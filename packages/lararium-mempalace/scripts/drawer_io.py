@@ -26,6 +26,10 @@ import sys
 
 from mempalace.palace import get_collection
 
+# This batch CLI's cap-stack is light: it #has only the shared NDJSON record reader
+# (no serve loop / flock / idle-reap — those belong to the persistent serve sidecars).
+from sidecar_caps import read_ndjson_records
+
 PALACE = os.path.expanduser("~/.mempalace/palace")
 # Current harvest version — bump when the harvester's output shape changes, so a
 # re-harvest re-processes every drawer; unchanged, it skips already-done drawers.
@@ -73,7 +77,7 @@ def cmd_export(args):
 
 def cmd_apply(args):
     col = _col()
-    patches = [json.loads(line) for line in open(args.patchfile) if line.strip()]
+    patches = list(read_ndjson_records(args.patchfile))
     applied = 0
     for k in range(0, len(patches), WRITE_BATCH):
         batch = patches[k : k + WRITE_BATCH]

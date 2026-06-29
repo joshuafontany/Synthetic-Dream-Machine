@@ -39,23 +39,25 @@ Run with the mempalace CLI's interpreter (it has the package + chroma):
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-import os
-import sys
-import time
 
 from mempalace.palace import get_collection
 
-try:
-    import fcntl as _fcntl  # POSIX only; absent on Windows
-except ImportError:  # pragma: no cover - Windows fallback
-    _fcntl = None
-
-try:
-    import select as _select  # POSIX-usable on the stdin pipe; idle-reap needs it
-except ImportError:  # pragma: no cover - never absent on POSIX
-    _select = None
+# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON
+# serve-loop · ops-dispatch · the serve composition root — composed from the shared
+# foundation, NOT inherited. The thin module-level aliases below keep this sidecar's
+# names (`_acquire_serve_lock`, `_serve_loop`, `_fcntl`, …) stable for its tests.
+from sidecar_caps import (
+    _fcntl,
+    _select,
+    acquire_serve_lock,
+    idle_ttl_seconds,
+    make_dispatch,
+    release_serve_lock,
+    run_sidecar,
+    serve_lock_path,
+    serve_loop,
+)
 
 # Cap the provenance list so a hot recurring structure cannot grow one entry without
 # bound — mirrors the prior flat-file store's PROVENANCE_CAP.
@@ -69,74 +71,24 @@ PROVENANCE_CAP = 64
 IDLE_TTL_ENV = "ASTPALACE_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 
-
-def _canonical_palace_path(palace_path: str) -> str:
-    """Fully-normalized palace path, IDENTICAL to mempalace.palace.mine_palace_lock's
-    keying (normcase ∘ realpath ∘ expanduser) so the serve-singleton keys on the SAME
-    canonical path the mine lock does — per-palace, never per-machine, and a
-    path-spelling variant of one physical palace collapses to one key."""
-    return os.path.normcase(os.path.realpath(os.path.expanduser(palace_path)))
+# The sidecar's identity in the lock namespace — its per-palace singleton prefix.
+_LOCK_PREFIX = "astpalace_serve"
 
 
 def _serve_lock_path(palace_path: str) -> str:
-    lock_dir = os.path.join(os.path.expanduser("~"), ".mempalace", "locks")
-    os.makedirs(lock_dir, exist_ok=True)
-    key = hashlib.sha256(_canonical_palace_path(palace_path).encode("utf-8")).hexdigest()[:16]
-    return os.path.join(lock_dir, f"astpalace_serve_{key}.lock")
+    return serve_lock_path(palace_path, _LOCK_PREFIX)
 
 
 def _acquire_serve_lock(palace_path: str):
-    """Lifetime per-palace singleton lock for this holder.
-
-    Returns an open file handle (HELD for the whole process, released on exit) when
-    this process may hold the palace, or ``None`` when another holder already owns it
-    and this process must exit. Non-blocking + exclusive, keyed on the canonical palace
-    path — so "one holder per palace dir" is OS-enforced and the 3 coexisting palaces
-    (~/.mempalace, ~/.lares/.astpalace, .meshpalace) each run their own singleton. On
-    non-POSIX (no fcntl) the handle is returned unlocked (best-effort; idle-reap still
-    bounds accumulation)."""
-    lock_path = _serve_lock_path(palace_path)
-    fh = open(lock_path, "w")
-    try:
-        os.chmod(lock_path, 0o600)
-    except OSError:
-        pass
-    if _fcntl is None:  # pragma: no cover - Windows fallback
-        return fh
-    try:
-        _fcntl.flock(fh.fileno(), _fcntl.LOCK_EX | _fcntl.LOCK_NB)
-    except OSError:
-        try:
-            fh.close()
-        except OSError:
-            pass
-        return None
-    return fh
+    return acquire_serve_lock(palace_path, _LOCK_PREFIX)
 
 
 def _release_serve_lock(fh) -> None:
-    if fh is None:
-        return
-    try:
-        if _fcntl is not None:
-            _fcntl.flock(fh.fileno(), _fcntl.LOCK_UN)
-    except OSError:
-        pass
-    finally:
-        try:
-            fh.close()
-        except OSError:
-            pass
+    release_serve_lock(fh)
 
 
 def _idle_ttl_seconds() -> float:
-    raw = os.environ.get(IDLE_TTL_ENV)
-    if raw is None:
-        return DEFAULT_IDLE_TTL_SECONDS
-    try:
-        return float(raw)
-    except ValueError:
-        return DEFAULT_IDLE_TTL_SECONDS
+    return idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS)
 
 
 # A CHEAP, DETERMINISTIC embedding derived from the structural hash. The `.astpalace`
@@ -255,84 +207,38 @@ class AstPalaceStore:
         return {"hash": structural_hash, "count": 1}
 
 
-def _handle_line(store: AstPalaceStore, line: str, out) -> None:
-    try:
-        req = json.loads(line)
-    except ValueError:
-        return  # non-JSON on stdin — ignore (defensive)
-    rid = req.get("id")
-    op = req.get("op")
-    try:
-        if op == "ping":
-            result: object = {"ready": True}
-        elif op == "put":
-            result = store.put(
-                req["hash"], req["ast"], req.get("source_file", ""), req.get("verbatim_sha", "")
-            )
-        elif op == "get":
-            result = store.get(req["hash"])
-        else:
-            raise ValueError(f"unknown op {op!r}")
-        out.write(json.dumps({"id": rid, "ok": True, "result": result}) + "\n")
-    except Exception as exc:  # noqa: BLE001 — surface to the caller, never crash the loop
-        out.write(json.dumps({"id": rid, "ok": False, "error": str(exc)}) + "\n")
-    out.flush()
+# --- the OPS this sidecar declares (its #has-stack made literal) -------------
+# Each op is a handler(req) -> result, bound to one open store. The shared
+# make_dispatch wraps them in the NDJSON {id, ok, result|error} envelope.
+
+
+def _build_ops(store: AstPalaceStore) -> dict:
+    return {
+        "ping": lambda req: {"ready": True},
+        "put": lambda req: store.put(
+            req["hash"], req["ast"], req.get("source_file", ""), req.get("verbatim_sha", "")
+        ),
+        "get": lambda req: store.get(req["hash"]),
+    }
 
 
 def _serve_loop(store: AstPalaceStore, in_fd: int, out) -> None:
-    """NDJSON request loop with idle-reap.
-
-    Reads at the raw fd (not the buffered ``sys.stdin`` iterator) so ``select`` and the
-    byte buffer never disagree about pending lines. Exits on EOF (the TS parent closed
-    stdin — the natural lifetime end) or when idle past the TTL (orphan bound). On a
-    platform without ``select`` the loop degrades to a plain blocking read (EOF-only)."""
-    idle_ttl = _idle_ttl_seconds()
-    poll = _select is not None and idle_ttl > 0
-    last_activity = time.monotonic()
-    buf = b""
-    while True:
-        if poll:
-            try:
-                ready, _, _ = _select.select([in_fd], [], [], 1.0)
-            except (OSError, ValueError):  # pragma: no cover - select unusable → blocking
-                poll = False
-                ready = [in_fd]
-            if not ready:
-                # No bytes pending: reap if idle past the TTL and nothing half-buffered.
-                if not buf.strip() and (time.monotonic() - last_activity) >= idle_ttl:
-                    return
-                continue
-        try:
-            chunk = os.read(in_fd, 65536)
-        except OSError:  # pragma: no cover - fd closed under us
-            return
-        if not chunk:  # EOF — parent closed stdin
-            return
-        buf += chunk
-        while b"\n" in buf:
-            raw, buf = buf.split(b"\n", 1)
-            line = raw.strip()
-            if not line:
-                continue
-            _handle_line(store, line.decode("utf-8", "replace"), out)
-            last_activity = time.monotonic()
+    """Wire this sidecar's ops into the shared NDJSON serve-loop cap (raw-fd read +
+    idle-reap). The TTL reads fresh from the env so a test/operator can override it."""
+    serve_loop(make_dispatch(_build_ops(store)), in_fd, out, idle_ttl=_idle_ttl_seconds())
 
 
 def _serve(palace_path: str) -> None:
-    # Lifetime singleton: acquire BEFORE opening the ChromaDB collection so a second
-    # holder for the same palace dir exits cleanly without two clients fighting the
-    # per-palace mine lock (the reap-don't-pile invariant, now OS-enforced).
-    lock = _acquire_serve_lock(palace_path)
-    if lock is None:
-        sys.stderr.write(
-            "astpalace_io: another holder already serves this palace; exiting (singleton)\n"
-        )
-        return
-    try:
-        store = AstPalaceStore(palace_path)
-        _serve_loop(store, sys.stdin.fileno(), sys.stdout)
-    finally:
-        _release_serve_lock(lock)
+    # Compose: the serve root acquires the per-palace singleton BEFORE build_dispatch
+    # opens the ChromaDB collection, so a refused second holder never opens a client
+    # to fight the per-palace mine lock (the reap-don't-pile invariant, OS-enforced).
+    run_sidecar(
+        palace=palace_path,
+        lock_prefix=_LOCK_PREFIX,
+        build_dispatch=lambda: make_dispatch(_build_ops(AstPalaceStore(palace_path))),
+        idle_ttl=_idle_ttl_seconds(),
+        singleton_msg="astpalace_io: another holder already serves this palace; exiting (singleton)\n",
+    )
 
 
 def main() -> None:

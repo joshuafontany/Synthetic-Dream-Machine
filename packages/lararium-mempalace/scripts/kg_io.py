@@ -28,10 +28,14 @@ import argparse
 import json
 import os
 import sqlite3
-import sys
 from datetime import date
 
 from mempalace.knowledge_graph import KnowledgeGraph, DEFAULT_KG_PATH
+
+# This batch CLI's cap-stack is light: it #has the shared NDJSON record reader + the
+# shared path canonicalization (no serve loop / flock / idle-reap — those belong to
+# the persistent serve sidecars).
+from sidecar_caps import canonical_path, read_ndjson_records
 
 ADAPTER_NAME = "lares-worldline"
 
@@ -41,7 +45,7 @@ def _kg_path(palace):
     # palace dir; without one, the package default. Canonicalize so a symlinked /
     # relative spelling addresses the SAME sqlite file (palace-path.ts's discipline).
     if palace:
-        return os.path.realpath(os.path.join(os.path.expanduser(palace), "knowledge_graph.sqlite3"))
+        return canonical_path(os.path.join(os.path.expanduser(palace), "knowledge_graph.sqlite3"))
     return DEFAULT_KG_PATH
 
 
@@ -49,21 +53,10 @@ def _kg(palace):
     return KnowledgeGraph(db_path=_kg_path(palace))
 
 
-def _records(patchfile):
-    src = sys.stdin if patchfile == "-" else open(patchfile)
-    try:
-        for line in src:
-            if line.strip():
-                yield json.loads(line)
-    finally:
-        if src is not sys.stdin:
-            src.close()
-
-
 def cmd_add(args):
     kg = _kg(args.palace)
     added = 0
-    for r in _records(args.patchfile):
+    for r in read_ndjson_records(args.patchfile):
         kg.add_triple(
             r["subject"],
             r["predicate"],
@@ -83,7 +76,7 @@ def cmd_add(args):
 def cmd_invalidate(args):
     kg = _kg(args.palace)
     n = 0
-    for r in _records(args.patchfile):
+    for r in read_ndjson_records(args.patchfile):
         kg.invalidate(r["subject"], r["predicate"], r["object"], ended=r.get("ended"))
         n += 1
     print(json.dumps({"invalidated": n}))

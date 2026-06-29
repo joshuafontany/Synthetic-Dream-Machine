@@ -91,28 +91,31 @@ line; only JSON responses on stdout (banners/library noise → stderr).
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
-import os
 import sys
-import time
 from collections import Counter
+
+# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON
+# serve-loop · ops-dispatch · the serve composition root — composed from the shared
+# foundation (NOT inherited). `_fcntl`/`_select` re-export so this sidecar's serve
+# tests keep their POSIX skip markers.
+from sidecar_caps import (
+    _fcntl,
+    _select,
+    acquire_serve_lock,
+    idle_ttl_seconds,
+    make_dispatch,
+    release_serve_lock,
+    run_sidecar,
+    serve_lock_path,
+    serve_loop,
+)
 
 try:
     import numpy as _np
 except ImportError:  # pragma: no cover - numpy is a hard dep of the mempalace venv
     _np = None
-
-try:
-    import fcntl as _fcntl  # POSIX only; absent on Windows
-except ImportError:  # pragma: no cover - Windows fallback
-    _fcntl = None
-
-try:
-    import select as _select  # POSIX-usable on the stdin pipe; idle-reap needs it
-except ImportError:  # pragma: no cover - never absent on POSIX
-    _select = None
 
 # The 3-layer grammar-stack tower (base → top), living-grammar-palace#grammar-stack.
 # The "lower" layer for down-the-tower propagation reads off this order.
@@ -859,74 +862,34 @@ class FormPalaceStore:
 
 
 # ---------------------------------------------------------------------------
-# serve singleton + idle-reap (mirrors astpalace_io.py — one holder per palace)
+# serve cap-stack (composed from sidecar_caps — one holder per palace)
 # ---------------------------------------------------------------------------
 
 IDLE_TTL_ENV = "FORM_ENCODER_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 
-
-def _canonical_palace_path(palace_path: str) -> str:
-    return os.path.normcase(os.path.realpath(os.path.expanduser(palace_path)))
+# The sidecar's identity in the lock namespace — its per-palace singleton prefix.
+_LOCK_PREFIX = "form_encoder_serve"
 
 
 def _serve_lock_path(palace_path: str) -> str:
-    lock_dir = os.path.join(os.path.expanduser("~"), ".mempalace", "locks")
-    os.makedirs(lock_dir, exist_ok=True)
-    key = hashlib.sha256(_canonical_palace_path(palace_path).encode("utf-8")).hexdigest()[:16]
-    return os.path.join(lock_dir, f"form_encoder_serve_{key}.lock")
+    return serve_lock_path(palace_path, _LOCK_PREFIX)
 
 
 def _acquire_serve_lock(palace_path: str):
-    """Lifetime per-palace singleton lock (non-blocking, exclusive, canonical-keyed).
-    Returns an open handle when this process may hold the palace, or None when another
-    holder already owns it. On non-POSIX the handle is returned unlocked (best-effort)."""
-    lock_path = _serve_lock_path(palace_path)
-    fh = open(lock_path, "w")
-    try:
-        os.chmod(lock_path, 0o600)
-    except OSError:
-        pass
-    if _fcntl is None:  # pragma: no cover - Windows fallback
-        return fh
-    try:
-        _fcntl.flock(fh.fileno(), _fcntl.LOCK_EX | _fcntl.LOCK_NB)
-    except OSError:
-        try:
-            fh.close()
-        except OSError:
-            pass
-        return None
-    return fh
+    return acquire_serve_lock(palace_path, _LOCK_PREFIX)
 
 
 def _release_serve_lock(fh) -> None:
-    if fh is None:
-        return
-    try:
-        if _fcntl is not None:
-            _fcntl.flock(fh.fileno(), _fcntl.LOCK_UN)
-    except OSError:
-        pass
-    finally:
-        try:
-            fh.close()
-        except OSError:
-            pass
+    release_serve_lock(fh)
 
 
 def _idle_ttl_seconds() -> float:
-    raw = os.environ.get(IDLE_TTL_ENV)
-    if raw is None:
-        return DEFAULT_IDLE_TTL_SECONDS
-    try:
-        return float(raw)
-    except ValueError:
-        return DEFAULT_IDLE_TTL_SECONDS
+    return idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS)
 
 
 # ---------------------------------------------------------------------------
-# NDJSON serve loop (mirrors astpalace_io.py's boundary protocol)
+# the OPS this sidecar declares (its #has-stack made literal)
 # ---------------------------------------------------------------------------
 
 
@@ -965,114 +928,80 @@ def _do_encode(req: dict, scorer_holder: dict) -> dict:
     )
 
 
+def _op_ping(req: dict, holder: dict) -> dict:
+    sc = holder.get("scorer")
+    return {
+        "ready": True,
+        "slor_live": sc is not None and sc.live,
+        "store": holder.get("palace") is not None,
+    }
+
+
+def _op_encode_store(req: dict, holder: dict) -> dict:
+    # The end-to-end form-graph wire: encode the skeleton → store the vector,
+    # keyed by the verbatim_sha, joined to the content drawer.
+    enc = _do_encode(req, holder)
+    store = _ensure_store(holder)
+    meta = dict(req.get("metadata") or {})
+    meta["conformance"] = enc["turn_conformance"]
+    meta["axis_activation"] = enc["axis_activation"]
+    stored = store.store(req["key"], enc["form_vector"], int(enc["dimension"]), meta)
+    return {**stored, "slor": enc["slor"], "form_vector": enc["form_vector"]}
+
+
+def _op_store(req: dict, holder: dict) -> dict:
+    # Store a PRECOMPUTED form-vector (no encode) — the caller-vector base path.
+    store = _ensure_store(holder)
+    return store.store(
+        req["key"], req["form_vector"], int(req["dimension"]), dict(req.get("metadata") or {})
+    )
+
+
+def _op_query(req: dict, holder: dict) -> dict:
+    store = _ensure_store(holder)
+    # Query by an encoded skeleton (encode then search) OR by a precomputed vector.
+    if "form_vector" in req:
+        fv = req["form_vector"]
+        dim = int(req["dimension"])
+    else:
+        enc = _do_encode(req, holder)
+        fv = enc["form_vector"]
+        dim = int(enc["dimension"])
+    return store.query(fv, dim, int(req.get("n_results", 10)), req.get("where"))
+
+
+def _build_ops(holder: dict) -> dict:
+    """The verb → handler registry — this sidecar's #has-stack made literal. Each
+    handler closes over the warm ``holder`` (scorer + store, both lazily opened)."""
+    return {
+        "ping": lambda req: _op_ping(req, holder),
+        "encode": lambda req: _do_encode(req, holder),
+        "encode_store": lambda req: _op_encode_store(req, holder),
+        "store": lambda req: _op_store(req, holder),
+        "query": lambda req: _op_query(req, holder),
+        "filter": lambda req: _ensure_store(holder).filter(
+            req.get("where"), int(req.get("n_results", 10))
+        ),
+        "get": lambda req: _ensure_store(holder).get(req["key"]),
+    }
+
+
 def _handle_request(req: dict, holder: dict, out) -> None:
-    rid = req.get("id")
-    op = req.get("op")
-    try:
-        if op == "ping":
-            sc = holder.get("scorer")
-            result: object = {
-                "ready": True,
-                "slor_live": sc is not None and sc.live,
-                "store": holder.get("palace") is not None,
-            }
-        elif op == "encode":
-            result = _do_encode(req, holder)
-        elif op == "encode_store":
-            # The end-to-end form-graph wire: encode the skeleton → store the vector,
-            # keyed by the verbatim_sha, joined to the content drawer.
-            enc = _do_encode(req, holder)
-            store = _ensure_store(holder)
-            meta = dict(req.get("metadata") or {})
-            meta["conformance"] = enc["turn_conformance"]
-            meta["axis_activation"] = enc["axis_activation"]
-            stored = store.store(
-                req["key"], enc["form_vector"], int(enc["dimension"]), meta
-            )
-            result = {**stored, "slor": enc["slor"], "form_vector": enc["form_vector"]}
-        elif op == "store":
-            # Store a PRECOMPUTED form-vector (no encode) — the caller-vector base path.
-            store = _ensure_store(holder)
-            result = store.store(
-                req["key"], req["form_vector"], int(req["dimension"]), dict(req.get("metadata") or {})
-            )
-        elif op == "query":
-            store = _ensure_store(holder)
-            # Query by an encoded skeleton (encode then search) OR by a precomputed vector.
-            if "form_vector" in req:
-                fv = req["form_vector"]
-                dim = int(req["dimension"])
-            else:
-                enc = _do_encode(req, holder)
-                fv = enc["form_vector"]
-                dim = int(enc["dimension"])
-            result = store.query(fv, dim, int(req.get("n_results", 10)), req.get("where"))
-        elif op == "filter":
-            store = _ensure_store(holder)
-            result = store.filter(req.get("where"), int(req.get("n_results", 10)))
-        elif op == "get":
-            store = _ensure_store(holder)
-            result = store.get(req["key"])
-        else:
-            raise ValueError(f"unknown op {op!r}")
-        out.write(json.dumps({"id": rid, "ok": True, "result": result}) + "\n")
-    except Exception as exc:  # noqa: BLE001 — surface to the caller, never crash the loop
-        out.write(json.dumps({"id": rid, "ok": False, "error": str(exc)}) + "\n")
-    out.flush()
+    """Dispatch one NDJSON request against the holder's ops (kept as a named entry
+    for the unit tests; the serve loop wires the same registry once, up front)."""
+    make_dispatch(_build_ops(holder))(req, out)
 
 
 def _serve_loop(holder: dict, in_fd: int, out) -> None:
-    """NDJSON request loop with idle-reap (raw-fd read so select + buffer never disagree).
-    Exits on EOF (parent closed stdin) or when idle past the TTL (orphan bound)."""
-    idle_ttl = _idle_ttl_seconds()
-    poll = _select is not None and idle_ttl > 0
-    last_activity = time.monotonic()
-    buf = b""
-    while True:
-        if poll:
-            try:
-                ready, _, _ = _select.select([in_fd], [], [], 1.0)
-            except (OSError, ValueError):  # pragma: no cover - select unusable → blocking
-                poll = False
-                ready = [in_fd]
-            if not ready:
-                if not buf.strip() and (time.monotonic() - last_activity) >= idle_ttl:
-                    return
-                continue
-        try:
-            chunk = os.read(in_fd, 65536)
-        except OSError:  # pragma: no cover - fd closed under us
-            return
-        if not chunk:  # EOF — parent closed stdin
-            return
-        buf += chunk
-        while b"\n" in buf:
-            raw, buf = buf.split(b"\n", 1)
-            line = raw.strip()
-            if not line:
-                continue
-            try:
-                req = json.loads(line.decode("utf-8", "replace"))
-            except ValueError:
-                continue  # non-JSON on stdin — ignore (defensive)
-            _handle_request(req, holder, out)
-            last_activity = time.monotonic()
+    """Wire this sidecar's ops into the shared NDJSON serve-loop cap (raw-fd read +
+    idle-reap). The TTL reads fresh from the env so a test/operator can override it."""
+    serve_loop(make_dispatch(_build_ops(holder)), in_fd, out, idle_ttl=_idle_ttl_seconds())
 
 
 def _serve(palace: str | None, preload: bool) -> None:
     holder: dict = {"scorer": None, "store": None, "palace": palace}
-    # Lifetime singleton (only meaningful when a palace is bound — an encode-only
-    # holder needs no store lock, but keying on the palace path keeps "one holder per
-    # palace dir" true for the store path, mirroring astpalace_io).
-    lock = None
-    if palace is not None:
-        lock = _acquire_serve_lock(palace)
-        if lock is None:
-            sys.stderr.write(
-                "form_encoder: another holder already serves this form palace; exiting (singleton)\n"
-            )
-            return
-    try:
+
+    def build_dispatch():
         if preload:
             holder["scorer"] = SlorScorer()
             if not holder["scorer"].live:
@@ -1080,9 +1009,20 @@ def _serve(palace: str | None, preload: bool) -> None:
                     f"form_encoder: SLOR unavailable, running degraded "
                     f"(structural × entrenchment): {holder['scorer'].reason}\n"
                 )
-        _serve_loop(holder, sys.stdin.fileno(), sys.stdout)
-    finally:
-        _release_serve_lock(lock)
+        return make_dispatch(_build_ops(holder))
+
+    # Compose: the serve root holds the per-palace singleton (only meaningful when a
+    # palace is bound — an encode-only holder needs no store lock, so require_lock keys
+    # on the palace presence). build_dispatch runs only AFTER the lock, mirroring
+    # astpalace_io's reap-don't-pile invariant.
+    run_sidecar(
+        palace=palace,
+        lock_prefix=_LOCK_PREFIX,
+        build_dispatch=build_dispatch,
+        idle_ttl=_idle_ttl_seconds(),
+        require_lock=palace is not None,
+        singleton_msg="form_encoder: another holder already serves this form palace; exiting (singleton)\n",
+    )
 
 
 def main() -> None:
