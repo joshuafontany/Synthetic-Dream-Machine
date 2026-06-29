@@ -78,15 +78,18 @@ export type {
   FormPalace, FormPalaceOptions, FormHolderSpawn, FormMetadata, FormStoreResult,
   FormMatch, FormEntry, SerializedBasis,
 } from "./formpalace.js";
-// P4 — the RRF dual-graph query: fuse the CONTENT (verbatim mempalace) and FORM (.formpalace)
-// graphs on verbatim_sha by reciprocal rank fusion (living-grammar-palace#dual-graph).
+// P4 — the RRF multi-graph query: fuse the CONTENT (verbatim mempalace), FORM (.formpalace), and
+// later graphs on verbatim_sha by N-ary reciprocal rank fusion (living-grammar-palace#dual-graph).
 export {
-  fuseDualGraph, dualGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
-} from "./dual-graph-recall.js";
+  fuseMultiGraph, multiGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
+  makeSkeletonDeriver, resolveApertureGrain, apertureWeight, weightByAperture, PARAGRAPH_APERTURE,
+  contentKeyOf, contentLeg, formLeg,
+} from "./multi-graph-recall.js";
 export type {
-  DualGraphHit, DualGraphOptions, DualGraphRecallDeps, DualGraphRecallArgs, DualGraphRecallResult,
+  MultiGraphHit, MultiGraphOptions, MultiGraphRecallDeps, MultiGraphRecallArgs, MultiGraphRecallResult,
+  GraphLeg, GraphItem, ExtraGraph, ApertureWeightOptions,
   FormSearchPalace, FormSearchConfig,
-} from "./dual-graph-recall.js";
+} from "./multi-graph-recall.js";
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
 // standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays

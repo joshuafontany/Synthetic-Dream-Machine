@@ -61,7 +61,8 @@ import type { DialEntry } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
-import { dualGraphRecall, makeFormSearch }  from "./dual-graph-recall.js";
+import { multiGraphRecall, makeFormSearch, makeSkeletonDeriver }  from "./multi-graph-recall.js";
+import { readFormBasisCache }  from "./node-capture-engine.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -472,39 +473,51 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const wing     = typeof args["wing"]   === "string" ? (args["wing"]   as string) : undefined;
       const limitRaw = args["limit"];
       const limit    = typeof limitRaw === "number" ? limitRaw : typeof limitRaw === "string" ? Number(limitRaw) : undefined;
-      // Dual-graph recall (P4): fuse the CONTENT (verbatim mempalace) + FORM (.formpalace) graphs by
-      // reciprocal rank fusion on the verbatim_sha. Opt-in (`dual`) — the FORM leg routes by query
-      // shape (bearing → structured where-filter · markers → vector · keywords → where-or-defer).
-      const dual         = args["dual"] === true || args["dual"] === "true";
+      // Multi-graph recall (P4): N-ary fuse the CONTENT (verbatim mempalace) + FORM (.formpalace) +
+      // later graphs by reciprocal rank fusion on the verbatim_sha. Opt-in (`dual`/`multi`) — the FORM
+      // leg routes by query shape (bearing → structured where-filter · markers → vector · keywords →
+      // where-or-defer). The `dual` arg name stays accepted for callers; `multi` reads the same.
+      const dual         = args["dual"] === true || args["dual"] === "true"
+                        || args["multi"] === true || args["multi"] === "true";
       const register     = typeof args["register"]     === "string" ? (args["register"]     as string) : undefined;
       const grammarLayer = typeof args["grammarLayer"] === "string" ? (args["grammarLayer"] as string)
                          : typeof args["grammar_layer"] === "string" ? (args["grammar_layer"] as string) : undefined;
       const fwRaw        = args["formWeight"];
       const formWeight   = typeof fwRaw === "number" ? fwRaw : typeof fwRaw === "string" ? Number(fwRaw) : undefined;
+      // P6 — the paragraph-scale aperture: a 0..20 grain or a band name ("paragraph"). Off when absent.
+      const agRaw        = args["apertureGrain"] ?? args["aperture_grain"] ?? args["aperture"];
+      const apertureGrain = typeof agRaw === "number" || typeof agRaw === "string" ? agRaw : undefined;
+      const awRaw        = args["apertureWidth"] ?? args["aperture_width"];
+      const apertureWidth = typeof awRaw === "number" ? awRaw : typeof awRaw === "string" && awRaw !== "" ? Number(awRaw) : undefined;
       // Warm pooled sidecar (started once, reused, self-healing) — recall stays
       // sub-second after the first cold start; this makes recall-into-wake fast.
       return withMempalace(async (client) => {
         if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
         if (dual && query) {
           recallFormPalace ??= makeFormPalace(larFormPalaceDir());
-          const formLeg = makeFormSearch({ query, formPalace: recallFormPalace });
-          const res = await dualGraphRecall(
+          // The LIVE markers→vector deriver: a sigil-bearing query → a query form-vector, in the SAME
+          // space the in-VM encoder pinned (the basis cached to disk at capture). Node-side, no VM.
+          const deriveSkeleton = makeSkeletonDeriver(() => readFormBasisCache(larFormPalaceDir()));
+          const formSearchLeg = makeFormSearch({ query, formPalace: recallFormPalace, deriveSkeleton });
+          const res = await multiGraphRecall(
             {
               contentSearch: (a) => client.search(a),
               // The FORM leg degrades to content-only if the form holder is unavailable (no python
-              // venv, store fault): a rejection collapses to [] → fuseDualGraph fuses content-only.
-              formSearch: async (input) => { try { return await formLeg(input); } catch { return []; } },
+              // venv, store fault): a rejection collapses to [] → fuseMultiGraph fuses content-only.
+              formSearch: async (input) => { try { return await formSearchLeg(input); } catch { return []; } },
             },
             {
               query,
-              ...(wing         !== undefined ? { wing } : {}),
-              ...(limit        !== undefined ? { limit } : {}),
-              ...(register     !== undefined ? { register } : {}),
-              ...(grammarLayer !== undefined ? { grammarLayer } : {}),
-              ...(formWeight   !== undefined ? { formWeight } : {}),
+              ...(wing          !== undefined ? { wing } : {}),
+              ...(limit         !== undefined ? { limit } : {}),
+              ...(register      !== undefined ? { register } : {}),
+              ...(grammarLayer  !== undefined ? { grammarLayer } : {}),
+              ...(formWeight    !== undefined ? { formWeight } : {}),
+              ...(apertureGrain !== undefined ? { apertureGrain } : {}),
+              ...(apertureWidth !== undefined ? { apertureWidth } : {}),
             },
           );
-          return { mode: "dual", ...res };
+          return { mode: "multi", ...res };
         }
         if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
         return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };

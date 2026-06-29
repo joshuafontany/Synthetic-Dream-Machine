@@ -7,10 +7,15 @@ import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import type { FlushGate } from "@lararium/mesh";
+import type { CaptureRecord, FlushGate } from "@lararium/mesh";
+import type { MoveSkeleton, SerializedBasis } from "@lararium/tw5/form-layer";
 import { describe, expect, test } from "vitest";
 
-import { makeNodeCaptureEngine, type NodeCaptureEngineOptions } from "../src/node-capture-engine.js";
+import {
+  makeNodeCaptureEngine, makeFormSplitFlush, readFormBasisCache,
+  type NodeCaptureEngineOptions,
+} from "../src/node-capture-engine.js";
+import type { FormMetadata, FormPalace, FormStoreResult } from "../src/formpalace.js";
 
 const GATE: FlushGate = {
   depth: 1,
@@ -62,5 +67,59 @@ describe("makeNodeCaptureEngine", () => {
     const rebooted = makeNodeCaptureEngine(o); // same WAL = a reboot
     expect(await rebooted.recover()).toBe(2);
     expect(rebooted.stats().depth).toBe(2);
+  });
+});
+
+describe("makeFormSplitFlush — the aperture stamp + the basis cache (P6 + jurus enabling seams)", () => {
+  const skeleton: MoveSkeleton = {
+    stream: [], graph: [], band: "raw",
+    counts: { tokens: 0, content: 0, water: 0, voices: 0, wards: 0, phases: 0, sigils: 0 },
+    bearing: { aim: [], yield: [], primary: null, facets: {} },
+  };
+  const basis: SerializedBasis = {
+    axes: [{ id: "voice:council", category: "voice", label: "council", layer: "x-memetic", parentFamily: null, sigilKind: null }],
+    dimension: 12,
+  };
+  function fakeFormPalace(stamped: FormMetadata[]): FormPalace {
+    return {
+      async encodeStore({ metadata }) {
+        stamped.push(metadata);
+        return { key: metadata.verbatim_sha, dimension: basis.dimension, count: 1, conformance: 1,
+          slor: { live: false, model: null, reason: "test" },
+          form_vector: { indices: [], values: [] } } satisfies FormStoreResult;
+      },
+      async query() { return []; },
+      async filter() { return []; },
+      async get() { return null; },
+      async close() {},
+    };
+  }
+  function rec(content: string): CaptureRecord {
+    return {
+      content, source_file: "x/1",
+      metadata: { lar_skeleton: JSON.stringify(skeleton), lar_basis: JSON.stringify(basis), lar_sigils: 2 },
+    } as unknown as CaptureRecord;
+  }
+
+  test("stamps the declared HUD aperture into the form metadata, and caches the basis to disk", async () => {
+    const dir = await mkdtemp(join(tmpdir(), "formsplit-"));
+    const stamped: FormMetadata[] = [];
+    const flush = makeFormSplitFlush(async (b) => b.length, fakeFormPalace(stamped), dir);
+
+    const n = await flush([rec("a turn <<~ hud Aperture(10) OODA-HA(3) >> the verb leads")]);
+    expect(n).toBe(1);
+    expect(stamped[0]!.aperture).toBe(10);                 // the paragraph grain, re-harvested
+    // the in-VM basis is cached to disk so a node-side recall queries in the SAME space
+    const cached = readFormBasisCache(dir);
+    expect(cached).not.toBeNull();
+    expect(cached!.dimension).toBe(12);
+  });
+
+  test("a turn with NO declared aperture stamps no aperture facet (graceful)", async () => {
+    const dir = await mkdtemp(join(tmpdir(), "formsplit-"));
+    const stamped: FormMetadata[] = [];
+    const flush = makeFormSplitFlush(async (b) => b.length, fakeFormPalace(stamped), dir);
+    await flush([rec("a turn with no hud panel")]);
+    expect(stamped[0]!.aperture).toBeUndefined();
   });
 });

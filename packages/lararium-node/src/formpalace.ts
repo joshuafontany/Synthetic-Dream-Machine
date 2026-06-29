@@ -43,13 +43,15 @@ export interface SerializedBasis {
 /** The metadata stamped on a form entry — the where-filterable facets + the content-join key.
  *  Carries the {@link BearingFacets} (bearing_w1/w2/w3/root/path/frag/grade) too: the aim/yield
  *  bearing descended into flat scalars, where-filterable for the STRUCTURED bearing recall path
- *  (dual-graph-recall#makeFormSearch). Stamped off `skeleton.bearing.facets` in
+ *  (multi-graph-recall#makeFormSearch). Stamped off `skeleton.bearing.facets` in
  *  node-capture-engine#makeFormSplitFlush; the python store carries any `bearing_*` key through. */
 export interface FormMetadata extends BearingFacets {
   /** the confidence register band (e.g. "synthesis"), for where-filtering */
   readonly register?: string;
   /** the deepest grammar-stack layer the turn touched */
   readonly grammar_layer?: string;
+  /** the DECLARED HUD attention grain (0..20 Aperture) — the paragraph-scale recall knob (P6) */
+  readonly aperture?: number;
   /** sha256 of the canonical placeholdered-graph — the FORM recurrence key */
   readonly struct_hash?: string;
   /** sha256 of the verbatim turn — the CROSS-GRAPH join key to the content drawer */
@@ -104,7 +106,7 @@ export interface FormPalace {
    * entries by a `where`-clause alone (chroma `.get(where=…)`), so a bearing root or a register
    * scope yields matches without encoding a query skeleton. `distance` is null on each match (a
    * where-match carries no similarity ranking). A null/empty `where` returns up to `nResults` of
-   * the collection; a where matching nothing returns []. (dual-graph-recall#makeFormSearch.)
+   * the collection; a where matching nothing returns []. (multi-graph-recall#makeFormSearch.)
    */
   filter(input: { where?: Record<string, unknown>; nResults?: number }): Promise<FormMatch[]>;
   /** Read a form entry back by its key (the verbatim_sha), or null if absent. */

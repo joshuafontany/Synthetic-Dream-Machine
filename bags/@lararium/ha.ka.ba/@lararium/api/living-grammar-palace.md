@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a dual FORM⊥CONTENT graph cross-joined by sha + RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and dual-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
+role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a multi-graph (CONTENT⊥FORM⊥STRUCTURE) cross-joined by sha + N-ary RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and multi-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
 l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/living-grammar-palace"
@@ -38,7 +38,7 @@ differentiated only by its cap-stack); THREE REGISTERS of the living grammar bra
 grammar-stack (a 3×3 grid); a TWO-PLANES form-capture (a discrete constructicon ⋈ a continuous fuzzy-
 membership manifestation); and a DUAL-GRAPH that keeps form orthogonal to content yet hash-joins the two.
 
-> **Constructicon names the score; the fuzzy-membership vector names the performance; the dual graph
+> **Constructicon names the score; the fuzzy-membership vector names the performance; the multi graph
 > keeps them apart yet rejoins them on the verbatim hash.**
 
 <<~/ahu >>
@@ -168,7 +168,7 @@ inverts the usual move: the grammar abstracts ITSELF into markers, the palace en
 
 **NOT a deterministic AST-skeleton.** A rigid AST-skeleton descends from hard-fault machine-grammars and
 lets content dominate the signal. The form vector stays a FUZZY membership profile (maybe-logic), not a
-content-dominated tree-shape. The structural-hash (#dual-graph) carries the exact-recurrence join; the
+content-dominated tree-shape. The structural-hash (#multi-graph) carries the exact-recurrence join; the
 fuzzy vector carries the graded form.
 
 **Baseline → learned.** Tier-1 BASELINE runs with NO training: move-n-grams + scalar trajectories over
@@ -187,19 +187,19 @@ and near-term.
 
 <<~/ahu >>
 
-<<~ ahu #dual-graph >>
+<<~ ahu #multi-graph >>
 
-## Dual-Graph ~ FORM ⊥ CONTENT, hash-joined
+## Multi-Graph ~ CONTENT ⊥ FORM ⊥ STRUCTURE …, hash-joined
 
-Form and content ride TWO palaces, kept orthogonal:
+Content, form, and structure ride SEPARATE palaces, kept orthogonal — and the join generalizes to N:
 
-<<~ranks palace content ~ the verbatim mempalace; late-chunked over the session (the words) -> form ~ the astpalace; the form vectors + constructicon membership (the moves) >>
+<<~ranks palace content ~ the verbatim mempalace; late-chunked over the session (the words) -> form ~ the formpalace; the fuzzy-constructicon move-vectors (the moves / the jurus) -> structure ~ the astpalace; the canonical AST + structural-hash (the exact shape) >>
 
-**Cross-joined by verbatim-sha + RRF.** The two collections rejoin on the shared verbatim hash and fuse
+**Cross-joined by verbatim-sha + N-ary RRF.** The palace collections rejoin on the shared verbatim hash and fuse
 their rankings by **Reciprocal Rank Fusion** — **fusion IS the hash-join**: a query ranks in each
-palace independently, RRF folds the two rank-lists, the verbatim-sha keys the rows together. A
-**ChromaDB two-collection app-join** carries it (no named-vector store needed — two plain collections,
-joined in app code).
+palace independently, RRF folds the N weighted rank-lists (one per graph), the verbatim-sha keys the rows together. A
+A ChromaDB app-join carries it (plain collections,
+joined in app code). RRF is N-ary by nature, so further graphs — the worldline (FFZ trajectory) and the federation (meshpalace peers) — fold in with zero change to the fusion core.
 
 **Structural-hash DEMOTED to a join-key.** The exact-recurrence structural hash (an exact-match
 construction signature) reads as an **equi-join key (1:many, indexed payload)**, NOT a "form embedding."
@@ -278,7 +278,7 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 <<~Phase P1 "does/move-skeleton emitter (pure) ~ read the emitted markers into a move-n-gram skeleton" >>
 <<~Phase P2 "does/Tier-1 fuzzy-form-vector (pure) ~ structural-match × SLOR × entrenchment, no training" >>
 <<~Phase P3 "does/wire the form-vector into astpalace (additive) ~ stamp the vector beside the verbatim" >>
-<<~Phase P4 "does/RRF dual-graph ~ the two-collection ChromaDB hash-join + RRF fusion" >>
+<<~Phase P4 "does/RRF multi-graph ~ the two-collection ChromaDB hash-join + RRF fusion" >>
 <<~Phase P5 "does/source-feed entity = the daemon-collapse ~ compose_palace(caps), retire the duplicated holders" >>
 <<~Phase P6 "does/apertures ~ RAPTOR collapsed-tree + Matryoshka coarse→fine + late-chunking" >>
 <<~Phase P7 "does/learned encoder ~ contrastive encoder distilled from a tree-edit-distance teacher" >>
@@ -477,7 +477,7 @@ re-entry: each kue's own key; or the operator's next FFZ-binding revision cycle
 The design rests on **eight research libations**, four on the grammar/ritual side and four on the
 retrieval/storage side:
 
-<<~ranks libation construction-grammar ~ Goldberg + Langacker partial-sanction (graded instantiation); Lau-Clark-Lappin SLOR (gradient grammaticality); Bybee usage-based + type-frequency productivity; Hopper emergent grammar (the descriptive↔prescriptive loop) -> ritual-tech ~ Rappaport (the canonical/self-referential split — the invariant score vs the indexical performance); Austin felicity (the performative's success conditions); Schechner (performance as restored behavior); Goodman (the score a performance instantiates) -> discourse-move-form ~ RST + Propp (move-grammars over discourse); the move-n-gram skeleton -> ast-vectors ~ red-green-trees (Roslyn) + tree-sitter (ERROR/MISSING, tree-edit-distance) — the tree-edit-distance teacher for the learned encoder -> multi-aperture ~ RAPTOR (collapsed-tree summary levels); Matryoshka (nested-dimension coarse→fine); late-chunking -> dual-graph ~ ColBERT + RRF (reciprocal rank fusion = the hash-join) -> instant-render ~ the TW5-native full parse-tree payload, hydrate-to-widget -> the-meta-pattern ~ the cross-substrate signature that a living grammar seeds, enacts, corrects, and decays ([[living-grammar]]) >>
+<<~ranks libation construction-grammar ~ Goldberg + Langacker partial-sanction (graded instantiation); Lau-Clark-Lappin SLOR (gradient grammaticality); Bybee usage-based + type-frequency productivity; Hopper emergent grammar (the descriptive↔prescriptive loop) -> ritual-tech ~ Rappaport (the canonical/self-referential split — the invariant score vs the indexical performance); Austin felicity (the performative's success conditions); Schechner (performance as restored behavior); Goodman (the score a performance instantiates) -> discourse-move-form ~ RST + Propp (move-grammars over discourse); the move-n-gram skeleton -> ast-vectors ~ red-green-trees (Roslyn) + tree-sitter (ERROR/MISSING, tree-edit-distance) — the tree-edit-distance teacher for the learned encoder -> multi-aperture ~ RAPTOR (collapsed-tree summary levels); Matryoshka (nested-dimension coarse→fine); late-chunking -> multi-graph ~ ColBERT + RRF (reciprocal rank fusion = the hash-join) -> instant-render ~ the TW5-native full parse-tree payload, hydrate-to-widget -> the-meta-pattern ~ the cross-substrate signature that a living grammar seeds, enacts, corrects, and decays ([[living-grammar]]) >>
 
 <<~ confidence Synthesis-Canon 13/20 >> Eight independent libations converge on the two-planes geometry
 (a discrete score ⋈ a graded performance) and on Route A (the grammar emits its own markers, so no
