@@ -1,58 +1,23 @@
 # docker-compose.mesh.yml — the DreamNet mesh-test harness (Infrastructure as Myth, IaC backup).
 #
-# A source Herm (Lares Viales) announces a dial on its public FLOW-map; a relay chain carries it
-# container-to-container across the astral space. Proves the mesh-palace BEING a mesh — the wayfarers
-# walking the roads, each blind to the territory, carrying only the public map.
+# Both vessel KINDS, composed over the ONE keel (composeVessel — cap-compose.ts): a full Lararium and
+# a composable Herm (daemon-FULL, wiki-LESS — the immune-teeth wayfarer). Each founds its own identity
+# in-container (lares init), then boots its cap-stack. Proves the composable keel being a mesh — the
+# Herm-as-keel running the same hearth-engine as the temple, keeping no rooms.
 #
-#   herm-source  (HERM_SEED=alpha) → herm-relay-1 (pulls source) → herm-relay-2 (pulls relay-1)
+#   lararium-a  (composeLararium: substrate + daemon + wiki + pool + read-face)   :18090
+#   herm-a      (composeHerm:     substrate + daemon + meshpalace + read-face)     :18091   LAR_RECIPE=herm
 #
 # Run:     docker compose -f docker-compose.mesh.yml up -d
-# Witness: node tools/herm-mesh-witness.mjs      (pulls relay-2 on :18080, asserts alpha crossed 3 hops)
-# Down:    docker compose -f docker-compose.mesh.yml down
+# Witness: ./tools/herm-mesh-witness.sh        (both reach live; herm-a daemon-full + wiki-less)
+# Down:    docker compose -f docker-compose.mesh.yml down -v
 #
-# Hermai run dev-style (node:24-slim + the mounted repo + built dist) — no image build, fast iterate.
-# Full Lararia (the serve stage) layer on next, once their containerized genesis ceremony is wired.
+# Dev-style (node:24-slim + mounted repo + built dist) — no image build, fast iterate.
 
 name: dreamnet-mesh
 
-x-herm: &herm
-  image: node:24-slim
-  working_dir: /app
-  volumes:
-    - ".:/app"
-  command: ["node", "packages/lararium-node/dist/src/herm-main.js"]
-  networks: [mesh]
-  restart: unless-stopped
-
 services:
-  herm-source:
-    <<: *herm
-    environment:
-      HERM_PORT: "8080"
-      HERM_SEED: "alpha"        # announces lar:///ha.ka.ba/@oracle/herm/alpha on its FLOW-map
-
-  herm-relay-1:
-    <<: *herm
-    environment:
-      HERM_PORT: "8080"
-      HERM_PEERS: "http://herm-source:8080"
-      HERM_PULL_MS: "1500"
-    depends_on: [herm-source]
-
-  herm-relay-2:
-    <<: *herm
-    environment:
-      HERM_PORT: "8080"
-      HERM_PEERS: "http://herm-relay-1:8080"
-      HERM_PULL_MS: "1500"
-    ports:
-      - "18080:8080"           # expose the tail of the chain to the host for the witness
-    depends_on: [herm-relay-1]
-
-  # A FULL Lararium — founded self-contained by tools/mesh-found-lararium.sh .mesh-test/lararium-a
-  # (genesis + identity + bootstrap under one mountable root). Serves its @oracle corpus over the
-  # same read-face: an anon pulls /oracle/pointer with NO gate — the anon-veil substrate, live.
-  # "Both kinds live" — a sovereign Lararium ⊕ the blind Hermai in one mesh.
+  # A FULL Lararium — founds its own identity, then composeLararium (substrate + daemon + wiki + pool).
   lararium-a:
     image: node:24-slim
     working_dir: /app
@@ -65,7 +30,27 @@ services:
     entrypoint: ["sh", "tools/lararium-container-boot.sh"]   # founds its OWN identity, then serves
     networks: [mesh]
     ports:
-      - "18090:8080"           # expose the Lararium's @oracle read-face (anon-veil witness)
+      - "18090:8080"             # the Lararium's @oracle read-face (anon-veil)
+    restart: "no"
+
+  # A composable HERM (Lares Viales) — founds its own identity, then composeHerm: the SAME keel as the
+  # Lararium MINUS the wiki cap (daemon-FULL immune core + @meshpalace + read-face, NO active wiki, NO
+  # pool). LAR_RECIPE=herm routes main.js → openNodeHerm. Blind by STRUCTURE — the wiki cap is never
+  # composed, so nothing routes to it (not a flag).
+  herm-a:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "herm-a-data:/herm-a"
+    environment:
+      LAR_ROOT: "/herm-a"
+      LAR_PORT: "8080"
+      LAR_RECIPE: "herm"
+    entrypoint: ["sh", "tools/lararium-container-boot.sh"]
+    networks: [mesh]
+    ports:
+      - "18091:8080"             # the Herm's @meshpalace FLOW-map read-face
     restart: "no"
 
 networks:
@@ -74,3 +59,4 @@ networks:
 
 volumes:
   lararium-a-data:
+  herm-a-data:

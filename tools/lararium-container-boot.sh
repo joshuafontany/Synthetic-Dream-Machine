@@ -9,10 +9,14 @@ set -e
 
 mkdir -p "$LAR_ROOT/genesis"
 cp /app/genesis/island.* "$LAR_ROOT/genesis/" 2>/dev/null || true
+cp -r /app/genesis/cas  "$LAR_ROOT/genesis/" 2>/dev/null || true   # the CAS substrate (engine/plugin blobs by CID — re-genesis)
+# NOT social-bootstrap.json: each container founds its OWN identity below.
 
 if [ ! -f "$LAR_ROOT/genesis/social-bootstrap.json" ]; then
   echo "[boot] founding this container's own Lararium (own vessel identity)…"
-  node packages/lares-cli/dist/src/bin/lares.js init
+  # --skip-build: the container trusts the HOST's mounted dist (the dev builds before `up`); it cannot
+  # run the full-workspace fresh-build itself (the TW5 submodule isn't populated in the bind mount).
+  node packages/lares-cli/dist/src/bin/lares.js init --skip-build
 fi
 
 echo "[boot] serving…"

@@ -20,6 +20,7 @@ fi
 # 2. Give the isolated root its own genesis — init reads the island from LAR_ROOT/genesis.
 mkdir -p "$DIR/genesis"
 cp "$REPO"/genesis/island.* "$DIR/genesis/"
+cp -r "$REPO"/genesis/cas "$DIR/genesis/" 2>/dev/null || true   # the CAS substrate (engine/plugin blobs by CID)
 
 # 3. Found identity + social-bootstrap into the isolated root (non-interactive, idempotent).
 echo "[found] founding Lararium into $DIR…"
