@@ -28,14 +28,18 @@
 
 import { CaptureNalu, PONO_FLUSH_GATE } from "./capture-nalu.js";
 import type { CaptureFlush, CaptureRecord, CaptureStats, FlushGate } from "./capture-nalu.js";
+import type { BranchContext } from "./build-patch.js";
 import { CoalesceGate } from "./projection-nalu.js";
 import { adaptGate, deriveGate } from "./gate-tuning.js";
 
 /** The forward annotate pass: a raw turn → its `lar_*` metadata. Each vessel injects its
- *  own (node: harvestTurnGradient + buildPatch; browser: the pure twin). */
+ *  own (node: harvestTurnGradient + buildPatch; browser: the pure twin). The optional `branch`
+ *  carries the turn-DAG fork-frontier (buildPatch's 3rd arg) so a same-session fork derives a
+ *  DISTINCT handle; absent (the common case) ⇒ byte-identical to before. */
 export type CaptureAnnotate = (
   turnText: string,
   sourceFile: string,
+  branch?: BranchContext,
 ) => Record<string, string | number | boolean>;
 
 /** One coalesced OUT-projection frame: the live engine stats, the current (breathing) gate, and
@@ -121,8 +125,9 @@ export interface CaptureEngineSeams {
 }
 
 export interface CaptureEngine {
-  /** Annotate a raw turn forward, durably write-ahead-log it, and enqueue it. */
-  enqueue(turnText: string, sourceFile: string): Promise<void>;
+  /** Annotate a raw turn forward, durably write-ahead-log it, and enqueue it. `branch` (optional)
+   *  threads the turn-DAG fork-frontier to the annotate pass (the same-session fork-cut). */
+  enqueue(turnText: string, sourceFile: string, branch?: BranchContext): Promise<void>;
   /** Crest on a server tick — flush the batch if the gate fires. Returns the count filed. */
   tick(nowMs: number): Promise<number>;
   /** Boot recovery — replay the WAL back into the hot pool. Returns the count recovered. */
@@ -221,11 +226,11 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   };
 
   return {
-    async enqueue(turnText, sourceFile) {
+    async enqueue(turnText, sourceFile, branch) {
       const record: CaptureRecord = {
         content: turnText,
         source_file: sourceFile,
-        metadata: annotate(turnText, sourceFile),
+        metadata: annotate(turnText, sourceFile, branch),
       };
       await reserve.append(record); // write-ahead: durable BEFORE the hot pool
       nalu.enqueue(record);

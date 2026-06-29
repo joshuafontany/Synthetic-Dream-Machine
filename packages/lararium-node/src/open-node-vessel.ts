@@ -538,7 +538,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const turnText   = typeof args["turnText"]   === "string" ? (args["turnText"]   as string) : "";
       const sourceFile = typeof args["sourceFile"] === "string" ? (args["sourceFile"] as string) : "";
       if (!turnText || !sourceFile) throw new Error("capture: args.turnText + args.sourceFile (non-empty strings) required");
-      daemonVm.placeTelemetry(turnText, sourceFile);
+      // Optional turn-DAG fork-frontier (head turn-uuids) the producer derived — threads to buildPatch's
+      // 3rd arg so a same-session fork derives a distinct handle. Absent ⇒ byte-identical to before.
+      const rawFrontier = args["frontier"];
+      const frontier = Array.isArray(rawFrontier)
+        ? rawFrontier.filter((x): x is string => typeof x === "string" && x !== "")
+        : typeof rawFrontier === "string" && rawFrontier ? [rawFrontier] : undefined;
+      daemonVm.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined);
       return { ok: true, captured: true, bytes: turnText.length };
     });
   };

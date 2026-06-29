@@ -19,6 +19,7 @@ export * from "./lar-uris.js";
 export * from "./boot-resolver.js";
 export * from "./build-patch.js";
 export * from "./branch-frontier.js";
+export * from "./gone-turns.js";
 export * from "./epoch-lease.js";
 export * from "./device-delegation.js";
 export * from "./oracle-substrate.js";

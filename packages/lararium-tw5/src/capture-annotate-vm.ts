@@ -22,7 +22,7 @@ module-type: startup
  */
 
 // PURE subpath (no Automerge) — the barrel `@lararium/mesh` drags in wasm the plugin build can't bundle.
-import { harvestTurnGradient, buildPatch } from "@lararium/mesh/harvest";
+import { harvestTurnGradient, buildPatch, type BranchContext } from "@lararium/mesh/harvest";
 import { parseMemeText } from "./meme-ast/index.js";
 import { getGrammar } from "./grammar-cache.js";
 import { emitMoveSkeleton, buildConstructiconBasis } from "./form-layer/index.js";
@@ -39,16 +39,18 @@ const AST_MAX = 262144;
 export const name  = "lararium-capture-annotate-vm";
 export const after = ["lararium-grammar-cache"];
 
-export type CaptureAnnotateVm = (turnText: string, sourceFile?: string) => Record<string, string | number>;
+export type CaptureAnnotateVm = (turnText: string, sourceFile?: string, branch?: BranchContext) => Record<string, string | number>;
 
 export function startup(): void {
   if (!$tw) return;
   const t = $tw as { lares?: { captureAnnotateVm?: CaptureAnnotateVm } };
   t.lares ??= {};
-  t.lares.captureAnnotateVm = (turnText: string, sourceFile?: string) => {
-    // 2. HARVEST (regex, in-VM) → the lar_* reading patch (existing behavior preserved).
+  t.lares.captureAnnotateVm = (turnText: string, sourceFile?: string, branch?: BranchContext) => {
+    // 2. HARVEST (regex, in-VM) → the lar_* reading patch (existing behavior preserved). `branch`
+    //    (the turn-DAG fork-frontier) rides buildPatch's 3rd arg so a same-session fork derives a
+    //    DISTINCT handle (the fork-cut); absent ⇒ byte-identical to before.
     const harvest = harvestTurnGradient(turnText);
-    const patch = buildPatch(harvest, sourceFile);
+    const patch = buildPatch(harvest, sourceFile, branch);
     // 1. PARSE (meme-ast, FULL grammar, in-VM) + 3. AST (ride the tree along). Best-effort: a parse
     //    failure must never sink a capture — the harvest patch still lands.
     try {

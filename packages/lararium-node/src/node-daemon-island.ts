@@ -60,16 +60,17 @@ const extra = t
           // holds the full self-hosted grammar; the worker only INVOKES it across ctx.tw5.$tw (same
           // thread, so its closure executes in-sandbox). No node-side annotate — if the plugin is not
           // loaded the turn persists un-annotated, surfaced loud (drop-honesty), never the regex shadow.
-          annotate: (turnText, sourceFile) => {
+          annotate: (turnText, sourceFile, branch) => {
             const $tw = ctx.tw5.$tw as unknown as {
-              lares?: { captureAnnotateVm?: (t: string, s?: string) => Record<string, string | number> };
+              lares?: { captureAnnotateVm?: (t: string, s?: string, b?: unknown) => Record<string, string | number> };
             };
             const fn = $tw.lares?.captureAnnotateVm;
             if (!fn) {
               console.warn("[node-daemon-island] $tw.lares.captureAnnotateVm absent (plugin not loaded) — turn persists un-annotated (drop-honesty)");
               return {};
             }
-            return fn(turnText, sourceFile);
+            // Thread the turn-DAG fork-frontier (branch) into the in-VM annotate → buildPatch's 3rd arg.
+            return fn(turnText, sourceFile, branch);
           },
           post,
           servo: { targetLatencyMs: t.targetLatencyMs ?? 1000 },

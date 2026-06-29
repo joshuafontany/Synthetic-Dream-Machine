@@ -271,6 +271,13 @@ export interface DaemonMsg_TelemetryPlaceVerb {
   type: "telemetry:place-verb";
   turnText: string;
   sourceFile: string;
+  /**
+   * The branch-frontier — the head turn-uuid(s) the producer (cli) derived from the transcript's
+   * parentUuid turn-DAG (branchContextForTurn). Absent on a non-forked turn (the common case),
+   * so the handle stays byte-identical to before. Carried as flat uuid strings; the in-VM annotate
+   * rebuilds the {@link BranchContext} and feeds it to buildPatch's 3rd arg (the fork-cut).
+   */
+  frontier?: readonly string[];
 }
 
 /**
@@ -728,12 +735,14 @@ export function mkDaemonPlaceVerb(opts: {
 export function mkTelemetryPlaceVerb(opts: {
   turnText: string;
   sourceFile: string;
+  frontier?: readonly string[];
 }): DaemonMsg_TelemetryPlaceVerb {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
     type: "telemetry:place-verb",
     turnText: opts.turnText,
     sourceFile: opts.sourceFile,
+    ...(opts.frontier && opts.frontier.length ? { frontier: [...opts.frontier] } : {}),
   };
 }
 

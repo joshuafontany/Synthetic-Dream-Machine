@@ -10,10 +10,10 @@ import type { CaptureEngine, CapturePost } from "@lararium/mesh";
 import type { IslandContext } from "../src/island-context.js";
 
 function fakeEngine() {
-  const calls = { recover: 0, tick: 0, enqueue: [] as Array<[string, string]>, dispose: 0 };
+  const calls = { recover: 0, tick: 0, enqueue: [] as Array<[string, string]>, branches: [] as Array<unknown>, dispose: 0 };
   let postRef: CapturePost | null = null;
   const engine: CaptureEngine = {
-    enqueue: async (t, s) => void calls.enqueue.push([t, s]),
+    enqueue: async (t, s, b) => void (calls.enqueue.push([t, s]), calls.branches.push(b)),
     tick: async () => (calls.tick++, 0),
     recover: async () => (calls.recover++, 0),
     stats: () => ({ depth: 0, failures: 0, spilled: 0, deadLettered: 0 }),
@@ -69,6 +69,25 @@ describe("hasCapture — the capture cap inside a causal island", () => {
     expect(f.calls.enqueue).toEqual([
       ["the verb leads", "s://1"],
       ["nested", "s://2"],
+    ]);
+  });
+
+  test("onSignal threads the fork-frontier to enqueue as a BranchContext; absent ⇒ undefined", async () => {
+    const f = fakeEngine();
+    const { ctx } = fakeCtx();
+    const cap = hasCapture({ makeEngine: f.makeEngine });
+    await cap.onEa!(ctx);
+
+    expect(cap.onSignal!("telemetry:place-verb", { turnText: "a", sourceFile: "s://1", frontier: ["turnA"] }, ctx)).toBe(true);
+    expect(cap.onSignal!("telemetry:place-verb", { args: { turnText: "b", sourceFile: "s://2", frontier: ["u1", "u2"] } }, ctx)).toBe(true);
+    expect(cap.onSignal!("telemetry:place-verb", { turnText: "c", sourceFile: "s://3" }, ctx)).toBe(true); // no fork
+    expect(cap.onSignal!("telemetry:place-verb", { turnText: "d", sourceFile: "s://4", frontier: [] }, ctx)).toBe(true); // empty ⇒ none
+
+    expect(f.calls.branches).toEqual([
+      { frontier: ["turnA"] },
+      { frontier: ["u1", "u2"] },
+      undefined,
+      undefined,
     ]);
   });
 });

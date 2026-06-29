@@ -132,8 +132,10 @@ export interface DaemonVmCore {
   workerEa:       Promise<void>;
   mountMainVerbs: (registry: VerbTable) => void;
   placeVerb:      (opts: VesselPlaceVerbRequest) => void;
-  /** FEED one captured turn to the @daemon's telemetry capture cap (the nalu). Fire-and-forget. */
-  placeTelemetry: (turnText: string, sourceFile: string) => void;
+  /** FEED one captured turn to the @daemon's telemetry capture cap (the nalu). Fire-and-forget.
+   *  `frontier` (optional) carries the turn-DAG fork-frontier so a same-session fork derives a
+   *  distinct handle; absent on a non-forked turn. */
+  placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[]) => void;
   /**
    * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
    * keyhive via daemon:verify-request/result. Common to both vessels.
@@ -407,8 +409,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
         ...(o.listenable      ? { listenable: o.listenable } : {}),
       }));
     },
-    placeTelemetry: (turnText: string, sourceFile: string) => {
-      worker.post(mkTelemetryPlaceVerb({ turnText, sourceFile }));
+    placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[]) => {
+      worker.post(mkTelemetryPlaceVerb({ turnText, sourceFile, ...(frontier && frontier.length ? { frontier } : {}) }));
     },
     onEvictRequest: (fn: (bagId: string) => Promise<void>) => {
       _evictHandler = fn;

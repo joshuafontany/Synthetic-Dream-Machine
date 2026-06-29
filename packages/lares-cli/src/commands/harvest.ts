@@ -29,8 +29,8 @@ import { execFileSync, execSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { basename, dirname, join } from "node:path";
-import { harvestTurnGradient } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
+import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, type TurnNode } from "@lararium/mesh";
+import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
 import { atomicWriteFileSync } from "@lararium/node";
@@ -196,6 +196,43 @@ function loadIndexHashes(path: string): Map<string, string> {
     }
   } catch { /* fall through */ }
   return seen;
+}
+
+/**
+ * The rewind-detection SCOPE key — `session \0 agentId`. A subagent's turns carry the PARENT
+ * session id (the link), so a `session`-only diff would read every subagent turn as gone when a lone
+ * main transcript is harvested (its subagents live in a subdir not in that run). Keying by agentId too
+ * keeps each scope independent: a scope is reconciled ONLY when its own source rode this run.
+ */
+function rewindScope(session: string, agentId: string | null): string {
+  return `${session || "?"} ${agentId ?? ""}`;
+}
+
+/**
+ * Read the append-only index into scope → the set of turn-keys it holds — the prior-run snapshot the
+ * rewind detector diffs against the live transcript. Scoped by (session + agentId) so a partial
+ * harvest never reads a turn from an un-harvested scope (a different session OR a subagent absent from
+ * this run) as gone.
+ */
+function loadIndexByScope(path: string): Map<string, Set<string>> {
+  const byScope = new Map<string, Set<string>>();
+  if (!existsSync(path)) return byScope;
+  try {
+    for (const line of readFileSync(path, "utf8").split("\n")) {
+      if (!line.trim()) continue;
+      try {
+        const r = JSON.parse(line) as { turn?: unknown; session?: unknown; agentId?: unknown };
+        if (typeof r.turn !== "string" || !r.turn) continue;
+        const session = typeof r.session === "string" ? r.session : "";
+        const agentId = typeof r.agentId === "string" ? r.agentId : null;
+        const scope = rewindScope(session, agentId);
+        let s = byScope.get(scope);
+        if (!s) { s = new Set<string>(); byScope.set(scope, s); }
+        s.add(r.turn);
+      } catch { /* skip torn line */ }
+    }
+  } catch { /* fall through */ }
+  return byScope;
 }
 
 /** All `.jsonl` under a dir (recursive — subagent `agent-*.jsonl` live in subdirs). */
@@ -598,11 +635,18 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     bands: { canon: 0, synthesis: 0, provisional: 0, raw: 0 }, indexPath,
   };
 
+  // The live snapshot for rewind detection: scope (session + agentId) → the turn-keys this run saw.
+  // Diffed against the index-by-scope below to find GONE (rewound) turns.
+  const currentByScope = new Map<string, Set<string>>();
   for (const file of files) {
     for (const turn of readTurns(file)) {
       summary.turns += 1;
       const key = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
       const hash = sha(turn.text);
+      const scope = rewindScope(turn.session, turn.agentId);
+      let live = currentByScope.get(scope);
+      if (!live) { live = new Set<string>(); currentByScope.set(scope, live); }
+      live.add(key);
       // Skip if the watermark OR the durable index already carries this turn at this content hash.
       if (state[key] === hash || indexHashes.get(key) === hash) { summary.skipped += 1; continue; }
 
@@ -631,11 +675,39 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     try { atomicWriteFileSync(statePath, JSON.stringify(nextState)); } catch { /* best effort */ }
   }
 
+  // REWIND DETECTION (kapae) — the index is append-only with no gone-turn reconciliation. For each
+  // session present in THIS run, a turn the index still holds but the live transcript no longer carries
+  // is a rewind: set aside (close) its worldline edges keyed to that turn-uuid, never erase. Scoped
+  // per-session (a turn from an un-harvested session never reads as gone). Best-effort: the KG is a
+  // re-derivable projection, so an absent KG / fault never sinks the harvest.
+  let kapae: { goneTurns: number; closed: number } | null = null;
+  if (!dryRun) {
+    const indexByScope = loadIndexByScope(indexPath);
+    const gone: string[] = [];
+    for (const [scope, live] of currentByScope) {
+      const prev = indexByScope.get(scope);
+      if (prev) gone.push(...detectGoneTurns(prev, live));
+    }
+    if (gone.length > 0) {
+      let closed = 0;
+      try {
+        for (const turnKey of gone) closed += kapaeTurn(turnKey).closed;
+        kapae = { goneTurns: gone.length, closed };
+      } catch (err) {
+        // KG absent (no python/sidecar) or a fault — the rewind stays unreconciled this run, never
+        // fatal (the KG is a re-derivable projection). Surface the reason only under debug.
+        const why = err instanceof KgUnavailable ? "KG unavailable" : err instanceof Error ? err.message : String(err);
+        kapae = { goneTurns: gone.length, closed };
+        if (process.env["LARES_DEBUG"]) console.warn(`[harvest] kapae best-effort skipped: ${why}`);
+      }
+    }
+  }
+
   // The repair tail — divergence-gated + idempotent (a no-op when the index is in sync).
   const hnsw = dryRun ? null : await runHnswRepairTail();
   emit(args, {
     ok: true,
-    data: { ...summary, dryRun, ...(hnsw ? { hnswRepair: hnsw } : {}) },
+    data: { ...summary, dryRun, ...(hnsw ? { hnswRepair: hnsw } : {}), ...(kapae ? { kapae } : {}) },
     human: () => {
       console.log(`lares harvest → ${wing}${dryRun ? "  (dry run)" : ""}`);
       console.log(`  transcripts:  ${summary.files}`);
@@ -643,6 +715,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       console.log(`  harvested:    ${summary.harvested}  (${summary.framed} framed · ${summary.raw} raw · ${summary.sidechain} sidechain)`);
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
       if (!dryRun) console.log(`  index:        ${indexPath}`);
+      if (kapae) console.log(`  rewind:       ${kapae.goneTurns} gone turn(s) → ${kapae.closed} worldline edge(s) set aside (kapae)`);
       if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
@@ -705,12 +778,25 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     // otherwise every captured turn lands in the `?` wing. buildPatch reads the basename, so surface/
     // handle derivation is unaffected.
     const src = `${wing}/${basename(file)}`;
+    // The full turn-DAG of THIS transcript (every user/assistant message), for the branch-frontier:
+    // a same-session FORK (a turn with ≥2 children in the parentUuid DAG) makes both branches derive
+    // the same handle → the worldline collision. branchContextForTurn derives the per-turn frontier so
+    // the daemon's buildPatch keys distinct handles. A linear transcript carries no fork ⇒ no frontier.
+    const dagNodes: TurnNode[] = readTurns(file).map((t) => ({ uuid: t.uuid, parentUuid: t.parentUuid }));
     for (const turn of readExchanges(file)) {       // exchange-grain drawer (the ingest canon)
       const key  = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
       const hash = sha(turn.text);
       if (state[key] === hash) continue;            // already captured (idempotent)
+      const branch = turn.uuid ? branchContextForTurn(dagNodes, turn.uuid) : undefined;
+      const frontier = branch?.frontier;
+      const frontierArr = frontier == null ? undefined : Array.isArray(frontier) ? frontier : [frontier];
       try {
-        const r = await runVerb("capture", { turnText: turn.text, sourceFile: src }, did, { timeoutMs: 5000 });
+        const r = await runVerb(
+          "capture",
+          { turnText: turn.text, sourceFile: src, ...(frontierArr && frontierArr.length ? { frontier: frontierArr } : {}) },
+          did,
+          { timeoutMs: 5000 },
+        );
         if (r.status !== "done") throw new Error(`capture status=${r.status}`);
         next[key] = hash;
         submitted += 1;

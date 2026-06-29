@@ -27,7 +27,7 @@ import { join } from "node:path";
 
 import {
   spiritName, agentIdOf, runIdOf, listSpiritFiles, spiritCaptureSourceFile, spiritsWing,
-  mineSubagentsForSession,
+  mineSubagentsForSession, observeSubagentWorldlines,
 } from "@lararium/mempalace";
 import { atomicWriteFileSync } from "@lararium/node";
 
@@ -63,6 +63,22 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
   const runId = runIdOf(transcript);
   mkdirSync(larHarvestDir(), { recursive: true });
   const statePath = join(larHarvestDir(), `${sw}.capture-state.json`);
+
+  // OBSERVER (the FFZ worldline trigger): project each spirit's spawn→Delegation + handback→close
+  // onto the mempalace KG, ONCE per spirit (a per-handle watermark), best-effort (KG absent ⇒ no-op,
+  // never sinks the verbatim/AST capture). Runs regardless of the daemon path — the KG edges are
+  // independent of the capture nalu. The transcript is the spirit's whole worldline, complete at Stop.
+  const wlStatePath = join(larHarvestDir(), `${sw}.worldline-state.json`);
+  const observeWorldlines = (): void => {
+    try {
+      const wl = loadState(wlStatePath);
+      const fresh = files.map((af) => `${runId}.${agentIdOf(af)}`).filter((h) => !wl[h]);
+      if (fresh.length === 0) return;
+      const res = observeSubagentWorldlines(transcript, { only: fresh });
+      for (const h of res.observed) wl[h] = "1";
+      if (res.observed.length) { try { atomicWriteFileSync(wlStatePath, JSON.stringify(wl)); } catch { /* best effort */ } }
+    } catch { /* best-effort durability — the KG is a re-derivable projection, never block capture */ }
+  };
   const state = loadState(statePath);
   const next: Record<string, string> = { ...state };
   const mined: Array<{ name: string; agentId: string; turns: number | string }> = [];
@@ -104,6 +120,7 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
       }
     }
     try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+    observeWorldlines();
     emit(args, {
       ok: true,
       data: { spirits: r?.spirits ?? mined.length, wing: sw, fallback: r ? "direct-mine" : "none (mine failed)", mined: r?.mined ?? mined },
@@ -113,6 +130,7 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
   }
 
   try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+  observeWorldlines();
   emit(args, {
     ok: true,
     data: { spirits: mined.length, wing: sw, routedThrough: "@daemon", mined },

@@ -10,3 +10,4 @@
 export * from "./turn-harvest.js";
 export * from "./build-patch.js";
 export * from "./branch-frontier.js";
+export * from "./gone-turns.js";

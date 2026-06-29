@@ -43,7 +43,9 @@ export interface CaptureCapOptions {
 interface EnqueueSignal {
   readonly turnText?: string;
   readonly sourceFile?: string;
-  readonly args?: { readonly turnText?: string; readonly sourceFile?: string };
+  /** The turn-DAG fork-frontier (head turn-uuids) the producer derived; absent on a non-forked turn. */
+  readonly frontier?: readonly string[];
+  readonly args?: { readonly turnText?: string; readonly sourceFile?: string; readonly frontier?: readonly string[] };
 }
 
 /** The IN=accumulate cap — hosts the capture-engine inside a causal island. */
@@ -117,7 +119,11 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
         console.warn(`[has-capture] dropped a malformed "${signal}" turn — needs string turnText + sourceFile (drop-honesty)`);
         return true;
       }
-      void e.enqueue(turnText, sourceFile);
+      // The fork-frontier (optional) → a BranchContext for the annotate pass; absent ⇒ no fork ⇒
+      // byte-identical handle to before. Carried as flat uuid strings, rebuilt into the context here.
+      const frontier = msg.frontier ?? msg.args?.frontier;
+      const branch = Array.isArray(frontier) && frontier.length ? { frontier: [...frontier] } : undefined;
+      void e.enqueue(turnText, sourceFile, branch);
       return true;
     },
   };
