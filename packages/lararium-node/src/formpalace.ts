@@ -12,18 +12,27 @@
  * FORM graph and the CONTENT graph (the existing verbatim mempalace) fuse on one join key. The
  * embedding model is never invoked (we always supply our own vector), mirroring `.astpalace`.
  *
- * A module-level singleton keys the holder on the canonical palace dir, so a second
- * `makeFormPalace`/store REUSES the one process — the reap-don't-pile invariant.
+ * THE CAP-STACK (the palace-instance #has): formpalace = the SHARED palace transport
+ * ({@link PalaceHolderRegistry}, palace-holder.ts) composed with its OWN op-surface —
+ * `encode_store`/`query`/`filter`/`get` over the python form-encoder holder. DISTINCT from
+ * astpalace (per-turn form-vectors keyed by verbatim_sha vs per-structure AST drawers keyed by
+ * structural hash, no AST payload stored here) but riding the IDENTICAL transport cap — two
+ * op-surface shapes, one transport, no god base-class (the sidecar 2-shapes lesson, one up).
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
  */
 
 import { spawn } from "node:child_process";
-import { realpathSync } from "node:fs";
-import { resolve } from "node:path";
 
 import { resolveFormEncoderSpawn } from "@lararium/mempalace";
 import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
+
+import {
+  PalaceHolderRegistry,
+  canonicalDirOf,
+  type PalaceHolderProc,
+  type PalaceHolderSpawn,
+} from "./palace-holder.js";
 
 /** The serializable basis shape the Python encoder consumes (its `index` is re-derived from order). */
 export interface SerializedBasis {
@@ -104,150 +113,14 @@ export interface FormPalace {
   close(): Promise<void>;
 }
 
-/** A child process plus the read-only stream surface the RPC needs (test-injectable). */
-interface HolderProc {
-  readonly stdin: NodeJS.WritableStream | null;
-  readonly stdout: NodeJS.ReadableStream | null;
-  readonly stderr: NodeJS.ReadableStream | null;
-  on(event: "exit", cb: (code: number | null) => void): void;
-  on(event: "error", cb: (err: Error) => void): void;
-  kill(): void;
-}
+/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+export type FormHolderSpawn = PalaceHolderSpawn;
 
-/** Test seam: produce the holder process for a canonical palace dir (defaults to the python helper). */
-export type FormHolderSpawn = (canonicalDir: string) => HolderProc;
-
-interface Pending {
-  resolve: (value: unknown) => void;
-  reject: (err: Error) => void;
-  timer: ReturnType<typeof setTimeout>;
-}
-
-/** The single live holder for one canonical palace dir — owns the child, ref-counts its users. */
-class Holder {
-  private proc: HolderProc | null = null;
-  private starting: Promise<void> | null = null;
-  private nextId = 1;
-  private readonly pending = new Map<number, Pending>();
-  private stdoutBuf = "";
-  private stderrTail = "";
-  refs = 0;
-
-  constructor(
-    private readonly canonicalDir: string,
-    private readonly spawnProc: FormHolderSpawn,
-    private readonly timeoutMs: number,
-  ) {}
-
-  private async ensure(): Promise<void> {
-    if (this.proc) return;
-    if (this.starting) return this.starting;
-    this.starting = new Promise<void>((res, rej) => {
-      const proc = this.spawnProc(this.canonicalDir);
-      this.proc = proc;
-      proc.stdout?.setEncoding?.("utf8");
-      proc.stdout?.on?.("data", (chunk: string) => this.onStdout(chunk));
-      proc.stderr?.setEncoding?.("utf8");
-      // stderr carries banner/library noise on a healthy boot, but the REAL fault (chroma permission,
-      // disk full, an import blow-up) on a sick one — buffer its tail, surface it on failure.
-      proc.stderr?.on?.("data", (chunk: string) => { this.stderrTail = (this.stderrTail + chunk).slice(-4096); });
-      proc.on("exit", (code) => this.onDown(this.withStderr(new Error(`form_encoder holder exited (code ${code ?? "null"})`))));
-      proc.on("error", (err) => this.onDown(this.withStderr(err)));
-      // Handshake: a ping confirms the holder is up before any encode/store rides.
-      this.request("ping", {}).then(() => res()).catch(rej);
-    });
-    try {
-      await this.starting;
-    } finally {
-      this.starting = null;
-    }
-  }
-
-  private onStdout(chunk: string): void {
-    this.stdoutBuf += chunk;
-    let idx: number;
-    while ((idx = this.stdoutBuf.indexOf("\n")) !== -1) {
-      const line = this.stdoutBuf.slice(0, idx).trim();
-      this.stdoutBuf = this.stdoutBuf.slice(idx + 1);
-      if (!line) continue;
-      let msg: { id?: unknown; ok?: boolean; result?: unknown; error?: string };
-      try {
-        msg = JSON.parse(line);
-      } catch {
-        continue; // non-JSON on stdout (stray banner) — ignore
-      }
-      if (typeof msg.id !== "number") continue;
-      const p = this.pending.get(msg.id);
-      if (!p) continue;
-      this.pending.delete(msg.id);
-      clearTimeout(p.timer);
-      if (msg.ok === false) p.reject(new Error(msg.error ?? "form_encoder error"));
-      else p.resolve(msg.result);
-    }
-  }
-
-  private withStderr(err: Error): Error {
-    const tail = this.stderrTail.trim();
-    if (tail) err.message = `${err.message}\n  holder stderr: ${tail}`;
-    return err;
-  }
-
-  private onDown(err: Error): void {
-    for (const p of this.pending.values()) {
-      clearTimeout(p.timer);
-      p.reject(err);
-    }
-    this.pending.clear();
-    this.proc = null;
-    if (holders.get(this.canonicalDir) === this) holders.delete(this.canonicalDir);
-  }
-
-  private request(op: string, fields: Record<string, unknown>): Promise<unknown> {
-    const id = this.nextId++;
-    return new Promise<unknown>((res, rej) => {
-      const timer = setTimeout(() => {
-        this.pending.delete(id);
-        rej(new Error(`form_encoder '${op}' timed out after ${this.timeoutMs}ms`));
-      }, this.timeoutMs);
-      this.pending.set(id, { resolve: res, reject: rej, timer });
-      try {
-        if (!this.proc?.stdin) throw new Error("form_encoder holder not started");
-        this.proc.stdin.write(JSON.stringify({ id, op, ...fields }) + "\n");
-      } catch (err) {
-        this.pending.delete(id);
-        clearTimeout(timer);
-        rej(err as Error);
-      }
-    });
-  }
-
-  async send(op: string, fields: Record<string, unknown>): Promise<unknown> {
-    await this.ensure();
-    return this.request(op, fields);
-  }
-
-  shutdown(): void {
-    this.onDown(new Error("form_encoder holder closed"));
-    try {
-      this.proc?.stdin?.end?.();
-    } catch { /* ignore */ }
-    this.proc?.kill?.();
-  }
-}
-
-/** ONE holder per canonical palace dir — the singleton that makes "one holder, never a pile" true. */
-const holders = new Map<string, Holder>();
-
-function canonicalDirOf(dir: string): string {
-  try {
-    return realpathSync(dir);
-  } catch {
-    return resolve(dir);
-  }
-}
+/** ONE registry per palace TYPE — formpalace's holders stay separate from astpalace's. */
+const registry = new PalaceHolderRegistry("form_encoder");
 
 /** Default holder spawn: the venv-aware python running `form_encoder.py serve --palace <dir>`. */
-function defaultHolderSpawn(canonicalDir: string): HolderProc {
+function defaultHolderSpawn(canonicalDir: string): PalaceHolderProc {
   const { python, script, submoduleRoot, scriptPresent } = resolveFormEncoderSpawn();
   if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
   if (!scriptPresent) throw new Error(`form_encoder.py missing at ${script}`);
@@ -256,7 +129,7 @@ function defaultHolderSpawn(canonicalDir: string): HolderProc {
     cwd: submoduleRoot,
     env,
     stdio: ["pipe", "pipe", "pipe"],
-  }) as unknown as HolderProc;
+  }) as unknown as PalaceHolderProc;
 }
 
 export interface FormPalaceOptions {
@@ -267,27 +140,21 @@ export interface FormPalaceOptions {
 }
 
 /**
- * Open the FORM store rooted at `dir` — a mempalace instance's "form" collection. Reuses the ONE
- * holder process per canonical dir (singleton); `close()` releases this reference and kills the
- * process when the last reference closes.
+ * Open the FORM store rooted at `dir` — a mempalace instance's "form" collection. Composes the
+ * shared transport cap (ref-counted ONE holder per canonical dir) with the form op-surface;
+ * `close()` releases this reference and kills the process when the last reference closes.
  */
 export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormPalace {
   const canonicalDir = canonicalDirOf(dir);
   const timeoutMs = opts.timeoutMs ?? 60_000;
   const spawnProc = opts.spawn ?? defaultHolderSpawn;
 
-  let holder = holders.get(canonicalDir);
-  if (!holder) {
-    holder = new Holder(canonicalDir, spawnProc, timeoutMs);
-    holders.set(canonicalDir, holder);
-  }
-  holder.refs += 1;
-  const myHolder = holder;
+  const holder = registry.acquire(canonicalDir, spawnProc, timeoutMs);
   let closed = false;
 
   return {
     async encodeStore({ skeleton, basis, key, metadata }): Promise<FormStoreResult> {
-      return (await myHolder.send("encode_store", {
+      return (await holder.send("encode_store", {
         key,
         skeleton,
         basis,
@@ -296,7 +163,7 @@ export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormP
     },
 
     async query({ skeleton, basis, nResults, where }): Promise<FormMatch[]> {
-      const res = (await myHolder.send("query", {
+      const res = (await holder.send("query", {
         skeleton,
         basis,
         n_results: nResults ?? 10,
@@ -306,7 +173,7 @@ export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormP
     },
 
     async filter({ where, nResults }): Promise<FormMatch[]> {
-      const res = (await myHolder.send("filter", {
+      const res = (await holder.send("filter", {
         n_results: nResults ?? 10,
         ...(where !== undefined ? { where } : {}),
       })) as { matches: FormMatch[] };
@@ -314,22 +181,18 @@ export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormP
     },
 
     async get(key: string): Promise<FormEntry | null> {
-      return (await myHolder.send("get", { key })) as FormEntry | null;
+      return (await holder.send("get", { key })) as FormEntry | null;
     },
 
     async close(): Promise<void> {
       if (closed) return;
       closed = true;
-      myHolder.refs -= 1;
-      if (myHolder.refs <= 0) {
-        myHolder.shutdown();
-        if (holders.get(canonicalDir) === myHolder) holders.delete(canonicalDir);
-      }
+      registry.release(holder);
     },
   };
 }
 
 /** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
 export function _liveFormHolderCount(): number {
-  return holders.size;
+  return registry.size();
 }

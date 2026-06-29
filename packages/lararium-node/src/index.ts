@@ -68,8 +68,11 @@ export type { CaptureReserveOptions } from "./capture-reserve.js";
 // injected by node-daemon-island) so the package index never pulls the mempalace barrel.
 export { makeNodeCaptureEngine, makeAstSplitFlush, makeFormSplitFlush } from "./node-capture-engine.js";
 export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
+// The shared palace-instance transport cap (the #has-stack foundation both local stores compose).
+export { PalaceHolder, PalaceHolderRegistry, canonicalDirOf } from "./palace-holder.js";
+export type { PalaceHolderProc, PalaceHolderSpawn, PalaceFeedCap } from "./palace-holder.js";
 export { makeAstPalace } from "./astpalace.js";
-export type { AstPalace, AstEntry, AstProvenance } from "./astpalace.js";
+export type { AstPalace, AstEntry, AstProvenance, HolderSpawn } from "./astpalace.js";
 export { makeFormPalace } from "./formpalace.js";
 export type {
   FormPalace, FormPalaceOptions, FormHolderSpawn, FormMetadata, FormStoreResult,
