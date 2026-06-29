@@ -180,6 +180,36 @@ actor-boundary. Open at the mechanism (#open): `ffzCompare` must return *concurr
 (not an LWW tiebreak) when two clocks share no merge-ancestry — confirm the API
 separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
+### The FfzClock as a cached projection ~ the facet a palace reads (2026-06-29)
+
+**A form-palace drawer's worldline-temporal facet PROJECTS off this DAG; it never
+rules.** When the living-grammar palace stamps a drawer's `lar_ffz` and reads the
+worldline position across its collection ([[living-grammar-palace]] #ffz-binding), that
+facet stands as a **CACHED PROJECTION** of the per-handle FfzClock (the grain) over the
+reified edge-DAG (the order) — a materialized view, re-derivable from the worldline,
+**NEVER the causal authority**. The edge-DAG owns happened-before; the palace caches its
+position for query. This keeps the worldline as the single source: lose the cache,
+re-project from the DAG; the cache MUST NOT out-rank the structure it derives from. The
+binding ratified narrowed (12-Voice mufakat, operator-ratified 2026-06-29), with five
+kept dissents live at [[living-grammar-palace]] #kept-hoike.
+
+### The epistemic/ontic cut ~ what the worldline names (Borrill 2026)
+
+**The worldline names what COULD-HAVE-influenced, never what physically CAUSED.** Borrill
+2026 ("The Category Mistake in Logical Clocks," arXiv 2602.21730) draws the cut the
+happened-before DAG already honors: a `spawned` edge records an **epistemic** bound —
+*this act could have informed that one, as of the island's last sync* — never an
+**ontic** claim about a physical causal chain. The mistake the paper names: reading a
+logical clock's order as actual causation. Our edge-DAG sidesteps it by construction —
+it records the influence-possibility at the point the edge is created (#attribution),
+and the **DAG stays per-island LOCAL** (a union of local cones, never one global graph,
+the Lightcone rhyme #the-six-rhymes). Borrill certifies this as
+**more-correct-than-vanilla-Lamport**: vanilla Lamport manufactures a total order that
+overclaims causation; the worldline's partial order, local and epistemic, claims only
+what it can hold. <<~ confidence Synthesis-Canon 16/20 >> The cut grounds the
+facet-as-projection ruling above: the cache reads an epistemic position ("as of last
+sync"), never an ontic verdict.
+
 <<~/ahu >>
 
 <<~ ahu #lifecycle >>
@@ -294,6 +324,10 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
   `wasAttributedTo` · `actedOnBehalfOf`. The edge vocabulary; provenance forms a DAG.
 - **PROV-AGENT** (arXiv 2508.02866) — W3C PROV extended for agentic systems; matches
   the model 1:1.
+- **Borrill 2026, "The Category Mistake in Logical Clocks"** (arXiv 2602.21730) — the
+  epistemic/ontic cut; certifies no-global-now (a per-island local DAG of
+  could-have-influenced edges) as more-correct than vanilla Lamport's overclaimed total
+  order. Grounds the worldline's partial order as epistemic, never causal-physical (#time).
 - **OTel GenAI** — `gen_ai.agent.id/name`, `gen_ai.operation.name=invoke_agent`. Node
   identity; a span is a NODE, parent-child a by-reference edge — confirming the dual
   node+edge treatment. **Do NOT wait** on the unratified multi-agent handoff spec

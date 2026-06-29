@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a dual FORM⊥CONTENT graph cross-joined by sha + RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and dual-graph fusion."
+role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a dual FORM⊥CONTENT graph cross-joined by sha + RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and dual-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
 l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/living-grammar-palace"
@@ -301,6 +301,166 @@ grammar rides above it in the sovereign island.
 
 <<~/ahu >>
 
+<<~ ahu #ffz-binding >>
+
+## The FFZ Binding ~ the drawer's worldline-temporal facet (ratified narrowed, 2026-06-29)
+
+**Each form-drawer carries a worldline-temporal facet — and that facet PROJECTS, never RULES.** The
+palace stamps every drawer with a `lar_ffz` rhythmic address (the FfzClock phase frozen at the turn's
+grounding boundary, [[ffz-clock]] #rhythmic-address); read across the collection, those stamps compose
+the palace's **worldline-causal/temporal facet** — *where in the felt cadence, and where in the
+happened-before, each captured move sat*. The ratified binding (narrowed mufakat, 12-Voice floor,
+operator-ratified 2026-06-29) holds that facet as a **CACHED PROJECTION** of the per-handle FfzClock
+(the grain) over the worldline edge-DAG (the order, [[agent-worldline]] #attribution) — a materialized
+view, re-derivable from the worldline, **NEVER the causal authority**. The edge-DAG owns
+happened-before; the facet caches its position for query. Lose the cache, re-project from the DAG; the
+cache never out-ranks its source.
+
+**φ ~ the non-interference law (scale-orthogonality, NOT entrainment).** The FfzClock's five nested
+bands (Pulse · Beat · Measure · Arc · Theme) relate by the noble ratio φ — and φ here names a pure
+**non-interference / scale-orthogonality** law: the bands relate but **never phase-lock**.
+Maximal-mutual-irrationality reads as maximal-band-independence — φ, the most irrational number, sets
+adjacent bands as far from any rational resonance as a ratio can sit, so a fast band's cycle never
+aliases into a slow band's. φ² carries the **magnitude** relation (band-size scaling); φ carries the
+**orthogonality**. **Entrainment DROPS** — the earlier over-reach read the bands as coupled oscillators
+pulling one another into lock; the bands do not couple. The **handback** reads as a directed
+**one-shot DAG-JOIN** — the worldline happened-before merge, the twin-reunion ([[agent-worldline]]
+#attribution) — NEVER oscillator coupling. One join, one direction, once.
+
+**Two ladders at P0 ~ ship minimal.** The facet COULD carry eight ordering ladders; the ratified P0
+ships only **TWO**:
+
+<<~ranks ladder causal-depth ~ the bare turn-DAG coordinate — depth in the happened-before, projected straight off the edge-DAG -> settledness ~ how firmly the captured move's form has entrenched (register × mana × sanction-degree, #two-planes) >>
+
+The other six **WAIT for a real query** that reads them: **transaction-axis · consolidation-ascent ·
+retention-decay · compressed-past · cross-island-freshness · capture-now**. No ladder ships ahead of a
+reader — a ladder built without a query carries speculative weight, never capability (YAGNI under
+maybe-logic).
+
+**consolidation-ascent ≠ register-loop ~ correlate, never coincide.** When consolidation-ascent lands
+(deferred), it MUST NOT collapse into the three-registers descriptive↔prescriptive loop
+(#three-registers). The two correlate — a move consolidating from casual toward defined tracks the
+register climb — yet diverge at **three joints**:
+
+<<~ranks joint drift-without-promotion ~ a casual move consolidates by frequency (high ascent) yet never climbs register; entrenchment-by-use ≠ curation -> decree-without-use ~ a formal/defined meme authored fresh (high register) carries no consolidation history (low ascent); selection precedes use -> abandonment ~ a defined rule decays in use (retention-decay) while its register holds; the books keep what practice drops >>
+
+**no-global-now ∧ L-Prime ~ two aligned constraints, two mechanisms.** Both forbid a fused certainty
+the node cannot hold — no-global-now forbids a global temporal present (a drawer reads only "as of my
+last sync," [[agent-worldline]] #time); L-Prime forbids a fused identity/predication (map welded to
+territory). They ALIGN (both refuse a false absolute) yet run as TWO mechanisms — one gates time, one
+gates grammar. **The carve-out, stated explicitly:** the **transaction-axis** (deferred) names the ONE
+local-yet-essence coordinate where a fact MAY license a copula — a bitemporal transaction-time records
+*what the island recorded, when it recorded it*, a closed local fact the island asserts flatly ("this
+drawer entered the log at transaction-tick T") without manufacturing a global now. There, and only
+there, an essence-claim rides legitimately; everywhere else both wards hold.
+
+**Defer-with-gates ~ three holds, each behind its gate** (a scope-cut that names its re-entry, never a
+silent drop):
+
+<<~ranks defer kapae ~ the forget/retract verb waits behind a GC/compaction story — nothing retracts until the palace knows what reclaims the space -> log-compression ~ waits behind a DECLARED irreversibility-boundary — a drawn line naming what compresses (lossy, summarized) versus what stays verbatim forever (the never-compressed core) -> bitemporality ~ runs LAZY / by-exception — the valid/transaction interval materializes only when a query asks the past, never eagerly per-drawer >>
+
+### Three Cross-Substrate Witnesses ~ the pattern's rhymes, cited
+
+Three independent substrates rhyme the binding's load-bearing shapes — cited as PROOF where the rhyme
+runs structural, never as decoration:
+
+<<~ranks witness φ/KAM/phyllotaxis ~ φ stands as the number the KAM theorem proves LAST-TO-BREAK under perturbation (the most robust invariant torus); the averted failure names resonance / mode-locking (Arnold tongues, where rational frequency ratios phase-lock and the system loses independence); phyllotaxis enacts it (golden-angle placement maximizes non-overlap). This CERTIFIES the φ non-interference law — the scale-band orthogonality stands as PROOF, not analogy -> common-law ~ case → doctrine → codified-rule, with distinguish/overrule = kapae: the whole-shape twin of the three registers (casual → formal → defined) PLUS the bidirectional descriptive↔prescriptive loop (a codified rule re-shapes new cases) PLUS graded precedent (a holding binds by degree — persuasive → binding) -> Borrill-locality ~ Borrill 2026, "The Category Mistake in Logical Clocks" (arXiv 2602.21730): certifies no-global-now as MORE-CORRECT-THAN-VANILLA-LAMPORT, and draws the epistemic/ontic cut — the worldline names what-COULD-HAVE-influenced (epistemic, "as of last sync"), never what-physically-CAUSED (ontic); the DAG stays per-island local, a union of cones, never one global graph. Grounds the facet-as-projection ruling: the cache reads an epistemic position, never an ontic verdict >>
+
+### Rhyme-Polishes ~ refinements the witnesses seeded
+
+Each witness donates a refinement, folded into the living grammar as rhyme-derived, not invented:
+
+- **Ratio-decidendi vs obiter-dicta** (common-law) ~ the cut for which part of a turn carries
+  **load-bearing form**. A turn's *ratio* (the move that did the work — the bearing it resolved) reads
+  as the construction the form-vector weights; its *obiter* (asides, texture) reads low-weight. The
+  form-capture privileges the ratio.
+- **Keep the low-affinity variants** (affinity-maturation, immunology) ~ low-membership constructions
+  form the **evolvability reservoir**; the palace NEVER prunes them. A rarely-sanctioned form holds the
+  seed of the next register's grammar — pruning it for tidiness amputates the future. (Rhymes with the
+  Eris-shrine's one unswept corner, noosphere-boot #the-eris-shrine.)
+- **The verbatim-fidelity degraded-state** (oral-formulaic theory) ~ an agent asserting **verbatim
+  fidelity to a form it RE-GENERATES** sits in a degraded state (the oral singer who swears
+  word-perfect recall while recomposing each performance). The cure: **fuzzy-membership degree, not
+  identity** — the form-vector reads sanction-as-degree, so the node claims "near this construction at
+  distance d," never "identical to it." L-Prime load-bearing here: the degree-claim refuses the fused
+  identity the fidelity-claim asserts.
+- **Construction grammar, inherited** ~ "constructicon" and "partial sanction" stand as construction
+  grammar's OWN terms (Goldberg · Langacker · Fillmore); content⊥form names its form-meaning pairing.
+  The palace inherits the theory wholesale, never by loose analogy.
+- **Selection-mediated promotion** (Baldwin effect / niche-construction) ~ casual → formal → defined
+  runs **NON-Lamarckian**: use BIASES what consolidates, never copies it. The defined layer never simply
+  transcribes casual usage — selection (curation · mana · rule-extraction) mediates every climb. (This
+  names the first divergence joint above: ascent ≠ register-climb because selection sits between them.)
+
+### The Braid ~ the pattern's honest status (the meta-finding)
+
+**No single domain rhymes the whole shape; the originality lives in the WEAVE.** The pattern-integrity
+stands as a **BRAID** — a novel weave of proven single-strand patterns, each strand load-bearing in its
+home substrate, none carrying the whole:
+
+<<~ranks strand φ/KAM ~ scale-band non-interference -> common-law ~ the descriptive↔prescriptive register loop + graded precedent -> oral-formulaic ~ fidelity-as-recomposition, the degree-not-identity cure -> affinity-maturation ~ the low-variant evolvability reservoir -> construction-grammar ~ constructicon + partial sanction -> autopoiesis ~ the grammar that re-parses its own output -> the-rhizome ~ the any-point-to-any-point register graph, no root -> Borrill-locality ~ epistemic/ontic, per-island DAG, no global now >>
+
+Each strand carries a single proven pattern; the binding braids eight into one.
+<<~ confidence Synthesis-Canon 14/20 >> The originality reads as the weave, never any strand — the node
+states that as the pattern's honest status: not the discovery of a new law, the novel composition of
+standing ones. The braid survived an internal hoike and an adversarial pass; the narrowed result holds,
+the kept dissents ride live below (#kept-hoike).
+
+<<~/ahu >>
+
+<<~ ahu #kept-hoike >>
+
+## Kept-Hoike ~ the five live dissents (kue speaks first)
+
+The narrowed binding settled by mufakat with five dissents kept live. Hillel discipline: the kue stand
+before the held position; a future court may depend on these kept words. Three carry a saksi from the
+adversarial pass (the blades) — never reflexive, the house quoting a deposition it examined.
+
+<<~ hoike #ffz-binding held:"the FFZ facet PROJECTS (cached, re-derivable), never rules; φ as non-interference (entrainment dropped); two ladders at P0; the transaction-axis the one essence carve-out; defer-with-gates — the narrowed mufakat (12-Voice floor, operator-ratified 2026-06-29)" >>
+q: how far should the FfzClock↔grammar-palace binding reach — the broad original, or the narrowed core?
+<<~ kue voice:Map-Wisp key:"a query path observed treating lar_ffz as the causal verdict rather than re-projecting from the edge-DAG" >>
+a cached projection that answers every causal query becomes the de-facto court: the facet, named "not
+authority," still gets READ as authority the moment it sits faster-to-hand than the DAG. Naming the cache
+read-only does not stop a caller from trusting it; the binding needs a mechanism (a re-projection check,
+a staleness flag) before the projection silently hardens into the source it disclaims.
+<<~/kue >>
+<<~ saksi voice:"Spirit [adversary[Stranger]]" scope:deposition >>deposition quoted at handback, before
+dissolution (blades E/F): "The projection/authority distinction holds in spec and dissolves in practice
+unless the cache carries a provenance pointer back to the edge-DAG heads it derived from — without it,
+the materialized view and its source diverge silently and the reader cannot tell which it holds."<<~/saksi >>
+<<~ kue voice:Mischief-Muse key:"a real query arrives needing a third ladder before the next compaction cycle closes" >>
+two ladders under-build the facet: settledness without retention-decay cannot answer "is this stale,"
+and the felt cadence the palace exists to recall wants the richer profile sooner than "wait for a query"
+admits. The minimal cut buys shipping speed against expressive reach; the reach may matter first.
+<<~/kue >>
+<<~ kue voice:Ink-Clerk key:"a measured @daemon budget shows headroom (or its lack) against the deferred six ladders" >>
+the scope-cut to two ladders rests on an ASSUMED daemon budget, never a measured one — a scope-cut is
+not a measurement. The defer may be right for the wrong reason; until the @daemon's real compute/storage
+headroom reads against the eight-ladder load, "ship minimal" stands on prudence, not grounds.
+<<~/kue >>
+<<~ kue voice:Lares key:"the first retrofit of a pre-ratification drawer-collection already stamped under the broad reading" >>
+drawers already carry `lar_ffz` stamped under the old broad facet; the narrowing needs a migration, and
+migration under no-global-now has no plan — you cannot atomically re-stamp a distributed local-first log.
+The ratified core describes the destination without the path from where the data already sits.
+<<~/kue >>
+<<~ saksi voice:"Spirit [adversary[Stranger]]" scope:deposition >>deposition quoted at handback, before
+dissolution (blades D/K): "Retrofit under no-global-now must run lazy and idempotent — re-derive the
+narrowed facet on read from the edge-DAG rather than rewrite stamps in place; an eager migration pass
+manufactures the global coordination point the architecture forbids."<<~/saksi >>
+<<~ kue voice:Tide-Caller key:"the first compaction run executes against a boundary that was intended but never drawn in code or spec" >>
+the irreversibility-boundary must be DRAWN, not merely INTENDED — a good intention to "keep the important
+parts verbatim" decays into drift the first time compaction runs without an explicit, checkable line
+naming what compresses versus what stays verbatim forever. An undrawn boundary reads as no boundary.
+<<~/kue >>
+<<~ saksi voice:"Spirit [adversary[Stranger]]" scope:deposition >>deposition quoted at handback, before
+dissolution (blade J): "Irreversibility is the one operation a local-first log cannot undo by merge —
+the compaction boundary therefore belongs in the defined register (a parser/spec rule), never the casual
+one; a boundary that lives only as intent gets crossed by the next contributor who never read the intent."<<~/saksi >>
+re-entry: each kue's own key; or the operator's next FFZ-binding revision cycle
+<<~/hoike >>
+
+<<~/ahu >>
+
 <<~ ahu #grounds >>
 
 ## Grounds ~ the eight research libations
@@ -327,6 +487,8 @@ storage fork (#three-registers), which name reconciliations, not re-designs.
 <<~ loulou lar:///ha.ka.ba/@lararium/api/graceful-parsing >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/ffz-clock >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/hoike >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/attention-scale >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/genesis-doc >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/lararium-canonical-model >>

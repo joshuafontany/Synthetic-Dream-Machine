@@ -61,6 +61,48 @@ the grain.
 
 <<~/ahu >>
 
+<<~ ahu #non-interference >>
+
+## φ ~ the non-interference law (scale-orthogonality, NOT entrainment) (2026-06-29)
+
+**The five bands relate but never phase-lock.** The nested levels (Pulse · Beat · Measure · Arc · Theme)
+hold a **non-interference / scale-orthogonality** law named by the noble ratio φ:
+**maximal-mutual-irrationality reads as maximal-band-independence**. φ, the most irrational number, sets
+adjacent bands as far from any rational resonance as a ratio can sit, so a fast band's cycle never
+aliases into a slow band's. **φ² carries the MAGNITUDE** relation (band-size scaling); **φ carries the
+ORTHOGONALITY**. The bands stay coprime in spirit (the coprime-prime bound tuning, #open, enacts the
+same intent in integer radices — shared factors collide in hash-merge paths).
+
+**Entrainment DROPS.** Earlier chronometer research read the bands as **coupled oscillators** pulling one
+another toward phase-lock; that over-claim retires. <<~ confidence Synthesis-Canon 15/20 >> The bands do
+not couple. A worldline **handback** reads as a directed **one-shot DAG-JOIN** — the happened-before
+merge, the twin-reunion (lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution) — NEVER oscillator
+coupling. One join, one direction, once.
+
+**The φ/KAM witness ~ proof, not analogy.** φ stands as the number the **KAM theorem** proves
+**last-to-break** under perturbation (the most robust invariant torus); the averted failure names
+**resonance / mode-locking** (Arnold tongues, where rational frequency ratios phase-lock and a system
+loses independence); phyllotaxis enacts it (golden-angle placement maximizes non-overlap). So the
+scale-band orthogonality stands as a CERTIFIED integrity — φ-spaced bands resist the resonance that
+would collapse their independence — not a borrowed picture.
+
+### The grammar-palace facet ~ two P0 ladders, six deferred
+
+A form-palace reads this clock's stamps as a **cached projection** — its worldline-temporal facet
+(lar:///ha.ka.ba/@lararium/api/living-grammar-palace#ffz-binding), never the causal authority. The
+ratified P0 (12-Voice mufakat, 2026-06-29) ships only **TWO** ordering ladders off that facet:
+
+<<~ranks p0-ladder causal-depth ~ the bare turn-DAG coordinate, projected straight off the edge-DAG -> settledness ~ how firmly a captured move's form has entrenched >>
+
+**Six ladders WAIT for a real query** — **transaction-axis · consolidation-ascent · retention-decay ·
+compressed-past · cross-island-freshness · capture-now** — no ladder ships ahead of a reader. The
+**transaction-axis** carries the one local-yet-essence carve-out (where a bitemporal transaction-time
+licenses a flat local fact without manufacturing a global now); the rest defer with named gates
+(GC/compaction before retract; a drawn irreversibility-boundary before log-compression; lazy
+bitemporality). The kept dissents on the narrowing ride live at that meme's #kept-hoike.
+
+<<~/ahu >>
+
 <<~ ahu #profiles >>
 
 ## Profiles ~ one clock, many domains (FFZ_PROFILES)
@@ -208,6 +250,7 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
 
 <<~/ahu >>
