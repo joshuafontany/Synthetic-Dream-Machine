@@ -39,6 +39,12 @@ import {
   resolveVoiceRole,
   wardStateForGlyph,
 } from "./constructicon-basis.js";
+import {
+  parseBearingPayload,
+  bearingFacets,
+  type BearingVector,
+  type BearingFacets,
+} from "./bearing-ast.js";
 
 // ---------------------------------------------------------------------------
 // The linear move-skeleton stream
@@ -67,6 +73,12 @@ export interface MoveToken {
   readonly axisId: string | null;
   /** Character offset in the turn (synthetic for the frame: aim < 0, yield large). */
   readonly offset: number;
+  /**
+   * For a `bearing` token only: the parsed bearing-vector AST this leg carries
+   * (aim → the delegated role `to`; yield → the resolved bearing). The RED URI,
+   * descended into its slots — no longer collapsed to a bare presence token.
+   */
+  readonly bearing?: BearingVector;
 }
 
 const CONTENT_PLACEHOLDER = "_";
@@ -117,6 +129,26 @@ export interface MoveSkeletonCounts {
   readonly sigils: number;
 }
 
+/**
+ * The aim/yield bearing, parsed into bearing-vector ASTs and surfaced as
+ * queryable facets. The aim leg's payload `<from> -> <to>` parses to its two
+ * vectors (operator-intent, the delegated role); the yield leg's `<resolved>
+ * -> ?` parses to one (the bearing the work resolved toward).
+ */
+export interface SkeletonBearing {
+  /** the aim leg's parsed vectors, left→right: typically [from, to]; [] when no aim. */
+  readonly aim: readonly BearingVector[];
+  /** the yield leg's parsed vectors: typically [resolved]; [] when no yield. */
+  readonly yield: readonly BearingVector[];
+  /**
+   * the turn's OPERATIVE bearing-vector: the yield's resolved bearing, else the
+   * aim's delegated role (its last vector), else the aim's first vector, else null.
+   */
+  readonly primary: BearingVector | null;
+  /** where-filterable facets derived from {@link primary} (empty when no bearing). */
+  readonly facets: BearingFacets;
+}
+
 /** The fold of a TurnHarvest + meme-ast tree — both shapes the encoder consumes. */
 export interface MoveSkeleton {
   /** (a) The linear move-skeleton stream (prose stripped to `_`). */
@@ -127,6 +159,8 @@ export interface MoveSkeleton {
   readonly counts: MoveSkeletonCounts;
   /** The harvest band carried through (provenance for the encoder). */
   readonly band: TurnHarvest["band"];
+  /** The parsed aim/yield bearing + its queryable facets (the RED URI, descended). */
+  readonly bearing: SkeletonBearing;
 }
 
 // ---------------------------------------------------------------------------
@@ -211,7 +245,7 @@ function otherTokens(o: OtherSigil): MoveToken[] {
  * frame carries no offset in the harvest — its aim token PREPENDS and its yield
  * token APPENDS (the chiasmus), and water tokens (count-only) trail at the end.
  */
-function buildStream(h: TurnHarvest): MoveToken[] {
+function buildStream(h: TurnHarvest, bearing: SkeletonBearing): MoveToken[] {
   const positioned: Positioned[] = [];
   const add = (sig: OffsetSignal, toks: MoveToken[]): void => {
     positioned.push({ offset: sig.offset, end: spanEnd(sig), tokens: toks });
@@ -229,9 +263,17 @@ function buildStream(h: TurnHarvest): MoveToken[] {
 
   const stream: MoveToken[] = [];
 
-  // The aim leg opens the chiasmus.
+  // The aim leg opens the chiasmus — its token carries the delegated role (the
+  // `->` target: the aim payload's last vector), so the skeleton holds the slots.
   if (h.bearing?.aimUri != null) {
-    stream.push({ kind: "bearing", token: "aim", axisId: "sigil:lares", offset: -1 });
+    const aimVec = bearing.aim.length > 0 ? bearing.aim[bearing.aim.length - 1] : undefined;
+    stream.push({
+      kind: "bearing",
+      token: "aim",
+      axisId: "sigil:lares",
+      offset: -1,
+      ...(aimVec ? { bearing: aimVec } : {}),
+    });
   }
 
   // Interleave positioned tokens with `_` content placeholders for prose gaps.
@@ -249,13 +291,16 @@ function buildStream(h: TurnHarvest): MoveToken[] {
     if (p.end > cursor) cursor = p.end;
   }
 
-  // The yield leg closes the chiasmus.
+  // The yield leg closes the chiasmus — its token carries the resolved bearing
+  // (the yield payload's first vector, the forward-vector the work resolved toward).
   if (h.bearing?.yieldUri != null) {
+    const yieldVec = bearing.yield.length > 0 ? bearing.yield[0] : undefined;
     stream.push({
       kind: "bearing",
       token: "yield",
       axisId: "sigil:lares",
       offset: Number.MAX_SAFE_INTEGER,
+      ...(yieldVec ? { bearing: yieldVec } : {}),
     });
   }
 
@@ -265,6 +310,41 @@ function buildStream(h: TurnHarvest): MoveToken[] {
   }
 
   return stream;
+}
+
+// ---------------------------------------------------------------------------
+// the bearing — parse the aim/yield URIs into bearing-vector ASTs + facets
+// ---------------------------------------------------------------------------
+
+const EMPTY_BEARING: SkeletonBearing = {
+  aim: [],
+  yield: [],
+  primary: null,
+  facets: {},
+};
+
+/**
+ * Parse the harvest's raw aim/yield payloads into bearing-vector ASTs and derive
+ * the turn's operative bearing + its queryable facets. Graceful: a missing leg
+ * yields [], a drifted URI grades down inside {@link parseBearingPayload}; never
+ * throws. The OUR-OWN licensed parse (bearing-ast) — the RED URI descended.
+ */
+function buildSkeletonBearing(h: TurnHarvest): SkeletonBearing {
+  if (!h.bearing) return EMPTY_BEARING;
+  const aim = parseBearingPayload(h.bearing.aimUri);
+  const yld = parseBearingPayload(h.bearing.yieldUri);
+
+  // The operative bearing: the yield's resolved vector, else the aim's delegated
+  // role (its last vector), else the aim's first vector.
+  const primary =
+    yld[0] ?? (aim.length > 0 ? aim[aim.length - 1] : undefined) ?? aim[0] ?? null;
+
+  return {
+    aim,
+    yield: yld,
+    primary,
+    facets: primary ? bearingFacets(primary) : {},
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -326,7 +406,8 @@ export function emitMoveSkeleton(
   harvest: TurnHarvest,
   tree: readonly MemeAstNode[] = [],
 ): MoveSkeleton {
-  const stream = buildStream(harvest);
+  const bearing = buildSkeletonBearing(harvest);
+  const stream = buildStream(harvest, bearing);
   const graph = placeholderTree(tree);
 
   const counts: MoveSkeletonCounts = {
@@ -347,5 +428,5 @@ export function emitMoveSkeleton(
     ).length,
   };
 
-  return { stream, graph, counts, band: harvest.band };
+  return { stream, graph, counts, band: harvest.band, bearing };
 }

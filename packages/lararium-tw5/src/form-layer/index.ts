@@ -36,8 +36,27 @@ export type {
   PlaceholderNode,
   MoveSkeletonCounts,
   MoveSkeleton,
+  SkeletonBearing,
 } from "./move-skeleton.js";
 export { emitMoveSkeleton, placeholderTree } from "./move-skeleton.js";
+
+// The bearing-vector AST — the OUR-OWN licensed lar: URI parser (the RED URI,
+// descended into its 5 chunks) + its queryable facets. Pure + isomorphic; runs
+// in the @daemon sovereign-island TW5 worker VM (lar-uri).
+export type {
+  BearingAuthority,
+  BearingRoot,
+  BearingGrade,
+  BearingVector,
+  BearingFacets,
+} from "./bearing-ast.js";
+export {
+  BEARING_GRADE_CONFIDENCE,
+  parseBearing,
+  parseBearingPayload,
+  linearizeBearing,
+  bearingFacets,
+} from "./bearing-ast.js";
 
 // Re-export the shared grammar + AST shapes the basis/emitter index against, so
 // consumers (and tests) take them from the form-layer surface — never reaching
