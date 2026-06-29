@@ -32,6 +32,8 @@ interface DaemonWorkerData {
     readonly quarantinePath: string;
     /** The DURABLE .astpalace dir (the memory-ast-unfolding bridge — local, never federates). */
     readonly astPalaceDir?: string;
+    /** The DURABLE .formpalace dir (the living-grammar FORM-vector store — local, never federates). */
+    readonly formPalaceDir?: string;
     readonly mempalaceBin?: string;
     readonly tickMs?: number;
     readonly targetLatencyMs?: number;
@@ -53,6 +55,7 @@ const extra = t
           walPath: t.walPath,
           quarantinePath: t.quarantinePath,
           ...(t.astPalaceDir !== undefined ? { astPalaceDir: t.astPalaceDir } : {}),
+          ...(t.formPalaceDir !== undefined ? { formPalaceDir: t.formPalaceDir } : {}),
           // ALL ast-parsing runs INSIDE the TW5 engine: the in-realm annotate (capture-annotate-vm)
           // holds the full self-hosted grammar; the worker only INVOKES it across ctx.tw5.$tw (same
           // thread, so its closure executes in-sandbox). No node-side annotate — if the plugin is not

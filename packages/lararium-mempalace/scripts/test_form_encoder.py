@@ -2,14 +2,20 @@
 
 Run under the mempalace venv:
 
-    ~/.venv/bin/python -m pytest \
+    PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
         packages/lararium-mempalace/scripts/test_form_encoder.py -q
 
 The encode-path tests use a deterministic fake/dead scorer (fast, no model load);
-two dedicated tests exercise the REAL SlorScorer to report live-vs-fallback.
+two dedicated tests exercise the REAL SlorScorer to report live-vs-fallback. The
+STORE tests drive a REAL temp-dir ChromaDB "form" collection (the caller-vector
+base path); the SERVE tests cover the singleton lock + idle-reap loop.
 """
 
+import io
+import json
 import math
+import os
+import threading
 
 import pytest
 
@@ -400,3 +406,223 @@ def test_real_scorer_end_to_end():
     assert isinstance(res["slor"]["live"], bool)
     # Floored/fallback factor → the vector never collapses to empty.
     assert len(res["form_vector"]["indices"]) > 0
+
+
+# ---------------------------------------------------------------------------
+# densify — sparse {indices, values} → fixed dense vector of basis.dimension
+# ---------------------------------------------------------------------------
+
+
+def test_densify_scatters_sparse_into_fixed_length():
+    dense = fe._densify({"indices": [1, 3], "values": [0.5, 0.9]}, 5)
+    assert dense == [0.0, 0.5, 0.0, 0.9, 0.0]
+    assert len(dense) == 5
+
+
+def test_densify_ignores_out_of_range_indices():
+    # An index past the pinned dimension is dropped, never overflows the dense vector.
+    dense = fe._densify({"indices": [0, 99], "values": [1.0, 1.0]}, 3)
+    assert dense == [1.0, 0.0, 0.0]
+
+
+# ---------------------------------------------------------------------------
+# FormPalaceStore — the REAL "form" collection (caller-vector, no model invoked)
+# ---------------------------------------------------------------------------
+
+SHA_A = "a" * 64
+SHA_B = "b" * 64
+
+
+@pytest.fixture
+def store(tmp_path):
+    return fe.FormPalaceStore(str(tmp_path / "formpalace"))
+
+
+def test_store_then_get_round_trip(store):
+    """A form-vector stores keyed by verbatim_sha and reads back with its metadata —
+    the cross-graph join key present (form-drawer.id == content's verbatim_sha)."""
+    fv = {"indices": [0, 2], "values": [1.0, 0.5]}
+    res = store.store(
+        SHA_A, fv, dimension=4,
+        metadata={"register": "synthesis", "grammar_layer": "x-memetic",
+                  "struct_hash": "sh1", "verbatim_sha": SHA_A, "conformance": 0.83},
+    )
+    assert res["key"] == SHA_A
+    assert res["dimension"] == 4
+    assert res["count"] == 1
+    got = store.get(SHA_A)
+    assert got is not None
+    assert got["key"] == SHA_A
+    assert got["metadata"]["lar_verbatim_sha"] == SHA_A  # the content-join key
+    assert got["metadata"]["register"] == "synthesis"
+    assert got["metadata"]["struct_hash"] == "sh1"
+    assert got["metadata"]["conformance"] == pytest.approx(0.83)
+
+
+def test_store_recurrence_bumps_count(store):
+    fv = {"indices": [0], "values": [1.0]}
+    store.store(SHA_A, fv, 4, {"verbatim_sha": SHA_A})
+    res2 = store.store(SHA_A, fv, 4, {"verbatim_sha": SHA_A})
+    assert res2["count"] == 2  # same key re-mined → recurrence tally
+    assert store.get(SHA_A)["metadata"]["count"] == 2
+
+
+def test_query_finds_by_form_similarity(store):
+    """The collection is queryable by form-similarity: the nearest hit to a vector is
+    the entry stored from that very vector."""
+    near = {"indices": [0, 1], "values": [1.0, 1.0]}
+    far = {"indices": [2, 3], "values": [1.0, 1.0]}
+    store.store(SHA_A, near, 4, {"verbatim_sha": SHA_A, "register": "synthesis"})
+    store.store(SHA_B, far, 4, {"verbatim_sha": SHA_B, "register": "provisional"})
+    res = store.query(near, 4, n_results=2, where=None)
+    assert res["matches"], "query returned no matches"
+    assert res["matches"][0]["key"] == SHA_A  # the nearest is itself
+    keys = {m["key"] for m in res["matches"]}
+    assert keys == {SHA_A, SHA_B}
+
+
+def test_query_narrows_by_metadata_where_filter(store):
+    near = {"indices": [0, 1], "values": [1.0, 1.0]}
+    far = {"indices": [2, 3], "values": [1.0, 1.0]}
+    store.store(SHA_A, near, 4, {"verbatim_sha": SHA_A, "register": "synthesis"})
+    store.store(SHA_B, far, 4, {"verbatim_sha": SHA_B, "register": "provisional"})
+    res = store.query(near, 4, n_results=5, where={"register": "provisional"})
+    keys = {m["key"] for m in res["matches"]}
+    assert keys == {SHA_B}  # the where-filter excludes the nearer synthesis entry
+
+
+def test_store_dimension_drift_surfaces(store):
+    """A second store whose dimension differs from the pinned collection length
+    surfaces as a clear basis-drift error, never a silent corruption."""
+    store.store(SHA_A, {"indices": [0], "values": [1.0]}, 4, {"verbatim_sha": SHA_A})
+    with pytest.raises(ValueError, match="drift|dimension"):
+        store.store(SHA_B, {"indices": [0], "values": [1.0]}, 8, {"verbatim_sha": SHA_B})
+
+
+# ---------------------------------------------------------------------------
+# the encode_store wire — encode a skeleton then store, joined by verbatim_sha
+# ---------------------------------------------------------------------------
+
+
+def test_encode_store_wire_end_to_end(tmp_path):
+    """encode_store: a serialized MoveSkeleton + basis → encode → store → queryable.
+    The whole form-graph slice in one round-trip, keyed by verbatim_sha."""
+    palace = str(tmp_path / "formpalace")
+    holder = {"scorer": FakeScorer(1.0), "store": None, "palace": palace}
+    out = io.StringIO()
+    basis = make_basis()
+    sk = make_skeleton(loulou_confidence=18)
+    req = {
+        "id": 1, "op": "encode_store", "key": SHA_A,
+        "skeleton": sk, "basis": basis,
+        "metadata": {"register": "synthesis", "grammar_layer": "x-memetic",
+                     "struct_hash": "sh1", "verbatim_sha": SHA_A},
+    }
+    fe._handle_request(req, holder, out)
+    resp = json.loads(out.getvalue().splitlines()[0])
+    assert resp["ok"] is True
+    r = resp["result"]
+    assert r["key"] == SHA_A
+    assert r["dimension"] == basis["dimension"]
+    assert 0.0 <= r["conformance"] <= 1.0
+    assert r["form_vector"]["indices"]
+
+    # Queryable by form-similarity through the same warm holder.
+    out2 = io.StringIO()
+    fe._handle_request(
+        {"id": 2, "op": "query", "skeleton": sk, "basis": basis, "n_results": 3}, holder, out2
+    )
+    q = json.loads(out2.getvalue().splitlines()[0])["result"]
+    assert q["matches"][0]["key"] == SHA_A
+
+    # get returns the metadata with the verbatim_sha content-join key.
+    out3 = io.StringIO()
+    fe._handle_request({"id": 3, "op": "get", "key": SHA_A}, holder, out3)
+    g = json.loads(out3.getvalue().splitlines()[0])["result"]
+    assert g["metadata"]["lar_verbatim_sha"] == SHA_A
+    assert g["metadata"]["struct_hash"] == "sh1"
+
+
+def test_store_op_requires_palace():
+    """Without a --palace the store/query/get ops fail clearly (encode still works)."""
+    holder = {"scorer": FakeScorer(1.0), "store": None, "palace": None}
+    out = io.StringIO()
+    fe._handle_request(
+        {"id": 1, "op": "store", "key": SHA_A, "form_vector": {"indices": [0], "values": [1.0]},
+         "dimension": 4, "metadata": {"verbatim_sha": SHA_A}}, holder, out
+    )
+    resp = json.loads(out.getvalue().splitlines()[0])
+    assert resp["ok"] is False
+    assert "palace" in resp["error"]
+
+
+# ---------------------------------------------------------------------------
+# serve singleton lock + idle-reap loop (mirrors astpalace_io's protocol)
+# ---------------------------------------------------------------------------
+
+_posix_flock = pytest.mark.skipif(
+    fe._fcntl is None, reason="serve.lock singleton relies on POSIX fcntl.flock"
+)
+
+
+@_posix_flock
+def test_serve_lock_is_singleton_per_palace(tmp_path, monkeypatch):
+    monkeypatch.setenv("HOME", str(tmp_path))
+    palace_a = str(tmp_path / "palace_a")
+    palace_b = str(tmp_path / "palace_b")
+    fh1 = fe._acquire_serve_lock(palace_a)
+    assert fh1 is not None
+    assert fe._acquire_serve_lock(palace_a) is None  # same palace, held → refused
+    fh_b = fe._acquire_serve_lock(palace_b)
+    assert fh_b is not None  # different palace → independent singleton
+    fe._release_serve_lock(fh1)
+    fh2 = fe._acquire_serve_lock(palace_a)
+    assert fh2 is not None  # released → claimable again
+    fe._release_serve_lock(fh2)
+    fe._release_serve_lock(fh_b)
+
+
+@pytest.mark.skipif(fe._select is None, reason="idle-reap needs select")
+def test_serve_loop_reaps_when_idle(monkeypatch):
+    monkeypatch.setenv(fe.IDLE_TTL_ENV, "0.5")
+    r, w = os.pipe()
+    out = io.StringIO()
+    done = threading.Event()
+
+    def _run():
+        fe._serve_loop({"scorer": None, "store": None, "palace": None}, r, out)
+        done.set()
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    try:
+        assert done.wait(timeout=5), "idle loop did not reap within the TTL window"
+    finally:
+        os.close(w)
+        os.close(r)
+        t.join(timeout=2)
+
+
+def test_serve_loop_handles_ping_then_exits_on_eof(monkeypatch):
+    monkeypatch.setenv(fe.IDLE_TTL_ENV, "0")  # EOF drives exit
+    r, w = os.pipe()
+    out = io.StringIO()
+    done = threading.Event()
+
+    def _run():
+        fe._serve_loop({"scorer": None, "store": None, "palace": None}, r, out)
+        done.set()
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    try:
+        os.write(w, (json.dumps({"id": 1, "op": "ping"}) + "\n").encode("utf-8"))
+        os.close(w)
+        assert done.wait(timeout=5), "loop did not exit on EOF"
+    finally:
+        os.close(r)
+        t.join(timeout=2)
+    line = json.loads(out.getvalue().splitlines()[0])
+    assert line["id"] == 1 and line["ok"] is True
+    assert line["result"]["ready"] is True
+    assert line["result"]["store"] is False  # no palace bound

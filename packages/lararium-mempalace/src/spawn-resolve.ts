@@ -76,3 +76,24 @@ export function resolveAstPalaceSpawn(): AstPalaceSpawn {
   const script = resolveAstPalaceIo();
   return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
 }
+
+/** Locate `form_encoder.py` — CODE at the repo root. The persistent NDJSON holder for the
+ *  living-grammar FORM store (the @daemon's two-planes Lares-INTEGRATION: encode + store). */
+export function resolveFormEncoderIo(): string {
+  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "form_encoder.py");
+}
+
+/** What `makeFormPalace` needs to spawn the form-encoder holder (mirrors {@link AstPalaceSpawn}). */
+export interface FormEncoderSpawn {
+  readonly python: string | null;
+  readonly script: string;
+  readonly submoduleRoot: string;
+  readonly scriptPresent: boolean;
+}
+
+/** Resolve everything the form-encoder holder needs (mirrors {@link resolveAstPalaceSpawn}). */
+export function resolveFormEncoderSpawn(): FormEncoderSpawn {
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const script = resolveFormEncoderIo();
+  return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
+}

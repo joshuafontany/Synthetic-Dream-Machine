@@ -7,12 +7,14 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
-import { makeCaptureEngine } from "@lararium/mesh";
+import { makeCaptureEngine, canonicalJsonBytes, defaultCryptoProvider, sha256Hex, utf8Bytes } from "@lararium/mesh";
 import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CaptureFlush, CapturePost, CaptureRecord, CaptureServo, FlushGate } from "@lararium/mesh";
+import type { MoveSkeleton } from "@lararium/tw5/form-layer";
 
 import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";
 import { makeAstPalace, type AstPalace } from "./astpalace.js";
+import { makeFormPalace, type FormPalace, type SerializedBasis } from "./formpalace.js";
 
 export interface NodeCaptureEngineOptions {
   /** palace path passed to `mine --source ndjson --palace` */
@@ -31,6 +33,11 @@ export interface NodeCaptureEngineOptions {
    *  rides through) — there is NO implicit default: the old `<dirname(spoolDir)>/astpalace` fallback
    *  was a footgun that silently routed ASTs into a transient tmpfs path. */
   readonly astPalaceDir?: string | null;
+  /** the LOCAL FORM palace dir (never federates) — the routing split emits each turn's move-skeleton
+   *  (stashed in-VM as `lar_skeleton` + `lar_basis`) to the living-grammar FORM store, keyed by the
+   *  turn's verbatim_sha (the cross-graph join to the content drawer). Absent/`null` DISABLES the form
+   *  split (the skeleton/basis are simply dropped from the drawer); no implicit default. */
+  readonly formPalaceDir?: string | null;
   readonly gate?: FlushGate;
   readonly mempalaceBin?: string;
   readonly timeoutMs?: number;
@@ -112,6 +119,80 @@ export function makeAstSplitFlush(inner: CaptureFlush, astPalace: AstPalace): Ca
   };
 }
 
+/** The confidence register band (e.g. "synthesis") off the harvest's `lar_confidence` patch field
+ *  ("Synthesis:11/20|…"), lowercased — the where-filterable form facet. Absent → "". */
+function registerFromPatch(meta: CaptureRecord["metadata"]): string {
+  const conf = meta?.["lar_confidence"];
+  if (typeof conf !== "string") return "";
+  const reg = (conf.split("|")[0] ?? "").split(":")[0] ?? "";
+  return reg.trim().toLowerCase();
+}
+
+/** The deepest grammar-stack layer the turn touched — `x-memetic` once any classified sigil rode,
+ *  else `wikitext` (a plain prose turn never reaches the `<<~` overlay). */
+function grammarLayerFromPatch(meta: CaptureRecord["metadata"]): string {
+  const sigils = meta?.["lar_sigils"];
+  return typeof sigils === "number" && sigils > 0 ? "x-memetic" : "wikitext";
+}
+
+/**
+ * The FORM ROUTING SPLIT — the form-graph twin of {@link makeAstSplitFlush}. Each record carries the
+ * in-VM-emitted move-skeleton (`lar_skeleton`) + constructicon basis (`lar_basis`) — where the
+ * harvest, tree, and full self-hosted grammar all coexist. This split routes them to the living-
+ * grammar FORM store: the holder ENCODES the fuzzy-membership form-vector and STORES it keyed by the
+ * turn's `verbatim_sha` (the SAME key the content drawer keeps as `lar_verbatim_sha` — the two graphs
+ * fuse there). The internal `lar_skeleton`/`lar_basis` are STRIPPED from the drawer (they never
+ * belong on the content side); the drawer keeps `lar_verbatim_sha` + `lar_form_dim` as the join
+ * marker. The form graph is BEST-EFFORT: an encode/store failure (or an absent skeleton) never sinks
+ * the capture — the record rides through with the two internal fields dropped, content conserved.
+ */
+export function makeFormSplitFlush(inner: CaptureFlush, formPalace: FormPalace): CaptureFlush {
+  return async (batch: readonly CaptureRecord[]): Promise<number> => {
+    const routed: CaptureRecord[] = [];
+    for (const rec of batch) {
+      const skJson = rec.metadata?.["lar_skeleton"];
+      const baJson = rec.metadata?.["lar_basis"];
+      if (typeof skJson !== "string" || typeof baJson !== "string") {
+        // No in-VM form input (plugin not loaded / pre-form drawer / truncated) — strip any partial
+        // internal fields and ride through; nothing to encode.
+        if (rec.metadata && ("lar_skeleton" in rec.metadata || "lar_basis" in rec.metadata)) {
+          const { lar_skeleton: _s, lar_basis: _b, ...rest } = rec.metadata as Record<string, string | number | boolean>;
+          routed.push({ ...rec, metadata: rest });
+        } else {
+          routed.push(rec);
+        }
+        continue;
+      }
+      // Strip the internal form-input fields regardless of outcome — they are not drawer content.
+      const { lar_skeleton: _s, lar_basis: _b, ...rest } = rec.metadata as Record<string, string | number | boolean>;
+      try {
+        const skeleton = JSON.parse(skJson) as MoveSkeleton;
+        const basis = JSON.parse(baJson) as SerializedBasis;
+        const verbatimSha = await sha256Hex(utf8Bytes(rec.content), defaultCryptoProvider);
+        // The FORM recurrence key: the structural hash of the placeholdered graph (the shape, no words).
+        const structHash = await sha256Hex(canonicalJsonBytes(skeleton.graph), defaultCryptoProvider);
+        const res = await formPalace.encodeStore({
+          skeleton,
+          basis,
+          key: verbatimSha,
+          metadata: {
+            register: registerFromPatch(rec.metadata),
+            grammar_layer: grammarLayerFromPatch(rec.metadata),
+            struct_hash: structHash,
+            verbatim_sha: verbatimSha,
+          },
+        });
+        // The drawer keeps the join key + a marker that a form-vector exists (dimension), set HERE.
+        routed.push({ ...rec, metadata: { ...rest, lar_verbatim_sha: verbatimSha, lar_form_dim: res.dimension } });
+      } catch {
+        // Encode/store failed — keep the capture, drop only the internal form-input fields.
+        routed.push({ ...rec, metadata: rest });
+      }
+    }
+    return inner(routed);
+  };
+}
+
 /** Build the node telemetry engine (the isomorphic worker + node seams). */
 export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEngine {
   const subprocessFlush = makeSubprocessFlush({
@@ -125,10 +206,16 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
   // construction: a content-addressed file store, never a mesh/Automerge surface. Absent/null disables
   // it — NO implicit tmpfs default (that footgun silently wrote ASTs to a transient, wiped path).
   const astPalaceDir = opts.astPalaceDir ?? null;
-  const split = astPalaceDir ? makeAstSplitFlush(subprocessFlush, makeAstPalace(astPalaceDir)) : subprocessFlush;
-  // Wing-stamp runs OUTERMOST (always, AST split or not): it decodes the `<wing>/` source_file prefix
-  // into `metadata.wing` BEFORE the split (which preserves it) and the ndjson mine reads it as routing.
-  const flush = makeWingStampFlush(split);
+  const astSplit = astPalaceDir ? makeAstSplitFlush(subprocessFlush, makeAstPalace(astPalaceDir)) : subprocessFlush;
+  // The FORM split rides OUTSIDE the AST split (runs first): it consumes the in-VM `lar_skeleton`/
+  // `lar_basis`, routes the form-vector to the FORM store, strips those internal fields, then hands
+  // the (still lar_ast-bearing) record to the AST split. Both stores come out clean, joined by
+  // verbatim_sha. Local-only, never federates; absent/null disables it (no implicit default).
+  const formPalaceDir = opts.formPalaceDir ?? null;
+  const formSplit = formPalaceDir ? makeFormSplitFlush(astSplit, makeFormPalace(formPalaceDir)) : astSplit;
+  // Wing-stamp runs OUTERMOST (always): it decodes the `<wing>/` source_file prefix into
+  // `metadata.wing` BEFORE the splits (which preserve it) and the ndjson mine reads it as routing.
+  const flush = makeWingStampFlush(formSplit);
   const reserve = makeCaptureReserve({ walPath: opts.walPath, quarantinePath: opts.quarantinePath });
   return makeCaptureEngine({
     flush,

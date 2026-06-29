@@ -36,6 +36,14 @@ export function larAstPalaceDir(): string {
   return join(larHome(), ".astpalace");
 }
 
+/** The `.formpalace` FORM-store palace dir — a mempalace instance holding the per-turn living-grammar
+ *  FORM vector (the two-planes form-capture, encoded) in its "form" collection, keyed by verbatim_sha
+ *  (the cross-graph join to the verbatim content drawer). Sits at `~/.lares/.formpalace`, PARALLEL to
+ *  `.astpalace` + the verbatim palace; durable bridge state, beside the wipe-zone, never federates. */
+export function larFormPalaceDir(): string {
+  return join(larHome(), ".formpalace");
+}
+
 /** Vessel identity dir — the keypair, PRESERVED across `reset` (sibling of the wipe-zone). */
 export function larIdentityDir(): string {
   return join(larHome(), ".lararium-identity");

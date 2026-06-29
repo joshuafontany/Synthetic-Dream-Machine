@@ -25,6 +25,7 @@ module-type: startup
 import { harvestTurnGradient, buildPatch } from "@lararium/mesh/harvest";
 import { parseMemeText } from "./meme-ast/index.js";
 import { getGrammar } from "./grammar-cache.js";
+import { emitMoveSkeleton, buildConstructiconBasis } from "./form-layer/index.js";
 
 // TW5 injects $tw as a module parameter (vm.runInContext sandbox); reach it as the injected var.
 declare const $tw: { lares?: Record<string, unknown> } | undefined;
@@ -46,7 +47,8 @@ export function startup(): void {
   t.lares ??= {};
   t.lares.captureAnnotateVm = (turnText: string, sourceFile?: string) => {
     // 2. HARVEST (regex, in-VM) → the lar_* reading patch (existing behavior preserved).
-    const patch = buildPatch(harvestTurnGradient(turnText), sourceFile);
+    const harvest = harvestTurnGradient(turnText);
+    const patch = buildPatch(harvest, sourceFile);
     // 1. PARSE (meme-ast, FULL grammar, in-VM) + 3. AST (ride the tree along). Best-effort: a parse
     //    failure must never sink a capture — the harvest patch still lands.
     try {
@@ -56,7 +58,19 @@ export function startup(): void {
       const astJson = JSON.stringify(result.meme);
       if (astJson.length <= AST_MAX) patch["lar_ast"] = astJson;
       else patch["lar_ast_truncated"] = astJson.length;
-    } catch { /* parse contained — harvest patch already built */ }
+      // 4. FORM (living-grammar two-planes, in-VM — harvest + tree + FULL grammar coexist HERE).
+      //    Emit the move-skeleton (P1) + the constructicon basis (P0) and ride them along as
+      //    `lar_skeleton` + `lar_basis`. The node-side FORM split (makeFormSplitFlush) consumes them
+      //    into the form-vector store and STRIPS them — they never reach the content drawer. The
+      //    Python encode+store can't run in-VM, so the heavy lift crosses to the node sidecar; only
+      //    the cheap, grammar-bound emission lives here. Best-effort: never sinks the harvest/AST.
+      const skeleton = emitMoveSkeleton(harvest, result.nodes);
+      const skJson = JSON.stringify(skeleton);
+      if (skJson.length <= AST_MAX) patch["lar_skeleton"] = skJson;
+      const basis = buildConstructiconBasis(grammar);
+      const baJson = JSON.stringify({ axes: basis.axes, dimension: basis.dimension });
+      if (baJson.length <= AST_MAX) patch["lar_basis"] = baJson;
+    } catch { /* parse/emit contained — harvest patch already built */ }
     return patch;
   };
   // Also expose the gradient parser itself — callable from a LIVE WIKI (a widget, filter, or module) to

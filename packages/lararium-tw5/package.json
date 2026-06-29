@@ -16,6 +16,10 @@
       "import": "./dist/meme-normalize.js",
       "types": "./dist/meme-normalize.d.ts"
     },
+    "./form-layer": {
+      "import": "./dist/form-layer/index.js",
+      "types": "./dist/form-layer/index.d.ts"
+    },
     "./tw5-worker-script": {
       "import": "./dist/tw5-worker-script.js",
       "types": "./dist/tw5-worker-script.d.ts"

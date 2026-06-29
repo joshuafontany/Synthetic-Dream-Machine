@@ -91,15 +91,28 @@ line; only JSON responses on stdout (banners/library noise → stderr).
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
+import os
 import sys
+import time
 from collections import Counter
 
 try:
     import numpy as _np
 except ImportError:  # pragma: no cover - numpy is a hard dep of the mempalace venv
     _np = None
+
+try:
+    import fcntl as _fcntl  # POSIX only; absent on Windows
+except ImportError:  # pragma: no cover - Windows fallback
+    _fcntl = None
+
+try:
+    import select as _select  # POSIX-usable on the stdin pipe; idle-reap needs it
+except ImportError:  # pragma: no cover - never absent on POSIX
+    _select = None
 
 # The 3-layer grammar-stack tower (base → top), living-grammar-palace#grammar-stack.
 # The "lower" layer for down-the-tower propagation reads off this order.
@@ -685,36 +698,294 @@ def encode_form(
 
 
 # ---------------------------------------------------------------------------
+# the FORM palace store — the caller-vector "form" collection (mirrors astpalace_io)
+# ---------------------------------------------------------------------------
+
+# The cross-graph join: the form entry is KEYED by the verbatim_sha (the content
+# drawer's join key), so form-drawer.id == content-drawer.lar_verbatim_sha and the
+# two graphs fuse on one key (living-grammar-palace#two-planes — the FORM side here,
+# the CONTENT side stays the existing verbatim mempalace).
+#
+# Caller-vector pattern (the BASE multi-collection move): we open a SEPARATE "form"
+# collection (a second collection beside the palace default), ALWAYS supply our own
+# dense form-vector as the embedding, and skip the embedder-identity check — so the
+# palace's configured embedding model is left attached but NEVER invoked (no model
+# load, no download, no network), exactly as astpalace_io does for the AST store.
+#
+# DIMENSION: ChromaDB pins a collection's vector length at the first insert. The
+# form-vector is SPARSE {indices, values} of logical length == basis.dimension; we
+# DENSIFY it to a fixed dense vector of that dimension (an O(D) scatter — negligible
+# for D in the tens-to-low-hundreds the constructicon basis carries). A later store
+# whose basis.dimension differs (the grammar grew new sigil/family axes) collides
+# with the pinned length → ChromaDB raises and we surface it as a basis-drift flag
+# (re-pin/migration is deferred to the P5 collapse).
+PROVENANCE_CAP = 64
+FORM_COLLECTION = "form"
+
+
+def _densify(form_vector: dict, dimension: int) -> list[float]:
+    """Scatter a sparse {indices, values} form-vector into a fixed dense vector of
+    length ``dimension`` — the shape ChromaDB stores (one fixed length per collection)."""
+    dense = [0.0] * dimension
+    indices = form_vector.get("indices") or []
+    values = form_vector.get("values") or []
+    for i, v in zip(indices, values):
+        if isinstance(i, int) and 0 <= i < dimension:
+            dense[i] = float(v)
+    return dense
+
+
+def _now() -> str:
+    import datetime
+
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+
+class FormPalaceStore:
+    """One open "form" collection; store (RMW count) + query (form-similarity) + get."""
+
+    def __init__(self, palace_path: str) -> None:
+        from mempalace.palace import get_collection
+
+        # create-or-open the SECOND ("form") collection; identity check skipped — we
+        # never run the embedder (we always pass our own dense form-vector).
+        self._col = get_collection(
+            palace_path, collection_name=FORM_COLLECTION, create=True, _skip_identity_check=True
+        )
+
+    def _get_raw(self, key: str) -> dict | None:
+        got = self._col.get(ids=[key], include=["documents", "metadatas"])
+        ids = got.get("ids") or []
+        if not ids:
+            return None
+        docs = got.get("documents") or [None]
+        metas = got.get("metadatas") or [None]
+        return {"id": ids[0], "document": docs[0], "metadata": metas[0] or {}}
+
+    def store(self, key: str, form_vector: dict, dimension: int, metadata: dict) -> dict:
+        """Upsert one form-vector keyed by ``key`` (the verbatim_sha). Recurrence on the
+        same key (a re-mined turn) bumps ``count`` and refreshes ``last_seen``."""
+        if not key:
+            raise ValueError("form store requires a non-empty key (the verbatim_sha)")
+        dense = _densify(form_vector, dimension)
+        now = _now()
+        # Flat, chroma-legal metadata (str/int/float/bool only — never None).
+        meta: dict[str, object] = {
+            "kind": "form",
+            "lar_verbatim_sha": str(metadata.get("verbatim_sha", key)),
+            "register": str(metadata.get("register", "")),
+            "grammar_layer": str(metadata.get("grammar_layer", "")),
+            "struct_hash": str(metadata.get("struct_hash", "")),
+            "conformance": float(metadata.get("conformance", 0.0)),
+            "dimension": int(dimension),
+        }
+        existing = self._get_raw(key)
+        count = 1
+        if existing is not None:
+            try:
+                count = int(existing["metadata"].get("count", 1)) + 1
+            except (ValueError, TypeError):
+                count = 1
+            meta["first_seen"] = existing["metadata"].get("first_seen", now)
+        else:
+            meta["first_seen"] = now
+        meta["count"] = count
+        meta["last_seen"] = now
+        document = json.dumps(
+            {
+                "axis_activation": metadata.get("axis_activation", {}),
+                "turn_conformance": meta["conformance"],
+            }
+        )
+        try:
+            self._col.upsert(
+                ids=[key], documents=[document], metadatas=[meta], embeddings=[dense]
+            )
+        except Exception as exc:  # noqa: BLE001 — surface dimension drift precisely
+            raise ValueError(
+                f"form store upsert failed (dimension={dimension}; a basis-dimension "
+                f"drift re-pins the collection — see P5): {type(exc).__name__}: {exc}"
+            ) from exc
+        return {"key": key, "dimension": dimension, "count": count, "conformance": meta["conformance"]}
+
+    def query(self, form_vector: dict, dimension: int, n_results: int, where: dict | None) -> dict:
+        """Nearest form-vectors by similarity, optionally narrowed by a metadata where-filter."""
+        dense = _densify(form_vector, dimension)
+        res = self._col.query(
+            query_embeddings=[dense],
+            n_results=n_results,
+            where=where,
+            include=["metadatas", "distances"],
+        )
+        ids = (getattr(res, "ids", None) or [[]])[0]
+        metas = (getattr(res, "metadatas", None) or [[]])[0]
+        dists = (getattr(res, "distances", None) or [[]])[0]
+        matches = [
+            {"key": ids[i], "distance": dists[i] if i < len(dists) else None,
+             "metadata": metas[i] if i < len(metas) else {}}
+            for i in range(len(ids))
+        ]
+        return {"matches": matches}
+
+    def get(self, key: str) -> dict | None:
+        raw = self._get_raw(key)
+        if raw is None:
+            return None
+        return {"key": raw["id"], "metadata": raw["metadata"], "document": raw["document"]}
+
+
+# ---------------------------------------------------------------------------
+# serve singleton + idle-reap (mirrors astpalace_io.py — one holder per palace)
+# ---------------------------------------------------------------------------
+
+IDLE_TTL_ENV = "FORM_ENCODER_IDLE_TTL"
+DEFAULT_IDLE_TTL_SECONDS = 600.0
+
+
+def _canonical_palace_path(palace_path: str) -> str:
+    return os.path.normcase(os.path.realpath(os.path.expanduser(palace_path)))
+
+
+def _serve_lock_path(palace_path: str) -> str:
+    lock_dir = os.path.join(os.path.expanduser("~"), ".mempalace", "locks")
+    os.makedirs(lock_dir, exist_ok=True)
+    key = hashlib.sha256(_canonical_palace_path(palace_path).encode("utf-8")).hexdigest()[:16]
+    return os.path.join(lock_dir, f"form_encoder_serve_{key}.lock")
+
+
+def _acquire_serve_lock(palace_path: str):
+    """Lifetime per-palace singleton lock (non-blocking, exclusive, canonical-keyed).
+    Returns an open handle when this process may hold the palace, or None when another
+    holder already owns it. On non-POSIX the handle is returned unlocked (best-effort)."""
+    lock_path = _serve_lock_path(palace_path)
+    fh = open(lock_path, "w")
+    try:
+        os.chmod(lock_path, 0o600)
+    except OSError:
+        pass
+    if _fcntl is None:  # pragma: no cover - Windows fallback
+        return fh
+    try:
+        _fcntl.flock(fh.fileno(), _fcntl.LOCK_EX | _fcntl.LOCK_NB)
+    except OSError:
+        try:
+            fh.close()
+        except OSError:
+            pass
+        return None
+    return fh
+
+
+def _release_serve_lock(fh) -> None:
+    if fh is None:
+        return
+    try:
+        if _fcntl is not None:
+            _fcntl.flock(fh.fileno(), _fcntl.LOCK_UN)
+    except OSError:
+        pass
+    finally:
+        try:
+            fh.close()
+        except OSError:
+            pass
+
+
+def _idle_ttl_seconds() -> float:
+    raw = os.environ.get(IDLE_TTL_ENV)
+    if raw is None:
+        return DEFAULT_IDLE_TTL_SECONDS
+    try:
+        return float(raw)
+    except ValueError:
+        return DEFAULT_IDLE_TTL_SECONDS
+
+
+# ---------------------------------------------------------------------------
 # NDJSON serve loop (mirrors astpalace_io.py's boundary protocol)
 # ---------------------------------------------------------------------------
 
 
-def _handle_request(req: dict, scorer_holder: dict, out) -> None:
+def _ensure_scorer(holder: dict, model: str | None, corpus: list | None) -> "SlorScorer":
+    sc = holder.get("scorer")
+    if sc is None:
+        sc = SlorScorer(model or "distilgpt2", corpus=corpus)
+        holder["scorer"] = sc
+    elif corpus:
+        sc.fit_unigram(corpus)
+    return sc
+
+
+def _ensure_store(holder: dict) -> FormPalaceStore:
+    store = holder.get("store")
+    if store is None:
+        palace = holder.get("palace")
+        if not palace:
+            raise ValueError("no --palace configured: store/query/get unavailable (encode still works)")
+        store = FormPalaceStore(palace)
+        holder["store"] = store
+    return store
+
+
+def _do_encode(req: dict, scorer_holder: dict) -> dict:
+    sc = _ensure_scorer(scorer_holder, req.get("model"), req.get("corpus"))
+    return encode_form(
+        req["skeleton"],
+        req["basis"],
+        entrenchment=req.get("entrenchment"),
+        scorer=sc,
+        tnorm=req.get("tnorm", "product"),
+        l2=bool(req.get("l2", False)),
+        prop_fraction=float(req.get("prop_fraction", 0.5)),
+        curves=req.get("curves"),
+    )
+
+
+def _handle_request(req: dict, holder: dict, out) -> None:
     rid = req.get("id")
     op = req.get("op")
     try:
         if op == "ping":
-            result: object = {"ready": True, "slor_live": scorer_holder.get("scorer") is not None
-                              and scorer_holder["scorer"].live}
+            sc = holder.get("scorer")
+            result: object = {
+                "ready": True,
+                "slor_live": sc is not None and sc.live,
+                "store": holder.get("palace") is not None,
+            }
         elif op == "encode":
-            sc = scorer_holder.get("scorer")
-            # A request MAY carry its own corpus → refit the unigram lazily.
-            corpus = req.get("corpus")
-            if sc is None:
-                sc = SlorScorer(req.get("model", "distilgpt2"), corpus=corpus)
-                scorer_holder["scorer"] = sc
-            elif corpus:
-                sc.fit_unigram(corpus)
-            result = encode_form(
-                req["skeleton"],
-                req["basis"],
-                entrenchment=req.get("entrenchment"),
-                scorer=sc,
-                tnorm=req.get("tnorm", "product"),
-                l2=bool(req.get("l2", False)),
-                prop_fraction=float(req.get("prop_fraction", 0.5)),
-                curves=req.get("curves"),
+            result = _do_encode(req, holder)
+        elif op == "encode_store":
+            # The end-to-end form-graph wire: encode the skeleton → store the vector,
+            # keyed by the verbatim_sha, joined to the content drawer.
+            enc = _do_encode(req, holder)
+            store = _ensure_store(holder)
+            meta = dict(req.get("metadata") or {})
+            meta["conformance"] = enc["turn_conformance"]
+            meta["axis_activation"] = enc["axis_activation"]
+            stored = store.store(
+                req["key"], enc["form_vector"], int(enc["dimension"]), meta
             )
+            result = {**stored, "slor": enc["slor"], "form_vector": enc["form_vector"]}
+        elif op == "store":
+            # Store a PRECOMPUTED form-vector (no encode) — the caller-vector base path.
+            store = _ensure_store(holder)
+            result = store.store(
+                req["key"], req["form_vector"], int(req["dimension"]), dict(req.get("metadata") or {})
+            )
+        elif op == "query":
+            store = _ensure_store(holder)
+            # Query by an encoded skeleton (encode then search) OR by a precomputed vector.
+            if "form_vector" in req:
+                fv = req["form_vector"]
+                dim = int(req["dimension"])
+            else:
+                enc = _do_encode(req, holder)
+                fv = enc["form_vector"]
+                dim = int(enc["dimension"])
+            result = store.query(fv, dim, int(req.get("n_results", 10)), req.get("where"))
+        elif op == "get":
+            store = _ensure_store(holder)
+            result = store.get(req["key"])
         else:
             raise ValueError(f"unknown op {op!r}")
         out.write(json.dumps({"id": rid, "ok": True, "result": result}) + "\n")
@@ -723,36 +994,85 @@ def _handle_request(req: dict, scorer_holder: dict, out) -> None:
     out.flush()
 
 
-def _serve(preload: bool) -> None:
-    scorer_holder: dict = {"scorer": None}
-    if preload:
-        scorer_holder["scorer"] = SlorScorer()
-        if not scorer_holder["scorer"].live:
-            sys.stderr.write(
-                f"form_encoder: SLOR unavailable, running degraded "
-                f"(structural × entrenchment): {scorer_holder['scorer'].reason}\n"
-            )
-    for line in sys.stdin:
-        line = line.strip()
-        if not line:
-            continue
+def _serve_loop(holder: dict, in_fd: int, out) -> None:
+    """NDJSON request loop with idle-reap (raw-fd read so select + buffer never disagree).
+    Exits on EOF (parent closed stdin) or when idle past the TTL (orphan bound)."""
+    idle_ttl = _idle_ttl_seconds()
+    poll = _select is not None and idle_ttl > 0
+    last_activity = time.monotonic()
+    buf = b""
+    while True:
+        if poll:
+            try:
+                ready, _, _ = _select.select([in_fd], [], [], 1.0)
+            except (OSError, ValueError):  # pragma: no cover - select unusable → blocking
+                poll = False
+                ready = [in_fd]
+            if not ready:
+                if not buf.strip() and (time.monotonic() - last_activity) >= idle_ttl:
+                    return
+                continue
         try:
-            req = json.loads(line)
-        except ValueError:
-            continue  # non-JSON on stdin — ignore (defensive)
-        _handle_request(req, scorer_holder, sys.stdout)
+            chunk = os.read(in_fd, 65536)
+        except OSError:  # pragma: no cover - fd closed under us
+            return
+        if not chunk:  # EOF — parent closed stdin
+            return
+        buf += chunk
+        while b"\n" in buf:
+            raw, buf = buf.split(b"\n", 1)
+            line = raw.strip()
+            if not line:
+                continue
+            try:
+                req = json.loads(line.decode("utf-8", "replace"))
+            except ValueError:
+                continue  # non-JSON on stdin — ignore (defensive)
+            _handle_request(req, holder, out)
+            last_activity = time.monotonic()
+
+
+def _serve(palace: str | None, preload: bool) -> None:
+    holder: dict = {"scorer": None, "store": None, "palace": palace}
+    # Lifetime singleton (only meaningful when a palace is bound — an encode-only
+    # holder needs no store lock, but keying on the palace path keeps "one holder per
+    # palace dir" true for the store path, mirroring astpalace_io).
+    lock = None
+    if palace is not None:
+        lock = _acquire_serve_lock(palace)
+        if lock is None:
+            sys.stderr.write(
+                "form_encoder: another holder already serves this form palace; exiting (singleton)\n"
+            )
+            return
+    try:
+        if preload:
+            holder["scorer"] = SlorScorer()
+            if not holder["scorer"].live:
+                sys.stderr.write(
+                    f"form_encoder: SLOR unavailable, running degraded "
+                    f"(structural × entrenchment): {holder['scorer'].reason}\n"
+                )
+        _serve_loop(holder, sys.stdin.fileno(), sys.stdout)
+    finally:
+        _release_serve_lock(lock)
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="form_encoder (the @daemon's fuzzy-form-vector integration)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("serve", help="persistent NDJSON RPC encoder")
+    s = sub.add_parser("serve", help="persistent NDJSON RPC encoder + form-vector store")
+    s.add_argument(
+        "--palace",
+        default=None,
+        help="the form palace dir (enables store/query/get; absent → encode-only)",
+    )
     s.add_argument(
         "--preload",
         action="store_true",
         help="load distilgpt2 at startup (else lazy on first encode)",
     )
-    s.set_defaults(fn=lambda a: _serve(a.preload))
+    s.set_defaults(fn=lambda a: _serve(a.palace, a.preload))
     args = ap.parse_args()
     args.fn(args)
 

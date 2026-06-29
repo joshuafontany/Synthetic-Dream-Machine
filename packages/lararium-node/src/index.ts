@@ -66,10 +66,15 @@ export type { CaptureReserveOptions } from "./capture-reserve.js";
 // makeCaptureEngine + CaptureReserve/CaptureFlush/CaptureAnnotate contracts live in
 // @lararium/mesh (the isomorphic core); the annotate runs IN-VM ($tw.lares.captureAnnotateVm,
 // injected by node-daemon-island) so the package index never pulls the mempalace barrel.
-export { makeNodeCaptureEngine, makeAstSplitFlush } from "./node-capture-engine.js";
+export { makeNodeCaptureEngine, makeAstSplitFlush, makeFormSplitFlush } from "./node-capture-engine.js";
 export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
 export { makeAstPalace } from "./astpalace.js";
 export type { AstPalace, AstEntry, AstProvenance } from "./astpalace.js";
+export { makeFormPalace } from "./formpalace.js";
+export type {
+  FormPalace, FormPalaceOptions, FormHolderSpawn, FormMetadata, FormStoreResult,
+  FormMatch, FormEntry, SerializedBasis,
+} from "./formpalace.js";
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
 // standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays

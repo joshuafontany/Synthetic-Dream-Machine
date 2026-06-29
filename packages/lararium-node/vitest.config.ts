@@ -7,6 +7,9 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: "@lararium/tw5/plugin-tiddler.generated", replacement: path.resolve(root, "../lararium-tw5/src/plugin-tiddler.generated.ts") },
+      // Subpath aliases MUST precede the generic "@lararium/tw5" — else the string prefix-match
+      // mangles "@lararium/tw5/form-layer" into "src/index.ts/form-layer".
+      { find: "@lararium/tw5/form-layer", replacement: path.resolve(root, "../lararium-tw5/src/form-layer/index.ts") },
       { find: "@lararium/tw5", replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
       { find: "@lararium/mesh/lar-uris", replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
       // Subpath alias MUST precede the generic "@lararium/mesh" — else the string

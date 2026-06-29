@@ -59,7 +59,7 @@ import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath }
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { DialEntry } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { larRuntimeDir, larAstPalaceDir }  from "./vessel-paths.js";
+import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -417,6 +417,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // sits BESIDE the wipe-zone (not inside .lararium / tmpfs): the recurrence tally is durable
         // bridge state that must survive reboots AND `reset`. LAR_ROOT-isolated for staged instances.
         astPalaceDir:   larAstPalaceDir(),
+        // The DURABLE .formpalace — the living-grammar FORM-vector store (the two-planes form-capture's
+        // CONTINUOUS plane, encoded) at `~/.lares/.formpalace`, PARALLEL to `.astpalace`. Keyed by
+        // verbatim_sha (the cross-graph join to the verbatim content drawer); durable bridge state,
+        // beside the wipe-zone, never federates. LAR_ROOT-isolated for staged instances.
+        formPalaceDir:  larFormPalaceDir(),
       },
     });
     return { workerEa: daemonVm.workerEa, mountMainVerbs: daemonVm.mountMainVerbs, resolveBinding: daemonVm };
