@@ -7,5 +7,6 @@ export * from "./spawn-resolve.js";
 export * from "./palace-path.js";
 export * from "./telemetry-writeback.js";
 export * from "./subagent-mine.js";
+export * from "./hnsw-repair.js";
 export * from "./mine-retry.js";
 export * from "./mine-timeout.js";

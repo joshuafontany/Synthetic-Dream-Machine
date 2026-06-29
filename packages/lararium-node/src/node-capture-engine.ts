@@ -47,6 +47,38 @@ export interface NodeCaptureEngineOptions {
 }
 
 /**
+ * The WING STAMP — the per-record routing channel the @daemon `capture` verb otherwise lacks.
+ *
+ * The capture pipeline carries no wing: the verb takes only `{turnText, sourceFile}`, the in-VM
+ * annotate (buildPatch) sets `lar_*` but never `metadata.wing`, and the flush mines `--source ndjson`
+ * with NO `--wing` — so a drawer's wing rides ONLY `metadata.wing` (the ndjson adapter, RFC 002 §2.5).
+ * Without a wing, every captured turn lands in the `?` wing. The producer (lares capture / subagents)
+ * therefore PREFIXES the source_file with `<wing>/` (e.g. `wing_x__spirits/Name__agent-id__run-r.jsonl`);
+ * this flush DECODES that prefix back into `metadata.wing` here at the node boundary — entirely on the
+ * node substrate, no mesh/tw5 edit. buildPatch is unaffected: it reads the BASENAME, so the prefix is
+ * invisible to surface/agent/handle derivation. The record's own wing wins; a record that already
+ * carries a wing is left untouched (idempotent).
+ */
+export function makeWingStampFlush(inner: CaptureFlush): CaptureFlush {
+  return async (batch: readonly CaptureRecord[]): Promise<number> => {
+    const stamped = batch.map((rec) => {
+      const wing = wingFromSourceFile(rec.source_file);
+      if (!wing || (rec.metadata && rec.metadata["wing"])) return rec;
+      return { ...rec, metadata: { ...(rec.metadata ?? {}), wing } };
+    });
+    return inner(stamped);
+  };
+}
+
+/** Decode a `<wing>/…` routing prefix off a capture source_file, else null (no prefix → no wing). */
+function wingFromSourceFile(sourceFile: string): string | null {
+  const slash = sourceFile.replace(/\\/g, "/").indexOf("/");
+  if (slash <= 0) return null;
+  const head = sourceFile.slice(0, slash);
+  return head.startsWith("wing_") ? head : null;
+}
+
+/**
  * The ROUTING SPLIT — the cleanest seam: the LAST point the node controls before a batch crosses
  * into the (external) mempalace via `mine`. For each record carrying an inline `lar_ast`, route the
  * parse tree to the LOCAL `.astpalace` (keyed by its structural hash, bound to its verbatim), strip
@@ -93,7 +125,10 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
   // construction: a content-addressed file store, never a mesh/Automerge surface. Absent/null disables
   // it — NO implicit tmpfs default (that footgun silently wrote ASTs to a transient, wiped path).
   const astPalaceDir = opts.astPalaceDir ?? null;
-  const flush = astPalaceDir ? makeAstSplitFlush(subprocessFlush, makeAstPalace(astPalaceDir)) : subprocessFlush;
+  const split = astPalaceDir ? makeAstSplitFlush(subprocessFlush, makeAstPalace(astPalaceDir)) : subprocessFlush;
+  // Wing-stamp runs OUTERMOST (always, AST split or not): it decodes the `<wing>/` source_file prefix
+  // into `metadata.wing` BEFORE the split (which preserves it) and the ndjson mine reads it as routing.
+  const flush = makeWingStampFlush(split);
   const reserve = makeCaptureReserve({ walPath: opts.walPath, quarantinePath: opts.quarantinePath });
   return makeCaptureEngine({
     flush,

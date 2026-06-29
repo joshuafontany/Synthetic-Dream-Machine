@@ -25,12 +25,12 @@
  */
 
 import { createHash } from "node:crypto";
-import { execFileSync } from "node:child_process";
+import { execFileSync, execSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
-import { basename, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, mineWithRetry, type WritebackResult } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
 import { atomicWriteFileSync } from "@lararium/node";
@@ -150,7 +150,7 @@ function readTurns(file: string): RawTurn[] {
  * grain mempalace already uses); the assistant side carries the authored sigil instruments the
  * gradient reads. Orphan turns (user with no answer, answer with no question) flush as-is.
  */
-function readExchanges(file: string): RawTurn[] {
+export function readExchanges(file: string): RawTurn[] {
   const out: RawTurn[] = [];
   let q: RawTurn | null = null;
   for (const t of readTurns(file)) {
@@ -166,7 +166,7 @@ function readExchanges(file: string): RawTurn[] {
   return out;
 }
 
-function sha(s: string): string {
+export function sha(s: string): string {
   return createHash("sha256").update(s).digest("hex").slice(0, 16);
 }
 
@@ -264,6 +264,46 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
  *  the palace-lock busy signal via the SHARED helper (exponential backoff + full jitter). */
 function mineDirect(args: readonly string[]): string {
   return mineWithRetry(() => execFileSync(MP, [...args], { maxBuffer: 1 << 30, encoding: "utf8" }));
+}
+
+// --- the HNSW repair tail (idempotent, divergence-gated, fail-soft) ---------
+// After mining, the vector index can drift from sqlite (mempalace #1222). This tail reads the
+// (pure-sqlite, ~100ms) `repair-status`, and ONLY when the drawers index is DIVERGED does it quiesce
+// the palace holders + rebuild from sqlite. Aligned → SKIP (idempotent). A repair failure NEVER fails
+// the harvest. The orchestration core lives in @lararium/mempalace (unit-tested); here we wire the
+// real commands. The MCP's stale handle re-opens out-of-band (harness respawn + mempalace_reconnect).
+
+/** Wire the real mempalace commands into the divergence-gated rebuild core. */
+function runHnswRepairTail(): Promise<HnswRepairResult> {
+  const palace = resolvePalacePath();
+  // The resource (FD-based) quiesce — NEVER `pkill -f <pattern>` (it self-matches the caller's own
+  // command line). `fuser` lists the PIDs holding the palace; `xargs -r` no-ops when none do.
+  const palaceMount = dirname(palace); // ~/.mempalace (honors MEMPALACE_PALACE_PATH overrides too)
+  return repairHnswIfDiverged({
+    checkStatus: async () =>
+      execFileSync(MP, ["--palace", palace, "repair-status"], { maxBuffer: 1 << 28, encoding: "utf8" }),
+    quiesce: async () => {
+      try {
+        execSync(`fuser ${JSON.stringify(palaceMount)} 2>/dev/null | xargs -r kill -TERM`, { stdio: "ignore" });
+      } catch { /* no holders (or fuser absent) — nothing to drop */ }
+    },
+    repair: async () => {
+      execFileSync(MP, ["--palace", palace, "repair", "--mode", "from-sqlite", "--archive-existing", "--yes"], {
+        maxBuffer: 1 << 28,
+        encoding: "utf8",
+      });
+    },
+  });
+}
+
+/** Render the repair-tail outcome as one TTY line (the JSON rides in the command's `data`). */
+function hnswRepairLine(r: HnswRepairResult): string {
+  switch (r.action) {
+    case "skip":         return `  hnsw index:   in sync${r.divergence !== null ? ` (divergence ${r.divergence})` : ""}`;
+    case "repaired":     return `  hnsw index:   REBUILT (was diverged ${r.divergence ?? "?"} → now ${r.afterDivergence ?? "?"})`;
+    case "repair-failed":return `  hnsw index:   repair FAILED (diverged ${r.divergence ?? "?"}) — harvest ok · ${r.note ?? ""}`;
+    case "check-failed": return `  hnsw index:   status unreadable — skipped · ${r.note ?? ""}`;
+  }
 }
 
 /** Recover the real cwd a transcript ran in (rows carry it), to derive a stable wing. */
@@ -498,14 +538,17 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   }
 
   results.sort((a, b) => b.transcripts - a.transcripts);
+  // The repair tail — divergence-gated + idempotent (skips on dry-run; a no-op when the index is in sync).
+  const hnsw = dryRun ? null : await runHnswRepairTail();
   emit(args, {
     ok: true,
-    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon" },
+    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(hnsw ? { hnswRepair: hnsw } : {}) },
     human: () => {
       console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
       for (const r of results)
         console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}`);
       console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .astpalace · hash-bound`);
+      if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
   return 0;
@@ -588,9 +631,11 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     try { atomicWriteFileSync(statePath, JSON.stringify(nextState)); } catch { /* best effort */ }
   }
 
+  // The repair tail — divergence-gated + idempotent (a no-op when the index is in sync).
+  const hnsw = dryRun ? null : await runHnswRepairTail();
   emit(args, {
     ok: true,
-    data: { ...summary, dryRun },
+    data: { ...summary, dryRun, ...(hnsw ? { hnswRepair: hnsw } : {}) },
     human: () => {
       console.log(`lares harvest → ${wing}${dryRun ? "  (dry run)" : ""}`);
       console.log(`  transcripts:  ${summary.files}`);
@@ -598,6 +643,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       console.log(`  harvested:    ${summary.harvested}  (${summary.framed} framed · ${summary.raw} raw · ${summary.sidechain} sidechain)`);
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
       if (!dryRun) console.log(`  index:        ${indexPath}`);
+      if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
   return 0;
@@ -654,7 +700,11 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
 
   outer:
   for (const file of files) {
-    const src = basename(file);
+    // PREFIX the wing onto the source_file (`<wing>/<surface>__<run>.jsonl`): the @daemon capture path
+    // carries no `--wing`, so the node wing-stamp flush decodes this prefix into `metadata.wing` —
+    // otherwise every captured turn lands in the `?` wing. buildPatch reads the basename, so surface/
+    // handle derivation is unaffected.
+    const src = `${wing}/${basename(file)}`;
     for (const turn of readExchanges(file)) {       // exchange-grain drawer (the ingest canon)
       const key  = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
       const hash = sha(turn.text);

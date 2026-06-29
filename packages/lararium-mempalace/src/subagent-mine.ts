@@ -65,8 +65,41 @@ function firstHandoff(file: string): string {
 }
 
 /** The agent id from an `agent-<id>.jsonl` filename. */
-function agentIdOf(agentFile: string): string {
+export function agentIdOf(agentFile: string): string {
   return /^agent-(.+)\.jsonl$/.exec(basename(agentFile))?.[1] ?? "unknown";
+}
+
+/** The worldline run-root for a session transcript — its basename minus `.jsonl`. */
+export function runIdOf(transcriptPath: string): string {
+  return basename(transcriptPath).replace(/\.jsonl$/, "");
+}
+
+/** The `<session>/subagents` directory that holds a session's tasked-spirit transcripts. */
+export function spiritSubagentDir(transcriptPath: string): string {
+  return transcriptPath.replace(/\.jsonl$/, "") + "/subagents";
+}
+
+/** Every `agent-*.jsonl` tasked-spirit transcript for a session (absolute paths), else []. */
+export function listSpiritFiles(transcriptPath: string): string[] {
+  const dir = spiritSubagentDir(transcriptPath);
+  if (!existsSync(dir)) return [];
+  try {
+    return readdirSync(dir).filter((f) => /^agent-.*\.jsonl$/.test(f)).map((f) => join(dir, f));
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * The `source_file` a spirit turn rides through the @daemon `capture` verb under. Two channels
+ * fuse in one string: a `<wing>/` PREFIX (the routing — `spiritsWing(wing)`, decoded to
+ * `metadata.wing` at the node flush) and the `<name>__agent-<id>__run-<run>.jsonl` BASENAME (the
+ * provenance — buildPatch reads `lar_agent` / `lar_sidechain` / `lar_agent_handle` off it, exactly
+ * the convention the direct-mine leg stages). The capture path takes the basename, the wing-stamp
+ * takes the prefix, so one record lands BOTH the `__spirits` wing AND the AST keyed to the spirit.
+ */
+export function spiritCaptureSourceFile(wing: string, name: string, agentId: string, runId: string): string {
+  return `${spiritsWing(wing)}/${name}__agent-${agentId}__run-${runId}.jsonl`;
 }
 
 /**
