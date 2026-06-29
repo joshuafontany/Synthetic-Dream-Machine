@@ -20,6 +20,48 @@ export const LAR_HV = 6;
 
 const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
 
+/**
+ * BranchContext — the turn-DAG fork signal. A same-session FORK (a transcript turn with
+ * two children in the conversation parentUuid DAG = a branch point) makes both branches
+ * derive the IDENTICAL `run` handle, so worldlineClockFor folds two timelines into one
+ * (the collision). The cure: a BRANCH-FRONTIER component keyed into the handle.
+ *
+ * Branch identity = the FRONTIER (the set of head turn-uuids at the divergence point — the
+ * git/Merkle "set of head hashes" reading). Derived data keys by (handle + frontier), so
+ * two forks of one session derive DISTINCT handles. A normal spawn (no fork) carries no
+ * frontier and is UNAFFECTED — the handle stays exactly `run.agentId` / `run`.
+ *
+ * The feed (the parentUuid turn-DAG → frontier) is wired by the capture/harvest caller; this
+ * module only derives the component. Absent a frontier, behavior is byte-identical to before.
+ */
+export interface BranchContext {
+  /**
+   * The divergence frontier — the head turn-uuid(s) that distinguish this branch. A single
+   * uuid (the divergence turn) or the set of heads. Empty/absent ⇒ no fork ⇒ no component.
+   */
+  readonly frontier?: string | readonly string[];
+}
+
+/**
+ * A short, stable, dependency-free token for a branch frontier (FNV-1a/32, 8 hex). NOT a
+ * cryptographic digest — it only needs to DISTINGUISH branches deterministically at session
+ * scale (build-patch bundles into the TW5 VM + the browser twin, so no @noble import here).
+ * Order-independent over a head SET (sorted before folding). Returns null when no frontier.
+ */
+export function deriveBranchFrontier(branch?: BranchContext): string | null {
+  const f = branch?.frontier;
+  if (f == null) return null;
+  const heads = (Array.isArray(f) ? [...f] : [f as string]).filter((h) => h != null && h !== "");
+  if (heads.length === 0) return null;
+  const key = heads.map(String).sort().join("\n");
+  let h = 0x811c9dc5; // FNV-1a 32-bit offset basis
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0; // FNV prime, keep unsigned
+  }
+  return h.toString(16).padStart(8, "0");
+}
+
 /** Derive the originating harness from a staged source_file (prefixed `<surface>__…`). */
 function deriveSurface(sourceFile?: string): string {
   if (!sourceFile) return "claude";
@@ -51,11 +93,15 @@ function deriveAgent(sourceFile?: string): string | null {
  * Flat `subagents/` gives a `run.child` path; deep parentUuid nesting is a
  * documented extension (agent-worldline#open).
  */
-function deriveHandle(sourceFile?: string): string | null {
+function deriveHandle(sourceFile?: string, frontier?: string | null): string | null {
   if (!sourceFile) return null;
   const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
   const m = /__agent-([^/]+?)__run-([^/]+)\.jsonl$/.exec(base);
-  return m ? `${m[2]}.${m[1]}` : null;
+  if (!m) return null;
+  // The branch-frontier rides the RUN component (`run~frontier`), so split(".")[0] below
+  // yields the branch-specific run — two same-session forks no longer collide.
+  const run = frontier ? `${m[2]}~${frontier}` : m[2];
+  return `${run}.${m[1]}`;
 }
 
 /**
@@ -67,12 +113,15 @@ function deriveHandle(sourceFile?: string): string | null {
  * `lar_parent_handle` resolves back to the main agent's `lar_agent_handle` — the
  * attribution graph closes (agent-worldline#attribution).
  */
-function deriveRootHandle(sourceFile?: string): string | null {
+function deriveRootHandle(sourceFile?: string, frontier?: string | null): string | null {
   if (!sourceFile) return null;
   const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
   if (base.includes("__agent-")) return null; // a spirit — not a root
   const m = /^[^_]+__([^/]+)\.jsonl$/.exec(base); // <surface>__<run>.jsonl
-  return m ? (m[1] ?? null) : null;
+  if (!m?.[1]) return null;
+  // A same-session FORK gives both branches the same run → collision. The branch-frontier
+  // makes the two roots distinct (`run~frontier`); a normal session carries none.
+  return frontier ? `${m[1]}~${frontier}` : m[1];
 }
 
 /** Deterministic function-hall routing from the authored instruments (no LLM). */
@@ -84,7 +133,12 @@ function hallForHarvest(h: TurnHarvest): string {
 }
 
 /** Build the `lar_*` reading patch (chroma metadata = str/int/float/bool only). */
-export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, string | number> {
+export function buildPatch(
+  h: TurnHarvest,
+  sourceFile?: string,
+  branch?: BranchContext,
+): Record<string, string | number> {
+  const frontier = deriveBranchFrontier(branch); // null unless the caller signals a fork
   const patch: Record<string, string | number> = {
     lar_hv: LAR_HV,
     lar_surface: deriveSurface(sourceFile),
@@ -104,7 +158,7 @@ export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, 
   if (hall) patch["lar_hall"] = hall;
   const agent = deriveAgent(sourceFile);
   if (agent) { patch["lar_agent"] = agent.slice(0, 60); patch["lar_sidechain"] = 1; }
-  const handle = deriveHandle(sourceFile);
+  const handle = deriveHandle(sourceFile, frontier);
   if (handle) {
     // A SPIRIT worldline. The projected attribution edge (child→parent), single-source.
     // Flat `subagents/`: the spirit is a direct child of the run, so appointed-by
@@ -118,7 +172,7 @@ export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, 
   } else {
     // A MAIN-agent worldline — its own root, no parent above it. Its handle = the run,
     // which a spirit's lar_parent_handle points back to (the graph closes).
-    const root = deriveRootHandle(sourceFile);
+    const root = deriveRootHandle(sourceFile, frontier);
     if (root) { patch["lar_agent_handle"] = root.slice(0, 120); patch["lar_root_handle"] = root.slice(0, 120); }
   }
   return patch;

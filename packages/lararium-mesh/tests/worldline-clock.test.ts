@@ -9,6 +9,8 @@
 import { describe, test, expect } from "vitest";
 import {
   ffzZero,
+  ffzCompare,
+  ffzCausalCompare,
   worldlineClockFor,
   segmentTick,
   groundingTick,
@@ -17,6 +19,14 @@ import {
   ffzAddress,
   ffzAddressPrefix,
   CLAUDE_AGENT_BOUNDS,
+  worldlineCausalSeed,
+  worldlineSpawn,
+  worldlineInject,
+  worldlineHandback,
+  worldlineCompare,
+  itcSeed,
+  itcFork,
+  itcEvent,
 } from "../src/index.js";
 import type { FfzClock, LarTickCounter, WorldlineEvent, WorldlineLog } from "../src/index.js";
 
@@ -99,5 +109,78 @@ describe("groundWorldlineEvent — the minimal LOCAL slice end to end", () => {
     const first = groundWorldlineEvent(logOf(), "run.alice", tc(1));
     const second = groundWorldlineEvent(logOf(first.event), "run.alice", tc(2));
     expect(second.event.clock.levels[1]).toBe(2);
+  });
+});
+
+describe("the two reads stay SEPARATE — rhythmic LWW vs causal partial-order", () => {
+  test("ffzCompare is a total order (never concurrent); it only paces the grain", () => {
+    const lo: FfzClock = { levels: [0, 1, 0, 0, 0], bounds: CLAUDE_AGENT_BOUNDS, actorId: "h1" };
+    const hi: FfzClock = { levels: [0, 2, 0, 0, 0], bounds: CLAUDE_AGENT_BOUNDS, actorId: "h2" };
+    expect(ffzCompare(lo, hi)).toBe(-1);
+    expect(ffzCompare(hi, lo)).toBe(1);
+    // identical tuples, different handle → actorId tiebreak (still a TOTAL order)
+    const a: FfzClock = { levels: [0, 1, 0, 0, 0], bounds: CLAUDE_AGENT_BOUNDS, actorId: "a" };
+    const b: FfzClock = { levels: [0, 1, 0, 0, 0], bounds: CLAUDE_AGENT_BOUNDS, actorId: "b" };
+    expect(ffzCompare(a, b)).toBe(-1);
+  });
+
+  test("ffzCausalCompare CAN say concurrent — siblings sharing no merge-ancestry", () => {
+    const [x0, y0] = itcFork(itcSeed());
+    const x = itcEvent(x0);
+    const y = itcEvent(y0);
+    expect(ffzCausalCompare(x, y)).toBe("concurrent");
+    // and it still reads before/after where history orders
+    expect(ffzCausalCompare(itcSeed(), itcEvent(itcSeed()))).toBe("before");
+  });
+});
+
+describe("worldline causal partial-order — rides ITC, concurrent-capable", () => {
+  test("spawn = fork: a spawned child reads AFTER the parent once it acts", () => {
+    let c = worldlineCausalSeed("run");
+    c = worldlineSpawn(c, "run", "run.child");
+    c = worldlineInject(c, "run.child"); // the child does work
+    expect(worldlineCompare(c, "run", "run.child")).toBe("before"); // parent → child
+    expect(worldlineCompare(c, "run.child", "run")).toBe("after");
+  });
+
+  test("siblings of one spawn, no join between → CONCURRENT", () => {
+    let c = worldlineCausalSeed("run");
+    c = worldlineSpawn(c, "run", "run.a");
+    c = worldlineSpawn(c, "run", "run.b");
+    c = worldlineInject(c, "run.a");
+    c = worldlineInject(c, "run.b");
+    expect(worldlineCompare(c, "run.a", "run.b")).toBe("concurrent");
+  });
+
+  test("inject FULL-ticks every time (the D-cut): each injection advances the history", () => {
+    let c = worldlineCausalSeed("run");
+    c = worldlineSpawn(c, "run", "run.a");
+    const before = c.stamps["run.a"]!;
+    c = worldlineInject(c, "run.a");
+    const after1 = c.stamps["run.a"]!;
+    c = worldlineInject(c, "run.a");
+    const after2 = c.stamps["run.a"]!;
+    expect(ffzCausalCompare(before, after1)).toBe("before");
+    expect(ffzCausalCompare(after1, after2)).toBe("before");
+  });
+
+  test("handback = join: the parent absorbs the concurrent child, reads AFTER it; child retires", () => {
+    let c = worldlineCausalSeed("run");
+    c = worldlineSpawn(c, "run", "run.child");
+    c = worldlineInject(c, "run.child"); // the child works
+    c = worldlineInject(c, "run");       // the parent works meanwhile — concurrent
+    const childAtHandback = c.stamps["run.child"]!;
+    expect(worldlineCompare(c, "run", "run.child")).toBe("concurrent");
+    c = worldlineHandback(c, "run", "run.child");
+    expect(c.stamps["run.child"]).toBeUndefined(); // dissolved at handback
+    // the reunited parent's history now dominates the child's pre-handback history
+    expect(ffzCausalCompare(c.stamps["run"]!, childAtHandback)).toBe("after");
+  });
+
+  test("unknown handles throw — the registry never invents a worldline", () => {
+    const c = worldlineCausalSeed("run");
+    expect(() => worldlineSpawn(c, "ghost", "x")).toThrow();
+    expect(() => worldlineInject(c, "ghost")).toThrow();
+    expect(() => worldlineCompare(c, "run", "ghost")).toThrow();
   });
 });
