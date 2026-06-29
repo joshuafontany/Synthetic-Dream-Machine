@@ -78,6 +78,17 @@ describe("composeVessel — declare ⊥ wire, the composable keel", () => {
     expect(torn).toEqual(["daemon", "repo"]);                            // reverse of build order
   });
 
+  test("mid-boot build failure disposes the ALREADY-built caps (no partial-boot leak)", async () => {
+    const torn: string[] = [];
+    const stack: CapModule[] = [
+      cap("a", [], () => ({}), { dispose: () => { torn.push("a"); } }),
+      cap("b", ["a"], () => ({}), { dispose: () => { torn.push("b"); } }),
+      cap("c", ["b"], () => { throw new Error("boom"); }),   // builds last (topo) → throws mid-boot
+    ];
+    await expect(composeVessel(stack)).rejects.toThrow(/boom/);
+    expect(torn).toEqual(["b", "a"]);                         // built caps disposed reverse, before the throw
+  });
+
   test("REFUSES a duplicate cap id in the stack", async () => {
     const stack: CapModule[] = [cap("repo", [], () => ({})), cap("repo", [], () => ({}))];
     await expect(composeVessel(stack)).rejects.toThrow(/duplicate cap "repo"/);

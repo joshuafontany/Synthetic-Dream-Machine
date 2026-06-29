@@ -95,6 +95,16 @@ export async function composeVessel(stack: readonly CapModule[]): Promise<Compos
 
   // ── build in dependency order, each with a least-authority (POLA) resolver ──
   const built = new Map<CapId, unknown>();
+  const builtOrder: CapId[] = []; // the caps actually built — drives reverse teardown (full OR partial)
+  // Best-effort reverse teardown — a per-cap dispose error never blocks the rest (Effect-Scope / ExitStack
+  // semantics, distilled from the Effect.Layer evaluation without the dependency).
+  const teardown = async (): Promise<void> => {
+    for (let i = builtOrder.length - 1; i >= 0; i--) {
+      const id = builtOrder[i]!;
+      const d = index.get(id)!.dispose;
+      if (d) { try { await d(built.get(id)); } catch { /* teardown is best-effort */ } }
+    }
+  };
   for (const id of order) {
     const m = index.get(id)!;
     const declared = new Set<CapId>([...(m.requires ?? []), ...(m.optional ?? [])]);
@@ -104,18 +114,20 @@ export async function composeVessel(stack: readonly CapModule[]): Promise<Compos
       }
       return built.get(dep) as T; // mandatory: built earlier; absent-optional: undefined
     };
-    built.set(id, await m.build(resolve));
+    try {
+      built.set(id, await m.build(resolve));
+      builtOrder.push(id);
+    } catch (err) {
+      // a cap's build threw mid-boot → dispose the already-built caps before re-throwing, so a partial
+      // boot leaks nothing (the one genuine win the Effect.Layer eval surfaced — Scope cleanup, sans dep).
+      await teardown();
+      throw err;
+    }
   }
 
   return {
     get: <T = unknown>(id: CapId): T | undefined => built.get(id) as T | undefined,
     order,
-    dispose: async () => {
-      for (let i = order.length - 1; i >= 0; i--) {
-        const id = order[i]!;
-        const m = index.get(id)!;
-        if (m.dispose) await m.dispose(built.get(id));
-      }
-    },
+    dispose: teardown,
   };
 }
