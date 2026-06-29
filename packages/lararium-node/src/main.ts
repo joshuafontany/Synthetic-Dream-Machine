@@ -29,7 +29,7 @@
 import { createServer }  from "http";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
-import { openNodeVessel }               from "./open-node-vessel.js";
+import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
 import { startUdsChannel }              from "./uds-channel.js";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed }        from "./node-vessel-identity.js";
@@ -44,7 +44,7 @@ import { REPO_ROOT }   from "./node-host.js";
 // CLI / env config
 // ---------------------------------------------------------------------------
 
-function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null } {
+function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null; recipe: NodeRecipe } {
   const args = process.argv.slice(2);
   const get  = (flag: string, env: string, fallback: string) => {
     const i = args.indexOf(flag);
@@ -56,6 +56,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   // the repo root carries the REAL tracked genesis dir (the symlink and the
   // package-dir home both died 2026-06-11; early alpha keeps no compatibility).
   const genesisDir = resolve(get("--genesis", "LAR_GENESIS", join(rootDir, "genesis")));
+  const recipe = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as NodeRecipe;
   return {
     port:       Number(get("--port", "LAR_PORT", "8080")),
     storageDir,
@@ -63,6 +64,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     wikiId:     get("--wiki", "LAR_WIKI", "lares"),
     rootDir,
     catalogUrl: process.env["LAR_CATALOG"] ?? null,
+    recipe,
   };
 }
 
@@ -71,7 +73,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
-  const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl } = parseArgs();
+  const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, recipe } = parseArgs();
 
   // WS server — path-scoped to /ws only. Non-WS requests get no handler (socket destroyed
   // by the upgrade gate below). No HTTP surface — catalog URL advertised via stdout.
@@ -101,6 +103,58 @@ async function main(): Promise<void> {
   httpServer.listen(port, () => {
     console.log(`[lararium] WS relay on :${port}  (ws://localhost:${port}/ws)`);
   });
+
+  // ── Herm (Lares Viales) — the wiki-LESS wayfarer cap-stack: @daemon immune core + a served
+  //    @meshpalace FLOW-map, no wiki/pool. Routed by --recipe herm / LAR_RECIPE=herm. ──────────
+  if (recipe === "herm") {
+    const herm = await openNodeHerm({
+      hostId:     "lares-viales",
+      wikiId,
+      storageDir,
+      genesisDir,
+      rootDir,
+      wss,
+      catalogUrl,
+      recipe:     "herm",
+      httpServer,
+      onPhase:    (phase) => console.log(`[herm] phase → ${phase}`),
+    });
+    console.log(`[herm] live — wiki-less wayfarer | storage: ${storageDir}`);
+    console.log(`[herm] catalog:   ${herm.catalogHandleUrl}`);
+    console.log(`[herm] oracle:    ${herm.oracleDocUrl}`);
+    console.log(`[herm] daemon:    ${herm.daemon.daemonHandle.url}`);
+    console.log(`[herm] FLOW-map read-face: GET /oracle/pointer · /oracle/<cid>.bin`);
+    console.log(`[herm] ws:        ws://localhost:${port}/ws`);
+
+    // Co-located UDS verb-channel for the local `lares` CLI (the @daemon answers).
+    const hermSocketPath = join(storageDir, "lares.sock");
+    const hermUds = startUdsChannel({
+      daemonHandle: herm.daemon.daemonHandle,
+      socketPath:   hermSocketPath,
+      onLog: (line) => console.log(`[herm] ${line}`),
+    });
+
+    let hermShuttingDown = false;
+    const hermShutdown = async (sig: string): Promise<void> => {
+      if (hermShuttingDown) return;
+      hermShuttingDown = true;
+      console.log(`[herm] ${sig} — graceful shutdown`);
+      try {
+        hermUds.close();
+        httpServer.close();
+        await herm.dispose();          // read-face + daemon island flush, then the composed vessel
+        await herm.repo.flush();
+        console.log("[herm] shutdown complete — state flushed durably");
+      } catch (e) {
+        console.error("[herm] shutdown error:", e instanceof Error ? e.message : String(e));
+      } finally {
+        process.exit(0);
+      }
+    };
+    process.on("SIGINT",  () => void hermShutdown("SIGINT"));
+    process.on("SIGTERM", () => void hermShutdown("SIGTERM"));
+    return;
+  }
 
   const result = await openNodeVessel({
     hostId:     "lararium-node",
