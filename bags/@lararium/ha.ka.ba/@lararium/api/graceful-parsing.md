@@ -419,8 +419,8 @@ field-set first, cap-stack second.
 **Tie ~ degrade-down-the-tower IS the form gradient.** The superset-tower graceful-degradation this meme
 locks (`x-memetic → wikitext → HTML → raw`, never hard-fault) carries directly into the FORM-capture: a
 botched construction lights its parent schema AND its lower grammar-layer, degrading up and down the
-same tower ([[living-grammar-palace]] #two-planes). The cross-substrate GRADED-CORRECTION invariant
-behind that — correction by degree, never a binary gate — lives at [[living-grammar]].
+same tower ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes]]). The cross-substrate GRADED-CORRECTION invariant
+behind that — correction by degree, never a binary gate — lives at [[living-grammar|lar:///ha.ka.ba/@lares/api/pono/living-grammar]].
 
 <<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/living-grammar >>

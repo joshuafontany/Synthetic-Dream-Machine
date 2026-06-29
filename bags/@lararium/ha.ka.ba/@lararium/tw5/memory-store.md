@@ -91,7 +91,7 @@ The vessel's `BagResolver` binds the slot to a different Automerge doc per
 operator's device cabal → same doc → shared state; different recipe or
 different cabal → different doc → no cross-talk. Approved 2026-05-30; see
 the proposal at
-[[lar:///ha.ka.ba/@lararium/api/personal-slot]] for
+[[personal-slot|lar:///ha.ka.ba/@lararium/api/personal-slot]] for
 boot wiring and the cascade rules that will activate it.
 
 **Landing status (2026-05-31).** S7.1 + S7.2 of EPIC-RESIDENCY-MODEL landed:
@@ -123,7 +123,7 @@ No persistence across island lifecycles.
 `meta.deleted = true`. Tombstones preserve change ordering for projections.
 A tombstone raises a **kāpae** (shadows lower bags in the cascade); `remove()`
 instead drops the record entirely (`get()` → null = *absent*, falls through to a
-lower bag) — the two stay distinct (the shadow-vs-fall-through cut: [[kapae]]).
+lower bag) — the two stay distinct (the shadow-vs-fall-through cut: [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]]).
 
 **M-4 — Projection bus participation.** Every `put()` and `tombstone()` emits
 a `LarTiddlerChange` carrying the optional `bagId`. Subscribers see the

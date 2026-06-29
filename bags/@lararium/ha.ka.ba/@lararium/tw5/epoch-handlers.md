@@ -57,7 +57,7 @@ Two reactors, both running worker-ward over the catalog accessor
 
 **EP-1 — Tombstones survive the epoch (Cassandra rule).** A record carrying
 `meta.deleted = true` migrates into the new doc as first-class state, not
-history — a raised kāpae ([[kapae]]) in a high bag **shadows** a low bag's
+history — a raised kāpae ([[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]]) in a high bag **shadows** a low bag's
 copy, and that shadow must outlive the restart, or the low copy un-shadows
 and the delete silently un-happens.
 

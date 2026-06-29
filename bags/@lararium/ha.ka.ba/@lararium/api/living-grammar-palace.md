@@ -27,7 +27,7 @@ written   = "2026-06-29"
 # The Living-Grammar Memory-Palace ~ capturing FORM beside CONTENT
 
 **The house speaks a living grammar; this palace remembers how it MOVED, not only what it said.** The
-verbatim mempalace ([[capture-annotation-model]]) keeps CONTENT — the words a turn carried. This meme
+verbatim mempalace ([[capture-annotation-model|lar:///ha.ka.ba/@lararium/api/capture-annotation-model]]) keeps CONTENT — the words a turn carried. This meme
 states the design-of-record for a SECOND axis: the **FORM** a turn enacted — which constructions of the
 living grammar it instantiated, how fully each one sanctioned, how the move-shape degraded where it
 strained. Content answers *what was said*; form answers *how the grammar moved* — the constructicon
@@ -58,7 +58,7 @@ a Python port of `composeIsland` (`packages/lararium-tw5/src/island-caps.ts`):
 a content palace HAS `[FlockSingleton, ContentFeedCap, LateChunkCap]`; a form palace HAS
 `[FlockSingleton, AstFeedCap, FormVectorCap]`; a mesh palace HAS `[FlockSingleton, AutomergeFeedCap]`.
 The differentiation rides the stack (data), never the body (code). This extends the has-stack runtime
-twin ([[has-stack]], [[island-caps]]) from the TW5 island layer into the Python palace daemon — the
+twin ([[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]], [[island-caps]]) from the TW5 island layer into the Python palace daemon — the
 SAME composition law, a second substrate. <<~ confidence Synthesis 12/20 >> the collapse mirrors a
 proven TS pattern; the Python port stays specified, not yet built.
 
@@ -103,7 +103,7 @@ the fork stays OPEN, recorded here, not resolved. <<~ confidence Synthesis 9/20 
 ## Three-Layer Grammar-Stack ~ the construction-depth axis (orthogonal to registers)
 
 ORTHOGONAL to the three registers runs the construction-DEPTH axis: the nested superset tower the house
-already parses ([[graceful-parsing]]):
+already parses ([[graceful-parsing|lar:///ha.ka.ba/@lararium/api/graceful-parsing]]):
 
 <<~ranks tower html ~ the base; renders verbatim, never fails -> tw5-wikitext ~ ⊃ HTML (the core html.js wikirule) -> x-memetic-wikitext ~ ⊃ TW5 wikitext (the <<~ overlay, island grammar) >>
 
@@ -112,7 +112,7 @@ sigils interleaved. The constructicon basis therefore spans all three nested ban
 seat at any layer.
 
 **Graceful degradation FALLS DOWN the superset-tower.** A malformation at the memetic layer panics to
-water → verbatim text → HTML text, which always renders — the never-fail floor ([[graceful-parsing]]
+water → verbatim text → HTML text, which always renders — the never-fail floor ([[graceful-parsing|lar:///ha.ka.ba/@lararium/api/graceful-parsing]]
 #the-tower). This is the existing AUGMENT+WRAP graceful-parsing model, READ AS a degradation gradient:
 `x-memetic → wikitext → HTML → raw`. The form-capture rides the SAME tower — a botched construction
 degrades down its layers, never hard-faults.
@@ -123,7 +123,7 @@ layer). The form-capture below profiles a turn ACROSS this grid.
 
 **Capture the AUTHORED SOURCE text's blend** — the constructicon over the source the author wrote — NOT
 the downstream parse→widget→render pipe. The form vector reads the source's construction-blend; the
-render pipeline projects it, a separate concern ([[render-pipeline]]).
+render pipeline projects it, a separate concern ([[render-pipeline|lar:///ha.ka.ba/@lares/api/pono/render-pipeline]]).
 
 <<~/ahu >>
 
@@ -131,7 +131,7 @@ render pipeline projects it, a separate concern ([[render-pipeline]]).
 
 ## Two-Planes Form-Capture ~ the spine (discrete constructicon ⋈ continuous fuzzy-membership)
 
-The form rides on TWO orthogonal planes, the way genesis rides two planes ([[genesis-doc]]):
+The form rides on TWO orthogonal planes, the way genesis rides two planes ([[genesis-doc|lar:///ha.ka.ba/@lararium/mesh/genesis-doc]]):
 
 \procedure ~Plane(~Type:"" ~Params:"") ~Plane <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -161,7 +161,7 @@ and downward (the superset tower), never hard-faults — the form-plane twin of 
 never-fail floor.
 
 **Route A ~ abstract-then-encode (no discourse-parser needed).** Our CNL EMITS its own form-markers:
-the classifier channel (`<<~ … >>` sigils — the red that steers, [[lar-telemetry]]) already declares
+the classifier channel (`<<~ … >>` sigils — the red that steers, [[lar-telemetry|lar:///ha.ka.ba/@lararium/api/lar-telemetry]]) already declares
 aperture, ward, confidence, oracle, Voices, bearing. So the form vector reads the EMITTED markers
 (`packages/lararium-mesh/src/turn-harvest.ts`), never a learned discourse-parser over bare prose. This
 inverts the usual move: the grammar abstracts ITSELF into markers, the palace encodes the markers.
@@ -179,7 +179,7 @@ at a distance, never *in* a bin.
 
 **Reliability = marker-emission fidelity.** The form-capture trusts only as far as the markers emit
 faithfully; a bare-text turn (no sigils) falls back to the graceful-parser's best-effort tree
-([[graceful-parsing]]). Honest degradation, never a fabricated form.
+([[graceful-parsing|lar:///ha.ka.ba/@lararium/api/graceful-parsing]]). Honest degradation, never a fabricated form.
 
 <<~ confidence Synthesis 11/20 >> The two-planes geometry rests on convergent theory (construction
 grammar + ritual/performative + score notation); the encoder tiers stay specified, the baseline cheap
@@ -215,7 +215,7 @@ shape moved here*. The hash joins; the vector ranks.
 Each drawer carries the **TW5-native parse-tree stored verbatim** as its payload — concrete, lossless,
 CID-addressed by schema, serialized JSON/CBOR. The gain: **instant render** — recall hydrates straight
 to the widget tree, no re-parse. The parse-tree is the same `{type, attributes, children}` shape the
-widget pipeline already consumes ([[graceful-parsing]] #architecture), so the stored form IS the
+widget pipeline already consumes ([[graceful-parsing|lar:///ha.ka.ba/@lararium/api/graceful-parsing#architecture]]), so the stored form IS the
 renderable form. The schema rides a CID so a tree's shape stays verifiable across versions.
 
 <<~/ahu >>
@@ -224,13 +224,13 @@ renderable form. The schema rides a CID so a tree's shape stays verifiable acros
 
 ## Multi-Aperture ~ scale-selection comes free
 
-Retrieval reads at multiple apertures (the attention-scale ladder, [[attention-scale]]):
+Retrieval reads at multiple apertures (the attention-scale ladder, [[attention-scale|lar:///ha.ka.ba/@lares/api/pono/attention-scale]]):
 
 <<~ranks aperture raptor ~ RAPTOR collapsed-tree: turn → session → arc summary levels ARE the apertures; collapsed-tree retrieval = automatic scale-selection (a query lands at the right summary level) -> matryoshka ~ the dimension-axis: a coarse-filter on the truncated prefix → a fine-rerank on the full vector -> late-chunking ~ embed-then-chunk over the session, so a chunk keeps its surrounding context >>
 
 **Parse-trees give the fine hierarchy free** (the tree's own depth); **session-boundaries give the
 coarse** (the RAPTOR summary levels). The apertures map onto Pulse · Beat · Measure · Arc · Theme
-([[attention-scale]]) — turn-grain to arc-grain, the same ladder the HUD reads.
+([[attention-scale|lar:///ha.ka.ba/@lares/api/pono/attention-scale]]) — turn-grain to arc-grain, the same ladder the HUD reads.
 
 <<~/ahu >>
 
@@ -251,7 +251,7 @@ in the codebase:
 
 These ride as caps on the palace-instance's stack (#palace-instance), composed, never re-authored per
 palace. They carry the same hardening the capture-nalu earned across the four-domain survey
-([[capture-annotation-model]] #nalu-flush-hardening).
+([[capture-annotation-model|lar:///ha.ka.ba/@lararium/api/capture-annotation-model#nalu-flush-hardening]]).
 
 <<~/ahu >>
 
@@ -262,7 +262,7 @@ palace. They carry the same hardening the capture-nalu earned across the four-do
 A **meshpalace** reads as a mempalace **fed-by-the-Automerge-doc** — DreamNet navigation memory, a
 content palace whose feed cap drains the federated CRDT instead of the local transcript. It rides as a
 THIRD `FeedCap` on the nameless palace body (#palace-instance): `[FlockSingleton, AutomergeFeedCap, …]`.
-Design-only here — the parallel DreamNet session owns the Automerge internals ([[genesis-doc]],
+Design-only here — the parallel DreamNet session owns the Automerge internals ([[genesis-doc|lar:///ha.ka.ba/@lararium/mesh/genesis-doc]],
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture >>); this meme names only the seam
 (a feed cap), never the mesh mechanism.
 
@@ -307,11 +307,11 @@ grammar rides above it in the sovereign island.
 
 **Each form-drawer carries a worldline-temporal facet — and that facet PROJECTS, never RULES.** The
 palace stamps every drawer with a `lar_ffz` rhythmic address (the FfzClock phase frozen at the turn's
-grounding boundary, [[ffz-clock]] #rhythmic-address); read across the collection, those stamps compose
+grounding boundary, [[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#rhythmic-address]]); read across the collection, those stamps compose
 the palace's **worldline-causal/temporal facet** — *where in the felt cadence, and where in the
 happened-before, each captured move sat*. The ratified binding (narrowed mufakat, 12-Voice floor,
 operator-ratified 2026-06-29) holds that facet as a **CACHED PROJECTION** of the per-handle FfzClock
-(the grain) over the worldline edge-DAG (the order, [[agent-worldline]] #attribution) — a materialized
+(the grain) over the worldline edge-DAG (the order, [[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution]]) — a materialized
 view, re-derivable from the worldline, **NEVER the causal authority**. The edge-DAG owns
 happened-before; the facet caches its position for query. Lose the cache, re-project from the DAG; the
 cache never out-ranks its source.
@@ -324,7 +324,7 @@ adjacent bands as far from any rational resonance as a ratio can sit, so a fast 
 aliases into a slow band's. φ² carries the **magnitude** relation (band-size scaling); φ carries the
 **orthogonality**. **Entrainment DROPS** — the earlier over-reach read the bands as coupled oscillators
 pulling one another into lock; the bands do not couple. The **handback** reads as a directed
-**one-shot DAG-JOIN** — the worldline happened-before merge, the twin-reunion ([[agent-worldline]]
+**one-shot DAG-JOIN** — the worldline happened-before merge, the twin-reunion ([[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline]]
 #attribution) — NEVER oscillator coupling. One join, one direction, once.
 
 **Two ladders at P0 ~ ship minimal.** The facet COULD carry eight ordering ladders; the ratified P0
@@ -346,7 +346,7 @@ register climb — yet diverge at **three joints**:
 
 **no-global-now ∧ L-Prime ~ two aligned constraints, two mechanisms.** Both forbid a fused certainty
 the node cannot hold — no-global-now forbids a global temporal present (a drawer reads only "as of my
-last sync," [[agent-worldline]] #time); L-Prime forbids a fused identity/predication (map welded to
+last sync," [[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline#time]]); L-Prime forbids a fused identity/predication (map welded to
 territory). They ALIGN (both refuse a false absolute) yet run as TWO mechanisms — one gates time, one
 gates grammar. **The carve-out, stated explicitly:** the **transaction-axis** (deferred) names the ONE
 local-yet-essence coordinate where a fact MAY license a copula — a bitemporal transaction-time records
@@ -365,7 +365,7 @@ so recall weights it down. The GC/compaction story it waited on now reads: **swe
 a grace window, keep a thin tombstone** (retraction never reads as absence); and the base already enacts
 the mechanism (mempalace `kg_invalidate` closes `valid_to` append-only; L7 dynamics decay salience to a
 floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the **rhizome** (mid-flight
-injection = a `prov:Communication` merge, *merge-where-messages-land*) — rides [[agent-worldline]] #time;
+injection = a `prov:Communication` merge, *merge-where-messages-land*) — rides [[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline#time]];
 its forks are operator-cut (C turn-DAG-keyed · D full-ticks · E operator-as-root common-cause); the past-session FFZ/DAG re-derives by nuke-and-pave + re-harvest (transcripts are the source of truth).
 
 ### Three Cross-Substrate Witnesses ~ the pattern's rhymes, cited
@@ -477,7 +477,7 @@ re-entry: each kue's own key; or the operator's next FFZ-binding revision cycle
 The design rests on **eight research libations**, four on the grammar/ritual side and four on the
 retrieval/storage side:
 
-<<~ranks libation construction-grammar ~ Goldberg + Langacker partial-sanction (graded instantiation); Lau-Clark-Lappin SLOR (gradient grammaticality); Bybee usage-based + type-frequency productivity; Hopper emergent grammar (the descriptive↔prescriptive loop) -> ritual-tech ~ Rappaport (the canonical/self-referential split — the invariant score vs the indexical performance); Austin felicity (the performative's success conditions); Schechner (performance as restored behavior); Goodman (the score a performance instantiates) -> discourse-move-form ~ RST + Propp (move-grammars over discourse); the move-n-gram skeleton -> ast-vectors ~ red-green-trees (Roslyn) + tree-sitter (ERROR/MISSING, tree-edit-distance) — the tree-edit-distance teacher for the learned encoder -> multi-aperture ~ RAPTOR (collapsed-tree summary levels); Matryoshka (nested-dimension coarse→fine); late-chunking -> multi-graph ~ ColBERT + RRF (reciprocal rank fusion = the hash-join) -> instant-render ~ the TW5-native full parse-tree payload, hydrate-to-widget -> the-meta-pattern ~ the cross-substrate signature that a living grammar seeds, enacts, corrects, and decays ([[living-grammar]]) >>
+<<~ranks libation construction-grammar ~ Goldberg + Langacker partial-sanction (graded instantiation); Lau-Clark-Lappin SLOR (gradient grammaticality); Bybee usage-based + type-frequency productivity; Hopper emergent grammar (the descriptive↔prescriptive loop) -> ritual-tech ~ Rappaport (the canonical/self-referential split — the invariant score vs the indexical performance); Austin felicity (the performative's success conditions); Schechner (performance as restored behavior); Goodman (the score a performance instantiates) -> discourse-move-form ~ RST + Propp (move-grammars over discourse); the move-n-gram skeleton -> ast-vectors ~ red-green-trees (Roslyn) + tree-sitter (ERROR/MISSING, tree-edit-distance) — the tree-edit-distance teacher for the learned encoder -> multi-aperture ~ RAPTOR (collapsed-tree summary levels); Matryoshka (nested-dimension coarse→fine); late-chunking -> multi-graph ~ ColBERT + RRF (reciprocal rank fusion = the hash-join) -> instant-render ~ the TW5-native full parse-tree payload, hydrate-to-widget -> the-meta-pattern ~ the cross-substrate signature that a living grammar seeds, enacts, corrects, and decays ([[living-grammar|lar:///ha.ka.ba/@lares/api/pono/living-grammar]]) >>
 
 <<~ confidence Synthesis-Canon 13/20 >> Eight independent libations converge on the two-planes geometry
 (a discrete score ⋈ a graded performance) and on Route A (the grammar emits its own markers, so no

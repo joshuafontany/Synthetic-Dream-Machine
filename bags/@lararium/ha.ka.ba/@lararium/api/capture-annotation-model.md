@@ -339,10 +339,10 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/living-grammar >>
 
 **Tie ~ FORM beside CONTENT.** This model captures CONTENT (the verbatim journey + gradient
-annotations); its orthogonal twin, [[living-grammar-palace]], captures the turn's FORM (the constructicon
+annotations); its orthogonal twin, [[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]], captures the turn's FORM (the constructicon
 in use) — the two cross-joined by verbatim-sha + RRF. The form-capture reads the SAME emitted markers
-this model annotates from ([[lar-telemetry]]); the cross-substrate invariant behind both lives at
-[[living-grammar]].
+this model annotates from ([[lar-telemetry|lar:///ha.ka.ba/@lararium/api/lar-telemetry]]); the cross-substrate invariant behind both lives at
+[[living-grammar|lar:///ha.ka.ba/@lares/api/pono/living-grammar]].
 
 <<~/ahu >>
 

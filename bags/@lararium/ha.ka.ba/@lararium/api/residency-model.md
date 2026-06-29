@@ -202,7 +202,7 @@ RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-han
 
 ## Yang / Yin / Chao symmetry preserved
 
-The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
+The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[personal-slot|lar:///ha.ka.ba/@lararium/api/personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
 
 ```
               @temp          ┐
@@ -232,7 +232,7 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 |---|---|---|---|
 | 1 | **Causal-history severance on copy** | Upwelling / Patchwork / Cambria | Preserve `change-id` (Gerrit/Mercurial/jj/Sapling pattern) across ACTION verbs so lifting between bags retains identity |
 | 2 | **Schema drift across multi-bag residency** | Kleppmann EuroSys 2021 | Cambria-style read-time lenses, not write-time migration |
-| 3 | **Kāpae resurrection** | OverlayFS / moby#783 | First-class `tombstone` op distinct from "absent" (the toggleable shadow-vs-fall-through cut: [[kapae]]) |
+| 3 | **Kāpae resurrection** | OverlayFS / moby#783 | First-class `tombstone` op distinct from "absent" (the toggleable shadow-vs-fall-through cut: [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]]) |
 | 4 | **Shadow-override confusion** | TW5 #570, #9139 | Surface `origin-bag` as a tiddler field on every read |
 | 5 | **Recipe-drift poisoning** | Nix overlays / OCI layers | Recipe pins bag-epochs (DXOS-style); `lares wiki diff` shows what would change if pins bumped |
 | 6 | **Concurrent commits into same lower bag** | Upwelling (explicitly unsolved) | Operator-visible commit queue per bag; surface the race rather than hide it |
@@ -300,7 +300,7 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 <<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
-**Tie ~ the palace reads at apertures.** The living-grammar memory-palace ([[living-grammar-palace]])
+**Tie ~ the palace reads at apertures.** The living-grammar memory-palace ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]])
 retrieves multi-aperture (RAPTOR collapsed-tree turn→session→arc levels) — a scale-selection that
 rhymes with this model's thermal residency yet stays distinct (retrieval grain, not warm/cold reach).
 

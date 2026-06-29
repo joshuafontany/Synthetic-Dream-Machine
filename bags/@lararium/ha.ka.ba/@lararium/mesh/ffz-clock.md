@@ -86,7 +86,7 @@ stays one-shot-directed (φ non-interference holds per-edge); there are simply *
 one. Mechanism: the worldline rides the **edge-DAG stamped into the mempalace** (the chat-session store —
 Automerge serves only the DreamNet mesh + wiki-bags, never chat); **Interval Tree Clocks** (fork·event·join)
 model it, **full ticks** (every injection), **turn-DAG-keyed**. Causal rides the edge-DAG; this clock stays
-purely rhythmic ([[agent-worldline]] #time, the kupono models).
+purely rhythmic ([[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline#time]], the kupono models).
 
 **The φ/KAM witness ~ proof, not analogy.** φ stands as the number the **KAM theorem** proves
 **last-to-break** under perturbation (the most robust invariant torus); the averted failure names

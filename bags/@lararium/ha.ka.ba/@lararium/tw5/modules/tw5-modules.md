@@ -31,7 +31,7 @@ Entry points bundled into this artifact:
 - `packages/lararium-tw5/src/memetic-parser.ts` → MemeticParser (TW5 parse tree bridge)
 - `packages/lararium-tw5/src/widgets/*.ts` → individual widget implementations
 
-Canonical widget source tiddler: [[lar:///ha.ka.ba/@lararium/tw5/modules/tw5-widgets]].
+Canonical widget source tiddler: [[tw5-widgets|lar:///ha.ka.ba/@lararium/tw5/modules/tw5-widgets]].
 
 Run `pnpm --filter @lararium/tw5 build` to regenerate.
 

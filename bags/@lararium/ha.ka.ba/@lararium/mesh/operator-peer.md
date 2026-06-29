@@ -59,7 +59,7 @@ between ceremonies. It carries the operator's capability context continuously.
 **OP-2 — Active wiki lanes serve corpus work.**
 Each active wiki lane carries one wiki URI and its recipe stack. The pool manages lane
 LIFECYCLE (mount/evict/teardown); RESIDENCY itself stays ISLAND-OWNED — a bag reads
-wela/anu by reachability from a live island, never by a pool-held tier ([[causal-island]],
+wela/anu by reachability from a live island, never by a pool-held tier ([[causal-island|lar:///ha.ka.ba/@lararium/mesh/causal-island]],
 the island-owned residency law). Active lanes may evict under memory pressure; the admin
 lane does not.
 
@@ -156,7 +156,7 @@ Neither holds a privileged shape; both author intent and observe convergence.
 An AI agent that interfaces with the mesh SHALL hold its own keys, its own replica,
 and its own causal log, reconciling over a real boundary. An agent embedded in the
 daemon's heap — a function call wearing a vessel costume — breaks the
-share-substrate-not-sovereignty law ([[causal-island]] #substrate-not-sovereignty).
+share-substrate-not-sovereignty law ([[causal-island|lar:///ha.ka.ba/@lararium/mesh/causal-island#substrate-not-sovereignty]]).
 Co-location on one machine stays fine; a shared heap/Repo/storage-scope does not.
 
 **OP-AP2 — Identity by held keys, not account or session.**
@@ -188,7 +188,7 @@ keyhive engine boots ONCE, on the always-on **relay**, which amortizes the cost 
 verifies leaf proofs in its keyholder worker. The ContactCard carries no expiry or
 nonce — mint it once (at `lares init`), re-present it forever; proof FRESHNESS rides
 the per-challenge nonce + timestamp, never the cached card (never cache the nonce).
-No contradiction with [[open-vessel]]'s equal-peer claim: leaf and relay share IDENTICAL
+No contradiction with [[open-vessel|lar:///ha.ka.ba/@lararium/mesh/open-vessel]]'s equal-peer claim: leaf and relay share IDENTICAL
 STRUCTURE; they differ only in currently-held CAPABILITIES (the relay holds the keyhive
 engine piece; the leaf has not-yet-held it). Symmetric structure, asymmetric capabilities
 (Ink & Switch) — the one reconciled stance.

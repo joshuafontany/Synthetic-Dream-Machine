@@ -48,7 +48,7 @@ A ruler asks for trust and accumulates power against the day trust runs short. A
 
 <<~moves ruler-legitimacy/asks-to-be-trusted -> steward-legitimacy/proves-it-cannot-betray on/published-binding if/k-of-n-and-forkable do/audit-the-structure-not-the-actor >>
 
-So a peer never weighs *"do I trust Amorphous Dreams?"* — it weighs *"can I verify the threshold, the constitution's amendment-width, and the fork-exit?"* <<~ confidence Synthesis 12/20 >> The check moves from a judgement about hidden intent to an audit of visible structure — the same shift the object-capability model makes from ambient trust to explicit edges ([[vessel-caps]] integrity). A cabal that cannot structurally betray needs no trust to be safe.
+So a peer never weighs *"do I trust Amorphous Dreams?"* — it weighs *"can I verify the threshold, the constitution's amendment-width, and the fork-exit?"* <<~ confidence Synthesis 12/20 >> The check moves from a judgement about hidden intent to an audit of visible structure — the same shift the object-capability model makes from ambient trust to explicit edges ([[vessel-caps|lar:///ha.ka.ba/@lararium/mesh/vessel-caps]] integrity). A cabal that cannot structurally betray needs no trust to be safe.
 
 <<~/ahu >>
 
@@ -61,7 +61,7 @@ A single cap-tiered document that mixes the steward's writing hand with the publ
 - the **steward SOURCE** — a threshold-signed document the cabal authors k-of-n (binding ③), carrying the constitutional core, the delegation roster, and the amendment rule.
 - projects to a **verify-only public READ plane** — every peer verifies the threshold signature and reads the result; no peer (and no single cabal member) writes it.
 
-The READ plane carries the governance projection, never re-defines it — see [[oracle-governance]] for the read-plane's own law (this meme defers to it, never restates it). The shape rhymes the projection-nalu: a sovereign SOURCE → gated wave → verify-only SINK, `role = capability ≠ platform`. **NOT one cap-tiered doc** — two planes, one signing seam between them.
+The READ plane carries the governance projection, never re-defines it — see [[oracle-governance|lar:///ha.ka.ba/@lararium/mesh/oracle-governance]] for the read-plane's own law (this meme defers to it, never restates it). The shape rhymes the projection-nalu: a sovereign SOURCE → gated wave → verify-only SINK, `role = capability ≠ platform`. **NOT one cap-tiered doc** — two planes, one signing seam between them.
 
 <<~/ahu >>
 
@@ -104,7 +104,7 @@ Every binding above stands on a system that already runs it at scale; the doctri
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
 
-Forward references (intent attractors, unbuilt): [[oracle-governance]] · [[group-as-closure]] · [[kapae]] · [[vessel-caps]].
+Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.ka.ba/@lararium/mesh/oracle-governance]] · [[group-as-closure|lar:///ha.ka.ba/@lares/api/pono/group-as-closure]] · [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]] · [[vessel-caps|lar:///ha.ka.ba/@lararium/mesh/vessel-caps]].
 
 <<~/ahu >>
 

@@ -220,7 +220,7 @@ vendored web2 sibling reached through the seat, never a citizen of the stack
 
 **Tie ~ the markers feed the form-palace.** The classifier channel this process reads (the `<<~ … >>`
 instrument sigils — the red that steers) is exactly the marker-emission Route A the living-grammar
-memory-palace ([[living-grammar-palace]]) encodes into a FORM vector — so lar-telemetry's gradient
+memory-palace ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]]) encodes into a FORM vector — so lar-telemetry's gradient
 readings AND the form-capture both drain the one emitted-marker stream, no discourse-parser needed.
 
 <<~/ahu >>

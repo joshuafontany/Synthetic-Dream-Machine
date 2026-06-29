@@ -27,7 +27,7 @@ The fiction sets the test at its worst: the **necrospire** — a persistent adve
 
 ## Two Clocks ~ authority refresh ⊥ flow self-heal
 
-The siege presses on two independent surfaces, and the mesh keeps two clocks against them — the same AUTHORITY ⊥ FLOW master cut the cap-stack rides ([[vessel-caps]]):
+The siege presses on two independent surfaces, and the mesh keeps two clocks against them — the same AUTHORITY ⊥ FLOW master cut the cap-stack rides ([[vessel-caps|lar:///ha.ka.ba/@lararium/mesh/vessel-caps]]):
 
 - **AUTHORITY clock** — *who holds the secret and the membership*. This clock MUST tick FASTER than the adversary creeps. If the necrospire compromises shares slower than the mesh re-randomizes them, it never assembles a live threshold.
 - **FLOW clock** — *state convergence*. This clock MUST self-heal from ANY corrupted state, with no outside hand — a corrupted replica converges back to correct purely by gossip with its honest peers.
@@ -62,9 +62,9 @@ MAY co-occur at a boundary, never fuse.
 The refresh fires on a **scheduled FLOOR plus event-triggers**, never on a global clock:
 
 - a **24-hour scheduled floor** — a guaranteed minimum refresh, even under no observed attack.
-- **event-triggers that may only SHORTEN the window**, never lengthen it: a membership change (a raised [[kapae]] on the membership stack), quorum re-availability after a partition heals, or an IDS / algedonic alarm (#self-stabilization). A trigger brings the next refresh forward; nothing pushes it back.
+- **event-triggers that may only SHORTEN the window**, never lengthen it: a membership change (a raised [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]] on the membership stack), quorum re-availability after a partition heals, or an IDS / algedonic alarm (#self-stabilization). A trigger brings the next refresh forward; nothing pushes it back.
 
-The refresh itself runs **CHURP-style** — cheap dynamic-committee handoff, so the committee may change shape between rounds without a costly full re-deal. The schedule floor stays **LOCAL per committee** — no global tick, FFZ-aligned (no global now; each committee keeps its own clock and event-triggers, see [[causal-islands]]).
+The refresh itself runs **CHURP-style** — cheap dynamic-committee handoff, so the committee may change shape between rounds without a costly full re-deal. The schedule floor stays **LOCAL per committee** — no global tick, FFZ-aligned (no global now; each committee keeps its own clock and event-triggers, see [[causal-islands|lar:///ha.ka.ba/@lares/api/pono/causal-islands]]).
 
 **Tuning the window `T`.** Set the floor against measured detect-and-evict time, never a guessed constant: `T ≤ (t − margin) / λ / k`, where `λ` measures the adversary's per-node creep-rate, `k ≈ 4` carries a safety factor, and `margin` reserves headroom below the threshold `t`. Shorten `T` as measured `λ` rises.
 
@@ -76,18 +76,18 @@ The refresh itself runs **CHURP-style** — cheap dynamic-committee handoff, so 
 
 ## The Repair-Kit ~ the delegate's verbs
 
-The maintainer (the bounded repair hand of [[steward-doctrine]]) carries a small, typed verb-set — each verb a known protocol, none invented here:
+The maintainer (the bounded repair hand of [[steward-doctrine|lar:///ha.ka.ba/@lararium/mesh/steward-doctrine]]) carries a small, typed verb-set — each verb a known protocol, none invented here:
 
 | verb | what it does | carried by |
 |---|---|---|
 | **re-key** | rotate a member's key forward; heal a past compromise | TreeKEM / MLS Update — post-compromise security |
 | **re-share** | re-randomize the threshold shares; expire old theft | PSS refresh (#reset-the-clock) |
-| **evict** | blank a member's path so it loses ALL future access | TreeKEM blank-the-path + a [[kapae]] on the membership stack |
+| **evict** | blank a member's path so it loses ALL future access | TreeKEM blank-the-path + a [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]] on the membership stack |
 | **heal-partition** | re-converge two halves after a split | gossip / epidemic anti-entropy |
 | **recover-from-fork** | re-anchor a forked island to a trusted line | weak-subjectivity CHECKPOINT — a guardian-signed re-genesis seed |
 | **re-genesis** | re-seed a destroyed island from the guardians | guardian-threshold social-recovery + a TIME-LOCK |
 
-Two verbs carry a sharp edge worth naming. **evict** runs forward-only — TreeKEM's blank-the-path removes *future* access (the evicted member keeps what it already read); pair it with the membership-stack [[kapae]] so the eviction shadows resurrection. **re-genesis** carries a **TIME-LOCK by design** — a guardian-threshold can re-seed a lost island, but the time-lock gives the legitimate operator a veto window to refuse an *attacker's* recovery attempt. <<~ confidence Synthesis 11/20 >> Without the lock, the social-recovery path itself becomes the adversary's cleanest entry — designation must carry authority and fail loud, never recover silently.
+Two verbs carry a sharp edge worth naming. **evict** runs forward-only — TreeKEM's blank-the-path removes *future* access (the evicted member keeps what it already read); pair it with the membership-stack [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]] so the eviction shadows resurrection. **re-genesis** carries a **TIME-LOCK by design** — a guardian-threshold can re-seed a lost island, but the time-lock gives the legitimate operator a veto window to refuse an *attacker's* recovery attempt. <<~ confidence Synthesis 11/20 >> Without the lock, the social-recovery path itself becomes the adversary's cleanest entry — designation must carry authority and fail loud, never recover silently.
 
 <<~/ahu >>
 
@@ -110,7 +110,7 @@ The biological shape carries real structure, never decoration:
 
 The two clocks, the cadence, and the repair-kit run **at each shrine tier autonomously** — Household, Crossroads, Temple — each tier a viable system that refreshes its own authority and self-heals its own flow without a parent's permission (VSM recursion, #self-stabilization). No tier waits on the tier above to survive a local breach.
 
-<<~ confidence Synthesis 12/20 >> This autonomy explains a build decision already taken: the Herm (the crossroads-marker, the minimal wayfarer of [[vessel-caps]]) now carries the **@daemon** as its keel — so even a pure-carriage waystation runs its own refresh clock and repair hand, rather than depending on a distant operator to defend it. A mesh whose smallest nodes can each reset their own clock has no single window the necrospire can pry.
+<<~ confidence Synthesis 12/20 >> This autonomy explains a build decision already taken: the Herm (the crossroads-marker, the minimal wayfarer of [[vessel-caps|lar:///ha.ka.ba/@lararium/mesh/vessel-caps]]) now carries the **@daemon** as its keel — so even a pure-carriage waystation runs its own refresh clock and repair hand, rather than depending on a distant operator to defend it. A mesh whose smallest nodes can each reset their own clock has no single window the necrospire can pry.
 
 <<~/ahu >>
 
@@ -122,7 +122,7 @@ The two clocks, the cadence, and the repair-kit run **at each shrine tier autono
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
 
-Forward references (intent attractors, unbuilt): [[oracle-governance]] · [[group-as-closure]] · [[kapae]] · [[vessel-caps]].
+Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.ka.ba/@lararium/mesh/oracle-governance]] · [[group-as-closure|lar:///ha.ka.ba/@lares/api/pono/group-as-closure]] · [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]] · [[vessel-caps|lar:///ha.ka.ba/@lararium/mesh/vessel-caps]].
 
 <<~/ahu >>
 

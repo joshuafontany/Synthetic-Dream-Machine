@@ -80,7 +80,7 @@ The siege names which clock is load-bearing: **the proactive-refresh EPOCH** (th
 
 <<~moves epoch-cadence -> paced-to/the-adversary's-measured-creep-rate not/convenience-nor-e-for-elegance do/re-key-before-the-threshold-falls >>
 
-<<~ confidence Synthesis 13/20 >> This is the siege-resilience **two clocks** made concrete ([[siege-resilience]] #cadence): the AUTHORITY-refresh epoch ⊥ the FLOW self-heal. The authority epoch is the one that must beat the necrospire; the flow layer self-stabilizes underneath it (Dijkstra). The epoch length is the lever — too long and the creep crosses the threshold; short enough and the siege never accrues.
+<<~ confidence Synthesis 13/20 >> This is the siege-resilience **two clocks** made concrete ([[siege-resilience|lar:///ha.ka.ba/@lararium/mesh/siege-resilience#cadence]]): the AUTHORITY-refresh epoch ⊥ the FLOW self-heal. The authority epoch is the one that must beat the necrospire; the flow layer self-stabilizes underneath it (Dijkstra). The epoch length is the lever — too long and the creep crosses the threshold; short enough and the siege never accrues.
 
 <<~/ahu >>
 
@@ -90,7 +90,7 @@ The siege names which clock is load-bearing: **the proactive-refresh EPOCH** (th
 
 FlipIt's **dropout** result sets a hard precondition the timing law cannot escape: the equilibrium tracks the **ratio of move costs**, and a defender whose refresh costs too much relative to the adversary's compromise **should drop to rate 0** — you cannot out-refresh an attacker who seizes you far more cheaply than you re-key.
 
-<<~ confidence Synthesis 13/20 >> So the **siege-cost / voucher dial** (the membership cost-gate, [[veil-cost-dial-design]], [[siege-resilience]]) stands as a **first-class precondition** on the whole timing law, not a separate concern: raise the necrospire's per-compromise cost (`rb > c`, co-pay-and-watch, ZK-vouch) or no cleverness of timing saves the island. Timing buys time only while the rate-advantage sits with the defender.
+<<~ confidence Synthesis 13/20 >> So the **siege-cost / voucher dial** (the membership cost-gate, [[veil-cost-dial-design]], [[siege-resilience|lar:///ha.ka.ba/@lararium/mesh/siege-resilience]]) stands as a **first-class precondition** on the whole timing law, not a separate concern: raise the necrospire's per-compromise cost (`rb > c`, co-pay-and-watch, ZK-vouch) or no cleverness of timing saves the island. Timing buys time only while the rate-advantage sits with the defender.
 
 <<~/ahu >>
 
@@ -98,7 +98,7 @@ FlipIt's **dropout** result sets a hard precondition the timing law cannot escap
 
 ## φ stays INTRA-clock ~ the scope that vindicates it
 
-The grammar's golden `φ≈1.618` ([[living-grammar-palace]], [[ffz-clock]] #phi) reads **correct and untouched** — for **one clock's** five-band orthogonality it sits exactly in the d=1 KAM regime where φ is provably the last torus to break. The only error would be **extrapolation**: promoting a within-one-clock optimum to a between-all-clocks law. Inter-clock the regime changes **kind, not value** — local-choice + pairwise-incommensurability, frame-relative the way proper-time is each frame's own. φ rules inside a node's band-stack; the mesh rules between nodes by the invariant. Different layer, different law.
+The grammar's golden `φ≈1.618` ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]], [[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#phi]]) reads **correct and untouched** — for **one clock's** five-band orthogonality it sits exactly in the d=1 KAM regime where φ is provably the last torus to break. The only error would be **extrapolation**: promoting a within-one-clock optimum to a between-all-clocks law. Inter-clock the regime changes **kind, not value** — local-choice + pairwise-incommensurability, frame-relative the way proper-time is each frame's own. φ rules inside a node's band-stack; the mesh rules between nodes by the invariant. Different layer, different law.
 
 <<~/ahu >>
 

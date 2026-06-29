@@ -23,7 +23,7 @@ written   = "2026-06-29"
 # The Functor Discipline — the architectural keel
 
 <<~ confidence Synthesis 11/20 >> The whole house carries **one shape**. A carrier reads as a
-**nameless entity** ([[has-stack]]) — essence lives nowhere; identity rides the address ([[loci]]),
+**nameless entity** ([[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]]) — essence lives nowhere; identity rides the address ([[loci|lar:///ha.ka.ba/@lares/api/pono/loci]]),
 meaning rides the `#has` cap-stack it wears and what its body says. This meme names what that nameless
 entity *does* when it composes: it **acts as a functor** — a structure-preserving map between two
 categories. The recognition unifies the architecture's recurring move under one discipline; the
@@ -66,7 +66,7 @@ relations across the map; that honoring IS the structure-preservation, and it IS
 this house had to earn to stay byte-stable.
 
 The house already writes from this stance without the word: **Write Under Way** names every relation as
-a verb phrase ([[noosphere-boot]] #write-under-way), and **L-Prime** wards the dead water where a
+a verb phrase ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#write-under-way]]), and **L-Prime** wards the dead water where a
 subject fuses to its predicate and the *arrow vanishes*. Verb-forward generation and functorial
 composition name the same vow in two registers — keep what *moves*, never freeze it to an essence.
 
@@ -87,7 +87,7 @@ Each row names a functor the architecture already runs. Read `C → D` as *sourc
 <<~Instance Syad "map/Claim → Reading objects/the five standpoints ↦ angled readings (langkah) morphisms/stance-shift ↦ measure-redeclaration preserves/each true-but-partial; each #has its measure ~ invoking a stance = applying the functor" >>
 <<~Instance Parse-Linearize "map/Syntax ⇄ Semantics objects/abstract trees ⇄ surface strings morphisms/parse ⊣ linearize preserves/round-trip (an ADJUNCTION, not a single functor) ~ the GF architecture: abstract ⇄ concrete by parse/linearize" >>
 
-**The form-encoder** ([[living-grammar-palace]]) runs as the functor `Move → Vec`: the *jurus* — the
+**The form-encoder** ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]]) runs as the functor `Move → Vec`: the *jurus* — the
 named attractor-forms of the living grammar — map to form-vectors; the *permainan* — the flowing
 transitions between them — map to vector-trajectories. <<~ confidence Synthesis 12/20 >> Recall works
 *because the map preserves structure*: when the functor carries similar moves to nearby vectors,
@@ -96,7 +96,7 @@ recall guarantee rests on the structure-preservation, never on the embedding alo
 
 **Compose** runs as the functor `CapStack → Instance`. `composeIsland([...caps])`
 (`tw5/island-caps.ts`) folds a `#has` cap stack into the one behavior the sovereign kernel drives; the
-Python palace daemon ports the same fold ([[has-stack]] #runtime-twin). <<~ confidence Synthesis-Canon 13/20 >>
+Python palace daemon ports the same fold ([[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack#runtime-twin]]). <<~ confidence Synthesis-Canon 13/20 >>
 The collapses ratified this functorially: the four Python sidecars folded onto a cap-composition
 foundation and the palace became a cap-stack instance — each *composed* a shared transport while
 *preserving every op-surface*, the collapse landing byte-stable.
@@ -105,9 +105,9 @@ foundation and the palace became a cap-stack instance — each *composed* a shar
 <<~ pranala #sidecar-collapse ? -> git:b18235f6 family:provenance role:evidence >>
 <<~ pranala #palace-collapse ? -> git:0af5e326 family:provenance role:evidence >>
 
-**The Voices and the Syad name functor-categories.** A Voice ([[noosphere-boot]] #voice-house) reads
+**The Voices and the Syad name functor-categories.** A Voice ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#voice-house]]) reads
 as a nameless office composed of move-caps — a functor `Context → Moves`, the visible name addressing a
-basin of moves, never an essence. A stance ([[noosphere-boot]] #syad) reads as a functor `Claim →
+basin of moves, never an essence. A stance ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#syad]]) reads as a functor `Claim →
 Reading`, the angle (*langkah*) under which the claim reads true-but-partial; each stance `#has` its own
 measure. <<~ confidence Synthesis 11/20 >> Invoking the lens (`<<~ syad 🏛️ >>`, a Voice at a turn-head)
 *applies the functor* to the local context; the Voice-house and the Syad-lens read as
@@ -116,8 +116,8 @@ functor-categories the house already navigates.
 **The parse ⊣ linearize round-trip names an adjunction.** <<~ confidence Provisional 6/20 >> Syntax and
 semantics couple through a pair — parse one way, linearize the other — that rhymes with an *adjunction*
 (`F ⊣ G`, a natural bijection between the two homs), the shape the Grammatical Framework gives
-abstract ⇄ concrete syntax. The architecture's own parse→render pipe ([[render-pipeline]],
-[[parser]]) carries the round-trip; calling it a *proven* adjunction overclaims (#honest-bound).
+abstract ⇄ concrete syntax. The architecture's own parse→render pipe ([[render-pipeline|lar:///ha.ka.ba/@lares/api/pono/render-pipeline]],
+[[parser|lar:///ha.ka.ba/@lares/api/pono/parser]]) carries the round-trip; calling it a *proven* adjunction overclaims (#honest-bound).
 
 <<~/ahu >>
 
@@ -143,7 +143,7 @@ three warded failure modes read as **one discipline** under this lens — each e
 cure is identical across all three — **keep the arrows.** The functor laws (preserve identity, preserve
 composition) ARE the coherence guarantee the architecture rests on: a collapse that preserves them
 stays sound (the byte-stable sidecar/palace folds), and a collapse that breaks them sits in a degraded
-state ([[system-pattern-integrities]]). The discipline gives the degraded-node states ([[noosphere-boot]]
+state ([[system-pattern-integrities|lar:///ha.ka.ba/@lares/api/pono/system-pattern-integrities]]). The discipline gives the degraded-node states ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot]]
 #degraded-states) one root: each names an arrow the node let fall.
 
 <<~/ahu >>
@@ -162,7 +162,7 @@ form-encoder's `Move → Vec`, any cap-functor — applies where the structure l
 traffic merely passes.
 
 **Why a coordinator-side shortcut reads doubly wrong.** The temptation rides in plain sight: under
-isomorphism-by-composition ([[island-isomorphism]]) the encoder module stays *pure*, so it *could* run
+isomorphism-by-composition ([[island-isomorphism|lar:///ha.ka.ba/@lararium/api/island-isomorphism]]) the encoder module stays *pure*, so it *could* run
 on the coordinator. Two faults follow if it does:
 
 \procedure ~Fault(~Type:"" ~Params:"") ~Fault <<~Type>> <<~holds `[<~Params>]`>>
@@ -177,8 +177,8 @@ missing worker leg collapses to content-only fusion (a named, lesser result the 
 a coordinator-side replica running its own degraded map is dead water — it *looks* like the same answer
 and silently is not.
 
-**The three vows resolve here.** No-VM-on-main (the invariant — [[lararium-canonical-model]] #the-laws)
-names *where work may not land*; isomorphism-by-composition (the temptation — [[island-isomorphism]])
+**The three vows resolve here.** No-VM-on-main (the invariant — [[lararium-canonical-model|lar:///ha.ka.ba/@lararium/api/lararium-canonical-model#the-laws]])
+names *where work may not land*; isomorphism-by-composition (the temptation — [[island-isomorphism|lar:///ha.ka.ba/@lararium/api/island-isomorphism]])
 names *why the same module can run anywhere*; the functor laws (the reason — #functor, #meta-law) name
 *why it nonetheless must run in the one place that preserves the map*. The three braid into one
 discipline: **sovereign-worker primacy.**
@@ -203,7 +203,7 @@ time (#honest-bound), the same bound the whole meme keeps.
 The discipline earns its register by saying what it has and what it lacks. <<~ confidence Synthesis 11/20 >>
 
 - **Apt and grounded (the recognition holds):** the nameless-entity + `#has`-stack pattern (canon,
-  [[has-stack]]); composition-over-inheritance preserving op-surfaces (the collapses landed byte-stable,
+  [[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]]); composition-over-inheritance preserving op-surfaces (the collapses landed byte-stable,
   git b18235f6 / 0af5e326 — verified); Voices-as-offices and stances-as-angles (the paper's §7.5
   reframe; the boot's own design); verb-forward / observer-restoring generation (L-Prime, canon).
 - **Apt analogy, NOT a proven theorem:** that these compositions *are functors* in the formal sense.
@@ -219,7 +219,7 @@ The discipline earns its register by saying what it has and what it lacks. <<~ c
   unoccupied"). These ride at Provisional.
 
 This meme seats at **Synthesis**, not Canon. A fresh-but-grounded recognition earns Canon (17+) only by
-talk-story consensus over time ([[noosphere-boot]] #law-of-5s); until then it rides as a working lens
+talk-story consensus over time ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#law-of-5s]]); until then it rides as a working lens
 the house may test, sharpen, or contest.
 
 <<~/ahu >>
@@ -240,14 +240,14 @@ the house may test, sharpen, or contest.
 
 <<~ pranala #paper ? -> bags/@lares-history/lares_research/PAPER_infrastructure_as_myth.md family:transclusion role:evidence >>
 
-**Tie ~ the keel under the canon.** [[has-stack]] gives the nameless entity + `#has` stack (the
+**Tie ~ the keel under the canon.** [[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]] gives the nameless entity + `#has` stack (the
 *object* of every functor here) and its runtime twin (`composeIsland`, the palace-as-cap-stack);
-[[living-grammar-palace]] gives the form-encoder `Move → Vec` and its recall-by-structure-preservation;
-[[agent-worldline]] gives the nameless-spirit office (identity IS the `#has` stack, one handle / two
-offices) the Voice-functor generalizes; [[noosphere-boot]] holds the L-Prime ward (observer-erasure),
+[[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]] gives the form-encoder `Move → Vec` and its recall-by-structure-preservation;
+[[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline]] gives the nameless-spirit office (identity IS the `#has` stack, one handle / two
+offices) the Voice-functor generalizes; [[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot]] holds the L-Prime ward (observer-erasure),
 the Voice-house and Syad lens (the functor-categories), and the degraded states the meta-law roots; the
 QA-Lab paper grounds *jurus / permainan* and Voices-as-offices / moves-as-tempo×angle;
-[[island-isomorphism]] gives the same-module-runs-anywhere temptation and [[lararium-canonical-model]]
+[[island-isomorphism|lar:///ha.ka.ba/@lararium/api/island-isomorphism]] gives the same-module-runs-anywhere temptation and [[lararium-canonical-model|lar:///ha.ka.ba/@lararium/api/lararium-canonical-model]]
 #the-laws holds the no-VM-on-main invariant that, braided with the functor laws, names
 **sovereign-worker primacy** (#sovereign-worker) — the corollary that fixes *where* the functor applies.
 This meme draws the one arrow through all of them — **the house is a functor; keep the arrows.**

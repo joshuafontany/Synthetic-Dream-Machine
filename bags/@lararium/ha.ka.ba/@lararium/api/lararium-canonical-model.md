@@ -34,7 +34,7 @@ sub-memes; this carries the keel + the meme map.
 
 1. **Causal islands / no global now.** Each island (vessel · wiki · meme · node-edge)
    holds its own partially-ordered log; it knows only "as of my last sync." Local-first:
-   read own state, never a global truth. ([[causal-island]])
+   read own state, never a global truth. ([[causal-island|lar:///ha.ka.ba/@lararium/mesh/causal-island]])
 2. **Share substrate, not sovereignty.** Co-located vessels MAY share a substrate
    (machine · disk · relay · canon read) but MUST NOT share sovereignty (replica · heap ·
    storage scope · keys · log · "now"). Boundary = mutable state, not hardware.
@@ -44,7 +44,7 @@ sub-memes; this carries the keel + the meme map.
 4. **Same structure, differing capabilities (Ink & Switch).** Node and browser differ
    ONLY in capabilities, never in structure. The capability set GROWS — init/PersonaGroup/
    genesis/corpus/residency SHALL become browser-composable. Absent reads not-yet-held,
-   never cannot-hold; no `isNode` fork, no permanently-absent slot. ([[open-vessel]])
+   never cannot-hold; no `isNode` fork, no permanently-absent slot. ([[open-vessel|lar:///ha.ka.ba/@lararium/mesh/open-vessel]])
 5. **No VM on the main thread.** Every TW5 VM / reaction engine boots in a Worker
    (worker_threads · DedicatedWorker); the main thread only COORDINATES the pool over
    MessagePort. ([[project_no_vm_on_main_thread]])
@@ -55,7 +55,7 @@ sub-memes; this carries the keel + the meme map.
 7. **Two-register persona, two-lane vessel.** Userbase = presence (ley-line threshold) +
    office (held grants), no stored tiers. Every vessel runs one always-resident admin VM
    lane + zero-or-more wiki lanes; lanes coordinate via the command/receipt tiddler
-   surface, never shared state. ([[operator-peer]], [[project_two_register_persona_model]])
+   surface, never shared state. ([[operator-peer|lar:///ha.ka.ba/@lararium/mesh/operator-peer]], [[project_two_register_persona_model]])
 8. **Island-owned residency.** Bags hold no tier manager; residency (wela/anu + orthogonal
    pin) flows DOWN from islands by reachability — a bag reads wela if any wela island
    reaches it. ([[project_residency_tiers_unified]])
@@ -130,7 +130,7 @@ Boot sequence (invariant on every substrate): `boot → repo-open → catalog-re
 island-ready → wiki-ready → vessel-ready → corpus-ready → tw5-booted → live`, gating on
 the admin island's `ea` before any wiki mounts. The shared keel lives in
 `open-vessel-core.ts` (assembleVessel + mountWikiSlot); platform recipes supply the
-substrate atoms + the capability pieces they hold. ([[open-vessel]])
+substrate atoms + the capability pieces they hold. ([[open-vessel|lar:///ha.ka.ba/@lararium/mesh/open-vessel]])
 
 <<~/ahu >>
 
@@ -238,9 +238,9 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/living-grammar >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/lares/noosphere-boot >>
 
-**Tie ~ the living grammar.** The house's grammar lives as a pattern-integrity ([[living-grammar]]) —
+**Tie ~ the living grammar.** The house's grammar lives as a pattern-integrity ([[living-grammar|lar:///ha.ka.ba/@lares/api/pono/living-grammar]]) —
 seeded by the boot, enacted per turn, corrected by degree, decaying untended; the memory-palace that
-captures its FORM beside the verbatim CONTENT stands at [[living-grammar-palace]].
+captures its FORM beside the verbatim CONTENT stands at [[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]].
 
 <<~ &#x0003; >>
 

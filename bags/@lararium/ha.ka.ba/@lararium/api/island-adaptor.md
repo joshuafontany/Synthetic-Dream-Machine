@@ -67,7 +67,7 @@ recipe-priority order before enqueue (the **kāpae** semantics): a tombstone in 
 higher-priority bag SHADOWS the bags beneath it (the cascade stops, the title reads
 gone — resurrection-prevention); only a live copy in a higher-priority bag surfaces
 over a lower tombstone. The winning record — live or tombstone — reaches
-`enqueueNalu`, never both. (the shadow-vs-fall-through cut: [[kapae]])
+`enqueueNalu`, never both. (the shadow-vs-fall-through cut: [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]])
 
 **I-3 Single forwarding path for all origins.**
 Every inbound change — `crdt-remote`, `canon-hydrate`, `lares-verb` — flows through

@@ -22,7 +22,7 @@ Verse equivalent: `OnSimulate(StagedUpdates)<suspends>` entry point.
 
 **Status: DEFERRED** — full pono law spec and Hawaiian proper name await Visual Verse tick node
 confirmation (UE6 target ~2027). The *nalu* (wave) is the infrastructure concept below this;
-`\tick` is the grammar-layer hook into the nalu. See [[nalu]] for the wave architecture.
+`\tick` is the grammar-layer hook into the nalu. See [[nalu|lar:///ha.ka.ba/@lares/api/pono/nalu]] for the wave architecture.
 
 Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration only for now.
 

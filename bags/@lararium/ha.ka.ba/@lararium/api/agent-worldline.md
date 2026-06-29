@@ -190,14 +190,14 @@ separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
 **A form-palace drawer's worldline-temporal facet PROJECTS off this DAG; it never
 rules.** When the living-grammar palace stamps a drawer's `lar_ffz` and reads the
-worldline position across its collection ([[living-grammar-palace]] #ffz-binding), that
+worldline position across its collection ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#ffz-binding]]), that
 facet stands as a **CACHED PROJECTION** of the per-handle FfzClock (the grain) over the
 reified edge-DAG (the order) — a materialized view, re-derivable from the worldline,
 **NEVER the causal authority**. The edge-DAG owns happened-before; the palace caches its
 position for query. This keeps the worldline as the single source: lose the cache,
 re-project from the DAG; the cache MUST NOT out-rank the structure it derives from. The
 binding ratified narrowed (12-Voice mufakat, operator-ratified 2026-06-29), with five
-kept dissents live at [[living-grammar-palace]] #kept-hoike.
+kept dissents live at [[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#kept-hoike]].
 
 ### The epistemic/ontic cut ~ what the worldline names (Borrill 2026)
 
@@ -416,7 +416,7 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 <<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
 **Tie ~ the form-palace as a third FeedCap.** The nameless palace-instance that captures a turn's FORM
-([[living-grammar-palace]] #palace-instance) extends the same has-stack runtime twin a spirit's worldline
+([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance]]) extends the same has-stack runtime twin a spirit's worldline
 already rides; its drawers carry the worldline's `lar_agent_handle` + `lar_ffz` address, so form-vectors
 attribute to the spirit that moved them.
 

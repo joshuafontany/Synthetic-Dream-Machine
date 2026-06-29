@@ -495,7 +495,7 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice
 <<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
 **Tie ~ palettes as casual register.** A per-operator overlay (palette, view-state) reads as the CASUAL
-register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace]]
+register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace]]
 #three-registers).
 
 <<~ &#x0003; >>

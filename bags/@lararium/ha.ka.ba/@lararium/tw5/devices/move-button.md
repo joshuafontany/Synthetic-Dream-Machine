@@ -19,7 +19,7 @@ verb       = "MOVE"
 
 # move-button Device
 
-A kumu device type that fires the `MOVE` residency ACTION verb when its InteractedWithEvent listenable activates. `MOVE` performs the atomic `ADD`-to-destination + `REMOVE`-from-source gesture defined by the residency model — the source **retracts to absent** (the `remove` primitive that falls through, so the canonical copy beneath surfaces), never a `CLEAR` that raises a kāpae shadow ([[kapae]], residency anti-pattern #3). The coordinate-space successor to the retired canon-promotion ceremony.
+A kumu device type that fires the `MOVE` residency ACTION verb when its InteractedWithEvent listenable activates. `MOVE` performs the atomic `ADD`-to-destination + `REMOVE`-from-source gesture defined by the residency model — the source **retracts to absent** (the `remove` primitive that falls through, so the canonical copy beneath surfaces), never a `CLEAR` that raises a kāpae shadow ([[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]], residency anti-pattern #3). The coordinate-space successor to the retired canon-promotion ceremony.
 
 **Verse analogue:** a `button_device` whose `InteractedWithEvent` is wired via DEB to a handler
 that issues a residency `MOVE`. In Lares the DEB wire becomes a papalohe edge on the instance meme;

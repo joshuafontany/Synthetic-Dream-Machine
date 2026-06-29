@@ -48,7 +48,7 @@ The strict-bytes vs canonical-form fork resolves **canonical-form** (field-wide 
 ### 3 · Layered multi-bag composition
 
 - Recipe = ordered stack, later bag shadows per-title; **bag = locus of namespace AND access control** (TiddlyWeb 2008 → MWS Bags & Recipes — our own ancestor validates the shape).
-- **Shadowing cannot express "remove from below"** (OCI whiteouts; overlayfs opaque markers): a layered delete eventually needs an explicit **tombstone/whiteout verb**. ~~Reserved, not scheduled.~~ **Realized as kāpae** (2026-06) — the tombstone op shipped: `store.tombstone` / CLEAR / DROP / `listKapaeBags`, the toggleable shadow held distinct from *absent* (the `remove` fall-through). See [[kapae]] + residency-model anti-pattern #3.
+- **Shadowing cannot express "remove from below"** (OCI whiteouts; overlayfs opaque markers): a layered delete eventually needs an explicit **tombstone/whiteout verb**. ~~Reserved, not scheduled.~~ **Realized as kāpae** (2026-06) — the tombstone op shipped: `store.tombstone` / CLEAR / DROP / `listKapaeBags`, the toggleable shadow held distinct from *absent* (the `remove` fall-through). See [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]] + residency-model anti-pattern #3.
 - **The closure ruling firms** (vector 3): npm's flat hoisting birthed phantom dependencies; pnpm's strictness + lockfiles killed them; the OCI manifest names its full ordered layer list even though built transitively. The lean graduates to a researched recommendation: **resolve transitively at mount-time, record the flattened ordered closure in the consumer's own recipe** — plus a deliberate lock-refresh verb and `--frozen-lockfile`-spirit drift detection.
 
 ### 4 · Residency & ownership across replicas

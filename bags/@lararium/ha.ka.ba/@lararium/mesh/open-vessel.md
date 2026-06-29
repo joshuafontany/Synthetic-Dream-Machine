@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/@lararium/mesh/open-vessel"
 
 # The Vessel — One Composable Web3 Design
 
-The authority contract lives in [[operator-peer]] (two-lane law, ea, actor-parity).
+The authority contract lives in [[operator-peer|lar:///ha.ka.ba/@lararium/mesh/operator-peer]] (two-lane law, ea, actor-parity).
 This meme owns the **compositional structure**: what a vessel composes FROM, and the
 ONE factory shape both platforms instance. It supersedes the per-platform factory
 drift (see #drift).
@@ -64,10 +64,10 @@ them, it does not re-implement them.
 
 | # | Participation | Protocol | Source |
 |---|---|---|---|
-| 1 | **Identity** | keyhive / did:key — keypair + self-certifying ContactCard | [[operator-peer]] #actor-parity (light leaf identity) |
-| 2 | **Replica** | Automerge Repo = own log + own storage scope; no global now | [[causal-island]] #substrate-not-sovereignty |
+| 1 | **Identity** | keyhive / did:key — keypair + self-certifying ContactCard | [[operator-peer|lar:///ha.ka.ba/@lararium/mesh/operator-peer#actor-parity]] (light leaf identity) |
+| 2 | **Replica** | Automerge Repo = own log + own storage scope; no global now | [[causal-island|lar:///ha.ka.ba/@lararium/mesh/causal-island#substrate-not-sovereignty]] |
 | 3 | **Peering** | NetworkAdapter + inbound-access policy as a **capability** | V3 peer-auth (auth-wire); sharePolicy |
-| 4 | **Recipe + residency** | CompositeStore bag-cascade + residency tiers | [[causal-island]], residency-tiers, disk-projection |
+| 4 | **Recipe + residency** | CompositeStore bag-cascade + residency tiers | [[causal-island|lar:///ha.ka.ba/@lararium/mesh/causal-island]], residency-tiers, disk-projection |
 | 5 | **Sovereign islands** | TW5-in-Worker VM pool; syncPort per island | [[project_no_vm_on_main_thread]], island-protocol |
 | 6 | **Admin island** | authn/z home; keyhive-in-worker; verb dispatch + binding | verify-then-delegate; admin-vm-core |
 | 7 | **Verb plane** | verb-tiddler invocation → outcome (UCAN-invocation shape) | verb-tiddler; [[project_asymmetric_peer_handoff]] |

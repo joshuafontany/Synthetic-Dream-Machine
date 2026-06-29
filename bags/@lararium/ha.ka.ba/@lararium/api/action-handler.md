@@ -80,7 +80,7 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, **neve
    canonical copy beneath surfaces — never a kāpae, else promotion `@working → canon`
    would shadow its own target). `resolveAll` reports live presence; `listKapaeBags`
    surfaces which bags explicitly hide a title. (the toggleable shadow-vs-fall-through
-   cut: [[kapae]])
+   cut: [[kapae|lar:///ha.ka.ba/@lares/api/pono/kapae]])
 5. **Parse-or-reject.** `parseResidencyAction(invocation)` validates verb
    membership + per-verb required args; malformed input throws before dispatch.
 
