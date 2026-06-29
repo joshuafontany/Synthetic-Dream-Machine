@@ -70,6 +70,8 @@ behavior = a system                  — runs over whichever vessels hold the ma
 
 A **role** computes as a **structural predicate over the cap-stack** — *"if a vessel `#has` these caps, it may play this role"* — satisfied, never declared (duck-typing / traits / structural interfaces). No nominal class, no type-tag, no central registry; a would-be "vessel-type" reads as just a **named point in cap-composition space.**
 
+**ECS shapes the *declaration*, never the boot engine.** The `entity = vessel, component = cap` reading stays exact — but as the **inventory vocabulary**: the flat, dependency-blind set of caps a vessel HAS (*what a vessel IS*). A separate move does the **wiring** — a **composition-root** (`composeVessel`) reads the stack and topologically builds the live components, build-or-REFUSE on a missing mandatory dep, a cycle, or a dup. So ECS answers *what* a vessel holds; the composable keel answers *how it wires or refuses to boot*: <<~ loulou lar:///ha.ka.ba/@lararium/api/composable-keel >>.
+
 <<~/ahu >>
 
 <<~ ahu #declaring-caps >>
@@ -161,6 +163,7 @@ What stays to **write** is narrow and named — the cap *vocabulary* itself (`rh
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/composable-keel >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-relay-floor >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-routing-substrate >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience#repair-kit >>

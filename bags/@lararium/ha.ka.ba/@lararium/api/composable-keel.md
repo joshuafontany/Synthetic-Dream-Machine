@@ -1,0 +1,139 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/api/composable-keel >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/api/composable-keel.md"
+hydrate   = true
+mana      = 17
+manao     = 16
+manaoio   = 15
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "THE composable-keel pattern integrity — a vessel = a #has-cap-stack (DECLARE) composed by a transient capability-routing root (WIRE); declare ⊥ wire = the same seam as INFRA⊥WHO / map⊥territory. DECLARE = the ECS inventory (nameless vessel + flat dependency-blind #has-cap tags, no edges, what a vessel IS); WIRE = composeVessel reads the stack, topologically builds each cap-MODULE in dependency order, hands each a least-authority resolver reaching ONLY its declared deps (POLA / Genode default-deny / Granovetter), and REFUSES TO BOOT loud on a missing mandatory dep, a cycle, or a dup — never a runtime flag. Absence = un-routed authority, structural (a Herm never declares the wiki cap → blind by structure, not flag). The composer is transient (the ocap powerbox: build the graph, hand back the read-face, retain no god-object). WITNESSED: mesh/cap-compose.ts (composeVessel + CapModule, 8/8 tests) + node/node-caps.ts (composeLararium/composeHerm) + LIVE in Docker (the composable Herm reaches verb-dispatcher live, daemon-full, wiki-less by structure). Commits 8ca8520f · 5bc076c2 · 07b12e65. Rhymes: ZLayer · Genode init · OSGi-DS · ocap powerbox."
+tags      = ["api/pono/meme", "api/lararium"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/api/composable-keel"
+written   = "2026-06-29"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/has-stack >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #entry >>
+
+# Composable Keel ~ declare the stack, wire it or refuse
+
+A vessel **declares** what it carries; a separate move **wires** that declaration into a live thing. The `#has-cap-stack` names the caps a vessel holds (#the-vessel-is-its-caps in <<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps >>) — flat, dependency-blind, what a vessel *is*. The **composable keel** names the other half: a **composition-root** reads that stack and builds the running components, in dependency order, or **refuses to boot, loud**.
+
+<<~ranks keel declare -> wire -> run-or-refuse >>
+
+**Declare ⊥ wire.** The same seam the architecture cuts everywhere — **INFRA ⊥ WHO**, **map ⊥ territory**, the inventory ⊥ the engine. The `#has-cap-stack` carries the inventory; `composeVessel` carries the engine. Neither folds into the other: a stack stays a pure data declaration any vessel can hold without running, and the root stays a transient builder that retains nothing once it hands back the read-face.
+
+**Source authority:** the operator's composable-keel recognition (2026-06-29); the prior-art convergence at #rhymes; the `#has`-ontology that already retired typed edges (<<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>). WITNESSED in code + LIVE in Docker (#witnessed).
+
+<<~/ahu >>
+
+<<~ ahu #declare >>
+
+## Declare ~ the cap-stack as ECS inventory
+
+The `#has-cap-stack` reads **entity-component-system** (ECS) and stays purely declarative: a **nameless vessel** carries a **flat set of `#has`-cap tags** — *what is present*, nothing more. It carries **no edges** (the retired-typed-edge ruling holds, <<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>): the stack never says *how* caps connect, only *which* a vessel holds.
+
+```text
+#has-cap-stack = (VesselId, Set<CapModule>)   — flat, edgeless, dependency-blind
+```
+
+This declaration answers *what a vessel IS* — a full node holds `{lararium-core, daemon, mesh-palace, read-face, …}`; a Herm holds `{substrate, daemon, mesh-palace, read-face}` and nothing more. ECS supplies the **inventory vocabulary** (entity = vessel · component = cap · system = behavior), never the boot engine. The stack sits inert until a root wires it.
+
+<<~/ahu >>
+
+<<~ ahu #wire >>
+
+## Wire ~ the composition-root builds or refuses
+
+The **composition-root** (`composeVessel`) reads the flat stack and **topologically builds** the live components. The cap-stack carries no edges, so each **cap-MODULE** declares the deps **it** needs (its cardinality), and the root wires the graph from those declarations:
+
+- **each module declares `requires` (1..1) and `optional` (0..1)** — the module names its own deps, the way OSGi Declarative Services names component cardinality.
+- **the root builds in dependency order** — a topological walk over (requires + present-optional) edges, so a mandatory dep stands built before its consumer.
+- **the root hands each module a least-authority resolver** — `resolve(id)` reaches **only that module's declared deps**; resolving an undeclared id throws. POLA by construction: a module reaches exactly what it routed, never the ambient graph (Genode's default-deny `init`; Granovetter's *"only connectivity begets connectivity"*).
+- **a missing mandatory dep, a cycle, or a duplicate cap = the vessel REFUSES TO BOOT, loud** — an error at compose time, never a runtime flag, never a silent fall-through to ambient authority.
+
+<<~ confidence Synthesis-Canon 15/20 >> The refusal carries the integrity: a vessel that cannot wire its declared stack **does not start half-built**. The composer surfaces the gap (which cap requires which absent dep, or the cycle path) and stops — the build-or-fail discipline, not a degraded run.
+
+```text
+declare:  stack = [substrate, daemon(req: substrate), mesh-palace(req: daemon), read-face(req: mesh-palace)]
+wire:     composeVessel(stack) → topo-order → build each w/ POLA resolver → ComposedVessel{ get, order, dispose }
+refuse:   daemon present, substrate ABSENT → throw "[compose] vessel refuses to boot: daemon requires substrate"
+```
+
+<<~/ahu >>
+
+<<~ ahu #absence-is-structural >>
+
+## Absence ~ un-routed authority, by structure
+
+A Herm does **not** read as *"a node with `wiki = false"`*. A Herm reads as a **cap-stack that never declares the wiki cap** — so nothing routes to it, and the vessel runs **blind by structure**, never by a flag a later bug could flip. The relay floor's `#has-NOT read` (vessel-caps#the-five-caps) lands here as **absence of a routed capability**, the Genode reading: *an absent cap grants no authority.*
+
+So the disclosure boundary holds at the **shape of the composition**, not at a checked condition. A Herm cannot reach the operator-content wikis because no edge in its wired graph reaches them — the confused-deputy guard made structural (the standing covenant: designation carries authority, and an absent designation fails closed). **Absence = un-routed authority**, the cleanest cut the keel makes.
+
+<<~/ahu >>
+
+<<~ ahu #transient-composer >>
+
+## The Transient Composer ~ the ocap powerbox
+
+The composition-root holds broad authority for exactly one moment — it touches every cap-module to wire the graph — then **drops it**. It hands back a **read-face** (`get(id)`, `order`, `dispose`) over the built components and **retains no god-object**: the boot extracts the few entry-points it needs and lets the broad-authority builder fall away. This rides the **ocap powerbox** pattern — a transient broad grant that distributes narrow caps and then disappears, so no standing principal holds the whole graph.
+
+Teardown mirrors the build: `dispose` runs in **reverse build order**, so a consumer releases before the dep it consumed. The keel composes *and* decomposes by the same declared order.
+
+<<~/ahu >>
+
+<<~ ahu #witnessed >>
+
+## Witnessed ~ code + live Docker
+
+The keel runs; the parts below carry their grounds:
+
+- **the engine** — `packages/lararium-mesh/src/cap-compose.ts`: `composeVessel` + the `CapModule` interface (`requires` / `optional` / `build(resolve)` / `dispose`). **8/8 tests** (`packages/lararium-mesh/tests/cap-compose.test.ts`): wires in dependency order · refuses on a missing mandatory dep · refuses on a cycle · POLA (an undeclared `resolve` throws) · optional-absent resolves `undefined` · optional-present wires + orders before its consumer · disposes in reverse order · refuses a duplicate cap id.
+- **the node's modules** — `packages/lararium-node/src/node-caps.ts`: the cap-modules (`substrateCap`, `daemonCap`, `meshPalaceCap`, …) plus `composeLararium` (the full node's `#has-cap-stack`) and `composeHerm` (the wiki-LESS wayfarer composed UP from granular caps).
+- **LIVE in Docker** — the composable Herm boots to `[verb-dispatcher] live`, **daemon-full, wiki-less by structure** (it never declares the wiki cap, so nothing routes to it).
+- **commits** — `8ca8520f` · `5bc076c2` · `07b12e65`.
+
+<<~ confidence Synthesis-Canon 16/20 >> The pattern stands **witnessed, not designed** — the seam ran end-to-end in two surfaces (the unit harness and a live process) before this meme named it.
+
+<<~/ahu >>
+
+<<~ ahu #rhymes >>
+
+## Rhymes ~ four prior-art convergence
+
+The keel invents nothing structural; four well-worn patterns each carry a face of it:
+
+- **ZLayer** (Scala / ZIO) — *provide the dependency graph*: layers declare their inputs/outputs, the runtime wires them **topologically** and **fails the build** on a missing or cyclic layer. The declare ⊥ wire seam, library-grade.
+- **Genode `init`** — *capability-routing, default-deny*: a component reaches only the services explicitly **routed** to it; an unrouted service grants no authority. Our POLA resolver + absence-is-structural read.
+- **OSGi Declarative Services** — *declared cardinality*: a component declares mandatory (1..1) and optional (0..1) references; the runtime satisfies them or holds the component unsatisfied. Our per-module `requires` / `optional`.
+- **the ocap powerbox / Granovetter** — *transient broad authority, then POLA*: a one-shot broad grant distributes narrow caps and steps away; *"only connectivity begets connectivity."* Our transient composer (#transient-composer).
+
+<<~ confidence Synthesis 12/20 >> Four domains converging on one shape reads as a real pattern integrity, not a local trick — the convergence carries the weight (the BREAK-not-bless survey discipline, <<~ loulou lar:///ha.ka.ba/@lararium/api/causal-island-pattern >>).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-relay-floor >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/causal-island-pattern >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/projection-nalu >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
