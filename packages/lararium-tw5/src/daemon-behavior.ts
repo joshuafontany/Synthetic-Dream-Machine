@@ -20,10 +20,12 @@ import {
   mkDaemonDelegateVerb,
   mkDaemonVerifyResult,
   mkDaemonResolveBindingResult,
+  mkDaemonDeriveSkeletonResult,
   type DaemonMsg_PlaceVerb,
   type DaemonMsg_VerbResult,
   type DaemonMsg_VerifyRequest,
   type DaemonMsg_ResolveBindingRequest,
+  type DaemonMsg_DeriveSkeletonRequest,
   type AuthProofWire,
   type BatchMode,
   type Verb,
@@ -190,6 +192,31 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
           .catch((err: unknown) => post(mkDaemonVerifyResult({
             requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),
           })));
+        return true;
+      }
+
+      if (type === "daemon:derive-skeleton-request") {
+        // The recall twin of the telemetry capture: derive the query's move-skeleton IN this island's
+        // TW5 VM, against the full self-hosted grammar + the LIVE grammar-cache basis — the SAME
+        // Move→Vec functor capture runs. The in-VM fn lives on $tw.lares (query-derive-vm startup);
+        // we reach it across ctx.tw5.$tw, identical to the capture annotate path. One runtime, no
+        // node-side fallback. Plugin absent / parse fault → a graceful null (→ recall fuses content-only).
+        const msg = raw as DaemonMsg_DeriveSkeletonRequest;
+        try {
+          const $tw = (tw5 as { $tw?: { lares?: { deriveQuerySkeletonVm?: (q: string) => { skeleton: unknown; basis: unknown } | null } } } | undefined)?.$tw;
+          const fn = $tw?.lares?.deriveQuerySkeletonVm;
+          if (!fn) {
+            console.warn("[daemon-behavior] $tw.lares.deriveQuerySkeletonVm absent (plugin not loaded) — recall degrades to content-only (drop-honesty)");
+            post(mkDaemonDeriveSkeletonResult({ requestId: msg.requestId }));
+          } else {
+            const d = fn(msg.query);
+            post(mkDaemonDeriveSkeletonResult(
+              d ? { requestId: msg.requestId, skeleton: d.skeleton, basis: d.basis } : { requestId: msg.requestId },
+            ));
+          }
+        } catch (err) {
+          post(mkDaemonDeriveSkeletonResult({ requestId: msg.requestId, error: err instanceof Error ? err.message : String(err) }));
+        }
         return true;
       }
 

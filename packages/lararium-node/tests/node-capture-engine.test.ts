@@ -12,7 +12,7 @@ import type { MoveSkeleton, SerializedBasis } from "@lararium/tw5/form-layer";
 import { describe, expect, test } from "vitest";
 
 import {
-  makeNodeCaptureEngine, makeFormSplitFlush, readFormBasisCache,
+  makeNodeCaptureEngine, makeFormSplitFlush,
   type NodeCaptureEngineOptions,
 } from "../src/node-capture-engine.js";
 import type { FormMetadata, FormPalace, FormStoreResult } from "../src/formpalace.js";
@@ -101,24 +101,18 @@ describe("makeFormSplitFlush — the aperture stamp + the basis cache (P6 + juru
     } as unknown as CaptureRecord;
   }
 
-  test("stamps the declared HUD aperture into the form metadata, and caches the basis to disk", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "formsplit-"));
+  test("stamps the declared HUD aperture into the form metadata (no disk basis-cache — recall derives in-VM)", async () => {
     const stamped: FormMetadata[] = [];
-    const flush = makeFormSplitFlush(async (b) => b.length, fakeFormPalace(stamped), dir);
+    const flush = makeFormSplitFlush(async (b) => b.length, fakeFormPalace(stamped));
 
     const n = await flush([rec("a turn <<~ hud Aperture(10) OODA-HA(3) >> the verb leads")]);
     expect(n).toBe(1);
     expect(stamped[0]!.aperture).toBe(10);                 // the paragraph grain, re-harvested
-    // the in-VM basis is cached to disk so a node-side recall queries in the SAME space
-    const cached = readFormBasisCache(dir);
-    expect(cached).not.toBeNull();
-    expect(cached!.dimension).toBe(12);
   });
 
   test("a turn with NO declared aperture stamps no aperture facet (graceful)", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "formsplit-"));
     const stamped: FormMetadata[] = [];
-    const flush = makeFormSplitFlush(async (b) => b.length, fakeFormPalace(stamped), dir);
+    const flush = makeFormSplitFlush(async (b) => b.length, fakeFormPalace(stamped));
     await flush([rec("a turn with no hud panel")]);
     expect(stamped[0]!.aperture).toBeUndefined();
   });

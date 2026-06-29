@@ -82,7 +82,7 @@ export type {
 // later graphs on verbatim_sha by N-ary reciprocal rank fusion (living-grammar-palace#dual-graph).
 export {
   fuseMultiGraph, multiGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
-  makeSkeletonDeriver, resolveApertureGrain, apertureWeight, weightByAperture, PARAGRAPH_APERTURE,
+  resolveApertureGrain, apertureWeight, weightByAperture, PARAGRAPH_APERTURE,
   contentKeyOf, contentLeg, formLeg,
 } from "./multi-graph-recall.js";
 export type {

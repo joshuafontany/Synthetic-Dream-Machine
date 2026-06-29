@@ -22,10 +22,9 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#dual-graph (+ #multi-aperture)
  */
 
-import { harvestTurnGradient } from "@lararium/mesh";
 import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";
 import type { BearingFacets, MoveSkeleton } from "@lararium/tw5/form-layer";
-import { parseBearing, bearingFacets, emitMoveSkeleton } from "@lararium/tw5/form-layer";
+import { parseBearing, bearingFacets } from "@lararium/tw5/form-layer";
 
 import type { FormMatch, FormPalace, SerializedBasis } from "./formpalace.js";
 
@@ -258,11 +257,14 @@ export interface FormSearchConfig {
   /** the FORM store (the metadata filter + the vector query). */
   readonly formPalace: FormSearchPalace;
   /**
-   * The markers path: derive a query move-skeleton + basis to vectorize a sigil-bearing query.
-   * Absent (or returns null) → a markers query DEGRADES to the keyword branch (no skeleton can be
-   * vectorized on this leg). The live deriver is {@link makeSkeletonDeriver}; tests inject a fake.
+   * The markers path: derive a query move-skeleton + basis to vectorize a sigil-bearing query. Runs
+   * IN the @daemon VM (the recall twin of capture — one runtime, no node-side fallback): a round-trip
+   * to the warm worker where the query folds against the full grammar + live basis (the structural
+   * plane present), so recall applies the IDENTICAL Move→Vec functor capture does. Absent (or resolves
+   * null — the VM cold/unavailable, or no derivable move-form) → a markers query DEGRADES to the
+   * keyword branch (content-only fusion). The live wiring is `daemonVm.deriveSkeleton`; tests inject a fake.
    */
-  readonly deriveSkeleton?: (query: string) => { skeleton: MoveSkeleton; basis: SerializedBasis } | null;
+  readonly deriveSkeleton?: (query: string) => Promise<{ skeleton: MoveSkeleton; basis: SerializedBasis } | null>;
 }
 
 /** The sharktooth opener — a query carrying it has derivable sigil markers (the form-vector path). */
@@ -305,9 +307,10 @@ export function makeFormSearch(
       return cfg.formPalace.filter({ nResults, ...(merged !== undefined ? { where: merged } : {}) });
     }
 
-    // 2. MARKERS — a derivable skeleton → form-vector similarity (the existing query path).
+    // 2. MARKERS — a derivable skeleton → form-vector similarity (the existing query path). The
+    //    derive round-trips the @daemon VM (one runtime); a null (VM cold / no move-form) falls to (3).
     if (hasMarkers && cfg.deriveSkeleton) {
-      const derived = cfg.deriveSkeleton(cfg.query);
+      const derived = await cfg.deriveSkeleton(cfg.query);
       if (derived) {
         return cfg.formPalace.query({
           skeleton: derived.skeleton,
@@ -321,45 +324,6 @@ export function makeFormSearch(
     // 3. KEYWORDS — an aperture scope present → filter by it; else DEFER (content-only fusion).
     if (where !== undefined) return cfg.formPalace.filter({ where, nResults });
     return [];
-  };
-}
-
-// ---------------------------------------------------------------------------
-// the MARKERS → VECTOR deriver — the live `deriveSkeleton` (the jurus query)
-// ---------------------------------------------------------------------------
-
-/**
- * Build the live `deriveSkeleton` the {@link makeFormSearch} markers branch needs — node-side, PURE,
- * NO VM round-trip. A recall query carrying sigil markers (`<<~ … >>`) names a MOVE-FORM (a *jurus*,
- * the paper's attractor-form in move-space); this turns it into a query form-vector so recall-by-
- * move-form goes live.
- *
- * THE PATH (the lightest correct one — see the seam note the @daemon left):
- *  - the SKELETON derives node-side: `harvestTurnGradient` reads the `<<~` markers off the query (the
- *    classifier channel is already emitted — Route A), then {@link emitMoveSkeleton} folds the harvest
- *    into the linear move-stream. The query carries no meme-ast tree (that WOULD need the VM parser),
- *    so the graph plane stays `[]` — the stream carries the move-form signal the encoder indexes.
- *  - the BASIS rides in from `loadBasis`. It CANNOT be re-derived node-side: the constructicon basis
- *    grows grammar-derived `family:`/`sigil:` axes that live only in the VM grammar-cache, and the
- *    stored form-vectors were pinned to THAT basis's dimension (a mismatched basis → ChromaDB drift).
- *    The capture path persists the basis it used to disk (node-capture-engine#writeFormBasisCache); a
- *    recall reads it back, so the query vector lands in the SAME space as the stored vectors.
- *
- * Degrades to null (→ the keyword/content branch) when the query carries no AXIS-bearing marker (a
- * bare `<<~` water opener, or no markers at all) or when no basis has been cached yet.
- */
-export function makeSkeletonDeriver(
-  loadBasis: () => SerializedBasis | null,
-): (query: string) => { skeleton: MoveSkeleton; basis: SerializedBasis } | null {
-  return (query: string) => {
-    const harvest = harvestTurnGradient(query);
-    const skeleton = emitMoveSkeleton(harvest, []);
-    // A query with no axis-bearing token carries no move-form signal — degrade gracefully.
-    const hasForm = skeleton.stream.some((t) => t.axisId !== null);
-    if (!hasForm) return null;
-    const basis = loadBasis();
-    if (!basis || basis.dimension <= 0) return null;
-    return { skeleton, basis };
   };
 }
 

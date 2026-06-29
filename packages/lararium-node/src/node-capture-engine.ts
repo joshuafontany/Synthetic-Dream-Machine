@@ -7,9 +7,6 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-
 import { makeCaptureEngine, canonicalJsonBytes, defaultCryptoProvider, harvestTurnGradient, sha256Hex, utf8Bytes } from "@lararium/mesh";
 import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CaptureFlush, CapturePost, CaptureRecord, CaptureServo, FlushGate } from "@lararium/mesh";
 import type { MoveSkeleton } from "@lararium/tw5/form-layer";
@@ -148,34 +145,6 @@ function apertureFromContent(content: string): number | undefined {
   return undefined;
 }
 
-/** The on-disk path the capture-time constructicon basis is cached at — a sibling of the form palace
- *  dir, so a node-side recall can read the SAME basis the in-VM encoder pinned the form-vectors to
- *  (the query vector must live in that space; the grammar-derived axes are unreachable node-side). */
-export function formBasisCachePath(formPalaceDir: string): string {
-  return join(formPalaceDir, ".form-basis.json");
-}
-
-/** Read the cached capture-time basis (or null when none cached / unreadable / malformed). The
- *  markers→vector recall deriver (multi-graph-recall#makeSkeletonDeriver) loads it; absent → the
- *  markers query degrades to the keyword/content branch. */
-export function readFormBasisCache(formPalaceDir: string): SerializedBasis | null {
-  try {
-    const b = JSON.parse(readFileSync(formBasisCachePath(formPalaceDir), "utf8")) as SerializedBasis;
-    return b && Array.isArray(b.axes) && typeof b.dimension === "number" && b.dimension > 0 ? b : null;
-  } catch {
-    return null;
-  }
-}
-
-/** Persist the basis the in-VM encoder used (best-effort; a write fault never sinks a capture). */
-function writeFormBasisCache(formPalaceDir: string, basis: SerializedBasis): void {
-  try {
-    writeFileSync(formBasisCachePath(formPalaceDir), JSON.stringify({ axes: basis.axes, dimension: basis.dimension }));
-  } catch {
-    /* best-effort: the recall deriver simply finds no cache and degrades to keywords */
-  }
-}
-
 /**
  * The FORM ROUTING SPLIT — the form-graph twin of {@link makeAstSplitFlush}. Each record carries the
  * in-VM-emitted move-skeleton (`lar_skeleton`) + constructicon basis (`lar_basis`) — where the
@@ -190,9 +159,7 @@ function writeFormBasisCache(formPalaceDir: string, basis: SerializedBasis): voi
 export function makeFormSplitFlush(
   inner: CaptureFlush,
   formPalace: FormPalace,
-  basisCacheDir?: string,
 ): CaptureFlush {
-  let basisCached = false;
   return async (batch: readonly CaptureRecord[]): Promise<number> => {
     const routed: CaptureRecord[] = [];
     for (const rec of batch) {
@@ -214,9 +181,8 @@ export function makeFormSplitFlush(
       try {
         const skeleton = JSON.parse(skJson) as MoveSkeleton;
         const basis = JSON.parse(baJson) as SerializedBasis;
-        // Persist the basis ONCE per flush-engine lifetime so a node-side recall can re-query in the
-        // SAME space the in-VM encoder pinned (the grammar-derived axes are unreachable node-side).
-        if (basisCacheDir && !basisCached) { writeFormBasisCache(basisCacheDir, basis); basisCached = true; }
+        // The basis is NOT persisted to disk — recall derives its query vector IN the daemon VM
+        // against the SAME live grammar-cache basis capture pinned (one runtime, no disk crutch).
         const verbatimSha = await sha256Hex(utf8Bytes(rec.content), defaultCryptoProvider);
         // The FORM recurrence key: the structural hash of the placeholdered graph (the shape, no words).
         const structHash = await sha256Hex(canonicalJsonBytes(skeleton.graph), defaultCryptoProvider);
@@ -270,7 +236,7 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
   // the (still lar_ast-bearing) record to the AST split. Both stores come out clean, joined by
   // verbatim_sha. Local-only, never federates; absent/null disables it (no implicit default).
   const formPalaceDir = opts.formPalaceDir ?? null;
-  const formSplit = formPalaceDir ? makeFormSplitFlush(astSplit, makeFormPalace(formPalaceDir), formPalaceDir) : astSplit;
+  const formSplit = formPalaceDir ? makeFormSplitFlush(astSplit, makeFormPalace(formPalaceDir)) : astSplit;
   // Wing-stamp runs OUTERMOST (always): it decodes the `<wing>/` source_file prefix into
   // `metadata.wing` BEFORE the splits (which preserve it) and the ndjson mine reads it as routing.
   const flush = makeWingStampFlush(formSplit);

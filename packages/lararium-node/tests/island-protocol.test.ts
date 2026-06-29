@@ -20,6 +20,8 @@ import {
   ISLAND_PROTOCOL_VERSION,
   mkTeardown,
   mkManifest,
+  mkDaemonDeriveSkeletonRequest,
+  mkDaemonDeriveSkeletonResult,
   type IslandMsg_TeardownAck,
   type IslandMsg_Ea,
   type IslandMsg_Event,
@@ -204,6 +206,29 @@ describe("GP-1 — schema_version enforcement", () => {
     expect(isIslandToVesselMsg({ schema_version: 1, type: "teardown:ack" })).toBe(true);
     expect(isIslandToVesselMsg({ schema_version: 1, type: "ea", wikiUri: "lar:///test" })).toBe(true);
     expect(isIslandToVesselMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
+  });
+
+  test("derive-skeleton request is vessel→island, result is island→vessel (the in-VM query-derive channel)", () => {
+    const req = mkDaemonDeriveSkeletonRequest({ requestId: "derive-1", query: "<<~ ward ! L-Prime >>" });
+    expect(req.type).toBe("daemon:derive-skeleton-request");
+    expect(isVesselToIslandMsg(req)).toBe(true);
+    expect(isIslandToVesselMsg(req)).toBe(false);
+
+    // a real derivation — skeleton + serialized basis ride back as plain objects (GP-2).
+    const hit = mkDaemonDeriveSkeletonResult({
+      requestId: "derive-1",
+      skeleton: { stream: [], graph: [{ kind: "Sigil" }] },
+      basis: { axes: [], dimension: 12 },
+    });
+    expect(hit.type).toBe("daemon:derive-skeleton-result");
+    expect(isIslandToVesselMsg(hit)).toBe(true);
+    expect(isVesselToIslandMsg(hit)).toBe(false);
+
+    // a graceful null — both planes absent (→ recall fuses content-only).
+    const empty = mkDaemonDeriveSkeletonResult({ requestId: "derive-1" });
+    expect(empty.skeleton).toBeUndefined();
+    expect(empty.basis).toBeUndefined();
+    expect(isIslandToVesselMsg(empty)).toBe(true);
   });
 });
 

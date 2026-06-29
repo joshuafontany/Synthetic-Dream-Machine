@@ -14,7 +14,7 @@ import type { MoveSkeleton, SerializedBasis } from "@lararium/tw5/form-layer";
 import type { FormMatch } from "../src/formpalace.js";
 import {
   fuseMultiGraph, multiGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
-  contentLeg, formLeg, makeSkeletonDeriver, resolveApertureGrain, apertureWeight, weightByAperture,
+  contentLeg, formLeg, resolveApertureGrain, apertureWeight, weightByAperture,
   PARAGRAPH_APERTURE,
   type MultiGraphRecallDeps, type FormSearchPalace, type MultiGraphHit, type GraphLeg,
 } from "../src/multi-graph-recall.js";
@@ -287,59 +287,57 @@ describe("makeFormSearch — the form-leg policy (bearing · markers · keywords
 // the MARKERS → VECTOR live deriver — recall-by-move-form (the jurus query)
 // ---------------------------------------------------------------------------
 
-describe("makeSkeletonDeriver — the live markers→vector path (node-side, no VM)", () => {
+describe("makeFormSearch markers branch — the in-VM query-derive routing (one runtime, no node fallback)", () => {
   const fakeBasis = { axes: [], dimension: 12 } as SerializedBasis;
+  // The derive runs IN the @daemon VM now; the leg only sees its async result. A real derivation
+  // carries BOTH planes — the linear stream AND the structural (graph) plane (the meme-ast TREE) —
+  // so the query vector lands in the SAME full space as the corpus (capture's identical functor).
+  const fakeDerivation = {
+    skeleton: {
+      stream: [{ kind: "ward", token: "sword", axisId: "ward:sword", offset: 0 }],
+      graph: [{ kind: "Sigil", children: [] }],
+    },
+    basis: fakeBasis,
+  } as unknown as { skeleton: MoveSkeleton; basis: SerializedBasis };
   const MARKERS_QUERY = "what did we decide <<~ hud Aperture(10) OODA-HA(3) >> <<~ ward ! L-Prime >>";
 
-  test("a sigil-bearing query → a derived skeleton (stream carries axis-bearing move tokens)", () => {
-    const derive = makeSkeletonDeriver(() => fakeBasis);
-    const out = derive(MARKERS_QUERY);
-    expect(out).not.toBeNull();
-    expect(out!.basis).toBe(fakeBasis);
-    expect(out!.skeleton.stream.some((t) => t.axisId !== null)).toBe(true);
-    expect(out!.skeleton.graph).toEqual([]);     // no meme-ast tree on the query side
-  });
-
-  test("a plain keyword query (no markers) → null (degrades to keyword/content)", () => {
-    expect(makeSkeletonDeriver(() => fakeBasis)("what did we decide about deps")).toBeNull();
-  });
-
-  test("markers present but NO cached basis → null (degrades gracefully)", () => {
-    expect(makeSkeletonDeriver(() => null)(MARKERS_QUERY)).toBeNull();
-  });
-
-  test("a zero-dimension basis → null (no real space to query)", () => {
-    expect(makeSkeletonDeriver(() => ({ axes: [], dimension: 0 }) as SerializedBasis)(MARKERS_QUERY)).toBeNull();
-  });
-
-  test("wired into makeFormSearch: a markers query drives the VECTOR (query) path, not filter", async () => {
+  test("a markers query → the VM derive routes to the VECTOR (query) path, structural plane present", async () => {
     const queryCalls: { skeleton: MoveSkeleton; basis: SerializedBasis }[] = [];
     const filterCalls: unknown[] = [];
     const palace: FormSearchPalace = {
       async query(input) { queryCalls.push(input); return [formMatch(SHA_B)]; },
       async filter(input) { filterCalls.push(input); return []; },
     };
-    const leg = makeFormSearch({
-      query: MARKERS_QUERY, formPalace: palace, deriveSkeleton: makeSkeletonDeriver(() => fakeBasis),
-    });
+    const deriveSkeleton = async (_q: string) => fakeDerivation;
+    const leg = makeFormSearch({ query: MARKERS_QUERY, formPalace: palace, deriveSkeleton });
     const out = await leg({ nResults: 5 });
     expect(out).toHaveLength(1);
     expect(queryCalls).toHaveLength(1);
     expect(filterCalls).toHaveLength(0);
     expect(queryCalls[0]!.basis.dimension).toBe(12);
+    // The FULL functor: the structural (graph) plane rides the query vector — NEVER the truncated [].
+    expect(queryCalls[0]!.skeleton.graph.length).toBeGreaterThan(0);
   });
 
-  test("wired into makeFormSearch: markers + a deriver that null-degrades → keyword branch (DEFER)", async () => {
+  test("the VM derive resolves null (VM cold/unavailable, no move-form) → keyword DEFER → [] (content-only)", async () => {
     const queryCalls: unknown[] = [];
     const palace: FormSearchPalace = {
       async query(i) { queryCalls.push(i); return [formMatch(SHA_B)]; },
       async filter() { return []; },
     };
-    const leg = makeFormSearch({
-      query: MARKERS_QUERY, formPalace: palace, deriveSkeleton: makeSkeletonDeriver(() => null),
-    });
+    const deriveSkeleton = async (_q: string) => null;
+    const leg = makeFormSearch({ query: MARKERS_QUERY, formPalace: palace, deriveSkeleton });
     expect(await leg({ nResults: 5 })).toEqual([]);
     expect(queryCalls).toHaveLength(0);
+  });
+
+  test("a markers query with NO deriveSkeleton wired → keyword DEFER → [] (graceful, no shadow derive)", async () => {
+    const palace: FormSearchPalace = {
+      async query() { return [formMatch(SHA_B)]; },
+      async filter() { return []; },
+    };
+    const leg = makeFormSearch({ query: MARKERS_QUERY, formPalace: palace });
+    expect(await leg({ nResults: 5 })).toEqual([]);
   });
 });
 

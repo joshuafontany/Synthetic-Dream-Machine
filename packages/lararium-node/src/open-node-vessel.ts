@@ -61,8 +61,7 @@ import type { DialEntry } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
-import { multiGraphRecall, makeFormSearch, makeSkeletonDeriver }  from "./multi-graph-recall.js";
-import { readFormBasisCache }  from "./node-capture-engine.js";
+import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -495,9 +494,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
         if (dual && query) {
           recallFormPalace ??= makeFormPalace(larFormPalaceDir());
-          // The LIVE markers→vector deriver: a sigil-bearing query → a query form-vector, in the SAME
-          // space the in-VM encoder pinned (the basis cached to disk at capture). Node-side, no VM.
-          const deriveSkeleton = makeSkeletonDeriver(() => readFormBasisCache(larFormPalaceDir()));
+          // The markers→vector derive runs IN the @daemon VM — the recall twin of capture, one runtime,
+          // NO node-side fallback. A sigil-bearing query round-trips to the warm worker, where it folds
+          // against the FULL self-hosted grammar + the LIVE grammar-cache basis (structural plane
+          // present), so recall applies the IDENTICAL Move→Vec functor capture does. VM unavailable /
+          // cold → resolves null → the markers leg fuses content-only (graceful, no shadow derive).
+          const deriveSkeleton = (q: string) => daemonVm.deriveSkeleton(q);
           const formSearchLeg = makeFormSearch({ query, formPalace: recallFormPalace, deriveSkeleton });
           const res = await multiGraphRecall(
             {

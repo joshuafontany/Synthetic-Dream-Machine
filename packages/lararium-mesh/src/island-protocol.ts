@@ -281,6 +281,35 @@ export interface DaemonMsg_TelemetryPlaceVerb {
 }
 
 /**
+ * Vessel → island: derive a recall query's move-skeleton IN the daemon VM (the recall twin of the
+ * telemetry capture). The host's recall verb routes a sigil-bearing query string here so the
+ * markers→vector recall runs the SAME Move→Vec functor capture runs — parse with the full self-hosted
+ * grammar + emit the skeleton (structural plane present) against the LIVE grammar-cache basis. One
+ * runtime, no node-side fallback. The island calls `$tw.lares.deriveQuerySkeletonVm` and answers with
+ * {@link DaemonMsg_DeriveSkeletonResult}.
+ */
+export interface DaemonMsg_DeriveSkeletonRequest {
+  schema_version: ProtocolVersion;
+  type: "daemon:derive-skeleton-request";
+  requestId: string;
+  /** The recall query — sniffed in-VM for sigil markers, parsed with the full grammar. */
+  query: string;
+}
+
+/** Island → vessel: the in-VM query-derive result. `skeleton`+`basis` (plain objects — the move-
+ *  skeleton + the serialized `{axes, dimension}` basis) when the query carried a derivable move-form;
+ *  BOTH absent (a graceful null) when it did not (→ the recall fuses content-only). `error` carries a
+ *  derive fault (the VM unavailable degrades to null at the host, never an error). */
+export interface DaemonMsg_DeriveSkeletonResult {
+  schema_version: ProtocolVersion;
+  type: "daemon:derive-skeleton-result";
+  requestId: string;
+  skeleton?: unknown;
+  basis?: unknown;
+  error?: string;
+}
+
+/**
  * Island → vessel: delegate a wiki-scope verb to the vessel handler registry.
  * Emitted when the daemon island's VerbDispatcher encounters a verb not in its local registry.
  * The vessel executes the handler and posts DaemonMsg_VerbResult back.
@@ -455,6 +484,7 @@ export type VesselToIslandMsg =
   | IslandMsg_Teardown
   | DaemonMsg_PlaceVerb
   | DaemonMsg_TelemetryPlaceVerb
+  | DaemonMsg_DeriveSkeletonRequest
   | DaemonMsg_VerbResult
   | DaemonMsg_VerifyRequest
   | DaemonMsg_ResolveBindingRequest
@@ -605,6 +635,7 @@ export type IslandToVesselMsg =
   | IslandMsg_Ready
   | WikiMsg_VerbResult
   | DaemonMsg_DelegateVerb
+  | DaemonMsg_DeriveSkeletonResult
   | DaemonMsg_VerifyResult
   | DaemonMsg_ResolveBindingResult
   | DaemonMsg_EvictRequest
@@ -624,14 +655,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "daemon:derive-skeleton-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "daemon:delegate-verb", "daemon:verify-result", "daemon:resolve-binding-result", "daemon:evict-request", "daemon:residency-op", "daemon:wiki-alert"] as const).includes(
+  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "daemon:delegate-verb", "daemon:derive-skeleton-result", "daemon:verify-result", "daemon:resolve-binding-result", "daemon:evict-request", "daemon:residency-op", "daemon:wiki-alert"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -744,6 +775,35 @@ export function mkTelemetryPlaceVerb(opts: {
     sourceFile: opts.sourceFile,
     ...(opts.frontier && opts.frontier.length ? { frontier: [...opts.frontier] } : {}),
   };
+}
+
+export function mkDaemonDeriveSkeletonRequest(opts: {
+  requestId: string;
+  query: string;
+}): DaemonMsg_DeriveSkeletonRequest {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "daemon:derive-skeleton-request",
+    requestId: opts.requestId,
+    query: opts.query,
+  };
+}
+
+export function mkDaemonDeriveSkeletonResult(opts: {
+  requestId: string;
+  skeleton?: unknown;
+  basis?: unknown;
+  error?: string;
+}): DaemonMsg_DeriveSkeletonResult {
+  const msg: DaemonMsg_DeriveSkeletonResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "daemon:derive-skeleton-result",
+    requestId: opts.requestId,
+  };
+  if (opts.skeleton !== undefined) msg.skeleton = opts.skeleton;
+  if (opts.basis    !== undefined) msg.basis    = opts.basis;
+  if (opts.error    !== undefined) msg.error    = opts.error;
+  return msg;
 }
 
 export function mkDaemonDelegateVerb(opts: {

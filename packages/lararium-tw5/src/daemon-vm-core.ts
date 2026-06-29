@@ -33,6 +33,7 @@ import {
   mkDaemonVerbResult,
   mkDaemonVerifyRequest,
   mkDaemonResolveBindingRequest,
+  mkDaemonDeriveSkeletonRequest,
   mkDaemonEvictResult,
   mkDaemonResidencyOpResult,
   mkTeardown,
@@ -49,6 +50,7 @@ import {
   type DaemonMsg_DelegateVerb,
   type DaemonMsg_VerifyResult,
   type DaemonMsg_ResolveBindingResult,
+  type DaemonMsg_DeriveSkeletonResult,
   type DaemonMsg_EvictRequest,
   type DaemonMsg_ResidencyOp,
   type DaemonMsg_WikiAlert,
@@ -58,6 +60,15 @@ import {
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
 import type { VerbTable } from "./verb-dispatcher.js";
+import type { MoveSkeleton, ConstructiconAxis } from "./form-layer/index.js";
+
+/** The in-VM query-derive result the recall verb round-trips for — the move-skeleton (FULL functor,
+ *  structural plane present) + the serialized `{axes, dimension}` basis. `null` = no derivable form
+ *  (→ recall fuses content-only). Structurally matches node's FormSearch deriveSkeleton return. */
+export interface DaemonDeriveSkeletonResult {
+  skeleton: MoveSkeleton;
+  basis: { axes: readonly ConstructiconAxis[]; dimension: number };
+}
 
 // The ea watchdog budget — a SILENCE window, not a mount deadline (debt
 // resolved 2026-06-12). The mounting island emits breath (sovereign-kernel:
@@ -136,6 +147,13 @@ export interface DaemonVmCore {
    *  `frontier` (optional) carries the turn-DAG fork-frontier so a same-session fork derives a
    *  distinct handle; absent on a non-forked turn. */
   placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[]) => void;
+  /**
+   * Derive a recall query's move-skeleton IN the daemon VM (the recall twin of placeTelemetry) —
+   * round-trips the query string through the island's `$tw.lares.deriveQuerySkeletonVm` so the
+   * markers→vector recall runs the SAME Move→Vec functor capture runs (full grammar + live basis,
+   * structural plane present). Resolves `null` when the query carries no derivable move-form.
+   */
+  deriveSkeleton: (query: string) => Promise<DaemonDeriveSkeletonResult | null>;
   /**
    * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
    * keyhive via daemon:verify-request/result. Common to both vessels.
@@ -287,6 +305,17 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
       return;
     }
 
+    if (raw.type === "daemon:derive-skeleton-result") {
+      const msg = raw as DaemonMsg_DeriveSkeletonResult;
+      if (msg.error) settleAsk(msg.requestId, undefined, msg.error);
+      // skeleton+basis both present → the derivation; both absent → a graceful null (content-only).
+      else settleAsk(
+        msg.requestId,
+        msg.skeleton !== undefined && msg.basis !== undefined ? { skeleton: msg.skeleton, basis: msg.basis } : null,
+      );
+      return;
+    }
+
     if (raw.type === "daemon:evict-request") {
       // Sovereign-worker: the worker decided (policy, keyhive-gated); main executes the
       // mechanism (pool teardown). Route to the injected pool handler; ack regardless.
@@ -412,6 +441,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[]) => {
       worker.post(mkTelemetryPlaceVerb({ turnText, sourceFile, ...(frontier && frontier.length ? { frontier } : {}) }));
     },
+    deriveSkeleton: (query: string) =>
+      askIsland<DaemonDeriveSkeletonResult | null>("derive", (requestId) => mkDaemonDeriveSkeletonRequest({ requestId, query })),
     onEvictRequest: (fn: (bagId: string) => Promise<void>) => {
       _evictHandler = fn;
     },
