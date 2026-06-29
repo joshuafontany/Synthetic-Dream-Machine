@@ -16,7 +16,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 
 import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
-import { canonicalPalacePath, mineWithRetryAsync } from "@lararium/mempalace";
+import { canonicalPalacePath, mineWithServoAsync, TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 
 const execFileAsync = promisify(execFile);
 
@@ -27,11 +27,14 @@ export interface SubprocessFlushOptions {
   readonly palacePath: string;
   /** the mempalace executable (default "mempalace") */
   readonly mempalaceBin?: string;
-  /** flush timeout (ms) — the writer-liveness guard so a wedged `mine` never blinds
-   *  telemetry under load (neuro depolarization-block). Default 30 s. */
-  readonly timeoutMs?: number;
-  /** injected spawn for tests; defaults to execFile(mempalace ...) */
-  readonly spawn?: (bin: string, args: readonly string[]) => Promise<{ stdout: string }>;
+  /** injected spawn for tests; defaults to execFile(mempalace ...). Receives the servo's adaptive
+   *  per-attempt timeout — the writer-liveness guard so a wedged `mine` never blinds telemetry
+   *  under load (neuro depolarization-block); self-tuning, no longer a fixed 30 s. */
+  readonly spawn?: (
+    bin: string,
+    args: readonly string[],
+    opts?: { timeout?: number; killSignal?: NodeJS.Signals },
+  ) => Promise<{ stdout: string }>;
 }
 
 /**
@@ -42,8 +45,9 @@ export interface SubprocessFlushOptions {
  */
 export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush {
   const bin = opts.mempalaceBin ?? "mempalace";
-  const timeout = opts.timeoutMs ?? 30_000;
-  const spawn = opts.spawn ?? ((b, a) => execFileAsync(b, [...a], { timeout }));
+  const spawn =
+    opts.spawn ??
+    ((b, a, o) => execFileAsync(b, [...a], { timeout: o?.timeout, killSignal: o?.killSignal }));
   // ONE canonical spelling for the physical palace — so this flush, the subagent
   // mine, and the read sidecar all address the SAME write-daemon singleton (a
   // symlinked / `..` / relative spelling otherwise keys a SECOND daemon → lock
@@ -64,8 +68,14 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
       // absent). A palace-lock BUSY signal (a concurrent one-shot mine holds the lock) WAITS+retries
       // via the shared backoff — it must not FAIL here (the @daemon flush regression). A NON-busy
       // submit failure THROWS straight through → the nalu's WAL/backoff retries (durable, no loss).
-      const { stdout } = await mineWithRetryAsync(() =>
-        spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path]),
+      // The adaptive timeout servo bounds a wedged `mine` (a hang dies ≤ CEIL, never 9 h) and
+      // learns each flush's real duration; it COMPOSES with the BUSY-retry — a busy lock WAITS,
+      // a hang is killed (SIGKILL) and surfaces honestly so the nalu's WAL re-queues it.
+      const { stdout } = await mineWithServoAsync("capture-flush", (timeoutMs) =>
+        spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path], {
+          timeout: timeoutMs,
+          killSignal: TIMEOUT_KILL_SIGNAL,
+        }),
       );
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;

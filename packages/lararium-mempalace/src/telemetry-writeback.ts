@@ -26,6 +26,8 @@ import { harvestTurnGradient, buildPatch, LAR_HV, type TurnHarvest } from "@lara
 export { buildPatch, LAR_HV };
 import { repoRoot } from "@lararium/mesh/node";
 import { resolveMempalacePython } from "./spawn-resolve.js";
+import { mineWithServo } from "./mine-retry.js";
+import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
 
 
 export interface WritebackResult {
@@ -62,7 +64,15 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
   const limit = opts.limit ?? 0;
   const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
-  const exportOut = execFileSync(PY, [DRAWER_IO, ...exportArgs], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8" });
+  // drawer_io export had NO timeout — the confirmed 9 h-stuck source. The servo bounds it: an
+  // adaptive `timeout` + SIGKILL kills a wedged export ≤ CEIL and surfaces it (MineHangError),
+  // and learns each export's real duration so a normal-but-slow run is never false-killed.
+  const exportOut = mineWithServo("drawer-io-export", (timeoutMs) =>
+    execFileSync(PY, [DRAWER_IO, ...exportArgs], {
+      cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
+      timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
+    }),
+  );
   const drawers = exportOut.split("\n").filter(Boolean).map((l) => JSON.parse(l) as { id: string; content: string; source_file?: string });
 
   const bands: Record<string, number> = { canon: 0, synthesis: 0, provisional: 0, raw: 0 };
@@ -80,7 +90,12 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
     const pf = join(tmpdir(), `lar-telemetry-patch-${wing}-${process.pid}.ndjson`);
     writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
     try {
-      const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8" });
+      const applyOut = mineWithServo("drawer-io-apply", (timeoutMs) =>
+        execFileSync(PY, [DRAWER_IO, "apply", pf], {
+          cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
+          timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
+        }),
+      );
       try { applied = (JSON.parse(applyOut.trim()) as { applied: number }).applied; } catch { applied = patches.length; }
     } finally {
       rmSync(pf, { force: true });

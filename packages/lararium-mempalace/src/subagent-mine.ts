@@ -28,7 +28,8 @@ import { existsSync, readFileSync, readdirSync, mkdirSync, linkSync, copyFileSyn
 import { homedir, tmpdir } from "node:os";
 import { join, basename } from "node:path";
 import { resolvePalacePath } from "./palace-path.js";
-import { mineWithRetry } from "./mine-retry.js";
+import { mineWithServo } from "./mine-retry.js";
+import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
 
 const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
 
@@ -146,11 +147,14 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
       // A palace-lock BUSY signal (the daemon flush or a concurrent backfill holds it) WAITS+retries
       // via the shared backoff — it must not collapse to "mine-failed". A REAL error (after the
       // retries run out, or any non-busy fault) still falls to the honest "mine-failed" below.
-      const out = mineWithRetry(() =>
+      // execFileSync had NO timeout — a wedged mine blocked indefinitely (the 9 h-stuck class).
+      // The servo gives each attempt an adaptive `timeout` + SIGKILL: a hang dies ≤ CEIL and
+      // surfaces (caught below as "mine-failed"), while a BUSY lock still WAITS+retries.
+      const out = mineWithServo("subagent-mine", (timeoutMs) =>
         execFileSync(
           mpExe,
           ["--palace", resolvePalacePath(), "mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
-          { maxBuffer: 1 << 30, encoding: "utf8" },
+          { maxBuffer: 1 << 30, encoding: "utf8", timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL },
         ),
       );
       drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);

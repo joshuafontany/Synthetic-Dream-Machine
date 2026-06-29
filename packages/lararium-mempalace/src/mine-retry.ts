@@ -12,8 +12,22 @@
  * Thunk-based (inject the closure, not an interface): each caller owns its own exe resolution,
  * argv, options, and test seam; this module owns ONLY the busy-detect + backoff + retry loop.
  *
+ * The `*WithServo` variants COMPOSE the self-tuning timeout servo (mine-timeout) ON TOP of the
+ * busy-retry: each attempt runs under an adaptive `timeout` (the thunk passes it to execFileSync),
+ * its duration is learned on completion, and a HANG (killed by the timeout) follows a DISTINCT path
+ * from a BUSY lock — a busy lock WAITS+retries (unchanged YIN behavior), a hang retries at most
+ * once (a hang retried the same way is just another hang) then surfaces honestly as MineHangError.
+ *
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
+
+import {
+  adaptiveTimeoutMs,
+  isMineHang,
+  MineHangError,
+  timeMine,
+  timeMineAsync,
+} from "./mine-timeout.js";
 
 /** The cross-process palace-lock BUSY signal — a held lock, not a failure (SQLITE_BUSY analogue). */
 export const MINE_BUSY_REGEX = /MineAlreadyRunning|is held by PID|LockHeldByOtherProcess/;
@@ -72,6 +86,77 @@ export async function mineWithRetryAsync<T>(run: () => Promise<T>, maxAttempts =
     try {
       return await run();
     } catch (e) {
+      if (isMineAlreadyRunning(errMessage(e)) && attempt < maxAttempts) {
+        await sleepAsync(backoffMs(attempt));
+        continue;
+      }
+      throw e;
+    }
+  }
+}
+
+/** Options shared by the servo-composed retry entry points. */
+export interface ServoRetryOptions {
+  /** BUSY-lock retry budget (the YIN retry-on-busy). Default 5. */
+  readonly maxAttempts?: number;
+  /** HANG retry budget — a killed-by-timeout attempt retries at most this many times. Default 1. */
+  readonly maxHangRetries?: number;
+}
+
+/**
+ * Run a SYNC mine thunk under the timeout servo AND the busy-retry — the full composition. The
+ * thunk receives the adaptive `timeoutMs` to hand to execFileSync (`{ timeout, killSignal }`); a
+ * completion teaches the EWMA. On throw: a BUSY lock WAITS+retries up to `maxAttempts` (unchanged);
+ * a HANG (timeout-kill) follows its OWN path — at most `maxHangRetries`, then a {@link MineHangError}
+ * carrying the pathKey and the timeout that killed it (honest, not masked); any other fault throws
+ * straight through (the caller's own durability owns it).
+ */
+export function mineWithServo<T>(pathKey: string, run: (timeoutMs: number) => T, opts: ServoRetryOptions = {}): T {
+  const maxAttempts = opts.maxAttempts ?? 5;
+  const maxHangRetries = opts.maxHangRetries ?? 1;
+  let hangs = 0;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return timeMine(pathKey, run);
+    } catch (e) {
+      if (isMineHang(e)) {
+        if (hangs < maxHangRetries) {
+          hangs += 1;
+          sleepSync(backoffMs(hangs));
+          continue;
+        }
+        throw new MineHangError(pathKey, adaptiveTimeoutMs(pathKey), hangs + 1, e);
+      }
+      if (isMineAlreadyRunning(errMessage(e)) && attempt < maxAttempts) {
+        sleepSync(backoffMs(attempt));
+        continue;
+      }
+      throw e;
+    }
+  }
+}
+
+/** Async twin of {@link mineWithServo} — for execFileAsync / spawn callers. */
+export async function mineWithServoAsync<T>(
+  pathKey: string,
+  run: (timeoutMs: number) => Promise<T>,
+  opts: ServoRetryOptions = {},
+): Promise<T> {
+  const maxAttempts = opts.maxAttempts ?? 5;
+  const maxHangRetries = opts.maxHangRetries ?? 1;
+  let hangs = 0;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await timeMineAsync(pathKey, run);
+    } catch (e) {
+      if (isMineHang(e)) {
+        if (hangs < maxHangRetries) {
+          hangs += 1;
+          await sleepAsync(backoffMs(hangs));
+          continue;
+        }
+        throw new MineHangError(pathKey, adaptiveTimeoutMs(pathKey), hangs + 1, e);
+      }
       if (isMineAlreadyRunning(errMessage(e)) && attempt < maxAttempts) {
         await sleepAsync(backoffMs(attempt));
         continue;
