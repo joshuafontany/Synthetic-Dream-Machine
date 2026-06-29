@@ -108,12 +108,51 @@ This means initial replay and live patches share the same code path. No per-isla
 pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
 queue handles both.
 
+<<~ ahu #gate-families-seam >>
+
+## The gate-families seam ~ runtime ≠ physics
+
+A scout (the Substrate-Diver) flagged an apparent collision: **N-1** holds ONE queue
+across all bags, *per-bag accumulators do not exist* — yet `projection-nalu`
+(`lar:///ha.ka.ba/@lararium/api/projection-nalu`) stands a `KeyedCoalesceGate` **per
+carrier-root** and **per bag**. Both stand; they sit at OPPOSITE ENDS of the one shape
+`SOURCE → gate → SINK`, never the same layer.
+
+<<~ranks seam UPSTREAM:membrane-coalesce-per-key -> DOWNSTREAM:engine-unified-queue-per-frame >>
+
+- **UPSTREAM — the membrane gates (physics).** `MemeProvider` (the TS-side, before the
+  membrane crossing) draws the coalesce gates: a per-URI debounce window collapses the
+  8–50 replay patches a fresh vessel-connect fires for one URI down to ONE latest-state
+  change, and the 5th-shore `_changesetGate` (`meme-provider.ts:64`) coalesces a storm of
+  large Automerge transactions to ONE `onChangeset(union)` per bag. This is the
+  **coalesce** family — intermediates lawfully DROP, newest-per-key wins. The drop happens
+  HERE, before a change ever reaches `enqueueNalu`.
+- **DOWNSTREAM — the engine queue (runtime).** Each surviving change crosses the membrane
+  via `IslandAdaptor.onUriChanged → enqueueNalu` and joins the ONE unified queue in arrival
+  order (N-1), delivered as ONE `wiki.transact()` per frame (N-2). The engine drops
+  NOTHING further — every survivor lands — and batches them by the FRAME clock. This is the
+  nalu **crest**: the projection-nalu *periodic / nested-periodic* flush-trigger rendered as
+  the rAF frame, the Aperture-ladder pulse made delivery.
+
+So N-1's "no per-bag accumulators" governs the DELIVERY runtime — the engine refuses to
+re-shard its queue per bag; it stays one queue, one transact. The per-key coalesce gates
+do not contradict it, because they live UPSTREAM in the membrane, shaping the stream BEFORE
+it reaches the queue. **The engine carries the runtime; the gate-families carry the
+physics it enacts** (`role = capability ≠ platform` — the queue is the fixed frame-aligned
+SINK-side batcher, the membrane gates the injected per-source dedup). The two compose
+end-to-end: coalesce-per-key (drop intermediates) → unified queue (preserve order) → one
+transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the membrane gates
+(`mesh/meme-provider.ts`, `mesh/projection-nalu.ts`).
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/nalu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/island-adaptor >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/projection-nalu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/docs/verse-mesh >>
 
 <<~/ahu >>
