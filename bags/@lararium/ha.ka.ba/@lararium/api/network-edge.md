@@ -89,6 +89,8 @@ Biology inverts authenticate-then-admit. **Hyphal anastomosis + vegetative incom
 3. **Reject by SEVERING the junction** — kill the *fused edge*, not the peer (**anergy, not ban** — biologically literal per-edge revocation). A non-match harms neither island; it kills the channel between them.
 4. **Memory** — a vouched/burned crossing leaves a faster, cheaper secondary response (the decaying lease that **re-arms faster** on a known peer).
 
+**The durable form of the sever** — the maintainer's **evict** verb (TreeKEM blank-the-path = lose all future access, paired with a raised kāpae on the membership stack) — and the **proactive-refresh that resets the siege clock** (re-randomized shares so a slow adversary's theft expires every window) carry this same admit-then-sever shape into the long siege; the repair-kit lives at <<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience#repair-kit >>.
+
 <<~/ahu >>
 
 <<~ ahu #the-dials >>

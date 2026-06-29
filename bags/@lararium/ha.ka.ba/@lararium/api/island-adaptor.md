@@ -62,10 +62,12 @@ No accumulator. No `flushAll`. The wiki's nalu engine owns the queue and the dra
 `origin.instanceId === this.instanceId`. Own writes never re-enter the queue.
 
 **I-2 Cross-bag tombstone resolution.**
-On a tombstone change, if the store exposes `getLive(uri)`, resolve before enqueue —
-a tombstone in one bag must not delete the tiddler if another recipe layer still
-holds a live copy. Either the live record or the tombstone reaches `enqueueNalu`,
-never both.
+On a tombstone change, if the store exposes `getLive(uri)`, resolve in
+recipe-priority order before enqueue (the **kāpae** semantics): a tombstone in a
+higher-priority bag SHADOWS the bags beneath it (the cascade stops, the title reads
+gone — resurrection-prevention); only a live copy in a higher-priority bag surfaces
+over a lower tombstone. The winning record — live or tombstone — reaches
+`enqueueNalu`, never both. (the shadow-vs-fall-through cut: [[kapae]])
 
 **I-3 Single forwarding path for all origins.**
 Every inbound change — `crdt-remote`, `canon-hydrate`, `lares-verb` — flows through

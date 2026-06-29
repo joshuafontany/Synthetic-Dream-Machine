@@ -121,6 +121,9 @@ No persistence across island lifecycles.
 **M-3 — Tombstone visibility.** A tombstoned title disappears from
 `listVisible()` but `get()` still returns the dead record carrying
 `meta.deleted = true`. Tombstones preserve change ordering for projections.
+A tombstone raises a **kāpae** (shadows lower bags in the cascade); `remove()`
+instead drops the record entirely (`get()` → null = *absent*, falls through to a
+lower bag) — the two stay distinct (the shadow-vs-fall-through cut: [[kapae]]).
 
 **M-4 — Projection bus participation.** Every `put()` and `tombstone()` emits
 a `LarTiddlerChange` carrying the optional `bagId`. Subscribers see the

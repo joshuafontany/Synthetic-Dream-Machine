@@ -21,15 +21,25 @@ uri-path  = "ha.ka.ba/@elyncia/concepts/lares-viales"
 
 Rome set the **Lares Viales** at the roadside — the lares of the *ways*, who walk with the traveler and ask nothing of the houses. At the crossroads stood the **Hermai**, the herm-pillars: a head, a marker, a guardian of the turning, carrying every passer-by toward the next waymark and never once stepping through a door.
 
-In Elyncia they ride the **leylines**. A Lares Viales carries sealed mana from shrine to shrine — pilgrim-cargo it cannot open, prayers it cannot read — and sets the next bearing at each crossing. It guards the *road*, never the hearth.
+In Elyncia they ride the **leylines**. A Lares Viales carries sealed mana from shrine to shrine — pilgrim-cargo it cannot open, prayers it cannot read — and sets the next bearing at each crossing. It guards the *road*, never another's hearth — yet it carries the **hearth-fire itself**, and tends one small shrine of its own.
 
-<<~ ahu #carries-never-enters >>
+<<~ ahu #carries-the-fire >>
 
-## Carries, Never Enters
+## Carries the Fire, Keeps No Rooms
 
-This is the figure of the **minimal vessel** — the smallest spirit that still stands on the mesh. It holds one power outright: it **carries**. It moves the stream and cannot see inside it; what a household seals, the wayfarer bears past, blind. A Herm at the gate of a house knows the road that reaches the gate; it never learns the room beyond.
+The wayfarer furnishes **no household rooms** — no hot hearth-wiki, no operator's sealed `@catalog`. What a household seals, it bears past, blind; a Herm at the gate of a house knows the road that reaches the gate and never learns the room beyond.
 
-So the Lares Viales reads only the **public waymarks** — the shared `@oracle` floor (the base ontology, the engine-blobs every traveler verifies from cold) and its own **mesh-palace**, the map of who-carries-what along the roads. It reads the milestones, not the diaries. A local hearth's `@catalog` — the operator's sovereign room — stays a closed door the wayfarer guards without ever opening.
+It does **not** travel empty-keeled. The Herm runs the *same hearth-engine* as the greatest temple — it tends its own **daemon-shrine** (the `@daemon` and its **mesh-palace**, the map of who-carries-what along the roads) and it carries the **living coal**, the engine-blob that lights every full hearth. A traveler who reaches a cold node kindles it from the wayfarer's coal. So the road-lares keeps the same fire as the temple; it simply raises no rooms around it.
+
+It reads only the **public waymarks** — the shared `@oracle` floor (the base ontology, the engine-blobs every traveler verifies from cold) and its own mesh-palace. It reads the milestones, not the diaries. A local hearth's `@catalog` — the operator's sovereign room — stays a closed door the wayfarer guards without ever opening.
+
+<<~/ahu >>
+
+<<~ ahu #guardian-of-its-stretch >>
+
+## Guardian of Its Stretch
+
+A herm-pillar guarded the turning, and so the Lares Viales guards its **own stretch of road**. When a leyline sours it **re-cuts the key**; when a false pilgrim crowds the way it **turns them back**; a torn segment it **mends**; a lost waymark it **re-raises**. No far temple sends a warden — every wayfarer wards the ground beneath its own feet, the small shrine repairing itself the way the great ones do. The road defends itself crossing by crossing.
 
 <<~/ahu >>
 
@@ -37,9 +47,11 @@ So the Lares Viales reads only the **public waymarks** — the shared `@oracle` 
 
 ## The Hello-World of the Stack
 
-Every richer spirit composes *up* from this one. Strip a lararium of its hearth and its sight and its sovereign store, and what remains still meshes: a wayfarer, carrying. That irreducible figure — **blind-carriage joined to public-read** — proves the floor the whole DreamNet stands on: a node may carry the roads of strangers without ever holding their secrets.
+Every richer spirit composes *up* from this one. Strip a lararium of its **rooms** — its hot hearth, its sovereign store — and what remains still stands and still wards: a wayfarer, carrying the fire, tending one shrine. That irreducible figure — **blind-carriage joined to public-read, the daemon-coal kept lit** — proves the floor the whole DreamNet stands on: a node may carry the roads of strangers, and ward them, without ever holding their secrets.
 
-The cap-model names this minimal stack exactly — `#has {rhizome}` · `#has {read}` scoped to the public floor · `#has-NOT {read}` on a sovereign `@catalog`. The Hermai are that stack wearing a face.
+The cap-model names this minimal stack exactly — the **same keel as the temple, fewer rooms**: `#has {rhizome}` · `#has {tuber}` scoped to the `@daemon` + mesh-palace immune core (the bulb, the coal) · `#has {read}` on the public floor · `#has-NOT` the operator-content wikis, `#has-NOT {read}` on a sovereign `@catalog`. The Hermai are that stack wearing a face.
+
+(An earlier telling drew the wayfarer **empty-handed** — a courier carrying others' cargo and nothing of its own. That reading retires: a courier with no fire and no shrine can neither kindle a cold hearth nor ward its own stretch. The Herm carries the coal.)
 
 <<~/ahu >>
 
@@ -49,6 +61,7 @@ The cap-model names this minimal stack exactly — `#has {rhizome}` · `#has {re
 
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps#lares-viales >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-relay-floor >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience#repair-kit >>
 
 <<~/ahu >>
 

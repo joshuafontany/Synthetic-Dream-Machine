@@ -48,7 +48,7 @@ Six residency verbs (SPARQL set-algebra) + a **non-residency tier** (INGEST, REC
 |---|---|---|---|
 | **ADD** | read `from-bag`'s record for title; write into `to-bag` preserving change-id | accession (`to-bag`) | title, from-bag, to-bag, change-id |
 | **COPY** | read `from-bag`'s record; overwrite `to-bag`'s version preserving change-id | accession (`to-bag`) | title, from-bag, to-bag, change-id |
-| **MOVE** | ADD into `to-bag` + tombstone the title in `from-bag` | transfer pair: accession (`to-bag`) + deaccession (`from-bag`) | title, from-bag, to-bag, change-id |
+| **MOVE** | ADD into `to-bag` + RETRACT (hard-remove → *absent*) the title in `from-bag` (falls through to a canon copy beneath; never a kāpae) | transfer pair: accession (`to-bag`) + deaccession (`from-bag`) | title, from-bag, to-bag, change-id |
 | **CLEAR** | enumerate live titles in bag, tombstone each | disposition (bag-level) | bag |
 | **DROP** | tombstone every live title in bag + mark the bag retired | disposition (bag retired) | bag |
 | **LOAD** | land operator-supplied carriers into `to-bag` (carrier-borne; islands never fetch — `source-uri` = provenance) | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
@@ -74,9 +74,13 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, **neve
 3. **Change-id preservation** (Anti-pattern #1 defense). ADD / COPY / MOVE carry
    the source record's `change-id` into the destination Manifestation — the Work
    keeps its causal identity across bags.
-4. **Kāpae, not delete** (Anti-pattern #3 defense). MOVE / CLEAR / DROP tombstone;
-   they never hard-delete. `resolveAll` reports live presence; `listKapaeBags`
-   surfaces which bags explicitly hide a title.
+4. **Kāpae or retract, never silent delete** (Anti-pattern #3 defense). CLEAR /
+   DROP raise a **kāpae** tombstone (shadows lower bags — resurrection-prevention);
+   MOVE **retracts** its source to *absent* (hard-remove → falls through, so the
+   canonical copy beneath surfaces — never a kāpae, else promotion `@working → canon`
+   would shadow its own target). `resolveAll` reports live presence; `listKapaeBags`
+   surfaces which bags explicitly hide a title. (the toggleable shadow-vs-fall-through
+   cut: [[kapae]])
 5. **Parse-or-reject.** `parseResidencyAction(invocation)` validates verb
    membership + per-verb required args; malformed input throws before dispatch.
 

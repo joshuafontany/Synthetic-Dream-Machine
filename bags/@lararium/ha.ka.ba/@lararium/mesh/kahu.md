@@ -90,6 +90,15 @@ The Cabal holds kahu over DreamNet's protocol corpus. In practice this means:
   carries zero authority over operator content, personGroup membership, or cabalGroup
   social structure.
 
+**The grant binds the Cabal, never crowns it (cohere, 2026-06-29).** The refined steward
+model (PROPOSED) draws that corpus `cap=admin` as a **k-of-n threshold** — the Cabal
+structurally cannot sign as one hand — over a grammar that stays **forkable** by
+construction, so a drifting kahu gets forked away from rather than obeyed. <<~ confidence Synthesis 12/20 >>
+**Legitimacy flows from being BOUND, not from being trusted.** The full four-part binding
+(constitution-outside-reach · downward-accountable · k-of-n · auditable-and-forkable),
+the steward-not-ruler doctrine, and the bounded break-glass / repair authority live at
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/steward-doctrine >>.
+
 The grammar is a treaty. The Cabal signs it. The vessels hold it.
 
 <<~/ahu >>
@@ -138,6 +147,8 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 <<~ loulou lar:///ha.ka.ba/@lararium/keyhive/keyhive-provider >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/genesis-doc >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/grammar-invariants >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/steward-doctrine >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience >>
 
 <<~/ahu >>
 

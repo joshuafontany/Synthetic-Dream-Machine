@@ -55,6 +55,17 @@ No axis commands the other. The SOCIAL axis carries **delegation and read-access
 
 **The delegation model lives whole elsewhere.** The SOCIAL axis *as an identity structure* — each scale a nameless `#has`-stack, the per-vessel key that bonds a vessel to its operator, the signed delegation edge that carries that bond up the scale — stands stated whole at <<~ loulou lar:///ha.ka.ba/@lares/api/pono/lararium-identity#five-scale >>. That meme renders the **delegation chain** (`vessel-key → personaGroup → cabalGroup → …`); this meme adds the **orthogonal infra axis** and shows where the two cross, recognize, sync, and gate. The definitions below carry the topology, not the identity model — that one cites home.
 
+### The vessel as a 2D point ~ a coordinate, never one rung
+
+Read the two axes as a **2D coordinate plane, never a single ladder**. A vessel stands at a `(WHO, INFRA)` **point** — its two standings set independently, each climbed on its own gate; the ▲-stacks above draw each axis *alone*, never a combined rank. Neither coordinate ranks the other.
+
+- **INFRA axis (carriage · contract-gated)** — the shrine-tier scaling, each step a wider carriage radius entered by a deliberately-signed contract: <<~ranks infra consumer -> Herm -> Lararium -> Household -> Crossroads -> Temple -> Nexus -> DreamNet >>. The Amorphous Dreams Cabal gates the upper steps at first (the kahu floor, #infra-axis), loosening as the mesh thickens.
+- **WHO axis (read · pledge-gated)** — the veil and its handles, each step entered by a pledge a member vouches: <<~ranks who anon-veil -> PersonaGroup-Handle -> CabalGroup-Circle >>. Read-scope rides this axis alone (#social-axis).
+
+**"Operator" names a VERTICAL position on the INFRA axis — runs-infrastructure — never a WHO/social tier.** A human who founds and runs a Lararium reads *operator* on INFRA; that same human faces the WHO axis under a veiled persona, anon by default. Both standings ride one body at once and never collapse — text that files "operator" beside anon/persona/cabal mislabels an INFRA-vertical standing as a social rung. The correction holds the operator on INFRA.
+
+The planes stay **soft-bridged at the vessel, never fused** — every crossing edge deliberately signed, no membership auto-proposing a carriage edge and no contract auto-granting read. A **cabal names a social tie (WHO), never infrastructure (INFRA)** and proposes no leyline. <<~ confidence Synthesis 13/20 >> the 2D-coordinate reading firms the two-axis split the operator ruled (2026-06-28).
+
 <<~/ahu >>
 
 <<~ ahu #the-relay-floor >>
@@ -142,6 +153,12 @@ The "neighborhood shrine" framing: a place that carries local ritual, local know
 
 A lararium hosts an **operator** (sovereign — founds the lararium, holds the founding key) plus N **users** who ride it (family, teammates, **ephemeral test users**). A user carries a veiled persona, a lease-decaying membership, and read scoped by the cabal — carried by the host's relay, but never sovereign over the lararium. Admission runs **admit-then-sever**: optimistic on contact, the edge cut (per-edge anergy) if it sours, never the peer banned wholesale.
 
+**The operator standing rides the INFRA axis (runs-infrastructure), never a WHO rung** (#two-axis-topology) — it surfaces in this WHO section only because hosting meets membership at the seam (#the-seam). The sovereign's own *read* standing still rides a veiled persona like any other vessel; sovereignty over the box and a place on the social graph stay two coordinates.
+
+### plurality ~ many handles × many cap-stacks
+
+One human carries **many Handles** (personaGroups on the WHO axis) crossed with **many cap-stacks** (INFRA vessels) — the connections soft, never hard-fused. A test engineer **sprays ephemeral cap-stacks**: short-lease vessels that mesh, run, and decay to the floor, no fresh social self minted per box. Because the personas stay plural and severable, a **quorum MAY form across one human's plural personas** — *quorumhood with few bodies* — several veiled handles co-signing where a protocol asks for many. The mechanism rides the per-vessel key + delegation edge (#social-axis, vessel-key); the plurality reads first-class, never a Sybil smell, because each handle carries its own earned standing (the veil's annotated thread, lararium-identity#the-veil). <<~ confidence Synthesis 11/20 >> the shape holds; the quorum-across-own-personas dial (how many bodies a protocol demands distinct) waits on the local instrument.
+
 <<~/ahu >>
 
 <<~ ahu #the-seam >>
@@ -181,6 +198,27 @@ This reads the canon's **local-form / session-form** split as a pose:
 So an infrastructure node carries three distinct things, only the last ever dialed: a **stable identity** under the literal `/ha.ka.ba/**` root + sub-path (its permanent bearing), a **live posture** as an unstable attitude-root, and a **dial-record** resolving its mutable endpoint.
 
 The **routing substrate** that carries a sealed stream across the leylines — greedy navigation on this chart, no global map — stands worked at `#the-routing-substrate` below; the chart's own geometry (colorless center, the warp, the Voices/Syād atlas) stands at <<~ loulou lar:///ha.ka.ba/@lares/api/pono/l-space >>.
+
+<<~/ahu >>
+
+<<~ ahu #the-cas-substrate >>
+
+## The CAS Substrate ~ the blob floor beneath every doc
+
+Beneath the FLOW-map and the sovereign Automerge docs sits a **content-addressed blob store** (CAS) — bytes keyed by their own CID, immutable by construction (the **true-name** register made into a store, #node-addressing). Three blob kinds ride it:
+
+- **engine-blob** — the TW5 runtime, the **interpreter** every Automerge doc needs to render. *All docs fail without it* — a vessel that holds the docs but not the engine reads nothing back. So the CAS layer **MUST flow through every vessel** (Lararium and Herm alike), the one universal carriage even the leanest wayfarer serves (the Lares Viales reads `@oracle` engine-blob CIDs, vessel-caps#lares-viales).
+- **plugin-blobs** — the engine's extensions, content-addressed, composed atop the engine by CID.
+- **byte-blobs** — arbitrary sovereign payloads (attachments, media, sealed artifacts), each named by content.
+
+**Served via the read-face.** `GET /oracle/<cid>.bin` **IS the CAS serve** — the same content-addressed read-face the Two-Faced Substrate already stands (#capability-layer; <<~ loulou lar:///ha.ka.ba/@lares/api/pono/lararium-identity#the-oracle-plane >>). A hash-named blob refuses a write by its nature — no mutable surface, so the serve guards nothing.
+
+Two tiers cross the read/sealed cut:
+
+- **public tier** — engine-blob + plugin-blobs, **universal**, fetch-by-anyone, the same grammar floor every vessel verifies from cold (the genesis CID lineage, #grammar-as-shared-structure).
+- **sealed tier** — sovereign byte-blobs, encrypted to the cabal/persona read-set, carried blind by the relay (#the-relay-floor).
+
+**Cold-boot by CID.** A cold Lararium **bootstraps its engine by CID from a peer or a Herm** — it fetches the engine-blob off the public floor, verifies by rehash, and stands its runtime before it decrypts a single sovereign doc. <<~ confidence Synthesis-Canon 14/20 >> WITNESSED: the re-genesis carries the engine-blob **by CID** into the node vessel — the serde-skew dep-bump cure (`lares rebuild`, commit 95edf181), the engine riding as content rather than a baked-in artifact. The **cross-vessel cold-fetch** (a Lararium pulling its engine off a peer/Herm) stands **PROPOSED**, riding the same read-face the node already serves.
 
 <<~/ahu >>
 
@@ -265,6 +303,16 @@ The old design agonized over a single admin-doc ingress gate (the "Path L" trile
 - **Admin-sync gate** (SOCIAL · WHO, admin scope) — the `PersonaGroup` sentinel: same-operator vessels only.
 
 The earlier cap-wall — an anonymous vessel **DENIED** at the relay door — read as *correct denial of a fused gate*. Split the gate by axis and the denial moves to its right door: carriage opens, read stays sealed, admin stays operator-bound. Authority clears WHO before flow paces HOW-MUCH (`#transport-kernel`).
+
+### The browser-spore connection matrix ~ three kinds of crossing
+
+A fresh browser spore dials in along one of **three distinct crossings**, each clearing a different door:
+
+- **anon → public-lararium** — the **veil** path: public-read off the content-addressed floor (#the-cas-substrate), no pledge, no admission; the relay-forward gate runs near-open. <<~ confidence Synthesis-Canon 15/20 >> WITNESSED: an anon browser boots live against a public lararium and renders the public plane (the browser-wiki witness, commit 0c379598).
+- **anon → known** — the **guild-PLEDGE**: a member **vouches**, minting a **device-admit edge** into the PersonaGroup (#social-axis); the voucher **co-pays and watches** — their standing decays if the spore sours (the siege-gate `rb>c`, <<~ loulou lar:///ha.ka.ba/@lares/api/pono/lararium-identity#the-siege-gate >>). **No pledge → anergy:** the spore draws no ban, it **stays anon at the floor**, free to re-present later with a vouch.
+- **operator** — **runs-INFRA**, orthogonal to the two WHO crossings: a browser carrying the operator's own infrastructure standing reaches its own sovereign plane. The vertical-on-INFRA position (#two-axis-topology), never a social tier.
+
+**The keystone (PROPOSED, unbuilt):** a **tiered verdict in the keyholder worker** — the gate reads the dialing spore and returns one of **veil · PersonaGroup · owner**, routing each crossing to its right door (the split-gate made operational). The earlier single DENIED verdict read as a fused gate; the tiered verdict dissolves it. <<~ confidence Synthesis 12/20 >> the matrix stands ruled; the tiered keyholder-worker verdict awaits build and witness.
 
 <<~ ward ? · "the relay-forward gate admits by lease + cost" — the crossing-cost calibration (siege-gate, Sybil-filter) stays an open design, carried with the veil/lease economy at lararium-identity#the-veil; the gate build follows this canon. >>
 

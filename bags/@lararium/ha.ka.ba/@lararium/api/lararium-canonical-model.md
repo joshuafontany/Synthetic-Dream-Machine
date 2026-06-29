@@ -67,9 +67,15 @@ sub-memes; this carries the keel + the meme map.
 11. **Tiddler-format law + disk projection.** Documentation memes live in `bags/` as `.md`
     memetic-wikitext; `.tid` carry runtime TW5 code only. `@bag`=automerge doc; bags/=seed/
     canon, wikis/=projection; RENDER not copy. ([[feedback_bags_docs_over_tids]], [[project_disk_projection_model]])
-12. **DreamNet topology.** device-vessel → PersonaGroup → Cabal → Nexus → DreamNet. Each
-    layer holds sovereignty within; outer layers carry RECOGNITION via shared grammar
-    (lar:/// · SharktoothSigil · ABILITY_LADDER · genesis CID), no central authority. ([[project_dreamnet_architecture]])
+12. **DreamNet topology — two orthogonal axes, never one ladder.** The earlier single chain
+    (device-vessel → PersonaGroup → Cabal → Nexus → DreamNet) **retires** as fused-ladder residue —
+    it crossed WHO (read) with FLOW (carriage) on one rope. The live model splits them: the **WHO
+    axis** (read · pledge-gated) climbs vessel-key → PersonaGroup → CabalGroup, and the **INFRA axis**
+    (carriage · contract-gated) climbs relay-floor → Lararium → Nexus → DreamNet — the two crossing at
+    the vessel, soft-bridged, never fused. "Operator" names a VERTICAL position on INFRA (runs-infra),
+    never a WHO/social tier; delegation tops at the Cabal, above it treaty / mutual-carriage. Each scale
+    holds sovereignty within; outer scales carry RECOGNITION via shared grammar (lar:/// · SharktoothSigil
+    · ABILITY_LADDER · genesis CID), no central authority. (<<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#two-axis-topology >>)
 
 <<~/ahu >>
 

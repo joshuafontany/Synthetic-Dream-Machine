@@ -103,13 +103,20 @@ The carriage-demand stimulus reads off `r` — the carriage-standing coordinate 
 
 ## Lares Viales ~ the minimal wayfarer
 
-The smallest composition that still meshes — **the Hermai**, the crossroads-markers: a pure-carriage wayfarer that **cannot read most of the time.** Its whole stack:
+The smallest composition that still meshes — **the Hermai**, the crossroads-markers. A Herm runs the **same code keel as a full Lararium** — the core **@daemon wiki-worker** plus its **own mesh-palace** — and thins only its `#has`-stack: it furnishes none of the operator-content wikis (no hot/cold user store, no sovereign `@catalog`). **One codebase, two `#has`-stacks.** The Herm differs from a fat node by **composition over the shared keel**, never by a separate minimal codepath — so a Herm reads as a named point in cap-composition space (#the-vessel-is-its-caps), not a stripped-down process. Its stack:
 
-- `#has {rhizome}` — it carries sealed mana along the leylines.
-- `#has {read}` scoped to the **public floor** — `@oracle` (base-ontology, engine-blob CIDs) and its **own mesh-palace** (the FLOW-map it routes on).
-- `#has-NOT {read}` on a local operator's **`@catalog`** — the sovereign hearth stays sealed.
+- `#has {rhizome}` — it carries sealed mana along the leylines (CARRIAGE).
+- `#has {tuber}` scoped to the **immune core** — its own `@daemon` (the autonomy organ) and mesh-palace (the FLOW-map it routes on), carrying the **bulb** (the engine-blob / boot-seed) so it can seed a cold hearth.
+- `#has {read}` scoped to the **public floor** — `@oracle` (base-ontology, engine-blob CIDs) and its own mesh-palace.
+- `#has-NOT` the **operator-content wikis** — no hot/cold user store; `#has-NOT {read}` on another operator's sovereign **`@catalog`**, the sealed hearth stays a closed door.
 
-It holds no sovereignty over another's content and expresses no sight into the territory; it knows the roads and the waymarks, never the houses. The Lares Viales proves the architecture's floor in one figure — **blind-carriage ⊕ public-read** — the minimal node every richer vessel composes *up* from (the Hello-World of the stack). The fiction names it the road-lares and the crossroads-herm: <<~ loulou lar:///ha.ka.ba/@elyncia/concepts/lares-viales >>.
+### Immune teeth ~ why the keel, not a pipe
+
+The `@daemon` carries the **autonomy organ**: it runs the siege repair-kit — **re-key · evict · heal · re-share** — at the Herm's **own shrine tier**. A dumb pipe holds no such organ and cannot defend the segment it carries; the keel grows the teeth. This follows **Stafford Beer's VSM recursion** — the viable-system kit runs at *every* tier, each tier autonomous, never one central immune system. So a Herm at a crossroads repairs its own neighborhood: it re-keys a soured leyline, evicts a bad peer, heals a torn segment, re-shares the floor. Carrying the engine-blob, it brings **the fire to cold hearths** — any traveler kindles a fresh node from the wayfarer's own bulb.
+
+A Herm **boots permissionlessly** (its own self-certifying key, anon — no blessing asked, #integrity); every leyline it forms rides a **separately-signed PEER/TRANSIT edge**, never a membership grant — carriage means transit, not trust. It reads the public floor and routes the map, yet the **disclosure membrane holds at the wire**: sovereign content never crosses it. The Lares Viales proves the architecture's floor in one figure — **immune-core ⊕ blind-carriage ⊕ public-read** — the minimal node every richer vessel composes *up* from (the Hello-World of the stack, now with teeth). The fiction names it the road-lares and the crossroads-herm: <<~ loulou lar:///ha.ka.ba/@elyncia/concepts/lares-viales >>.
+
+**Retire-residue (attractor).** An earlier draft named the Herm a **minimal serve-carry process** — a stripped pipe serving the public FLOW-map and forwarding bytes, with no `@daemon` and no engine. That picture **superseded**: a pipe grows no immune function, so a mesh of pipes cannot repair itself under siege. The current model keeps the figure (minimal, blind-carriage, public-read) and **adds the keel** — the @daemon + mesh-palace immune core — so the floor defends itself at every tier.
 
 <<~/ahu >>
 
@@ -156,6 +163,7 @@ What stays to **write** is narrow and named — the cap *vocabulary* itself (`rh
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-relay-floor >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-routing-substrate >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience#repair-kit >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/lar-vessel >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/open-vessel >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/capability >>

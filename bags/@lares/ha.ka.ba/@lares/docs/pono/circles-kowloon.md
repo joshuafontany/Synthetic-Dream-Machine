@@ -5,7 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/circles-kowloon.md"
 mana      = 16
-register  = "SC"
+register  = "Synthesis-Canon"
 retain    = true
 role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
 type      = "text/x-memetic-wikitext"
@@ -101,6 +101,18 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 <<~ ahu #lararium-mapping >>
 
 ## Lararium Mapping
+
+> **Coherence note (2026-06-29).** The refined identity model resolves a Lararium group
+> as an **edge-closure** — the reciprocal-edge fan over signed, typed, `lar:`-named
+> member edges, *evaluated* as a query — never a central `CirclesDoc` object a single
+> node owns as a roster
+> (<<~ loulou lar:///ha.ka.ba/@lares/api/pono/group-as-closure >>). So the mapping rows
+> below that read a circle as one owner-held doc carry **retire-residue** framing: keep
+> them as the faithful Kowloon prior-art trace they document, but for *our* design read
+> `CirclesDoc`/`actorId`-ownership as the closure each member's own edge composes, and
+> read eviction as a kāpae on the membership stack
+> (<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kapae#membership-sense >>). The Kowloon
+> reference itself stands unchanged — Kowloon legitimately uses a central object.
 
 | Kowloon | Lararium |
 |---|---|
