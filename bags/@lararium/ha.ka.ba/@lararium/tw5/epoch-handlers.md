@@ -17,6 +17,20 @@ uri-path    = "ha.ka.ba/@lararium/tw5/epoch-handlers"
 
 <<~ &#x0002; >>
 
+<<~ ahu #disambiguation >>
+
+## Disambiguation — `epoch` here names COMPACTION
+
+This `epoch` (the DXOS-style snapshot-restart that mints a fresh history-less doc) names
+the **compaction** that bounds CRDT history — DISTINCT from the authority/liveness
+**lease-epoch** (the re-key / re-share clock, max-register, coordinator-free) that runs the
+siege refresh window at <<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience >>. The
+two MAY co-occur at a boundary, never fuse: this one bounds *state-history growth*, the
+lease-epoch bounds *who may still act*. Reserve bare *epoch* for the lease going forward;
+read this mechanism as **compaction**.
+
+<<~/ahu >>
+
 <<~ ahu #contract >>
 
 ## Contract

@@ -99,7 +99,7 @@ question closes with the ruling above — no numbered plane survives to reconcil
 
 <<~ ahu #vessel-key >>
 
-## The Vessel Key ~ Plane 0, minted on-device
+## The Vessel Key ~ the device key, minted on-device
 
 Each vessel forges its **own** Ed25519 keypair, on its own device, private half never
 leaving (NodeFS for the node, WebCrypto for a browser session). The verifying key
@@ -108,10 +108,19 @@ derives a `did:key`. The literature converges: **admit by signing, never by shar
 warns against (SSB-fusion, Veilid lose per-device revocation by it; Keybase built its
 per-device model to escape it).
 
-So genesis mints a **distinct vessel key** (Plane 0) **and** an operator **PersonaGroup**
-(Plane 1); the vessel stands as the group's first member, never as the group itself.
-The behavioral split (drop the `kind="operator"` brand on the device tiddler; mint the
-Plane-1 group) rides the genesis refactor — single-vessel-correct, no Beelay needed.
+So genesis mints a **distinct per-vessel device key** **and** an operator **PersonaGroup**;
+the vessel stands as the group's first member, never as the group itself. The device key
+**binds to its operator by a signed delegation edge** into the PersonaGroup
+(#delegation-edge) — the bond climbs the **WHO / social axis** (#five-scale), never an
+absolute plane-index. The behavioral split (drop the `kind="operator"` brand on the device
+tiddler; mint the operator PersonaGroup and sign the delegation edge) rides the genesis
+refactor — single-vessel-correct, no Beelay needed.
+
+**Retire-residue (the plane-numbering framing).** Earlier drafts named this the *Plane 0*
+device key delegating to a *Plane 1* group. The numbered planes retired (operator ruling
+2026-06-24, #five-scale — nameless `#has`-stacks scope **by reach, relatively**, never by a
+global plane-index); read any lingering "Plane 0 / Plane 1" as **the device key → operator
+PersonaGroup delegation edge** on the WHO axis.
 
 <<~/ahu >>
 

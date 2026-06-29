@@ -35,6 +35,14 @@ all to see*. This meme answers **who governs it, at what scale, and how it stays
 un-capturable**. The short of it: **the founder seeds, the circle governs, the fork
 guards.**
 
+**One `@oracle`, two faces — never a second board.** This governance board reads as the
+**read face** over the *same* `@oracle` substrate the registry/recipe plane already holds.
+The **content/registry face** mints the recipe + engine-blob CIDs + protocol invariants
+(<<~ loulou lar:///ha.ka.ba/@lares/docs/pono/wiki-layer-ontology#oracle-planes >>); the
+governed **read face** named here projects that content for public verify-only sight. The
+two name one `@oracle` seen two ways — no reader should mistake this board for a second
+`@oracle`.
+
 <<~ ahu #per-nexus-not-global >>
 
 ## Per-Nexus, Not One Global Board

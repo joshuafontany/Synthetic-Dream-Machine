@@ -46,6 +46,13 @@ A static defence loses a 500-year siege by arithmetic: given enough time, a cree
 
 <<~moves static-threshold-defence/eventually-falls -> proactive-refresh/expires-every-theft on/g(0)=0-re-randomization if/refresh-faster-than-creep do/reset-the-window-not-win-the-fight >>
 
+**Disambiguation — this re-key/re-share `epoch` = the liveness LEASE.** The refresh window's
+`epoch` (the AUTHORITY clock, #two-clocks — re-key / re-share, max-register, coordinator-free)
+names the liveness **lease** (it bounds *who may still act*), DISTINCT from the CRDT-history
+**compaction**-epoch (the snapshot-restart that bounds *state-history growth*) at
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/epoch-handlers >>. Same word, two mechanisms — they
+MAY co-occur at a boundary, never fuse.
+
 <<~/ahu >>
 
 <<~ ahu #cadence >>

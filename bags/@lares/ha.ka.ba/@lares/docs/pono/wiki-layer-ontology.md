@@ -86,6 +86,8 @@ Islands resolve each slot from its plane: invariants + system bags from the `@or
 
 **Invariant mint law (operator-gated, 2026-06-10):** minting a protocol invariant rides the **most-restricted grant — operator(admin), timed**. Only the node home (the base @lararium node, the genesis office) mints; the keel only READS the oracle, and wild vessels receive the invariant plane by federating the **@oracle** runtime-island doc — absent reads *not-yet-federated*, never mint-it-yourself. Mint-if-absent self-heals at the node's genesis load (boot = first reconcile); two node homes sharing one @oracle doc settle a concurrent mint by LWW: write, re-read, **adopt the winner**. Grant-proof enforcement arrives with keyhive; placement enforces the gate today. Content arrives by its own arc; the empty doc stands the structure.
 
+**Content face ↔ read face (one `@oracle`, never two boards).** This recipe/invariant plane names the **content face** of `@oracle`; its governed **read face** — who signs the public-read projection, at what scale, and how it stays un-capturable — refines forward at <<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>. Same `@oracle` seen two ways.
+
 <<~/ahu >>
 
 <<~ ahu #lifecycle-law >>
