@@ -492,8 +492,11 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/memory-store >>
 <<~ loulou lar:///ha.ka.ba/@lararium/config/bag-paths >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
-<<~/ahu >>
+**Tie ~ palettes as casual register.** A per-operator overlay (palette, view-state) reads as the CASUAL
+register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace]]
+#three-registers).
 
 <<~ &#x0003; >>
 

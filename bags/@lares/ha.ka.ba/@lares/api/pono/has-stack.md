@@ -101,6 +101,11 @@ The same grammar runs both planes: stack order is precedence (a cap claims a sig
 
 <<~ loulou lar:///ha.ka.ba/@lararium/api/island-isomorphism >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/projection-nalu >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
+
+**Tie ~ a palace IS its cap-stack.** The runtime twin extends a third substrate: the nameless memory-
+palace daemon ([[living-grammar-palace]] #palace-instance) ports `composeIsland` to Python — one body,
+differentiated only by `[FlockSingleton, FeedCap, …]`; role emerges from the stack, never a type.
 
 <<~/ahu >>
 

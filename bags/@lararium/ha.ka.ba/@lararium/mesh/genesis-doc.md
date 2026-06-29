@@ -162,6 +162,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-cas-substrate >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/island-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
 <<~/ahu >>
 

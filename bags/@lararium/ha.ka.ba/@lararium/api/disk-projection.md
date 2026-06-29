@@ -195,8 +195,11 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 <<~ loulou lar:///ha.ka.ba/@lararium/api/save-path >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/sync-namespace >>
 <<~ loulou lar:///ha.ka.ba/@lararium/docs/catalog-doc >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
-<<~/ahu >>
+**Tie ~ bags/ IS the formal register.** This surface (the seed/canon `bags/`, mana-entrenched) is exactly
+the FORMAL register of the living grammar ([[living-grammar-palace]] #three-registers) — the curated band
+between casual chat-use and the defined parser core.
 
 <<~ &#x0003; >>
 

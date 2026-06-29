@@ -335,6 +335,14 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 <<~ loulou lar:///ha.ka.ba/@lararium/api/mempalace-integration >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/nalu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/lararium-canonical-model >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/living-grammar >>
+
+**Tie ~ FORM beside CONTENT.** This model captures CONTENT (the verbatim journey + gradient
+annotations); its orthogonal twin, [[living-grammar-palace]], captures the turn's FORM (the constructicon
+in use) — the two cross-joined by verbatim-sha + RRF. The form-capture reads the SAME emitted markers
+this model annotates from ([[lar-telemetry]]); the cross-substrate invariant behind both lives at
+[[living-grammar]].
 
 <<~/ahu >>
 

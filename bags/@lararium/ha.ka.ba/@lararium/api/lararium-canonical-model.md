@@ -234,7 +234,13 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/ffz-clock >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/living-grammar >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/lares/noosphere-boot >>
+
+**Tie ~ the living grammar.** The house's grammar lives as a pattern-integrity ([[living-grammar]]) —
+seeded by the boot, enacted per turn, corrected by degree, decaying untended; the memory-palace that
+captures its FORM beside the verbatim CONTENT stands at [[living-grammar-palace]].
 
 <<~ &#x0003; >>
 

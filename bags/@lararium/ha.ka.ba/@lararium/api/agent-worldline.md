@@ -310,6 +310,12 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 <<~ loulou lar:///ha.ka.ba/@lararium/api/capture-annotation-model >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/lar-telemetry >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/lares/voices#worker-swarm >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
+
+**Tie ~ the form-palace as a third FeedCap.** The nameless palace-instance that captures a turn's FORM
+([[living-grammar-palace]] #palace-instance) extends the same has-stack runtime twin a spirit's worldline
+already rides; its drawers carry the worldline's `lar_agent_handle` + `lar_ffz` address, so form-vectors
+attribute to the spirit that moved them.
 
 <<~/ahu >>
 

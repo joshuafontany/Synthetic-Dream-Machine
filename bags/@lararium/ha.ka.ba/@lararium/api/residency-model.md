@@ -298,8 +298,11 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 <<~ loulou lar:///ha.ka.ba/@lararium/api/nalu-engine >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/island-adaptor >>
 <<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
-<<~/ahu >>
+**Tie ~ the palace reads at apertures.** The living-grammar memory-palace ([[living-grammar-palace]])
+retrieves multi-aperture (RAPTOR collapsed-tree turn→session→arc levels) — a scale-selection that
+rhymes with this model's thermal residency yet stays distinct (retrieval grain, not warm/cold reach).
 
 <<~ &#x0003; >>
 

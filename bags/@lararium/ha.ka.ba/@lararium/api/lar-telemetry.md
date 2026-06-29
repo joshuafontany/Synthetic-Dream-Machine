@@ -215,6 +215,13 @@ vendored web2 sibling reached through the seat, never a citizen of the stack
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/parser >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/lararium-canonical-model >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/living-grammar >>
+
+**Tie ~ the markers feed the form-palace.** The classifier channel this process reads (the `<<~ … >>`
+instrument sigils — the red that steers) is exactly the marker-emission Route A the living-grammar
+memory-palace ([[living-grammar-palace]]) encodes into a FORM vector — so lar-telemetry's gradient
+readings AND the form-capture both drain the one emitted-marker stream, no discourse-parser needed.
 
 <<~/ahu >>
 

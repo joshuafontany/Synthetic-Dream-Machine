@@ -130,8 +130,11 @@ The model holds two tiers (`wela` live / `anu` torn down). A third (warm / froze
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/local-first >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/lares/alignment-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 
-<<~/ahu >>
+**Tie ~ apertures, not tiers.** The living-grammar memory-palace ([[living-grammar-palace]]) selects a
+retrieval APERTURE (turn → session → arc) where this model selects a THERMAL tier (wela/anu) — adjacent
+scale-axes, kept distinct.
 
 <<~ &#x0003; >>
 
