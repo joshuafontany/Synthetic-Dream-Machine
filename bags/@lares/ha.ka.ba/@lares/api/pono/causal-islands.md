@@ -65,11 +65,17 @@ homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal 
 `CapabilityVerifier.verify` accepts it. First live call site + ocap rationale:
 [personal-slot](../lararium/personal-slot.md).
 
-**Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups:
-`Individual ⊂ PersonaGroup ⊂ Cabal ⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet`. Each ring
-forms a causal island with a **cryptographic membrane** — the Keyhive delegation chain
-IS the join-rule. "DreamNet" names no registry and no canonical graph; it is the emergent
-transitive closure of who-relays-to-whom under everyone's local stances.
+**Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups on the **SOCIAL axis**:
+`Individual ⊂ PersonaGroup ⊂ Cabal`. Each social ring forms a causal island with a **cryptographic
+membrane** — the Keyhive delegation chain carries the join-rule. **Delegation tops at the Cabal**
+(2026-06-29 cohere); above it the mesh scales on the orthogonal **INFRA axis** — `Nexus` and
+`DreamNet` join by **treaty / mutual-carriage contract** (who relays whose sealed bytes), never by
+delegation-up, a relay carrying without reading
+(<<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#two-axis-topology >>). "DreamNet"
+names no registry and no canonical graph; it emerges as the transitive closure of who-relays-to-whom
+under everyone's local stances. Read the earlier single rope
+(`⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet` as delegation-nested SOCIAL rings) as retire-residue the
+two-axis treaty split supersedes — neighborhood/city now ride the INFRA shrine-tiers, not a WHO ring.
 
 **Axis 3 — Powers.** The faculties of infrastructure are separable and each devolvable to
 a distinct provider: `host · relay · aggregate · address · moderate`. **Host-independent
@@ -105,8 +111,11 @@ private mesh of households rather than a public broadcast medium.)
 **Visibility gate**: ALL six conditions must hold for a meme to federate across an edge island.
 Stage band is a UX annotation — NOT a gate condition.
 
-**Membrane law** (Scale axis): joining a ring requires a capability delegation from that ring's
-Keyhive group. The delegation chain functions as the join-rule; no central admission authority exists.
+**Membrane law** (Scale axis): joining a **social** ring (≤ Cabal) requires a capability delegation
+from that ring's Keyhive group. The delegation chain functions as the join-rule for the SOCIAL axis;
+no central admission authority stands. **Above the Cabal the INFRA axis takes over** — `Nexus` and
+`DreamNet` join by **treaty / mutual-carriage contract**, never delegation-up (2026-06-29 cohere →
+dreamnet-architecture#two-axis-topology).
 
 **Alignment law** (Plane 0): trust assertions are ordinary signed content, evaluated LOCALLY
 against a per-island root. No global consensus, no central registry, no global trust score.
@@ -136,8 +145,12 @@ implication-rule  = "ordered-except-pull"
 #   revoke = an ADMIN operation (roll the epoch) — carried by edge-island epoch + lifecycle
 
 # ── Axis 2 — SCALE (membership nesting; Keyhive group composition) ──────────
+# SOCIAL rings (WHO axis) — delegation tops at the cabal:
+scale-social  = ["individual", "persona-group", "cabal"]
+membrane-rule = "delegation-chain-is-the-join-rule"   # SOCIAL rings (≤ cabal) only — each = a causal island membrane
+# INFRA scaling (FLOW axis) — neighborhood/city/nexus/dreamnet join by TREATY / mutual-carriage, NOT delegation-up
+# (cohere 2026-06-29 → dreamnet-architecture#two-axis-topology). Retire-residue of the old single rope below:
 scale-lattice = ["individual", "persona-group", "cabal", "neighborhood", "city", "nexus", "dreamnet"]
-membrane-rule = "delegation-chain-is-the-join-rule"   # each ring = a causal island membrane
 
 # ── Axis 3 — POWERS (separable faculties; each devolvable to a distinct provider) ─
 powers       = ["host", "relay", "aggregate", "address", "moderate"]

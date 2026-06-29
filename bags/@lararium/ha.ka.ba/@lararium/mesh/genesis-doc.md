@@ -70,6 +70,8 @@ The `@oracle` docId derives from the FOUNDING vessel's `@daemon` identity-root (
 
 **Backstop — exit/fork.** `@oracle` is a synced CRDT with a host-independent docId → the net can fork it and continue at zero loss. A founder who CAN be forked cannot rule — a property, not a promise. The rhizome forbids a *filiation*, not a *seed*; a seed that becomes one alliance-point among many is fully rhizomatic.
 
+**The governance face.** This doc **seeds** the board (the docId derivation, the three couplings); who **signs** the steward source, why the board lives **per-nexus** (ownership + scale, never a no-global-now prohibition — a shared docId names a rendezvous each peer materializes as its own causal island), and how the fork guards it — that face stands worked at <<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>. The three couplings here (origin · governance · liveness) carry forward there as *founder seeds · circle governs · fork guards*.
+
 <<~ confidence Synthesis-Canon 15/20 >> architecture correct + stack-aligned; UNVERIFIED + load-bearing (code-scouts for the build): does alpha Keyhive express group-as-root-subject + quorum admission TODAY · does the Hermai invite path carry an `@oracle` introduction along the trust edge. Rhymes: genesis-block (founder-not-dictator) · UCAN (delegate-out; the revocation-veto is the trap) · ATProto (host-independent identity) · Stellar k-of-n + founder-multisig · petname/TOFU introduction · the rhizome (alliance not filiation).
 
 <<~/ahu >>
@@ -157,6 +159,8 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/lar-uris >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/crypto >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-cas-substrate >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/island-protocol >>
 
 <<~/ahu >>

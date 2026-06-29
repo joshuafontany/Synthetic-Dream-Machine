@@ -54,7 +54,7 @@ Time rides three instruments, never one (`ffz-clock`):
 Revocation runs two modes, and conflating them ships an unsafe gate:
 
 - **Non-renewal (the default)** — the **epoch-lease**: a max-register rolls forward, every grant at epoch ≤ N must re-mint or expire. Coordinator-free, rides Automerge over the WS relay. <<~ confidence Synthesis-Canon 15/20 >> Safe *because* it only ratchets the whole resource forward — it never singles out one principal.
-- **Targeted (the exception, but PRIMARY for malice)** — **Keyhive convergent membership-removal** (`revoke()`, a tombstone in the membership graph; `orichalcum-capabilities`). A device that re-mints concurrently with a roll would ride the max-register *up* and survive, so any revoke that must defeat a malicious self-renew MUST ride Keyhive's convergent removal — **never the counter** (Kleppmann · p2panda · Keyhive converge on this; #provenance).
+- **Targeted (the exception, but PRIMARY for malice)** — **Keyhive convergent membership-removal** (`revoke()`, a tombstone in the membership graph; `orichalcum-capabilities`). A device that re-mints concurrently with a roll would ride the max-register *up* and survive, so any revoke that must defeat a malicious self-renew MUST ride Keyhive's convergent removal — **never the counter** (Kleppmann · p2panda · Keyhive converge on this; #provenance). That convergent-removal tombstone reads as a **raised kāpae on the membership stack** (`kapae#membership-sense`) — remove-wins, the shadow defeating the malicious self-renew the way a raised kāpae defeats a partitioned lower-layer re-add.
 
 <<~/ahu >>
 
@@ -112,6 +112,7 @@ This meme stands **PROPOSED** (crucible-before-binding). The model held through 
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/lararium-identity >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kapae#membership-sense >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/kahu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/residency-model >>

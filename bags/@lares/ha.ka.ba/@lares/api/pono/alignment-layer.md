@@ -184,6 +184,18 @@ only the *root* and the *default subscriptions* change:
 
 <<~/ahu >>
 
+<<~ ahu #closure-coherence >>
+
+## Coherence — the membership face the closure model formalizes
+
+The veil's cost-dial reads as the **WHO-plane membership face** that [group-as-closure](group-as-closure.md) now states whole. Three connections hold; the cost-dial model above stands unchanged — these links only name where it meets the newer formalizations:
+
+- **The vouch carries the signed membership edge.** A `vouch` (#sybil) rides one signed, severable edge; a group resolves as the reciprocal-edge closure over those vouches — evaluated, never instantiated (group-as-closure#core-claim). Refuse the vouch and the principal stays at the floor: admitted to no cabal, surfaced by no root — the no-vouch → anergy → stay-at-floor reading the closure model formalizes.
+- **Durable eviction raises a kāpae on the membership stack.** Severing a vouch retroactively prunes the subtree (#sybil); the durable form raises a [kāpae](kapae.md) (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
+- **The siege supplies the cadence.** Siege-resilience carries the refresh that keeps a stolen vouch-edge from compounding across centuries — PSS re-randomization on a 24-hour floor — plus its correlated-compromise warning: a monoculture lets one exploit fell every vouch at once, so node-config diversity guards the cost-dial before any refresh cadence buys time.
+
+<<~/ahu >>
+
 <<~ ahu #fiction >>
 
 ## Fiction-layer reading — the Lemuria rite
@@ -219,6 +231,9 @@ right — to decide whose presence the hearth refuses.
 
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/residency-model >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/group-as-closure >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kapae#membership-sense >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/siege-resilience >>
 
 <<~/ahu >>
 

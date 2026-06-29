@@ -113,6 +113,7 @@ only. The running engine still swaps only on reboot (EW-2).
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/genesis-doc >>
 <<~ loulou lar:///ha.ka.ba/@lararium/node/epoch-handlers >>
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/memory-store >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-cas-substrate >>
 
 <<~/ahu >>
 

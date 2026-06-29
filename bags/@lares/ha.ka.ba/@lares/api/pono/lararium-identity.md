@@ -319,6 +319,15 @@ or a threshold — wait on the local instrument (the swarm constrains the shape,
 
 ## The @oracle Plane ~ read-open by content-address, write-gated by relay-tier
 
+> **COHERE → oracle-governance (2026-06-29).** The governance face of this plane refines forward at
+> <<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>: an `@oracle` board lives
+> **per-nexus**, never one global DreamNet board (grounds run ownership + scale, never no-global-now —
+> a shared `docId` names a **rendezvous**, each peer materializing its own causal island over it);
+> governance rides a **threshold-signed steward SOURCE → verify-only public READ projection**, never
+> one cap-tiered writable doc; three couplings hold it — *founder seeds · circle governs · fork guards*.
+> The content-addressed read-face below **stands** (witnessed live); read the single-writable-CRDT
+> framing as the earlier shape the per-nexus steward-source supersedes.
+
 The DreamNet public plane (@oracle — the genesis grammar, public memes, the catalog schema) reads
 OPEN to all, anon included, and writes ONLY to the **kahu-cabal**. The resolution **splits the semantics**
 rather than gate a mutable CRDT for public read (operator insight + scout-grounded, 2026-06-25):
@@ -329,8 +338,10 @@ shared mutable @oracle CRDT **cannot** gate writes without Beelay.
 **Operators and the kahu-cabal part as two groups** (operator ruling 2026-06-25): every **operator**
 holds caps over their OWN infrastructure (their PersonaGroup · their bags · their hearth) and MAY
 receive **Cabal/Nexus-scope** caps *granted by* the kahu-cabal; only the **kahu-cabal** — the
-governance group (the Amorphous Dream Cabal, solo now, scaling toward consensus) — holds write-caps
-on the FULL @oracle DreamNet plane. Every admin/write cap reads **temporary** — a lease that decays
+governance group (the Amorphous Dream Cabal, solo now, scaling toward consensus) — holds the
+steward-source-signing authority over its **nexus's** @oracle plane (per-nexus, never one global
+DreamNet board — #the-oracle-plane cohere note, oracle-governance). Every admin/write cap reads
+**temporary** — a lease that decays
 unfed (#the-lease), the kahu's own included; no permanent write-authority stands anywhere on the mesh.
 
 So @oracle wears **two faces**, joined by a publish-bridge:

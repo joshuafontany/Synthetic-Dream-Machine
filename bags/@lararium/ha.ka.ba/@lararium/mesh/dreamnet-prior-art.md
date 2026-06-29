@@ -320,6 +320,8 @@ uri-path      = "ha.ka.ba/@lararium/mesh/dreamnet-prior-art"
 
 ## 2. Layer Mapping: Prior Art → DreamNet
 
+> **Frame note (post-split residue).** This 2026-05-28 mapping reads the prior art onto the then-current **single five-layer stack**. The architecture later **split that stack into two orthogonal axes** — INFRA (FLOW · carriage, relay-floor → lararium → nexusGroup → DreamNet) ⊥ WHO (read · membership, vessel-key → personaGroup → cabalGroup), crossing at the vessel. The component rows below still hold one-for-one; only the *ladder* they sit in dissolved into a 2D coordinate. §4 #divergences carries the correction; the live model stands at <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#two-axis-topology >>.
+
 ### Layer 1: device-vessel
 
 | Feature | Prior Art | Maturity |

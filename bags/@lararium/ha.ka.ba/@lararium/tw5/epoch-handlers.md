@@ -43,8 +43,9 @@ Two reactors, both running worker-ward over the catalog accessor
 
 **EP-1 — Tombstones survive the epoch (Cassandra rule).** A record carrying
 `meta.deleted = true` migrates into the new doc as first-class state, not
-history — a deletion in a high bag that unshadows a low bag's copy must
-outlive the restart, or the delete silently un-happens.
+history — a raised kāpae ([[kapae]]) in a high bag **shadows** a low bag's
+copy, and that shadow must outlive the restart, or the low copy un-shadows
+and the delete silently un-happens.
 
 **EP-2 — Only the oracle moves.** The bag's slot URI never changes across an
 epoch; the `@catalog` oracle tiddler's doc URL does. Running islands hold the
@@ -100,6 +101,7 @@ is free recovery until growth on a long-lived high-churn bag actually bites
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/engine-watch >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/recipe >>
 <<~ loulou lar:///ha.ka.ba/@lararium/node/handler-args >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kapae >>
 
 <<~/ahu >>
 

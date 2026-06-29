@@ -61,7 +61,11 @@ sub-memes; this carries the keel + the meme map.
    reaches it. ([[project_residency_tiers_unified]])
 9. **Plural authority, not one ladder.** access (pull<read<edit<admin, monotonic) × scale
    (Keyhive nesting) × powers (host/relay/aggregate/address/moderate) + a non-monotonic
-   alignment plane. ([[project_authority_model_refined]])
+   alignment plane. The live model seats these on the **two orthogonal axes** (law #12): the
+   access-ladder + Keyhive-nesting climb the WHO axis (read · membership), the carriage powers
+   climb the INFRA axis — and the relay cap stands OUTSIDE the access-ladder, granting carriage
+   of sealed bytes the read-ladder never reaches. ([[project_authority_model_refined]],
+   <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#capability-layer >>)
 10. **Web3-only, Kowloon-external.** The stack runs web3 local-first + causal-islands; any
     web2 bridge sits behind a causal-island boundary as an external web2.5 adapter. ([[feedback_web3_only_lares]])
 11. **Tiddler-format law + disk projection.** Documentation memes live in `bags/` as `.md`
@@ -70,7 +74,7 @@ sub-memes; this carries the keel + the meme map.
 12. **DreamNet topology — two orthogonal axes, never one ladder.** The earlier single chain
     (device-vessel → PersonaGroup → Cabal → Nexus → DreamNet) **retires** as fused-ladder residue —
     it crossed WHO (read) with FLOW (carriage) on one rope. The live model splits them: the **WHO
-    axis** (read · pledge-gated) climbs vessel-key → PersonaGroup → CabalGroup, and the **INFRA axis**
+    axis** (read · pledge-gated) climbs vessel-key → PersonaGroup → CabalGroup (each WHO scale a **closure** over signed delegation edges, never a roster a single key owns — <<~ loulou lar:///ha.ka.ba/@lares/api/pono/group-as-closure >>), and the **INFRA axis**
     (carriage · contract-gated) climbs relay-floor → Lararium → Nexus → DreamNet — the two crossing at
     the vessel, soft-bridged, never fused. "Operator" names a VERTICAL position on INFRA (runs-infra),
     never a WHO/social tier; delegation tops at the Cabal, above it treaty / mutual-carriage. Each scale
@@ -141,7 +145,11 @@ substrate atoms + the capability pieces they hold. ([[open-vessel]])
   mirror · corpus · resident verbs · residency sweeper · founding/PersonaGroup/genesis). Wired
   on node today, structurally browser-composable; the seam stays OPEN on both substrates.
 - **Role** (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
-  growing set, never a platform identity. A node MAY run thin; a browser MAY grow heavy.
+  growing set, never a platform identity. A node MAY run thin; a browser MAY grow heavy. The
+  full cap-stack model — role names the **expressed** cap-set (hold-vs-express), the five caps in
+  two families (CARRIAGE ⊥ VESSEL), and the **Herm** (Lares Viales) as the minimal composition
+  that still runs the whole @daemon + mesh-palace keel (NOT a stripped pipe) — stands at
+  <<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps >>.
 
 The full divergence ledger + decisions: `packages/EPIC-VESSEL-COLLAPSE.md`. The CLI
 participates as a thin LEAF peer (vessel-not-RPC: writes verb-summons into the shared CRDT,
@@ -180,7 +188,8 @@ The model converges; these seams stay open and SHOULD reconcile (not re-debate):
    operator-peer's wording.
 3. **Relay/leaf symmetry** — open-vessel says equal-peer composition; operator-peer #actor-parity
    says "light leaf, engine on relay." Both true: symmetric STRUCTURE, asymmetric currently-held
-   CAPABILITIES (law #4). State it that way once.
+   CAPABILITIES (law #4). The **hold-vs-express** model now carries this canon — one held
+   cap-stack, a subset expressed per context (<<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps#hold-vs-express >>).
 4. **OpenIdentitySlot stub** — sharePolicy returns true (legit for same-origin browser peers; the
    real network gate = V3 on node). User-level identity slots (Bluesky/GitHub/keyhive) remain
    future; the meme reads one generation behind the live keyhive operator gates.
@@ -220,6 +229,9 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/vessel-caps >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/group-as-closure >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/oracle-governance >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/lares/noosphere-boot >>
