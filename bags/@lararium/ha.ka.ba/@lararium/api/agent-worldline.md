@@ -131,6 +131,12 @@ valid-interval — the twin-reunion, the worldline's one sync point. So the worl
 partial causal order needs no separate structure: it **projects from the provenance
 DAG** — the edge-DAG IS the worldline's happened-before (FfzClock carries only its rhythmic grain: #time).
 
+**The rhizome widens the reading** (2026-06-29): the spawn (`prov:Delegation`) edge is
+not the only happened-before — a mid-flight **injection** (`prov:Communication` — operator
+OR parent reaching a *running* spirit) lands a happened-before edge **mid-execution**, a
+merge-point that is *not* a handback. So 'the worldline's one sync point' generalizes to
+*merge-where-messages-land*; handback becomes one merge among many (the kupono models, #time).
+
 ### The correlation-id ~ the only token that crosses wings
 
 Wings stay isolated; one shared token lets the harvester draw the inter-wing edge:
@@ -209,6 +215,65 @@ overclaims causation; the worldline's partial order, local and epistemic, claims
 what it can hold. <<~ confidence Synthesis-Canon 16/20 >> The cut grounds the
 facet-as-projection ruling above: the cache reads an epistemic position ("as of last
 sync"), never an ontic verdict.
+
+### Rewind, fork & the rhizome ~ the kupono models (operator-ratified 2026-06-29)
+
+A four-spirit swarm + a mempalace recall of the prior floor's own moʻolelo read the
+worldline against a **mutable, branching, injectable** source. Three operations the
+append-only-LINEAR reading never held — each resolved, each grounded in a mechanism the
+base already carries.
+
+**Rewind = *kapae*** (to set aside, never erase). A deleted transcript turn is no hole —
+it stands **tombstoned and kept**, stamped so recall weights it down (the eidetic palace
+remembers the road not taken). Four traditions converge — Datomic retraction · PROV
+`wasInvalidatedBy` · git reflog (dangling, not deleted) · bitemporal valid-close — and the
+base enacts it already: **mempalace `kg_invalidate` closes a triple's `valid_to`
+append-only** (history preserved, never dropped), and the L7 tunnel/hallway dynamics decay
+salience to a floor but **never to zero**. *Gap held:* `as_of` filters **valid-time only**;
+a true belief-rewind (transaction-time — "what did the palace believe at T") is net-new
+atop `extracted_at`.
+
+**Fork = concurrency the DAG already holds.** A session-fork is topologically a
+sibling-spawn — common ancestor, two concurrent frontiers, no edge between — so it needs
+**no new graph structure**. Derived palace data separates two ways: **content-address the
+drawer by change-hash** (shared-prefix dedups, divergent turns mint distinct CIDs — the
+form-palace already keys by `verbatim_sha`), or **fork-by-palace-path** (the daemon is
+keyed per `palace_key = sha256(path)` — each fork its own queue/token/KG/tunnels). And the
+**handle gains a branch-frontier component** so same-session forks stop colliding on the
+shared `run` handle.
+
+**Injection = the rhizome — the `prov:Communication` leg, lit at last.** Because
+`SendMessage` lets *both* operator and node redirect any running spirit — even a grandchild
+the parent never spawned — the worldline is a **rhizome, not a tree**. A mid-flight
+injection lands a happened-before edge **mid-execution**: a merge-point that is **not** a
+handback. So **'merge-only-at-handback' generalizes to 'merge-where-messages-land'** — the
+vector-clock law (a causal clock merges on every message-receive, not only at a join); the
+sealed-delegation rule was the special case where the only messages were spawn + return.
+The **edge-DAG absorbs this** (causal stays on the structure); the **FfzClock stays purely
+rhythmic** — the PATH-B cut already in this meme, now confirmed not overturned: causal never
+rode the clock, so the rhizome adds no burden to it. Two forks stay open at the operator's
+hand:
+
+<<~ranks rhizome-fork D-granularity ~ every-injection ticks+merges (full vector-clock fidelity, noisy-but-true) · *bearing-change-only* (clean, needs a redirection test) — lean: bearing-only -> E-shared-cause ~ injected siblings stay concurrent (an injection-edge each) · siblings the SAME injector steered share that injector as a COMMON CAUSE (not purely concurrent — the rhizome's honest answer) — lean: shared-cause honesty >>
+
+*Mechanism (the build path, packages-swarm 2026-06-29):* merge-where-messages-land needs
+no bolt-on clock — **Automerge already buffers a change until its `deps` arrive, then
+applies it where it lands** (`getHeads` = the frontier), so a `prov:Communication` edge
+models as a change whose `deps` name the recipient's frontier-at-receipt (the doc-plane).
+For the worldline-plane clock-model, **Interval Tree Clocks** (fork = spawn · event =
+inject · join = handback) fit the dynamic spawn/cull set where plain vector-clocks bloat —
+vendor it. The cap-handoff itself rides **`@endo/captp` over the daemon UDS** (`@endo/far`
+= the attenuated reference, build-or-refuse at single-cap granularity).
+
+So the canon's earlier 'twin-reunion, the worldline's one sync point' widens: **handback is
+one merge among many; the rhizome merges wherever a message lands.** The donation boundary
+holds — these models ride *our* @daemon atop the base's bi-temporal KG (`kg_invalidate`) +
+content-addressed tunnels; MemPalace's trunk (entity-first real-name registry, single-node
+"local-first") stays a different ontology — faithful upstream gets only backend/adapters/fixes.
+
+<<~ confidence Synthesis-Canon 16/20 >> The three resolutions rest on convergent prior art
+(bitemporal · PROV-invalidation · vector-clocks · Merkle-fork) and on mechanisms the base
+already ships; the two rhizome forks (D·E) stay genuinely open at the operator's hand.
 
 <<~/ahu >>
 

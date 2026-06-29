@@ -79,6 +79,14 @@ not couple. A worldline **handback** reads as a directed **one-shot DAG-JOIN** �
 merge, the twin-reunion (lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution) — NEVER oscillator
 coupling. One join, one direction, once.
 
+**The rhizome generalizes the join** (2026-06-29). Handback is not the *only* DAG-join — a mid-flight
+**injection** (`prov:Communication`, operator or parent reaching a running spirit) is *also* a directed
+one-shot join, landing **where the message lands** (the vector-clock law), not only at reunion. Each join
+stays one-shot-directed (φ non-interference holds per-edge); there are simply **many** join-points, not
+one. Mechanism: Automerge buffers a change until its `deps` arrive (the doc-plane frontier); Interval Tree
+Clocks (fork·event·join) model the worldline-plane. Causal rides the edge-DAG; this clock stays purely
+rhythmic ([[agent-worldline]] #time, the kupono models).
+
 **The φ/KAM witness ~ proof, not analogy.** φ stands as the number the **KAM theorem** proves
 **last-to-break** under perturbation (the most robust invariant torus); the averted failure names
 **resonance / mode-locking** (Arnold tongues, where rational frequency ratios phase-lock and a system

@@ -359,6 +359,15 @@ silent drop):
 
 <<~ranks defer kapae ~ the forget/retract verb waits behind a GC/compaction story — nothing retracts until the palace knows what reclaims the space -> log-compression ~ waits behind a DECLARED irreversibility-boundary — a drawn line naming what compresses (lossy, summarized) versus what stays verbatim forever (the never-compressed core) -> bitemporality ~ runs LAZY / by-exception — the valid/transaction interval materializes only when a query asks the past, never eagerly per-drawer >>
 
+**Kapae resolves the retract gate** (operator-ratified 2026-06-29). The forget/retract verb no longer
+merely waits: **rewind = *kapae*** (set-aside, never-erase) — a deleted turn tombstones-and-keeps, stamped
+so recall weights it down. The GC/compaction story it waited on now reads: **sweep at causal-stability or
+a grace window, keep a thin tombstone** (retraction never reads as absence); and the base already enacts
+the mechanism (mempalace `kg_invalidate` closes `valid_to` append-only; L7 dynamics decay salience to a
+floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the **rhizome** (mid-flight
+injection = a `prov:Communication` merge, *merge-where-messages-land*) — rides [[agent-worldline]] #time;
+its two live forks (D injection-granularity · E concurrency-under-shared-injection) stay open.
+
 ### Three Cross-Substrate Witnesses ~ the pattern's rhymes, cited
 
 Three independent substrates rhyme the binding's load-bearing shapes — cited as PROOF where the rhyme
