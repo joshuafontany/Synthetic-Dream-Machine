@@ -129,7 +129,7 @@ PersonaGroup delegation edge** on the WHO axis.
 ## The Delegation Edge ~ the relationship reified
 
 The bond between operator and vessel rides a **signed delegation edge**, not a shared
-secret. The canon already shapes it — the `DeviceDelegationTiddler` (S7.1, Plane 0→1):
+secret. The canon already shapes it — the `DeviceDelegationTiddler` (S7.1 ~ the device key delegating up to its PersonaGroup, the WHO axis):
 
 ```
 device-delegation | {operatorDid} | {deviceDid} | {deviceVerifyingKey} | {issuedAt}
