@@ -57,6 +57,7 @@ import {
 import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
+import type { DialEntry } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir }  from "./vessel-paths.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
@@ -104,6 +105,12 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   recipe?: NodeRecipe;
   /** HTTP server the Herm's FLOW-map read-face serves over (required for openNodeHerm). */
   httpServer?: Server;
+  /** Herm carriage — peer base URLs whose FLOW-maps this Herm pulls + merges (empty = a leaf). */
+  peers?: readonly string[];
+  /** Herm carriage pull cadence (ms). */
+  pullIntervalMs?: number;
+  /** Herm self-announce — dials to seed on this Herm's own FLOW-map (a source's reachability). */
+  seed?: readonly DialEntry[];
 }
 
 export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonVmCore> {
@@ -673,6 +680,9 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     httpServer:  opts.httpServer,
     signerSeed:  p.operatorSeed,
     storageDir:  opts.storageDir,
+    ...(opts.peers ? { peers: opts.peers } : {}),
+    ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
+    ...(opts.seed ? { seed: opts.seed } : {}),
     onLog:       (line) => console.log(`[herm] ${line}`),
   });
   p.emit("vessel-ready");

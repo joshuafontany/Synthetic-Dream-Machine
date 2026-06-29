@@ -1,57 +1,75 @@
 # docker-compose.mesh.yml — the DreamNet mesh-test harness (Infrastructure as Myth, IaC backup).
 #
-# Both vessel KINDS, composed over the ONE keel (composeVessel — cap-compose.ts): a full Lararium and
-# a composable Herm (daemon-FULL, wiki-LESS — the immune-teeth wayfarer). Each founds its own identity
-# in-container (lares init), then boots its cap-stack. Proves the composable keel being a mesh — the
-# Herm-as-keel running the same hearth-engine as the temple, keeping no rooms.
+# All vessels composed over the ONE keel (composeVessel — cap-compose.ts), each founding its own
+# identity in-container (lares init), then booting its cap-stack. Proves the composable keel being a
+# mesh — daemon-FULL Hermai carrying the FLOW-map, container-to-container.
 #
-#   lararium-a  (composeLararium: substrate + daemon + wiki + pool + read-face)   :18090
-#   herm-a      (composeHerm:     substrate + daemon + meshpalace + read-face)     :18091   LAR_RECIPE=herm
+#   lararium-a    composeLararium (substrate+daemon+wiki+pool+read-face)                    :18090
+#   herm-source   composeHerm + LAR_SEED=alpha (announces a dial on its FLOW-map)            :18092
+#   herm-relay    composeHerm + carriage (LAR_PEERS=herm-source → pulls + re-serves)         :18091
 #
 # Run:     docker compose -f docker-compose.mesh.yml up -d
-# Witness: ./tools/herm-mesh-witness.sh        (both reach live; herm-a daemon-full + wiki-less)
+# Witness: ./tools/herm-mesh-witness.sh        (relay carries the alpha dial; daemon-full, wiki-less)
 # Down:    docker compose -f docker-compose.mesh.yml down -v
 #
-# Dev-style (node:24-slim + mounted repo + built dist) — no image build, fast iterate.
+# Dev-style (node:24-slim + mounted repo + built dist) — no image build; the host builds before `up`.
 
 name: dreamnet-mesh
 
+x-herm: &herm
+  image: node:24-slim
+  working_dir: /app
+  entrypoint: ["sh", "tools/lararium-container-boot.sh"]   # founds its OWN identity, then composeHerm
+  networks: [mesh]
+  restart: "no"
+
 services:
-  # A FULL Lararium — founds its own identity, then composeLararium (substrate + daemon + wiki + pool).
+  # A FULL Lararium — composeLararium (substrate + daemon + wiki + pool).
   lararium-a:
     image: node:24-slim
     working_dir: /app
     volumes:
       - ".:/app"
-      - "lararium-a-data:/lar-a"   # this vessel's OWN founded state (identity + genesis + storage)
+      - "lararium-a-data:/lar-a"
     environment:
       LAR_ROOT: "/lar-a"
       LAR_PORT: "8080"
-    entrypoint: ["sh", "tools/lararium-container-boot.sh"]   # founds its OWN identity, then serves
-    networks: [mesh]
-    ports:
-      - "18090:8080"             # the Lararium's @oracle read-face (anon-veil)
-    restart: "no"
-
-  # A composable HERM (Lares Viales) — founds its own identity, then composeHerm: the SAME keel as the
-  # Lararium MINUS the wiki cap (daemon-FULL immune core + @meshpalace + read-face, NO active wiki, NO
-  # pool). LAR_RECIPE=herm routes main.js → openNodeHerm. Blind by STRUCTURE — the wiki cap is never
-  # composed, so nothing routes to it (not a flag).
-  herm-a:
-    image: node:24-slim
-    working_dir: /app
-    volumes:
-      - ".:/app"
-      - "herm-a-data:/herm-a"
-    environment:
-      LAR_ROOT: "/herm-a"
-      LAR_PORT: "8080"
-      LAR_RECIPE: "herm"
     entrypoint: ["sh", "tools/lararium-container-boot.sh"]
     networks: [mesh]
     ports:
-      - "18091:8080"             # the Herm's @meshpalace FLOW-map read-face
+      - "18090:8080"
     restart: "no"
+
+  # A SOURCE Herm — composeHerm, announces a dial on its own @meshpalace FLOW-map.
+  herm-source:
+    <<: *herm
+    volumes:
+      - ".:/app"
+      - "herm-source-data:/herm"
+    environment:
+      LAR_ROOT: "/herm"
+      LAR_PORT: "8080"
+      LAR_RECIPE: "herm"
+      LAR_SEED: "alpha"          # announces lar:///ha.ka.ba/@oracle/herm/alpha
+    ports:
+      - "18092:8080"
+
+  # A RELAY Herm — composeHerm + the carriage cap: pulls herm-source's FLOW-map, merges, re-serves.
+  # Daemon-FULL (immune core up), wiki-LESS (blind by structure). Carries what it cannot author.
+  herm-relay:
+    <<: *herm
+    volumes:
+      - ".:/app"
+      - "herm-relay-data:/herm"
+    environment:
+      LAR_ROOT: "/herm"
+      LAR_PORT: "8080"
+      LAR_RECIPE: "herm"
+      LAR_PEERS: "http://herm-source:8080"
+      LAR_PULL_MS: "2000"
+    ports:
+      - "18091:8080"
+    depends_on: [herm-source]
 
 networks:
   mesh:
@@ -59,4 +77,5 @@ networks:
 
 volumes:
   lararium-a-data:
-  herm-a-data:
+  herm-source-data:
+  herm-relay-data:

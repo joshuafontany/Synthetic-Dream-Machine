@@ -25,6 +25,7 @@ import {
   composeVessel, type CapModule, type ComposedVessel,
   assembleVessel, AutomergeDocStore,
   MESH_PALACE_BAG, emptyMeshPalaceDoc, type MeshPalaceDoc,
+  pullAndVerifyOracle, dialEntryToRecord, type DialEntry, type LarTiddlerRecord,
   type VesselRecipe, type VesselCoreAssembly,
   type BagResidencyManager,
 } from "@lararium/mesh";
@@ -43,6 +44,7 @@ export const CAP = {
   wiki:       "wiki",
   pool:       "pool",
   meshpalace: "meshpalace",
+  carriage:   "carriage",
   readFace:   "read-face",
 } as const;
 
@@ -85,12 +87,19 @@ export interface MeshPalaceComponent { readonly handle: DocHandle<MeshPalaceDoc>
 
 /** meshpalace — a writable @meshpalace AutomergeDocStore layer (the vessel's own public FLOW-map) +
  *  a residency pin. Requires substrate (the composite to layer into). */
-export function meshPalaceCap(deps: { repo: Repo; residency?: BagResidencyManager }): CapModule {
+export function meshPalaceCap(deps: { repo: Repo; residency?: BagResidencyManager; seed?: readonly DialEntry[] }): CapModule {
   return {
     id: CAP.meshpalace, requires: [CAP.substrate],
     build: async (resolve) => {
       const assembly = resolve<VesselCoreAssembly>(CAP.substrate);
       const handle   = deps.repo.create<MeshPalaceDoc>(emptyMeshPalaceDoc());
+      // Self-announce: a source Herm seeds its OWN dial(s) on the FLOW-map (public reachability —
+      // never others' content). Absent = a leaf/relay that only carries what it pulls.
+      if (deps.seed && deps.seed.length > 0) {
+        handle.change((d) => {
+          for (const e of deps.seed!) { const rec = dialEntryToRecord(e, "herm-self-announce"); d.tiddlers[rec.tiddler.title] = rec; }
+        });
+      }
       assembly.composite.addLayer({
         bagId: MESH_PALACE_BAG, store: new AutomergeDocStore(handle, MESH_PALACE_BAG),
         writable: true, defaultWritable: true,
@@ -122,6 +131,45 @@ export function flowMapReadFaceCap(deps: {
   };
 }
 
+/** The carriage handle a carriage cap exposes — a manual pull + the loop's stop. */
+export interface CarriageComponent { readonly pullOnce: () => Promise<number>; readonly stop: () => void; }
+
+/** carriage — the blind relay: pull each peer's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
+ *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). A peer down is no
+ *  error — feed-or-fade. Requires meshpalace (the doc to merge into). Empty peers = a no-op (a leaf). */
+export function carriageCap(deps: { peers: readonly string[]; pullIntervalMs?: number; onLog?: (line: string) => void }): CapModule {
+  return {
+    id: CAP.carriage, requires: [CAP.meshpalace],
+    build: (resolve) => {
+      const mp = resolve<MeshPalaceComponent>(CAP.meshpalace);
+      const pullOnce = async (): Promise<number> => {
+        let merged = 0;
+        for (const peer of deps.peers) {
+          let verdict;
+          try { verdict = await pullAndVerifyOracle<MeshPalaceDoc>(peer, { nowMs: Date.now() }); }
+          catch { continue; } // a peer down/unreachable is no error — feed-or-fade
+          if (!verdict.ok || !verdict.doc) continue;
+          const incoming = verdict.doc.tiddlers;
+          const titles = Object.keys(incoming);
+          if (titles.length === 0) continue;
+          mp.handle.change((d) => {
+            // cross-doc copy → clone to plain values (Automerge refuses a value linked in another doc)
+            for (const t of titles) d.tiddlers[t] = JSON.parse(JSON.stringify(incoming[t])) as LarTiddlerRecord;
+          });
+          merged += titles.length;
+          deps.onLog?.(`carriage: merged ${titles.length} FLOW records from ${peer}`);
+        }
+        return merged;
+      };
+      const timer = setInterval(() => { void pullOnce(); }, deps.pullIntervalMs ?? 30_000);
+      timer.unref();
+      void pullOnce(); // carry the peers' maps from the first breath
+      return { pullOnce, stop: () => clearInterval(timer) };
+    },
+    dispose: (c) => (c as CarriageComponent).stop(),
+  };
+}
+
 // ── the two node cap-stacks ──────────────────────────────────────────────────────────────────────
 
 /**
@@ -140,13 +188,18 @@ export async function composeLararium<TPool extends PrimaryMountPool>(
 }
 
 export interface HermStackDeps extends DaemonCapDeps {
-  readonly keel:       VesselRecipe;
-  readonly repo:       Repo;
-  readonly residency?: BagResidencyManager;
-  readonly httpServer: Server;
-  readonly signerSeed: Uint8Array;
-  readonly storageDir: string;
-  readonly onLog?:     (line: string) => void;
+  readonly keel:           VesselRecipe;
+  readonly repo:           Repo;
+  readonly residency?:     BagResidencyManager;
+  readonly httpServer:     Server;
+  readonly signerSeed:     Uint8Array;
+  readonly storageDir:     string;
+  /** Peer base URLs this Herm carries (pulls + merges their FLOW-maps). Empty = a leaf (no carriage). */
+  readonly peers?:         readonly string[];
+  readonly pullIntervalMs?: number;
+  /** Self-announce dials on this Herm's own FLOW-map (a source Herm's reachability). */
+  readonly seed?:          readonly DialEntry[];
+  readonly onLog?:         (line: string) => void;
 }
 
 /** The handles a composed Herm hands back. */
@@ -168,7 +221,16 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
   const vessel = await composeVessel([
     substrateCap(d.keel),
     daemonCap(d),
-    meshPalaceCap({ repo: d.repo, ...(d.residency ? { residency: d.residency } : {}) }),
+    meshPalaceCap({
+      repo: d.repo,
+      ...(d.residency ? { residency: d.residency } : {}),
+      ...(d.seed ? { seed: d.seed } : {}),
+    }),
+    carriageCap({
+      peers: d.peers ?? [],
+      ...(d.pullIntervalMs !== undefined ? { pullIntervalMs: d.pullIntervalMs } : {}),
+      ...(d.onLog ? { onLog: d.onLog } : {}),
+    }),
     flowMapReadFaceCap({
       httpServer: d.httpServer, signerSeed: d.signerSeed, storageDir: d.storageDir,
       ...(d.onLog ? { onLog: d.onLog } : {}),
