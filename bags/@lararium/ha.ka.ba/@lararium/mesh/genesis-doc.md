@@ -56,6 +56,24 @@ The `@oracle` is a **served, signed POINTER doc** — the public crossroads wher
 
 <<~/ahu >>
 
+<<~ ahu #seed-without-ruling >>
+
+## Seed without ruling ~ the home node names, never governs
+
+The `@oracle` docId derives from the FOUNDING vessel's `@daemon` identity-root (the home node) — safe **genesis**, not authority, PROVIDED three couplings stay apart (seed-authority research, 2026-06-28):
+
+<<~ranks coupling origin@keep -> governance@disperse -> liveness@pluralize >>
+
+- **Origin (docId derivation) — KEEP.** Born from the home `@daemon` identity yet names no host; once minted it outlives the home node (a DID, not an ActivityPub URL). Record the derivation publicly so anyone re-verifies genesis without the founder.
+- **Governance (write authority) — DISPERSE.** A sole home-root retains the UCAN reach-back revocation veto — *that* is the central authority. Keeper-phase ladder: founder (n=1, genesis) -> founder-multisig (a 2nd keeper contracts in → write delegates to a GROUP; the group, not the original key, becomes root) -> k-of-n quorum (admission/eviction by quorum). After phase 2 the home key can vanish and keepers still govern — no reach-back, no single revoker. A DECLARED sunset, not implicit trust.
+- **Liveness (discovery) — PLURALIZE.** "Learn the board from the home node" is the libp2p-hardcoded-bootstrap / ActivityPub-source-must-be-online trap. The content-addressed docId means ANY peer syncing the board can serve it; newcomers learn by petname/TOFU introduction along the trust edge; a plural swappable bootstrap set (home listed, never required).
+
+**Backstop — exit/fork.** `@oracle` is a synced CRDT with a host-independent docId → the net can fork it and continue at zero loss. A founder who CAN be forked cannot rule — a property, not a promise. The rhizome forbids a *filiation*, not a *seed*; a seed that becomes one alliance-point among many is fully rhizomatic.
+
+<<~ confidence Synthesis-Canon 15/20 >> architecture correct + stack-aligned; UNVERIFIED + load-bearing (code-scouts for the build): does alpha Keyhive express group-as-root-subject + quorum admission TODAY · does the Hermai invite path carry an `@oracle` introduction along the trust edge. Rhymes: genesis-block (founder-not-dictator) · UCAN (delegate-out; the revocation-veto is the trap) · ATProto (host-independent identity) · Stellar k-of-n + founder-multisig · petname/TOFU introduction · the rhizome (alliance not filiation).
+
+<<~/ahu >>
+
 <<~ ahu #what-genesis-seeds >>
 
 ## What genesis seeds (the `@oracle` system plane)
