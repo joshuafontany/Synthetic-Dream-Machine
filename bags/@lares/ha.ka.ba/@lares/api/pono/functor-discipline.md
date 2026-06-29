@@ -148,6 +148,54 @@ state ([[system-pattern-integrities]]). The discipline gives the degraded-node s
 
 <<~/ahu >>
 
+<<~ ahu #sovereign-worker >>
+
+## The corollary — sovereign-worker primacy
+
+> *"No fallback, all work that can happen SHOULD happen in the sovereign island workers."* — the operator's cut.
+
+<<~ confidence Synthesis 12/20 >> **Sovereign-worker primacy.** The functor gets *applied* in the one
+runtime that holds the grammar, the VM, and the live state — the sovereign island worker. The
+coordinator (the main thread) **routes**: it fans the work out, fuses the ranks the workers return, and
+hands the result back; it never runs the functor-work itself. The structure-preserving map — the
+form-encoder's `Move → Vec`, any cap-functor — applies where the structure lives, never where the
+traffic merely passes.
+
+**Why a coordinator-side shortcut reads doubly wrong.** The temptation rides in plain sight: under
+isomorphism-by-composition ([[island-isomorphism]]) the encoder module stays *pure*, so it *could* run
+on the coordinator. Two faults follow if it does:
+
+\procedure ~Fault(~Type:"" ~Params:"") ~Fault <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Fault Overcollapse "breaks/the place-discipline ~ work lands where only routing belongs; the coordinator swells past its office, the no-VM-on-main invariant bends" >>
+<<~Fault Broken-Symmetry "breaks/the functor-symmetry ~ a coordinator-side replica runs a DIFFERENT or DEGRADED map than the worker — an unparsed query carries no structural plane, so it yields a truncated Move→Vec; query-side and corpus-side stop sharing ONE functor, and 'vector-nearness ⟺ move-nearness' fails" >>
+
+<<~ confidence Synthesis 12/20 >> So the shortcut **forgets an arrow** — the same degradation the
+meta-law names (#meta-law), now in the runtime-placement register: two ends of a comparison that must
+share one functor drift onto two maps. **The honest degrade reads as ABSENCE, never a shadow path.** A
+missing worker leg collapses to content-only fusion (a named, lesser result the operator can read);
+a coordinator-side replica running its own degraded map is dead water — it *looks* like the same answer
+and silently is not.
+
+**The three vows resolve here.** No-VM-on-main (the invariant — [[lararium-canonical-model]] #the-laws)
+names *where work may not land*; isomorphism-by-composition (the temptation — [[island-isomorphism]])
+names *why the same module can run anywhere*; the functor laws (the reason — #functor, #meta-law) name
+*why it nonetheless must run in the one place that preserves the map*. The three braid into one
+discipline: **sovereign-worker primacy.**
+
+**Enacted once (this session).** The recall query-derive moved off the coordinator into the in-VM
+`@daemon` worker — the node-side derive and its disk basis-cache deleted, no fallback kept — so capture
+and recall apply the **identical** functor against the same grammar/state. The derive that once ran two
+places (and so risked two maps) now runs one.
+
+<<~ pranala #in-vm-derive ? -> packages/lararium-tw5/src/capture-annotate-vm.ts family:code role:has >>
+<<~ pranala #coordinator-routes ? -> packages/lararium-node/src/multi-graph-recall.ts family:code role:has >>
+
+<<~ confidence Synthesis 11/20 >> A discipline, enacted once here; it earns Canon by talk-story over
+time (#honest-bound), the same bound the whole meme keeps.
+
+<<~/ahu >>
+
 <<~ ahu #honest-bound >>
 
 ## The honest bound — proven map vs apt analogy
@@ -184,6 +232,8 @@ the house may test, sharpen, or contest.
 <<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/system-pattern-integrities >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/island-isomorphism >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/lararium-canonical-model#the-laws >>
 
 <<~ aka lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#l-prime >>
 <<~ aka lar:///ha.ka.ba/@lares/docs/lares/infrastructure-as-myth >>
@@ -196,8 +246,11 @@ the house may test, sharpen, or contest.
 [[agent-worldline]] gives the nameless-spirit office (identity IS the `#has` stack, one handle / two
 offices) the Voice-functor generalizes; [[noosphere-boot]] holds the L-Prime ward (observer-erasure),
 the Voice-house and Syad lens (the functor-categories), and the degraded states the meta-law roots; the
-QA-Lab paper grounds *jurus / permainan* and Voices-as-offices / moves-as-tempo×angle. This meme draws
-the one arrow through all of them — **the house is a functor; keep the arrows.**
+QA-Lab paper grounds *jurus / permainan* and Voices-as-offices / moves-as-tempo×angle;
+[[island-isomorphism]] gives the same-module-runs-anywhere temptation and [[lararium-canonical-model]]
+#the-laws holds the no-VM-on-main invariant that, braided with the functor laws, names
+**sovereign-worker primacy** (#sovereign-worker) — the corollary that fixes *where* the functor applies.
+This meme draws the one arrow through all of them — **the house is a functor; keep the arrows.**
 
 <<~/ahu >>
 
