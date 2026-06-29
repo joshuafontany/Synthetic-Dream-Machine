@@ -366,7 +366,7 @@ a grace window, keep a thin tombstone** (retraction never reads as absence); and
 the mechanism (mempalace `kg_invalidate` closes `valid_to` append-only; L7 dynamics decay salience to a
 floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the **rhizome** (mid-flight
 injection = a `prov:Communication` merge, *merge-where-messages-land*) — rides [[agent-worldline]] #time;
-its two live forks (D injection-granularity · E concurrency-under-shared-injection) stay open.
+its forks are operator-cut (C turn-DAG-keyed · D full-ticks · E operator-as-root common-cause); the past-session FFZ/DAG re-derives by nuke-and-pave + re-harvest (transcripts are the source of truth).
 
 ### Three Cross-Substrate Witnesses ~ the pattern's rhymes, cited
 

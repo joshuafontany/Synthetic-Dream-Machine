@@ -251,19 +251,23 @@ vector-clock law (a causal clock merges on every message-receive, not only at a 
 sealed-delegation rule was the special case where the only messages were spawn + return.
 The **edge-DAG absorbs this** (causal stays on the structure); the **FfzClock stays purely
 rhythmic** — the PATH-B cut already in this meme, now confirmed not overturned: causal never
-rode the clock, so the rhizome adds no burden to it. Two forks stay open at the operator's
-hand:
+rode the clock, so the rhizome adds no burden to it. **The forks, now operator-cut (2026-06-29):**
 
-<<~ranks rhizome-fork D-granularity ~ every-injection ticks+merges (full vector-clock fidelity, noisy-but-true) · *bearing-change-only* (clean, needs a redirection test) — lean: bearing-only -> E-shared-cause ~ injected siblings stay concurrent (an injection-edge each) · siblings the SAME injector steered share that injector as a COMMON CAUSE (not purely concurrent — the rhizome's honest answer) — lean: shared-cause honesty >>
+<<~ranks rhizome-cut C-turn-DAG ~ handoffs key to the TURN-DAG node (survives rewind/fork) — operator-cut -> D-full-ticks ~ EVERY injection ticks+merges (full vector-clock fidelity); we cannot yet reliably detect a bearing/vector-change, so full ticks beat a lossy bearing-test — operator-cut -> E-operator-root ~ injected siblings share their injector as a COMMON CAUSE, and the OPERATOR is the root (the operator initiates every flow today; chron / other triggers MAY add non-operator roots later — held open) — operator-cut >>
 
-*Mechanism (the build path, packages-swarm 2026-06-29):* merge-where-messages-land needs
-no bolt-on clock — **Automerge already buffers a change until its `deps` arrive, then
-applies it where it lands** (`getHeads` = the frontier), so a `prov:Communication` edge
-models as a change whose `deps` name the recipient's frontier-at-receipt (the doc-plane).
-For the worldline-plane clock-model, **Interval Tree Clocks** (fork = spawn · event =
-inject · join = handback) fit the dynamic spawn/cull set where plain vector-clocks bloat —
-vendor it. The cap-handoff itself rides **`@endo/captp` over the daemon UDS** (`@endo/far`
-= the attenuated reference, build-or-refuse at single-cap granularity).
+*Mechanism (the build path):* the worldline's merge-where-messages-land rides the **edge-DAG
+stamped into the mempalace** — the **chat-session store**. **Automerge does NOT hold
+chat-session data**; it serves only the DreamNet mesh + the operator's wiki-bags (which
+project to disk as markdown memes), so it never touches this plane (the two-domain cut,
+sharpened). A `prov:Communication` edge stamps at the injection-point, keyed turn-DAG;
+**Interval Tree Clocks** (fork = spawn · event = inject · join = handback) model the
+worldline clock where plain vector-clocks bloat under spawning agents — vendor it. The
+cap-handoff rides **`@endo/captp` over the daemon UDS** (`@endo/far` = the attenuated
+reference). **Migration is cheap:** the FFZ/DAG over past sessions is a **re-derivable
+projection** — nuke-and-pave + re-harvest from the transcripts (the source of truth), so no
+forward-retrofit is owed (this answers the kept retrofit-migration dissent). And **install
+must ingest a complex pre-existing chat-store** (e.g. MemPalace's own populated palace), not
+only a fresh one.
 
 So the canon's earlier 'twin-reunion, the worldline's one sync point' widens: **handback is
 one merge among many; the rhizome merges wherever a message lands.** The donation boundary
@@ -273,7 +277,7 @@ content-addressed tunnels; MemPalace's trunk (entity-first real-name registry, s
 
 <<~ confidence Synthesis-Canon 16/20 >> The three resolutions rest on convergent prior art
 (bitemporal · PROV-invalidation · vector-clocks · Merkle-fork) and on mechanisms the base
-already ships; the two rhizome forks (D·E) stay genuinely open at the operator's hand.
+already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ticks · operator-root), and the past-session FFZ/DAG re-derives by nuke-and-pave + re-harvest.
 
 <<~/ahu >>
 
