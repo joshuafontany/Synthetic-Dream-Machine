@@ -13,6 +13,7 @@ export { BrowserVesselIslandPool } from "./browser-vessel-island-pool.js";
 export type { BrowserVesselIslandPoolOptions } from "./browser-vessel-island-pool.js";
 
 export { openBrowserVessel } from "./open-browser-vessel.js";
+export { composeBrowser } from "./browser-caps.js";
 export type { BrowserVesselOptions, BrowserVesselResult } from "./open-browser-vessel.js";
 
 export {

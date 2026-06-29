@@ -32,10 +32,10 @@ import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
   loadCatalogCorpora, seedVesselDefaults,
-  openVesselCore,
   makeResidencyStatsReactor,
   PROJECTION_FRAME,
 }                                            from "@lararium/tw5";
+import { composeBrowser }                    from "./browser-caps.js";
 import type { VesselWikiSlot, VesselCoreResult, DaemonVmCore } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
@@ -243,7 +243,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     onEvict: async (bagId) => { await vmManager.unmountWiki(bagId); },
   });
 
-  const result: VesselCoreResult<BrowserVesselIslandPool> = await openVesselCore<BrowserVesselIslandPool>({
+  const { core: result } = await composeBrowser<BrowserVesselIslandPool>({
     keel: {
       repo,
       catalogHandle,
