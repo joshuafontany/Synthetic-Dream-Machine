@@ -19,8 +19,10 @@
  */
 
 import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";
+import type { BearingFacets, MoveSkeleton } from "@lararium/tw5/form-layer";
+import { parseBearing, bearingFacets } from "@lararium/tw5/form-layer";
 
-import type { FormMatch } from "./formpalace.js";
+import type { FormMatch, FormPalace, SerializedBasis } from "./formpalace.js";
 
 /** RRF damping constant. k=60 is the standard (Cormack et al.) — large enough that top-rank
  *  differences don't dominate, small enough that rank still matters. */
@@ -165,18 +167,133 @@ export function fuseDualGraph(
 }
 
 /**
- * Build the FORM-leg metadata where-filter from the aperture knobs. The "form" collection stamps
- * `register` + `grammar_layer` on every drawer (formpalace#FormMetadata), so scoping the FORM
- * search to a register/grammar-layer narrows the aperture (living-grammar-palace#multi-aperture).
- * Returns a ChromaDB-shaped where clause, or undefined when no scope is asked.
+ * Build the FORM-leg metadata where-filter from the aperture knobs PLUS the bearing facets. The
+ * "form" collection stamps `register` + `grammar_layer` on every drawer AND carries the descended
+ * aim/yield bearing facets (bearing_w1/w2/w3/root/path/frag/grade, formpalace#FormMetadata), so a
+ * recall scopes by a register/grammar-layer aperture (living-grammar-palace#multi-aperture) AND/OR
+ * by a bearing clause (the structured bearing recall). Each PRESENT bearing_* facet becomes its own
+ * equality clause. Returns a ChromaDB-shaped where clause (a flat clause for one, an `$and` for
+ * several), or undefined when nothing is asked.
  */
-export function buildFormWhere(register?: string, grammarLayer?: string): Record<string, unknown> | undefined {
+export function buildFormWhere(
+  register?: string,
+  grammarLayer?: string,
+  bearing?: Partial<BearingFacets>,
+): Record<string, unknown> | undefined {
   const clauses: Record<string, unknown>[] = [];
   if (register) clauses.push({ register });
   if (grammarLayer) clauses.push({ grammar_layer: grammarLayer });
+  if (bearing) {
+    for (const [key, val] of Object.entries(bearing)) {
+      if (val) clauses.push({ [key]: val });
+    }
+  }
   if (clauses.length === 0) return undefined;
   if (clauses.length === 1) return clauses[0];
   return { $and: clauses };
+}
+
+/**
+ * AND any number of ChromaDB where-clauses (undefined ignored), flattening one level of `$and` so a
+ * pre-built aperture `$and` and a bearing clause combine into ONE flat `$and` (never a nested tower).
+ * Returns undefined when nothing remains, the lone clause when one, else `{ $and: [...] }`.
+ */
+export function combineWhere(
+  ...clauses: (Record<string, unknown> | undefined)[]
+): Record<string, unknown> | undefined {
+  const flat: Record<string, unknown>[] = [];
+  for (const c of clauses) {
+    if (!c) continue;
+    const and = (c as { $and?: unknown }).$and;
+    if (Array.isArray(and)) flat.push(...(and as Record<string, unknown>[]));
+    else flat.push(c);
+  }
+  if (flat.length === 0) return undefined;
+  if (flat.length === 1) return flat[0];
+  return { $and: flat };
+}
+
+// ---------------------------------------------------------------------------
+// the FORM-LEG policy — resolve the deferred form-query fork by query shape
+// ---------------------------------------------------------------------------
+
+/** What the form-leg policy needs of a {@link FormPalace}: the metadata-only `filter` (the bearing /
+ *  keyword recall) + the vector `query` (the markers recall). */
+export type FormSearchPalace = Pick<FormPalace, "filter" | "query">;
+
+/** Config for {@link makeFormSearch} — the query to route, the FORM store, and the OPTIONAL markers
+ *  skeleton-deriver. */
+export interface FormSearchConfig {
+  /** the recall query — parsed for a bearing, sniffed for sigil markers. */
+  readonly query: string;
+  /** the FORM store (the metadata filter + the vector query). */
+  readonly formPalace: FormSearchPalace;
+  /**
+   * OPTIONAL markers path: derive a query move-skeleton + basis to vectorize a sigil-bearing query.
+   * Absent (or returns null) → a markers query DEGRADES to the keyword branch (no skeleton can be
+   * vectorized on this leg). The @daemon leaves this unwired for now (deriving a skeleton needs the
+   * harvest pipeline / a VM round-trip — see the seam note); tests inject a fake.
+   */
+  readonly deriveSkeleton?: (query: string) => { skeleton: MoveSkeleton; basis: SerializedBasis } | null;
+}
+
+/** The sharktooth opener — a query carrying it has derivable sigil markers (the form-vector path). */
+const MARKER_RE = /<<~/;
+
+/**
+ * Build the injected `formSearch` leg with GRACEFUL DEGRADATION across three query shapes — this
+ * RESOLVES P4's deferred form-query fork (a bare keyword query yields a near-empty form vector, so a
+ * vector search is the wrong tool unless the query actually carries grammar):
+ *
+ *  1. a BEARING (an aim/yield `lar://` URI) → a STRUCTURED metadata where-filter on the bearing root
+ *     (NO vector — the bearing IS the query; bearing-ast#bearingFacets → buildFormWhere);
+ *  2. sigil MARKERS (a derivable skeleton, `deriveSkeleton` supplied + non-null) → form-vector
+ *     SIMILARITY (the existing FormPalace.query path);
+ *  3. bare KEYWORDS → the register/grammar-layer where-filter IF an aperture scope is asked, ELSE
+ *     DEFER the form leg (return [] → dualGraphRecall fuses content-only, gracefully).
+ *
+ * The `where` the leg receives carries dualGraphRecall's aperture scope (register/grammar-layer);
+ * the bearing branch ANDs its own root clause onto it ({@link combineWhere}). Returns the leg
+ * dualGraphRecall calls — `(input: { nResults, where? }) => Promise<FormMatch[]>`.
+ */
+export function makeFormSearch(
+  cfg: FormSearchConfig,
+): (input: { nResults: number; where?: Record<string, unknown> }) => Promise<FormMatch[]> {
+  const bv = parseBearing(cfg.query);
+  const hasMarkers = MARKER_RE.test(cfg.query);
+
+  return async ({ nResults, where }) => {
+    // 1. BEARING — a parseable lar: URI with a root → metadata where-filter, no vector needed.
+    if (bv.grade !== "unparsed" && bv.root.terms.length > 0) {
+      const f = bearingFacets(bv);
+      // Filter by the bearing ROOT (the identity key); grade/path/frag stay OUT of the filter so a
+      // recall matches every turn that bore this root, not only the exact full URI.
+      const bearingWhere = buildFormWhere(
+        undefined,
+        undefined,
+        f.bearing_root ? { bearing_root: f.bearing_root } : {},
+      );
+      const merged = combineWhere(where, bearingWhere);
+      return cfg.formPalace.filter({ nResults, ...(merged !== undefined ? { where: merged } : {}) });
+    }
+
+    // 2. MARKERS — a derivable skeleton → form-vector similarity (the existing query path).
+    if (hasMarkers && cfg.deriveSkeleton) {
+      const derived = cfg.deriveSkeleton(cfg.query);
+      if (derived) {
+        return cfg.formPalace.query({
+          skeleton: derived.skeleton,
+          basis: derived.basis,
+          nResults,
+          ...(where !== undefined ? { where } : {}),
+        });
+      }
+    }
+
+    // 3. KEYWORDS — an aperture scope present → filter by it; else DEFER (content-only fusion).
+    if (where !== undefined) return cfg.formPalace.filter({ where, nResults });
+    return [];
+  };
 }
 
 /** The injected search legs — the two graphs, each reached however the caller wires it (the real

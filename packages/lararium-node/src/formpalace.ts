@@ -23,7 +23,7 @@ import { realpathSync } from "node:fs";
 import { resolve } from "node:path";
 
 import { resolveFormEncoderSpawn } from "@lararium/mempalace";
-import type { MoveSkeleton, ConstructiconBasis } from "@lararium/tw5/form-layer";
+import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
 
 /** The serializable basis shape the Python encoder consumes (its `index` is re-derived from order). */
 export interface SerializedBasis {
@@ -31,8 +31,12 @@ export interface SerializedBasis {
   readonly dimension: number;
 }
 
-/** The metadata stamped on a form entry — the where-filterable facets + the content-join key. */
-export interface FormMetadata {
+/** The metadata stamped on a form entry — the where-filterable facets + the content-join key.
+ *  Carries the {@link BearingFacets} (bearing_w1/w2/w3/root/path/frag/grade) too: the aim/yield
+ *  bearing descended into flat scalars, where-filterable for the STRUCTURED bearing recall path
+ *  (dual-graph-recall#makeFormSearch). Stamped off `skeleton.bearing.facets` in
+ *  node-capture-engine#makeFormSplitFlush; the python store carries any `bearing_*` key through. */
+export interface FormMetadata extends BearingFacets {
   /** the confidence register band (e.g. "synthesis"), for where-filtering */
   readonly register?: string;
   /** the deepest grammar-stack layer the turn touched */
@@ -86,6 +90,14 @@ export interface FormPalace {
     nResults?: number;
     where?: Record<string, unknown>;
   }): Promise<FormMatch[]>;
+  /**
+   * METADATA-ONLY filter — NO vector. The structured bearing / keyword recall path: match form
+   * entries by a `where`-clause alone (chroma `.get(where=…)`), so a bearing root or a register
+   * scope yields matches without encoding a query skeleton. `distance` is null on each match (a
+   * where-match carries no similarity ranking). A null/empty `where` returns up to `nResults` of
+   * the collection; a where matching nothing returns []. (dual-graph-recall#makeFormSearch.)
+   */
+  filter(input: { where?: Record<string, unknown>; nResults?: number }): Promise<FormMatch[]>;
   /** Read a form entry back by its key (the verbatim_sha), or null if absent. */
   get(key: string): Promise<FormEntry | null>;
   /** Release this reference; the holder process is killed when the last reference closes. */
@@ -287,6 +299,14 @@ export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormP
       const res = (await myHolder.send("query", {
         skeleton,
         basis,
+        n_results: nResults ?? 10,
+        ...(where !== undefined ? { where } : {}),
+      })) as { matches: FormMatch[] };
+      return res.matches ?? [];
+    },
+
+    async filter({ where, nResults }): Promise<FormMatch[]> {
+      const res = (await myHolder.send("filter", {
         n_results: nResults ?? 10,
         ...(where !== undefined ? { where } : {}),
       })) as { matches: FormMatch[] };

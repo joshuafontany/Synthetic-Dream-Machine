@@ -9,10 +9,11 @@
 import { describe, expect, test } from "vitest";
 
 import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";
+import type { MoveSkeleton, SerializedBasis } from "@lararium/tw5/form-layer";
 import type { FormMatch } from "../src/formpalace.js";
 import {
-  fuseDualGraph, dualGraphRecall, buildFormWhere, DEFAULT_RRF_K,
-  type DualGraphRecallDeps,
+  fuseDualGraph, dualGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
+  type DualGraphRecallDeps, type FormSearchPalace,
 } from "../src/dual-graph-recall.js";
 
 const sha = (c: string) => c.repeat(64);
@@ -150,6 +151,155 @@ describe("buildFormWhere — the multi-aperture metadata scoping", () => {
     expect(buildFormWhere("synthesis", "x-memetic")).toEqual({
       $and: [{ register: "synthesis" }, { grammar_layer: "x-memetic" }],
     });
+  });
+
+  test("a bearing clause alone → a flat clause", () => {
+    expect(buildFormWhere(undefined, undefined, { bearing_root: "breach.watch.fires" })).toEqual({
+      bearing_root: "breach.watch.fires",
+    });
+    expect(buildFormWhere(undefined, undefined, { bearing_w1: "breach" })).toEqual({
+      bearing_w1: "breach",
+    });
+  });
+
+  test("aperture + bearing facets compose into one $and (present-only, empties dropped)", () => {
+    expect(
+      buildFormWhere("synthesis", undefined, { bearing_w1: "breach", bearing_w3: "fires", bearing_frag: "" }),
+    ).toEqual({
+      $and: [{ register: "synthesis" }, { bearing_w1: "breach" }, { bearing_w3: "fires" }],
+    });
+  });
+});
+
+describe("combineWhere — AND clauses, flatten one $and level", () => {
+  test("all undefined → undefined", () => {
+    expect(combineWhere(undefined, undefined)).toBeUndefined();
+  });
+  test("one clause → itself", () => {
+    expect(combineWhere(undefined, { register: "synthesis" })).toEqual({ register: "synthesis" });
+  });
+  test("a pre-built $and + a flat clause flatten into ONE $and (no nesting)", () => {
+    const aperture = buildFormWhere("synthesis", "x-memetic"); // an $and of two
+    const bearing = { bearing_root: "breach.watch.fires" };
+    expect(combineWhere(aperture, bearing)).toEqual({
+      $and: [{ register: "synthesis" }, { grammar_layer: "x-memetic" }, { bearing_root: "breach.watch.fires" }],
+    });
+  });
+});
+
+describe("makeFormSearch — the form-leg policy (bearing · markers · keywords)", () => {
+  function fakePalace(matches: FormMatch[]): {
+    palace: FormSearchPalace;
+    filterCalls: { where?: Record<string, unknown>; nResults?: number }[];
+    queryCalls: { skeleton: MoveSkeleton; basis: SerializedBasis; nResults?: number; where?: Record<string, unknown> }[];
+  } {
+    const filterCalls: { where?: Record<string, unknown>; nResults?: number }[] = [];
+    const queryCalls: { skeleton: MoveSkeleton; basis: SerializedBasis; nResults?: number; where?: Record<string, unknown> }[] = [];
+    const palace: FormSearchPalace = {
+      async filter(input) { filterCalls.push(input); return matches; },
+      async query(input) { queryCalls.push(input); return matches; },
+    };
+    return { palace, filterCalls, queryCalls };
+  }
+  const fakeDerive = () => ({ skeleton: {} as MoveSkeleton, basis: { axes: [], dimension: 0 } as SerializedBasis });
+
+  test("a BEARING query → structured where-filter on the root, no vector", async () => {
+    const { palace, filterCalls, queryCalls } = fakePalace([formMatch(SHA_A)]);
+    const leg = makeFormSearch({ query: "lar:///breach.watch.fires/intent", formPalace: palace });
+    const out = await leg({ nResults: 5 });
+    expect(out).toHaveLength(1);
+    expect(queryCalls).toHaveLength(0);          // NO vector query
+    expect(filterCalls).toHaveLength(1);
+    expect(filterCalls[0]!.nResults).toBe(5);
+    expect(filterCalls[0]!.where).toEqual({ bearing_root: "breach.watch.fires" });
+  });
+
+  test("a BEARING query ANDs its root onto the incoming aperture where", async () => {
+    const { palace, filterCalls } = fakePalace([]);
+    const leg = makeFormSearch({ query: "lar:///breach.watch.fires", formPalace: palace });
+    await leg({ nResults: 3, where: { register: "synthesis" } });
+    expect(filterCalls[0]!.where).toEqual({
+      $and: [{ register: "synthesis" }, { bearing_root: "breach.watch.fires" }],
+    });
+  });
+
+  test("a MARKERS query (deriveSkeleton supplied) → vector similarity", async () => {
+    const { palace, filterCalls, queryCalls } = fakePalace([formMatch(SHA_B)]);
+    const leg = makeFormSearch({ query: "the turn <<~ ward ! >>", formPalace: palace, deriveSkeleton: fakeDerive });
+    const out = await leg({ nResults: 4, where: { register: "synthesis" } });
+    expect(out).toHaveLength(1);
+    expect(filterCalls).toHaveLength(0);         // NO metadata filter
+    expect(queryCalls).toHaveLength(1);
+    expect(queryCalls[0]!.nResults).toBe(4);
+    expect(queryCalls[0]!.where).toEqual({ register: "synthesis" });
+  });
+
+  test("a MARKERS query with NO deriver degrades to the keyword branch", async () => {
+    const { palace, filterCalls, queryCalls } = fakePalace([]);
+    const leg = makeFormSearch({ query: "the turn <<~ ward ! >>", formPalace: palace });
+    // no deriver, no aperture where → DEFER (content-only)
+    const out = await leg({ nResults: 4 });
+    expect(out).toEqual([]);
+    expect(queryCalls).toHaveLength(0);
+    expect(filterCalls).toHaveLength(0);
+  });
+
+  test("a KEYWORD query with an aperture scope → where-filter only", async () => {
+    const { palace, filterCalls, queryCalls } = fakePalace([formMatch(SHA_A)]);
+    const leg = makeFormSearch({ query: "what did we decide about deps", formPalace: palace });
+    const out = await leg({ nResults: 6, where: { register: "synthesis" } });
+    expect(out).toHaveLength(1);
+    expect(queryCalls).toHaveLength(0);
+    expect(filterCalls).toHaveLength(1);
+    expect(filterCalls[0]!.where).toEqual({ register: "synthesis" });
+  });
+
+  test("a bare KEYWORD query with NO scope → DEFER (empty form leg, content-only fusion)", async () => {
+    const { palace, filterCalls, queryCalls } = fakePalace([formMatch(SHA_A)]);
+    const leg = makeFormSearch({ query: "what did we decide about deps", formPalace: palace });
+    const out = await leg({ nResults: 6 });
+    expect(out).toEqual([]);
+    expect(filterCalls).toHaveLength(0);
+    expect(queryCalls).toHaveLength(0);
+  });
+});
+
+describe("dualGraphRecall × makeFormSearch — the wired recall", () => {
+  test("a dual bearing query fuses content + the bearing-filtered form leg", async () => {
+    const { palace } = (() => {
+      const palace: FormSearchPalace = {
+        async filter() { return [formMatch(SHA_B)]; },
+        async query() { return []; },
+      };
+      return { palace };
+    })();
+    const deps: DualGraphRecallDeps = {
+      async contentSearch(args) { return { query: args.query, results: [contentHit(SHA_A), contentHit(SHA_B)] }; },
+      formSearch: makeFormSearch({ query: "lar:///breach.watch.fires", formPalace: palace }),
+    };
+    const res = await dualGraphRecall(deps, { query: "lar:///breach.watch.fires" });
+    expect(res.contentCount).toBe(2);
+    expect(res.formCount).toBe(1);
+    // B rode both graphs → it tops the fused ranking.
+    expect(res.results[0]!.verbatimSha).toBe(SHA_B);
+    expect(res.results[0]!.inBoth).toBe(true);
+  });
+
+  test("a keyword-only dual query degrades to content-leaning WITHOUT error", async () => {
+    const palace: FormSearchPalace = {
+      async filter() { return []; },
+      async query() { return []; },
+    };
+    const deps: DualGraphRecallDeps = {
+      async contentSearch(args) { return { query: args.query, results: [contentHit(SHA_A)] }; },
+      formSearch: makeFormSearch({ query: "plain keywords here", formPalace: palace }),
+    };
+    const res = await dualGraphRecall(deps, { query: "plain keywords here" });
+    expect(res.formCount).toBe(0);             // form leg deferred
+    expect(res.contentCount).toBe(1);
+    expect(res.results).toHaveLength(1);
+    expect(res.results[0]!.verbatimSha).toBe(SHA_A);
+    expect(res.results[0]!.inBoth).toBe(false); // content-only
   });
 });
 

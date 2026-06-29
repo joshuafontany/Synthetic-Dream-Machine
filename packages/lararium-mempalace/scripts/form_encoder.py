@@ -791,6 +791,12 @@ class FormPalaceStore:
             meta["first_seen"] = now
         meta["count"] = count
         meta["last_seen"] = now
+        # Carry the bearing facets (bearing_w1/w2/w3/root/path/frag/grade) through to chroma
+        # metadata — the aim/yield bearing descended to flat scalars (bearing-ast#bearingFacets),
+        # where-filterable for the structured bearing recall path. Flat str/int/float/bool only.
+        for bk, bv in metadata.items():
+            if isinstance(bk, str) and bk.startswith("bearing_") and isinstance(bv, (str, int, float, bool)):
+                meta[bk] = bv
         document = json.dumps(
             {
                 "axis_activation": metadata.get("axis_activation", {}),
@@ -822,6 +828,24 @@ class FormPalaceStore:
         dists = (getattr(res, "distances", None) or [[]])[0]
         matches = [
             {"key": ids[i], "distance": dists[i] if i < len(dists) else None,
+             "metadata": metas[i] if i < len(metas) else {}}
+            for i in range(len(ids))
+        ]
+        return {"matches": matches}
+
+    def filter(self, where: dict | None, n_results: int) -> dict:
+        """METADATA-ONLY filter (NO vector) — chroma `.get(where=…)`. The structured bearing /
+        keyword recall path: match by metadata alone, no query skeleton encoded. `distance` is
+        null (a where-match carries no similarity ranking). A null/empty where returns up to
+        n_results of the collection; a where matching nothing returns []."""
+        kwargs = {"limit": n_results, "include": ["metadatas"]}
+        if where:
+            kwargs["where"] = where
+        got = self._col.get(**kwargs)
+        ids = got.get("ids") or []
+        metas = got.get("metadatas") or []
+        matches = [
+            {"key": ids[i], "distance": None,
              "metadata": metas[i] if i < len(metas) else {}}
             for i in range(len(ids))
         ]
@@ -983,6 +1007,9 @@ def _handle_request(req: dict, holder: dict, out) -> None:
                 fv = enc["form_vector"]
                 dim = int(enc["dimension"])
             result = store.query(fv, dim, int(req.get("n_results", 10)), req.get("where"))
+        elif op == "filter":
+            store = _ensure_store(holder)
+            result = store.filter(req.get("where"), int(req.get("n_results", 10)))
         elif op == "get":
             store = _ensure_store(holder)
             result = store.get(req["key"])

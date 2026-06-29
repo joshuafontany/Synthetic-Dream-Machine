@@ -60,6 +60,8 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { DialEntry } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
+import { makeFormPalace, type FormPalace }  from "./formpalace.js";
+import { dualGraphRecall, makeFormSearch }  from "./dual-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -434,6 +436,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // wiki island) and residency stats (a read of the main-resident manager).
   const wireVerbs: VesselOrchestration<VesselIslandPool>["wireVerbs"] = (registry, _assembly) => {
     seedVesselDefaults(registry);
+    // The recall FORM leg — opened ONCE, lazily, on the first dual recall. It REUSES the singleton
+    // form holder the capture engine already runs for the same dir (makeFormPalace ref-counts per
+    // canonical dir), so this adds one reference, never a second process. Closed implicitly at
+    // process exit / idle-reap; recall never tears the holder down under the live capture engine.
+    let recallFormPalace: FormPalace | null = null;
     registry.register("sync-wiki", async (args, ctx) =>
       vmManager.placeWikiVerb(slotActiveWikiId, {
         verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
@@ -465,10 +472,40 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const wing     = typeof args["wing"]   === "string" ? (args["wing"]   as string) : undefined;
       const limitRaw = args["limit"];
       const limit    = typeof limitRaw === "number" ? limitRaw : typeof limitRaw === "string" ? Number(limitRaw) : undefined;
+      // Dual-graph recall (P4): fuse the CONTENT (verbatim mempalace) + FORM (.formpalace) graphs by
+      // reciprocal rank fusion on the verbatim_sha. Opt-in (`dual`) — the FORM leg routes by query
+      // shape (bearing → structured where-filter · markers → vector · keywords → where-or-defer).
+      const dual         = args["dual"] === true || args["dual"] === "true";
+      const register     = typeof args["register"]     === "string" ? (args["register"]     as string) : undefined;
+      const grammarLayer = typeof args["grammarLayer"] === "string" ? (args["grammarLayer"] as string)
+                         : typeof args["grammar_layer"] === "string" ? (args["grammar_layer"] as string) : undefined;
+      const fwRaw        = args["formWeight"];
+      const formWeight   = typeof fwRaw === "number" ? fwRaw : typeof fwRaw === "string" ? Number(fwRaw) : undefined;
       // Warm pooled sidecar (started once, reused, self-healing) — recall stays
       // sub-second after the first cold start; this makes recall-into-wake fast.
       return withMempalace(async (client) => {
         if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
+        if (dual && query) {
+          recallFormPalace ??= makeFormPalace(larFormPalaceDir());
+          const formLeg = makeFormSearch({ query, formPalace: recallFormPalace });
+          const res = await dualGraphRecall(
+            {
+              contentSearch: (a) => client.search(a),
+              // The FORM leg degrades to content-only if the form holder is unavailable (no python
+              // venv, store fault): a rejection collapses to [] → fuseDualGraph fuses content-only.
+              formSearch: async (input) => { try { return await formLeg(input); } catch { return []; } },
+            },
+            {
+              query,
+              ...(wing         !== undefined ? { wing } : {}),
+              ...(limit        !== undefined ? { limit } : {}),
+              ...(register     !== undefined ? { register } : {}),
+              ...(grammarLayer !== undefined ? { grammarLayer } : {}),
+              ...(formWeight   !== undefined ? { formWeight } : {}),
+            },
+          );
+          return { mode: "dual", ...res };
+        }
         if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
         return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
       });

@@ -77,9 +77,12 @@ export type {
 } from "./formpalace.js";
 // P4 — the RRF dual-graph query: fuse the CONTENT (verbatim mempalace) and FORM (.formpalace)
 // graphs on verbatim_sha by reciprocal rank fusion (living-grammar-palace#dual-graph).
-export { fuseDualGraph, dualGraphRecall, buildFormWhere, DEFAULT_RRF_K } from "./dual-graph-recall.js";
+export {
+  fuseDualGraph, dualGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
+} from "./dual-graph-recall.js";
 export type {
   DualGraphHit, DualGraphOptions, DualGraphRecallDeps, DualGraphRecallArgs, DualGraphRecallResult,
+  FormSearchPalace, FormSearchConfig,
 } from "./dual-graph-recall.js";
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
 // standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the

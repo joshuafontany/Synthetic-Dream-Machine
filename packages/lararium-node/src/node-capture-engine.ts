@@ -180,6 +180,11 @@ export function makeFormSplitFlush(inner: CaptureFlush, formPalace: FormPalace):
             grammar_layer: grammarLayerFromPatch(rec.metadata),
             struct_hash: structHash,
             verbatim_sha: verbatimSha,
+            // The aim/yield bearing descended to flat where-filterable facets (bearing_w1/w2/w3/
+            // root/path/frag/grade) — the one-line read the URI spirit flagged: the in-VM emitter
+            // already parsed the RED URI into `skeleton.bearing.facets`; stamp them so the bearing
+            // recall path can structured-where-filter on them (dual-graph-recall#makeFormSearch).
+            ...skeleton.bearing.facets,
           },
         });
         // The drawer keeps the join key + a marker that a form-vector exists (dimension), set HERE.

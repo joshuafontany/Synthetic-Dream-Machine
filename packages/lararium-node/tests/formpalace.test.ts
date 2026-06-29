@@ -109,6 +109,28 @@ describe("makeFormPalace — the form-graph wired end-to-end (live python + chro
     expect(provisional.map((m) => m.key)).toEqual([SHA_B]); // the where-filter excludes the synthesis entry
   }, TEST_TIMEOUT);
 
+  test("the bearing facets persist + filter recalls BY bearing root (no vector)", async () => {
+    const pal = openPalace(await palaceDir());
+    const { skeleton, basis } = buildInputs();
+    // Store two turns under different bearing roots (bearing facets stamped on the metadata).
+    await pal.encodeStore({ skeleton, basis, key: SHA_A,
+      metadata: { register: "synthesis", grammar_layer: "x-memetic", struct_hash: "s", verbatim_sha: SHA_A,
+        bearing_w1: "breach", bearing_w3: "fires", bearing_root: "breach.watch.fires", bearing_grade: "canon" } });
+    await pal.encodeStore({ skeleton, basis, key: SHA_B,
+      metadata: { register: "synthesis", grammar_layer: "x-memetic", struct_hash: "s", verbatim_sha: SHA_B,
+        bearing_root: "council.fork.named", bearing_grade: "canon" } });
+
+    // The facet round-trips through chroma metadata.
+    const entry = await pal.get(SHA_A);
+    expect(entry!.metadata["bearing_root"]).toBe("breach.watch.fires");
+    expect(entry!.metadata["bearing_w1"]).toBe("breach");
+
+    // The metadata-only filter (NO vector) recalls exactly the breach-rooted turn.
+    const hits = await pal.filter({ where: { bearing_root: "breach.watch.fires" }, nResults: 5 });
+    expect(hits.map((m) => m.key)).toEqual([SHA_A]);
+    expect(hits[0]!.distance).toBeNull(); // a where-match carries no similarity ranking
+  }, TEST_TIMEOUT);
+
   test("the reap-don't-pile invariant — two facades on ONE dir share ONE holder", async () => {
     const dir = await palaceDir();
     const before = _liveFormHolderCount();
@@ -214,6 +236,14 @@ describe("makeFormSplitFlush — the form routing split (fake palace, no python)
     expect(c.metadata.register).toBe("synthesis"); // derived from lar_confidence
     expect(c.metadata.grammar_layer).toBe("x-memetic"); // lar_sigils > 0
     expect(c.metadata.struct_hash).toMatch(/^[0-9a-f]{64}$/);
+
+    // The bearing facets ride too — skeleton.bearing.facets stamped onto FormMetadata (the URI
+    // spirit's one-line read). The TURN's operative bearing is the yield's resolved root.
+    expect(c.metadata.bearing_root).toBe("council.fork.named");
+    expect(c.metadata.bearing_w1).toBe("council");
+    expect(c.metadata.bearing_w3).toBe("named");
+    expect(c.metadata.bearing_grade).toBe("canon");
+    expect(c.metadata).toMatchObject(skeleton.bearing.facets); // exactly what the emitter parsed
   });
 
   test("a record without lar_skeleton passes straight through (form is best-effort)", async () => {
