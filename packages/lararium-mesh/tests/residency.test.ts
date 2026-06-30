@@ -1,8 +1,9 @@
 /**
  * Residency Tier Unification (EPIC S11) — two-state ʻōlelo thermal model tests.
  *
- * The residency surface relocated from bag-residency.ts into causal-island.ts
- * (S11.1). After an adversarial + kupono + YIN research pass (2026-06-01) the
+ * The residency surface lives in bag-residency.ts (restored to its own file in
+ * the S11-collapse YIN pass, after a stint glued onto causal-island.ts). After
+ * an adversarial + kupono + YIN research pass (2026-06-01) the
  * `warm` tier was CUT: the model is a TWO-state thermal axis in ʻōlelo Hawaiʻi —
  * wela (hot) / anu (cold) — plus an orthogonal pin flag. No tests existed before
  * this file (the S6 suite was lost in the @lararium/core → @lararium/mesh port).
@@ -19,7 +20,7 @@
  */
 
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
-import { BagResidencyManager, deriveBagTemperature } from "../src/causal-island.js";
+import { BagResidencyManager, deriveBagTemperature } from "../src/bag-residency.js";
 
 const A = "automerge:aaa";
 const B = "automerge:bbb";

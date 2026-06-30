@@ -38,7 +38,7 @@ import type {
   WikiMsg_VerbResult,
 } from "./island-protocol.js";
 import type { WikiMountSpec } from "./wiki-recipe.js";
-import type { ResidencyTemperature } from "./causal-island.js";
+import type { ResidencyTemperature } from "./bag-residency.js";
 
 // ── Slots — two-state thermal axis (wela/anu) + orthogonal pin flag ──────────
 

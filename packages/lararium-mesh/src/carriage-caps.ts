@@ -25,7 +25,7 @@ import { pullAndVerifyOracle } from "./oracle-read-client.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
 import type { LarDoc } from "./base-doc.js";
 import type { VesselCoreAssembly } from "./open-vessel-core.js";
-import type { BagResidencyManager } from "./causal-island.js";
+import type { BagResidencyManager } from "./bag-residency.js";
 
 /**
  * The carriage cap-ids. A vessel's #has-cap-stack names these to wire the @meshpalace FLOW-map + carriage.
