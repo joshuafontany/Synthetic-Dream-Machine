@@ -27,9 +27,9 @@
 
 import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { homedir } from "node:os";
 import { execFileSync } from "node:child_process";
-import { larHarvestDir, larHarvestStageDir, larAstPalaceDir, larFormPalaceDir } from "../env.js";
+import { larHarvestDir, larHarvestStageDir } from "../env.js";
+import { palaceOrgans, corpusTeardownDirs } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -38,15 +38,28 @@ interface Target {
   readonly path:  string;
 }
 
-/** Resolve the teardown targets from env + the fixed lares/mempalace homes — never an ambient default. */
+const ORGAN_LABEL: Readonly<Record<string, string>> = {
+  mempalace:  "palace store (chroma + config + entities + locks + worldline-KG sqlite)",
+  astpalace:  "astpalace (memory-ast-unfolding — a second mempalace instance)",
+  formpalace: "formpalace (living-grammar FORM-vector store — a third mempalace instance)",
+  meshpalace: "meshpalace (federation bridge store — a mempalace instance)",
+};
+
+/**
+ * Resolve the teardown targets — never an ambient default. The PALACE organs come from the SHARED
+ * @lararium/node registry (`palaceOrgans`), the SAME list `lares wake --init` stands up (one
+ * enumerator, two consumers, can't drift). Teardown adds its own non-palace idempotency targets
+ * (the harvest watermark + stage) AND every ephemeral `.corpus/*` scratch instance, so an
+ * interrupted `corpus run` can never leak state past a re-pave.
+ */
 function resolveTargets(): Target[] {
-  const palace = process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace");
+  const organs = palaceOrgans().map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
+  const corpus = corpusTeardownDirs().map((dir) => ({ label: `corpus scratch instance (${dir.split(/[/\\]/).pop()})`, path: dir }));
   return [
-    { label: "palace store (chroma + config + entities + locks + worldline-KG sqlite)", path: palace },
-    { label: "astpalace (memory-ast-unfolding — a second mempalace instance)", path: larAstPalaceDir() },
-    { label: "formpalace (living-grammar FORM-vector store — a third mempalace instance)", path: larFormPalaceDir() },
-    { label: "harvest watermark (lar_hv idempotency)",            path: larHarvestDir() },
-    { label: "harvest stage (normalized transcript copies)",      path: larHarvestStageDir() },
+    ...organs,
+    ...corpus,
+    { label: "harvest watermark (lar_hv idempotency)",        path: larHarvestDir() },
+    { label: "harvest stage (normalized transcript copies)",  path: larHarvestStageDir() },
   ];
 }
 

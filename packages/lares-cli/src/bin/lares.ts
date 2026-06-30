@@ -38,6 +38,8 @@ import { cmdRecall }                  from "../commands/recall.js";
 import { cmdTelemetry }               from "../commands/telemetry.js";
 import { cmdSubagents }               from "../commands/subagents.js";
 import { cmdPalaceTeardown }          from "../commands/palace-teardown.js";
+import { cmdCorpus }                  from "../commands/corpus.js";
+import { renderCommandHelp }          from "../command-help.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
   cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild, cmdRefresh,
@@ -68,7 +70,8 @@ const COMMANDS: readonly Command[] = [
   { name: "capture",       summary: "FEED the telemetry nalu — route a transcript's NEW turns THROUGH the @daemon (the {chat}→@daemon-nalu→mempalace path): each turn → `capture` verb → capture cap → WAL → flush `mine --source ndjson`. Idempotent (per-wing capture watermark). Daemon down → graceful fallback to a direct `mempalace mine --extract exchange` (verbatim-always). `lares capture <transcript|stageDir> --wing <w>`. The drawer leg of the ingest hook.", handler: cmdCapture },
   { name: "telemetry",     summary: "lar-telemetry — read a wing's turn instruments (the gradient chat sigils) THROUGH the @daemon seat and project lar_* onto its mempalace drawers (mempalace through the seat, web3-only). `lares telemetry --wing <w> [--limit <n>]`. Idempotent (lar_hv gate). The capture hook calls this beside the verbatim mine; daemon down → no-op, the sweep backstops (verbatim-always / telemetry-eventual).", handler: cmdTelemetry },
   { name: "subagents",     summary: "Capture tasked-spirit (sub-agent) transcripts DISTINCT from the main agent — each `<session>/subagents/agent-*.jsonl` mines into `wing_<w>__spirits`, named from its handoff (Mask → Pet-Name-by-role → spirit-<id>), both sides of the exchange. A direct mine (no daemon). `lares subagents <session-transcript.jsonl> --wing <w>`. Named spirits are re-callable; run `lares telemetry --wing <w>__spirits` for their gradient.", handler: cmdSubagents },
-  { name: "palace-teardown", summary: "Completely tear down the local mempalace store + harvest idempotency (chroma store, config, entities, `lar_hv` watermark, stage) so a re-pave starts from zero — the clean cure for a partial/interrupted re-pave. Preview by default; `--confirm` removes; REFUSES under live MCP/mine unless `--force`. Re-pave after with `lares harvest --all`.", handler: cmdPalaceTeardown },
+  { name: "palace-teardown", summary: "Completely tear down the local palace organs + harvest idempotency (mempalace/ast/form/mesh stores, `lar_hv` watermark, stage, `.corpus/*` scratch) so a re-pave starts from zero — the clean cure for a partial/interrupted re-pave. Preview by default; `--confirm` removes; REFUSES under live MCP/mine unless `--force`. Re-pave after with `lares harvest --all`.", handler: cmdPalaceTeardown },
+  { name: "corpus",        summary: "The ephemeral astral MULTIPALACE (the `docker run --rm` of memory): `run <path>` opens→ingests→analyzes→DISSOLVES on exit (`--keep` lands it); `open`/`query`/`ls`/`keep`/`dissolve` manage live scratch corpus-palaces. Leak-proof: `dissolve --orphans` reaps interrupted runs. Run `lares corpus help`.", handler: cmdCorpus },
   { name: "serve",         summary: "Run the lararium node in foreground (no Vite).",                                handler: cmdServe         },
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
   { name: "rebuild",       summary: "Identity-safe dep-bump cure: rebuild the genesis engine under current deps, then serve. No wipe, keypair untouched.", handler: cmdRebuild       },
@@ -98,12 +101,13 @@ function printHelp(): void {
   console.log(`  ${"--no-json".padEnd(14)} Force human prose even when stdout is not a TTY.`);
   console.log(`  ${"--yes".padEnd(14)} Skip confirmation prompts (required for non-interactive/agent runs).\n`);
   console.log("Output renders by audience: prose on a TTY, JSON off-TTY or under --json.");
-  console.log("Run `lares <command> --help` once a command implements its own help (TBD).");
+  console.log("Run `lares <command> --help` for a command's own examples-first help.");
 }
 
 export async function dispatch(argv: readonly string[]): Promise<number> {
   const args = parseArgs(argv);
-  if (args.command === null || args.command === "help" || args.flags["help"]) {
+  // Global help: bare `lares`, `lares help`, or `lares --help` (no command).
+  if (args.command === null || args.command === "help" || (args.flags["help"] && !COMMANDS.some((c) => c.name === args.command))) {
     printHelp();
     return args.command === null ? 1 : 0;
   }
@@ -111,6 +115,12 @@ export async function dispatch(argv: readonly string[]): Promise<number> {
   if (!cmd) {
     console.error(`lares: unknown command "${args.command}".  Run \`lares help\` for the list.`);
     return 2;
+  }
+  // Per-command help: `lares <command> --help` renders the command's own examples-first help and
+  // returns — never running the handler. The command may ALSO render help on missing-args itself.
+  if (args.flags["help"]) {
+    renderCommandHelp(cmd.name, cmd.summary);
+    return 0;
   }
   // Fresh-Build Invariant — a daemon-lifecycle verb (found/boot/mutate-identity) never runs
   // from stale dist: build the workspace, then re-exec this command in a fresh process.

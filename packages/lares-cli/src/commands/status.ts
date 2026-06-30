@@ -15,8 +15,31 @@ import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
+import { palaceOrgans, organHealthy } from "@lararium/node";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
+
+/**
+ * `lares status --palaces` — the palace-organ health table (re-runnable). Reads the SAME registry
+ * `lares wake --init` stands up + `lares palace-teardown` removes, so the health view never drifts
+ * from what setup/teardown act on. Pure inspection (each organ's cheap probe), no vm boot.
+ */
+function cmdStatusPalaces(args: ParsedArgs): number {
+  const organs = palaceOrgans().map((o) => ({ name: o.name, dir: o.dir, healthy: organHealthy(o) }));
+  const allHealthy = organs.every((o) => o.healthy);
+  emit(args, {
+    ok: true,
+    data: { palaces: organs, allHealthy },
+    human: () => {
+      console.log("lares status — palace organs");
+      for (const o of organs) {
+        console.log(`  ${o.healthy ? "ok     " : "ABSENT "} ${o.name.padEnd(11)} ${o.dir}`);
+      }
+      if (!allHealthy) console.log("\n  → stand up absent organs:  lares wake --init");
+    },
+  });
+  return 0;
+}
 
 function dirSizeHint(dir: string): string {
   if (!existsSync(dir)) return "(absent)";
@@ -49,6 +72,9 @@ function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<b
 }
 
 export async function cmdStatus(args: ParsedArgs): Promise<number> {
+  // --palaces: the palace-organ health table (re-runnable; same registry as setup/teardown).
+  if (args.flags["palaces"] === true) return cmdStatusPalaces(args);
+
   const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
   const storage   = larDataDir();   // runtime → ~/.lares/.lararium
   const bootstrap = join(root, "genesis", "social-bootstrap.json");
