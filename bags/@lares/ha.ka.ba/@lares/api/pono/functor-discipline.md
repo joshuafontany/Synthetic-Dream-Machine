@@ -161,6 +161,16 @@ hands the result back; it never runs the functor-work itself. The structure-pres
 form-encoder's `Move → Vec`, any cap-functor — applies where the structure lives, never where the
 traffic merely passes.
 
+**The cap-stack lifts whole.** Primacy runs deeper than "the worker applies the map." A `#has`
+cap-stack reads as a *liftable unit* — the very object the functor maps ([[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]]) —
+and the **whole** stack lives in the worker and lifts as one body. Split a single cap onto the
+coordinator — a worldline READ pulled out while compose, compare, and teardown stay behind — and the
+stack stops lifting as one: you can no longer move the sovereign island whole. The split **shatters
+liftability**, the functor's object torn in two. <<~ confidence Synthesis 12/20 >> So no cap carves
+off to the coordinator, not even a read; the stack stays whole or it stands as a stack no longer.
+Sovereign-worker primacy reads, fully: not only "the worker runs the functor" but "the **whole**
+cap-stack lives in the worker and lifts as one — no cap splits away."
+
 **Why a coordinator-side shortcut reads doubly wrong.** The temptation rides in plain sight: under
 isomorphism-by-composition ([[island-isomorphism|lar:///ha.ka.ba/@lararium/api/island-isomorphism]]) the encoder module stays *pure*, so it *could* run
 on the coordinator. Two faults follow if it does:
@@ -177,6 +187,25 @@ missing worker leg collapses to content-only fusion (a named, lesser result the 
 a coordinator-side replica running its own degraded map is dead water — it *looks* like the same answer
 and silently is not.
 
+**The convenient frame — a present-tense trap.** A subtler temptation rides beside the pure-module one:
+*"this cap needs no worker state right now, so the coordinator may as well hold it."* That reasoning
+collapses the model to **today's usage** — the move the Mu-exit wards against (*"I DO NOT BELIEVE
+ANYTHING"* — [[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#mu-five-tools]]), a convenient frame mistaken for the
+territory. No absence of a present need licenses breaking the lift-whole shape; the model holds
+regardless of current use.
+
+\procedure ~Trap(~Type:"" ~Params:"") ~Trap <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Trap No-State-Now "tempts/the present-tense carve-out ~ 'it needs no worker state NOW' justifies splitting a read onto the coordinator breaks/the model by usage ~ no absence of today's need licenses shattering the lift-whole shape cure/the Mu-exit ~ believe no convenient frame; keep the stack whole against the use you have not yet made" >>
+
+**The seam the future rides.** The "no state now" frame reads false even on its own terms. A `lares`
+CLI call that READS, then COMPUTES — TW5 filter-language over temp tids in the `@daemon` wikistore —
+needs that read **already inside the worker** for the filter-compute to chain in-VM. <<~ confidence
+Synthesis 11/20 >> Hold the read in the worker and the downstream filter rides the same runtime, the
+same grammar, the same live state; pull it to the coordinator and the future compute finds nowhere to
+chain from. The read-in-the-worker carries the **seam the next move rides** — the opposite of overhead
+held for nothing.
+
 **The three vows resolve here.** No-VM-on-main (the invariant — [[lararium-canonical-model|lar:///ha.ka.ba/@lararium/api/lararium-canonical-model#the-laws]])
 names *where work may not land*; isomorphism-by-composition (the temptation — [[island-isomorphism|lar:///ha.ka.ba/@lararium/api/island-isomorphism]])
 names *why the same module can run anywhere*; the functor laws (the reason — #functor, #meta-law) name
@@ -187,6 +216,13 @@ discipline: **sovereign-worker primacy.**
 `@daemon` worker — the node-side derive and its disk basis-cache deleted, no fallback kept — so capture
 and recall apply the **identical** functor against the same grammar/state. The derive that once ran two
 places (and so risked two maps) now runs one.
+
+**Enacted again (this session).** The worldline reads — the registry lookup and the compare/trajectory
+derive — moved off the node coordinator into the in-VM worker: a node-side holder deleted, the reads
+routed to the worker over `askIsland`. A carve-out had split a worldline READ onto the coordinator; the
+correction **reversed** it and returned the read to the stack, so the cap-stack lifts whole once more.
+<<~ confidence Synthesis 12/20 >> The live proof of the rule it sharpens — no cap, not even a read,
+stays behind.
 
 <<~ pranala #in-vm-derive ? -> packages/lararium-tw5/src/capture-annotate-vm.ts family:code role:has >>
 <<~ pranala #coordinator-routes ? -> packages/lararium-node/src/multi-graph-recall.ts family:code role:has >>
