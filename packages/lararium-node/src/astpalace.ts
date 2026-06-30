@@ -65,17 +65,38 @@ export interface AstEntry {
   provenance: AstProvenance[];
 }
 
+/** The result of a kapae (rewind) — the tally set-aside + the drawers to down-weight. */
+export interface AstKapaeResult {
+  /** provenance lines closed (normally 1; 0 = idempotent no-op / unknown turn). */
+  readonly closed: number;
+  /** structural hashes tombstoned (count fell to ≤0) — set aside, the row kept. */
+  readonly tombstoned: readonly string[];
+  /** the verbatim shas the dropped provenance lines carried — the content drawers to down-weight. */
+  readonly verbatim_shas: readonly string[];
+  readonly turn_key: string;
+}
+
 export interface AstPalace {
   /**
    * Store an AST tree, keyed by its structural hash, bound to its verbatim. Idempotent on the
    * STRUCTURE: an identical tree collides to the same hash/drawer and bumps `count` (recurrence),
-   * accreting distinct provenance. Returns the structural hash (the drawer keeps it as `lar_ast_hash`)
-   * + the verbatim sha (the drawer keeps it as `lar_verbatim_sha`). THROWS if the store did not
-   * persist, so the caller keeps the inline AST rather than stamping a dangling reference.
+   * accreting distinct provenance. `turnKey` (optional) — the USER turn's uuid — rides into the
+   * provenance line + the reverse-index, so a later {@link kapae} can set-aside this turn's tally.
+   * Returns the structural hash (the drawer keeps it as `lar_ast_hash`) + the verbatim sha (the
+   * drawer keeps it as `lar_verbatim_sha`). THROWS if the store did not persist, so the caller keeps
+   * the inline AST rather than stamping a dangling reference.
    */
-  put(astTree: unknown, verbatim: { source_file: string; content: string }): Promise<{ hash: string; verbatimSha: string }>;
+  put(astTree: unknown, verbatim: { source_file: string; content: string; turnKey?: string }): Promise<{ hash: string; verbatimSha: string }>;
   /** Read an entry back by its structural hash, or null if absent. */
   get(hash: string): Promise<AstEntry | null>;
+  /**
+   * REWIND (kapae = set-aside, never erase) one turn's recurrence tally, keyed by the USER turn's
+   * uuid (mirrors the worldline KG kapae so ONE gone uuid closes both stores). Decrements the
+   * structure's `count`; tombstones it (row kept, recall-excluded) when the count falls to ≤0;
+   * idempotent. Returns the dropped verbatim shas (the content drawers the salience producer
+   * down-weights). Best-effort at the caller — a holder fault never sinks the harvest.
+   */
+  kapae(turnKey: string, ended?: string): Promise<AstKapaeResult>;
   /** The structural hash of a tree WITHOUT storing it (the content address) — pure-TS, no holder. */
   hashOf(astTree: unknown): Promise<string>;
   /** Release this reference to the shared holder; the process is killed when the last one closes. */
@@ -139,13 +160,28 @@ export function makeAstPalace(dir: string, opts: AstPalaceOptions = {}): AstPala
       const hash = await hashOf(astTree);
       const verbatimSha = await sha256Hex(utf8Bytes(verbatim.content), defaultCryptoProvider);
       const astJson = canonicalJson(astTree); // canonical-key-ordered — invariant for this hash
-      await holder.send("put", { hash, ast: astJson, source_file: verbatim.source_file, verbatim_sha: verbatimSha });
+      await holder.send("put", {
+        hash, ast: astJson, source_file: verbatim.source_file, verbatim_sha: verbatimSha,
+        ...(verbatim.turnKey ? { turn_key: verbatim.turnKey } : {}),
+      });
       return { hash, verbatimSha };
     },
 
     async get(hash: string): Promise<AstEntry | null> {
       if (!HEX64.test(hash)) return null;
       return (await holder.send("get", { hash })) as AstEntry | null;
+    },
+
+    async kapae(turnKey: string, ended?: string): Promise<AstKapaeResult> {
+      const res = (await holder.send("kapae", { turn_key: turnKey, ...(ended ? { ended } : {}) })) as
+        | Partial<AstKapaeResult>
+        | null;
+      return {
+        closed: res?.closed ?? 0,
+        tombstoned: res?.tombstoned ?? [],
+        verbatim_shas: res?.verbatim_shas ?? [],
+        turn_key: res?.turn_key ?? turnKey,
+      };
     },
 
     async close(): Promise<void> {

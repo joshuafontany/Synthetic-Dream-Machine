@@ -84,6 +84,13 @@ LAR_SCHEMA = AdapterSchema(
                                      description="projected attribution edge: the root-principal handle (paramount; flat subagents = the run)"),
         "lar_ffz": FieldSpec(type="string", required=False, indexed=True,
                              description="rhythmic ADDRESS — the worldline clock's phase frozen at this turn's grounding boundary: Theme.Arc.Measure.Beat.Segment[.block], prefix-truncatable (segment ticks, block offsets; ffz-clock#rhythmic-address)"),
+        # ── kapae down-weight (strand C) — the rewind salience the FFZ Measure servo reads ──────────
+        "lar_salience": FieldSpec(type="float", required=False, indexed=True,
+                                  description="kapae down-weight in (0,1] (default 1.0): a rewound / road-not-taken drawer rides a floor salience so it barely bends the Measure rhythm (ffz-orchestrator#kapae-down-weight)"),
+        "lar_kapae": FieldSpec(type="int", required=False, indexed=True,
+                               description="1 = this drawer's turn was rewound (kapae); set aside, never erased — the convergence twin of the KG valid-close + the astpalace tally-decrement"),
+        "lar_frontier": FieldSpec(type="string", required=False, indexed=True,
+                                  description="the turn-DAG fork-frontier token (head turn-uuids) keying a same-session fork to a distinct worldline handle (build-patch#BranchContext)"),
     },
 )
 

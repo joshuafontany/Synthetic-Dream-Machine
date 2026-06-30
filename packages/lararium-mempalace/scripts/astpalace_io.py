@@ -27,11 +27,23 @@ stdout (banners/library noise → stderr, which the TS side drains and ignores):
     -> {"id":1,"op":"ping"}
     <- {"id":1,"ok":true,"result":{"ready":true}}
 
-    -> {"id":2,"op":"put","hash":H,"ast":"<canonical-json>","source_file":S,"verbatim_sha":V}
+    -> {"id":2,"op":"put","hash":H,"ast":"<canonical-json>","source_file":S,"verbatim_sha":V,"turn_key":K}
     <- {"id":2,"ok":true,"result":{"hash":H,"count":N}}
 
     -> {"id":3,"op":"get","hash":H}
     <- {"id":3,"ok":true,"result":{ <AstEntry> | null }}
+
+    -> {"id":4,"op":"kapae","turn_key":K,"ended":T}
+    <- {"id":4,"ok":true,"result":{"closed":N,"tombstoned":[H,…],"verbatim_shas":[V,…],"turn_key":K}}
+
+KAPAE (rewind = set-aside, never erase) — the astpalace twin of the worldline KG kapae.
+Keyed by the USER turn's uuid (turn_key), which `put` threads into every provenance entry. A
+gone turn drops its provenance line and decrements `count`; an entry whose count falls to ≤0 is
+TOMBSTONED (`lar_tombstoned_at` stamped, the chroma row KEPT, excluded from recall) rather than
+deleted (history preserved). Idempotent: a 2nd kapae for the same uuid finds the line already
+gone → a no-op. A small sqlite reverse-index (`turnkey_index.sqlite3`, beside the chroma store —
+mirrors kg_io's raw-sqlite-beside-chroma idiom) keeps the turn_key → structural_hash lookup O(1),
+since chroma cannot where-filter inside a JSON provenance list.
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
   PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 astpalace_io.py serve --palace ~/.lares/.astpalace
@@ -40,6 +52,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import sqlite3
 
 from mempalace.palace import get_collection
 
@@ -112,14 +126,43 @@ def _now() -> str:
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
 
+# The reverse-index db name — sits BESIDE the chroma store in the palace dir (kg_io's
+# raw-sqlite-beside-chroma idiom). Maps turn_key → structural_hash so kapae stays O(1):
+# chroma cannot where-filter inside the JSON provenance list.
+_TURNKEY_INDEX_DB = "turnkey_index.sqlite3"
+
+
 class AstPalaceStore:
-    """One open `.astpalace` collection; put (recurrence RMW) + get by structural hash."""
+    """One open `.astpalace` collection; put (recurrence RMW) + get by structural hash + kapae."""
 
     def __init__(self, palace_path: str) -> None:
         # create-or-open: get_collection(create=True) os.makedirs the dir + creates the
         # collection if absent — this IS the `init` for a fresh palace. Identity check
         # skipped: we never run the embedder, so its recorded identity is irrelevant.
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
+        # The turn_key → structural_hash reverse-index, beside the chroma store. get_collection
+        # already made the palace dir, so the path is safe to open. One row per turn_key (PK);
+        # a turn re-put under a new structure overwrites it (the latest structure for that turn).
+        self._index_path = os.path.join(palace_path, _TURNKEY_INDEX_DB)
+        self._index = sqlite3.connect(self._index_path)
+        self._index.execute(
+            "CREATE TABLE IF NOT EXISTS turnkey_index (turn_key TEXT PRIMARY KEY, structural_hash TEXT NOT NULL)"
+        )
+        self._index.commit()
+
+    def _index_put(self, turn_key: str, structural_hash: str) -> None:
+        self._index.execute(
+            "INSERT INTO turnkey_index (turn_key, structural_hash) VALUES (?, ?) "
+            "ON CONFLICT(turn_key) DO UPDATE SET structural_hash=excluded.structural_hash",
+            (turn_key, structural_hash),
+        )
+        self._index.commit()
+
+    def _index_lookup(self, turn_key: str) -> str | None:
+        row = self._index.execute(
+            "SELECT structural_hash FROM turnkey_index WHERE turn_key=?", (turn_key,)
+        ).fetchone()
+        return row[0] if row else None
 
     def _get_raw(self, structural_hash: str) -> dict | None:
         got = self._col.get(ids=[structural_hash], include=["documents", "metadatas"])
@@ -147,15 +190,25 @@ class AstPalaceStore:
             "first_seen": meta.get("first_seen", ""),
             "last_seen": meta.get("last_seen", ""),
             "provenance": provenance,
+            # kapae set-aside marker (absent on a live entry); a tombstoned entry keeps its row
+            # but its structure no longer counts toward recurrence.
+            **({"tombstoned_at": meta["lar_tombstoned_at"]} if meta.get("lar_tombstoned_at") else {}),
         }
 
     def get(self, structural_hash: str) -> dict | None:
         raw = self._get_raw(structural_hash)
         return self._to_entry(raw) if raw is not None else None
 
-    def put(self, structural_hash: str, ast_json: str, source_file: str, verbatim_sha: str) -> dict:
+    def put(self, structural_hash: str, ast_json: str, source_file: str, verbatim_sha: str, turn_key: str = "") -> dict:
         now = _now()
+        # The provenance line carries the kapae key (the USER turn's uuid) alongside the verbatim
+        # join — so a gone turn can drop exactly its line. turn_key may be "" (a put with no turn
+        # context, e.g. a backfill); such a line is simply not kapae-addressable.
         link = {"source_file": source_file, "verbatim_sha": verbatim_sha}
+        if turn_key:
+            link["turn_key"] = turn_key
+            # The reverse-index lets kapae find this structure by turn_key in O(1).
+            self._index_put(turn_key, structural_hash)
         existing = self._get_raw(structural_hash)
         if existing is not None:
             meta = dict(existing["metadata"])
@@ -179,6 +232,10 @@ class AstPalaceStore:
                     "lar_provenance": json.dumps(provenance),
                 }
             )
+            # Revival: a tombstoned structure that recurs is live again (its turns came back, or a
+            # new turn unfolds the same shape). Clear the set-aside marker ("" reads as live).
+            if meta.get("lar_tombstoned_at"):
+                meta["lar_tombstoned_at"] = ""
             # Recurrence: same structure, same id → upsert (overwrite) the one entry.
             self._col.upsert(
                 ids=[structural_hash],
@@ -206,6 +263,59 @@ class AstPalaceStore:
         )
         return {"hash": structural_hash, "count": 1}
 
+    def kapae(self, turn_key: str, ended: str | None = None) -> dict:
+        """Set-aside (NOT erase) the AST tally for a gone turn — the astpalace twin of the KG kapae.
+
+        Find the structure the turn unfolded to (via the O(1) reverse-index), drop that turn's
+        provenance line, and decrement `count`. When count falls to ≤0 the entry is TOMBSTONED
+        (`lar_tombstoned_at` stamped, the chroma row KEPT) rather than deleted — history preserved,
+        recall excludes it. Idempotent: a 2nd kapae finds the line already gone → a no-op (the row
+        is untouched, nothing re-decremented). Returns the verbatim_shas dropped (so the salience
+        producer can down-weight exactly those drawers) + whether the entry tombstoned.
+        """
+        if not turn_key:
+            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+        ended = ended or _now()
+        structural_hash = self._index_lookup(turn_key)
+        if not structural_hash:
+            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+        raw = self._get_raw(structural_hash)
+        if raw is None:
+            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+        meta = dict(raw["metadata"])
+        try:
+            provenance = json.loads(meta.get("lar_provenance") or "[]")
+        except (ValueError, TypeError):
+            provenance = []
+        # Drop every provenance line minted by this turn (normally one). The verbatim_shas of the
+        # dropped lines feed the salience down-weight (strand C).
+        kept, dropped_shas = [], []
+        for p in provenance:
+            if p.get("turn_key") == turn_key:
+                if p.get("verbatim_sha"):
+                    dropped_shas.append(p["verbatim_sha"])
+            else:
+                kept.append(p)
+        removed = len(provenance) - len(kept)
+        if removed == 0:
+            # Idempotent no-op: the line is already gone (a 2nd kapae for the same uuid).
+            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+        count = int(meta.get("count", 1)) - removed
+        meta["count"] = count
+        meta["lar_provenance"] = json.dumps(kept)
+        tombstoned = []
+        if count <= 0:
+            meta["lar_tombstoned_at"] = ended
+            tombstoned.append(structural_hash)
+        # update() (not upsert) — leave the document/embedding untouched; only the metadata moves.
+        self._col.update(ids=[structural_hash], metadatas=[meta])
+        return {
+            "closed": removed,
+            "tombstoned": tombstoned,
+            "verbatim_shas": dropped_shas,
+            "turn_key": turn_key,
+        }
+
 
 # --- the OPS this sidecar declares (its #has-stack made literal) -------------
 # Each op is a handler(req) -> result, bound to one open store. The shared
@@ -216,9 +326,11 @@ def _build_ops(store: AstPalaceStore) -> dict:
     return {
         "ping": lambda req: {"ready": True},
         "put": lambda req: store.put(
-            req["hash"], req["ast"], req.get("source_file", ""), req.get("verbatim_sha", "")
+            req["hash"], req["ast"], req.get("source_file", ""), req.get("verbatim_sha", ""),
+            req.get("turn_key", ""),
         ),
         "get": lambda req: store.get(req["hash"]),
+        "kapae": lambda req: store.kapae(req["turn_key"], req.get("ended")),
     }
 
 

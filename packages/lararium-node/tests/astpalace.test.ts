@@ -82,6 +82,32 @@ describe("makeAstPalace (mempalace-instance-backed)", () => {
     expect(entry!.provenance).toHaveLength(1); // but the identical link is not re-appended
   }, TEST_TIMEOUT);
 
+  test("kapae (rewind) sets aside a turn's tally by turn_key, returns its verbatim_shas, idempotent", async () => {
+    const pal = openPalace(await palaceDir());
+    // Two DISTINCT turns unfold the SAME structure → count 2; each provenance line carries its turn_key.
+    const { hash, verbatimSha: vA } = await pal.put(tree, { source_file: "nalu://run/1", content: "turn A", turnKey: "uuid-A" });
+    await pal.put(sameTreeReordered, { source_file: "nalu://run/2", content: "turn B", turnKey: "uuid-B" });
+    expect((await pal.get(hash))!.count).toBe(2);
+    expect((await pal.get(hash))!.provenance[0]).toEqual({
+      source_file: "nalu://run/1", verbatim_sha: vA, turn_key: "uuid-A",
+    });
+
+    // Rewind turn A → count 2→1, NOT tombstoned, returns A's verbatim_sha (the drawer to down-weight).
+    const r1 = await pal.kapae("uuid-A");
+    expect(r1.closed).toBe(1);
+    expect(r1.verbatim_shas).toEqual([vA]);
+    expect(r1.tombstoned).toEqual([]);
+    expect((await pal.get(hash))!.count).toBe(1);
+
+    // Idempotent: a 2nd rewind of the same uuid is a no-op.
+    expect((await pal.kapae("uuid-A")).closed).toBe(0);
+
+    // Rewind turn B → count 1→0 → TOMBSTONED, the row KEPT (get still returns it).
+    const r2 = await pal.kapae("uuid-B");
+    expect(r2.tombstoned).toEqual([hash]);
+    expect(await pal.get(hash)).not.toBeNull();
+  }, TEST_TIMEOUT);
+
   test("get on an unknown/malformed hash returns null", async () => {
     const pal = openPalace(await palaceDir());
     expect(await pal.get("not-a-hash")).toBeNull(); // bad format — short-circuits, no holder call

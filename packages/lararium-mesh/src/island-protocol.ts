@@ -280,6 +280,28 @@ export interface DaemonMsg_TelemetryPlaceVerb {
    * rebuilds the {@link BranchContext} and feeds it to buildPatch's 3rd arg (the fork-cut).
    */
   frontier?: readonly string[];
+  /**
+   * The USER turn's uuid — the PROVENANCE key the node AST split lifts into the .astpalace, so a
+   * later rewind (kapae) can set-aside exactly this turn's recurrence tally. Absent ⇒ no key (the
+   * turn's AST is stored, but not kapae-addressable). Stripped from the content drawer.
+   */
+  turnKey?: string;
+}
+
+/**
+ * Vessel → island: REWIND (kapae) one turn's .astpalace tally — the convergence twin of the KG
+ * valid-close + the Measure salience down-weight. Fire-and-forget (symmetric with telemetry
+ * capture): the @daemon owns the warm .astpalace serve holder (a flock-singleton the CLI cannot
+ * re-open), so the producer routes the rewind here. The capture cap (hasCapture) holds the engine
+ * that holds the holder; it set-asides the turn's tally AND down-weights the turn's content drawers.
+ */
+export interface DaemonMsg_AstpalaceKapae {
+  schema_version: ProtocolVersion;
+  type: "astpalace:kapae";
+  /** The USER turn's uuid to rewind (matched against the .astpalace provenance turn_key). */
+  turnKey: string;
+  /** Optional rewind timestamp (the tombstone `valid_to`); defaults to now in the holder. */
+  ended?: string;
 }
 
 /**
@@ -585,6 +607,7 @@ export type VesselToIslandMsg =
   | IslandMsg_Teardown
   | DaemonMsg_PlaceVerb
   | DaemonMsg_TelemetryPlaceVerb
+  | DaemonMsg_AstpalaceKapae
   | DaemonMsg_DeriveSkeletonRequest
   | DaemonMsg_WorldlineCompareRequest
   | DaemonMsg_WorldlineTrajectoryRequest
@@ -760,7 +783,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "astpalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
@@ -872,6 +895,7 @@ export function mkTelemetryPlaceVerb(opts: {
   turnText: string;
   sourceFile: string;
   frontier?: readonly string[];
+  turnKey?: string;
 }): DaemonMsg_TelemetryPlaceVerb {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -879,6 +903,19 @@ export function mkTelemetryPlaceVerb(opts: {
     turnText: opts.turnText,
     sourceFile: opts.sourceFile,
     ...(opts.frontier && opts.frontier.length ? { frontier: [...opts.frontier] } : {}),
+    ...(opts.turnKey ? { turnKey: opts.turnKey } : {}),
+  };
+}
+
+export function mkAstpalaceKapae(opts: {
+  turnKey: string;
+  ended?: string;
+}): DaemonMsg_AstpalaceKapae {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "astpalace:kapae",
+    turnKey: opts.turnKey,
+    ...(opts.ended ? { ended: opts.ended } : {}),
   };
 }
 

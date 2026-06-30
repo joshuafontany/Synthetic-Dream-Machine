@@ -126,8 +126,11 @@ export interface CaptureEngineSeams {
 
 export interface CaptureEngine {
   /** Annotate a raw turn forward, durably write-ahead-log it, and enqueue it. `branch` (optional)
-   *  threads the turn-DAG fork-frontier to the annotate pass (the same-session fork-cut). */
-  enqueue(turnText: string, sourceFile: string, branch?: BranchContext): Promise<void>;
+   *  threads the turn-DAG fork-frontier to the annotate pass (the same-session fork-cut). `turnKey`
+   *  (optional) — the USER turn's uuid — rides onto the record's metadata as `lar_turn_key`, the
+   *  PROVENANCE key the node-side AST split lifts into the .astpalace (so a rewind can later
+   *  set-aside that turn's tally); it is stripped from the content drawer (provenance, not content). */
+  enqueue(turnText: string, sourceFile: string, branch?: BranchContext, turnKey?: string): Promise<void>;
   /** Crest on a server tick — flush the batch if the gate fires. Returns the count filed. */
   tick(nowMs: number): Promise<number>;
   /** Boot recovery — replay the WAL back into the hot pool. Returns the count recovered. */
@@ -140,6 +143,14 @@ export interface CaptureEngine {
   compactIfDrained(): Promise<void>;
   /** Tear down the OUT projection's coalesce timer (teardown; the final stats ride the host). */
   dispose(): void;
+  /**
+   * REWIND (kapae) one turn's structural-AST tally — the strand-B convergence leg. OPTIONAL: a
+   * vessel that wires a content-addressed AST store (node: the .astpalace) sets it; others leave it
+   * absent (the browser/relay engine carries no local AST store). The node impl set-asides the
+   * turn's recurrence tally AND down-weights its content drawers (the salience producer), all in
+   * the worker that owns the warm holder. Best-effort — a holder fault is swallowed (re-derivable).
+   */
+  kapaeAst?(turnKey: string, ended?: string): Promise<void>;
 }
 
 /** Compose the self-regulating dual-family cell from a vessel's substrate seams. */
@@ -226,11 +237,16 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   };
 
   return {
-    async enqueue(turnText, sourceFile, branch) {
+    async enqueue(turnText, sourceFile, branch, turnKey) {
+      const metadata = annotate(turnText, sourceFile, branch);
+      // The turn's provenance key rides ALONGSIDE the annotate patch (not derived from text — it
+      // is the producer's identity for this turn). The node AST split lifts it into the .astpalace
+      // and strips it from the drawer; absent ⇒ byte-identical to before.
+      if (turnKey) metadata["lar_turn_key"] = turnKey;
       const record: CaptureRecord = {
         content: turnText,
         source_file: sourceFile,
-        metadata: annotate(turnText, sourceFile, branch),
+        metadata,
       };
       await reserve.append(record); // write-ahead: durable BEFORE the hot pool
       nalu.enqueue(record);

@@ -27,6 +27,8 @@ import type { IslandContext } from "./island-context.js";
 export const TELEMETRY_FRAME = "telemetry:frame";
 /** Default signal type that carries a raw turn IN to a capture island. */
 const DEFAULT_ENQUEUE_SIGNAL = "telemetry:place-verb";
+/** Signal type that REWINDS (kapae) one turn's .astpalace tally + salience down-weight. */
+const KAPAE_SIGNAL = "astpalace:kapae";
 
 export interface CaptureCapOptions {
   /** Build the capture engine given the OUT-frame `post` seam (the cap wires it to `ctx.post`).
@@ -45,7 +47,16 @@ interface EnqueueSignal {
   readonly sourceFile?: string;
   /** The turn-DAG fork-frontier (head turn-uuids) the producer derived; absent on a non-forked turn. */
   readonly frontier?: readonly string[];
-  readonly args?: { readonly turnText?: string; readonly sourceFile?: string; readonly frontier?: readonly string[] };
+  /** The USER turn's uuid — the .astpalace provenance key (rides into the AST store, never the drawer). */
+  readonly turnKey?: string;
+  readonly args?: { readonly turnText?: string; readonly sourceFile?: string; readonly frontier?: readonly string[]; readonly turnKey?: string };
+}
+
+/** A rewind (kapae) signal: set-aside one turn's AST tally + down-weight its content drawers. */
+interface KapaeSignal {
+  readonly turnKey?: string;
+  readonly ended?: string;
+  readonly args?: { readonly turnKey?: string; readonly ended?: string };
 }
 
 /** The IN=accumulate cap — hosts the capture-engine inside a causal island. */
@@ -103,6 +114,24 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
       };
     },
     onSignal(type: string, raw: unknown): boolean {
+      if (type === KAPAE_SIGNAL) {
+        if (!makeEngine) return false; // inert sink — honestly unhandled
+        const e = engine;
+        if (!e) {
+          console.warn(`[has-capture] dropped an "${KAPAE_SIGNAL}" rewind — engine not yet booted (drop-honesty)`);
+          return true;
+        }
+        const k = raw as KapaeSignal;
+        const turnKey = k.turnKey ?? k.args?.turnKey;
+        if (typeof turnKey !== "string" || !turnKey) {
+          console.warn(`[has-capture] dropped a malformed "${KAPAE_SIGNAL}" rewind — needs a non-empty turnKey (drop-honesty)`);
+          return true;
+        }
+        const ended = k.ended ?? k.args?.ended;
+        // Best-effort rewind (the engine swallows holder faults) — fire-and-forget like the capture.
+        void e.kapaeAst?.(turnKey, typeof ended === "string" ? ended : undefined);
+        return true;
+      }
       if (type !== signal) return false;
       if (!makeEngine) return false; // inert (sink not wired) — honestly unhandled, not a silent claim
       const e = engine;
@@ -123,7 +152,10 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
       // byte-identical handle to before. Carried as flat uuid strings, rebuilt into the context here.
       const frontier = msg.frontier ?? msg.args?.frontier;
       const branch = Array.isArray(frontier) && frontier.length ? { frontier: [...frontier] } : undefined;
-      void e.enqueue(turnText, sourceFile, branch);
+      // The USER turn's uuid rides onto the record metadata as the .astpalace provenance key (the
+      // kapae key); absent ⇒ the turn's AST is stored but not rewind-addressable.
+      const turnKey = msg.turnKey ?? msg.args?.turnKey;
+      void e.enqueue(turnText, sourceFile, branch, typeof turnKey === "string" && turnKey ? turnKey : undefined);
       return true;
     },
   };

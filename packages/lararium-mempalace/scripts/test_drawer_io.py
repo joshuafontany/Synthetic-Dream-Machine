@@ -107,3 +107,64 @@ def test_cmd_form_embeddings_degrades_when_no_form_collection(monkeypatch, capsy
     monkeypatch.setattr(dio, "get_collection", _boom)
     dio.cmd_form_embeddings(argparse.Namespace())  # must NOT raise
     assert _lines(capsys) == []  # 0 rows ⇒ the orchestrator stays 1-plane
+
+
+# ---------------------------------------------------------------------------
+# cmd_kapae — the strand-C salience down-weight (by verbatim_sha)
+# ---------------------------------------------------------------------------
+
+
+class _StampCollection:
+    """A chroma-shaped collection that resolves a verbatim_sha where-filter → drawer ids and
+    records updates. `where` carries {"lar_verbatim_sha": V} or {"lar_verbatim_sha": {"$in": [...]}}"""
+
+    def __init__(self, by_sha):
+        self._by_sha = by_sha  # sha -> (id, meta)
+        self.updates = []  # (ids, metadatas)
+
+    def get(self, where=None, include=None):
+        f = (where or {}).get("lar_verbatim_sha")
+        wanted = f["$in"] if isinstance(f, dict) else [f]
+        ids, metas = [], []
+        for sha in wanted:
+            if sha in self._by_sha:
+                did, meta = self._by_sha[sha]
+                ids.append(did)
+                metas.append(meta)
+        return {"ids": ids, "metadatas": metas}
+
+    def update(self, ids=None, metadatas=None):
+        self.updates.append((ids, metadatas))
+
+
+def test_cmd_kapae_stamps_floor_salience_and_kapae_flag(monkeypatch, capsys, tmp_path):
+    col = _StampCollection(
+        {"shaA": ("dA", {"wing": "w", "lar_verbatim_sha": "shaA"}),
+         "shaB": ("dB", {"wing": "w", "lar_verbatim_sha": "shaB"})},
+    )
+    monkeypatch.setattr(dio, "_col", lambda: col)
+    pf = tmp_path / "shas.ndjson"
+    pf.write_text(json.dumps({"verbatim_sha": "shaA"}) + "\n" + json.dumps({"verbatim_sha": "shaB"}) + "\n")
+    dio.cmd_kapae(argparse.Namespace(patchfile=str(pf), salience=None))
+    out = _lines(capsys)[0]
+    assert out["stamped"] == 2
+    assert out["salience"] == dio.KAPAE_FLOOR_SALIENCE
+    # Both drawers got the floor salience + the kapae flag, merge-only (wing preserved).
+    ids, metas = col.updates[0]
+    assert ids == ["dA", "dB"]
+    for m in metas:
+        assert m["lar_salience"] == dio.KAPAE_FLOOR_SALIENCE
+        assert m["lar_kapae"] == 1
+        assert m["wing"] == "w"
+        assert m["adapter_name"] == dio.ADAPTER_NAME
+
+
+def test_cmd_kapae_skips_missing_shas(monkeypatch, capsys, tmp_path):
+    col = _StampCollection({"shaA": ("dA", {"lar_verbatim_sha": "shaA"})})
+    monkeypatch.setattr(dio, "_col", lambda: col)
+    pf = tmp_path / "shas.ndjson"
+    pf.write_text(json.dumps({"verbatim_sha": "ghost"}) + "\n")
+    dio.cmd_kapae(argparse.Namespace(patchfile=str(pf), salience=None))
+    out = _lines(capsys)[0]
+    assert out["stamped"] == 0
+    assert col.updates == []  # nothing matched ⇒ no write

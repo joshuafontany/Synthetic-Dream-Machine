@@ -34,9 +34,15 @@ from sidecar_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embed
 PALACE = os.path.expanduser("~/.mempalace/palace")
 # Current harvest version — bump when the harvester's output shape changes, so a
 # re-harvest re-processes every drawer; unchanged, it skips already-done drawers.
-HARVEST_VERSION = 6  # bump in lockstep with LAR_HV in telemetry-writeback.ts buildPatch (v6 = main-agent root handle: lar_agent_handle/lar_root_handle on top-level session drawers, no new fields)
+HARVEST_VERSION = 7  # bump in lockstep with LAR_HV in mesh/build-patch.ts (v7 = kapae convergence: lar_salience/lar_kapae/lar_frontier declared; the nuke-and-pave re-harvest re-stamps every drawer)
 READ_BATCH = 2000
 WRITE_BATCH = 1000
+
+# The kapae down-weight floor (strand C) — a rewound turn's drawers ride this salience so they
+# barely bend the FFZ Measure rhythm (ffz-orchestrator reads lar_salience, default 1.0). A small
+# (0,1] value: it cannot trip a gong on its own, yet keeps the drawer recall-visible (set-aside,
+# never erased). Mirrors the ffz test's floor (0.01).
+KAPAE_FLOOR_SALIENCE = 0.01
 
 # The declared schema contract (RFC 002). Every lar_* write is validated against
 # it and stamped with the adapter identity — declared, not smuggled.
@@ -240,6 +246,42 @@ def cmd_apply(args):
     print(json.dumps({"applied": applied, "hv": HARVEST_VERSION, "adapter": ADAPTER_NAME, "adapter_version": ADAPTER_VERSION}))
 
 
+def cmd_kapae(args):
+    """Down-weight a rewound turn's drawers — the strand-C salience producer.
+
+    Reads NDJSON {"verbatim_sha": V} (the shas the astpalace kapae dropped — the turn's content
+    drawers) and stamps lar_salience=floor + lar_kapae=1 on every drawer whose lar_verbatim_sha
+    matches. set-aside, never erased: the drawer stays recall-visible, but contributes almost no
+    fused surprise to the FFZ Measure servo (the convergence twin of the KG valid-close + the
+    astpalace tally-decrement). Idempotent — a re-stamp writes the same floor. Merge-only update
+    (never deletes a field), the adapter identity stamped like apply."""
+    col = _col()
+    recs = list(read_ndjson_records(args.patchfile))
+    shas = [r["verbatim_sha"] for r in recs if r.get("verbatim_sha")]
+    stamped = 0
+    floor = args.salience if args.salience is not None else KAPAE_FLOOR_SALIENCE
+    for k in range(0, len(shas), WRITE_BATCH):
+        batch = shas[k : k + WRITE_BATCH]
+        # chroma `where` over the indexed lar_verbatim_sha — one $in query per batch resolves the
+        # content drawers (makeAstSplitFlush stamps lar_verbatim_sha on every captured drawer).
+        where = {"lar_verbatim_sha": {"$in": batch}} if len(batch) > 1 else {"lar_verbatim_sha": batch[0]}
+        got = col.get(where=where, include=["metadatas"])
+        ids, metas = got["ids"], got["metadatas"]
+        if not ids:
+            continue
+        up_metas = []
+        for m in metas:
+            merged = dict(m or {})
+            merged["lar_salience"] = floor
+            merged["lar_kapae"] = 1
+            merged["adapter_name"] = ADAPTER_NAME
+            merged["adapter_version"] = ADAPTER_VERSION
+            up_metas.append(merged)
+        col.update(ids=ids, metadatas=up_metas)
+        stamped += len(ids)
+    print(json.dumps({"stamped": stamped, "salience": floor, "shas": len(shas)}))
+
+
 def main():
     ap = argparse.ArgumentParser(description="mempalace drawer I/O (boundary substrate side)")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -259,6 +301,10 @@ def main():
     a = sub.add_parser("apply")
     a.add_argument("patchfile")
     a.set_defaults(fn=cmd_apply)
+    k = sub.add_parser("kapae")  # strand-C salience down-weight by verbatim_sha
+    k.add_argument("patchfile", help="NDJSON {verbatim_sha} — the shas the astpalace kapae dropped")
+    k.add_argument("--salience", type=float, default=None, help=f"floor salience (default {KAPAE_FLOOR_SALIENCE})")
+    k.set_defaults(fn=cmd_kapae)
     args = ap.parse_args()
     args.fn(args)
 

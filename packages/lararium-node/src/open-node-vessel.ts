@@ -512,7 +512,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       },
     };
     const daemonImpl: DaemonVerbProvider = {
-      placeTelemetry: (turnText, sourceFile, frontier) => daemonVm.placeTelemetry(turnText, sourceFile, frontier),
+      placeTelemetry: (turnText, sourceFile, frontier, turnKey) => daemonVm.placeTelemetry(turnText, sourceFile, frontier, turnKey),
+      placeAstpalaceKapae: (turnKey, ended) => daemonVm.placeAstpalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),
       worldlineTrajectory: (input) => daemonVm.worldlineTrajectory(input),

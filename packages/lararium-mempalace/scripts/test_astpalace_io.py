@@ -29,12 +29,15 @@ class _DummyStore:
     def __init__(self):
         self.puts = []
 
-    def put(self, h, ast, source_file, verbatim_sha):
-        self.puts.append((h, ast, source_file, verbatim_sha))
+    def put(self, h, ast, source_file, verbatim_sha, turn_key=""):
+        self.puts.append((h, ast, source_file, verbatim_sha, turn_key))
         return {"hash": h, "count": 1}
 
     def get(self, h):
         return None
+
+    def kapae(self, turn_key, ended=None):
+        return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
 
 
 @_posix_flock
@@ -160,7 +163,7 @@ def test_serve_loop_handles_request_then_exits_on_eof(monkeypatch):
     lines = [json.loads(x) for x in out.getvalue().splitlines() if x.strip()]
     assert lines[0] == {"id": 1, "ok": True, "result": {"ready": True}}
     assert lines[1]["id"] == 2 and lines[1]["ok"] is True
-    assert store.puts == [("H", "{}", "f", "V")]
+    assert store.puts == [("H", "{}", "f", "V", "")]
 
 
 def test_idle_ttl_seconds_env_parsing(monkeypatch):
@@ -172,3 +175,93 @@ def test_idle_ttl_seconds_env_parsing(monkeypatch):
     assert ap._idle_ttl_seconds() == 0.0
     monkeypatch.setenv(ap.IDLE_TTL_ENV, "garbage")
     assert ap._idle_ttl_seconds() == ap.DEFAULT_IDLE_TTL_SECONDS
+
+
+# ── Strand B: the turn_key provenance + kapae tally-decrement (real ChromaDB store) ──────────────
+#
+# These open a real AstPalaceStore in a tmp palace (the venv supplies chroma). They prove the
+# three new contracts: put appends turn_key into provenance + upserts the reverse-index;
+# store.kapae decrements + tombstones-at-zero (KEEPING the row) + is idempotent; the reverse-index
+# SELECT → RMW drives an O(1) kapae.
+
+
+def _store(tmp_path):
+    return ap.AstPalaceStore(str(tmp_path / "astpalace"))
+
+
+# Structural hashes are sha256 hex (the _embed reads hex off them) — use valid hex fixtures.
+H1 = "a" * 64
+
+
+def test_put_appends_turn_key_to_provenance_and_reverse_index(tmp_path):
+    store = _store(tmp_path)
+    store.put(H1, '{"t":1}', "wing/sess.jsonl", "vsha1", "turn-A")
+    entry = store.get(H1)
+    assert entry is not None
+    assert entry["count"] == 1
+    assert entry["provenance"] == [
+        {"source_file": "wing/sess.jsonl", "verbatim_sha": "vsha1", "turn_key": "turn-A"}
+    ]
+    # The reverse-index maps the turn_key → this structure (the O(1) kapae lookup).
+    assert store._index_lookup("turn-A") == H1
+    assert store._index_lookup("nope") is None
+
+
+def test_kapae_decrements_and_tombstones_at_zero_keeping_the_row(tmp_path):
+    store = _store(tmp_path)
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
+    # A SECOND distinct turn unfolds the SAME structure → count 2, two provenance lines.
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaB", "turn-B")
+    assert store.get(H1)["count"] == 2
+
+    # kapae turn-A → drops its line, count 2→1, NOT tombstoned, returns its verbatim_sha.
+    r1 = store.kapae("turn-A")
+    assert r1["closed"] == 1
+    assert r1["verbatim_shas"] == ["vshaA"]
+    assert r1["tombstoned"] == []
+    e1 = store.get(H1)
+    assert e1["count"] == 1
+    assert [p["turn_key"] for p in e1["provenance"]] == ["turn-B"]
+    assert "tombstoned_at" not in e1  # still live
+
+    # kapae turn-B → count 1→0 → TOMBSTONED, the chroma row KEPT (get still returns it).
+    r2 = store.kapae("turn-B")
+    assert r2["closed"] == 1
+    assert r2["tombstoned"] == [H1]
+    e2 = store.get(H1)
+    assert e2 is not None  # row kept, never deleted
+    assert e2["count"] == 0
+    assert e2.get("tombstoned_at")  # the set-aside marker stamped
+
+
+def test_kapae_is_idempotent(tmp_path):
+    store = _store(tmp_path)
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
+    first = store.kapae("turn-A")
+    assert first["closed"] == 1
+    # A 2nd kapae for the same uuid finds the line already gone → no-op (nothing re-decremented).
+    second = store.kapae("turn-A")
+    assert second["closed"] == 0
+    assert second["tombstoned"] == []
+    assert second["verbatim_shas"] == []
+
+
+def test_kapae_unknown_turn_key_is_a_noop(tmp_path):
+    store = _store(tmp_path)
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
+    r = store.kapae("never-seen")
+    assert r == {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": "never-seen"}
+    # The live entry is untouched.
+    assert store.get(H1)["count"] == 1
+
+
+def test_put_revives_a_tombstoned_structure(tmp_path):
+    store = _store(tmp_path)
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
+    store.kapae("turn-A")
+    assert store.get(H1).get("tombstoned_at")  # tombstoned
+    # The same structure recurs (a new turn) → revived, the marker cleared.
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaC", "turn-C")
+    revived = store.get(H1)
+    assert not revived.get("tombstoned_at")
+    assert revived["count"] == 1

@@ -58,7 +58,7 @@ export interface CaptureContext {
  * with `HARVEST_VERSION` in `drawer_io.py` when the reading logic changes, so the
  * next sweep re-reads exactly the stale drawers. THE single source for this number.
  */
-export const LAR_HV = 6;
+export const LAR_HV = 7;
 
 const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
 
@@ -209,6 +209,9 @@ export function buildPatch(
     lar_sigils: h.sigilCount,
     lar_water: h.waterCount,
   };
+  // The fork-frontier token (when a same-session fork keyed a distinct handle) — declared in
+  // LAR_SCHEMA so it where-filters; the handle already folds it in, this surfaces it standalone.
+  if (frontier) patch["lar_frontier"] = frontier;
   if (h.bearing?.aimUri) patch["lar_aim"] = h.bearing.aimUri.slice(0, 300);
   if (h.bearing?.yieldUri) patch["lar_yield"] = h.bearing.yieldUri.slice(0, 300);
   if (h.voices.length)

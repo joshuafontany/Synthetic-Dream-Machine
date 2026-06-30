@@ -109,3 +109,30 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   }
   return { drawers: drawers.length, framed, applied, bands };
 }
+
+/**
+ * KAPAE salience down-weight (strand C producer) — stamp `lar_salience=floor` + `lar_kapae=1` on the
+ * content drawers a rewound turn fed (addressed by their `lar_verbatim_sha`, the shas the .astpalace
+ * kapae dropped). Best-effort: an absent python substrate is reported, never thrown (the rewind stays
+ * unreconciled this run, re-derivable). Returns the count stamped, or `null` when the substrate is
+ * absent. drawer_io targets the canonical palace (the same default as the apply/export legs).
+ */
+export function stampKapaeSalience(verbatimShas: readonly string[]): { stamped: number } | null {
+  if (verbatimShas.length === 0) return { stamped: 0 };
+  const PY = resolveMempalacePython();
+  if (!PY) return null;
+  const DRAWER_IO = resolveDrawerIo();
+  if (!existsSync(DRAWER_IO)) return null;
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+  const pf = join(tmpdir(), `lar-kapae-salience-${process.pid}-${Date.now()}.ndjson`);
+  writeFileSync(pf, verbatimShas.map((s) => JSON.stringify({ verbatim_sha: s })).join("\n") + "\n");
+  try {
+    const out = execFileSync(PY, [DRAWER_IO, "kapae", pf], {
+      cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 28, encoding: "utf8",
+    });
+    try { return { stamped: (JSON.parse(out.trim()) as { stamped: number }).stamped }; } catch { return { stamped: verbatimShas.length }; }
+  } finally {
+    rmSync(pf, { force: true });
+  }
+}

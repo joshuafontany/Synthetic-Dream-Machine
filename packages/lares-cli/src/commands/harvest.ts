@@ -170,6 +170,17 @@ export function sha(s: string): string {
   return createHash("sha256").update(s).digest("hex").slice(0, 16);
 }
 
+/**
+ * The TURN KEY — the USER turn's stable identity (its uuid), the join the kapae convergence keys on.
+ * The SAME formula MUST drive both legs: the CAPTURE leg (readExchanges → the .astpalace provenance
+ * turn_key) and the BEARING/rewind leg (readTurns → the gone-turn detection → the worldline KG +
+ * astpalace-kapae). Sharing this one helper keeps them in lockstep by construction — a gone uuid
+ * closes the KG edge, the astpalace tally, AND the Measure salience as ONE key (the grain note).
+ */
+export function turnKeyOf(file: string, turn: { uuid: string; ts: string; text: string }): string {
+  return turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
+}
+
 /** Load the idempotency watermark: turn-key → content hash already harvested. */
 function loadState(path: string): Record<string, string> {
   if (!existsSync(path)) return {};
@@ -641,7 +652,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   for (const file of files) {
     for (const turn of readTurns(file)) {
       summary.turns += 1;
-      const key = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
+      const key = turnKeyOf(file, turn);
       const hash = sha(turn.text);
       const scope = rewindScope(turn.session, turn.agentId);
       let live = currentByScope.get(scope);
@@ -680,7 +691,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   // is a rewind: set aside (close) its worldline edges keyed to that turn-uuid, never erase. Scoped
   // per-session (a turn from an un-harvested session never reads as gone). Best-effort: the KG is a
   // re-derivable projection, so an absent KG / fault never sinks the harvest.
-  let kapae: { goneTurns: number; closed: number } | null = null;
+  let kapae: { goneTurns: number; closed: number; astpalace: number } | null = null;
   if (!dryRun) {
     const indexByScope = loadIndexByScope(indexPath);
     const gone: string[] = [];
@@ -689,17 +700,31 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       if (prev) gone.push(...detectGoneTurns(prev, live));
     }
     if (gone.length > 0) {
+      // ONE gone turn-uuid → the THREE convergence effects. Leg 1 (KG valid-close) fires CLI-side
+      // (the KG has no holder). Legs 2+3 (.astpalace tally set-aside + the Measure salience
+      // down-weight) fire through the @daemon's `astpalace-kapae` verb — the daemon owns the warm
+      // .astpalace serve holder (a flock-singleton the CLI cannot re-open), and does BOTH in the
+      // worker. Every leg is best-effort: a down KG / down daemon leaves the rewind unreconciled
+      // this run (re-derivable on the next harvest), never fatal.
       let closed = 0;
       try {
         for (const turnKey of gone) closed += kapaeTurn(turnKey).closed;
-        kapae = { goneTurns: gone.length, closed };
       } catch (err) {
-        // KG absent (no python/sidecar) or a fault — the rewind stays unreconciled this run, never
-        // fatal (the KG is a re-derivable projection). Surface the reason only under debug.
         const why = err instanceof KgUnavailable ? "KG unavailable" : err instanceof Error ? err.message : String(err);
-        kapae = { goneTurns: gone.length, closed };
-        if (process.env["LARES_DEBUG"]) console.warn(`[harvest] kapae best-effort skipped: ${why}`);
+        if (process.env["LARES_DEBUG"]) console.warn(`[harvest] KG kapae best-effort skipped: ${why}`);
       }
+      // Legs 2+3 — route each gone turn's rewind to the @daemon's warm holder (fire-and-forget).
+      let did = "";
+      try { did = await operatorDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
+      let astpalace = 0;
+      const fired = await Promise.allSettled(
+        gone.map((turnKey) => runVerb("astpalace-kapae", { turnKey }, did, { timeoutMs: 5000 })),
+      );
+      for (const r of fired) if (r.status === "fulfilled" && r.value.status === "done") astpalace += 1;
+      if (astpalace === 0 && process.env["LARES_DEBUG"]) {
+        console.warn(`[harvest] astpalace-kapae best-effort skipped (daemon down?) — ${gone.length} gone turn(s) unreconciled this run`);
+      }
+      kapae = { goneTurns: gone.length, closed, astpalace };
     }
   }
 
@@ -715,7 +740,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       console.log(`  harvested:    ${summary.harvested}  (${summary.framed} framed · ${summary.raw} raw · ${summary.sidechain} sidechain)`);
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
       if (!dryRun) console.log(`  index:        ${indexPath}`);
-      if (kapae) console.log(`  rewind:       ${kapae.goneTurns} gone turn(s) → ${kapae.closed} worldline edge(s) set aside (kapae)`);
+      if (kapae) console.log(`  rewind:       ${kapae.goneTurns} gone turn(s) → ${kapae.closed} worldline edge(s) + ${kapae.astpalace} astpalace tally(ies) set aside (kapae)`);
       if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
@@ -784,7 +809,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     // the daemon's buildPatch keys distinct handles. A linear transcript carries no fork ⇒ no frontier.
     const dagNodes: TurnNode[] = readTurns(file).map((t) => ({ uuid: t.uuid, parentUuid: t.parentUuid }));
     for (const turn of readExchanges(file)) {       // exchange-grain drawer (the ingest canon)
-      const key  = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
+      const key  = turnKeyOf(file, turn);
       const hash = sha(turn.text);
       if (state[key] === hash) continue;            // already captured (idempotent)
       const branch = turn.uuid ? branchContextForTurn(dagNodes, turn.uuid) : undefined;
@@ -793,7 +818,13 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
       try {
         const r = await runVerb(
           "capture",
-          { turnText: turn.text, sourceFile: src, ...(frontierArr && frontierArr.length ? { frontier: frontierArr } : {}) },
+          {
+            turnText: turn.text, sourceFile: src,
+            // The USER turn's uuid — the .astpalace provenance key (the kapae key). The SAME formula
+            // the rewind detector keys on (turn.uuid || sha(...)), so one gone uuid closes both stores.
+            turnKey: key,
+            ...(frontierArr && frontierArr.length ? { frontier: frontierArr } : {}),
+          },
           did,
           { timeoutMs: 5000 },
         );
@@ -826,7 +857,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
       fellBack = true;
       // The direct mine landed these exchanges — mark them so the nalu won't double next run.
       for (const file of files) for (const turn of readExchanges(file)) {
-        const key = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
+        const key = turnKeyOf(file, turn);
         next[key] = sha(turn.text);
       }
     } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }

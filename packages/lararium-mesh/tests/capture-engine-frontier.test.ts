@@ -10,6 +10,8 @@ import {
   harvestTurnGradient,
   buildPatch,
   mkTelemetryPlaceVerb,
+  mkAstpalaceKapae,
+  isVesselToIslandMsg,
 } from "../src/index.js";
 import type { CaptureRecord, CaptureReserve, FlushGate, BranchContext } from "../src/index.js";
 
@@ -74,5 +76,43 @@ describe("mkTelemetryPlaceVerb carries the frontier (the transport leg)", () => 
     expect(noF.frontier).toBeUndefined();
     const emptyF = mkTelemetryPlaceVerb({ turnText: "t", sourceFile: "s", frontier: [] });
     expect(emptyF.frontier).toBeUndefined();
+  });
+});
+
+describe("strand-B: the turn_key + the astpalace-kapae signal (the transport legs)", () => {
+  test("enqueue threads turnKey → metadata.lar_turn_key (the .astpalace provenance key)", async () => {
+    const flushed: CaptureRecord[] = [];
+    const engine = makeCaptureEngine({
+      reserve: stubReserve(),
+      flush: async (batch) => { flushed.push(...batch); return batch.length; },
+      annotate: (turn, src, branch?: BranchContext) => buildPatch(harvestTurnGradient(turn), src, branch),
+      gate: GATE,
+    });
+    await engine.enqueue("Lares (Mapper): the verb leads", SPIRIT, undefined, "turn-uuid-1");
+    await engine.tick(50);
+    expect(flushed[0]!.metadata!["lar_turn_key"]).toBe("turn-uuid-1");
+  });
+
+  test("no turnKey ⇒ lar_turn_key absent (byte-identical to before)", async () => {
+    const flushed: CaptureRecord[] = [];
+    const engine = makeCaptureEngine({
+      reserve: stubReserve(),
+      flush: async (batch) => { flushed.push(...batch); return batch.length; },
+      annotate: (turn, src, branch?: BranchContext) => buildPatch(harvestTurnGradient(turn), src, branch),
+      gate: GATE,
+    });
+    await engine.enqueue("Lares (Mapper): the verb leads", SPIRIT);
+    await engine.tick(50);
+    expect(flushed[0]!.metadata!["lar_turn_key"]).toBeUndefined();
+  });
+
+  test("mkAstpalaceKapae carries the turnKey + optional ended, and is a valid vessel→island msg", () => {
+    const m = mkAstpalaceKapae({ turnKey: "turn-X" });
+    expect(m.type).toBe("astpalace:kapae");
+    expect(m.turnKey).toBe("turn-X");
+    expect(m.ended).toBeUndefined();
+    expect(isVesselToIslandMsg(m)).toBe(true);
+    const withEnded = mkAstpalaceKapae({ turnKey: "turn-Y", ended: "2026-06-30" });
+    expect(withEnded.ended).toBe("2026-06-30");
   });
 });

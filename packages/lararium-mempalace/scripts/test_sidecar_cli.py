@@ -102,12 +102,13 @@ def test_drawer_io_export_then_apply_round_trip(tmp_path):
     lines = _json_lines(exp.stdout)
     assert lines == [{"id": "d1", "content": "hello shore", "source_file": "claude__x"}]
 
+    import drawer_io as dio  # the single source of HARVEST_VERSION (bumps must not break this round-trip)
     patch = tmp_path / "patch.ndjson"
-    patch.write_text(json.dumps({"id": "d1", "patch": {"lar_hv": 6}}) + "\n")
+    patch.write_text(json.dumps({"id": "d1", "patch": {"lar_hv": dio.HARVEST_VERSION}}) + "\n")
     app = _run(["drawer_io.py", "apply", str(patch)], home=tmp_path)
     assert app.returncode == 0, app.stderr
     out = json.loads(app.stdout)
-    assert out["applied"] == 1 and out["hv"] == 6
+    assert out["applied"] == 1 and out["hv"] == dio.HARVEST_VERSION
 
     # The patch landed: re-export now skips the (now-current) drawer.
     exp2 = _run(["drawer_io.py", "export", "--wing", "w1"], home=tmp_path)
