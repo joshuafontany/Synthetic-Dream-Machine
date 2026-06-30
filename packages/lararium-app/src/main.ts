@@ -121,6 +121,18 @@ async function bootVessel(): Promise<void> {
   const relayUrl = new URLSearchParams(location.search).get("relay") ?? undefined;
   // ?genesis=<base> → where the static host serves genesis/ (manifest + cas/). Default /genesis.
   const genesisCasBaseUrl = new URLSearchParams(location.search).get("genesis") ?? "/genesis";
+  // ?mesh=<readface,…> → carry-in as a mesh LEAF, bootstrapping the FLOW-map from peer @oracle
+  //   read-faces (opt-in; absent = no carriage / pure local boot). Empty value defaults to the
+  //   ?oracle= read-face. The browser is a LEAF (no endpoint — carries-in, not dial-able).
+  const meshParam = new URLSearchParams(location.search).get("mesh");
+  const meshLeaf = meshParam !== null
+    ? {
+        coordSeed: location.origin,
+        peers: meshParam
+          ? meshParam.split(",").map((s) => s.trim()).filter(Boolean)
+          : [new URLSearchParams(location.search).get("oracle") ?? "http://localhost:8080"],
+      }
+    : undefined;
   try {
     const result = await openBrowserVessel({
       hostId: "elyncia-browser",
@@ -133,6 +145,7 @@ async function bootVessel(): Promise<void> {
       onPhase: paint,
       onProjection: applyProjection,
       ...(relayUrl ? { relayUrl } : {}),
+      ...(meshLeaf ? { meshLeaf } : {}),
     });
     _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg
     const vesselEl = $("vessel"); vesselEl.replaceChildren();
