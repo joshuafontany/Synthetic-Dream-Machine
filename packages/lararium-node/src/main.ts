@@ -122,6 +122,10 @@ async function main(): Promise<void> {
       return (h >>> 0) / 4294967296;
     };
     const selfCoord = { theta: hashUnit(publicUrl) * 2 * Math.PI, r: Number(process.env["LAR_RADIUS"] ?? 1) };
+    // EVERY Herm self-announces (LAR_SEED label, else a content-blind label from the address), so every
+    // vessel is reachable + on the routing chart — the carriage re-publishes this slot as its r drifts.
+    const selfLabel = seedLabel ?? `n${hashUnit(publicUrl).toString(36).slice(2, 8)}`;
+    const selfBearing = `lar:///ha.ka.ba/@oracle/herm/${selfLabel}`;
     const herm = await openNodeHerm({
       hostId:     "lares-viales",
       wikiId,
@@ -134,10 +138,11 @@ async function main(): Promise<void> {
       httpServer,
       selfEndpoint: publicUrl,
       selfCoord,
+      selfBearing,
       ...(peers.length ? { peers } : {}),
       ...(pullMs ? { pullIntervalMs: Number.parseInt(pullMs, 10) } : {}),
       // the dial advertises the REACHABLE read-face URL (publicUrl), so peers carrying it can self-peer back.
-      ...(seedLabel ? { seed: [{ bearing: `lar:///ha.ka.ba/@oracle/herm/${seedLabel}`, verifyingKeyHex: "f".repeat(64), endpoint: publicUrl, scale: "dreamnet" as const }] } : {}),
+      seed: [{ bearing: selfBearing, verifyingKeyHex: "f".repeat(64), endpoint: publicUrl, scale: "dreamnet" as const }],
       onPhase:    (phase) => console.log(`[herm] phase → ${phase}`),
     });
     console.log(`[herm] live — wiki-less wayfarer | storage: ${storageDir}`);

@@ -13,9 +13,9 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { Repo } from "@automerge/automerge-repo";
-import { composeVessel, pullAndVerifyOracle, dialEntryToRecord, routingSlotToRecord, type MeshPalaceDoc, type CapModule } from "@lararium/mesh";
+import { composeVessel, pullAndVerifyOracle, dialEntryToRecord, routingSlotToRecord, radialCoordinate, type MeshPalaceDoc, type CapModule } from "@lararium/mesh";
 import { mountFlowMapReadFace } from "../src/oracle-read-face.js";
-import { carriageCap, CAP, incommensurablePullMs, discoverPeers, type MeshPalaceComponent } from "../src/node-caps.js";
+import { carriageCap, CAP, incommensurablePullMs, discoverPeers, dampedRadius, type MeshPalaceComponent } from "../src/node-caps.js";
 
 const SEED_A = new Uint8Array(32).fill(7);
 async function listen(server: Server): Promise<number> {
@@ -118,6 +118,20 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
     expect(discoverPeers(doc, [], undefined, 2, self)).toEqual(["http://near:8080", "http://mid:8080"]); // then mid
     // without a selfCoord → insertion order (federation-by-dials, no re-rank)
     expect(discoverPeers(doc, [], undefined, 1)).toEqual(["http://far:8080"]);
+  });
+
+  test("dampedRadius — PSO-β low-pass: r DRIFTS toward radialCoordinate(degree), never snaps (no oscillation)", () => {
+    const r0 = 8, deg = 20;
+    const target = radialCoordinate(deg, { R: 8, minDegree: 1 }); // high degree → low r (hub near center)
+    const r1 = dampedRadius(r0, deg);
+    expect(r1).toBeLessThan(r0);                            // drifts down (more carriage → nearer center)
+    expect(r1).toBeGreaterThan(target);                    // but does NOT snap — a partial (γ=0.15) move
+    expect(r1).toBeCloseTo(0.85 * r0 + 0.15 * target, 9);  // exactly the low-pass
+    let r = 8; for (let i = 0; i < 80; i++) r = dampedRadius(r, deg);
+    expect(r).toBeCloseTo(target, 3);                      // iterating converges (stable, monotone)
+    let rHi = 8, rLo = 8;
+    for (let i = 0; i < 80; i++) { rHi = dampedRadius(rHi, 50); rLo = dampedRadius(rLo, 2); }
+    expect(rHi).toBeLessThan(rLo);                         // higher degree → lower steady-state r
   });
 
   test("a peer down is no error — feed-or-fade (pullOnce returns 0, never throws)", async () => {

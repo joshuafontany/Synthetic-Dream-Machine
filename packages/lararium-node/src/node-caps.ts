@@ -26,7 +26,7 @@ import {
   AutomergeDocStore,
   MESH_PALACE_BAG, emptyMeshPalaceDoc, type MeshPalaceDoc,
   pullAndVerifyOracle, dialEntryToRecord, dialEntries, type DialEntry, type LarTiddlerRecord, type LarDoc,
-  routingSlots, routingSlotToRecord, hyperbolicDistance, type Coord, type RoutingSlot,
+  routingSlots, routingSlotToRecord, hyperbolicDistance, radialCoordinate, type Coord, type RoutingSlot,
   type VesselRecipe, type VesselCoreAssembly,
   type BagResidencyManager,
 } from "@lararium/mesh";
@@ -164,13 +164,27 @@ export function discoverPeers(
   return peers;
 }
 
+const R_DISK = 8;     // the rim radius of the routing disk
+const R_DAMP = 0.15;  // PSO-β low-pass (Vivaldi adaptive-step analogue) — slow, non-oscillating r-drift
+const R_DEADBAND = 0.5; // re-publish the slot only when r drifts past this band (hysteresis)
+/**
+ * The carriage's radial standing damped from its LIVE degree (Krioukov `r = R−2·ln(κ/κ₀)` via
+ * `radialCoordinate`). `r` DRIFTS (low-pass γ) toward the target, never snapping — the Chart-Diver's
+ * stability layer (PSO-β popularity-fade) that keeps the degree→r→re-publish feedback from oscillating.
+ * High-degree carriage hubs drift toward center, leaves to the rim; θ never feeds back (carved cones).
+ */
+export function dampedRadius(rCurrent: number, degree: number, gamma = R_DAMP): number {
+  const rTarget = radialCoordinate(Math.max(1, degree), { R: R_DISK, minDegree: 1 });
+  return (1 - gamma) * rCurrent + gamma * rTarget;
+}
+
 /** carriage — the blind relay: pull each PEER's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
  *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). Peers are
  *  DISCOVERED from the carried dials (self-peering) ∪ the bootstrap. A peer down is no error —
  *  feed-or-fade. Requires meshpalace (the doc to merge into + discover dials from). */
 export function carriageCap(deps: {
   peers: readonly string[]; pullIntervalMs?: number; nodeSeedHex?: string;
-  selfEndpoint?: string; maxFanout?: number; selfCoord?: Coord; onLog?: (line: string) => void;
+  selfEndpoint?: string; maxFanout?: number; selfCoord?: Coord; selfBearing?: string; onLog?: (line: string) => void;
 }): CapModule {
   return {
     id: CAP.carriage, requires: [CAP.meshpalace],
@@ -178,9 +192,22 @@ export function carriageCap(deps: {
       const mp = resolve<MeshPalaceComponent>(CAP.meshpalace);
       const bootstrap = new Set(deps.peers);
       const seenDiscovered = new Set<string>();
+      let rCurrent = deps.selfCoord?.r ?? 1; // the carriage's radial standing, low-pass damped from live degree
+      let rPublished = rCurrent;
       const pullOnce = async (): Promise<number> => {
         let merged = 0;
         const peers = discoverPeers(mp.handle.doc(), deps.peers, deps.selfEndpoint, deps.maxFanout ?? 16, deps.selfCoord);
+        // FFZ/Krioukov dynamic chart: damp r toward radialCoordinate(live-degree); re-publish the self-slot
+        // ONLY past the deadband (hysteresis) — degree→r→re-publish never oscillates (PSO-β low-pass).
+        if (deps.selfBearing && deps.selfCoord) {
+          rCurrent = dampedRadius(rCurrent, peers.length);
+          if (Math.abs(rCurrent - rPublished) > R_DEADBAND) {
+            rPublished = rCurrent;
+            const rec = routingSlotToRecord({ bearing: deps.selfBearing, r: rCurrent, theta: deps.selfCoord.theta }, "carriage-standing");
+            mp.handle.change((d) => { d.tiddlers[rec.tiddler.title] = rec; });
+            deps.onLog?.(`carriage: standing → r=${rCurrent.toFixed(2)} (degree ${peers.length}, past the band)`);
+          }
+        }
         for (const peer of peers) {
           if (!bootstrap.has(peer) && !seenDiscovered.has(peer)) {
             seenDiscovered.add(peer);
@@ -247,6 +274,8 @@ export interface HermStackDeps extends DaemonCapDeps {
   /** This Herm's routing-chart coord (r=carriage-standing, θ=kinship) — published in its slot + drives
    *  the carriage's proximity re-rank. Absent = federation-by-dials in insertion order. */
   readonly selfCoord?:     Coord;
+  /** This Herm's own dial bearing — the slot the carriage re-publishes as its standing `r` drifts. */
+  readonly selfBearing?:   string;
   /** Self-announce dials on this Herm's own FLOW-map (a source Herm's reachability). */
   readonly seed?:          readonly DialEntry[];
   readonly onLog?:         (line: string) => void;
@@ -284,6 +313,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       ...(d.selfEndpoint ? { selfEndpoint: d.selfEndpoint } : {}),
       ...(d.maxFanout !== undefined ? { maxFanout: d.maxFanout } : {}),
       ...(d.selfCoord ? { selfCoord: d.selfCoord } : {}),
+      ...(d.selfBearing ? { selfBearing: d.selfBearing } : {}),
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     flowMapReadFaceCap({

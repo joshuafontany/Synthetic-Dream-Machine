@@ -141,6 +141,8 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   selfEndpoint?: string;
   /** This Herm's routing-chart coord (r,θ) — published in its slot, drives the carriage proximity re-rank. */
   selfCoord?: Coord;
+  /** This Herm's own dial bearing — the slot re-published as its standing `r` drifts from live degree. */
+  selfBearing?: string;
   /** Herm self-announce — dials to seed on this Herm's own FLOW-map (a source's reachability). */
   seed?: readonly DialEntry[];
 }
@@ -872,6 +874,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
     ...(opts.selfEndpoint ? { selfEndpoint: opts.selfEndpoint } : {}),
     ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
+    ...(opts.selfBearing ? { selfBearing: opts.selfBearing } : {}),
     ...(opts.seed ? { seed: opts.seed } : {}),
     onLog:       (line) => console.log(`[herm] ${line}`),
   });
