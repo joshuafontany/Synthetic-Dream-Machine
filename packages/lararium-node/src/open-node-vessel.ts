@@ -57,7 +57,7 @@ import {
 import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
-import type { DialEntry, SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
+import type { DialEntry, SparseFormVector, WorldlineStubWire, Coord } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
@@ -139,6 +139,8 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   pullIntervalMs?: number;
   /** This Herm's OWN reachable http read-face URL — excluded from self-peering, advertised in its dial. */
   selfEndpoint?: string;
+  /** This Herm's routing-chart coord (r,θ) — published in its slot, drives the carriage proximity re-rank. */
+  selfCoord?: Coord;
   /** Herm self-announce — dials to seed on this Herm's own FLOW-map (a source's reachability). */
   seed?: readonly DialEntry[];
 }
@@ -869,6 +871,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     ...(opts.peers ? { peers: opts.peers } : {}),
     ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
     ...(opts.selfEndpoint ? { selfEndpoint: opts.selfEndpoint } : {}),
+    ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
     ...(opts.seed ? { seed: opts.seed } : {}),
     onLog:       (line) => console.log(`[herm] ${line}`),
   });

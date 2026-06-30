@@ -26,6 +26,7 @@ import {
   AutomergeDocStore,
   MESH_PALACE_BAG, emptyMeshPalaceDoc, type MeshPalaceDoc,
   pullAndVerifyOracle, dialEntryToRecord, dialEntries, type DialEntry, type LarTiddlerRecord, type LarDoc,
+  routingSlots, routingSlotToRecord, hyperbolicDistance, type Coord, type RoutingSlot,
   type VesselRecipe, type VesselCoreAssembly,
   type BagResidencyManager,
 } from "@lararium/mesh";
@@ -56,17 +57,26 @@ export interface MeshPalaceComponent { readonly handle: DocHandle<MeshPalaceDoc>
 
 /** meshpalace — a writable @meshpalace AutomergeDocStore layer (the vessel's own public FLOW-map) +
  *  a residency pin. Requires substrate (the composite to layer into). */
-export function meshPalaceCap(deps: { repo: Repo; residency?: BagResidencyManager; seed?: readonly DialEntry[] }): CapModule {
+export function meshPalaceCap(deps: { repo: Repo; residency?: BagResidencyManager; seed?: readonly DialEntry[]; selfCoord?: Coord }): CapModule {
   return {
     id: CAP.meshpalace, requires: [CAP.substrate],
     build: async (resolve) => {
       const assembly = resolve<VesselCoreAssembly>(CAP.substrate);
       const handle   = deps.repo.create<MeshPalaceDoc>(emptyMeshPalaceDoc());
-      // Self-announce: a source Herm seeds its OWN dial(s) on the FLOW-map (public reachability —
-      // never others' content). Absent = a leaf/relay that only carries what it pulls.
+      // Self-announce: a source Herm seeds its OWN dial(s) on the FLOW-map (public reachability — never
+      // others' content), and — with a self-coord — a ROUTING-SLOT per dial so peers can re-rank toward
+      // it on the hyperbolic chart. Absent = a leaf/relay that only carries what it pulls.
       if (deps.seed && deps.seed.length > 0) {
         handle.change((d) => {
-          for (const e of deps.seed!) { const rec = dialEntryToRecord(e, "herm-self-announce"); d.tiddlers[rec.tiddler.title] = rec; }
+          for (const e of deps.seed!) {
+            const rec = dialEntryToRecord(e, "herm-self-announce");
+            d.tiddlers[rec.tiddler.title] = rec;
+            if (deps.selfCoord) {
+              const slot: RoutingSlot = { bearing: e.bearing, r: deps.selfCoord.r, theta: deps.selfCoord.theta };
+              const srec = routingSlotToRecord(slot, "herm-self-announce");
+              d.tiddlers[srec.tiddler.title] = srec;
+            }
+          }
         });
       }
       assembly.composite.addLayer({
@@ -125,17 +135,27 @@ export interface CarriageComponent { readonly pullOnce: () => Promise<number>; r
  * Self-peering federation: the carriage discovers its pull-set from the FLOW-map's DIALS (each dial
  * advertises a reachable http read-face URL) UNION the bootstrap peers — so the mesh grows by the dials
  * it CARRIES (transitive discovery), never a hardcoded list. http(s) read-faces only (ws sync-endpoints
- * skipped); self excluded; deduped; bounded by maxFanout. (Routing-coord K-nearest selection over the
- * hyperbolic chart rides a follow-up — this cut is federation-by-dials.)
+ * skipped); self excluded; deduped; bounded by maxFanout. With a `selfCoord`, the carried dials are
+ * RE-RANKED by l-space proximity (the native `hyperbolicDistance` over published routing-slots — the
+ * routing chart drives WHICH dials to carry, nearest first; the embedding's re-rank stage, native side).
  */
 export function discoverPeers(
   doc: { tiddlers: Record<string, LarTiddlerRecord> } | undefined,
   bootstrap: readonly string[], selfEndpoint: string | undefined, maxFanout: number,
+  selfCoord?: Coord,
 ): string[] {
-  const fromDials = doc ? dialEntries(doc as LarDoc).map((d) => d.endpoint) : [];
+  let dials = doc ? dialEntries(doc as LarDoc) : [];
+  if (selfCoord && doc) {
+    const coordOf = new Map<string, Coord>(routingSlots(doc as LarDoc).map((s) => [s.bearing, { r: s.r, theta: s.theta }]));
+    const distOf = (bearing: string): number => {
+      const c = coordOf.get(bearing);
+      return c ? hyperbolicDistance(selfCoord, c) : Infinity; // a coordless dial ranks last
+    };
+    dials = [...dials].sort((a, b) => distOf(a.bearing) - distOf(b.bearing)); // nearest by the chart first
+  }
   const peers: string[] = [];
   const seen = new Set<string>();
-  for (const p of [...bootstrap, ...fromDials]) {
+  for (const p of [...bootstrap, ...dials.map((d) => d.endpoint)]) { // bootstrap first, then nearest dials
     if (!p || p === selfEndpoint || !/^https?:\/\//.test(p) || seen.has(p)) continue; // http read-faces only
     seen.add(p);
     peers.push(p);
@@ -150,7 +170,7 @@ export function discoverPeers(
  *  feed-or-fade. Requires meshpalace (the doc to merge into + discover dials from). */
 export function carriageCap(deps: {
   peers: readonly string[]; pullIntervalMs?: number; nodeSeedHex?: string;
-  selfEndpoint?: string; maxFanout?: number; onLog?: (line: string) => void;
+  selfEndpoint?: string; maxFanout?: number; selfCoord?: Coord; onLog?: (line: string) => void;
 }): CapModule {
   return {
     id: CAP.carriage, requires: [CAP.meshpalace],
@@ -160,7 +180,7 @@ export function carriageCap(deps: {
       const seenDiscovered = new Set<string>();
       const pullOnce = async (): Promise<number> => {
         let merged = 0;
-        const peers = discoverPeers(mp.handle.doc(), deps.peers, deps.selfEndpoint, deps.maxFanout ?? 16);
+        const peers = discoverPeers(mp.handle.doc(), deps.peers, deps.selfEndpoint, deps.maxFanout ?? 16, deps.selfCoord);
         for (const peer of peers) {
           if (!bootstrap.has(peer) && !seenDiscovered.has(peer)) {
             seenDiscovered.add(peer);
@@ -224,6 +244,9 @@ export interface HermStackDeps extends DaemonCapDeps {
   readonly selfEndpoint?:  string;
   /** Max peers pulled per cycle (bootstrap ∪ discovered dials). */
   readonly maxFanout?:     number;
+  /** This Herm's routing-chart coord (r=carriage-standing, θ=kinship) — published in its slot + drives
+   *  the carriage's proximity re-rank. Absent = federation-by-dials in insertion order. */
+  readonly selfCoord?:     Coord;
   /** Self-announce dials on this Herm's own FLOW-map (a source Herm's reachability). */
   readonly seed?:          readonly DialEntry[];
   readonly onLog?:         (line: string) => void;
@@ -252,6 +275,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       repo: d.repo,
       ...(d.residency ? { residency: d.residency } : {}),
       ...(d.seed ? { seed: d.seed } : {}),
+      ...(d.selfCoord ? { selfCoord: d.selfCoord } : {}),
     }),
     carriageCap({
       peers: d.peers ?? [],
@@ -259,6 +283,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),  // the node-id seeds its incommensurable cadence
       ...(d.selfEndpoint ? { selfEndpoint: d.selfEndpoint } : {}),
       ...(d.maxFanout !== undefined ? { maxFanout: d.maxFanout } : {}),
+      ...(d.selfCoord ? { selfCoord: d.selfCoord } : {}),
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     flowMapReadFaceCap({

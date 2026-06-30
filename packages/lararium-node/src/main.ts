@@ -113,6 +113,15 @@ async function main(): Promise<void> {
     const pullMs = process.env["LAR_PULL_MS"];
     const seedLabel = process.env["LAR_SEED"];
     const publicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
+    // Routing-chart coord: θ deterministic from the node-id (CONTENT-BLIND — a hash of the address, never
+    // sealed content; the canonical born-random-then-grow-from-topology is the fuller design), r = carriage
+    // standing (LAR_RADIUS, default 1). Published in this Herm's slot + drives peers' proximity re-rank.
+    const hashUnit = (s: string): number => {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
+      return (h >>> 0) / 4294967296;
+    };
+    const selfCoord = { theta: hashUnit(publicUrl) * 2 * Math.PI, r: Number(process.env["LAR_RADIUS"] ?? 1) };
     const herm = await openNodeHerm({
       hostId:     "lares-viales",
       wikiId,
@@ -124,6 +133,7 @@ async function main(): Promise<void> {
       recipe:     "herm",
       httpServer,
       selfEndpoint: publicUrl,
+      selfCoord,
       ...(peers.length ? { peers } : {}),
       ...(pullMs ? { pullIntervalMs: Number.parseInt(pullMs, 10) } : {}),
       // the dial advertises the REACHABLE read-face URL (publicUrl), so peers carrying it can self-peer back.

@@ -13,7 +13,7 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { Repo } from "@automerge/automerge-repo";
-import { composeVessel, pullAndVerifyOracle, dialEntryToRecord, type MeshPalaceDoc, type CapModule } from "@lararium/mesh";
+import { composeVessel, pullAndVerifyOracle, dialEntryToRecord, routingSlotToRecord, type MeshPalaceDoc, type CapModule } from "@lararium/mesh";
 import { mountFlowMapReadFace } from "../src/oracle-read-face.js";
 import { carriageCap, CAP, incommensurablePullMs, discoverPeers, type MeshPalaceComponent } from "../src/node-caps.js";
 
@@ -98,6 +98,26 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
     expect(bounded).toEqual(["http://boot:8080", "http://a:8080"]);
     // a leaf with no carried dials → bootstrap only
     expect(discoverPeers(undefined, ["http://boot:8080"], undefined, 16)).toEqual(["http://boot:8080"]);
+  });
+
+  test("discoverPeers — with a selfCoord, RE-RANKS carried dials by l-space proximity (nearest first)", () => {
+    const self = { r: 1.0, theta: 0.4 };
+    const tiddlers: Record<string, ReturnType<typeof dialEntryToRecord>> = {};
+    const mk = (i: number, ep: string, r: number) => {
+      const b = `lar:///ha.ka.ba/@oracle/herm/n${i}`;
+      const dial = dialEntryToRecord({ bearing: b, verifyingKeyHex: "a".repeat(64), endpoint: ep, scale: "dreamnet" }, "test");
+      const slot = routingSlotToRecord({ bearing: b, r, theta: 0.4 }, "test"); // same θ → distance = |r − self.r|
+      tiddlers[dial.tiddler.title] = dial;
+      tiddlers[slot.tiddler.title] = slot;
+    };
+    mk(0, "http://far:8080", 5.0);   // farthest
+    mk(1, "http://near:8080", 1.2);  // nearest
+    mk(2, "http://mid:8080", 3.0);   // middle
+    const doc: MeshPalaceDoc = { schemaVersion: "0.1", tiddlers };
+    expect(discoverPeers(doc, [], undefined, 1, self)).toEqual(["http://near:8080"]);             // nearest only
+    expect(discoverPeers(doc, [], undefined, 2, self)).toEqual(["http://near:8080", "http://mid:8080"]); // then mid
+    // without a selfCoord → insertion order (federation-by-dials, no re-rank)
+    expect(discoverPeers(doc, [], undefined, 1)).toEqual(["http://far:8080"]);
   });
 
   test("a peer down is no error — feed-or-fade (pullOnce returns 0, never throws)", async () => {
