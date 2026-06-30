@@ -26,6 +26,29 @@ function fixture(): { dir: string; transcript: string; run: string; agentId: str
   return { dir, transcript, run, agentId, handle: `${run}.${agentId}` };
 }
 
+/** A session fixture whose spirit transcript carries a mid-flight SendMessage-continue re-entry (a
+ *  second top-level user prompt AFTER the spirit produced output, not a tool-result echo) — the one
+ *  detectable injection signal (worldline-inject-detect). */
+function injectFixture(): { dir: string; transcript: string; run: string; agentId: string; handle: string } {
+  const dir = mkdtempSync(join(tmpdir(), "lar-wl-inject-"));
+  const run = "sessINJ";
+  const agentId = "spirit42";
+  const transcript = join(dir, `${run}.jsonl`);
+  const subagents = join(dir, run, "subagents");
+  mkdirSync(subagents, { recursive: true });
+  const rows = [
+    { type: "user", uuid: "spawn-turn", timestamp: "2026-06-29T00:00:00Z", message: { content: "Mask: Mapper\nyou are a mapper" } },
+    { type: "assistant", uuid: "work-1", timestamp: "2026-06-29T00:01:00Z", message: { content: [{ type: "text", text: "Mapper: first pass" }] } },
+    // a tool-result echo arrives as a `user` turn — must NOT count as an injection
+    { type: "user", uuid: "tool-echo", timestamp: "2026-06-29T00:02:00Z", message: { content: [{ type: "tool_result", content: "ok" }] } },
+    // THE injection — a re-entry prompt (plain text), the SendMessage-continue
+    { type: "user", uuid: "reentry-turn", timestamp: "2026-06-29T00:03:00Z", message: { content: "also check the edge case" } },
+    { type: "assistant", uuid: "work-2", timestamp: "2026-06-29T00:04:00Z", message: { content: [{ type: "text", text: "Mapper: done" }] } },
+  ];
+  writeFileSync(join(subagents, `agent-${agentId}.jsonl`), rows.map((r) => JSON.stringify(r)).join("\n") + "\n");
+  return { dir, transcript, run, agentId, handle: `${run}.${agentId}` };
+}
+
 describe("deriveSubagentEdges — pure derivation from the transcript", () => {
   test("a spirit → one spawn Delegation (run→handle) + a handback close, anchored to its turns", () => {
     const fx = fixture();
@@ -39,6 +62,21 @@ describe("deriveSubagentEdges — pure derivation from the transcript", () => {
         valid_from: "2026-06-29T00:00:00Z", turnKey: "spawn-turn",
       });
       expect(e.handback).toMatchObject({ subject: fx.run, predicate: "prov:Delegation", object: fx.handle, ended: "2026-06-29T00:05:00Z" });
+      expect(e.inject).toEqual([]); // one-handoff transcript → no mid-flight inject
+    } finally { rmSync(fx.dir, { recursive: true, force: true }); }
+  });
+
+  test("a SendMessage-continue re-entry → a prov:Communication inject edge (run→handle, the re-entry turn)", () => {
+    const fx = injectFixture();
+    try {
+      const edges = deriveSubagentEdges(fx.transcript);
+      expect(edges).toHaveLength(1);
+      const e = edges[0]!;
+      expect(e.inject).toHaveLength(1); // the tool-result echo excluded, the spawn task excluded
+      expect(e.inject[0]).toMatchObject({
+        subject: fx.run, predicate: "prov:Communication", object: fx.handle,
+        valid_from: "2026-06-29T00:03:00Z", turnKey: "reentry-turn",
+      });
     } finally { rmSync(fx.dir, { recursive: true, force: true }); }
   });
 
@@ -79,6 +117,25 @@ describe("observeSubagentWorldlines — persist spawn + close handback (fake exe
 
       const inv = fe.calls.find((c) => c.args.includes("invalidate"))!;
       expect(JSON.parse((inv.ndjson ?? "").trim())).toMatchObject({ subject: fx.run, object: fx.handle, ended: "2026-06-29T00:05:00Z" });
+      expect(res.injected).toBe(0); // one-handoff transcript → no Communication add
+    } finally { rmSync(fx.dir, { recursive: true, force: true }); }
+  });
+
+  test("SEAM B — a re-entry inject → an `add` prov:Communication row keyed to the re-entry turn", () => {
+    const fx = injectFixture();
+    const fe = fakeExec();
+    try {
+      const res = observeSubagentWorldlines(fx.transcript, { python: "python3", script: resolveKgIo(), exec: fe.exec, palacePath: "/tmp/pX" });
+      expect(res.injected).toBe(1);
+
+      // The spawn add (Delegation) and the inject add (Communication) BOTH ride `add`; find the Comm one.
+      const addCalls = fe.calls.filter((c) => c.args.includes("add"));
+      const commRow = addCalls
+        .map((c) => JSON.parse((c.ndjson ?? "").trim()))
+        .find((r) => r.predicate === "prov:Communication");
+      expect(commRow).toMatchObject({
+        subject: fx.run, predicate: "prov:Communication", object: fx.handle, turn_key: "reentry-turn",
+      });
     } finally { rmSync(fx.dir, { recursive: true, force: true }); }
   });
 

@@ -29,8 +29,11 @@ import { readFileSync } from "node:fs";
 import {
   delegationEdge,
   handbackClose,
+  deriveInjectionEdges,
+  classifyTranscriptTurn,
   type WorldlineEdgeTriple,
   type WorldlineEdgeClose,
+  type TranscriptTurn,
 } from "@lararium/mesh";
 
 import { listSpiritFiles, agentIdOf, runIdOf } from "./subagent-mine.js";
@@ -71,12 +74,32 @@ function spiritBounds(agentFile: string): SpiritBounds | null {
   return { firstUuid, firstTs, lastTs };
 }
 
-/** A spirit's worldline edges (one spawn Delegation + its handback close). */
+/** Read a spirit transcript's turns, normalized for the inject detector (role + provenance, no body).
+ *  Lines that carry no worldline signal (system/summary/sidechain) classify away to null. */
+function spiritTurns(agentFile: string): TranscriptTurn[] {
+  let lines: string[];
+  try { lines = readFileSync(agentFile, "utf8").split("\n"); } catch { return []; }
+  const turns: TranscriptTurn[] = [];
+  for (const l of lines) {
+    const t = classifyTranscriptTurn(l);
+    if (t) turns.push(t);
+  }
+  return turns;
+}
+
+/** A spirit's worldline edges (one spawn Delegation + its handback close + any mid-flight injects). */
 export interface SpiritWorldlineEdges {
   /** The lineage HANDLE, `<run>.<agentId>` — IDENTICAL to buildPatch's lar_agent_handle. */
   readonly handle: string;
   readonly spawn: WorldlineEdgeTriple;
   readonly handback: WorldlineEdgeClose;
+  /**
+   * prov:Communication edges — a SendMessage-continue that re-entered this RUNNING spirit (the
+   * rhizome's merge-where-messages-land leg, worldline-inject-detect). The injector is the run-root
+   * (the safe default: the spirit transcript cannot name the sender). Empty under the one-handoff /
+   * run-to-completion model — the detector stands ready for the signal.
+   */
+  readonly inject: readonly WorldlineEdgeTriple[];
 }
 
 /**
@@ -97,7 +120,9 @@ export function deriveSubagentEdges(transcript: string): SpiritWorldlineEdges[] 
       ...(b.firstUuid ? { turnKey: b.firstUuid } : {}),
     });
     const handback = handbackClose(run, handle, b.lastTs || undefined);
-    out.push({ handle, spawn, handback });
+    // INJECT — the mid-flight re-entry edges (run-root → spirit), one per detected injection point.
+    const inject = deriveInjectionEdges(run, handle, spiritTurns(af));
+    out.push({ handle, spawn, handback, inject });
   }
   return out;
 }
@@ -109,6 +134,8 @@ export interface ObserveResult {
   readonly spawned: number;
   /** Delegation intervals closed (the handback twin-reunion). */
   readonly handedBack: number;
+  /** prov:Communication rows added to the KG (the mid-flight inject seam, SEAM B). */
+  readonly injected: number;
 }
 
 /**
@@ -129,15 +156,19 @@ export function observeSubagentWorldlines(
   const all = deriveSubagentEdges(transcript);
   const only = opts.only ? new Set(opts.only) : null;
   const edges = only ? all.filter((e) => only.has(e.handle)) : all;
-  if (edges.length === 0) return { observed: [], spawned: 0, handedBack: 0 };
+  if (edges.length === 0) return { observed: [], spawned: 0, handedBack: 0, injected: 0 };
 
   const { only: _drop, ...kg } = opts;
   try {
     const spawned = persistWorldlineEdges(edges.map((e) => e.spawn), kg).added;
     const handedBack = closeWorldlineEdges(edges.map((e) => e.handback), kg).invalidated;
-    return { observed: edges.map((e) => e.handle), spawned, handedBack };
+    // SEAM B — persist every detected mid-flight inject (prov:Communication). [] under the one-handoff
+    // model → persistWorldlineEdges no-ops. Same best-effort gate (KgUnavailable swallowed below).
+    const injectEdges = edges.flatMap((e) => e.inject);
+    const injected = persistWorldlineEdges(injectEdges, kg).added;
+    return { observed: edges.map((e) => e.handle), spawned, handedBack, injected };
   } catch (err) {
-    if (err instanceof KgUnavailable) return { observed: [], spawned: 0, handedBack: 0 };
+    if (err instanceof KgUnavailable) return { observed: [], spawned: 0, handedBack: 0, injected: 0 };
     throw err;
   }
 }
