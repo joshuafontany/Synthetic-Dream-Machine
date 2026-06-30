@@ -316,6 +316,38 @@ export class KeyhiveProvider implements CapabilityProvider {
   }
 
   /**
+   * Revoke an agent's (by Identifier hex) membership on a sentinel Document — the
+   * symmetric close of the sentinel trio (createSentinelDoc / addSentinelMember /
+   * verifySentinelMembership → +revokeSentinelMember). The public `revoke()` only
+   * serves a `delegate()`-tracked delegationId; a sentinel member added via
+   * `addSentinelMember` produces no such id, so it needs this audience+doc path.
+   *
+   * CONVERGENT-REMOVAL (canon cabal-place#the-tie-break — "malice rides Keyhive
+   * convergent-removal, never the counter"): `retain_all_other_members=true`
+   * revokes ONLY this audience, leaving the rest intact; the REVOKED events fire
+   * into the event_handler/EventStore and converge across replicas (eventual, per
+   * concap — an offline peer stays authorized locally until it syncs the tombstone).
+   */
+  async revokeSentinelMember(
+    memberIdentifierHex: string,
+    sentinelDocIdHex:    string,
+  ): Promise<{ bytes: Uint8Array }> {
+    const docId = new KH.DocumentId(hexToBytes(sentinelDocIdHex));
+    const doc   = await this.requireKh().getDocument(docId);
+    if (!doc) throw new Error(`[keyhive] sentinel doc not found for revoke: ${sentinelDocIdHex.slice(0, 16)}…`);
+
+    const agentId = new KH.Identifier(hexToBytes(memberIdentifierHex));
+    const agent   = await this.requireKh().getAgent(agentId);
+    if (!agent) throw new Error(`[keyhive] agent not found for sentinel revoke: ${memberIdentifierHex.slice(0, 16)}…`);
+
+    const revocations = await this.requireKh().revokeMember(agent, true, doc.toMembered());
+    if (!revocations || revocations.length === 0) {
+      throw new Error("[keyhive] revokeSentinelMember produced no revocation events");
+    }
+    return { bytes: revocations[0]!.signature };
+  }
+
+  /**
    * Verify that an agent (by Identifier hex) holds any access on a sentinel Document.
    * Gate B: vesselIndividualHex vs personaGroupDocIdHex
    * Gate C: personaGroupAgentIdHex vs meshCabalDocIdHex

@@ -42,6 +42,11 @@ export type {
   ApplyAdmitInput, ApplyAdmitResult,
 } from "./ceremony-core.js";
 
+export {
+  foundCabalPlace, joinCabalPlace, evictMember, cabalPlaceRoster, cabalPlaceLiveness,
+} from "./cabal-place-ceremony.js";
+export type { FoundCabalPlaceOpts } from "./cabal-place-ceremony.js";
+
 /**
  * DeviceAdmitPayload — isomorphic wire type for the same-operator vessel
  * admission ceremony. Produced by a Node vessel's `runDeviceAdmit`; consumed
