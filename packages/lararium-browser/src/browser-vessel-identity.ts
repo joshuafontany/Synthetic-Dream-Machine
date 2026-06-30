@@ -12,6 +12,8 @@
  * Meme: lar:///ha.ka.ba/@lararium/browser/browser-vessel-identity
  */
 
+import { hexToBytes } from "@lararium/mesh";
+
 const KEY_RECORD = "vessel-key";
 
 interface PersistedBrowserKey {
@@ -60,6 +62,9 @@ export function idbPut(db: IDBDatabase, store: string, key: string, value: unkno
 }
 
 // ── Encoding ──────────────────────────────────────────────────────────────────
+// hex→bytes rides the canonical (validated) `hexToBytes` from @lararium/mesh.
+// base64urlToHex stays browser-local — it decodes a WebCrypto JWK field via
+// `atob`, with no mesh-floor equivalent.
 
 function base64urlToHex(b64url: string): string {
   const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/")
@@ -68,14 +73,6 @@ function base64urlToHex(b64url: string): string {
   let hex = "";
   for (let i = 0; i < bin.length; i++) hex += bin.charCodeAt(i).toString(16).padStart(2, "0");
   return hex;
-}
-
-function hexToBytes(hex: string): Uint8Array {
-  const out = new Uint8Array(hex.length / 2);
-  for (let i = 0; i < out.length; i++) {
-    out[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16);
-  }
-  return out;
 }
 
 // ── Keypair lifecycle ─────────────────────────────────────────────────────────
