@@ -207,6 +207,14 @@ class AstPalaceStore:
         link = {"source_file": source_file, "verbatim_sha": verbatim_sha}
         if turn_key:
             link["turn_key"] = turn_key
+            # STALE-TALLY GUARD: if this turn already unfolded to a DIFFERENT structure (content
+            # EDITED under an unchanged turn-uuid), retract its tally from the OLD structure FIRST
+            # (drop the provenance line, decrement, tombstone-at-zero — mirroring kapae) BEFORE the
+            # index repoints. Else the old structure's recurrence count is orphaned, never decremented.
+            # A re-put to the SAME structure skips this (idempotent no-op).
+            prior_hash = self._index_lookup(turn_key)
+            if prior_hash and prior_hash != structural_hash:
+                self._retract_turn_from(prior_hash, turn_key, now)
             # The reverse-index lets kapae find this structure by turn_key in O(1).
             self._index_put(turn_key, structural_hash)
         existing = self._get_raw(structural_hash)
@@ -263,25 +271,16 @@ class AstPalaceStore:
         )
         return {"hash": structural_hash, "count": 1}
 
-    def kapae(self, turn_key: str, ended: str | None = None) -> dict:
-        """Set-aside (NOT erase) the AST tally for a gone turn — the astpalace twin of the KG kapae.
-
-        Find the structure the turn unfolded to (via the O(1) reverse-index), drop that turn's
-        provenance line, and decrement `count`. When count falls to ≤0 the entry is TOMBSTONED
-        (`lar_tombstoned_at` stamped, the chroma row KEPT) rather than deleted — history preserved,
-        recall excludes it. Idempotent: a 2nd kapae finds the line already gone → a no-op (the row
-        is untouched, nothing re-decremented). Returns the verbatim_shas dropped (so the salience
-        producer can down-weight exactly those drawers) + whether the entry tombstoned.
+    def _retract_turn_from(self, structural_hash: str, turn_key: str, ended: str) -> dict:
+        """Drop `turn_key`'s provenance line(s) from `structural_hash` and decrement its recurrence
+        `count`; tombstone-at-zero (`lar_tombstoned_at` stamped, the chroma row KEPT) rather than
+        delete — history preserved, recall excludes it. Idempotent: a line already gone → a no-op
+        (nothing re-decremented). SHARED by kapae (the gone-turn set-aside) and put (the edit-under-
+        same-uuid stale-tally guard). Returns {closed, tombstoned, verbatim_shas}.
         """
-        if not turn_key:
-            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
-        ended = ended or _now()
-        structural_hash = self._index_lookup(turn_key)
-        if not structural_hash:
-            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
         raw = self._get_raw(structural_hash)
         if raw is None:
-            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+            return {"closed": 0, "tombstoned": [], "verbatim_shas": []}
         meta = dict(raw["metadata"])
         try:
             provenance = json.loads(meta.get("lar_provenance") or "[]")
@@ -298,8 +297,8 @@ class AstPalaceStore:
                 kept.append(p)
         removed = len(provenance) - len(kept)
         if removed == 0:
-            # Idempotent no-op: the line is already gone (a 2nd kapae for the same uuid).
-            return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+            # Idempotent no-op: the line is already gone (a 2nd retract for the same uuid).
+            return {"closed": 0, "tombstoned": [], "verbatim_shas": []}
         count = int(meta.get("count", 1)) - removed
         meta["count"] = count
         meta["lar_provenance"] = json.dumps(kept)
@@ -309,12 +308,26 @@ class AstPalaceStore:
             tombstoned.append(structural_hash)
         # update() (not upsert) — leave the document/embedding untouched; only the metadata moves.
         self._col.update(ids=[structural_hash], metadatas=[meta])
-        return {
-            "closed": removed,
-            "tombstoned": tombstoned,
-            "verbatim_shas": dropped_shas,
-            "turn_key": turn_key,
-        }
+        return {"closed": removed, "tombstoned": tombstoned, "verbatim_shas": dropped_shas}
+
+    def kapae(self, turn_key: str, ended: str | None = None) -> dict:
+        """Set-aside (NOT erase) the AST tally for a gone turn — the astpalace twin of the KG kapae.
+
+        Find the structure the turn unfolded to (via the O(1) reverse-index) and retract its tally
+        (drop the turn's provenance line, decrement `count`, tombstone-at-zero) via the shared
+        {@link _retract_turn_from}. Idempotent: a 2nd kapae finds the line already gone → a no-op.
+        Returns the verbatim_shas dropped (so the salience producer can down-weight exactly those
+        drawers) + whether the entry tombstoned.
+        """
+        empty = {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
+        if not turn_key:
+            return empty
+        ended = ended or _now()
+        structural_hash = self._index_lookup(turn_key)
+        if not structural_hash:
+            return empty
+        res = self._retract_turn_from(structural_hash, turn_key, ended)
+        return {**res, "turn_key": turn_key}
 
 
 # --- the OPS this sidecar declares (its #has-stack made literal) -------------

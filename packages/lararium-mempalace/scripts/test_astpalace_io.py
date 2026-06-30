@@ -265,3 +265,41 @@ def test_put_revives_a_tombstoned_structure(tmp_path):
     revived = store.get(H1)
     assert not revived.get("tombstoned_at")
     assert revived["count"] == 1
+
+
+def test_put_edit_same_uuid_retracts_the_old_structure_tally(tmp_path):
+    """The stale-tally fix: editing content under an UNCHANGED turn-uuid repoints the reverse-index
+    to the new structure AND retracts the OLD structure's tally — count decremented + tombstoned-at-
+    zero (row KEPT), never orphaned. A re-put to the SAME structure is a no-op (the guard never fires).
+    """
+    H2 = "b" * 64
+    store = _store(tmp_path)
+    # turn-A first unfolds to structure H1.
+    store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
+    assert store.get(H1)["count"] == 1
+    assert store._index_lookup("turn-A") == H1
+
+    # EDIT: the SAME turn-A now unfolds to a DIFFERENT structure H2 (content edited in place).
+    store.put(H2, '{"t":2}', "wing/s.jsonl", "vshaB", "turn-A")
+
+    # The OLD structure H1 is retracted: count 1→0, TOMBSTONED, the row KEPT (no orphaned tally).
+    e1 = store.get(H1)
+    assert e1 is not None                                   # row kept, never deleted
+    assert e1["count"] == 0
+    assert e1.get("tombstoned_at")                          # the set-aside marker stamped
+    assert [p.get("turn_key") for p in e1["provenance"]] == []  # turn-A's line dropped
+
+    # The NEW structure H2 carries the turn now: count 1, live, the reverse-index repointed.
+    e2 = store.get(H2)
+    assert e2["count"] == 1
+    assert not e2.get("tombstoned_at")
+    assert store._index_lookup("turn-A") == H2
+
+    # SAME-uuid SAME-hash re-put → the guard never fires: H2 stays live, the index unchanged, and
+    # the already-tombstoned H1 is untouched (no second decrement, no re-stamp).
+    stamp = e1["tombstoned_at"]
+    store.put(H2, '{"t":2}', "wing/s.jsonl", "vshaB", "turn-A")
+    assert store._index_lookup("turn-A") == H2
+    assert not store.get(H2).get("tombstoned_at")
+    assert store.get(H1)["count"] == 0
+    assert store.get(H1).get("tombstoned_at") == stamp
