@@ -23,6 +23,7 @@ import {
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, BagResidencyManager,
+  meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -139,6 +140,26 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   /** Projection-nalu sink: a `projection:frame` (rendered HTML+CSS) from the hot wiki island.
    *  The app applies it to a shadow root — the live wiki made visible. */
   onProjection?:   (frame: { html: string; css: string; rev: number }) => void;
+  /**
+   * Mesh-LEAF standing (Epic 5, cut 1) — the browser carries-in the FLOW-map as a LEAF: it navigates
+   * the mesh (pulls peers' public @meshpalace + re-ranks by l-space proximity) WITHOUT serving or
+   * dialing. A browser holds no listening socket, so a leaf advertises NO endpoint and seeds no
+   * self-dial (`deriveMeshLeaf` → no endpoint; `meshSelfSeed` → []). The mirror of the node's `meshSelf`,
+   * the leaf tier. ABSENT → the browser composes NO carriage (exactly today's behavior). PRESENT → it
+   * carries-in via the read-face fetch (isomorphic global `fetch`; the peers' read-faces serve CORS `*`).
+   */
+  meshLeaf?: {
+    /** A stable self-identifier (the vessel's origin / relay URL) hashed to the leaf's chart coord +
+     *  bearing — content-blind, names where this leaf sits on the routing chart. */
+    coordSeed: string;
+    /** Bootstrap peer read-face base URLs (`https://…`) the leaf carries-in from; the carriage UNIONs
+     *  these with the dials it discovers off the carried FLOW-map (self-peering). */
+    peers:     readonly string[];
+    /** Optional radial standing override (default 1 — a rim leaf). */
+    radius?:   number;
+    /** Max peer read-faces pulled per carriage cycle (default 16). */
+    maxFanout?: number;
+  };
 }
 
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
@@ -165,6 +186,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     genesisSeed,
     genesisCasManifest, genesisCasBaseUrl,
     daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl, relayGatePubKey,
+    meshLeaf,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -254,6 +276,34 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     hotCap: 32, idleMs: 300_000, sweepIntervalMs: 30_000,
     onEvict: async (bagId) => { await vmManager.unmountWiki(bagId); },
   });
+
+  // ── The mesh carriage as a LEAF (Epic 5, cut 1) ───────────────────────────────
+  // PRESENT → derive the leaf standing and compose the carriage ALONGSIDE the wiki core: meshpalace
+  // (a writable @meshpalace FLOW-map, seeded with NO self-dial — `meshSelfSeed([leaf])` is [] for a
+  // leaf) + carriage (pulls peers' public read-faces, re-ranks by l-space proximity). A LEAF has no
+  // endpoint → it carries-in but is NOT dial-able (a browser holds no listening socket). ABSENT → [],
+  // the browser composes no carriage (today's behavior, unchanged). The mirror of openNodeVessel.
+  const meshExtraCaps = meshLeaf ? (() => {
+    const leaf = deriveMeshLeaf(
+      meshLeaf.coordSeed, meshLeaf.peers,
+      ...(meshLeaf.radius !== undefined ? [{ radius: meshLeaf.radius }] : []),
+    );
+    return [
+      meshPalaceCap({
+        repo, residency,
+        selfCoord: leaf.coord,
+        seed: meshSelfSeed(leaf),   // [] for a leaf — carries-in, advertises no self-dial
+      }),
+      carriageCap({
+        peers: leaf.peers, selfBearing: leaf.bearing,
+        // no selfEndpoint — a leaf is not dial-able (the endpoint-absent leaf↔full tier)
+        selfCoord: leaf.coord,
+        ...(meshLeaf.maxFanout !== undefined ? { maxFanout: meshLeaf.maxFanout } : {}),
+        nodeSeedHex: operatorDid,   // the per-vessel cadence seed (browser-safe hex string, no Buffer)
+        onLog: (l) => console.log(`[lararium-browser] ${l}`),
+      }),
+    ];
+  })() : [];
 
   const result = await composeBrowser<BrowserVesselIslandPool>({
     keel: {
@@ -422,7 +472,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // Presence — ephemeral, does not travel via CRDT.
       wikiHandle.broadcast({ did: operatorDid, ts: Date.now() });
     },
-  });
+  }, meshExtraCaps);
 
   return {
     pool: result.pool,
