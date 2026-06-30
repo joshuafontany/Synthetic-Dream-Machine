@@ -94,3 +94,4 @@ export type { LarWSClientOptions } from "./lar-ws-client-adapter.js";
 export * from "./cap-compose.js";
 export * from "./carriage-caps.js";
 export * from "./persona-hd.js";
+export * from "./persona-identity.js";
