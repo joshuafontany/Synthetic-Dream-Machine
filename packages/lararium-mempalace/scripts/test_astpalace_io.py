@@ -189,8 +189,130 @@ def _store(tmp_path):
     return ap.AstPalaceStore(str(tmp_path / "astpalace"))
 
 
-# Structural hashes are sha256 hex (the _embed reads hex off them) — use valid hex fixtures.
+# Structural hashes are sha256 hex — use valid hex fixtures (the join/index keys, not the
+# embedding source: the encoder now reads the AST SHAPE, no longer the hash hex).
 H1 = "a" * 64
+
+
+# ── The STRUCTURAL ENCODER — the cosine-meaningful property the dummy LACKED ─────────
+
+
+def _cos(a, b):
+    import math
+
+    dot = sum(x * y for x, y in zip(a, b))
+    na = math.sqrt(sum(x * x for x in a))
+    nb = math.sqrt(sum(y * y for y in b))
+    return dot / (na * nb) if na > 0 and nb > 0 else 0.0
+
+
+# Two STRUCTURALLY-SIMILAR trees: the same node-types + silhouette, differing only in leaf
+# count and (ignored) text content.
+_TREE_SIMILAR_A = {
+    "type": "element", "tag": "p",
+    "children": [
+        {"type": "text", "text": "alpha"},
+        {"type": "text", "text": "beta"},
+    ],
+}
+_TREE_SIMILAR_B = {
+    "type": "element", "tag": "p",
+    "children": [
+        {"type": "text", "text": "gamma"},
+        {"type": "text", "text": "delta"},
+        {"type": "text", "text": "epsilon"},
+    ],
+}
+# A STRUCTURALLY-DISSIMILAR tree: a disjoint node-type vocabulary AND a deeper, differently
+# shaped silhouette.
+_TREE_DIFFERENT = {
+    "type": "macrocall", "name": "weave",
+    "params": [
+        {"type": "macro-param", "value": {"type": "transclude", "ref": {"type": "filter", "op": "all"}}},
+        {"type": "macro-param", "value": {"type": "transclude", "ref": {"type": "filter", "op": "tag"}}},
+    ],
+}
+
+
+def test_structural_embed_dimension_and_l2_norm():
+    import math
+
+    v = ap._structural_embed(_TREE_SIMILAR_A)
+    assert len(v) == ap._EMBED_DIM
+    # L2-normalized ⇒ a unit vector (so a dot reads as a cosine directly).
+    assert abs(math.sqrt(sum(x * x for x in v)) - 1.0) < 1e-9
+
+
+def test_structural_embed_is_deterministic():
+    # Same tree → byte-identical vector (a re-harvest re-derives the same geometry).
+    assert ap._structural_embed(_TREE_SIMILAR_A) == ap._structural_embed(_TREE_SIMILAR_A)
+
+
+def test_structural_embed_similar_close_dissimilar_far():
+    """THE property the hash-hex dummy LACKED: structurally-similar trees land NEAR (high
+    cosine), dissimilar trees land FAR (clearly lower) — so the structure plane can run a
+    cosine Measure. The dummy gave sibling trees orthogonal noise; this asserts the cure."""
+    va = ap._structural_embed(_TREE_SIMILAR_A)
+    vb = ap._structural_embed(_TREE_SIMILAR_B)
+    vd = ap._structural_embed(_TREE_DIFFERENT)
+
+    sim = _cos(va, vb)
+    dissim = _cos(va, vd)
+
+    assert sim > 0.9, f"similar trees should be near; cos={sim}"
+    assert dissim < 0.6, f"dissimilar trees should be far; cos={dissim}"
+    assert sim - dissim > 0.3, f"the near/far gap collapsed (sim={sim}, dissim={dissim})"
+
+
+def test_structural_embed_beats_the_retired_hash_dummy():
+    """CONTRAST: the retired hash-hex embedding (now `_hash_fallback`) reads the structural
+    HASH, so two similar trees (different hashes) land at NOISE cosine — it could not feed a
+    cosine Measure. The real encoder's similar-tree cosine clears that noise by a wide margin."""
+    import hashlib
+
+    real = _cos(ap._structural_embed(_TREE_SIMILAR_A), ap._structural_embed(_TREE_SIMILAR_B))
+    # the hashes of two DISTINCT structures (what the dummy keyed on) → its noisy cosine.
+    ha = hashlib.sha256(b"A").hexdigest()
+    hb = hashlib.sha256(b"B").hexdigest()
+    dummy = _cos(ap._hash_fallback(ha), ap._hash_fallback(hb))
+    assert real > dummy, f"real encoder ({real}) must beat the hash dummy ({dummy})"
+
+
+def test_embed_falls_back_when_ast_json_unparseable():
+    # A non-JSON ast string never crashes put — it falls back to a same-dimension vector.
+    v = ap._embed("{not json", "f" * 64)
+    assert len(v) == ap._EMBED_DIM
+
+
+def test_structure_embeddings_reader_expands_provenance_skips_tombstoned(tmp_path):
+    """The structure-plane reader (the FFZ 3rd-plane feed): expands each live structure across
+    its provenance verbatim_shas (one row per sha, the structure's vector), and SKIPS a
+    tombstoned (kapae'd) structure."""
+    import io
+
+    store = _store(tmp_path)
+    palace = str(tmp_path / "astpalace")
+    HA = "a" * 64
+    HB = "b" * 64
+    # HA recurs across TWO turns → two provenance verbatim_shas (one structure, two joins).
+    store.put(HA, '{"type":"element","children":[{"type":"text"}]}', "s.jsonl", "vshaA1", "turn-A")
+    store.put(HA, '{"type":"element","children":[{"type":"text"}]}', "s.jsonl", "vshaA2", "turn-B")
+    # HB unfolds once, then is kapae'd to zero → tombstoned → must NOT appear.
+    store.put(HB, '{"type":"macrocall"}', "s.jsonl", "vshaB", "turn-C")
+    store.kapae("turn-C")
+
+    out = io.StringIO()
+    written = ap._structure_embeddings(palace, out)
+    rows = [json.loads(x) for x in out.getvalue().splitlines() if x.strip()]
+    shas = {r["verbatim_sha"] for r in rows}
+
+    assert written == 2
+    assert shas == {"vshaA1", "vshaA2"}      # HA expanded across both turns
+    assert "vshaB" not in shas               # tombstoned HB skipped
+    # every row carries a full-dimension vector, and HA's two rows share the SAME vector.
+    for r in rows:
+        assert len(r["embedding"]) == ap._EMBED_DIM
+    assert rows[0]["embedding"] == rows[1]["embedding"]
 
 
 def test_put_appends_turn_key_to_provenance_and_reverse_index(tmp_path):

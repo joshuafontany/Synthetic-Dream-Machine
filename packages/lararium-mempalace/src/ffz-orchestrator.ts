@@ -27,17 +27,18 @@
  *
  * SCOPE REPORT (form/structure plane availability):
  *   - CONTENT — LIVE. `drawer_io.py embeddings` reads the stored nomic vectors (never
- *     re-embeds), ordered per session. The 1-plane Measure servo runs on these now.
- *   - FORM — the formpalace move-vectors EXIST (stored at capture, keyed by verbatim_sha)
- *     but there is NO session-ordered BATCH vector export beside `drawer_io embeddings`
- *     (only per-key holder RPC, `FormPalace.get`). REMAINING PLUMBING: a
- *     `form_encoder.py embeddings --wing` batch export joined on verbatim_sha.
- *   - STRUCTURE — the astpalace is content-addressed by STRUCTURAL HASH with a recurrence
- *     tally; it stores no per-drawer DENSE vector ordered per session. REMAINING PLUMBING:
- *     a structure-vector encoding + batch export, same join key.
- *   Until those land, {@link orchestrateWing} runs CONTENT-only (planesPresent = 1); the
- *   {@link quorumStep} multi-plane path is wired and reachable (feed a `planes` drift
- *   vector per drawer) so the form/structure feed drops straight in.
+ *     re-embeds), ordered per session. Always plane-0.
+ *   - FORM — LIVE. `drawer_io.py form-embeddings` dumps the stored move-vectors flat,
+ *     joined per session on verbatim_sha (plane-1 when a session joins it).
+ *   - STRUCTURE — LIVE. `astpalace_io.py structure-embeddings` dumps the stored AST-SHAPE
+ *     vectors flat (the deterministic structural encoder — a node-type histogram + tree-shape
+ *     stats, cosine-meaningful), expanded across each structure's provenance verbatim_shas
+ *     (the last plane when a session joins it). The vectors POPULATE on the nuke-and-pave
+ *     re-harvest (alongside content + form), so all THREE planes light at once.
+ *   {@link orchestrateWing} runs at N = the planes a session joins (1 content-only · 2 +form ·
+ *   3 +structure); {@link quorumStep} is plane-agnostic, so each plane drops straight in. The
+ *   degradation stays graceful: an absent reader (or a session that joins nothing) drops the
+ *   run back to the planes present, never breaking the N=1/N=2 paths.
  *
  * Lives BESIDE telemetry-writeback.ts (the other `lar_*` write membrane): one boundary,
  * the dependency points node/cli → mempalace, never the reverse.
@@ -64,7 +65,7 @@ import {
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 
-import { resolveMempalacePython } from "./spawn-resolve.js";
+import { resolveMempalacePython, resolveAstPalaceIo } from "./spawn-resolve.js";
 import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
@@ -135,6 +136,16 @@ export type ClusterReader = (wing: string) => ClusterReading | null;
  * form/move tension-moments light up. Absent ⇒ the run stays 1-plane (today).
  */
 export type FormVectorReader = (wing: string) => Map<string, readonly number[]>;
+/**
+ * Read a wing's stored STRUCTURE-plane vectors back, joined by `verbatim_sha` (the same
+ * cross-graph join key). The THIRD plane of the braid: when wired AND the form plane is
+ * also present the Measure servo runs the quorum at N=3 (content plane-0 · form plane-1 ·
+ * structure plane-2), so the structural/AST-shape tension-moments light up. Mirrors
+ * {@link FormVectorReader} exactly — the astpalace structure vectors (the deterministic
+ * AST-shape encoding), expanded across each structure's provenance verbatim_shas. Absent
+ * ⇒ the run degrades to the planes present (content, or content+form).
+ */
+export type StructureVectorReader = (wing: string) => Map<string, readonly number[]>;
 /** Merge the `{lar_ffz}` patches back onto the drawers; returns the applied count. */
 export type PatchWriter = (
   patches: ReadonlyArray<{ readonly id: string; readonly patch: Record<string, string | number> }>,
@@ -150,6 +161,13 @@ export interface OrchestrateDeps {
    * Present (and a session joins it) ⇒ the form plane rides as plane-1, the quorum runs N=2.
    */
   readonly readFormVectors?: FormVectorReader;
+  /**
+   * Optional — absent ⇒ the structure plane never engages (1 or 2 planes per the form seam).
+   * Present (and a session joins it) ⇒ the structure plane rides as the last plane, the quorum
+   * runs at N=3 when the form plane is also present (content · form · structure), or N=2 (content
+   * · structure) when form is absent. Mirrors {@link readFormVectors} — the seam, not new math.
+   */
+  readonly readStructureVectors?: StructureVectorReader;
   readonly writePatches: PatchWriter;
 }
 
@@ -179,9 +197,9 @@ export interface OrchestrateResult {
   readonly themeAccepted: boolean;
   /** patches merged back. */
   readonly applied: number;
-  /** planes the Measure servo ran over (1 = content-only; 2 = content + form). */
+  /** planes the Measure servo ran over (1 = content-only; 2 = +form; 3 = +structure). */
   readonly planesPresent: number;
-  /** form/move TENSION-moments — quorum steps where the planes disagreed (Signal-Jam). */
+  /** form/structure TENSION-moments — quorum steps where the planes disagreed (Signal-Jam). */
   readonly conflicts: number;
 }
 
@@ -252,49 +270,64 @@ export function overlayFfzAddress(
   return ffzMembershipAddress(cells);
 }
 
+/** One per-plane running-centroid drift tracker — the turn-grained "repeat the last joined
+ *  vector" rule shared by the FORM and STRUCTURE planes. A drawer with NO join feeds a REPEAT
+ *  of the last joined vector (the chunks of one turn share a verbatim_sha ⇒ one vector ⇒ the
+ *  plane drift reads ~0 mid-turn and lights only at a turn boundary — CORRECT, not a bug).
+ *  Until the first join there is no vector to repeat, so the drift stays 0. PURE-ish (closes
+ *  over its own running state). */
+function makeJoinTracker(bySha: ReadonlyMap<string, readonly number[]>) {
+  let centroid: readonly number[] | null = null;
+  let last: readonly number[] | null = null;
+  let count = 0;
+  return (verbatimSha: string | undefined): number => {
+    const joined = verbatimSha != null ? bySha.get(verbatimSha) : undefined;
+    const vec: readonly number[] | null = joined ?? last; // no join ⇒ repeat the last vector
+    if (!vec) return 0;
+    const step = centroidDriftStep(centroid, vec, count);
+    centroid = step.centroid;
+    count += 1;
+    last = vec;
+    return step.drift;
+  };
+}
+
 /**
- * The 2-plane PRE-PASS — run ONE {@link centroidDriftStep} tracker per plane over a session
- * (in order) → a per-drawer `[contentDrift, formDrift]` drift vector. PURE.
+ * The multi-plane PRE-PASS — run ONE {@link centroidDriftStep} tracker per plane over a session
+ * (in order) → a per-drawer drift vector. PURE. The drift vector's PLANES (in order):
  *
- *   CONTENT — the running-centroid drift of each drawer's embedding.
- *   FORM    — the running-centroid drift of each drawer's joined form vector
- *             (`formBySha.get(verbatimSha)`). A drawer with NO form join feeds the form
- *             tracker a REPEAT of the LAST form vector — turn-grained: the chunks of one
- *             turn share a verbatim_sha (one form vector), so the form drift reads ~0
- *             mid-turn and lights only at a turn boundary (the form-shift moment). That is
- *             CORRECT, not a bug. Until the first join there is no form vector to repeat,
- *             so the form drift stays 0.
+ *   CONTENT   — always plane-0: the running-centroid drift of each drawer's embedding.
+ *   FORM      — present iff `formBySha` is supplied: the joined form-vector's drift (see
+ *               {@link makeJoinTracker} for the turn-grained repeat-last rule).
+ *   STRUCTURE — present iff `structBySha` is supplied: the joined structure-vector's drift,
+ *               the SAME tracker against the astpalace AST-shape vectors (the 3rd quorum plane).
  *
- * No gong-feedback reseed here (a pure pre-pass; the gong is decided downstream in
- * {@link quorumStep}). The servo's per-plane EWMA-z standardizes the two scales, so the raw
- * drift magnitudes need not match across planes.
+ * Backward-compatible: called with `(vectors, formMap)` it yields `[content, form]` (today's
+ * 2-plane output exactly); with `(vectors, formMap, structMap)` it yields `[content, form,
+ * structure]`; with `(vectors, undefined, structMap)` it yields `[content, structure]`. No
+ * gong-feedback reseed here (a pure pre-pass; the gong is decided downstream in {@link
+ * quorumStep}). The servo's per-plane EWMA-z standardizes the scales, so the raw drift
+ * magnitudes need not match across planes.
  */
 export function computePlaneDrifts(
   sessionVectors: readonly DrawerVector[],
-  formBySha: ReadonlyMap<string, readonly number[]>,
+  formBySha?: ReadonlyMap<string, readonly number[]>,
+  structBySha?: ReadonlyMap<string, readonly number[]>,
 ): Map<string, readonly number[]> {
   const drifts = new Map<string, readonly number[]>();
   let contentCentroid: readonly number[] | null = null;
-  let formCentroid: readonly number[] | null = null;
-  let lastForm: readonly number[] | null = null;
   let contentCount = 0;
-  let formCount = 0;
+  const formTracker = formBySha ? makeJoinTracker(formBySha) : undefined;
+  const structTracker = structBySha ? makeJoinTracker(structBySha) : undefined;
   for (const v of sessionVectors) {
     const c = centroidDriftStep(contentCentroid, v.embedding, contentCount);
     contentCentroid = c.centroid;
     contentCount += 1;
 
-    const joined = v.verbatimSha != null ? formBySha.get(v.verbatimSha) : undefined;
-    const formVec: readonly number[] | null = joined ?? lastForm; // no join ⇒ repeat the last form vector
-    let formDrift = 0;
-    if (formVec) {
-      const f = centroidDriftStep(formCentroid, formVec, formCount);
-      formCentroid = f.centroid;
-      formDrift = f.drift;
-      formCount += 1;
-      lastForm = formVec;
-    }
-    drifts.set(v.id, [c.drift, formDrift]);
+    const drift: number[] = [c.drift];
+    if (formTracker) drift.push(formTracker(v.verbatimSha));
+    if (structTracker) drift.push(structTracker(v.verbatimSha));
+    drifts.set(v.id, drift);
   }
   return drifts;
 }
@@ -319,28 +352,35 @@ export function deriveMeasureLabels(
   sessionVectors: readonly DrawerVector[],
   servo: Partial<MeasureServoConfig & QuorumServoConfig> = {},
   formBySha?: ReadonlyMap<string, readonly number[]>,
+  structBySha?: ReadonlyMap<string, readonly number[]>,
 ): { labels: Map<string, string>; gongs: number; planes: number; conflicts: number } {
   const labels = new Map<string, string>();
   let gongs = 0;
   let conflicts = 0;
 
-  // ROUTE 1 — the FORM plane (2-plane) when a reader is wired and this session joins it.
-  const formJoins =
-    formBySha != null &&
-    formBySha.size > 0 &&
-    sessionVectors.some((v) => v.verbatimSha != null && formBySha.has(v.verbatimSha));
-  if (formJoins) {
-    const planeDrifts = computePlaneDrifts(sessionVectors, formBySha);
-    let st = quorumServoInit(2);
+  // ROUTE 1 — the FORM and/or STRUCTURE plane(s) when a reader is wired and this session joins
+  // it. Content is always plane-0; form (plane-1) and structure (the next plane) ride only when
+  // their map is non-empty AND a drawer's verbatim_sha joins it. The quorum runs at N = the count
+  // of present planes (2 = content+one, 3 = content+form+structure); the per-plane EWMA-z + ZCA
+  // whitening + co-firing ladder are PLANE-AGNOSTIC, so the 3rd plane drops in with no new math.
+  const joins = (m: ReadonlyMap<string, readonly number[]> | undefined): boolean =>
+    m != null && m.size > 0 && sessionVectors.some((v) => v.verbatimSha != null && m.has(v.verbatimSha));
+  const formMap = joins(formBySha) ? formBySha : undefined;
+  const structMap = joins(structBySha) ? structBySha : undefined;
+  if (formMap || structMap) {
+    const n = 1 + (formMap ? 1 : 0) + (structMap ? 1 : 0);
+    const planeDrifts = computePlaneDrifts(sessionVectors, formMap, structMap);
+    const zero = new Array(n).fill(0) as number[];
+    let st = quorumServoInit(n);
     for (const v of sessionVectors) {
-      const drift = planeDrifts.get(v.id) ?? [0, 0];
+      const drift = planeDrifts.get(v.id) ?? zero;
       const step = quorumStep(st, drift, servo, v.salience ?? 1);
       st = step.state;
       labels.set(v.id, step.label);
       if (step.gonged) gongs += 1;
       if (step.conflict) conflicts += 1;
     }
-    return { labels, gongs, planes: 2, conflicts };
+    return { labels, gongs, planes: n, conflicts };
   }
 
   // ROUTE 2 — an explicit multi-plane drift feed on the records.
@@ -388,6 +428,9 @@ export function orchestrateWing(
   // The FORM plane (the 2nd plane of the braid) — read once for the wing, joined per
   // session on verbatim_sha. Absent ⇒ formBySha undefined ⇒ every session stays 1-plane.
   const formBySha = deps.readFormVectors ? deps.readFormVectors(wing) : undefined;
+  // The STRUCTURE plane (the 3rd plane) — read once for the wing, joined the SAME way on
+  // verbatim_sha. Absent ⇒ structBySha undefined ⇒ the plane never engages (graceful degrade).
+  const structBySha = deps.readStructureVectors ? deps.readStructureVectors(wing) : undefined;
 
   // Group by (source_file, frontier) — the Arc × fork-branch, preserving the readback order
   // (drawer_io.py already sorts by (source_file, chunk_index, id)). Two forked branches that
@@ -409,7 +452,7 @@ export function orchestrateWing(
   let conflicts = 0;
   let planesPresent = 1;
   for (const recs of sessions.values()) {
-    const { labels, gongs: g, planes, conflicts: c } = deriveMeasureLabels(recs, opts.servo, formBySha);
+    const { labels, gongs: g, planes, conflicts: c } = deriveMeasureLabels(recs, opts.servo, formBySha, structBySha);
     for (const [id, l] of labels) measureLabels.set(id, l);
     gongs += g;
     conflicts += c;
@@ -565,6 +608,36 @@ export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly 
   return bySha;
 }
 
+/**
+ * Default {@link StructureVectorReader} — `astpalace_io.py structure-embeddings` (the STRUCTURE
+ * plane). Reads the stored AST-shape vectors back from the `.astpalace` (NEVER re-encodes),
+ * expanded across each structure's provenance verbatim_shas → `verbatim_sha` → the structure
+ * vector. The astpalace dir defaults inside the script ($LAR_ROOT/~ .lares/.astpalace), so no
+ * `--palace` is passed; a `--wing` filter does not apply (structure is keyed by sha, not
+ * wing-scoped). A missing/empty astpalace yields no rows ⇒ the structure plane never engages.
+ */
+export function pythonStructureEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
+  const PY = resolveMempalacePython();
+  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
+  const ASTPALACE_IO = resolveAstPalaceIo();
+  if (!existsSync(ASTPALACE_IO)) throw new TelemetryUnavailable(`astpalace_io.py missing at ${ASTPALACE_IO}`);
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+  const out = mineWithServo("astpalace-io-structure-embeddings", (timeoutMs) =>
+    execFileSync(PY, [ASTPALACE_IO, "structure-embeddings"], {
+      cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
+      timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
+    }),
+  );
+  const bySha = new Map<string, readonly number[]>();
+  for (const l of out.split("\n").filter(Boolean)) {
+    const r = JSON.parse(l) as { id: string; embedding: number[]; verbatim_sha?: string };
+    const key = r.verbatim_sha || r.id;
+    if (key) bySha.set(key, r.embedding);
+  }
+  return bySha;
+}
+
 /** Default {@link ClusterReader} — `drawer_io.py cluster --wing W` (Theme band). */
 export function pythonClusterReader(wing: string): ClusterReading | null {
   const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
@@ -612,6 +685,7 @@ export function orchestrateWingLive(wing: string, opts: OrchestrateOptions = {})
       readEmbeddings: pythonEmbeddingsReader,
       readClusters: pythonClusterReader,
       readFormVectors: pythonFormEmbeddingsReader,
+      readStructureVectors: pythonStructureEmbeddingsReader,
       writePatches: pythonPatchWriter,
     },
     opts,

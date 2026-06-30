@@ -51,9 +51,12 @@ Run with the mempalace CLI's interpreter (it has the package + chroma):
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import math
 import os
 import sqlite3
+import sys
 
 from mempalace.palace import get_collection
 
@@ -67,6 +70,7 @@ from sidecar_caps import (
     acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,
+    read_stored_embeddings,
     release_serve_lock,
     run_sidecar,
     serve_lock_path,
@@ -105,19 +109,180 @@ def _idle_ttl_seconds() -> float:
     return idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS)
 
 
-# A CHEAP, DETERMINISTIC embedding derived from the structural hash. The `.astpalace`
-# is addressed by EXACT id (the structural hash) — we never semantic-search it — so we
-# provide our own vectors and NEVER invoke the palace's embedding model (no model load,
-# no download, no network). Consistent dimension across every upsert fixes the
-# collection's vector dimension to ours; the configured embedding function is left
-# attached but never called.
-_EMBED_DIM = 16
+# ── The STRUCTURAL ENCODER — a deterministic feature-vector over the AST SHAPE ───────
+#
+# The `.astpalace` is addressed by EXACT id (the structural hash) for put/get/kapae — we
+# never semantic-search it — so we supply our OWN vectors and NEVER invoke the palace's
+# embedding model (no model load, no download, no network). The vector is the STRUCTURE
+# PLANE's cohesion feed for the FFZ Measure servo (ffz-orchestrator, the 3rd quorum plane):
+# it must be COSINE-MEANINGFUL — two structurally-similar trees land NEAR, dissimilar trees
+# FAR. The retired hash-hex embedding could NOT do this (sibling trees hash to orthogonal
+# noise); this one captures the AST's SHAPE, so the geometry carries semantics.
+#
+# The feature vector is two concatenated blocks, then L2-normalized (cosine = dot):
+#   1. a NODE-TYPE HISTOGRAM (feature-hashed into a fixed number of buckets, so the open
+#      node-type vocabulary maps to a fixed dimension) — the dominant fingerprint: trees
+#      built from the same node-types overlap here.
+#   2. TREE-SHAPE STATISTICS (depth · node-count · branching mean/max/spread · leaf
+#      fraction · subtree size · balance) — each saturated to [0,1), so two trees of the
+#      same silhouette read close even when their type-mix differs slightly.
+#
+# DETERMINISTIC + light: a single recursive walk, sha256 bucketing, pure arithmetic — no
+# model, fast, reproducible (a re-harvest re-derives the byte-identical vector).
+#
+# FOLLOW-UPS (documented, NOT built): a richer geometry could replace the histogram with a
+# tree-kernel (subtree / subpath / Weisfeiler-Lehman label-propagation) Gram-vector, or a
+# LEARNED tree-embedding (a small TreeLSTM / GNN over the AST). Both are heavier (a kernel
+# basis or a trained model) and break the "no-model, instant" invariant this encoder holds;
+# they stay deferred behind this light feature-vector.
+_HISTO_BUCKETS = 24
+_SHAPE_DIM = 8
+_EMBED_DIM = _HISTO_BUCKETS + _SHAPE_DIM  # 32 — pinned at the collection's first upsert
+
+# Block weights — each block is unit-normalized THEN weighted, so the NODE-TYPE HISTOGRAM
+# (the strong fingerprint: trees of disjoint node-types must read FAR) dominates the SHAPE
+# silhouette (a secondary signal: two small trees share a similar silhouette even when their
+# type-mix differs). Without the down-weight the 8 shape stats — each in [0,1) — out-mass the
+# sparse histogram after L2 and two type-disjoint trees read spuriously near.
+_HISTO_WEIGHT = 1.0
+_SHAPE_WEIGHT = 0.5
+
+# The node fields that carry a TYPE-ish label (checked in order); absent all of them, a
+# node's sorted key-set stands in (a content-free structural signature).
+_TYPE_KEYS = ("type", "kind", "name", "tag", "sigil", "sigilName", "rule")
 
 
-def _embed(structural_hash: str) -> list[float]:
-    """16 floats in [0,1) read straight off the hash hex — constant per structure."""
-    h = (structural_hash + "0" * (_EMBED_DIM * 2))[: _EMBED_DIM * 2]
-    return [int(h[i * 2 : i * 2 + 2], 16) / 255.0 for i in range(_EMBED_DIM)]
+def _node_label(node: dict) -> str:
+    """A stable, content-light label for a dict node — its first present type-ish field,
+    else a signature of its key-set. Never the node's VALUES (that would leak content into
+    a SHAPE vector); only its type/shape."""
+    for k in _TYPE_KEYS:
+        v = node.get(k)
+        if isinstance(v, str) and v:
+            return f"{k}={v}"
+    return "keys:" + ",".join(sorted(map(str, node.keys())))
+
+
+def _bucket(label: str) -> int:
+    """Feature-hash a node label into a fixed histogram bucket (open vocab → fixed dim)."""
+    return int.from_bytes(hashlib.sha256(label.encode("utf-8")).digest()[:4], "big") % _HISTO_BUCKETS
+
+
+def _saturate(x: float, scale: float) -> float:
+    """Map [0,∞) → [0,1) monotonically: x/(x+scale). A bounded, derivative-free squash so
+    an unbounded shape stat (node-count, depth, …) contributes a comparable [0,1) feature."""
+    return x / (x + scale) if x > 0 else 0.0
+
+
+def _structural_features(tree: object) -> list[float]:
+    """ONE recursive walk → (node-type histogram, tree-shape stats). A dict OR list is a
+    structural node; scalars are leaves. The histogram counts node labels; the stats track
+    depth, branching, subtree sizes, and leaf-depth spread (the balance)."""
+    histo = [0.0] * _HISTO_BUCKETS
+    branchings: list[int] = []
+    subtree_sizes: list[int] = []
+    leaf_depths: list[int] = []
+    state = {"nodes": 0, "leaves": 0, "max_depth": 0}
+
+    def walk(node: object, depth: int) -> int:
+        if isinstance(node, dict):
+            histo[_bucket(_node_label(node))] += 1.0
+            kids = [v for v in node.values() if isinstance(v, (dict, list))]
+        elif isinstance(node, list):
+            histo[_bucket("[list]")] += 1.0
+            kids = [v for v in node if isinstance(v, (dict, list))]
+        else:
+            state["leaves"] += 1
+            leaf_depths.append(depth)
+            return 0
+        state["nodes"] += 1
+        if depth > state["max_depth"]:
+            state["max_depth"] = depth
+        branchings.append(len(kids))
+        if not kids:
+            leaf_depths.append(depth)  # a node with no container children is a structural leaf
+        size = 1
+        for k in kids:
+            size += walk(k, depth + 1)
+        subtree_sizes.append(size)
+        return size
+
+    walk(tree, 0)
+
+    nodes = state["nodes"]
+    total = sum(histo)
+    histo_norm = [c / total for c in histo] if total > 0 else histo
+
+    def _mean(xs: list) -> float:
+        return sum(xs) / len(xs) if xs else 0.0
+
+    def _std(xs: list) -> float:
+        if len(xs) < 2:
+            return 0.0
+        m = _mean(xs)
+        return math.sqrt(sum((x - m) ** 2 for x in xs) / len(xs))
+
+    mean_branch = _mean(branchings)
+    max_branch = max(branchings) if branchings else 0
+    # Leaf fraction = structural nodes with no container children (the tree's terminals).
+    leaf_frac = (sum(1 for b in branchings if b == 0) / nodes) if nodes else 0.0
+
+    shape = [
+        _saturate(float(nodes), 16.0),            # 1. size of the tree
+        _saturate(float(state["max_depth"]), 8.0),  # 2. how deep
+        _saturate(mean_branch, 2.0),              # 3. typical fan-out
+        _saturate(float(max_branch), 4.0),        # 4. widest fan-out
+        _saturate(_std(branchings), 2.0),         # 5. fan-out spread
+        leaf_frac,                                # 6. leaf fraction (already [0,1])
+        _saturate(_mean(subtree_sizes), 8.0),     # 7. typical subtree size
+        _saturate(_std(leaf_depths), 4.0),        # 8. leaf-depth spread (im/balance)
+    ]
+    return histo_norm, shape
+
+
+def _l2(vec: list[float]) -> list[float]:
+    norm = math.sqrt(sum(v * v for v in vec))
+    return [v / norm for v in vec] if norm > 0 else list(vec)
+
+
+def _structural_embed(tree: object) -> list[float]:
+    """The REAL structural embedding: the SHAPE feature-vector, L2-normalized (so a dot is a
+    cosine). DETERMINISTIC — a given tree always yields the same vector. The two blocks are
+    unit-normalized then weighted ({@link _HISTO_WEIGHT}/{@link _SHAPE_WEIGHT}) so the type
+    histogram dominates the silhouette, then the whole is L2-normalized."""
+    histo, shape = _structural_features(tree)
+    hu = _l2(histo)
+    su = _l2(shape)
+    combined = [_HISTO_WEIGHT * x for x in hu] + [_SHAPE_WEIGHT * x for x in su]
+    return _l2(combined)
+
+
+def _hash_fallback(structural_hash: str) -> list[float]:
+    """A deterministic _EMBED_DIM-vector spread off the hash hex — the fallback when an AST
+    json cannot be parsed (it never should: ast_json is canonicalJson output). L2-normalized,
+    same dimension as the real encoder, so the collection's pinned length holds."""
+    raw = []
+    h = structural_hash or ""
+    for i in range(_EMBED_DIM):
+        chunk = (h[(i * 2) % max(len(h), 1):][:2] or "00").ljust(2, "0")
+        try:
+            raw.append(int(chunk, 16) / 255.0)
+        except ValueError:
+            raw.append(0.0)
+    return _l2(raw)
+
+
+def _embed(ast_json: str, structural_hash: str) -> list[float]:
+    """The embedding for an upsert — parse the AST json and encode its SHAPE; on a parse
+    failure (never expected), fall back to a hash-spread vector of the same dimension so the
+    put never crashes and the collection's pinned vector length holds."""
+    try:
+        tree = json.loads(ast_json) if ast_json else None
+    except (ValueError, TypeError):
+        return _hash_fallback(structural_hash)
+    if tree is None:
+        return _hash_fallback(structural_hash)
+    return _structural_embed(tree)
 
 
 def _now() -> str:
@@ -249,7 +414,7 @@ class AstPalaceStore:
                 ids=[structural_hash],
                 documents=[ast_json],
                 metadatas=[meta],
-                embeddings=[_embed(structural_hash)],
+                embeddings=[_embed(ast_json, structural_hash)],
             )
             return {"hash": structural_hash, "count": count}
 
@@ -267,7 +432,7 @@ class AstPalaceStore:
             ids=[structural_hash],
             documents=[ast_json],
             metadatas=[meta],
-            embeddings=[_embed(structural_hash)],
+            embeddings=[_embed(ast_json, structural_hash)],
         )
         return {"hash": structural_hash, "count": 1}
 
@@ -366,12 +531,79 @@ def _serve(palace_path: str) -> None:
     )
 
 
+# ── The STRUCTURE-PLANE READER — the batch readback the FFZ Measure servo joins ──────
+#
+# Mirrors `drawer_io.py cmd_form_embeddings` (the FORM plane), one tier up: the FORM store
+# keys an entry BY the verbatim_sha (one vector per turn), so its readback is a 1:1 dump.
+# The astpalace keys by STRUCTURAL HASH with a recurrence tally, and ONE structure may have
+# unfolded from MANY turns (its `lar_provenance` list of verbatim_shas). So this reader
+# EXPANDS each live entry across its provenance: one NDJSON row per (verbatim_sha) carrying
+# that structure's vector. The orchestrator joins each content drawer's verbatim_sha against
+# this map (the 3rd quorum plane), exactly as it joins the form map. Tombstoned (kapae'd-to-
+# zero) entries are SKIPPED — set-aside structures feed no plane. Read-only — never a write.
+#
+# A missing/empty astpalace yields no rows ⇒ the orchestrator degrades to content (+form),
+# the same graceful path the absent form collection takes.
+
+def _default_astpalace_dir() -> str:
+    """The canonical `.astpalace` palace dir — `$LAR_ROOT/.astpalace` (isolated instances)
+    or `~/.lares/.astpalace`. Mirrors the TS `larAstPalaceDir()` (vessel-paths.ts) so the
+    orchestrator and the holder agree on the dir without a cross-package import."""
+    root = os.environ.get("LAR_ROOT") or os.path.join(os.path.expanduser("~"), ".lares")
+    return os.path.join(root, ".astpalace")
+
+
+def _structure_embeddings(palace_path: str, out) -> int:
+    """Dump the live structure vectors FLAT, one NDJSON row per (verbatim_sha):
+      {id: <structural_hash>, embedding: [...], verbatim_sha: V}
+    `id` carries the structure's hash (informational); the JOIN key is `verbatim_sha`. A
+    tombstoned structure is skipped. Returns the row count."""
+    try:
+        col = get_collection(palace_path, _skip_identity_check=True)
+    except Exception as exc:  # noqa: BLE001 — no astpalace yet ⇒ 0 rows (graceful degrade)
+        sys.stderr.write(f"structure-embeddings: no astpalace ({type(exc).__name__}: {exc}) — 0 rows\n")
+        return 0
+    rows = read_stored_embeddings(
+        col, {"provenance": "lar_provenance", "tombstoned": "lar_tombstoned_at"}
+    )
+    written = 0
+    for r in rows:
+        if r.get("tombstoned"):
+            continue  # set-aside structure — feeds no plane
+        try:
+            provenance = json.loads(r.get("provenance") or "[]")
+        except (ValueError, TypeError):
+            provenance = []
+        emb = r["embedding"]
+        seen: set[str] = set()
+        for p in provenance:
+            sha = p.get("verbatim_sha") if isinstance(p, dict) else None
+            if not sha or sha in seen:
+                continue
+            seen.add(sha)
+            out.write(json.dumps({"id": r["id"], "embedding": emb, "verbatim_sha": sha}) + "\n")
+            written += 1
+    return written
+
+
+def cmd_structure_embeddings(args) -> None:
+    palace_path = args.palace or _default_astpalace_dir()
+    written = _structure_embeddings(palace_path, sys.stdout)
+    sys.stderr.write(f"read {written} structure-vector rows from the astpalace at {palace_path}\n")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="astpalace I/O (the .astpalace mempalace-instance holder)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("serve", help="persistent NDJSON RPC holder for one .astpalace palace dir")
     s.add_argument("--palace", required=True)
     s.set_defaults(fn=lambda a: _serve(a.palace))
+    se = sub.add_parser(
+        "structure-embeddings",
+        help="batch readback of structure vectors keyed by verbatim_sha (the FFZ 3rd plane)",
+    )
+    se.add_argument("--palace", default="", help="the .astpalace dir (default: $LAR_ROOT/~ .lares/.astpalace)")
+    se.set_defaults(fn=cmd_structure_embeddings)
     args = ap.parse_args()
     args.fn(args)
 

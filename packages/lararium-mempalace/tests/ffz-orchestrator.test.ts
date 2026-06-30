@@ -370,6 +370,170 @@ describe("orchestrateWing — the form plane wired (N=2)", () => {
 });
 
 // ───────────────────────────────────────────────────────────────────────────
+// STRUCTURE plane (the 3rd plane of the braid). The Measure quorum runs at N=3
+// (content plane-0 · form plane-1 · structure plane-2); the structural/AST-shape
+// tension-moments light up. Mirrors the FORM strand one tier up.
+// ───────────────────────────────────────────────────────────────────────────
+
+describe("computePlaneDrifts — the 3-plane pre-pass", () => {
+  test("a structBySha map adds a 3rd drift element (content · form · structure)", () => {
+    const form = new Map<string, readonly number[]>([["sha", hot(0, 4)]]);
+    const struct = new Map<string, readonly number[]>([["sha", hot(0, 6)]]);
+    const recs = [0, 1, 2, 3].map((c) => fdrawer(c, hot(0, 8), "sha"));
+    const drifts = computePlaneDrifts(recs, form, struct);
+    for (const r of recs) expect(drifts.get(r.id)).toEqual([0, 0, 0]); // steady on all 3 planes
+  });
+
+  test("a structure-only shift lifts ONLY the 3rd drift element", () => {
+    const form = new Map<string, readonly number[]>();
+    const struct = new Map<string, readonly number[]>();
+    const recs: DrawerVector[] = [];
+    for (let c = 0; c < 6; c++) {
+      const sha = `s${c}`;
+      form.set(sha, hot(0, 4)); // form steady
+      struct.set(sha, hot(c >= 3 ? 1 : 0, 6)); // structure shifts at chunk 3
+      recs.push(fdrawer(c, hot(0, 8), sha)); // content steady
+    }
+    const drifts = computePlaneDrifts(recs, form, struct);
+    const [cd, fd, sd] = drifts.get("q#3")!;
+    expect(cd).toBe(0); // content coherent
+    expect(fd).toBe(0); // form coherent
+    expect(sd).toBeGreaterThan(0.9); // the lone structure shift
+  });
+
+  test("backward-compatible — a 2-arg call still yields [content, form]", () => {
+    const form = new Map<string, readonly number[]>([["sha", hot(0, 4)]]);
+    const recs = [0, 1].map((c) => fdrawer(c, hot(0, 8), "sha"));
+    for (const r of recs) expect(computePlaneDrifts(recs, form).get(r.id)).toEqual([0, 0]);
+  });
+});
+
+describe("deriveMeasureLabels — the structure plane (N=3 quorum)", () => {
+  /** A 10-member session driving all three planes per chunk. */
+  function session3(contentAxis: (c: number) => number[], formAxis: (c: number) => number, structAxis: (c: number) => number): {
+    recs: DrawerVector[];
+    form: Map<string, readonly number[]>;
+    struct: Map<string, readonly number[]>;
+  } {
+    const form = new Map<string, readonly number[]>();
+    const struct = new Map<string, readonly number[]>();
+    const recs: DrawerVector[] = [];
+    for (let c = 0; c < 10; c++) {
+      const sha = `s${c}`;
+      form.set(sha, hot(formAxis(c), 4));
+      struct.set(sha, hot(structAxis(c), 6));
+      recs.push(fdrawer(c, contentAxis(c), sha));
+    }
+    return { recs, form, struct };
+  }
+
+  test("planesPresent reports 3 when the session joins both form and structure", () => {
+    const { recs, form, struct } = session3(() => hot(0, 8), () => 0, () => 0);
+    expect(deriveMeasureLabels(recs, {}, form, struct).planes).toBe(3);
+  });
+
+  test("a content+form+structure JOINT shift gongs", () => {
+    const { recs, form, struct } = session3(
+      (c) => hot(c >= 5 ? 1 : 0, 8),
+      (c) => (c >= 5 ? 1 : 0),
+      (c) => (c >= 5 ? 1 : 0),
+    );
+    const r = deriveMeasureLabels(recs, {}, form, struct);
+    expect(r.planes).toBe(3);
+    expect(r.gongs).toBe(1); // all three co-fire ⇒ effGong=min(3,3)=3 met
+    expect(r.conflicts).toBe(0);
+  });
+
+  test("a structure-only shift (content + form coherent) reads conflict — the tension-moment", () => {
+    const { recs, form, struct } = session3(() => hot(0, 8), () => 0, (c) => (c >= 5 ? 1 : 0));
+    const r = deriveMeasureLabels(recs, {}, form, struct);
+    expect(r.planes).toBe(3);
+    expect(r.gongs).toBe(0); // the lone structure scream NEVER fires the gong
+    expect(r.conflicts).toBeGreaterThan(0); // Signal-Jam: structure screams, content+form silent
+  });
+
+  test("graceful — structure reader wired but unjoined drops to the form plane (N=2)", () => {
+    const { recs, form } = session3(() => hot(0, 8), () => 0, () => 0);
+    const structElsewhere = new Map<string, readonly number[]>([["nowhere", hot(0, 6)]]);
+    const r = deriveMeasureLabels(recs, {}, form, structElsewhere);
+    expect(r.planes).toBe(2); // structure never joins ⇒ content + form only
+  });
+
+  test("graceful — structure joins but form absent runs N=2 (content + structure)", () => {
+    const { recs, struct } = session3(() => hot(0, 8), () => 0, () => 0);
+    const r = deriveMeasureLabels(recs, {}, undefined, struct);
+    expect(r.planes).toBe(2);
+  });
+
+  test("1/2-plane paths IDENTICAL when no structure reader is wired (absent-seam parity)", () => {
+    const { recs, form } = session3((c) => hot(c >= 5 ? 1 : 0, 8), (c) => (c >= 5 ? 1 : 0), (c) => (c >= 5 ? 1 : 0));
+    const twoPlane = deriveMeasureLabels(recs, {}, form); // no structBySha
+    expect(twoPlane.planes).toBe(2);
+    const onePlane = deriveMeasureLabels(recs); // no form, no struct
+    expect(onePlane.planes).toBe(1);
+  });
+});
+
+describe("orchestrateWing — the structure plane wired (N=3)", () => {
+  function struct3Session(): {
+    reader: () => DrawerVector[];
+    form: Map<string, readonly number[]>;
+    struct: Map<string, readonly number[]>;
+  } {
+    const form = new Map<string, readonly number[]>();
+    const struct = new Map<string, readonly number[]>();
+    const recs: DrawerVector[] = [];
+    for (let c = 0; c < 10; c++) {
+      const shifted = c >= 5;
+      const sha = `s${c}`;
+      form.set(sha, hot(shifted ? 1 : 0, 4));
+      struct.set(sha, hot(shifted ? 1 : 0, 6));
+      recs.push(fdrawer(c, hot(shifted ? 1 : 0, 8), sha));
+    }
+    return { reader: () => recs, form, struct };
+  }
+
+  test("planesPresent=3 + the JOINT shift gongs through the full pipeline", () => {
+    const { reader, form, struct } = struct3Session();
+    const w = capture();
+    const res = orchestrateWing("wing_s", {
+      readEmbeddings: reader,
+      readFormVectors: () => form,
+      readStructureVectors: () => struct,
+      writePatches: w.writePatches,
+    });
+    expect(res.planesPresent).toBe(3);
+    expect(res.gongs).toBe(1);
+    expect(res.measured).toBe(10);
+    // the patch STILL carries ONLY lar_ffz — the 3rd plane changes the LABEL, never the key set.
+    for (const p of w.patches) expect(Object.keys(p.patch)).toEqual(["lar_ffz"]);
+  });
+
+  test("idempotent — a second 3-plane run derives byte-identical patches", () => {
+    const { reader, form, struct } = struct3Session();
+    const w1 = capture();
+    orchestrateWing("wing_s", { readEmbeddings: reader, readFormVectors: () => form, readStructureVectors: () => struct, writePatches: w1.writePatches });
+    const w2 = capture();
+    orchestrateWing("wing_s", { readEmbeddings: reader, readFormVectors: () => form, readStructureVectors: () => struct, writePatches: w2.writePatches });
+    expect(w2.patches).toEqual(w1.patches);
+  });
+
+  test("an absent structure reader leaves planesPresent=2 (the form path preserved)", () => {
+    const { reader, form } = struct3Session();
+    const w = capture();
+    const res = orchestrateWing("wing_s", { readEmbeddings: reader, readFormVectors: () => form, writePatches: w.writePatches });
+    expect(res.planesPresent).toBe(2);
+  });
+
+  test("structure-only reader (no form) runs N=2 through the pipeline", () => {
+    const { reader, struct } = struct3Session();
+    const w = capture();
+    const res = orchestrateWing("wing_s", { readEmbeddings: reader, readStructureVectors: () => struct, writePatches: w.writePatches });
+    expect(res.planesPresent).toBe(2);
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────
 // STRAND C — rewind/fork awareness in the Measure quorum.
 //   · kapae DOWN-WEIGHT — a per-drawer salience scales the Measure contribution.
 //   · PER-FRONTIER keying — (sourceFile, frontier) groups each fork its own pass,
