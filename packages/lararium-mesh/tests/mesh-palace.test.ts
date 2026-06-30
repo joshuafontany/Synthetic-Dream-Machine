@@ -24,6 +24,7 @@ import {
   routingSlotToRecord, recordToRoutingSlot,
   publicFlowMap, snapshotPublicFlowMap,
   hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate, bearingVector,
+  gravityPressureNextHop, GP_GRAVITY, type GpState,
   seedTheta, childCone, coneCenter, ROOT_CONE, type Coord,
   hermCanRead, HERM_CAPS,
   MeshPalace, emptyMeshPalaceDoc,
@@ -191,6 +192,27 @@ describe("greedy geometric routing — the native-disk chart", () => {
     expect(radialCoordinate(10, opts)).toBeLessThan(radialCoordinate(1, opts));   // more carriage → nearer center
     expect(radialCoordinate(2, opts)).toBeGreaterThan(radialCoordinate(8, opts)); // monotone decreasing
     expect(radialCoordinate(1e6, opts)).toBeGreaterThanOrEqual(0);                // clamped onto the disk
+  });
+
+  test("gravityPressureNextHop — greedy until a local minimum, then pressure delivers (no dead-end)", () => {
+    const slot = (bearing: string, r: number, theta: number): RoutingSlot => ({ bearing, r, theta });
+    const dest = { r: 0, theta: 0 }; // the origin
+    // GRAVITY: forwards to the neighbour closest to dest
+    const g = gravityPressureNextHop({ r: 3, theta: 0 }, "@self", [slot("@near", 1, 0), slot("@far", 5, 0)], dest, GP_GRAVITY);
+    expect(g.next?.bearing).toBe("@near");
+    // LOCAL MINIMUM → PRESSURE: no neighbour beats self, yet ALWAYS a hop; the valley is recorded
+    const p = gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [slot("@a", 5, 0), slot("@b", 6, 0)], dest, GP_GRAVITY);
+    expect(p.next).not.toBeNull();
+    expect(p.state.valleyDist).toBeCloseTo(hyperbolicDistance({ r: 1, theta: 0 }, dest));
+    // PRESSURE forwards to the LEAST-visited neighbour
+    const pressured: GpState = { visits: { "@a": 3, "@b": 1 }, valleyDist: 0.5 };
+    expect(gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [slot("@a", 5, 0), slot("@b", 5, 0.1)], dest, pressured).next?.bearing).toBe("@b");
+    // RECOVER: closer than the valley → back to gravity (greedy)
+    const rec = gravityPressureNextHop({ r: 0.5, theta: 0 }, "@self", [slot("@near", 0.1, 0), slot("@far", 5, 0)], dest, { visits: {}, valleyDist: 2.0 });
+    expect(rec.state.valleyDist).toBe(Infinity);
+    expect(rec.next?.bearing).toBe("@near");
+    // the only dead-end: zero neighbours
+    expect(gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [], dest, GP_GRAVITY).next).toBeNull();
   });
 
   test("bearingVector — the log-map L2 store-vector: ‖v‖ = r, origin → 0, radially-aligned L2 == geodesic", () => {

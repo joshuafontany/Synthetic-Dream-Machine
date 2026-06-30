@@ -292,6 +292,51 @@ export function greedyNextHop(self: Coord, neighbors: readonly RoutingSlot[], de
 }
 
 /**
+ * A packet's Gravity-Pressure routing state (Cvetkovski-Crovella) — rides WITH the packet, no node
+ * keeps it: the per-node visit-counts + the valley distance recorded at pressure-entry (Infinity in
+ * gravity mode).
+ */
+export interface GpState {
+  readonly visits: Readonly<Record<string, number>>;
+  readonly valleyDist: number;
+}
+/** A fresh packet starts in gravity mode, unvisited. */
+export const GP_GRAVITY: GpState = { visits: {}, valleyDist: Infinity };
+
+/**
+ * Gravity-Pressure next-hop (Cvetkovski-Crovella INFOCOM 2009) — greedy ("gravity") until a local
+ * minimum, then "pressure" (forward to the LEAST-visited neighbor, tie-break by most progress) until
+ * the packet comes closer than the valley, then recover to gravity. ALWAYS makes a hop if a path
+ * exists, so the mesh tolerates STALE coords / churn WITHOUT re-embedding — greedy degrades to a few
+ * pressure detours, never a dead end. Wraps the built `greedyNextHop`/`hyperbolicDistance` (gravity
+ * mode); the visit-vector + valley-distance are the only invention. Returns the next slot + the packet
+ * state to carry forward (records this node's visit). `next: null` only with zero neighbors.
+ */
+export function gravityPressureNextHop(
+  self: Coord, selfBearing: string, neighbors: readonly RoutingSlot[], dest: Coord, state: GpState,
+): { next: RoutingSlot | null; state: GpState } {
+  const visits = { ...state.visits, [selfBearing]: (state.visits[selfBearing] ?? 0) + 1 };
+  const selfDist = hyperbolicDistance(self, dest);
+  let valleyDist = selfDist < state.valleyDist ? Infinity : state.valleyDist; // recovered → back to gravity
+  if (neighbors.length === 0) return { next: null, state: { visits, valleyDist } };
+  if (valleyDist === Infinity) {
+    const greedy = greedyNextHop(self, neighbors, dest); // GRAVITY: the progress hop
+    if (greedy) return { next: greedy, state: { visits, valleyDist } };
+    valleyDist = selfDist; // local minimum → enter PRESSURE, mark the valley
+  }
+  // PRESSURE: the least-visited neighbor (tie-break: closest to dest)
+  let best = neighbors[0]!;
+  let bestV = visits[best.bearing] ?? 0;
+  let bestD = hyperbolicDistance(best, dest);
+  for (const n of neighbors) {
+    const v = visits[n.bearing] ?? 0;
+    const d = hyperbolicDistance(n, dest);
+    if (v < bestV || (v === bestV && d < bestD)) { best = n; bestV = v; bestD = d; }
+  }
+  return { next: best, state: { visits, valleyDist } };
+}
+
+/**
  * The radial coordinate `r` from a vessel's carriage-degree (Krioukov: `r = R − 2·ln(κ/κ₀)`).
  * High carriage (high degree) seats near the center; a minimum-degree leaf seats at the rim `r = R`.
  * `r` is a FLOW quantity (the operator's ruling: routing's radial = carriage-degree, OFF the social
