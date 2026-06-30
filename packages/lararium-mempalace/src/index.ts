@@ -6,6 +6,7 @@ export * from "./harvest-all.js";
 export * from "./spawn-resolve.js";
 export * from "./palace-path.js";
 export * from "./telemetry-writeback.js";
+export * from "./ffz-orchestrator.js";
 export * from "./worldline-kg.js";
 export * from "./worldline-observe.js";
 export * from "./subagent-mine.js";

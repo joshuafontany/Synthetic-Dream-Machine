@@ -100,6 +100,13 @@ def cmd_embeddings(args):
                 "embedding": [float(x) for x in emb],
                 "chunk_index": m.get("chunk_index"),
                 "source_file": m.get("source_file", ""),
+                # the EXISTING rhythmic address (Arc + Pulse stamped at capture) — the FFZ
+                # orchestrator parses it, OVERLAYS the fluid bands (Measure/Beat/Theme), and
+                # re-serializes, so the birth-stamped Arc/Pulse cells survive untouched.
+                "lar_ffz": m.get("lar_ffz", ""),
+                # the cross-graph join key to the form/structure palaces (the deferred
+                # form/structure plane feed keys off this; carried now so the plumbing lands clean).
+                "verbatim_sha": m.get("lar_verbatim_sha", ""),
             }
         )
     # Stable per-session order: source_file, then the ingest ordinal (the Beat label
@@ -109,6 +116,66 @@ def cmd_embeddings(args):
     for r in rows:
         out.write(json.dumps(r) + "\n")
     sys.stderr.write(f"read {len(rows)} embeddings (of {len(ids)} in {args.wing or 'ALL'})\n")
+
+
+def cmd_cluster(args):
+    """Theme band: cluster the wing's drawer-graph by embedding cosine similarity
+    (networkx greedy-modularity communities) → ONE JSON line:
+      {communities:{id:label}, modularity, members, edges}
+
+    The Theme cell is a community LABEL LOCAL to this store — never cross-vessel. Labels are
+    DETERMINISTIC (communities ranked by their min member-ordinal), so a re-run yields the SAME
+    labels = the idempotent stamp the orchestrator needs. Read-only — never a write. The TS
+    orchestrator applies the ffzAcceptRecluster MDL/modularity guard over this `modularity`.
+
+    SCOPE: networkx + numpy ride the venv (igraph/leidenalg do NOT); this uses the deterministic
+    Clauset-Newman-Moore greedy modularity, the in-scope community-detection the sidecar holds."""
+    import networkx as nx
+    import numpy as np
+
+    col = _col()
+    where = {"wing": args.wing} if args.wing else None
+    got = col.get(where=where, include=["embeddings"])
+    ids = got["ids"]
+    embs = got["embeddings"]
+    pairs = [(i, e) for i, e in zip(ids, embs) if e is not None]
+    out = sys.stdout
+    if len(pairs) < 2:
+        out.write(json.dumps({"communities": {}, "modularity": 0.0, "members": len(pairs), "edges": 0}) + "\n")
+        sys.stderr.write(f"cluster: {len(pairs)} drawers — too few to cluster\n")
+        return
+
+    M = np.asarray([e for _, e in pairs], dtype=float)
+    norms = np.linalg.norm(M, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    Mn = M / norms
+    sim = Mn @ Mn.T  # cosine similarity (rows are unit-normed)
+    n = len(pairs)
+    thr = args.threshold
+
+    G = nx.Graph()
+    G.add_nodes_from(range(n))
+    for a in range(n):
+        row = sim[a]
+        for b in range(a + 1, n):
+            w = float(row[b])
+            if w >= thr:
+                G.add_edge(a, b, weight=w)
+
+    communities = list(nx.community.greedy_modularity_communities(G, weight="weight"))
+    try:
+        modularity = float(nx.community.modularity(G, communities, weight="weight")) if G.number_of_edges() else 0.0
+    except Exception:  # noqa: BLE001 — a degenerate graph yields no modularity; report 0
+        modularity = 0.0
+
+    # Deterministic label = the community's RANK by its smallest member ordinal, so the
+    # same graph always paints the same labels (the idempotent Theme stamp).
+    label_of = {}
+    for label, members in enumerate(sorted(communities, key=lambda c: min(c))):
+        for idx in members:
+            label_of[pairs[idx][0]] = label
+    out.write(json.dumps({"communities": label_of, "modularity": modularity, "members": n, "edges": G.number_of_edges()}) + "\n")
+    sys.stderr.write(f"clustered {n} drawers → {len(communities)} communities, Q={modularity:.4f}\n")
 
 
 def cmd_apply(args):
@@ -153,6 +220,10 @@ def main():
     em = sub.add_parser("embeddings")
     em.add_argument("--wing", default="")  # empty ⇒ the whole palace (the servo scopes per source_file)
     em.set_defaults(fn=cmd_embeddings)
+    c = sub.add_parser("cluster")
+    c.add_argument("--wing", default="")  # empty ⇒ the whole palace
+    c.add_argument("--threshold", type=float, default=0.5)  # cosine edge gate for the Theme graph
+    c.set_defaults(fn=cmd_cluster)
     a = sub.add_parser("apply")
     a.add_argument("patchfile")
     a.set_defaults(fn=cmd_apply)
