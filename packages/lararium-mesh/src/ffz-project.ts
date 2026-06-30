@@ -8,9 +8,10 @@
  * length of their longest common prefix (an ULTRAMETRIC, order-free).
  *
  * The five bands (coarse→fine, FFZ_ADDRESS_ORDER):
- *   - Theme   — thread cluster        (FLUID, deferred to stage two)
+ *   - Theme   — thread cluster        (ARC-CLOSE trigger + MDL guard BUILT; the
+ *               community-detection compute — igraph/leiden — stays deferred)
  *   - Arc     — the session = source_file (the session-island; given FREE)
- *   - Measure — topic-shift           (FLUID, deferred to stage two)
+ *   - Measure — topic-shift           (SERVO-DRIVEN — the Schmitt-trigger quorum gong)
  *   - Beat    — the turn (a grounding act, per-island; null-graceful where no clean
  *               turn label exists at the call site)
  *   - Pulse   — the drawer / inscription atom (the finest cell)
@@ -55,11 +56,11 @@ export const FFZ_ABSENT = "_";
  * tree root (a namespace), default "session".
  */
 export interface FfzCells {
-  /** Theme (L4) — thread cluster. FLUID (stage two); usually absent. */
+  /** Theme (L4) — thread cluster. SET on arc-close re-cluster (the compute is deferred); usually absent. */
   readonly theme?: string | number | null;
   /** Arc (L3) — the session = source_file (the session-island). Given free. */
   readonly arc?: string | number | null;
-  /** Measure (L2) — topic-shift. FLUID (stage two); usually absent. */
+  /** Measure (L2) — topic-shift. The servo emits this LABEL (the quorum gong); absent where the servo hasn't run. */
   readonly measure?: string | number | null;
   /** Beat (L1) — the turn (per-island; causally inert). Null-graceful. */
   readonly beat?: string | number | null;
@@ -395,7 +396,9 @@ export function measureStep(
 //
 // PURE: like the one servo, every function returns fresh state and mutates nothing.
 // This is the FUSION math over GIVEN per-plane drifts — the live 3-plane vector feed
-// (content embeddings · form/structure signals) rides the deferred orchestrator.
+// (content embeddings · form/structure signals) rides the node-side orchestrator
+// (mempalace `ffz-orchestrator`), BUILT and tested; it runs live as a @daemon verb
+// post-re-harvest (gated on the nuke/re-harvest), no daemon caller wired yet.
 // ───────────────────────────────────────────────────────────────────────────
 
 /** Plane index convention for the 3-plane servo (callers may use any N, ordered). */

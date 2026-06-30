@@ -122,9 +122,11 @@ export function closeWorldlineEdges(closes: readonly WorldlineEdgeClose[], opts:
  * a retracted turn-DAG node. Append-only (history preserved); idempotent (a re-run closes nothing
  * new). Returns the count closed.
  *
- * NOTE — the kapae TRIGGER (auto-detecting that a turn DISAPPEARED from a transcript) is a SEPARATE,
- * deferred piece: the harvest index is append-only with no gone-turn reconciliation, so nothing yet
- * CALLS this. This is the mechanism; wire it to a detector when one lands.
+ * NOTE — the gone-turn DETECTOR landed: mesh `detectGoneTurns` (gone-turns.ts) diffs the append-only
+ * harvest index against the live transcript to surface rewound turn-uuids, and the astpalace twin
+ * (`astpalace_io.kapae`) sets aside the AST tally. This is the worldline-KG half of the same mechanism.
+ * What stays unwired is the AUTO-TRIGGER loop — a caller that runs `detectGoneTurns` over the harvest
+ * index per session and fires `kapaeTurn` for each gone uuid; until that lands nothing yet CALLS this.
  */
 export function kapaeTurn(turnKey: string, opts: WorldlineKgOptions & { ended?: string } = {}): { closed: number; ended: string } {
   if (!turnKey) throw new Error("kapaeTurn: turnKey required");

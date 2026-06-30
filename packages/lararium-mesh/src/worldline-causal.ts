@@ -8,11 +8,11 @@
  * (agent-worldline #time, #attribution). Keyed turn-DAG (the operator's C-cut) — handles
  * survive rewind/fork because the turn-DAG node does.
  *
- * NOTE — the edge-DAG home is deferred. This in-memory ITC registry is the CAUSAL
- * FOUNDATION; slice-2 stamps the same spawn/inject/handback as mempalace-KG triples
- * (prov:Delegation + prov:Communication via kg_add) and wires kapae (rewind) via
- * kg_invalidate. The ITC verdict re-projects from those triples when they land (the
- * edge-DAG projection rides worldline-trajectory's worldlineCausalFromEdges).
+ * NOTE — the edge-DAG home LANDED (slice-2): the same spawn/inject/handback now persist as
+ * mempalace-KG triples (prov:Delegation + prov:Communication via kg_add / `kg_io.py`), and
+ * kapae (rewind) closes them via kg_invalidate (valid_to set, never deleted). This in-memory
+ * ITC registry stays the live causal READ; the persisted edge-DAG is the durable home, and the
+ * ITC verdict re-projects from those triples via worldline-trajectory's worldlineCausalFromEdges.
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
  */
