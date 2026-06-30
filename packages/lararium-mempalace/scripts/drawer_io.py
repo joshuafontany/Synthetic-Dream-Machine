@@ -75,6 +75,42 @@ def cmd_export(args):
     sys.stderr.write(f"exported {len(todo)} drawers (of {len(ids)} in {args.wing})\n")
 
 
+def cmd_embeddings(args):
+    """Read STORED embeddings back out of the palace — the FFZ Measure servo's
+    cosine-cohesion feed. The nomic vectors were already computed by the palace at
+    insert; this NEVER re-embeds and NEVER loads a model (model-agnostic readback),
+    honoring the NO-new-model law. One NDJSON record per drawer:
+      {id, embedding:[...], chunk_index, source_file}
+    ordered for the servo by (source_file, chunk_index) so a session's members feed
+    the one servo in their per-session ingest order. Read-only — never a write."""
+    col = _col()
+    where = {"wing": args.wing} if args.wing else None
+    got = col.get(where=where, include=["embeddings", "metadatas"])
+    ids = got["ids"]
+    embs = got["embeddings"]
+    metas = got["metadatas"]
+    rows = []
+    for i, emb, m in zip(ids, embs, metas):
+        if emb is None:
+            continue  # a drawer with no stored vector — nothing for the servo to read
+        m = m or {}
+        rows.append(
+            {
+                "id": i,
+                "embedding": [float(x) for x in emb],
+                "chunk_index": m.get("chunk_index"),
+                "source_file": m.get("source_file", ""),
+            }
+        )
+    # Stable per-session order: source_file, then the ingest ordinal (the Beat label
+    # source), then the id — so the servo reads each Arc's members in sequence.
+    rows.sort(key=lambda r: (r["source_file"], r["chunk_index"] if r["chunk_index"] is not None else 1 << 30, r["id"]))
+    out = sys.stdout
+    for r in rows:
+        out.write(json.dumps(r) + "\n")
+    sys.stderr.write(f"read {len(rows)} embeddings (of {len(ids)} in {args.wing or 'ALL'})\n")
+
+
 def cmd_apply(args):
     col = _col()
     patches = list(read_ndjson_records(args.patchfile))
@@ -114,6 +150,9 @@ def main():
     e.add_argument("--wing", required=True)
     e.add_argument("--limit", type=int, default=0)
     e.set_defaults(fn=cmd_export)
+    em = sub.add_parser("embeddings")
+    em.add_argument("--wing", default="")  # empty ⇒ the whole palace (the servo scopes per source_file)
+    em.set_defaults(fn=cmd_embeddings)
     a = sub.add_parser("apply")
     a.add_argument("patchfile")
     a.set_defaults(fn=cmd_apply)

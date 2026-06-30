@@ -21,17 +21,34 @@ import { ffzMembershipAddress } from "./ffz-project.js";
  * inside {@link buildPatch}; the caller threads only the finer cells it holds. Causality
  * is NOT carried here — it rides the edge-DAG (the PATH-B cut).
  *
- * The fluid bands (Theme = thread cluster, Measure = topic-shift) are deferred to stage
- * two and never threaded here; they render absent (porous) in the address.
+ * The fluid bands (Theme = thread cluster, Measure = topic-shift) COMMIT on a discrete
+ * GONG (stage two): a caller that has run the gong machinery threads the committed cell
+ * LABEL here; absent the gong they render porous (`_`) in the address — the φ-band
+ * free-runs until its wavefront lands. Every cell is a LABEL, never a count.
  */
 export interface CaptureContext {
   /** Pulse (L0) — the drawer / inscription atom id (e.g. the turn's content-address). */
   readonly pulse?: string | number;
   /**
-   * Beat (L1) — the turn cell (a per-island, causally-inert label). Null-graceful:
-   * the caller omits it where no clean turn label exists at the call site.
+   * Beat (L1) — the turn cell (a per-island, causally-inert turn LABEL, read as
+   * membership — "which-turn", NEVER a count; the ordinal SEQUENCE rides the edge-DAG).
+   * The cleanest per-session source is the drawer's `chunk_index` (the ndjson ingest
+   * ordinal within the source_file = the Arc); the live in-VM capture site has no clean
+   * ordinal, so it stays absent (porous) there — a writeback/harvest pass supplies it.
+   * Null-graceful: the caller omits it where no clean turn label exists at the call site.
    */
   readonly beat?: string | number;
+  /**
+   * Measure (L2) — the topic-shift segment LABEL the one servo commits on a gong
+   * ({@link measureStep} in ffz-project). Absent between gongs (the φ-band free-runs).
+   */
+  readonly measure?: string | number;
+  /**
+   * Theme (L3-coarse) — the thread-cluster community LABEL, re-derived on Arc-close.
+   * LOCAL to this store, NEVER cross-vessel. Absent until the cluster-compute lands
+   * (a deferred follow-up); porous until then.
+   */
+  readonly theme?: string | number;
   /** The FFZ tree-root selector (a namespace), default "session". */
   readonly ffzProfile?: string;
 }
@@ -224,14 +241,23 @@ export function buildPatch(
   // NOT a wall-time projection; rhythm-only, zero causality). The FREE/factual cells:
   // Arc = source_file (the session-island), Pulse = the inscription atom (caller-supplied
   // content-address), Beat = the turn (caller-supplied, null-graceful). The fluid bands
-  // (Theme/Measure) stay absent → porous in the address (stage two). Stamp whenever at
-  // least one real cell is present (Arc alone still addresses the session); otherwise omit.
+  // (Theme/Measure) COMMIT on a gong: threaded here when the caller has run the gong
+  // machinery, else absent → porous (the φ-band free-runs). Stamp whenever at least one
+  // real cell is present (Arc alone still addresses the session); otherwise omit.
   const arc = deriveArc(sourceFile);
-  if (arc != null || capture?.pulse != null || capture?.beat != null) {
+  if (
+    arc != null ||
+    capture?.pulse != null ||
+    capture?.beat != null ||
+    capture?.measure != null ||
+    capture?.theme != null
+  ) {
     const ffz = ffzMembershipAddress({
       arc,
-      ...(capture?.pulse != null ? { pulse: capture.pulse } : {}),
+      ...(capture?.theme != null ? { theme: capture.theme } : {}),
+      ...(capture?.measure != null ? { measure: capture.measure } : {}),
       ...(capture?.beat != null ? { beat: capture.beat } : {}),
+      ...(capture?.pulse != null ? { pulse: capture.pulse } : {}),
       profile: capture?.ffzProfile ?? "session",
     });
     patch["lar_ffz"] = ffz.slice(0, 120);

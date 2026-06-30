@@ -196,3 +196,224 @@ export function ffzLca(a: string, b: string): string {
   while (out.length && out[out.length - 1] === FFZ_ABSENT) out.pop();
   return `${A.profile}/${out.join(".")}`;
 }
+
+// ───────────────────────────────────────────────────────────────────────────
+// MEASURE — the one servo (a continuous→discrete Schmitt-trigger gong).
+//
+// The Measure band is the SINGLE hinge where the FFZ breathes continuously and
+// COMMITS on a discrete GONG (the topic-shift wavefront). Between gongs the
+// φ-bands free-run; this servo is the only continuous→discrete mechanism in the
+// schema. The Measure cell it emits is a segment LABEL ("which-segment"), never
+// a count — the running internal `count` is bookkeeping the address never sees.
+//
+// SIGNAL — the cosine of incoming content against the running centroid of the
+// current segment. The vectors are the nomic embeddings the palace already holds
+// (read back from chroma; this servo never embeds, it only consumes vectors).
+//
+// TWO-LOOP (nalu-shaped) THRESHOLD:
+//   FAST  — fire when the cohesion-drop is an outlier vs the within-segment
+//           cohesion baseline (an EWMA mean + EWMA variance → a z-score).
+//   SLOW  — re-anchor the expected segment length (a BOCPD-style hazard λ,
+//           EWMA'd per session) so the bar RELAXES as a segment ages past λ.
+//   MDL   — a split must pay its segment-header cost (the drop's Gaussian
+//           surprise, in bits, must clear `mdlBits`) — stops marginal splits.
+//   FLOOR — no gong before `minSegment` members — stops churn.
+//   CEIL  — force a gong at `maxSegment` members — stops staleness.
+//
+// Hysteresis (the Schmitt part): after a gong the trigger DISARMS; it re-arms
+// only once the new segment settles (a coherent member, z ≤ reArmZ), so a slow
+// monotone drift cannot machine-gun gongs on consecutive steps.
+// ───────────────────────────────────────────────────────────────────────────
+
+/** Tunables for {@link measureStep}. All have defaults via {@link MEASURE_SERVO_DEFAULTS}. */
+export interface MeasureServoConfig {
+  /** FAST: the z-score outlier bar a cohesion-drop must clear to gong. */
+  readonly zThreshold: number;
+  /** A floor the relaxed bar never sinks below (except the CEIL force). */
+  readonly zFloor: number;
+  /** EWMA smoothing for the within-segment cohesion baseline (mean + variance). */
+  readonly ewmaAlpha: number;
+  /** SLOW: the BOCPD-style expected segment length (re-anchored EWMA per session). */
+  readonly hazardLambda: number;
+  /** How fast the z bar relaxes once a segment ages past λ (per extra member). */
+  readonly ageRelax: number;
+  /** MDL: the segment-header cost (bits) a split's surprise must clear. */
+  readonly mdlBits: number;
+  /** FLOOR: no gong before this many members in the current segment. */
+  readonly minSegment: number;
+  /** CEIL: force a gong once the current segment reaches this many members. */
+  readonly maxSegment: number;
+  /** Re-arm hysteresis: the trigger re-arms once a member's z drops to/below this. */
+  readonly reArmZ: number;
+}
+
+export const MEASURE_SERVO_DEFAULTS: MeasureServoConfig = {
+  zThreshold: 3.0,
+  zFloor: 1.0,
+  ewmaAlpha: 0.3,
+  hazardLambda: 12,
+  ageRelax: 0.05,
+  mdlBits: 4.0,
+  minSegment: 3,
+  maxSegment: 48,
+  reArmZ: 0.5,
+};
+
+/**
+ * The servo's running state — PURE data, carried between {@link measureStep} calls.
+ * `count`/`cohMean`/`cohVar`/`lambdaEff`/`armed` are internal bookkeeping; only
+ * `segmentOrdinal` surfaces (as the Measure LABEL). Never serialized into an address.
+ */
+export interface MeasureServoState {
+  /** The running centroid of the current segment (mean of its member vectors). */
+  readonly centroid: readonly number[] | null;
+  /** Members in the current segment so far (internal — NEVER the emitted label). */
+  readonly count: number;
+  /** EWMA of within-segment cohesion (the baseline the drop reads against). */
+  readonly cohMean: number;
+  /** EWMA variance of within-segment cohesion. */
+  readonly cohVar: number;
+  /** The re-anchored expected segment length (BOCPD hazard λ, EWMA'd). */
+  readonly lambdaEff: number;
+  /** Which segment we are in — the Measure cell LABEL seed (a label, not a count). */
+  readonly segmentOrdinal: number;
+  /** Schmitt arming: false right after a gong, true once the new segment settles. */
+  readonly armed: boolean;
+}
+
+/** A fresh servo state — segment 0 opens on the first {@link measureStep} (no gong). */
+export function measureServoInit(): MeasureServoState {
+  return { centroid: null, count: 0, cohMean: 1, cohVar: 0.01, lambdaEff: NaN, segmentOrdinal: 0, armed: true };
+}
+
+const EPS = 1e-9;
+/** The seed variance a fresh segment opens with (a fresh segment is maximally self-coherent). */
+const VAR_SEED = 0.01;
+
+/** Cosine similarity, zero-graceful (a zero/absent vector reads cohesion 0, not NaN). */
+export function ffzCosine(a: readonly number[], b: readonly number[]): number {
+  const n = Math.min(a.length, b.length);
+  let dot = 0, na = 0, nb = 0;
+  for (let i = 0; i < n; i++) {
+    const x = a[i] ?? 0, y = b[i] ?? 0;
+    dot += x * y; na += x * x; nb += y * y;
+  }
+  if (na < EPS || nb < EPS) return 0;
+  return dot / (Math.sqrt(na) * Math.sqrt(nb));
+}
+
+/** The result of one servo step: the next state, the Measure LABEL, and whether a gong tripped. */
+export interface MeasureStep {
+  readonly state: MeasureServoState;
+  /** The Measure cell label for THIS member (the segment it belongs to). */
+  readonly label: string;
+  /** True when this member opened a NEW segment via a topic-shift gong (the wavefront). */
+  readonly gonged: boolean;
+}
+
+/**
+ * Advance the one servo by one member vector — PURE (returns fresh state, mutates nothing).
+ *
+ * The opening member of segment 0 is NOT a gong (no wavefront crossed); thereafter a member
+ * either CONTINUES the current segment (the φ-band free-runs, the centroid/baseline update) or
+ * TRIPS a gong (the FAST/SLOW/MDL/CEIL decision below), opening a new segment whose ordinal
+ * becomes its label. The FLOOR blocks a gong before `minSegment`; the CEIL forces one at
+ * `maxSegment` regardless of cohesion (staleness); hysteresis blocks repeat-fires until re-armed.
+ */
+export function measureStep(
+  state: MeasureServoState,
+  vector: readonly number[],
+  config: Partial<MeasureServoConfig> = {},
+): MeasureStep {
+  const cfg = { ...MEASURE_SERVO_DEFAULTS, ...config };
+  const lambda = Number.isNaN(state.lambdaEff) ? cfg.hazardLambda : state.lambdaEff;
+
+  // The opening of segment 0 — establish the first centroid, no gong.
+  if (state.centroid == null || state.count === 0) {
+    const next: MeasureServoState = {
+      centroid: [...vector], count: 1, cohMean: 1, cohVar: VAR_SEED,
+      lambdaEff: lambda, segmentOrdinal: state.segmentOrdinal, armed: true,
+    };
+    return { state: next, label: String(state.segmentOrdinal), gonged: false };
+  }
+
+  // The cohesion of the incoming member against the established segment centroid.
+  const coh = ffzCosine(vector, state.centroid);
+  const sd = Math.sqrt(state.cohVar + EPS);
+  const z = (state.cohMean - coh) / sd;          // positive z = a cohesion DROP
+  const surpriseBits = (z * z) / (2 * Math.LN2); // Gaussian surprise of the drop, in bits
+
+  // The relaxed bar: drops as the segment ages past the (re-anchored) expected length λ.
+  const effZ = Math.max(cfg.zFloor, cfg.zThreshold - cfg.ageRelax * Math.max(0, state.count - lambda));
+
+  const ceil = state.count >= cfg.maxSegment;    // staleness — force a break
+  const floored = state.count < cfg.minSegment;  // churn guard — too soon to break
+  const fastFire = state.armed && !floored && z > effZ && surpriseBits > cfg.mdlBits;
+  const gong = ceil || fastFire;
+
+  if (gong) {
+    // Re-anchor λ (SLOW loop) from the segment we just closed, then open the new one
+    // from THIS member; its ordinal is its label. Disarm (Schmitt) until it settles.
+    const lambdaEff = (1 - cfg.ewmaAlpha) * lambda + cfg.ewmaAlpha * state.count;
+    const ordinal = state.segmentOrdinal + 1;
+    const next: MeasureServoState = {
+      centroid: [...vector], count: 1, cohMean: 1, cohVar: VAR_SEED,
+      lambdaEff, segmentOrdinal: ordinal, armed: false,
+    };
+    return { state: next, label: String(ordinal), gonged: true };
+  }
+
+  // CONTINUE the segment: fold the member into the centroid + update the EWMA baseline.
+  const k = state.count;
+  const centroid = state.centroid.map((c, i) => (c * k + (vector[i] ?? 0)) / (k + 1));
+  const dev = coh - state.cohMean;
+  const cohMean = (1 - cfg.ewmaAlpha) * state.cohMean + cfg.ewmaAlpha * coh;
+  const cohVar = (1 - cfg.ewmaAlpha) * state.cohVar + cfg.ewmaAlpha * dev * dev;
+  const armed = state.armed || z <= cfg.reArmZ; // re-arm once the new segment settles
+  const next: MeasureServoState = {
+    centroid, count: k + 1, cohMean, cohVar, lambdaEff: lambda,
+    segmentOrdinal: state.segmentOrdinal, armed,
+  };
+  return { state: next, label: String(state.segmentOrdinal), gonged: false };
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// THEME — the cluster band, re-derived on ARC-CLOSE (session-rest), MDL-guarded.
+//
+// SCOPE FLAG: the cluster-COMPUTE (graph community-detection — CPM-Leiden via
+// python-igraph, label-propagation delta for the incremental case) is a DEFERRED
+// follow-up: python-igraph/leidenalg are NOT installed in the sidecar venv (only
+// networkx + numpy), so a fresh cluster sidecar is out of scope for this pass.
+// Built here: the ARC-CLOSE trigger predicate + the MDL/modularity ACCEPT guard
+// (pure), so the compute drops straight into a standing scaffold when added. The
+// Theme cell is a community LABEL local to THIS store — NEVER cross-vessel.
+// ───────────────────────────────────────────────────────────────────────────
+
+/**
+ * ARC-CLOSE — consolidate-when-input-stops. True once the session has rested
+ * (no new member for `restThresholdMs`). The caller owns the clock; this is the
+ * pure predicate the Theme re-cluster fires behind (rest, not wall-time rhythm).
+ */
+export function ffzArcClosed(idleMs: number, restThresholdMs: number): boolean {
+  return idleMs >= restThresholdMs && restThresholdMs > 0;
+}
+
+/**
+ * The MDL/modularity guard: accept a re-cluster ONLY if the modularity GAIN pays
+ * its description-length cost. The gain (newModularity − prevModularity) scaled by
+ * the evidence (edge/member count, in bits) must clear the segment-header cost
+ * `mdlBits`. A gain that does not pay is rejected — the prior clustering stands
+ * (no churn, no thrash on noise). Pure; the compute that produces the modularities
+ * is the deferred follow-up.
+ */
+export function ffzAcceptRecluster(args: {
+  prevModularity: number;
+  newModularity: number;
+  evidenceBits: number;
+  mdlBits?: number;
+}): boolean {
+  const mdl = args.mdlBits ?? MEASURE_SERVO_DEFAULTS.mdlBits;
+  const gain = args.newModularity - args.prevModularity;
+  if (gain <= 0) return false;
+  return gain * args.evidenceBits > mdl;
+}

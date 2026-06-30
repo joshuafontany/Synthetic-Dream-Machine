@@ -114,6 +114,33 @@ def test_drawer_io_export_then_apply_round_trip(tmp_path):
     assert _json_lines(exp2.stdout) == []
 
 
+def test_drawer_io_embeddings_reads_stored_vectors_in_session_order(tmp_path):
+    """The FFZ Measure servo's cosine feed: read STORED vectors back, ordered per
+    session by (source_file, chunk_index). Never re-embeds (model-agnostic)."""
+    from mempalace.palace import get_collection
+
+    palace_path = os.path.join(str(tmp_path), ".mempalace", "palace")
+    os.makedirs(palace_path, exist_ok=True)
+    col = get_collection(palace_path, create=True, _skip_identity_check=True)
+    # Two drawers in one session, out of ingest order — the command must re-sort by chunk_index.
+    col.upsert(
+        ids=["d2", "d1"],
+        documents=["second", "first"],
+        metadatas=[
+            {"wing": "w1", "source_file": "claude__s", "chunk_index": 1},
+            {"wing": "w1", "source_file": "claude__s", "chunk_index": 0},
+        ],
+        embeddings=[[0.0, 1.0], [1.0, 0.0]],
+    )
+
+    out = _run(["drawer_io.py", "embeddings", "--wing", "w1"], home=tmp_path)
+    assert out.returncode == 0, out.stderr
+    rows = _json_lines(out.stdout)
+    assert [r["id"] for r in rows] == ["d1", "d2"]  # chunk_index 0 before 1
+    assert rows[0]["embedding"] == [1.0, 0.0]
+    assert rows[0]["chunk_index"] == 0 and rows[0]["source_file"] == "claude__s"
+
+
 # ---------------------------------------------------------------------------
 # astpalace_io serve — ping · put · get over NDJSON (real .astpalace ChromaDB)
 # ---------------------------------------------------------------------------
