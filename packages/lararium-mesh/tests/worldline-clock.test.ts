@@ -10,7 +10,7 @@ import { describe, test, expect } from "vitest";
 import {
   ffzZero,
   ffzCompare,
-  ffzCausalCompare,
+  itcCompare,
   worldlineClockFor,
   segmentTick,
   groundingTick,
@@ -124,13 +124,13 @@ describe("the two reads stay SEPARATE — rhythmic LWW vs causal partial-order",
     expect(ffzCompare(a, b)).toBe(-1);
   });
 
-  test("ffzCausalCompare CAN say concurrent — siblings sharing no merge-ancestry", () => {
+  test("itcCompare CAN say concurrent — siblings sharing no merge-ancestry", () => {
     const [x0, y0] = itcFork(itcSeed());
     const x = itcEvent(x0);
     const y = itcEvent(y0);
-    expect(ffzCausalCompare(x, y)).toBe("concurrent");
+    expect(itcCompare(x, y)).toBe("concurrent");
     // and it still reads before/after where history orders
-    expect(ffzCausalCompare(itcSeed(), itcEvent(itcSeed()))).toBe("before");
+    expect(itcCompare(itcSeed(), itcEvent(itcSeed()))).toBe("before");
   });
 });
 
@@ -160,8 +160,8 @@ describe("worldline causal partial-order — rides ITC, concurrent-capable", () 
     const after1 = c.stamps["run.a"]!;
     c = worldlineInject(c, "run.a");
     const after2 = c.stamps["run.a"]!;
-    expect(ffzCausalCompare(before, after1)).toBe("before");
-    expect(ffzCausalCompare(after1, after2)).toBe("before");
+    expect(itcCompare(before, after1)).toBe("before");
+    expect(itcCompare(after1, after2)).toBe("before");
   });
 
   test("handback = join: the parent absorbs the concurrent child, reads AFTER it; child retires", () => {
@@ -174,7 +174,7 @@ describe("worldline causal partial-order — rides ITC, concurrent-capable", () 
     c = worldlineHandback(c, "run", "run.child");
     expect(c.stamps["run.child"]).toBeUndefined(); // dissolved at handback
     // the reunited parent's history now dominates the child's pre-handback history
-    expect(ffzCausalCompare(c.stamps["run"]!, childAtHandback)).toBe("after");
+    expect(itcCompare(c.stamps["run"]!, childAtHandback)).toBe("after");
   });
 
   test("unknown handles throw — the registry never invents a worldline", () => {

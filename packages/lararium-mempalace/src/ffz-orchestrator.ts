@@ -11,10 +11,11 @@
  *      (source_file, chunk_index), via `drawer_io.py embeddings` (the CONTENT plane,
  *      live). FORM/STRUCTURE planes (formpalace/astpalace move/AST vectors keyed by
  *      verbatim_sha) are SCOPED — see the scope note below; absent them the quorum
- *      degrades gracefully to the one CONTENT plane (the 1-plane {@link measureStep}).
+ *      degrades gracefully to the one CONTENT plane (the N=1 {@link quorumStep} path).
  *   2. RUN — per session: the Measure servo over the ordered vectors → a segment LABEL
- *      per drawer (the {@link measureStep} one-plane servo, or {@link quorumStep} when a
- *      multi-plane drift feed is present). Theme: the wing's drawer-graph clustered
+ *      per drawer ({@link quorumStep} always — content as plane-0, derived from the embeddings
+ *      via {@link centroidDriftStep} when no multi-plane drift feed rides). Theme: the wing's
+ *      drawer-graph clustered
  *      (networkx, in `drawer_io.py cluster`) + the {@link ffzAcceptRecluster} MDL guard.
  *      Beat: the drawer's `chunk_index` (free, from the readback).
  *   3. STAMP-BACK — overlay the committed fluid-band cells onto each drawer's EXISTING
@@ -50,8 +51,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import {
-  measureServoInit,
-  measureStep,
+  centroidDriftStep,
   quorumServoInit,
   quorumStep,
   ffzMembershipAddress,
@@ -89,9 +89,9 @@ export interface DrawerVector {
   readonly verbatimSha?: string;
   /**
    * OPTIONAL multi-plane per-step DRIFT signals `[content, form, structure, …]` (higher =
-   * more drift on that plane). Present ⇒ the {@link quorumStep} 3-plane servo runs; absent
-   * ⇒ the 1-plane {@link measureStep} over `embedding`. The quorum degrades gracefully to
-   * the planes present — this is the form/structure feed seam (today: unfed → 1-plane).
+   * more drift on that plane). Present ⇒ the {@link quorumStep} 3-plane servo fuses them; absent
+   * ⇒ {@link quorumStep} at N=1 over the content drift derived from `embedding`. The quorum
+   * degrades gracefully to the planes present — the form/structure feed seam (today: unfed → N=1).
    */
   readonly planes?: readonly number[];
 }
@@ -222,9 +222,11 @@ export function overlayFfzAddress(
 
 /**
  * Run the Measure servo over ONE session's vectors (already ordered by chunk_index) →
- * a segment LABEL per drawer id. Uses the 3-plane {@link quorumStep} when a `planes` drift
- * feed rides the records (graceful degradation to the planes present), else the 1-plane
- * {@link measureStep} over the content embeddings. PURE.
+ * a segment LABEL per drawer id. ALWAYS routes through {@link quorumStep} (the C-0 collapse —
+ * content is plane-0): when a multi-plane `planes` drift feed rides the records it fuses those
+ * planes; absent it, the content drift is derived from the embeddings ({@link centroidDriftStep})
+ * as the sole plane-0 — `effGong = min(quorumGong, 1) = 1` reproduces the one-plane gong
+ * byte-for-byte. Behaviorally identical at 1-plane (Strand A wires the 2nd plane later). PURE.
  */
 export function deriveMeasureLabels(
   sessionVectors: readonly DrawerVector[],
@@ -232,23 +234,27 @@ export function deriveMeasureLabels(
 ): { labels: Map<string, string>; gongs: number; planes: number } {
   const labels = new Map<string, string>();
   let gongs = 0;
-  const planes = sessionVectors.find((v) => v.planes && v.planes.length > 1)?.planes?.length ?? 1;
+  const multiPlane = sessionVectors.find((v) => v.planes && v.planes.length > 1)?.planes?.length;
+  const planes = multiPlane ?? 1;
 
-  if (planes > 1) {
-    // quorumServoInit's param infers the literal `3` (its default = MEASURE_PLANES.length);
-    // the runtime builds `planeCount`-length arrays for any N, so widen the call site.
-    let st = quorumServoInit(planes as 3);
+  if (multiPlane) {
+    let st = quorumServoInit(multiPlane);
     for (const v of sessionVectors) {
-      const drift = v.planes && v.planes.length === planes ? v.planes : new Array(planes).fill(0);
+      const drift = v.planes && v.planes.length === multiPlane ? v.planes : new Array(multiPlane).fill(0);
       const step = quorumStep(st, drift, servo);
       st = step.state;
       labels.set(v.id, step.label);
       if (step.gonged) gongs += 1;
     }
   } else {
-    let st = measureServoInit();
+    // CONTENT-only: derive the content drift against the running centroid, feed quorumStep at N=1.
+    let st = quorumServoInit(1);
+    let centroid: readonly number[] | null = null;
     for (const v of sessionVectors) {
-      const step = measureStep(st, v.embedding, servo);
+      const openCount = st.count;
+      const { drift, centroid: folded } = centroidDriftStep(centroid, v.embedding, openCount);
+      const step = quorumStep(st, [drift], servo);
+      centroid = step.gonged || openCount === 0 ? [...v.embedding] : folded;
       st = step.state;
       labels.set(v.id, step.label);
       if (step.gonged) gongs += 1;

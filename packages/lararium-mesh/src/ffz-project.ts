@@ -22,7 +22,8 @@
  *
  * RHYTHM-ONLY (the PATH-B cut): `lar_ffz` carries ZERO causality. Co-depth paces the
  * grain (how near two rhythms sit); it never orders history — causal order rides the
- * edge-DAG / ffzCausalCompare (ffz-clock.ts), which this module does NOT touch.
+ * edge-DAG / itcCompare (itc.ts) / worldlineCompare (worldline-causal.ts), which this
+ * module does NOT touch.
  *
  * Address shape — `"<profile>/<Theme>.<Arc>.<Measure>.<Beat>.<Pulse>"`, ordered
  * COARSE→FINE so a coarser read drops trailing bands cleanly (prefix-truncatable; see
@@ -198,92 +199,84 @@ export function ffzLca(a: string, b: string): string {
 }
 
 // ───────────────────────────────────────────────────────────────────────────
-// MEASURE — the one servo (a continuous→discrete Schmitt-trigger gong).
+// MEASURE — the one-plane servo (a continuous→discrete Schmitt-trigger gong).
 //
 // The Measure band is the SINGLE hinge where the FFZ breathes continuously and
 // COMMITS on a discrete GONG (the topic-shift wavefront). Between gongs the
-// φ-bands free-run; this servo is the only continuous→discrete mechanism in the
-// schema. The Measure cell it emits is a segment LABEL ("which-segment"), never
-// a count — the running internal `count` is bookkeeping the address never sees.
+// φ-bands free-run. The Measure cell it emits is a segment LABEL ("which-
+// segment"), never a count.
+//
+// COLLAPSE (C-0): the one-plane Measure path is now PLANE-0 of the N-plane
+// quorum servo below. {@link measureStep} is a thin back-compat wrapper —
+// {@link centroidDriftStep} derives the content drift (`1 − cosine` against the
+// running centroid) and {@link quorumStep} at N=1 makes the decision, where
+// `effGong = min(quorumGong, 1) = 1` reproduces the single-plane gong byte-for-
+// byte. The whole FAST/SLOW/MDL/FLOOR/CEIL/Schmitt decision lives ONCE, in
+// {@link schmittGongCore} (shared by both paths).
 //
 // SIGNAL — the cosine of incoming content against the running centroid of the
 // current segment. The vectors are the nomic embeddings the palace already holds
 // (read back from chroma; this servo never embeds, it only consumes vectors).
-//
-// TWO-LOOP (nalu-shaped) THRESHOLD:
-//   FAST  — fire when the cohesion-drop is an outlier vs the within-segment
-//           cohesion baseline (an EWMA mean + EWMA variance → a z-score).
-//   SLOW  — re-anchor the expected segment length (a BOCPD-style hazard λ,
-//           EWMA'd per session) so the bar RELAXES as a segment ages past λ.
-//   MDL   — a split must pay its segment-header cost (the drop's Gaussian
-//           surprise, in bits, must clear `mdlBits`) — stops marginal splits.
-//   FLOOR — no gong before `minSegment` members — stops churn.
-//   CEIL  — force a gong at `maxSegment` members — stops staleness.
-//
-// Hysteresis (the Schmitt part): after a gong the trigger DISARMS; it re-arms
-// only once the new segment settles (a coherent member, z ≤ reArmZ), so a slow
-// monotone drift cannot machine-gun gongs on consecutive steps.
 // ───────────────────────────────────────────────────────────────────────────
 
-/** Tunables for {@link measureStep}. All have defaults via {@link MEASURE_SERVO_DEFAULTS}. */
-export interface MeasureServoConfig {
-  /** FAST: the z-score outlier bar a cohesion-drop must clear to gong. */
-  readonly zThreshold: number;
-  /** A floor the relaxed bar never sinks below (except the CEIL force). */
-  readonly zFloor: number;
-  /** EWMA smoothing for the within-segment cohesion baseline (mean + variance). */
+/**
+ * The SHARED servo tunables — the seven keys the one-plane Measure path and the N-plane
+ * quorum path overlap on. {@link QUORUM_SERVO_DEFAULTS} spreads this base + adds the
+ * quorum-only keys; {@link MEASURE_SERVO_DEFAULTS} aliases it (back-compat).
+ */
+export interface ServoBaseConfig {
+  /** EWMA smoothing for the per-plane baselines AND the cross-plane correlation. */
   readonly ewmaAlpha: number;
-  /** SLOW: the BOCPD-style expected segment length (re-anchored EWMA per session). */
-  readonly hazardLambda: number;
-  /** How fast the z bar relaxes once a segment ages past λ (per extra member). */
-  readonly ageRelax: number;
-  /** MDL: the segment-header cost (bits) a split's surprise must clear. */
+  /** MDL: the segment-header cost (bits) a split's fused surprise must clear. */
   readonly mdlBits: number;
   /** FLOOR: no gong before this many members in the current segment. */
   readonly minSegment: number;
   /** CEIL: force a gong once the current segment reaches this many members. */
   readonly maxSegment: number;
-  /** Re-arm hysteresis: the trigger re-arms once a member's z drops to/below this. */
+  /** SLOW: the BOCPD-style expected segment length (re-anchored EWMA), relaxes the MDL bar with age. */
+  readonly hazardLambda: number;
+  /** How fast the MDL bar relaxes once a segment ages past λ (per extra member). */
+  readonly ageRelax: number;
+  /** Re-arm hysteresis: the trigger re-arms once the segment settles to/below this. */
   readonly reArmZ: number;
 }
 
-export const MEASURE_SERVO_DEFAULTS: MeasureServoConfig = {
-  zThreshold: 3.0,
-  zFloor: 1.0,
+/** The shared base defaults — folded into both the Measure alias and the quorum spread. */
+export const SERVO_DEFAULTS: ServoBaseConfig = {
   ewmaAlpha: 0.3,
-  hazardLambda: 12,
-  ageRelax: 0.05,
   mdlBits: 4.0,
   minSegment: 3,
   maxSegment: 48,
+  hazardLambda: 12,
+  ageRelax: 0.05,
   reArmZ: 0.5,
 };
 
 /**
- * The servo's running state — PURE data, carried between {@link measureStep} calls.
- * `count`/`cohMean`/`cohVar`/`lambdaEff`/`armed` are internal bookkeeping; only
- * `segmentOrdinal` surfaces (as the Measure LABEL). Never serialized into an address.
+ * Tunables for {@link measureStep} — now the {@link ServoBaseConfig} base. The retired
+ * one-plane FAST loop (zThreshold/zFloor) gives way to the quorum `gate` + age-relaxed MDL;
+ * the name stays exported for back-compat callers.
+ */
+export type MeasureServoConfig = ServoBaseConfig;
+
+/** Back-compat alias: the Measure servo's defaults ARE the shared base. */
+export const MEASURE_SERVO_DEFAULTS: MeasureServoConfig = SERVO_DEFAULTS;
+
+/**
+ * The one-plane Measure servo's running state — now a THIN wrapper (the C-0 collapse): a
+ * content centroid tracker beside the underlying {@link QuorumServoState} at N=1 (content =
+ * plane-0). Only the quorum state's `segmentOrdinal` surfaces (as the Measure LABEL).
  */
 export interface MeasureServoState {
-  /** The running centroid of the current segment (mean of its member vectors). */
+  /** The running centroid of the current segment (the content vector tracker). */
   readonly centroid: readonly number[] | null;
-  /** Members in the current segment so far (internal — NEVER the emitted label). */
-  readonly count: number;
-  /** EWMA of within-segment cohesion (the baseline the drop reads against). */
-  readonly cohMean: number;
-  /** EWMA variance of within-segment cohesion. */
-  readonly cohVar: number;
-  /** The re-anchored expected segment length (BOCPD hazard λ, EWMA'd). */
-  readonly lambdaEff: number;
-  /** Which segment we are in — the Measure cell LABEL seed (a label, not a count). */
-  readonly segmentOrdinal: number;
-  /** Schmitt arming: false right after a gong, true once the new segment settles. */
-  readonly armed: boolean;
+  /** The underlying single-plane quorum-servo state (content = plane-0). */
+  readonly qstate: QuorumServoState;
 }
 
 /** A fresh servo state — segment 0 opens on the first {@link measureStep} (no gong). */
 export function measureServoInit(): MeasureServoState {
-  return { centroid: null, count: 0, cohMean: 1, cohVar: 0.01, lambdaEff: NaN, segmentOrdinal: 0, armed: true };
+  return { centroid: null, qstate: quorumServoInit(1) };
 }
 
 const EPS = 1e-9;
@@ -302,6 +295,32 @@ export function ffzCosine(a: readonly number[], b: readonly number[]): number {
   return dot / (Math.sqrt(na) * Math.sqrt(nb));
 }
 
+/** The result of one {@link centroidDriftStep}: the raw content drift + the folded centroid. */
+export interface CentroidDrift {
+  /** The raw drift `1 − cosine(vector, centroid)` (monotone; 0 = perfectly coherent). */
+  readonly drift: number;
+  /** The centroid folded with this member (seeded to the member on a null/opening centroid). */
+  readonly centroid: readonly number[];
+}
+
+/**
+ * The per-plane VECTOR tracker — derive a member's raw drift against the running centroid and
+ * fold it in. `drift = 1 − ffzCosine(vector, centroid)` (monotone: more drift = less cohesion);
+ * the centroid folds as the running mean `(c·k + v)/(k+1)` over `count` prior members. A null
+ * centroid (the segment opening) SEEDS to the member with drift 0. PURE — it feeds the one-plane
+ * {@link measureStep} (content as plane-0 of {@link quorumStep}).
+ */
+export function centroidDriftStep(
+  centroid: readonly number[] | null,
+  vector: readonly number[],
+  count = 0,
+): CentroidDrift {
+  if (centroid == null || count === 0) return { drift: 0, centroid: [...vector] };
+  const drift = 1 - ffzCosine(vector, centroid);
+  const folded = centroid.map((c, i) => (c * count + (vector[i] ?? 0)) / (count + 1));
+  return { drift, centroid: folded };
+}
+
 /** The result of one servo step: the next state, the Measure LABEL, and whether a gong tripped. */
 export interface MeasureStep {
   readonly state: MeasureServoState;
@@ -312,69 +331,25 @@ export interface MeasureStep {
 }
 
 /**
- * Advance the one servo by one member vector — PURE (returns fresh state, mutates nothing).
- *
- * The opening member of segment 0 is NOT a gong (no wavefront crossed); thereafter a member
- * either CONTINUES the current segment (the φ-band free-runs, the centroid/baseline update) or
- * TRIPS a gong (the FAST/SLOW/MDL/CEIL decision below), opening a new segment whose ordinal
- * becomes its label. The FLOOR blocks a gong before `minSegment`; the CEIL forces one at
- * `maxSegment` regardless of cohesion (staleness); hysteresis blocks repeat-fires until re-armed.
+ * Advance the one-plane Measure servo by one member vector — PURE. The C-0 collapse: derive the
+ * content drift against the running centroid ({@link centroidDriftStep}) and route it as plane-0
+ * through {@link quorumStep} at N=1, where `effGong = min(quorumGong, 1) = 1` reproduces the
+ * single-plane gong byte-for-byte (the parity guard). A thin back-compat wrapper (external/test
+ * callers keep the same shape); the decision math lives once, in the quorum servo + {@link
+ * schmittGongCore}. drift = `1 − cosine` is a monotone, variance-preserving transform of the old
+ * cohesion signal, so the standardized z (hence every label) is identical on the one-plane path.
  */
 export function measureStep(
   state: MeasureServoState,
   vector: readonly number[],
   config: Partial<MeasureServoConfig> = {},
 ): MeasureStep {
-  const cfg = { ...MEASURE_SERVO_DEFAULTS, ...config };
-  const lambda = Number.isNaN(state.lambdaEff) ? cfg.hazardLambda : state.lambdaEff;
-
-  // The opening of segment 0 — establish the first centroid, no gong.
-  if (state.centroid == null || state.count === 0) {
-    const next: MeasureServoState = {
-      centroid: [...vector], count: 1, cohMean: 1, cohVar: VAR_SEED,
-      lambdaEff: lambda, segmentOrdinal: state.segmentOrdinal, armed: true,
-    };
-    return { state: next, label: String(state.segmentOrdinal), gonged: false };
-  }
-
-  // The cohesion of the incoming member against the established segment centroid.
-  const coh = ffzCosine(vector, state.centroid);
-  const sd = Math.sqrt(state.cohVar + EPS);
-  const z = (state.cohMean - coh) / sd;          // positive z = a cohesion DROP
-  const surpriseBits = (z * z) / (2 * Math.LN2); // Gaussian surprise of the drop, in bits
-
-  // The relaxed bar: drops as the segment ages past the (re-anchored) expected length λ.
-  const effZ = Math.max(cfg.zFloor, cfg.zThreshold - cfg.ageRelax * Math.max(0, state.count - lambda));
-
-  const ceil = state.count >= cfg.maxSegment;    // staleness — force a break
-  const floored = state.count < cfg.minSegment;  // churn guard — too soon to break
-  const fastFire = state.armed && !floored && z > effZ && surpriseBits > cfg.mdlBits;
-  const gong = ceil || fastFire;
-
-  if (gong) {
-    // Re-anchor λ (SLOW loop) from the segment we just closed, then open the new one
-    // from THIS member; its ordinal is its label. Disarm (Schmitt) until it settles.
-    const lambdaEff = (1 - cfg.ewmaAlpha) * lambda + cfg.ewmaAlpha * state.count;
-    const ordinal = state.segmentOrdinal + 1;
-    const next: MeasureServoState = {
-      centroid: [...vector], count: 1, cohMean: 1, cohVar: VAR_SEED,
-      lambdaEff, segmentOrdinal: ordinal, armed: false,
-    };
-    return { state: next, label: String(ordinal), gonged: true };
-  }
-
-  // CONTINUE the segment: fold the member into the centroid + update the EWMA baseline.
-  const k = state.count;
-  const centroid = state.centroid.map((c, i) => (c * k + (vector[i] ?? 0)) / (k + 1));
-  const dev = coh - state.cohMean;
-  const cohMean = (1 - cfg.ewmaAlpha) * state.cohMean + cfg.ewmaAlpha * coh;
-  const cohVar = (1 - cfg.ewmaAlpha) * state.cohVar + cfg.ewmaAlpha * dev * dev;
-  const armed = state.armed || z <= cfg.reArmZ; // re-arm once the new segment settles
-  const next: MeasureServoState = {
-    centroid, count: k + 1, cohMean, cohVar, lambdaEff: lambda,
-    segmentOrdinal: state.segmentOrdinal, armed,
-  };
-  return { state: next, label: String(state.segmentOrdinal), gonged: false };
+  const openCount = state.qstate.count;
+  const { drift, centroid: folded } = centroidDriftStep(state.centroid, vector, openCount);
+  const step = quorumStep(state.qstate, [drift], config);
+  // On a gong (or the opening) the new segment's centroid SEEDS to this member; else fold.
+  const centroid = step.gonged || openCount === 0 ? [...vector] : folded;
+  return { state: { centroid, qstate: step.state }, label: step.label, gonged: step.gonged };
 }
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -567,20 +542,16 @@ export interface QuorumServoConfig {
 }
 
 export const QUORUM_SERVO_DEFAULTS: QuorumServoConfig = {
-  ewmaAlpha: 0.3,
+  // The seven shared keys (ewmaAlpha · mdlBits · minSegment · maxSegment · hazardLambda ·
+  // ageRelax · reArmZ) fold in from the one base; the quorum-only keys add below.
+  ...SERVO_DEFAULTS,
   gate: 2.0,
   vetoGate: 2.0,
   screamZ: 3.0,
   coFireWindow: 3,
   quorumFirm: 2,
   quorumGong: 3,
-  mdlBits: 4.0,
   mdlFloor: 1.0,
-  minSegment: 3,
-  maxSegment: 48,
-  hazardLambda: 12,
-  ageRelax: 0.05,
-  reArmZ: 0.5,
   ridge: 0.05,
   whiten: true,
 };
@@ -610,8 +581,9 @@ export interface QuorumServoState {
   readonly armed: boolean;
 }
 
-/** A fresh quorum-servo over `planeCount` planes (default 3: content·form·structure). */
-export function quorumServoInit(planeCount = MEASURE_PLANES.length): QuorumServoState {
+/** A fresh quorum-servo over `planeCount` planes (default 3: content·form·structure; N=1 = the
+ *  collapsed one-plane Measure path). */
+export function quorumServoInit(planeCount: number = MEASURE_PLANES.length): QuorumServoState {
   return {
     planes: Array.from({ length: planeCount }, () => ({ mean: 0, var: VAR_SEED })),
     corr: identityMatrix(planeCount),
@@ -642,6 +614,63 @@ export interface QuorumStep {
   readonly perPlaneZ: readonly number[];
   /** Per-plane whitened (decorrelated) z — diagnostic. */
   readonly whitenedZ: readonly number[];
+}
+
+/** The minimal Schmitt-state {@link schmittGongCore} reads (a structural subset of the servo states). */
+export interface SchmittGongState {
+  /** Members in the current segment so far. */
+  readonly count: number;
+  /** The re-anchored expected segment length (BOCPD hazard λ, EWMA'd; NaN seeds to hazardLambda). */
+  readonly lambdaEff: number;
+  /** Schmitt arming: false right after a gong, true once the segment settles. */
+  readonly armed: boolean;
+  /** Which segment we are in — the LABEL seed. */
+  readonly segmentOrdinal: number;
+}
+
+/** The verdict of {@link schmittGongCore} — the gong, the next ordinal/λ, and the next arming. */
+export interface SchmittGongResult {
+  readonly gong: boolean;
+  readonly ordinal: number;
+  readonly lambdaEff: number;
+  readonly armed: boolean;
+}
+
+/**
+ * The SHARED gong decision — the one continuous→discrete commit BOTH the one-plane Measure path
+ * (via {@link measureStep}) and the N-plane {@link quorumStep} ride. Given the fused surprise
+ * (bits), whether the FAST trigger `fired`, and whether the segment `settled` (for re-arming),
+ * it returns the gong verdict + the next segment ordinal, re-anchored λ, and arming. PURE.
+ *
+ *   FLOOR — no gong before `minSegment` members (churn guard).
+ *   CEIL  — force a gong at `maxSegment` members (staleness).
+ *   MDL   — the fused surprise must clear `effMdl = max(mdlFloor, mdlBits − ageRelax·max(0,
+ *           count−λ))`; the bar RELAXES as a segment ages past its expected length λ (BOCPD slow).
+ *   λ-reanchor — on a gong, EWMA the closed segment's length back into λ.
+ *   Schmitt — the `armed` gate blocks fast repeat-fires; re-arms once `settled`.
+ */
+export function schmittGongCore(
+  state: SchmittGongState,
+  fusedBits: number,
+  fired: boolean,
+  settled: boolean,
+  cfg: Pick<QuorumServoConfig, "minSegment" | "maxSegment" | "mdlBits" | "mdlFloor" | "hazardLambda" | "ageRelax" | "ewmaAlpha">,
+): SchmittGongResult {
+  const lambda = Number.isNaN(state.lambdaEff) ? cfg.hazardLambda : state.lambdaEff;
+  const floored = state.count < cfg.minSegment;
+  const ceil = state.count >= cfg.maxSegment;
+  const effMdl = Math.max(cfg.mdlFloor, cfg.mdlBits - cfg.ageRelax * Math.max(0, state.count - lambda));
+  const fastGong = state.armed && !floored && fired && fusedBits > effMdl;
+  const gong = ceil || fastGong;
+  if (gong) {
+    return {
+      gong: true,
+      ordinal: state.segmentOrdinal + 1,
+      lambdaEff: (1 - cfg.ewmaAlpha) * lambda + cfg.ewmaAlpha * state.count,
+      armed: false,
+    };
+  }
+  return { gong: false, ordinal: state.segmentOrdinal, lambdaEff: lambda, armed: state.armed || settled };
 }
 
 /**
@@ -704,24 +733,28 @@ export function quorumStep(
   }
   const fusedBits = Math.max(0, fusedQuad) / (2 * Math.LN2);
 
-  // 4. CO-FIRING WINDOW + LADDER — count planes firing within the window.
+  // 4. CO-FIRING WINDOW + LADDER — count planes firing within the window. The ladder CLAMPS
+  //    to the plane count (the C-0 load-bearing fix): effGong = min(quorumGong, n), so N=1
+  //    gongs on its single plane (reproducing the one servo), N=2 needs both, N=3 unchanged.
   const win = [...state.window, firePos].slice(-cfg.coFireWindow);
   const inWindow = new Array(n).fill(false) as boolean[];
   for (const flags of win) for (let p = 0; p < n; p++) if (flags[p]) inWindow[p] = true;
   const quorum = inWindow.filter(Boolean).length;
+  const effGong = Math.min(cfg.quorumGong, n);
+  const effFirm = Math.min(cfg.quorumFirm, n);
   const level: MeasureLevel =
-    quorum >= cfg.quorumGong ? "gong" : quorum >= cfg.quorumFirm ? "firm" : quorum >= 1 ? "provisional" : "none";
+    quorum >= effGong ? "gong" : quorum >= effFirm ? "firm" : quorum >= 1 ? "provisional" : "none";
 
   // 5. CONFLICT GUARD (Signal-Jam) — a lone scream, or a live positive/negative disagreement.
   const anyPos = firePos.some(Boolean);
-  const conflict = (anyScream && quorum < cfg.quorumFirm) || (anyPos && anyVeto);
+  const conflict = (anyScream && quorum < effFirm) || (anyPos && anyVeto);
 
-  // DECISION — the gong needs full quorum + no veto + paid MDL (or the CEIL forces it).
-  const floored = state.count < cfg.minSegment;
-  const ceil = state.count >= cfg.maxSegment;
-  const effMdl = Math.max(cfg.mdlFloor, cfg.mdlBits - cfg.ageRelax * Math.max(0, state.count - lambda));
-  const fastGong = state.armed && !floored && quorum >= cfg.quorumGong && !anyVeto && fusedBits > effMdl;
-  const gong = ceil || fastGong;
+  // DECISION — the FAST fire is full (clamped) quorum + no veto; the SHARED gong core then
+  // applies FLOOR / CEIL / age-relaxed MDL / λ-reanchor / Schmitt arm-rearm (the one decision
+  // both this and the one-plane measureStep ride).
+  const fired = quorum >= effGong && !anyVeto;
+  const settled = w.every((wi) => Math.abs(wi) <= cfg.reArmZ);
+  const core = schmittGongCore(state, fusedBits, fired, settled, cfg);
 
   // Calibration updates (per-plane baselines + cross-plane correlation), carried either way.
   const planes = state.planes.map((ps, p) => {
@@ -736,23 +769,19 @@ export function quorumStep(
     row.map((v, j) => (1 - cfg.ewmaAlpha) * v + cfg.ewmaAlpha * (z[i] ?? 0) * (z[j] ?? 0)),
   );
 
-  if (gong) {
-    const lambdaEff = (1 - cfg.ewmaAlpha) * lambda + cfg.ewmaAlpha * state.count;
-    const ordinal = state.segmentOrdinal + 1;
+  if (core.gong) {
     const next: QuorumServoState = {
-      planes, corr, window: [], count: 1, segmentOrdinal: ordinal, lambdaEff, armed: false,
+      planes, corr, window: [], count: 1, segmentOrdinal: core.ordinal, lambdaEff: core.lambdaEff, armed: false,
     };
     return {
-      state: next, label: String(ordinal), gonged: true, level: "gong", conflict: false,
+      state: next, label: String(core.ordinal), gonged: true, level: "gong", conflict: false,
       quorum, fusedBits, perPlaneZ: z, whitenedZ: w,
     };
   }
 
-  const settled = w.every((wi) => Math.abs(wi) <= cfg.reArmZ);
-  const armed = state.armed || settled;
   const next: QuorumServoState = {
     planes, corr, window: win, count: state.count + 1,
-    segmentOrdinal: state.segmentOrdinal, lambdaEff: lambda, armed,
+    segmentOrdinal: state.segmentOrdinal, lambdaEff: core.lambdaEff, armed: core.armed,
   };
   return { state: next, label: String(state.segmentOrdinal), gonged: false, level, conflict, quorum, fusedBits, perPlaneZ: z, whitenedZ: w };
 }

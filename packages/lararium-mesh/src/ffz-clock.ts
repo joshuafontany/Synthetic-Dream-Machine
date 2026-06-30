@@ -21,8 +21,6 @@
  * Law of Fives: L0–L4 map onto OODA_HA_5 stances (PENTA_2_CLOCK_ALIGNMENT).
  */
 
-import { itcCompare, type ItcStamp, type ItcOrder } from "./itc.js";
-
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -170,8 +168,8 @@ export function ffzTick(clock: FfzClock, level = 0): FfzClock {
  * "concurrent" — a total order can't (canon flags exactly this: agent-worldline #time,
  * #open). The PATH-B cut holds: causality does NOT ride the FfzClock; it rides the
  * worldline ITC stamp / the edge-DAG. For the concurrent-capable causal read use
- * `ffzCausalCompare` (below) on the two worldlines' ITC stamps. Two functions, one cut:
- * this one paces the rhythm, that one orders the history.
+ * `itcCompare` (itc.ts) / `worldlineCompare` (worldline-causal.ts) on the two worldlines'
+ * ITC stamps. Two reads, one cut: this one paces the rhythm, those order the history.
  */
 export function ffzCompare(a: FfzClock, b: FfzClock): -1 | 0 | 1 {
   const al = a.levels as readonly number[];
@@ -181,19 +179,6 @@ export function ffzCompare(a: FfzClock, b: FfzClock): -1 | 0 | 1 {
       return (al[i] as number) < (bl[i] as number) ? -1 : 1;
   }
   return a.actorId < b.actorId ? -1 : a.actorId > b.actorId ? 1 : 0;
-}
-
-/**
- * The CAUSAL read — concurrent-capable, the read `ffzCompare` structurally cannot give.
- * It reads the worldline ITC stamps (the history), NEVER the FfzClock levels, so the
- * FfzClock stays purely rhythmic (the PATH-B cut: causal rides ITC/the edge-DAG). Two
- * stamps that share no merge-ancestry — neither's history ≤ the other's — read
- * "concurrent" (the lightcone "elsewhere"; siblings of one spawn with no join between
- * them). This is the separation the canon asks for: the rhythmic LWW and the causal
- * partial-order stay TWO functions, never one overloaded compare.
- */
-export function ffzCausalCompare(a: ItcStamp, b: ItcStamp): ItcOrder {
-  return itcCompare(a, b);
 }
 
 /**
