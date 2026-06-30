@@ -97,3 +97,4 @@ export * from "./persona-hd.js";
 export * from "./persona-identity.js";
 export * from "./cabal-place.js";
 export * from "./cabal-place-charter.js";
+export * from "./cabal-place-clock.js";
