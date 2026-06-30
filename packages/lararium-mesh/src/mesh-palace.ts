@@ -476,9 +476,17 @@ export type {
   PointerVerdict as FlowMapVerdict,
 };
 
+/** A FIXED Automerge actorId for read-face projection loads. Automerge's default
+ *  `from` mints a RANDOM actor that lands in the saved bytes, so the SAME public
+ *  projection would hash to a fresh cid every export — breaking the read-face's
+ *  "re-export only when the content hash actually changes" invariant (spurious
+ *  pointer ratchets on every ea-breath). Pinning the actor makes the snapshot a
+ *  PURE function of the public projection's content. */
+const FLOW_MAP_ACTOR_ID = "00000000000000000000000000000000" as const;
+
 /** Load a plain LarDoc projection into a fresh Automerge doc (A.from rejects the readonly interface). */
 function loadDoc(d: LarDoc): Doc<Record<string, unknown>> {
-  return automergeFrom(d as unknown as Record<string, unknown>);
+  return automergeFrom(d as unknown as Record<string, unknown>, FLOW_MAP_ACTOR_ID);
 }
 
 /** Snapshot a mesh-palace doc's PUBLIC FLOW-map (membrane applied) as a content-addressed read-face. */
