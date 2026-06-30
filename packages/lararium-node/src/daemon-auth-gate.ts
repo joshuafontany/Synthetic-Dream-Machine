@@ -175,8 +175,11 @@ export class DaemonAuthGate extends EventEmitter {
 
           // Path (b): host has no keyhive — proxy to the daemon island, which
           // does receiveContactCard + verify in-worker and returns the verdict
-          // plus the peer's Identifier hex for the sharePolicy map.
-          const verdict = await seam.verify(cardBytes, daemonBagUrl, "admin", proof);
+          // plus the peer's Identifier hex for the sharePolicy map. The OPTIONAL
+          // device-delegation edge (Seam B) rides through untouched — the gate
+          // never adjudicates it; the in-worker keyholder verifies it against the
+          // PINNED hearth root.
+          const verdict = await seam.verify(cardBytes, daemonBagUrl, "admin", proof, parsed.edge);
 
           // ENFORCEMENT (V3 step D): the keyholder worker already folded the proof
           // check into `verdict.ok` (it returns ok only on capability AND a verified

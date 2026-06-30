@@ -125,6 +125,13 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    *  a founding card is cached), the vessel composes the V3 leaf transport (LarWSClientAdapter) and
    *  adds it to the Repo — the browser's outbound crossing. */
   relayUrl?:       string;
+  /**
+   * The relay gate's verifying-key hex — the gate-binding the V3 proof commits to (anti-relay;
+   * known OUT-OF-BAND, NEVER trusted from the wire). For a cross-operator crossing this is the
+   * NODE daemon's gate key (so the proof clears against the node's own key). Absent → defaults to
+   * this vessel's own operatorDid (the same-operator leaf, the prior behavior — back-compat).
+   */
+  relayGatePubKey?: string;
   /** URL of the compiled browser daemon island Worker script. */
   daemonWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
@@ -157,7 +164,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     idbName = "lares:vessel", displayName, onPhase,
     genesisSeed,
     genesisCasManifest, genesisCasBaseUrl,
-    daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl,
+    daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl, relayGatePubKey,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -201,16 +208,21 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // LarWSClientAdapter and add it to the Repo: the browser dials the node's gate, runs the V3
   // handshake on the socket, and — on a passing verdict — syncs shared docs (the second spore).
   // FLOW ⊥ AUTHORITY: this is pure authority+sync; the nalu servo / ea-backpressure rides later.
-  // NOTE: the gate admits only a peer holding cap=admin on the node's @daemon — a same-operator leaf
-  // (gatePubKey == own DID) or a device-admitted key. An un-admitted anon dials + fails closed.
+  // NOTE: the gate admits a peer holding cap=admin on the node's @daemon, OR (Seam B) one the
+  // operator device-admitted that carries a valid device-delegation edge pinned to the node's
+  // hearth root. The leaf rides its own device edge (social.deviceEdge) so the in-worker keyholder
+  // can admit it at the operator's-own-device tier. gatePubKey is PROVISIONED out-of-band: for a
+  // cross-operator crossing pass the NODE's gate key (relayGatePubKey); absent → own DID (the
+  // same-operator leaf, prior behavior). An un-admitted anon dials + fails closed.
   if (relayUrl && social.contactCard) {
     const leaf: LeafIdentity = {
       contactCard: social.contactCard,
       peerPubKey:  operatorDid,
       sign:        ed25519SignerFromSeed(operatorSeed),
+      ...(social.deviceEdge ? { edge: social.deviceEdge } : {}),
     };
     const relayAdapter = new LarWSClientAdapter({
-      url: relayUrl, identity: leaf, aud: DAEMON_BAG_ID, gatePubKey: operatorDid,
+      url: relayUrl, identity: leaf, aud: DAEMON_BAG_ID, gatePubKey: relayGatePubKey ?? operatorDid,
     });
     repo.networkSubsystem.addNetworkAdapter(relayAdapter);
   }

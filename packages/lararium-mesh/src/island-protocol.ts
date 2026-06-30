@@ -454,6 +454,12 @@ export interface DaemonMsg_VerifyRequest {
    * `proofVerified` advisory-only until the enforcement flip (D).
    */
   proof?: AuthProofWire;
+  /**
+   * OPTIONAL device-delegation edge (Seam B) relayed from the peer's lar:auth. The in-worker
+   * keyholder verifies it against the PINNED hearth root and admits a device-admitted peer that
+   * holds no cap=admin. Absent → the worker takes the existing admin-cap path unchanged.
+   */
+  edge?: DeviceDelegationTiddler;
 }
 
 /** Island → vessel: the keyhive verdict for a verify-request. */
@@ -1023,6 +1029,7 @@ export function mkDaemonVerifyRequest(opts: {
   bagUrl:    string;
   access:    "read" | "admin";
   proof?:    AuthProofWire;
+  edge?:     DeviceDelegationTiddler;
 }): DaemonMsg_VerifyRequest {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -1032,6 +1039,7 @@ export function mkDaemonVerifyRequest(opts: {
     bagUrl:    opts.bagUrl,
     access:    opts.access,
     ...(opts.proof ? { proof: opts.proof } : {}),
+    ...(opts.edge ? { edge: opts.edge } : {}),
   };
 }
 
@@ -1217,6 +1225,8 @@ export interface AuthVerifierSeam {
     /** V3 proof material relayed from the peer's lar:auth; the in-worker
      *  keyholder verifies it (advisory `proofVerified` until the D flip). */
     proof?: AuthProofWire,
+    /** OPTIONAL device-delegation edge (Seam B) — admits an operator-device-admitted peer. */
+    edge?: DeviceDelegationTiddler,
   ): Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
 }
 

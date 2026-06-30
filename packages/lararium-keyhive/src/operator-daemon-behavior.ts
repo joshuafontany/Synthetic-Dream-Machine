@@ -23,13 +23,13 @@ import {
   makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
-import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
+import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
 /** Vessel-injected daemon seam the platform entry supplies (node folds the telemetry capture SINK
  *  here). Forwarded straight to makeDaemonBehavior — the @daemon always carries the cap; this makes
  *  it live. Absent → the cap stays inert (sink not wired). */
 type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs">;
-import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
+import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
 import { resolveOrMintBinding } from "./resolve-binding.js";
@@ -135,7 +135,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       return keyhive;
     },
 
-    verifyPeer: async (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin", proof?: AuthProofWire) => {
+    verifyPeer: async (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin", proof?: AuthProofWire, edge?: DeviceDelegationTiddler) => {
       if (!kh) return { ok: false, reason: "keyhive not booted" };
       const { id } = await kh.receiveContactCard(cardBytes);
       const verdict = await kh.verify({ presenter: id, bagUrl, access });
@@ -176,6 +176,46 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         return { ok: false, identifier: id, proofVerified, reason: proof ? "V3 proof verification failed" : "V3 proof required" };
       }
 
+      // ADMIN-CAP PATH (unchanged): a satisfied capability admits directly. Under `enforce`
+      // the early return above already guaranteed proofVerified, so this admits on cap + a
+      // verified proof-of-possession exactly as before.
+      if (verdict.ok) {
+        return { ...verdict, identifier: id, proofVerified };
+      }
+
+      // SEAM B — OPERATOR DEVICE-DELEGATION PATH (additive). The peer holds NO cap=admin, but a
+      // device the operator admitted carries the signed root→device edge. Admit it at the
+      // operator's-own-device tier IFF the edge verifies AND binds to THIS proven identity.
+      //
+      // MANDATORY PIN (confused-deputy cure): the edge MUST chain to signerDid — the hearth's
+      // pinned PersonaGroup root (daemonAuth.signerDid, the same root the Binding Gate pins in
+      // bootDaemonKeyhive). An unpinned edge NEVER admits; an absent signerDid is a HARD ERROR,
+      // not a skip. The presenter binding (`edge.deviceDid === id`) ties the operator's grant to
+      // the exact identity that just proved possession of its key (proofVerified, above) — a
+      // device-admitted peer STILL proves it holds its key; the edge only adds the operator's
+      // delegation, it never weakens the V3 proof.
+      if (edge) {
+        const signerDid = daemonAuth.signerDid;
+        if (typeof signerDid !== "string" || signerDid.length === 0) {
+          return { ok: false, identifier: id, proofVerified, reason: "device-delegation: no pinned signerDid in scope — refusing to admit on an unpinned edge" };
+        }
+        const delegation    = await verifyDeviceDelegation(edge, signerDid, { now: Date.now() });
+        const deviceMatches = edge.deviceDid === id;
+        if (delegation.ok && deviceMatches && proofVerified) {
+          // Admitted at the operator's-own-device tier — equivalent flow to admin (it IS the
+          // operator's delegated device). `reason` carries the provenance (survives the worker→host
+          // boundary; the gate ignores it on an ok verdict but it aids audit).
+          return { ok: true, identifier: id, proofVerified, reason: "admitted via operator device-delegation" };
+        }
+        return {
+          ok: false, identifier: id, proofVerified,
+          reason: !delegation.ok  ? `device-delegation rejected: ${delegation.reason ?? "(no reason)"}`
+                : !deviceMatches  ? "device-delegation edge not bound to the presented identity"
+                :                   "device-delegation requires a verified proof-of-possession",
+        };
+      }
+
+      // Neither admin-cap nor a valid edge → the existing denial stands.
       return { ...verdict, identifier: id, proofVerified };
     },
 

@@ -96,6 +96,7 @@ export class LarWSClientAdapter extends WebSocketClientAdapter {
       gatePubKey:  this.#gatePubKey,
       aud:         this.#aud,
       sign:        this.#identity.sign,
+      ...(this.#identity.edge ? { edge: this.#identity.edge } : {}),
       ...(this.#now ? { now: this.#now } : {}),
     };
 

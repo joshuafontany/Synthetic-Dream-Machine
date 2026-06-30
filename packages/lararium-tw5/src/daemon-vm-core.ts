@@ -483,10 +483,11 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
       _registry = registry;
     },
     authSeam: {
-      verify: (cardBytes, bagUrl, access, proof) =>
+      verify: (cardBytes, bagUrl, access, proof, edge) =>
         askIsland("verify", (requestId) => mkDaemonVerifyRequest({
           requestId, cardBytes, bagUrl, access,
           ...(proof ? { proof } : {}),
+          ...(edge ? { edge } : {}),
         })),
     },
     resolveBinding: (fingerprint, recipeTrace) =>

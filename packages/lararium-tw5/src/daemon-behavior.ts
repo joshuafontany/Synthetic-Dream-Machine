@@ -31,6 +31,7 @@ import {
   type DaemonMsg_WorldlineCompareRequest,
   type DaemonMsg_WorldlineTrajectoryRequest,
   type AuthProofWire,
+  type DeviceDelegationTiddler,
   type BatchMode,
   type Verb,
   type CapabilityVerifier,
@@ -65,7 +66,7 @@ export interface DaemonBehaviorOptions {
    * platform entry supplies this closing over the booted keyhive; tw5 stays
    * keyhive-free.
    */
-  verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin", proof?: AuthProofWire)
+  verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin", proof?: AuthProofWire, edge?: DeviceDelegationTiddler)
     => Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
   /**
    * Resolve (or mint+delegate) the @personal/@draft binding pair island-side —
@@ -184,7 +185,7 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
       if (type === "daemon:verify-request") {
         const msg = raw as DaemonMsg_VerifyRequest;
         const answer: Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }> = opts.verifyPeer
-          ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access, msg.proof)
+          ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access, msg.proof, msg.edge)
           : Promise.resolve({ ok: false, reason: "no verifyPeer configured" });
         answer
           .then((r) => post(mkDaemonVerifyResult({

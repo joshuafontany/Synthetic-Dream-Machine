@@ -27,6 +27,7 @@
 
 import * as ed25519 from "@noble/ed25519";
 import { canonicalJsonBytes, hex, hexToBytes } from "./crypto.js";
+import type { DeviceDelegationTiddler } from "./device-delegation.js";
 
 export const AUTH_WIRE_VERSION = "1" as const;
 export type AuthWireVersion = typeof AUTH_WIRE_VERSION;
@@ -72,6 +73,13 @@ export interface LarAuthMsg {
   sig:         string;
   /** Peer timestamp the signature commits to (the verifier recomputes the proof with it). */
   ts?:         string;
+  /**
+   * OPTIONAL device-delegation edge (Seam B). A peer the operator device-admitted carries the
+   * signed root→device edge so the gate can admit it on the operator's-own-device path even
+   * absent a cap=admin grant. Untrusted CRDT input — the worker verifies it against the PINNED
+   * hearth root (verifyDeviceDelegation); a peer that sends none behaves exactly as before.
+   */
+  edge?:       DeviceDelegationTiddler;
   version:     AuthWireVersion;
 }
 
@@ -292,6 +300,8 @@ export async function buildAuthResponse(parts: {
   aud:         string;
   ts:          string;
   sign:        (bytes: Uint8Array) => Promise<string> | string;
+  /** OPTIONAL device-delegation edge ridden alongside the proof (Seam B). */
+  edge?:       DeviceDelegationTiddler;
 }): Promise<LarAuthMsg> {
   const proof = authProofBytes({
     nonce:      parts.nonce,
@@ -307,6 +317,7 @@ export async function buildAuthResponse(parts: {
     nonce:       parts.nonce,
     sig,
     ts:          parts.ts,
+    ...(parts.edge ? { edge: parts.edge } : {}),
     version:     AUTH_WIRE_VERSION,
   };
 }
@@ -333,6 +344,8 @@ export interface PeerHandshake {
   aud:         string;
   /** Ed25519 sign over bytes → hex (operator signer / Signer.trySign). */
   sign:        (bytes: Uint8Array) => Promise<string> | string;
+  /** OPTIONAL device-delegation edge (Seam B) — a device-admitted leaf rides its edge to the gate. */
+  edge?:       DeviceDelegationTiddler;
   /** Clock for the response timestamp (default: now, ISO). */
   now?:        () => string;
 }
@@ -355,6 +368,7 @@ export async function runPeerHandshake(h: PeerHandshake): Promise<{ ok: boolean;
     aud:         h.aud,
     ts:          (h.now ?? (() => new Date().toISOString()))(),
     sign:        h.sign,
+    ...(h.edge ? { edge: h.edge } : {}),
   });
   h.send(auth);
   const verdict = await h.recv();
@@ -376,4 +390,6 @@ export interface LeafIdentity {
   peerPubKey:  string;
   /** Bare-Ed25519 signer over the operator seed → hex. No keyhive. */
   sign:        (bytes: Uint8Array) => Promise<string>;
+  /** OPTIONAL device-delegation edge (Seam B) — a device-admitted leaf presents its edge to admit. */
+  edge?:       DeviceDelegationTiddler;
 }
