@@ -677,11 +677,22 @@ export function schmittGongCore(
  * Advance the 3-plane quorum-servo by one per-plane drift vector — PURE. `drifts[p]` is
  * plane p's raw drift signal on its OWN scale (higher = more drift); the servo standardizes,
  * whitens, sparsifies, fuses, and decides. The opening member seeds baselines with no gong.
+ *
+ * KAPAE DOWN-WEIGHT (strand C): `weight` (default 1) scales THIS member's contribution —
+ * a per-step salience, NOT new state. It rides TWO multiply-points: (1) FUSION — the fused
+ * surprise scales `weight·r·wₚ²` (and the veto branch subtracts `weight·r·wₚ²`), so a
+ * floor-salience member contributes little fused surprise and CANNOT trip a gong on its own
+ * (it still crosses the gate, so it joins the co-firing quorum, but the MDL bar reads its
+ * shrunken fusedBits); (2) CALIBRATION — `alphaEff = ewmaAlpha·weight` slows the per-plane
+ * baselines AND the cross-plane correlation EWMA, so the road-not-taken (a rewound/forked
+ * member) bends the running rhythm only faintly. `weight = 1` reproduces the prior output
+ * BYTE-FOR-BYTE (the parity guard) — both points collapse to the original math.
  */
 export function quorumStep(
   state: QuorumServoState,
   drifts: readonly number[],
   config: Partial<QuorumServoConfig> = {},
+  weight = 1,
 ): QuorumStep {
   const cfg = { ...QUORUM_SERVO_DEFAULTS, ...config };
   const n = drifts.length;
@@ -723,11 +734,11 @@ export function quorumStep(
     const r = rel?.[p] ?? 1;
     const wp = w[p] ?? 0;
     if (wp > cfg.gate) {
-      fusedQuad += r * wp * wp;
+      fusedQuad += weight * r * wp * wp; // kapae down-weight scales this member's surprise
       firePos[p] = true;
       if (wp > cfg.screamZ) anyScream = true;
     } else if (wp < -cfg.vetoGate) {
-      fusedQuad -= r * wp * wp; // a plane DENYING a boundary self-vetoes the pool
+      fusedQuad -= weight * r * wp * wp; // a plane DENYING a boundary self-vetoes the pool
       anyVeto = true;
     }
   }
@@ -757,16 +768,19 @@ export function quorumStep(
   const core = schmittGongCore(state, fusedBits, fired, settled, cfg);
 
   // Calibration updates (per-plane baselines + cross-plane correlation), carried either way.
+  // The kapae down-weight slows the EWMA: alphaEff = ewmaAlpha·weight, so a floor-salience
+  // member barely reshapes the baseline (the road-not-taken bends the rhythm faintly).
+  const alphaEff = cfg.ewmaAlpha * weight;
   const planes = state.planes.map((ps, p) => {
     const d = drifts[p] ?? ps.mean;
     const dev = d - ps.mean;
     return {
-      mean: (1 - cfg.ewmaAlpha) * ps.mean + cfg.ewmaAlpha * d,
-      var: (1 - cfg.ewmaAlpha) * ps.var + cfg.ewmaAlpha * dev * dev,
+      mean: (1 - alphaEff) * ps.mean + alphaEff * d,
+      var: (1 - alphaEff) * ps.var + alphaEff * dev * dev,
     };
   });
   const corr = state.corr.map((row, i) =>
-    row.map((v, j) => (1 - cfg.ewmaAlpha) * v + cfg.ewmaAlpha * (z[i] ?? 0) * (z[j] ?? 0)),
+    row.map((v, j) => (1 - alphaEff) * v + alphaEff * (z[i] ?? 0) * (z[j] ?? 0)),
   );
 
   if (core.gong) {

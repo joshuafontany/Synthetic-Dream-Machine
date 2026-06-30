@@ -238,3 +238,53 @@ describe("CEIL — a long calm run forces a staleness gong (reused from the one 
     expect(firstGong).toBe(max); // count hits max on the (max+1)-th (index max) member
   });
 });
+
+// ───────────────────────────────────────────────────────────────────────────
+// STRAND C — the kapae DOWN-WEIGHT (a per-step salience scaling THIS member's
+// Measure contribution). A floor-salience (rewound/road-not-taken) member: (1)
+// contributes little fused surprise → cannot trip a gong alone; (2) barely
+// reshapes the baseline. weight=1 reproduces the prior output byte-for-byte.
+// ───────────────────────────────────────────────────────────────────────────
+describe("kapae down-weight — a floor salience can't trip a gong, barely bends the rhythm", () => {
+  const FLOOR = 0.05;
+  // A MODERATE tri-plane spike — clears the gate (z≈3.2 > gate 2) so the planes co-fire and
+  // the full-weight fused surprise (~17.7 bits) clears the MDL bar, but is small enough that
+  // the floor-scaled surprise (~0.9 bits) does NOT. A huge spike would gong even at floor.
+  const SPIKE = [0.1, 0.1, 0.1];
+
+  /** Warm a 3-plane servo over a calm run, then take ONE weighted spike step. */
+  function warmThenSpike(spike: number[], weight: number) {
+    let state = quorumServoInit(spike.length);
+    for (const v of calm(8, spike.length)) state = quorumStep(state, v, {}).state;
+    return { before: state, step: quorumStep(state, spike, {}, weight) };
+  }
+
+  test("a tri-plane spike gongs at weight=1 but NOT at floor salience", () => {
+    const full = warmThenSpike(SPIKE, 1).step;
+    const floor = warmThenSpike(SPIKE, FLOOR).step;
+    expect(full.gonged).toBe(true); // the same member, full weight, trips the gong
+    expect(floor.gonged).toBe(false); // floor salience: the fused surprise can't clear the MDL bar
+    // the gate is still crossed (the planes co-fire) — the down-weight throttles the SURPRISE,
+    // not the firing — so the fused bits shrink by ~the weight ratio.
+    expect(floor.fusedBits).toBeLessThan(full.fusedBits * 0.1);
+  });
+
+  test("a floor-salience member barely reshapes the per-plane baseline", () => {
+    const { before, step: full } = warmThenSpike(SPIKE, 1);
+    const floor = warmThenSpike(SPIKE, FLOOR).step;
+    const base0 = before.planes[0].mean;
+    const fullDelta = Math.abs(full.state.planes[0].mean - base0);
+    const floorDelta = Math.abs(floor.state.planes[0].mean - base0);
+    // alphaEff = ewmaAlpha·weight, so the floor member moves the baseline ~weight× as far.
+    expect(floorDelta).toBeCloseTo(fullDelta * FLOOR, 6);
+    expect(floorDelta).toBeLessThan(fullDelta * 0.1);
+  });
+
+  test("PARITY — weight=1 reproduces the unweighted step byte-for-byte", () => {
+    let state = quorumServoInit(3);
+    for (const v of calm(8)) state = quorumStep(state, v, {}).state;
+    const def = quorumStep(state, [1, 1, 1], {}); // the default (no weight arg)
+    const explicit = quorumStep(state, [1, 1, 1], {}, 1); // explicit weight 1
+    expect(explicit).toEqual(def); // whole QuorumStep — state, label, gong, fusedBits, …
+  });
+});

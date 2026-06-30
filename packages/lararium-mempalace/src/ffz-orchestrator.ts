@@ -94,6 +94,22 @@ export interface DrawerVector {
    * degrades gracefully to the planes present — the form/structure feed seam (today: unfed → N=1).
    */
   readonly planes?: readonly number[];
+  /**
+   * OPTIONAL kapae down-weight (strand C) — a per-drawer salience in `(0,1]` (default 1.0)
+   * scaling this member's Measure contribution (read back from `lar_salience`). A rewound /
+   * road-not-taken drawer rides a floor salience: it contributes little fused surprise (cannot
+   * trip a gong alone) and barely reshapes the baseline. {@link deriveMeasureLabels} passes it
+   * as the per-step weight to {@link quorumStep}; absent ⇒ 1 (zero behavior change).
+   */
+  readonly salience?: number;
+  /**
+   * OPTIONAL fork frontier (strand C) — the branch component parsed from `lar_agent_handle`
+   * (`run~frontier`). Present ⇒ the orchestrator groups this drawer by `(sourceFile, frontier)`
+   * (each Arc × frontier runs its OWN Measure pass, so forked branches sharing a source_file
+   * never bleed across the fork) AND overlays the ultrametric Arc cell `sourceFile~frontier`
+   * (so {@link ffzCoDepth} breaks at Arc between branches — forks read concurrent-not-near).
+   */
+  readonly frontier?: string;
 }
 
 /** The Theme-cluster reading (one line of `drawer_io.py cluster`). */
@@ -213,14 +229,16 @@ export function parseFfzCells(address: string): FfzCells {
  */
 export function overlayFfzAddress(
   existing: string,
-  overlay: { measure?: string | number; beat?: string | number; theme?: string | number },
+  overlay: { measure?: string | number; beat?: string | number; theme?: string | number; arc?: string | number },
   fallback: { arc?: string } = {},
 ): string {
   const base = parseFfzCells(existing);
   // Conditional spreads (not undefined-valued keys) — exactOptionalPropertyTypes: an absent
   // cell is OMITTED, which ffzMembershipAddress renders porous; never assigned `undefined`.
   const theme = overlay.theme ?? base.theme;
-  const arc = base.arc ?? fallback.arc;
+  // `overlay.arc` is an OVERRIDE (the ultrametric fork encoding `sourceFile~frontier`),
+  // taking precedence over the birth-stamped Arc; else keep the birth Arc, else the fallback.
+  const arc = overlay.arc ?? base.arc ?? fallback.arc;
   const measure = overlay.measure ?? base.measure;
   const beat = overlay.beat ?? base.beat;
   const cells: FfzCells = {
@@ -316,7 +334,7 @@ export function deriveMeasureLabels(
     let st = quorumServoInit(2);
     for (const v of sessionVectors) {
       const drift = planeDrifts.get(v.id) ?? [0, 0];
-      const step = quorumStep(st, drift, servo);
+      const step = quorumStep(st, drift, servo, v.salience ?? 1);
       st = step.state;
       labels.set(v.id, step.label);
       if (step.gonged) gongs += 1;
@@ -331,7 +349,7 @@ export function deriveMeasureLabels(
     let st = quorumServoInit(multiPlane);
     for (const v of sessionVectors) {
       const drift = v.planes && v.planes.length === multiPlane ? v.planes : new Array(multiPlane).fill(0);
-      const step = quorumStep(st, drift, servo);
+      const step = quorumStep(st, drift, servo, v.salience ?? 1);
       st = step.state;
       labels.set(v.id, step.label);
       if (step.gonged) gongs += 1;
@@ -346,7 +364,7 @@ export function deriveMeasureLabels(
   for (const v of sessionVectors) {
     const openCount = st.count;
     const { drift, centroid: folded } = centroidDriftStep(centroid, v.embedding, openCount);
-    const step = quorumStep(st, [drift], servo);
+    const step = quorumStep(st, [drift], servo, v.salience ?? 1);
     centroid = step.gonged || openCount === 0 ? [...v.embedding] : folded;
     st = step.state;
     labels.set(v.id, step.label);
@@ -371,13 +389,18 @@ export function orchestrateWing(
   // session on verbatim_sha. Absent ⇒ formBySha undefined ⇒ every session stays 1-plane.
   const formBySha = deps.readFormVectors ? deps.readFormVectors(wing) : undefined;
 
-  // Group by source_file (the Arc = session-island), preserving the readback order
-  // (drawer_io.py already sorts by (source_file, chunk_index, id)).
+  // Group by (source_file, frontier) — the Arc × fork-branch, preserving the readback order
+  // (drawer_io.py already sorts by (source_file, chunk_index, id)). Two forked branches that
+  // share a source_file but diverge at a frontier would otherwise INTERLEAVE under one servo
+  // pass, bleeding their Measure segments across the fork; keying on the frontier runs each
+  // branch its OWN pass (each restarts at Measure 0). Absent frontier ⇒ key = source_file
+  // (today's behavior exactly). The NUL separator can never appear in either component.
   const sessions = new Map<string, DrawerVector[]>();
   for (const v of vectors) {
-    const arr = sessions.get(v.sourceFile);
+    const key = v.frontier ? `${v.sourceFile} ${v.frontier}` : v.sourceFile;
+    const arr = sessions.get(key);
     if (arr) arr.push(v);
-    else sessions.set(v.sourceFile, [v]);
+    else sessions.set(key, [v]);
   }
 
   // MEASURE — per session.
@@ -416,7 +439,7 @@ export function orchestrateWing(
     const measure = measureLabels.get(v.id);
     if (measure === undefined) continue; // no vector ⇒ no fluid band to stamp
     measured += 1;
-    const overlay: { measure?: string | number; beat?: string | number; theme?: string | number } = { measure };
+    const overlay: { measure?: string | number; beat?: string | number; theme?: string | number; arc?: string | number } = { measure };
     if (v.chunkIndex != null) overlay.beat = v.chunkIndex;
     const themeLabel = themeAccepted ? themeLabels[v.id] : undefined;
     if (themeLabel !== undefined) {
@@ -424,6 +447,17 @@ export function orchestrateWing(
       themed += 1;
     }
     const arc = deriveArcLocal(v.sourceFile);
+    // ULTRAMETRIC fork encoding — when a frontier is present, OVERLAY the Arc cell as
+    // `<arc>~<frontier>` (mirrors the `run~frontier` idiom). A pre-fork drawer (Arc=<arc>)
+    // and a post-fork branch (Arc=<arc>~<frontier>) then DIVERGE at the Arc band, so
+    // ffzCoDepth breaks at Arc — two forks read concurrent-not-near, never falsely same-Arc.
+    if (v.frontier) {
+      // Take the bare arc (the part BEFORE any prior `~frontier` suffix) so a re-run derives
+      // the byte-identical `<arc>~<frontier>` — idempotent, never `<arc>~<frontier>~<frontier>`.
+      const stamped = String(parseFfzCells(v.ffz).arc ?? arc ?? v.sourceFile);
+      const bareArc = stamped.split("~")[0];
+      overlay.arc = `${bareArc}~${v.frontier}`;
+    }
     const address = overlayFfzAddress(v.ffz, overlay, arc != null ? { arc } : {});
     patches.push({ id: v.id, patch: { lar_ffz: address.slice(0, 120) } });
   }
@@ -477,7 +511,11 @@ export function pythonEmbeddingsReader(wing: string): DrawerVector[] {
     const r = JSON.parse(l) as {
       id: string; embedding: number[]; chunk_index: number | null;
       source_file?: string; lar_ffz?: string; verbatim_sha?: string;
+      lar_salience?: number | null; lar_agent_handle?: string | null;
     };
+    // Strand C ride-alongs (projected for free off the same readback): the kapae salience
+    // down-weight + the fork frontier parsed from the main-agent root handle.
+    const frontier = parseFrontier(r.lar_agent_handle);
     return {
       id: r.id,
       embedding: r.embedding,
@@ -485,8 +523,23 @@ export function pythonEmbeddingsReader(wing: string): DrawerVector[] {
       sourceFile: r.source_file ?? "",
       ffz: r.lar_ffz ?? "",
       ...(r.verbatim_sha ? { verbatimSha: r.verbatim_sha } : {}),
+      ...(r.lar_salience != null ? { salience: r.lar_salience } : {}),
+      ...(frontier ? { frontier } : {}),
     };
   });
+}
+
+/**
+ * Parse the fork frontier from a `lar_agent_handle` (`run~frontier`) — split on `~`, take the
+ * frontier component. No `~` (a bare run handle, the un-forked main line) ⇒ undefined (the
+ * drawer groups by source_file alone, today's behavior). Empty/absent handle ⇒ undefined.
+ */
+function parseFrontier(handle: string | null | undefined): string | undefined {
+  if (!handle) return undefined;
+  const i = handle.indexOf("~");
+  if (i < 0) return undefined;
+  const frontier = handle.slice(i + 1).trim();
+  return frontier || undefined;
 }
 
 /**

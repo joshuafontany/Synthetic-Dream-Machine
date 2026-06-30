@@ -12,6 +12,8 @@
 
 import { describe, expect, test } from "vitest";
 
+import { ffzCoDepth } from "@lararium/mesh";
+
 import {
   orchestrateWing,
   parseFfzCells,
@@ -359,5 +361,119 @@ describe("orchestrateWing — the form plane wired (N=2)", () => {
     const w = capture();
     const res = orchestrateWing("wing_f", { readEmbeddings: reader, writePatches: w.writePatches });
     expect(res.planesPresent).toBe(1);
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// STRAND C — rewind/fork awareness in the Measure quorum.
+//   · kapae DOWN-WEIGHT — a per-drawer salience scales the Measure contribution.
+//   · PER-FRONTIER keying — (sourceFile, frontier) groups each fork its own pass,
+//     and the ultrametric Arc cell `sourceFile~frontier` breaks ffzCoDepth at Arc.
+// ───────────────────────────────────────────────────────────────────────────
+
+/** A branch drawer: shares `source` with its sibling fork but carries a distinct `frontier`. */
+function bdrawer(source: string, frontier: string, chunk: number, axis: number): DrawerVector {
+  const arc = source.replace(/\.[^.]+$/, ""); // "s.jsonl" → "s" (the birth Arc cell)
+  return {
+    id: `${frontier}#${chunk}`,
+    embedding: vec(axis),
+    chunkIndex: chunk,
+    sourceFile: source,
+    ffz: `session/_.${arc}._._.p${frontier}${chunk}`,
+    frontier,
+  };
+}
+
+/** The Measure cell of a stamped address (the segment LABEL). */
+const measureOf = (addr: string): string | undefined => parseFfzCells(addr).measure as string | undefined;
+
+describe("kapae down-weight via salience (deriveMeasureLabels)", () => {
+  test("a floor-salience shift member does NOT gong (but at salience 1 the same shift WOULD)", () => {
+    // sessionA shifts axis0→axis1 at chunk 3 (a gong at salience 1).
+    const full = deriveMeasureLabels(sessionA());
+    expect(full.gongs).toBe(1);
+
+    // floor-weight EVERY shifted member (axis-1, chunks 3-5) — the road-not-taken can't gong.
+    // (An orthogonal one-hot shift is a violent drift, so the floor sits low — 0.01.)
+    const floored = sessionA().map((d, i) => (i >= 3 ? { ...d, salience: 0.01 } : d));
+    const r = deriveMeasureLabels(floored);
+    expect(r.gongs).toBe(0);
+    expect([...r.labels.values()].every((l) => l === "0")).toBe(true); // one segment, no break
+  });
+
+  test("salience defaults to 1 (absent ⇒ today's output exactly)", () => {
+    const withDefault = deriveMeasureLabels(sessionA());
+    const withExplicitOne = deriveMeasureLabels(sessionA().map((d) => ({ ...d, salience: 1 })));
+    expect(withExplicitOne).toEqual(withDefault);
+  });
+});
+
+describe("per-frontier keying — two forks sharing a source_file do not bleed", () => {
+  // Two branches of ONE session (source "s.jsonl") that shift OUT OF PHASE: F1 shifts at
+  // chunk 3, F2 at chunk 5. Their distinct gong points are what the keying must keep apart.
+  const F1 = [0, 1, 2, 3, 4, 5].map((c) => bdrawer("s.jsonl", "F1", c, c < 3 ? 0 : 1)); // shift@3
+  const F2 = [0, 1, 2, 3, 4, 5].map((c) => bdrawer("s.jsonl", "F2", c, c < 5 ? 0 : 1)); // shift@5
+  // The readback INTERLEAVES the branches (drawer_io sorts by chunk_index, the shared key).
+  const interleaved: DrawerVector[] = [];
+  for (let c = 0; c < 6; c++) { interleaved.push(F1[c]!); interleaved.push(F2[c]!); }
+  const F1_TRUE = ["0", "0", "0", "1", "1", "1"]; // F1's own segmentation (shift@3)
+  const F2_TRUE = ["0", "0", "0", "0", "0", "1"]; // F2's own segmentation (shift@5)
+
+  test("each branch runs its OWN pass — both restart at Measure 0, segmented independently", () => {
+    const w = capture();
+    const res = orchestrateWing("wing_fork", { readEmbeddings: () => interleaved, writePatches: w.writePatches });
+    expect(res.sessions).toBe(2); // (source, frontier) → two distinct Arcs
+    expect(res.gongs).toBe(2); // each branch gongs once, at its OWN shift point
+
+    const byId = new Map(w.patches.map((p) => [p.id, String(p.patch["lar_ffz"])]));
+    const f1 = [0, 1, 2, 3, 4, 5].map((c) => measureOf(byId.get(`F1#${c}`)!));
+    const f2 = [0, 1, 2, 3, 4, 5].map((c) => measureOf(byId.get(`F2#${c}`)!));
+    expect(f1).toEqual(F1_TRUE); // clean restart, shift@3
+    expect(f2).toEqual(F2_TRUE); // clean restart, shift@5 — NOT pulled to F1's boundary
+  });
+
+  test("CONTRAST — WITHOUT the frontier key the branches interleave and F2 bleeds", () => {
+    // Strip the frontier → one session over the interleaved order → the segments bleed.
+    const noKey = interleaved.map(({ frontier: _f, ...rest }) => rest);
+    const w = capture();
+    const res = orchestrateWing("wing_bleed", { readEmbeddings: () => noKey, writePatches: w.writePatches });
+    expect(res.sessions).toBe(1); // one Arc — the fork is invisible
+
+    const byId = new Map(w.patches.map((p) => [p.id, String(p.patch["lar_ffz"])]));
+    const f2 = [0, 1, 2, 3, 4, 5].map((c) => measureOf(byId.get(`F2#${c}`)!));
+    // F2's true late shift (shift@5) is GONE — the shared pass drags F2 across F1's boundary,
+    // so F2 reads a spurious early break. This is the bleed the frontier key cures.
+    expect(f2).not.toEqual(F2_TRUE);
+  });
+
+  test("ultrametric Arc — a frontier overlays `sourceFile~frontier`, and ffzCoDepth breaks at Arc", () => {
+    const w = capture();
+    orchestrateWing("wing_fork", { readEmbeddings: () => interleaved, writePatches: w.writePatches });
+    const byId = new Map(w.patches.map((p) => [p.id, String(p.patch["lar_ffz"])]));
+
+    const a1 = byId.get("F1#0")!;
+    const a2 = byId.get("F2#0")!;
+    expect(parseFfzCells(a1).arc).toBe("s~F1"); // the overlaid ultrametric Arc cell
+    expect(parseFfzCells(a2).arc).toBe("s~F2");
+
+    // two forks read CONCURRENT-not-near: their rhythm diverges AT the Arc band (co-depth 0).
+    expect(ffzCoDepth(a1, a2)).toBe(0);
+    // two members of the SAME branch still sit near (share Arc + Measure) — co-depth > 0.
+    expect(ffzCoDepth(a1, byId.get("F1#1")!)).toBeGreaterThan(0);
+
+    // a PRE-fork drawer (bare Arc "s") vs a POST-fork branch ("s~F1") also breaks at Arc.
+    const preFork = "session/_.s.0.9.psPre";
+    expect(ffzCoDepth(preFork, a1)).toBe(0);
+  });
+
+  test("idempotent — a second frontier-keyed run derives byte-identical patches (no `~F~F`)", () => {
+    const w1 = capture();
+    orchestrateWing("wing_fork", { readEmbeddings: () => interleaved, writePatches: w1.writePatches });
+    // feed the FIRST run's stamped addresses back as the existing ffz (the re-run condition).
+    const stamped = new Map(w1.patches.map((p) => [p.id, String(p.patch["lar_ffz"])]));
+    const reRead = interleaved.map((v) => ({ ...v, ffz: stamped.get(v.id) ?? v.ffz }));
+    const w2 = capture();
+    orchestrateWing("wing_fork", { readEmbeddings: () => reRead, writePatches: w2.writePatches });
+    expect(w2.patches).toEqual(w1.patches); // Arc stays `s~F1`, never `s~F1~F1`
   });
 });
