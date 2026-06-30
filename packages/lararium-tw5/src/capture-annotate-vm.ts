@@ -22,7 +22,7 @@ module-type: startup
  */
 
 // PURE subpath (no Automerge) — the barrel `@lararium/mesh` drags in wasm the plugin build can't bundle.
-import { harvestTurnGradient, buildPatch, type BranchContext } from "@lararium/mesh/harvest";
+import { harvestTurnGradient, buildPatch, fnv1a8, type BranchContext } from "@lararium/mesh/harvest";
 import { parseMemeText } from "./meme-ast/index.js";
 import { getGrammar } from "./grammar-cache.js";
 import { emitMoveSkeleton, buildConstructiconBasis } from "./form-layer/index.js";
@@ -43,32 +43,32 @@ export type CaptureAnnotateVm = (turnText: string, sourceFile?: string, branch?:
 
 /**
  * The PURE capture annotate — the live in-VM pass extracted from the `$tw` wrapper so it tests
- * node-side against the bootstrap grammar (the query-derive-vm test pattern). The startup wrapper
- * supplies `capturedTime = Date.now()` — at LIVE capture the capture event IS the turn's wall-time.
+ * node-side against the bootstrap grammar (the query-derive-vm test pattern).
  *
- * `capturedTime` threads into buildPatch's 4th arg (the CaptureContext) so `lar_ffz` — the FfzClock
- * RHYTHMIC address — projects onto the drawer at birth: the COARSE bands (Arc/Theme) stamp from the
- * wall-time now. The fine bands (Beat/Measure) need a session-position (the turn-index) tracked
- * NOWHERE yet, so they stay UNSTAMPED (the coarse prefix only — ffz-project never fabricates a
- * phase). Absent a `capturedTime` ⇒ no `lar_ffz`, byte-identical to before. The "session" profile
- * is the operator-agent exchange-turn cycle (FFZ_PROFILES) — the natural session-work-memory grain.
+ * `lar_ffz` — the FFZ rhythmic address — is now a NESTED-MEMBERSHIP CONTAINMENT PATH, not a
+ * wall-time projection (the prior Date.now() anchor is REJECTED as un-pono — it imputed a global
+ * now). buildPatch derives the Arc cell FREE from `sourceFile` (the session-island); here we supply
+ * the Pulse cell as the turn's CONTENT-ADDRESS (the inscription atom, `fnv1a8(turnText)` — what the
+ * drawer already holds, web3 content-addressing). The Beat cell (the turn) is null-graceful: no
+ * clean per-island turn ordinal exists at this capture site, so it stays absent (porous) — a
+ * stage-two wiring. The fluid bands (Theme/Measure) are likewise deferred. The "session" profile is
+ * the operator-agent exchange-turn tree-root.
  */
 export function captureAnnotate(
   turnText: string,
   sourceFile?: string,
   branch?: BranchContext,
-  capturedTime?: number,
 ): Record<string, string | number> {
   // 2. HARVEST (regex, in-VM) → the lar_* reading patch (existing behavior preserved). `branch`
   //    (the turn-DAG fork-frontier) rides buildPatch's 3rd arg so a same-session fork derives a
   //    DISTINCT handle (the fork-cut); absent ⇒ byte-identical to before. The 4th arg (CaptureContext)
-  //    carries the LIVE capture wall-time → `lar_ffz` coarse bands (omitted when no time is supplied).
+  //    carries the MEMBERSHIP cells: Pulse = the turn's content-address (Beat null-graceful here).
   const harvest = harvestTurnGradient(turnText);
   const patch = buildPatch(
     harvest,
     sourceFile,
     branch,
-    capturedTime != null ? { capturedTime, ffzProfile: "session" } : undefined,
+    { pulse: fnv1a8(turnText), ffzProfile: "session" },
   );
   // 1. PARSE (meme-ast, FULL grammar, in-VM) + 3. AST (ride the tree along). Best-effort: a parse
   //    failure must never sink a capture — the harvest patch still lands.
@@ -99,10 +99,10 @@ export function startup(): void {
   if (!$tw) return;
   const t = $tw as { lares?: { captureAnnotateVm?: CaptureAnnotateVm } };
   t.lares ??= {};
-  // The LIVE capture moment IS the turn's wall-time (the producer stamps lar_ffz at capture, per
-  // capture-nalu's "Each record carries its lar_ffz (felt) — set by the producer").
+  // `lar_ffz` is a membership containment path (Arc = source_file, Pulse = the turn's
+  // content-address), NOT a wall-time stamp — so the live wrapper feeds no clock.
   t.lares.captureAnnotateVm = (turnText: string, sourceFile?: string, branch?: BranchContext) =>
-    captureAnnotate(turnText, sourceFile, branch, Date.now());
+    captureAnnotate(turnText, sourceFile, branch);
   // Also expose the gradient parser itself — callable from a LIVE WIKI (a widget, filter, or module) to
   // parse gradient text in-realm with the full grammar. The native text/x-memetic-wikitext path + tooling
   // reach it here; one parser, one runtime.

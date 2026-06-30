@@ -1,147 +1,171 @@
 /**
- * ffz-project — the `lar_ffz` rhythmic address as a PURE CACHED PROJECTION.
+ * ffz-project — the `lar_ffz` rhythmic address as a NESTED-MEMBERSHIP CONTAINMENT PATH.
  *
- * Proves: pure + deterministic (same inputs → same address); prefix-truncation
- * (a coarser read drops trailing bands cleanly); profile-scoping (the bounds cycle
- * differently per profile); and that the projection carries ZERO causality (rhythm
- * only — the PATH-B cut). The build-patch wire is proven here too: `lar_ffz` stamps
- * when a captured time is present and OMITS gracefully when absent.
+ * Proves: ffzMembershipAddress builds a coarse→fine path from membership cells (graceful omission
+ * of absent/fluid cells); ffzTruncate yields a clean coarser prefix; ffzCoDepth/ffzLca
+ * read the ULTRAMETRIC distance (the longest-common-prefix / lowest common ancestor —
+ * same session, different turns share Arc not Beat; different sessions share only the
+ * root); and the build-patch wire stamps Arc (free, from source_file) + Pulse, omits the
+ * fluid bands, and carries ZERO causality (the PATH-B cut).
  *
  * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
  */
 
 import { describe, test, expect } from "vitest";
 import {
-  ffzProject,
+  ffzMembershipAddress,
   ffzTruncate,
+  ffzCoDepth,
+  ffzLca,
+  ffzHasCell,
   FFZ_ADDRESS_ORDER,
+  FFZ_ABSENT,
   buildPatch,
   harvestTurnGradient,
-  FFZ_PROFILES,
 } from "../src/index.js";
 
-// A fixed wall-time so the coarse bands are stable across runs.
-const T = Date.UTC(2026, 5, 29, 14, 30, 17); // 2026-06-29T14:30:17Z
 const h = () => harvestTurnGradient("Lares (Council): the verb leads");
 
-describe("ffzProject — pure, deterministic, stateless", () => {
-  test("same inputs → identical address (no hidden state, called twice)", () => {
-    const a = ffzProject({ capturedTime: T, sessionPosition: 8, profile: "session" });
-    const b = ffzProject({ capturedTime: T, sessionPosition: 8, profile: "session" });
+describe("ffzMembershipAddress — a coarse→fine membership path, gracefully partial", () => {
+  test("pure + deterministic: same cells → identical address", () => {
+    const a = ffzMembershipAddress({ arc: "sessA", beat: "t8", pulse: "drwX", profile: "session" });
+    const b = ffzMembershipAddress({ arc: "sessA", beat: "t8", pulse: "drwX", profile: "session" });
     expect(a).toBe(b);
-    expect(a).not.toBeNull();
   });
 
-  test("a full read carries all five coarse→fine bands (Theme first)", () => {
-    const addr = ffzProject({ capturedTime: T, sessionPosition: 8, profile: "session" })!;
+  test("a full set carries all five coarse→fine bands (Theme first)", () => {
+    const addr = ffzMembershipAddress({ theme: "th", arc: "ar", measure: "me", beat: "be", pulse: "pu" });
     const [profile, tuple] = addr.split("/");
-    expect(profile).toBe("session");
+    expect(profile).toBe("session"); // default tree-root
     expect(tuple!.split(".")).toHaveLength(FFZ_ADDRESS_ORDER.length); // 5 bands
+    expect(tuple).toBe("th.ar.me.be.pu");
   });
 
-  test("the Beat band equals the turn-index modulo the profile bound", () => {
-    const bounds = FFZ_PROFILES["session"]!.bounds; // [b0,b1,b2,b3,Inf]
-    const pos = 8;
-    const addr = ffzProject({ capturedTime: T, sessionPosition: pos })!;
-    const bands = addr.split("/")[1]!.split("."); // [Theme,Arc,Measure,Beat,Pulse]
-    expect(Number(bands[3])).toBe(pos % bounds[1]); // Beat = pos % b1
+  test("absent leading/interior cells render as the porous sentinel; trailing cells omit", () => {
+    // Arc + Pulse only (the stage-one free bands): Theme/Measure/Beat absent.
+    const addr = ffzMembershipAddress({ arc: "sessA", pulse: "drwX" });
+    expect(addr).toBe(`session/${FFZ_ABSENT}.sessA.${FFZ_ABSENT}.${FFZ_ABSENT}.drwX`);
+    // Arc only: trailing absents (Measure/Beat/Pulse) drop entirely.
+    expect(ffzMembershipAddress({ arc: "sessA" })).toBe(`session/${FFZ_ABSENT}.sessA`);
+    // nothing real → the bare root.
+    expect(ffzMembershipAddress({})).toBe("session/");
   });
 
-  test("a captured time but NO position projects only the coarse prefix (fine bands unstamped)", () => {
-    const addr = ffzProject({ capturedTime: T })!;
-    const tuple = addr.split("/")[1]!.split(".");
-    expect(tuple).toHaveLength(2); // Theme.Arc only — fine bands NOT fabricated
-    // and the coarse prefix matches the head of the full read
-    const full = ffzProject({ capturedTime: T, sessionPosition: 8 })!;
-    expect(full.startsWith(addr)).toBe(true);
+  test("labels are delimiter-safe: dots/slashes/whitespace in a cell collapse to '-'", () => {
+    const addr = ffzMembershipAddress({ arc: "claude__run-abc.jsonl", pulse: "a/b c" });
+    const segs = addr.split("/")[1]!.split(".");
+    expect(segs).toHaveLength(5); // no extra segment split out of the dotted source_file
+    expect(segs[1]).toBe("claude__run-abc-jsonl");
+    expect(segs[4]).toBe("a-b-c");
   });
 
-  test("no usable wall-time → null (never fabricates a phase)", () => {
-    expect(ffzProject({ capturedTime: NaN })).toBeNull();
-    expect(ffzProject({ capturedTime: Infinity })).toBeNull();
-    expect(ffzProject({ capturedTime: -1 })).toBeNull();
+  test("an explicit profile rides as the tree-root", () => {
+    expect(ffzMembershipAddress({ arc: "x", profile: "diegetic" }).startsWith("diegetic/")).toBe(true);
   });
 
-  test("a negative session position is treated as absent (coarse prefix only)", () => {
-    const addr = ffzProject({ capturedTime: T, sessionPosition: -5 })!;
-    expect(addr.split("/")[1]!.split(".")).toHaveLength(2);
+  test("ffzHasCell — true with a real cell, false for the bare root", () => {
+    expect(ffzHasCell(ffzMembershipAddress({ arc: "x" }))).toBe(true);
+    expect(ffzHasCell(ffzMembershipAddress({}))).toBe(false);
   });
 });
 
 describe("ffzTruncate — prefix-truncation drops trailing (finer) bands cleanly", () => {
   test("a coarser read is a clean prefix of the full address", () => {
-    const full = ffzProject({ capturedTime: T, sessionPosition: 8 })!;
+    const full = ffzMembershipAddress({ theme: "th", arc: "ar", measure: "me", beat: "be", pulse: "pu" });
     const coarse = ffzTruncate(full, 2); // keep Theme.Arc
     expect(coarse.split("/")[1]!.split(".")).toHaveLength(2);
     expect(full.startsWith(coarse)).toBe(true);
   });
 
-  test("truncating to the coarse prefix equals projecting with no position", () => {
-    const full = ffzProject({ capturedTime: T, sessionPosition: 8 })!;
-    const noPos = ffzProject({ capturedTime: T })!;
-    expect(ffzTruncate(full, 2)).toBe(noPos);
-  });
-
   test("the profile prefix is preserved; clamps to available bands", () => {
-    const full = ffzProject({ capturedTime: T, sessionPosition: 8 })!;
+    const full = ffzMembershipAddress({ theme: "th", arc: "ar", measure: "me", beat: "be", pulse: "pu" });
     expect(ffzTruncate(full, 99).split("/")[1]!.split(".")).toHaveLength(5); // clamp up
     expect(ffzTruncate(full, 0)).toBe("session/"); // profile kept, no bands
   });
 });
 
-describe("profile-scoping — bounds cycle differently per profile", () => {
-  test("the profile name rides the address, and differing bounds yield differing reads", () => {
-    // A position large enough to roll the diegetic Beat bound (8) but not the session bound (256).
-    const pos = 10;
-    const session = ffzProject({ capturedTime: T, sessionPosition: pos, profile: "session" })!;
-    const diegetic = ffzProject({ capturedTime: T, sessionPosition: pos, profile: "diegetic" })!;
-    expect(session.startsWith("session/")).toBe(true);
-    expect(diegetic.startsWith("diegetic/")).toBe(true);
-    const sBeat = Number(session.split("/")[1]!.split(".")[3]);
-    const dBeat = Number(diegetic.split("/")[1]!.split(".")[3]);
-    expect(sBeat).toBe(pos % FFZ_PROFILES["session"]!.bounds[1]); // 10 % 256 = 10
-    expect(dBeat).toBe(pos % FFZ_PROFILES["diegetic"]!.bounds[1]); // 10 % 8 = 2
-    expect(sBeat).not.toBe(dBeat);
+describe("ffzCoDepth / ffzLca — the ultrametric (longest-common-prefix = LCA depth)", () => {
+  // Two drawers in the SAME session (same Arc) but DIFFERENT turns (different Pulse).
+  const a = ffzMembershipAddress({ arc: "sessA", pulse: "drw1" });
+  const b = ffzMembershipAddress({ arc: "sessA", pulse: "drw2" });
+  // A drawer in a DIFFERENT session.
+  const c = ffzMembershipAddress({ arc: "sessB", pulse: "drw3" });
+
+  test("same session, different turns → share Arc, not the finer cell (co-depth 1)", () => {
+    expect(ffzCoDepth(a, b)).toBe(1); // Arc shared; Pulse diverges
+    expect(ffzLca(a, b)).toBe(`session/${FFZ_ABSENT}.sessA`); // the LCA node = the Arc cell
   });
 
-  test("an unknown profile falls back to default bounds without throwing", () => {
-    const addr = ffzProject({ capturedTime: T, sessionPosition: 8, profile: "no-such-profile" });
-    expect(addr).not.toBeNull();
-    expect(addr!.startsWith("no-such-profile/")).toBe(true);
+  test("different sessions → share only the root (co-depth 0)", () => {
+    expect(ffzCoDepth(a, c)).toBe(0); // Arc diverges
+    expect(ffzLca(a, c)).toBe("session/"); // only the tree-root
+  });
+
+  test("a drawer is maximally near itself (co-depth = its real cell count)", () => {
+    expect(ffzCoDepth(a, a)).toBe(2); // Arc + Pulse
+    expect(ffzLca(a, a)).toBe(a);
+  });
+
+  test("an absent (fluid) band is porous — a coarser shared cell reads through it", () => {
+    // Beat present on one side, absent on the other: the shared Arc still counts.
+    const withBeat = ffzMembershipAddress({ arc: "sessA", beat: "t1", pulse: "drwZ" });
+    const noBeat = ffzMembershipAddress({ arc: "sessA", pulse: "drwY" });
+    expect(ffzCoDepth(withBeat, noBeat)).toBe(1); // Arc shared; Beat porous on one side
+  });
+
+  test("same session AND same turn (same Beat) → share Arc + Beat (co-depth 2)", () => {
+    const x = ffzMembershipAddress({ arc: "sessA", beat: "t1", pulse: "drwA" });
+    const y = ffzMembershipAddress({ arc: "sessA", beat: "t1", pulse: "drwB" });
+    expect(ffzCoDepth(x, y)).toBe(2); // Arc + Beat; Pulse diverges
+    expect(ffzLca(x, y)).toBe(`session/${FFZ_ABSENT}.sessA.${FFZ_ABSENT}.t1`);
+  });
+
+  test("a different profile (a different tree) → co-depth 0, no common tree", () => {
+    const d = ffzMembershipAddress({ arc: "sessA", pulse: "drw1", profile: "diegetic" });
+    expect(ffzCoDepth(a, d)).toBe(0);
+    expect(ffzLca(a, d)).toBe("");
   });
 });
 
-describe("buildPatch wire — lar_ffz stamps when present, omits gracefully when absent", () => {
-  test("no capture context ⇒ no lar_ffz (byte-identical to before)", () => {
+describe("buildPatch wire — lar_ffz stamps Arc (free) + Pulse, omits fluid bands, no causality", () => {
+  test("source_file alone ⇒ lar_ffz stamps the Arc cell (the session, given free)", () => {
     const p = buildPatch(h(), "claude__sess1.jsonl");
+    // Arc derived from source_file (basename, extension stripped); Pulse/Beat absent.
+    expect(p["lar_ffz"]).toBe("session/_.claude__sess1");
+  });
+
+  test("no source_file and no context ⇒ no lar_ffz (nothing to address)", () => {
+    const p = buildPatch(h());
     expect(p["lar_ffz"]).toBeUndefined();
   });
 
-  test("a captured time ⇒ lar_ffz stamps (coarse prefix when no position)", () => {
-    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { capturedTime: T });
-    expect(p["lar_ffz"]).toBe("session/" + (ffzProject({ capturedTime: T })!).split("/")[1]);
-  });
-
-  test("time + position ⇒ the full five-band address stamps", () => {
-    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { capturedTime: T, sessionPosition: 8 });
-    expect(p["lar_ffz"]).toBe(ffzProject({ capturedTime: T, sessionPosition: 8 }));
+  test("source_file + Pulse cell ⇒ Arc + Pulse stamp, the fluid bands omitted", () => {
+    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { pulse: "drwX" });
+    expect(p["lar_ffz"]).toBe("session/_.claude__sess1._._.drwX");
+    // exactly the five-slot tuple with the two fluid bands + Beat porous.
     expect(String(p["lar_ffz"]).split("/")[1]!.split(".")).toHaveLength(5);
   });
 
+  test("Beat threads when supplied (a per-island turn cell)", () => {
+    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { pulse: "drwX", beat: "t3" });
+    expect(p["lar_ffz"]).toBe("session/_.claude__sess1._.t3.drwX");
+  });
+
   test("an explicit profile threads through to the stamp", () => {
-    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { capturedTime: T, sessionPosition: 8, ffzProfile: "diegetic" });
+    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { pulse: "drwX", ffzProfile: "diegetic" });
     expect(String(p["lar_ffz"]).startsWith("diegetic/")).toBe(true);
   });
 
-  test("a present-but-invalid captured time omits lar_ffz (no phantom phase)", () => {
-    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { capturedTime: NaN, sessionPosition: 8 });
-    expect(p["lar_ffz"]).toBeUndefined();
+  test("two same-session drawers' stamps read same-session via ffzCoDepth", () => {
+    const p1 = buildPatch(h(), "claude__sess1.jsonl", undefined, { pulse: "drw1" });
+    const p2 = buildPatch(h(), "claude__sess1.jsonl", undefined, { pulse: "drw2" });
+    expect(ffzCoDepth(String(p1["lar_ffz"]), String(p2["lar_ffz"]))).toBe(1); // share Arc
   });
 
-  test("lar_ffz carries NO causality field — it is a rhythm-only string", () => {
-    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { capturedTime: T, sessionPosition: 8 });
+  test("lar_ffz carries NO causality field — it is a rhythm-only membership string", () => {
+    const p = buildPatch(h(), "claude__sess1.jsonl", undefined, { pulse: "drwX" });
     expect(typeof p["lar_ffz"]).toBe("string");
-    // the patch holds only the str/int chroma scalars — no edge/causal field rode in
+    // the patch holds only the str/int chroma scalars — no edge/causal/itc field rode in
     expect(Object.keys(p).some((k) => /causal|edge|happens|itc/i.test(k))).toBe(false);
   });
 });

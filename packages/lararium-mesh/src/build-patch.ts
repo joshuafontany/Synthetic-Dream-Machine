@@ -10,23 +10,29 @@
  */
 
 import type { TurnHarvest } from "./turn-harvest.js";
-import { ffzProject } from "./ffz-project.js";
+import { ffzMembershipAddress } from "./ffz-project.js";
 
 /**
- * CaptureContext — the turn's RHYTHMIC coordinates, what the drawer already holds.
+ * CaptureContext — the turn's MEMBERSHIP cells, what the drawer already holds.
  *
- * Feeds the `lar_ffz` projection (build-patch.ts stamps a PURE rhythm-only address,
- * never a stored clock). The capture/harvest caller threads it from the turn's
- * captured wall-time + session position; absent (the case today — no caller supplies
- * it yet) ⇒ no `lar_ffz`, byte-identical to before. Causality is NOT carried here —
- * it rides the edge-DAG (the PATH-B cut).
+ * Feeds the `lar_ffz` membership address (a NESTED-CONTAINMENT PATH, never a stored
+ * clock and never a wall-time projection — the prior {capturedTime, sessionPosition}
+ * anchor is rejected as un-pono). Arc (the session) is derived FREE from `sourceFile`
+ * inside {@link buildPatch}; the caller threads only the finer cells it holds. Causality
+ * is NOT carried here — it rides the edge-DAG (the PATH-B cut).
+ *
+ * The fluid bands (Theme = thread cluster, Measure = topic-shift) are deferred to stage
+ * two and never threaded here; they render absent (porous) in the address.
  */
 export interface CaptureContext {
-  /** Epoch ms the turn was captured at — drives `lar_ffz` coarse bands (Arc/Theme). */
-  readonly capturedTime?: number;
-  /** Turn-index within the session (= L1 Beat count) — drives the fine bands (Beat/Measure). */
-  readonly sessionPosition?: number;
-  /** FFZ_PROFILES key (default "session") — selects the cycling bounds. */
+  /** Pulse (L0) — the drawer / inscription atom id (e.g. the turn's content-address). */
+  readonly pulse?: string | number;
+  /**
+   * Beat (L1) — the turn cell (a per-island, causally-inert label). Null-graceful:
+   * the caller omits it where no clean turn label exists at the call site.
+   */
+  readonly beat?: string | number;
+  /** The FFZ tree-root selector (a namespace), default "session". */
   readonly ffzProfile?: string;
 }
 
@@ -62,23 +68,42 @@ export interface BranchContext {
 }
 
 /**
- * A short, stable, dependency-free token for a branch frontier (FNV-1a/32, 8 hex). NOT a
- * cryptographic digest — it only needs to DISTINGUISH branches deterministically at session
- * scale (build-patch bundles into the TW5 VM + the browser twin, so no @noble import here).
- * Order-independent over a head SET (sorted before folding). Returns null when no frontier.
+ * A short, stable, dependency-free content token (FNV-1a/32, 8 hex). NOT a cryptographic
+ * digest — it only needs to DISTINGUISH deterministically at session scale (build-patch
+ * bundles into the TW5 VM + the browser twin, so no @noble import here). Used both for the
+ * branch-frontier token and for the Pulse cell (a turn's content-address inscription atom).
+ */
+export function fnv1a8(s: string): string {
+  let h = 0x811c9dc5; // FNV-1a 32-bit offset basis
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0; // FNV prime, keep unsigned
+  }
+  return h.toString(16).padStart(8, "0");
+}
+
+/**
+ * A short, stable token for a branch frontier (FNV-1a/32, 8 hex). Order-independent over
+ * a head SET (sorted before folding). Returns null when no frontier.
  */
 export function deriveBranchFrontier(branch?: BranchContext): string | null {
   const f = branch?.frontier;
   if (f == null) return null;
   const heads = (Array.isArray(f) ? [...f] : [f as string]).filter((h) => h != null && h !== "");
   if (heads.length === 0) return null;
-  const key = heads.map(String).sort().join("\n");
-  let h = 0x811c9dc5; // FNV-1a 32-bit offset basis
-  for (let i = 0; i < key.length; i++) {
-    h ^= key.charCodeAt(i);
-    h = Math.imul(h, 0x01000193) >>> 0; // FNV prime, keep unsigned
-  }
-  return h.toString(16).padStart(8, "0");
+  return fnv1a8(heads.map(String).sort().join("\n"));
+}
+
+/**
+ * Derive the Arc cell — the session-island = the staged source_file (the basename, one
+ * trailing extension stripped). Two drawers from the same transcript share this Arc, so
+ * they read as same-session in {@link ffzCoDepth}. Given FREE from what the drawer holds.
+ */
+function deriveArc(sourceFile?: string): string | null {
+  if (!sourceFile) return null;
+  const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
+  const noExt = base.replace(/\.[^.]+$/, "");
+  return noExt || null;
 }
 
 /** Derive the originating harness from a staged source_file (prefixed `<surface>__…`). */
@@ -195,17 +220,21 @@ export function buildPatch(
     const root = deriveRootHandle(sourceFile, frontier);
     if (root) { patch["lar_agent_handle"] = root.slice(0, 120); patch["lar_root_handle"] = root.slice(0, 120); }
   }
-  // `lar_ffz` — the rhythmic address, a PURE CACHED PROJECTION of the turn's captured
-  // time/position onto the five bands (NOT a stored clock; rhythm-only, zero causality).
-  // Graceful: no captured time ⇒ no stamp; time-but-no-position ⇒ the coarse prefix only,
-  // the fine bands left unstamped rather than fabricated (ffz-project.ts).
-  if (capture?.capturedTime != null) {
-    const ffz = ffzProject({
-      capturedTime: capture.capturedTime,
-      ...(capture.sessionPosition != null ? { sessionPosition: capture.sessionPosition } : {}),
-      profile: capture.ffzProfile ?? "session",
+  // `lar_ffz` — the rhythmic address, a NESTED-MEMBERSHIP CONTAINMENT PATH (NOT a clock,
+  // NOT a wall-time projection; rhythm-only, zero causality). The FREE/factual cells:
+  // Arc = source_file (the session-island), Pulse = the inscription atom (caller-supplied
+  // content-address), Beat = the turn (caller-supplied, null-graceful). The fluid bands
+  // (Theme/Measure) stay absent → porous in the address (stage two). Stamp whenever at
+  // least one real cell is present (Arc alone still addresses the session); otherwise omit.
+  const arc = deriveArc(sourceFile);
+  if (arc != null || capture?.pulse != null || capture?.beat != null) {
+    const ffz = ffzMembershipAddress({
+      arc,
+      ...(capture?.pulse != null ? { pulse: capture.pulse } : {}),
+      ...(capture?.beat != null ? { beat: capture.beat } : {}),
+      profile: capture?.ffzProfile ?? "session",
     });
-    if (ffz) patch["lar_ffz"] = ffz.slice(0, 120);
+    patch["lar_ffz"] = ffz.slice(0, 120);
   }
   return patch;
 }
