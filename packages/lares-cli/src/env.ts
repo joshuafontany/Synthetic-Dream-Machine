@@ -18,7 +18,7 @@ import { larDataDir, loadVesselVerifyingKey } from "@lararium/node";
 // The vessel runtime-state resolvers — defined once in @lararium/node, surfaced here.
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
-  larHarvestDir, larHarvestStageDir, larAstPalaceDir,
+  larHarvestDir, larHarvestStageDir, larAstPalaceDir, larFormPalaceDir,
 } from "@lararium/node";
 
 /** CORPUS/code root — LAR_ROOT or the repo root. (The vessel STATE roots in the home; see larHome.) */
