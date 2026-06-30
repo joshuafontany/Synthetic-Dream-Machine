@@ -74,6 +74,13 @@ two offices.
 <<~ confidence Synthesis-Canon 17/20 >> Six independent domains rhyme to the
 no-registry derived handle — the convergence, not any single source, seats it.
 
+**The ʻŌlelo name — *hoʻoili*.** This worldline functor (Turn → Trajectory) carries
+the house name **hoʻoili** — to transmit, bequeath, inherit (from *ili*, inheritance) —
+the **descent specialization** of *mālama pili*, the functor discipline's core keeper-name
+([[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline#glosses]]). It reads from
+the verb the same way the handle does: descent IS the address, so the worldline functor
+**inherits** — passing the parent's name down the lineage-path.
+
 <<~/ahu >>
 
 <<~ ahu #attribution >>
