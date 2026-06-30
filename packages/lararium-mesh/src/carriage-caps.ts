@@ -155,8 +155,10 @@ export function dampedRadius(rCurrent: number, degree: number, gamma = R_DAMP): 
  * → a leaf that only carries what it pulls.
  */
 export interface MeshSelf {
-  /** OWN reachable http read-face URL — advertised in its dial, excluded from self-peering. */
-  readonly endpoint: string;
+  /** OWN reachable http read-face URL — advertised in its dial, excluded from self-peering. ABSENT → a
+   *  LEAF: it carries-in (pulls + re-ranks by coord) but advertises no reachable dial, so it is NOT
+   *  dial-able (a browser with no listening socket). The endpoint present-vs-absent IS the leaf↔full tier. */
+  readonly endpoint?: string;
   /** Own dial bearing — the slot the carriage re-publishes as its standing `r` drifts. */
   readonly bearing: string;
   readonly coord: Coord;                 // routing-chart coord (r=standing, θ=kinship), published in its slot
@@ -189,10 +191,34 @@ export function deriveMeshSelf(
   };
 }
 
+/**
+ * deriveMeshLeaf — a LEAF mesh standing: carries-in (peers + a coord for the proximity re-rank) but
+ * advertises NO endpoint, so it is not dial-able (a browser with no listening socket). `coordSeed` (the
+ * vessel's own identifier — origin / relay URL) hashes to the chart coord + the leaf's bearing.
+ */
+export function deriveMeshLeaf(
+  coordSeed: string, peers: readonly string[], opts: { radius?: number } = {},
+): MeshSelf {
+  const u = hashUnit(coordSeed);
+  return {
+    bearing: `lar:///ha.ka.ba/@oracle/leaf/${u.toString(36).slice(2, 8)}`,
+    coord:   { theta: u * 2 * Math.PI, r: opts.radius ?? 1 },
+    peers,
+    // no endpoint → a LEAF (the Spore-Diver's one-field tier: carry-in only, not dial-able)
+  };
+}
+
 /** The self-announce dial a vessel seeds on its OWN FLOW-map — DERIVED from its MeshSelf (the `seed`
- *  param dissolved: bearing + endpoint ARE the dial; the placeholder key + dreamnet scale stay fixed). */
-export function meshSelfDial(self: MeshSelf): DialEntry {
+ *  param dissolved: bearing + endpoint ARE the dial). A LEAF (no endpoint) has no dial → undefined. */
+export function meshSelfDial(self: MeshSelf): DialEntry | undefined {
+  if (!self.endpoint) return undefined; // a leaf advertises no reachable dial
   return { bearing: self.bearing, verifyingKeyHex: "f".repeat(64), endpoint: self.endpoint, scale: "dreamnet" };
+}
+
+/** The self-announce seed a caller hands `meshPalaceCap` — `[dial]` for a full node, `[]` for a leaf. */
+export function meshSelfSeed(self: MeshSelf): readonly DialEntry[] {
+  const dial = meshSelfDial(self);
+  return dial ? [dial] : [];
 }
 
 /** carriage — the blind relay: pull each PEER's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into

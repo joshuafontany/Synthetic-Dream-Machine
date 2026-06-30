@@ -69,7 +69,7 @@ import {
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
-import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfDial, type MeshSelf } from "./node-caps.js";
+import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf } from "./node-caps.js";
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
@@ -832,10 +832,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     meshPalaceCap({
       repo: p.repo, ...(p.residency ? { residency: p.residency } : {}),
       selfCoord: opts.meshSelf.coord,
-      seed: [meshSelfDial(opts.meshSelf)],
+      seed: meshSelfSeed(opts.meshSelf),
     }),
     carriageCap({
-      peers: opts.meshSelf.peers, selfEndpoint: opts.meshSelf.endpoint, selfBearing: opts.meshSelf.bearing,
+      peers: opts.meshSelf.peers, selfBearing: opts.meshSelf.bearing,
+      ...(opts.meshSelf.endpoint ? { selfEndpoint: opts.meshSelf.endpoint } : {}), // absent → a leaf
       selfCoord: opts.meshSelf.coord,
       ...(opts.meshSelf.maxFanout !== undefined ? { maxFanout: opts.meshSelf.maxFanout } : {}),
       nodeSeedHex: Buffer.from(p.operatorSeed).toString("hex"),

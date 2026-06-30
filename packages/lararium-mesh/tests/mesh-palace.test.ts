@@ -30,8 +30,25 @@ import {
   MeshPalace, emptyMeshPalaceDoc,
   type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
+import { deriveMeshSelf, deriveMeshLeaf, meshSelfDial, meshSelfSeed } from "../src/carriage-caps.js";
 
 const AUTH = "lar:///ha.ka.ba/@meshpalace/test";
+
+describe("MeshSelf — the leaf↔full tier is ONE field (endpoint present-vs-absent)", () => {
+  test("a full node advertises a dial; a leaf carries-in but has no reachable endpoint", () => {
+    const full = deriveMeshSelf("http://node:8080", ["http://boot:8080"]);
+    expect(full.endpoint).toBe("http://node:8080");
+    expect(meshSelfDial(full)).toBeDefined();            // full node → a dial peers can reach
+    expect(meshSelfSeed(full)).toHaveLength(1);
+    const leaf = deriveMeshLeaf("browser-origin-xyz", ["http://relay:8080"]);
+    expect(leaf.endpoint).toBeUndefined();               // a LEAF has NO reachable endpoint (not dial-able)
+    expect(leaf.peers).toEqual(["http://relay:8080"]);   // …yet it still carries-in
+    expect(leaf.coord.r).toBeGreaterThanOrEqual(0);      // …and holds a coord for the proximity re-rank
+    expect(meshSelfDial(leaf)).toBeUndefined();          // no dial
+    expect(meshSelfSeed(leaf)).toEqual([]);              // → no self-announce seed
+    expect(leaf.bearing).toContain("@oracle/leaf/");     // its own leaf identity
+  });
+});
 
 function docOf(records: LarTiddlerRecord[]): LarDoc {
   const tiddlers: Record<string, LarTiddlerRecord> = {};

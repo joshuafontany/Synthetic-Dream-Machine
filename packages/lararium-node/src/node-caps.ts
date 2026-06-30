@@ -30,7 +30,7 @@ import {
   type BagResidencyManager,
   // ── the lifted carriage machinery, now mesh-floor (re-exported below) ──
   CARRIAGE_CAP,
-  meshPalaceCap, carriageCap, meshSelfDial, type MeshSelf, type MeshPalaceComponent,
+  meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf, type MeshPalaceComponent,
 } from "@lararium/mesh";
 import {
   composeCoreVessel, substrateCap, daemonCap, CORE_CAP,
@@ -44,7 +44,7 @@ import { mountFlowMapReadFace, type OracleReadFace } from "./oracle-read-face.js
  */
 export {
   meshPalaceCap, carriageCap, discoverPeers, dampedRadius, incommensurablePullMs,
-  deriveMeshSelf, meshSelfDial,
+  deriveMeshSelf, deriveMeshLeaf, meshSelfDial, meshSelfSeed,
   type MeshSelf, type MeshPalaceComponent, type CarriageComponent,
 } from "@lararium/mesh";
 
@@ -131,14 +131,14 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
     meshPalaceCap({
       repo: d.repo,
       ...(d.residency ? { residency: d.residency } : {}),
-      ...(d.meshSelf ? { seed: [meshSelfDial(d.meshSelf)], selfCoord: d.meshSelf.coord } : {}),
+      ...(d.meshSelf ? { seed: meshSelfSeed(d.meshSelf), selfCoord: d.meshSelf.coord } : {}),
     }),
     carriageCap({
       peers: d.meshSelf?.peers ?? [],
       ...(d.pullIntervalMs !== undefined ? { pullIntervalMs: d.pullIntervalMs } : {}),
       nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),  // the node-id seeds its incommensurable cadence
       ...(d.meshSelf ? {
-        selfEndpoint: d.meshSelf.endpoint,
+        ...(d.meshSelf.endpoint ? { selfEndpoint: d.meshSelf.endpoint } : {}), // absent → a leaf
         selfCoord:    d.meshSelf.coord,
         selfBearing:  d.meshSelf.bearing,
         ...(d.meshSelf.maxFanout !== undefined ? { maxFanout: d.meshSelf.maxFanout } : {}),
