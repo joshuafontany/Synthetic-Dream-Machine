@@ -4,7 +4,8 @@
  * mesh-palace's `snapshotPublicFlowMap`): drop-private, keep-public.
  *
  * Canon: lar:///ha.ka.ba/@lares/api/pono/cabal-place#the-place (NAMED-not-ruled —
- * "the place's identity is content-addressed; knowing the place grants nothing")
+ * "the place's identity is content-addressed; the name grants no authority" — though,
+ * crucible-corrected, it does leak metadata; see THE VEIL INVARIANT below)
  * + lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture ("cabalGroup = shared
  * charter, read-scope"). The read/veil tier ALREADY EXISTS as the @oracle
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
@@ -19,11 +20,15 @@
  *   · MEMBERS-ONLY — the substrate CONTENT + the member ROSTER + the liveness
  *                    lease slots + the epoch keys. NEVER crosses the membrane.
  *
- * THE VEIL GUARANTEE (structural, not folklore): `projectCabalPlaceCharter` reads
- * ONLY the public fields of its input and constructs a literal naming ONLY charter
- * fields. The members-only data (roster / substrate content) rides the SAME input
- * bag yet is structurally unreachable in the output — the membrane never references
- * it. It is IMPOSSIBLE for a roster or substrate content to leak through.
+ * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee — crucible-
+ * scoped): `projectCabalPlaceCharter` reads ONLY the public fields of its input and
+ * constructs a literal naming ONLY charter fields. The members-only data (roster /
+ * substrate content) rides the SAME input bag yet is structurally unreachable in the
+ * output — the membrane never references it, so a roster or substrate content CANNOT
+ * leak through THIS function. That kills the accidental roster-in-output bug. It is
+ * NOT a guarantee against an adversary, who lives on the WIRE (the signed pointer
+ * leaks version / activity / membership-change timing — Pfitzmann-Hansen) and at the
+ * members-only STORE (its own sync + access patterns), never inside the projector.
  *
  * Platform-blind: rides ./cabal-place + ./oracle-substrate + automerge only. NO
  * node: imports.

@@ -45,7 +45,8 @@ import type { BagResidencyManager, ResidencyTemperature } from "./bag-residency.
 /**
  * A cabal-place — a virtual PLACE three primitives co-define:
  *   · a Keyhive SENTINEL identity (the place's content-addressed name — a
- *     docId/agentId pair; knowing it grants nothing, #the-place NAMED-not-ruled).
+ *     docId/agentId pair; knowing it grants no authority — #the-place NAMED-not-ruled
+ *     — though it does leak metadata via the public pointer, crucible-corrected).
  *     THIS CUT only TYPES this half — it does not mint or call Keyhive.
  *   · an Automerge SUBSTRATE doc (the shared content that the members maintain
  *     and that COOLS to anu when unfed — the residency-tracked half).
@@ -53,7 +54,7 @@ import type { BagResidencyManager, ResidencyTemperature } from "./bag-residency.
  */
 export interface CabalPlace {
   /** The place's Keyhive sentinel DocId, hex — the content-addressed NAME, used
-   *  as the lease resourceId. Knowing it grants nothing (#the-place). */
+   *  as the lease resourceId. Knowing it grants no authority (#the-place). */
   readonly placeDocIdHex: string;
   /** The place's Keyhive sentinel AgentId, hex — the membership-graph anchor a
    *  later cut (cut 2, gated) ties the CGKA ceremony to. Inert here. */

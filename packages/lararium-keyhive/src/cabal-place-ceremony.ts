@@ -17,9 +17,13 @@
  *     (public DocumentId ctor) is the working skeleton AND partly architecturally
  *     correct — canon #the-place names the place by its content-addressed *doc*
  *     identity. Track the Group subduction for a later cut (provider NOTE ~line 281).
- *   · forward_secrecy STAYS false — ARCHITECTURAL in Keyhive (whole-system FS is not
- *     provided at any alpha version; canon already holds "the substrate has no FS").
- *     This module never touches it (it rides the provider's init choice).
+ *   · forward_secrecy STAYS false — a deliberate THREAT-MODEL CHOICE, not an
+ *     architectural impossibility (crucible-corrected: BeeKEM the substrate DOES keep
+ *     FS against a passive adversary; the FS is forgone one layer up, at Keyhive's
+ *     whole-DOCUMENT-access — a current member reads the whole doc, so per-chunk FS
+ *     buys little, and replayable access lets a later-admitted device derive the key.
+ *     See keyhive-provider.ts init `false`). This module never touches it (it rides
+ *     the provider's init choice).
  *   · membership = the Keyhive DOC-ROSTER — a LIST verified per-member against the
  *     sentinel (cabalPlaceRoster below), NOT the closure-query of canon
  *     #RULED-by-the-closure. The closure ("evaluated as a query, never instantiated")
