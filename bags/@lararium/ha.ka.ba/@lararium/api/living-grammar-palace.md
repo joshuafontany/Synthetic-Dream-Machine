@@ -314,7 +314,9 @@ operator-ratified 2026-06-29) holds that facet as a **CACHED PROJECTION** of the
 (the grain) over the worldline edge-DAG (the order, [[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution]]) — a materialized
 view, re-derivable from the worldline, **NEVER the causal authority**. The edge-DAG owns
 happened-before; the facet caches its position for query. Lose the cache, re-project from the DAG; the
-cache never out-ranks its source.
+cache never out-ranks its source. The stamp itself reads as nested MEMBERSHIP — a containment path on
+the FfzClock's ultrametric tree (the meet-semilattice keystone), never a shared tick-count
+([[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#the-spine]]).
 
 **φ ~ the non-interference law (scale-orthogonality, NOT entrainment).** The FfzClock's five nested
 bands (Pulse · Beat · Measure · Arc · Theme) relate by the noble ratio φ — and φ here names a pure
