@@ -42,6 +42,12 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "node:fs";
 import { join, dirname } from "node:path";
+import {
+  generateOrLoadKeypair,
+  signingSeedFromHex,
+  type KeypairStore,
+  type KeypairCrypto,
+} from "@lararium/mesh";
 
 /**
  * The identity dir — a SIBLING of the storage dir, structurally OUTSIDE any
@@ -106,6 +112,43 @@ export interface VesselIdentity {
 
 function keyFileName(login: string | null): string {
   return login ? `.vessel-key-${login}.json` : ".vessel-key.json";
+}
+
+// ── Platform seams for the shared keypair lifecycle (vessel-identity-core) ────
+// node mints via the local CSPRNG (generateKeyPairSync) and persists each keypair
+// as a 0o600 JSON file in the wipe-zone-sibling identity dir, stamping the git
+// email hint. The core (mesh) owns the generate-or-load control flow over these.
+
+const nodeKeypairCrypto: KeypairCrypto = {
+  async generate() {
+    const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+    const pubJwk  = publicKey.export({ format: "jwk" })  as { x: string };
+    const privJwk = privateKey.export({ format: "jwk" }) as { d: string };
+    return {
+      verifyingKey: Buffer.from(pubJwk.x,  "base64url").toString("hex"),
+      signingKey:   Buffer.from(privJwk.d, "base64url").toString("hex"),
+    };
+  },
+};
+
+/** A single 0o600 JSON keypair slot at `keyFile`; save() stamps the git-email hint. */
+function fileKeypairStore(keyFile: string, login: string | null): KeypairStore {
+  return {
+    async load() {
+      if (!existsSync(keyFile)) return undefined;
+      const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
+      return { verifyingKey: raw.verifyingKey, signingKey: raw.signingKey };
+    },
+    async save(kp) {
+      const persisted: PersistedKey = {
+        verifyingKey: kp.verifyingKey,
+        signingKey:   kp.signingKey,
+        ...(login ? { gitEmail: login } : {}),
+      };
+      writeFileSync(keyFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
+      chmodSync(keyFile, 0o600);
+    },
+  };
 }
 
 // ── KERI-style pre-rotation (the can't-retrofit root-rotation hook) ──────────
@@ -188,11 +231,12 @@ export async function generateOrLoadVesselIdentity(
   // `reset` between CLI identity loads can never strand it in `.lararium/`.
   const keyFile  = join(idDir, keyFileName(hint.login));
 
-  let verifyingKey: string;
+  const { verifyingKey, created } = await generateOrLoadKeypair(
+    fileKeypairStore(keyFile, hint.login),
+    nodeKeypairCrypto,
+  );
 
-  if (existsSync(keyFile)) {
-    const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
-    verifyingKey = raw.verifyingKey;
+  if (!created) {
     console.log(`[vessel-identity] loaded keypair${hint.login ? ` for ${hint.login}` : ""}`);
     // No-retrofit guard: a key minted before pre-rotation has no valid inception window —
     // NEVER fake one (it has already signed; the thief-can't-rotate guarantee is unrecoverable).
@@ -200,21 +244,12 @@ export async function generateOrLoadVesselIdentity(
       console.log(`[vessel-identity] key predates pre-rotation — non-pre-rotating (not retrofitted)`);
     }
   } else {
-    const { publicKey, privateKey } = generateKeyPairSync("ed25519");
-    const pubJwk  = publicKey.export({ format: "jwk" }) as { x: string };
-    const privJwk = privateKey.export({ format: "jwk" }) as { d: string };
-
-    verifyingKey           = Buffer.from(pubJwk.x,  "base64url").toString("hex");
-    const signingKey       = Buffer.from(privJwk.d, "base64url").toString("hex");
-    const persisted: PersistedKey = { verifyingKey, signingKey, ...(hint.login ? { gitEmail: hint.login } : {}) };
-
-    writeFileSync(keyFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
-    chmodSync(keyFile, 0o600);
     console.log(`[vessel-identity] generated new Ed25519 keypair${hint.login ? ` for ${hint.login}` : ""}`);
 
     // Pre-rotation: commit the next-root key's digest NOW — before this key ever signs
     // (first use is `keyhive.init`, downstream of founding). The only valid window; cannot
     // be retrofitted. Minimal commitment; full KERI KEL/ceremony later (see kelFileName note).
+    // Runs strictly AFTER the keypair reached disk (the core persists before returning).
     const { kel, nextSeed } = mintInceptionCommitment(verifyingKey);
     const kelFile  = join(idDir, kelFileName(hint.login));
     const nextFile = join(idDir, nextSeedFileName(hint.login));
@@ -318,11 +353,7 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
   if (typeof raw.signingKey !== "string" || raw.signingKey.length !== 64) {
     throw new Error(`[vessel-identity] malformed signingKey in ${keyFile}`);
   }
-  const bytes = new Uint8Array(32);
-  for (let i = 0; i < 32; i++) {
-    bytes[i] = parseInt(raw.signingKey.slice(i * 2, i * 2 + 2), 16);
-  }
-  return bytes;
+  return signingSeedFromHex(raw.signingKey);
 }
 
 // ── PersonaGroup root key custody (the operator-root delegation capability) ──────
@@ -378,27 +409,24 @@ export async function generateOrLoadPersonaGroupRoot(
 
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
   const rootFile = join(idDir, personaGroupRootFileName(hint.login));
+  const store    = fileKeypairStore(rootFile, hint.login);
 
-  if (existsSync(rootFile)) {
-    const raw = JSON.parse(readFileSync(rootFile, "utf8")) as PersistedKey;
-    if (typeof raw.verifyingKey !== "string" || raw.verifyingKey.length !== 64) {
+  // The root rides the same generate-or-load skeleton + seams as the device key —
+  // with the root's stricter load-time verifyingKey guard kept (it is the more
+  // pin-worthy identity) and FOUNDER-ONLY semantics carried by the caller.
+  const existing = await store.load();
+  if (existing) {
+    if (existing.verifyingKey.length !== 64) {
       throw new Error(`[vessel-identity] malformed verifyingKey in ${rootFile}`);
     }
     console.log(`[vessel-identity] loaded PersonaGroup root${hint.login ? ` for ${hint.login}` : ""}`);
-    return { verifyingKey: raw.verifyingKey, created: false };
+    return { verifyingKey: existing.verifyingKey, created: false };
   }
 
-  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
-  const pubJwk  = publicKey.export({ format: "jwk" }) as { x: string };
-  const privJwk = privateKey.export({ format: "jwk" }) as { d: string };
-  const verifyingKey = Buffer.from(pubJwk.x,  "base64url").toString("hex");
-  const signingKey   = Buffer.from(privJwk.d, "base64url").toString("hex");
-  const persisted: PersistedKey = { verifyingKey, signingKey, ...(hint.login ? { gitEmail: hint.login } : {}) };
-
-  writeFileSync(rootFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
-  chmodSync(rootFile, 0o600);
+  const fresh = await nodeKeypairCrypto.generate();
+  await store.save(fresh);
   console.log(`[vessel-identity] minted PersonaGroup root${hint.login ? ` for ${hint.login}` : ""}`);
-  return { verifyingKey, created: true };
+  return { verifyingKey: fresh.verifyingKey, created: true };
 }
 
 /**
@@ -422,9 +450,5 @@ export async function loadPersonaGroupRootSeed(dataDir: string): Promise<Uint8Ar
   if (typeof raw.signingKey !== "string" || raw.signingKey.length !== 64) {
     throw new Error(`[vessel-identity] malformed signingKey in ${rootFile}`);
   }
-  const bytes = new Uint8Array(32);
-  for (let i = 0; i < 32; i++) {
-    bytes[i] = parseInt(raw.signingKey.slice(i * 2, i * 2 + 2), 16);
-  }
-  return bytes;
+  return signingSeedFromHex(raw.signingKey);
 }

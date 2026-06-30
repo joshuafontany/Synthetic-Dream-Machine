@@ -11,6 +11,7 @@ export * from "./base-doc.js";
 export * from "./cas.js";
 export * from "./resolver.js";
 export * from "./bag-residency.js";
+export * from "./vessel-identity-core.js";
 export * from "./capability.js";
 export * from "./crypto.js";
 export * from "./projection-registry.js";

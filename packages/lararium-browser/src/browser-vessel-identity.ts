@@ -12,7 +12,12 @@
  * Meme: lar:///ha.ka.ba/@lararium/browser/browser-vessel-identity
  */
 
-import { hexToBytes } from "@lararium/mesh";
+import {
+  generateOrLoadKeypair,
+  signingSeedFromHex,
+  type KeypairStore,
+  type KeypairCrypto,
+} from "@lararium/mesh";
 
 const KEY_RECORD = "vessel-key";
 
@@ -61,8 +66,9 @@ export function idbPut(db: IDBDatabase, store: string, key: string, value: unkno
   });
 }
 
-// ── Encoding ──────────────────────────────────────────────────────────────────
-// hex→bytes rides the canonical (validated) `hexToBytes` from @lararium/mesh.
+// ── Platform seams for the shared keypair lifecycle (vessel-identity-core) ──────
+// The browser mints via WebCrypto (Ed25519 subtle) and persists the keypair to
+// IndexedDB. The core (mesh) owns the generate-or-load control flow over these.
 // base64urlToHex stays browser-local — it decodes a WebCrypto JWK field via
 // `atob`, with no mesh-floor equivalent.
 
@@ -73,6 +79,40 @@ function base64urlToHex(b64url: string): string {
   let hex = "";
   for (let i = 0; i < bin.length; i++) hex += bin.charCodeAt(i).toString(16).padStart(2, "0");
   return hex;
+}
+
+const browserKeypairCrypto: KeypairCrypto = {
+  async generate() {
+    const keyPair = await crypto.subtle.generateKey(
+      { name: "Ed25519" } as EcKeyGenParams,
+      true,
+      ["sign", "verify"],
+    ) as CryptoKeyPair;
+    const privJwk = await crypto.subtle.exportKey("jwk", keyPair.privateKey) as JsonWebKey;
+    const pubJwk  = await crypto.subtle.exportKey("jwk", keyPair.publicKey)  as JsonWebKey;
+    if (!privJwk.d || !pubJwk.x) {
+      throw new Error("[browser-vessel-identity] WebCrypto exportKey produced unexpected JWK shape");
+    }
+    return { verifyingKey: base64urlToHex(pubJwk.x), signingKey: base64urlToHex(privJwk.d) };
+  },
+};
+
+/** The IndexedDB keystore slot as a single keypair store. */
+function idbKeypairStore(idbName: string): KeypairStore {
+  return {
+    async load() {
+      const db = await openVesselIdb(idbName);
+      const existing = await idbGet<PersistedBrowserKey>(db, "keystore", KEY_RECORD);
+      db.close();
+      return existing ? { verifyingKey: existing.verifyingKey, signingKey: existing.signingKey } : undefined;
+    },
+    async save(kp) {
+      const db = await openVesselIdb(idbName);
+      const record: PersistedBrowserKey = { verifyingKey: kp.verifyingKey, signingKey: kp.signingKey };
+      await idbPut(db, "keystore", KEY_RECORD, record);
+      db.close();
+    },
+  };
 }
 
 // ── Keypair lifecycle ─────────────────────────────────────────────────────────
@@ -90,36 +130,7 @@ export async function generateOrLoadBrowserVesselIdentity(
   idbName    = "lares:vessel",
   displayName?: string,
 ): Promise<BrowserVesselIdentity> {
-  const db      = await openVesselIdb(idbName);
-  const existing = await idbGet<PersistedBrowserKey>(db, "keystore", KEY_RECORD);
-
-  if (existing) {
-    db.close();
-    const base: BrowserVesselIdentity = { verifyingKey: existing.verifyingKey };
-    return displayName ? { ...base, displayName } : base;
-  }
-
-  // First boot — generate via WebCrypto.
-  const keyPair = await crypto.subtle.generateKey(
-    { name: "Ed25519" } as EcKeyGenParams,
-    true,
-    ["sign", "verify"],
-  ) as CryptoKeyPair;
-
-  const privJwk = await crypto.subtle.exportKey("jwk", keyPair.privateKey) as JsonWebKey;
-  const pubJwk  = await crypto.subtle.exportKey("jwk", keyPair.publicKey)  as JsonWebKey;
-
-  if (!privJwk.d || !pubJwk.x) {
-    throw new Error("[browser-vessel-identity] WebCrypto exportKey produced unexpected JWK shape");
-  }
-
-  const signingKey   = base64urlToHex(privJwk.d);
-  const verifyingKey = base64urlToHex(pubJwk.x);
-
-  const record: PersistedBrowserKey = { verifyingKey, signingKey };
-  await idbPut(db, "keystore", KEY_RECORD, record);
-  db.close();
-
+  const { verifyingKey } = await generateOrLoadKeypair(idbKeypairStore(idbName), browserKeypairCrypto);
   const base: BrowserVesselIdentity = { verifyingKey };
   return displayName ? { ...base, displayName } : base;
 }
@@ -129,12 +140,9 @@ export async function generateOrLoadBrowserVesselIdentity(
  * Throws when no keypair exists — call generateOrLoadBrowserVesselIdentity first.
  */
 export async function loadBrowserSigningSeed(idbName = "lares:vessel"): Promise<Uint8Array> {
-  const db      = await openVesselIdb(idbName);
-  const existing = await idbGet<PersistedBrowserKey>(db, "keystore", KEY_RECORD);
-  db.close();
-
+  const existing = await idbKeypairStore(idbName).load();
   if (!existing) {
     throw new Error("[browser-vessel-identity] no keypair in IDB — call generateOrLoadBrowserVesselIdentity first");
   }
-  return hexToBytes(existing.signingKey);
+  return signingSeedFromHex(existing.signingKey);
 }
