@@ -90,6 +90,64 @@ def test_make_dispatch_handler_error_surfaces_not_crashes():
 
 
 # ---------------------------------------------------------------------------
+# read_stored_embeddings — the model-agnostic store-readback cap
+# ---------------------------------------------------------------------------
+
+
+class _FakeCollection:
+    """A minimal chroma-shaped collection: `.get(where=, include=)` returns parallel
+    ids/embeddings/metadatas lists (the only surface read_stored_embeddings touches)."""
+
+    def __init__(self, ids, embeddings, metadatas):
+        self._ids = ids
+        self._embs = embeddings
+        self._metas = metadatas
+        self.calls = []
+
+    def get(self, where=None, include=None):
+        self.calls.append({"where": where, "include": include})
+        return {"ids": self._ids, "embeddings": self._embs, "metadatas": self._metas}
+
+
+def test_read_stored_embeddings_projects_per_key_map():
+    col = _FakeCollection(
+        ids=["a", "b"],
+        embeddings=[[1, 2], [3, 4]],
+        metadatas=[{"src": "x", "n": 5}, {"src": "y", "n": 9}],
+    )
+    rows = sc.read_stored_embeddings(col, {"source_file": "src", "chunk_index": "n"})
+    assert rows == [
+        {"id": "a", "embedding": [1.0, 2.0], "source_file": "x", "chunk_index": 5},
+        {"id": "b", "embedding": [3.0, 4.0], "source_file": "y", "chunk_index": 9},
+    ]
+    # the readback asks for BOTH embeddings + metadatas (never re-embeds, never a model).
+    assert col.calls[0]["include"] == ["embeddings", "metadatas"]
+
+
+def test_read_stored_embeddings_skips_none_embeddings_and_coerces_floats():
+    col = _FakeCollection(
+        ids=["a", "b", "c"],
+        embeddings=[[1, 2], None, [7, 8]],  # b has no stored vector → dropped
+        metadatas=[{"k": "1"}, {"k": "2"}, None],  # c's None metadata → projects None
+    )
+    rows = sc.read_stored_embeddings(col, {"key": "k"})
+    assert [r["id"] for r in rows] == ["a", "c"]  # b skipped
+    assert rows[0]["embedding"] == [1.0, 2.0]
+    assert all(isinstance(x, float) for r in rows for x in r["embedding"])  # float-coerced
+    assert rows[1]["key"] is None  # a missing metadata key projects None (caller defaults)
+
+
+def test_read_stored_embeddings_passes_where_through():
+    col = _FakeCollection(ids=["a"], embeddings=[[1.0]], metadatas=[{}])
+    sc.read_stored_embeddings(col, {}, where={"wing": "w1"})
+    assert col.calls[0]["where"] == {"wing": "w1"}
+
+
+def test_form_collection_constant_is_form():
+    assert sc.FORM_COLLECTION == "form"
+
+
+# ---------------------------------------------------------------------------
 # flock-singleton — per-palace, per-prefix, OS-enforced
 # ---------------------------------------------------------------------------
 

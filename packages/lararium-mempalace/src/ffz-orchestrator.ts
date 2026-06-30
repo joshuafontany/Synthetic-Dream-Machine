@@ -112,6 +112,13 @@ export interface ClusterReading {
 export type EmbeddingsReader = (wing: string) => DrawerVector[];
 /** Cluster a wing's drawer-graph (the Theme band); null ⇒ no cluster reading. */
 export type ClusterReader = (wing: string) => ClusterReading | null;
+/**
+ * Read a wing's stored FORM-plane vectors back, joined by `verbatim_sha` (the
+ * cross-graph join key). The SECOND plane of the two-planes braid: when wired the
+ * Measure servo runs the quorum at N=2 (content plane-0 · form plane-1), so the
+ * form/move tension-moments light up. Absent ⇒ the run stays 1-plane (today).
+ */
+export type FormVectorReader = (wing: string) => Map<string, readonly number[]>;
 /** Merge the `{lar_ffz}` patches back onto the drawers; returns the applied count. */
 export type PatchWriter = (
   patches: ReadonlyArray<{ readonly id: string; readonly patch: Record<string, string | number> }>,
@@ -122,6 +129,11 @@ export interface OrchestrateDeps {
   readonly readEmbeddings: EmbeddingsReader;
   /** Optional — absent ⇒ Theme stays porous (Measure + Beat still stamp). */
   readonly readClusters?: ClusterReader;
+  /**
+   * Optional — absent ⇒ the run stays CONTENT-only (1-plane, today's behavior exactly).
+   * Present (and a session joins it) ⇒ the form plane rides as plane-1, the quorum runs N=2.
+   */
+  readonly readFormVectors?: FormVectorReader;
   readonly writePatches: PatchWriter;
 }
 
@@ -151,8 +163,10 @@ export interface OrchestrateResult {
   readonly themeAccepted: boolean;
   /** patches merged back. */
   readonly applied: number;
-  /** planes the Measure servo ran over (1 = content-only; form/structure plumbing pending). */
+  /** planes the Measure servo ran over (1 = content-only; 2 = content + form). */
   readonly planesPresent: number;
+  /** form/move TENSION-moments — quorum steps where the planes disagreed (Signal-Jam). */
+  readonly conflicts: number;
 }
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -221,22 +235,98 @@ export function overlayFfzAddress(
 }
 
 /**
+ * The 2-plane PRE-PASS — run ONE {@link centroidDriftStep} tracker per plane over a session
+ * (in order) → a per-drawer `[contentDrift, formDrift]` drift vector. PURE.
+ *
+ *   CONTENT — the running-centroid drift of each drawer's embedding.
+ *   FORM    — the running-centroid drift of each drawer's joined form vector
+ *             (`formBySha.get(verbatimSha)`). A drawer with NO form join feeds the form
+ *             tracker a REPEAT of the LAST form vector — turn-grained: the chunks of one
+ *             turn share a verbatim_sha (one form vector), so the form drift reads ~0
+ *             mid-turn and lights only at a turn boundary (the form-shift moment). That is
+ *             CORRECT, not a bug. Until the first join there is no form vector to repeat,
+ *             so the form drift stays 0.
+ *
+ * No gong-feedback reseed here (a pure pre-pass; the gong is decided downstream in
+ * {@link quorumStep}). The servo's per-plane EWMA-z standardizes the two scales, so the raw
+ * drift magnitudes need not match across planes.
+ */
+export function computePlaneDrifts(
+  sessionVectors: readonly DrawerVector[],
+  formBySha: ReadonlyMap<string, readonly number[]>,
+): Map<string, readonly number[]> {
+  const drifts = new Map<string, readonly number[]>();
+  let contentCentroid: readonly number[] | null = null;
+  let formCentroid: readonly number[] | null = null;
+  let lastForm: readonly number[] | null = null;
+  let contentCount = 0;
+  let formCount = 0;
+  for (const v of sessionVectors) {
+    const c = centroidDriftStep(contentCentroid, v.embedding, contentCount);
+    contentCentroid = c.centroid;
+    contentCount += 1;
+
+    const joined = v.verbatimSha != null ? formBySha.get(v.verbatimSha) : undefined;
+    const formVec: readonly number[] | null = joined ?? lastForm; // no join ⇒ repeat the last form vector
+    let formDrift = 0;
+    if (formVec) {
+      const f = centroidDriftStep(formCentroid, formVec, formCount);
+      formCentroid = f.centroid;
+      formDrift = f.drift;
+      formCount += 1;
+      lastForm = formVec;
+    }
+    drifts.set(v.id, [c.drift, formDrift]);
+  }
+  return drifts;
+}
+
+/**
  * Run the Measure servo over ONE session's vectors (already ordered by chunk_index) →
  * a segment LABEL per drawer id. ALWAYS routes through {@link quorumStep} (the C-0 collapse —
- * content is plane-0): when a multi-plane `planes` drift feed rides the records it fuses those
- * planes; absent it, the content drift is derived from the embeddings ({@link centroidDriftStep})
- * as the sole plane-0 — `effGong = min(quorumGong, 1) = 1` reproduces the one-plane gong
- * byte-for-byte. Behaviorally identical at 1-plane (Strand A wires the 2nd plane later). PURE.
+ * content is plane-0). Three routes, in precedence:
+ *
+ *   1. FORM (2-plane) — a `formBySha` reader is wired AND this session joins it: the
+ *      {@link computePlaneDrifts} pre-pass derives `[content, form]` drifts and the quorum runs
+ *      at N=2 (content plane-0, form plane-1). `effGong = min(quorumGong, 2) = 2` ⇒ BOTH planes
+ *      must co-fire to gong; a lone form scream reads `conflict` (the tension-moment).
+ *   2. EXPLICIT planes — a multi-plane `planes` drift feed rides the records (the test/deferred
+ *      3-plane path): fuse them directly.
+ *   3. CONTENT-only (1-plane) — derive the content drift from the embeddings
+ *      ({@link centroidDriftStep}) as the sole plane-0; `effGong = min(quorumGong, 1) = 1`
+ *      reproduces the one-plane gong byte-for-byte (today's behavior, IDENTICAL when no form
+ *      reader is wired). PURE.
  */
 export function deriveMeasureLabels(
   sessionVectors: readonly DrawerVector[],
   servo: Partial<MeasureServoConfig & QuorumServoConfig> = {},
-): { labels: Map<string, string>; gongs: number; planes: number } {
+  formBySha?: ReadonlyMap<string, readonly number[]>,
+): { labels: Map<string, string>; gongs: number; planes: number; conflicts: number } {
   const labels = new Map<string, string>();
   let gongs = 0;
-  const multiPlane = sessionVectors.find((v) => v.planes && v.planes.length > 1)?.planes?.length;
-  const planes = multiPlane ?? 1;
+  let conflicts = 0;
 
+  // ROUTE 1 — the FORM plane (2-plane) when a reader is wired and this session joins it.
+  const formJoins =
+    formBySha != null &&
+    formBySha.size > 0 &&
+    sessionVectors.some((v) => v.verbatimSha != null && formBySha.has(v.verbatimSha));
+  if (formJoins) {
+    const planeDrifts = computePlaneDrifts(sessionVectors, formBySha);
+    let st = quorumServoInit(2);
+    for (const v of sessionVectors) {
+      const drift = planeDrifts.get(v.id) ?? [0, 0];
+      const step = quorumStep(st, drift, servo);
+      st = step.state;
+      labels.set(v.id, step.label);
+      if (step.gonged) gongs += 1;
+      if (step.conflict) conflicts += 1;
+    }
+    return { labels, gongs, planes: 2, conflicts };
+  }
+
+  // ROUTE 2 — an explicit multi-plane drift feed on the records.
+  const multiPlane = sessionVectors.find((v) => v.planes && v.planes.length > 1)?.planes?.length;
   if (multiPlane) {
     let st = quorumServoInit(multiPlane);
     for (const v of sessionVectors) {
@@ -245,22 +335,25 @@ export function deriveMeasureLabels(
       st = step.state;
       labels.set(v.id, step.label);
       if (step.gonged) gongs += 1;
+      if (step.conflict) conflicts += 1;
     }
-  } else {
-    // CONTENT-only: derive the content drift against the running centroid, feed quorumStep at N=1.
-    let st = quorumServoInit(1);
-    let centroid: readonly number[] | null = null;
-    for (const v of sessionVectors) {
-      const openCount = st.count;
-      const { drift, centroid: folded } = centroidDriftStep(centroid, v.embedding, openCount);
-      const step = quorumStep(st, [drift], servo);
-      centroid = step.gonged || openCount === 0 ? [...v.embedding] : folded;
-      st = step.state;
-      labels.set(v.id, step.label);
-      if (step.gonged) gongs += 1;
-    }
+    return { labels, gongs, planes: multiPlane, conflicts };
   }
-  return { labels, gongs, planes };
+
+  // ROUTE 3 — CONTENT-only: derive the content drift against the running centroid, quorum at N=1.
+  let st = quorumServoInit(1);
+  let centroid: readonly number[] | null = null;
+  for (const v of sessionVectors) {
+    const openCount = st.count;
+    const { drift, centroid: folded } = centroidDriftStep(centroid, v.embedding, openCount);
+    const step = quorumStep(st, [drift], servo);
+    centroid = step.gonged || openCount === 0 ? [...v.embedding] : folded;
+    st = step.state;
+    labels.set(v.id, step.label);
+    if (step.gonged) gongs += 1;
+    if (step.conflict) conflicts += 1;
+  }
+  return { labels, gongs, planes: 1, conflicts };
 }
 
 /**
@@ -274,6 +367,9 @@ export function orchestrateWing(
   opts: OrchestrateOptions = {},
 ): OrchestrateResult {
   const vectors = deps.readEmbeddings(wing);
+  // The FORM plane (the 2nd plane of the braid) — read once for the wing, joined per
+  // session on verbatim_sha. Absent ⇒ formBySha undefined ⇒ every session stays 1-plane.
+  const formBySha = deps.readFormVectors ? deps.readFormVectors(wing) : undefined;
 
   // Group by source_file (the Arc = session-island), preserving the readback order
   // (drawer_io.py already sorts by (source_file, chunk_index, id)).
@@ -287,11 +383,13 @@ export function orchestrateWing(
   // MEASURE — per session.
   const measureLabels = new Map<string, string>();
   let gongs = 0;
+  let conflicts = 0;
   let planesPresent = 1;
   for (const recs of sessions.values()) {
-    const { labels, gongs: g, planes } = deriveMeasureLabels(recs, opts.servo);
+    const { labels, gongs: g, planes, conflicts: c } = deriveMeasureLabels(recs, opts.servo, formBySha);
     for (const [id, l] of labels) measureLabels.set(id, l);
     gongs += g;
+    conflicts += c;
     planesPresent = Math.max(planesPresent, planes);
   }
 
@@ -340,6 +438,7 @@ export function orchestrateWing(
     themeAccepted,
     applied,
     planesPresent,
+    conflicts,
   };
 }
 
@@ -390,6 +489,29 @@ export function pythonEmbeddingsReader(wing: string): DrawerVector[] {
   });
 }
 
+/**
+ * Default {@link FormVectorReader} — `drawer_io.py form-embeddings` (the FORM plane).
+ * Reads the stored form-vectors back from the "form" collection (NEVER re-embeds), keyed by
+ * `verbatim_sha` → the form vector. A `--wing` filter does not apply (form is keyed by sha,
+ * not wing-scoped); the orchestrator joins per session on the content readback's verbatim_sha.
+ */
+export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
+  const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
+  const out = mineWithServo("drawer-io-form-embeddings", (timeoutMs) =>
+    execFileSync(PY, [DRAWER_IO, "form-embeddings"], {
+      cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
+      timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
+    }),
+  );
+  const bySha = new Map<string, readonly number[]>();
+  for (const l of out.split("\n").filter(Boolean)) {
+    const r = JSON.parse(l) as { id: string; embedding: number[]; verbatim_sha?: string };
+    const key = r.verbatim_sha || r.id;
+    if (key) bySha.set(key, r.embedding);
+  }
+  return bySha;
+}
+
 /** Default {@link ClusterReader} — `drawer_io.py cluster --wing W` (Theme band). */
 export function pythonClusterReader(wing: string): ClusterReading | null {
   const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
@@ -433,7 +555,12 @@ export function pythonPatchWriter(
 export function orchestrateWingLive(wing: string, opts: OrchestrateOptions = {}): OrchestrateResult {
   return orchestrateWing(
     wing,
-    { readEmbeddings: pythonEmbeddingsReader, readClusters: pythonClusterReader, writePatches: pythonPatchWriter },
+    {
+      readEmbeddings: pythonEmbeddingsReader,
+      readClusters: pythonClusterReader,
+      readFormVectors: pythonFormEmbeddingsReader,
+      writePatches: pythonPatchWriter,
+    },
     opts,
   );
 }

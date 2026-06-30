@@ -17,6 +17,7 @@ import {
   parseFfzCells,
   overlayFfzAddress,
   deriveMeasureLabels,
+  computePlaneDrifts,
   type DrawerVector,
   type ClusterReading,
   type OrchestrateDeps,
@@ -184,5 +185,179 @@ describe("orchestrateWing — the full pipeline", () => {
     expect(res.drawers).toBe(0);
     expect(res.applied).toBe(0);
     expect(wrote).toBe(0);
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// STRAND A — the FORM plane (the 2nd plane of the braid). The Measure quorum runs
+// at N=2 (content plane-0 · form plane-1); the form/move tension-moments light up.
+// ───────────────────────────────────────────────────────────────────────────
+
+/** An n-dim one-hot vector (a deterministic, embedder-free stand-in for a form vector). */
+function hot(axis: number, dim: number): number[] {
+  const v = new Array(dim).fill(0);
+  v[axis] = 1;
+  return v;
+}
+/** A content vector that tilts `frac` of the way from axis 0 toward axis 1 (cos-controlled drift). */
+function tilt(frac: number): number[] {
+  const v = new Array(8).fill(0);
+  v[0] = 1 - frac;
+  v[1] = frac;
+  return v;
+}
+/** A drawer carrying a content embedding + a verbatim_sha (the form-plane join key). */
+function fdrawer(chunk: number, emb: number[], sha: string): DrawerVector {
+  return {
+    id: `q#${chunk}`,
+    embedding: emb,
+    chunkIndex: chunk,
+    sourceFile: "q.jsonl",
+    ffz: `session/_.q._._.pq${chunk}`,
+    verbatimSha: sha,
+  };
+}
+
+describe("computePlaneDrifts — the 2-plane pre-pass", () => {
+  test("turn-grained: chunks of one turn share a verbatim_sha ⇒ form drift 0 mid-turn", () => {
+    // 4 chunks, ONE verbatim_sha → one form vector; content also steady.
+    const form = new Map<string, readonly number[]>([["sha", hot(0, 4)]]);
+    const recs = [0, 1, 2, 3].map((c) => fdrawer(c, hot(0, 8), "sha"));
+    const drifts = computePlaneDrifts(recs, form);
+    // every member: content drift 0 (steady) and form drift 0 (one shared vector).
+    for (const r of recs) expect(drifts.get(r.id)).toEqual([0, 0]);
+  });
+
+  test("a drawer with NO form join repeats the last form vector (form drift stays 0)", () => {
+    // chunk 0 joins f0; chunks 1-2 have NO join (sha absent from the map) → repeat f0.
+    const form = new Map<string, readonly number[]>([["j0", hot(0, 4)]]);
+    const recs = [fdrawer(0, hot(0, 8), "j0"), fdrawer(1, hot(0, 8), "miss1"), fdrawer(2, hot(0, 8), "miss2")];
+    const drifts = computePlaneDrifts(recs, form);
+    // the repeated form vector is identical ⇒ form drift 0 across the no-join chunks.
+    expect(drifts.get("q#0")?.[1]).toBe(0);
+    expect(drifts.get("q#1")?.[1]).toBe(0);
+    expect(drifts.get("q#2")?.[1]).toBe(0);
+  });
+
+  test("a JOINT shift lifts BOTH plane drifts at the same member", () => {
+    const form = new Map<string, readonly number[]>();
+    const recs: DrawerVector[] = [];
+    for (let c = 0; c < 6; c++) {
+      const shifted = c >= 3;
+      const sha = `s${c}`;
+      form.set(sha, hot(shifted ? 1 : 0, 4));
+      recs.push(fdrawer(c, hot(shifted ? 1 : 0, 8), sha));
+    }
+    const drifts = computePlaneDrifts(recs, form);
+    expect(drifts.get("q#2")).toEqual([0, 0]); // pre-shift, coherent
+    const [cd, fd] = drifts.get("q#3")!; // the shift member
+    expect(cd).toBeGreaterThan(0.9); // orthogonal one-hot ⇒ drift ≈ 1 on both planes
+    expect(fd).toBeGreaterThan(0.9);
+  });
+});
+
+describe("deriveMeasureLabels — the form plane (N=2 quorum)", () => {
+  /** A 10-member session; `content`/`form` axis pickers per chunk drive the two planes. */
+  function session(contentAxis: (c: number) => number[], formAxis: (c: number) => number): {
+    recs: DrawerVector[];
+    form: Map<string, readonly number[]>;
+  } {
+    const form = new Map<string, readonly number[]>();
+    const recs: DrawerVector[] = [];
+    for (let c = 0; c < 10; c++) {
+      const sha = `s${c}`;
+      form.set(sha, hot(formAxis(c), 4));
+      recs.push(fdrawer(c, contentAxis(c), sha));
+    }
+    return { recs, form };
+  }
+
+  test("planesPresent reports 2 when the session joins the form plane", () => {
+    const { recs, form } = session(() => hot(0, 8), () => 0);
+    expect(deriveMeasureLabels(recs, {}, form).planes).toBe(2);
+  });
+
+  test("a content+form JOINT shift gongs", () => {
+    const { recs, form } = session((c) => hot(c >= 5 ? 1 : 0, 8), (c) => (c >= 5 ? 1 : 0));
+    const r = deriveMeasureLabels(recs, {}, form);
+    expect(r.planes).toBe(2);
+    expect(r.gongs).toBe(1); // both planes co-fire ⇒ effGong=min(3,2)=2 met
+    expect(r.conflicts).toBe(0);
+  });
+
+  test("a content-only shift (form coherent) reads no-gong, no-conflict", () => {
+    // a MODERATE content tilt fires-but-does-not-scream; the form plane stays coherent.
+    const { recs, form } = session((c) => (c >= 5 ? tilt(0.2) : hot(0, 8)), () => 0);
+    const r = deriveMeasureLabels(recs, {}, form);
+    expect(r.gongs).toBe(0); // one plane cannot meet the N=2 gong
+    expect(r.conflicts).toBe(0); // a moderate wobble does not scream → no tension flag
+  });
+
+  test("a form-only shift (content coherent) reads conflict — the tension-moment", () => {
+    const { recs, form } = session(() => hot(0, 8), (c) => (c >= 5 ? 1 : 0));
+    const r = deriveMeasureLabels(recs, {}, form);
+    expect(r.gongs).toBe(0); // the lone form scream NEVER fires the gong
+    expect(r.conflicts).toBeGreaterThan(0); // Signal-Jam: form screams with content silent
+  });
+
+  test("a session that does not join the form plane stays 1-plane (no spurious gong)", () => {
+    // a wired reader, but NO drawer's sha is in the map → the form plane never engages.
+    const recs = [0, 1, 2].map((c) => fdrawer(c, hot(0, 8), `nojoin${c}`));
+    const form = new Map<string, readonly number[]>([["elsewhere", hot(0, 4)]]);
+    const r = deriveMeasureLabels(recs, {}, form);
+    expect(r.planes).toBe(1);
+    expect(r.gongs).toBe(0);
+    expect(r.conflicts).toBe(0);
+  });
+
+  test("1-plane behavior IDENTICAL when no form reader is wired (absent-seam parity)", () => {
+    const { recs } = session((c) => hot(c >= 5 ? 1 : 0, 8), (c) => (c >= 5 ? 1 : 0));
+    const withForm = deriveMeasureLabels(recs); // no formBySha
+    expect(withForm.planes).toBe(1);
+  });
+});
+
+describe("orchestrateWing — the form plane wired (N=2)", () => {
+  function formSession(): { reader: () => DrawerVector[]; form: Map<string, readonly number[]> } {
+    const form = new Map<string, readonly number[]>();
+    const recs: DrawerVector[] = [];
+    for (let c = 0; c < 10; c++) {
+      const shifted = c >= 5;
+      const sha = `s${c}`;
+      form.set(sha, hot(shifted ? 1 : 0, 4));
+      recs.push(fdrawer(c, hot(shifted ? 1 : 0, 8), sha));
+    }
+    return { reader: () => recs, form };
+  }
+
+  test("planesPresent=2 + the JOINT shift gongs through the full pipeline", () => {
+    const { reader, form } = formSession();
+    const w = capture();
+    const res = orchestrateWing("wing_f", {
+      readEmbeddings: reader,
+      readFormVectors: () => form,
+      writePatches: w.writePatches,
+    });
+    expect(res.planesPresent).toBe(2);
+    expect(res.gongs).toBe(1);
+    expect(res.measured).toBe(10);
+    // the patch STILL carries ONLY lar_ffz — the form plane changes the LABEL, never the key set.
+    for (const p of w.patches) expect(Object.keys(p.patch)).toEqual(["lar_ffz"]);
+  });
+
+  test("idempotent — a second form-wired run derives byte-identical patches", () => {
+    const { reader, form } = formSession();
+    const w1 = capture();
+    orchestrateWing("wing_f", { readEmbeddings: reader, readFormVectors: () => form, writePatches: w1.writePatches });
+    const w2 = capture();
+    orchestrateWing("wing_f", { readEmbeddings: reader, readFormVectors: () => form, writePatches: w2.writePatches });
+    expect(w2.patches).toEqual(w1.patches);
+  });
+
+  test("an absent form reader leaves planesPresent=1 (today's behavior preserved)", () => {
+    const { reader } = formSession();
+    const w = capture();
+    const res = orchestrateWing("wing_f", { readEmbeddings: reader, writePatches: w.writePatches });
+    expect(res.planesPresent).toBe(1);
   });
 });

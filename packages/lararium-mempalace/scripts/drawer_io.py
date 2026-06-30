@@ -26,9 +26,10 @@ import sys
 
 from mempalace.palace import get_collection
 
-# This batch CLI's cap-stack is light: it #has only the shared NDJSON record reader
-# (no serve loop / flock / idle-reap — those belong to the persistent serve sidecars).
-from sidecar_caps import read_ndjson_records
+# This batch CLI's cap-stack is light: it #has the shared NDJSON record reader and
+# the store-readback cap (no serve loop / flock / idle-reap — those belong to the
+# persistent serve sidecars). FORM_COLLECTION is the shared form-store name.
+from sidecar_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embeddings
 
 PALACE = os.path.expanduser("~/.mempalace/palace")
 # Current harvest version — bump when the harvester's output shape changes, so a
@@ -77,45 +78,74 @@ def cmd_export(args):
 
 def cmd_embeddings(args):
     """Read STORED embeddings back out of the palace — the FFZ Measure servo's
-    cosine-cohesion feed. The nomic vectors were already computed by the palace at
-    insert; this NEVER re-embeds and NEVER loads a model (model-agnostic readback),
-    honoring the NO-new-model law. One NDJSON record per drawer:
-      {id, embedding:[...], chunk_index, source_file}
-    ordered for the servo by (source_file, chunk_index) so a session's members feed
-    the one servo in their per-session ingest order. Read-only — never a write."""
+    CONTENT-plane cohesion feed. The nomic vectors were already computed by the palace
+    at insert; the shared `read_stored_embeddings` cap NEVER re-embeds and NEVER loads a
+    model (model-agnostic readback), honoring the NO-new-model law. One NDJSON record
+    per drawer:
+      {id, embedding:[...], chunk_index, source_file, lar_ffz, verbatim_sha,
+       lar_agent_handle, lar_salience}
+    ordered HERE (the caller owns ordering) by (source_file, chunk_index, id) so a
+    session's members feed the one servo in their per-session ingest order. The two
+    extra keys (lar_agent_handle for frontier-parse · lar_salience for down-weight)
+    ride for free off the same readback. Read-only — never a write."""
     col = _col()
     where = {"wing": args.wing} if args.wing else None
-    got = col.get(where=where, include=["embeddings", "metadatas"])
-    ids = got["ids"]
-    embs = got["embeddings"]
-    metas = got["metadatas"]
-    rows = []
-    for i, emb, m in zip(ids, embs, metas):
-        if emb is None:
-            continue  # a drawer with no stored vector — nothing for the servo to read
-        m = m or {}
-        rows.append(
-            {
-                "id": i,
-                "embedding": [float(x) for x in emb],
-                "chunk_index": m.get("chunk_index"),
-                "source_file": m.get("source_file", ""),
-                # the EXISTING rhythmic address (Arc + Pulse stamped at capture) — the FFZ
-                # orchestrator parses it, OVERLAYS the fluid bands (Measure/Beat/Theme), and
-                # re-serializes, so the birth-stamped Arc/Pulse cells survive untouched.
-                "lar_ffz": m.get("lar_ffz", ""),
-                # the cross-graph join key to the form/structure palaces (the deferred
-                # form/structure plane feed keys off this; carried now so the plumbing lands clean).
-                "verbatim_sha": m.get("lar_verbatim_sha", ""),
-            }
-        )
+    rows = read_stored_embeddings(
+        col,
+        {
+            "chunk_index": "chunk_index",
+            "source_file": "source_file",
+            # the EXISTING rhythmic address (Arc + Pulse stamped at capture) — the FFZ
+            # orchestrator parses it, OVERLAYS the fluid bands (Measure/Beat/Theme), and
+            # re-serializes, so the birth-stamped Arc/Pulse cells survive untouched.
+            "lar_ffz": "lar_ffz",
+            # the cross-graph join key to the form/structure palaces (the form plane
+            # feed keys off this against the form readback below).
+            "verbatim_sha": "lar_verbatim_sha",
+            # ride-along: the main-agent root handle (frontier-parse) + the salience
+            # down-weight — projected for free off the same readback.
+            "lar_agent_handle": "lar_agent_handle",
+            "lar_salience": "lar_salience",
+        },
+        where=where,
+    )
+    # The string fields default to "" (the readback shape the TS orchestrator parses);
+    # chunk_index stays null-graceful (the Beat cell tolerates a missing ordinal).
+    for r in rows:
+        r["source_file"] = r["source_file"] or ""
+        r["lar_ffz"] = r["lar_ffz"] or ""
+        r["verbatim_sha"] = r["verbatim_sha"] or ""
     # Stable per-session order: source_file, then the ingest ordinal (the Beat label
     # source), then the id — so the servo reads each Arc's members in sequence.
     rows.sort(key=lambda r: (r["source_file"], r["chunk_index"] if r["chunk_index"] is not None else 1 << 30, r["id"]))
     out = sys.stdout
     for r in rows:
         out.write(json.dumps(r) + "\n")
-    sys.stderr.write(f"read {len(rows)} embeddings (of {len(ids)} in {args.wing or 'ALL'})\n")
+    sys.stderr.write(f"read {len(rows)} embeddings (of {len(rows)} with vectors in {args.wing or 'ALL'})\n")
+
+
+def cmd_form_embeddings(args):
+    """Read STORED form-vectors back out of the FORM collection — the FFZ Measure
+    servo's FORM-plane feed (the SECOND plane of the two-planes braid). Same shared
+    `read_stored_embeddings` cap (NEVER re-embeds), against `get_collection(PALACE,
+    collection_name="form")`. The form entry's id ALREADY == its verbatim_sha (the
+    cross-graph join key), so we project only the explicit `verbatim_sha` metadata for
+    parity. Dumped FLAT — NO sort: form has no chunk_index/source_file ordering; the
+    orchestrator joins each form vector on verbatim_sha against the content readback's
+    own order. Read-only. A missing form collection (none stored yet) yields no rows
+    ⇒ the orchestrator degrades to the one CONTENT plane (N=1)."""
+    out = sys.stdout
+    try:
+        col = get_collection(PALACE, collection_name=FORM_COLLECTION, _skip_identity_check=True)
+    except Exception as exc:  # noqa: BLE001 — no form store yet ⇒ 1-plane degrade
+        sys.stderr.write(f"form-embeddings: no form collection ({type(exc).__name__}: {exc}) — 0 rows\n")
+        return
+    rows = read_stored_embeddings(col, {"verbatim_sha": "lar_verbatim_sha"})
+    for r in rows:
+        # id already == verbatim_sha; keep the explicit key non-null for the join.
+        r["verbatim_sha"] = r["verbatim_sha"] or r["id"]
+        out.write(json.dumps(r) + "\n")
+    sys.stderr.write(f"read {len(rows)} form-vectors from the '{FORM_COLLECTION}' collection\n")
 
 
 def cmd_cluster(args):
@@ -220,6 +250,8 @@ def main():
     em = sub.add_parser("embeddings")
     em.add_argument("--wing", default="")  # empty ⇒ the whole palace (the servo scopes per source_file)
     em.set_defaults(fn=cmd_embeddings)
+    fe = sub.add_parser("form-embeddings")  # the FORM-plane readback (keyed by verbatim_sha)
+    fe.set_defaults(fn=cmd_form_embeddings)
     c = sub.add_parser("cluster")
     c.add_argument("--wing", default="")  # empty ⇒ the whole palace
     c.add_argument("--threshold", type=float, default=0.5)  # cosine edge gate for the Theme graph

@@ -111,6 +111,47 @@ def make_dispatch(ops: dict):
 
 
 # ---------------------------------------------------------------------------
+# store-readback cap — read STORED vectors back out of ANY chroma collection
+# ---------------------------------------------------------------------------
+
+# The form/structure store's collection name. The SHARED home (form_encoder.py
+# re-declares the same literal value, FORM_COLLECTION = "form", as its store
+# target); a reader that joins the form plane keys off this. One name, two
+# holders agree by value — the cross-graph join (living-grammar-palace#two-planes).
+FORM_COLLECTION = "form"
+
+
+def read_stored_embeddings(collection, key_map: dict, *, where=None) -> list:
+    """Read STORED vectors back out of ``collection`` — NEVER re-embed, NEVER load a
+    model. The model-agnostic readback shared by every plane's feed (content · form):
+    a `.get(include=["embeddings","metadatas"])`, the None-embedding skip (a drawer
+    with no stored vector has nothing to feed), and the `[float(x) for x in emb]`
+    coercion (numpy → JSON-legal floats).
+
+    ``key_map`` is ``{output_field: metadata_key}`` — each row projects the named
+    metadata keys under the chosen output names. One row per drawer with a vector::
+
+        {id, embedding:[...], **projected}
+
+    The CALLER owns ordering (content sorts by (source_file, chunk_index, id); form
+    dumps flat) — this cap reads, projects, and returns in the store's native order."""
+    got = collection.get(where=where, include=["embeddings", "metadatas"])
+    ids = got["ids"]
+    embs = got["embeddings"]
+    metas = got["metadatas"]
+    rows = []
+    for i, emb, m in zip(ids, embs, metas):
+        if emb is None:
+            continue  # a drawer with no stored vector — nothing to feed a plane
+        m = m or {}
+        row = {"id": i, "embedding": [float(x) for x in emb]}
+        for out_field, meta_key in key_map.items():
+            row[out_field] = m.get(meta_key)
+        rows.append(row)
+    return rows
+
+
+# ---------------------------------------------------------------------------
 # serve cap — the per-palace flock singleton (reap-don't-pile, OS-enforced)
 # ---------------------------------------------------------------------------
 
