@@ -96,3 +96,4 @@ export * from "./carriage-caps.js";
 export * from "./persona-hd.js";
 export * from "./persona-identity.js";
 export * from "./cabal-place.js";
+export * from "./cabal-place-charter.js";
