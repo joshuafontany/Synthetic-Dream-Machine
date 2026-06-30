@@ -23,8 +23,6 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
-import { spawn } from "node:child_process";
-
 import {
   canonicalJson,
   canonicalJsonBytes,
@@ -37,7 +35,7 @@ import { resolveAstPalaceSpawn } from "@lararium/mempalace";
 import {
   PalaceHolderRegistry,
   canonicalDirOf,
-  type PalaceHolderProc,
+  makeServeSpawn,
   type PalaceHolderSpawn,
 } from "./palace-holder.js";
 
@@ -112,20 +110,7 @@ export type HolderSpawn = PalaceHolderSpawn;
 const registry = new PalaceHolderRegistry("astpalace");
 
 /** Default holder spawn: the venv-aware python running `astpalace_io.py serve --palace <dir>`. */
-function defaultHolderSpawn(canonicalDir: string): PalaceHolderProc {
-  const { python, script, submoduleRoot, scriptPresent } = resolveAstPalaceSpawn();
-  if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
-  if (!scriptPresent) throw new Error(`astpalace_io.py missing at ${script}`);
-  // PYTHONPATH=submoduleRoot makes `import mempalace` resolve (it is not pip-installed); the venv
-  // python supplies chromadb. `python script.py` sets sys.path[0] to the SCRIPT dir, so PYTHONPATH
-  // is the seam that reaches the submodule package.
-  const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
-  return spawn(python, [script, "serve", "--palace", canonicalDir], {
-    cwd: submoduleRoot,
-    env,
-    stdio: ["pipe", "pipe", "pipe"],
-  }) as unknown as PalaceHolderProc;
-}
+const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveAstPalaceSpawn);
 
 export interface AstPalaceOptions {
   /** per-call RPC timeout (ms); default 30s (covers the one-time chroma open on first call). */

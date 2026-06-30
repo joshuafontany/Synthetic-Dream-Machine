@@ -22,15 +22,13 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
  */
 
-import { spawn } from "node:child_process";
-
 import { resolveFormEncoderSpawn } from "@lararium/mempalace";
 import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
 
 import {
   PalaceHolderRegistry,
   canonicalDirOf,
-  type PalaceHolderProc,
+  makeServeSpawn,
   type PalaceHolderSpawn,
 } from "./palace-holder.js";
 
@@ -122,17 +120,7 @@ export type FormHolderSpawn = PalaceHolderSpawn;
 const registry = new PalaceHolderRegistry("form_encoder");
 
 /** Default holder spawn: the venv-aware python running `form_encoder.py serve --palace <dir>`. */
-function defaultHolderSpawn(canonicalDir: string): PalaceHolderProc {
-  const { python, script, submoduleRoot, scriptPresent } = resolveFormEncoderSpawn();
-  if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
-  if (!scriptPresent) throw new Error(`form_encoder.py missing at ${script}`);
-  const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
-  return spawn(python, [script, "serve", "--palace", canonicalDir], {
-    cwd: submoduleRoot,
-    env,
-    stdio: ["pipe", "pipe", "pipe"],
-  }) as unknown as PalaceHolderProc;
-}
+const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveFormEncoderSpawn);
 
 export interface FormPalaceOptions {
   /** per-call RPC timeout (ms); default 60s (covers the one-time chroma open + first encode). */

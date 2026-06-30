@@ -24,6 +24,7 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
+import { spawn } from "node:child_process";
 import { realpathSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -39,6 +40,41 @@ export interface PalaceHolderProc {
 
 /** Test seam: produce the holder process for a canonical palace dir (defaults to a python helper). */
 export type PalaceHolderSpawn = (canonicalDir: string) => PalaceHolderProc;
+
+/** The resolved spawn inputs a python `serve` holder needs (the shape AstPalaceSpawn / FormEncoderSpawn share). */
+export interface ResolvedServeSpawn {
+  /** the venv-aware interpreter, or null when none holds mempalace */
+  readonly python: string | null;
+  /** the helper script (full path) to run `serve` on */
+  readonly script: string;
+  /** the mempalace submodule root — the spawn cwd + PYTHONPATH so `import mempalace` resolves */
+  readonly submoduleRoot: string;
+  /** whether {@link ResolvedServeSpawn.script} exists on disk */
+  readonly scriptPresent: boolean;
+}
+
+/**
+ * Build the default holder spawn for a python `serve` palace store: resolve the venv-aware python
+ * + helper script (lazily, per spawn, via `resolveSpawn`), then run `<python> <script> serve
+ * --palace <dir>` with PYTHONPATH reaching the mempalace submodule. astpalace + formpalace share
+ * this verbatim — the only divergence was the resolve fn, lifted to a parameter here.
+ */
+export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn): PalaceHolderSpawn {
+  return (canonicalDir: string): PalaceHolderProc => {
+    const { python, script, submoduleRoot, scriptPresent } = resolveSpawn();
+    if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
+    if (!scriptPresent) throw new Error(`serve helper missing at ${script}`);
+    // PYTHONPATH=submoduleRoot makes `import mempalace` resolve (it is not pip-installed); the venv
+    // python supplies chromadb. `python script.py` sets sys.path[0] to the SCRIPT dir, so PYTHONPATH
+    // is the seam that reaches the submodule package.
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+    return spawn(python, [script, "serve", "--palace", canonicalDir], {
+      cwd: submoduleRoot,
+      env,
+      stdio: ["pipe", "pipe", "pipe"],
+    }) as unknown as PalaceHolderProc;
+  };
+}
 
 /** Canonicalize a palace dir the way the python side will (realpath when it exists, else resolve). */
 export function canonicalDirOf(dir: string): string {
