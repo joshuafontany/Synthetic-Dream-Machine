@@ -22,6 +22,11 @@ import {
   mkManifest,
   mkDaemonDeriveSkeletonRequest,
   mkDaemonDeriveSkeletonResult,
+  mkDaemonWorldlineCompareRequest,
+  mkDaemonWorldlineCompareResult,
+  mkDaemonWorldlineTrajectoryRequest,
+  mkDaemonWorldlineTrajectoryResult,
+  delegationEdge,
   type IslandMsg_TeardownAck,
   type IslandMsg_Ea,
   type IslandMsg_Event,
@@ -229,6 +234,43 @@ describe("GP-1 — schema_version enforcement", () => {
     expect(empty.skeleton).toBeUndefined();
     expect(empty.basis).toBeUndefined();
     expect(isIslandToVesselMsg(empty)).toBe(true);
+  });
+
+  test("worldline-compare/-trajectory requests are vessel→island, results island→vessel (the in-VM worldline reads)", () => {
+    // Well 1 — the ITC LIVE-READ. The edge-DAG rides IN (GP-2 plain objects); the verdict rides back.
+    const cmpReq = mkDaemonWorldlineCompareRequest({
+      requestId: "wl-1", a: "run", b: "run.a",
+      opens: [delegationEdge("run", "run.a", { validFrom: "2026-06-29T00:00:00Z" })],
+      root: "run",
+    });
+    expect(cmpReq.type).toBe("daemon:worldline-compare-request");
+    expect(isVesselToIslandMsg(cmpReq)).toBe(true);
+    expect(isIslandToVesselMsg(cmpReq)).toBe(false);
+
+    const cmpHit = mkDaemonWorldlineCompareResult({ requestId: "wl-1", order: "before" });
+    expect(cmpHit.type).toBe("daemon:worldline-compare-result");
+    expect(isIslandToVesselMsg(cmpHit)).toBe(true);
+    expect(isVesselToIslandMsg(cmpHit)).toBe(false);
+    // an unknown handle → a graceful error (never a thrown wire).
+    expect(mkDaemonWorldlineCompareResult({ requestId: "wl-1", error: "unknown handle" }).error).toBe("unknown handle");
+
+    // Well 3 + Well 4 — the trajectory. The stubs (form-vectors shipped) ride IN; the path rides back.
+    const trajReq = mkDaemonWorldlineTrajectoryRequest({
+      requestId: "wl-2", handle: "run.x",
+      stubs: [{ verbatimSha: "sha-a", tickCounter: 1, formVector: { indices: [0], values: [1] } }],
+      joinForm: true, includeNull: true, seed: 3,
+    });
+    expect(trajReq.type).toBe("daemon:worldline-trajectory-request");
+    expect(isVesselToIslandMsg(trajReq)).toBe(true);
+
+    const trajHit = mkDaemonWorldlineTrajectoryResult({
+      requestId: "wl-2",
+      trajectory: { handle: "run.x", steps: [{ verbatimSha: "sha-a" }] },
+      nullBaseline: { handle: "run.x", steps: [{ verbatimSha: "sha-a" }], shuffled: true },
+    });
+    expect(trajHit.type).toBe("daemon:worldline-trajectory-result");
+    expect(isIslandToVesselMsg(trajHit)).toBe(true);
+    expect(isVesselToIslandMsg(trajHit)).toBe(false);
   });
 });
 

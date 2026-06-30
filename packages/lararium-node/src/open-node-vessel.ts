@@ -57,8 +57,7 @@ import {
 import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
-import { makeWorldlineHolder, type TurnStub } from "./worldline-holder.js";
-import type { DialEntry } from "@lararium/mesh";
+import type { DialEntry, SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
@@ -73,6 +72,32 @@ import { DaemonAuthGate }                           from "./daemon-auth-gate.js"
 import { composeLararium, composeHerm }             from "./node-caps.js";
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
+
+/**
+ * Pull a sparse form-vector out of a form-store entry's stored `document` (the move-space position
+ * the worldline-trajectory read joins). The python store keeps the dense embedding internally; the
+ * JSON `document` carries the axis activation. The host fetches this node-side (the form store is a
+ * node child_process the worker can't reach) and SHIPS it to the in-VM trajectory read. An absent /
+ * unparseable document yields null (the worker keeps the turn's TIME slot, form null). Moved here from
+ * the retired node-side worldline-holder when the reads lifted into the sovereign worker.
+ */
+function parseFormVector(document: string): SparseFormVector | null {
+  try {
+    const obj = JSON.parse(document) as Record<string, unknown>;
+    const act = obj["axis_activation"];
+    if (act && typeof act === "object") {
+      const entries = Object.entries(act as Record<string, unknown>).filter(([, v]) => typeof v === "number");
+      if (entries.length === 0) return { indices: [], values: [] };
+      return {
+        indices: entries.map((_, i) => i),
+        values: entries.map(([, v]) => v as number),
+      };
+    }
+    return { indices: [], values: [] };
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Upstream's NodeWSServerAdapter declares ready only on its FIRST client
@@ -565,35 +590,27 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     });
 
     // ── worldline reads — the PERMAINAN SUBSTRATE (the flow-lens foundation) ──────────────────────
-    // The node-side worldline holder (worldline-holder.ts): the LIVE ITC registry + the Turn→Trajectory
-    // functor + null-readiness. Coordinator-homed, NOT worker-routed — the primacy carve-out: pure ITC
-    // compute + node-side data sources (formpalace child_process, transcript fs), no VM/grammar state
-    // (worldline-holder #scope). REUSES the recall form holder (one ref, never a 2nd process).
-    let worldlineHolder: ReturnType<typeof makeWorldlineHolder> | null = null;
-    const getWorldlineHolder = (): ReturnType<typeof makeWorldlineHolder> => {
-      if (!worldlineHolder) {
-        recallFormPalace ??= makeFormPalace(larFormPalaceDir());
-        worldlineHolder = makeWorldlineHolder({ formPalace: recallFormPalace });
-      }
-      return worldlineHolder;
-    };
+    // The reads run IN the sovereign daemon worker (worldline-read-vm.ts) — the cap-stack lifts WHOLE,
+    // no coordinator carve-out (operator override: a future lares-CLI read → TW5-filter-compute chain
+    // must live in-VM). The host supplies only EXTERNAL data the worker can't reach: the edge-DAG
+    // (derived from a session transcript) and the form-vector bytes (the python form store, a node
+    // child_process). All COMPUTE — registry, ITC compare, ordering, joining, shuffling — is the
+    // worker's. Mirrors the recall query-derive (deriveSkeleton), which ships its query string IN.
 
     // worldline-compare (Well 1, ITC LIVE-READ): two handles → the concurrent-capable causal verdict
-    // (before / after / concurrent / equal). The registry projects from the durable edge-DAG — derived
-    // here from a session `transcript` (spawn + handback edges, deriveSubagentEdges); the holder ingests
-    // then compares. (Inject Communication edges enrich it via the worldline-inject-detect seam.)
+    // (before / after / concurrent / equal). The host derives the edge-DAG from a session `transcript`
+    // (spawn + handback edges, deriveSubagentEdges) and ships it; the WORKER projects the registry +
+    // runs the ITC tree-leq. (Inject Communication edges enrich it via the worldline-inject-detect seam.)
     registry.register("worldline-compare", async (args) => {
       const a = typeof args["a"] === "string" ? (args["a"] as string) : "";
       const b = typeof args["b"] === "string" ? (args["b"] as string) : "";
       if (!a || !b) throw new Error("worldline-compare: args.a + args.b (handles) required");
-      const holder = getWorldlineHolder();
       const transcript = typeof args["transcript"] === "string" ? (args["transcript"] as string) : "";
-      if (transcript) {
-        const spirits = deriveSubagentEdges(transcript);
-        holder.ingestEdges(spirits.map((s) => s.spawn), spirits.map((s) => s.handback));
-      }
+      const spirits = transcript ? deriveSubagentEdges(transcript) : [];
+      const opens = spirits.map((s) => s.spawn);
+      const closes = spirits.map((s) => s.handback);
       try {
-        return { order: holder.compare(a, b) };
+        return await daemonVm.worldlineCompare({ a, b, opens, closes });
       } catch (err) {
         throw new Error(`worldline-compare: ${err instanceof Error ? err.message : String(err)} (supply a transcript that names both handles)`);
       }
@@ -602,14 +619,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // worldline-trajectory (Well 3 + Well 4, THE CORE): a handle → its worldline-ordered form-vector
     // path through move-space (the permainan the flow-lens reads), and optionally a null baseline
     // (shuffled order). `stubs` (verbatimSha + tickCounter, the handle's captured turns) is the clean
-    // substrate API — driveable by any turn source. FLAG: the production source is the content graph
-    // (lar_agent_handle → lar_verbatim_sha + lar_ffz per drawer); wiring that read needs a content-graph
-    // handle where-filter (absent from the client API) — the one follow-up seam.
+    // substrate API — driveable by any turn source. The host pre-fetches each turn's move-space
+    // position from the form store (a node child_process the worker can't reach) and SHIPS it on the
+    // wire stubs; the WORKER orders + joins + shuffles. FLAG: the production turn source is the content
+    // graph (lar_agent_handle → lar_verbatim_sha + lar_ffz per drawer); wiring that read needs a
+    // content-graph handle where-filter (absent from the client API) — the one follow-up seam.
     registry.register("worldline-trajectory", async (args) => {
       const handle = typeof args["handle"] === "string" ? (args["handle"] as string) : "";
       if (!handle) throw new Error("worldline-trajectory: args.handle required");
       const rawStubs = Array.isArray(args["stubs"]) ? (args["stubs"] as unknown[]) : [];
-      const stubs: TurnStub[] = rawStubs
+      const baseStubs = rawStubs
         .filter((s): s is Record<string, unknown> => !!s && typeof s === "object")
         .map((s, i) => ({
           verbatimSha: typeof s["verbatimSha"] === "string" ? (s["verbatimSha"] as string) : String(s["verbatimSha"] ?? ""),
@@ -617,15 +636,40 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         }))
         .filter((s) => s.verbatimSha);
       const joinForm = args["joinForm"] !== false && args["joinForm"] !== "false";
-      const holder = getWorldlineHolder();
-      const trajectory = await holder.trajectory(handle, stubs, { joinForm });
-      const wantNull = args["null"] === true || args["null"] === "true";
-      if (!wantNull) return { trajectory };
+      // Pre-fetch each unique turn's move-space position from the form store, node-side (the worker
+      // can't reach the python child_process), then SHIP it on the wire stubs. A miss/fault → null
+      // (the worker keeps the turn's TIME slot with a null form slot). REUSES the recall form holder.
+      const formByKey = new Map<string, SparseFormVector | null>();
+      if (joinForm && baseStubs.length) {
+        recallFormPalace ??= makeFormPalace(larFormPalaceDir());
+        const fp = recallFormPalace;
+        await Promise.all(
+          [...new Set(baseStubs.map((s) => s.verbatimSha))].map(async (sha) => {
+            try {
+              const entry = await fp.get(sha);
+              formByKey.set(sha, entry?.document ? parseFormVector(entry.document) : null);
+            } catch {
+              formByKey.set(sha, null);
+            }
+          }),
+        );
+      }
+      const stubs: WorldlineStubWire[] = baseStubs.map((s) => ({
+        verbatimSha: s.verbatimSha,
+        tickCounter: s.tickCounter,
+        ...(joinForm ? { formVector: formByKey.get(s.verbatimSha) ?? null } : {}),
+      }));
+      const includeNull = args["null"] === true || args["null"] === "true";
       const seed = typeof args["seed"] === "number" ? (args["seed"] as number) : undefined;
       const windowRaw = args["window"];
       const window = typeof windowRaw === "number" ? windowRaw : typeof windowRaw === "string" && windowRaw !== "" ? Number(windowRaw) : undefined;
-      const nullBaseline = await holder.nullBaseline(handle, stubs, { joinForm, ...(seed !== undefined ? { seed } : {}), ...(window !== undefined ? { window } : {}) });
-      return { trajectory, nullBaseline };
+      const result = await daemonVm.worldlineTrajectory({
+        handle, stubs, joinForm, includeNull,
+        ...(seed   !== undefined ? { seed }   : {}),
+        ...(window !== undefined ? { window } : {}),
+      });
+      if (!includeNull) return { trajectory: result.trajectory };
+      return { trajectory: result.trajectory, nullBaseline: result.nullBaseline };
     });
   };
 

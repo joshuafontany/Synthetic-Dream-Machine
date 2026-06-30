@@ -28,6 +28,10 @@
       "import": "./dist/reaction-graph.js",
       "types": "./dist/reaction-graph.d.ts"
     },
+    "./worldline": {
+      "import": "./dist/worldline.js",
+      "types": "./dist/worldline.d.ts"
+    },
     "./node": {
       "import": "./dist/node.js",
       "types": "./dist/node.d.ts"

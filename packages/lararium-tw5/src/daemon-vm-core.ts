@@ -34,6 +34,8 @@ import {
   mkDaemonVerifyRequest,
   mkDaemonResolveBindingRequest,
   mkDaemonDeriveSkeletonRequest,
+  mkDaemonWorldlineCompareRequest,
+  mkDaemonWorldlineTrajectoryRequest,
   mkDaemonEvictResult,
   mkDaemonResidencyOpResult,
   mkTeardown,
@@ -51,6 +53,11 @@ import {
   type DaemonMsg_VerifyResult,
   type DaemonMsg_ResolveBindingResult,
   type DaemonMsg_DeriveSkeletonResult,
+  type DaemonMsg_WorldlineCompareResult,
+  type DaemonMsg_WorldlineTrajectoryResult,
+  type WorldlineStubWire,
+  type WorldlineEdgeTriple,
+  type WorldlineEdgeClose,
   type DaemonMsg_EvictRequest,
   type DaemonMsg_ResidencyOp,
   type DaemonMsg_WikiAlert,
@@ -68,6 +75,33 @@ import type { MoveSkeleton, ConstructiconAxis } from "./form-layer/index.js";
 export interface DaemonDeriveSkeletonResult {
   skeleton: MoveSkeleton;
   basis: { axes: readonly ConstructiconAxis[]; dimension: number };
+}
+
+/** Well 1 input the host round-trips to the worker — two handles + the edge-DAG to project from. */
+export interface DaemonWorldlineCompareInput {
+  a: string;
+  b: string;
+  opens: readonly WorldlineEdgeTriple[];
+  closes?: readonly WorldlineEdgeClose[];
+  root?: string;
+}
+
+/** Well 3 + Well 4 input the host round-trips to the worker — a handle's turns (form-vectors shipped). */
+export interface DaemonWorldlineTrajectoryInput {
+  handle: string;
+  stubs: readonly WorldlineStubWire[];
+  joinForm?: boolean;
+  includeNull?: boolean;
+  seed?: number;
+  window?: number;
+}
+
+/** The in-VM trajectory read result — the worldline-ordered path (+ optional null baseline). Plain
+ *  objects (the worker computed; the host relays). `unknown` to keep the core free of the mesh
+ *  WorldlineTrajectory type detail — the verb shapes the response. */
+export interface DaemonWorldlineTrajectoryResult {
+  trajectory: unknown;
+  nullBaseline?: unknown;
 }
 
 // The ea watchdog budget — a SILENCE window, not a mount deadline (debt
@@ -154,6 +188,20 @@ export interface DaemonVmCore {
    * structural plane present). Resolves `null` when the query carries no derivable move-form.
    */
   deriveSkeleton: (query: string) => Promise<DaemonDeriveSkeletonResult | null>;
+  /**
+   * Well 1 (the ITC LIVE-READ) — answer the concurrent-capable causal verdict between two handles IN
+   * the daemon VM. Round-trips the edge-DAG (host-derived from a transcript) + the two handles through
+   * the island's `$tw.lares.worldlineCompareVm`; the worker projects the registry + runs the ITC
+   * tree-leq. Rejects (the worker's error) on an unknown handle — the verb wraps the helpful message.
+   */
+  worldlineCompare: (input: DaemonWorldlineCompareInput) => Promise<{ order: string }>;
+  /**
+   * Well 3 (THE CORE) + Well 4 (NULL-READY) — a handle's worldline-ordered form-vector path IN the
+   * daemon VM. Round-trips the captured turns (form-vectors the host pre-fetched from the form store
+   * shipped on the stubs) through `$tw.lares.worldlineTrajectoryVm`; the worker orders + joins +
+   * (optionally) shuffles. Total — empty stubs resolve an empty trajectory.
+   */
+  worldlineTrajectory: (input: DaemonWorldlineTrajectoryInput) => Promise<DaemonWorldlineTrajectoryResult>;
   /**
    * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
    * keyhive via daemon:verify-request/result. Common to both vessels.
@@ -316,6 +364,23 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
       return;
     }
 
+    if (raw.type === "daemon:worldline-compare-result") {
+      const msg = raw as DaemonMsg_WorldlineCompareResult;
+      if (msg.error) settleAsk(msg.requestId, undefined, msg.error);
+      else settleAsk(msg.requestId, { order: msg.order });
+      return;
+    }
+
+    if (raw.type === "daemon:worldline-trajectory-result") {
+      const msg = raw as DaemonMsg_WorldlineTrajectoryResult;
+      if (msg.error) settleAsk(msg.requestId, undefined, msg.error);
+      else settleAsk(
+        msg.requestId,
+        { trajectory: msg.trajectory, ...(msg.nullBaseline !== undefined ? { nullBaseline: msg.nullBaseline } : {}) },
+      );
+      return;
+    }
+
     if (raw.type === "daemon:evict-request") {
       // Sovereign-worker: the worker decided (policy, keyhive-gated); main executes the
       // mechanism (pool teardown). Route to the injected pool handler; ack regardless.
@@ -443,6 +508,20 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     },
     deriveSkeleton: (query: string) =>
       askIsland<DaemonDeriveSkeletonResult | null>("derive", (requestId) => mkDaemonDeriveSkeletonRequest({ requestId, query })),
+    worldlineCompare: (input: DaemonWorldlineCompareInput) =>
+      askIsland<{ order: string }>("wl-cmp", (requestId) => mkDaemonWorldlineCompareRequest({
+        requestId, a: input.a, b: input.b, opens: input.opens,
+        ...(input.closes !== undefined ? { closes: input.closes } : {}),
+        ...(input.root   !== undefined ? { root: input.root }     : {}),
+      })),
+    worldlineTrajectory: (input: DaemonWorldlineTrajectoryInput) =>
+      askIsland<DaemonWorldlineTrajectoryResult>("wl-traj", (requestId) => mkDaemonWorldlineTrajectoryRequest({
+        requestId, handle: input.handle, stubs: input.stubs,
+        ...(input.joinForm    !== undefined ? { joinForm: input.joinForm }       : {}),
+        ...(input.includeNull !== undefined ? { includeNull: input.includeNull } : {}),
+        ...(input.seed        !== undefined ? { seed: input.seed }               : {}),
+        ...(input.window      !== undefined ? { window: input.window }           : {}),
+      })),
     onEvictRequest: (fn: (bagId: string) => Promise<void>) => {
       _evictHandler = fn;
     },

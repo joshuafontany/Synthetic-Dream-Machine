@@ -55,6 +55,8 @@
 
 import type { AuthProofWire } from "./auth-wire.js";
 import type { DeviceDelegationTiddler } from "./device-delegation.js";
+import type { WorldlineEdgeTriple, WorldlineEdgeClose } from "./worldline-edge.js";
+import type { SparseFormVector } from "./worldline-trajectory.js";
 
 export const ISLAND_PROTOCOL_VERSION = 1 as const;
 export type ProtocolVersion = typeof ISLAND_PROTOCOL_VERSION;
@@ -309,6 +311,99 @@ export interface DaemonMsg_DeriveSkeletonResult {
   error?: string;
 }
 
+// ── Worldline reads (the permainan substrate — sovereign-worker home) ───────
+//
+// The flow-lens reads run IN the daemon VM, the same one-runtime lock the recall
+// query-derive rides (the cap-stack lifts WHOLE — no coordinator carve-out). Two
+// reads, two request/result pairs mirroring DeriveSkeleton:
+//
+//   worldline-compare    — Well 1, the ITC LIVE-READ. The worker holds the
+//     WorldlineCausal registry (projected from the edge-DAG it receives) and
+//     answers the concurrent-capable causal verdict (before/after/concurrent/equal).
+//   worldline-trajectory — Well 3 + Well 4, THE CORE. The worker orders a handle's
+//     captured turns by happened-before (orderTrajectory), joins each turn's
+//     move-space position (joinFormVectors over the form-vectors the host ships —
+//     the formpalace is a node child_process the worker can't reach, so the host
+//     fetches the bytes and ships them IN, exactly as it ships the query string to
+//     derive), and optionally rides the SAME path through the seeded null shuffle.
+//
+// All COMPUTE — registry, ITC compare, ordering, joining, shuffling — lives in the
+// worker; the host supplies only external data (edges from a transcript, form-vector
+// bytes from the python store). Graceful: an unknown handle / empty input degrades
+// like the derive (an `error` string or an empty result), never throws across the wire.
+
+/** One captured turn pre-order, on the wire (GP-2 plain object): the join key + the within-handle
+ *  happened-before tick + (optionally) the move-space position the host pre-fetched from the form
+ *  store. `formVector` absent/null → the worker keeps the turn's TIME slot with a null form slot. */
+export interface WorldlineStubWire {
+  verbatimSha: string;
+  tickCounter: number;
+  formVector?: SparseFormVector | null;
+}
+
+/**
+ * Vessel → island: answer the concurrent-capable causal verdict between two handles, IN the daemon VM.
+ * The worker projects the WorldlineCausal registry from the edge-DAG carried here (worldlineCausalFromEdges)
+ * — `opens`/`closes` derived host-side from a session transcript — then runs the pure ITC tree-leq. The
+ * in-VM fn lives on `$tw.lares.worldlineCompareVm`. An unknown handle answers `error` (never throws the wire).
+ */
+export interface DaemonMsg_WorldlineCompareRequest {
+  schema_version: ProtocolVersion;
+  type: "daemon:worldline-compare-request";
+  requestId: string;
+  a: string;
+  b: string;
+  /** The durable edge-DAG opens (prov:Delegation spawn / prov:Communication inject), plain objects. */
+  opens: readonly WorldlineEdgeTriple[];
+  /** The edge-DAG closes (prov:Delegation handback) — absent when no handback edges stand. */
+  closes?: readonly WorldlineEdgeClose[];
+  /** The run-root / common-cause handle the registry seeds from (default "operator"). */
+  root?: string;
+}
+
+/** Island → vessel: the ITC causal verdict (`order`) — or an `error` (unknown handle / no registry). */
+export interface DaemonMsg_WorldlineCompareResult {
+  schema_version: ProtocolVersion;
+  type: "daemon:worldline-compare-result";
+  requestId: string;
+  /** "before" | "after" | "concurrent" | "equal" — the ItcOrder, carried as a plain string (GP-2). */
+  order?: string;
+  error?: string;
+}
+
+/**
+ * Vessel → island: a handle's worldline-ordered path through move-space, IN the daemon VM (Well 3 +
+ * Well 4). The worker runs orderTrajectory over the carried stubs, joins the form-vectors the host
+ * shipped, and — when `includeNull` — rides the SAME path through the seeded shuffle. The in-VM fn
+ * lives on `$tw.lares.worldlineTrajectoryVm`. The trajectory (+ optional null baseline) rides back as
+ * a plain object (GP-2). Empty stubs → an empty trajectory (graceful, like a derive null).
+ */
+export interface DaemonMsg_WorldlineTrajectoryRequest {
+  schema_version: ProtocolVersion;
+  type: "daemon:worldline-trajectory-request";
+  requestId: string;
+  handle: string;
+  stubs: readonly WorldlineStubWire[];
+  /** Join move-space positions (default true; false = TIME-only skeleton). */
+  joinForm?: boolean;
+  /** Also compute the seeded null baseline (the shuffled order). */
+  includeNull?: boolean;
+  /** PRNG seed — a reproducible null (default 1). */
+  seed?: number;
+  /** Scale grading: the shuffle window (default full shuffle). */
+  window?: number;
+}
+
+/** Island → vessel: the worldline-ordered trajectory (+ optional null baseline) as plain objects. */
+export interface DaemonMsg_WorldlineTrajectoryResult {
+  schema_version: ProtocolVersion;
+  type: "daemon:worldline-trajectory-result";
+  requestId: string;
+  trajectory?: unknown;
+  nullBaseline?: unknown;
+  error?: string;
+}
+
 /**
  * Island → vessel: delegate a wiki-scope verb to the vessel handler registry.
  * Emitted when the daemon island's VerbDispatcher encounters a verb not in its local registry.
@@ -485,6 +580,8 @@ export type VesselToIslandMsg =
   | DaemonMsg_PlaceVerb
   | DaemonMsg_TelemetryPlaceVerb
   | DaemonMsg_DeriveSkeletonRequest
+  | DaemonMsg_WorldlineCompareRequest
+  | DaemonMsg_WorldlineTrajectoryRequest
   | DaemonMsg_VerbResult
   | DaemonMsg_VerifyRequest
   | DaemonMsg_ResolveBindingRequest
@@ -636,6 +733,8 @@ export type IslandToVesselMsg =
   | WikiMsg_VerbResult
   | DaemonMsg_DelegateVerb
   | DaemonMsg_DeriveSkeletonResult
+  | DaemonMsg_WorldlineCompareResult
+  | DaemonMsg_WorldlineTrajectoryResult
   | DaemonMsg_VerifyResult
   | DaemonMsg_ResolveBindingResult
   | DaemonMsg_EvictRequest
@@ -655,14 +754,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "daemon:derive-skeleton-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "daemon:delegate-verb", "daemon:derive-skeleton-result", "daemon:verify-result", "daemon:resolve-binding-result", "daemon:evict-request", "daemon:residency-op", "daemon:wiki-alert"] as const).includes(
+  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "daemon:delegate-verb", "daemon:derive-skeleton-result", "daemon:worldline-compare-result", "daemon:worldline-trajectory-result", "daemon:verify-result", "daemon:resolve-binding-result", "daemon:evict-request", "daemon:residency-op", "daemon:wiki-alert"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -803,6 +902,82 @@ export function mkDaemonDeriveSkeletonResult(opts: {
   if (opts.skeleton !== undefined) msg.skeleton = opts.skeleton;
   if (opts.basis    !== undefined) msg.basis    = opts.basis;
   if (opts.error    !== undefined) msg.error    = opts.error;
+  return msg;
+}
+
+export function mkDaemonWorldlineCompareRequest(opts: {
+  requestId: string;
+  a: string;
+  b: string;
+  opens: readonly WorldlineEdgeTriple[];
+  closes?: readonly WorldlineEdgeClose[];
+  root?: string;
+}): DaemonMsg_WorldlineCompareRequest {
+  const msg: DaemonMsg_WorldlineCompareRequest = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "daemon:worldline-compare-request",
+    requestId: opts.requestId,
+    a: opts.a,
+    b: opts.b,
+    opens: opts.opens,
+  };
+  if (opts.closes !== undefined) msg.closes = opts.closes;
+  if (opts.root   !== undefined) msg.root   = opts.root;
+  return msg;
+}
+
+export function mkDaemonWorldlineCompareResult(opts: {
+  requestId: string;
+  order?: string;
+  error?: string;
+}): DaemonMsg_WorldlineCompareResult {
+  const msg: DaemonMsg_WorldlineCompareResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "daemon:worldline-compare-result",
+    requestId: opts.requestId,
+  };
+  if (opts.order !== undefined) msg.order = opts.order;
+  if (opts.error !== undefined) msg.error = opts.error;
+  return msg;
+}
+
+export function mkDaemonWorldlineTrajectoryRequest(opts: {
+  requestId: string;
+  handle: string;
+  stubs: readonly WorldlineStubWire[];
+  joinForm?: boolean;
+  includeNull?: boolean;
+  seed?: number;
+  window?: number;
+}): DaemonMsg_WorldlineTrajectoryRequest {
+  const msg: DaemonMsg_WorldlineTrajectoryRequest = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "daemon:worldline-trajectory-request",
+    requestId: opts.requestId,
+    handle: opts.handle,
+    stubs: opts.stubs,
+  };
+  if (opts.joinForm    !== undefined) msg.joinForm    = opts.joinForm;
+  if (opts.includeNull !== undefined) msg.includeNull = opts.includeNull;
+  if (opts.seed        !== undefined) msg.seed        = opts.seed;
+  if (opts.window      !== undefined) msg.window      = opts.window;
+  return msg;
+}
+
+export function mkDaemonWorldlineTrajectoryResult(opts: {
+  requestId: string;
+  trajectory?: unknown;
+  nullBaseline?: unknown;
+  error?: string;
+}): DaemonMsg_WorldlineTrajectoryResult {
+  const msg: DaemonMsg_WorldlineTrajectoryResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "daemon:worldline-trajectory-result",
+    requestId: opts.requestId,
+  };
+  if (opts.trajectory   !== undefined) msg.trajectory   = opts.trajectory;
+  if (opts.nullBaseline !== undefined) msg.nullBaseline = opts.nullBaseline;
+  if (opts.error        !== undefined) msg.error        = opts.error;
   return msg;
 }
 

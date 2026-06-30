@@ -21,11 +21,15 @@ import {
   mkDaemonVerifyResult,
   mkDaemonResolveBindingResult,
   mkDaemonDeriveSkeletonResult,
+  mkDaemonWorldlineCompareResult,
+  mkDaemonWorldlineTrajectoryResult,
   type DaemonMsg_PlaceVerb,
   type DaemonMsg_VerbResult,
   type DaemonMsg_VerifyRequest,
   type DaemonMsg_ResolveBindingRequest,
   type DaemonMsg_DeriveSkeletonRequest,
+  type DaemonMsg_WorldlineCompareRequest,
+  type DaemonMsg_WorldlineTrajectoryRequest,
   type AuthProofWire,
   type BatchMode,
   type Verb,
@@ -216,6 +220,62 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
           }
         } catch (err) {
           post(mkDaemonDeriveSkeletonResult({ requestId: msg.requestId, error: err instanceof Error ? err.message : String(err) }));
+        }
+        return true;
+      }
+
+      if (type === "daemon:worldline-compare-request") {
+        // Well 1, the ITC LIVE-READ — homed in THIS island VM (the cap-stack lifts whole, no
+        // coordinator carve-out). The in-VM fn projects the registry from the carried edge-DAG +
+        // answers the causal verdict; an unknown handle throws → a graceful `error` across the wire.
+        const msg = raw as DaemonMsg_WorldlineCompareRequest;
+        try {
+          const $tw = (tw5 as { $tw?: { lares?: { worldlineCompareVm?: (i: { a: string; b: string; opens: unknown; closes?: unknown; root?: string }) => { order: string } } } } | undefined)?.$tw;
+          const fn = $tw?.lares?.worldlineCompareVm;
+          if (!fn) {
+            console.warn("[daemon-behavior] $tw.lares.worldlineCompareVm absent (plugin not loaded) — worldline-compare unavailable");
+            post(mkDaemonWorldlineCompareResult({ requestId: msg.requestId, error: "worldlineCompareVm absent (plugin not loaded)" }));
+          } else {
+            const r = fn({
+              a: msg.a, b: msg.b, opens: msg.opens,
+              ...(msg.closes !== undefined ? { closes: msg.closes } : {}),
+              ...(msg.root   !== undefined ? { root: msg.root }     : {}),
+            });
+            post(mkDaemonWorldlineCompareResult({ requestId: msg.requestId, order: r.order }));
+          }
+        } catch (err) {
+          post(mkDaemonWorldlineCompareResult({ requestId: msg.requestId, error: err instanceof Error ? err.message : String(err) }));
+        }
+        return true;
+      }
+
+      if (type === "daemon:worldline-trajectory-request") {
+        // Well 3 (THE CORE) + Well 4 (NULL-READY) — homed in THIS island VM. The in-VM fn orders the
+        // handle's turns, joins the form-vectors the host shipped, and optionally rides the null
+        // shuffle. Total (empty stubs → empty trajectory); a fault degrades to an `error`.
+        const msg = raw as DaemonMsg_WorldlineTrajectoryRequest;
+        try {
+          const $tw = (tw5 as { $tw?: { lares?: { worldlineTrajectoryVm?: (i: { handle: string; stubs: unknown; joinForm?: boolean; includeNull?: boolean; seed?: number; window?: number }) => { trajectory: unknown; nullBaseline?: unknown } } } } | undefined)?.$tw;
+          const fn = $tw?.lares?.worldlineTrajectoryVm;
+          if (!fn) {
+            console.warn("[daemon-behavior] $tw.lares.worldlineTrajectoryVm absent (plugin not loaded) — worldline-trajectory unavailable");
+            post(mkDaemonWorldlineTrajectoryResult({ requestId: msg.requestId, error: "worldlineTrajectoryVm absent (plugin not loaded)" }));
+          } else {
+            const r = fn({
+              handle: msg.handle, stubs: msg.stubs,
+              ...(msg.joinForm    !== undefined ? { joinForm: msg.joinForm }       : {}),
+              ...(msg.includeNull !== undefined ? { includeNull: msg.includeNull } : {}),
+              ...(msg.seed        !== undefined ? { seed: msg.seed }               : {}),
+              ...(msg.window      !== undefined ? { window: msg.window }           : {}),
+            });
+            post(mkDaemonWorldlineTrajectoryResult({
+              requestId: msg.requestId,
+              trajectory: r.trajectory,
+              ...(r.nullBaseline !== undefined ? { nullBaseline: r.nullBaseline } : {}),
+            }));
+          }
+        } catch (err) {
+          post(mkDaemonWorldlineTrajectoryResult({ requestId: msg.requestId, error: err instanceof Error ? err.message : String(err) }));
         }
         return true;
       }
