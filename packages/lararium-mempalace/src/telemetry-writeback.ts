@@ -81,6 +81,12 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
     const h = harvestTurnGradient(d.content);
     bands[h.band] = (bands[h.band] ?? 0) + 1;
     if (h.bearing) framed += 1;
+    // NO CaptureContext (4th arg) here, so this re-read sweep emits NO `lar_ffz`. This is the
+    // RIGHT call, not a gap: the export (`drawer_io.py export`) carries only {id, content,
+    // source_file} — the drawer's ORIGINAL captured wall-time is not available at re-read, and
+    // stamping against `now` would be a lie (the turn was filed long ago). The live in-VM annotate
+    // (capture-annotate-vm) stamps `lar_ffz` at BIRTH; `drawer_io.py apply` MERGES this patch onto
+    // the drawer's existing metadata, so the birth-stamp is preserved untouched by this sweep.
     return { id: d.id, patch: buildPatch(h, d.source_file) };
   });
 

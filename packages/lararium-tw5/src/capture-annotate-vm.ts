@@ -41,40 +41,68 @@ export const after = ["lararium-grammar-cache"];
 
 export type CaptureAnnotateVm = (turnText: string, sourceFile?: string, branch?: BranchContext) => Record<string, string | number>;
 
+/**
+ * The PURE capture annotate — the live in-VM pass extracted from the `$tw` wrapper so it tests
+ * node-side against the bootstrap grammar (the query-derive-vm test pattern). The startup wrapper
+ * supplies `capturedTime = Date.now()` — at LIVE capture the capture event IS the turn's wall-time.
+ *
+ * `capturedTime` threads into buildPatch's 4th arg (the CaptureContext) so `lar_ffz` — the FfzClock
+ * RHYTHMIC address — projects onto the drawer at birth: the COARSE bands (Arc/Theme) stamp from the
+ * wall-time now. The fine bands (Beat/Measure) need a session-position (the turn-index) tracked
+ * NOWHERE yet, so they stay UNSTAMPED (the coarse prefix only — ffz-project never fabricates a
+ * phase). Absent a `capturedTime` ⇒ no `lar_ffz`, byte-identical to before. The "session" profile
+ * is the operator-agent exchange-turn cycle (FFZ_PROFILES) — the natural session-work-memory grain.
+ */
+export function captureAnnotate(
+  turnText: string,
+  sourceFile?: string,
+  branch?: BranchContext,
+  capturedTime?: number,
+): Record<string, string | number> {
+  // 2. HARVEST (regex, in-VM) → the lar_* reading patch (existing behavior preserved). `branch`
+  //    (the turn-DAG fork-frontier) rides buildPatch's 3rd arg so a same-session fork derives a
+  //    DISTINCT handle (the fork-cut); absent ⇒ byte-identical to before. The 4th arg (CaptureContext)
+  //    carries the LIVE capture wall-time → `lar_ffz` coarse bands (omitted when no time is supplied).
+  const harvest = harvestTurnGradient(turnText);
+  const patch = buildPatch(
+    harvest,
+    sourceFile,
+    branch,
+    capturedTime != null ? { capturedTime, ffzProfile: "session" } : undefined,
+  );
+  // 1. PARSE (meme-ast, FULL grammar, in-VM) + 3. AST (ride the tree along). Best-effort: a parse
+  //    failure must never sink a capture — the harvest patch still lands.
+  try {
+    const grammar = getGrammar() ?? undefined;
+    const result  = parseMemeText("lar:///turn", turnText, grammar);
+    if (result.failures.length) patch["lar_ast_failures"] = result.failures.length;
+    const astJson = JSON.stringify(result.meme);
+    if (astJson.length <= AST_MAX) patch["lar_ast"] = astJson;
+    else patch["lar_ast_truncated"] = astJson.length;
+    // 4. FORM (living-grammar two-planes, in-VM — harvest + tree + FULL grammar coexist HERE).
+    //    Emit the move-skeleton (P1) + the constructicon basis (P0) and ride them along as
+    //    `lar_skeleton` + `lar_basis`. The node-side FORM split (makeFormSplitFlush) consumes them
+    //    into the form-vector store and STRIPS them — they never reach the content drawer. The
+    //    Python encode+store can't run in-VM, so the heavy lift crosses to the node sidecar; only
+    //    the cheap, grammar-bound emission lives here. Best-effort: never sinks the harvest/AST.
+    const skeleton = emitMoveSkeleton(harvest, result.nodes);
+    const skJson = JSON.stringify(skeleton);
+    if (skJson.length <= AST_MAX) patch["lar_skeleton"] = skJson;
+    const basis = buildConstructiconBasis(grammar);
+    const baJson = JSON.stringify({ axes: basis.axes, dimension: basis.dimension });
+    if (baJson.length <= AST_MAX) patch["lar_basis"] = baJson;
+  } catch { /* parse/emit contained — harvest patch already built */ }
+  return patch;
+}
+
 export function startup(): void {
   if (!$tw) return;
   const t = $tw as { lares?: { captureAnnotateVm?: CaptureAnnotateVm } };
   t.lares ??= {};
-  t.lares.captureAnnotateVm = (turnText: string, sourceFile?: string, branch?: BranchContext) => {
-    // 2. HARVEST (regex, in-VM) → the lar_* reading patch (existing behavior preserved). `branch`
-    //    (the turn-DAG fork-frontier) rides buildPatch's 3rd arg so a same-session fork derives a
-    //    DISTINCT handle (the fork-cut); absent ⇒ byte-identical to before.
-    const harvest = harvestTurnGradient(turnText);
-    const patch = buildPatch(harvest, sourceFile, branch);
-    // 1. PARSE (meme-ast, FULL grammar, in-VM) + 3. AST (ride the tree along). Best-effort: a parse
-    //    failure must never sink a capture — the harvest patch still lands.
-    try {
-      const grammar = getGrammar() ?? undefined;
-      const result  = parseMemeText("lar:///turn", turnText, grammar);
-      if (result.failures.length) patch["lar_ast_failures"] = result.failures.length;
-      const astJson = JSON.stringify(result.meme);
-      if (astJson.length <= AST_MAX) patch["lar_ast"] = astJson;
-      else patch["lar_ast_truncated"] = astJson.length;
-      // 4. FORM (living-grammar two-planes, in-VM — harvest + tree + FULL grammar coexist HERE).
-      //    Emit the move-skeleton (P1) + the constructicon basis (P0) and ride them along as
-      //    `lar_skeleton` + `lar_basis`. The node-side FORM split (makeFormSplitFlush) consumes them
-      //    into the form-vector store and STRIPS them — they never reach the content drawer. The
-      //    Python encode+store can't run in-VM, so the heavy lift crosses to the node sidecar; only
-      //    the cheap, grammar-bound emission lives here. Best-effort: never sinks the harvest/AST.
-      const skeleton = emitMoveSkeleton(harvest, result.nodes);
-      const skJson = JSON.stringify(skeleton);
-      if (skJson.length <= AST_MAX) patch["lar_skeleton"] = skJson;
-      const basis = buildConstructiconBasis(grammar);
-      const baJson = JSON.stringify({ axes: basis.axes, dimension: basis.dimension });
-      if (baJson.length <= AST_MAX) patch["lar_basis"] = baJson;
-    } catch { /* parse/emit contained — harvest patch already built */ }
-    return patch;
-  };
+  // The LIVE capture moment IS the turn's wall-time (the producer stamps lar_ffz at capture, per
+  // capture-nalu's "Each record carries its lar_ffz (felt) — set by the producer").
+  t.lares.captureAnnotateVm = (turnText: string, sourceFile?: string, branch?: BranchContext) =>
+    captureAnnotate(turnText, sourceFile, branch, Date.now());
   // Also expose the gradient parser itself — callable from a LIVE WIKI (a widget, filter, or module) to
   // parse gradient text in-realm with the full grammar. The native text/x-memetic-wikitext path + tooling
   // reach it here; one parser, one runtime.
