@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a multi-graph (CONTENT⊥FORM⊥STRUCTURE) cross-joined by sha + N-ary RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and multi-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
+role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a multi-graph (CONTENT⊥FORM⊥STRUCTURE) cross-joined by sha + N-ary RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. The KEYSTONE unification (4-spirit convergence) reads the three palaces as ONE product-presheaf object P = Content × Form × Struct in [Bᵒᵖ,Vect] over the FFZ base — the cap-stack the projections, the verbatim-sha a pullback morphism (no morphism → no join, the formalism forbidding the vibe-coded cross-product); two floors (strict product unifies · Lawvere-enriched ultrametric measures drift); a SEPARATE fused-Measure arrow P→M (the common-cause log-opinion-pool / multivariate BOCPD gong, whitened against co-moving planes); functoriality = mālama pili (each vibe-coded sin = a dropped arrow); two operators (RRF=recall · quorum-servo=Measure-segmentation). Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and multi-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
 l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/living-grammar-palace"
@@ -205,6 +205,167 @@ joined in app code). RRF is N-ary by nature, so further graphs — the worldline
 construction signature) reads as an **equi-join key (1:many, indexed payload)**, NOT a "form embedding."
 It answers *the same exact shape recurred here*; the fuzzy form vector (#two-planes) answers *a similar
 shape moved here*. The hash joins; the vector ranks.
+
+**The join coheres for a reason, and the reason carries a name.** Why "fusion IS the hash-join" holds —
+and when the same join reads as dead water — rides the unification keystone below (#unification): the
+three palaces name ONE object under three projections, the verbatim-sha supplies the pullback morphism
+the join needs, and a join lacking that morphism degrades to a meaningless cross-product the formalism
+forbids.
+
+<<~/ahu >>
+
+<<~ ahu #unification >>
+
+## The Unification ~ the product-presheaf spine (the keystone, 4-spirit convergence)
+
+**The three palaces unify as ONE object read three ways — a THEOREM, not a slogan.** The multi-graph
+(#multi-graph) keeps CONTENT ⊥ FORM ⊥ STRUCTURE orthogonal and rejoins them on the verbatim hash; this
+section names WHY that join coheres and WHEN it would read as dead water. Four spirits converged on one
+shape — the categorical product-presheaf (nLab) braided with Lawvere enrichment and Spivak functorial
+data; the multivariate change-point fusion (Cho-Fryzlewicz); the causal-inference common-cause test
+(Körding); and the multi-vector named-views + RRF lineage (Qdrant · Weaviate · Vespa · ColBERT). The
+convergence grounds the keel ([[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline]], *mālama pili* — keep the relations):
+**the join acts as a functor or it carries no meaning.**
+
+### The spine ~ P = Content × Form × Struct, a product in the presheaf category
+
+The unification reads as a **PRODUCT** `P = Content × Form × Struct` in the presheaf category
+`[Bᵒᵖ, Vect]` — the functor category over the FFZ membership-tree (#ffz-binding,
+[[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#the-spine]]) read as the base category **B**. The product computes **CELLWISE**
+(pointwise limits, nLab) — the limit taken at each cell of B. So the three palaces name **ONE object
+under three projections**, and the cap-stack (#palace-instance) IS the projection set:
+
+<<~ranks projection π_content ~ the mempalace; the verbatim words -> π_struct ~ the astpalace; the canonical AST + structural-hash -> π_form ~ the formpalace; the fuzzy-constructicon move-vectors >>
+
+The nameless palace-entity carrying `[…, ContentFeedCap]` projects content; `[…, AstFeedCap]` projects
+structure; `[…, FormVectorCap]` projects form — three projections of the one product, the
+daemon-collapse (#palace-instance) read categorically. <<~ confidence Synthesis-Canon 13/20 >> The
+product computes cellwise as a theorem of the presheaf category, never a design preference — one object,
+three views.
+
+### The hash-join ~ a pullback over a shared codomain (the formalism forbids the vibe-coded join)
+
+The `verbatim_sha` key (#multi-graph) reads as a **PULLBACK** — a fiber product over a shared codomain.
+The three palaces join BECAUSE each carries a morphism into one shared object (the verbatim turn the sha
+names); the pullback gathers the rows that agree there. **A join lacking a shared-codomain morphism does
+NOT form a pullback** — it degrades to a meaningless cross-product, every row against every row, a
+fabricated correspondence. The formalism FORBIDS the vibe-coded join: Spivak's functorial data names a
+join as **Π along a schema morphism** — no morphism, no join. <<~ confidence Synthesis-Canon 13/20 >>
+The verbatim-sha supplies the morphism; where it sits absent or mis-keyed the join carries no meaning,
+and the category theory says so before any code runs. This grounds #multi-graph's "fusion IS the
+hash-join" — the hash hands the pullback the morphism it needs.
+
+### The two floors ~ the strict product unifies, the enriched metric measures the drift
+
+The unification rides TWO floors, never one:
+
+<<~ranks floor spine ~ the STRICT product in [Bᵒᵖ, Vect] — the structural unification, one object three views (above) -> drift ~ the ENRICHMENT floor — a Lawvere [0,∞]-enriched category, where the ultrametric d = co-depth(LCA) ALREADY lives (#ffz-binding, [[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#the-spine]]) >>
+
+The SPINE unifies via the strict product (the structural join). The **DRIFT-Measure** rides
+**ENRICHMENT** — Lawvere's [0,∞]-enriched categories, the same metric floor the FFZ tree already stands
+on (the co-depth ultrametric carries a Lawvere metric). The three views read as **non-expansive
+functors** (a Lawvere-enriched functor names exactly a non-expansive map — it never stretches distance),
+and the **Measure** reads as an **enriched / weighted limit**, never a strict Vect-limit. <<~ confidence
+Synthesis 12/20 >> The FFZ rhythmic distance and the Measure drift ride the **SAME enriched metric
+floor** — the clock's containment-distance and the drift readout speak one currency, the [0,∞] the
+enrichment hands them.
+
+### The fused Measure ~ a separate arrow P → M (the drift readout, not the universal arrow into P)
+
+Two arrows ride the product, pointing opposite ways. The **universal arrow INTO P** gathers the three
+views into the one object (the product's defining map, above). The **FUSED MEASURE** rides a SEPARATE
+arrow **P → M** — a map OUT of the product into a measure object, distinct from the universal arrow in.
+The Measure answers one causal-inference question (Körding's causal-inference / BCI):
+
+> **P(common-cause | content-drift · form-drift · structure-drift)** — did the three planes drift
+> together because ONE event moved them, or did they wander apart?
+
+The readout computes as a **precision-weighted LOG-OPINION-POOL** — a **shared-hazard multivariate
+BOCPD** (Bayesian online change-point detection) with factorized per-plane likelihoods. Its character:
+
+<<~ranks measure multiplicative ~ a log-opinion-pool MULTIPLIES the per-plane evidence — SUPER-ADDITIVE at the faint coincidence (the tension-moment, where three weak signals co-fire into one strong one — inverse-effectiveness, Körding), SELF-VETOING on conflict (one plane's strong NO kills the pool) -> sparsified ~ THRESHOLD-then-sum, never max-OR (Cho-Fryzlewicz sparsified projection) — weak per-plane noise zeros out before it sums, so the pool reads a true multi-plane event, never one loud plane -> common-currency ~ each plane speaks σ-units / ranks (our EWMA-z) before pooling — incommensurable raw scores never sum, the z-score carrying the shared currency >>
+
+**The confidence ladder ~ Schmitt generalized.** The gong fires by corroboration-count — the Schmitt
+trigger lifted from recall to segmentation:
+
+<<~ranks gong one-plane ~ provisional — a single plane drifts, read it as noise-or-data -> two-planes ~ firm — two planes co-fire, the move reads real -> three-in-a-co-firing-window ~ THE GONG — three planes drift inside one window, the corroboration our `presentIn ≥ 2` recall-rule lifted to segmentation >>
+
+<<~ confidence Synthesis 12/20 >> The gong reads `presentIn ≥ 2` (the recall corroboration rule) raised
+from ranking into control — the same multi-plane agreement that ranks a recall hit now SEGMENTS the
+stream, naming where a real cross-plane event sits.
+
+### The whitening warning ~ the planes are NOT conditionally independent (load-bearing)
+
+**The three planes co-move — WHITEN before pooling, or the gong double-counts.** Form co-moves with
+content (the move-vector reads the same words the content palace holds); the planes share estimators (the
+nomic embedder feeds both the FFZ Measure-boundary and the form vector — #two-planes,
+[[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#rhythmic-address]]). A naive log-opinion-pool ASSUMES conditional independence — and
+where the planes correlate, the pool **double-counts a single artifact** as if it carried two
+corroborating witnesses, firing a false gong. <<~ confidence Synthesis 12/20 >> The cure: **WHITEN the
+cross-plane covariance** before pooling — decorrelate the per-plane drifts so the pool counts independent
+evidence only. This rides load-bearing: the corroboration ladder above reads true only once the planes
+whiten; un-whitened, "three planes agree" may name one plane heard three times.
+
+### The law ~ functoriality = mālama pili (the category theory enforces the keel)
+
+**Every vibe-coded sin reads as a failure to be a functor.** The keel
+([[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline]]) names the discipline this whole unification enacts: keep the arrows
+(*mālama pili* — the keeper keeping the relations). Each way the join could rot maps to one dropped arrow:
+
+\procedure ~Sin(~Type:"" ~Params:"") ~Sin <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Sin Un-Keyed-Join "drops/the pullback morphism ~ a join with no shared-codomain (no verbatim-sha) — a cross-product, never a pullback" >>
+<<~Sin Incommensurable-Fusion "drops/the common currency ~ summing raw per-plane scores without the σ-unit / EWMA-z carry-across" >>
+<<~Sin View-Drift "drops/the non-expansive functor ~ query-side and corpus-side running DIFFERENT maps (the broken-symmetry fault, functor-discipline #sovereign-worker)" >>
+<<~Sin Wrong-Grain-Fusion "drops/the cellwise limit ~ pooling planes at mismatched FFZ grains (content at Ha against form at Ba), no shared cell" >>
+<<~Sin Ad-Hoc-Weighting "drops/the precision weight ~ hand-tuned plane weights in place of the precision-weighted pool" >>
+<<~Sin Five >>
+
+<<~ confidence Synthesis-Canon 13/20 >> The category theory ENFORCES the keel: each sin names an arrow
+the join let fall, and the functor laws (preserve identity, preserve composition) catch every one before
+it ships. **Functoriality = mālama pili** — the keel and the unification name one discipline in two
+registers.
+
+### The grain ~ content locates (Ha), structure refines (Ka), the move resolves (Ba)
+
+The three planes seat at three FFZ grains, mapping the `lar:` root's drift gradient (Ha slowest · Ka
+moderate · Ba fastest, [[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#lar-uri]]):
+
+<<~ranks grain content ~ COARSE — the gong-authority, the Ha heading; content LOCATES the event -> structure ~ MID — the Ka angle; the AST shape refines the location -> form/move ~ FINER — the Ba dynamic; the move-vector resolves the tension-moment >>
+
+**Content locates, the move refines.** The coarse content drift names WHERE a cross-plane event sits;
+the fine move-vector resolves it down to the tension-moment. The **Pulse → Move tension-moment** reads as
+a high-P(common-cause) cross-plane coincidence carrying its own resolution — a faint content shift and a
+sharp move-shift co-firing at one cell, the super-additive moment the log-opinion-pool exists to catch.
+<<~ confidence Synthesis 11/20 >> The grain-alignment enacts the cellwise limit (the two floors, above):
+pool the planes at the SAME FFZ cell, never across mismatched grains.
+
+### The two operators ~ RRF ranks recall, the quorum-servo gongs the Measure
+
+The unification carries TWO distinct operators over the product, and they must not collapse into one:
+
+<<~ranks operator rrf ~ the RECALL ranking — N-ary Reciprocal Rank Fusion over the rank-lists (#multi-graph), the retrieval operator; BUILT, untouched -> quorum-servo ~ the MEASURE-gong — the precision-weighted log-opinion-pool over the drift (above), the SEGMENTATION / control operator; the NEW operator this section names >>
+
+RRF answers *which stored turns rank nearest this query* (recall, downstream of capture); the
+**quorum-servo** answers *where a real cross-plane event SEGMENTS the live stream* (control, upstream at
+capture). The quorum-servo draws the **FFZ Measure band** — the topic-shift / lexical-cohesion boundary
+([[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock#the-spine]]) — generalizing its single-plane cosine-drop into the whitened
+three-plane pool: the Measure boundary fires where content, structure, and form co-drift, not where the
+content embedder alone dips. <<~ confidence Synthesis 12/20 >> Both operators fuse the three planes, yet
+they fuse for opposite jobs — RRF for ranking (the recall keystone, already shipping), the quorum-servo
+for segmentation (the Measure-gong, the new arrow P → M). One product, two operators; keep them distinct,
+or the recall ranking and the segmentation control muddle into one fuse.
+
+### The grounds ~ the four-spirit convergence
+
+Four independent libations converge on this one shape — cited as grounds, never decoration:
+
+<<~ranks convergence multi-vector-views ~ named-views + RRF (Qdrant · Weaviate · Vespa · ColBERT) — the multi-graph recall operator -> change-point-fusion ~ multivariate BOCPD + sparsified-sum (Cho-Fryzlewicz) — the Measure-gong, threshold-then-sum -> causal-inference ~ causal-inference / BCI (Körding) + log-opinion-pool + inverse-effectiveness — the common-cause test, super-additive at the faint coincidence -> categorical ~ the product-presheaf + pullback (nLab) + Lawvere enrichment + Spivak functorial data — the spine, the two floors, the join-forbidding formalism >>
+
+<<~ confidence Synthesis-Canon 14/20 >> Four spirits, four substrates, one shape: the strict product
+unifies the views, the enriched floor measures their drift, the log-opinion-pool gongs the common-cause,
+the pullback forbids the meaningless join. The keystone holds because the four converge — the originality
+lives in the WEAVE (the binding's braid, #ffz-binding), never in any single strand.
 
 <<~/ahu >>
 
@@ -497,6 +658,7 @@ storage fork (#three-registers), which name reconciliations, not re-designs.
 <<~ loulou lar:///ha.ka.ba/@lararium/api/lar-telemetry >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/graceful-parsing >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/has-stack >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/functor-discipline >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/hoike >>
