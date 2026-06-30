@@ -178,6 +178,56 @@ export function dampedRadius(rCurrent: number, degree: number, gamma = R_DAMP): 
   return (1 - gamma) * rCurrent + gamma * rTarget;
 }
 
+// ── MeshSelf — the ONE derived mesh self-dial (the 6-param sprawl collapsed) ──────────────────────
+
+/**
+ * A vessel's mesh standing — the single bundle the options layer carries (was six scattered params:
+ * selfCoord, selfBearing, selfEndpoint, peers, maxFanout, seed). `composeHerm`/`openNodeVessel` unpack
+ * it back into the caps' granular interface; the self-announce dial DERIVES from bearing + endpoint
+ * (the old `seed` dissolved). Present → self-announce + self-peer + proximity re-rank + r-drift; absent
+ * → a leaf that only carries what it pulls.
+ */
+export interface MeshSelf {
+  /** OWN reachable http read-face URL — advertised in its dial, excluded from self-peering. */
+  readonly endpoint: string;
+  /** Own dial bearing — the slot the carriage re-publishes as its standing `r` drifts. */
+  readonly bearing: string;
+  readonly coord: Coord;                 // routing-chart coord (r=standing, θ=kinship), published in its slot
+  readonly peers: readonly string[];     // bootstrap peer base URLs carried (∪ discovered dials); empty = a leaf
+  readonly maxFanout?: number;           // max peers pulled per cycle
+}
+
+/** FNV-1a → [0,1): a content-blind unit hash of an address — the routing-chart θ + a fallback label. */
+export function hashUnit(s: string): number {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
+  return (h >>> 0) / 4294967296;
+}
+
+/**
+ * deriveMeshSelf — the ONE mesh self-dial derivation (was duplicated across main.ts's two branches).
+ * Every vessel is a NODE on the chart: θ = a content-blind FNV hash of the address, r = carriage standing
+ * (`LAR_RADIUS`, default 1), bearing = `…/@oracle/node/<label>` (`LAR_SEED` label, else hash-derived).
+ */
+export function deriveMeshSelf(
+  publicUrl: string, peers: readonly string[], opts: { label?: string; radius?: number } = {},
+): MeshSelf {
+  const u = hashUnit(publicUrl);
+  const label = opts.label ?? u.toString(36).slice(2, 8);
+  return {
+    endpoint: publicUrl,
+    bearing:  `lar:///ha.ka.ba/@oracle/node/${label}`,
+    coord:    { theta: u * 2 * Math.PI, r: opts.radius ?? Number(process.env["LAR_RADIUS"] ?? 1) },
+    peers,
+  };
+}
+
+/** The self-announce dial a vessel seeds on its OWN FLOW-map — DERIVED from its MeshSelf (the `seed`
+ *  param dissolved: bearing + endpoint ARE the dial; the placeholder key + dreamnet scale stay fixed). */
+export function meshSelfDial(self: MeshSelf): DialEntry {
+  return { bearing: self.bearing, verifyingKeyHex: "f".repeat(64), endpoint: self.endpoint, scale: "dreamnet" };
+}
+
 /** carriage — the blind relay: pull each PEER's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
  *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). Peers are
  *  DISCOVERED from the carried dials (self-peering) ∪ the bootstrap. A peer down is no error —
@@ -264,20 +314,10 @@ export interface HermStackDeps extends DaemonCapDeps {
   readonly httpServer:     Server;
   readonly signerSeed:     Uint8Array;
   readonly storageDir:     string;
-  /** Peer base URLs this Herm carries (pulls + merges their FLOW-maps). Empty = a leaf (no carriage). */
-  readonly peers?:         readonly string[];
+  /** This Herm's mesh standing — derived once via deriveMeshSelf. Present → it self-announces, self-peers,
+   *  re-ranks by proximity + drifts r. Absent → a leaf that only carries what it pulls (no carriage dials). */
+  readonly meshSelf?:      MeshSelf;
   readonly pullIntervalMs?: number;
-  /** This Herm's OWN reachable http read-face URL — excluded from self-peering; advertised in its dial. */
-  readonly selfEndpoint?:  string;
-  /** Max peers pulled per cycle (bootstrap ∪ discovered dials). */
-  readonly maxFanout?:     number;
-  /** This Herm's routing-chart coord (r=carriage-standing, θ=kinship) — published in its slot + drives
-   *  the carriage's proximity re-rank. Absent = federation-by-dials in insertion order. */
-  readonly selfCoord?:     Coord;
-  /** This Herm's own dial bearing — the slot the carriage re-publishes as its standing `r` drifts. */
-  readonly selfBearing?:   string;
-  /** Self-announce dials on this Herm's own FLOW-map (a source Herm's reachability). */
-  readonly seed?:          readonly DialEntry[];
   readonly onLog?:         (line: string) => void;
 }
 
@@ -303,17 +343,18 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
     meshPalaceCap({
       repo: d.repo,
       ...(d.residency ? { residency: d.residency } : {}),
-      ...(d.seed ? { seed: d.seed } : {}),
-      ...(d.selfCoord ? { selfCoord: d.selfCoord } : {}),
+      ...(d.meshSelf ? { seed: [meshSelfDial(d.meshSelf)], selfCoord: d.meshSelf.coord } : {}),
     }),
     carriageCap({
-      peers: d.peers ?? [],
+      peers: d.meshSelf?.peers ?? [],
       ...(d.pullIntervalMs !== undefined ? { pullIntervalMs: d.pullIntervalMs } : {}),
       nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),  // the node-id seeds its incommensurable cadence
-      ...(d.selfEndpoint ? { selfEndpoint: d.selfEndpoint } : {}),
-      ...(d.maxFanout !== undefined ? { maxFanout: d.maxFanout } : {}),
-      ...(d.selfCoord ? { selfCoord: d.selfCoord } : {}),
-      ...(d.selfBearing ? { selfBearing: d.selfBearing } : {}),
+      ...(d.meshSelf ? {
+        selfEndpoint: d.meshSelf.endpoint,
+        selfCoord:    d.meshSelf.coord,
+        selfBearing:  d.meshSelf.bearing,
+        ...(d.meshSelf.maxFanout !== undefined ? { maxFanout: d.meshSelf.maxFanout } : {}),
+      } : {}),
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     flowMapReadFaceCap({

@@ -53,7 +53,7 @@ services:
       LAR_ROOT: "/herm"
       LAR_PORT: "8080"
       LAR_RECIPE: "herm"
-      LAR_SEED: "alpha"          # announces lar:///ha.ka.ba/@oracle/herm/alpha → endpoint http://herm-source:8080
+      LAR_SEED: "alpha"          # announces lar:///ha.ka.ba/@oracle/node/alpha → endpoint http://herm-source:8080
       LAR_PUBLIC_URL: "http://herm-source:8080"
     ports:
       - "18092:8080"

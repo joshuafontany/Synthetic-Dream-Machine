@@ -30,6 +30,7 @@ import { createServer }  from "http";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
+import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed }        from "./node-vessel-identity.js";
@@ -75,6 +76,15 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 async function main(): Promise<void> {
   const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, recipe } = parseArgs();
 
+  // Mesh standing — derived ONCE for either cap-stack (was duplicated across the herm + lararium
+  // branches). Every vessel is a node on the routing chart: LAR_PUBLIC_URL = its REACHABLE http
+  // read-face (the self-peering key, advertised in its dial), LAR_PEERS = bootstrap base URLs,
+  // LAR_SEED = its dial label (else hash-derived); LAR_RADIUS = its carriage standing r.
+  const publicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
+  const peers = (process.env["LAR_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const seedLabel = process.env["LAR_SEED"];
+  const meshSelf = deriveMeshSelf(publicUrl, peers, seedLabel ? { label: seedLabel } : {});
+
   // WS server — path-scoped to /ws only. Non-WS requests get no handler (socket destroyed
   // by the upgrade gate below). No HTTP surface — catalog URL advertised via stdout.
   const httpServer = createServer();
@@ -107,25 +117,7 @@ async function main(): Promise<void> {
   // ── Herm (Lares Viales) — the wiki-LESS wayfarer cap-stack: @daemon immune core + a served
   //    @meshpalace FLOW-map, no wiki/pool. Routed by --recipe herm / LAR_RECIPE=herm. ──────────
   if (recipe === "herm") {
-    // Carriage + self-announce from the env: LAR_PEERS (bootstrap base URLs), LAR_PULL_MS, LAR_SEED (label),
-    // LAR_PUBLIC_URL (this Herm's REACHABLE http read-face — advertised in its dial, the self-peering key).
-    const peers = (process.env["LAR_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-    const pullMs = process.env["LAR_PULL_MS"];
-    const seedLabel = process.env["LAR_SEED"];
-    const publicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
-    // Routing-chart coord: θ deterministic from the node-id (CONTENT-BLIND — a hash of the address, never
-    // sealed content; the canonical born-random-then-grow-from-topology is the fuller design), r = carriage
-    // standing (LAR_RADIUS, default 1). Published in this Herm's slot + drives peers' proximity re-rank.
-    const hashUnit = (s: string): number => {
-      let h = 2166136261 >>> 0;
-      for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
-      return (h >>> 0) / 4294967296;
-    };
-    const selfCoord = { theta: hashUnit(publicUrl) * 2 * Math.PI, r: Number(process.env["LAR_RADIUS"] ?? 1) };
-    // EVERY Herm self-announces (LAR_SEED label, else a content-blind label from the address), so every
-    // vessel is reachable + on the routing chart — the carriage re-publishes this slot as its r drifts.
-    const selfLabel = seedLabel ?? `n${hashUnit(publicUrl).toString(36).slice(2, 8)}`;
-    const selfBearing = `lar:///ha.ka.ba/@oracle/herm/${selfLabel}`;
+    const pullMs = process.env["LAR_PULL_MS"];   // carriage cadence — tuning, kept separate from membership
     const herm = await openNodeHerm({
       hostId:     "lares-viales",
       wikiId,
@@ -136,13 +128,8 @@ async function main(): Promise<void> {
       catalogUrl,
       recipe:     "herm",
       httpServer,
-      selfEndpoint: publicUrl,
-      selfCoord,
-      selfBearing,
-      ...(peers.length ? { peers } : {}),
+      meshSelf,
       ...(pullMs ? { pullIntervalMs: Number.parseInt(pullMs, 10) } : {}),
-      // the dial advertises the REACHABLE read-face URL (publicUrl), so peers carrying it can self-peer back.
-      seed: [{ bearing: selfBearing, verifyingKeyHex: "f".repeat(64), endpoint: publicUrl, scale: "dreamnet" as const }],
       onPhase:    (phase) => console.log(`[herm] phase → ${phase}`),
     });
     console.log(`[herm] live — wiki-less wayfarer | storage: ${storageDir}`);
@@ -182,17 +169,8 @@ async function main(): Promise<void> {
     return;
   }
 
-  // A Lararium is also a first-class mesh-node: it carries the FLOW-map (meshpalace+carriage) when given
-  // its self-announce params — a hearth that navigates the mesh, not a destination beside the roads.
-  const larPublicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
-  const larPeers = (process.env["LAR_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-  const larHashUnit = (s: string): number => {
-    let h = 2166136261 >>> 0;
-    for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
-    return (h >>> 0) / 4294967296;
-  };
-  const larSelfCoord = { theta: larHashUnit(larPublicUrl) * 2 * Math.PI, r: Number(process.env["LAR_RADIUS"] ?? 1) };
-  const larSelfBearing = `lar:///ha.ka.ba/@oracle/lararium/${larHashUnit(larPublicUrl).toString(36).slice(2, 8)}`;
+  // A Lararium is also a first-class mesh-node: it carries the FLOW-map (meshpalace+carriage) from the SAME
+  // derived meshSelf — a hearth that navigates the mesh, not a destination beside the roads.
   const result = await openNodeVessel({
     hostId:     "lararium-node",
     wikiId,
@@ -201,10 +179,7 @@ async function main(): Promise<void> {
     rootDir,
     wss,
     catalogUrl,
-    selfEndpoint: larPublicUrl,
-    selfCoord:    larSelfCoord,
-    selfBearing:  larSelfBearing,
-    ...(larPeers.length ? { peers: larPeers } : {}),
+    meshSelf,
     onPhase: (phase) => {
       console.log(`[lararium] phase → ${phase}`);
     },

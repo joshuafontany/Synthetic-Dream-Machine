@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # herm-mesh-witness — the live witness for docker-compose.mesh.yml: confirm the source Herm's
-# announced dial (lar:///ha.ka.ba/@oracle/herm/alpha) crossed the relay chain to relay-2, served at
+# announced dial (lar:///ha.ka.ba/@oracle/node/alpha) crossed the relay chain to relay-2, served at
 # its content-addressed snapshot. Dependency-free (curl only) — the in-process tests cover the full
 # pointer-signature/hash/freshness verify rule; this proves the CONTAINER-TO-CONTAINER relay.
 #
@@ -9,7 +9,7 @@
 # Usage: docker compose -f docker-compose.mesh.yml up -d && ./tools/herm-mesh-witness.sh
 set -euo pipefail
 URL="${WITNESS_URL:-http://localhost:18080}"
-NEEDLE="herm/alpha"
+NEEDLE="node/alpha"
 
 for i in $(seq 1 30); do
   cid=$(curl -s --max-time 5 "$URL/oracle/pointer" 2>/dev/null | grep -o '"cid":"[0-9a-f]*"' | head -1 | cut -d'"' -f4 || true)

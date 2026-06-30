@@ -57,7 +57,7 @@ import {
 import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
-import type { DialEntry, SparseFormVector, WorldlineStubWire, Coord } from "@lararium/mesh";
+import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
@@ -69,7 +69,7 @@ import {
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
-import { composeLararium, composeHerm, meshPalaceCap, carriageCap } from "./node-caps.js";
+import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfDial, type MeshSelf } from "./node-caps.js";
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
@@ -133,18 +133,12 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   recipe?: NodeRecipe;
   /** HTTP server the Herm's FLOW-map read-face serves over (required for openNodeHerm). */
   httpServer?: Server;
-  /** Herm carriage — peer base URLs whose FLOW-maps this Herm pulls + merges (empty = a leaf). */
-  peers?: readonly string[];
-  /** Herm carriage pull cadence (ms). */
+  /** This vessel's mesh standing — derived once via deriveMeshSelf. Present → it self-announces,
+   *  self-peers, re-ranks by proximity + drifts r (a Lararium carries ALONGSIDE its wiki-full core; a
+   *  Herm IS its carriage). Absent → a leaf that only carries what it pulls. */
+  meshSelf?: MeshSelf;
+  /** Carriage pull cadence (ms) — tuning, kept separate from membership. */
   pullIntervalMs?: number;
-  /** This Herm's OWN reachable http read-face URL — excluded from self-peering, advertised in its dial. */
-  selfEndpoint?: string;
-  /** This Herm's routing-chart coord (r,θ) — published in its slot, drives the carriage proximity re-rank. */
-  selfCoord?: Coord;
-  /** This Herm's own dial bearing — the slot re-published as its standing `r` drifts from live degree. */
-  selfBearing?: string;
-  /** Herm self-announce — dials to seed on this Herm's own FLOW-map (a source's reachability). */
-  seed?: readonly DialEntry[];
 }
 
 export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonVmCore> {
@@ -834,15 +828,16 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // A Lararium is a hearth that is ALSO a first-class mesh-node: when self-announce params are supplied,
   // it composes the carriage (meshpalace + carriage) ALONGSIDE the wiki-full core — it carries + navigates
   // the FLOW-map for its own routing (carry-without-reserve; no second read-face, no @oracle conflict).
-  const extraCaps = (opts.selfBearing && opts.selfEndpoint) ? [
+  const extraCaps = opts.meshSelf ? [
     meshPalaceCap({
       repo: p.repo, ...(p.residency ? { residency: p.residency } : {}),
-      ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
-      seed: [{ bearing: opts.selfBearing, verifyingKeyHex: "f".repeat(64), endpoint: opts.selfEndpoint, scale: "dreamnet" }],
+      selfCoord: opts.meshSelf.coord,
+      seed: [meshSelfDial(opts.meshSelf)],
     }),
     carriageCap({
-      peers: opts.peers ?? [], selfEndpoint: opts.selfEndpoint, selfBearing: opts.selfBearing,
-      ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
+      peers: opts.meshSelf.peers, selfEndpoint: opts.meshSelf.endpoint, selfBearing: opts.meshSelf.bearing,
+      selfCoord: opts.meshSelf.coord,
+      ...(opts.meshSelf.maxFanout !== undefined ? { maxFanout: opts.meshSelf.maxFanout } : {}),
       nodeSeedHex: Buffer.from(p.operatorSeed).toString("hex"),
       onLog: (l) => console.log(`[lararium] ${l}`),
     }),
@@ -886,12 +881,8 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     httpServer:  opts.httpServer,
     signerSeed:  p.operatorSeed,
     storageDir:  opts.storageDir,
-    ...(opts.peers ? { peers: opts.peers } : {}),
+    ...(opts.meshSelf ? { meshSelf: opts.meshSelf } : {}),
     ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
-    ...(opts.selfEndpoint ? { selfEndpoint: opts.selfEndpoint } : {}),
-    ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
-    ...(opts.selfBearing ? { selfBearing: opts.selfBearing } : {}),
-    ...(opts.seed ? { seed: opts.seed } : {}),
     onLog:       (line) => console.log(`[herm] ${line}`),
   });
   p.emit("vessel-ready");
