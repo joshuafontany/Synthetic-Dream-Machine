@@ -23,6 +23,36 @@ export function larHome(): string {
   return process.env["LAR_ROOT"] ?? join(homedir(), ".lares");
 }
 
+/** The VERBATIM mempalace store dir — `MEMPALACE_PALACE_PATH` (override) or `~/.mempalace`. This is
+ *  the PARENT store (chroma + config.json + entities + locks + the worldline-KG knowledge_graph.sqlite3
+ *  that lives INSIDE it), the whole organ the teardown removes. NOTE it roots in the true homedir
+ *  (or the env override), NOT larHome — the verbatim palace predates the ~/.lares vessel root and the
+ *  vendored mempalace owns its own default. Use `MEMPALACE_PALACE_PATH` to isolate it for a test. */
+export function larMempalaceDir(): string {
+  return process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace");
+}
+
+/** The `.meshpalace` STORE dir — a mempalace instance fed by the @meshpalace Automerge doc (the
+ *  cross-Lararium federation bridge). Sits at `~/.lares/.meshpalace`, PARALLEL to `.astpalace` +
+ *  `.formpalace`. THIS resolver names the store dir ONLY — the @meshpalace feed/federation/carriage
+ *  logic is a separate (mesh-domain) concern and lives elsewhere; here we only stand the directory. */
+export function larMeshPalaceDir(): string {
+  return join(larHome(), ".meshpalace");
+}
+
+/** The `.corpus` root — the ephemeral astral MULTIPALACE: each `lares corpus` run/open mints a SCRATCH
+ *  mempalace instance under `~/.lares/.corpus/<corpus-id>/` (a 4th palace shape, same machinery,
+ *  sweepable). Sits beside the durable palaces; every child is dissolvable + reapable so an interrupted
+ *  run can never leak state (palace-teardown enumerates `.corpus/*`). */
+export function larCorpusDir(): string {
+  return join(larHome(), ".corpus");
+}
+
+/** The scratch instance dir for one ephemeral corpus-palace, by its id, under {@link larCorpusDir}. */
+export function corpusInstanceDir(id: string): string {
+  return join(larCorpusDir(), id);
+}
+
 /** Storage dir — the Automerge Repo, vessel key, and UDS socket. WIPED by `reset`. */
 export function larDataDir(): string {
   return join(larHome(), ".lararium");

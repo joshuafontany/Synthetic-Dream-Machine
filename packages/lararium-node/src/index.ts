@@ -3,8 +3,24 @@ export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larAstPalaceDir, larFormPalaceDir,
+  larMempalaceDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
+
+// The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
+export { palaceOrgans, setupPalaceOrgans, organHealthy } from "./palace-organs.js";
+export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";
+
+// The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
+export {
+  newCorpusId, listCorpora, openCorpus, queryCorpus, keepCorpus,
+  dissolveCorpus, dissolveAll, listOrphans, reapOrphans, runCorpus,
+  corpusTeardownDirs, defaultCorpusIngest, defaultCorpusSearch,
+} from "./corpus-palace.js";
+export type {
+  CorpusManifest, CorpusIngest, CorpusSearch, OpenCorpusOptions, OpenCorpusResult,
+  QueryCorpusResult, KeepResult, DissolveResult, RunCorpusOptions, RunCorpusResult,
+} from "./corpus-palace.js";
 
 export { LarDiskProjector } from "./disk-projector.js";
 export { DaemonAuthGate } from "./daemon-auth-gate.js";
