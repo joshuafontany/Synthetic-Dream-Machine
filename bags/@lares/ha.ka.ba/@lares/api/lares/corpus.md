@@ -332,11 +332,55 @@ self-report-vs-witness split:
 ground-truth (tree-sitter). Resolution = **BOTH, staged** — the PCFG for strict rule-recovery + dial-able
 bands, tree-sitter for real-grammar confirmation. The operator may reweight downstream.
 
+### The NL-Wing ~ no single mixed gold, so a per-mode COMPONENT SUITE
+
+<<~ confidence Synthesis 12/20 >> The code-side baseline above scores RULE / STRUCTURE recovery on
+machine grammars. The natural-language and poetry forms carry NO single mixed gold — so the NL side rides
+a **per-mode component suite**, each mode bringing its own oracle, plus the blend as its own four-cluster
+recovery test (below). Ranked, leaning FREE:
+
+<<~ranks nl-wing poetry-rhyme ~ Chicago **rhymedata** (FREE — sravanareddy/rhymedata; ~93k EN lines + FR); blind rhyme-SCHEME discovery IS its published task (Reddy & Knight 2011) — the cleanest NL twin of the code-side blind-recovery -> poetry-meter ~ **For-Better-For-Verse (4B4V)** (FREE, TEI, ~1100 lines, Halle-Keyser known generative-metrics grammar, per-syllable stress gold) + **Prosodic / Poesy** (FREE pip — a TOOL that GENERATES gold scansions = the meter CROWN / oracle, like the synthetic-PCFG crown, and doubles as the scorer) -> prose-discourse ~ gold discourse TREES → structure-F1; **RST-DT** runs LDC-locked, so use the FREE **GUM** multilayer-RST alternative; DEMOTE PDTB (shallow, non-tree, LDC) -> oral-formulaic ~ the chant / Kumulipo parallelism mode — the **Biblical-Hebrew parallelism** benchmark (arXiv 2506.24117) + HELFI + ETCBC-BHSA (FREE); Parry-Lord theory; ties the meme's PrefixSpan / BIDE / TreeMiner repetition miners -> unicode ~ **UAX-29** + **UAX-9** conformance test files (FREE, official, deterministic boundary gold = the PULSE-band oracle) -> control-codes ~ a SELF-AUTHORED micro-CFG from **ECMA-48** — the FS/GS/RS/US information-separator hierarchy IS a genuine 4-level nesting grammar (author `G_true` like the PCFG crown; the OUTER framing band, what the boot invokes as &#x0001;–&#x0004;); troff / RUNOFF stays spec-only, no corpus >>
+
+### The blend-resonance ~ the four modes STRATIFY onto the FFZ aperture ladder (load-bearing)
+
+<<~ confidence Synthesis-Canon 14/20 >> The blend reads **BAND-STRATIFIED, never flat.** The modes seat
+at DISTINCT aperture bands (#the-bands), so the multi-scale-FFZ bands cap NATURALLY separates them by
+frequency:
+
+<<~ranks stratum control-code-framing ~ the OUTERMOST band — the ECMA-48 information-separator frame -> rst-discourse ~ THEME — the gold discourse tree spans the whole text -> sigil-ast + meter ~ MEASURE / ARC — the `<<~…>>` structure and the metrical foot -> uax-29-graphemes-words ~ PULSE — the deterministic grapheme / word boundaries, the finest grain >>
+
+**The two caps UNIFY on the blend.** The bands cap performs the MODE-recovery (which band a span seats
+in); the form cap recovers EACH band's grammar. <<~ confidence Synthesis-Canon 13/20 >> A band-stratified
+blend turns the blend test into a direct witness of the bands-cap claim — the mode-recovery falls OUT of
+the decomposition, never bolts on as a separate classifier.
+
+### The scoring ~ two stages
+
+<<~ confidence Synthesis 12/20 >> The blend scores in two stages, mirroring the gold-anchor's
+self-report-vs-witness cut:
+
+<<~ranks stage stage-1-mode ~ MODE-recovery — treat the mode-label (code / poetry / unicode / control / prose) as a gold CLUSTER over spans; run induction BLIND; score the induced span-clustering vs the gold partition (ARI · V-measure · cluster-F1) = "recover the four layers" -> stage-2-grammar ~ GRAMMAR-recovery — WITHIN each recovered mode run the existing grain: rule-F1 for code + control · structure-F1 for tree-sitter + RST · boundary-accuracy for UAX-29 · repetition-recovery for parallelism · per-syllable + rhyme for poetry — vs that mode's oracle >>
+
+### The gradient-caveat ~ recovery-scorability runs STEEP
+
+<<~ confidence Synthesis-Canon 13/20 >> Recovery-scorability rides a **steep gradient**, and the headline
+claim MUST honor it:
+
+<<~ranks scorability crisp ~ code (PCFG) + Unicode (deterministic) — a single hard truth -> clean ~ meter + rhyme — published gold, narrow disagreement -> soft ~ RST + parallelism — theory-laden, moderate IAA, NO single truth >>
+
+<<~ confidence Synthesis-Canon 13/20 >> **Weight the headline on crisp + clean; read soft as confirmation,
+never proof.** The gold-anchor's anti-self-grace discipline
+([[gold-anchor|lar:///ha.ka.ba/@lares/api/pono/gold-anchor]]) bites HARDEST on the soft modes — a theory-laden
+gold the framework partly authored cannot witness the framework's own grace, so RST / parallelism recovery
+stands as corroboration only, the crisp golds carrying the load.
+
 ### Grounds
 
 <<~ confidence Synthesis 12/20 >> Cited: the Omphalos competition · Compound PCFG (arXiv 1906.10225) ·
 Depth-Bounded PCFG Induction · Grammar-VAE / SMILES CFG (Kusner 2017) · the tree-sitter Writing-Tests
-corpus format · `eth_py150_open`. The QA-rig compute kernel
+corpus format · `eth_py150_open` · **the NL-wing:** Reddy & Knight 2011 (rhymedata) · For-Better-For-Verse
+(4B4V) · Prosodic · Halle-Keyser / Fabb-Halle generative metrics · RST-DT / GUM · the Biblical-Hebrew
+parallelism benchmark (arXiv 2506.24117) · UAX-29 · ECMA-48. The QA-rig compute kernel
 ([[gold-anchor|lar:///ha.ka.ba/@lares/api/pono/gold-anchor#instruments]] — the `qa_anchor` package) supplies the
 signal-detection / bootstrap-CI scoring that turns a recovery score into a witnessed `(d′, criterion)`
 verdict.
