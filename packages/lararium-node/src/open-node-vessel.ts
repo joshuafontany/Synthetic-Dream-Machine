@@ -47,8 +47,14 @@ import {
   selectActiveWikiSlug,
   seedVesselDefaults,
   loadCatalogCorpora,
+  composeVerbPlane,
+  mempalaceProviderCap, formPalaceProviderCap, daemonVerbProviderCap, telemetryProviderCap,
+  recallVerbCap, telemetryVerbCap, captureVerbCap, worldlineVerbCap,
 } from "@lararium/tw5";
-import type { VesselWikiSlot, DaemonVmCore, VesselDaemonVm, VesselOrchestration } from "@lararium/tw5";
+import type {
+  VesselWikiSlot, DaemonVmCore, VesselDaemonVm, VesselOrchestration,
+  VerbContribution, MempalaceProvider, FormPalaceProvider, DaemonVerbProvider, TelemetryProvider, RecallClient,
+} from "@lararium/tw5";
 import {
   loadOrMaterializeOracle,
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
@@ -261,6 +267,15 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   let bootstrap!: VesselBootstrap;         // captured in loadGenesis
   let slotActiveWikiId = "";               // captured in wikiSlot
   let activeWikiSource: "boot-arg" | "daemon-marker" = "boot-arg";
+  // The recall FORM leg holder — opened ONCE, lazily, shared by BOTH the dual recall fuse and the
+  // worldline form pre-fetch (makeFormPalace ref-counts per canonical dir → one reference, never a
+  // second process). Owned by the form provider impl below; closed implicitly at process exit / idle-reap.
+  let recallFormPalace: FormPalace | null = null;
+  // The composed verb plane (the four provider-heavy groups, NESTED-composed). composeVerbPlane is async
+  // but wireVerbs runs SYNCHRONOUSLY (daemonCap.build calls it un-awaited); the plane composes at the END
+  // of openDaemon (where daemonVm is ready, awaited BEFORE wireVerbs inside daemonCap) and wireVerbs
+  // applies this cached contribution synchronously.
+  let pendingVerbContribution: VerbContribution | null = null;
 
   const residency = new BagResidencyManager({
     hotCap:          32,
@@ -452,6 +467,78 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         formPalaceDir:  larFormPalaceDir(),
       },
     });
+
+    // ── NESTED verb-plane compose (composable-keel idiom) ─────────────────────────────────────────
+    // The four provider-heavy verb groups (recall · lar-telemetry · capture · worldline) lift into a
+    // #has-cap-stack of provider caps + verb-group caps (@lararium/tw5 verb-caps). The platform builds the
+    // provider impls HERE from its node helpers + the now-live daemonVm, and composeVerbPlane wires the
+    // stack (a verb cap whose mandatory provider is absent REFUSES — blind by structure). The merged
+    // contribution stashes in `pendingVerbContribution`; wireVerbs applies it synchronously below.
+    // Ordering: openDaemon runs (awaited) inside daemonCap.build BEFORE the un-awaited wireVerbs, and
+    // daemonVm is set just above — so every injected impl is ready at this compose point.
+    const mempalaceImpl: MempalaceProvider = {
+      withClient: (fn) => withMempalace((client) => fn(client as unknown as RecallClient)),
+      turnsForHandleStubs: (handle, opts) =>
+        withMempalace(async (client) => orderHandleTurnsToStubs(await client.turnsForHandle(handle, opts))),
+    };
+    const formImpl: FormPalaceProvider = {
+      // The worldline form pre-fetch: a miss/fault → null (the worker keeps the turn's TIME slot, form
+      // null). REUSES the recall form holder (one process).
+      getForm: async (sha) => {
+        recallFormPalace ??= makeFormPalace(larFormPalaceDir());
+        try {
+          const entry = await recallFormPalace.get(sha);
+          return entry?.document ? parseFormVector(entry.document) : null;
+        } catch {
+          return null;
+        }
+      },
+      // The dual recall fuse — the form-leg construction (markers→vector derive IN the @daemon VM, the
+      // content-only degradation on fault) + the RRF fuse, verbatim. The markers derive round-trips the
+      // warm worker (deriveSkeleton); VM cold/unavailable → resolves null → the markers leg fuses
+      // content-only (graceful, no shadow derive). A form-holder rejection collapses to [] → fuse
+      // content-only. REUSES the recall form holder.
+      multiRecall: (legs, args) => {
+        recallFormPalace ??= makeFormPalace(larFormPalaceDir());
+        const deriveSkeleton = (q: string) => daemonVm.deriveSkeleton(q);
+        const formSearchLeg = makeFormSearch({ query: args["query"] as string, formPalace: recallFormPalace, deriveSkeleton });
+        return multiGraphRecall(
+          {
+            contentSearch: (a: Record<string, unknown>) => legs.contentSearch(a),
+            formSearch: async (input: { nResults: number; where?: Record<string, unknown> }) => { try { return await formSearchLeg(input); } catch { return []; } },
+          } as unknown as Parameters<typeof multiGraphRecall>[0],
+          args as unknown as Parameters<typeof multiGraphRecall>[1],
+        ) as unknown as Promise<Record<string, unknown>>;
+      },
+    };
+    const daemonImpl: DaemonVerbProvider = {
+      placeTelemetry: (turnText, sourceFile, frontier) => daemonVm.placeTelemetry(turnText, sourceFile, frontier),
+      subagentEdges: (transcript) => deriveSubagentEdges(transcript),
+      worldlineCompare: (input) => daemonVm.worldlineCompare(input),
+      worldlineTrajectory: (input) => daemonVm.worldlineTrajectory(input),
+    };
+    const telemetryImpl: TelemetryProvider = {
+      writeback: (wing, opts) => {
+        try {
+          const r = writebackWing(wing, opts);
+          return { wing, ...r };
+        } catch (err) {
+          if (err instanceof TelemetryUnavailable) throw new Error(`lar-telemetry unavailable: ${err.message}`);
+          throw err;
+        }
+      },
+    };
+    pendingVerbContribution = await composeVerbPlane([
+      mempalaceProviderCap(mempalaceImpl),
+      formPalaceProviderCap(formImpl),
+      daemonVerbProviderCap(daemonImpl),
+      telemetryProviderCap(telemetryImpl),
+      recallVerbCap(),
+      telemetryVerbCap(),
+      captureVerbCap(),
+      worldlineVerbCap(),
+    ]);
+
     return { workerEa: daemonVm.workerEa, mountMainVerbs: daemonVm.mountMainVerbs, resolveBinding: daemonVm };
   };
 
@@ -462,11 +549,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // wiki island) and residency stats (a read of the main-resident manager).
   const wireVerbs: VesselOrchestration<VesselIslandPool>["wireVerbs"] = (registry, _assembly) => {
     seedVesselDefaults(registry);
-    // The recall FORM leg — opened ONCE, lazily, on the first dual recall. It REUSES the singleton
-    // form holder the capture engine already runs for the same dir (makeFormPalace ref-counts per
-    // canonical dir), so this adds one reference, never a second process. Closed implicitly at
-    // process exit / idle-reap; recall never tears the holder down under the live capture engine.
-    let recallFormPalace: FormPalace | null = null;
     registry.register("sync-wiki", async (args, ctx) =>
       vmManager.placeWikiVerb(slotActiveWikiId, {
         verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
@@ -485,204 +567,15 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       }),
     );
     registry.register("residency", makeResidencyStatsReactor({ residency }));
-    // recall — the mempalace READ membrane (Option D, slice 1). The @daemon host
-    // reaches the verbatim PLACE memory THROUGH the seat: a read-only sidecar,
-    // spawned per call, semantic-search | list | get. mempalace stays a sibling
-    // behind the causal-island shore (web3-only law) — only its REACH
-    // moves from a raw CLI subprocess to this mediated, capability-gated verb (it
-    // rides the worker's verify-then-delegate gate for free, routed to main as the
-    // sidecar I/O lives here). A persistent/pooled client is a later optimization.
-    registry.register("recall", async (args) => {
-      const drawerId = typeof args["drawer"] === "string" ? (args["drawer"] as string) : "";
-      const query    = typeof args["query"]  === "string" ? (args["query"]  as string) : "";
-      const wing     = typeof args["wing"]   === "string" ? (args["wing"]   as string) : undefined;
-      const limitRaw = args["limit"];
-      const limit    = typeof limitRaw === "number" ? limitRaw : typeof limitRaw === "string" ? Number(limitRaw) : undefined;
-      // Multi-graph recall (P4): N-ary fuse the CONTENT (verbatim mempalace) + FORM (.formpalace) +
-      // later graphs by reciprocal rank fusion on the verbatim_sha. Opt-in (`dual`/`multi`) — the FORM
-      // leg routes by query shape (bearing → structured where-filter · markers → vector · keywords →
-      // where-or-defer). The `dual` arg name stays accepted for callers; `multi` reads the same.
-      const dual         = args["dual"] === true || args["dual"] === "true"
-                        || args["multi"] === true || args["multi"] === "true";
-      const register     = typeof args["register"]     === "string" ? (args["register"]     as string) : undefined;
-      const grammarLayer = typeof args["grammarLayer"] === "string" ? (args["grammarLayer"] as string)
-                         : typeof args["grammar_layer"] === "string" ? (args["grammar_layer"] as string) : undefined;
-      const fwRaw        = args["formWeight"];
-      const formWeight   = typeof fwRaw === "number" ? fwRaw : typeof fwRaw === "string" ? Number(fwRaw) : undefined;
-      // P6 — the paragraph-scale aperture: a 0..20 grain or a band name ("paragraph"). Off when absent.
-      const agRaw        = args["apertureGrain"] ?? args["aperture_grain"] ?? args["aperture"];
-      const apertureGrain = typeof agRaw === "number" || typeof agRaw === "string" ? agRaw : undefined;
-      const awRaw        = args["apertureWidth"] ?? args["aperture_width"];
-      const apertureWidth = typeof awRaw === "number" ? awRaw : typeof awRaw === "string" && awRaw !== "" ? Number(awRaw) : undefined;
-      // Warm pooled sidecar (started once, reused, self-healing) — recall stays
-      // sub-second after the first cold start; this makes recall-into-wake fast.
-      return withMempalace(async (client) => {
-        if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
-        if (dual && query) {
-          recallFormPalace ??= makeFormPalace(larFormPalaceDir());
-          // The markers→vector derive runs IN the @daemon VM — the recall twin of capture, one runtime,
-          // NO node-side fallback. A sigil-bearing query round-trips to the warm worker, where it folds
-          // against the FULL self-hosted grammar + the LIVE grammar-cache basis (structural plane
-          // present), so recall applies the IDENTICAL Move→Vec functor capture does. VM unavailable /
-          // cold → resolves null → the markers leg fuses content-only (graceful, no shadow derive).
-          const deriveSkeleton = (q: string) => daemonVm.deriveSkeleton(q);
-          const formSearchLeg = makeFormSearch({ query, formPalace: recallFormPalace, deriveSkeleton });
-          const res = await multiGraphRecall(
-            {
-              contentSearch: (a) => client.search(a),
-              // The FORM leg degrades to content-only if the form holder is unavailable (no python
-              // venv, store fault): a rejection collapses to [] → fuseMultiGraph fuses content-only.
-              formSearch: async (input) => { try { return await formSearchLeg(input); } catch { return []; } },
-            },
-            {
-              query,
-              ...(wing          !== undefined ? { wing } : {}),
-              ...(limit         !== undefined ? { limit } : {}),
-              ...(register      !== undefined ? { register } : {}),
-              ...(grammarLayer  !== undefined ? { grammarLayer } : {}),
-              ...(formWeight    !== undefined ? { formWeight } : {}),
-              ...(apertureGrain !== undefined ? { apertureGrain } : {}),
-              ...(apertureWidth !== undefined ? { apertureWidth } : {}),
-            },
-          );
-          return { mode: "multi", ...res };
-        }
-        if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
-        return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
-      });
-    });
-    // lar-telemetry — the mempalace WRITE membrane (Option D, slice 2). The @daemon
-    // host reads a wing's drawers' instrument readings (the gradient parser) and
-    // projects lar_* back ONTO them THROUGH the seat (capability-gated, witnessed),
-    // never a raw CLI subprocess. MVP flushes on invocation; the nalu-batched
-    // hold/flush (worker enqueueNalu → on-nalu command main) is the next refinement
-    // (lar:///ha.ka.ba/@lararium/api/lar-telemetry).
-    registry.register("lar-telemetry", async (args) => {
-      const wing = typeof args["wing"] === "string" ? (args["wing"] as string) : "";
-      if (!wing) throw new Error("args.wing is required");
-      const limitRaw = args["limit"];
-      const limit    = typeof limitRaw === "number" ? limitRaw : typeof limitRaw === "string" ? Number(limitRaw) : undefined;
-      try {
-        const r = writebackWing(wing, limit !== undefined ? { limit } : {});
-        return { wing, ...r };
-      } catch (err) {
-        if (err instanceof TelemetryUnavailable) throw new Error(`lar-telemetry unavailable: ${err.message}`);
-        throw err;
-      }
-    });
-    // capture — the FEED leg of the telemetry nalu (the @daemon WRITE membrane, forward-capture).
-    // Routes ONE captured turn to the daemon island's capture cap (telemetry:place-verb → enqueue →
-    // WAL → flush `mine --source ndjson` → mempalace). Fire-and-forget: the nalu owns durability +
-    // self-regulation. `lares capture` is the producer; it falls back to a direct `mempalace mine`
-    // when the daemon is down (verbatim-always). Distinct from lar-telemetry (the lar_* writeback).
-    registry.register("capture", async (args) => {
-      const turnText   = typeof args["turnText"]   === "string" ? (args["turnText"]   as string) : "";
-      const sourceFile = typeof args["sourceFile"] === "string" ? (args["sourceFile"] as string) : "";
-      if (!turnText || !sourceFile) throw new Error("capture: args.turnText + args.sourceFile (non-empty strings) required");
-      // Optional turn-DAG fork-frontier (head turn-uuids) the producer derived — threads to buildPatch's
-      // 3rd arg so a same-session fork derives a distinct handle. Absent ⇒ byte-identical to before.
-      const rawFrontier = args["frontier"];
-      const frontier = Array.isArray(rawFrontier)
-        ? rawFrontier.filter((x): x is string => typeof x === "string" && x !== "")
-        : typeof rawFrontier === "string" && rawFrontier ? [rawFrontier] : undefined;
-      daemonVm.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined);
-      return { ok: true, captured: true, bytes: turnText.length };
-    });
-
-    // ── worldline reads — the PERMAINAN SUBSTRATE (the flow-lens foundation) ──────────────────────
-    // The reads run IN the sovereign daemon worker (worldline-read-vm.ts) — the cap-stack lifts WHOLE,
-    // no coordinator carve-out (operator override: a future lares-CLI read → TW5-filter-compute chain
-    // must live in-VM). The host supplies only EXTERNAL data the worker can't reach: the edge-DAG
-    // (derived from a session transcript) and the form-vector bytes (the python form store, a node
-    // child_process). All COMPUTE — registry, ITC compare, ordering, joining, shuffling — is the
-    // worker's. Mirrors the recall query-derive (deriveSkeleton), which ships its query string IN.
-
-    // worldline-compare (Well 1, ITC LIVE-READ): two handles → the concurrent-capable causal verdict
-    // (before / after / concurrent / equal). The host derives the edge-DAG from a session `transcript`
-    // (spawn + handback edges, deriveSubagentEdges) and ships it; the WORKER projects the registry +
-    // runs the ITC tree-leq. (Inject Communication edges enrich it via the worldline-inject-detect seam.)
-    registry.register("worldline-compare", async (args) => {
-      const a = typeof args["a"] === "string" ? (args["a"] as string) : "";
-      const b = typeof args["b"] === "string" ? (args["b"] as string) : "";
-      if (!a || !b) throw new Error("worldline-compare: args.a + args.b (handles) required");
-      const transcript = typeof args["transcript"] === "string" ? (args["transcript"] as string) : "";
-      const spirits = transcript ? deriveSubagentEdges(transcript) : [];
-      const opens = spirits.map((s) => s.spawn);
-      const closes = spirits.map((s) => s.handback);
-      try {
-        return await daemonVm.worldlineCompare({ a, b, opens, closes });
-      } catch (err) {
-        throw new Error(`worldline-compare: ${err instanceof Error ? err.message : String(err)} (supply a transcript that names both handles)`);
-      }
-    });
-
-    // worldline-trajectory (Well 3 + Well 4, THE CORE): a handle → its worldline-ordered form-vector
-    // path through move-space (the permainan the flow-lens reads), and optionally a null baseline
-    // (shuffled order). `stubs` (verbatimSha + tickCounter, the handle's captured turns) is the clean
-    // substrate API — driveable by any turn source. The host pre-fetches each turn's move-space
-    // position from the form store (a node child_process the worker can't reach) and SHIPS it on the
-    // wire stubs; the WORKER orders + joins + shuffles.
-    //
-    // SEAM A (LIVE): the PRODUCTION turn source is the CONTENT GRAPH — the drawers WHERE
-    // `lar_agent_handle = handle`, each carrying its EXACT capture `lar_verbatim_sha` (full fidelity,
-    // not a transcript-text re-hash). When the caller passes no `stubs`, this fetches them live from
-    // the content mempalace (client.turnsForHandle → orderHandleTurnsToStubs) and feeds the worker
-    // those. An explicit `stubs` arg still overrides (tests / a transcript-driven probe). NOTE: the
-    // order rides filed_at → chunk_index (lar_ffz stays documented-but-unstamped; flagged).
-    registry.register("worldline-trajectory", async (args) => {
-      const handle = typeof args["handle"] === "string" ? (args["handle"] as string) : "";
-      if (!handle) throw new Error("worldline-trajectory: args.handle required");
-      const wing = typeof args["wing"] === "string" ? (args["wing"] as string) : undefined;
-      const rawStubs = Array.isArray(args["stubs"]) ? (args["stubs"] as unknown[]) : null;
-      // No explicit stubs → SOURCE FROM THE LIVE CONTENT GRAPH (the production path). A handle with no
-      // drawers yields [] → an empty trajectory (graceful). The pooled read-client stays warm.
-      const baseStubs = rawStubs === null
-        ? await withMempalace(async (client) =>
-            orderHandleTurnsToStubs(await client.turnsForHandle(handle, { ...(wing !== undefined ? { wing } : {}) })),
-          )
-        : rawStubs
-            .filter((s): s is Record<string, unknown> => !!s && typeof s === "object")
-            .map((s, i) => ({
-              verbatimSha: typeof s["verbatimSha"] === "string" ? (s["verbatimSha"] as string) : String(s["verbatimSha"] ?? ""),
-              tickCounter: typeof s["tickCounter"] === "number" ? (s["tickCounter"] as number) : i,
-            }))
-            .filter((s) => s.verbatimSha);
-      const joinForm = args["joinForm"] !== false && args["joinForm"] !== "false";
-      // Pre-fetch each unique turn's move-space position from the form store, node-side (the worker
-      // can't reach the python child_process), then SHIP it on the wire stubs. A miss/fault → null
-      // (the worker keeps the turn's TIME slot with a null form slot). REUSES the recall form holder.
-      const formByKey = new Map<string, SparseFormVector | null>();
-      if (joinForm && baseStubs.length) {
-        recallFormPalace ??= makeFormPalace(larFormPalaceDir());
-        const fp = recallFormPalace;
-        await Promise.all(
-          [...new Set(baseStubs.map((s) => s.verbatimSha))].map(async (sha) => {
-            try {
-              const entry = await fp.get(sha);
-              formByKey.set(sha, entry?.document ? parseFormVector(entry.document) : null);
-            } catch {
-              formByKey.set(sha, null);
-            }
-          }),
-        );
-      }
-      const stubs: WorldlineStubWire[] = baseStubs.map((s) => ({
-        verbatimSha: s.verbatimSha,
-        tickCounter: s.tickCounter,
-        ...(joinForm ? { formVector: formByKey.get(s.verbatimSha) ?? null } : {}),
-      }));
-      const includeNull = args["null"] === true || args["null"] === "true";
-      const seed = typeof args["seed"] === "number" ? (args["seed"] as number) : undefined;
-      const windowRaw = args["window"];
-      const window = typeof windowRaw === "number" ? windowRaw : typeof windowRaw === "string" && windowRaw !== "" ? Number(windowRaw) : undefined;
-      const result = await daemonVm.worldlineTrajectory({
-        handle, stubs, joinForm, includeNull,
-        ...(seed   !== undefined ? { seed }   : {}),
-        ...(window !== undefined ? { window } : {}),
-      });
-      if (!includeNull) return { trajectory: result.trajectory };
-      return { trajectory: result.trajectory, nullBaseline: result.nullBaseline };
-    });
+    // The four provider-heavy verb groups (recall · lar-telemetry · capture · worldline-compare/-trajectory)
+    // lifted into the NESTED #has-cap-stack (verb-caps.ts) — composed at the END of openDaemon (where the
+    // daemonVm + the node helpers are live) and stashed in `pendingVerbContribution`. Apply it here,
+    // synchronously: a verb a missing provider would have refused never reaches this point. openDaemon runs
+    // (awaited) inside daemonCap.build BEFORE this un-awaited wireVerbs, so the contribution is always ready.
+    if (!pendingVerbContribution) {
+      throw new Error("[openNodeVessel] verb plane not composed — wireVerbs ran before openDaemon stashed the contribution");
+    }
+    pendingVerbContribution(registry);
   };
 
   // After the daemon VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.

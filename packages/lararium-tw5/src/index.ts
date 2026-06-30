@@ -132,4 +132,15 @@ export type {
   DaemonVmCoreOptions,
   VesselPlaceVerbRequest,
 } from "./daemon-vm-core.js";
+export {
+  composeVerbPlane,
+  mempalaceProviderCap, formPalaceProviderCap, daemonVerbProviderCap, telemetryProviderCap,
+  recallVerbCap, telemetryVerbCap, captureVerbCap, worldlineVerbCap,
+  VERB_PROVIDER, VERB_GROUP, VERB_GROUP_PREFIX,
+} from "./verb-caps.js";
+export type {
+  VerbContribution,
+  MempalaceProvider, FormPalaceProvider, DaemonVerbProvider, TelemetryProvider,
+  RecallClient, RecalledTrajectoryStub, SubagentEdgePair,
+} from "./verb-caps.js";
 
