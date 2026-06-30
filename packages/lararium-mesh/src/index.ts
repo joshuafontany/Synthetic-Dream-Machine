@@ -91,3 +91,4 @@ export type {
 export { LarWSClientAdapter } from "./lar-ws-client-adapter.js";
 export type { LarWSClientOptions } from "./lar-ws-client-adapter.js";
 export * from "./cap-compose.js";
+export * from "./carriage-caps.js";
