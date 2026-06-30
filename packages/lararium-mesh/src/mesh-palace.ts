@@ -304,6 +304,19 @@ export function radialCoordinate(degree: number, opts: { readonly R: number; rea
   return Math.min(opts.R, Math.max(0, r)); // clamp onto the disk [0, R]
 }
 
+/**
+ * bearingVector — the meshpalace's L2 store-vector for a routing coord, the Poincaré LOG-MAP at the
+ * origin (tangent-plane projection). Our `r` IS the H² geodesic radial (≥ 0 — `radialCoordinate`), so
+ * it already equals the log-map norm: NO `artanh` restretch (that's only for a Poincaré-disk radius
+ * ∈[0,1)). `v = [r·cosθ, r·sinθ]`, `‖v‖ = r` = the hyperbolic distance from origin. Store in a Chroma
+ * **L2** collection (never cosine — cosine discards the radial standing) for cheap ANN recall, then
+ * RE-RANK the top-k with the exact `hyperbolicDistance` (retrieve-then-rerank; the native metric an ANN
+ * index cannot host). dim 2. (Grounded: Poincaré embeddings / log-map, NNS-reduces-to-Euclidean.)
+ */
+export function bearingVector(c: Coord): readonly [number, number] {
+  return [c.r * Math.cos(c.theta), c.r * Math.sin(c.theta)];
+}
+
 // ── The angular coordinate θ — seed random, grow from topology (the blessed derivation) ────────
 // θ is BORN uniform-random (the map-never-territory guarantee: a sampled angle leaks no sealed
 // content — you cannot leak what you drew from a die) and GROWS its kinship from tree-topology, never

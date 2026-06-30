@@ -23,7 +23,7 @@ import {
   vesselCapStackToRecord, recordToVesselCapStack,
   routingSlotToRecord, recordToRoutingSlot,
   publicFlowMap, snapshotPublicFlowMap,
-  hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate,
+  hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate, bearingVector,
   seedTheta, childCone, coneCenter, ROOT_CONE, type Coord,
   hermCanRead, HERM_CAPS,
   MeshPalace, emptyMeshPalaceDoc,
@@ -191,6 +191,16 @@ describe("greedy geometric routing — the native-disk chart", () => {
     expect(radialCoordinate(10, opts)).toBeLessThan(radialCoordinate(1, opts));   // more carriage → nearer center
     expect(radialCoordinate(2, opts)).toBeGreaterThan(radialCoordinate(8, opts)); // monotone decreasing
     expect(radialCoordinate(1e6, opts)).toBeGreaterThanOrEqual(0);                // clamped onto the disk
+  });
+
+  test("bearingVector — the log-map L2 store-vector: ‖v‖ = r, origin → 0, radially-aligned L2 == geodesic", () => {
+    expect(bearingVector({ r: 0, theta: 1.2 })).toEqual([0, 0]);                  // origin maps to 0
+    const v = bearingVector({ r: 2.5, theta: 0.7 });
+    expect(Math.hypot(v[0], v[1])).toBeCloseTo(2.5, 9);                            // ‖v‖ = r (the geodesic radial)
+    // radially-aligned (same θ) → L2 EXACTLY equals hyperbolicDistance — the recall basis for the L2 ANN
+    const a = { r: 1.0, theta: 0.4 }, b = { r: 3.0, theta: 0.4 };
+    const [ax, ay] = bearingVector(a), [bx, by] = bearingVector(b);
+    expect(Math.hypot(ax - bx, ay - by)).toBeCloseTo(hyperbolicDistance(a, b), 9); // = |r₁−r₂| = 2
   });
 
   test("seedTheta samples the cyclic [0, 2π) — content-blind by construction", () => {
