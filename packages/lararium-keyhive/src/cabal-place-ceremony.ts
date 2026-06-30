@@ -39,9 +39,12 @@ import {
   cabalPlaceJoinGate,
   cabalPlaceLeaseSlot,
   deriveCabalPlaceLiveness,
+  projectCabalPlaceCharter,
   type CabalPlace,
   type CabalPlaceLiveness,
   type BagResidencyManager,
+  type CabalPlacePublicMeta,
+  type CabalPlaceCharter,
 } from "@lararium/mesh";
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
@@ -94,6 +97,47 @@ export async function foundCabalPlace(
   }
 
   return place;
+}
+
+/**
+ * A FOUNDED cabal-place AND its public CHARTER, born together — the place's
+ * sovereign identity (members-only substrate + roster + lease) PLUS its
+ * veil-public face (the only projection that ever crosses the read-face wire).
+ */
+export interface FoundedCabalPlace {
+  readonly place:   CabalPlace;
+  readonly charter: CabalPlaceCharter;
+}
+
+/**
+ * FOUND a cabal-place AND its veil-public CHARTER in one act — the founding that
+ * gives the place its public face. Mints the sentinel + substrate + lease
+ * (foundCabalPlace, unchanged) and ALSO projects the place's charter through the
+ * pure disclosure membrane (mesh/projectCabalPlaceCharter): the charter carries
+ * ONLY the place's content-addressed name + bearing + whatever the founder CHOOSES
+ * to advertise (`meta` — title / description / foundedAt; an empty meta founds a
+ * name-only place). The members-only substrate + roster NEVER enter the charter —
+ * structurally, the membrane reads only {place, meta} (canon #the-veil-public-set).
+ *
+ * `foundedAt` rides `meta` so the founder stamps the founding MOMENT from its own
+ * runtime clock (the ceremony stays a deterministic, clock-free function — a test
+ * passes a fixed value, a live founding passes Date.now()). The returned charter is
+ * publish-ready: hand it to mesh/cabalPlaceCharterExporter to serve it through the
+ * existing @oracle read-face. This founds the charter; SERVING it (mounting the
+ * read-face) stays the caller's separate act.
+ */
+export async function foundCabalPlaceWithCharter(
+  provider:     KeyhiveProvider,
+  uri:          string,
+  substrateUrl: string,
+  meta:         CabalPlacePublicMeta = {},
+  opts:         FoundCabalPlaceOpts = {},
+): Promise<FoundedCabalPlace> {
+  const place = await foundCabalPlace(provider, uri, substrateUrl, opts);
+  // The membrane reads ONLY {place, meta}; no roster exists yet at founding, and
+  // none could cross even if it did (#the-veil — projectCabalPlaceCharter proof).
+  const charter = projectCabalPlaceCharter({ place, meta });
+  return { place, charter };
 }
 
 /**

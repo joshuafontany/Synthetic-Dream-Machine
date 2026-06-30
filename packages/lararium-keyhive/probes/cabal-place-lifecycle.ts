@@ -2,10 +2,12 @@
  * CABAL-PLACE LIFECYCLE WITNESS — the found/join/evict trio drifted through a full
  * lifecycle against REAL Keyhive (no mocks) + cut 1's mesh floor.
  *
- * The Place-Wright's drift (Epic 2, cut 2):
- *   1. FOUND a cabal-place (mint sentinel Document + registerCold substrate + register lease slot)
+ * The Place-Wright's drift (Epic 2, cut 2; + the charter-founding drift):
+ *   1. FOUND a cabal-place AND its veil-public charter (foundCabalPlaceWithCharter)
+ *  1b. assert the founding founds the CHARTER (name+bearing+meta; no roster/substrate)
  *   2. JOIN two members (contact-card exchange → addSentinelMember via the INERT join gate)
  *   3. assert BOTH in the roster (the Keyhive doc-roster, verified per-member)
+ *  3b. VEIL holds in a real founding — a charter over the LIVE roster + a secret leaks neither
  *   4. ROLL its lease (effectiveLeaseEpoch advances 0 → 1)
  *   5. STARVE + cool the substrate to anu (deriveCabalPlaceLiveness → "dissolved")
  *   6. RE-WARM (feedCabalPlace → "alive")
@@ -24,7 +26,7 @@
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
 import {
-  foundCabalPlace, joinCabalPlace, evictMember, cabalPlaceRoster, cabalPlaceLiveness,
+  foundCabalPlaceWithCharter, joinCabalPlace, evictMember, cabalPlaceRoster, cabalPlaceLiveness,
 } from "../src/cabal-place-ceremony.js";
 import {
   BagResidencyManager,
@@ -32,6 +34,8 @@ import {
   feedCabalPlace,
   effectiveLeaseEpoch,
   rolledLeaseEpoch,
+  projectCabalPlaceCharter,
+  cabalPlaceCharterSnapshot,
 } from "@lararium/mesh";
 
 const PLACE_URI    = "lar:///crossroads.cabal.gathers/probe-place";
@@ -58,10 +62,15 @@ async function main(): Promise<void> {
   const residency  = new BagResidencyManager({ idleMs: 1 });   // 1ms idle so a sweep cools fast
   const leaseSlots = new Map<string, string>();
 
-  // ── STAGE 1 — FOUND ────────────────────────────────────────────────────────────
-  const place = await foundCabalPlace(founder, PLACE_URI, SUBSTRATE_URL, {
-    residency, leaseWriterId: WRITER_ID, leaseSlots,
-  });
+  // ── STAGE 1 — FOUND (place + its veil-public charter, born together) ────────────
+  // A fixed foundedAt so the founding stays deterministic (a live founder passes its
+  // own Date.now(); the ceremony itself reads no clock).
+  const FOUNDED_AT = 1_700_000_000_000;
+  const { place, charter } = await foundCabalPlaceWithCharter(
+    founder, PLACE_URI, SUBSTRATE_URL,
+    { title: "Probe Place", description: "a cabal-place founded by the witness", foundedAt: FOUNDED_AT },
+    { residency, leaseWriterId: WRITER_ID, leaseSlots },
+  );
   const slot = cabalPlaceLeaseSlot(place.placeDocIdHex, WRITER_ID);
   stage("1 FOUND — sentinel minted, substrate registered cold, lease slot at genesis 0",
     place.placeDocIdHex.length > 0 &&
@@ -69,6 +78,18 @@ async function main(): Promise<void> {
     residency.tier(SUBSTRATE_URL) === "anu" &&
     leaseSlots.get(slot) === "0",
     `doc=${place.placeDocIdHex.slice(0, 16)}… tier=${residency.tier(SUBSTRATE_URL)} epoch=${leaseSlots.get(slot)}`);
+
+  // ── STAGE 1b — CHARTER (the founding founds the place's veil-public face) ───────
+  const charterKeys = Object.keys(charter);
+  stage("1b CHARTER — founding founds the veil-public charter (name+bearing+meta; NO roster/substrate keys)",
+    charter.placeDocIdHex === place.placeDocIdHex &&
+    charter.genesisUri === PLACE_URI &&
+    charter.foundedAt === FOUNDED_AT &&
+    charter.title === "Probe Place" &&
+    !charterKeys.includes("roster") &&
+    !charterKeys.includes("substrateContent") &&
+    !charterKeys.includes("memberCount"),     // never auto-disclosed
+    `keys=[${charterKeys.join(",")}]`);
 
   // ── STAGE 2 — JOIN two members ─────────────────────────────────────────────────
   // Each member is an independent vessel; the founder must KNOW it as an agent first
@@ -93,6 +114,30 @@ async function main(): Promise<void> {
   stage("3 ROSTER — both members present in the doc-roster",
     roster0.length === 2 && roster0.includes(memberA) && roster0.includes(memberB),
     `roster=${roster0.length}`);
+
+  // ── STAGE 3b — VEIL HOLDS IN A REAL FOUNDING ───────────────────────────────────
+  // Project a charter from a publish-state carrying the LIVE keyhive member ids + a
+  // secret substrate payload — the exact bag a real served charter would be built
+  // from once the place has members. The membrane must drop BOTH, in the output AND
+  // in the serialized snapshot bytes (the wire form a peer actually pulls).
+  const SECRET = "SECRET-SUBSTRATE-PAYLOAD-must-not-cross";
+  const withRoster = projectCabalPlaceCharter({
+    place,
+    meta: { title: "Probe Place", foundedAt: FOUNDED_AT },
+    roster: roster0,                              // the REAL member ids (memberA, memberB)
+    substrateContent: { secret: SECRET, note: `${memberA} posted here` },
+  });
+  const snap = await cabalPlaceCharterSnapshot(withRoster);
+  const wireBytes = Buffer.from(snap.bytes).toString("latin1");
+  const outJson   = JSON.stringify(withRoster);
+  const leaked =
+    roster0.some((id) => outJson.includes(id) || wireBytes.includes(id)) ||
+    outJson.includes(SECRET) || wireBytes.includes(SECRET);
+  stage("3b VEIL — charter over the LIVE roster + secret leaks NEITHER (output + snapshot bytes)",
+    !leaked &&
+    withRoster.placeDocIdHex === place.placeDocIdHex &&   // the public name still crosses
+    snap.cid.length === 64,                                // a real content-addressed snapshot
+    `roster=${roster0.length} secret-in-wire=${wireBytes.includes(SECRET)} cid=${snap.cid.slice(0, 12)}…`);
 
   // ── STAGE 4 — ROLL the lease (max-register 0 → 1) ──────────────────────────────
   const eff0 = effectiveLeaseEpoch(leaseSlots.values());
@@ -133,7 +178,7 @@ async function main(): Promise<void> {
 
   console.log("[cabal-place] =========================================================");
   if (failures === 0) {
-    console.log("[cabal-place] ALL 8 STAGES PASS — the cabal-place lifecycle holds.");
+    console.log("[cabal-place] ALL STAGES PASS — the cabal-place lifecycle holds, charter founded, veil intact.");
   } else {
     console.log(`[cabal-place] ${failures} STAGE(S) FAILED.`);
     process.exit(1);
