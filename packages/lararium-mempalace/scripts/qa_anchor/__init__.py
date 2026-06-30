@@ -28,6 +28,13 @@ from .dprime import (
     loglinear_rates,
     z,
 )
+from .register import (
+    aggregate as register_aggregate,
+)
+from .register import (
+    scan_artifacts,
+    scan_text,
+)
 from .reliability import (
     ALPHA_SATISFACTORY,
     ALPHA_TENTATIVE_FLOOR,
@@ -40,6 +47,17 @@ from .reliability import (
     cohens_kappa,
     intraclass_correlation,
     krippendorff_alpha,
+)
+from .wards import (
+    NULL_CONSTRUCT,
+    AblationPair,
+    Construct,
+    DecoyItem,
+    ablate,
+    ablation_pair,
+    decoy_set,
+    is_null_construct,
+    ritual_tokens,
 )
 
 __all__ = [
@@ -67,4 +85,18 @@ __all__ = [
     "KappaResult",
     "intraclass_correlation",
     "IccResult",
+    # register — the deterministic swell-read (no LLM)
+    "scan_text",
+    "scan_artifacts",
+    "register_aggregate",
+    # wards — the circularity wards
+    "Construct",
+    "NULL_CONSTRUCT",
+    "is_null_construct",
+    "DecoyItem",
+    "decoy_set",
+    "AblationPair",
+    "ablate",
+    "ablation_pair",
+    "ritual_tokens",
 ]

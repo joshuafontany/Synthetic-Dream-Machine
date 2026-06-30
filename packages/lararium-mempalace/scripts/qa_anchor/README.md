@@ -93,3 +93,33 @@ Cohen's κ + ICC · the KUE-1 four-story inference. Depends on nothing downstrea
 - **The human kumu labels** — the ground-truth `present` booleans the kernel
   scores against; the d′ is only as trustworthy as the labels, which is why the
   reliability layer ships alongside.
+
+## Braid ②b — the swell-read + the circularity wards (this increment)
+
+The cheapest, most circularity-proof instruments, built atop the COMPUTE kernel —
+buildable now, no nuke. The order matters: read the deterministic signal first,
+ward the loop against self-confirmation, only then let a judge near it.
+
+| File | Holds |
+|------|-------|
+| `register.py` + `lexicons/register_markers.json` | the **swell-read** — a deterministic (no-LLM) hedge-vs-booster grader, per 100 words, the two poles reported SEPARATELY. The un-foolable ground-truth read BEFORE any judge. Wired to scan our drawer / form-vector artifacts (`scan_artifacts`); `scan_text` is the import-stable core. Lexicon = Hyland 2005 + Wikipedia W2W + CoNLL-2010/BioScope + LIWC samples. |
+| `wards.py` | the **circularity wards** — (1) the NULL-CONSTRUCT decoy (`flux-resonance`, referent-less; the nameless-entity sink predicted to score at floor — the ward against "the thinker thinks then the prover proves"); (2) the ABLATION harness (`ablate` / `ablation_pair` — ritual-stripped twins for the ablation-dissociation control: does the score read the PROSE or the ornament?). |
+| `sealed/` | the **sealed-judge SCAFFOLD** (no live LLM yet). `setup-blind-judge.sh` → `rate-sealed.sh`: the judge runs from an EMPTY temp CWD, rubric inline, answer-key locked out, label-LAST. `prereg.py` freezes the rubric (by SHA-256) + the predicted decoy floor + the α-gate BEFORE scoring (verify fails closed on rubric drift). `score_alpha.py` scores Krippendorff's α PER FACET (ordinal; MASI for set-valued), with a bootstrap CI, and **gates on the LOWER bound** — never the point, never an across-facet average. |
+
+Reuses the kernel maximally: ordinal α + the shared percentile-bootstrap engine +
+the reliability bands all come from `qa_anchor.reliability` / `qa_anchor.bootstrap`.
+
+```sh
+python qa_anchor/register.py --selftest                   # deterministic grader sanity
+python -m qa_anchor.sealed.score_alpha <raw.tsv> [floor]  # per-facet α, lower-bound gate
+```
+
+### What remains for the next sprint
+
+- **The human-gold collection** — the kumu labels the whole rig scores against (the
+  reliability layer already ships to back them).
+- **The cross-family judge panel** — choose the judge models (cross-FAMILY, no
+  Lares-native model rating Lares output) and wire `JUDGE_CMD` into `rate-sealed.sh`.
+- **The crossed mixed-model + power analysis** — the design balance / power read
+  (the QA-rig prereg red-team's mechanical-confound + identifiability cautions apply).
+- **The Fisher-Rao flow-lens** — the geometry arm over the register/form-vector flow.

@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "purpose": "Commitment-register markers for the deterministic (no-LLM) hedge/booster grader. Two poles reported SEPARATELY, never one collapsed scalar. Read DELTAS across conditions/sigils, never absolutes.",
+    "category_scheme": "mirrors findings/scout-register-lexicons.md (the QA-rig scout) — Hyland (2005) Appendix A core + Wikipedia Manual-of-Style Words-to-Watch + CoNLL-2010/BioScope cue categories + LIWC tentat/certain samples + a composed conversational patch.",
+    "discipline": "multi-word phrases match BEFORE single tokens; word-boundary, case-insensitive; POS-ambiguous KILLERS excluded from the headline; clause-initial-only discourse boosters counted only at clause start (handled by register.py, not this file).",
+    "honest_gaps": "the full LIWC dictionaries are proprietary (~5 sample words each carried); the full BioScope per-token list is gated; composed conversational phrases are register-fit patches grounded in the literature, NOT pulled verbatim from one open list."
+  },
+  "provenance": {
+    "hyland_2005_appendix_a": "Hyland, K. (2005) Metadiscourse — the field-standard hedge/booster division (epistemic modals/adverbs/adjectives/verbs vs adverbials/adjectivals/factive verbs).",
+    "wikipedia_words_to_watch": "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Words_to_watch — peacock (booster), weasel/unsupported-attribution (hedge), expressions-of-doubt (hedge), editorializing (mixed). Closer genre-fit to short casual model answers than Hyland.",
+    "conll_2010_bioscope": "Vincze et al. 2008 (BioScope); CoNLL-2010 shared task — the most rigorously human-annotated open hedge-cue source; categories + frequent cues open, full per-token corpus gated.",
+    "liwc_tentat_certain": "LIWC2007 manual — tentat (155w) / certain (83w); dictionaries proprietary, only sample words carried.",
+    "composed_conversational": "register-fit patch for the casual short-answer genre Hyland's academic list misses (I think / maybe / pretty sure / definitely). verified:false — grounded in the literature, not one citable open list."
+  },
+  "ambiguous": {
+    "note": "handle-with-care; register.py owns the runtime handling. Listed here for transparency.",
+    "month_collision": ["may"],
+    "deontic_vs_epistemic": ["should", "must", "could", "would", "can", "ought", "will", "shall"],
+    "discourse_only_when_clause_initial": ["clearly", "obviously", "of course", "indeed", "actually", "naturally", "essentially"],
+    "excluded_from_headline": ["or", "appear", "appears", "appeared", "show", "shows", "showed", "shown", "indicate", "indicates", "indicated", "around", "can"]
+  },
+  "hedges": {
+    "modal_verbs": ["may", "might", "could", "would", "should", "ought", "can"],
+    "epistemic_adverbs": ["perhaps", "possibly", "probably", "presumably", "seemingly", "arguably", "apparently", "allegedly", "supposedly", "reportedly", "ostensibly", "conceivably", "roughly", "approximately", "generally", "typically", "usually", "often", "sometimes", "somewhat", "relatively", "fairly", "rather", "maybe", "virtually", "practically", "broadly", "largely"],
+    "epistemic_adjectives": ["possible", "probable", "likely", "unlikely", "apparent", "uncertain", "unclear", "doubtful", "questionable", "plausible", "conceivable", "putative", "alleged", "supposed", "so-called", "tentative"],
+    "epistemic_verbs": ["suggest", "suggests", "suggested", "indicate", "indicates", "indicated", "seem", "seems", "seemed", "appear", "appears", "appeared", "assume", "assumes", "assumed", "suppose", "supposes", "supposed", "suspect", "suspects", "suspected", "believe", "believes", "believed", "think", "thinks", "thought", "guess", "reckon", "presume", "estimate", "speculate", "imagine", "gather", "tend", "tends", "tended"],
+    "approximators": ["about", "almost", "nearly", "more or less"],
+    "tentative_phrases": ["i think", "i guess", "i suppose", "i believe", "i reckon", "sort of", "kind of", "it seems", "it appears", "could be", "might be", "may be", "i'm not sure", "not sure", "as far as i know", "to my knowledge", "in my opinion", "it is possible", "tend to", "a bit", "some say", "research has shown", "it is believed", "if i recall", "i would say", "i'd say", "as i understand it"]
+  },
+  "boosters": {
+    "emphatics": ["clearly", "obviously", "evidently", "undoubtedly", "conclusively", "absolutely", "plainly", "manifestly", "indisputably", "unquestionably", "incontrovertibly", "undeniably", "patently", "decidedly"],
+    "certainty_adverbs": ["certainly", "surely", "definitely", "indeed", "naturally", "really", "truly", "actually", "assuredly", "doubtless", "positively", "genuinely", "totally", "completely", "entirely", "utterly", "fully", "perfectly", "precisely", "exactly", "essentially"],
+    "certainty_adjectives": ["clear", "evident", "obvious", "certain", "definite", "true", "sure", "undeniable", "unmistakable", "conclusive", "indisputable"],
+    "factive_verbs": ["demonstrate", "demonstrates", "demonstrated", "establish", "establishes", "established", "prove", "proves", "proved", "proven", "show", "shows", "showed", "shown", "know", "knows", "knew", "find", "finds", "found", "realize", "realizes", "realized", "confirm", "confirms", "confirmed", "verify", "verifies", "verified", "ensure", "ensures"],
+    "modal_necessity": ["must", "will", "always", "never", "shall", "cannot"],
+    "peacock": ["legendary", "acclaimed", "iconic", "visionary", "renowned", "celebrated", "eminent", "prestigious", "world-class", "cutting-edge", "leading", "foremost", "unparalleled", "unrivaled", "exceptional", "extraordinary", "remarkable", "outstanding", "stunning", "masterful"],
+    "certainty_phrases": ["in fact", "of course", "no doubt", "without a doubt", "for sure", "no question", "beyond doubt", "needless to say", "as everyone knows", "it is clear", "there is no doubt"]
+  },
+  "phrase_markers": ["i think", "i guess", "i suppose", "i believe", "sort of", "kind of", "it seems", "could be", "might be", "may be", "i'm not sure", "not sure", "tend to", "more or less", "some say", "research has shown", "in fact", "of course", "no doubt", "without a doubt", "for sure", "needless to say", "it is clear", "there is no doubt"]
+}
