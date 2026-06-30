@@ -40,7 +40,7 @@ services:
       - "18090:8080"
     restart: "no"
 
-  # A SOURCE Herm — composeHerm, announces a dial on its own @meshpalace FLOW-map.
+  # A SOURCE Herm — composeHerm, announces a dial (carrying its REACHABLE read-face) on its FLOW-map.
   herm-source:
     <<: *herm
     volumes:
@@ -50,12 +50,12 @@ services:
       LAR_ROOT: "/herm"
       LAR_PORT: "8080"
       LAR_RECIPE: "herm"
-      LAR_SEED: "alpha"          # announces lar:///ha.ka.ba/@oracle/herm/alpha
+      LAR_SEED: "alpha"          # announces lar:///ha.ka.ba/@oracle/herm/alpha → endpoint http://herm-source:8080
+      LAR_PUBLIC_URL: "http://herm-source:8080"
     ports:
       - "18092:8080"
 
-  # A RELAY Herm — composeHerm + the carriage cap: pulls herm-source's FLOW-map, merges, re-serves.
-  # Daemon-FULL (immune core up), wiki-LESS (blind by structure). Carries what it cannot author.
+  # A RELAY Herm — bootstraps from herm-source, carries + re-serves its FLOW-map (incl. the alpha dial).
   herm-relay:
     <<: *herm
     volumes:
@@ -66,10 +66,30 @@ services:
       LAR_PORT: "8080"
       LAR_RECIPE: "herm"
       LAR_PEERS: "http://herm-source:8080"
+      LAR_PUBLIC_URL: "http://herm-relay:8080"
       LAR_PULL_MS: "2000"
     ports:
       - "18091:8080"
     depends_on: [herm-source]
+
+  # A SECOND-HOP Relay — bootstraps ONLY from herm-relay, yet SELF-PEERS herm-source TRANSITIVELY:
+  # it pulls herm-relay's FLOW-map, finds herm-source's dial (endpoint http://herm-source:8080), and
+  # dials herm-source directly. Federation by carried dials, not a hardcoded peer list.
+  herm-relay-2:
+    <<: *herm
+    volumes:
+      - ".:/app"
+      - "herm-relay-2-data:/herm"
+    environment:
+      LAR_ROOT: "/herm"
+      LAR_PORT: "8080"
+      LAR_RECIPE: "herm"
+      LAR_PEERS: "http://herm-relay:8080"
+      LAR_PUBLIC_URL: "http://herm-relay-2:8080"
+      LAR_PULL_MS: "2000"
+    ports:
+      - "18093:8080"
+    depends_on: [herm-relay]
 
 networks:
   mesh:
@@ -79,3 +99,4 @@ volumes:
   lararium-a-data:
   herm-source-data:
   herm-relay-data:
+  herm-relay-2-data:

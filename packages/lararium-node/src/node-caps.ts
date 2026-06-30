@@ -25,7 +25,7 @@ import {
   composeVessel, type CapModule, type ComposedVessel,
   AutomergeDocStore,
   MESH_PALACE_BAG, emptyMeshPalaceDoc, type MeshPalaceDoc,
-  pullAndVerifyOracle, dialEntryToRecord, type DialEntry, type LarTiddlerRecord,
+  pullAndVerifyOracle, dialEntryToRecord, dialEntries, type DialEntry, type LarTiddlerRecord, type LarDoc,
   type VesselRecipe, type VesselCoreAssembly,
   type BagResidencyManager,
 } from "@lararium/mesh";
@@ -121,17 +121,51 @@ export function incommensurablePullMs(seedHex: string, baseMs: number, rand: () 
 
 export interface CarriageComponent { readonly pullOnce: () => Promise<number>; readonly stop: () => void; }
 
-/** carriage — the blind relay: pull each peer's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
- *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). A peer down is no
- *  error — feed-or-fade. Requires meshpalace (the doc to merge into). Empty peers = a no-op (a leaf). */
-export function carriageCap(deps: { peers: readonly string[]; pullIntervalMs?: number; nodeSeedHex?: string; onLog?: (line: string) => void }): CapModule {
+/**
+ * Self-peering federation: the carriage discovers its pull-set from the FLOW-map's DIALS (each dial
+ * advertises a reachable http read-face URL) UNION the bootstrap peers — so the mesh grows by the dials
+ * it CARRIES (transitive discovery), never a hardcoded list. http(s) read-faces only (ws sync-endpoints
+ * skipped); self excluded; deduped; bounded by maxFanout. (Routing-coord K-nearest selection over the
+ * hyperbolic chart rides a follow-up — this cut is federation-by-dials.)
+ */
+export function discoverPeers(
+  doc: { tiddlers: Record<string, LarTiddlerRecord> } | undefined,
+  bootstrap: readonly string[], selfEndpoint: string | undefined, maxFanout: number,
+): string[] {
+  const fromDials = doc ? dialEntries(doc as LarDoc).map((d) => d.endpoint) : [];
+  const peers: string[] = [];
+  const seen = new Set<string>();
+  for (const p of [...bootstrap, ...fromDials]) {
+    if (!p || p === selfEndpoint || !/^https?:\/\//.test(p) || seen.has(p)) continue; // http read-faces only
+    seen.add(p);
+    peers.push(p);
+    if (peers.length >= maxFanout) break;
+  }
+  return peers;
+}
+
+/** carriage — the blind relay: pull each PEER's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
+ *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). Peers are
+ *  DISCOVERED from the carried dials (self-peering) ∪ the bootstrap. A peer down is no error —
+ *  feed-or-fade. Requires meshpalace (the doc to merge into + discover dials from). */
+export function carriageCap(deps: {
+  peers: readonly string[]; pullIntervalMs?: number; nodeSeedHex?: string;
+  selfEndpoint?: string; maxFanout?: number; onLog?: (line: string) => void;
+}): CapModule {
   return {
     id: CAP.carriage, requires: [CAP.meshpalace],
     build: (resolve) => {
       const mp = resolve<MeshPalaceComponent>(CAP.meshpalace);
+      const bootstrap = new Set(deps.peers);
+      const seenDiscovered = new Set<string>();
       const pullOnce = async (): Promise<number> => {
         let merged = 0;
-        for (const peer of deps.peers) {
+        const peers = discoverPeers(mp.handle.doc(), deps.peers, deps.selfEndpoint, deps.maxFanout ?? 16);
+        for (const peer of peers) {
+          if (!bootstrap.has(peer) && !seenDiscovered.has(peer)) {
+            seenDiscovered.add(peer);
+            deps.onLog?.(`carriage: self-peering discovered ${peer} from a carried dial`);
+          }
           let verdict;
           try { verdict = await pullAndVerifyOracle<MeshPalaceDoc>(peer, { nowMs: Date.now() }); }
           catch { continue; } // a peer down/unreachable is no error — feed-or-fade
@@ -186,6 +220,10 @@ export interface HermStackDeps extends DaemonCapDeps {
   /** Peer base URLs this Herm carries (pulls + merges their FLOW-maps). Empty = a leaf (no carriage). */
   readonly peers?:         readonly string[];
   readonly pullIntervalMs?: number;
+  /** This Herm's OWN reachable http read-face URL — excluded from self-peering; advertised in its dial. */
+  readonly selfEndpoint?:  string;
+  /** Max peers pulled per cycle (bootstrap ∪ discovered dials). */
+  readonly maxFanout?:     number;
   /** Self-announce dials on this Herm's own FLOW-map (a source Herm's reachability). */
   readonly seed?:          readonly DialEntry[];
   readonly onLog?:         (line: string) => void;
@@ -219,6 +257,8 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       peers: d.peers ?? [],
       ...(d.pullIntervalMs !== undefined ? { pullIntervalMs: d.pullIntervalMs } : {}),
       nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),  // the node-id seeds its incommensurable cadence
+      ...(d.selfEndpoint ? { selfEndpoint: d.selfEndpoint } : {}),
+      ...(d.maxFanout !== undefined ? { maxFanout: d.maxFanout } : {}),
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     flowMapReadFaceCap({

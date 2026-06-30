@@ -55,7 +55,7 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges } from "@lararium/mempalace";
+import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { DialEntry, SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
@@ -137,6 +137,8 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   peers?: readonly string[];
   /** Herm carriage pull cadence (ms). */
   pullIntervalMs?: number;
+  /** This Herm's OWN reachable http read-face URL — excluded from self-peering, advertised in its dial. */
+  selfEndpoint?: string;
   /** Herm self-announce — dials to seed on this Herm's own FLOW-map (a source's reachability). */
   seed?: readonly DialEntry[];
 }
@@ -621,20 +623,32 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // (shuffled order). `stubs` (verbatimSha + tickCounter, the handle's captured turns) is the clean
     // substrate API — driveable by any turn source. The host pre-fetches each turn's move-space
     // position from the form store (a node child_process the worker can't reach) and SHIPS it on the
-    // wire stubs; the WORKER orders + joins + shuffles. FLAG: the production turn source is the content
-    // graph (lar_agent_handle → lar_verbatim_sha + lar_ffz per drawer); wiring that read needs a
-    // content-graph handle where-filter (absent from the client API) — the one follow-up seam.
+    // wire stubs; the WORKER orders + joins + shuffles.
+    //
+    // SEAM A (LIVE): the PRODUCTION turn source is the CONTENT GRAPH — the drawers WHERE
+    // `lar_agent_handle = handle`, each carrying its EXACT capture `lar_verbatim_sha` (full fidelity,
+    // not a transcript-text re-hash). When the caller passes no `stubs`, this fetches them live from
+    // the content mempalace (client.turnsForHandle → orderHandleTurnsToStubs) and feeds the worker
+    // those. An explicit `stubs` arg still overrides (tests / a transcript-driven probe). NOTE: the
+    // order rides filed_at → chunk_index (lar_ffz stays documented-but-unstamped; flagged).
     registry.register("worldline-trajectory", async (args) => {
       const handle = typeof args["handle"] === "string" ? (args["handle"] as string) : "";
       if (!handle) throw new Error("worldline-trajectory: args.handle required");
-      const rawStubs = Array.isArray(args["stubs"]) ? (args["stubs"] as unknown[]) : [];
-      const baseStubs = rawStubs
-        .filter((s): s is Record<string, unknown> => !!s && typeof s === "object")
-        .map((s, i) => ({
-          verbatimSha: typeof s["verbatimSha"] === "string" ? (s["verbatimSha"] as string) : String(s["verbatimSha"] ?? ""),
-          tickCounter: typeof s["tickCounter"] === "number" ? (s["tickCounter"] as number) : i,
-        }))
-        .filter((s) => s.verbatimSha);
+      const wing = typeof args["wing"] === "string" ? (args["wing"] as string) : undefined;
+      const rawStubs = Array.isArray(args["stubs"]) ? (args["stubs"] as unknown[]) : null;
+      // No explicit stubs → SOURCE FROM THE LIVE CONTENT GRAPH (the production path). A handle with no
+      // drawers yields [] → an empty trajectory (graceful). The pooled read-client stays warm.
+      const baseStubs = rawStubs === null
+        ? await withMempalace(async (client) =>
+            orderHandleTurnsToStubs(await client.turnsForHandle(handle, { ...(wing !== undefined ? { wing } : {}) })),
+          )
+        : rawStubs
+            .filter((s): s is Record<string, unknown> => !!s && typeof s === "object")
+            .map((s, i) => ({
+              verbatimSha: typeof s["verbatimSha"] === "string" ? (s["verbatimSha"] as string) : String(s["verbatimSha"] ?? ""),
+              tickCounter: typeof s["tickCounter"] === "number" ? (s["tickCounter"] as number) : i,
+            }))
+            .filter((s) => s.verbatimSha);
       const joinForm = args["joinForm"] !== false && args["joinForm"] !== "false";
       // Pre-fetch each unique turn's move-space position from the form store, node-side (the worker
       // can't reach the python child_process), then SHIP it on the wire stubs. A miss/fault → null
@@ -854,6 +868,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     storageDir:  opts.storageDir,
     ...(opts.peers ? { peers: opts.peers } : {}),
     ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
+    ...(opts.selfEndpoint ? { selfEndpoint: opts.selfEndpoint } : {}),
     ...(opts.seed ? { seed: opts.seed } : {}),
     onLog:       (line) => console.log(`[herm] ${line}`),
   });

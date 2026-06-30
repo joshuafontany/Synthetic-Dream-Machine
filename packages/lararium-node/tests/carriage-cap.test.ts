@@ -15,7 +15,7 @@ import { join } from "node:path";
 import { Repo } from "@automerge/automerge-repo";
 import { composeVessel, pullAndVerifyOracle, dialEntryToRecord, type MeshPalaceDoc, type CapModule } from "@lararium/mesh";
 import { mountFlowMapReadFace } from "../src/oracle-read-face.js";
-import { carriageCap, CAP, incommensurablePullMs, type MeshPalaceComponent } from "../src/node-caps.js";
+import { carriageCap, CAP, incommensurablePullMs, discoverPeers, type MeshPalaceComponent } from "../src/node-caps.js";
 
 const SEED_A = new Uint8Array(32).fill(7);
 async function listen(server: Server): Promise<number> {
@@ -73,6 +73,31 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
     // bounded + floored (never a runaway-tight or zero cadence)
     expect(lo).toBeGreaterThanOrEqual(250);
     expect(hi).toBeLessThan(30_000 * 1.3 * 1.25 + 1);   // ≤ max factor × max jitter
+  });
+
+  test("discoverPeers — self-peering: bootstrap ∪ carried dials, http-only, self-excluded, deduped, bounded", () => {
+    const docWith = (...endpoints: string[]): MeshPalaceDoc => {
+      const tiddlers: Record<string, ReturnType<typeof dialEntryToRecord>> = {};
+      endpoints.forEach((ep, i) => {
+        const rec = dialEntryToRecord(
+          { bearing: `lar:///ha.ka.ba/@oracle/herm/d${i}`, verifyingKeyHex: "a".repeat(64), endpoint: ep, scale: "dreamnet" }, "test");
+        tiddlers[rec.tiddler.title] = rec;
+      });
+      return { schemaVersion: "0.1", tiddlers };
+    };
+    // union + http-only + self-excluded + deduped
+    const doc = docWith("http://a:8080", "http://b:8080", "ws://c:8080/ws", "http://self:8080", "http://a:8080");
+    const peers = discoverPeers(doc, ["http://boot:8080"], "http://self:8080", 16);
+    expect(peers).toContain("http://boot:8080");                          // bootstrap kept
+    expect(peers).toEqual(expect.arrayContaining(["http://a:8080", "http://b:8080"])); // dials discovered
+    expect(peers).not.toContain("ws://c:8080/ws");                        // ws sync-endpoint skipped
+    expect(peers).not.toContain("http://self:8080");                      // self excluded
+    expect(peers.filter((p) => p === "http://a:8080").length).toBe(1);    // deduped
+    // bounded by maxFanout (bootstrap first)
+    const bounded = discoverPeers(docWith("http://a:8080", "http://b:8080", "http://c:8080"), ["http://boot:8080"], undefined, 2);
+    expect(bounded).toEqual(["http://boot:8080", "http://a:8080"]);
+    // a leaf with no carried dials → bootstrap only
+    expect(discoverPeers(undefined, ["http://boot:8080"], undefined, 16)).toEqual(["http://boot:8080"]);
   });
 
   test("a peer down is no error — feed-or-fade (pullOnce returns 0, never throws)", async () => {

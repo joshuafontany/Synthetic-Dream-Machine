@@ -107,10 +107,12 @@ async function main(): Promise<void> {
   // ── Herm (Lares Viales) — the wiki-LESS wayfarer cap-stack: @daemon immune core + a served
   //    @meshpalace FLOW-map, no wiki/pool. Routed by --recipe herm / LAR_RECIPE=herm. ──────────
   if (recipe === "herm") {
-    // Carriage + self-announce from the env: LAR_PEERS (comma-sep base URLs), LAR_PULL_MS, LAR_SEED (label).
+    // Carriage + self-announce from the env: LAR_PEERS (bootstrap base URLs), LAR_PULL_MS, LAR_SEED (label),
+    // LAR_PUBLIC_URL (this Herm's REACHABLE http read-face — advertised in its dial, the self-peering key).
     const peers = (process.env["LAR_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
     const pullMs = process.env["LAR_PULL_MS"];
     const seedLabel = process.env["LAR_SEED"];
+    const publicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
     const herm = await openNodeHerm({
       hostId:     "lares-viales",
       wikiId,
@@ -121,9 +123,11 @@ async function main(): Promise<void> {
       catalogUrl,
       recipe:     "herm",
       httpServer,
+      selfEndpoint: publicUrl,
       ...(peers.length ? { peers } : {}),
       ...(pullMs ? { pullIntervalMs: Number.parseInt(pullMs, 10) } : {}),
-      ...(seedLabel ? { seed: [{ bearing: `lar:///ha.ka.ba/@oracle/herm/${seedLabel}`, verifyingKeyHex: "f".repeat(64), endpoint: `ws://0.0.0.0:${port}`, scale: "dreamnet" as const }] } : {}),
+      // the dial advertises the REACHABLE read-face URL (publicUrl), so peers carrying it can self-peer back.
+      ...(seedLabel ? { seed: [{ bearing: `lar:///ha.ka.ba/@oracle/herm/${seedLabel}`, verifyingKeyHex: "f".repeat(64), endpoint: publicUrl, scale: "dreamnet" as const }] } : {}),
       onPhase:    (phase) => console.log(`[herm] phase → ${phase}`),
     });
     console.log(`[herm] live — wiki-less wayfarer | storage: ${storageDir}`);
