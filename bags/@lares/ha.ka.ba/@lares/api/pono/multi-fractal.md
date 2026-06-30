@@ -38,7 +38,7 @@ The house keeps standing in this shape at every plane. Name it once; recognize i
 |---|---|---|---|
 | **memory** | verbatim · ast · form · mesh palaces | the mempalace root | one ChromaDB engine |
 | **l-space** | the Voices/Syād atlas of charts | the colorless active center (`ha.ka.ba` hub) | one manifold |
-| **identity** | the PersonaGroup constellation | the "me" Circle | one Keyhive group |
+| **identity** | the handle-Circle constellation | the "me" Circle | one mutual binding (the Circle is the *closure*, not a central group) |
 | **vessel** | the `#has`-cap-stack | `composeVessel` | one cap-module |
 | **mesh** | Lararium · Nexus · DreamNet | the admission rite | one delegation edge |
 
