@@ -10,7 +10,7 @@ manao       = 16
 manaoio     = 17
 register    = "Synthesis-Canon"
 retain      = true
-role        = "FfzClock (Fuller-Fontany-Zelenka Chronometer) — the domain-general RHYTHMIC pattern integrity: a 5-level bounded hierarchical clock (Pulse→Theme) read as a MEMBERSHIP TREE / meet-semilattice (the keystone — a containment path carrying the ultrametric d=co-depth(LCA), never a shared tick-count) carrying the tempo/freshness GRAIN — 'as of last sync', the manaoio register — for EVERY non-Automerge domain (agent-worldline cadence · external streams: game·Mudlet·video·DAW·market·CI/CD·IoT · capability-leases), profile-scoped by FFZ_PROFILES. The two-domain boundary: FfzClock NEVER carries causal order INSIDE Automerge docs/wiki-CRDTs (Automerge logical time owns that); it carries the grain everywhere else. NOT a causality court — the worldline's happened-before rides the reified edge-DAG, not ffzCompare's LWW. Stamps a prefix-truncatable rhythmic ADDRESS (lar_ffz = Theme.Arc.Measure.Beat.Segment.block) onto local work-memory drawers — segment ticks, block addresses (Loom-grounded, #rhythmic-address)"
+role        = "FfzClock (Fuller-Fontany-Zelenka Chronometer) — the domain-general RHYTHMIC pattern integrity: a 5-level bounded hierarchical clock (Pulse→Theme) read as a MEMBERSHIP TREE / meet-semilattice (the keystone — a containment path carrying the ultrametric d=co-depth(LCA), never a shared tick-count) naming the rhythmic POSITION — WHERE a drawer SITS, a dimensionless order-free membership coordinate; it holds NO decaying scalar, no 'as of last sync', no age (the manaoio freshness/decay serves MEMES — the wiki / on-disk bags — NEVER this chat-session clock) — for EVERY non-Automerge domain (agent-worldline cadence · external streams: game·Mudlet·video·DAW·market·CI/CD·IoT · capability-leases), profile-scoped by FFZ_PROFILES. The two-domain boundary: FfzClock NEVER carries causal order INSIDE Automerge docs/wiki-CRDTs (Automerge logical time owns that); it carries the grain everywhere else. NOT a causality court — the worldline's happened-before rides the reified edge-DAG, not ffzCompare's LWW. Stamps a prefix-truncatable rhythmic ADDRESS (lar_ffz = Theme.Arc.Measure.Beat.Segment.block) onto local work-memory drawers — segment ticks, block addresses (Loom-grounded, #rhythmic-address)"
 source-file = "packages/lararium-mesh/src/ffz-clock.ts"
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
@@ -40,6 +40,12 @@ everything in the hierarchy derives its meaning by relation to L1; L0 MUST remai
 sub-perceptual (an operator-meaningful event at L0 erodes the L1 anchor → level-shift
 it up). The five bands read as nested MEMBERSHIP — a containment path, never a count
 (#the-spine, the keystone the whole clock rests on).
+
+**The clock holds no decaying scalar.** It names rhythmic POSITION — *where* a drawer
+sits in the cadence — never freshness, never age, never an "as of last sync." The
+**manaoio** freshness/decay register serves the MEMES (the wiki / the on-disk bags, which
+ripen and stale); it NEVER welds onto this chat-session clock. Position carries no decay:
+a coordinate stays exactly as fresh whenever it gets read, because it counts nothing.
 
 <<~/ahu >>
 
@@ -80,6 +86,16 @@ derived locally. This **re-levels** the earlier calendar reading — the old "da
 with the shared epoch (another count-anchor); Theme now crosses island boundaries by
 content-community, where a shared clock never could. <<~ confidence Synthesis-Canon 15/20 >>
 
+### Glossary ~ island ≡ Arc, never a vessel
+
+**island ≡ Arc** — a **session-island within ONE local store** (the `source_file`, given
+free), never a vessel. **Theme** spans these session-islands *within a store* by CONTENT
+(incremental, local community-detection — a fresh node joins with no global recompute);
+crossing a **VESSEL** never rides the rhythm — it happens at operator ask / cost, the
+@daemon→@daemon wiki-bag-CRDT handshake (the clock-domain-crossing rhymes the cell-membrane
+ATP cost · the DDD anti-corruption layer). The clock holds its shape inside ONE store; a
+vessel boundary stays an operator-priced crossing, never a band.
+
 ### Refinement 1 ~ order exists, but never enters the address (cladistics, the teacher)
 
 **The address names membership; ORDER EXISTS — descent, the edge-DAG — yet it stays LOCAL +
@@ -97,8 +113,18 @@ instruments (#the-two-domain-boundary).
 **Hox colinearity** marks what FFZ is NOT. In the Hox cluster gene-ORDER maps to body-order:
 position itself carries the signal, the count IS the content. That names the exact anti-pattern
 the spine refuses — <<~ confidence Synthesis-Canon 15/20 >> **never let a band become a counter
-whose count is the signal.** Where position-as-content earns its keep (a Hox sequence, a
-genome), a counter belongs; where membership-and-freshness serve (FFZ), a tree belongs. The
+whose count is the signal.** A Hox band cannot be truncated or read locally: lop the prefix and
+the colinear meaning shatters, because the position WAS the content.
+
+**The seal ~ each band LABELS a cell, never tallies a count.** A band answers *which* — which
+turn · which topic · which session · which thread — never *how many*. Even the lowest band's
+local ordinal (the Segment, the Beat) reads as a cell-**LABEL** (*which-turn*), never as a
+count or a sequence (*how-many*): the address names the cell it sits in, and the ordinal
+SEQUENCE — what-came-before-what — belongs on the **edge-DAG**, NEVER in the address
+([[agent-worldline|lar:///ha.ka.ba/@lararium/api/agent-worldline#time]]). This is why the
+address truncates cleanly (a label drops, the rest still reads) where a Hox sequence cannot. The
+FFZ refuses position-as-content by construction: where position-as-content earns its keep (a Hox
+sequence, a genome), a counter belongs; where label-membership serves (FFZ), a tree belongs. The
 grain carries containment, never a colinear count.
 
 ### The convergence ~ the grounds (cross-domain)
@@ -118,10 +144,12 @@ sharpens the boundary rather than weakening it.
 
 ## Rhythm, not causality ~ the two-domain boundary (the operator's cut, 2026-06-25)
 
-**FfzClock measures tempo — a decay/freshness GRAIN — never causal order as a CRDT
-verdict.** The boundary follows the actor-boundary; it splits clean in two:
+**FfzClock measures rhythmic POSITION — *where* a moment sits in the cadence — never
+causal order as a CRDT verdict, and never a decay/freshness scalar (the manaoio register
+serves the MEMES, never this clock).** The boundary follows the actor-boundary; it splits
+clean in two:
 
-<<~ranks domain inside-automerge ~ docs · wiki-CRDTs: **Automerge logical time** owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, lar:///ha.ka.ba/@lares/api/pono/causal-islands) -> everywhere-else ~ all non-Automerge domains where its pono manaoio applies: the **agent-worldline cadence** (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see lar:///ha.ka.ba/@lararium/api/agent-worldline#time; FfzClock paces the worldline's grain only) · **external streams** pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · **capability-leases** (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
+<<~ranks domain inside-automerge ~ docs · wiki-CRDTs: **Automerge logical time** owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, lar:///ha.ka.ba/@lares/api/pono/causal-islands) -> everywhere-else ~ all non-Automerge domains where its rhythmic position applies: the **agent-worldline cadence** (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see lar:///ha.ka.ba/@lararium/api/agent-worldline#time; FfzClock paces the worldline's grain only) · **external streams** pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · **capability-leases** (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
 
 **The retired over-claim stays retired.** Earlier chronometer research read FfzClock's
 epoch-dominance as *"universal causal ordering across all instances."* That reading
@@ -335,8 +363,9 @@ The DreamNet mesh keeps time on three instruments, never one:
   (merge = max, coordinator-free) a grant names a `boundEpoch` against; the grant goes
   stale when the counter rolls past it (*re-mint or expire*). Safe coordinator-free
   *because* it only ratchets the whole resource forward, never singles out a principal.
-- **FfzClock** — the rhythmic decay + freshness grain: the cadence the epoch-lease
-  rolls on, the grain a reading carries "as of last sync."
+- **FfzClock** — the rhythmic POSITION grain: the cadence the epoch-lease rolls on,
+  naming *where in the rhythm* a reading sits. It carries no decay and no "as of last
+  sync" of its own (that freshness register — manaoio — rides the memes, never this clock).
 
 A lease rides the **epoch-counter** for its value, **FfzClock** for its cadence; a
 wall-clock `exp` stays a replay backstop only. **Revocation is NOT a clock**: two modes
