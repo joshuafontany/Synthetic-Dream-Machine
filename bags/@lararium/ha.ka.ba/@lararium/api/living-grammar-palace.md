@@ -662,6 +662,7 @@ storage fork (#three-registers), which name reconciliations, not re-designs.
 <<~ loulou lar:///ha.ka.ba/@lararium/api/agent-worldline >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/hoike >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/gold-anchor >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/attention-scale >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/genesis-doc >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/lararium-canonical-model >>
