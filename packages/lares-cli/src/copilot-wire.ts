@@ -6,9 +6,10 @@
  *   - MCP   → ~/.copilot/mcp-config.json   ({ mcpServers: { name: {type,command,args,tools} } })
  *   - hooks → ~/.copilot/hooks/<file>.json ({ version:1, hooks: { sessionEnd:[…] } })
  * Its sessionEnd payload carries { sessionId, cwd } but NO transcript_path — the
- * transcript lives at ~/.copilot/session-state/<sessionId>/events.jsonl, which the
- * harness-aware ingest hook resolves. (Bug github/copilot-cli#991: sessionEnd fires
- * per-prompt in interactive mode → the ingest stays idempotent on lar_hv.)
+ * conversation lives in the global SQLite store ~/.copilot/session-store.db
+ * (events.jsonl is gone, CLI 1.0.6x), which the harness-aware ingest hook resolves
+ * + normalizes via copilot_sqlite_normalize.py. (Bug github/copilot-cli#991:
+ * sessionEnd fires per-prompt in interactive mode → the ingest stays idempotent on lar_hv.)
  *
  * Idempotent deep-merge, backs up, preserves existing config — same discipline as
  * claude-wire.

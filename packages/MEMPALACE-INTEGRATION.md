@@ -60,7 +60,7 @@ re-runs no-op), and degrades gracefully when its tool isn't installed.
 | `claude` | `~/.claude/projects/<enc>/*.jsonl` (CLI + VS Code ext) | `cwd` field | native |
 | `codex` | `~/.codex/sessions/**/rollout-*.jsonl` (CLI + VS Code ChatGPT ext) | `session_meta.payload.cwd` | native |
 | `copilot-vscode` | `…/workspaceStorage/<hash>/GitHub.copilot-chat/transcripts/*.jsonl` (all variants) | path-scrape (no cwd) | normalize → Claude-shape |
-| `copilot-cli` | `~/.copilot/session-state/<id>/events.jsonl` | path-scrape | normalize → Claude-shape |
+| `copilot-cli` | `~/.copilot/session-store.db` (global SQLite, CLI 1.0.6x) | `sessions.cwd` field | normalize → Claude-shape |
 
 Each entry stages into `~/.lares/harvest-stage/<wing>/<surface>__<file>` (stable path →
 mempalace `source_file` dedup → idempotent; the prefix → `lar_surface`).
@@ -91,7 +91,7 @@ re-enriches exactly the stale drawers (Kappa upgrade gate). *Current: 3.*
 | `packages/lares-cli/src/commands/harvest.ts` | `lares harvest` — `--all` multi-source sweep, `--writeback`, default bearing index |
 | `packages/lararium-mempalace/scripts/drawer_io.py` | substrate boundary I/O — export drawers / apply `lar_*` patches (validates + stamps) |
 | `packages/lararium-mempalace/mempalace_source_lares/` | the declared schema (RFC-002 `BaseSourceAdapter`) |
-| `packages/lararium-mempalace/scripts/copilot_normalize.py` | Copilot `events.jsonl` → Claude-shaped jsonl |
+| `packages/lararium-mempalace/scripts/copilot_sqlite_normalize.py` | Copilot `session-store.db` (`sessions` ⋈ `turns`) → Claude-shaped jsonl |
 | `packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh` | the live two-leg hook (mine + writeback), harness-aware + surface-prefixing |
 | `packages/lares-cli/src/{claude,codex,copilot,vscode}-wire.ts` | per-harness MCP + hook wiring |
 | `packages/lares-cli/src/setup-mempalace.ts` | `--init` palace setup (init + `auto_save=false`) |

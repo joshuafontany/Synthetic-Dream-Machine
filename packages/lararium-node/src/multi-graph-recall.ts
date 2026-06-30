@@ -43,13 +43,43 @@ export interface MultiGraphOptions {
 
 /** One ranked item in a graph leg: its cross-graph join key + the sha to report + the native hit. */
 export interface GraphItem {
-  /** the join key — the verbatim sha when known, else a synthetic key that NEVER collides with a
-   *  real 64-hex sha (so an unjoinable item still rides the fusion as its own row). */
+  /** the join key — the verbatim sha when known (the SHARED join codomain), else a TYPED-GAP sentinel
+   *  OUTSIDE the 64-hex sha space (so an unjoinable item rides the fusion as its own isolated row and
+   *  can never falsely fuse with a real sha or another gap). */
   readonly key: string;
   /** the verbatim sha256 to report on the fused row, or "" when this item carried none to join on. */
   readonly sha: string;
   /** the graph's native hit payload (a SearchHit, a FormMatch, …) — surfaced under the graph name. */
   readonly payload: unknown;
+}
+
+/** The join codomain (the product-presheaf pullback): a validated verbatim sha256, or a TYPED GAP when
+ *  a leg's hit carries none. Legs join ONLY on `{ sha }`; a `{ gap: true }` never joins (it rides the
+ *  fusion as its own isolated row). */
+export type ShaOrGap = { readonly sha: string } | { readonly gap: true };
+
+/** A real verbatim sha is exactly 64 lowercase hex chars (sha256 hex). The validator gate — anything
+ *  else (absent, wrong shape, an unvalidated form key) is a typed gap, never a false join key. */
+const VERBATIM_SHA_RE = /^[0-9a-f]{64}$/;
+
+/**
+ * The ONE join-morphism every recall leg routes through (the verbatim_sha pullback). A candidate that
+ * VALIDATES as a 64-hex sha256 lands in the shared join codomain (`{ sha }`); anything else returns a
+ * TYPED GAP (`{ gap: true }`). The content leg passes `lar_verbatim_sha`; the form leg passes its
+ * `FormMatch.key` — each VALIDATED here, never assumed-a-sha. A gap excludes the item from the cross-
+ * leg join; it never synthesizes a colliding key in a different keyspace.
+ */
+export function verbatimShaOf(candidate: unknown): ShaOrGap {
+  if (typeof candidate === "string" && VERBATIM_SHA_RE.test(candidate)) return { sha: candidate };
+  return { gap: true };
+}
+
+/** Map a {@link ShaOrGap} to a {@link GraphItem}'s `{ key, sha }`. A real sha keys into the shared join
+ *  codomain (`key === sha`); a GAP keys to a per-leg, per-index sentinel prefixed with NUL — OUTSIDE
+ *  the 64-hex sha space — so it rides as its own row and can never falsely fuse. */
+function joinKeyFor(s: ShaOrGap, legName: string, index: number): { key: string; sha: string } {
+  if ("sha" in s) return { key: s.sha, sha: s.sha };
+  return { key: `\u0000gap:${legName}:${index}`, sha: "" };
 }
 
 /** One graph fed to the fusion: a name (the key its scores/ranks/payloads file under), an RRF weight
@@ -86,38 +116,38 @@ interface Row {
   payloads: Record<string, unknown>;
 }
 
-/** The join key for a content hit: its `lar_verbatim_sha` (the cross-graph key the routing split
- *  stamped, node-capture-engine#makeFormSplitFlush) when present; otherwise a synthetic content-only
- *  key that NEVER collides with a real 64-hex sha, so a content drawer with no form partner still
- *  rides the fusion as its own row. */
+/** The join `{ key, sha }` for a content hit — route its `lar_verbatim_sha` through the {@link
+ *  verbatimShaOf} morphism: a validated sha keys into the shared join codomain; anything else is a
+ *  TYPED GAP keyed to a per-index sentinel outside the sha space (the content drawer with no form
+ *  partner rides the fusion as its own isolated row, never a colliding key in a different keyspace). */
 export function contentKeyOf(hit: SearchHit, index: number): { key: string; sha: string } {
-  const raw = hit["lar_verbatim_sha"];
-  if (typeof raw === "string" && raw) return { key: raw, sha: raw };
-  const src =
-    (typeof hit.source_path === "string" && hit.source_path) ||
-    (typeof hit.source_file === "string" && hit.source_file) ||
-    "?";
-  return { key: `content-only:${index}:${src}`, sha: "" };
+  return joinKeyFor(verbatimShaOf(hit["lar_verbatim_sha"]), "content", index);
 }
 
-/** Build a CONTENT graph leg from mempalace search hits (the verbatim_sha join key per hit). */
+/** Build a CONTENT graph leg from mempalace search hits — each hit's `lar_verbatim_sha` validated
+ *  through {@link verbatimShaOf} (the shared join codomain, or a typed gap). */
 export function contentLeg(name: string, hits: readonly SearchHit[], weight?: number): GraphLeg {
   return {
     name,
     ...(weight !== undefined ? { weight } : {}),
     items: hits.map((hit, i) => {
-      const { key, sha } = contentKeyOf(hit, i);
+      const { key, sha } = joinKeyFor(verbatimShaOf(hit["lar_verbatim_sha"]), name, i);
       return { key, sha, payload: hit };
     }),
   };
 }
 
-/** Build a FORM graph leg from form-similarity matches (the match `key` IS the verbatim_sha). */
+/** Build a FORM graph leg from form-similarity matches — each match's `key` VALIDATED through {@link
+ *  verbatimShaOf} as the verbatim_sha (NOT assumed-a-sha): a real sha joins its content twin; a non-sha
+ *  key is a typed gap that rides as its own row, never a false join into a different keyspace. */
 export function formLeg(name: string, matches: readonly FormMatch[], weight?: number): GraphLeg {
   return {
     name,
     ...(weight !== undefined ? { weight } : {}),
-    items: matches.map((m) => ({ key: m.key, sha: m.key, payload: m })),
+    items: matches.map((m, i) => {
+      const { key, sha } = joinKeyFor(verbatimShaOf(m.key), name, i);
+      return { key, sha, payload: m };
+    }),
   };
 }
 

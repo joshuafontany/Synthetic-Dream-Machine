@@ -83,11 +83,11 @@ export type {
 export {
   fuseMultiGraph, multiGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
   resolveApertureGrain, apertureWeight, weightByAperture, PARAGRAPH_APERTURE,
-  contentKeyOf, contentLeg, formLeg,
+  contentKeyOf, contentLeg, formLeg, verbatimShaOf,
 } from "./multi-graph-recall.js";
 export type {
   MultiGraphHit, MultiGraphOptions, MultiGraphRecallDeps, MultiGraphRecallArgs, MultiGraphRecallResult,
-  GraphLeg, GraphItem, ExtraGraph, ApertureWeightOptions,
+  GraphLeg, GraphItem, ExtraGraph, ApertureWeightOptions, ShaOrGap,
   FormSearchPalace, FormSearchConfig,
 } from "./multi-graph-recall.js";
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The

@@ -149,6 +149,9 @@ export class MempalaceClient {
   private nextId = 1;
   private readonly pending = new Map<number, Pending>();
   private stdoutBuf = "";
+  /** Last ~4KB of stderr — a ChromaDB permission/disk-full/import fault surfaces here, never swallowed
+   *  to a bare timeout. Folded into faults (and timeouts) by {@link withStderr}. */
+  private stderrTail = "";
 
   private readonly submoduleRoot: string;
   private readonly palacePath: string | undefined;
@@ -181,10 +184,14 @@ export class MempalaceClient {
     proc.stdout?.on("data", (chunk: string) => this.onStdout(chunk));
     proc.stderr?.setEncoding("utf8");
     proc.stderr?.on("data", (chunk: string) => {
+      // stderr carries redacted human logs on a healthy boot, but ALSO the real fault on a sick one
+      // (ChromaDB permission denied, disk full, an import blow-up). BUFFER its tail and SURFACE it on
+      // failure — never let it degrade to a bare timeout. stdout stays the JSON-RPC channel.
+      this.stderrTail = (this.stderrTail + chunk).slice(-4096);
       if (this.onLog) this.onLog(chunk.replace(/\n+$/, ""));
     });
-    proc.on("exit", (code) => this.rejectAll(new Error(`mempalace sidecar exited (code ${code ?? "null"})`)));
-    proc.on("error", (err: Error) => this.rejectAll(err));
+    proc.on("exit", (code) => this.rejectAll(this.withStderr(new Error(`mempalace sidecar exited (code ${code ?? "null"})`))));
+    proc.on("error", (err: Error) => this.rejectAll(this.withStderr(err)));
 
     await this.request("initialize", {
       protocolVersion: "2025-11-25",
@@ -236,12 +243,20 @@ export class MempalaceClient {
     this.send({ jsonrpc: "2.0", method, params });
   }
 
+  /** Fold the buffered stderr tail into an error so a python-side fault reaches the caller (the recall
+   *  path surfaces the REAL ChromaDB error, never a bare timeout/exit). No tail → the error unchanged. */
+  private withStderr(err: Error): Error {
+    const tail = this.stderrTail.trim();
+    if (tail) err.message = `${err.message}\n  sidecar stderr: ${tail}`;
+    return err;
+  }
+
   private request(method: string, params: unknown): Promise<unknown> {
     const id = this.nextId++;
     return new Promise<unknown>((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
-        reject(new Error(`mempalace call '${method}' timed out after ${this.timeoutMs}ms`));
+        reject(this.withStderr(new Error(`mempalace call '${method}' timed out after ${this.timeoutMs}ms`)));
       }, this.timeoutMs);
       this.pending.set(id, { resolve, reject, timer });
       try {

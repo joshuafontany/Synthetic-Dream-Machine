@@ -21,13 +21,14 @@ set -uo pipefail
 
 input="$(cat)"
 # Harness-aware: Claude Code + Codex Stop hooks deliver `transcript_path` on stdin;
-# Copilot CLI sessionEnd delivers `sessionId` only — resolve its events.jsonl.
+# Copilot CLI sessionEnd delivers `sessionId` only — its conversation lives in the
+# global SQLite store ~/.copilot/session-store.db (events.jsonl is gone, CLI 1.0.6x).
 transcript="$(printf '%s' "$input" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("transcript_path",""))' 2>/dev/null)"
 cwd="$(printf '%s' "$input" | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get("cwd",""))' 2>/dev/null)"
 
 if [ -z "${transcript:-}" ]; then
   sid="$(printf '%s' "$input" | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get("sessionId",d.get("session_id","")))' 2>/dev/null)"
-  [ -n "${sid:-}" ] && [ -f "$HOME/.copilot/session-state/$sid/events.jsonl" ] && transcript="$HOME/.copilot/session-state/$sid/events.jsonl"
+  [ -n "${sid:-}" ] && [ -f "$HOME/.copilot/session-store.db" ] && transcript="$HOME/.copilot/session-store.db"
 fi
 
 [ -n "${transcript:-}" ] && [ -f "$transcript" ] || exit 0
@@ -49,16 +50,22 @@ LARES="$HOME/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
 stage="$(mktemp -d 2>/dev/null)" || exit 0
 # Surface the drawer's origin (staged name prefixed `<surface>__…` → lar_surface).
 case "$transcript" in
-  */.codex/sessions/*)        surface=codex ;;
-  */.copilot/session-state/*) surface=copilot-cli ;;
-  *)                          surface=claude ;;
+  */.codex/sessions/*)      surface=codex ;;
+  */.copilot/session-store.db) surface=copilot-cli ;;
+  *)                        surface=claude ;;
 esac
 case "$transcript" in
-  */.copilot/session-state/*)
+  */.copilot/session-store.db)
+    # session-store.db holds EVERY session; the normalizer exports one jsonl per
+    # session into a dir + a stdout manifest. Stage just THIS session's file (by sid).
     HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"
-    NORM="$HOOK_DIR/../../../../packages/lararium-mempalace/scripts/copilot_normalize.py"
-    sid="$(basename "$(dirname "$transcript")")"
-    python3 "$NORM" "$transcript" > "$stage/${surface}__$sid.jsonl" 2>/dev/null || { rm -rf "$stage"; exit 0; }
+    NORM="$HOOK_DIR/../../../../packages/lararium-mempalace/scripts/copilot_sqlite_normalize.py"
+    [ -n "${sid:-}" ] || { rm -rf "$stage"; exit 0; }
+    raw="$stage/raw"; mkdir -p "$raw"
+    python3 "$NORM" "$transcript" "$raw" >/dev/null 2>&1 || { rm -rf "$stage"; exit 0; }
+    [ -f "$raw/$sid.jsonl" ] || { rm -rf "$stage"; exit 0; }
+    mv "$raw/$sid.jsonl" "$stage/${surface}__$sid.jsonl" 2>/dev/null || { rm -rf "$stage"; exit 0; }
+    rm -rf "$raw"
     ;;
   *)
     dst="$stage/${surface}__$(basename "$transcript")"
