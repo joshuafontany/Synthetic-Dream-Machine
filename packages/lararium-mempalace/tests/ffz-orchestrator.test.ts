@@ -293,6 +293,11 @@ describe("deriveMeasureLabels — the form plane (N=2 quorum)", () => {
     const r = deriveMeasureLabels(recs, {}, form);
     expect(r.gongs).toBe(0); // one plane cannot meet the N=2 gong
     expect(r.conflicts).toBe(0); // a moderate wobble does not scream → no tension flag
+    // SYMMETRIC-CONFLICT FINDING (Strand A): the no-conflict here rides the MODERATE tilt, NOT
+    // the plane it lands on. The Signal-Jam guard (ffz-project#quorumStep: `anyScream && quorum
+    // < effFirm`) is plane-SYMMETRIC — a SCREAMING content-only shift reads conflict identically
+    // to the screaming form-only case below (content-only vs form-only BOTH conflict when lone +
+    // screaming). The asymmetry on display is tilt-magnitude (wobble vs scream), never plane.
   });
 
   test("a form-only shift (content coherent) reads conflict — the tension-moment", () => {
