@@ -69,7 +69,7 @@ import {
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
-import { composeLararium, composeHerm }             from "./node-caps.js";
+import { composeLararium, composeHerm, meshPalaceCap, carriageCap } from "./node-caps.js";
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
@@ -831,7 +831,23 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
  */
 export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesselResult> {
   const p = await prepareNodeBoot(opts);
-  const result = await composeLararium<VesselIslandPool>(p.orchestration);
+  // A Lararium is a hearth that is ALSO a first-class mesh-node: when self-announce params are supplied,
+  // it composes the carriage (meshpalace + carriage) ALONGSIDE the wiki-full core — it carries + navigates
+  // the FLOW-map for its own routing (carry-without-reserve; no second read-face, no @oracle conflict).
+  const extraCaps = (opts.selfBearing && opts.selfEndpoint) ? [
+    meshPalaceCap({
+      repo: p.repo, ...(p.residency ? { residency: p.residency } : {}),
+      ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
+      seed: [{ bearing: opts.selfBearing, verifyingKeyHex: "f".repeat(64), endpoint: opts.selfEndpoint, scale: "dreamnet" }],
+    }),
+    carriageCap({
+      peers: opts.peers ?? [], selfEndpoint: opts.selfEndpoint, selfBearing: opts.selfBearing,
+      ...(opts.selfCoord ? { selfCoord: opts.selfCoord } : {}),
+      nodeSeedHex: Buffer.from(p.operatorSeed).toString("hex"),
+      onLog: (l) => console.log(`[lararium] ${l}`),
+    }),
+  ] : [];
+  const result = await composeLararium<VesselIslandPool>(p.orchestration, extraCaps);
 
   return {
     activeWikiId: p.slotActiveWikiId(),

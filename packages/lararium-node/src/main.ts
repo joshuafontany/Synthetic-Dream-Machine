@@ -182,6 +182,17 @@ async function main(): Promise<void> {
     return;
   }
 
+  // A Lararium is also a first-class mesh-node: it carries the FLOW-map (meshpalace+carriage) when given
+  // its self-announce params — a hearth that navigates the mesh, not a destination beside the roads.
+  const larPublicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
+  const larPeers = (process.env["LAR_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const larHashUnit = (s: string): number => {
+    let h = 2166136261 >>> 0;
+    for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
+    return (h >>> 0) / 4294967296;
+  };
+  const larSelfCoord = { theta: larHashUnit(larPublicUrl) * 2 * Math.PI, r: Number(process.env["LAR_RADIUS"] ?? 1) };
+  const larSelfBearing = `lar:///ha.ka.ba/@oracle/lararium/${larHashUnit(larPublicUrl).toString(36).slice(2, 8)}`;
   const result = await openNodeVessel({
     hostId:     "lararium-node",
     wikiId,
@@ -190,6 +201,10 @@ async function main(): Promise<void> {
     rootDir,
     wss,
     catalogUrl,
+    selfEndpoint: larPublicUrl,
+    selfCoord:    larSelfCoord,
+    selfBearing:  larSelfBearing,
+    ...(larPeers.length ? { peers: larPeers } : {}),
     onPhase: (phase) => {
       console.log(`[lararium] phase → ${phase}`);
     },

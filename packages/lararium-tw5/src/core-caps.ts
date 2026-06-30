@@ -215,6 +215,7 @@ export function mountCap<TPool extends PrimaryMountPool>(o: VesselOrchestration<
  */
 export async function composeCoreVessel<TPool extends PrimaryMountPool>(
   o: VesselOrchestration<TPool>,
+  extraCaps: readonly CapModule[] = [], // role caps composed ALONGSIDE the core (e.g. meshpalace+carriage → a hearth that also navigates the mesh)
 ): Promise<VesselCoreResult<TPool>> {
   const vessel = await composeVessel([
     substrateCap(o.keel),
@@ -229,6 +230,7 @@ export async function composeCoreVessel<TPool extends PrimaryMountPool>(
     wikiCap(o),
     poolCap(o),
     mountCap(o),
+    ...extraCaps, // a Herm's caps minus the wiki = the roads; the full vessel + these caps = a hearth-node
   ]);
 
   const assembly = vessel.get<VesselCoreAssembly>(CORE_CAP.substrate)!;
