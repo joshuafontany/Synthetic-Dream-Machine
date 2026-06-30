@@ -34,6 +34,7 @@ export { bagStackFromRec } from "./bag-stack-from-rec.js";
 export * from "./composite-store.js";
 export * from "./itc.js";
 export * from "./ffz-clock.js";
+export * from "./ffz-project.js";
 export * from "./worldline-clock.js";
 export * from "./worldline-edge.js";
 export * from "./worldline-trajectory.js";

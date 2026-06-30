@@ -10,6 +10,25 @@
  */
 
 import type { TurnHarvest } from "./turn-harvest.js";
+import { ffzProject } from "./ffz-project.js";
+
+/**
+ * CaptureContext — the turn's RHYTHMIC coordinates, what the drawer already holds.
+ *
+ * Feeds the `lar_ffz` projection (build-patch.ts stamps a PURE rhythm-only address,
+ * never a stored clock). The capture/harvest caller threads it from the turn's
+ * captured wall-time + session position; absent (the case today — no caller supplies
+ * it yet) ⇒ no `lar_ffz`, byte-identical to before. Causality is NOT carried here —
+ * it rides the edge-DAG (the PATH-B cut).
+ */
+export interface CaptureContext {
+  /** Epoch ms the turn was captured at — drives `lar_ffz` coarse bands (Arc/Theme). */
+  readonly capturedTime?: number;
+  /** Turn-index within the session (= L1 Beat count) — drives the fine bands (Beat/Measure). */
+  readonly sessionPosition?: number;
+  /** FFZ_PROFILES key (default "session") — selects the cycling bounds. */
+  readonly ffzProfile?: string;
+}
 
 /**
  * `lar_hv` — the enrich-logic version (the Kappa upgrade gate). Bump in lockstep
@@ -137,6 +156,7 @@ export function buildPatch(
   h: TurnHarvest,
   sourceFile?: string,
   branch?: BranchContext,
+  capture?: CaptureContext,
 ): Record<string, string | number> {
   const frontier = deriveBranchFrontier(branch); // null unless the caller signals a fork
   const patch: Record<string, string | number> = {
@@ -174,6 +194,18 @@ export function buildPatch(
     // which a spirit's lar_parent_handle points back to (the graph closes).
     const root = deriveRootHandle(sourceFile, frontier);
     if (root) { patch["lar_agent_handle"] = root.slice(0, 120); patch["lar_root_handle"] = root.slice(0, 120); }
+  }
+  // `lar_ffz` — the rhythmic address, a PURE CACHED PROJECTION of the turn's captured
+  // time/position onto the five bands (NOT a stored clock; rhythm-only, zero causality).
+  // Graceful: no captured time ⇒ no stamp; time-but-no-position ⇒ the coarse prefix only,
+  // the fine bands left unstamped rather than fabricated (ffz-project.ts).
+  if (capture?.capturedTime != null) {
+    const ffz = ffzProject({
+      capturedTime: capture.capturedTime,
+      ...(capture.sessionPosition != null ? { sessionPosition: capture.sessionPosition } : {}),
+      profile: capture.ffzProfile ?? "session",
+    });
+    if (ffz) patch["lar_ffz"] = ffz.slice(0, 120);
   }
   return patch;
 }
