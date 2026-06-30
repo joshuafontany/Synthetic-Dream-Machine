@@ -10,7 +10,6 @@ export type { Heads, Doc as AutomergeDoc } from "@automerge/automerge";
 export * from "./base-doc.js";
 export * from "./cas.js";
 export * from "./resolver.js";
-export * from "./causal-island-authority.js";
 export * from "./bag-residency.js";
 export * from "./capability.js";
 export * from "./crypto.js";
