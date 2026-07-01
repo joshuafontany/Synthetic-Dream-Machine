@@ -22,7 +22,7 @@
  * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
- * A handful of resolvers (mesh, vessel substrate, the state watermarks, the ephemeral corpus root) still
+ * A few resolvers (the vessel substrate, the projection watermark, the ephemeral corpus root) still
  * read OLD-else-NEW via {@link strangle} — probe the new XDG dir; use it once it exists; else fall back
  * to the legacy `~/.lares` spelling; on a fresh vessel default to the new canonical dir. The env seams
  * (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
@@ -127,12 +127,12 @@ export function larFormPalaceDir(): string {
 
 // ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────
 
-/** The `mesh` sensorium dir — the strangler over `<data>/sensoriums/mesh` (new) / `~/.lares/.meshpalace`
- *  (legacy). Its manifest declares MINIMAL own caps + three nested children (who/authority/flow) as
- *  dumb `coupling.children[]` edges; the filetree IS the composition (sensorium.ts). The cross-Lararium
- *  federation feed/carriage lives elsewhere in the mesh domain — this is directory + structure only. */
+/** The `mesh` sensorium dir — `<data>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three
+ *  nested children (who/authority/flow) as dumb `coupling.children[]` edges; the filetree IS the
+ *  composition (sensorium.ts). The cross-Lararium federation feed/carriage lives elsewhere in the mesh
+ *  domain — this is directory + structure only. */
 export function meshSensoriumDir(): string {
-  return strangle(join(larDataHome(), "sensoriums", "mesh"), join(larHome(), ".meshpalace"));
+  return join(larDataHome(), "sensoriums", "mesh");
 }
 
 /** The WHO child-sensorium dir — `<mesh>/who`. Identity/presence: content (presence-embeddings) +
@@ -197,16 +197,14 @@ export function larProjectionDir(): string {
   return strangle(join(larStateHome(), "projection"), join(larHome(), ".lararium-projection"));
 }
 
-/** Harvest watermark (lar_hv idempotency state) — strangler `<state>/harvest` (new) /
- *  `~/.lares/harvest` (legacy). */
+/** Harvest watermark (lar_hv idempotency state) — `<state>/harvest`. */
 export function larHarvestDir(): string {
-  return strangle(join(larStateHome(), "harvest"), join(larHome(), "harvest"));
+  return join(larStateHome(), "harvest");
 }
 
-/** Harvest stage (normalized transcript copies) — strangler `<state>/harvest-stage` (new) /
- *  `~/.lares/harvest-stage` (legacy). */
+/** Harvest stage (normalized transcript copies) — `<state>/harvest-stage`. */
 export function larHarvestStageDir(): string {
-  return strangle(join(larStateHome(), "harvest-stage"), join(larHome(), "harvest-stage"));
+  return join(larStateHome(), "harvest-stage");
 }
 
 // NOTE: genesis/ (the baked island.bin seed + social-bootstrap.json) stays CORPUS-relative
