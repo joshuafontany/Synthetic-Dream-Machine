@@ -72,6 +72,37 @@ export type {
 } from "./teleodynamic-probe.js";
 export { teleodynamicProbe, apertureBandFor } from "./teleodynamic-probe.js";
 
+// The self-read-harvester — the ONE sensorium that reads the house reading itself
+// (research a478d788). Folds the gradient harvest into the teleodynamic SelfRead
+// (structuralChange BOUND to an out-of-band persisted-write channel, NEVER prose)
+// + the Voice register-amplitudes, then wires BOTH North-Stars: buresDistance and
+// the teleodynamic register-band. Pure + isomorphic.
+export type {
+  RegisterBandDef,
+  PersistedEffect,
+  VoiceRegisterReading,
+  TurnSensorium,
+  RegisterBandReading,
+  TurnInput,
+} from "./self-read-harvester.js";
+export {
+  REGISTER_BANDS,
+  REGISTER_COUNT,
+  STRUCTURAL_WRITE_KINDS,
+  registerBandForWord,
+  registerBandForValue,
+  bandForConfidence,
+  firedStructuralWrite,
+  aftermathClosedFromHuds,
+  harvestVoiceReadings,
+  harvestTurn,
+  turnDensity,
+  buresDrift,
+  turnRegisterBand,
+  harvestSequence,
+  probeTurnSequence,
+} from "./self-read-harvester.js";
+
 // Re-export the shared grammar + AST shapes the basis/emitter index against, so
 // consumers (and tests) take them from the form-layer surface — never reaching
 // into the VM-sovereign meme-ast internals directly (vm-grammar-boundary).
