@@ -670,3 +670,112 @@ def test_run_stack_never_leaks_nan_inf_on_adversarial_signals():
         out = bs.run_stack(np.asarray(sig, dtype=float).reshape(-1, 1))
         blob = json.dumps(out, default=float).lower()
         assert "nan" not in blob and "infinity" not in blob, f"NaN/Inf leak on {sig[:3]}"
+
+
+# ══════════════════════════════════════════════════════════════════════════════════════════════
+# ADVERSARIAL / PROPERTY-BASED QA (The-Sword, tasked QA-spirit, 2026-07-01) — the CLASSIFIER legs.
+#
+# Two REAL breaks in the criticality / early-warning verdicts (distinct from The-Advocate's numerical
+# edges above). Each INTENDED invariant is xfail(strict=True) so the suite stays GREEN while the bug
+# lives and turns RED the moment it is fixed; a paired characterization test pins the current behaviour.
+#
+#   BUG A — criticality_signature() calls a high-φ AR(1) "critical". An AR(1) is the textbook MARKOV /
+#           exponential-decay process (finite correlation length −1/ln φ ≈ 9.5 samples at φ=0.9), yet it
+#           reads "critical" (scale-free long memory) 100% of the time, reporting ~2.7 DECADES of power
+#           law and corr_len ≈ 500. The power-vs-exp R² discriminator over-calls power law on the
+#           geometric-d supported range. (A 2-state Markov chain leaks the same way on most seeds.)
+#
+#   BUG B — forecast_ews()'s noise-inflation guard LEAKS. The docstring: a pure noise-AMPLITUDE inflation
+#           (fixed φ, rising σ, NO critical slowing) "can never fire". But a within-window variance RAMP
+#           biases the sample lag-1-AC UPWARD, and neither colored surrogate reproduces that ramp (the
+#           AR(1) null fits ONE constant σ; the phase-randomized null is stationary), so the spurious
+#           rising AC1 reads surrogate-significant → a FALSE FORECAST (seed 9: fired, ac1_p ≈ 0.03).
+# ══════════════════════════════════════════════════════════════════════════════════════════════
+
+
+def _ar1(n, phi, seed):
+    """A pure AR(1) — the textbook Markov / exponential-decay process (finite correlation length
+    −1/ln φ). NOT critical: MI(d) decays EXPONENTIALLY, never a scale-free power law."""
+    rng = np.random.default_rng(seed)
+    x = np.zeros(n)
+    for t in range(1, n):
+        x[t] = phi * x[t - 1] + rng.normal(0, 1)
+    return x
+
+
+def test_ar1_high_phi_reads_critical_BUG():
+    """CHARACTERIZATION (passes today, pins BUG A): a φ=0.9 AR(1) — a finite-correlation-length Markov
+    process — is classified "critical" by criticality_signature, deterministically across seeds. This
+    assertion FLIPS RED when the classifier is corrected."""
+    for seed in range(6):
+        v = bs.criticality_signature(_ar1(2000, 0.9, seed), n_bins=4, seed=1)
+        assert v["verdict"] == "critical", (seed, v["note"])  # the WRONG verdict — documents BUG A
+    v0 = bs.criticality_signature(_ar1(2000, 0.9, 0), n_bins=4, seed=1)
+    # the smoking gun: multi-decade power law + corr_len ≫ the true ~9.5-sample correlation length
+    assert v0["decades"] >= 1.0 and v0["corr_len"] > 100
+
+
+@pytest.mark.xfail(strict=True, reason="KNOWN BUG A: high-φ AR(1) (exponential decay = Markov, finite "
+                   "correlation length) misclassified 'critical' — the power-vs-exp R² discriminator "
+                   "over-calls power law on the geometric-d supported range.")
+def test_ar1_markov_is_not_critical_INTENDED():
+    """THE INVARIANT: an AR(1) (exponential MI decay, finite correlation length) must read markov or
+    shuffled — NEVER 'critical'. Currently fails at φ=0.9 (xfail; turns red once fixed)."""
+    for seed in range(6):
+        v = bs.criticality_signature(_ar1(2000, 0.9, seed), n_bins=4, seed=1)
+        assert v["verdict"] != "critical", (seed, v["note"])
+
+
+def test_noise_inflation_guard_leaks_BUG():
+    """CHARACTERIZATION (passes today, pins BUG B): the `_noise_inflation` fixture at seed 9 (fixed
+    φ=0.4, σ ramping 0.3→3.0, NO critical slowing) FIRES a false FORECAST — the within-window variance
+    ramp inflates the sample lag-1-AC, absent from both colored nulls. Flips red once the guard is fixed."""
+    fc = bs.forecast_ews(_noise_inflation(9), window=50, n_surr=120, alpha=0.05, seed=1)
+    assert fc["fired"] is True and fc["state"] == "FORECAST", fc["note"]  # a FALSE fire — documents BUG B
+    assert fc["ac1_significant"] is True and fc["ar1_p"] <= 0.05  # the guard's AC1 tooth was fooled
+
+
+@pytest.mark.xfail(strict=True, reason="KNOWN BUG B: a pure noise-AMPLITUDE inflation (fixed φ, rising σ, "
+                   "no critical slowing) can produce a surrogate-significant rising lag-1-AC — the "
+                   "within-window variance ramp is absent from BOTH colored nulls (AR(1) fits one σ; "
+                   "phase-randomized is stationary) — firing a false FORECAST (seed 9).")
+def test_noise_inflation_never_fires_INTENDED():
+    """THE INVARIANT (leg 2): a pure noise-amplitude inflation NEVER fires FORECAST (reports
+    NOISE-INFLATION or WATCH). Currently leaks at seed 9 (xfail)."""
+    for s in range(12):
+        fc = bs.forecast_ews(_noise_inflation(s), window=50, n_surr=120, alpha=0.05, seed=1)
+        assert fc["fired"] is False, (s, fc["note"])
+
+
+# ── the CLEAN directions still hold under fuzzing (defend the true verdicts) ──────────────────
+
+
+def test_white_noise_always_reads_shuffled_property():
+    """Independent white noise carries NO two-point structure → 'shuffled' every time (MI never
+    clears the shuffle floor). Fuzzed across seeds; the null floor holds."""
+    for s in range(10):
+        v = bs.criticality_signature(np.random.default_rng(s).normal(0, 1, 3000), seed=1)
+        assert v["verdict"] == "shuffled", (s, v["note"])
+
+
+def _pink(n, beta, seed):
+    rng = np.random.default_rng(seed)
+    f = np.fft.rfftfreq(n)
+    f[0] = f[1]
+    ph = rng.uniform(0, 2 * np.pi, f.size)
+    ph[0] = 0.0
+    if n % 2 == 0:
+        ph[-1] = 0.0
+    s = np.fft.irfft(f ** (-beta / 2.0) * np.exp(1j * ph), n=n)
+    return (s - s.mean()) / (s.std() + 1e-9)
+
+
+def test_pink_noise_reads_critical_property():
+    """A 1/f^β long-range signal (β=1.3) genuinely IS critical — power-law MI over decades. Fuzzed
+    across seeds it reads 'critical' (the true positive the AR(1) false positive must be told from)."""
+    for s in range(10):
+        v = bs.criticality_signature(_pink(4000, 1.3, s), seed=1)
+        assert v["verdict"] == "critical", (s, v["note"])
+    # NOTE: the TRUE-positive CSD fire is stochastic per realization (seed 1 reaches only WATCH);
+    # the canonical seed-5 true positive is already defended by test_forecast_fires_before_ecp_commits
+    # and test_forecast_still_fires_on_true_csd_with_colored_null — not re-asserted here.
