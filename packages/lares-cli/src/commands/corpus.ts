@@ -36,6 +36,7 @@ async function runVerb(args: ParsedArgs): Promise<number> {
       console.log(`  id:        ${res.id}`);
       console.log(`  drawers:   ${res.drawers}${res.note ? `  (${res.note})` : ""}`);
       console.log(`  structure: ${res.structures} vector(s)`);
+      console.log(`  bands:     ${res.bands} lar_ffz cell(s)`);
       if (res.analysis) {
         console.log(`  analysis: ${res.analysis.hits.length} hit(s)${res.analysis.note ? `  (${res.analysis.note})` : ""}`);
         for (const h of res.analysis.hits.slice(0, 5)) console.log(`    · ${preview(h["text"])}`);
@@ -60,6 +61,7 @@ function openVerb(args: ParsedArgs): number {
       console.log(`  name:      ${manifest.name}`);
       console.log(`  drawers:   ${manifest.drawers ?? 0}${manifest.note ? `  (${manifest.note})` : ""}`);
       console.log(`  structure: ${manifest.structures ?? 0} vector(s)`);
+      console.log(`  bands:     ${manifest.bands ?? 0} lar_ffz cell(s)`);
       console.log(`\n  → query:    lares corpus query ${id} <keywords>`);
       console.log(`  → dissolve: lares corpus dissolve ${id}`);
     },

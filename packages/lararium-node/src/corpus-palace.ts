@@ -21,7 +21,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn } from "@lararium/mempalace";
+import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn, resolveBandsSidecarSpawn } from "@lararium/mempalace";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { larCorpusDir, corpusInstanceDir } from "./vessel-paths.js";
 
@@ -46,6 +46,11 @@ export interface CorpusManifest {
    *  (code · markdown · wikitext · json · toml · memetic-wikitext · prose). 0 ⇒ structure-skipped
    *  (no router / no parser for the corpus's kinds) — the content plane still stands. */
   readonly structures?: number;
+  /** bands-plane adaptive lar_ffz cells the multi-scale FFZ sidecar filed (S1): one per content
+   *  chunk, a five-band aperture address (Theme.Arc.Measure.Beat.Pulse) with a Canon/Provisional
+   *  register from the resampling gate. 0 ⇒ bands-skipped (no sidecar / R / too few vectors) —
+   *  the content + structure planes still stand. */
+  readonly bands?: number;
   /** an ingest note (e.g. "ingest-skipped: no python sidecar"). */
   readonly note?: string;
 }
@@ -103,14 +108,55 @@ export function listCorpora(): CorpusManifest[] {
 
 // ── the ingest seam (THIN for S0; the deep bands/structure/form caps land S1–S3) ──────────────────
 
-/** The pluggable ingest leg — chunk + content-embed the source into the scratch palace dir, and
- *  (S2) push each file through the structure parse-router into a structure plane under the dir. */
-export type CorpusIngest = (args: { sourcePath: string; palaceDir: string }) => { drawers: number; structures: number; note: string };
+/** The pluggable ingest leg — chunk + content-embed the source into the scratch palace dir,
+ *  (S2) push each file through the structure parse-router into a structure plane under the dir,
+ *  and (S1) run the multi-scale FFZ bands sidecar over the corpus cohesion signal → adaptive
+ *  lar_ffz cells. */
+export type CorpusIngest = (args: { sourcePath: string; palaceDir: string }) => { drawers: number; structures: number; bands: number; note: string };
 
 /** The structure plane lives in a chroma sub-palace under the corpus instance dir — so a
  *  `dissolve` (rmSync of the instance dir) sweeps it too; no separate teardown registration. */
 export function corpusStructureDir(palaceDir: string): string {
   return join(palaceDir, "structure");
+}
+
+/** The bands plane's adaptive lar_ffz cells NDJSON, written under the corpus instance dir (swept
+ *  on dissolve with everything else). One line per content chunk: {id?, lar_ffz, register, cells}. */
+export function corpusBandsCellsPath(palaceDir: string): string {
+  return join(palaceDir, "bands-cells.ndjson");
+}
+
+/**
+ * The BANDS leg (S1): run `bands_sidecar.py analyze --palace <dir>` over the corpus content
+ * embeddings (read back from the scratch palace chroma) → the multi-scale FFZ stack (MODWT-MRA
+ * spine · EWT/ssqueezepy servo · ecp/ruptures divisive tree · resampling-consensus gate) → the
+ * adaptive lar_ffz cells, captured to {@link corpusBandsCellsPath}. GRACEFUL: no sidecar / no
+ * python / no chroma / too few vectors ⇒ `bands:0` (bands-skipped), the content + structure
+ * planes UNAFFECTED. Returns the cell count + a note fragment. Runs AFTER the content mine (it
+ * reads the stored nomic vectors the mine wrote), and never re-embeds.
+ */
+function runBandsSidecar(palaceDir: string): { bands: number; note: string } {
+  const { python, script, submoduleRoot, scriptPresent } = resolveBandsSidecarSpawn();
+  if (!python || !scriptPresent) return { bands: 0, note: "bands-skipped: no sidecar/python" };
+  try {
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+    const out = execFileSync(python, [script, "analyze", "--palace", palaceDir], {
+      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
+    });
+    // The sidecar streams NDJSON cells then a final JSON summary; the LAST JSON line is
+    // authoritative, the preceding cell lines are the adaptive lar_ffz stamps we persist.
+    const lines = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{"));
+    if (lines.length === 0) return { bands: 0, note: "bands-skipped: no sidecar output" };
+    const summary = JSON.parse(lines[lines.length - 1] as string) as { cells?: number; note?: string };
+    const cellLines = lines.slice(0, -1);
+    if (cellLines.length > 0) {
+      try { writeFileSync(corpusBandsCellsPath(palaceDir), cellLines.join("\n") + "\n"); } catch { /* best effort */ }
+    }
+    const bands = Number(summary.cells ?? 0);
+    return { bands, note: summary.note ? `bands: ${summary.note}` : `bands: ${bands} cells` };
+  } catch (e) {
+    return { bands: 0, note: `bands-skipped: sidecar fault (${(e as Error).message.slice(0, 100)})` };
+  }
 }
 
 /**
@@ -147,8 +193,8 @@ function runStructureRouter(sourcePath: string, palaceDir: string): { structures
  */
 export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, palaceDir }) => {
   const { python, sidecarPresent } = resolveMempalaceSpawn();
-  if (!python || !sidecarPresent) return { drawers: 0, structures: 0, note: "ingest-skipped: no python sidecar (lares wake --install)" };
-  if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, note: `ingest-skipped: source absent (${sourcePath})` };
+  if (!python || !sidecarPresent) return { drawers: 0, structures: 0, bands: 0, note: "ingest-skipped: no python sidecar (lares wake --install)" };
+  if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, bands: 0, note: `ingest-skipped: source absent (${sourcePath})` };
   // STRUCTURE plane (S2) — independent of the content mine; runs even if the mine faults.
   const struct = runStructureRouter(sourcePath, palaceDir);
   try {
@@ -157,9 +203,12 @@ export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, palaceDir }) => 
       maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
     });
     const drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
-    return { drawers, structures: struct.structures, note: `mined ${sourcePath} → ${drawers} drawers · ${struct.note}` };
+    // BANDS plane (S1) — runs AFTER the content mine (it reads the stored vectors); a mine that
+    // filed nothing means no cohesion signal → bands gracefully skip.
+    const bands = drawers > 0 ? runBandsSidecar(palaceDir) : { bands: 0, note: "bands-skipped: no content drawers" };
+    return { drawers, structures: struct.structures, bands: bands.bands, note: `mined ${sourcePath} → ${drawers} drawers · ${struct.note} · ${bands.note}` };
   } catch (e) {
-    return { drawers: 0, structures: struct.structures, note: `ingest-skipped: mine fault (${(e as Error).message.slice(0, 120)}) · ${struct.note}` };
+    return { drawers: 0, structures: struct.structures, bands: 0, note: `ingest-skipped: mine fault (${(e as Error).message.slice(0, 120)}) · ${struct.note}` };
   }
 };
 
@@ -186,10 +235,10 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
   const name = opts.name ?? (opts.sourcePath.replace(/[/\\]+$/, "").split(/[/\\]/).pop() || id);
   const ephemeral = opts.ephemeral ?? false;
   const ingest = opts.ingest ?? defaultCorpusIngest;
-  const { drawers, structures, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
+  const { drawers, structures, bands, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
   const manifest: CorpusManifest = {
     id, name, sourcePath: opts.sourcePath, createdAt: new Date().toISOString(),
-    ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, note,
+    ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, bands, note,
   };
   writeManifest(dir, manifest);
   return { id, dir, manifest };
@@ -300,6 +349,8 @@ export interface RunCorpusResult {
   readonly drawers: number;
   /** structure-plane vectors the parse-router filed (S2); 0 ⇒ structure-skipped. */
   readonly structures: number;
+  /** bands-plane adaptive lar_ffz cells the multi-scale FFZ sidecar filed (S1); 0 ⇒ bands-skipped. */
+  readonly bands: number;
   readonly note?: string;
   readonly analysis?: QueryCorpusResult;
   /** true ⇒ dissolved on exit (the --rm default); false ⇒ kept (landed durable). */
@@ -333,9 +384,9 @@ export async function runCorpus(opts: RunCorpusOptions): Promise<RunCorpusResult
     if (opts.keep) {
       keepCorpus(id);
       dissolved = false;
-      return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
+      return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
     }
-    return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: true };
+    return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: true };
   } finally {
     if (!opts.keep) { dissolveCorpus(id); dissolved = true; }
     process.removeListener("exit", guard);

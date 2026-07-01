@@ -121,3 +121,28 @@ export function resolveStructureRouterSpawn(): StructureRouterSpawn {
   const script = resolveStructureRouterIo();
   return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
 }
+
+/** Locate `bands_sidecar.py` — CODE at the repo root. The corpus BANDS-plane multi-scale FFZ:
+ *  a corpus's cohesion signal → MODWT-MRA spine + EWT/ssqueezepy servo + ecp/ruptures divisive
+ *  tree + resampling-consensus gate → adaptive lar_ffz cells (corpus.md #the-bands). A batch
+ *  sidecar (not a serve holder), invoked once per corpus ingest, after the content+structure mine. */
+export function resolveBandsSidecarIo(): string {
+  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "bands_sidecar.py");
+}
+
+/** What the corpus ingest needs to run the bands sidecar: the venv-aware python, the helper
+ *  script, and the submoduleRoot (PYTHONPATH so `analyze`'s `import mempalace` chroma readback
+ *  resolves; `decompose` needs neither). Mirrors {@link StructureRouterSpawn}. */
+export interface BandsSidecarSpawn {
+  readonly python: string | null;
+  readonly script: string;
+  readonly submoduleRoot: string;
+  readonly scriptPresent: boolean;
+}
+
+/** Resolve everything the bands sidecar needs (mirrors {@link resolveStructureRouterSpawn}). */
+export function resolveBandsSidecarSpawn(): BandsSidecarSpawn {
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const script = resolveBandsSidecarIo();
+  return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
+}
