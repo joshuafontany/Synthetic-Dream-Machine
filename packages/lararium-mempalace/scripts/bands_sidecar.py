@@ -54,6 +54,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import shutil
 import subprocess
@@ -675,6 +676,238 @@ def wavelet_threshold_floor(mra: dict) -> float:
     return sigma * float(np.sqrt(2.0 * np.log(n)))
 
 
+# ── EWS — the PREDICTIVE bands leg: forecast the regime-shift BEFORE it commits ────────────
+#
+# sensorium-rhymes.md #the-predictive-upgrade (the dynamical-systems leg): critical-slowing-
+# down. As a system approaches a bifurcation it loses resilience — recovery from perturbation
+# slows — and this shows up BEFORE the transition commits as a RISING lag-1 autocorrelation
+# and RISING variance. The `changepoint_tree` (ecp) detects a shift once it COMMITS; the EWS
+# leg forecasts its APPROACH. The R keel (sensorium-rhymes #R-is-the-keel) is LOAD-BEARING:
+# a rising-trend indicator is worthless without a false-positive guard, so a forecast FIRES
+# only on (a) SURROGATE-significance — the observed Kendall-τ beats an AR(1)-null ensemble —
+# AND (b) MULTI-BAND agreement — several MODWT bands independently show the rising trend.
+#
+# The lightweight estimators (rolling variance / lag-1-AC / Kendall-τ) run NATIVE (numpy only,
+# dependency-light hot path); the R `earlywarnings::generic_ews` + `surrogates_ews` route is
+# used WHEN PRESENT (ews.R, graceful skip when absent) — mirroring the ecp / ruptures degrade.
+
+
+def kendall_tau(y: np.ndarray) -> float:
+    """Kendall's τ-b of a series against its time index — the monotone-TREND statistic EWS
+    reads (a rising indicator ⇒ τ > 0). Native O(n²) (n = the rolling-indicator length, a few
+    hundred), tie-corrected. Returns 0 for a degenerate/short series."""
+    y = np.asarray(y, dtype=float).ravel()
+    n = y.size
+    if n < 3:
+        return 0.0
+    conc = disc = 0
+    ty = 0  # ties in y (x = time is never tied)
+    for i in range(n - 1):
+        dy = y[i + 1:] - y[i]
+        conc += int(np.sum(dy > 0))
+        disc += int(np.sum(dy < 0))
+        ty += int(np.sum(dy == 0))
+    n0 = n * (n - 1) // 2
+    denom = math.sqrt(max(1.0, (n0 - ty)) * n0)
+    return (conc - disc) / denom if denom > 0 else 0.0
+
+
+def _rolling(x: np.ndarray, window: int, fn) -> np.ndarray:
+    """A right-aligned rolling map — `fn` over each length-`window` slice, one value per step
+    from index `window-1` on. Returns the indicator series (length n-window+1)."""
+    x = np.asarray(x, dtype=float).ravel()
+    n = x.size
+    if n < window or window < 2:
+        return np.zeros(0, dtype=float)
+    return np.asarray([fn(x[i - window + 1:i + 1]) for i in range(window - 1, n)], dtype=float)
+
+
+def _lag1_ac(seg: np.ndarray) -> float:
+    """Lag-1 autocorrelation of one window (the critical-slowing-down precursor)."""
+    s = np.asarray(seg, dtype=float).ravel()
+    s = s - s.mean()
+    d = float(np.dot(s, s))
+    if d < _EPS:
+        return 0.0
+    return float(np.dot(s[:-1], s[1:]) / d)
+
+
+def _skew(seg: np.ndarray) -> float:
+    s = np.asarray(seg, dtype=float).ravel()
+    sd = s.std()
+    if sd < _EPS:
+        return 0.0
+    return float(np.mean(((s - s.mean()) / sd) ** 3))
+
+
+def generic_ews(x: np.ndarray, window: int = 50) -> dict:
+    """The generic early-warning indicators over a 1-D signal (mirrors R
+    `earlywarnings::generic_ews`): the rolling lag-1-AC, variance, and skewness series, each
+    with its Kendall-τ TREND. A rising AC1/variance (τ > 0) is the critical-slowing-down
+    precursor. Returns {ar1_tau, var_tau, skew_tau, n_windows, …}. Graceful (τ=0) when the
+    signal is shorter than the window."""
+    x = np.asarray(x, dtype=float).ravel()
+    ar1 = _rolling(x, window, _lag1_ac)
+    var = _rolling(x, window, lambda s: float(np.var(s)))
+    skew = _rolling(x, window, _skew)
+    return {
+        "ar1": ar1.tolist(), "variance": var.tolist(), "skewness": skew.tolist(),
+        "ar1_tau": kendall_tau(ar1), "var_tau": kendall_tau(var), "skew_tau": kendall_tau(skew),
+        "n_windows": int(ar1.size), "window": window,
+    }
+
+
+def ar1_surrogate(x: np.ndarray, rng: np.random.Generator) -> np.ndarray:
+    """One AR(1)-null SURROGATE of `x`: fit `x[t] ≈ a·x[t-1]` (+ residual σ), then simulate a
+    fresh series of the same length with the SAME a and σ. The AR(1) null carries the signal's
+    linear autocorrelation but NO trend in it — so an indicator that TRENDS in `x` but not in
+    the surrogate ensemble is unlikely to be an AR(1)-noise artefact (the `surrogates_ews`
+    false-positive guard)."""
+    x = np.asarray(x, dtype=float).ravel()
+    n = x.size
+    if n < 3:
+        return x.copy()
+    xc = x - x.mean()
+    denom = float(np.dot(xc[:-1], xc[:-1]))
+    a = float(np.dot(xc[:-1], xc[1:]) / denom) if denom > _EPS else 0.0
+    a = float(np.clip(a, -0.999, 0.999))
+    resid = xc[1:] - a * xc[:-1]
+    sd = float(np.std(resid)) or 1e-6
+    s = np.zeros(n)
+    # Match the observed INITIAL CONDITION (s[0] = x[0]−mean) rather than draw from the
+    # stationary distribution: a series that opens far from equilibrium (a burn-in transient)
+    # then produces surrogates with the SAME transient, so the null is FAIR — a burn-in-driven
+    # rising trend appears in the surrogates too and no longer reads as a false CSD forecast.
+    s[0] = xc[0]
+    for t in range(1, n):
+        s[t] = a * s[t - 1] + rng.normal(0, sd)
+    return s + x.mean()
+
+
+def surrogate_pvalue(x: np.ndarray, window: int, indicator: str = "ar1",
+                     n_surr: int = 200, seed: int = 1) -> float:
+    """One-sided surrogate p-value for a RISING indicator trend: the fraction of AR(1)-null
+    surrogates whose indicator Kendall-τ is ≥ the observed τ. A small p ⇒ the rising trend is
+    unlikely under an AR(1) null with the same autocorrelation (the R-keel: detection that
+    survives its own null, sensorium-rhymes #R-is-the-keel). Graceful p=1.0 on a short signal."""
+    x = np.asarray(x, dtype=float).ravel()
+    key = {"ar1": _lag1_ac, "variance": lambda s: float(np.var(s)), "skewness": _skew}[indicator]
+    obs = kendall_tau(_rolling(x, window, key))
+    if _rolling(x, window, key).size < 3:
+        return 1.0
+    rng = np.random.default_rng(seed)
+    ge = 1  # +1 (the observed itself) — a conservative, never-zero p
+    for _ in range(n_surr):
+        sur = ar1_surrogate(x, rng)
+        if kendall_tau(_rolling(sur, window, key)) >= obs:
+            ge += 1
+    return ge / (n_surr + 1)
+
+
+def _ews_R(x: np.ndarray, window: int) -> dict | None:
+    """Route to the R `earlywarnings` sidecar (ews.R → generic_ews + surrogates_ews) when the
+    package is installed. Returns the parsed verdict or None (⇒ the native estimators run).
+    Graceful, exactly like `_ecp_divisive_R` — R / earlywarnings absent is never fatal."""
+    if not _r_available():
+        return None
+    r_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ews.R")
+    if not os.path.exists(r_script):
+        return None
+    req = json.dumps({"op": "generic_ews", "x": np.asarray(x, dtype=float).ravel().tolist(),
+                      "window": int(window)})
+    try:
+        proc = subprocess.run(["Rscript", "--vanilla", r_script], input=req,
+                              capture_output=True, text=True, timeout=180)
+        if proc.returncode != 0:
+            return None
+        line = [l for l in proc.stdout.splitlines() if l.strip().startswith("{")]
+        if not line:
+            return None
+        resp = json.loads(line[-1])
+        return resp if resp.get("ok") else None
+    except Exception:  # noqa: BLE001 — any R fault ⇒ native fallback
+        return None
+
+
+def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
+                 alpha: float = 0.05, min_bands: int = 2, seed: int = 1) -> dict:
+    """The PREDICTIVE bands leg — forecast an approaching bifurcation from critical-slowing-
+    down (sensorium-rhymes #the-predictive-upgrade). Feeds:
+      · the POOLED signal (mean across columns) carries the PRIMARY indicators — rolling
+        lag-1-AC + variance + their Kendall-τ, with an AR(1)-surrogate p-value on each.
+      · the MODWT detail BANDS carry the multi-band agreement guard — each band's rolling-
+        variance Kendall-τ; agreement = how many bands trend UP together.
+
+    THE GUARD (the R keel, LOAD-BEARING): the forecast FIRES only when
+      (1) SURROGATE-significant — the AC1 (or variance) rising trend beats the AR(1) null
+          (p ≤ alpha), AND
+      (2) MULTI-BAND agreement — ≥ `min_bands` MODWT bands show a rising variance-τ.
+    Either alone stays a WATCH, never a fire (a single-band or un-surrogated trend is exactly
+    the apophenia the keel guards against). Returns the full verdict (fired · the per-indicator
+    τ / p · the per-band agreement · the R/native engine)."""
+    M = np.asarray(matrix, dtype=float)
+    if M.ndim == 1:
+        M = M.reshape(-1, 1)
+    n = M.shape[0]
+    win = max(5, min(window, n // 2)) if n >= 10 else 0
+    if n < 12 or win < 5:
+        return {"fired": False, "note": "ews-skipped: too few samples (<12)", "n": n,
+                "r_available": _r_available()}
+    pooled = M.mean(axis=1)
+
+    # PRIMARY indicators — R route when earlywarnings stands, else native.
+    r_out = _ews_R(pooled, win)
+    if r_out is not None:
+        ar1_tau, var_tau = float(r_out.get("ar1_tau", 0.0)), float(r_out.get("var_tau", 0.0))
+        ar1_p = float(r_out.get("ar1_p", 1.0))
+        var_p = float(r_out.get("var_p", 1.0))
+        engine = "earlywarnings-R"
+    else:
+        gews = generic_ews(pooled, win)
+        ar1_tau, var_tau = gews["ar1_tau"], gews["var_tau"]
+        ar1_p = surrogate_pvalue(pooled, win, "ar1", n_surr=n_surr, seed=seed)
+        var_p = surrogate_pvalue(pooled, win, "variance", n_surr=n_surr, seed=seed)
+        engine = "native-ews"
+
+    # MULTI-BAND agreement — each MODWT detail band's rolling-variance trend.
+    mra = modwt_mra(pooled)
+    band_taus = []
+    for j, bname in enumerate(BANDS_FINE_TO_COARSE[: mra.get("levels", 0)]):
+        bsig = np.asarray(mra["bands"][j], dtype=float)
+        bwin = max(5, min(win, bsig.size // 2))
+        vtau = kendall_tau(_rolling(bsig, bwin, lambda s: float(np.var(s)))) if bsig.size >= 12 else 0.0
+        band_taus.append({"band": bname, "var_tau": vtau, "rising": vtau > 0.0})
+    n_rising = sum(1 for b in band_taus if b["rising"])
+
+    # THE FIRE CONDITION — surrogate-significance AND multi-band agreement (both, never one).
+    surrogate_sig = (ar1_p <= alpha) or (var_p <= alpha)
+    multi_band = n_rising >= min_bands
+    fired = bool(surrogate_sig and multi_band)
+    if fired:
+        state = "FORECAST"
+    elif surrogate_sig or multi_band:
+        state = "WATCH"
+    else:
+        state = "QUIET"
+
+    return {
+        "fired": fired,
+        "state": state,
+        "n": n, "window": win,
+        "ar1_tau": ar1_tau, "ar1_p": ar1_p,
+        "var_tau": var_tau, "var_p": var_p,
+        "surrogate_significant": surrogate_sig,
+        "multi_band_agreement": multi_band,
+        "bands_rising": n_rising, "min_bands": min_bands,
+        "band_taus": band_taus,
+        "alpha": alpha, "n_surr": n_surr,
+        "engine": engine,
+        "r_available": _r_available(),
+        "note": (f"critical-slowing-down {state}: AR1-τ {ar1_tau:.2f} (p={ar1_p:.3f}) · "
+                 f"var-τ {var_tau:.2f} (p={var_p:.3f}) · {n_rising} bands rising · engine {engine}"),
+    }
+
+
 # ── the composed stack — signal-matrix → the full bands verdict ───────────────────────────
 
 
@@ -877,6 +1110,17 @@ def cmd_couple(args) -> None:
     sys.stdout.write(json.dumps(out) + "\n")
 
 
+def cmd_forecast(args) -> None:
+    """Run the PREDICTIVE bands leg (early-warning signals) over an NDJSON signal → one JSON
+    verdict: the critical-slowing-down forecast (fired / WATCH / QUIET), the AC1 + variance
+    Kendall-τ with AR(1)-surrogate p-values, and the multi-band agreement. Forecasts the
+    approaching regime-shift BEFORE `analyze`'s ecp changepoint commits."""
+    M = _load_signal(args.signal)
+    out = forecast_ews(M, window=args.window, n_surr=args.nsurr, alpha=args.alpha,
+                       min_bands=args.minbands, seed=args.seed)
+    sys.stdout.write(json.dumps(out) + "\n")
+
+
 def cmd_selftest(args) -> None:
     """A synthetic-signal self-check (no chroma, no fixture file): a fast+slow signal → the
     SPINE separates the scales; a clean vs noisy fixture → the GATE locks vs holds."""
@@ -925,6 +1169,15 @@ def main() -> None:
     c.add_argument("--alpha", type=float, default=0.05, help="significance gate for the edge list")
     c.add_argument("--names", default="", help="comma-separated signal names (else s0,s1,…)")
     c.set_defaults(fn=cmd_couple)
+
+    f = sub.add_parser("forecast", help="early-warning signals → forecast an approaching bifurcation (critical slowing down)")
+    f.add_argument("--signal", required=True, help="NDJSON signal (rows=time), or - for stdin")
+    f.add_argument("--window", type=int, default=50, help="rolling-indicator window")
+    f.add_argument("--nsurr", type=int, default=200, help="AR(1)-surrogate ensemble size")
+    f.add_argument("--alpha", type=float, default=0.05, help="surrogate-significance gate")
+    f.add_argument("--minbands", type=int, default=2, help="min MODWT bands trending up to fire")
+    f.add_argument("--seed", type=int, default=1)
+    f.set_defaults(fn=cmd_forecast)
 
     s = sub.add_parser("selftest", help="synthetic multi-scale self-check (no chroma)")
     s.set_defaults(fn=cmd_selftest)

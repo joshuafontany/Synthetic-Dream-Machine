@@ -311,3 +311,100 @@ def test_r_availability_flag():
     assert out["r_available"] == (shutil.which("Rscript") is not None)
     if not out["r_available"]:
         assert out["tree"]["engine"] in ("ruptures-binseg-rbf", "variance-split")
+
+
+# ── EWS — the PREDICTIVE bands leg (critical-slowing-down forecast) ──────────────────────────
+
+
+def _csd_approach_then_commit(seed=5, T=300, tail=120, jump=6.0):
+    """A fixture that APPROACHES a bifurcation then COMMITS: over [0,T) the AR coefficient ramps
+    0.3→0.97 (critical slowing down — rising lag-1-AC), then at T a mean-shift regime change
+    commits (the jump ecp fires on). Returns (series, T)."""
+    rng = np.random.default_rng(seed)
+    a = np.concatenate([np.linspace(0.3, 0.97, T), np.full(tail, 0.4)])
+    mu = np.concatenate([np.zeros(T), np.full(tail, jump)])
+    x = np.zeros(T + tail)
+    for t in range(1, T + tail):
+        x[t] = mu[t] + a[t] * (x[t - 1] - mu[t - 1]) + rng.normal(0, 0.5)
+    return x, T
+
+
+def test_kendall_tau_trend_direction():
+    """Kendall τ reads a rising series positive, a falling one negative, a flat one ≈ 0."""
+    assert bs.kendall_tau(np.arange(20.0)) == pytest.approx(1.0)
+    assert bs.kendall_tau(-np.arange(20.0)) == pytest.approx(-1.0)
+    assert abs(bs.kendall_tau(np.ones(20))) < 1e-9
+
+
+def test_generic_ews_rising_ac1_on_approach():
+    """The rolling lag-1-AC TRENDS UP as the system approaches the bifurcation (critical
+    slowing down); a stationary AR series shows no such trend."""
+    x, T = _csd_approach_then_commit()
+    g = bs.generic_ews(x[:T], window=50)
+    assert g["ar1_tau"] > 0.3, f"AC1 should rise on the approach, got {g['ar1_tau']}"
+    # a properly-burned-in stationary control does NOT trend up
+    rng = np.random.default_rng(11)
+    z = np.zeros(700)
+    for t in range(1, 700):
+        z[t] = 0.5 * z[t - 1] + rng.normal(0, 0.5)
+    gz = bs.generic_ews(z[300:], window=50)
+    assert gz["ar1_tau"] < 0.3
+
+
+def test_forecast_fires_before_ecp_commits():
+    """THE LOAD-BEARING VERIFY: the EWS leg forecasts the approaching bifurcation from the
+    PRE-transition window (rising lag-1-AC + a SURROGATE-significant Kendall-τ + multi-band
+    agreement) — fired using data BEFORE the transition, while ecp's coarsest committed cut
+    lands AT the transition T. The forecast LEADS the changepoint."""
+    x, T = _csd_approach_then_commit()
+    fc = bs.forecast_ews(x[:T], window=50, n_surr=300, alpha=0.05, min_bands=2, seed=1)
+    assert fc["fired"] is True, f"forecast should fire on the approach, got {fc['note']}"
+    assert fc["ar1_tau"] > 0.0                    # rising lag-1 autocorrelation
+    assert fc["ar1_p"] <= 0.05                    # surrogate-significant (the R keel)
+    assert fc["multi_band_agreement"] is True     # ≥ min_bands MODWT bands trending up
+    # ecp's COMMITTED cut lands at the transition — the forecast (pre-T data) preceded it.
+    full = bs.changepoint_tree(x.reshape(-1, 1), max_cuts=6, min_size=10)
+    assert full["order"], "ecp should find the committed regime shift on the full series"
+    assert abs(full["order"][0] - T) <= 15, f"ecp's coarsest cut should sit at T={T}, got {full['order'][:3]}"
+
+
+def test_forecast_quiet_on_stationary_and_burnin():
+    """The surrogate + multi-band guard refuses to FIRE on a stationary series — AND on a
+    from-equilibrium burn-in transient (the surrogate matches the observed initial condition,
+    so a burn-in-driven rising trend appears in the null too). The anti-apophenia keel."""
+    # proper-stationary AR(0.5)
+    rng = np.random.default_rng(11)
+    z = np.zeros(700)
+    for t in range(1, 700):
+        z[t] = 0.5 * z[t - 1] + rng.normal(0, 0.5)
+    fcz = bs.forecast_ews(z[300:], window=50, n_surr=300, alpha=0.05, seed=1)
+    assert fcz["fired"] is False
+    # a from-zero burn-in transient must NOT fire (the null carries the same transient)
+    rng = np.random.default_rng(7)
+    y = np.zeros(400)
+    for t in range(1, 400):
+        y[t] = 0.3 * y[t - 1] + rng.normal(0, 0.5)
+    fcy = bs.forecast_ews(y, window=50, n_surr=300, alpha=0.05, seed=1)
+    assert fcy["fired"] is False
+
+
+def test_forecast_graceful_and_engine():
+    """Graceful on too-few samples; the native estimators run when earlywarnings-R is absent
+    (the R route is used only when installed — mirrors ecp → ruptures)."""
+    short = bs.forecast_ews(np.arange(6.0), window=50)
+    assert short["fired"] is False and "ews-skipped" in short["note"]
+    x, T = _csd_approach_then_commit()
+    fc = bs.forecast_ews(x[:T], window=50, n_surr=50, seed=1)
+    assert fc["engine"] in ("native-ews", "earlywarnings-R")
+    assert fc["r_available"] == (shutil.which("Rscript") is not None)
+
+
+def test_cli_forecast_stdin():
+    """`forecast --signal -` runs the EWS leg over an NDJSON signal → one JSON verdict."""
+    x, T = _csd_approach_then_commit()
+    lines = "\n".join(json.dumps(float(v)) for v in x[:T])
+    r = _run_cli(["forecast", "--signal", "-", "--window", "50", "--nsurr", "100"], stdin=lines)
+    assert r.returncode == 0, r.stderr
+    verdict = json.loads(r.stdout.strip().splitlines()[-1])
+    assert verdict["fired"] is True
+    assert "ar1_tau" in verdict and "band_taus" in verdict
