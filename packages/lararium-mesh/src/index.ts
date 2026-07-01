@@ -23,6 +23,7 @@ export * from "./branch-frontier.js";
 export * from "./gone-turns.js";
 export * from "./source-adapter.js";
 export * from "./claude-code-adapter.js";
+export * from "./codex-adapter.js";
 export * from "./epoch-lease.js";
 export * from "./device-delegation.js";
 export * from "./oracle-substrate.js";
