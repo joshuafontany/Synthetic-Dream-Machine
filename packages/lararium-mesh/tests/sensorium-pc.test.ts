@@ -16,6 +16,11 @@ import {
   freeEnergy,
   kendallTau,
   forecastEws,
+  vfePrecisionTerm,
+  optimalPrecision,
+  settlePrecision,
+  gaussianKL,
+  temporalKL,
 } from "../src/index.js";
 
 // ── the π ↔ confidence map — precision IS confidence-as-gain ────────────────────────────────
@@ -121,18 +126,96 @@ describe("the free-energy objective", () => {
       },
       { model: "ar1" },
     );
-    expect(fe.F).toBeCloseTo(fe.accuracy + fe.complexity, 9);
+    expect(fe.F).toBeCloseTo(fe.accuracy + fe.precisionPenalty + fe.complexity, 9);
     expect(fe.complexity).toBeGreaterThan(0);
     expect(fe.perPlane.bands.surprise).toBeGreaterThan(fe.perPlane.content.surprise);
+    // FIX 2: the complexity is a REAL KL to a NAMED (temporal predictive) prior, per plane.
+    expect(fe.perPlane.content.priorKind).toBe("temporal");
+    expect(fe.perPlane.bands.priorKind).toBe("temporal");
+    // no vow ⇒ the −ln π penalty is inert (gain 1), so F still closes as accuracy + complexity.
+    expect(fe.precisionPenalty).toBeCloseTo(0, 9);
   });
 
-  test("the FORM plane's complexity accepts the induction MDL bits directly", () => {
+  test("the FORM plane's complexity accepts the induction MDL bits directly (a coding prior)", () => {
     const fe = freeEnergy(
       { content: [1, 2, 1, 2, 1, 2, 1, 2], form: [0, 0, 0, 0] },
       { formComplexityBits: 42.5 },
     );
     expect(fe.perPlane.form.complexity).toBe(42.5);
-    expect(fe.F).toBeCloseTo(fe.accuracy + fe.complexity, 9);
+    expect(fe.perPlane.form.priorKind).toBe("mdl-coding"); // NOT a Gaussian KL — honestly marked
+    expect(fe.perPlane.content.priorKind).toBe("temporal");
+    expect(fe.F).toBeCloseTo(fe.accuracy + fe.precisionPenalty + fe.complexity, 9);
+  });
+
+  test("a top-down VOW lights the −ln π penalty (FIX 1) inside F", () => {
+    const noise = Array.from({ length: 60 }, (_, i) => Math.sin(i) * ((i * 37) % 11));
+    const vowed = freeEnergy({ a: noise }, { confidences: { a: 18 } });
+    // π(18) = 9 > 1 ⇒ −½ ln 9 < 0: an over-confident vow is PENALIZED toward the interior optimum.
+    expect(vowed.precisionPenalty).toBeCloseTo(-0.5 * Math.log(confidenceToPrecision(18)), 9);
+    expect(vowed.precisionPenalty).toBeLessThan(0);
+    expect(vowed.F).toBeCloseTo(vowed.accuracy + vowed.precisionPenalty + vowed.complexity, 9);
+  });
+
+  test("a plane may be marked approx-prior (coupling — the ki cosheaf side is aspirational)", () => {
+    const fe = freeEnergy(
+      { content: [1, 2, 1, 2, 1, 2, 1, 2], coupling: [0, 1, 0, 1, 0, 1, 0, 1] },
+      { approxPriorPlanes: ["coupling"] },
+    );
+    expect(fe.perPlane.coupling.priorKind).toBe("temporal-approx");
+    expect(fe.perPlane.content.priorKind).toBe("temporal");
+  });
+});
+
+// ── FIX 1: the −ln π penalty gives precision an INTERIOR optimum (no runaway) ─────────────────
+
+describe("the −ln π precision penalty (FIX 1, #crucible-tested)", () => {
+  test("vfePrecisionTerm is convex with a unique interior minimum at π* = 1/ε̄²", () => {
+    const m = 0.25; // mean squared error ⇒ optimum at 1/m = 4
+    expect(optimalPrecision(m)).toBeCloseTo(4, 9);
+    const star = vfePrecisionTerm(4, m);
+    // the argmin is a true trough: neighbours on BOTH sides carry higher free energy
+    expect(vfePrecisionTerm(2, m)).toBeGreaterThan(star);
+    expect(vfePrecisionTerm(8, m)).toBeGreaterThan(star);
+    // convex: the midpoint value sits below the chord (Jensen)
+    const chord = 0.5 * (vfePrecisionTerm(2, m) + vfePrecisionTerm(8, m));
+    expect(vfePrecisionTerm(5, m)).toBeLessThan(chord);
+  });
+
+  test("WITHOUT −ln π precision runs away; WITH it the flow SETTLES at the interior optimum", () => {
+    const m = 0.25;
+    // with the penalty: gradient flow converges and STOPS at π* = 1/m = 4, from either side
+    const fromLow = settlePrecision(m, { init: 0.1 });
+    const fromHigh = settlePrecision(m, { init: 100 });
+    expect(fromLow.settled).toBe(true);
+    expect(fromHigh.settled).toBe(true);
+    expect(fromLow.precision).toBeCloseTo(4, 4);
+    expect(fromHigh.precision).toBeCloseTo(4, 4);
+    // drop the penalty: the gradient is the constant ½·ε̄² > 0 — never zero, the flow slides to the
+    // π→0 floor and NEVER settles at an interior point (the runaway the −ln π cures).
+    const naive = settlePrecision(m, { init: 4, withLogPrecision: false });
+    expect(naive.settled).toBe(false);
+    expect(naive.precision).toBeLessThan(1e-6); // ran to the boundary, no interior optimum
+    expect(Math.abs(naive.grad)).toBeGreaterThan(1e-3); // gradient never vanished
+  });
+});
+
+// ── FIX 2: complexity is a REAL KL[q(x)‖p(x)] to a named prior ────────────────────────────────
+
+describe("the KL complexity to a named prior (FIX 2, #crucible-tested)", () => {
+  test("gaussianKL is zero for identical laws and positive otherwise", () => {
+    expect(gaussianKL(0, 1, 0, 1)).toBeCloseTo(0, 12);
+    expect(gaussianKL(2, 1, 0, 1)).toBeCloseTo(2, 9); // pure mean shift ⇒ (Δμ)²/2 = 2
+    expect(gaussianKL(0, 1, 0, 4)).toBeGreaterThan(0);
+  });
+
+  test("temporalKL prices belief-MOVEMENT: a still belief costs 0, a moving one costs > 0", () => {
+    expect(temporalKL([3, 3, 3, 3], 1)).toBeCloseTo(0, 12); // the prior never had to move
+    expect(temporalKL([0, 1, 2, 3], 1)).toBeGreaterThan(0); // each frame updates the prior
+  });
+
+  test("a plane that never moves its belief carries ~zero KL complexity", () => {
+    const flat = freeEnergy({ a: [5, 5, 5, 5, 5, 5, 5, 5] });
+    expect(flat.perPlane.a.complexity).toBeCloseTo(0, 6);
   });
 });
 
