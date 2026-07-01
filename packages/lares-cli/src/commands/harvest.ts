@@ -29,7 +29,7 @@ import { execFileSync, execSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { basename, dirname, join } from "node:path";
-import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, type TurnNode } from "@lararium/mesh";
+import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
@@ -646,18 +646,21 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     bands: { canon: 0, synthesis: 0, provisional: 0, raw: 0 }, indexPath,
   };
 
-  // The live snapshot for rewind detection: scope (session + agentId) → the turn-keys this run saw.
-  // Diffed against the index-by-scope below to find GONE (rewound) turns.
-  const currentByScope = new Map<string, Set<string>>();
+  // The records this run saw, per scope (session + agentId), keyed for the CURRENT-BRANCH rewind
+  // reconstruction. A flat "every record" snapshot misses every rewind — the fork-family orphans the
+  // rewound tail in-file, so it stays physically present. liveKeysForRewind (below) walks parentUuid to
+  // the live leaf and drops the genuine rewind-orphans, so the tail reads gone. Collected here, folded
+  // into currentByScope after the loop.
+  const recordsByScope = new Map<string, KeyedBranchNode[]>();
   for (const file of files) {
     for (const turn of readTurns(file)) {
       summary.turns += 1;
       const key = turnKeyOf(file, turn);
       const hash = sha(turn.text);
       const scope = rewindScope(turn.session, turn.agentId);
-      let live = currentByScope.get(scope);
-      if (!live) { live = new Set<string>(); currentByScope.set(scope, live); }
-      live.add(key);
+      let recs = recordsByScope.get(scope);
+      if (!recs) { recs = []; recordsByScope.set(scope, recs); }
+      recs.push({ uuid: turn.uuid, parentUuid: turn.parentUuid, isSidechain: turn.sidechain, type: turn.role, key });
       // Skip if the watermark OR the durable index already carries this turn at this content hash.
       if (state[key] === hash || indexHashes.get(key) === hash) { summary.skipped += 1; continue; }
 
@@ -685,6 +688,11 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   if (!dryRun) {
     try { atomicWriteFileSync(statePath, JSON.stringify(nextState)); } catch { /* best effort */ }
   }
+
+  // Fold each scope's records to its CURRENT-BRANCH live keys (orphans + sidechains excluded), the
+  // snapshot the rewind diff reads. The prior index minus these live keys = the rewound tail.
+  const currentByScope = new Map<string, Set<string>>();
+  for (const [scope, recs] of recordsByScope) currentByScope.set(scope, liveKeysForRewind(recs));
 
   // REWIND DETECTION (kapae) — the index is append-only with no gone-turn reconciliation. For each
   // session present in THIS run, a turn the index still holds but the live transcript no longer carries
