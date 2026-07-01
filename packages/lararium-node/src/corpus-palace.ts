@@ -18,7 +18,7 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn, resolveBandsSidecarSpawn, resolveComputeCapEnv, resolveFormInductionSpawn } from "@lararium/mempalace";
@@ -290,12 +290,18 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
   const id = newCorpusId();
   const dir = corpusInstanceDir(id);
   mkdirSync(dir, { recursive: true });
+  // Resolve the source to an ABSOLUTE path before ANY ingest leg runs: the structure · bands · form
+  // sidecars run with `cwd: submoduleRoot` (the mempalace dir), so a relative sourcePath (the common
+  // CLI form, `packages/foo`) would resolve against the WRONG cwd and the router would walk nothing
+  // (0 structures → form-skips). The content mine inherits the process cwd and survived by luck; this
+  // makes every leg agree on one absolute source (and records it durably in the manifest).
+  const sourcePath = resolve(opts.sourcePath);
   const name = opts.name ?? (opts.sourcePath.replace(/[/\\]+$/, "").split(/[/\\]/).pop() || id);
   const ephemeral = opts.ephemeral ?? false;
   const ingest = opts.ingest ?? defaultCorpusIngest;
-  const { drawers, structures, bands, forms, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
+  const { drawers, structures, bands, forms, note } = ingest({ sourcePath, palaceDir: dir });
   const manifest: CorpusManifest = {
-    id, name, sourcePath: opts.sourcePath, createdAt: new Date().toISOString(),
+    id, name, sourcePath, createdAt: new Date().toISOString(),
     ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, bands, forms, note,
   };
   writeManifest(dir, manifest);
