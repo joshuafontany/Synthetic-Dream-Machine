@@ -57,17 +57,53 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "for a partial/interrupted re-pave. Enumerates the SAME organ registry `lares wake --init` stands " +
       "up (mempalace · astpalace · formpalace · meshpalace), PLUS the harvest watermark/stage and every " +
       "`.corpus/*` scratch. PREVIEW by default (touches no disk); `--confirm` removes; REFUSES under a " +
-      "live MCP/mine unless `--force`.",
+      "live daemon/MCP/mine (naming each blocker + its SPAWNER) unless `--drain` (graceful quiesce-then-" +
+      "tear) or `--force`.",
     examples: [
-      "lares palace-teardown                   # preview what would be removed",
-      "lares palace-teardown --confirm         # remove it",
-      "lares palace-teardown --confirm --force # remove even under a live MCP",
+      "lares palace-teardown                    # preview what would be removed",
+      "lares palace-teardown --confirm --drain  # quiesce live daemons, then remove (graceful)",
+      "lares palace-teardown --confirm          # remove (REFUSES + names blockers if live)",
+      "lares palace-teardown --confirm --force  # remove even under a live daemon",
     ],
     flags: [
       "--confirm   actually remove (default is a no-disk preview)",
-      "--force     remove even when a live mempalace process holds the store",
+      "--drain     gracefully quiesce live daemons (pause hooks + drain) BEFORE tearing",
+      "--force     remove even when a live palace process holds the store / mints daemons",
     ],
-    next: ["lares harvest --all   # re-pave after the nuke"],
+    next: ["lares mempalace status   # inspect the topology first", "lares harvest --all   # re-pave after the nuke"],
+  },
+
+  mempalace: {
+    synopsis:
+      "Observe + gracefully drain the palace daemon/hook/capture topology (alias `lares palace`). The cure " +
+      "for the daemon-spawn whack-a-mole: warm write-daemons spawn ON-DEMAND and the capture/ingest hooks " +
+      "mint one on every dispatch, so killing the children never stops the SPAWNER. `status` surfaces the " +
+      "whole topology (each row: PID · serves-what · SPAWNER · uptime); `quiesce` pauses the hooks FIRST " +
+      "then SIGTERM-drains the daemons to zero (idempotent); `resume` un-pauses.",
+    examples: [
+      "lares mempalace status              # the live daemon/hook/capture topology + spawners",
+      "lares mempalace quiesce             # pause hooks → drain daemons → confirm zero, then un-pause",
+      "lares mempalace quiesce --hold      # ... but leave the hooks paused (for a migration)",
+      "lares mempalace resume              # un-pause the hooks (daemon re-spawns lazily)",
+    ],
+    flags: ["--hold   (quiesce) leave the hooks paused after draining (run `resume` when done)"],
+    next: ["lares palace-teardown --confirm --drain   # graceful tear", "lares hooks status"],
+  },
+
+  hooks: {
+    synopsis:
+      "The hook-lever on its own: `pause` / `resume` / `status` the capture + ingest hooks by writing / " +
+      "removing a marker file the hook scripts check and NO-OP on when present. Lets a migration or a " +
+      "`lares palace-teardown` run WITHOUT daemon-spawn contention. `lares mempalace quiesce` pauses AND " +
+      "drains in one gesture; this verb is the lever alone (suppress minting without touching live daemons).",
+    examples: [
+      "lares hooks status                 # is minting paused?",
+      "lares hooks pause                  # suppress capture/ingest minting",
+      "lares hooks pause --reason migrate # ... with a recorded reason",
+      "lares hooks resume                 # un-pause",
+    ],
+    flags: ["--reason <t>   (pause) record why the hooks were paused (default: manual)"],
+    next: ["lares mempalace status", "lares mempalace quiesce   # pause AND drain"],
   },
 
   status: {

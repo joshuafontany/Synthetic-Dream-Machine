@@ -11,6 +11,7 @@
     "prebuild": "node ../../tools/clean-output.mjs dist",
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsx src/bin/lares.ts",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "@lararium/tw5": "workspace:*"
   },
   "devDependencies": {
-    "tsx": "^4.19.0"
+    "tsx": "^4.19.0",
+    "vitest": "^3.2.0"
   }
 }

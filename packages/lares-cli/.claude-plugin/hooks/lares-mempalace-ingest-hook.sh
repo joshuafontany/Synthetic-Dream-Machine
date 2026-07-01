@@ -19,6 +19,19 @@
 # Detached so the hook returns instantly. Fires from Stop + SessionEnd/PreCompact.
 set -uo pipefail
 
+# ── The hook-lever (spawn-contention guard) ──────────────────────────────────
+# `lares hooks pause` / `lares mempalace quiesce` writes a marker; while it exists
+# this hook NO-OPS so a migration/teardown runs without minting warm write-daemons
+# (the daemon-spawn whack-a-mole cure — kill the SPAWNER, not the children). The
+# marker path mirrors larStateHome() in TS: LAR_ROOT/state (isolated) else the XDG
+# state home. `lares hooks resume` removes it. Keep this BEFORE any daemon-minting.
+if [ -n "${LAR_ROOT:-}" ]; then
+  _lares_state="$LAR_ROOT/state"
+else
+  _lares_state="${XDG_STATE_HOME:-$HOME/.local/state}/lares"
+fi
+[ -f "$_lares_state/hooks.paused" ] && exit 0
+
 input="$(cat)"
 # Harness-aware: Claude Code + Codex Stop hooks deliver `transcript_path` on stdin;
 # Copilot CLI sessionEnd delivers `sessionId` only — its conversation lives in the
