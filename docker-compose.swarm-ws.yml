@@ -1,0 +1,71 @@
+# docker-compose.swarm-ws.yml — the DEPLOYED swarm over LIVE-WS (the strangler-fig swap).
+# Same vessels, same ceremony as docker-compose.swarm.yml — but the membership channel is
+# now a live WebSocket RELAY container the vessels dial, NOT a shared volume. The seam made
+# the swap a one-env change (LAR_SWARM_RELAY instead of LAR_SWARM_DIR).
+#
+#   relay    (relay-node)  a dumb broadcast membership relay on :8090
+#   founder  dials ws://relay:8090, founds + admits, writes roster.json (bind-mounted out)
+#   vessel-b / vessel-c    dial ws://relay:8090, offer card → await admit
+#
+# Run:     rm -rf .swarm-run && docker compose -f docker-compose.swarm-ws.yml up -d
+# Witness: cat .swarm-run/roster.json (→ {"count":2,...}) + founder logs "roster=2/2"
+# Down:    docker compose -f docker-compose.swarm-ws.yml down -v
+
+name: dreamnet-swarm-ws
+
+x-vessel: &vessel
+  image: node:24-slim
+  working_dir: /app
+  volumes:
+    - ".:/app"
+  networks: [swarm]
+  restart: "no"
+  command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/swarm-node.ts"]
+
+services:
+  relay:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    networks: [swarm]
+    restart: "no"
+    environment:
+      LAR_RELAY_PORT: "8090"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/relay-node.ts"]
+
+  founder:
+    <<: *vessel
+    volumes:
+      - ".:/app"
+      - "./.swarm-run:/swarm"          # roster.json output only — the CHANNEL is WS
+    environment:
+      LAR_SWARM_ROLE:   "founder"
+      LAR_SWARM_RELAY:  "ws://relay:8090"
+      LAR_SWARM_DIR:    "/swarm"
+      LAR_SWARM_ID:     "founder"
+      LAR_SWARM_SEED:   "f0"
+      LAR_SWARM_EXPECT: "2"
+    depends_on: [relay]
+
+  vessel-b:
+    <<: *vessel
+    environment:
+      LAR_SWARM_ROLE:  "joiner"
+      LAR_SWARM_RELAY: "ws://relay:8090"
+      LAR_SWARM_ID:    "vessel-B"
+      LAR_SWARM_SEED:  "b0"
+    depends_on: [relay]
+
+  vessel-c:
+    <<: *vessel
+    environment:
+      LAR_SWARM_ROLE:  "joiner"
+      LAR_SWARM_RELAY: "ws://relay:8090"
+      LAR_SWARM_ID:    "vessel-C"
+      LAR_SWARM_SEED:  "c0"
+    depends_on: [relay]
+
+networks:
+  swarm:
+    driver: bridge

@@ -40,7 +40,13 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 const b64 = (u: Uint8Array): string => Buffer.from(u).toString("base64");
 
 async function openChannel(): Promise<MembershipChannel> {
-  if (RELAY) { const ws = new WSMembershipChannel(RELAY); await ws.opened(); return ws; }
+  if (RELAY) {
+    // Retry the dial — the relay container may not be listening yet at startup.
+    for (let attempt = 0; ; attempt++) {
+      try { const ws = new WSMembershipChannel(RELAY); await ws.opened(); return ws; }
+      catch (e) { if (attempt >= 30) throw e; await sleep(1000); }
+    }
+  }
   if (!DIR) throw new Error("LAR_SWARM_DIR or LAR_SWARM_RELAY required");
   return new FileMembershipChannel(join(DIR, "channel"));
 }
