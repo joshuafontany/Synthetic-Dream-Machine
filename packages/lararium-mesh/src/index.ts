@@ -108,4 +108,5 @@ export * from "./fork-place.js";
 export * from "./veil-crossing.js";
 export * from "./veil-vouch.js";
 export * from "./veil-ladder.js";
+export * from "./immune-read.js";
 export * from "./membership-channel.js";
