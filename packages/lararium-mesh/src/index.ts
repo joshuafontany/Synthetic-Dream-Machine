@@ -28,6 +28,7 @@ export * from "./copilot-cli-adapter.js";
 export * from "./copilot-chat-adapter.js";
 export * from "./stream-adapter.js";
 export * from "./text-stream-adapter.js";
+export * from "./sensorium-pc.js";
 export * from "./epoch-lease.js";
 export * from "./device-delegation.js";
 export * from "./oracle-substrate.js";
