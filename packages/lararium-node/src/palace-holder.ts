@@ -27,6 +27,7 @@
 import { spawn } from "node:child_process";
 import { realpathSync } from "node:fs";
 import { resolve } from "node:path";
+import { resolveComputeCapEnv } from "@lararium/mempalace";
 
 /** A child process plus the read-only stream surface the line-RPC needs (test-injectable). */
 export interface PalaceHolderProc {
@@ -67,7 +68,11 @@ export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn): PalaceHo
     // PYTHONPATH=submoduleRoot makes `import mempalace` resolve (it is not pip-installed); the venv
     // python supplies chromadb. `python script.py` sets sys.path[0] to the SCRIPT dir, so PYTHONPATH
     // is the seam that reaches the submodule package.
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+    // The GPU compute cap (LD_LIBRARY_PATH → CUDA runtime libs + the device hint): the `serve` holder
+    // opens its chroma collection, which builds the default onnxruntime embedder — and onnxruntime-gpu
+    // HARD-fails to import (`libcudart.so.NN`) without the CUDA libs on the loader path. resolveComputeCapEnv
+    // walks torch's bundled nvidia wheels; absent (the QA box) it adds only the device hint and degrades to CPU.
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
     return spawn(python, [script, "serve", "--palace", canonicalDir], {
       cwd: submoduleRoot,
       env,

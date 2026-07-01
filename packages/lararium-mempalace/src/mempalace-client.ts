@@ -9,6 +9,7 @@
  */
 
 import { spawn, type ChildProcess } from "node:child_process";
+import { resolveComputeCapEnv } from "./compute-cap.js";
 
 export interface MempalaceClientOptions {
   /** <repo>/mempalace — the spawn cwd so `python -m mempalace.mcp_server` resolves the package. */
@@ -175,8 +176,14 @@ export class MempalaceClient {
   async start(): Promise<void> {
     const command = this.commandOverride ?? this.python;
     const args = this.argsOverride ?? this.defaultArgs();
+    // + the GPU compute cap on the DURABLE recall read path: the sidecar opens its chroma collection
+    // (default onnxruntime embedder) on boot, which HARD-fails to import onnxruntime-gpu without the
+    // CUDA runtime libs on LD_LIBRARY_PATH. resolveComputeCapEnv threads them (torch's bundled nvidia
+    // wheels) + the device hint; absent (the QA box) the embedder degrades to CPU on its own. When the
+    // spawn is overridden for tests, the cap probes the override command harmlessly (bad path ⇒ []).
     const proc = spawn(command, args, {
       cwd: this.submoduleRoot,
+      env: { ...process.env, ...resolveComputeCapEnv(command) },
       stdio: ["pipe", "pipe", "pipe"],
     });
     this.proc = proc;

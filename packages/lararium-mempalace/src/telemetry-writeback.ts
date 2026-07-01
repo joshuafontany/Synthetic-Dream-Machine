@@ -26,6 +26,7 @@ import { harvestTurnGradient, buildPatch, LAR_HV, type TurnHarvest } from "@lara
 export { buildPatch, LAR_HV };
 import { repoRoot } from "@lararium/mesh/node";
 import { resolveMempalacePython } from "./spawn-resolve.js";
+import { resolveComputeCapEnv } from "./compute-cap.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
 
@@ -61,7 +62,10 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   // SCRIPT dir (not cwd), so cwd alone can't find it — PYTHONPATH=submoduleRoot makes
   // `import mempalace` resolve, while the venv python supplies chromadb/sqlite.
   const submoduleRoot = join(repoRoot, "mempalace");
-  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+  // + the GPU compute cap: drawer_io opens a chroma collection (default onnxruntime embedder), which
+  // HARD-fails to import onnxruntime-gpu without the CUDA runtime libs on LD_LIBRARY_PATH. Cap absent
+  // (the QA box) ⇒ only the device hint rides and the embedder degrades to CPU. (Restart-safety P0.)
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(PY) };
   const limit = opts.limit ?? 0;
   const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
   // drawer_io export had NO timeout — the confirmed 9 h-stuck source. The servo bounds it: an
@@ -124,7 +128,7 @@ export function stampKapaeSalience(verbatimShas: readonly string[]): { stamped: 
   const DRAWER_IO = resolveDrawerIo();
   if (!existsSync(DRAWER_IO)) return null;
   const submoduleRoot = join(repoRoot, "mempalace");
-  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(PY) };
   const pf = join(tmpdir(), `lar-kapae-salience-${process.pid}-${Date.now()}.ndjson`);
   writeFileSync(pf, verbatimShas.map((s) => JSON.stringify({ verbatim_sha: s })).join("\n") + "\n");
   try {
