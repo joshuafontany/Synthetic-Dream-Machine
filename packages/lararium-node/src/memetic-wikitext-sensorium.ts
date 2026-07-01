@@ -87,6 +87,16 @@ export interface Stratum {
   readonly muOp?: MuOp;
   /** the sigil HEAD word (e.g. "confidence", "ward", "lares") — the association's typed-relation label. */
   readonly head: string;
+  /** the scanner's canonical sigil name (e.g. "ahu", "control-stx", "(generic)") — drives frame detection. */
+  readonly sigilName: string;
+  /**
+   * a FRAMING boundary, not a steering register (`ahu` open/close · the `control-*` phase sigils). A frame
+   * stratum BOUNDS blocks; it never spreads a register onto prose. Red steering is DOMAIN-LOCAL between
+   * frames (the No-Crossing Constraint) — a steer that would reach past a frame FLOATS + DOCKS instead.
+   */
+  readonly frame: boolean;
+  /** the verbatim island text — the OCP identity key + standoff self-description. */
+  readonly raw: string;
   /** the span axis — the aperture band of this stratum's OWN byte-range. */
   readonly band: FfzBand;
   /** the content-address of the source this stratum indexes into (pins the table to its text). */
@@ -124,6 +134,19 @@ export interface AssociationEdge {
   /** the spread direction — rightward (marker-leads, default) or leftward (fallback). */
   readonly direction: SpreadDirection;
   readonly crossBand: boolean;
+  /**
+   * FLOAT + DOCK — the NCC cure (crucible-F2; Coleman & Local). The steer's nearest anchor lies PAST a
+   * framing boundary; rather than spread-across (asserting A≺B ∧ A∘B at once — incoherent), the red
+   * autosegment FLOATS out of its block and RE-DOCKS at the next block's boundary anchor. A licensed
+   * hand-off, never a spread. `false` = an ordinary domain-local spread.
+   */
+  readonly floatDock: boolean;
+  /**
+   * DEFAULT-FILL — the WFC repair (Goldsmith Proposal 4 / Harmonic Phonology). This edge was ADDED to
+   * satisfy the Well-Formedness Condition: an unmarked prose anchor default-fills the ambient register by
+   * spreading the nearest in-domain steer onto it (never a rejection). `false` = a primary read edge.
+   */
+  readonly defaultFill: boolean;
 }
 
 /** The full stratification of one memetic-wikitext source — the LI (pattern) face of the reader. */
@@ -151,20 +174,32 @@ export function sigilHead(raw: string): string {
   return m ? m[1]! : "(sigil)";
 }
 
+/** One red island — a scanned `<<~…>>` range with its scanner-canonical name (drives frame detection). */
+interface Island { start: number; end: number; raw: string; sigilName: string; }
+
 /** Merge event spans into DISJOINT red islands (position-dedup can still leave overlaps; we normalize). */
-function disjointIslands(spans: Array<{ start: number; end: number; raw: string }>): Array<{ start: number; end: number; raw: string }> {
+function disjointIslands(spans: Island[]): Island[] {
   const sorted = [...spans].sort((a, b) => a.start - b.start || b.end - a.end);
-  const out: Array<{ start: number; end: number; raw: string }> = [];
+  const out: Island[] = [];
   for (const s of sorted) {
     const last = out[out.length - 1];
     if (last && s.start < last.end) {
-      // overlap — extend the island, keep the widest raw (the outer construct steers)
-      if (s.end > last.end) { last.end = s.end; }
+      // overlap — extend the island, keep the widest raw + name (the outer construct steers/bounds)
+      if (s.end > last.end) { last.end = s.end; last.raw = s.raw; last.sigilName = s.sigilName; }
       continue;
     }
-    out.push({ start: s.start, end: s.end, raw: s.raw });
+    out.push({ ...s });
   }
   return out;
+}
+
+/**
+ * A FRAMING boundary — a structural block delimiter, never a steering register. The `ahu` scope sockets
+ * (open/close) and the `control-*` phase sigils (SOH/STX/ETX/EOT) bound blocks; the red steering register
+ * is DOMAIN-LOCAL between them (the No-Crossing Constraint). Everything else is a steer (red/base).
+ */
+export function isFrameSigil(sigilName: string): boolean {
+  return sigilName === "ahu" || sigilName.startsWith("control-");
 }
 
 /**
@@ -180,7 +215,7 @@ function disjointIslands(spans: Array<{ start: number; end: number; raw: string 
  */
 export function stratify(text: string, sourceCid: string = sourceCidOf(text)): Stratification {
   const events = collectEvents(text);
-  const islands = disjointIslands(events.map((e) => ({ start: e.pos, end: e.end, raw: e.raw })));
+  const islands = disjointIslands(events.map((e) => ({ start: e.pos, end: e.end, raw: e.raw, sigilName: e.sigilName })));
 
   const strata: Stratum[] = [];
   const skeletal: SkeletalAnchor[] = [];
@@ -197,11 +232,15 @@ export function stratify(text: string, sourceCid: string = sourceCidOf(text)): S
     pushAnchor(cursor, isl.start);
     const len = isl.end - isl.start;
     const muOp = detectMuOp(isl.raw);
+    const frame = isFrameSigil(isl.sigilName);
     strata.push({
       span: [isl.start, isl.end],
       channel: muOp ? "base" : "red",
       ...(muOp ? { muOp } : {}),
       head: sigilHead(isl.raw),
+      sigilName: isl.sigilName,
+      frame,
+      raw: isl.raw,
       band: bandForSpanLength(len),
       sourceCid,
     });
@@ -212,9 +251,14 @@ export function stratify(text: string, sourceCid: string = sourceCidOf(text)): S
   // Autosegmental association (typed, unit-anchored): a control sigil SEEDS FORWARD, so each stratum
   // spreads RIGHTWARD onto the prose it governs — the nearest anchor starting on/after the stratum's end.
   // Where none exists (a trailing/closing sigil), it docks LEFTWARD onto the nearest preceding anchor.
+  //
+  // FRAME strata never steer — they BOUND (no association). And a rightward reach that would cross a
+  // framing boundary is the NCC breach (Coleman & Local): rather than spread-across, the autosegment
+  // FLOATS + DOCKS at the next block's boundary anchor (a licensed hand-off), marked `floatDock`.
   const associations: AssociationEdge[] = [];
   for (let si = 0; si < strata.length; si++) {
     const s = strata[si]!;
+    if (s.frame) continue;   // framing boundaries bound blocks; they do not spread a register
     let anchorIdx = -1;
     let direction: SpreadDirection = "rightward";
     // preferred (marker-leads): the nearest anchor starting on/after this stratum's end
@@ -230,10 +274,159 @@ export function stratify(text: string, sourceCid: string = sourceCidOf(text)): S
     }
     if (anchorIdx === -1) continue;   // a source that is ALL sigil, no prose — no association
     const anchor = skeletal[anchorIdx]!;
-    associations.push({ stratum: si, anchor: anchorIdx, relation: s.head, direction, crossBand: s.band !== anchor.band });
+    // NCC: does a framing boundary lie STRICTLY between this steer and its rightward anchor? Then the
+    // reach is not a spread — it is a FLOAT + DOCK across the boundary (a licensed hand-off).
+    const floatDock = direction === "rightward" && strata.some(
+      (b) => b.frame && b.span[0] >= s.span[1] && b.span[0] < anchor.span[0],
+    );
+    associations.push({
+      stratum: si, anchor: anchorIdx, relation: s.head, direction,
+      crossBand: s.band !== anchor.band, floatDock, defaultFill: false,
+    });
   }
 
   return { sourceCid, skeletal, strata, associations };
+}
+
+/** Does a framing boundary sit STRICTLY inside the byte range [lo, hi)? (NCC domain-locality test.) */
+function frameBetween(strata: readonly Stratum[], lo: number, hi: number): boolean {
+  return strata.some((b) => b.frame && b.span[0] >= lo && b.span[0] < hi);
+}
+
+/**
+ * WFC MINIMAL-REPAIR — never reject an under-associated parse; REPAIR it (Goldsmith Proposal 4 /
+ * Harmonic Phonology; the graceful-parsing doctrine — augment, don't break). Each prose anchor left
+ * unmarked by {@link stratify} (no steer reached it) DEFAULT-FILLS the ambient register: the nearest
+ * IN-DOMAIN steer spreads onto it (preferring the register already in force to the left — Goldsmith's
+ * Association Convention — else spreading leftward from the following steer). A frame boundary blocks the
+ * spread (NCC domain-locality). An anchor with no steer in either domain stays well-formed as pure black
+ * default (the ambient IS black; no float). Added edges carry `defaultFill: true`.
+ */
+export function repairWellFormedness(strat: Stratification): Stratification {
+  const marked = new Set<number>(strat.associations.map((a) => a.anchor));
+  const added: AssociationEdge[] = [];
+  for (let ai = 0; ai < strat.skeletal.length; ai++) {
+    if (marked.has(ai)) continue;
+    const anchor = strat.skeletal[ai]!;
+    // in-force register (left): nearest preceding steer, no frame boundary between it and the anchor
+    let sIdx = -1;
+    let direction: SpreadDirection = "rightward";
+    for (let si = strat.strata.length - 1; si >= 0; si--) {
+      const s = strat.strata[si]!;
+      if (s.frame || s.span[1] > anchor.span[0]) continue;
+      if (!frameBetween(strat.strata, s.span[1], anchor.span[0])) { sIdx = si; break; }
+    }
+    // fallback (right): nearest following steer spreads leftward, no frame boundary between
+    if (sIdx === -1) {
+      direction = "leftward";
+      for (let si = 0; si < strat.strata.length; si++) {
+        const s = strat.strata[si]!;
+        if (s.frame || s.span[0] < anchor.span[1]) continue;
+        if (!frameBetween(strat.strata, anchor.span[1], s.span[0])) { sIdx = si; break; }
+      }
+    }
+    if (sIdx === -1) continue;   // no in-domain steer — pure black default, well-formed, no float
+    const s = strat.strata[sIdx]!;
+    added.push({
+      stratum: sIdx, anchor: ai, relation: s.head, direction,
+      crossBand: s.band !== anchor.band, floatDock: false, defaultFill: true,
+    });
+  }
+  return { ...strat, associations: [...strat.associations, ...added] };
+}
+
+/** The verdict of the B&E finite-state validity check — well-formed ⟺ non-empty tier intersection. */
+export interface TierIntersection {
+  /** well-formed ⟺ the synchronized product of the per-tier automata is NON-EMPTY. */
+  readonly valid: boolean;
+  /** why the intersection is empty (the tier that could not synchronize), when `valid === false`. */
+  readonly reason?: string;
+}
+
+/**
+ * B&E FST-INTERSECTION VALIDITY (Bird & Ellison 1994) — the stratified parse is the synchronized
+ * INTERSECTION product of the per-tier automata, and it is well-formed IFF that intersection is
+ * NON-EMPTY. A decidable finite-state check over the tiers:
+ *
+ *  1. the SKELETAL tier automaton accepts a strictly-ordered, non-overlapping anchor sequence;
+ *  2. the STRATA tier automaton accepts a strictly-ordered, non-overlapping stratum sequence;
+ *  3. the ASSOCIATION product synchronizes them PLANARLY — two association lines may not cross (the
+ *     No-Crossing Constraint). Ranks are the span-ordered indices, so lines i,j cross IFF
+ *     `sign(sᵢ−sⱼ)·sign(aᵢ−aⱼ) < 0` — an inversion of the stratum order against the anchor order.
+ *
+ * Any tier that rejects ⇒ the product is empty ⇒ ill-formed. A parse from {@link stratify} synchronizes
+ * (planar by construction); a hand-crossed association graph does not (the honest rejection).
+ */
+export function intersectTiers(strat: Stratification): TierIntersection {
+  for (let i = 1; i < strat.skeletal.length; i++) {
+    if (strat.skeletal[i]!.span[0] < strat.skeletal[i - 1]!.span[1]) {
+      return { valid: false, reason: "skeletal tier automaton rejects — overlapping/mis-ordered anchors" };
+    }
+  }
+  for (let i = 1; i < strat.strata.length; i++) {
+    if (strat.strata[i]!.span[0] < strat.strata[i - 1]!.span[1]) {
+      return { valid: false, reason: "strata tier automaton rejects — overlapping/mis-ordered strata" };
+    }
+  }
+  const e = strat.associations;
+  for (let i = 0; i < e.length; i++) {
+    for (let j = i + 1; j < e.length; j++) {
+      const ds = Math.sign(e[i]!.stratum - e[j]!.stratum);
+      const da = Math.sign(e[i]!.anchor - e[j]!.anchor);
+      if (ds * da < 0) {
+        return { valid: false, reason: "association product empty — crossing lines (No-Crossing Constraint)" };
+      }
+    }
+  }
+  return { valid: true };
+}
+
+/**
+ * OCP NORMALIZATION (the Obligatory Contour Principle) — two ADJACENT IDENTICAL red autosegments on the
+ * strata tier collapse to one (e.g. two identical `<<~ confidence Synthesis 12/20 >>` in a row). Adjacent =
+ * consecutive strata with NO prose anchor between them (whitespace only); identical = same channel, same
+ * Mu operator, same normalized sigil text. Frames never collapse (they bound, not steer). The merged
+ * stratum spans both, its band re-derives from the merged length, and associations re-point (deduped) —
+ * free canonicalization, no information lost that the contour did not already duplicate.
+ */
+export function normalizeOcp(strat: Stratification): Stratification {
+  const norm = (r: string): string => r.replace(/\s+/g, " ").trim();
+  const anchorBetween = (lo: number, hi: number): boolean =>
+    lo < hi && strat.skeletal.some((a) => a.span[0] >= lo && a.span[0] < hi);
+
+  const out: Array<{ s: Stratum; span: [number, number] }> = [];
+  const remap: number[] = new Array(strat.strata.length).fill(-1);
+  for (let i = 0; i < strat.strata.length; i++) {
+    const cur = strat.strata[i]!;
+    const last = out[out.length - 1];
+    const identical =
+      !!last && !last.s.frame && !cur.frame &&
+      last.s.channel === cur.channel && last.s.muOp === cur.muOp &&
+      norm(last.s.raw) === norm(cur.raw);
+    if (last && identical && !anchorBetween(last.span[1], cur.span[0])) {
+      last.span = [last.span[0], Math.max(last.span[1], cur.span[1])];   // collapse the contour
+      remap[i] = out.length - 1;
+      continue;
+    }
+    remap[i] = out.length;
+    out.push({ s: cur, span: [cur.span[0], cur.span[1]] });
+  }
+
+  const strata: Stratum[] = out.map((o) => ({
+    ...o.s, span: [o.span[0], o.span[1]] as Span, band: bandForSpanLength(o.span[1] - o.span[0]),
+  }));
+
+  const seen = new Set<string>();
+  const associations: AssociationEdge[] = [];
+  for (const a of strat.associations) {
+    const ns = remap[a.stratum]!;
+    if (ns < 0) continue;
+    const key = `${ns}:${a.anchor}:${a.relation}:${a.direction}:${a.defaultFill}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    associations.push({ ...a, stratum: ns });
+  }
+  return { sourceCid: strat.sourceCid, skeletal: strat.skeletal, strata, associations };
 }
 
 // ── the tree-sitter injection config (documents disjoint-partition ≅ injection) ────────────────────
