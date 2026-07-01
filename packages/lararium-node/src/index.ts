@@ -89,6 +89,8 @@ export { PalaceHolder, PalaceHolderRegistry, canonicalDirOf } from "./palace-hol
 export type { PalaceHolderProc, PalaceHolderSpawn, PalaceFeedCap } from "./palace-holder.js";
 export { makeAstPalace } from "./astpalace.js";
 export type { AstPalace, AstEntry, AstProvenance, HolderSpawn } from "./astpalace.js";
+export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
+export type { MembershipRelay } from "./ws-membership-channel.js";
 export { makeFormPalace } from "./formpalace.js";
 export type {
   FormPalace, FormPalaceOptions, FormHolderSpawn, FormMetadata, FormStoreResult,
