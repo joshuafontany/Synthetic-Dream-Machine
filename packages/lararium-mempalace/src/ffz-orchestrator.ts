@@ -65,7 +65,7 @@ import {
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 
-import { resolveMempalacePython, resolveAstPalaceIo } from "./spawn-resolve.js";
+import { resolveMempalacePython, resolveAstPalaceSpawn } from "./spawn-resolve.js";
 import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
@@ -617,11 +617,9 @@ export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly 
  * wing-scoped). A missing/empty astpalace yields no rows ⇒ the structure plane never engages.
  */
 export function pythonStructureEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
-  const PY = resolveMempalacePython();
+  const { python: PY, script: ASTPALACE_IO, scriptPresent, submoduleRoot } = resolveAstPalaceSpawn();
   if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
-  const ASTPALACE_IO = resolveAstPalaceIo();
-  if (!existsSync(ASTPALACE_IO)) throw new TelemetryUnavailable(`astpalace_io.py missing at ${ASTPALACE_IO}`);
-  const submoduleRoot = join(repoRoot, "mempalace");
+  if (!scriptPresent) throw new TelemetryUnavailable(`astpalace_io.py missing at ${ASTPALACE_IO}`);
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
   const out = mineWithServo("astpalace-io-structure-embeddings", (timeoutMs) =>
     execFileSync(PY, [ASTPALACE_IO, "structure-embeddings"], {
