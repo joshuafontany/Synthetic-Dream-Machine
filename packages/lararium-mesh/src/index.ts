@@ -126,4 +126,5 @@ export * from "./cmi-significance.js";
 export * from "./signed-innovation.js";
 export * from "./mesh-couple.js";
 export * from "./change-point.js";
+export * from "./windowed-coupling.js";
 export * from "./membership-channel.js";
