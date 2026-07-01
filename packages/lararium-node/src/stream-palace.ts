@@ -27,7 +27,7 @@ import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { resolveBandsSidecarSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
-import { composePalace, type PalaceComposition, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
+import { composePalace, freeEnergy, forecastEws, type PalaceComposition, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
 import { defaultCorpusIngest, type CorpusIngest } from "./corpus-palace.js";
 
 // ── the frame-native signal door — bands + coupling over a raw numeric stream (NDJSON) ────────────
@@ -142,5 +142,31 @@ export function composeStreamPalace<Raw>(opts: ComposeStreamOptions<Raw>): Palac
 
   // DIRECT-SIGNAL / LIVE / custom-sink ⇒ the per-plane frame driver (the numeric door + documented
   // live seam for content/structure).
-  return composePalace(adapter, source, opts.sink ?? defaultStreamPlaneSink(palaceDir));
+  const comp = composePalace(adapter, source, opts.sink ?? defaultStreamPlaneSink(palaceDir));
+  return attachPredictiveRead(comp, adapter.ingest(source));
+}
+
+/**
+ * Attach the sensorium's PREDICTIVE read to a numeric-door composition — the free-energy
+ * objective F = Σ π·ε² + complexity and the critical-slowing-down forecast — computed NATIVELY
+ * in-process via the {@link freeEnergy} / {@link forecastEws} core (no extra sidecar spawn, the
+ * dependency-light hot path). Graceful: a stream with no direct `signal` (text) returns the
+ * composition unchanged (the predictive read lives on the numeric door; text's derived-bands
+ * read rides the corpus run). sensorium-rhymes.md #the-predictive-upgrade.
+ */
+function attachPredictiveRead(comp: PalaceComposition, frames: readonly StreamFrame[]): PalaceComposition {
+  const rows = frames.map((f) => Array.from(f.signal)).filter((r) => r.length > 0);
+  if (rows.length < 3) return comp; // no direct signal (or too short) ⇒ leave the composition as-is
+  // per-COLUMN planes (each signal channel a plane) → the multi-plane free energy F.
+  const width = rows.reduce((w, r) => Math.max(w, r.length), 0);
+  const planes: Record<string, number[]> = {};
+  for (let j = 0; j < width; j++) planes[`signal${j}`] = rows.map((r) => r[j] ?? 0);
+  const fe = freeEnergy(planes, { model: "ar1" });
+  const fc = forecastEws(rows, {});
+  return {
+    ...comp,
+    freeEnergy: { F: fe.F, accuracy: fe.accuracy, complexity: fe.complexity },
+    forecast: { fired: fc.fired, state: fc.state, ar1Tau: fc.ar1Tau, ar1P: fc.ar1P, note: fc.note },
+    note: `${comp.note} · F=${fe.F.toFixed(2)} · ${fc.note}`,
+  };
 }

@@ -129,6 +129,21 @@ export interface PalaceComposition {
   readonly bandsDerived: boolean;
   /** A human-readable provenance line. */
   readonly note: string;
+  /**
+   * The PREDICTIVE read (sensorium-rhymes.md #the-predictive-upgrade), attached over a numeric
+   * stream by the wiring (stream-palace) using the native {@link freeEnergy} / {@link forecastEws}
+   * core — absent when the modality carries no direct `signal` (a text corpus). The sensorium's
+   * per-frame objective F = Σ π·ε² + complexity, exposed here at the composition level.
+   */
+  readonly freeEnergy?: { readonly F: number; readonly accuracy: number; readonly complexity: number };
+  /** The critical-slowing-down forecast over the stream's signal (the EWS-predictive bands leg). */
+  readonly forecast?: {
+    readonly fired: boolean;
+    readonly state: "FORECAST" | "WATCH" | "QUIET";
+    readonly ar1Tau: number;
+    readonly ar1P: number;
+    readonly note: string;
+  };
 }
 
 // ── The shared CORE — route frames' populated slots to the planes ────────────────────────────────

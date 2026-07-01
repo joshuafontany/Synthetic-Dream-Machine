@@ -66,6 +66,30 @@ describe("composeStreamPalace — the direct-signal / custom-sink frame driver",
     expect(out.bandsDerived).toBe(false);
   });
 
+  test("a numeric stream attaches the PREDICTIVE read (F = Σπε² + complexity + the CSD forecast)", () => {
+    // an AR series whose coefficient ramps toward 1 (critical slowing down — rising lag-1-AC)
+    let s = 5 >>> 0;
+    const u = () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 0xffffffff; };
+    const norm = () => Math.sqrt(-2 * Math.log(Math.max(u(), 1e-12))) * Math.cos(2 * Math.PI * u());
+    const x: number[] = [0];
+    for (let t = 1; t < 360; t++) x.push((0.2 + 0.75 * (t / 360)) * x[t - 1]! + 0.5 * norm());
+    const rows = x.map((v) => [v]); // a univariate numeric stream
+    const oneCol: StreamAdapter<number[][]> = {
+      modality: "sensor", mode: "live",
+      ingest: (rs) => rs.map((r, i): StreamFrame => ({ seq: i, signal: r })),
+    };
+    const sink: PlaneSink = { bands: (f) => f.length };
+    const out = composeStreamPalace({ adapter: oneCol, source: rows, palaceDir: dir, sink });
+    // F = Σ π·ε² + complexity, computed and EXPOSED on the composition
+    expect(out.freeEnergy).toBeDefined();
+    expect(out.freeEnergy!.F).toBeCloseTo(out.freeEnergy!.accuracy + out.freeEnergy!.complexity, 6);
+    expect(out.freeEnergy!.complexity).toBeGreaterThan(0);
+    // the critical-slowing-down forecast fires on the approaching bifurcation
+    expect(out.forecast).toBeDefined();
+    expect(out.forecast!.fired).toBe(true);
+    expect(out.note).toContain("F=");
+  });
+
   test("an explicit sink forces the frame driver even for a batch path adapter", () => {
     const sink: PlaneSink = { content: (f) => f.length };
     const out = composeStreamPalace({
