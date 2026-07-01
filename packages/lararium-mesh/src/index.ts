@@ -99,4 +99,5 @@ export * from "./cabal-place.js";
 export * from "./cabal-place-charter.js";
 export * from "./cabal-place-clock.js";
 export * from "./me-circle.js";
+export * from "./fork-place.js";
 export * from "./membership-channel.js";
