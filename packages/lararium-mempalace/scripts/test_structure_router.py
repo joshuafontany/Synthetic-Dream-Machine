@@ -172,6 +172,34 @@ def test_prose_stanza_tier_yields_constituency_spans():
     assert {"ROOT", "S", "NP", "VP"} & labels  # constituency labels, not dependency/segment
 
 
+# ── the compute-device cap — composed when present, never required (both scales) ──────────
+
+
+def test_device_cap_is_composed_not_required():
+    """The compute device is a CAP the entity #has, never a dependency: `cuda` on a card,
+    `cpu` on the QA-lab box. An env override forces the hand; absent one it resolves from
+    torch. Either resolution is a valid standing — the SAME router runs at both scales."""
+    assert sr._device_cap() in ("cpu", "cuda")
+    prev = os.environ.get("STRUCTURE_ROUTER_DEVICE")
+    try:
+        os.environ["STRUCTURE_ROUTER_DEVICE"] = "cpu"  # simulate the card-less QA box
+        assert sr._device_cap() == "cpu"
+    finally:
+        if prev is None:
+            os.environ.pop("STRUCTURE_ROUTER_DEVICE", None)
+        else:
+            os.environ["STRUCTURE_ROUTER_DEVICE"] = prev
+
+
+def test_prose_stands_with_the_gpu_cap_ABSENT(monkeypatch):
+    """Force the device-cap OFF (the QA-lab scale) and confirm prose STILL yields a tree —
+    stanza-on-cpu, or the spaCy/segment tiers below it. Cap-absent never means parse-absent."""
+    monkeypatch.setenv("STRUCTURE_ROUTER_DEVICE", "cpu")
+    tree = sr.parse_prose("The fox runs. The dog sleeps soundly through the long afternoon.")
+    assert tree["type"] == "source_file"
+    assert _count(tree) > 3
+
+
 # ── encoder fidelity: the router's trees are COSINE-MEANINGFUL ────────────────────────────
 
 

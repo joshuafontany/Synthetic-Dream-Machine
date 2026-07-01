@@ -276,6 +276,24 @@ _stanza_nlp = None
 _stanza_tried = False
 
 
+def _device_cap() -> str:
+    """The COMPUTE-DEVICE cap this box #has — resolved, never ambient. `cuda` when a torch
+    GPU stands (this box), else `cpu` (e.g. the QA-lab lararium, a separate box with no card).
+    An env override (STRUCTURE_ROUTER_DEVICE / MEMPALACE_EMBEDDING_DEVICE) forces the hand.
+    The GPU is a CAP the entity composes when present — NEVER a dependency; the SAME nameless
+    router stands at both scales, the cap resolving high on the card, low on the CPU."""
+    forced = (os.environ.get("STRUCTURE_ROUTER_DEVICE")
+              or os.environ.get("MEMPALACE_EMBEDDING_DEVICE") or "auto").strip().lower()
+    if forced in ("cpu", "cuda"):
+        return forced
+    try:
+        import torch
+
+        return "cuda" if torch.cuda.is_available() else "cpu"
+    except Exception:  # noqa: BLE001 — no torch ⇒ CPU (stanza would not import either)
+        return "cpu"
+
+
 def _prose_stanza(text: str) -> dict | None:
     """Tier 1: stanza constituency parse (Stanford NLP — maintained, PyTorch, modern-torch
     clean). The nested phrase SPANS `(ROOT (S (NP …) (VP …)))` are exactly the form-induction
@@ -283,19 +301,26 @@ def _prose_stanza(text: str) -> dict | None:
     which is dead against transformers ≥5 (T5Tokenizer API drift). Content-free: a phrase /
     POS LABEL rides each node, never the word. On any failure ⇒ None (spaCy tier takes over).
 
-    The English constituency model auto-downloads once into ~/stanza_resources on first use
+    The compute device rides {@link _device_cap} — the GPU is a CAP, not a dependency: on a
+    card it lands `cuda`, on the QA box it lands `cpu`, the SAME tier standing either way. The
+    English constituency model auto-downloads once into ~/stanza_resources on first use
     (matching how spaCy/nltk models bootstrap); thereafter it reuses the local copy."""
     global _stanza_nlp, _stanza_tried
     if _stanza_tried and _stanza_nlp is None:
         return None
     if _stanza_nlp is None:
         _stanza_tried = True
+        device = _device_cap()
         try:
             import stanza
 
+            # use_gpu gates the cap explicitly; stanza still self-checks torch.cuda, so a
+            # cap:cuda that fails to place falls to CPU inside stanza rather than crashing.
             _stanza_nlp = stanza.Pipeline(
                 "en", processors="tokenize,pos,constituency", verbose=False,
+                use_gpu=(device == "cuda"),
             )
+            sys.stderr.write(f"structure_router: stanza constituency on device-cap '{device}'\n")
         except Exception as exc:  # noqa: BLE001 — stanza / its model absent ⇒ spaCy tier
             sys.stderr.write(f"structure_router: stanza unavailable ({type(exc).__name__}) — spaCy tier\n")
             _stanza_nlp = None
