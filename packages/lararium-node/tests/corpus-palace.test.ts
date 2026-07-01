@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   runCorpus, openCorpus, listCorpora, listOrphans, reapOrphans,
-  dissolveCorpus, keepCorpus, type CorpusIngest, type CorpusSearch,
+  dissolveCorpus, keepCorpus, corpusStructureDir, type CorpusIngest, type CorpusSearch,
 } from "../src/corpus-palace.js";
 import { larCorpusDir, corpusInstanceDir } from "../src/vessel-paths.js";
 
@@ -18,7 +18,7 @@ let savedRoot: string | undefined;
 let src: string;
 
 /** A no-python ingest stub — the lifecycle tests never touch the sidecar. */
-const fakeIngest: CorpusIngest = () => ({ drawers: 3, note: "fake-ingest" });
+const fakeIngest: CorpusIngest = () => ({ drawers: 3, structures: 2, note: "fake-ingest" });
 
 beforeEach(() => {
   savedRoot = process.env["LAR_ROOT"];
@@ -38,6 +38,7 @@ describe("runCorpus — the `--rm` ephemeral default", () => {
     const res = await runCorpus({ sourcePath: src, ingest: fakeIngest });
     expect(res.dissolved).toBe(true);
     expect(res.drawers).toBe(3);
+    expect(res.structures).toBe(2); // the S2 structure-plane count threads through
     expect(existsSync(corpusInstanceDir(res.id))).toBe(false);
     expect(listCorpora()).toHaveLength(0);
   });
@@ -118,5 +119,43 @@ describe("orphan reaping", () => {
     expect(listOrphans()).not.toContain(corpusInstanceDir(live.id));
     expect(reapOrphans()).not.toContain(corpusInstanceDir(live.id));
     expect(existsSync(corpusInstanceDir(live.id))).toBe(true);
+  });
+});
+
+describe("the S2 structure plane — the parse-router seam", () => {
+  test("a router-less ingest GRACEFULLY structure-skips (content plane unaffected)", async () => {
+    // a seam that mimics a host with no python/router: drawers filed, 0 structures, skip note.
+    const skipIngest: CorpusIngest = () => ({ drawers: 1, structures: 0, note: "mined → 1 drawers · structure-skipped: no router/python" });
+    const res = await runCorpus({ sourcePath: src, ingest: skipIngest });
+    expect(res.structures).toBe(0);
+    expect(res.drawers).toBe(1);
+    expect(res.note).toContain("structure-skipped");
+    expect(res.dissolved).toBe(true);
+  });
+
+  test("the structure sub-palace lives UNDER the corpus dir (swept on dissolve)", () => {
+    // a seam that writes a marker into the structure dir, proving corpusStructureDir nests it.
+    const writingIngest: CorpusIngest = ({ palaceDir }) => {
+      const sdir = corpusStructureDir(palaceDir);
+      mkdirSync(sdir, { recursive: true });
+      writeFileSync(join(sdir, "chroma.sqlite3"), "x");
+      return { drawers: 0, structures: 1, note: "structure: 1 vectors (0 skipped)" };
+    };
+    const { id, dir } = openCorpus({ sourcePath: src, ingest: writingIngest });
+    expect(existsSync(corpusStructureDir(dir))).toBe(true);
+    dissolveCorpus(id);
+    expect(existsSync(corpusStructureDir(dir))).toBe(false); // swept with the instance dir
+  });
+
+  // Opt-in end-to-end: the REAL defaultCorpusIngest over a code/markdown dir, exercised through the
+  // public openCorpus seam. Skips unless RUN_CORPUS_E2E=1 (it needs the venv python + tree-sitter +
+  // chroma). When it runs, it proves `corpus run`-shaped ingest produces structure vectors.
+  const e2e = process.env["RUN_CORPUS_E2E"] === "1" ? test : test.skip;
+  e2e("defaultCorpusIngest's structure leg files vectors over real source", () => {
+    writeFileSync(join(src, "x.js"), "function f(n){ if(n>0){return n*2;} return 0; }\n");
+    const out = openCorpus({ sourcePath: src }); // default ingest → real python structure router
+    expect(out.manifest.structures ?? 0).toBeGreaterThan(0);
+    expect(existsSync(corpusStructureDir(out.dir))).toBe(true);
+    dissolveCorpus(out.id);
   });
 });

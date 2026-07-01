@@ -1,0 +1,69 @@
+==================
+a bare sharktooth sigil
+==================
+
+<<~ confidence Synthesis 12/20 >>
+
+---
+
+(source_file
+  (sharktooth_sigil
+    (sigil_name)
+    (arg)
+    (arg)))
+
+==================
+the turn frame — a sigil row
+==================
+
+<<~ lares aim lar:///operator.intent.lands -> lar:///council.options.cuts >>
+<<~ hud Aperture(11) OODA-HA(9) >>
+<<~ ward * L-Prime >>
+
+---
+
+(source_file
+  (sharktooth_sigil (sigil_name) (arg) (arg) (arg) (arg))
+  (sharktooth_sigil (sigil_name) (arg) (arg))
+  (sharktooth_sigil (sigil_name) (arg) (arg)))
+
+==================
+an ahu block nests inner sigils
+==================
+
+<<~ ahu #entry >>
+prose under the section
+<<~ confidence Canon 18/20 >>
+<<~/ahu >>
+
+---
+
+(source_file
+  (ahu_block
+    (sigil_name)
+    (text)
+    (sharktooth_sigil (sigil_name) (arg) (arg))))
+
+==================
+the pranala-header edge
+==================
+
+<<~ ? -> lar:///ha.ka.ba/@lares/api/lares/corpus >>
+
+---
+
+(source_file
+  (pranala_header
+    (sigil_name)))
+
+==================
+a pranala edge sigil
+==================
+
+<<~ pranala #link operator.intent.lands -> council.options.cuts >>
+
+---
+
+(source_file
+  (pranala
+    (sigil_name)))

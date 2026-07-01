@@ -21,7 +21,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { resolveMempalaceSpawn, MempalaceClient } from "@lararium/mempalace";
+import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn } from "@lararium/mempalace";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { larCorpusDir, corpusInstanceDir } from "./vessel-paths.js";
 
@@ -42,6 +42,10 @@ export interface CorpusManifest {
   readonly pid?: number;
   /** drawers filed by the ingest stub (0 when the sidecar was unavailable). */
   readonly drawers?: number;
+  /** structure-plane vectors filed by the parse-router (S2): one per file the router could parse
+   *  (code · markdown · wikitext · json · toml · memetic-wikitext · prose). 0 ⇒ structure-skipped
+   *  (no router / no parser for the corpus's kinds) — the content plane still stands. */
+  readonly structures?: number;
   /** an ingest note (e.g. "ingest-skipped: no python sidecar"). */
   readonly note?: string;
 }
@@ -99,30 +103,63 @@ export function listCorpora(): CorpusManifest[] {
 
 // ── the ingest seam (THIN for S0; the deep bands/structure/form caps land S1–S3) ──────────────────
 
-/** The pluggable ingest leg — chunk + content-embed the source into the scratch palace dir. */
-export type CorpusIngest = (args: { sourcePath: string; palaceDir: string }) => { drawers: number; note: string };
+/** The pluggable ingest leg — chunk + content-embed the source into the scratch palace dir, and
+ *  (S2) push each file through the structure parse-router into a structure plane under the dir. */
+export type CorpusIngest = (args: { sourcePath: string; palaceDir: string }) => { drawers: number; structures: number; note: string };
+
+/** The structure plane lives in a chroma sub-palace under the corpus instance dir — so a
+ *  `dissolve` (rmSync of the instance dir) sweeps it too; no separate teardown registration. */
+export function corpusStructureDir(palaceDir: string): string {
+  return join(palaceDir, "structure");
+}
 
 /**
- * The default ingest stub: a best-effort `mempalace mine <path> --palace <scratch>` (the existing
- * drawer path), parsing the "Drawers filed: N" tally. GRACEFUL by construction — a missing python
- * sidecar / a mine fault never sinks the run; the corpus stays a live (if empty) store and the note
- * records why. The deep analysis (bands · structure · form) is the documented S1–S3 seam.
+ * The STRUCTURE leg (S2): run `structure_router.py ingest` to parse each source file (tree-sitter
+ * for code/markdown/wikitext/json/toml · the sigil parser for memetic-wikitext · a constituency
+ * tier for prose) → the astpalace content-free encoder → a structure chroma-palace under the corpus
+ * dir. GRACEFUL: no router / no python / a kind with no parser ⇒ `structures:0` (structure-skipped),
+ * the content plane unaffected. Returns the structure-vector count + a note fragment.
+ */
+function runStructureRouter(sourcePath: string, palaceDir: string): { structures: number; note: string } {
+  const { python, script, submoduleRoot, scriptPresent } = resolveStructureRouterSpawn();
+  if (!python || !scriptPresent) return { structures: 0, note: "structure-skipped: no router/python" };
+  try {
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+    const out = execFileSync(python, [script, "ingest", "--path", sourcePath, "--palace", corpusStructureDir(palaceDir)], {
+      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
+    });
+    // The router prints a one-line JSON summary; the last JSON line is authoritative.
+    const lastLine = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{")).pop() ?? "{}";
+    const summary = JSON.parse(lastLine) as { structures?: number; parsed?: number; skipped?: number };
+    const structures = Number(summary.structures ?? 0);
+    return { structures, note: `structure: ${structures} vectors (${summary.skipped ?? 0} skipped)` };
+  } catch (e) {
+    return { structures: 0, note: `structure-skipped: router fault (${(e as Error).message.slice(0, 100)})` };
+  }
+}
+
+/**
+ * The default ingest leg: a best-effort `mempalace mine <path> --palace <scratch>` (the CONTENT
+ * plane, parsing the "Drawers filed: N" tally) PLUS the S2 structure parse-router (the STRUCTURE
+ * plane). GRACEFUL by construction — a missing python sidecar / a mine fault / no parser never
+ * sinks the run; the corpus stays a live store and the note records why. The bands · form caps are
+ * the documented S1 · S3 seam.
  */
 export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, palaceDir }) => {
   const { python, sidecarPresent } = resolveMempalaceSpawn();
-  if (!python || !sidecarPresent) return { drawers: 0, note: "ingest-skipped: no python sidecar (lares wake --install)" };
-  if (!existsSync(sourcePath)) return { drawers: 0, note: `ingest-skipped: source absent (${sourcePath})` };
+  if (!python || !sidecarPresent) return { drawers: 0, structures: 0, note: "ingest-skipped: no python sidecar (lares wake --install)" };
+  if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, note: `ingest-skipped: source absent (${sourcePath})` };
+  // STRUCTURE plane (S2) — independent of the content mine; runs even if the mine faults.
+  const struct = runStructureRouter(sourcePath, palaceDir);
   try {
     const exe = process.platform === "win32" ? "mempalace.exe" : "mempalace";
-    // `--mode projects` is the code/docs miner (the thin S0 stub); the bands/structure/form caps
-    // refine this into the deep analysis in S1–S3.
     const out = execFileSync(exe, ["--palace", palaceDir, "mine", sourcePath, "--mode", "projects"], {
       maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
     });
     const drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
-    return { drawers, note: `mined ${sourcePath} → ${drawers} drawers` };
+    return { drawers, structures: struct.structures, note: `mined ${sourcePath} → ${drawers} drawers · ${struct.note}` };
   } catch (e) {
-    return { drawers: 0, note: `ingest-skipped: mine fault (${(e as Error).message.slice(0, 120)})` };
+    return { drawers: 0, structures: struct.structures, note: `ingest-skipped: mine fault (${(e as Error).message.slice(0, 120)}) · ${struct.note}` };
   }
 };
 
@@ -149,10 +186,10 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
   const name = opts.name ?? (opts.sourcePath.replace(/[/\\]+$/, "").split(/[/\\]/).pop() || id);
   const ephemeral = opts.ephemeral ?? false;
   const ingest = opts.ingest ?? defaultCorpusIngest;
-  const { drawers, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
+  const { drawers, structures, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
   const manifest: CorpusManifest = {
     id, name, sourcePath: opts.sourcePath, createdAt: new Date().toISOString(),
-    ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, note,
+    ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, note,
   };
   writeManifest(dir, manifest);
   return { id, dir, manifest };
@@ -261,6 +298,8 @@ export interface RunCorpusOptions extends Omit<OpenCorpusOptions, "ephemeral"> {
 export interface RunCorpusResult {
   readonly id: string;
   readonly drawers: number;
+  /** structure-plane vectors the parse-router filed (S2); 0 ⇒ structure-skipped. */
+  readonly structures: number;
   readonly note?: string;
   readonly analysis?: QueryCorpusResult;
   /** true ⇒ dissolved on exit (the --rm default); false ⇒ kept (landed durable). */
@@ -294,9 +333,9 @@ export async function runCorpus(opts: RunCorpusOptions): Promise<RunCorpusResult
     if (opts.keep) {
       keepCorpus(id);
       dissolved = false;
-      return { id, drawers: manifest.drawers ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
+      return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
     }
-    return { id, drawers: manifest.drawers ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: true };
+    return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: true };
   } finally {
     if (!opts.keep) { dissolveCorpus(id); dissolved = true; }
     process.removeListener("exit", guard);

@@ -97,3 +97,27 @@ export function resolveFormEncoderSpawn(): FormEncoderSpawn {
   const script = resolveFormEncoderIo();
   return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
 }
+
+/** Locate `structure_router.py` — CODE at the repo root. The corpus STRUCTURE-plane parse
+ *  router: `parse(kind, bytes) -> tree` → the astpalace encoder → a structure chroma-palace
+ *  (corpus.md #the-caps). A batch sidecar (not a serve holder), invoked once per corpus ingest. */
+export function resolveStructureRouterIo(): string {
+  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "structure_router.py");
+}
+
+/** What the corpus ingest needs to run the structure router: the venv-aware python, the
+ *  helper script, and the submoduleRoot (PYTHONPATH so the router's `import astpalace_io` /
+ *  `import mempalace` resolve). Mirrors {@link resolveAstPalaceSpawn}. */
+export interface StructureRouterSpawn {
+  readonly python: string | null;
+  readonly script: string;
+  readonly submoduleRoot: string;
+  readonly scriptPresent: boolean;
+}
+
+/** Resolve everything the structure router needs (mirrors {@link resolveAstPalaceSpawn}). */
+export function resolveStructureRouterSpawn(): StructureRouterSpawn {
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const script = resolveStructureRouterIo();
+  return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
+}

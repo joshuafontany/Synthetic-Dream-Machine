@@ -29,8 +29,8 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "The ephemeral astral MULTIPALACE — scratch mempalace instances (the `docker run --rm` of memory). " +
       "`run` is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit (success OR error). `open` " +
       "leaves a corpus live to `query` / `keep` / `dissolve`. Every scratch is leak-proofed: " +
-      "`dissolve --orphans` reaps anything an interrupted run left behind. (S0 ingest is a thin stub; " +
-      "the bands/structure/form analysis lands in S1–S3.)",
+      "`dissolve --orphans` reaps anything an interrupted run left behind. (S0 stands the content " +
+      "stub; S2 wires the structure parse-router → content-free shape vectors; bands/form land in S1/S3.)",
     examples: [
       "lares corpus run ./notes -- what decisions were made   # open, analyze, dissolve",
       "lares corpus run ./notes --keep                        # ... but land it durable",
