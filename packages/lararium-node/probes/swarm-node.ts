@@ -25,6 +25,7 @@ import { KeyhiveProvider, InMemoryEventStore, foundCabalPlace, joinCabalPlace, c
 import { MEMBERSHIP_BROADCAST, type MembershipChannel } from "@lararium/mesh";
 import { FileMembershipChannel } from "../src/file-membership-channel.js";
 import { WSMembershipChannel } from "../src/ws-membership-channel.js";
+import { loadVesselSigningSeed, generateOrLoadVesselIdentity } from "../src/node-vessel-identity.js";
 
 const envOf = (k: string, d = ""): string => process.env[k] ?? d;
 const ROLE = envOf("LAR_SWARM_ROLE", "joiner");
@@ -34,7 +35,20 @@ const ID = envOf("LAR_SWARM_ID", ROLE);
 const SEED = Number.parseInt(envOf("LAR_SWARM_SEED", "01"), 16) & 0xff;
 const EXPECT = Number.parseInt(envOf("LAR_SWARM_EXPECT", "2"), 10);
 const PLACE_URI = envOf("LAR_SWARM_PLACE", "lar:///crossroads.cabal.gathers/docker-swarm");
+const ROOT = envOf("LAR_SWARM_ROOT");   // a founded .lararium dataDir → use its REAL identity (else a test key)
 const TRANSPORT = RELAY ? `ws ${RELAY}` : `file ${DIR}`;
+
+/** This vessel's seed: its REAL founded identity (loadVesselSigningSeed) when LAR_SWARM_ROOT
+ *  points at a `lares init`-founded dataDir; a deterministic test byte otherwise. */
+async function loadSeed(): Promise<Uint8Array> {
+  if (ROOT) {
+    await generateOrLoadVesselIdentity(ROOT);   // mint this vessel's identity if absent (idempotent, = lares init's mint)
+    const seed = await loadVesselSigningSeed(ROOT);
+    console.log(`[swarm-node] using FOUNDED vessel identity from ${ROOT}`);
+    return seed;
+  }
+  return new Uint8Array(32).fill(SEED);
+}
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 const b64 = (u: Uint8Array): string => Buffer.from(u).toString("base64");
@@ -102,7 +116,7 @@ async function runJoiner(channel: MembershipChannel, provider: KeyhiveProvider):
 async function main(): Promise<void> {
   const channel = await openChannel();
   const provider = new KeyhiveProvider();
-  await provider.init({ seed: new Uint8Array(32).fill(SEED), eventStore: new InMemoryEventStore() });
+  await provider.init({ seed: await loadSeed(), eventStore: new InMemoryEventStore() });
   if (ROLE === "founder") await runFounder(channel, provider);
   else await runJoiner(channel, provider);
   if (channel instanceof WSMembershipChannel) channel.close();
