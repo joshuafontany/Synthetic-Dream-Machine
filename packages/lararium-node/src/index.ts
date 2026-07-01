@@ -35,6 +35,19 @@ export type {
   ConsistencyOptions, StalkMetric, KiCoConsistency,
 } from "./sensorium-consistency.js";
 
+// The COHOMOLOGICAL GATE — the SECOND invariant beyond the H⁰ consistency-radius. H¹ = ker(δ¹)/im(δ⁰)
+// over the agreement nerve tells apart the EPISTEMIC no-global-now (H¹=0, reconcilable → FUSE via
+// Chebyshev sheaf-Laplacian diffusion toward H₀) from the ONTOLOGICAL one (H¹≠0, a genuine cocycle →
+// HOLD-OPEN, routed to Talk-Story, never averaged). Cost R*_sem = log₂ dim H¹ (Thomas–Chen).
+export {
+  cohomologyObstruction, agreementNerve, reconciliationCost, fuse,
+  denseHeatReference, chebyshevHeatDiffuse, kernelConsensus, coObservationOrder,
+} from "./sensorium-fusion.js";
+export type {
+  SheafAssignment, NerveSimplex, AgreementNerve, CohomologyOptions, CohomologyObstruction,
+  DiffusionOptions, FusedPseudosection, FuseResult, FuseOptions,
+} from "./sensorium-fusion.js";
+
 // The memetic-wikitext SENSORIUM — the concrete neither-top, co-located-peers instance: the reader
 // (island-scan → standoff strata + skeletal tier + typed association graph, TWO axes span×channel), the
 // fractal FFZ-aligned coupler (stratum red↔black ≅ corpus formal↔informal through the mesh keel's
