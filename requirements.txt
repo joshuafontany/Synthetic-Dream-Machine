@@ -21,3 +21,14 @@ tree-sitter-wikitext
 stanza>=1.10
 spacy>=3.8
 nltk
+
+# --- OPTIONAL GPU compute cap (this box #has it; the QA-lab box does not) ---
+# A card is a CAP the box composes, never a dependency. On a GPU box install onnxruntime-gpu
+# (the mempalace[gpu] extra) — the content embedder (all-MiniLM / embeddinggemma, ONNX) then
+# runs on CUDA. onnxruntime-gpu HARD-requires the CUDA runtime libs on LD_LIBRARY_PATH; torch's
+# nvidia-*-cu13 wheels already ship them, and @lararium/mempalace's resolveComputeCapEnv detects
+# + injects that path per-spawn (stanza/torch self-load via torch). A card-less box installs the
+# plain CPU `onnxruntime` instead and rides CPU — the SAME sidecars, the cap resolved-not-ambient.
+# smoke-tested here: RTX 2070 Super, CUDA 13.2 driver, onnxruntime-gpu 1.27 → CUDAExecutionProvider.
+#   GPU box:  onnxruntime-gpu>=1.27   (+ set MEMPALACE_EMBEDDING_DEVICE=auto)
+#   QA  box:  onnxruntime             (CPU; no lib path needed)
