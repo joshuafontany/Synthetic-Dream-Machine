@@ -2,3 +2,22 @@
 pytest
 pytest-cov
 chromadb
+
+# --- lares-corpus STRUCTURE-plane parse router (S2) — additive, venv-only ---
+# The router (packages/lararium-mempalace/scripts/structure_router.py) routes each corpus
+# kind to a tree the astpalace encoder walks. tree-sitter 0.25+ (0.26 is current — verified
+# working with the individual grammar wheels; NOT tree-sitter-languages / -language-pack,
+# whose bundled binaries mismatch the modern ABI).
+tree-sitter>=0.25
+tree-sitter-javascript
+tree-sitter-json
+tree-sitter-markdown
+tree-sitter-toml
+tree-sitter-wikitext
+# Prose fallback: stanza constituency (Stanford, maintained, modern-torch clean) is the live
+# tier-1 — the nested phrase SPANS are the form-induction template candidates. It REPLACES
+# benepar, which is dead against transformers>=5 (T5Tokenizer API drift). spaCy dependency
+# (en_core_web_md) is tier-2; nltk (punkt) is the segment floor.
+stanza>=1.10
+spacy>=3.8
+nltk

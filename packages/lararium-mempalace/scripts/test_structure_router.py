@@ -146,13 +146,30 @@ def test_grammar_and_corpus_files_exist():
     assert os.path.isfile(os.path.join(base, "test", "corpus", "sigils.txt"))
 
 
-# ── the prose tier (graceful: benepar → spaCy → segment) ─────────────────────────────────
+# ── the prose tier (graceful: stanza constituency → spaCy dependency → segment) ───────────
 
 
 def test_prose_yields_a_tree():
     tree = sr.parse_prose("The quick brown fox jumps. The lazy dog then sleeps all day long here.")
     assert tree["type"] == "source_file"
     assert _count(tree) > 3  # SOME tier produced a real tree (segment floor never fails)
+
+
+def test_prose_stanza_tier_yields_constituency_spans():
+    """When stanza is installed, tier-1 produces real constituency phrase spans (ROOT/S/NP/VP)
+    — the form-induction template candidates. Skips cleanly if stanza / its model is absent."""
+    tree = sr._prose_stanza("The quick brown fox jumps over the lazy dog.")
+    if tree is None:
+        pytest.skip("stanza (or its en constituency model) not available")
+    labels = set()
+
+    def walk(n):
+        labels.add(n["type"])
+        for c in n["children"]:
+            walk(c)
+
+    walk(tree)
+    assert {"ROOT", "S", "NP", "VP"} & labels  # constituency labels, not dependency/segment
 
 
 # ── encoder fidelity: the router's trees are COSINE-MEANINGFUL ────────────────────────────

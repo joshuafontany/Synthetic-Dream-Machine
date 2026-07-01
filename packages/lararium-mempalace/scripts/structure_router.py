@@ -23,8 +23,9 @@ ROUTING — by corpus-KIND, auto-detected from extension + content:
   memetic-wikitext    -> the SIGIL parser (our own `<<~ … >>` forms — the read-side
                          twin of the lar-sigil TW5 wikirules; the tree-sitter grammar
                          lives at grammars/tree-sitter-lar-sigil/grammar.js)
-  prose               -> benepar constituency (when it loads) → spaCy dependency tree
-                         → nltk sentence/word → regex paragraph/sentence (graceful tiers)
+  prose               -> stanza constituency (Stanford, maintained, modern-torch — the
+                         nested SPANS are the form-induction template candidates) → spaCy
+                         dependency tree → nltk sentence/word → regex (graceful tiers)
 
 GRACEFUL by construction: a kind with no available parser yields None ⇒ the caller
 records `structure-skipped` and the content plane still stands. The heavy tree-sitter
@@ -267,49 +268,60 @@ def parse_sigils(text: str) -> dict:
     return root
 
 
-# ── the PROSE tier — benepar constituency → spaCy dependency → nltk → regex ────────────
+# ── the PROSE tier — stanza constituency → spaCy dependency → nltk → regex ─────────────
 
 _spacy_nlp = None
 _spacy_tried = False
-_benepar_parser = None
-_benepar_tried = False
+_stanza_nlp = None
+_stanza_tried = False
 
 
-def _prose_benepar(text: str) -> dict | None:
-    """Tier 1: benepar constituency parse (the nested SPANS are the template candidates).
-    Often blocked by a transformers-version tokenizer drift; on any failure ⇒ None (the
-    spaCy tier takes over)."""
-    global _benepar_parser, _benepar_tried
-    if _benepar_tried and _benepar_parser is None:
+def _prose_stanza(text: str) -> dict | None:
+    """Tier 1: stanza constituency parse (Stanford NLP — maintained, PyTorch, modern-torch
+    clean). The nested phrase SPANS `(ROOT (S (NP …) (VP …)))` are exactly the form-induction
+    template candidates (corpus.md #the-form-induction). Replaces the unmaintained benepar,
+    which is dead against transformers ≥5 (T5Tokenizer API drift). Content-free: a phrase /
+    POS LABEL rides each node, never the word. On any failure ⇒ None (spaCy tier takes over).
+
+    The English constituency model auto-downloads once into ~/stanza_resources on first use
+    (matching how spaCy/nltk models bootstrap); thereafter it reuses the local copy."""
+    global _stanza_nlp, _stanza_tried
+    if _stanza_tried and _stanza_nlp is None:
         return None
-    if _benepar_parser is None:
-        _benepar_tried = True
+    if _stanza_nlp is None:
+        _stanza_tried = True
         try:
-            import benepar  # noqa: F401
-            _benepar_parser = benepar.Parser("benepar_en3")
-        except Exception as exc:  # noqa: BLE001
-            sys.stderr.write(f"structure_router: benepar unavailable ({type(exc).__name__}) — spaCy tier\n")
-            _benepar_parser = None
+            import stanza
+
+            _stanza_nlp = stanza.Pipeline(
+                "en", processors="tokenize,pos,constituency", verbose=False,
+            )
+        except Exception as exc:  # noqa: BLE001 — stanza / its model absent ⇒ spaCy tier
+            sys.stderr.write(f"structure_router: stanza unavailable ({type(exc).__name__}) — spaCy tier\n")
+            _stanza_nlp = None
             return None
     try:
-        import nltk
-
-        sents = nltk.sent_tokenize(text)[:200]
+        doc = _stanza_nlp(text[:100_000])
         root = {"type": "source_file", "children": []}
+        budget = [_MAX_NODES]
 
-        def conv(tree) -> dict:
-            if isinstance(tree, str):
+        def conv(tree, depth: int) -> dict:
+            # a word leaf (no children) → a content-free token; a phrase/POS node → its label.
+            if not tree.children or depth >= _MAX_DEPTH:
                 return {"type": "token", "children": []}
-            return {"type": str(tree.label()), "children": [conv(c) for c in tree]}
+            kids = []
+            for c in tree.children:
+                if budget[0] <= 0:
+                    break
+                budget[0] -= 1
+                kids.append(conv(c, depth + 1))
+            return {"type": str(tree.label), "children": kids}
 
-        for s in sents:
-            if not s.strip():
-                continue
-            t = _benepar_parser.parse(s)
-            root["children"].append(conv(t))
-        return root
+        for sent in doc.sentences:
+            root["children"].append(conv(sent.constituency, 0))
+        return root if root["children"] else None
     except Exception as exc:  # noqa: BLE001
-        sys.stderr.write(f"structure_router: benepar parse failed ({type(exc).__name__}) — spaCy tier\n")
+        sys.stderr.write(f"structure_router: stanza parse failed ({type(exc).__name__}) — spaCy tier\n")
         return None
 
 
@@ -386,8 +398,8 @@ def _prose_segment(text: str) -> dict:
 
 
 def parse_prose(text: str) -> dict:
-    """Prose → constituency-ish tree, best tier available (benepar → spaCy → segment)."""
-    return _prose_benepar(text) or _prose_spacy(text) or _prose_segment(text)
+    """Prose → constituency-ish tree, best tier available (stanza → spaCy → segment)."""
+    return _prose_stanza(text) or _prose_spacy(text) or _prose_segment(text)
 
 
 # ── the router front door ──────────────────────────────────────────────────────────────
