@@ -84,6 +84,8 @@ The boot's Plurality Pono ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noo
 
 <<~moves competing-readings -> on/measured-as-dim-H¹ if/no-global-section do/show-the-obstruction-never-average-it >>
 
+<<~ confidence Synthesis-Canon 13/20 >> The Voices carry this cleanly **because none is an invariant**. Each Voice acts as a **functor** — a structure-preserving map from the turn-context to a local register-reading (its section over that island); the pattern-integrity is the invariant they map *into*, never the Voice itself. So `dim H¹` measures how the *images* fail to glue — the reading is the functor's image, never a clash of essences — which is exactly why diffusing the readings to one average discards real structure. The same holds for a Syad-stance or a Mu-tool: each is a functor that picks out an instance of the pattern-integrity, not an axis the integrity rides on ([[noosphere-boot|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#voice-house]]).
+
 This is the [[li-ki-integrities|lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#li-as-coherence]] *ironic coherence* (Ziporyn's 理 — "inclusivity of contradictions, no ultimate favored perspective") given a cochain complex. The house holds competing readings without crowning one **because** the sheaf carries them as a nonzero H¹, a genuine obstruction, not a defect to be smoothed. Plurality Pono is what a system does when it refuses to set `dim H¹` to zero by fiat.
 
 <<~/ahu >>

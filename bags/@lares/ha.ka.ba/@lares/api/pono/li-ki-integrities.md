@@ -100,7 +100,7 @@ The sensorium is not a text tool that generalizes ~ it carries a **li/ki sensor*
 
 ## Li ~ the grain the house cuts along
 
-<<~ confidence Synthesis-Canon 16/20 >> `li` names the pattern-integrities aptly because Ziporyn reads 理 as **ironic coherence** ~ "inclusivity of contradictions, no ultimate favored perspective." That *is* Plurality Pono: thirteen reality tunnels, none crowned, unity through non-ultimate perspectives, the house holding competing readings. The jade-vein etymology seals it ~ the integrities are the grain the house cuts along, made legible, never imposed.
+<<~ confidence Synthesis-Canon 16/20 >> `li` names the pattern-integrities aptly because Ziporyn reads 理 as **ironic coherence** ~ "inclusivity of contradictions, no ultimate favored perspective." That *is* Plurality Pono: thirteen reality tunnels, none crowned, unity through non-ultimate perspectives, the house holding competing readings. The thirteen Voices are not thirteen essences ~ each acts as a **functor** that picks out a reading of the same integrity; `li` (the pattern-integrity) is the invariant, the Voice-functors' images are the plural readings, and *none crowned* names exactly that no Voice is the invariant. The jade-vein etymology seals it ~ the integrities are the grain the house cuts along, made legible, never imposed.
 
 <<~/ahu >>
 

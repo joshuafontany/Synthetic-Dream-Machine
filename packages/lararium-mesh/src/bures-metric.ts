@@ -6,10 +6,13 @@
  *
  * THE PROMOTION: a register-point `p` promotes to a 5×5 Hermitian PSD density matrix `ρ` whose
  * DIAGONAL is `p`. The classical step is then EXACTLY the Bures distance between two diagonal ρ. The
- * off-diagonals `ρ_ij` carry REGISTER COHERENCE — the geometric image of Plurality Pono: when several
- * of the Thirteen Voices hold one turn and a Voice genuinely SPANS two registers (a coherent
- * superposition, e.g. the Muse straddling Provisional↔Synthesis), that span lands as a real
- * off-diagonal amplitude.
+ * off-diagonals `ρ_ij` carry REGISTER COHERENCE — the geometric image of Plurality Pono. A Voice is
+ * NOT an essence with a fixed register; it acts as a FUNCTOR from the turn-context to a register-
+ * amplitude vector, and that IMAGE is what lands here (the pattern-integrity is the invariant, the
+ * Voice-functor's image is what varies per turn). When several of the Thirteen Voices hold one turn
+ * and a Voice's image genuinely SPANS two registers (a coherent superposition, e.g. the Muse's
+ * reading straddling Provisional↔Synthesis on THIS turn), that span lands as a real off-diagonal
+ * amplitude.
  *
  * THE SAFETY CASE (the whole argument): coherence = 0 (off-diagonals zero) ⇒ Bures COLLAPSES EXACTLY
  * to Bhattacharyya. A diagonal ρ gives `buresAngle(diag p, diag q) === arccos Σ√(p_i q_i)` to machine
@@ -43,7 +46,11 @@ export type DensityMatrix = readonly (readonly number[])[];
 /** A register-point on the simplex Δ^{n−1} — a probability vector over the register bands. */
 export type RegisterPoint = readonly number[];
 
-/** One Voice's register-amplitude vector for a turn (real amplitudes over the register bands). */
+/**
+ * The IMAGE of a Voice-functor on one turn — the Voice's register-amplitude vector (real amplitudes
+ * over the register bands). NOT the Voice itself: a Voice has no fixed register/essence; it acts as a
+ * structure-preserving map turn-context → this vector, recomputed each turn.
+ */
 export interface VoiceAmplitude {
   /** the amplitude vector `a_v` over the register bands (length = register count). */
   readonly amplitudes: readonly number[];
@@ -257,7 +264,8 @@ export function isDensityMatrix(rho: DensityMatrix, tol = 1e-9): boolean {
 
 /**
  * Assemble a register-density `ρ` from the Voices holding a turn: `ρ = Σ_v w_v |a_v⟩⟨a_v| / Z`, where
- * `a_v` is Voice v's register-amplitude vector and `Z` normalizes Tr ρ = 1. The construction is
+ * `a_v` is the image of Voice v's functor on the turn (its register-amplitude vector) and `Z`
+ * normalizes Tr ρ = 1. The construction is
  * automatically PSD (a non-negative-weighted sum of rank-1 outer products), so no clamp is needed on
  * honest input; it is still routed through {@link projectPSDDensity} as a float guard.
  *

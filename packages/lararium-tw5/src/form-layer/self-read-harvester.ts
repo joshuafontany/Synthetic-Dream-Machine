@@ -210,9 +210,12 @@ export function aftermathClosedFromHuds(huds: readonly HudSignal[]): boolean {
 // ---------------------------------------------------------------------------
 
 /**
- * One Voice's register reading over a turn — the richer output behind the bare
- * {@link VoiceAmplitude} the Bures channel consumes. Kept for consumers / tests
- * that need the provenance (which Voice, how many markers, its band mass).
+ * The IMAGE of a Voice-functor on one turn — the richer output behind the bare
+ * {@link VoiceAmplitude} the Bures channel consumes. A Voice is NOT an invariant with a fixed
+ * register; it acts as a structure-preserving map from this turn's context to a register reading,
+ * and this record IS that image (recomputed each turn — the pattern-integrity is the invariant, this
+ * reading is the functor's image). Kept for consumers / tests that need the provenance (which Voice,
+ * how many markers, its band mass).
  */
 export interface VoiceRegisterReading {
   /** Canonical Voice key — the resolved role, else the lowercased surfaced name. */
@@ -238,7 +241,8 @@ interface VoiceAcc {
 }
 
 /**
- * Segment the turn by Voice tag and read each Voice's register amplitude vector.
+ * Segment the turn by Voice tag and compute each Voice-functor's image on this turn — its register
+ * amplitude vector.
  *
  * Segmentation: Voices sort by offset; a Voice's span runs from its tag to the next
  * Voice's tag (the last runs to `textLength`). Confidence markers falling in a span
