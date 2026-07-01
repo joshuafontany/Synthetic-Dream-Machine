@@ -21,7 +21,7 @@ import { existsSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
-import type { WorldlineEdgeTriple, WorldlineEdgeClose } from "@lararium/mesh";
+import { rewindThenFork, type WorldlineEdgeTriple, type WorldlineEdgeClose, type RewindThenForkResult } from "@lararium/mesh";
 import { resolveMempalacePython } from "./spawn-resolve.js";
 import { resolveComputeCapEnv } from "./compute-cap.js";
 import { resolvePalacePath } from "./palace-path.js";
@@ -126,11 +126,11 @@ export function closeWorldlineEdges(closes: readonly WorldlineEdgeClose[], opts:
  * a retracted turn-DAG node. Append-only (history preserved); idempotent (a re-run closes nothing
  * new). Returns the count closed.
  *
- * NOTE — the gone-turn DETECTOR landed: mesh `detectGoneTurns` (gone-turns.ts) diffs the append-only
- * harvest index against the live transcript to surface rewound turn-uuids, and the astpalace twin
- * (`astpalace_io.kapae`) sets aside the AST tally. This is the worldline-KG half of the same mechanism.
- * What stays unwired is the AUTO-TRIGGER loop — a caller that runs `detectGoneTurns` over the harvest
- * index per session and fires `kapaeTurn` for each gone uuid; until that lands nothing yet CALLS this.
+ * NOTE — the AUTO-TRIGGER landed (FFZ live-triggers): `lares harvest` runs mesh `detectGoneTurns`
+ * (gone-turns.ts) per session-scope over the append-only index vs the live current-branch, and fires
+ * THIS `kapaeTurn` for every gone uuid (Leg 1, the KG valid-close), while the astpalace twin
+ * (`astpalace_io.kapae`) sets aside the AST tally (Legs 2+3 via the @daemon). The REWIND-THEN-FORK
+ * composition rides {@link kapaeThenFork} — kapae's valid-close → re-project → the new sibling.
  */
 export function kapaeTurn(turnKey: string, opts: WorldlineKgOptions & { ended?: string } = {}): { closed: number; ended: string } {
   if (!turnKey) throw new Error("kapaeTurn: turnKey required");
@@ -140,4 +140,41 @@ export function kapaeTurn(turnKey: string, opts: WorldlineKgOptions & { ended?: 
   let res: { closed?: number; ended?: string } = {};
   try { res = JSON.parse(out.trim()) as typeof res; } catch { /* fall through */ }
   return { closed: typeof res.closed === "number" ? res.closed : 0, ended: res.ended ?? opts.ended ?? "" };
+}
+
+export interface KapaeThenForkResult extends RewindThenForkResult {
+  /** KG edge-rows valid-closed by the durable kapae leg (summed over every rewound turn). */
+  readonly closed: number;
+}
+
+/**
+ * REWIND-THEN-FORK (edit-and-resubmit), the DURABLE path — the ONE composition kapae → re-project →
+ * fork. Fires the real {@link kapaeTurn} for each rewound turn (Leg 1: close `valid_to` in the KG,
+ * append-only — the tx-row survives), then hands the caller's edge set to the mesh-pure
+ * {@link rewindThenFork} (re-project the ITC over the surviving VALID view → the rewound frontier →
+ * itcFork the new sibling).
+ *
+ * The caller supplies `opens`/`closes` (the session's edge-DAG, e.g. from `deriveSubagentEdges`) — the
+ * KG has no edge-QUERY path yet (design-only follow-up), so the durable close and the in-memory
+ * re-project ride the SAME edge set: kapae persists the valid-close, the pure core drops those turnKeys
+ * from the projected view. Best-effort on the KG (a {@link KgUnavailable} leaves `closed = 0`; the
+ * re-project + fork still yield the sibling — the KG is a re-derivable projection, never the authority).
+ */
+export function kapaeThenFork(
+  root: string,
+  opens: readonly WorldlineEdgeTriple[],
+  closes: readonly WorldlineEdgeClose[],
+  rewoundTurnKeys: readonly string[],
+  fork: { readonly parent: string; readonly child: string },
+  opts: WorldlineKgOptions & { ended?: string } = {},
+): KapaeThenForkResult {
+  let closed = 0;
+  for (const turnKey of rewoundTurnKeys) {
+    if (!turnKey) continue;
+    try { closed += kapaeTurn(turnKey, opts).closed; } catch (err) {
+      if (!(err instanceof KgUnavailable)) throw err; // KG absent → best-effort; other faults surface
+    }
+  }
+  const forked = rewindThenFork(root, opens, closes, rewoundTurnKeys, fork);
+  return { ...forked, closed };
 }

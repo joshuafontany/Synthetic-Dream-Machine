@@ -33,6 +33,7 @@ import {
   worldlineSpawn,
   worldlineInject,
   worldlineHandback,
+  worldlineStampFor,
   type WorldlineCausal,
 } from "./worldline-clock.js";
 import {
@@ -206,14 +207,14 @@ export function worldlineCausalFromEdges(
   for (const ev of sorted) {
     try {
       if (ev.op === "spawn") {
-        if (!causal.stamps[ev.subject]) causal = mergeSeed(causal, ev.subject); // defensive seed
-        if (causal.stamps[ev.object]) continue; // idempotent — child already forked
+        if (!worldlineStampFor(causal, ev.subject)) causal = mergeSeed(causal, ev.subject); // defensive seed
+        if (worldlineStampFor(causal, ev.object)) continue; // idempotent — child already forked
         causal = worldlineSpawn(causal, ev.subject, ev.object);
       } else if (ev.op === "inject") {
-        if (!causal.stamps[ev.object]) continue; // target unknown — skip (re-derive tolerance)
+        if (!worldlineStampFor(causal, ev.object)) continue; // target unknown — skip (re-derive tolerance)
         causal = worldlineInject(causal, ev.object);
       } else {
-        if (!causal.stamps[ev.subject] || !causal.stamps[ev.object]) continue; // unknown pair — skip
+        if (!worldlineStampFor(causal, ev.subject) || !worldlineStampFor(causal, ev.object)) continue; // unknown pair — skip
         causal = worldlineHandback(causal, ev.subject, ev.object);
       }
     } catch {
@@ -226,6 +227,62 @@ export function worldlineCausalFromEdges(
 
 /** Seed an extra root-like handle into an existing registry (a fresh full-ownership stamp). */
 function mergeSeed(c: WorldlineCausal, handle: string): WorldlineCausal {
-  const seeded = worldlineCausalSeed(handle);
-  return { stamps: { ...c.stamps, [handle]: seeded.stamps[handle]! } };
+  const seeded = worldlineCausalSeed(handle); // composite-keyed (`${handle}@${frontier}`)
+  return { stamps: { ...c.stamps, ...seeded.stamps } };
+}
+
+// ---------------------------------------------------------------------------
+// The rewind-then-fork orchestrator — kapae (valid-close) → re-project → fork
+// ---------------------------------------------------------------------------
+
+/** The output of {@link rewindThenFork} — the re-projected view and the sibling forked off it. */
+export interface RewindThenForkResult {
+  /** The registry AFTER the fork — the rewound frontier PLUS the new concurrent sibling. */
+  readonly causal: WorldlineCausal;
+  /** The registry re-projected over the FILTERED (valid) view, BEFORE the fork — the rewound frontier. */
+  readonly view: WorldlineCausal;
+  /** The count of open edges the kapae filter dropped (the rewound turns' Delegation/Communication). */
+  readonly dropped: number;
+  readonly parent: string;
+  readonly child: string;
+}
+
+/**
+ * REWIND-THEN-FORK (edit-and-resubmit) — the PURE composition over the built organs: close a set of
+ * turns' valid-time (the kapae move, modeled as a valid-view FILTER over the durable append-only
+ * edges), re-project the ITC registry from the surviving VALID edges (the rewound-frontier stamp),
+ * then fork a new concurrent sibling off it.
+ *
+ * The bi-temporal discipline holds by construction: the caller's `opens` are the append-only tx-rows
+ * (the durable KG's `kapaeTurn` sets `valid_to`, never deletes); this function drops the rewound
+ * turnKeys from the VALID VIEW only, so the row survives while the view sheds it (the TOKI/XTDB audit
+ * row). The re-projected stamp is a DERIVED projection — the fork rides a re-derivable frontier, so no
+ * global-now sneaks in (the guard). PURE: `opens`/`closes` are untouched; a fresh registry is built.
+ *
+ * The DURABLE half — actually closing `valid_to` in the mempalace KG — is `kapaeTurn` (node-side); the
+ * node orchestrator fires it, then hands its surviving edges here. This is the mesh-pure re-project +
+ * fork the durable path composes over (worldline-kg's kapae → these organs).
+ */
+export function rewindThenFork(
+  root: string,
+  opens: readonly WorldlineEdgeTriple[],
+  closes: readonly WorldlineEdgeClose[],
+  rewoundTurnKeys: Iterable<string>,
+  fork: { readonly parent: string; readonly child: string },
+): RewindThenForkResult {
+  const rewound = new Set<string>();
+  for (const k of rewoundTurnKeys) if (k) rewound.add(k);
+
+  // The kapae VALID-VIEW filter: drop every open edge keyed to a rewound turn. The tx-row survives in
+  // the durable KG (append-only); only the projected view sheds it (valid-time non-monotone).
+  const validOpens = rewound.size === 0 ? opens : opens.filter((e) => !(e.turnKey && rewound.has(e.turnKey)));
+  const dropped = opens.length - validOpens.length;
+
+  // Re-project the ITC registry over the surviving VALID edges → the rewound-frontier stamp.
+  const view = worldlineCausalFromEdges(root, validOpens, closes);
+
+  // Fork the new concurrent sibling off the rewound frontier (itcFork, via worldlineSpawn).
+  const causal = worldlineSpawn(view, fork.parent, fork.child);
+
+  return { causal, view, dropped, parent: fork.parent, child: fork.child };
 }

@@ -12,11 +12,12 @@ import { mkdtempSync, rmSync, mkdirSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { delegationEdge, communicationEdge, handbackClose } from "@lararium/mesh";
+import { delegationEdge, communicationEdge, handbackClose, worldlineHandles, worldlineCompare } from "@lararium/mesh";
 import {
   persistWorldlineEdges,
   closeWorldlineEdges,
   kapaeTurn,
+  kapaeThenFork,
   resolveKgIo,
 } from "../src/worldline-kg.js";
 import { resolveMempalacePython } from "../src/spawn-resolve.js";
@@ -79,6 +80,27 @@ describe("worldline-kg arg/NDJSON building (fake exec)", () => {
     expect(persistWorldlineEdges([], opts).added).toBe(0);
     expect(closeWorldlineEdges([], opts).invalidated).toBe(0);
     expect(calls.length).toBe(0);
+  });
+
+  test("kapaeThenFork → durable kapae per rewound turn + the pure re-project→fork composes", () => {
+    calls.length = 0;
+    const root = "run";
+    const opens = [
+      delegationEdge(root, "run.a", { validFrom: "2026-06-29T00:00:00Z", turnKey: "t-a" }),
+      delegationEdge(root, "run.b", { validFrom: "2026-06-29T00:00:01Z", turnKey: "t-b" }), // rewound
+    ];
+    const r = kapaeThenFork(root, opens, [], ["t-b"], { parent: root, child: "run.c" }, opts);
+    // DURABLE leg: one kapae fired for the rewound turn (fake exec returns closed:3).
+    expect(calls.length).toBe(1);
+    expect(calls[0]!.args).toEqual([resolveKgIo(), "--palace", "/tmp/palaceX", "kapae", "--turn-key", "t-b"]);
+    expect(r.closed).toBe(3);
+    // PURE leg: run.b dropped from the valid view; run.c forked off the rewound frontier.
+    expect(r.dropped).toBe(1);
+    expect(worldlineHandles(r.view).sort()).toEqual(["run", "run.a"]);
+    expect(worldlineHandles(r.causal).sort()).toEqual(["run", "run.a", "run.c"]);
+    expect(worldlineCompare(r.causal, root, "run.c")).toBe("equal"); // a bare fork shares history
+    // The append-only edges are untouched — kapae is a valid-view filter (bi-temporal).
+    expect(opens.length).toBe(2);
   });
 });
 

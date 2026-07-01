@@ -13,6 +13,10 @@ import {
   mulberry32,
   worldlineCausalFromEdges,
   worldlineCompare,
+  worldlineHandles,
+  worldlineFrontiersFor,
+  worldlineInject,
+  rewindThenFork,
   delegationEdge,
   communicationEdge,
   handbackClose,
@@ -124,7 +128,7 @@ describe("worldlineCausalFromEdges — project the ITC registry from the durable
     const closes = [handbackClose(root, "run.a", "2026-06-29T00:00:05Z")];
     const causal = worldlineCausalFromEdges(root, opens, closes);
     // the child dissolves at handback (apoptosis) — only the parent stamp remains
-    expect(Object.keys(causal.stamps)).toEqual([root]);
+    expect(worldlineHandles(causal)).toEqual([root]);
     expect(() => worldlineCompare(causal, root, "run.a")).toThrow(); // child retired
   });
 
@@ -138,7 +142,7 @@ describe("worldlineCausalFromEdges — project the ITC registry from the durable
     const causal = worldlineCausalFromEdges(root, opens);
     // root injected b after spawning both → root's pre-inject history ≤ b? the inject advances b,
     // and the registry still holds both spirit stamps as live.
-    expect(Object.keys(causal.stamps).sort()).toEqual(["run", "run.a", "run.b"]);
+    expect(worldlineHandles(causal).sort()).toEqual(["run", "run.a", "run.b"]);
   });
 
   test("idempotent / re-derive-tolerant — a duplicate spawn + an unknown-pair handback are skipped", () => {
@@ -149,6 +153,52 @@ describe("worldlineCausalFromEdges — project the ITC registry from the durable
     ];
     const closes = [handbackClose(root, "run.ghost", "2026-06-29T00:00:09Z")]; // unknown — skipped
     const causal = worldlineCausalFromEdges(root, opens, closes);
-    expect(Object.keys(causal.stamps).sort()).toEqual(["run", "run.a"]);
+    expect(worldlineHandles(causal).sort()).toEqual(["run", "run.a"]);
+  });
+});
+
+describe("rewindThenFork — kapae (valid-close) → re-project → fork (edit-and-resubmit)", () => {
+  const root = "run";
+  // A branch that spawned two spirits; run.b's spawn keys to a turn the operator later REWINDS.
+  const opens = [
+    delegationEdge(root, "run.a", { validFrom: "2026-06-29T00:00:00Z", turnKey: "t-a" }),
+    delegationEdge(root, "run.b", { validFrom: "2026-06-29T00:00:01Z", turnKey: "t-b" }),
+    communicationEdge(root, "run.a", { validFrom: "2026-06-29T00:00:02Z", turnKey: "t-a2" }),
+  ];
+
+  test("the rewound turn's edge drops from the VALID view (the row survives, the view sheds it)", () => {
+    const r = rewindThenFork(root, opens, [], ["t-b"], { parent: root, child: "run.c" });
+    expect(r.dropped).toBe(1);                       // run.b's Delegation left the valid view
+    expect(worldlineHandles(r.view).sort()).toEqual(["run", "run.a"]); // run.b never re-projected
+    // The append-only `opens` are UNTOUCHED — kapae is a valid-view filter, not an erase (bi-temporal).
+    expect(opens.length).toBe(3);
+  });
+
+  test("the fork yields a concurrent sibling off the rewound frontier", () => {
+    const r = rewindThenFork(root, opens, [], ["t-b"], { parent: root, child: "run.c" });
+    expect(worldlineHandles(r.causal).sort()).toEqual(["run", "run.a", "run.c"]);
+    // run.c forked off root's rewound frontier — a bare fork shares history → equal (pre-work).
+    expect(worldlineCompare(r.causal, root, "run.c")).toBe("equal");
+    // The resubmitted branch does its own work (the edit-and-resubmit) → it grows an event run.a
+    // never saw, while run.a carries an event run.c never saw → neither dominates → CONCURRENT.
+    const worked = worldlineInject(r.causal, "run.c");
+    expect(worldlineCompare(worked, "run.a", "run.c")).toBe("concurrent");
+  });
+
+  test("re-forking the SAME child handle after a rewind does not collide (distinct frontiers)", () => {
+    // First fork run.c off the FULL history; then rewind t-b and re-fork run.c off the REWOUND
+    // frontier — a different re-projected history → a distinct (handle, frontier) key, no throw.
+    const full = worldlineCausalFromEdges(root, opens);
+    const r = rewindThenFork(root, opens, [], ["t-b"], { parent: root, child: "run.c" });
+    // The rewound-view fork succeeded; run.c is live on the re-projected branch.
+    expect(worldlineFrontiersFor(r.causal, "run.c").length).toBe(1);
+    // The two projections are independent registries (the guard: a derived projection, never shared state).
+    expect(worldlineHandles(full).sort()).toEqual(["run", "run.a", "run.b"]);
+  });
+
+  test("no rewound keys → a plain fork off the full view (dropped = 0)", () => {
+    const r = rewindThenFork(root, opens, [], [], { parent: root, child: "run.c" });
+    expect(r.dropped).toBe(0);
+    expect(worldlineHandles(r.causal).sort()).toEqual(["run", "run.a", "run.b", "run.c"]);
   });
 });

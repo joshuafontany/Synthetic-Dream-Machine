@@ -24,6 +24,9 @@ import {
   worldlineInject,
   worldlineHandback,
   worldlineCompare,
+  worldlineStampFor,
+  worldlineHandles,
+  worldlineFrontiersFor,
   itcSeed,
   itcFork,
   itcEvent,
@@ -155,11 +158,11 @@ describe("worldline causal partial-order — rides ITC, concurrent-capable", () 
   test("inject FULL-ticks every time (the D-cut): each injection advances the history", () => {
     let c = worldlineCausalSeed("run");
     c = worldlineSpawn(c, "run", "run.a");
-    const before = c.stamps["run.a"]!;
+    const before = worldlineStampFor(c, "run.a")!;
     c = worldlineInject(c, "run.a");
-    const after1 = c.stamps["run.a"]!;
+    const after1 = worldlineStampFor(c, "run.a")!;
     c = worldlineInject(c, "run.a");
-    const after2 = c.stamps["run.a"]!;
+    const after2 = worldlineStampFor(c, "run.a")!;
     expect(itcCompare(before, after1)).toBe("before");
     expect(itcCompare(after1, after2)).toBe("before");
   });
@@ -169,12 +172,12 @@ describe("worldline causal partial-order — rides ITC, concurrent-capable", () 
     c = worldlineSpawn(c, "run", "run.child");
     c = worldlineInject(c, "run.child"); // the child works
     c = worldlineInject(c, "run");       // the parent works meanwhile — concurrent
-    const childAtHandback = c.stamps["run.child"]!;
+    const childAtHandback = worldlineStampFor(c, "run.child")!;
     expect(worldlineCompare(c, "run", "run.child")).toBe("concurrent");
     c = worldlineHandback(c, "run", "run.child");
-    expect(c.stamps["run.child"]).toBeUndefined(); // dissolved at handback
+    expect(worldlineStampFor(c, "run.child")).toBeUndefined(); // dissolved at handback
     // the reunited parent's history now dominates the child's pre-handback history
-    expect(itcCompare(c.stamps["run"]!, childAtHandback)).toBe("after");
+    expect(itcCompare(worldlineStampFor(c, "run")!, childAtHandback)).toBe("after");
   });
 
   test("unknown handles throw — the registry never invents a worldline", () => {
@@ -182,5 +185,25 @@ describe("worldline causal partial-order — rides ITC, concurrent-capable", () 
     expect(() => worldlineSpawn(c, "ghost", "x")).toThrow();
     expect(() => worldlineInject(c, "ghost")).toThrow();
     expect(() => worldlineCompare(c, "run", "ghost")).toThrow();
+  });
+
+  test("(handle × frontier) key: re-spawning a child across a moved parent frontier does NOT collide", () => {
+    // The slice-2 bug: worldlineSpawn threw when a child handle already existed. Now the key is
+    // (handle, frontier) — the parent's frontier moves on inject, so the re-forked child inherits a
+    // DISTINCT frontier and rides alongside the old entry (the same-session fork).
+    let c = worldlineCausalSeed("run");
+    c = worldlineSpawn(c, "run", "run.child"); // first fork — child @ frontier F0
+    c = worldlineInject(c, "run");             // the parent's history advances → frontier moves
+    expect(() => (c = worldlineSpawn(c, "run", "run.child"))).not.toThrow(); // re-fork @ frontier F1
+    // Two concurrent frontiers for ONE rigid handle — the moving antichain, keyed BY the handle.
+    expect(worldlineFrontiersFor(c, "run.child").length).toBe(2);
+    expect(worldlineHandles(c).sort()).toEqual(["run", "run.child"]);
+  });
+
+  test("an identical re-fork (same frontier) still collides — a genuine duplicate is rejected", () => {
+    let c = worldlineCausalSeed("run");
+    c = worldlineSpawn(c, "run", "run.child");
+    // No intervening event → the parent frontier is unchanged → the child's key repeats → collision.
+    expect(() => worldlineSpawn(c, "run", "run.child")).toThrow();
   });
 });
