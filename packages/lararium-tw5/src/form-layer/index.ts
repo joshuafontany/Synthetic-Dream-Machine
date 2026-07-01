@@ -58,6 +58,20 @@ export {
   bearingFacets,
 } from "./bearing-ast.js";
 
+// The teleodynamic-probe — a PROVISIONAL-HYPOTHESIS probe (NOT Canon) for the
+// eigenform-motor claim. Instruments a teleodynamic triple (aftermath-rate ·
+// structural-change-rate · freeze) over the machina's OWN self-read sequence.
+// Pure + isomorphic. Every reading it emits carries `provisional: true`.
+export type {
+  SelfRead,
+  TeleodynamicGauge,
+  ApertureBand,
+  TeleodynamicReading,
+  MotorSignal,
+  ProbeOptions,
+} from "./teleodynamic-probe.js";
+export { teleodynamicProbe, apertureBandFor } from "./teleodynamic-probe.js";
+
 // Re-export the shared grammar + AST shapes the basis/emitter index against, so
 // consumers (and tests) take them from the form-layer surface — never reaching
 // into the VM-sovereign meme-ast internals directly (vm-grammar-boundary).
