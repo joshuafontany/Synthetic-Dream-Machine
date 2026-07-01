@@ -25,7 +25,10 @@ import { join } from "node:path";
 import { homedir } from "node:os";
 import { spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
-import { larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir } from "./vessel-paths.js";
+import {
+  larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
+} from "./vessel-paths.js";
+import { buildSensoriumManifest, readManifest, writeManifest } from "./sensorium.js";
 
 /** One ledger line from a setup pass — {@link setupPalaceOrgans} returns these (table/JSON-renderable). */
 export interface PalaceSetupStep {
@@ -154,6 +157,47 @@ export function organHealthy(organ: PalaceOrgan): boolean {
 }
 
 /**
+ * Materialize the `memory` sensorium's self-describing manifest — the SHEAF-TRUE marker that makes
+ * the dir a sensorium (sensorium.ts). It declares content/structure/form as THIN fiber-cap edges
+ * (relative when consolidated, absolute during the strangler window — {@link larMempalaceDir} et al.
+ * report where the bytes actually are), bands as the base-cap interval-grain (wavelet, computed on
+ * read — NO dir), and an empty coupling (memory glues no sub-sensoriums; the follow-on Meshpalace
+ * carries children). Idempotent + atomic: re-written each setup so it stays faithful to the resolvers.
+ */
+export function materializeMemorySensorium(): PalaceSetupStep {
+  const dir = memorySensoriumDir();
+  try {
+    mkdirSync(dir, { recursive: true });
+    const existing = readManifest(dir);
+    const desired = buildSensoriumManifest(dir, {
+      sensorium: "memory",
+      lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
+      caps: {
+        content:   { absDir: larMempalaceDir(), engine: "mempalace" },
+        structure: { absDir: larAstPalaceDir(), engine: "astpalace" },
+        form:      { absDir: larFormPalaceDir(), engine: "formpalace" },
+      },
+      // BASE cap — interval-grain metadata only; the wavelet bands compute on read, no bytes stored.
+      bands: { grain: "wavelet", computed: "on-read" },
+      // BASE cap — memory couples no sub-sensoriums (the follow-on Meshpalace carries WHO/AUTHORITY/FLOW).
+      children: [],
+      ephemeral: false,
+      // Preserve the original mint time on a rewrite so an unchanged manifest is byte-identical.
+      ...(existing ? { created: existing.created } : {}),
+    });
+    // Idempotent: only (re)write when the shape actually drifted (cap dirs moved, bands changed …).
+    const drifted = !existing || JSON.stringify(existing) !== JSON.stringify(desired);
+    if (drifted) {
+      writeManifest(dir, desired);
+      return { step: "memory:manifest", ran: true, ok: true, detail: `sensorium manifest written (${dir})` };
+    }
+    return { step: "memory:manifest", ran: false, ok: true, detail: "sensorium manifest present" };
+  } catch (e) {
+    return { step: "memory:manifest", ran: true, ok: false, detail: errText(e).slice(0, 160) };
+  }
+}
+
+/**
  * Stand up EVERY palace organ across the registry — wire-once / detect-existing, fully idempotent.
  * Each organ's step is `healthy ? {ran:false, ok:true, "present"} : init()`, and each init result is
  * re-probed so the ledger reports whether the store actually materialized. Returns the combined
@@ -179,5 +223,7 @@ export function setupPalaceOrgans(): PalaceSetupStep[] {
       steps.push(s.step === organ.name && s.ran ? { ...s, ok: s.ok && healthy } : s);
     }
   }
+  // Stamp the SHEAF-TRUE manifest so the memory sensorium dir self-describes its cap-stack.
+  steps.push(materializeMemorySensorium());
   return steps;
 }

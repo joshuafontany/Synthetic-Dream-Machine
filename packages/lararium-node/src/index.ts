@@ -21,8 +21,15 @@ export type {
 } from "./sensorium.js";
 
 // The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
-export { palaceOrgans, setupPalaceOrgans, organHealthy } from "./palace-organs.js";
+export { palaceOrgans, setupPalaceOrgans, organHealthy, materializeMemorySensorium } from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";
+
+// Idempotent, reversible migration scaffolding (the operator owns the --confirm; nothing here deletes).
+export {
+  MIGRATION_MARKER, migrationMarkerPath, readMigrationMarker, writeMigrationMarker,
+  preMigratePath, planMemoryMigration, repavePlan,
+} from "./sensorium-migrate.js";
+export type { MigrationMarker, MigrationMethod, CapMigrationStep, RepavePlan } from "./sensorium-migrate.js";
 
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {
