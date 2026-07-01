@@ -27,10 +27,12 @@
 
 import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { execFileSync } from "node:child_process";
-import { larHarvestDir, larHarvestStageDir } from "../env.js";
+import { larHarvestDir, larHarvestStageDir, larPort } from "../env.js";
 import { palaceOrgans, corpusTeardownDirs } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
+import { livePalaceProcs, type PalaceProc } from "../palace-procs.js";
+import { portHolderPids } from "../port-control.js";
+import { quiescePalace } from "./mempalace.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 interface Target {
@@ -94,29 +96,29 @@ function humanBytes(n: number): string {
 }
 
 /**
- * Live mempalace processes (MCP servers / a running mine / chroma) that hold the
- * store open. Best-effort + advisory: a detection failure returns [] and never
- * blocks on its own account — the refusal only fires on a POSITIVE find.
+ * Live palace processes that BLOCK a clean teardown — not just the store-HOLDERS
+ * (write-daemon / recall MCP / one-shot mine / chroma) but the SPAWNERS too (the
+ * ingest hook + its `lares capture/subagents/telemetry` legs): a live spawner
+ * re-mints a warm daemon mid-tear and the removed dir refills → ENOTEMPTY. So the
+ * refusal broadened from "holders only" to "holders OR spawners", each carrying its
+ * OWN spawner so the message can teach kill-the-parent. Best-effort + advisory: a
+ * detection failure returns [] and never blocks on its own account.
  */
-function liveMempalaceProcs(): Array<{ pid: number; cmd: string }> {
-  const out: Array<{ pid: number; cmd: string }> = [];
+function liveMempalaceProcs(): PalaceProc[] {
   try {
-    const isWin = process.platform === "win32";
-    const raw = isWin
-      ? execFileSync("tasklist", ["/fo", "csv", "/nh"], { encoding: "utf8", maxBuffer: 1 << 24 })
-      : execFileSync("ps", ["-eo", "pid=,args="], { encoding: "utf8", maxBuffer: 1 << 24 });
-    const re = /mempalace[-.]mcp|mempalace\.mcp_server|mempalace\s+mine|chromadb|chroma\.cli/i;
-    for (const line of raw.split("\n")) {
-      const trimmed = line.trim();
-      if (!trimmed || !re.test(trimmed)) continue;
-      const m = trimmed.match(/^"?(\d+)"?[,\s]+(.*)$/);
-      if (!m || !m[1] || m[2] === undefined) continue;
-      out.push({ pid: Number(m[1]), cmd: m[2].replace(/^"|"$/g, "").slice(0, 140) });
-    }
+    let vesselPids: number[] = [];
+    try { vesselPids = portHolderPids(larPort()); } catch { /* advisory */ }
+    return livePalaceProcs({ vesselPids, vesselPort: larPort() })
+      .filter((p) => p.holdsStore || p.mintsDaemons);
   } catch {
-    /* detection unreliable on this host — advisory only */
+    return [];
   }
-  return out;
+}
+
+/** One-line description naming the holder's role + what it serves + its spawner (teaches kill-the-parent). */
+function describeProc(p: PalaceProc): string {
+  const role = p.holdsStore ? "holds the store" : "re-mints daemons";
+  return `pid ${p.pid} (${role}: ${p.serves}) — spawned by pid ${p.ppid}: ${p.spawnerCmd}`;
 }
 
 export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
@@ -128,7 +130,8 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
   const totalBytes = present.reduce((s, t) => s + t.bytes, 0);
   const confirm    = args.flags["confirm"] === true;
   const force      = args.flags["force"]   === true;
-  const procs      = liveMempalaceProcs();
+  const drain      = args.flags["drain"]   === true;
+  let procs        = liveMempalaceProcs();
 
   // PREVIEW (default) — name every target, touch no disk.
   if (!confirm) {
@@ -138,7 +141,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
         mode: "preview",
         targets: targets.map((t) => ({ label: t.label, path: t.path, exists: t.exists, bytes: t.bytes })),
         totalBytes,
-        liveProcesses: procs,
+        liveProcesses: procs.map((p) => ({ pid: p.pid, kind: p.kind, serves: p.serves, spawner: p.spawnerCmd, holdsStore: p.holdsStore, mintsDaemons: p.mintsDaemons })),
         hint: "re-run with --confirm to remove",
       },
       human: () => {
@@ -150,30 +153,42 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
         }
         console.log(`\n  total to free: ${humanBytes(totalBytes)}`);
         if (procs.length) {
-          console.log(`\n  ⚠ ${procs.length} live mempalace process(es) hold the store:`);
-          for (const p of procs) console.log(`      pid ${p.pid}  ${p.cmd}`);
-          console.log("      stop them first, or pass --force alongside --confirm.");
+          console.log(`\n  ⚠ ${procs.length} live palace process(es) block a clean tear:`);
+          for (const p of procs) console.log(`      ${describeProc(p)}`);
+          console.log("      → --drain gracefully quiesces them first, or --force overrides.");
         }
-        console.log("\n  → re-run with --confirm to remove.");
+        console.log("\n  → re-run with --confirm to remove (add --drain to quiesce live daemons first).");
       },
     });
     return 0;
   }
 
-  // Live-process safety: a positive find REFUSES unless --force overrides.
+  // --drain: gracefully quiesce (pause hooks → drain warm daemons → confirm zero)
+  // BEFORE tearing, so no live daemon re-mints into the dir we are about to remove
+  // (the ENOTEMPTY race). Holds the hooks paused through the tear (--hold).
+  let drainedInfo: { drained: number[]; forced: number[]; quiet: boolean } | undefined;
+  if (drain && procs.length) {
+    const q = await quiescePalace({ hold: true });
+    drainedInfo = { drained: q.drained, forced: q.forced, quiet: q.quiet };
+    procs = liveMempalaceProcs(); // re-snapshot after the drain
+  }
+
+  // Live-process safety: a positive find REFUSES unless --force overrides. The
+  // refusal NAMES each blocker + its spawner + the graceful cure (never "stop them").
   if (procs.length && !force) {
     emit(args, {
       ok: false,
       error: {
         code: "conflict",
-        message: `${procs.length} live mempalace process(es) hold the store open`,
-        hint: "stop the MCP servers / mine first, or re-run with --confirm --force",
+        message: `${procs.length} live palace process(es) block a clean teardown`,
+        hint: "run `lares mempalace quiesce` (or re-run with --drain), or re-run with --confirm --force",
       },
-      data: { liveProcesses: procs },
+      data: { liveProcesses: procs.map((p) => ({ pid: p.pid, kind: p.kind, serves: p.serves, spawner: p.spawnerCmd })) },
       human: () => {
-        console.error("lares palace-teardown: REFUSED — live mempalace processes hold the store:");
-        for (const p of procs) console.error(`  pid ${p.pid}  ${p.cmd}`);
-        console.error("\nStop them (end the MCP clients / `kill <pid>`), or re-run with --confirm --force.");
+        console.error("lares palace-teardown: REFUSED — live palace processes block a clean tear:");
+        for (const p of procs) console.error(`  ${describeProc(p)}`);
+        console.error("\nGraceful cure: `lares mempalace quiesce` (pauses hooks + drains daemons), then re-run.");
+        console.error("Or re-run with --drain (quiesce-then-tear), or --confirm --force to override.");
       },
     });
     return exitFor("conflict");
@@ -193,15 +208,31 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
   const freed = removed.reduce((s, r) => s + r.bytes, 0);
   const ok    = failed.length === 0;
 
+  // A removal that FAILED (classically ENOTEMPTY) usually means a live daemon
+  // re-minted files into the dir mid-tear. Re-snapshot so we can NAME the culprit +
+  // its spawner instead of surfacing a bare errno — the whack-a-mole made legible.
+  const culprits = ok ? [] : liveMempalaceProcs();
+
   emit(args, {
     ok,
-    data: { mode: "teardown", removed, failed, freedBytes: freed, forcedUnderLiveProcs: procs.length > 0 },
-    ...(ok ? {} : { error: { code: "error", message: `${failed.length} target(s) failed to remove` } }),
+    data: {
+      mode: "teardown", removed, failed, freedBytes: freed,
+      forcedUnderLiveProcs: procs.length > 0,
+      ...(drainedInfo ? { drained: drainedInfo } : {}),
+      ...(culprits.length ? { culprits: culprits.map((p) => ({ pid: p.pid, kind: p.kind, serves: p.serves, spawner: p.spawnerCmd })) } : {}),
+    },
+    ...(ok ? {} : { error: { code: "error", message: `${failed.length} target(s) failed to remove`, ...(culprits.length ? { hint: "a live daemon refilled the dir — run `lares mempalace quiesce`, then re-tear" } : {}) } }),
     human: () => {
       console.log("lares palace-teardown — TORN DOWN\n");
+      if (drainedInfo) console.log(`  drained: SIGTERM'd ${drainedInfo.drained.length}${drainedInfo.forced.length ? `, SIGKILL'd ${drainedInfo.forced.length}` : ""} holder(s) — ${drainedInfo.quiet ? "quiescent" : "some survived"}.\n`);
       if (!present.length) console.log("  (nothing to remove — already clean)");
       for (const r of removed) console.log(`  ✓ removed  ${r.path}  (${humanBytes(r.bytes)})`);
       for (const f of failed)  console.log(`  ✗ FAILED   ${f.path}  — ${f.error}`);
+      if (culprits.length) {
+        console.log(`\n  ⚠ a live daemon refilled the dir mid-tear — the ENOTEMPTY culprit:`);
+        for (const p of culprits) console.log(`      ${describeProc(p)}`);
+        console.log("      cure: `lares mempalace quiesce` (pauses hooks + drains), then re-run --confirm.");
+      }
       console.log(`\n  freed: ${humanBytes(freed)}`);
       console.log("  re-pave with:  lares harvest --all");
     },
