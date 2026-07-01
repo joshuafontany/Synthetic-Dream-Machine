@@ -4,6 +4,9 @@ export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larAstPalaceDir, larFormPalaceDir,
   larMempalaceDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
+  // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
+  larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
+  memorySensoriumDir,
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
 

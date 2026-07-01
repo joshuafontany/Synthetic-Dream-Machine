@@ -21,10 +21,29 @@
  * Meme: lar:///ha.ka.ba/@lararium/mempalace/palace-path
  */
 
-import { realpathSync } from "node:fs";
+import { existsSync, realpathSync } from "node:fs";
 import { resolve } from "node:path";
 import { homedir } from "node:os";
 import { join } from "node:path";
+
+/**
+ * The verbatim mempalace's PARENT store dir, derived from the SAME XDG base + strangler that
+ * `@lararium/node`'s vessel-paths.ts uses for `larMempalaceDir` — kept in sync BY VALUE (this
+ * package sits BELOW node in the dep graph, so it cannot import it; the ~6 lines are duplicated
+ * deliberately, both keyed on `$XDG_DATA_HOME`/`$LAR_ROOT` + `~/.mempalace`). Consolidated new home:
+ * `<data>/sensoriums/memory/content`; legacy: `~/.mempalace`. A live box (legacy present) stays legacy.
+ */
+function mempalaceContentParent(): string {
+  const root = process.env["LAR_ROOT"];
+  const dataHome = root
+    ? join(root, "data")
+    : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lares");
+  const newParent = join(dataHome, "sensoriums", "memory", "content");
+  const legacyParent = join(homedir(), ".mempalace");
+  if (existsSync(newParent)) return newParent;
+  if (existsSync(legacyParent)) return legacyParent;
+  return newParent;
+}
 
 /**
  * Canonicalize a palace path to ONE stable spelling:
@@ -44,11 +63,14 @@ export function canonicalPalacePath(p: string): string {
 
 /**
  * The default palace path spelling, BEFORE canonicalization:
- *   $MEMPALACE_PALACE_PATH (override) || ~/.mempalace/palace (the chroma palace dir).
+ *   $MEMPALACE_PALACE_PATH (override, taken AS the chroma dir) || <content-parent>/palace.
+ * The content parent follows the XDG strangler ({@link mempalaceContentParent}), so the chroma dir
+ * and the vessel's `larMempalaceDir` view always agree — legacy `~/.mempalace/palace` on a live box,
+ * `<data>/sensoriums/memory/content/palace` once migrated.
  */
 export function defaultPalacePath(): string {
   const env = process.env["MEMPALACE_PALACE_PATH"]?.trim();
-  return env || join(homedir(), ".mempalace", "palace");
+  return env || join(mempalaceContentParent(), "palace");
 }
 
 /**

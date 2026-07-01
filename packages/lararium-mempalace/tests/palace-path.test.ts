@@ -46,16 +46,35 @@ describe("palace-path canonicalization (the daemon pile-up cure)", () => {
     expect(canonicalPalacePath(notYet)).toBe(join(root, "palace-not-created"));
   });
 
-  it("defaultPalacePath honors MEMPALACE_PALACE_PATH, else ~/.mempalace/palace", () => {
-    const prev = process.env["MEMPALACE_PALACE_PATH"];
+  it("defaultPalacePath honors MEMPALACE_PALACE_PATH, else the XDG-strangler chroma dir", () => {
+    const prevMp = process.env["MEMPALACE_PALACE_PATH"];
+    const prevData = process.env["XDG_DATA_HOME"];
+    const prevRoot = process.env["LAR_ROOT"];
+    const prevHome = process.env["HOME"];
+    const prevProfile = process.env["USERPROFILE"];
     try {
+      delete process.env["LAR_ROOT"];
+      // Hermetic home: point HOME at an empty temp dir so the strangler's legacy `~/.mempalace`
+      // probe reads absent regardless of the developer's real home (which may hold a live palace).
+      process.env["HOME"] = join(root, "home");
+      process.env["USERPROFILE"] = join(root, "home");
+      // env override is taken AS the chroma dir, verbatim.
       process.env["MEMPALACE_PALACE_PATH"] = join(root, "custom");
       expect(defaultPalacePath()).toBe(join(root, "custom"));
+
+      // No override → the strangler. Fresh vessel (neither the new XDG dir nor ~/.mempalace present
+      // under this temp XDG_DATA_HOME) → the consolidated `<data>/lares/sensoriums/memory/content/palace`.
       delete process.env["MEMPALACE_PALACE_PATH"];
-      expect(defaultPalacePath()).toMatch(/[\\/]\.mempalace[\\/]palace$/);
+      process.env["XDG_DATA_HOME"] = join(root, "xdg-data");
+      expect(defaultPalacePath()).toBe(
+        join(root, "xdg-data", "lares", "sensoriums", "memory", "content", "palace"),
+      );
     } finally {
-      if (prev === undefined) delete process.env["MEMPALACE_PALACE_PATH"];
-      else process.env["MEMPALACE_PALACE_PATH"] = prev;
+      if (prevMp === undefined) delete process.env["MEMPALACE_PALACE_PATH"]; else process.env["MEMPALACE_PALACE_PATH"] = prevMp;
+      if (prevData === undefined) delete process.env["XDG_DATA_HOME"]; else process.env["XDG_DATA_HOME"] = prevData;
+      if (prevRoot === undefined) delete process.env["LAR_ROOT"]; else process.env["LAR_ROOT"] = prevRoot;
+      if (prevHome === undefined) delete process.env["HOME"]; else process.env["HOME"] = prevHome;
+      if (prevProfile === undefined) delete process.env["USERPROFILE"]; else process.env["USERPROFILE"] = prevProfile;
     }
   });
 
