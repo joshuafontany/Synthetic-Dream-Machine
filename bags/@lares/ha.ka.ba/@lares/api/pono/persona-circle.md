@@ -82,7 +82,7 @@ Pure inversion-of-control **breaks at the multi-principal key-handover**: with e
 
 ## Disclosure ~ the per-join dial, and its gate
 
-**Anon is the base; a known handle is a disclosure act** (Nissenbaum's contextual integrity — staying veiled in a context is *appropriate flow*, **never a deficit or an un-climbed ladder**). Lifting the veil is **reversible toward-veiled** (the lease decays the linkage back to the anon floor; anergy-not-ban) — but a **severed** past does NOT re-weld: kāpae is remove-wins, re-linking a cut identity is irreversible and costly ([[kapae]]). Graduate by **transferring a credential to a fresh pseudonym** (Chaum), never by proving sameness, so the veil can re-close on a new key.
+**Anon is the base; a known handle is a disclosure act** (Nissenbaum's contextual integrity — staying veiled in a context is *appropriate flow*, **never a deficit or an un-climbed ladder**). Lifting the veil is **reversible toward-veiled** (the lease decays the linkage back to the anon floor; anergy-not-ban) — but a **severed** past does NOT re-weld: kāpae is remove-wins, re-linking a cut identity is irreversible and costly ([[kapae]]). Graduate by **transferring a credential to a fresh pseudonym** (Chaum), never by proving sameness, so the veil can re-close on a new key. **BUILT** (`veil-crossing.ts`): the crossing is a per-join gesture — **LIFT** (keep the anon key, link, carry the reputation — the anon past *welds*) or **HOLD** (refound a fresh key at a new all-hardened path — no back-link a wire-watcher can follow, *severed*). The mechanism serves either anon-key policy (stable-reused vs ephemeral — the operator's recorded fork); the **ZK-vouch** (a refound blessed by someone who knew the anon, *without* the public link) stays the adjacent arc.
 
 **The Sybil gate at the Circle-join** is the operator's designed **voucher cost-dial**: marginal-not-absolute (`rb>c`, the voucher supplies r), the **voucher co-pays AND becomes the watcher**, **anergy-not-ban** (no vouch → stay at the anon floor, re-presentable), slashing-by-revocation. The pledge is a **WHO-plane edge** (who-vouches-for-whom) — the planes stay clean. It **prices** Sybil, never eliminates it.
 
@@ -94,7 +94,7 @@ Pure inversion-of-control **breaks at the multi-principal key-handover**: with e
 
 The model closes **only the key layer** — and there it closes well: unlinkable-by-construction at the *key* layer on ed25519-HD. It does **NOT** deliver cross-self unlinkability against an observer who sees the wire, the disclosed credentials, or the prose:
 
-- **disclosure-protocol** — partially shaped (the handle-Circle is the right form); selective-disclosure is a protocol still owed.
+- **disclosure-protocol** — the graduate move is now BUILT (lift/hold veil-crossing, #disclosure); the richer *selective*-disclosure (reveal SOME attributes, prove predicates without the key) + the ZK-vouch stay owed.
 - **transport** — OPEN (mixnet/private-routing territory; do not lean on it as solved).
 - **behavioral** — OPEN (fingerprint/stylometry defeat key hygiene; crypto cannot touch it).
 
