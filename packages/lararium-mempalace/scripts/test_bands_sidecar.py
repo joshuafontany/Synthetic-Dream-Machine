@@ -592,3 +592,81 @@ def test_cli_selftest_covers_new_legs():
     rep = json.loads(r.stdout.strip().splitlines()[-1])
     assert rep["criticality_separates"] is True
     assert rep["slaving_reads_order_parameter"] is True
+
+
+# ── QA: adversarial numerical edges (The-Advocate, tasked QA-spirit) ────────────────────────
+#
+# The slaving-gain scale-blind ∞-degeneracy. `_slaving_gain` reads
+#   gain = var(target) / (var(resid) + _EPS),  _EPS = 1e-9   (bands_sidecar.py)
+# The ONLY regularizer on a vanishing residual is the ADDITIVE ABSOLUTE floor `_EPS`. For a
+# near-noiseless linearly-slaved band the residual collapses to ~machine-zero, so the gain runs
+# to var(target)·1e9 — a 9-order-of-magnitude blowup that (a) is SCALE-DEPENDENT (grows with the
+# target's variance, because the floor is absolute not relative) and (b) is SILENT: the downstream
+# `topdown_confidence = 20·g/(1+g)` saturates at 20, hiding the absurd raw gain. Observation-noise
+# regularization as implemented is NOT enough — even 1e-6 noise leaves the gain > 1e6; a relative /
+# SNR floor (resid floored to a fraction of var(target)) would cap it. The boundary a live run
+# resolves the hard way: any strongly-cohesive low-noise corpus band reports a meaningless precision.
+
+
+def test_slaving_gain_noiseless_blowup_is_scale_blind():
+    """A noiseless exact-linear order-parameter→target relation drives the gain to var(y)·1e9,
+    and the ADDITIVE _EPS floor makes it scale with var(y) — the regularization is scale-blind."""
+    t = np.arange(512)
+    p = np.sin(2 * np.pi * t / 64.0) + 5.0
+
+    g1, r1 = bs._slaving_gain(p, 3.0 * p + 1.0)          # var(y) ~ O(v)
+    g10, r10 = bs._slaving_gain(p, 30.0 * p + 1.0)       # var(y) ~ O(100·v) — 10× amplitude
+
+    # the blowup: a noiseless slaving reports a gain ≥ 1e9 (NOT a sane precision).
+    assert g1 > 1e8, f"expected the noiseless-tone blowup, got gain={g1:.3e}"
+    assert np.isfinite(g1) and np.isfinite(g10)          # no NaN/Inf leak — bounded by _EPS
+    assert abs(r1 - 1.0) < 1e-6                           # perfect correlation
+
+    # SCALE-BLINDNESS: 10× the target amplitude ⇒ ~100× the gain (the floor is absolute, not
+    # relative). A relative/SNR floor would leave the gain roughly INVARIANT under this rescale.
+    assert g10 / g1 > 50, f"gain should scale ~var(y): g1={g1:.3e} g10={g10:.3e}"
+
+
+def test_slaving_gain_observation_noise_regularization_insufficient():
+    """Adding observation noise is the intended cure for the noiseless degeneracy — but the
+    absolute _EPS floor means even 1e-6 noise leaves the gain in the MILLIONS; only ~1e-3 noise
+    brings it down to a (still large) 1e6-ish. The 'a little observation noise breaks the
+    degeneracy' assumption (selftest comment) under-regularizes for small noise."""
+    t = np.arange(512)
+    rng = np.random.default_rng(0)
+    p = np.sin(2 * np.pi * t / 50.0) + 2.0
+    gains = {}
+    for noise in (1e-10, 1e-6, 1e-3):
+        y = 4.0 * p + rng.normal(0, noise, t.size)
+        g, _ = bs._slaving_gain(p, y)
+        gains[noise] = g
+    # 1e-6 noise is NOT enough — the gain is still astronomically large.
+    assert gains[1e-6] > 1e6, f"1e-6 noise should still blow up, got {gains[1e-6]:.3e}"
+    # the gain only meaningfully drops once the noise dominates _EPS (monotone in the noise).
+    assert gains[1e-3] < gains[1e-6], "more noise must reduce the gain (residual grows)"
+
+
+def test_slaving_gain_blowup_is_SILENT_at_the_confidence_readout():
+    """The load-bearing risk: the blowup does not surface — `topdown_confidence` saturates at ~20
+    for ANY gain past ~1e3, so a gain of 1e9 and a gain of 1e3 read IDENTICALLY downstream. The
+    raw `topdown_gain` is the only place the instability shows, and it is a garbage magnitude."""
+    t = np.arange(512)
+    pure = np.sin(2 * np.pi * t / 16.0)          # a near-noiseless tone → near-perfect slaving
+    sl = bs.slaving_leg(bs.modwt_mra(pure))
+    for pair in sl["pairs"]:
+        # confidence is finite and pinned high, regardless of how absurd the raw gain gets.
+        assert np.isfinite(pair["topdown_confidence"])
+        assert pair["topdown_confidence"] <= 20.0 + 1e-9
+        assert np.isfinite(pair["topdown_gain"])
+
+
+def test_run_stack_never_leaks_nan_inf_on_adversarial_signals():
+    """The containment guarantee: no adversarial 1-D signal (all-zero, constant, single-spike,
+    huge/tiny scale) leaks a NaN or Inf token into the composed run_stack verdict."""
+    t = np.arange(256)
+    for sig in (np.zeros(256), np.full(256, 3.14),
+                np.concatenate([np.zeros(255), [1.0]]),
+                np.sin(t) * 1e12, np.sin(t) * 1e-12):
+        out = bs.run_stack(np.asarray(sig, dtype=float).reshape(-1, 1))
+        blob = json.dumps(out, default=float).lower()
+        assert "nan" not in blob and "infinity" not in blob, f"NaN/Inf leak on {sig[:3]}"
