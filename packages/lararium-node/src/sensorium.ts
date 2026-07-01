@@ -142,7 +142,11 @@ export function capDecl(
   sensoriumDir: string, absDir: string, engine: string, variance: Variance = "sheaf",
 ): CapDecl {
   const rel = relative(sensoriumDir, absDir);
-  const inside = rel !== "" && !rel.startsWith("..") && !isAbsolute(rel);
+  // The SELF cap — its bytes ARE the sensorium dir (a peer whose content leaf IS its own dir). `relative`
+  // returns "" there; store it as the absolute-self-path `"."` (a real inside-relative), never the
+  // absolute dir (which would falsely read as "outside" and break the relocate-as-one invariant).
+  if (rel === "") return { dir: ".", engine, variance };
+  const inside = !rel.startsWith("..") && !isAbsolute(rel);
   return { dir: inside ? rel.split(/[\\/]/).join("/") : absDir, engine, variance };
 }
 

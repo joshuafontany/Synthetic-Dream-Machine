@@ -89,14 +89,14 @@ describe("orphan reaping", () => {
     // a live, durable corpus — must be spared
     const durable = openCorpus({ sourcePath: src, ingest: fakeIngest });
 
-    // a manifest-less leaked dir (interrupted mid-mint)
+    // a record-less leaked dir (interrupted mid-mint)
     const orphanDir = corpusInstanceDir("c-orphan-nomanifest");
     mkdirSync(orphanDir, { recursive: true });
 
-    // an ephemeral whose owner pid is dead (a crashed run)
+    // an ephemeral whose owner pid is dead (a crashed run) — the leak-record rides corpus.json
     const deadDir = corpusInstanceDir("c-orphan-deadpid");
     mkdirSync(deadDir, { recursive: true });
-    writeFileSync(join(deadDir, "manifest.json"), JSON.stringify({
+    writeFileSync(join(deadDir, "corpus.json"), JSON.stringify({
       id: "c-orphan-deadpid", name: "x", sourcePath: src, createdAt: new Date().toISOString(),
       ephemeral: true, pid: 2_147_483_646, // a pid that is not alive
     }) + "\n");

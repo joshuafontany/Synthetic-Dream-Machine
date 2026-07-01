@@ -24,15 +24,16 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { homedir } from "node:os";
 import { spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import {
   larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
-  meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
+  meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir, resolveMempalaceExe,
+  memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
 } from "./vessel-paths.js";
 import { buildSensoriumManifest, readManifest, writeManifest } from "./sensorium.js";
 import type { BuildSensoriumOptions } from "./sensorium.js";
+import { defaultSensoriumBands } from "./memetic-wikitext-sensorium.js";
 
 /** One ledger line from a setup pass — {@link setupPalaceOrgans} returns these (table/JSON-renderable). */
 export interface PalaceSetupStep {
@@ -63,13 +64,6 @@ const PALACE_CONFIG = (): string => join(larMempalaceDir(), "config.json");
 
 function errText(e: unknown): string {
   return e instanceof Error ? e.message : String(e);
-}
-
-/** Prefer the user-installed mempalace CLI (~/.local/bin), fall back to PATH. */
-function resolveMempalaceExe(): string {
-  const exe = process.platform === "win32" ? "mempalace.exe" : "mempalace";
-  const local = join(homedir(), ".local", "bin", exe);
-  return existsSync(local) ? local : "mempalace";
 }
 
 /**
@@ -157,6 +151,12 @@ export function palaceOrgans(): PalaceOrgan[] {
     { name: "mesh:who",       dir: meshWhoDir(),        init: ensureDirOrgan("mesh:who",       meshWhoDir())        },
     { name: "mesh:authority", dir: meshAuthorityDir(),  init: ensureDirOrgan("mesh:authority", meshAuthorityDir())  },
     { name: "mesh:flow",      dir: meshFlowDir(),       init: ensureDirOrgan("mesh:flow",      meshFlowDir())       },
+    // The `memetic-wikitext` sensorium TREE — the top plus its two co-located PEER children (formal ⋈
+    // informal), NEITHER on top. Structure only here (dirs + manifests); the peers' content stores fill
+    // elsewhere. The top's coupling.children carry the peers; the coupling read runs the H¹ gate over them.
+    { name: "memetic-wikitext",          dir: memeticWikitextSensoriumDir(), init: ensureDirOrgan("memetic-wikitext",          memeticWikitextSensoriumDir()) },
+    { name: "memetic-wikitext:formal",   dir: memeticWikitextFormalDir(),    init: ensureDirOrgan("memetic-wikitext:formal",   memeticWikitextFormalDir())    },
+    { name: "memetic-wikitext:informal", dir: memeticWikitextInformalDir(),  init: ensureDirOrgan("memetic-wikitext:informal", memeticWikitextInformalDir())  },
   ];
 }
 
@@ -273,6 +273,48 @@ export function materializeMeshSensorium(): PalaceSetupStep[] {
 }
 
 /**
+ * Materialize the `memetic-wikitext` sensorium TREE — the nameless top entity that `#has` NO fiber cap
+ * and TWO co-located PEER children (formal ⋈ informal) as dumb `coupling.children[]` edges, NEITHER on
+ * top (memetic-wikitext-sensorium.ts). Each peer carries a THIN `content` cap whose bytes ARE its own
+ * dir (serialized `"."` — the self-cap). STRUCTURE only: the peers' content stores fill elsewhere; here
+ * we stamp the three manifests so the tree self-describes and the coupling read has children to resolve.
+ * Returns one ledger step per manifest (top + formal + informal).
+ */
+export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
+  const topDir      = memeticWikitextSensoriumDir();
+  const formalDir   = memeticWikitextFormalDir();
+  const informalDir = memeticWikitextInformalDir();
+  const bands = defaultSensoriumBands();
+  return [
+    materializeSensorium("memetic-wikitext:manifest", topDir, {
+      sensorium: "memetic-wikitext",
+      lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium",
+      caps: {},                                        // the top holds NO byte-storing fiber cap
+      bands,
+      children: [
+        { sensorium: "formal",   absDir: formalDir },
+        { sensorium: "informal", absDir: informalDir },
+      ],
+      ephemeral: false,
+    }),
+    materializeSensorium("memetic-wikitext:formal:manifest", formalDir, {
+      sensorium: "formal",
+      lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium#formal",
+      caps: { content: { absDir: formalDir, engine: "mempalace" } },   // the memes-on-disk corpus (self-cap → ".")
+      bands,
+      ephemeral: false,
+    }),
+    materializeSensorium("memetic-wikitext:informal:manifest", informalDir, {
+      sensorium: "informal",
+      lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium#informal",
+      caps: { content: { absDir: informalDir, engine: "mempalace" } }, // the chat-sessions corpus (self-cap → ".")
+      bands,
+      ephemeral: false,
+    }),
+  ];
+}
+
+/**
  * Stand up EVERY palace organ across the registry — wire-once / detect-existing, fully idempotent.
  * Each organ's step is `healthy ? {ran:false, ok:true, "present"} : init()`, and each init result is
  * re-probed so the ledger reports whether the store actually materialized. Returns the combined
@@ -299,8 +341,10 @@ export function setupPalaceOrgans(): PalaceSetupStep[] {
     }
   }
   // Stamp the SHEAF-TRUE manifests so each sensorium dir self-describes its cap-stack: the `memory`
-  // sensorium, then the `mesh` sensorium TREE (parent + who/authority/flow children).
+  // sensorium, the `mesh` sensorium TREE (parent + who/authority/flow), then the `memetic-wikitext`
+  // sensorium TREE (top + formal/informal peers).
   steps.push(materializeMemorySensorium());
   steps.push(...materializeMeshSensorium());
+  steps.push(...materializeMemeticWikitextSensorium());
   return steps;
 }

@@ -12,6 +12,7 @@ import { readManifest, resolveCapDir } from "../src/sensorium.js";
 import {
   larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
+  memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
 } from "../src/vessel-paths.js";
 
 let home: string;
@@ -40,6 +41,7 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
     expect(names).toEqual([
       "mempalace", "astpalace", "formpalace",
       "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
+      "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
     ]);
   });
 
@@ -71,16 +73,22 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     const first = setupPalaceOrgans();
     // every step ok
     expect(first.every((s) => s.ok)).toBe(true);
-    // ast/form + the whole mesh tree were absent → init ran and created their dirs
-    for (const name of ["astpalace", "formpalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow"]) {
+    // ast/form + the mesh tree + the memetic-wikitext tree were absent → init ran and created their dirs
+    for (const name of [
+      "astpalace", "formpalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
+      "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
+    ]) {
       const step = first.find((s) => s.step === name)!;
       expect(step.ran).toBe(true);
       expect(existsSync(palaceOrgans().find((o) => o.name === name)!.dir)).toBe(true);
     }
     // mempalace was present → skipped (no subprocess)
     expect(first.find((s) => s.step === "mempalace")!.ran).toBe(false);
-    // the sensorium manifests stamped on the FIRST pass (memory + the four mesh manifests)
-    for (const step of ["memory:manifest", "mesh:manifest", "mesh:who:manifest", "mesh:authority:manifest", "mesh:flow:manifest"]) {
+    // the sensorium manifests stamped on the FIRST pass (memory + the four mesh + the three memetic-wikitext)
+    for (const step of [
+      "memory:manifest", "mesh:manifest", "mesh:who:manifest", "mesh:authority:manifest", "mesh:flow:manifest",
+      "memetic-wikitext:manifest", "memetic-wikitext:formal:manifest", "memetic-wikitext:informal:manifest",
+    ]) {
       expect(first.find((s) => s.step === step)!.ran).toBe(true);
     }
 
@@ -119,5 +127,29 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     for (const m of [who, auth, flow]) expect(m.has).toEqual({});   // thin — parallel fills without a structure change
     // FLOW reserves its coupling-lobe child-edges (empty) for the node-stream effective-connectivity.
     expect(flow.coupling.children).toEqual([]);
+  });
+
+  test("stamps the memetic-wikitext TREE: top #has {formal,informal} as coupling children; peers carry a self-cap", () => {
+    mkdirSync(mempalace, { recursive: true });
+    writeFileSync(join(mempalace, "config.json"), JSON.stringify({ hooks: { auto_save: false } }) + "\n");
+    setupPalaceOrgans();
+
+    // The top holds NO fiber cap; the peers ride the dumb coupling child-edges, NEITHER on top.
+    const top = readManifest(memeticWikitextSensoriumDir())!;
+    expect(top.sensorium).toBe("memetic-wikitext");
+    expect(top.has).toEqual({});
+    expect(top.coupling.children.map((c) => c.sensorium)).toEqual(["formal", "informal"]);
+    const byChild = Object.fromEntries(top.coupling.children.map((c) => [c.sensorium, resolveCapDir(memeticWikitextSensoriumDir(), c.dir)]));
+    expect(byChild["formal"]).toBe(memeticWikitextFormalDir());
+    expect(byChild["informal"]).toBe(memeticWikitextInformalDir());
+
+    // Each peer self-describes with a THIN content cap whose bytes ARE its own dir — the self-cap "." fix.
+    const formal   = readManifest(memeticWikitextFormalDir())!;
+    const informal = readManifest(memeticWikitextInformalDir())!;
+    expect([formal.sensorium, informal.sensorium]).toEqual(["formal", "informal"]);
+    expect(formal.has["content"]!.dir).toBe(".");
+    expect(informal.has["content"]!.dir).toBe(".");
+    // and "." inverts back to the peer dir (relocate-as-one holds).
+    expect(resolveCapDir(memeticWikitextFormalDir(), formal.has["content"]!.dir)).toBe(memeticWikitextFormalDir());
   });
 });

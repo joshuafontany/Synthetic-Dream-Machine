@@ -69,8 +69,25 @@ export type {
 } from "./memetic-wikitext-sensorium.js";
 
 // The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
-export { palaceOrgans, setupPalaceOrgans, organHealthy, materializeMemorySensorium, materializeMeshSensorium } from "./palace-organs.js";
+export {
+  palaceOrgans, setupPalaceOrgans, organHealthy,
+  materializeMemorySensorium, materializeMeshSensorium, materializeMemeticWikitextSensorium,
+} from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";
+
+// The memetic-wikitext sensorium dir + its formal/informal peer dirs (the co-located-peers tree).
+export {
+  memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir, resolveMempalaceExe,
+} from "./vessel-paths.js";
+
+// The COUPLING READER — makes `coupling.children` load-bearing: resolves the child edges → each child's
+// section over a shared stalk → the H¹-GATED fusion (fuse or hold-open, never a silent average).
+export {
+  readCoupling, readMemeticWikitextCoupling, defaultChildRestriction, SALIENCES_SIDECAR,
+} from "./sensorium-coupling.js";
+export type {
+  ChildRestriction, CouplingChildRead, CouplingRead, ReadCouplingOptions,
+} from "./sensorium-coupling.js";
 
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {

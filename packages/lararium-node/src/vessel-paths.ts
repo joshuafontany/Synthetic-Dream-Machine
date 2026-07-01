@@ -35,6 +35,7 @@
  * `larIdentityDir` (vessel-identity — a separate concern) stays at its `~/.lares` spelling.
  */
 
+import { existsSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -80,6 +81,18 @@ export function larRuntimeHome(): string {
 /** The vessel config file — `$XDG_CONFIG_HOME/lares/config.json`. */
 export function larConfigPath(): string {
   return join(larConfigHome(), "config.json");
+}
+
+/**
+ * The ONE mempalace executable resolver (DRY) — prefer the user-installed CLI at `~/.local/bin`
+ * (`mempalace.exe` on win32), fall back to the bare name on PATH. Both the palace-organ setup and the
+ * corpus-ingest leg resolve the exe through HERE so the win32 spelling + the local-bin preference never
+ * fork across call sites.
+ */
+export function resolveMempalaceExe(): string {
+  const exe = process.platform === "win32" ? "mempalace.exe" : "mempalace";
+  const local = join(homedir(), ".local", "bin", exe);
+  return existsSync(local) ? local : exe;
 }
 
 // ── The legacy vessel home (isolation base + still-legacy organs) ─────────────────────────────────
@@ -158,6 +171,29 @@ export function meshFlowDir(): string {
  *  named alias for surface stability (the palace-organ registry + the index re-export read it). */
 export function larMeshPalaceDir(): string {
   return meshSensoriumDir();
+}
+
+// ── The `memetic-wikitext` sensorium (FORMAL ⋈ INFORMAL peers, neither top) ───────────────────────
+
+/** The `memetic-wikitext` sensorium dir — `<data>/sensoriums/memetic-wikitext`. A nameless nested
+ *  entity that `#has` NO fiber cap and TWO PEER child-sensoria (formal ⋈ informal) as dumb
+ *  `coupling.children[]` edges, NEITHER on top; the coupling plane reads the directed formal↔informal
+ *  flow (memetic-wikitext-sensorium.ts). The filetree IS the composition (sensorium.ts). */
+export function memeticWikitextSensoriumDir(): string {
+  return join(larDataHome(), "sensoriums", "memetic-wikitext");
+}
+
+/** The FORMAL peer-sensorium dir — `<memetic-wikitext>/formal`. The memes-on-disk corpus (grammar/
+ *  liturgy): a thin content-cap sensorium the parallel fills; the dir nests below the top so the tree
+ *  relocates as one and teardown reaps it. */
+export function memeticWikitextFormalDir(): string {
+  return join(memeticWikitextSensoriumDir(), "formal");
+}
+
+/** The INFORMAL peer-sensorium dir — `<memetic-wikitext>/informal`. The chat-sessions corpus (pidgin):
+ *  a thin content-cap sensorium the parallel fills; nested below the top with the formal peer. */
+export function memeticWikitextInformalDir(): string {
+  return join(memeticWikitextSensoriumDir(), "informal");
 }
 
 // ── The ephemeral corpus multipalace (scratch sensoriums) ─────────────────────────────────────────

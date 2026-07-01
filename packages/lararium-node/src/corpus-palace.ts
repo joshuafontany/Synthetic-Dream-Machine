@@ -6,10 +6,17 @@
  * is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit, success OR error. An `open`
  * leaves it live (a durable-until-dissolved instance) for later `query` / `keep` / `dissolve`.
  *
- * Leak-proofing: every instance carries a `manifest.json` ({id, ephemeral, pid, …}). An ephemeral
- * instance that outlives its run process is, by definition, leaked — `reapOrphans` removes every
- * ephemeral instance whose owning pid is dead (and every manifest-less dir), so an interrupted run
+ * Leak-proofing: every instance carries a `corpus.json` LIFECYCLE record ({id, ephemeral, pid, …}). An
+ * ephemeral instance that outlives its run process is, by definition, leaked — `reapOrphans` removes
+ * every ephemeral instance whose owning pid is dead (and every record-less dir), so an interrupted run
  * can never leave scratch behind. `palace-teardown` ALSO enumerates `.corpus/*` for the nuke path.
+ *
+ * THE MANIFEST SPLIT (the sheaf-true reader must never misparse the leak-record): the lifecycle record
+ * rides `corpus.json`, and the instance ALSO stamps a REAL {@link SensoriumManifest} at the canonical
+ * `manifest.json` (`ephemeral:true`) — so the corpus dir IS a sheaf-true ephemeral sensorium (the
+ * compose_palace instantiated transiently: content ← the scratch chroma at the dir root, structure ←
+ * the parse-router sub-palace when it stood, bands ← the on-read aperture grain). Two files, two jobs;
+ * a sensorium reader reads a true sensorium, the reaper reads the leak-record.
  *
  * The deep ingest (bands / structure / form caps) lands in S1–S3; THIS sprint wires the lifecycle +
  * the store + a THIN, graceful ingest seam (a best-effort `mempalace mine` into the scratch dir).
@@ -23,9 +30,13 @@ import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn, resolveBandsSidecarSpawn, resolveComputeCapEnv, resolveFormInductionSpawn } from "@lararium/mempalace";
 import { atomicWriteFileSync } from "./fs-atomic.js";
-import { larCorpusDir, corpusInstanceDir } from "./vessel-paths.js";
+import { larCorpusDir, corpusInstanceDir, resolveMempalaceExe } from "./vessel-paths.js";
+import { buildSensoriumManifest, readManifest as readSensoriumManifest, writeManifest as writeSensoriumManifest } from "./sensorium.js";
 
-const MANIFEST = "manifest.json";
+/** The LIFECYCLE record filename — the leak-proofing/provenance record ({id, ephemeral, pid, …}). Held
+ *  OFF `manifest.json` so the sheaf-true sensorium reader never misparses it (the corpus dir's
+ *  `manifest.json` carries a REAL {@link SensoriumManifest} instead). */
+const CORPUS_RECORD = "corpus.json";
 
 /** One ephemeral corpus-palace instance's on-disk manifest — the leak-proofing + provenance record. */
 export interface CorpusManifest {
@@ -65,21 +76,44 @@ export function newCorpusId(): string {
   return `c-${Date.now().toString(36)}-${randomBytes(3).toString("hex")}`;
 }
 
-function manifestPath(dir: string): string {
-  return join(dir, MANIFEST);
+function corpusRecordPath(dir: string): string {
+  return join(dir, CORPUS_RECORD);
 }
 
-function readManifest(dir: string): CorpusManifest | null {
+function readCorpusRecord(dir: string): CorpusManifest | null {
   try {
-    const m = JSON.parse(readFileSync(manifestPath(dir), "utf8")) as CorpusManifest;
+    const m = JSON.parse(readFileSync(corpusRecordPath(dir), "utf8")) as CorpusManifest;
     return typeof m?.id === "string" ? m : null;
   } catch {
     return null;
   }
 }
 
-function writeManifest(dir: string, m: CorpusManifest): void {
-  atomicWriteFileSync(manifestPath(dir), JSON.stringify(m, null, 2) + "\n");
+function writeCorpusRecord(dir: string, m: CorpusManifest): void {
+  atomicWriteFileSync(corpusRecordPath(dir), JSON.stringify(m, null, 2) + "\n");
+}
+
+/**
+ * Stamp the corpus dir's REAL {@link SensoriumManifest} (`ephemeral:true`) — the compose_palace
+ * instantiated transiently. content ← the scratch chroma the mine wrote at the dir root (engine
+ * `mempalace`; the self-dir cap serializes as `"."`), structure ← the parse-router sub-palace when it
+ * actually stood (`structures > 0`; engine `astpalace`), bands ← the on-read aperture grain (base cap,
+ * no bytes). This is what a sheaf-true reader sees — never the leak-record. Best-effort: a stamp fault
+ * never sinks the ingest (the leak-record + planes already stand).
+ */
+function stampCorpusSensorium(dir: string, structures: number): void {
+  try {
+    writeSensoriumManifest(dir, buildSensoriumManifest(dir, {
+      sensorium: "corpus",
+      lar: "lar:///ha.ka.ba/@lares/api/lares/corpus#astral-multipalace",
+      caps: {
+        content: { absDir: dir, engine: "mempalace" },
+        ...(structures > 0 ? { structure: { absDir: corpusStructureDir(dir), engine: "astpalace" } } : {}),
+      },
+      bands: { grain: "aperture", computed: "sidecar" },
+      ephemeral: true,
+    }));
+  } catch { /* best effort — the leak-record + planes already stand */ }
 }
 
 /** Is a pid still alive? (signal 0 = existence probe). EPERM ⇒ alive-but-not-ours. */
@@ -103,10 +137,10 @@ function instanceDirs(): string[] {
     .filter((p) => { try { return statSync(p).isDirectory(); } catch { return false; } });
 }
 
-/** The live corpus instances (valid manifest), newest first. */
+/** The live corpus instances (valid lifecycle record), newest first. */
 export function listCorpora(): CorpusManifest[] {
   return instanceDirs()
-    .map(readManifest)
+    .map(readCorpusRecord)
     .filter((m): m is CorpusManifest => m !== null)
     .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }
@@ -252,7 +286,7 @@ export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, palaceDir }) => 
   // (no trees to mine) ⇒ form gracefully skips.
   const form = struct.structures > 0 ? runFormInduction(palaceDir) : { forms: 0, note: "form-skipped: no structures" };
   try {
-    const exe = process.platform === "win32" ? "mempalace.exe" : "mempalace";
+    const exe = resolveMempalaceExe();
     // The OPTIONAL GPU compute cap: on a card, this hands the content embedder the CUDA lib path
     // + `MEMPALACE_EMBEDDING_DEVICE=auto` (cuda-if-present); on the QA box it adds only the device
     // hint and the embedder falls to CPU. Composed when present, graceful when absent.
@@ -304,7 +338,9 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
     id, name, sourcePath, createdAt: new Date().toISOString(),
     ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, bands, forms, note,
   };
-  writeManifest(dir, manifest);
+  writeCorpusRecord(dir, manifest);
+  // Stamp the REAL sheaf-true sensorium manifest beside the leak-record (the compose_palace, transient).
+  stampCorpusSensorium(dir, structures);
   return { id, dir, manifest };
 }
 
@@ -339,7 +375,7 @@ export async function queryCorpus(
   id: string, keywords: string, search: CorpusSearch = defaultCorpusSearch, limit = 5,
 ): Promise<QueryCorpusResult> {
   const dir = corpusInstanceDir(id);
-  if (!existsSync(dir) || readManifest(dir) === null) return { id, found: false, hits: [] };
+  if (!existsSync(dir) || readCorpusRecord(dir) === null) return { id, found: false, hits: [] };
   const { hits, note } = await search({ palaceDir: dir, query: keywords, limit });
   return { id, found: true, hits, ...(note ? { note } : {}) };
 }
@@ -348,13 +384,17 @@ export async function queryCorpus(
 
 export interface KeepResult { readonly id: string; readonly kept: boolean; readonly existed: boolean; }
 
-/** Promote an ephemeral corpus to durable (ephemeral:false, pid dropped) — it survives exit now. */
+/** Promote an ephemeral corpus to durable (ephemeral:false, pid dropped) — it survives exit now. Flips
+ *  the sheaf-true sensorium manifest's `ephemeral` too, so the leak-record and the sensorium stay coherent. */
 export function keepCorpus(id: string): KeepResult {
   const dir = corpusInstanceDir(id);
-  const m = existsSync(dir) ? readManifest(dir) : null;
+  const m = existsSync(dir) ? readCorpusRecord(dir) : null;
   if (m === null) return { id, kept: false, existed: false };
   const { pid: _pid, ...rest } = m;
-  writeManifest(dir, { ...rest, ephemeral: false });
+  writeCorpusRecord(dir, { ...rest, ephemeral: false });
+  // Keep the sensorium manifest coherent — its bytes are durable now.
+  const sm = readSensoriumManifest(dir);
+  if (sm && sm.ephemeral) { try { writeSensoriumManifest(dir, { ...sm, ephemeral: false }); } catch { /* best effort */ } }
   return { id, kept: true, existed: true };
 }
 
@@ -375,11 +415,11 @@ export function dissolveAll(): string[] {
   return ids;
 }
 
-/** A leaked scratch dir — a reap candidate (manifest-less, or an ephemeral whose owner pid is dead). */
+/** A leaked scratch dir — a reap candidate (record-less, or an ephemeral whose owner pid is dead). */
 export function listOrphans(): string[] {
   const orphans: string[] = [];
   for (const dir of instanceDirs()) {
-    const m = readManifest(dir);
+    const m = readCorpusRecord(dir);
     if (m === null) { orphans.push(dir); continue; }          // corrupt / interrupted mid-mint
     if (!m.ephemeral) continue;                                // durable — never an orphan
     if (m.pid !== undefined && pidAlive(m.pid)) continue;      // a live run owns it — spare it
@@ -439,7 +479,7 @@ export async function runCorpus(opts: RunCorpusOptions): Promise<RunCorpusResult
   // Hard-interrupt guard: a synchronous sweep on process exit removes the scratch if the run never
   // reached its finally (SIGINT / uncaught). Idempotent with the finally below + dissolveCorpus.
   let dissolved = false;
-  const guard = (): void => { if (!dissolved && existsSync(dir) && (readManifest(dir)?.ephemeral ?? true)) { try { rmSync(dir, { recursive: true, force: true }); } catch { /* best effort */ } } };
+  const guard = (): void => { if (!dissolved && existsSync(dir) && (readCorpusRecord(dir)?.ephemeral ?? true)) { try { rmSync(dir, { recursive: true, force: true }); } catch { /* best effort */ } } };
   const onSignal = (sig: NodeJS.Signals): void => { guard(); process.exit(sig === "SIGINT" ? 130 : 143); };
   process.once("exit", guard);
   process.once("SIGINT", onSignal);

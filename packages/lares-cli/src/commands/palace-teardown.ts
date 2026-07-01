@@ -48,6 +48,9 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
   "mesh:who": "mesh/who sensorium (identity/presence)",
   "mesh:authority": "mesh/authority sensorium (caps/keyhive)",
   "mesh:flow": "mesh/flow sensorium (traffic/coupling — the coupling-lobe)",
+  "memetic-wikitext": "memetic-wikitext sensorium (the formal ⋈ informal co-located-peers tree)",
+  "memetic-wikitext:formal": "memetic-wikitext/formal sensorium (memes-on-disk — grammar/liturgy)",
+  "memetic-wikitext:informal": "memetic-wikitext/informal sensorium (chat-sessions — pidgin)",
 };
 
 /**

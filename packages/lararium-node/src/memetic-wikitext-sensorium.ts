@@ -557,13 +557,27 @@ export function coupleAligned(
     if (r.out.coupling) coupling = r.out.coupling;
   }
 
-  // Tier-0 screen on the PRIMARY coupling channel — the first dim of the first two children (the steering
-  // red / the formal register). Never trust the Gaussian read past this without an escalate check.
+  // Tier-0 screen on the PRIMARY coupling channel — child-0 (the steering red / the formal register)
+  // against child-1, ACROSS EVERY SHARED DIM, never dim-0 alone: a nonlinearity the Gaussian read would
+  // miss can hide in ANY coordinate, so a dim-0-only screen leaves signal on the table. Run the gate per
+  // shared dim; escalate if ANY dim escalates; report the dim carrying the STRONGEST nonlinear-beyond-
+  // linear signal (max dCorGap) as the representative reading. Never trust the Gaussian read past this.
   let linearity: LinearityReading | null = null;
   if (children.length >= 2 && ticks.length >= 8) {
-    const x = ticks.map((t) => t[0]?.[0] ?? 0);
-    const y = ticks.map((t) => t[1]?.[0] ?? 0);
-    linearity = linearityGate(x, y, opts.linearity ?? {});
+    let d0 = 0, d1 = 0;
+    for (const t of ticks) { d0 = Math.max(d0, t[0]?.length ?? 0); d1 = Math.max(d1, t[1]?.length ?? 0); }
+    const dims = Math.max(1, Math.min(d0, d1));   // at least dim-0 (a scalar channel keeps the old behavior)
+    let anyEscalate = false;
+    for (let d = 0; d < dims; d++) {
+      const x = ticks.map((t) => t[0]?.[d] ?? 0);
+      const y = ticks.map((t) => t[1]?.[d] ?? 0);
+      const r = linearityGate(x, y, opts.linearity ?? {});
+      anyEscalate = anyEscalate || r.escalate;
+      // keep the strongest nonlinear-beyond-linear reading (max dCorGap) as the representative one.
+      if (linearity === null || r.dCorGap > linearity.dCorGap) linearity = r;
+    }
+    // the representative reading carries the OR-of-dims escalate verdict, not just its own dim's.
+    if (linearity !== null && anyEscalate !== linearity.escalate) linearity = { ...linearity, escalate: anyEscalate };
   }
 
   return { coupling, warming, filled, resets, ticks: ticks.length, linearity, escalate: linearity?.escalate ?? false };
