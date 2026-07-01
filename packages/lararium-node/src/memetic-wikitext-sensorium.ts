@@ -32,7 +32,12 @@
 
 import { createHash } from "node:crypto";
 import { collectEvents } from "@lararium/tw5/meme-ast";
-import { coupleMesh, type ChildSignalMV, type MeshCoupling } from "@lararium/mesh";
+import {
+  type MeshCoupling,
+  windowInit, windowPush, windowLengthFor, type WindowConfig, type WindowState,
+  linearityGate, type LinearityReading,
+  ffzMembershipAddress, ffzTruncate, type FfzCells,
+} from "@lararium/mesh";
 import { buildSensoriumManifest, type SensoriumManifest, type SensoriumBands } from "./sensorium.js";
 import { FFZ_ADDRESS_ORDER, type FfzBand } from "@lararium/mesh";
 
@@ -265,77 +270,190 @@ export function sigilInjectionQuery(inj: SigilInjection = SIGIL_INJECTION): stri
   ].join("\n");
 }
 
-// ── the KI: windowed signals + the shared coupler (the fractal atom) ────────────────────────────────
+// ── the KI: FFZ-aligned tick streams → the windowed-coupling runtime (the fractal atom) ─────────────
+//
+// "A system is what it does." — the fixed-window ordinal shortcut is GONE. The coupling reads run the
+// parallel keel's STREAMING runtime (windowed-coupling: L-window · floor-warming · change-point reset ·
+// hop) over a stream of ALIGNED TICKS, each tick one vector per child at a SHARED GRAIN. That grain is
+// the FFZ rhythmic address — the runtime's own contract ("the worldline aligns upstream"). The reader
+// only PRODUCES the aligned ticks + CALLS the runtime; it never re-derives windowing, reset, or coupling.
 
-/** Per-window channel densities of one text (the atom both scales window through). */
-interface WindowDensity {
-  readonly redFrac: number;
-  readonly blackFrac: number;
+/** One ALIGNED tick — child i's vector at a shared-grain instant. Order matches the children names. */
+export type AlignedTick = readonly (readonly number[])[];
+
+/** Options for {@link coupleAligned} — the window policy (L auto-derived from d_joint) + the screen. */
+export interface CoupleAlignedOptions {
+  /** window length; default `windowLengthFor(d_joint, k)` — the estimator floor, never a magic number. */
+  readonly L?: number;
+  /** L = k · d_joint (k ∈ [15,20]; default 15). */
+  readonly k?: number;
+  readonly floor?: number;
+  readonly hop?: number;
+  readonly detectMin?: number;
+  readonly changeThreshold?: number;
+  readonly mergeThreshold?: number;
+  readonly lag?: number;
+  readonly alpha?: number;
+  /** the Tier-0 linearity-gate thresholds (effect-size floors). */
+  readonly linearity?: { gapDelta?: number; kurtFloor?: number };
 }
 
-/** Window a text's stratification into `windowCount` byte-windows; per window, the red/black density. */
-export function windowDensities(text: string, windowCount: number, strat: Stratification = stratify(text)): WindowDensity[] {
-  const len = text.length;
-  const wlen = Math.max(1, Math.ceil(len / windowCount));
-  const out: WindowDensity[] = [];
-  for (let w = 0; w < windowCount; w++) {
-    const ws = w * wlen;
-    const we = Math.min(len, ws + wlen);
-    const width = Math.max(1, we - ws);
-    let redChars = 0;
-    for (const s of strat.strata) {
-      const os = Math.max(ws, s.span[0]);
-      const oe = Math.min(we, s.span[1]);
-      if (oe > os) redChars += oe - os;
-    }
-    const redFrac = redChars / width;
-    out.push({ redFrac, blackFrac: 1 - redFrac });
+/** The result of running the windowed runtime over a tick stream — the KI (氣, flow) reading. */
+export interface AlignedCouplingRead {
+  /** the last significance-clean coupling the runtime emitted, or null while warming / no shared grain. */
+  readonly coupling: MeshCoupling | null;
+  /** the final window is under-powered (too few aligned ticks, or just reset) → no trustworthy coupling. */
+  readonly warming: boolean;
+  /** filled samples in the final window. */
+  readonly filled: number;
+  /** change-point regime resets over the stream (each keeps a coupling inside ONE regime). */
+  readonly resets: number;
+  /** aligned ticks consumed (0 ⇒ no shared grain — the honest no-coupling, never fabricated). */
+  readonly ticks: number;
+  /** the Tier-0 linearity screen on the primary coupling channel (null when too few ticks / <2 children). */
+  readonly linearity: LinearityReading | null;
+  /** the screen's verdict: the Gaussian read leaves nonlinear signal on the table → escalate to KSG. */
+  readonly escalate: boolean;
+}
+
+/**
+ * The SHARED COUPLER (the fractal atom): run the parallel keel's {@link windowPush} runtime over an
+ * ALIGNED TICK stream, then screen the primary channel with {@link linearityGate}. A THIN call — the
+ * runtime owns window / warming / change-point-reset / hop / coupling; this only folds the stream and
+ * reports. BOTH scales route through here — {@link readKiStratum} (red↔black) and {@link readKiCorpus}
+ * (formal↔informal) — the same shape, one FFZ grain up.
+ */
+export function coupleAligned(
+  children: readonly string[], ticks: readonly AlignedTick[], opts: CoupleAlignedOptions = {},
+): AlignedCouplingRead {
+  const first = ticks[0];
+  const dJoint = first ? first.reduce((s, v) => s + v.length, 0) : Math.max(1, children.length);
+  const L = opts.L ?? windowLengthFor(dJoint, opts.k ?? 15);
+  const config: WindowConfig = {
+    L,
+    ...(opts.floor !== undefined ? { floor: opts.floor } : {}),
+    ...(opts.hop !== undefined ? { hop: opts.hop } : {}),
+    ...(opts.detectMin !== undefined ? { detectMin: opts.detectMin } : {}),
+    ...(opts.changeThreshold !== undefined ? { changeThreshold: opts.changeThreshold } : {}),
+    ...(opts.mergeThreshold !== undefined ? { mergeThreshold: opts.mergeThreshold } : {}),
+    ...(opts.lag !== undefined ? { lag: opts.lag } : {}),
+    ...(opts.alpha !== undefined ? { alpha: opts.alpha } : {}),
+  };
+
+  let state: WindowState = windowInit(children);
+  let coupling: MeshCoupling | null = null;
+  let warming = true;
+  let filled = 0;
+  let resets = 0;
+  for (const tick of ticks) {
+    const r = windowPush(state, tick, config);
+    state = r.state;
+    warming = r.out.warming;
+    filled = r.out.filled;
+    if (r.out.reset) resets++;
+    if (r.out.coupling) coupling = r.out.coupling;
   }
-  return out;
+
+  // Tier-0 screen on the PRIMARY coupling channel — the first dim of the first two children (the steering
+  // red / the formal register). Never trust the Gaussian read past this without an escalate check.
+  let linearity: LinearityReading | null = null;
+  if (children.length >= 2 && ticks.length >= 8) {
+    const x = ticks.map((t) => t[0]?.[0] ?? 0);
+    const y = ticks.map((t) => t[1]?.[0] ?? 0);
+    linearity = linearityGate(x, y, opts.linearity ?? {});
+  }
+
+  return { coupling, warming, filled, resets, ticks: ticks.length, linearity, escalate: linearity?.escalate ?? false };
+}
+
+// ── STRATUM scale: FFZ Pulse-grain ticks from one text ──────────────────────────────────────────────
+
+/** The finest aperture cell (the Pulse band ceiling) — the FFZ inscription-atom grain a text is walked at. */
+export const PULSE_GRAIN = 40;
+
+/** The red-channel density over a byte cell [start, end) — the fraction of the cell the red strata cover. */
+function cellRedFrac(strata: readonly Stratum[], start: number, end: number): number {
+  const width = Math.max(1, end - start);
+  let redChars = 0;
+  for (const s of strata) {
+    const os = Math.max(start, s.span[0]);
+    const oe = Math.min(end, s.span[1]);
+    if (oe > os) redChars += oe - os;
+  }
+  return redChars / width;
 }
 
 /**
- * The SHARED COUPLER (the fractal atom): hand a set of named `ChildSignalMV` streams to the mesh keel's
- * `coupleMesh` (whiten → couple → χ²-gate). NEVER re-derives the coupling; a thin call. Both scales route
- * through here — {@link readKiStratum} (red↔black) and {@link readKiCorpus} (formal↔informal).
+ * Walk ONE text at the FFZ Pulse grain, emitting an aligned tick per cell: `[[redFrac], [blackFrac]]`.
+ * The shared grain is the text's own reading order at the finest aperture cell; the runtime accumulates
+ * L cells into a window and detects regime shifts (a section boundary) itself — no fixed pre-window.
  */
-export function coupleStreams(streams: readonly ChildSignalMV[], opts?: Parameters<typeof coupleMesh>[1]): MeshCoupling {
-  return coupleMesh(streams, opts);
+export function stratumTicks(text: string, grain = PULSE_GRAIN, strat: Stratification = stratify(text)): AlignedTick[] {
+  const ticks: AlignedTick[] = [];
+  const step = Math.max(1, grain);
+  for (let start = 0; start < text.length; start += step) {
+    const end = Math.min(text.length, start + step);
+    const red = cellRedFrac(strat.strata, start, end);
+    ticks.push([[red], [1 - red]]);
+  }
+  return ticks;
 }
 
 /**
- * STRATUM-scale KI: split ONE text into its red and black channels, window each, and couple them —
- * reading the directed red↔black flow (does the classifier register lead the prose, or trail it?).
+ * Read the STRATUM-scale KI: the red↔black directed coupling of one text, run through the windowed
+ * runtime over Pulse-grain ticks. A short text yields fewer ticks than L ⇒ `warming` (the runtime
+ * REFUSES to emit on under-powered data — the anti-false-sovereign behavior, honest by construction).
  */
-export function channelSignals(text: string, windowCount = 48): readonly ChildSignalMV[] {
-  const dens = windowDensities(text, windowCount);
-  const red: ChildSignalMV = { name: "red", signal: dens.map((d) => [d.redFrac]) };
-  const black: ChildSignalMV = { name: "black", signal: dens.map((d) => [d.blackFrac]) };
-  return [red, black];
+export function readKiStratum(text: string, opts: CoupleAlignedOptions = {}): AlignedCouplingRead {
+  return coupleAligned(["red", "black"], stratumTicks(text), opts);
 }
 
-/** Read the stratum-scale KI: the red↔black directed coupling of one memetic-wikitext text. */
-export function readKiStratum(text: string, windowCount = 48, opts?: Parameters<typeof coupleMesh>[1]): MeshCoupling {
-  return coupleStreams(channelSignals(text, windowCount), opts);
+// ── CORPUS scale: FFZ-address JOIN (no ordinal fakery) ──────────────────────────────────────────────
+
+/** One FFZ-addressed cell — a vector at a rhythmic address. The address is the SHARED-GRAIN join key. */
+export interface FfzCell {
+  /** the cell's FFZ rhythmic address — a serialized string, or an {@link FfzCells} to serialize. */
+  readonly ffz: string | FfzCells;
+  /** the cell's feature vector at that address. */
+  readonly vec: readonly number[];
+}
+
+/** Serialize a cell's FFZ address, optionally truncated to `band` coarse cells (the coupling grain). */
+function ffzKey(cell: FfzCell, band?: number): string {
+  const addr = typeof cell.ffz === "string" ? cell.ffz : ffzMembershipAddress(cell.ffz);
+  return band !== undefined ? ffzTruncate(addr, band) : addr;
 }
 
 /**
- * CORPUS-scale KI: window the FORMAL and INFORMAL texts (each on the SAME window grid) into density
- * vectors and couple them — the peer sub-sensoria's directed formal↔informal flow. The SAME windowing
- * atom and the SAME coupler as the stratum scale (the fractal made literal). The shared ordinal-window
- * grid is the first-instance alignment; the FFZ aperture clock is the named, not-yet-built binding.
+ * JOIN two FFZ-addressed cell streams into aligned ticks — the ONLY sound cross-text alignment: a formal
+ * cell pairs with an informal cell IFF they SHARE an FFZ address (the shared grain). Formal drives order;
+ * a formal cell with no informal match at its address emits NO tick. No shared address ⇒ no ticks ⇒ the
+ * runtime warms and emits nothing (the honest no-coupling — never the ordinal fabrication that was here).
  */
-export function corpusSignals(formalText: string, informalText: string, windowCount = 48): readonly ChildSignalMV[] {
-  const f = windowDensities(formalText, windowCount);
-  const i = windowDensities(informalText, windowCount);
-  const formal: ChildSignalMV = { name: "formal", signal: f.map((d) => [d.redFrac, d.blackFrac]) };
-  const informal: ChildSignalMV = { name: "informal", signal: i.map((d) => [d.redFrac, d.blackFrac]) };
-  return [formal, informal];
+export function ffzAlignTicks(formal: readonly FfzCell[], informal: readonly FfzCell[], band?: number): AlignedTick[] {
+  const imap = new Map<string, readonly number[]>();
+  for (const c of informal) {
+    const k = ffzKey(c, band);
+    if (!imap.has(k)) imap.set(k, c.vec);
+  }
+  const ticks: AlignedTick[] = [];
+  for (const c of formal) {
+    const iv = imap.get(ffzKey(c, band));
+    if (iv) ticks.push([c.vec, iv]);
+  }
+  return ticks;
 }
 
-/** Read the corpus-scale KI: the formal↔informal directed coupling of the two peer sub-sensoria. */
-export function readKiCorpus(formalText: string, informalText: string, windowCount = 48, opts?: Parameters<typeof coupleMesh>[1]): MeshCoupling {
-  return coupleStreams(corpusSignals(formalText, informalText, windowCount), opts);
+/**
+ * Read the CORPUS-scale KI: the formal↔informal directed coupling of the two peer sub-sensoria, aligned
+ * on a SHARED FFZ address (never ordinal index — two unrelated texts share no ordinal axis; only the
+ * rhythmic clock makes them comparable). The SAME runtime as the stratum scale, one grain up — the
+ * fractal made literal. The FfzCell streams come from the bands sidecar / worldline clock upstream.
+ */
+export function readKiCorpus(
+  formal: readonly FfzCell[], informal: readonly FfzCell[], opts: CoupleAlignedOptions & { band?: number } = {},
+): AlignedCouplingRead {
+  return coupleAligned(["formal", "informal"], ffzAlignTicks(formal, informal, opts.band), opts);
 }
 
 // ── the LI/KI faces of one text ─────────────────────────────────────────────────────────────────────
@@ -345,9 +463,9 @@ export function readLi(text: string, sourceCid?: string): Stratification {
   return stratify(text, sourceCid ?? sourceCidOf(text));
 }
 
-/** The KI (氣 — flow) face: the stratum-scale red↔black coupling of a source. */
-export function readKi(text: string, windowCount = 48, opts?: Parameters<typeof coupleMesh>[1]): MeshCoupling {
-  return readKiStratum(text, windowCount, opts);
+/** The KI (氣 — flow) face: the stratum-scale red↔black coupling of a source, windowed + screened. */
+export function readKi(text: string, opts: CoupleAlignedOptions = {}): AlignedCouplingRead {
+  return readKiStratum(text, opts);
 }
 
 // ── the compose: the top nameless entity `#has {formal, informal}`, neither top ────────────────────

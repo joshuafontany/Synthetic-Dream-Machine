@@ -4,17 +4,18 @@
  * Proves: the reader stratifies a real memetic-wikitext sample into a skeletal tier (black) + red/base
  * strata + autosegmental associations; a fine-grain inline `<<~ confidence… >>` reads as a CROSS-BAND
  * signal (two axes, not forced-outer); the peer sub-sensoria compose (`#has {formal, informal}`,
- * coupling.children, neither top); and the coupling edge reads formal↔informal (directed) via coupleMesh.
+ * coupling.children, neither top); and the coupling edge reads formal↔informal (directed) — through the
+ * mesh keel's windowed-coupling RUNTIME over FFZ-aligned ticks, screened by the linearity gate.
  */
 
 import { describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { ChildSignalMV } from "@lararium/mesh";
 import {
   stratify, bandForSpanLength, sigilInjectionQuery, SIGIL_INJECTION,
-  channelSignals, readKiStratum, corpusSignals, readKiCorpus, coupleStreams,
+  stratumTicks, readKiStratum, ffzAlignTicks, readKiCorpus, coupleAligned,
+  type AlignedTick, type FfzCell,
   buildMemeticWikitextSensorium, buildPeerSensorium,
 } from "../src/memetic-wikitext-sensorium.js";
 
@@ -134,41 +135,57 @@ describe("the compose — `#has {formal, informal}`: neither top", () => {
   });
 });
 
-describe("the KI face — the fractal coupler through coupleMesh", () => {
-  test("the stratum scale reads red↔black on a real text", () => {
-    const streams = channelSignals(SAMPLE, 24);
-    expect(streams.map((s) => s.name)).toEqual(["red", "black"]);
-    // both children share the SAME window grid (aligned time axis)
-    expect(streams[0]!.signal.length).toBe(streams[1]!.signal.length);
-    const mc = readKiStratum(SAMPLE, 24);
-    expect(mc.children).toEqual(["red", "black"]);
-    expect(mc.te.length).toBe(2);
+describe("the KI face — FFZ-aligned ticks through the windowed-coupling runtime", () => {
+  test('the stratum scale walks Pulse-grain ticks and REFUSES to emit on a short text ("what it does")', () => {
+    // the fine sample yields fewer Pulse cells than L ⇒ the runtime warms and emits NOTHING — the
+    // anti-false-sovereign behavior, honest by construction (no fabricated coupling on thin data).
+    const ticks = stratumTicks(SAMPLE);
+    expect(ticks.length).toBeGreaterThan(0);
+    expect(ticks[0]!.length).toBe(2);                 // one vector per child (red, black), aligned
+    const read = readKiStratum(SAMPLE);
+    expect(read.ticks).toBe(ticks.length);
+    expect(read.warming).toBe(true);
+    expect(read.coupling).toBeNull();
   });
 
-  test("the corpus scale reads formal↔informal — the SAME coupler, one scale up", () => {
-    const streams = corpusSignals(PARA, SAMPLE, 24);
-    expect(streams.map((s) => s.name)).toEqual(["formal", "informal"]);
-    expect(streams[0]!.signal.length).toBe(streams[1]!.signal.length);
-    const mc = readKiCorpus(PARA, SAMPLE, 24);
-    expect(mc.children).toEqual(["formal", "informal"]);
+  test("the corpus scale JOINS on a shared FFZ address — no shared grain ⇒ no ticks (no ordinal fakery)", () => {
+    const formal: FfzCell[] = [
+      { ffz: "session/T.A.M.1.0", vec: [0.9, 0.1] },
+      { ffz: "session/T.A.M.1.1", vec: [0.7, 0.3] },
+      { ffz: "session/T.A.M.2.0", vec: [0.4, 0.6] },
+    ];
+    // shares the first two addresses; the third informal address has NO formal match
+    const informalShared: FfzCell[] = [
+      { ffz: "session/T.A.M.1.0", vec: [0.8, 0.2] },
+      { ffz: "session/T.A.M.1.1", vec: [0.6, 0.4] },
+      { ffz: "session/T.A.M.9.9", vec: [0.1, 0.9] },
+    ];
+    expect(ffzAlignTicks(formal, informalShared).length).toBe(2);   // only the two SHARED addresses pair
+    // disjoint addresses ⇒ ZERO ticks ⇒ warming, no coupling (the honest no-coupling)
+    const informalDisjoint: FfzCell[] = [{ ffz: "session/T.A.M.5.5", vec: [0.5, 0.5] }];
+    const read = readKiCorpus(formal, informalDisjoint);
+    expect(read.ticks).toBe(0);
+    expect(read.warming).toBe(true);
+    expect(read.coupling).toBeNull();
   });
 
-  test("coupleStreams reads the DIRECTED edge: formal LEADS informal (a lagged echo)", () => {
+  test("the runtime reads the DIRECTED edge over aligned ticks: formal LEADS informal (a lagged echo)", () => {
     // a deterministic pseudo-random driver; informal is formal's PAST plus light noise → formal→informal
-    const N = 220;
+    const N = 260;
     let a = 123456789, b = 987654321;
     const rng = (): number => { a = (1103515245 * a + 12345) & 0x7fffffff; return (a / 0x7fffffff) - 0.5; };
-    const noise = (): number => { b = (1103515245 * b + 54321) & 0x7fffffff; return ((b / 0x7fffffff) - 0.5) * 0.15; };
+    const noise = (): number => { b = (1103515245 * b + 54321) & 0x7fffffff; return ((b / 0x7fffffff) - 0.5) * 0.1; };
     const drive: number[] = Array.from({ length: N }, () => rng());
-    const formal: ChildSignalMV = { name: "formal", signal: drive.map((x) => [x + noise()]) };
-    const informal: ChildSignalMV = {
-      name: "informal",
-      signal: drive.map((_, t) => [(t > 0 ? drive[t - 1]! : 0) + noise()]),
-    };
-    const mc = coupleStreams([formal, informal], { alpha: 0.05, lag: 1 });
-    expect(mc.strongestEdge).not.toBeNull();
-    expect(mc.strongestEdge!.from).toBe("formal");
-    expect(mc.strongestEdge!.to).toBe("informal");
-    expect(mc.strongestEdge!.coupling).toBeGreaterThan(0);
+    const ticks: AlignedTick[] = drive.map((x, t) => [[x + noise()], [(t > 0 ? drive[t - 1]! : 0) + noise()]]);
+    // L=30 window, high change-threshold so the stationary echo is not spuriously reset mid-stream
+    const read = coupleAligned(["formal", "informal"], ticks, { L: 30, lag: 1, alpha: 0.05, changeThreshold: 12 });
+    expect(read.warming).toBe(false);
+    expect(read.coupling).not.toBeNull();
+    expect(read.coupling!.strongestEdge).not.toBeNull();
+    expect(read.coupling!.strongestEdge!.from).toBe("formal");
+    expect(read.coupling!.strongestEdge!.to).toBe("informal");
+    // the Tier-0 linearity screen ran on the primary channel (a verdict, not silence)
+    expect(read.linearity).not.toBeNull();
+    expect(typeof read.escalate).toBe("boolean");
   });
 });

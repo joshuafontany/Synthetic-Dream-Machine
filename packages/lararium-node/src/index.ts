@@ -23,18 +23,20 @@ export type {
 } from "./sensorium.js";
 
 // The memetic-wikitext SENSORIUM — the concrete neither-top, co-located-peers instance: the reader
-// (island-scan → standoff strata + skeletal tier + association graph, TWO axes span×channel), the
-// fractal coupler (stratum red↔black ≅ corpus formal↔informal through the mesh keel's coupleMesh), and
-// the `#has {formal, informal}` compose (coupling.children, neither top). LI (理 pattern) ⊥ KI (氣 flow).
+// (island-scan → standoff strata + skeletal tier + typed association graph, TWO axes span×channel), the
+// fractal FFZ-aligned coupler (stratum red↔black ≅ corpus formal↔informal through the mesh keel's
+// windowed-coupling runtime + linearity screen), and the `#has {formal, informal}` compose (coupling.
+// children, neither top). LI (理 pattern) ⊥ KI (氣 flow).
 export {
   bandForSpanLength, SPAN_BAND_MAX, sourceCidOf, sigilHead, stratify,
   SIGIL_INJECTION, sigilInjectionQuery,
-  windowDensities, coupleStreams, channelSignals, readKiStratum, corpusSignals, readKiCorpus,
+  PULSE_GRAIN, coupleAligned, stratumTicks, readKiStratum, ffzAlignTicks, readKiCorpus,
   readLi, readKi, defaultSensoriumBands, buildMemeticWikitextSensorium, buildPeerSensorium,
 } from "./memetic-wikitext-sensorium.js";
 export type {
   ChannelTag, MuOp, Span, Stratum, SkeletalAnchor, AssociationEdge, SpreadDirection, Stratification,
   SigilInjection, ComposeMemeticWikitextOptions,
+  AlignedTick, CoupleAlignedOptions, AlignedCouplingRead, FfzCell,
 } from "./memetic-wikitext-sensorium.js";
 
 // The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.

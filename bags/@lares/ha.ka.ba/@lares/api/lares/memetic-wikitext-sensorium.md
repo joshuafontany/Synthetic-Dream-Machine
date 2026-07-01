@@ -60,8 +60,8 @@ corpus scale. It **recurs** — the same pattern holds at a finer scale, inside 
 **So ONE structure serves both.** The reader written for the stratum scale — split a text into
 co-located channels, window each into a signal, couple them — **is the same shape** composed at the
 corpus scale, where the two channels become two whole texts. *The reader you write for the stratum is the
-shape you compose for the corpus.* The concrete instance builds this once (a `coupleStreams` atom) and
-calls it at both scales.
+shape you compose for the corpus.* The concrete instance builds this once (a `coupleAligned` atom over an
+FFZ-aligned tick stream) and calls it at both scales.
 
 > **The black speaks; the red steers** — and the same coupling that reads red↔black inside one meme reads
 > formal↔informal across the corpus. Fractal, not analogical.
@@ -145,17 +145,25 @@ tree-sitter.
 
 ## Enactment ~ the concrete instance
 
-<<~ranks part reader ~ `packages/lararium-node/src/memetic-wikitext-sensorium.ts` — `stratify()` (island-scan → standoff strata + skeletal tier + association graph), `sigilInjectionQuery()` (the tree-sitter injection config), the two-axes span×channel read -> compose ~ `buildMemeticWikitextSensorium()` — the top nameless entity `#has {formal, informal}` via `buildSensoriumManifest`, `coupling.children=[formal, informal]`, neither top -> couple ~ `coupleStreams()` — the fractal atom; `readKiStratum` couples red↔black, `readKiCorpus` couples formal↔informal, BOTH through the mesh keel's `coupleMesh` ([[mesh-couple|lar:///ha.ka.ba/@lararium/mesh/flow]]) — a THIN call, never a rebuild >>
+<<~ranks part reader ~ `packages/lararium-node/src/memetic-wikitext-sensorium.ts` — `stratify()` (island-scan → standoff strata + skeletal tier + typed association graph), `sigilInjectionQuery()` (the tree-sitter injection config), the two-axes span×channel read -> compose ~ `buildMemeticWikitextSensorium()` — the top nameless entity `#has {formal, informal}` via `buildSensoriumManifest`, `coupling.children=[formal, informal]`, neither top -> couple ~ `coupleAligned()` — the fractal atom; feeds an ALIGNED-TICK stream to the keel's `windowed-coupling` RUNTIME ([[windowed-coupling|lar:///ha.ka.ba/@lararium/mesh/flow]] — L-window · floor-warming · change-point reset · hop) then screens with `linearityGate`. `readKiStratum` walks Pulse-grain ticks (red↔black); `readKiCorpus` JOINS FFZ-addressed cells (formal↔informal). A THIN call, never a rebuild >>
 
-**Coordination seam.** The coupling keel (`coupleMesh`: whiten → couple → χ²-gate) is owned by the mesh
-plane; this instance CALLS it, never re-derives it. The reader turns each stream (a channel, or a whole
-text) into a `ChildSignalMV` (windowed density vectors) and hands the pair to `coupleMesh`; the directed
-`te` matrix and the `strongestEdge` carry the answer.
+**The FFZ alignment IS the runtime's contract — not optional polish.** <<~ confidence Synthesis-Canon 15/20 >>
+The `windowed-coupling` runtime demands ALIGNED TICKS *"at a shared grain — the worldline aligns
+upstream… the FFZ rhythmic address."* So the FFZ clock ([[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock]])
+is the CALLER'S obligation before the runtime reads, never downstream nicety. The reader honors it two ways:
+the STRATUM scale walks one text at the finest FFZ **Pulse** grain (the shared axis IS the reading order);
+the CORPUS scale JOINS the two peers on a **shared FFZ address** (`ffzAlignTicks`) — the ONLY sound
+cross-text alignment. **The ordinal-window shortcut is GONE** ("a system is what it does" — the shortcut
+would BECOME the behavior): two unrelated texts share no ordinal axis, so no shared FFZ address ⇒ NO ticks
+⇒ the runtime warms and emits nothing — the honest no-coupling, never a fabricated number. A short text
+likewise warms (fewer Pulse cells than the estimator floor L) — the anti-false-sovereign refusal, by
+construction.
 
-<<~ confidence Provisional-Synthesis 8/20 >> The corpus-scale time-alignment (formal vs informal on ONE
-shared clock) rides a simple ordinal-window model in this first instance — enough to prove the edge reads
-formal↔informal. The real alignment binds to the FFZ aperture clock
-([[ffz-clock|lar:///ha.ka.ba/@lararium/mesh/ffz-clock]]); that binding is named, not yet built.
+**Two floors more, both CALLED not rebuilt.** The `linearity-gate` (effect-size, not raw p) screens each
+Gaussian read — `escalate` flags nonlinear signal the default leaves on the table (KSG territory). The
+`change-point` reset (mean AND variance) lives INSIDE the windowed runtime, keeping every estimate in ONE
+regime — resonant with the aperture **Measure** band (topic-shift). All three are **ki** (氣, flow)
+instruments; the **li** (理, pattern — strata · skeletal tier · associations) never moves under them.
 
 <<~/ahu >>
 
