@@ -26,9 +26,13 @@
  * so isolation holds and the UDS socket path always agrees. Both the CLI (local-connector) and the
  * node daemon (uds-channel) resolve through HERE.
  *
+ * The mesh federation store consolidates too — as its OWN `mesh` SENSORIUM that `#has` three nested
+ * child sensoriums (WHO · AUTHORITY · FLOW). {@link meshSensoriumDir} strangles `<data>/sensoriums/mesh`
+ * (new) over the legacy `~/.lares/.meshpalace` (old), and the children hang below it. The mesh's own
+ * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
+ *
  * EXCLUDED from the move (deliberately): `larIdentityDir` (vessel-identity — a separate concern, left
- * at its legacy spelling) and `larMeshPalaceDir` (the mesh federation store — a follow-on build
- * declares it its OWN sensorium with WHO/AUTHORITY/FLOW children; relocating it now would double-migrate).
+ * at its legacy spelling).
  */
 
 import { existsSync } from "node:fs";
@@ -129,14 +133,39 @@ export function larFormPalaceDir(): string {
   return strangle(join(memorySensoriumDir(), "form"), join(larHome(), ".formpalace"));
 }
 
-// ── The mesh federation store (EXCLUDED from the move — follow-on sensorium-izes it) ──────────────
+// ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────
 
-/** The `.meshpalace` STORE dir — the cross-Lararium federation bridge store. LEFT at its legacy
- *  spelling `~/.lares/.meshpalace`: the mesh domain is a parallel concern and a follow-on build
- *  declares the Meshpalace its OWN sensorium (`#has` WHO/AUTHORITY/FLOW children), which would
- *  re-home this store — moving it now would double-migrate. Directory only; feed/carriage lives elsewhere. */
+/** The `mesh` sensorium dir — the strangler over `<data>/sensoriums/mesh` (new) / `~/.lares/.meshpalace`
+ *  (legacy). Its manifest declares MINIMAL own caps + three nested children (who/authority/flow) as
+ *  dumb `coupling.children[]` edges; the filetree IS the composition (sensorium.ts). The cross-Lararium
+ *  federation feed/carriage lives elsewhere in the mesh domain — this is directory + structure only. */
+export function meshSensoriumDir(): string {
+  return strangle(join(larDataHome(), "sensoriums", "mesh"), join(larHome(), ".meshpalace"));
+}
+
+/** The WHO child-sensorium dir — `<mesh>/who`. Identity/presence: content (presence-embeddings) +
+ *  structure (the presence-graph) fill here; the parallel populates the caps, the dir stays thin. */
+export function meshWhoDir(): string {
+  return join(meshSensoriumDir(), "who");
+}
+
+/** The AUTHORITY child-sensorium dir — `<mesh>/authority`. Caps/keyhive: the cap-grant store fills
+ *  here; the parallel declares the content cap + engine, the dir stays thin. */
+export function meshAuthorityDir(): string {
+  return join(meshSensoriumDir(), "authority");
+}
+
+/** The FLOW child-sensorium dir — `<mesh>/flow`. Traffic/coupling, the coupling-lobe: its manifest
+ *  RESERVES `coupling.children[]` for the node-stream edges the parallel's transfer-entropy read
+ *  consults (effective-connectivity). We reserve the slot; the read lives elsewhere. */
+export function meshFlowDir(): string {
+  return join(meshSensoriumDir(), "flow");
+}
+
+/** The mesh-palace STORE dir — now the `mesh` SENSORIUM dir (== {@link meshSensoriumDir}). Kept as a
+ *  named alias for surface stability (the palace-organ registry + the index re-export read it). */
 export function larMeshPalaceDir(): string {
-  return join(larHome(), ".meshpalace");
+  return meshSensoriumDir();
 }
 
 // ── The ephemeral corpus multipalace (scratch sensoriums) ─────────────────────────────────────────

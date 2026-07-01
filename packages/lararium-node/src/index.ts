@@ -7,6 +7,8 @@ export {
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
   larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
   memorySensoriumDir,
+  // The `mesh` sensorium dir + its WHO/AUTHORITY/FLOW child dirs (the consolidated federation tree).
+  meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
 
@@ -21,7 +23,7 @@ export type {
 } from "./sensorium.js";
 
 // The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
-export { palaceOrgans, setupPalaceOrgans, organHealthy, materializeMemorySensorium } from "./palace-organs.js";
+export { palaceOrgans, setupPalaceOrgans, organHealthy, materializeMemorySensorium, materializeMeshSensorium } from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";
 
 // Idempotent, reversible migration scaffolding (the operator owns the --confirm; nothing here deletes).

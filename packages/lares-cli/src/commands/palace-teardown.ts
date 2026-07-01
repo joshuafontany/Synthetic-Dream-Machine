@@ -42,7 +42,10 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
   mempalace:  "palace store (chroma + config + entities + locks + worldline-KG sqlite)",
   astpalace:  "astpalace (memory-ast-unfolding — a second mempalace instance)",
   formpalace: "formpalace (living-grammar FORM-vector store — a third mempalace instance)",
-  meshpalace: "meshpalace (federation bridge store — a mempalace instance)",
+  meshpalace: "mesh sensorium (the federation tree — #has who/authority/flow)",
+  "mesh:who": "mesh/who sensorium (identity/presence)",
+  "mesh:authority": "mesh/authority sensorium (caps/keyhive)",
+  "mesh:flow": "mesh/flow sensorium (traffic/coupling — the coupling-lobe)",
 };
 
 /**

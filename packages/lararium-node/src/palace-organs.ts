@@ -8,8 +8,10 @@
  *                 worldline-KG knowledge_graph.sqlite3 lives INSIDE it, so it stands FIRST.
  *   - astpalace   ~/.lares/.astpalace   — the structural-AST store (a 2nd mempalace instance).
  *   - formpalace  ~/.lares/.formpalace  — the living-grammar FORM-vector store (a 3rd instance).
- *   - meshpalace  ~/.lares/.meshpalace  — the federation bridge STORE (stood LAST: it couples to a
- *                 live node; here we wire only the directory, the feed/carriage logic lives elsewhere).
+ *   - meshpalace  <data>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a live
+ *                 node). It `#has` three nested child sensoriums — WHO · AUTHORITY · FLOW — each its
+ *                 own dir + thin manifest; the mesh's own caps stay minimal. Here we wire only the
+ *                 directory STRUCTURE + stamp the manifests; the feed/carriage + cap-content live elsewhere.
  *
  * Each organ carries a resolved `dir` (never an ambient default), an optional `init` that STANDS it
  * up when absent (idempotent: a present dir is never re-init'd), and a cheap `healthProbe` that
@@ -27,8 +29,10 @@ import { spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import {
   larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
+  meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
 } from "./vessel-paths.js";
 import { buildSensoriumManifest, readManifest, writeManifest } from "./sensorium.js";
+import type { BuildSensoriumOptions } from "./sensorium.js";
 
 /** One ledger line from a setup pass — {@link setupPalaceOrgans} returns these (table/JSON-renderable). */
 export interface PalaceSetupStep {
@@ -147,7 +151,12 @@ export function palaceOrgans(): PalaceOrgan[] {
     },
     { name: "astpalace",  dir: larAstPalaceDir(),  init: ensureDirOrgan("astpalace",  larAstPalaceDir())  },
     { name: "formpalace", dir: larFormPalaceDir(), init: ensureDirOrgan("formpalace", larFormPalaceDir()) },
-    { name: "meshpalace", dir: larMeshPalaceDir(), init: ensureDirOrgan("meshpalace", larMeshPalaceDir()) },
+    // The `mesh` sensorium TREE — the parent dir plus its three nested children (who/authority/flow),
+    // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
+    { name: "meshpalace",     dir: larMeshPalaceDir(),  init: ensureDirOrgan("meshpalace",     larMeshPalaceDir())  },
+    { name: "mesh:who",       dir: meshWhoDir(),        init: ensureDirOrgan("mesh:who",       meshWhoDir())        },
+    { name: "mesh:authority", dir: meshAuthorityDir(),  init: ensureDirOrgan("mesh:authority", meshAuthorityDir())  },
+    { name: "mesh:flow",      dir: meshFlowDir(),       init: ensureDirOrgan("mesh:flow",      meshFlowDir())       },
   ];
 }
 
@@ -157,44 +166,109 @@ export function organHealthy(organ: PalaceOrgan): boolean {
 }
 
 /**
- * Materialize the `memory` sensorium's self-describing manifest — the SHEAF-TRUE marker that makes
- * the dir a sensorium (sensorium.ts). It declares content/structure/form as THIN fiber-cap edges
- * (relative when consolidated, absolute during the strangler window — {@link larMempalaceDir} et al.
- * report where the bytes actually are), bands as the base-cap interval-grain (wavelet, computed on
- * read — NO dir), and an empty coupling (memory glues no sub-sensoriums; the follow-on Meshpalace
- * carries children). Idempotent + atomic: re-written each setup so it stays faithful to the resolvers.
+ * Materialize ONE sensorium's self-describing manifest at `dir` — the SHEAF-TRUE marker that makes a
+ * dir a sensorium (sensorium.ts). Idempotent + atomic: it mkdirs the dir, preserves the original mint
+ * time on a rewrite (so an unchanged manifest stays byte-identical), and only (re)writes when the shape
+ * actually drifted (cap dirs moved, children changed …). `opts` carries the resolved absolute dirs; the
+ * builder chooses relative-when-inside / absolute-when-outside per cap. Never pass `created` — it is
+ * derived from the existing manifest here.
  */
-export function materializeMemorySensorium(): PalaceSetupStep {
-  const dir = memorySensoriumDir();
+function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensoriumOptions, "created">): PalaceSetupStep {
   try {
     mkdirSync(dir, { recursive: true });
     const existing = readManifest(dir);
     const desired = buildSensoriumManifest(dir, {
-      sensorium: "memory",
-      lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
-      caps: {
-        content:   { absDir: larMempalaceDir(), engine: "mempalace" },
-        structure: { absDir: larAstPalaceDir(), engine: "astpalace" },
-        form:      { absDir: larFormPalaceDir(), engine: "formpalace" },
-      },
-      // BASE cap — interval-grain metadata only; the wavelet bands compute on read, no bytes stored.
-      bands: { grain: "wavelet", computed: "on-read" },
-      // BASE cap — memory couples no sub-sensoriums (the follow-on Meshpalace carries WHO/AUTHORITY/FLOW).
-      children: [],
-      ephemeral: false,
+      ...opts,
       // Preserve the original mint time on a rewrite so an unchanged manifest is byte-identical.
       ...(existing ? { created: existing.created } : {}),
     });
-    // Idempotent: only (re)write when the shape actually drifted (cap dirs moved, bands changed …).
     const drifted = !existing || JSON.stringify(existing) !== JSON.stringify(desired);
     if (drifted) {
       writeManifest(dir, desired);
-      return { step: "memory:manifest", ran: true, ok: true, detail: `sensorium manifest written (${dir})` };
+      return { step, ran: true, ok: true, detail: `sensorium manifest written (${dir})` };
     }
-    return { step: "memory:manifest", ran: false, ok: true, detail: "sensorium manifest present" };
+    return { step, ran: false, ok: true, detail: "sensorium manifest present" };
   } catch (e) {
-    return { step: "memory:manifest", ran: true, ok: false, detail: errText(e).slice(0, 160) };
+    return { step, ran: true, ok: false, detail: errText(e).slice(0, 160) };
   }
+}
+
+/**
+ * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges
+ * (relative when consolidated, absolute during the strangler window — {@link larMempalaceDir} et al.
+ * report where the bytes actually are), bands as the base-cap interval-grain (wavelet, computed on
+ * read — NO dir), and an empty coupling (memory glues no sub-sensoriums).
+ */
+export function materializeMemorySensorium(): PalaceSetupStep {
+  return materializeSensorium("memory:manifest", memorySensoriumDir(), {
+    sensorium: "memory",
+    lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
+    caps: {
+      content:   { absDir: larMempalaceDir(), engine: "mempalace" },
+      structure: { absDir: larAstPalaceDir(), engine: "astpalace" },
+      form:      { absDir: larFormPalaceDir(), engine: "formpalace" },
+    },
+    // BASE cap — interval-grain metadata only; the wavelet bands compute on read, no bytes stored.
+    bands: { grain: "wavelet", computed: "on-read" },
+    // BASE cap — memory couples no sub-sensoriums (the `mesh` sensorium carries WHO/AUTHORITY/FLOW).
+    children: [],
+    ephemeral: false,
+  });
+}
+
+/**
+ * Materialize the `mesh` sensorium TREE — the parent manifest that `#has` three nested children, plus
+ * each child's own thin manifest. STRUCTURE only: every child declares an EMPTY `has` (clause-4 OPEN
+ * record) so the parallel fills the actual stores/engines WITHOUT a structure change, and dumb edges
+ * carry no role vocabulary. Returns one ledger step per manifest (parent + who/authority/flow).
+ *
+ *   mesh      lar:///ha.ka.ba/@lararium/mesh            — minimal own caps; STRUCTURE = the 3 children.
+ *   ├─ who        …/mesh/who        — identity/presence: content (presence-embeddings) + structure
+ *   │                                 (the presence-graph) fill here; thin `has` until the parallel fills.
+ *   ├─ authority  …/mesh/authority  — caps/keyhive: the cap-grant store; a thin content cap the parallel fills.
+ *   └─ flow       …/mesh/flow       — traffic/coupling, the coupling-lobe: `coupling.children[]` RESERVED
+ *                                     (empty) for the node-stream edges transfer-entropy reads. We reserve
+ *                                     the slot; the read lives in the parallel's domain.
+ */
+export function materializeMeshSensorium(): PalaceSetupStep[] {
+  const meshDir = meshSensoriumDir();
+  const whoDir  = meshWhoDir();
+  const authDir = meshAuthorityDir();
+  const flowDir = meshFlowDir();
+  return [
+    materializeSensorium("mesh:manifest", meshDir, {
+      sensorium: "mesh",
+      lar: "lar:///ha.ka.ba/@lararium/mesh",
+      caps: {},
+      children: [
+        { sensorium: "who",       absDir: whoDir  },
+        { sensorium: "authority", absDir: authDir },
+        { sensorium: "flow",      absDir: flowDir },
+      ],
+      ephemeral: false,
+    }),
+    materializeSensorium("mesh:who:manifest", whoDir, {
+      sensorium: "who",
+      lar: "lar:///ha.ka.ba/@lararium/mesh/who",
+      caps: {},
+      ephemeral: false,
+    }),
+    materializeSensorium("mesh:authority:manifest", authDir, {
+      sensorium: "authority",
+      lar: "lar:///ha.ka.ba/@lararium/mesh/authority",
+      caps: {},
+      ephemeral: false,
+    }),
+    materializeSensorium("mesh:flow:manifest", flowDir, {
+      sensorium: "flow",
+      lar: "lar:///ha.ka.ba/@lararium/mesh/flow",
+      caps: {},
+      // BASE cap — the coupling-lobe RESERVES its child-edges (empty) for the node-stream effective-
+      // connectivity the parallel's transfer-entropy read consults. Reserved slot; no read here.
+      children: [],
+      ephemeral: false,
+    }),
+  ];
 }
 
 /**
@@ -223,7 +297,9 @@ export function setupPalaceOrgans(): PalaceSetupStep[] {
       steps.push(s.step === organ.name && s.ran ? { ...s, ok: s.ok && healthy } : s);
     }
   }
-  // Stamp the SHEAF-TRUE manifest so the memory sensorium dir self-describes its cap-stack.
+  // Stamp the SHEAF-TRUE manifests so each sensorium dir self-describes its cap-stack: the `memory`
+  // sensorium, then the `mesh` sensorium TREE (parent + who/authority/flow children).
   steps.push(materializeMemorySensorium());
+  steps.push(...materializeMeshSensorium());
   return steps;
 }
