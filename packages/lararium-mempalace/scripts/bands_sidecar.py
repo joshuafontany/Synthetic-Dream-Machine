@@ -78,6 +78,24 @@ _EPS = 1e-9
 # instead of blowing up with var(target) (#crucible-tested 2026-07-01). Tied to machine epsilon.
 _EPS_REL = float(np.finfo(float).eps)
 
+# CRITICALITY discriminator margin — a CRITICAL (Lin–Tegmark) signature is a power law with NO
+# finite cutoff, so the power fit must beat the exponential (cutoff) fit by THIS margin on the
+# genuine (contiguous) support. An AR(1)/Markov process decays exponentially: on its short
+# contiguous support the exponential fits as-well-or-better (margin ≤ 0) → markov, never critical
+# (φ=0.9 AR(1) sits at ≤ +0.00; a 1/f^β critical signal at ≥ +0.18) (#crucible-tested 2026-07-01).
+_POWER_LAW_MARGIN = 0.10
+# CRITICALITY span threshold — a CONTIGUOUS supra-floor run spanning ≥ THIS many decades is a
+# span NO finite-correlation-length (exponential) process can reach (a φ=0.9 AR(1) dies by ≈1.6
+# decades), so it certifies "critical" on its own even when a coincidentally-high exponential R²
+# thins the power margin. Genuine 1/f^β support reaches ≈3 decades (#crucible-tested 2026-07-01).
+_CRITICAL_SPAN_DECADES = 2.3
+# NOISE-INFLATION variance-ramp threshold — a MONOTONE within-window amplitude ramp of this
+# window-variance ratio (late-quartile / early-quartile) reads as pure noise-amplitude inflation,
+# NOT critical slowing: it biases the sample lag-1-AC upward while NEITHER colored null reproduces
+# the ramp, so it can spuriously fire. A dominant ramp vetoes the FORECAST → NOISE-INFLATION. The
+# noise-inflation fixture sits ≥ 8×; a genuine critical-slowing approach ≈ 2.6× (#crucible 2026-07-01).
+_NOISE_RAMP_RATIO = 5.0
+
 
 # ── SIGNAL — the per-chunk cohesion / drift over the plane embeddings ─────────────────────
 
@@ -874,10 +892,13 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
       (1) AC1-SIGNIFICANT — the lag-1-AC rising trend beats BOTH colored nulls (the AR(1)
           init-matched AND the phase-randomized spectral null; p = max of the two ≤ alpha).
           The AC1 rise is the critical-slowing-down-SPECIFIC tooth.
-      (2) VARIANCE ≠ AC1 SEPARATION — a rising VARIANCE with NO rising AC1 reads as pure
-          NOISE-AMPLITUDE INFLATION (no bifurcation), NOT a forecast: variance alone can never
-          fire (it is exactly the false-positive engine — rising noise lifts variance without
-          lifting AC1). The AC1 tooth (1) enforces this; a var-only rise reports NOISE-INFLATION.
+      (2) VARIANCE ≠ AC1 SEPARATION + the RAMP VETO — a rising VARIANCE with NO rising AC1 reads
+          as pure NOISE-AMPLITUDE INFLATION (no bifurcation), NOT a forecast. AND a DOMINANT
+          monotone within-window variance RAMP (late/early window-variance ratio ≥ _NOISE_RAMP_
+          RATIO) VETOES the fire even when the AC1 reads significant: the ramp biases the sample
+          lag-1-AC upward and NEITHER colored null reproduces it (the AR(1) null fits one constant
+          σ; the phase-randomized null is stationary), so a ramp-driven AC1 is untrustworthy → the
+          path reports NOISE-INFLATION. Genuine critical slowing rides a MODEST ramp (≈2.6×).
       (3) MULTI-BAND agreement — ≥ `min_bands` MODWT bands show a rising variance-τ.
     A single tooth alone stays a WATCH, never a fire (the apophenia the keel guards against).
     Returns the full verdict (fired · state · the per-indicator τ / colored-null p · the
@@ -921,18 +942,37 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
         band_taus.append({"band": bname, "var_tau": vtau, "rising": vtau > 0.0})
     n_rising = sum(1 for b in band_taus if b["rising"])
 
+    # THE WITHIN-WINDOW VARIANCE-RAMP guard (the third false-positive tooth) — a MONOTONE
+    # amplitude ramp (rising σ, FIXED dynamics: no critical slowing) biases the SAMPLE lag-1-AC
+    # upward inside the window, and NEITHER colored null reproduces that ramp (the AR(1) null
+    # fits ONE constant σ; the phase-randomized null is stationary), so the spurious rising AC1
+    # can clear the surrogate test → a FALSE forecast. A dominant rising variance ramp IS the
+    # noise-inflation engine, not a bifurcation: measure its magnitude (the late-quartile /
+    # early-quartile window-variance ratio) and VETO the fire. Genuine critical slowing rides its
+    # robust AC1 tooth at a MODEST measured ramp (the CSD fixture ≈ 2.6×), so it is untouched.
+    var_series = _rolling(pooled, win, lambda s: float(np.var(s)))
+    if var_series.size >= 4:
+        q = max(1, var_series.size // 4)
+        ramp_ratio = float(np.mean(var_series[-q:]) / (np.mean(var_series[:q]) + _EPS))
+    else:
+        ramp_ratio = 1.0
+
     # THE VARIANCE ≠ AC1 SEPARATION (the false-positive teeth): a rising AC1 that beats the
     # colored null is the CSD-specific tooth; a rising VARIANCE alone (AC1 NOT rising) is pure
     # noise-amplitude inflation — no bifurcation. Only the AC1 tooth may FIRE.
     ac1_sig = bool(ar1_tau > 0.0 and ar1_p <= alpha)
     var_sig = bool(var_tau > 0.0 and var_p <= alpha)
-    noise_inflation = bool(var_sig and not ac1_sig)   # variance rises WITHOUT the AC1 rise
+    # a DOMINANT monotone amplitude ramp — the noise-inflation false-positive engine; even a
+    # (ramp-biased) AC1 that reads significant is untrustworthy under it, so it vetoes the fire.
+    strong_ramp = bool(var_sig and ramp_ratio >= _NOISE_RAMP_RATIO)
+    noise_inflation = bool(strong_ramp or (var_sig and not ac1_sig))  # ramp, or var-up-AC1-flat
     surrogate_sig = ac1_sig or var_sig                # kept for back-compat (any null beaten)
     multi_band = n_rising >= min_bands
 
-    # THE FIRE CONDITION — AC1-significant (CSD-specific) AND multi-band agreement. Variance
-    # CORROBORATES but can never fire alone (that path reports NOISE-INFLATION, never FORECAST).
-    fired = bool(ac1_sig and multi_band)
+    # THE FIRE CONDITION — AC1-significant (CSD-specific) AND multi-band agreement, AND NO
+    # dominant variance ramp. Variance CORROBORATES but can never fire alone, and a dominant
+    # ramp VETOES (that path reports NOISE-INFLATION, never FORECAST).
+    fired = bool(ac1_sig and multi_band and not strong_ramp)
     if fired:
         state = "FORECAST"
     elif noise_inflation:
@@ -951,6 +991,8 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
         "ac1_significant": ac1_sig,
         "var_significant": var_sig,
         "noise_inflation": noise_inflation,
+        "variance_ramp_ratio": ramp_ratio,
+        "strong_variance_ramp": strong_ramp,
         "surrogate_significant": surrogate_sig,
         "multi_band_agreement": multi_band,
         "bands_rising": n_rising, "min_bands": min_bands,
@@ -959,8 +1001,8 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
         "engine": engine,
         "r_available": _r_available(),
         "note": (f"critical-slowing-down {state}: AC1-τ {ar1_tau:.2f} (p={ar1_p:.3f}) · "
-                 f"var-τ {var_tau:.2f} (p={var_p:.3f}) · {n_rising} bands rising · "
-                 f"{'AC1+var' if ac1_sig and var_sig else 'var-only(inflation)' if noise_inflation else 'AC1' if ac1_sig else 'none'} · engine {engine}"),
+                 f"var-τ {var_tau:.2f} (p={var_p:.3f}) · ramp {ramp_ratio:.1f}× · {n_rising} bands rising · "
+                 f"{'ramp-veto(inflation)' if strong_ramp else 'AC1+var' if ac1_sig and var_sig else 'var-only(inflation)' if noise_inflation else 'AC1' if ac1_sig else 'none'} · engine {engine}"),
     }
 
 
@@ -1049,12 +1091,14 @@ def criticality_signature(x: np.ndarray, n_bins: int = 4, n_shuffle: int = 20,
       · SHUFFLED — MI never clears the shuffle floor (independent tokens, no structure).
 
     The SHUFFLE NULL (the R-keel) sets a per-distance floor (mean + 3σ over `n_shuffle`
-    order-permutations); MI counts only where it clears the floor. The verdict compares the
-    log-log (power) vs log-linear (exponential) fit R² ON the supra-floor range, gated by the
-    span in DECADES — a critical process has NO finite correlation length, so its power law
-    persists ≥ 1 decade. `dfa_hurst` corroborates (H>0.5 ⇒ persistent). Graceful on a short
-    signal. Returns {verdict, r2_power, r2_exp, mu (power exponent), decades, corr_len, hurst,
-    n_supported, snr}."""
+    order-permutations); MI counts only where it clears the floor. The verdict runs a MODEL
+    COMPARISON — the log-log (power) vs log-linear (exponential/cutoff) fit — over the CONTIGUOUS
+    supra-floor run (a finite-correlation-length process supports MI contiguously up to ≈ξ then
+    drops into the floor; scattered floor-crossings past the first gap are finite-sample artefacts
+    that falsely inflate the span). CRITICAL iff the power fit BEATS the exponential by a margin
+    over ≥ 1 decade of that contiguous support (no finite cutoff); else MARKOV (a cutoff detected).
+    `dfa_hurst` corroborates (H>0.5 ⇒ persistent). Graceful on a short signal. Returns {verdict,
+    r2_power, r2_exp, mu (power exponent), decades, corr_len, hurst, n_supported, snr}."""
     sym, k = _symbolize(x, n_bins)
     n = sym.size
     if n < 64 or k < 2:
@@ -1083,16 +1127,35 @@ def criticality_signature(x: np.ndarray, n_bins: int = 4, n_shuffle: int = 20,
                 "decades": 0.0, "corr_len": 0.0, "hurst": hurst, "n_supported": supported,
                 "snr": snr, "n_bins": n_bins,
                 "note": f"MI at the shuffle floor (independent tokens) · H={hurst:.2f}"}
-    ds = dists[sig].astype(float)
-    le = np.log(np.clip(excess[sig], _EPS, None))
+    # CONTIGUOUS supra-floor run (from the first supported distance): a finite-correlation-length
+    # process supports MI CONTIGUOUSLY up to ≈ξ then falls into the noise floor — scattered
+    # floor-crossings PAST the first gap are finite-sample artefacts that falsely inflate
+    # corr_len/decades and let an exponential AR(1) mimic a scale-free power law. The
+    # discriminator reads the GENUINE (contiguous) support only.
+    first = int(np.argmax(sig))                  # first supported index (≥ 4 True here)
+    run = first
+    while run < sig.size and sig[run]:
+        run += 1
+    csig = np.zeros(sig.size, dtype=bool)
+    csig[first:run] = True
+    n_contig = int(csig.sum())
+    ds = dists[csig].astype(float)
+    le = np.log(np.clip(excess[csig], _EPS, None))
     r2_pow, mu = _mi_linfit(np.log(ds), le)      # power law: log-log straight, slope = -μ
     r2_exp, rate = _mi_linfit(ds, le)            # exponential: log-linear straight
-    corr_len = float(dists[sig].max())
-    dmin = float(dists[sig].min())
+    corr_len = float(dists[csig].max())
+    dmin = float(dists[csig].min())
     decades = float(np.log10(max(corr_len, dmin) / max(dmin, 1.0)))
-    # CRITICAL iff the power law persists ≥ 1 decade (no finite correlation length) AND fits
-    # at least as well as the exponential; else MARKOV (a finite-correlation-length cutoff).
-    verdict = "critical" if (decades >= 1.0 and r2_pow >= r2_exp) else "markov"
+    # MODEL COMPARISON (Lin–Tegmark) — a CRITICAL signature is a power law with NO finite cutoff.
+    # Over ≥ 1 decade of contiguous support, CRITICAL iff EITHER the power fit beats the exponential
+    # (cutoff) fit by _POWER_LAW_MARGIN, OR the contiguous support itself spans ≥ _CRITICAL_SPAN_
+    # DECADES — a reach no finite-correlation-length process attains, so a coincidentally-high
+    # exponential R² over a genuinely scale-free range cannot mask it. An AR(1)/Markov process decays
+    # EXPONENTIALLY: its short contiguous support fits the exponential as-well-or-better and dies by
+    # ≈1.6 decades → markov. Reading raw R² over the SCATTERED support over-called AR(1) "critical".
+    critical = bool(n_contig >= 3 and decades >= 1.0
+                    and (r2_pow >= r2_exp + _POWER_LAW_MARGIN or decades >= _CRITICAL_SPAN_DECADES))
+    verdict = "critical" if critical else "markov"
     return {
         "verdict": verdict, "r2_power": r2_pow, "r2_exp": r2_exp, "mu": -mu,
         "decades": decades, "corr_len": corr_len, "hurst": hurst,

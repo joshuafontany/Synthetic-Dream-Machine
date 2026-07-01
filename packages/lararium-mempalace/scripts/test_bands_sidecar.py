@@ -675,22 +675,26 @@ def test_run_stack_never_leaks_nan_inf_on_adversarial_signals():
 
 # ══════════════════════════════════════════════════════════════════════════════════════════════
 # ADVERSARIAL / PROPERTY-BASED QA (The-Sword, tasked QA-spirit, 2026-07-01) — the CLASSIFIER legs.
+# FIXED by The-Artificer (2026-07-01): both breaks corrected; the INTENDED invariants below now PASS
+# as live regression guards (the xfail markers dropped), and each paired characterization test was
+# re-pointed at the corrected behaviour (the `_FIXED` tests).
 #
-# Two REAL breaks in the criticality / early-warning verdicts (distinct from The-Advocate's numerical
-# edges above). Each INTENDED invariant is xfail(strict=True) so the suite stays GREEN while the bug
-# lives and turns RED the moment it is fixed; a paired characterization test pins the current behaviour.
+#   BUG A (FIXED) — criticality_signature() called a high-φ AR(1) "critical". An AR(1) is the textbook
+#           MARKOV / exponential-decay process (finite correlation length −1/ln φ ≈ 9.5 samples at
+#           φ=0.9), yet it read "critical" (scale-free long memory) 100% of the time, reporting ~2.7
+#           DECADES of power law and corr_len ≈ 500 — the raw-R² power-vs-exp discriminator over-called
+#           power law on the SCATTERED geometric-d support. FIX: run the model comparison over the
+#           CONTIGUOUS supra-floor run (scattered floor-crossings past the first gap are finite-sample
+#           artefacts) and require the power fit to BEAT the exponential (cutoff) fit by a margin over
+#           ≥ 1 decade. Now AR(1) φ=0.9 → markov with corr_len ≈ ξ; a 1/f^β signal → critical.
 #
-#   BUG A — criticality_signature() calls a high-φ AR(1) "critical". An AR(1) is the textbook MARKOV /
-#           exponential-decay process (finite correlation length −1/ln φ ≈ 9.5 samples at φ=0.9), yet it
-#           reads "critical" (scale-free long memory) 100% of the time, reporting ~2.7 DECADES of power
-#           law and corr_len ≈ 500. The power-vs-exp R² discriminator over-calls power law on the
-#           geometric-d supported range. (A 2-state Markov chain leaks the same way on most seeds.)
-#
-#   BUG B — forecast_ews()'s noise-inflation guard LEAKS. The docstring: a pure noise-AMPLITUDE inflation
-#           (fixed φ, rising σ, NO critical slowing) "can never fire". But a within-window variance RAMP
-#           biases the sample lag-1-AC UPWARD, and neither colored surrogate reproduces that ramp (the
-#           AR(1) null fits ONE constant σ; the phase-randomized null is stationary), so the spurious
-#           rising AC1 reads surrogate-significant → a FALSE FORECAST (seed 9: fired, ac1_p ≈ 0.03).
+#   BUG B (FIXED) — forecast_ews()'s noise-inflation guard LEAKED. A pure noise-AMPLITUDE inflation
+#           (fixed φ, rising σ, NO critical slowing) could fire: a within-window variance RAMP biases
+#           the sample lag-1-AC UPWARD and neither colored surrogate reproduces that ramp (the AR(1)
+#           null fits ONE constant σ; the phase-randomized null is stationary), so the spurious rising
+#           AC1 read surrogate-significant → a FALSE FORECAST (seed 9). FIX: a dominant monotone
+#           within-window variance RAMP (late/early window-variance ratio ≥ threshold) VETOES the fire
+#           → NOISE-INFLATION. Genuine critical slowing rides a MODEST ramp (≈2.6×) and still fires.
 # ══════════════════════════════════════════════════════════════════════════════════════════════
 
 
@@ -704,45 +708,43 @@ def _ar1(n, phi, seed):
     return x
 
 
-def test_ar1_high_phi_reads_critical_BUG():
-    """CHARACTERIZATION (passes today, pins BUG A): a φ=0.9 AR(1) — a finite-correlation-length Markov
-    process — is classified "critical" by criticality_signature, deterministically across seeds. This
-    assertion FLIPS RED when the classifier is corrected."""
+def test_ar1_high_phi_reads_markov_FIXED():
+    """REGRESSION (BUG A fixed): a φ=0.9 AR(1) — a finite-correlation-length Markov process — now
+    reads 'markov' (never 'critical'), and its reported corr_len collapses back to ≈ the true
+    correlation length (≪ the ~500 the scattered-support fit used to invent). Re-pointed from the
+    former `_BUG` characterization that pinned the wrong verdict."""
     for seed in range(6):
         v = bs.criticality_signature(_ar1(2000, 0.9, seed), n_bins=4, seed=1)
-        assert v["verdict"] == "critical", (seed, v["note"])  # the WRONG verdict — documents BUG A
+        assert v["verdict"] == "markov", (seed, v["note"])  # the CORRECT verdict — finite ξ
     v0 = bs.criticality_signature(_ar1(2000, 0.9, 0), n_bins=4, seed=1)
-    # the smoking gun: multi-decade power law + corr_len ≫ the true ~9.5-sample correlation length
-    assert v0["decades"] >= 1.0 and v0["corr_len"] > 100
+    # the fix: corr_len reads the GENUINE (contiguous) support, near the true ~9.5-sample ξ, not ~500
+    assert v0["corr_len"] < 100
 
 
-@pytest.mark.xfail(strict=True, reason="KNOWN BUG A: high-φ AR(1) (exponential decay = Markov, finite "
-                   "correlation length) misclassified 'critical' — the power-vs-exp R² discriminator "
-                   "over-calls power law on the geometric-d supported range.")
 def test_ar1_markov_is_not_critical_INTENDED():
-    """THE INVARIANT: an AR(1) (exponential MI decay, finite correlation length) must read markov or
-    shuffled — NEVER 'critical'. Currently fails at φ=0.9 (xfail; turns red once fixed)."""
+    """THE INVARIANT (BUG A, now a live guard): an AR(1) (exponential MI decay, finite correlation
+    length) must read markov or shuffled — NEVER 'critical'. Was xfail while the classifier over-
+    called power law on the scattered support; the model comparison over the contiguous run fixes it."""
     for seed in range(6):
         v = bs.criticality_signature(_ar1(2000, 0.9, seed), n_bins=4, seed=1)
         assert v["verdict"] != "critical", (seed, v["note"])
 
 
-def test_noise_inflation_guard_leaks_BUG():
-    """CHARACTERIZATION (passes today, pins BUG B): the `_noise_inflation` fixture at seed 9 (fixed
-    φ=0.4, σ ramping 0.3→3.0, NO critical slowing) FIRES a false FORECAST — the within-window variance
-    ramp inflates the sample lag-1-AC, absent from both colored nulls. Flips red once the guard is fixed."""
+def test_noise_inflation_guard_holds_seed9_FIXED():
+    """REGRESSION (BUG B fixed): the `_noise_inflation` fixture at seed 9 (fixed φ=0.4, σ ramping
+    0.3→3.0, NO critical slowing) — the one that used to FIRE a false FORECAST — is now caught by the
+    variance-RAMP veto: it reports NOISE-INFLATION with a dominant ramp flagged, never a fire. Even the
+    (ramp-biased) AC1 that reads significant no longer fires. Re-pointed from the former `_BUG` test."""
     fc = bs.forecast_ews(_noise_inflation(9), window=50, n_surr=120, alpha=0.05, seed=1)
-    assert fc["fired"] is True and fc["state"] == "FORECAST", fc["note"]  # a FALSE fire — documents BUG B
-    assert fc["ac1_significant"] is True and fc["ar1_p"] <= 0.05  # the guard's AC1 tooth was fooled
+    assert fc["fired"] is False and fc["state"] == "NOISE-INFLATION", fc["note"]
+    assert fc["strong_variance_ramp"] is True                      # the dominant ramp was detected
+    assert fc["variance_ramp_ratio"] >= 5.0                        # ≫ the ≈2.6× a genuine CSD shows
 
 
-@pytest.mark.xfail(strict=True, reason="KNOWN BUG B: a pure noise-AMPLITUDE inflation (fixed φ, rising σ, "
-                   "no critical slowing) can produce a surrogate-significant rising lag-1-AC — the "
-                   "within-window variance ramp is absent from BOTH colored nulls (AR(1) fits one σ; "
-                   "phase-randomized is stationary) — firing a false FORECAST (seed 9).")
 def test_noise_inflation_never_fires_INTENDED():
-    """THE INVARIANT (leg 2): a pure noise-amplitude inflation NEVER fires FORECAST (reports
-    NOISE-INFLATION or WATCH). Currently leaks at seed 9 (xfail)."""
+    """THE INVARIANT (leg 2, BUG B, now a live guard): a pure noise-amplitude inflation NEVER fires
+    FORECAST (reports NOISE-INFLATION or WATCH). Was xfail while the within-window variance ramp —
+    absent from BOTH colored nulls — leaked a false fire at seed 9; the ramp veto closes it."""
     for s in range(12):
         fc = bs.forecast_ews(_noise_inflation(s), window=50, n_surr=120, alpha=0.05, seed=1)
         assert fc["fired"] is False, (s, fc["note"])
