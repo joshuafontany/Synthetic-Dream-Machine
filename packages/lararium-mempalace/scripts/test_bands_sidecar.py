@@ -408,3 +408,187 @@ def test_cli_forecast_stdin():
     verdict = json.loads(r.stdout.strip().splitlines()[-1])
     assert verdict["fired"] is True
     assert "ar1_tau" in verdict and "band_taus" in verdict
+
+
+# ── TWO-POINT-MI CRITICALITY — the Lin–Tegmark signature (power-law MI = critical, NOT Zipf) ──
+
+
+def _pink_noise(n=4000, beta=1.2, seed=0):
+    """A long-range-correlated (critical) signal via 1/f^β spectral synthesis — MI(d) decays as
+    a POWER LAW over decades (no finite correlation length)."""
+    rng = np.random.default_rng(seed)
+    f = np.fft.rfftfreq(n)
+    f[0] = f[1] if f.size > 1 else 1.0
+    ph = rng.uniform(0, 2 * np.pi, f.size)
+    ph[0] = 0.0
+    if n % 2 == 0:
+        ph[-1] = 0.0
+    s = np.fft.irfft(f ** (-beta / 2.0) * np.exp(1j * ph), n=n)
+    return (s - s.mean()) / (s.std() + 1e-9)
+
+
+def _markov_chain(n=4000, flip=0.15, seed=3):
+    """A 2-state Markov chain — MI(d) decays EXPONENTIALLY (a finite correlation length)."""
+    rng = np.random.default_rng(seed)
+    x = np.zeros(n, dtype=int)
+    for t in range(1, n):
+        x[t] = x[t - 1] if rng.random() > flip else 1 - x[t - 1]
+    return x.astype(float)
+
+
+def test_two_point_mi_critical_vs_markov_vs_shuffled():
+    """THE LOAD-BEARING VERIFY (leg 1): the two-point-MI estimator distinguishes a CRITICAL
+    corpus (power-law MI decay, long memory) from a MARKOV one (exponential decay, finite
+    correlation length) and from a SHUFFLED one (MI at the null floor). NOT Zipf — the
+    signature is the DECAY of MI between tokens at distance d, not the marginal frequency."""
+    crit = bs.criticality_signature(_pink_noise(beta=1.2), seed=1)
+    mark = bs.criticality_signature(_markov_chain(), n_bins=2, seed=1)
+    shuf = _pink_noise(beta=1.2)
+    np.random.default_rng(0).shuffle(shuf)
+    sh = bs.criticality_signature(shuf, seed=1)
+
+    assert crit["verdict"] == "critical", crit["note"]
+    assert crit["r2_power"] >= crit["r2_exp"]         # power law fits at least as well
+    assert crit["decades"] >= 1.0                     # persists over ≥ 1 decade (no cutoff)
+    assert mark["verdict"] == "markov", mark["note"]  # finite correlation length
+    assert sh["verdict"] == "shuffled", sh["note"]    # MI never clears the shuffle floor
+
+
+def test_two_point_mi_estimator_and_hurst():
+    """The MI estimator reads a dependent pair above an independent one; DFA-Hurst separates a
+    persistent long-range signal (H>0.5) from white noise (H≈0.5)."""
+    # a period-2 alternating sequence carries MI at even lags, none at the shuffle floor
+    seq = np.tile([0, 1, 2, 3], 500)
+    sym, k = bs._symbolize(seq, n_bins=4)
+    assert bs.two_point_mi(sym, 4, k) > bs.two_point_mi(sym, 1, k)  # aligned lag carries more
+    assert bs.two_point_mi(sym, 0, k) == 0.0                        # degenerate d → 0
+    assert bs.dfa_hurst(_pink_noise(beta=1.6)) > 0.6               # persistent long-range
+    assert abs(bs.dfa_hurst(np.random.default_rng(0).normal(0, 1, 4000)) - 0.5) < 0.15  # white
+
+
+def test_criticality_graceful_short():
+    """The criticality leg degrades gracefully on a too-short signal (never a fault)."""
+    out = bs.criticality_signature(np.arange(20.0))
+    assert out["verdict"] == "undetermined" and "criticality-skipped" in out["note"]
+
+
+def test_cli_criticality_stdin():
+    """`criticality --signal -` runs the two-point-MI leg → one JSON verdict."""
+    lines = "\n".join(json.dumps(float(v)) for v in _pink_noise(beta=1.3))
+    r = _run_cli(["criticality", "--signal", "-"], stdin=lines)
+    assert r.returncode == 0, r.stderr
+    verdict = json.loads(r.stdout.strip().splitlines()[-1])
+    assert verdict["verdict"] == "critical"
+    assert "hurst" in verdict and "r2_power" in verdict
+
+
+# ── COLORED SURROGATE + VARIANCE/AC1 SEPARATION — the hardened false-discovery ward (leg 2) ───
+
+
+def _noise_inflation(seed=2, n=400):
+    """A NOISE-AMPLITUDE-INFLATION fixture: the AR coefficient is FIXED (no critical slowing),
+    only the noise σ ramps up. Variance RISES, lag-1-AC does NOT — the classic EWS false
+    positive a white-shuffle null lets through, the colored teeth must catch."""
+    rng = np.random.default_rng(seed)
+    sd = np.linspace(0.3, 3.0, n)
+    x = np.zeros(n)
+    for t in range(1, n):
+        x[t] = 0.4 * x[t - 1] + rng.normal(0, sd[t])
+    return x
+
+
+def test_phase_randomized_surrogate_preserves_spectrum():
+    """The phase-randomized (colored) surrogate keeps the FULL power spectrum (the color /
+    autocorrelation) and the mean, randomizing only the phases — the proper colored null."""
+    x = _pink_noise(n=1024, beta=1.5, seed=4)
+    sur = bs.phase_randomized_surrogate(x, np.random.default_rng(1))
+    assert sur.shape == x.shape
+    # identical magnitude spectrum (the color preserved), different series (phases scrambled)
+    assert np.allclose(np.abs(np.fft.rfft(x)), np.abs(np.fft.rfft(sur)), atol=1e-6)
+    assert abs(sur.mean() - x.mean()) < 1e-6
+    assert not np.allclose(sur, x)
+
+
+def test_noise_inflation_does_not_fire_variance_separated():
+    """THE LOAD-BEARING VERIFY (leg 2): a pure noise-amplitude rise (variance UP, lag-1-AC FLAT)
+    is caught — it reports NOISE-INFLATION, never FORECAST. The AC1 tooth (beating the colored
+    null) separates a real bifurcation from noise inflation; variance alone can never fire."""
+    fc = bs.forecast_ews(_noise_inflation(), window=50, n_surr=300, alpha=0.05, seed=1)
+    assert fc["fired"] is False
+    assert fc["state"] == "NOISE-INFLATION"
+    assert fc["var_significant"] is True      # variance genuinely rises (and beats the null)
+    assert fc["ac1_significant"] is False     # but the lag-1-AC does NOT — no critical slowing
+    assert fc["noise_inflation"] is True
+
+
+def test_forecast_still_fires_on_true_csd_with_colored_null():
+    """The hardened forecast (colored nulls, beat-both) STILL fires on a true critical-slowing
+    approach — AC1 rises, beats BOTH the AR(1) and phase-randomized nulls, bands agree."""
+    x, T = _csd_approach_then_commit()
+    fc = bs.forecast_ews(x[:T], window=50, n_surr=300, alpha=0.05, min_bands=2, seed=1)
+    assert fc["fired"] is True and fc["state"] == "FORECAST", fc["note"]
+    assert fc["ac1_significant"] is True
+    assert fc["ar1_p"] <= 0.05                # the WORSE of the two colored nulls still clears
+
+
+# ── SLAVING — the aperture ladder as an order-parameter hierarchy (leg 3, Haken synergetics) ──
+
+
+def test_slaving_reads_order_parameter():
+    """THE LOAD-BEARING VERIFY (leg 3): a SLOW order-parameter enslaving a fast carrier
+    (amplitude modulation) shows a strong top-down slaving gain AND a bottom-up emergence
+    correlation (circular causality closes) — above an ADDITIVE control where the coarse band
+    does not score the fine band's amplitude. The higher band's prior scores the lower."""
+    t = np.arange(1024)
+    rng = np.random.default_rng(1)
+    modulated = (1.0 + 0.9 * np.sin(2 * np.pi * t / 256.0)) * np.sin(2 * np.pi * t / 8.0) \
+        + rng.normal(0, 0.05, 1024)
+    additive = np.sin(2 * np.pi * t / 256.0) + np.sin(2 * np.pi * t / 8.0) \
+        + rng.normal(0, 0.05, 1024)
+    sm = bs.slaving_leg(bs.modwt_mra(modulated))
+    sa = bs.slaving_leg(bs.modwt_mra(additive))
+    gain_mod = max(p["topdown_gain"] for p in sm["pairs"])
+    gain_add = max(p["topdown_gain"] for p in sa["pairs"])
+    assert gain_mod > gain_add                     # the order parameter enslaves more
+    # circular causality closes on the modulated signal (top-down AND bottom-up both present)
+    strongest = max(sm["pairs"], key=lambda p: p["topdown_gain"])
+    assert strongest["topdown_gain"] > 1.5 and abs(strongest["bottomup_r"]) > 0.2
+    assert strongest["circular"] is True
+    # the gain reads as a confidence (0..20 via the π↔confidence map)
+    assert 0.0 <= strongest["topdown_confidence"] <= 20.0
+
+
+def test_slaving_graceful_single_band():
+    """The slaving leg needs ≥ 2 bands — a too-short signal degrades gracefully (no fault)."""
+    out = bs.slaving_leg(bs.modwt_mra(np.array([0.1, 0.2, 0.3])))  # n<4 → levels 0
+    assert out["pairs"] == [] and out["levels"] < 2
+    assert "slaving-skipped" in out["note"]
+
+
+def test_run_stack_carries_slaving_block():
+    """The composed stack surfaces the slaving (order-parameter) block alongside the bands."""
+    E = _blocks()
+    out = bs.run_stack(E, spine_signal=bs.cohesion_signal([E]).mean(axis=1), n_boot=20)
+    assert "slaving" in out and "pairs" in out["slaving"]
+    assert "note" in out["slaving"]
+
+
+def test_cli_slaving_stdin():
+    """`slaving --signal -` runs the order-parameter leg → one JSON verdict."""
+    t = np.arange(1024)
+    mod = (1.0 + 0.9 * np.sin(2 * np.pi * t / 256.0)) * np.sin(2 * np.pi * t / 8.0) \
+        + np.random.default_rng(1).normal(0, 0.05, 1024)
+    lines = "\n".join(json.dumps(float(v)) for v in mod)
+    r = _run_cli(["slaving", "--signal", "-"], stdin=lines)
+    assert r.returncode == 0, r.stderr
+    verdict = json.loads(r.stdout.strip().splitlines()[-1])
+    assert verdict["pairs"] and "order_parameter" in verdict["pairs"][0]
+
+
+def test_cli_selftest_covers_new_legs():
+    """`selftest` now also reports the criticality separation and the slaving read."""
+    r = _run_cli(["selftest"])
+    assert r.returncode == 0
+    rep = json.loads(r.stdout.strip().splitlines()[-1])
+    assert rep["criticality_separates"] is True
+    assert rep["slaving_reads_order_parameter"] is True

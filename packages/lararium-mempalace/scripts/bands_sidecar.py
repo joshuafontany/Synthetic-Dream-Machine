@@ -784,21 +784,49 @@ def ar1_surrogate(x: np.ndarray, rng: np.random.Generator) -> np.ndarray:
     return s + x.mean()
 
 
+def phase_randomized_surrogate(x: np.ndarray, rng: np.random.Generator) -> np.ndarray:
+    """One PHASE-RANDOMIZED (Fourier) surrogate of `x`: preserve the FULL power spectrum (all
+    of the signal's COLOR — its linear autocorrelation at every lag) and randomize only the
+    Fourier phases → a stationary Gaussian series with an IDENTICAL spectrum but no trend and
+    no time-asymmetry. THE COLORED NULL (sensorium-rhymes #R-is-the-keel, the hardening): a
+    white shuffle destroys the color and OVER-rejects on long-range-correlated streams (text
+    and code ARE colored), so a rising-variance artefact of the color reads as a false
+    positive; this null keeps the color and only tests for the trend/nonstationarity the
+    critical-slowing-down forecast actually claims. Preserves DC (mean) and the Nyquist term."""
+    x = np.asarray(x, dtype=float).ravel()
+    n = x.size
+    if n < 4:
+        return x.copy()
+    X = np.fft.rfft(x)
+    mag = np.abs(X)
+    phases = rng.uniform(0.0, 2.0 * np.pi, mag.size)
+    phases[0] = 0.0  # keep DC real (preserve the mean)
+    if n % 2 == 0:
+        phases[-1] = 0.0  # Nyquist term is real for an even-length series
+    s = np.fft.irfft(mag * np.exp(1j * phases), n=n)
+    return np.asarray(s, dtype=float)
+
+
 def surrogate_pvalue(x: np.ndarray, window: int, indicator: str = "ar1",
-                     n_surr: int = 200, seed: int = 1) -> float:
-    """One-sided surrogate p-value for a RISING indicator trend: the fraction of AR(1)-null
+                     n_surr: int = 200, seed: int = 1, surrogate: str = "ar1") -> float:
+    """One-sided surrogate p-value for a RISING indicator trend: the fraction of NULL
     surrogates whose indicator Kendall-τ is ≥ the observed τ. A small p ⇒ the rising trend is
-    unlikely under an AR(1) null with the same autocorrelation (the R-keel: detection that
-    survives its own null, sensorium-rhymes #R-is-the-keel). Graceful p=1.0 on a short signal."""
+    unlikely under a null that carries the signal's autocorrelation (the R-keel: detection that
+    survives its own null, sensorium-rhymes #R-is-the-keel). Two COLORED nulls, never a white
+    shuffle: `surrogate="ar1"` — the init-matched AR(1) null (carries lag-1 AC + the observed
+    burn-in transient, so a from-equilibrium transient appears in the null too); `="phase"` —
+    the phase-randomized null (carries the FULL spectrum, so a variance-inflation artefact of
+    the color appears in the null too). Graceful p=1.0 on a short signal."""
     x = np.asarray(x, dtype=float).ravel()
     key = {"ar1": _lag1_ac, "variance": lambda s: float(np.var(s)), "skewness": _skew}[indicator]
     obs = kendall_tau(_rolling(x, window, key))
     if _rolling(x, window, key).size < 3:
         return 1.0
+    gen = phase_randomized_surrogate if surrogate == "phase" else ar1_surrogate
     rng = np.random.default_rng(seed)
     ge = 1  # +1 (the observed itself) — a conservative, never-zero p
     for _ in range(n_surr):
-        sur = ar1_surrogate(x, rng)
+        sur = gen(x, rng)
         if kendall_tau(_rolling(sur, window, key)) >= obs:
             ge += 1
     return ge / (n_surr + 1)
@@ -838,13 +866,18 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
       · the MODWT detail BANDS carry the multi-band agreement guard — each band's rolling-
         variance Kendall-τ; agreement = how many bands trend UP together.
 
-    THE GUARD (the R keel, LOAD-BEARING): the forecast FIRES only when
-      (1) SURROGATE-significant — the AC1 (or variance) rising trend beats the AR(1) null
-          (p ≤ alpha), AND
-      (2) MULTI-BAND agreement — ≥ `min_bands` MODWT bands show a rising variance-τ.
-    Either alone stays a WATCH, never a fire (a single-band or un-surrogated trend is exactly
-    the apophenia the keel guards against). Returns the full verdict (fired · the per-indicator
-    τ / p · the per-band agreement · the R/native engine)."""
+    THE GUARD (the R keel, LOAD-BEARING) — three teeth, ALL required to FIRE:
+      (1) AC1-SIGNIFICANT — the lag-1-AC rising trend beats BOTH colored nulls (the AR(1)
+          init-matched AND the phase-randomized spectral null; p = max of the two ≤ alpha).
+          The AC1 rise is the critical-slowing-down-SPECIFIC tooth.
+      (2) VARIANCE ≠ AC1 SEPARATION — a rising VARIANCE with NO rising AC1 reads as pure
+          NOISE-AMPLITUDE INFLATION (no bifurcation), NOT a forecast: variance alone can never
+          fire (it is exactly the false-positive engine — rising noise lifts variance without
+          lifting AC1). The AC1 tooth (1) enforces this; a var-only rise reports NOISE-INFLATION.
+      (3) MULTI-BAND agreement — ≥ `min_bands` MODWT bands show a rising variance-τ.
+    A single tooth alone stays a WATCH, never a fire (the apophenia the keel guards against).
+    Returns the full verdict (fired · state · the per-indicator τ / colored-null p · the
+    variance-vs-AC1 separation · the per-band agreement · the R/native engine)."""
     M = np.asarray(matrix, dtype=float)
     if M.ndim == 1:
         M = M.reshape(-1, 1)
@@ -865,8 +898,13 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
     else:
         gews = generic_ews(pooled, win)
         ar1_tau, var_tau = gews["ar1_tau"], gews["var_tau"]
-        ar1_p = surrogate_pvalue(pooled, win, "ar1", n_surr=n_surr, seed=seed)
-        var_p = surrogate_pvalue(pooled, win, "variance", n_surr=n_surr, seed=seed)
+        # CONSERVATIVE: the trend must beat BOTH colored nulls — the AR(1) init-matched null
+        # (guards the burn-in transient) AND the phase-randomized spectral null (guards the
+        # color-driven variance-inflation artefact). p = the WORSE (max) of the two.
+        ar1_p = max(surrogate_pvalue(pooled, win, "ar1", n_surr=n_surr, seed=seed, surrogate="ar1"),
+                    surrogate_pvalue(pooled, win, "ar1", n_surr=n_surr, seed=seed, surrogate="phase"))
+        var_p = max(surrogate_pvalue(pooled, win, "variance", n_surr=n_surr, seed=seed, surrogate="ar1"),
+                    surrogate_pvalue(pooled, win, "variance", n_surr=n_surr, seed=seed, surrogate="phase"))
         engine = "native-ews"
 
     # MULTI-BAND agreement — each MODWT detail band's rolling-variance trend.
@@ -879,13 +917,23 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
         band_taus.append({"band": bname, "var_tau": vtau, "rising": vtau > 0.0})
     n_rising = sum(1 for b in band_taus if b["rising"])
 
-    # THE FIRE CONDITION — surrogate-significance AND multi-band agreement (both, never one).
-    surrogate_sig = (ar1_p <= alpha) or (var_p <= alpha)
+    # THE VARIANCE ≠ AC1 SEPARATION (the false-positive teeth): a rising AC1 that beats the
+    # colored null is the CSD-specific tooth; a rising VARIANCE alone (AC1 NOT rising) is pure
+    # noise-amplitude inflation — no bifurcation. Only the AC1 tooth may FIRE.
+    ac1_sig = bool(ar1_tau > 0.0 and ar1_p <= alpha)
+    var_sig = bool(var_tau > 0.0 and var_p <= alpha)
+    noise_inflation = bool(var_sig and not ac1_sig)   # variance rises WITHOUT the AC1 rise
+    surrogate_sig = ac1_sig or var_sig                # kept for back-compat (any null beaten)
     multi_band = n_rising >= min_bands
-    fired = bool(surrogate_sig and multi_band)
+
+    # THE FIRE CONDITION — AC1-significant (CSD-specific) AND multi-band agreement. Variance
+    # CORROBORATES but can never fire alone (that path reports NOISE-INFLATION, never FORECAST).
+    fired = bool(ac1_sig and multi_band)
     if fired:
         state = "FORECAST"
-    elif surrogate_sig or multi_band:
+    elif noise_inflation:
+        state = "NOISE-INFLATION"       # variance up, AC1 flat → the guarded false positive
+    elif ac1_sig or var_sig or multi_band:
         state = "WATCH"
     else:
         state = "QUIET"
@@ -896,6 +944,9 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
         "n": n, "window": win,
         "ar1_tau": ar1_tau, "ar1_p": ar1_p,
         "var_tau": var_tau, "var_p": var_p,
+        "ac1_significant": ac1_sig,
+        "var_significant": var_sig,
+        "noise_inflation": noise_inflation,
         "surrogate_significant": surrogate_sig,
         "multi_band_agreement": multi_band,
         "bands_rising": n_rising, "min_bands": min_bands,
@@ -903,8 +954,247 @@ def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
         "alpha": alpha, "n_surr": n_surr,
         "engine": engine,
         "r_available": _r_available(),
-        "note": (f"critical-slowing-down {state}: AR1-τ {ar1_tau:.2f} (p={ar1_p:.3f}) · "
-                 f"var-τ {var_tau:.2f} (p={var_p:.3f}) · {n_rising} bands rising · engine {engine}"),
+        "note": (f"critical-slowing-down {state}: AC1-τ {ar1_tau:.2f} (p={ar1_p:.3f}) · "
+                 f"var-τ {var_tau:.2f} (p={var_p:.3f}) · {n_rising} bands rising · "
+                 f"{'AC1+var' if ac1_sig and var_sig else 'var-only(inflation)' if noise_inflation else 'AC1' if ac1_sig else 'none'} · engine {engine}"),
+    }
+
+
+# ── CRITICALITY — the two-point mutual-information signature (Lin–Tegmark, NOT Zipf) ──────
+
+
+def _symbolize(x: np.ndarray, n_bins: int = 4) -> tuple[np.ndarray, int]:
+    """A 1-D signal → an integer symbol sequence for the MI estimator. An already-symbolic
+    small-alphabet integer array passes through; else RANK-quantile binning into `n_bins`
+    (a uniform marginal — the maximum-entropy binning that reads correlation cleanly, robust
+    to the signal's scale and heavy tails). Returns (symbols, alphabet_size)."""
+    x = np.asarray(x, dtype=float).ravel()
+    if x.size == 0:
+        return np.zeros(0, dtype=int), 0
+    if np.allclose(x, np.round(x)) and x.min() >= 0 and (x.max() - x.min()) < n_bins * 4:
+        sym = x.astype(int)
+        return sym, int(sym.max()) + 1
+    ranks = np.argsort(np.argsort(x))
+    sym = (ranks * n_bins // max(1, x.size)).astype(int)
+    sym = np.clip(sym, 0, n_bins - 1)
+    return sym, int(sym.max()) + 1 if sym.size else 0
+
+
+def two_point_mi(sym: np.ndarray, d: int, k: int) -> float:
+    """Empirical mutual information `I(S_t ; S_{t+d})` in NATS over a symbol sequence — the
+    TWO-POINT criticality statistic (Lin & Tegmark 2017). NOT Zipf: Zipf is a ONE-point
+    (marginal-frequency) law a Markov process satisfies; the criticality signature lives in
+    how MI between tokens DECAYS with separation `d`. Returns 0 for a degenerate d/k."""
+    n = sym.size
+    if d <= 0 or d >= n or k < 2:
+        return 0.0
+    a, b = sym[:-d], sym[d:]
+    joint = np.zeros((k, k), dtype=float)
+    np.add.at(joint, (a, b), 1.0)
+    tot = joint.sum()
+    if tot < 1.0:
+        return 0.0
+    joint /= tot
+    pa, pb = joint.sum(axis=1), joint.sum(axis=0)
+    nz = joint > 0
+    outer = np.outer(pa, pb)
+    return float(max(0.0, np.sum(joint[nz] * np.log(joint[nz] / outer[nz]))))
+
+
+def dfa_hurst(x: np.ndarray) -> float:
+    """Detrended-fluctuation-analysis Hurst exponent H — the long-range-correlation
+    corroborator (H≈0.5 uncorrelated/Markov, H>0.5 PERSISTENT long-range, H<0.5 anti-
+    persistent). Integrate to a profile, RMS the linearly-detrended fluctuation per scale,
+    fit log-F vs log-scale. Graceful H=0.5 on a short signal."""
+    x = np.asarray(x, dtype=float).ravel()
+    n = x.size
+    if n < 32:
+        return 0.5
+    y = np.cumsum(x - x.mean())
+    scales = np.unique(np.geomspace(4, max(4, n // 4), 12).astype(int))
+    fs = []
+    for s in scales:
+        s = int(s)
+        if s < 4 or s > n // 2:
+            continue
+        nseg = n // s
+        rms = []
+        t = np.arange(s)
+        for v in range(nseg):
+            seg = y[v * s:(v + 1) * s]
+            coef = np.polyfit(t, seg, 1)
+            rms.append(float(np.sqrt(np.mean((seg - np.polyval(coef, t)) ** 2))))
+        if rms:
+            fs.append((s, float(np.mean(rms))))
+    if len(fs) < 3:
+        return 0.5
+    ls = np.log([f[0] for f in fs])
+    lf = np.log([max(f[1], _EPS) for f in fs])
+    return float(np.polyfit(ls, lf, 1)[0])
+
+
+def criticality_signature(x: np.ndarray, n_bins: int = 4, n_shuffle: int = 20,
+                          seed: int = 1) -> dict:
+    """THE TWO-POINT-MI CRITICALITY VERDICT (sensorium-rhymes #the-predictive-upgrade, the
+    dynamical leg; Lin & Tegmark, *Entropy* 2017). Fit MI(d) vs d and classify:
+
+      · CRITICAL — MI(d) decays as a POWER LAW `d^-μ` over DECADES (no finite correlation
+        length; long memory a context-free grammar cannot explain).
+      · MARKOV   — MI(d) decays EXPONENTIALLY (a finite correlation length, short support) —
+        the signature of a finite-order Markov / shuffled-local process.
+      · SHUFFLED — MI never clears the shuffle floor (independent tokens, no structure).
+
+    The SHUFFLE NULL (the R-keel) sets a per-distance floor (mean + 3σ over `n_shuffle`
+    order-permutations); MI counts only where it clears the floor. The verdict compares the
+    log-log (power) vs log-linear (exponential) fit R² ON the supra-floor range, gated by the
+    span in DECADES — a critical process has NO finite correlation length, so its power law
+    persists ≥ 1 decade. `dfa_hurst` corroborates (H>0.5 ⇒ persistent). Graceful on a short
+    signal. Returns {verdict, r2_power, r2_exp, mu (power exponent), decades, corr_len, hurst,
+    n_supported, snr}."""
+    sym, k = _symbolize(x, n_bins)
+    n = sym.size
+    if n < 64 or k < 2:
+        return {"verdict": "undetermined", "note": f"criticality-skipped: too few samples/symbols (n={n}, k={k})",
+                "r2_power": 0.0, "r2_exp": 0.0, "decades": 0.0, "hurst": 0.5, "n_supported": 0}
+    dmax = max(4, n // 4)
+    dists = np.unique(np.concatenate([np.arange(1, 9), np.geomspace(1, dmax, 16).astype(int)]))
+    dists = np.array([d for d in dists if 1 <= d < n], dtype=int)
+    mi = np.array([two_point_mi(sym, int(d), k) for d in dists])
+    # SHUFFLE FLOOR — the finite-sample MI bias + its scatter under order-permutation (the null).
+    rng = np.random.default_rng(seed)
+    fl = np.zeros((n_shuffle, dists.size))
+    for i in range(n_shuffle):
+        sh = sym.copy()
+        rng.shuffle(sh)
+        fl[i] = np.array([two_point_mi(sh, int(d), k) for d in dists])
+    floor = fl.mean(axis=0)
+    floor_sd = fl.std(axis=0) + _EPS
+    excess = mi - floor
+    sig = excess > 3.0 * floor_sd            # MI clears the shuffle floor by 3σ
+    supported = int(sig.sum())
+    snr = float(np.mean(excess) / (np.mean(floor) + _EPS))
+    hurst = dfa_hurst(x)
+    if supported < 4 or np.max(excess) < 3.0 * np.max(floor_sd):
+        return {"verdict": "shuffled", "r2_power": 0.0, "r2_exp": 0.0, "mu": 0.0,
+                "decades": 0.0, "corr_len": 0.0, "hurst": hurst, "n_supported": supported,
+                "snr": snr, "n_bins": n_bins,
+                "note": f"MI at the shuffle floor (independent tokens) · H={hurst:.2f}"}
+    ds = dists[sig].astype(float)
+    le = np.log(np.clip(excess[sig], _EPS, None))
+    r2_pow, mu = _mi_linfit(np.log(ds), le)      # power law: log-log straight, slope = -μ
+    r2_exp, rate = _mi_linfit(ds, le)            # exponential: log-linear straight
+    corr_len = float(dists[sig].max())
+    dmin = float(dists[sig].min())
+    decades = float(np.log10(max(corr_len, dmin) / max(dmin, 1.0)))
+    # CRITICAL iff the power law persists ≥ 1 decade (no finite correlation length) AND fits
+    # at least as well as the exponential; else MARKOV (a finite-correlation-length cutoff).
+    verdict = "critical" if (decades >= 1.0 and r2_pow >= r2_exp) else "markov"
+    return {
+        "verdict": verdict, "r2_power": r2_pow, "r2_exp": r2_exp, "mu": -mu,
+        "decades": decades, "corr_len": corr_len, "hurst": hurst,
+        "n_supported": supported, "snr": snr, "n_bins": n_bins,
+        "note": (f"two-point-MI {verdict}: power-law R² {r2_pow:.2f} vs exp R² {r2_exp:.2f} · "
+                 f"μ={-mu:.2f} · {decades:.1f} decades · H={hurst:.2f}"),
+    }
+
+
+def _mi_linfit(xx: np.ndarray, yy: np.ndarray) -> tuple[float, float]:
+    """Least-squares line fit → (R², slope). The power-vs-exponential discriminator reads the
+    two R²s (log-log for power, log-linear for exponential)."""
+    xx = np.asarray(xx, dtype=float)
+    yy = np.asarray(yy, dtype=float)
+    if xx.size < 3:
+        return 0.0, 0.0
+    coef = np.polyfit(xx, yy, 1)
+    pred = np.polyval(coef, xx)
+    ss_res = float(np.sum((yy - pred) ** 2))
+    ss_tot = float(np.sum((yy - yy.mean()) ** 2))
+    return 1.0 - ss_res / (ss_tot + _EPS), float(coef[0])
+
+
+# ── SLAVING — the aperture ladder AS an order-parameter hierarchy (Haken synergetics) ─────
+
+
+def _band_envelope(band: np.ndarray, win: int) -> np.ndarray:
+    """The local amplitude envelope of a MODWT detail band — a moving-RMS of the coefficients
+    (the band's instantaneous power). The order-parameter's envelope is the slaving PRIOR; the
+    enslaved band's envelope is what the prior predicts."""
+    b = np.asarray(band, dtype=float).ravel()
+    w = max(2, int(win))
+    kern = np.ones(w) / w
+    env2 = np.convolve(b * b, kern, mode="same")
+    return np.sqrt(np.clip(env2, 0.0, None))
+
+
+def _slaving_gain(prior: np.ndarray, target: np.ndarray, warmup: int = 1) -> tuple[float, float]:
+    """TOP-DOWN precision gain — regress the enslaved `target` envelope on the order-parameter
+    `prior`; the gain = var(target) / var(residual). >1 ⇒ the prior SCORES (predicts) the
+    target (the slaving/predictive leg). Returns (gain, correlation)."""
+    p = np.asarray(prior, dtype=float).ravel()
+    y = np.asarray(target, dtype=float).ravel()
+    m = min(p.size, y.size)
+    w = max(0, min(warmup, m))
+    p, y = p[w:m], y[w:m]
+    if y.size < 8 or np.std(y) < _EPS or np.std(p) < _EPS:
+        return 1.0, 0.0
+    A = np.column_stack([p, np.ones_like(p)])
+    coef, *_ = np.linalg.lstsq(A, y, rcond=None)
+    resid = y - A @ coef
+    gain = float(np.var(y) / (float(np.var(resid)) + _EPS))
+    r = float(np.corrcoef(p, y)[0, 1])
+    return max(gain, _EPS), r
+
+
+def slaving_leg(mra: dict, warmup: int = 1) -> dict:
+    """THE ORDER-PARAMETER / SLAVING LEG (sensorium-rhymes #the-predictive-upgrade, the
+    top-down leg; Haken synergetics). The aperture ladder IS an order-parameter hierarchy: the
+    SLOW/coarse band (Theme) is the order parameter that ENSLAVES the FAST/fine band (Pulse).
+    Wire the CIRCULAR CAUSALITY between each adjacent MODWT band pair (coarse→fine):
+
+      · TOP-DOWN (slaving / prediction) — the coarser band's envelope supplies the PRIOR that
+        scores the finer band's envelope. `topdown_gain` = the precision (var-reduction) the
+        prior buys, read as a confidence via the π↔confidence map (predictive_coding). THIS is
+        the mechanism top-down prediction lacked: the higher band's prior scores the lower.
+      · BOTTOM-UP (emergence) — the slow mode as a function of aggregated fast fluctuation:
+        `bottomup_r` = the correlation of the coarse band with the fine band's running energy.
+
+    Circular causality CLOSES on a pair when BOTH legs run (top-down gain > 1 AND bottom-up
+    correlation present). Returns {pairs, levels, note}. Graceful on < 2 bands."""
+    bands = mra.get("bands", [])
+    levels = int(mra.get("levels", 0))
+    if levels < 2:
+        return {"pairs": [], "levels": levels, "note": "slaving-skipped: <2 bands"}
+    names = BANDS_FINE_TO_COARSE[:levels]
+    try:
+        from predictive_coding import precision_to_confidence as _to_conf
+    except Exception:  # noqa: BLE001 — predictive_coding absent → the inline π↔conf map
+        def _to_conf(p: float) -> float:
+            p = max(0.0, float(p))
+            return 20.0 * p / (1.0 + p)
+    pairs = []
+    for j in range(levels - 1):
+        fine = np.asarray(bands[j], dtype=float)        # faster — the enslaved band
+        coarse = np.asarray(bands[j + 1], dtype=float)  # slower — the order parameter
+        win = 2 ** (j + 3)
+        fine_env = _band_envelope(fine, win)
+        prior = _band_envelope(coarse, win * 2)         # the order-parameter magnitude (slow)
+        gain, tr = _slaving_gain(prior, fine_env, warmup)
+        m = min(coarse.size, fine_env.size)
+        cu, fe = np.abs(coarse[:m]), fine_env[:m]
+        bu_r = (float(np.corrcoef(cu, fe)[0, 1])
+                if m > 8 and np.std(cu) > _EPS and np.std(fe) > _EPS else 0.0)
+        pairs.append({
+            "order_parameter": names[j + 1], "enslaved": names[j],
+            "topdown_gain": gain, "topdown_confidence": _to_conf(gain),
+            "topdown_r": tr, "bottomup_r": bu_r,
+            "circular": bool(gain > 1.2 and abs(bu_r) > 0.2),
+        })
+    strongest = max(pairs, key=lambda p: p["topdown_gain"]) if pairs else None
+    return {
+        "pairs": pairs, "levels": levels,
+        "note": (f"slaving: {strongest['order_parameter']}→{strongest['enslaved']} "
+                 f"gain {strongest['topdown_gain']:.2f} (conf {strongest['topdown_confidence']:.1f})"
+                 if strongest else "slaving: no pairs"),
     }
 
 
@@ -965,6 +1255,7 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
             "band_names_fine_to_coarse": BANDS_FINE_TO_COARSE[: mra.get("levels", 0)],
         },
         "servo": {"boundaries": servo["boundaries"], "moved": servo["moved"], "n_modes": n_modes, "ridges": servo["ridges"]},
+        "slaving": slaving_leg(mra),
         "tree": {"engine": tree["engine"], "n_cuts": len(order), "order": order, "band_counts": band_counts},
         "gate": {"consensus": gate["consensus"], "cut_support": gate["cut_support"], "method": gate_method,
                  "canon_cuts": sum(1 for r in reg_of_cut.values() if r == "Canon"),
@@ -1121,9 +1412,33 @@ def cmd_forecast(args) -> None:
     sys.stdout.write(json.dumps(out) + "\n")
 
 
+def cmd_criticality(args) -> None:
+    """Run the TWO-POINT-MI criticality signature (Lin–Tegmark, NOT Zipf) over an NDJSON
+    signal → one JSON verdict: critical (power-law MI decay, long memory) vs markov
+    (exponential decay, finite correlation length) vs shuffled (MI at the null floor), with the
+    log-log/log-linear fit R², the decades of support, and the DFA Hurst corroborator."""
+    M = _load_signal(args.signal)
+    x = M.mean(axis=1) if M.ndim == 2 and M.shape[1] > 1 else M.ravel()
+    out = criticality_signature(x, n_bins=args.bins, n_shuffle=args.shuffle, seed=args.seed)
+    sys.stdout.write(json.dumps(out) + "\n")
+
+
+def cmd_slaving(args) -> None:
+    """Run the ORDER-PARAMETER / SLAVING leg (Haken synergetics) over an NDJSON signal → one
+    JSON verdict: per adjacent-band circular-causality pair, the top-down slaving gain (the
+    coarse order-parameter's prior scoring the fine band, read as a confidence) and the
+    bottom-up emergence correlation. The aperture ladder read as an order-parameter hierarchy."""
+    M = _load_signal(args.signal)
+    x = M.mean(axis=1) if M.ndim == 2 and M.shape[1] > 1 else M.ravel()
+    out = slaving_leg(modwt_mra(x))
+    sys.stdout.write(json.dumps(out) + "\n")
+
+
 def cmd_selftest(args) -> None:
     """A synthetic-signal self-check (no chroma, no fixture file): a fast+slow signal → the
-    SPINE separates the scales; a clean vs noisy fixture → the GATE locks vs holds."""
+    SPINE separates the scales; a clean vs noisy fixture → the GATE locks vs holds; the
+    two-point-MI leg tells a critical (pink) from a markov (AR1) signal; the slaving leg reads
+    a modulated (order-parameter) pair above an additive control."""
     n = 256
     t = np.arange(n)
     fast = np.sin(2 * np.pi * t / 4.0)
@@ -1132,11 +1447,44 @@ def cmd_selftest(args) -> None:
     frac = band_energy_fractions(mra)
     fine_energy = sum(frac[:2])
     coarse_energy = sum(frac[3:])
+
+    # CRITICALITY leg — pink (critical) vs AR(1) (markov) two-point-MI separation.
+    rng = np.random.default_rng(0)
+    freq = np.fft.rfftfreq(4000)
+    freq[0] = freq[1]
+    ph = rng.uniform(0, 2 * np.pi, freq.size)
+    ph[0] = 0.0
+    ph[-1] = 0.0
+    pink = np.fft.irfft(freq ** (-0.7) * np.exp(1j * ph), n=4000)
+    ar = np.zeros(4000)
+    for tt in range(1, 4000):
+        ar[tt] = 0.7 * ar[tt - 1] + rng.normal(0, 1)
+    crit = criticality_signature(pink, seed=1)
+    mark = criticality_signature(ar, seed=1)
+
+    # SLAVING leg — a slow order-parameter enslaving a fast carrier vs an additive control.
+    # A little observation noise breaks the noiseless-tone degeneracy (a pure tone's envelope
+    # is flat, so a noiseless regression residual collapses to ~0 and gains blow up); real
+    # cohesion signals carry noise, and the modulated pair then reads ABOVE the additive one.
+    tt = np.arange(1024)
+    modulated = (1.0 + 0.9 * np.sin(2 * np.pi * tt / 256.0)) * np.sin(2 * np.pi * tt / 8.0) \
+        + rng.normal(0, 0.05, 1024)
+    additive = np.sin(2 * np.pi * tt / 256.0) + np.sin(2 * np.pi * tt / 8.0) \
+        + rng.normal(0, 0.05, 1024)
+    sl_mod = max(p["topdown_gain"] for p in slaving_leg(modwt_mra(modulated))["pairs"])
+    sl_add = max(p["topdown_gain"] for p in slaving_leg(modwt_mra(additive))["pairs"])
+
     report = {
         "spine_levels": mra["levels"],
         "energy_fractions": frac,
         "fine_holds_fast": fine_energy > 0.2,
         "coarse_holds_slow": coarse_energy > 0.05,
+        "criticality_pink": crit["verdict"],
+        "criticality_ar1": mark["verdict"],
+        "criticality_separates": crit["verdict"] == "critical" and mark["verdict"] == "markov",
+        "slaving_gain_modulated": sl_mod,
+        "slaving_gain_additive": sl_add,
+        "slaving_reads_order_parameter": sl_mod > sl_add,
     }
     sys.stdout.write(json.dumps(report) + "\n")
 
@@ -1178,6 +1526,17 @@ def main() -> None:
     f.add_argument("--minbands", type=int, default=2, help="min MODWT bands trending up to fire")
     f.add_argument("--seed", type=int, default=1)
     f.set_defaults(fn=cmd_forecast)
+
+    cr = sub.add_parser("criticality", help="two-point-MI criticality signature (power-law=critical vs exponential=markov, NOT Zipf)")
+    cr.add_argument("--signal", required=True, help="NDJSON signal (rows=time), or - for stdin")
+    cr.add_argument("--bins", type=int, default=4, help="symbolization quantile-bin count")
+    cr.add_argument("--shuffle", type=int, default=20, help="shuffle-null replicate count (the MI floor)")
+    cr.add_argument("--seed", type=int, default=1)
+    cr.set_defaults(fn=cmd_criticality)
+
+    sl = sub.add_parser("slaving", help="order-parameter / slaving leg — top-down band-pair prediction (Haken)")
+    sl.add_argument("--signal", required=True, help="NDJSON signal (rows=time), or - for stdin")
+    sl.set_defaults(fn=cmd_slaving)
 
     s = sub.add_parser("selftest", help="synthetic multi-scale self-check (no chroma)")
     s.set_defaults(fn=cmd_selftest)
