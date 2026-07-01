@@ -1,23 +1,21 @@
 /**
- * copilot-cli-adapter — the GitHub Copilot-CLI SourceAdapter: parse the `events.jsonl` turn-records,
- * FOLD each `turn_index` to its latest content, the content-hash identity rung (turn_index is per-TURN,
- * not per-message, so a per-turn ordinal must NOT ride the session-index rung), the re-emit EDIT signal,
- * the linear current-branch, and the appendOnly emit gate (reharvest, never kapae).
+ * copilot-cli-adapter — the GitHub Copilot-CLI SourceAdapter, grounded on the REAL `~/.copilot/**` bytes
+ * of a LIVE multi-turn session. The event log is a TYPED event stream (`{type,data,id,parentId,timestamp}`),
+ * NOT the flat `turn_index`/`user_message`/`assistant_response` rows the first cut assumed (that flat shape
+ * lives only in the derived SQLite `turns` table). The log APPENDS (like Codex): an `assistant.message`
+ * rides its stable `data.messageId` (native-uuid rung), a `user.message` rides the content-hash rung, and
+ * appendOnly gates a rewind to reharvest.
  *
- * Expected identity keys ride identityLadder so no session-namespace separator is ever hand-typed (the
- * NUL-vs-space bug that bit the foundation). Imports the adapter module DIRECTLY (not the barrel) to stay
- * disjoint from the parallel adapter swarm.
+ * A redacted real-shape fixture (`fixtures/copilot-cli.events.jsonl` — structure from a real session,
+ * content synthetic) grounds the parse; a guarded block also parses any live `~/.copilot` session present.
+ * Imports the adapter module DIRECTLY (not the barrel) to stay disjoint from the parallel adapter swarm.
  */
 import { describe, test, expect } from "vitest";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
-import {
-  copilotCliAdapter,
-  copilotHash,
-  parseCopilotEvents,
-  editedTurnIndices,
-} from "../src/copilot-cli-adapter.js";
+import { fileURLToPath } from "node:url";
+import { copilotCliAdapter, copilotHash, parseCopilotEvents } from "../src/copilot-cli-adapter.js";
 import {
   analyzeSession,
   identityLadder,
@@ -25,67 +23,63 @@ import {
   type AdapterRecord,
 } from "../src/source-adapter.js";
 
-/** Serialize turn-record rows back to the `events.jsonl` line shape the parser reads. */
+const FIXTURE = join(fileURLToPath(new URL(".", import.meta.url)), "fixtures", "copilot-cli.events.jsonl");
+
+/** Serialize typed events back to the `events.jsonl` line shape the parser reads. */
 function jsonl(rows: Array<Record<string, unknown>>): string {
   return rows.map((r) => JSON.stringify(r)).join("\n");
 }
 
-/** A real-shaped Copilot-CLI turn event: one row carries BOTH sides + the per-turn `turn_index`. */
-function turnRow(turn_index: number, user: string, assistant: string): Record<string, unknown> {
-  return { turn_index, user_message: user, assistant_response: assistant, timestamp: "2026-06-24T17:33:52Z" };
+/** A real-shaped `user.message` event — `data.content` + the interaction it opens. */
+function userEvent(interactionId: string, content: string, delivery: string | null = "idle"): Record<string, unknown> {
+  return { type: "user.message", data: { content, delivery, interactionId }, id: `ev-${interactionId}`, parentId: null, timestamp: "2026-07-01T00:00:00.000Z" };
 }
 
-/** Compute the content-hash keys the adapter WOULD emit for these records — via identityLadder (no hand-typed NS). */
+/** A real-shaped `assistant.message` event — `data.content` + a stable `messageId` (the native-uuid rung). */
+function asstEvent(interactionId: string, messageId: string, content: string, turnId = "0"): Record<string, unknown> {
+  return { type: "assistant.message", data: { content, messageId, turnId, interactionId }, id: `ev-${messageId}`, parentId: null, timestamp: "2026-07-01T00:00:00.000Z" };
+}
+
+/** Compute the identity keys the adapter WOULD emit — via identityLadder (no hand-typed NS separator). */
 function keysOf(records: readonly AdapterRecord[], sessionId: string): string[] {
   const ctx = makeIdentityContext(sessionId, copilotHash);
   return records.map((r) => identityLadder(r, ctx).key);
 }
 
-describe("parseCopilotEvents", () => {
-  test("parses per-turn rows, folds each turn_index to its LATEST content, ascending order", () => {
+describe("parseCopilotEvents — the typed event stream", () => {
+  test("keeps real user turns + non-empty assistant messages, in linear append order", () => {
     const content = jsonl([
-      turnRow(0, "u0", "a0"),
-      turnRow(1, "u1", "a1"),
-      turnRow(2, "u2", "a2"),
-      turnRow(1, "u1", "a1-EDITED"), // re-emit turn 1 (UPSERT) — the latest wins
+      { type: "session.start", data: { sessionId: "S" }, id: "e0", parentId: null, timestamp: "t" },
+      { type: "system.message", data: { role: "system", content: "INJECTED-SYSTEM-PROMPT" }, id: "e1", parentId: null, timestamp: "t" },
+      userEvent("ix0", "hello"),
+      asstEvent("ix0", "msg0", "hi there"),
+      userEvent("ix1", "do a thing"),
+      { type: "assistant.turn_start", data: { turnId: "0", interactionId: "ix1" }, id: "e5", parentId: null, timestamp: "t" },
+      asstEvent("ix1", "msg1", "", "0"), // tool-call-only sub-turn: empty content ⇒ dropped
+      { type: "tool.execution_start", data: { turnId: "0" }, id: "e7", parentId: null, timestamp: "t" },
+      asstEvent("ix1", "msg2", "done", "1"),
     ]);
     const recs = parseCopilotEvents(content, "S");
-    expect(recs).toHaveLength(3); // three live turns, the superseded turn-1 emission folded out
-    expect(recs.map((r) => r.text)).toEqual(["u0\na0", "u1\na1-EDITED", "u2\na2"]);
-    // content-hash rung: no native uuid, no session-index ordinal
-    expect(recs.every((r) => r.uuid === null && r.nativeSeq == null)).toBe(true);
-    expect(recs.every((r) => r.role === "turn" && r.sessionId === "S")).toBe(true);
+    expect(recs.map((r) => `${r.role}:${r.text}`)).toEqual(["user:hello", "assistant:hi there", "user:do a thing", "assistant:done"]);
+    expect(recs.every((r) => r.sessionId === "S")).toBe(true);
   });
 
-  test("skips rows with no turn_index and empty-text turns", () => {
+  test("an injected tool-result user.message (reusing a live interactionId) is NOT a turn", () => {
     const content = jsonl([
-      { note: "no turn_index here" },
-      turnRow(0, "hello", "hi"),
-      { turn_index: 1, user_message: "", assistant_response: "" }, // no text ⇒ skipped
+      userEvent("ix0", "the operator question"),
+      asstEvent("ix0", "msg0", "narration"),
+      // Copilot re-delivers large tool output back to the model as a user.message on the SAME interaction:
+      userEvent("ix0", "HUGE-TOOL-RESULT-INJECTED", null),
+      asstEvent("ix0", "msg1", "final answer", "1"),
     ]);
     const recs = parseCopilotEvents(content, "S");
-    expect(recs.map((r) => r.text)).toEqual(["hello\nhi"]);
+    expect(recs.map((r) => `${r.role}:${r.text}`)).toEqual(["user:the operator question", "assistant:narration", "assistant:final answer"]);
   });
 
-  test("an identical re-emit (idempotent UPSERT) stays a single live turn", () => {
-    const content = jsonl([turnRow(0, "u0", "a0"), turnRow(0, "u0", "a0")]);
-    expect(parseCopilotEvents(content, "S")).toHaveLength(1);
-  });
-});
-
-describe("editedTurnIndices — the EDIT / new-content signal", () => {
-  test("a re-emitted turn_index with NEW content flags as an edit", () => {
-    const content = jsonl([
-      turnRow(0, "u0", "a0"),
-      turnRow(1, "u1", "a1"),
-      turnRow(1, "u1", "a1-regenerated"), // same index, new content ⇒ EDIT
-    ]);
-    expect(editedTurnIndices(content)).toEqual([1]);
-  });
-
-  test("an identical re-emit is NOT an edit", () => {
-    const content = jsonl([turnRow(0, "u0", "a0"), turnRow(0, "u0", "a0")]);
-    expect(editedTurnIndices(content)).toEqual([]);
+  test("assistant messages ride the native-uuid rung (messageId); user messages ride content-hash", () => {
+    const recs = parseCopilotEvents(jsonl([userEvent("ix0", "q"), asstEvent("ix0", "msg0", "a")]), "S");
+    const ctx = makeIdentityContext("S", copilotHash);
+    expect(recs.map((r) => identityLadder(r, ctx).rung)).toEqual(["content-hash", "native-uuid"]);
   });
 });
 
@@ -95,82 +89,79 @@ describe("adapter contract", () => {
     expect(copilotCliAdapter.appendOnly).toBe(true);
   });
 
-  test("normalizeIdentity rides the content-hash rung (turn_index is per-turn, never the ordinal)", () => {
-    const ctx = makeIdentityContext("S", copilotHash);
-    const rec: AdapterRecord = { uuid: null, parentUuid: null, role: "turn", text: "u0\na0", isSidechain: false, sessionId: "S", index: 0 };
-    expect(copilotCliAdapter.normalizeIdentity(rec, ctx).rung).toBe("content-hash");
-  });
-
-  test("currentBranch is the linear live-turn chain, keyed via identityLadder", () => {
-    const recs = parseCopilotEvents(jsonl([turnRow(0, "u0", "a0"), turnRow(1, "u1", "a1")]), "S");
+  test("currentBranch is the linear chain, keyed via identityLadder", () => {
+    const recs = parseCopilotEvents(jsonl([userEvent("ix0", "q0"), asstEvent("ix0", "msg0", "a0")]), "S");
     expect(copilotCliAdapter.currentBranch(recs)).toEqual(keysOf(recs, "S"));
   });
 
   test("perAppSignal carries no new sibling (no out-of-file fork)", () => {
-    const recs = parseCopilotEvents(jsonl([turnRow(0, "u0", "a0"), turnRow(1, "u1", "a1v2"), turnRow(1, "u1", "a1")]), "S");
+    const recs = parseCopilotEvents(jsonl([userEvent("ix0", "q"), asstEvent("ix0", "msg0", "a")]), "S");
     expect(copilotCliAdapter.perAppSignal(recs, []).hasNewSibling).toBe(false);
   });
 });
 
-describe("the in-log EDIT — appendOnly gates the emit to reharvest", () => {
-  // Turns 0,1,2 harvested; then turn 1 regenerated + turn 2 re-authored. The superseded old contents
-  // leave the live set ⇒ they read gone ⇒ appendOnly ⇒ reharvest (the orphan is preserved, re-harvestable).
-  const before = parseCopilotEvents(jsonl([turnRow(0, "u0", "a0"), turnRow(1, "u1", "a1"), turnRow(2, "u2", "a2")]), "S");
-  const afterContent = jsonl([
-    turnRow(0, "u0", "a0"),
-    turnRow(1, "u1", "a1"),
-    turnRow(2, "u2", "a2"),
-    turnRow(1, "u1", "a1-regenerated"),
-    turnRow(2, "u2-redone", "a2-redone"),
-  ]);
+describe("rewind shape — appendOnly gates the emit to reharvest", () => {
+  const before = parseCopilotEvents(jsonl([
+    userEvent("ix0", "q0"), asstEvent("ix0", "msg0", "a0"),
+    userEvent("ix1", "q1"), asstEvent("ix1", "msg1", "a1"),
+    userEvent("ix2", "q2"), asstEvent("ix2", "msg2", "a2"),
+  ]), "S");
 
-  test("the raw log flags turns 1 and 2 as edited", () => {
-    expect(editedTurnIndices(afterContent)).toEqual([1, 2]);
-  });
-
-  test("analyzeSession reharvests the superseded contents, keeping the new turns live", () => {
-    const prior = keysOf(before, "S");
-    const after = parseCopilotEvents(afterContent, "S");
-    expect(after.map((r) => r.text)).toEqual(["u0\na0", "u1\na1-regenerated", "u2-redone\na2-redone"]);
-    const finding = analyzeSession(copilotCliAdapter, { records: after, prior });
-    expect(finding?.emit).toBe("reharvest"); // appendOnly gate
-    // the two superseded (old) turn contents are the gone keys; the shared turn-0 key stays live
-    expect(finding?.goneKeys.sort()).toEqual(keysOf(before, "S").slice(1).sort());
-    expect(finding?.kind).toBe("TAIL_TRUNCATE");
-  });
-});
-
-describe("a DELETE (turn present-then-absent) — reharvest via the appendOnly gate", () => {
-  test("a dropped tail turn reads gone and reharvests", () => {
-    const before = parseCopilotEvents(jsonl([turnRow(0, "u0", "a0"), turnRow(1, "u1", "a1"), turnRow(2, "u2", "a2")]), "S");
-    const after = parseCopilotEvents(jsonl([turnRow(0, "u0", "a0"), turnRow(1, "u1", "a1")]), "S");
+  test("a dropped tail turn reads gone and reharvests (TAIL_TRUNCATE)", () => {
+    const after = parseCopilotEvents(jsonl([
+      userEvent("ix0", "q0"), asstEvent("ix0", "msg0", "a0"),
+      userEvent("ix1", "q1"), asstEvent("ix1", "msg1", "a1"),
+    ]), "S");
     const finding = analyzeSession(copilotCliAdapter, { records: after, prior: keysOf(before, "S") });
     expect(finding?.kind).toBe("TAIL_TRUNCATE");
     expect(finding?.emit).toBe("reharvest");
-    expect(finding?.goneKeys).toEqual([keysOf(before, "S")[2]]);
+    expect(finding?.goneKeys).toEqual(keysOf(before, "S").slice(-2));
+  });
+
+  test("a regenerated assistant message (new messageId) supersedes the old ⇒ reharvest", () => {
+    const after = parseCopilotEvents(jsonl([
+      userEvent("ix0", "q0"), asstEvent("ix0", "msg0", "a0"),
+      userEvent("ix1", "q1"), asstEvent("ix1", "msg1", "a1"),
+      userEvent("ix2", "q2"), asstEvent("ix2", "msg2-REGEN", "a2-regenerated"), // new id + text
+    ]), "S");
+    const finding = analyzeSession(copilotCliAdapter, { records: after, prior: keysOf(before, "S") });
+    expect(finding?.emit).toBe("reharvest");
+    expect(finding?.goneKeys).toEqual([keysOf(before, "S").at(-1)]); // the old msg2 key left the live set
   });
 
   test("no rewind ⇒ no finding", () => {
-    const recs = parseCopilotEvents(jsonl([turnRow(0, "u0", "a0"), turnRow(1, "u1", "a1")]), "S");
-    expect(analyzeSession(copilotCliAdapter, { records: recs, prior: keysOf(recs, "S") })).toBeNull();
+    expect(analyzeSession(copilotCliAdapter, { records: before, prior: keysOf(before, "S") })).toBeNull();
   });
 });
 
-// ── Real-bytes grounding (guarded — no-op when the box carries no Copilot-CLI session) ──────────────
-describe("real ~/.copilot bytes", () => {
-  test("any present events.jsonl parses without throwing, onto the content-hash rung", () => {
+describe("redacted real-shape fixture (fixtures/copilot-cli.events.jsonl)", () => {
+  test("parses the real event structure into user + assistant records on the right rungs", () => {
+    const recs = parseCopilotEvents(readFileSync(FIXTURE, "utf8"), "FIX");
+    expect(recs.length).toBeGreaterThan(0);
+    expect(recs.some((r) => r.role === "user")).toBe(true);
+    expect(recs.some((r) => r.role === "assistant" && r.uuid !== null)).toBe(true); // messageId native-uuid rung
+    const ctx = makeIdentityContext("FIX", copilotHash);
+    const rungs = new Set(recs.map((r) => identityLadder(r, ctx).rung));
+    expect(rungs.has("content-hash")).toBe(true);
+    expect(rungs.has("native-uuid")).toBe(true);
+    // a linear branch with all-unique keys (no collisions across turns)
+    const branch = copilotCliAdapter.currentBranch(recs);
+    expect(new Set(branch).size).toBe(recs.length);
+  });
+});
+
+// ── Live-box grounding (guarded — no-op when the box carries no Copilot-CLI session with events) ──
+describe("live ~/.copilot bytes", () => {
+  test("any present events.jsonl parses into transcript records without throwing", () => {
     const stateDir = join(homedir(), ".copilot", "session-state");
     if (!existsSync(stateDir)) { expect(true).toBe(true); return; }
-    let sawAny = false;
     for (const dir of readdirSync(stateDir)) {
       const file = join(stateDir, dir, "events.jsonl");
       if (!existsSync(file)) continue;
-      sawAny = true;
       const recs = parseCopilotEvents(readFileSync(file, "utf8"), dir);
       expect(Array.isArray(recs)).toBe(true);
-      expect(recs.every((r) => r.uuid === null && r.nativeSeq == null)).toBe(true);
+      // user records ride content-hash (uuid null); assistant records may carry a messageId native-uuid.
+      expect(recs.every((r) => r.role === "user" ? r.uuid === null : true)).toBe(true);
     }
-    // On this box the session persisted only metadata (no events.jsonl); the guard keeps the suite green.
-    expect(sawAny || true).toBe(true);
   });
 });

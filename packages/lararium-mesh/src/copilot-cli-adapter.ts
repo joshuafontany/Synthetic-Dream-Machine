@@ -1,44 +1,58 @@
 /**
  * copilot-cli-adapter — the GitHub Copilot-CLI {@link SourceAdapter}, built against the reference
- * {@link claudeCodeAdapter} (commit 697f959c) and the sibling {@link codexAdapter}, grounded on the real
- * `~/.copilot/**` bytes on this box.
+ * {@link claudeCodeAdapter} (commit 697f959c) and the sibling {@link codexAdapter}, GROUNDED ON THE REAL
+ * `~/.copilot/**` bytes of a LIVE, multi-turn session (not the empty-DB schema the first cut assumed).
  *
- * ## Storage (grounded)
- *   ~/.copilot/session-state/<uuid>/events.jsonl  — the TRUTH: an append-only event log
- *   ~/.copilot/session-store.db                   — a SQLite PROJECTION, rebuildable via reindex
+ * ## Storage (grounded on real bytes)
+ *   ~/.copilot/session-state/<uuid>/events.jsonl  — the TRUTH: an append-only TYPED event log
+ *   ~/.copilot/session-store.db                   — a SQLite PROJECTION (a `turns` table), rebuildable
  *
- * The SQLite `turns` table IS the projection shape (read live off `session-store.db`):
- *   turns(id INTEGER PK AUTOINCREMENT, session_id TEXT, turn_index INTEGER NOT NULL,
- *         user_message TEXT, assistant_response TEXT, timestamp TEXT,
- *         UNIQUE(session_id, turn_index))
- * The event log is the source; the DB is derived (a reindex rebuilds it), so the adapter reads the
- * `events.jsonl` and never the DB. `appendOnly = true`: a rewind ORPHANS-not-deletes, kapae re-harvests.
+ * ### The correction (real bytes vs the first cut)
+ * The FIRST cut modelled `events.jsonl` as FLAT turn rows mirroring the DB — top-level `turn_index`,
+ * `user_message`, `assistant_response`. That flat shape lives ONLY in the derived SQLite `turns` table.
+ * The real `events.jsonl` is a TYPED EVENT STREAM, every line:
+ *   `{ type, data, id, parentId, timestamp }`
+ * with `type ∈ { session.start, session.model_change, system.message, user.message, assistant.turn_start,
+ * assistant.message, assistant.turn_end, tool.execution_start, tool.execution_complete, system.notification,
+ * permission.requested, permission.completed, … }`. The readable transcript rides:
+ *   - `user.message`      → `data.content` (the operator's words), `data.interactionId`, `data.delivery`
+ *   - `assistant.message` → `data.content`, `data.messageId` (a stable id), `data.turnId`, `data.interactionId`
  *
- * ## Turn granularity + identity — the content-hash rung (NOT turn_index)
- * A `turns` row is PER-TURN: one row carries BOTH `user_message` AND `assistant_response`, keyed by
- * `turn_index` (`UNIQUE(session_id, turn_index)`). So `turn_index` counts TURNS, not messages. Feeding a
- * per-turn ordinal as the native/session-index rung would (a) make an EDIT re-key the SAME slot — an
- * in-place overwrite that silently DROPS the superseded content, violating the append-only "nothing
- * vanishes, re-harvestable" doctrine — and (b) diverge across any re-run. So a turn rides the
- * CONTENT-HASH rung of the 4-rung {@link identityLadder} (uuid + nativeSeq both absent): the same text
- * hashes identically (stable for the copied/unchanged prefix `diffGone` compares), while EDITED content
- * hashes to a NEW key and the superseded emission's key falls out of the live set ⇒ it reads gone ⇒ kapae
- * re-harvests it as a preserved orphan. This mirrors {@link codexAdapter}'s content-hash choice for its
- * per-turn user messages.
+ * So the "UPSERT a `turn_index` row" the first cut worried about is a DB-PROJECTION behaviour, NOT a log
+ * behaviour: the LOG only ever APPENDS (exactly like Codex). The corrected adapter therefore reads the
+ * event log as a LINEAR APPEND CHAIN — no in-log re-emit fold.
  *
- * ## Rewind semantics — the log appends, the DB is derived
- *   - A re-emitted `turn_index` UPSERTS/replaces that projection row (same index, new content /
- *     timestamp) = an EDIT / REGEN. {@link parseCopilotEvents} FOLDS to the latest content per
- *     `turn_index` (the live turn); the superseded emission's content-hash key leaves the live set, so
- *     the shared diff surfaces it — `appendOnly = true` gates the emit to `reharvest`.
- *     {@link editedTurnIndices} reads the raw log back for the explicit new-content (EDIT) signal.
- *   - An index present-then-absent = a DELETE (a tail-truncate, or an interior hole) — the same
- *     content-hash diff surfaces it ⇒ `reharvest`.
- *   - `/session delete` = a whole-session hard-delete (the whole `session-state/<uuid>/` dir vanishes).
+ * ### `turnId` is NOT a turn ordinal (the second footgun)
+ * `data.turnId` RESETS to 0 on every new user interaction and counts the ASSISTANT SUB-TURNS (each
+ * tool-call round increments it), so it collides across interactions (every interaction has a turnId 0).
+ * The real per-exchange identity is `data.interactionId` (a UUID minted on the operator's `user.message`).
+ * Feeding `turnId` as an ordinal rung would be catastrophic; the adapter never does.
  *
- * Copilot-CLI has NO out-of-file fork (no `--fork-session`; a session lives in one dir), so — unlike
- * Codex — there is no cross-file fork edge and {@link copilotCliAdapter.perAppSignal} carries no new
- * sibling: the in-file re-emit rides the content-hash diff alone (the shared classifier reads the shape).
+ * ## Turn granularity + identity — mirrors {@link codexAdapter}
+ *   - An `assistant.message` carries a stable `data.messageId` ⇒ the NATIVE-UUID rung (rung 1). A rewind /
+ *     regenerate mints a NEW `messageId` (a fresh API call), so the superseded message's key leaves the
+ *     live set ⇒ it reads gone ⇒ `appendOnly = true` re-harvests it as a preserved orphan.
+ *   - A `user.message` carries NO stable id ⇒ the CONTENT-HASH rung (rung 3): the same operator text
+ *     hashes identically (stable for the copied prefix the diff compares), an EDITED message hashes to a
+ *     NEW key and the superseded one falls out of the live set ⇒ reharvest. Identical to Codex's user turns.
+ *
+ * Only the FIRST `user.message` of an `interactionId` is a real operator turn: a LATER `user.message` that
+ * REUSES a still-open `interactionId` is an INJECTED tool-result delivery (Copilot re-delivers large tool
+ * output back to the model as a `user.message` with `delivery ≠ "idle"` and no `transformedContent`) — it
+ * is skipped, the way Codex skips its `developer` base-instructions injection. Empty-content
+ * `assistant.message`s (the tool-call-only sub-turns) are skipped too.
+ *
+ * ## Rewind semantics
+ * Copilot-CLI has NO out-of-file fork (no `--fork-session`; a session lives in one `session-state/<uuid>/`
+ * dir), and the log carries no per-message `parentUuid` DAG to re-parent in place. A rewind/regenerate
+ * APPENDS fresh events; the superseded message's native-uuid / content-hash key simply leaves the live
+ * (linear) branch, and the SHARED classifier reads TAIL_TRUNCATE / INTERIOR_DELETE / DELETE from the
+ * content diff alone, gated to `reharvest` by `appendOnly = true`. So {@link copilotCliAdapter.perAppSignal}
+ * carries no new sibling. `/session delete` is a whole-session hard-delete (the dir vanishes).
+ *
+ * NOTE: the rewind PATH is validated by shape (the shared diff/classify is proven cross-adapter), but a
+ * real Copilot-CLI `/rewind` was not present in the grounding session — the exact bytes a rewind appends
+ * to `events.jsonl` await a real rewind event to confirm.
  *
  * `parse` + the adapter object are pure over records; only {@link copilotCliAdapter.discover} touches
  * `node:fs`. Content-hashing is the injected `node:crypto` sha256/16 prefix (matching the CLI harvest `sha`).
@@ -52,7 +66,6 @@ import { basename, dirname } from "node:path";
 import {
   identityLadder,
   makeIdentityContext,
-  normalizeText,
   type AdapterRecord,
   type IdentityContext,
   type PerAppSignal,
@@ -64,6 +77,12 @@ import {
 /** The default content-hasher (16-hex sha256 prefix) — matches the CLI harvest `sha` and {@link claudeHash}. */
 export function copilotHash(s: string): string {
   return createHash("sha256").update(s).digest("hex").slice(0, 16);
+}
+
+/** Read a string field off an object, else "". */
+function str(o: Record<string, unknown>, key: string): string {
+  const v = o[key];
+  return typeof v === "string" ? v : "";
 }
 
 /** Pull the readable text from a value — a bare string, a `{content}` / `{text}` object, or a block array. */
@@ -84,93 +103,74 @@ function valueText(v: unknown): string {
   return "";
 }
 
-/** Assemble a turn's text from a copilot event row — the user side then the assistant side, tolerant of shapes. */
-function eventText(row: Record<string, unknown>): string {
-  const parts: string[] = [];
-  for (const field of ["user_message", "userMessage", "assistant_response", "assistantResponse", "content", "message", "text"]) {
-    const t = valueText(row[field]);
-    if (t) parts.push(t);
-  }
-  return parts.join("\n").trim();
-}
-
-/** Read the monotonic per-turn `turn_index` off an event row (number or numeric string), or null when absent. */
-function turnIndexOf(row: Record<string, unknown>): number | null {
-  const v = row["turn_index"] ?? row["turnIndex"];
-  if (typeof v === "number" && Number.isFinite(v)) return v;
-  if (typeof v === "string" && v.trim() !== "" && Number.isFinite(Number(v))) return Number(v);
-  return null;
-}
-
-/** Read the session id an event row carries (`session_id` / `sessionId`), else null. */
-function sessionOf(row: Record<string, unknown>): string | null {
-  const v = (row["session_id"] as string | undefined) ?? (row["sessionId"] as string | undefined);
-  return v ? String(v) : null;
-}
-
 /**
- * Parse a Copilot-CLI `events.jsonl` (the append-only event log) into the LIVE turns — one
- * {@link AdapterRecord} per `turn_index`, FOLDED to the LATEST emission (the current UPSERT winner), in
- * ascending `turn_index` order (the monotonic live-branch order). No `uuid` / `nativeSeq` is set, so each
- * turn rides the CONTENT-HASH rung of {@link identityLadder}. `sessionId` seeds the namespace when a row
- * carries no `session_id`.
+ * Parse a Copilot-CLI `events.jsonl` (the append-only TYPED event log) into the transcript turns — one
+ * {@link AdapterRecord} per real operator `user.message` and per non-empty `assistant.message`, in the
+ * linear append order the log carries (Copilot never edits an earlier line; a rewind APPENDS).
  *
- * The superseded (pre-edit) emissions are folded OUT of the live set here; they are the orphans the diff
- * surfaces against a prior harvest. {@link editedTurnIndices} reads them back from the raw log.
+ * Identity rungs (via {@link identityLadder}, seeded downstream): an assistant message rides its stable
+ * `data.messageId` (native-uuid rung); a user message has no id ⇒ content-hash rung. Only the FIRST
+ * `user.message` of an `interactionId` is kept (a later one reusing a live interaction is an injected
+ * tool-result delivery); empty-content assistant messages (tool-call-only sub-turns) are dropped.
+ *
+ * `sessionId` seeds the record namespace (the dir uuid); `data.sessionId` on `session.start` corroborates.
  */
 export function parseCopilotEvents(content: string, sessionId = ""): AdapterRecord[] {
-  const latest = new Map<number, { text: string; session: string }>();
-  const firstSeen: number[] = [];
+  const out: AdapterRecord[] = [];
+  const openInteractions = new Set<string>();
+  let ns = sessionId;
+  let index = 0;
   for (const line of content.split("\n")) {
     if (!line.trim()) continue;
     let row: Record<string, unknown>;
     try { row = JSON.parse(line) as Record<string, unknown>; } catch { continue; }
-    const ti = turnIndexOf(row);
-    if (ti === null) continue;
-    const text = eventText(row);
-    if (!text) continue;
-    if (!latest.has(ti)) firstSeen.push(ti);
-    latest.set(ti, { text, session: sessionOf(row) ?? sessionId });
-  }
-  return firstSeen
-    .slice()
-    .sort((a, b) => a - b)
-    .map((ti, i) => {
-      const live = latest.get(ti)!;
-      return {
+    const type = str(row, "type");
+    const data = (row["data"] ?? {}) as Record<string, unknown>;
+
+    if (type === "session.start" && !ns) {
+      ns = str(data, "sessionId") || ns;
+      continue;
+    }
+
+    if (type === "user.message") {
+      const interaction = str(data, "interactionId");
+      // The FIRST user.message of an interaction is the operator's turn; a later one REUSING a still-open
+      // interactionId is an injected tool-result delivery (delivery ≠ "idle") — skip it.
+      if (interaction && openInteractions.has(interaction)) continue;
+      if (interaction) openInteractions.add(interaction);
+      const text = valueText(data["content"]);
+      if (!text.trim()) continue;
+      out.push({
         uuid: null,
         parentUuid: null,
-        role: "turn",
-        text: live.text,
+        role: "user",
+        text,
         isSidechain: false,
-        sessionId: live.session,
-        index: i,
-      } satisfies AdapterRecord;
-    });
-}
+        sessionId: ns,
+        index: index++,
+      } satisfies AdapterRecord);
+      continue;
+    }
 
-/**
- * The `turn_index`es RE-EMITTED with NEW content in this raw log — the explicit EDIT / UPSERT signal
- * (a `turn_index` reappearing with a different normalized text supersedes its prior emission). An
- * identical re-emit (idempotent UPSERT) is NOT an edit. Returned ascending.
- */
-export function editedTurnIndices(content: string): number[] {
-  const latest = new Map<number, string>();
-  const edited = new Set<number>();
-  for (const line of content.split("\n")) {
-    if (!line.trim()) continue;
-    let row: Record<string, unknown>;
-    try { row = JSON.parse(line) as Record<string, unknown>; } catch { continue; }
-    const ti = turnIndexOf(row);
-    if (ti === null) continue;
-    const text = eventText(row);
-    if (!text) continue;
-    const norm = normalizeText(text);
-    const prev = latest.get(ti);
-    if (prev !== undefined && prev !== norm) edited.add(ti);
-    latest.set(ti, norm);
+    if (type === "assistant.message") {
+      const text = valueText(data["content"]);
+      if (!text.trim()) continue; // tool-call-only sub-turns carry empty content — skip
+      const messageId = str(data, "messageId");
+      out.push({
+        uuid: messageId || null, // a stable messageId ⇒ native-uuid rung, else content-hash
+        parentUuid: null,
+        role: "assistant",
+        text,
+        isSidechain: false,
+        sessionId: ns,
+        index: index++,
+      } satisfies AdapterRecord);
+      continue;
+    }
+    // session.model_change · system.message (the injected system prompt) · assistant.turn_start/end ·
+    // tool.* · system.notification · permission.* — not transcript turns, skipped (cf. Codex `developer`).
   }
-  return [...edited].sort((a, b) => a - b);
+  return out;
 }
 
 /**
@@ -185,7 +185,7 @@ export const copilotCliAdapter: SourceAdapter = {
   /**
    * Read each `events.jsonl` into a singleton {@link SessionGroup}: a Copilot-CLI session lives in its
    * own `session-state/<uuid>/` dir and shares no root with another (there is no `--fork-session`), so a
-   * family never spans files. The session id is the dir uuid (or a row's `session_id`).
+   * family never spans files. The session id is the dir uuid (or a `session.start` `sessionId`).
    */
   discover(sessionFiles: readonly string[]): SessionGroup[] {
     return sessionFiles.map((file) => {
@@ -202,9 +202,9 @@ export const copilotCliAdapter: SourceAdapter = {
   },
 
   /**
-   * The current branch is the LINEAR live-turn chain (parse already folded each `turn_index` to its
-   * latest content, in ascending order), so every kept turn IS on the live branch. Keys ride
-   * {@link identityLadder} (which owns the session-namespace separator) — never a hand-typed separator.
+   * The current branch is the LINEAR append chain (Copilot never edits an earlier line and has no in-file
+   * re-parent), so every kept record IS on the live branch, in order. Keys ride {@link identityLadder}
+   * (which owns the session-namespace separator) — never a hand-typed separator.
    */
   currentBranch(records: readonly AdapterRecord[]): string[] {
     const sessionId = records[0]?.sessionId ?? "?";
@@ -213,11 +213,10 @@ export const copilotCliAdapter: SourceAdapter = {
   },
 
   /**
-   * Copilot-CLI has NO out-of-file fork and no in-file `parentUuid` DAG to re-parent — a rewind is an
-   * in-file `turn_index` re-emit whose superseded content-hash key simply leaves the live set. So there
-   * is no app-specific new sibling to flag: the shared classifier reads the rewind shape (TAIL_TRUNCATE /
-   * INTERIOR_DELETE / DELETE) from the content-hash diff alone, and `appendOnly = true` gates it to
-   * `reharvest`. ({@link editedTurnIndices} exposes the raw EDIT signal for callers that want it.)
+   * Copilot-CLI has NO out-of-file fork and no in-file `parentUuid` DAG to re-parent — a rewind APPENDS
+   * fresh events whose superseded native-uuid / content-hash key simply leaves the live set. So there is
+   * no app-specific new sibling to flag: the shared classifier reads the rewind shape (TAIL_TRUNCATE /
+   * INTERIOR_DELETE / DELETE) from the content diff alone, and `appendOnly = true` gates it to `reharvest`.
    */
   perAppSignal(_records: readonly AdapterRecord[], _prior: readonly string[]): PerAppSignal {
     return { hasNewSibling: false };
