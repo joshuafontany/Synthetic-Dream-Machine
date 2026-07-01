@@ -110,4 +110,5 @@ export * from "./veil-vouch.js";
 export * from "./veil-ladder.js";
 export * from "./immune-read.js";
 export * from "./conviction-dial.js";
+export * from "./capture-reading.js";
 export * from "./membership-channel.js";
