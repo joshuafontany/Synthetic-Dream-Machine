@@ -431,7 +431,7 @@ function toCorrelation(C: readonly (readonly number[])[]): number[][] {
  * Returns eigenvalues and eigenvectors as columns (`vecs[i][k]` = component i of the
  * k-th eigenvector). Exact enough for the tiny (N≤~8) correlation matrices here.
  */
-function jacobiEigen(input: readonly (readonly number[])[]): { values: number[]; vecs: number[][] } {
+export function jacobiEigen(input: readonly (readonly number[])[]): { values: number[]; vecs: number[][] } {
   const n = input.length;
   const A = input.map((r) => r.slice());
   const V = identityMatrix(n);
