@@ -15,12 +15,25 @@ export { atomicWriteFileSync } from "./fs-atomic.js";
 // The SHEAF-TRUE sensorium primitive — a dir that `#has` fiber-caps (content/structure/form) with
 // bands + coupling as base-caps living IN the manifest. The filetree IS the composition.
 export {
-  SENSORIUM_SCHEMA, SENSORIUM_MANIFEST, manifestPath, capDecl, resolveCapDir, capDir,
+  SENSORIUM_SCHEMA, SENSORIUM_MANIFEST, manifestPath, capDecl, resolveCapDir, capDir, planeVariance,
+  SHEAF_PLANES, COSHEAF_PLANES,
   buildSensoriumManifest, readManifest, writeManifest,
 } from "./sensorium.js";
 export type {
   CapDecl, SensoriumChild, SensoriumCoupling, SensoriumBands, SensoriumManifest, BuildSensoriumOptions,
+  Variance,
 } from "./sensorium.js";
+
+// The LI (sheaf) CONSISTENCY-RADIUS — the Robinson li-disagreement signal over content/structure/form
+// (0 ⟺ they glue; positive ⟺ a localizable obstruction), with the ki co-consistency honestly stubbed.
+export {
+  cosineDistance, jaccardDistance, treeEditDistance, chebyshevStalkMetric, consistencyRadius,
+  stratificationRestrictions, assertSheafPlanes, kiCoConsistency, KI_CO_CONSISTENCY_STUB,
+} from "./sensorium-consistency.js";
+export type {
+  LabeledTree, ComparisonStalk, PlaneRestriction, PairObstruction, ConsistencyRadius,
+  ConsistencyOptions, StalkMetric, KiCoConsistency,
+} from "./sensorium-consistency.js";
 
 // The memetic-wikitext SENSORIUM — the concrete neither-top, co-located-peers instance: the reader
 // (island-scan → standoff strata + skeletal tier + typed association graph, TWO axes span×channel), the

@@ -9,6 +9,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   buildSensoriumManifest, readManifest, writeManifest, capDir, resolveCapDir, SENSORIUM_SCHEMA,
+  planeVariance, SHEAF_PLANES, COSHEAF_PLANES,
 } from "../src/sensorium.js";
 
 let dir: string;
@@ -58,6 +59,39 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
 
   test("readManifest is null before a manifest exists (a bare dir is not yet a sensorium)", () => {
     expect(readManifest(dir)).toBeNull();
+  });
+
+  test("carries the li/ki VARIANCE tag — fiber caps = sheaf (li), bands/coupling = cosheaf (ki)", () => {
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "memory",
+      lar: "lar:///x",
+      caps: {
+        content:   { absDir: join(dir, "content"),   engine: "mempalace" },   // default sheaf
+        structure: { absDir: join(dir, "structure"),  engine: "astpalace" },
+        form:      { absDir: join(dir, "form"),        engine: "formpalace" },
+      },
+    });
+    // fiber caps carry the sheaf (li) posture on the wire, by default
+    expect(m.has["content"]!.variance).toBe("sheaf");
+    expect(m.has["structure"]!.variance).toBe("sheaf");
+    expect(m.has["form"]!.variance).toBe("sheaf");
+    // planeVariance reads the dual pair: content/structure/form = sheaf; bands/coupling = cosheaf
+    for (const p of SHEAF_PLANES) expect(planeVariance(m, p)).toBe("sheaf");
+    for (const p of COSHEAF_PLANES) expect(planeVariance(m, p)).toBe("cosheaf");
+    expect(planeVariance(m, "not-a-plane")).toBeNull();
+    // the variance survives the disk round-trip (the manifest self-describes its dual pair)
+    writeManifest(dir, m);
+    expect(readManifest(dir)!.has["content"]!.variance).toBe("sheaf");
+  });
+
+  test("a cosheaf-natured fiber cap may DECLARE its variance (has is an open, tag-driven record)", () => {
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "odd",
+      lar: "lar:///x",
+      caps: { flux: { absDir: join(dir, "flux"), engine: "e", variance: "cosheaf" } },
+    });
+    expect(m.has["flux"]!.variance).toBe("cosheaf");
+    expect(planeVariance(m, "flux")).toBe("cosheaf");
   });
 
   test("coupling nests child sub-sensoriums as dumb edges (the follow-on Meshpalace shape)", () => {

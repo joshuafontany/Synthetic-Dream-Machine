@@ -39,14 +39,50 @@ export const SENSORIUM_SCHEMA = 1 as const;
 export const SENSORIUM_MANIFEST = "manifest.json";
 
 /**
+ * The gluing POSTURE a plane's cap takes — the li/ki dual pair the sensorium holds SEPARATELY
+ * (li-ki-integrities.md#crucible-tested):
+ *
+ *   `sheaf`   — li (理). CONTRAVARIANT restriction, global→local: a value defined over a region
+ *               RESTRICTS onto a sub-region. content/structure/form ride here — each reads a pattern
+ *               that localizes (a stalk's value is a genuine restriction of the whole).
+ *   `cosheaf` — ki (氣). COVARIANT extension, local→global: a local value EXTENDS outward. bands/coupling
+ *               ride here — a coarse wavelet coefficient depends on data OUTSIDE its span, so the
+ *               contravariant restriction map isn't even well-defined; the transfer-entropy nagare glues
+ *               local edges into a global flow.
+ *
+ * The keystone (crucible): mixing them under ONE contravariant gluing SILENTLY corrupts — it penalizes
+ * the flow (ki) for failing to be static (li). Consistency is computed SEPARATELY per posture
+ * (li-restriction-consistency · ki-co-consistency), never merged.
+ */
+export type Variance = "sheaf" | "cosheaf";
+
+/** The canonical LI (sheaf) planes — content/structure/form RESTRICT (contravariant, global→local). */
+export const SHEAF_PLANES = ["content", "structure", "form"] as const;
+
+/**
+ * The canonical KI (cosheaf) planes — bands/coupling EXTEND (covariant, local→global). They ride the
+ * manifest's own `bands`/`coupling` BASE-cap fields, never `has.*` (they store no leaf-dir bytes), so
+ * their cosheaf posture is structural, read via {@link planeVariance}.
+ */
+export const COSHEAF_PLANES = ["bands", "coupling"] as const;
+
+/**
  * A FIBER-cap edge — THIN by law (has-stack clause 7): `dir` (relative-if-inside / absolute-if-outside)
- * + `engine` (the holder that stores the bytes). No role vocabulary rides here.
+ * + `engine` (the holder that stores the bytes) + `variance` (the gluing posture; li-sheaf by default).
+ * No role vocabulary rides here — `variance` names the DUAL-PAIR side, not a role.
  */
 export interface CapDecl {
   /** where the bytes live — relative to the sensorium dir, or absolute when they sit outside it. */
   readonly dir: string;
   /** the store engine that holds this cap (e.g. "mempalace"); a WHERE-hint, never a role claim. */
   readonly engine: string;
+  /**
+   * the gluing posture (li-ki-integrities.md#crucible-tested) — `sheaf` (li, restriction) by default;
+   * a cosheaf-natured fiber cap declares `cosheaf` explicitly. Fiber caps (content/structure/form) are
+   * sheaves; the cap SELF-DESCRIBES its variance rather than relying on a central name check (clause 4:
+   * `has` is an OPEN record, so the partition reads the tag, never a hardcoded enum).
+   */
+  readonly variance: Variance;
 }
 
 /**
@@ -79,11 +115,11 @@ export interface SensoriumManifest {
   readonly sensorium: string;
   /** the sensorium's stable graph address. */
   readonly lar: string;
-  /** FIBER caps — open record, THIN `{dir, engine}` edges (clause 4 + 7). */
+  /** FIBER caps — open record, THIN `{dir, engine, variance}` edges (clause 4 + 7); li-sheaves by default. */
   readonly has: Readonly<Record<string, CapDecl>>;
-  /** BASE cap — interval-grain for the on-read wavelet bands. No bytes. */
+  /** BASE cap — interval-grain for the on-read wavelet bands. No bytes. KI cosheaf (see {@link planeVariance}). */
   readonly bands: SensoriumBands;
-  /** BASE cap — the dumb child-edges gluing sub-sensoriums. No bytes. */
+  /** BASE cap — the dumb child-edges gluing sub-sensoriums. No bytes. KI cosheaf (see {@link planeVariance}). */
   readonly coupling: SensoriumCoupling;
   /** does this sensorium's bytes live in ephemeral scratch (swept), or durable store? */
   readonly ephemeral: boolean;
@@ -102,10 +138,12 @@ export function manifestPath(sensoriumDir: string): string {
  * (a cap whose bytes sit outside, e.g. the external `content` cap at `~/.mempalace`). The relative form
  * uses POSIX separators so the manifest stays portable.
  */
-export function capDecl(sensoriumDir: string, absDir: string, engine: string): CapDecl {
+export function capDecl(
+  sensoriumDir: string, absDir: string, engine: string, variance: Variance = "sheaf",
+): CapDecl {
   const rel = relative(sensoriumDir, absDir);
   const inside = rel !== "" && !rel.startsWith("..") && !isAbsolute(rel);
-  return { dir: inside ? rel.split(/[\\/]/).join("/") : absDir, engine };
+  return { dir: inside ? rel.split(/[\\/]/).join("/") : absDir, engine, variance };
 }
 
 /** Invert {@link capDecl}: resolve a cap/child `dir` back to an absolute path against the sensorium dir. */
@@ -119,12 +157,33 @@ export function capDir(sensoriumDir: string, m: SensoriumManifest, cap: string):
   return decl ? resolveCapDir(sensoriumDir, decl.dir) : null;
 }
 
+/**
+ * The gluing posture of any plane — the li/ki dual-pair partition, read from the manifest itself:
+ * a declared fiber cap reports its OWN `variance` tag; the base-cap `bands`/`coupling` planes report
+ * their canonical `cosheaf` posture (they live in the manifest's own base-cap fields, not `has.*`);
+ * an unknown plane reports `null`. The consistency reads route through here so the li-radius runs only
+ * over the sheaf planes and the ki co-consistency only over the cosheaf planes — never merged.
+ */
+export function planeVariance(m: SensoriumManifest, plane: string): Variance | null {
+  const decl = m.has[plane];
+  if (decl) return decl.variance;
+  if ((COSHEAF_PLANES as readonly string[]).includes(plane)) return "cosheaf";
+  if ((SHEAF_PLANES as readonly string[]).includes(plane)) return "sheaf";
+  return null;
+}
+
 /** Options for {@link buildSensoriumManifest}. `caps` maps cap-name → its resolved absolute store dir + engine. */
 export interface BuildSensoriumOptions {
   readonly sensorium: string;
   readonly lar: string;
-  /** cap-name → { absDir, engine } — each becomes a THIN `has.*` fiber edge via {@link capDecl}. */
-  readonly caps: Readonly<Record<string, { readonly absDir: string; readonly engine: string }>>;
+  /**
+   * cap-name → { absDir, engine, variance? } — each becomes a THIN `has.*` fiber edge via {@link capDecl}.
+   * `variance` defaults to `sheaf` (li); a cosheaf-natured fiber cap declares it (bands/coupling ride the
+   * base-cap fields, not `has`, so they carry their cosheaf posture structurally — see {@link planeVariance}).
+   */
+  readonly caps: Readonly<Record<string, {
+    readonly absDir: string; readonly engine: string; readonly variance?: Variance;
+  }>>;
   readonly bands?: SensoriumBands;
   /** child sub-sensoriums — each { sensorium, absDir } becomes a dumb `coupling.children[]` edge. */
   readonly children?: ReadonlyArray<{ readonly sensorium: string; readonly absDir: string }>;
@@ -136,8 +195,8 @@ export interface BuildSensoriumOptions {
 /** Construct a schema-1 manifest from resolved absolute dirs, choosing relative/absolute per cap. */
 export function buildSensoriumManifest(sensoriumDir: string, opts: BuildSensoriumOptions): SensoriumManifest {
   const has: Record<string, CapDecl> = {};
-  for (const [name, { absDir, engine }] of Object.entries(opts.caps)) {
-    has[name] = capDecl(sensoriumDir, absDir, engine);
+  for (const [name, { absDir, engine, variance }] of Object.entries(opts.caps)) {
+    has[name] = capDecl(sensoriumDir, absDir, engine, variance ?? "sheaf");
   }
   const children: SensoriumChild[] = (opts.children ?? []).map((c) => {
     const decl = capDecl(sensoriumDir, c.absDir, "");
