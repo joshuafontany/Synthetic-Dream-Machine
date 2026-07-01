@@ -14,6 +14,7 @@ import {
   delegationEdge,
   communicationEdge,
   handbackClose,
+  worldlineHandles,
   mkDaemonWorldlineCompareRequest,
   mkDaemonWorldlineTrajectoryRequest,
 } from "@lararium/mesh";
@@ -40,7 +41,8 @@ describe("computeWorldlineCompare — Well 1 (registry held in-VM, concurrent-ca
     expect(computeWorldlineCompare({ a: "run.a", b: "run.b", opens, root: "run" }).order).toBe("concurrent");
     expect(computeWorldlineCompare({ a: "run.a", b: "run.a", opens, root: "run" }).order).toBe("equal");
     // the registry is HELD in module state (the future read→filter-compute chain leans on it).
-    expect(Object.keys(worldlineRegistry()!.stamps).sort()).toEqual(["run", "run.a", "run.b"]);
+    // Read through the accessor: the stamps key by composite (handle × frontier), never bare handle.
+    expect(worldlineHandles(worldlineRegistry()!).sort()).toEqual(["run", "run.a", "run.b"]);
   });
 
   test("a compare with NO fresh edges reads the HELD registry (cross-read persistence)", () => {
