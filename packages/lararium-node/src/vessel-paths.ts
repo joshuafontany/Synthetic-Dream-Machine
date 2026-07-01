@@ -35,19 +35,19 @@
  * at its legacy spelling).
  */
 
-import { existsSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 
+// The XDG data-home + the OLD-else-NEW strangler + the mempalace content parent live in ONE cycle-free
+// home — `@lararium/mempalace/xdg-base` — so vessel-paths and mempalace's palace-path derive the store
+// parent from the SAME source (no value-duplication). Imported across the existing node → mempalace edge.
+import { larDataHome, strangle, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
+
+// Re-export the data home so the historical `@lararium/node` surface (`larDataHome`) stays stable.
+export { larDataHome };
+
 // ── XDG base homes ──────────────────────────────────────────────────────────────────────────────
 // Each honors its env var (unset → the freedesktop default), and roots under LAR_ROOT when isolated.
-
-/** $XDG_DATA_HOME/lares — persistent stores (the sensoriums + the vessel substrate). */
-export function larDataHome(): string {
-  const root = process.env["LAR_ROOT"];
-  return root ? join(root, "data")
-              : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lares");
-}
 
 /** $XDG_STATE_HOME/lares — durable watermarks (harvest, harvest-stage, projection). */
 export function larStateHome(): string {
@@ -82,16 +82,6 @@ export function larConfigPath(): string {
   return join(larConfigHome(), "config.json");
 }
 
-// ── The strangler ────────────────────────────────────────────────────────────────────────────────
-
-/** Read OLD-else-NEW: prefer the new XDG dir once it exists, fall back to legacy when only IT exists,
- *  default a fresh vessel to the new canonical dir. One migration cycle; a live box stays on legacy. */
-function strangle(newDir: string, legacyDir: string): string {
-  if (existsSync(newDir)) return newDir;
-  if (existsSync(legacyDir)) return legacyDir;
-  return newDir;
-}
-
 // ── The legacy vessel home (isolation base + still-legacy organs) ─────────────────────────────────
 
 /** The legacy vessel home — `LAR_ROOT` (isolated instance) or `~/.lares`. Still hosts the not-yet-
@@ -116,7 +106,9 @@ export function memorySensoriumDir(): string {
 export function larMempalaceDir(): string {
   const env = process.env["MEMPALACE_PALACE_PATH"]?.trim();
   if (env) return env;
-  return strangle(join(memorySensoriumDir(), "content"), join(homedir(), ".mempalace"));
+  // The pure XDG-derived parent (== `<memory>/content` new / `~/.mempalace` legacy) — the SAME source
+  // mempalace's palace-path.ts derives its chroma dir from, so the two views stay byte-identical.
+  return mempalaceContentParent();
 }
 
 /** The astpalace store dir (the `structure` fiber cap) — the strangler over `<memory>/structure`

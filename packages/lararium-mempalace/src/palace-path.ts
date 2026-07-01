@@ -21,29 +21,10 @@
  * Meme: lar:///ha.ka.ba/@lararium/mempalace/palace-path
  */
 
-import { existsSync, realpathSync } from "node:fs";
-import { resolve } from "node:path";
-import { homedir } from "node:os";
-import { join } from "node:path";
+import { realpathSync } from "node:fs";
+import { resolve, join } from "node:path";
 
-/**
- * The verbatim mempalace's PARENT store dir, derived from the SAME XDG base + strangler that
- * `@lararium/node`'s vessel-paths.ts uses for `larMempalaceDir` — kept in sync BY VALUE (this
- * package sits BELOW node in the dep graph, so it cannot import it; the ~6 lines are duplicated
- * deliberately, both keyed on `$XDG_DATA_HOME`/`$LAR_ROOT` + `~/.mempalace`). Consolidated new home:
- * `<data>/sensoriums/memory/content`; legacy: `~/.mempalace`. A live box (legacy present) stays legacy.
- */
-function mempalaceContentParent(): string {
-  const root = process.env["LAR_ROOT"];
-  const dataHome = root
-    ? join(root, "data")
-    : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lares");
-  const newParent = join(dataHome, "sensoriums", "memory", "content");
-  const legacyParent = join(homedir(), ".mempalace");
-  if (existsSync(newParent)) return newParent;
-  if (existsSync(legacyParent)) return legacyParent;
-  return newParent;
-}
+import { mempalaceContentParent } from "./xdg-base.js";
 
 /**
  * Canonicalize a palace path to ONE stable spelling:

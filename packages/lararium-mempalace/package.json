@@ -8,6 +8,10 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./xdg-base": {
+      "import": "./dist/xdg-base.js",
+      "types": "./dist/xdg-base.d.ts"
     }
   },
   "main": "./dist/index.js",
