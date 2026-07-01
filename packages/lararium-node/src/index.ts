@@ -7,6 +7,16 @@ export {
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
 
+// The SHEAF-TRUE sensorium primitive — a dir that `#has` fiber-caps (content/structure/form) with
+// bands + coupling as base-caps living IN the manifest. The filetree IS the composition.
+export {
+  SENSORIUM_SCHEMA, SENSORIUM_MANIFEST, manifestPath, capDecl, resolveCapDir, capDir,
+  buildSensoriumManifest, readManifest, writeManifest,
+} from "./sensorium.js";
+export type {
+  CapDecl, SensoriumChild, SensoriumCoupling, SensoriumBands, SensoriumManifest, BuildSensoriumOptions,
+} from "./sensorium.js";
+
 // The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
 export { palaceOrgans, setupPalaceOrgans, organHealthy } from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";
