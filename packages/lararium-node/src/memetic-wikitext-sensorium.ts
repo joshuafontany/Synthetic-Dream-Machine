@@ -519,8 +519,18 @@ export interface AlignedCouplingRead {
 export function coupleAligned(
   children: readonly string[], ticks: readonly AlignedTick[], opts: CoupleAlignedOptions = {},
 ): AlignedCouplingRead {
-  const first = ticks[0];
-  const dJoint = first ? first.reduce((s, v) => s + v.length, 0) : Math.max(1, children.length);
+  // d_joint = the JOINT dimension the estimator floor (windowLengthFor) rides on. Deriving it from
+  // ticks[0] ALONE lets a RAGGED first tick (lower-dimensional than the rest — a malformed sidecar) under-
+  // count the floor: L collapses below windowLengthFor(true d_joint), warming is DEFEATED, and the SAME data
+  // the uniform path honestly refuses (warming) instead FABRICATES a coupling edge — the anti-false-sovereign
+  // failure this module exists to forbid. Take the MAX joint dimension any tick carries (never under-count),
+  // floored at the child count, so a thin/ragged tick can only RAISE the floor, never lower it.
+  let dJoint = Math.max(1, children.length);
+  for (const tick of ticks) {
+    let d = 0;
+    for (const v of tick) d += v.length;
+    if (d > dJoint) dJoint = d;
+  }
   const L = opts.L ?? windowLengthFor(dJoint, opts.k ?? 15);
   const config: WindowConfig = {
     L,
