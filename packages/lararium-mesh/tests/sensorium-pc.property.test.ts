@@ -3,15 +3,13 @@
  * complexity (The-Sword QA, 2026-07-01). Many random + adversarial cases per invariant; the
  * invariant must NEVER break.
  *
- * FINDING (a real bug, documented below): {@link settlePrecision}'s gradient flow does NOT
- * converge to the interior optimum π* = 1/ε̄² for meanSqErr ≳ 2.83 — the fixed lr = 0.5 makes
- * the iteration non-contractive near π* (local multiplier 1 − ¼·ε̄² leaves the unit circle at
- * ε̄² = 8·½·... , empirically m ≳ 2.83). For ε̄² ∈ {3} it STALLS (oscillates, never settles);
- * for ε̄² ∈ {4,5,50} it DIVERGES to π ≈ 2.5e8 (the WRONG boundary). The module docstring's
- * claim — "the flow CONVERGES and STOPS there … from either side" — holds only for ε̄² ≲ 2.83.
+ * RESOLVED (2026-07-01): {@link settlePrecision}'s gradient flow used to be non-contractive for
+ * meanSqErr ≳ 2.83 (STALL / divergence to the wrong boundary). The settle is now the analytic
+ * closed form π* = 1/(ε̄²+EPS_REL) — no iteration, no stall — so the "converges from either side"
+ * invariant holds for EVERY ε̄² (the block below asserts it directly).
  */
 
-import { describe, test, it, expect } from "vitest";
+import { describe, test, expect } from "vitest";
 import {
   vfePrecisionTerm, optimalPrecision, settlePrecision,
   planePc, gaussianKL, temporalKL,
@@ -87,38 +85,32 @@ describe("settlePrecision — the SAFE region where the flow genuinely converges
   });
 });
 
-describe("settlePrecision — the DOCUMENTED BUG (non-convergence for ε̄² ≳ 2.83)", () => {
-  // CHARACTERIZATION (passes today, pins the broken behaviour; flips RED when the flow is fixed):
-  test("BUG repro — the DEFAULT call settlePrecision(ε̄²) RUNS AWAY for every ε̄² ∈ {5,8,10,20,50}", () => {
+describe("settlePrecision — the CLOSED FORM converges for EVERY ε̄² (Defect 2 FIXED, 2026-07-01)", () => {
+  // The old fixed-lr gradient flow was non-contractive for ε̄² ≳ 2.83 (stalled / diverged to the
+  // WRONG boundary). The settle is now the analytic optimum π* = 1/(ε̄²+EPS_REL) — no flow, no stall.
+  test("the DEFAULT call settlePrecision(ε̄²) settles at π* = 1/ε̄² for every ε̄² ∈ {5,8,10,20,50}", () => {
     for (const m of [5, 8, 10, 20, 50]) {
-      const r = settlePrecision(m); // default init = 1, the natural call
-      expect(r.settled).toBe(false); // the doc claims it settles at π* = 1/ε̄²; it does not
-      // it DIVERGES to a huge precision (~2.5e8) — the OPPOSITE end from π* = 1/ε̄² < 0.2
-      expect(r.precision).toBeGreaterThan(1e5);
-      expect(Math.abs(r.grad)).toBeGreaterThan(1e-3); // the gradient never vanished
+      const r = settlePrecision(m);
+      expect(r.settled).toBe(true); // closed form — always settled, no runaway
+      expect(r.precision).toBeCloseTo(1 / m, 6); // lands ON π* = 1/ε̄² (not the 2.5e8 boundary)
+      expect(Math.abs(r.grad)).toBeLessThan(1e-9); // gradient vanishes AT the optimum
     }
   });
 
-  test("BUG repro — ε̄² = 3 STALLS (oscillates), settling at π ≈ 0.25 ≠ π* = 1/3", () => {
-    const r = settlePrecision(3); // default init = 1
-    expect(r.settled).toBe(false);
-    expect(r.precision).not.toBeCloseTo(1 / 3, 2);
+  test("ε̄² = 3 (the old STALL point) settles cleanly at π* = 1/3", () => {
+    const r = settlePrecision(3);
+    expect(r.settled).toBe(true);
+    expect(r.precision).toBeCloseTo(1 / 3, 6);
   });
 
-  // THE INTENDED INVARIANT, marked as a known failure. `it.fails` PASSES while the bug lives
-  // (keeping the suite green) and turns RED the moment the flow is fixed — forcing promotion to
-  // a real assertion. This is the invariant the module docstring PROMISES but does not deliver.
-  it.fails(
-    "INTENDED (known-broken): settles to 1/ε̄² from either side for EVERY ε̄² up to 5",
-    () => {
-      for (const m of [0.25, 1, 2, 3, 5, 10, 50]) {
-        const star = 1 / m;
-        const r = settlePrecision(m, { iters: 500_000 }); // default init = 1
-        expect(r.settled).toBe(true);
-        expect(r.precision).toBeCloseTo(star, 3);
-      }
-    },
-  );
+  // THE INTENDED INVARIANT the module docstring PROMISES — now delivered, a real assertion.
+  test("settles to 1/ε̄² for EVERY ε̄² up to 50 (was known-broken above ~2.83)", () => {
+    for (const m of [0.25, 1, 2, 3, 5, 10, 50]) {
+      const r = settlePrecision(m);
+      expect(r.settled).toBe(true);
+      expect(r.precision).toBeCloseTo(1 / m, 6);
+    }
+  });
 });
 
 // ── the −ln π penalty is INERT in estimate mode (gain 1 ⇒ penalty 0), for ANY signal ────────

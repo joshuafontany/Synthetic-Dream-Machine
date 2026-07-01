@@ -594,67 +594,68 @@ def test_cli_selftest_covers_new_legs():
     assert rep["slaving_reads_order_parameter"] is True
 
 
-# ── QA: adversarial numerical edges (The-Advocate, tasked QA-spirit) ────────────────────────
+# ── QA: robust-numerics fixes, FLIPPED to assert the cure (Artificer, 2026-07-01) ───────────
 #
-# The slaving-gain scale-blind ∞-degeneracy. `_slaving_gain` reads
-#   gain = var(target) / (var(resid) + _EPS),  _EPS = 1e-9   (bands_sidecar.py)
-# The ONLY regularizer on a vanishing residual is the ADDITIVE ABSOLUTE floor `_EPS`. For a
-# near-noiseless linearly-slaved band the residual collapses to ~machine-zero, so the gain runs
-# to var(target)·1e9 — a 9-order-of-magnitude blowup that (a) is SCALE-DEPENDENT (grows with the
-# target's variance, because the floor is absolute not relative) and (b) is SILENT: the downstream
-# `topdown_confidence = 20·g/(1+g)` saturates at 20, hiding the absurd raw gain. Observation-noise
-# regularization as implemented is NOT enough — even 1e-6 noise leaves the gain > 1e6; a relative /
-# SNR floor (resid floored to a fraction of var(target)) would cap it. The boundary a live run
-# resolves the hard way: any strongly-cohesive low-noise corpus band reports a meaningless precision.
+# The slaving-gain scale-blind ∞-degeneracy is FIXED. `_slaving_gain` now forms the BOUNDED
+# SIGNAL FRACTION directly:
+#   reliability = var(target) / (var(target) + var(resid)),   confidence = 20·reliability
+# — the `20·g/(1+g)` map with `g = var(target)/var(resid)`, but WITHOUT ever taking the ratio `g`
+# first, so no absolute `_EPS` floor, no scale-blind blowup, no silent saturation. The reported
+# `gain` keeps a RELATIVE floor (`var(resid) ≥ _EPS_REL·var(target)`) so it stays finite AND
+# scale-invariant. The proof each test carries: rescale the target ⇒ confidence UNCHANGED.
 
 
-def test_slaving_gain_noiseless_blowup_is_scale_blind():
-    """A noiseless exact-linear order-parameter→target relation drives the gain to var(y)·1e9,
-    and the ADDITIVE _EPS floor makes it scale with var(y) — the regularization is scale-blind."""
+def test_slaving_gain_noiseless_confidence_is_scale_invariant():
+    """A noiseless exact-linear order-parameter→target relation: the confidence (20·reliability)
+    is INVARIANT under rescaling the target, and the reported gain is finite + scale-invariant too
+    (the relative floor replaced the old absolute _EPS that made gain scale with var(y))."""
     t = np.arange(512)
     p = np.sin(2 * np.pi * t / 64.0) + 5.0
 
-    g1, r1 = bs._slaving_gain(p, 3.0 * p + 1.0)          # var(y) ~ O(v)
-    g10, r10 = bs._slaving_gain(p, 30.0 * p + 1.0)       # var(y) ~ O(100·v) — 10× amplitude
+    g1, rel1, r1 = bs._slaving_gain(p, 3.0 * p + 1.0)     # var(y) ~ O(v)
+    g10, rel10, r10 = bs._slaving_gain(p, 30.0 * p + 1.0)  # var(y) ~ O(100·v) — 10× amplitude
 
-    # the blowup: a noiseless slaving reports a gain ≥ 1e9 (NOT a sane precision).
-    assert g1 > 1e8, f"expected the noiseless-tone blowup, got gain={g1:.3e}"
-    assert np.isfinite(g1) and np.isfinite(g10)          # no NaN/Inf leak — bounded by _EPS
-    assert abs(r1 - 1.0) < 1e-6                           # perfect correlation
+    # SCALE-INVARIANCE: the signal-fraction confidence does not move when the target is rescaled.
+    assert abs(20.0 * rel1 - 20.0 * rel10) < 1e-9, f"conf drifted: {20*rel1} vs {20*rel10}"
+    assert 0.0 < rel1 <= 1.0 and rel1 > 0.999             # near-perfect slaving ⇒ reliability→1
+    assert np.isfinite(g1) and np.isfinite(g10)           # finite (relative floor caps it)
+    # the reported gain is now scale-INVARIANT too (was > 50× under this rescale, the old blowup).
+    assert abs(g10 / g1 - 1.0) < 1e-6, f"gain should be scale-invariant: g1={g1:.3e} g10={g10:.3e}"
+    assert abs(r1 - 1.0) < 1e-6                            # perfect correlation
 
-    # SCALE-BLINDNESS: 10× the target amplitude ⇒ ~100× the gain (the floor is absolute, not
-    # relative). A relative/SNR floor would leave the gain roughly INVARIANT under this rescale.
-    assert g10 / g1 > 50, f"gain should scale ~var(y): g1={g1:.3e} g10={g10:.3e}"
 
-
-def test_slaving_gain_observation_noise_regularization_insufficient():
-    """Adding observation noise is the intended cure for the noiseless degeneracy — but the
-    absolute _EPS floor means even 1e-6 noise leaves the gain in the MILLIONS; only ~1e-3 noise
-    brings it down to a (still large) 1e6-ish. The 'a little observation noise breaks the
-    degeneracy' assumption (selftest comment) under-regularizes for small noise."""
+def test_slaving_gain_confidence_exactly_invariant_under_rescale():
+    """The load-bearing proof: rescaling the whole target (signal + its noise) leaves the
+    signal-fraction confidence EXACTLY unchanged — the ratio is dimensionless, no absolute floor."""
     t = np.arange(512)
     rng = np.random.default_rng(0)
     p = np.sin(2 * np.pi * t / 50.0) + 2.0
-    gains = {}
-    for noise in (1e-10, 1e-6, 1e-3):
-        y = 4.0 * p + rng.normal(0, noise, t.size)
-        g, _ = bs._slaving_gain(p, y)
-        gains[noise] = g
-    # 1e-6 noise is NOT enough — the gain is still astronomically large.
-    assert gains[1e-6] > 1e6, f"1e-6 noise should still blow up, got {gains[1e-6]:.3e}"
-    # the gain only meaningfully drops once the noise dominates _EPS (monotone in the noise).
-    assert gains[1e-3] < gains[1e-6], "more noise must reduce the gain (residual grows)"
+    y = 4.0 * p + rng.normal(0, 1e-2, t.size)
+    g1, rel1, _ = bs._slaving_gain(p, y)
+    g2, rel2, _ = bs._slaving_gain(p, 1000.0 * y)         # rescale target ×1000
+    assert abs(20.0 * rel1 - 20.0 * rel2) < 1e-9          # confidence UNCHANGED under rescale
+    assert abs(g1 - g2) < 1e-6 * max(1.0, g1)             # reported gain scale-invariant too
 
 
-def test_slaving_gain_blowup_is_SILENT_at_the_confidence_readout():
-    """The load-bearing risk: the blowup does not surface — `topdown_confidence` saturates at ~20
-    for ANY gain past ~1e3, so a gain of 1e9 and a gain of 1e3 read IDENTICALLY downstream. The
-    raw `topdown_gain` is the only place the instability shows, and it is a garbage magnitude."""
+def test_slaving_gain_confidence_not_silently_saturated():
+    """The fix: confidence comes from the BOUNDED signal-fraction directly, so distinct SNRs give
+    DISTINCT confidences instead of both saturating at 20. No silent blowup masking."""
     t = np.arange(512)
-    pure = np.sin(2 * np.pi * t / 16.0)          # a near-noiseless tone → near-perfect slaving
-    sl = bs.slaving_leg(bs.modwt_mra(pure))
+    rng = np.random.default_rng(3)
+    p = np.sin(2 * np.pi * t / 50.0) + 2.0
+    sig = 4.0 * p
+    sd = float(np.std(sig))
+    # high SNR (resid ~ var_sig/1e3) vs very-high SNR (resid ~ var_sig/1e9)
+    y_hi = sig + rng.normal(0, sd / np.sqrt(1e3), t.size)
+    y_vhi = sig + rng.normal(0, sd / np.sqrt(1e9), t.size)
+    _, rel_hi, _ = bs._slaving_gain(p, y_hi)
+    _, rel_vhi, _ = bs._slaving_gain(p, y_vhi)
+    c_hi, c_vhi = 20.0 * rel_hi, 20.0 * rel_vhi
+    assert c_vhi > c_hi, f"distinct SNR must give distinct confidence: {c_hi} vs {c_vhi}"
+    assert np.isfinite(c_hi) and 0.0 <= c_hi <= 20.0
+    # slaving_leg's readout matches: finite, bounded, from the fraction.
+    sl = bs.slaving_leg(bs.modwt_mra(np.sin(2 * np.pi * t / 16.0)))
     for pair in sl["pairs"]:
-        # confidence is finite and pinned high, regardless of how absurd the raw gain gets.
         assert np.isfinite(pair["topdown_confidence"])
         assert pair["topdown_confidence"] <= 20.0 + 1e-9
         assert np.isfinite(pair["topdown_gain"])

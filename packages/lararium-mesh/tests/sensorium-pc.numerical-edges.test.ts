@@ -1,18 +1,15 @@
 /**
- * sensorium-pc — ADVERSARIAL numerical-edge QA (The-Advocate, tasked QA-spirit).
+ * sensorium-pc — numerical-edge QA, FLIPPED to assert the fixes (Artificer, 2026-07-01).
  *
- * These are CHARACTERIZATION tests: they pin the CURRENT behavior at the numerical edges the
- * `−ln π` / KL / precision-settle machinery touches, so a future fix (or regression) surfaces
- * loudly. Two live DEFECTS and one bounded-degeneracy are documented here — see each block.
+ * These were characterization tests pinning two live DEFECTS; the minimalist robust-numerics
+ * fixes landed (one relative constant `EPS_REL` governs the precision floor AND the confidence
+ * cap), so they now ASSERT the cure. See each block.
  *
- * Boundary the live runs would otherwise resolve the hard way (li-ki-integrities #crucible-tested):
- *   D1  precisionToConfidence(∞) → NaN — the exported map documents "π→∞ ⇒ 20/20" but returns NaN
- *       AT ∞ (and at any overflow-to-Inf precision). Not internally reachable (the loop bounds π ≤
- *       ~1e9), but a latent public-API NaN source the moment a caller hands it an Inf.
- *   D2  settlePrecision fails to CONVERGE for small ε̄² — the interior optimum π*=1/ε̄² exists and the
- *       closed-form optimalPrecision returns it, but the fixed-lr / fixed-iter gradient flow STALLS
- *       far short (ε̄²=1e-12 ⇒ p≈224, optimum 1e12, settled:false). A near-noiseless (high-precision)
- *       plane never settles. The docstring's "the flow CONVERGES and STOPS there" does NOT hold here.
+ *   D1 (FIXED)  precisionToConfidence(∞) ⇒ 20 EXACTLY — the complementary form `20·(1−1/(1+π))`
+ *       makes `1/(1+∞)=0`, never `Inf/Inf ⇒ NaN`, and an isFinite guard returns the ceiling.
+ *   D2 (FIXED)  settlePrecision is the CLOSED FORM `π* = 1/(ε̄²+EPS_REL)` — exact for every ε̄²,
+ *       no gradient-flow stall; the relative floor caps a near-noiseless plane at PI_MAX instead
+ *       of the old absolute-EPS `1e9` ceiling.
  */
 import { describe, test, expect } from "vitest";
 import {
@@ -24,12 +21,12 @@ import {
   freeEnergy,
 } from "../src/index.js";
 
-describe("QA: precision↔confidence NaN edge (D1 — latent public-API break)", () => {
-  test("precisionToConfidence(Infinity) returns NaN — NOT the documented 20/20 ceiling", () => {
-    // 20·π/(1+π) with π=Inf ⇒ Inf/Inf ⇒ NaN. The doc promises "π→∞ ⇒ 20/20".
-    expect(Number.isNaN(precisionToConfidence(Infinity))).toBe(true);
-    // Any finite-but-overflowing precision multiplied past Number.MAX_VALUE hits the same NaN.
-    expect(Number.isNaN(precisionToConfidence(1e308 * 10))).toBe(true);
+describe("D1 FIXED: precisionToConfidence(∞) ⇒ 20 exactly (complementary form + isFinite guard)", () => {
+  test("precisionToConfidence(Infinity) returns the 20/20 ceiling — NOT NaN", () => {
+    // 20·(1−1/(1+π)) with π=Inf ⇒ 20·(1−0) = 20, and the isFinite guard returns the ceiling.
+    expect(precisionToConfidence(Infinity)).toBe(20);
+    // A finite-but-overflowing precision (past Number.MAX_VALUE ⇒ Inf) also lands on the ceiling.
+    expect(precisionToConfidence(1e308 * 10)).toBe(20);
   });
 
   test("a LARGE finite precision saturates cleanly (the ceiling holds below ∞)", () => {
@@ -41,26 +38,24 @@ describe("QA: precision↔confidence NaN edge (D1 — latent public-API break)",
   });
 });
 
-describe("QA: settlePrecision convergence ceiling (D2 — live gradient-flow defect)", () => {
-  test("optimalPrecision (closed form) reaches π*=1/ε̄² but settlePrecision STALLS far short", () => {
+describe("D2 FIXED: settlePrecision is the closed form π*=1/(ε̄²+EPS_REL) — no stall", () => {
+  test("optimalPrecision AND settlePrecision AGREE at π*=1/ε̄² for small ε̄² (closed form, exact)", () => {
     const eps2 = 1e-6;
-    // Closed form (above the EPS=1e-9 floor) is exact: π* = 1/ε̄² = 1e6.
+    // Closed form is exact: π* = 1/(ε̄²+EPS_REL) ≈ 1e6.
     expect(optimalPrecision(eps2)).toBeGreaterThan(9e5);
-    // Gradient flow cannot reach it with the default lr/iters — it reports NOT settled and lands
-    // orders of magnitude short (~2.2e2 vs 1e6). THIS is the noiseless-plane degeneracy in TS.
+    // The settler NO LONGER iterates — it returns the same closed form, settled, no stall.
     const s = settlePrecision(eps2);
-    expect(s.settled).toBe(false);
-    expect(s.precision).toBeLessThan(1e3); // nowhere near 1e6 — stalls at ~223
-    // the closed form and the settler DISAGREE by ~3.5 orders of magnitude — the defect signal.
-    expect(optimalPrecision(eps2) / s.precision).toBeGreaterThan(1e3);
+    expect(s.settled).toBe(true);
+    expect(s.precision).toBeGreaterThan(9e5); // reaches ~1e6, not the old ~223 stall
+    // closed form and settler now AGREE (to machine precision), not off by 3.5 orders of magnitude.
+    expect(s.precision).toBeCloseTo(optimalPrecision(eps2), 6);
   });
 
-  test("SUB-FINDING: optimalPrecision's own EPS=1e-9 floor CAPS π* at 1e9 for ε̄²<1e-9", () => {
-    // The docstring names the optimum π*=1/ε̄² unconditionally, but the internal max(EPS, ε̄²)
-    // clamps it: below ε̄²=1e-9 the "unique interior optimum" silently pins at 1e9, diverging
-    // from 1/ε̄². A near-noiseless plane's precision is thus quietly ceilinged, not truly optimal.
-    expect(optimalPrecision(1e-12)).toBeCloseTo(1e9, -6); // 1/1e-9, NOT 1/1e-12=1e12
-    expect(optimalPrecision(0)).toBeCloseTo(1e9, -6);
+  test("the relative floor UNCAPS π* — near-noiseless ε̄²<1e-9 reaches ~1/ε̄², not the old 1e9", () => {
+    // The old absolute EPS=1e-9 floor clamped π* at 1e9 for any ε̄²<1e-9. The relative EPS_REL
+    // floor lifts it: ε̄²=1e-12 now reaches ~1e12 (order 1/ε̄²), and ε̄²=0 caps at PI_MAX=1/EPS_REL.
+    expect(optimalPrecision(1e-12)).toBeGreaterThan(1e11); // ~1e12, NOT ceilinged at 1e9
+    expect(optimalPrecision(0)).toBeGreaterThan(1e15); // PI_MAX = 1/Number.EPSILON ≈ 4.5e15
   });
 
   test("settlePrecision DOES converge for a moderate ε̄² (the defect is small-ε̄²-specific)", () => {

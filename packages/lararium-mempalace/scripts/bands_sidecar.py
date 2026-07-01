@@ -73,6 +73,10 @@ N_BANDS = 5
 
 _WAVELET = "db4"
 _EPS = 1e-9
+# RELATIVE floor (dimensionless) for scale-invariant precision — a residual is floored to a
+# FRACTION of the target variance, never an absolute constant, so a near-noiseless slaving caps
+# instead of blowing up with var(target) (#crucible-tested 2026-07-01). Tied to machine epsilon.
+_EPS_REL = float(np.finfo(float).eps)
 
 
 # ── SIGNAL — the per-chunk cohesion / drift over the plane embeddings ─────────────────────
@@ -1126,23 +1130,42 @@ def _band_envelope(band: np.ndarray, win: int) -> np.ndarray:
     return np.sqrt(np.clip(env2, 0.0, None))
 
 
-def _slaving_gain(prior: np.ndarray, target: np.ndarray, warmup: int = 1) -> tuple[float, float]:
-    """TOP-DOWN precision gain — regress the enslaved `target` envelope on the order-parameter
-    `prior`; the gain = var(target) / var(residual). >1 ⇒ the prior SCORES (predicts) the
-    target (the slaving/predictive leg). Returns (gain, correlation)."""
+def _slaving_gain(prior: np.ndarray, target: np.ndarray,
+                  warmup: int = 1) -> tuple[float, float, float]:
+    """TOP-DOWN precision — regress the enslaved `target` envelope on the order-parameter `prior`.
+
+    The load-bearing quantity is the SIGNAL FRACTION (reliability / R² / Wiener gain),
+    computed DIRECTLY and BOUNDED in [0,1]:
+
+        reliability = var(target) / (var(target) + var(residual))
+
+    This is `20·g/(1+g)` (the π↔confidence map) with `g = var(target)/var(residual)`, but formed
+    WITHOUT ever taking the ratio `g` first — so no absolute `_EPS` floor on a vanishing residual,
+    no scale-blind blowup, and no silent saturation (#crucible-tested 2026-07-01). As `var(resid)→0`,
+    `reliability→1` (confidence→20) smoothly, at ANY scale, because both terms carry the same units.
+
+    The `gain` (var-ratio, kept for the reporting/threshold surface) is floored RELATIVELY —
+    `var(resid) ≥ _EPS_REL·var(target)` — so it stays finite AND scale-invariant (caps at
+    `1/_EPS_REL`), unlike the old absolute `+ _EPS` that let it run to `var(target)·1e9`.
+    Returns (gain, reliability, correlation)."""
     p = np.asarray(prior, dtype=float).ravel()
     y = np.asarray(target, dtype=float).ravel()
     m = min(p.size, y.size)
     w = max(0, min(warmup, m))
     p, y = p[w:m], y[w:m]
     if y.size < 8 or np.std(y) < _EPS or np.std(p) < _EPS:
-        return 1.0, 0.0
+        return 1.0, 0.5, 0.0
     A = np.column_stack([p, np.ones_like(p)])
     coef, *_ = np.linalg.lstsq(A, y, rcond=None)
     resid = y - A @ coef
-    gain = float(np.var(y) / (float(np.var(resid)) + _EPS))
+    var_y = float(np.var(y))
+    var_r = float(np.var(resid))
+    # the BOUNDED signal-fraction, formed directly (var_y > 0 here — guarded by the std check above).
+    reliability = var_y / (var_y + var_r)
+    # the reported var-ratio, RELATIVE-floored so it is finite and scale-invariant (caps at 1/_EPS_REL).
+    gain = var_y / max(var_r, _EPS_REL * var_y)
     r = float(np.corrcoef(p, y)[0, 1])
-    return max(gain, _EPS), r
+    return gain, reliability, r
 
 
 def slaving_leg(mra: dict, warmup: int = 1) -> dict:
@@ -1165,12 +1188,6 @@ def slaving_leg(mra: dict, warmup: int = 1) -> dict:
     if levels < 2:
         return {"pairs": [], "levels": levels, "note": "slaving-skipped: <2 bands"}
     names = BANDS_FINE_TO_COARSE[:levels]
-    try:
-        from predictive_coding import precision_to_confidence as _to_conf
-    except Exception:  # noqa: BLE001 — predictive_coding absent → the inline π↔conf map
-        def _to_conf(p: float) -> float:
-            p = max(0.0, float(p))
-            return 20.0 * p / (1.0 + p)
     pairs = []
     for j in range(levels - 1):
         fine = np.asarray(bands[j], dtype=float)        # faster — the enslaved band
@@ -1178,14 +1195,16 @@ def slaving_leg(mra: dict, warmup: int = 1) -> dict:
         win = 2 ** (j + 3)
         fine_env = _band_envelope(fine, win)
         prior = _band_envelope(coarse, win * 2)         # the order-parameter magnitude (slow)
-        gain, tr = _slaving_gain(prior, fine_env, warmup)
+        gain, reliability, tr = _slaving_gain(prior, fine_env, warmup)
         m = min(coarse.size, fine_env.size)
         cu, fe = np.abs(coarse[:m]), fine_env[:m]
         bu_r = (float(np.corrcoef(cu, fe)[0, 1])
                 if m > 8 and np.std(cu) > _EPS and np.std(fe) > _EPS else 0.0)
         pairs.append({
             "order_parameter": names[j + 1], "enslaved": names[j],
-            "topdown_gain": gain, "topdown_confidence": _to_conf(gain),
+            # confidence from the BOUNDED signal-fraction directly (20·reliability), never the
+            # ratio-gain through _to_conf — so it is scale-invariant and never silently saturates.
+            "topdown_gain": gain, "topdown_confidence": 20.0 * reliability,
             "topdown_r": tr, "bottomup_r": bu_r,
             "circular": bool(gain > 1.2 and abs(bu_r) > 0.2),
         })

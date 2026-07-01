@@ -62,6 +62,17 @@
 
 const EPS = 1e-9;
 
+/**
+ * ONE RELATIVE constant governing BOTH the precision floor and the confidence cap — they
+ * reciprocate through it (`PI_MAX = 1/EPS_REL`). The optimum floors ε̄² relatively so
+ * `π* = 1/(ε̄²+EPS_REL) ≤ PI_MAX` (a near-noiseless plane caps instead of blowing up), and the
+ * π→confidence map hits the 20-ceiling as π→PI_MAX. It is RELATIVE (dimensionless) — the errors
+ * are standardized (z²) before they reach here — so `ε̄²→0` never reintroduces ∞ at ANY scale.
+ * Tied to machine epsilon (the old absolute `1e-9` floor was scale-blind, #crucible-tested 2026-07-01).
+ */
+const EPS_REL = Number.EPSILON;
+const PI_MAX = 1 / EPS_REL;
+
 /** The confidence-register ceiling (0..20; noosphere-boot #law-of-5s). */
 export const CONFIDENCE_MAX = 20;
 
@@ -78,13 +89,17 @@ export function confidenceToPrecision(confidence: number): number {
 }
 
 /**
- * A bottom-up precision ESTIMATE (≥0) expressed as a confidence band (0..20): `conf = 20·π/(1+π)`.
- * The exact inverse of {@link confidenceToPrecision}; π=1 ⇒ 10/20 (neutral), π→∞ ⇒ 20/20. How a
- * plane REPORTS trust in its own prediction.
+ * A bottom-up precision ESTIMATE (≥0) expressed as a confidence band (0..20). Written in the
+ * BOUNDED COMPLEMENTARY form `20·(1 − 1/(1+π))` — algebraically the signal-fraction `20·π/(1+π)`
+ * but numerically robust: at `π→∞`, `1/(1+∞) = 0` ⇒ `20` EXACTLY (the naive `π/(1+π)` would form
+ * `Inf/Inf ⇒ NaN`). The exact inverse of {@link confidenceToPrecision}; π=1 ⇒ 10/20 (neutral),
+ * π→∞ ⇒ 20/20. An `isFinite` guard returns the ceiling for a non-finite π (Defect 3 fix,
+ * #crucible-tested 2026-07-01). How a plane REPORTS trust in its own prediction.
  */
 export function precisionToConfidence(precision: number): number {
   const p = Math.max(0, precision);
-  return (CONFIDENCE_MAX * p) / (1 + p);
+  if (!Number.isFinite(p)) return CONFIDENCE_MAX; // π→∞ ⇒ 20/20 exactly (no Inf/Inf ⇒ NaN)
+  return CONFIDENCE_MAX * (1 - 1 / (1 + p));
 }
 
 // ── the −ln π precision penalty — the log-precision term that CREATES an interior optimum ───
@@ -102,9 +117,14 @@ export function vfePrecisionTerm(precision: number, meanSqErr: number): number {
   return 0.5 * (p * meanSqErr - Math.log(p));
 }
 
-/** The precision that minimizes {@link vfePrecisionTerm}: `argmin_π ½(π·ε̄² − ln π) = 1/ε̄²`. */
+/**
+ * The precision that minimizes {@link vfePrecisionTerm}: `argmin_π ½(π·ε̄² − ln π) = 1/ε̄²`,
+ * computed as the CLOSED FORM `1/(ε̄²+EPS_REL)`. The floor is RELATIVE (`EPS_REL`, not the old
+ * absolute `EPS=1e-9`), so a near-noiseless plane (`ε̄²→0`) caps at `PI_MAX = 1/EPS_REL` rather
+ * than the scale-blind `1e9` ceiling that used to clamp every `ε̄² < 1e-9` (Defect 2, #crucible-tested).
+ */
 export function optimalPrecision(meanSqErr: number): number {
-  return 1 / Math.max(EPS, meanSqErr);
+  return 1 / (Math.max(0, meanSqErr) + EPS_REL);
 }
 
 export interface PrecisionSettle {
@@ -117,31 +137,33 @@ export interface PrecisionSettle {
 }
 
 /**
- * SETTLE a plane's precision by gradient flow on the free-energy precision term (FIX 1 in action).
- * With the `−ln π` penalty the gradient `∂/∂π ½(π·ε̄² − ln π) = ½(ε̄² − 1/π)` has a stable interior
- * zero at `π* = 1/ε̄²`, so the flow CONVERGES and STOPS there. Pass `withLogPrecision: false` to
- * drop the penalty: the gradient becomes the constant `½·ε̄² > 0`, the flow slides monotonically to
- * the `π→0` floor and never settles at an interior point — the runaway the penalty cures.
+ * SETTLE a plane's precision at the free-energy precision term's optimum. With the `−ln π` penalty
+ * the term `½(π·ε̄² − ln π)` is strictly convex with a unique interior minimum where the gradient
+ * `½(ε̄² − 1/π)` vanishes — so the settle is the CLOSED FORM `π* = 1/(ε̄²+EPS_REL)`
+ * ({@link optimalPrecision}), solved, not iterated (Defect 2 fix, #crucible-tested 2026-07-01: the
+ * old fixed-`lr` gradient flow was non-contractive for `ε̄² ≳ 2.83` — it STALLED or diverged to the
+ * WRONG boundary; the optimum is analytic, so there is nothing to converge). Always `settled` — a
+ * closed form carries no convergence risk. (A STREAMING caller tracking a moving `ε̄²` could run
+ * Newton on log-precision to warm-start from the previous frame; not needed for the one-shot settle.)
+ *
+ * Pass `withLogPrecision: false` to DROP the penalty: the objective `½π·ε̄²` is then monotone in π
+ * with gradient `½·ε̄² > 0` and NO interior optimum — the flow slides to the `π→0` floor and never
+ * settles (the runaway the penalty cures). Reported directly (`settled: false`), no iteration needed
+ * to know it never stops. The `init`/`lr`/`iters`/`tol` opts are accepted for back-compat and ignored.
  */
 export function settlePrecision(
   meanSqErr: number,
   opts: { init?: number; lr?: number; iters?: number; tol?: number; withLogPrecision?: boolean } = {},
 ): PrecisionSettle {
-  const m = Math.max(EPS, meanSqErr);
-  const lr = opts.lr ?? 0.5;
-  const maxIters = opts.iters ?? 100_000;
-  const tol = opts.tol ?? 1e-9;
+  const m = Math.max(0, meanSqErr);
   const withLog = opts.withLogPrecision ?? true;
-  let p = Math.max(EPS, opts.init ?? 1);
-  let grad = 0;
-  let i = 0;
-  for (; i < maxIters; i++) {
-    // ∂/∂π ½(π·ε̄² − ln π) = ½(ε̄² − 1/π); drop the −ln π ⇒ ½·ε̄² (constant, never zero).
-    grad = withLog ? 0.5 * (m - 1 / p) : 0.5 * m;
-    if (Math.abs(grad) <= tol) break;
-    p = Math.max(EPS, p - lr * grad);
+  if (!withLog) {
+    // no `−ln π` ⇒ ½π·ε̄² monotone, gradient ½·ε̄² never zero ⇒ slides to the π→0 floor, never settles.
+    return { precision: EPS, settled: false, iters: 0, grad: 0.5 * m };
   }
-  return { precision: p, settled: withLog && Math.abs(grad) <= tol && Number.isFinite(p), iters: i, grad };
+  const precision = optimalPrecision(m); // = 1/(ε̄²+EPS_REL), the analytic interior optimum
+  const grad = 0.5 * (m - 1 / precision); // ≈ −½·EPS_REL at π* — stationary to machine precision
+  return { precision, settled: Number.isFinite(precision), iters: 0, grad };
 }
 
 // ── the KL complexity — a REAL KL[q(x)‖p(x)] to a NAMED per-plane prior (FIX 2) ─────────────
