@@ -110,10 +110,10 @@ describe("adapter contract", () => {
     expect(copilotChatAdapter.name).toBe("copilot-chat");
   });
 
-  test("normalizeIdentity rides the requestId on the native-uuid rung", () => {
+  test("the shared identityLadder rides the requestId on the native-uuid rung", () => {
     const ctx = makeIdentityContext("S", copilotChatHash);
     const rec: AdapterRecord = { uuid: "request_a", parentUuid: null, role: "user", text: "hi", isSidechain: false, sessionId: "S", index: 0 };
-    expect(copilotChatAdapter.normalizeIdentity(rec, ctx)).toMatchObject({ rung: "native-uuid", key: liveKey("S", "request_a") });
+    expect(identityLadder(rec, ctx)).toMatchObject({ rung: "native-uuid", key: liveKey("S", "request_a") });
   });
 
   test("currentBranch returns the replayed-live requestId keys in order", () => {

@@ -53,14 +53,11 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { basename } from "node:path";
 import {
-  identityLadder,
-  makeIdentityContext,
+  linearBranch,
   type AdapterRecord,
-  type IdentityContext,
   type PerAppSignal,
   type SessionGroup,
   type SourceAdapter,
-  type TurnIdentity,
 } from "./source-adapter.js";
 
 /** The default content-hasher (16-hex sha256 prefix) — matches the CLI harvest `sha` and {@link claudeHash}. */
@@ -185,9 +182,10 @@ export function discoverCopilotChatFiles(sessionFiles: readonly string[]): Sessi
 }
 
 /**
- * The GitHub Copilot Chat {@link SourceAdapter}. `discover · normalizeIdentity · currentBranch ·
- * perAppSignal` are the app-specific reads; the SHARED free functions in source-adapter supply the
- * identity ladder, the diff, the classify-by-shape, and the emit gate.
+ * The GitHub Copilot Chat {@link SourceAdapter}. `discover · perAppSignal` are the app-specific reads
+ * (`currentBranch` delegates to the shared {@link linearBranch}); the SHARED free functions in
+ * source-adapter supply the identity ladder, the linear-branch reconstruction, the diff, the
+ * classify-by-shape, and the emit gate.
  */
 export const copilotChatAdapter: SourceAdapter = {
   name: "copilot-chat",
@@ -198,19 +196,13 @@ export const copilotChatAdapter: SourceAdapter = {
     return discoverCopilotChatFiles(sessionFiles);
   },
 
-  normalizeIdentity(rec: AdapterRecord, ctx: IdentityContext): TurnIdentity {
-    return identityLadder(rec, ctx);
-  },
-
   /**
    * The current branch is the REPLAYED-LIVE requestId sequence: `parse` already replayed the op-log to
-   * its final `requests[]`, so every kept record IS on the live branch, in order. Keys ride
-   * {@link identityLadder} (which owns the session-namespace separator) — never a hand-typed separator.
+   * its final `requests[]`, so every kept record IS on the live branch, in order — the shared
+   * {@link linearBranch} reconstruction, fed the Copilot-Chat content-hasher.
    */
   currentBranch(records: readonly AdapterRecord[]): string[] {
-    const sessionId = records[0]?.sessionId ?? "?";
-    const ctx = makeIdentityContext(sessionId, copilotChatHash);
-    return records.map((rec) => identityLadder(rec, ctx).key);
+    return linearBranch(records, copilotChatHash);
   },
 
   /**

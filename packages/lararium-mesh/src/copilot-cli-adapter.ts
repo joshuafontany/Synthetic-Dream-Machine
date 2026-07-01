@@ -64,14 +64,11 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { basename, dirname } from "node:path";
 import {
-  identityLadder,
-  makeIdentityContext,
+  linearBranch,
   type AdapterRecord,
-  type IdentityContext,
   type PerAppSignal,
   type SessionGroup,
   type SourceAdapter,
-  type TurnIdentity,
 } from "./source-adapter.js";
 
 /** The default content-hasher (16-hex sha256 prefix) — matches the CLI harvest `sha` and {@link claudeHash}. */
@@ -174,9 +171,10 @@ export function parseCopilotEvents(content: string, sessionId = ""): AdapterReco
 }
 
 /**
- * The Copilot-CLI {@link SourceAdapter}. `discover · normalizeIdentity · currentBranch · perAppSignal`
- * are the app-specific reads; the SHARED free functions in source-adapter supply the identity ladder,
- * the diff, the classify-by-shape, and the emit gate.
+ * The Copilot-CLI {@link SourceAdapter}. `discover · perAppSignal` are the app-specific reads
+ * (`currentBranch` delegates to the shared {@link linearBranch}); the SHARED free functions in
+ * source-adapter supply the identity ladder, the linear-branch reconstruction, the diff, the
+ * classify-by-shape, and the emit gate.
  */
 export const copilotCliAdapter: SourceAdapter = {
   name: "copilot-cli",
@@ -197,19 +195,13 @@ export const copilotCliAdapter: SourceAdapter = {
     });
   },
 
-  normalizeIdentity(rec: AdapterRecord, ctx: IdentityContext): TurnIdentity {
-    return identityLadder(rec, ctx);
-  },
-
   /**
    * The current branch is the LINEAR append chain (Copilot never edits an earlier line and has no in-file
-   * re-parent), so every kept record IS on the live branch, in order. Keys ride {@link identityLadder}
-   * (which owns the session-namespace separator) — never a hand-typed separator.
+   * re-parent), so every kept record IS on the live branch, in order — the shared {@link linearBranch}
+   * reconstruction, fed the Copilot-CLI content-hasher.
    */
   currentBranch(records: readonly AdapterRecord[]): string[] {
-    const sessionId = records[0]?.sessionId ?? "?";
-    const ctx = makeIdentityContext(sessionId, copilotHash);
-    return records.map((rec) => identityLadder(rec, ctx).key);
+    return linearBranch(records, copilotHash);
   },
 
   /**

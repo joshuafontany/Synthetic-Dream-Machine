@@ -10,6 +10,7 @@ import {
   rootUuidOf,
   analyzeSession,
   makeIdentityContext,
+  identityLadder,
   claudeHash,
   type AdapterRecord,
 } from "../src/index.js";
@@ -53,10 +54,10 @@ describe("adapter contract", () => {
     expect(claudeCodeAdapter.appendOnly).toBe(true);
   });
 
-  test("normalizeIdentity rides the uuid rung", () => {
+  test("the shared identityLadder rides the uuid rung (the ladder the core applies)", () => {
     const ctx = makeIdentityContext("S", claudeHash);
     const rec = ar("u1", null, "user", 0);
-    expect(claudeCodeAdapter.normalizeIdentity(rec, ctx)).toMatchObject({ rung: "native-uuid", key: k("S", "u1") });
+    expect(identityLadder(rec, ctx)).toMatchObject({ rung: "native-uuid", key: k("S", "u1") });
   });
 
   test("currentBranch returns session-namespaced leaf-chain keys", () => {

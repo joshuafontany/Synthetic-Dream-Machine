@@ -17,16 +17,18 @@
  * ## The pipeline (the contract every adapter feeds)
  *
  *   discover(files)            → group a fork-FAMILY of session files under one root
- *   normalizeIdentity(rec)     → a session-namespaced key via the 4-rung identity ladder
  *   currentBranch(records)     → the live leaf-chain (orphans excluded)
+ *   identityLadder(rec, ctx)   → a session-namespaced key via the 4-rung ladder     [SHARED]
+ *   linearBranch(records, hash)→ the whole-log branch for a linear append source    [SHARED]
  *   diffGone(prior, branch)    → the keys the branch no longer carries              [SHARED]
  *   classifyByShape(...)       → DELETE | TAIL_TRUNCATE | INTERIOR_DELETE | FORK    [SHARED]
  *   emitFor(kind, appendOnly)  → kapae | reharvest | fork                           [SHARED]
  *
- * The adapter supplies `discover · normalizeIdentity · currentBranch · perAppSignal` and the
- * `appendOnly` flag; the SHARED free functions here supply the identity ladder, the diff, the
- * classify-by-shape, and the emit gate. A new app (Codex / Copilot-CLI / Copilot-Chat) is a ~4-method
- * adapter over this same spine.
+ * The adapter supplies `discover · currentBranch · perAppSignal` and the `appendOnly` flag; the SHARED
+ * free functions here supply the identity ladder, the linear-branch reconstruction, the diff, the
+ * classify-by-shape, and the emit gate. A linear app (Codex / Copilot-CLI / Copilot-Chat) delegates
+ * `currentBranch` to {@link linearBranch}; Claude-Code overrides it with its parentUuid DAG walk (the
+ * one genuinely app-specific `currentBranch`).
  *
  * Pure + dependency-free (bundles beside gone-turns / branch-frontier). Content-hashing is INJECTED
  * (a `hash` fn on the identity context) so this module pulls no crypto — the node/CLI caller supplies
@@ -130,6 +132,20 @@ export function identityLadder(rec: AdapterRecord, ctx: IdentityContext): TurnId
     return { key: `${ns}${NS}h:${h}#${occ}`, parentKey, rung: "content-hash" };
   }
   return { key: `${ns}${NS}@${rec.index}`, parentKey, rung: "positional" };
+}
+
+/**
+ * The LINEAR-BRANCH reconstruction — the current branch for an append-only LINEAR source (Codex ·
+ * Copilot-CLI · Copilot-Chat): the source never edits an earlier line and has no in-file re-parent, so
+ * every kept record IS on the live branch, in order. Keys ride {@link identityLadder} (which owns the
+ * session-namespace separator) — never a hand-typed separator. Claude-Code overrides this with its
+ * parentUuid DAG walk (the one genuinely app-specific `currentBranch`); every linear adapter delegates
+ * here, passing only its own content-hasher.
+ */
+export function linearBranch(records: readonly AdapterRecord[], hash: (s: string) => string): string[] {
+  const sessionId = records[0]?.sessionId ?? "?";
+  const ctx = makeIdentityContext(sessionId, hash);
+  return records.map((rec) => identityLadder(rec, ctx).key);
 }
 
 // ── Diff · classify · emit (shared) ─────────────────────────────────────────
@@ -254,9 +270,10 @@ export interface SourceAdapter {
   readonly appendOnly: boolean;
   /** Group session files into fork-FAMILIES (a shared-root lineage under one {@link SessionGroup}). */
   discover(sessionFiles: readonly string[]): SessionGroup[];
-  /** Normalize one record to a session-namespaced {@link TurnIdentity} via the 4-rung ladder. */
-  normalizeIdentity(rec: AdapterRecord, ctx: IdentityContext): TurnIdentity;
-  /** Reconstruct the current-branch leaf-chain (root→leaf KEYS) from a session's records. */
+  /**
+   * Reconstruct the current-branch leaf-chain (root→leaf KEYS) from a session's records. A linear source
+   * delegates to {@link linearBranch}; Claude-Code overrides with its parentUuid DAG walk.
+   */
   currentBranch(records: readonly AdapterRecord[]): string[];
   /** The per-app signal for the classify step (in-file re-parent vs new-file fork, etc.). */
   perAppSignal(records: readonly AdapterRecord[], prior: readonly string[]): PerAppSignal;

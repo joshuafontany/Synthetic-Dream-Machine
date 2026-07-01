@@ -31,13 +31,10 @@ import {
   type BranchNode,
 } from "./gone-turns.js";
 import {
-  identityLadder,
   type AdapterRecord,
-  type IdentityContext,
   type PerAppSignal,
   type SessionGroup,
   type SourceAdapter,
-  type TurnIdentity,
 } from "./source-adapter.js";
 
 const NS = "\u0000"; // MUST match source-adapter's session-namespace separator
@@ -158,11 +155,11 @@ export const claudeCodeAdapter: SourceAdapter = {
     return groupForkFamilies(sessions);
   },
 
-  normalizeIdentity(rec: AdapterRecord, ctx: IdentityContext): TurnIdentity {
-    return identityLadder(rec, ctx);
-  },
-
-  /** The current-branch leaf-chain as session-namespaced KEYS (root → leaf). */
+  /**
+   * The current-branch leaf-chain as session-namespaced KEYS (root → leaf) — the one genuinely
+   * app-specific `currentBranch`: Claude-Code's parentUuid DAG walk (orphans excluded), not the shared
+   * linear reconstruction.
+   */
   currentBranch(records: readonly AdapterRecord[]): string[] {
     const sessionId = records[0]?.sessionId ?? "?";
     return reconstructCurrentBranch(records.map(toBranchNode)).map((uuid) => nsKey(sessionId, uuid));
