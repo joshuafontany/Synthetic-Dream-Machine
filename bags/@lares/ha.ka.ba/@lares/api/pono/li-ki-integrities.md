@@ -104,4 +104,20 @@ The sensorium is not a text tool that generalizes ~ it carries a **li/ki sensor*
 
 <<~/ahu >>
 
+<<~ ahu #crucible-tested >>
+
+## Crucible-tested ~ what survived the fire (2026-07-01)
+
+Three adversarial spirits put the intent on the anvil before it was set. What held, what demoted, what re-cut:
+
+**Perceiver, not agent.** The sensorium runs precision-weighted variational PERCEPTION, never yet active-inference AGENCY. `F = Σπε² + complexity` earns "the accuracy term of VFE" ~ "IS VFE" waits on a named per-plane generative prior `p(x)` in the complexity term (else it reads as regression in FEP costume; the missing `−ln π` is the tell). Precision = the confidence register is the STRONGEST leg ~ a true role-isomorphism ~ but load-bearing only while the register stays vowed FORWARD (which L-Prime already demands). Sovereignty carries a BOUNDARY, called a "blanket" only on credit (the conditional independence fails during coupling). Agency stays a named future with a price: a generative prior · a checkable per-episode factorization · an explicit EFE-vs-FEEF choice · exogenous preference priors ~ never "the path."
+
+**Li is a sheaf, ki is a cosheaf.** content/structure/form RESTRICT (contravariant, global→local) = the SHEAF side = li. bands/coupling EXTEND (covariant, local→global ~ a coarse wavelet coefficient depends on data outside its span) = the COSHEAF side = ki. They hold as a DUAL PAIR over the shared skeletal complex, variance-tagged, consistency computed SEPARATELY (li-restriction-consistency · ki-co-consistency); one merged contravariant gluing SILENTLY corrupts (it penalizes the flow for failing to be static). The consistency-radius (Robinson) is the principled li-disagreement signal ~ 0 iff the li-planes glue ~ buildable now for li (per-plane pseudometrics + engineered overlaps), aspirational for the ki co-consistency. Its VALUE lives in engineered redundancy: disjoint planes glue vacuously and buy nothing.
+
+**The four-fold naming is a partial rhyme, not an identity.** The pattern-integrity is an INVARIANT OF A SELF-REFERENTIAL ENDO-PROCESS ~ the shared schema (Lawvere's fixed-point abstraction) the four traditions each realize DIFFERENTLY. Two bridges hold strong: sheaf-`H⁰` ↔ `argmin F` (both the argmin of an agreement functional) · `H⁰` ↔ order-parameter (zero/slow modes of a Laplacian, linear case). Eigenform is the NONLINEAR general case; NESS/`H⁰` the linear-spectral special case nested inside it (cognate, not identical). The order parameter is a MODE (a direction), not a point ~ it pairs with the center MANIFOLD, never the slow variable. Claim the schema-level kinship; never the literal one-object identity.
+
+**The slogan, re-cut.** "no-global-now = failure to be a sheaf" is a category error (sheaf-ness is the model, global-now the data). Exact: **no-global-now = the assignment carries positive consistency radius = it fails to be a global SECTION.** A valid sheaf routinely carries a non-global assignment.
+
+<<~/ahu >>
+
 <<~ ॐ ँ -> ? >>
