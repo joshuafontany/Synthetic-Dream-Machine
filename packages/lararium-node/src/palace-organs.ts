@@ -6,8 +6,8 @@
  * The five organs (the astral palaces made filesystem):
  *   - mempalace   ~/.mempalace (or $MEMPALACE_PALACE_PATH) — the VERBATIM content store; the
  *                 worldline-KG knowledge_graph.sqlite3 lives INSIDE it, so it stands FIRST.
- *   - astpalace   ~/.lares/.astpalace   — the structural-AST store (a 2nd mempalace instance).
- *   - formpalace  ~/.lares/.formpalace  — the living-grammar FORM-vector store (a 3rd instance).
+ *   - astpalace   <memory>/structure  — the structural-AST store (a 2nd mempalace instance).
+ *   - formpalace  <memory>/form       — the living-grammar FORM-vector store (a 3rd instance).
  *   - meshpalace  <data>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a live
  *                 node). It `#has` three nested child sensoriums — WHO · AUTHORITY · FLOW — each its
  *                 own dir + thin manifest; the mesh's own caps stay minimal. Here we wire only the

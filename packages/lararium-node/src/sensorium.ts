@@ -98,8 +98,9 @@ export function manifestPath(sensoriumDir: string): string {
 
 /**
  * Build a THIN fiber-cap edge for a cap whose bytes live at `absDir`. Stores a RELATIVE dir when
- * `absDir` sits inside `sensoriumDir` (the consolidated tree), else the ABSOLUTE dir (the strangler
- * window). The relative form uses POSIX separators so the manifest stays portable.
+ * `absDir` sits inside `sensoriumDir` (the consolidated tree — structure/form), else the ABSOLUTE dir
+ * (a cap whose bytes sit outside, e.g. the external `content` cap at `~/.mempalace`). The relative form
+ * uses POSIX separators so the manifest stays portable.
  */
 export function capDecl(sensoriumDir: string, absDir: string, engine: string): CapDecl {
   const rel = relative(sensoriumDir, absDir);

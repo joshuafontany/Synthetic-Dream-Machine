@@ -26,13 +26,6 @@ export type {
 export { palaceOrgans, setupPalaceOrgans, organHealthy, materializeMemorySensorium, materializeMeshSensorium } from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";
 
-// Idempotent, reversible migration scaffolding (the operator owns the --confirm; nothing here deletes).
-export {
-  MIGRATION_MARKER, migrationMarkerPath, readMigrationMarker, writeMigrationMarker,
-  preMigratePath, planMemoryMigration, repavePlan,
-} from "./sensorium-migrate.js";
-export type { MigrationMarker, MigrationMethod, CapMigrationStep, RepavePlan } from "./sensorium-migrate.js";
-
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {
   newCorpusId, listCorpora, openCorpus, queryCorpus, keepCorpus,

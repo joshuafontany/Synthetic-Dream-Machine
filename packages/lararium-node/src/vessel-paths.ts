@@ -18,25 +18,21 @@
  * by physical colocation in the tree. bands + coupling are BASE caps — they live in the manifest,
  * never as dirs.
  *
- * THE STRANGLER (backward-compat for ONE migration cycle): every OURS-owned relocated resolver
- * (structure, form, mesh, vessel, state) reads OLD-else-NEW — probe the new XDG dir; when it
- * materializes, use it; else fall back to the legacy `~/.lares` spelling when THAT exists; on a
- * truly-fresh vessel default to the new canonical dir. A live box (legacy dirs present) therefore sees
- * NO disruption until the operator migrates. content does NOT strangle — it defaults to `~/.mempalace`
- * outright (upstream's home). The env seams (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
+ * The mesh federation store lives as its OWN `mesh` SENSORIUM that `#has` three nested child sensoriums
+ * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own
+ * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
+ *
+ * A handful of resolvers (mesh, vessel substrate, the state watermarks, the ephemeral corpus root) still
+ * read OLD-else-NEW via {@link strangle} — probe the new XDG dir; use it once it exists; else fall back
+ * to the legacy `~/.lares` spelling; on a fresh vessel default to the new canonical dir. The env seams
+ * (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
  *
  * `LAR_ROOT` overrides the home root for ISOLATED instances (the test harness / staged pairs): each
  * pair gets its own tree with the XDG facets laid out beneath it (`<root>/data`, `<root>/state`, …),
  * so isolation holds and the UDS socket path always agrees. Both the CLI (local-connector) and the
  * node daemon (uds-channel) resolve through HERE.
  *
- * The mesh federation store consolidates too — as its OWN `mesh` SENSORIUM that `#has` three nested
- * child sensoriums (WHO · AUTHORITY · FLOW). {@link meshSensoriumDir} strangles `<data>/sensoriums/mesh`
- * (new) over the legacy `~/.lares/.meshpalace` (old), and the children hang below it. The mesh's own
- * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
- *
- * EXCLUDED from the move (deliberately): `larIdentityDir` (vessel-identity — a separate concern, left
- * at its legacy spelling).
+ * `larIdentityDir` (vessel-identity — a separate concern) stays at its `~/.lares` spelling.
  */
 
 import { homedir, tmpdir } from "node:os";
@@ -88,8 +84,8 @@ export function larConfigPath(): string {
 
 // ── The legacy vessel home (isolation base + still-legacy organs) ─────────────────────────────────
 
-/** The legacy vessel home — `LAR_ROOT` (isolated instance) or `~/.lares`. Still hosts the not-yet-
- *  moved organs (identity, meshpalace) and every strangler's legacy fallback. */
+/** The `~/.lares` vessel home — `LAR_ROOT` (isolated instance) or `~/.lares`. Hosts vessel-identity
+ *  and the legacy fallback arm for every resolver that still reads OLD-else-NEW via {@link strangle}. */
 export function larHome(): string {
   return process.env["LAR_ROOT"] ?? join(homedir(), ".lares");
 }
@@ -116,18 +112,17 @@ export function larMempalaceDir(): string {
   return mempalaceContentParent();
 }
 
-/** The astpalace store dir (the `structure` fiber cap) — the strangler over `<memory>/structure`
- *  (new) / `~/.lares/.astpalace` (legacy). A 2nd mempalace instance holding the per-turn parse-tree
- *  AST keyed by structural hash. */
+/** The astpalace store dir (the `structure` fiber cap) — `<memory>/structure`, inside the consolidated
+ *  sensorium tree. A 2nd mempalace instance holding the per-turn parse-tree AST keyed by structural hash. */
 export function larAstPalaceDir(): string {
-  return strangle(join(memorySensoriumDir(), "structure"), join(larHome(), ".astpalace"));
+  return join(memorySensoriumDir(), "structure");
 }
 
-/** The formpalace store dir (the `form` fiber cap) — the strangler over `<memory>/form` (new) /
- *  `~/.lares/.formpalace` (legacy). A mempalace instance holding the per-turn living-grammar FORM
- *  vector, keyed by verbatim_sha (the cross-graph join to the content drawer). */
+/** The formpalace store dir (the `form` fiber cap) — `<memory>/form`, inside the consolidated sensorium
+ *  tree. A mempalace instance holding the per-turn living-grammar FORM vector, keyed by verbatim_sha
+ *  (the cross-graph join to the content drawer). */
 export function larFormPalaceDir(): string {
-  return strangle(join(memorySensoriumDir(), "form"), join(larHome(), ".formpalace"));
+  return join(memorySensoriumDir(), "form");
 }
 
 // ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────

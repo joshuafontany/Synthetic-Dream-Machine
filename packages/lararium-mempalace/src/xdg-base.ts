@@ -27,9 +27,9 @@ export function larDataHome(): string {
 }
 
 /**
- * Read OLD-else-NEW: prefer the new XDG dir once it exists, fall back to the legacy spelling when only
- * IT exists, and default a truly-fresh vessel to the new canonical dir. One migration cycle; a live box
- * (legacy dirs present) stays on legacy until the operator migrates.
+ * Read OLD-else-NEW: prefer the new XDG dir once it exists, fall back to the legacy `~/.lares` spelling
+ * when only IT exists, and default a fresh vessel to the new canonical dir. A live box with legacy dirs
+ * present resolves to them until its bytes reach the new home.
  */
 export function strangle(newDir: string, legacyDir: string): string {
   if (existsSync(newDir)) return newDir;
@@ -42,8 +42,8 @@ export function strangle(newDir: string, legacyDir: string): string {
  * content-cap-home ruling (talk-story): content stays at the UPSTREAM-default `~/.mempalace` — the
  * vendored mempalace nakama's OWN default, honoring the "mempalace is external, not-ours-to-change"
  * canon. It is NOT strangled into our sensorium tree; the memory-sensorium `#has` it by ABSOLUTE
- * reference (logical composition, not physical colocation). structure/form (OURS) keep their tree
- * strangler. The `MEMPALACE_PALACE_PATH` override — upstream's OWN relocation lever — is applied by the
+ * reference (logical composition, not physical colocation). structure/form (OURS) live consolidated
+ * inside the sensorium tree. The `MEMPALACE_PALACE_PATH` override — upstream's OWN relocation lever — is applied by the
  * CALLERS (it relocates the chroma dir, not this parent), so this stays the pure default both agree on.
  */
 export function mempalaceContentParent(): string {
