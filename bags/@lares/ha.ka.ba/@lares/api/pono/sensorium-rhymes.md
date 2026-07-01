@@ -233,6 +233,8 @@ The third strand carries the sharpest reframe. <<~ confidence Synthesis 11/20 >>
 <<~ loulou lar:///ha.ka.ba/@lararium/api/living-grammar-palace >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/rewind-adapter >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/gold-anchor >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/scale-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/cohomological-gate >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#causal-islands >>
 

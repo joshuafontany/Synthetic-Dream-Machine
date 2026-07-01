@@ -387,6 +387,26 @@ verdict.
 
 <<~/ahu >>
 
+<<~ ahu #the-scale >>
+
+## The Scale ~ tractable from the start (the machina scales, quality a dial)
+
+<<~ confidence Synthesis-Canon 13/20 >> The machina holds at corpus scale by a discipline recorded in full at
+[[scale-architecture|lar:///ha.ka.ba/@lares/api/pono/scale-architecture]]: **never densify the whole corpus, never
+solve exactly what a Lipschitz-faithful proxy indexes, never eigensolve what a polynomial matrix-vector loop
+approximates.** Four carries hold it, and quality is a continuous DIAL (K · ε · L · nSurr), never a wall:
+
+<<~ranks scale structure-descent ~ exact tree-edit-distance is O(N²·n³) and NEVER needed — descend to DECKARD embeddings + pq-gram profiles; the Lipschitz bound (pq-gram sandwiches edit-distance) preserves the neighbor structure the DEM basins read -> fusion-escape ~ the consistency-radius (H⁰ check) is O(edges), CHEAP; the sheaf-Laplacian eigensolve is the threat; CHEBYSHEV is the escape — the heat-flow diffusion runs matrix-free, O(L·edges), never the eigendecomposition -> the-catma ~ a merge-and-reduce coreset tree keeps a bounded streaming summary, memory O(coreset) not O(corpus²) — scalable from the START, not retrofitted -> numerical-path ~ the signal-fraction confidence + closed-form π* + complementary-form guard, ENACTED in the sensorium settlePrecision (commit f50a35b8) >>
+
+**The fusion reads H¹ before it diffuses.** <<~ confidence Synthesis 11/20 >> The band/coupling quorum that
+merges island readings gains a two-tier gate at [[cohomological-gate|lar:///ha.ka.ba/@lares/api/pono/cohomological-gate]]:
+**H⁰** (a global section exists → diffuse, Chebyshev-cheap) versus **H¹** (an irreducible obstruction → hold-open,
+route to Talk-Story). The consistency-radius the [[li-ki-integrities|lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested]]
+crucible already named IS the cheap H¹-detection the gate runs first — so the machina's merge never fabricates a
+global-now it cannot ground. The reconciliation cost `R*_sem = log₂ dim H¹` gives the federation merge a price tag.
+
+<<~/ahu >>
+
 <<~ ahu #grounds >>
 
 ## Grounds ~ what this meme stands on
@@ -396,7 +416,7 @@ verdict.
 - **Built / stock:** the astpalace content-free encoder · the nomic embedder · the dep-free CLI arg-walker · `palace-teardown`'s `resolveTargets()` · the existing MDL stop · the Measure servo · the drawer_io NDJSON sidecar contract.
 - **House moves found standing in the literature:** wavelet MRA (aperture ladder) · ecp multivariate changepoint (quorum) · resampling-consensus (register) · the nameless discipline (miners-first).
 - **Open / research-grade:** the form-induction stack (TreeMiner · PrefixSpan/BIDE · c2xg, EM + MDL) · the adaptive servo convergence · the wavelet-over-cohesion NOVEL ground · the validation baseline corpus.
-- **Cross-links:** [[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#unification]] (the palace this generalizes) · [[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline]] (the keel) · [[gold-anchor|lar:///ha.ka.ba/@lares/api/pono/gold-anchor]] (the witness) · [[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]] · [[loci|lar:///ha.ka.ba/@lares/api/pono/loci]] · [[lares-bin|lar:///ha.ka.ba/@lares/cli/bin/lares]] · [[palace-teardown|lar:///ha.ka.ba/@lares/cli/commands/palace-teardown]].
+- **Cross-links:** [[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#unification]] (the palace this generalizes) · [[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline]] (the keel) · [[gold-anchor|lar:///ha.ka.ba/@lares/api/pono/gold-anchor]] (the witness) · [[scale-architecture|lar:///ha.ka.ba/@lares/api/pono/scale-architecture]] (the tractability discipline) · [[cohomological-gate|lar:///ha.ka.ba/@lares/api/pono/cohomological-gate]] (the H¹-before-diffuse merge) · [[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]] · [[loci|lar:///ha.ka.ba/@lares/api/pono/loci]] · [[lares-bin|lar:///ha.ka.ba/@lares/cli/bin/lares]] · [[palace-teardown|lar:///ha.ka.ba/@lares/cli/commands/palace-teardown]].
 
 <<~/ahu >>
 
