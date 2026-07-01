@@ -146,3 +146,28 @@ export function resolveBandsSidecarSpawn(): BandsSidecarSpawn {
   const script = resolveBandsSidecarIo();
   return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
 }
+
+/** Locate `form_induction.py` — CODE at the repo root. The corpus FORM-plane BLIND grammar
+ *  induction (S3): the accumulated STRUCTURE forest → TreeMiner + PrefixSpan/BIDE + ΔP →
+ *  MDL-selected constructicon, keyed by structural hash (corpus.md #the-form-induction). An
+ *  offline BATCH sidecar (not a serve holder), invoked once per corpus ingest, after structure. */
+export function resolveFormInductionIo(): string {
+  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "form_induction.py");
+}
+
+/** What the corpus ingest needs to run the form-induction sidecar: the venv-aware python, the
+ *  helper script, and the submoduleRoot (PYTHONPATH so `induce`'s chroma readback `import
+ *  mempalace` resolves; the pure miners need neither). Mirrors {@link BandsSidecarSpawn}. */
+export interface FormInductionSpawn {
+  readonly python: string | null;
+  readonly script: string;
+  readonly submoduleRoot: string;
+  readonly scriptPresent: boolean;
+}
+
+/** Resolve everything the form-induction sidecar needs (mirrors {@link resolveBandsSidecarSpawn}). */
+export function resolveFormInductionSpawn(): FormInductionSpawn {
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const script = resolveFormInductionIo();
+  return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
+}
