@@ -27,11 +27,14 @@ export type {
 // The LI (sheaf) CONSISTENCY-RADIUS — the Robinson li-disagreement signal over content/structure/form
 // (0 ⟺ they glue; positive ⟺ a localizable obstruction), with the ki co-consistency honestly stubbed.
 export {
-  cosineDistance, jaccardDistance, treeEditDistance, chebyshevStalkMetric, consistencyRadius,
+  cosineDistance, jaccardDistance, treeEditDistance, treeEditExact,
+  deckardDistance, characteristicVector, pqGramDistance, pqGramProfile,
+  chebyshevStalkMetric, consistencyRadius,
   stratificationRestrictions, assertSheafPlanes, kiCoConsistency, KI_CO_CONSISTENCY_STUB,
 } from "./sensorium-consistency.js";
 export type {
-  LabeledTree, ComparisonStalk, PlaneRestriction, PairObstruction, ConsistencyRadius,
+  LabeledTree, TreeDistanceMethod, TreeDistanceOptions,
+  ComparisonStalk, PlaneRestriction, PairObstruction, ConsistencyRadius,
   ConsistencyOptions, StalkMetric, KiCoConsistency,
 } from "./sensorium-consistency.js";
 
