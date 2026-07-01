@@ -368,22 +368,87 @@ export type StalkMetric = (
   vp: ReadonlyMap<string, number>, vq: ReadonlyMap<string, number>, overlap: readonly string[],
 ) => { distance: number; locus: readonly string[] };
 
-/** L∞ over the overlap: `max_u |vp(u) − vq(u)|`; 0 ⟺ equal on every shared unit; locus = the argmax unit(s). */
-export const chebyshevStalkMetric: StalkMetric = (vp, vq, overlap) => {
+/**
+ * The shared L∞-argmax core the two default posture-metrics ride: `max_c |vp(c) − vq(c)|` over the shared
+ * cells; locus = the argmax cell(s) (empty when the max is 0). The li stalk-metric and the ki coface-metric
+ * are the SAME computation under a renamed locus — this is that one computation. It NEVER merges the
+ * postures: each metric wraps it and re-labels the locus into its own posture's field.
+ */
+function linfArgmax(
+  vp: ReadonlyMap<string, number>, vq: ReadonlyMap<string, number>, cells: readonly string[],
+): { distance: number; locus: readonly string[] } {
   let distance = 0;
-  const diffs: Array<{ unit: string; d: number }> = [];
-  for (const u of overlap) {
-    const d = Math.abs((vp.get(u) ?? 0) - (vq.get(u) ?? 0));
-    diffs.push({ unit: u, d });
+  const diffs: Array<{ cell: string; d: number }> = [];
+  for (const c of cells) {
+    const d = Math.abs((vp.get(c) ?? 0) - (vq.get(c) ?? 0));
+    diffs.push({ cell: c, d });
     if (d > distance) distance = d;
   }
-  const locus = distance > 0 ? diffs.filter((x) => x.d === distance).map((x) => x.unit) : [];
+  const locus = distance > 0 ? diffs.filter((x) => x.d === distance).map((x) => x.cell) : [];
   return { distance, locus };
-};
+}
+
+/** L∞ over the overlap: `max_u |vp(u) − vq(u)|`; 0 ⟺ equal on every shared unit; locus = the argmax unit(s). */
+export const chebyshevStalkMetric: StalkMetric = (vp, vq, overlap) => linfArgmax(vp, vq, overlap);
 
 export interface ConsistencyOptions {
   /** the pair-overlap pseudometric; default {@link chebyshevStalkMetric}. */
   readonly stalkMetric?: StalkMetric;
+}
+
+/** A posture-neutral restriction — the common shape the li sheaf-restriction and ki cosheaf-face share. */
+interface CellRestriction {
+  readonly plane: string;
+  readonly variance: Variance;
+  readonly value: ReadonlyMap<string, number>;
+}
+
+/** The neutral pair metric the sup rides — disagreement + argmax locus over a pair's shared cells. */
+type CellMetric = (
+  vp: ReadonlyMap<string, number>, vq: ReadonlyMap<string, number>, overlap: readonly string[],
+) => { distance: number; locus: readonly string[] };
+
+/**
+ * The SUP-OVER-PAIRS core both postures ride (li restrict/meet · ki extend/coface) — the ONE Robinson
+ * radius mechanism, parameterized by the shared cell set and the pair metric. It projects each
+ * restriction's key set onto the shared cells, reads pairwise disagreement on each pair's overlap, and
+ * returns the sup, the union of maximizing loci, and whether ANY pair bound (non-vacuous). It NEVER merges
+ * the postures: each caller passes ONLY its own posture's restrictions and its own cells (units / cofaces),
+ * enforces its own variance gate first, and re-labels this neutral result into its own typed verdict — the
+ * li/ki dual stays two functions over one mechanism (the "line-for-line" mirror, de-duplicated in truth).
+ */
+function supOverPairs(
+  restrictions: readonly CellRestriction[], cells: readonly string[], metric: CellMetric,
+): { radius: number; vacuous: boolean; pairs: PairObstruction[]; bindingLoci: string[] } {
+  const cellSet = new Set(cells);
+  // Each restriction's domain, intersected with the SHARED stalk — the engineered-overlap projection.
+  const domains = restrictions.map((r) => {
+    const dom = new Set<string>();
+    for (const u of r.value.keys()) if (cellSet.has(u)) dom.add(u);
+    return dom;
+  });
+
+  const pairs: PairObstruction[] = [];
+  let radius = 0;
+  const bindingLoci = new Set<string>();
+  let anyBinding = false;
+
+  for (let i = 0; i < restrictions.length; i++) {
+    for (let j = i + 1; j < restrictions.length; j++) {
+      const overlap = [...domains[i]!].filter((u) => domains[j]!.has(u));
+      if (overlap.length === 0) {
+        pairs.push({ a: restrictions[i]!.plane, b: restrictions[j]!.plane, distance: 0, locus: [], vacuous: true });
+        continue;
+      }
+      anyBinding = true;
+      const { distance, locus } = metric(restrictions[i]!.value, restrictions[j]!.value, overlap);
+      pairs.push({ a: restrictions[i]!.plane, b: restrictions[j]!.plane, distance, locus, vacuous: false });
+      if (distance > radius) radius = distance;
+      for (const u of locus) bindingLoci.add(u);
+    }
+  }
+
+  return { radius, vacuous: !anyBinding, pairs, bindingLoci: [...bindingLoci] };
 }
 
 /**
@@ -409,14 +474,6 @@ export function consistencyRadius(
     );
   }
 
-  const stalkUnits = new Set(stalk.units);
-  // Each plane's domain, intersected with the SHARED stalk — the engineered-overlap projection.
-  const domains = restrictions.map((r) => {
-    const dom = new Set<string>();
-    for (const u of r.value.keys()) if (stalkUnits.has(u)) dom.add(u);
-    return dom;
-  });
-
   if (stalk.units.length === 0) {
     return {
       radius: 0, glues: false, vacuous: true, pairs: [], obstructionLocus: [],
@@ -425,33 +482,14 @@ export function consistencyRadius(
     };
   }
 
-  const pairs: PairObstruction[] = [];
-  let radius = 0;
-  const bindingLoci = new Set<string>();
-  let anyBinding = false;
-
-  for (let i = 0; i < restrictions.length; i++) {
-    for (let j = i + 1; j < restrictions.length; j++) {
-      const overlap = [...domains[i]!].filter((u) => domains[j]!.has(u));
-      if (overlap.length === 0) {
-        pairs.push({ a: restrictions[i]!.plane, b: restrictions[j]!.plane, distance: 0, locus: [], vacuous: true });
-        continue;
-      }
-      anyBinding = true;
-      const { distance, locus } = metric(restrictions[i]!.value, restrictions[j]!.value, overlap);
-      pairs.push({ a: restrictions[i]!.plane, b: restrictions[j]!.plane, distance, locus, vacuous: false });
-      if (distance > radius) radius = distance;
-      for (const u of locus) bindingLoci.add(u);
-    }
-  }
-
-  const vacuous = !anyBinding;
+  // the li posture: restrict onto the meet-stalk units, read L∞ disagreement (the StalkMetric IS a CellMetric).
+  const { radius, vacuous, pairs, bindingLoci } = supOverPairs(restrictions, stalk.units, metric);
   return {
     radius: vacuous ? 0 : radius,
     glues: !vacuous && radius === 0,
     vacuous,
     pairs,
-    obstructionLocus: [...bindingLoci],
+    obstructionLocus: bindingLoci,
     signalKind: "disagreement-signal",
     ...(vacuous
       ? { note: "no pair shares a domain overlap — disjoint aspects, a vacuous 0 (caution a)." }
@@ -628,15 +666,8 @@ export type CofaceMetric = (
  * pseudometric, the dual of {@link chebyshevStalkMetric}.
  */
 export const energyCofaceMetric: CofaceMetric = (vp, vq, coOverlap) => {
-  let distance = 0;
-  const diffs: Array<{ coface: string; d: number }> = [];
-  for (const c of coOverlap) {
-    const d = Math.abs((vp.get(c) ?? 0) - (vq.get(c) ?? 0));
-    diffs.push({ coface: c, d });
-    if (d > distance) distance = d;
-  }
-  const offendingCoface = distance > 0 ? diffs.filter((x) => x.d === distance).map((x) => x.coface) : [];
-  return { distance, offendingCoface };
+  const { distance, locus } = linfArgmax(vp, vq, coOverlap);
+  return { distance, offendingCoface: locus };
 };
 
 export interface KiCoConsistencyOptions {
@@ -668,14 +699,6 @@ export function kiCoConsistency(
     );
   }
 
-  const stalkCofaces = new Set(stalk.cofaces);
-  // Each face's codomain, intersected with the SHARED stalk — the engineered-co-overlap projection.
-  const codomains = coRestrictions.map((r) => {
-    const cod = new Set<string>();
-    for (const c of r.value.keys()) if (stalkCofaces.has(c)) cod.add(c);
-    return cod;
-  });
-
   if (stalk.cofaces.length === 0) {
     return {
       radius: 0, coExtends: false, vacuous: true, pairs: [], offendingCoface: [],
@@ -684,33 +707,21 @@ export function kiCoConsistency(
     };
   }
 
-  const pairs: CoPairObstruction[] = [];
-  let radius = 0;
-  const bindingCofaces = new Set<string>();
-  let anyBinding = false;
-
-  for (let i = 0; i < coRestrictions.length; i++) {
-    for (let j = i + 1; j < coRestrictions.length; j++) {
-      const coOverlap = [...codomains[i]!].filter((c) => codomains[j]!.has(c));
-      if (coOverlap.length === 0) {
-        pairs.push({ a: coRestrictions[i]!.plane, b: coRestrictions[j]!.plane, distance: 0, offendingCoface: [], vacuous: true });
-        continue;
-      }
-      anyBinding = true;
-      const { distance, offendingCoface } = metric(coRestrictions[i]!.value, coRestrictions[j]!.value, coOverlap);
-      pairs.push({ a: coRestrictions[i]!.plane, b: coRestrictions[j]!.plane, distance, offendingCoface, vacuous: false });
-      if (distance > radius) radius = distance;
-      for (const c of offendingCoface) bindingCofaces.add(c);
-    }
-  }
-
-  const vacuous = !anyBinding;
+  // the ki posture: EXTEND onto the coface stalk, read the SAME sup — adapt the coface-metric's
+  // `offendingCoface` locus into the neutral `locus` the core rides, then re-label the loci back on the way out.
+  const neutralMetric: CellMetric = (vp, vq, cells) => {
+    const { distance, offendingCoface } = metric(vp, vq, cells);
+    return { distance, locus: offendingCoface };
+  };
+  const { radius, vacuous, pairs, bindingLoci } = supOverPairs(coRestrictions, stalk.cofaces, neutralMetric);
   return {
     radius: vacuous ? 0 : radius,
     coExtends: !vacuous && radius === 0,
     vacuous,
-    pairs,
-    offendingCoface: [...bindingCofaces],
+    pairs: pairs.map((p): CoPairObstruction => ({
+      a: p.a, b: p.b, distance: p.distance, offendingCoface: p.locus, vacuous: p.vacuous,
+    })),
+    offendingCoface: bindingLoci,
     signalKind: "disagreement-signal",
     ...(vacuous
       ? { note: "no pair shares a coface co-overlap — disjoint flows, a vacuous 0 (caution a)." }
