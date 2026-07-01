@@ -6,8 +6,10 @@
 import { describe, test, expect } from "vitest";
 import {
   cosineDistance, jaccardDistance, treeEditDistance,
-  consistencyRadius, stratificationRestrictions, kiCoConsistency, KI_CO_CONSISTENCY_STUB,
+  consistencyRadius, stratificationRestrictions,
+  kiCoConsistency, bandSynthesisCoRestrictions,
   type PlaneRestriction, type ComparisonStalk, type LabeledTree,
+  type PlaneCoRestriction, type CofaceStalk, type ModwtMra,
 } from "../src/sensorium-consistency.js";
 import { stratify } from "../src/memetic-wikitext-sensorium.js";
 
@@ -150,14 +152,117 @@ describe("stratificationRestrictions — a genuine shared-comparison-stalk", () 
   });
 });
 
-// ── the KI co-consistency — honestly stubbed (caution c) ───────────────────────────────────────────
+// ── the KI co-consistency — the cosheaf PUSHFORWARD mirror (caution c, FOUNDED) ─────────────────────
 
-describe("kiCoConsistency — the honest stub (caution c)", () => {
-  test("returns the not-yet-built marker; never fakes a cosheaf read through a restriction map", () => {
-    const k = kiCoConsistency();
-    expect(k.built).toBe(false);
-    expect(k.marker).toBe(KI_CO_CONSISTENCY_STUB);
-    expect(k.planes).toEqual(["bands", "coupling"]);
-    expect(k.note).toMatch(/cosheaf|extension|colimit/i);
+const coface3: CofaceStalk = { cofaces: ["c0", "c1", "c2"] };
+const coval = (o: Record<string, number>) => new Map(Object.entries(o));
+const face = (plane: string, o: Record<string, number>): PlaneCoRestriction =>
+  ({ plane, variance: "cosheaf", value: coval(o) });
+
+describe("kiCoConsistency — the ki-radius (the dual of consistencyRadius)", () => {
+  test("radius === 0 AND coExtends when the faces CO-EXTEND coherently (a global co-section)", () => {
+    const agree = { c0: 0, c1: 0, c2: 0 };
+    const k = kiCoConsistency(
+      [face("D1", agree), face("D2", agree), face("D3", agree)], coface3,
+    );
+    expect(k.radius).toBe(0);
+    expect(k.coExtends).toBe(true);
+    expect(k.vacuous).toBe(false);
+    expect(k.offendingCoface).toEqual([]);
+    expect(k.signalKind).toBe("disagreement-signal");
+  });
+
+  test("radius POSITIVE + LOCALIZED to the offending coface on a seeded co-obstruction (one band leaks)", () => {
+    const clean = { c0: 0, c1: 0, c2: 0 };
+    const leak = { c0: 0, c1: 0.6, c2: 0 };   // D3 leaks coarse energy into c1
+    const k = kiCoConsistency(
+      [face("D1", clean), face("D2", clean), face("D3", leak)], coface3,
+    );
+    expect(k.radius).toBeCloseTo(0.6, 12);
+    expect(k.coExtends).toBe(false);
+    expect(k.vacuous).toBe(false);
+    expect(k.offendingCoface).toEqual(["c1"]);   // localizable to the leaking coface
+    const d12 = k.pairs.find((p) => p.a === "D1" && p.b === "D2")!;
+    const d13 = k.pairs.find((p) => p.a === "D1" && p.b === "D3")!;
+    expect(d12.distance).toBe(0);                 // D1↔D2 still co-extend
+    expect(d13.distance).toBeCloseTo(0.6, 12);
+    expect(d13.offendingCoface).toEqual(["c1"]);
+  });
+
+  test("VACUOUS 0 on an empty coface stalk — no engineered co-overlap buys nothing (caution a)", () => {
+    const k = kiCoConsistency([face("D1", { c0: 1 })], { cofaces: [] });
+    expect(k.vacuous).toBe(true);
+    expect(k.coExtends).toBe(false);
+    expect(k.radius).toBe(0);
+    expect(k.note).toMatch(/vacuous/i);
+  });
+
+  test("VACUOUS 0 on DISJOINT codomains — disjoint flows co-extend trivially (caution a)", () => {
+    const k = kiCoConsistency(
+      [face("D1", { c0: 1 }), face("D2", { c1: 1 }), face("D3", { c2: 1 })], coface3,
+    );
+    expect(k.vacuous).toBe(true);
+    expect(k.coExtends).toBe(false);
+    expect(k.radius).toBe(0);
+    expect(k.pairs.every((p) => p.vacuous)).toBe(true);
+  });
+
+  test("REFUSES a sheaf plane — a static section pushed through an extension map is the mirror corruption", () => {
+    const bad: PlaneCoRestriction = { plane: "content", variance: "sheaf", value: coval({ c0: 1 }) };
+    expect(() => kiCoConsistency([face("D1", { c0: 1 }), bad], coface3)).toThrow(/cosheaf/i);
+  });
+});
+
+// ── the ENGINEERED co-overlap over a REAL MODWT-MRA synthesis (caution a, the dual made concrete) ───
+
+describe("bandSynthesisCoRestrictions — the MODWT-MRA synthesis as the extension operator", () => {
+  test("scale-separated bands (block-zero-mean) CO-EXTEND ⇒ radius 0", () => {
+    // three detail bands, each an alternating ±1 fluctuation → zero-mean over any even block.
+    const alt = (n: number, sign = 1) => Array.from({ length: n }, (_, i) => sign * (i % 2 === 0 ? 1 : -1));
+    const mra: ModwtMra = {
+      details: [alt(8), alt(8, -1), alt(8)],
+      smooth: Array.from({ length: 8 }, () => 5),   // a genuinely coarse (constant) smooth
+    };
+    const { stalk, coRestrictions } = bandSynthesisCoRestrictions(mra, { blockSize: 4 });
+    expect(stalk.cofaces).toEqual(["c0", "c1"]);
+    expect(coRestrictions.map((r) => r.plane)).toEqual(["D1", "D2", "D3"]);
+    expect(coRestrictions.every((r) => r.variance === "cosheaf")).toBe(true);
+    const k = kiCoConsistency(coRestrictions, stalk);
+    expect(k.vacuous).toBe(false);
+    expect(k.radius).toBeCloseTo(0, 12);
+    expect(k.coExtends).toBe(true);
+  });
+
+  test("a band that LEAKS coarse energy into one block ⇒ radius positive, localized to that coface", () => {
+    const alt = (n: number) => Array.from({ length: n }, (_, i) => (i % 2 === 0 ? 1 : -1));
+    // D3's second block carries a DC offset (+2 everywhere) — it leaks coarse energy into c1.
+    const leaky = [...alt(4), 2, 2, 2, 2];
+    const mra: ModwtMra = {
+      details: [alt(8), alt(8), leaky],
+      smooth: Array.from({ length: 8 }, () => 5),
+    };
+    const { stalk, coRestrictions } = bandSynthesisCoRestrictions(mra, { blockSize: 4 });
+    const k = kiCoConsistency(coRestrictions, stalk);
+    expect(k.radius).toBeGreaterThan(0);
+    expect(k.coExtends).toBe(false);
+    expect(k.offendingCoface).toEqual(["c1"]);
+    expect(k.signalKind).toBe("disagreement-signal");
+  });
+
+  test("a single detail band ⇒ no binding pair ⇒ a VACUOUS 0 (no engineered coface-redundancy)", () => {
+    const mra: ModwtMra = { details: [[1, -1, 1, -1]], smooth: [0, 0, 0, 0] };
+    const { stalk, coRestrictions } = bandSynthesisCoRestrictions(mra, { blockSize: 2 });
+    const k = kiCoConsistency(coRestrictions, stalk);
+    expect(k.vacuous).toBe(true);
+    expect(k.radius).toBe(0);
+    expect(k.coExtends).toBe(false);
+  });
+
+  test("an empty signal ⇒ empty coface stalk ⇒ a VACUOUS 0", () => {
+    const { stalk, coRestrictions } = bandSynthesisCoRestrictions({ details: [], smooth: [] });
+    expect(stalk.cofaces).toEqual([]);
+    const k = kiCoConsistency(coRestrictions, stalk);
+    expect(k.vacuous).toBe(true);
+    expect(k.radius).toBe(0);
   });
 });

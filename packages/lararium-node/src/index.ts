@@ -25,17 +25,22 @@ export type {
 } from "./sensorium.js";
 
 // The LI (sheaf) CONSISTENCY-RADIUS — the Robinson li-disagreement signal over content/structure/form
-// (0 ⟺ they glue; positive ⟺ a localizable obstruction), with the ki co-consistency honestly stubbed.
+// (0 ⟺ they glue; positive ⟺ a localizable obstruction), PAIRED with the KI (cosheaf) co-consistency —
+// the PUSHFORWARD mirror over bands/coupling (0 ⟺ the flows co-extend; positive ⟺ a localizable
+// co-obstruction), the sheaf/cosheaf dual pair now complete.
 export {
   cosineDistance, jaccardDistance, treeEditDistance, treeEditExact,
   deckardDistance, characteristicVector, pqGramDistance, pqGramProfile,
   chebyshevStalkMetric, consistencyRadius,
-  stratificationRestrictions, assertSheafPlanes, kiCoConsistency, KI_CO_CONSISTENCY_STUB,
+  stratificationRestrictions, assertSheafPlanes,
+  energyCofaceMetric, kiCoConsistency, bandSynthesisCoRestrictions,
 } from "./sensorium-consistency.js";
 export type {
   LabeledTree, TreeDistanceMethod, TreeDistanceOptions,
   ComparisonStalk, PlaneRestriction, PairObstruction, ConsistencyRadius,
-  ConsistencyOptions, StalkMetric, KiCoConsistency,
+  ConsistencyOptions, StalkMetric,
+  CofaceStalk, PlaneCoRestriction, CoPairObstruction, KiCoConsistency,
+  CofaceMetric, KiCoConsistencyOptions, ModwtMra, BandSynthesisOptions,
 } from "./sensorium-consistency.js";
 
 // The COHOMOLOGICAL GATE — the SECOND invariant beyond the H⁰ consistency-radius. H¹ = ker(δ¹)/im(δ⁰)
