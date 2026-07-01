@@ -138,6 +138,37 @@ export function corpusFormConstructiconPath(palaceDir: string): string {
   return join(palaceDir, "form-constructicon.ndjson");
 }
 
+/** The resolved spawn inputs a batch sidecar needs (the shared shape the corpus legs destructure). */
+type BatchSidecarSpawn = { python: string | null; script: string; submoduleRoot: string; scriptPresent: boolean };
+
+/** The outcome of a batch-sidecar run: streamed JSON lines (last = summary), or a non-run reason. */
+type BatchSidecarRun =
+  | { readonly ok: true; readonly lines: string[] }
+  | { readonly ok: false; readonly reason: "absent" }
+  | { readonly ok: false; readonly reason: "fault"; readonly message: string };
+
+/**
+ * Run a batch corpus sidecar (`execFileSync`) and return the JSON lines it streamed (the LAST is the
+ * authoritative summary, the preceding lines the plane's payload). The ONE membrane the three legs
+ * (structure · bands · form) share: the PYTHONPATH + optional-GPU-compute-cap env, the `1<<30`
+ * maxBuffer, the caller's timeout, and the `startsWith("{")` line filter. Each leg supplies its spawn,
+ * argv, and timeout, and OWNS the parse of the returned lines + its own skip-note wording.
+ */
+function runBatchSidecar(spawn: BatchSidecarSpawn, argv: readonly string[], timeoutMs: number): BatchSidecarRun {
+  const { python, script, submoduleRoot, scriptPresent } = spawn;
+  if (!python || !scriptPresent) return { ok: false, reason: "absent" };
+  try {
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+    const out = execFileSync(python, [script, ...argv], {
+      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: timeoutMs,
+    });
+    const lines = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{"));
+    return { ok: true, lines };
+  } catch (e) {
+    return { ok: false, reason: "fault", message: (e as Error).message };
+  }
+}
+
 /**
  * The FORM leg (S3): run `form_induction.py induce --structure <corpus>/structure` — an OFFLINE
  * BATCH over the accumulated STRUCTURE forest → TreeMiner + PrefixSpan/BIDE + ΔP-association →
@@ -148,27 +179,18 @@ export function corpusFormConstructiconPath(palaceDir: string): string {
  * trees the router filed), and never re-parses.
  */
 function runFormInduction(palaceDir: string): { forms: number; note: string } {
-  const { python, script, submoduleRoot, scriptPresent } = resolveFormInductionSpawn();
-  if (!python || !scriptPresent) return { forms: 0, note: "form-skipped: no sidecar/python" };
-  try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
-    const out = execFileSync(python, [script, "induce", "--structure", corpusStructureDir(palaceDir)], {
-      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
-    });
-    // The sidecar streams NDJSON template lines then a final JSON summary; the LAST JSON line is
-    // authoritative, the preceding lines are the constructicon templates we persist.
-    const lines = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{"));
-    if (lines.length === 0) return { forms: 0, note: "form-skipped: no sidecar output" };
-    const summary = JSON.parse(lines[lines.length - 1] as string) as { forms?: number; note?: string };
-    const formLines = lines.slice(0, -1);
-    if (formLines.length > 0) {
-      try { writeFileSync(corpusFormConstructiconPath(palaceDir), formLines.join("\n") + "\n"); } catch { /* best effort */ }
-    }
-    const forms = Number(summary.forms ?? 0);
-    return { forms, note: summary.note ? `${summary.note}` : `form: ${forms} constructions` };
-  } catch (e) {
-    return { forms: 0, note: `form-skipped: sidecar fault (${(e as Error).message.slice(0, 100)})` };
+  // The sidecar streams NDJSON template lines then a final JSON summary; the LAST JSON line is
+  // authoritative, the preceding lines are the constructicon templates we persist.
+  const r = runBatchSidecar(resolveFormInductionSpawn(), ["induce", "--structure", corpusStructureDir(palaceDir)], 300_000);
+  if (!r.ok) return { forms: 0, note: r.reason === "absent" ? "form-skipped: no sidecar/python" : `form-skipped: sidecar fault (${r.message.slice(0, 100)})` };
+  if (r.lines.length === 0) return { forms: 0, note: "form-skipped: no sidecar output" };
+  const summary = JSON.parse(r.lines[r.lines.length - 1] as string) as { forms?: number; note?: string };
+  const formLines = r.lines.slice(0, -1);
+  if (formLines.length > 0) {
+    try { writeFileSync(corpusFormConstructiconPath(palaceDir), formLines.join("\n") + "\n"); } catch { /* best effort */ }
   }
+  const forms = Number(summary.forms ?? 0);
+  return { forms, note: summary.note ? `${summary.note}` : `form: ${forms} constructions` };
 }
 
 /**
@@ -181,27 +203,18 @@ function runFormInduction(palaceDir: string): { forms: number; note: string } {
  * reads the stored nomic vectors the mine wrote), and never re-embeds.
  */
 function runBandsSidecar(palaceDir: string): { bands: number; note: string } {
-  const { python, script, submoduleRoot, scriptPresent } = resolveBandsSidecarSpawn();
-  if (!python || !scriptPresent) return { bands: 0, note: "bands-skipped: no sidecar/python" };
-  try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
-    const out = execFileSync(python, [script, "analyze", "--palace", palaceDir], {
-      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
-    });
-    // The sidecar streams NDJSON cells then a final JSON summary; the LAST JSON line is
-    // authoritative, the preceding cell lines are the adaptive lar_ffz stamps we persist.
-    const lines = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{"));
-    if (lines.length === 0) return { bands: 0, note: "bands-skipped: no sidecar output" };
-    const summary = JSON.parse(lines[lines.length - 1] as string) as { cells?: number; note?: string };
-    const cellLines = lines.slice(0, -1);
-    if (cellLines.length > 0) {
-      try { writeFileSync(corpusBandsCellsPath(palaceDir), cellLines.join("\n") + "\n"); } catch { /* best effort */ }
-    }
-    const bands = Number(summary.cells ?? 0);
-    return { bands, note: summary.note ? `bands: ${summary.note}` : `bands: ${bands} cells` };
-  } catch (e) {
-    return { bands: 0, note: `bands-skipped: sidecar fault (${(e as Error).message.slice(0, 100)})` };
+  // The sidecar streams NDJSON cells then a final JSON summary; the LAST JSON line is
+  // authoritative, the preceding cell lines are the adaptive lar_ffz stamps we persist.
+  const r = runBatchSidecar(resolveBandsSidecarSpawn(), ["analyze", "--palace", palaceDir], 300_000);
+  if (!r.ok) return { bands: 0, note: r.reason === "absent" ? "bands-skipped: no sidecar/python" : `bands-skipped: sidecar fault (${r.message.slice(0, 100)})` };
+  if (r.lines.length === 0) return { bands: 0, note: "bands-skipped: no sidecar output" };
+  const summary = JSON.parse(r.lines[r.lines.length - 1] as string) as { cells?: number; note?: string };
+  const cellLines = r.lines.slice(0, -1);
+  if (cellLines.length > 0) {
+    try { writeFileSync(corpusBandsCellsPath(palaceDir), cellLines.join("\n") + "\n"); } catch { /* best effort */ }
   }
+  const bands = Number(summary.cells ?? 0);
+  return { bands, note: summary.note ? `bands: ${summary.note}` : `bands: ${bands} cells` };
 }
 
 /**
@@ -212,21 +225,13 @@ function runBandsSidecar(palaceDir: string): { bands: number; note: string } {
  * the content plane unaffected. Returns the structure-vector count + a note fragment.
  */
 function runStructureRouter(sourcePath: string, palaceDir: string): { structures: number; note: string } {
-  const { python, script, submoduleRoot, scriptPresent } = resolveStructureRouterSpawn();
-  if (!python || !scriptPresent) return { structures: 0, note: "structure-skipped: no router/python" };
-  try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
-    const out = execFileSync(python, [script, "ingest", "--path", sourcePath, "--palace", corpusStructureDir(palaceDir)], {
-      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
-    });
-    // The router prints a one-line JSON summary; the last JSON line is authoritative.
-    const lastLine = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{")).pop() ?? "{}";
-    const summary = JSON.parse(lastLine) as { structures?: number; parsed?: number; skipped?: number };
-    const structures = Number(summary.structures ?? 0);
-    return { structures, note: `structure: ${structures} vectors (${summary.skipped ?? 0} skipped)` };
-  } catch (e) {
-    return { structures: 0, note: `structure-skipped: router fault (${(e as Error).message.slice(0, 100)})` };
-  }
+  const r = runBatchSidecar(resolveStructureRouterSpawn(), ["ingest", "--path", sourcePath, "--palace", corpusStructureDir(palaceDir)], 180_000);
+  if (!r.ok) return { structures: 0, note: r.reason === "absent" ? "structure-skipped: no router/python" : `structure-skipped: router fault (${r.message.slice(0, 100)})` };
+  // The router prints a one-line JSON summary; the last JSON line is authoritative.
+  const lastLine = r.lines[r.lines.length - 1] ?? "{}";
+  const summary = JSON.parse(lastLine) as { structures?: number; parsed?: number; skipped?: number };
+  const structures = Number(summary.structures ?? 0);
+  return { structures, note: `structure: ${structures} vectors (${summary.skipped ?? 0} skipped)` };
 }
 
 /**
