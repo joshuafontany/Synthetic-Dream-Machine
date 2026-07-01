@@ -77,3 +77,4 @@ genesis/social-bootstrap.json
 mempalace.yaml
 entities.json
 .mesh-test/
+.swarm-run/

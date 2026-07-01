@@ -1,0 +1,59 @@
+# docker-compose.swarm.yml — the DEPLOYED WHO-plane swarm: different PersonaGroups found +
+# join a SHARED cabal-place across REAL containers, the membership ceremony crossing a FILE
+# channel over a shared VOLUME (file/POST first; the live-WS relay-service is the strangler-
+# fig follow). Each vessel is its own container + its own Keyhive identity.
+#
+#   founder  (LAR_SWARM_ROLE=founder)  founds the place, admits the joiners, writes roster.json
+#   vessel-b (joiner) ─┐  offer contact-card over /swarm/channel → await admit
+#   vessel-c (joiner) ─┘
+#
+# Run:     rm -rf .swarm-run && docker compose -f docker-compose.swarm.yml up -d
+# Witness: cat .swarm-run/roster.json   (→ {"count":2,...}) + founder logs "roster=2/2"
+# Down:    docker compose -f docker-compose.swarm.yml down -v
+#
+# Dev-style (node:24-slim + mounted repo + built dist/node_modules; tsx runs the entrypoint) —
+# no image build; the host builds before `up`.
+
+name: dreamnet-swarm
+
+x-vessel: &vessel
+  image: node:24-slim
+  working_dir: /app
+  volumes:
+    - ".:/app"
+    - "./.swarm-run:/swarm"      # the shared file channel (bind mount → witnessable on the host)
+  networks: [swarm]
+  restart: "no"
+  command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/swarm-node.ts"]
+
+services:
+  founder:
+    <<: *vessel
+    environment:
+      LAR_SWARM_ROLE:   "founder"
+      LAR_SWARM_DIR:    "/swarm"
+      LAR_SWARM_ID:     "founder"
+      LAR_SWARM_SEED:   "f0"
+      LAR_SWARM_EXPECT: "2"
+
+  vessel-b:
+    <<: *vessel
+    environment:
+      LAR_SWARM_ROLE: "joiner"
+      LAR_SWARM_DIR:  "/swarm"
+      LAR_SWARM_ID:   "vessel-B"
+      LAR_SWARM_SEED: "b0"
+    depends_on: [founder]
+
+  vessel-c:
+    <<: *vessel
+    environment:
+      LAR_SWARM_ROLE: "joiner"
+      LAR_SWARM_DIR:  "/swarm"
+      LAR_SWARM_ID:   "vessel-C"
+      LAR_SWARM_SEED: "c0"
+    depends_on: [founder]
+
+networks:
+  swarm:
+    driver: bridge
