@@ -22,6 +22,10 @@ export type {
   QueryCorpusResult, KeepResult, DissolveResult, RunCorpusOptions, RunCorpusResult,
 } from "./corpus-palace.js";
 
+// The stream compose_palace seam — generalize the corpus lifecycle to ANY StreamAdapter's frames.
+export { composeStreamPalace, defaultStreamPlaneSink } from "./stream-palace.js";
+export type { ComposeStreamOptions } from "./stream-palace.js";
+
 export { LarDiskProjector } from "./disk-projector.js";
 export { DaemonAuthGate } from "./daemon-auth-gate.js";
 export { openNodeVessel } from "./open-node-vessel.js";
