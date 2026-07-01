@@ -120,4 +120,5 @@ export * from "./self-coupling.js";
 export * from "./mesh-coupling.js";
 export * from "./who-sensory-seam.js";
 export * from "./sensory-seam.js";
+export * from "./gaussian-cmi.js";
 export * from "./membership-channel.js";
