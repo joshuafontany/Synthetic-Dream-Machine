@@ -1,6 +1,7 @@
 export * from "./mempalace-client.js";
 export * from "./mempalace-pool.js";
 export * from "./spawn-resolve.js";
+export * from "./compute-cap.js";
 export * from "./palace-path.js";
 export * from "./telemetry-writeback.js";
 export * from "./ffz-orchestrator.js";

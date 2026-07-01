@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   runCorpus, openCorpus, listCorpora, listOrphans, reapOrphans,
-  dissolveCorpus, keepCorpus, corpusStructureDir, corpusBandsCellsPath,
+  dissolveCorpus, keepCorpus, corpusStructureDir, corpusBandsCellsPath, corpusFormConstructiconPath,
   type CorpusIngest, type CorpusSearch,
 } from "../src/corpus-palace.js";
 import { larCorpusDir, corpusInstanceDir } from "../src/vessel-paths.js";
@@ -19,7 +19,7 @@ let savedRoot: string | undefined;
 let src: string;
 
 /** A no-python ingest stub — the lifecycle tests never touch the sidecar. */
-const fakeIngest: CorpusIngest = () => ({ drawers: 3, structures: 2, bands: 5, note: "fake-ingest" });
+const fakeIngest: CorpusIngest = () => ({ drawers: 3, structures: 2, bands: 5, forms: 4, note: "fake-ingest" });
 
 beforeEach(() => {
   savedRoot = process.env["LAR_ROOT"];
@@ -41,6 +41,7 @@ describe("runCorpus — the `--rm` ephemeral default", () => {
     expect(res.drawers).toBe(3);
     expect(res.structures).toBe(2); // the S2 structure-plane count threads through
     expect(res.bands).toBe(5); // the S1 bands-plane cell count threads through
+    expect(res.forms).toBe(4); // the S3 form-plane construction count threads through
     expect(existsSync(corpusInstanceDir(res.id))).toBe(false);
     expect(listCorpora()).toHaveLength(0);
   });
@@ -127,7 +128,7 @@ describe("orphan reaping", () => {
 describe("the S2 structure plane — the parse-router seam", () => {
   test("a router-less ingest GRACEFULLY structure-skips (content plane unaffected)", async () => {
     // a seam that mimics a host with no python/router: drawers filed, 0 structures, skip note.
-    const skipIngest: CorpusIngest = () => ({ drawers: 1, structures: 0, bands: 0, note: "mined → 1 drawers · structure-skipped: no router/python · bands-skipped: no sidecar/python" });
+    const skipIngest: CorpusIngest = () => ({ drawers: 1, structures: 0, bands: 0, forms: 0, note: "mined → 1 drawers · structure-skipped: no router/python · bands-skipped: no sidecar/python" });
     const res = await runCorpus({ sourcePath: src, ingest: skipIngest });
     expect(res.structures).toBe(0);
     expect(res.bands).toBe(0);
@@ -143,7 +144,7 @@ describe("the S2 structure plane — the parse-router seam", () => {
       const sdir = corpusStructureDir(palaceDir);
       mkdirSync(sdir, { recursive: true });
       writeFileSync(join(sdir, "chroma.sqlite3"), "x");
-      return { drawers: 0, structures: 1, bands: 0, note: "structure: 1 vectors (0 skipped)" };
+      return { drawers: 0, structures: 1, bands: 0, forms: 0, note: "structure: 1 vectors (0 skipped)" };
     };
     const { id, dir } = openCorpus({ sourcePath: src, ingest: writingIngest });
     expect(existsSync(corpusStructureDir(dir))).toBe(true);
@@ -166,7 +167,7 @@ describe("the S2 structure plane — the parse-router seam", () => {
 
 describe("the S1 bands plane — the multi-scale FFZ seam", () => {
   test("a sidecar-less ingest GRACEFULLY bands-skips (content/structure planes unaffected)", async () => {
-    const skipIngest: CorpusIngest = () => ({ drawers: 2, structures: 1, bands: 0, note: "mined → 2 drawers · structure: 1 vectors · bands-skipped: no sidecar/python" });
+    const skipIngest: CorpusIngest = () => ({ drawers: 2, structures: 1, bands: 0, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands-skipped: no sidecar/python" });
     const res = await runCorpus({ sourcePath: src, ingest: skipIngest });
     expect(res.bands).toBe(0);
     expect(res.drawers).toBe(2);
@@ -179,12 +180,38 @@ describe("the S1 bands plane — the multi-scale FFZ seam", () => {
     // a seam that writes the bands-cells NDJSON (proving the path nests under the corpus dir)
     const bandsIngest: CorpusIngest = ({ palaceDir }) => {
       writeFileSync(corpusBandsCellsPath(palaceDir), JSON.stringify({ lar_ffz: "corpus/0.0.0.0.0", register: "Canon" }) + "\n");
-      return { drawers: 4, structures: 3, bands: 12, note: "bands: 2 cuts · 1 Canon / 1 Provisional" };
+      return { drawers: 4, structures: 3, bands: 12, forms: 0, note: "bands: 2 cuts · 1 Canon / 1 Provisional" };
     };
     const { id, dir, manifest } = openCorpus({ sourcePath: src, ingest: bandsIngest });
     expect(manifest.bands).toBe(12);
     expect(existsSync(corpusBandsCellsPath(dir))).toBe(true);
     dissolveCorpus(id);
     expect(existsSync(corpusBandsCellsPath(dir))).toBe(false); // swept with the instance dir
+  });
+});
+
+describe("the S3 form plane — the blind-induction seam", () => {
+  test("a sidecar-less ingest GRACEFULLY form-skips (content/structure/bands planes unaffected)", async () => {
+    const skipIngest: CorpusIngest = () => ({ drawers: 2, structures: 1, bands: 3, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands: 3 cells · form-skipped: no sidecar/python" });
+    const res = await runCorpus({ sourcePath: src, ingest: skipIngest });
+    expect(res.forms).toBe(0);
+    expect(res.drawers).toBe(2);
+    expect(res.structures).toBe(1);
+    expect(res.bands).toBe(3);
+    expect(res.note).toContain("form-skipped");
+    expect(res.dissolved).toBe(true);
+  });
+
+  test("the form leg files the constructicon the manifest + result thread through", () => {
+    // a seam that writes the constructicon NDJSON (proving the path nests under the corpus dir)
+    const formIngest: CorpusIngest = ({ palaceDir }) => {
+      writeFileSync(corpusFormConstructiconPath(palaceDir), JSON.stringify({ struct_hash: "abc", origin: "tree", seq: ["ahu_block", "sigil_name"], support: 5 }) + "\n");
+      return { drawers: 6, structures: 5, bands: 4, forms: 7, note: "form: 7 constructions from 5 structures" };
+    };
+    const { id, dir, manifest } = openCorpus({ sourcePath: src, ingest: formIngest });
+    expect(manifest.forms).toBe(7);
+    expect(existsSync(corpusFormConstructiconPath(dir))).toBe(true);
+    dissolveCorpus(id);
+    expect(existsSync(corpusFormConstructiconPath(dir))).toBe(false); // swept with the instance dir
   });
 });

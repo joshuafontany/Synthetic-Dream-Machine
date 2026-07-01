@@ -21,7 +21,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn, resolveBandsSidecarSpawn } from "@lararium/mempalace";
+import { resolveMempalaceSpawn, MempalaceClient, resolveStructureRouterSpawn, resolveBandsSidecarSpawn, resolveComputeCapEnv, resolveFormInductionSpawn } from "@lararium/mempalace";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { larCorpusDir, corpusInstanceDir } from "./vessel-paths.js";
 
@@ -51,6 +51,11 @@ export interface CorpusManifest {
    *  register from the resampling gate. 0 ⇒ bands-skipped (no sidecar / R / too few vectors) —
    *  the content + structure planes still stand. */
   readonly bands?: number;
+  /** form-plane constructions the induction sidecar surfaced (S3): the corpus's OWN grammar,
+   *  induced BLIND over the accumulated structures (TreeMiner + PrefixSpan/BIDE + ΔP, MDL-stopped)
+   *  and keyed by structural hash. 0 ⇒ form-skipped (no sidecar / no structures / nothing that pays
+   *  its description-length) — the content + structure + bands planes still stand. */
+  readonly forms?: number;
   /** an ingest note (e.g. "ingest-skipped: no python sidecar"). */
   readonly note?: string;
 }
@@ -112,7 +117,7 @@ export function listCorpora(): CorpusManifest[] {
  *  (S2) push each file through the structure parse-router into a structure plane under the dir,
  *  and (S1) run the multi-scale FFZ bands sidecar over the corpus cohesion signal → adaptive
  *  lar_ffz cells. */
-export type CorpusIngest = (args: { sourcePath: string; palaceDir: string }) => { drawers: number; structures: number; bands: number; note: string };
+export type CorpusIngest = (args: { sourcePath: string; palaceDir: string }) => { drawers: number; structures: number; bands: number; forms: number; note: string };
 
 /** The structure plane lives in a chroma sub-palace under the corpus instance dir — so a
  *  `dissolve` (rmSync of the instance dir) sweeps it too; no separate teardown registration. */
@@ -124,6 +129,46 @@ export function corpusStructureDir(palaceDir: string): string {
  *  on dissolve with everything else). One line per content chunk: {id?, lar_ffz, register, cells}. */
 export function corpusBandsCellsPath(palaceDir: string): string {
   return join(palaceDir, "bands-cells.ndjson");
+}
+
+/** The FORM plane's constructicon NDJSON — the corpus's OWN induced grammar, written under the
+ *  corpus instance dir (swept on dissolve with everything else). One line per surfaced template:
+ *  {struct_hash, origin, seq, support, ...} (form_induction.py #the-form-induction, S3). */
+export function corpusFormConstructiconPath(palaceDir: string): string {
+  return join(palaceDir, "form-constructicon.ndjson");
+}
+
+/**
+ * The FORM leg (S3): run `form_induction.py induce --structure <corpus>/structure` — an OFFLINE
+ * BATCH over the accumulated STRUCTURE forest → TreeMiner + PrefixSpan/BIDE + ΔP-association →
+ * MDL-selected constructicon, keyed by structural hash (the corpus's OWN grammar, induced blind,
+ * the LLM naming LAST). GRACEFUL: no sidecar / no python / no structure store / too few
+ * structures ⇒ `forms:0` (form-skipped), the content · structure · bands planes UNAFFECTED.
+ * Returns the constructicon size + a note fragment. Runs AFTER the structure router (it reads the
+ * trees the router filed), and never re-parses.
+ */
+function runFormInduction(palaceDir: string): { forms: number; note: string } {
+  const { python, script, submoduleRoot, scriptPresent } = resolveFormInductionSpawn();
+  if (!python || !scriptPresent) return { forms: 0, note: "form-skipped: no sidecar/python" };
+  try {
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+    const out = execFileSync(python, [script, "induce", "--structure", corpusStructureDir(palaceDir)], {
+      cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
+    });
+    // The sidecar streams NDJSON template lines then a final JSON summary; the LAST JSON line is
+    // authoritative, the preceding lines are the constructicon templates we persist.
+    const lines = out.trim().split(/\r?\n/).filter((l) => l.trim().startsWith("{"));
+    if (lines.length === 0) return { forms: 0, note: "form-skipped: no sidecar output" };
+    const summary = JSON.parse(lines[lines.length - 1] as string) as { forms?: number; note?: string };
+    const formLines = lines.slice(0, -1);
+    if (formLines.length > 0) {
+      try { writeFileSync(corpusFormConstructiconPath(palaceDir), formLines.join("\n") + "\n"); } catch { /* best effort */ }
+    }
+    const forms = Number(summary.forms ?? 0);
+    return { forms, note: summary.note ? `${summary.note}` : `form: ${forms} constructions` };
+  } catch (e) {
+    return { forms: 0, note: `form-skipped: sidecar fault (${(e as Error).message.slice(0, 100)})` };
+  }
 }
 
 /**
@@ -139,7 +184,7 @@ function runBandsSidecar(palaceDir: string): { bands: number; note: string } {
   const { python, script, submoduleRoot, scriptPresent } = resolveBandsSidecarSpawn();
   if (!python || !scriptPresent) return { bands: 0, note: "bands-skipped: no sidecar/python" };
   try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
     const out = execFileSync(python, [script, "analyze", "--palace", palaceDir], {
       cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
     });
@@ -170,7 +215,7 @@ function runStructureRouter(sourcePath: string, palaceDir: string): { structures
   const { python, script, submoduleRoot, scriptPresent } = resolveStructureRouterSpawn();
   if (!python || !scriptPresent) return { structures: 0, note: "structure-skipped: no router/python" };
   try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
     const out = execFileSync(python, [script, "ingest", "--path", sourcePath, "--palace", corpusStructureDir(palaceDir)], {
       cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
     });
@@ -193,22 +238,30 @@ function runStructureRouter(sourcePath: string, palaceDir: string): { structures
  */
 export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, palaceDir }) => {
   const { python, sidecarPresent } = resolveMempalaceSpawn();
-  if (!python || !sidecarPresent) return { drawers: 0, structures: 0, bands: 0, note: "ingest-skipped: no python sidecar (lares wake --install)" };
-  if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, bands: 0, note: `ingest-skipped: source absent (${sourcePath})` };
+  if (!python || !sidecarPresent) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: "ingest-skipped: no python sidecar (lares wake --install)" };
+  if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: `ingest-skipped: source absent (${sourcePath})` };
   // STRUCTURE plane (S2) — independent of the content mine; runs even if the mine faults.
   const struct = runStructureRouter(sourcePath, palaceDir);
+  // FORM plane (S3) — the offline BATCH induction over the accumulated structures the router just
+  // filed; independent of the content mine, so it stands even if the mine faults. `structures:0`
+  // (no trees to mine) ⇒ form gracefully skips.
+  const form = struct.structures > 0 ? runFormInduction(palaceDir) : { forms: 0, note: "form-skipped: no structures" };
   try {
     const exe = process.platform === "win32" ? "mempalace.exe" : "mempalace";
+    // The OPTIONAL GPU compute cap: on a card, this hands the content embedder the CUDA lib path
+    // + `MEMPALACE_EMBEDDING_DEVICE=auto` (cuda-if-present); on the QA box it adds only the device
+    // hint and the embedder falls to CPU. Composed when present, graceful when absent.
+    const capEnv = { ...process.env, ...resolveComputeCapEnv(python) };
     const out = execFileSync(exe, ["--palace", palaceDir, "mine", sourcePath, "--mode", "projects"], {
-      maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
+      env: capEnv, maxBuffer: 1 << 30, encoding: "utf8", timeout: 180_000,
     });
     const drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
     // BANDS plane (S1) — runs AFTER the content mine (it reads the stored vectors); a mine that
     // filed nothing means no cohesion signal → bands gracefully skip.
     const bands = drawers > 0 ? runBandsSidecar(palaceDir) : { bands: 0, note: "bands-skipped: no content drawers" };
-    return { drawers, structures: struct.structures, bands: bands.bands, note: `mined ${sourcePath} → ${drawers} drawers · ${struct.note} · ${bands.note}` };
+    return { drawers, structures: struct.structures, bands: bands.bands, forms: form.forms, note: `mined ${sourcePath} → ${drawers} drawers · ${struct.note} · ${bands.note} · ${form.note}` };
   } catch (e) {
-    return { drawers: 0, structures: struct.structures, bands: 0, note: `ingest-skipped: mine fault (${(e as Error).message.slice(0, 120)}) · ${struct.note}` };
+    return { drawers: 0, structures: struct.structures, bands: 0, forms: form.forms, note: `ingest-skipped: mine fault (${(e as Error).message.slice(0, 120)}) · ${struct.note} · ${form.note}` };
   }
 };
 
@@ -235,10 +288,10 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
   const name = opts.name ?? (opts.sourcePath.replace(/[/\\]+$/, "").split(/[/\\]/).pop() || id);
   const ephemeral = opts.ephemeral ?? false;
   const ingest = opts.ingest ?? defaultCorpusIngest;
-  const { drawers, structures, bands, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
+  const { drawers, structures, bands, forms, note } = ingest({ sourcePath: opts.sourcePath, palaceDir: dir });
   const manifest: CorpusManifest = {
     id, name, sourcePath: opts.sourcePath, createdAt: new Date().toISOString(),
-    ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, bands, note,
+    ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, bands, forms, note,
   };
   writeManifest(dir, manifest);
   return { id, dir, manifest };
@@ -351,6 +404,8 @@ export interface RunCorpusResult {
   readonly structures: number;
   /** bands-plane adaptive lar_ffz cells the multi-scale FFZ sidecar filed (S1); 0 ⇒ bands-skipped. */
   readonly bands: number;
+  /** form-plane constructions the induction sidecar surfaced (S3); 0 ⇒ form-skipped. */
+  readonly forms: number;
   readonly note?: string;
   readonly analysis?: QueryCorpusResult;
   /** true ⇒ dissolved on exit (the --rm default); false ⇒ kept (landed durable). */
@@ -384,9 +439,9 @@ export async function runCorpus(opts: RunCorpusOptions): Promise<RunCorpusResult
     if (opts.keep) {
       keepCorpus(id);
       dissolved = false;
-      return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
+      return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, forms: manifest.forms ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
     }
-    return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: true };
+    return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, forms: manifest.forms ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: true };
   } finally {
     if (!opts.keep) { dissolveCorpus(id); dissolved = true; }
     process.removeListener("exit", guard);

@@ -30,7 +30,8 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "`run` is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit (success OR error). `open` " +
       "leaves a corpus live to `query` / `keep` / `dissolve`. Every scratch is leak-proofed: " +
       "`dissolve --orphans` reaps anything an interrupted run left behind. (S0 stands the content " +
-      "stub; S2 wires the structure parse-router → content-free shape vectors; bands/form land in S1/S3.)",
+      "stub; S1 the multi-scale-FFZ bands; S2 the structure parse-router → content-free shape vectors; " +
+      "S3 the FORM induction → the corpus's OWN grammar, mined blind and MDL-stopped. Four planes stand.)",
     examples: [
       "lares corpus run ./notes -- what decisions were made   # open, analyze, dissolve",
       "lares corpus run ./notes --keep                        # ... but land it durable",
