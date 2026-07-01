@@ -117,4 +117,5 @@ export * from "./capture-reading.js";
 export * from "./transfer-entropy.js";
 export * from "./partition-monitor.js";
 export * from "./self-coupling.js";
+export * from "./mesh-coupling.js";
 export * from "./membership-channel.js";
