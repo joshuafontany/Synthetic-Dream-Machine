@@ -144,13 +144,19 @@ def test_stability_gate_locks_stable_holds_noise():
         assert any(gate["register_of_cut"][int(c)] == "Canon" for c in near)
         assert max(gate["cut_support"][int(c)] for c in near) >= 0.7
 
-    # a pure-noise fixture — no true structure → the register HOLDS Provisional (lower
-    # consensus, at least one un-witnessed cut) — the gate refuses to canonize noise.
+    # a pure-noise fixture — no true structure → the gate refuses to canonize noise. Two
+    # engines, two shapes of refusal, BOTH honored: the ruptures fallback always returns
+    # cuts, so the resampling register HOLDS at least one Provisional (a low-consensus,
+    # un-witnessed cut); the R `ecp::e.divisive` permutation test refuses the cut at source,
+    # so `order` comes back EMPTY (a stronger refusal — nothing even reaches the register).
     noise = np.random.default_rng(11).normal(0, 1, (90, 3))
     norder = bs.changepoint_tree(noise, max_cuts=8, min_size=2)["order"]
     ngate = bs.stability_gate(noise, norder, n_boot=50, seed=7)
     assert ngate["consensus"] < gate["consensus"], "noise must witness weaker than clean blocks"
-    assert any(r == "Provisional" for r in ngate["register_of_cut"].values())
+    reg = ngate["register_of_cut"]
+    assert (not reg) or any(r == "Provisional" for r in reg.values()), (
+        "noise must not canonize: either no significant cut (ecp) or a Provisional one (ruptures)"
+    )
 
 
 def test_jackknife_gate_runs_index_shift_aware():
@@ -196,6 +202,46 @@ def test_cohesion_signal_drift():
     assert sig[30, 0] > 0.5 and sig[60, 0] > 0.5
 
 
+# ── COUPLE — the cross-stream transfer-entropy lead-lag plane (R sidecar coupling.R) ────────
+
+
+def _lead_lag_fixture(seed=1, n=600, noise=0.2):
+    """Signal A → B: B is a one-step-lagged copy of A (+ noise). A is a KNOWN lead of B, so a
+    directional measure MUST score A→B ≫ B→A. Returns an N×2 matrix (cols = [A, B])."""
+    rng = np.random.default_rng(seed)
+    A = rng.normal(0, 1, n)
+    B = np.concatenate([[0.0], A[:-1]]) + rng.normal(0, noise, n)
+    return np.column_stack([A, B])
+
+
+def test_couple_streams_directional_lead_lag():
+    """`RTransferEntropy::calc_ete` over a KNOWN A-leads-B fixture scores A→B strictly above
+    B→A and flags the A→B edge significant (the who-leads-whom read). When R is absent the
+    verb degrades to a graceful `coupling-skipped` note (TE is the R plane, no python fallback)."""
+    M = _lead_lag_fixture()
+    out = bs.couple_streams(M, nboot=80, shuffles=50, seed=1, names=["A", "B"])
+    if not bs._r_available():
+        assert out["edges"] == 0 and out["note"].startswith("coupling-skipped")
+        return
+    assert out["engine"] == "RTransferEntropy-calc_ete"
+    ete = out["ete"]
+    # A→B (row 0, col 1) ≫ B→A (row 1, col 0): the lead direction dominates.
+    assert ete[0][1] > ete[1][0], f"A must lead B, got ete={ete}"
+    assert out["lead_lag"][0][1] > 0 and out["lead_lag"][1][0] < 0
+    # the significant edge list carries A→B (p ≤ alpha), not the reverse.
+    froms = {(e["from"], e["to"]) for e in out["edges"]}
+    assert ("A", "B") in froms, f"A→B should be a significant edge, edges={out['edges']}"
+    assert ("B", "A") not in froms, f"B→A must NOT be significant, edges={out['edges']}"
+
+
+def test_couple_streams_graceful_on_single_signal():
+    """A single-signal matrix can carry no coupling — the verb returns a graceful skip note,
+    never a fault (mirrors the bands `analyze` no-chroma degrade)."""
+    out = bs.couple_streams(np.random.default_rng(0).normal(0, 1, (100, 1)))
+    assert out["edges"] == 0
+    assert out["note"].startswith("coupling-skipped")
+
+
 # ── the CLI faces ───────────────────────────────────────────────────────────────────────────
 
 
@@ -239,6 +285,22 @@ def test_cli_analyze_signal_emits_cells():
     cells = [json.loads(l) for l in out_lines[:-1]]
     assert len(cells) == 90
     assert all("lar_ffz" in c and "register" in c for c in cells)
+
+
+def test_cli_couple_stdin():
+    """`couple --signal -` runs the transfer-entropy plane over an NDJSON N-signal matrix and
+    emits one JSON verdict. R present ⇒ the A→B edge leads; R absent ⇒ a graceful skip note."""
+    M = _lead_lag_fixture(n=400)
+    lines = "\n".join(json.dumps(row.tolist()) for row in M)
+    r = _run_cli(["couple", "--signal", "-", "--nboot", "40", "--shuffles", "40",
+                  "--names", "A,B"], stdin=lines)
+    assert r.returncode == 0, r.stderr
+    verdict = json.loads(r.stdout.strip().splitlines()[-1])
+    if not bs._r_available():
+        assert verdict["note"].startswith("coupling-skipped")
+        return
+    assert verdict["engine"] == "RTransferEntropy-calc_ete"
+    assert verdict["ete"][0][1] > verdict["ete"][1][0]
 
 
 def test_r_availability_flag():

@@ -395,6 +395,110 @@ def _variance_split(M: np.ndarray, max_cuts: int, min_size: int) -> list[int]:
     return order
 
 
+# ── COUPLE — RTransferEntropy::calc_ete (R sidecar) → the cross-stream lead-lag plane ─────
+
+
+def _couple_ete_R(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int = 100,
+                  nboot: int = 100, seed: int = 1, names: list[str] | None = None,
+                  q: float = 0.1, quantiles: tuple[int, int] = (5, 95)) -> dict | None:
+    """Invoke the thin R sidecar (coupling.R) → `RTransferEntropy::calc_ete` over the N-signal
+    matrix (rows=time, cols=signals) → the pairwise DIRECTIONAL effective-transfer-entropy
+    matrix (ete[i][j] = flow i→j) + a source-permutation bootstrap p-value matrix. Returns the
+    parsed verdict dict, or None when R / the sidecar / RTransferEntropy is unavailable (⇒ the
+    caller degrades to a graceful skip — coupling has NO python fallback, TE is the R plane).
+    drawer_io-style: one NDJSON request on stdin, one NDJSON response on stdout."""
+    if not _r_available():
+        return None
+    r_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coupling.R")
+    if not os.path.exists(r_script):
+        return None
+    M = np.asarray(matrix, dtype=float)
+    if M.ndim != 2 or M.shape[1] < 2 or M.shape[0] < 8:
+        return None
+    req = json.dumps({
+        "op": "couple",
+        "matrix": M.tolist(),
+        "lx": int(lx), "ly": int(ly),
+        "shuffles": int(shuffles), "nboot": int(nboot), "seed": int(seed),
+        "q": float(q), "quantiles": list(quantiles),
+        "names": list(names) if names is not None else [f"s{i}" for i in range(M.shape[1])],
+    })
+    try:
+        proc = subprocess.run(
+            ["Rscript", "--vanilla", r_script],
+            input=req, capture_output=True, text=True, timeout=600,
+        )
+        if proc.returncode != 0:
+            return None
+        line = [l for l in proc.stdout.splitlines() if l.strip().startswith("{")]
+        if not line:
+            return None
+        resp = json.loads(line[-1])
+        return resp if resp.get("ok") else None
+    except Exception:  # noqa: BLE001 — any R fault ⇒ graceful skip
+        return None
+
+
+def couple_streams(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int = 100,
+                   nboot: int = 100, seed: int = 1, names: list[str] | None = None,
+                   alpha: float = 0.05) -> dict:
+    """The cross-stream COUPLING plane (corpus.md #the-bands, the sensorium's who-leads-whom).
+
+    `RTransferEntropy::calc_ete` over the N-signal matrix → the directional effective-transfer-
+    entropy matrix + bootstrap p-values (the R sidecar coupling.R). On top of the raw matrices
+    this adds the READ the coordinator wants: per ORDERED pair a NET flow (ete[i→j] − ete[j→i],
+    the lead-lag) and a SIGNIFICANT-edge list (p ≤ alpha). Rscript never DECIDES — it computes
+    the ete/p matrices; the leader read is a pure arithmetic projection here. GRACEFUL: R absent
+    / RTransferEntropy absent ⇒ {"note":"coupling-skipped: …","edges":0} (never fatal — TE is
+    the R plane with no python fallback, exactly like `analyze`'s no-chroma degrade)."""
+    M = np.asarray(matrix, dtype=float)
+    if M.ndim == 1:
+        M = M.reshape(-1, 1)
+    if M.shape[1] < 2:
+        return {"note": "coupling-skipped: need ≥2 signals", "edges": 0, "r_available": _r_available()}
+    if M.shape[0] < 8:
+        return {"note": "coupling-skipped: too few samples (<8)", "edges": 0, "r_available": _r_available()}
+    names = list(names) if names is not None else [f"s{i}" for i in range(M.shape[1])]
+    res = _couple_ete_R(M, lx=lx, ly=ly, shuffles=shuffles, nboot=nboot, seed=seed, names=names)
+    if res is None:
+        why = "R absent" if not _r_available() else "RTransferEntropy absent / a fault"
+        return {"note": f"coupling-skipped: {why}", "edges": 0, "r_available": _r_available()}
+    K = int(res["n_signals"])
+    ete = res["ete"]
+    pval = res["pval"]
+    # Net lead-lag + the significant directed edges (p ≤ alpha) — the who-leads-whom read.
+    lead_lag = [[0.0] * K for _ in range(K)]
+    edges = []
+    for i in range(K):
+        for j in range(K):
+            if i == j:
+                continue
+            eij = float(ete[i][j]) if ete[i][j] is not None else 0.0
+            eji = float(ete[j][i]) if ete[j][i] is not None else 0.0
+            lead_lag[i][j] = eij - eji
+            p = pval[i][j]
+            if p is not None and float(p) <= alpha and eij > 0:
+                edges.append({"from": names[i], "to": names[j], "ete": eij,
+                              "p": float(p), "net": eij - eji})
+    edges.sort(key=lambda e: (-e["ete"], e["p"]))
+    return {
+        "engine": res["engine"],
+        "n_signals": K,
+        "names": names,
+        "ete": ete,
+        "te": res.get("te"),
+        "pval": pval,
+        "lead_lag": lead_lag,
+        "edges": edges,
+        "alpha": alpha,
+        "nboot": int(res.get("nboot", nboot)),
+        "r_available": True,
+    }
+
+
+# ── TREE — ecp::e.divisive (R sidecar) → nested changepoint tree; ruptures fallback (cont.) ─
+
+
 def changepoint_tree(matrix: np.ndarray, max_cuts: int, min_size: int = 2,
                      sig_lvl: float = 0.05) -> dict:
     """The multivariate nested changepoint tree (coarse cuts parent fine cuts). Tries the R
@@ -761,6 +865,18 @@ def cmd_analyze(args) -> None:
     sys.stdout.write(json.dumps(summary) + "\n")
 
 
+def cmd_couple(args) -> None:
+    """Run the cross-stream COUPLING plane over an N-signal matrix (NDJSON, rows=time,
+    cols=signals) → one JSON verdict on stdout: the directional ete/p matrices + the
+    who-leads-whom edge list. The R-plane VERIFY face (RTransferEntropy::calc_ete); a
+    graceful `coupling-skipped` note when R is absent (TE has no python fallback)."""
+    M = _load_signal(args.signal)
+    names = args.names.split(",") if args.names else None
+    out = couple_streams(M, lx=args.lx, ly=args.ly, shuffles=args.shuffles,
+                         nboot=args.nboot, seed=args.seed, names=names, alpha=args.alpha)
+    sys.stdout.write(json.dumps(out) + "\n")
+
+
 def cmd_selftest(args) -> None:
     """A synthetic-signal self-check (no chroma, no fixture file): a fast+slow signal → the
     SPINE separates the scales; a clean vs noisy fixture → the GATE locks vs holds."""
@@ -798,6 +914,17 @@ def main() -> None:
     a.add_argument("--boot", type=int, default=40)
     a.add_argument("--gate", default="bootstrap", choices=["bootstrap", "jackknife"])
     a.set_defaults(fn=cmd_analyze)
+
+    c = sub.add_parser("couple", help="N-signal matrix (NDJSON) → directional transfer-entropy lead-lag + p-values")
+    c.add_argument("--signal", required=True, help="NDJSON N-signal matrix (rows=time, cols=signals), or - for stdin")
+    c.add_argument("--lx", type=int, default=1, help="source (x) Markov order")
+    c.add_argument("--ly", type=int, default=1, help="target (y) Markov order")
+    c.add_argument("--shuffles", type=int, default=100, help="calc_ete bias-correction shuffles")
+    c.add_argument("--nboot", type=int, default=100, help="source-permutation p-value replicates")
+    c.add_argument("--seed", type=int, default=1)
+    c.add_argument("--alpha", type=float, default=0.05, help="significance gate for the edge list")
+    c.add_argument("--names", default="", help="comma-separated signal names (else s0,s1,…)")
+    c.set_defaults(fn=cmd_couple)
 
     s = sub.add_parser("selftest", help="synthetic multi-scale self-check (no chroma)")
     s.set_defaults(fn=cmd_selftest)
