@@ -91,6 +91,7 @@ export { makeAstPalace } from "./astpalace.js";
 export type { AstPalace, AstEntry, AstProvenance, HolderSpawn } from "./astpalace.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
+export { FileMembershipChannel } from "./file-membership-channel.js";
 export { makeFormPalace } from "./formpalace.js";
 export type {
   FormPalace, FormPalaceOptions, FormHolderSpawn, FormMetadata, FormStoreResult,
