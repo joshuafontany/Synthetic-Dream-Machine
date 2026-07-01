@@ -22,6 +22,21 @@ export type {
   CapDecl, SensoriumChild, SensoriumCoupling, SensoriumBands, SensoriumManifest, BuildSensoriumOptions,
 } from "./sensorium.js";
 
+// The memetic-wikitext SENSORIUM — the concrete neither-top, co-located-peers instance: the reader
+// (island-scan → standoff strata + skeletal tier + association graph, TWO axes span×channel), the
+// fractal coupler (stratum red↔black ≅ corpus formal↔informal through the mesh keel's coupleMesh), and
+// the `#has {formal, informal}` compose (coupling.children, neither top). LI (理 pattern) ⊥ KI (氣 flow).
+export {
+  bandForSpanLength, SPAN_BAND_MAX, sourceCidOf, stratify,
+  SIGIL_INJECTION, sigilInjectionQuery,
+  windowDensities, coupleStreams, channelSignals, readKiStratum, corpusSignals, readKiCorpus,
+  readLi, readKi, defaultSensoriumBands, buildMemeticWikitextSensorium, buildPeerSensorium,
+} from "./memetic-wikitext-sensorium.js";
+export type {
+  ChannelTag, MuOp, Span, Stratum, SkeletalAnchor, AssociationEdge, Stratification,
+  SigilInjection, ComposeMemeticWikitextOptions,
+} from "./memetic-wikitext-sensorium.js";
+
 // The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
 export { palaceOrgans, setupPalaceOrgans, organHealthy, materializeMemorySensorium, materializeMeshSensorium } from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";

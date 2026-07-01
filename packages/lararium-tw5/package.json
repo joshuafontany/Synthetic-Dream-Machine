@@ -20,6 +20,10 @@
       "import": "./dist/form-layer/index.js",
       "types": "./dist/form-layer/index.d.ts"
     },
+    "./meme-ast": {
+      "import": "./dist/meme-ast/index.js",
+      "types": "./dist/meme-ast/index.d.ts"
+    },
     "./tw5-worker-script": {
       "import": "./dist/tw5-worker-script.js",
       "types": "./dist/tw5-worker-script.d.ts"
