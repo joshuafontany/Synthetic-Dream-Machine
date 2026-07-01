@@ -1,34 +1,31 @@
 /**
- * sensorium-consistency — ADVERSARIAL scale QA (The-Advocate, tasked QA-spirit).
+ * sensorium-consistency — SCALE + PSEUDOMETRIC QA for the structure-plane distance (The-Advocate,
+ * tasked QA-spirit). Re-cut 2026-07-01 after the O(n^3.2) tree-edit was RETIRED.
  *
- * THE SCALE CEILING: the structure-plane pseudometric `treeEditDistance` runs `forestEditRaw`, a
- * NAIVE memoized rightmost-root ordered-forest edit — NOT Zhang–Shasha (no keyroots / LR
- * decomposition). Two compounding costs make it far worse than the O(n²–n³) its docstring implies:
- *   1. the recursion splices children into the forest (`[...F.slice(0,-1), ...f.children]`), so the
- *      space of distinct subforest subproblems is not bounded to the O(n²) ZS "special subforests";
- *   2. every memo key is `serializeForest(F)+"|"+serializeForest(G)` — an O(n) STRING build per
- *      lookup, so even memoized work carries an extra n factor.
+ * THE OLD CEILING (gone): the structure metric ran `forestEditRaw`, a naive memoized rightmost-root
+ * ordered-forest edit with O(n)-string memo keys — empirical growth ≈O(n^3.2), timing out past ~200
+ * nodes (MEASURED, prior box: balanced n=256→37.6s; chain n=384→38.7s). A live consistency-radius over
+ * a real per-chunk AST (hundreds→thousands of nodes) blew past any interactive budget.
  *
- * MEASURED (this box, 2026-07-01, node v24) — two trees of n nodes each, one root relabel:
- *   balanced:  n=64→0.45s   n=128→4.1s   n=192→14.4s   n=256→37.6s
- *   chain:     n=128→1.2s    n=256→10.0s  n=384→38.7s
- * Empirical growth ≈ O(n^3.2). The docstring's "skeletal trees stay cheap / exact" holds ONLY for
- * tiny trees (≲ ~64 nodes). A real per-chunk or coarse structural AST at the tw5 corpus scale
- * (hundreds→thousands of nodes) blows past any interactive budget:
+ * THE SWAP: `treeEditDistance` now DEFAULTS to the DECKARD characteristic-vector embedding — count each
+ * node's q-level atomic subtree pattern into a histogram (O(n) build), compare by angular cosine (O(dim)).
+ * The cubic exact TED is SHELVED behind `{ method: "exact" }` for the rare certified-count case; a pq-gram
+ * refine rides `{ method: "pqgram" }`.
  *
- *   THE LIVE-RUN BOUNDARY (name it): a single treeEditDistance over two structure trees of ≳200
- *   nodes each ⇒ multi-second → timeout; ≳400 nodes ⇒ tens of seconds. This is the hard-problem
- *   boundary a live consistency-radius run would otherwise hit the hard way. The consistency-radius
- *   itself is cheap (3 planes, sup over overlaps); the cost lives ENTIRELY in the tree-edit stalk
- *   metric, so guarding it (a size cap → sampled/approximate edit, or a real ZS with O(1) keys) is
- *   the fix, not touching the radius.
+ * THE NEW CEILING (name it): DECKARD is near-linear. Two trees of n nodes each now complete in
+ * MILLISECONDS, not seconds — n=500 and n=2000 (both balanced AND chain) finish under a tens-of-ms budget
+ * on this box. The O(n^3.2) wall is GONE; the only remaining cost is the linear node walk + the O(dim)
+ * histogram compare. Measured numbers are logged below (grep "DECKARD scale").
  */
 import { describe, test, expect } from "vitest";
-import { treeEditDistance, type LabeledTree } from "../src/sensorium-consistency.js";
+import {
+  treeEditDistance, treeEditExact, deckardDistance, pqGramDistance,
+  characteristicVector, pqGramProfile, type LabeledTree,
+} from "../src/sensorium-consistency.js";
 
 const leaf = (l: string): LabeledTree => ({ label: l, children: [] });
 
-/** A left-deep chain of `n` nodes — the AST-spine shape. */
+/** A left-deep chain of `n` nodes — the AST-spine shape (the old wall's worst case at depth). */
 function chain(n: number): LabeledTree {
   let t = leaf("n0");
   for (let i = 1; i < n; i++) t = { label: "n" + i, children: [t] };
@@ -45,14 +42,26 @@ function balanced(n: number, id = { v: 0 }): LabeledTree {
   return { label: "I" + id.v++, children };
 }
 
-function timeEdit(a: LabeledTree, b: LabeledTree): { ms: number; d: number } {
-  const t0 = performance.now();
-  const d = treeEditDistance(a, b);
-  return { ms: performance.now() - t0, d };
+/** Relabel the top-most `k` nodes of a chain to fresh globally-unique symbols (a monotone edit ladder). */
+function chainRelabelTop(n: number, k: number): LabeledTree {
+  let t = leaf("n0");
+  for (let i = 1; i < n; i++) {
+    const label = i >= n - k ? "EDIT_" + i : "n" + i; // the top k get fresh labels
+    t = { label, children: [t] };
+  }
+  return t;
 }
 
-describe("QA: tree-edit scale ceiling (the structure-plane hot spot)", () => {
-  test("correct on tiny skeletal trees (the design regime)", () => {
+function timeIt<T>(f: () => T): { ms: number; v: T } {
+  const t0 = performance.now();
+  const v = f();
+  return { ms: performance.now() - t0, v };
+}
+
+// ── the scale ceiling is GONE: DECKARD is near-linear ──────────────────────────────────────────────
+
+describe("QA: structure distance is near-linear now (the O(n^3.2) wall is retired)", () => {
+  test("correct on tiny skeletal trees (the design regime — DECKARD default)", () => {
     const a: LabeledTree = { label: "root", children: [leaf("x"), leaf("y")] };
     expect(treeEditDistance(a, a)).toBe(0);
     const relabel: LabeledTree = { label: "root", children: [leaf("x"), leaf("z")] };
@@ -60,31 +69,102 @@ describe("QA: tree-edit scale ceiling (the structure-plane hot spot)", () => {
     expect(treeEditDistance(a, relabel)).toBeLessThanOrEqual(1);
   });
 
-  test("growth is SUPER-QUADRATIC — the O(n^3+) ceiling is real, not O(n²) as the docstring implies", () => {
-    // Warm up (JIT), then measure two sizes. Ratio ≈ (2)^3.2 ≈ 9 in practice; assert > 3 (well
-    // above quadratic's 4×… wait: quadratic doubling is 4×, so > 4.5 proves SUPER-quadratic).
-    timeEdit(balanced(24), balanced(24));
-    const small = timeEdit(balanced(48), balanced(48));
-    const big = timeEdit(balanced(96), balanced(96));
-    // both stay correct (identical trees ⇒ distance 0)
-    expect(small.d).toBe(0);
-    expect(big.d).toBe(0);
-    // guard against dividing noise: the small measurement must be non-trivial.
-    if (small.ms >= 20) {
-      const ratio = big.ms / small.ms;
-      // doubling n under true O(n²) ⇒ 4×; we measure ≈8–9×. Assert > 4.5 ⇒ provably super-quadratic.
-      expect(ratio).toBeGreaterThan(4.5);
+  test("n=500 and n=2000 complete in MILLISECONDS (both balanced and chain) — no timeout", () => {
+    // warm the JIT
+    treeEditDistance(balanced(64), balanced(64));
+
+    const cases: Array<{ shape: string; n: number; ms: number }> = [];
+    for (const n of [500, 2000]) {
+      const bA = balanced(n), bB = balanced(n);
+      const cA = chain(n), cB = chain(n);
+      const rb = timeIt(() => treeEditDistance(bA, bB));
+      const rc = timeIt(() => treeEditDistance(cA, cB));
+      // identical trees ⇒ distance exactly 0 (the embedding vectors coincide)
+      expect(rb.v).toBe(0);
+      expect(rc.v).toBe(0);
+      cases.push({ shape: "balanced", n, ms: rb.ms }, { shape: "chain", n, ms: rc.ms });
+      // the old wall put n=256 at ~37s; a near-linear metric MUST finish these in well under a second.
+      expect(rb.ms).toBeLessThan(1000);
+      expect(rc.ms).toBeLessThan(1000);
     }
-    // and n=96 stays under a very loose 20s cap (measured ~1.8s) — a canary: if this ever TRIPS,
-    // the ceiling has moved into the interactive path.
-    expect(big.ms).toBeLessThan(20_000);
+    // Log the new ceiling for the report (grep "DECKARD scale").
+    // eslint-disable-next-line no-console
+    console.log("DECKARD scale (ms):", JSON.stringify(cases));
   });
 
-  test("a ~200-node structure tree is the practical wall (documented, not run here)", () => {
-    // We do NOT run n≳200 in CI (measured ≥14s — a timeout risk). This test PINS the boundary as a
-    // fast n=100 canary: it must still complete quickly; n≳200 is where a live run stalls.
-    const r = timeEdit(chain(100), chain(100));
-    expect(r.d).toBe(0);
-    expect(r.ms).toBeLessThan(10_000); // n=100 chain ~0.5s; the wall is at ~2–4× this size
+  test("growth is roughly LINEAR, not super-quadratic — a 4× node step stays well under the 16× quadratic mark", () => {
+    // Min-of-N to denoise (sub-10ms measurements are GC/JIT-noisy under full-suite load).
+    const best = (n: number): number => {
+      let m = Infinity;
+      for (let i = 0; i < 5; i++) {
+        const a = chain(n), b = chain(n);
+        const r = timeIt(() => treeEditDistance(a, b));
+        expect(r.v).toBe(0);
+        m = Math.min(m, r.ms);
+      }
+      return m;
+    };
+    best(1000); // warm the JIT
+    const small = best(1000);   // n
+    const big = best(4000);     // 4n
+    if (small >= 1) {
+      const ratio = big / small;
+      // a 4× node step: LINEAR ⇒ ~4×, O(n²) ⇒ 16×, O(n^3.2) ⇒ ~100×. Assert < 12 ⇒ provably sub-quadratic.
+      expect(ratio).toBeLessThan(12);
+    }
+  });
+
+  test("a distinct-structure pair at scale reads POSITIVE and quickly (not a false 0)", () => {
+    const a = chain(2000), b = chainRelabelTop(2000, 200); // 200 of 2000 nodes relabeled
+    const r = timeIt(() => treeEditDistance(a, b));
+    expect(r.v).toBeGreaterThan(0);
+    expect(r.v).toBeLessThanOrEqual(1);
+    expect(r.ms).toBeLessThan(1000);
+  });
+});
+
+// ── the shelved exact TED stays correct on tiny trees (the certified-count escape hatch) ───────────
+
+describe("QA: exact TED is SHELVED behind the flag but still correct on tiny trees", () => {
+  test("{ method: 'exact' } routes to the cubic path; agrees with treeEditExact on small trees", () => {
+    const a: LabeledTree = { label: "root", children: [leaf("x"), leaf("y")] };
+    const relabel: LabeledTree = { label: "root", children: [leaf("x"), leaf("z")] };
+    expect(treeEditDistance(a, a, { method: "exact" })).toBe(0);
+    expect(treeEditDistance(a, relabel, { method: "exact" })).toBe(treeEditExact(a, relabel));
+    expect(treeEditExact(a, relabel)).toBeGreaterThan(0);
+    // one relabel of a 3-node tree ⇒ raw edit 1 over max size 3 ⇒ 1/3.
+    expect(treeEditExact(a, relabel)).toBeCloseTo(1 / 3, 12);
+  });
+
+  test("the exact path stays cubic — it is NOT run at scale here (documented, off the hot path)", () => {
+    // A ~64-node balanced tree is a safe upper canary for the shelved exact path.
+    const a = balanced(64);
+    const r = timeIt(() => treeEditExact(a, a));
+    expect(r.v).toBe(0);
+    expect(r.ms).toBeLessThan(20_000); // loose — this path is cubic; never the interactive default
+  });
+});
+
+// ── the embedding + profile build sub-linearly-enough to be usable ─────────────────────────────────
+
+describe("QA: the embedding / profile builders are near-linear", () => {
+  test("characteristicVector + pqGramProfile build a n=2000 chain in ms (deep, no stack overflow)", () => {
+    const t = chain(2000);
+    const cv = timeIt(() => characteristicVector(t));
+    const pg = timeIt(() => pqGramProfile(t));
+    expect(cv.v.size).toBeGreaterThan(0);
+    expect(pg.v.size).toBeGreaterThan(0);
+    expect(cv.ms).toBeLessThan(500);
+    expect(pg.ms).toBeLessThan(500);
+    // and the pq-gram distance path also completes fast at scale
+    const d = timeIt(() => pqGramDistance(t, chain(2000)));
+    expect(d.v).toBe(0);
+    expect(d.ms).toBeLessThan(1000);
+  });
+
+  test("deckardDistance and pqGramDistance agree that identical trees are distance 0", () => {
+    const t = balanced(300);
+    expect(deckardDistance(t, t)).toBe(0);
+    expect(pqGramDistance(t, t)).toBe(0);
   });
 });
