@@ -80,6 +80,8 @@ export interface Stratum {
   readonly channel: ChannelTag;
   /** the base-4 refinement when `channel === "base"` — the steering Mu operator. */
   readonly muOp?: MuOp;
+  /** the sigil HEAD word (e.g. "confidence", "ward", "lares") — the association's typed-relation label. */
+  readonly head: string;
   /** the span axis — the aperture band of this stratum's OWN byte-range. */
   readonly band: FfzBand;
   /** the content-address of the source this stratum indexes into (pins the table to its text). */
@@ -93,14 +95,29 @@ export interface SkeletalAnchor {
   readonly band: FfzBand;
 }
 
+/** The spread direction of an association — RIGHTWARD (marker-leads / seed-forward) is the default. */
+export type SpreadDirection = "rightward" | "leftward";
+
 /**
  * One AUTOSEGMENTAL association edge — a stratum links to a skeletal anchor WITHOUT being that anchor's
- * position. `crossBand` fires when the stratum's span-band differs from its anchor's band: a fine
- * control-signal on a coarse anchor reads CROSS-BAND, never flattened to the outer band.
+ * position (Goldsmith 1976). The edges form a TYPED OVERLAP MULTIGRAPH over one skeleton: `relation`
+ * labels the link (confidence-line ≠ ward-line ≠ voice-line — distinct typed relations, never one
+ * undifferentiated association). `direction` records the spread: control sigils SEED FORWARD, so the
+ * default spreads RIGHTWARD (the marker leads, governing the prose that follows until a boundary or a
+ * competing marker — textbook L-to-R spreading), falling LEFTWARD only where no following anchor exists.
+ *
+ * UNIT-ANCHORED (Goldsmith's Stability argument): the edge keys on skeletal-tier INDICES, never raw byte
+ * offsets — so the red register SURVIVES a splice/rewrite of the black stream (the confidence/ward
+ * autosegment re-docks) without an offset-drift re-projection tax. `crossBand` fires when the stratum's
+ * span-band differs from its anchor's band: a fine control-signal on a coarse anchor reads CROSS-BAND.
  */
 export interface AssociationEdge {
-  readonly stratum: number;   // index into Stratification.strata
-  readonly anchor: number;    // index into Stratification.skeletal
+  readonly stratum: number;   // index into Stratification.strata (unit-anchored, not a byte offset)
+  readonly anchor: number;    // index into Stratification.skeletal (unit-anchored, not a byte offset)
+  /** the typed-relation label — the stratum's sigil head (the multigraph edge type). */
+  readonly relation: string;
+  /** the spread direction — rightward (marker-leads, default) or leftward (fallback). */
+  readonly direction: SpreadDirection;
   readonly crossBand: boolean;
 }
 
@@ -121,6 +138,12 @@ export function sourceCidOf(text: string): string {
 function detectMuOp(raw: string): MuOp | null {
   const m = /<<~\s*(?:ward|mu)\s+([*?!_])/.exec(raw);
   return m ? (m[1] as MuOp) : null;
+}
+
+/** The sigil HEAD word of a red span — the typed-relation label (`confidence`, `ward`, `lares`, …). */
+export function sigilHead(raw: string): string {
+  const m = /<<~\s*\/?\s*(\\?[A-Za-zऀ-ॿ][\w-]*)/.exec(raw);
+  return m ? m[1]! : "(sigil)";
 }
 
 /** Merge event spans into DISJOINT red islands (position-dedup can still leave overlaps; we normalize). */
@@ -144,8 +167,11 @@ function disjointIslands(spans: Array<{ start: number; end: number; raw: string 
  *
  * The island scanner ({@link collectEvents}) yields the disjoint `<<~…>>` islands (the RED classifier
  * register); the gaps between them are the BLACK skeletal anchors (the prose the red steers). Each red
- * stratum ASSOCIATES to the black anchor it emerges from (the preceding anchor, else the following) — an
- * autosegmental edge, `crossBand` where the stratum's fine span-band meets a coarse anchor.
+ * stratum ASSOCIATES to the prose it governs — by the SEED-FORWARD / marker-leads law, the default spread
+ * runs RIGHTWARD (the marker leads the claim that follows it, textbook L-to-R spreading), falling LEFTWARD
+ * only where no following anchor exists. The edges form a TYPED OVERLAP MULTIGRAPH (labeled by sigil head)
+ * and are UNIT-ANCHORED (skeletal indices, not byte offsets — stable under edits). `crossBand` fires where
+ * a fine control-sigil docks on a coarse anchor. (Goldsmith 1976; Bird & Ellison 1994.)
  */
 export function stratify(text: string, sourceCid: string = sourceCidOf(text)): Stratification {
   const events = collectEvents(text);
@@ -170,6 +196,7 @@ export function stratify(text: string, sourceCid: string = sourceCidOf(text)): S
       span: [isl.start, isl.end],
       channel: muOp ? "base" : "red",
       ...(muOp ? { muOp } : {}),
+      head: sigilHead(isl.raw),
       band: bandForSpanLength(len),
       sourceCid,
     });
@@ -177,25 +204,28 @@ export function stratify(text: string, sourceCid: string = sourceCidOf(text)): S
   }
   pushAnchor(cursor, text.length);
 
-  // Autosegmental association: each stratum links to the black anchor it emerges from — the anchor
-  // ending at/just before the stratum's start (position-INDEPENDENT: the edge, not the offset, binds).
+  // Autosegmental association (typed, unit-anchored): a control sigil SEEDS FORWARD, so each stratum
+  // spreads RIGHTWARD onto the prose it governs — the nearest anchor starting on/after the stratum's end.
+  // Where none exists (a trailing/closing sigil), it docks LEFTWARD onto the nearest preceding anchor.
   const associations: AssociationEdge[] = [];
   for (let si = 0; si < strata.length; si++) {
     const s = strata[si]!;
     let anchorIdx = -1;
-    // preferred: the nearest anchor ending on/before this stratum's start
-    for (let ai = skeletal.length - 1; ai >= 0; ai--) {
-      if (skeletal[ai]!.span[1] <= s.span[0]) { anchorIdx = ai; break; }
+    let direction: SpreadDirection = "rightward";
+    // preferred (marker-leads): the nearest anchor starting on/after this stratum's end
+    for (let ai = 0; ai < skeletal.length; ai++) {
+      if (skeletal[ai]!.span[0] >= s.span[1]) { anchorIdx = ai; break; }
     }
-    // fallback: the nearest anchor starting on/after this stratum's end (leading sigil, no prose before)
+    // fallback: the nearest anchor ending on/before this stratum's start (closing/trailing sigil)
     if (anchorIdx === -1) {
-      for (let ai = 0; ai < skeletal.length; ai++) {
-        if (skeletal[ai]!.span[0] >= s.span[1]) { anchorIdx = ai; break; }
+      direction = "leftward";
+      for (let ai = skeletal.length - 1; ai >= 0; ai--) {
+        if (skeletal[ai]!.span[1] <= s.span[0]) { anchorIdx = ai; break; }
       }
     }
     if (anchorIdx === -1) continue;   // a source that is ALL sigil, no prose — no association
     const anchor = skeletal[anchorIdx]!;
-    associations.push({ stratum: si, anchor: anchorIdx, crossBand: s.band !== anchor.band });
+    associations.push({ stratum: si, anchor: anchorIdx, relation: s.head, direction, crossBand: s.band !== anchor.band });
   }
 
   return { sourceCid, skeletal, strata, associations };

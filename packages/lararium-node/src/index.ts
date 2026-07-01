@@ -27,13 +27,13 @@ export type {
 // fractal coupler (stratum red↔black ≅ corpus formal↔informal through the mesh keel's coupleMesh), and
 // the `#has {formal, informal}` compose (coupling.children, neither top). LI (理 pattern) ⊥ KI (氣 flow).
 export {
-  bandForSpanLength, SPAN_BAND_MAX, sourceCidOf, stratify,
+  bandForSpanLength, SPAN_BAND_MAX, sourceCidOf, sigilHead, stratify,
   SIGIL_INJECTION, sigilInjectionQuery,
   windowDensities, coupleStreams, channelSignals, readKiStratum, corpusSignals, readKiCorpus,
   readLi, readKi, defaultSensoriumBands, buildMemeticWikitextSensorium, buildPeerSensorium,
 } from "./memetic-wikitext-sensorium.js";
 export type {
-  ChannelTag, MuOp, Span, Stratum, SkeletalAnchor, AssociationEdge, Stratification,
+  ChannelTag, MuOp, Span, Stratum, SkeletalAnchor, AssociationEdge, SpreadDirection, Stratification,
   SigilInjection, ComposeMemeticWikitextOptions,
 } from "./memetic-wikitext-sensorium.js";
 

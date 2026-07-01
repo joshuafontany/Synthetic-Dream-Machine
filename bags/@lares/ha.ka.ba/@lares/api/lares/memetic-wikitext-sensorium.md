@@ -120,6 +120,27 @@ stratification (pattern); `readKi` returns the coupling (flow). The reader holds
 
 <<~/ahu >>
 
+<<~ ahu #autosegmental >>
+
+## The Association Graph ~ autosegmental grounding (Goldsmith · Bird & Ellison)
+
+**The skeletal-tier ⋈ strata model is autosegmental phonology, read straight** (Goldsmith 1976; Bird &
+Ellison 1994). That grounding hands the reader six properties — the first three enacted now, the rest
+named for follow-up.
+
+<<~ranks enacted typed-multigraph ~ the associations are a TYPED OVERLAP MULTIGRAPH — confidence-line ≠ ward-line ≠ voice-line, labeled distinct relations over ONE skeleton (feature-geometry class-links), never one undifferentiated association. `AssociationEdge.relation` carries the sigil head -> rightward-spread ~ SEED-FORWARD / marker-leads reads as textbook L-to-R SPREADING: `<<~ confidence… >>` anchored at its marker governs the prose that FOLLOWS until a boundary/competing marker; `direction` defaults rightward, docks leftward only for a closing/trailing sigil -> unit-anchored ~ Goldsmith's STABILITY argument: the edge keys on skeletal INDICES, never byte offsets, so the red register SURVIVES a splice/rewrite of the black stream (the autosegment re-docks) — curing the offset-drift / live-wiki re-projection tax (crucible-F1) for FREE >>
+
+<<~ranks follow-up ncc-float-dock ~ the No-Crossing Constraint makes a red sigil steering ACROSS a `<<~…>>` framing boundary a DETECTABLE breach (Coleman & Local: asserting A≺B ∧ A∘B at once is incoherent) — crucible-F2. Cure: red steering is DOMAIN-LOCAL to its block; cross-boundary influence = FLOAT + DOCK (a floating red autosegment re-docking at the next block's boundary, a licensed hand-off), NEVER spread-across -> wfc-minimal-repair ~ Goldsmith Proposal 4 / Harmonic Phonology: don't REJECT an under-associated parse, REPAIR it by minimal association-adding; unmarked spans DEFAULT-FILL the ambient register by the Association Convention. This IS graceful-parsing ([[graceful-parsing|lar:///ha.ka.ba/@lares/api/pono/graceful-parsing]] — augment+wrap, no parse breaks badly); REUSE it -> fst-validity ~ Bird & Ellison: the stratified parse = the synchronized INTERSECTION product of per-tier automata; well-formed ⟺ intersection non-empty (a real algorithm on the meme-ast machinery) -> ocp ~ the Obligatory Contour Principle normalizes: two adjacent identical `confidence` markers collapse to one >>
+
+**Where memetic-wikitext EXCEEDS phonology** (reach past autosegmental for these): the skeleton is
+RECURSIVELY NESTED (tree-sitter / RAPTOR, not a flat tier); the tiers are themselves LANGUAGES (html ⊂
+wikitext ⊂ x-memetic grammars, not flat feature-strings); the red is NEVER REALIZED (its true cousin is
+the CLASSIFIER / determinative channel ([[classifier-channel|lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#classifier-channel]]),
+not tone). <<~ confidence Synthesis 10/20 >> keep the WITHIN-block engine autosegmental, the recursion
+tree-sitter.
+
+<<~/ahu >>
+
 <<~ ahu #enactment >>
 
 ## Enactment ~ the concrete instance

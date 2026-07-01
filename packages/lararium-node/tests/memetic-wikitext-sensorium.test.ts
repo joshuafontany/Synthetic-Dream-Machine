@@ -70,6 +70,23 @@ describe("the two axes — span × channel: the cross-band proof", () => {
     const anchor = s.skeletal[edge!.anchor]!;
     expect(anchor.band === "Measure" || anchor.band === "Arc").toBe(true);   // the paragraph is coarse
     expect(edge!.crossBand).toBe(true);                                       // NOT flattened to the outer band
+    // TYPED multigraph: the edge is labeled by the sigil head; SEED-FORWARD spreads RIGHTWARD (marker-leads)
+    expect(edge!.relation).toBe("confidence");
+    expect(edge!.direction).toBe("rightward");
+    // the ward at the CLOSE has no following prose → it docks LEFTWARD (the fallback)
+    const wardIdx = s.strata.findIndex((st) => st.head === "ward");
+    const wardEdge = s.associations.find((a) => a.stratum === wardIdx);
+    expect(wardEdge!.relation).toBe("ward");
+    expect(wardEdge!.direction).toBe("leftward");
+  });
+
+  test("the associations form a TYPED multigraph — distinct relations over one skeleton", () => {
+    const s = stratify(SAMPLE);
+    const relations = new Set(s.associations.map((a) => a.relation));
+    // confidence-line ≠ ward-line — labeled, distinct typed relations (not one undifferentiated edge)
+    expect(relations.has("confidence")).toBe(true);
+    expect(relations.has("ward")).toBe(true);
+    expect(relations.size).toBeGreaterThanOrEqual(2);
   });
 
   test("bandForSpanLength maps length → aperture band, fine→coarse", () => {
