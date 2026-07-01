@@ -46,7 +46,7 @@ describe("palace-path canonicalization (the daemon pile-up cure)", () => {
     expect(canonicalPalacePath(notYet)).toBe(join(root, "palace-not-created"));
   });
 
-  it("defaultPalacePath honors MEMPALACE_PALACE_PATH, else the XDG-strangler chroma dir", () => {
+  it("defaultPalacePath honors MEMPALACE_PALACE_PATH, else the upstream-default ~/.mempalace/palace", () => {
     const prevMp = process.env["MEMPALACE_PALACE_PATH"];
     const prevData = process.env["XDG_DATA_HOME"];
     const prevRoot = process.env["LAR_ROOT"];
@@ -54,20 +54,21 @@ describe("palace-path canonicalization (the daemon pile-up cure)", () => {
     const prevProfile = process.env["USERPROFILE"];
     try {
       delete process.env["LAR_ROOT"];
-      // Hermetic home: point HOME at an empty temp dir so the strangler's legacy `~/.mempalace`
-      // probe reads absent regardless of the developer's real home (which may hold a live palace).
+      // Hermetic home: point HOME at a temp dir so the resolution is independent of the developer's
+      // real home (which may hold a live palace).
       process.env["HOME"] = join(root, "home");
       process.env["USERPROFILE"] = join(root, "home");
       // env override is taken AS the chroma dir, verbatim.
       process.env["MEMPALACE_PALACE_PATH"] = join(root, "custom");
       expect(defaultPalacePath()).toBe(join(root, "custom"));
 
-      // No override → the strangler. Fresh vessel (neither the new XDG dir nor ~/.mempalace present
-      // under this temp XDG_DATA_HOME) → the consolidated `<data>/lares/sensoriums/memory/content/palace`.
+      // No override → the upstream-default parent. Per the content-cap-home ruling the content cap stays
+      // EXTERNAL at `~/.mempalace` (never strangled into the XDG tree), so the chroma dir is
+      // `~/.mempalace/palace` regardless of XDG_DATA_HOME.
       delete process.env["MEMPALACE_PALACE_PATH"];
       process.env["XDG_DATA_HOME"] = join(root, "xdg-data");
       expect(defaultPalacePath()).toBe(
-        join(root, "xdg-data", "lares", "sensoriums", "memory", "content", "palace"),
+        join(root, "home", ".mempalace", "palace"),
       );
     } finally {
       if (prevMp === undefined) delete process.env["MEMPALACE_PALACE_PATH"]; else process.env["MEMPALACE_PALACE_PATH"] = prevMp;

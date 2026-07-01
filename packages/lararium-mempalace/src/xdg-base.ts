@@ -38,11 +38,14 @@ export function strangle(newDir: string, legacyDir: string): string {
 }
 
 /**
- * The verbatim mempalace's PARENT store dir (the `content` fiber cap): the strangler over
- * `<data>/sensoriums/memory/content` (new) / `~/.mempalace` (legacy). The `MEMPALACE_PALACE_PATH`
- * override is applied by the CALLERS (it relocates the chroma dir, not this parent), so this stays the
- * pure XDG-derived parent both callers agree on.
+ * The verbatim mempalace's PARENT store dir (the `content` fiber cap). Per the operator's
+ * content-cap-home ruling (talk-story): content stays at the UPSTREAM-default `~/.mempalace` — the
+ * vendored mempalace nakama's OWN default, honoring the "mempalace is external, not-ours-to-change"
+ * canon. It is NOT strangled into our sensorium tree; the memory-sensorium `#has` it by ABSOLUTE
+ * reference (logical composition, not physical colocation). structure/form (OURS) keep their tree
+ * strangler. The `MEMPALACE_PALACE_PATH` override — upstream's OWN relocation lever — is applied by the
+ * CALLERS (it relocates the chroma dir, not this parent), so this stays the pure default both agree on.
  */
 export function mempalaceContentParent(): string {
-  return strangle(join(larDataHome(), "sensoriums", "memory", "content"), join(homedir(), ".mempalace"));
+  return join(homedir(), ".mempalace");
 }

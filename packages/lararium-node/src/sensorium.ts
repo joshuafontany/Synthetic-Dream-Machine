@@ -18,9 +18,10 @@
  * (clause 4: no fixed enum of blessed caps); the `memory` sensorium happens to wear content/structure/
  * form, but the type never mandates that set.
  *
- * A cap's `dir` reads RELATIVE to the sensorium dir when the bytes sit INSIDE it (the fully-consolidated
- * SHEAF-TRUE tree → the whole sensorium relocates/rsyncs as one), and ABSOLUTE when they sit outside
- * (the transitional strangler window, where e.g. `content` still points at a legacy `~/.mempalace`).
+ * A cap's `dir` reads RELATIVE to the sensorium dir when the bytes sit INSIDE it (structure/form — the
+ * consolidated SHEAF-TRUE tree relocates/rsyncs as one), and ABSOLUTE when they sit outside it (the
+ * `content` cap, by the content-cap-home ruling, stays external at the upstream-default `~/.mempalace`).
+ * The `memory` sensorium is thus a MIXED layout — absolute content + relative structure/form.
  * {@link capDecl} chooses; {@link resolveCapDir} inverts. The manifest thus stays a FAITHFUL snapshot
  * of where the bytes actually are, never a wishful canonical claim.
  *

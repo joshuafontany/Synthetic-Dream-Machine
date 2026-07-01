@@ -39,26 +39,27 @@ describe("larMempalaceDir (derives from the shared xdg-base)", () => {
     expect(larMempalaceDir()).toBe(join(root, "custom"));
   });
 
-  it("fresh vessel → <data>/sensoriums/memory/content (== mempalace defaultPalacePath parent)", () => {
+  it("unset → the upstream-default ~/.mempalace (== mempalace defaultPalacePath parent)", () => {
+    // content-cap-home ruling: the content cap stays EXTERNAL at the vendored mempalace's own default,
+    // never strangled into our sensorium tree; the memory-sensorium `#has` it by ABSOLUTE reference.
     const root = freshRoot();
     set("MEMPALACE_PALACE_PATH", undefined);
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", join(root, "xdg"));
-    set("HOME", join(root, "home")); // empty → legacy ~/.mempalace absent
+    set("HOME", join(root, "home"));
     set("USERPROFILE", join(root, "home"));
-    expect(larMempalaceDir()).toBe(
-      join(root, "xdg", "lares", "sensoriums", "memory", "content"),
-    );
+    expect(larMempalaceDir()).toBe(join(root, "home", ".mempalace"));
   });
 
-  it("legacy ~/.mempalace present (live box) → legacy spelling", () => {
+  it("the sensorium tree does NOT relocate content (upstream-external boundary)", () => {
     const root = freshRoot();
     set("MEMPALACE_PALACE_PATH", undefined);
     set("LAR_ROOT", undefined);
-    set("XDG_DATA_HOME", join(root, "xdg")); // new dir absent
+    set("XDG_DATA_HOME", join(root, "xdg"));
     set("HOME", join(root, "home"));
     set("USERPROFILE", join(root, "home"));
-    mkdirSync(join(root, "home", ".mempalace"), { recursive: true });
+    // even with the consolidated content dir present in the tree, content stays external at ~/.mempalace.
+    mkdirSync(join(root, "xdg", "lares", "sensoriums", "memory", "content"), { recursive: true });
     expect(larMempalaceDir()).toBe(join(root, "home", ".mempalace"));
   });
 });

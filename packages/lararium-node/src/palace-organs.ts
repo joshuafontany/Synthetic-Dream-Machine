@@ -194,10 +194,11 @@ function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensori
 }
 
 /**
- * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges
- * (relative when consolidated, absolute during the strangler window — {@link larMempalaceDir} et al.
- * report where the bytes actually are), bands as the base-cap interval-grain (wavelet, computed on
- * read — NO dir), and an empty coupling (memory glues no sub-sensoriums).
+ * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges in a
+ * MIXED layout: content ABSOLUTE (the content-cap-home ruling keeps it external at `~/.mempalace`),
+ * structure/form RELATIVE (inside the tree) — {@link larMempalaceDir} et al. report where the bytes
+ * actually are and {@link capDecl} chooses per cap. bands as the base-cap interval-grain (wavelet,
+ * computed on read — NO dir), and an empty coupling (memory glues no sub-sensoriums).
  */
 export function materializeMemorySensorium(): PalaceSetupStep {
   return materializeSensorium("memory:manifest", memorySensoriumDir(), {

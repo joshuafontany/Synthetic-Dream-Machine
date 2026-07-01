@@ -51,11 +51,12 @@ describe("resolveComputeCapEnv — the cap composes or degrades", () => {
 /**
  * Restart-safety (P0) — the DURABLE @daemon sidecars (drawer_io · astpalace_io · form_encoder ·
  * kg_io · the read recall MCP client) each open a chroma collection that builds the default
- * onnxruntime embedder. When onnxruntime-GPU is installed, a BARE `import onnxruntime` HARD-fails
- * (`libcudart.so.NN` off the loader path), so a cold daemon restart would break durable recall. The
- * cap-env (resolveComputeCapEnv, threaded through EVERY durable spawn membrane) puts the CUDA runtime
- * libs on LD_LIBRARY_PATH. This proves the spawn env carries the cap AND that a would-fail import now
- * succeeds — GUARDED behind the cap's presence, so the card-less QA box (CPU wheel) skips cleanly.
+ * onnxruntime embedder. The premise CHANGED: the GPU `ld.so.conf` + `onnxruntime-gpu` now put the CUDA
+ * runtime on the SYSTEM linker path, so a BARE `import onnxruntime` — the exact path a cold daemon
+ * restart hits — now RESOLVES by construction, no cap-env help needed. (Historically the bare import
+ * HARD-failed on `libcudart.so.NN` off the loader path; that state is gone.) These cases assert the
+ * current robust state — GUARDED behind the GPU cap's presence, so the card-less QA box (CPU wheel)
+ * skips cleanly.
  */
 describe("restart-safety — the durable spawn env imports onnxruntime cleanly", () => {
   const py = resolveMempalacePython();
@@ -67,20 +68,17 @@ describe("restart-safety — the durable spawn env imports onnxruntime cleanly",
     expect(env["LD_LIBRARY_PATH"]).toMatch(/nvidia[/\\][^:]*[/\\]lib/);
   });
 
-  test.runIf(capPresent && !!py)("bare `import onnxruntime` FAILS but the capped durable-spawn env SUCCEEDS", () => {
-    // BARE: the exact fault a cold daemon restart would hit — onnxruntime-gpu without the CUDA libs.
-    const bare = spawnSync(py!, ["-c", "import onnxruntime"], { encoding: "utf8", env: withoutCapLd(process.env) });
-    expect(bare.status).not.toBe(0);
-    expect(bare.stderr).toMatch(/libcud|onnxruntime_pybind11_state|ImportError/i);
-
-    // CAPPED: the SAME env the durable sidecars now spawn with — the import resolves + a provider lists.
-    const capped = spawnSync(
+  test.runIf(capPresent && !!py)("bare `import onnxruntime` now SUCCEEDS — CUDA on the system linker path, restart-safe by construction", () => {
+    // BARE (no cap-env): withoutCapLd strips any nvidia/*/lib from LD_LIBRARY_PATH, so the ONLY way the
+    // CUDA runtime resolves is the SYSTEM linker path (the GPU ld.so.conf). This proves the bare import
+    // — the cold-restart path — is robust by construction, not by an LD_LIBRARY_PATH cap-env hand-hold.
+    const bare = spawnSync(
       py!,
       ["-c", "import onnxruntime as o; print(','.join(o.get_available_providers()))"],
-      { encoding: "utf8", env: { ...withoutCapLd(process.env), ...resolveComputeCapEnv(py) } },
+      { encoding: "utf8", env: withoutCapLd(process.env) },
     );
-    expect(capped.status).toBe(0);
-    expect(capped.stdout).toMatch(/ExecutionProvider/); // CUDA on a card, CPU on the QA box — either way it imports
+    expect(bare.status).toBe(0);
+    expect(bare.stdout).toMatch(/CUDAExecutionProvider/); // the GPU provider lists off the system linker path
   });
 });
 

@@ -45,9 +45,9 @@ export function canonicalPalacePath(p: string): string {
 /**
  * The default palace path spelling, BEFORE canonicalization:
  *   $MEMPALACE_PALACE_PATH (override, taken AS the chroma dir) || <content-parent>/palace.
- * The content parent follows the XDG strangler ({@link mempalaceContentParent}), so the chroma dir
- * and the vessel's `larMempalaceDir` view always agree — legacy `~/.mempalace/palace` on a live box,
- * `<data>/sensoriums/memory/content/palace` once migrated.
+ * The content parent stays at the upstream-default `~/.mempalace` ({@link mempalaceContentParent} — the
+ * content-cap-home ruling keeps it external, never strangled into our tree), so the chroma dir and the
+ * vessel's `larMempalaceDir` view always agree at `~/.mempalace/palace`.
  */
 export function defaultPalacePath(): string {
   const env = process.env["MEMPALACE_PALACE_PATH"]?.trim();

@@ -10,16 +10,20 @@
  *   $XDG_CONFIG_HOME/lares  (~/.config/lares)       — config.json.
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
  *
- * The SENSORIUM consolidation (SHEAF-TRUE): content ← the verbatim mempalace, structure ← the
- * astpalace, form ← the formpalace, co-located under `<data>/sensoriums/memory/{content,structure,form}`
- * so the filetree IS the composition (sensorium.ts). bands + coupling are BASE caps — they live in the
- * manifest, never as dirs.
+ * The SENSORIUM consolidation (SHEAF-TRUE): structure ← the astpalace, form ← the formpalace, both
+ * co-located under `<data>/sensoriums/memory/{structure,form}` so the filetree IS the composition
+ * (sensorium.ts). content ← the verbatim mempalace stays EXTERNAL at its upstream-default `~/.mempalace`
+ * (the content-cap-home ruling — "mempalace is external, not-ours-to-change"); the memory-sensorium
+ * `#has` it by ABSOLUTE reference (logical composition, respecting the vendored-sibling boundary), NOT
+ * by physical colocation in the tree. bands + coupling are BASE caps — they live in the manifest,
+ * never as dirs.
  *
- * THE STRANGLER (backward-compat for ONE migration cycle): every relocated resolver reads OLD-else-NEW
- * — probe the new XDG dir; when it materializes, use it; else fall back to the legacy `~/.lares` /
- * `~/.mempalace` spelling when THAT exists; on a truly-fresh vessel default to the new canonical dir.
- * A live box (legacy dirs present) therefore sees NO disruption until the operator migrates. The
- * env seams (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win over both.
+ * THE STRANGLER (backward-compat for ONE migration cycle): every OURS-owned relocated resolver
+ * (structure, form, mesh, vessel, state) reads OLD-else-NEW — probe the new XDG dir; when it
+ * materializes, use it; else fall back to the legacy `~/.lares` spelling when THAT exists; on a
+ * truly-fresh vessel default to the new canonical dir. A live box (legacy dirs present) therefore sees
+ * NO disruption until the operator migrates. content does NOT strangle — it defaults to `~/.mempalace`
+ * outright (upstream's home). The env seams (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
  *
  * `LAR_ROOT` overrides the home root for ISOLATED instances (the test harness / staged pairs): each
  * pair gets its own tree with the XDG facets laid out beneath it (`<root>/data`, `<root>/state`, …),
@@ -99,15 +103,16 @@ export function memorySensoriumDir(): string {
 }
 
 /** The VERBATIM mempalace store dir (the `content` fiber cap) — `MEMPALACE_PALACE_PATH` (override,
- *  the relocation lever) else the strangler over `<memory>/content` (new) / `~/.mempalace` (legacy).
- *  This is the PARENT store (config.json + the `palace/` chroma dir + entities + locks + the
+ *  the relocation lever) else the upstream-default `~/.mempalace`. Per the content-cap-home ruling this
+ *  cap stays EXTERNAL (never strangled into our tree); the memory-sensorium `#has` it by ABSOLUTE
+ *  reference. This is the PARENT store (config.json + the `palace/` chroma dir + entities + locks + the
  *  worldline-KG knowledge_graph.sqlite3 that lives INSIDE it). The vendored mempalace subtree is
  *  never touched — the env lever relocates it; palace-path.ts derives the chroma from the SAME base. */
 export function larMempalaceDir(): string {
   const env = process.env["MEMPALACE_PALACE_PATH"]?.trim();
   if (env) return env;
-  // The pure XDG-derived parent (== `<memory>/content` new / `~/.mempalace` legacy) — the SAME source
-  // mempalace's palace-path.ts derives its chroma dir from, so the two views stay byte-identical.
+  // The upstream-default parent (`~/.mempalace`) — the SAME source mempalace's palace-path.ts derives
+  // its chroma dir from, so the vessel view and the palace view stay byte-identical.
   return mempalaceContentParent();
 }
 

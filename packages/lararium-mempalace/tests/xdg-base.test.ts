@@ -66,24 +66,26 @@ describe("xdg-base (the shared XDG resolver)", () => {
     expect(strangle(newDir, legacy)).toBe(newDir);
   });
 
-  it("mempalaceContentParent: fresh vessel → <data>/sensoriums/memory/content", () => {
+  it("mempalaceContentParent: always the upstream-default ~/.mempalace (never the tree)", () => {
+    // content-cap-home ruling: content stays at the vendored mempalace's own default, referenced by
+    // the memory-sensorium via ABSOLUTE path — it is NOT strangled into our sensorium tree.
     const root = freshRoot();
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", join(root, "xdg"));
-    set("HOME", join(root, "home")); // empty → legacy ~/.mempalace absent
-    set("USERPROFILE", join(root, "home"));
-    expect(mempalaceContentParent()).toBe(
-      join(root, "xdg", "lares", "sensoriums", "memory", "content"),
-    );
-  });
-
-  it("mempalaceContentParent: legacy ~/.mempalace present (live box) → legacy", () => {
-    const root = freshRoot();
-    set("LAR_ROOT", undefined);
-    set("XDG_DATA_HOME", join(root, "xdg")); // new dir absent
     set("HOME", join(root, "home"));
     set("USERPROFILE", join(root, "home"));
-    mkdirSync(join(root, "home", ".mempalace"), { recursive: true });
+    expect(mempalaceContentParent()).toBe(join(root, "home", ".mempalace"));
+  });
+
+  it("mempalaceContentParent: XDG_DATA_HOME does NOT relocate content (upstream-external boundary)", () => {
+    const root = freshRoot();
+    set("LAR_ROOT", undefined);
+    set("XDG_DATA_HOME", join(root, "xdg"));
+    set("HOME", join(root, "home"));
+    set("USERPROFILE", join(root, "home"));
+    // even with the sensorium tree present, content stays external at ~/.mempalace (respecting the
+    // vendored-sibling boundary — structure/form are ours to strangle, content is not).
+    mkdirSync(join(root, "xdg", "lares", "sensoriums", "memory", "content"), { recursive: true });
     expect(mempalaceContentParent()).toBe(join(root, "home", ".mempalace"));
   });
 });
