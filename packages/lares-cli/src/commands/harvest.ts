@@ -30,7 +30,8 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, 
 import { homedir, tmpdir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
+import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
 import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
@@ -525,6 +526,10 @@ interface WingHarvest {
   readonly transcripts: number;
   readonly sources: string;
   readonly mined: number | string;
+  /** Claude sessions whose tasked-spirit transcripts got swept (→ `<wing>__spirits`). */
+  readonly spiritSessions?: number;
+  /** The last spirit-sweep failure, when one surfaced (the sweep runs per-session, best-effort). */
+  readonly spiritSweep?: string;
 }
 
 async function runHarvestAll(args: ParsedArgs): Promise<number> {
@@ -602,7 +607,30 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     } catch (e) {
       mined = "capture-failed: " + String((e as Error).message ?? "").trim().slice(0, 160);
     }
-    results.push({ wing, transcripts: es.length, sources, mined });
+    // SPIRIT SWEEP (the --all spirits leg): every Claude session's tasked-spirit transcripts
+    // ride the SAME road the Stop hook takes — cmdSubagents routes each spirit turn through
+    // the @daemon capture verb (daemon-first; the direct ndjson mine only as the daemon-down
+    // verbatim-always fallback), into `<wing>__spirits` beside the project wing (the project-
+    // wing law flows through). Idempotent: the per-spirits-wing capture watermark skips turns
+    // already submitted, so re-runs cost one listSpiritFiles stat per session. The sweep reads
+    // the ORIGINAL transcript path (spirits live at `<session>/subagents/`, never staged).
+    let spiritSessions = 0;
+    let spiritSweep: string | undefined;
+    for (const e of es) {
+      if (e.source !== "claude" || listSpiritFiles(e.file).length === 0) continue;
+      try {
+        const rc = await cmdSubagents({ command: "subagents", positional: [e.file], options: { wing }, flags: {} });
+        if (rc === 0) spiritSessions += 1;
+        else spiritSweep = `subagents-rc-${rc}`;
+      } catch (err) {
+        spiritSweep = "subagents-failed: " + String((err as Error).message ?? "").trim().slice(0, 120);
+      }
+    }
+    results.push({
+      wing, transcripts: es.length, sources, mined,
+      ...(spiritSessions ? { spiritSessions } : {}),
+      ...(spiritSweep ? { spiritSweep } : {}),
+    });
   }
 
   results.sort((a, b) => b.transcripts - a.transcripts);
@@ -618,7 +646,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
         console.log(`  organs front-run: stood ${ran} step(s) before mining (registry probe found absent organs)`);
       }
       for (const r of results)
-        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}`);
+        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
       console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .astpalace · hash-bound`);
       if (hnsw) console.log(hnswRepairLine(hnsw));
     },
