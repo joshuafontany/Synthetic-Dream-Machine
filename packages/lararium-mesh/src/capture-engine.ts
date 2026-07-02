@@ -31,6 +31,8 @@ import type { CaptureFlush, CaptureRecord, CaptureStats, FlushGate } from "./cap
 import type { BranchContext } from "./build-patch.js";
 import { CoalesceGate } from "./projection-nalu.js";
 import { adaptGate, deriveGate } from "./gate-tuning.js";
+import { defaultCryptoProvider, sha256Hex, utf8Bytes } from "./crypto.js";
+import type { DigestProvider } from "./crypto.js";
 
 /** The forward annotate pass: a raw turn → its `lar_*` metadata. Each vessel injects its
  *  own (node: harvestTurnGradient + buildPatch; browser: the pure twin). The optional `branch`
@@ -122,6 +124,9 @@ export interface CaptureEngineSeams {
     readonly setTimer: (fn: () => void, ms: number) => TimerHandle;
     readonly clearTimer: (h: TimerHandle) => void;
   };
+  /** digest seam for the sink-side dedup + chunk identity (deterministic tests). Default: the
+   *  platform Web Crypto provider — isomorphic, no substrate import. */
+  readonly digest?: DigestProvider;
 }
 
 export interface CaptureEngine {
@@ -129,8 +134,21 @@ export interface CaptureEngine {
    *  threads the turn-DAG fork-frontier to the annotate pass (the same-session fork-cut). `turnKey`
    *  (optional) — the USER turn's uuid — rides onto the record's metadata as `lar_turn_key`, the
    *  PROVENANCE key the node-side AST split lifts into the .astpalace (so a rewind can later
-   *  set-aside that turn's tally); it is stripped from the content drawer (provenance, not content). */
-  enqueue(turnText: string, sourceFile: string, branch?: BranchContext, turnKey?: string): Promise<void>;
+   *  set-aside that turn's tally); it is stripped from the content drawer (provenance, not content).
+   *
+   *  SINK-SIDE IDEMPOTENCE (the dedup-first keystone): the cell dedups in ITS OWN log — a
+   *  resubmitted turn (same source + turnKey + content hash) acks idempotently and never
+   *  double-lands the WAL or the hot pool. The dedup index seeds from the WAL replay (recover)
+   *  and grows with each accepted append; enqueues serialize on an internal tail so two
+   *  concurrent resubmits cannot race past the check.
+   *
+   *  `chunkIndex` (optional) — the producer's stable per-source ordinal (e.g. the exchange index
+   *  within the transcript) — rides onto the record as the ndjson `chunk_index`, so the drawer id
+   *  (`sha256(source_file)_chunk`) stays deterministic across flush batches AND converges with the
+   *  daemon-down direct-mine fallback (which stamps the same ordinal). Absent, the cell derives a
+   *  stable 48-bit ordinal from the turnKey (else the content hash) — deterministic, never the
+   *  per-spool restart that collided same-session drawers across batches. */
+  enqueue(turnText: string, sourceFile: string, branch?: BranchContext, turnKey?: string, chunkIndex?: number): Promise<void>;
   /** Crest on a server tick — flush the batch if the gate fires. Returns the count filed. */
   tick(nowMs: number): Promise<number>;
   /** Boot recovery — replay the WAL back into the hot pool. Returns the count recovered. */
@@ -159,6 +177,20 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   const now = seams.now ?? (() => Date.now());
   let gate = seams.gate ?? PONO_FLUSH_GATE;
   let live = true;
+
+  // SINK-SIDE DEDUP — the island's own log. Keyed `source \0 turnKey` (else `source \0 #hash`),
+  // valued by the content hash: a resubmit with the SAME key+hash acks idempotently; the same
+  // turnKey with NEW content (an exchange that grew its answer) re-lands and upserts (the
+  // deterministic chunk id keeps it ONE drawer). Seeded from the WAL replay, grown per append.
+  const digest = seams.digest ?? defaultCryptoProvider;
+  const seen = new Map<string, string>();
+  let enqueueTail: Promise<void> = Promise.resolve();
+  const hashOf = (text: string): Promise<string> => sha256Hex(utf8Bytes(text), digest);
+  // The dedup IDENTITY = (source, turnKey-or-content, chunk). The chunk term keeps same-session
+  // FORK twins distinct (identical text, different frontier -> a different derived chunk) while a
+  // true resubmit (same producer ordinal / same derivation) still collapses.
+  const dedupKeyOf = (sourceFile: string, turnKey: string | undefined, contentHash: string, chunk: number | undefined): string =>
+    `${sourceFile}\u0000${turnKey ?? "#" + contentHash}\u0000${chunk ?? ""}`;
 
   // Derivation-loop state (inert when no `derive`): the EWMA flush cost (S), the enqueue count +
   // window for arrival rate (λ = arrivals/elapsed), and the slow-loop flush counter.
@@ -237,21 +269,41 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   };
 
   return {
-    async enqueue(turnText, sourceFile, branch, turnKey) {
-      const metadata = annotate(turnText, sourceFile, branch);
-      // The turn's provenance key rides ALONGSIDE the annotate patch (not derived from text — it
-      // is the producer's identity for this turn). The node AST split lifts it into the .astpalace
-      // and strips it from the drawer; absent ⇒ byte-identical to before.
-      if (turnKey) metadata["lar_turn_key"] = turnKey;
-      const record: CaptureRecord = {
-        content: turnText,
-        source_file: sourceFile,
-        metadata,
-      };
-      await reserve.append(record); // write-ahead: durable BEFORE the hot pool
-      nalu.enqueue(record);
-      arrivals++; // count the arrival for λ (the derivation loop; recover() bypasses this — replay ≠ arrival)
-      markOut(); // hot-pool depth moved — coalesce a stats frame
+    enqueue(turnText, sourceFile, branch, turnKey, chunkIndex) {
+      // Serialize on the tail: two near-simultaneous resubmits of one turn must not both pass the
+      // dedup check mid-hash (the WAL append order stays deterministic as a side effect).
+      const run = enqueueTail.then(async () => {
+        const contentHash = await hashOf(turnText);
+        // The CHUNK IDENTITY — the ndjson `chunk_index` half of the deterministic drawer id
+        // (`sha256(source_file)_chunk`). Producer-sent ordinal when present (converges with the
+        // direct-mine fallback's transcript ordinal); else a stable 48-bit derivation off the
+        // turnKey (stable across content growth -> the drawer upserts in place) else the content
+        // hash, salted by the fork-frontier so same-session fork twins stay distinct. NEVER the
+        // adapter's per-spool restart (the cross-batch collision this cures).
+        const forkTag = branch?.frontier == null ? "" : Array.isArray(branch.frontier) ? branch.frontier.join(",") : String(branch.frontier);
+        const chunk = chunkIndex ??
+          Number.parseInt((await hashOf(`${turnKey ?? contentHash}\u0000${forkTag}`)).slice(0, 12), 16);
+        const key = dedupKeyOf(sourceFile, turnKey, contentHash, chunk);
+        if (seen.get(key) === contentHash) return; // already in the island's log — idempotent ack
+        const metadata = annotate(turnText, sourceFile, branch);
+        // The turn's provenance key rides ALONGSIDE the annotate patch (not derived from text — it
+        // is the producer's identity for this turn). The node AST split lifts it into the .astpalace
+        // and strips it from the drawer; absent ⇒ byte-identical to before.
+        if (turnKey) metadata["lar_turn_key"] = turnKey;
+        const record: CaptureRecord = {
+          content: turnText,
+          source_file: sourceFile,
+          metadata,
+          chunk_index: chunk,
+        };
+        await reserve.append(record); // write-ahead: durable BEFORE the hot pool
+        seen.set(key, contentHash); // the log accepted it — the dedup index grows with the log
+        nalu.enqueue(record);
+        arrivals++; // count the arrival for λ (the derivation loop; recover() bypasses this — replay ≠ arrival)
+        markOut(); // hot-pool depth moved — coalesce a stats frame
+      });
+      enqueueTail = run.catch(() => { /* a failed append never wedges the tail */ });
+      return run;
     },
     async tick(nowMs) {
       try {
@@ -264,9 +316,21 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
       }
     },
     async recover() {
+      // Replay the WAL AND seed the dedup index from it — the WAL is the island's own log, so a
+      // resubmit after a restart still acks idempotently. A duplicate WAL line (a pre-dedup
+      // append, or a crash between append and truncate) replays ONCE.
       const records = await reserve.replay();
-      for (const r of records) nalu.enqueue(r);
-      return records.length;
+      let recovered = 0;
+      for (const r of records) {
+        const turnKey = typeof r.metadata?.["lar_turn_key"] === "string" ? (r.metadata["lar_turn_key"] as string) : undefined;
+        const contentHash = await hashOf(r.content);
+        const key = dedupKeyOf(r.source_file, turnKey, contentHash, r.chunk_index);
+        if (seen.get(key) === contentHash) continue;
+        seen.set(key, contentHash);
+        nalu.enqueue(r);
+        recovered++;
+      }
+      return recovered;
     },
     stats: () => nalu.stats(),
     gate: () => gate,

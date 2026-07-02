@@ -286,6 +286,13 @@ export interface DaemonMsg_TelemetryPlaceVerb {
    * turn's AST is stored, but not kapae-addressable). Stripped from the content drawer.
    */
   turnKey?: string;
+  /**
+   * The producer's stable per-source ordinal (the exchange index within the transcript) — the
+   * ndjson `chunk_index` half of the deterministic drawer id (`sha256(source_file)_chunk`), so
+   * the verb leg and the daemon-down direct-mine fallback converge on ONE drawer per turn.
+   * Absent ⇒ the engine derives a stable ordinal from the turnKey / content hash.
+   */
+  chunkIndex?: number;
 }
 
 /**
@@ -896,6 +903,7 @@ export function mkTelemetryPlaceVerb(opts: {
   sourceFile: string;
   frontier?: readonly string[];
   turnKey?: string;
+  chunkIndex?: number;
 }): DaemonMsg_TelemetryPlaceVerb {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -904,6 +912,7 @@ export function mkTelemetryPlaceVerb(opts: {
     sourceFile: opts.sourceFile,
     ...(opts.frontier && opts.frontier.length ? { frontier: [...opts.frontier] } : {}),
     ...(opts.turnKey ? { turnKey: opts.turnKey } : {}),
+    ...(opts.chunkIndex !== undefined ? { chunkIndex: opts.chunkIndex } : {}),
   };
 }
 

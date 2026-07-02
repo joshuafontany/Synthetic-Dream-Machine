@@ -49,7 +49,9 @@ interface EnqueueSignal {
   readonly frontier?: readonly string[];
   /** The USER turn's uuid — the .astpalace provenance key (rides into the AST store, never the drawer). */
   readonly turnKey?: string;
-  readonly args?: { readonly turnText?: string; readonly sourceFile?: string; readonly frontier?: readonly string[]; readonly turnKey?: string };
+  /** The producer's stable per-source ordinal — the deterministic drawer-id chunk (absent ⇒ the engine derives one). */
+  readonly chunkIndex?: number;
+  readonly args?: { readonly turnText?: string; readonly sourceFile?: string; readonly frontier?: readonly string[]; readonly turnKey?: string; readonly chunkIndex?: number };
 }
 
 /** A rewind (kapae) signal: set-aside one turn's AST tally + down-weight its content drawers. */
@@ -155,7 +157,14 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
       // The USER turn's uuid rides onto the record metadata as the .astpalace provenance key (the
       // kapae key); absent ⇒ the turn's AST is stored but not rewind-addressable.
       const turnKey = msg.turnKey ?? msg.args?.turnKey;
-      void e.enqueue(turnText, sourceFile, branch, typeof turnKey === "string" && turnKey ? turnKey : undefined);
+      // The producer's stable chunk ordinal (the deterministic drawer-id half); absent ⇒ the engine
+      // derives a stable one from the turnKey / content hash — never the per-spool restart.
+      const chunkIndex = msg.chunkIndex ?? msg.args?.chunkIndex;
+      void e.enqueue(
+        turnText, sourceFile, branch,
+        typeof turnKey === "string" && turnKey ? turnKey : undefined,
+        typeof chunkIndex === "number" && Number.isFinite(chunkIndex) ? chunkIndex : undefined,
+      );
       return true;
     },
   };

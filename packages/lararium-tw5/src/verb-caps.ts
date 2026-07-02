@@ -119,7 +119,7 @@ export interface SubagentEdgePair {
  *  worker's. The impl proxies to the live `DaemonVmCore`. */
 export interface DaemonVerbProvider {
   /** FEED one captured turn to the @daemon telemetry capture cap (the nalu). Fire-and-forget. */
-  placeTelemetry(turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string): void;
+  placeTelemetry(turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string, chunkIndex?: number): void;
   /** REWIND (kapae) one turn's .astpalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeAstpalaceKapae(turnKey: string, ended?: string): void;
@@ -266,7 +266,13 @@ export function captureVerbCap(): CapModule {
           // Optional turn uuid — the .astpalace provenance key (the kapae key); rides into the AST
           // store via the capture record metadata, stripped from the content drawer.
           const turnKey = typeof args["turnKey"] === "string" && args["turnKey"] ? (args["turnKey"] as string) : undefined;
-          daemon.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined, turnKey);
+          // Optional producer ordinal — the ndjson chunk_index half of the deterministic drawer id
+          // (sha256(source_file)_chunk); keeps the verb leg convergent with the direct-mine fallback.
+          const rawChunk = args["chunkIndex"];
+          const chunkIndex = typeof rawChunk === "number" && Number.isFinite(rawChunk)
+            ? rawChunk
+            : typeof rawChunk === "string" && rawChunk !== "" && Number.isFinite(Number(rawChunk)) ? Number(rawChunk) : undefined;
+          daemon.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined, turnKey, chunkIndex);
           return { ok: true, captured: true, bytes: turnText.length };
         });
         registry.register("astpalace-kapae", async (args) => {
