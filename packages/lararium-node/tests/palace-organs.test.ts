@@ -4,7 +4,7 @@
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
-import { mkdtempSync, rmSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { mkdtempSync, rmSync, mkdirSync, writeFileSync, existsSync, readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { palaceOrgans, setupPalaceOrgans, organHealthy } from "../src/palace-organs.js";
@@ -97,6 +97,26 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     expect(second.every((s) => s.ok)).toBe(true);
     expect(second.every((s) => s.ran === false)).toBe(true);
     for (const o of palaceOrgans()) expect(organHealthy(o)).toBe(true);
+  });
+
+  test("the auto_save off-switch rewrites config.json ATOMICALLY — parse-back holds, no stranded temp", () => {
+    // Config present but auto_save NOT yet false → the off-switch leg fires the durable write.
+    mkdirSync(mempalace, { recursive: true });
+    writeFileSync(join(mempalace, "config.json"), JSON.stringify({ hooks: { auto_save: true }, keep: "me" }) + "\n");
+
+    // Fire the mempalace organ's init directly: config PRESENT → the CLI spawn leg skips, and
+    // ONLY the auto-save off-switch (the atomic config write under witness) runs.
+    const steps = palaceOrgans().find((o) => o.name === "mempalace")!.init!();
+    const off = steps.find((s) => s.step === "mempalace:auto-save-off")!;
+    expect(off.ran).toBe(true);
+    expect(off.ok).toBe(true);
+
+    // Parse-back: the rewritten config reads whole (never torn), gate pinned, siblings preserved.
+    const cfg = JSON.parse(readFileSync(join(mempalace, "config.json"), "utf8")) as Record<string, unknown>;
+    expect((cfg["hooks"] as Record<string, unknown>)["auto_save"]).toBe(false);
+    expect(cfg["keep"]).toBe("me");
+    // The atomic path leaves NO stranded `<path>.<pid>.tmp` sibling behind.
+    expect(readdirSync(mempalace).filter((f) => f.endsWith(".tmp"))).toEqual([]);
   });
 
   test("stamps the mesh sensorium TREE: parent #has {who,authority,flow}, each child self-describes", () => {

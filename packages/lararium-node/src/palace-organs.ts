@@ -22,10 +22,11 @@
  * Meme: lar:///ha.ka.ba/@lararium/mempalace/genesis-doc
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
+import { atomicWriteFileSync } from "./fs-atomic.js";
 import {
   larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir, resolveMempalaceExe,
@@ -104,7 +105,9 @@ function initMempalace(): PalaceSetupStep[] {
     const hooks = (cfg["hooks"] ?? {}) as Record<string, unknown>;
     if (hooks["auto_save"] !== false) {
       cfg["hooks"] = { ...hooks, auto_save: false };
-      writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
+      // Atomic (temp + rename): a crash mid-write must never tear the DURABLE palace config —
+      // a torn config.json loses the auto_save re-pollution gate silently on the next boot.
+      atomicWriteFileSync(cfgPath, JSON.stringify(cfg, null, 2) + "\n");
       steps.push({ step: "mempalace:auto-save-off", ran: true, ok: true, detail: "hooks.auto_save=false (re-pollution gate)" });
     } else {
       steps.push({ step: "mempalace:auto-save-off", ran: false, ok: true, detail: "hooks.auto_save already false" });
