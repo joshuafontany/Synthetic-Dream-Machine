@@ -1,21 +1,21 @@
 /**
- * testimony-keel — the precision law: born silent · corroboration-not-count · defeat re-silences
- * without deleting · voice/confidence DERIVE at read (never stored) · the surprise gate.
+ * testimony-keel — the standing law: born silent · corroboration-not-count · defeat re-silences
+ * without deleting · voice/standing DERIVE at read (never stored) · the surprise gate.
  */
 import { describe, test, expect } from "vitest";
 import {
   recordTestimony, corroborate, defeat, reentryPrior, surpriseGate, surpriseScore,
-  CONFIDENCE_FLOOR, CONFIDENCE_CEILING,
+  STANDING_FLOOR, STANDING_CEILING,
 } from "../src/index.js";
 
 const prov = { signer: "vessel-A", frontier: "f0" };
 const born = () => recordTestimony("innovation", [1, 2, 3], prov);
 
 describe("testimony-keel — born silent, matured by independence alone", () => {
-  test("a fresh testimony reads silent at the floor confidence", () => {
+  test("a fresh testimony reads silent at the floor standing", () => {
     const p = reentryPrior(born());
     expect(p.voice).toBe("silent");
-    expect(p.confidence).toBe(CONFIDENCE_FLOOR);
+    expect(p.standing).toBe(STANDING_FLOOR);
     expect(p.value).toEqual([1, 2, 3]);
   });
 
@@ -24,23 +24,23 @@ describe("testimony-keel — born silent, matured by independence alone", () => 
     for (let i = 0; i < 100; i++) t = corroborate(t, { signer: "vessel-A", frontier: `f${i}` });
     const p = reentryPrior(t);
     expect(p.voice).toBe("silent");
-    expect(p.confidence).toBe(CONFIDENCE_FLOOR);
+    expect(p.standing).toBe(STANDING_FLOOR);
     expect(t.corroborations).toHaveLength(100);            // recorded honestly, weighed at zero
   });
 
   test("one DISTINCT signer speaks it; repeats of that same witness add nothing more", () => {
     let t = corroborate(born(), { signer: "vessel-B", frontier: "f1" });
     expect(reentryPrior(t).voice).toBe("spoken");
-    const c1 = reentryPrior(t).confidence;
-    expect(c1).toBeGreaterThan(CONFIDENCE_FLOOR);
+    const s1 = reentryPrior(t).standing;
+    expect(s1).toBeGreaterThan(STANDING_FLOOR);
     for (let i = 0; i < 10; i++) t = corroborate(t, { signer: "vessel-B", frontier: `f${i + 2}` });
-    expect(reentryPrior(t).confidence).toBe(c1);           // count buys nothing
+    expect(reentryPrior(t).standing).toBe(s1);           // count buys nothing
   });
 
-  test("many distinct signers grow confidence but NEVER into the Canon band (ceiling 16)", () => {
+  test("many distinct signers grow standing but NEVER into the Canon band (ceiling 16)", () => {
     let t = born();
     for (let i = 0; i < 50; i++) t = corroborate(t, { signer: `vessel-W${i}`, frontier: `f${i}` });
-    expect(reentryPrior(t).confidence).toBe(CONFIDENCE_CEILING); // Canon (17+) is talk-story's alone
+    expect(reentryPrior(t).standing).toBe(STANDING_CEILING); // Canon (17+) is talk-story's alone
   });
 
   test("defeat re-silences to the floor and deletes NOTHING", () => {
@@ -48,7 +48,7 @@ describe("testimony-keel — born silent, matured by independence alone", () => 
     const beaten = defeat(spoken, { signer: "vessel-C", frontier: "f2" });
     const p = reentryPrior(beaten);
     expect(p.voice).toBe("silent");
-    expect(p.confidence).toBe(CONFIDENCE_FLOOR);
+    expect(p.standing).toBe(STANDING_FLOOR);
     expect(beaten.corroborations).toHaveLength(1);         // history intact (move-not-delete)
     expect(beaten.defeats).toHaveLength(1);
   });
@@ -59,7 +59,7 @@ describe("testimony-keel — born silent, matured by independence alone", () => 
     const respoken = corroborate(beaten, { signer: "vessel-B", frontier: "f3" });
     const p = reentryPrior(respoken);
     expect(p.voice).toBe("spoken");
-    expect(p.confidence).toBeGreaterThan(CONFIDENCE_FLOOR);
+    expect(p.standing).toBeGreaterThan(STANDING_FLOOR);
   });
 
   test("transitions are immutable — the prior record never mutates", () => {
@@ -70,7 +70,7 @@ describe("testimony-keel — born silent, matured by independence alone", () => 
     expect(t.defeats).toHaveLength(0);
   });
 
-  test("nothing persisted claims voice/confidence — the record is content + histories only", () => {
+  test("nothing persisted claims voice/standing — the record is content + histories only", () => {
     const t = corroborate(born(), { signer: "vessel-B", frontier: "f1" });
     expect(Object.keys(t).sort()).toEqual(["assertion", "corroborations", "defeats", "kind", "provenance", "pubinfo"]);
   });

@@ -1,16 +1,27 @@
 /**
  * testimony-keel — the persistence keystone's LIFECYCLE floor: a sensorium's persisted reading
  * lives as attributed, immutable TESTIMONY (nanopublication shape: assertion ⊥ provenance ⊥
- * pubinfo), born SILENT at a LOW confidence, matured ONLY by independent corroboration — never by
+ * pubinfo), born SILENT at a LOW standing, matured ONLY by independent corroboration — never by
  * count — and re-silenced by a defeater flag (move-not-delete).
  *
- * THE PRECISION LAW (the 2026-07-02 crucible's surviving core, YIN-collapsed to one sentence):
- * a persisted trace carries one confidence dial — only distinct-signer witness edges raise it,
+ * THE STANDING LAW (the 2026-07-02 crucible's surviving core, YIN-collapsed to one sentence):
+ * a persisted trace carries one STANDING dial — only distinct-signer witness edges raise it,
  * only flagged defeaters lower it, repetition and recall move it not at all; at the floor, the
  * trace rides silent — weighed at floor gain on re-entry, never obeyed.
  *
- * The laws that sentence keeps, and where they came from (rhyme-diver-maps#crucible-verdicts):
- *   - FEP re-entry — {value, confidence} returns as arithmetic, weighed never obeyed.
+ * THE THREE REGISTERS (the operator's 2026-07-02 correction — the keel fuses none of them):
+ *   - CONFIDENCE — a FORWARD vow of commitment (provisional-play → canon-committed), seeded
+ *     before a claim, never computed after. The keel computes NO confidence; a recorder's vowed
+ *     band rides `pubinfo` verbatim, preserved untouched.
+ *   - STANDING — what witnesses EARN a record (the Law-of-5s rating ladder's r-axis:
+ *     noise → data → meme → ano → kapu). Backward-accumulated by design — this, and only this,
+ *     is the keel's dial. Gating voice on standing is lawful; gating on confidence never is.
+ *   - CORRESPONDENCE (Maybe-Logic's pole-shy fuzzy truth) — encoded NOWHERE, deliberately;
+ *     it lives in the reader's judgment, not in any stored number.
+ *
+ * The laws the standing law keeps (rhyme-diver-maps#crucible-verdicts):
+ *   - FEP re-entry — {value, standing} returns as arithmetic, weighed never obeyed. Standing is
+ *     NOT a gain π and NOT a vowed confidence; a consumer weighting by it declares its own map.
  *   - recorded ≠ retrievable — a testimony persists whole while silent.
  *   - sincerity ⊥ reliability (Fricker, narrowed) — `signer` carries attribution only;
  *     reliability rides the corroboration lifecycle, never the signature.
@@ -23,12 +34,8 @@
  *   - the inlined ITC frontier — the causal position rides ON the record as an opaque string
  *     (callers populate it via worldline-causal's frontierOf; the sidecar handle fell in crucible).
  *
- * VOCABULARY (loom-check): the 0..20 dial is CONFIDENCE (sensorium-pc's scale). The FEP gain π
- * is a DIFFERENT number — consumers weighing prediction error MUST convert via sensorium-pc's
- * `confidenceToPrecision` (confidence 10 ⇒ gain 1); plugging the raw dial in as π mis-weights.
- *
- * Confidence ceiling law: the mechanical lifecycle NEVER lifts the dial into the Canon band
- * (17..20) — Canon settles by talk-story consensus only (Maybe Logic), so the ceiling pins at 16.
+ * Standing ceiling law: the mechanical lifecycle NEVER lifts the dial into the top band
+ * (kapu, 17..20) — the top band seats by talk-story consensus only, so the ceiling pins at 16.
  *
  * DERIVE, NEVER STORE (pruning-shear): the record persists only content + histories; voice and
  * confidence derive at read, so a persisted record cannot CLAIM "spoken" without the
@@ -40,10 +47,10 @@
 
 import { meanVar } from "./change-point.js";
 
-/** The 0..20 confidence dial's floors and ceilings for a testimony's lifecycle. */
-export const CONFIDENCE_FLOOR = 3;    // born Provisional — the play register, honest not failed
-export const CONFIDENCE_STEP = 4;     // one independent corroborator's worth of gain
-export const CONFIDENCE_CEILING = 16; // Synthesis-Canon top — Canon (17+) is talk-story's alone
+/** The 0..20 STANDING dial's floors and ceilings for a testimony's lifecycle. */
+export const STANDING_FLOOR = 3;    // born at the noise band — quiet, honest, not failed
+export const STANDING_STEP = 4;     // one independent corroborator's worth of earned standing
+export const STANDING_CEILING = 16; // ano's top — kapu (17+) seats by talk-story alone
 
 /** PROVENANCE — who spoke (attribution only) + where in causal time. */
 export interface TestimonyProvenance {
@@ -75,7 +82,7 @@ export interface Defeat {
  * A TESTIMONY — one persisted sensorium reading, nanopub-shaped: pure content + histories.
  * `assertion` carries the slow sufficient statistic (a signed innovation vector, a distribution
  * snapshot — the keel is content-blind); `kind` names its plane/shape for the reader. Voice and
- * confidence are NOT stored — read them through {@link reentryPrior}.
+ * standing are NOT stored — read them through {@link reentryPrior}.
  */
 export interface Testimony {
   readonly kind: string;
@@ -138,15 +145,15 @@ export function defeat(t: Testimony, defeater: WitnessEdge): Testimony {
 }
 
 /**
- * The FEP re-entry read — where voice and confidence DERIVE: floor + one step per distinct fresh
+ * The FEP re-entry read — where voice and standing DERIVE: floor + one step per distinct fresh
  * signer, ceiling-pinned; above the floor, the testimony speaks. The value returns as a
- * low-confidence prior for the consumer's arithmetic — weighed, never obeyed. A silent testimony
+ * low-standing prior for the consumer's arithmetic — weighed, never obeyed. A silent testimony
  * still returns (recorded ≠ retrievable ≠ suppressed), at the floor.
  */
-export function reentryPrior(t: Testimony): { readonly value: readonly number[]; readonly confidence: number; readonly voice: "silent" | "spoken" } {
+export function reentryPrior(t: Testimony): { readonly value: readonly number[]; readonly standing: number; readonly voice: "silent" | "spoken" } {
   const n = freshIndependentSigners(t).size;
-  const confidence = Math.min(CONFIDENCE_FLOOR + n * CONFIDENCE_STEP, CONFIDENCE_CEILING);
-  return { value: t.assertion, confidence, voice: n > 0 ? "spoken" : "silent" };
+  const standing = Math.min(STANDING_FLOOR + n * STANDING_STEP, STANDING_CEILING);
+  return { value: t.assertion, standing, voice: n > 0 ? "spoken" : "silent" };
 }
 
 /**
