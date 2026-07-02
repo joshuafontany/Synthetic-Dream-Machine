@@ -110,6 +110,18 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
 
   const out = summaryOutput(result) ?? {};
   const mode = out["mode"];
+  // STALE-DAEMON GUARD — a daemon predating the stamp filters ignores unknown verb args and
+  // returns the UNFILTERED result (the silent drop the filters ban). A filtered response always
+  // carries `scanned`; its absence under requested filters refuses loud, never lies quietly.
+  if (hasFilters && mode !== "drawer" && typeof out["scanned"] !== "number") {
+    const msg = "the running daemon predates recall stamp filters (it returned an unfiltered result)";
+    emit(args, {
+      ok: false, requestId: result.requestId,
+      error: { code: "verb-error", message: msg, hint: "Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry." },
+      human: () => { console.error(`lares recall: ${msg}`); console.error("  Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry."); },
+    });
+    return exitFor("verb-error");
+  }
   emit(args, {
     ok: true,
     requestId: result.requestId,
