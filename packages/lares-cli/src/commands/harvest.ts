@@ -522,20 +522,24 @@ interface WingHarvest {
 // the capture WAL's live depth — sink pressure) servos the inter-batch delay; the FFZ
 // incommensurable floor keeps bulk from phase-locking with the live turn-Stop capture.
 
+/** Nominal WAL bytes-per-record for the cheap depth estimate. A real record (a full exchange as
+ *  one JSON line) runs WELL over 1 KiB, so dividing by this UNDERSTATES record size and therefore
+ *  OVER-reports depth — the conservative direction (over-reporting only widens the window). */
+const WAL_NOMINAL_RECORD_BYTES = 1024;
+
 /**
- * READ-ONLY depth of the @daemon capture WAL (`<larDataDir>/capture-nalu/wal.ndjson`) — the
- * count of write-ahead-logged records since the engine's last fully-drained compact. HONEST
- * BOUND: the WAL is append-only until `compactIfDrained` truncates it, so this reads an UPPER
- * bound on the live hot-pool depth — over-reporting only widens the feeder window (the
- * conservative direction for a cost signal). No engine edit: the file IS the engine's own
- * durable depth surface.
+ * READ-ONLY depth estimate of the @daemon capture WAL (`<larDataDir>/capture-nalu/wal.ndjson`) —
+ * write-ahead-logged records since the engine's last fully-drained compact. Reads ONE cheap
+ * `statSync` (bytes ÷ nominal record size), never the whole file — the old line-count read pulled
+ * a 43 MB WAL into memory on EVERY pacer step. HONEST BOUND twice over: the WAL is append-only
+ * until `compactIfDrained` truncates it, and the nominal divisor over-counts records — both errors
+ * point the conservative way (a wider feeder window). No engine edit: the file IS the engine's
+ * own durable depth surface.
  */
 function readCaptureWalDepth(): number {
   try {
-    const body = readFileSync(join(larDataDir(), "capture-nalu", "wal.ndjson"), "utf8");
-    let n = 0;
-    for (const line of body.split("\n")) if (line.trim()) n += 1;
-    return n;
+    const bytes = statSync(join(larDataDir(), "capture-nalu", "wal.ndjson")).size;
+    return Math.ceil(bytes / WAL_NOMINAL_RECORD_BYTES);
   } catch {
     return 0; // no WAL (daemon never captured / already compacted) — no pressure
   }

@@ -68,7 +68,7 @@ function dirSizeHint(dir: string): string {
   return `${count} files, ${(bytes / 1024).toFixed(1)} KiB`;
 }
 
-function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<boolean> {
+export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<boolean> {
   return new Promise((resolveP) => {
     const sock = createConnection({ port, host });
     const done = (open: boolean): void => {
