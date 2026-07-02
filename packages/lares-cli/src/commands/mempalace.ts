@@ -115,10 +115,20 @@ function cmdStatus(args: ParsedArgs): number {
 // ── quiesce ─────────────────────────────────────────────────────────────────
 
 /**
- * Drain every store-HOLDER to zero: SIGTERM each (its own graceful flush-then-force
- * handler, `main.ts` for the vessel, mempalace's daemon for the rest), poll the
- * topology until no holder remains, then SIGKILL as a bounded fallback. The live
- * process table is the authority — never a stale PID file.
+ * A proc the drain TERMs: the store-HOLDERS *and* the daemon-MINTING spawner jobs
+ * (`lares capture/subagents/telemetry` legs + the ingest hook). Holders alone left
+ * a wedged spawner surviving every drain, dead-ending the teardown into --force.
+ * The spawner jobs run watermark-idempotent by design, so a TERM stays re-runnable.
+ * (The node vessel — holdsStore:false, mintsDaemons:false — stays untouched.)
+ */
+const drainable = (p: PalaceProc): boolean => p.holdsStore || p.mintsDaemons;
+
+/**
+ * Drain every store-HOLDER and daemon-MINTING job to zero: SIGTERM each (its own
+ * graceful flush-then-force handler, `main.ts` for the vessel, mempalace's daemon
+ * for the rest), poll the topology until no drainable proc remains, then SIGKILL
+ * as a bounded fallback. The live process table is the authority — never a stale
+ * PID file.
  */
 async function drainHolders(opts: { graceMs?: number; pollMs?: number; killMs?: number } = {}): Promise<{
   drained: number[]; forced: number[]; remaining: PalaceProc[];
@@ -128,7 +138,7 @@ async function drainHolders(opts: { graceMs?: number; pollMs?: number; killMs?: 
   const killMs  = opts.killMs  ?? 3_000;
   const drained = new Set<number>();
 
-  const holdersNow = (): PalaceProc[] => snapshot().filter((p) => p.holdsStore);
+  const holdersNow = (): PalaceProc[] => snapshot().filter(drainable);
   const initial = holdersNow();
   if (initial.length === 0) return { drained: [], forced: [], remaining: [] };
 
@@ -163,15 +173,15 @@ export interface QuiesceResult {
 
 /**
  * The quiesce core (shared by `lares mempalace quiesce` AND `lares palace-teardown
- * --drain`): pause the hooks FIRST (stop the minting), drain every warm holder
- * (SIGTERM → poll → bounded SIGKILL), then confirm zero. Un-pauses on a clean quiet
+ * --drain`): pause the hooks FIRST (stop the minting), drain every warm holder AND
+ * wedged spawner job (SIGTERM → poll → bounded SIGKILL), then confirm zero. Un-pauses on a clean quiet
  * unless `hold` (a teardown keeps minting suppressed until it finishes). Idempotent.
  */
 export async function quiescePalace(opts: { hold?: boolean } = {}): Promise<QuiesceResult> {
   const hold = opts.hold === true;
   const paused = pauseHooks("quiesce");
   const { drained, forced, remaining } = await drainHolders();
-  const holdersLeft = snapshot().filter((p) => p.holdsStore);
+  const holdersLeft = snapshot().filter(drainable);
   const quiet = holdersLeft.length === 0;
   if (!hold && quiet) resumeHooks();
   return { quiet, drained, forced, holdersLeft, remaining, hooksHeld: hold || !quiet, marker: paused.marker };
