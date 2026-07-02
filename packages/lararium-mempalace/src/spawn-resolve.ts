@@ -93,6 +93,12 @@ export function resolveFormEncoderSpawn(): FormEncoderSpawn {
   return resolveSidecarSpawn("form_encoder.py");
 }
 
+/** `persistence_io.py` — the persistent NDJSON `serve` holder for a PersistencePalace (testimony) store. */
+export type PersistencePalaceSpawn = SidecarSpawn;
+export function resolvePersistencePalaceSpawn(): PersistencePalaceSpawn {
+  return resolveSidecarSpawn("persistence_io.py");
+}
+
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
 export type StructureRouterSpawn = SidecarSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {
