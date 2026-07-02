@@ -16,7 +16,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 
 import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
-import { canonicalPalacePath, mineWithServoAsync, TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
+import { canonicalPalacePath, mineWithServoAsync, TIMEOUT_KILL_SIGNAL, withMineLane } from "@lararium/mempalace";
 
 const execFileAsync = promisify(execFile);
 
@@ -71,11 +71,17 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
       // The adaptive timeout servo bounds a wedged `mine` (a hang dies ≤ CEIL, never 9 h) and
       // learns each flush's real duration; it COMPOSES with the BUSY-retry — a busy lock WAITS,
       // a hang is killed (SIGKILL) and surfaces honestly so the nalu's WAL re-queues it.
-      const { stdout } = await mineWithServoAsync("capture-flush", (timeoutMs) =>
-        spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path], {
-          timeout: timeoutMs,
-          killSignal: TIMEOUT_KILL_SIGNAL,
-        }),
+      // The SINGLE-WRITER lane (mine-lane): every async mine for this palace queues on one
+      // in-process tail, so concurrent flushes can never race each other (or the chroma hnsw
+      // compactor) into the palace lock — the busy-retry stays the CROSS-process guard, the
+      // lane keeps this process from storming it.
+      const { stdout } = await withMineLane(palacePath, () =>
+        mineWithServoAsync("capture-flush", (timeoutMs) =>
+          spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path], {
+            timeout: timeoutMs,
+            killSignal: TIMEOUT_KILL_SIGNAL,
+          }),
+        ),
       );
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;
