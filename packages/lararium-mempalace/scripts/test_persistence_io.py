@@ -1,0 +1,70 @@
+"""Real-chroma round-trip for the PersistencePalace store (persistence_io). Opens a real
+ChromaDB collection in a tmp palace dir (the venv has chroma), exercising the DUMB store's
+put/get/witness-RMW/neighbors — the lifecycle LAW stays in the TS keel, so this only proves
+persistence + load + append + the neighbor read.
+
+    PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
+        packages/lararium-mempalace/scripts/test_persistence_io.py -q
+"""
+
+import persistence_io as pio
+
+
+def _store(tmp_path):
+    return pio.PersistenceStore(str(tmp_path / ".structurepalace_test_persist"))
+
+
+def test_put_then_get_roundtrips_the_testimony(tmp_path):
+    s = _store(tmp_path)
+    s.put("t-1", "innovation", [0.1, 0.2, 0.3], "vessel-A", "f0", {"vow": "provisional"})
+    got = s.get("t-1")
+    assert got is not None
+    assert got["kind"] == "innovation"
+    assert got["provenance"] == {"signer": "vessel-A", "frontier": "f0"}
+    assert got["pubinfo"] == {"vow": "provisional"}
+    assert got["witnesses"] == []  # born with no witnesses
+    assert len(got["assertion"]) == 3
+    assert got["document"] == "t-1"  # no text projection given → id placeholder
+
+
+def test_get_absent_is_none(tmp_path):
+    assert _store(tmp_path).get("never") is None
+
+
+def test_witness_appends_signed_edges_rmw(tmp_path):
+    s = _store(tmp_path)
+    s.put("t-1", "innovation", [1.0, 0.0], "vessel-A", "f0", {})
+    r1 = s.witness("t-1", "vessel-B", "f1", 1, 5)
+    assert r1 == {"ok": True, "witnesses": 1}
+    r2 = s.witness("t-1", "vessel-C", "f2", -1)  # a defeat
+    assert r2["witnesses"] == 2
+    log = s.get("t-1")["witnesses"]
+    assert log[0] == {"signer": "vessel-B", "frontier": "f1", "polarity": 1, "tick": 5}
+    assert log[1] == {"signer": "vessel-C", "frontier": "f2", "polarity": -1}  # no tick
+
+
+def test_witness_on_absent_is_honest_noop(tmp_path):
+    assert _store(tmp_path).witness("ghost", "vessel-B", "f1", 1) == {"ok": False, "witnesses": 0}
+
+
+def test_put_preserves_witness_log_on_reput(tmp_path):
+    s = _store(tmp_path)
+    s.put("t-1", "innovation", [1.0, 0.0], "vessel-A", "f0", {})
+    s.witness("t-1", "vessel-B", "f1", 1)
+    s.put("t-1", "innovation", [1.0, 0.0], "vessel-A", "f0", {"note": "re-put"})  # content re-put
+    got = s.get("t-1")
+    assert len(got["witnesses"]) == 1        # the log survived the re-put
+    assert got["pubinfo"] == {"note": "re-put"}
+
+
+def test_neighbors_empty_population_is_empty(tmp_path):
+    assert _store(tmp_path).neighbors([1.0, 2.0], 8) == {"population": []}
+
+
+def test_neighbors_returns_nearest_vectors_for_the_gate(tmp_path):
+    s = _store(tmp_path)
+    for i in range(5):
+        s.put(f"t-{i}", "innovation", [float(i), 0.0], "vessel-A", f"f{i}", {})
+    pop = s.neighbors([0.0, 0.0], 3)["population"]
+    assert len(pop) == 3            # the k nearest existing vectors
+    assert all(len(v) == 2 for v in pop)
