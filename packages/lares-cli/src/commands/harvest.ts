@@ -33,7 +33,7 @@ import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysFor
 import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
-import { atomicWriteFileSync } from "@lararium/node";
+import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
 import { emit, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -534,6 +534,26 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
     return 3;
   }
+  // Front-run the palace organs — mining into an ABSENT/stray palace lands a config-less
+  // store with hooks.auto_save unpinned (the mega-wing re-pollution gate). When any organ's
+  // health probe fails, stand the WHOLE registry first (the SAME list `lares wake --init`
+  // stands; idempotent — present organs skip). FAIL LOUD when the verbatim palace still
+  // won't stand: mining into a config-less store re-poisons the palace.
+  let organSteps: PalaceSetupStep[] | null = null;
+  if (!dryRun && palaceOrgans().some((o) => !organHealthy(o))) {
+    organSteps = setupPalaceOrgans();
+    const verbatim = palaceOrgans().find((o) => o.name === "mempalace");
+    if (verbatim && !organHealthy(verbatim)) {
+      const tail = organSteps.filter((s) => !s.ok).map((s) => `${s.step}: ${s.detail}`).join(" · ");
+      const error: LaresError = {
+        code: "error",
+        message: `palace organs failed to stand — refusing to mine into a config-less store${tail ? ` (${tail})` : ""}`,
+        hint: "run `lares wake --init` and inspect its ledger, then re-run `lares harvest --all`",
+      };
+      emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+      return 1;
+    }
+  }
   // EVERY transcript surface — but transcripts ONLY (never curated MD / memory-tool notes).
   const entries = [...discoverClaude(), ...discoverCodex(), ...discoverCopilotVscode(), ...discoverCopilotCli()];
   if (entries.length === 0) {
@@ -590,9 +610,13 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   const hnsw = dryRun ? null : await runHnswRepairTail();
   emit(args, {
     ok: true,
-    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(hnsw ? { hnswRepair: hnsw } : {}) },
+    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(organSteps ? { organsFrontRun: organSteps } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}) },
     human: () => {
       console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
+      if (organSteps) {
+        const ran = organSteps.filter((s) => s.ran).length;
+        console.log(`  organs front-run: stood ${ran} step(s) before mining (registry probe found absent organs)`);
+      }
       for (const r of results)
         console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}`);
       console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .astpalace · hash-bound`);
