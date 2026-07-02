@@ -33,7 +33,8 @@ import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysFor
 import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
-import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
+import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
+import { makeHarvestPacer, type PacerStep } from "../harvest-pacer.js";
 import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
 import { emit, type LaresError } from "../render.js";
@@ -530,6 +531,37 @@ interface WingHarvest {
   readonly spiritSessions?: number;
   /** The last spirit-sweep failure, when one surfaced (the sweep runs per-session, best-effort). */
   readonly spiritSweep?: string;
+  /** The flow-control step this wing's completion cost fed the pacer (absent on the last wing). */
+  readonly pacing?: PacerStep;
+}
+
+// --- FLOW CONTROL: the bulk feeder pacer (harvest-pacer.ts) -----------------
+// The sink's own lived cost paces the source: each wing-batch's completion cost (inflated by
+// the capture WAL's live depth — sink pressure) servos the inter-batch delay; the FFZ
+// incommensurable floor keeps bulk from phase-locking with the live turn-Stop capture.
+
+/**
+ * READ-ONLY depth of the @daemon capture WAL (`<larDataDir>/capture-nalu/wal.ndjson`) — the
+ * count of write-ahead-logged records since the engine's last fully-drained compact. HONEST
+ * BOUND: the WAL is append-only until `compactIfDrained` truncates it, so this reads an UPPER
+ * bound on the live hot-pool depth — over-reporting only widens the feeder window (the
+ * conservative direction for a cost signal). No engine edit: the file IS the engine's own
+ * durable depth surface.
+ */
+function readCaptureWalDepth(): number {
+  try {
+    const body = readFileSync(join(larDataDir(), "capture-nalu", "wal.ndjson"), "utf8");
+    let n = 0;
+    for (const line of body.split("\n")) if (line.trim()) n += 1;
+    return n;
+  } catch {
+    return 0; // no WAL (daemon never captured / already compacted) — no pressure
+  }
+}
+
+/** Async hold between wing-batches (the pacer's delay — never a wall-clock config). */
+function holdMs(ms: number): Promise<void> {
+  return new Promise((res) => setTimeout(res, Math.max(0, Math.round(ms))));
 }
 
 async function runHarvestAll(args: ParsedArgs): Promise<number> {
@@ -574,6 +606,14 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     if (arr) arr.push(e); else byWing.set(e.wing, [e]);
   }
 
+  // The FLOW-CONTROL pacer: per-run seed (the secret phase — pid+time, never shared), WAL-depth
+  // pressure seam wired to the daemon's own durable log. Self-clocking — no wall-clock config.
+  const pacer = makeHarvestPacer({
+    seedHex: process.pid.toString(16) + Date.now().toString(16),
+    readDepth: readCaptureWalDepth,
+  });
+  let wingIndex = 0;
+
   const results: WingHarvest[] = [];
   for (const [wing, es] of byWing) {
     const sources = [...new Set(es.map((e) => e.source))].sort().join("+");
@@ -581,6 +621,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       results.push({ wing, transcripts: es.length, sources, mined: "dry-run" });
       continue;
     }
+    const batchT0 = Date.now();
     // stage into a stable per-wing dir (normalize copilot, hardlink the rest) so
     // mempalace's source_file dedup keeps the mine idempotent across runs.
     const stage = join(stageRoot, wing);
@@ -626,10 +667,20 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
         spiritSweep = "subagents-failed: " + String((err as Error).message ?? "").trim().slice(0, 120);
       }
     }
+    // FLOW CONTROL (cuts 1/3/4): this batch's completion cost — inflated by the sink's live
+    // WAL depth — servos the delay held BEFORE the next wing; the FFZ incommensurable floor
+    // keeps the cadence from phase-locking with live capture. The last wing holds no delay.
+    wingIndex += 1;
+    let pacing: PacerStep | undefined;
+    if (wingIndex < byWing.size) {
+      pacing = pacer.next(Date.now() - batchT0);
+      await holdMs(pacing.delayMs);
+    }
     results.push({
       wing, transcripts: es.length, sources, mined,
       ...(spiritSessions ? { spiritSessions } : {}),
       ...(spiritSweep ? { spiritSweep } : {}),
+      ...(pacing ? { pacing } : {}),
     });
   }
 
@@ -638,7 +689,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   const hnsw = dryRun ? null : await runHnswRepairTail();
   emit(args, {
     ok: true,
-    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(organSteps ? { organsFrontRun: organSteps } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}) },
+    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(pacer.trajectory().length ? { flowControl: pacer.trajectory() } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}) },
     human: () => {
       console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
       if (organSteps) {
@@ -648,6 +699,12 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       for (const r of results)
         console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
       console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .astpalace · hash-bound`);
+      const flow = pacer.trajectory();
+      if (flow.length) {
+        // The servo's window trajectory — the live-light witness line (cuts 1/3/4).
+        const track = flow.map((s) => `${s.windowMs}→${s.delayMs}ms${s.depth ? `(wal ${s.depth})` : ""}`).join(" · ");
+        console.log(`  flow control:  servo window→delay per batch: ${track}`);
+      }
       if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
