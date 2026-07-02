@@ -161,21 +161,71 @@ export const STRUCTURAL_WRITE_KINDS: ReadonlySet<string> = new Set([
   "meme_write",
   "add_tunnel",
   "create_tunnel",
+  "delete_tunnel",
+  "delete_hallway",
+  "delete_by_source",
+  "checkpoint",
   "diary_write",
 ]);
+
+/**
+ * The kinds of persisted effect KNOWN to persist NOTHING structural — reads and
+ * queries. A receipt of one of these never counts, silently. Any kind in NEITHER
+ * set reads as an UNKNOWN write — see {@link firedStructuralWrite}.
+ */
+export const NON_STRUCTURAL_READ_KINDS: ReadonlySet<string> = new Set([
+  "kg_query",
+  "kg_stats",
+  "kg_timeline",
+  "search",
+  "get_drawer",
+  "list_drawers",
+  "list_rooms",
+  "list_wings",
+  "list_hallways",
+  "list_tunnels",
+  "find_tunnels",
+  "follow_tunnels",
+  "traverse",
+  "graph_stats",
+  "status",
+  "diary_read",
+  "memories_filed_away",
+  "check_duplicate",
+  "get_taxonomy",
+  "get_aaak_spec",
+]);
+
+/** Unknown kinds already warned this process — one loud line per kind, never a log flood. */
+const warnedUnknownKinds = new Set<string>();
 
 /**
  * TRUE iff a STRUCTURAL persisted write fired this turn — the house re-encoded
  * itself out-of-band. Reads ONLY the effect channel; a turn of pure discourse
  * (empty channel) reads FALSE (noop). This is the persisted-write detector the
  * honesty ruling demands — NOT a prose scan.
+ *
+ * An UNKNOWN kind (in neither register) counts as STRUCTURAL and warns loudly:
+ * a persisted receipt we cannot classify more plausibly re-encoded the house
+ * than not, and a silent non-count under-feeds the teleodynamic North-Star —
+ * the failure this detector exists to prevent.
  */
 export function firedStructuralWrite(effects: readonly PersistedEffect[]): boolean {
+  let unknownFired = false;
   for (const e of effects) {
     if (e.persisted === false) continue;
     if (STRUCTURAL_WRITE_KINDS.has(e.kind)) return true;
+    if (NON_STRUCTURAL_READ_KINDS.has(e.kind)) continue;
+    // UNKNOWN kind — loud, and counted structural (over-count beats a silent under-count).
+    if (!warnedUnknownKinds.has(e.kind)) {
+      warnedUnknownKinds.add(e.kind);
+      console.warn(
+        `[self-read-harvester] unknown persisted-effect kind "${e.kind}" — counting it as a STRUCTURAL write; add it to STRUCTURAL_WRITE_KINDS or NON_STRUCTURAL_READ_KINDS`,
+      );
+    }
+    unknownFired = true;
   }
-  return false;
+  return unknownFired;
 }
 
 // ---------------------------------------------------------------------------

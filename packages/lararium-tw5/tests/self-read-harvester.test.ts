@@ -11,7 +11,7 @@
  *     off-diagonal — feeding buresDistance (North-Star 1) + the register-band (2).
  */
 
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 import {
   harvestTurn,
   harvestVoiceReadings,
@@ -131,9 +131,31 @@ describe("structuralChange is bound to a PERSISTED write, NOT prose", () => {
     expect(firedStructuralWrite([{ kind: "kg_add", persisted: false }])).toBe(false);
   });
 
-  test("every named structural write kind fires", () => {
-    for (const kind of ["kg_add", "drawer_add", "canonize", "meme_write", "kg_invalidate"]) {
+  test("every named structural write kind fires — the DELETE family + checkpoint included", () => {
+    for (const kind of [
+      "kg_add", "drawer_add", "canonize", "meme_write", "kg_invalidate",
+      // The re-encoding DELETES + the checkpoint — a delete-only turn IS a structural change.
+      "delete_tunnel", "delete_hallway", "delete_by_source", "checkpoint",
+    ]) {
       expect(firedStructuralWrite([{ kind }])).toBe(true);
+    }
+  });
+
+  test("a delete_tunnel-only turn yields structuralChange=true through harvestTurn", () => {
+    const { selfRead } = harvestTurn(SELF_NARRATING_NOOP_TURN, [{ kind: "delete_tunnel", ref: "tunnel:abc" }]);
+    expect(selfRead.structuralChange).toBe(true);
+  });
+
+  test("an UNKNOWN kind surfaces a warning AND counts as structural (never a silent under-count)", () => {
+    const warnings: string[] = [];
+    const spy = vi.spyOn(console, "warn").mockImplementation((...a: unknown[]) => { warnings.push(a.map(String).join(" ")); });
+    try {
+      expect(firedStructuralWrite([{ kind: "totally_new_verb" }])).toBe(true);
+      expect(warnings.some((w) => w.includes("totally_new_verb") && w.includes("STRUCTURAL"))).toBe(true);
+      // …but a rolled-back unknown still never counts.
+      expect(firedStructuralWrite([{ kind: "totally_new_verb_2", persisted: false }])).toBe(false);
+    } finally {
+      spy.mockRestore();
     }
   });
 });

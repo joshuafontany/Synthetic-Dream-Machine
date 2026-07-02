@@ -89,6 +89,7 @@ export {
   REGISTER_BANDS,
   REGISTER_COUNT,
   STRUCTURAL_WRITE_KINDS,
+  NON_STRUCTURAL_READ_KINDS,
   registerBandForWord,
   registerBandForValue,
   bandForConfidence,
