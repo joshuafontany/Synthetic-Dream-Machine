@@ -44,6 +44,17 @@ import {
   type WorldlineKgOptions,
 } from "./worldline-kg.js";
 
+/**
+ * Truncate an ISO timestamp to WHOLE SECONDS before it crosses into the mempalace KG — the KG's
+ * `sanitize_iso_temporal` accepts only `YYYY-MM-DD` / `YYYY-MM-DDTHH:MM:SSZ` (canonical UTC,
+ * no fractional part), while Claude transcripts stamp millisecond ISO (`…:56.789Z`). Un-truncated,
+ * every session's spawn→Delegation edge raised one traceback and never landed. Pure string cut —
+ * a non-ISO or already-whole value passes through untouched.
+ */
+export function isoWholeSeconds(ts: string): string {
+  return ts.replace(/(\d{2}:\d{2}:\d{2})\.\d+(?=Z|[+-]\d{2}:?\d{2}$|$)/, "$1");
+}
+
 /** The boundary turns of a spirit transcript — the spawn anchor (first) and handback anchor (last). */
 interface SpiritBounds {
   readonly firstUuid: string;
@@ -64,7 +75,7 @@ function spiritBounds(agentFile: string): SpiritBounds | null {
     try { r = JSON.parse(l) as Record<string, unknown>; } catch { continue; }
     const role = r["type"];
     if (role !== "user" && role !== "assistant") continue;
-    const ts = typeof r["timestamp"] === "string" ? (r["timestamp"] as string) : "";
+    const ts = typeof r["timestamp"] === "string" ? isoWholeSeconds(r["timestamp"] as string) : "";
     if (!firstUuid) firstUuid = typeof r["uuid"] === "string" ? (r["uuid"] as string) : "";
     if (!firstTs && ts) firstTs = ts;
     if (ts) lastTs = ts;
@@ -82,7 +93,8 @@ function spiritTurns(agentFile: string): TranscriptTurn[] {
   const turns: TranscriptTurn[] = [];
   for (const l of lines) {
     const t = classifyTranscriptTurn(l);
-    if (t) turns.push(t);
+    // Whole-second law at the observer: an inject edge's validFrom rides t.ts into the KG.
+    if (t) turns.push(t.ts ? { ...t, ts: isoWholeSeconds(t.ts) } : t);
   }
   return turns;
 }
