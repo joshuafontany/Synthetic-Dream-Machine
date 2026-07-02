@@ -65,7 +65,10 @@ export async function seedRun(args: ParsedArgs): Promise<SeedHolding[]> {
         command: "ingest",
         positional: [],
         options: { ...args.options, source: h.source, to: h.toBag },
-        flags: args.flags,
+        // On --apply, force `yes` so the ingest submit-leg runs non-interactively (mirrors the
+        // LOAD branch below). Without this a system holding with NEW content (e.g. @lares, unlike a
+        // converged @lararium) trips "confirmation required" and the regenesis seed part-feeds.
+        flags: args.flags["apply"] ? { ...args.flags, yes: true } : args.flags,
       });
       ledger.push({ ...h, gesture: "ingest", exitCode });
     } else {
