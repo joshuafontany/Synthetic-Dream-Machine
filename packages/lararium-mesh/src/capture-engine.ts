@@ -57,6 +57,21 @@ export interface CaptureFrame {
  *  platform. Absent = no OUT projection (Null-Object). */
 export type CapturePost = (frame: CaptureFrame) => void;
 
+/** One LANDED turn — reported by {@link CaptureEngineSeams.onLand} the instant a flush confirms it
+ *  durable. `turnKey` = the producer's idempotency key (the CLI's `.capture-state.json` key); a turn
+ *  captured without one lands with `turnKey` undefined. This is the land-owned watermark's raw event:
+ *  the CLI (or any consumer) advances its per-key watermark on THIS, never on the accept/enqueue ack. */
+export interface LandedTurn {
+  readonly turnKey?: string;
+  readonly sourceFile: string;
+  readonly contentHash: string;
+}
+
+/** The LAND-signal seam (ACCUMULATE, never coalesce — a land must NEVER drop): fires the batch's
+ *  landed turns after a flush confirms them durable. The node vessel writes the capture-state
+ *  watermark off this (drain owns the watermark); absent = no land reporting (Null-Object). */
+export type OnLand = (landed: readonly LandedTurn[]) => void;
+
 /** Self-regulation config (the homeostatic servo — the FAST loop). When composed, each flush
  *  nudges the gate toward `targetLatencyMs` (the recently-observed flush latency vs the set-point). */
 export interface CaptureServo {
@@ -110,6 +125,9 @@ export interface CaptureEngineSeams {
   readonly gate?: FlushGate;
   /** OUT family: deliver coalesced stats frames to the vessel surface (Null-Object when absent). */
   readonly post?: CapturePost;
+  /** LAND signal (accumulate): fires each batch's landed turns after the flush confirms them durable,
+   *  so a consumer advances its watermark on LAND, never on accept. Null-Object when absent. */
+  readonly onLand?: OnLand;
   /** the OUT coalesce window (ms): a burst of state-changes collapses to one frame. Default 50. */
   readonly outWindowMs?: number;
   /** the cell's own clock — times the flush for the servo. Default Date.now. */
@@ -185,6 +203,12 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   const digest = seams.digest ?? defaultCryptoProvider;
   const seen = new Map<string, string>();
   let enqueueTail: Promise<void> = Promise.resolve();
+
+  // LAND signal: thread each record's landed-turn info (the CLI's idempotency key + content hash)
+  // through the flush by OBJECT IDENTITY (a WeakMap — no wire-shape change, nothing leaks into the
+  // mine's ndjson). On flush-success the engine fires onLand with the batch's turns, so a consumer
+  // advances its watermark on LAND, never on the enqueue ack (accept≠land, made structural here).
+  const landMeta = new WeakMap<CaptureRecord, LandedTurn>();
   const hashOf = (text: string): Promise<string> => sha256Hex(utf8Bytes(text), digest);
   // The dedup IDENTITY = (source, turnKey-or-content, chunk). The chunk term keeps same-session
   // FORK twins distinct (identical text, different frontier -> a different derived chunk) while a
@@ -210,6 +234,18 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
     const filed = await seams.flush(batch); // a throw PROPAGATES → both loops skipped (a failed flush
     // is a fast-fail, not a latency signal; the nalu's own backoff/dead-letter is the failure response)
     const observedLatencyMs = now() - t0;
+
+    // LAND confirmed — the flush returned without throwing, so this batch is durable. Fire the land
+    // signal (accumulate: every land reported, none dropped). This is the ONLY site that reports a
+    // land; a throw above skips it entirely (the turn stays staged, no land fires — accept≠land).
+    if (seams.onLand) {
+      const landed: LandedTurn[] = [];
+      for (const rec of batch) {
+        const m = landMeta.get(rec);
+        if (m) landed.push(m);
+      }
+      if (landed.length) seams.onLand(landed);
+    }
 
     if (seams.derive) {
       ewmaCostMs = costSamples === 0 ? observedLatencyMs : COST_EWMA_ALPHA * observedLatencyMs + (1 - COST_EWMA_ALPHA) * ewmaCostMs;
@@ -298,6 +334,8 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
         };
         await reserve.append(record); // write-ahead: durable BEFORE the hot pool
         seen.set(key, contentHash); // the log accepted it — the dedup index grows with the log
+        // record the land-info (NOT a land — the land fires only when the flush confirms it durable)
+        landMeta.set(record, { sourceFile, contentHash, ...(turnKey ? { turnKey } : {}) });
         nalu.enqueue(record);
         arrivals++; // count the arrival for λ (the derivation loop; recover() bypasses this — replay ≠ arrival)
         markOut(); // hot-pool depth moved — coalesce a stats frame
@@ -327,6 +365,7 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
         const key = dedupKeyOf(r.source_file, turnKey, contentHash, r.chunk_index);
         if (seen.get(key) === contentHash) continue;
         seen.set(key, contentHash);
+        landMeta.set(r, { sourceFile: r.source_file, contentHash, ...(turnKey ? { turnKey } : {}) }); // re-lands on next flush → fires onLand
         nalu.enqueue(r);
         recovered++;
       }

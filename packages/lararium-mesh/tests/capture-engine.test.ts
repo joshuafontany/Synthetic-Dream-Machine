@@ -193,4 +193,40 @@ describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
     expect(engine.gate().depth).toBe(45);
     expect(engine.gate().maxDepth).toBe(360); // depth · burst(8)
   });
+
+  test("onLand fires the batch's landed turns ONLY on flush-success (accept≠land, the keel's land-signal)", async () => {
+    const r = stubReserve();
+    const lands: string[] = [];
+    const engine = makeCaptureEngine({
+      reserve: r.reserve,
+      flush: async (b) => b.length,           // a landing flush
+      annotate: () => ({}),
+      gate: GATE,
+      onLand: (landed) => { for (const l of landed) lands.push(l.turnKey ?? `#${l.contentHash.slice(0, 4)}`); },
+    });
+    await engine.enqueue("turn one", "src/1", undefined, "uuid-1");
+    await engine.enqueue("turn two", "src/2", undefined, "uuid-2");
+    expect(lands).toEqual([]);                 // enqueued (accepted) but NOT landed — no land fired
+    await engine.tick(50);                     // flush confirms durable → land fires
+    expect(lands).toEqual(["uuid-1", "uuid-2"]);
+  });
+
+  test("a THROWING flush fires NO land — the turn stays staged, the watermark holds (the leak cannot recur)", async () => {
+    const r = stubReserve();
+    const lands: string[] = [];
+    let fail = true;
+    const engine = makeCaptureEngine({
+      reserve: r.reserve,
+      flush: async (b) => { if (fail) throw new Error("store down"); return b.length; },
+      annotate: () => ({}),
+      gate: GATE,
+      onLand: (landed) => { for (const l of landed) lands.push(l.turnKey!); },
+    });
+    await engine.enqueue("t", "src/1", undefined, "uuid-1");
+    await engine.tick(50).catch(() => { /* flush threw → nalu backoff */ });
+    expect(lands).toEqual([]);                 // NO land on a failed flush — accept≠land held
+    fail = false;
+    await engine.tick(10_000);                 // retry succeeds → NOW the land fires
+    expect(lands).toEqual(["uuid-1"]);
+  });
 });
