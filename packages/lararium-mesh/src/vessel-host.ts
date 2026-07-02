@@ -89,26 +89,64 @@ export function awaitIslandMsg<T extends IslandToVesselMsg>(opts: AwaitIslandMsg
   return new Promise<T>((resolve, reject) => {
     const offs: Array<() => void> = [];
     let timer: ReturnType<typeof setTimeout>;
+    // Platform-blind deferral: this module runs in browser pools too, where bare
+    // setImmediate does not exist — setTimeout(fn, 0) lands in the same
+    // after-the-poll-phase spot for the queued-breath check.
+    const defer: (fn: () => void) => ReturnType<typeof setTimeout> =
+      typeof setImmediate === "function"
+        ? (setImmediate as unknown as (fn: () => void) => ReturnType<typeof setTimeout>)
+        : (fn) => setTimeout(fn, 0);
+    const clearDefer: (h: ReturnType<typeof setTimeout>) => void =
+      typeof clearImmediate === "function"
+        ? (clearImmediate as unknown as (h: ReturnType<typeof setTimeout>) => void)
+        : clearTimeout;
+    let verdict: ReturnType<typeof setTimeout> | undefined;
     let lastBreath: string | null = null;
     let lastEvidence: string | null = null;
-    let lastAdvanceAt = Date.now();
+    // The LOCAL monotonic clock (suspend-blind, never wall time): the vessel and the
+    // island run as separate causal islands — no shared now — so the only honest
+    // silence measure reads "ms of MY loop-time since the last message I processed."
+    // Wall clock (Date.now) fabricates silence across a host suspend/clock-skew;
+    // performance.now measures only this loop's own lived time.
+    const mono = (): number => performance.now();
+    let lastAdvanceAt = mono();
+    let lastHeardAt   = mono();
     const cleanup = (): void => {
       clearTimeout(timer);
+      if (verdict !== undefined) clearDefer(verdict);
       for (const off of offs) off();
     };
-    const arm = (): void => {
+    // Silence is MEASURED (monotonic time since the last island message processed),
+    // never inferred from "the timer fired": after an event-loop wedge (a long
+    // synchronous automerge load/sync on either thread) the timers phase runs BEFORE
+    // queued port messages get processed, so an expired timer would fabricate
+    // "N ms of silence" over an island whose breaths sat queued the whole time. At
+    // fire the measured check re-arms for the true remainder; a genuine overrun
+    // defers the verdict one setImmediate (the check phase runs AFTER poll delivers
+    // pending messages) so a queued breath still lands, moves lastHeardAt, and the
+    // wait re-arms instead of killing a live island.
+    const arm = (ms: number): void => {
+      clearTimeout(timer);
       timer = setTimeout(() => {
-        cleanup();
-        reject(new Error(
-          `[vessel-host] timeout waiting for ${opts.expectedType}` +
-          ` (${opts.timeoutMs}ms of silence${lastBreath ? `; last breath: ${lastBreath}` : ""})`,
-        ));
-      }, opts.timeoutMs);
+        const silent = mono() - lastHeardAt;
+        if (silent < opts.timeoutMs) { arm(opts.timeoutMs - silent); return; }
+        verdict = defer(() => {
+          verdict = undefined;
+          const measured = mono() - lastHeardAt;
+          if (measured < opts.timeoutMs) { arm(opts.timeoutMs - measured); return; }
+          cleanup();
+          reject(new Error(
+            `[vessel-host] timeout waiting for ${opts.expectedType}` +
+            ` (${Math.round(measured)}ms of silence${lastBreath ? `; last breath: ${lastBreath}` : ""})`,
+          ));
+        });
+      }, ms);
     };
-    arm();
+    arm(opts.timeoutMs);
 
     offs.push(opts.subscribe((raw) => {
       if (!isIslandToVesselMsg(raw)) return;
+      lastHeardAt = mono();
       if (opts.rejectOnTypes?.includes(raw.type)) {
         cleanup();
         const detail = (raw as { error?: string }).error;
@@ -126,10 +164,10 @@ export function awaitIslandMsg<T extends IslandToVesselMsg>(opts: AwaitIslandMsg
         lastBreath    = breath ? `${breath.phase}#${breath.progress}` : raw.type;
         if (lastBreath !== lastEvidence) {
           lastEvidence  = lastBreath;
-          lastAdvanceAt = Date.now();
+          lastAdvanceAt = mono();
         } else if (
           opts.progressStallMs !== undefined &&
-          Date.now() - lastAdvanceAt > opts.progressStallMs
+          mono() - lastAdvanceAt > opts.progressStallMs
         ) {
           cleanup();
           reject(new Error(
@@ -138,8 +176,7 @@ export function awaitIslandMsg<T extends IslandToVesselMsg>(opts: AwaitIslandMsg
           ));
           return;
         }
-        clearTimeout(timer);
-        arm();
+        arm(opts.timeoutMs);
         return;
       }
       if (raw.type !== opts.expectedType) return;
