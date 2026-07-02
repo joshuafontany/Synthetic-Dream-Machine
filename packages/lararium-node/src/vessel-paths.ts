@@ -137,6 +137,13 @@ export function larFormPalaceDir(): string {
   return join(memorySensoriumDir(), "form");
 }
 
+/** The persistencepalace store dir (the `has.persistence` cosheaf cap — the 5th part) — `<memory>/persistence`,
+ *  inside the consolidated sensorium tree. A caller-vector mempalace instance holding Testimony atoms +
+ *  their witness-logs (standing derived by the keel). The `memory` sensorium composes it in authority mode. */
+export function larPersistencePalaceDir(): string {
+  return join(memorySensoriumDir(), "persistence");
+}
+
 // ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────
 
 /** The `mesh` sensorium dir — `<data>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three

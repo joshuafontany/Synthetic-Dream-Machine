@@ -28,7 +28,7 @@ import { spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import {
-  larMempalaceDir, larStructurePalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
+  larMempalaceDir, larStructurePalaceDir, larFormPalaceDir, larPersistencePalaceDir, larMeshPalaceDir, memorySensoriumDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir, resolveMempalaceExe,
   memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
 } from "./vessel-paths.js";
@@ -148,6 +148,9 @@ export function palaceOrgans(): PalaceOrgan[] {
     },
     { name: "structurepalace",  dir: larStructurePalaceDir(),  init: ensureDirOrgan("structurepalace",  larStructurePalaceDir())  },
     { name: "formpalace", dir: larFormPalaceDir(), init: ensureDirOrgan("formpalace", larFormPalaceDir()) },
+    // The `persistence` cosheaf cap store (the 5th part) — a caller-vector instance holding Testimony
+    // atoms; the `memory` sensorium composes it (authority mode). Lazy collection like ast/form: init = ensure dir.
+    { name: "persistencepalace", dir: larPersistencePalaceDir(), init: ensureDirOrgan("persistencepalace", larPersistencePalaceDir()) },
     // The `mesh` sensorium TREE — the parent dir plus its three nested children (who/authority/flow),
     // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
     { name: "meshpalace",     dir: larMeshPalaceDir(),  init: ensureDirOrgan("meshpalace",     larMeshPalaceDir())  },
@@ -208,12 +211,17 @@ export function materializeMemorySensorium(): PalaceSetupStep {
     sensorium: "memory",
     lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
     caps: {
-      content:   { absDir: larMempalaceDir(), engine: "mempalace" },
-      structure: { absDir: larStructurePalaceDir(), engine: "structurepalace" },
-      form:      { absDir: larFormPalaceDir(), engine: "formpalace" },
+      content:     { absDir: larMempalaceDir(), engine: "mempalace" },
+      structure:   { absDir: larStructurePalaceDir(), engine: "structurepalace" },
+      form:        { absDir: larFormPalaceDir(), engine: "formpalace" },
+      // The 5th part — a COSHEAF fiber (standing depends on witness edges OUTSIDE the trace, ki not li).
+      persistence: { absDir: larPersistencePalaceDir(), engine: "persistence", variance: "cosheaf" },
     },
     // BASE cap — interval-grain metadata only; the wavelet bands compute on read, no bytes stored.
     bands: { grain: "wavelet", computed: "on-read" },
+    // BASE cap — the persistence dials: authority/witness mode (halfLife null → the durable interoception
+    // store never cools; only a defeater lowers standing). ORTHOGONAL to ephemeral (path-A un-fuse).
+    persistencePolicy: { admitThreshold: 0.5, halfLife: null },
     // BASE cap — memory couples no sub-sensoriums (the `mesh` sensorium carries WHO/AUTHORITY/FLOW).
     children: [],
     ephemeral: false,
