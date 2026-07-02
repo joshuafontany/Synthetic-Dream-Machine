@@ -7,7 +7,7 @@
 
 import { describe, expect, test, vi } from "vitest";
 import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
-import { makeWingStampFlush, makeAstSplitFlush } from "../src/node-capture-engine.js";
+import { makeWingStampFlush, makeAstSplitFlush, QUARANTINE_WING } from "../src/node-capture-engine.js";
 
 const SPIRIT_SRC = "wing_synthetic_dream_machine__spirits/Mapper__agent-abc123__run-r99.jsonl";
 
@@ -26,10 +26,22 @@ describe("makeWingStampFlush", () => {
     expect(seen[0]?.metadata?.["lar_agent"]).toBe("Mapper"); // existing annotation preserved
   });
 
-  test("no `<wing>/` prefix → no wing stamped (untouched)", async () => {
-    const { flush, seen } = recorder();
-    await makeWingStampFlush(flush)([{ content: "x", source_file: "agent-only.jsonl", metadata: {} }]);
-    expect(seen[0]?.metadata?.["wing"]).toBeUndefined();
+  test("no `<wing>/` prefix → QUARANTINED (honestly-named wing) + one loud warn per source", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      const { flush, seen } = recorder();
+      const stamp = makeWingStampFlush(flush);
+      await stamp([
+        { content: "x", source_file: "agent-only.jsonl", metadata: {} },
+        { content: "y", source_file: "agent-only.jsonl", metadata: {} },   // same source — no second warn
+      ]);
+      expect(seen[0]?.metadata?.["wing"]).toBe(QUARANTINE_WING);
+      expect(seen[1]?.metadata?.["wing"]).toBe(QUARANTINE_WING);
+      expect(warn).toHaveBeenCalledTimes(1);
+      expect(String(warn.mock.calls[0]?.[0])).toContain("agent-only.jsonl");
+    } finally {
+      warn.mockRestore();
+    }
   });
 
   test("a record that already carries a wing is left untouched (idempotent — record's own wing wins)", async () => {

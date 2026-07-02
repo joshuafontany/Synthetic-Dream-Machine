@@ -67,13 +67,27 @@ export interface NodeCaptureEngineOptions {
  * node substrate, no mesh/tw5 edit. buildPatch is unaffected: it reads the BASENAME, so the prefix is
  * invisible to surface/agent/handle derivation. The record's own wing wins; a record that already
  * carries a wing is left untouched (idempotent).
+ *
+ * QUARANTINE (the `?`-wing cure): a record whose source_file carries NO decodable `<wing>/` prefix
+ * used to ride through wing-less and land silently in mempalace's `?` wing — an honest-looking sink
+ * hiding a producer bug. It now routes to {@link QUARANTINE_WING} (an honestly-NAMED holding wing)
+ * with ONE loud warn per offending source_file, so the misroute surfaces instead of pooling.
  */
+
+/** The honestly-named holding wing for records that arrive without a decodable `<wing>/` prefix. */
+export const QUARANTINE_WING = "wing_quarantine";
+
 export function makeWingStampFlush(inner: CaptureFlush): CaptureFlush {
+  const warned = new Set<string>();   // one loud line per offending source, not per record
   return async (batch: readonly CaptureRecord[]): Promise<number> => {
     const stamped = batch.map((rec) => {
+      if (rec.metadata && rec.metadata["wing"]) return rec;   // the record's own wing wins
       const wing = wingFromSourceFile(rec.source_file);
-      if (!wing || (rec.metadata && rec.metadata["wing"])) return rec;
-      return { ...rec, metadata: { ...(rec.metadata ?? {}), wing } };
+      if (!wing && !warned.has(rec.source_file)) {
+        warned.add(rec.source_file);
+        console.warn(`[capture] wing quarantine: source_file "${rec.source_file}" carries no wing_ prefix — routing to ${QUARANTINE_WING}`);
+      }
+      return { ...rec, metadata: { ...(rec.metadata ?? {}), wing: wing ?? QUARANTINE_WING } };
     });
     return inner(stamped);
   };

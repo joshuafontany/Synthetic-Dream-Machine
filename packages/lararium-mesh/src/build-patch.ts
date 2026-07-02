@@ -123,12 +123,18 @@ function deriveArc(sourceFile?: string): string | null {
   return noExt || null;
 }
 
-/** Derive the originating harness from a staged source_file (prefixed `<surface>__…`). */
+/**
+ * Derive the originating harness from a staged source_file (prefixed `<surface>__…`).
+ * An absent or un-prefixed source carries "unknown" HONESTLY — the old silent
+ * default-to-"claude" stamped a guess as provenance, hiding un-tokened producers.
+ * Downstream reads the field as a free string (adapter.py FieldSpec, no enum), so
+ * the honest value rides without breaking a consumer.
+ */
 function deriveSurface(sourceFile?: string): string {
-  if (!sourceFile) return "claude";
+  if (!sourceFile) return "unknown";
   const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
   const pfx = base.split("__")[0] ?? "";
-  return SURFACES.includes(pfx) ? pfx : "claude"; // un-prefixed legacy drawers = claude
+  return SURFACES.includes(pfx) ? pfx : "unknown"; // no surface token → carried honestly, never guessed
 }
 
 /**

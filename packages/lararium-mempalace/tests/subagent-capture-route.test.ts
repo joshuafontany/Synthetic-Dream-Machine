@@ -32,11 +32,11 @@ describe("spiritCaptureSourceFile", () => {
     expect(patch["lar_parent_handle"]).toBe("run-99");            // closes back to the main run
   });
 
-  test("legacy un-prefixed spirit names derive UNCHANGED (existing drawers key on the handle)", () => {
+  test("legacy un-prefixed spirit names: handle law UNSHIFTED, surface carried HONESTLY", () => {
     const legacy = "wing_x__spirits/Mapper__agent-abc123def__run-run-99.jsonl";
     const patch = buildPatch(harvestTurnGradient("Lares (Mapper): the verb leads"), legacy);
     expect(patch["lar_agent"]).toBe("Mapper");
     expect(patch["lar_agent_handle"]).toBe("run-99.abc123def");
-    expect(patch["lar_surface"]).toBe("claude"); // un-prefixed legacy → claude, as before
+    expect(patch["lar_surface"]).toBe("unknown"); // no surface token → honest, never a guessed "claude"
   });
 });
