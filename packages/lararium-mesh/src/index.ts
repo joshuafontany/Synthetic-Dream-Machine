@@ -138,3 +138,7 @@ export * from "./membership-channel.js";
 export * from "./persistence-keel.js";
 
 export * from "./capture-drain.js";
+
+export * from "./concurrency-dial.js";
+
+export * from "./parallel-ingest.js";
