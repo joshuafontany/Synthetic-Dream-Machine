@@ -85,6 +85,6 @@ export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
   for (const h of failed) console.error(`[regenesis] seed ${h.holding} (${h.gesture}) → exit ${h.exitCode}`);
   if (failed.length > 0) { console.error("[regenesis] seeding failed — the docs may sit part-fed; re-run seed/regenesis (idempotent)"); return 1; }
 
-  console.log("[regenesis] rebirth complete — witness: `lares status`, one meme through the wiki, chunk census on ~/.lares/.lararium");
+  console.log("[regenesis] rebirth complete — witness: `lares status`, one meme through the wiki, chunk census on the vessel store (larDataDir — <data>/vessel)");
   return 0;
 }

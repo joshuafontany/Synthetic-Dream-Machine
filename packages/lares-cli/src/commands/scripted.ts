@@ -68,57 +68,49 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
  * Operator-confirmation gate: until S7 lands proper auth, we still want a
  * second-thought guard. Honors --force to skip the prompt.
  */
+/**
+ * The reset wipe-list — the ONE spelling of every path `lares reset` deletes, resolved at
+ * call time (AFTER any --root sets LAR_ROOT). Exported for the wipe-list contract test:
+ * the projection watermark dies WITH the store (GAP 1); identity NEVER appears here.
+ *
+ * The strangler RETIRED (2026-07-01): larDataDir()/larProjectionDir() resolve the canonical
+ * XDG dirs deterministically — no legacy arm exists to dangle, so the wipe names them directly.
+ */
+export function resetTargets(): Array<{ path: string; recursive: boolean }> {
+  const gen = (name: string, recursive = false) => ({ path: join(larRoot(), "genesis", name), recursive });
+  return [
+    { path: larDataDir(), recursive: true },   // the vessel store (<data>/vessel)
+    gen("social-bootstrap.json"),
+    gen("island.bin"),
+    gen("island.sha256"),
+    gen("island.sha256-pre"),                  // legacy (pre-split); cleaned for migration
+    gen("island.cid"),
+    gen("island.cid-engine"),
+    gen("island.cid-plugins"),
+    gen("island.manifest.json"),               // G-CAS slice 1: the CAS index
+    gen("cas", true),                          // G-CAS slice 1: the blob bytes
+    // The projection watermark (synced-tree) must die WITH the store — a surviving watermark makes the
+    // post-reset ingest read every bags/*.md as "unchanged" and the fresh empty docs stay empty,
+    // silently (GAP 1, regenesis scout 2026-07-01).
+    { path: larProjectionDir(), recursive: true },
+  ];
+}
+
 export async function cmdReset(args: ParsedArgs): Promise<number> {
   const { rmSync, existsSync } = await import("node:fs");
   // Only an EXPLICIT --root sets LAR_ROOT (isolated instances). NEVER default it to REPO_ROOT —
   // that would make larHome() resolve to the repo and defeat the ~/.lares uplift (the bug this
   // reset hit). With LAR_ROOT unset: storage → <data>/vessel (larDataDir), genesis → repo (larRoot).
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
-  const genesis   = join(larRoot(), "genesis");
-  // The strangler RETIRED (2026-07-01): larDataDir()/larProjectionDir() resolve the canonical
-  // XDG dirs deterministically — no legacy arm exists to dangle, so the wipe names them directly.
-  const storage   = larDataDir();
-  const bootstrap = join(genesis, "social-bootstrap.json");
-  const islandBin = join(genesis, "island.bin");
-  const islandSha = join(genesis, "island.sha256");
-  const islandShaPre = join(genesis, "island.sha256-pre");  // legacy (pre-split); cleaned for migration
-  const islandCid = join(genesis, "island.cid");
-  const islandCidEngine  = join(genesis, "island.cid-engine");
-  const islandCidPlugins = join(genesis, "island.cid-plugins");
-  const islandManifest   = join(genesis, "island.manifest.json");  // G-CAS slice 1: the CAS index
-  const islandCasDir     = join(genesis, "cas");                   // G-CAS slice 1: the blob bytes
-  // The projection watermark (synced-tree) must die WITH the store — a surviving watermark makes the
-  // post-reset ingest read every bags/*.md as "unchanged" and the fresh empty docs stay empty,
-  // silently (GAP 1, regenesis scout 2026-07-01).
-  const projection = larProjectionDir();
+  const targets = resetTargets();
 
   console.log("[lares reset] will delete:");
-  if (existsSync(storage))   console.log(`  ${storage}`);
-  if (existsSync(bootstrap)) console.log(`  ${bootstrap}`);
-  if (existsSync(islandBin)) console.log(`  ${islandBin}`);
-  if (existsSync(islandSha)) console.log(`  ${islandSha}`);
-  if (existsSync(islandShaPre)) console.log(`  ${islandShaPre}`);
-  if (existsSync(islandCid)) console.log(`  ${islandCid}`);
-  if (existsSync(islandCidEngine))  console.log(`  ${islandCidEngine}`);
-  if (existsSync(islandCidPlugins)) console.log(`  ${islandCidPlugins}`);
-  if (existsSync(islandManifest))   console.log(`  ${islandManifest}`);
-  if (existsSync(islandCasDir))     console.log(`  ${islandCasDir}`);
-  if (existsSync(projection)) console.log(`  ${projection}`);
+  for (const t of targets) if (existsSync(t.path)) console.log(`  ${t.path}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
   }
-  rmSync(storage,   { recursive: true, force: true });
-  rmSync(bootstrap, { force: true });
-  rmSync(islandBin, { force: true });
-  rmSync(islandSha, { force: true });
-  rmSync(islandShaPre, { force: true });
-  rmSync(islandCid, { force: true });
-  rmSync(islandCidEngine,  { force: true });
-  rmSync(islandCidPlugins, { force: true });
-  rmSync(islandManifest,   { force: true });
-  rmSync(islandCasDir, { recursive: true, force: true });
-  rmSync(projection, { recursive: true, force: true });
+  for (const t of targets) rmSync(t.path, { recursive: t.recursive, force: true });
   console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)
