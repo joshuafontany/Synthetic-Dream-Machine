@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/api/lararium.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 16
 manao     = 15
 manaoio   = 14
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "canonical lararium seat, mechanics shelf, mandatory child-hydration bridge to session dials"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lararium"
 ```

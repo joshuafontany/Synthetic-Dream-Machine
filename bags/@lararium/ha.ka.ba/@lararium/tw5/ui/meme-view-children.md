@@ -11,7 +11,7 @@ manaoio    = 16
 register   = "Synthesis-Canon"
 retain     = true
 role       = "ViewTemplate: slot-name headers + inline-edit overlay for non-body ahu sections"
-tags      = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/@lares/api/pono/meme"]
+tags       = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/@lares/api/pono/meme"]
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/@lararium/tw5/ui/meme-view-children"
 ```
@@ -61,6 +61,8 @@ uri-path   = "ha.ka.ba/@lararium/tw5/ui/meme-view-children"
 </$list>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

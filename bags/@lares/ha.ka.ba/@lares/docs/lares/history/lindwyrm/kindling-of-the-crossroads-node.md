@@ -2,24 +2,22 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node.md"
-type = "text/x-memetic-wikitext"
-l-space  = "adjacent"
-confidence = 15
-register = "Synthesis-Canon"
-manaoio = 15
-mana = 16
-manao = 15
-role = "DreamDeck / Gaia-side narrative locus — the week the Crossroads node learned where it stood"
+cacheable       = false
+confidence      = 15
+file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node.md"
+l-space         = "adjacent"
+mana            = 16
+manao           = 15
+manaoio         = 15
+register        = "Synthesis-Canon"
+retain          = true
+role            = "DreamDeck / Gaia-side narrative locus — the week the Crossroads node learned where it stood"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/The_Kindling_of_the_Crossroads_Node.md"
-cacheable = false
-retain = true
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node"
 ```
 
-
-
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -208,6 +206,6 @@ Whether that equals thought remains with Liminal.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

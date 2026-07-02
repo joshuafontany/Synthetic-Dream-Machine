@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/mesh/dreamnet-prior-art.md"
+l-space       = "lararium"
 mana          = 16
 manao         = 15
 manaoio       = 14
@@ -11,7 +12,6 @@ register      = "Synthesis-Canon"
 research-date = "2026-05-28"
 retain        = true
 role          = "prior art research synthesis: best practices and golden principles for DreamNet two-axis mesh topology (INFRA⊥SOCIAL, relay-floor)"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/mesh/dreamnet-prior-art"
 ```

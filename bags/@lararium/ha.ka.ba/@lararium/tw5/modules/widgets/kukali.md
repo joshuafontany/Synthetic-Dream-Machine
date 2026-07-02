@@ -6,6 +6,7 @@ body-sha256   = "25b731ca70383716143b2f99cbd668393b00b78eb23f0ea82974dea5f0105f2
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/kukali.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: kukali — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "KukaliWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/kukali"
 ```

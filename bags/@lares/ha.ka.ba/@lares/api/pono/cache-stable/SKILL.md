@@ -16,7 +16,7 @@ manaoio            = 14
 register           = "SC"
 role               = "cache-stable skill, conformance checker, and sidecar splitter"
 skill-package-root = "bags/@lares/ha.ka.ba/@lares/api/pono/cache-stable"
-tags      = ["api/pono/meme", "api/pono/loci"]
+tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/api/pono/cache-stable/SKILL"
 ```

@@ -4,13 +4,13 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/recipe.md"
+l-space     = "lararium"
 mana        = 12
 manao       = 12
 register    = "Synthesis"
 retain      = true
 role        = "RecipeTiddler schema + bag-stack parsing — the stored shape of a wiki's composition record"
 source-file = "packages/lararium-mesh/src/recipe.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/recipe"
 ```

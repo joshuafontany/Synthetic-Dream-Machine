@@ -13,7 +13,7 @@ retain        = true
 role          = "heleuma ka: void-start operator identity tiddler builder"
 source-symbol = "*"
 status-date   = "2026-05-04"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/cold-boot-ceremony"
 ```

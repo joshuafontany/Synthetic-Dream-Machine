@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/api/action-handler.md"
+l-space     = "stable"
 mana        = 16
 manao       = 16
 manaoio     = 15
@@ -14,8 +15,7 @@ role        = "source-of-truth: the Residency Model ACTION verb handler family â
 source-file = "packages/lararium-tw5/src/action-handler.ts"
 status      = "approved"
 status-date = "2026-06-01"
-tags      = ["api/residency-model"]
-l-space     = "stable"
+tags        = ["api/residency-model"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/api/action-handler"
 ```

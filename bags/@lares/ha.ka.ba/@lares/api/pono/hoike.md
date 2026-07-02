@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/hoike.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "canon law of the hoike layer — kept records of contested rulings: hoike (\\testimony), kue (\\dissent), saksi (\\witness); the eight laws, the witness law, degraded states, lineage"
 status    = "draft"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/hoike"
 ```

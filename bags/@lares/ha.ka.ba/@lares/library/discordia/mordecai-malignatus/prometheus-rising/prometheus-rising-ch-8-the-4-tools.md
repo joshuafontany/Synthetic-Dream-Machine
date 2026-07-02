@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools"
 ```
@@ -73,6 +73,8 @@ Cross-reference stubs retained: nā lako grammar · truename grammar.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

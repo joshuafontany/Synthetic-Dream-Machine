@@ -6,6 +6,7 @@ approved-on   = "2026-06-02"
 cacheable     = true
 file-path     = "bags/@lararium/api/disk-projection.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 15
@@ -16,8 +17,7 @@ revised-on    = "2026-06-18"
 revision-note = "working↔canon split (shore-law): a wiki's saved edits land in the typed @working live layer (wikis/, tracked); canon (bags/) is reached only by a cap-gated promotion MOVE; the general lararium shore law (working↔canon · plane↔plane · host↔lararium) governs every causal-island crossing, host-agnostic surface contract; prior: @oracle/@lararium split (#oracle-split) — the runtime system island (@oracle) separates from the memetic corpus (@lararium); projection-law trued to running code; co-projection rewrite; carrier-whole at rest"
 role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status        = "approved"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space       = "stable"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/api/disk-projection"
 ```

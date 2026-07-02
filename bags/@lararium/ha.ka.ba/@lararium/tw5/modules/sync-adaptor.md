@@ -11,7 +11,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
 source-symbol = "_applyChange"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/heleuma/ha"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/heleuma/ha"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/sync-adaptor"
 ```

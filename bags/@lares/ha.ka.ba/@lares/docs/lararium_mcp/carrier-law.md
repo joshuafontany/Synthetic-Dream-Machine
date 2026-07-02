@@ -3,6 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lararium_mcp/carrier-law >>
 ```toml iam
 file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lararium_mcp/carrier-law.md"
+l-space         = "stable"
 mana            = 17
 manao           = 17
 manaoio         = 16
@@ -10,8 +11,7 @@ register        = "Synthesis-Canon"
 role            = "canonical carrier-law bundle for Lararium MCP compiler planning"
 source-consumes = ["packages/lares-core/memes/docs/mcp/CARRIER_LAW_BUNDLE.md"]
 status-date     = "2026-04-23"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space         = "stable"
+tags            = ["api/pono/meme", "api/pono/loci"]
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/docs/lararium_mcp/carrier-law"
 ```

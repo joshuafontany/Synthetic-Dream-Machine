@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lararium.md"
+l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for lararium voice-work, old all-in-one AGENTS ingests, agent preferences, and house-presence materials where Mischief-Muse and the others can rest and ressurect"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lararium"
 ```

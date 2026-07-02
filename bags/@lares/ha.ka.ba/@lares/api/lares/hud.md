@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/api/lares/hud.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 16
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/hud"
 ```

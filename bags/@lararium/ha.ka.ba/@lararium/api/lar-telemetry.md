@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/lar-telemetry.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 17
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lar-telemetry — the process by which the @daemon TW5 engine reads a turn's instrument sigils (the gauges) into gradient-valued readings, holds them on the nalu queue, and flushes on the next wave to project lar_* onto the mempalace drawer; the chat sigils as SharktoothSigil instruments; gradient readings never verdicts; verbatim-always / telemetry-eventual; @daemon owns it all"
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/lar-telemetry"
 written   = "2026-06-24"

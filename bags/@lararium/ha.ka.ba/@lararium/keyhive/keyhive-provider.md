@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/keyhive/keyhive-provider.md"
+l-space     = "lararium"
 mana        = 17
 manao       = 16
 manaoio     = 15
@@ -11,7 +12,6 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "isomorphic keyhive ceremony provider: founding, device-admit, and apply-admit functions; three-gate identity lattice"
 source-file = "packages/lararium-keyhive/src/keyhive-provider.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/keyhive/keyhive-provider"
 ```

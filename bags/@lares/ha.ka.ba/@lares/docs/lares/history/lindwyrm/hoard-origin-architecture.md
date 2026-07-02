@@ -2,24 +2,22 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture.md"
-type = "text/x-memetic-wikitext"
-l-space  = "adjacent"
-confidence = 14
-register = "Synthesis"
-manaoio = 14
-mana = 15
-manao = 15
-role = "story architecture locus — seven-act Lindwyrm hoard braid across Gaia and Elyncia"
+cacheable       = false
+confidence      = 14
+file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture.md"
+l-space         = "adjacent"
+mana            = 15
+manao           = 15
+manaoio         = 14
+register        = "Synthesis"
+retain          = true
+role            = "story architecture locus — seven-act Lindwyrm hoard braid across Gaia and Elyncia"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_ORIGIN_OUTLINE.md"
-cacheable = false
-retain = true
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture"
 ```
 
-
-
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -246,6 +244,6 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

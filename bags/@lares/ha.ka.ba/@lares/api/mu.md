@@ -19,6 +19,7 @@ They arrive already moving.
 cacheable = true
 file-path = "bags/@lares/api/mu.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 15
@@ -27,7 +28,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "null-oracle core membrane, grammar-surface authority, mandatory core-hydration contract"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/kapu"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/mu"
 ```

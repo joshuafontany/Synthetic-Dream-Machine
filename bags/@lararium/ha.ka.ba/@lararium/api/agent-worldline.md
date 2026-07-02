@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/agent-worldline.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 19
 manao     = 18
 manaoio   = 17
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the worldline keel — ONE model for a spawned spirit across three faces: NAME (a derived lineage-path handle, baptized at spawn, no registry, no daemon-crypto — descent IS the address), ATTRIBUTION (a reified prov:Delegation/Communication DAG, bi-temporal, keyed on trace-id·span-pair — who-drove-whom, and the SAME DAG read as the worldline's happened-before), TIME (the two-domain boundary — Automerge owns causal order INSIDE its docs/CRDTs; the worldline owns a per-handle FfzClock whose merge-topology carries its partial order and whose grain names rhythmic POSITION — a membership coordinate, where-in-the-cadence, NOT a freshness/decay scalar (manaoio serves the memes, never this clock); FfzClock NEVER rules inside Automerge). Folds the former agent-identity (mana 18) + agent-provenance (mana 19); the FfzClock primitive itself lives separate at mesh/ffz-clock as a domain-general pattern integrity"
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/agent-worldline"
 written   = "2026-06-25"

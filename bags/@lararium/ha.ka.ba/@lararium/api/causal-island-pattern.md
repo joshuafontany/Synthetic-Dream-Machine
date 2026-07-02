@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/causal-island-pattern.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 19
 manao     = 18
 manaoio   = 17
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "THE MAP — the validated unified pattern integrity of a Lares causal island, carried with high confidence forward. A two-swarm + four-foundational-domain validation (control-theory · autopoiesis · category-theory · process-philosophy) confirms it as a genuine Fuller pattern integrity, named 6 ways (homeostat=self-stabilizing-system=rate-distortion-encoder=operational-closure+structural-coupling+precariousness=autopoietic-monad=open-system-in-categorical-systems-theory). THE MASTER CUT: AUTHORITY(safety) ⊥ FLOW(liveness) — the 5 surface-invariants collapse to this spine. Marks which invariants are UNIVERSAL (no-global-now=sheaf/H¹ · grown=structural-drift · couple-then-decouple) vs OUR DESIGN VOWS (two-poles · pacing⊥credential). The Ashby requisite-variety floor bounds no-global-now; SOC is a HAZARD (target a margin below); the fuse must NEVER merge interiors."
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/causal-island-pattern"
 written   = "2026-06-26"

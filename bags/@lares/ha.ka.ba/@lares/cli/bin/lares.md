@@ -4,11 +4,11 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/cli/bin/lares.md"
+l-space   = "lararium"
 mana      = 10
 register  = "Synthesis-Canon"
 retain    = true
 role      = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/cli/bin/lares"
 ```

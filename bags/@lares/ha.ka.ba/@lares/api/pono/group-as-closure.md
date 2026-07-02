@@ -4,16 +4,16 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/api/pono/group-as-closure.md"
+l-space   = "stable"
 mana      = 14
 manao     = 14
 manaoio   = 12
-namespace = "⬡"
+namespace = "&#x2B21;"
 register  = "Synthesis"
 retain    = true
 role      = "group-as-closure: a group names no central object — it names the reciprocal-edge closure over signed, typed, lar:-named individual edges, EVALUATED never instantiated; quorum = a composed threshold subject; eviction = kāpae on the membership stack; maps PersonaGroup/Plurality/Kowloon-Admins onto #has-stack composition; PROPOSED, mostly unbuilt"
 status    = "proposed"
 tags      = ["api/pono/meme", "api/pono/orichalcum-capabilities", "api/pono/causal-islands", "api/pono/lararium-identity"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/group-as-closure"
 written   = "2026-06-29"

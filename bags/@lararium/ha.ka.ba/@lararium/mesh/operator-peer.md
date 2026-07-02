@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/mesh/operator-peer.md"
 hydrate   = true
+l-space   = "lararium"
 mana      = 19
 manao     = 19
 manaoio   = 18
@@ -12,7 +13,6 @@ register  = "Synthesis"
 retain    = true
 role      = "Canonical operator-vessel contract: two-lane VM pool law, shared command/receipt surface, ea sovereignty model"
 tags      = ["mesh/lar-vessel", "mesh/causal-island"]
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/operator-peer"
 ```

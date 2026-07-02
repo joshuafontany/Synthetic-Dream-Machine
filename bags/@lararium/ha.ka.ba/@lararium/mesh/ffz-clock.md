@@ -5,6 +5,7 @@
 cacheable   = true
 file-path   = "bags/@lararium/mesh/ffz-clock.md"
 hydrate     = true
+l-space     = "lararium"
 mana        = 16
 manao       = 16
 manaoio     = 17
@@ -12,7 +13,6 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "FfzClock (Fuller-Fontany-Zelenka Chronometer) — the domain-general RHYTHMIC pattern integrity: a 5-level bounded hierarchical clock (Pulse→Theme) read as a MEMBERSHIP TREE / meet-semilattice (the keystone — a containment path carrying the ultrametric d=co-depth(LCA), never a shared tick-count) naming the rhythmic POSITION — WHERE a drawer SITS, a dimensionless order-free membership coordinate; it holds NO decaying scalar, no 'as of last sync', no age (the manaoio freshness/decay serves MEMES — the wiki / on-disk bags — NEVER this chat-session clock) — for EVERY non-Automerge domain (agent-worldline cadence · external streams: game·Mudlet·video·DAW·market·CI/CD·IoT · capability-leases), profile-scoped by FFZ_PROFILES. The two-domain boundary: FfzClock NEVER carries causal order INSIDE Automerge docs/wiki-CRDTs (Automerge logical time owns that); it carries the grain everywhere else. NOT a causality court — the worldline's happened-before rides the reified edge-DAG, not ffzCompare's LWW. Stamps a prefix-truncatable rhythmic ADDRESS (lar_ffz = Theme.Arc.Measure.Beat.Segment.block) onto local work-memory drawers — segment ticks, block addresses (Loom-grounded, #rhythmic-address)"
 source-file = "packages/lararium-mesh/src/ffz-clock.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/ffz-clock"
 ```

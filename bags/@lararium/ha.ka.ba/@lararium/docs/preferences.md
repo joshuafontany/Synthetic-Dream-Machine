@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/preferences.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "extraction shelf for durable concepts recovered from Lares_Preferences.system-prompt and adjacent lararium witnesses"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/preferences"
 ```

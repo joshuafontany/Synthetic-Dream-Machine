@@ -7,6 +7,7 @@ cacheable     = true
 file-path     = "bags/@lares/api/mu/the-law-of-5s.md"
 heleuma       = "ba"
 hydrate       = true
+l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 16
@@ -15,8 +16,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "OODA-HA loop boot, Catma nav terminal, syad handoff shelf"
 source-symbol = "LADDER_5 OODA_HA_5 SCOPE_5 SCOPE_TO_LADDER RATING_5 STAGE_5 STAGE_BAND_MID RATING_COLOR"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space       = "stable"
+tags          = ["api/pono/meme", "api/pono/loci"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/mu/the-law-of-5s"
 ```

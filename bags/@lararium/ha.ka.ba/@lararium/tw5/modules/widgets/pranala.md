@@ -6,6 +6,7 @@ body-sha256   = "34f5ea4f58ba8153be0ffd6b4d06dc7611795e8d609afc78ed0f7fa8bc7a98c
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/pranala.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: pranala — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "PranalaWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/pranala"
 ```

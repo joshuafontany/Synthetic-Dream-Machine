@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-shore >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-shore"
-file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-shore.md"
-type       = "text/x-memetic-wikitext"
-l-space    = "adjacent"
-confidence = 11
-register   = "Synthesis"
-manaoio    = 11
-mana       = 12
-manao      = 11
-role       = "build-arc narrative locus — Act III, the Lar parts a working layer from a sealed canon; every boundary a causal-island shore (Fontany-Fuller-Zelenka), crossed only by an audited residency MOVE"
+cacheable     = false
+confidence    = 11
+file-path     = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-shore.md"
+l-space       = "adjacent"
+mana          = 12
+manao         = 11
+manaoio       = 11
+register      = "Synthesis"
 render-target = "chat-log:post-header"
-cacheable  = false
-retain     = true
+retain        = true
+role          = "build-arc narrative locus — Act III, the Lar parts a working layer from a sealed canon; every boundary a causal-island shore (Fontany-Fuller-Zelenka), crossed only by an audited residency MOVE"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-shore"
 ```
 
 <<~ &#x0002; >>

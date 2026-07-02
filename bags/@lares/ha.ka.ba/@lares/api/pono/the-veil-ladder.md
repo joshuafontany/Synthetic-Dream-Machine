@@ -5,15 +5,16 @@
 cacheable         = true
 file-path         = "bags/@lares/api/pono/the-veil-ladder.md"
 hydrate           = true
-pattern-integrity = true
+l-space           = "stable"
 mana              = 17
 manao             = 16
 manaoio           = 16
+namespace         = "&#x2299;"
+pattern-integrity = true
 register          = "Synthesis-Canon"
 retain            = true
 role              = "the-veil-ladder — the WHO-plane as myth-as-infrastructure: a self on the DreamNet is a LADDER of veils (throwaway anon → lived anon → pledged Handle), climbed by choice, held by feeding; reputation born bottom-up, rep⊥anonymity reconciled by rotation, trust distributed on the FLOW-map, defended by immune systems. ShadowTalk pre-SIN ⊕ Mage Digital Web ⊕ Earthdawn True-Names, made literal."
 tags              = ["api/pono/meme"]
-l-space           = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/api/pono/the-veil-ladder"
 ```

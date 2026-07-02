@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/node-host.md"
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -12,8 +13,7 @@ retain        = true
 role          = "lararium-node host: lares/ walker, meme graph loader, interface URI bootstrap list"
 source-symbol = "*"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space       = "stable"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/node-host"
 ```

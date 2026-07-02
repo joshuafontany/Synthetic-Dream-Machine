@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/corpus-sources.md"
+l-space       = "stable"
 mana          = 18
 manao         = 18
 manaoio       = 17
@@ -12,8 +13,7 @@ retain        = true
 role          = "invariant registry: all corpus bag targets in the monorepo; each maps to one Automerge doc"
 source-symbol = "CORPUS_SOURCES"
 status-date   = "2026-04-30"
-tags      = ["api/pono/meme"]
-l-space       = "stable"
+tags          = ["api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/corpus-sources"
 ```

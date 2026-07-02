@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/preferences/degraded-epistemic-weather.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for named epistemic failure-weather, collapse patterns, and possible short-invariant promotion targets"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/preferences/degraded-epistemic-weather"
 ```

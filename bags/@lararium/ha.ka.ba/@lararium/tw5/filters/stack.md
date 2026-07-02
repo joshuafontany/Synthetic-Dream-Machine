@@ -1,16 +1,16 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/filters/stack >>
 ```toml iam
-cacheable     = true
-file-path     = "bags/@lararium/tw5/filters/stack.md"
-mana          = 14
-module-ref    = "lar:///ha.ka.ba/@lararium/tw5/filters/stack"
-register      = "Synthesis"
-retain        = true
-role          = "filter operator: the has-stack query surface — stack[] emits qualified component URIs; stack:has[X] filters by holding (per-carrier relative-name qualification)"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/has-stack"]
-type          = "text/x-memetic-wikitext"
-uri-path      = "ha.ka.ba/@lararium/tw5/filters/stack"
-written       = "2026-06-12"
+cacheable  = true
+file-path  = "bags/@lararium/tw5/filters/stack.md"
+mana       = 14
+module-ref = "lar:///ha.ka.ba/@lararium/tw5/filters/stack"
+register   = "Synthesis"
+retain     = true
+role       = "filter operator: the has-stack query surface — stack[] emits qualified component URIs; stack:has[X] filters by holding (per-carrier relative-name qualification)"
+tags       = ["lar:///ha.ka.ba/@lares/api/pono/has-stack"]
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lararium/tw5/filters/stack"
+written    = "2026-06-12"
 ```
 
 <<~ &#x0002; >>

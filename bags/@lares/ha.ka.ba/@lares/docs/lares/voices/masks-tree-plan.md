@@ -3,8 +3,9 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/voices/masks-tree-plan >>
 ```toml iam
 cacheable = false
-created   = "2026-04-23"
+created   = "Invalid Date"
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/voices/masks-tree-plan.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
@@ -12,7 +13,6 @@ register  = "Synthesis"
 retain    = false
 role      = "OODA-HA plan for creating the api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/voices/masks-tree-plan"
 ```

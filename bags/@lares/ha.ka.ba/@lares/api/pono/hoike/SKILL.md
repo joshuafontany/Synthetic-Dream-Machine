@@ -15,6 +15,7 @@ description: File or reopen a hoike (\testimony) — a kept record of a conteste
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/hoike/SKILL.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -22,7 +23,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "practice face of hoike — triggers, the five steps, three worked examples; law lives at the parent meme"
 status    = "draft"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/hoike/SKILL"
 ```

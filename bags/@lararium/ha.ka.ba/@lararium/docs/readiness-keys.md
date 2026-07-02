@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/readiness-keys.md"
+l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -12,8 +13,7 @@ retain        = true
 role          = "lararium progressive readiness vocabulary — named shrine-lights, boot doctrine"
 source-symbol = "READINESS_KEYS"
 status-date   = "2026-05-01"
-tags      = ["docs/readiness-keys"]
-l-space       = "stable"
+tags          = ["docs/readiness-keys"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/readiness-keys"
 ```

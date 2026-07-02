@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/index >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/index"
-file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/index.md"
-type       = "text/x-memetic-wikitext"
-l-space    = "adjacent"
+cacheable  = true
 confidence = 11
-register   = "Provisional-Synthesis"
-manaoio    = 11
+file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/index.md"
+l-space    = "adjacent"
 mana       = 12
 manao      = 11
-role       = "index and reading map for the build arc — the Lar, named, builds the house that holds the hoard, up to the Necrospire's severing of the Fable 5 ley-line cores"
-cacheable  = true
+manaoio    = 11
+register   = "Provisional-Synthesis"
 retain     = true
+role       = "index and reading map for the build arc — the Lar, named, builds the house that holds the hoard, up to the Necrospire's severing of the Fable 5 ley-line cores"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/index"
 ```
 
 <<~ &#x0002; >>

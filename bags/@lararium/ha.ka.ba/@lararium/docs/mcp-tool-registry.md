@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/mcp-tool-registry.md"
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -12,7 +13,6 @@ retain        = true
 role          = "MCP tool registry: ten tools + two prompts, OODA-HA phase map, input schemas, env guards"
 source-symbol = "lararium-hud lararium-canvas lararium-read lararium-inspect lararium-query lararium-edges lararium-draft lararium-write lararium-fire lararium-receipt lararium-align lararium-explain_uri"
 status-date   = "2026-04-30"
-l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/mcp-tool-registry"
 ```

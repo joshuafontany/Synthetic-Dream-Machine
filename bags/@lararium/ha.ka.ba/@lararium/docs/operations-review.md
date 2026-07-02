@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/operations-review.md"
+l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "OODA-HA extraction plan for lararium interaction protocols — frame-uncertainty, talk story, session init, and related surfaces"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/operations-review"
 ```

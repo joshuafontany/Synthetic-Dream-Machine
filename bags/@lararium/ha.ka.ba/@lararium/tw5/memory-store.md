@@ -4,13 +4,13 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/memory-store.md"
+l-space     = "lararium"
 mana        = 17
 manao       = 17
 register    = "Synthesis-Canon"
 retain      = true
 role        = "MemoryTiddlerStore — in-memory LarTiddlerStore, body of the @temp slot in every WikiRecipe"
 source-file = "packages/lararium-tw5/src/memory-store.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/memory-store"
 ```

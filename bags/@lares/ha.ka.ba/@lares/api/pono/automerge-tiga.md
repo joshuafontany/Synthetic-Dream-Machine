@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/automerge-tiga.md"
+l-space   = "stable"
 mana      = 19
 manao     = 19
 manaoio   = 18
@@ -12,7 +13,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: six base docs in two tigas — content plane (ha/ka/ba) + social plane (identities/groups/sessions)"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/automerge-tiga"
 ```

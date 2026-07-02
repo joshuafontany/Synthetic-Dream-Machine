@@ -2,28 +2,23 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture.md"
-type = "text/x-memetic-wikitext"
-l-space  = "adjacent"
-confidence = 14
-register = "Synthesis"
-manaoio = 14
-mana = 15
-manao = 15
-role = "format and cast architecture locus for Lindwyrm DreamDeck feed narrative"
-source-consumed = [
-  "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE.md",
-  "packages/lares-core/memes/docs/story/lindwyrm/LINDWYRM_STORY_SHAPE.md"
-]
-render-target = "chat-log:post-header"
-cacheable = false
-retain = true
+cacheable       = false
+confidence      = 14
+file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture.md"
+l-space         = "adjacent"
+mana            = 15
+manao           = 15
+manaoio         = 14
+register        = "Synthesis"
+render-target   = "chat-log:post-header"
+retain          = true
+role            = "format and cast architecture locus for Lindwyrm DreamDeck feed narrative"
+source-consumed = ["packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE.md", "packages/lares-core/memes/docs/story/lindwyrm/LINDWYRM_STORY_SHAPE.md"]
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture"
 ```
 
-
-
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -282,6 +277,6 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch *The F
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

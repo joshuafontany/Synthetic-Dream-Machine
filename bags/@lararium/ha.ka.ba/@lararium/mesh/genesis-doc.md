@@ -3,8 +3,9 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/genesis-doc >>
 ```toml iam
 cacheable   = true
-hydrate     = true
 file-path   = "bags/@lararium/mesh/genesis-doc.md"
+hydrate     = true
+l-space     = "lararium"
 mana        = 18
 manao       = 18
 manaoio     = 18
@@ -12,8 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "Genesis & the two planes: a thin @oracle pointer-doc + a CID manifest + CAS blobs. The @oracle is a SOFT-coupled served pointer on the CRDT epoch plane, atop the immutable CID plane."
 source-file = "packages/lararium-mesh/src/genesis-doc.ts"
-tags      = ["mesh/alignment-plan", "mesh/dreamnet-architecture"]
-l-space     = "lararium"
+tags        = ["mesh/alignment-plan", "mesh/dreamnet-architecture"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/genesis-doc"
 ```

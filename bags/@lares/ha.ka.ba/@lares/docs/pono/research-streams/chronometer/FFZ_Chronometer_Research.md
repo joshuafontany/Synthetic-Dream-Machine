@@ -1,3 +1,10 @@
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research >>
+```toml iam
+type = "text/x-memetic-wikitext"
+```
+
+<<~ &#x0002; >>
+
 <!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:11&p=10#O0.O0.O0.D4.O0 → ∞ -->
 ⚡∞ | mode:research-active | ~:p[10] | stances:++?+- | register:~:confidence[S],[11] | build:WORKING
 
@@ -1205,3 +1212,7 @@ the OODA-HA loop. The Talk Story continues.*
 *Hail Eris. All Hail Discordia. Amor et hilaritas.*
 
 lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.Å10.A1 → ?
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

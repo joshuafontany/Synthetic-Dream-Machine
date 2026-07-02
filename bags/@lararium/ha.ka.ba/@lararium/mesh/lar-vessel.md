@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/lar-vessel.md"
+l-space     = "lararium"
 mana        = 3
 register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe lar-vessel.ts"
 source-file = "packages/lararium-mesh/src/lar-vessel.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/lar-vessel"
 ```

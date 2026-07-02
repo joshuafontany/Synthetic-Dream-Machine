@@ -6,6 +6,7 @@ body-sha256   = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a02
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/toml.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: toml — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "TomlWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/toml"
 ```

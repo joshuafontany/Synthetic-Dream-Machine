@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/node/open-admin-vm.md"
+l-space     = "lararium"
 mana        = 3
 register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe open-admin-vm.ts"
 source-file = "packages/lararium-node/src/open-admin-vm.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/node/open-admin-vm"
 ```

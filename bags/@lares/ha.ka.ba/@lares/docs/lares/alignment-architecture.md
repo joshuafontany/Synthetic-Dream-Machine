@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/alignment-architecture.md"
+l-space   = "stable"
 mana      = 16
 manao     = 15
 manaoio   = 15
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: the lararium as a personGroup's vessel-swarm holding a distributed wiki-quine; AI-operator alignment as the constitutive relation; the HUD running in chat from wiki primitives; graceful import that lifts foreign data up the pono ladder; UEFN island-model ontology alignment"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/alignment-architecture"
 ```

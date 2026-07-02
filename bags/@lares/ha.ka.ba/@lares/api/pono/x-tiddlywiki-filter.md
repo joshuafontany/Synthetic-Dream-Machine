@@ -11,7 +11,7 @@ namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
 role        = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"
-tags      = ["api/pono/meme"]
+tags        = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/x-tiddlywiki-filter"
 ```

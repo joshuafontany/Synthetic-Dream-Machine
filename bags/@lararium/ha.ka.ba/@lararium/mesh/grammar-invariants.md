@@ -4,11 +4,11 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/grammar-invariants.md"
+l-space   = "lararium"
 mana      = 3
 register  = "Provisional"
 retain    = true
 role      = "self-documentation: TODO describe grammar-invariants.ts"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/grammar-invariants"
 ```

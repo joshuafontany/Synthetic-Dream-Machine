@@ -18,7 +18,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "memetic-wikitext operational skill — authoring, compression, audit, and sidecar split discipline"
 skill-package-root = "packages/lares-core/memes/api/pono/memetic-wikitext"
-tags      = ["api/pono/meme", "api/pono/loci"]
+tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/api/pono/memetic-wikitext/SKILL"
 ```

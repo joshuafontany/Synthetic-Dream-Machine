@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/library/discordia/malaclypse-the-younger/are-discordians-serious.md"
+l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 18
@@ -11,7 +12,6 @@ register  = "Canon"
 retain    = false
 role      = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/library/discordia/malaclypse-the-younger/are-discordians-serious"
 ```

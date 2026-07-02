@@ -11,7 +11,7 @@ manaoio     = 16
 register    = "Synthesis-Canon"
 retain      = true
 role        = "ViewTemplate: slot badge + parent link shown at top of any ahu child tiddler"
-tags      = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/@lares/api/pono/meme"]
+tags        = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/@lares/api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/ui/ahu-breadcrumb"
 ```
@@ -33,6 +33,8 @@ uri-path    = "ha.ka.ba/@lararium/tw5/ui/ahu-breadcrumb"
 </$list>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

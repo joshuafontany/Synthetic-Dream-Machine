@@ -3,14 +3,14 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/graph/traversal >>
 ```toml iam
 file-path   = "bags/@lares/ha.ka.ba/@lares/docs/graph/traversal.md"
+l-space     = "stable"
 mana        = 17
 manao       = 17
 manaoio     = 17
 register    = "Synthesis-Canon"
 role        = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
 status-date = "2026-04-24"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space     = "stable"
+tags        = ["api/pono/meme", "api/pono/loci"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/docs/graph/traversal"
 ```

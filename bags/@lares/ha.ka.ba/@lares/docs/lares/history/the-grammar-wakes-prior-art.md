@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes-prior-art >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes-prior-art"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes-prior-art.md"
-type      = "text/x-memetic-wikitext"
-l-space   = "adjacent"
-confidence = 18
-register  = "Synthesis"
-manaoio   = 17
-mana      = 18
-manao     = 17
-role      = "side-car to the genesis arc — the 8-system prior-art comparison battery and 7 open design tests that shaped kahea/ahu/loulou design pressure and the W3C lineage verdict. Reference, not narrative."
+cacheable     = false
+confidence    = 18
+file-path     = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes-prior-art.md"
+l-space       = "adjacent"
+mana          = 18
+manao         = 17
+manaoio       = 17
+register      = "Synthesis"
 render-target = "docs"
-cacheable = false
-retain    = true
+retain        = true
+role          = "side-car to the genesis arc — the 8-system prior-art comparison battery and 7 open design tests that shaped kahea/ahu/loulou design pressure and the W3C lineage verdict. Reference, not narrative."
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes-prior-art"
 ```
 
 <<~ &#x0002; >>

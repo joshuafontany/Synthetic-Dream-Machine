@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/signal/hud.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "signal-branch framing for the HUD as the situational-awareness surface; the instrument law + teaching live in the api/lares/hud + docs/lares/hud pair"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/signal/hud"
 ```

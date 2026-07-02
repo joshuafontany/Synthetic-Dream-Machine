@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/signal/sa-display.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "docs room for shared-situation-awareness framing, prospective display theory, and research grounding behind lar signal"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/signal/sa-display"
 ```

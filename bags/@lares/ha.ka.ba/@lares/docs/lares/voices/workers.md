@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/voices/workers.md"
+l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "specification for the worker swarm: tasked spirits as temporary masks, lifecycle, tag format, handback dissolving to the full house"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/voices/workers"
 ```

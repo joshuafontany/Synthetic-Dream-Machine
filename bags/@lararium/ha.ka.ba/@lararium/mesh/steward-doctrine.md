@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/steward-doctrine.md"
+l-space   = "lararium"
 mana      = 15
 manao     = 14
 manaoio   = 14
 register  = "Synthesis"
 retain    = true
 role      = "PROPOSED design intent: the Amorphous Dreams cabal as steward-not-ruler — founders/maintainers who hold repair authority WITHOUT becoming rulers, legitimacy flowing from being BOUND (k-of-n threshold, constitution outside reach, forkable) not from being trusted; the board verdict separates a threshold-signed steward SOURCE from a verify-only public READ plane"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/steward-doctrine"
 ```

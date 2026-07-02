@@ -10,7 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: LeleWidget — heleuma ka"
 source-symbol = "LeleWidget"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/lele", "tw5/modules/tw5-widgets"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/lele", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/widgets/lele"
 ```

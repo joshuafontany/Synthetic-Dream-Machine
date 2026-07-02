@@ -4,12 +4,12 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/api/pono/holds.md"
+l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 14
 register  = "Synthesis-Canon"
 role      = "names the copula-free predicate; a carrier holds a component; the held thing speaks; tables fall to holds-stacks; ordered runs, crossings, and grades each ride their own verb (four verbs, three spines)"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/holds"
 written   = "2026-06-14"

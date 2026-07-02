@@ -6,6 +6,7 @@ body-sha256   = "e75d894319cc697fb1bc9b63e515327e683f5c57f1b783652e5b3c9880b9a45
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/kumu.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: kumu — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "KumuWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/kumu"
 ```

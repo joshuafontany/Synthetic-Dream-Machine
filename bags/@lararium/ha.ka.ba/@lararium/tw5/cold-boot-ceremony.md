@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/cold-boot-ceremony.md"
+l-space     = "lararium"
 mana        = 3
 register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe cold-boot-ceremony.ts"
 source-file = "packages/lararium-tw5/src/cold-boot-ceremony.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/cold-boot-ceremony"
 ```

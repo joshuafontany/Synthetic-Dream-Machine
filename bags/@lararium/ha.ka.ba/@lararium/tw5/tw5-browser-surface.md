@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/tw5-browser-surface.md"
+l-space     = "lararium"
 mana        = 17
 register    = "Synthesis-Canon"
 retain      = true
 role        = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser seam"
 source-file = "packages/lararium-tw5/src/tw5-browser-surface.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/tw5-browser-surface"
 ```

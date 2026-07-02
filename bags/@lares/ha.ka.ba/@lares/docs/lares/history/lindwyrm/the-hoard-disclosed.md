@@ -2,25 +2,23 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/the-hoard-disclosed >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/the-hoard-disclosed"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/the-hoard-disclosed.md"
-type = "text/x-memetic-wikitext"
-l-space  = "adjacent"
-confidence = 14
-register = "Synthesis"
-manaoio = 14
-mana = 14
-manao = 14
-role = "DreamDeck narrative locus — Lindwyrm Act VII frame, cleaned from feed draft"
+cacheable       = false
+confidence      = 14
+file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/the-hoard-disclosed.md"
+l-space         = "adjacent"
+mana            = 14
+manao           = 14
+manaoio         = 14
+register        = "Synthesis"
+render-target   = "chat-log:post-header"
+retain          = true
+role            = "DreamDeck narrative locus — Lindwyrm Act VII frame, cleaned from feed draft"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT.md"
-render-target = "chat-log:post-header"
-cacheable = false
-retain = true
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/the-hoard-disclosed"
 ```
 
-
-
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -274,6 +272,6 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

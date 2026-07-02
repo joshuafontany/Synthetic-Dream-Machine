@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/alignment-layer.md"
+l-space     = "stable"
 mana        = 16
 manao       = 15
 manaoio     = 13
@@ -13,8 +14,7 @@ register    = "Synthesis"
 retain      = true
 role        = "design invariant: the alignment plane (Plane 0) — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
 status      = "proposed"
-tags      = ["api/pono/causal-islands"]
-l-space     = "stable"
+tags        = ["api/pono/causal-islands"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/alignment-layer"
 ```

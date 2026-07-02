@@ -10,7 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: registerTomlFieldOperator — heleuma ka"
 source-symbol = "registerTomlFieldOperator"
-tags      = ["tw5/modules/tw5-widgets"]
+tags          = ["tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/filters/toml-field"
 ```

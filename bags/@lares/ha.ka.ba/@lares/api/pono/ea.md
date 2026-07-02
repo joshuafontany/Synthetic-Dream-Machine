@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/ea.md"
+l-space   = "stable"
 mana      = 16
 manao     = 15
 namespace = "&#x2299;"
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = true
 role      = "ontology invariant: ea — sovereignty, breath, life — the declaration pattern for any self-standing causal island group or node on the DreamNet"
 tags      = ["lar:///ha.ka.ba/@lararium/mesh/island-protocol"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/ea"
 ```

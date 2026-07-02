@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/law-of-5s.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, Aperture mapping, and scale UCAN attenuation"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/law-of-5s"
 ```

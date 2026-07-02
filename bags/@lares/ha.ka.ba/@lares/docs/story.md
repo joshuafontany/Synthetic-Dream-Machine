@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/story.md"
+l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 15
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for Lindwyrm, Elyncia, origin-story, and other narrative scaffolds that inform but do not govern the live stack"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/story"
 ```

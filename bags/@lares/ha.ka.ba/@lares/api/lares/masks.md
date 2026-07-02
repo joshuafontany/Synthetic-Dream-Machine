@@ -3,9 +3,10 @@
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/api/lares/masks >>
 ```toml iam
 cacheable = true
-created   = "2026-04-23"
+created   = "Invalid Date"
 file-path = "bags/@lares/api/lares/masks.md"
 hydrate   = false
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -14,7 +15,6 @@ register  = "Synthesis"
 retain    = false
 role      = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/masks"
 ```

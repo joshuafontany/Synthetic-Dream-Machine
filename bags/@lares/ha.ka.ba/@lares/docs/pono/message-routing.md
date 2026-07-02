@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/message-routing.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 register  = "Synthesis"
 retain    = false
 role      = "extended docs: memetic-wikitext message routing — render-down (dataflow) and message-up (message) over the control DAG; lexical meme-scope; filter context binding"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/message-routing"
 ```

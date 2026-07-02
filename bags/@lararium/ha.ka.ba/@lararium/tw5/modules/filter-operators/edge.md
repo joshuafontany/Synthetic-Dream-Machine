@@ -6,6 +6,7 @@ body-sha256   = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c3
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/filter-operators/edge.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 filter operator: edge — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "registerEdge"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/filter-operators/edge"
 ```

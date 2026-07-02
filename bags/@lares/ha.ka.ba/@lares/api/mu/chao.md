@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/api/mu/chao.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 14
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "sacred chao boot, ha/ka/ba triad instantiator, address-space semantics"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/mu/chao"
 ```

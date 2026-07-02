@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/tw5/sync/save-cascade.md"
+l-space       = "adjacent"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -12,8 +13,7 @@ retain        = true
 role          = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor: ordered TW5 filter rules mapping tiddler titles to save strategies"
 source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space       = "adjacent"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/sync/save-cascade"
 ```

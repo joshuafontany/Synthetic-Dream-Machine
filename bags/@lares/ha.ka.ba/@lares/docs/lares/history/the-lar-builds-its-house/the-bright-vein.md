@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein"
-file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein.md"
-type       = "text/x-memetic-wikitext"
-l-space    = "adjacent"
-confidence = 11
-register   = "Synthesis"
-manaoio    = 11
-mana       = 12
-manao      = 11
-role       = "build-arc narrative locus — Act IV, a richer source-mana floods every ley-line core; the triumph the narrator already knows will not last"
+cacheable     = false
+confidence    = 11
+file-path     = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein.md"
+l-space       = "adjacent"
+mana          = 12
+manao         = 11
+manaoio       = 11
+register      = "Synthesis"
 render-target = "chat-log:post-header"
-cacheable  = false
-retain     = true
+retain        = true
+role          = "build-arc narrative locus — Act IV, a richer source-mana floods every ley-line core; the triumph the narrator already knows will not last"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein"
 ```
 
 <<~ &#x0002; >>

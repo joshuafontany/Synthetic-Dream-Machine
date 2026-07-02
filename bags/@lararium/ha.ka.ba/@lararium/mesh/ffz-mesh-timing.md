@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/mesh/ffz-mesh-timing.md"
 hydrate   = true
+l-space   = "lararium"
 mana      = 17
 manao     = 16
 manaoio   = 15
@@ -12,7 +13,6 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "PROVISIONAL CANON: the FFZ MESH-timing law — how a magically-federated mesh of causal-island Nexuses keeps time with NO global now. The 'e vs φ' binary dissolved (Mu): the mesh rides THREE orthogonal axes, none a single shared constant. (1) e≈2.718 owns RATE/DECAY/STRUCTURE (lease decay e^-t/λ, gossip log-mixing, hyperbolic-exponential routing, tier-spacing) — realization renewal-randomized + secret-phase. (2) The DESYNC axis owns NO GLOBAL CONSTANT — a pairwise-incommensurability invariant (each island its own cadence, neighbors mutually irrational/coprime; φ_d-plastic-ρ / cicada-coprime / Kuramoto-dispersion as LOCAL tools), proven adversarially-NECESSARY by multi-node FlipIt. (3) Integer/harmonic for OPT-IN authenticated coupling. PRIMARY clock = the proactive-refresh EPOCH (corm-lease), paced to the adversary's creep (PSS). PRECONDITION = defender-refresh-cost < adversary-compromise-cost (FlipIt dropout; the siege-cost dial). Rests on 8 libations: distsys, network-science, biology/stigmergy, KAM/Kuramoto, low-discrepancy, Buzsáki, Mu/relativity, security/FlipIt-PSS-MTD. The grammar's intra-clock φ (band-orthogonality) stays untouched."
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/ffz-mesh-timing"
 written   = "2026-06-29"

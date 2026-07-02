@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/tw5/continuity.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 14
 manao     = 14
 manaoio   = 14
@@ -13,7 +14,6 @@ register  = "Synthesis"
 retain    = true
 role      = "lararium child invariant for continuity, crystal carry, and memory-as-hint boundaries"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/tw5/continuity"
 ```

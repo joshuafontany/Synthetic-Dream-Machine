@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/network-edge.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 16
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "THE undefined-network-edge doctrine — how a local-first causal-island mesh connects, crosses, and admits at an edge no census reaches. Grounds the second-spore / federation frontier in a 4-spirit convergence (Erdős/random-graph · network-edge SOTA · biology · physics/social): the edge connects as a PHASE TRANSITION reasoned PROBABILISTICALLY; the crossing is the weak-tie/anastomosis carried cheap+optimistic; membership is admit-then-test-then-SEVER at the seam via distributed challenge + per-edge anergy; dependence is a buildable resource; the lease is a pheromone. Adopt Beelay/Iroh/Keyhive; invent the admission semantics."
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/network-edge"
 written   = "2026-06-26"

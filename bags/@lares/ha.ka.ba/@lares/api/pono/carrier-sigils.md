@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/carrier-sigils.md"
+l-space     = "stable"
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -12,8 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
 status-date = "2026-06-12"
-tags      = ["api/pono/memetic-wikitext"]
-l-space     = "stable"
+tags        = ["api/pono/memetic-wikitext"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/carrier-sigils"
 ```

@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/lar-uri.md"
+l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/lar-uri"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/lar-uri"
 ```

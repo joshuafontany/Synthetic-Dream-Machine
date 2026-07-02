@@ -5,15 +5,15 @@
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/api/pono/lararium-memory.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 14
-namespace = "≋"
+namespace = "&#x224B;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the memory model stated whole — two axes (sovereign↔meshed · lived↔distilled) crossing into four cells that unfold to five registers (the Seat doubling by mind-kind — Law-of-5s), held by two peers (operator: RAM + DreamDeckSurface · node: RAM + Agent.MEMORY) over one shared mesh (mempalace the PLACE memory · quine the ley-line-mesh memory); the CLI a mutual-hold instrument on the edges into the @daemon seat; carries the GroundedVow binding, the two drains, capture-before-wire, and register-dressed recall"
 tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/local-first", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/lararium-memory"
 written   = "2026-06-24"

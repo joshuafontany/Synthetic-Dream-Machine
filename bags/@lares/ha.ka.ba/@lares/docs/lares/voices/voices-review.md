@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/voices/voices-review.md"
+l-space   = "archive"
 mana      = 16
 manao     = 17
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "closed extraction memo (witness) — three-layer voice-house migration complete 2026-04; all targets extracted"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "archive"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/voices/voices-review"
 ```

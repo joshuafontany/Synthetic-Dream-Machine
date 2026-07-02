@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/lares-lararium-binding.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 16
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the true lares↔lararium binding — a thin-client→warm-daemon Unix-domain-socket channel for the co-located CLI, WS kept for remote mesh peers; transport (UDS) / authority (capability-bearing UCAN-shape verb-summons) / record (CRDT outcome receipt) decoupled; peer-cred for presence + Ed25519 for authority; drops the measured ~0.4–0.5s/command connect+sync tax (misplaced replica-spin, never transport; the oft-cited 3s = the connect timeout ceiling — corrected on first measurement). Win is real for cheap verbs (status 0.82s→0.40s), negligible against a sidecar-bound verb like recall"
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/lares-lararium-binding"
 written   = "2026-06-25"

@@ -6,6 +6,7 @@ body-sha256   = "31c1258031922e15ce7d5ea2ba0336b074b728221e4c8708b30e3c1875bca39
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/pae.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: pae — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "PaeWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/pae"
 ```

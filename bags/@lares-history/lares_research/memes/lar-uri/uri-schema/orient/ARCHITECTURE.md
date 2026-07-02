@@ -57,7 +57,7 @@ At each exchange span, `lar:` URIs are used in a mandatory sequence:
 **Full form (with authority):**
 
 ```
-lar://alias:grant@host/ha.ka.ba/?stances=XXXXX&confidence=R:N&p=N#chronometer <!-- uri-ok -->
+lar://alias:grant@host/ha.ka.ba/ <!-- uri-ok -->
 ```
 
 Where `stances=XXXXX` is the five-character stance amplitude string.
@@ -131,43 +131,6 @@ HA.KA.BA semantic address. Three mandatory slots in canonical order:
 **Mandatory word-count rule:** Each slot is exactly one lowercase word. No hyphens, underscores, or spaces within a slot. Three-slot combination is mandatory — no HA.KA.BA with fewer than three populated slots. A HA.KA.BA is always a `noun.adjective.verb` triple.
 
 **Optional sub-path extension:** After the mandatory three-slot HA.KA.BA, additional `/`-separated path segments may follow to navigate within the named territory. Sub-path segments are free-form routing tokens, not HA.KA.BA slots.
-
-### `query` — `?stances=XXXXX&confidence=R:N&p=N`
-
-Signal parameters, non-hierarchical.
-
-| Parameter | Type | Repeatable? | Record Values | HUD Values |
-|---|---|---|---|---|
-| `stances` | 5-char amplitude string | No | `^.?.-.-.-` (positional: philosopher, poet, satirist, humorist, private) | `🏛️+🌊?🗡️-🎭-🔮-` |
-| `confidence` | `R:N` | No | `~:confidence[P],[7]`, `~:confidence[SP],[9]`, `~:confidence[S],[13]`, `~:confidence[CS],[16]`, `~:confidence[C],[18]` | Same |
-| `p` | `N` | No | `0.5` | Same |
-
-**Stance amplitude encoding:**
-
-Positional order fixed: Philosopher, Poet, Satirist, Humorist, Private. Each position carries one amplitude character:
-
-| Char | Meaning |
-|---|---|
-| `^` | Above baseline / active / elevated |
-| `-` | Below baseline / suppressed |
-| `?` | Uncertain / provisional |
-| `.` | Baseline / neutral presence |
-
-Record form uses URL-safe characters only (`^`, `-`, `?`, `.`). HUD render targets map `^` → `+` for display.
-
-### `fragment` — `#chronometer`
-
-FFZ chronometer position. Five OODA-HA scale positions, dot-separated. Format: `O0.O0.O3.D2.A1`.
-
-| Phase | Record | HUD | Meaning |
-|---|---|---|---|
-| Observe | `O` | `✶` | Gathering — no commitment |
-| Orient | `Ø` | `◎` | Making sense |
-| Decide | `D` | `◇` | Choosing a path |
-| Act | `A` | `■` | Executing |
-| Assess/Aftermath | `Å` | `○` | Feeding upward |
-
-Scale positions: Strategic (🗺️ ~6 days) · Operational (⚙️ ~4 hours) · Tactical (🔍 ~10 min) · Combat (⚔️ ~6 sec) · Action (⚡ variable). All five positions always present; no trailing-zero omission.
 
 ---
 

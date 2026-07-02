@@ -11,7 +11,7 @@ manaoio    = 16
 register   = "Synthesis-Canon"
 retain     = true
 role       = "EditTemplate: inline editors for non-body ahu slots; body slot edited via core EditTemplate/body"
-tags      = ["$:/tags/EditTemplate", "lar:///ha.ka.ba/@lares/api/pono/meme"]
+tags       = ["$:/tags/EditTemplate", "lar:///ha.ka.ba/@lares/api/pono/meme"]
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/@lararium/tw5/ui/meme-edit-children"
 ```
@@ -56,6 +56,8 @@ uri-path   = "ha.ka.ba/@lararium/tw5/ui/meme-edit-children"
 </$list>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

@@ -6,6 +6,7 @@ body-sha256   = "fea43878818e50755601d9f3c2aef21be2a12a7899de63c41606a87bd2ebec1
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/sigil.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: sigil — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "SigilWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/sigil"
 ```

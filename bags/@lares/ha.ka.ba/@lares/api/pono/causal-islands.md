@@ -5,6 +5,7 @@
 cacheable     = true
 file-path     = "bags/@lares/api/pono/causal-islands.md"
 heleuma       = "ba"
+l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -14,8 +15,7 @@ retain        = true
 role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
 status-date   = "2026-06-01"
-tags      = ["api/pono/orichalcum-capabilities", "api/pono/federated-causal-islands", "api/pono/alignment-layer"]
-l-space       = "stable"
+tags          = ["api/pono/orichalcum-capabilities", "api/pono/federated-causal-islands", "api/pono/alignment-layer"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/pono/causal-islands"
 ```
@@ -309,6 +309,8 @@ meant to escape):
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

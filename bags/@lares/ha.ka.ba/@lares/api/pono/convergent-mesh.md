@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/api/pono/convergent-mesh.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 14
 manao     = 14
 manaoio   = 13
@@ -13,7 +14,6 @@ retain    = true
 role      = "the converged DreamNet mesh model — revocation, membership, and revision are ONE shape (local·decaying·graded·cost-bound·lineage); epoch=lease not revoker; the contract performs the key-agreement; grounded in falsifiable cross-domain pattern-integrities (mycelium foremost)"
 status    = "proposed"
 tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/orichalcum-capabilities", "api/pono/lararium-identity"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/convergent-mesh"
 written   = "2026-06-24"

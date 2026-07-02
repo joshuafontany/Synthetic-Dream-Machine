@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/mu/the-syad-perspectives.md"
+l-space   = "stable"
 mana      = 15
 manao     = 17
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "condensed syad research shelf, stance-reading summary, bridge to the archive bundle"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/mu/the-syad-perspectives"
 ```

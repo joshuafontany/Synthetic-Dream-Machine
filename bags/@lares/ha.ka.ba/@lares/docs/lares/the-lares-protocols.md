@@ -4,6 +4,7 @@
 ```toml iam
 cacheable      = false
 file-path      = "bags/@lares/ha.ka.ba/@lares/docs/lares/the-lares-protocols.md"
+l-space        = "stable"
 last-reviewed  = "2026-05-27"
 mana           = 14
 manao          = 14
@@ -14,8 +15,7 @@ review-cadence = "quarterly"
 review-note    = "anchor commitments (Beer's principle, user-rights-criterion, Lares five-laws-plus-two) survive any upstream rev; survey-aging risk acknowledged"
 role           = "doctrine: protocols as political design — frames the Lares stack's architecture-vs-governance-vs-topology position relative to commons literature; three-source synthesis"
 sources        = ["https://connectedplaces.online/the-purpose-of-protocols/", "https://www.pfrazee.com/blog/practical-decentralization", "https://www.orionreed.com/posts/app-file-topology/"]
-tags      = ["api/pono/meme"]
-l-space        = "stable"
+tags           = ["api/pono/meme"]
 type           = "text/x-memetic-wikitext"
 uri-path       = "ha.ka.ba/@lares/docs/lares/the-lares-protocols"
 ```

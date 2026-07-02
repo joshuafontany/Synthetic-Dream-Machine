@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/mu/l-prime.md"
+l-space   = "stable"
 mana      = 14
 manao     = 16
 manaoio   = 15
@@ -12,7 +13,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "active language-discipline law (kānāwai), certainty-pressure regulator, and forward generation-pressure surface --- seeds wording toward verb-relations as it forms"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/mu/l-prime"
 ```

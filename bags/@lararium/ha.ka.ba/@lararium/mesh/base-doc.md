@@ -4,13 +4,13 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/base-doc.md"
+l-space     = "lararium"
 mana        = 9
 manao       = 9
 register    = "Synthesis"
 retain      = true
 role        = "the LarDoc record/blob shapes + the bag→doc oracle resolve-and-write-back primitive (resolveOracleDoc) + blob descriptor addressing"
 source-file = "packages/lararium-mesh/src/base-doc.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/base-doc"
 ```

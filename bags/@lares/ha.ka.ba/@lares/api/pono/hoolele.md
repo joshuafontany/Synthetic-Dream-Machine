@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/hoolele.md"
+l-space     = "stable"
 mana        = 16
 manao       = 16
 namespace   = "&#x2299;"
@@ -11,8 +12,7 @@ register    = "Synthesis"
 retain      = true
 role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
 status-date = "2026-05-15"
-tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele"]
-l-space     = "stable"
+tags        = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/hoolele"
 ```

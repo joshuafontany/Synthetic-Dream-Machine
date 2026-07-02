@@ -2,24 +2,22 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/consumption-ledger >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/consumption-ledger"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/consumption-ledger.md"
-type = "text/x-memetic-wikitext"
-l-space  = "adjacent"
+cacheable  = false
 confidence = 14
-register = "Synthesis"
-manaoio = 14
-mana = 14
-manao = 15
-role = "consumption ledger for Lindwyrm / DreamDeck narrative loci migration"
-mode = "narrate-to-self"
-cacheable = false
-retain = true
+file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/consumption-ledger.md"
+l-space    = "adjacent"
+mana       = 14
+manao      = 15
+manaoio    = 14
+mode       = "narrate-to-self"
+register   = "Synthesis"
+retain     = true
+role       = "consumption ledger for Lindwyrm / DreamDeck narrative loci migration"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/consumption-ledger"
 ```
 
-
-
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -114,6 +112,6 @@ Likely next slices:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

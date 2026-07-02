@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/sigil-kind.md"
+l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 17
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lar-kind taxonomy: all SharktoothSigil kind values, dispatch behavior, grammar-cache classification, family rule properties"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/sigil-kind"
 ```

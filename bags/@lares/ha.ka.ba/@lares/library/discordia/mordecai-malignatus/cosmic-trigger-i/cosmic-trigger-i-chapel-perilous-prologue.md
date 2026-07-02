@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locus, verbatim provenance shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue"
 ```
@@ -306,6 +306,8 @@ stubbornness, dumb luck") describes how he personally navigated — not the form
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

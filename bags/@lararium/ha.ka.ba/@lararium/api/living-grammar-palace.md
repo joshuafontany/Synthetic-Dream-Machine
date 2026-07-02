@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/living-grammar-palace.md"
 hydrate   = true
+l-space   = "lararium"
 mana      = 19
 manao     = 18
 manaoio   = 17
@@ -12,7 +13,6 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a multi-graph (CONTENT⊥FORM⊥STRUCTURE) cross-joined by sha + N-ary RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. The KEYSTONE unification (4-spirit convergence) reads the three palaces as ONE product-presheaf object P = Content × Form × Struct in [Bᵒᵖ,Vect] over the FFZ base — the cap-stack the projections, the verbatim-sha a pullback morphism (no morphism → no join, the formalism forbidding the vibe-coded cross-product); two floors (strict product unifies · Lawvere-enriched ultrametric measures drift); a SEPARATE fused-Measure arrow P→M (the common-cause log-opinion-pool / multivariate BOCPD gong, whitened against co-moving planes); functoriality = mālama pili (each vibe-coded sin = a dropped arrow); two operators (RRF=recall · quorum-servo=Measure-segmentation). Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and multi-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/living-grammar-palace"
 written   = "2026-06-29"

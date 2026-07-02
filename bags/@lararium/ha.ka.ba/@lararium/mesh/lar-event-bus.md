@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/lar-event-bus.md"
+l-space     = "lararium"
 mana        = 3
 register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe lar-event-bus.ts"
 source-file = "packages/lararium-mesh/src/lar-event-bus.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/lar-event-bus"
 ```

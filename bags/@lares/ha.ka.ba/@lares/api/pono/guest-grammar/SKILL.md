@@ -18,7 +18,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "guest-grammar operational skill — admission audit, hana shaping, and sidecar split discipline"
 skill-package-root = "packages/lares-core/memes/api/pono/guest-grammar"
-tags      = ["api/pono/meme", "api/pono/loci"]
+tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/api/pono/guest-grammar/SKILL"
 ```

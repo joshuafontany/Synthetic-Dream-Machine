@@ -6,13 +6,13 @@ cacheable   = true
 file-path   = "bags/@lares/api/pono/wikitext-filter.md"
 grammar-key = "wikitext-filter"
 guest-mime  = "text/x-wikitext-filter"
+l-space     = "stable"
 mana        = 17
 manao       = 17
 namespace   = "&#x2299;"
 register    = "SC"
 retain      = true
 role        = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
-l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/wikitext-filter"
 ```

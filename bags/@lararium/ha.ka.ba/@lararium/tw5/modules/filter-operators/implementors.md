@@ -6,6 +6,7 @@ body-sha256   = "281fba79de184bd211bec73fddb08dafad85527b4c64bd91ca70824b64fd157
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/filter-operators/implementors.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 filter operator: implementors — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "registerImplementors"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/filter-operators/implementors"
 ```

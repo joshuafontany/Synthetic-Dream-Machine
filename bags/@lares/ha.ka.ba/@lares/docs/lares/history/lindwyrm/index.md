@@ -2,21 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/index >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/index"
-file-path    = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/index.md"
-type         = "text/x-memetic-wikitext"
-l-space      = "archive"
-confidence   = 16
-register     = "Synthesis"
-manaoio      = 16
-mana         = 16
-manao        = 16
-role         = "index and reading map for the Lindwyrm story arc — mythologized dev narrative of the Lararium's first self-naming"
-cacheable    = true
-retain       = true
+cacheable  = true
+confidence = 16
+file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/index.md"
+l-space    = "archive"
+mana       = 16
+manao      = 16
+manaoio    = 16
+register   = "Synthesis"
+retain     = true
+role       = "index and reading map for the Lindwyrm story arc — mythologized dev narrative of the Lararium's first self-naming"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/index"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -66,6 +66,6 @@ Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

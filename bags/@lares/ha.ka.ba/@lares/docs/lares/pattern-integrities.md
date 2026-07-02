@@ -3,13 +3,13 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/pattern-integrities >>
 ```toml iam
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/pattern-integrities.md"
+l-space   = "stable"
 mana      = 15
 manao     = 15
 manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the research shelf: prior art, golden principles, anti-patterns for the seven stack integrities — field-grounded by nine research spirits, 2026-06-11/12; binds as kupono intent (builds implement THESE, never improvisation)"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/pattern-integrities"
 written   = "2026-06-12"

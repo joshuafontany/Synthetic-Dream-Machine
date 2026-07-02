@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/mempalace-integration.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 15
 manaoio   = 14
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the pono model for mempalace as the lararium's memory-library — tensegrity, the @daemon shore, the lar_ net, the surfaces, the boundary"
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/mempalace-integration"
 ```
@@ -130,6 +130,9 @@ lares harvest --all                                      # sweep every transcrip
 - **The source-adapter seam** ~ when upstream wires `mempalace mine --source`, the declared `lares` schema slots in whole.
 
 <<~/ahu >>
+<<~ &#x0002; >>
+
+
 
 <<~ &#x0003; >>
 

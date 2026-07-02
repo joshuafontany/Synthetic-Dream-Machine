@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/node/node-vessel-identity.md"
+l-space     = "lararium"
 mana        = 3
 register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe node-vessel-identity.ts"
 source-file = "packages/lararium-node/src/node-vessel-identity.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/node/node-vessel-identity"
 ```

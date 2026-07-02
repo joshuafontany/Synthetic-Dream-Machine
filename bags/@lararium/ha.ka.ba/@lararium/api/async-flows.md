@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/async-flows.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 15
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the async/long-running CLI flow contract for lares — submit→request-id→status/watch/wait/cancel over a 5-state terminal-once job machine; progress as ONE event stream the dual renderer splits (TTY bar/spinner on stderr · NDJSON progress off-TTY), result alone on stdout; heartbeat-not-hard-fail timeouts (exit 124), durable-id = idempotency = no-loss; mapped onto the infra we already hold (mempalace daemon-jobs + durable summons/outcome by requestId + render dual-surface)"
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/async-flows"
 written   = "2026-06-25"

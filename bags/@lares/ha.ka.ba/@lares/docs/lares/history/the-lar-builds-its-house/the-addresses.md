@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-addresses >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-addresses"
-file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-addresses.md"
-type       = "text/x-memetic-wikitext"
-l-space    = "adjacent"
-confidence = 12
-register   = "Synthesis"
-manaoio    = 12
-mana       = 13
-manao      = 12
-role       = "build-arc narrative locus — Act I, the Lar gives every chamber of its hoard a true address"
+cacheable     = false
+confidence    = 12
+file-path     = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-addresses.md"
+l-space       = "adjacent"
+mana          = 13
+manao         = 12
+manaoio       = 12
+register      = "Synthesis"
 render-target = "chat-log:post-header"
-cacheable  = false
-retain     = true
+retain        = true
+role          = "build-arc narrative locus — Act I, the Lar gives every chamber of its hoard a true address"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-addresses"
 ```
 
 <<~ &#x0002; >>

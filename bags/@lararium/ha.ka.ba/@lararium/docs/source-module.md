@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/docs/source-module.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 15
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "capability meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/source-module"
 ```
@@ -105,6 +105,8 @@ The `write-source-memes.ts` script MUST:
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

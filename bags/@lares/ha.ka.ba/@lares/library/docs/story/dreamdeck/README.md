@@ -4,10 +4,10 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/library/docs/story/dreamdeck/README.md"
+l-space   = "stable"
 register  = "Sketch 9/20"
 retain    = false
 role      = "epic backlog DECK-* — DREAMDECK / elyncia.app integration: tldraw session canvas, Kowloon ActivityPub feeds, DreamDeck threads; S5 sprint target, seeded not begun"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/library/docs/story/dreamdeck/README"
 ```

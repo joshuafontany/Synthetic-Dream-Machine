@@ -5,15 +5,16 @@
 cacheable         = true
 file-path         = "bags/@lares/api/pono/cabal-place.md"
 hydrate           = true
-pattern-integrity = true
+l-space           = "stable"
 mana              = 17
 manao             = 16
 manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
 register          = "Synthesis-Canon"
 retain            = true
 role              = "cabal-place — a CabalGroup modeled as a virtual PLACE (a hearth beside, not a category above): a shared causal-island the members maintain, named-not-ruled, alive by its epoch, dissolving to anu when unfed. The tie-break is the place's epoch (BeeKEM); malice rides Plane-B convergent-removal"
 tags              = ["api/pono/meme"]
-l-space           = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/api/pono/cabal-place"
 ```

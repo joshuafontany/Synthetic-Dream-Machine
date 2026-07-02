@@ -18,6 +18,7 @@ description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/talk-story/SKILL.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -25,7 +26,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "practice face of talk-story — triggers, the five steps, three worked exits, crucible record; law lives at the parent meme"
 status    = "draft"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/talk-story/SKILL"
 ```

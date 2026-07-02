@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/preferences/operating-modes.md"
+l-space   = "stable"
 mana      = 18
 manao     = 16
 manaoio   = 17
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "docs concept room for named operating modes, scale vectors, and p-band visibility discipline in the recovered Lares stack"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/preferences/operating-modes"
 ```

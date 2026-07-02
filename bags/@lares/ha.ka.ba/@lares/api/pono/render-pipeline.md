@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/render-pipeline.md"
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -12,8 +13,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
-tags      = ["api/pono/meme", "api/pono/memetic-wikitext"]
-l-space       = "stable"
+tags          = ["api/pono/meme", "api/pono/memetic-wikitext"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/pono/render-pipeline"
 ```

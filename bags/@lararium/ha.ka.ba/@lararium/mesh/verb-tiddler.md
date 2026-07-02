@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/verb-tiddler.md"
+l-space     = "lararium"
 mana        = 14
 register    = "Synthesis-Canon"
 retain      = true
 role        = "the verb/summons/outcome task surface — verb (invocation), summons (edge transport), outcome (result); LANGUAGE-protocol register internal, the UCAN Invocation/Receipt/Task ontology held as boundary projection for lineage + interop"
 source-file = "packages/lararium-mesh/src/verb-tiddler.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/verb-tiddler"
 ```

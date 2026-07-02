@@ -6,6 +6,7 @@ approved-on   = "2026-05-30"
 cacheable     = true
 file-path     = "bags/@lararium/api/residency-model.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 16
@@ -16,8 +17,7 @@ revised-on    = "2026-06-15"
 revision-note = "non-residency verb tier seated (#non-residency-verbs): INGEST (the precedent) + RECONCILE (engine-fold into @oracle, operator-admin, preview/conflict-surface/confirm/idempotent/effect-record, conflict-SURFACING never merge-arbitrating); §5 amended to admit non-residency verbs while holding the VCS-verb ban; EPOCH named + deferred (paired, sequenced reconcile→epoch); prior: bag-grain verb pair approved"
 role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag); a non-residency verb tier (INGEST, RECONCILE) rides the same rail"
 status        = "approved"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space       = "stable"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/api/residency-model"
 ```

@@ -3,10 +3,10 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/docs/exchange-protocol >>
 ```toml iam
 file-path = "bags/@lararium/docs/exchange-protocol.md"
+l-space   = "stable"
 register  = "Synthesis"
 retain    = false
 role      = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/exchange-protocol"
 ```

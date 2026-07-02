@@ -11,7 +11,7 @@ manaoio    = 16
 register   = "Synthesis-Canon"
 retain     = true
 role       = "startup action: routes lar:///...#slot URL fragments to parent tiddler + correct tab state"
-tags      = ["$:/tags/StartupAction", "lar:///ha.ka.ba/@lares/api/pono/meme"]
+tags       = ["$:/tags/StartupAction", "lar:///ha.ka.ba/@lares/api/pono/meme"]
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/@lararium/tw5/ui/iam-startup-action"
 ```

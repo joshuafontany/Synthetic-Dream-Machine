@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/verse-event-lattice.md"
+l-space     = "stable"
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -12,8 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: UEFN Verse 5.6 event type lattice — event/listenable asymmetry, suspends effect specifier, @editable boundary, using module import; unreleased: sticky_event + subscribable_event; standard for Lararium device model"
 status-date = "2026-05-15"
-tags      = ["api/pono/meme"]
-l-space     = "stable"
+tags        = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/verse-event-lattice"
 ```

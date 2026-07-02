@@ -4,14 +4,14 @@
 ```toml iam
 cacheable = true
 hydrate   = true
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
 namespace = "&#x0950; &#x0901;"
+reflexive = true
 register  = "Synthesis-Canon"
 retain    = true
-reflexive = true
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/noosphere-boot"
 ```

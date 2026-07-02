@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/voices.md"
+l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 18
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "specification for the three-layer lararium voice-house: the Thirteen, Voice house law, worker swarm, and mask layer"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/voices"
 ```

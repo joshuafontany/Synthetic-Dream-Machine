@@ -6,6 +6,7 @@ body-sha256   = "0518ad22472bdea6dffd686dcd663ab93e9bbcecc3d69b54c8b49fba36aa209
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/dynamic.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: dynamic — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "DynamicWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/dynamic"
 ```

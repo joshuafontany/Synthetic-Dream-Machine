@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/disk-projection-law.md"
+l-space       = "stable"
 last-reviewed = "2026-05-11"
 mana          = 18
 manao         = 18
@@ -11,7 +12,6 @@ manaoio       = 18
 register      = "Synthesis-Canon"
 retain        = true
 role          = "council law: single-template plain-text per-node projection as the canonical disk export model for markdown-meme"
-l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/disk-projection-law"
 ```

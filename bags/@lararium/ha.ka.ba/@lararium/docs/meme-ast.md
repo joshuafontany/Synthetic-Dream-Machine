@@ -13,7 +13,7 @@ register      = "Synthesis-Canon"
 role          = "heleuma ka: isomorphic memetic-wikitext AST parser bundle"
 source-symbol = "parseMemeText"
 status-date   = "2026-05-01"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/meme-ast"
 ```
@@ -56,6 +56,8 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 <<~/ahu >>
 
 <<~ ahu #source >>
+
+
 
 <<~/ahu >>
 

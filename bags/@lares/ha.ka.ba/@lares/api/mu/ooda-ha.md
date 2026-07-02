@@ -5,6 +5,7 @@
 cacheable             = true
 file-path             = "bags/@lares/api/mu/ooda-ha.md"
 gear-shift-disclosure = "audible"
+l-space               = "stable"
 mana                  = 18
 manao                 = 18
 manaoio               = 18
@@ -14,8 +15,7 @@ ooda-ha-loop-span     = "multi-turn"
 register              = "Synthesis-Canon"
 retain                = true
 role                  = "invariant OODA-HA loop law, loop-visibility Level, and the loop-spans-turns phase-yield grammar"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space               = "stable"
+tags                  = ["api/pono/meme", "api/pono/loci"]
 type                  = "text/x-memetic-wikitext"
 uri-path              = "ha.ka.ba/@lares/api/mu/ooda-ha"
 ```

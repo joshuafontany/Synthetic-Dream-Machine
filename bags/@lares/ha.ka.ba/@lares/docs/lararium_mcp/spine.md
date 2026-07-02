@@ -3,6 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lararium_mcp/spine >>
 ```toml iam
 file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lararium_mcp/spine.md"
+l-space         = "stable"
 mana            = 16
 manao           = 17
 manaoio         = 16
@@ -10,8 +11,7 @@ register        = "Synthesis-Canon"
 role            = "canonical Lararium MCP program spine and architecture contraction"
 source-consumes = ["packages/lares-core/memes/docs/mcp/README.md", "packages/lares-core/memes/docs/mcp/ARCHITECTURE.md"]
 status-date     = "2026-04-23"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space         = "stable"
+tags            = ["api/pono/meme", "api/pono/loci"]
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/docs/lararium_mcp/spine"
 ```

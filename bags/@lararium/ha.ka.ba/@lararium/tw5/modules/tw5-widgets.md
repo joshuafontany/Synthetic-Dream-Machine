@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/tw5-widgets.md"
+l-space       = "adjacent"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -12,8 +13,7 @@ retain        = true
 role          = "TW5 widget registry: ten lararium widget types, widget tiddler registration, TW5ParseNode shape"
 source-symbol = "LARARIUM_WIDGETS_TIDDLER WorksiteWidget EdgeWidget TomlWidget SigilWidget DynamicWidget HeaderWidget DispatchWidget PapaloheWidget KukaliWidget KumuWidget TW5ParseNode"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/papalohe", "lar:///ha.ka.ba/@lares/api/pono/kukali"]
-l-space       = "adjacent"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/papalohe", "lar:///ha.ka.ba/@lares/api/pono/kukali"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/tw5-widgets"
 ```

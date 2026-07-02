@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/nalu.md"
+l-space     = "stable"
 mana        = 18
 manao       = 17
 namespace   = "&#x2299;"
@@ -11,7 +12,6 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ in-wiki nalu engine; yin-collapse law"
 status-date = "2026-05-30"
-l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/nalu"
 ```

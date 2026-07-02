@@ -3,14 +3,14 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/graph/artifacts >>
 ```toml iam
 file-path   = "bags/@lares/ha.ka.ba/@lares/docs/graph/artifacts.md"
+l-space     = "stable"
 mana        = 17
 manao       = 17
 manaoio     = 16
 register    = "Synthesis-Canon"
 role        = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
 status-date = "2026-04-24"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space     = "stable"
+tags        = ["api/pono/meme", "api/pono/loci"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/docs/graph/artifacts"
 ```

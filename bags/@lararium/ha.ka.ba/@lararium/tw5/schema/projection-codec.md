@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/schema/projection-codec.md"
+l-space     = "invariant"
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -11,8 +12,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant law: carrier-codec as projection layer; import and export paths between disk carrier format and canonical LarTiddlerRecord entries"
 status-date = "2026-04-30"
-tags      = ["api/pono/meme"]
-l-space     = "invariant"
+tags        = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/schema/projection-codec"
 ```

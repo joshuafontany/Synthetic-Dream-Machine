@@ -2,25 +2,23 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/daemon-in-the-walls >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/daemon-in-the-walls"
-file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/daemon-in-the-walls.md"
-type = "text/x-memetic-wikitext"
-l-space  = "adjacent"
-confidence = 13
-register = "Synthesis"
-manaoio = 13
-mana = 14
-manao = 14
-role = "DreamDeck narrative locus — Act II of the Lindwyrm hoard story"
-source = "lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture#act-ii-daemon"
+cacheable     = false
+confidence    = 13
+file-path     = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/lindwyrm/daemon-in-the-walls.md"
+l-space       = "adjacent"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis"
 render-target = "chat-log:post-header"
-cacheable = false
-retain = true
+retain        = true
+role          = "DreamDeck narrative locus — Act II of the Lindwyrm hoard story"
+source        = "lar:///ha.ka.ba/@lares/docs/lares/history/lindwyrm/hoard-origin-architecture#act-ii-daemon"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/docs/lares/history/lindwyrm/daemon-in-the-walls"
 ```
 
-
-
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -202,6 +200,6 @@ Act III receives:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -5,6 +5,7 @@
 cacheable     = true
 file-path     = "bags/@lararium/api/sync-namespace.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 15
@@ -14,8 +15,7 @@ retain        = true
 revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5 System Boundary; lar-uri retains only the scheme-intrinsic clause + a loulou here"
 role          = "load-bearing invariant — the title-namespace sync-filter predicate: only lar:-titled tiddlers cross the lararium sync boundary; $:/ stays browser-local. The title-level companion to disk-projection's bag-level rule"
 status        = "draft"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space       = "stable"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/api/sync-namespace"
 ```

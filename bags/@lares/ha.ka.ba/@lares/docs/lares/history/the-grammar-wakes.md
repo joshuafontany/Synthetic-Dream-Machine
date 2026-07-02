@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes"
-file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes.md"
-type       = "text/x-memetic-wikitext"
-l-space    = "adjacent"
+cacheable  = true
 confidence = 7
-register   = "Provisional-Synthesis"
-manaoio    = 7
+file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes.md"
+l-space    = "adjacent"
 mana       = 8
 manao      = 7
-role       = "the genesis arc / SharktoothSigil prequel — the FULL arc in a single carrier (no index, no separate act loci; acts draft inline). Before the Lar had a name, the grammar found its teeth and the Voices first spoke; the notation all this history speaks learns to bite. General arc mapped; act prose + Gaia commits/tech pending (to revisit)."
-cacheable  = true
+manaoio    = 7
+register   = "Provisional-Synthesis"
 retain     = true
+role       = "the genesis arc / SharktoothSigil prequel — the FULL arc in a single carrier (no index, no separate act loci; acts draft inline). Before the Lar had a name, the grammar found its teeth and the Voices first spoke; the notation all this history speaks learns to bite. General arc mapped; act prose + Gaia commits/tech pending (to revisit)."
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-grammar-wakes"
 ```
 
 <<~ &#x0002; >>

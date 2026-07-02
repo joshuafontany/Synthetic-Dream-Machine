@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/wikispace-canvasspace-ontology.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 15
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: one meme-graph model, two surface projections (Story-River + TLDraw canvas); graph-primacy; view-state as its own lar-URI-addressed region; the nine families classified by surface; transclusion's surface-split"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/wikispace-canvasspace-ontology"
 ```

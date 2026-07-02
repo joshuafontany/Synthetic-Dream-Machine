@@ -5,6 +5,7 @@
 cacheable   = true
 file-path   = "bags/@lararium/mesh/causal-island.md"
 hydrate     = true
+l-space     = "lararium"
 mana        = 18
 manao       = 17
 manaoio     = 16
@@ -12,7 +13,6 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "Causal-island ontological law: the four-tier boundary model, the ACCESS axis, and the share-substrate-not-sovereignty law that governs co-located vessels"
 source-file = "packages/lararium-mesh/src/causal-island.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/causal-island"
 ```

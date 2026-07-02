@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/alignment-plan.md"
+l-space   = "lararium"
 mana      = 19
 manao     = 18
 manaoio   = 18
 register  = "Synthesis"
 retain    = true
 role      = "Package alignment law: mesh as isomorphic spine; dep graph and consistency rules for the monorepo"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/alignment-plan"
 ```

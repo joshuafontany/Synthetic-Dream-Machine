@@ -3,6 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lararium_mcp/ast-execution-render >>
 ```toml iam
 file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lararium_mcp/ast-execution-render.md"
+l-space         = "stable"
 mana            = 16
 manao           = 17
 manaoio         = 15
@@ -10,8 +11,7 @@ register        = "Synthesis-Canon"
 role            = "canonical AST envelope, pranala graph-plane, execution graph, and render projection contract"
 source-consumes = ["packages/lares-core/memes/docs/mcp/TW_FILTER_BOUNDARY.md", "packages/lares-core/memes/docs/mcp/AST_ENVELOPE.md", "packages/lares-core/memes/docs/mcp/TW_AST_MAPPING.md", "packages/lares-core/memes/docs/mcp/PRANALA_ALIGNMENT.md", "packages/lares-core/memes/docs/mcp/EXECUTION_GRAPH_SCHEMA.md", "packages/lares-core/memes/docs/mcp/RENDER_PROJECTION_CONTRACT.md"]
 status-date     = "2026-04-23"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space         = "stable"
+tags            = ["api/pono/meme", "api/pono/loci"]
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/docs/lararium_mcp/ast-execution-render"
 ```

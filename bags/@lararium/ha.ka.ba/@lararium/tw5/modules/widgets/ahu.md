@@ -6,6 +6,7 @@ body-sha256   = "12b3869aa70d01761a960fe2bc881fa66b007d8b6559676b0de68e85508f52f
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/widgets/ahu.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: ahu — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "AhuWidget"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/widgets/ahu"
 ```

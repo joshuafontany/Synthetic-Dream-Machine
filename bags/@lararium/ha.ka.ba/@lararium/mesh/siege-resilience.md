@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/siege-resilience.md"
+l-space   = "lararium"
 mana      = 15
 manao     = 14
 manaoio   = 14
 register  = "Synthesis"
 retain    = true
 role      = "PROPOSED design intent: how the mesh survives a persistent 500-year adversary (the necrospire) in an isolated nexus + the maintainer repair-kit — TWO CLOCKS (authority refresh ⊥ flow self-heal); outrun a creeping adversary by RESETTING the clock (proactive secret sharing) not winning the static fight; the delegate's verbs (re-key/re-share/evict/heal-partition/recover-from-fork/re-genesis); self-stabilization + immune-system + VSM shape, run autonomously at each shrine tier"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/siege-resilience"
 ```

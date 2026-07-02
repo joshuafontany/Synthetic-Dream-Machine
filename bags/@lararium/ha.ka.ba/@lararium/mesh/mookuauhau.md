@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/mesh/mookuauhau.md"
+l-space       = "lararium"
 mana          = 16
 manao         = 15
 manaoio       = 14
@@ -11,7 +12,6 @@ register      = "Synthesis-Canon"
 research-date = "2026-06-30"
 retain        = true
 role          = "moʻokūʻauhau — the genealogy of the one recursive #has-cap fractal: ancestors, the three pillars, the cousins, the anti-pattern corpse, and the weld verdict"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/mesh/mookuauhau"
 ```

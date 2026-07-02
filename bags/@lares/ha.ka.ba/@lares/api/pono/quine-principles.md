@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/quine-principles.md"
+l-space     = "stable"
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -12,8 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: quine principles P1-P4; TiddlyWiki vs Smalltalk comparison; if-it-CAN-live-in-the-wiki-it-MUST rule; IPLD bridge; Heleuma anchor system"
 status-date = "2026-05-02"
-tags      = ["api/pono/meme"]
-l-space     = "stable"
+tags        = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/quine-principles"
 ```

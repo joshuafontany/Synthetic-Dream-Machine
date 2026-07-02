@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/attention-scale.md"
+l-space     = "stable"
 mana        = 18
 manao       = 17
 manaoio     = 17
@@ -12,8 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 status-date = "2026-05-06"
-tags      = ["api/pono/meme"]
-l-space     = "stable"
+tags        = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/attention-scale"
 ```

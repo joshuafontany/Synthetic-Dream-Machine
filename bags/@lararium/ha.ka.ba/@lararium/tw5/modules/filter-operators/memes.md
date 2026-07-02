@@ -6,6 +6,7 @@ body-sha256   = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/filter-operators/memes.md"
 heleuma       = "ba"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 filter operator: memes — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "collectMemes registerMemes registerMemesSource"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/filter-operators/memes"
 ```

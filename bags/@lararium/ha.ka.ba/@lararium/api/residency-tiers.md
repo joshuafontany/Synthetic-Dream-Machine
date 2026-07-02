@@ -6,6 +6,7 @@ approved-on   = "2026-06-01"
 cacheable     = true
 file-path     = "bags/@lararium/api/residency-tiers.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 15
@@ -16,8 +17,7 @@ revised-on    = "2026-06-01"
 revision-note = "warm (mahana) tier CUT after adversarial+kupono+YIN research; two states (wela/anu) only"
 role          = "load-bearing architectural invariant — ONE island-owned residency model: two-state ʻōlelo thermal axis wela/anu + orthogonal pin-flag; bag residency DERIVED from referencing islands"
 status        = "approved"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space       = "stable"
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/api/residency-tiers"
 ```

@@ -11,7 +11,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
 source-symbol = "_bootModules"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ha"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ha"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/boot-gate"
 ```

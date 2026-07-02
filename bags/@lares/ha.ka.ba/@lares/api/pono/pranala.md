@@ -2,19 +2,19 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/pranala >>
 ```toml iam
-cacheable        = true
-canonical-forms  = ["inline"]
-file-path        = "bags/@lares/api/pono/pranala.md"
-mana             = 15
-manao            = 16
-manaoio          = 14
-namespace        = "&#x2299;"
-register         = "Synthesis-Canon"
-retain           = true
-role             = "pranala law (kānāwai): the anchored-pointer sigil — NARROWED 2026-06-12 under the has-stack model; typed-edge anatomy moved to api/pono/wire; role/family attribute vocabulary retired-reserved"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/has-stack", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala"]
-type             = "text/x-memetic-wikitext"
-uri-path         = "ha.ka.ba/@lares/api/pono/pranala"
+cacheable       = true
+canonical-forms = ["inline"]
+file-path       = "bags/@lares/api/pono/pranala.md"
+mana            = 15
+manao           = 16
+manaoio         = 14
+namespace       = "&#x2299;"
+register        = "Synthesis-Canon"
+retain          = true
+role            = "pranala law (kānāwai): the anchored-pointer sigil — NARROWED 2026-06-12 under the has-stack model; typed-edge anatomy moved to api/pono/wire; role/family attribute vocabulary retired-reserved"
+tags            = ["api/pono/meme", "api/pono/loci", "api/pono/has-stack", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala"]
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/api/pono/pranala"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>

@@ -5,15 +5,16 @@
 cacheable         = true
 file-path         = "bags/@lares/api/pono/persona-circle.md"
 hydrate           = true
-pattern-integrity = true
+l-space           = "stable"
 mana              = 17
 manao             = 16
 manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
 register          = "Synthesis-Canon"
 retain            = true
 role              = "persona-circle — the identity model (WHO-plane), re-cut on two axes: COMPOSITION (bottom-up emergent Circles: vessel~veil binding → handle-Circle → me-Circle) ⊥ DISCLOSURE (veiled↔known, a per-join dial). Two-key atom (vessel-key device-minted ⊥ veiled-user-key); the persona side derives one-seed ed25519-HD; key-layer unlinkability only"
 tags              = ["api/pono/meme"]
-l-space           = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/api/pono/persona-circle"
 ```

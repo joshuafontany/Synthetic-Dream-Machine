@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/signal/l-space.md"
+l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 18
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "docs room for definitional lar l-space semantics and address-slot framing"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/signal/l-space"
 ```

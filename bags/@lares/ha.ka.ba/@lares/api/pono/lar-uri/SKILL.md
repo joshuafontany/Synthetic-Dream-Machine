@@ -18,7 +18,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "lar: URI operational skill — authoring, validation, and audit of addresses against the scheme law"
 skill-package-root = "packages/lares-core/memes/api/pono/lar-uri"
-tags      = ["api/pono/meme", "api/pono/loci"]
+tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/api/pono/lar-uri/SKILL"
 ```

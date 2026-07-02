@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/ha.ka.ba/@lares/api/pono/aniani.md"
+l-space     = "stable"
 mana        = 16
 manao       = 16
 manaoio     = 15
@@ -14,7 +15,6 @@ role        = "Aniani the Mirror — a self-contained reflexive pass: point it a
 status      = "proposed"
 status-date = "2026-06-13"
 tags        = ["api/pono/lens"]
-l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/aniani"
 ```

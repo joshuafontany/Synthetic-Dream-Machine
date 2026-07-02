@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/composable-keel.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 15
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "THE composable-keel pattern integrity — a vessel = a #has-cap-stack (DECLARE) composed by a transient capability-routing root (WIRE); declare ⊥ wire = the same seam as INFRA⊥WHO / map⊥territory. DECLARE = the ECS inventory (nameless vessel + flat dependency-blind #has-cap tags, no edges, what a vessel IS); WIRE = composeVessel reads the stack, topologically builds each cap-MODULE in dependency order, hands each a least-authority resolver reaching ONLY its declared deps (POLA / Genode default-deny / Granovetter), and REFUSES TO BOOT loud on a missing mandatory dep, a cycle, or a dup — never a runtime flag. Absence = un-routed authority, structural (a Herm never declares the wiki cap → blind by structure, not flag). The composer is transient (the ocap powerbox: build the graph, hand back the read-face, retain no god-object). WITNESSED: mesh/cap-compose.ts (composeVessel + CapModule, 8/8 tests) + node/node-caps.ts (composeLararium/composeHerm) + LIVE in Docker (the composable Herm reaches verb-dispatcher live, daemon-full, wiki-less by structure). Commits 8ca8520f · 5bc076c2 · 07b12e65. Rhymes: ZLayer · Genode init · OSGi-DS · ocap powerbox."
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/composable-keel"
 written   = "2026-06-29"

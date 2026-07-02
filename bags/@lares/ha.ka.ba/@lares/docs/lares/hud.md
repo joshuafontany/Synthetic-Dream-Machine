@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/hud.md"
+l-space   = "stable"
 mana      = 14
 manao     = 14
 manaoio   = 13
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs companion to the HUD law — line composition, glyph and tool tables, the Syadasti confidence reading rule, and field-annotation thresholds"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/hud"
 ```

@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/research-streams/gaps-tensions.md"
+l-space   = "stable"
 mana      = 15
 manao     = 15
 register  = "Synthesis"
 retain    = false
 role      = "living catalogue of memetic-wikitext gaps, tensions, and conflicts — design-history record; open items sync to the submission Annex B"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/research-streams/gaps-tensions"
 ```

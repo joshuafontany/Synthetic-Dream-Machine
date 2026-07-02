@@ -4,13 +4,13 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/recipe-watch.md"
+l-space     = "lararium"
 mana        = 11
 manao       = 11
 register    = "Synthesis"
 retain      = true
 role        = "recipe-watch — island-side LIVE composition reconcile; the composition class sheds its reboot"
 source-file = "packages/lararium-tw5/src/recipe-watch.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/recipe-watch"
 ```

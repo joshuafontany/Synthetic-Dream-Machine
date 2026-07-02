@@ -10,7 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: PaeWidget — heleuma ka"
 source-symbol = "PaeWidget"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/pae", "tw5/modules/tw5-widgets"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/pae", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/widgets/pae"
 ```

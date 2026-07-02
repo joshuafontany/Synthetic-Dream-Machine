@@ -3,6 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lararium_mcp/sprint-ledger >>
 ```toml iam
 file-path       = "bags/@lares/ha.ka.ba/@lares/docs/lararium_mcp/sprint-ledger.md"
+l-space         = "stable"
 mana            = 16
 manao           = 16
 manaoio         = 15
@@ -10,8 +11,7 @@ register        = "Synthesis-Canon"
 role            = "canonical closed-sprint ledger and consumption map for Lararium MCP planning documents"
 source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDATION.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-01_HYDRATION_SLICE.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md"]
 status          = "sequence-bound; no calendar dates"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space         = "stable"
+tags            = ["api/pono/meme", "api/pono/loci"]
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/docs/lararium_mcp/sprint-ledger"
 ```

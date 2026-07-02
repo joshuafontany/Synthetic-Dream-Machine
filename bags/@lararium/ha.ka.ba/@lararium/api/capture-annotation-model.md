@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/capture-annotation-model.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 19
 manao     = 18
 manaoio   = 17
@@ -13,7 +14,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "THE holistic capture & annotation model — the implement-from keel that fills mempalace's holes (multi-agent topology · subagent/swarm capture · gradient annotation · ephemeral noise · agent identity). Ties lar-telemetry + agent-worldline + lararium-memory into one layered spec: capture (surfaces·membranes·verbatim-always/gradient-eventual) → annotation (lar_* instrument readings, gradient-not-verdict) → multi-agent (identity·provenance·relationship spawn-graph) → ephemeral (lares ephemeral launcher·blind dir·hardening). Carries the operator rulings ledger + the implementation backlog (built/specified/blocked)."
 tags      = ["api/pono/meme", "api/lararium"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/capture-annotation-model"
 written   = "2026-06-25"

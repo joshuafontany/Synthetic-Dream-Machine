@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/meme.md"
+l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 15
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "extended documentation surface for meme examples, lifecycle table, resolution notes, and migration residue"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/meme"
 ```

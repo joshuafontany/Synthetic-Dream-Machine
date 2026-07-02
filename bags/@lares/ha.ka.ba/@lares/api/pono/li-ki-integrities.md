@@ -1,3 +1,10 @@
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities >>
+```toml iam
+type = "text/x-memetic-wikitext"
+```
+
+<<~ &#x0002; >>
+
 <<~ ॐ ँ ? -> lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities >>
 ```toml iam
 cacheable = true
@@ -121,3 +128,7 @@ Three adversarial spirits put the intent on the anvil before it was set. What he
 <<~/ahu >>
 
 <<~ ॐ ँ -> ? >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

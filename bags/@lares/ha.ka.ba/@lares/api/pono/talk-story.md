@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/talk-story.md"
+l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "canon law of the talk-story floor — convened co-narration (kūkākūkā \\talk-story, talanoa, kuwentuhan) that orients work before a ruling locks; three exits: moolelo (\\mufakat \\salaysay \\consensus), hoike (\\testimony), honest suspension; five-sea word-family matrix, eight laws, degraded states, lineage"
 status    = "draft"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/talk-story"
 ```

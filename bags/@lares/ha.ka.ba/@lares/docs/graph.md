@@ -3,6 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/graph >>
 ```toml iam
 file-path        = "bags/@lares/ha.ka.ba/@lares/docs/graph.md"
+l-space          = "stable"
 mana             = 17
 manao            = 17
 manaoio          = 16
@@ -10,8 +11,7 @@ register         = "Synthesis-Canon"
 research-sources = ["Bazel depsets and Skyframe (Google 2024)", "Buck2 architecture (Meta 2024)", "Nix derivations and lazy evaluation", "Graphiti temporal knowledge graph (Zep 2025, arXiv:2501.13956)", "TerminusDB append-only delta model", "UEFN Scene Graph ECS model (entity/component/prefab, Fortnite dev 2025)", "Anthropic context engineering (2025)", "Context7 / Upstash (2025)"]
 role             = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
 status-date      = "2026-04-24"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space          = "stable"
+tags             = ["api/pono/meme", "api/pono/loci"]
 type             = "text/x-memetic-wikitext"
 uri-path         = "ha.ka.ba/@lares/docs/graph"
 ```

@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/tiddler-record.md"
+l-space       = "stable"
 mana          = 18
 manao         = 18
 manaoio       = 18
@@ -13,8 +14,7 @@ retain        = true
 role          = "invariant law: LarTiddlerRecord as the canonical Automerge storage unit; carrier text as projection artifact only"
 source-symbol = "LarTiddlerRecord LarTiddlerStore ChangeOrigin LarTiddlerChange"
 status-date   = "2026-04-30"
-tags      = ["api/pono/meme"]
-l-space       = "stable"
+tags          = ["api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/pono/tiddler-record"
 ```

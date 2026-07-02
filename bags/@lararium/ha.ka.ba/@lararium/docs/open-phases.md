@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/open-phases.md"
+l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -12,7 +13,6 @@ retain        = true
 role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion seam"
 source-symbol = "LarariumOpenPhase LarariumAuthorityEnvelope"
 status-date   = "2026-04-30"
-l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/open-phases"
 ```

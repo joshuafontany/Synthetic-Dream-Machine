@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lararium/api/save-path.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
@@ -12,7 +13,6 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant spec for the outbound TW5→CRDT save path: debounce, draft routing, ephemeral truncation"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/save-path"
 ```

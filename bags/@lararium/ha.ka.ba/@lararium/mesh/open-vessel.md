@@ -5,6 +5,7 @@
 cacheable   = true
 file-path   = "bags/@lararium/mesh/open-vessel.md"
 hydrate     = true
+l-space     = "lararium"
 mana        = 17
 manao       = 16
 manaoio     = 14
@@ -12,7 +13,6 @@ register    = "Synthesis"
 retain      = true
 role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations; openVesselCore owns the sequence, VesselHostSeam injects substrate atoms; role rides as a capability bundle, never a platform"
 source-file = "packages/lararium-mesh/src/open-vessel-core.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/open-vessel"
 ```

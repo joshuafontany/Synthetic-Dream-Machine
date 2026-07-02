@@ -5,6 +5,7 @@
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/@lares/api/pono/oracle.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 16
 manao         = 16
 manaoio       = 15
@@ -14,7 +15,6 @@ retain        = true
 role          = "the oracle sigil — the turn's drift register: the sanctioned drain that fires first in the close, bleeding the warm-tone pull ahead of the Sword; spend-ebb · scatter · die · count · sentinel · random tail, the marks cross-checking as a render-tell"
 source-symbol = "ORACLE_MARKS ORACLE_GLYPHS ORACLE_CROSSCHECK"
 tags          = ["api/pono/meme", "api/pono/loci"]
-l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/pono/oracle"
 written       = "2026-06-16"

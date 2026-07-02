@@ -4,14 +4,15 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/api/ingest-canon.md"
+hydrate   = true
+l-space   = "lararium"
 mana      = 18
 manao     = 18
 manaoio   = 18
+namespace = "&#x2299;"
 register  = "Canon"
 retain    = true
-hydrate   = true
 role      = "THE locked golden path for {any chat + telemetry} → ingest → nalu → mempalace: one Kappa path, born-annotated single-write, per-exchange drawers, the writeback demoted to version-gated re-derivation and joined to the single-writer lock. 9 cited decisions + the build/retire migration."
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/api/ingest-canon"
 written   = "2026-06-27"

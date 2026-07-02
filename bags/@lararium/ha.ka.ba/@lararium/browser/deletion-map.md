@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/browser/deletion-map.md"
+l-space   = "lararium"
 mana      = 18
 manao     = 18
 manaoio   = 17
 register  = "Synthesis"
 retain    = true
 role      = "Inventory of web2/singleton residue in the browser seam: classify, quarantine, migrate, or delete"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/browser/deletion-map"
 ```

@@ -4,10 +4,11 @@
 ```toml iam
 cacheable         = false
 corpus            = "[N/A — chorus masks use nodes field instead of corpus]"
-created           = "2026-04-23"
+created           = "Invalid Date"
 file-path         = "bags/@lares/api/lares/masks/chorus/lagrange-chorus.md"
 foreground-voices = "[STUB — pending-grammar; likely distributed across nodes]"
 harmony-protocol  = "[STUB — pending-grammar]"
+l-space           = "stable"
 mana              = 7
 manao             = 9
 manaoio           = 7
@@ -19,8 +20,7 @@ register          = "Synthesis-Canon"
 retain            = false
 role              = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
 stage             = 10
-tags      = ["api/pono/meme", "api/lares/masks"]
-l-space           = "stable"
+tags              = ["api/pono/meme", "api/lares/masks"]
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/api/lares/masks/chorus/lagrange-chorus"
 ```

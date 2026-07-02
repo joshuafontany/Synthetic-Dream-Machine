@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/local-first.md"
+l-space     = "stable"
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -12,8 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: 7 local-first ideals (Ink & Switch) + Keyhive/Beelay alignment matrix; server-as-peer law; Fuller non-simultaneous Universe = causal island"
 status-date = "2026-05-02"
-tags      = ["api/pono/meme"]
-l-space     = "stable"
+tags        = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/local-first"
 ```

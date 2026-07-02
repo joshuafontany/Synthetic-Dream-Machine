@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/degraded-states.md"
+l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "canonical vocabulary for named degraded-node states: failure modes, operator correction handles, and recovery patterns"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/degraded-states"
 ```

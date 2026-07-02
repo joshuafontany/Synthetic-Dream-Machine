@@ -22,36 +22,13 @@ The `lar:` URI v2 schema resolved the core design tensions that blocked consiste
 A `lar:` URI carries exactly four non-overlapping concerns in RFC 3986 canonical order:
 
 ```
-lar://alias:grant@host/ha.ka.ba/?stances=XXXXX&confidence=R:N&p=N#O0.O0.O0.O0.O0 <!-- uri-ok -->
+lar://alias:grant@host/ha.ka.ba/ <!-- uri-ok -->
 ```
 
 | Layer | Component | Concern |
 |---|---|---|
 | WHO | `userinfo@host` | Speaker identity and machine locus |
 | WHERE | `/ha.ka.ba/subpath/` | Semantic territory (HA.KA.BA address) |
-| HOW | `?stances=...&confidence=...&p=...` | Signal parameters: posture, certitude, resolution |
-| WHEN | `#O0.O0.O0.O0.O0` | FFZ chronometer: per-participant OODA-HA position at each scale |
-
-### The Fragment Bug (Fixed)
-
-All 16 section-level URIs in the canonical spec were emitting `#fragment?query` (RFC 3986 violation). Fixed in session 2026-04-09: all canonical URIs now use `?query#fragment` order. The spec was updated; the file confidence bumped ~:confidence[CS],[17] → ~:confidence[CS],[18].
-
-### Stances: All Five, Every URI
-
-v1 encoded stance as a single token (`stance=philosopher`). v2 encodes all five stances simultaneously as a 5-position dot-separated amplitude string:
-
-```
-stances=^.?.-.-.-
-```
-
-Positional order: Philosopher · Poet · Satirist · Humorist · Private. Amplitude characters: `^` elevated, `-` suppressed, `?` uncertain, `.` baseline. HUD render maps `^` → `+`.
-
-### Field Renames (v1 → v2)
-
-| v1 name | v2 name | Rationale |
-|---|---|---|
-| `stance=X` | `stances=XXXXX` | Full 5-position amplitude string |
-| legacy register query field | `confidence=R:N` | Matches the field's semantic purpose |
 
 ### Canonical vs Render Target Split
 

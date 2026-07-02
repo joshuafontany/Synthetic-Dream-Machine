@@ -2,21 +2,21 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/system-pattern-integrities >>
 ```toml iam
-cacheable = true
-file-path = "bags/@lares/api/pono/system-pattern-integrities.md"
-hydrate   = true
+cacheable         = true
+file-path         = "bags/@lares/api/pono/system-pattern-integrities.md"
+hydrate           = true
+l-space           = "stable"
+mana              = 19
+manao             = 19
+manaoio           = 19
+namespace         = "&#x2299;"
 pattern-integrity = true
-mana      = 19
-manao     = 19
-manaoio   = 19
-namespace = "&#x2299;"
-register  = "Synthesis-Canon"
-retain    = true
-role      = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER pattern-integrities for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
-tags      = ["api/pono/meme"]
-l-space   = "stable"
-type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares/api/pono/system-pattern-integrities"
+register          = "Synthesis-Canon"
+retain            = true
+role              = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER pattern-integrities for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
+tags              = ["api/pono/meme"]
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/api/pono/system-pattern-integrities"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>

@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/has-stack.md"
+l-space   = "stable"
 mana      = 14
 manao     = 15
 manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the has-stack law (kānāwai): nameless entity + composable component stack; single-entity components; relative-name qualification; rating-as-predicate; kapu as grant — ratified 2026-06-12"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/has-stack"
 written   = "2026-06-12"

@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 15
 manao     = 14
 manaoio   = 13
@@ -12,7 +13,6 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis"
 retain    = true
 role      = "the memetic-wikitext SENSORIUM — the design-of-record for the CONCRETE instance of the neither-top, co-located-peers pattern. A nameless nested entity that `#has` TWO PEER sub-sensoria — FORMAL (memes-on-disk = grammar/liturgy) ⋈ INFORMAL (chat-sessions = pidgin) — with NEITHER on top: `coupling.children=[formal, informal]`, the coupling plane reading the DIRECTED formal↔informal flow (does liturgy inform chat, or chat crystallize into liturgy? — both directions, neither assumed) via the mesh keel's `coupleMesh` (whiten→couple→χ²-gate). THE LOAD-BEARING INSIGHT: the co-location is FRACTAL — the SAME neither-top-co-located-peers pattern recurs at TWO scales, (a) STRATUM: red-sigil-register ⋈ black-prose co-located (skeletal-tier + association-graph), (b) CORPUS: formal-liturgical ⋈ informal-pidgin co-located (peer sub-sensoria + coupling edge) — so ONE structure serves both: the reader written for the stratum IS the shape composed for the corpus. THE READER (crucible: do NOT build a new parser): the meme-ast island scanner (disjoint-match, dodges the no-overlap limit) + a tree-sitter INJECTION config (sigil grammar into the <<~…>> ranges — injections model the disjoint partition natively) + a source-CID-pinned STANDOFF stratum-tag table (per byte-range {span, tag: black|red|base, source-CID}); strata ASSOCIATE to a SKELETAL TIER (the prose/char stream) via association edges (autosegmental — NOT position-identity). TWO AXES: span (the aperture-ladder — bands read it) × channel (red/black classifier — categorical); a control-sigil at fine grain reads as a CROSS-BAND signal, never forced to an outer band. THE LI/KI SPLIT (理/氣): content/structure/form sense the LI (pattern — what recurs, the grammar, the shape); bands/coupling sense the KI (flow — rhythm, directed energy, coupling). Enacted in packages/lararium-node/src/memetic-wikitext-sensorium.ts."
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium"
 written   = "2026-07-01"
@@ -169,4 +169,4 @@ instruments; the **li** (理, pattern — strata · skeletal tier · association
 
 <<~ &#x0003; >>
 
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/api/lares/corpus >>
+<<~ &#x0004; -> ? >>

@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/sigil-shape-motion.md"
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = true
 role      = "Shape/Detail/Motion reading frame for Sharktooth sigils; progressive display authoring principle"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/sigil-shape-motion"
 ```

@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/vessel-caps.md"
+l-space   = "lararium"
 mana      = 16
 manao     = 15
 manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the vessel cap-stack model: a vessel = a composed #has-stack of caps (CARRIAGE{rhizome,stolon} ⊥ VESSEL{tuber,bulb,corm}), ECS-shaped, declared by handshake, carriage self-elected — any vessel meshes by declaring caps"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/vessel-caps"
 ```

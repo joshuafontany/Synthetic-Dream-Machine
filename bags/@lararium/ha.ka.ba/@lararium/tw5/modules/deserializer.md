@@ -11,7 +11,7 @@ register      = "Synthesis-Canon"
 role          = "heleuma ka: TW5 tiddlerdeserializer for text/x-memetic-wikitext"
 source-symbol = "*"
 status-date   = "2026-05-01"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
+tags          = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/deserializer"
 ```

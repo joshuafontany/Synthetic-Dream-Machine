@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/federated-causal-islands.md"
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 16
@@ -12,7 +13,6 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
 tags      = ["api/pono/pranala"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/federated-causal-islands"
 ```

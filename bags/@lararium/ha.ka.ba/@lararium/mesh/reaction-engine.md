@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/reaction-engine.md"
+l-space     = "lararium"
 mana        = 17
 manao       = 17
 manaoio     = 16
@@ -12,7 +13,6 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical pipeline invariant: five-layer reactive architecture from CRDT patch to observable outcome — nalu, live-query, IslandMsg_Event, CRDT-as-distributed-promise"
 status-date = "2026-05-28"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/reaction-engine"
 ```

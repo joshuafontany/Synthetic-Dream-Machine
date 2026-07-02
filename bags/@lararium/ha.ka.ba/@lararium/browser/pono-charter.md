@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/browser/pono-charter.md"
+l-space   = "lararium"
 mana      = 19
 manao     = 18
 manaoio   = 18
 register  = "Synthesis"
 retain    = true
 role      = "Constitutional charter for lararium-browser: detached worker-authority pool vessel"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/browser/pono-charter"
 ```

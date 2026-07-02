@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/parser.md"
+l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 16
@@ -11,10 +12,9 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "parser law: MemeticParser subclass contract, lar-sigil dispatch model, grammar self-hosting, sigil kinds, closure law, C0 control-sigil roles"
-l-space   = "stable"
+tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/parser"
-tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext"]
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>

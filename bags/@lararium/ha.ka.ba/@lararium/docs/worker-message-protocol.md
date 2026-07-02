@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/worker-message-protocol.md"
+l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 14
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "the P.3 Worker-thread message protocol — the structured-clone boundary, the schema-versioned envelope (GP-1..6), and the three boundary message types; for operator + agent review"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/worker-message-protocol"
 ```

@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/api/lares/voices.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 16
@@ -13,7 +14,6 @@ register  = "Synthesis"
 retain    = true
 role      = "load-bearing invariant for the three-layer lararium voice-house: Voice house (the Thirteen), worker swarm, and mask layer"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/voices"
 ```

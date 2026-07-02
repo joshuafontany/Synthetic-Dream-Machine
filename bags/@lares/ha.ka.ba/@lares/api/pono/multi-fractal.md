@@ -5,15 +5,16 @@
 cacheable         = true
 file-path         = "bags/@lares/api/pono/multi-fractal.md"
 hydrate           = true
-pattern-integrity = true
+l-space           = "stable"
 mana              = 17
 manao             = 16
 manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
 register          = "Synthesis-Canon"
 retain            = true
 role              = "multi-fractal — the pattern integrity where one entity IS a private container binding many scope-bound instances of a single primitive, each instance itself a container (recursion → fractal, never merely plural)"
 tags              = ["api/pono/meme"]
-l-space           = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/api/pono/multi-fractal"
 ```

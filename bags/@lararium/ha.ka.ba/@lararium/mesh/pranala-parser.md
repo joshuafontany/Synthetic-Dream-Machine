@@ -4,11 +4,11 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/pranala-parser.md"
+l-space   = "lararium"
 mana      = 3
 register  = "Provisional"
 retain    = true
 role      = "self-documentation: TODO describe pranala-parser.ts"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/pranala-parser"
 ```

@@ -6,6 +6,7 @@ body-sha256   = "cc83e7dcde3bedd78f80de35ab3b8adc8d25af6aa39d64afc348355138d957b
 cacheable     = true
 file-path     = "bags/@lararium/tw5/modules/filter-operators/toml-field.md"
 heleuma       = "ka"
+l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
@@ -13,7 +14,6 @@ register      = "Synthesis-Canon"
 role          = "TW5 filter operator: toml-field — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "registerTomlField"
 status-date   = "2026-05-03"
-l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/tw5/modules/filter-operators/toml-field"
 ```

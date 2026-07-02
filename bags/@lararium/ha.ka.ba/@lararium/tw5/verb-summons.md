@@ -4,12 +4,12 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/verb-summons.md"
+l-space     = "lararium"
 mana        = 12
 register    = "Synthesis"
 retain      = true
 role        = "the summons relay — CRDT verb-summons tiddler (@daemon/summons/<id>) → volatile local invocation; edge transport, not durable coordination"
 source-file = "packages/lararium-tw5/src/verb-summons.ts"
-l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/tw5/verb-summons"
 ```

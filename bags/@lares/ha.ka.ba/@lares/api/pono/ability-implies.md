@@ -2,8 +2,8 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/ability-implies >>
 ```toml iam
-cacheable     = true
 body-sha256   = "4eb7fd5da26c4cb5097ed713b105a0e0f8570f390a4ee7882ec7a98064faea68"
+cacheable     = true
 file-path     = "bags/@lares/api/pono/ability-implies.md"
 heleuma       = "ka"
 mana          = 18
@@ -14,7 +14,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: Orichalcum ability implication — ordered capability lattice with relay-law exception (pull does not imply read)"
 source-symbol = "abilityImplies"
 status-date   = "2026-04-30"
-tags      = ["api/pono/meme"]
+tags          = ["api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/pono/ability-implies"
 ```

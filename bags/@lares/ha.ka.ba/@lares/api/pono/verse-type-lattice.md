@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/verse-type-lattice.md"
+l-space     = "stable"
 mana        = 17
 manao       = 17
 namespace   = "&#x2299;"
@@ -11,7 +12,6 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical: Verse type lattice — any/false/void/comparable hierarchy; persistable constraint universe; effects bit-vector (6 families); edge-label semantics for pranala type annotations"
 status-date = "2026-05-15"
-l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/verse-type-lattice"
 ```

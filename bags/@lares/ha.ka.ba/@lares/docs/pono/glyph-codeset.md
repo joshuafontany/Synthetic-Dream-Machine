@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/glyph-codeset.md"
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 16
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = true
 role      = "nine-category glyph codeset: Unicode ranges, semantic roles, authority matrix, UCAN attenuation, parsing pseudocode, validation rules, three-layer encoding"
 tags      = ["api/pono/meme"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/glyph-codeset"
 ```

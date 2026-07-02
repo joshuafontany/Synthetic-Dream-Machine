@@ -3,10 +3,10 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/palette/gruvbox-dark >>
 ```toml iam
 file-path = "bags/@lararium/tw5/palette/gruvbox-dark.md"
+l-space   = "adjacent"
 register  = "Synthesis"
 role      = "Gruvbox Dark color palette for TW5 theme engine"
 tags      = ["$:/tags/Palette"]
-l-space   = "adjacent"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/tw5/palette/gruvbox-dark"
 ```

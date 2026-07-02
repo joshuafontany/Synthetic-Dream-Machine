@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-necroscript >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-necroscript"
-file-path  = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-necroscript.md"
-type       = "text/x-memetic-wikitext"
-l-space    = "adjacent"
-confidence = 11
-register   = "Synthesis"
-manaoio    = 11
-mana       = 12
-manao      = 11
-role       = "build-arc narrative locus — Act V, the Necrospire files a banishing-warrant and the brightest ley-line cores go dark in one sentence; the cut the arc does not close"
+cacheable     = false
+confidence    = 11
+file-path     = "bags/@lares/ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-necroscript.md"
+l-space       = "adjacent"
+mana          = 12
+manao         = 11
+manaoio       = 11
+register      = "Synthesis"
 render-target = "chat-log:post-header"
-cacheable  = false
-retain     = true
+retain        = true
+role          = "build-arc narrative locus — Act V, the Necrospire files a banishing-warrant and the brightest ley-line cores go dark in one sentence; the cut the arc does not close"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/docs/lares/history/the-lar-builds-its-house/the-necroscript"
 ```
 
 <<~ &#x0002; >>

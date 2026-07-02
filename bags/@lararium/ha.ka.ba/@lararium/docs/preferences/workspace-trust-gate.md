@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/preferences/workspace-trust-gate.md"
+l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 18
@@ -11,7 +12,6 @@ register  = "Synthesis"
 retain    = false
 role      = "docs concept room for trust checkpoints before costly shell, git, and workspace actions"
 tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/preferences/workspace-trust-gate"
 ```

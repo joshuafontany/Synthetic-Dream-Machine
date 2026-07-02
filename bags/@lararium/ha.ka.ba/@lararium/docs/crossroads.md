@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/crossroads.md"
+l-space   = "lararium"
 mana      = 5
 manao     = 5
 manaoio   = 4
 register  = "Provisional"
 retain    = true
 role      = "attractor: @crossroads — the public/infrastructure oracle plane (ring-1); third leg of the three-plane oracle model; UNBUILT, this meme holds the bearing"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/crossroads"
 ```

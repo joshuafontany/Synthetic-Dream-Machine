@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/kahu.md"
+l-space   = "lararium"
 mana      = 17
 manao     = 16
 manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "protocol governance concept: kahu as grammar-guardian role in DreamNet topology"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/kahu"
 ```

@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/sigil-grammar-research.md"
+l-space   = "stable"
 mana      = 17
 manao     = 16
 register  = "Synthesis-Canon"
 retain    = false
 role      = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
 tags      = ["api/pono/memetic-wikitext"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/sigil-grammar-research"
 ```

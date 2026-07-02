@@ -5,6 +5,7 @@
 cacheable     = true
 file-path     = "bags/@lares/api/mu/the-syad-perspectives.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 18
 manao         = 18
 manaoio       = 18
@@ -13,8 +14,7 @@ register      = "Canon"
 retain        = true
 role          = "syad reading invariant --- five naya standpoints licensing the saptabhaṅgī predications; stance-conditioned confidence law"
 source-symbol = "STANCES SYAD_7 STANCE_LICENSES SATIRIST_OPERATIONAL"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space       = "stable"
+tags          = ["api/pono/meme", "api/pono/loci"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/mu/the-syad-perspectives"
 ```

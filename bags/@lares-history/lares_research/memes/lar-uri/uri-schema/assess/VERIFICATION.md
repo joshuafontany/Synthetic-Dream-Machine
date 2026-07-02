@@ -63,7 +63,7 @@ The rendering table (§5.1 of `lares/modules/uri-schema/URI-SCHEMA.md`) governs 
 
 Example:
 ```
-Source: lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=^.-.-.-.-&confidence=S:13&p=10#O0.O0.O1.O1.A11
+Source: lar://telarus:operator@enyalios/threshold.uncertain.opens/
 Correct stable address: lar:///threshold.uncertain.opens/
 ```
 

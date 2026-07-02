@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/@lares/docs/pono/lar-uri-roots.md"
+l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -12,8 +13,7 @@ retain        = true
 role          = "lar:/// URI namespace roots: file-resolvable caps, virtual caps, stable tuple root"
 source-symbol = "CAPS_FILE_ROOTS VIRTUAL_CAPS_ROOTS STABLE_TUPLE_ROOT"
 status-date   = "2026-04-30"
-tags      = ["api/pono/meme"]
-l-space       = "stable"
+tags          = ["api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/docs/pono/lar-uri-roots"
 ```
@@ -72,6 +72,8 @@ stable-tuple-root = "ha.ka.ba"
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

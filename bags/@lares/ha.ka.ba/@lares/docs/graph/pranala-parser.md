@@ -6,6 +6,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/graph/pranala-parser >>
 ```toml iam
 file-path   = "bags/@lares/ha.ka.ba/@lares/docs/graph/pranala-parser.md"
+l-space     = "stable"
 mana        = 17
 manao       = 17
 manaoio     = 16
@@ -13,8 +14,7 @@ open-gate   = "closed: fragment-level resolution (Option A) confirmed by canonic
 register    = "Synthesis-Canon"
 role        = "parser design for pranala block and inline forms, sugar expansion, ? -> resolution, and field normalization"
 status-date = "2026-04-24"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space     = "stable"
+tags        = ["api/pono/meme", "api/pono/loci"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/docs/graph/pranala-parser"
 ```

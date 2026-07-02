@@ -5,6 +5,7 @@
 approved-on = "2026-06-01"
 cacheable   = true
 file-path   = "bags/@lararium/api/personal-slot.md"
+l-space     = "stable"
 mana        = 16
 manao       = 15
 manaoio     = 16
@@ -15,8 +16,7 @@ register    = "Synthesis"
 retain      = true
 role        = "the @personal recipe slot (cross-device viewing state, PersonaGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
 status      = "approved"
-tags      = ["lar:///ha.ka.ba/@lares/api/lararium/wiki-recipe"]
-l-space     = "stable"
+tags        = ["lar:///ha.ka.ba/@lares/api/lararium/wiki-recipe"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/api/personal-slot"
 uri-shape   = "lar:///ha.ka.ba/@personal"

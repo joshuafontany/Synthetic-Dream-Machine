@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/library/hawaii/kumulipo/kumulipo-liliuokalani.md"
+l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 18
@@ -11,7 +12,6 @@ register  = "Canon"
 retain    = false
 role      = "hawaiian source witness meme, Kumulipo Liliʻuokalani-1897 translation locus, koʻihonua cosmogony shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/library/hawaii/kumulipo/kumulipo-liliuokalani"
 ```

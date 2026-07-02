@@ -4,6 +4,7 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/verse-task-tree.md"
+l-space     = "stable"
 mana        = 18
 manao       = 17
 namespace   = "&#x2299;"
@@ -11,8 +12,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical: Verse execution model as task tree — forest topology, five concurrency operators as graph ops, task states, Await/Cancel semantics, cancellation cascade, return-escape, defer constraints, spawn-hides-suspends"
 status-date = "2026-05-15"
-tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task"]
-l-space     = "stable"
+tags        = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/api/pono/verse-task-tree"
 ```

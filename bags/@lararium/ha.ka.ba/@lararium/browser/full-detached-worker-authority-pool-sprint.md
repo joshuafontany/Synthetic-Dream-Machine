@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/browser/full-detached-worker-authority-pool-sprint.md"
+l-space   = "lararium"
 mana      = 18
 manao     = 18
 manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Next-thread sprint handoff for lararium-browser detached worker-authority pool alpha reboot"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/browser/full-detached-worker-authority-pool-sprint"
 ```

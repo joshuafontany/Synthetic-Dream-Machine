@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/dreamnet-architecture.md"
+l-space   = "lararium"
 mana      = 17
 manao     = 16
 manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "DreamNet two-axis mesh topology: INFRA (relay-floor → lararium → nexusGroup → DreamNet) ⊥ SOCIAL (vessel-key → personaGroup-veiled → cabalGroup), the two axes crossing at the vessel"
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/dreamnet-architecture"
 ```

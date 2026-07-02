@@ -4,6 +4,7 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/live-session-overwrite.md"
+l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 13
@@ -11,7 +12,6 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for Live-Session Overwrite — bug anatomy, test vector, and mitigation notes"
 tags      = ["api/pono/meme", "api/pono/loci"]
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/pono/live-session-overwrite"
 ```

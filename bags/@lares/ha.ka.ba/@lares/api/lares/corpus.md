@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/api/lares/corpus.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 15
@@ -12,7 +13,6 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the lares-corpus — the design-of-record for the EPHEMERAL astral-multipalace CLI (`lares corpus`) + the corpus-self-learns-its-planes tool-stack + the build SCRUM. ONE move: `compose_palace(caps)` instantiated EPHEMERALLY over any text/code corpus — the mempalace machina generalized into a sensorium-for-FORM. The structure plane is ALREADY corpus-general (content-free shape vectors); content is stock (nomic); the new ground is FORM — the corpus's OWN learned grammar, induced blind, named LAST. THE CAPS: content=stock embedder · structure=our content-free astpalace encoder + a tree-sitter parse-ROUTER (+ a thin grammar for our own <<~…>> sigils) · bands=the multi-scale FFZ (deterministic MODWT-MRA 5-level SPINE + adaptive EWT/ssqueezepy SERVO + ecp::e.divisive multivariate quorum + per-band BOCPD) · form=the induction stack (TreeMiner + PrefixSpan/BIDE + c2xg constructicon, EM-iterated, MDL-stopped, LLM-names-LAST) · coupling=the base-cap H¹-gated fusion over child sub-sensoria (read on demand; fuse vs hold-open, never a silent average). THE CLI: dep-free arg-walker kept; SETUP wires all five organs via ONE shared palaceOrgans() registry (one enumerator, two consumers — setup + teardown can't drift); `lares corpus run` ephemeral-DEFAULT modeled on `docker run --rm` + nix-shell + mktemp/trap-EXIT (open→ingest→analyze→DISSOLVE, --keep lands it); scratch instances = a 4th mempalace instance under ~/.lares/.corpus/<id>/, resolved-never-ambient, registered into the teardown sweep. THE GATE: heleuma-anchored — when the CLI help-registry text drifts from this meme, the audit trips. RESONANCES: aperture-ladder=wavelet bands · quorum=ecp changepoint · Canon-vs-Provisional=resampling-consensus · MDL-stop=our MDL lifted to grammar · nameless-discipline=miners-surface/LLM-names-last. NOVEL-GROUND flag: no prior art runs a wavelet over an embedding-cohesion signal. The validation baseline (a known-grammar gold-standard corpus, our-tools-vs-ground-truth) rides a placeholder — a corpus-finder spirit selects it; the coordinator appends."
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/corpus"
 written   = "2026-06-30"

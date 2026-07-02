@@ -16,7 +16,7 @@ manaoio            = 13
 register           = "Synthesis-Canon"
 role               = "agent-facing procedural surface for loci routing and rating passes"
 skill-package-root = "packages/lares-core/memes/api/pono/loci"
-tags      = ["api/pono/meme", "api/pono/loci"]
+tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/api/pono/loci/SKILL"
 ```

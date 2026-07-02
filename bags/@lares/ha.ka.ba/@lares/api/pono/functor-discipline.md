@@ -4,13 +4,13 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/functor-discipline.md"
+l-space   = "stable"
 mana      = 11
 manao     = 12
 manaoio   = 10
 register  = "Synthesis"
 retain    = true
 role      = "the functor discipline — the architectural keel: a nameless entity composed of a #has cap-stack ACTS AS a functor (structure-preserving map between categories); the whole house reads as one shape. CORE ʻŌlelo name = mālama pili (mālama, the kahu/keeper verb, tending pili, the relations — the functor as steward of the arrows; secondary: unuhi kūlike the faithful carry-across · hoʻoili the worldline descent-functor). pono = functorial (keep the arrows = mālama [i ka] pili); overcollapse = the forgetful functor (keeps objects, erases morphisms). The three warded failures — observer-erasure · compose-not-inherit · gradient-not-pass/fail — read as ONE discipline: keep the arrows. A LENS, not yet a proven formalization — operator-named, co-derived 2026-06-29; earns Canon by talk-story over time."
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/pono/functor-discipline"
 written   = "2026-06-29"

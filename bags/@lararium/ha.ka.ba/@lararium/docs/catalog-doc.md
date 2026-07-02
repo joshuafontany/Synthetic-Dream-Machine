@@ -4,6 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/catalog-doc.md"
+l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -12,7 +13,6 @@ retain        = true
 role          = "catalog island doc schema — hallway doc naming all rooms, corpora, recipes, snapshots, projection receipts"
 source-symbol = "CatalogDoc"
 status-date   = "2026-05-01"
-l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/docs/catalog-doc"
 ```

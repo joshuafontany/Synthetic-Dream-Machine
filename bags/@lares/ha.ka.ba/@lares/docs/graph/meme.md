@@ -3,6 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/graph/meme >>
 ```toml iam
 file-path                    = "bags/@lares/ha.ka.ba/@lares/docs/graph/meme.md"
+l-space                      = "stable"
 mana                         = 17
 manao                        = 17
 manaoio                      = 16
@@ -10,8 +11,7 @@ register                     = "Synthesis-Canon"
 renamed-from                 = "ha.ka.ba/@lares/docs/graph/loci"
 role                         = "PranalaEdge, Meme, and MemeGraph data model contracts for the pranala-edge DAG compiler"
 status-date                  = "2026-04-24"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space                      = "stable"
+tags                         = ["api/pono/meme", "api/pono/loci"]
 type                         = "text/x-memetic-wikitext"
 uncertainty-graph-class-name = "MemeGraph preferred over LociGraph, CarrierGraph, or Graph; not yet ratified in code"
 uncertainty-locus-subtype    = "Locus remains valid as the subtype name for memes that implement the pono loci interface; distinct from graph node terminology"

@@ -4,13 +4,14 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/node/dev-loop.md"
+l-space   = "lararium"
 mana      = 16
 manao     = 16
 manaoio   = 16
+namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the dev loop: the idempotent CLI cures after a code change (refresh/reconcile/rebuild/fresh/serve/reset/wake) + WHERE vessel state lives (~/.lares) vs corpus (the repo). The reach taxonomy + the path law + the invariants the dev loop rests on."
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/node/dev-loop"
 written   = "2026-06-27"

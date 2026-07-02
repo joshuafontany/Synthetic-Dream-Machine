@@ -4,6 +4,7 @@
 ```toml iam
 cacheable    = false
 file-path    = "bags/@lares/ha.ka.ba/@lares/docs/lares/voices/witnesses/mischief-muse-coffee-oracle.md"
+l-space      = "stable"
 mana         = 15
 manao        = 14
 manaoio      = 14
@@ -12,8 +13,7 @@ retain       = false
 role         = "witness carrier for Mischief-Muse Coffee Oracle seed extraction"
 source-lines = "1-57"
 source-path  = "packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md"
-tags      = ["api/pono/meme"]
-l-space      = "stable"
+tags         = ["api/pono/meme"]
 target-mask  = "lar:///ha.ka.ba/@lares/api/lares/masks/named/mischief-muse"
 type         = "text/x-memetic-wikitext"
 uri-path     = "ha.ka.ba/@lares/docs/lares/voices/witnesses/mischief-muse-coffee-oracle"

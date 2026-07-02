@@ -4,16 +4,16 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/@lararium/mesh/oracle-governance.md"
+l-space   = "lararium"
 mana      = 14
 manao     = 14
 manaoio   = 12
-namespace = "◉"
+namespace = "&#x25C9;"
 register  = "Synthesis"
 retain    = true
 role      = "oracle-governance: a per-nexus @oracle board (ownership+scale grounds, NOT no-global-now — a shared docId names a rendezvous, each peer materializes its own causal island); a well-known root/index docId fanning to per-topic islands (Beelay's global-address/local-state); steward-SOURCE → public verify-only READ projection (NOT one cap-tiered doc); three couplings — origin, governance, liveness; PROPOSED, mostly unbuilt"
 status    = "proposed"
 tags      = ["mesh/dreamnet-architecture", "api/pono/group-as-closure", "api/pono/causal-islands"]
-l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/mesh/oracle-governance"
 written   = "2026-06-29"

@@ -5,13 +5,13 @@
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/handoff.md"
 hydrate   = true
+l-space   = "stable"
 mana      = 14
 manao     = 14
 manaoio   = 13
 register  = "Synthesis"
 retain    = true
 role      = "live handoff — the next vector and the ground it stands on; updated at each phase boundary, never archived in place; history lives in git, research in pattern-integrities, law in api/ memes"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/docs/lares/handoff"
 written   = "2026-06-19"

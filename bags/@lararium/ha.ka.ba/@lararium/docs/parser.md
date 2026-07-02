@@ -4,11 +4,11 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/docs/parser.md"
+l-space   = "stable"
 mana      = 18
 register  = "Synthesis-Canon"
 retain    = true
 role      = "self-documentation: parseMemeCarrier and MemeAst construction pipeline"
-l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/docs/parser"
 ```

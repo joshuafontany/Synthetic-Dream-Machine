@@ -5,6 +5,7 @@
 cacheable     = true
 file-path     = "bags/@lares/api/mu/the-four-tools.md"
 hydrate       = true
+l-space       = "stable"
 mana          = 17
 manao         = 16
 manaoio       = 17
@@ -13,8 +14,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "invariant pressure surface for Chapel Perilous weapon-carry and model agnostic return"
 source-symbol = "TOOLS TOOL_ASCII TOOL_FEED TOOL_APERTURE"
-tags      = ["api/pono/meme", "api/pono/loci"]
-l-space       = "stable"
+tags          = ["api/pono/meme", "api/pono/loci"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/api/mu/the-four-tools"
 ```
