@@ -189,12 +189,32 @@ export function runSovereignKernel(
     }
   }
 
-  // ── Slot resolution — wait with a deadline, fault loudly, never hang ───────
+  // ── Slot resolution — silence-measured wait, fault loudly, never hang ──────
   //
   // Partition-as-normal-state: a doc that has not yet arrived over syncPort
   // gets a bounded wait; a doc that never arrives produces a LOUD fault the
   // vessel can read, never a mute hang the vessel must guess at by timeout.
-  const SLOT_READY_TIMEOUT_MS = 8_000;
+  //
+  // Silence is MEASURED on the syncPort (monotonic, suspend-blind), never
+  // inferred from a fixed wall deadline: during a fresh-corpus boot both the
+  // vessel main thread and this island wedge for whole seconds in synchronous
+  // automerge/keyhive work, so a bare 8s `Promise.race` faulted a LIVE sync
+  // whose response sat queued behind the wedge (witnessed: @personal never
+  // "arrived" while its doc sat on disk the whole time — regenesis 2026-07-01).
+  // The vessel-host ea-wait carries the same law; this is its island-side twin:
+  //   - the budget clocks port-silence, re-armed by ANY inbound sync traffic
+  //     (a busy peer mid-corpus-sync reads live, not absent);
+  //   - a verdict defers one turn so queued port messages land first;
+  //   - a hard cap keeps the loud-fault law when traffic flows forever without
+  //     the doc (the vessel's mount stall budget backstops far above it).
+  const SLOT_SILENCE_TIMEOUT_MS = 8_000;
+  const SLOT_READY_HARD_CAP_MS  = 60_000;
+  const SLOT_POLL_MS            = 250;
+  const mono = (): number => performance.now();
+  const defer = (): Promise<void> =>
+    new Promise((res) => (typeof setImmediate === "function" ? setImmediate(res) : setTimeout(res, 0)));
+  let _lastSyncHeardAt = mono();
+  const _markSyncHeard = (): void => { _lastSyncHeardAt = mono(); };
 
   async function _resolveSlot(
     repo: Repo,
@@ -202,15 +222,39 @@ export function runSovereignKernel(
     slot: string,
     wikiUri: string,
   ): Promise<DocHandle<LarDoc> | null> {
-    // automerge-repo 2.6: find() resolves only when READY and REJECTS on
-    // unavailable (allowableStates + isUnavailable retired). Race the find
-    // against a bounded timeout; fault if the doc never arrives over syncPort.
-    const handle = await Promise.race([
-      repo.find<LarDoc>(docUrl as AutomergeUrl).catch(() => null),
-      new Promise<null>((res) => setTimeout(() => res(null), SLOT_READY_TIMEOUT_MS)),
-    ]);
-    if (handle) return handle;
-    _post(mkFault(wikiUri, `slot ${slot} unavailable — doc ${docUrl} never arrived over syncPort (${SLOT_READY_TIMEOUT_MS}ms)`));
+    const started = mono();
+    // automerge-repo 2.6: find() resolves only when READY and REJECTS on an
+    // unavailable VERDICT (the peer answered "don't have") — a genuine miss,
+    // distinct from not-yet-arrived. undefined = still pending.
+    let outcome: DocHandle<LarDoc> | null | undefined;
+    void repo.find<LarDoc>(docUrl as AutomergeUrl).then(
+      (h) => { outcome = h; },
+      ()  => { outcome = null; },
+    );
+    // The silence budget clocks from max(last inbound message, THIS find's start):
+    // slots that resolve from the island's own storage partition move no port
+    // traffic, so quiet accrued BEFORE this find says nothing about this doc's
+    // request (witnessed: @draft faulted at 756ms elapsed under 9240ms of stale
+    // pre-find silence when the big bags loaded locally).
+    const silence = (): number => mono() - Math.max(_lastSyncHeardAt, started);
+    for (;;) {
+      await new Promise((res) => setTimeout(res, SLOT_POLL_MS));
+      if (outcome !== undefined) break;
+      if (silence() < SLOT_SILENCE_TIMEOUT_MS && mono() - started < SLOT_READY_HARD_CAP_MS) continue;
+      // Verdict deferral: queued port messages get one turn to land and move
+      // _lastSyncHeardAt (or settle the find) before the fault fires.
+      await defer();
+      if (outcome !== undefined) break;
+      const finalSilent = silence();
+      if (finalSilent < SLOT_SILENCE_TIMEOUT_MS && mono() - started < SLOT_READY_HARD_CAP_MS) continue;
+      _post(mkFault(wikiUri,
+        `slot ${slot} unavailable — doc ${docUrl} never arrived over syncPort ` +
+        `(${Math.round(finalSilent)}ms port-silence, ${Math.round(mono() - started)}ms elapsed; ` +
+        `silence budget ${SLOT_SILENCE_TIMEOUT_MS}ms, hard cap ${SLOT_READY_HARD_CAP_MS}ms)`));
+      return null;
+    }
+    if (outcome) return outcome;
+    _post(mkFault(wikiUri, `slot ${slot} unavailable — the peer answered WITHOUT doc ${docUrl} (unavailable verdict, not a timeout)`));
     return null;
   }
 
@@ -222,6 +266,19 @@ export function runSovereignKernel(
 
     // Repo construction + network wiring is a CRDT concern owned by mesh; the
     // kernel composes it through the facade and stays @automerge-free.
+    //
+    // The silence clock taps the syncPort FIRST (same tick — no message can slip
+    // between listeners): every inbound sync message marks the peer live, so the
+    // slot wait measures true port-silence, never a wall deadline over a busy peer.
+    _lastSyncHeardAt = mono();
+    const tapPort = msg.syncPort as unknown as {
+      addEventListener?: (t: string, h: () => void) => void;
+      on?: (t: string, h: () => void) => void;
+    };
+    // Node worker_threads ports speak EventEmitter, browser ports EventTarget;
+    // tap whichever face the platform holds (both coexist with the adapter's own).
+    if (typeof tapPort.addEventListener === "function") tapPort.addEventListener("message", _markSyncHeard);
+    else tapPort.on?.("message", _markSyncHeard);
     const storageAdapter = host.storage(msg);
     _repo = makeIslandRepo({ ...(storageAdapter ? { storage: storageAdapter } : {}), syncPort: msg.syncPort });
 

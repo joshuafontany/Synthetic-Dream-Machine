@@ -291,7 +291,11 @@ async function main(): Promise<void> {
  */
 function isSerdeSkewFault(err: unknown): boolean {
   const msg = err instanceof Error ? err.message : String(err);
-  return /tag for enum is not valid|manifest handler threw|\[vessel-host\] fault/i.test(msg);
+  // Match the SYMPTOM (a Rust deserializer error), never the wrapper: matching any
+  // `[vessel-host] fault` / `manifest handler threw` painted every island fault
+  // (e.g. a slot-sync timeout) with the "run lares rebuild" cure — a wrong cure
+  // banner that cost real diagnosis time (witnessed: regenesis 2026-07-01).
+  return /tag for enum is not valid|failed to deserialize|invalid type:|serde/i.test(msg);
 }
 
 main().catch((err) => {
