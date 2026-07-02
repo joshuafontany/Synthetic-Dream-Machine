@@ -134,4 +134,5 @@ export * from "./windowed-coupling.js";
 export * from "./linearity-gate.js";
 export * from "./membership-channel.js";
 
-export * from "./testimony-keel.js";
+
+export * from "./persistence-keel.js";
