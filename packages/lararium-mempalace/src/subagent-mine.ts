@@ -1,6 +1,6 @@
 /**
  * subagent-mine — capture tasked-spirit (sub-agent) transcripts DISTINCT from the
- * main agent's verbatim memory, named from their own handoff, both sides.
+ * main agent's verbatim memory, identified by their agent UUID, both sides.
  *
  * A spirit's transcript lives at `<session>/subagents/agent-<id>.jsonl` and holds
  * BOTH sides of the exchange — the handoff the main Lares authored (user) and the
@@ -9,10 +9,10 @@
  * only the top-level file, dropping it. This router does it right:
  *
  *   - DISTINCT: each spirit mines into `wing_<project>__spirits`, never the parent's.
- *   - NAMED: the actor is the spirit's name, EXTRACTED FROM ITS HANDOFF — the
- *     `Spirit: <Name>` / `Mask: <Name>` opener the main Lares writes. A named
- *     spirit is RE-CALLABLE: its drawers accrete under one actor across spawns.
- *     Absent the marker, falls back to `spirit-<id>` (captured, not re-callable).
+ *   - IDENTIFIED BY UUID (RULED 2026-07-01): identity rides the worldline handle
+ *     `<run>.<agentId>` (`lar_agent_handle`); the stage-name `spirit-<uuid8>` only
+ *     labels. The handoff-parsed name ladder (Mask/Spirit markers, role pet-names)
+ *     was a trial, now subtracted.
  *   - BOTH SIDES: mines the whole agent file (`--extract exchange` pairs handoff
  *     with the spirit's turns).
  *
@@ -24,7 +24,7 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, mkdirSync, linkSync, copyFileSync } from "node:fs";
+import { existsSync, readdirSync, mkdirSync, linkSync, copyFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, basename } from "node:path";
 import { resolvePalacePath } from "./palace-path.js";
@@ -53,31 +53,6 @@ function spiritStageRoot(): string {
 export function resolveMempalaceExe(): string {
   const local = join(homedir(), ".local", "bin", MP_EXE);
   return existsSync(local) ? local : "mempalace";
-}
-
-/** The naming convention: a `Mask: <Name>` / `Spirit: <Name>` opener the main Lares writes. */
-const NAME_RE = /(?:^|\n)\s*(?:Mask|Spirit)\s*:\s*([A-Za-z][\w-]{0,40})/;
-
-/** First user-message text from an agent transcript — the handoff prompt. */
-function firstHandoff(file: string): string {
-  let lines: string[];
-  try { lines = readFileSync(file, "utf8").split("\n"); } catch { return ""; }
-  for (const l of lines) {
-    if (!l.trim()) continue;
-    let r: Record<string, unknown>;
-    try { r = JSON.parse(l) as Record<string, unknown>; } catch { continue; }
-    if (r["type"] !== "user") continue;
-    const m = r["message"] as { content?: unknown } | undefined;
-    const c = m?.content;
-    if (typeof c === "string") return c;
-    if (Array.isArray(c)) {
-      for (const b of c) {
-        const bb = b as { type?: string; text?: string };
-        if (bb?.type === "text" && typeof bb.text === "string") return bb.text;
-      }
-    }
-  }
-  return "";
 }
 
 /** The agent id from an `agent-<id>.jsonl` filename. */
@@ -119,28 +94,14 @@ export function spiritCaptureSourceFile(wing: string, name: string, agentId: str
 }
 
 /**
- * A Pet Name from the spirit's ROLE, read off the handoff opener ("You are <role>…").
- * Deterministic; the boot-assigned Mask (NAME_RE) always supersedes it. Gerund →
- * agent-noun: researching→Researcher, mapping→Mapper, mining→Miner.
- */
-function petNameFromRole(handoff: string): string | null {
-  const m = /\byou are\b\s+(?:an?\s+|the\s+)?([a-z]+(?:[ -][a-z]+)?)/i.exec(handoff);
-  if (!m || !m[1]) return null;
-  const titled = m[1].trim().toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
-  return titled.replace(/ing\b/i, "er").replace(/\s+/g, "-");
-}
-
-/**
- * The spirit's re-callable name, in priority:
- *   1. the boot-assigned Mask/Spirit marker the main Lares wrote in the handoff,
- *   2. else a Pet Name by role (read off the handoff),
- *   3. else a last-resort `spirit-<id>` (captured, but not re-callable by name).
+ * The spirit's stage-name — `spirit-<uuid8>`, derived from the agent UUID alone (RULED
+ * 2026-07-01): subagent IDENTITY rides the worldline handle (`<run>.<agentId>` →
+ * `lar_agent_handle`), never a mask or pet name — the handoff-parsed name ladder
+ * (Mask/Spirit markers, role pet-names) was a trial, now subtracted. The stage-name
+ * only labels; nothing keys on it but the drawer's `lar_agent` display label.
  */
 export function spiritName(agentFile: string): string {
-  const handoff = firstHandoff(agentFile);
-  const mark = NAME_RE.exec(handoff);
-  if (mark && mark[1]) return mark[1];
-  return petNameFromRole(handoff) ?? `spirit-${agentIdOf(agentFile).slice(0, 8)}`;
+  return `spirit-${agentIdOf(agentFile).slice(0, 8)}`;
 }
 
 /** The spirits wing derived from a project wing (distinct, never the parent's). */
@@ -156,7 +117,8 @@ export interface SubagentMineResult {
 
 /**
  * Mine every tasked-spirit transcript for a session into the project's spirits
- * wing, each named by its handoff, capturing both sides. Idempotent at the
+ * wing, each labeled `spirit-<uuid8>` (identity = the worldline handle), capturing
+ * both sides. Idempotent at the
  * mempalace layer (source_file dedup). Returns per-spirit counts.
  */
 export function mineSubagentsForSession(transcriptPath: string, wing: string, mpExe = resolveMempalaceExe()): SubagentMineResult {
