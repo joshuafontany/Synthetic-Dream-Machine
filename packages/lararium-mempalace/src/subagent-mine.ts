@@ -83,15 +83,28 @@ export function listSpiritFiles(transcriptPath: string): string[] {
 }
 
 /**
+ * The staged spirit BASENAME — ONE build site for BOTH legs (capture + direct mine):
+ * `<surface>__<name>__agent-<id>__run-<run>.jsonl`. The leading `<surface>__` token
+ * follows the main-transcript law (`${surface}__…`, runHarvestAll) so `lar_surface`
+ * stamps by token instead of defaulting; buildPatch skips it before deriving
+ * `lar_agent`, and `lar_agent_handle` reads off the end-anchored `__agent-…__run-…`
+ * segment — the handle law holds unshifted.
+ */
+export function spiritStageBasename(name: string, agentId: string, runId: string, surface = "claude"): string {
+  return `${surface}__${name}__agent-${agentId}__run-${runId}.jsonl`;
+}
+
+/**
  * The `source_file` a spirit turn rides through the @daemon `capture` verb under. Two channels
  * fuse in one string: a `<wing>/` PREFIX (the routing — `spiritsWing(wing)`, decoded to
- * `metadata.wing` at the node flush) and the `<name>__agent-<id>__run-<run>.jsonl` BASENAME (the
- * provenance — buildPatch reads `lar_agent` / `lar_sidechain` / `lar_agent_handle` off it, exactly
- * the convention the direct-mine leg stages). The capture path takes the basename, the wing-stamp
- * takes the prefix, so one record lands BOTH the `__spirits` wing AND the AST keyed to the spirit.
+ * `metadata.wing` at the node flush) and the `spiritStageBasename` (the provenance —
+ * buildPatch reads `lar_surface` / `lar_agent` / `lar_sidechain` / `lar_agent_handle` off it,
+ * exactly the convention the direct-mine leg stages). The capture path takes the basename, the
+ * wing-stamp takes the prefix, so one record lands BOTH the `__spirits` wing AND the AST keyed
+ * to the spirit.
  */
-export function spiritCaptureSourceFile(wing: string, name: string, agentId: string, runId: string): string {
-  return `${spiritsWing(wing)}/${name}__agent-${agentId}__run-${runId}.jsonl`;
+export function spiritCaptureSourceFile(wing: string, name: string, agentId: string, runId: string, surface = "claude"): string {
+  return `${spiritsWing(wing)}/${spiritStageBasename(name, agentId, runId, surface)}`;
 }
 
 /**
@@ -141,12 +154,13 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
     const agentId = agentIdOf(af);
     // Stage this ONE spirit alone — `mine` takes a directory, and isolating each
     // spirit (a) keeps the parent pass from ever re-collecting it and (b) makes
-    // the staged source_file carry the lineage (`<name>__agent-<id>__run-<run>.jsonl`)
-    // so lar-telemetry's buildPatch reads BOTH lar_agent (the pet-name label) and
+    // the staged source_file carry the surface + lineage (spiritStageBasename:
+    // `<surface>__<name>__agent-<id>__run-<run>.jsonl`) so lar-telemetry's buildPatch
+    // reads lar_surface (the token), lar_agent (the display label) and
     // lar_agent_handle (the `<run>.<id>` worldline path) off it.
     const stage = join(spiritStageRoot(), `lar-spirit-${agentId}`);
     mkdirSync(stage, { recursive: true });
-    const dst = join(stage, `${name}__agent-${agentId}__run-${runId}.jsonl`);
+    const dst = join(stage, spiritStageBasename(name, agentId, runId));
     try { linkSync(af, dst); } catch { try { copyFileSync(af, dst); } catch { continue; } }
     let drawers: number | string = 0;
     try {

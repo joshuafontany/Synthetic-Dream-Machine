@@ -132,6 +132,17 @@ function deriveSurface(sourceFile?: string): string {
 }
 
 /**
+ * Strip one leading `<surface>__` token off a staged basename. Spirit basenames carry it
+ * too (`<surface>__<name>__agent-<id>__run-<run>.jsonl`, spiritStageBasename) — without the
+ * strip, deriveAgent's lazy `(.+?)` would swallow `<surface>__` into the agent label.
+ * Legacy un-prefixed names pass through untouched (the handle law never shifts).
+ */
+function stripSurfaceToken(base: string): string {
+  const pfx = base.split("__")[0] ?? "";
+  return SURFACES.includes(pfx) ? base.slice(pfx.length + 2) : base;
+}
+
+/**
  * Derive the tasked-spirit name from a subagent-staged source_file
  * (`<name>__agent-<id>.jsonl`, the convention from subagent-mine.ts), else null.
  * A drawer with a name reads as a spirit turn (lar_sidechain), kept queryable by
@@ -139,7 +150,7 @@ function deriveSurface(sourceFile?: string): string {
  */
 function deriveAgent(sourceFile?: string): string | null {
   if (!sourceFile) return null;
-  const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
+  const base = stripSurfaceToken(sourceFile.replace(/\\/g, "/").split("/").pop() ?? "");
   const m = /^(.+?)__agent-[^/]+\.jsonl$/.exec(base);
   return m ? (m[1] ?? null) : null;
 }
@@ -156,7 +167,7 @@ function deriveAgent(sourceFile?: string): string | null {
  */
 function deriveHandle(sourceFile?: string, frontier?: string | null): string | null {
   if (!sourceFile) return null;
-  const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
+  const base = stripSurfaceToken(sourceFile.replace(/\\/g, "/").split("/").pop() ?? "");
   const m = /__agent-([^/]+?)__run-([^/]+)\.jsonl$/.exec(base);
   if (!m) return null;
   // The branch-frontier rides the RUN component (`run~frontier`), so split(".")[0] below
