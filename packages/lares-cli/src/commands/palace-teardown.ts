@@ -18,7 +18,8 @@
  *
  * Safety: if live mempalace processes (MCP servers / a running mine) hold the
  * store open, the verb REFUSES (exit conflict) unless `--force` is also given —
- * stop them first, or override. Re-pave after with `lares harvest --all`.
+ * stop them first, or override. Re-pave after with the full ceremony:
+ * `lares wake --init` → `lares harvest --all` → `lares mempalace resume`.
  *
  * Usage:  lares palace-teardown                    # preview what would be removed
  *         lares palace-teardown --confirm          # remove it
@@ -169,8 +170,12 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
   // --drain: gracefully quiesce (pause hooks → drain warm daemons → confirm zero)
   // BEFORE tearing, so no live daemon re-mints into the dir we are about to remove
   // (the ENOTEMPTY race). Holds the hooks paused through the tear (--hold).
+  // ALWAYS runs on --drain — never gated on a momentarily-quiet process table: a
+  // Stop-hook can fire MID-tear and re-mint a poisoned half-palace (witnessed:
+  // ~/.mempalace re-created config-less). quiescePalace stays idempotent; on a
+  // quiet table it pauses the hooks and no-ops the drain.
   let drainedInfo: { drained: number[]; forced: number[]; quiet: boolean } | undefined;
-  if (drain && procs.length) {
+  if (drain) {
     const q = await quiescePalace({ hold: true });
     drainedInfo = { drained: q.drained, forced: q.forced, quiet: q.quiet };
     procs = liveMempalaceProcs(); // re-snapshot after the drain
@@ -237,7 +242,12 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
         console.log("      cure: `lares mempalace quiesce` (pauses hooks + drains), then re-run --confirm.");
       }
       console.log(`\n  freed: ${humanBytes(freed)}`);
-      console.log("  re-pave with:  lares harvest --all");
+      // The FULL ceremony tail — a bare `harvest --all` hint left followers with a
+      // config-less palace and hooks paused forever (--drain holds them paused).
+      console.log("  re-pave ceremony:");
+      console.log("    1. lares wake --init        (stand the organs: config.json + hooks.auto_save=false pin)");
+      console.log("    2. lares harvest --all      (the re-pave)");
+      console.log("    3. lares mempalace resume   (un-pause the hooks)");
     },
   });
   return ok ? 0 : 1;
