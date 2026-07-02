@@ -992,7 +992,10 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     // capture upserts the SAME drawer instead of doubling. metadata.wing rides each record (this
     // leg bypasses the node wing-stamp flush; RFC 002 §2.5 — the record's own wing wins).
     let fellBack = false;
-    const spoolDir = join(HARVEST_DIR, "capture-stage", wing);
+    // `capture-spool` — the transient fallback SPOOL, named apart from the hook's stable
+    // `capture-stage` (one name, two laws: the spool holds throwaway ndjson batches, the
+    // hook's stage holds dedup-keyed transcript copies that must keep a stable path).
+    const spoolDir = join(HARVEST_DIR, "capture-spool", wing);
     const spool = join(spoolDir, `fallback-${process.pid}-${Date.now()}.ndjson`);
     try {
       mkdirSync(spoolDir, { recursive: true });
