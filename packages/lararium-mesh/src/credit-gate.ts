@@ -2,7 +2,7 @@
  * credit-gate — TWO-SIDED (end-to-end) backpressure: the receiver's drain advertises credits, the
  * producer consumes them. Closes the Nalu canon's explicitly-stated gap (`projection-nalu#network-
  * ring`: "the RECEIVER's gate signals the SENDER — our servo is one-sided today") and cures the
- * BULLWHIP a deep-domain rhyme-dive flagged in the one-sided AIMD dial (a producer reacting to a
+ * BULLWHIP the one-sided AIMD dial generates (a producer reacting to a
  * LOCAL signal without end-to-end sink visibility amplifies oscillation).
  *
  * THE LAW (convergent across credit-based flow control · ant entrance-encounter-rate ·

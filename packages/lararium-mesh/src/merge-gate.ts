@@ -1,9 +1,9 @@
 /**
  * merge-gate — the fan-in merge acts as a GATE, not a funnel. Where parallel embedders converge on
- * the single-writer commit, the merge does three jobs at once (deep-domain convergence, rhyme-dive
- * 2026-07-02: secretory-pathway QC · venous one-way valves · coagulation threshold · ATC point-
- * merge): it VALIDATES before the irreversible step, ASSIGNS one-way order, and RECYCLES rejects to
- * a dead-letter lane — it never drops a reject nor blocks the whole stream.
+ * the single-writer commit, the merge does three jobs at once (the shape secretory-pathway QC ·
+ * venous one-way valves · coagulation threshold · ATC point-merge all share): it VALIDATES before
+ * the irreversible step, ASSIGNS one-way order, and RECYCLES rejects to a dead-letter lane — it
+ * never drops a reject nor blocks the whole stream.
  *
  * It also carries the CONSUME-LICENSE-ON-COMMIT flow (DNA-replication licensing · kinetic
  * proofreading): a fresh content-key holds a license the commit consumes exactly once; a key already

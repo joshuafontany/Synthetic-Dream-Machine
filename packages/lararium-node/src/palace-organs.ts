@@ -151,8 +151,8 @@ export function palaceOrgans(): PalaceOrgan[] {
     // The `persistence` cosheaf cap store (the 5th part) — a caller-vector instance holding Testimony
     // atoms; the `memory` sensorium composes it (authority mode). Lazy collection like ast/form: init = ensure dir.
     { name: "persistencepalace", dir: larPersistencePalaceDir(), init: ensureDirOrgan("persistencepalace", larPersistencePalaceDir()) },
-    // The LARARIUM-OWNED content plane (Option B) — a caller-vector content store the memory sensorium
-    // owns (<memory>/content), sovereign from the guest ~/.mempalace. Lazy collection: init = ensure dir.
+    // The LARARIUM-OWNED content plane — a caller-vector content store the memory sensorium owns
+    // (<memory>/content), sovereign from the guest ~/.mempalace. Lazy collection: init = ensure dir.
     { name: "contentpalace", dir: larContentDir(), init: ensureDirOrgan("contentpalace", larContentDir()) },
     // The `mesh` sensorium TREE — the parent dir plus its three nested children (who/authority/flow),
     // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
@@ -214,9 +214,9 @@ export function materializeMemorySensorium(): PalaceSetupStep {
     sensorium: "memory",
     lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
     caps: {
-      // Option B (sovereign memory): the content plane is a LARARIUM-OWNED store (<memory>/content),
-      // NOT the guest ~/.mempalace. Adopting an existing user mempalace is a deliberate import Act
-      // (SCRUM S3.2), never a runtime binding — the lararium stops depending on a store it doesn't own.
+      // The content plane is a LARARIUM-OWNED store (<memory>/content), NOT the guest ~/.mempalace.
+      // Adopting an existing user mempalace runs as a deliberate import Act, never a runtime binding —
+      // the lararium stops depending on a store it doesn't own.
       content:     { absDir: larContentDir(), engine: "content" },
       structure:   { absDir: larStructurePalaceDir(), engine: "structurepalace" },
       form:        { absDir: larFormPalaceDir(), engine: "formpalace" },

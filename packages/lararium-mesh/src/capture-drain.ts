@@ -1,8 +1,7 @@
 /**
  * capture-drain — the TRAILING-WATERMARK drain-ledger: the pure invariant that stops the
- * capture leak (7030 staged → 219 landed). The keystone the 2026-07-02 capture research swarm
- * converged on (Drain · Loom · Gate divers): acknowledge work ONLY after its effect is durable;
- * make the effect idempotent so acknowledgement can be conservative.
+ * capture leak (a staged turn never lands unless the store confirms it). The law: acknowledge work
+ * ONLY after its effect is durable; make the effect idempotent so acknowledgement can be conservative.
  *
  * THE LAW (one line, four systems — Kafka offsets · transactional outbox · WAL checkpoint · Flink
  * barriers): the watermark advances FROM the store's confirmed commit, NEVER from dequeue/stage.
