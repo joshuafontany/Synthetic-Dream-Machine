@@ -39,7 +39,7 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
   test("enumerates the organs in dependency order — mempalace FIRST, the mesh TREE last", () => {
     const names = palaceOrgans().map((o) => o.name);
     expect(names).toEqual([
-      "mempalace", "structurepalace", "formpalace", "persistencepalace",
+      "mempalace", "structurepalace", "formpalace", "persistencepalace", "contentpalace",
       "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
       "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
     ]);
@@ -75,7 +75,7 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     expect(first.every((s) => s.ok)).toBe(true);
     // ast/form + the mesh tree + the memetic-wikitext tree were absent → init ran and created their dirs
     for (const name of [
-      "structurepalace", "formpalace", "persistencepalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
+      "structurepalace", "formpalace", "persistencepalace", "contentpalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
       "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
     ]) {
       const step = first.find((s) => s.step === name)!;

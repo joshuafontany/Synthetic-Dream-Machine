@@ -144,6 +144,14 @@ export function larPersistencePalaceDir(): string {
   return join(memorySensoriumDir(), "persistence");
 }
 
+/** The lararium-OWNED content store dir (the `content` fiber cap) — `<memory>/content`, inside the
+ *  sensorium tree. Option B (sovereign memory): the lararium owns its content plane rather than binding
+ *  it to the guest `~/.mempalace`; adopting an existing user mempalace history is a deliberate import Act.
+ *  Held by the content-palace (caller-vector, embed upstream / commit here). */
+export function larContentDir(): string {
+  return join(memorySensoriumDir(), "content");
+}
+
 // ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────
 
 /** The `mesh` sensorium dir — `<data>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three
