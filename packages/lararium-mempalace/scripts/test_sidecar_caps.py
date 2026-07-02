@@ -306,3 +306,42 @@ def test_run_sidecar_encode_only_skips_lock_and_runs(tmp_path):
         t.join(timeout=2)
     assert built == [1]
     assert json.loads(out.getvalue()) == {"id": 1, "ok": True, "result": {"ready": True}}
+
+
+# ── ReverseIndex — the lifted raw-sqlite-beside-chroma cap (astpalace + persistence) ──
+
+def _rev_idx(tmp_path, **kw):
+    return sc.ReverseIndex(str(tmp_path), kw.get("db", "idx.sqlite3"), kw.get("table", "t"), kw.get("key", "k"), kw.get("val", "v"))
+
+
+def test_reverse_index_put_then_lookup_roundtrips(tmp_path):
+    idx = _rev_idx(tmp_path)
+    idx.put("turn-1", "hash-A")
+    assert idx.lookup("turn-1") == "hash-A"
+
+
+def test_reverse_index_lookup_absent_is_none(tmp_path):
+    assert _rev_idx(tmp_path).lookup("never") is None
+
+
+def test_reverse_index_put_upserts_latest_value_wins(tmp_path):
+    idx = _rev_idx(tmp_path)
+    idx.put("turn-1", "hash-A")
+    idx.put("turn-1", "hash-B")  # same key re-put under a new structure
+    assert idx.lookup("turn-1") == "hash-B"
+
+
+def test_reverse_index_persists_across_reopen(tmp_path):
+    idx = _rev_idx(tmp_path)
+    idx.put("turn-1", "hash-A")
+    idx.close()
+    assert _rev_idx(tmp_path).lookup("turn-1") == "hash-A"  # same db file
+
+
+def test_reverse_index_signer_shape_composes_too(tmp_path):
+    """persistence's signer -> testimony_id rides the SAME cap, differing only in column
+    names — the lift generalizes past astpalace's turn_key -> hash."""
+    idx = _rev_idx(tmp_path, db="signer_index.sqlite3", table="signer_index", key="signer", val="testimony_id")
+    idx.put("vessel-B", "t-42")
+    assert idx.lookup("vessel-B") == "t-42"
+    assert idx.lookup("vessel-Z") is None

@@ -55,7 +55,6 @@ import hashlib
 import json
 import math
 import os
-import sqlite3
 import sys
 
 from mempalace.palace import get_collection
@@ -65,6 +64,7 @@ from mempalace.palace import get_collection
 # foundation, NOT inherited. The thin module-level aliases below keep this sidecar's
 # names (`_acquire_serve_lock`, `_serve_loop`, `_fcntl`, …) stable for its tests.
 from sidecar_caps import (
+    ReverseIndex,
     _fcntl,
     _select,
     acquire_serve_lock,
@@ -305,29 +305,11 @@ class AstPalaceStore:
         # collection if absent — this IS the `init` for a fresh palace. Identity check
         # skipped: we never run the embedder, so its recorded identity is irrelevant.
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
-        # The turn_key → structural_hash reverse-index, beside the chroma store. get_collection
-        # already made the palace dir, so the path is safe to open. One row per turn_key (PK);
-        # a turn re-put under a new structure overwrites it (the latest structure for that turn).
-        self._index_path = os.path.join(palace_path, _TURNKEY_INDEX_DB)
-        self._index = sqlite3.connect(self._index_path)
-        self._index.execute(
-            "CREATE TABLE IF NOT EXISTS turnkey_index (turn_key TEXT PRIMARY KEY, structural_hash TEXT NOT NULL)"
-        )
-        self._index.commit()
-
-    def _index_put(self, turn_key: str, structural_hash: str) -> None:
-        self._index.execute(
-            "INSERT INTO turnkey_index (turn_key, structural_hash) VALUES (?, ?) "
-            "ON CONFLICT(turn_key) DO UPDATE SET structural_hash=excluded.structural_hash",
-            (turn_key, structural_hash),
-        )
-        self._index.commit()
-
-    def _index_lookup(self, turn_key: str) -> str | None:
-        row = self._index.execute(
-            "SELECT structural_hash FROM turnkey_index WHERE turn_key=?", (turn_key,)
-        ).fetchone()
-        return row[0] if row else None
+        # The turn_key → structural_hash reverse-index, beside the chroma store (the shared
+        # ReverseIndex cap — get_collection already made the palace dir, so the path is safe).
+        # One row per turn_key (PK); a turn re-put under a new structure overwrites it (the
+        # latest structure for that turn).
+        self._index = ReverseIndex(palace_path, _TURNKEY_INDEX_DB, "turnkey_index", "turn_key", "structural_hash")
 
     def _get_raw(self, structural_hash: str) -> dict | None:
         got = self._col.get(ids=[structural_hash], include=["documents", "metadatas"])
@@ -377,11 +359,11 @@ class AstPalaceStore:
             # (drop the provenance line, decrement, tombstone-at-zero — mirroring kapae) BEFORE the
             # index repoints. Else the old structure's recurrence count is orphaned, never decremented.
             # A re-put to the SAME structure skips this (idempotent no-op).
-            prior_hash = self._index_lookup(turn_key)
+            prior_hash = self._index.lookup(turn_key)
             if prior_hash and prior_hash != structural_hash:
                 self._retract_turn_from(prior_hash, turn_key, now)
             # The reverse-index lets kapae find this structure by turn_key in O(1).
-            self._index_put(turn_key, structural_hash)
+            self._index.put(turn_key, structural_hash)
         existing = self._get_raw(structural_hash)
         if existing is not None:
             meta = dict(existing["metadata"])
@@ -488,7 +470,7 @@ class AstPalaceStore:
         if not turn_key:
             return empty
         ended = ended or _now()
-        structural_hash = self._index_lookup(turn_key)
+        structural_hash = self._index.lookup(turn_key)
         if not structural_hash:
             return empty
         res = self._retract_turn_from(structural_hash, turn_key, ended)

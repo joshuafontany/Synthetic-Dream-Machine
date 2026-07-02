@@ -325,8 +325,8 @@ def test_put_appends_turn_key_to_provenance_and_reverse_index(tmp_path):
         {"source_file": "wing/sess.jsonl", "verbatim_sha": "vsha1", "turn_key": "turn-A"}
     ]
     # The reverse-index maps the turn_key → this structure (the O(1) kapae lookup).
-    assert store._index_lookup("turn-A") == H1
-    assert store._index_lookup("nope") is None
+    assert store._index.lookup("turn-A") == H1
+    assert store._index.lookup("nope") is None
 
 
 def test_kapae_decrements_and_tombstones_at_zero_keeping_the_row(tmp_path):
@@ -399,7 +399,7 @@ def test_put_edit_same_uuid_retracts_the_old_structure_tally(tmp_path):
     # turn-A first unfolds to structure H1.
     store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
     assert store.get(H1)["count"] == 1
-    assert store._index_lookup("turn-A") == H1
+    assert store._index.lookup("turn-A") == H1
 
     # EDIT: the SAME turn-A now unfolds to a DIFFERENT structure H2 (content edited in place).
     store.put(H2, '{"t":2}', "wing/s.jsonl", "vshaB", "turn-A")
@@ -415,13 +415,13 @@ def test_put_edit_same_uuid_retracts_the_old_structure_tally(tmp_path):
     e2 = store.get(H2)
     assert e2["count"] == 1
     assert not e2.get("tombstoned_at")
-    assert store._index_lookup("turn-A") == H2
+    assert store._index.lookup("turn-A") == H2
 
     # SAME-uuid SAME-hash re-put → the guard never fires: H2 stays live, the index unchanged, and
     # the already-tombstoned H1 is untouched (no second decrement, no re-stamp).
     stamp = e1["tombstoned_at"]
     store.put(H2, '{"t":2}', "wing/s.jsonl", "vshaB", "turn-A")
-    assert store._index_lookup("turn-A") == H2
+    assert store._index.lookup("turn-A") == H2
     assert not store.get(H2).get("tombstoned_at")
     assert store.get(H1)["count"] == 0
     assert store.get(H1).get("tombstoned_at") == stamp

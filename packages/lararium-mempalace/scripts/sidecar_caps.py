@@ -37,6 +37,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import sqlite3
 import sys
 import time
 
@@ -49,6 +50,53 @@ try:
     import select as _select  # POSIX-usable on the stdin pipe; idle-reap needs it
 except ImportError:  # pragma: no cover - never absent on POSIX
     _select = None
+
+
+# ---------------------------------------------------------------------------
+# reverse-index cap — a key→value sqlite index BESIDE the chroma store
+# ---------------------------------------------------------------------------
+
+
+class ReverseIndex:
+    """A small key→value reverse-index in a sqlite db BESIDE the chroma store — the
+    raw-sqlite-beside-chroma idiom already inlined by astpalace (turn_key→hash) and
+    kg_io, lifted here once. Chroma cannot where-filter inside a JSON metadata list,
+    so the store keeps this O(1) side-map for the one lookup it needs.
+
+    One row per key (PK); ``put`` upserts (latest value wins), ``lookup`` returns the
+    value or None. ``palace_path`` must already exist (get_collection makes the dir).
+
+    The table/column names are CODE-supplied constants composed into the SQL by the
+    store, never caller/user input — no injection surface (sqlite has no placeholder
+    for identifiers, so identifiers must interpolate; values always bind via ``?``).
+    """
+
+    def __init__(self, palace_path: str, db_name: str, table: str, key_col: str, val_col: str) -> None:
+        self._table = table
+        self._key = key_col
+        self._val = val_col
+        self._conn = sqlite3.connect(os.path.join(palace_path, db_name))
+        self._conn.execute(
+            f"CREATE TABLE IF NOT EXISTS {table} ({key_col} TEXT PRIMARY KEY, {val_col} TEXT NOT NULL)"
+        )
+        self._conn.commit()
+
+    def put(self, key: str, val: str) -> None:
+        self._conn.execute(
+            f"INSERT INTO {self._table} ({self._key}, {self._val}) VALUES (?, ?) "
+            f"ON CONFLICT({self._key}) DO UPDATE SET {self._val}=excluded.{self._val}",
+            (key, val),
+        )
+        self._conn.commit()
+
+    def lookup(self, key: str) -> "str | None":
+        row = self._conn.execute(
+            f"SELECT {self._val} FROM {self._table} WHERE {self._key}=?", (key,)
+        ).fetchone()
+        return row[0] if row else None
+
+    def close(self) -> None:
+        self._conn.close()
 
 
 # ---------------------------------------------------------------------------
