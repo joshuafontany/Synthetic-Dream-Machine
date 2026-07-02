@@ -673,10 +673,14 @@ function fmtNamespaceEntities(v: string): string {
   return out + '"';
 }
 
-/** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key. */
+/** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key.
+ *  Machine telemetry (`lar_*` — parse grades, lar-telemetry projections) NEVER
+ *  re-emits: sensor readings stay off the operator's TOML (map never fuses to
+ *  territory; operator ruling 2026-07-01 — the lar_parse_failures write-back
+ *  bite, stamped since d9a83386 and projected into canon by the regenesis). */
 function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
   const keys = Object.keys(fields).sort().filter((k) => {
-    if (deny.has(k) || k.charAt(0) === "$") return false;
+    if (deny.has(k) || k.charAt(0) === "$" || k.startsWith("lar_")) return false;
     const v = fields[k];
     return !(v === undefined || v === null || v === "" || (Array.isArray(v) && v.length === 0));
   });
