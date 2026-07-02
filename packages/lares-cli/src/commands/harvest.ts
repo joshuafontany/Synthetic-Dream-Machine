@@ -853,10 +853,17 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   const statePath = join(HARVEST_DIR, `${wing}.capture-state.json`);
   const state = loadState(statePath);
   const next: Record<string, string> = { ...state };
-  let submitted = 0;
-  let daemonDown = false;
 
-  outer:
+  // Collect the CURRENT BATCH — every not-yet-captured exchange, each carrying its stable
+  // transcript ordinal (the ndjson chunk_index half of the deterministic drawer id,
+  // `sha256(source_file)_chunk`). BOTH legs below submit these same records under the same
+  // source_file + ordinal, so verb + fallback converge on ONE drawer per turn (the sink-side
+  // dedup + deterministic id make resubmission idempotent).
+  interface PendingTurn {
+    readonly key: string; readonly hash: string; readonly text: string;
+    readonly src: string; readonly chunk: number; readonly frontier?: readonly string[];
+  }
+  const pending: PendingTurn[] = [];
   for (const file of files) {
     // PREFIX the wing onto the source_file (`<wing>/<surface>__<run>.jsonl`): the @daemon capture path
     // carries no `--wing`, so the node wing-stamp flush decodes this prefix into `metadata.wing` —
@@ -868,79 +875,98 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     // the same handle → the worldline collision. branchContextForTurn derives the per-turn frontier so
     // the daemon's buildPatch keys distinct handles. A linear transcript carries no fork ⇒ no frontier.
     const dagNodes: TurnNode[] = readTurns(file).map((t) => ({ uuid: t.uuid, parentUuid: t.parentUuid }));
+    let chunk = -1;
     for (const turn of readExchanges(file)) {       // exchange-grain drawer (the ingest canon)
+      chunk += 1;                                    // the transcript ordinal — stable across runs
       const key  = turnKeyOf(file, turn);
       const hash = sha(turn.text);
       if (state[key] === hash) continue;            // already captured (idempotent)
       const branch = turn.uuid ? branchContextForTurn(dagNodes, turn.uuid) : undefined;
       const frontier = branch?.frontier;
       const frontierArr = frontier == null ? undefined : Array.isArray(frontier) ? frontier : [frontier];
-      try {
-        const r = await runVerb(
-          "capture",
-          {
-            turnText: turn.text, sourceFile: src,
-            // The USER turn's uuid — the .astpalace provenance key (the kapae key). The SAME formula
-            // the rewind detector keys on (turn.uuid || sha(...)), so one gone uuid closes both stores.
-            turnKey: key,
-            ...(frontierArr && frontierArr.length ? { frontier: frontierArr } : {}),
-          },
-          did,
-          { timeoutMs: 5000 },
-        );
-        if (r.status !== "done") throw new Error(`capture status=${r.status}`);
-        next[key] = hash;
-        submitted += 1;
-      } catch {
-        daemonDown = true;                          // unreachable → fall back, verbatim-always
-        break outer;
-      }
+      pending.push({ key, hash, text: turn.text, src, chunk, ...(frontierArr && frontierArr.length ? { frontier: frontierArr } : {}) });
     }
   }
 
-  if (daemonDown) {
+  // SUBMIT under the SUSPEND LAW: a verb failure never infers "down" for the whole pipeline.
+  //   - a failure AFTER any success → SUSPEND the remainder (leave state unmarked; the next run
+  //     retries — safe, the sink dedups), never a bulk direct mine + mark-all.
+  //   - the daemon reads UNREACHABLE only when the whole run yields zero successes (the first
+  //     PROBE calls all fail, or every call fails) → the direct-mine fallback fires, for the
+  //     CURRENT batch only (verbatim-always).
+  const PROBE = 3;
+  let submitted = 0;
+  let failures = 0;
+  let halted = false;
+  for (const p of pending) {
+    if (halted) break;
+    try {
+      const r = await runVerb(
+        "capture",
+        {
+          turnText: p.text, sourceFile: p.src,
+          // The USER turn's uuid — the .astpalace provenance key (the kapae key). The SAME formula
+          // the rewind detector keys on (turn.uuid || sha(...)), so one gone uuid closes both stores.
+          turnKey: p.key,
+          // The stable transcript ordinal — the deterministic drawer-id chunk (converges both legs).
+          chunkIndex: p.chunk,
+          ...(p.frontier ? { frontier: [...p.frontier] } : {}),
+        },
+        did,
+        { timeoutMs: 5000 },
+      );
+      if (r.status !== "done") throw new Error(`capture status=${r.status}`);
+      next[p.key] = p.hash;
+      submitted += 1;
+    } catch {
+      failures += 1;
+      // One timeout amid successes = a wobble, not a down daemon: suspend, retry next run.
+      // Zero successes across PROBE consecutive failures = unreachable: stop probing, fall back.
+      if (submitted > 0 || failures >= PROBE) halted = true;
+    }
+  }
+  const daemonUnreachable = failures > 0 && submitted === 0;
+  const suspended = pending.length - submitted;
+
+  if (daemonUnreachable && pending.length > 0) {
+    // FALLBACK (verbatim-always): the daemon stayed unreachable across the whole run — direct-mine
+    // the CURRENT batch over the SAME road the daemon flush takes (`mine --source ndjson --daemon`),
+    // each record under the daemon leg's exact source_file + transcript ordinal, so a later daemon
+    // capture upserts the SAME drawer instead of doubling. metadata.wing rides each record (this
+    // leg bypasses the node wing-stamp flush; RFC 002 §2.5 — the record's own wing wins).
     let fellBack = false;
-    // `mempalace mine` processes the .jsonl files IN a DIR — stage a file target into one.
-    // STABLE per-wing staging path, never mkdtemp: mempalace's file-level dedup keys on the
-    // staged path, so an ephemeral dir re-mints every drawer on each fallback mine (the
-    // 2026-07-01 duplicate-drawer bite). Same session file → same staged path, always.
-    let mineDir = target;
-    let tmpStage = "";
+    const spoolDir = join(HARVEST_DIR, "capture-stage", wing);
+    const spool = join(spoolDir, `fallback-${process.pid}-${Date.now()}.ndjson`);
     try {
-      if (statSync(target).isFile()) {
-        tmpStage = join(HARVEST_DIR, "capture-stage", wing);
-        mkdirSync(tmpStage, { recursive: true });
-        for (const f of files) copyFileSync(f, join(tmpStage, basename(f)));
-        mineDir = tmpStage;
-      }
-    } catch { /* fall through with target as-is */ }
-    try {
-      // Daemon down → direct mine, but still retry the palace-lock busy signal (a concurrent
-      // backfill or another session's fallback may hold it) — graceful, no lost drawer.
-      mineDirect(["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"]);
+      mkdirSync(spoolDir, { recursive: true });
+      writeFileSync(
+        spool,
+        pending.map((p) => JSON.stringify({
+          content: p.text, source_file: p.src, chunk_index: p.chunk, metadata: { wing },
+        })).join("\n") + "\n",
+      );
+      // Still retry the palace-lock busy signal (a concurrent backfill or another session's
+      // fallback may hold it) — graceful, no lost drawer.
+      mineDirect(["--palace", resolvePalacePath(), "mine", "--source", "ndjson", "--daemon", spool]);
       fellBack = true;
       // The direct mine landed these exchanges — mark them so the nalu won't double next run.
-      for (const file of files) for (const turn of readExchanges(file)) {
-        const key = turnKeyOf(file, turn);
-        next[key] = sha(turn.text);
-      }
+      for (const p of pending) next[p.key] = p.hash;
     } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
-    // Remove only OUR staged copies — the wing stage dir is shared (stable path law).
-    if (tmpStage) { for (const f of files) { try { rmSync(join(tmpStage, basename(f)), { force: true }); } catch { /* best effort */ } } }
+    finally { try { rmSync(spool, { force: true }); } catch { /* best effort */ } }
     try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
     emit(args, {
       ok: true,
-      data: { wing, submitted, fallback: fellBack ? "direct-mine" : "none (mine failed)" },
-      human: () => console.log(`[capture] daemon down → ${fellBack ? "direct mine fallback" : "FAILED (mine errored)"} (wing ${wing})`),
+      data: { wing, submitted, suspended: fellBack ? 0 : suspended, fallback: fellBack ? "direct-mine" : "none (mine failed — turns suspended, next run retries)" },
+      human: () => console.log(`[capture] daemon unreachable → ${fellBack ? `direct ndjson mine fallback (${pending.length} turn(s))` : `mine FAILED — ${suspended} turn(s) suspended, next run retries`} (wing ${wing})`),
     });
     return 0;
   }
 
-  try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+  try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
   emit(args, {
     ok: true,
-    data: { wing, submitted },
-    human: () => console.log(`[capture] ${submitted} turn(s) → @daemon nalu (wing ${wing})`),
+    data: { wing, submitted, ...(suspended > 0 ? { suspended, suspendedReason: "verb failure mid-run — turns left unmarked, next run retries (sink-side dedup guards)" } : {}) },
+    human: () => console.log(`[capture] ${submitted} turn(s) → @daemon nalu (wing ${wing})${suspended > 0 ? ` · ${suspended} turn(s) SUSPENDED (verb failure — next run retries)` : ""}`),
   });
   return 0;
 }

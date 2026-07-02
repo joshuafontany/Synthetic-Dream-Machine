@@ -22,7 +22,7 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import {
@@ -82,64 +82,95 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
   const state = loadState(statePath);
   const next: Record<string, string> = { ...state };
   const mined: Array<{ name: string; agentId: string; turns: number | string }> = [];
-  let daemonDown = false;
 
-  outer:
+  // Collect the CURRENT BATCH — every not-yet-captured spirit exchange, each with its stable
+  // per-transcript ordinal (the ndjson chunk_index — the SAME `i` mineSubagentsForSession stamps,
+  // so both legs converge on one deterministic drawer id per turn).
+  interface PendingTurn { readonly key: string; readonly hash: string; readonly text: string; readonly src: string; readonly chunk: number; readonly spirit: number }
+  const pending: PendingTurn[] = [];
   for (const af of files) {
     const name = spiritName(af);
     const agentId = agentIdOf(af);
     const src = spiritCaptureSourceFile(wing, name, agentId, runId); // <wing>__spirits/<name>__agent-<id>__run-<run>.jsonl
-    let turns = 0;
+    const spirit = mined.length;
+    mined.push({ name, agentId, turns: 0 });
+    let chunk = -1;
     for (const turn of readExchanges(af)) {
+      chunk += 1;                                    // the transcript ordinal — stable across runs
       const key = turn.uuid || sha(af + turn.ts + turn.text.slice(0, 64));
       const hash = sha(turn.text);
       if (state[key] === hash) continue;            // already captured (idempotent)
-      try {
-        const r = await runVerb("capture", { turnText: turn.text, sourceFile: src }, did, { timeoutMs: 5000 });
-        if (r.status !== "done") throw new Error(`capture status=${r.status}`);
-        next[key] = hash;
-        turns += 1;
-      } catch {
-        daemonDown = true;                          // unreachable → fall back, verbatim-always
-        break outer;
-      }
+      pending.push({ key, hash, text: turn.text, src, chunk, spirit });
     }
-    mined.push({ name, agentId, turns });
   }
 
-  if (daemonDown) {
-    // The @daemon is down: the AST leg cannot run, but the verbatim drawer MUST land. Fall back to
-    // the proven DIRECT mine (correct __spirits wing + per-spirit agent), then mark every spirit turn
-    // captured so the nalu won't re-submit (and double) on the next run.
+  // SUBMIT under the SUSPEND LAW (the dedup-first order): a verb failure after any success
+  // SUSPENDS the remainder (unmarked — the next run retries; the sink dedups a resubmit).
+  // The daemon reads unreachable ONLY on zero successes across the run → then the direct-mine
+  // fallback fires for the current batch (verbatim-always), never on one timeout.
+  const PROBE = 3;
+  let submitted = 0;
+  let failures = 0;
+  let halted = false;
+  for (const p of pending) {
+    if (halted) break;
+    try {
+      const r = await runVerb(
+        "capture",
+        // turnKey = the .astpalace provenance key (the kapae key); chunkIndex = the deterministic
+        // drawer-id ordinal (the fallback's exact `i`).
+        { turnText: p.text, sourceFile: p.src, turnKey: p.key, chunkIndex: p.chunk },
+        did,
+        { timeoutMs: 5000 },
+      );
+      if (r.status !== "done") throw new Error(`capture status=${r.status}`);
+      next[p.key] = p.hash;
+      submitted += 1;
+      const m = mined[p.spirit];
+      if (m && typeof m.turns === "number") m.turns += 1;
+    } catch {
+      failures += 1;
+      if (submitted > 0 || failures >= PROBE) halted = true;
+    }
+  }
+  const daemonUnreachable = failures > 0 && submitted === 0;
+  const suspended = pending.length - submitted;
+
+  if (daemonUnreachable && pending.length > 0) {
+    // The @daemon stayed unreachable across the whole run: the AST leg cannot run, but the verbatim
+    // drawer MUST land. Fall back to the proven DIRECT mine (correct __spirits wing + per-spirit
+    // agent), then mark every spirit turn captured so the nalu won't re-submit (and double) next run.
     let r: ReturnType<typeof mineSubagentsForSession> | null = null;
     // The SAME exchange reader the daemon leg submits through — both legs file identical
-    // turn content under ONE source_file key (spiritCaptureSourceFile), so a daemon-down
-    // fallback converges with (upserts over) a later daemon capture instead of doubling.
+    // turn content under ONE source_file key (spiritCaptureSourceFile) + one chunk ordinal,
+    // so a daemon-down fallback converges with (upserts over) a later daemon capture.
     try { r = mineSubagentsForSession(transcript, wing, { turns: readExchanges }); } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
     if (r) {
-      for (const af of files) for (const turn of readExchanges(af)) {
-        const key = turn.uuid || sha(af + turn.ts + turn.text.slice(0, 64));
-        next[key] = sha(turn.text);
-      }
+      for (const p of pending) next[p.key] = p.hash;
     }
     try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
     observeWorldlines();
     emit(args, {
       ok: true,
-      data: { spirits: r?.spirits ?? mined.length, wing: sw, fallback: r ? "direct-mine" : "none (mine failed)", mined: r?.mined ?? mined },
-      human: () => console.log(`lares subagents → ${sw}  daemon down → ${r ? "direct mine fallback (verbatim-always, AST skipped)" : "FAILED (mine errored)"}`),
+      data: {
+        spirits: r?.spirits ?? mined.length, wing: sw,
+        fallback: r ? "direct-mine" : "none (mine failed — turns suspended, next run retries)",
+        ...(r ? {} : { suspended }),
+        mined: r?.mined ?? mined,
+      },
+      human: () => console.log(`lares subagents → ${sw}  daemon unreachable → ${r ? "direct mine fallback (verbatim-always, AST skipped)" : `FAILED (mine errored) — ${suspended} turn(s) suspended, next run retries`}`),
     });
     return 0;
   }
 
-  try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+  try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
   observeWorldlines();
   emit(args, {
     ok: true,
-    data: { spirits: mined.length, wing: sw, routedThrough: "@daemon", mined },
+    data: { spirits: mined.length, wing: sw, routedThrough: "@daemon", mined, ...(suspended > 0 ? { suspended, suspendedReason: "verb failure mid-run — turns left unmarked, next run retries (sink-side dedup guards)" } : {}) },
     human: () => {
       const total = mined.reduce((n, m) => n + (typeof m.turns === "number" ? m.turns : 0), 0);
-      console.log(`lares subagents → ${sw}  (${mined.length} spirit${mined.length === 1 ? "" : "s"}, ${total} turn(s) → @daemon nalu — verbatim + AST)`);
+      console.log(`lares subagents → ${sw}  (${mined.length} spirit${mined.length === 1 ? "" : "s"}, ${total} turn(s) → @daemon nalu — verbatim + AST)${suspended > 0 ? `  · ${suspended} turn(s) SUSPENDED (verb failure — next run retries)` : ""}`);
       for (const s of mined) console.log(`  ${s.name.padEnd(20)} ${String(s.turns).padStart(4)} turns  (agent-${s.agentId.slice(0, 8)})`);
     },
   });
