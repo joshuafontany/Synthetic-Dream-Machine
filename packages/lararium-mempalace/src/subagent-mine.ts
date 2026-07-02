@@ -17,8 +17,9 @@
  *     with the spirit's turns).
  *
  * mempalace stays vendored: we mine THROUGH its CLI (one `--agent` per invocation,
- * so each spirit mines in its own pass), never edit it. The child→parent tunnel
- * (the LINK) rides a separate post-mine step (create_tunnel needs the room to exist).
+ * so each spirit mines in its own pass), never edit it. The child→parent LINK rides
+ * `lar_parent_handle` (buildPatch, off the staged basename) + the KG observer
+ * (observeSubagentWorldlines, D6) — no post-mine tunnel step exists or is needed.
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
