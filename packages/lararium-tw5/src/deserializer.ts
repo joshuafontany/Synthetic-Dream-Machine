@@ -233,6 +233,7 @@ function splitMemeToTiddlers(
   // Fence-mask law: a QUOTED control sigil (in a code fence or inline code)
   // never frames the carrier — before the mask, a fenced ETX mention
   // truncated everything after it (real corpus loss, found 2026-06-11).
+  const hadSoh = SOH_LINE_RE.test(text);
   const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
   const etxM = maskedExec(noSoh, /\n?<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
   const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
@@ -263,12 +264,18 @@ function splitMemeToTiddlers(
   }
 
   const stxM = maskedExec(stripped, STX_LINE_RE);
-  const headerRegion = stxM ? stripped.slice(0, stxM.index) : stripped;
+  // A fully BARE doc (no SOH, no STX — the no-carrier fallback) reads as ALL BODY:
+  // its content belongs between the minted &#x0002;/&#x0003; markers on recompose
+  // (operator ruling 2026-07-01 — the header-routed wrap left the body slot empty
+  // and stacked blank lines). A degraded SOH-carrier missing its STX keeps the
+  // header reading (its iam still parses; the gradient grades the miss).
+  const bare = !hadSoh && !stxM;
+  const headerRegion = stxM ? stripped.slice(0, stxM.index) : (bare ? "" : stripped);
   // Trim body edges at ingest. The export template owns the visual padding:
   // one blank line after STX and one blank line before ETX. Keeping the stored
   // field edge-trimmed prevents authored leading/trailing newlines from stacking
   // with those template-emitted margins.
-  const bodyRegion   = stripLeadingNewlines(stxM ? stripped.slice(stxM.index + stxM[0].length) : "");
+  const bodyRegion   = stripLeadingNewlines(stxM ? stripped.slice(stxM.index + stxM[0].length) : (bare ? stripped : ""));
 
   // Parse iam fields from header region (before STX).
   // Guard: only look for iam in the part of headerRegion before the first
