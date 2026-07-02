@@ -119,6 +119,29 @@ function initMempalace(): PalaceSetupStep[] {
   return steps;
 }
 
+/**
+ * The persistence INFRASTRUCTURE every sensorium #has — a `has.persistence` cosheaf fiber cap
+ * (`<dir>/persistence`, engine "persistence") plus the authority-mode policy (halfLife null: the
+ * store never cools; only a defeater lowers standing). A sensorium is a nameless entity, and durable
+ * witnessed memory is infrastructure it ALL carries — content/structure/form perceive, persistence
+ * remembers. Returns the cap + policy to spread into a {@link BuildSensoriumOptions}.
+ */
+function persistenceInfra(sensoriumDir: string): {
+  cap: { persistence: { absDir: string; engine: string; variance: "cosheaf" } };
+  persistencePolicy: { admitThreshold: number; halfLife: number | null };
+} {
+  return {
+    cap: { persistence: { absDir: join(sensoriumDir, "persistence"), engine: "persistence", variance: "cosheaf" } },
+    persistencePolicy: { admitThreshold: 0.5, halfLife: null },
+  };
+}
+
+/** The persistence-organ for a sensorium dir — stands `<dir>/persistence` (lazy chroma collection). */
+function persistenceOrgan(name: string, sensoriumDir: string): PalaceOrgan {
+  const dir = join(sensoriumDir, "persistence");
+  return { name, dir, init: ensureDirOrgan(name, dir) };
+}
+
 /** A ChromaDB-backed instance (ast/form/mesh) — its collection is created lazily on first holder
  *  `put`, so standing it up only means ensuring the store DIRECTORY exists. */
 function ensureDirOrgan(name: string, dir: string): () => PalaceSetupStep[] {
@@ -158,14 +181,19 @@ export function palaceOrgans(): PalaceOrgan[] {
     // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
     { name: "meshpalace",     dir: larMeshPalaceDir(),  init: ensureDirOrgan("meshpalace",     larMeshPalaceDir())  },
     { name: "mesh:who",       dir: meshWhoDir(),        init: ensureDirOrgan("mesh:who",       meshWhoDir())        },
+    persistenceOrgan("mesh:who:persistence",       meshWhoDir()),
     { name: "mesh:authority", dir: meshAuthorityDir(),  init: ensureDirOrgan("mesh:authority", meshAuthorityDir())  },
+    persistenceOrgan("mesh:authority:persistence", meshAuthorityDir()),
     { name: "mesh:flow",      dir: meshFlowDir(),       init: ensureDirOrgan("mesh:flow",      meshFlowDir())       },
+    persistenceOrgan("mesh:flow:persistence",      meshFlowDir()),
     // The `memetic-wikitext` sensorium TREE — the top plus its two co-located PEER children (formal ⋈
     // informal), NEITHER on top. Structure only here (dirs + manifests); the peers' content stores fill
     // elsewhere. The top's coupling.children carry the peers; the coupling read runs the H¹ gate over them.
     { name: "memetic-wikitext",          dir: memeticWikitextSensoriumDir(), init: ensureDirOrgan("memetic-wikitext",          memeticWikitextSensoriumDir()) },
     { name: "memetic-wikitext:formal",   dir: memeticWikitextFormalDir(),    init: ensureDirOrgan("memetic-wikitext:formal",   memeticWikitextFormalDir())    },
+    persistenceOrgan("memetic-wikitext:formal:persistence",   memeticWikitextFormalDir()),
     { name: "memetic-wikitext:informal", dir: memeticWikitextInformalDir(),  init: ensureDirOrgan("memetic-wikitext:informal", memeticWikitextInformalDir())  },
+    persistenceOrgan("memetic-wikitext:informal:persistence", memeticWikitextInformalDir()),
   ];
 }
 
@@ -253,6 +281,9 @@ export function materializeMeshSensorium(): PalaceSetupStep[] {
   const whoDir  = meshWhoDir();
   const authDir = meshAuthorityDir();
   const flowDir = meshFlowDir();
+  const who  = persistenceInfra(whoDir);
+  const auth = persistenceInfra(authDir);
+  const flow = persistenceInfra(flowDir);
   return [
     materializeSensorium("mesh:manifest", meshDir, {
       sensorium: "mesh",
@@ -265,22 +296,27 @@ export function materializeMeshSensorium(): PalaceSetupStep[] {
       ],
       ephemeral: false,
     }),
+    // Every sensorium carries the persistence infrastructure — the perceptual fibers (content/
+    // structure) the parallel fills WHEN it perceives them; the persistence cap it #has from birth.
     materializeSensorium("mesh:who:manifest", whoDir, {
       sensorium: "who",
       lar: "lar:///ha.ka.ba/@lararium/mesh/who",
-      caps: {},
+      caps: { ...who.cap },
+      persistencePolicy: who.persistencePolicy,
       ephemeral: false,
     }),
     materializeSensorium("mesh:authority:manifest", authDir, {
       sensorium: "authority",
       lar: "lar:///ha.ka.ba/@lararium/mesh/authority",
-      caps: {},
+      caps: { ...auth.cap },
+      persistencePolicy: auth.persistencePolicy,
       ephemeral: false,
     }),
     materializeSensorium("mesh:flow:manifest", flowDir, {
       sensorium: "flow",
       lar: "lar:///ha.ka.ba/@lararium/mesh/flow",
-      caps: {},
+      caps: { ...flow.cap },
+      persistencePolicy: flow.persistencePolicy,
       // BASE cap — the coupling-lobe RESERVES its child-edges (empty) for the node-stream effective-
       // connectivity the parallel's transfer-entropy read consults. Reserved slot; no read here.
       children: [],
@@ -302,6 +338,8 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
   const formalDir   = memeticWikitextFormalDir();
   const informalDir = memeticWikitextInformalDir();
   const bands = defaultSensoriumBands();
+  const formal   = persistenceInfra(formalDir);
+  const informal = persistenceInfra(informalDir);
   return [
     materializeSensorium("memetic-wikitext:manifest", topDir, {
       sensorium: "memetic-wikitext",
@@ -314,17 +352,20 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
       ],
       ephemeral: false,
     }),
+    // Each peer carries the persistence infrastructure beside its content self-cap.
     materializeSensorium("memetic-wikitext:formal:manifest", formalDir, {
       sensorium: "formal",
       lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium#formal",
-      caps: { content: { absDir: formalDir, engine: "mempalace" } },   // the memes-on-disk corpus (self-cap → ".")
+      caps: { content: { absDir: formalDir, engine: "mempalace" }, ...formal.cap },   // memes-on-disk corpus (self-cap → ".") + persistence
+      persistencePolicy: formal.persistencePolicy,
       bands,
       ephemeral: false,
     }),
     materializeSensorium("memetic-wikitext:informal:manifest", informalDir, {
       sensorium: "informal",
       lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium#informal",
-      caps: { content: { absDir: informalDir, engine: "mempalace" } }, // the chat-sessions corpus (self-cap → ".")
+      caps: { content: { absDir: informalDir, engine: "mempalace" }, ...informal.cap }, // chat-sessions corpus (self-cap → ".") + persistence
+      persistencePolicy: informal.persistencePolicy,
       bands,
       ephemeral: false,
     }),

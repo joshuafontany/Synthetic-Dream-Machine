@@ -40,8 +40,13 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
     const names = palaceOrgans().map((o) => o.name);
     expect(names).toEqual([
       "mempalace", "structurepalace", "formpalace", "persistencepalace", "contentpalace",
-      "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
-      "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
+      "meshpalace",
+      "mesh:who", "mesh:who:persistence",
+      "mesh:authority", "mesh:authority:persistence",
+      "mesh:flow", "mesh:flow:persistence",
+      "memetic-wikitext",
+      "memetic-wikitext:formal", "memetic-wikitext:formal:persistence",
+      "memetic-wikitext:informal", "memetic-wikitext:informal:persistence",
     ]);
   });
 
@@ -144,7 +149,12 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     expect(who.lar).toBe("lar:///ha.ka.ba/@lararium/mesh/who");
     expect(auth.lar).toBe("lar:///ha.ka.ba/@lararium/mesh/authority");
     expect(flow.lar).toBe("lar:///ha.ka.ba/@lararium/mesh/flow");
-    for (const m of [who, auth, flow]) expect(m.has).toEqual({});   // thin — parallel fills without a structure change
+    // Every sensorium carries the persistence infrastructure (a cosheaf fiber + policy); the
+    // perceptual fibers the parallel fills WHEN it perceives them.
+    for (const m of [who, auth, flow]) {
+      expect(m.has["persistence"]!.variance).toBe("cosheaf");
+      expect(m.persistencePolicy).toEqual({ admitThreshold: 0.5, halfLife: null });
+    }
     // FLOW reserves its coupling-lobe child-edges (empty) for the node-stream effective-connectivity.
     expect(flow.coupling.children).toEqual([]);
   });
