@@ -8,6 +8,7 @@
 import { join } from "node:path";
 import { runTsxScript, runCommand } from "../spawn.js";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
+import { larStateHome, larHome } from "@lararium/node";
 import { larDataDir, larIdentityDir, larRoot } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -85,6 +86,12 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   const islandCidPlugins = join(genesis, "island.cid-plugins");
   const islandManifest   = join(genesis, "island.manifest.json");  // G-CAS slice 1: the CAS index
   const islandCasDir     = join(genesis, "cas");                   // G-CAS slice 1: the blob bytes
+  // The projection watermark (synced-tree) must die WITH the store — a surviving watermark makes the
+  // post-reset ingest read every bags/*.md as "unchanged" and the fresh empty docs stay empty,
+  // silently (GAP 1, regenesis scout 2026-07-01). Both strangler arms wiped: the reader would fall
+  // back to whichever survived.
+  const projectionNew    = join(larStateHome(), "projection");
+  const projectionLegacy = join(larHome(), ".lararium-projection");
 
   console.log("[lares reset] will delete:");
   if (existsSync(storage))   console.log(`  ${storage}`);
@@ -97,6 +104,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   if (existsSync(islandCidPlugins)) console.log(`  ${islandCidPlugins}`);
   if (existsSync(islandManifest))   console.log(`  ${islandManifest}`);
   if (existsSync(islandCasDir))     console.log(`  ${islandCasDir}`);
+  if (existsSync(projectionNew))    console.log(`  ${projectionNew}`);
+  if (existsSync(projectionLegacy)) console.log(`  ${projectionLegacy}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
@@ -111,6 +120,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandCidPlugins, { force: true });
   rmSync(islandManifest,   { force: true });
   rmSync(islandCasDir, { recursive: true, force: true });
+  rmSync(projectionNew,    { recursive: true, force: true });
+  rmSync(projectionLegacy, { recursive: true, force: true });
   console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)
