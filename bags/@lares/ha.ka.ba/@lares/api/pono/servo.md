@@ -90,10 +90,19 @@ Read the bound, ask what overload threatens, and the sign falls out.
   when observed durations rise, **grow** the headroom so a slow-but-honest worker never false-dies;
   when they fall, **shrink** so a true hang dies sooner. The flush-gate lesson read backwards.
   Engine: `adaptiveTimeoutMs`.
+- **Concurrency-limit → SHRINK under load.** A parallel-worker ceiling: when embed latency rises
+  past the no-load baseline × tolerance, **shrink** the limit (multiplicative back-off) to shed the
+  queue; when headroom holds, probe up (additive). The AIMD dial for the parallel-ingest pool.
+  Engine: `mesh/concurrency-dial.ts` (LANDED 2026-07-02).
+
 - **Display-bound window → stay FIXED.** Where the bound's optimum sits structurally at the frame
   clock, the correct self-regulation IS the pin — tuning it adds instability for no gain; overrun
   cures by frame-skip. **role = physics ≠ uniformity** — all bounds self-regulate, each the way its
   physics demands; for some that means holding still.
+
+### The two-sided completion ~ the servo breathes on both banks (2026-07-02)
+
+Every polarity above runs ONE-SIDED — the bound self-tunes from its OWN observed signal. A rhyme-dive (credit-based flow control · ant entrance-encounter · Frank-Starling preload · HPA feedback · quorum-sensing) named the missing half: a one-sided AIMD governor without downstream visibility generates the **BULLWHIP** (amplified oscillation). The cure adds the receiver's voice — **the drain advertises credits, the producer consumes them and SHEDS at zero.** Engine: `mesh/credit-gate.ts` (`credits = maxInFlight − uncommitted`). The AIMD dial becomes the SLOW ceiling-discovery loop; credits the FAST governor tied to PROVEN drain. LAW: *upstream rate tracks a downstream signal, never the producer's guess.* This closes the `projection-nalu#network-ring` "one-sided servo" gap — the governor now hears both banks.
 
 <<~/ahu >>
 
