@@ -3,12 +3,15 @@
  * spawn (prov:Delegation) + handback (interval-close) edges on the KG. Hermetic (a fake exec proves
  * the args/NDJSON the seam builds), plus the pure derivation over real temp transcript files.
  */
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeAll } from "vitest";
+import { execFileSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { deriveSubagentEdges, observeSubagentWorldlines } from "../src/worldline-observe.js";
 import { resolveKgIo } from "../src/worldline-kg.js";
+import { resolveMempalacePython } from "../src/spawn-resolve.js";
 
 /** Build a session transcript dir with one spirit transcript carrying two timestamped turns. */
 function fixture(): { dir: string; transcript: string; run: string; agentId: string; handle: string } {
@@ -147,5 +150,63 @@ describe("observeSubagentWorldlines — persist spawn + close handback (fake exe
       expect(res.observed).toEqual([]);
       expect(fe.calls.length).toBe(0);
     } finally { rmSync(fx.dir, { recursive: true, force: true }); }
+  });
+});
+
+// ── SINK-side idempotence (real kg_io.py) — the watermark demoted to a cache ─────────────
+const PY = resolveMempalacePython();
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+const SUBMODULE = join(REPO_ROOT, "mempalace");
+let kgImportable = false;
+beforeAll(() => {
+  if (!PY) return;
+  try {
+    execFileSync(PY, ["-c", "import mempalace.knowledge_graph"], {
+      cwd: SUBMODULE,
+      env: { ...process.env, PYTHONPATH: SUBMODULE },
+      stdio: "ignore",
+    });
+    kgImportable = true;
+  } catch { kgImportable = false; }
+});
+
+describe.skipIf(!PY)("observeSubagentWorldlines re-run — SINK-side lifecycle idempotence (integration)", () => {
+  /** Dump every (predicate, valid_from, valid_to, source_drawer_id, id) row for exact comparison. */
+  function dump(palace: string): Array<[string, string | null, string | null, string | null, string]> {
+    const code =
+      "import sqlite3,sys,json;" +
+      "c=sqlite3.connect(sys.argv[1]);" +
+      "print(json.dumps([list(r) for r in c.execute('SELECT predicate,valid_from,valid_to,source_drawer_id,id FROM triples ORDER BY id')]))";
+    const out = execFileSync(PY!, ["-c", code, join(palace, "knowledge_graph.sqlite3")], {
+      cwd: SUBMODULE,
+      env: { ...process.env, PYTHONPATH: SUBMODULE },
+      encoding: "utf8",
+    });
+    return JSON.parse(out.trim());
+  }
+
+  test("a WIPED-WATERMARK re-run yields IDENTICAL KG rows — no re-add, no valid_to churn", () => {
+    if (!kgImportable) return; // mempalace not importable in this env — treat as skip
+    const fx = fixture();
+    const dir = mkdtempSync(join(tmpdir(), "lar-wl-idem-"));
+    const palace = join(dir, "palace");
+    mkdirSync(palace, { recursive: true });
+    try {
+      // Run 1 — the spirit's whole lifecycle observes: spawn adds, handback closes.
+      const first = observeSubagentWorldlines(fx.transcript, { palacePath: palace });
+      expect(first.observed).toEqual([fx.handle]);
+      const rowsAfterFirst = dump(palace);
+      expect(rowsAfterFirst).toHaveLength(1);
+      expect(rowsAfterFirst[0]![2]).toBe("2026-06-29T00:05:00Z"); // interval closed at handback
+
+      // Run 2 — the watermark "wiped" (this call carries none): the SINK holds the law.
+      const second = observeSubagentWorldlines(fx.transcript, { palacePath: palace });
+      expect(second.observed).toEqual([fx.handle]); // it re-derived — and the sink absorbed it
+      const rowsAfterSecond = dump(palace);
+      expect(rowsAfterSecond).toEqual(rowsAfterFirst); // IDENTICAL rows — same ids, same intervals
+    } finally {
+      rmSync(fx.dir, { recursive: true, force: true });
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

@@ -151,9 +151,10 @@ export interface ObserveResult {
  * handback. Best-effort durability: the KG is a re-derivable projection (transcripts are truth), so a
  * {@link KgUnavailable} is SWALLOWED (the caller's verbatim/AST capture is never sunk by an absent KG).
  *
- * The caller (lares subagents) SHOULD gate this with a per-handle watermark — a re-run re-derives the
- * same edges, and while persist is idempotent at the KG for a still-OPEN triple, closing-then-re-adding
- * across runs is not, so observe each spirit's lifecycle ONCE (the transcript is complete at Stop).
+ * Re-runs are safe at the SINK: kg_io.py holds lifecycle idempotence (an identical S/P/O + valid_from
+ * skips re-add even after the interval closed; close-of-already-closed no-ops), so a wiped watermark
+ * never duplicates rows or churns valid_to. The caller's per-handle watermark (lares subagents) thereby
+ * demotes to a CACHE — it saves the python spawn, it no longer carries correctness.
  *
  * `only` (optional) restricts the pass to the named handles (the un-watermarked spirits this run).
  */

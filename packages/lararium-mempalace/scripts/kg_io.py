@@ -13,8 +13,14 @@ way drawer_io.py calls the collection. We never edit mempalace/.
   add  PATCHFILE       <- NDJSON {subject,predicate,object,valid_from?,valid_to?,
                           turn_key?,source_file?,confidence?} ; one kg.add_triple each.
                           turn_key rides source_drawer_id (the kapae filter slot).
+                          SINK-idempotent over the WHOLE lifecycle: an identical S/P/O
+                          triple with the SAME valid_from — open (add_triple's own
+                          still-open dedup) or already CLOSED (a re-observed
+                          spawn->handback pair) — skips, so a re-run re-adds nothing.
   invalidate PATCHFILE <- NDJSON {subject,predicate,object,ended?} ; one kg.invalidate
                           each — closes a triple's valid_to by S/P/O (the handback close).
+                          SINK-idempotent: close-of-already-closed no-ops (only a row
+                          with an OPEN valid_to closes; the count reports real closes).
   kapae --turn-key K [--ended T]
                        <- close valid_to on EVERY still-open triple keyed to turn K
                           (append-only UPDATE; bitemporal valid-close, history preserved).
@@ -30,6 +36,7 @@ import os
 import sqlite3
 from datetime import date
 
+from mempalace.config import sanitize_iso_temporal
 from mempalace.knowledge_graph import KnowledgeGraph, DEFAULT_KG_PATH
 
 # This batch CLI's cap-stack is light: it #has the shared NDJSON record reader + the
@@ -53,33 +60,79 @@ def _kg(palace):
     return KnowledgeGraph(db_path=_kg_path(palace))
 
 
+def _canon_spo(subject, predicate, obj):
+    # Mirror KnowledgeGraph's storage canonicalization (_entity_id + predicate
+    # normalization) so our idempotence probes address the SAME stored rows.
+    def entity_id(name):
+        return name.lower().replace(" ", "_").replace("'", "")
+
+    return entity_id(subject), predicate.lower().replace(" ", "_"), entity_id(obj)
+
+
 def cmd_add(args):
     kg = _kg(args.palace)
+    KnowledgeGraph(db_path=_kg_path(args.palace))  # ensure schema before the probe connection
+    conn = sqlite3.connect(_kg_path(args.palace))
     added = 0
-    for r in read_ndjson_records(args.patchfile):
-        kg.add_triple(
-            r["subject"],
-            r["predicate"],
-            r["object"],
-            valid_from=r.get("valid_from"),
-            valid_to=r.get("valid_to"),
-            confidence=float(r.get("confidence", 1.0)),
-            source_file=r.get("source_file"),
-            # The turn-DAG key rides the RFC-002 provenance slot — the kapae filter column.
-            source_drawer_id=r.get("turn_key"),
-            adapter_name=ADAPTER_NAME,
-        )
-        added += 1
-    print(json.dumps({"added": added, "adapter": ADAPTER_NAME}))
+    skipped = 0
+    try:
+        for r in read_ndjson_records(args.patchfile):
+            sub_id, pred, obj_id = _canon_spo(r["subject"], r["predicate"], r["object"])
+            valid_from = sanitize_iso_temporal(r.get("valid_from"), "valid_from")
+            # SINK-side idempotence — the SPAWN law (add_triple dedups an identical
+            # still-open triple) extended over the whole lifecycle: the same S/P/O with
+            # the SAME interval start already stands, open OR closed (a re-observed
+            # spawn->handback pair), so a re-run mints no duplicate row. `IS ?` compares
+            # NULL-safe (a dateless edge dedups too).
+            existing = conn.execute(
+                "SELECT 1 FROM triples WHERE subject=? AND predicate=? AND object=? AND valid_from IS ?",
+                (sub_id, pred, obj_id, valid_from),
+            ).fetchone()
+            if existing:
+                skipped += 1
+                continue
+            kg.add_triple(
+                r["subject"],
+                r["predicate"],
+                r["object"],
+                valid_from=r.get("valid_from"),
+                valid_to=r.get("valid_to"),
+                confidence=float(r.get("confidence", 1.0)),
+                source_file=r.get("source_file"),
+                # The turn-DAG key rides the RFC-002 provenance slot — the kapae filter column.
+                source_drawer_id=r.get("turn_key"),
+                adapter_name=ADAPTER_NAME,
+            )
+            added += 1
+    finally:
+        conn.close()
+    print(json.dumps({"added": added, "skipped": skipped, "adapter": ADAPTER_NAME}))
 
 
 def cmd_invalidate(args):
     kg = _kg(args.palace)
+    KnowledgeGraph(db_path=_kg_path(args.palace))  # ensure schema before the probe connection
+    conn = sqlite3.connect(_kg_path(args.palace))
     n = 0
-    for r in read_ndjson_records(args.patchfile):
-        kg.invalidate(r["subject"], r["predicate"], r["object"], ended=r.get("ended"))
-        n += 1
-    print(json.dumps({"invalidated": n}))
+    already_closed = 0
+    try:
+        for r in read_ndjson_records(args.patchfile):
+            sub_id, pred, obj_id = _canon_spo(r["subject"], r["predicate"], r["object"])
+            # SINK-side idempotence (mirrors kapae's `valid_to IS NULL` law): only an OPEN
+            # interval closes; close-of-already-closed no-ops — never a valid_to re-churn,
+            # and the count reports REAL closes only.
+            open_row = conn.execute(
+                "SELECT 1 FROM triples WHERE subject=? AND predicate=? AND object=? AND valid_to IS NULL",
+                (sub_id, pred, obj_id),
+            ).fetchone()
+            if not open_row:
+                already_closed += 1
+                continue
+            kg.invalidate(r["subject"], r["predicate"], r["object"], ended=r.get("ended"))
+            n += 1
+    finally:
+        conn.close()
+    print(json.dumps({"invalidated": n, "already_closed": already_closed}))
 
 
 def cmd_kapae(args):
