@@ -16,8 +16,11 @@ import { join } from "node:path";
 import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
 import { palaceOrgans, organHealthy, readMemeticWikitextCoupling } from "@lararium/node";
+import { readClaudeCleanupPeriod, CLEANUP_PERIOD_DAYS_FLOOR } from "../claude-wire.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
+
+const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is unset.
 
 /**
  * `lares status --palaces` — the palace-organ health table (re-runnable). Reads the SAME registry
@@ -97,12 +100,21 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
   const hasBoot    = existsSync(bootstrap);
   const storageStr = dirSizeHint(storage);
 
+  // Session-file retention — the mempalace's verbatim harvest source lives in
+  // ~/.claude/projects and Claude prunes it on startup by cleanupPeriodDays. Surface
+  // it so a short window (evaporating raw memory before it's mined) stays visible.
+  const cleanupRaw = readClaudeCleanupPeriod();
+  const cleanupEffective = cleanupRaw ?? CLAUDE_DEFAULT_CLEANUP_DAYS;
+  const cleanupProtected = cleanupEffective >= CLEANUP_PERIOD_DAYS_FLOOR;
+
   // Snapshot fields — the same data the prose renders, shaped for an agent.
   const data: Record<string, unknown> = {
     bootstrap: hasBoot ? "present" : "absent",
     storage:   storageStr,
     port,
     portInUse,
+    cleanupPeriodDays: cleanupRaw,
+    cleanupProtected,
   };
   let residencyLine: string | null = null;
 
@@ -143,6 +155,9 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
       console.log(`  storage:     ${storageStr}`);
       console.log(`  port ${port}:  ${portInUse ? "in use (node likely running)" : "free"}`);
       if (residencyLine) console.log(`  residency:   ${residencyLine}`);
+      console.log(cleanupProtected
+        ? `  retention:   ${cleanupEffective} days — session files kept ~forever (mempalace source safe)`
+        : `  retention:   ${cleanupEffective} days${cleanupRaw === null ? " (Claude default, unset)" : ""} — raise with \`lares cleanup-days max\` (mempalace source evaporates)`);
     },
   });
   return 0;

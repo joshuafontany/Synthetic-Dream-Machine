@@ -115,6 +115,17 @@ const HOOK_SPECS: readonly HookSpec[] = [
   { event: "SessionEnd", script: "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh", timeout: 60, runner: "bash" },
 ];
 
+/**
+ * The retention floor for `cleanupPeriodDays` — how many days Claude Code keeps a session
+ * file before deleting it at startup (docs: default 30, minimum 1, `0` REJECTED as invalid,
+ * so a large finite number is the only "keep forever" idiom). 99999 ≈ 274 years.
+ *
+ * Those session files (~/.claude/projects/…) ARE the mempalace's verbatim-memory harvest
+ * source; a low cleanup window evaporates the raw ground before the ingest hook mines it,
+ * so `lares wake --claude` raises the floor as part of standing the memory shore.
+ */
+export const CLEANUP_PERIOD_DAYS_FLOOR = 99999;
+
 export type WireAction = "wired" | "present" | "missing-script";
 
 export interface ClaudeWireStep {
@@ -194,6 +205,19 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
     changed = true;
   }
 
+  // Retention floor — keep the session files (the mempalace's harvest source) from
+  // evaporating. SET-IF-ABSENT only: an operator who already chose a value keeps it
+  // (don't-clobber); `lares cleanup-days` raises an existing-but-low value explicitly.
+  if (settings["cleanupPeriodDays"] === undefined) {
+    settings["cleanupPeriodDays"] = CLEANUP_PERIOD_DAYS_FLOOR;
+    steps.push({ item: "cleanupPeriodDays", action: "wired", detail: `set ${CLEANUP_PERIOD_DAYS_FLOOR} (session files kept ~forever — the mempalace harvest source)` });
+    changed = true;
+  } else {
+    const cur = settings["cleanupPeriodDays"];
+    const low = typeof cur === "number" && cur < CLEANUP_PERIOD_DAYS_FLOOR;
+    steps.push({ item: "cleanupPeriodDays", action: "present", detail: low ? `${String(cur)} days (below floor — raise with \`lares cleanup-days\`)` : `${String(cur)} days` });
+  }
+
   // MCP lives in ~/.claude.json (via `claude mcp add`), NOT settings.json — Claude
   // ignores mcpServers here. Clean up any dead settings.json entry from earlier wiring,
   // then register through the real store.
@@ -212,4 +236,69 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
   }
 
   return { settingsPath, backedUp, changed, steps };
+}
+
+/** Resolve ~/.claude/settings.json for the given (or default) home. */
+function claudeSettingsPath(home?: string): string {
+  return join(home ?? homedir(), ".claude", "settings.json");
+}
+
+/**
+ * Read the current `cleanupPeriodDays` from ~/.claude/settings.json (pure inspection,
+ * no lock). Returns the number, or null if unset / the file is absent-or-unreadable —
+ * a null reads as "Claude's 30-day default applies" at the surface.
+ */
+export function readClaudeCleanupPeriod(opts: { home?: string } = {}): number | null {
+  const path = claudeSettingsPath(opts.home);
+  if (!existsSync(path)) return null;
+  try {
+    const s = JSON.parse(readFileSync(path, "utf8")) as ClaudeSettings;
+    const v = s["cleanupPeriodDays"];
+    return typeof v === "number" ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+export interface CleanupPeriodResult {
+  readonly settingsPath: string;
+  readonly previous: number | null;
+  readonly value: number;
+  readonly changed: boolean;
+}
+
+/**
+ * Set `cleanupPeriodDays` in ~/.claude/settings.json EXPLICITLY (operator intent — forces
+ * the value even over an existing lower one, unlike the set-if-absent wire step). Same
+ * lock + backup + validate-before-replace discipline as the wire flow. Rejects a value
+ * below Claude's minimum of 1 (0 is invalid to Claude, and would evaporate everything).
+ */
+export async function setClaudeCleanupPeriod(days: number, opts: { home?: string } = {}): Promise<CleanupPeriodResult> {
+  if (!Number.isInteger(days) || days < 1) {
+    throw new Error(`cleanupPeriodDays must be a whole number ≥ 1 (Claude rejects 0); got ${days}. Use a large number like ${CLEANUP_PERIOD_DAYS_FLOOR} to keep session files ~forever.`);
+  }
+  const settingsPath = claudeSettingsPath(opts.home);
+  mkdirSync(join(opts.home ?? homedir(), ".claude"), { recursive: true });
+  const lockPath = settingsPath + ".lock";
+  await acquireLock(lockPath);
+  try {
+    let settings: ClaudeSettings = {};
+    if (existsSync(settingsPath)) {
+      try {
+        settings = JSON.parse(readFileSync(settingsPath, "utf8")) as ClaudeSettings;
+      } catch {
+        throw new Error(`${settingsPath} is not valid JSON — refusing to overwrite (fix it, then re-run).`);
+      }
+      copyFileSync(settingsPath, settingsPath + ".bak");
+    }
+    const prev = typeof settings["cleanupPeriodDays"] === "number" ? (settings["cleanupPeriodDays"] as number) : null;
+    settings["cleanupPeriodDays"] = days;
+    const tmp = settingsPath + ".tmp";
+    writeFileSync(tmp, JSON.stringify(settings, null, 2) + "\n", "utf8");
+    JSON.parse(readFileSync(tmp, "utf8")); // validate before replacing
+    renameSync(tmp, settingsPath);
+    return { settingsPath, previous: prev, value: days, changed: prev !== days };
+  } finally {
+    rmSync(lockPath, { force: true });
+  }
 }
