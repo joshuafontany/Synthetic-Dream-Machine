@@ -130,7 +130,7 @@ function deriveArc(sourceFile?: string): string | null {
  * Downstream reads the field as a free string (adapter.py FieldSpec, no enum), so
  * the honest value rides without breaking a consumer.
  */
-function deriveSurface(sourceFile?: string): string {
+export function deriveSurface(sourceFile?: string): string {
   if (!sourceFile) return "unknown";
   const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
   const pfx = base.split("__")[0] ?? "";
@@ -154,7 +154,7 @@ function stripSurfaceToken(base: string): string {
  * A drawer with a name reads as a spirit turn (lar_sidechain), kept queryable by
  * actor in the spirits wing — distinct from the main agent's verbatim.
  */
-function deriveAgent(sourceFile?: string): string | null {
+export function deriveAgent(sourceFile?: string): string | null {
   if (!sourceFile) return null;
   const base = stripSurfaceToken(sourceFile.replace(/\\/g, "/").split("/").pop() ?? "");
   const m = /^(.+?)__agent-[^/]+\.jsonl$/.exec(base);
@@ -171,7 +171,7 @@ function deriveAgent(sourceFile?: string): string | null {
  * Flat `subagents/` gives a `run.child` path; deep parentUuid nesting is a
  * documented extension (agent-worldline#open).
  */
-function deriveHandle(sourceFile?: string, frontier?: string | null): string | null {
+export function deriveHandle(sourceFile?: string, frontier?: string | null): string | null {
   if (!sourceFile) return null;
   const base = stripSurfaceToken(sourceFile.replace(/\\/g, "/").split("/").pop() ?? "");
   const m = /__agent-([^/]+?)__run-([^/]+)\.jsonl$/.exec(base);
@@ -191,7 +191,7 @@ function deriveHandle(sourceFile?: string, frontier?: string | null): string | n
  * `lar_parent_handle` resolves back to the main agent's `lar_agent_handle` — the
  * attribution graph closes (agent-worldline#attribution).
  */
-function deriveRootHandle(sourceFile?: string, frontier?: string | null): string | null {
+export function deriveRootHandle(sourceFile?: string, frontier?: string | null): string | null {
   if (!sourceFile) return null;
   const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
   if (base.includes("__agent-")) return null; // a spirit — not a root

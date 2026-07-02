@@ -37,6 +37,7 @@ export * from "./oracle-read-client.js";
 export * from "./mesh-palace.js";
 export * from "./bearing-harvest.js";
 export * from "./turn-harvest.js";
+export * from "./stamp-filter.js";
 export * from "./mirror-paths.js";
 export * from "./tiddler-store.js";
 export * from "./recipe.js";

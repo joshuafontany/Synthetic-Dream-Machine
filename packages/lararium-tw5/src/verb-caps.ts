@@ -23,7 +23,7 @@
  * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel
  */
 
-import { composeVessel, type CapModule } from "@lararium/mesh";
+import { composeVessel, readStampFilters, hitPassesStampFilters, drawerPassesStampFilters, type CapModule, type StampFilters } from "@lararium/mesh";
 import type {
   SparseFormVector,
   WorldlineStubWire,
@@ -157,6 +157,69 @@ export function telemetryProviderCap(impl: TelemetryProvider): CapModule {
 
 // ── VERB-GROUP caps — declare the providers they route, register their verb(s) over the resolved impls ─
 
+/** Search-path stamp filtering: OVERFETCH the semantic search (×5, floor 25, cap 100 — the
+ *  sidecar's own limit ceiling), post-filter each hit ({@link hitPassesStampFilters}: exact
+ *  source-derived surface/agent + the sovereign gradient re-read for voice/band/drift — the
+ *  search wire carries no drawer metadata and no turn key to join on), then cut to the caller's
+ *  limit. Honest counts ride out: `scanned` (pre-filter) + `matched` (post-filter, pre-cut). */
+async function filteredSearch(
+  client: RecallClient,
+  filters: StampFilters,
+  a: { query: string; wing?: string | undefined; limit?: number | undefined },
+): Promise<Record<string, unknown>> {
+  const limit = a.limit !== undefined && Number.isFinite(a.limit) ? Math.max(1, a.limit) : 5;
+  const fetchLimit = Math.min(100, Math.max(25, limit * 5));
+  const res = await client.search({ query: a.query, ...(a.wing !== undefined ? { wing: a.wing } : {}), limit: fetchLimit });
+  const all = Array.isArray(res["results"]) ? (res["results"] as Array<Record<string, unknown>>) : [];
+  const matched = all.filter((h) => hitPassesStampFilters(filters, h));
+  return {
+    mode: "search",
+    ...res,
+    results: matched.slice(0, limit),
+    filters: filters as unknown as Record<string, unknown>,
+    scanned: all.length,
+    matched: matched.length,
+  };
+}
+
+/** List-path stamp filtering: page the drawer list (wing-scoped when given) and keep the drawers
+ *  whose stamped `lar_*` metadata passes ({@link drawerPassesStampFilters} — exact, per-drawer).
+ *  Pages the whole scope, so a caller SHOULD pass the narrowest wing it knows (the drawersWhere
+ *  discipline). Honest counts: `scanned` + `matched` ride out beside the cut list. */
+async function filteredList(
+  client: RecallClient,
+  filters: StampFilters,
+  a: { wing?: string | undefined; limit?: number | undefined },
+): Promise<Record<string, unknown>> {
+  const limit = a.limit !== undefined && Number.isFinite(a.limit) ? Math.max(1, a.limit) : 20;
+  const pageSize = 200;
+  const kept: Array<Record<string, unknown>> = [];
+  let scanned = 0;
+  let matched = 0;
+  for (let offset = 0; ; offset += pageSize) {
+    const page = await client.listDrawers({ ...(a.wing !== undefined ? { wing: a.wing } : {}), limit: pageSize, offset });
+    const drawers = Array.isArray(page["drawers"]) ? (page["drawers"] as Array<Record<string, unknown>>) : [];
+    scanned += drawers.length;
+    for (const d of drawers) {
+      const meta = (d["metadata"] as Record<string, unknown> | undefined) ?? {};
+      if (!drawerPassesStampFilters(filters, meta)) continue;
+      matched += 1;
+      if (kept.length < limit) kept.push(d);
+    }
+    const count = typeof page["count"] === "number" ? (page["count"] as number) : drawers.length;
+    const total = typeof page["total"] === "number" ? (page["total"] as number) : scanned;
+    if (count < pageSize || offset + count >= total) break;
+  }
+  return {
+    mode: "list",
+    drawers: kept,
+    total: matched,
+    filters: filters as unknown as Record<string, unknown>,
+    scanned,
+    matched,
+  };
+}
+
 /** recall — the mempalace READ membrane (semantic-search | list | get | multi-graph fuse). Requires
  *  the mempalace read-client + the form store (the dual fuse). */
 export function recallVerbCap(): CapModule {
@@ -189,10 +252,18 @@ export function recallVerbCap(): CapModule {
           const apertureGrain = typeof agRaw === "number" || typeof agRaw === "string" ? agRaw : undefined;
           const awRaw        = args["apertureWidth"] ?? args["aperture_width"];
           const apertureWidth = typeof awRaw === "number" ? awRaw : typeof awRaw === "string" && awRaw !== "" ? Number(awRaw) : undefined;
+          // STAMP FILTERS (voice · band · agent · surface · drift) — compose with the semantic
+          // query (post-filter, honest counts) or the list (exact lar_* metadata). Throws on an
+          // invalid band; the multi fuse re-shapes hits, so filters + dual refuse loud (never a
+          // silent drop) until the fuse learns them.
+          const filters = readStampFilters(args);
+          if (filters && dual) throw new Error("recall: stamp filters (--voice/--band/--agent/--surface/--drift) do not yet compose with --multi");
           // Warm pooled sidecar (started once, reused, self-healing) — recall stays sub-second after the
           // first cold start; this makes recall-into-wake fast.
           return mp.withClient(async (client) => {
             if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
+            if (filters && query) return filteredSearch(client, filters, { query, wing, limit });
+            if (filters) return filteredList(client, filters, { wing, limit });
             if (dual && query) {
               // The form-leg construction (markers→vector derive IN the @daemon VM, content-only
               // degradation on fault) + the RRF fuse ride the form provider's multiRecall impl, verbatim;

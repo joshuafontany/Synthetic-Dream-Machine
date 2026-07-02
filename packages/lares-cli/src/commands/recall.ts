@@ -15,6 +15,14 @@
  *   lares recall --list [--wing <w>]    list drawers (no query)
  *   lares recall ... --port <n>         daemon port
  *
+ * STAMP FILTERS — compose with the search or the list (honest counts, never a
+ * silent drop): --voice <name> · --band <canon|synthesis|provisional|raw> ·
+ * --agent <id|handle-prefix|pet-name> · --surface <claude|codex|copilot-cli|copilot-vscode> ·
+ * --drift (drift-flagged turns only). List mode reads the stamped lar_* drawer
+ * metadata exactly; search mode reads surface/agent exactly off the source name
+ * and re-runs the capture's own gradient reader for voice/band/drift (the search
+ * wire returns no drawer metadata — see mesh/stamp-filter.ts).
+ *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/lararium-memory#shared-mesh
  */
 
@@ -42,9 +50,13 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   const wing    = args.options["wing"];
   const limit   = args.options["limit"];
   const wantList = args.flags["list"];
+  // The stamp filters (voice · band · agent · surface · drift) — a filter alone implies --list.
+  const filterKeys = ["voice", "band", "agent", "surface"] as const;
+  const hasFilters = filterKeys.some((k) => args.options[k] !== undefined) || args.flags["drift"] === true;
 
-  if (!query && !drawer && !wantList) {
+  if (!query && !drawer && !wantList && !hasFilters) {
     console.error("usage: lares recall <keywords...> | --drawer <id> | --list [--wing <w>] [--limit <n>]");
+    console.error("  stamp filters: --voice <name> --band <canon|synthesis|provisional|raw> --agent <id> --surface <claude|codex|...> --drift");
     return 2;
   }
 
@@ -54,6 +66,8 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   else if (query)        verbArgs["query"]  = query;
   if (wing  !== undefined) verbArgs["wing"]  = wing;
   if (limit !== undefined) verbArgs["limit"] = Number(limit);
+  for (const k of filterKeys) if (args.options[k] !== undefined) verbArgs[k] = args.options[k];
+  if (args.flags["drift"] === true) verbArgs["drift"] = true;
 
   const portOpt = args.options["port"];
 
@@ -107,7 +121,9 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
         console.log(typeof d["content"] === "string" ? d["content"] : JSON.stringify(d, null, 2));
       } else if (mode === "search") {
         const hits = Array.isArray(out["results"]) ? (out["results"] as Array<Record<string, unknown>>) : [];
-        console.log(`recall "${query}" — ${hits.length} hit${hits.length === 1 ? "" : "s"}`);
+        const fnote = typeof out["scanned"] === "number"
+          ? ` (filtered: ${String(out["matched"] ?? hits.length)} of ${String(out["scanned"])} scanned)` : "";
+        console.log(`recall "${query}" — ${hits.length} hit${hits.length === 1 ? "" : "s"}${fnote}`);
         for (const h of hits) {
           const sim  = typeof h["similarity"] === "number" ? `${(h["similarity"] * 100).toFixed(0)}%` : "  ?";
           const loc  = [h["wing"], h["room"]].filter(Boolean).join("/") || "—";
@@ -118,7 +134,8 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
         // list
         const drawers = Array.isArray(out["drawers"]) ? (out["drawers"] as Array<Record<string, unknown>>) : [];
         const total = out["total"];
-        console.log(`drawers ${drawers.length}${typeof total === "number" ? ` of ${total}` : ""}`);
+        const fnote = typeof out["scanned"] === "number" ? ` (filtered from ${String(out["scanned"])} scanned)` : "";
+        console.log(`drawers ${drawers.length}${typeof total === "number" ? ` of ${total}` : ""}${fnote}`);
         for (const d of drawers) {
           const loc = [d["wing"], d["room"]].filter(Boolean).join("/") || "—";
           console.log(`  ${String(d["drawer_id"] ?? d["id"] ?? "?")}  ${loc}`);

@@ -137,6 +137,37 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     ],
     next: ["lares status --palaces", "lares harvest --all"],
   },
+
+  recall: {
+    synopsis:
+      "Read the verbatim PLACE memory (mempalace) THROUGH the @daemon seat — semantic search, one-drawer " +
+      "fetch, or a drawer list. STAMP FILTERS compose with the search or the list and report honest " +
+      "counts (matched of scanned), never a silent drop: the list path matches the stamped lar_* drawer " +
+      "metadata exactly; the search path reads surface/agent exactly off the source name and re-runs the " +
+      "capture's own gradient reader for voice/band/drift (the search wire returns no drawer metadata).",
+    examples: [
+      "lares recall keyhive convergent removal      # semantic search (default 5 hits)",
+      "lares recall gate --wing wing_myproj         # scope to one project wing",
+      "lares recall verdict --surface codex         # only codex-harness turns",
+      "lares recall fork --voice Council --band canon   # filters compose (AND)",
+      "lares recall --list --agent a1d5 --wing wing_x__spirits  # one spirit's drawers",
+      "lares recall --drift --wing wing_x           # drift-flagged drawers only",
+      "lares recall --drawer wing_x_a1b2c3          # one drawer verbatim",
+    ],
+    flags: [
+      "--wing <w>      scope to one project wing (pass the narrowest wing you know)",
+      "--limit <n>     cap results (default 5 search / 20 filtered list)",
+      "--drawer <id>   fetch one drawer verbatim",
+      "--list          list drawers (a stamp filter alone implies it)",
+      "--voice <name>  keep turns a named Voice held (e.g. Council, Ink-Clerk)",
+      "--band <b>      canon | synthesis | provisional | raw (the register ladder)",
+      "--agent <a>     spirit id / worldline-handle prefix, or the exact pet-name",
+      "--surface <s>   claude | codex | copilot-cli | copilot-vscode",
+      "--drift         drift-flagged turns only",
+      "--port <n>      daemon port",
+    ],
+    next: ["lares worldline <session>   # walk the session's spirit tree", "lares telemetry --wing <w>"],
+  },
 };
 
 /**
