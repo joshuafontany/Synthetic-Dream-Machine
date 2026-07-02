@@ -26,7 +26,7 @@ export interface ChangePointReading {
 }
 
 /** Per-dimension mean and (population) variance of an observation matrix (rows = obs, cols = dims). */
-function meanVar(rows: readonly (readonly number[])[], dims: number): { mean: number[]; var: number[] } {
+export function meanVar(rows: readonly (readonly number[])[], dims: number): { mean: number[]; var: number[] } {
   const m = rows.length;
   const mean = new Array<number>(dims).fill(0);
   const varr = new Array<number>(dims).fill(0);
