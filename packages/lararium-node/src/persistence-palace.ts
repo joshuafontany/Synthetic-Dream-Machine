@@ -25,8 +25,11 @@ import {
 import { resolvePersistencePalaceSpawn } from "@lararium/mempalace";
 
 import {
-  PalaceHolderRegistry, canonicalDirOf, makeServeSpawn, type PalaceHolderSpawn,
+  composePalace, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn,
 } from "./palace-holder.js";
+
+/** the palace label — the transport registry key. */
+const LABEL = "persistence";
 
 /** A testimony's provenance as the caller presents it (attribution + causal position). */
 export interface RecordProvenance {
@@ -59,9 +62,6 @@ export interface PersistencePalace {
   close(): Promise<void>;
 }
 
-/** ONE registry per palace TYPE — persistence holders stay separate from structure/form holders. */
-const registry = new PalaceHolderRegistry("persistence");
-
 /** Default holder spawn: the venv-aware python running `persistence_io.py serve --palace <dir>`. */
 const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolvePersistencePalaceSpawn);
 
@@ -78,29 +78,27 @@ export interface PersistencePalaceOptions {
  * this reference. Each sensorium composes its OWN instance — persistence is a cap, not a singleton.
  */
 export function makePersistencePalace(dir: string, opts: PersistencePalaceOptions = {}): PersistencePalace {
-  const canonicalDir = canonicalDirOf(dir);
-  const timeoutMs = opts.timeoutMs ?? 30_000;
-  const holder = registry.acquire(canonicalDir, opts.spawn ?? defaultHolderSpawn, timeoutMs);
-  let closed = false;
+  // Compose the SHARED transport cap; layer the persistence op-surface + the mesh keel below.
+  const p = composePalace(LABEL, dir, opts.spawn ?? defaultHolderSpawn, opts.timeoutMs ?? 30_000);
 
-  const tidOf = (kind: string, assertion: readonly number[], p: RecordProvenance): Promise<string> =>
-    sha256Hex(canonicalJsonBytes({ signer: p.signer, frontier: p.frontier, assertion }), defaultCryptoProvider);
+  const tidOf = (kind: string, assertion: readonly number[], prov: RecordProvenance): Promise<string> =>
+    sha256Hex(canonicalJsonBytes({ signer: prov.signer, frontier: prov.frontier, assertion }), defaultCryptoProvider);
 
   return {
     async record(kind, assertion, provenance, pubinfo = {}, document = ""): Promise<{ tid: string }> {
       const tid = await tidOf(kind, assertion, provenance);
-      await holder.send("put", {
+      await p.send("put", {
         tid, kind, assertion, signer: provenance.signer, frontier: provenance.frontier, pubinfo, document,
       });
       return { tid };
     },
 
     async get(tid: string): Promise<Testimony | null> {
-      return (await holder.send("get", { tid })) as Testimony | null;
+      return (await p.send("get", { tid })) as Testimony | null;
     },
 
     async witness(tid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }> {
-      const r = (await holder.send("witness", {
+      const r = (await p.send("witness", {
         tid, signer: edge.signer, frontier: edge.frontier, polarity: edge.polarity,
         ...(edge.tick !== undefined ? { tick: edge.tick } : {}),
       })) as { ok?: boolean; witnesses?: number } | null;
@@ -108,25 +106,21 @@ export function makePersistencePalace(dir: string, opts: PersistencePalaceOption
     },
 
     async reentry(tid, policy = WITNESS_POLICY, now?): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null> {
-      const t = (await holder.send("get", { tid })) as Testimony | null;
+      const t = (await p.send("get", { tid })) as Testimony | null;
       if (t === null) return null;
       return reentryPrior(t, policy, now);   // the keel derives standing+voice — the store never does
     },
 
     async admit(candidate, policy = WITNESS_POLICY): Promise<{ admit: boolean; score: number }> {
-      const r = (await holder.send("neighbors", { assertion: candidate, k: 32 })) as { population?: number[][] } | null;
+      const r = (await p.send("neighbors", { assertion: candidate, k: 32 })) as { population?: number[][] } | null;
       return keelAdmit(candidate, r?.population ?? [], policy);   // the keel scores — the store only supplies the population
     },
 
-    async close(): Promise<void> {
-      if (closed) return;
-      closed = true;
-      registry.release(holder);
-    },
+    close: p.close,
   };
 }
 
 /** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
 export function _livePersistenceHolderCount(): number {
-  return registry.size();
+  return livePalaceHolderCount(LABEL);
 }

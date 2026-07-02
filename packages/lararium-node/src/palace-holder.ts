@@ -263,6 +263,43 @@ export class PalaceHolderRegistry {
 }
 
 /**
+ * composePalace — the SHARED transport composition every palace-instance #has (the YIN collapse of
+ * the copy-pasted registry+acquire+close boilerplate across structure/form/persistence/content). A
+ * palace = a NAMELESS entity whose behavior IS its cap-stack: this composer supplies the transport
+ * cap (a per-LABEL registry → one ref-counted holder per canonical dir + a `send`/`close` pair);
+ * each palace layers only its OWN thin typed op-surface (put/kapae · encode_store/query ·
+ * record/witness — kept DISTINCT, the sidecar-2-shapes ward: share the transport, never a god
+ * base-class). One registry per label so two palace TYPES serving one dir never collide.
+ */
+export interface ComposedPalace {
+  /** issue one line-RPC to the holder (the op-surface's single verb). */
+  send(op: string, fields?: Record<string, unknown>): Promise<unknown>;
+  /** release this reference; the holder process dies when the last reference closes. Idempotent. */
+  close(): Promise<void>;
+}
+
+/** ONE registry per palace label — module-global so a label's holders singleton across composes. */
+const palaceRegistries = new Map<string, PalaceHolderRegistry>();
+
+/** Compose the transport cap for a palace layer: acquire the label's singleton holder for `dir`. */
+export function composePalace(label: string, dir: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedPalace {
+  let registry = palaceRegistries.get(label);
+  if (!registry) { registry = new PalaceHolderRegistry(label); palaceRegistries.set(label, registry); }
+  const reg = registry;
+  const holder = reg.acquire(canonicalDirOf(dir), spawn, timeoutMs);
+  let closed = false;
+  return {
+    send: (op: string, fields: Record<string, unknown> = {}) => holder.send(op, fields),
+    close: async (): Promise<void> => { if (closed) return; closed = true; reg.release(holder); },
+  };
+}
+
+/** How many holder processes a palace label holds live (proves "one holder per palace, never a pile"). */
+export function livePalaceHolderCount(label: string): number {
+  return palaceRegistries.get(label)?.size() ?? 0;
+}
+
+/**
  * MESHPALACE shape — FLAGGED, MODELED, NOT BUILT HERE.
  *
  * The meshpalace = a mempalace-instance fed by the @meshpalace Automerge doc through a

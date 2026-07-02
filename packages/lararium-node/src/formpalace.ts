@@ -26,11 +26,14 @@ import { resolveFormEncoderSpawn } from "@lararium/mempalace";
 import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
 
 import {
-  PalaceHolderRegistry,
-  canonicalDirOf,
+  composePalace,
+  livePalaceHolderCount,
   makeServeSpawn,
   type PalaceHolderSpawn,
 } from "./palace-holder.js";
+
+/** the palace label — the transport registry key (one holder singleton per label per dir). */
+const LABEL = "form";
 
 /** The serializable basis shape the Python encoder consumes (its `index` is re-derived from order). */
 export interface SerializedBasis {
@@ -116,9 +119,6 @@ export interface FormPalace {
 /** Test seam alias: how the holder process is produced (defaults to the python helper). */
 export type FormHolderSpawn = PalaceHolderSpawn;
 
-/** ONE registry per palace TYPE — formpalace's holders stay separate from structurepalace's. */
-const registry = new PalaceHolderRegistry("form_encoder");
-
 /** Default holder spawn: the venv-aware python running `form_encoder.py serve --palace <dir>`. */
 const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveFormEncoderSpawn);
 
@@ -135,35 +135,24 @@ export interface FormPalaceOptions {
  * `close()` releases this reference and kills the process when the last reference closes.
  */
 export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormPalace {
-  const canonicalDir = canonicalDirOf(dir);
-  const timeoutMs = opts.timeoutMs ?? 60_000;
-  const spawnProc = opts.spawn ?? defaultHolderSpawn;
-
-  const holder = registry.acquire(canonicalDir, spawnProc, timeoutMs);
-  let closed = false;
+  // Compose the SHARED transport cap; layer only the form op-surface below (the sidecar-2-shapes ward).
+  const p = composePalace(LABEL, dir, opts.spawn ?? defaultHolderSpawn, opts.timeoutMs ?? 60_000);
 
   return {
     async encodeStore({ skeleton, basis, key, metadata }): Promise<FormStoreResult> {
-      return (await holder.send("encode_store", {
-        key,
-        skeleton,
-        basis,
-        metadata,
-      })) as FormStoreResult;
+      return (await p.send("encode_store", { key, skeleton, basis, metadata })) as FormStoreResult;
     },
 
     async query({ skeleton, basis, nResults, where }): Promise<FormMatch[]> {
-      const res = (await holder.send("query", {
-        skeleton,
-        basis,
-        n_results: nResults ?? 10,
+      const res = (await p.send("query", {
+        skeleton, basis, n_results: nResults ?? 10,
         ...(where !== undefined ? { where } : {}),
       })) as { matches: FormMatch[] };
       return res.matches ?? [];
     },
 
     async filter({ where, nResults }): Promise<FormMatch[]> {
-      const res = (await holder.send("filter", {
+      const res = (await p.send("filter", {
         n_results: nResults ?? 10,
         ...(where !== undefined ? { where } : {}),
       })) as { matches: FormMatch[] };
@@ -171,18 +160,14 @@ export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormP
     },
 
     async get(key: string): Promise<FormEntry | null> {
-      return (await holder.send("get", { key })) as FormEntry | null;
+      return (await p.send("get", { key })) as FormEntry | null;
     },
 
-    async close(): Promise<void> {
-      if (closed) return;
-      closed = true;
-      registry.release(holder);
-    },
+    close: p.close,
   };
 }
 
 /** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
 export function _liveFormHolderCount(): number {
-  return registry.size();
+  return livePalaceHolderCount(LABEL);
 }

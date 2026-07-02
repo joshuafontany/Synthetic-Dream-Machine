@@ -33,11 +33,14 @@ import {
 import { resolveStructurePalaceSpawn } from "@lararium/mempalace";
 
 import {
-  PalaceHolderRegistry,
-  canonicalDirOf,
+  composePalace,
+  livePalaceHolderCount,
   makeServeSpawn,
   type PalaceHolderSpawn,
 } from "./palace-holder.js";
+
+/** the palace label — the transport registry key. */
+const LABEL = "structure";
 
 /** A provenance link back to a verbatim turn (the drawer this AST unfolded from). */
 export interface StructureProvenance {
@@ -106,9 +109,6 @@ const HEX64 = /^[0-9a-f]{64}$/;
 /** Test seam alias: how the holder process is produced (defaults to the python helper). */
 export type HolderSpawn = PalaceHolderSpawn;
 
-/** ONE registry per palace TYPE — structurepalace's holders stay separate from formpalace's. */
-const registry = new PalaceHolderRegistry("structurepalace");
-
 /** Default holder spawn: the venv-aware python running `structurepalace_io.py serve --palace <dir>`. */
 const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveStructurePalaceSpawn);
 
@@ -126,12 +126,8 @@ export interface StructurePalaceOptions {
  * reference closes.
  */
 export function makeStructurePalace(dir: string, opts: StructurePalaceOptions = {}): StructurePalace {
-  const canonicalDir = canonicalDirOf(dir);
-  const timeoutMs = opts.timeoutMs ?? 30_000;
-  const spawnProc = opts.spawn ?? defaultHolderSpawn;
-
-  const holder = registry.acquire(canonicalDir, spawnProc, timeoutMs);
-  let closed = false;
+  // Compose the SHARED transport cap; layer the structure op-surface (+ the pure hashOf) below.
+  const p = composePalace(LABEL, dir, opts.spawn ?? defaultHolderSpawn, opts.timeoutMs ?? 30_000);
 
   const hashOf = (astTree: unknown): Promise<string> =>
     sha256Hex(canonicalJsonBytes(astTree), defaultCryptoProvider);
@@ -145,7 +141,7 @@ export function makeStructurePalace(dir: string, opts: StructurePalaceOptions = 
       const hash = await hashOf(astTree);
       const verbatimSha = await sha256Hex(utf8Bytes(verbatim.content), defaultCryptoProvider);
       const astJson = canonicalJson(astTree); // canonical-key-ordered — invariant for this hash
-      await holder.send("put", {
+      await p.send("put", {
         hash, ast: astJson, source_file: verbatim.source_file, verbatim_sha: verbatimSha,
         ...(verbatim.turnKey ? { turn_key: verbatim.turnKey } : {}),
       });
@@ -154,11 +150,11 @@ export function makeStructurePalace(dir: string, opts: StructurePalaceOptions = 
 
     async get(hash: string): Promise<StructureEntry | null> {
       if (!HEX64.test(hash)) return null;
-      return (await holder.send("get", { hash })) as StructureEntry | null;
+      return (await p.send("get", { hash })) as StructureEntry | null;
     },
 
     async kapae(turnKey: string, ended?: string): Promise<StructureKapaeResult> {
-      const res = (await holder.send("kapae", { turn_key: turnKey, ...(ended ? { ended } : {}) })) as
+      const res = (await p.send("kapae", { turn_key: turnKey, ...(ended ? { ended } : {}) })) as
         | Partial<StructureKapaeResult>
         | null;
       return {
@@ -169,15 +165,11 @@ export function makeStructurePalace(dir: string, opts: StructurePalaceOptions = 
       };
     },
 
-    async close(): Promise<void> {
-      if (closed) return;
-      closed = true;
-      registry.release(holder);
-    },
+    close: p.close,
   };
 }
 
 /** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
 export function _liveHolderCount(): number {
-  return registry.size();
+  return livePalaceHolderCount(LABEL);
 }
