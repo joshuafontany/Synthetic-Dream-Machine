@@ -30,8 +30,12 @@ export const TIMEOUT_FLOOR_MS = 15_000;
 export const TIMEOUT_CEIL_MS = 300_000;
 /** below this many samples the EWMA can't be trusted → the cold-start default holds. */
 export const TIMEOUT_MIN_SAMPLES = 3;
-/** the cold-start default (no learned EWMA yet) — the prior 30 s flush constant. */
+/** the cold-start default (a partially-learned EWMA, < minSamples) — the prior 30 s flush constant. */
 export const TIMEOUT_DEFAULT_MS = 30_000;
+/** the FIRST-RUN exemption (zero observations on this key): a cold chroma + embedding-model load
+ *  legitimately exceeds 30 s, so the very first mine gets generous headroom; from the first
+ *  completion onward the default (then the learned EWMA) takes over. CEIL still bounds a hang. */
+export const TIMEOUT_FIRST_RUN_MS = 120_000;
 /** the kill signal a timed-out mine takes — SIGKILL can't be caught/ignored, so a wedged native
  *  process (chromadb/sqlite C extension that would swallow SIGTERM) is GUARANTEED to die; the
  *  palace lock is PID-held, so the next miner reclaims it once the holder is gone. */
@@ -63,13 +67,16 @@ export function recordMineDuration(pathKey: string, ms: number): void {
 
 /**
  * COMPUTE: the adaptive kill-timeout for the next mine on this key — clamp(K · ewma, FLOOR, CEIL).
- * Until {@link TIMEOUT_MIN_SAMPLES} durations are learned, the cold-start default holds (the servo
- * won't trust a one-sample EWMA). The timeout GROWS as observed durations rise (headroom under
- * load) and SHRINKS as they fall (catch a hang sooner) — the inversion vs the flush gate.
+ * The very FIRST mine on a key (zero observations) rides {@link TIMEOUT_FIRST_RUN_MS} — a cold
+ * chroma + model load runs long, honestly. Until {@link TIMEOUT_MIN_SAMPLES} durations are learned,
+ * the cold-start default holds (the servo won't trust a one-sample EWMA). The timeout GROWS as
+ * observed durations rise (headroom under load) and SHRINKS as they fall (catch a hang sooner) —
+ * the inversion vs the flush gate.
  */
 export function adaptiveTimeoutMs(pathKey: string): number {
   const s = state.get(pathKey);
-  if (!s || s.samples < TIMEOUT_MIN_SAMPLES) return TIMEOUT_DEFAULT_MS;
+  if (!s) return TIMEOUT_FIRST_RUN_MS; // first run on this key — the cold-load exemption
+  if (s.samples < TIMEOUT_MIN_SAMPLES) return TIMEOUT_DEFAULT_MS;
   const raw = TIMEOUT_K * s.ewmaMs;
   return Math.round(Math.max(TIMEOUT_FLOOR_MS, Math.min(TIMEOUT_CEIL_MS, raw)));
 }
@@ -89,13 +96,16 @@ export function resetMineTimeouts(): void {
  * A subprocess KILLED by its timeout — a HANG, distinct from a BUSY lock or a real non-zero exit.
  * Probed against Node's actual fields (2026-06-28): execFileSync timeout → `code:'ETIMEDOUT'`,
  * `signal:'SIGKILL'`, `status:null`; execFileAsync timeout → `killed:true`, `signal:'SIGKILL'`. A
- * real non-zero exit carries `signal:null` + a numeric `status` → never reads as a hang.
+ * real non-zero exit carries `signal:null` + a numeric `status` → never reads as a hang. An
+ * EXTERNAL `SIGTERM` reads as a CLEAN shutdown (a system/service stop reaping children) — our own
+ * kill only ever speaks {@link TIMEOUT_KILL_SIGNAL} (SIGKILL), so SIGTERM never marks our timeout.
  */
 export function isMineHang(e: unknown): boolean {
   const err = e as { killed?: boolean; signal?: string | null; code?: string | null };
+  if (err?.signal === "SIGTERM") return false; // external graceful stop — a clean shutdown, never our kill
   if (err?.killed === true) return true;
   if (err?.code === "ETIMEDOUT") return true;
-  if (err?.signal === "SIGKILL" || err?.signal === "SIGTERM") return true;
+  if (err?.signal === "SIGKILL") return true;
   return false;
 }
 

@@ -19,6 +19,7 @@ import {
   isMineHang,
   MineHangError,
   TIMEOUT_DEFAULT_MS,
+  TIMEOUT_FIRST_RUN_MS,
   TIMEOUT_FLOOR_MS,
   TIMEOUT_CEIL_MS,
   TIMEOUT_K,
@@ -47,8 +48,17 @@ function hangError(): Error & { code: string; signal: string; status: null } {
 }
 
 describe("the EWMA servo — adaptiveTimeoutMs / recordMineDuration", () => {
-  test("cold start (< minSamples) holds the sane default", () => {
-    expect(adaptiveTimeoutMs("k")).toBe(TIMEOUT_DEFAULT_MS);
+  test("the FIRST run on a key (zero observations) rides the cold-load exemption, not the 30 s default", () => {
+    // A cold chroma + embedding-model load legitimately exceeds 30 s — the very first
+    // mine must never false-kill on the default.
+    expect(adaptiveTimeoutMs("virgin")).toBe(TIMEOUT_FIRST_RUN_MS);
+    expect(TIMEOUT_FIRST_RUN_MS).toBeGreaterThan(TIMEOUT_DEFAULT_MS);
+    // One completion ends the exemption — the default takes over until minSamples.
+    recordMineDuration("virgin", 5_000);
+    expect(adaptiveTimeoutMs("virgin")).toBe(TIMEOUT_DEFAULT_MS);
+  });
+
+  test("cold start (1 ≤ samples < minSamples) holds the sane default", () => {
     recordMineDuration("k", 5_000);
     recordMineDuration("k", 5_000); // still only 2 samples (< minSamples=3)
     expect(TIMEOUT_MIN_SAMPLES).toBe(3);
@@ -115,7 +125,11 @@ describe("isMineHang — a timeout-kill, distinct from busy / a real exit", () =
   test("classifies a kill (ETIMEDOUT / SIGKILL / killed) as a hang", () => {
     expect(isMineHang(hangError())).toBe(true); // sync shape: ETIMEDOUT + SIGKILL
     expect(isMineHang({ killed: true, signal: "SIGKILL" })).toBe(true); // async shape
-    expect(isMineHang({ signal: "SIGTERM" })).toBe(true);
+  });
+
+  test("an EXTERNAL SIGTERM reads as a CLEAN shutdown, never a hang (our kill only speaks SIGKILL)", () => {
+    expect(isMineHang({ signal: "SIGTERM" })).toBe(false); // a system/service stop reaping children
+    expect(isMineHang({ killed: true, signal: "SIGTERM" })).toBe(false); // even a parent-initiated graceful stop
   });
 
   test("a BUSY lock and a real non-zero exit are NOT hangs", () => {
