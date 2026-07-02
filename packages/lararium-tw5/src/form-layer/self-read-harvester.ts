@@ -41,17 +41,21 @@
  * like its form-layer siblings.
  */
 
+// PURE subpaths (no Automerge) — the barrel `@lararium/mesh` drags in wasm the
+// plugin build can't bundle (this module rides the plugin bundle via form-layer).
 import {
   harvestTurnGradient,
-  voiceCoherenceDensity,
-  buresDistance,
-  registerMarginal,
   type TurnHarvest,
   type ConfidenceSignal,
   type HudSignal,
+} from "@lararium/mesh/harvest";
+import {
+  voiceCoherenceDensity,
+  buresDistance,
+  registerMarginal,
   type VoiceAmplitude,
   type DensityMatrix,
-} from "@lararium/mesh";
+} from "@lararium/mesh/bures-metric";
 import { resolveVoiceRole } from "./constructicon-basis.js";
 import { teleodynamicProbe, type SelfRead, type TeleodynamicReading } from "./teleodynamic-probe.js";
 

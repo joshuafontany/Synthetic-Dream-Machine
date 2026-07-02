@@ -16,8 +16,10 @@ export default defineConfig({
       { find: "@lararium/tw5/meme-ast", replacement: path.resolve(root, "../lararium-tw5/src/meme-ast/index.ts") },
       { find: "@lararium/tw5", replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
       { find: "@lararium/mesh/lar-uris", replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
-      // Subpath alias MUST precede the generic "@lararium/mesh" — else the string
-      // prefix-match mangles "@lararium/mesh/node" into "src/index.ts/node".
+      // Subpath aliases MUST precede the generic "@lararium/mesh" — else the string
+      // prefix-match mangles "@lararium/mesh/<sub>" into "src/index.ts/<sub>".
+      { find: "@lararium/mesh/harvest", replacement: path.resolve(root, "../lararium-mesh/src/harvest.ts") },
+      { find: "@lararium/mesh/bures-metric", replacement: path.resolve(root, "../lararium-mesh/src/bures-metric.ts") },
       { find: "@lararium/mesh/node", replacement: path.resolve(root, "../lararium-mesh/src/node.ts") },
       { find: "@lararium/mesh", replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
     ],

@@ -11,7 +11,9 @@ export default defineConfig({
       // Stub Node's `crypto` module for browser tests — tw5-host-bridge uses createHash.
       { find: /^(node:)?crypto$/, replacement: path.resolve(root, "src/__stubs__/crypto-stub.ts") },
       { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
+      { find: "@lararium/mesh/bures-metric",     replacement: path.resolve(root, "../lararium-mesh/src/bures-metric.ts") },
       { find: "@lararium/mesh/cascade",          replacement: path.resolve(root, "../lararium-mesh/src/cascade.ts") },
+      { find: "@lararium/mesh/harvest",          replacement: path.resolve(root, "../lararium-mesh/src/harvest.ts") },
       { find: "@lararium/mesh/lar-uris",         replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
       { find: "@lararium/mesh/mirror-paths",     replacement: path.resolve(root, "../lararium-mesh/src/mirror-paths.ts") },
       { find: "@lararium/mesh/promotion-ceremony", replacement: path.resolve(root, "../lararium-mesh/src/promotion-ceremony.ts") },

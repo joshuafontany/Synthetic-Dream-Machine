@@ -8,6 +8,10 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./bures-metric": {
+      "import": "./dist/bures-metric.js",
+      "types": "./dist/bures-metric.d.ts"
+    },
     "./cascade": {
       "import": "./dist/cascade.js",
       "types": "./dist/cascade.d.ts"
