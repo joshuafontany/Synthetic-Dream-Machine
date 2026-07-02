@@ -33,6 +33,7 @@ import { atomicWriteFileSync } from "@lararium/node";
 
 import { larHarvestDir, operatorDid } from "../env.js";
 import { runVerb } from "../verb-call.js";
+import { sessionEphemeral } from "../ephemeral.js";
 import { readExchanges, sha } from "./harvest.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -51,6 +52,21 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
   }
 
   const sw = spiritsWing(wing);
+
+  // THE EPHEMERAL GATE (spirit discovery): the PARENT session's verdict covers every tasked
+  // spirit it spawned — an ephemeral session's spirits never enter the __spirits wing. One loud
+  // line; the transcripts (session + agent-*.jsonl) stay untouched on disk.
+  const eph = sessionEphemeral(transcript);
+  if (eph.ephemeral) {
+    console.error(`[subagents] EPHEMERAL skip: ${transcript} — ${eph.reason}`);
+    emit(args, {
+      ok: true,
+      data: { spirits: 0, wing: sw, ephemeralSkipped: [{ file: transcript, reason: eph.reason }] },
+      human: () => console.log(`lares subagents → ${sw}  EPHEMERAL session — spirits not ingested (transcripts untouched)`),
+    });
+    return 0;
+  }
+
   const files = listSpiritFiles(transcript);
   if (files.length === 0) {
     emit(args, { ok: true, data: { spirits: 0, wing: sw, mined: [] }, human: () => console.log(`lares subagents → ${sw}  (0 spirits)`) });

@@ -35,6 +35,7 @@ import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
 import { wingFromDir, readCwdFromTranscript } from "../wing-law.js";
+import { partitionEphemeral } from "../ephemeral.js";
 import { makeHarvestPacer, type PacerStep } from "../harvest-pacer.js";
 import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
@@ -714,8 +715,8 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   const wing = args.options["wing"] ?? wingFromDir(larRoot());
   const dryRun = args.flags["dry-run"] === true;
 
-  const files = listTranscripts(target);
-  if (files.length === 0) {
+  const allFiles = listTranscripts(target);
+  if (allFiles.length === 0) {
     const error: LaresError = {
       code: "not-found",
       message: `no .jsonl transcripts at ${target}`,
@@ -723,6 +724,20 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     };
     emit(args, { ok: false, error, human: () => console.error(`lares harvest: ${error.message}\n  ${error.hint}`) });
     return 3;
+  }
+  // THE EPHEMERAL GATE (the readTurns leg): a session marked ephemeral — derived (its recorded
+  // cwd under a scratch root) or declared (a `.ephemeral` sibling / `.lar-ephemeral` in its cwd) —
+  // never enters the harvest index. Ephemeral ≠ deleted: the transcript survives; the ingest
+  // declines, one loud line per skip. A skipped session's scope also never enters the rewind
+  // diff below (skip ≠ gone — its indexed turns stay unreconciled, never kapae'd).
+  const { live: files, skipped: ephemeralSkips } = partitionEphemeral(allFiles, "harvest");
+  if (files.length === 0) {
+    emit(args, {
+      ok: true,
+      data: { wing, files: 0, ephemeralSkipped: ephemeralSkips, dryRun },
+      human: () => console.log(`lares harvest → ${wing}: all ${ephemeralSkips.length} transcript(s) EPHEMERAL — nothing ingested (transcripts untouched on disk)`),
+    });
+    return 0;
   }
 
   mkdirSync(HARVEST_DIR, { recursive: true });
@@ -839,10 +854,10 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   const hnsw = dryRun ? null : await runHnswRepairTail();
   emit(args, {
     ok: true,
-    data: { ...summary, dryRun, ...(hnsw ? { hnswRepair: hnsw } : {}), ...(kapae ? { kapae } : {}) },
+    data: { ...summary, dryRun, ...(ephemeralSkips.length ? { ephemeralSkipped: ephemeralSkips } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}), ...(kapae ? { kapae } : {}) },
     human: () => {
       console.log(`lares harvest → ${wing}${dryRun ? "  (dry run)" : ""}`);
-      console.log(`  transcripts:  ${summary.files}`);
+      console.log(`  transcripts:  ${summary.files}${ephemeralSkips.length ? `  (+${ephemeralSkips.length} EPHEMERAL, skipped)` : ""}`);
       console.log(`  turns seen:   ${summary.turns}  (${summary.skipped} already harvested, skipped)`);
       console.log(`  harvested:    ${summary.harvested}  (${summary.framed} framed · ${summary.raw} raw · ${summary.sidechain} sidechain)`);
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
@@ -890,6 +905,19 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   } catch { files = []; }
   if (!files.length) {
     emit(args, { ok: true, data: { wing, submitted: 0 }, human: () => console.log(`[capture] no .jsonl under ${target}`) });
+    return 0;
+  }
+  // THE EPHEMERAL GATE (the capture leg): a marked session's turns never submit to the palace
+  // nalu. Reads the transcript's own CONTENT (its recorded cwd), so a staged hardlink/copy carries
+  // the same verdict as the original. One loud line per skip; the transcript stays on disk.
+  const { live: liveFiles, skipped: ephemeralSkips } = partitionEphemeral(files, "capture");
+  files = liveFiles;
+  if (!files.length) {
+    emit(args, {
+      ok: true,
+      data: { wing, submitted: 0, ephemeralSkipped: ephemeralSkips },
+      human: () => console.log(`[capture] all ${ephemeralSkips.length} transcript(s) EPHEMERAL — nothing submitted (wing ${wing})`),
+    });
     return 0;
   }
 
@@ -1015,7 +1043,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
   emit(args, {
     ok: true,
-    data: { wing, submitted, ...(suspended > 0 ? { suspended, suspendedReason: "verb failure mid-run — turns left unmarked, next run retries (sink-side dedup guards)" } : {}) },
+    data: { wing, submitted, ...(ephemeralSkips.length ? { ephemeralSkipped: ephemeralSkips } : {}), ...(suspended > 0 ? { suspended, suspendedReason: "verb failure mid-run — turns left unmarked, next run retries (sink-side dedup guards)" } : {}) },
     human: () => console.log(`[capture] ${submitted} turn(s) → @daemon nalu (wing ${wing})${suspended > 0 ? ` · ${suspended} turn(s) SUSPENDED (verb failure — next run retries)` : ""}`),
   });
   return 0;
