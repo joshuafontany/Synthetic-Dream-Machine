@@ -46,9 +46,61 @@ fi
 
 [ -n "${transcript:-}" ] && [ -f "$transcript" ] || exit 0
 
+# ── The EPHEMERAL gate (skip staging entirely) ────────────────────────────────
+# Designation carries authority: a session declares itself ephemeral (a
+# `<transcript>.ephemeral` sibling, or a `.lar-ephemeral` marker in the session's
+# own recorded cwd), or derives it (that recorded cwd sits under a scratch root:
+# $TMPDIR / /tmp, a LAR_ROOT sandbox, the corpus-palace `.corpus` scratch).
+# EPHEMERAL ≠ DELETED — the transcript survives; only the palace ingest declines.
+# LOUD: one skip line on stderr (silence never hides a skip). TS twin: the
+# sessionEphemeral verdict in packages/lares-cli/src/ephemeral.ts — keep in lockstep.
+if [ "${transcript##*.}" = "jsonl" ]; then
+  eph_reason=""
+  [ -f "${transcript%.jsonl}.ephemeral" ] && eph_reason="declared: $(basename "${transcript%.jsonl}.ephemeral")"
+  if [ -z "$eph_reason" ]; then
+    session_cwd="$(python3 -c '
+import sys, json
+with open(sys.argv[1]) as f:
+    for i, line in enumerate(f):
+        if i > 60: break
+        try: c = json.loads(line).get("cwd")
+        except Exception: continue
+        if c:
+            print(c); break
+' "$transcript" 2>/dev/null)"
+    if [ -n "${session_cwd:-}" ]; then
+      [ -f "$session_cwd/.lar-ephemeral" ] && eph_reason="declared: .lar-ephemeral in $session_cwd"
+      if [ -z "$eph_reason" ]; then
+        for _root in "${TMPDIR:-/tmp}" /tmp ${LAR_ROOT:+"$LAR_ROOT"} "${LAR_ROOT:-$HOME/.lares}/.corpus"; do
+          _root="${_root%/}"
+          case "$session_cwd" in
+            "$_root"|"$_root"/*) eph_reason="derived: cwd $session_cwd under scratch root $_root"; break ;;
+          esac
+        done
+      fi
+    fi
+  fi
+  if [ -n "$eph_reason" ]; then
+    echo "[lares-ingest-hook] EPHEMERAL skip: $(basename "$transcript") — $eph_reason" >&2
+    exit 0
+  fi
+fi
+
+MP="$HOME/.local/bin/mempalace"; [ -x "$MP" ] || MP="mempalace"
+LARES="$HOME/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
+
 # Wing = the AI PROJECT the transcript belongs to, agnostic to AI surface — the
 # project dir's recorded cwd (harvest --all's discoverClaude law), never the
-# live payload cwd (it drifts with every agent cd). Fallback: payload cwd → PWD.
+# live payload cwd (it drifts with every agent cd).
+# FALLBACK LADDER (the hook must survive a broken dist):
+#   `lares wing-of` (the ONE TS wing law, src/wing-law.ts) → inline python (the
+#   recorded-cwd mirror) → payload cwd → PWD.
+wing=""
+if [ "${transcript##*.}" = "jsonl" ]; then
+  wing="$("$LARES" wing-of "$transcript" --no-json 2>/dev/null | tail -n1)"
+  case "$wing" in wing_*) : ;; *) wing="" ;; esac
+fi
+if [ -z "$wing" ]; then
 project_cwd=""
 if [ -n "${transcript:-}" ] && [ "${transcript##*.}" = "jsonl" ]; then
   project_cwd="$(python3 -c '
@@ -66,9 +118,7 @@ base="$(basename "${project_cwd:-${cwd:-$PWD}}")"
 slug="$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | tr ' -' '__' | sed 's/[^a-z0-9_]//g')"
 [ -n "$slug" ] || slug="unsorted"
 wing="wing_${slug}"
-
-MP="$HOME/.local/bin/mempalace"; [ -x "$MP" ] || MP="mempalace"
-LARES="$HOME/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
+fi
 
 # Stage just this transcript so sibling scratch / memory / json never get swept.
 # Claude .jsonl + Codex rollout are mined as-is (mempalace parses both); Copilot

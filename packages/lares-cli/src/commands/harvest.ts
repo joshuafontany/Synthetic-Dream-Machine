@@ -34,6 +34,7 @@ import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repai
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
+import { wingFromDir, readCwdFromTranscript } from "../wing-law.js";
 import { makeHarvestPacer, type PacerStep } from "../harvest-pacer.js";
 import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
@@ -82,11 +83,8 @@ interface RunSummary {
   indexPath: string;
 }
 
-/** Derive a per-project wing slug from a directory/cwd name. */
-function wingFromDir(dir: string): string {
-  const slug = basename(dir).toLowerCase().replace(/[ -]/g, "_").replace(/[^a-z0-9_]/g, "");
-  return `wing_${slug || "unsorted"}`;
-}
+// wingFromDir / readCwdFromTranscript — the wing law, extracted to ../wing-law.ts so
+// `lares wing-of` and the ingest hook read the SAME derivation (imported above).
 
 /** Pull the readable text from a Claude Code message's content (array or string). */
 function messageText(message: unknown): { text: string; hasTools: boolean } {
@@ -354,22 +352,6 @@ function hnswRepairLine(r: HnswRepairResult): string {
     case "repair-failed":return `  hnsw index:   repair FAILED (diverged ${r.divergence ?? "?"}) — harvest ok · ${r.note ?? ""}`;
     case "check-failed": return `  hnsw index:   status unreadable — skipped · ${r.note ?? ""}`;
   }
-}
-
-/** Recover the real cwd a transcript ran in (rows carry it), to derive a stable wing. */
-function readCwdFromTranscript(jsonl: string): string | null {
-  try {
-    const lines = readFileSync(jsonl, "utf8").split("\n");
-    for (let i = 0; i < Math.min(lines.length, 60); i++) {
-      const l = lines[i];
-      if (!l || !l.trim()) continue;
-      try {
-        const r = JSON.parse(l) as Record<string, unknown>;
-        if (typeof r["cwd"] === "string" && r["cwd"]) return r["cwd"];
-      } catch { /* skip torn line */ }
-    }
-  } catch { /* fall through */ }
-  return null;
 }
 
 const COPILOT_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_normalize.py");

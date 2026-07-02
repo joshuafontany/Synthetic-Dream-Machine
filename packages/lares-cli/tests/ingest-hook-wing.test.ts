@@ -1,30 +1,25 @@
 /**
  * ingest-hook-wing — the cross-language wing-slug agreement fixture.
  *
- * The per-project wing derives in TWO languages: bash in the ingest hook
- * (.claude-plugin/hooks/lares-mempalace-ingest-hook.sh) and TypeScript in
- * harvest.ts (`wingFromDir`). The transform MUST agree — a divergence forks one
- * session's drawers across two wings. This test EXTRACTS the live slug pipeline
- * from the hook (so a hook edit breaks it loudly) and runs each fixture through
- * bash against the TS formula (mirrored below from harvest.ts wingFromDir;
- * unifying onto one resolver — e.g. `lares wing-of <dir>` — retires this mirror).
+ * The wing law now lives ONCE in TS (src/wing-law.ts): the hook calls
+ * `lares wing-of <transcript>` FIRST, keeping its bash/python pipeline only as the
+ * broken-dist FALLBACK. This test (a) pins the fallback's agreement with the real
+ * `wingFromDir` (imported, the old mirror retired), (b) pins the ladder — the hook
+ * still calls `wing-of` first, and (c) exercises the resolver itself on a synthetic
+ * transcript (recorded cwd → wing; sibling-first; no cwd → null, never a guess).
  */
 
 import { describe, test, expect } from "vitest";
-import { readFileSync } from "node:fs";
-import { join, basename } from "node:path";
+import { readFileSync, mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { spawnSync } from "node:child_process";
+import { wingFromDir, resolveTranscriptWing } from "../src/wing-law.js";
 
 const HOOK = join(
   new URL("..", import.meta.url).pathname,
   ".claude-plugin", "hooks", "lares-mempalace-ingest-hook.sh",
 );
-
-/** The TS side of the contract — harvest.ts `wingFromDir`, mirrored verbatim. */
-function wingFromDir(dir: string): string {
-  const slug = basename(dir).toLowerCase().replace(/[ -]/g, "_").replace(/[^a-z0-9_]/g, "");
-  return `wing_${slug || "unsorted"}`;
-}
 
 const hookText = readFileSync(HOOK, "utf8");
 
@@ -72,5 +67,49 @@ describe("hook wing-slug ≡ harvest.ts wingFromDir", () => {
 
   test("the known-project anchor holds byte-for-byte", () => {
     expect(bashWing("Synthetic-Dream-Machine")).toBe("wing_synthetic_dream_machine");
+  });
+});
+
+describe("the hook's fallback ladder leads with the ONE resolver", () => {
+  test("`lares wing-of` is called FIRST, validated to wing_*, python kept as fallback", () => {
+    expect(hookText).toMatch(/"\$LARES" wing-of "\$transcript" --no-json/);
+    expect(hookText).toMatch(/case "\$wing" in wing_\*\)/);          // never trust a non-wing echo
+    expect(hookText.indexOf('wing-of')).toBeLessThan(hookText.indexOf('project_cwd=""')); // ladder order
+  });
+});
+
+describe("resolveTranscriptWing — the resolver the hook + `lares wing-of` share", () => {
+  function scratchProject(): { dir: string; done: () => void } {
+    const dir = mkdtempSync(join(tmpdir(), "wing-of-"));
+    return { dir, done: () => rmSync(dir, { recursive: true, force: true }) };
+  }
+  const row = (cwd?: string): string => JSON.stringify(cwd ? { cwd, type: "user" } : { type: "user" }) + "\n";
+
+  test("derives the wing from the transcript's recorded cwd", () => {
+    const { dir, done } = scratchProject();
+    try {
+      const t = join(dir, "session-b.jsonl");
+      writeFileSync(t, row() + row("/home/op/Synthetic-Dream-Machine"));
+      expect(resolveTranscriptWing(t)).toBe("wing_synthetic_dream_machine");
+    } finally { done(); }
+  });
+
+  test("the FIRST sibling's cwd wins (the project dir's stable identity, discoverClaude parity)", () => {
+    const { dir, done } = scratchProject();
+    try {
+      writeFileSync(join(dir, "a-first.jsonl"), row("/home/op/Stable-Project"));
+      const t = join(dir, "z-later.jsonl");
+      writeFileSync(t, row("/home/op/some/drifted-subdir"));
+      expect(resolveTranscriptWing(t)).toBe("wing_stable_project");
+    } finally { done(); }
+  });
+
+  test("no recorded cwd anywhere → null (fail loud, never a guessed wing)", () => {
+    const { dir, done } = scratchProject();
+    try {
+      const t = join(dir, "bare.jsonl");
+      writeFileSync(t, row() + row());
+      expect(resolveTranscriptWing(t)).toBeNull();
+    } finally { done(); }
   });
 });
