@@ -61,14 +61,16 @@ export async function seedRun(args: ParsedArgs): Promise<SeedHolding[]> {
   const ledger: SeedHolding[] = [];
   for (const h of holdings) {
     if (SYSTEM_HOLDINGS.has(h.holding)) {
+      // Infrastructure bags (@lares/@lararium) flow as NAMELESS ENTITIES — no special auto-confirm.
+      // A converged bag submits zero (silent no-op); a bag with genuinely NEW content trips the
+      // ingest gate's "confirmation required" WITHOUT `--yes` — and that is the FEATURE: new infra
+      // content SURFACES for the operator to grade on a gradient (approve → re-run with --yes, or
+      // abort), never silently auto-applied. `--yes` (the operator's relayed approval) passes through.
       const exitCode = await cmdIngest({
         command: "ingest",
         positional: [],
         options: { ...args.options, source: h.source, to: h.toBag },
-        // On --apply, force `yes` so the ingest submit-leg runs non-interactively (mirrors the
-        // LOAD branch below). Without this a system holding with NEW content (e.g. @lares, unlike a
-        // converged @lararium) trips "confirmation required" and the regenesis seed part-feeds.
-        flags: args.flags["apply"] ? { ...args.flags, yes: true } : args.flags,
+        flags: args.flags,
       });
       ledger.push({ ...h, gesture: "ingest", exitCode });
     } else {
