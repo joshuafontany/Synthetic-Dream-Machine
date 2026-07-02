@@ -3,7 +3,7 @@
  * at 0 the shed engages (hard block, the Frank-Starling ceiling); reading surfaces the shed.
  */
 import { describe, test, expect } from "vitest";
-import { availableCredits, canAdmit, creditReading } from "../src/index.js";
+import { availableCredits, canAdmit, creditReading, creditConservation, agedOut } from "../src/index.js";
 
 describe("credit-gate — the two-sided law (downstream signal paces the producer)", () => {
   test("credits = maxInFlight − uncommitted, clamped at 0", () => {
@@ -34,5 +34,25 @@ describe("credit-gate — the two-sided law (downstream signal paces the produce
     expect(availableCredits(8, 8)).toBe(0);     // full → shed
     expect(availableCredits(8, 5)).toBe(3);     // 3 committed → 3 credits returned
     expect(availableCredits(8, 0)).toBe(8);     // fully drained → full credits
+  });
+
+  test("credit-conservation holds when issued == inFlight + free (InfiniBand ward)", () => {
+    expect(creditConservation(8, 5, 3)).toEqual({ conserved: true, drift: 0 });
+  });
+
+  test("a LEAKED credit shows as positive drift — the silent-deadlock alarm", () => {
+    // one credit vanished between land and return: inFlight+free < issued → the window decays forever
+    const r = creditConservation(8, 5, 2);
+    expect(r.conserved).toBe(false);
+    expect(r.drift).toBe(1);                     // 1 credit hostage → shed creeps toward permanent
+  });
+
+  test("a double-returned credit shows as negative drift", () => {
+    expect(creditConservation(8, 5, 4).drift).toBe(-1);
+  });
+
+  test("agedOut fires the HLL escape only past the max age (a stuck item frees its credit)", () => {
+    expect(agedOut(10, 14, 5)).toBe(false);     // 4 ticks old, limit 5 → still waiting
+    expect(agedOut(10, 15, 5)).toBe(true);      // 5 ticks → age out to dead-letter, return the credit
   });
 });

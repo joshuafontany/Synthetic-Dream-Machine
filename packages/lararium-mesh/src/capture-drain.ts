@@ -14,6 +14,12 @@
  * contiguous frontier); a gap BLOCKS advance. On restart, replay from the watermark: turns above a
  * gap re-run, and the content-hash upsert makes that a no-op (effectively-once by composition).
  *
+ * The ACCEPT≠LAND capability boundary (Raft `matchIndex`/`commitIndex`): `staged` (accept) and
+ * `committed` (land) sit in SEPARATE fields with SEPARATE write-sites — stage() may only touch
+ * staged, commit() only committed — so the watermark cannot be advanced from the accept path (the
+ * old leak becomes unrepresentable). And the watermark advances by SCANNING the committed frontier,
+ * never by per-event increment: a scan is replay-idempotent, an increment is not.
+ *
  * Backpressure as an HONEST signal (never silent loss): `backlog()` = staged − committed. WAL
  * reclaim couples to the watermark, so a stalled store shows as a GROWING, bounded, monitorable
  * backlog — the failure surfaces instead of the watermark racing ahead over un-landed turns.
@@ -124,4 +130,24 @@ export function replaySet(l: DrainLedger): DrainEntry[] {
   const out: DrainEntry[] = [];
   for (const [seq, key] of l.staged) if (seq > w) out.push({ seq, key });
   return out.sort((a, b) => a.seq - b.seq);
+}
+
+/**
+ * The EXACTLY-ONCE erasure audit (Landauer: the commit IS the one logically-irreversible bit — the
+ * license-erasure — so a real land erases exactly one license per landed effect). Physically: each
+ * committed seq must carry a DISTINCT content-key; a key committed under two seqs = one license
+ * erased twice = a duplicate land (the effectively-once composition broke). `ok` iff distinct-keys ==
+ * committed-count; `duplicates` names the keys that landed more than once. A drift here flags a
+ * real-world duplicate, not a replay no-op (replay never commits — it re-stages, the upsert absorbs it).
+ */
+export function exactlyOnceAudit(l: DrainLedger): { readonly committed: number; readonly distinctKeys: number; readonly ok: boolean; readonly duplicates: string[] } {
+  const seen = new Map<string, number>();
+  for (const seq of l.committed) {
+    const key = l.staged.get(seq);
+    if (key === undefined) continue; // commit() forbids un-staged seqs; defensive
+    seen.set(key, (seen.get(key) ?? 0) + 1);
+  }
+  const duplicates: string[] = [];
+  for (const [key, n] of seen) if (n > 1) duplicates.push(key);
+  return { committed: l.committed.size, distinctKeys: seen.size, ok: duplicates.length === 0, duplicates: duplicates.sort() };
 }

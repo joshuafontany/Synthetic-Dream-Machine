@@ -5,7 +5,7 @@
  */
 import { describe, test, expect } from "vitest";
 import {
-  emptyDrain, stage, commit, watermark, backlog, reclaimable, replaySet,
+  emptyDrain, stage, commit, watermark, backlog, reclaimable, replaySet, exactlyOnceAudit,
 } from "../src/index.js";
 
 const e = (seq: number) => ({ seq, key: `k${seq}` });
@@ -86,5 +86,23 @@ describe("capture-drain — idempotency + honesty guards", () => {
     const l0 = stage(emptyDrain(), e(1));
     commit(l0, 1);
     expect(l0.committed.size).toBe(0);                    // l0 unchanged
+  });
+
+  test("exactly-once audit: each committed seq carries a distinct key (Landauer — one erasure per land)", () => {
+    let l = emptyDrain();
+    for (let s = 1; s <= 3; s++) l = commit(stage(l, e(s)), s);
+    expect(exactlyOnceAudit(l)).toEqual({ committed: 3, distinctKeys: 3, ok: true, duplicates: [] });
+  });
+
+  test("a DUPLICATE land (one content-key committed under two seqs) fails the audit", () => {
+    // two seqs sharing a content-key, BOTH committed = one license erased twice = a real duplicate.
+    let l = stage(emptyDrain(), { seq: 1, key: "dup" });
+    l = stage(l, { seq: 2, key: "dup" });
+    l = commit(commit(l, 1), 2);
+    const audit = exactlyOnceAudit(l);
+    expect(audit.ok).toBe(false);
+    expect(audit.committed).toBe(2);
+    expect(audit.distinctKeys).toBe(1);
+    expect(audit.duplicates).toEqual(["dup"]);
   });
 });

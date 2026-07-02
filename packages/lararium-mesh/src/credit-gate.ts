@@ -69,3 +69,25 @@ export function creditReading(maxInFlight: number, uncommitted: number): CreditR
     utilization: maxInFlight > 0 ? uncommitted / maxInFlight : Infinity,
   };
 }
+
+/**
+ * The CREDIT-CONSERVATION invariant (InfiniBand credit-loop ward): a leaked credit — one that fails
+ * to return between land and release (an exception, a dropped callback) — decays the window to 0 and
+ * sheds FOREVER, looking exactly like healthy backpressure. So the population MUST conserve:
+ * `issued == inFlight + free`. Any drift means a credit went missing (or was double-returned). Read
+ * this each cycle; a non-zero `drift` is a silent-deadlock alarm, never a normal state.
+ */
+export function creditConservation(issued: number, inFlight: number, free: number): { readonly conserved: boolean; readonly drift: number } {
+  const drift = issued - (inFlight + free);
+  return { conserved: drift === 0, drift };
+}
+
+/**
+ * The HLL escape (InfiniBand Head-of-queue Lifetime Limit): a staged item that never lands holds its
+ * credit hostage. Past `maxAgeTicks` a staged-but-uncommitted item MUST age out (→ the dead-letter
+ * anergy lane, returning its credit) rather than freeze the fabric. True = evict-and-return-the-credit.
+ * `nowTick`/`stagedAtTick` ride the injected logical clock (no wall-time in the pure core).
+ */
+export function agedOut(stagedAtTick: number, nowTick: number, maxAgeTicks: number): boolean {
+  return nowTick - stagedAtTick >= maxAgeTicks;
+}
