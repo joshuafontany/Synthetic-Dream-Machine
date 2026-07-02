@@ -46,10 +46,23 @@ fi
 
 [ -n "${transcript:-}" ] && [ -f "$transcript" ] || exit 0
 
-# Per-project wing from the working directory name:
-#   /home/joshu/Synthetic-Dream-Machine -> wing_synthetic_dream_machine
-#   /home/joshu                          -> wing_joshu
-base="$(basename "${cwd:-$PWD}")"
+# Wing = the AI PROJECT the transcript belongs to, agnostic to AI surface — the
+# project dir's recorded cwd (harvest --all's discoverClaude law), never the
+# live payload cwd (it drifts with every agent cd). Fallback: payload cwd → PWD.
+project_cwd=""
+if [ -n "${transcript:-}" ] && [ "${transcript##*.}" = "jsonl" ]; then
+  project_cwd="$(python3 -c '
+import sys, json, os, glob
+files = sorted(glob.glob(os.path.join(os.path.dirname(sys.argv[1]), "*.jsonl")))
+for path in files[:1] + [sys.argv[1]]:
+    with open(path) as f:
+        for line in f:
+            try: c = json.loads(line).get("cwd")
+            except Exception: continue
+            if c: print(c); sys.exit(0)
+' "$transcript" 2>/dev/null)"
+fi
+base="$(basename "${project_cwd:-${cwd:-$PWD}}")"
 slug="$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | tr ' -' '__' | sed 's/[^a-z0-9_]//g')"
 [ -n "$slug" ] || slug="unsorted"
 wing="wing_${slug}"
