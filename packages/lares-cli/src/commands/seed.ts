@@ -69,11 +69,22 @@ export async function seedRun(args: ParsedArgs): Promise<SeedHolding[]> {
       });
       ledger.push({ ...h, gesture: "ingest", exitCode });
     } else {
-      // LOAD carries no preview posture of its own — honor seed's preview default
-      // by riding the act surface's --dry-run.
+      // LOAD refuses an unregistered bag (cap-denied) — CREATE registers the
+      // catalog-corpus entry first. CREATE converges idempotently (same content
+      // id → same outcome), witnessed 2026-07-01, so every seed run may lead
+      // with it. Applied runs only — a preview mutates nothing.
       const flags = args.flags["apply"]
         ? { ...args.flags, yes: true }
         : { ...args.flags, "dry-run": true };
+      if (args.flags["apply"]) {
+        const createCode = await cmdAct({
+          command: "act",
+          positional: ["CREATE"],
+          options: { ...args.options, bag: h.toBag },
+          flags: { ...args.flags, yes: true },
+        });
+        if (createCode !== 0) { ledger.push({ ...h, gesture: "load", exitCode: createCode }); continue; }
+      }
       const exitCode = await cmdAct({
         command: "act",
         positional: ["LOAD"],
