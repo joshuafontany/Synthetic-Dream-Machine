@@ -31,6 +31,7 @@
 
 import { emptyDrain, stage, commit as commitDrain, watermark, backlog, type DrainLedger } from "./capture-drain.js";
 import { makeDial, observe, type Dial } from "./concurrency-dial.js";
+import { canAdmit } from "./credit-gate.js";
 
 /** One item to ingest: its order `seq`, its idempotent content-hash `key`, and the raw `payload` to embed. */
 export interface IngestItem<P> {
@@ -106,9 +107,16 @@ export async function runParallelIngest<P, E>(
     });
   };
 
-  // Continuous bounded pump: keep up to dial.limit in flight; re-read the (tuning) limit each round.
+  // Continuous bounded pump — TWO-SIDED: admission gates on CREDITS from the drain's real backlog
+  // (uncommitted = staged-not-yet-committed), not the producer's own in-flight count. credits =
+  // dial.limit − uncommitted; at 0 the shed engages (admission stops until a commit returns a
+  // credit). This ties admission to PROVEN drain (the credit-gate law), curing the one-sided AIMD
+  // bullwhip: if commits stall, the backlog grows, credits fall, and the producer sheds — the
+  // receiver pacing the sender. The dial's `limit` is the slow-discovered ceiling; credits are the
+  // fast per-cycle governor. (In-process, uncommitted tracks in-flight; across the @daemon seam the
+  // credit source is already the drain's true committed-progress, network-ring-ready.)
   while ((cursor < items.length && firstError === null) || active.size > 0) {
-    while (cursor < items.length && active.size < dial.limit && firstError === null) {
+    while (cursor < items.length && canAdmit(dial.limit, backlog(drain).length) && firstError === null) {
       const item = items[cursor++]!;
       const p = processOne(item)
         .catch((e: unknown) => { if (firstError === null) firstError = e; })
