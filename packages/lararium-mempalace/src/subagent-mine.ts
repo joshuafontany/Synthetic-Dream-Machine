@@ -25,13 +25,29 @@
 
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, mkdirSync, linkSync, copyFileSync } from "node:fs";
-import { homedir, tmpdir } from "node:os";
+import { homedir } from "node:os";
 import { join, basename } from "node:path";
 import { resolvePalacePath } from "./palace-path.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
 
 const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
+
+/**
+ * The spirit-staging root — SWEPT territory: it lives under the harvest stage
+ * (`$XDG_STATE_HOME/lares/harvest-stage/.spirit-stage`, LAR_ROOT-aware), which
+ * `lares palace-teardown` enumerates as a target, so staged spirit copies never
+ * accumulate as unswept tmpdir() residue. Mirrors vessel-paths' `larStateHome`
+ * resolution (that fn sits ABOVE this package in the dep graph — the XDG standard
+ * resolves here dependency-free, no value invented).
+ */
+function spiritStageRoot(): string {
+  const root = process.env["LAR_ROOT"];
+  const stateHome = root
+    ? join(root, "state")
+    : join(process.env["XDG_STATE_HOME"]?.trim() || join(homedir(), ".local", "state"), "lares");
+  return join(stateHome, "harvest-stage", ".spirit-stage");
+}
 
 /** Resolve the mempalace executable (prefer ~/.local/bin, then PATH). */
 export function resolveMempalaceExe(): string {
@@ -165,7 +181,7 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
     // the staged source_file carry the lineage (`<name>__agent-<id>__run-<run>.jsonl`)
     // so lar-telemetry's buildPatch reads BOTH lar_agent (the pet-name label) and
     // lar_agent_handle (the `<run>.<id>` worldline path) off it.
-    const stage = join(tmpdir(), `lar-spirit-${agentId}`);
+    const stage = join(spiritStageRoot(), `lar-spirit-${agentId}`);
     mkdirSync(stage, { recursive: true });
     const dst = join(stage, `${name}__agent-${agentId}__run-${runId}.jsonl`);
     try { linkSync(af, dst); } catch { try { copyFileSync(af, dst); } catch { continue; } }
