@@ -112,7 +112,10 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
     // the proven DIRECT mine (correct __spirits wing + per-spirit agent), then mark every spirit turn
     // captured so the nalu won't re-submit (and double) on the next run.
     let r: ReturnType<typeof mineSubagentsForSession> | null = null;
-    try { r = mineSubagentsForSession(transcript, wing); } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
+    // The SAME exchange reader the daemon leg submits through — both legs file identical
+    // turn content under ONE source_file key (spiritCaptureSourceFile), so a daemon-down
+    // fallback converges with (upserts over) a later daemon capture instead of doubling.
+    try { r = mineSubagentsForSession(transcript, wing, { turns: readExchanges }); } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
     if (r) {
       for (const af of files) for (const turn of readExchanges(af)) {
         const key = turn.uuid || sha(af + turn.ts + turn.text.slice(0, 64));

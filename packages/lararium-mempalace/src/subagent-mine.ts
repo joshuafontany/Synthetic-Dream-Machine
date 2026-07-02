@@ -13,19 +13,24 @@
  *     `<run>.<agentId>` (`lar_agent_handle`); the stage-name `spirit-<uuid8>` only
  *     labels. The handoff-parsed name ladder (Mask/Spirit markers, role pet-names)
  *     was a trial, now subtracted.
- *   - BOTH SIDES: mines the whole agent file (`--extract exchange` pairs handoff
- *     with the spirit's turns).
+ *   - BOTH SIDES: mines the whole agent file (the injected exchange assembler pairs
+ *     the handoff with the spirit's turns — the SAME reader the capture leg submits).
  *
- * mempalace stays vendored: we mine THROUGH its CLI (one `--agent` per invocation,
- * so each spirit mines in its own pass), never edit it. The child→parent LINK rides
- * `lar_parent_handle` (buildPatch, off the staged basename) + the KG observer
- * (observeSubagentWorldlines, D6) — no post-mine tunnel step exists or is needed.
+ * mempalace stays vendored: we mine THROUGH its CLI (`mine --source ndjson --daemon`,
+ * the SAME road the @daemon capture flush takes — one spool per spirit), never edit it.
+ * This is the daemon-down FALLBACK leg only; the primary path stays the @daemon capture
+ * verb (lares subagents). Each record carries the daemon leg's exact `source_file`
+ * (spiritCaptureSourceFile — `<wing>__spirits/<surface>__<name>__agent-<id>__run-<run>.jsonl`),
+ * so BOTH legs share ONE dedup key and the stage layout never leaks into provenance.
+ * The child→parent LINK rides `lar_parent_handle` (buildPatch, off the staged basename)
+ * + the KG observer (observeSubagentWorldlines, D6) — no post-mine tunnel step exists
+ * or is needed.
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, readdirSync, mkdirSync, linkSync, copyFileSync } from "node:fs";
+import { existsSync, readdirSync, mkdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, basename } from "node:path";
 import { resolvePalacePath } from "./palace-path.js";
@@ -129,16 +134,31 @@ export interface SubagentMineResult {
   readonly mined: Array<{ name: string; agentId: string; drawers: number | string }>;
 }
 
+export interface SubagentMineOptions {
+  /**
+   * The exchange assembler — pairs each user turn with its assistant response(s) into
+   * ONE recall unit (the caller threads lares-cli's `readExchanges`; the SAME reader the
+   * @daemon capture leg submits through, so both legs file identical turn content).
+   */
+  readonly turns: (file: string) => ReadonlyArray<{ readonly text: string }>;
+  readonly mpExe?: string;
+}
+
 /**
  * Mine every tasked-spirit transcript for a session into the project's spirits
  * wing, each labeled `spirit-<uuid8>` (identity = the worldline handle), capturing
- * both sides. Idempotent at the
- * mempalace layer (source_file dedup). Returns per-spirit counts.
+ * both sides. The daemon-down FALLBACK leg (verbatim-always): it rides the SAME
+ * `mine --source ndjson --daemon` road the @daemon capture flush takes, each record
+ * carrying the daemon leg's exact relative `source_file` (spiritCaptureSourceFile) —
+ * one dedup key across both legs, deterministic drawer ids
+ * (`sha256(source_file)_chunk_index`), so a re-mine upserts in place. Returns
+ * per-spirit counts.
  */
-export function mineSubagentsForSession(transcriptPath: string, wing: string, mpExe = resolveMempalaceExe()): SubagentMineResult {
+export function mineSubagentsForSession(transcriptPath: string, wing: string, opts: SubagentMineOptions): SubagentMineResult {
+  const mpExe = opts.mpExe ?? resolveMempalaceExe();
   const sw = spiritsWing(wing);
   // The session IS the worldline run-root; each spirit's lineage-path handle reads
-  // `<run>.<agentId>` (agent-worldline#name). Threaded through the staged filename
+  // `<run>.<agentId>` (agent-worldline#name). Threaded through the source_file basename
   // so lar-telemetry's buildPatch can derive lar_agent_handle off it.
   const runId = basename(transcriptPath).replace(/\.jsonl$/, "");
   const mined: Array<{ name: string; agentId: string; drawers: number | string }> = [];
@@ -152,21 +172,30 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
   for (const af of files) {
     const name = spiritName(af);
     const agentId = agentIdOf(af);
-    // Stage this ONE spirit alone — `mine` takes a directory, and isolating each
-    // spirit (a) keeps the parent pass from ever re-collecting it and (b) makes
-    // the staged source_file carry the surface + lineage (spiritStageBasename:
-    // `<surface>__<name>__agent-<id>__run-<run>.jsonl`) so lar-telemetry's buildPatch
-    // reads lar_surface (the token), lar_agent (the display label) and
-    // lar_agent_handle (the `<run>.<id>` worldline path) off it.
+    // ONE source_file convention across both legs: the RELATIVE
+    // `<wing>__spirits/<surface>__<name>__agent-<id>__run-<run>.jsonl` the @daemon
+    // capture leg submits. The ndjson spool (a transient batch file under the swept
+    // spirit stage) never enters provenance — the prior convos-mine leg recorded the
+    // ABSOLUTE `.spirit-stage/...` staging path, leaking the stage layout into the
+    // palace and forking the dedup key from the daemon leg's.
+    const src = spiritCaptureSourceFile(wing, name, agentId, runId);
+    // metadata.wing rides EACH record: the direct leg bypasses the node wing-stamp
+    // flush, so the routing must live on the record itself (RFC 002 §2.5 — the
+    // record's own wing wins; the ndjson adapter files it verbatim).
+    const records = opts.turns(af).map((t, i) =>
+      JSON.stringify({ content: t.text, source_file: src, chunk_index: i, metadata: { wing: sw, agent: name } }),
+    );
+    if (records.length === 0) { mined.push({ name, agentId, drawers: 0 }); continue; }
     const stage = join(spiritStageRoot(), `lar-spirit-${agentId}`);
     mkdirSync(stage, { recursive: true });
-    const dst = join(stage, spiritStageBasename(name, agentId, runId));
-    try { linkSync(af, dst); } catch { try { copyFileSync(af, dst); } catch { continue; } }
+    const spool = join(stage, `spirit-${agentId}.ndjson`);
+    try { writeFileSync(spool, records.join("\n") + "\n", "utf8"); } catch { mined.push({ name, agentId, drawers: "spool-failed" }); continue; }
     let drawers: number | string = 0;
     try {
       // --daemon HANDS OFF to the write-daemon's single palace handle (the seam) — the subagents
       // leg was the confirmed racer that grabbed the lock and blocked the telemetry-nalu flush.
-      // Every writer through the seam = nothing races. (--mode convos --daemon is daemon-supported.)
+      // Every writer through the seam = nothing races. (`mine --source ndjson --daemon` is the
+      // exact invocation the @daemon capture flush spawns — capture-flush.ts.)
       // --palace passes the CANONICAL spelling (realpath/normalize) so this leg addresses the SAME
       // write-daemon singleton as the capture flush — without it, mempalace's own default resolution
       // can key a SECOND daemon for the same physical palace (the pile-up root, 2026-06-28).
@@ -179,7 +208,7 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
       const out = mineWithServo("subagent-mine", (timeoutMs) =>
         execFileSync(
           mpExe,
-          ["--palace", resolvePalacePath(), "mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
+          ["--palace", resolvePalacePath(), "mine", "--source", "ndjson", "--daemon", spool],
           { maxBuffer: 1 << 30, encoding: "utf8", timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL },
         ),
       );
