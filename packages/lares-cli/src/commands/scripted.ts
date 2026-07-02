@@ -8,8 +8,7 @@
 import { join } from "node:path";
 import { runTsxScript, runCommand } from "../spawn.js";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
-import { larStateHome, larHome } from "@lararium/node";
-import { larDataDir, larIdentityDir, larRoot } from "../env.js";
+import { larDataDir, larProjectionDir, larIdentityDir, larRoot } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const NODE_PKG = join(REPO_ROOT, "packages", "lararium-node");
@@ -64,7 +63,7 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares reset` — wipe `.lararium/` storage + bootstrap artifact, then re-init.
+ * `lares reset` — wipe the vessel store (`<data>/vessel`) + bootstrap artifact, then re-init.
  *
  * Operator-confirmation gate: until S7 lands proper auth, we still want a
  * second-thought guard. Honors --force to skip the prompt.
@@ -73,10 +72,12 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   const { rmSync, existsSync } = await import("node:fs");
   // Only an EXPLICIT --root sets LAR_ROOT (isolated instances). NEVER default it to REPO_ROOT —
   // that would make larHome() resolve to the repo and defeat the ~/.lares uplift (the bug this
-  // reset hit). With LAR_ROOT unset: storage → ~/.lares (larDataDir), genesis → repo (larRoot).
+  // reset hit). With LAR_ROOT unset: storage → <data>/vessel (larDataDir), genesis → repo (larRoot).
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
   const genesis   = join(larRoot(), "genesis");
-  const storage   = larDataDir();   // runtime → ~/.lares/.lararium (genesis stays corpus-relative)
+  // The strangler RETIRED (2026-07-01): larDataDir()/larProjectionDir() resolve the canonical
+  // XDG dirs deterministically — no legacy arm exists to dangle, so the wipe names them directly.
+  const storage   = larDataDir();
   const bootstrap = join(genesis, "social-bootstrap.json");
   const islandBin = join(genesis, "island.bin");
   const islandSha = join(genesis, "island.sha256");
@@ -88,10 +89,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   const islandCasDir     = join(genesis, "cas");                   // G-CAS slice 1: the blob bytes
   // The projection watermark (synced-tree) must die WITH the store — a surviving watermark makes the
   // post-reset ingest read every bags/*.md as "unchanged" and the fresh empty docs stay empty,
-  // silently (GAP 1, regenesis scout 2026-07-01). Both strangler arms wiped: the reader would fall
-  // back to whichever survived.
-  const projectionNew    = join(larStateHome(), "projection");
-  const projectionLegacy = join(larHome(), ".lararium-projection");
+  // silently (GAP 1, regenesis scout 2026-07-01).
+  const projection = larProjectionDir();
 
   console.log("[lares reset] will delete:");
   if (existsSync(storage))   console.log(`  ${storage}`);
@@ -104,8 +103,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   if (existsSync(islandCidPlugins)) console.log(`  ${islandCidPlugins}`);
   if (existsSync(islandManifest))   console.log(`  ${islandManifest}`);
   if (existsSync(islandCasDir))     console.log(`  ${islandCasDir}`);
-  if (existsSync(projectionNew))    console.log(`  ${projectionNew}`);
-  if (existsSync(projectionLegacy)) console.log(`  ${projectionLegacy}`);
+  if (existsSync(projection)) console.log(`  ${projection}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
@@ -120,8 +118,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandCidPlugins, { force: true });
   rmSync(islandManifest,   { force: true });
   rmSync(islandCasDir, { recursive: true, force: true });
-  rmSync(projectionNew,    { recursive: true, force: true });
-  rmSync(projectionLegacy, { recursive: true, force: true });
+  rmSync(projection, { recursive: true, force: true });
   console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)

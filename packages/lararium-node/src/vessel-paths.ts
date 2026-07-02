@@ -22,9 +22,8 @@
  * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
- * A few resolvers (the vessel substrate, the projection watermark, the ephemeral corpus root) still
- * read OLD-else-NEW via {@link strangle} — probe the new XDG dir; use it once it exists; else fall back
- * to the legacy `~/.lares` spelling; on a fresh vessel default to the new canonical dir. The env seams
+ * The OLD-else-NEW strangler RETIRED (2026-07-01): every resolver now answers the canonical XDG dir
+ * deterministically — no legacy `~/.lares` fallback arm remains. The env seams
  * (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
  *
  * `LAR_ROOT` overrides the home root for ISOLATED instances (the test harness / staged pairs): each
@@ -39,10 +38,10 @@ import { existsSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 
-// The XDG data-home + the OLD-else-NEW strangler + the mempalace content parent live in ONE cycle-free
+// The XDG data-home + the mempalace content parent live in ONE cycle-free
 // home — `@lararium/mempalace/xdg-base` — so vessel-paths and mempalace's palace-path derive the store
 // parent from the SAME source (no value-duplication). Imported across the existing node → mempalace edge.
-import { larDataHome, strangle, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
+import { larDataHome, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
 
 // Re-export the data home so the historical `@lararium/node` surface (`larDataHome`) stays stable.
 export { larDataHome };
@@ -95,10 +94,10 @@ export function resolveMempalaceExe(): string {
   return existsSync(local) ? local : exe;
 }
 
-// ── The legacy vessel home (isolation base + still-legacy organs) ─────────────────────────────────
+// ── The `~/.lares` vessel home (isolation base + vessel-identity) ─────────────────────────────────
 
 /** The `~/.lares` vessel home — `LAR_ROOT` (isolated instance) or `~/.lares`. Hosts vessel-identity
- *  and the legacy fallback arm for every resolver that still reads OLD-else-NEW via {@link strangle}. */
+ *  (a separate concern, kept at its `~/.lares` spelling). */
 export function larHome(): string {
   return process.env["LAR_ROOT"] ?? join(homedir(), ".lares");
 }
@@ -198,11 +197,10 @@ export function memeticWikitextInformalDir(): string {
 
 // ── The ephemeral corpus multipalace (scratch sensoriums) ─────────────────────────────────────────
 
-/** The scratch-sensorium root — the strangler over `<cache>/scratch/sensoriums` (new) /
- *  `~/.lares/.corpus` (legacy). Each `lares corpus` run mints a dissolvable child instance below it
- *  (ephemeral, sweepable; palace-teardown reaps every child). */
+/** The scratch-sensorium root — `<cache>/scratch/sensoriums`. Each `lares corpus` run mints a
+ *  dissolvable child instance below it (ephemeral, sweepable; palace-teardown reaps every child). */
 export function larCorpusDir(): string {
-  return strangle(join(larCacheHome(), "scratch", "sensoriums"), join(larHome(), ".corpus"));
+  return join(larCacheHome(), "scratch", "sensoriums");
 }
 
 /** The scratch instance dir for one ephemeral corpus-sensorium, by its id, under {@link larCorpusDir}. */
@@ -212,11 +210,10 @@ export function corpusInstanceDir(id: string): string {
 
 // ── The vessel substrate (Automerge Repo — NOT a sensorium) ──────────────────────────────────────
 
-/** Storage dir — the Automerge Repo, vessel key, and UDS socket. The strangler over `<data>/vessel`
- *  (new) / `~/.lares/.lararium` (legacy). WIPED by `reset`. NOT a sensorium (it carries no sensory
- *  fiber caps) — kept distinct under `<data>/vessel`. */
+/** Storage dir — the Automerge Repo, vessel key, and UDS socket, at `<data>/vessel`.
+ *  WIPED by `reset`. NOT a sensorium (it carries no sensory fiber caps). */
 export function larDataDir(): string {
-  return strangle(join(larDataHome(), "vessel"), join(larHome(), ".lararium"));
+  return join(larDataHome(), "vessel");
 }
 
 /** Vessel identity dir — the keypair, PRESERVED across `reset`. EXCLUDED from the XDG move
@@ -227,10 +224,9 @@ export function larIdentityDir(): string {
 
 // ── Durable watermarks (state) ────────────────────────────────────────────────────────────────────
 
-/** Disk-projection state dir (the synced-tree watermark) — strangler `<state>/projection` (new) /
- *  `~/.lares/.lararium-projection` (legacy). */
+/** Disk-projection state dir (the synced-tree watermark) — `<state>/projection`. */
 export function larProjectionDir(): string {
-  return strangle(join(larStateHome(), "projection"), join(larHome(), ".lararium-projection"));
+  return join(larStateHome(), "projection");
 }
 
 /** Harvest watermark (lar_hv idempotency state) — `<state>/harvest`. */

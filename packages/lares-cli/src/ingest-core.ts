@@ -50,7 +50,7 @@ export interface ScanResult {
   readonly skipped: string[];
 }
 
-/** Open the Synced tree at the canonical projection-state path (~/.lares/.lararium-projection —
+/** Open the Synced tree at the canonical projection-state path (larProjectionDir() —
  *  runtime vessel state, not corpus). */
 export function openSyncedTree(): SyncedTree {
   return new SyncedTree(join(larProjectionDir(), "synced-tree.json"));

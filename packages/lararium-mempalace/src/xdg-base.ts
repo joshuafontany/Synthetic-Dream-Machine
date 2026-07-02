@@ -1,5 +1,5 @@
 /**
- * xdg-base — the ONE cycle-free source for the XDG data-home resolution + the OLD-else-NEW strangler
+ * xdg-base — the ONE cycle-free source for the XDG data-home resolution
  * + the verbatim mempalace CONTENT parent. Both `@lararium/node`'s vessel-paths.ts and this package's
  * palace-path.ts derive the mempalace store parent from HERE, so the two views stay byte-identical
  * without value-duplication.
@@ -11,7 +11,6 @@
  * Meme: lar:///ha.ka.ba/@lararium/mempalace/xdg-base
  */
 
-import { existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
@@ -24,17 +23,6 @@ export function larDataHome(): string {
   const root = process.env["LAR_ROOT"];
   return root ? join(root, "data")
               : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lares");
-}
-
-/**
- * Read OLD-else-NEW: prefer the new XDG dir once it exists, fall back to the legacy `~/.lares` spelling
- * when only IT exists, and default a fresh vessel to the new canonical dir. A live box with legacy dirs
- * present resolves to them until its bytes reach the new home.
- */
-export function strangle(newDir: string, legacyDir: string): string {
-  if (existsSync(newDir)) return newDir;
-  if (existsSync(legacyDir)) return legacyDir;
-  return newDir;
 }
 
 /**

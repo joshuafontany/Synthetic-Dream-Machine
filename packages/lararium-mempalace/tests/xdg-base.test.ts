@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from "vitest";
 import { mkdtempSync, rmSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { larDataHome, strangle, mempalaceContentParent } from "../src/xdg-base.js";
+import { larDataHome, mempalaceContentParent } from "../src/xdg-base.js";
 
 /**
  * xdg-base is the ONE cycle-free source both `@lararium/node`'s vessel-paths.ts (`larMempalaceDir`)
@@ -50,20 +50,6 @@ describe("xdg-base (the shared XDG resolver)", () => {
     set("HOME", "/home/tester");
     set("USERPROFILE", "/home/tester");
     expect(larDataHome()).toBe(join("/home/tester", ".local", "share", "lares"));
-  });
-
-  it("strangle: new-if-exists, else legacy-if-exists, else new (fresh)", () => {
-    const root = freshRoot();
-    const newDir = join(root, "new");
-    const legacy = join(root, "legacy");
-    // fresh: neither present → new
-    expect(strangle(newDir, legacy)).toBe(newDir);
-    // legacy only → legacy
-    mkdirSync(legacy, { recursive: true });
-    expect(strangle(newDir, legacy)).toBe(legacy);
-    // new present → new wins
-    mkdirSync(newDir, { recursive: true });
-    expect(strangle(newDir, legacy)).toBe(newDir);
   });
 
   it("mempalaceContentParent: always the upstream-default ~/.mempalace (never the tree)", () => {
