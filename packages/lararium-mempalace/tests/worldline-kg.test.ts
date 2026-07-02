@@ -75,6 +75,22 @@ describe("worldline-kg arg/NDJSON building (fake exec)", () => {
     expect(c.args).toEqual([resolveKgIo(), "--palace", "/tmp/palaceX", "kapae", "--turn-key", "t1", "--ended", "2026-06-29"]);
   });
 
+  test("the MEMBRANE truncates ms ISO to whole seconds on EVERY temporal seam (valid_from / ended / kapae)", () => {
+    // The whole-second law lives in the membrane now — no caller can forward a ms ISO past it.
+    calls.length = 0;
+    persistWorldlineEdges([delegationEdge("run", "run.child", { validFrom: "2026-06-29T00:00:00.123Z", turnKey: "t1" })], opts);
+    expect(JSON.parse((calls[0]!.ndjson ?? "").trim()).valid_from).toBe("2026-06-29T00:00:00Z");
+
+    calls.length = 0;
+    closeWorldlineEdges([handbackClose("run", "run.child", "2026-06-29T02:00:00.456Z")], opts);
+    expect(JSON.parse((calls[0]!.ndjson ?? "").trim()).ended).toBe("2026-06-29T02:00:00Z");
+
+    calls.length = 0;
+    kapaeTurn("t1", { ...opts, ended: "2026-06-29T03:00:00.789Z" });
+    expect(calls[0]!.args).toContain("2026-06-29T03:00:00Z");
+    expect(calls[0]!.args.join(" ")).not.toContain(".789");
+  });
+
   test("empty edge lists are no-ops (no exec)", () => {
     calls.length = 0;
     expect(persistWorldlineEdges([], opts).added).toBe(0);
@@ -176,6 +192,31 @@ describe.skipIf(!PY)("worldline-kg ↔ real mempalace KG (integration)", () => {
 
       // KAPAE is idempotent — a re-run closes nothing new
       expect(kapaeTurn("inject-turn", { ...opts, ended: "2026-06-29T04:00:00Z" }).closed).toBe(0);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test("a MILLISECOND ISO rides the membrane into the KG — the row LANDS whole-second, zero traceback", () => {
+    if (!kgImportable) return; // mempalace not importable in this env — treat as skip
+    const dir = mkdtempSync(join(tmpdir(), "lar-wl-kg-ms-"));
+    const palace = join(dir, "palace");
+    mkdirSync(palace, { recursive: true });
+    const opts = { palacePath: palace };
+    try {
+      // SPAWN with a transcript-grade ms timestamp — pre-membrane this raised a sanitize traceback.
+      const added = persistWorldlineEdges(
+        [delegationEdge("run", "run.child", { validFrom: "2026-06-29T00:00:56.789Z", turnKey: "spawn-turn" })],
+        opts,
+      );
+      expect(added.added).toBe(1);
+      // CLOSE with a ms `ended` — the handback leg crosses the same membrane law.
+      const closed = closeWorldlineEdges([handbackClose("run", "run.child", "2026-06-29T02:00:01.234Z")], opts);
+      expect(closed.invalidated).toBe(1);
+      const rows = dump(palace);
+      expect(rows.length).toBe(1);
+      expect(rows[0]![1]).toBe("2026-06-29T00:00:56Z"); // valid_from landed, whole-second
+      expect(rows[0]![2]).toBe("2026-06-29T02:00:01Z"); // valid_to landed, whole-second
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

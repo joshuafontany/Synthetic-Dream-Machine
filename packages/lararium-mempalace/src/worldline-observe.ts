@@ -40,20 +40,16 @@ import { listSpiritFiles, agentIdOf, runIdOf } from "./subagent-mine.js";
 import {
   persistWorldlineEdges,
   closeWorldlineEdges,
+  isoWholeSeconds,
   KgUnavailable,
   type WorldlineKgOptions,
 } from "./worldline-kg.js";
 
-/**
- * Truncate an ISO timestamp to WHOLE SECONDS before it crosses into the mempalace KG — the KG's
- * `sanitize_iso_temporal` accepts only `YYYY-MM-DD` / `YYYY-MM-DDTHH:MM:SSZ` (canonical UTC,
- * no fractional part), while Claude transcripts stamp millisecond ISO (`…:56.789Z`). Un-truncated,
- * every session's spawn→Delegation edge raised one traceback and never landed. Pure string cut —
- * a non-ISO or already-whole value passes through untouched.
- */
-export function isoWholeSeconds(ts: string): string {
-  return ts.replace(/(\d{2}:\d{2}:\d{2})\.\d+(?=Z|[+-]\d{2}:?\d{2}$|$)/, "$1");
-}
+// The whole-second law now lives IN the KG membrane (worldline-kg.ts) — every temporal value
+// crossing there rides it regardless of caller. This observer still truncates at derivation time
+// (below) so the DERIVED edges it returns carry canonical timestamps too; re-exported for the
+// callers that imported it from here.
+export { isoWholeSeconds } from "./worldline-kg.js";
 
 /** The boundary turns of a spirit transcript — the spawn anchor (first) and handback anchor (last). */
 interface SpiritBounds {

@@ -40,6 +40,18 @@ export interface WorldlineKgOptions {
   readonly exec?: (bin: string, args: readonly string[]) => string;
 }
 
+/**
+ * Truncate an ISO timestamp to WHOLE SECONDS before it crosses into the mempalace KG — the KG's
+ * `sanitize_iso_temporal` accepts only `YYYY-MM-DD` / `YYYY-MM-DDTHH:MM:SSZ` (canonical UTC,
+ * no fractional part), while Claude transcripts stamp millisecond ISO (`…:56.789Z`). Un-truncated,
+ * a ms value raises one traceback per record and the edge never lands. Pure string cut — a non-ISO
+ * or already-whole value passes through untouched. THE MEMBRANE OWNS THIS LAW: every temporal
+ * value below (valid_from / ended) rides through it, so no caller can forward a ms ISO past here.
+ */
+export function isoWholeSeconds(ts: string): string {
+  return ts.replace(/(\d{2}:\d{2}:\d{2})\.\d+(?=Z|[+-]\d{2}:?\d{2}$|$)/, "$1");
+}
+
 /** Locate `kg_io.py` — CODE, so it lives at the repo root (never LAR_ROOT). */
 export function resolveKgIo(): string {
   return join(repoRoot, "packages", "lararium-mempalace", "scripts", "kg_io.py");
@@ -97,7 +109,7 @@ export function persistWorldlineEdges(edges: readonly WorldlineEdgeTriple[], opt
     subject: e.subject,
     predicate: e.predicate,
     object: e.object,
-    ...(e.valid_from !== undefined ? { valid_from: e.valid_from } : {}),
+    ...(e.valid_from !== undefined ? { valid_from: isoWholeSeconds(e.valid_from) } : {}),
     ...(e.turnKey !== undefined ? { turn_key: e.turnKey } : {}),
   }));
   const res = runWithNdjson(r, "add", records) as { added?: number };
@@ -115,7 +127,7 @@ export function closeWorldlineEdges(closes: readonly WorldlineEdgeClose[], opts:
     subject: c.subject,
     predicate: c.predicate,
     object: c.object,
-    ...(c.ended !== undefined ? { ended: c.ended } : {}),
+    ...(c.ended !== undefined ? { ended: isoWholeSeconds(c.ended) } : {}),
   }));
   const res = runWithNdjson(r, "invalidate", records) as { invalidated?: number };
   return { invalidated: typeof res.invalidated === "number" ? res.invalidated : closes.length };
@@ -135,7 +147,7 @@ export function closeWorldlineEdges(closes: readonly WorldlineEdgeClose[], opts:
 export function kapaeTurn(turnKey: string, opts: WorldlineKgOptions & { ended?: string } = {}): { closed: number; ended: string } {
   if (!turnKey) throw new Error("kapaeTurn: turnKey required");
   const r = resolve(opts);
-  const args = ["--palace", r.palace, "kapae", "--turn-key", turnKey, ...(opts.ended ? ["--ended", opts.ended] : [])];
+  const args = ["--palace", r.palace, "kapae", "--turn-key", turnKey, ...(opts.ended ? ["--ended", isoWholeSeconds(opts.ended)] : [])];
   const out = r.exec(r.py, [r.script, ...args]);
   let res: { closed?: number; ended?: string } = {};
   try { res = JSON.parse(out.trim()) as typeof res; } catch { /* fall through */ }
