@@ -110,3 +110,41 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
     expect(resolveCapDir(dir, m.coupling.children[0]!.dir)).toBe(join(dir, "who"));
   });
 });
+
+describe("sensorium — the persistence cap (the 5th part, path-A un-fuse)", () => {
+  test("a sensorium composes has.persistence as a COSHEAF fiber + a persistencePolicy base-cap", () => {
+    const dir = "/tmp/sens-x";
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "memory", lar: "lar:///x",
+      caps: {
+        content: { absDir: "/home/u/.mempalace", engine: "mempalace" },              // li sheaf (default)
+        persistence: { absDir: dir + "/persistence", engine: "persistence", variance: "cosheaf" },
+      },
+      persistencePolicy: { admitThreshold: 0.5, halfLife: null },                     // witness/authority mode
+    });
+    expect(m.has["persistence"]!.variance).toBe("cosheaf");
+    expect(planeVariance(m, "persistence")).toBe("cosheaf");                          // read from the fiber's own tag
+    expect(planeVariance(m, "content")).toBe("sheaf");
+    expect(m.persistencePolicy).toEqual({ admitThreshold: 0.5, halfLife: null });
+  });
+
+  test("path-A: the maturation mode rides halfLife, ORTHOGONAL to the ephemeral bool", () => {
+    const dir = "/tmp/sens-eph";
+    // an ephemeral (swept-on-exit) sensorium in AUTHORITY mode (halfLife null) — the two axes cross freely
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "scratch", lar: "lar:///y",
+      caps: { persistence: { absDir: dir + "/p", engine: "persistence", variance: "cosheaf" } },
+      persistencePolicy: { admitThreshold: 0.5, halfLife: 2592000 },                  // affinity mode
+      ephemeral: false,                                                               // but durable-on-disk
+    });
+    expect(m.ephemeral).toBe(false);                 // swept-on-exit axis UNTOUCHED
+    expect(m.persistencePolicy!.halfLife).toBe(2592000); // maturation axis independent
+  });
+
+  test("no persistence cap → the field is simply absent (non-breaking)", () => {
+    const m = buildSensoriumManifest("/tmp/sens-none", {
+      sensorium: "plain", lar: "lar:///z", caps: { content: { absDir: "/c", engine: "mempalace" } },
+    });
+    expect(m.persistencePolicy).toBeUndefined();
+  });
+});

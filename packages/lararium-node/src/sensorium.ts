@@ -30,6 +30,7 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { isAbsolute, join, relative } from "node:path";
+import type { PersistencePolicy } from "@lararium/mesh";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /** The manifest schema version — bump only on a breaking shape change. */
@@ -121,7 +122,16 @@ export interface SensoriumManifest {
   readonly bands: SensoriumBands;
   /** BASE cap — the dumb child-edges gluing sub-sensoriums. No bytes. KI cosheaf (see {@link planeVariance}). */
   readonly coupling: SensoriumCoupling;
-  /** does this sensorium's bytes live in ephemeral scratch (swept), or durable store? */
+  /**
+   * BASE cap (optional) — the persistence dials for this sensorium's `has.persistence` cap (the 5th
+   * part). `admitThreshold` = the surprise floor at admission; `halfLife` = the maturation MODE:
+   * null = append-only-witness (authority, never cools — the Mempalace) · finite = affinity-
+   * maturation (ephemeral exploratory sensoria; standing cools). Absent = the sensorium composes no
+   * persistence cap. ORTHOGONAL to {@link ephemeral} (path-A un-fuse: `ephemeral` stays swept-on-
+   * process-exit; the maturation mode lives HERE in `halfLife`, never overloaded onto the bool).
+   */
+  readonly persistencePolicy?: PersistencePolicy;
+  /** does this sensorium's bytes live in ephemeral scratch (swept-on-exit), or durable store? */
   readonly ephemeral: boolean;
   /** ISO-8601 mint time. */
   readonly created: string;
@@ -191,6 +201,8 @@ export interface BuildSensoriumOptions {
   readonly bands?: SensoriumBands;
   /** child sub-sensoriums — each { sensorium, absDir } becomes a dumb `coupling.children[]` edge. */
   readonly children?: ReadonlyArray<{ readonly sensorium: string; readonly absDir: string }>;
+  /** the persistence dials (see {@link SensoriumManifest.persistencePolicy}); paired with a `has.persistence` cap. */
+  readonly persistencePolicy?: PersistencePolicy;
   readonly ephemeral?: boolean;
   /** override the mint time (tests); defaults to now. */
   readonly created?: string;
@@ -213,6 +225,7 @@ export function buildSensoriumManifest(sensoriumDir: string, opts: BuildSensoriu
     has,
     bands: opts.bands ?? {},
     coupling: { children },
+    ...(opts.persistencePolicy ? { persistencePolicy: opts.persistencePolicy } : {}),
     ephemeral: opts.ephemeral ?? false,
     created: opts.created ?? new Date().toISOString(),
   };
