@@ -99,6 +99,12 @@ export function resolvePersistencePalaceSpawn(): PersistencePalaceSpawn {
   return resolveSidecarSpawn("persistence_io.py");
 }
 
+/** `content_io.py` — the persistent NDJSON `serve` holder for a CONTENT store (non-memory targeted content). */
+export type ContentPalaceSpawn = SidecarSpawn;
+export function resolveContentPalaceSpawn(): ContentPalaceSpawn {
+  return resolveSidecarSpawn("content_io.py");
+}
+
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
 export type StructureRouterSpawn = SidecarSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {
