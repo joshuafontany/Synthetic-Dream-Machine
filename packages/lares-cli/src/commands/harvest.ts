@@ -26,8 +26,8 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync, execSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
-import { homedir, tmpdir } from "node:os";
+import { existsSync, mkdirSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
@@ -40,7 +40,7 @@ import { runVerb } from "../verb-call.js";
 import { emit, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-const HARVEST_DIR = larHarvestDir();   // ~/.lares/harvest (LAR_ROOT-isolated for staged instances)
+const HARVEST_DIR = larHarvestDir();   // <state>/harvest — XDG (strangler retired); LAR_ROOT-isolated for staged instances
 
 /** One harvested turn — the gradient summary, keyed for idempotent dedup. */
 interface HarvestRecord {
