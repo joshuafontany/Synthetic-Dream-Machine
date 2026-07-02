@@ -57,7 +57,7 @@ export function resolveMempalaceSpawn(): MempalaceSpawn {
 
 /**
  * The resolved inputs ANY mempalace sidecar spawn needs — the ONE shape every sidecar shares,
- * a `serve` holder (astpalace · form_encoder) OR a batch sidecar (structure_router · bands_sidecar
+ * a `serve` holder (structurepalace · form_encoder) OR a batch sidecar (structure_router · bands_sidecar
  * · form_induction): the venv-aware python, the helper SCRIPT (CODE, so it lives at the repo root,
  * never LAR_ROOT), the mempalace `submoduleRoot` (spawn cwd + PYTHONPATH so `import mempalace`
  * resolves), and whether the script is present on disk. Structurally identical to
@@ -81,10 +81,10 @@ function resolveSidecarSpawn(scriptFile: string): SidecarSpawn {
 // The five sidecars name themselves by their one divergent bit — the script file. The `*Spawn`
 // type aliases keep each holder's declared surface stable (callers destructure the shared shape).
 
-/** `astpalace_io.py` — the persistent NDJSON `serve` holder for the `.astpalace` AST store. */
-export type AstPalaceSpawn = SidecarSpawn;
-export function resolveAstPalaceSpawn(): AstPalaceSpawn {
-  return resolveSidecarSpawn("astpalace_io.py");
+/** `structurepalace_io.py` — the persistent NDJSON `serve` holder for the `.structurepalace` AST store. */
+export type StructurePalaceSpawn = SidecarSpawn;
+export function resolveStructurePalaceSpawn(): StructurePalaceSpawn {
+  return resolveSidecarSpawn("structurepalace_io.py");
 }
 
 /** `form_encoder.py` — the persistent NDJSON `serve` holder for the living-grammar FORM store. */

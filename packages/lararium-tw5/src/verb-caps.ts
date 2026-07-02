@@ -120,9 +120,9 @@ export interface SubagentEdgePair {
 export interface DaemonVerbProvider {
   /** FEED one captured turn to the @daemon telemetry capture cap (the nalu). Fire-and-forget. */
   placeTelemetry(turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string, chunkIndex?: number): void;
-  /** REWIND (kapae) one turn's .astpalace tally + salience down-weight, IN the @daemon (warm holder).
+  /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
-  placeAstpalaceKapae(turnKey: string, ended?: string): void;
+  placeStructurepalaceKapae(turnKey: string, ended?: string): void;
   /** Derive a session transcript's spawn/handback edges (worldline-compare's edge-DAG source). */
   subagentEdges(transcript: string): readonly SubagentEdgePair[];
   /** Well 1 — the concurrent-capable causal verdict between two handles, IN the daemon VM. */
@@ -334,7 +334,7 @@ export function captureVerbCap(): CapModule {
           const frontier = Array.isArray(rawFrontier)
             ? rawFrontier.filter((x): x is string => typeof x === "string" && x !== "")
             : typeof rawFrontier === "string" && rawFrontier ? [rawFrontier] : undefined;
-          // Optional turn uuid — the .astpalace provenance key (the kapae key); rides into the AST
+          // Optional turn uuid — the .structurepalace provenance key (the kapae key); rides into the AST
           // store via the capture record metadata, stripped from the content drawer.
           const turnKey = typeof args["turnKey"] === "string" && args["turnKey"] ? (args["turnKey"] as string) : undefined;
           // Optional producer ordinal — the ndjson chunk_index half of the deterministic drawer id
@@ -346,13 +346,13 @@ export function captureVerbCap(): CapModule {
           daemon.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined, turnKey, chunkIndex);
           return { ok: true, captured: true, bytes: turnText.length };
         });
-        registry.register("astpalace-kapae", async (args) => {
-          // REWIND one turn's .astpalace tally (+ salience down-weight) — the convergence twin of the
+        registry.register("structurepalace-kapae", async (args) => {
+          // REWIND one turn's .structurepalace tally (+ salience down-weight) — the convergence twin of the
           // CLI-side worldline KG valid-close. Fire-and-forget through the @daemon's warm holder.
           const turnKey = typeof args["turnKey"] === "string" ? (args["turnKey"] as string) : "";
-          if (!turnKey) throw new Error("astpalace-kapae: args.turnKey (non-empty string) required");
+          if (!turnKey) throw new Error("structurepalace-kapae: args.turnKey (non-empty string) required");
           const ended = typeof args["ended"] === "string" && args["ended"] ? (args["ended"] as string) : undefined;
-          daemon.placeAstpalaceKapae(turnKey, ended);
+          daemon.placeStructurepalaceKapae(turnKey, ended);
           return { ok: true, kapae: true, turnKey };
         });
       };

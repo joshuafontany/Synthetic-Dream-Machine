@@ -1,12 +1,12 @@
 """Tests for structure_router — the corpus STRUCTURE-plane parse router.
 
 Two faces proven here:
-  1. the ROUTER — each corpus kind parses to a nested-dict tree the astpalace encoder
+  1. the ROUTER — each corpus kind parses to a nested-dict tree the structurepalace encoder
      accepts (a fixture per kind → a tree → a cosine-meaningful structure vector), and
   2. the SIGIL grammar — a `<<~ … >>` block parses to the expected AST (the read-side
      twin of the lar-sigil TW5 wikirules; node types match grammar.js).
 
-Parse-level tests need NO chroma; the encoder + ingest tests import astpalace_io (chroma)
+Parse-level tests need NO chroma; the encoder + ingest tests import structurepalace_io (chroma)
 and SKIP cleanly when it / the venv stack is absent. Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
@@ -205,8 +205,8 @@ def test_prose_stands_with_the_gpu_cap_ABSENT(monkeypatch):
 
 def _encoder():
     try:
-        import astpalace_io
-        return astpalace_io
+        import structurepalace_io
+        return structurepalace_io
     except Exception:  # noqa: BLE001 — chroma/venv stack absent
         return None
 
@@ -214,7 +214,7 @@ def _encoder():
 def test_structure_vectors_are_cosine_meaningful():
     ap = _encoder()
     if ap is None:
-        pytest.skip("astpalace_io (chroma stack) not importable")
+        pytest.skip("structurepalace_io (chroma stack) not importable")
 
     def vec(kind, src):
         return ap._structural_embed(sr.parse_to_tree(kind, src))
@@ -235,7 +235,7 @@ def test_structure_vectors_are_cosine_meaningful():
 def test_ingest_populates_a_structure_palace(tmp_path):
     ap = _encoder()
     if ap is None:
-        pytest.skip("astpalace_io (chroma stack) not importable")
+        pytest.skip("structurepalace_io (chroma stack) not importable")
     src = tmp_path / "src"
     src.mkdir()
     (src / "a.js").write_text("function f(x){ return x*2; }\nconst y=[1,2,3];\n")

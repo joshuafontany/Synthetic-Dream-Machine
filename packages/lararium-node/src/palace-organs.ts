@@ -6,7 +6,7 @@
  * The five organs (the astral palaces made filesystem):
  *   - mempalace   ~/.mempalace (or $MEMPALACE_PALACE_PATH) — the VERBATIM content store; the
  *                 worldline-KG knowledge_graph.sqlite3 lives INSIDE it, so it stands FIRST.
- *   - astpalace   <memory>/structure  — the structural-AST store (a 2nd mempalace instance).
+ *   - structurepalace   <memory>/structure  — the structural-AST store (a 2nd mempalace instance).
  *   - formpalace  <memory>/form       — the living-grammar FORM-vector store (a 3rd instance).
  *   - meshpalace  <data>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a live
  *                 node). It `#has` three nested child sensoriums — WHO · AUTHORITY · FLOW — each its
@@ -28,7 +28,7 @@ import { spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import {
-  larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
+  larMempalaceDir, larStructurePalaceDir, larFormPalaceDir, larMeshPalaceDir, memorySensoriumDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir, resolveMempalaceExe,
   memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
 } from "./vessel-paths.js";
@@ -38,7 +38,7 @@ import { defaultSensoriumBands } from "./memetic-wikitext-sensorium.js";
 
 /** One ledger line from a setup pass — {@link setupPalaceOrgans} returns these (table/JSON-renderable). */
 export interface PalaceSetupStep {
-  /** the organ (or sub-step) name, e.g. "mempalace" | "mempalace:auto-save-off" | "astpalace" */
+  /** the organ (or sub-step) name, e.g. "mempalace" | "mempalace:auto-save-off" | "structurepalace" */
   readonly step: string;
   /** did this step DO work (true), or skip because the organ was already present (false)? */
   readonly ran: boolean;
@@ -146,7 +146,7 @@ export function palaceOrgans(): PalaceOrgan[] {
       init: initMempalace,
       healthProbe: () => existsSync(join(mempalaceDir, "config.json")),
     },
-    { name: "astpalace",  dir: larAstPalaceDir(),  init: ensureDirOrgan("astpalace",  larAstPalaceDir())  },
+    { name: "structurepalace",  dir: larStructurePalaceDir(),  init: ensureDirOrgan("structurepalace",  larStructurePalaceDir())  },
     { name: "formpalace", dir: larFormPalaceDir(), init: ensureDirOrgan("formpalace", larFormPalaceDir()) },
     // The `mesh` sensorium TREE — the parent dir plus its three nested children (who/authority/flow),
     // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
@@ -209,7 +209,7 @@ export function materializeMemorySensorium(): PalaceSetupStep {
     lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
     caps: {
       content:   { absDir: larMempalaceDir(), engine: "mempalace" },
-      structure: { absDir: larAstPalaceDir(), engine: "astpalace" },
+      structure: { absDir: larStructurePalaceDir(), engine: "structurepalace" },
       form:      { absDir: larFormPalaceDir(), engine: "formpalace" },
     },
     // BASE cap — interval-grain metadata only; the wavelet bands compute on read, no bytes stored.

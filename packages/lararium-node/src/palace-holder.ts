@@ -11,8 +11,8 @@
  *   - the TRANSPORT cap  → {@link PalaceHolder} (this module): spawn-once, line-RPC, stderr
  *     surfacing, ping handshake, self-healing registry, ref-counted singleton-per-dir.
  *   - the REGISTRY cap   → {@link PalaceHolderRegistry}: ONE map per palace TYPE, so two
- *     palace types serving the SAME dir never collide (astpalace ⟂ formpalace).
- * Each store (astpalace · formpalace) then #has only its own OP SURFACE — a thin typed
+ *     palace types serving the SAME dir never collide (structurepalace ⟂ formpalace).
+ * Each store (structurepalace · formpalace) then #has only its own OP SURFACE — a thin typed
  * facade of `holder.send(op, fields)` calls — and nothing of the transport machinery.
  *
  * The honest grain (NOT a god base-class — the sidecar 2-shapes lesson carried up): the
@@ -42,7 +42,7 @@ export interface PalaceHolderProc {
 /** Test seam: produce the holder process for a canonical palace dir (defaults to a python helper). */
 export type PalaceHolderSpawn = (canonicalDir: string) => PalaceHolderProc;
 
-/** The resolved spawn inputs a python `serve` holder needs (the shape AstPalaceSpawn / FormEncoderSpawn share). */
+/** The resolved spawn inputs a python `serve` holder needs (the shape StructurePalaceSpawn / FormEncoderSpawn share). */
 export interface ResolvedServeSpawn {
   /** the venv-aware interpreter, or null when none holds mempalace */
   readonly python: string | null;
@@ -57,7 +57,7 @@ export interface ResolvedServeSpawn {
 /**
  * Build the default holder spawn for a python `serve` palace store: resolve the venv-aware python
  * + helper script (lazily, per spawn, via `resolveSpawn`), then run `<python> <script> serve
- * --palace <dir>` with PYTHONPATH reaching the mempalace submodule. astpalace + formpalace share
+ * --palace <dir>` with PYTHONPATH reaching the mempalace submodule. structurepalace + formpalace share
  * this verbatim — the only divergence was the resolve fn, lifted to a parameter here.
  */
 export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn): PalaceHolderSpawn {
@@ -117,7 +117,7 @@ export class PalaceHolder {
     readonly canonicalDir: string,
     private readonly spawnProc: PalaceHolderSpawn,
     private readonly timeoutMs: number,
-    /** error-message prefix, e.g. "astpalace" | "form_encoder" */
+    /** error-message prefix, e.g. "structurepalace" | "form_encoder" */
     private readonly label: string,
     /** drop this holder from its registry on death (self-heal) */
     private readonly dropSelf: (holder: PalaceHolder) => void,
@@ -225,7 +225,7 @@ export class PalaceHolder {
 
 /**
  * The REGISTRY cap — ONE holder per canonical palace dir, scoped to ONE palace TYPE. Each
- * palace store instantiates its OWN registry, so astpalace's holders and formpalace's holders
+ * palace store instantiates its OWN registry, so structurepalace's holders and formpalace's holders
  * stay separate even when they happen to serve the same dir. Makes "one holder, never a pile"
  * true and gives the store a uniform acquire/release lifecycle.
  */

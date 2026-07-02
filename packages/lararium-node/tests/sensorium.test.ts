@@ -25,7 +25,7 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
         lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
         caps: {
           content:   { absDir: legacyContent,               engine: "mempalace" },  // OUTSIDE → absolute
-          structure: { absDir: join(dir, "structure"),      engine: "astpalace" },  // inside → relative
+          structure: { absDir: join(dir, "structure"),      engine: "structurepalace" },  // inside → relative
           form:      { absDir: join(dir, "form"),           engine: "formpalace" }, // inside → relative
         },
         bands: { grain: "wavelet" },
@@ -67,7 +67,7 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
       lar: "lar:///x",
       caps: {
         content:   { absDir: join(dir, "content"),   engine: "mempalace" },   // default sheaf
-        structure: { absDir: join(dir, "structure"),  engine: "astpalace" },
+        structure: { absDir: join(dir, "structure"),  engine: "structurepalace" },
         form:      { absDir: join(dir, "form"),        engine: "formpalace" },
       },
     });

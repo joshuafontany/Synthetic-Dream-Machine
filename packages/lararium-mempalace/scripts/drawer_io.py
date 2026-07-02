@@ -249,15 +249,15 @@ def cmd_apply(args):
 def cmd_kapae(args):
     """Down-weight a rewound turn's drawers — the strand-C salience producer.
 
-    Reads NDJSON {"verbatim_sha": V, "ended": T?} (the shas the astpalace kapae dropped — the
+    Reads NDJSON {"verbatim_sha": V, "ended": T?} (the shas the structurepalace kapae dropped — the
     turn's content drawers — each with the rewind-detection moment) and stamps
     lar_salience=floor + the lar_kapae LIVENESS stamp on every drawer whose lar_verbatim_sha
     matches. lar_kapae carries the row's `ended` (iso whole-seconds — WHEN the rewind was
     detected, the rank signal recall reads); a legacy row without `ended` stamps 1 (the
     pre-timestamp truthy mark — any truthy lar_kapae reads "rewound"). set-aside, never erased:
     the drawer stays recall-visible, but contributes almost no fused surprise to the FFZ Measure
-    servo (the convergence twin of the KG valid-close + the astpalace tally-decrement).
-    Idempotent per detection — kapae fires once per gone turn (the astpalace no-ops a re-kapae),
+    servo (the convergence twin of the KG valid-close + the structurepalace tally-decrement).
+    Idempotent per detection — kapae fires once per gone turn (the structurepalace no-ops a re-kapae),
     so the stamp keeps its FIRST detection moment. Merge-only update (never deletes a field),
     the adapter identity stamped like apply."""
     col = _col()
@@ -308,7 +308,7 @@ def main():
     a.add_argument("patchfile")
     a.set_defaults(fn=cmd_apply)
     k = sub.add_parser("kapae")  # strand-C salience down-weight by verbatim_sha
-    k.add_argument("patchfile", help="NDJSON {verbatim_sha} — the shas the astpalace kapae dropped")
+    k.add_argument("patchfile", help="NDJSON {verbatim_sha} — the shas the structurepalace kapae dropped")
     k.add_argument("--salience", type=float, default=None, help=f"floor salience (default {KAPAE_FLOOR_SALIENCE})")
     k.set_defaults(fn=cmd_kapae)
     args = ap.parse_args()

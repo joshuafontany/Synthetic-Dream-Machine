@@ -2,7 +2,7 @@
 """structure_router — the STRUCTURE-plane parse ROUTER for the lares-corpus.
 
 The corpus-palace's structure cap (corpus.md #the-caps) names two halves:
-  1. the EXISTING content-free astpalace encoder (`astpalace_io._structural_embed`),
+  1. the EXISTING content-free structurepalace encoder (`structurepalace_io._structural_embed`),
      which already eats ANY nested-dict tree and yields a cosine-meaningful SHAPE
      vector; and
   2. THIS router — `parse(kind, bytes) -> nested-dict-tree` — which turns any corpus
@@ -10,7 +10,7 @@ The corpus-palace's structure cap (corpus.md #the-caps) names two halves:
 
 ONE return shape: a nested dict `{"type": <node-type>, "children": [...subtrees...]}`
 — content-FREE (node TYPES + nesting only, never the source words), exactly what
-`astpalace_io._structural_features` reads (it labels a dict by its `type` field and
+`structurepalace_io._structural_features` reads (it labels a dict by its `type` field and
 recurses into list/dict values). So the router is purely the front door; the encoder
 is unchanged.
 
@@ -35,11 +35,11 @@ Protocol — three faces:
   * the library: `detect_kind`, `parse_to_tree`, `parse_sigils`, `parse_prose`
   * `parse  --path <file> [--kind K]`     -> the tree as JSON on stdout (one object)
   * `ingest --path <src>  --palace <dir>` -> walk a path, parse each file, push each
-        tree through the astpalace encoder into a structure chroma-palace under <dir>;
+        tree through the structurepalace encoder into a structure chroma-palace under <dir>;
         a JSON summary on stdout ({files_seen, parsed, structures, skipped, by_kind}).
 
 Run with the mempalace venv interpreter (PYTHONPATH=<repo>/mempalace so `ingest`'s
-`import astpalace_io`/`mempalace` resolve; `parse` needs neither):
+`import structurepalace_io`/`mempalace` resolve; `parse` needs neither):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 structure_router.py parse --path foo.js
 """
 from __future__ import annotations
@@ -459,11 +459,11 @@ def structural_hash(tree) -> str:
     return hashlib.sha256(canonical_json(tree).encode("utf-8")).hexdigest()
 
 
-# ── the batch INGEST command — router → astpalace encoder → structure palace ───────────
+# ── the batch INGEST command — router → structurepalace encoder → structure palace ───────────
 
 # Skip dirs / files that carry no structural corpus signal.
 _SKIP_DIRS = {".git", "node_modules", "dist", "__pycache__", ".venv", ".corpus",
-              ".astpalace", ".meshpalace", ".mempalace"}
+              ".structurepalace", ".meshpalace", ".mempalace"}
 _MAX_FILE_BYTES = 2_000_000
 
 
@@ -479,24 +479,24 @@ def _iter_files(path: str):
 
 def cmd_ingest(args) -> None:
     """Walk a source path; parse each file via the router; push each tree through the
-    astpalace structural encoder into a structure chroma-palace under <palace>. Graceful:
+    structurepalace structural encoder into a structure chroma-palace under <palace>. Graceful:
     a file the router can't parse is counted `skipped`, never fatal. JSON summary on stdout."""
     src = args.path
     palace_dir = args.palace
     summary = {"files_seen": 0, "parsed": 0, "structures": 0, "skipped": 0, "by_kind": {}, "errors": []}
 
-    # The encoder + store live in astpalace_io (lazy import: `parse` needs neither, and a
+    # The encoder + store live in structurepalace_io (lazy import: `parse` needs neither, and a
     # missing mempalace/chroma must degrade to a clean structure-skip, not a crash).
     try:
-        import astpalace_io
+        import structurepalace_io
     except Exception as exc:  # noqa: BLE001
-        summary["errors"].append(f"astpalace-encoder-unavailable: {type(exc).__name__}: {exc}")
+        summary["errors"].append(f"structurepalace-encoder-unavailable: {type(exc).__name__}: {exc}")
         sys.stdout.write(json.dumps(summary) + "\n")
         return
 
     store = None
     try:
-        store = astpalace_io.AstPalaceStore(palace_dir)
+        store = structurepalace_io.StructurePalaceStore(palace_dir)
     except Exception as exc:  # noqa: BLE001
         summary["errors"].append(f"structure-palace-unavailable: {type(exc).__name__}: {exc}")
         sys.stdout.write(json.dumps(summary) + "\n")

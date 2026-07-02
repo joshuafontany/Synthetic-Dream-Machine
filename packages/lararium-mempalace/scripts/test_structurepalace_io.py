@@ -1,11 +1,11 @@
-"""Regression tests for astpalace_io's serve singleton + idle-reap.
+"""Regression tests for structurepalace_io's serve singleton + idle-reap.
 
 These mirror the submodule daemon's singleton/idle-reap fix on OUR in-tree
-.astpalace holder. They never touch ChromaDB (a dummy store stands in), so they
+.structurepalace holder. They never touch ChromaDB (a dummy store stands in), so they
 run fast under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_astpalace_io.py -q
+        packages/lararium-mempalace/scripts/test_structurepalace_io.py -q
 """
 
 import io
@@ -15,7 +15,7 @@ import threading
 
 import pytest
 
-import astpalace_io as ap
+import structurepalace_io as ap
 
 _posix_flock = pytest.mark.skipif(
     ap._fcntl is None,
@@ -24,7 +24,7 @@ _posix_flock = pytest.mark.skipif(
 
 
 class _DummyStore:
-    """Stands in for AstPalaceStore so the loop tests never open ChromaDB."""
+    """Stands in for StructurePalaceStore so the loop tests never open ChromaDB."""
 
     def __init__(self):
         self.puts = []
@@ -86,13 +86,13 @@ def test_serve_lock_collapses_path_variants(tmp_path, monkeypatch):
 @_posix_flock
 def test_serve_refuses_second_holder_without_opening_collection(tmp_path, monkeypatch):
     """When the singleton lock is already held, _serve exits WITHOUT constructing
-    AstPalaceStore (no ChromaDB client, no mine-lock fight)."""
+    StructurePalaceStore (no ChromaDB client, no mine-lock fight)."""
     monkeypatch.setenv("HOME", str(tmp_path))
     palace = str(tmp_path / "palace")
 
     built = []
     monkeypatch.setattr(
-        ap, "AstPalaceStore", lambda *a, **kw: built.append(1) or object()
+        ap, "StructurePalaceStore", lambda *a, **kw: built.append(1) or object()
     )
 
     held = ap._acquire_serve_lock(palace)
@@ -179,14 +179,14 @@ def test_idle_ttl_seconds_env_parsing(monkeypatch):
 
 # ── Strand B: the turn_key provenance + kapae tally-decrement (real ChromaDB store) ──────────────
 #
-# These open a real AstPalaceStore in a tmp palace (the venv supplies chroma). They prove the
+# These open a real StructurePalaceStore in a tmp palace (the venv supplies chroma). They prove the
 # three new contracts: put appends turn_key into provenance + upserts the reverse-index;
 # store.kapae decrements + tombstones-at-zero (KEEPING the row) + is idempotent; the reverse-index
 # SELECT → RMW drives an O(1) kapae.
 
 
 def _store(tmp_path):
-    return ap.AstPalaceStore(str(tmp_path / "astpalace"))
+    return ap.StructurePalaceStore(str(tmp_path / "structurepalace"))
 
 
 # Structural hashes are sha256 hex — use valid hex fixtures (the join/index keys, not the
@@ -291,7 +291,7 @@ def test_structure_embeddings_reader_expands_provenance_skips_tombstoned(tmp_pat
     import io
 
     store = _store(tmp_path)
-    palace = str(tmp_path / "astpalace")
+    palace = str(tmp_path / "structurepalace")
     HA = "a" * 64
     HB = "b" * 64
     # HA recurs across TWO turns → two provenance verbatim_shas (one structure, two joins).

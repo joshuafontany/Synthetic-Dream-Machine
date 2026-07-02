@@ -97,7 +97,7 @@ function writeCorpusRecord(dir: string, m: CorpusManifest): void {
  * Stamp the corpus dir's REAL {@link SensoriumManifest} (`ephemeral:true`) — the compose_palace
  * instantiated transiently. content ← the scratch chroma the mine wrote at the dir root (engine
  * `mempalace`; the self-dir cap serializes as `"."`), structure ← the parse-router sub-palace when it
- * actually stood (`structures > 0`; engine `astpalace`), bands ← the on-read aperture grain (base cap,
+ * actually stood (`structures > 0`; engine `structurepalace`), bands ← the on-read aperture grain (base cap,
  * no bytes). This is what a sheaf-true reader sees — never the leak-record. Best-effort: a stamp fault
  * never sinks the ingest (the leak-record + planes already stand).
  */
@@ -108,7 +108,7 @@ function stampCorpusSensorium(dir: string, structures: number): void {
       lar: "lar:///ha.ka.ba/@lares/api/lares/corpus#astral-multipalace",
       caps: {
         content: { absDir: dir, engine: "mempalace" },
-        ...(structures > 0 ? { structure: { absDir: corpusStructureDir(dir), engine: "astpalace" } } : {}),
+        ...(structures > 0 ? { structure: { absDir: corpusStructureDir(dir), engine: "structurepalace" } } : {}),
       },
       bands: { grain: "aperture", computed: "sidecar" },
       ephemeral: true,
@@ -254,7 +254,7 @@ function runBandsSidecar(palaceDir: string): { bands: number; note: string } {
 /**
  * The STRUCTURE leg (S2): run `structure_router.py ingest` to parse each source file (tree-sitter
  * for code/markdown/wikitext/json/toml · the sigil parser for memetic-wikitext · a constituency
- * tier for prose) → the astpalace content-free encoder → a structure chroma-palace under the corpus
+ * tier for prose) → the structurepalace content-free encoder → a structure chroma-palace under the corpus
  * dir. GRACEFUL: no router / no python / a kind with no parser ⇒ `structures:0` (structure-skipped),
  * the content plane unaffected. Returns the structure-vector count + a note fragment.
  */

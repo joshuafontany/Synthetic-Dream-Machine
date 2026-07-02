@@ -11,7 +11,7 @@
  *  - INSTRUMENT clauses (voice · band · drift) read off `lar_voices` / `lar_band` /
  *    `lar_drift` where drawer METADATA is in hand (`drawerPassesStampFilters`, the
  *    list path). The SEARCH wire returns no metadata and no turn key (`lar_turn_key`
- *    never lands on a content drawer — node-capture-engine strips it to .astpalace
+ *    never lands on a content drawer — node-capture-engine strips it to .structurepalace
  *    provenance), so NO palace-side join key exists on a search hit; the honest cure
  *    (`hitPassesStampFilters`) re-runs the SAME sovereign reader that stamped the
  *    drawer at capture — `harvestTurnGradient` — over the hit's returned verbatim

@@ -8,7 +8,7 @@ constructicon a corpus never told us it had — the nameless learner: miners sur
 shape, description-length keeps only what pays, and the LLM names LAST (never inside the
 loop).
 
-An OFFLINE BATCH over the accumulated STRUCTURE plane (the astpalace of content-free
+An OFFLINE BATCH over the accumulated STRUCTURE plane (the structurepalace of content-free
 trees the S2 router filed under <corpus>/structure), NOT a per-turn hot-path move. One
 `induce` command reads the forest back, mines it, and writes the corpus's constructicon
 keyed by structural hash.
@@ -111,7 +111,7 @@ def _canonical(value) -> str:
 
 def _struct_hash(value) -> str:
     """The constructicon KEY — sha256 of a template's canonical form (mirrors the S2
-    astpalace structural_hash), so a form is addressed by its shape, never a name."""
+    structurepalace structural_hash), so a form is addressed by its shape, never a name."""
     return hashlib.sha256(_canonical(value).encode("utf-8")).hexdigest()[:32]
 
 
@@ -597,11 +597,11 @@ def label_constructicon(forms: list, namer=None) -> list:
     return out
 
 
-# ── the batch induce command — read the structure astpalace, mine, emit ───────────────
+# ── the batch induce command — read the structure structurepalace, mine, emit ───────────────
 
 
 def _read_structure_forest(structure_dir: str) -> tuple[list, str | None]:
-    """Read the content-free trees back out of the S2 structure astpalace (the chroma at
+    """Read the content-free trees back out of the S2 structure structurepalace (the chroma at
     <corpus>/structure). Returns (forest, error). A missing/empty store → ([], reason)."""
     try:
         from mempalace.palace import get_collection
@@ -618,7 +618,7 @@ def _read_structure_forest(structure_dir: str) -> tuple[list, str | None]:
     docs = got.get("documents") or []
     metas = got.get("metadatas") or []
     forest = []
-    # The astpalace DEDUPS identical structures to one row carrying a recurrence `count`
+    # The structurepalace DEDUPS identical structures to one row carrying a recurrence `count`
     # (structure_router files one put per source file; a repeated shape bumps the count). A
     # frequency miner must see that recurrence, so each distinct structure is EXPANDED by its
     # count (a tombstoned/set-aside structure feeds no plane) — capped so a hot structure can't
@@ -682,7 +682,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="form_induction — the S3 corpus FORM cap (blind grammar induction)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     ind = sub.add_parser("induce", help="batch-induce a corpus's constructicon from its structure forest")
-    ind.add_argument("--structure", required=True, help="the S2 structure astpalace dir (<corpus>/structure)")
+    ind.add_argument("--structure", required=True, help="the S2 structure structurepalace dir (<corpus>/structure)")
     ind.add_argument("--out", default="", help="also write the constructicon NDJSON here")
     ind.add_argument("--min-support", type=int, default=_DEFAULT_MIN_SUPPORT, dest="min_support")
     ind.add_argument("--max-forms", type=int, default=_MAX_FORMS_DEFAULT, dest="max_forms")

@@ -57,15 +57,15 @@ describe("spirit turn → verbatim (winged) AND AST (spirit provenance)", () => 
     const put = vi.fn(async (_tree: unknown, v: { source_file: string; content: string }) => ({
       hash: "deadbeef", verbatimSha: "cafe" + v.source_file.length,
     }));
-    const astPalace = { put, get: async () => null, hashOf: async () => "h", close: async () => {} };
+    const structurePalace = { put, get: async () => null, hashOf: async () => "h", close: async () => {} };
 
     // Compose exactly as makeNodeCaptureEngine does: wing-stamp OUTERMOST, ast-split beneath.
-    const composed = makeWingStampFlush(makeAstSplitFlush(flush, astPalace));
+    const composed = makeWingStampFlush(makeAstSplitFlush(flush, structurePalace));
     const ast = JSON.stringify({ kind: "meme", children: [] });
     const filed = await composed([{ content: "Lares (Mapper): leads", source_file: SPIRIT_SRC, metadata: { lar_agent: "Mapper", lar_ast: ast } }]);
 
     expect(filed).toBe(1);
-    // AST routed to .astpalace with the SPIRIT source_file as provenance.
+    // AST routed to .structurepalace with the SPIRIT source_file as provenance.
     expect(put).toHaveBeenCalledOnce();
     expect(put.mock.calls[0]?.[1]?.source_file).toBe(SPIRIT_SRC);
     // The verbatim drawer: winged + the deterministic AST join, inline tree stripped.
@@ -74,6 +74,6 @@ describe("spirit turn → verbatim (winged) AND AST (spirit provenance)", () => 
     expect(drawer["lar_agent"]).toBe("Mapper");
     expect(drawer["lar_ast_hash"]).toBe("deadbeef");
     expect(drawer["lar_verbatim_sha"]).toBeTypeOf("string");
-    expect(drawer["lar_ast"]).toBeUndefined(); // inline tree split out into .astpalace
+    expect(drawer["lar_ast"]).toBeUndefined(); // inline tree split out into .structurepalace
   });
 });

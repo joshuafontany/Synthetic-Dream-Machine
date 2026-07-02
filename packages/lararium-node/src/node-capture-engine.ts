@@ -15,7 +15,7 @@ import { stampKapaeSalience } from "@lararium/mempalace";
 
 import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";
-import { makeAstPalace, type AstPalace } from "./astpalace.js";
+import { makeStructurePalace, type StructurePalace } from "./structurepalace.js";
 import { makeFormPalace, type FormPalace, type SerializedBasis } from "./formpalace.js";
 
 export interface NodeCaptureEngineOptions {
@@ -29,12 +29,12 @@ export interface NodeCaptureEngineOptions {
   readonly quarantinePath: string;
   /** the forward annotate pass (worker: the in-VM `$tw.lares.captureAnnotateVm`; tests: a fake) */
   readonly annotate: CaptureAnnotate;
-  /** the LOCAL `.astpalace` dir (never federates) — the routing split writes each turn's AST here
+  /** the LOCAL `.structurepalace` dir (never federates) — the routing split writes each turn's AST here
    *  keyed by structural hash; the mempalace drawer keeps only `lar_ast_hash`. Pass the DURABLE home
-   *  explicitly (node: `larAstPalaceDir()`). Absent/`null` DISABLES the split (the inline `lar_ast`
-   *  rides through) — there is NO implicit default: the old `<dirname(spoolDir)>/astpalace` fallback
+   *  explicitly (node: `larStructurePalaceDir()`). Absent/`null` DISABLES the split (the inline `lar_ast`
+   *  rides through) — there is NO implicit default: the old `<dirname(spoolDir)>/structurepalace` fallback
    *  was a footgun that silently routed ASTs into a transient tmpfs path. */
-  readonly astPalaceDir?: string | null;
+  readonly structurePalaceDir?: string | null;
   /** the LOCAL FORM palace dir (never federates) — the routing split emits each turn's move-skeleton
    *  (stashed in-VM as `lar_skeleton` + `lar_basis`) to the living-grammar FORM store, keyed by the
    *  turn's verbatim_sha (the cross-graph join to the content drawer). Absent/`null` DISABLES the form
@@ -104,17 +104,17 @@ function wingFromSourceFile(sourceFile: string): string | null {
 /**
  * The ROUTING SPLIT — the cleanest seam: the LAST point the node controls before a batch crosses
  * into the (external) mempalace via `mine`. For each record carrying an inline `lar_ast`, route the
- * parse tree to the LOCAL `.astpalace` (keyed by its structural hash, bound to its verbatim), strip
+ * parse tree to the LOCAL `.structurepalace` (keyed by its structural hash, bound to its verbatim), strip
  * the inline tree from the drawer metadata, and leave behind `lar_ast_hash` (the cid reference). The
  * two stores come out clean: VERBATIM + provenance + `lar_ast_hash` in the mempalace drawer,
- * STRUCTURE in `.astpalace`, joined by the hash. A parse/store failure NEVER sinks the capture — the
+ * STRUCTURE in `.structurepalace`, joined by the hash. A parse/store failure NEVER sinks the capture — the
  * record then rides through with its inline `lar_ast` intact (drop-honesty, capture conserved).
  */
-export function makeAstSplitFlush(inner: CaptureFlush, astPalace: AstPalace): CaptureFlush {
+export function makeAstSplitFlush(inner: CaptureFlush, structurePalace: StructurePalace): CaptureFlush {
   return async (batch: readonly CaptureRecord[]): Promise<number> => {
     const routed: CaptureRecord[] = [];
     for (const rec of batch) {
-      // The turn's PROVENANCE key (the USER turn's uuid) rides into the .astpalace, NOT the content
+      // The turn's PROVENANCE key (the USER turn's uuid) rides into the .structurepalace, NOT the content
       // drawer — strip it here either way (provenance, not content), alongside lar_ast.
       const turnKey = typeof rec.metadata?.["lar_turn_key"] === "string" ? (rec.metadata["lar_turn_key"] as string) : "";
       const astJson = rec.metadata?.["lar_ast"];
@@ -130,15 +130,15 @@ export function makeAstSplitFlush(inner: CaptureFlush, astPalace: AstPalace): Ca
       }
       try {
         const tree = JSON.parse(astJson);
-        const { hash, verbatimSha } = await astPalace.put(tree, {
+        const { hash, verbatimSha } = await structurePalace.put(tree, {
           source_file: rec.source_file, content: rec.content,
           ...(turnKey ? { turnKey } : {}),
         });
         const { lar_ast: _dropped, lar_turn_key: _tk, ...rest } = rec.metadata as Record<string, string | number | boolean>;
-        // The drawer carries BOTH deterministic joins, set HERE at flush: lar_ast_hash → .astpalace
+        // The drawer carries BOTH deterministic joins, set HERE at flush: lar_ast_hash → .structurepalace
         // (forward), lar_verbatim_sha ↔ the AST entry's provenance (back). No mine-assigned id, no
         // race-to-catchup — both stores compute the same join independently. lar_turn_key stays in
-        // the .astpalace provenance only (the kapae key), never on the content drawer.
+        // the .structurepalace provenance only (the kapae key), never on the content drawer.
         routed.push({ ...rec, metadata: { ...rest, lar_ast_hash: hash, lar_verbatim_sha: verbatimSha } });
       } catch {
         routed.push(rec); // parse/store failed — keep the inline tree, never lose the turn
@@ -258,12 +258,12 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
   // The AST routing split rides between the engine and the (external) mempalace write. Local-only by
   // construction: a content-addressed file store, never a mesh/Automerge surface. Absent/null disables
   // it — NO implicit tmpfs default (that footgun silently wrote ASTs to a transient, wiped path).
-  const astPalaceDir = opts.astPalaceDir ?? null;
-  // Create the .astpalace ONCE (the warm holder) — shared between the AST split (put) and the
+  const structurePalaceDir = opts.structurePalaceDir ?? null;
+  // Create the .structurepalace ONCE (the warm holder) — shared between the AST split (put) and the
   // kapaeAst rewind leg below, so the rewind reaches the SAME warm serve holder the captures feed
   // (the flock-singleton forbids a 2nd holder for this palace dir).
-  const astPalace: AstPalace | null = astPalaceDir ? makeAstPalace(astPalaceDir) : null;
-  const astSplit = astPalace ? makeAstSplitFlush(subprocessFlush, astPalace) : subprocessFlush;
+  const structurePalace: StructurePalace | null = structurePalaceDir ? makeStructurePalace(structurePalaceDir) : null;
+  const astSplit = structurePalace ? makeAstSplitFlush(subprocessFlush, structurePalace) : subprocessFlush;
   // The FORM split rides OUTSIDE the AST split (runs first): it consumes the in-VM `lar_skeleton`/
   // `lar_basis`, routes the form-vector to the FORM store, strips those internal fields, then hands
   // the (still lar_ast-bearing) record to the AST split. Both stores come out clean, joined by
@@ -284,8 +284,8 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     ...(opts.servo !== undefined ? { servo: opts.servo } : {}),
     ...(opts.derive !== undefined ? { derive: opts.derive } : {}),
   });
-  if (!astPalace) return engine; // no AST store wired → no rewind leg (kapaeAst stays absent)
-  // The strand-B convergence leg: ONE gone turn-uuid → the .astpalace tally set-aside AND the
+  if (!structurePalace) return engine; // no AST store wired → no rewind leg (kapaeAst stays absent)
+  // The strand-B convergence leg: ONE gone turn-uuid → the .structurepalace tally set-aside AND the
   // Measure salience down-weight (strand C), both in the worker that owns the warm holder. The
   // KG valid-close is the third leg, fired CLI-side (it has no holder). Best-effort throughout —
   // a holder/substrate fault leaves the rewind unreconciled this run (re-derivable), never fatal.
@@ -293,16 +293,16 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     ...engine,
     kapaeAst: async (turnKey: string, ended?: string): Promise<void> => {
       try {
-        const res = await astPalace.kapae(turnKey, ended);
+        const res = await structurePalace.kapae(turnKey, ended);
         if (res.verbatim_shas.length) {
           // Down-weight the rewound turn's content drawers (strand C) — keyed by the shas the
-          // .astpalace dropped; the FFZ Measure servo reads lar_salience. The SAME `ended` the
-          // .astpalace tombstone carries rides into the drawer's `lar_kapae` liveness stamp
+          // .structurepalace dropped; the FFZ Measure servo reads lar_salience. The SAME `ended` the
+          // .structurepalace tombstone carries rides into the drawer's `lar_kapae` liveness stamp
           // (iso whole-seconds — the rank signal recall reads; one moment across all legs).
           stampKapaeSalience(res.verbatim_shas, ended);
         }
       } catch (err) {
-        console.warn(`[node-capture-engine] astpalace kapae best-effort skipped: ${err instanceof Error ? err.message : String(err)}`);
+        console.warn(`[node-capture-engine] structurepalace kapae best-effort skipped: ${err instanceof Error ? err.message : String(err)}`);
       }
     },
   };

@@ -85,7 +85,7 @@ back to a degraded vector = structural-match × entrenchment (the SLOR factor
 dropped). The encoder still ships; SLOR rides in later. It NEVER forces a broken
 model.
 
-Protocol mirrors astpalace_io.py: NDJSON over stdin/stdout, ONE JSON object per
+Protocol mirrors structurepalace_io.py: NDJSON over stdin/stdout, ONE JSON object per
 line; only JSON responses on stdout (banners/library noise → stderr).
 """
 from __future__ import annotations
@@ -701,7 +701,7 @@ def encode_form(
 
 
 # ---------------------------------------------------------------------------
-# the FORM palace store — the caller-vector "form" collection (mirrors astpalace_io)
+# the FORM palace store — the caller-vector "form" collection (mirrors structurepalace_io)
 # ---------------------------------------------------------------------------
 
 # The cross-graph join: the form entry is KEYED by the verbatim_sha (the content
@@ -713,7 +713,7 @@ def encode_form(
 # collection (a second collection beside the palace default), ALWAYS supply our own
 # dense form-vector as the embedding, and skip the embedder-identity check — so the
 # palace's configured embedding model is left attached but NEVER invoked (no model
-# load, no download, no network), exactly as astpalace_io does for the AST store.
+# load, no download, no network), exactly as structurepalace_io does for the AST store.
 #
 # DIMENSION: ChromaDB pins a collection's vector length at the first insert. The
 # form-vector is SPARSE {indices, values} of logical length == basis.dimension; we
@@ -1014,7 +1014,7 @@ def _serve(palace: str | None, preload: bool) -> None:
     # Compose: the serve root holds the per-palace singleton (only meaningful when a
     # palace is bound — an encode-only holder needs no store lock, so require_lock keys
     # on the palace presence). build_dispatch runs only AFTER the lock, mirroring
-    # astpalace_io's reap-don't-pile invariant.
+    # structurepalace_io's reap-don't-pile invariant.
     run_sidecar(
         palace=palace,
         lock_prefix=_LOCK_PREFIX,

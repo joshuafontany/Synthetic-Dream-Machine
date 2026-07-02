@@ -10,7 +10,7 @@ import { join } from "node:path";
 import { palaceOrgans, setupPalaceOrgans, organHealthy } from "../src/palace-organs.js";
 import { readManifest, resolveCapDir } from "../src/sensorium.js";
 import {
-  larMempalaceDir, larAstPalaceDir, larFormPalaceDir, larMeshPalaceDir,
+  larMempalaceDir, larStructurePalaceDir, larFormPalaceDir, larMeshPalaceDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
   memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
 } from "../src/vessel-paths.js";
@@ -39,7 +39,7 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
   test("enumerates the organs in dependency order — mempalace FIRST, the mesh TREE last", () => {
     const names = palaceOrgans().map((o) => o.name);
     expect(names).toEqual([
-      "mempalace", "astpalace", "formpalace",
+      "mempalace", "structurepalace", "formpalace",
       "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
       "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
     ]);
@@ -48,7 +48,7 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
   test("each organ resolves its dir from the SAME vessel-path resolver (no ambient default)", () => {
     const byName = Object.fromEntries(palaceOrgans().map((o) => [o.name, o.dir]));
     expect(byName["mempalace"]).toBe(larMempalaceDir());
-    expect(byName["astpalace"]).toBe(larAstPalaceDir());
+    expect(byName["structurepalace"]).toBe(larStructurePalaceDir());
     expect(byName["formpalace"]).toBe(larFormPalaceDir());
     expect(byName["meshpalace"]).toBe(larMeshPalaceDir());
     // the mesh children hang below the mesh sensorium dir — the TREE is the composition.
@@ -59,7 +59,7 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
     expect(byName["mesh:who"].startsWith(meshSensoriumDir())).toBe(true);
     // all under the isolated temp roots — proof the env override flows through.
     expect(byName["mempalace"]).toBe(mempalace);
-    expect(byName["astpalace"].startsWith(home)).toBe(true);
+    expect(byName["structurepalace"].startsWith(home)).toBe(true);
     expect(byName["meshpalace"].startsWith(home)).toBe(true);
   });
 });
@@ -75,7 +75,7 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     expect(first.every((s) => s.ok)).toBe(true);
     // ast/form + the mesh tree + the memetic-wikitext tree were absent → init ran and created their dirs
     for (const name of [
-      "astpalace", "formpalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
+      "structurepalace", "formpalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
       "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
     ]) {
       const step = first.find((s) => s.step === name)!;

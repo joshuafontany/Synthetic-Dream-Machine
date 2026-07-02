@@ -133,7 +133,7 @@ export interface CaptureEngine {
   /** Annotate a raw turn forward, durably write-ahead-log it, and enqueue it. `branch` (optional)
    *  threads the turn-DAG fork-frontier to the annotate pass (the same-session fork-cut). `turnKey`
    *  (optional) — the USER turn's uuid — rides onto the record's metadata as `lar_turn_key`, the
-   *  PROVENANCE key the node-side AST split lifts into the .astpalace (so a rewind can later
+   *  PROVENANCE key the node-side AST split lifts into the .structurepalace (so a rewind can later
    *  set-aside that turn's tally); it is stripped from the content drawer (provenance, not content).
    *
    *  SINK-SIDE IDEMPOTENCE (the dedup-first keystone): the cell dedups in ITS OWN log — a
@@ -163,7 +163,7 @@ export interface CaptureEngine {
   dispose(): void;
   /**
    * REWIND (kapae) one turn's structural-AST tally — the strand-B convergence leg. OPTIONAL: a
-   * vessel that wires a content-addressed AST store (node: the .astpalace) sets it; others leave it
+   * vessel that wires a content-addressed AST store (node: the .structurepalace) sets it; others leave it
    * absent (the browser/relay engine carries no local AST store). The node impl set-asides the
    * turn's recurrence tally AND down-weights its content drawers (the salience producer), all in
    * the worker that owns the warm holder. Best-effort — a holder fault is swallowed (re-derivable).
@@ -287,7 +287,7 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
         if (seen.get(key) === contentHash) return; // already in the island's log — idempotent ack
         const metadata = annotate(turnText, sourceFile, branch);
         // The turn's provenance key rides ALONGSIDE the annotate patch (not derived from text — it
-        // is the producer's identity for this turn). The node AST split lifts it into the .astpalace
+        // is the producer's identity for this turn). The node AST split lifts it into the .structurepalace
         // and strips it from the drawer; absent ⇒ byte-identical to before.
         if (turnKey) metadata["lar_turn_key"] = turnKey;
         const record: CaptureRecord = {

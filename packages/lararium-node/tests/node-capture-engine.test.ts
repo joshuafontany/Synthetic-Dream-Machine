@@ -16,7 +16,7 @@ import {
   type NodeCaptureEngineOptions,
 } from "../src/node-capture-engine.js";
 import type { FormMetadata, FormPalace, FormStoreResult } from "../src/formpalace.js";
-import type { AstPalace, AstKapaeResult } from "../src/astpalace.js";
+import type { StructurePalace, StructureKapaeResult } from "../src/structurepalace.js";
 
 const GATE: FlushGate = {
   depth: 1,
@@ -71,13 +71,13 @@ describe("makeNodeCaptureEngine", () => {
   });
 });
 
-describe("makeAstSplitFlush — strand-B: turn_key rides to the .astpalace, stripped from the drawer", () => {
+describe("makeAstSplitFlush — strand-B: turn_key rides to the .structurepalace, stripped from the drawer", () => {
   type PutCall = { tree: unknown; verbatim: { source_file: string; content: string; turnKey?: string } };
-  function fakeAstPalace(puts: PutCall[]): AstPalace {
+  function fakeStructurePalace(puts: PutCall[]): StructurePalace {
     return {
       async put(tree, verbatim) { puts.push({ tree, verbatim }); return { hash: "h".repeat(64), verbatimSha: "v".repeat(64) }; },
       async get() { return null; },
-      async kapae(turnKey): Promise<AstKapaeResult> { return { closed: 0, tombstoned: [], verbatim_shas: [], turn_key: turnKey }; },
+      async kapae(turnKey): Promise<StructureKapaeResult> { return { closed: 0, tombstoned: [], verbatim_shas: [], turn_key: turnKey }; },
       async hashOf() { return "h".repeat(64); },
       async close() {},
     };
@@ -86,10 +86,10 @@ describe("makeAstSplitFlush — strand-B: turn_key rides to the .astpalace, stri
   test("lar_turn_key is passed to put() and STRIPPED from the routed drawer (provenance, not content)", async () => {
     const puts: PutCall[] = [];
     let routed: CaptureRecord[] = [];
-    const flush = makeAstSplitFlush(async (b) => { routed = [...b]; return b.length; }, fakeAstPalace(puts));
+    const flush = makeAstSplitFlush(async (b) => { routed = [...b]; return b.length; }, fakeStructurePalace(puts));
     await flush([{ content: "the verb leads", source_file: "wing/s.jsonl",
       metadata: { lar_ast: JSON.stringify({ t: 1 }), lar_turn_key: "turn-uuid-9", lar_sigils: 2 } } as unknown as CaptureRecord]);
-    // turn_key reached the .astpalace put as provenance.
+    // turn_key reached the .structurepalace put as provenance.
     expect(puts[0]!.verbatim.turnKey).toBe("turn-uuid-9");
     // the routed drawer carries the joins but NOT lar_ast / lar_turn_key.
     const m = routed[0]!.metadata as Record<string, unknown>;
@@ -103,7 +103,7 @@ describe("makeAstSplitFlush — strand-B: turn_key rides to the .astpalace, stri
   test("no inline AST: lar_turn_key is still stripped off the drawer (no leak)", async () => {
     const puts: PutCall[] = [];
     let routed: CaptureRecord[] = [];
-    const flush = makeAstSplitFlush(async (b) => { routed = [...b]; return b.length; }, fakeAstPalace(puts));
+    const flush = makeAstSplitFlush(async (b) => { routed = [...b]; return b.length; }, fakeStructurePalace(puts));
     await flush([{ content: "plain", source_file: "wing/s.jsonl",
       metadata: { lar_turn_key: "turn-uuid-2", lar_sigils: 0 } } as unknown as CaptureRecord]);
     expect(puts).toHaveLength(0); // nothing to split

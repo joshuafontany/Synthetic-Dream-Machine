@@ -173,10 +173,10 @@ export function sha(s: string): string {
 
 /**
  * The TURN KEY — the USER turn's stable identity (its uuid), the join the kapae convergence keys on.
- * The SAME formula MUST drive both legs: the CAPTURE leg (readExchanges → the .astpalace provenance
+ * The SAME formula MUST drive both legs: the CAPTURE leg (readExchanges → the .structurepalace provenance
  * turn_key) and the BEARING/rewind leg (readTurns → the gone-turn detection → the worldline KG +
- * astpalace-kapae). Sharing this one helper keeps them in lockstep by construction — a gone uuid
- * closes the KG edge, the astpalace tally, AND the Measure salience as ONE key (the grain note).
+ * structurepalace-kapae). Sharing this one helper keeps them in lockstep by construction — a gone uuid
+ * closes the KG edge, the structurepalace tally, AND the Measure salience as ONE key (the grain note).
  */
 export function turnKeyOf(file: string, turn: { uuid: string; ts: string; text: string }): string {
   return turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
@@ -627,7 +627,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     try {
       // CANON (the worker-routing now built): route the harvest THROUGH the @daemon — cmdCapture submits
       // each turn via the capture verb → the @daemon's capture cap → in-VM annotate (lar_* + AST) →
-      // flush → mempalace verbatim + .astpalace AST + the deterministic hash-bindings (lar_ast_hash ·
+      // flush → mempalace verbatim + .structurepalace AST + the deterministic hash-bindings (lar_ast_hash ·
       // lar_verbatim_sha). Born-annotated, single-write through the nalu gates. (cmdCapture self-falls-
       // back to a DIRECT verbatim mine if the @daemon is down — the verbatim drawer is never lost.)
       const rc = await cmdCapture({ command: "capture", positional: [stage], options: { wing }, flags: {} });
@@ -685,7 +685,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       }
       for (const r of results)
         console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
-      console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .astpalace · hash-bound`);
+      console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .structurepalace · hash-bound`);
       const flow = pacer.trajectory();
       if (flow.length) {
         // The servo's window trajectory — the live-light witness line (cuts 1/3/4).
@@ -809,7 +809,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   // is a rewind: set aside (close) its worldline edges keyed to that turn-uuid, never erase. Scoped
   // per-session (a turn from an un-harvested session never reads as gone). Best-effort: the KG is a
   // re-derivable projection, so an absent KG / fault never sinks the harvest.
-  let kapae: { goneTurns: number; closed: number; astpalace: number } | null = null;
+  let kapae: { goneTurns: number; closed: number; structurepalace: number } | null = null;
   if (!dryRun) {
     const indexByScope = loadIndexByScope(indexPath);
     const gone: string[] = [];
@@ -819,13 +819,13 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     }
     if (gone.length > 0) {
       // ONE gone turn-uuid → the THREE convergence effects. Leg 1 (KG valid-close) fires CLI-side
-      // (the KG has no holder). Legs 2+3 (.astpalace tally set-aside + the Measure salience
-      // down-weight) fire through the @daemon's `astpalace-kapae` verb — the daemon owns the warm
-      // .astpalace serve holder (a flock-singleton the CLI cannot re-open), and does BOTH in the
+      // (the KG has no holder). Legs 2+3 (.structurepalace tally set-aside + the Measure salience
+      // down-weight) fire through the @daemon's `structurepalace-kapae` verb — the daemon owns the warm
+      // .structurepalace serve holder (a flock-singleton the CLI cannot re-open), and does BOTH in the
       // worker. Every leg is best-effort: a down KG / down daemon leaves the rewind unreconciled
       // this run (re-derivable on the next harvest), never fatal.
       // ONE detection timestamp (iso whole-seconds) rides ALL THREE legs — the KG valid-close,
-      // the .astpalace tombstone, AND the drawer `lar_kapae` liveness stamp (the rank signal the
+      // the .structurepalace tombstone, AND the drawer `lar_kapae` liveness stamp (the rank signal the
       // recall side reads) — so a rewound turn's every trace carries the SAME moment.
       const ended = isoWholeSeconds(new Date().toISOString());
       let closed = 0;
@@ -838,15 +838,15 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       // Legs 2+3 — route each gone turn's rewind to the @daemon's warm holder (fire-and-forget).
       let did = "";
       try { did = await operatorDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
-      let astpalace = 0;
+      let structurepalace = 0;
       const fired = await Promise.allSettled(
-        gone.map((turnKey) => runVerb("astpalace-kapae", { turnKey, ended }, did, { timeoutMs: 5000 })),
+        gone.map((turnKey) => runVerb("structurepalace-kapae", { turnKey, ended }, did, { timeoutMs: 5000 })),
       );
-      for (const r of fired) if (r.status === "fulfilled" && r.value.status === "done") astpalace += 1;
-      if (astpalace === 0 && process.env["LARES_DEBUG"]) {
-        console.warn(`[harvest] astpalace-kapae best-effort skipped (daemon down?) — ${gone.length} gone turn(s) unreconciled this run`);
+      for (const r of fired) if (r.status === "fulfilled" && r.value.status === "done") structurepalace += 1;
+      if (structurepalace === 0 && process.env["LARES_DEBUG"]) {
+        console.warn(`[harvest] structurepalace-kapae best-effort skipped (daemon down?) — ${gone.length} gone turn(s) unreconciled this run`);
       }
-      kapae = { goneTurns: gone.length, closed, astpalace };
+      kapae = { goneTurns: gone.length, closed, structurepalace };
     }
   }
 
@@ -862,7 +862,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       console.log(`  harvested:    ${summary.harvested}  (${summary.framed} framed · ${summary.raw} raw · ${summary.sidechain} sidechain)`);
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
       if (!dryRun) console.log(`  index:        ${indexPath}`);
-      if (kapae) console.log(`  rewind:       ${kapae.goneTurns} gone turn(s) → ${kapae.closed} worldline edge(s) + ${kapae.astpalace} astpalace tally(ies) set aside (kapae)`);
+      if (kapae) console.log(`  rewind:       ${kapae.goneTurns} gone turn(s) → ${kapae.closed} worldline edge(s) + ${kapae.structurepalace} structurepalace tally(ies) set aside (kapae)`);
       if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
@@ -980,7 +980,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
         "capture",
         {
           turnText: p.text, sourceFile: p.src,
-          // The USER turn's uuid — the .astpalace provenance key (the kapae key). The SAME formula
+          // The USER turn's uuid — the .structurepalace provenance key (the kapae key). The SAME formula
           // the rewind detector keys on (turn.uuid || sha(...)), so one gone uuid closes both stores.
           turnKey: p.key,
           // The stable transcript ordinal — the deterministic drawer-id chunk (converges both legs).

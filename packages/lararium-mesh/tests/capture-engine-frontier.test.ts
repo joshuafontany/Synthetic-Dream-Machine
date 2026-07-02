@@ -10,7 +10,7 @@ import {
   harvestTurnGradient,
   buildPatch,
   mkTelemetryPlaceVerb,
-  mkAstpalaceKapae,
+  mkStructurepalaceKapae,
   isVesselToIslandMsg,
 } from "../src/index.js";
 import type { CaptureRecord, CaptureReserve, FlushGate, BranchContext } from "../src/index.js";
@@ -79,8 +79,8 @@ describe("mkTelemetryPlaceVerb carries the frontier (the transport leg)", () => 
   });
 });
 
-describe("strand-B: the turn_key + the astpalace-kapae signal (the transport legs)", () => {
-  test("enqueue threads turnKey → metadata.lar_turn_key (the .astpalace provenance key)", async () => {
+describe("strand-B: the turn_key + the structurepalace-kapae signal (the transport legs)", () => {
+  test("enqueue threads turnKey → metadata.lar_turn_key (the .structurepalace provenance key)", async () => {
     const flushed: CaptureRecord[] = [];
     const engine = makeCaptureEngine({
       reserve: stubReserve(),
@@ -106,13 +106,13 @@ describe("strand-B: the turn_key + the astpalace-kapae signal (the transport leg
     expect(flushed[0]!.metadata!["lar_turn_key"]).toBeUndefined();
   });
 
-  test("mkAstpalaceKapae carries the turnKey + optional ended, and is a valid vessel→island msg", () => {
-    const m = mkAstpalaceKapae({ turnKey: "turn-X" });
-    expect(m.type).toBe("astpalace:kapae");
+  test("mkStructurepalaceKapae carries the turnKey + optional ended, and is a valid vessel→island msg", () => {
+    const m = mkStructurepalaceKapae({ turnKey: "turn-X" });
+    expect(m.type).toBe("structurepalace:kapae");
     expect(m.turnKey).toBe("turn-X");
     expect(m.ended).toBeUndefined();
     expect(isVesselToIslandMsg(m)).toBe(true);
-    const withEnded = mkAstpalaceKapae({ turnKey: "turn-Y", ended: "2026-06-30" });
+    const withEnded = mkStructurepalaceKapae({ turnKey: "turn-Y", ended: "2026-06-30" });
     expect(withEnded.ended).toBe("2026-06-30");
   });
 });

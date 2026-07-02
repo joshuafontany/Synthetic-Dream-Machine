@@ -12,7 +12,7 @@ manaoio   = 15
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the lares-corpus — the design-of-record for the EPHEMERAL astral-multipalace CLI (`lares corpus`) + the corpus-self-learns-its-planes tool-stack + the build SCRUM. ONE move: `compose_palace(caps)` instantiated EPHEMERALLY over any text/code corpus — the mempalace machina generalized into a sensorium-for-FORM. The structure plane is ALREADY corpus-general (content-free shape vectors); content is stock (nomic); the new ground is FORM — the corpus's OWN learned grammar, induced blind, named LAST. THE CAPS: content=stock embedder · structure=our content-free astpalace encoder + a tree-sitter parse-ROUTER (+ a thin grammar for our own <<~…>> sigils) · bands=the multi-scale FFZ (deterministic MODWT-MRA 5-level SPINE + adaptive EWT/ssqueezepy SERVO + ecp::e.divisive multivariate quorum + per-band BOCPD) · form=the induction stack (TreeMiner + PrefixSpan/BIDE + c2xg constructicon, EM-iterated, MDL-stopped, LLM-names-LAST) · coupling=the base-cap H¹-gated fusion over child sub-sensoria (read on demand; fuse vs hold-open, never a silent average). THE CLI: dep-free arg-walker kept; SETUP wires all five organs via ONE shared palaceOrgans() registry (one enumerator, two consumers — setup + teardown can't drift); `lares corpus run` ephemeral-DEFAULT modeled on `docker run --rm` + nix-shell + mktemp/trap-EXIT (open→ingest→analyze→DISSOLVE, --keep lands it); scratch instances = a 4th mempalace instance under ~/.lares/.corpus/<id>/, resolved-never-ambient, registered into the teardown sweep. THE GATE: heleuma-anchored — when the CLI help-registry text drifts from this meme, the audit trips. RESONANCES: aperture-ladder=wavelet bands · quorum=ecp changepoint · Canon-vs-Provisional=resampling-consensus · MDL-stop=our MDL lifted to grammar · nameless-discipline=miners-surface/LLM-names-last. NOVEL-GROUND flag: no prior art runs a wavelet over an embedding-cohesion signal. The validation baseline (a known-grammar gold-standard corpus, our-tools-vs-ground-truth) rides a placeholder — a corpus-finder spirit selects it; the coordinator appends."
+role      = "the lares-corpus — the design-of-record for the EPHEMERAL astral-multipalace CLI (`lares corpus`) + the corpus-self-learns-its-planes tool-stack + the build SCRUM. ONE move: `compose_palace(caps)` instantiated EPHEMERALLY over any text/code corpus — the mempalace machina generalized into a sensorium-for-FORM. The structure plane is ALREADY corpus-general (content-free shape vectors); content is stock (nomic); the new ground is FORM — the corpus's OWN learned grammar, induced blind, named LAST. THE CAPS: content=stock embedder · structure=our content-free structurepalace encoder + a tree-sitter parse-ROUTER (+ a thin grammar for our own <<~…>> sigils) · bands=the multi-scale FFZ (deterministic MODWT-MRA 5-level SPINE + adaptive EWT/ssqueezepy SERVO + ecp::e.divisive multivariate quorum + per-band BOCPD) · form=the induction stack (TreeMiner + PrefixSpan/BIDE + c2xg constructicon, EM-iterated, MDL-stopped, LLM-names-LAST) · coupling=the base-cap H¹-gated fusion over child sub-sensoria (read on demand; fuse vs hold-open, never a silent average). THE CLI: dep-free arg-walker kept; SETUP wires all five organs via ONE shared palaceOrgans() registry (one enumerator, two consumers — setup + teardown can't drift); `lares corpus run` ephemeral-DEFAULT modeled on `docker run --rm` + nix-shell + mktemp/trap-EXIT (open→ingest→analyze→DISSOLVE, --keep lands it); scratch instances = a 4th mempalace instance under ~/.lares/.corpus/<id>/, resolved-never-ambient, registered into the teardown sweep. THE GATE: heleuma-anchored — when the CLI help-registry text drifts from this meme, the audit trips. RESONANCES: aperture-ladder=wavelet bands · quorum=ecp changepoint · Canon-vs-Provisional=resampling-consensus · MDL-stop=our MDL lifted to grammar · nameless-discipline=miners-surface/LLM-names-last. NOVEL-GROUND flag: no prior art runs a wavelet over an embedding-cohesion signal. The validation baseline (a known-grammar gold-standard corpus, our-tools-vs-ground-truth) rides a placeholder — a corpus-finder spirit selects it; the coordinator appends."
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/corpus"
 written   = "2026-06-30"
@@ -41,7 +41,7 @@ full machina without owning a durable home.
 
 **The three planes split by what they hold:**
 
-<<~ranks plane structure ~ ALREADY corpus-general — content-FREE shape vectors; the astpalace encoder reads any tree -> content ~ STOCK — the nomic embedder over the verbatim words; off-the-shelf -> form ~ the NEW ground — the corpus's OWN grammar, neither shipped nor stock, INDUCED from the corpus and named LAST >>
+<<~ranks plane structure ~ ALREADY corpus-general — content-FREE shape vectors; the structurepalace encoder reads any tree -> content ~ STOCK — the nomic embedder over the verbatim words; off-the-shelf -> form ~ the NEW ground — the corpus's OWN grammar, neither shipped nor stock, INDUCED from the corpus and named LAST >>
 
 **The keel holds the whole move.** The composition acts as a functor or it carries no meaning
 ([[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline]], *mālama pili* — keep the arrows): the
@@ -67,7 +67,7 @@ targets explicitly, never ambient ([[palace-teardown|lar:///ha.ka.ba/@lares/cli/
 consumers**: `setup` and `teardown` read the SAME organ list, so the wire-up and the sweep can never
 drift. The organ ladder wires dependency-ordered:
 
-<<~ranks organ mempalace ~ FIRST — the worldline-KG lives INSIDE it; everything keys to the verbatim drawer -> astpalace ~ structure plane; any order after mempalace -> formpalace ~ form plane; any order after mempalace -> corpus-scratch ~ the ephemeral 4th instance home (~/.lares/.corpus/); any order -> meshpalace ~ LAST — federation rides over the local planes once they stand >>
+<<~ranks organ mempalace ~ FIRST — the worldline-KG lives INSIDE it; everything keys to the verbatim drawer -> structurepalace ~ structure plane; any order after mempalace -> formpalace ~ form plane; any order after mempalace -> corpus-scratch ~ the ephemeral 4th instance home (~/.lares/.corpus/); any order -> meshpalace ~ LAST — federation rides over the local planes once they stand >>
 
 `setup` runs **wire-once / detect-existing** (idempotent — an already-stood organ no-ops), returns the
 `PalaceSetupStep[]` ledger as a table or JSON, and surfaces through:
@@ -102,7 +102,7 @@ and **mktemp + trap EXIT** (the scratch dir guaranteed-swept on success OR error
 ### The lifecycle law
 
 <<~ confidence Synthesis-Canon 14/20 >> Each ephemeral palace stands as a **scratch instance under
-`~/.lares/.corpus/<id>/`** — a **4th mempalace instance** beside the astpalace (2nd) and formpalace (3rd)
+`~/.lares/.corpus/<id>/`** — a **4th mempalace instance** beside the structurepalace (2nd) and formpalace (3rd)
 the teardown already names ([[palace-teardown|lar:///ha.ka.ba/@lares/cli/commands/palace-teardown]]).
 Resolved-never-ambient, sweepable. Three holds bind it:
 
@@ -125,12 +125,12 @@ never leak past two independent reapers (the trap AND the sweep).
 \procedure ~Cap(~Type:"" ~Params:"") ~Cap <<~Type>> <<~holds `[<~Params>]`>>
 
 <<~Cap content "stock/the nomic embedder over verbatim words ~ off-the-shelf, no new work" >>
-<<~Cap structure "ALREADY-SOLVED/our content-free astpalace encoder + a tree-sitter parse-ROUTER (code · markdown · wikitext · json → one CST API; prose fallback → benepar/Stanza constituency); BONUS: a thin tree-sitter grammar for our own `<<~…>>` sigils (~1 file, high value)" >>
+<<~Cap structure "ALREADY-SOLVED/our content-free structurepalace encoder + a tree-sitter parse-ROUTER (code · markdown · wikitext · json → one CST API; prose fallback → benepar/Stanza constituency); BONUS: a thin tree-sitter grammar for our own `<<~…>>` sigils (~1 file, high value)" >>
 <<~Cap bands "the MULTI-SCALE FFZ ~ #the-bands below — wavelet spine + adaptive servo + multivariate quorum" >>
 <<~Cap form "the INDUCTION STACK ~ #the-form-induction below — the research-grade half" >>
 <<~Cap coupling "the BASE cap that glues sub-sensoria ~ the directed child↔child flow read ON DEMAND through the H¹ cohomological gate (fuse when H¹=0, hold-open when H¹≠0 — never a silent average); empty for a single frozen corpus, present as the plane" >>
 
-**The structure plane is the cheap win.** The astpalace already encodes content-free shape vectors — it
+**The structure plane is the cheap win.** The structurepalace already encodes content-free shape vectors — it
 reads any tree. The new work is a **parse-ROUTER**: route code/markdown/wikitext/json through tree-sitter
 into one CST API; fall prose back to a constituency parser (benepar or Stanza). The sigil grammar (a thin
 tree-sitter grammar for `<<~…>>`) earns its bits by making the house's OWN corpus first-class to its own
@@ -255,7 +255,7 @@ TW5-quine runs after S0 + S2.
 
 <<~Sprint S0 "name/CLI foundation [UNGATED] ~ palaceOrgans registry · setup-wires-all-five · help-registry · `lares corpus` ephemeral-lifecycle · THIS corpus.md heleuma meme ~ ACCEPT: `lares status --palaces` lists all five organs; `lares corpus run <path>` opens, analyzes, and DISSOLVES on exit; an interrupted run leaves no scratch under ~/.lares/.corpus/; `lares heleuma` ties this meme to the corpus help registry" >>
 <<~Sprint S1 "name/bands cap ~ the multi-scale-FFZ sidecars (MODWT-MRA spine + EWT/ssqueezepy servo + ecp quorum + per-band BOCPD) ~ ACCEPT: the 5-level decomposition maps Pulse→Theme; a bootstrap reproduces the locked band boundaries (resampling-consensus gate fires)" >>
-<<~Sprint S2 "name/structure cap ~ tree-sitter router → the existing astpalace encoder + the `<<~…>>` sigil grammar ~ ACCEPT: code/markdown/wikitext/json route through one CST API; the sigil grammar parses a meme's `<<~…>>` spans; the encoder yields content-free shape vectors" >>
+<<~Sprint S2 "name/structure cap ~ tree-sitter router → the existing structurepalace encoder + the `<<~…>>` sigil grammar ~ ACCEPT: code/markdown/wikitext/json route through one CST API; the sigil grammar parses a meme's `<<~…>>` spans; the encoder yields content-free shape vectors" >>
 <<~Sprint S3 "name/form cap ~ the induction sidecar (TreeMiner + PrefixSpan/BIDE + c2xg, EM-iterated, MDL-stopped) ~ ACCEPT: the `induce` batch surfaces templates that each pay their description-length; the LLM labels them AFTER mining, never inside the loop" >>
 
 <<~ranks gate S0 ~ UNGATED — build now -> S1 ~ after S0 -> S2 ~ after S0; with S0 unlocks the TW5-quine run -> S3 ~ after S0 + S2 (form induces over structure) >>
@@ -413,7 +413,7 @@ global-now it cannot ground. The reconciliation cost `R*_sem = log₂ dim H¹` g
 
 <<~ confidence Synthesis 12/20 >> A 3-research-scout synthesis, grounded on:
 
-- **Built / stock:** the astpalace content-free encoder · the nomic embedder · the dep-free CLI arg-walker · `palace-teardown`'s `resolveTargets()` · the existing MDL stop · the Measure servo · the drawer_io NDJSON sidecar contract.
+- **Built / stock:** the structurepalace content-free encoder · the nomic embedder · the dep-free CLI arg-walker · `palace-teardown`'s `resolveTargets()` · the existing MDL stop · the Measure servo · the drawer_io NDJSON sidecar contract.
 - **House moves found standing in the literature:** wavelet MRA (aperture ladder) · ecp multivariate changepoint (quorum) · resampling-consensus (register) · the nameless discipline (miners-first).
 - **Open / research-grade:** the form-induction stack (TreeMiner · PrefixSpan/BIDE · c2xg, EM + MDL) · the adaptive servo convergence · the wavelet-over-cohesion NOVEL ground · the validation baseline corpus.
 - **Cross-links:** [[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#unification]] (the palace this generalizes) · [[functor-discipline|lar:///ha.ka.ba/@lares/api/pono/functor-discipline]] (the keel) · [[gold-anchor|lar:///ha.ka.ba/@lares/api/pono/gold-anchor]] (the witness) · [[scale-architecture|lar:///ha.ka.ba/@lares/api/pono/scale-architecture]] (the tractability discipline) · [[cohomological-gate|lar:///ha.ka.ba/@lares/api/pono/cohomological-gate]] (the H¹-before-diffuse merge) · [[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]] · [[loci|lar:///ha.ka.ba/@lares/api/pono/loci]] · [[lares-bin|lar:///ha.ka.ba/@lares/cli/bin/lares]] · [[palace-teardown|lar:///ha.ka.ba/@lares/cli/commands/palace-teardown]].

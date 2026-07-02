@@ -7,7 +7,7 @@ launch) left every CLI surface intact:
 
   drawer_io     export --wing W  ·  apply PATCHFILE      (telemetry-writeback.ts)
   kg_io         --palace P add PF · kapae --turn-key K   (worldline-kg.ts)
-  astpalace_io  serve --palace D  + NDJSON ping/put/get   (astpalace.ts)
+  structurepalace_io  serve --palace D  + NDJSON ping/put/get   (structurepalace.ts)
   form_encoder  serve             + NDJSON ping           (formpalace.ts)
 
 Run under the mempalace venv:
@@ -143,12 +143,12 @@ def test_drawer_io_embeddings_reads_stored_vectors_in_session_order(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# astpalace_io serve — ping · put · get over NDJSON (real .astpalace ChromaDB)
+# structurepalace_io serve — ping · put · get over NDJSON (real .structurepalace ChromaDB)
 # ---------------------------------------------------------------------------
 
 
-def test_astpalace_io_serve_round_trip(tmp_path):
-    palace = str(tmp_path / ".astpalace")
+def test_structurepalace_io_serve_round_trip(tmp_path):
+    palace = str(tmp_path / ".structurepalace")
     h = "a" * 64  # the structural hash is sha256-hex (the cheap embed reads it as hex)
     reqs = "\n".join(
         json.dumps(r)
@@ -159,7 +159,7 @@ def test_astpalace_io_serve_round_trip(tmp_path):
             {"id": 3, "op": "get", "hash": h},
         ]
     ) + "\n"
-    proc = _run(["astpalace_io.py", "serve", "--palace", palace], home=tmp_path, stdin=reqs)
+    proc = _run(["structurepalace_io.py", "serve", "--palace", palace], home=tmp_path, stdin=reqs)
     assert proc.returncode == 0, proc.stderr
     lines = _json_lines(proc.stdout)
     by_id = {l["id"]: l for l in lines}

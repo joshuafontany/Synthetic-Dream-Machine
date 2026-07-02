@@ -5,7 +5,7 @@
  * ROUTED THROUGH the @daemon `capture` verb (the same path the main agent uses): each spirit at
  * `<session>/subagents/agent-*.jsonl` reads exchange-grain (readExchanges) and submits each turn via
  * the capture verb → capture cap → in-VM annotate (lar_* + the parse tree) → flush → mempalace
- * verbatim drawer + `.astpalace` AST (the deterministic hash-bindings). The spirit identity rides the
+ * verbatim drawer + `.structurepalace` AST (the deterministic hash-bindings). The spirit identity rides the
  * `source_file`: a `<wing>__spirits/` PREFIX routes the verbatim drawer into the spirits wing (decoded
  * to `metadata.wing` by the node wing-stamp flush), and the `<name>__agent-<id>__run-<run>.jsonl`
  * BASENAME gives buildPatch `lar_agent` / `lar_sidechain` / `lar_agent_handle` + the parent link. So a
@@ -133,7 +133,7 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
     try {
       const r = await runVerb(
         "capture",
-        // turnKey = the .astpalace provenance key (the kapae key); chunkIndex = the deterministic
+        // turnKey = the .structurepalace provenance key (the kapae key); chunkIndex = the deterministic
         // drawer-id ordinal (the fallback's exact `i`).
         { turnText: p.text, sourceFile: p.src, turnKey: p.key, chunkIndex: p.chunk },
         did,

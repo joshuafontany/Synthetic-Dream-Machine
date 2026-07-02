@@ -11,7 +11,7 @@
  *
  * Targets (resolved, never ambient):
  *   - the palace store      MEMPALACE_PALACE_PATH ?? ~/.mempalace   (chroma + config + entities + locks + the worldline-KG knowledge_graph.sqlite3, which lives INSIDE the palace dir)
- *   - the astpalace store   larAstPalaceDir (~/.lares/.astpalace)    (the memory-ast-unfolding — a second mempalace instance)
+ *   - the structurepalace store   larStructurePalaceDir (~/.lares/.structurepalace)    (the memory-ast-unfolding — a second mempalace instance)
  *   - the formpalace store  larFormPalaceDir (~/.lares/.formpalace)  (the living-grammar FORM-vector store — a third mempalace instance; nuke-or-the-re-pave half-paves stale form-vectors keyed by verbatim_sha)
  *   - the harvest watermark ~/.lares/harvest                        (lar_hv idempotency state.json)
  *   - the harvest stage     ~/.lares/harvest-stage                  (normalized transcript copies)
@@ -43,7 +43,7 @@ interface Target {
 
 const ORGAN_LABEL: Readonly<Record<string, string>> = {
   mempalace:  "palace store (chroma + config + entities + locks + worldline-KG sqlite)",
-  astpalace:  "astpalace (memory-ast-unfolding — a second mempalace instance)",
+  structurepalace:  "structurepalace (memory-ast-unfolding — a second mempalace instance)",
   formpalace: "formpalace (living-grammar FORM-vector store — a third mempalace instance)",
   meshpalace: "mesh sensorium (the federation tree — #has who/authority/flow)",
   "mesh:who": "mesh/who sensorium (identity/presence)",

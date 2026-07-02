@@ -27,8 +27,8 @@ import type { IslandContext } from "./island-context.js";
 export const TELEMETRY_FRAME = "telemetry:frame";
 /** Default signal type that carries a raw turn IN to a capture island. */
 const DEFAULT_ENQUEUE_SIGNAL = "telemetry:place-verb";
-/** Signal type that REWINDS (kapae) one turn's .astpalace tally + salience down-weight. */
-const KAPAE_SIGNAL = "astpalace:kapae";
+/** Signal type that REWINDS (kapae) one turn's .structurepalace tally + salience down-weight. */
+const KAPAE_SIGNAL = "structurepalace:kapae";
 
 export interface CaptureCapOptions {
   /** Build the capture engine given the OUT-frame `post` seam (the cap wires it to `ctx.post`).
@@ -47,7 +47,7 @@ interface EnqueueSignal {
   readonly sourceFile?: string;
   /** The turn-DAG fork-frontier (head turn-uuids) the producer derived; absent on a non-forked turn. */
   readonly frontier?: readonly string[];
-  /** The USER turn's uuid — the .astpalace provenance key (rides into the AST store, never the drawer). */
+  /** The USER turn's uuid — the .structurepalace provenance key (rides into the AST store, never the drawer). */
   readonly turnKey?: string;
   /** The producer's stable per-source ordinal — the deterministic drawer-id chunk (absent ⇒ the engine derives one). */
   readonly chunkIndex?: number;
@@ -154,7 +154,7 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
       // byte-identical handle to before. Carried as flat uuid strings, rebuilt into the context here.
       const frontier = msg.frontier ?? msg.args?.frontier;
       const branch = Array.isArray(frontier) && frontier.length ? { frontier: [...frontier] } : undefined;
-      // The USER turn's uuid rides onto the record metadata as the .astpalace provenance key (the
+      // The USER turn's uuid rides onto the record metadata as the .structurepalace provenance key (the
       // kapae key); absent ⇒ the turn's AST is stored but not rewind-addressable.
       const turnKey = msg.turnKey ?? msg.args?.turnKey;
       // The producer's stable chunk ordinal (the deterministic drawer-id half); absent ⇒ the engine

@@ -281,7 +281,7 @@ export interface DaemonMsg_TelemetryPlaceVerb {
    */
   frontier?: readonly string[];
   /**
-   * The USER turn's uuid — the PROVENANCE key the node AST split lifts into the .astpalace, so a
+   * The USER turn's uuid — the PROVENANCE key the node AST split lifts into the .structurepalace, so a
    * later rewind (kapae) can set-aside exactly this turn's recurrence tally. Absent ⇒ no key (the
    * turn's AST is stored, but not kapae-addressable). Stripped from the content drawer.
    */
@@ -296,16 +296,16 @@ export interface DaemonMsg_TelemetryPlaceVerb {
 }
 
 /**
- * Vessel → island: REWIND (kapae) one turn's .astpalace tally — the convergence twin of the KG
+ * Vessel → island: REWIND (kapae) one turn's .structurepalace tally — the convergence twin of the KG
  * valid-close + the Measure salience down-weight. Fire-and-forget (symmetric with telemetry
- * capture): the @daemon owns the warm .astpalace serve holder (a flock-singleton the CLI cannot
+ * capture): the @daemon owns the warm .structurepalace serve holder (a flock-singleton the CLI cannot
  * re-open), so the producer routes the rewind here. The capture cap (hasCapture) holds the engine
  * that holds the holder; it set-asides the turn's tally AND down-weights the turn's content drawers.
  */
-export interface DaemonMsg_AstpalaceKapae {
+export interface DaemonMsg_StructurepalaceKapae {
   schema_version: ProtocolVersion;
-  type: "astpalace:kapae";
-  /** The USER turn's uuid to rewind (matched against the .astpalace provenance turn_key). */
+  type: "structurepalace:kapae";
+  /** The USER turn's uuid to rewind (matched against the .structurepalace provenance turn_key). */
   turnKey: string;
   /** Optional rewind timestamp (the tombstone `valid_to`); defaults to now in the holder. */
   ended?: string;
@@ -614,7 +614,7 @@ export type VesselToIslandMsg =
   | IslandMsg_Teardown
   | DaemonMsg_PlaceVerb
   | DaemonMsg_TelemetryPlaceVerb
-  | DaemonMsg_AstpalaceKapae
+  | DaemonMsg_StructurepalaceKapae
   | DaemonMsg_DeriveSkeletonRequest
   | DaemonMsg_WorldlineCompareRequest
   | DaemonMsg_WorldlineTrajectoryRequest
@@ -790,7 +790,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "astpalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
@@ -916,13 +916,13 @@ export function mkTelemetryPlaceVerb(opts: {
   };
 }
 
-export function mkAstpalaceKapae(opts: {
+export function mkStructurepalaceKapae(opts: {
   turnKey: string;
   ended?: string;
-}): DaemonMsg_AstpalaceKapae {
+}): DaemonMsg_StructurepalaceKapae {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "astpalace:kapae",
+    type: "structurepalace:kapae",
     turnKey: opts.turnKey,
     ...(opts.ended ? { ended: opts.ended } : {}),
   };

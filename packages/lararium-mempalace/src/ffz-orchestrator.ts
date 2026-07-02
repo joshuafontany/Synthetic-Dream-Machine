@@ -9,7 +9,7 @@
  *
  *   1. READBACK — read a session's stored vectors back out of the palace, ordered by
  *      (source_file, chunk_index), via `drawer_io.py embeddings` (the CONTENT plane,
- *      live). FORM/STRUCTURE planes (formpalace/astpalace move/AST vectors keyed by
+ *      live). FORM/STRUCTURE planes (formpalace/structurepalace move/AST vectors keyed by
  *      verbatim_sha) are SCOPED — see the scope note below; absent them the quorum
  *      degrades gracefully to the one CONTENT plane (the N=1 {@link quorumStep} path).
  *   2. RUN — per session: the Measure servo over the ordered vectors → a segment LABEL
@@ -30,7 +30,7 @@
  *     re-embeds), ordered per session. Always plane-0.
  *   - FORM — LIVE. `drawer_io.py form-embeddings` dumps the stored move-vectors flat,
  *     joined per session on verbatim_sha (plane-1 when a session joins it).
- *   - STRUCTURE — LIVE. `astpalace_io.py structure-embeddings` dumps the stored AST-SHAPE
+ *   - STRUCTURE — LIVE. `structurepalace_io.py structure-embeddings` dumps the stored AST-SHAPE
  *     vectors flat (the deterministic structural encoder — a node-type histogram + tree-shape
  *     stats, cosine-meaningful), expanded across each structure's provenance verbatim_shas
  *     (the last plane when a session joins it). The vectors POPULATE on the nuke-and-pave
@@ -65,7 +65,7 @@ import {
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 
-import { resolveMempalacePython, resolveAstPalaceSpawn } from "./spawn-resolve.js";
+import { resolveMempalacePython, resolveStructurePalaceSpawn } from "./spawn-resolve.js";
 import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
@@ -141,7 +141,7 @@ export type FormVectorReader = (wing: string) => Map<string, readonly number[]>;
  * cross-graph join key). The THIRD plane of the braid: when wired AND the form plane is
  * also present the Measure servo runs the quorum at N=3 (content plane-0 · form plane-1 ·
  * structure plane-2), so the structural/AST-shape tension-moments light up. Mirrors
- * {@link FormVectorReader} exactly — the astpalace structure vectors (the deterministic
+ * {@link FormVectorReader} exactly — the structurepalace structure vectors (the deterministic
  * AST-shape encoding), expanded across each structure's provenance verbatim_shas. Absent
  * ⇒ the run degrades to the planes present (content, or content+form).
  */
@@ -300,7 +300,7 @@ function makeJoinTracker(bySha: ReadonlyMap<string, readonly number[]>) {
  *   FORM      — present iff `formBySha` is supplied: the joined form-vector's drift (see
  *               {@link makeJoinTracker} for the turn-grained repeat-last rule).
  *   STRUCTURE — present iff `structBySha` is supplied: the joined structure-vector's drift,
- *               the SAME tracker against the astpalace AST-shape vectors (the 3rd quorum plane).
+ *               the SAME tracker against the structurepalace AST-shape vectors (the 3rd quorum plane).
  *
  * Backward-compatible: called with `(vectors, formMap)` it yields `[content, form]` (today's
  * 2-plane output exactly); with `(vectors, formMap, structMap)` it yields `[content, form,
@@ -609,20 +609,20 @@ export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly 
 }
 
 /**
- * Default {@link StructureVectorReader} — `astpalace_io.py structure-embeddings` (the STRUCTURE
- * plane). Reads the stored AST-shape vectors back from the `.astpalace` (NEVER re-encodes),
+ * Default {@link StructureVectorReader} — `structurepalace_io.py structure-embeddings` (the STRUCTURE
+ * plane). Reads the stored AST-shape vectors back from the `.structurepalace` (NEVER re-encodes),
  * expanded across each structure's provenance verbatim_shas → `verbatim_sha` → the structure
- * vector. The astpalace dir defaults inside the script ($LAR_ROOT/~ .lares/.astpalace), so no
+ * vector. The structurepalace dir defaults inside the script ($LAR_ROOT/~ .lares/.structurepalace), so no
  * `--palace` is passed; a `--wing` filter does not apply (structure is keyed by sha, not
- * wing-scoped). A missing/empty astpalace yields no rows ⇒ the structure plane never engages.
+ * wing-scoped). A missing/empty structurepalace yields no rows ⇒ the structure plane never engages.
  */
 export function pythonStructureEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
-  const { python: PY, script: ASTPALACE_IO, scriptPresent, submoduleRoot } = resolveAstPalaceSpawn();
+  const { python: PY, script: STRUCTUREPALACE_IO, scriptPresent, submoduleRoot } = resolveStructurePalaceSpawn();
   if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
-  if (!scriptPresent) throw new TelemetryUnavailable(`astpalace_io.py missing at ${ASTPALACE_IO}`);
+  if (!scriptPresent) throw new TelemetryUnavailable(`structurepalace_io.py missing at ${STRUCTUREPALACE_IO}`);
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
-  const out = mineWithServo("astpalace-io-structure-embeddings", (timeoutMs) =>
-    execFileSync(PY, [ASTPALACE_IO, "structure-embeddings"], {
+  const out = mineWithServo("structurepalace-io-structure-embeddings", (timeoutMs) =>
+    execFileSync(PY, [STRUCTUREPALACE_IO, "structure-embeddings"], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),

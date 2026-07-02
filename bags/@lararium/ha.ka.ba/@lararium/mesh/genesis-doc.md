@@ -144,7 +144,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 ## Grounds (the realized flow)
 
-<<~ranks commit cid-plane@9c90b390 -> slice-1-blob-strip@940a023e -> astpalace-instance@991bfbe7 -> daemon-lifecycle@7fb1c3bb >>
+<<~ranks commit cid-plane@9c90b390 -> slice-1-blob-strip@940a023e -> structurepalace-instance@991bfbe7 -> daemon-lifecycle@7fb1c3bb >>
 
 - **9c90b390 — CID plane:** kernel resolves engine/plugins CAS-only by CID; the byte-blob left the `@oracle` CRDT (where the merge-into-stale had made it an unresolved actor conflict — the boot-skew root).
 - **940a023e — slice 1:** blob bytes leave the genesis doc entirely → `genesis/cas/` + `island.manifest.json`; `island.bin` 547 KB → 4 KB. Merge-conflict-on-bytes class gone structurally. Isomorphic (node fs · browser OPFS).

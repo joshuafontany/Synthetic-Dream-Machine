@@ -174,7 +174,7 @@ def test_singleton_independent_per_prefix(tmp_path, monkeypatch):
     singleton — the prefix names the entity in the lock namespace."""
     monkeypatch.setenv("HOME", str(tmp_path))
     p = str(tmp_path / "shared")
-    fh_ast = sc.acquire_serve_lock(p, "astpalace_serve")
+    fh_ast = sc.acquire_serve_lock(p, "structurepalace_serve")
     fh_form = sc.acquire_serve_lock(p, "form_encoder_serve")
     try:
         assert fh_ast is not None and fh_form is not None
@@ -308,7 +308,7 @@ def test_run_sidecar_encode_only_skips_lock_and_runs(tmp_path):
     assert json.loads(out.getvalue()) == {"id": 1, "ok": True, "result": {"ready": True}}
 
 
-# ── ReverseIndex — the lifted raw-sqlite-beside-chroma cap (astpalace + persistence) ──
+# ── ReverseIndex — the lifted raw-sqlite-beside-chroma cap (structurepalace + persistence) ──
 
 def _rev_idx(tmp_path, **kw):
     return sc.ReverseIndex(str(tmp_path), kw.get("db", "idx.sqlite3"), kw.get("table", "t"), kw.get("key", "k"), kw.get("val", "v"))
@@ -340,7 +340,7 @@ def test_reverse_index_persists_across_reopen(tmp_path):
 
 def test_reverse_index_signer_shape_composes_too(tmp_path):
     """persistence's signer -> testimony_id rides the SAME cap, differing only in column
-    names — the lift generalizes past astpalace's turn_key -> hash."""
+    names — the lift generalizes past structurepalace's turn_key -> hash."""
     idx = _rev_idx(tmp_path, db="signer_index.sqlite3", table="signer_index", key="signer", val="testimony_id")
     idx.put("vessel-B", "t-42")
     assert idx.lookup("vessel-B") == "t-42"

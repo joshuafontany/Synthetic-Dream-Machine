@@ -49,7 +49,7 @@ describe("resolveComputeCapEnv — the cap composes or degrades", () => {
 });
 
 /**
- * Restart-safety (P0) — the DURABLE @daemon sidecars (drawer_io · astpalace_io · form_encoder ·
+ * Restart-safety (P0) — the DURABLE @daemon sidecars (drawer_io · structurepalace_io · form_encoder ·
  * kg_io · the read recall MCP client) each open a chroma collection that builds the default
  * onnxruntime embedder. The premise CHANGED: the GPU `ld.so.conf` + `onnxruntime-gpu` now put the CUDA
  * runtime on the SYSTEM linker path, so a BARE `import onnxruntime` — the exact path a cold daemon

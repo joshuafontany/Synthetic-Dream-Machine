@@ -48,13 +48,13 @@ membership manifestation); and a DUAL-GRAPH that keeps form orthogonal to conten
 ## The Nameless Palace-Instance Entity ~ a palace IS its cap-stack
 
 **One generic daemon body, differentiated ONLY by its cap-stack.** Today the corpus duplicates the
-holder logic: `mempalace.daemon`, `astpalace_io.py`, and the per-feed variants each re-author the same
+holder logic: `mempalace.daemon`, `structurepalace_io.py`, and the per-feed variants each re-author the same
 on-ea / on-signal / on-hooanu lifecycle around a different store. This collapses them into ONE entity —
 a Python port of `composeIsland` (`packages/lararium-tw5/src/island-caps.ts`):
 
 <<~ranks compose compose_palace(caps) ~ folds an ORDERED cap-stack into one palace body -> on_ea ~ every cap sets up; a returned fn registers as LIFO teardown -> on_signal ~ first cap in stack order to CLAIM a message wins -> on_hooanu ~ LIFO teardown, then each cap's close >>
 
-**A palace IS its cap-stack; role emerges, never a type.** No `MemPalace` class, no `AstPalace` class —
+**A palace IS its cap-stack; role emerges, never a type.** No `MemPalace` class, no `StructurePalace` class —
 a content palace HAS `[FlockSingleton, ContentFeedCap, LateChunkCap]`; a form palace HAS
 `[FlockSingleton, AstFeedCap, FormVectorCap]`; a mesh palace HAS `[FlockSingleton, AutomergeFeedCap]`.
 The differentiation rides the stack (data), never the body (code). This extends the has-stack runtime
@@ -193,7 +193,7 @@ and near-term.
 
 Content, form, and structure ride SEPARATE palaces, kept orthogonal — and the join generalizes to N:
 
-<<~ranks palace content ~ the verbatim mempalace; late-chunked over the session (the words) -> form ~ the formpalace; the fuzzy-constructicon move-vectors (the moves / the jurus) -> structure ~ the astpalace; the canonical AST + structural-hash (the exact shape) >>
+<<~ranks palace content ~ the verbatim mempalace; late-chunked over the session (the words) -> form ~ the formpalace; the fuzzy-constructicon move-vectors (the moves / the jurus) -> structure ~ the structurepalace; the canonical AST + structural-hash (the exact shape) >>
 
 **Cross-joined by verbatim-sha + N-ary RRF.** The palace collections rejoin on the shared verbatim hash and fuse
 their rankings by **Reciprocal Rank Fusion** — **fusion IS the hash-join**: a query ranks in each
@@ -235,7 +235,7 @@ The unification reads as a **PRODUCT** `P = Content × Form × Struct` in the pr
 (pointwise limits, nLab) — the limit taken at each cell of B. So the three palaces name **ONE object
 under three projections**, and the cap-stack (#palace-instance) IS the projection set:
 
-<<~ranks projection π_content ~ the mempalace; the verbatim words -> π_struct ~ the astpalace; the canonical AST + structural-hash -> π_form ~ the formpalace; the fuzzy-constructicon move-vectors >>
+<<~ranks projection π_content ~ the mempalace; the verbatim words -> π_struct ~ the structurepalace; the canonical AST + structural-hash -> π_form ~ the formpalace; the fuzzy-constructicon move-vectors >>
 
 The nameless palace-entity carrying `[…, ContentFeedCap]` projects content; `[…, AstFeedCap]` projects
 structure; `[…, FormVectorCap]` projects form — three projections of the one product, the
@@ -438,7 +438,7 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 <<~Phase P0 "does/pin the 3-layer constructicon basis (read-only) ~ name the constructions across HTML·wikitext·memetic" >>
 <<~Phase P1 "does/move-skeleton emitter (pure) ~ read the emitted markers into a move-n-gram skeleton" >>
 <<~Phase P2 "does/Tier-1 fuzzy-form-vector (pure) ~ structural-match × SLOR × entrenchment, no training" >>
-<<~Phase P3 "does/wire the form-vector into astpalace (additive) ~ stamp the vector beside the verbatim" >>
+<<~Phase P3 "does/wire the form-vector into structurepalace (additive) ~ stamp the vector beside the verbatim" >>
 <<~Phase P4 "does/RRF multi-graph ~ the two-collection ChromaDB hash-join + RRF fusion" >>
 <<~Phase P5 "does/source-feed entity = the daemon-collapse ~ compose_palace(caps), retire the duplicated holders" >>
 <<~Phase P6 "does/apertures ~ RAPTOR collapsed-tree + Matryoshka coarse→fine + late-chunking" >>
@@ -452,7 +452,7 @@ collapse (P5) after the form-vector proves its shape, the learned encoder (P7) l
 **mempalace submodule** — the base layer, donated upstream to the nakama: N-collection support,
 caller-supplied vectors, the RRF fuse, the embedding hook (nomic · late-chunking · Matryoshka), the
 daemon-singleton flock (the orphan-pile-up fix the first such contribution). The multi-store complexity
-collapses *into* that base: `astpalace_io.py` retires, the `.astpalace` becomes one mempalace collection
+collapses *into* that base: `structurepalace_io.py` retires, the `.structurepalace` becomes one mempalace collection
 among many, and the warm Python sidecar **is** the mempalace base daemon — never a custom Lares holder.
 The **`lares` @daemon sovereign island** keeps only the *integration*: the constructicon (P0), the
 fuzzy-form-encoder (P1·P2·P7), the cap-composition (P5), the TW5-wikirule graceful parse, the aperture

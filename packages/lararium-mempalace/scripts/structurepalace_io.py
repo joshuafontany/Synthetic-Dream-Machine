@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""astpalace_io — the substrate side of the `.astpalace` memory-ast-unfolding palace.
+"""structurepalace_io — the substrate side of the `.structurepalace` memory-ast-unfolding palace.
 
 A SECOND mempalace instance (the same ChromaDB engine, a separate palace dir) that
 holds the per-turn parse-tree AST, keyed by its STRUCTURAL HASH (sha256 of the
@@ -11,9 +11,9 @@ The binding is CODE-LEVEL, navigable BOTH ways:
   - the verbatim drawer (in the verbatim palace) carries `lar_ast_hash`  → this entry's id
   - this entry carries `verbatim_sha` + `source_file`                    → that drawer
 
-This helper is the SOLE holder of the `.astpalace` PersistentClient for its palace dir
+This helper is the SOLE holder of the `.structurepalace` PersistentClient for its palace dir
 (one process, lazily spawned, reused) — the reap-don't-pile invariant: never two holders
-fighting the per-palace mine lock. The TS `makeAstPalace` keys a singleton on the
+fighting the per-palace mine lock. The TS `makeStructurePalace` keys a singleton on the
 canonical palace dir so a second `put` reuses this one process instead of spawning a pile.
 
 It is OUR code (the causal-island boundary's substrate side), NOT the submodule: it only
@@ -31,12 +31,12 @@ stdout (banners/library noise → stderr, which the TS side drains and ignores):
     <- {"id":2,"ok":true,"result":{"hash":H,"count":N}}
 
     -> {"id":3,"op":"get","hash":H}
-    <- {"id":3,"ok":true,"result":{ <AstEntry> | null }}
+    <- {"id":3,"ok":true,"result":{ <StructureEntry> | null }}
 
     -> {"id":4,"op":"kapae","turn_key":K,"ended":T}
     <- {"id":4,"ok":true,"result":{"closed":N,"tombstoned":[H,…],"verbatim_shas":[V,…],"turn_key":K}}
 
-KAPAE (rewind = set-aside, never erase) — the astpalace twin of the worldline KG kapae.
+KAPAE (rewind = set-aside, never erase) — the structurepalace twin of the worldline KG kapae.
 Keyed by the USER turn's uuid (turn_key), which `put` threads into every provenance entry. A
 gone turn drops its provenance line and decrements `count`; an entry whose count falls to ≤0 is
 TOMBSTONED (`lar_tombstoned_at` stamped, the chroma row KEPT, excluded from recall) rather than
@@ -46,7 +46,7 @@ mirrors kg_io's raw-sqlite-beside-chroma idiom) keeps the turn_key → structura
 since chroma cannot where-filter inside a JSON provenance list.
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 astpalace_io.py serve --palace ~/.lares/.astpalace
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace ~/.lares/.structurepalace
 """
 from __future__ import annotations
 
@@ -86,11 +86,11 @@ PROVENANCE_CAP = 64
 # landed) can't linger forever. 0 (or negative) opts out. Read fresh from the env so
 # an operator/test can override per process. The flock singleton is the primary guard;
 # idle-reap bounds accumulation even if a flock is somehow bypassed (e.g. non-POSIX).
-IDLE_TTL_ENV = "ASTPALACE_IDLE_TTL"
+IDLE_TTL_ENV = "STRUCTUREPALACE_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 
 # The sidecar's identity in the lock namespace — its per-palace singleton prefix.
-_LOCK_PREFIX = "astpalace_serve"
+_LOCK_PREFIX = "structurepalace_serve"
 
 
 def _serve_lock_path(palace_path: str) -> str:
@@ -111,7 +111,7 @@ def _idle_ttl_seconds() -> float:
 
 # ── The STRUCTURAL ENCODER — a deterministic feature-vector over the AST SHAPE ───────
 #
-# The `.astpalace` is addressed by EXACT id (the structural hash) for put/get/kapae — we
+# The `.structurepalace` is addressed by EXACT id (the structural hash) for put/get/kapae — we
 # never semantic-search it — so we supply our OWN vectors and NEVER invoke the palace's
 # embedding model (no model load, no download, no network). The vector is the STRUCTURE
 # PLANE's cohesion feed for the FFZ Measure servo (ffz-orchestrator, the 3rd quorum plane):
@@ -297,8 +297,8 @@ def _now() -> str:
 _TURNKEY_INDEX_DB = "turnkey_index.sqlite3"
 
 
-class AstPalaceStore:
-    """One open `.astpalace` collection; put (recurrence RMW) + get by structural hash + kapae."""
+class StructurePalaceStore:
+    """One open `.structurepalace` collection; put (recurrence RMW) + get by structural hash + kapae."""
 
     def __init__(self, palace_path: str) -> None:
         # create-or-open: get_collection(create=True) os.makedirs the dir + creates the
@@ -458,7 +458,7 @@ class AstPalaceStore:
         return {"closed": removed, "tombstoned": tombstoned, "verbatim_shas": dropped_shas}
 
     def kapae(self, turn_key: str, ended: str | None = None) -> dict:
-        """Set-aside (NOT erase) the AST tally for a gone turn — the astpalace twin of the KG kapae.
+        """Set-aside (NOT erase) the AST tally for a gone turn — the structurepalace twin of the KG kapae.
 
         Find the structure the turn unfolded to (via the O(1) reverse-index) and retract its tally
         (drop the turn's provenance line, decrement `count`, tombstone-at-zero) via the shared
@@ -482,7 +482,7 @@ class AstPalaceStore:
 # make_dispatch wraps them in the NDJSON {id, ok, result|error} envelope.
 
 
-def _build_ops(store: AstPalaceStore) -> dict:
+def _build_ops(store: StructurePalaceStore) -> dict:
     return {
         "ping": lambda req: {"ready": True},
         "put": lambda req: store.put(
@@ -494,7 +494,7 @@ def _build_ops(store: AstPalaceStore) -> dict:
     }
 
 
-def _serve_loop(store: AstPalaceStore, in_fd: int, out) -> None:
+def _serve_loop(store: StructurePalaceStore, in_fd: int, out) -> None:
     """Wire this sidecar's ops into the shared NDJSON serve-loop cap (raw-fd read +
     idle-reap). The TTL reads fresh from the env so a test/operator can override it."""
     serve_loop(make_dispatch(_build_ops(store)), in_fd, out, idle_ttl=_idle_ttl_seconds())
@@ -507,9 +507,9 @@ def _serve(palace_path: str) -> None:
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(AstPalaceStore(palace_path))),
+        build_dispatch=lambda: make_dispatch(_build_ops(StructurePalaceStore(palace_path))),
         idle_ttl=_idle_ttl_seconds(),
-        singleton_msg="astpalace_io: another holder already serves this palace; exiting (singleton)\n",
+        singleton_msg="structurepalace_io: another holder already serves this palace; exiting (singleton)\n",
     )
 
 
@@ -517,22 +517,22 @@ def _serve(palace_path: str) -> None:
 #
 # Mirrors `drawer_io.py cmd_form_embeddings` (the FORM plane), one tier up: the FORM store
 # keys an entry BY the verbatim_sha (one vector per turn), so its readback is a 1:1 dump.
-# The astpalace keys by STRUCTURAL HASH with a recurrence tally, and ONE structure may have
+# The structurepalace keys by STRUCTURAL HASH with a recurrence tally, and ONE structure may have
 # unfolded from MANY turns (its `lar_provenance` list of verbatim_shas). So this reader
 # EXPANDS each live entry across its provenance: one NDJSON row per (verbatim_sha) carrying
 # that structure's vector. The orchestrator joins each content drawer's verbatim_sha against
 # this map (the 3rd quorum plane), exactly as it joins the form map. Tombstoned (kapae'd-to-
 # zero) entries are SKIPPED — set-aside structures feed no plane. Read-only — never a write.
 #
-# A missing/empty astpalace yields no rows ⇒ the orchestrator degrades to content (+form),
+# A missing/empty structurepalace yields no rows ⇒ the orchestrator degrades to content (+form),
 # the same graceful path the absent form collection takes.
 
-def _default_astpalace_dir() -> str:
-    """The canonical `.astpalace` palace dir — `$LAR_ROOT/.astpalace` (isolated instances)
-    or `~/.lares/.astpalace`. Mirrors the TS `larAstPalaceDir()` (vessel-paths.ts) so the
+def _default_structurepalace_dir() -> str:
+    """The canonical `.structurepalace` palace dir — `$LAR_ROOT/.structurepalace` (isolated instances)
+    or `~/.lares/.structurepalace`. Mirrors the TS `larStructurePalaceDir()` (vessel-paths.ts) so the
     orchestrator and the holder agree on the dir without a cross-package import."""
     root = os.environ.get("LAR_ROOT") or os.path.join(os.path.expanduser("~"), ".lares")
-    return os.path.join(root, ".astpalace")
+    return os.path.join(root, ".structurepalace")
 
 
 def _structure_embeddings(palace_path: str, out) -> int:
@@ -542,8 +542,8 @@ def _structure_embeddings(palace_path: str, out) -> int:
     tombstoned structure is skipped. Returns the row count."""
     try:
         col = get_collection(palace_path, _skip_identity_check=True)
-    except Exception as exc:  # noqa: BLE001 — no astpalace yet ⇒ 0 rows (graceful degrade)
-        sys.stderr.write(f"structure-embeddings: no astpalace ({type(exc).__name__}: {exc}) — 0 rows\n")
+    except Exception as exc:  # noqa: BLE001 — no structurepalace yet ⇒ 0 rows (graceful degrade)
+        sys.stderr.write(f"structure-embeddings: no structurepalace ({type(exc).__name__}: {exc}) — 0 rows\n")
         return 0
     rows = read_stored_embeddings(
         col, {"provenance": "lar_provenance", "tombstoned": "lar_tombstoned_at"}
@@ -569,22 +569,22 @@ def _structure_embeddings(palace_path: str, out) -> int:
 
 
 def cmd_structure_embeddings(args) -> None:
-    palace_path = args.palace or _default_astpalace_dir()
+    palace_path = args.palace or _default_structurepalace_dir()
     written = _structure_embeddings(palace_path, sys.stdout)
-    sys.stderr.write(f"read {written} structure-vector rows from the astpalace at {palace_path}\n")
+    sys.stderr.write(f"read {written} structure-vector rows from the structurepalace at {palace_path}\n")
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="astpalace I/O (the .astpalace mempalace-instance holder)")
+    ap = argparse.ArgumentParser(description="structurepalace I/O (the .structurepalace mempalace-instance holder)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("serve", help="persistent NDJSON RPC holder for one .astpalace palace dir")
+    s = sub.add_parser("serve", help="persistent NDJSON RPC holder for one .structurepalace palace dir")
     s.add_argument("--palace", required=True)
     s.set_defaults(fn=lambda a: _serve(a.palace))
     se = sub.add_parser(
         "structure-embeddings",
         help="batch readback of structure vectors keyed by verbatim_sha (the FFZ 3rd plane)",
     )
-    se.add_argument("--palace", default="", help="the .astpalace dir (default: $LAR_ROOT/~ .lares/.astpalace)")
+    se.add_argument("--palace", default="", help="the .structurepalace dir (default: $LAR_ROOT/~ .lares/.structurepalace)")
     se.set_defaults(fn=cmd_structure_embeddings)
     args = ap.parse_args()
     args.fn(args)

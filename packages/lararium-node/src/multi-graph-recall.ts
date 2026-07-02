@@ -2,7 +2,7 @@
  * multi-graph-recall — P4 of the living-grammar palace: the RRF MULTI-graph query that FUSES the
  * palace's several graphs into ONE ranking. Today the two live legs are the CONTENT graph (the
  * verbatim mempalace — dense embeddings, the drawers) and the FORM graph (the `.formpalace` "form"
- * collection — sparse fuzzy-constructicon vectors, the moves); the STRUCTURE (`.astpalace`),
+ * collection — sparse fuzzy-constructicon vectors, the moves); the STRUCTURE (`.structurepalace`),
  * worldline, and federation graphs slot in as further legs with ZERO core change.
  *
  * The graphs stay ORTHOGONAL (each asks a different question — *what was said* · *how the grammar

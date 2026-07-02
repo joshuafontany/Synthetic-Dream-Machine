@@ -10,7 +10,7 @@
  *   $XDG_CONFIG_HOME/lares  (~/.config/lares)       — config.json.
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
  *
- * The SENSORIUM consolidation (SHEAF-TRUE): structure ← the astpalace, form ← the formpalace, both
+ * The SENSORIUM consolidation (SHEAF-TRUE): structure ← the structurepalace, form ← the formpalace, both
  * co-located under `<data>/sensoriums/memory/{structure,form}` so the filetree IS the composition
  * (sensorium.ts). content ← the verbatim mempalace stays EXTERNAL at its upstream-default `~/.mempalace`
  * (the content-cap-home ruling — "mempalace is external, not-ours-to-change"); the memory-sensorium
@@ -124,9 +124,9 @@ export function larMempalaceDir(): string {
   return mempalaceContentParent();
 }
 
-/** The astpalace store dir (the `structure` fiber cap) — `<memory>/structure`, inside the consolidated
+/** The structurepalace store dir (the `structure` fiber cap) — `<memory>/structure`, inside the consolidated
  *  sensorium tree. A 2nd mempalace instance holding the per-turn parse-tree AST keyed by structural hash. */
-export function larAstPalaceDir(): string {
+export function larStructurePalaceDir(): string {
   return join(memorySensoriumDir(), "structure");
 }
 

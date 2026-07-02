@@ -557,7 +557,7 @@ def test_store_op_requires_palace():
 
 
 # ---------------------------------------------------------------------------
-# serve singleton lock + idle-reap loop (mirrors astpalace_io's protocol)
+# serve singleton lock + idle-reap loop (mirrors structurepalace_io's protocol)
 # ---------------------------------------------------------------------------
 
 _posix_flock = pytest.mark.skipif(

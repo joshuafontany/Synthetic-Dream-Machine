@@ -1,5 +1,5 @@
 /**
- * astpalace — the `.astpalace` AST store, now a SECOND mempalace instance (same ChromaDB engine,
+ * structurepalace — the `.structurepalace` AST store, now a SECOND mempalace instance (same ChromaDB engine,
  * a separate palace dir) reached through ONE persistent python holder. Asserts against a REAL
  * temp-dir palace: store→read by structural hash; identical structures collide to one hash (the
  * recurrence/frequency signal); the binding navigates BOTH ways (drawer→AST · AST→drawer); the
@@ -19,7 +19,7 @@ import { join } from "node:path";
 import type { CaptureRecord } from "@lararium/mesh";
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makeAstPalace, _liveHolderCount, type AstPalace, type HolderSpawn } from "../src/astpalace.js";
+import { makeStructurePalace, _liveHolderCount, type StructurePalace, type HolderSpawn } from "../src/structurepalace.js";
 import { makeAstSplitFlush } from "../src/node-capture-engine.js";
 
 const TEST_TIMEOUT = 60_000;
@@ -30,20 +30,20 @@ const sameTreeReordered = { body: [{ args: "aim", word: "lares", kind: "sigil" }
 const otherTree = { kind: "meme", uri: "lar:///turn", body: [{ kind: "sigil", word: "hud", args: "Aperture(10)" }] };
 
 // Every palace opened in a test is registered here and closed after, so no holder process lingers.
-const opened: AstPalace[] = [];
-function openPalace(dir: string): AstPalace {
-  const pal = makeAstPalace(dir);
+const opened: StructurePalace[] = [];
+function openPalace(dir: string): StructurePalace {
+  const pal = makeStructurePalace(dir);
   opened.push(pal);
   return pal;
 }
 async function palaceDir(): Promise<string> {
-  return mkdtemp(join(tmpdir(), "astpalace-"));
+  return mkdtemp(join(tmpdir(), "structurepalace-"));
 }
 afterEach(async () => {
   await Promise.all(opened.splice(0).map((p) => p.close()));
 });
 
-describe("makeAstPalace (mempalace-instance-backed)", () => {
+describe("makeStructurePalace (mempalace-instance-backed)", () => {
   test("store an AST → read it back by its structural hash", async () => {
     const pal = openPalace(await palaceDir());
     const { hash } = await pal.put(tree, { source_file: "nalu://run/1", content: "the verb leads" });
@@ -133,7 +133,7 @@ describe("makeAstPalace (mempalace-instance-backed)", () => {
 });
 
 describe("makeAstSplitFlush — the routing split (over the live store)", () => {
-  test("routes AST → .astpalace, leaves drawer with verbatim + lar_ast_hash (inline lar_ast gone)", async () => {
+  test("routes AST → .structurepalace, leaves drawer with verbatim + lar_ast_hash (inline lar_ast gone)", async () => {
     const pal = openPalace(await palaceDir());
     let filed: CaptureRecord[] = [];
     const inner = async (batch: readonly CaptureRecord[]): Promise<number> => {
@@ -159,7 +159,7 @@ describe("makeAstSplitFlush — the routing split (over the live store)", () => 
     expect(hash).toMatch(/^[0-9a-f]{64}$/);
     expect(out.metadata!["lar_verbatim_sha"]).toMatch(/^[0-9a-f]{64}$/); // the deterministic back-key flows through at flush
 
-    // The structure is recoverable from .astpalace by that hash — the two stores joined by the hash.
+    // The structure is recoverable from .structurepalace by that hash — the two stores joined by the hash.
     const entry = await pal.get(hash);
     expect(entry!.ast).toEqual(tree);
     expect(entry!.provenance[0]!.source_file).toBe("nalu://run/1");
@@ -212,16 +212,16 @@ describe("a sick holder SURFACES its stderr (the ChromaDB-error footgun)", () =>
   };
 
   test("a put() against a holder that dies rejects WITH the stderr fault, not a bare exit code", async () => {
-    const dir = await mkdtemp(join(tmpdir(), "astpalace-sick-"));
-    const fault = "chromadb PermissionError: [Errno 13] could not open .astpalace/chroma.sqlite3";
-    const pal = makeAstPalace(dir, { spawn: sickSpawn(fault) });
+    const dir = await mkdtemp(join(tmpdir(), "structurepalace-sick-"));
+    const fault = "chromadb PermissionError: [Errno 13] could not open .structurepalace/chroma.sqlite3";
+    const pal = makeStructurePalace(dir, { spawn: sickSpawn(fault) });
     await expect(pal.put(tree, { source_file: "nalu://x", content: "y" })).rejects.toThrow(/PermissionError/);
     await pal.close();
   }, TEST_TIMEOUT);
 });
 
 describe("the reap-don't-pile invariant — ONE holder per palace dir", () => {
-  test("two makeAstPalace on the SAME dir share ONE holder process (never a pile)", async () => {
+  test("two makeStructurePalace on the SAME dir share ONE holder process (never a pile)", async () => {
     const dir = await palaceDir();
     const before = _liveHolderCount();
     const a = openPalace(dir);

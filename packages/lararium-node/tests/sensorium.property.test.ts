@@ -48,7 +48,7 @@ function randManifest(u: () => number, sensoriumDir: string) {
     const inside = u() < 0.5;
     caps[name] = {
       absDir: inside ? join(sensoriumDir, name) : join(tmpdir(), `outside-${name}-${Math.floor(u() * 1e6)}`),
-      engine: ["mempalace", "astpalace", "formpalace", ""][Math.floor(u() * 4)]!,
+      engine: ["mempalace", "structurepalace", "formpalace", ""][Math.floor(u() * 4)]!,
       variance,
     };
     wanted[name] = variance;
@@ -89,7 +89,7 @@ describe("planeVariance — the partition is TOTAL and canonical (property)", ()
       sensorium: "memory", lar: "lar:///x",
       caps: {
         content: { absDir: join(dir, "content"), engine: "mempalace" },
-        structure: { absDir: join(dir, "structure"), engine: "astpalace" },
+        structure: { absDir: join(dir, "structure"), engine: "structurepalace" },
         form: { absDir: join(dir, "form"), engine: "formpalace" },
       },
     });

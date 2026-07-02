@@ -9,7 +9,7 @@
  *      heuristics-only), then pin `hooks.auto_save = false` — THE re-pollution gate (a fresh init
  *      defaults it true and the plugin hooks fire independent of settings.json, so without this the
  *      `sessions` mega-wing returns on the first turn). The worldline-KG sqlite lives INSIDE it.
- *   2. astpalace / 3. formpalace — ChromaDB instances; the collection is created lazily on first
+ *   2. structurepalace / 3. formpalace — ChromaDB instances; the collection is created lazily on first
  *      `put`, so standing them up only ensures the store directory exists.
  *   4. meshpalace — stood LAST (it couples to a live node); the directory wiring is all we do here,
  *      the @meshpalace feed/federation logic lives in the mesh domain.

@@ -30,7 +30,7 @@ import {
   mkManifest,
   mkDaemonPlaceVerb,
   mkTelemetryPlaceVerb,
-  mkAstpalaceKapae,
+  mkStructurepalaceKapae,
   mkDaemonVerbResult,
   mkDaemonVerifyRequest,
   mkDaemonResolveBindingRequest,
@@ -182,9 +182,9 @@ export interface DaemonVmCore {
    *  `frontier` (optional) carries the turn-DAG fork-frontier so a same-session fork derives a
    *  distinct handle; absent on a non-forked turn. */
   placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string, chunkIndex?: number) => void;
-  /** REWIND (kapae) one turn's .astpalace tally + salience down-weight, IN the daemon island (it owns
+  /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the daemon island (it owns
    *  the warm holder). Fire-and-forget — the convergence twin of the CLI-side KG valid-close. */
-  placeAstpalaceKapae: (turnKey: string, ended?: string) => void;
+  placeStructurepalaceKapae: (turnKey: string, ended?: string) => void;
   /**
    * Derive a recall query's move-skeleton IN the daemon VM (the recall twin of placeTelemetry) —
    * round-trips the query string through the island's `$tw.lares.deriveQuerySkeletonVm` so the
@@ -511,8 +511,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string, chunkIndex?: number) => {
       worker.post(mkTelemetryPlaceVerb({ turnText, sourceFile, ...(frontier && frontier.length ? { frontier } : {}), ...(turnKey ? { turnKey } : {}), ...(chunkIndex !== undefined ? { chunkIndex } : {}) }));
     },
-    placeAstpalaceKapae: (turnKey: string, ended?: string) => {
-      worker.post(mkAstpalaceKapae({ turnKey, ...(ended ? { ended } : {}) }));
+    placeStructurepalaceKapae: (turnKey: string, ended?: string) => {
+      worker.post(mkStructurepalaceKapae({ turnKey, ...(ended ? { ended } : {}) }));
     },
     deriveSkeleton: (query: string) =>
       askIsland<DaemonDeriveSkeletonResult | null>("derive", (requestId) => mkDaemonDeriveSkeletonRequest({ requestId, query })),

@@ -140,8 +140,8 @@ export function closeWorldlineEdges(closes: readonly WorldlineEdgeClose[], opts:
  *
  * NOTE — the AUTO-TRIGGER landed (FFZ live-triggers): `lares harvest` runs mesh `detectGoneTurns`
  * (gone-turns.ts) per session-scope over the append-only index vs the live current-branch, and fires
- * THIS `kapaeTurn` for every gone uuid (Leg 1, the KG valid-close), while the astpalace twin
- * (`astpalace_io.kapae`) sets aside the AST tally (Legs 2+3 via the @daemon). The REWIND-THEN-FORK
+ * THIS `kapaeTurn` for every gone uuid (Leg 1, the KG valid-close), while the structurepalace twin
+ * (`structurepalace_io.kapae`) sets aside the AST tally (Legs 2+3 via the @daemon). The REWIND-THEN-FORK
  * composition rides {@link kapaeThenFork} — kapae's valid-close → re-project → the new sibling.
  */
 export function kapaeTurn(turnKey: string, opts: WorldlineKgOptions & { ended?: string } = {}): { closed: number; ended: string } {

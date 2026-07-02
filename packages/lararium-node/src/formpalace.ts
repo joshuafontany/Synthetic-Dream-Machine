@@ -3,19 +3,19 @@
  * FORM-vector (the two-planes form-capture's CONTINUOUS plane, encoded). Backed by a "form"
  * collection inside a mempalace instance (the same ChromaDB engine, the SECOND collection beside
  * the palace default), reached through ONE persistent Python holder (`form_encoder.py serve
- * --palace <dir>`). It NEVER federates — local, the eidetic↔grammatical bridge twin to `.astpalace`.
+ * --palace <dir>`). It NEVER federates — local, the eidetic↔grammatical bridge twin to `.structurepalace`.
  *
  * Each turn's move-skeleton (emitMoveSkeleton, P1) + constructicon basis (buildConstructiconBasis,
  * P0) ride to the holder, which ENCODES the sparse fuzzy-membership form-vector (form_encoder, P2)
  * and STORES it as a caller-supplied dense vector (densified to basis.dimension), keyed by the
  * turn's `verbatim_sha` — the SAME key the content drawer carries as `lar_verbatim_sha`, so the
  * FORM graph and the CONTENT graph (the existing verbatim mempalace) fuse on one join key. The
- * embedding model is never invoked (we always supply our own vector), mirroring `.astpalace`.
+ * embedding model is never invoked (we always supply our own vector), mirroring `.structurepalace`.
  *
  * THE CAP-STACK (the palace-instance #has): formpalace = the SHARED palace transport
  * ({@link PalaceHolderRegistry}, palace-holder.ts) composed with its OWN op-surface —
  * `encode_store`/`query`/`filter`/`get` over the python form-encoder holder. DISTINCT from
- * astpalace (per-turn form-vectors keyed by verbatim_sha vs per-structure AST drawers keyed by
+ * structurepalace (per-turn form-vectors keyed by verbatim_sha vs per-structure AST drawers keyed by
  * structural hash, no AST payload stored here) but riding the IDENTICAL transport cap — two
  * op-surface shapes, one transport, no god base-class (the sidecar 2-shapes lesson, one up).
  *
@@ -116,7 +116,7 @@ export interface FormPalace {
 /** Test seam alias: how the holder process is produced (defaults to the python helper). */
 export type FormHolderSpawn = PalaceHolderSpawn;
 
-/** ONE registry per palace TYPE — formpalace's holders stay separate from astpalace's. */
+/** ONE registry per palace TYPE — formpalace's holders stay separate from structurepalace's. */
 const registry = new PalaceHolderRegistry("form_encoder");
 
 /** Default holder spawn: the venv-aware python running `form_encoder.py serve --palace <dir>`. */

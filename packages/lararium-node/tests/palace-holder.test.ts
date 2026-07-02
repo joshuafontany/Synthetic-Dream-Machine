@@ -1,6 +1,6 @@
 /**
  * palace-holder — the SHARED palace-instance transport cap (the #has-stack foundation both the
- * astpalace and the formpalace compose). These tests drive it with a FAKE spawn (no python):
+ * structurepalace and the formpalace compose). These tests drive it with a FAKE spawn (no python):
  *   - the op round-trip: send(op, fields) → request → matched response by id;
  *   - the ping handshake gates the first op (ensure-once);
  *   - the reap-don't-pile invariant: ONE holder per canonical dir, ref-counted, freed on last close;
@@ -132,7 +132,7 @@ describe("PalaceHolderRegistry — reap-don't-pile (ONE holder per dir)", () => 
   });
 
   test("two registries (two palace TYPES) stay isolated on the SAME dir", () => {
-    const astReg = new PalaceHolderRegistry("astpalace");
+    const astReg = new PalaceHolderRegistry("structurepalace");
     const formReg = new PalaceHolderRegistry("form_encoder");
     const spawn = fakeSpawn((op) => (op === "ping" ? {} : {}));
     const a = astReg.acquire("/tmp/same", spawn, 5_000);
@@ -147,7 +147,7 @@ describe("PalaceHolderRegistry — reap-don't-pile (ONE holder per dir)", () => 
 
 describe("PalaceHolder — a sick holder surfaces its stderr (the footgun cure)", () => {
   test("an op against a holder that dies rejects WITH the buffered stderr fault", async () => {
-    const reg = new PalaceHolderRegistry("astpalace");
+    const reg = new PalaceHolderRegistry("structurepalace");
     const fault = "chromadb PermissionError: [Errno 13] could not open chroma.sqlite3";
     const holder = reg.acquire("/tmp/sick", sickSpawn(fault), 5_000);
     await expect(holder.send("put", {})).rejects.toThrow(/PermissionError/);

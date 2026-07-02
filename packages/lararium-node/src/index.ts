@@ -2,7 +2,7 @@ export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
-  larHarvestDir, larHarvestStageDir, larRuntimeDir, larAstPalaceDir, larFormPalaceDir,
+  larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
   larMempalaceDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
   larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
@@ -174,8 +174,8 @@ export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
 // The shared palace-instance transport cap (the #has-stack foundation both local stores compose).
 export { PalaceHolder, PalaceHolderRegistry, canonicalDirOf } from "./palace-holder.js";
 export type { PalaceHolderProc, PalaceHolderSpawn, PalaceFeedCap } from "./palace-holder.js";
-export { makeAstPalace } from "./astpalace.js";
-export type { AstPalace, AstEntry, AstProvenance, HolderSpawn } from "./astpalace.js";
+export { makeStructurePalace } from "./structurepalace.js";
+export type { StructurePalace, StructureEntry, StructureProvenance, HolderSpawn } from "./structurepalace.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";

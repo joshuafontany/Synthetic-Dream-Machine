@@ -65,7 +65,7 @@ import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, 
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
+import { larRuntimeDir, larStructurePalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
@@ -455,13 +455,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         spoolDir:       join(larRuntimeDir(), "capture-nalu"),
         walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
         quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
-        // The DURABLE .astpalace — a SECOND mempalace instance (same ChromaDB engine, separate
-        // palace) at `~/.lares/.astpalace`, PARALLEL to the verbatim palace + `.meshpalace`. It
+        // The DURABLE .structurepalace — a SECOND mempalace instance (same ChromaDB engine, separate
+        // palace) at `~/.lares/.structurepalace`, PARALLEL to the verbatim palace + `.meshpalace`. It
         // sits BESIDE the wipe-zone (not inside .lararium / tmpfs): the recurrence tally is durable
         // bridge state that must survive reboots AND `reset`. LAR_ROOT-isolated for staged instances.
-        astPalaceDir:   larAstPalaceDir(),
+        structurePalaceDir:   larStructurePalaceDir(),
         // The DURABLE .formpalace — the living-grammar FORM-vector store (the two-planes form-capture's
-        // CONTINUOUS plane, encoded) at `~/.lares/.formpalace`, PARALLEL to `.astpalace`. Keyed by
+        // CONTINUOUS plane, encoded) at `~/.lares/.formpalace`, PARALLEL to `.structurepalace`. Keyed by
         // verbatim_sha (the cross-graph join to the verbatim content drawer); durable bridge state,
         // beside the wipe-zone, never federates. LAR_ROOT-isolated for staged instances.
         formPalaceDir:  larFormPalaceDir(),
@@ -513,7 +513,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     };
     const daemonImpl: DaemonVerbProvider = {
       placeTelemetry: (turnText, sourceFile, frontier, turnKey, chunkIndex) => daemonVm.placeTelemetry(turnText, sourceFile, frontier, turnKey, chunkIndex),
-      placeAstpalaceKapae: (turnKey, ended) => daemonVm.placeAstpalaceKapae(turnKey, ended),
+      placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),
       worldlineTrajectory: (input) => daemonVm.worldlineTrajectory(input),

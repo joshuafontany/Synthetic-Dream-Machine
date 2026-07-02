@@ -55,7 +55,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     synopsis:
       "Tear down the local palace organs + harvest idempotency so a re-pave starts from ZERO — the cure " +
       "for a partial/interrupted re-pave. Enumerates the SAME organ registry `lares wake --init` stands " +
-      "up (mempalace · astpalace · formpalace · meshpalace), PLUS the harvest watermark/stage and every " +
+      "up (mempalace · structurepalace · formpalace · meshpalace), PLUS the harvest watermark/stage and every " +
       "`.corpus/*` scratch. PREVIEW by default (touches no disk); `--confirm` removes; REFUSES under a " +
       "live daemon/MCP/mine (naming each blocker + its SPAWNER) unless `--drain` (graceful quiesce-then-" +
       "tear) or `--force`.",
@@ -116,7 +116,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "lares status --palaces  # the palace-organ health table",
       "lares status --json     # machine-readable",
     ],
-    flags: ["--palaces   print the palace-organ health table (mempalace · ast · form · mesh)"],
+    flags: ["--palaces   print the palace-organ health table (mempalace · structure · form · mesh)"],
     next: ["lares wake --init   # stand up any absent organ"],
   },
 

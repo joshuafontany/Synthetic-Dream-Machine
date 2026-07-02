@@ -35,7 +35,7 @@
 
 /**
  * A content-FREE nested shape tree — node TYPES + nesting only, never the source words. The exact
- * shape the astpalace structure-encoder eats (`{"type", "children":[…]}`, structure_router.py's ONE
+ * shape the structurepalace structure-encoder eats (`{"type", "children":[…]}`, structure_router.py's ONE
  * return shape). Optional on a frame: only structure-bearing modalities fill it.
  */
 export interface NestedTree {
@@ -89,7 +89,7 @@ export interface StreamAdapter<Raw = unknown> {
 /**
  * The PLANE BANK — the injected appliers the CORE routes frames to. This is the impurity boundary
  * (as source-adapter injects `hash`): the node/CLI caller wires the real python sidecars (content
- * embed · astpalace encoder · bands MODWT+ecp · RTransferEntropy coupling); a test wires a fake.
+ * embed · structurepalace encoder · bands MODWT+ecp · RTransferEntropy coupling); a test wires a fake.
  * Each leg is OPTIONAL — an absent leg means that plane is skipped (graceful, like the corpus caps).
  * Each returns the count it filed (drawers · structure vectors · bands cells · coupling edges).
  *
@@ -100,7 +100,7 @@ export interface StreamAdapter<Raw = unknown> {
 export interface PlaneSink {
   /** The CONTENT plane — embed each frame's `content` (nomic). Returns drawers filed. */
   content?(frames: readonly StreamFrame[]): number;
-  /** The STRUCTURE plane — encode each frame's `structure` (astpalace) + form induction downstream. */
+  /** The STRUCTURE plane — encode each frame's `structure` (structurepalace) + form induction downstream. */
   structure?(frames: readonly StreamFrame[]): number;
   /**
    * The BANDS plane — MODWT-MRA spine + ecp quorum. Reads the frames' `signal` DIRECT (numeric door)

@@ -119,7 +119,7 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
  * KAPAE salience down-weight (strand C producer) — stamp `lar_salience=floor` + the `lar_kapae`
  * LIVENESS stamp (iso whole-seconds — WHEN the rewind was detected, the rank signal recall reads)
  * on the content drawers a rewound turn fed (addressed by their `lar_verbatim_sha`, the shas the
- * .astpalace kapae dropped). VERBATIM LAW: set aside, never erase/hide — the stamp lets readers
+ * .structurepalace kapae dropped). VERBATIM LAW: set aside, never erase/hide — the stamp lets readers
  * RANK. `ended` names the detection moment (defaults to now, whole-seconds); the harvest passes
  * ONE `ended` across all three kapae legs so every trace of a rewind carries the same moment.
  * Best-effort: an absent python substrate is reported, never thrown (the rewind stays
