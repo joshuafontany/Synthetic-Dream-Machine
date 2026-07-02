@@ -32,6 +32,7 @@
 import { emptyDrain, stage, commit as commitDrain, watermark, backlog, type DrainLedger } from "./capture-drain.js";
 import { makeDial, observe, type Dial } from "./concurrency-dial.js";
 import { canAdmit } from "./credit-gate.js";
+import { mergeGate, type Validate, type DeadLetter } from "./merge-gate.js";
 
 /** One item to ingest: its order `seq`, its idempotent content-hash `key`, and the raw `payload` to embed. */
 export interface IngestItem<P> {
@@ -46,6 +47,10 @@ export interface IngestSeams<P, E> {
   readonly embed: (item: IngestItem<P>) => Promise<E>;
   /** the SINGLE-WRITER sink — commit the embedded record through the @daemon gate to the store. */
   readonly commit: (embedded: E, item: IngestItem<P>) => Promise<void>;
+  /** the merge PROOFREAD — validate before the irreversible commit (default: accept all). A reject routes to the dead-letter lane. */
+  readonly validate?: Validate<E>;
+  /** the dead-letter (ERAD) sink — a rejected item is KEPT here, never dropped (default: collect into the result). */
+  readonly deadLetter?: (dl: DeadLetter) => Promise<void> | void;
   /** starting dial (default fresh); the run tunes its limit by embed latency. */
   readonly dial?: Dial;
   /** monotonic clock for latency samples (default Date.now); inject for deterministic tests. */
@@ -54,12 +59,18 @@ export interface IngestSeams<P, E> {
 
 /** What a run reports — the landed frontier, any residual backlog (0 on clean completion), the tuned limit. */
 export interface IngestResult {
-  /** the trailing watermark = highest contiguous-committed seq (== items on a clean run). */
+  /** the trailing watermark = highest contiguous-RESOLVED seq (committed OR dead-lettered; == items on a clean run). */
   readonly watermark: number;
-  /** staged-but-uncommitted seqs (empty on clean completion; non-empty only if a run was cut short). */
+  /** staged-but-unresolved seqs (empty on clean completion; non-empty only if a run was cut short). */
   readonly backlog: number[];
-  /** the count of items committed. */
+  /** the count of items committed to the store (validated + license-fresh). */
   readonly committed: number;
+  /** the count of items dead-lettered (failed the proofread; KEPT in the ERAD lane, never dropped). */
+  readonly deadLettered: number;
+  /** the count of items skipped (license already consumed — idempotent no-op). */
+  readonly skipped: number;
+  /** the dead-letters collected when no `deadLetter` sink was injected (else empty). */
+  readonly deadLetters: DeadLetter[];
   /** the dial's final tuned concurrency limit. */
   readonly finalLimit: number;
 }
@@ -87,11 +98,15 @@ export async function runParallelIngest<P, E>(
   seams: IngestSeams<P, E>,
 ): Promise<IngestResult> {
   const clock = seams.clock ?? Date.now;
+  const validate: Validate<E> = seams.validate ?? (() => ({ ok: true }));
+  const collectedDL: DeadLetter[] = [];
+  const deadLetterSink = seams.deadLetter ?? ((dl: DeadLetter) => { collectedDL.push(dl); });
   const lane = serialLane();
+  const licensed = new Set<string>();               // consumed-license registry (the drain's committed keys)
   let drain: DrainLedger = emptyDrain();
   let dial = seams.dial ?? makeDial();
   let cursor = 0;
-  let committed = 0;
+  let committed = 0, deadLettered = 0, skipped = 0;
   let firstError: unknown = null;
   const active = new Set<Promise<void>>();
 
@@ -100,10 +115,20 @@ export async function runParallelIngest<P, E>(
     const t0 = clock();
     const embedded = await seams.embed(item);        // PARALLEL (expensive)
     dial = observe(dial, clock() - t0);              // latency → AIMD dial
-    await lane.run(async () => {                     // SERIAL single-writer commit
-      await seams.commit(embedded, item);
-      drain = commitDrain(drain, item.seq);
-      committed++;
+    // THE MERGE GATE (serial, single-writer) — validate · consume-license · order · dead-letter.
+    await lane.run(async () => {
+      const verdict = mergeGate({ seq: item.seq, key: item.key, embedded }, licensed, validate);
+      if (verdict.kind === "commit") {
+        await seams.commit(embedded, item);          // the irreversible step, AFTER the proofread
+        licensed.add(item.key);                      // consume the license (once)
+        committed++;
+      } else if (verdict.kind === "dead-letter") {
+        await deadLetterSink({ key: item.key, seq: item.seq, reason: verdict.reason }); // KEEP, never drop
+        deadLettered++;
+      } else {
+        skipped++;                                    // license already consumed — idempotent skip
+      }
+      drain = commitDrain(drain, item.seq);           // RESOLVED (committed | dead-lettered | skipped) → watermark advances
     });
   };
 
@@ -128,5 +153,8 @@ export async function runParallelIngest<P, E>(
   // Structured: every started worker has settled here (the loop drains `active` fully). Fail loud.
   if (firstError !== null) throw firstError;
 
-  return { watermark: watermark(drain), backlog: backlog(drain), committed, finalLimit: dial.limit };
+  return {
+    watermark: watermark(drain), backlog: backlog(drain),
+    committed, deadLettered, skipped, deadLetters: collectedDL, finalLimit: dial.limit,
+  };
 }

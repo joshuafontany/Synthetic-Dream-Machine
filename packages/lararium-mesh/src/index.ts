@@ -142,3 +142,7 @@ export * from "./capture-drain.js";
 export * from "./concurrency-dial.js";
 
 export * from "./parallel-ingest.js";
+
+export * from "./credit-gate.js";
+
+export * from "./merge-gate.js";

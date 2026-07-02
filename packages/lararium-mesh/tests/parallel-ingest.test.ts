@@ -86,7 +86,46 @@ describe("parallel-ingest — single-writer split", () => {
 
   test("empty input → clean zero result", async () => {
     const r = await runParallelIngest([], { embed: async () => 0, commit: async () => {}, clock: fakeClock() });
-    expect(r).toEqual({ watermark: 0, backlog: [], committed: 0, finalLimit: expect.any(Number) });
+    expect(r).toEqual({ watermark: 0, backlog: [], committed: 0, deadLettered: 0, skipped: 0, deadLetters: [], finalLimit: expect.any(Number) });
+  });
+
+  test("merge-gate: a failed proofread dead-letters (KEPT, never dropped); the rest commit", async () => {
+    let commits = 0;
+    const r = await runParallelIngest(items(10), {
+      embed: async (it) => it.payload,
+      commit: async () => { commits++; },
+      validate: (m) => (m.seq % 5 === 0 ? { ok: false, reason: "bad-fold" } : { ok: true }), // seq 5,10 fail
+      dial: makeDial({ min: 4, max: 4 }),
+      clock: fakeClock(),
+    });
+    expect(r.committed).toBe(8);
+    expect(commits).toBe(8);                       // the sink only saw validated items
+    expect(r.deadLettered).toBe(2);
+    expect(r.deadLetters.map((d) => d.seq).sort((a, b) => a - b)).toEqual([5, 10]);
+    expect(r.deadLetters[0]!.reason).toBe("bad-fold");
+    expect(r.watermark).toBe(10);                  // dead-lettered seqs are RESOLVED → the watermark still advances
+    expect(r.backlog).toEqual([]);
+  });
+
+  test("consume-license-on-commit: a duplicate content-key commits ONCE, the rest skip", async () => {
+    let commits = 0;
+    // seq 2 and 4 carry the SAME content-key as seq 1 (a re-presented turn)
+    const dupItems = [
+      { seq: 1, key: "kX", payload: 1 },
+      { seq: 2, key: "kX", payload: 1 },
+      { seq: 3, key: "kY", payload: 3 },
+      { seq: 4, key: "kX", payload: 1 },
+    ];
+    const r = await runParallelIngest(dupItems, {
+      embed: async (it) => it.payload,
+      commit: async () => { commits++; },
+      dial: makeDial({ min: 1, max: 1 }),          // serial admission so kX commits before its dupes reach the gate
+      clock: fakeClock(),
+    });
+    expect(commits).toBe(2);                        // kX once + kY once
+    expect(r.committed).toBe(2);
+    expect(r.skipped).toBe(2);                      // the two duplicate kX presentations
+    expect(r.watermark).toBe(4);                    // all four RESOLVED
   });
 
   test("the dial tunes under latency (final limit reflects AIMD, not the start)", async () => {
