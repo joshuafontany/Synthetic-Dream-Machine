@@ -849,11 +849,15 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   if (daemonDown) {
     let fellBack = false;
     // `mempalace mine` processes the .jsonl files IN a DIR — stage a file target into one.
+    // STABLE per-wing staging path, never mkdtemp: mempalace's file-level dedup keys on the
+    // staged path, so an ephemeral dir re-mints every drawer on each fallback mine (the
+    // 2026-07-01 duplicate-drawer bite). Same session file → same staged path, always.
     let mineDir = target;
     let tmpStage = "";
     try {
       if (statSync(target).isFile()) {
-        tmpStage = mkdtempSync(join(tmpdir(), "lar-capture-"));
+        tmpStage = join(HARVEST_DIR, "capture-stage", wing);
+        mkdirSync(tmpStage, { recursive: true });
         for (const f of files) copyFileSync(f, join(tmpStage, basename(f)));
         mineDir = tmpStage;
       }
@@ -869,7 +873,8 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
         next[key] = sha(turn.text);
       }
     } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
-    if (tmpStage) { try { rmSync(tmpStage, { recursive: true, force: true }); } catch { /* best effort */ } }
+    // Remove only OUR staged copies — the wing stage dir is shared (stable path law).
+    if (tmpStage) { for (const f of files) { try { rmSync(join(tmpStage, basename(f)), { force: true }); } catch { /* best effort */ } } }
     try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
     emit(args, {
       ok: true,

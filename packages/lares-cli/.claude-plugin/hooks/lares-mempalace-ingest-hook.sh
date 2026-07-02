@@ -60,7 +60,11 @@ LARES="$HOME/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
 # Stage just this transcript so sibling scratch / memory / json never get swept.
 # Claude .jsonl + Codex rollout are mined as-is (mempalace parses both); Copilot
 # events.jsonl has no mempalace parser → normalize it to a Claude-shaped jsonl first.
-stage="$(mktemp -d 2>/dev/null)" || exit 0
+# STABLE per-wing staging path — never mktemp: mempalace's file-level dedup keys on
+# the staged path, so an ephemeral dir re-mints every drawer on each daemon-down
+# fallback mine (the 2026-07-01 duplicate-drawer bite). Same session → same path.
+stage="$_lares_state/capture-stage/$wing"
+mkdir -p "$stage" 2>/dev/null || exit 0
 # Surface the drawer's origin (staged name prefixed `<surface>__…` → lar_surface).
 case "$transcript" in
   */.codex/sessions/*)      surface=codex ;;
@@ -71,18 +75,21 @@ case "$transcript" in
   */.copilot/session-store.db)
     # session-store.db holds EVERY session; the normalizer exports one jsonl per
     # session into a dir + a stdout manifest. Stage just THIS session's file (by sid).
+    # The stage dir is SHARED per wing (stable path law) — clean only our own files,
+    # never the dir: a concurrent session of the same wing may be mid-mine.
     HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"
     NORM="$HOOK_DIR/../../../../packages/lararium-mempalace/scripts/copilot_sqlite_normalize.py"
-    [ -n "${sid:-}" ] || { rm -rf "$stage"; exit 0; }
-    raw="$stage/raw"; mkdir -p "$raw"
-    python3 "$NORM" "$transcript" "$raw" >/dev/null 2>&1 || { rm -rf "$stage"; exit 0; }
-    [ -f "$raw/$sid.jsonl" ] || { rm -rf "$stage"; exit 0; }
-    mv "$raw/$sid.jsonl" "$stage/${surface}__$sid.jsonl" 2>/dev/null || { rm -rf "$stage"; exit 0; }
+    [ -n "${sid:-}" ] || exit 0
+    raw="$stage/raw-$$"; mkdir -p "$raw"
+    dst="$stage/${surface}__$sid.jsonl"
+    python3 "$NORM" "$transcript" "$raw" >/dev/null 2>&1 || { rm -rf "$raw"; exit 0; }
+    [ -f "$raw/$sid.jsonl" ] || { rm -rf "$raw"; exit 0; }
+    mv "$raw/$sid.jsonl" "$dst" 2>/dev/null || { rm -rf "$raw"; exit 0; }
     rm -rf "$raw"
     ;;
   *)
     dst="$stage/${surface}__$(basename "$transcript")"
-    ln "$transcript" "$dst" 2>/dev/null || cp "$transcript" "$dst" 2>/dev/null || { rm -rf "$stage"; exit 0; }
+    ln -f "$transcript" "$dst" 2>/dev/null || cp -f "$transcript" "$dst" 2>/dev/null || exit 0
     ;;
 esac
 
@@ -107,7 +114,9 @@ esac
   # Gradient readings (lar-telemetry through @admin) on both wings — parent + spirits.
   "$LARES" telemetry --wing "$wing" >/dev/null 2>&1
   "$LARES" telemetry --wing "${wing}__spirits" >/dev/null 2>&1
-  rm -rf "$stage"
+  # Remove only OUR staged file — the wing stage dir is shared (stable path law);
+  # a concurrent same-wing session's file must survive our cleanup.
+  rm -f "$dst"
 ) >/dev/null 2>&1 &
 
 exit 0
