@@ -249,15 +249,21 @@ def cmd_apply(args):
 def cmd_kapae(args):
     """Down-weight a rewound turn's drawers — the strand-C salience producer.
 
-    Reads NDJSON {"verbatim_sha": V} (the shas the astpalace kapae dropped — the turn's content
-    drawers) and stamps lar_salience=floor + lar_kapae=1 on every drawer whose lar_verbatim_sha
-    matches. set-aside, never erased: the drawer stays recall-visible, but contributes almost no
-    fused surprise to the FFZ Measure servo (the convergence twin of the KG valid-close + the
-    astpalace tally-decrement). Idempotent — a re-stamp writes the same floor. Merge-only update
-    (never deletes a field), the adapter identity stamped like apply."""
+    Reads NDJSON {"verbatim_sha": V, "ended": T?} (the shas the astpalace kapae dropped — the
+    turn's content drawers — each with the rewind-detection moment) and stamps
+    lar_salience=floor + the lar_kapae LIVENESS stamp on every drawer whose lar_verbatim_sha
+    matches. lar_kapae carries the row's `ended` (iso whole-seconds — WHEN the rewind was
+    detected, the rank signal recall reads); a legacy row without `ended` stamps 1 (the
+    pre-timestamp truthy mark — any truthy lar_kapae reads "rewound"). set-aside, never erased:
+    the drawer stays recall-visible, but contributes almost no fused surprise to the FFZ Measure
+    servo (the convergence twin of the KG valid-close + the astpalace tally-decrement).
+    Idempotent per detection — kapae fires once per gone turn (the astpalace no-ops a re-kapae),
+    so the stamp keeps its FIRST detection moment. Merge-only update (never deletes a field),
+    the adapter identity stamped like apply."""
     col = _col()
     recs = list(read_ndjson_records(args.patchfile))
-    shas = [r["verbatim_sha"] for r in recs if r.get("verbatim_sha")]
+    ended_by_sha = {r["verbatim_sha"]: r.get("ended") for r in recs if r.get("verbatim_sha")}
+    shas = list(ended_by_sha)
     stamped = 0
     floor = args.salience if args.salience is not None else KAPAE_FLOOR_SALIENCE
     for k in range(0, len(shas), WRITE_BATCH):
@@ -273,7 +279,7 @@ def cmd_kapae(args):
         for m in metas:
             merged = dict(m or {})
             merged["lar_salience"] = floor
-            merged["lar_kapae"] = 1
+            merged["lar_kapae"] = ended_by_sha.get(merged.get("lar_verbatim_sha")) or 1
             merged["adapter_name"] = ADAPTER_NAME
             merged["adapter_version"] = ADAPTER_VERSION
             up_metas.append(merged)

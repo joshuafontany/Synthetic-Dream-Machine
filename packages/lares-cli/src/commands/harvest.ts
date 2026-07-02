@@ -30,7 +30,7 @@ import { existsSync, mkdirSync, rmSync, readFileSync, readdirSync, appendFileSyn
 import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
@@ -809,9 +809,13 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       // .astpalace serve holder (a flock-singleton the CLI cannot re-open), and does BOTH in the
       // worker. Every leg is best-effort: a down KG / down daemon leaves the rewind unreconciled
       // this run (re-derivable on the next harvest), never fatal.
+      // ONE detection timestamp (iso whole-seconds) rides ALL THREE legs — the KG valid-close,
+      // the .astpalace tombstone, AND the drawer `lar_kapae` liveness stamp (the rank signal the
+      // recall side reads) — so a rewound turn's every trace carries the SAME moment.
+      const ended = isoWholeSeconds(new Date().toISOString());
       let closed = 0;
       try {
-        for (const turnKey of gone) closed += kapaeTurn(turnKey).closed;
+        for (const turnKey of gone) closed += kapaeTurn(turnKey, { ended }).closed;
       } catch (err) {
         const why = err instanceof KgUnavailable ? "KG unavailable" : err instanceof Error ? err.message : String(err);
         if (process.env["LARES_DEBUG"]) console.warn(`[harvest] KG kapae best-effort skipped: ${why}`);
@@ -821,7 +825,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       try { did = await operatorDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
       let astpalace = 0;
       const fired = await Promise.allSettled(
-        gone.map((turnKey) => runVerb("astpalace-kapae", { turnKey }, did, { timeoutMs: 5000 })),
+        gone.map((turnKey) => runVerb("astpalace-kapae", { turnKey, ended }, did, { timeoutMs: 5000 })),
       );
       for (const r of fired) if (r.status === "fulfilled" && r.value.status === "done") astpalace += 1;
       if (astpalace === 0 && process.env["LARES_DEBUG"]) {

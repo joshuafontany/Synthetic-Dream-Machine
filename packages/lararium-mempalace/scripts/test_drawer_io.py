@@ -137,24 +137,31 @@ class _StampCollection:
         self.updates.append((ids, metadatas))
 
 
-def test_cmd_kapae_stamps_floor_salience_and_kapae_flag(monkeypatch, capsys, tmp_path):
+def test_cmd_kapae_stamps_floor_salience_and_liveness_stamp(monkeypatch, capsys, tmp_path):
     col = _StampCollection(
         {"shaA": ("dA", {"wing": "w", "lar_verbatim_sha": "shaA"}),
          "shaB": ("dB", {"wing": "w", "lar_verbatim_sha": "shaB"})},
     )
     monkeypatch.setattr(dio, "_col", lambda: col)
     pf = tmp_path / "shas.ndjson"
-    pf.write_text(json.dumps({"verbatim_sha": "shaA"}) + "\n" + json.dumps({"verbatim_sha": "shaB"}) + "\n")
+    # shaA rides the detection moment (the liveness stamp); shaB rides a LEGACY row (no ended).
+    pf.write_text(
+        json.dumps({"verbatim_sha": "shaA", "ended": "2026-07-01T04:05:06Z"}) + "\n"
+        + json.dumps({"verbatim_sha": "shaB"}) + "\n"
+    )
     dio.cmd_kapae(argparse.Namespace(patchfile=str(pf), salience=None))
     out = _lines(capsys)[0]
     assert out["stamped"] == 2
     assert out["salience"] == dio.KAPAE_FLOOR_SALIENCE
-    # Both drawers got the floor salience + the kapae flag, merge-only (wing preserved).
+    # Both drawers got the floor salience + the kapae stamp, merge-only (wing preserved):
+    # lar_kapae = the row's iso-seconds detection moment; a legacy row (no ended) stamps 1.
     ids, metas = col.updates[0]
     assert ids == ["dA", "dB"]
+    by_id = dict(zip(ids, metas))
+    assert by_id["dA"]["lar_kapae"] == "2026-07-01T04:05:06Z"
+    assert by_id["dB"]["lar_kapae"] == 1
     for m in metas:
         assert m["lar_salience"] == dio.KAPAE_FLOOR_SALIENCE
-        assert m["lar_kapae"] == 1
         assert m["wing"] == "w"
         assert m["adapter_name"] == dio.ADAPTER_NAME
 

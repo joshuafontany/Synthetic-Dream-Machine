@@ -87,8 +87,8 @@ LAR_SCHEMA = AdapterSchema(
         # ── kapae down-weight (strand C) — the rewind salience the FFZ Measure servo reads ──────────
         "lar_salience": FieldSpec(type="float", required=False, indexed=True,
                                   description="kapae down-weight in (0,1] (default 1.0): a rewound / road-not-taken drawer rides a floor salience so it barely bends the Measure rhythm (ffz-orchestrator#kapae-down-weight)"),
-        "lar_kapae": FieldSpec(type="int", required=False, indexed=True,
-                               description="1 = this drawer's turn was rewound (kapae); set aside, never erased — the convergence twin of the KG valid-close + the astpalace tally-decrement"),
+        "lar_kapae": FieldSpec(type="string", required=False, indexed=True,
+                               description="the rewind LIVENESS stamp: iso whole-seconds of kapae detection (legacy drawers carry int 1) — set aside, never erased/hidden; readers RANK by it (any truthy = rewound) — the convergence twin of the KG valid-close + the astpalace tally-decrement"),
         "lar_frontier": FieldSpec(type="string", required=False, indexed=True,
                                   description="the turn-DAG fork-frontier token (head turn-uuids) keying a same-session fork to a distinct worldline handle (build-patch#BranchContext)"),
     },

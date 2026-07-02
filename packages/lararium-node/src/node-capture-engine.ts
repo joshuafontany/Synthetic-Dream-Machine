@@ -296,8 +296,10 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
         const res = await astPalace.kapae(turnKey, ended);
         if (res.verbatim_shas.length) {
           // Down-weight the rewound turn's content drawers (strand C) — keyed by the shas the
-          // .astpalace dropped; the FFZ Measure servo reads lar_salience.
-          stampKapaeSalience(res.verbatim_shas);
+          // .astpalace dropped; the FFZ Measure servo reads lar_salience. The SAME `ended` the
+          // .astpalace tombstone carries rides into the drawer's `lar_kapae` liveness stamp
+          // (iso whole-seconds — the rank signal recall reads; one moment across all legs).
+          stampKapaeSalience(res.verbatim_shas, ended);
         }
       } catch (err) {
         console.warn(`[node-capture-engine] astpalace kapae best-effort skipped: ${err instanceof Error ? err.message : String(err)}`);
