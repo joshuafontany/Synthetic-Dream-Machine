@@ -168,6 +168,28 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     ],
     next: ["lares worldline <session>   # walk the session's spirit tree", "lares telemetry --wing <w>"],
   },
+
+  worldline: {
+    synopsis:
+      "Walk a session's SPIRIT TREE from the durable worldline edge-DAG: the mempalace knowledge graph " +
+      "read READ-ONLY (prov:Delegation spawn→handback intervals + prov:Communication injects, adapter " +
+      "lares-worldline), joined with the bearing index (<state>/harvest/*.ndjson) for per-agent turn " +
+      "counts + aim/yield. The ∥ mark rides the edge-DAG's own valid-time replay law (the ordering the " +
+      "mesh causal projection is defined by — a sibling reads sequential only when the previous handback " +
+      "replays before its spawn). `diff <A> <B>` refuses honestly: ITC stamps are not queryably " +
+      "persisted (in-memory registry only); the gap needs a persisted ITC read-path.",
+    examples: [
+      "lares worldline 0425c035                # session-id prefix — the braid",
+      "lares worldline 0425c035-a698-4aeb-a988-1bbf5a19b567.a1d5606cd26b88c82   # a handle walks its run",
+      "lares worldline 0425c035 --json         # the structured braid (agents/pipes)",
+      "lares worldline tree 0425c035 --palace ~/.mempalace/palace   # explicit palace",
+    ],
+    flags: [
+      "--palace <dir>  palace dir holding knowledge_graph.sqlite3 (default: the resolved palace)",
+      "--json          deterministic JSON braid (nodes carry spawn/handback/turnKey/turns/aim/yield/∥)",
+    ],
+    next: ["lares recall --agent <id>   # a spirit's drawers", "lares harvest   # project fresh edges + bearing turns"],
+  },
 };
 
 /**
