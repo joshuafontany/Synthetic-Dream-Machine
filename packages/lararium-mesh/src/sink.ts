@@ -82,6 +82,9 @@ export interface Sink {
   planeSignals(): PlaneSignal[];
   /** The event-indexed rhythm (agreement first-difference, or the explicit value override; empty when atemporal). */
   rhythm(): number[];
+  /** Per-plane rhythm — each plane's OWN agreement first-difference (empty when atemporal). Feeds the
+   *  sink-class ablation: a plane that stands rigid ALONE carries a signal-boundary (cymatic) shape. */
+  rhythmByPlane(): Map<string, number[]>;
   /** Recent-window mean agreement ÷ the baseline EMA, self-calibrated against the beat-derived window. */
   supersaturation(): number;
   /** Compose birth ⊕ standing ⊕ clock into the Sink's current verdict. */
@@ -109,6 +112,20 @@ export function makeSink(opts: SinkOptions = {}): Sink {
     for (let i = 0; i < agreeTrail.length; i++) {
       const override = valueTrail[i];
       out.push(typeof override === "number" ? override : i === 0 ? 0 : agreeTrail[i]! - agreeTrail[i - 1]!);
+    }
+    return out;
+  };
+
+  // Per-plane rhythm: each plane's OWN agreement first-difference (v_0 = 0). A plane whose solo rhythm
+  // re-locks (temporalRigidity) carries the shape in its own data-boundary — a cymatic (signal-boundary)
+  // sink; a corpus (atemporal) feed fabricates no rhythm, so it hands back an empty map.
+  const deriveRhythmByPlane = (): Map<string, number[]> => {
+    const out = new Map<string, number[]>();
+    if (atemporal) return out;
+    for (const [plane, series] of perPlane) {
+      const r: number[] = [];
+      for (let i = 0; i < series.length; i++) r.push(i === 0 ? 0 : series[i]! - series[i - 1]!);
+      out.set(plane, r);
     }
     return out;
   };
@@ -233,6 +250,7 @@ export function makeSink(opts: SinkOptions = {}): Sink {
     support: () => agreeTrail.length,
     planeSignals,
     rhythm: () => deriveRhythm(),
+    rhythmByPlane: () => deriveRhythmByPlane(),
     supersaturation: () => snapshot().supersaturation,
     verdict,
   };
