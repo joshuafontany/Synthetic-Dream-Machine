@@ -148,9 +148,22 @@ def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
     return result
 
 
-def _as_forest(node: dict) -> tuple:
-    """A tree → the immutable (label, children-forest) form the inclusion recurrence walks."""
-    return (str(node.get("type", "?")), tuple(_as_forest(c) for c in _children(node)))
+# Motif-scale bounds: the sinks we mine are SHALLOW recurring shapes, not whole deep-wide ASTs.
+# Bounding depth + fan-out keeps the ordered-inclusion recurrence (_emb_forest) off the Python
+# recursion limit AND the subtree enumeration off a combinatorial cliff — witnessed on real JS ASTs,
+# which are both deep and wide and blew 990+ recursion frames. Beyond a cap a node truncates to a
+# leaf (depth) / drops its extra siblings (fan-out); the recurring MOTIF scale survives intact.
+_MAX_TREE_DEPTH = 32
+_MAX_TREE_WIDTH = 16
+
+
+def _as_forest(node: dict, depth: int = 0) -> tuple:
+    """A tree → the immutable (label, children-forest) the inclusion recurrence walks, bounded to
+    motif scale so a deep-wide AST cannot overflow the recurrence."""
+    label = str(node.get("type", "?"))
+    if depth >= _MAX_TREE_DEPTH:
+        return (label, ())
+    return (label, tuple(_as_forest(c, depth + 1) for c in _children(node)[:_MAX_TREE_WIDTH]))
 
 
 def _embeds(pattern_forest: tuple, target: dict) -> bool:
@@ -506,6 +519,10 @@ def induce_forest(forest: list, *, min_support: int = _DEFAULT_MIN_SUPPORT,
     TreeMiner + PrefixSpan/BIDE + ΔP surface candidates; MDL over the streams selects the
     ones that pay their bits; seeds ride the same ledger (kept only where earned). The LLM
     is NOT called — labelling is downstream. Returns {forms, summary}."""
+    import sys
+    # Backstop for the linear tree-walks (_all_nodes / _tree_size / _preorder_types) on deep ASTs;
+    # the _as_forest motif bound already keeps the branching inclusion-recurrence shallow.
+    sys.setrecursionlimit(max(sys.getrecursionlimit(), 6000))
     forest = forest[:_MAX_TREES]
     streams = []
     for t in forest:
