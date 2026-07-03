@@ -26,10 +26,11 @@ export interface ContentEntry {
   readonly metadata: Record<string, unknown>;
 }
 
-/** One content-similarity match. */
+/** One content-similarity match — carries the document so recall needs no follow-up get. */
 export interface ContentMatch {
   readonly cid: string;
   readonly distance: number | null;
+  readonly document: string;
   readonly metadata: Record<string, unknown>;
 }
 

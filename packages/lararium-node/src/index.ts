@@ -182,6 +182,7 @@ export { makeContentPalace } from "./content-palace.js";
 export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage, ContentPalaceOptions } from "./content-palace.js";
 export { importGuestPalace } from "./guest-import.js";
 export type { GuestImportResult } from "./guest-import.js";
+export { recallContent } from "./content-recall.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";

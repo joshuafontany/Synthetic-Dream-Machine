@@ -85,14 +85,20 @@ class ContentStore:
             return {"matches": []}
         got = self._col.query(
             query_embeddings=[embedding], n_results=min(k, n),
-            include=["distances", "metadatas"],
+            include=["distances", "metadatas", "documents"],
             **({"where": where} if where else {}),
         )
         ids = (got.get("ids") or [[]])[0]
         dists = (got.get("distances") or [[]])[0]
         metas = (got.get("metadatas") or [[]])[0]
+        docs = (got.get("documents") or [[]])[0]
         matches = [
-            {"cid": ids[i], "distance": dists[i] if i < len(dists) else None, "metadata": metas[i] or {}}
+            {
+                "cid": ids[i],
+                "distance": dists[i] if i < len(dists) else None,
+                "document": docs[i] if i < len(docs) else "",
+                "metadata": metas[i] or {},
+            }
             for i in range(len(ids))
         ]
         return {"matches": matches}
