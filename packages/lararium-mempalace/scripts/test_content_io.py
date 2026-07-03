@@ -72,3 +72,20 @@ def test_scan_pages_records_with_embeddings(tmp_path):
 
 def test_scan_past_end_is_empty(tmp_path):
     assert _store(tmp_path).scan(10, 5) == {"records": [], "next": None, "total": 0}
+
+
+def test_taxonomy_aggregates_metadata(tmp_path):
+    s = _store(tmp_path)
+    s.put("d1", "a", [0.1, 0.2], {"wing": "w1", "room": "r1", "hall": "h1", "entities": "alice;bob"})
+    s.put("d2", "b", [0.3, 0.4], {"wing": "w1", "room": "r2", "hall": "h1", "entities": "alice;carol"})
+    tax = s.taxonomy()
+    assert tax["total"] == 2
+    assert tax["wings"] == ["w1"]
+    assert tax["rooms"] == ["r1", "r2"]
+    assert tax["halls"] == ["h1"]
+    assert tax["entities"]["alice"] == 2          # alice in both drawers
+    assert tax["entities"]["bob"] == 1
+
+
+def test_taxonomy_empty_store(tmp_path):
+    assert _store(tmp_path).taxonomy() == {"total": 0, "wings": [], "rooms": [], "halls": [], "entities": {}}

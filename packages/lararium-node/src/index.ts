@@ -179,7 +179,7 @@ export type { StructurePalace, StructureEntry, StructureProvenance, HolderSpawn 
 export { makePersistencePalace } from "./persistence-palace.js";
 export type { PersistencePalace, RecordProvenance, PersistencePalaceOptions } from "./persistence-palace.js";
 export { makeContentPalace } from "./content-palace.js";
-export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage, ContentPalaceOptions } from "./content-palace.js";
+export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage, Taxonomy, ContentPalaceOptions } from "./content-palace.js";
 export { importGuestPalace } from "./guest-import.js";
 export type { GuestImportResult } from "./guest-import.js";
 export { makeSearchCap } from "./search-cap.js";

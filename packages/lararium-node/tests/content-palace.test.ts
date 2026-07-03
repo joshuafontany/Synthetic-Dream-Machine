@@ -50,4 +50,15 @@ describe("makeContentPalace (non-memory targeted content, driven live)", () => {
     openPalace(dir); openPalace(dir);
     expect(_liveContentHolderCount()).toBe(1);
   }, TEST_TIMEOUT);
+
+  test("taxonomy aggregates wings/rooms/entities across drawers (the status read)", async () => {
+    const pal = openPalace(await palaceDir());
+    await pal.put("d1", "a", [0.1, 0.2], { wing: "w1", room: "r1", entities: "alice;bob" });
+    await pal.put("d2", "b", [0.3, 0.4], { wing: "w1", room: "r2", entities: "alice;carol" });
+    const tax = await pal.taxonomy();
+    expect(tax.total).toBe(2);
+    expect(tax.wings).toEqual(["w1"]);
+    expect(tax.rooms).toEqual(["r1", "r2"]);
+    expect(tax.entities["alice"]).toBe(2);
+  }, TEST_TIMEOUT);
 });

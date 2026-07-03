@@ -49,6 +49,15 @@ export interface ScanPage {
   readonly total: number;
 }
 
+/** The status/taxonomy read: distinct wings/rooms/halls + an entity frequency map + the drawer total. */
+export interface Taxonomy {
+  readonly total: number;
+  readonly wings: string[];
+  readonly rooms: string[];
+  readonly halls: string[];
+  readonly entities: Record<string, number>;
+}
+
 export interface ContentPalace {
   /**
    * Store one content record: `cid` (a content-hash or stable target id), the `text` (rides the
@@ -62,6 +71,8 @@ export interface ContentPalace {
   search(embedding: readonly number[], opts?: { k?: number; where?: Record<string, unknown> }): Promise<ContentMatch[]>;
   /** Read a PAGE of records WITH embeddings (the guest-import read leg — copy store→store, no re-embed). */
   scan(opts?: { offset?: number; limit?: number }): Promise<ScanPage>;
+  /** The status/taxonomy read — distinct wings/rooms/halls + entity frequencies + drawer total. */
+  taxonomy(opts?: { limit?: number }): Promise<Taxonomy>;
   /** Release this reference; the holder process dies when the last reference closes. */
   close(): Promise<void>;
 }
@@ -107,6 +118,11 @@ export function makeContentPalace(dir: string, opts: ContentPalaceOptions = {}):
     async scan(opts2 = {}): Promise<ScanPage> {
       const res = (await p.send("scan", { offset: opts2.offset ?? 0, limit: opts2.limit ?? 256 })) as Partial<ScanPage> | null;
       return { records: res?.records ?? [], next: res?.next ?? null, total: res?.total ?? 0 };
+    },
+
+    async taxonomy(opts2 = {}): Promise<Taxonomy> {
+      const r = (await p.send("taxonomy", { limit: opts2.limit ?? 4096 })) as Partial<Taxonomy> | null;
+      return { total: r?.total ?? 0, wings: r?.wings ?? [], rooms: r?.rooms ?? [], halls: r?.halls ?? [], entities: r?.entities ?? {} };
     },
 
     close: p.close,

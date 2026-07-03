@@ -138,6 +138,42 @@ class ContentStore:
         return {"records": records, "next": (nxt if nxt < n else None), "total": n}
 
 
+    def taxonomy(self, limit: int = 4096) -> dict:
+        """The STATUS/taxonomy read (the lift of list_wings/list_rooms/get_taxonomy): aggregate the
+        structuring metadata across drawers into distinct wings/rooms/halls + an entity frequency map
+        + the total. Pure metadata scan (no vectors); paginated up to `limit`."""
+        wings, rooms, halls, entities = {}, {}, {}, {}
+        total, offset = 0, 0
+        while offset < limit:
+            page = self.scan(offset, min(256, limit - offset))
+            recs = page["records"]
+            if not recs:
+                break
+            for r in recs:
+                total += 1
+                m = r.get("metadata") or {}
+                for key, bag in (("wing", wings), ("room", rooms), ("hall", halls)):
+                    v = m.get(key)
+                    if v:
+                        bag[v] = bag.get(v, 0) + 1
+                ents = m.get("entities") or ""
+                for e in (ents.split(";") if isinstance(ents, str) else []):
+                    e = e.strip()
+                    if e:
+                        entities[e] = entities.get(e, 0) + 1
+            nxt = page.get("next")
+            if nxt is None:
+                break
+            offset = nxt
+        return {
+            "total": total,
+            "wings": sorted(wings.keys()),
+            "rooms": sorted(rooms.keys()),
+            "halls": sorted(halls.keys()),
+            "entities": entities,
+        }
+
+
 def _build_ops(store: ContentStore) -> dict:
     return {
         "ping": lambda req: {"ready": True},
@@ -145,6 +181,7 @@ def _build_ops(store: ContentStore) -> dict:
         "get": lambda req: store.get(req["cid"]),
         "search": lambda req: store.search(req["embedding"], int(req.get("k", 8)), req.get("where")),
         "scan": lambda req: store.scan(int(req.get("offset", 0)), int(req.get("limit", 256))),
+        "taxonomy": lambda req: store.taxonomy(int(req.get("limit", 4096))),
     }
 
 
