@@ -106,6 +106,7 @@ from sidecar_caps import (
     acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,
+    mine_busy_retry,
     release_serve_lock,
     run_sidecar,
     serve_lock_path,
@@ -807,9 +808,9 @@ class FormPalaceStore:
             }
         )
         try:
-            self._col.upsert(
+            mine_busy_retry(lambda: self._col.upsert(
                 ids=[key], documents=[document], metadatas=[meta], embeddings=[dense]
-            )
+            ))
         except Exception as exc:  # noqa: BLE001 — surface dimension drift precisely
             raise ValueError(
                 f"form store upsert failed (dimension={dimension}; a basis-dimension "

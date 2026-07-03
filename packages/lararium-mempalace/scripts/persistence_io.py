@@ -51,6 +51,7 @@ from sidecar_caps import (
     acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,
+    mine_busy_retry,
     release_serve_lock,
     run_sidecar,
     serve_lock_path,
@@ -133,7 +134,7 @@ class PersistenceStore:
         # The document slot carries the OPTIONAL text projection (the "past text" design — text is
         # ONE projection of the vector-atom). Absent one, the id rides as a non-empty placeholder
         # (chroma requires a document); the atom stays the assertion vector.
-        self._col.upsert(ids=[tid], embeddings=[assertion], documents=[document or tid], metadatas=[meta])
+        mine_busy_retry(lambda: self._col.upsert(ids=[tid], embeddings=[assertion], documents=[document or tid], metadatas=[meta]))
         return {"tid": tid}
 
     def witness(self, tid: str, signer: str, frontier: str, polarity: int, tick=None) -> dict:
@@ -154,7 +155,7 @@ class PersistenceStore:
         meta["lar_witnesses"] = json.dumps(log)
         # Re-upsert with the SAME embedding + document (the assertion + its text projection are
         # immutable; only the witness-log grows).
-        self._col.upsert(ids=[tid], embeddings=[raw["embedding"]], documents=[raw.get("document") or tid], metadatas=[meta])
+        mine_busy_retry(lambda: self._col.upsert(ids=[tid], embeddings=[raw["embedding"]], documents=[raw.get("document") or tid], metadatas=[meta]))
         return {"ok": True, "witnesses": len(log)}
 
     def neighbors(self, assertion: list, k: int = 16) -> dict:

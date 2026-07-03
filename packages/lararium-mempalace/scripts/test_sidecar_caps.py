@@ -345,3 +345,41 @@ def test_reverse_index_signer_shape_composes_too(tmp_path):
     idx.put("vessel-B", "t-42")
     assert idx.lookup("vessel-B") == "t-42"
     assert idx.lookup("vessel-Z") is None
+
+
+# --- mine_busy_retry — the hardened-write busy-retry (align to the palace-flock LOCK_NB discipline) ---
+
+def test_mine_busy_retry_retries_then_succeeds():
+    from mempalace.palace import MineAlreadyRunning
+    calls = {"n": 0}
+
+    def fn():
+        calls["n"] += 1
+        if calls["n"] < 3:
+            raise MineAlreadyRunning("held by PID 999")
+        return "ok"
+
+    assert sc.mine_busy_retry(fn, attempts=6, base_ms=1) == "ok"
+    assert calls["n"] == 3  # waited out two busy raises, landed on the third
+
+
+def test_mine_busy_retry_surfaces_after_attempts():
+    from mempalace.palace import MineAlreadyRunning
+
+    def fn():
+        raise MineAlreadyRunning("wedged")
+
+    with pytest.raises(MineAlreadyRunning):
+        sc.mine_busy_retry(fn, attempts=3, base_ms=1)
+
+
+def test_mine_busy_retry_passes_non_busy_through():
+    def fn():
+        raise ValueError("a real fault, not a busy lock")
+
+    with pytest.raises(ValueError):
+        sc.mine_busy_retry(fn, attempts=5, base_ms=1)
+
+
+def test_mine_busy_retry_success_first_try():
+    assert sc.mine_busy_retry(lambda: 42) == 42

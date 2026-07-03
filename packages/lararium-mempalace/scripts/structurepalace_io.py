@@ -70,6 +70,7 @@ from sidecar_caps import (
     acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,
+    mine_busy_retry,
     read_stored_embeddings,
     release_serve_lock,
     run_sidecar,
@@ -392,12 +393,12 @@ class StructurePalaceStore:
             if meta.get("lar_tombstoned_at"):
                 meta["lar_tombstoned_at"] = ""
             # Recurrence: same structure, same id → upsert (overwrite) the one entry.
-            self._col.upsert(
+            mine_busy_retry(lambda: self._col.upsert(
                 ids=[structural_hash],
                 documents=[ast_json],
                 metadatas=[meta],
                 embeddings=[_embed(ast_json, structural_hash)],
-            )
+            ))
             return {"hash": structural_hash, "count": count}
 
         meta = {
@@ -410,12 +411,12 @@ class StructurePalaceStore:
             "last_seen": now,
             "lar_provenance": json.dumps([link]),
         }
-        self._col.upsert(
+        mine_busy_retry(lambda: self._col.upsert(
             ids=[structural_hash],
             documents=[ast_json],
             metadatas=[meta],
             embeddings=[_embed(ast_json, structural_hash)],
-        )
+        ))
         return {"hash": structural_hash, "count": 1}
 
     def _retract_turn_from(self, structural_hash: str, turn_key: str, ended: str) -> dict:

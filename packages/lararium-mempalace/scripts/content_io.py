@@ -36,6 +36,7 @@ from mempalace.palace import get_collection
 from sidecar_caps import (
     idle_ttl_seconds,
     make_dispatch,
+    mine_busy_retry,
     run_sidecar,
 )
 
@@ -72,8 +73,10 @@ class ContentStore:
         return {"cid": raw["cid"], "document": raw["document"] or "", "metadata": raw["metadata"]}
 
     def put(self, cid: str, text: str, embedding: list, metadata: dict) -> dict:
-        # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites.
-        self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[metadata or {}])
+        # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
+        # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
+        # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.
+        mine_busy_retry(lambda: self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[metadata or {}]))
         return {"cid": cid}
 
     def search(self, embedding: list, k: int = 8, where: "dict | None" = None) -> dict:

@@ -159,6 +159,36 @@ def make_dispatch(ops: dict):
 
 
 # ---------------------------------------------------------------------------
+# hardened-write cap — busy-retry on the palace flock (align to the nakama's write discipline)
+# ---------------------------------------------------------------------------
+
+
+def mine_busy_retry(fn, attempts: int = 6, base_ms: float = 100.0):
+    """Run a chroma write, WAITING+retrying on the palace-lock BUSY signal instead of failing.
+
+    The backend's `ChromaCollection.upsert` already takes `mine_palace_lock` — the per-palace flock
+    that is the OS-level single-writer boundary — but it is `LOCK_EX | LOCK_NB` (non-blocking): under
+    contention with a concurrent mempalace `mine`/`repair`/`reconnect` on the SAME dir it RAISES
+    `MineAlreadyRunning` rather than waiting. This wraps a write so the busy lock WAITS (exponential
+    backoff + full jitter, ~6 tries ≈ 3s) and only surfaces the error if the lock stays wedged — the
+    same discipline the mempalace CLI's own mine-retry uses. MineAlreadyRunning imported lazily so a
+    sidecar with no mempalace on its path still loads sidecar_caps."""
+    try:
+        from mempalace.palace import MineAlreadyRunning  # lazy: not every sidecar imports mempalace
+    except Exception:  # noqa: BLE001 — no mempalace on the path → nothing to retry, run bare
+        return fn()
+    import random
+
+    for attempt in range(1, attempts + 1):
+        try:
+            return fn()
+        except MineAlreadyRunning:
+            if attempt >= attempts:
+                raise
+            time.sleep(min(base_ms * 2 ** (attempt - 1), 2000.0) / 1000.0 * (0.5 + random.random() * 0.5))
+
+
+# ---------------------------------------------------------------------------
 # store-readback cap — read STORED vectors back out of ANY chroma collection
 # ---------------------------------------------------------------------------
 
