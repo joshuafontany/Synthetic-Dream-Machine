@@ -60,7 +60,7 @@ export interface ResolvedServeSpawn {
  * --palace <dir>` with PYTHONPATH reaching the mempalace submodule. structurepalace + formpalace share
  * this verbatim — the only divergence was the resolve fn, lifted to a parameter here.
  */
-export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn): PalaceHolderSpawn {
+export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn, opts: { readonly palaceless?: boolean } = {}): PalaceHolderSpawn {
   return (canonicalDir: string): PalaceHolderProc => {
     const { python, script, submoduleRoot, scriptPresent } = resolveSpawn();
     if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
@@ -73,7 +73,10 @@ export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn): PalaceHo
     // HARD-fails to import (`libcudart.so.NN`) without the CUDA libs on the loader path. resolveComputeCapEnv
     // walks torch's bundled nvidia wheels; absent (the QA box) it adds only the device hint and degrades to CPU.
     const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
-    return spawn(python, [script, "serve", "--palace", canonicalDir], {
+    // A palace-less holder (the embed cap) serves `serve` with NO --palace: the model is the
+    // resource, not a store dir; `canonicalDir` is only the registry KEY, never passed to python.
+    const argv = opts.palaceless ? [script, "serve"] : [script, "serve", "--palace", canonicalDir];
+    return spawn(python, argv, {
       cwd: submoduleRoot,
       env,
       stdio: ["pipe", "pipe", "pipe"],

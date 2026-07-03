@@ -180,6 +180,8 @@ export { makePersistencePalace } from "./persistence-palace.js";
 export type { PersistencePalace, RecordProvenance, PersistencePalaceOptions } from "./persistence-palace.js";
 export { makeContentPalace } from "./content-palace.js";
 export type { ContentPalace, ContentEntry, ContentMatch, ContentPalaceOptions } from "./content-palace.js";
+export { makeEmbedCap } from "./embed-cap.js";
+export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";
