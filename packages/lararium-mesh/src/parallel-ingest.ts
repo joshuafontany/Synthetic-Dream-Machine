@@ -24,7 +24,7 @@
  * fakes. `clock` is injected too (default Date.now) so the dial is deterministic under test.
  *
  * KAPPA: the SAME runtime serves live capture AND recovery/harvest — recovery is just this run fed
- * from offset 0. One path, one gate, one set of invariants. [[main-session-capture-gap]]
+ * from offset 0. One path, one gate, one set of invariants.
  *
  * Meme: lar:///ha.ka.ba/@lararium/mesh/parallel-ingest
  */

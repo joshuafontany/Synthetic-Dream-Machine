@@ -26,7 +26,7 @@
  *
  * PURE: functions over (maxInFlight, uncommitted). The caller reads `uncommitted` from the
  * drain-ledger's `backlog().length` and `maxInFlight` from the dial's `limit`. Meme:
- * lar:///ha.ka.ba/@lararium/mesh/credit-gate · [[main-session-capture-gap]] · api/pono/servo
+ * lar:///ha.ka.ba/@lararium/mesh/credit-gate · api/pono/servo
  */
 
 /**

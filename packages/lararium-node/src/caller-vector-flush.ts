@@ -3,14 +3,14 @@
  * `mine` (embed-on-write) in the live path. It composes the two proven caps — the embed cap (fan-out
  * text→vector, the model loaded once) and the content palace (single-writer caller-vector `put`) — so
  * the single-writer split is real: EMBED fans out, COMMIT serializes. This is the CaptureFlush the
- * capture-engine's flush seam takes; wiring it into node-capture-engine (replacing makeSubprocessFlush)
- * is S3.1's daemon step, but the chain itself (text → embed → put) is proven standalone here.
+ * capture-engine's flush seam takes (it replaces makeSubprocessFlush, retiring the vendored mine from
+ * the live path); the chain itself (text → embed → put) stands proven standalone.
  *
  * The drawer id (`cid`) is deterministic from (source_file, chunk_index) — the mempalace drawer-id
  * convention `sha256(source_file)_chunk` — so a caller-vector put is idempotent on re-flush AND
- * converges with imported mine-built data (the exact byte-format is re-verified at S3.2 backfill).
+ * converges with imported mine-built data.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu · [[scrum-sovereign-memory-sensorium]] (S3.1).
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
  */
 
 import { defaultCryptoProvider, sha256Hex, utf8Bytes } from "@lararium/mesh";

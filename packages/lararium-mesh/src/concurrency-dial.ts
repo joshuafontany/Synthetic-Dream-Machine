@@ -19,7 +19,7 @@
  * PURE + immutable: every observe() returns a new dial. The caller feeds it (latency, inflight)
  * samples from the real pool; the dial owns only the control law.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/concurrency-dial · [[main-session-capture-gap]]
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/concurrency-dial
  */
 
 /** The dial's tuning constants — the safe defaults Loom-Diver's sources name. */
