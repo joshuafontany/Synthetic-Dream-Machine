@@ -11,12 +11,10 @@
 
 import { resolveEmbedSpawn } from "@lararium/mempalace";
 
-import { composePalace, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn } from "./palace-holder.js";
+import { composeEncoder, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn } from "./palace-holder.js";
 
-/** the holder label (the transport registry key — one embed holder for the whole process). */
+/** the holder label — palace-less: ONE embed holder per process (the model is the resource). */
 const LABEL = "embed";
-/** the sentinel "dir" — palace-less, so this is only the registry key; the spawn never passes it. */
-const SENTINEL = "embed-cap";
 
 /** The outcome of an embed batch: the vectors + the model name (for the EmbedderIdentity contract). */
 export interface EmbedResult {
@@ -47,7 +45,7 @@ export interface EmbedCapOptions {
 
 /** Open the embed cap — the shared palace-less holder (the model loads once), driven over line-RPC. */
 export function makeEmbedCap(opts: EmbedCapOptions = {}): EmbedCap {
-  const p = composePalace(LABEL, SENTINEL, opts.spawn ?? defaultHolderSpawn, opts.timeoutMs ?? 120_000);
+  const p = composeEncoder(LABEL, opts.spawn ?? defaultHolderSpawn, opts.timeoutMs ?? 120_000);
   return {
     async embed(texts): Promise<EmbedResult> {
       const r = (await p.send("embed", { texts: [...texts] })) as Partial<EmbedResult> | null;

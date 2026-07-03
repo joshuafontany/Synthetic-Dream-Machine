@@ -266,30 +266,35 @@ export class PalaceHolderRegistry {
 }
 
 /**
- * composePalace — the SHARED transport composition every palace-instance #has (the YIN collapse of
- * the copy-pasted registry+acquire+close boilerplate across structure/form/persistence/content). A
- * palace = a NAMELESS entity whose behavior IS its cap-stack: this composer supplies the transport
- * cap (a per-LABEL registry → one ref-counted holder per canonical dir + a `send`/`close` pair);
- * each palace layers only its OWN thin typed op-surface (put/kapae · encode_store/query ·
- * record/witness — kept DISTINCT, the sidecar-2-shapes ward: share the transport, never a god
- * base-class). One registry per label so two palace TYPES serving one dir never collide.
+ * A COMPOSED HOLDER — the send/close handle onto one held line-RPC subprocess. The shape every
+ * cap that rides a python holder returns (palace store · encoder · a future consume-sidecar).
  */
-export interface ComposedPalace {
+export interface ComposedHolder {
   /** issue one line-RPC to the holder (the op-surface's single verb). */
   send(op: string, fields?: Record<string, unknown>): Promise<unknown>;
   /** release this reference; the holder process dies when the last reference closes. Idempotent. */
   close(): Promise<void>;
 }
 
-/** ONE registry per palace label — module-global so a label's holders singleton across composes. */
-const palaceRegistries = new Map<string, PalaceHolderRegistry>();
+/** Back-compat alias — a palace's composed transport IS a composed holder. */
+export type ComposedPalace = ComposedHolder;
 
-/** Compose the transport cap for a palace layer: acquire the label's singleton holder for `dir`. */
-export function composePalace(label: string, dir: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedPalace {
-  let registry = palaceRegistries.get(label);
-  if (!registry) { registry = new PalaceHolderRegistry(label); palaceRegistries.set(label, registry); }
+/** ONE registry per label — module-global so a label's holders singleton across composes. */
+const holderRegistries = new Map<string, PalaceHolderRegistry>();
+
+/**
+ * composeHolder — the GENERAL held-subprocess cap: one ref-counted line-RPC holder per `key` within
+ * a `label` registry (+ a `send`/`close` pair). Knows NOTHING of "palace" — a nameless entity that
+ * #has {held-process · line-RPC · one-per-key registry}. `composePalace` and `composeEncoder` both
+ * COMPOSE this (siblings, neither over the other — the IoC that dissolves the palace-less sentinel):
+ * a palace keys by its store DIR; an encoder keys by its LABEL (the model is the resource, no dir).
+ * `key` is handed to `spawn` too — a palace-spawn reads it as the dir; an encoder-spawn ignores it.
+ */
+export function composeHolder(label: string, key: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedHolder {
+  let registry = holderRegistries.get(label);
+  if (!registry) { registry = new PalaceHolderRegistry(label); holderRegistries.set(label, registry); }
   const reg = registry;
-  const holder = reg.acquire(canonicalDirOf(dir), spawn, timeoutMs);
+  const holder = reg.acquire(key, spawn, timeoutMs);
   let closed = false;
   return {
     send: (op: string, fields: Record<string, unknown> = {}) => holder.send(op, fields),
@@ -297,9 +302,20 @@ export function composePalace(label: string, dir: string, spawn: PalaceHolderSpa
   };
 }
 
-/** How many holder processes a palace label holds live (proves "one holder per palace, never a pile"). */
+/** A PALACE holder — composeHolder keyed by the canonical store DIR (one holder per dir per label). */
+export function composePalace(label: string, dir: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedPalace {
+  return composeHolder(label, canonicalDirOf(dir), spawn, timeoutMs);
+}
+
+/** An ENCODER holder — composeHolder keyed by the LABEL (palace-less: ONE holder, the model is the
+ *  resource; the spawn ignores the key). No sentinel dir — the sibling of composePalace. */
+export function composeEncoder(label: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedHolder {
+  return composeHolder(label, label, spawn, timeoutMs);
+}
+
+/** How many holder processes a label holds live (proves "one holder per label, never a pile"). */
 export function livePalaceHolderCount(label: string): number {
-  return palaceRegistries.get(label)?.size() ?? 0;
+  return holderRegistries.get(label)?.size() ?? 0;
 }
 
 /**
