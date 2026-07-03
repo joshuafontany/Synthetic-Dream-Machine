@@ -190,6 +190,8 @@ export { makeMetaCap } from "./meta-cap.js";
 export type { MetaCap, MetaAnnotation, MetaCapOptions } from "./meta-cap.js";
 export { makeGraphCap } from "./graph-cap.js";
 export type { GraphCap, GraphCapOptions } from "./graph-cap.js";
+export { composePalaceCaps } from "./palace-caps.js";
+export type { PalaceCaps, PalaceCapsOptions } from "./palace-caps.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";
