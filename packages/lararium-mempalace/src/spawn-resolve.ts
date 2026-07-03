@@ -111,6 +111,12 @@ export function resolveEmbedSpawn(): EmbedSpawn {
   return resolveSidecarSpawn("embed_io.py");
 }
 
+/** `search_io.py` — the SEARCH holder, consuming mempalace's hybrid `search_memories` over a palace. */
+export type SearchSpawn = SidecarSpawn;
+export function resolveSearchSpawn(): SearchSpawn {
+  return resolveSidecarSpawn("search_io.py");
+}
+
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
 export type StructureRouterSpawn = SidecarSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {

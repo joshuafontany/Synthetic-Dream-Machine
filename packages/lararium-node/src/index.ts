@@ -183,6 +183,8 @@ export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage
 export { importGuestPalace } from "./guest-import.js";
 export type { GuestImportResult } from "./guest-import.js";
 export { recallContent } from "./content-recall.js";
+export { makeSearchCap } from "./search-cap.js";
+export type { SearchCap, SearchHit, SearchResult, SearchCapOptions } from "./search-cap.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";
