@@ -1,8 +1,8 @@
 /**
  * temporal-rigidity — a sink's STANDING measured as time-crystal RIGIDITY. The time-crystal transfer:
  * a discrete time crystal re-locks to its EXACT subharmonic even under a perturbed drive (Yao et al.,
- * PRL 118, 030401). So a sink STANDS when its occurrence-rhythm is RIGID — a real dominant period that
- * RE-LOCKS after a perturbation — and is thermal noise when the rhythm is floppy.
+ * PRL 118, 030401). So a sink STANDS when its occurrence-rhythm reads RIGID — a real dominant period that
+ * RE-LOCKS after a perturbation — and reads as thermal noise when the rhythm goes floppy.
  *
  * Two orthogonal order-parameters, both needed (lock ⟂ re-lock):
  *   · lock-quality — IS there a real dominant period? (the top autocorrelation LOCAL-maximum's strength)
@@ -10,7 +10,7 @@
  *                    perturbed signal and check it matches — the faithful "re-locks to the subharmonic" test)
  * standing = lock-quality × recovery (a continuous order-parameter); rigid = standing above threshold.
  *
- * NOTE on what this does NOT yet do (honest POSIWID): this is a SINGLE-SNAPSHOT measure — it carries no
+ * NOTE on what this does NOT yet do (honest POSIWID): this measure reads a SINGLE SNAPSHOT — it carries no
  * decay dial, no forgetting, no Ostwald ripening. Those, plus the shuffle-null calibration of `threshold`
  * (so it emerges from the signal's own null rather than a chosen 0.5) and a period-swept kick, ride the
  * feed-it-emerges Sink accumulator (the next-phase redesign), not this pure function.
@@ -36,7 +36,7 @@ export interface RigidityVerdict {
   readonly period: number;
   /** Lock-quality — the dominant period's autocorrelation strength ∈ [0,1]. */
   readonly lockQuality: number;
-  /** Recovery — the fraction of lock retained when the SAME period is re-detected after the perturbation
+  /** Recovery — the fraction of lock retained when re-detection finds the SAME period after the perturbation
    *  ∈ [0,1]; 0 when the perturbed signal's dominant period no longer matches (no re-lock). */
   readonly recovery: number;
   /** standing = lockQuality × recovery ∈ [0,1] — the continuous order-parameter. */
@@ -65,7 +65,7 @@ function autocorrAt(x: readonly number[], lag: number, mean: number, denom: numb
 }
 
 /**
- * The dominant period + its lock-quality = the strongest LOCAL MAXIMUM of the autocorrelation over
+ * The dominant period + its lock-quality READ AS the strongest LOCAL MAXIMUM of the autocorrelation over
  * [minLag, maxLag] (NOT the global argmax — a global argmax sits on the monotone-decay shoulder at minLag
  * for any smooth rhythm, mis-reporting the period; standard autocorrelation pitch detection takes the
  * first strong local max). Returns period 0 when no local maximum exists (no real rhythm).
@@ -97,6 +97,20 @@ function dominantLock(x: readonly number[], minLag: number, maxLag: number): { p
   return { period: bestLag, lockQuality: Math.max(0, Math.min(1, bestAc)) };
 }
 
+/** Public: the dominant period + lock-quality of an event-indexed signal (first strong autocorrelation
+ *  LOCAL maximum). Shared by clock-recovery (beat inference) and rigidity (base period). Finite-guarded;
+ *  period 0 when no rhythm / garbage / too short. NO wall-clock — event ordinal indexes the signal. */
+export function dominantPeriod(
+  signal: readonly number[],
+  opts: { minLag?: number; maxLag?: number } = {},
+): { period: number; lockQuality: number } {
+  const n = signal.length;
+  if (n < 4 || !signal.every((v) => Number.isFinite(v))) return { period: 0, lockQuality: 0 };
+  const minLag = Math.max(1, opts.minLag ?? 2);
+  const maxLag = Math.min(opts.maxLag ?? Math.floor(n / 3), Math.floor(n / 2));
+  return dominantLock(signal, minLag, maxLag);
+}
+
 /** A REAL perturbation: excise a contiguous middle chunk (a gap), splicing the remainder — NOT
  *  autocorrelation-invariant (a circular shift would be). */
 function phaseKick(x: readonly number[], kick: number): number[] {
@@ -111,7 +125,7 @@ export function temporalRigidity(input: RigidityInput): RigidityVerdict {
   const x = input.signal;
   const n = x.length;
   // Fail loud on GARBAGE (non-finite) — never conflate it with a valid verdict; a merely-short signal
-  // is legitimate (a young sink with few events) → not-rigid, not invalid.
+  // stays legitimate (a young sink with few events) → not-rigid, not invalid.
   if (!x.every((v) => Number.isFinite(v))) return { ...NONE, invalid: true };
   if (n < 4) return { ...NONE, invalid: false };
   const minLag = Math.max(1, input.minLag ?? 2);

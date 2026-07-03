@@ -1,13 +1,13 @@
 /**
- * nucleation-gate — a candidate sink is BORN not on accreted support alone (the frequency trap) but
- * when support crosses a CRITICAL-NUCLEUS barrier. Classical nucleation theory: a cluster's free energy
+ * nucleation-gate — a candidate sink NUCLEATES not on accreted support alone (the frequency trap) but
+ * when support crosses a CRITICAL-NUCLEUS barrier. Classical nucleation theory gives a cluster's free energy
  *   ΔG(r) = −(4/3)π·Δg·r³ + 4π·γ·r²
  * fights a VOLUME gain (∝ r³, the driving force Δg) against a SURFACE cost (∝ r², the price γ of positing
  * a bounded standing entity — the naming/index cost a frequency count cannot see). The sum has a SADDLE at
  *   r* = 2γ/Δg          (the critical radius)
  *   ΔG* = 16π·γ³/(3·Δg²) (the barrier height — returned as telemetry; see NOTE below)
  * Below r* the candidate DISSOLVES; above r* it self-sustains (BORN). γ enters the barrier cubically →
- * cheap naming (UUID-first) lowers r* everywhere; r* is SUPERSATURATION-ADAPTIVE (a burst raises Δg →
+ * cheap naming (UUID-first) lowers r* everywhere; r* ADAPTS to supersaturation (a burst raises Δg →
  * lowers r* → nucleates sinks a static threshold would miss; an unfed island's Δg→0 so r*→∞, never born).
  *
  * The DRIVE Δg = mean per-plane agreement × (effective INDEPENDENT PLANES − 1) × supersaturation:
@@ -17,14 +17,14 @@
  *     floored at ρ ≥ −1/(n−1)+ε so anti-correlated planes count as MORE independent (corroboration) yet
  *     never drive to infinity — lockstep/derived planes (ρ→1) collapse to ONE effective plane.
  *
- * ONTOLOGY NOTE: "effective planes" here = independent corroborating SIGNAL STREAMS (the counterpoint
- * no-parallel-fifths rhyme: lockstep lines collapse to one). This is DISTINCT from the house's "Voice"
+ * ONTOLOGY NOTE: "effective planes" here NAMES independent corroborating SIGNAL STREAMS (the counterpoint
+ * no-parallel-fifths rhyme: lockstep lines collapse to one). This stays DISTINCT from the house's "Voice"
  * (a Kahea-able handle on move-potentials/functors in l-space) — do NOT conflate; the code never says "voice".
  *
- * NOTE (honest POSIWID): this is a PURE, STATELESS function — it decides BIRTH from one candidate's
- * (support, plane-agreements, arrivalRate). It does NOT hold cross-call state, so it cannot itself "reap"
- * sub-critical recurrers or ripen sinks; and `barrier` is returned as telemetry but does NOT gate `born`
- * (birth is the r* radius comparison). Metastable reaping, Ostwald ripening, decay, and the self-adaptive
+ * NOTE (honest POSIWID): this function runs PURE + STATELESS — it decides BIRTH from one candidate's
+ * (support, plane-agreements, arrivalRate). It holds NO cross-call state, so it cannot itself "reap"
+ * sub-critical recurrers or ripen sinks; and `barrier` rides as telemetry but does NOT gate `born`
+ * (birth rides the r* radius comparison). Metastable reaping, Ostwald ripening, decay, and the self-adaptive
  * calibration of γ / supersaturation-baseline / thresholds all ride the feed-it-emerges Sink accumulator
  * (the next-phase redesign), never this function.
  *
@@ -55,7 +55,7 @@ export interface NucleationInput {
 export interface NucleationVerdict {
   /** Did support cross the critical nucleus (self-sustaining) vs stay sub-critical (dissolve)? */
   readonly born: boolean;
-  /** r* = 2γ/Δg — the critical radius (Infinity when there is no drive: reap). */
+  /** r* = 2γ/Δg — the critical radius (Infinity when no drive stands: reap). */
   readonly criticalRadius: number;
   /** ΔG* = 16π·γ³/(3·Δg²) — the barrier height (telemetry only; does NOT gate `born`). */
   readonly barrier: number;
