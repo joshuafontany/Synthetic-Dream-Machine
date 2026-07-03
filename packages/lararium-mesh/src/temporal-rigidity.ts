@@ -1,53 +1,53 @@
 /**
  * temporal-rigidity — a sink's STANDING measured as time-crystal RIGIDITY. The time-crystal transfer:
- * a discrete time crystal's defining property is that its sub-rhythm RE-LOCKS to the exact subharmonic
- * even when the drive is perturbed (Yao et al., PRL 118, 030401). So a sink STANDS when its
- * occurrence-rhythm is RIGID — a strong, sharp dominant period that SURVIVES a phase-kick — and it is
- * thermal noise when the rhythm is floppy (no lock, or a lock that collapses under perturbation).
+ * a discrete time crystal re-locks to its EXACT subharmonic even under a perturbed drive (Yao et al.,
+ * PRL 118, 030401). So a sink STANDS when its occurrence-rhythm is RIGID — a real dominant period that
+ * RE-LOCKS after a perturbation — and is thermal noise when the rhythm is floppy.
  *
- * This is the strongest transfer of the weird-domain swarm: it unifies persistence + canalization +
- * decay into ONE measurable order-parameter — standing = lock-quality × recovery-after-perturbation,
- * NOT accrual count. (Birth rides the nucleation-gate; STANDING rides here — the sink's two order-parameters.)
+ * Two orthogonal order-parameters, both needed (lock ⟂ re-lock):
+ *   · lock-quality — IS there a real dominant period? (the top autocorrelation LOCAL-maximum's strength)
+ *   · recovery     — does the SAME period RE-EMERGE after a perturbation? (re-detect the period on the
+ *                    perturbed signal and check it matches — the faithful "re-locks to the subharmonic" test)
+ * standing = lock-quality × recovery (a continuous order-parameter); rigid = standing above threshold.
  *
- * The measure: the dominant period is the lag of the top autocorrelation peak; lock-quality is that peak's
- * strength; recovery is the fraction of lock-quality retained after a deliberate phase-kick. Rigid = locked
- * AND recovers. A rigid rhythm's period survives the kick (re-locks); a spurious peak collapses.
+ * NOTE on what this does NOT yet do (honest POSIWID): this is a SINGLE-SNAPSHOT measure — it carries no
+ * decay dial, no forgetting, no Ostwald ripening. Those, plus the shuffle-null calibration of `threshold`
+ * (so it emerges from the signal's own null rather than a chosen 0.5) and a period-swept kick, ride the
+ * feed-it-emerges Sink accumulator (the next-phase redesign), not this pure function.
  *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
 
 export interface RigidityInput {
-  /** The candidate's occurrence-rhythm / band-signal over time (evenly sampled). */
+  /** The candidate's occurrence-rhythm / band-signal over time (evenly sampled; must be all-finite). */
   readonly signal: readonly number[];
-  /** Max period (lag) to consider — default floor(n/2). */
+  /** Max period (lag) to consider — default floor(n/3) (a robust autocorrelation floor; ≥3 cycles). */
   readonly maxLag?: number;
   /** Min period (lag) — skip trivial tiny lags. Default 2. */
   readonly minLag?: number;
-  /** Phase-kick strength ∈ [0,1]: the fraction of the signal circularly displaced to perturb the phase.
-   *  Default 0.25. */
+  /** Perturbation: fraction of the signal excised as a gap before re-detecting the period. Default 0.25. */
   readonly kick?: number;
-  /** Lock/recovery threshold to call the rhythm RIGID. Default 0.5. */
+  /** standing threshold to call the rhythm RIGID. Default 0.25 (=lock 0.5 × recovery 0.5). */
   readonly threshold?: number;
 }
 
 export interface RigidityVerdict {
-  /** Dominant period — the lag of the top autocorrelation peak (0 when none / flat signal). */
+  /** Dominant period — the lag of the top autocorrelation LOCAL maximum (0 when none / flat / invalid). */
   readonly period: number;
-  /** Lock-quality — the dominant period's autocorrelation strength, ∈ [0,1]. */
+  /** Lock-quality — the dominant period's autocorrelation strength ∈ [0,1]. */
   readonly lockQuality: number;
-  /** Recovery — lock-quality at the SAME period after a phase-kick, as a fraction of the original ∈ [0,1]. */
+  /** Recovery — the fraction of lock retained when the SAME period is re-detected after the perturbation
+   *  ∈ [0,1]; 0 when the perturbed signal's dominant period no longer matches (no re-lock). */
   readonly recovery: number;
-  /** Rigid = the rhythm locks (lockQuality ≥ threshold) AND re-locks after the kick (recovery ≥ threshold). */
+  /** standing = lockQuality × recovery ∈ [0,1] — the continuous order-parameter. */
+  readonly standing: number;
+  /** Rigid = standing ≥ threshold (locks AND re-locks). */
   readonly rigid: boolean;
+  /** True when the input was rejected (non-finite / too short) — distinct from a valid non-rigid verdict. */
+  readonly invalid: boolean;
 }
 
-/** Normalized autocorrelation at a given lag (mean-centered; ∈ [-1,1]). 0 for a flat signal. */
-function autocorrAt(x: readonly number[], lag: number, mean: number, denom: number): number {
-  if (denom <= 0) return 0;
-  let num = 0;
-  for (let i = lag; i < x.length; i++) num += (x[i]! - mean) * (x[i - lag]! - mean);
-  return num / denom;
-}
+const NONE: RigidityVerdict = { period: 0, lockQuality: 0, recovery: 0, standing: 0, rigid: false, invalid: false };
 
 function meanOf(x: readonly number[]): number {
   let s = 0;
@@ -55,59 +55,92 @@ function meanOf(x: readonly number[]): number {
   return x.length ? s / x.length : 0;
 }
 
-/** The dominant period + its lock-quality over [minLag, maxLag] (autocorrelation peak). */
+/** Normalized autocorrelation at a lag (mean-centered, full-variance denom — the robust biased estimator
+ *  that suppresses spurious high-lag peaks). ∈ [-1,1]; 0 for a flat signal. */
+function autocorrAt(x: readonly number[], lag: number, mean: number, denom: number): number {
+  if (denom <= 0) return 0;
+  let num = 0;
+  for (let i = lag; i < x.length; i++) num += (x[i]! - mean) * (x[i - lag]! - mean);
+  return num / denom;
+}
+
+/**
+ * The dominant period + its lock-quality = the strongest LOCAL MAXIMUM of the autocorrelation over
+ * [minLag, maxLag] (NOT the global argmax — a global argmax sits on the monotone-decay shoulder at minLag
+ * for any smooth rhythm, mis-reporting the period; standard autocorrelation pitch detection takes the
+ * first strong local max). Returns period 0 when no local maximum exists (no real rhythm).
+ */
 function dominantLock(x: readonly number[], minLag: number, maxLag: number): { period: number; lockQuality: number } {
+  const n = x.length;
+  if (maxLag < minLag || n < 4) return { period: 0, lockQuality: 0 };
   const mean = meanOf(x);
   let denom = 0;
   for (const v of x) denom += (v - mean) * (v - mean);
+  if (denom <= 0) return { period: 0, lockQuality: 0 };
+  // autocorrelation over [minLag-1 .. maxLag+1] so the endpoints can be local-max tested.
+  const lo = Math.max(1, minLag - 1);
+  const hi = Math.min(Math.floor(n / 2), maxLag + 1);
+  const ac = new Map<number, number>();
+  for (let lag = lo; lag <= hi; lag++) ac.set(lag, autocorrAt(x, lag, mean, denom));
   let bestLag = 0;
   let bestAc = 0;
   for (let lag = minLag; lag <= maxLag; lag++) {
-    const ac = autocorrAt(x, lag, mean, denom);
-    if (ac > bestAc) {
-      bestAc = ac;
+    const a = ac.get(lag) ?? 0;
+    if (a <= 0) continue;
+    const prev = ac.get(lag - 1) ?? -Infinity;
+    const next = ac.get(lag + 1) ?? -Infinity;
+    if (a > prev && a >= next && a > bestAc) {
+      bestAc = a;
       bestLag = lag;
     }
   }
   return { period: bestLag, lockQuality: Math.max(0, Math.min(1, bestAc)) };
 }
 
-/** A REAL phase-kick: excise a contiguous fraction (a gap), splicing the remainder — NOT
- *  autocorrelation-invariant (a circular shift would be). A rigid rhythm re-locks at the same period
- *  across the splice; a spurious peak collapses. */
+/** A REAL perturbation: excise a contiguous middle chunk (a gap), splicing the remainder — NOT
+ *  autocorrelation-invariant (a circular shift would be). */
 function phaseKick(x: readonly number[], kick: number): number[] {
   const n = x.length;
   const cut = Math.max(1, Math.min(n - 2, Math.round(kick * n)));
-  const start = Math.floor((n - cut) / 2); // excise a middle chunk → a mid-signal phase break
+  const start = Math.floor((n - cut) / 2);
   return x.slice(0, start).concat(x.slice(start + cut));
 }
 
-/** Measure a signal's temporal rigidity (lock + recovery after a phase-kick). */
+/** Measure a signal's temporal rigidity: lock (is there a period?) AND re-lock (does it survive a kick?). */
 export function temporalRigidity(input: RigidityInput): RigidityVerdict {
   const x = input.signal;
   const n = x.length;
+  // Fail loud on GARBAGE (non-finite) — never conflate it with a valid verdict; a merely-short signal
+  // is legitimate (a young sink with few events) → not-rigid, not invalid.
+  if (!x.every((v) => Number.isFinite(v))) return { ...NONE, invalid: true };
+  if (n < 4) return { ...NONE, invalid: false };
   const minLag = Math.max(1, input.minLag ?? 2);
-  const maxLag = Math.min(input.maxLag ?? Math.floor(n / 2), Math.floor(n / 2));
-  const threshold = input.threshold ?? 0.5;
+  const maxLag = Math.min(input.maxLag ?? Math.floor(n / 3), Math.floor(n / 2));
+  const threshold = input.threshold ?? 0.25;
   const kick = Math.max(0, Math.min(1, input.kick ?? 0.25));
-
-  if (n < 4 || maxLag < minLag) {
-    return { period: 0, lockQuality: 0, recovery: 0, rigid: false };
-  }
+  if (maxLag < minLag) return { ...NONE, invalid: false };
 
   const base = dominantLock(x, minLag, maxLag);
   if (base.period === 0 || base.lockQuality <= 0) {
-    return { period: 0, lockQuality: 0, recovery: 0, rigid: false };
+    return { period: 0, lockQuality: 0, recovery: 0, standing: 0, rigid: false, invalid: false };
   }
 
-  // Phase-kick, then measure lock-quality AT THE SAME dominant period — does the rhythm re-lock?
+  // RE-LOCK (the faithful test): perturb, then RE-DETECT the dominant period on the perturbed signal.
+  // Recovery counts only if the SAME period re-emerges (within ±1 lag) — a rigid rhythm re-locks; a
+  // drifting/chirp rhythm's period shifts (no match → recovery 0).
   const kicked = phaseKick(x, kick);
-  const kmean = meanOf(kicked);
-  let kdenom = 0;
-  for (const v of kicked) kdenom += (v - kmean) * (v - kmean);
-  const kickedLock = Math.max(0, Math.min(1, autocorrAt(kicked, base.period, kmean, kdenom)));
-  const recovery = base.lockQuality > 0 ? Math.min(1, kickedLock / base.lockQuality) : 0;
+  const kMax = Math.min(maxLag, Math.floor(kicked.length / 2));
+  const relock = dominantLock(kicked, minLag, kMax);
+  const periodMatches = relock.period > 0 && Math.abs(relock.period - base.period) <= 1;
+  const recovery = periodMatches ? Math.max(0, Math.min(1, relock.lockQuality / base.lockQuality)) : 0;
 
-  const rigid = base.lockQuality >= threshold && recovery >= threshold;
-  return { period: base.period, lockQuality: base.lockQuality, recovery, rigid };
+  const standing = base.lockQuality * recovery;
+  return {
+    period: base.period,
+    lockQuality: base.lockQuality,
+    recovery,
+    standing,
+    rigid: standing >= threshold,
+    invalid: false,
+  };
 }
