@@ -18,6 +18,7 @@ import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
 
 import type { EmbedCap } from "./embed-cap.js";
 import type { ContentPalace } from "./content-palace.js";
+import type { MetaCap } from "./meta-cap.js";
 
 /** The mempalace drawer-id: sha256(source_file)_chunk — deterministic, idempotent, mine-convergent. */
 async function drawerCid(record: CaptureRecord): Promise<string> {
@@ -26,12 +27,14 @@ async function drawerCid(record: CaptureRecord): Promise<string> {
 }
 
 /**
- * Compose a caller-vector CaptureFlush from an embed cap + a content palace. EMBED the whole batch in
- * one call (fan-out, the model amortized), then COMMIT each vector through the single content-palace
- * writer. Returns the count filed. A throw propagates (the nalu's WAL/backoff owns the failure — the
- * turn stays staged, no watermark advance: accept≠land holds).
+ * Compose a caller-vector CaptureFlush from an embed cap + a content palace (+ an OPTIONAL meta cap).
+ * EMBED the whole batch in one call (fan-out, the model amortized), then COMMIT each vector through
+ * the single content-palace writer. When `meta` is present, each turn is annotated (entities + hall)
+ * and the metadata stamped onto the drawer, so it lands STRUCTURED (unlocking the consumed rich
+ * stack); absent, the drawer lands flat (the floor). Returns the count filed. A throw propagates (the
+ * nalu's WAL/backoff owns the failure — the turn stays staged, no watermark advance: accept≠land holds).
  */
-export function makeCallerVectorFlush(embed: EmbedCap, content: ContentPalace): CaptureFlush {
+export function makeCallerVectorFlush(embed: EmbedCap, content: ContentPalace, meta?: MetaCap): CaptureFlush {
   return async (batch: readonly CaptureRecord[]): Promise<number> => {
     if (batch.length === 0) return 0;
     const { vectors } = await embed.embed(batch.map((r) => r.content));
@@ -41,7 +44,12 @@ export function makeCallerVectorFlush(embed: EmbedCap, content: ContentPalace): 
       const vec = vectors[i];
       if (!vec) continue; // embed under-delivered for this row — leave it staged (never fake a land)
       const cid = await drawerCid(r);
-      await content.put(cid, r.content, vec, r.metadata ?? {});
+      let metadata: Record<string, unknown> = r.metadata ?? {};
+      if (meta) {
+        const ann = await meta.annotate(r.content); // consume the meta-model → structuring metadata
+        metadata = { ...metadata, entities: ann.entities, hall: ann.hall };
+      }
+      await content.put(cid, r.content, vec, metadata);
       filed++;
     }
     return filed;

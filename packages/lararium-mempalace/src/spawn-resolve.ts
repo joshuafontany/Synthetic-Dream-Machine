@@ -123,6 +123,12 @@ export function resolveKgSpawn(): KgSpawn {
   return resolveSidecarSpawn("kg_io.py");
 }
 
+/** `meta_io.py` — the palace-less META-MODEL holder (content→entities+hall), consuming their extractors. */
+export type MetaSpawn = SidecarSpawn;
+export function resolveMetaSpawn(): MetaSpawn {
+  return resolveSidecarSpawn("meta_io.py");
+}
+
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
 export type StructureRouterSpawn = SidecarSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {
