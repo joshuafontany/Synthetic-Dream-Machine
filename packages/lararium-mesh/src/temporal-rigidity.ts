@@ -21,7 +21,8 @@
 export interface RigidityInput {
   /** The candidate's occurrence-rhythm / band-signal over time (evenly sampled; must be all-finite). */
   readonly signal: readonly number[];
-  /** Max period (lag) to consider — default floor(n/3) (a robust autocorrelation floor; ≥3 cycles). */
+  /** Max period (lag) to consider — default min(floor(n/3), MAX_LAG) (an autocorrelation floor of ≥3
+   *  cycles, with an ABSOLUTE ceiling so a huge n never blows the lag sweep). */
   readonly maxLag?: number;
   /** Min period (lag) — skip trivial tiny lags. Default 2. */
   readonly minLag?: number;
@@ -29,7 +30,15 @@ export interface RigidityInput {
   readonly kick?: number;
   /** standing threshold to call the rhythm RIGID. Default 0.25 (=lock 0.5 × recovery 0.5). */
   readonly threshold?: number;
+  /** When supplied, REUSE this period as the base (skip re-detecting it) and read its lock-quality at that
+   *  lag — the beat the clock already recovered, so the base period gets detected ONCE. The kick + tail
+   *  re-lock test still runs. Ignored when it rounds below minLag (falls back to self-detection). */
+  readonly knownPeriod?: number;
 }
+
+/** Absolute ceiling on the autocorrelation lag sweep — caps cost on a very long signal (n/3 still bounds
+ *  short ones). */
+export const MAX_LAG = 512;
 
 export interface RigidityVerdict {
   /** Dominant period — the lag of the top autocorrelation LOCAL maximum (0 when none / flat / invalid). */
@@ -53,6 +62,23 @@ function meanOf(x: readonly number[]): number {
   let s = 0;
   for (const v of x) s += v;
   return x.length ? s / x.length : 0;
+}
+
+/** Mean-center then max-abs scale a signal so extreme finite amplitudes (±1e200) survive the squaring the
+ *  autocorrelation runs, instead of overflowing to Infinity→NaN and reading as a flat rhythm. The transform
+ *  stays affine, so it LEAVES the autocorrelation shape invariant (autocorrAt already mean-centers) — it only
+ *  keeps the squares finite. A flat / degenerate signal returns mean-centered (all-zero); shared by the Sink
+ *  before it hands one rhythm to both the clock and the rigidity detector. */
+export function normalizeSignal(x: readonly number[]): number[] {
+  if (x.length === 0) return [];
+  const mean = meanOf(x);
+  let maxAbs = 0;
+  for (const v of x) {
+    const d = Math.abs(v - mean);
+    if (d > maxAbs) maxAbs = d;
+  }
+  if (!(maxAbs > 0) || !Number.isFinite(maxAbs)) return x.map((v) => v - mean);
+  return x.map((v) => (v - mean) / maxAbs);
 }
 
 /** Normalized autocorrelation at a lag (mean-centered, full-variance denom — the robust biased estimator
@@ -107,7 +133,7 @@ export function dominantPeriod(
   const n = signal.length;
   if (n < 4 || !signal.every((v) => Number.isFinite(v))) return { period: 0, lockQuality: 0 };
   const minLag = Math.max(1, opts.minLag ?? 2);
-  const maxLag = Math.min(opts.maxLag ?? Math.floor(n / 3), Math.floor(n / 2));
+  const maxLag = Math.min(opts.maxLag ?? Math.floor(n / 3), Math.floor(n / 2), MAX_LAG);
   return dominantLock(signal, minLag, maxLag);
 }
 
@@ -129,12 +155,25 @@ export function temporalRigidity(input: RigidityInput): RigidityVerdict {
   if (!x.every((v) => Number.isFinite(v))) return { ...NONE, invalid: true };
   if (n < 4) return { ...NONE, invalid: false };
   const minLag = Math.max(1, input.minLag ?? 2);
-  const maxLag = Math.min(input.maxLag ?? Math.floor(n / 3), Math.floor(n / 2));
+  const maxLag = Math.min(input.maxLag ?? Math.floor(n / 3), Math.floor(n / 2), MAX_LAG);
   const threshold = input.threshold ?? 0.25;
   const kick = Math.max(0, Math.min(1, input.kick ?? 0.25));
   if (maxLag < minLag) return { ...NONE, invalid: false };
 
-  const base = dominantLock(x, minLag, maxLag);
+  // The base period: REUSE a supplied knownPeriod (the clock's already-recovered beat) rather than re-detect
+  // it — read its lock-quality at that lag. Fall back to self-detection when none / below minLag.
+  const known = input.knownPeriod;
+  let base: { period: number; lockQuality: number };
+  if (known !== undefined && Number.isFinite(known) && Math.round(known) >= minLag) {
+    const p = Math.round(known);
+    const mean = meanOf(x);
+    let denom = 0;
+    for (const v of x) denom += (v - mean) * (v - mean);
+    const lq = denom > 0 ? Math.max(0, Math.min(1, autocorrAt(x, p, mean, denom))) : 0;
+    base = { period: p, lockQuality: lq };
+  } else {
+    base = dominantLock(x, minLag, maxLag);
+  }
   if (base.period === 0 || base.lockQuality <= 0) {
     return { period: 0, lockQuality: 0, recovery: 0, standing: 0, rigid: false, invalid: false };
   }
