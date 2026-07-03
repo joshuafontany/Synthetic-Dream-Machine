@@ -105,6 +105,12 @@ export function resolveContentPalaceSpawn(): ContentPalaceSpawn {
   return resolveSidecarSpawn("content_io.py");
 }
 
+/** `embed_io.py` — the palace-less EMBED holder (text→vector), consuming the mempalace embedder. */
+export type EmbedSpawn = SidecarSpawn;
+export function resolveEmbedSpawn(): EmbedSpawn {
+  return resolveSidecarSpawn("embed_io.py");
+}
+
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
 export type StructureRouterSpawn = SidecarSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {
