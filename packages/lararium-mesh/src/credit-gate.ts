@@ -47,6 +47,23 @@ export function canAdmit(maxInFlight: number, uncommitted: number): boolean {
   return availableCredits(maxInFlight, uncommitted) > 0;
 }
 
+/**
+ * The CREDIT FLOOR — when two fronts share ONE drain (a low-latency LIVE front + a throughput BULK
+ * front reading the same `uncommitted` meter), the BULK front admits against a REDUCED ceiling that
+ * reserves `liveFloor` credits for live. So a saturating harvest sheds ITSELF first and can never
+ * fully starve live capture (the priority-lane's credit twin — Frank-Starling with a reserved vital
+ * line). Live keeps using {@link canAdmit} (the full ceiling); bulk uses this. Both read the SAME
+ * `uncommitted`, so bulk defers to live automatically, no cross-front coordination.
+ */
+export function availableBulkCredits(maxInFlight: number, uncommitted: number, liveFloor: number): number {
+  return Math.max(0, maxInFlight - uncommitted - Math.max(0, liveFloor));
+}
+
+/** May the BULK front admit one more, given a live credit floor? True iff room remains ABOVE the floor. */
+export function canAdmitBulk(maxInFlight: number, uncommitted: number, liveFloor: number): boolean {
+  return availableBulkCredits(maxInFlight, uncommitted, liveFloor) > 0;
+}
+
 /** The gate's honest state for telemetry/surfacing — credits, whether shedding, and the utilization. */
 export interface CreditReading {
   readonly maxInFlight: number;

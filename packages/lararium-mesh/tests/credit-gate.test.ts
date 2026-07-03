@@ -3,7 +3,7 @@
  * at 0 the shed engages (hard block, the Frank-Starling ceiling); reading surfaces the shed.
  */
 import { describe, test, expect } from "vitest";
-import { availableCredits, canAdmit, creditReading, creditConservation, agedOut } from "../src/index.js";
+import { availableCredits, canAdmit, creditReading, creditConservation, agedOut, availableBulkCredits, canAdmitBulk } from "../src/index.js";
 
 describe("credit-gate — the two-sided law (downstream signal paces the producer)", () => {
   test("credits = maxInFlight − uncommitted, clamped at 0", () => {
@@ -54,5 +54,18 @@ describe("credit-gate — the two-sided law (downstream signal paces the produce
   test("agedOut fires the HLL escape only past the max age (a stuck item frees its credit)", () => {
     expect(agedOut(10, 14, 5)).toBe(false);     // 4 ticks old, limit 5 → still waiting
     expect(agedOut(10, 15, 5)).toBe(true);      // 5 ticks → age out to dead-letter, return the credit
+  });
+
+  test("the credit FLOOR reserves room for live — bulk sheds before live starves", () => {
+    // maxInFlight 8, floor 3 reserved for live. Bulk sees 8−uncommitted−3 room.
+    expect(availableBulkCredits(8, 0, 3)).toBe(5);   // idle → bulk gets 5, live's 3 held
+    expect(availableBulkCredits(8, 5, 3)).toBe(0);   // 5 in flight → bulk SHEDS (floor protects live)
+    expect(canAdmit(8, 5)).toBe(true);               // …but LIVE still admits into its reserved floor
+    expect(canAdmitBulk(8, 5, 3)).toBe(false);       // bulk is shed while live keeps flowing
+  });
+
+  test("the floor never goes negative and clamps at zero (over-full sheds bulk entirely)", () => {
+    expect(availableBulkCredits(8, 8, 3)).toBe(0);   // full → bulk shed
+    expect(availableBulkCredits(4, 0, 10)).toBe(0);  // floor > ceiling → bulk gets nothing (live-only)
   });
 });
