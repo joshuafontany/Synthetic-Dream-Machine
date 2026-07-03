@@ -30,7 +30,7 @@ import { existsSync, mkdirSync, rmSync, readFileSync, readdirSync, appendFileSyn
 import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, mineWithRetry, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
@@ -308,12 +308,6 @@ const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
 const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
   ? join(homedir(), ".local", "bin", MP_EXE)
   : "mempalace";
-
-/** Run a DIRECT mempalace `mine` (fresh process — clean chroma/HNSW/embedder state), RETRYING on
- *  the palace-lock busy signal via the SHARED helper (exponential backoff + full jitter). */
-function mineDirect(args: readonly string[]): string {
-  return mineWithRetry(() => execFileSync(MP, [...args], { maxBuffer: 1 << 30, encoding: "utf8" }));
-}
 
 // --- the HNSW repair tail (idempotent, divergence-gated, fail-soft) ---------
 // After mining, the vector index can drift from sqlite (mempalace #1222). This tail reads the
@@ -672,11 +666,13 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   }
 
   results.sort((a, b) => b.transcripts - a.transcripts);
-  // The repair tail — divergence-gated + idempotent (skips on dry-run; a no-op when the index is in sync).
-  const hnsw = dryRun ? null : await runHnswRepairTail();
+  // No guest HNSW-repair tail here: all telemetry flows through the @daemon to the SOVEREIGN sensorium
+  // (verbatim → contentpalace via caller-vector, AST → .structurepalace, form → .formpalace); the guest
+  // ~/.mempalace stays untouched, so there is nothing of ours to repair in it. (The sovereign content
+  // store's index health rides content_io's own chroma upsert — a follow-up if divergence ever shows.)
   emit(args, {
     ok: true,
-    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(pacer.trajectory().length ? { flowControl: pacer.trajectory() } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}) },
+    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(pacer.trajectory().length ? { flowControl: pacer.trajectory() } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}) },
     human: () => {
       console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
       if (organSteps) {
@@ -685,14 +681,13 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       }
       for (const r of results)
         console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
-      console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .structurepalace · hash-bound`);
+      console.log(`  routed through the @daemon nalu — verbatim → contentpalace (sovereign) · AST → .structurepalace · form → .formpalace · hash-bound`);
       const flow = pacer.trajectory();
       if (flow.length) {
         // The servo's window trajectory — the live-light witness line (cuts 1/3/4).
         const track = flow.map((s) => `${s.windowMs}→${s.delayMs}ms${s.depth ? `(wal ${s.depth})` : ""}`).join(" · ");
         console.log(`  flow control:  servo window→delay per batch: ${track}`);
       }
-      if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
   return 0;
@@ -1004,38 +999,14 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   const suspended = pending.length - submitted;
 
   if (daemonUnreachable && pending.length > 0) {
-    // FALLBACK (verbatim-always): the daemon stayed unreachable across the whole run — direct-mine
-    // the CURRENT batch over the SAME road the daemon flush takes (`mine --source ndjson --daemon`),
-    // each record under the daemon leg's exact source_file + transcript ordinal, so a later daemon
-    // capture upserts the SAME drawer instead of doubling. metadata.wing rides each record (this
-    // leg bypasses the node wing-stamp flush; RFC 002 §2.5 — the record's own wing wins).
-    let fellBack = false;
-    // `capture-spool` — the transient fallback SPOOL, named apart from the hook's stable
-    // `capture-stage` (one name, two laws: the spool holds throwaway ndjson batches, the
-    // hook's stage holds dedup-keyed transcript copies that must keep a stable path).
-    const spoolDir = join(HARVEST_DIR, "capture-spool", wing);
-    const spool = join(spoolDir, `fallback-${process.pid}-${Date.now()}.ndjson`);
-    try {
-      mkdirSync(spoolDir, { recursive: true });
-      writeFileSync(
-        spool,
-        pending.map((p) => JSON.stringify({
-          content: p.text, source_file: p.src, chunk_index: p.chunk, metadata: { wing },
-        })).join("\n") + "\n",
-      );
-      // Still retry the palace-lock busy signal (a concurrent backfill or another session's
-      // fallback may hold it) — graceful, no lost drawer.
-      mineDirect(["--palace", resolvePalacePath(), "mine", "--source", "ndjson", "--daemon", spool]);
-      fellBack = true;
-      // The direct mine landed these exchanges — mark them so the nalu won't double next run.
-      for (const p of pending) next[p.key] = p.hash;
-    } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
-    finally { try { rmSync(spool, { force: true }); } catch { /* best effort */ } }
-    try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+    // ALL telemetry flows through the @daemon nalu (the single-path invariant the nalu-gate work
+    // established) — there is NO direct-mine fallback. A direct mine would (a) bypass the gate and
+    // (b) write to the external guest ~/.mempalace. So an unreachable daemon SUSPENDS the batch:
+    // leave every turn unmarked and retry next run (the sink-side dedup makes the retry safe). Loud.
     emit(args, {
       ok: true,
-      data: { wing, submitted, suspended: fellBack ? 0 : suspended, fallback: fellBack ? "direct-mine" : "none (mine failed — turns suspended, next run retries)" },
-      human: () => console.log(`[capture] daemon unreachable → ${fellBack ? `direct ndjson mine fallback (${pending.length} turn(s))` : `mine FAILED — ${suspended} turn(s) suspended, next run retries`} (wing ${wing})`),
+      data: { wing, submitted: 0, suspended, daemon: "unreachable", note: "all telemetry flows through the @daemon — no direct mine; turns suspended, next run retries" },
+      human: () => console.log(`[capture] @daemon unreachable → ${suspended} turn(s) SUSPENDED (all telemetry flows through the @daemon; start it, then re-run) (wing ${wing})`),
     });
     return 0;
   }

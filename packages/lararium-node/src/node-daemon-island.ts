@@ -34,6 +34,10 @@ interface DaemonWorkerData {
     readonly structurePalaceDir?: string;
     /** The DURABLE .formpalace dir (the living-grammar FORM-vector store — local, never federates). */
     readonly formPalaceDir?: string;
+    /** Caller-vector routing: verbatim content flows to the SOVEREIGN contentpalace (embed → content-palace
+     *  put), NOT the external guest mine. Only `contentDir` crosses workerData (a string); the engine's
+     *  embed/content/meta caps use their default sidecar spawns. Present ⇒ the sovereign capture path. */
+    readonly callerVector?: { readonly contentDir: string; readonly structured?: boolean };
     readonly mempalaceBin?: string;
     readonly tickMs?: number;
     readonly targetLatencyMs?: number;
@@ -56,6 +60,7 @@ const extra = t
           quarantinePath: t.quarantinePath,
           ...(t.structurePalaceDir !== undefined ? { structurePalaceDir: t.structurePalaceDir } : {}),
           ...(t.formPalaceDir !== undefined ? { formPalaceDir: t.formPalaceDir } : {}),
+          ...(t.callerVector !== undefined ? { callerVector: t.callerVector } : {}),
           // ALL ast-parsing runs INSIDE the TW5 engine: the in-realm annotate (capture-annotate-vm)
           // holds the full self-hosted grammar; the worker only INVOKES it across ctx.tw5.$tw (same
           // thread, so its closure executes in-sandbox). No node-side annotate — if the plugin is not

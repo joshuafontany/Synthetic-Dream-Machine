@@ -75,6 +75,8 @@ export interface DaemonVmOptions {
     readonly structurePalaceDir?: string;
     /** The DURABLE .formpalace dir (the living-grammar FORM-vector store — local, never federates). */
     readonly formPalaceDir?: string;
+    /** Caller-vector routing: verbatim content → the SOVEREIGN contentpalace (not the guest mine). */
+    readonly callerVector?: { readonly contentDir: string; readonly structured?: boolean };
     readonly mempalaceBin?: string;
     readonly tickMs?: number;
     readonly targetLatencyMs?: number;

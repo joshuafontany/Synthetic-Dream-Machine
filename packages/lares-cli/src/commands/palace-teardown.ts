@@ -9,8 +9,9 @@
  * watermark). This verb resolves every target explicitly, previews by default,
  * and removes only on `--confirm`.
  *
- * Targets (resolved, never ambient):
- *   - the palace store      MEMPALACE_PALACE_PATH ?? ~/.mempalace   (chroma + config + entities + locks + the worldline-KG knowledge_graph.sqlite3, which lives INSIDE the palace dir)
+ * Targets (resolved, never ambient) — the SOVEREIGN memory sensorium only; the external guest
+ * ~/.mempalace (a separate causal island) is NEVER touched:
+ *   - the contentpalace store     larContentDir (<memory>/content)   (the sovereign verbatim content store — caller-vector)
  *   - the structurepalace store   larStructurePalaceDir (~/.lares/.structurepalace)    (the memory-ast-unfolding — a second mempalace instance)
  *   - the formpalace store  larFormPalaceDir (~/.lares/.formpalace)  (the living-grammar FORM-vector store — a third mempalace instance; nuke-or-the-re-pave half-paves stale form-vectors keyed by verbatim_sha)
  *   - the harvest watermark ~/.lares/harvest                        (lar_hv idempotency state.json)
@@ -62,7 +63,14 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
  * interrupted `corpus run` can never leak state past a re-pave.
  */
 function resolveTargets(): Target[] {
-  const organs = palaceOrgans().map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
+  // The `mempalace` organ resolves to the external GUEST (~/.mempalace) — a SEPARATE causal island
+  // OUTSIDE the lararium (the content-cap-home ruling keeps it external; it holds the verbatim convos
+  // mine + the worldline-KG, tended independently). The sovereign memory-sensorium teardown NEVER touches
+  // it. The sovereign sensorium proper = contentpalace(<memory>/content) + structure/form/persistence/
+  // mesh/memetic — the only entities this verb tears down.
+  const organs = palaceOrgans()
+    .filter((o) => o.name !== "mempalace")
+    .map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
   const corpus = corpusTeardownDirs().map((dir) => ({ label: `corpus scratch instance (${dir.split(/[/\\]/).pop()})`, path: dir }));
   return [
     ...organs,
@@ -150,6 +158,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
       },
       human: () => {
         console.log("lares palace-teardown — PREVIEW (nothing removed)\n");
+        console.log("  scope: the sovereign memory sensorium — the external guest ~/.mempalace is never touched\n");
         for (const t of targets) {
           const mark = t.exists ? "✗" : "·";
           const size = t.exists ? `  (${humanBytes(t.bytes)})` : "  (absent)";

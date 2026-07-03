@@ -65,7 +65,7 @@ import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, 
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { larRuntimeDir, larStructurePalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
+import { larRuntimeDir, larStructurePalaceDir, larFormPalaceDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
@@ -465,6 +465,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // verbatim_sha (the cross-graph join to the verbatim content drawer); durable bridge state,
         // beside the wipe-zone, never federates. LAR_ROOT-isolated for staged instances.
         formPalaceDir:  larFormPalaceDir(),
+        // CALLER-VECTOR routing (the sovereign capture path): verbatim content flows to the sovereign
+        // contentpalace (<memory>/content — embed cap → content-palace put), NOT the external guest
+        // mine. AST → .structurepalace + form → .formpalace already land sovereign; this closes the
+        // triple. The engine's embed/content/meta caps use their default sidecar spawns (only the dir
+        // crosses workerData). The whole memory sensorium now lives inside the lararium.
+        callerVector:   { contentDir: larContentDir() },
       },
     });
 
