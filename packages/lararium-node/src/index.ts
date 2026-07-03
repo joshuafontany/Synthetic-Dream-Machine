@@ -192,6 +192,8 @@ export { makeGraphCap } from "./graph-cap.js";
 export type { GraphCap, GraphCapOptions } from "./graph-cap.js";
 export { composePalaceCaps } from "./palace-caps.js";
 export type { PalaceCaps, PalaceCapsOptions } from "./palace-caps.js";
+export { makeLaresQuery } from "./lares-query.js";
+export type { LaresQuery, Lens } from "./lares-query.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";
