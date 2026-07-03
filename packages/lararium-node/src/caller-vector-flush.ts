@@ -1,0 +1,49 @@
+/**
+ * caller-vector-flush — the CALLER-VECTOR capture commit: the flush seam that REPLACES the vendored
+ * `mine` (embed-on-write) in the live path. It composes the two proven caps — the embed cap (fan-out
+ * text→vector, the model loaded once) and the content palace (single-writer caller-vector `put`) — so
+ * the single-writer split is real: EMBED fans out, COMMIT serializes. This is the CaptureFlush the
+ * capture-engine's flush seam takes; wiring it into node-capture-engine (replacing makeSubprocessFlush)
+ * is S3.1's daemon step, but the chain itself (text → embed → put) is proven standalone here.
+ *
+ * The drawer id (`cid`) is deterministic from (source_file, chunk_index) — the mempalace drawer-id
+ * convention `sha256(source_file)_chunk` — so a caller-vector put is idempotent on re-flush AND
+ * converges with imported mine-built data (the exact byte-format is re-verified at S3.2 backfill).
+ *
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu · [[scrum-sovereign-memory-sensorium]] (S3.1).
+ */
+
+import { defaultCryptoProvider, sha256Hex, utf8Bytes } from "@lararium/mesh";
+import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
+
+import type { EmbedCap } from "./embed-cap.js";
+import type { ContentPalace } from "./content-palace.js";
+
+/** The mempalace drawer-id: sha256(source_file)_chunk — deterministic, idempotent, mine-convergent. */
+async function drawerCid(record: CaptureRecord): Promise<string> {
+  const srcHash = await sha256Hex(utf8Bytes(record.source_file), defaultCryptoProvider);
+  return `${srcHash}_${record.chunk_index ?? 0}`;
+}
+
+/**
+ * Compose a caller-vector CaptureFlush from an embed cap + a content palace. EMBED the whole batch in
+ * one call (fan-out, the model amortized), then COMMIT each vector through the single content-palace
+ * writer. Returns the count filed. A throw propagates (the nalu's WAL/backoff owns the failure — the
+ * turn stays staged, no watermark advance: accept≠land holds).
+ */
+export function makeCallerVectorFlush(embed: EmbedCap, content: ContentPalace): CaptureFlush {
+  return async (batch: readonly CaptureRecord[]): Promise<number> => {
+    if (batch.length === 0) return 0;
+    const { vectors } = await embed.embed(batch.map((r) => r.content));
+    let filed = 0;
+    for (let i = 0; i < batch.length; i++) {
+      const r = batch[i]!;
+      const vec = vectors[i];
+      if (!vec) continue; // embed under-delivered for this row — leave it staged (never fake a land)
+      const cid = await drawerCid(r);
+      await content.put(cid, r.content, vec, r.metadata ?? {});
+      filed++;
+    }
+    return filed;
+  };
+}
