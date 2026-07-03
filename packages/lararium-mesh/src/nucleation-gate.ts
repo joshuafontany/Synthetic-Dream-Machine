@@ -10,12 +10,16 @@
  * cheap naming (UUID-first) lowers r* everywhere; r* is SUPERSATURATION-ADAPTIVE (a burst raises Δg →
  * lowers r* → nucleates sinks a static threshold would miss; an unfed island's Δg→0 so r*→∞, never born).
  *
- * The DRIVE Δg = mean per-plane agreement × (effective INDEPENDENT voices − 1) × supersaturation:
- *   · CROSS-PLANE agreement, not single-plane frequency — the `(voices − 1)` factor makes a LONE voice
- *     yield ZERO drive (never born), enforcing the cross-plane thesis STRUCTURALLY, not by comment;
- *   · effective voices = n/(1+(n−1)ρ) on the SIGNED mean correlation ρ (Kish effective sample size),
+ * The DRIVE Δg = mean per-plane agreement × (effective INDEPENDENT PLANES − 1) × supersaturation:
+ *   · CROSS-PLANE agreement, not single-plane frequency — the `(effectivePlanes − 1)` factor makes a LONE
+ *     plane yield ZERO drive (never born), enforcing the cross-plane thesis STRUCTURALLY, not by comment;
+ *   · effectivePlanes = n/(1+(n−1)ρ) on the SIGNED mean correlation ρ (Kish effective sample size),
  *     floored at ρ ≥ −1/(n−1)+ε so anti-correlated planes count as MORE independent (corroboration) yet
- *     never drive to infinity — lockstep/derived planes (ρ→1) collapse to ONE voice (no-parallel-fifths).
+ *     never drive to infinity — lockstep/derived planes (ρ→1) collapse to ONE effective plane.
+ *
+ * ONTOLOGY NOTE: "effective planes" here = independent corroborating SIGNAL STREAMS (the counterpoint
+ * no-parallel-fifths rhyme: lockstep lines collapse to one). This is DISTINCT from the house's "Voice"
+ * (a Kahea-able handle on move-potentials/functors in l-space) — do NOT conflate; the code never says "voice".
  *
  * NOTE (honest POSIWID): this is a PURE, STATELESS function — it decides BIRTH from one candidate's
  * (support, plane-agreements, arrivalRate). It does NOT hold cross-call state, so it cannot itself "reap"
@@ -36,7 +40,7 @@ export interface PlaneSignal {
 export interface NucleationInput {
   /** Accreted support — the candidate's "size" r (reference/cap count; ≥ 0). */
   readonly support: number;
-  /** Per-plane agreement signals — the cross-plane drive (a lone voice yields zero drive: never born). */
+  /** Per-plane agreement signals — the cross-plane drive (a lone plane yields zero drive: never born). */
   readonly planes: readonly PlaneSignal[];
   /** Supersaturation proxy: recent related-material arrival rate (the feeding drive). Default 1. A burst
    *  (>1) lowers r*; an unfed/dilute island (→0) sends r*→∞ (never nucleates). */
@@ -44,7 +48,7 @@ export interface NucleationInput {
   /** γ — the surface cost of positing a bounded entity (the naming/index price). UUID-first keeps it cheap. */
   readonly surfaceCost?: number;
   /** Optional SIGNED pairwise correlation among the planes (n×n, symmetric, diag 1), for the effective-
-   *  voice count. Omitted ⇒ all planes independent. A shape mismatch throws (fail-loud). */
+   *  plane count. Omitted ⇒ all planes independent. A shape mismatch throws (fail-loud). */
   readonly planeCorrelation?: readonly (readonly number[])[];
 }
 
@@ -55,10 +59,11 @@ export interface NucleationVerdict {
   readonly criticalRadius: number;
   /** ΔG* = 16π·γ³/(3·Δg²) — the barrier height (telemetry only; does NOT gate `born`). */
   readonly barrier: number;
-  /** Δg — mean agreement × (effective voices − 1) × supersaturation (the driving force). */
+  /** Δg — mean agreement × (effectivePlanes − 1) × supersaturation (the driving force). */
   readonly drive: number;
-  /** Effective number of INDEPENDENT voices (n/(1+(n−1)ρ), signed-ρ, PSD-floored). */
-  readonly voices: number;
+  /** Effective number of INDEPENDENT PLANES (n/(1+(n−1)ρ), signed-ρ, PSD-floored) — corroborating signal
+   *  streams, NOT the house's "Voice". */
+  readonly effectivePlanes: number;
   /** Saturation ∈ [0,1): support/(support+r*) — 0.5 at r*, →1 above. A FILL ratio, NOT a naming signal. */
   readonly condensation: number;
   /** True when the input was non-finite/garbage — distinct from a valid sub-critical `born:false`. */
@@ -72,7 +77,7 @@ export const GAMMA_UUID_FIRST = 1;
 const clamp01 = (x: number): number => (Number.isFinite(x) ? (x < 0 ? 0 : x > 1 ? 1 : x) : 0);
 
 const INVALID: NucleationVerdict = {
-  born: false, criticalRadius: Infinity, barrier: Infinity, drive: 0, voices: 0, condensation: 0, invalid: true,
+  born: false, criticalRadius: Infinity, barrier: Infinity, drive: 0, effectivePlanes: 0, condensation: 0, invalid: true,
 };
 
 /** Signed mean |off-diagonal| correlation among n planes (0 when uncorrelated / < 2 planes). Validates shape. */
@@ -95,9 +100,9 @@ function meanSignedCorr(n: number, corr?: readonly (readonly number[])[]): numbe
   return cnt ? sum / cnt : 0;
 }
 
-/** Effective independent voices n/(1+(n−1)ρ): ρ=0 → n, ρ=1 → 1 (parallel = one voice), ρ<0 → >n
+/** Effective independent PLANES n/(1+(n−1)ρ): ρ=0 → n, ρ=1 → 1 (parallel = one plane), ρ<0 → >n
  *  (anti-correlated corroboration), with a PSD-safe floor ρ ≥ −1/(n−1)+ε so it never diverges. */
-function effectiveVoices(n: number, corr?: readonly (readonly number[])[]): number {
+function effectivePlaneCount(n: number, corr?: readonly (readonly number[])[]): number {
   if (n <= 1) return n;
   const floor = -1 / (n - 1) + 1e-3;                 // PSD-safe: denom stays > 0 → n_eff finite
   const rho = Math.min(1, Math.max(floor, meanSignedCorr(n, corr)));
@@ -105,8 +110,8 @@ function effectiveVoices(n: number, corr?: readonly (readonly number[])[]): numb
 }
 
 /**
- * Decide whether a candidate sink NUCLEATES. drive Δg = mean agreement × (effective voices − 1) ×
- * supersaturation; r* = 2γ/Δg; born iff support ≥ r*. A lone voice (voices=1 → factor 0) never nucleates.
+ * Decide whether a candidate sink NUCLEATES. drive Δg = mean agreement × (effective planes − 1) ×
+ * supersaturation; r* = 2γ/Δg; born iff support ≥ r*. A lone plane (effectivePlanes=1 → factor 0) never nucleates.
  * Non-finite input fails loud (invalid), never a deceptive `born:false`. planeCorrelation shape errors throw.
  */
 export function nucleate(input: NucleationInput): NucleationVerdict {
@@ -123,15 +128,16 @@ export function nucleate(input: NucleationInput): NucleationVerdict {
   let sumA = 0;
   for (const p of planes) sumA += clamp01(p.agreement);
   const meanAgreement = planes.length > 0 ? sumA / planes.length : 0;
-  const voices = effectiveVoices(planes.length, input.planeCorrelation);
+  const effectivePlanes = effectivePlaneCount(planes.length, input.planeCorrelation);
 
-  // The driving force: agreement × (independent-corroboration − 1) × supersaturation. The (voices−1)
-  // makes a single/lockstep voice yield ZERO drive — the cross-plane thesis, enforced structurally.
-  const drive = meanAgreement * Math.max(0, voices - 1) * supersaturation;
+  // The driving force: agreement × (independent-corroboration − 1) × supersaturation. The
+  // (effectivePlanes − 1) makes a single/lockstep plane yield ZERO drive — the cross-plane thesis,
+  // enforced structurally.
+  const drive = meanAgreement * Math.max(0, effectivePlanes - 1) * supersaturation;
 
   if (!(drive > 0)) {
-    // No drive (lone voice, no agreement, or unfed) → r*→∞ → never nucleates; reap.
-    return { born: false, criticalRadius: Infinity, barrier: Infinity, drive: 0, voices, condensation: 0, invalid: false };
+    // No drive (lone plane, no agreement, or unfed) → r*→∞ → never nucleates; reap.
+    return { born: false, criticalRadius: Infinity, barrier: Infinity, drive: 0, effectivePlanes, condensation: 0, invalid: false };
   }
 
   const criticalRadius = (2 * gamma) / drive;
@@ -139,5 +145,5 @@ export function nucleate(input: NucleationInput): NucleationVerdict {
   const born = size >= criticalRadius;
   const condensation = size / (size + criticalRadius); // saturation (fill ratio), NOT a naming signal
 
-  return { born, criticalRadius, barrier, drive, voices, condensation, invalid: false };
+  return { born, criticalRadius, barrier, drive, effectivePlanes, condensation, invalid: false };
 }

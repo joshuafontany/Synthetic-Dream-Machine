@@ -1,8 +1,8 @@
 /**
  * nucleation-gate — the critical-nucleus sink-birth gate, hardened per the QA swap-dialectic. Witnesses:
- * the saddle, the (voices−1) single-plane guard (lone voice never nucleates), supersaturation-adaptivity,
- * the no-parallel-fifths guard (lockstep = one voice → zero drive), SIGNED-ρ anti-correlation (counts as
- * MORE voices), the γ naming-cost lever, saturation, and fail-loud on garbage/ragged input.
+ * the saddle, the (effectivePlanes−1) single-plane guard (lone effective plane never nucleates), supersaturation-adaptivity,
+ * the no-parallel-fifths guard (lockstep = one effective plane → zero drive), SIGNED-ρ anti-correlation (counts as
+ * MORE planes), the γ naming-cost lever, saturation, and fail-loud on garbage/ragged input.
  */
 import { describe, expect, test } from "vitest";
 
@@ -18,11 +18,11 @@ describe("nucleation-gate (critical-nucleus sink-birth, hardened)", () => {
     expect(nucleate({ support: 50, planes }).born).toBe(true);
   });
 
-  test("the single-plane frequency trap is BLOCKED — a lone voice never nucleates", () => {
+  test("the single-plane frequency trap is BLOCKED — a lone effective plane never nucleates", () => {
     const v = nucleate({ support: 1e6, planes: P(1.0, "only-one") });
-    expect(v.born).toBe(false);      // (voices−1) = 0 → zero drive, regardless of support
+    expect(v.born).toBe(false);      // (effectivePlanes−1) = 0 → zero drive, regardless of support
     expect(v.drive).toBe(0);
-    expect(v.voices).toBe(1);
+    expect(v.effectivePlanes).toBe(1);
   });
 
   test("no drive → never nucleates (no agreement OR unfed island)", () => {
@@ -40,23 +40,23 @@ describe("nucleation-gate (critical-nucleus sink-birth, hardened)", () => {
     expect(burst.born && !calm.born).toBe(true);
   });
 
-  test("no-parallel-fifths: lockstep planes collapse to ONE voice → zero drive (not born)", () => {
+  test("no-parallel-fifths: lockstep planes collapse to ONE effective plane → zero drive (not born)", () => {
     const two = P(0.8, "a", "b");
     const independent = nucleate({ support: 5, planes: two });
     const parallel = nucleate({ support: 5, planes: two, planeCorrelation: [[1, 1], [1, 1]] });
-    expect(independent.voices).toBeCloseTo(2, 6);
-    expect(parallel.voices).toBeCloseTo(1, 6);       // lockstep → one voice
+    expect(independent.effectivePlanes).toBeCloseTo(2, 6);
+    expect(parallel.effectivePlanes).toBeCloseTo(1, 6);       // lockstep → one effective plane
     expect(parallel.drive).toBe(0);                  // (1−1) → zero drive
     expect(parallel.born).toBe(false);
     expect(independent.born).toBe(true);
   });
 
-  test("SIGNED anti-correlation counts as MORE independent voices (corroboration), never one", () => {
+  test("SIGNED anti-correlation counts as MORE independent planes (corroboration), never one", () => {
     const two = P(0.8, "a", "b");
     const indep = nucleate({ support: 5, planes: two });
     const anti = nucleate({ support: 5, planes: two, planeCorrelation: [[1, -1], [-1, 1]] });
-    expect(anti.voices).toBeGreaterThan(indep.voices);   // ρ<0 → >n voices (PSD-floored, finite)
-    expect(Number.isFinite(anti.voices)).toBe(true);     // never diverges
+    expect(anti.effectivePlanes).toBeGreaterThan(indep.effectivePlanes);   // ρ<0 → >n planes (PSD-floored, finite)
+    expect(Number.isFinite(anti.effectivePlanes)).toBe(true);     // never diverges
     expect(anti.drive).toBeGreaterThan(indep.drive);
   });
 
