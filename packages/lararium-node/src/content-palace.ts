@@ -33,6 +33,21 @@ export interface ContentMatch {
   readonly metadata: Record<string, unknown>;
 }
 
+/** One scanned record — carries its embedding OUT (the guest-import read leg: copy store→store). */
+export interface ScannedRecord {
+  readonly cid: string;
+  readonly document: string;
+  readonly embedding: number[] | null;
+  readonly metadata: Record<string, unknown>;
+}
+
+/** A page of a scan: the records + the offset to resume from (`next` null = drained). */
+export interface ScanPage {
+  readonly records: ScannedRecord[];
+  readonly next: number | null;
+  readonly total: number;
+}
+
 export interface ContentPalace {
   /**
    * Store one content record: `cid` (a content-hash or stable target id), the `text` (rides the
@@ -44,6 +59,8 @@ export interface ContentPalace {
   get(cid: string): Promise<ContentEntry | null>;
   /** Nearest content by vector similarity, optional where-filter. */
   search(embedding: readonly number[], opts?: { k?: number; where?: Record<string, unknown> }): Promise<ContentMatch[]>;
+  /** Read a PAGE of records WITH embeddings (the guest-import read leg — copy store→store, no re-embed). */
+  scan(opts?: { offset?: number; limit?: number }): Promise<ScanPage>;
   /** Release this reference; the holder process dies when the last reference closes. */
   close(): Promise<void>;
 }
@@ -84,6 +101,11 @@ export function makeContentPalace(dir: string, opts: ContentPalaceOptions = {}):
         ...(opts2.where !== undefined ? { where: opts2.where } : {}),
       })) as { matches: ContentMatch[] };
       return res.matches ?? [];
+    },
+
+    async scan(opts2 = {}): Promise<ScanPage> {
+      const res = (await p.send("scan", { offset: opts2.offset ?? 0, limit: opts2.limit ?? 256 })) as Partial<ScanPage> | null;
+      return { records: res?.records ?? [], next: res?.next ?? null, total: res?.total ?? 0 };
     },
 
     close: p.close,

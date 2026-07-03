@@ -97,6 +97,37 @@ class ContentStore:
         ]
         return {"matches": matches}
 
+    def scan(self, offset: int = 0, limit: int = 256) -> dict:
+        """Read a PAGE of records WITH their embeddings — the guest-import read leg. Copies a
+        source store (a mine-built or caller-vector collection) into another store-compatibly: the
+        embeddings ride out so the target `put`s them verbatim (no re-embed, no drift). `next` is the
+        offset to resume from, or null when the page ran short (the scan is drained)."""
+        try:
+            n = self._col.count()
+        except Exception:  # noqa: BLE001 — fresh/empty collection
+            n = 0
+        if offset >= n:
+            return {"records": [], "next": None, "total": n}
+        got = self._col.get(
+            limit=limit, offset=offset,
+            include=["documents", "metadatas", "embeddings"],
+        )
+        ids = got.get("ids") or []
+        docs = got.get("documents") or []
+        embs = got.get("embeddings")
+        metas = got.get("metadatas") or []
+        records = [
+            {
+                "cid": ids[i],
+                "document": docs[i] if i < len(docs) else "",
+                "embedding": [float(x) for x in embs[i]] if embs is not None and i < len(embs) else None,
+                "metadata": metas[i] or {},
+            }
+            for i in range(len(ids))
+        ]
+        nxt = offset + len(ids)
+        return {"records": records, "next": (nxt if nxt < n else None), "total": n}
+
 
 def _build_ops(store: ContentStore) -> dict:
     return {
@@ -104,6 +135,7 @@ def _build_ops(store: ContentStore) -> dict:
         "put": lambda req: store.put(req["cid"], req.get("text", ""), req["embedding"], req.get("metadata", {})),
         "get": lambda req: store.get(req["cid"]),
         "search": lambda req: store.search(req["embedding"], int(req.get("k", 8)), req.get("where")),
+        "scan": lambda req: store.scan(int(req.get("offset", 0)), int(req.get("limit", 256))),
     }
 
 
