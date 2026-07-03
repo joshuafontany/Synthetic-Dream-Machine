@@ -129,6 +129,12 @@ export function resolveMetaSpawn(): MetaSpawn {
   return resolveSidecarSpawn("meta_io.py");
 }
 
+/** `graph_io.py serve` — the GRAPH holder, consuming mempalace palace_graph + hallways over a palace. */
+export type GraphSpawn = SidecarSpawn;
+export function resolveGraphSpawn(): GraphSpawn {
+  return resolveSidecarSpawn("graph_io.py");
+}
+
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
 export type StructureRouterSpawn = SidecarSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {

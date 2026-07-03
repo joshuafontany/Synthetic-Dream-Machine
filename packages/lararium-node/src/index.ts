@@ -188,6 +188,8 @@ export { makeKgCap } from "./kg-cap.js";
 export type { KgCap, TripleOpts, KgCapOptions } from "./kg-cap.js";
 export { makeMetaCap } from "./meta-cap.js";
 export type { MetaCap, MetaAnnotation, MetaCapOptions } from "./meta-cap.js";
+export { makeGraphCap } from "./graph-cap.js";
+export type { GraphCap, GraphCapOptions } from "./graph-cap.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";
