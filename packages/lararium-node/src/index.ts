@@ -3,7 +3,7 @@ export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
-  larMempalaceDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
+  larMempalaceDir, larContentDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
   larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
   memorySensoriumDir,
