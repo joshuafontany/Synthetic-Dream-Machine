@@ -39,12 +39,17 @@ from datetime import date
 from mempalace.config import sanitize_iso_temporal
 from mempalace.knowledge_graph import KnowledgeGraph, DEFAULT_KG_PATH
 
-# This batch CLI's cap-stack is light: it #has the shared NDJSON record reader + the
-# shared path canonicalization (no serve loop / flock / idle-reap — those belong to
-# the persistent serve sidecars).
-from sidecar_caps import canonical_path, read_ndjson_records
+# Two cap-stacks compose here: the BATCH cmds (add/invalidate/kapae) #has the light
+# NDJSON-reader + path caps; the SERVE holder (the /mcp lares KG surface) #has the full
+# serve stack (loop/flock/idle-reap) + the read ops (query/timeline/stats). Both CONSUME
+# the one KnowledgeGraph — read+write+serve parity, their code behind the boundary.
+from sidecar_caps import canonical_path, read_ndjson_records, idle_ttl_seconds, make_dispatch, run_sidecar
 
 ADAPTER_NAME = "lares-worldline"
+IDLE_TTL_ENV = "KG_IDLE_TTL"
+DEFAULT_IDLE_TTL_SECONDS = 600.0
+_LOCK_PREFIX = "kg_serve"
+_TRIPLE_KWARGS = ("valid_from", "valid_to", "confidence", "source_closet", "source_file", "source_drawer_id", "adapter_name")
 
 
 def _kg_path(palace):
@@ -58,6 +63,62 @@ def _kg_path(palace):
 
 def _kg(palace):
     return KnowledgeGraph(db_path=_kg_path(palace))
+
+
+# --- the SERVE holder (the /mcp lares KG surface) — full read+write over the one KnowledgeGraph ---
+
+
+class Kg:
+    """CONSUME KnowledgeGraph over one palace's kg sqlite for the persistent NDJSON surface: the
+    bitemporal read ops (query_entity/query_relationship/timeline/stats) beside add/invalidate.
+    No LLM (the graph STORE; extraction that fills it is a separate, LLM-gated step)."""
+
+    def __init__(self, palace):
+        self._kg = _kg(palace)
+
+    def add_entity(self, name, entity_type="unknown", properties=None):
+        return self._kg.add_entity(name, entity_type, properties or {})
+
+    def add_triple(self, subject, predicate, obj, **kw):
+        return self._kg.add_triple(subject, predicate, obj, **{k: kw[k] for k in _TRIPLE_KWARGS if k in kw})
+
+    def invalidate(self, subject, predicate, obj, ended=None):
+        return self._kg.invalidate(subject, predicate, obj, ended)
+
+    def query_entity(self, name, as_of=None, direction="outgoing"):
+        return self._kg.query_entity(name, as_of=as_of, direction=direction)
+
+    def query_relationship(self, predicate, as_of=None):
+        return self._kg.query_relationship(predicate, as_of=as_of)
+
+    def timeline(self, entity_name=None):
+        return self._kg.timeline(entity_name)
+
+    def stats(self):
+        return self._kg.stats()
+
+
+def _build_ops(k):
+    return {
+        "ping": lambda req: {"ready": True},
+        "add_entity": lambda req: k.add_entity(req["name"], req.get("entity_type", "unknown"), req.get("properties")),
+        "add_triple": lambda req: k.add_triple(req["subject"], req["predicate"], req["object"], **{kk: req[kk] for kk in _TRIPLE_KWARGS if kk in req}),
+        "invalidate": lambda req: k.invalidate(req["subject"], req["predicate"], req["object"], req.get("ended")),
+        "query_entity": lambda req: k.query_entity(req["name"], req.get("as_of"), req.get("direction", "outgoing")),
+        "query_relationship": lambda req: k.query_relationship(req["predicate"], req.get("as_of")),
+        "timeline": lambda req: k.timeline(req.get("entity_name")),
+        "stats": lambda req: k.stats(),
+    }
+
+
+def cmd_serve(args):
+    run_sidecar(
+        palace=args.palace,
+        lock_prefix=_LOCK_PREFIX,
+        build_dispatch=lambda: make_dispatch(_build_ops(Kg(args.palace))),
+        idle_ttl=idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS),
+        singleton_msg="kg_io: another holder already serves this palace kg; exiting (singleton)\n",
+    )
 
 
 def _canon_spo(subject, predicate, obj):
@@ -174,6 +235,10 @@ def main():
     k.add_argument("--turn-key", required=True, dest="turn_key")
     k.add_argument("--ended", default=None)
     k.set_defaults(fn=cmd_kapae)
+
+    sv = sub.add_parser("serve", help="persistent NDJSON KG holder (the /mcp lares KG surface: read+write)")
+    sv.add_argument("--palace", required=True)  # serve's own --palace (makeServeSpawn passes `serve --palace <dir>`)
+    sv.set_defaults(fn=cmd_serve)
 
     args = ap.parse_args()
     args.fn(args)
