@@ -182,7 +182,6 @@ export { makeContentPalace } from "./content-palace.js";
 export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage, ContentPalaceOptions } from "./content-palace.js";
 export { importGuestPalace } from "./guest-import.js";
 export type { GuestImportResult } from "./guest-import.js";
-export { recallContent } from "./content-recall.js";
 export { makeSearchCap } from "./search-cap.js";
 export type { SearchCap, SearchHit, SearchResult, SearchCapOptions } from "./search-cap.js";
 export { makeKgCap } from "./kg-cap.js";
