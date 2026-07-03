@@ -119,6 +119,7 @@ export * from "./capture-reading.js";
 export * from "./transfer-entropy.js";
 export * from "./edge-kind.js";
 export * from "./nucleation-gate.js";
+export * from "./temporal-rigidity.js";
 export * from "./partition-monitor.js";
 export * from "./self-coupling.js";
 export * from "./mesh-coupling.js";
