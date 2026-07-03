@@ -17,6 +17,11 @@ import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";
 import { makeStructurePalace, type StructurePalace } from "./structurepalace.js";
 import { makeFormPalace, type FormPalace, type SerializedBasis } from "./formpalace.js";
+import { makeEmbedCap } from "./embed-cap.js";
+import { makeContentPalace } from "./content-palace.js";
+import { makeMetaCap } from "./meta-cap.js";
+import { makeCallerVectorFlush } from "./caller-vector-flush.js";
+import type { PalaceHolderSpawn } from "./palace-holder.js";
 
 export interface NodeCaptureEngineOptions {
   /** palace path passed to `mine --source ndjson --palace` */
@@ -53,6 +58,20 @@ export interface NodeCaptureEngineOptions {
   readonly derive?: CaptureDerive;
   /** test injection for the flush subprocess */
   readonly spawn?: (bin: string, args: readonly string[]) => Promise<{ stdout: string }>;
+  /** CALLER-VECTOR mode: when set, the base content commit becomes the MINE-FREE caller-vector chain
+   *  (embed cap → content-palace put, + the consumed meta-model annotate), retiring the vendored
+   *  `mine` from the live path. The ast/form/wing wrappers compose over it UNCHANGED. Absent = the
+   *  legacy subprocess mine. The engine owns the caps' lifecycle (closed on dispose). */
+  readonly callerVector?: {
+    /** the owned content palace dir (the sovereign plane the turns land in). */
+    readonly contentDir: string;
+    /** stamp the consumed meta-model (entities/hall) so drawers land STRUCTURED. Default true. */
+    readonly structured?: boolean;
+    /** test seams for the caps (default: the real python holders). */
+    readonly embedSpawn?: PalaceHolderSpawn;
+    readonly contentSpawn?: PalaceHolderSpawn;
+    readonly metaSpawn?: PalaceHolderSpawn;
+  };
 }
 
 /**
@@ -248,13 +267,28 @@ export function makeFormSplitFlush(
 
 /** Build the node telemetry engine (the isomorphic worker + node seams). */
 export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEngine {
-  const subprocessFlush = makeSubprocessFlush({
-    spoolDir: opts.spoolDir,
-    palacePath: opts.palacePath,
-    ...(opts.mempalaceBin !== undefined ? { mempalaceBin: opts.mempalaceBin } : {}),
-    ...(opts.timeoutMs !== undefined ? { timeoutMs: opts.timeoutMs } : {}),
-    ...(opts.spawn !== undefined ? { spawn: opts.spawn } : {}),
-  });
+  // The BASE content commit. Caller-vector (mine-free: embed cap → content-palace put, + the meta-
+  // model annotate) when composed — the vendored mine leaves the live path; else the subprocess mine.
+  // The ast/form/wing wrappers compose over EITHER unchanged. The engine owns the caller-vector caps.
+  let disposeCaps: () => Promise<void> = async () => {};
+  let baseFlush: CaptureFlush;
+  if (opts.callerVector) {
+    const embed = makeEmbedCap(opts.callerVector.embedSpawn ? { spawn: opts.callerVector.embedSpawn } : {});
+    const content = makeContentPalace(opts.callerVector.contentDir, opts.callerVector.contentSpawn ? { spawn: opts.callerVector.contentSpawn } : {});
+    const meta = opts.callerVector.structured !== false
+      ? makeMetaCap(opts.callerVector.metaSpawn ? { spawn: opts.callerVector.metaSpawn } : {})
+      : undefined;
+    baseFlush = makeCallerVectorFlush(embed, content, meta);
+    disposeCaps = async () => { await embed.close(); await content.close(); if (meta) await meta.close(); };
+  } else {
+    baseFlush = makeSubprocessFlush({
+      spoolDir: opts.spoolDir,
+      palacePath: opts.palacePath,
+      ...(opts.mempalaceBin !== undefined ? { mempalaceBin: opts.mempalaceBin } : {}),
+      ...(opts.timeoutMs !== undefined ? { timeoutMs: opts.timeoutMs } : {}),
+      ...(opts.spawn !== undefined ? { spawn: opts.spawn } : {}),
+    });
+  }
   // The AST routing split rides between the engine and the (external) mempalace write. Local-only by
   // construction: a content-addressed file store, never a mesh/Automerge surface. Absent/null disables
   // it — NO implicit tmpfs default (that footgun silently wrote ASTs to a transient, wiped path).
@@ -263,7 +297,7 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
   // kapaeAst rewind leg below, so the rewind reaches the SAME warm serve holder the captures feed
   // (the flock-singleton forbids a 2nd holder for this palace dir).
   const structurePalace: StructurePalace | null = structurePalaceDir ? makeStructurePalace(structurePalaceDir) : null;
-  const astSplit = structurePalace ? makeAstSplitFlush(subprocessFlush, structurePalace) : subprocessFlush;
+  const astSplit = structurePalace ? makeAstSplitFlush(baseFlush, structurePalace) : baseFlush;
   // The FORM split rides OUTSIDE the AST split (runs first): it consumes the in-VM `lar_skeleton`/
   // `lar_basis`, routes the form-vector to the FORM store, strips those internal fields, then hands
   // the (still lar_ast-bearing) record to the AST split. Both stores come out clean, joined by
@@ -274,7 +308,7 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
   // `metadata.wing` BEFORE the splits (which preserve it) and the ndjson mine reads it as routing.
   const flush = makeWingStampFlush(formSplit);
   const reserve = makeCaptureReserve({ walPath: opts.walPath, quarantinePath: opts.quarantinePath });
-  const engine = makeCaptureEngine({
+  const baseEngine = makeCaptureEngine({
     flush,
     reserve,
     annotate: opts.annotate,
@@ -284,6 +318,8 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     ...(opts.servo !== undefined ? { servo: opts.servo } : {}),
     ...(opts.derive !== undefined ? { derive: opts.derive } : {}),
   });
+  // Wrap dispose to ALSO close the caller-vector caps (embed/content/meta); a no-op in mine mode.
+  const engine: CaptureEngine = { ...baseEngine, dispose: () => { baseEngine.dispose(); void disposeCaps(); } };
   if (!structurePalace) return engine; // no AST store wired → no rewind leg (kapaeAst stays absent)
   // The strand-B convergence leg: ONE gone turn-uuid → the .structurepalace tally set-aside AND the
   // Measure salience down-weight (strand C), both in the worker that owns the warm holder. The
