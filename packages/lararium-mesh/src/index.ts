@@ -126,6 +126,7 @@ export * from "./sink-class.js";
 export * from "./commit-dial.js";
 export * from "./purple-minter.js";
 export * from "./directed-boundary.js";
+export * from "./sink-flow.js";
 export * from "./partition-monitor.js";
 export * from "./self-coupling.js";
 export * from "./mesh-coupling.js";

@@ -66,22 +66,29 @@ export function mintPurpleSink(
   if (klass.sinkClass !== "receiver-boundary") return null; // cymatic/none get DETECTED, never minted
 
   const quantum = opts.quantum ?? 0.1;
+  // The floor reads the feed's OWN truth: an atemporal (corpus) sink waives standing (a corpus never
+  // re-locks), so the designation carries the authority rather than trusting each caller to remember.
+  const floor: CommitFloor = { ...opts.floor, requireStanding: opts.floor?.requireStanding ?? !verdict.atemporal };
   const commit = commitDial(
     { born: verdict.birth.born, rigid: verdict.standing.rigid, supersaturation: verdict.supersaturation },
-    opts.floor,
+    floor,
   );
 
-  // The metameric key: quantize each plane's agreement into a cell; many spectra → one cone-activation.
-  const cells = verdict.planeSignals.map((p) => Math.round(p.agreement / quantum));
+  // The metameric key: sort by plane NAME (never Map-insertion order — a false split), quantize each
+  // plane's agreement into a cell; many spectra land in one cell → one cone-activation, one pet-name.
+  const sorted = [...verdict.planeSignals].sort((a, b) => a.plane.localeCompare(b.plane));
+  const cells = sorted.map((p) => Math.round(p.agreement / quantum));
   const key = cells.join(",");
   const existing = registry.lookup(key);
   const petName = existing ?? mintId();
   if (!existing) registry.record(key, petName);
 
+  // GAP (KA-4, deferred): the caller-side reaction-graph bridging-edge stays UNBUILT — the ring closes as
+  // returned data (`planes`), not yet as a Ki-graph node. Wire mint → reaction-graph in a follow-up.
   return {
     petName,
     closureVector: cells.map((c) => c * quantum),
-    planes: verdict.planeSignals.map((p) => p.plane),
+    planes: sorted.map((p) => p.plane),
     presentInNoPlane: true,
     commit,
   };

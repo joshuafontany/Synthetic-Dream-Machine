@@ -20,7 +20,7 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
 
-import { temporalRigidity } from "./temporal-rigidity.js";
+import { temporalRigidity, normalizeSignal } from "./temporal-rigidity.js";
 import type { NucleationVerdict } from "./nucleation-gate.js";
 
 export type SinkClass = "signal-boundary" | "receiver-boundary" | "none";
@@ -32,46 +32,48 @@ export interface SinkClassVerdict {
   readonly signalPlanes: readonly string[];
   /** Did the gate birth the sink across planes (nucleate.born on the full plane-set)? */
   readonly bornCrossPlane: boolean;
-  /** 0 = fully in-data (every plane stands) … 1 = fully minted-at-closure (no plane stands, born cross-plane). */
-  readonly observerDependence: number;
+  /** False on an atemporal feed (no per-plane rhythm) — the cymatic detector reads TEMPORAL standing only,
+   *  so a corpus sink tags receiver-boundary "by blindness", NOT confidently at a closure. */
+  readonly cymaticTestable: boolean;
   /** True when the birth verdict arrived invalid (garbage) — distinct from a valid `none`. */
   readonly invalid: boolean;
 }
 
-const NONE: SinkClassVerdict = {
-  sinkClass: "none", signalPlanes: [], bornCrossPlane: false, observerDependence: 0, invalid: false,
-};
-
 /**
  * Classify a candidate sink from its per-plane rhythm + the gate's birth verdict. A plane stands ALONE
- * when temporalRigidity re-locks its solo rhythm; ≥1 standing plane → signal-boundary (cymatic); else a
- * cross-plane birth → receiver-boundary (purple); else → none. Non-finite birth fails loud (invalid).
+ * when temporalRigidity re-locks its solo rhythm (normalized to match the sink's OWN standing path, so an
+ * extreme-amplitude plane the sink calls rigid never mis-reads flat); ≥1 standing plane → signal-boundary
+ * (cymatic); else a cross-plane birth → receiver-boundary (purple); else → none. Non-finite birth fails
+ * loud (invalid). cymaticTestable falls false on an atemporal feed — the detector goes blind without a beat.
  */
 export function classifySink(
   perPlaneRhythm: ReadonlyMap<string, readonly number[]>,
   birth: NucleationVerdict,
   opts: { threshold?: number } = {},
 ): SinkClassVerdict {
-  if (birth.invalid) return { ...NONE, invalid: true };
-
   const bornCrossPlane = birth.born;
-  const nPlanes = perPlaneRhythm.size;
+  if (birth.invalid) {
+    return { sinkClass: "none", signalPlanes: [], bornCrossPlane: false, cymaticTestable: false, invalid: true };
+  }
 
-  // Leave-one-plane ablation: which planes STAND rigid on their OWN rhythm (the cymatic detector)?
+  // Leave-one-plane ablation: which planes STAND rigid on their OWN (normalized) rhythm — the cymatic detector.
   const signalPlanes: string[] = [];
+  let testable = 0;
   for (const [plane, rhythm] of perPlaneRhythm) {
-    const verdict = temporalRigidity({ signal: [...rhythm], ...(opts.threshold !== undefined ? { threshold: opts.threshold } : {}) });
+    if (rhythm.length >= 4) testable += 1; // a real reader with the medium (temporalRigidity needs n≥4)
+    const verdict = temporalRigidity({
+      signal: normalizeSignal([...rhythm]),
+      ...(opts.threshold !== undefined ? { threshold: opts.threshold } : {}),
+    });
     if (verdict.rigid) signalPlanes.push(plane);
   }
-
-  // The mint-fraction — how much of the shape the receiver bridges rather than reads from a plane.
-  const observerDependence = nPlanes > 0 ? 1 - signalPlanes.length / nPlanes : 0;
+  const cymaticTestable = testable > 0;
 
   if (signalPlanes.length >= 1) {
-    return { sinkClass: "signal-boundary", signalPlanes, bornCrossPlane, observerDependence, invalid: false };
+    return { sinkClass: "signal-boundary", signalPlanes, bornCrossPlane, cymaticTestable, invalid: false };
   }
   if (bornCrossPlane) {
-    return { sinkClass: "receiver-boundary", signalPlanes, bornCrossPlane, observerDependence: 1, invalid: false };
+    return { sinkClass: "receiver-boundary", signalPlanes, bornCrossPlane, cymaticTestable, invalid: false };
   }
-  return { ...NONE, bornCrossPlane };
+  return { sinkClass: "none", signalPlanes, bornCrossPlane, cymaticTestable, invalid: false };
 }

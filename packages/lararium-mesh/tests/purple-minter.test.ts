@@ -25,6 +25,7 @@ const mkVerdict = (over: Partial<SinkVerdict> = {}): SinkVerdict => ({
   freeRunBeat: 8,
   provisional: false,
   standsAsSink: true,
+  atemporal: false,
   ...over,
 });
 
@@ -72,6 +73,16 @@ describe("mintPurpleSink — the crucible-gated purple mint", () => {
     expect(m).not.toBeNull(); // still minted (crucible marks PROPOSED, never seals-out)
     expect(m!.commit.state).toBe("PROPOSED");
     expect(m!.commit.bound).toBe(false);
+  });
+
+  test("an ATEMPORAL purple BINDS — the minter waives standing from verdict.atemporal (the corpus fix)", () => {
+    const corpus = mkVerdict({
+      atemporal: true,
+      standing: { period: 0, lockQuality: 0, recovery: 0, standing: 0, rigid: false, invalid: false },
+    });
+    const m = mintPurpleSink(corpus, mkClass("receiver-boundary"), makeMintRegistry(), counter());
+    expect(m).not.toBeNull();
+    expect(m!.commit.bound).toBe(true); // atemporal → requireStanding waived → RULED despite no re-lock
   });
 });
 

@@ -62,6 +62,9 @@ export interface SinkVerdict {
   /** A candidate STANDS as a sink when it is BORN (nucleated) AND RIGID (its rhythm re-locks); an atemporal
    *  Sink never stands (no beat to lock). */
   readonly standsAsSink: boolean;
+  /** True when the Sink reads a corpus (atemporal) feed — carries the feed's own truth so a downstream
+   *  mint waives standing (a corpus never re-locks) rather than trusting each caller to remember. */
+  readonly atemporal: boolean;
 }
 
 export interface SinkOptions {
@@ -170,6 +173,8 @@ export function makeSink(opts: SinkOptions = {}): Sink {
 
   // Recover the clock ONCE, size the beat-derived window, and self-calibrate supersaturation. The beat drives
   // the rest; on holdover the clock free-runs on the last-locked beat (provisional).
+  // BATCH cost: snapshot re-derives the beat + baseline over the WHOLE trail per verdict (O(n·maxLag)); the
+  // deferred streaming cure (online-autocorr + streaming-subspace incremental accumulators) rides later.
   const snapshot = () => {
     const seen = agreeTrail.length;
     const rhythm = deriveRhythm();
@@ -225,6 +230,7 @@ export function makeSink(opts: SinkOptions = {}): Sink {
       freeRunBeat: st.freeRunBeat,
       provisional: st.clock.holdover,
       standsAsSink: !atemporal && birth.born && standing.rigid,
+      atemporal,
     };
   };
 

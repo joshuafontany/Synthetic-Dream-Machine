@@ -43,7 +43,7 @@ describe("classifySink — the two-sink-class tag", () => {
     const v = classifySink(perPlane, birthVerdict(true));
     expect(v.sinkClass).toBe("signal-boundary");
     expect(v.signalPlanes).toContain("content");
-    expect(v.observerDependence).toBeLessThan(1); // some of the shape sits in the data
+    expect(v.cymaticTestable).toBe(true); // the planes carry testable rhythm
   });
 
   test("no plane stands alone + born cross-plane tags RECEIVER-BOUNDARY (purple)", () => {
@@ -53,8 +53,7 @@ describe("classifySink — the two-sink-class tag", () => {
     ]);
     const v = classifySink(perPlane, birthVerdict(true));
     expect(v.sinkClass).toBe("receiver-boundary");
-    expect(v.signalPlanes.length).toBe(0);
-    expect(v.observerDependence).toBe(1); // fully minted at the closure — present in no plane
+    expect(v.signalPlanes.length).toBe(0); // no plane stands alone — present in no plane
   });
 
   test("no plane stands alone + NOT born tags NONE", () => {

@@ -69,9 +69,10 @@ function frob(A: Mat): number {
 }
 
 /**
- * departureFromNormality — the ALARM. ‖TᵀT − TTᵀ‖_F / ‖T‖_F² for the walk T = D⁻¹W: ≈0 for a normal
- * (reversible) operator, large for a directed one. Names WHERE a raw directed coupling refuses an
- * orthonormal eigenbasis — the wall the Chung cure clears.
+ * departureFromNormality — the ALARM. ‖TᵀT − TTᵀ‖_F / ‖T‖_F² for the walk T = D⁻¹W: ≈0 for a NORMAL
+ * operator, large for a NON-NORMAL one. Non-normality — not directedness — names WHERE a coupling refuses
+ * an orthonormal eigenbasis; a directed graph USUALLY runs non-normal, but a permutation cycle runs
+ * directed-yet-normal (orthogonal). The metric gauges the obstruction the Chung cure clears.
  */
 export function departureFromNormality(W: Mat): number {
   const T = walk(W);
@@ -109,6 +110,13 @@ export function chungDirectedLaplacian(W: Mat): { L: number[][]; stationary: num
   return { L, stationary: phi };
 }
 
+/** Reads true when W runs symmetric (W ≈ Wᵀ) — the real precondition for the symmetric-Laplacian path. */
+function isSymmetric(W: Mat, tol = 1e-9): boolean {
+  const n = W.length;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (Math.abs(W[i]![j]! - (W[j]?.[i] ?? 0)) > tol) return false;
+  return true;
+}
+
 /** The symmetric normalized Laplacian L = I − D^-½ W D^-½ (for an already-symmetric coupling). */
 export function symmetricNormalizedLaplacian(W: Mat): number[][] {
   const n = W.length;
@@ -133,13 +141,17 @@ export interface BoundaryEigenbasis {
 }
 
 /**
- * Build the boundary eigenbasis from a coupling graph. A directed coupling routes through the Chung cure
- * (reversibilize → self-adjoint L → orthonormal eigenbasis); a symmetric one takes the normalized
- * Laplacian directly. Either way orthogonality FALLS OUT — jacobiEigen on a self-adjoint L.
+ * Build the boundary eigenbasis from a coupling graph. A directed (asymmetric) coupling routes through the
+ * Chung cure (reversibilize → self-adjoint L → orthonormal eigenbasis); a symmetric one takes the
+ * normalized Laplacian directly. Either way orthogonality FALLS OUT — jacobiEigen on a self-adjoint L.
+ * Auto-routing gates on W's SYMMETRY (not its normality): a directed-yet-normal graph still needs the
+ * Chung path, since symmetricNormalizedLaplacian on an asymmetric W would hand jacobiEigen a non-symmetric
+ * operator. `departure` rides on as a diagnostic. Suits coupling/sensorium-scale graphs — jacobiEigen
+ * holds its accuracy at small n (a plane-count of ~3-8), not a large Ki link-graph.
  */
 export function boundaryEigenbasis(W: Mat, opts: { directed?: boolean } = {}): BoundaryEigenbasis {
   const departure = departureFromNormality(W);
-  const directed = opts.directed ?? departure > 1e-6;
+  const directed = opts.directed ?? !isSymmetric(W);
   const operator = directed ? chungDirectedLaplacian(W).L : symmetricNormalizedLaplacian(W);
   const { values, vecs } = jacobiEigen(operator);
   // sort eigenpairs ascending (smoothest boundary modes first)
