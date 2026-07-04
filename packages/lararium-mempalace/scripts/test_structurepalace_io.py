@@ -344,7 +344,7 @@ def test_kapae_decrements_and_tombstones_at_zero_keeping_the_row(tmp_path):
     e1 = store.get(H1)
     assert e1["count"] == 1
     assert [p["turn_key"] for p in e1["provenance"]] == ["turn-B"]
-    assert "tombstoned_at" not in e1  # still live
+    assert "tombstoned" not in e1  # still live
 
     # kapae turn-B → count 1→0 → TOMBSTONED, the chroma row KEPT (get still returns it).
     r2 = store.kapae("turn-B")
@@ -353,7 +353,7 @@ def test_kapae_decrements_and_tombstones_at_zero_keeping_the_row(tmp_path):
     e2 = store.get(H1)
     assert e2 is not None  # row kept, never deleted
     assert e2["count"] == 0
-    assert e2.get("tombstoned_at")  # the set-aside marker stamped
+    assert e2.get("tombstoned")  # the set-aside marker stamped
 
 
 def test_kapae_is_idempotent(tmp_path):
@@ -381,11 +381,11 @@ def test_put_revives_a_tombstoned_structure(tmp_path):
     store = _store(tmp_path)
     store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaA", "turn-A")
     store.kapae("turn-A")
-    assert store.get(H1).get("tombstoned_at")  # tombstoned
+    assert store.get(H1).get("tombstoned")  # tombstoned
     # The same structure recurs (a new turn) → revived, the marker cleared.
     store.put(H1, '{"t":1}', "wing/s.jsonl", "vshaC", "turn-C")
     revived = store.get(H1)
-    assert not revived.get("tombstoned_at")
+    assert not revived.get("tombstoned")
     assert revived["count"] == 1
 
 
@@ -408,20 +408,20 @@ def test_put_edit_same_uuid_retracts_the_old_structure_tally(tmp_path):
     e1 = store.get(H1)
     assert e1 is not None                                   # row kept, never deleted
     assert e1["count"] == 0
-    assert e1.get("tombstoned_at")                          # the set-aside marker stamped
+    assert e1.get("tombstoned")                          # the set-aside marker stamped
     assert [p.get("turn_key") for p in e1["provenance"]] == []  # turn-A's line dropped
 
     # The NEW structure H2 carries the turn now: count 1, live, the reverse-index repointed.
     e2 = store.get(H2)
     assert e2["count"] == 1
-    assert not e2.get("tombstoned_at")
+    assert not e2.get("tombstoned")
     assert store._index.lookup("turn-A") == H2
 
     # SAME-uuid SAME-hash re-put → the guard never fires: H2 stays live, the index unchanged, and
     # the already-tombstoned H1 is untouched (no second decrement, no re-stamp).
-    stamp = e1["tombstoned_at"]
+    stamp = e1["tombstoned"]
     store.put(H2, '{"t":2}', "wing/s.jsonl", "vshaB", "turn-A")
     assert store._index.lookup("turn-A") == H2
-    assert not store.get(H2).get("tombstoned_at")
+    assert not store.get(H2).get("tombstoned")
     assert store.get(H1)["count"] == 0
-    assert store.get(H1).get("tombstoned_at") == stamp
+    assert store.get(H1).get("tombstoned") == stamp

@@ -345,7 +345,7 @@ class StructurePalaceStore:
             "provenance": provenance,
             # kapae set-aside marker (absent on a live entry); a tombstoned entry keeps its row
             # but its structure no longer counts toward recurrence.
-            **({"tombstoned_at": meta["lar_tombstoned"]} if meta.get("lar_tombstoned") else {}),
+            **({"tombstoned": meta["lar_tombstoned"]} if meta.get("lar_tombstoned") else {}),
         }
 
     def get(self, structural_hash: str) -> dict | None:
