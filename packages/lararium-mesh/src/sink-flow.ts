@@ -4,8 +4,10 @@
  * crucible floor deriving standing-vs-waived from the feed's own atemporal truth. A cymatic (signal-
  * boundary) candidate DETECTS and mints nothing; a receiver-boundary (purple) one mints at the closure.
  *
- * The DANGLING half — couplingBoundary → project → residual → birth — stays unwired: the residual-
- * projection organ awaits the streaming pass + the operator's rank-k cut and residual-feed rulings.
+ * The residual half — couplingBoundary → project → residual → birth — NOW rides `runBoundaryResidualFlow`
+ * below: a directed coupling builds the smooth boundary W*, each frame's residual off it feeds the sink,
+ * the ONE dial (ARL₀) calibrates Qα. Still deferred beneath it: the streaming/online pass (track/WRITE)
+ * and the operator's rank-k cut.
  *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
@@ -35,13 +37,17 @@ export function runSinkClassMint(
   events: readonly SinkEvent[],
   registry: MintRegistry,
   mintId: () => string,
-  opts: { sink?: SinkOptions; mint?: MintOptions } = {},
+  opts: { sink?: SinkOptions; mint?: MintOptions; dial?: ArlDial } = {},
 ): SinkFlowResult {
   const sink = makeSink(opts.sink);
   for (const e of events) sink.ingest(e);
   const verdict = sink.verdict();
   const klass = classifySink(sink.rhythmByPlane(), verdict.birth);
-  const minted = mintPurpleSink(verdict, klass, registry, mintId, opts.mint);
+  // The ONE dial reaches the non-boundary path too: its basinRadius governs the minter's dedup/grow query,
+  // so a pre-formed-event caller reads the SAME dedup grain as the residual flow (no half-wired dial). The
+  // α half does not apply here — this path ingests pre-calibrated events, running no Qα control limit.
+  const mintOpts = opts.dial ? { ...opts.mint, basinRadius: opts.dial.basinRadius } : opts.mint;
+  const minted = mintPurpleSink(verdict, klass, registry, mintId, mintOpts);
   return { verdict, klass, minted };
 }
 
@@ -101,6 +107,13 @@ export function runBoundaryResidualFlow(
   const signalScale = cnt > 0 ? Math.sqrt(sumSq / cnt) : 1;
   const noiseFloor = relativeFloor(1e-300, signalScale * signalScale, 1e-18);
   // The ONE dial: α feeds the null, basinRadius feeds the mint — one scalar, every threshold reads it.
+  // OPEN RULING (α vs α_node — Sprint-0 aftermath): controlLimit reads the PER-FRAME α (dial.alpha), so the
+  // cross-plane AND refracts the BIRTH-level rate to ≈ α^k — CONSERVATIVE against the dial's stated meaning
+  // ("one false SINK per N frames"). The dial exposes the birth-matched α_node = ARL₀^(−1/k) for the fix, but
+  // wiring it now would set the per-node gate by FIAT on an UNMEASURED assumption (independent planes). The
+  // planes correlate + the accretion barrier attenuates, so the TRUE birth rate sits between α^k and α — only
+  // the deferred shuffle-null can measure which field lands ARL₀. Until then: α (conservative), witnessed at
+  // the node level (arl-dial.test T3). Do NOT swap to α_node before the shuffle-null witnesses the birth rate.
   const alpha = opts.dial?.alpha ?? opts.alpha ?? 0.05;
   const qAlpha = controlLimit(refResiduals, alpha, noiseFloor);
   const sink = makeSink(opts.sink);
