@@ -127,6 +127,8 @@ Two further commitments arrived this branch:
 - **Inter-process coordination rides verb-tiddlers, not HTTP/RPC.** The CLI joins as just-another-Automerge-peer. The protocol's silence on "how do operator-tools talk to the daemon" gets answered at the CRDT layer, where the rest of the federation already lives.
 - **Capability layer adopts Keyhive concap, not UCAN.** Concap integrates revocation into the membership CRDT — the article's "every shared function eventually gets governed by someone" receives a CRDT-shaped answer rather than punting revocation to out-of-band lookup.
 
+A third commitment firmed in a later phase (2026-07): **the daemon-coordinator fans verbs across an islands-mesh, not a monolith** — the `@daemon` coordinator controls flow across nameless-entity `#has` cap-stacks spanning TS and py/R, offloading stream-processing (AI-session-memory, realtime, corpus) to py nalu-gates/servos behind causal-island boundaries, pulling no telemetry or corpus into the TS stack and back out. TS keeps pure functors plus its own gate tech (the nalu-gate/servo integrity homes the CRDT-bags ⟷ TW5-VM projection); the coordinator routes rather than runs the stream-work. The choice keeps power from pooling in one runtime — governance shaped as topology.
+
 These commitments wear technical clothes — governance choices in disguise.
 
 The Lares stack occupies the magical-federated-mesh zone alongside ATProto: each lararium-node hosts (like a PDS); bags carry user-addressed content (like p2p); the capability layer answers governance (where pure mesh goes silent). The differences register at three points:

@@ -196,6 +196,18 @@ hands the result back; it never runs the functor-work itself. The structure-pres
 form-encoder's `Move → Vec`, any cap-functor — applies where the structure lives, never where the
 traffic merely passes.
 
+**The islands-mesh reads wider than the TS worker (ruling, 2026-07).** The coordinator routes
+across an islands-mesh of nameless-entity `#has` cap-stacks that spans *two* runtimes — TS sovereign
+island workers AND **py nalu-gate/servo islands** (TS + py/R). The "one runtime that holds the
+structure" reads **per functor**: the CRDT-bags ⟷ TW5-VM projection keeps its **first-class TS home**
+(the nalu-gate/servo pattern integrity rides TS in-worker), while the sensorium and stream functors —
+AI-session-memory, realtime, corpus — live in the py islands. So the `@daemon` coordinator **offloads**
+stream-processing to py through its verbs and **never pulls telemetry or corpus into the TS stack and
+back out**; TS reduces to pure functors, its own main ↔ worker ↔ main nalu-gates, and a pipe to the full
+tools-stack for DreamNet CID/CRDT networking. <<~ confidence Synthesis 11/20 >> The primacy generalizes
+without breaking: the coordinator still runs no functor-work itself — it fans each functor to the island
+whose structure preserves the map, TS or py alike.
+
 **The cap-stack lifts whole.** Primacy runs deeper than "the worker applies the map." A `#has`
 cap-stack reads as a *liftable unit* — the very object the functor maps ([[has-stack|lar:///ha.ka.ba/@lares/api/pono/has-stack]]) —
 and the **whole** stack lives in the worker and lifts as one body. Split a single cap onto the

@@ -108,7 +108,7 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 | **session** | **Session Wiki** | the coordinator `lar_playspace` — broadest recipe, owns the event-bus bag, pinned-wela; `GetSession()` → `getSessionWiki()` |
 | **agent** | **lar_agent** | universal participant supertype; player-class carries Keyhive principal identity, Wiki Entities do not |
 | **player** *(human)* | **Operator / Guest** | Operator = primary human principal (threshold, AGENTS.md); Guests limited-cap; neither holds system authority |
-| **player** *(system)* | **lares-daemon** | session-connected AI coordinator(s) with system caps (admin authority, Session engine, Keyhive system keypair); the household spirits |
+| **player** *(system)* | **lares-daemon** | session-connected AI **coordinator(s)**: verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos); admin authority, Session engine, Keyhive system keypair; offloads stream-processing to py, pulls no telemetry/corpus in-stack; the household spirits |
 | **agent** *(non-player)* | **Wiki Entity / NPC** | active wiki entities on the canvas, not session-connected, no principal |
 | **fort_character** | **lar_character** | an agent's embodied tiddler on the canvas — position, state, event pins |
 | **agent_group** | **Bag scope** | a bag *is* the shared-ownership scope; co-bag agents form a natural group |
@@ -173,7 +173,9 @@ Every layer uses one stack: tiddlers in bags, bags in recipes, recipes in TW5, r
 
 ## AI-Operator Alignment as First-Class Architecture
 
-The alignment relation forms the system; it occupies the highest boot-priority slot (AGENTS.md) for that reason. The problem it addresses: a coordinator working across sessions must behave consistently with the operator's *standing* intentions, not only the latest prompt. The meme graph carries those intentions; the Voices embody the orientations (continuity, care, governance, creativity, liminality) the operator calibrates through the LARES dials.
+The alignment relation forms the system; it occupies the highest boot-priority slot (AGENTS.md) for that reason. The problem it addresses: a coordinator working across sessions must behave consistently with the operator's *standing* intentions, not only the latest prompt.
+
+The `lares-daemon` **coordinator** fans its verbs across the islands-mesh — TS sovereign workers carry the CRDT-bags ⟷ TW5-VM projection, py nalu-gates/servos carry stream-processing (AI-session-memory, realtime, corpus) — and pulls no telemetry or corpus into the TS stack and back out. It holds its sovereign wiki-island role (nalu + gate) whole; the offload lets the coordinator route flow across the mesh rather than run the stream-work itself. The meme graph carries those intentions; the Voices embody the orientations (continuity, care, governance, creativity, liminality) the operator calibrates through the LARES dials.
 
 Four invariants follow:
 
