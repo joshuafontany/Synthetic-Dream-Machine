@@ -127,6 +127,7 @@ export * from "./commit-dial.js";
 export * from "./purple-minter.js";
 export * from "./spectral-keel.js";
 export * from "./spectral-keel-cap.js";
+export * from "./null-harness.js";
 export * from "./numerics.js";
 export * from "./arl-dial.js";
 export * from "./subspace-track.js";
