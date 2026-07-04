@@ -58,13 +58,21 @@ describe("mintPurpleSink — the crucible-gated purple mint", () => {
     expect(mintPurpleSink(mkVerdict(), mkClass("none"), reg, counter())).toBeNull();
   });
 
-  test("metameric collapse — two logs in the same closure-cell mint the SAME pet-name", () => {
-    const reg = makeMintRegistry();
-    const id = counter();
-    const a = mintPurpleSink(mkVerdict({ planeSignals: [{ plane: "content", agreement: 0.82 }, { plane: "structure", agreement: 0.63 }] }), mkClass("receiver-boundary"), reg, id);
-    const b = mintPurpleSink(mkVerdict({ planeSignals: [{ plane: "content", agreement: 0.79 }, { plane: "structure", agreement: 0.58 }] }), mkClass("receiver-boundary"), reg, id);
-    // 0.82→cell 8, 0.79→cell 8 (quantum 0.1); 0.63→cell 6, 0.58→cell 6 — same closure key → one pet-name.
-    expect(a!.petName).toBe(b!.petName);
+  test("metameric collapse — two near closures fall in ONE basin (loose radius) but SPLIT (tight radius)", () => {
+    const near1 = mkVerdict({ planeSignals: [{ plane: "content", agreement: 0.82 }, { plane: "structure", agreement: 0.63 }] });
+    const near2 = mkVerdict({ planeSignals: [{ plane: "content", agreement: 0.79 }, { plane: "structure", agreement: 0.58 }] });
+    // the two closures sit ~0.058 apart — ONE nearest-basin query, no hard grid wall.
+    const loose = makeMintRegistry();
+    const lid = counter();
+    const a = mintPurpleSink(near1, mkClass("receiver-boundary"), loose, lid, { basinRadius: 0.1 });
+    const b = mintPurpleSink(near2, mkClass("receiver-boundary"), loose, lid, { basinRadius: 0.1 });
+    expect(a!.petName).toBe(b!.petName); // within radius → collapse to one basin
+
+    const tight = makeMintRegistry();
+    const tid = counter();
+    const c = mintPurpleSink(near1, mkClass("receiver-boundary"), tight, tid, { basinRadius: 0.01 });
+    const d = mintPurpleSink(near2, mkClass("receiver-boundary"), tight, tid, { basinRadius: 0.01 });
+    expect(c!.petName).not.toBe(d!.petName); // outside radius → two basins minted
   });
 
   test("the crucible floor holds a born-but-not-standing candidate PROPOSED (anti-rubber-stamp)", () => {

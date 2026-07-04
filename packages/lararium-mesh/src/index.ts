@@ -127,6 +127,7 @@ export * from "./commit-dial.js";
 export * from "./purple-minter.js";
 export * from "./directed-boundary.js";
 export * from "./numerics.js";
+export * from "./arl-dial.js";
 export * from "./boundary-residual.js";
 export * from "./sink-flow.js";
 export * from "./partition-monitor.js";

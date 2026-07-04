@@ -16,6 +16,7 @@ import { mintPurpleSink, type MintedSink, type MintRegistry, type MintOptions } 
 import { couplingBoundary, type BoundaryOpts, type BoundaryEigenbasis } from "./directed-boundary.js";
 import { projectBoundary, residualComponentEvents, controlLimit } from "./boundary-residual.js";
 import { relativeFloor } from "./numerics.js";
+import type { ArlDial } from "./arl-dial.js";
 import type { MeshCoupling } from "./mesh-coupling.js";
 
 export interface SinkFlowResult {
@@ -46,11 +47,12 @@ export function runSinkClassMint(
 
 export interface BoundaryResidualOpts {
   readonly boundary?: Omit<BoundaryOpts, "directed">;
-  /** The PER-NODE PER-FRAME false-surprise rate α (default 0.05) — NOT the system false-BIRTH rate. The
-   *  cross-plane AND (birth needs ≥2 nodes corroborate) refracts α to the conjunction ≈ α^k: at k=2,
-   *  0.05²≈0.0025 → ARL₀≈400, on Shewhart's 3σ; the accretion barrier (support≥r*) attenuates further, so
-   *  it needs NO extra FDR correction (double-correcting starves real sinks). The pono re-tune makes α
-   *  SELF-EMERGENT (the operator dials ARL₀ instead) via the shared shuffle-null sprint — see the SCRUM. */
+  /** The ONE operator dial (ARL₀ = "one false sink per N frames"). Its α feeds the null-calibration and
+   *  its basinRadius feeds the mint — one scalar, every threshold reads it. Overrides `alpha` when present. */
+  readonly dial?: ArlDial;
+  /** The PER-NODE PER-FRAME false-surprise rate α (default 0.05) — used only when no `dial` rides. NOT the
+   *  system false-BIRTH rate: the cross-plane AND refracts α to the conjunction ≈ α^k (at k=2, 0.05²≈0.0025
+   *  → ARL₀≈400, on Shewhart's 3σ), the accretion barrier attenuates further — NO extra FDR correction. */
   readonly alpha?: number;
   readonly sink?: SinkOptions;
   readonly mint?: MintOptions;
@@ -98,7 +100,9 @@ export function runBoundaryResidualFlow(
   }
   const signalScale = cnt > 0 ? Math.sqrt(sumSq / cnt) : 1;
   const noiseFloor = relativeFloor(1e-300, signalScale * signalScale, 1e-18);
-  const qAlpha = controlLimit(refResiduals, opts.alpha ?? 0.05, noiseFloor);
+  // The ONE dial: α feeds the null, basinRadius feeds the mint — one scalar, every threshold reads it.
+  const alpha = opts.dial?.alpha ?? opts.alpha ?? 0.05;
+  const qAlpha = controlLimit(refResiduals, alpha, noiseFloor);
   const sink = makeSink(opts.sink);
   for (const f of frames) {
     const proj = projectBoundary(f, boundary.Wstar, deflate);
@@ -106,6 +110,7 @@ export function runBoundaryResidualFlow(
   }
   const verdict = sink.verdict();
   const klass = classifySink(sink.rhythmByPlane(), verdict.birth);
-  const minted = mintPurpleSink(verdict, klass, registry, mintId, opts.mint);
+  const mintOpts = opts.dial ? { ...opts.mint, basinRadius: opts.dial.basinRadius } : opts.mint;
+  const minted = mintPurpleSink(verdict, klass, registry, mintId, mintOpts);
   return { verdict, klass, minted, boundary, qAlpha };
 }

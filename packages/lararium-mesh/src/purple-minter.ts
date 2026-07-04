@@ -31,21 +31,44 @@ export interface MintedSink {
 }
 
 export interface MintRegistry {
-  /** The pet-name already minted for this closure-key, or undefined. */
-  lookup(key: string): string | undefined;
-  /** Bind a closure-key to its pet-name (the metameric-collapse memory). */
-  record(key: string, petName: string): void;
+  /** The pet-name of the nearest stored basin WITHIN `radius` of this closure-vector, or undefined —
+   *  one nearest-basin query gates dedup (found) vs mint-fresh (none). Replaces the hard-walled grid cell
+   *  that false-split two near vectors across a boundary. */
+  nearest(vector: readonly number[], radius: number): string | undefined;
+  /** Bind a closure-vector to its pet-name (the metameric-basin memory). */
+  record(vector: readonly number[], petName: string): void;
 }
 
-/** A Map-backed mint registry — the metameric-collapse memory (closure-key → pet-name). */
+/** A basin-registry — the metameric-collapse memory as attractor basins (a closure-vector collapses to the
+ *  nearest basin within radius, else mints a fresh one). Linear scan (few sinks); an LSH/attractor index
+ *  rides a later pass. */
 export function makeMintRegistry(): MintRegistry {
-  const m = new Map<string, string>();
-  return { lookup: (k) => m.get(k), record: (k, p) => void m.set(k, p) };
+  const basins: { vector: number[]; petName: string }[] = [];
+  return {
+    nearest(vector, radius) {
+      let best: string | undefined;
+      let bestDist = radius;
+      for (const b of basins) {
+        let d = 0;
+        for (let i = 0; i < vector.length; i++) {
+          const dv = (vector[i] ?? 0) - (b.vector[i] ?? 0);
+          d += dv * dv;
+        }
+        d = Math.sqrt(d);
+        if (d <= bestDist) {
+          bestDist = d;
+          best = b.petName;
+        }
+      }
+      return best;
+    },
+    record: (vector, petName) => void basins.push({ vector: [...vector], petName }),
+  };
 }
 
 export interface MintOptions {
-  /** Agreement-cell size for the closure-vector quantization (the metameric grain). Default 0.1. */
-  readonly quantum?: number;
+  /** The basin radius — dedup-collapse within it, mint-fresh outside. Default 0.1 (the dial supplies it). */
+  readonly basinRadius?: number;
   /** The crucible floor the mint binds against (atemporal feeds waive standing). */
   readonly floor?: CommitFloor;
 }
@@ -65,7 +88,7 @@ export function mintPurpleSink(
 ): MintedSink | null {
   if (klass.sinkClass !== "receiver-boundary") return null; // cymatic/none get DETECTED, never minted
 
-  const quantum = opts.quantum ?? 0.1;
+  const basinRadius = opts.basinRadius ?? 0.1;
   // The floor reads the feed's OWN truth: an atemporal (corpus) sink waives standing (a corpus never
   // re-locks), so the designation carries the authority rather than trusting each caller to remember.
   const floor: CommitFloor = { ...opts.floor, requireStanding: opts.floor?.requireStanding ?? !verdict.atemporal };
@@ -74,20 +97,20 @@ export function mintPurpleSink(
     floor,
   );
 
-  // The metameric key: sort by plane NAME (never Map-insertion order — a false split), quantize each
-  // plane's agreement into a cell; many spectra land in one cell → one cone-activation, one pet-name.
+  // The closure-vector: sort by plane NAME (never Map-insertion order — a false split), take each plane's
+  // agreement. ONE nearest-basin query gates all three outcomes — collapse to a basin within radius (dedup),
+  // else mint a fresh one (birth); the grow-a-channel accretes to the found basin. No hard-walled grid.
   const sorted = [...verdict.planeSignals].sort((a, b) => a.plane.localeCompare(b.plane));
-  const cells = sorted.map((p) => Math.round(p.agreement / quantum));
-  const key = cells.join(",");
-  const existing = registry.lookup(key);
+  const closureVector = sorted.map((p) => p.agreement);
+  const existing = registry.nearest(closureVector, basinRadius);
   const petName = existing ?? mintId();
-  if (!existing) registry.record(key, petName);
+  if (!existing) registry.record(closureVector, petName);
 
   // GAP (KA-4, deferred): the caller-side reaction-graph bridging-edge stays UNBUILT — the ring closes as
   // returned data (`planes`), not yet as a Ki-graph node. Wire mint → reaction-graph in a follow-up.
   return {
     petName,
-    closureVector: cells.map((c) => c * quantum),
+    closureVector,
     planes: sorted.map((p) => p.plane),
     presentInNoPlane: true,
     commit,
