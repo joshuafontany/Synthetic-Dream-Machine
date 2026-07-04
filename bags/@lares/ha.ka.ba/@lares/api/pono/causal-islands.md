@@ -131,6 +131,31 @@ pretending to a global now reads as the managing failure
 
 <<~/ahu >>
 
+<<~ ahu #two-clocks >>
+
+## Two clocks, orthogonal — causal ⊥ rhythmic
+
+The mesh keeps time on **two clocks that never collapse into one**:
+
+- **CRDT-causal ordering** (TS, structural). Automerge `<counter, actorId>` OpId, `getHeads`/`headsEqual`,
+  ITC fork/join, and the authority-first sync order below carry it. This clock rules **happened-before** —
+  the causal poset the "no global now" gluing obstruction lives in
+  (`lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands#formal-model`). It stays TS-native,
+  web3-local-first, on this side of every causal-island boundary. **AUTHORITY(safety) rides here.**
+- **FFZ-recovered rhythm** (py/R, per-stream, across-the-shore). The chronometer gate recovers a cadence
+  (Pulse→Theme) from each stream and stamps freshness/decay grain — the reading a node carries "as of my
+  last sync." Full telemetry and metadata stamping runs **py-side, behind a causal-island boundary**
+  (Web3-only law: any py/R bridge sits behind the boundary; no py ontology enters the stack proper). This
+  clock annotates *rhythm*, never happened-before.
+
+The two ride **⊥**: FFZ names rhythmic position and alignment, never the causal order. An LWW rhythmic
+total-order MUST NOT drive a fork, merge, or revocation decision — that manufactures a global-now the mesh
+cannot hold. Liveness ratchets (the epoch-lease, non-renewal) and targeted revocation (Keyhive convergent
+membership-removal) name authority/liveness mechanisms, never clocks. Full rhythmic model:
+`lar:///ha.ka.ba/@lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research`.
+
+<<~/ahu >>
+
 <<~ ahu #schema >>
 
 ## Schema (machine-readable)

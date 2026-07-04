@@ -208,6 +208,24 @@ A later deep-domain research arc resolves several questions above. **The mesh ke
 - **Q8 (single point of failure):** confirmed — the notary model holds. FFZ records ticks; it never constitutes "the" time. Keeping FFZ *off* the causal and revocation decisions (those ride Automerge + Keyhive) is exactly what preserves non-simultaneous apprehension — no single clock rules.
 - **The Chapel Perilous note (a vs b):** answered empirically — reading **(a) holds**. The converged model (of which this chronometer is the rhythmic layer) proved a **real cross-domain pattern integrity**, corroborated by five *falsifiable* independent fields (soft-state networking, garbage-collection reachability-from-roots, Schmitt-trigger hysteresis, speciation, costly-signaling). RAW's counsel lands as: **weight the falsifiable engineering/biology rhymes; treat the metaphysics (process philosophy, Markov-blanket literalism) as vocabulary, never evidence.** Synthesis, not self-flattery.
 
+### Two-Clocks Reconciliation (2026-07-03) `~:confidence[S],[13]`
+
+The operator's ruling collapses the three-clocks framing above to **TWO clocks**. The
+epoch-counter never named a clock — it reads as a **liveness ratchet (lease)**; targeted
+revocation rides Keyhive convergent membership-removal, a mechanism. What remains: two
+orthogonal clocks.
+
+- **CRDT-causal ordering** (TS, structural) — Automerge OpId · `getHeads`/`drifted` · ITC
+  fork/join · the authority-first sync order. Carries happened-before authority; rules
+  fork/merge/revocation ordering. Stays web3-local-first, on this side of every boundary.
+- **FFZ-recovered rhythm** (py/R, per-stream, no-global-now) — a cadence recovered from
+  each stream, freshness/decay grain. **The FFZ chronometer gate lives py/R**, instanced
+  per-stream, across-the-shore; full telemetry + metadata stamping runs **py-side, behind
+  a causal-island boundary**.
+
+The two ride **⊥**: FFZ annotates rhythm, never causal order (this reaffirms Q8 above — the
+notary model). Canon anchor: `lar:///ha.ka.ba/@lares/api/pono/causal-islands#two-clocks`.
+
 ## 3. Prior Art to Investigate
 
 ### Distributed Systems (confirmed relevant)

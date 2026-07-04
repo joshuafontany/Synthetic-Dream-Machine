@@ -66,6 +66,23 @@ A four-domain validation (`lar:///ha.ka.ba/@lararium/api/causal-island-pattern`)
 
 The master cut rides ABOVE the gluing: **AUTHORITY(safety) ⊥ FLOW(liveness)** — flow may glue probabilistically and eventually; authority never (safety cannot be earned from local sections alone; Ashby's requisite-variety floor — a global-variety invariant must be *attenuated* to a local one or *amplified* by modelling peers, never locally faked).
 
+### The two clocks ~ causal ⊥ rhythmic (2026-07-03)
+
+The master cut sorts a second pair beneath it: the mesh keeps time on **two orthogonal clocks**, never one.
+
+- **The CRDT-causal clock** (TS, structural) carries the happened-before poset — Automerge `<counter,
+  actorId>` OpId, `getHeads`/`drifted`, ITC fork/join, the authority-first sync order below. It alone rules
+  fork-detection, merge, and revocation ordering; AUTHORITY/safety cannot glue from local sections alone,
+  so this clock stays TS-native and web3-local-first.
+- **The FFZ-recovered rhythm clock** (py/R, per-stream, no-global-now) rides alongside as *rhythmic
+  annotation* — a cadence recovered from each stream, freshness/decay grain stamped py-side behind the
+  causal-island boundary. FFZ reads RHYTHMIC, never causal: its LWW total-order MUST NOT drive an authority
+  decision.
+
+Liveness (the epoch-lease, non-renewal) and targeted revocation (Keyhive convergent membership-removal)
+name authority/liveness mechanisms, not clocks. Full model:
+`lar:///ha.ka.ba/@lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research`.
+
 ## Law
 
 A node-to-node pranala connection marks a causal island.

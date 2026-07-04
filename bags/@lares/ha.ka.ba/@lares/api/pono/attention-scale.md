@@ -188,7 +188,11 @@ bands map directly.
 ```
 
 When the exploration clock's ₄ (Theme/Week) ticks, it also ticks the World-Time
-clock's ₀ (Pulse/Week) — the two clocks share the Week boundary.
+clock's ₀ (Pulse/Week) — the two clocks share the Week boundary. Both clocks name
+**FFZ-rhythm profiles** (py/R plane, behind the causal-island boundary); their shared
+Week boundary couples rhythm to rhythm, never a causal-order merge. The CRDT-causal
+clock (TS-structural: Automerge OpId / heads / ITC) rides ⊥ and carries happened-before
+authority alone (see lar:///ha.ka.ba/@lares/api/pono/causal-islands#two-clocks).
 
 ### World-Time Clock (diegetic campaign calendar)
 

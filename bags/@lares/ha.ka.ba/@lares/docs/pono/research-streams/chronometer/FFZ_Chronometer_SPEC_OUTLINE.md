@@ -157,6 +157,17 @@ A later deep-domain research arc — the DreamNet convergence over revocation ·
 
 This finding lifts the document's *foundation* toward Synthesis. The conversation-chronometer placeholders below (HUD, ITC stamps, exchange wrapping) remain open spec-authoring — they were already rhythmic-correct and need no correction, only completion.
 
+## Two-Clocks Reconciliation (2026-07-03) `~:confidence[S],[13]`
+
+The operator's ruling collapses the framing above to **TWO clocks**, never three or four — the earlier table listed mechanisms alongside clocks and blurred the count. The mesh keeps time on two orthogonal clocks:
+
+| Clock | Substrate | Home | Job |
+|---|---|---|---|
+| **CRDT-causal ordering** | TS, structural | web3-local-first, this side of every boundary | happened-before authority — Automerge OpId · `getHeads`/`drifted` · ITC fork/join · the authority-first sync order · fork/merge/revocation ordering |
+| **FFZ-recovered rhythm** | py/R, per-stream | **py-side, behind a causal-island boundary** | rhythmic decay/freshness GRAIN — a cadence recovered from each stream; full telemetry + metadata stamping runs py-side |
+
+**The FFZ chronometer gate lives py/R** — instanced per-stream, across-the-shore, no-global-now. The epoch-counter reads as a **liveness ratchet (lease), never a clock**; targeted revocation rides Keyhive convergent membership-removal (a mechanism, not a clock). The two clocks ride **⊥**: FFZ annotates rhythm and MUST NOT drive a causal or revocation decision. This preserves the retirement already stamped above — FFZ never ruled a universal causal order. Structural ⊥ rhythmic: `lar:///ha.ka.ba/@lares/api/pono/causal-islands#two-clocks`.
+
 ---
 
 # SPECIFICATION OUTLINE — Placeholder Structure

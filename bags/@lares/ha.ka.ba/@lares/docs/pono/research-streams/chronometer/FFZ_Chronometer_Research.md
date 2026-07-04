@@ -1153,6 +1153,33 @@ Phase 1 (Architectural Draft).
 
 ---
 
+### 11.7 Two-Clocks Reconciliation — the py/R home (2026-07-03) `~:confidence[S],[13]`
+
+**Operator ruling.** The four-layer composite CRDT above (§11.6) describes the
+chronometer's *internal* data model — all of it rhythmic-side annotation. Above it,
+the whole stack keeps time on **exactly two clocks**, orthogonal:
+
+1. **CRDT-causal ordering** — TS, structural. Automerge `<counter, actorId>` OpId,
+   `getHeads`/`drifted`, ITC fork/join, and the authority-first sync order. This clock
+   carries happened-before authority and rules fork-detection, merge, and revocation
+   ordering. It stays web3-local-first, on this side of every causal-island boundary.
+2. **FFZ-recovered rhythm** — py/R, per-stream, no-global-now. The whole FFZ Chronometer
+   (ITC-event-grain + phase register + stance + confidence) reads as the RHYTHM clock:
+   a cadence recovered from each stream, freshness/decay grain stamped as "as of last
+   sync." **The FFZ chronometer gate lives py/R** — instanced per-stream, across-the-shore;
+   full telemetry and metadata stamping runs **py-side, behind a causal-island boundary**
+   (Web3-only law: py/R sits behind the boundary; no py ontology enters the stack proper).
+
+The two ride **⊥**: FFZ annotates rhythm, never happened-before, and MUST NOT drive a
+causal or revocation decision — that would manufacture a global-now the mesh cannot hold.
+This extends the three-clocks finding (SPEC_OUTLINE grounded findings): the earlier framing
+counted mechanisms as clocks. The **epoch-counter reads as a liveness ratchet (lease), not
+a clock**; **targeted revocation rides Keyhive convergent membership-removal**, a mechanism
+rather than a clock. Two clocks stand: CRDT-causal (TS) ⊥ FFZ-rhythm (py/R). Canon anchor:
+`lar:///ha.ka.ba/@lares/api/pono/causal-islands#two-clocks`.
+
+---
+
 ## 12. Register Promotions — Session 3
 
 Per operator directive ("let's bump those Provisional ratings"):
