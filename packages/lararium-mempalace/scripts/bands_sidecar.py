@@ -686,6 +686,23 @@ def stability_gate(matrix: np.ndarray, order: list[int], n_boot: int = 40,
     return {"cut_support": support, "grade_of_cut": grade, "consensus": consensus, "method": method}
 
 
+def chunk_grades(order: list[int], grade_of_cut: dict, n: int) -> dict:
+    """Each chunk inherits the WEAKEST grade of its BOUNDING cuts — the nearest cut at-or-left
+    (its segment opener) AND the nearest cut to its right (its closer), never the whole prefix.
+    So a reproduced late region reads reproduced even after an earlier fragile cut. A missing
+    (un-witnessed) bounding cut defaults FRAGILE — fail-CLOSED, the gate's own vow + fail-safe
+    defaults (an un-witnessed boundary NEVER reads reproduced). An un-CUT chunk (order empty →
+    no bounding cut at all) reads reproduced: no boundary claim to distrust."""
+    cuts = [int(c) for c in order]
+    grade: dict = {}
+    for i in range(n):
+        left = max((c for c in cuts if c <= i), default=None)
+        right = min((c for c in cuts if c > i), default=None)
+        bounding = [grade_of_cut.get(c, "fragile") for c in (left, right) if c is not None]
+        grade[i] = "fragile" if any(r == "fragile" for r in bounding) else "reproduced"
+    return grade
+
+
 def wavelet_threshold_floor(mra: dict) -> float:
     """The per-band noise floor via universal (VisuShrink) wavelet thresholding on the
     finest detail: `σ·√(2·ln n)`, σ = MAD(D1)/0.6745. Below this the finest band reads pure
@@ -1295,7 +1312,7 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
         over content(+form+structure)) — so distribution SHIFTS in the embedding sequence
         yield clean nested cuts, not the sparse drift-spike train.
     Flow: SPINE (MODWT) → AUTO-TUNE (variance elbow → scale count) → SERVO (EWT/ridge nudge)
-    → TREE (divisive cuts) → allocate cuts across the 5 bands → GATE (resampling register) →
+    → TREE (divisive cuts) → allocate cuts across the 5 bands → GATE (resampling grade) →
     per-band BOCPD hazards → the FFZ cells. Returns the full verdict dict (JSON-legal)."""
     M = np.asarray(tree_matrix, dtype=float)
     if M.ndim == 1:
@@ -1322,13 +1339,11 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
         var = float(energy[j]) if j < len(energy) else 1.0
         hazard = max(4.0, 1.0 / (var + _EPS) ** 0.5)  # low-variance (coarse) → long expected segment
         bocpd[band_name] = bocpd_changepoints(band_sig, hazard)
-    # Per-chunk repro-grade: a chunk inherits the WEAKEST grade of the cuts bounding its
-    # coarsest changed band (a chunk under only fragile cuts reads fragile).
-    grade_of_cut = gate["grade_of_cut"]
-    chunk_grade = {}
-    for i in range(n):
-        bounding = [grade_of_cut.get(int(c), "reproduced") for c in order if int(c) <= i]
-        chunk_grade[i] = "fragile" if any(r == "fragile" for r in bounding) else "reproduced"
+    # Per-chunk repro-grade via chunk_grades: each chunk inherits the WEAKEST grade of its
+    # BOUNDING cuts (nearest ≤ i, nearest > i), NOT the whole prefix — so a reproduced late
+    # region reads reproduced even after an earlier fragile cut, and an un-witnessed cut fails
+    # CLOSED (fragile). QA-fix (absorb→bound + fail-open→fail-closed).
+    chunk_grade = chunk_grades(order, gate["grade_of_cut"], n)
     cells = ffz_cells(order, band_counts, n, grades=chunk_grade)
     return {
         "n": n,
@@ -1342,8 +1357,8 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
         "slaving": slaving_leg(mra),
         "tree": {"engine": tree["engine"], "n_cuts": len(order), "order": order, "band_counts": band_counts},
         "gate": {"consensus": gate["consensus"], "cut_support": gate["cut_support"], "method": gate_method,
-                 "reproduced_cuts": sum(1 for r in grade_of_cut.values() if r == "reproduced"),
-                 "fragile_cuts": sum(1 for r in grade_of_cut.values() if r == "fragile")},
+                 "reproduced_cuts": sum(1 for r in gate["grade_of_cut"].values() if r == "reproduced"),
+                 "fragile_cuts": sum(1 for r in gate["grade_of_cut"].values() if r == "fragile")},
         "bocpd": bocpd,
         "noise_floor": wavelet_threshold_floor(mra),
         "cells": cells,

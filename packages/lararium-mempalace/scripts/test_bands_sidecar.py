@@ -160,6 +160,19 @@ def test_stability_gate_locks_stable_holds_noise():
     )
 
 
+def test_chunk_grade_bounds_not_absorbs_and_fails_closed():
+    # QA control (fails on the pre-fix code): the chunk grade BOUNDS, and un-witnessed fails CLOSED.
+    # (a-1) a REPRODUCED-late region reads reproduced even AFTER a fragile-early cut (not absorbed).
+    g = bs.chunk_grades([3, 10], {3: "fragile", 10: "reproduced"}, 20)
+    assert g[15] == "reproduced"                              # bounded by reproduced-10, NOT poisoned by cut 3
+    assert g[5] == "fragile"                                  # sits between fragile-3 and reproduced-10
+    assert all(g[i] == "reproduced" for i in (11, 18, 19))    # the whole late segment reads clean
+    # (a-2) an UN-WITNESSED cut (empty gate, n<8) fails CLOSED → fragile, never reproduced.
+    assert set(bs.chunk_grades([3], {}, 7).values()) == {"fragile"}
+    # an UN-CUT corpus (order empty) → reproduced: no boundary claim to distrust.
+    assert set(bs.chunk_grades([], {}, 10).values()) == {"reproduced"}
+
+
 def test_jackknife_gate_runs_index_shift_aware():
     """The jackknife method (leave-a-block-out, index-shift-aware) also witnesses the true
     block boundaries (a distinct resampling engine, same verdict shape)."""
