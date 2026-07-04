@@ -7,6 +7,8 @@ persistence + load + append + the neighbor read.
         packages/lararium-mempalace/scripts/test_persistence_io.py -q
 """
 
+import pytest
+
 import persistence_io as pio
 
 
@@ -68,3 +70,21 @@ def test_neighbors_returns_nearest_vectors_for_the_gate(tmp_path):
     pop = s.neighbors([0.0, 0.0], 3)["population"]
     assert len(pop) == 3            # the k nearest existing vectors
     assert all(len(v) == 2 for v in pop)
+
+
+def test_default_store_identity_floor_off_accepts_any_width(tmp_path):
+    # DEFAULT (no expected_dim): the floor is OFF — testimony stays caller-trusting, any width lands.
+    s = _store(tmp_path)
+    s.put("t-a", "innovation", [0.1, 0.2, 0.3, 0.4], "vessel-A", "f0", {})  # 4-wide, no raise
+    assert len(s.get("t-a")["assertion"]) == 4
+
+
+def test_expected_dim_floor_rejects_mismatch_and_none(tmp_path):
+    # opt IN the embedder-identity floor: a dim swap fails loud BEFORE it corrupts standing.
+    s = pio.PersistenceStore(str(tmp_path / ".persist_guarded"), expected_dim=3)
+    s.put("t-1", "innovation", [0.1, 0.2, 0.3], "vessel-A", "f0", {})       # right dim → lands
+    assert len(s.get("t-1")["assertion"]) == 3                              # (chroma stores float32; check width)
+    with pytest.raises(ValueError):                                          # wrong dim → embedder-identity floor
+        s.put("t-2", "innovation", [0.1, 0.2], "vessel-A", "f0", {})
+    with pytest.raises(ValueError):                                          # None assertion → clean domain error (not len(None))
+        s.put("t-3", "innovation", None, "vessel-A", "f0", {})

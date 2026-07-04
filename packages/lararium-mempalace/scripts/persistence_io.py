@@ -77,9 +77,14 @@ class PersistenceStore:
     RMW witness-append + a nearest-neighbor read for the TS admit gate. DUMB by design — no
     standing, no admission decision (both live in the TS keel)."""
 
-    def __init__(self, palace_path: str) -> None:
+    def __init__(self, palace_path: str, expected_dim: "int | None" = None) -> None:
         # create-or-open; identity check skipped (we never run the embedder — the assertion IS
         # the vector). get_collection os.makedirs the dir, so this IS `init` for a fresh palace.
+        # `expected_dim` opts IN the embedder-identity floor: a caller pins the assertion width so a
+        # model swap that changes the dim FAILS LOUD before it corrupts standing with vectors from an
+        # incomparable space (the model-tag half of identity rides the caller/coordinator). Unset →
+        # no guard (the testimony floor stays caller-trusting, as today).
+        self._expected_dim = expected_dim
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
 
     def _get_raw(self, tid: str) -> "dict | None":
@@ -122,6 +127,10 @@ class PersistenceStore:
         # Idempotent on the id: a re-put of the same tid overwrites (the caller owns the id, a
         # content-hash or a uuid). The witness-log is NOT reset on re-put — an existing record's
         # log is preserved (put carries content+provenance; witness carries edges).
+        if self._expected_dim is not None and (not isinstance(assertion, (list, tuple)) or len(assertion) != self._expected_dim):
+            got = len(assertion) if isinstance(assertion, (list, tuple)) else 0  # guard len(None) → a clean domain error
+            raise ValueError(f"persistence put {tid}: assertion dim {got} != expected {self._expected_dim} "
+                             "(embedder-identity floor — a model swap that changes the dim must fail loud before it corrupts standing)")
         existing = self._get_raw(tid)
         witnesses_json = existing["metadata"].get("lar_witnesses") if existing else None
         meta = {
@@ -188,13 +197,14 @@ def _build_ops(store: PersistenceStore) -> dict:
     }
 
 
-def _serve(palace_path: str) -> None:
+def _serve(palace_path: str, expected_dim: "int | None" = None) -> None:
     # Compose: the serve root acquires the per-palace singleton BEFORE build_dispatch opens the
-    # ChromaDB collection (the reap-don't-pile invariant, OS-enforced).
+    # ChromaDB collection (the reap-don't-pile invariant, OS-enforced). expected_dim (unset =
+    # off) arms the embedder-identity floor for a caller that pins the assertion width.
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(PersistenceStore(palace_path))),
+        build_dispatch=lambda: make_dispatch(_build_ops(PersistenceStore(palace_path, expected_dim=expected_dim))),
         idle_ttl=_idle_ttl_seconds(),
         singleton_msg="persistence_io: another holder already serves this palace; exiting (singleton)\n",
     )
@@ -205,7 +215,9 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("serve", help="persistent NDJSON RPC holder for one PersistencePalace dir")
     s.add_argument("--palace", required=True)
-    s.set_defaults(fn=lambda a: _serve(a.palace))
+    s.add_argument("--expected-dim", type=int, default=None,
+                   help="pin the assertion vector width; a dim mismatch fails loud (embedder-identity floor; unset = off)")
+    s.set_defaults(fn=lambda a: _serve(a.palace, expected_dim=a.expected_dim))
     args = ap.parse_args()
     args.fn(args)
 
