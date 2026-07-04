@@ -71,6 +71,29 @@ describe("subspace-track — CLAIM B: the frozen anchor stays high, the tracker 
   });
 });
 
+describe("subspace-track — the bounded-arc guard (a gross frame never hijacks the basis)", () => {
+  test("a gross outlier rotates the subspace by ≤ step·π/2 — arctan saturates, no over-rotation", () => {
+    const step = 0.5;
+    const tracker = makeTracker(b0.Wstar, b0.trivialColumns, { step });
+    const before = tracker.basis();
+    // A gross frame: an in-span component + a HUGE orthogonal spike (‖r‖ ≫ ‖w‖). The old product angle
+    // θ=step·‖r‖·‖w‖ would wrap through many half-turns; arctan(‖r‖/‖w‖)→π/2 caps the turn at step·π/2.
+    const gross = w0.map((v, i) => v * 1.0 + (i === 1 ? 1e6 : 0));
+    tracker.track(gross);
+    const moved = subspaceDistance(before, tracker.basis());
+    expect(Number.isFinite(moved)).toBe(true); // no NaN blowup
+    expect(moved).toBeLessThanOrEqual(step * (Math.PI / 2) + 1e-6); // bounded arc — the outlier cannot flip U
+  });
+
+  test("one moderate outlier moves the subspace less than a full flip (basin survives a single shock)", () => {
+    const tracker = makeTracker(b0.Wstar, b0.trivialColumns, { step: 0.5 });
+    const shock = w1.map((v) => v * 8); // a big frame from the OTHER regime — a shock, not the new steady state
+    tracker.track(shock);
+    // A single shock nudges toward S₁ but does NOT snap the basis onto it — entrainment stays gradual.
+    expect(subspaceDistance(tracker.basis(), b1.Wstar)).toBeGreaterThan(0.2);
+  });
+});
+
 describe("subspace-track — streaming parity (recovers the batch subspace)", () => {
   test("from a tilted init, a stationary in-span feed converges the tracker toward the batch Wstar", () => {
     // Init tilted well off Wstar₀ (but not orthogonal — GROUSE needs overlap to gain traction).

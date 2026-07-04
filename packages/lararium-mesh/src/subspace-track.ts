@@ -11,8 +11,9 @@
  * Wstar/trivialColumns) — it imports nothing from directed-boundary or boundary-residual, so the deferred M4
  * collapse renames those without touching this source (the strangler repoints one witness import, never this
  * file). Runtime hand-rolled (no proven JS GROUSE exists; the kernel runs a few vector ops): GROUSE rank-1
- * ascent toward the innovation direction + Gram-Schmidt re-orthonormalize — Balzano, Nowak & Recht 2010
- * (arXiv:1006.4046); Oja 1982 (Hebbian PCA ascent). principalAngles rides the existing jacobiEigen — Björck &
+ * geodesic step (a per-frame rotation BOUNDED by the arc θ = step·arctan(‖r‖/‖w‖) ≤ step·π/2) toward the
+ * innovation + Gram-Schmidt re-orthonormalize — Balzano, Nowak & Recht 2010 (arXiv:1006.4046); Oja 1982
+ * (Hebbian PCA ascent). principalAngles rides the existing jacobiEigen — Björck &
  * Golub 1973 ("Numerical methods for computing angles between linear subspaces"). The persistence+corroboration
  * fold-rate gate and the exact β(ARL₀) horizon defer to the null-calibration sprint; R1 folds plain (fixed
  * step) to prove convergence, not to feed the sink.
@@ -115,15 +116,30 @@ export function makeTracker(U0: Mat, D: Mat = [], opts: TrackerOpts = {}): Track
       let nullEnergy = 0;
       for (const v of r) nullEnergy += v * v;
 
-      // Fold AFTER the read: GROUSE rank-1 ascent (ΔU = step·r·wᵀ/‖w‖²) toward the innovation, then
-      // re-orthonormalize. ‖w‖² guards the normalizer against a NaN on a zero-coordinate frame (numerical
-      // clamp, never the fold-rate — the persistence+corroboration rate-gate defers to the null-calib sprint).
+      // Fold AFTER the read: GROUSE geodesic rank-1 step (Balzano, Nowak & Recht 2010). Rotate U along the
+      // Grassmannian geodesic toward the innovation by a step-fraction of the angle-to-full-fit
+      // θ = step·arctan(‖r‖/‖w‖), then re-orthonormalize. arctan SATURATES at π/2, so the per-frame rotation
+      // stays BOUNDED by step·π/2 no matter how gross the frame — a single outlier turns the subspace by a
+      // bounded arc, where both the old linear kick (ΔU ∝ ‖r‖, unbounded) and the vanilla product angle
+      // (θ ∝ ‖r‖·‖w‖, unbounded → wraps and flips) over-rotate. ‖w‖²,‖r‖² guard against a NaN on a
+      // zero-coordinate / zero-residual frame (numerical clamp, never the fold-rate — the
+      // persistence+corroboration rate-gate defers to the null-calib sprint). ‖p‖ = ‖w‖ holds for
+      // orthonormal U (an isometry), so p̂ = p/‖w‖.
       let wNorm2 = 0;
       for (const v of w) wNorm2 += v * v;
       if (wNorm2 > 1e-12 && nullEnergy > 1e-24) {
+        const wNorm = Math.sqrt(wNorm2);
+        const rNorm = Math.sqrt(nullEnergy);
+        const theta = step * Math.atan2(rNorm, wNorm); // arctan(‖r‖/‖w‖) — bounded in [0, step·π/2)
+        const cosm1 = Math.cos(theta) - 1;
+        const sinT = Math.sin(theta);
         for (let c = 0; c < k; c++) {
-          const gain = (step * (w[c] ?? 0)) / wNorm2;
-          for (let rr = 0; rr < n; rr++) U[rr]![c] = (U[rr]?.[c] ?? 0) + gain * (r[rr] ?? 0);
+          const wUnit = (w[c] ?? 0) / wNorm; // (w/‖w‖)_c
+          for (let rr = 0; rr < n; rr++) {
+            // ΔU = [ (cosθ−1)·p̂ + sinθ·r̂ ] (w/‖w‖)ᵀ — the geodesic move, bounded by the arc.
+            const dir = cosm1 * ((p[rr] ?? 0) / wNorm) + sinT * ((r[rr] ?? 0) / rNorm);
+            U[rr]![c] = (U[rr]?.[c] ?? 0) + dir * wUnit;
+          }
         }
         gramSchmidtColumns(U, n, k);
       }
