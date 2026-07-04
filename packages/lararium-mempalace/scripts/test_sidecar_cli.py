@@ -72,7 +72,9 @@ def test_kg_io_add_then_kapae_round_trip(tmp_path):
     assert json.loads(add.stdout)["added"] == 1
 
     kapae = _run(
-        ["kg_io.py", "--palace", str(palace), "kapae", "--turn-key", "t1"], home=tmp_path
+        # --ended carries a logical close-mark (a frontier/tick) — the clock-purity hardening requires
+        # it, since valid_to rides the bitemporal worldline and must never fall back to a host clock.
+        ["kg_io.py", "--palace", str(palace), "kapae", "--turn-key", "t1", "--ended", "5"], home=tmp_path
     )
     assert kapae.returncode == 0, kapae.stderr
     res = json.loads(kapae.stdout)

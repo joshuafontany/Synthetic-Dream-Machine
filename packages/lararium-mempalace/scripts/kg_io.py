@@ -21,7 +21,7 @@ way drawer_io.py calls the collection. We never edit mempalace/.
                           each — closes a triple's valid_to by S/P/O (the handback close).
                           SINK-idempotent: close-of-already-closed no-ops (only a row
                           with an OPEN valid_to closes; the count reports real closes).
-  kapae --turn-key K [--ended T]
+  kapae --turn-key K --ended T   (--ended = a logical close-mark; required, clock-purity)
                        <- close valid_to on EVERY still-open triple keyed to turn K
                           (append-only UPDATE; bitemporal valid-close, history preserved).
 
