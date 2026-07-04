@@ -71,8 +71,10 @@ export function projectBoundary(signal: readonly number[], Wstar: Mat, deflate: 
  * Per-node control limit Qα_p — the (1−α) EMPIRICAL quantile of the reference per-node residual-energy
  * r_p² (no distributional assumption; robust). A residual at Qα reads agreement 0.5, above → 1. Per-node
  * (not whole-SPE) so a contribution names WHICH node carries the anomaly — feeding the cross-plane
- * nucleation directly. (A parametric Box g·χ² limit rides as a later refinement; the shuffle-null of Qα
- * shares the deferred γ / rigidity-threshold null-calibration sprint.)
+ * nucleation directly. The empirical quantile needs N ≳ 1/α reference frames to seat (α=0.05 → ≥20, ~100
+ * for a stable read); below that, a GPD peaks-over-threshold tail-fit extrapolates Qα rather than reading
+ * the sample max (the parametric refinement — with the Box g·χ² limit — the shuffle-null of Qα shares the
+ * deferred γ / rigidity-threshold null-calibration sprint, where α turns self-emergent from a target ARL₀).
  */
 export function controlLimit(refResiduals: Mat, alpha = 0.05, floor = 1e-12): number[] {
   const frames = refResiduals.length;

@@ -46,7 +46,11 @@ export function runSinkClassMint(
 
 export interface BoundaryResidualOpts {
   readonly boundary?: Omit<BoundaryOpts, "directed">;
-  /** The Qα control-limit false-positive level — the ONE operator dial (default 0.05, tunable). */
+  /** The PER-NODE PER-FRAME false-surprise rate α (default 0.05) — NOT the system false-BIRTH rate. The
+   *  cross-plane AND (birth needs ≥2 nodes corroborate) refracts α to the conjunction ≈ α^k: at k=2,
+   *  0.05²≈0.0025 → ARL₀≈400, on Shewhart's 3σ; the accretion barrier (support≥r*) attenuates further, so
+   *  it needs NO extra FDR correction (double-correcting starves real sinks). The pono re-tune makes α
+   *  SELF-EMERGENT (the operator dials ARL₀ instead) via the shared shuffle-null sprint — see the SCRUM. */
   readonly alpha?: number;
   readonly sink?: SinkOptions;
   readonly mint?: MintOptions;
