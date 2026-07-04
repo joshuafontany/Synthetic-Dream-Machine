@@ -126,6 +126,7 @@ export * from "./sink-class.js";
 export * from "./commit-dial.js";
 export * from "./purple-minter.js";
 export * from "./spectral-keel.js";
+export * from "./spectral-keel-cap.js";
 export * from "./numerics.js";
 export * from "./arl-dial.js";
 export * from "./subspace-track.js";
