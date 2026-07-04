@@ -104,6 +104,25 @@ class ContentStore:
         mine_busy_retry(lambda: self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[meta]))
         return {"cid": cid}
 
+    def patch_metadata(self, cid: str, patch: dict) -> dict:
+        """Partial metadata write — MERGE `patch` onto the drawer's existing metadata via chroma-native
+        col.update, which preserves the document AND the embedding (no re-embed, no vector clobber). For
+        evolving standing/decay/register on a stored drawer without a whole-record re-put. A get+put RMW
+        would drop the vector (get returns no embedding); this stays vector-safe. Returns {ok:false} for
+        an absent cid — a patch names an EXISTING drawer, it never creates one."""
+        raw = self._get_raw(cid)
+        if raw is None:
+            return {"ok": False, "cid": cid}
+        merged = {**raw["metadata"], **(patch or {})}
+        # A guarded (session-memory) store must not let a patch leave a required key missing/empty —
+        # merge cannot drop a key, but it can overwrite one with a falsy value (same ward as put).
+        if self._required_keys:
+            missing = sorted(k for k in self._required_keys if not str(merged.get(k, "")).strip())
+            if missing:
+                raise ValueError(f"content patch_metadata {cid}: patch would leave required keys missing/empty {missing}")
+        mine_busy_retry(lambda: self._col.update(ids=[cid], metadatas=[merged]))
+        return {"ok": True, "cid": cid}
+
     def search(self, embedding: list, k: int = 8, where: "dict | None" = None) -> dict:
         try:
             n = self._col.count()
@@ -203,6 +222,7 @@ def _build_ops(store: ContentStore) -> dict:
     return {
         "ping": lambda req: {"ready": True},
         "put": lambda req: store.put(req["cid"], req.get("text", ""), req["embedding"], req.get("metadata", {})),
+        "patch_metadata": lambda req: store.patch_metadata(req["cid"], req.get("patch", {})),
         "get": lambda req: store.get(req["cid"]),
         "search": lambda req: store.search(req["embedding"], int(req.get("k", 8)), req.get("where")),
         "scan": lambda req: store.scan(int(req.get("offset", 0)), int(req.get("limit", 256))),

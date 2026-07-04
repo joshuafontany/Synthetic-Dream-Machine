@@ -90,6 +90,35 @@ def test_put_is_idempotent_on_cid(tmp_path):
     assert s.get("c-1")["document"] == "second"
 
 
+def test_patch_metadata_merges_and_preserves_vector(tmp_path):
+    # the partial write: merge patch onto existing metadata, preserving document AND embedding.
+    s = _store(tmp_path)
+    s.put("c-1", "the text", [0.5, 0.6], {"wing": "w1", "standing": "data"})
+    r = s.patch_metadata("c-1", {"standing": "meme", "note": "bumped"})
+    assert r == {"ok": True, "cid": "c-1"}
+    got = s.get("c-1")
+    assert got["document"] == "the text"          # document preserved (no re-put)
+    assert got["metadata"]["standing"] == "meme"  # overwritten
+    assert got["metadata"]["wing"] == "w1"        # untouched key survives the merge
+    assert got["metadata"]["note"] == "bumped"    # new key added
+    assert s.search([0.5, 0.6], 1)["matches"][0]["cid"] == "c-1"  # the vector survived (still findable)
+
+
+def test_patch_metadata_absent_cid_is_ok_false(tmp_path):
+    # a patch names an EXISTING drawer; an absent cid is an honest no-op, never a create.
+    assert _store(tmp_path).patch_metadata("nope", {"x": 1}) == {"ok": False, "cid": "nope"}
+
+
+def test_patch_metadata_guarded_rejects_emptying_a_required_key(tmp_path):
+    # on a session-memory store, a patch must not leave a required key missing/empty.
+    s = cio.ContentStore(str(tmp_path / ".patch_guarded"), required_keys={"wing", "room"}, expected_dim=2)
+    s.put("c-1", "t", [0.1, 0.2], {"wing": "w", "room": "r"})
+    with pytest.raises(ValueError):
+        s.patch_metadata("c-1", {"room": ""})     # emptying a required key → refuse
+    s.patch_metadata("c-1", {"room": "r2"})       # a valid patch lands
+    assert s.get("c-1")["metadata"]["room"] == "r2"
+
+
 def test_search_empty_is_empty(tmp_path):
     assert _store(tmp_path).search([1.0, 2.0], 8) == {"matches": []}
 
