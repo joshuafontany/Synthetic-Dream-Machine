@@ -5,11 +5,31 @@ tmp palace dir (the venv has chroma). Non-memory targeted content, uniform with 
         packages/lararium-mempalace/scripts/test_content_io.py -q
 """
 
+import pytest
+
 import content_io as cio
 
 
 def _store(tmp_path):
     return cio.ContentStore(str(tmp_path / ".content_test"))
+
+
+def test_generic_store_accepts_arbitrary_metadata(tmp_path):
+    # the DEFAULT store is GENERIC (arbitrary corpora) — neither opt-in guard fires.
+    s = _store(tmp_path)
+    s.put("c-1", "anything", [0.1, 0.2, 0.3], {"whatever": "shape"})  # no raise
+    assert s.get("c-1")["metadata"]["whatever"] == "shape"
+
+
+def test_session_memory_store_enforces_schema_and_dim(tmp_path):
+    # the SESSION-MEMORY palace opts IN: required mempalace-schema keys + a pinned embedder dim.
+    s = cio.ContentStore(str(tmp_path / ".sess"), required_keys={"wing", "room"}, expected_dim=3)
+    s.put("t-1", "turn one", [0.1, 0.2, 0.3], {"wing": "w1", "room": "r1", "source_file": "s"})  # full schema, right dim
+    assert s.get("t-1")["metadata"]["wing"] == "w1"
+    with pytest.raises(ValueError):                                      # off-schema (no room) → fail loud
+        s.put("t-2", "turn two", [0.1, 0.2, 0.3], {"wing": "w1"})
+    with pytest.raises(ValueError):                                      # wrong dim → embedder-identity floor
+        s.put("t-3", "turn three", [0.1, 0.2], {"wing": "w1", "room": "r1"})
 
 
 def test_put_then_get_roundtrips(tmp_path):

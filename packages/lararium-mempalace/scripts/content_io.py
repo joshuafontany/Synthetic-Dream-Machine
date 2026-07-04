@@ -54,7 +54,16 @@ class ContentStore:
     caller-supplied embedding) + get by cid + nearest-neighbor search. Caller-vector
     (skip-identity — the embedder never runs here); the ingest pipeline supplies the vector."""
 
-    def __init__(self, palace_path: str) -> None:
+    def __init__(self, palace_path: str, required_keys: "set[str] | None" = None,
+                 expected_dim: "int | None" = None) -> None:
+        # GENERIC by default (arbitrary corpora — no schema, no dim guard). The SESSION-MEMORY
+        # palace opts IN: `required_keys` names the mempalace-schema metadata a drawer MUST carry
+        # (wing/room/source_file/chunk_index/lar_*); `expected_dim` pins the embedder's vector width
+        # so a model swap that changes the dim FAILS LOUD on the wire (the physically-unusable case —
+        # the embedder-identity floor; the model-tag half rides the caller/coordinator). Neither
+        # fires when unset, so generic corpora are untouched.
+        self._required_keys = required_keys or set()
+        self._expected_dim = expected_dim
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
 
     def _get_raw(self, cid: str) -> "dict | None":
@@ -73,10 +82,22 @@ class ContentStore:
         return {"cid": raw["cid"], "document": raw["document"] or "", "metadata": raw["metadata"]}
 
     def put(self, cid: str, text: str, embedding: list, metadata: dict) -> dict:
+        meta = metadata or {}
+        # Opt-in session-memory guards (NO-OP for generic corpora — both unset). A missing schema
+        # key or a dim-mismatch RAISES, so the serve dispatch replies {ok:false,error} — fail LOUD,
+        # never a silent off-schema or wrong-embedder write (the ack-after-proof law: a non-land
+        # crosses as an error line, so the caller's watermark never advances on it).
+        if self._required_keys:
+            missing = self._required_keys - set(meta.keys())
+            if missing:
+                raise ValueError(f"content put {cid}: missing required schema keys {sorted(missing)}")
+        if self._expected_dim is not None and len(embedding) != self._expected_dim:
+            raise ValueError(f"content put {cid}: embedding dim {len(embedding)} != expected {self._expected_dim} "
+                             "(embedder-identity floor — a model swap that changes the dim must fail loud)")
         # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
         # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
         # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.
-        mine_busy_retry(lambda: self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[metadata or {}]))
+        mine_busy_retry(lambda: self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[meta]))
         return {"cid": cid}
 
     def search(self, embedding: list, k: int = 8, where: "dict | None" = None) -> dict:
