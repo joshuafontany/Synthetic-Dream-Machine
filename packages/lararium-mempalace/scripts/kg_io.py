@@ -34,7 +34,6 @@ import argparse
 import json
 import os
 import sqlite3
-from datetime import date
 
 from mempalace.config import sanitize_iso_temporal
 from mempalace.knowledge_graph import KnowledgeGraph, DEFAULT_KG_PATH
@@ -196,21 +195,21 @@ def cmd_invalidate(args):
     print(json.dumps({"invalidated": n, "already_closed": already_closed}))
 
 
-def _unreliable_witness_date() -> str:
-    """A host-wall-clock DATE — an UNRELIABLE WITNESS under no-global-now (island clocks skew); a
-    LAST-RESORT fallback only. valid_to is bitemporal (as_of-consumed), so for correctness the caller
-    SHOULD supply `ended` (worldline discipline: defaults applied by the caller/seam, never fabricated
-    here); this stamps a provenance-only close-date when the caller omits one, never an authoritative one."""
-    return date.today().isoformat()
-
-
 def cmd_kapae(args):
     # Rewind a turn = close (never drop) every edge that turn minted. We filter by the
     # turn-DAG key in source_drawer_id and set valid_to on the still-open rows only —
     # append-only, idempotent (a re-run closes nothing new). A direct UPDATE on the KG's
     # own sqlite file (WAL: concurrent with the daemon's handle); the public invalidate()
     # filters only by S/P/O, so it cannot retract a whole turn — this can.
-    ended = args.ended or _unreliable_witness_date()
+    # valid_to is BITEMPORAL (worldline-critical, as_of-consumed): the close-mark stays PURE — the
+    # caller MUST supply a logical `ended` (a frontier/tick), NEVER a host-clock fallback (no-global-now:
+    # an unreliable-witness date would silently corrupt the bitemporal stream). Fail loud if absent.
+    ended = args.ended
+    if not ended:
+        raise SystemExit(
+            "kg kapae: --ended (a logical close-mark) is required — valid_to is bitemporal/worldline-critical "
+            "and MUST NOT fall back to an unreliable host clock (no-global-now). Supply the turn's close frontier."
+        )
     path = _kg_path(args.palace)
     KnowledgeGraph(db_path=path)  # ensure the schema exists before we touch the file
     conn = sqlite3.connect(path)
