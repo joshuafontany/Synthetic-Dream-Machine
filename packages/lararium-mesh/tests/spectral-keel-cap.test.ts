@@ -7,7 +7,7 @@
 import { describe, expect, test } from "vitest";
 
 import { composeVessel } from "../src/cap-compose.js";
-import { spectralKeelCap, captureIslandCap, SPECTRAL_KEEL_CAP, type ReadFacet, type WriteFacet } from "../src/spectral-keel-cap.js";
+import { spectralKeelCap, captureIslandCap, reAnchorCap, SPECTRAL_KEEL_CAP, type ReadFacet, type WriteFacet, type KeelFacet } from "../src/spectral-keel-cap.js";
 import type { MeshCoupling } from "../src/mesh-coupling.js";
 
 const jitter = (s: number): number => {
@@ -56,5 +56,32 @@ describe("spectral-keel-cap — the READ/WRITE capability line (blind by composi
       if (t >= 90) { frozenTail += frozen; trackedTail += tracked; tail++; }
     }
     expect(trackedTail / tail).toBeLessThan(frozenTail / tail); // the write-face entrained; the read-face did not
+  });
+
+  test("re-anchor grants freeze; freeze re-mints a successor anchored at the tracked subspace", async () => {
+    const v = await composeVessel([spectralKeelCap(S0, { k: 1 }), captureIslandCap(), reAnchorCap()]);
+    const facet = v.get<KeelFacet>(SPECTRAL_KEEL_CAP)!;
+    expect(typeof facet.track).toBe("function");
+    expect(typeof facet.freeze).toBe("function"); // re-anchor granted the freeze verb
+
+    const w1 = [-0.5, 0.5, -0.5, 0.5]; // an S₁-flavoured direction; drift the tracker toward it
+    const frame = (t: number): number[] => w1.map((v, i) => v + 0.04 * jitter(t * 7 + i * 13));
+    for (let t = 0; t < 120; t++) facet.track!(frame(t));
+
+    const successor = facet.freeze!(); // re-anchor at the tracked subspace (the new "normal")
+    const probe = frame(999);
+    // The successor reads the new regime at LOW residual; the ORIGINAL anchor still reads it HIGH (Π₀ immutable).
+    expect(successor.project(probe).spe).toBeLessThan(facet.project(probe).spe);
+  });
+
+  test("orthogonal grants: capture-island → track without freeze; no cap → neither (tier separation)", async () => {
+    const readOnly = await composeVessel([spectralKeelCap(S0, { k: 1 })]);
+    const rf = readOnly.get<KeelFacet>(SPECTRAL_KEEL_CAP)!;
+    expect(rf.track).toBeUndefined();
+    expect(rf.freeze).toBeUndefined();
+    const writeOnly = await composeVessel([spectralKeelCap(S0, { k: 1 }), captureIslandCap()]);
+    const wf = writeOnly.get<KeelFacet>(SPECTRAL_KEEL_CAP)!;
+    expect(typeof wf.track).toBe("function");
+    expect(wf.freeze).toBeUndefined(); // write does NOT grant re-anchor — the tiers separate
   });
 });

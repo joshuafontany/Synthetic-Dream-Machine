@@ -23,6 +23,19 @@ import type { MeshCoupling } from "./mesh-coupling.js";
 export const SPECTRAL_KEEL_CAP = "spectral-keel";
 /** The write-authority marker — its PRESENCE in the stack grants `track`. */
 export const CAPTURE_ISLAND_CAP = "capture-island";
+/** The re-anchor authority marker — its PRESENCE grants `freeze` (redefine the baseline). Orthogonal to
+ *  capture-island: re-anchor separates the authority to RE-FOUND the reference from the authority to USE it
+ *  (Redell/Miller caretaker + POLA + crucible-before-binding — freeze erases the Claim-B baseline). */
+export const RE_ANCHOR_CAP = "re-anchor";
+
+/** The composed keel facet — `project` always; `track` present iff the capture-island cap composed; `freeze`
+ *  present iff the re-anchor cap composed. An orthogonal method-union (KA's ruling), so a capless island's
+ *  reference simply lacks the withheld methods — blind by composition, never a call-time flag. */
+export interface KeelFacet {
+  project(frame: readonly number[]): Projection;
+  track?(frame: readonly number[]): Reading;
+  freeze?(): KeelFacet;
+}
 
 /** The READ facet — `project` only. A capless island holds this; it carries no `.track` to call. */
 export interface ReadFacet {
@@ -50,20 +63,36 @@ export function writeFacet(keel: SpectralKeel): WriteFacet {
  * branch (NOT a call-time authority check) draws the capability line — Miller's "choose the facet at grant
  * time"; a capless island's reference has no `.track` method at all.
  */
-export function spectralKeelCap(coupling: MeshCoupling, opts: KeelOpts = {}): CapModule<ReadFacet> {
+export function spectralKeelCap(coupling: MeshCoupling, opts: KeelOpts = {}): CapModule<KeelFacet> {
   return {
     id: SPECTRAL_KEEL_CAP,
-    optional: [CAPTURE_ISLAND_CAP],
+    optional: [CAPTURE_ISLAND_CAP, RE_ANCHOR_CAP],
     build: (resolve) => {
-      const keel = buildSpectralKeel(coupling, opts); // MINT — parenthood, once
-      const canWrite = resolve(CAPTURE_ISLAND_CAP) !== undefined; // compose-time grant read, once
-      return canWrite ? writeFacet(keel) : readFacet(keel);
+      // Read the grants at COMPOSE time, once (never a call-time authority check).
+      const canWrite = resolve(CAPTURE_ISLAND_CAP) !== undefined;
+      const canAnchor = resolve(RE_ANCHOR_CAP) !== undefined;
+      // wrap attenuates the keel to its granted method-union; freeze re-wraps the successor with the SAME
+      // grants (the successor stays same-tier, and no raw keel handle ever leaks through the facet).
+      const wrap = (keel: SpectralKeel): KeelFacet => {
+        const facet: KeelFacet = { project: (f) => keel.project(f) };
+        if (canWrite) facet.track = (f) => keel.track(f);
+        if (canAnchor) facet.freeze = () => wrap(keel.freeze());
+        return facet;
+      };
+      return wrap(buildSpectralKeel(coupling, opts)); // MINT once — the full handle never leaves this frame
     },
   };
 }
 
 /** The write-authority marker cap — its PRESENCE grants `track`. An island whose stack omits it composes a
- *  readFacet with no `.track` reachable (blind by structure, never a runtime flag). */
+ *  facet with no `.track` reachable (blind by structure, never a runtime flag). */
 export function captureIslandCap(): CapModule<Record<string, never>> {
   return { id: CAPTURE_ISLAND_CAP, build: () => ({}) };
+}
+
+/** The re-anchor authority marker cap — its PRESENCE grants `freeze`. Orthogonal to capture-island: an island
+ *  may hold re-anchor without capture-island (freeze re-anchors at the un-drifted W*), or both. The most-
+ *  privileged grant — it redefines "normal", so it never rides a routine write grant by default. */
+export function reAnchorCap(): CapModule<Record<string, never>> {
+  return { id: RE_ANCHOR_CAP, build: () => ({}) };
 }

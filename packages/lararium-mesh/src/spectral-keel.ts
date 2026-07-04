@@ -379,24 +379,40 @@ export interface SpectralKeel {
    *  after-read; self-emergence under drift). Mutates ONLY U_t — the frozen anchor stays put. The WRITE
    *  face; the ocap writeFacet gates it (spectral-keel-cap). */
   track(frame: readonly number[]): Reading;
+  /** freeze() → re-mint a SUCCESSOR keel whose frozen anchor = the CURRENT tracked subspace U_t (the new
+   *  "normal"), warm-starting the successor's tracker U₀←U_t. This keel's own Π₀ stays byte-immutable — a
+   *  caller comparing regimes across a re-anchor holds both handles distinct. The MOST-privileged verb (it
+   *  redefines the Claim-B baseline); the ocap anchorFacet gates it. */
+  freeze(): SpectralKeel;
 }
 
-/**
- * Build a spectral keel from a coupling: diagonalize the self-adjoint boundary operator ONCE (the powerbox),
- * freeze the anchor subspace W* (Π₀ read via project's matvec), and bind BOTH verbs — the frozen `project`
- * (READ) and the live `track` (WRITE, an internal GROUSE tracker seeded U₀=W*). The full handle carries both;
- * the ocap facets attenuate (readFacet{project} ⊂ writeFacet{+track}), so a capless island holds a reference
- * with no `.track`. `freeze` re-anchor + the anchorFacet ride the next sprint. The involution orientation
- * rides `select` (default smooth = the Laplacian bottom-k boundary).
- */
-export function buildSpectralKeel(coupling: MeshCoupling, opts: KeelOpts = {}): SpectralKeel {
-  const boundary = boundaryEigenbasis(coupling.te, { ...opts, directed: opts.directed ?? true });
-  // The tracker seeds U₀ from the frozen anchor W* and drifts its OWN copy — disjoint from Π₀, so track
-  // never perturbs project's frozen read (the two-subspace contrast the Claim-B witness rests on).
+/** Bind a keel's verbs over a frozen boundary — the shared core of buildSpectralKeel and freeze's re-mint.
+ *  The tracker seeds U₀ from the frozen anchor W* and drifts its OWN copy — disjoint from Π₀, so track never
+ *  perturbs project's frozen read (the two-subspace contrast the Claim-B witness rests on). */
+function keelFromBoundary(boundary: BoundaryEigenbasis, opts: KeelOpts): SpectralKeel {
   const tracker = makeTracker(boundary.Wstar, boundary.trivialColumns, opts.step !== undefined ? { step: opts.step } : {});
   return {
     boundary,
     project: (frame) => projectBoundary(frame, boundary.Wstar, boundary.trivialColumns),
     track: (frame) => tracker.track(frame),
+    freeze: () => {
+      // Re-anchor at the current tracked subspace — the successor's project reads against the entrained U_t.
+      const anchored = tracker.basis(); // row-major n×k, the new "normal"
+      const k = anchored[0]?.length ?? boundary.k;
+      return keelFromBoundary({ ...boundary, Wstar: anchored, k }, opts);
+    },
   };
+}
+
+/**
+ * Build a spectral keel from a coupling: diagonalize the self-adjoint boundary operator ONCE (the powerbox),
+ * freeze the anchor subspace W* (Π₀ read via project's matvec), and bind the three verbs — the frozen
+ * `project` (READ), the live `track` (WRITE, an internal GROUSE tracker seeded U₀=W*), and `freeze`
+ * (re-anchor, re-mints a successor from the tracked U_t). The full handle carries all three; the ocap facets
+ * attenuate (readFacet{project} ⊂ writeFacet{+track} ⊂ anchorFacet{+freeze}), so a capless island holds a
+ * reference with no `.track`/`.freeze`. The involution orientation rides `select` (default smooth = the
+ * Laplacian bottom-k boundary).
+ */
+export function buildSpectralKeel(coupling: MeshCoupling, opts: KeelOpts = {}): SpectralKeel {
+  return keelFromBoundary(boundaryEigenbasis(coupling.te, { ...opts, directed: opts.directed ?? true }), opts);
 }
