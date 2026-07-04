@@ -6,7 +6,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { surrogateNull, iidShuffle, lag1Autocorr, makeRng } from "../src/null-harness.js";
+import { surrogateNull, iidShuffle, lag1Autocorr, makeRng, phaseScramble, timeReversalAsymmetry } from "../src/null-harness.js";
 
 describe("null-harness — the self-emergent threshold (surrogate = equilibrium, signal = NESS)", () => {
   test("a structured (autocorrelated) series EXCEEDS its iid-shuffle equilibrium null", () => {
@@ -32,5 +32,29 @@ describe("null-harness — the self-emergent threshold (surrogate = equilibrium,
     const b = surrogateNull(s, lag1Autocorr, iidShuffle, { trials: 200, seed: 3 });
     expect(a.threshold).toBe(b.threshold); // same seed → same null → same emergent threshold
     expect(Number.isFinite(a.threshold)).toBe(true);
+  });
+});
+
+describe("null-harness — the phase-scramble null (nonlinear lock vs linear-Gaussian spectral artifact)", () => {
+  const absAsym = (s: readonly number[]): number => Math.abs(timeReversalAsymmetry(s));
+
+  test("a sawtooth (nonlinear, time-asymmetric) EXCEEDS its phase-scramble null", () => {
+    const sawtooth = Array.from({ length: 120 }, (_, t) => (t % 12) / 12); // slow rise, sharp drop
+    const v = surrogateNull(sawtooth, absAsym, phaseScramble, { trials: 200, alpha: 0.05, seed: 5 });
+    expect(v.exceeds).toBe(true); // real irreversible lock — beats the spectrum-matched surrogate
+    expect(v.pValue).toBeLessThan(0.05);
+  });
+
+  test("a sine (linear, time-symmetric) sits WITHIN its phase-scramble null (a spectral artifact, no lock)", () => {
+    const sine = Array.from({ length: 120 }, (_, t) => Math.sin(t / 5));
+    const v = surrogateNull(sine, absAsym, phaseScramble, { trials: 200, alpha: 0.05, seed: 5 });
+    expect(v.exceeds).toBe(false); // time-symmetric — the surrogate reproduces it, no nonlinear structure
+  });
+
+  test("the surrogate PRESERVES the power spectrum (linear autocorrelation held, only phase destroyed)", () => {
+    const saw = Array.from({ length: 96 }, (_, t) => (t % 8) / 8);
+    const surr = phaseScramble(saw, makeRng(9));
+    // autocorrelation = inverse-FT of the power spectrum → invariant under phase-scramble.
+    expect(Math.abs(lag1Autocorr(surr) - lag1Autocorr(saw))).toBeLessThan(0.05);
   });
 });

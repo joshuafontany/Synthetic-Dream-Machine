@@ -104,3 +104,76 @@ export function lag1Autocorr(series: readonly number[]): number {
   }
   return den > 0 ? num / den : 0;
 }
+
+// ── the phase-scramble (Fourier) surrogate: preserve the POWER SPECTRUM, destroy the PHASE — the rigidity
+//    null for "a real nonlinear/deterministic lock vs a linear-Gaussian spectral artifact" (Theiler et al.
+//    1992, the FT surrogate). Small-n DFT (O(n²), fine at mesh scale; no proven JS FFT needed per the
+//    tool-scout). Preserving the power spectrum preserves the linear autocorrelation, so ONLY a departure
+//    beyond the linear-Gaussian equilibrium (a nonlinear lock) exceeds this null. ──
+
+function dft(x: readonly number[]): { re: number[]; im: number[] } {
+  const n = x.length;
+  const re = new Array<number>(n).fill(0);
+  const im = new Array<number>(n).fill(0);
+  for (let k = 0; k < n; k++) {
+    for (let t = 0; t < n; t++) {
+      const ang = (-2 * Math.PI * k * t) / n;
+      re[k]! += x[t]! * Math.cos(ang);
+      im[k]! += x[t]! * Math.sin(ang);
+    }
+  }
+  return { re, im };
+}
+
+function idftReal(re: readonly number[], im: readonly number[]): number[] {
+  const n = re.length;
+  const out = new Array<number>(n).fill(0);
+  for (let t = 0; t < n; t++) {
+    let s = 0;
+    for (let k = 0; k < n; k++) {
+      const ang = (2 * Math.PI * k * t) / n;
+      s += re[k]! * Math.cos(ang) - im[k]! * Math.sin(ang);
+    }
+    out[t] = s / n;
+  }
+  return out;
+}
+
+/** Phase-scramble (Fourier) surrogate — keep each frequency's MAGNITUDE, randomize its PHASE under conjugate
+ *  symmetry (so the inverse stays real). Preserves the power spectrum (hence the linear autocorrelation) and
+ *  destroys only the phase structure: the equilibrium null for a nonlinear/deterministic lock (Theiler 1992). */
+export function phaseScramble(series: readonly number[], rng: () => number): number[] {
+  const n = series.length;
+  const { re, im } = dft(series);
+  const mag = re.map((r, k) => Math.hypot(r, im[k]!));
+  const phase = new Array<number>(n).fill(0);
+  const half = Math.floor(n / 2);
+  for (let k = 1; k <= half; k++) {
+    const p = (rng() * 2 - 1) * Math.PI;
+    phase[k] = p;
+    if (k < n - k) phase[n - k] = -p; // conjugate symmetry → a real surrogate
+  }
+  if (n % 2 === 0) phase[half] = 0; // the Nyquist bin stays real
+  const re2 = mag.map((m, k) => m * Math.cos(phase[k]!));
+  const im2 = mag.map((m, k) => m * Math.sin(phase[k]!));
+  return idftReal(re2, im2);
+}
+
+/** Time-reversal asymmetry — the normalized third moment of increments, ⟨(xₜ−xₜ₋₁)³⟩/⟨(xₜ−xₜ₋₁)²⟩^{3/2}. ≈0
+ *  for a time-symmetric linear-Gaussian process; large for a nonlinear/irreversible lock (a relaxation cycle,
+ *  a sawtooth). The discriminator the phase-scramble null calibrates against (Schreiber & Schmitz 1997) — a
+ *  real deterministic lock beats its spectrum-matched surrogate here, a spectral artifact does not. */
+export function timeReversalAsymmetry(series: readonly number[]): number {
+  const n = series.length;
+  if (n < 2) return 0;
+  let m3 = 0;
+  let m2 = 0;
+  for (let t = 1; t < n; t++) {
+    const d = series[t]! - series[t - 1]!;
+    m3 += d * d * d;
+    m2 += d * d;
+  }
+  const c = n - 1;
+  const var2 = m2 / c;
+  return var2 > 0 ? m3 / c / Math.pow(var2, 1.5) : 0;
+}
