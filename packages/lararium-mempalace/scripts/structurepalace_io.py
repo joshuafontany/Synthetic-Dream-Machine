@@ -290,7 +290,7 @@ def _unreliable_witness_timestamp() -> str:
     """A host-wall-clock reading — an UNRELIABLE WITNESS under no-global-now: island clocks skew, so
     this value NEVER compares across islands and NEVER orders anything. Provenance only (a rough "this
     node saw it around here"); the logical/FFZ clock — once it lands py-side — is the ordering authority.
-    Named to strip the false-clock authority, not to fabricate a shared now (two-clocks: this is neither
+    Named to strip the false-clock authority, not to fabricate a global-now (two-clocks: this is neither
     the CRDT-causal clock nor the FFZ rhythm)."""
     import datetime
 
