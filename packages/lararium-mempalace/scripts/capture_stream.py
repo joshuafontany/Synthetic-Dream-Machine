@@ -18,7 +18,7 @@ from the still-durable source. The `capture_drain` ledger orders the landing wit
 the exactly-once audit. The ~37x under-delivery dissolves: a pass processes the FULL source, never a
 stalled hot-pool.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/capture-stream (the composable pipeline; content_io is the land-cap).
+Meme: lar:///ha.ka.ba/@lararium/sensorium/capture-stream (the composable pipeline; content_io serves as the land-cap).
 """
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ from capture_drain import DrainLedger
 
 
 class ContentStoreLandCap:
-    """The land-cap over content_io's ContentStore: is_landed = the cid is already a durable row;
+    """The land-cap over content_io's ContentStore: is_landed = the cid already holds a durable row;
     land = the caller-vector put (the store's schema/dim guards ride its constructor). Content-safe
     barrier = the sqlite commit; the HNSW index is derived (rebuild-on-divergence), off the ack path."""
 

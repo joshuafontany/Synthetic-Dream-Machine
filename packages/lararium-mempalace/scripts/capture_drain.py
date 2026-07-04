@@ -3,7 +3,7 @@
 THE LAW (one line, four systems — Kafka offsets · transactional outbox · WAL checkpoint · Flink
 barriers): the watermark advances FROM the store's confirmed commit, NEVER from stage/accept. A turn
 stays pending until the store returns commit; only then may the watermark step past it. This one
-inversion (advance-AFTER, not advance-before) is the cure for the capture leak.
+inversion (advance-AFTER, not advance-before) CURES the capture leak.
 
 ACCEPT != LAND (Raft matchIndex/commitIndex): staged (accept) and committed (land) hold SEPARATE
 write-sites — stage() touches only staged, commit() only committed — so the watermark cannot advance
