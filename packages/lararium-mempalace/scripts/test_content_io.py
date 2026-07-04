@@ -50,6 +50,25 @@ def test_session_memory_store_enforces_embedder_model(tmp_path):
         s.put("t-3", "three", [0.1, 0.2, 0.3], {})
 
 
+def test_append_only_is_the_immutable_ground(tmp_path):
+    # the Memory sensorium (W1.1): a committed atom's text can't be overwritten (an edit rides kapae),
+    # but an idempotent same-text re-put passes (the re-derivation crash-cure).
+    s = cio.ContentStore(str(tmp_path / ".memory"), append_only=True)
+    s.put("c-1", "the verbatim turn", [0.1, 0.2], {"wing": "w"})
+    s.put("c-1", "the verbatim turn", [0.1, 0.2], {"wing": "w2"})   # SAME text → idempotent re-put OK
+    assert s.get("c-1")["document"] == "the verbatim turn"
+    with pytest.raises(ValueError):                                 # DIFFERENT text → immutable-ground refuses
+        s.put("c-1", "an edited turn", [0.3, 0.4], {"wing": "w"})
+
+
+def test_mutable_store_allows_overwrite_the_dream_default(tmp_path):
+    # the Dream sensorium / generic default (append_only off): an overwrite is allowed (mutable schema).
+    s = _store(tmp_path)
+    s.put("c-1", "first", [0.1, 0.2], {})
+    s.put("c-1", "second", [0.3, 0.4], {})   # overwrite OK
+    assert s.get("c-1")["document"] == "second"
+
+
 def test_generic_store_ignores_embedder_model(tmp_path):
     # no expected_model → generic corpora write with any/no model tag (the guard is opt-in).
     s = _store(tmp_path)

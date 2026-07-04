@@ -55,7 +55,8 @@ class ContentStore:
     (skip-identity — the embedder never runs here); the ingest pipeline supplies the vector."""
 
     def __init__(self, palace_path: str, required_keys: "set[str] | None" = None,
-                 expected_dim: "int | None" = None, expected_model: "str | None" = None) -> None:
+                 expected_dim: "int | None" = None, expected_model: "str | None" = None,
+                 append_only: bool = False) -> None:
         # GENERIC by default (arbitrary corpora — no schema, no identity guard). The SESSION-MEMORY
         # palace opts IN: `required_keys` names the mempalace-schema metadata a drawer MUST carry
         # (wing/room/source_file/chunk_index/lar_*). The EMBEDDER-IDENTITY FLOOR has two halves, both
@@ -67,6 +68,11 @@ class ContentStore:
         self._required_keys = required_keys or set()
         self._expected_dim = expected_dim
         self._expected_model = expected_model
+        # append_only = the IMMUTABLE-GROUND policy (the Memory sensorium: verbatim/eidetic). A put on
+        # an existing cid whose text DIFFERS is refused — a committed atom is never overwritten; an edit
+        # rides kapae/worldline (a muted fork-branch), never a silent re-put. An idempotent same-text
+        # re-put still passes (the re-derivation crash-cure). The Dream sensorium leaves this off (mutable).
+        self._append_only = append_only
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
 
     def _get_raw(self, cid: str) -> "dict | None":
@@ -108,6 +114,13 @@ class ContentStore:
             if got_model != self._expected_model:
                 raise ValueError(f"content put {cid}: embedder model {got_model!r} != expected {self._expected_model!r} "
                                  "(embedder-identity floor — a same-dim different-model swap corrupts recall silently)")
+        if self._append_only:
+            # the immutable-ground guard: a committed atom's text is never overwritten (an edit rides
+            # kapae, not a re-put). An identical re-put passes (idempotent re-derivation crash-cure).
+            existing = self._get_raw(cid)
+            if existing is not None and (existing.get("document") or "") != text:
+                raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
+                                 "atom's text cannot be overwritten; an edit rides kapae/worldline, never a re-put")
         # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
         # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
         # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.
@@ -241,14 +254,14 @@ def _build_ops(store: ContentStore) -> dict:
 
 
 def _serve(palace_path: str, required_keys: "set[str] | None" = None, expected_dim: "int | None" = None,
-           expected_model: "str | None" = None) -> None:
+           expected_model: "str | None" = None, append_only: bool = False) -> None:
     # The guards ride optional kwargs into the store built inside the dispatch closure — so
     # run_sidecar is untouched, and the session-memory contract reaches the RPC face (the QA #1
     # fix: the coordinator's resolveMemoryContentSpawn passes the flags; a generic corpus omits them).
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim, expected_model=expected_model))),
+        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim, expected_model=expected_model, append_only=append_only))),
         idle_ttl=_idle_ttl_seconds(),
         singleton_msg="content_io: another holder already serves this palace; exiting (singleton)\n",
     )
@@ -265,13 +278,16 @@ def main() -> None:
                    help="pin the embedder vector width; a dim mismatch fails loud (session-memory opt-in; unset = generic)")
     s.add_argument("--expected-model", default=None,
                    help="pin the embedder MODEL name (checked vs each drawer's lar_embedder_model); a same-dim different-model swap fails loud (session-memory opt-in; unset = off)")
+    s.add_argument("--append-only", action="store_true",
+                   help="immutable-ground policy (the Memory sensorium): a committed atom's text cannot be overwritten (an edit rides kapae); idempotent same-text re-put still passes")
     s.set_defaults(fn=lambda a: _serve(
         a.palace,
         # `if k` is load-bearing: an empty/absent --require-keys yields None (generic), never {""}
         # (which would fire the guard on every put and reject all generic corpora).
         required_keys=({k for k in a.require_keys.split(",") if k} or None),
         expected_dim=a.expected_dim,
-        expected_model=a.expected_model))
+        expected_model=a.expected_model,
+        append_only=a.append_only))
     args = ap.parse_args()
     args.fn(args)
 
