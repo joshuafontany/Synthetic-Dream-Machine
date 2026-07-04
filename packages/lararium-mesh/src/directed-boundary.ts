@@ -15,6 +15,7 @@
  */
 
 import { jacobiEigen } from "./ffz-project.js";
+import { relativeFloor } from "./numerics.js";
 import type { MeshCoupling } from "./mesh-coupling.js";
 
 type Mat = readonly (readonly number[])[];
@@ -141,8 +142,15 @@ export interface BoundaryEigenbasis {
   readonly k: number;
   /** Indices of the deflated trivial (λ ≤ λTol) modes — the Perron/DC baseline, projected out before W*. */
   readonly trivialModes: number[];
+  /** The trivial eigenvector COLUMNS (n×trivialModes.length) — pass straight to projectBoundary's `deflate`
+   *  so a caller never hand-slices the DC baseline (or forgets it → a flooded residual). */
+  readonly trivialColumns: number[][];
   /** The eigengap the adaptive cut landed on (telemetry; 0 on a fixed-k or degenerate cut). */
   readonly eigengap: number;
+  /** relGap = eigengap / non-trivial span — how DECISIVE the cut read (a small relGap = a noise-floor pick). */
+  readonly relGap: number;
+  /** gapRatio = the chosen gap vs the runner-up (Infinity when only one candidate) — cut decisiveness. */
+  readonly gapRatio: number;
   /** The non-normality of the RAW walk — the alarm the cure answered (≈0 already-normal, large directed). */
   readonly departure: number;
   /** True when the Chung cure ran (a directed coupling). */
@@ -155,26 +163,39 @@ export interface BoundaryEigenbasis {
 function cutSmoothK(
   eigenvalues: readonly number[],
   opts: { k?: number; kMin?: number; kMax?: number; lambdaTol?: number },
-): { k: number; trivialModes: number[]; eigengap: number } {
-  const lambdaTol = opts.lambdaTol ?? 1e-9;
+): { k: number; trivialModes: number[]; eigengap: number; relGap: number; gapRatio: number } {
+  // Scale-relative triviality floor (max|λ|) — an absolute 1e-9 would leak a near-DC mode on a small-scale
+  // spectrum (the fixed-k path then bleeds a smooth mode into the residual).
+  const maxAbsLambda = eigenvalues.reduce((m, v) => Math.max(m, Math.abs(v)), 0);
+  const lambdaTol = relativeFloor(opts.lambdaTol ?? 1e-12, maxAbsLambda);
   const trivialModes: number[] = [];
   for (let i = 0; i < eigenvalues.length; i++) if (eigenvalues[i]! <= lambdaTol) trivialModes.push(i);
   const start = trivialModes.length;
   const nNon = Math.max(0, eigenvalues.length - start);
-  if (nNon === 0) return { k: 0, trivialModes, eigengap: 0 };
-  if (opts.k !== undefined) return { k: Math.max(1, Math.min(opts.k, nNon)), trivialModes, eigengap: 0 };
+  const none = { trivialModes, eigengap: 0, relGap: 0, gapRatio: 0 };
+  if (nNon === 0) return { k: 0, ...none };
+  if (opts.k !== undefined) return { k: Math.max(1, Math.min(opts.k, nNon)), ...none };
   const kMin = Math.max(1, opts.kMin ?? 1);
   const kMax = Math.min(opts.kMax ?? nNon, nNon);
   let bestGap = -Infinity;
-  let bestK = Math.min(kMin, nNon);
+  let secondGap = -Infinity;
+  let bestK = Math.min(kMin, kMax, nNon); // clamp holds even on a contradictory kMin>kMax
   for (let kk = kMin; kk <= kMax - 1; kk++) {
     const gap = eigenvalues[start + kk]! - eigenvalues[start + kk - 1]!;
     if (gap > bestGap) {
+      secondGap = bestGap;
       bestGap = gap;
       bestK = kk;
+    } else if (gap > secondGap) {
+      secondGap = gap;
     }
   }
-  return { k: bestK, trivialModes, eigengap: bestGap > -Infinity ? bestGap : 0 };
+  const eigengap = bestGap > -Infinity ? bestGap : 0;
+  // relGap = the cut's width as a fraction of the non-trivial span (decisiveness); gapRatio vs the runner-up.
+  const span = eigenvalues[eigenvalues.length - 1]! - eigenvalues[start]! || 1;
+  const relGap = eigengap / span;
+  const gapRatio = secondGap > 0 ? bestGap / secondGap : bestGap > 0 ? Infinity : 0;
+  return { k: bestK, trivialModes, eigengap, relGap, gapRatio };
 }
 
 /**
@@ -209,12 +230,15 @@ export function boundaryEigenbasis(W: Mat, opts: BoundaryOpts = {}): BoundaryEig
   order.forEach((o, c) => {
     for (let r = 0; r < n; r++) eigenbasis[r]![c]! = vecs[r]?.[o.i] ?? 0;
   });
-  // Cut the smooth boundary subspace W* = the k smallest-λ NON-trivial columns.
-  const { k, trivialModes, eigengap } = cutSmoothK(eigenvalues, opts);
+  // Cut the smooth boundary subspace W* = the k smallest-λ NON-trivial columns; hold the trivial columns
+  // ready for deflation (the column layout runs [trivial | Wstar | rough] = [0,start)|[start,start+k)|[start+k,n)).
+  const { k, trivialModes, eigengap, relGap, gapRatio } = cutSmoothK(eigenvalues, opts);
   const start = trivialModes.length;
   const Wstar = zeros(n, k);
   for (let c = 0; c < k; c++) for (let r = 0; r < n; r++) Wstar[r]![c]! = eigenbasis[r]![start + c]!;
-  return { operator, eigenbasis, eigenvalues, Wstar, k, trivialModes, eigengap, departure, reversibilized: directed };
+  const trivialColumns = zeros(n, start);
+  for (let c = 0; c < start; c++) for (let r = 0; r < n; r++) trivialColumns[r]![c]! = eigenbasis[r]![c]!;
+  return { operator, eigenbasis, eigenvalues, Wstar, k, trivialModes, trivialColumns, eigengap, relGap, gapRatio, departure, reversibilized: directed };
 }
 
 /** The Ki→eigensolver pipe: a mesh coupling's directed `te[][]` → the boundary eigenbasis (Chung-cured). */

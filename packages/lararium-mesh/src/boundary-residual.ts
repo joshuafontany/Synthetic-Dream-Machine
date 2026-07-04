@@ -9,6 +9,8 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
 
+import { softGate } from "./numerics.js";
+
 type Mat = readonly (readonly number[])[];
 
 /** The trivial (Perron/DC) eigenvector columns to deflate before projecting — `boundary.eigenbasis` sliced
@@ -32,6 +34,12 @@ export interface Projection {
  *  = the trivial columns removed first (x⊥ = x − Σ(vᵢᵀx)vᵢ). O(n·k). */
 export function projectBoundary(signal: readonly number[], Wstar: Mat, deflate: Mat = []): Projection {
   const n = signal.length;
+  // Fail loud on a dimension mismatch — a short/long frame would read Wstar[r] undefined → NaN/corruption.
+  // (W* + deflate MUST carry orthonormal columns of length n — jacobiEigen guarantees it upstream.)
+  if (Wstar.length !== n) throw new Error(`projectBoundary: signal length ${n} ≠ W* rows ${Wstar.length}`);
+  if (deflate.length > 0 && deflate.length !== n) {
+    throw new Error(`projectBoundary: deflate rows ${deflate.length} ≠ signal length ${n}`);
+  }
   // Deflate the trivial modes: x⊥ = x − Σ (dᵀx) d.
   const xperp = signal.slice();
   const dCols = deflate.length > 0 ? deflate[0]!.length : 0;
@@ -66,7 +74,7 @@ export function projectBoundary(signal: readonly number[], Wstar: Mat, deflate: 
  * nucleation directly. (A parametric Box g·χ² limit rides as a later refinement; the shuffle-null of Qα
  * shares the deferred γ / rigidity-threshold null-calibration sprint.)
  */
-export function controlLimit(refResiduals: Mat, alpha = 0.05, floor = 1e-9): number[] {
+export function controlLimit(refResiduals: Mat, alpha = 0.05, floor = 1e-12): number[] {
   const frames = refResiduals.length;
   const n = frames > 0 ? refResiduals[0]!.length : 0;
   const q = new Array<number>(n).fill(floor);
@@ -101,7 +109,9 @@ export function residualComponentEvents(
   return proj.residualVec.map((r, p) => {
     const spe = r * r;
     const qa = qAlpha[p] ?? 0;
-    const agreement = spe + qa > 0 ? spe / (spe + qa) : 0;
+    // A non-finite spe (an extreme ±1e200-class residual overflowing) reads MAXIMAL surprise — never NaN,
+    // which would abort the whole run at sink.ingest's fail-loud guard.
+    const agreement = Number.isFinite(spe) ? softGate(spe, qa) : 1;
     return { plane: nodeNames[p] ?? `node-${p}`, agreement, value: r };
   });
 }

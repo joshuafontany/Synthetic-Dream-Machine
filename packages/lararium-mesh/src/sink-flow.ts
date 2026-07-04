@@ -13,8 +13,9 @@
 import { makeSink, type SinkEvent, type SinkVerdict, type SinkOptions } from "./sink.js";
 import { classifySink, type SinkClassVerdict } from "./sink-class.js";
 import { mintPurpleSink, type MintedSink, type MintRegistry, type MintOptions } from "./purple-minter.js";
-import { couplingBoundary, type BoundaryOpts } from "./directed-boundary.js";
-import { projectBoundary, residualComponentEvents, controlLimit, columnsOf } from "./boundary-residual.js";
+import { couplingBoundary, type BoundaryOpts, type BoundaryEigenbasis } from "./directed-boundary.js";
+import { projectBoundary, residualComponentEvents, controlLimit } from "./boundary-residual.js";
+import { relativeFloor } from "./numerics.js";
 import type { MeshCoupling } from "./mesh-coupling.js";
 
 export interface SinkFlowResult {
@@ -51,6 +52,12 @@ export interface BoundaryResidualOpts {
   readonly mint?: MintOptions;
 }
 
+/** The residual bridge's result — the sink verdict/class/mint PLUS the boundary + Qα that forks 2 & 3 read. */
+export interface BoundaryResidualResult extends SinkFlowResult {
+  readonly boundary: BoundaryEigenbasis;
+  readonly qAlpha: readonly number[];
+}
+
 /**
  * The DIRECTED RESIDUAL BRIDGE (fork 1), wired end-to-end: a directed coupling → the smooth boundary
  * subspace W* → per-frame residual off it → per-node component events → birth/class/mint. The residual
@@ -65,11 +72,29 @@ export function runBoundaryResidualFlow(
   registry: MintRegistry,
   mintId: () => string,
   opts: BoundaryResidualOpts = {},
-): SinkFlowResult {
+): BoundaryResidualResult {
+  // Fail loud: a control limit needs a reference (empty → qAlpha collapses → agreement 1 → silent over-birth).
+  if (refFrames.length === 0) {
+    throw new Error("runBoundaryResidualFlow: refFrames is empty — the Qα control limit needs a reference window (size N ≳ 1/alpha)");
+  }
+  const nNodes = coupling.te.length;
+  for (const f of [...refFrames, ...frames]) {
+    if (f.length !== nNodes) throw new Error(`runBoundaryResidualFlow: a frame of length ${f.length} ≠ ${nNodes} boundary nodes`);
+  }
   const boundary = couplingBoundary(coupling, opts.boundary ?? {});
-  const deflate = columnsOf(boundary.eigenbasis, boundary.trivialModes);
+  const deflate = boundary.trivialColumns; // footgun-proof — the ready trivial columns, never hand-sliced
   const refResiduals = refFrames.map((f) => projectBoundary(f, boundary.Wstar, deflate).residualVec);
-  const qAlpha = controlLimit(refResiduals, opts.alpha ?? 0.05);
+  // Signal-scale noise floor for Qα: a residual energy below (relTol·signalRMS)² reads machine noise, not
+  // surprise — scale-relative so a small-scale feed does not mask real residuals nor a large one read inert.
+  let sumSq = 0;
+  let cnt = 0;
+  for (const f of refFrames) for (const v of f) {
+    sumSq += v * v;
+    cnt += 1;
+  }
+  const signalScale = cnt > 0 ? Math.sqrt(sumSq / cnt) : 1;
+  const noiseFloor = relativeFloor(1e-300, signalScale * signalScale, 1e-18);
+  const qAlpha = controlLimit(refResiduals, opts.alpha ?? 0.05, noiseFloor);
   const sink = makeSink(opts.sink);
   for (const f of frames) {
     const proj = projectBoundary(f, boundary.Wstar, deflate);
@@ -78,5 +103,5 @@ export function runBoundaryResidualFlow(
   const verdict = sink.verdict();
   const klass = classifySink(sink.rhythmByPlane(), verdict.birth);
   const minted = mintPurpleSink(verdict, klass, registry, mintId, opts.mint);
-  return { verdict, klass, minted };
+  return { verdict, klass, minted, boundary, qAlpha };
 }

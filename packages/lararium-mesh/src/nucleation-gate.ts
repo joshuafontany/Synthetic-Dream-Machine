@@ -31,6 +31,8 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
 
+import { softGate } from "./numerics.js";
+
 /** A per-plane agreement signal for one candidate: how strongly this plane attests the unit (0..1). */
 export interface PlaneSignal {
   readonly plane: string;
@@ -143,7 +145,7 @@ export function nucleate(input: NucleationInput): NucleationVerdict {
   const criticalRadius = (2 * gamma) / drive;
   const barrier = (16 * Math.PI * gamma ** 3) / (3 * drive ** 2); // telemetry — does NOT gate born
   const born = size >= criticalRadius;
-  const condensation = size / (size + criticalRadius); // saturation (fill ratio), NOT a naming signal
+  const condensation = softGate(size, criticalRadius); // saturation (fill ratio), NOT a naming signal
 
   return { born, criticalRadius, barrier, drive, effectivePlanes, condensation, invalid: false };
 }
