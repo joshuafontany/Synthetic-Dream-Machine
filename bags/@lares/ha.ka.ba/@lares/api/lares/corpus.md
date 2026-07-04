@@ -229,16 +229,20 @@ keystone names ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-gra
 
 <<~ ahu #integration >>
 
-## Integration ~ python + R sidecars, TS stays sovereign
+## Integration ~ the full model runs python + R, TS the functor floor + coordinator
 
-<<~ confidence Synthesis-Canon 13/20 >> The heavy numerics ride **sidecars** in the drawer_io NDJSON
-style (line-delimited JSON over stdio, the established sidecar contract). The live per-turn parse stays
-**sovereign in TS** — no sidecar on the hot path; the sidecars run offline, batch.
+<<~ confidence Synthesis-Canon 13/20 >> The **full sensorium model runs py/R**, instanced per-stream. The
+heavy numerics AND the live stream-processing both ride **sidecars** in the drawer_io NDJSON style
+(line-delimited JSON over stdio, the established sidecar contract); the FFZ-chronometer gate and the full
+telemetry/metadata stamping fire **py-side**, where the model reads. TS keeps the **pure-functor math
+floor** — the mesh numerics — consumed BY the py sensorium, and stands as the **coordinator** that drives
+the py-side instance and offloads to it. The batch bands sensorium already runs py/R; the streaming layer
+**twins it py-side**, never re-homed into TS.
 
-<<~ranks sidecar bands ~ python — PyWavelets · ewtpy · ssqueezepy · ruptures · bocd -> form ~ python — tree-sitter · tree-sitter-languages · prefixspan · c2xg · treeminer · spacy+benepar (or stanza) -> stats ~ a thin R sidecar — ecp::e.divisive + waveslim wavelet-variance bootstrap CIs -> induce ~ an offline BATCH sweep — the `induce` job mines a corpus end-to-end, off the live path >>
+<<~ranks sidecar bands ~ python — PyWavelets · ewtpy · ssqueezepy · ruptures · bocd -> form ~ python — tree-sitter · tree-sitter-languages · prefixspan · c2xg · treeminer · spacy+benepar (or stanza) -> stats ~ a thin R sidecar — ecp::e.divisive + waveslim wavelet-variance bootstrap CIs -> induce ~ the `induce` job mines a corpus end-to-end; the STREAMING layer TWINS it py-side, a live per-stream instance running the SAME model >>
 
-**The install is additive and pre-approved.** Every dependency lands in the venv, none replaces a live
-component:
+**The install carries the model, live and batch alike.** Every dependency lands in the venv, and the venv
+now homes the sensorium itself — the model reads py-side rather than behind TS:
 
 <<~ranks install python-form ~ tree-sitter · tree-sitter-languages · prefixspan · c2xg · treeminer · spacy+benepar (or stanza) -> python-bands ~ PyWavelets · ewtpy · ssqueezepy · ruptures · bocd -> r-stats ~ waveslim · ecp >>
 

@@ -155,6 +155,8 @@ And the ceiling on R rhymes with a law the house already holds:
 
 <<~ confidence Synthesis 11/20 >> The **whole-sensorium** row carries the highest leverage: top-down prediction and precision-weighting upgrade *every* plane at once, and **music as first corpus** hands the build a validation oracle — the GTTM analyses supply ground-truth structure that lets the sensorium be *scored*, not merely admired.
 
+<<~ confidence Synthesis 12/20 >> **The build homes the five-plane model in py/R**, instanced per-stream — the estimators the domains hand back (wavelet bands, ε-machine form, ΦID coupling, the surrogate nulls) read where their libraries live, and the FFZ-chronometer gate fires py-side with them. TS keeps the **pure-functor math floor** the py sensorium consumes and stands as the coordinator that drives it; the model itself runs py/R, batch and streaming alike.
+
 <<~/ahu >>
 
 <<~ ahu #the-mythtech-frame >>

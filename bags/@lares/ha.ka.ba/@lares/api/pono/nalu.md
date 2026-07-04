@@ -94,6 +94,13 @@ accumulate shrinks its batch depth under load, the variable-cost reconcile coale
 window, the display coalesce stays frame-pinned (the projection-nalu #servo + #cells law: role =
 physics ≠ uniformity).
 
+**The home split (2026-07-03):** the **federated in-wiki nalu** (rAF-crested, CRDT waves → the widget
+shore) and the **CRDT⟷TW5 projection-nalu** stay **sovereign TS** — a first-class TS home, where much of
+the projection tech lives. The **capture / stream nalu-gate** re-homes **py-side**: the stream sensorium's
+gate runs in py/R per-stream, and the TS coordinator drives it — feeding the py gate, consuming its crests.
+The wave shape holds identically across the TS/py membrane — collect-then-flush on either bank, the
+substrate the water, the nalu the pattern.
+
 **The invariant:** The nalu is not one tiddler change. It is the atomic delivery
 of a *batch* of changes to all observers simultaneously. Every observer — every
 widget, every reaction handler — receives the same `changedTiddlers` set in the

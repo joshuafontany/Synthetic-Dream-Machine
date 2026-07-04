@@ -105,7 +105,10 @@ The same grammar runs both planes: stack order is precedence (a cap claims a sig
 
 **Tie ~ a palace IS its cap-stack.** The runtime twin extends a third substrate: the nameless memory-
 palace daemon ([[living-grammar-palace|lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance]]) ports `composeIsland` to Python — one body,
-differentiated only by `[FlockSingleton, FeedCap, …]`; role emerges from the stack, never a type.
+differentiated only by `[FlockSingleton, FeedCap, …]`; role emerges from the stack, never a type. The
+**composed sub-sensoria and their servo caps run py/R** here too — the full sensorium model's home — the
+cap-stack grammar holding identically py-side, TS carrying the coordinator and the pure-functor math floor
+the py caps consume.
 
 <<~/ahu >>
 

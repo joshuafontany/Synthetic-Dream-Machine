@@ -91,6 +91,11 @@ export const laresRoot = new URL('../../..', import.meta.url).pathname;
 **CID-addressed tiddlers function ideally:** a content hash stays fully independent of where
 the content is stored. CIDs make the wave/water separation mechanical.
 
+**The nalu-gate / servo wave crosses the TS/py membrane.** The collect-then-flush nalu and the
+self-tuning servo hold as ONE pattern across **three homes** — TS main↔worker↔main message-passing · the
+TS CRDT⟷TW5 projection-nalu · the py/R sensorium stream-gates — the pattern invariant, the substrate (TS
+or py) the water. Read one gate in TS and one in py/R: the wave moves identically; only the water differs.
+
 **MUST:** System behavior MUST NOT depend on physical file layout. The lar: URI resolver
 MUST serve as the only reference mechanism for content.
 

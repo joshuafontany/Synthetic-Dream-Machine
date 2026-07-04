@@ -165,6 +165,13 @@ Gaussian read — `escalate` flags nonlinear signal the default leaves on the ta
 regime — resonant with the aperture **Measure** band (topic-shift). All three are **ki** (氣, flow)
 instruments; the **li** (理, pattern — strata · skeletal tier · associations) never moves under them.
 
+**The reader stays TS; the ki-model runs py/R.** <<~ confidence Synthesis 12/20 >> `stratify()` — the
+disjoint-match island-scan over STORED bytes — holds as a **TS functor** sensing the li (理, pattern), and
+that reader stays a first-class TS home. The **ki stream-processing** — the windowed-coupling model, the
+bands and coupling gates that breathe over the aligned-tick stream — runs **py/R** per-stream, the
+FFZ-aligned gate firing py-side, and TS stands as the coordinator that drives it. The WAVE holds
+identically across the TS/py membrane: the li-reader on one bank, the ki-model on the other, one shape.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

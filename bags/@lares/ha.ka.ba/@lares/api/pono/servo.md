@@ -168,6 +168,12 @@ The network ring lifts the same two-loop to the wire — **the servo becomes con
 the receiver's gate signalling the sender (the one piece the intra-island governor lacks today). Held
 for the ring, not built here (`projection-nalu#network-ring`).
 
+**The governor rides py/R too.** <<~ confidence Synthesis 12/20 >> The same servo law that breathes the TS
+gates — the main↔worker↔main message-passing and the CRDT⟷TW5 projection-nalu — governs the **py/R
+sensorium stream-gates**: the bands and coupling breathing-thresholds self-tune py-side, the FFZ-paced gate
+finding its bound from the observed stream cost. One governor pattern-integrity, three homes across the
+TS/py membrane; the polarity law and the two-loop shape hold identically wherever the bound breathes.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
