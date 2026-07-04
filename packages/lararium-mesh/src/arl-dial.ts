@@ -47,6 +47,13 @@ export function makeArlDial(arl0: number, opts: ArlDialOpts = {}): ArlDial {
 /** The reference ARL₀ that reproduces the prior per-node α=0.05 default (α=1/20). */
 export const ARL0_REFERENCE = 20;
 
+/** The SINGLE home for a default significance level: α = 1/ARL0_REFERENCE (= 0.05). Every gate that reads
+ *  a bare α reads THIS, so the scattered literal collapses to one dialed source — moving ARL0_REFERENCE
+ *  moves every default α together (the charter's "one number now"). A gate handed a live {@link ArlDial}
+ *  reads `dial.alpha` and overrides this reference; the deeper per-statistic self-emergence (the 3σ / lock /
+ *  linearity value-thresholds) rides the deferred surrogate-null sprint, never this constant. */
+export const REFERENCE_ALPHA = 1 / ARL0_REFERENCE;
+
 /** The single home for the dedup grain. NOTE: this carried the NUMBER of the retired grid `quantum` (0.1),
  *  NOT its meaning — quantum set a per-axis CELL width (±0.05/axis); this sets a Euclidean RADIUS on the raw
  *  agreement vector, so across d planes the effective dedup tightens ~√d. A placeholder until the deferred

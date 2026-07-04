@@ -77,7 +77,9 @@ export function gaussianCMISignificance(cmiBits: number, n: number, dfSource = 1
   return chiSquareSurvival(g2, dfSource * dfTarget);
 }
 
-/** Is the coupling significant at level `alpha` (default 0.05)? A real edge, not the bias floor. */
+/** Is the coupling significant at level `alpha`? A real edge, not the bias floor. `alpha` is REQUIRED of
+ *  the decision-site caller (coupleMesh sources it from the ARL₀ dial → REFERENCE_ALPHA); the 0.05 fallback
+ *  keeps this floor primitive pure (no policy import) and never fires when the caller passes the dial's α. */
 export function significantCMI(cmiBits: number, n: number, dfSource = 1, dfTarget = 1, alpha = 0.05): boolean {
   return gaussianCMISignificance(cmiBits, n, dfSource, dfTarget) < alpha;
 }

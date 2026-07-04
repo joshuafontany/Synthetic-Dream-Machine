@@ -23,7 +23,7 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
 
-import type { ArlDial } from "./arl-dial.js";
+import { type ArlDial, REFERENCE_ALPHA } from "./arl-dial.js";
 
 /** A deterministic PRNG (mulberry32) from a local seed — reproducible nulls, no global randomness. */
 export function makeRng(seed: number): () => number {
@@ -74,7 +74,7 @@ export function surrogateNull(
   opts: { trials?: number; alpha?: number; seed?: number } = {},
 ): NullVerdict {
   const trials = Math.max(1, opts.trials ?? 200);
-  const alpha = opts.alpha ?? 0.05;
+  const alpha = opts.alpha ?? REFERENCE_ALPHA;
   const rng = makeRng(opts.seed ?? 1);
   const observed = statistic(series);
   const nullStat: number[] = [];
@@ -138,7 +138,7 @@ export function maxTNull(
   opts: { trials?: number; alpha?: number; seed?: number } = {},
 ): MaxTVerdict {
   const trials = Math.max(1, opts.trials ?? 200);
-  const alpha = opts.alpha ?? 0.05;
+  const alpha = opts.alpha ?? REFERENCE_ALPHA;
   const rng = makeRng(opts.seed ?? 1);
   const observed = seriesPerNode.map((s) => statistic(s));
   const nullMax: number[] = [];

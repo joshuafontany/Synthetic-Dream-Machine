@@ -24,7 +24,7 @@ import {
   type BoundaryEigenbasis,
 } from "./spectral-keel.js";
 import { relativeFloor } from "./numerics.js";
-import type { ArlDial } from "./arl-dial.js";
+import { type ArlDial, REFERENCE_ALPHA } from "./arl-dial.js";
 import type { MeshCoupling } from "./mesh-coupling.js";
 
 export interface SinkFlowResult {
@@ -120,7 +120,7 @@ export function runBoundaryResidualFlow(
   // planes correlate + the accretion barrier attenuates, so the TRUE birth rate sits between α^k and α — only
   // the deferred shuffle-null can measure which field lands ARL₀. Until then: α (conservative), witnessed at
   // the node level (arl-dial.test T3). Do NOT swap to α_node before the shuffle-null witnesses the birth rate.
-  const alpha = opts.dial?.alpha ?? opts.alpha ?? 0.05;
+  const alpha = opts.dial?.alpha ?? opts.alpha ?? REFERENCE_ALPHA;
   const qAlpha = controlLimit(refResiduals, alpha, noiseFloor);
   const sink = makeSink(opts.sink);
   for (const f of frames) {

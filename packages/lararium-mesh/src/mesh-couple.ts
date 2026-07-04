@@ -17,14 +17,19 @@ import { whitenChildren } from "./signed-innovation.js";
 import { coupleMeshChildrenMV, type ChildSignalMV } from "./mesh-coupling-mv.js";
 import { significantCMI } from "./cmi-significance.js";
 import { type MeshCoupling } from "./mesh-coupling.js";
+import { type ArlDial, REFERENCE_ALPHA } from "./arl-dial.js";
 
 export interface CoupleMeshOptions {
   /** Sovereignty dial — the strongest surviving cross-edge must stay below this (bits). Default 0.5. */
   readonly mergeThreshold?: number;
   /** History length for the conditional-TE embedding. Default 1. */
   readonly lag?: number;
-  /** Significance level — edges with χ² p ≥ alpha are zeroed. Default 0.05. */
+  /** Significance level — edges with χ² p ≥ alpha are zeroed. Sourced from `dial.alpha` when a dial rides,
+   *  else this explicit α, else {@link REFERENCE_ALPHA}. */
   readonly alpha?: number;
+  /** The ARL₀ dial — when present, `dial.alpha` sets the edge-significance gate (one operator dial governs
+   *  which couplings survive). Overrides the bare `alpha`; absent → the reference default. */
+  readonly dial?: ArlDial;
   /** Whiten to the signed innovation first (the correct prewhitening). Default true. */
   readonly whiten?: boolean;
 }
@@ -37,7 +42,7 @@ export interface CoupleMeshOptions {
 export function coupleMesh(children: readonly ChildSignalMV[], opts: CoupleMeshOptions = {}): MeshCoupling {
   const mergeThreshold = opts.mergeThreshold ?? 0.5;
   const lag = opts.lag ?? 1;
-  const alpha = opts.alpha ?? 0.05;
+  const alpha = opts.dial?.alpha ?? opts.alpha ?? REFERENCE_ALPHA; // one dial governs the significance gate
   const whiten = opts.whiten ?? true;
 
   const prepped = whiten ? whitenChildren(children) : children.map((c) => ({ name: c.name, signal: c.signal }));

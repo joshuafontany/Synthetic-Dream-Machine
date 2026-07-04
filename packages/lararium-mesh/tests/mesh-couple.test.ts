@@ -3,7 +3,7 @@
  * Independent children read fully sovereign (all edges gated away); a real coupling survives.
  */
 import { describe, test, expect } from "vitest";
-import { coupleMesh, type ChildSignalMV } from "../src/index.js";
+import { coupleMesh, makeArlDial, type ChildSignalMV } from "../src/index.js";
 
 function gaussGen(seed: number): () => number {
   let s = seed >>> 0;
@@ -38,6 +38,15 @@ describe("mesh-couple — one call: whiten → couple → significance-gate", ()
     expect(c.strongestEdge!.to).toBe("authority");
     expect(c.sovereign).toBe(false);
     expect(c.phantomGuarded).toBe(true);
+  });
+
+  test("the ARL₀ dial governs the significance gate (a loose dial opens edges the reference zeroes)", () => {
+    const g = gaussGen(1);
+    const kids = [child("who", vseq(700, 2, g)), child("authority", vseq(700, 2, g)), child("flow", vseq(700, 2, g))];
+    // reference α (no dial) → independents fully gated, every edge zeroed.
+    expect(coupleMesh(kids).te.flat().every((v) => v === 0)).toBe(true);
+    // a loose dial (ARL₀=1 → α=1) reaches significantCMI and opens the gate — finite-sample noise edges survive.
+    expect(coupleMesh(kids, { dial: makeArlDial(1) }).te.flat().some((v) => v > 0)).toBe(true);
   });
 
   test("whiten:false still runs the pipeline (couple + significance on raw signals)", () => {
