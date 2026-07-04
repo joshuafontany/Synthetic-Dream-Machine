@@ -15,8 +15,14 @@
 import { makeSink, type SinkEvent, type SinkVerdict, type SinkOptions } from "./sink.js";
 import { classifySink, type SinkClassVerdict } from "./sink-class.js";
 import { mintPurpleSink, type MintedSink, type MintRegistry, type MintOptions } from "./purple-minter.js";
-import { couplingBoundary, type BoundaryOpts, type BoundaryEigenbasis } from "./directed-boundary.js";
-import { projectBoundary, residualComponentEvents, controlLimit } from "./boundary-residual.js";
+import {
+  couplingBoundary,
+  projectBoundary,
+  residualComponentEvents,
+  controlLimit,
+  type BoundaryOpts,
+  type BoundaryEigenbasis,
+} from "./spectral-keel.js";
 import { relativeFloor } from "./numerics.js";
 import type { ArlDial } from "./arl-dial.js";
 import type { MeshCoupling } from "./mesh-coupling.js";

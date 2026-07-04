@@ -10,8 +10,7 @@
 import { describe, expect, test } from "vitest";
 
 import { makeTracker, principalAngles, subspaceDistance } from "../src/subspace-track.js";
-import { couplingBoundary } from "../src/directed-boundary.js";
-import { projectBoundary } from "../src/boundary-residual.js";
+import { couplingBoundary, projectBoundary } from "../src/spectral-keel.js";
 import type { MeshCoupling } from "../src/mesh-coupling.js";
 
 const jitter = (s: number): number => {

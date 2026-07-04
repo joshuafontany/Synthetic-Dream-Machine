@@ -1,5 +1,5 @@
 /**
- * boundary-residual — witness the directed residual bridge (fork 1). Units: projectBoundary (an in-subspace
+ * spectral-keel (projection face) — witness the directed residual bridge (fork 1). Units: projectBoundary (an in-subspace
  * signal reads spe≈0; a rough signal's residual ⊥ W*); controlLimit (the α-quantile); residualComponentEvents
  * (agreement 0.5 at the limit). End-to-end: a directed coupling → the bottom-k boundary → per-frame residual
  * → component events → sink-flow — a NORMAL (in-subspace) regime births no sink; an ANOMALY (rough cross-node)
@@ -7,8 +7,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { projectBoundary, controlLimit, residualComponentEvents } from "../src/boundary-residual.js";
-import { couplingBoundary } from "../src/directed-boundary.js";
+import { projectBoundary, controlLimit, residualComponentEvents, couplingBoundary } from "../src/spectral-keel.js";
 import { runBoundaryResidualFlow } from "../src/sink-flow.js";
 import { makeMintRegistry } from "../src/purple-minter.js";
 import type { MeshCoupling } from "../src/mesh-coupling.js";

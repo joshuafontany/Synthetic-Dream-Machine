@@ -1,5 +1,5 @@
 /**
- * directed-boundary — witness the Chung cure (Sprint 2). Proves the alarm has an answer: a directed walk
+ * spectral-keel (operator face) — witness the Chung cure (Sprint 2). Proves the alarm has an answer: a directed walk
  * reads NON-NORMAL (departureFromNormality large), the Chung symmetrized Laplacian arrives SELF-ADJOINT,
  * and its eigenbasis precipitates ORTHONORMAL (VᵀV≈I) — orthogonality falls out on a directed graph. The
  * Ki `te[][]` coupling now generates a boundary basis for the first time.
@@ -11,7 +11,7 @@ import {
   chungDirectedLaplacian,
   boundaryEigenbasis,
   couplingBoundary,
-} from "../src/directed-boundary.js";
+} from "../src/spectral-keel.js";
 import type { MeshCoupling } from "../src/mesh-coupling.js";
 
 const undirectedRing = (n: number): number[][] => {

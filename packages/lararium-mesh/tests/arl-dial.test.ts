@@ -14,8 +14,7 @@ import { describe, expect, test } from "vitest";
 import { makeArlDial, ARL0_REFERENCE } from "../src/arl-dial.js";
 import { runBoundaryResidualFlow } from "../src/sink-flow.js";
 import { makeMintRegistry } from "../src/purple-minter.js";
-import { couplingBoundary } from "../src/directed-boundary.js";
-import { projectBoundary, controlLimit } from "../src/boundary-residual.js";
+import { couplingBoundary, projectBoundary, controlLimit } from "../src/spectral-keel.js";
 import type { MeshCoupling } from "../src/mesh-coupling.js";
 
 const counter = () => {
