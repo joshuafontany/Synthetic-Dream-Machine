@@ -44,6 +44,20 @@ IDLE_TTL_ENV = "CONTENT_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 _LOCK_PREFIX = "content_serve"
 
+# The kapae mute-leg (Phase 4) rides two metadata slots. `lar_turn_key` binds a content row to a
+# worldline turn (the kapae cascade resolves cids by it); `lar_kapae` marks a row MUTED so recall
+# excludes it — a metadata FLAG the atom (document+embedding) never sees, so mute stays move-not-
+# delete: the row persists, only the flag flips. A row without the slot reads live (unset = live).
+TURN_KEY_META = "lar_turn_key"
+KAPAE_META = "lar_kapae"
+_MUTED_VALUES = {"1", "true", "yes"}
+
+
+def _is_muted(metadata: "dict | None") -> bool:
+    """A row reads muted when its `lar_kapae` slot carries a truthy mark. Absent/"0"/"" = live —
+    so the vast un-kapae'd corpus (no slot) never filters, and un-mute (flag -> "0") restores."""
+    return str((metadata or {}).get(KAPAE_META, "")).strip().lower() in _MUTED_VALUES
+
 
 def _idle_ttl_seconds() -> float:
     return idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS)
@@ -146,32 +160,73 @@ class ContentStore:
         mine_busy_retry(lambda: self._col.update(ids=[cid], metadatas=[merged]))
         return {"ok": True, "cid": cid}
 
-    def search(self, embedding: list, k: int = 8, where: "dict | None" = None) -> dict:
+    def search(self, embedding: list, k: int = 8, where: "dict | None" = None,
+               include_muted: bool = False) -> dict:
+        """Nearest-neighbor recall that EXCLUDES kapae-muted rows by default (the recall-exclusion
+        leg). We drop muted rows in PYTHON, never via a chroma `where`: chroma's `$ne` on the mute
+        slot would SKIP every un-kapae'd row that lacks the slot (the absent-key trap), silently
+        emptying recall. So we over-fetch in an EXPANDING window until k live rows stand or the
+        collection drains — correct even when many near neighbors ride muted. `include_muted`
+        opts the raw index back (audit/debug)."""
         try:
             n = self._col.count()
         except Exception:  # noqa: BLE001 — fresh/empty collection
             n = 0
         if n == 0:
             return {"matches": []}
-        got = self._col.query(
-            query_embeddings=[embedding], n_results=min(k, n),
-            include=["distances", "metadatas", "documents"],
-            **({"where": where} if where else {}),
-        )
-        ids = (got.get("ids") or [[]])[0]
-        dists = (got.get("distances") or [[]])[0]
-        metas = (got.get("metadatas") or [[]])[0]
-        docs = (got.get("documents") or [[]])[0]
-        matches = [
-            {
-                "cid": ids[i],
-                "distance": dists[i] if i < len(dists) else None,
-                "document": docs[i] if i < len(docs) else "",
-                "metadata": metas[i] or {},
-            }
-            for i in range(len(ids))
-        ]
-        return {"matches": matches}
+        pool = min(max(k, 1), n)
+        while True:
+            got = self._col.query(
+                query_embeddings=[embedding], n_results=pool,
+                include=["distances", "metadatas", "documents"],
+                **({"where": where} if where else {}),
+            )
+            ids = (got.get("ids") or [[]])[0]
+            dists = (got.get("distances") or [[]])[0]
+            metas = (got.get("metadatas") or [[]])[0]
+            docs = (got.get("documents") or [[]])[0]
+            matches = []
+            for i in range(len(ids)):
+                meta = metas[i] or {}
+                if not include_muted and _is_muted(meta):
+                    continue                    # a kapae-muted row never recalls
+                matches.append({
+                    "cid": ids[i],
+                    "distance": dists[i] if i < len(dists) else None,
+                    "document": docs[i] if i < len(docs) else "",
+                    "metadata": meta,
+                })
+            # Enough live rows, the window covered the whole collection, or nothing to exclude — done.
+            if len(matches) >= k or pool >= n or include_muted:
+                return {"matches": matches[:k]}
+            pool = min(pool * 2, n)             # widen and re-fetch (more near neighbors were muted)
+
+    def cids_for_turn(self, turn_key: str) -> list:
+        """Every cid bound to a worldline `turn_key` (via `lar_turn_key` metadata) — the kapae
+        cascade's resolver. A chroma `where` EQUALITY read (scalar match, no absent-key trap)."""
+        if not turn_key:
+            return []
+        got = self._col.get(where={TURN_KEY_META: turn_key}, include=["metadatas"])
+        return list(got.get("ids") or [])
+
+    def mute(self, cid: str, tick=None) -> dict:
+        """MUTE one row for kapae — flip the `lar_kapae` flag via patch_metadata (chroma-native
+        col.update: the document AND the embedding survive, no re-embed, no vector clobber). The
+        atom never changes, so this rides the IMMUTABLE-GROUND (append-only) Memory sensorium too —
+        a mute is metadata, not an edit. `tick` (a caller LOGICAL mark) stamps when, never a host
+        clock. Idempotent; {ok:false} for an absent cid."""
+        patch = {KAPAE_META: "1"}
+        if tick is not None:
+            patch["lar_kapae_tick"] = tick
+        return self.patch_metadata(cid, patch)
+
+    def unmute(self, cid: str, tick=None) -> dict:
+        """UN-MUTE one row — flip `lar_kapae` back to "0" (never a key removal: move-not-delete at
+        the content plane too; the row and its mute-history stay, the flag flips). Restores recall."""
+        patch = {KAPAE_META: "0"}
+        if tick is not None:
+            patch["lar_unkapae_tick"] = tick
+        return self.patch_metadata(cid, patch)
 
     def scan(self, offset: int = 0, limit: int = 256) -> dict:
         """Read a PAGE of records WITH their embeddings — the guest-import read leg. Copies a
@@ -247,7 +302,10 @@ def _build_ops(store: ContentStore) -> dict:
         "put": lambda req: store.put(req["cid"], req.get("text", ""), req["embedding"], req.get("metadata", {})),
         "patch_metadata": lambda req: store.patch_metadata(req["cid"], req.get("patch", {})),
         "get": lambda req: store.get(req["cid"]),
-        "search": lambda req: store.search(req["embedding"], int(req.get("k", 8)), req.get("where")),
+        "search": lambda req: store.search(req["embedding"], int(req.get("k", 8)), req.get("where"), bool(req.get("include_muted", False))),
+        "cids_for_turn": lambda req: {"cids": store.cids_for_turn(req["turn_key"])},
+        "mute": lambda req: store.mute(req["cid"], req.get("tick")),
+        "unmute": lambda req: store.unmute(req["cid"], req.get("tick")),
         "scan": lambda req: store.scan(int(req.get("offset", 0)), int(req.get("limit", 256))),
         "taxonomy": lambda req: store.taxonomy(int(req.get("limit", 4096))),
     }

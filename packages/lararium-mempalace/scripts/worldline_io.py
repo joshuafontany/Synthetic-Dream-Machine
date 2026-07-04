@@ -1,0 +1,359 @@
+#!/usr/bin/env python3
+"""worldline_io — the WORLDLINE RHIZOME (a fork-DAG over turns) + FULL kapae.
+
+The agent worldline READS as a rhizome: a turn SPAWNS a fork, a HANDBACK joins the fork back,
+and concurrent siblings of one spawn (no join between them) run ∥. This holder persists that
+fork-DAG durably and drives the FULL kapae — branch-mute that CASCADES across the sensoria's
+palaces so recall EXCLUDES a muted fork-path, reversibly, move-not-delete.
+
+TWO append-only sqlite tables BESIDE the palace (the raw-sqlite-beside-chroma idiom kg_io /
+structurepalace already ride):
+
+  worldline_edges  — the rhizome STRUCTURE + the bitemporal spawn-interval.
+      Each edge points CAUSE -> EFFECT (happened-before): a `fork` runs parent->child, a
+      `linear` runs prev->next, a `join` (handback) runs child->parent (the reunion — the
+      parent's post-handback acts stand AFTER the child). `valid_from` opens the interval on a
+      caller LOGICAL tick; `valid_to` closes it at handback (bitemporal, kg_io's idiom).
+      History stays: a close sets `valid_to`, never a DELETE.
+
+  worldline_kapae  — the MUTE polarity-log (persistence_io's move-not-delete idiom).
+      kapae APPENDS a `polarity=1` row per branch turn-key; un_kapae APPENDS `polarity=-1`.
+      Nothing ever drops — a turn's live mute-state reads the LATEST polarity row (max id).
+      This log IS the "polarity/valid-close edge" a defeat rides; a removal never happens.
+
+CLOCK-PURITY (the sighting ward, no-global-now): every mark — `valid_from`, `valid_to`, the
+kapae `tick` — takes a caller-supplied LOGICAL tick. This module imports NO host clock (no
+time/datetime); a wall-time mark would corrupt the bitemporal stream with an unreliable
+witness (persistence_io.witness carries the same tick idiom).
+
+kapae is WORLDLINE-scoped — a branch (a fork-path subtree) plus its palace entries — DISTINCT
+from the general release/supersede/purge. The cascade rides `cascade_kapae` below: it mutes the
+branch in the rhizome, then mutes THOSE entries (by turn-key) across the pinned sensoria's
+content stores. Un-kapae RESTORES across all of them.
+
+Protocol — NDJSON over stdin/stdout, one JSON object per line (only JSON to stdout):
+
+    -> {"id":1,"op":"ping"}
+    <- {"id":1,"ok":true,"result":{"ready":true}}
+
+    -> {"id":2,"op":"add_edge","parent":P,"child":C,"relation":"fork","tick":N}
+    -> {"id":2,"op":"handback","parent":P,"child":C,"tick":N}      # join + close the fork interval
+    -> {"id":3,"op":"dag","as_of":N?}                              # the rhizome (bitemporal read)
+    -> {"id":4,"op":"descendants","node":X,"as_of":N?}            # the branch subtree (fork+linear)
+    -> {"id":5,"op":"are_concurrent","a":X,"b":Y}                 # ∥ verdict (spawn-tree incomparable)
+    -> {"id":6,"op":"kapae","branch":R,"tick":N}                  # mute the branch (returns turn-keys)
+    -> {"id":7,"op":"un_kapae","branch":R,"tick":N}              # restore the branch
+    -> {"id":8,"op":"muted_turns"}                                # the live-muted turn-keys
+
+The CASCADE (branch-mute across the sensoria) rides the Python coordinator (`cascade_kapae` /
+`cascade_un_kapae`) — it holds the rhizome AND the content stores, above any single palace.
+
+Run with the mempalace CLI's interpreter (it has the package):
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 worldline_io.py serve --palace ~/.lares/.worldline
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sqlite3
+
+from sidecar_caps import (
+    canonical_path,
+    idle_ttl_seconds,
+    make_dispatch,
+    run_sidecar,
+)
+
+# The three rhizome relations — each stored CAUSE -> EFFECT so happened-before reads as reachability.
+REL_FORK = "fork"      # spawn: parent -> child
+REL_LINEAR = "linear"  # sequential: prev -> next
+REL_JOIN = "join"      # handback: child -> parent (the reunion; parent stands after child)
+
+# The spawn-tree relations — the DOWNWARD branch. kapae mutes a subtree over these; the ∥ verdict
+# reads incomparability over these. A `join` runs UPWARD (back to main) and rides NEITHER walk.
+_SPAWN_TREE = (REL_FORK, REL_LINEAR)
+
+_DB_NAME = "worldline.sqlite3"
+
+IDLE_TTL_ENV = "WORLDLINE_IDLE_TTL"
+DEFAULT_IDLE_TTL_SECONDS = 600.0
+_LOCK_PREFIX = "worldline_serve"
+
+
+def _db_path(palace_path: str) -> str:
+    # The rhizome sqlite lives INSIDE the palace dir (kg_io's <palace>/knowledge_graph.sqlite3
+    # discipline). Canonicalize so a symlink/relative spelling addresses the SAME file.
+    return canonical_path(os.path.join(os.path.expanduser(palace_path), _DB_NAME))
+
+
+class WorldlineStore:
+    """One rhizome fork-DAG over a palace dir: add the structure edges, close a spawn-interval at
+    handback, walk the branch subtree, read the ∥ verdict, and drive the move-not-delete kapae
+    polarity-log. Pure sqlite BESIDE the chroma palaces — no LLM, no vectors, no host clock."""
+
+    def __init__(self, palace_path: str) -> None:
+        os.makedirs(os.path.expanduser(palace_path), exist_ok=True)
+        self._conn = sqlite3.connect(_db_path(palace_path))
+        self._conn.execute(
+            "CREATE TABLE IF NOT EXISTS worldline_edges ("
+            "  id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "  frm TEXT NOT NULL,"           # cause endpoint
+            "  to_node TEXT NOT NULL,"       # effect endpoint
+            "  relation TEXT NOT NULL,"      # fork | linear | join
+            "  valid_from,"                  # caller logical tick (opens the interval)
+            "  valid_to"                     # caller logical tick or NULL-open (closes at handback)
+            ")"
+        )
+        self._conn.execute(
+            "CREATE TABLE IF NOT EXISTS worldline_kapae ("
+            "  id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "  branch TEXT NOT NULL,"        # the branch-root the mute keys to
+            "  turn_key TEXT NOT NULL,"      # one row per branch turn (the muted node)
+            "  polarity INTEGER NOT NULL,"   # 1 = muted, -1 = restored (un-kapae); latest wins
+            "  tick"                         # caller logical tick
+            ")"
+        )
+        self._conn.execute("CREATE INDEX IF NOT EXISTS ix_edges_frm ON worldline_edges(frm)")
+        self._conn.execute("CREATE INDEX IF NOT EXISTS ix_edges_to ON worldline_edges(to_node)")
+        self._conn.execute("CREATE INDEX IF NOT EXISTS ix_kapae_turn ON worldline_kapae(turn_key)")
+        self._conn.commit()
+
+    # -- structure: add the rhizome edges (SINK-idempotent, kg_io's add-idiom) --------------
+
+    def add_edge(self, frm: str, to_node: str, relation: str, tick) -> dict:
+        """Add one CAUSE->EFFECT edge at `tick`. SINK-idempotent: an identical (frm,to,relation)
+        opening at the SAME tick already stands (a re-observed spawn), so a re-run mints nothing."""
+        if not frm or not to_node:
+            raise ValueError("add_edge: frm and to_node required")
+        if relation not in (REL_FORK, REL_LINEAR, REL_JOIN):
+            raise ValueError(f"add_edge: unknown relation {relation!r}")
+        existing = self._conn.execute(
+            "SELECT 1 FROM worldline_edges WHERE frm=? AND to_node=? AND relation=? AND valid_from IS ?",
+            (frm, to_node, relation, tick),
+        ).fetchone()
+        if existing:
+            return {"added": False, "frm": frm, "to": to_node, "relation": relation}
+        self._conn.execute(
+            "INSERT INTO worldline_edges (frm, to_node, relation, valid_from, valid_to) VALUES (?,?,?,?,NULL)",
+            (frm, to_node, relation, tick),
+        )
+        self._conn.commit()
+        return {"added": True, "frm": frm, "to": to_node, "relation": relation}
+
+    def fork(self, parent: str, child: str, tick) -> dict:
+        """SPAWN — the parent forks the child (parent happened-before child)."""
+        return self.add_edge(parent, child, REL_FORK, tick)
+
+    def linear(self, prev: str, nxt: str, tick) -> dict:
+        """A linear turn->turn step (prev happened-before next)."""
+        return self.add_edge(prev, nxt, REL_LINEAR, tick)
+
+    def handback(self, parent: str, child: str, tick) -> dict:
+        """HANDBACK — the twin-reunion: add the JOIN edge (child->parent, the parent stands after
+        the child) AND CLOSE the still-open fork interval (bitemporal valid_to; move-not-delete —
+        the fork row stays, only its interval closes). Idempotent: a re-handback closes nothing new."""
+        join = self.add_edge(child, parent, REL_JOIN, tick)
+        cur = self._conn.execute(
+            "UPDATE worldline_edges SET valid_to=? WHERE frm=? AND to_node=? AND relation=? AND valid_to IS NULL",
+            (tick, parent, child, REL_FORK),
+        )
+        self._conn.commit()
+        return {"join": join["added"], "fork_closed": cur.rowcount}
+
+    # -- reads: the bitemporal rhizome + the branch subtree + the ∥ verdict ------------------
+
+    def _rows(self, as_of=None) -> list:
+        """Every edge (frm, to, relation, valid_from, valid_to), optionally AS-OF a tick — the
+        bitemporal slice keeps only intervals open at `as_of` (valid_from<=as_of<valid_to)."""
+        rows = self._conn.execute(
+            "SELECT frm, to_node, relation, valid_from, valid_to FROM worldline_edges ORDER BY id"
+        ).fetchall()
+        if as_of is None:
+            return [{"frm": r[0], "to": r[1], "relation": r[2], "valid_from": r[3], "valid_to": r[4]} for r in rows]
+        out = []
+        for r in rows:
+            vf, vt = r[3], r[4]
+            if vf is not None and vf > as_of:
+                continue                       # not yet opened at as_of
+            if vt is not None and vt <= as_of:
+                continue                       # already closed at as_of
+            out.append({"frm": r[0], "to": r[1], "relation": r[2], "valid_from": vf, "valid_to": vt})
+        return out
+
+    def dag(self, as_of=None) -> dict:
+        """The rhizome as an edge list (bitemporal AS-OF a tick, else the whole history) — the
+        tree/replay read: the caller reconstructs adjacency from the CAUSE->EFFECT edges."""
+        return {"edges": self._rows(as_of)}
+
+    def _adjacency(self, relations, as_of=None) -> dict:
+        adj: dict = {}
+        for e in self._rows(as_of):
+            if e["relation"] not in relations:
+                continue
+            adj.setdefault(e["frm"], []).append(e["to"])
+        return adj
+
+    def descendants(self, node: str, as_of=None) -> list:
+        """The BRANCH subtree rooted at `node` — every turn reachable DOWN the spawn-tree
+        (fork+linear), the node itself EXCLUDED. Join edges run upward-to-main, so they never
+        walk (a rejoined branch's tail stays inside its own subtree). Cycle-safe BFS."""
+        adj = self._adjacency(_SPAWN_TREE, as_of)
+        seen, out, queue = {node}, [], list(adj.get(node, []))
+        while queue:
+            n = queue.pop(0)
+            if n in seen:
+                continue
+            seen.add(n)
+            out.append(n)
+            queue.extend(adj.get(n, []))
+        return out
+
+    def branch_keys(self, branch_root: str, as_of=None) -> list:
+        """The full branch = the root PLUS its spawn-tree descendants — the turn-key set kapae mutes."""
+        return [branch_root, *self.descendants(branch_root, as_of)]
+
+    def are_concurrent(self, a: str, b: str, as_of=None) -> bool:
+        """The ∥ verdict — a and b run concurrent when NEITHER stands in the other's spawn-tree
+        subtree (incomparable in the spawn partial-order). Two siblings of one fork with no join
+        between them read ∥; a parent and its own descendant read ordered, not ∥."""
+        if a == b:
+            return False
+        return b not in self.descendants(a, as_of) and a not in self.descendants(b, as_of)
+
+    def relation_of(self, a: str, b: str, as_of=None) -> str:
+        """"before" (a in b's ancestry via the spawn-tree), "after", or "concurrent" (∥)."""
+        if b in self.descendants(a, as_of):
+            return "before"
+        if a in self.descendants(b, as_of):
+            return "after"
+        return "concurrent"
+
+    # -- kapae: the move-not-delete mute polarity-log ---------------------------------------
+
+    def muted_turns(self) -> set:
+        """The live-muted turn-keys — each turn's LATEST polarity row (max id) reading 1. The log
+        stays append-only, so this DERIVES the current mute-state; no row ever drops."""
+        rows = self._conn.execute(
+            "SELECT turn_key, polarity FROM worldline_kapae k WHERE id = "
+            "(SELECT MAX(id) FROM worldline_kapae k2 WHERE k2.turn_key = k.turn_key)"
+        ).fetchall()
+        return {r[0] for r in rows if int(r[1]) == 1}
+
+    def _log(self, branch_root: str, turn_keys, polarity: int, tick) -> None:
+        self._conn.executemany(
+            "INSERT INTO worldline_kapae (branch, turn_key, polarity, tick) VALUES (?,?,?,?)",
+            [(branch_root, tk, polarity, tick) for tk in turn_keys],
+        )
+        self._conn.commit()
+
+    def kapae(self, branch_root: str, tick) -> list:
+        """Mute the branch (root + spawn-tree subtree) — APPEND a polarity=1 row per turn-key
+        (move-not-delete). Returns the muted turn-keys so the coordinator can cascade to the
+        palaces. Idempotent-in-effect: a re-kapae appends fresh polarity=1 rows (the latest still
+        reads muted), never a duplicate STATE."""
+        keys = self.branch_keys(branch_root)
+        self._log(branch_root, keys, 1, tick)
+        return keys
+
+    def un_kapae(self, branch_root: str, tick) -> list:
+        """Restore the branch — APPEND a polarity=-1 row per turn-key (the log grows; the mute
+        rows STAY, only the latest polarity flips). Returns the restored turn-keys for the cascade."""
+        keys = self.branch_keys(branch_root)
+        self._log(branch_root, keys, -1, tick)
+        return keys
+
+    def kapae_log(self) -> list:
+        """The whole append-only mute-log (the move-not-delete witness) — every polarity edge, in order."""
+        rows = self._conn.execute(
+            "SELECT branch, turn_key, polarity, tick FROM worldline_kapae ORDER BY id"
+        ).fetchall()
+        return [{"branch": r[0], "turn_key": r[1], "polarity": int(r[2]), "tick": r[3]} for r in rows]
+
+    def close(self) -> None:
+        self._conn.close()
+
+
+# ---------------------------------------------------------------------------
+# The CASCADE — branch-mute ACROSS the sensoria (the coordinator's cross-palace leg)
+# ---------------------------------------------------------------------------
+#
+# kapae stays worldline-scoped but its BLAST-RADIUS crosses the palaces: muting a branch must mute
+# THOSE turns' entries in every sensorium so recall excludes them. The rhizome holds no vectors,
+# so the cascade rides ABOVE it — it holds the rhizome AND the content stores (the pinned Memory +
+# Dream land-stores), the @daemon coordinator's seat. Each content store resolves its own cids for
+# a turn-key (content_io.cids_for_turn) and mutes/unmutes them (content_io.mute, vector-safe).
+
+
+def cascade_kapae(worldline: WorldlineStore, stores, branch_root: str, tick) -> dict:
+    """FULL kapae: mute the branch in the rhizome, then cascade the mute to EVERY store's entries
+    for those turn-keys. `stores` = the sensoria's content stores (Memory + Dream). Returns the
+    branch + the total entries muted. Reversible via `cascade_un_kapae` (move-not-delete throughout)."""
+    keys = worldline.kapae(branch_root, tick)
+    muted = 0
+    for store in stores:
+        for tk in keys:
+            for cid in store.cids_for_turn(tk):
+                store.mute(cid, tick)
+                muted += 1
+    return {"branch": sorted(keys), "muted_entries": muted}
+
+
+def cascade_un_kapae(worldline: WorldlineStore, stores, branch_root: str, tick) -> dict:
+    """Restore the branch across the rhizome AND every store — the entries reappear in recall. The
+    rows never left (move-not-delete), so cids_for_turn still finds them to un-mute."""
+    keys = worldline.un_kapae(branch_root, tick)
+    restored = 0
+    for store in stores:
+        for tk in keys:
+            for cid in store.cids_for_turn(tk):
+                store.unmute(cid, tick)
+                restored += 1
+    return {"branch": sorted(keys), "restored_entries": restored}
+
+
+# ---------------------------------------------------------------------------
+# serve — the rhizome's NDJSON face (the cascade rides the Python coordinator above)
+# ---------------------------------------------------------------------------
+
+
+def _build_ops(store: WorldlineStore) -> dict:
+    return {
+        "ping": lambda req: {"ready": True},
+        "add_edge": lambda req: store.add_edge(req["frm"], req["to"], req["relation"], req.get("tick")),
+        "fork": lambda req: store.fork(req["parent"], req["child"], req.get("tick")),
+        "linear": lambda req: store.linear(req["prev"], req["next"], req.get("tick")),
+        "handback": lambda req: store.handback(req["parent"], req["child"], req.get("tick")),
+        "dag": lambda req: store.dag(req.get("as_of")),
+        "descendants": lambda req: {"branch": store.descendants(req["node"], req.get("as_of"))},
+        "are_concurrent": lambda req: {"concurrent": store.are_concurrent(req["a"], req["b"], req.get("as_of"))},
+        "relation_of": lambda req: {"relation": store.relation_of(req["a"], req["b"], req.get("as_of"))},
+        "kapae": lambda req: {"branch": store.kapae(req["branch"], req.get("tick"))},
+        "un_kapae": lambda req: {"branch": store.un_kapae(req["branch"], req.get("tick"))},
+        "muted_turns": lambda req: {"muted": sorted(store.muted_turns())},
+        "kapae_log": lambda req: {"log": store.kapae_log()},
+    }
+
+
+def _serve(palace_path: str) -> None:
+    run_sidecar(
+        palace=palace_path,
+        lock_prefix=_LOCK_PREFIX,
+        build_dispatch=lambda: make_dispatch(_build_ops(WorldlineStore(palace_path))),
+        idle_ttl=idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS),
+        singleton_msg="worldline_io: another holder already serves this palace; exiting (singleton)\n",
+    )
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description="worldline I/O (the rhizome fork-DAG + kapae holder)")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    s = sub.add_parser("serve", help="persistent NDJSON RPC holder for one worldline palace dir")
+    s.add_argument("--palace", required=True)
+    s.set_defaults(fn=lambda a: _serve(a.palace))
+    args = ap.parse_args()
+    args.fn(args)
+
+
+if __name__ == "__main__":
+    main()
