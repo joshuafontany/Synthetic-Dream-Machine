@@ -38,6 +38,25 @@ def test_session_memory_store_enforces_schema_and_dim(tmp_path):
     assert s.get("t-6")["metadata"]["chunk_index"] == 0
 
 
+def test_session_memory_store_enforces_embedder_model(tmp_path):
+    # the MODEL-NAME half of the embedder-identity floor (W0.3 / sev16): a same-dim DIFFERENT-model
+    # swap slips the dim guard but corrupts recall — reject it (and an absent tag, fail-closed).
+    s = cio.ContentStore(str(tmp_path / ".model"), expected_dim=3, expected_model="minilm")
+    s.put("t-1", "one", [0.1, 0.2, 0.3], {"lar_embedder_model": "minilm"})   # right model+dim → lands
+    assert s.get("t-1")["metadata"]["lar_embedder_model"] == "minilm"
+    with pytest.raises(ValueError):                                          # same dim, DIFFERENT model → refuse
+        s.put("t-2", "two", [0.1, 0.2, 0.3], {"lar_embedder_model": "other-384d"})
+    with pytest.raises(ValueError):                                          # absent model tag → fail-closed
+        s.put("t-3", "three", [0.1, 0.2, 0.3], {})
+
+
+def test_generic_store_ignores_embedder_model(tmp_path):
+    # no expected_model → generic corpora write with any/no model tag (the guard is opt-in).
+    s = _store(tmp_path)
+    s.put("c-1", "x", [0.1, 0.2], {"lar_embedder_model": "whatever"})  # no raise
+    assert s.get("c-1") is not None
+
+
 def test_guard_raise_crosses_the_wire(tmp_path):
     # fail-loud COMPOSITION: a guard-raise crosses as the {ok:false,error} NDJSON envelope through
     # make_dispatch, never a crash and never a Python exception escaping (JSON-legal str error).

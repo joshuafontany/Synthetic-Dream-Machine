@@ -55,15 +55,18 @@ class ContentStore:
     (skip-identity — the embedder never runs here); the ingest pipeline supplies the vector."""
 
     def __init__(self, palace_path: str, required_keys: "set[str] | None" = None,
-                 expected_dim: "int | None" = None) -> None:
-        # GENERIC by default (arbitrary corpora — no schema, no dim guard). The SESSION-MEMORY
+                 expected_dim: "int | None" = None, expected_model: "str | None" = None) -> None:
+        # GENERIC by default (arbitrary corpora — no schema, no identity guard). The SESSION-MEMORY
         # palace opts IN: `required_keys` names the mempalace-schema metadata a drawer MUST carry
-        # (wing/room/source_file/chunk_index/lar_*); `expected_dim` pins the embedder's vector width
-        # so a model swap that changes the dim FAILS LOUD on the wire (the physically-unusable case —
-        # the embedder-identity floor; the model-tag half rides the caller/coordinator). Neither
-        # fires when unset, so generic corpora are untouched.
+        # (wing/room/source_file/chunk_index/lar_*). The EMBEDDER-IDENTITY FLOOR has two halves, both
+        # opt-in: `expected_dim` pins the vector WIDTH (the physically-unusable case), and
+        # `expected_model` pins the MODEL NAME (the caller stamps `lar_embedder_model` in metadata) —
+        # because a same-dim DIFFERENT-model swap (e.g. minilm→another 384-d model) passes the dim
+        # guard yet corrupts recall silently (vectors from an incomparable space). Both fail LOUD on
+        # the wire; neither fires when unset, so generic corpora are untouched.
         self._required_keys = required_keys or set()
         self._expected_dim = expected_dim
+        self._expected_model = expected_model
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
 
     def _get_raw(self, cid: str) -> "dict | None":
@@ -98,6 +101,13 @@ class ContentStore:
             got = len(embedding) if isinstance(embedding, (list, tuple)) else 0  # guard len(None) → a clean domain error
             raise ValueError(f"content put {cid}: embedding dim {got} != expected {self._expected_dim} "
                              "(embedder-identity floor — a model swap that changes the dim must fail loud)")
+        if self._expected_model is not None:
+            # the model-name half: the caller stamps `lar_embedder_model`; a same-dim different-model
+            # swap slips the dim guard but corrupts recall — reject it (fail-closed on an absent tag too).
+            got_model = str(meta.get("lar_embedder_model", "")).strip()
+            if got_model != self._expected_model:
+                raise ValueError(f"content put {cid}: embedder model {got_model!r} != expected {self._expected_model!r} "
+                                 "(embedder-identity floor — a same-dim different-model swap corrupts recall silently)")
         # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
         # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
         # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.
@@ -230,14 +240,15 @@ def _build_ops(store: ContentStore) -> dict:
     }
 
 
-def _serve(palace_path: str, required_keys: "set[str] | None" = None, expected_dim: "int | None" = None) -> None:
+def _serve(palace_path: str, required_keys: "set[str] | None" = None, expected_dim: "int | None" = None,
+           expected_model: "str | None" = None) -> None:
     # The guards ride optional kwargs into the store built inside the dispatch closure — so
     # run_sidecar is untouched, and the session-memory contract reaches the RPC face (the QA #1
     # fix: the coordinator's resolveMemoryContentSpawn passes the flags; a generic corpus omits them).
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim))),
+        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim, expected_model=expected_model))),
         idle_ttl=_idle_ttl_seconds(),
         singleton_msg="content_io: another holder already serves this palace; exiting (singleton)\n",
     )
@@ -252,12 +263,15 @@ def main() -> None:
                    help="comma-joined schema keys a session-memory drawer MUST carry; empty = generic corpus (no schema guard)")
     s.add_argument("--expected-dim", type=int, default=None,
                    help="pin the embedder vector width; a dim mismatch fails loud (session-memory opt-in; unset = generic)")
+    s.add_argument("--expected-model", default=None,
+                   help="pin the embedder MODEL name (checked vs each drawer's lar_embedder_model); a same-dim different-model swap fails loud (session-memory opt-in; unset = off)")
     s.set_defaults(fn=lambda a: _serve(
         a.palace,
         # `if k` is load-bearing: an empty/absent --require-keys yields None (generic), never {""}
         # (which would fire the guard on every put and reject all generic corpora).
         required_keys=({k for k in a.require_keys.split(",") if k} or None),
-        expected_dim=a.expected_dim))
+        expected_dim=a.expected_dim,
+        expected_model=a.expected_model))
     args = ap.parse_args()
     args.fn(args)
 
