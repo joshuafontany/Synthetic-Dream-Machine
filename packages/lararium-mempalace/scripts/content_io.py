@@ -88,6 +88,24 @@ class ContentStore:
         # re-put still passes (the re-derivation crash-cure). The Dream sensorium leaves this off (mutable).
         self._append_only = append_only
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
+        if self._expected_model is not None:
+            self._assert_palace_model_history()
+
+    def _assert_palace_model_history(self) -> None:
+        """The PALACE-HISTORY half of the identity floor: refuse to OPEN a palace that already holds
+        vectors from a DIFFERENT embedder. The record-level `expected_model` guard catches a mis-stamped
+        drawer, but a model-B driver re-opening a model-A palace stamps each record self-consistently
+        (stamp==pin) and slips it — yet its queries search an incomparable space (recall corruption of the
+        immutable ground). Peek one held drawer; a disagreeing model fails loud on compose."""
+        got = self._col.get(limit=1, include=["metadatas"])
+        metas = got.get("metadatas") or []
+        if not metas:
+            return  # empty palace — no history to disagree with
+        held = str((metas[0] or {}).get("lar_embedder_model", "")).strip()
+        if held and held != self._expected_model:
+            raise ValueError(f"content palace already holds vectors from embedder {held!r} != expected "
+                             f"{self._expected_model!r} — a model swap over an existing palace searches an "
+                             "incomparable space (palace-history identity floor); re-embed or open under the held model")
 
     def _get_raw(self, cid: str) -> "dict | None":
         got = self._col.get(ids=[cid], include=["documents", "metadatas"])

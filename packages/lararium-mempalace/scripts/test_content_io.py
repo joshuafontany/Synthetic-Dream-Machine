@@ -69,6 +69,18 @@ def test_mutable_store_allows_overwrite_the_dream_default(tmp_path):
     assert s.get("c-1")["document"] == "second"
 
 
+def test_palace_history_model_floor_on_compose(tmp_path):
+    # the palace-history half: a model-B driver re-opening a model-A palace fails loud on compose
+    # (the record-level stamp can't catch it — a model-B driver stamps self-consistently).
+    palace = str(tmp_path / ".hist")
+    a = cio.ContentStore(palace, expected_dim=3, expected_model="minilm")
+    a.put("c-1", "one", [0.1, 0.2, 0.3], {"lar_embedder_model": "minilm"})
+    cio.ContentStore(palace, expected_dim=3, expected_model="minilm")   # same model re-opens fine
+    with pytest.raises(ValueError):                                     # model-B over a model-A palace → refuse
+        cio.ContentStore(palace, expected_dim=3, expected_model="other-384d")
+    cio.ContentStore(str(tmp_path / ".empty"), expected_model="minilm")  # empty palace → no history, opens
+
+
 def test_generic_store_ignores_embedder_model(tmp_path):
     # no expected_model → generic corpora write with any/no model tag (the guard is opt-in).
     s = _store(tmp_path)
