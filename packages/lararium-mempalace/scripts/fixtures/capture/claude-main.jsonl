@@ -1,0 +1,8 @@
+{"type":"summary","summary":"a leading non-turn line the parser skips"}
+{"type":"user","uuid":"u-1","parentUuid":null,"sessionId":"sess-abc","timestamp":"2026-07-04T10:00:00Z","cwd":"/home/joshu/proj","message":{"role":"user","content":[{"type":"text","text":"light the capture engine"}]}}
+{"type":"assistant","uuid":"a-1","parentUuid":"u-1","sessionId":"sess-abc","timestamp":"2026-07-04T10:00:05Z","message":{"role":"assistant","content":[{"type":"text","text":"the source-cap parses the transcript"},{"type":"tool_use","id":"t1","name":"Write","input":{}}]}}
+{"type":"user","uuid":"u-2","parentUuid":"a-1","sessionId":"sess-abc","timestamp":"2026-07-04T10:01:00Z","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"t1","content":"ok"}]}}
+{"type":"user","uuid":"u-3","parentUuid":"a-1","sessionId":"sess-abc","timestamp":"2026-07-04T10:02:00Z","message":{"role":"user","content":"drive the pass"}}
+{"type":"assistant","uuid":"a-3","parentUuid":"u-3","sessionId":"sess-abc","timestamp":"2026-07-04T10:02:05Z","message":{"role":"assistant","content":[{"type":"text","text":"the drain-ledger orders the land"}]}}
+{"type":"user","uuid":"u-4","parentUuid":"a-3","sessionId":"sess-abc","timestamp":"2026-07-04T10:03:00Z","message":{"role":"user","content":"re-run it"}}
+{"type":"assistant","uuid":"a-4","parentUuid":"u-4","sessionId":"sess-abc","timestamp":"2026-07-04T10:03:05Z","message":{"role":"assistant","content":[{"type":"text","text":"the re-derivation lands only the tail"}]}}

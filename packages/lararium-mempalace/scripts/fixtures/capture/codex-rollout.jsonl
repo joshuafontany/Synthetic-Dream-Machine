@@ -1,0 +1,9 @@
+{"type":"session_meta","timestamp":"2026-07-04T11:00:00Z","payload":{"id":"cx-thread-1","session_id":"cx-thread-1","cwd":"/home/joshu/proj","forked_from_id":null}}
+{"type":"turn_context","payload":{"turn_id":"turn-0","cwd":"/home/joshu/proj"}}
+{"type":"response_item","timestamp":"2026-07-04T11:00:01Z","payload":{"type":"message","role":"developer","content":[{"type":"input_text","text":"base instructions injection — skipped"}]}}
+{"type":"response_item","timestamp":"2026-07-04T11:00:02Z","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"parse the codex rollout"}]}}
+{"type":"event_msg","timestamp":"2026-07-04T11:00:03Z","payload":{"type":"stream_delta","text":"double-count trap — skipped"}}
+{"type":"response_item","timestamp":"2026-07-04T11:00:04Z","payload":{"type":"reasoning","content":[{"type":"output_text","text":"reasoning item — skipped"}]}}
+{"type":"response_item","timestamp":"2026-07-04T11:00:05Z","payload":{"type":"message","role":"assistant","id":"msg_cx1","content":[{"type":"output_text","text":"the response_item lines carry the transcript"}]}}
+{"type":"response_item","timestamp":"2026-07-04T11:01:00Z","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"and the developer role"}]}}
+{"type":"response_item","timestamp":"2026-07-04T11:01:05Z","payload":{"type":"message","role":"assistant","id":"msg_cx2","content":[{"type":"output_text","text":"drops from the transcript"}]}}

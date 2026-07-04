@@ -39,6 +39,55 @@ def _row_get(row, key):
     return v if isinstance(v, str) and v.strip() else None
 
 
+def read_sessions(db_path):
+    """Yield `(session_id, cwd, turns)` from the Copilot SQLite store — the SQLite READ, NEVER the
+    deleted per-session events.jsonl (which captures nothing now). Each `turns` row (one full
+    user+assistant exchange) EXPANDS to Claude-shaped turn dicts `{uuid, role, text, ts}` in the grain
+    the engine's exchange-assembler eats. The source-cap (`capture_sources.copilot_source`) drives this;
+    the CLI `main` below renders the same turns to on-disk jsonl for the legacy harvester manifest.
+
+    Yields nothing (never raises) when the db goes missing / unreadable, or a session runs empty."""
+    if not os.path.exists(db_path):
+        return  # no db → nothing to read
+    try:
+        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+    except sqlite3.Error:
+        return
+    conn.row_factory = sqlite3.Row
+    try:
+        try:
+            sessions = conn.execute("SELECT id, cwd FROM sessions").fetchall()
+        except sqlite3.Error:
+            return
+        for s in sessions:
+            sid = _row_get(s, "id")
+            if not sid:
+                continue
+            cwd = _row_get(s, "cwd") or ""
+            try:
+                rows = conn.execute(
+                    "SELECT turn_index, user_message, assistant_response, timestamp "
+                    "FROM turns WHERE session_id=? ORDER BY turn_index",
+                    (sid,),
+                ).fetchall()
+            except sqlite3.Error:
+                continue
+            turns = []
+            for t in rows:
+                idx = t["turn_index"]
+                ts = _row_get(t, "timestamp") or ""
+                um = _row_get(t, "user_message")
+                am = _row_get(t, "assistant_response")
+                if um:
+                    turns.append({"uuid": f"{sid}-t{idx}-u", "role": "user", "text": um, "ts": ts})
+                if am:
+                    turns.append({"uuid": f"{sid}-t{idx}-a", "role": "assistant", "text": am, "ts": ts})
+            if turns:
+                yield sid, cwd, turns
+    finally:
+        conn.close()
+
+
 def main():
     if len(sys.argv) < 3:
         sys.exit("usage: copilot_sqlite_normalize.py <session-store.db> <out_dir>")
@@ -47,65 +96,22 @@ def main():
         return  # no db → nothing to export (empty manifest)
     os.makedirs(out_dir, exist_ok=True)
 
-    try:
-        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
-    except sqlite3.Error:
-        return
-    conn.row_factory = sqlite3.Row
-
-    try:
-        sessions = conn.execute(
-            "SELECT id, cwd FROM sessions"
-        ).fetchall()
-    except sqlite3.Error:
-        conn.close()
-        return
-
-    for s in sessions:
-        sid = _row_get(s, "id")
-        if not sid:
-            continue
-        cwd = _row_get(s, "cwd") or ""
-        try:
-            turns = conn.execute(
-                "SELECT turn_index, user_message, assistant_response, timestamp "
-                "FROM turns WHERE session_id=? ORDER BY turn_index",
-                (sid,),
-            ).fetchall()
-        except sqlite3.Error:
-            continue
-        if not turns:
-            continue  # empty session — nothing to harvest
-
+    for sid, cwd, turns in read_sessions(db_path):
+        # Render each turn dict back to the Claude-Code transcript line shape the legacy harvester eats.
         out_path = os.path.join(out_dir, f"{sid}.jsonl")
         n = 0
         try:
             with open(out_path, "w", encoding="utf-8") as fh:
                 for t in turns:
-                    idx = t["turn_index"]
-                    ts = _row_get(t, "timestamp") or ""
-                    um = _row_get(t, "user_message")
-                    am = _row_get(t, "assistant_response")
-                    if um:
-                        fh.write(json.dumps({
-                            "type": "user",
-                            "uuid": f"{sid}-t{idx}-u",
-                            "timestamp": ts,
-                            "sessionId": sid,
-                            "cwd": cwd,
-                            "message": {"role": "user", "content": um},
-                        }) + "\n")
-                        n += 1
-                    if am:
-                        fh.write(json.dumps({
-                            "type": "assistant",
-                            "uuid": f"{sid}-t{idx}-a",
-                            "timestamp": ts,
-                            "sessionId": sid,
-                            "cwd": cwd,
-                            "message": {"role": "assistant", "content": am},
-                        }) + "\n")
-                        n += 1
+                    fh.write(json.dumps({
+                        "type": t["role"],
+                        "uuid": t["uuid"],
+                        "timestamp": t["ts"],
+                        "sessionId": sid,
+                        "cwd": cwd,
+                        "message": {"role": t["role"], "content": t["text"]},
+                    }) + "\n")
+                    n += 1
         except OSError:
             continue
         if n == 0:
@@ -114,10 +120,10 @@ def main():
             except OSError:
                 pass
             continue
-
-        sys.stdout.write(json.dumps({"id": sid, "cwd": cwd, "path": out_path, "turns": len(turns)}) + "\n")
-
-    conn.close()
+        # The manifest counts turn-ROWS (each `<sid>-t<idx>` prefix names one exchange row), NOT the
+        # expanded user+assistant line count — parity with the pre-refactor manifest.
+        row_count = len({t["uuid"].rsplit("-", 1)[0] for t in turns})
+        sys.stdout.write(json.dumps({"id": sid, "cwd": cwd, "path": out_path, "turns": row_count}) + "\n")
 
 
 if __name__ == "__main__":
