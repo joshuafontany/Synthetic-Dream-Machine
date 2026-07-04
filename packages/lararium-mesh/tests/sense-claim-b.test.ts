@@ -60,3 +60,16 @@ describe("sense-claim-b — W12: self-emergence under drift, through the keel ha
     expect(trackedTail).toBeLessThan(0.15);
   });
 });
+
+describe("sense-claim-b — I8: the frozen anchor stays immutable under live tracking (the poison-ward foundation)", () => {
+  test("project() on a fixed probe reads IDENTICALLY before and after a full regime shift folds through track()", () => {
+    const keel = buildSpectralKeel(S0, { k: 1, step: 0.5 });
+    const probe = [0.6, -0.4, 0.1, 0.3];
+    const before = keel.project(probe).spe;
+    // Drive a whole S0→S1 shift through track — the live U_t entrains hard toward the new regime.
+    regimeShiftStream(w0, w1, 30, 120, { seed: 11 }).forEach((f) => keel.track(f));
+    const after = keel.project(probe).spe;
+    // The frozen Π₀ never moved: track mutates ONLY U_t, so a capless island's project can never be poisoned.
+    expect(after).toBe(before);
+  });
+});
