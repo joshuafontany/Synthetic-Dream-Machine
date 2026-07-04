@@ -131,6 +131,7 @@ export * from "./null-harness.js";
 export * from "./numerics.js";
 export * from "./arl-dial.js";
 export * from "./subspace-track.js";
+export * from "./synthetic-drift.js";
 export * from "./sink-flow.js";
 export * from "./partition-monitor.js";
 export * from "./self-coupling.js";
