@@ -58,8 +58,9 @@ export interface CorpusManifest {
    *  (no router / no parser for the corpus's kinds) — the content plane still stands. */
   readonly structures?: number;
   /** bands-plane adaptive lar_ffz cells the multi-scale FFZ sidecar filed (S1): one per content
-   *  chunk, a five-band aperture address (Theme.Arc.Measure.Beat.Pulse) with a Canon/Provisional
-   *  register from the resampling gate. 0 ⇒ bands-skipped (no sidecar / R / too few vectors) —
+   *  chunk, a five-band aperture address (Theme.Arc.Measure.Beat.Pulse) with a reproduced/fragile
+   *  repro_grade from the resampling gate (a hardened-math witness — the wiki, not the sensorium,
+   *  runs the data→meme promotion). 0 ⇒ bands-skipped (no sidecar / R / too few vectors) —
    *  the content + structure planes still stand. */
   readonly bands?: number;
   /** form-plane constructions the induction sidecar surfaced (S3): the corpus's OWN grammar,
@@ -160,7 +161,7 @@ export function corpusStructureDir(palaceDir: string): string {
 }
 
 /** The bands plane's adaptive lar_ffz cells NDJSON, written under the corpus instance dir (swept
- *  on dissolve with everything else). One line per content chunk: {id?, lar_ffz, register, cells}. */
+ *  on dissolve with everything else). One line per content chunk: {id?, lar_ffz, repro_grade, cells}. */
 export function corpusBandsCellsPath(palaceDir: string): string {
   return join(palaceDir, "bands-cells.ndjson");
 }
