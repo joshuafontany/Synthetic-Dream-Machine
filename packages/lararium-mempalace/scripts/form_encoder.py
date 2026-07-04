@@ -771,11 +771,11 @@ class FormPalaceStore:
 
     def store(self, key: str, form_vector: dict, dimension: int, metadata: dict) -> dict:
         """Upsert one form-vector keyed by ``key`` (the verbatim_sha). Recurrence on the
-        same key (a re-mined turn) bumps ``count`` and refreshes ``last_seen``."""
+        same key (a re-mined turn) bumps ``count`` and refreshes ``last_sighting``."""
         if not key:
             raise ValueError("form store requires a non-empty key (the verbatim_sha)")
         dense = _densify(form_vector, dimension)
-        now = _unreliable_witness_timestamp()
+        sighting = _unreliable_witness_timestamp()  # a PURE unreliable-witness sighting — provenance only
         # Flat, chroma-legal metadata (str/int/float/bool only — never None).
         meta: dict[str, object] = {
             "kind": "form",
@@ -793,11 +793,11 @@ class FormPalaceStore:
                 count = int(existing["metadata"].get("count", 1)) + 1
             except (ValueError, TypeError):
                 count = 1
-            meta["first_seen"] = existing["metadata"].get("first_seen", now)
+            meta["first_sighting"] = existing["metadata"].get("first_sighting", sighting)
         else:
-            meta["first_seen"] = now
+            meta["first_sighting"] = sighting
         meta["count"] = count
-        meta["last_seen"] = now
+        meta["last_sighting"] = sighting
         # Carry the bearing facets (bearing_w1/w2/w3/root/path/frag/grade) through to chroma
         # metadata — the aim/yield bearing descended to flat scalars (bearing-ast#bearingFacets),
         # where-filterable for the structured bearing recall path. Flat str/int/float/bool only.

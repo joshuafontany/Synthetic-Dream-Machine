@@ -33,13 +33,13 @@ stdout (banners/library noise → stderr, which the TS side drains and ignores):
     -> {"id":3,"op":"get","hash":H}
     <- {"id":3,"ok":true,"result":{ <StructureEntry> | null }}
 
-    -> {"id":4,"op":"kapae","turn_key":K,"ended":T}
+    -> {"id":4,"op":"kapae","turn_key":K,"set_aside_mark":M}
     <- {"id":4,"ok":true,"result":{"closed":N,"tombstoned":[H,…],"verbatim_shas":[V,…],"turn_key":K}}
 
 KAPAE (rewind = set-aside, never erase) — the structurepalace twin of the worldline KG kapae.
 Keyed by the USER turn's uuid (turn_key), which `put` threads into every provenance entry. A
 gone turn drops its provenance line and decrements `count`; an entry whose count falls to ≤0 is
-TOMBSTONED (`lar_tombstoned_at` stamped, the chroma row KEPT, excluded from recall) rather than
+TOMBSTONED (`lar_tombstoned` stamped, the chroma row KEPT, excluded from recall) rather than
 deleted (history preserved). Idempotent: a 2nd kapae for the same uuid finds the line already
 gone → a no-op. A small sqlite reverse-index (`turnkey_index.sqlite3`, beside the chroma store —
 mirrors kg_io's raw-sqlite-beside-chroma idiom) keeps the turn_key → structural_hash lookup O(1),
@@ -340,12 +340,12 @@ class StructurePalaceStore:
             "hash": raw["id"],
             "ast": ast,
             "count": int(meta.get("count", 1)),
-            "first_seen": meta.get("first_seen", ""),
-            "last_seen": meta.get("last_seen", ""),
+            "first_sighting": meta.get("first_sighting", ""),
+            "last_sighting": meta.get("last_sighting", ""),
             "provenance": provenance,
             # kapae set-aside marker (absent on a live entry); a tombstoned entry keeps its row
             # but its structure no longer counts toward recurrence.
-            **({"tombstoned_at": meta["lar_tombstoned_at"]} if meta.get("lar_tombstoned_at") else {}),
+            **({"tombstoned_at": meta["lar_tombstoned"]} if meta.get("lar_tombstoned") else {}),
         }
 
     def get(self, structural_hash: str) -> dict | None:
@@ -353,7 +353,7 @@ class StructurePalaceStore:
         return self._to_entry(raw) if raw is not None else None
 
     def put(self, structural_hash: str, ast_json: str, source_file: str, verbatim_sha: str, turn_key: str = "") -> dict:
-        now = _unreliable_witness_timestamp()
+        sighting = _unreliable_witness_timestamp()  # a PURE unreliable-witness sighting — provenance only, never a worldline/tombstone marker
         # The provenance line carries the kapae key (the USER turn's uuid) alongside the verbatim
         # join — so a gone turn can drop exactly its line. turn_key may be "" (a put with no turn
         # context, e.g. a backfill); such a line is simply not kapae-addressable.
@@ -367,7 +367,7 @@ class StructurePalaceStore:
             # A re-put to the SAME structure skips this (idempotent no-op).
             prior_hash = self._index.lookup(turn_key)
             if prior_hash and prior_hash != structural_hash:
-                self._retract_turn_from(prior_hash, turn_key, now)
+                self._retract_turn_from(prior_hash, turn_key, turn_key)  # set-aside marker = the PURE logical turn_key, never the unreliable sighting
             # The reverse-index lets kapae find this structure by turn_key in O(1).
             self._index.put(turn_key, structural_hash)
         existing = self._get_raw(structural_hash)
@@ -387,7 +387,7 @@ class StructurePalaceStore:
             meta.update(
                 {
                     "count": count,
-                    "last_seen": now,
+                    "last_sighting": sighting,
                     "lar_verbatim_sha": verbatim_sha,
                     "source_file": source_file,
                     "lar_provenance": json.dumps(provenance),
@@ -395,8 +395,8 @@ class StructurePalaceStore:
             )
             # Revival: a tombstoned structure that recurs is live again (its turns came back, or a
             # new turn unfolds the same shape). Clear the set-aside marker ("" reads as live).
-            if meta.get("lar_tombstoned_at"):
-                meta["lar_tombstoned_at"] = ""
+            if meta.get("lar_tombstoned"):
+                meta["lar_tombstoned"] = ""
             # Recurrence: same structure, same id → upsert (overwrite) the one entry.
             mine_busy_retry(lambda: self._col.upsert(
                 ids=[structural_hash],
@@ -412,8 +412,8 @@ class StructurePalaceStore:
             "lar_verbatim_sha": verbatim_sha,
             "source_file": source_file,
             "count": 1,
-            "first_seen": now,
-            "last_seen": now,
+            "first_sighting": sighting,
+            "last_sighting": sighting,
             "lar_provenance": json.dumps([link]),
         }
         mine_busy_retry(lambda: self._col.upsert(
@@ -424,9 +424,9 @@ class StructurePalaceStore:
         ))
         return {"hash": structural_hash, "count": 1}
 
-    def _retract_turn_from(self, structural_hash: str, turn_key: str, ended: str) -> dict:
+    def _retract_turn_from(self, structural_hash: str, turn_key: str, set_aside_mark: str) -> dict:
         """Drop `turn_key`'s provenance line(s) from `structural_hash` and decrement its recurrence
-        `count`; tombstone-at-zero (`lar_tombstoned_at` stamped, the chroma row KEPT) rather than
+        `count`; tombstone-at-zero (`lar_tombstoned` stamped, the chroma row KEPT) rather than
         delete — history preserved, recall excludes it. Idempotent: a line already gone → a no-op
         (nothing re-decremented). SHARED by kapae (the gone-turn set-aside) and put (the edit-under-
         same-uuid stale-tally guard). Returns {closed, tombstoned, verbatim_shas}.
@@ -457,13 +457,13 @@ class StructurePalaceStore:
         meta["lar_provenance"] = json.dumps(kept)
         tombstoned = []
         if count <= 0:
-            meta["lar_tombstoned_at"] = ended
+            meta["lar_tombstoned"] = set_aside_mark
             tombstoned.append(structural_hash)
         # update() (not upsert) — leave the document/embedding untouched; only the metadata moves.
         self._col.update(ids=[structural_hash], metadatas=[meta])
         return {"closed": removed, "tombstoned": tombstoned, "verbatim_shas": dropped_shas}
 
-    def kapae(self, turn_key: str, ended: str | None = None) -> dict:
+    def kapae(self, turn_key: str, set_aside_mark: str | None = None) -> dict:
         """Set-aside (NOT erase) the AST tally for a gone turn — the structurepalace twin of the KG kapae.
 
         Find the structure the turn unfolded to (via the O(1) reverse-index) and retract its tally
@@ -475,11 +475,13 @@ class StructurePalaceStore:
         empty = {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
         if not turn_key:
             return empty
-        ended = ended or _unreliable_witness_timestamp()
+        # PURITY: the set-aside marker stays PURE logical — the caller's mark, else the turn_key handle;
+        # NEVER the unreliable sighting (kapae is a worldline rewind; the tombstone must not carry host-time).
+        set_aside_mark = set_aside_mark or turn_key
         structural_hash = self._index.lookup(turn_key)
         if not structural_hash:
             return empty
-        res = self._retract_turn_from(structural_hash, turn_key, ended)
+        res = self._retract_turn_from(structural_hash, turn_key, set_aside_mark)
         return {**res, "turn_key": turn_key}
 
 
@@ -496,7 +498,7 @@ def _build_ops(store: StructurePalaceStore) -> dict:
             req.get("turn_key", ""),
         ),
         "get": lambda req: store.get(req["hash"]),
-        "kapae": lambda req: store.kapae(req["turn_key"], req.get("ended")),
+        "kapae": lambda req: store.kapae(req["turn_key"], req.get("set_aside_mark")),
     }
 
 
@@ -552,7 +554,7 @@ def _structure_embeddings(palace_path: str, out) -> int:
         sys.stderr.write(f"structure-embeddings: no structurepalace ({type(exc).__name__}: {exc}) — 0 rows\n")
         return 0
     rows = read_stored_embeddings(
-        col, {"provenance": "lar_provenance", "tombstoned": "lar_tombstoned_at"}
+        col, {"provenance": "lar_provenance", "tombstoned": "lar_tombstoned"}
     )
     written = 0
     for r in rows:

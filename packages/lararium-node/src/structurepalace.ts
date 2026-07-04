@@ -58,10 +58,10 @@ export interface StructureEntry {
   readonly ast: unknown;
   /** recurrence tally — how many turns have unfolded to this exact structure (the frequency signal) */
   count: number;
-  /** ISO timestamp of first sighting */
-  readonly first_seen: string;
-  /** ISO timestamp of most-recent sighting */
-  last_seen: string;
+  /** the fallible local sighting of first observation (unreliable-witness provenance, never authoritative time) */
+  readonly first_sighting: string;
+  /** the fallible local sighting of most-recent observation (unreliable-witness provenance, never authoritative time) */
+  last_sighting: string;
   /** the verbatim turns this structure unfolded from (deduped, capped) — the bound-to-verbatim link */
   provenance: StructureProvenance[];
 }
@@ -97,7 +97,7 @@ export interface StructurePalace {
    * idempotent. Returns the dropped verbatim shas (the content drawers the salience producer
    * down-weights). Best-effort at the caller — a holder fault never sinks the harvest.
    */
-  kapae(turnKey: string, ended?: string): Promise<StructureKapaeResult>;
+  kapae(turnKey: string, setAsideMark?: string): Promise<StructureKapaeResult>;
   /** The structural hash of a tree WITHOUT storing it (the content address) — pure-TS, no holder. */
   hashOf(astTree: unknown): Promise<string>;
   /** Release this reference to the shared holder; the process is killed when the last one closes. */
@@ -153,8 +153,8 @@ export function makeStructurePalace(dir: string, opts: StructurePalaceOptions = 
       return (await p.send("get", { hash })) as StructureEntry | null;
     },
 
-    async kapae(turnKey: string, ended?: string): Promise<StructureKapaeResult> {
-      const res = (await p.send("kapae", { turn_key: turnKey, ...(ended ? { ended } : {}) })) as
+    async kapae(turnKey: string, setAsideMark?: string): Promise<StructureKapaeResult> {
+      const res = (await p.send("kapae", { turn_key: turnKey, ...(setAsideMark ? { set_aside_mark: setAsideMark } : {}) })) as
         | Partial<StructureKapaeResult>
         | null;
       return {

@@ -36,7 +36,7 @@ class _DummyStore:
     def get(self, h):
         return None
 
-    def kapae(self, turn_key, ended=None):
+    def kapae(self, turn_key, set_aside_mark=None):
         return {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
 
 
