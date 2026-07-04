@@ -13,7 +13,21 @@ fake, injected by monkeypatch. Run under the mempalace venv:
 import argparse
 import json
 
+import pytest
+
 import drawer_io as dio
+
+
+def test_write_paths_fail_closed_when_adapter_missing(monkeypatch, tmp_path):
+    # KA-4 fail-closed: an un-importable adapter (_DECLARED None) must REFUSE a session-memory write,
+    # never silently degrade to unvalidated/mis-stamped drawers. _require_adapter raises before _col().
+    monkeypatch.setattr(dio, "_DECLARED", None)
+    pf = tmp_path / "p.ndjson"
+    pf.write_text(json.dumps({"id": "d1", "patch": {"lar_salience": 0.5}}) + "\n")
+    with pytest.raises(SystemExit):
+        dio.cmd_apply(argparse.Namespace(patchfile=str(pf)))
+    with pytest.raises(SystemExit):
+        dio.cmd_kapae(argparse.Namespace(patchfile=str(pf), salience=None))
 
 
 class _FakeCollection:

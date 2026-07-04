@@ -55,8 +55,20 @@ try:
     )
 
     _DECLARED = declared_field_names()
-except Exception:  # noqa: BLE001 — fail safe: still write, just unstamped
+except Exception:  # noqa: BLE001 — export (read) stays soft; the WRITE paths gate via _require_adapter
     _DECLARED, ADAPTER_NAME, ADAPTER_VERSION = None, "lares", "0.1.0"
+
+
+def _require_adapter() -> None:
+    """Fail-CLOSED for a session-memory WRITE: an un-importable adapter means we can neither validate
+    the lar_* schema NOR stamp the true adapter identity — so refuse, rather than silently degrade to
+    unvalidated/mis-stamped drawers (the exact drift the schema contract exists to catch). The export
+    (read) path stays soft; only apply/kapae gate on this."""
+    if _DECLARED is None:
+        raise SystemExit(
+            "AdapterUnavailableError: mempalace_source_lares.adapter did not import — cannot validate "
+            "or stamp lar_* writes; refusing (fail-closed). Fix the adapter/package before writing."
+        )
 
 
 def _col():
@@ -215,6 +227,7 @@ def cmd_cluster(args):
 
 
 def cmd_apply(args):
+    _require_adapter()  # fail-closed: no unvalidated/mis-stamped session-memory writes
     col = _col()
     patches = list(read_ndjson_records(args.patchfile))
     applied = 0
@@ -260,6 +273,7 @@ def cmd_kapae(args):
     Idempotent per detection — kapae fires once per gone turn (the structurepalace no-ops a re-kapae),
     so the stamp keeps its FIRST detection moment. Merge-only update (never deletes a field),
     the adapter identity stamped like apply."""
+    _require_adapter()  # fail-closed: no mis-stamped session-memory writes
     col = _col()
     recs = list(read_ndjson_records(args.patchfile))
     ended_by_sha = {r["verbatim_sha"]: r.get("ended") for r in recs if r.get("verbatim_sha")}
