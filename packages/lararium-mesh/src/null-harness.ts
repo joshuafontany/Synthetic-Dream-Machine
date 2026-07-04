@@ -23,6 +23,8 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
  */
 
+import type { ArlDial } from "./arl-dial.js";
+
 /** A deterministic PRNG (mulberry32) from a local seed — reproducible nulls, no global randomness. */
 export function makeRng(seed: number): () => number {
   let a = seed >>> 0;
@@ -87,6 +89,27 @@ export function surrogateNull(
   const threshold = nullStat[idx]!;
   const pValue = (ge + 1) / (trials + 1);
   return { threshold, observed, pValue, exceeds: observed > threshold };
+}
+
+/**
+ * Wire the surrogate-null into the ONE dial: the ARL₀ dial's α sets the (1−α) quantile the surrogate-null
+ * reads, so the threshold turns SELF-EMERGENT (data-driven from the null) AND dialed (its rate rides ARL₀).
+ * This replaces a hardcoded threshold (rigidity, γ, basinRadius) with one the null calibrates at the dial's
+ * α — the ΔS instrument feeding the one operator dial. A stricter ARL₀ (smaller α) raises the null quantile,
+ * so the emergent threshold rises (harder to exceed) — the dial governs the self-emergent gate, monotone.
+ */
+export function calibrateThreshold(
+  dial: ArlDial,
+  refSeries: readonly number[],
+  statistic: (s: readonly number[]) => number,
+  surrogate: (s: readonly number[], rng: () => number) => number[],
+  opts: { trials?: number; seed?: number } = {},
+): NullVerdict {
+  return surrogateNull(refSeries, statistic, surrogate, {
+    alpha: dial.alpha,
+    trials: opts.trials ?? 200,
+    seed: opts.seed ?? 1,
+  });
 }
 
 /** A structure statistic — lag-1 autocorrelation. High on a temporally-ordered (NESS) series, ≈0 on iid

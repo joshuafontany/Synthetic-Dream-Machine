@@ -6,7 +6,8 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { surrogateNull, iidShuffle, lag1Autocorr, makeRng, phaseScramble, timeReversalAsymmetry } from "../src/null-harness.js";
+import { surrogateNull, iidShuffle, lag1Autocorr, makeRng, phaseScramble, timeReversalAsymmetry, calibrateThreshold } from "../src/null-harness.js";
+import { makeArlDial } from "../src/arl-dial.js";
 
 describe("null-harness — the self-emergent threshold (surrogate = equilibrium, signal = NESS)", () => {
   test("a structured (autocorrelated) series EXCEEDS its iid-shuffle equilibrium null", () => {
@@ -56,5 +57,21 @@ describe("null-harness — the phase-scramble null (nonlinear lock vs linear-Gau
     const surr = phaseScramble(saw, makeRng(9));
     // autocorrelation = inverse-FT of the power spectrum → invariant under phase-scramble.
     expect(Math.abs(lag1Autocorr(surr) - lag1Autocorr(saw))).toBeLessThan(0.05);
+  });
+});
+
+describe("null-harness — the ARL₀ dial governs the self-emergent threshold (the null feeds the one dial)", () => {
+  const structured = Array.from({ length: 120 }, (_, t) => Math.sin(t / 6) + t * 0.01);
+
+  test("the threshold emerges from the null at the dial's α (self-emergent + dialed)", () => {
+    const v = calibrateThreshold(makeArlDial(20), structured, lag1Autocorr, iidShuffle, { trials: 300, seed: 7 });
+    expect(Number.isFinite(v.threshold)).toBe(true); // no hardcoded constant — it emerged
+    expect(v.exceeds).toBe(true); // the structured series (NESS) still clears its own equilibrium null
+  });
+
+  test("a stricter ARL₀ (smaller α) RAISES the emergent threshold — the dial governs the gate, monotone", () => {
+    const loose = calibrateThreshold(makeArlDial(5), structured, lag1Autocorr, iidShuffle, { trials: 400, seed: 7 });
+    const strict = calibrateThreshold(makeArlDial(200), structured, lag1Autocorr, iidShuffle, { trials: 400, seed: 7 });
+    expect(strict.threshold).toBeGreaterThanOrEqual(loose.threshold); // higher (1−α) quantile → higher threshold
   });
 });
