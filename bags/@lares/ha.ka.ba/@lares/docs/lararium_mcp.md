@@ -182,7 +182,7 @@ The durable MCP design now lives under `packages/lares-core/memes/docs/lararium_
 | `carrier-law` | meme, invariant, memetic-wikitext, loci, and interface bundle compiler pressure |
 | `hydration` | required-core closure, edge taxonomy, artifact contract, resource exposure |
 | `ast-execution-render` | AST envelope, TiddlyWiki boundary, pranala planes, execution graph, render projection |
-| `adapters` | submodule adapter interface, submodule lane map, MemPalace sidecar contract |
+| `adapters` | submodule adapter interface, submodule lane map, MemPalace sidecar contract (RETIRED → `adapters#contentpalace-inherits`) |
 | `local-clients` | VS Code, Claude Code, Codex, prompt catalog, read-only tool façade |
 | `sprint-ledger` | closed Sprint-00/01/02 contraction and consumed-source map |
 
@@ -198,6 +198,8 @@ Graph redesign cluster lives under `packages/lares-core/memes/docs/graph/**`:
 
 Legacy non-meme design docs in `docs/mcp/` that contributed content now carry consumed markers.
 Active Sprint-03, roadmap, backlog, and todo work-tracking files remain live planning surfaces.
+
+<<~ confidence Synthesis-Canon 15/20 >> **MemPalace sidecar retires — M1 sidecar-free (swarm ruling, 2026-07-03).** The read-only stdio sidecar demonstration no longer holds: the sovereign **contentpalace** inherits mempalace's exact base schema (ChromaDB `cid·document·embedding·metadata`, 384-dim cosine), stands py-served behind the causal-island, and replaces the top-level `~/.mempalace` sidecar; ingest offloads via @daemon coordinator verbs to the py nalu-gates. Contract + retire-residue: `adapters#contentpalace-inherits`. The `adapters/mempalace.py` stdio client (module map above) and the read-only-gate rows below stand as consumed history.
 
 <<~/ahu >>
 

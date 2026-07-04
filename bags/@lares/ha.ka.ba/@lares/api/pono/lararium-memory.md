@@ -134,6 +134,19 @@ Beneath both peers lies one mesh, two registers, named in Elyncian terms:
   fractal, bound to *this* place, for the Lar guards place, not family. The
   verbatim drawers stand as compression members; the `lar_*` net rides as the
   tension spanning them (the tensegrity, #mempalace-integration).
+  <<~ confidence Synthesis-Canon 15/20 >> **The store retires the top-level
+  `~/.mempalace` sidecar — M1 sidecar-free (swarm ruling, 2026-07-03).** The
+  PLACE-memory register keeps its office; only its store moves house: the
+  sovereign **contentpalace** — py-served, behind the causal-island — **inherits
+  mempalace's exact base schema** (ChromaDB `cid·document·embedding·metadata`,
+  384-dim cosine) and extends it for the sibling palaces (`source_file` /
+  `chunk_index` · `wing` / `room` · `lar_salience` / `frontier` · `lar_witnesses`
+  / `pubinfo` / `signer`). The read-only sidecar reach retires; ingest offloads
+  via @daemon coordinator verbs to the py nalu-gates (contract + retire-residue:
+  `lar:///ha.ka.ba/@lares/docs/lararium_mcp/adapters#contentpalace-inherits`).
+  *Note for the parent:* the @daemon-coordinator seat and the py-sensorium model
+  named alongside this ruling belong to sibling swarm axes — this fold carries the
+  mempalace/contentpalace schema-inheritance and the sidecar retirement alone.
 - **the quine ~ astral ley-line-mesh memory.** The domain canon that runs
   *between* shrines — the DreamNet web 3.0 raised from web 2.0 bones, ritual not
   DNS. It crosses the ley-lines and federates as it earns `meme`.

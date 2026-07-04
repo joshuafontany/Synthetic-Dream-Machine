@@ -95,6 +95,8 @@ All current submodules count as core pieces of the MCP program, though not all e
 
 ## MemPalace Sidecar Contract
 
+> **RETIRED → `#contentpalace-inherits` (swarm ruling, 2026-07-03).** The top-level `~/.mempalace` sidecar retires: the sovereign **contentpalace** — py-served, behind the causal-island — inherits mempalace's exact base schema and replaces the read-only sidecar reach. **M1 stands sidecar-free.** The stdio JSON-RPC contract below keeps its shape as consumed history; ingest now offloads via @daemon coordinator verbs to the py nalu-gates. Retired terms reserve, never reuse.
+
 Lares talks to MemPalace across the MCP protocol boundary rather than importing MemPalace Python modules.
 Canonical v1 transport: JSON-RPC over stdio.
 
@@ -128,6 +130,25 @@ Accepted v1 wrapper groups:
 | `create_tunnel(source, target, label)` | `mempalace_create_tunnel` | create cross-palace link; policy-gated in workflows |
 
 Implementation landed as `lares/lararium_mcp/adapters/mempalace.py` with mocked subprocess JSON-RPC tests.
+
+<<~/ahu >>
+
+<<~ ahu #contentpalace-inherits >>
+
+## ContentPalace Inherits the Schema ~ M1 sidecar-free
+
+<<~ confidence Synthesis-Canon 15/20 >> The **contentpalace inherits mempalace's exact base schema** and extends it across the whole palace architecture (swarm ruling, 2026-07-03). The base carries through byte-for-byte:
+
+| Field | Base (mempalace) | Reading |
+|---|---|---|
+| `cid` | content id | the drawer's content-address |
+| `document` | verbatim text | what the turn said |
+| `embedding` | 384-dim vector, cosine | the semantic seat |
+| `metadata` | the drawer's tags | bearing, register, provenance |
+
+ChromaDB backs it; the 384-dim cosine space holds. ContentPalace **extends** the base for the sibling palaces — `source_file` / `chunk_index` (provenance) · `wing` / `room` (place) · `lar_salience` / `frontier` (standing) · `lar_witnesses` / `pubinfo` / `signer` (attestation). The one base carries through the whole architecture, every palace inheriting it.
+
+**M1 — sidecar-free.** The sovereign contentpalace stands **py-served, behind the causal-island boundary** (web3-only law routes any py bridge behind an island, #causal-islands) and **replaces the top-level `~/.mempalace` sidecar** (#mempalace-sidecar, retired). The read-only stdio JSON-RPC reach no longer carries ingest — **all ingest offloads via @daemon coordinator verbs to the py nalu-gates**. The @daemon coordinator seat and the py nalu-gate wiring belong to the wider swarm ruling; this locus carries the schema-inheritance and the sidecar retirement alone.
 
 <<~/ahu >>
 

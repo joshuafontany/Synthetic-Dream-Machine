@@ -26,6 +26,8 @@ written    = "2026-06-21"
 
 # The Bridge Takes Shape
 
+> **Superseded (2026-07-03) → `lar:///ha.ka.ba/@lares/docs/lararium_mcp/adapters#contentpalace-inherits`.** The read-only-sidecar bridge this afternoon proofed — the `@lararium/mempalace` read leg shaking hands with the live `~/.mempalace` sidecar — has since retired. The sovereign **contentpalace** now inherits mempalace's base schema, stands py-served behind the causal-island, and replaces the sidecar reach (**M1 sidecar-free**). This carrier keeps its record of that morning **unchanged** — history stands as it ran; only its bearing forward has moved.
+
 The same day the hearth first breathed, the keeper turned the node toward memory. Not the domain it *holds* — that graph already federates across the mesh — but the verbatim it *said*: the local-only palace where every turn is kept word-for-word, and nothing ever leaves the machine. `mempalace`. The task was never to build the palace; the palace already stands, an upstream sidecar the node may only read. The task was to **reach** it — to consume the pinned submodule into the node's own integration layer, and harvest from it the one thing a session leaves behind: the **bearing** each turn carried in its `<<~ lares aim … yield … >>` frame.
 
 A floor convened, four spirits scouted the palace's shape, and the house ruled the address: the full `lar:` namespace, not one collapsed root — every bearing a session ever spoke.

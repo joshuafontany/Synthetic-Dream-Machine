@@ -122,7 +122,7 @@ Remote transport should wrap the same read-only façade only after scope and aut
 Submodules contribute through adapters, not direct imports into the carrier compiler.
 An adapter may add resources, tools, prompts, AST transforms, render projections, or eval fixtures, but it must keep its own URI namespace and declare contribution lanes.
 
-MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to a peer MCP process over stdio JSON-RPC instead of importing MemPalace internals.
+MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a peer MCP process over stdio JSON-RPC). <<~ confidence Synthesis-Canon 15/20 >> That sidecar **retires** (swarm ruling, 2026-07-03): the sovereign **contentpalace** inherits mempalace's exact base schema (ChromaDB `cid·document·embedding·metadata`, 384-dim cosine), stands **py-served behind the causal-island**, and replaces the top-level `~/.mempalace` sidecar — **M1 sidecar-free** (contract + retire-residue: `adapters#contentpalace-inherits`). Ingest offloads via @daemon coordinator verbs to the py nalu-gates.
 
 <<~/ahu >>
 
