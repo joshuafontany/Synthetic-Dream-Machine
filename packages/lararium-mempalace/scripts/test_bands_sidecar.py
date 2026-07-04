@@ -7,8 +7,9 @@ Four faces proven, all chroma-free (pure signal in, bands verdict out):
      (a boundary moves toward fresh spectral evidence, damped; no evidence → it holds).
   3. the TREE — the multivariate divisive changepoint tree yields NESTED cuts over a
      multivariate block fixture (the R ecp path, or the ruptures fallback when R is absent).
-  4. the GATE — the resampling-consensus register locks a STABLE boundary Canon and holds a
-     noise-only one Provisional (the confidence register made statistical).
+  4. the GATE — the resampling-consensus grade reads a STABLE boundary REPRODUCED and a
+     noise-only one FRAGILE (a hardened-math witness, NOT the confidence register — the wiki's
+     data→meme/lore→canon promotion is a separate CRDT-layer act consuming this grade).
 
 Run under the mempalace venv:
     ~/.venv/bin/python -m pytest \
@@ -133,29 +134,29 @@ def test_band_cuts_nest_prefix_truncatable():
 
 def test_stability_gate_locks_stable_holds_noise():
     """The resampling-consensus gate: a STRONG block boundary reproduces under noise-floor
-    jitter (LOCKS Canon); a noise-only fixture yields lower consensus with Provisional cuts."""
+    jitter (reads REPRODUCED); a noise-only fixture yields lower consensus with FRAGILE cuts."""
     E = _blocks(noise=0.02)
     order = bs.changepoint_tree(E, max_cuts=8, min_size=2)["order"]
     gate = bs.stability_gate(E, order, n_boot=50, seed=7)
-    # the true boundaries (30, 60) lock Canon
+    # the true boundaries (30, 60) read reproduced
     for true_cut in (30, 60):
         near = [c for c in order if abs(c - true_cut) <= 2]
         assert near, f"tree missed the true cut near {true_cut}"
-        assert any(gate["register_of_cut"][int(c)] == "Canon" for c in near)
+        assert any(gate["grade_of_cut"][int(c)] == "reproduced" for c in near)
         assert max(gate["cut_support"][int(c)] for c in near) >= 0.7
 
     # a pure-noise fixture — no true structure → the gate refuses to canonize noise. Two
     # engines, two shapes of refusal, BOTH honored: the ruptures fallback always returns
-    # cuts, so the resampling register HOLDS at least one Provisional (a low-consensus,
+    # cuts, so the resampling grade HOLDS at least one fragile (a low-consensus,
     # un-witnessed cut); the R `ecp::e.divisive` permutation test refuses the cut at source,
-    # so `order` comes back EMPTY (a stronger refusal — nothing even reaches the register).
+    # so `order` comes back EMPTY (a stronger refusal — nothing even reaches the grade).
     noise = np.random.default_rng(11).normal(0, 1, (90, 3))
     norder = bs.changepoint_tree(noise, max_cuts=8, min_size=2)["order"]
     ngate = bs.stability_gate(noise, norder, n_boot=50, seed=7)
     assert ngate["consensus"] < gate["consensus"], "noise must witness weaker than clean blocks"
-    reg = ngate["register_of_cut"]
-    assert (not reg) or any(r == "Provisional" for r in reg.values()), (
-        "noise must not canonize: either no significant cut (ecp) or a Provisional one (ruptures)"
+    grade = ngate["grade_of_cut"]
+    assert (not grade) or any(r == "fragile" for r in grade.values()), (
+        "noise must not read reproduced: either no significant cut (ecp) or a fragile one (ruptures)"
     )
 
 
@@ -175,7 +176,7 @@ def test_jackknife_gate_runs_index_shift_aware():
 
 def test_run_stack_emits_five_band_cells():
     """The full stack over the block fixture emits one lar_ffz address per chunk, five bands
-    coarse→fine, each chunk carrying a Canon/Provisional register."""
+    coarse→fine, each chunk carrying a reproduced/fragile repro_grade."""
     E = _blocks()
     coh = bs.cohesion_signal([E])
     out = bs.run_stack(E, spine_signal=coh.mean(axis=1), n_boot=30)
@@ -184,7 +185,7 @@ def test_run_stack_emits_five_band_cells():
     row = out["cells"][45]
     assert set(row["cells"]) == set(bs.FFZ_ADDRESS_ORDER)
     assert row["lar_ffz"].startswith("corpus/")
-    assert row["register"] in ("Canon", "Provisional")
+    assert row["repro_grade"] in ("reproduced", "fragile")
     # the finest band (Pulse) is the chunk index itself
     assert out["cells"][45]["cells"]["Pulse"] == 45
     assert out["spine"]["levels"] >= 1
@@ -284,7 +285,7 @@ def test_cli_analyze_signal_emits_cells():
     assert summary["cells"] == 90
     cells = [json.loads(l) for l in out_lines[:-1]]
     assert len(cells) == 90
-    assert all("lar_ffz" in c and "register" in c for c in cells)
+    assert all("lar_ffz" in c and "repro_grade" in c for c in cells)
 
 
 def test_cli_couple_stdin():

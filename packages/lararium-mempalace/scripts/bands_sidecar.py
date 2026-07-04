@@ -23,20 +23,21 @@ The stack rides four layers plus a gate (corpus.md #the-bands):
              when R is unavailable (the incremental-Binseg order IS a divisive hierarchy).
   AUTO-TUNE— scale-count by EWT/ridge vote + a wavelet-variance elbow; penalty by MDL;
              BOCPD-per-band (`bocd`) with a scale-specific hazard from the band's variance.
-  GATE     — the confidence register made STATISTICAL: bootstrap/jackknife
-             resampling-consensus locks a band/cut as Canon only where a resample
-             reproduces it, else holds it Provisional. Per-band wavelet-thresholding sets
+  GATE     — the reproduction grade (a hardened-math WITNESS, NOT the confidence register):
+             bootstrap/jackknife resampling-consensus marks a band/cut REPRODUCED only where
+             a resample reproduces it, else FRAGILE. Per-band wavelet-thresholding sets
              the noise floor.
 
 NOVEL GROUND (corpus.md flag): no prior art runs a wavelet over an embedding-COHESION
 signal (wavelets over price/audio/EEG, yes; over a semantic-cohesion time-series, none).
-The resampling gate is LOAD-BEARING — an un-witnessed band boundary NEVER locks Canon.
+The resampling gate is LOAD-BEARING — an un-witnessed band boundary NEVER reads reproduced
+(the wiki's data→meme/lore→canon promotion is a SEPARATE CRDT-layer act consuming this witness).
 
 drawer_io-style NDJSON over stdio (the established sidecar contract). Faces:
   * the library: cohesion_signal · modwt_mra · ewt_servo · changepoint_tree ·
     stability_gate · ffz_cells (pure, chroma-free — the VERIFY surface)
   * `decompose --signal <file|-> [--planes N]`  → the full stack over a raw signal
-        matrix → one JSON summary (bands · boundaries · cuts · register) on stdout
+        matrix → one JSON summary (bands · boundaries · cuts · repro_grade) on stdout
   * `analyze  --palace <dir> [--signal <file>]` → read the corpus content(+form)
         embeddings back out of the scratch palace, build the cohesion signal, run the
         stack → NDJSON lar_ffz cells + a final JSON summary. GRACEFUL: no chroma /
@@ -584,14 +585,14 @@ def _segment_labels(n: int, cuts: list[int]) -> list[int]:
 
 
 def ffz_cells(order: list[int], band_counts: list[int], n: int,
-              registers: dict | None = None) -> list[dict]:
+              grades: dict | None = None) -> list[dict]:
     """Build the per-chunk lar_ffz membership address from the nested cut tree.
 
     For each aperture band the segmentation uses the first `band_counts[b]` cuts (a PREFIX
     of the finer band's cuts → nesting), so the address is prefix-truncatable exactly like
     mesh/ffz-project.ts ffzMembershipAddress. Pulse = the chunk index (the finest atom).
     Returns one row per chunk: {"index", "cells": {Theme,Arc,Measure,Beat,Pulse},
-    "lar_ffz": "<profile>/…", "register": Canon|Provisional}."""
+    "lar_ffz": "<profile>/…", "repro_grade": reproduced|fragile}."""
     theme_n, arc_n, measure_n, beat_n = (band_counts + [0, 0, 0, 0])[:4]
     labels = {
         "Theme": _segment_labels(n, order[:theme_n]),
@@ -600,7 +601,7 @@ def ffz_cells(order: list[int], band_counts: list[int], n: int,
         "Beat": _segment_labels(n, order[:beat_n]),
         "Pulse": list(range(n)),
     }
-    reg = registers or {}
+    grades_map = grades or {}
     rows = []
     for i in range(n):
         cells = {b: labels[b][i] for b in FFZ_ADDRESS_ORDER}
@@ -609,12 +610,12 @@ def ffz_cells(order: list[int], band_counts: list[int], n: int,
             "index": i,
             "cells": cells,
             "lar_ffz": "corpus/" + ".".join(segs),
-            "register": reg.get(i, "Canon"),
+            "repro_grade": grades_map.get(i, "reproduced"),
         })
     return rows
 
 
-# ── GATE — resampling-consensus: lock Canon only where a bootstrap reproduces the cut ─────
+# ── GATE — resampling-consensus: mark a cut REPRODUCED only where a bootstrap reproduces it ─────
 
 
 def _noise_floor_per_col(M: np.ndarray) -> np.ndarray:
@@ -632,24 +633,25 @@ def _noise_floor_per_col(M: np.ndarray) -> np.ndarray:
 def stability_gate(matrix: np.ndarray, order: list[int], n_boot: int = 40,
                    tol: int = 2, seed: int = 12345, method: str = "bootstrap",
                    floor_mult: float = 1.0) -> dict:
-    """The confidence register made STATISTICAL (corpus.md #the-convergence-gate). Perturb
-    the multivariate signal at its own NOISE FLOOR (index-PRESERVING, so a cut's location
+    """The reproduction grade — a hardened-math WITNESS (NOT the confidence register; the wiki's
+    data→meme/lore→canon promotion is a separate CRDT-layer act that CONSUMES this grade as data).
+    Perturb the multivariate signal at its own NOISE FLOOR (index-PRESERVING, so a cut's location
     stays comparable — unlike a sequence-resample, which scrambles where a boundary sits),
     re-detect the changepoint tree on each replicate, and score how often each original cut
     REPRODUCES (a replicate cut lands within `tol` chunks). A cut backed by a shift larger
-    than the noise floor survives the jitter (LOCKS Canon, support ≥ ½); a cut resting on
-    sub-floor wiggle fragments (HOLDS Provisional). Two methods:
+    than the noise floor survives the jitter (reads REPRODUCED, support ≥ ½); a cut resting on
+    sub-floor wiggle reads FRAGILE. Two methods:
       · "bootstrap"  — additive noise-floor jitter (a wild/residual bootstrap), the default.
       · "jackknife"  — leave-a-contiguous-block-out, with index-shift-aware reproduction
                        (a cut past the dropped block is expected `block` chunks earlier).
-    Returns {"cut_support", "register_of_cut", "consensus", "method"}. NEVER lets an
-    un-witnessed boundary read Canon."""
+    Returns {"cut_support", "grade_of_cut", "consensus", "method"}. NEVER lets an
+    un-witnessed boundary read reproduced."""
     M = np.asarray(matrix, dtype=float)
     if M.ndim == 1:
         M = M.reshape(-1, 1)
     n = M.shape[0]
     if n < 8 or not order:
-        return {"cut_support": {}, "register_of_cut": {}, "consensus": 0.0, "method": method}
+        return {"cut_support": {}, "grade_of_cut": {}, "consensus": 0.0, "method": method}
     rng = np.random.default_rng(seed)
     max_cuts = len(order)
     hits = {int(c): 0 for c in order}
@@ -679,9 +681,9 @@ def stability_gate(matrix: np.ndarray, order: list[int], n_boot: int = 40,
                     hits[int(c)] += 1
     denom = max(1, valid)
     support = {int(c): hits[int(c)] / denom for c in order}
-    register = {int(c): ("Canon" if support[int(c)] >= 0.5 else "Provisional") for c in order}
+    grade = {int(c): ("reproduced" if support[int(c)] >= 0.5 else "fragile") for c in order}
     consensus = float(np.mean(list(support.values()))) if support else 0.0
-    return {"cut_support": support, "register_of_cut": register, "consensus": consensus, "method": method}
+    return {"cut_support": support, "grade_of_cut": grade, "consensus": consensus, "method": method}
 
 
 def wavelet_threshold_floor(mra: dict) -> float:
@@ -1320,14 +1322,14 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
         var = float(energy[j]) if j < len(energy) else 1.0
         hazard = max(4.0, 1.0 / (var + _EPS) ** 0.5)  # low-variance (coarse) → long expected segment
         bocpd[band_name] = bocpd_changepoints(band_sig, hazard)
-    # Per-chunk register: a chunk inherits the WEAKEST register of the cuts bounding its
-    # coarsest changed band (a chunk under only Provisional cuts holds Provisional).
-    reg_of_cut = gate["register_of_cut"]
-    chunk_reg = {}
+    # Per-chunk repro-grade: a chunk inherits the WEAKEST grade of the cuts bounding its
+    # coarsest changed band (a chunk under only fragile cuts reads fragile).
+    grade_of_cut = gate["grade_of_cut"]
+    chunk_grade = {}
     for i in range(n):
-        bounding = [reg_of_cut.get(int(c), "Canon") for c in order if int(c) <= i]
-        chunk_reg[i] = "Provisional" if any(r == "Provisional" for r in bounding) else "Canon"
-    cells = ffz_cells(order, band_counts, n, registers=chunk_reg)
+        bounding = [grade_of_cut.get(int(c), "reproduced") for c in order if int(c) <= i]
+        chunk_grade[i] = "fragile" if any(r == "fragile" for r in bounding) else "reproduced"
+    cells = ffz_cells(order, band_counts, n, grades=chunk_grade)
     return {
         "n": n,
         "planes": M.shape[1],
@@ -1340,8 +1342,8 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
         "slaving": slaving_leg(mra),
         "tree": {"engine": tree["engine"], "n_cuts": len(order), "order": order, "band_counts": band_counts},
         "gate": {"consensus": gate["consensus"], "cut_support": gate["cut_support"], "method": gate_method,
-                 "canon_cuts": sum(1 for r in reg_of_cut.values() if r == "Canon"),
-                 "provisional_cuts": sum(1 for r in reg_of_cut.values() if r == "Provisional")},
+                 "reproduced_cuts": sum(1 for r in grade_of_cut.values() if r == "reproduced"),
+                 "fragile_cuts": sum(1 for r in grade_of_cut.values() if r == "fragile")},
         "bocpd": bocpd,
         "noise_floor": wavelet_threshold_floor(mra),
         "cells": cells,
@@ -1455,13 +1457,13 @@ def cmd_analyze(args) -> None:
     out = run_stack(tree_matrix, spine_signal=spine_signal, n_boot=args.boot, gate_method=args.gate)
     # Emit one NDJSON cell per chunk (keyed to the drawer id when the palace supplied ids).
     for row in out["cells"]:
-        rec = {"lar_ffz": row["lar_ffz"], "register": row["register"], "cells": row["cells"]}
+        rec = {"lar_ffz": row["lar_ffz"], "repro_grade": row["repro_grade"], "cells": row["cells"]}
         if ids is not None and row["index"] < len(ids):
             rec["id"] = ids[row["index"]]
         sys.stdout.write(json.dumps(rec) + "\n")
     # The authoritative final summary line (the TS caller parses the LAST JSON object).
     summary = {
-        "note": f"bands: {out['tree']['n_cuts']} cuts · {out['gate']['canon_cuts']} Canon / {out['gate']['provisional_cuts']} Provisional · engine {out['tree']['engine']} · {note}",
+        "note": f"bands: {out['tree']['n_cuts']} cuts · {out['gate']['reproduced_cuts']} reproduced / {out['gate']['fragile_cuts']} fragile · engine {out['tree']['engine']} · {note}",
         "cells": len(out["cells"]),
         "bands": out["spine"]["levels"],
         "consensus": out["gate"]["consensus"],
