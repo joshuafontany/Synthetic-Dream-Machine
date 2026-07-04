@@ -739,7 +739,10 @@ def _densify(form_vector: dict, dimension: int) -> list[float]:
     return dense
 
 
-def _now() -> str:
+def _unreliable_witness_timestamp() -> str:
+    """A host-wall-clock reading — an UNRELIABLE WITNESS under no-global-now: island clocks skew, so
+    this value NEVER compares across islands and NEVER orders anything. Provenance only; the logical/FFZ
+    clock is the ordering authority once it lands py-side. Named to strip the false-clock authority."""
     import datetime
 
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -772,7 +775,7 @@ class FormPalaceStore:
         if not key:
             raise ValueError("form store requires a non-empty key (the verbatim_sha)")
         dense = _densify(form_vector, dimension)
-        now = _now()
+        now = _unreliable_witness_timestamp()
         # Flat, chroma-legal metadata (str/int/float/bool only — never None).
         meta: dict[str, object] = {
             "kind": "form",

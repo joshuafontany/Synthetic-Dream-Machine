@@ -286,7 +286,12 @@ def _embed(ast_json: str, structural_hash: str) -> list[float]:
     return _structural_embed(tree)
 
 
-def _now() -> str:
+def _unreliable_witness_timestamp() -> str:
+    """A host-wall-clock reading — an UNRELIABLE WITNESS under no-global-now: island clocks skew, so
+    this value NEVER compares across islands and NEVER orders anything. Provenance only (a rough "this
+    node saw it around here"); the logical/FFZ clock — once it lands py-side — is the ordering authority.
+    Named to strip the false-clock authority, not to fabricate a shared now (two-clocks: this is neither
+    the CRDT-causal clock nor the FFZ rhythm)."""
     import datetime
 
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -348,7 +353,7 @@ class StructurePalaceStore:
         return self._to_entry(raw) if raw is not None else None
 
     def put(self, structural_hash: str, ast_json: str, source_file: str, verbatim_sha: str, turn_key: str = "") -> dict:
-        now = _now()
+        now = _unreliable_witness_timestamp()
         # The provenance line carries the kapae key (the USER turn's uuid) alongside the verbatim
         # join — so a gone turn can drop exactly its line. turn_key may be "" (a put with no turn
         # context, e.g. a backfill); such a line is simply not kapae-addressable.
@@ -470,7 +475,7 @@ class StructurePalaceStore:
         empty = {"closed": 0, "tombstoned": [], "verbatim_shas": [], "turn_key": turn_key}
         if not turn_key:
             return empty
-        ended = ended or _now()
+        ended = ended or _unreliable_witness_timestamp()
         structural_hash = self._index.lookup(turn_key)
         if not structural_hash:
             return empty
