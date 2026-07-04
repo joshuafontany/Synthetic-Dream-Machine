@@ -43,16 +43,16 @@ export interface PersistencePalace {
    * assertion} — an identical re-record collides idempotently. `document` is the OPTIONAL text
    * projection (the "past text" slot). Returns the testimony id. THROWS if the store did not persist.
    */
-  record(kind: string, assertion: readonly number[], provenance: RecordProvenance, pubinfo?: Record<string, unknown>, document?: string): Promise<{ tid: string }>;
+  record(kind: string, assertion: readonly number[], provenance: RecordProvenance, pubinfo?: Record<string, unknown>, document?: string): Promise<{ claimCid: string }>;
   /** Load a Testimony by id, or null if absent. */
-  get(tid: string): Promise<Testimony | null>;
+  get(claimCid: string): Promise<Testimony | null>;
   /** Append a witness edge (corroboration polarity +1 / defeat −1) — the store persists it (move-not-delete). */
-  witness(tid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }>;
+  witness(claimCid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }>;
   /**
    * The FEP re-entry read THROUGH the keel: load the testimony, derive standing+voice under the
    * policy (mode = policy.halfLife), return the low-standing prior. Null if the testimony is absent.
    */
-  reentry(tid: string, policy?: PersistencePolicy, now?: number): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null>;
+  reentry(claimCid: string, policy?: PersistencePolicy, now?: number): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null>;
   /**
    * The admit gate THROUGH the keel: read the store's nearest population, score the candidate's
    * novelty, return the verdict. The write-time decision the caller enacts before {@link record}.
@@ -81,32 +81,32 @@ export function makePersistencePalace(dir: string, opts: PersistencePalaceOption
   // Compose the SHARED transport cap; layer the persistence op-surface + the mesh keel below.
   const p = composePalace(LABEL, dir, opts.spawn ?? defaultHolderSpawn, opts.timeoutMs ?? 30_000);
 
-  const tidOf = (kind: string, assertion: readonly number[], prov: RecordProvenance): Promise<string> =>
+  const claimCidOf = (kind: string, assertion: readonly number[], prov: RecordProvenance): Promise<string> =>
     sha256Hex(canonicalJsonBytes({ signer: prov.signer, frontier: prov.frontier, assertion }), defaultCryptoProvider);
 
   return {
-    async record(kind, assertion, provenance, pubinfo = {}, document = ""): Promise<{ tid: string }> {
-      const tid = await tidOf(kind, assertion, provenance);
+    async record(kind, assertion, provenance, pubinfo = {}, document = ""): Promise<{ claimCid: string }> {
+      const claimCid = await claimCidOf(kind, assertion, provenance);
       await p.send("put", {
-        tid, kind, assertion, signer: provenance.signer, frontier: provenance.frontier, pubinfo, document,
+        claim_cid: claimCid, kind, assertion, signer: provenance.signer, frontier: provenance.frontier, pubinfo, document,
       });
-      return { tid };
+      return { claimCid };
     },
 
-    async get(tid: string): Promise<Testimony | null> {
-      return (await p.send("get", { tid })) as Testimony | null;
+    async get(claimCid: string): Promise<Testimony | null> {
+      return (await p.send("get", { claim_cid: claimCid })) as Testimony | null;
     },
 
-    async witness(tid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }> {
+    async witness(claimCid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }> {
       const r = (await p.send("witness", {
-        tid, signer: edge.signer, frontier: edge.frontier, polarity: edge.polarity,
+        claim_cid: claimCid, signer: edge.signer, frontier: edge.frontier, polarity: edge.polarity,
         ...(edge.tick !== undefined ? { tick: edge.tick } : {}),
       })) as { ok?: boolean; witnesses?: number } | null;
       return { ok: r?.ok ?? false, witnesses: r?.witnesses ?? 0 };
     },
 
-    async reentry(tid, policy = WITNESS_POLICY, now?): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null> {
-      const t = (await p.send("get", { tid })) as Testimony | null;
+    async reentry(claimCid, policy = WITNESS_POLICY, now?): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null> {
+      const t = (await p.send("get", { claim_cid: claimCid })) as Testimony | null;
       if (t === null) return null;
       return reentryPrior(t, policy, now);   // the keel derives standing+voice — the store never does
     },

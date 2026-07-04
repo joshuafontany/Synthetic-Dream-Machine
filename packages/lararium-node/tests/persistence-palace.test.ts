@@ -32,31 +32,31 @@ afterEach(async () => { await Promise.all(opened.splice(0).map((p) => p.close())
 describe("makePersistencePalace (keel ⊕ store, driven live)", () => {
   test("record → get round-trips a Testimony, born silent", async () => {
     const pal = openPalace(await palaceDir());
-    const { tid } = await pal.record("innovation", [0.1, 0.2, 0.3], prov, { vow: "provisional" });
-    expect(tid).toMatch(/^[0-9a-f]{64}$/);                 // content-addressed
-    const t = await pal.get(tid);
+    const { claimCid } = await pal.record("innovation", [0.1, 0.2, 0.3], prov, { vow: "provisional" });
+    expect(claimCid).toMatch(/^[0-9a-f]{64}$/);                 // content-addressed
+    const t = await pal.get(claimCid);
     expect(t).not.toBeNull();
     expect(t!.provenance).toEqual(prov);
     expect(t!.pubinfo).toEqual({ vow: "provisional" });
     expect(t!.witnesses).toEqual([]);
-    const re = await pal.reentry(tid);
+    const re = await pal.reentry(claimCid);
     expect(re!.voice).toBe("silent");                      // no witnesses → the floor
   }, TEST_TIMEOUT);
 
   test("a DISTINCT-signer witness speaks it — standing derived THROUGH the keel from the persisted log", async () => {
     const pal = openPalace(await palaceDir());
-    const { tid } = await pal.record("innovation", [1, 0], prov);
-    await pal.witness(tid, { signer: "vessel-B", frontier: "f1", polarity: 1 });
-    const re = await pal.reentry(tid);
+    const { claimCid } = await pal.record("innovation", [1, 0], prov);
+    await pal.witness(claimCid, { signer: "vessel-B", frontier: "f1", polarity: 1 });
+    const re = await pal.reentry(claimCid);
     expect(re!.voice).toBe("spoken");
     expect(re!.standing).toBeGreaterThan(3);               // above the floor
   }, TEST_TIMEOUT);
 
   test("frequency-capture defense survives the round-trip: SAME signer 5× stays silent", async () => {
     const pal = openPalace(await palaceDir());
-    const { tid } = await pal.record("innovation", [1, 0], prov);
-    for (let i = 0; i < 5; i++) await pal.witness(tid, { signer: "vessel-A", frontier: `f${i}`, polarity: 1 });
-    expect((await pal.reentry(tid))!.voice).toBe("silent"); // self-signer weighs zero
+    const { claimCid } = await pal.record("innovation", [1, 0], prov);
+    for (let i = 0; i < 5; i++) await pal.witness(claimCid, { signer: "vessel-A", frontier: `f${i}`, polarity: 1 });
+    expect((await pal.reentry(claimCid))!.voice).toBe("silent"); // self-signer weighs zero
   }, TEST_TIMEOUT);
 
   test("the admit gate: an outlier admits, a near-duplicate is refused", async () => {

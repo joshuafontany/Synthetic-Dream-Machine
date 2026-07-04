@@ -21,13 +21,13 @@ Protocol — NDJSON over stdin/stdout, one JSON object per line (only JSON to st
     -> {"id":1,"op":"ping"}
     <- {"id":1,"ok":true,"result":{"ready":true}}
 
-    -> {"id":2,"op":"put","tid":T,"kind":K,"assertion":[...],"signer":S,"frontier":F,"pubinfo":{...}}
-    <- {"id":2,"ok":true,"result":{"tid":T}}
+    -> {"id":2,"op":"put","claim_cid":C,"kind":K,"assertion":[...],"signer":S,"frontier":F,"pubinfo":{...}}
+    <- {"id":2,"ok":true,"result":{"claim_cid":C}}
 
-    -> {"id":3,"op":"get","tid":T}
+    -> {"id":3,"op":"get","claim_cid":C}
     <- {"id":3,"ok":true,"result":{ <Testimony> | null }}
 
-    -> {"id":4,"op":"witness","tid":T,"signer":S,"frontier":F,"polarity":1,"tick":N}
+    -> {"id":4,"op":"witness","claim_cid":C,"signer":S,"frontier":F,"polarity":1,"tick":N}
     <- {"id":4,"ok":true,"result":{"ok":true,"witnesses":M}}
 
     -> {"id":5,"op":"neighbors","assertion":[...],"k":16}
@@ -87,8 +87,8 @@ class PersistenceStore:
         self._expected_dim = expected_dim
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
 
-    def _get_raw(self, tid: str) -> "dict | None":
-        got = self._col.get(ids=[tid], include=["embeddings", "metadatas", "documents"])
+    def _get_raw(self, claim_cid: str) -> "dict | None":
+        got = self._col.get(ids=[claim_cid], include=["embeddings", "metadatas", "documents"])
         ids = got.get("ids") or []
         if not ids:
             return None
@@ -119,19 +119,19 @@ class PersistenceStore:
             "document": raw.get("document") or "",
         }
 
-    def get(self, tid: str) -> "dict | None":
-        raw = self._get_raw(tid)
+    def get(self, claim_cid: str) -> "dict | None":
+        raw = self._get_raw(claim_cid)
         return self._to_testimony(raw) if raw is not None else None
 
-    def put(self, tid: str, kind: str, assertion: list, signer: str, frontier: str, pubinfo: dict, document: str = "") -> dict:
-        # Idempotent on the id: a re-put of the same tid overwrites (the caller owns the id, a
+    def put(self, claim_cid: str, kind: str, assertion: list, signer: str, frontier: str, pubinfo: dict, document: str = "") -> dict:
+        # Idempotent on the id: a re-put of the same claim_cid overwrites (the caller owns the id, a
         # content-hash or a uuid). The witness-log is NOT reset on re-put — an existing record's
         # log is preserved (put carries content+provenance; witness carries edges).
         if self._expected_dim is not None and (not isinstance(assertion, (list, tuple)) or len(assertion) != self._expected_dim):
             got = len(assertion) if isinstance(assertion, (list, tuple)) else 0  # guard len(None) → a clean domain error
-            raise ValueError(f"persistence put {tid}: assertion dim {got} != expected {self._expected_dim} "
+            raise ValueError(f"persistence put {claim_cid}: assertion dim {got} != expected {self._expected_dim} "
                              "(embedder-identity floor — a model swap that changes the dim must fail loud before it corrupts standing)")
-        existing = self._get_raw(tid)
+        existing = self._get_raw(claim_cid)
         witnesses_json = existing["metadata"].get("lar_witnesses") if existing else None
         meta = {
             "kind": kind,
@@ -143,11 +143,11 @@ class PersistenceStore:
         # The document slot carries the OPTIONAL text projection (the "past text" design — text is
         # ONE projection of the vector-atom). Absent one, the id rides as a non-empty placeholder
         # (chroma requires a document); the atom stays the assertion vector.
-        mine_busy_retry(lambda: self._col.upsert(ids=[tid], embeddings=[assertion], documents=[document or tid], metadatas=[meta]))
-        return {"tid": tid}
+        mine_busy_retry(lambda: self._col.upsert(ids=[claim_cid], embeddings=[assertion], documents=[document or claim_cid], metadatas=[meta]))
+        return {"claim_cid": claim_cid}
 
-    def witness(self, tid: str, signer: str, frontier: str, polarity: int, tick=None) -> dict:
-        raw = self._get_raw(tid)
+    def witness(self, claim_cid: str, signer: str, frontier: str, polarity: int, tick=None) -> dict:
+        raw = self._get_raw(claim_cid)
         if raw is None:
             return {"ok": False, "witnesses": 0}
         meta = dict(raw["metadata"])
@@ -164,7 +164,7 @@ class PersistenceStore:
         meta["lar_witnesses"] = json.dumps(log)
         # Re-upsert with the SAME embedding + document (the assertion + its text projection are
         # immutable; only the witness-log grows).
-        mine_busy_retry(lambda: self._col.upsert(ids=[tid], embeddings=[raw["embedding"]], documents=[raw.get("document") or tid], metadatas=[meta]))
+        mine_busy_retry(lambda: self._col.upsert(ids=[claim_cid], embeddings=[raw["embedding"]], documents=[raw.get("document") or claim_cid], metadatas=[meta]))
         return {"ok": True, "witnesses": len(log)}
 
     def neighbors(self, assertion: list, k: int = 16) -> dict:
@@ -185,12 +185,12 @@ def _build_ops(store: PersistenceStore) -> dict:
     return {
         "ping": lambda req: {"ready": True},
         "put": lambda req: store.put(
-            req["tid"], req.get("kind", ""), req["assertion"],
+            req["claim_cid"], req.get("kind", ""), req["assertion"],
             req.get("signer", ""), req.get("frontier", ""), req.get("pubinfo", {}),
         ),
-        "get": lambda req: store.get(req["tid"]),
+        "get": lambda req: store.get(req["claim_cid"]),
         "witness": lambda req: store.witness(
-            req["tid"], req.get("signer", ""), req.get("frontier", ""),
+            req["claim_cid"], req.get("signer", ""), req.get("frontier", ""),
             int(req.get("polarity", 1)), req.get("tick"),
         ),
         "neighbors": lambda req: store.neighbors(req["assertion"], int(req.get("k", 16))),
