@@ -135,7 +135,7 @@ export function makeTracker(U0: Mat, D: Mat = [], opts: TrackerOpts = {}): Track
 
 /**
  * Principal angles (radians, ascending) between two orthonormal bases A (row-major n×kA) and B (n×kB). M = AᵀB;
- * the singular values of M are the cosines of the principal angles. For the small bases the keel keeps, read
+ * the singular values of M give the cosines of the principal angles. For the small bases the keel keeps, read
  * them off the eigenvalues of MᵀM via the existing jacobiEigen (σ² = eigenvalue). Björck & Golub 1973; Knyazev
  * & Argentati 2002. Pairs with subspaceDistance = the largest angle (→ 0 ⟺ B lies within A's span).
  */

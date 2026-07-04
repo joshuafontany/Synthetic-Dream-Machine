@@ -138,11 +138,11 @@ export function symmetricNormalizedLaplacian(W: Mat): number[][] {
 export interface BoundaryEigenbasis {
   /** The self-adjoint boundary operator L (Chung-cured when directed, normalized-Laplacian when symmetric). */
   readonly operator: number[][];
-  /** The eigenbasis V — columns are the orthonormal eigenvectors (the matched partition; V⁻¹ = Vᵀ). */
+  /** The eigenbasis V — columns carry the orthonormal eigenvectors (the matched partition; V⁻¹ = Vᵀ). */
   readonly eigenbasis: number[][];
   /** The eigenvalues, ascending (the smoothest boundary modes lead). */
   readonly eigenvalues: number[];
-  /** W* — n×k, the k SMOOTHEST non-trivial eigenvectors (small λ = the boundary; a Laplacian keeps the
+  /** W* — n×k, the k SMOOTHEST non-trivial eigenvectors (small λ marks the boundary; a Laplacian keeps the
    *  BOTTOM, inverting a Fisher operator's top-k). A signal's residual off W* rides the rough complement. */
   readonly Wstar: number[][];
   /** The retained smooth-mode count after the cut. */
