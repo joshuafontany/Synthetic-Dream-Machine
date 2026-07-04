@@ -96,5 +96,32 @@ describe("directed residual bridge (fork 1) — end-to-end", () => {
     expect(r.klass.sinkClass).toBe("receiver-boundary");
     expect(r.minted).not.toBeNull();
     expect(r.minted!.presentInNoPlane).toBe(true);
+    expect(r.boundary.trivialColumns.length).toBe(4); // the richer return carries the boundary (forks 2&3)
+    expect(r.qAlpha.length).toBe(4);
+  });
+});
+
+describe("the YIN-collapse fail-loud guards", () => {
+  const ref = Array.from({ length: 8 }, (_, i) => [0.5 + 0.01 * i, 0.4, 0.6, 0.5]); // valid 4-node frames
+
+  test("empty refFrames THROWS (a control limit needs a reference — no silent over-birth)", () => {
+    expect(() => runBoundaryResidualFlow(coupling, ref, [], makeMintRegistry(), counter())).toThrow(/refFrames/);
+  });
+
+  test("a frame of the wrong dimension THROWS (never Wstar[r] undefined → NaN/corruption)", () => {
+    const badFrame = [[1, 2, 3]]; // 3 ≠ 4 boundary nodes
+    expect(() => runBoundaryResidualFlow(coupling, badFrame, ref, makeMintRegistry(), counter())).toThrow(/boundary nodes/);
+  });
+
+  test("an extreme residual reads MAX agreement, never NaN (the run never aborts)", () => {
+    const ev = residualComponentEvents({ coords: [], residualVec: [1e200], spe: Infinity }, ["a"], [1]);
+    expect(ev[0]!.agreement).toBe(1); // spe→Infinity → agreement 1, not NaN
+    expect(Number.isFinite(ev[0]!.value)).toBe(true);
+  });
+
+  test("relGap/gapRatio telemetry rides on the boundary (cut decisiveness)", () => {
+    const r = runBoundaryResidualFlow(coupling, ref, ref, makeMintRegistry(), counter());
+    expect(Number.isFinite(r.boundary.relGap)).toBe(true);
+    expect(r.boundary.relGap).toBeGreaterThanOrEqual(0);
   });
 });
