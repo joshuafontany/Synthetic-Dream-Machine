@@ -134,10 +134,47 @@ export interface BoundaryEigenbasis {
   readonly eigenbasis: number[][];
   /** The eigenvalues, ascending (the smoothest boundary modes lead). */
   readonly eigenvalues: number[];
+  /** W* — n×k, the k SMOOTHEST non-trivial eigenvectors (small λ = the boundary; a Laplacian keeps the
+   *  BOTTOM, inverting a Fisher operator's top-k). A signal's residual off W* rides the rough complement. */
+  readonly Wstar: number[][];
+  /** The retained smooth-mode count after the cut. */
+  readonly k: number;
+  /** Indices of the deflated trivial (λ ≤ λTol) modes — the Perron/DC baseline, projected out before W*. */
+  readonly trivialModes: number[];
+  /** The eigengap the adaptive cut landed on (telemetry; 0 on a fixed-k or degenerate cut). */
+  readonly eigengap: number;
   /** The non-normality of the RAW walk — the alarm the cure answered (≈0 already-normal, large directed). */
   readonly departure: number;
   /** True when the Chung cure ran (a directed coupling). */
   readonly reversibilized: boolean;
+}
+
+/** Cut the smooth boundary subspace: drop trivial (λ≤λTol) modes, then keep the k smallest-λ non-trivial
+ *  eigenvectors — k fixed if given, else the widest eigengap among the small non-trivial λ (Davis-Kahan
+ *  certifies the cut's stability by the gap width), clamped to [kMin, kMax]. */
+function cutSmoothK(
+  eigenvalues: readonly number[],
+  opts: { k?: number; kMin?: number; kMax?: number; lambdaTol?: number },
+): { k: number; trivialModes: number[]; eigengap: number } {
+  const lambdaTol = opts.lambdaTol ?? 1e-9;
+  const trivialModes: number[] = [];
+  for (let i = 0; i < eigenvalues.length; i++) if (eigenvalues[i]! <= lambdaTol) trivialModes.push(i);
+  const start = trivialModes.length;
+  const nNon = Math.max(0, eigenvalues.length - start);
+  if (nNon === 0) return { k: 0, trivialModes, eigengap: 0 };
+  if (opts.k !== undefined) return { k: Math.max(1, Math.min(opts.k, nNon)), trivialModes, eigengap: 0 };
+  const kMin = Math.max(1, opts.kMin ?? 1);
+  const kMax = Math.min(opts.kMax ?? nNon, nNon);
+  let bestGap = -Infinity;
+  let bestK = Math.min(kMin, nNon);
+  for (let kk = kMin; kk <= kMax - 1; kk++) {
+    const gap = eigenvalues[start + kk]! - eigenvalues[start + kk - 1]!;
+    if (gap > bestGap) {
+      bestGap = gap;
+      bestK = kk;
+    }
+  }
+  return { k: bestK, trivialModes, eigengap: bestGap > -Infinity ? bestGap : 0 };
 }
 
 /**
@@ -149,7 +186,17 @@ export interface BoundaryEigenbasis {
  * operator. `departure` rides on as a diagnostic. Suits coupling/sensorium-scale graphs — jacobiEigen
  * holds its accuracy at small n (a plane-count of ~3-8), not a large Ki link-graph.
  */
-export function boundaryEigenbasis(W: Mat, opts: { directed?: boolean } = {}): BoundaryEigenbasis {
+export interface BoundaryOpts {
+  readonly directed?: boolean;
+  /** Fixed smooth-mode count (the band-count escape hatch); omit for the eigengap-adaptive cut. */
+  readonly k?: number;
+  readonly kMin?: number;
+  readonly kMax?: number;
+  /** Eigenvalues at/below this read as trivial (Perron/DC) and deflate before W*. Default 1e-9. */
+  readonly lambdaTol?: number;
+}
+
+export function boundaryEigenbasis(W: Mat, opts: BoundaryOpts = {}): BoundaryEigenbasis {
   const departure = departureFromNormality(W);
   const directed = opts.directed ?? !isSymmetric(W);
   const operator = directed ? chungDirectedLaplacian(W).L : symmetricNormalizedLaplacian(W);
@@ -162,10 +209,15 @@ export function boundaryEigenbasis(W: Mat, opts: { directed?: boolean } = {}): B
   order.forEach((o, c) => {
     for (let r = 0; r < n; r++) eigenbasis[r]![c]! = vecs[r]?.[o.i] ?? 0;
   });
-  return { operator, eigenbasis, eigenvalues, departure, reversibilized: directed };
+  // Cut the smooth boundary subspace W* = the k smallest-λ NON-trivial columns.
+  const { k, trivialModes, eigengap } = cutSmoothK(eigenvalues, opts);
+  const start = trivialModes.length;
+  const Wstar = zeros(n, k);
+  for (let c = 0; c < k; c++) for (let r = 0; r < n; r++) Wstar[r]![c]! = eigenbasis[r]![start + c]!;
+  return { operator, eigenbasis, eigenvalues, Wstar, k, trivialModes, eigengap, departure, reversibilized: directed };
 }
 
 /** The Ki→eigensolver pipe: a mesh coupling's directed `te[][]` → the boundary eigenbasis (Chung-cured). */
-export function couplingBoundary(coupling: MeshCoupling): BoundaryEigenbasis {
-  return boundaryEigenbasis(coupling.te, { directed: true });
+export function couplingBoundary(coupling: MeshCoupling, opts: Omit<BoundaryOpts, "directed"> = {}): BoundaryEigenbasis {
+  return boundaryEigenbasis(coupling.te, { ...opts, directed: true });
 }
