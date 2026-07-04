@@ -168,6 +168,14 @@ The asymmetry is preserved:
 
 <<~/ahu >>
 
+<<~ ahu #scope-1-networking >>
+
+## Scope 1 ~ the mesh projection surface [surgical 2026-07-03]
+
+The projection bus serves as a **Scope-1** mesh surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The `VerseEventConsumer` interface lives in `@lararium/mesh`; the CRDT projection it couples **runs in TS** (structural causality, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of **Scope 2** (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling seats this bus on the TS side of the split.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges

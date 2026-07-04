@@ -195,6 +195,14 @@ exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
 
 <<~/ahu >>
 
+<<~ ahu #scope-1-networking >>
+
+## Scope 1 ~ the CRDT-wave surface [surgical 2026-07-03]
+
+The reaction dispatch layer runs as a **Scope-1** CRDT-wave surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs (the cross-island `IslandMsg_Event` → `placeVerb()` path, #yin-collapse-target). Its **CRDT-causal clock runs in TS** (structural causality — CRDT convergence as the distributed promise, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of **Scope 2** (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling seats the reaction-wave on the TS structural clock.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/@lares/api/pono/pranala >>

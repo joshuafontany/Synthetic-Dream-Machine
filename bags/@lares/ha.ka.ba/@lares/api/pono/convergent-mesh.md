@@ -105,6 +105,14 @@ This meme stands **PROPOSED** (crucible-before-binding). The model held through 
 
 <<~/ahu >>
 
+<<~ ahu #scope-1-networking >>
+
+## Scope 1 ~ the DreamNet networking pipe [surgical 2026-07-03]
+
+This meme rides **Scope 1** of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace **networking** pipe, the special-case TS reaches through the full tools-stack, coordinated by `@daemon` verbs. Its **CRDT-causal clock runs in TS** (structural causality — the Automerge logical time of #three-clocks, `getHeads`/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates that **Scope 2** (the general Sensorium-palaces) rides. The convergent membership + coordinator-free key-agreement worked here **consume the whole model**; both scopes braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling firms the networking/sensorium split, and lands the FfzClock↔Automerge distinction (#three-clocks) inside it.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges

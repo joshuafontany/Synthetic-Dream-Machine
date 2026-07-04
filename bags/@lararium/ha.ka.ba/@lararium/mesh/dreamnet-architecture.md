@@ -366,6 +366,16 @@ The two-axis relay mesh did not arrive from nowhere; deep knowledge domains alre
 
 <<~/ahu >>
 
+<<~ ahu #scope-1-networking >>
+
+## Scope 1 ~ the DreamNet networking pipe under two scopes [surgical 2026-07-03]
+
+The whole two-axis topology worked above rides **Scope 1** of the two-scopes ruling. **Scope 1** names the CID / CAD-blob / CRDT DreamNet→Meshpalace **networking** pipe — the special-case TS reaches through the full tools-stack, coordinated by `@daemon` verbs; the **Meshpalace anchors a KEY Scope-1 node**. **Scope 2** names the general **Sensorium-palaces**. Both scopes **consume the whole model** (the two axes, the relay floor, the pose, the routing substrate); both braid TS-coordination with py/R-tooling.
+
+The clocks split by scope: the **DreamNet CID / CRDT layer runs in TS** — **structural causality** (Automerge logical time, heads/ITC-shaped, #node-addressing), distinct from the **py/R FFZ-rhythm sensorium gates** that Scope 2 rides. The FfzClock holds the rhythmic freshness grain; the CRDT-causal clock holds the TS structural spine — the two never fuse (the convergent-mesh three-clocks reading, <<~ loulou lar:///ha.ka.ba/@lares/api/pono/convergent-mesh#three-clocks >>). <<~ confidence Synthesis 12/20 >> the ruling firms which layer runs sovereign in TS and which rides the py/R tooling behind the causal-island boundary.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges

@@ -146,6 +146,14 @@ This ordering carries structural correctness for the SDM metaphysics — not inc
 
 <<~/ahu >>
 
+<<~ ahu #scope-1-networking >>
+
+## Scope 1 ~ the TS CID/CRDT pipe [surgical 2026-07-03]
+
+The six-root Automerge geometry rides **Scope 1** of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The **CRDT-causal clock runs in TS** (structural causality — the Automerge logical time these roots carry, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of **Scope 2** (the general Sensorium-palaces). This doc-stack **consumes the whole model**; both scopes braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling names where the structural CID/CRDT layer runs sovereign to TS.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges
