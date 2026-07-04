@@ -33,6 +33,11 @@ class ContentStoreLandCap:
     def __init__(self, store) -> None:
         self._store = store
 
+    @property
+    def store(self):
+        """The underlying store (the recall read-face reaches it; the land-cap owns the write-face)."""
+        return self._store
+
     def is_landed(self, cid: str) -> bool:
         return self._store.get(cid) is not None
 
