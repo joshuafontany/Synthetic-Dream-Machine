@@ -112,6 +112,57 @@ export function calibrateThreshold(
   });
 }
 
+export interface MaxTVerdict {
+  /** The family-wise (1−α) threshold — the (1−α) quantile of the MAX statistic across nodes under the null. */
+  readonly threshold: number;
+  /** Per-node observed statistics. */
+  readonly observed: number[];
+  /** Per-node significance AFTER multiplicity correction (observed > the family-wise threshold). */
+  readonly exceeds: boolean[];
+  /** Per-node maxT-adjusted p-values ((#{null-max ≥ observed_node} + 1)/(trials + 1)). */
+  readonly pValues: number[];
+}
+
+/**
+ * maxT family-wise multiplicity (Westfall & Young 1993) — testing N nodes at once inflates the false-rate;
+ * correct it with the null of the MAXIMUM statistic across nodes, read at the (1−α) quantile → ONE family-wise
+ * threshold every node clears. Strong control of the family-wise error under arbitrary cross-node dependence
+ * (the surrogates carry the joint null). A node exceeding this threshold reads as real AFTER correction — no
+ * per-node α inflation, and no over-conservative Bonferroni (maxT adapts to the nodes' dependence). Feeds the
+ * cross-plane birth: the family = the mesh's nodes, so one dialed threshold governs the whole plane at once.
+ */
+export function maxTNull(
+  seriesPerNode: readonly (readonly number[])[],
+  statistic: (s: readonly number[]) => number,
+  surrogate: (s: readonly number[], rng: () => number) => number[],
+  opts: { trials?: number; alpha?: number; seed?: number } = {},
+): MaxTVerdict {
+  const trials = Math.max(1, opts.trials ?? 200);
+  const alpha = opts.alpha ?? 0.05;
+  const rng = makeRng(opts.seed ?? 1);
+  const observed = seriesPerNode.map((s) => statistic(s));
+  const nullMax: number[] = [];
+  const ge = observed.map(() => 0);
+  for (let t = 0; t < trials; t++) {
+    let mx = -Infinity;
+    for (const s of seriesPerNode) {
+      const v = statistic(surrogate(s, rng));
+      if (v > mx) mx = v;
+    }
+    nullMax.push(mx);
+    for (let i = 0; i < observed.length; i++) if (mx >= observed[i]!) ge[i] = (ge[i] ?? 0) + 1;
+  }
+  nullMax.sort((a, b) => a - b);
+  const idx = Math.min(nullMax.length - 1, Math.max(0, Math.ceil((1 - alpha) * nullMax.length) - 1));
+  const threshold = nullMax[idx]!;
+  return {
+    threshold,
+    observed,
+    exceeds: observed.map((o) => o > threshold),
+    pValues: ge.map((g) => (g + 1) / (trials + 1)),
+  };
+}
+
 /** A structure statistic — lag-1 autocorrelation. High on a temporally-ordered (NESS) series, ≈0 on iid
  *  noise (equilibrium); the canonical probe the iid-shuffle null calibrates against. */
 export function lag1Autocorr(series: readonly number[]): number {

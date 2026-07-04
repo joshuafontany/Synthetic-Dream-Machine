@@ -6,7 +6,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { surrogateNull, iidShuffle, lag1Autocorr, makeRng, phaseScramble, timeReversalAsymmetry, calibrateThreshold } from "../src/null-harness.js";
+import { surrogateNull, iidShuffle, lag1Autocorr, makeRng, phaseScramble, timeReversalAsymmetry, calibrateThreshold, maxTNull } from "../src/null-harness.js";
 import { makeArlDial } from "../src/arl-dial.js";
 
 describe("null-harness — the self-emergent threshold (surrogate = equilibrium, signal = NESS)", () => {
@@ -73,5 +73,31 @@ describe("null-harness — the ARL₀ dial governs the self-emergent threshold (
     const loose = calibrateThreshold(makeArlDial(5), structured, lag1Autocorr, iidShuffle, { trials: 400, seed: 7 });
     const strict = calibrateThreshold(makeArlDial(200), structured, lag1Autocorr, iidShuffle, { trials: 400, seed: 7 });
     expect(strict.threshold).toBeGreaterThanOrEqual(loose.threshold); // higher (1−α) quantile → higher threshold
+  });
+});
+
+describe("null-harness — maxT family-wise multiplicity (one threshold across N nodes)", () => {
+  test("only the truly-structured node clears the family-wise threshold; noise nodes do not", () => {
+    const structured = Array.from({ length: 120 }, (_, t) => Math.sin(t / 6) + t * 0.01); // a real NESS
+    const noise = (seed: number): number[] => {
+      const rng = makeRng(seed);
+      return Array.from({ length: 120 }, () => rng() - 0.5);
+    };
+    const nodes = [structured, noise(11), noise(22), noise(33), noise(44)];
+    const v = maxTNull(nodes, lag1Autocorr, iidShuffle, { trials: 400, alpha: 0.05, seed: 7 });
+    expect(v.exceeds[0]).toBe(true); // the structured node clears the corrected bar
+    expect(v.exceeds.slice(1).every((e) => e === false)).toBe(true); // no noise node false-fires
+    expect(v.pValues[0]).toBeLessThan(0.05);
+  });
+
+  test("the family-wise threshold sits AT OR ABOVE a single-node threshold (multiplicity raises the bar)", () => {
+    const noise = (seed: number): number[] => {
+      const rng = makeRng(seed);
+      return Array.from({ length: 120 }, () => rng() - 0.5);
+    };
+    const nodes = [noise(1), noise(2), noise(3), noise(4), noise(5)];
+    const family = maxTNull(nodes, lag1Autocorr, iidShuffle, { trials: 400, alpha: 0.05, seed: 7 });
+    const single = surrogateNull(nodes[0]!, lag1Autocorr, iidShuffle, { trials: 400, alpha: 0.05, seed: 7 });
+    expect(family.threshold).toBeGreaterThanOrEqual(single.threshold); // the max-null bar ≥ a single-node bar
   });
 });
