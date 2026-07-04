@@ -30,6 +30,43 @@ def test_session_memory_store_enforces_schema_and_dim(tmp_path):
         s.put("t-2", "turn two", [0.1, 0.2, 0.3], {"wing": "w1"})
     with pytest.raises(ValueError):                                      # wrong dim → embedder-identity floor
         s.put("t-3", "turn three", [0.1, 0.2], {"wing": "w1", "room": "r1"})
+    with pytest.raises(ValueError):                                      # None embedding → clean domain error (not len(None))
+        s.put("t-4", "turn four", None, {"wing": "w1", "room": "r1"})
+    with pytest.raises(ValueError):                                      # present-but-EMPTY required value → violation
+        s.put("t-5", "turn five", [0.1, 0.2, 0.3], {"wing": "", "room": "r1"})
+    s.put("t-6", "turn six", [0.1, 0.2, 0.3], {"wing": "w1", "room": "r1", "chunk_index": 0})  # zero-value PASSES (not falsy-rejected)
+    assert s.get("t-6")["metadata"]["chunk_index"] == 0
+
+
+def test_guard_raise_crosses_the_wire(tmp_path):
+    # fail-loud COMPOSITION: a guard-raise crosses as the {ok:false,error} NDJSON envelope through
+    # make_dispatch, never a crash and never a Python exception escaping (JSON-legal str error).
+    import io
+    import json
+    from sidecar_caps import make_dispatch
+    store = cio.ContentStore(str(tmp_path / ".wire"), required_keys={"wing", "room"}, expected_dim=3)
+    dispatch = make_dispatch(cio._build_ops(store))
+
+    def call(req):
+        out = io.StringIO()
+        dispatch(req, out)
+        return json.loads(out.getvalue())
+
+    ok = call({"id": 1, "op": "put", "cid": "c1", "text": "t", "embedding": [0.1, 0.2, 0.3], "metadata": {"wing": "w", "room": "r"}})
+    assert ok["ok"] is True and ok["result"]["cid"] == "c1"
+    bad = call({"id": 2, "op": "put", "cid": "c2", "text": "t", "embedding": [0.1, 0.2, 0.3], "metadata": {"wing": "w"}})
+    assert bad["ok"] is False and isinstance(bad["error"], str) and "room" in bad["error"]
+    baddim = call({"id": 3, "op": "put", "cid": "c3", "text": "t", "embedding": [0.1, 0.2], "metadata": {"wing": "w", "room": "r"}})
+    assert baddim["ok"] is False and "dim" in baddim["error"]
+
+
+def test_require_keys_flag_parsing_empty_yields_none():
+    # the load-bearing empty-flag ward: serve --require-keys "" (or absent) must yield None (generic),
+    # NEVER {""} — which would fire the guard on every put and reject all generic corpora.
+    parse = lambda s: ({k for k in s.split(",") if k} or None)  # mirrors content_io.main serve-flag logic
+    assert parse("") is None
+    assert parse("wing,room") == {"wing", "room"}
+    assert parse("wing,,room") == {"wing", "room"}  # a stray comma drops, never mints an empty key
 
 
 def test_put_then_get_roundtrips(tmp_path):

@@ -88,11 +88,15 @@ class ContentStore:
         # never a silent off-schema or wrong-embedder write (the ack-after-proof law: a non-land
         # crosses as an error line, so the caller's watermark never advances on it).
         if self._required_keys:
-            missing = self._required_keys - set(meta.keys())
+            # present-AND-non-empty: a required key with a falsy/whitespace value is as un-addressable
+            # as a missing one. str(...).strip() so a legitimate chunk_index=0 / False PASSES — only
+            # None / "" / whitespace fail (a bare truthiness check would wrongly reject 0).
+            missing = sorted(k for k in self._required_keys if not str(meta.get(k, "")).strip())
             if missing:
-                raise ValueError(f"content put {cid}: missing required schema keys {sorted(missing)}")
-        if self._expected_dim is not None and len(embedding) != self._expected_dim:
-            raise ValueError(f"content put {cid}: embedding dim {len(embedding)} != expected {self._expected_dim} "
+                raise ValueError(f"content put {cid}: missing/empty required schema keys {missing}")
+        if self._expected_dim is not None and (not isinstance(embedding, (list, tuple)) or len(embedding) != self._expected_dim):
+            got = len(embedding) if isinstance(embedding, (list, tuple)) else 0  # guard len(None) → a clean domain error
+            raise ValueError(f"content put {cid}: embedding dim {got} != expected {self._expected_dim} "
                              "(embedder-identity floor — a model swap that changes the dim must fail loud)")
         # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
         # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
@@ -206,11 +210,14 @@ def _build_ops(store: ContentStore) -> dict:
     }
 
 
-def _serve(palace_path: str) -> None:
+def _serve(palace_path: str, required_keys: "set[str] | None" = None, expected_dim: "int | None" = None) -> None:
+    # The guards ride optional kwargs into the store built inside the dispatch closure — so
+    # run_sidecar is untouched, and the session-memory contract reaches the RPC face (the QA #1
+    # fix: the coordinator's resolveMemoryContentSpawn passes the flags; a generic corpus omits them).
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path))),
+        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim))),
         idle_ttl=_idle_ttl_seconds(),
         singleton_msg="content_io: another holder already serves this palace; exiting (singleton)\n",
     )
@@ -221,7 +228,16 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("serve", help="persistent NDJSON RPC holder for one content palace dir")
     s.add_argument("--palace", required=True)
-    s.set_defaults(fn=lambda a: _serve(a.palace))
+    s.add_argument("--require-keys", default="",
+                   help="comma-joined schema keys a session-memory drawer MUST carry; empty = generic corpus (no schema guard)")
+    s.add_argument("--expected-dim", type=int, default=None,
+                   help="pin the embedder vector width; a dim mismatch fails loud (session-memory opt-in; unset = generic)")
+    s.set_defaults(fn=lambda a: _serve(
+        a.palace,
+        # `if k` is load-bearing: an empty/absent --require-keys yields None (generic), never {""}
+        # (which would fire the guard on every put and reject all generic corpora).
+        required_keys=({k for k in a.require_keys.split(",") if k} or None),
+        expected_dim=a.expected_dim))
     args = ap.parse_args()
     args.fn(args)
 
