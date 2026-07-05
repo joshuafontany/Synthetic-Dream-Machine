@@ -58,25 +58,25 @@ def guard_hitl(verb: str, approval=None) -> None:
                               "the @daemon grants it out-of-band. A reversible verb (e.g. kapae) needs none.")
 
 
-# The stamp-filter → metadata-key map: each recall filter narrows on the `lar_*` slot the capture
-# stamps (filter and stamp share one key so they never drift — see mesh/stamp-filter.ts). `agent`
-# matches the handle slot; `drift` narrows to drift-flagged turns.
+# The stamp-filter → metadata-key map: each recall filter narrows on the key the py CAPTURE actually
+# stamps (filter and stamp share ONE key so they never drift). PHYSICS/STRUCTURAL filters ONLY — the
+# ENRICHMENT filters (voice/band/agent-handle/drift) drop from the surface until enrichment EMERGES from
+# the breathing sensorium (the Li/Ki nameless-entity detection); stamping them at capture would freeze a
+# guess the detection should discover. Keys match capture_sources: `wing` (raw, structural), `lar_surface`
+# + `lar_agent` (physics stream-provenance; lar_agent on sub-agent turns).
 _STAMP_KEYS = {
-    "wing": "lar_wing",
-    "voice": "lar_voices",
-    "band": "lar_band",
-    "agent": "lar_agent_handle",
+    "wing": "wing",
     "surface": "lar_surface",
+    "agent": "lar_agent",
 }
 
 
-def _recall_where(*, wing=None, voice=None, band=None, agent=None, surface=None, drift=None):
-    """Build a chroma `where` dict from the recall stamp-filters — one clause per provided filter,
-    keyed to its `lar_*` slot. Returns None when no filter narrows (the pool stays open)."""
-    clauses = {"wing": wing, "voice": voice, "band": band, "agent": agent, "surface": surface}
+def _recall_where(*, wing=None, agent=None, surface=None):
+    """Build a chroma `where` from the PHYSICS/STRUCTURAL recall filters — one clause per provided filter,
+    keyed to the slot the capture stamps. Returns None when no filter narrows (the pool stays open). The
+    enrichment filters (voice/band/drift) left the surface — deferred until enrichment emerges."""
+    clauses = {"wing": wing, "agent": agent, "surface": surface}
     where = {_STAMP_KEYS[name]: val for name, val in clauses.items() if val is not None}
-    if drift:
-        where["lar_drift"] = True
     return where or None
 
 
@@ -116,18 +116,16 @@ class LaresCoordinator:
                              embed_factory=lambda: (self._embed_one, self._model))
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
-               list: bool = False, voice: "str | None" = None, band: "str | None" = None,
-               agent: "str | None" = None, surface: "str | None" = None,
-               drift: "bool | None" = None) -> dict:
+               list: bool = False, agent: "str | None" = None, surface: "str | None" = None) -> dict:
         """Recall the nearest turns to a query (mirrors `lares recall`); kapae-muted turns stay excluded.
 
-        The CLI's read modes + stamp-filters shed onto this spine: `drawer` fetches ONE verbatim entry
-        by turn-key; `list` reports the taxonomy (the drawer-listing read-face); the stamp-filters
-        (`wing`/`voice`/`band`/`agent`/`surface`/`drift`) build a chroma `where` that narrows the
-        nearest-neighbor pool. A filter alone (no query) rides the `list`/taxonomy path."""
+        Read modes + PHYSICS/STRUCTURAL filters shed onto this spine: `drawer` fetches ONE verbatim entry
+        by turn-key; `list` reports the taxonomy (the drawer-listing read-face); `wing`/`agent`/`surface`
+        build a chroma `where` that narrows the nearest-neighbor pool. The enrichment filters
+        (voice/band/drift) left the surface — deferred until enrichment emerges from the breathing sensorium."""
         if drawer:
             return self._content.get(drawer) or {}
-        where = _recall_where(wing=wing, voice=voice, band=band, agent=agent, surface=surface, drift=drift)
+        where = _recall_where(wing=wing, agent=agent, surface=surface)
         if list:
             return self._content.taxonomy()
         return self._content.search(self._embed_one(query), k, where)
@@ -177,13 +175,11 @@ def build_mcp(coordinator: LaresCoordinator):
 
     @mcp.tool()
     def recall(query: str, k: int = 8, wing: "str | None" = None, drawer: "str | None" = None,
-               list: bool = False, voice: "str | None" = None, band: "str | None" = None,
-               agent: "str | None" = None, surface: "str | None" = None,
-               drift: "bool | None" = None) -> dict:
+               list: bool = False, agent: "str | None" = None, surface: "str | None" = None) -> dict:
         """Recall the nearest turns to a query from the Memory sensorium. `drawer` fetches one verbatim;
-        `list` reports the taxonomy; the stamp-filters (wing/voice/band/agent/surface/drift) narrow."""
-        return coordinator.recall(query, k, wing=wing, drawer=drawer, list=list, voice=voice,
-                                  band=band, agent=agent, surface=surface, drift=drift)
+        `list` reports the taxonomy; wing/agent/surface narrow. (Enrichment filters deferred until the
+        sensorium breathes — they left the surface to stay isomorphic with the CLI.)"""
+        return coordinator.recall(query, k, wing=wing, drawer=drawer, list=list, agent=agent, surface=surface)
 
     @mcp.tool()
     def status() -> dict:

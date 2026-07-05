@@ -162,7 +162,7 @@ def claude_source(*, wing: str, room: str = "conversations") -> SourceCap:
         agent_id = _claude_agent_id(pointer)
         extra = {"lar_surface": "claude"}
         if agent_id is not None:
-            extra.update({"lar_sidechain": "1", "lar_agent": agent_id})
+            extra.update({"lar_sidechain": 1, "lar_agent": agent_id})  # int, isomorphic with the TS stamp (Q3)
         yield from _seq_records(_drawers(os.path.basename(pointer), _parse_claude(pointer),
                                          wing=wing, room=room, extra=extra))
     return source

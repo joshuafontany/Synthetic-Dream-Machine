@@ -170,7 +170,7 @@ def test_patch_metadata_guarded_rejects_emptying_a_required_key(tmp_path):
 
 
 def test_search_empty_is_empty(tmp_path):
-    assert _store(tmp_path).search([1.0, 2.0], 8) == {"matches": []}
+    assert _store(tmp_path).search([1.0, 2.0], 8) == {"matches": [], "scanned": 0, "matched": 0}
 
 
 def test_search_returns_nearest_with_where(tmp_path):

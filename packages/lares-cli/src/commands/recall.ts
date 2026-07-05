@@ -54,13 +54,15 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   // `--k` mirrors the MCP tool arg; `--limit` survives as a back-compat alias (--k wins).
   const limit   = args.options["k"] ?? args.options["limit"];
   const wantList = args.flags["list"];
-  // The stamp filters (voice · band · agent · surface · drift) — a filter alone implies --list.
-  const filterKeys = ["voice", "band", "agent", "surface"] as const;
-  const hasFilters = filterKeys.some((k) => args.options[k] !== undefined) || args.flags["drift"] === true;
+  // The PHYSICS/STRUCTURAL filters (agent · surface) — a filter alone implies --list. The ENRICHMENT
+  // filters (voice/band/drift) left the surface, deferred until enrichment emerges from the breathing
+  // sensorium — keeping the CLI isomorphic with the /mcp recall tool (both carry only wing/agent/surface).
+  const filterKeys = ["agent", "surface"] as const;
+  const hasFilters = filterKeys.some((k) => args.options[k] !== undefined);
 
   if (!query && !drawer && !wantList && !hasFilters) {
     console.error("usage: lares recall <keywords...> | --drawer <id> | --list [--wing <w>] [--k <n>]");
-    console.error("  stamp filters: --voice <name> --band <canon|synthesis|provisional|raw> --agent <id> --surface <claude|codex|...> --drift");
+    console.error("  filters: --agent <id> --surface <claude|codex|copilot-cli|copilot-vscode>");
     return 2;
   }
 
@@ -71,7 +73,6 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   if (wing  !== undefined) verbArgs["wing"]  = wing;
   if (limit !== undefined) verbArgs["limit"] = Number(limit);
   for (const k of filterKeys) if (args.options[k] !== undefined) verbArgs[k] = args.options[k];
-  if (args.flags["drift"] === true) verbArgs["drift"] = true;
 
   const portOpt = args.options["port"];
 

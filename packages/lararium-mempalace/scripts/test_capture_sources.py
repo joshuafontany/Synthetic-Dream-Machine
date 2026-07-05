@@ -69,7 +69,7 @@ def test_claude_subagent_file_marks_sidechain(tmp_path):
     )
     recs = list(claude_source(wing="wing_proj__spirits")(str(agent)))
     assert len(recs) == 1
-    assert recs[0]["metadata"]["lar_sidechain"] == "1"
+    assert recs[0]["metadata"]["lar_sidechain"] == 1   # int, isomorphic with the TS stamp (Q3)
     assert recs[0]["metadata"]["lar_agent"] == "deadbeef"
 
 

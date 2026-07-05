@@ -189,7 +189,7 @@ class ContentStore:
         except Exception:  # noqa: BLE001 — fresh/empty collection
             n = 0
         if n == 0:
-            return {"matches": []}
+            return {"matches": [], "scanned": 0, "matched": 0}
         pool = min(max(k, 1), n)
         while True:
             got = self._col.query(
@@ -213,8 +213,10 @@ class ContentStore:
                     "metadata": meta,
                 })
             # Enough live rows, the window covered the whole collection, or nothing to exclude — done.
+            # `scanned`/`matched` feed the CLI recall stale-daemon guard (it refuses a filtered read that
+            # lacks a numeric scanned) — so the routed CLI reads identically to a native mempalace read.
             if len(matches) >= k or pool >= n or include_muted:
-                return {"matches": matches[:k]}
+                return {"matches": matches[:k], "scanned": pool, "matched": len(matches)}
             pool = min(pool * 2, n)             # widen and re-fetch (more near neighbors were muted)
 
     def cids_for_turn(self, turn_key: str) -> list:
