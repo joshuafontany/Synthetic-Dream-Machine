@@ -22,6 +22,39 @@ from embed_cap import make_embed_cap
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
 LIFECYCLE_VERBS = ("harvest", "recall", "status", "worldline", "kapae", "un_kapae")
 
+# The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
+# HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
+# crossing) blocks for the operator's hand. One grid across both surfaces (CLI + MCP). The @daemon holds
+# the LaresCoordinator cap in its wiki-island VM worker; it reads a verb's seat and grants the operator-
+# authorized approval capability an HITL verb needs (capability-based — the @daemon is the cap-holder).
+VERB_SEATS = {
+    "harvest": (True, False),    # append-only capture — reversible (an edit rides kapae), trusted
+    "recall": (True, False),     # read — reversible, trusted
+    "status": (True, False),     # read — reversible, trusted
+    "worldline": (True, False),  # read — reversible, trusted
+    "kapae": (True, False),      # move-not-delete mute — reversible, trusted
+    "un_kapae": (True, False),   # restore — reversible, trusted
+    # 6b control verbs — the SEAT stands now; execution rides in after the HITL talk-story locks.
+    "purge": (False, False),     # HARD-delete — IRREVERSIBLE → HITL
+    "attach": (True, True),      # admit a guest sensorium — TRUST-CROSSING → HITL
+}
+
+
+def seat_of(verb: str) -> str:
+    """HOTL when a verb runs reversible AND trusted; HITL (needs the operator's hand) when it turns
+    irreversible OR crosses a trust boundary."""
+    reversible, trust_crossing = VERB_SEATS[verb]
+    return "HOTL" if (reversible and not trust_crossing) else "HITL"
+
+
+def guard_hitl(verb: str, approval=None) -> None:
+    """Gate a verb by its seat: a HOTL verb passes freely; an HITL verb needs a truthy operator-approval
+    capability (the @daemon grants it out-of-band). Raise when an HITL verb rides without one."""
+    if seat_of(verb) == "HITL" and not approval:
+        why = "irreversible" if not VERB_SEATS[verb][0] else "trust-crossing"
+        raise PermissionError(f"{verb} sits HITL ({why}) — an operator-approval capability is required; "
+                              "the @daemon grants it out-of-band. A reversible verb (e.g. kapae) needs none.")
+
 
 class LaresCoordinator:
     """The verb-router BOTH surfaces (CLI + MCP) call — it holds a warm embedder + a content-store and a

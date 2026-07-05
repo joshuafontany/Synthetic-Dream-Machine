@@ -7,7 +7,9 @@ restores), and the FastMCP tool-set MIRRORS the CLI lifecycle verbs exactly (the
 import asyncio
 import os
 
-from lares_mcp import LIFECYCLE_VERBS, LaresCoordinator, build_mcp
+import pytest
+
+from lares_mcp import LIFECYCLE_VERBS, LaresCoordinator, build_mcp, guard_hitl, seat_of
 
 _FIXTURE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures", "capture", "claude-main.jsonl")
 
@@ -51,6 +53,23 @@ def test_coordinator_kapae_cascade_round_trip(tmp_path):
     restored = coord.un_kapae(tks[1], 3)
     assert restored["restored_entries"] >= 1
     assert tks[1] in _live_turn_keys(coord)          # move-not-delete: un-kapae restores it to recall
+
+
+def test_grid_seats_the_verbs_by_reversibility_and_trust():
+    for v in LIFECYCLE_VERBS:
+        assert seat_of(v) == "HOTL"       # every lifecycle verb runs reversible + trusted
+    assert seat_of("purge") == "HITL"     # irreversible
+    assert seat_of("attach") == "HITL"    # trust-crossing
+
+
+def test_hitl_gate_blocks_without_approval():
+    guard_hitl("recall")                  # HOTL passes freely
+    guard_hitl("kapae")                   # reversible mute passes freely
+    with pytest.raises(PermissionError):
+        guard_hitl("purge")               # HITL (irreversible) blocks without approval
+    with pytest.raises(PermissionError):
+        guard_hitl("attach")              # HITL (trust-crossing) blocks without approval
+    guard_hitl("purge", approval="operator-granted-cap")   # the @daemon-granted cap unblocks it
 
 
 def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
