@@ -39,7 +39,7 @@ import { partitionEphemeral } from "../ephemeral.js";
 import { makeHarvestPacer, type PacerStep } from "../harvest-pacer.js";
 import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
-import { emit, type LaresError } from "../render.js";
+import { emit, exitFor, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const HARVEST_DIR = larHarvestDir();   // <state>/harvest — XDG (strangler retired); LAR_ROOT-isolated for staged instances
@@ -693,7 +693,32 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   return 0;
 }
 
+// The default room every harvest/capture drawer lands in (the "convos mine"). `--room` joins the
+// arg-surface for isomorphism with the MCP `harvest(..., room)` tool, but a NON-default value would
+// change where a drawer lands — a byte-landing change this shape-pass never makes. So a non-default
+// `--room` refuses honestly (the override rides the DEFERRED @daemon-cap-wire); the default keeps
+// today's behavior byte-for-byte. Absent → default; equal-to-default → proceed unchanged.
+const DEFAULT_ROOM = "conversations";
+
+/** Guard `--room`: null when the room stays the default (proceed); an exit code when a non-default
+ *  room refuses honestly (the override awaits the @daemon-cap-wire). */
+function guardRoom(args: ParsedArgs, verb: string): number | null {
+  const room = args.options["room"];
+  if (room === undefined || room === DEFAULT_ROOM) return null;
+  const msg = `--room override ("${room}") rides the @daemon-cap-wire (routing deferred); ` +
+    `today ${verb} lands in the default room "${DEFAULT_ROOM}" only`;
+  emit(args, {
+    ok: false,
+    error: { code: "verb-error", message: msg, hint: `Drop --room (or pass --room ${DEFAULT_ROOM}) to harvest into the default room.` },
+    human: () => console.error(`lares ${verb}: ${msg}`),
+  });
+  return exitFor("verb-error");
+}
+
 export async function cmdHarvest(args: ParsedArgs): Promise<number> {
+  const roomGuard = guardRoom(args, "harvest");
+  if (roomGuard !== null) return roomGuard;
+
   // --all: the backfill feeder — discover EVERY project, mine + writeback each. Idempotent.
   if (args.flags["all"] === true) return runHarvestAll(args);
 
@@ -879,6 +904,9 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
  * writeback leg), which already routes through the daemon with its own fallback.
  */
 export async function cmdCapture(args: ParsedArgs): Promise<number> {
+  const roomGuard = guardRoom(args, "capture");
+  if (roomGuard !== null) return roomGuard;
+
   const target = args.positional[0] ?? "";
   const wing   = typeof args.options["wing"] === "string" ? args.options["wing"] : "";
   if (!target || !wing) {

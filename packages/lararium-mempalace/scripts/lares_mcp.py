@@ -37,6 +37,8 @@ VERB_SEATS = {
     # 6b control verbs — the SEAT stands now; execution rides in after the HITL talk-story locks.
     "purge": (False, False),     # HARD-delete — IRREVERSIBLE → HITL
     "attach": (True, True),      # admit a guest sensorium — TRUST-CROSSING → HITL
+    "release": (False, False),   # let a guest sensorium GO (drops its handle) — IRREVERSIBLE → HITL
+    "reconcile": (True, False),  # re-settle a sensorium against its source — reversible, trusted → HOTL
 }
 
 
@@ -56,6 +58,28 @@ def guard_hitl(verb: str, approval=None) -> None:
                               "the @daemon grants it out-of-band. A reversible verb (e.g. kapae) needs none.")
 
 
+# The stamp-filter → metadata-key map: each recall filter narrows on the `lar_*` slot the capture
+# stamps (filter and stamp share one key so they never drift — see mesh/stamp-filter.ts). `agent`
+# matches the handle slot; `drift` narrows to drift-flagged turns.
+_STAMP_KEYS = {
+    "wing": "lar_wing",
+    "voice": "lar_voices",
+    "band": "lar_band",
+    "agent": "lar_agent_handle",
+    "surface": "lar_surface",
+}
+
+
+def _recall_where(*, wing=None, voice=None, band=None, agent=None, surface=None, drift=None):
+    """Build a chroma `where` dict from the recall stamp-filters — one clause per provided filter,
+    keyed to its `lar_*` slot. Returns None when no filter narrows (the pool stays open)."""
+    clauses = {"wing": wing, "voice": voice, "band": band, "agent": agent, "surface": surface}
+    where = {_STAMP_KEYS[name]: val for name, val in clauses.items() if val is not None}
+    if drift:
+        where["lar_drift"] = True
+    return where or None
+
+
 class LaresCoordinator:
     """The verb-router BOTH surfaces (CLI + MCP) call — it holds a warm embedder + a content-store and a
     worldline handle on ONE sensorium palace, and drives the capture engine. Naming each method for its
@@ -70,23 +94,46 @@ class LaresCoordinator:
         self._content = cio.ContentStore(palace_path, expected_dim=self._dim, expected_model=self._model)
         self._worldline = wl.WorldlineStore(palace_path)
 
-    def harvest(self, surface: str, pointer: str, *, wing: "str | None" = None,
+    def harvest(self, surface: str, pointer: str, *, all: bool = False, writeback: bool = False,
+                dry_run: bool = False, wing: "str | None" = None,
                 room: str = "conversations") -> dict:
         """Capture a surface's transcript into the Memory sensorium (mirrors `lares harvest`). Idempotent
-        re-derivation — a re-run lands only the un-landed tail (the crash-cure)."""
+        re-derivation — a re-run lands only the un-landed tail (the crash-cure).
+
+        The isomorphism contract carries the CLI's rich args onto this one spine: `all` sweeps every
+        surface, `writeback` re-enriches a wing's drawers, `dry_run` previews without landing. The
+        per-pointer capture rides `drive_capture` here; the sweep/writeback/preview SHAPING rides the
+        CLI skin + the deferred @daemon-cap-wire (this task holds SHAPE + SEATS, never the re-point), so
+        the params stand in the signature and thread through as the wire lands them."""
         return drive_capture(self._palace, surface, pointer, wing=wing or self._wing, room=room,
                              embed_factory=lambda: (self._embed_one, self._model))
 
-    def recall(self, query: str, k: int = 8) -> dict:
-        """Recall the nearest turns to a query (mirrors `lares recall`); kapae-muted turns stay excluded."""
-        return self._content.search(self._embed_one(query), k)
+    def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
+               list: bool = False, voice: "str | None" = None, band: "str | None" = None,
+               agent: "str | None" = None, surface: "str | None" = None,
+               drift: "bool | None" = None) -> dict:
+        """Recall the nearest turns to a query (mirrors `lares recall`); kapae-muted turns stay excluded.
+
+        The CLI's read modes + stamp-filters shed onto this spine: `drawer` fetches ONE verbatim entry
+        by turn-key; `list` reports the taxonomy (the drawer-listing read-face); the stamp-filters
+        (`wing`/`voice`/`band`/`agent`/`surface`/`drift`) build a chroma `where` that narrows the
+        nearest-neighbor pool. A filter alone (no query) rides the `list`/taxonomy path."""
+        if drawer:
+            return self._content.get(drawer) or {}
+        where = _recall_where(wing=wing, voice=voice, band=band, agent=agent, surface=surface, drift=drift)
+        if list:
+            return self._content.taxonomy()
+        return self._content.search(self._embed_one(query), k, where)
 
     def status(self) -> dict:
         """What the sensorium holds — the taxonomy over the palace (mirrors `lares status`)."""
         return self._content.taxonomy()
 
-    def worldline(self, as_of=None) -> dict:
-        """The fork-DAG rhizome (mirrors `lares worldline`)."""
+    def worldline(self, selector: "str | None" = None, *, as_of=None) -> dict:
+        """The fork-DAG rhizome (mirrors `lares worldline`). `selector` names which run/handle the CLI
+        walks; the py `dag` renders the whole edge-DAG and the selector-narrowing rides the CLI skin.
+        `diff` stays a CLI-only delta (it refuses honestly on the persisted-ITC gap) — never a method
+        here."""
         return self._worldline.dag(as_of=as_of)
 
     def kapae(self, branch: str, tick) -> dict:
@@ -107,14 +154,23 @@ def build_mcp(coordinator: LaresCoordinator):
     mcp = FastMCP("lares")
 
     @mcp.tool()
-    def harvest(surface: str, pointer: str, wing: "str | None" = None) -> dict:
-        """Capture a surface's transcript (claude/codex/copilot) into the Memory sensorium."""
-        return coordinator.harvest(surface, pointer, wing=wing)
+    def harvest(surface: str, pointer: str, all: bool = False, writeback: bool = False,
+                dry_run: bool = False, wing: "str | None" = None,
+                room: str = "conversations") -> dict:
+        """Capture a surface's transcript (claude/codex/copilot) into the Memory sensorium. `all` sweeps
+        every surface, `writeback` re-enriches a wing, `dry_run` previews."""
+        return coordinator.harvest(surface, pointer, all=all, writeback=writeback, dry_run=dry_run,
+                                   wing=wing, room=room)
 
     @mcp.tool()
-    def recall(query: str, k: int = 8) -> dict:
-        """Recall the nearest turns to a query from the Memory sensorium."""
-        return coordinator.recall(query, k)
+    def recall(query: str, k: int = 8, wing: "str | None" = None, drawer: "str | None" = None,
+               list: bool = False, voice: "str | None" = None, band: "str | None" = None,
+               agent: "str | None" = None, surface: "str | None" = None,
+               drift: "bool | None" = None) -> dict:
+        """Recall the nearest turns to a query from the Memory sensorium. `drawer` fetches one verbatim;
+        `list` reports the taxonomy; the stamp-filters (wing/voice/band/agent/surface/drift) narrow."""
+        return coordinator.recall(query, k, wing=wing, drawer=drawer, list=list, voice=voice,
+                                  band=band, agent=agent, surface=surface, drift=drift)
 
     @mcp.tool()
     def status() -> dict:
@@ -122,9 +178,9 @@ def build_mcp(coordinator: LaresCoordinator):
         return coordinator.status()
 
     @mcp.tool()
-    def worldline() -> dict:
-        """Render the fork-DAG rhizome of turns."""
-        return coordinator.worldline()
+    def worldline(selector: "str | None" = None) -> dict:
+        """Render the fork-DAG rhizome of turns. `selector` names which run/handle to walk."""
+        return coordinator.worldline(selector)
 
     @mcp.tool()
     def kapae(branch: str, tick: int) -> dict:

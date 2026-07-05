@@ -10,10 +10,13 @@
  *
  *   lares recall <keywords...>          semantic search (default)
  *   lares recall <kw> --wing <w>        filter to one project wing
- *   lares recall <kw> --limit <n>       cap results (default 5)
+ *   lares recall <kw> --k <n>           cap results (default 5); --limit stays as a back-compat alias
  *   lares recall --drawer <id>          fetch one drawer verbatim
  *   lares recall --list [--wing <w>]    list drawers (no query)
  *   lares recall ... --port <n>         daemon port
+ *
+ * The `--k` name mirrors the isomorphic MCP tool arg (`recall(query, k)`); `--limit`
+ * keeps working for muscle-memory (`--k` wins when the operator passes both).
  *
  * STAMP FILTERS — compose with the search or the list (honest counts, never a
  * silent drop): --voice <name> · --band <canon|synthesis|provisional|raw> ·
@@ -48,14 +51,15 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   const query   = args.positional.join(" ").trim();
   const drawer  = args.options["drawer"];
   const wing    = args.options["wing"];
-  const limit   = args.options["limit"];
+  // `--k` mirrors the MCP tool arg; `--limit` survives as a back-compat alias (--k wins).
+  const limit   = args.options["k"] ?? args.options["limit"];
   const wantList = args.flags["list"];
   // The stamp filters (voice · band · agent · surface · drift) — a filter alone implies --list.
   const filterKeys = ["voice", "band", "agent", "surface"] as const;
   const hasFilters = filterKeys.some((k) => args.options[k] !== undefined) || args.flags["drift"] === true;
 
   if (!query && !drawer && !wantList && !hasFilters) {
-    console.error("usage: lares recall <keywords...> | --drawer <id> | --list [--wing <w>] [--limit <n>]");
+    console.error("usage: lares recall <keywords...> | --drawer <id> | --list [--wing <w>] [--k <n>]");
     console.error("  stamp filters: --voice <name> --band <canon|synthesis|provisional|raw> --agent <id> --surface <claude|codex|...> --drift");
     return 2;
   }

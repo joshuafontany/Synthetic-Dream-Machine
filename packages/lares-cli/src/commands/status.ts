@@ -1,13 +1,18 @@
 /**
- * `lares status` — quick health snapshot for the lararium node.
+ * `lares status` — the status surface, NAMESPACED into two referents (the name-collision cure):
  *
- * Probes:
- *   - genesis/social-bootstrap.json presence (init has run)
- *   - .lararium/ storage directory presence + size hint
- *   - whether the LAR_PORT (default 8080) is in use (a node process likely runs)
+ *   lares node status        NODE HEALTH — bootstrap presence, storage size, port in use. The
+ *                            historical `lares status` behavior; pure local inspection, no vm boot.
+ *   lares sensorium status   SENSORIUM TAXONOMY — what the Memory sensorium holds. Mirrors the
+ *                            isomorphic MCP `status` tool (py `content_io` taxonomy). SEATED STUB
+ *                            today: the read rides the DEFERRED @daemon-cap-wire.
+ *   lares status             muscle-memory ALIAS → `lares node status`.
+ *   lares status sensorium   also reaches the sensorium taxonomy (the alias spelled long).
  *
- * No vm boot — pure local inspection. This command stays cheap so operators
- * can run it freely during a session.
+ * The two carried one name before (CLI status = node-health · MCP status = taxonomy); they name
+ * one referent each now, so the isomorphism table holds no name resolving to two things.
+ *
+ * `lares status --palaces` keeps the palace-organ health table (a third, distinct local view).
  */
 
 import { larRoot, larDataDir } from "../env.js";
@@ -17,7 +22,7 @@ import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
 import { palaceOrgans, organHealthy, readMemeticWikitextCoupling } from "@lararium/node";
 import { readClaudeCleanupPeriod, CLEANUP_PERIOD_DAYS_FLOOR } from "../claude-wire.js";
-import { emit } from "../render.js";
+import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is unset.
@@ -86,9 +91,54 @@ export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Pr
   });
 }
 
+// The sensorium-taxonomy SEATED STUB. The verb shape stands now (isomorphic with the MCP `status`
+// tool = the sensorium taxonomy), but the read stays unwired: the taxonomy lives in the py
+// `content_io` backend, which CLI verbs reach only across the DEFERRED @daemon-cap-wire. Node health
+// (`lares node status`) reads local and answers today; the taxonomy waits for the wire.
+const SENSORIUM_STATUS_STUB =
+  "sensorium status routing deferred — rides the @daemon-cap-wire. The taxonomy (what the Memory " +
+  "sensorium holds) lives in the py content_io backend; CLI verbs reach it only once the cap-wire " +
+  "routes them there. For local organ health today, run `lares status --palaces`; for node health, " +
+  "`lares node status`.";
+
+/** `lares sensorium status` — the taxonomy mirror of MCP `status`. SEATED STUB (read deferred). */
+function cmdSensoriumStatus(args: ParsedArgs): number {
+  emit(args, {
+    ok: false,
+    error: { code: "verb-error", message: SENSORIUM_STATUS_STUB, hint: "`lares status --palaces` shows local organ health; the taxonomy lands once the @daemon-cap-wire routes to py content_io." },
+    human: () => { console.error(`lares sensorium status: ${SENSORIUM_STATUS_STUB}`); },
+  });
+  return exitFor("verb-error");
+}
+
+/** `lares node <subverb>` — the node command group; `status` reads node health (the historical view). */
+export async function cmdNode(args: ParsedArgs): Promise<number> {
+  const sub = args.positional[0];
+  if (sub === undefined || sub === "status") return cmdNodeStatus(args);
+  console.error(`lares node: unknown subverb "${sub}". Run \`lares node status\`.`);
+  return 2;
+}
+
+/** `lares sensorium <subverb>` — the sensorium command group; `status` mirrors the MCP `status` tool. */
+export async function cmdSensorium(args: ParsedArgs): Promise<number> {
+  const sub = args.positional[0];
+  if (sub === undefined || sub === "status") return cmdSensoriumStatus(args);
+  console.error(`lares sensorium: unknown subverb "${sub}". Run \`lares sensorium status\`.`);
+  return 2;
+}
+
 export async function cmdStatus(args: ParsedArgs): Promise<number> {
   // --palaces: the palace-organ health table (re-runnable; same registry as setup/teardown).
   if (args.flags["palaces"] === true) return cmdStatusPalaces(args);
+  // Namespaced spellings reached through the alias: `lares status sensorium` / `lares status node`.
+  if (args.positional[0] === "sensorium") return cmdSensoriumStatus(args);
+  if (args.positional[0] === "node") return cmdNodeStatus(args);
+  // Bare `lares status` = muscle-memory alias → node health.
+  return cmdNodeStatus(args);
+}
+
+/** Node health — bootstrap presence, storage size, port probe, retention. Pure local inspection. */
+async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
 
   const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
   const storage   = larDataDir();   // runtime → ~/.lares/.lararium

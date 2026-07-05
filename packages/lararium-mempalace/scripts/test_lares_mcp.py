@@ -5,13 +5,16 @@ restores), and the FastMCP tool-set MIRRORS the CLI lifecycle verbs exactly (the
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_lares_mcp.py -q
 """
 import asyncio
+import json
 import os
 
 import pytest
 
-from lares_mcp import LIFECYCLE_VERBS, LaresCoordinator, build_mcp, guard_hitl, seat_of
+from lares_mcp import LIFECYCLE_VERBS, VERB_SEATS, LaresCoordinator, build_mcp, guard_hitl, seat_of
 
-_FIXTURE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures", "capture", "claude-main.jsonl")
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_FIXTURE = os.path.join(_HERE, "fixtures", "capture", "claude-main.jsonl")
+_CLI_VERBS = os.path.join(_HERE, "fixtures", "cli-verbs.json")
 
 
 def _fake_embed():
@@ -60,20 +63,59 @@ def test_grid_seats_the_verbs_by_reversibility_and_trust():
         assert seat_of(v) == "HOTL"       # every lifecycle verb runs reversible + trusted
     assert seat_of("purge") == "HITL"     # irreversible
     assert seat_of("attach") == "HITL"    # trust-crossing
+    assert seat_of("release") == "HITL"   # irreversible — drops a guest handle for good
+    assert seat_of("reconcile") == "HOTL" # reversible re-settle against source
 
 
 def test_hitl_gate_blocks_without_approval():
     guard_hitl("recall")                  # HOTL passes freely
     guard_hitl("kapae")                   # reversible mute passes freely
+    guard_hitl("reconcile")               # HOTL re-settle passes freely
     with pytest.raises(PermissionError):
         guard_hitl("purge")               # HITL (irreversible) blocks without approval
     with pytest.raises(PermissionError):
         guard_hitl("attach")              # HITL (trust-crossing) blocks without approval
+    with pytest.raises(PermissionError):
+        guard_hitl("release")             # HITL (irreversible) blocks without approval
     guard_hitl("purge", approval="operator-granted-cap")   # the @daemon-granted cap unblocks it
 
 
-def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
-    # the ISOMORPHISM contract: the /mcp tool-set equals the CLI lifecycle verb-set, name-for-name.
+def _mcp_tool_names(tmp_path):
     mcp = build_mcp(_coord(tmp_path))
-    names = {t.name for t in asyncio.run(mcp.list_tools())}
-    assert names == set(LIFECYCLE_VERBS)
+    return {t.name for t in asyncio.run(mcp.list_tools())}
+
+
+def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
+    # the /mcp tool-set equals the declared lifecycle verb-set, name-for-name (the growth floor).
+    assert _mcp_tool_names(tmp_path) == set(LIFECYCLE_VERBS)
+
+
+def test_parity_inventory_three_way(tmp_path):
+    """THREE-WAY isomorphism guard against the CLI-verb INVENTORY (fixtures/cli-verbs.json — the
+    surface GROWS into it). Mutating any side (add an orphan MCP tool, seat-drop a mirrored verb,
+    or split the inventory) fails this loud. The `lares` MCP surface mirrors the WHOLE CLI, so the
+    invariant reads MCP ⊆ CLI (no orphan tool), never a permanent cli-only claim."""
+    with open(_CLI_VERBS, encoding="utf-8") as f:
+        inv = json.load(f)
+    verbs = set(inv["verbs"])                    # all CLI top-level command names
+    mirrored = set(inv["mirrored"])             # the MCP tool-names (the anchor; MCP-form)
+    mirror_hosts = set(inv["mirror_hosts"])     # the CLI top-level verbs those tools land on (coverage-form)
+    not_yet = set(inv["not_yet_mirrored"])
+    cli_forms = inv["cli_forms"]
+    mcp_tools = _mcp_tool_names(tmp_path)
+
+    # (a) the MCP tool-set IS the mirrored anchor IS the cli_forms keys — grow a tool, grow all three.
+    assert mcp_tools == mirrored
+    assert mcp_tools == set(cli_forms)
+    # (b) every MCP tool carries a VERB_SEATS entry — the grid seats the whole surface.
+    for name in mcp_tools:
+        assert name in VERB_SEATS, f"MCP tool {name!r} rides UNSEATED — grow VERB_SEATS"
+    # (c) the name-normalization BRIDGE: each MCP tool's CLI spelling lands on a REAL host verb — so a
+    # sub-verb mirror (kapae → `worldline kapae`, status → `sensorium status`) still resolves to a top-level
+    # verb the CLI actually carries (no orphan tool; MCP ⊆ CLI reads through the spelling, not the raw name).
+    for m in mcp_tools:
+        head = cli_forms[m].split()[0]
+        assert head in mirror_hosts and head in verbs, f"MCP {m!r} → CLI {cli_forms[m]!r} has no real host"
+    # (d) COVERAGE partition (the surface GROWS): every CLI top-level verb is a mirror-host XOR awaits.
+    assert mirror_hosts | not_yet == verbs
+    assert mirror_hosts.isdisjoint(not_yet)
