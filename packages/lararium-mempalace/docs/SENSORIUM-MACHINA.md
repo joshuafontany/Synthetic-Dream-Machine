@@ -86,7 +86,7 @@ Pinned dials to dissolve (each → its emergent replacement):
 |---|---|
 | `lockThreshold` / `lock_hi 0.3` / `lock_lo 0.15` | (1−α)-quantile of autocorrelation under phase-scramble surrogates, per-stream |
 | `quorum` / `holdover_grace` | SPRT/CUSUM run-length holding false-lock at ARL₀ |
-| `nestRatio 2` / `nBands 5` | read the ACTUAL subharmonic peaks — **φ/plastic-ρ-spaced, never dyadic** (count-5 stays Law-of-5s canon; the ratios emerge) |
+| `nestRatio 2` / `nBands 5` | INTRA-clock: **coprime-prime** radices near the domain rhythm (e.g. 191/5/31), never dyadic. φ names band ORTHOGONALITY (Canon 18/20) + φ² the magnitude; "φ *specifically* tunes" stays Provisional 4/20 — the load-bearing claim is only *an independent feature per band*. count-5 stays Law-of-5s canon. |
 | `FFZ_DEFAULT_BOUNDS` (stub) | recovered-band periods → nearest coprime prime |
 | nucleation `γ` / supersaturation | back-solve from observed birth-rate at ARL₀ |
 | basin `radius` | closure-distance null quantile |
@@ -94,9 +94,11 @@ Pinned dials to dissolve (each → its emergent replacement):
 **Stays pinned, legitimately**: ARL₀ (the one knob), the servo *set-points* (operator intent), the **incommensurable φ-jitter** (pinned on purpose — the anti-phase-lock guard; emergence never touches it).
 
 ### 5.2 · The three-layer N-stream structure
-- **A · per-worldline burst-mode CDR** — each worldline runs its own `SchmittLock` + `recover_clock`. **Non-locking, φ/Fibonacci-desync** — agent and sub-agent trees fire on non-causal rhythms and MUST NOT entrain (entrainment = a manufactured global-now). Non-locking φ-desync *is* both "couple-as-read-not-drive" and the φ-orthogonality the canon demands (the dyadic-2:1 was the bug).
-- **B · boundary-clock hierarchy** (IEEE-1588 PTP rhyme, along the FFZ address tree Theme.Arc.Measure.Beat.Pulse) — sub-agent clocks nest under parent-agent (Beat) → agent under project/session (Measure/Arc) → project under Lararium (Theme). **A sparse branch too thin to lock borrows the Beat it can't earn** from its parent.
-- **C · coupling as LOCAL READ only** (Kuramoto rhyme, hard-caveated) — couple worldline-rhythms exactly as the five senses couple: reliability-weighted P(common-cause), sovereign estimates kept, un-bound the instant correspondence drops. **Never a master beat.** This coupling-read *is* the Ki resonance.
+> **Corpus-grounding (2026-07-05):** there is NO shared timing constant and NO lost φ/Fibonacci series — the operator dissolved "φ vs e" (`ffz-mesh-timing.md`, Mu). The inter-clock desync rides a **tool-menu behind a pairwise-incommensurability INVARIANT**, checked locally where two clocks touch; each island picks its tool freely (coordination-free). φ scopes **intra-clock only**.
+
+- **A · per-worldline burst-mode CDR** — each worldline runs its own `SchmittLock` + `recover_clock`. **Non-locking, desync-by-tool** — agent and sub-agent trees fire on non-causal rhythms and MUST NOT entrain (entrainment = a manufactured global-now). The desync tool is a **HELD FORK, plastic-ρ leading**: **plastic-ρ ≈ 1.3247** (Roberts low-discrepancy, *dimension-correct* for d=2 — NOT copied φ) · φ+e-jitter (per-node 1-D) · coprime-integer (13/17) · Kuramoto frequency-dispersion. The invariant the pair checks = *mutual non-resonance*; the tool the node holds = its own choice. (FlipIt graduates this aesthetic→theorem: a synchronized refresh is strictly dominated.)
+- **B · boundary hierarchy — holdover, NOT borrow** (a fork, not settled). Along the FFZ address tree (Theme.Arc.Measure.Beat.Pulse), a sparse branch too thin to lock **holdover/free-runs** (corpus-grounded). It does **NOT borrow a parent's live Beat** — that re-imports the *retired* coupled-oscillator / master-beat, a covert global-now in the tree; canon reads sub-worldline relations as **one-shot directed DAG-joins** (spawn=fork, handback=join), never a PTP sync-hierarchy. Whether a thin branch may read (not entrain to) a parent's cadence stays **a fork** (§9).
+- **C · coupling as LOCAL READ only** (Kuramoto rhyme, hard-caveated) — couple worldline-rhythms as the five senses couple: reliability-weighted P(common-cause), sovereign estimates kept, un-bound the instant correspondence drops. **Never a master beat.** This coupling-read *is* the Ki resonance. **The anti-capture guard (β, §9):** above Kuramoto's critical coupling `Kc`, read *becomes* drive — an overdrive/ectopic feeder can silently capture neighbors' rhythms; the guard runs either emergent (an over-fast feeder self-attenuates as its `P(common-cause)` drops) or as a hard rate-floor against an adversarial feeder.
 
 ### 5.3 · Re-processing = EM over the free WAL
 "Process and re-process the corpuses" = EM/Baum-Welch: alternate (E) recover-clock-given-dials with (M) re-estimate-dials-given-clock, iterate to convergence — breaking the beat/threshold chicken-and-egg. The transcript-as-WAL makes each re-pass **free and deterministic** (the replay-to-converge precondition). Offline EM = deep-dream; online DtACI/ADWIN = daydream.
@@ -120,11 +122,11 @@ Only worldlines above a **transition-density floor** get their own clock (a stat
 
 ---
 
-## 7 · The py/R split & the two clocks
+## 7 · The py/R split & the three instruments
 
 - **py/R** owns the realtime streams: the capture-engine, the per-worldline FFZ gates, the null-harness, the EM, the online DtACI/ADWIN, the Li/Ki sidecars. R-tools run the READ-mode reflective replay (daydream).
 - **TS `@daemon`** coordinates the fleet across the causal-island shore — spawn/supervise/point, verbs + a data-pointer, **no payload**; keeps its sovereign wiki/CRDT island.
-- **Two clocks**: the CRDT-causal clock (TS, ordering) ⊥ the FFZ-rhythm clock (py/R, cadence) — causal-islands, no shared now.
+- **Three instruments** (corpus-grounded): the Automerge-causal clock (TS, ordering) ⊥ the **epoch-lease ratchet** (a liveness max-register — NOT a clock, a monotonic lease) ⊥ the FFZ-rhythm clock (py/R, cadence) — causal-islands, no shared now. Axis-1 **e breathes the rate** (`e^(−t/λ)` lease/decay); the **e-decay wire-vs-palace** fork (a dial carries the FFZ lease in the CRDT, or the meshpalace ages its own drawers) stays open (§9).
 - **The DAG**: roll-own `worldline_io` (local, single-writer, no-federate), grown toward **ITC** for fork-sound causality — **not** py-automerge (that earns its weight only on cross-node concurrent-writer convergence, which the no-federate ruling designs out).
 
 ---
@@ -154,11 +156,16 @@ Only worldlines above a **transition-density floor** get their own clock (a stat
 
 **Designed, pending the streaming epic:** the demux-by-worldline · the per-worldline gate instancing · the emergent-dial dissolution (ARL₀ + null-harness wiring) · the boundary-clock hierarchy · the coupling-read=Ki wiring · the EM re-processing loop · the regenerated-standing readout · the @daemon-cap-wire + the coordination-brain.
 
-**Open forks (the FFZ corpus pass must settle):**
-1. **The past φ/Fibonacci desync series** — the exact clock ratios for non-causal agent-tree rhythms (recover from the corpus, don't re-derive).
-2. **Does any stream genuinely lock in M1?** (locking gate-style deferred-not-denied).
-3. **EM local-vs-global optimum** — accept the local optimum (cheap) or multi-start from several ARL₀ seeds (robust, affordable since re-passes are free, needs a dial-set quality score).
-4. **Persistence depth** — fully-regenerated standing vs a stored-scalar fallback; retrieval-coupled vs hybrid-clock decay.
+**Open forks (corpus-grounded 2026-07-05; operator-held):**
+1. **The inter-clock desync TOOL** (NOT a lost series — the single-constant question was dissolved): **plastic-ρ ≈ 1.3247 leads** (dimension-correct) · φ+e-jitter (per-node 1-D) · coprime-13/17 · Kuramoto-dispersion. The held fork = node×time→plastic-ρ vs per-node-1-D→φ+e-jitter.
+2. **α — the consolidation loop-back (does sleep teach waking?)** — deep-dream learns TE-coupling / criticality / converged dials over the slow corpus; the doc wires wake→sleep but no sleep→wake. (a) deep-dream re-seeds the fast gate's priors (true CLS) vs (b) the fast gate stays sovereign, reading the slow findings as advice only (no-global-now purity). *The strongest un-named fork — the literal join of memory-as-dream ⋈ chronometer.*
+3. **The boundary hierarchy (§5.2-B)** — holdover-only on a sparse branch (canon-safe) vs may it *read* (never entrain to) a parent's cadence?
+4. **β — the anti-capture guard** — emergent self-attenuation (P(common-cause) drops as rhythm diverges) vs a hard rate-floor against an adversarial ectopic feeder.
+5. **γ — the EM dial-set quality score** (multi-start can't rank starts without one): ARL₀-hit-rate-vs-shuffle-null *leads* (reuses the calibration harness already designed) · Baum-Welch likelihood · sink-birth-stability.
+6. **The rewind-detector gap** — harvest runs append-only with no gone-turn reconciliation; a `worldline_io`/kapae keystone (kapae mutes forward; nothing detects a rewind already past).
+7. **Does any stream genuinely lock?** — Axis-3 opt-in authenticated treaty only (deferred-not-denied; a visible coupling window = an attack surface).
+8. **Persistence depth** — fully-regenerated standing vs a stored-scalar fallback; retrieval-coupled-vs-hybrid-clock decay turns out **forced** by the temporal/atemporal split (a guest corpus has no beat → decays on recall only), not operator taste.
+9. **e-decay wire-vs-palace** (§7).
 
 ---
 
