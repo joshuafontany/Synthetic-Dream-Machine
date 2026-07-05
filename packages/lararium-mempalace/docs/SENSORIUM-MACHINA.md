@@ -156,16 +156,22 @@ Only worldlines above a **transition-density floor** get their own clock (a stat
 
 **Designed, pending the streaming epic:** the demux-by-worldline · the per-worldline gate instancing · the emergent-dial dissolution (ARL₀ + null-harness wiring) · the boundary-clock hierarchy · the coupling-read=Ki wiring · the EM re-processing loop · the regenerated-standing readout · the @daemon-cap-wire + the coordination-brain.
 
-**Open forks (corpus-grounded 2026-07-05; operator-held):**
-1. **The inter-clock desync TOOL** (NOT a lost series — the single-constant question was dissolved): **plastic-ρ ≈ 1.3247 leads** (dimension-correct) · φ+e-jitter (per-node 1-D) · coprime-13/17 · Kuramoto-dispersion. The held fork = node×time→plastic-ρ vs per-node-1-D→φ+e-jitter.
-2. **α — the consolidation loop-back (does sleep teach waking?)** — deep-dream learns TE-coupling / criticality / converged dials over the slow corpus; the doc wires wake→sleep but no sleep→wake. (a) deep-dream re-seeds the fast gate's priors (true CLS) vs (b) the fast gate stays sovereign, reading the slow findings as advice only (no-global-now purity). *The strongest un-named fork — the literal join of memory-as-dream ⋈ chronometer.*
-3. **The boundary hierarchy (§5.2-B)** — holdover-only on a sparse branch (canon-safe) vs may it *read* (never entrain to) a parent's cadence?
-4. **β — the anti-capture guard** — emergent self-attenuation (P(common-cause) drops as rhythm diverges) vs a hard rate-floor against an adversarial ectopic feeder.
-5. **γ — the EM dial-set quality score** (multi-start can't rank starts without one): ARL₀-hit-rate-vs-shuffle-null *leads* (reuses the calibration harness already designed) · Baum-Welch likelihood · sink-birth-stability.
-6. **The rewind-detector gap** — harvest runs append-only with no gone-turn reconciliation; a `worldline_io`/kapae keystone (kapae mutes forward; nothing detects a rewind already past).
-7. **Does any stream genuinely lock?** — Axis-3 opt-in authenticated treaty only (deferred-not-denied; a visible coupling window = an attack surface).
-8. **Persistence depth** — fully-regenerated standing vs a stored-scalar fallback; retrieval-coupled-vs-hybrid-clock decay turns out **forced** by the temporal/atemporal split (a guest corpus has no beat → decays on recall only), not operator taste.
-9. **e-decay wire-vs-palace** (§7).
+**Forks RESOLVED — ratchet-closed 2026-07-05** (a 3-part ratchet: internet → mempalace → internet, YIN/YANG trading each round). Through-line: **every frontier answer is no-global-now NATIVE** — differential-dataflow partial-orders · DESYNC local-only · Nested-Learning frequency-factored loops · NCA local update-rules. Reversibility, factoring-by-timescale, node-local adaptation, regrow-to-setpoint are the frontier's *names* for integrities the spine already carries. **The work is wiring + subtracting the one over-reach (anti-kindling), not invention.**
+
+*CLOSED:*
+1. **α consolidation loop-back** → **self-distilled priors, same-island, a DIAL not a clock** (structurally no-global-now-safe: the slow loop reads a static corpus with no temporal beat, so it CANNOT leak a beat — only structural priors flow). Routes Memory→replay→Dream-schema→gate-prior (the existing two-pin replay path); factored-by-frequency (the built `deriveGate` slow-re-anchor ⊥ `adaptGate` fast-track precedent).
+2. **β anti-capture** → **sub-critical margin + reversible-unbind + a node-local homeostatic gain-floor + a Byzantine bounded-influence rate-floor**. Reversible-unbind = self-stabilization = edge-prune ("sever the junction, not the peer"). **DROP anti-kindling's per-edge weight-state** — a poisonable liability a self-stabilizing design discards on purpose.
+3. **γ dial-quality** → **PPC on sink-accrual = perturbation-recovery of the regeneration to its setpoint** (damage-and-regrow, NCA-style). Unifies with persistence: dial-quality and standing are one attractor read two ways. Already half-built (the `scrum-sovereign` false-birth proxy).
+4. **desync** → a **DESYNC-style node-local phase-repulsion** (Degesys-Nagpal: no coordinator, no shared constant, auto-adjusts to node-count) behind the pairwise-non-resonance invariant; **plastic-ρ demotes to a seed/fallback**.
+5. **one-substrate** → **FUSE THE READ, FACTOR THE WRITE**: one shared substrate-representation (the recovered FFZ clock + the regenerated-standing basin), read by many loops at different frequencies (Nested-Learning). Never a fused stateful core.
+6. **persistence** → **regrow-toward-an-editable-setpoint** (store the low-dim setpoint durable, regenerate the content toward it via canalized descent; Levin/NCA), scoped to **Dream**; the **Memory pin stays eidetic-by-fiat** (never regenerated).
+7. **rewind cascade-correction** → **differential-dataflow retraction**: model the Li/Ki/standing layers as incremental VIEWS over the worldline collection (harvest = +1, rewind = −1 a kāpae-prune the derived layer subscribes to); cascade-correction falls out as IVM-under-retraction; partial-order timestamps are no-global-now-native (= the ITC frontier `worldline_io` grows toward).
+8. **Does any stream lock?** → deferred-not-denied (Axis-3 opt-in authenticated treaty only; a visible coupling window = an attack surface).
+
+*OPERATOR-HELD (genuine choices that survive the ratchet, not domain gaps):*
+- **A · Rewind DETECTION** — a fundamental-limit fingerprint tradeoff (no clock-free detection of an edited/truncated prefix without a recorded fingerprint): a `prev-cid` hash-chain per harvest row · periodic snapshot-epochs · or producer-emit-only (no auto-detect). *Detection is the choice; the retraction/cascade mechanism above is settled.*
+- **B · Desync sub-choice** — statistical non-resonance (per-node low-discrepancy jitter, zero coupling) vs active collision-avoidance (DESYNC local repulsion, rides the coupling-read).
+- **C · e-decay wire-vs-palace** (§7) — a dial carries the FFZ lease in the CRDT, or the meshpalace ages its own drawers.
 
 ---
 
