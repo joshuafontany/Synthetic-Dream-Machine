@@ -28,8 +28,6 @@ Run with the mempalace CLI's interpreter (it has the package + chroma):
 from __future__ import annotations
 
 import argparse
-import json
-import sys
 
 from mempalace.palace import get_collection
 

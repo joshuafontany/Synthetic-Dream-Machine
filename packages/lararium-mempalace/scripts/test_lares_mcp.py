@@ -41,6 +41,15 @@ def _live_turn_keys(coord):
     return {m["metadata"].get("lar_turn_key") for m in coord.recall("turn", 20)["matches"]}
 
 
+def test_harvest_refuses_unwired_shaping_args(tmp_path):
+    # B2 footgun: all/writeback/dry_run ride the deferred cap-wire — they must REFUSE, never silently
+    # ignore (dry_run=True would otherwise LAND for real on the append-only ground).
+    coord = _coord(tmp_path)
+    for kwargs in ({"all": True}, {"writeback": True}, {"dry_run": True}):
+        with pytest.raises(NotImplementedError):
+            coord.harvest("claude", _FIXTURE, **kwargs)
+
+
 def test_coordinator_kapae_cascade_round_trip(tmp_path):
     coord = _coord(tmp_path)
     coord.harvest("claude", _FIXTURE, wing="w")

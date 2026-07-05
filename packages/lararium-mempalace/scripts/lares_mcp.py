@@ -105,6 +105,13 @@ class LaresCoordinator:
         per-pointer capture rides `drive_capture` here; the sweep/writeback/preview SHAPING rides the
         CLI skin + the deferred @daemon-cap-wire (this task holds SHAPE + SEATS, never the re-point), so
         the params stand in the signature and thread through as the wire lands them."""
+        if all or writeback or dry_run:
+            # REFUSE HONESTLY, never silently ignore: dry_run especially would otherwise LAND on the
+            # append-only ground (the tool advertises a preview it can't yet give). The sweep/writeback/
+            # preview shaping rides the deferred @daemon-cap-wire — the same discipline as the kapae stub.
+            raise NotImplementedError(
+                "harvest all/writeback/dry_run: the sweep/writeback/preview shaping rides the deferred "
+                "@daemon-cap-wire (not yet wired) — refusing rather than capturing for real")
         return drive_capture(self._palace, surface, pointer, wing=wing or self._wing, room=room,
                              embed_factory=lambda: (self._embed_one, self._model))
 
@@ -148,7 +155,13 @@ class LaresCoordinator:
 
 def build_mcp(coordinator: LaresCoordinator):
     """Wrap the coordinator in a FastMCP server — one @tool per lifecycle verb, each a thin skin that
-    routes straight to the coordinator (the isomorphism holds because both surfaces share it)."""
+    routes straight to the coordinator (the isomorphism holds because both surfaces share it).
+
+    HITL-GATE PIN (6b): the six lifecycle tools below all seat HOTL, so `guard_hitl` no-ops on them.
+    When the 6b control verbs (purge/attach/release) wire in as tools here, each MUST call
+    `guard_hitl(verb, approval)` before executing — the grid SEATS them HITL, but nothing structurally
+    forces the gate until the tool calls it. The @daemon (holding this cap in its wiki-island VM worker)
+    supplies the approval capability out-of-band (ask→confirm→cap→wiki-audit)."""
     from mcp.server.fastmcp import FastMCP
 
     mcp = FastMCP("lares")

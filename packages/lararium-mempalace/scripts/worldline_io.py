@@ -54,7 +54,6 @@ Run with the mempalace CLI's interpreter (it has the package):
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import sqlite3
 
