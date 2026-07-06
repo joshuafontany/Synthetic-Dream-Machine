@@ -14,6 +14,7 @@ export default defineConfig({
       // SOURCE (like form-layer) so vitest resolves the `./meme-ast` subpath the package.json exports; the
       // tw5 main barrel stays parser-free (the pono grammar boundary). MUST precede the generic below.
       { find: "@lararium/tw5/meme-ast", replacement: path.resolve(root, "../lararium-tw5/src/meme-ast/index.ts") },
+      { find: "@lararium/tw5/memetic-wikitext-sensorium", replacement: path.resolve(root, "../lararium-tw5/src/memetic-wikitext-sensorium.ts") },
       { find: "@lararium/tw5", replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
       { find: "@lararium/mesh/lar-uris", replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
       // Subpath aliases MUST precede the generic "@lararium/mesh" — else the string

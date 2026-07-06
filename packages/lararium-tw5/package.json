@@ -24,6 +24,10 @@
       "import": "./dist/meme-ast/index.js",
       "types": "./dist/meme-ast/index.d.ts"
     },
+    "./memetic-wikitext-sensorium": {
+      "import": "./dist/memetic-wikitext-sensorium.js",
+      "types": "./dist/memetic-wikitext-sensorium.d.ts"
+    },
     "./tw5-worker-script": {
       "import": "./dist/tw5-worker-script.js",
       "types": "./dist/tw5-worker-script.d.ts"

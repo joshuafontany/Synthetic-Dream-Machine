@@ -174,3 +174,4 @@ export type {
   RecallClient, RecalledTrajectoryStub, SubagentEdgePair,
 } from "./verb-caps.js";
 
+export * from "./memetic-wikitext-sensorium.js";
