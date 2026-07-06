@@ -52,6 +52,10 @@ TURN_KEY_META = "lar_turn_key"
 KAPAE_META = "lar_kapae"
 _MUTED_VALUES = {"1", "true", "yes"}
 
+# The recall over-fetch ceiling factor: the muted-exclusion widen never fetches more than k·C rows, so a
+# kapae'd hot-region bails with fewer-than-k live rows instead of scanning the whole collection (C5 scale).
+_POOL_CEILING_FACTOR = 32
+
 
 def _is_muted(metadata: "dict | None") -> bool:
     """A row reads muted when its `lar_kapae` slot carries a truthy mark. Absent/"0"/"" = live —
@@ -264,6 +268,11 @@ class ContentStore:
             n = 0                              # a real backend error propagates LOUD (never look-empty)
         if n == 0:
             return {"matches": [], "scanned": 0, "matched": 0}
+        # The over-fetch POOL CEILING: a kapae'd hot-region (the cascade mutes contiguous near-neighbors)
+        # would otherwise double the pool to the WHOLE collection — turning recall into a full-collection
+        # ANN scan. Cap the widen at k·C; past it, bail with the live rows found (fewer than k), never a
+        # full scan. A small collection (n ≤ ceiling) keeps the exact old behavior.
+        ceiling = min(n, max(k, 1) * _POOL_CEILING_FACTOR)
         pool = min(max(k, 1), n)
         while True:
             got = self._col.query(
@@ -286,12 +295,12 @@ class ContentStore:
                     "document": docs[i] if i < len(docs) else "",
                     "metadata": meta,
                 })
-            # Enough live rows, the window covered the whole collection, or nothing to exclude — done.
-            # `scanned`/`matched` feed the CLI recall stale-daemon guard (it refuses a filtered read that
-            # lacks a numeric scanned) — so the routed CLI reads identically to a native mempalace read.
-            if len(matches) >= k or pool >= n or include_muted:
+            # Enough live rows, the pool hit the ceiling (bail — never a full-collection scan), or nothing
+            # to exclude — done. `scanned`/`matched` feed the CLI recall stale-daemon guard (it refuses a
+            # filtered read that lacks a numeric scanned) — so the routed CLI reads like a native read.
+            if len(matches) >= k or pool >= ceiling or include_muted:
                 return {"matches": matches[:k], "scanned": pool, "matched": len(matches)}
-            pool = min(pool * 2, n)             # widen and re-fetch (more near neighbors were muted)
+            pool = min(pool * 2, ceiling)       # widen and re-fetch (more near neighbors were muted)
 
     def cids_for_turn(self, turn_key: str) -> list:
         """Every cid bound to a worldline `turn_key` (via `lar_turn_key` metadata) — the kapae
@@ -300,6 +309,28 @@ class ContentStore:
             return []
         got = self._col.get(where={TURN_KEY_META: turn_key}, include=["metadatas"])
         return list(got.get("ids") or [])
+
+    def vectors_for_turns(self, turn_keys) -> dict:
+        """`turn_key -> [vectors]` for a GIVEN set of worldline turn-keys — the SCOPED vector pull
+        (worldline_ffz reads only the braids it stamps, never a whole-corpus `scan`). A chroma `where`
+        $in on `lar_turn_key` with embeddings included; drawers bound to no wanted key never ride out.
+        Empty/absent keys → {}."""
+        keys = sorted({k for k in (turn_keys or []) if k})
+        if not keys:
+            return {}
+        got = self._col.get(where={TURN_KEY_META: {"$in": keys}}, include=["metadatas", "embeddings"])
+        ids = got.get("ids") or []
+        metas = got.get("metadatas") or []
+        embs = got.get("embeddings")
+        out: dict = {}
+        for i in range(len(ids)):
+            emb = embs[i] if embs is not None and i < len(embs) and embs[i] is not None else None
+            if emb is None:
+                continue
+            tk = str((metas[i] or {}).get(TURN_KEY_META, "")).strip()
+            if tk:
+                out.setdefault(tk, []).append([float(x) for x in emb])
+        return out
 
     def mute(self, cid: str, tick=None) -> dict:
         """MUTE one row for kapae — flip the `lar_kapae` flag via patch_metadata (chroma-native

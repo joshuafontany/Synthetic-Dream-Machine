@@ -36,6 +36,7 @@ Meme: lar:///ha.ka.ba/@lararium/sensorium/worldline-ffz
 """
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -69,16 +70,18 @@ def worldline_turn_order(worldline_store, root, as_of=None) -> list:
     return worldline_store.branch_keys(root, as_of)
 
 
-def collect_turn_vectors(content_stores) -> dict:
-    """Scan every content store into a `turn_key -> mean vector` map. A turn lands as one-or-more
-    drawers (chunks) sharing a `lar_turn_key`; this AVERAGES a turn's chunk vectors into one turn
-    vector (the turn's centroid in embedding space). content_io.get carries no embedding, so the read
-    rides `scan` (the embedding-bearing page leg). Skips a drawer with no `lar_turn_key` or no vector."""
+def _iter_turn_vectors(content_stores, wanted):
+    """Yield (turn_key, vector) pairs. SCOPED when `wanted` (a turn-key set) rides in — a targeted
+    chroma $in read pulls ONLY the braids being stamped (never the whole corpus, so a kapae'd/idle
+    tail of unrelated drawers never gets scanned). `wanted=None` keeps the full `scan` (back-compat)."""
     from content_io import TURN_KEY_META
 
-    sums: dict = {}
-    counts: dict = {}
     for store in content_stores:
+        if wanted is not None:
+            for tk, vecs in store.vectors_for_turns(wanted).items():
+                for emb in vecs:
+                    yield tk, emb
+            continue
         offset = 0
         while True:
             page = store.scan(offset, 256)
@@ -86,19 +89,29 @@ def collect_turn_vectors(content_stores) -> dict:
             for r in recs:
                 tk = str((r.get("metadata") or {}).get(TURN_KEY_META, "")).strip()
                 emb = r.get("embedding")
-                if not tk or emb is None:
-                    continue
-                v = np.asarray(emb, dtype=float)
-                if tk in sums:
-                    sums[tk] = sums[tk] + v
-                    counts[tk] += 1
-                else:
-                    sums[tk] = v
-                    counts[tk] = 1
+                if tk and emb is not None:
+                    yield tk, emb
             nxt = page.get("next")
             if nxt is None:
                 break
             offset = nxt
+
+
+def collect_turn_vectors(content_stores, wanted=None) -> dict:
+    """A `turn_key -> mean vector` map. A turn lands as one-or-more drawers (chunks) sharing a
+    `lar_turn_key`; this AVERAGES a turn's chunk vectors into one turn vector (the turn's centroid in
+    embedding space). When `wanted` (a turn-key set) rides in, the pull SCOPES to those braids via a
+    chroma $in read; else it full-scans (back-compat). Skips a drawer with no key or no vector."""
+    sums: dict = {}
+    counts: dict = {}
+    for tk, emb in _iter_turn_vectors(content_stores, wanted):
+        v = np.asarray(emb, dtype=float)
+        if tk in sums:
+            sums[tk] = sums[tk] + v
+            counts[tk] += 1
+        else:
+            sums[tk] = v
+            counts[tk] = 1
     return {tk: sums[tk] / counts[tk] for tk in sums}
 
 
@@ -136,13 +149,21 @@ def drift_signal(vectors: list) -> list:
 # ---------------------------------------------------------------------------
 
 
+def _stable_phase_index(root: str) -> int:
+    """A STABLE integer keyed off the root STRING (the C1b veiled `wl-<hash>` root turn-key), NOT the
+    sorted-enumeration position — so a later braid whose root sorts EARLIER never shifts every other
+    braid's index and re-stamps the whole corpus (the idempotence break YANG's stress-lens named). A
+    12-hex slice of sha256 feeds roberts_phase's `frac(index/ρ)`, which stays low-discrepancy for any int."""
+    return int(hashlib.sha256(root.encode("utf-8")).hexdigest()[:12], 16)
+
+
 def worldline_phases(worldline_store, as_of=None) -> dict:
-    """Draw each braid's desync PHASE off its `roots()` index — `root -> roberts_phase(index)`, the
-    plastic-ρ low-discrepancy offset. Keyed by index alone, the braids hold mutually non-resonant
-    phases with zero coordination (the incommensurability tool); `desync.min_pairwise_gap` witnesses
-    the spread. `desync_relax` composes behind the SAME interface when active repulsion gets wired."""
-    roots = worldline_store.roots(as_of)
-    return {root: roberts_phase(i) for i, root in enumerate(roots)}
+    """Draw each braid's desync PHASE off a STABLE per-root hash — `root -> roberts_phase(hash(root))`,
+    the plastic-ρ low-discrepancy offset. Keyed by the root's own identity (not its sorted-enumeration
+    index), so adding a braid never re-stamps the others (idempotent under a new join). The braids still
+    hold mutually non-resonant phases with zero coordination (the incommensurability tool);
+    `desync.min_pairwise_gap` witnesses the spread. `desync_relax` composes behind the SAME interface."""
+    return {root: roberts_phase(_stable_phase_index(root)) for root in worldline_store.roots(as_of)}
 
 
 # ---------------------------------------------------------------------------
@@ -206,12 +227,17 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
     held-over braid stamps the free-run position — no fabricated beat). LOCAL only; the stamp rides
     content_io.patch_metadata (vector-safe). Returns `{root: WorldlineClock}` — deterministic and
     idempotent (same drift → same clock → same address → the same merge-write)."""
-    vecmap = collect_turn_vectors(content_stores)
+    # Order every braid's turns FIRST, then pull vectors SCOPED to exactly those turn-keys — never a
+    # whole-corpus scan (a store may hold far more drawers than the braids being stamped).
+    roots = worldline_store.roots(as_of)
+    ordered_by_root = {root: worldline_turn_order(worldline_store, root, as_of) for root in roots}
+    wanted = {tk for keys in ordered_by_root.values() for tk in keys}
+    vecmap = collect_turn_vectors(content_stores, wanted)
     phases = worldline_phases(worldline_store, as_of)
     report: dict = {}
 
-    for root in worldline_store.roots(as_of):
-        ordered_keys = worldline_turn_order(worldline_store, root, as_of)
+    for root in roots:
+        ordered_keys = ordered_by_root[root]
         # Keep only the turns that carry content (the events the clock can read), in braid order.
         content_keys = [k for k in ordered_keys if k in vecmap]
         vectors = [vecmap[k] for k in content_keys]

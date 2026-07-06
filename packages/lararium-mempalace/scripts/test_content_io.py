@@ -21,6 +21,34 @@ def test_generic_store_accepts_arbitrary_metadata(tmp_path):
     assert s.get("c-1")["metadata"]["whatever"] == "shape"
 
 
+def test_search_over_fetch_bails_at_the_pool_ceiling_not_full_scan(tmp_path):
+    # C5 scale: a kapae'd hot-region (all near-neighbors muted) must NOT widen the over-fetch to the whole
+    # collection. The pool caps at k·C (=k*32); past it, recall bails with the live rows found — never a
+    # full-collection ANN scan. Here EVERY row is muted, so the widen runs to the ceiling and stops.
+    n = 300
+    s = cio.ContentStore(str(tmp_path / ".mem"))
+    for i in range(n):
+        s.put(f"c{i}", f"turn {i}", [1.0, 0.0], {"w": "v", cio.KAPAE_META: "1"})   # all muted
+    res = s.search([1.0, 0.0], k=2)
+    assert res["matches"] == [] and res["matched"] == 0    # nothing live to recall
+    assert res["scanned"] == 2 * cio._POOL_CEILING_FACTOR   # bailed at k·C (=64), never the full 300
+    assert res["scanned"] < n                               # NOT a full-collection scan
+
+
+def test_vectors_for_turns_scopes_the_pull_to_wanted_keys(tmp_path):
+    # C5: the SCOPED vector pull returns ONLY the wanted turn-keys' vectors (never a whole-corpus scan) —
+    # an unrelated drawer bound to a different turn-key never rides out.
+    s = cio.ContentStore(str(tmp_path / ".mem"))
+    s.put("a0", "wanted A", [0.1, 0.2], {"w": "v", cio.TURN_KEY_META: "A"})
+    s.put("a1", "wanted A chunk2", [0.3, 0.4], {"w": "v", cio.TURN_KEY_META: "A"})   # same turn, 2 chunks
+    s.put("b0", "wanted B", [0.5, 0.6], {"w": "v", cio.TURN_KEY_META: "B"})
+    s.put("z0", "UNRELATED", [0.7, 0.8], {"w": "v", cio.TURN_KEY_META: "Z"})         # not wanted
+    got = s.vectors_for_turns(["A", "B"])
+    assert set(got) == {"A", "B"} and "Z" not in got        # scoped — the unrelated key never pulled
+    assert len(got["A"]) == 2 and len(got["B"]) == 1        # a turn's chunk-vectors ride together
+    assert s.vectors_for_turns([]) == {}                    # empty ask → empty pull
+
+
 def _raiser(exc):
     def f(*_a, **_k):
         raise exc

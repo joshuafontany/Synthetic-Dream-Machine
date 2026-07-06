@@ -208,27 +208,38 @@ class WorldlineStore:
         tree/replay read: the caller reconstructs adjacency from the CAUSE->EFFECT edges."""
         return {"edges": self._rows(as_of)}
 
-    def _adjacency(self, relations, as_of=None) -> dict:
-        adj: dict = {}
-        for e in self._rows(as_of):
-            if e["relation"] not in relations:
-                continue
-            adj.setdefault(e["frm"], []).append(e["to"])
-        return adj
+    @staticmethod
+    def _interval_clause(as_of) -> tuple:
+        """The bitemporal WHERE fragment + params keeping only edges OPEN at `as_of` (empty when None).
+        `valid_from<=as_of` (opened) AND `valid_to>as_of`/NULL (not yet closed) — the _rows slice, pushed
+        to sqlite so a per-node walk rides the frm/to indexes instead of scanning the whole edge table."""
+        if as_of is None:
+            return "", ()
+        return " AND (valid_from IS NULL OR valid_from<=?) AND (valid_to IS NULL OR valid_to>?)", (as_of, as_of)
+
+    def _children(self, node: str, as_of=None) -> list:
+        """The spawn-tree children of `node` (its fork/linear `to`) — an INDEXED read on ix_edges_frm,
+        the down-walk step. No whole-table scan: the WHERE frm=? rides the index."""
+        clause, params = self._interval_clause(as_of)
+        rows = self._conn.execute(
+            "SELECT to_node FROM worldline_edges WHERE frm=? AND relation IN (?,?)" + clause,
+            (node, REL_FORK, REL_LINEAR, *params),
+        ).fetchall()
+        return [r[0] for r in rows]
 
     def descendants(self, node: str, as_of=None) -> list:
         """The BRANCH subtree rooted at `node` — every turn reachable DOWN the spawn-tree
         (fork+linear), the node itself EXCLUDED. Join edges run upward-to-main, so they never
-        walk (a rejoined branch's tail stays inside its own subtree). Cycle-safe BFS."""
-        adj = self._adjacency(_SPAWN_TREE, as_of)
-        seen, out, queue = {node}, [], list(adj.get(node, []))
+        walk (a rejoined branch's tail stays inside its own subtree). Cycle-safe BFS, each step an
+        INDEXED `_children` read (ix_edges_frm) rather than a full edge-table scan."""
+        seen, out, queue = {node}, [], list(self._children(node, as_of))
         while queue:
             n = queue.pop(0)
             if n in seen:
                 continue
             seen.add(n)
             out.append(n)
-            queue.extend(adj.get(n, []))
+            queue.extend(self._children(n, as_of))
         return out
 
     def branch_keys(self, branch_root: str, as_of=None) -> list:
@@ -238,15 +249,18 @@ class WorldlineStore:
     def _up_parent(self, node: str, as_of=None) -> "str | None":
         """The node standing UP the braid from `node` — its fork-spawner (preferred) or its linear-prev.
         A turn holds at most one of each; the spawner outranks the chain, so a sub-agent climbs to its
-        spawning main-turn before climbing that main's own chain."""
+        spawning main-turn before climbing that main's own chain. An INDEXED read on ix_edges_to."""
+        clause, params = self._interval_clause(as_of)
+        rows = self._conn.execute(
+            "SELECT relation, frm FROM worldline_edges WHERE to_node=? AND relation IN (?,?)" + clause,
+            (node, REL_FORK, REL_LINEAR, *params),
+        ).fetchall()
         fork_up = linear_up = None
-        for e in self._rows(as_of):
-            if e["to"] != node:
-                continue
-            if e["relation"] == REL_FORK:
-                fork_up = e["frm"]
-            elif e["relation"] == REL_LINEAR:
-                linear_up = e["frm"]
+        for relation, frm in rows:
+            if relation == REL_FORK:
+                fork_up = frm
+            elif relation == REL_LINEAR:
+                linear_up = frm
         return fork_up or linear_up
 
     def worldline_of(self, turn: str, as_of=None) -> str:

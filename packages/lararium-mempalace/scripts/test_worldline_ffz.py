@@ -86,6 +86,21 @@ def test_two_braids_draw_non_resonant_phases(tmp_path):
     assert wf.phase_spread(wstore) > 0.0
 
 
+def test_desync_phase_is_stable_under_a_new_earlier_sorting_root(tmp_path):
+    # C5 idempotence: keying the phase off a STABLE per-root hash (not the sorted-enumeration index)
+    # means adding a braid whose root SORTS EARLIER never shifts an existing braid's phase — so its
+    # drawers never re-stamp under a new join (the idempotence break YANG's stress-lens named).
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store.linear("z-root", "z1", tick=1)                  # one braid, root "z-root"
+    before = wf.worldline_phases(store)["z-root"]
+
+    store.linear("a-root", "a1", tick=2)                  # a NEW root that sorts BEFORE "z-root"
+    after = wf.worldline_phases(store)
+    assert set(after) == {"a-root", "z-root"}
+    assert after["z-root"] == before                       # STABLE — the new earlier root left z untouched
+    assert after["a-root"] != after["z-root"]              # still mutually non-resonant
+
+
 def test_lar_ffz_stamped_as_a_position_and_idempotent(tmp_path):
     wstore, content = _build(tmp_path)
     report = wf.assign_worldline_ffz(wstore, [content])

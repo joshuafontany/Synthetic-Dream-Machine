@@ -32,6 +32,25 @@ def _build_rhizome(store):
     store.handback("t-root", "t-A", tick=4)  # child A hands back to parent root: join + close the fork
 
 
+def test_graph_walks_ride_the_frm_to_indexes(tmp_path):
+    # C5 scale: the down-walk (_children) and up-walk (_up_parent) push frm/to WHERE to sqlite, so the
+    # ix_edges_frm / ix_edges_to indexes (dead weight before) now carry the walk — never a full-table scan.
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store.linear("a", "b", tick=1)
+    down = store._conn.execute(
+        "EXPLAIN QUERY PLAN SELECT to_node FROM worldline_edges WHERE frm=? AND relation IN (?,?)",
+        ("a", "fork", "linear"),
+    ).fetchall()
+    up = store._conn.execute(
+        "EXPLAIN QUERY PLAN SELECT relation, frm FROM worldline_edges WHERE to_node=? AND relation IN (?,?)",
+        ("b", "fork", "linear"),
+    ).fetchall()
+    assert any("ix_edges_frm" in str(r) for r in down), down     # the down-walk rides ix_edges_frm
+    assert any("ix_edges_to" in str(r) for r in up), up          # the up-walk rides ix_edges_to
+    # and the walks still read correctly through the indexed path
+    assert store.descendants("a") == ["b"] and store.worldline_of("b") == "a"
+
+
 def test_bogus_branch_kapae_reads_resolved_false(tmp_path):
     # C4: a bogus/typo branch (no rhizome node, no bound content) reads resolved:false — a legible miss,
     # never a silent no-op — and logs NO phantom mute. A real branch resolves true.
