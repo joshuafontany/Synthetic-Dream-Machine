@@ -23,6 +23,24 @@ export {
   BOOTSTRAP_SCANS,
 } from "./meme-ast/index.js";
 
+// the ahu slot grammar — the deserializer requires these off the library in-VM.
+export {
+  AHU_OPEN_RE,
+  AHU_CLOSE_RE,
+  CONTROL_SLOTS,
+  findTopLevelAhuBlocks,
+  composeSlotPath,
+} from "./meme-ast/index.js";
+
+// the fence-mask law — the deserializer + meme-stream require these off the library in-VM
+// (the barrel keeps them internal; the LIBRARY surface carries them for its VM consumers).
+export {
+  fencedSpans,
+  inMask,
+  maskedExec,
+  maskedExecAll,
+} from "./meme-ast/fence-mask.js";
+
 export type {
   MemeAstNode,
   MemeNode,

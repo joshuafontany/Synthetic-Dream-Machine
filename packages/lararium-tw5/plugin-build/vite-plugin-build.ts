@@ -39,6 +39,9 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
             // The alias below rewrites the relative import to this BARE id first (a bare external
             // emits the paths mapping verbatim; a relative external gets re-relativized by rollup).
             if (id === "lararium-wiki-sense-fold") return true;
+            // meme-ast ships ONCE as its own library tiddler (modules/meme-ast) — the same trio:
+            // every consumer module requires it by URI instead of inlining its own copy.
+            if (id === "lararium-meme-ast") return true;
             return false;
           },
           output: {
@@ -48,9 +51,11 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
             paths: (id: string) =>
               id === "lararium-wiki-sense-fold"
                 ? "lar:///ha.ka.ba/@lararium/tw5/lib/wiki-sense-fold"
-                : id === "smol-toml"
-                  ? "lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml"
-                  : id,
+                : id === "lararium-meme-ast"
+                  ? "lar:///ha.ka.ba/@lararium/tw5/modules/meme-ast"
+                  : id === "smol-toml"
+                    ? "lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml"
+                    : id,
           },
         },
       },
@@ -61,6 +66,16 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
           // bundle, which must inline its body.
           ...(mod.name !== "wiki-sense-fold"
             ? [{ find: /^(\.\.?\/)+wiki-sense-fold(\.js)?$/, replacement: "lararium-wiki-sense-fold" }]
+            : []),
+          // meme-ast rides the same law: its runtime submodules (index/parse/fence-mask/ahu-scan)
+          // rewrite to ONE bare id in every module except meme-ast's own bundle — the five inlined
+          // copies collapse to require() of the one library tiddler. (types.js stays type-only and
+          // erases before resolution.)
+          ...(mod.name !== "meme-ast"
+            ? [{
+                find: /^(\.\.?\/)+meme-ast\/(index|parse|fence-mask|ahu-scan)(\.js)?$/,
+                replacement: "lararium-meme-ast",
+              }]
             : []),
           {
             find: /^@lararium\/mesh\/(.+)$/,
