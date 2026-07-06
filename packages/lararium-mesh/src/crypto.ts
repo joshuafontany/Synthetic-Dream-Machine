@@ -1,17 +1,20 @@
 /**
- * Web Crypto provider boundary for Lararium.
+ * The crypto boundary for Lararium.
  *
- * Doctrine: lararium-mesh/CRYPTO.md
+ * Doctrine (lives here — the old CRYPTO.md pointer dangled and drops):
  *   - Lararium defines needs; it does not implement primitives.
- *   - Portable code depends on CryptoProvider, never on Node crypto or hand-rolled code.
- *   - All digest operations are async (SubtleCrypto.digest is async).
- *   - Callers must supply canonical bytes, not raw objects.
+ *   - Portable code depends on this module's seams, never on Node crypto or hand-rolled code.
+ *   - Callers must supply canonical bytes, never raw objects.
  *
- * Exception: sha256HexSync — synchronous build-tool path.
- *   Build scripts (Vite plugin, pack transcript, manifest generators) need a sync
- *   sha256. They run only in Node at build time; SubtleCrypto async is not ergonomic
- *   there. sha256HexSync uses @noble/hashes/sha2 directly. Do NOT import it into
- *   browser bundles or runtime code. All runtime callers MUST use sha256Hex().
+ * Two digest paths, both platform-blind, both full-hex sha256 (the single-cid-gate isomorphism):
+ *   - The SYNC family (sha256BytesSync / sha256HexBytesSync / sha256HexSync) rides
+ *     @noble/hashes/sha2 directly — audited, zero-dep, browser-shippable. The live runtime
+ *     digest: tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
+ *     memetic-wikitext reader's sourceCidOf all carry it. (The old build-time-only ward
+ *     lagged this settled practice; cured 2026-07-06.)
+ *   - The ASYNC seam (sha256Hex(bytes, provider) over CryptoProvider/SubtleCrypto) stays the
+ *     home for callers that INJECT their digest (auditability, HSM/worker routing) or
+ *     already live async.
  */
 import { sha256 as nobleSha256 } from "@noble/hashes/sha2.js";
 
@@ -136,19 +139,19 @@ export async function sha256Hex(bytes: Uint8Array, provider: DigestProvider): Pr
 /**
  * Synchronous SHA-256 of bytes.
  *
- * SCOPE: build-time tooling ONLY — Vite plugin, pack scripts, manifest generators.
- * Runtime code MUST use sha256Hex(bytes, provider) which routes through CryptoProvider.
- * Do NOT import this into browser bundles or any file that ships to a browser runtime.
- *
- * Uses @noble/hashes/sha2 (synchronous), not SubtleCrypto.
+ * SCOPE (the live law, cured 2026-07-06 — the old build-time-only ward lagged settled practice):
+ * @noble/hashes/sha2 serves as the platform-blind SYNC digest — it ships to browser runtimes and
+ * already carries tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
+ * memetic-wikitext reader's sourceCidOf. Reach for sha256Hex(bytes, provider) instead only where a
+ * caller INJECTS its digest (the CryptoProvider seam: auditability, HSM/worker routing) or already
+ * lives async. Both paths produce the same full-hex sha256 (the single-cid-gate isomorphism).
  */
 export function sha256BytesSync(bytes: Uint8Array): Uint8Array {
   return nobleSha256(bytes);
 }
 
 /**
- * Synchronous SHA-256 of bytes, returned as lowercase hex.
- * Build-time tooling only.
+ * Synchronous SHA-256 of bytes, returned as lowercase hex (same live-law scope as sha256BytesSync).
  */
 export function sha256HexBytesSync(bytes: Uint8Array): string {
   return hex(sha256BytesSync(bytes));
@@ -157,11 +160,12 @@ export function sha256HexBytesSync(bytes: Uint8Array): string {
 /**
  * Synchronous SHA-256 of a UTF-8 string, returned as lowercase hex.
  *
- * SCOPE: build-time tooling ONLY — Vite plugin, pack scripts, manifest generators.
- * Runtime code MUST use sha256Hex(bytes, provider) which routes through CryptoProvider.
- * Do NOT import this into browser bundles or any file that ships to a browser runtime.
- *
- * Uses @noble/hashes/sha2 (synchronous), not SubtleCrypto.
+ * SCOPE (the live law, cured 2026-07-06 — the old build-time-only ward lagged settled practice):
+ * @noble/hashes/sha2 serves as the platform-blind SYNC digest — it ships to browser runtimes and
+ * already carries tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
+ * memetic-wikitext reader's sourceCidOf. Reach for sha256Hex(bytes, provider) instead only where a
+ * caller INJECTS its digest (the CryptoProvider seam: auditability, HSM/worker routing) or already
+ * lives async. Both paths produce the same full-hex sha256 (the single-cid-gate isomorphism).
  */
 export function sha256HexSync(text: string): string {
   return sha256HexBytesSync(utf8Bytes(text));
