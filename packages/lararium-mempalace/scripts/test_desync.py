@@ -32,6 +32,27 @@ def test_more_worldlines_still_never_lock():
     assert min_pairwise_gap(desync_phases(64, d=2)) > 0.0
 
 
+def test_active_desync_relaxes_clustered_toward_even():
+    from desync import desync_relax
+    clustered = [0.01, 0.02, 0.03, 0.04, 0.90]   # 5 phases, 4 crowded on one side
+    relaxed = desync_relax(clustered, alpha=0.5, rounds=120)
+    # the active repulsion drives toward even interleaving (min-gap → ~1/n = 0.2); well past the crowd
+    assert min_pairwise_gap(relaxed) > min_pairwise_gap(clustered)
+    assert min_pairwise_gap(relaxed) > 0.5 * (1.0 / len(clustered))
+
+
+def test_desync_step_keeps_count_range_and_order():
+    from desync import desync_step
+    phases = [0.1, 0.5, 0.9, 0.3]
+    stepped = desync_step(phases, alpha=0.3)
+    assert len(stepped) == len(phases) and all(0.0 <= p < 1.0 for p in stepped)
+
+
+def test_desync_small_n_passes_through():
+    from desync import desync_step
+    assert len(desync_step([0.5, 0.6])) == 2   # < 3: no pair to repel between
+
+
 def test_gap_witness_reads_lock_and_freedom():
     assert min_pairwise_gap([0.5, 0.5]) == 0.0    # two coincident clocks = locked (the averted failure)
     assert min_pairwise_gap([0.5]) == 1.0         # a lone clock = maximally free

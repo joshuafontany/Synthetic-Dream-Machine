@@ -39,6 +39,40 @@ def desync_phases(n: int, d: int = 2) -> list:
     return [roberts_phase(i, d) for i in range(n)]
 
 
+def desync_step(phases: list, alpha: float = 0.5) -> list:
+    """One round of ACTIVE DESYNC local phase-repulsion (Degesys-Nagpal): each node moves its phase a
+    fraction `alpha` toward the MIDPOINT of its two CIRCULAR phase-neighbors — coordination-free,
+    neighbors-only, no shared constant. This is the active cap (rides the coupling-read: the neighbors
+    ARE what a node 'hears'). Preserves the caller's index order; fewer than 3 phases have no pair to
+    repel between and pass through."""
+    n = len(phases)
+    if n < 3:
+        return [p % 1.0 for p in phases]
+    order = sorted(range(n), key=lambda i: phases[i] % 1.0)
+    s = [phases[i] % 1.0 for i in order]
+    moved = list(s)
+    for k in range(n):
+        before = s[k - 1] - (1.0 if k == 0 else 0.0)          # unwrap the circular predecessor
+        after = s[(k + 1) % n] + (1.0 if k == n - 1 else 0.0)  # unwrap the circular successor
+        mid = (before + after) / 2.0
+        moved[k] = ((1.0 - alpha) * s[k] + alpha * mid) % 1.0
+    out = list(phases)
+    for k, i in enumerate(order):
+        out[i] = moved[k]
+    return out
+
+
+def desync_relax(phases: list, alpha: float = 0.5, rounds: int = 60) -> list:
+    """Iterate DESYNC to convergence — the active cap driving toward EVEN interleaving (the max spread
+    the pairwise-non-resonance invariant rewards, min-gap → 1/n), auto-adjusting to node count. Composes
+    behind the same invariant as the statistical plastic-ρ jitter; the operator picks per stream —
+    statistical (zero-coupling) or active (real collision-avoidance on the coupling-read)."""
+    p = list(phases)
+    for _ in range(rounds):
+        p = desync_step(p, alpha)
+    return p
+
+
 def min_pairwise_gap(phases: list) -> float:
     """Return the smallest CIRCULAR gap between any two phases on [0, 1) — the incommensurability
     WITNESS. A larger min-gap means the phases spread better (rhythms stay apart); 0.0 means two clocks
