@@ -383,6 +383,86 @@ def corpus_source(*, wing: str, room: str = "corpus") -> SourceCap:
     return source
 
 
+def corpus_sectioned_source(*, wing: str, room: str = "corpus", extract: bool = False) -> SourceCap:
+    """The SECTIONED corpus source-cap — one record per wa/section per logical source,
+    the chunk ordinal carrying the section index (`derive_cid('corpus:<source>', n)`):
+    the grain the cid gate reserved for exactly this.
+
+    `kumulipo_sections.section_corpus_file` names the cut: a known meme splits at its
+    OWN native wa markers into one or more logical sources (the Beckwith carrier yields
+    both its translation AND the Kalakaua appendix under `corpus:kumulipo/kalakaua-appendix`);
+    a file no rule names lands whole at chunk 0 (the plain corpus grain).
+
+    THE DUAL-RUN ABLATION RIDES `extract`: wrapped mode (default) sections the memetic
+    wikitext as it stands AND stamps `lar_kind` off the WHOLE carrier text — the sigil
+    envelope keeps routing the sections to the memetic grammar, as a whole-file capture
+    would; extracted mode sections the `#source-text` interior only and stamps the kind
+    off each bare section. Same marker boundaries, same cids both modes — the beds hold
+    aligned units and the sweep delta reads the red channel alone.
+
+    Every record keeps the corpus disciplines: `lar_chain` links each section to its
+    predecessor within its logical source (a re-cut breaks the chain, the rewind guard
+    re-lands), the host mtime rides the sighting register only, and two files claiming
+    one logical source fail LOUD (designation carries authority)."""
+    from structure_router import detect_kind
+    from kumulipo_sections import extract_source_text, section_corpus_file
+
+    mode = "extracted" if extract else "wrapped"
+
+    def source(pointer: str) -> Iterator[Record]:
+        def all_drawers() -> Iterator[tuple]:
+            claimed: dict = {}
+            for key_path, fp in _iter_corpus_files(pointer):
+                try:
+                    if os.path.getsize(fp) > _CORPUS_MAX_BYTES:
+                        continue
+                    with open(fp, encoding="utf-8", errors="replace") as fh:
+                        text = fh.read()
+                except OSError:
+                    continue
+                if not text.strip():
+                    continue
+                logical = section_corpus_file(os.path.basename(fp), text, extract=extract)
+                if logical is None:
+                    body = extract_source_text(text) if extract else text
+                    logical = [{"source": key_path, "sections": [("whole", body)]}]
+                sighting = _mtime_sighting(fp)
+                for src in logical:
+                    name = src["source"]
+                    prior = claimed.get(name)
+                    if prior is not None and prior != fp:
+                        raise ValueError(
+                            f"corpus_sectioned_source: logical source {name!r} claimed by both "
+                            f"{prior!r} and {fp!r} — one rendering keeps one carrier")
+                    claimed[name] = fp
+                    source_file = f"corpus:{name}"
+                    prev_chain = ""
+                    for chunk, (label, body) in enumerate(src["sections"]):
+                        if not body.strip():
+                            continue
+                        chain = _sha16(body + prev_chain)   # each section binds its text + predecessor
+                        prev_chain = chain
+                        meta = {
+                            "wing": wing,
+                            "room": room,
+                            "source_file": source_file,
+                            "chunk_index": chunk,
+                            "lar_turn_key": _turn_key(source_file, {"text": body}, chunk),
+                            "lar_chain": chain,
+                            "lar_surface": "corpus",
+                            # Wrapped: the carrier's whole text picks the grammar (the sigil
+                            # envelope routes every section memetic); extracted: the bare
+                            # section picks its own — the ablation's single code asymmetry.
+                            "lar_kind": detect_kind(fp, text if not extract else body) or "",
+                            "lar_mtime_sighting": sighting,
+                            "lar_section": label,
+                            "lar_section_mode": mode,
+                        }
+                        yield derive_cid(source_file, chunk), body, meta
+        yield from _seq_records(all_drawers())
+    return source
+
+
 # --- the surface dispatcher ------------------------------------------------
 
 _SURFACES: dict = {

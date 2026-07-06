@@ -32,7 +32,7 @@ import sys
 
 import content_io as cio
 from capture_session import stamp_embedder
-from capture_sources import corpus_source
+from capture_sources import corpus_sectioned_source, corpus_source
 from capture_stream import ContentStoreLandCap
 from plane_fanout import compose_corpus_planes
 from sensorium import compose_sensorium
@@ -50,18 +50,29 @@ def _refuse_comparator(root: str) -> None:
 
 def compose_testbed(root: str, *, wing: str, room: str = "corpus",
                     min_support: int = 2, max_forms: int = 64, max_candidates: int = 96,
-                    embed_factory=None) -> tuple:
+                    embed_factory=None, sections: "str | None" = None) -> tuple:
     """Compose the ephemeral test-bed sensorium: a Memory-pinned content store (the frozen
     corpus reads as immutable ground) + the corpus source-cap + the warm embedder + the
-    structure/form plane caps. Returns (sensorium, content_store, planes)."""
+    structure/form plane caps. Returns (sensorium, content_store, planes).
+
+    `sections` selects the capture grain: None keeps the whole-file corpus cap;
+    "wrapped" / "extracted" ride the SECTIONED cap (one record per wa/section,
+    capture_sources.corpus_sectioned_source) — the dual-run ablation's two modes."""
     _refuse_comparator(root)
+    if sections not in (None, "wrapped", "extracted"):
+        raise SystemExit(f"corpus_testbed: unknown --sections mode {sections!r} "
+                         "(the cap speaks wrapped | extracted)")
     if embed_factory is None:
         from embed_cap import make_embed_cap
         embed_factory = make_embed_cap
     embed_one, model = embed_factory()
     dim = len(embed_one("probe"))   # pin the width once off the warm cap (the dim floor)
 
-    source = stamp_embedder(corpus_source(wing=wing, room=room), model)
+    if sections is None:
+        cap = corpus_source(wing=wing, room=room)
+    else:
+        cap = corpus_sectioned_source(wing=wing, room=room, extract=(sections == "extracted"))
+    source = stamp_embedder(cap, model)
     store = cio.ContentStore(os.path.join(root, "content"), required_keys={"wing", "room"},
                              expected_dim=dim, expected_model=model, append_only=True)
     planes = compose_corpus_planes(root, min_support=min_support, max_forms=max_forms,
@@ -135,17 +146,19 @@ def witness(root: str, store: cio.ContentStore, planes: list, pass_summary: dict
 
 
 def run(corpus: str, root: str, *, wing: str, room: str, min_support: int, max_forms: int,
-        max_candidates: int = 96) -> dict:
+        max_candidates: int = 96, sections: "str | None" = None) -> dict:
     """The whole first-step arc: pass 1 (land all three planes) → read-back witness → pass 2
     over a FRESH composition (proves the idempotence lives in the stores, not process state)."""
     sensorium, store, planes = compose_testbed(root, wing=wing, room=room, min_support=min_support,
-                                               max_forms=max_forms, max_candidates=max_candidates)
+                                               max_forms=max_forms, max_candidates=max_candidates,
+                                               sections=sections)
     pass1 = sensorium.capture(corpus)
     w = witness(root, store, planes, pass1)
 
     # Pass 2 — a FRESH cap-stack over the same durable root: every plane must land ZERO.
     sensorium2, store2, planes2 = compose_testbed(root, wing=wing, room=room, min_support=min_support,
-                                                  max_forms=max_forms, max_candidates=max_candidates)
+                                                  max_forms=max_forms, max_candidates=max_candidates,
+                                                  sections=sections)
     pass2 = sensorium2.capture(corpus)
     plane2 = pass2.get("planes", {})
     w["idempotency"] = {
@@ -173,11 +186,15 @@ def main() -> None:
     r.add_argument("--max-forms", type=int, default=64, dest="max_forms")
     r.add_argument("--max-candidates", type=int, default=96, dest="max_candidates",
                    help="per-miner MDL pool bound (bounded per-pass work)")
+    r.add_argument("--sections", choices=("wrapped", "extracted"), default=None,
+                   help="the SECTIONED capture grain (one record per wa/section): wrapped = "
+                        "the memetic wikitext as it stands · extracted = the #source-text "
+                        "bare interior — the dual-run ablation's two modes")
     args = ap.parse_args()
     pointer = os.pathsep.join(args.corpus)
     out = run(pointer, os.path.expanduser(args.root), wing=args.wing, room=args.room,
               min_support=args.min_support, max_forms=args.max_forms,
-              max_candidates=args.max_candidates)
+              max_candidates=args.max_candidates, sections=args.sections)
     sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
 
 
