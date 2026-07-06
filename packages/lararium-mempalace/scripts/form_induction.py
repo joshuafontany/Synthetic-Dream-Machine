@@ -337,7 +337,8 @@ def _native_sequences(streams: list, min_support: int, *, max_forms: int, min_le
     for p, s in items:
         if not any(len(q) > len(p) and sq == s and _is_subsequence(p, q) for q, sq in items):
             closed.append({"seq": [str(x) for x in p], "support": s})
-    closed.sort(key=lambda x: (-len(x["seq"]), -x["support"]))
+    # total order: length, support, then the seq itself — no tie rides dict/set iteration order.
+    closed.sort(key=lambda x: (-len(x["seq"]), -x["support"], x["seq"]))
     return closed[:max_forms]
 
 
@@ -489,6 +490,9 @@ def mdl_select(streams: list, candidates: list, *, min_support: int = _DEFAULT_M
             continue
         seen_seq.add(key)
         pool.append(dict(c))
+    # total order over the candidate pool: first-improvement MDL ties resolve by support then seq,
+    # never by the miners' process-varying emission order (re-dreams stay byte-stable across seeds).
+    pool.sort(key=lambda c: (-int(c.get("support", 0) or 0), tuple(c["seq"])))
     dl = dl0
     rounds = 0
     while len(kept) < max_forms:
