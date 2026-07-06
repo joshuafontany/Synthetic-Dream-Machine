@@ -128,7 +128,12 @@ def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
         return True
     if not tf:
         return False
-    key = (id(pf), id(tf))
+    # The memo keys by VALUE (nested tuples hash structurally), never id(): the recurrence
+    # builds fresh forest tuples every step (t0[1] + trest), so id-keys (a) almost never hit —
+    # the recurrence blew up exponentially inside ONE check on a real ~170-node sigil tree —
+    # and (b) can WRONG-hit when a freed tuple's id gets reused mid-walk. Value-keys restore
+    # the polynomial memoized recurrence and make every hit a true subproblem match.
+    key = (pf, tf)
     cached = memo.get(key)
     if cached is not None:
         return cached
@@ -264,17 +269,26 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
 
 
 def mine_sequences(streams: list, min_support: int, *, max_forms: int = _MAX_FORMS_DEFAULT,
-                   min_len: int = 2) -> list:
+                   min_len: int = 2, topk: bool = False) -> list:
     """Frequent CLOSED subsequences of the pre-order type streams. Prefers the `prefixspan`
     package (PrefixSpan + BIDE-closed + top-k); falls back to a compact native BIDE-ish
-    miner so a bare venv still surfaces sequences. Returns [{seq, support}] as symbol lists."""
+    miner so a bare venv still surfaces sequences. Returns [{seq, support}] as symbol lists.
+
+    `topk=True` rides the package's branch-and-bound top-k (support-strongest first) instead
+    of the exhaustive closed enumeration — `frequent(closed=True)` walks the WHOLE pattern
+    lattice before any slice, which grinds for minutes on real ~500-symbol streams; the
+    bounded per-pass induce needs the strongest max_forms only."""
     try:
         from prefixspan import PrefixSpan  # type: ignore
 
         ps = PrefixSpan(streams)
         ps.minlen = min_len
-        # closed=True → the BIDE-style closed set; frequent(minsup) is absolute-support.
-        raw = ps.frequent(min_support, closed=True)
+        if topk:
+            # branch-and-bound top-k by support, closed; the support floor still applies.
+            raw = [(s, p) for s, p in ps.topk(max_forms, closed=True) if s >= min_support]
+        else:
+            # closed=True → the BIDE-style closed set; frequent(minsup) is absolute-support.
+            raw = ps.frequent(min_support, closed=True)
         out = []
         for support, pattern in raw:
             if len(pattern) >= min_len:
@@ -513,12 +527,20 @@ def mdl_select(streams: list, candidates: list, *, min_support: int = _DEFAULT_M
 
 
 def induce_forest(forest: list, *, min_support: int = _DEFAULT_MIN_SUPPORT,
-                  max_forms: int = _MAX_FORMS_DEFAULT, seeds: list | None = None) -> dict:
+                  max_forms: int = _MAX_FORMS_DEFAULT, seeds: list | None = None,
+                  max_candidates: "int | None" = None) -> dict:
     """BLIND induction over a structure forest → the corpus's constructicon.
 
     TreeMiner + PrefixSpan/BIDE + ΔP surface candidates; MDL over the streams selects the
     ones that pay their bits; seeds ride the same ledger (kept only where earned). The LLM
-    is NOT called — labelling is downstream. Returns {forms, summary}."""
+    is NOT called — labelling is downstream. Returns {forms, summary}.
+
+    `max_candidates` bounds the MDL's candidate POOL per miner (each miner's list already
+    sorts strongest-first, so the slice keeps the highest-support/largest shapes): every
+    MDL round trials the whole pool against the full streams, so an unbounded pool over
+    real corpora turns the greedy rounds into a minutes-long grind (the same bounded-work
+    philosophy as _MAX_CANDIDATES above, applied at the selection stage). None keeps the
+    unbounded batch behavior; the per-pass plane cap rides a bound."""
     import sys
     # Backstop for the linear tree-walks (_all_nodes / _tree_size / _preorder_types) on deep ASTs;
     # the _as_forest motif bound already keeps the branching inclusion-recurrence shallow.
@@ -538,10 +560,23 @@ def induce_forest(forest: list, *, min_support: int = _DEFAULT_MIN_SUPPORT,
     else:
         train = streams
 
-    subtrees = mine_subtrees(forest, min_support)
-    sequences = mine_sequences(train, min_support, max_forms=max_forms)
+    # The bound reaches the TreeMiner's ENUMERATION too, not just the pool slice: the default
+    # 4000-try budget also quadratically inflates the closed-filter (each frequent pair pays an
+    # inclusion check), which is where an unbounded per-pass induce ground for minutes.
+    subtrees = (mine_subtrees(forest, min_support) if max_candidates is None
+                else mine_subtrees(forest, min_support, max_candidates=max_candidates))
+    # Bounded ⇒ the branch-and-bound top-k sequence miner (the exhaustive closed walk
+    # grinds for minutes on real streams); unbounded keeps the exhaustive batch behavior.
+    sequences = mine_sequences(train, min_support, max_forms=max_forms,
+                               topk=(max_candidates is not None))
     dp = delta_p_bigrams(train, min_support=min_support)
     seed_forms = seeds if seeds is not None else house_seeds()
+    if max_candidates is not None:
+        # Bound the pool per miner (each list sorts strongest-first, so the strongest lead);
+        # seeds never slice — MDL already prices them honestly.
+        subtrees = subtrees[:max_candidates]
+        sequences = sequences[:max_candidates]
+        dp = dp[:max_candidates]
 
     # unify into ONE candidate pool for the MDL, carrying each candidate's origin + shape.
     # SEEDS lead the pool so a seeded shape that also gets mined keeps its name_hint through

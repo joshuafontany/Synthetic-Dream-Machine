@@ -35,23 +35,26 @@ class Sensorium:
         return self._land.store.search(embedding, k, where)
 
 
-def compose_sensorium(*, kind: str, source, land, embed=None, worldline=None) -> Sensorium:
+def compose_sensorium(*, kind: str, source, land, embed=None, worldline=None, planes=None) -> Sensorium:
     """Compose a sensorium from its cap-stack. Blind-by-composition: a missing required cap REFUSES
-    (a sensorium without source/land is unrepresentable), never a later error branch."""
+    (a sensorium without source/land is unrepresentable), never a later error branch. Optional
+    `planes` (structure/form caps, plane_fanout.py) fan the same records out past the content leg."""
     missing = [n for n, cap in (("source", source), ("land", land)) if cap is None]
     if missing:
         raise ValueError(f"compose_sensorium[{kind}]: missing required cap(s) {missing} — a sensorium's "
                          "identity IS its cap-stack; it cannot compose without them")
-    return Sensorium(kind=kind, pipeline=Pipeline(source=source, land=land, embed=embed), land=land, worldline=worldline)
+    return Sensorium(kind=kind, pipeline=Pipeline(source=source, land=land, embed=embed, planes=planes),
+                     land=land, worldline=worldline)
 
 
 def compose_memory_sensorium(palace_path: str, *, source, embed=None, expected_dim=None,
-                             expected_model=None) -> Sensorium:
+                             expected_model=None, planes=None) -> Sensorium:
     """The PINNED Memory sensorium — the IMMUTABLE GROUND (append-only, verbatim/eidetic; the SSGM
     immutable episodic ledger). Carries the session-memory schema guard + the embedder-identity floor."""
     store = cio.ContentStore(palace_path, required_keys={"wing", "room"}, expected_dim=expected_dim,
                              expected_model=expected_model, append_only=True)
-    return compose_sensorium(kind="memory", source=source, land=ContentStoreLandCap(store), embed=embed)
+    return compose_sensorium(kind="memory", source=source, land=ContentStoreLandCap(store), embed=embed,
+                             planes=planes)
 
 
 def compose_dream_sensorium(palace_path: str, *, source, embed=None) -> Sensorium:

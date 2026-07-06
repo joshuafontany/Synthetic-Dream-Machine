@@ -5,6 +5,8 @@ A Pipeline is NAMELESS: its identity IS its composed cap-stack —
   · land-cap    : .is_landed(cid) -> bool  +  .land(cid, text, vector, metadata)   (the durable sink)
   · embed-cap   : callable(text) -> vector  (embed-in-engine; None => caller-vector, the record carries it)
   · schema      : rides the land-cap's store config (required_keys / expected_dim), not a separate cap
+  · plane-caps  : optional further planes (structure · form) that ride the SAME records after the
+                  content leg lands — each plane derives by its OWN mechanism (plane_fanout.py)
 
 The **AI-session-memory sensorium is instance #1**; other streams / corpuses-on-disk spawn as further
 instances (compose a different source-cap + land-palace); the TS @daemon coordinates the fleet's
@@ -77,11 +79,18 @@ class Pipeline:
     and lands the un-landed into the store, ordered by the drain-ledger; idempotent, so a re-run is
     the crash cure."""
 
-    def __init__(self, *, source, land, embed=None, schema=None) -> None:
+    def __init__(self, *, source, land, embed=None, schema=None, planes=None) -> None:
         self._source = source   # callable(pointer) -> iterable of records
         self._land = land       # a land-cap (is_landed / land)
         self._embed = embed     # callable(text)->vector, or None for caller-vector
         self._schema = schema   # informational; the land-cap's store enforces it
+        # THE PLANE FAN-OUT (RUN-ARC #1, the keystone): further plane caps that ride the
+        # SAME records the content leg lands — each derives its plane by its OWN mechanism
+        # (structure: parse-router; form: induced grammar), NEVER from the content vector
+        # (the independence law — a co-jump over shared-derivation planes reads as artifact).
+        # A plane cap #has: `.name` (str) · `.land(rec)` (per-record, owns its OWN
+        # idempotence) · optional `.finish() -> dict` (the pass-end batch step + summary).
+        self._planes = list(planes) if planes else []
 
     def run_pass(self, pointer) -> dict:
         """Process the source once: re-derive the un-landed (is_landed skips already-durable), embed
@@ -109,6 +118,7 @@ class Pipeline:
         rewind_aware = hasattr(self._land, "stored_chain") and hasattr(self._land, "reland")
         landed = skipped = relanded = retracted = 0
         failed: list = []
+        plane_failed: dict = {p.name: [] for p in self._planes}
         for rec in self._source(pointer):
             seq, cid = rec["seq"], rec["cid"]
             try:
@@ -119,6 +129,7 @@ class Pipeline:
                     if not rewind_aware or self._land.stored_chain(cid) == (rec.get("metadata") or {}).get("lar_chain"):
                         drain.commit(seq)      # already durable, chain holds — the re-derivation no-op
                         skipped += 1
+                        self._fan_out(rec, plane_failed)   # planes re-offer (each skips its own durable prefix)
                         continue
                     # a REWIND — the stored text diverged from this re-derivation: never silent-skip it.
                     cure = self._land.reland(cid, rec.get("text", ""), self._vector_for(rec),
@@ -128,10 +139,12 @@ class Pipeline:
                         relanded += 1
                     else:
                         retracted += 1
+                    self._fan_out(rec, plane_failed)
                     continue
                 self._land.land(cid, rec.get("text", ""), self._vector_for(rec), rec.get("metadata", {}))
                 drain.commit(seq)              # advance the watermark AFTER the durable land (accept != land)
                 landed += 1
+                self._fan_out(rec, plane_failed)
             except Exception as exc:  # noqa: BLE001 — the poison-guard: one bad record never aborts the tail
                 # A SYSTEMIC floor violation (wrong embedder) propagates LOUD — never buried in `failed`.
                 is_fatal = getattr(self._land, "is_fatal", None)
@@ -141,7 +154,7 @@ class Pipeline:
                 # watermark holds below it and backlog surfaces the stall; record it, carry the pass on.
                 failed.append({"seq": seq, "cid": cid, "error": f"{type(exc).__name__}: {exc}"})
                 continue
-        return {
+        summary = {
             "landed": landed,
             "skipped": skipped,
             "relanded": relanded,
@@ -151,6 +164,39 @@ class Pipeline:
             "backlog": drain.backlog(),
             "audit": drain.exactly_once_audit(),
         }
+        if self._planes:
+            summary["planes"] = self._finish_planes(plane_failed)
+        return summary
+
+    def _fan_out(self, rec, plane_failed: dict) -> None:
+        """Offer the record to every plane cap AFTER its content leg resolves durable. A record whose
+        content leg failed never fans out (the planes ride landed units only); a plane throw rides the
+        poison-guard spirit — recorded per plane, the pass and the other planes carry on. The fan-out
+        runs on SKIPPED records too: each plane owns its own is-landed check, so a crash between the
+        content land and a plane land cures on the next pass (the same re-derivation discipline)."""
+        for p in self._planes:
+            try:
+                p.land(rec)
+            except Exception as exc:  # noqa: BLE001 — one plane poison never aborts the pass or its peers
+                plane_failed[p.name].append({"cid": rec["cid"], "error": f"{type(exc).__name__}: {exc}"})
+
+    def _finish_planes(self, plane_failed: dict) -> dict:
+        """Close each plane's pass: run its batch step (`finish`, e.g. the form induction) and fold the
+        per-record plane failures into its summary. A finish throw surfaces as the plane's error —
+        loud in the summary, never a pass abort (the content plane already stands durable)."""
+        out: dict = {}
+        for p in self._planes:
+            finish = getattr(p, "finish", None)
+            summary: dict = {}
+            if finish is not None:
+                try:
+                    summary = finish() or {}
+                except Exception as exc:  # noqa: BLE001 — the plane's close surfaces, the pass stands
+                    summary = {"error": f"{type(exc).__name__}: {exc}"}
+            if plane_failed.get(p.name):
+                summary = {**summary, "failed": plane_failed[p.name]}
+            out[p.name] = summary
+        return out
 
     def _vector_for(self, rec):
         """The record's vector — the caller-supplied one, else embed-in-engine (the warm model) when the
@@ -161,8 +207,9 @@ class Pipeline:
         return vector
 
 
-def compose_pipeline(*, source, land, embed=None, schema=None) -> Pipeline:
+def compose_pipeline(*, source, land, embed=None, schema=None, planes=None) -> Pipeline:
     """Compose a pipeline instance from a cap-stack. The AI-session-memory instance composes a
     transcript source-cap + a ContentStoreLandCap over the sovereign session palace + an embed-in-
-    engine cap + the session-memory schema; a corpus-on-disk instance swaps the source-cap + palace."""
-    return Pipeline(source=source, land=land, embed=embed, schema=schema)
+    engine cap + the session-memory schema; a corpus-on-disk instance swaps the source-cap + palace
+    and MAY compose plane caps (structure/form) that fan out over the same records."""
+    return Pipeline(source=source, land=land, embed=embed, schema=schema, planes=planes)

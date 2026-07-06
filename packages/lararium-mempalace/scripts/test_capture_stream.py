@@ -165,3 +165,65 @@ def test_rewind_retracts_on_the_immutable_ground(tmp_path):
     assert store.get("c-1")["metadata"].get("lar_kapae") == "1"   # the stale is muted — recall excludes it
     assert store.get("c-1")["document"] == "b"             # move-not-delete: the committed atom stays, muted
     assert res["audit"]["ok"]
+
+# --- the plane fan-out (RUN-ARC #1 — further planes ride the SAME records) --------------------------
+
+class _RecorderPlane:
+    """A light plane cap: records every cid offered (per-record leg) + counts at finish."""
+
+    def __init__(self, name="rec"):
+        self.name = name
+        self.cids = []
+
+    def land(self, rec):
+        self.cids.append(rec["cid"])
+
+    def finish(self):
+        return {"seen": len(self.cids)}
+
+
+class _ThrowingPlane:
+    """A plane cap that throws on land — the plane-poison isolation surface."""
+
+    name = "boom"
+
+    def land(self, rec):
+        raise RuntimeError("plane poison")
+
+
+def test_planes_ride_resolved_records_never_failed_ones(tmp_path):
+    # the fan-out offers every record whose CONTENT leg resolved durable; the poisoned record
+    # (content land threw) never fans out — planes ride landed units only.
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    plane = _RecorderPlane()
+    pipe = compose_pipeline(source=lambda recs: recs,
+                            land=_PoisonLandCap(store, {"c-3"}), embed=_fake_embed, planes=[plane])
+    res = pipe.run_pass(_records(5))
+    assert sorted(plane.cids) == ["c-1", "c-2", "c-4", "c-5"]        # c-3 failed → never offered
+    assert res["planes"]["rec"] == {"seen": 4}
+
+
+def test_planes_reoffer_on_skip_the_re_derivation_cure(tmp_path):
+    # a re-pass re-offers SKIPPED records to every plane (each plane owns its own durable-skip), so
+    # a crash between the content land and a plane land cures on the next pass.
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    pipe1 = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store), embed=_fake_embed)
+    pipe1.run_pass(_records(3))                                       # content landed, NO planes yet
+    late = _RecorderPlane()
+    pipe2 = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store),
+                             embed=_fake_embed, planes=[late])
+    res = pipe2.run_pass(_records(3))
+    assert res["skipped"] == 3 and late.cids == ["c-1", "c-2", "c-3"]  # skipped records still fan out
+
+
+def test_plane_poison_never_aborts_the_pass_or_its_peers(tmp_path):
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    healthy = _RecorderPlane()
+    pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store),
+                            embed=_fake_embed, planes=[_ThrowingPlane(), healthy])
+    res = pipe.run_pass(_records(3))
+    assert res["landed"] == 3                                         # the content pass stands whole
+    assert healthy.cids == ["c-1", "c-2", "c-3"]                      # the peer plane rode every record
+    boom = res["planes"]["boom"]
+    assert len(boom["failed"]) == 3                                   # each plane poison surfaced, loud
+    assert "RuntimeError: plane poison" in boom["failed"][0]["error"]

@@ -20,6 +20,7 @@ from capture_sources import (
     claude_source,
     codex_source,
     copilot_source,
+    corpus_source,
     derive_cid,
     resolve_source,
 )
@@ -182,3 +183,68 @@ def test_resolve_source_dispatch_and_wing_floor():
     with pytest.raises(ValueError):
         resolve_source("nope", wing="w")              # unknown surface refuses
     assert resolve_source("copilot") is not None      # copilot defaults its wing per-session
+
+
+# --- the curated human-text corpus cap (RUN-ARC #2 — the test-bed ground) ---------------------------
+
+def _plant_corpus(tmp_path):
+    root = tmp_path / "memes"
+    (root / "sub").mkdir(parents=True)
+    (root / "a.md").write_text("# Alpha\n\nA prose paragraph about the hearth.\n", encoding="utf-8")
+    (root / "sub" / "b.md").write_text("# Beta\n\nAnother paragraph, another meme.\n", encoding="utf-8")
+    (root / "c.py").write_text("print('no corpus signal')\n", encoding="utf-8")   # ext outside the cap
+    (root / "empty.md").write_text("   \n", encoding="utf-8")                     # blank → never a record
+    return root
+
+
+def test_corpus_source_one_file_one_record_stable_identity(tmp_path):
+    root = _plant_corpus(tmp_path)
+    recs = list(corpus_source(wing="wing_testbed")(str(root)))
+    # two md files ride; the .py and the blank file never land; the seq runs dense over the sorted walk.
+    assert [r["seq"] for r in recs] == [1, 2]
+    keys = sorted(r["metadata"]["source_file"] for r in recs)
+    assert keys == ["corpus:memes/a.md", "corpus:memes/sub/b.md"]   # root-basename + relpath, never absolute
+    a = next(r for r in recs if r["metadata"]["source_file"] == "corpus:memes/a.md")
+    assert a["cid"] == derive_cid("corpus:memes/a.md", 0)           # the single cid gate, chunk 0
+    assert a["metadata"]["lar_surface"] == "corpus"
+    assert a["metadata"]["lar_kind"] == "markdown"                  # the router kind rides the record
+    assert a["metadata"]["wing"] == "wing_testbed" and a["metadata"]["room"] == "corpus"
+    assert a["metadata"]["lar_chain"]                                # the one-link chain binds the text
+    assert a["metadata"]["lar_mtime_sighting"]                       # sighting register — provenance only
+    # idempotent: a re-read derives the SAME cids + chains (the frozen corpus re-derivation).
+    again = list(corpus_source(wing="wing_testbed")(str(root)))
+    assert [(r["cid"], r["metadata"]["lar_chain"]) for r in again] == \
+           [(r["cid"], r["metadata"]["lar_chain"]) for r in recs]
+
+
+def test_corpus_source_edit_keeps_cid_breaks_chain(tmp_path):
+    # the rewind surface: a re-curated file keeps its content-INDEPENDENT cid but its chain diverges,
+    # so the pipeline's rewind guard re-lands instead of silent-skipping the stale text.
+    root = _plant_corpus(tmp_path)
+    before = {r["cid"]: r["metadata"]["lar_chain"] for r in corpus_source(wing="w")(str(root))}
+    (root / "a.md").write_text("# Alpha EDITED\n\nThe paragraph moved on.\n", encoding="utf-8")
+    after = {r["cid"]: r["metadata"]["lar_chain"] for r in corpus_source(wing="w")(str(root))}
+    assert set(before) == set(after)                                 # cids hold (source+chunk identity)
+    edited = derive_cid("corpus:memes/a.md", 0)
+    assert before[edited] != after[edited]                           # the chain breaks — rewind detectable
+    other = derive_cid("corpus:memes/sub/b.md", 0)
+    assert before[other] == after[other]                             # the untouched file's chain holds
+
+
+def test_corpus_source_multi_root_and_collision_fails_loud(tmp_path):
+    r1 = tmp_path / "one";  r1.mkdir();  (r1 / "x.md").write_text("# One\n", encoding="utf-8")
+    r2 = tmp_path / "two";  r2.mkdir();  (r2 / "y.md").write_text("# Two\n", encoding="utf-8")
+    pointer = os.pathsep.join([str(r1), str(r2)])
+    recs = list(corpus_source(wing="w")(pointer))
+    assert sorted(r["metadata"]["source_file"] for r in recs) == ["corpus:one/x.md", "corpus:two/y.md"]
+    # two roots whose basenames collide would fuse distinct files under one cid — FAIL LOUD instead.
+    d1 = tmp_path / "p1" / "mu";  d1.mkdir(parents=True);  (d1 / "z.md").write_text("# Z1\n", encoding="utf-8")
+    d2 = tmp_path / "p2" / "mu";  d2.mkdir(parents=True);  (d2 / "z.md").write_text("# Z2\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="collision"):
+        list(corpus_source(wing="w")(os.pathsep.join([str(d1), str(d2)])))
+
+
+def test_resolve_source_knows_the_corpus_surface():
+    assert resolve_source("corpus", wing="w") is not None
+    with pytest.raises(ValueError):
+        resolve_source("corpus")                      # the corpus cap requires a wing (the schema floor)

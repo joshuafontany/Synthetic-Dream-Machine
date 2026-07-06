@@ -1,8 +1,9 @@
 """capture_sources — the multi-surface SOURCE-CAP family that LIGHTS the capture engine.
 
 The engine (capture_stream.Pipeline) drives a source-cap: `callable(pointer) -> iterable of records
-{seq, cid, text, metadata}`. This module supplies ONE cap per AI surface — **Claude Code · Codex ·
-Copilot** — each reading its native transcript into the engine's record grain. The engine's crash-safe
+{seq, cid, text, metadata}`. This module supplies ONE cap per surface — **Claude Code · Codex ·
+Copilot** each reading its native transcript into the engine's record grain, plus the
+**curated human-text corpus** cap (markdown/text trees — the RUN-arc test-bed ground). The engine's crash-safe
 re-derivation makes BULK and LIVE the SAME cap over one pointer: a re-pass re-reads the whole (growing)
 source, is_landed skips the already-durable prefix, only the fresh tail lands. Main and sub-agent
 sessions ride the same cap (a sub-agent transcript reads through the same parser, marked by surface).
@@ -279,12 +280,116 @@ def copilot_source(*, wing: "str | None" = None, room: str = "conversations") ->
     return source
 
 
+# --- curated human-text corpus (the RUN-arc test-bed surface) ---------------
+# Reads a directory tree (or an os.pathsep-joined list of trees/files) of markdown/
+# text files — the ephemeral human-text test-bed's frozen ground (RUN-ARC #2). Each
+# file lands as ONE record riding the same single-cid-gate + chain discipline as the
+# AI surfaces, so the rewind guard + kapae legs cover a re-curated corpus too.
+
+# The human-text extensions this cap eats; other kinds (code/json/toml) wait for a
+# later arc — the test-bed proves the rails on prose-rich memes.
+_CORPUS_EXTS = (".md", ".markdown", ".txt", ".text")
+# One file lands as one record; a file past this ceiling skips (a curated corpus
+# holds prose memes, never blobs).
+_CORPUS_MAX_BYTES = 512_000
+# Directories that carry no curated-corpus signal (mirrors structure_router._SKIP_DIRS).
+_CORPUS_SKIP_DIRS = {".git", "node_modules", "dist", "__pycache__", ".venv"}
+
+
+def _mtime_sighting(path: str) -> str:
+    """The file's host mtime as a SIGHTING — an unreliable-witness provenance mark under
+    no-global-now (island clocks skew): it never orders anything, never rides a worldline
+    path; the cid + chain carry the identity, this only testifies when the host saw the file."""
+    import datetime
+
+    try:
+        ts = os.stat(path).st_mtime
+    except OSError:
+        return ""
+    return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).isoformat()
+
+
+def _iter_corpus_files(pointer: str) -> Iterator[tuple]:
+    """Yield (source_key_path, abs_path) over the pointer's roots, SORTED for a stable
+    dense seq across re-runs. `pointer` names one or more os.pathsep-joined paths; a
+    directory walks recursively (skip-dirs pruned), a file rides alone. The key path =
+    `<root-basename>/<relpath>` — stable across machines (never an absolute path). Two
+    roots whose key paths collide FAIL LOUD (designation carries authority; a silent
+    merge would fuse two distinct files under one cid)."""
+    seen: dict = {}
+    for root in pointer.split(os.pathsep):
+        root = root.strip()
+        if not root:
+            continue
+        if os.path.isfile(root):
+            candidates = [(os.path.basename(root), root)]
+        else:
+            candidates = []
+            for dirpath, dirnames, filenames in os.walk(root):
+                dirnames[:] = sorted(d for d in dirnames
+                                     if d not in _CORPUS_SKIP_DIRS and not d.startswith("."))
+                for fn in sorted(filenames):
+                    fp = os.path.join(dirpath, fn)
+                    rel = os.path.relpath(fp, root)
+                    candidates.append((os.path.join(os.path.basename(root.rstrip(os.sep)), rel), fp))
+        for key_path, fp in sorted(candidates):
+            if os.path.splitext(fp)[1].lower() not in _CORPUS_EXTS:
+                continue
+            prior = seen.get(key_path)
+            if prior is not None and prior != fp:
+                raise ValueError(
+                    f"corpus_source: source-key collision — {key_path!r} names both "
+                    f"{prior!r} and {fp!r}; point at roots whose basename+relpath stay disjoint")
+            if prior is None:
+                seen[key_path] = fp
+                yield key_path, fp
+
+
+def corpus_source(*, wing: str, room: str = "corpus") -> SourceCap:
+    """The curated human-text corpus source-cap. One file → one record: cid rides the
+    single gate (`derive_cid('corpus:<key-path>', 0)`), `lar_chain` binds the text (an
+    edited file keeps its cid, breaks its chain → the rewind guard re-lands, never
+    silent-skips), `lar_kind` carries the structure-router kind so the structure plane
+    parses without re-sniffing, and the host mtime rides the sighting register only."""
+    from structure_router import detect_kind  # kind-detection borrowed (RUN-ARC #2); module import stays light
+
+    def source(pointer: str) -> Iterator[Record]:
+        def all_drawers() -> Iterator[tuple]:
+            for key_path, fp in _iter_corpus_files(pointer):
+                try:
+                    if os.path.getsize(fp) > _CORPUS_MAX_BYTES:
+                        continue
+                    with open(fp, encoding="utf-8", errors="replace") as fh:
+                        text = fh.read()
+                except OSError:
+                    continue
+                if not text.strip():
+                    continue
+                source_file = f"corpus:{key_path}"
+                chain = _sha16(text)  # a one-link chain: the file IS the whole source
+                meta = {
+                    "wing": wing,
+                    "room": room,
+                    "source_file": source_file,
+                    "chunk_index": 0,
+                    "lar_turn_key": _turn_key(source_file, {"text": text}, 0),
+                    "lar_chain": chain,
+                    "lar_surface": "corpus",
+                    "lar_kind": detect_kind(fp, text) or "",
+                    "lar_mtime_sighting": _mtime_sighting(fp),
+                }
+                yield derive_cid(source_file, 0), text, meta
+        yield from _seq_records(all_drawers())
+    return source
+
+
 # --- the surface dispatcher ------------------------------------------------
 
 _SURFACES: dict = {
     "claude": claude_source,
     "codex": codex_source,
     "copilot": copilot_source,
+    "corpus": corpus_source,
 }
 
 
