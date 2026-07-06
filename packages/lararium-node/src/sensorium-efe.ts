@@ -30,6 +30,10 @@
  *      does NOT gate the py `VERB_SEATS` HITL surface, which stays the house's kept HITL question, distinct
  *      from selection.
  *
+ * PORT-STATUS — this organ stands the S0-S3 CONCEPT-WITNESS + the TS↔py parity oracle; the production EFE
+ * compute ports to py (the RUN arc). py counterparts EXIST: `predictive_coding.py` (the F primitive) +
+ * `bands_sidecar.py`. OWED in py: the H¹ gate · THIS EFE keystone · the bench strands.
+ *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
  */
 
@@ -119,16 +123,23 @@ function autonomousForecast(series: readonly number[]): { mu: number; precision:
   const meanSqZ = count > 0 ? sumSq / count : 0;
   const precision = optimalPrecision(meanSqZ);
 
-  // INVERT the affine forecast map: pick two lag-points with the widest spread, read off a,b, forecast x[n].
-  const lagA = series[0]!, predA = pred[1]!;         // pred[1] = a·x[0] + b
-  const lagB = series[n - 2]!, predB = pred[n - 1]!; // pred[n-1] = a·x[n-2] + b
+  // INVERT the affine forecast map: pred[t] = a·x[t−1] + b, so ANY two DISTINCT lag-points recover (a,b) and
+  // the next mean a·x[n−1]+b — no re-fit. Scan the widest-spread lag pair (min↔max over the lags x[0..n−2]),
+  // so a repeated endpoint never forces the stale one-step fallback; only a constant series leaves no spread.
+  let loI = 0, hiI = 0;
+  for (let t = 0; t < n - 1; t++) {
+    if (series[t]! < series[loI]!) loI = t;
+    if (series[t]! > series[hiI]!) hiI = t;
+  }
+  const lagLo = series[loI]!, predLo = pred[loI + 1]!; // pred[loI+1] = a·x[loI] + b
+  const lagHi = series[hiI]!, predHi = pred[hiI + 1]!; // pred[hiI+1] = a·x[hiI] + b
   let mu: number;
-  if (Math.abs(lagB - lagA) > 1e-9) {
-    const a = (predB - predA) / (lagB - lagA);
-    const b = predA - a * lagA;
+  if (Math.abs(lagHi - lagLo) > 1e-9) {
+    const a = (predHi - predLo) / (lagHi - lagLo);
+    const b = predLo - a * lagLo;
     mu = a * series[n - 1]! + b;
   } else {
-    mu = pred[n - 1]!; // degenerate lag spread ⇒ fall back to the model's latest one-step prediction
+    mu = pred[n - 1]!; // a constant series carries no lag spread ⇒ the model's latest one-step prediction stands
   }
   return { mu, precision };
 }

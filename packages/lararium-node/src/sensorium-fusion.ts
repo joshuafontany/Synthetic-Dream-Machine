@@ -46,6 +46,10 @@
  * Cosheaf (ki) planes are REFUSED here, exactly as the consistency module refuses them — a flow read
  * through a contravariant restriction is the silent corruption (li-ki-integrities.md#crucible-tested).
  *
+ * PORT-STATUS — this organ stands the S0-S3 CONCEPT-WITNESS + the TS↔py parity oracle; the production H¹
+ * compute ports to py (the RUN arc). py counterparts EXIST: `predictive_coding.py` (the F primitive) +
+ * `bands_sidecar.py`. OWED in py: THIS H¹ gate · the EFE keystone · the bench strands.
+ *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
  */
 

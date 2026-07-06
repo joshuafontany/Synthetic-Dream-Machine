@@ -56,17 +56,9 @@ export type {
   DiffusionOptions, FusedPseudosection, FuseResult, FuseOptions,
 } from "./sensorium-fusion.js";
 
-// The EXPECTED-FREE-ENERGY organ (B×C keystone). Downstream of the gate: H¹=0 → efeSelect (argmin EFE, a
-// well-posed global section) · H¹≠0 → surfaceDisagreement (R*_sem = log₂ dim H¹, never a reconcile). EFE =
-// pragmatic (KL to the C set-point) + γ·epistemic (ambiguity) + γ·optionLoss (reachable-future-entropy, the
-// −ln π empowerment term). Reversibility falls out as sign(optionLoss). γ,τ default to 1 (seams, not wired).
-export {
-  predictNext, scoreEfe, efeSelect, surfaceDisagreement, efeGate,
-} from "./sensorium-efe.js";
-export type {
-  VerbDelta, ForwardPrediction, CVector, EfeOptions, EfeScore, EfeSelection,
-  DisagreementSurfacing, EfeGateResult,
-} from "./sensorium-efe.js";
+// The EXPECTED-FREE-ENERGY organ (B×C keystone) lives at ./sensorium-efe.js — a CONCEPT-WITNESS + TS↔py
+// parity oracle. The production EFE compute ports to py (machine-code=py ruling); the bench imports the organ
+// DIRECTLY. Held OFF the barrel until a node-side consumer earns the surface (no speculative re-export).
 
 // The memetic-wikitext SENSORIUM — the concrete neither-top, co-located-peers instance: the reader
 // (island-scan → standoff strata + skeletal tier + typed association graph, TWO axes span×channel), the

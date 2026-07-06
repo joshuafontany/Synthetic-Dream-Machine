@@ -16,6 +16,10 @@
  *
  * Run: pnpm exec tsx packages/lararium-node/probes/bifurcation-bench.ts
  *
+ * PORT-STATUS — this bench stands the S0-S3 CONCEPT-WITNESS + the TS↔py parity oracle; the production sweep
+ * compute ports to py (the RUN arc). py counterparts EXIST: `predictive_coding.py` (the F primitive) +
+ * `bands_sidecar.py`. OWED in py: the H¹ gate · the EFE keystone · THESE bench strands.
+ *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
  */
 
@@ -458,8 +462,6 @@ interface TraceSurrogate {
   readonly name: string;
   /** extract the real-valued corpus slice whose structure the trace depends on (the surrogate destroys it). */
   readonly series: (c: BenchCorpus) => number[];
-  /** the (possibly capped) slice the O(n²) AAFT surrogate rides — full-`series` is O(n²) on the symbol stream. */
-  readonly aaftSeries: (c: BenchCorpus) => number[];
   /** swap a surrogated slice back into the corpus and hand back the rebuilt whole. */
   readonly rebuild: (c: BenchCorpus, slice: readonly number[]) => BenchCorpus;
   /** the significance statistic read off a (rebuilt) corpus at α — the quantity the null bands. */
@@ -500,9 +502,6 @@ function rebuildPlanes(flat: readonly number[]): Record<string, number[]> {
   return out;
 }
 
-/** The O(n²) DFT surrogate rides a CAPPED symbol slice — the full 4000-stream is O(16M) per draw, and a
- *  1024-cap holds the excess-entropy estimate well while keeping the AAFT sub-test cheap. */
-const AAFT_SYMBOL_CAP = 1024;
 /** The jitter amplitude the H¹ structural null adds — above `gapHi` (0.45) so the coordinated disagreement
  *  gaps that mint the hollow triangles DISSOLVE, while each salience stays near its own magnitude. */
 const H1_JITTER_AMP = 0.5;
@@ -530,7 +529,6 @@ const traceSurrogates: readonly TraceSurrogate[] = [
     // H¹ — its obstruction count is SHUFFLE-INVARIANT, so the structural null JITTERS the salience.
     name: "h1_dimH1",
     series: (c) => flattenSheaf(c.sheaf),
-    aaftSeries: (c) => flattenSheaf(c.sheaf),
     rebuild: (c, slice) => ({ ...c, sheaf: rebuildSheaf(c.sheaf, slice) }),
     bandStatistic: (c, alpha) => h1BenchTrace.measure(c, alpha),
     surrogate: jitterSurrogate(H1_JITTER_AMP),
@@ -539,7 +537,6 @@ const traceSurrogates: readonly TraceSurrogate[] = [
     // ΔF — the band reads the RAW fitted F (the trace ΔF is already null-differenced); iid-shuffle collapses it.
     name: "deltaF",
     series: (c) => flattenPlanes(c.planes),
-    aaftSeries: (c) => flattenPlanes(c.planes),
     rebuild: (c, slice) => ({ ...c, planes: rebuildPlanes(slice) }),
     bandStatistic: (c, alpha) => fittedFreeEnergy(c.planes, alpha),
     surrogate: iidShuffle,
@@ -548,7 +545,6 @@ const traceSurrogates: readonly TraceSurrogate[] = [
     // excess-entropy — a plain statistic of the symbol stream; iid-shuffle destroys the ordered backbone.
     name: "complexity",
     series: (c) => c.symbols.slice(),
-    aaftSeries: (c) => c.symbols.slice(0, AAFT_SYMBOL_CAP),
     rebuild: (c, slice) => ({ ...c, symbols: slice.slice() }),
     bandStatistic: (c, alpha) => complexityEntropyTrace.measure(c, alpha),
     surrogate: iidShuffle,
@@ -636,27 +632,6 @@ function peakRung(rows: readonly SweepRow[], name: string): number {
   let peak = 0, best = -Infinity;
   rows.forEach((row, r) => { const v = Math.abs(row[name] ?? 0); if (v > best) { best = v; peak = r; } });
   return peak;
-}
-
-/**
- * The AAFT structural-vs-temporal discriminator, per trace. At each trace's peak rung, recompute the band
- * statistic over `trials` AAFT surrogate corpora and read whether the observed value survives ABOVE the AAFT
- * null. A survivor carries a nonlinear structural signature; one that sinks INTO its AAFT band reads as a
- * linear-spectral (temporal-beat) artifact — the spectrum-preserving surrogate keeps it. On THIS corpus the
- * three traces read SPECTRAL/topological (AR(1) is linear-spectral, the symbol backbone is periodic-spectral,
- * H¹'s count is shuffle-invariant) — see {@link aaftControlPair} for the discriminator's positive control.
- */
-function aaftDiscriminator(
-  rows: readonly SweepRow[], corpus: BenchCorpus, surrogates: readonly TraceSurrogate[], opts: SigOpts,
-): AaftVerdict[] {
-  return surrogates.map((s) => {
-    const alpha = rows[peakRung(rows, s.name)]!.alpha!;
-    const stat = (slice: readonly number[]): number => s.bandStatistic(s.rebuild(corpus, slice), alpha);
-    const v = surrogateNull(s.aaftSeries(corpus), stat, aaftSurrogate, {
-      alpha: opts.alphaSig, trials: opts.trials, seed: opts.seed,
-    });
-    return { name: s.name, observed: v.observed, aaftBand: v.threshold, pValue: v.pValue, survivesAaft: v.exceeds };
-  });
 }
 
 /**
@@ -862,14 +837,12 @@ function main(): void {
   //    a bug. The discriminator's DISCRIMINATING POWER is witnessed on a control pair: a nonlinear logistic
   //    orbit SURVIVES AAFT, a linear-Gaussian AR(1) does NOT. (To make a bench trace itself survive AAFT, its
   //    corpus backbone would need nonlinear-phase structure — an S0/S1 corpus change deferred to the operator.)
-  const aaft = aaftDiscriminator(rows, corpus, traceSurrogates, sigOpts);
   const ctrl = aaftControlPair(sigOpts);
   const discriminates = ctrl.nonlinear.survivesAaft && !ctrl.linear.survivesAaft;
   stage("11 AAFT DISCRIMINATOR — nonlinear control SURVIVES AAFT, linear control reads SPECTRAL",
     discriminates,
     `NL:${ctrl.nonlinear.survivesAaft ? "survives" : "spectral"}(obs=${ctrl.nonlinear.observed.toFixed(2)} band=${ctrl.nonlinear.aaftBand.toFixed(2)} p=${ctrl.nonlinear.pValue.toFixed(3)})`
-      + ` LN:${ctrl.linear.survivesAaft ? "survives" : "spectral"}(obs=${ctrl.linear.observed.toFixed(2)} band=${ctrl.linear.aaftBand.toFixed(2)})`
-      + ` · traces=[${aaft.map((v) => `${v.name}:${v.survivesAaft ? "survives" : "spectral"}`).join(" ")}]`);
+      + ` LN:${ctrl.linear.survivesAaft ? "survives" : "spectral"}(obs=${ctrl.linear.observed.toFixed(2)} band=${ctrl.linear.aaftBand.toFixed(2)})`);
 
   // ── STAGE 12 — the family-wise (maxT) band across the three traces (studentized Westfall–Young) ──────
   const fam = familyWiseMaxT(corpus, traceSurrogates, rows, { ...sigOpts, trials: 200 });
@@ -926,8 +899,8 @@ function main(): void {
       + ` · loose(α=0.9): ${looseGate.verdict}${looseGate.verdict === "surface-disagreement" ? ` dimH1=${String(looseGate.disagreement.dimH1)} R*_sem=${looseGate.disagreement.cost.toFixed(3)}` : ""}`);
 
   // ── the data-out: NUMBERS ONLY (JSON + CSV; the figure renders downstream) ──────
-  console.log("[bifurcation-bench] --- AAFT verdicts (per trace + control pair: survives-AAFT structural vs spectral) ---");
-  console.log(JSON.stringify({ traces: aaft, control: [ctrl.nonlinear, ctrl.linear] }, null, 0));
+  console.log("[bifurcation-bench] --- AAFT verdicts (control pair: nonlinear survives-AAFT vs linear spectral) ---");
+  console.log(JSON.stringify({ control: [ctrl.nonlinear, ctrl.linear] }, null, 0));
   console.log("[bifurcation-bench] --- family-wise maxT (nodes = the three traces; studentized band statistic) ---");
   console.log(JSON.stringify({ threshold: fam.threshold, traces: names, studentizedObserved: fam.observed, exceeds: fam.exceeds, pValues: fam.pValues }, null, 0));
   console.log("[bifurcation-bench] --- data-out (JSON rows: arl0, alpha, h1_dimH1, deltaF, complexity, *_band, *_p, *_sig) ---");
