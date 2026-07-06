@@ -1,0 +1,29 @@
+diff --git a/dist/client/.vite/manifest.json b/dist/client/.vite/manifest.json
+new file mode 100644
+index 0000000..ab41bf1
+--- /dev/null
++++ b/dist/client/.vite/manifest.json
+@@ -0,0 +1,23 @@
++{
++  "_utils-Owv5OOOf.js": {
++    "file": "__vitest_browser__/utils-Owv5OOOf.js"
++  },
++  "orchestrator.html": {
++    "file": "__vitest_browser__/orchestrator-Bo1OwGWc.js",
++    "src": "orchestrator.html",
++    "isEntry": true,
++    "imports": ["_utils-Owv5OOOf.js"]
++  },
++  "tester/tester.html": {
++    "file": "__vitest_browser__/tester-BYDMHqQ9.js",
++    "src": "tester/tester.html",
++    "isEntry": true,
++    "imports": ["_utils-Owv5OOOf.js"]
++  },
++  "__vitest__/index.html": {
++    "file": "__vitest__/assets/index-D_ryMEPs.js",
++    "src": "__vitest__/index.html",
++    "isEntry": true,
++    "css": ["__vitest__/assets/index-X8b7Z_4p.css"]
++  }
++}

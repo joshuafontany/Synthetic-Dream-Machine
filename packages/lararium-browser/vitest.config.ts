@@ -10,6 +10,11 @@ export default defineConfig({
     alias: [
       // Stub Node's `crypto` module for browser tests — tw5-host-bridge uses createHash.
       { find: /^(node:)?crypto$/, replacement: path.resolve(root, "src/__stubs__/crypto-stub.ts") },
+      // Stub Node's `fs`/`path` — the @lararium/mesh barrel re-exports host-only source
+      // adapters that carry top-level node:fs / node:path imports; the browser tier only
+      // loads their module graph (never runs them), so a load-safe stub keeps the hull whole.
+      { find: /^(node:)?fs$/, replacement: path.resolve(root, "src/__stubs__/fs-stub.ts") },
+      { find: /^(node:)?path$/, replacement: path.resolve(root, "src/__stubs__/path-stub.ts") },
       { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
       { find: "@lararium/mesh/bures-metric",     replacement: path.resolve(root, "../lararium-mesh/src/bures-metric.ts") },
       { find: "@lararium/mesh/cascade",          replacement: path.resolve(root, "../lararium-mesh/src/cascade.ts") },
