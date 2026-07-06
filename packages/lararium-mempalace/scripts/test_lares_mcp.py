@@ -10,7 +10,8 @@ import os
 
 import pytest
 
-from lares_mcp import LIFECYCLE_VERBS, VERB_SEATS, LaresCoordinator, build_mcp, guard_hitl, seat_of
+from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, VERB_SEATS, LaresCoordinator, build_mcp,
+                       guard_hitl, seat_of)
 from worldline_veil import veiled_root
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -135,8 +136,9 @@ def _mcp_tool_names(tmp_path):
 
 
 def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
-    # the /mcp tool-set equals the declared lifecycle verb-set, name-for-name (the growth floor).
-    assert _mcp_tool_names(tmp_path) == set(LIFECYCLE_VERBS)
+    # the /mcp tool-set equals the declared lifecycle verb-set PLUS the per-plane query-door verbs,
+    # name-for-name (the growth floor).
+    assert _mcp_tool_names(tmp_path) == set(LIFECYCLE_VERBS) | set(PLANE_VERBS)
 
 
 def test_parity_inventory_three_way(tmp_path):
@@ -151,20 +153,154 @@ def test_parity_inventory_three_way(tmp_path):
     mirror_hosts = set(inv["mirror_hosts"])     # the CLI top-level verbs those tools land on (coverage-form)
     not_yet = set(inv["not_yet_mirrored"])
     cli_forms = inv["cli_forms"]
+    # THE PLANE-VERB ALLOWANCE (the query door): PLANE_VERBS ride the MCP surface AHEAD of their CLI
+    # spellings — the CLI forms + this fixture grow with the projector arc. Until then the parity
+    # invariants read over the tool-set MINUS the named allowance (never a silent widening: the
+    # allowance is the declared PLANE_VERBS tuple, and every plane verb still seats in VERB_SEATS).
     mcp_tools = _mcp_tool_names(tmp_path)
+    mirrored_tools = mcp_tools - set(PLANE_VERBS)
 
     # (a) the MCP tool-set IS the mirrored anchor IS the cli_forms keys — grow a tool, grow all three.
-    assert mcp_tools == mirrored
-    assert mcp_tools == set(cli_forms)
-    # (b) every MCP tool carries a VERB_SEATS entry — the grid seats the whole surface.
+    assert mirrored_tools == mirrored
+    assert mirrored_tools == set(cli_forms)
+    # (b) every MCP tool (plane verbs INCLUDED) carries a VERB_SEATS entry — the grid seats the whole surface.
     for name in mcp_tools:
         assert name in VERB_SEATS, f"MCP tool {name!r} rides UNSEATED — grow VERB_SEATS"
     # (c) the name-normalization BRIDGE: each MCP tool's CLI spelling lands on a REAL host verb — so a
     # sub-verb mirror (kapae → `worldline kapae`, status → `sensorium status`) still resolves to a top-level
     # verb the CLI actually carries (no orphan tool; MCP ⊆ CLI reads through the spelling, not the raw name).
-    for m in mcp_tools:
+    for m in mirrored_tools:
         head = cli_forms[m].split()[0]
         assert head in mirror_hosts and head in verbs, f"MCP {m!r} → CLI {cli_forms[m]!r} has no real host"
     # (d) COVERAGE partition (the surface GROWS): every CLI top-level verb is a mirror-host XOR awaits.
     assert mirror_hosts | not_yet == verbs
     assert mirror_hosts.isdisjoint(not_yet)
+
+
+# ── the per-plane QUERY DOOR (recall_structure · recall_form · plane_record) ──────────────────
+
+
+def _three_plane_bed(tmp_path):
+    """A populated 3-plane palace in the TEST-BED layout (<root>/content|structure|form, one cid
+    keying all three) — landed straight through the same stores plane_fanout composes, fixture-lite
+    (two markdown records, hand-made form membership; no induction pass)."""
+    import hashlib
+
+    import content_io as cio
+    from form_encoder import FormPalaceStore
+    from structure_router import canonical_json, detect_kind, parse_to_tree, structural_hash
+    from structurepalace_io import StructurePalaceStore
+
+    root = str(tmp_path / "bed")
+    embed_one, model = _fake_embed()
+    content = cio.ContentStore(os.path.join(root, "content"), expected_dim=2, expected_model=model)
+    structure = StructurePalaceStore(os.path.join(root, "structure"))
+    form = FormPalaceStore(os.path.join(root, "form"))
+    texts = {
+        "alpha.md": "# Alpha\n\nfirst body\n",
+        "beta.md": "# Beta\n\nsecond body\n\n- one\n- two\n",
+    }
+    cids, hashes = {}, {}
+    memberships = {"alpha.md": {"indices": [0], "values": [1.0]},
+                   "beta.md": {"indices": [0, 1], "values": [1.0, 1.0]}}
+    for name, text in texts.items():
+        cid = hashlib.sha256(text.encode()).hexdigest()
+        cids[name] = cid
+        content.put(cid, text, embed_one(text),
+                    {"wing": "w", "room": "corpus", "source_file": name, "lar_embedder_model": model})
+        tree = parse_to_tree(detect_kind(name, text), text)
+        h = structural_hash(tree)
+        hashes[name] = h
+        structure.put(h, canonical_json(tree), source_file=name, verbatim_sha=cid)
+        form.store(cid, memberships[name], 3, {"verbatim_sha": cid, "struct_hash": h})
+    return root, cids, hashes
+
+
+def _bed_coord(tmp_path):
+    root, cids, hashes = _three_plane_bed(tmp_path)
+    return LaresCoordinator(root, wing="w", embed_factory=_fake_embed), cids, hashes
+
+
+def test_coordinator_resolves_the_three_plane_layout(tmp_path):
+    # content lives at <root>/content in the test-bed layout — the coordinator reads it there
+    # (never planting a second empty store at the root), so status counts the landed records.
+    coord, cids, _ = _bed_coord(tmp_path)
+    assert coord.status()["total"] == len(cids)
+
+
+def test_recall_structure_answers_by_text(tmp_path):
+    coord, _, hashes = _bed_coord(tmp_path)
+    # a query of the SAME markdown shape as alpha.md (heading + paragraph) recalls its structural
+    # entry nearest — the door rides the structural embedding, never the content vector.
+    res = coord.recall_structure("# Gamma\n\nthird body\n", 2)
+    assert res["present"] and res["matches"]
+    assert res["matches"][0]["hash"] == hashes["alpha.md"]
+
+
+def test_recall_structure_resolves_a_cid_through_provenance(tmp_path):
+    coord, cids, hashes = _bed_coord(tmp_path)
+    res = coord.recall_structure(cids["beta.md"], 4)
+    assert res["present"] and res["entry"] is not None
+    assert res["entry"]["hash"] == hashes["beta.md"]
+    assert cids["beta.md"] in res["entry"]["provenance_cids"]
+
+
+def test_recall_form_by_cid_with_neighbors(tmp_path):
+    coord, cids, _ = _bed_coord(tmp_path)
+    res = coord.recall_form(cids["alpha.md"], 3)
+    assert res["present"] and res["record"] is not None
+    assert res["record"]["dimension"] == 3
+    assert res["record"]["active_templates"] == 1        # alpha carries one induced template
+    neighbor_cids = [m["cid"] for m in res["matches"]]
+    assert cids["alpha.md"] not in neighbor_cids          # self dropped
+    assert cids["beta.md"] in neighbor_cids               # the other record rides nearest
+
+
+def test_recall_form_text_query_answers_an_honest_null(tmp_path):
+    coord, _, _ = _bed_coord(tmp_path)
+    res = coord.recall_form("what shapes recur", 3)
+    assert res["present"] and res["matches"] == [] and "note" in res
+
+
+def test_plane_record_witnesses_all_three_planes(tmp_path):
+    coord, cids, hashes = _bed_coord(tmp_path)
+    rec = coord.plane_record(cids["alpha.md"])
+    assert rec["content"]["present"] and rec["content"]["source_file"] == "alpha.md"
+    assert rec["structure"]["present"] and rec["structure"]["hash"] == hashes["alpha.md"]
+    assert rec["form"]["present"] and rec["form"]["active_templates"] == 1
+
+
+def test_plane_record_honest_nulls_for_an_unknown_cid(tmp_path):
+    coord, _, _ = _bed_coord(tmp_path)
+    rec = coord.plane_record("f" * 64)
+    assert not rec["content"]["present"]
+    assert not rec["structure"]["present"]
+    assert not rec["form"]["present"]
+
+
+def test_plane_verbs_read_honest_nulls_without_plane_stores(tmp_path):
+    # a plain capture palace (no structure/ or form/ store) answers present:false — the read
+    # verbs never PLANT an empty plane palace.
+    coord = _coord(tmp_path)
+    assert coord.recall_structure("# Q\n\nbody\n", 2) == {
+        "plane": "structure", "present": False, "matches": [],
+        "note": "structure: this palace carries no structure store"}
+    assert coord.recall_form("c" * 64, 2)["present"] is False
+    assert not os.path.isdir(str(tmp_path / ".mem" / "structure"))
+
+
+def test_cid_gate_carries_the_chunk_suffixed_form():
+    # the live capture chunker keys records `<sha256>_<n>` — both the bare and the chunk-suffixed
+    # form read as cids; prose (even hex-dense) reads as query text.
+    from lares_mcp import _reads_as_cid
+    assert _reads_as_cid("a" * 64)
+    assert _reads_as_cid("a" * 64 + "_0")
+    assert _reads_as_cid("a" * 64 + "_12")
+    assert not _reads_as_cid("a" * 64 + "_x")
+    assert not _reads_as_cid("a" * 63)
+    assert not _reads_as_cid("what shapes recur across the corpus")
+
+
+def test_plane_verbs_seat_hotl():
+    for v in PLANE_VERBS:
+        assert seat_of(v) == "HOTL"                       # every plane verb reads — reversible, trusted

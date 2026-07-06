@@ -13,6 +13,9 @@ Meme: lar:///ha.ka.ba/@lararium/sensorium/lares-mcp (the isomorphic surface).
 """
 from __future__ import annotations
 
+import json
+import os
+
 import content_io as cio
 import worldline_io as wl
 from capture_session import capture_and_observe, worldline_path
@@ -21,6 +24,13 @@ from embed_cap import make_embed_cap
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
 LIFECYCLE_VERBS = ("harvest", "recall", "status", "worldline", "kapae", "un_kapae")
+
+# The per-plane QUERY DOOR verbs — read-only interrogation of a 3-plane test-bed sensorium
+# (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
+# THE PARITY SEAM: these ride the MCP surface AHEAD of their CLI spellings — the CLI forms + the
+# cli-verbs fixture grow with the projector arc, so the parity test carries them as a NAMED allowance
+# (mcp_tools − PLANE_VERBS mirrors the fixture) until the CLI catches up.
+PLANE_VERBS = ("recall_structure", "recall_form", "plane_record")
 
 # The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
 # HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
@@ -34,6 +44,9 @@ VERB_SEATS = {
     "worldline": (True, False),  # read — reversible, trusted
     "kapae": (True, False),      # move-not-delete mute — reversible, trusted
     "un_kapae": (True, False),   # restore — reversible, trusted
+    "recall_structure": (True, False),  # per-plane read — reversible, trusted
+    "recall_form": (True, False),       # per-plane read — reversible, trusted
+    "plane_record": (True, False),      # cross-plane read — reversible, trusted
     # 6b control verbs — the SEAT stands now; execution rides in after the HITL talk-story locks.
     "purge": (False, False),     # HARD-delete — IRREVERSIBLE → HITL
     "attach": (True, True),      # admit a guest sensorium — TRUST-CROSSING → HITL
@@ -80,6 +93,40 @@ def _recall_where(*, wing=None, agent=None, surface=None):
     return where or None
 
 
+_HEX_DIGITS = frozenset("0123456789abcdef")
+
+
+def _reads_as_cid(s: str) -> bool:
+    """A record cid reads as a full sha-256 hex, optionally chunk-suffixed (`<hex64>_<n>` — the
+    capture chunker keys each chunk; the live test-bed carries this form); anything else reads
+    as query TEXT."""
+    if not isinstance(s, str):
+        return False
+    head, sep, tail = s.partition("_")
+    return (len(head) == 64 and all(c in _HEX_DIGITS for c in head.lower())
+            and (not sep or tail.isdigit()))
+
+
+def _structure_entry_for_cid(store, cid: str) -> "dict | None":
+    """Resolve a record cid to its STRUCTURE entry through the provenance join — the structurepalace
+    keys by structural HASH, so the cid walks the provenance lines (the same read-back leg the
+    corpus_testbed witness rides). None when no entry binds the cid."""
+    got = store._col.get(include=["metadatas"])  # noqa: SLF001 — the read probe walks the raw collection
+    ids = got.get("ids") or []
+    metas = got.get("metadatas") or []
+    for i, h in enumerate(ids):
+        meta = metas[i] or {}
+        try:
+            provenance = json.loads(meta.get("lar_provenance") or "[]")
+        except (ValueError, TypeError):
+            provenance = []
+        if any(p.get("verbatim_sha") == cid for p in provenance):
+            return {"hash": h, "count": meta.get("count"),
+                    "provenance_cids": sorted({p.get("verbatim_sha") for p in provenance
+                                               if p.get("verbatim_sha")})}
+    return None
+
+
 class LaresCoordinator:
     """The verb-router BOTH surfaces (CLI + MCP) call — it holds a warm embedder + a content-store and a
     worldline handle on ONE sensorium palace, and drives the capture engine. Naming each method for its
@@ -91,7 +138,14 @@ class LaresCoordinator:
         embed_factory = embed_factory or make_embed_cap
         self._embed_one, self._model = embed_factory()
         self._dim = len(self._embed_one("probe"))           # pin the width off the warm cap
-        self._content = cio.ContentStore(palace_path, expected_dim=self._dim, expected_model=self._model)
+        # LAYOUT: a 3-plane test-bed roots its content store at <palace>/content (beside structure/
+        # + form/ — corpus_testbed's layout); a capture palace roots it at <palace> itself. Resolve
+        # by which dir already CARRIES a chroma store, so opening a test-bed never plants a second
+        # empty store at its root.
+        content_dir = os.path.join(palace_path, "content")
+        content_path = content_dir if os.path.exists(os.path.join(content_dir, "chroma.sqlite3")) else palace_path
+        self._plane_stores: dict = {}                        # lazy structure/form handles, opened on first read
+        self._content = cio.ContentStore(content_path, expected_dim=self._dim, expected_model=self._model)
         # The fork-DAG rides the ONE canonical `.worldline` dir the capture wire builds into — the same
         # helper both sides call, so a harvest's braid IS the DAG this coordinator reads (no path split).
         self._worldline = wl.WorldlineStore(worldline_path(palace_path))
@@ -154,6 +208,129 @@ class LaresCoordinator:
         """Restore a muted branch across the sensorium (mirrors `lares worldline un-kapae`)."""
         return wl.cascade_un_kapae(self._worldline, [self._content], branch, tick)
 
+    # ── the per-plane QUERY DOOR (read-only; PLANE_VERBS) ────────────────────────────────────
+
+    def _plane_store(self, plane: str):
+        """Open the named plane palace (<palace>/structure | <palace>/form) lazily and cache the
+        handle. Returns None when the plane carries no store yet — the query verbs answer an
+        honest null rather than PLANTING an empty palace (the read verbs never write the ground)."""
+        cached = self._plane_stores.get(plane)
+        if cached is not None:
+            return cached
+        path = os.path.join(self._palace, plane)
+        if not os.path.exists(os.path.join(path, "chroma.sqlite3")):
+            return None
+        if plane == "structure":
+            from structurepalace_io import StructurePalaceStore
+            store = StructurePalaceStore(path)
+        else:
+            from form_encoder import FormPalaceStore
+            store = FormPalaceStore(path)
+        self._plane_stores[plane] = store
+        return store
+
+    def recall_structure(self, query_or_cid: str, k: int = 8) -> dict:
+        """Interrogate the STRUCTURE plane (read-only). A 64-hex cid resolves through the provenance
+        join to the structural entry binding it; any other string parses to a content-free tree
+        (markdown-hinted; a sigil-dense query still promotes to memetic-wikitext) and rides the
+        STRUCTURAL embedding into nearest-shape recall — never the content vector (the independence
+        law holds through the door). Honest nulls where the plane or the record stays absent."""
+        store = self._plane_store("structure")
+        if store is None:
+            return {"plane": "structure", "present": False, "matches": [],
+                    "note": "structure: this palace carries no structure store"}
+        if _reads_as_cid(query_or_cid):
+            entry = _structure_entry_for_cid(store, query_or_cid)
+            return {"plane": "structure", "present": True, "cid": query_or_cid,
+                    "entry": entry, "matches": []}
+        from structure_router import detect_kind, parse_to_tree
+        from structurepalace_io import _structural_embed
+        kind = detect_kind("query.md", query_or_cid)
+        tree = parse_to_tree(kind, query_or_cid)
+        if tree is None:
+            return {"plane": "structure", "present": True, "matches": [],
+                    "note": f"structure: the router holds no grammar for kind {kind!r}"}
+        got = store._col.query(query_embeddings=[_structural_embed(tree)],  # noqa: SLF001 — the store carries no query face yet
+                               n_results=max(k, 1), include=["metadatas", "distances"])
+        ids = (got.get("ids") or [[]])[0]
+        metas = (got.get("metadatas") or [[]])[0]
+        dists = (got.get("distances") or [[]])[0]
+        matches = [{"hash": ids[i],
+                    "distance": dists[i] if i < len(dists) else None,
+                    "count": (metas[i] or {}).get("count"),
+                    "source_file": (metas[i] or {}).get("source_file", "")}
+                   for i in range(len(ids))]
+        return {"plane": "structure", "present": True, "kind": kind, "matches": matches}
+
+    def recall_form(self, query_or_cid: str, k: int = 8) -> dict:
+        """Interrogate the FORM plane (read-only): a cid fetches its induced-template membership row,
+        then rides its OWN stored vector into nearest-by-membership neighbors (self dropped). A text
+        query answers an honest null — text→membership needs the induced constructicon, which the
+        store keeps only as per-record vectors, never as a queryable grammar."""
+        store = self._plane_store("form")
+        if store is None:
+            return {"plane": "form", "present": False, "matches": [],
+                    "note": "form: this palace carries no form store"}
+        if not _reads_as_cid(query_or_cid):
+            return {"plane": "form", "present": True, "matches": [],
+                    "note": "form: text queries need the induced constructicon (not persisted as a "
+                            "queryable grammar) — query by cid, or ride recall_structure/plane_record"}
+        row = store.get(query_or_cid)
+        if row is None:
+            return {"plane": "form", "present": True, "cid": query_or_cid, "record": None, "matches": []}
+        got = store._col.get(ids=[query_or_cid], include=["embeddings"])  # noqa: SLF001 — the stored vector drives the neighbor read
+        embs = got.get("embeddings")
+        vec = [float(x) for x in embs[0]] if embs is not None and len(embs) else []
+        meta = row.get("metadata") or {}
+        record = {"dimension": meta.get("dimension"), "count": meta.get("count"),
+                  "struct_hash": meta.get("struct_hash", ""),
+                  "active_templates": sum(1 for v in vec if v > 0.0)}
+        res = store._col.query(query_embeddings=[vec], n_results=max(k, 1) + 1,  # noqa: SLF001 — +1 covers the self-hit
+                               include=["metadatas", "distances"])
+        ids = (res.get("ids") or [[]])[0]
+        dists = (res.get("distances") or [[]])[0]
+        matches = [{"cid": ids[i], "distance": dists[i] if i < len(dists) else None}
+                   for i in range(len(ids)) if ids[i] != query_or_cid][:max(k, 1)]
+        return {"plane": "form", "present": True, "cid": query_or_cid, "record": record, "matches": matches}
+
+    def plane_record(self, cid: str) -> dict:
+        """The cross-plane witness read: ONE cid → its presence + payload summary across content ·
+        structure · form, honest nulls where a plane lacks the record. READ-only — it witnesses
+        co-presence and scores nothing. THE COHERE SEAM: cross-plane AGREEMENT (cohere) lands its
+        organs with the projector arc; this verb stays the bare 3-plane witness until then."""
+        out: dict = {"cid": cid}
+        row = self._content.get(cid)
+        if row is None:
+            out["content"] = {"present": False}
+        else:
+            meta = row.get("metadata") or {}
+            out["content"] = {"present": True,
+                              "head": (row.get("document") or "")[:120].replace("\n", " "),
+                              "source_file": meta.get("source_file", ""),
+                              "wing": meta.get("wing", ""), "room": meta.get("room", "")}
+        s_store = self._plane_store("structure")
+        if s_store is None:
+            out["structure"] = {"present": False, "note": "no structure store"}
+        else:
+            entry = _structure_entry_for_cid(s_store, cid)
+            out["structure"] = {"present": entry is not None, **(entry or {})}
+        f_store = self._plane_store("form")
+        if f_store is None:
+            out["form"] = {"present": False, "note": "no form store"}
+        else:
+            f_row = f_store.get(cid)
+            if f_row is None:
+                out["form"] = {"present": False}
+            else:
+                got = f_store._col.get(ids=[cid], include=["embeddings"])  # noqa: SLF001 — the membership count reads the vector
+                embs = got.get("embeddings")
+                vec = [float(x) for x in embs[0]] if embs is not None and len(embs) else []
+                f_meta = f_row.get("metadata") or {}
+                out["form"] = {"present": True, "dimension": f_meta.get("dimension"),
+                               "count": f_meta.get("count"),
+                               "active_templates": sum(1 for v in vec if v > 0.0)}
+        return out
+
 
 def build_mcp(coordinator: LaresCoordinator):
     """Wrap the coordinator in a FastMCP server — one @tool per lifecycle verb, each a thin skin that
@@ -204,6 +381,24 @@ def build_mcp(coordinator: LaresCoordinator):
     def un_kapae(branch: str, tick: int) -> dict:
         """Restore a previously kapae-muted branch across the sensorium."""
         return coordinator.un_kapae(branch, tick)
+
+    @mcp.tool()
+    def recall_structure(query_or_cid: str, k: int = 8) -> dict:
+        """Query the STRUCTURE plane: a 64-hex cid resolves to its structural entry (provenance
+        join); any other text parses to a content-free tree and recalls the nearest SHAPES."""
+        return coordinator.recall_structure(query_or_cid, k)
+
+    @mcp.tool()
+    def recall_form(query_or_cid: str, k: int = 8) -> dict:
+        """Query the FORM plane by cid: the record's induced-template membership + its
+        nearest-by-membership neighbors. Text queries answer an honest null."""
+        return coordinator.recall_form(query_or_cid, k)
+
+    @mcp.tool()
+    def plane_record(cid: str) -> dict:
+        """The cross-plane witness: one cid -> presence + payload summary across content,
+        structure and form (honest nulls where a plane lacks it)."""
+        return coordinator.plane_record(cid)
 
     return mcp
 

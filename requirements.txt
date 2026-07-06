@@ -2,6 +2,9 @@
 pytest
 pytest-cov
 chromadb
+# The /mcp surface (packages/lararium-mempalace/scripts/lares_mcp.py) rides FastMCP from the
+# official python SDK — the stdio serve + tool registry the isomorphic verb-surface stands on.
+mcp
 
 # --- lares-corpus STRUCTURE-plane parse router (S2) — additive, venv-only ---
 # The router (packages/lararium-mempalace/scripts/structure_router.py) routes each corpus
