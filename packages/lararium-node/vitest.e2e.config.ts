@@ -13,6 +13,9 @@ export default defineConfig({
       { find: "@lararium/mesh/meme-ast",         replacement: path.resolve(root, "../lararium-mesh/src/meme-ast/index.ts") },
       { find: "@lararium/mesh/mirror-paths",     replacement: path.resolve(root, "../lararium-mesh/src/mirror-paths.ts") },
       { find: "@lararium/mesh/promotion-ceremony", replacement: path.resolve(root, "../lararium-mesh/src/promotion-ceremony.ts") },
+      // Every remaining mesh subpath rides ONE regex → src/<sub>.ts (explicit entries above win first;
+      // the bare "@lararium/mesh" below would otherwise swallow subpaths into "src/index.ts/<sub>").
+      { find: /^@lararium\/mesh\/(.+)$/, replacement: path.resolve(root, "../lararium-mesh/src") + "/$1.ts" },
       { find: "@lararium/mesh",                  replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
       { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
     ],

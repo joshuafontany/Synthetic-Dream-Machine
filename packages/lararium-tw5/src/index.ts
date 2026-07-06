@@ -60,6 +60,8 @@ export type {
 } from "./wiki-coherence-projection.js";
 export {
   createWikiSensorium,
+  createWikiSensoriumOverReader,
+  compositeCorpusReader,
   hasWikiSensorium,
   runWikiSensoriumWitness,
   letterFrequencyEmbedder,
@@ -73,6 +75,7 @@ export type {
   WikiSensoriumHandle,
   WikiSensoriumOptions,
   WikiCoherenceVerdict,
+  WikiCorpusReader,
   WikiRecallQuery,
   WikiRecallHit,
   WikiRecallResult,
@@ -80,6 +83,8 @@ export type {
   WikiCouplingUnbuilt,
   WikiSensoriumWitness,
 } from "./wiki-sensorium-cap.js";
+export { summarizeCoherence } from "./wiki-sense-fold.js";
+export type { WikiSenseDoc, WikiCoherenceSummary, WikiSenseUniverse } from "./wiki-sense-fold.js";
 export {
   createWikiSenseSupervisor,
   registerWikiSenseVerbs,

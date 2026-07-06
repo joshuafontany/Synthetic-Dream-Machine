@@ -34,20 +34,34 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
             // smol-toml ships as its own library tiddler; externalize in all modules except
             // the lib-smol-toml bundle itself (which must inline it).
             if (id === "smol-toml" && mod.name !== "smol-toml") return true;
+            // wiki-sense-fold ships ONCE as its own library tiddler; every other module requires
+            // it by URI (the smol-toml precedent) — only the fold bundle inlines its own body.
+            // The alias below rewrites the relative import to this BARE id first (a bare external
+            // emits the paths mapping verbatim; a relative external gets re-relativized by rollup).
+            if (id === "lararium-wiki-sense-fold") return true;
             return false;
           },
           output: {
             esModule: false,
             exports: "named",
             generatedCode: { symbols: false },
-            paths: {
-              "smol-toml": "lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml",
-            },
+            paths: (id: string) =>
+              id === "lararium-wiki-sense-fold"
+                ? "lar:///ha.ka.ba/@lararium/tw5/lib/wiki-sense-fold"
+                : id === "smol-toml"
+                  ? "lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml"
+                  : id,
           },
         },
       },
       resolve: {
         alias: [
+          // the shared wiki-sense fold rides as ONE library tiddler: rewrite the relative import
+          // to a bare id (externalized + paths-mapped above) in every module EXCEPT the fold's own
+          // bundle, which must inline its body.
+          ...(mod.name !== "wiki-sense-fold"
+            ? [{ find: /^(\.\.?\/)+wiki-sense-fold(\.js)?$/, replacement: "lararium-wiki-sense-fold" }]
+            : []),
           {
             find: /^@lararium\/mesh\/(.+)$/,
             replacement: `${path.resolve(ROOT, "../lararium-mesh/src")}/$1`,

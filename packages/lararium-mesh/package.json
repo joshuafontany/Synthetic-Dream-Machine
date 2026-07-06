@@ -36,6 +36,34 @@
       "import": "./dist/worldline.js",
       "types": "./dist/worldline.d.ts"
     },
+    "./sensorium-consistency": {
+      "import": "./dist/sensorium-consistency.js",
+      "types": "./dist/sensorium-consistency.d.ts"
+    },
+    "./sensorium-fusion": {
+      "import": "./dist/sensorium-fusion.js",
+      "types": "./dist/sensorium-fusion.d.ts"
+    },
+    "./crypto": {
+      "import": "./dist/crypto.js",
+      "types": "./dist/crypto.d.ts"
+    },
+    "./ffz-project": {
+      "import": "./dist/ffz-project.js",
+      "types": "./dist/ffz-project.d.ts"
+    },
+    "./windowed-coupling": {
+      "import": "./dist/windowed-coupling.js",
+      "types": "./dist/windowed-coupling.d.ts"
+    },
+    "./linearity-gate": {
+      "import": "./dist/linearity-gate.js",
+      "types": "./dist/linearity-gate.d.ts"
+    },
+    "./mesh-coupling": {
+      "import": "./dist/mesh-coupling.js",
+      "types": "./dist/mesh-coupling.d.ts"
+    },
     "./node": {
       "import": "./dist/node.js",
       "types": "./dist/node.d.ts"

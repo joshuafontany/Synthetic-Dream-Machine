@@ -31,14 +31,14 @@
  */
 
 import { collectEvents } from "./meme-ast/index.js";
-import {
-  type MeshCoupling,
-  windowInit, windowPush, windowLengthFor, type WindowConfig, type WindowState,
-  linearityGate, type LinearityReading,
-  ffzMembershipAddress, ffzTruncate, type FfzCells,
-} from "@lararium/mesh";
-import { type FfzBand, sha256HexSync } from "@lararium/mesh";
-import type { ComparisonStalk, PlaneRestriction } from "@lararium/mesh";
+// mesh SUBPATH imports (the grammar-cache precedent): this module bundles into the plugin blob's
+// wiki-sense-fold library, and the mesh ROOT index drags automerge/wasm the VM must never carry.
+import { type MeshCoupling } from "@lararium/mesh/mesh-coupling";
+import { windowInit, windowPush, windowLengthFor, type WindowConfig, type WindowState } from "@lararium/mesh/windowed-coupling";
+import { linearityGate, type LinearityReading } from "@lararium/mesh/linearity-gate";
+import { ffzMembershipAddress, ffzTruncate, type FfzCells, type FfzBand } from "@lararium/mesh/ffz-project";
+import { sha256HexSync } from "@lararium/mesh/crypto";
+import type { ComparisonStalk, PlaneRestriction } from "@lararium/mesh/sensorium-consistency";
 
 // ── the two axes ─────────────────────────────────────────────────────────────────────────────────
 

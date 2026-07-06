@@ -22,6 +22,9 @@ export default defineConfig({
       { find: "@lararium/mesh/harvest", replacement: path.resolve(root, "../lararium-mesh/src/harvest.ts") },
       { find: "@lararium/mesh/bures-metric", replacement: path.resolve(root, "../lararium-mesh/src/bures-metric.ts") },
       { find: "@lararium/mesh/node", replacement: path.resolve(root, "../lararium-mesh/src/node.ts") },
+      // Every remaining mesh subpath rides ONE regex → src/<sub>.ts (explicit entries above win first;
+      // the bare "@lararium/mesh" below would otherwise swallow subpaths into "src/index.ts/<sub>").
+      { find: /^@lararium\/mesh\/(.+)$/, replacement: path.resolve(root, "../lararium-mesh/src") + "/$1.ts" },
       { find: "@lararium/mesh", replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
     ],
   },

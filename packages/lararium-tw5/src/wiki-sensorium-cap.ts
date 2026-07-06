@@ -1,43 +1,61 @@
 /**
- * wiki-sensorium-cap — S2: the `hasWikiSensorium` cap-fold. The S0 adapter senses, the S1 projection
- * displays; THIS cap gives the wiki-causal-island (and its @daemon or any wiki-island-worker) a
- * THREE-VERB PERCEIVER over its OWN tiddler corpus:
+ * wiki-sensorium-cap — the `hasWikiSensorium` cap-fold: a wiki-causal-island (and its @daemon or
+ * any wiki-island-worker) composes a THREE-VERB PERCEIVER over its OWN tiddler corpus:
  *
- *   cohere()      — the consistency read: the S0 snapshot folds through the mesh organs (Robinson
- *                   {@link consistencyRadius} + the H¹ {@link cohomologyObstruction} classifier) into one
+ *   cohere()      — the consistency read: the corpus folds through the mesh organs (Robinson
+ *                   consistencyRadius + the H¹ cohomologyObstruction classifier) into one
  *                   verdict: radius · glues/vacuous · per-pair loci · reconcilable-vs-ontological.
  *   recall(query) — LOCAL-FIRST tiddler recall over the planes that exist today: title match (content
  *                   floor) · sigil-head match (structure, the L2 reader's strata) · shingle-Jaccard
- *                   neighbors (form, the S0 shingle machinery) · plus an OPTIONAL semantic tier behind
- *                   the injectable {@link TextEmbedder} seam (cosine flat-scan; no model dependency —
- *                   the COOP/COEP deployment fork stays the operator's).
- *   couple()      — answers honestly UNBUILT: the cross-island coupling read awaits the S5 mesh-of-wikis
+ *                   neighbors (form) · plus an OPTIONAL semantic tier behind the injectable
+ *                   {@link TextEmbedder} seam (cosine flat-scan; no model dependency — the COOP/COEP
+ *                   deployment fork stays the operator's).
+ *   couple()      — answers honestly UNBUILT: the cross-island coupling read awaits the mesh-of-wikis
  *                   fork (readKiCorpus over FFZ-aligned cells across islands); this verb never fakes it.
  *
- * GRAIN LAW: every verb reads the RESOLVED composite surface ({@link CompositeStore.entries},
- * kāpae-honored, causal-stamped) and WRITES NOTHING. A volatile corpus-index memo (the licensed S3+
- * pattern) caches one entries() fold; the composite's own change events invalidate it, so the memo
- * never outlives the log it read (`heads` ride the cached entries as the as-of stamp — no global now).
+ * PONO-HOME LAW (operator): a wiki that RUNS as a TW5 VM senses itself IN-VM — the plugin blob's
+ * WikiSenseIndexer + `wikisense` filter operator carry that beat natively. THIS cap serves the
+ * wikis that hold NO VM: {@link createWikiSensorium} stands the hull over a composite-store island
+ * through the {@link WikiCorpusReader} seam ({@link createWikiSensoriumOverReader} takes any
+ * reader). Every doc crosses the seam as its WHOLE open field record (operator law — title =
+ * pet-name key, no set schema); the fold math lives ONCE in wiki-sense-fold.ts — shipped in the
+ * plugin as a library tiddler — so the in-VM beat and the composite beat agree by construction.
+ *
+ * GRAIN LAW: every verb reads the reader's resolved surface and WRITES NOTHING. A volatile
+ * corpus-fold memo (the licensed pattern) caches one docs() fold; the reader's own change
+ * events invalidate it, so the memo never outlives the log it read (`heads` ride the cached docs
+ * as the as-of stamp — no global now).
  *
  * THE HULL RUNS PLATFORM-BLIND: no node builtins — the same cap composes on node AND in a browser
- * worker; {@link hasWikiSensorium} wears the existing {@link IslandCap} idiom (island-caps.ts), and
- * {@link createWikiSensorium} exposes the same perceiver for direct in-process use (daemon, tests).
+ * worker; {@link hasWikiSensorium} wears the existing {@link IslandCap} idiom (island-caps.ts).
  *
  * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
  */
 
-import type { CompositeStore, CompositeEntry, LarTiddlerRecord, ConsistencyRadius, SensoriumSignalType } from "@lararium/mesh";
-import { consistencyRadius, cohomologyObstruction, jaccardDistance, cosineDistance } from "@lararium/mesh";
+import type { CompositeStore, SensoriumSignalType } from "@lararium/mesh";
+import { cosineDistance } from "@lararium/mesh";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext } from "./island-context.js";
+import { buildFixtureIsland, GLUE_SEEDS, OBSTRUCT_SEEDS } from "./wiki-store-adapter.js";
 import {
-  projectWikiSensorium,
-  buildFixtureIsland,
-  GLUE_SEEDS,
-  OBSTRUCT_SEEDS,
-  shingles,
-} from "./wiki-store-adapter.js";
-import { stratify } from "./memetic-wikitext-sensorium.js";
+  foldCorpus,
+  cohereFold,
+  contentTier,
+  structureTier,
+  formTier,
+  rankHits,
+  RECALL_LIMIT,
+  type CorpusFold,
+  type WikiCoherenceVerdict,
+  type WikiRecallHit,
+} from "./wiki-sense-fold.js";
+import { compositeCorpusReader, type WikiCorpusReader } from "./wiki-corpus-reader.js";
+
+// the verdict/hit shapes live with the fold (every mouth speaks them); the cap re-exports the held names.
+export type { WikiCoherenceVerdict, WikiRecallHit } from "./wiki-sense-fold.js";
+export { RECALL_LIMIT } from "./wiki-sense-fold.js";
+export type { WikiCorpusReader } from "./wiki-corpus-reader.js";
+export { compositeCorpusReader } from "./wiki-corpus-reader.js";
 
 // ── the semantic SEAM (an interface, never a dependency) ────────────────────────────────────────────
 
@@ -55,24 +73,6 @@ function toNumbers(v: Float32Array): readonly number[] {
 
 // ── the verb result shapes ──────────────────────────────────────────────────────────────────────────
 
-/** The cohere() verdict — the S0 planes folded through BOTH mesh organs over one snapshot. */
-export interface WikiCoherenceVerdict {
-  /** the Robinson li-radius: radius · glues · vacuous · per-pair loci · the union obstruction locus. */
-  readonly consistency: ConsistencyRadius;
-  /** the H¹ classifier over the SAME assignment — which no-global-now stands (reconcilable ⊥ ontological). */
-  readonly gate: {
-    readonly kind: "reconcilable" | "ontological";
-    readonly dimH1: number;
-    /** the reconciliation cost R*_sem = log₂ dim H¹ (0 when reconcilable). */
-    readonly cost: number;
-  };
-  /** how many resolved tiddlers the verdict folded — the corpus grain it speaks over. */
-  readonly corpusSize: number;
-  /** the as-of stamp: the union of the answering layers' Automerge heads at the snapshot read
-   *  (dedup, sorted; empty for stores with no CRDT backing) — "as of my last sync", never "globally". */
-  readonly asOf: readonly string[];
-}
-
 /** One recall query — each present field licenses its tier; absent fields skip theirs. */
 export interface WikiRecallQuery {
   /** the content-floor probe: matches TITLES (exact > prefix > substring); also feeds the semantic tier. */
@@ -83,12 +83,6 @@ export interface WikiRecallQuery {
   readonly likeTitle?: string;
   /** per-tier hit cap; default {@link RECALL_LIMIT}. */
   readonly limit?: number;
-}
-
-/** One recall hit — a title with the score its tier gave it (each tier normalizes into [0,1]). */
-export interface WikiRecallHit {
-  readonly title: string;
-  readonly score: number;
 }
 
 /** The recall() result — one ranked list per tier the query licensed (empty = licensed, nothing matched). */
@@ -103,17 +97,14 @@ export interface WikiRecallResult {
   readonly semantic: readonly WikiRecallHit[] | null;
 }
 
-/** Default per-tier recall cap. */
-export const RECALL_LIMIT = 10;
-
-/** The couple() answer while S5 stands unbuilt — a typed refusal, never a faked coupling read. */
+/** The couple() answer while the coupling read stands unbuilt — a typed refusal, never a faked read. */
 export interface WikiCouplingUnbuilt {
   readonly status: "unbuilt";
-  /** the fork this verb awaits: the S5 mesh-of-wikis coupling (readKiCorpus across islands). */
+  /** the fork this verb awaits — the wire value names it; the mesh-of-wikis coupling (readKiCorpus across islands). */
   readonly awaits: "S5:mesh-of-wikis";
 }
 
-/** The coupling read — widens beyond the unbuilt arm when the S5 fork lands. */
+/** The coupling read — widens beyond the unbuilt arm when the mesh-of-wikis fork lands. */
 export type WikiCouplingRead = WikiCouplingUnbuilt;
 
 // ── the perceiver ───────────────────────────────────────────────────────────────────────────────────
@@ -135,147 +126,54 @@ export interface WikiSensoriumOptions {
   readonly embedder?: TextEmbedder;
 }
 
-/** Pull a tiddler's body text — the `text` field, the memetic-wikitext carrier (the S0 read, kept local). */
-function bodyOf(record: LarTiddlerRecord): string {
-  const text = (record.tiddler as Record<string, unknown>)["text"];
-  return typeof text === "string" ? text : "";
-}
-
-/** One tiddler's recall index — the per-plane probes derived once per memo fill. */
-interface DocIndex {
-  readonly title: string;
-  readonly body: string;
-  /** the form probe: the doc's distinct char k-gram shingles (the S0 machinery, same k). */
-  readonly shingleSet: ReadonlySet<string>;
-  /** the structure probe: sigil-head → how many strata carry it (the L2 reader's typed heads). */
-  readonly headCounts: ReadonlyMap<string, number>;
-}
-
-/** The volatile corpus index — ONE entries() fold serving every verb until the log moves. */
-interface CorpusIndex {
-  readonly entries: readonly CompositeEntry[];
-  readonly docs: readonly DocIndex[];
-}
-
-/** Fold the resolved entries into the corpus index (the memo body — runs once per invalidation). */
-function buildIndex(entries: readonly CompositeEntry[]): CorpusIndex {
-  const docs: DocIndex[] = entries.map((e) => {
-    const body = bodyOf(e.record);
-    const headCounts = new Map<string, number>();
-    // the L2 reader stratifies the body; frame sigils bound rather than steer, so they stay out of
-    // the head index (a recall for "ahu" would name structure that governs nothing).
-    for (const s of stratify(body).strata) {
-      if (s.frame) continue;
-      const key = s.head.toLowerCase();
-      headCounts.set(key, (headCounts.get(key) ?? 0) + 1);
-    }
-    return { title: e.title, body, shingleSet: shingles(body), headCounts };
-  });
-  return { entries, docs };
-}
-
-/** Sort hits score-desc, title-asc (deterministic), then cap at the tier limit. */
-function rankHits(hits: WikiRecallHit[], limit: number): WikiRecallHit[] {
-  return hits
-    .sort((a, b) => b.score - a.score || (a.title < b.title ? -1 : a.title > b.title ? 1 : 0))
-    .slice(0, limit);
-}
-
 /**
- * Stand the perceiver over one wiki island's composite. Read-only: every verb folds the RESOLVED
- * surface (kāpae-honored); nothing writes back. The corpus index memoizes ONE entries() fold and the
- * composite's own change events invalidate it (the licensed volatile-memo pattern) — dispose() releases
- * that subscription.
+ * Stand the ONE perceiver hull over ANY corpus reader. Read-only: every verb
+ * folds the reader's resolved docs (WHOLE open records); nothing writes back. The corpus fold
+ * memoizes ONE docs() read and the reader's own change events invalidate it (the licensed
+ * volatile-memo pattern) — dispose() releases that subscription.
  */
-export function createWikiSensorium(
-  store: CompositeStore, opts: WikiSensoriumOptions = {},
+export function createWikiSensoriumOverReader(
+  reader: WikiCorpusReader, opts: WikiSensoriumOptions = {},
 ): WikiSensoriumHandle {
-  let cached: Promise<CorpusIndex> | null = null;
+  let cached: Promise<CorpusFold> | null = null;
   // the log moved → the memo dies with the snapshot it summarized (never a stale read past a write).
-  const unsub = store.subscribe(() => { cached = null; });
-  const index = (): Promise<CorpusIndex> =>
-    (cached ??= store.entries().then(buildIndex));
+  const unsub = reader.subscribe(() => { cached = null; });
+  const fold = (): Promise<CorpusFold> =>
+    (cached ??= reader.docs().then((docs) => foldCorpus(docs)));
 
   return {
     async cohere(): Promise<WikiCoherenceVerdict> {
-      const idx = await index();
-      // the S0 projection engineers the structure⊥form stalk; both organs read the SAME assignment.
-      const snap = projectWikiSensorium(idx.entries);
-      const consistency = consistencyRadius(snap.restrictions, snap.stalk);
-      const obs = cohomologyObstruction({ restrictions: snap.restrictions, stalk: snap.stalk });
-      return {
-        consistency,
-        gate: { kind: obs.kind, dimH1: obs.dimH1, cost: obs.cost },
-        corpusSize: idx.entries.length,
-        // the snapshot's causal coordinates — the proof-hold's stamp rides these, never a wall clock.
-        asOf: [...new Set(idx.entries.flatMap((e) => e.heads ?? []))].sort(),
-      };
+      // both organs read the SAME assignment — the shared fold projects the structure⊥form planes.
+      return cohereFold(await fold());
     },
 
     async recall(query: WikiRecallQuery): Promise<WikiRecallResult> {
-      const idx = await index();
+      const f = await fold();
       const limit = Math.max(1, query.limit ?? RECALL_LIMIT);
 
-      // content floor — the probe matches TITLES; exact outranks prefix outranks substring.
-      const content: WikiRecallHit[] = [];
-      if (query.text !== undefined && query.text.length > 0) {
-        const probe = query.text.toLowerCase();
-        for (const d of idx.docs) {
-          const t = d.title.toLowerCase();
-          const score = t === probe ? 1 : t.startsWith(probe) ? 0.75 : t.includes(probe) ? 0.5 : 0;
-          if (score > 0) content.push({ title: d.title, score });
-        }
-      }
-
-      // structure — the sigil-head strata the L2 reader typed; score = matching-strata count, max-normalized.
-      const structure: WikiRecallHit[] = [];
-      if (query.sigilHead !== undefined && query.sigilHead.length > 0) {
-        const head = query.sigilHead.toLowerCase();
-        const counts = idx.docs
-          .map((d) => ({ title: d.title, n: d.headCounts.get(head) ?? 0 }))
-          .filter((x) => x.n > 0);
-        const maxN = Math.max(1, ...counts.map((x) => x.n));
-        for (const x of counts) structure.push({ title: x.title, score: x.n / maxN });
-      }
-
-      // form — the seed tiddler's shingle-set neighbors, ranked by Jaccard SIMILARITY (the mesh organ's
-      // distance, flipped). The seed itself stays out of its own neighbor list.
-      const form: WikiRecallHit[] = [];
-      if (query.likeTitle !== undefined) {
-        const seed = idx.docs.find((d) => d.title === query.likeTitle);
-        if (seed) {
-          for (const d of idx.docs) {
-            if (d.title === seed.title) continue;
-            const sim = 1 - jaccardDistance(seed.shingleSet, d.shingleSet);
-            if (sim > 0) form.push({ title: d.title, score: sim });
-          }
-        }
-      }
+      const content = query.text !== undefined ? contentTier(f, query.text, limit) : [];
+      const structure = query.sigilHead !== undefined ? structureTier(f, query.sigilHead, limit) : [];
+      const form = query.likeTitle !== undefined ? formTier(f, query.likeTitle, limit) : [];
 
       // semantic — the seam-gated tier: ONE batch embed (query + every body), then a flat cosine scan.
       // No embedder ⇒ null (the tier reads honest-absent, never a degraded fallback ranking).
       let semantic: WikiRecallHit[] | null = null;
-      if (opts.embedder && query.text !== undefined && query.text.length > 0 && idx.docs.length > 0) {
-        const vecs = await opts.embedder([query.text, ...idx.docs.map((d) => d.body)]);
+      if (opts.embedder && query.text !== undefined && query.text.length > 0 && f.docs.length > 0) {
+        const vecs = await opts.embedder([query.text, ...f.docs.map((d) => d.body)]);
         const qv = toNumbers(vecs[0]!);
         semantic = [];
-        for (let i = 0; i < idx.docs.length; i++) {
+        for (let i = 0; i < f.docs.length; i++) {
           const sim = 1 - cosineDistance(qv, toNumbers(vecs[i + 1]!));
-          if (Number.isFinite(sim) && sim > 0) semantic.push({ title: idx.docs[i]!.title, score: sim });
+          if (Number.isFinite(sim) && sim > 0) semantic.push({ title: f.docs[i]!.title, score: sim });
         }
         semantic = rankHits(semantic, limit);
       }
 
-      return {
-        content: rankHits(content, limit),
-        structure: rankHits(structure, limit),
-        form: rankHits(form, limit),
-        semantic,
-      };
+      return { content, structure, form, semantic };
     },
 
     couple(): WikiCouplingRead {
-      // the honest stub: a cross-island coupling read needs the S5 mesh-of-wikis fork (FFZ-aligned
+      // the honest stub: a cross-island coupling read needs the mesh-of-wikis fork (FFZ-aligned
       // cells across islands feeding readKiCorpus); until it lands this verb REFUSES, typed.
       return { status: "unbuilt", awaits: "S5:mesh-of-wikis" };
     },
@@ -287,9 +185,19 @@ export function createWikiSensorium(
   };
 }
 
+/**
+ * Stand the perceiver over one VM-less wiki island's composite — the held signature: it wraps the
+ * composite in {@link compositeCorpusReader} and rides the same hull as every other face.
+ */
+export function createWikiSensorium(
+  store: CompositeStore, opts: WikiSensoriumOptions = {},
+): WikiSensoriumHandle {
+  return createWikiSensoriumOverReader(compositeCorpusReader(store), opts);
+}
+
 // ── the island cap (the #has unit — wears the island-caps idiom) ────────────────────────────────────
 
-/** The OUT-frame listenable every sensorium verb answers on (the S1/telemetry post-event family). */
+/** The OUT-frame listenable every sensorium verb answers on (the telemetry post-event family). */
 export const SENSORIUM_FRAME = "sensorium:frame";
 
 /** The three IN signals the cap claims — one per perceiver verb. Typed against the mesh wire union
@@ -385,7 +293,7 @@ export const letterFrequencyEmbedder: TextEmbedder = async (texts) =>
     return v;
   });
 
-/** The witness verdict — every S2 verb exercised over the S0 fixture corpora, the cross-tier assertion surface. */
+/** The witness verdict — every perceiver verb exercised over the fixture corpora, the cross-tier assertion surface. */
 export interface WikiSensoriumWitness {
   /** cohere over the GLUE corpus — expects glues:true, vacuous:false, gate reconcilable. */
   readonly glue: WikiCoherenceVerdict;
@@ -402,7 +310,7 @@ export interface WikiSensoriumWitness {
 }
 
 /**
- * Run the S2 cross-tier witness — stand two fixture islands (the S0 GLUE/OBSTRUCT corpora), drive every
+ * Run the cross-tier witness — stand the two fixture islands (the GLUE/OBSTRUCT corpora), drive every
  * verb through the SAME {@link createWikiSensorium} hull, and hand back the readings. A node test and a
  * browser (Chromium) test assert the IDENTICAL verdict — one hull, two substrates, differ by grant not hull.
  */
