@@ -212,6 +212,46 @@ class WorldlineStore:
         """The full branch = the root PLUS its spawn-tree descendants — the turn-key set kapae mutes."""
         return [branch_root, *self.descendants(branch_root, as_of)]
 
+    def _up_parent(self, node: str, as_of=None) -> "str | None":
+        """The node standing UP the braid from `node` — its fork-spawner (preferred) or its linear-prev.
+        A turn holds at most one of each; the spawner outranks the chain, so a sub-agent climbs to its
+        spawning main-turn before climbing that main's own chain."""
+        fork_up = linear_up = None
+        for e in self._rows(as_of):
+            if e["to"] != node:
+                continue
+            if e["relation"] == REL_FORK:
+                fork_up = e["frm"]
+            elif e["relation"] == REL_LINEAR:
+                linear_up = e["frm"]
+        return fork_up or linear_up
+
+    def worldline_of(self, turn: str, as_of=None) -> str:
+        """The worldline-ROOT of a turn (the demux's lineage-path) — climb the braid (fork-spawner,
+        else linear-prev) to the top: a sub-agent turn climbs its fork-parent to the spawning main-turn,
+        then up the main's linear chain to the main-session root. The root carries no fork-parent and no
+        linear-prev — descent IS the address (agent-worldline Face-I). Cycle-guarded."""
+        node, seen = turn, set()
+        while node not in seen:
+            seen.add(node)
+            up = self._up_parent(node, as_of)
+            if up is None:
+                return node
+            node = up
+        return node
+
+    def roots(self, as_of=None) -> list:
+        """Every worldline-ROOT — the turns carrying no fork-parent and no linear-prev (one per braid).
+        The demux partitions the captured turns by which root `worldline_of` climbs to."""
+        nodes: set = set()
+        has_up: set = set()
+        for e in self._rows(as_of):
+            nodes.add(e["frm"])
+            nodes.add(e["to"])
+            if e["relation"] in (REL_FORK, REL_LINEAR):
+                has_up.add(e["to"])
+        return sorted(nodes - has_up)
+
     def are_concurrent(self, a: str, b: str, as_of=None) -> bool:
         """The ∥ verdict — a and b run concurrent when NEITHER stands in the other's spawn-tree
         subtree (incomparable in the spawn partial-order). Two siblings of one fork with no join
