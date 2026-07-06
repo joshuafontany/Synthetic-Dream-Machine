@@ -38,7 +38,13 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
 
 1. **The plane fan-out** — `capture_stream.run_pass` lands CONTENT only; wire the structure plane (`structure_router` → `structurepalace_io`) and form plane (`form_encoder`/`form_induction`) into the pass, so all three planes ride the same records. *The keystone — the cross-plane thesis needs genuinely-independent planes on shared units.*
 2. **A curated-corpus source-cap** — `capture_sources` reads AI surfaces only; add a human-text/markdown reader (borrow `structure_router` kind-detection) for the ephemeral test-bed.
-3. **The py projector / RUN surface** — reads the populated planes, sweeps `arl-dial` ARL₀→α, emits the complexity-entropy diagram + ΔF (reuse `predictive_coding` F as evidence-codelength; BMR for the reduced family) + H¹ (a py twin — `spectral_geometry` has H⁰; H¹ over the agreement-nerve is owed) + the EFE gate (a py twin of `sensorium-efe`).
+3. **LANDED 2026-07-06** — the twins (5a39f2fd: sensorium_consistency/fusion/efe.py, all three parity
+   rows turned WITNESSED, 10 TS assertions bound at first contact) + the projector (d50526cc:
+   run_projector.py, the ARL0->alpha sweep with per-rung surrogate-null bands, witnessed over the
+   12-record test-bed — instruments run end-to-end; dim H1=0 reads honest-not-vacuous at that grain,
+   the plug-in excess-entropy saturates at 12 symbols; the load-bearing co-jump awaits the bigger
+   corpuses). Named follow-ups: family-wise maxT port · the sensorium-pc<->predictive_coding
+   owed-fixture row. Original charge: **The py projector / RUN surface** — reads the populated planes, sweeps `arl-dial` ARL₀→α, emits the complexity-entropy diagram + ΔF (reuse `predictive_coding` F as evidence-codelength; BMR for the reduced family) + H¹ (a py twin — `spectral_geometry` has H⁰; H¹ over the agreement-nerve is owed) + the EFE gate (a py twin of `sensorium-efe`).
 4. **The memory-sensorium driver** — compose (`sensorium.py`) + run a capture pass over the real `~/.lares` corpus (the goal), and over the ephemeral test-bed (the proof-ground).
 
 ## The first step (the unlock — BA)
