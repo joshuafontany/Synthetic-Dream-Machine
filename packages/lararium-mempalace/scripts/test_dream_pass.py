@@ -165,6 +165,17 @@ def test_the_pass_never_writes_the_eidetic_ground(tmp_path):
     with pytest.raises(SystemExit):
         dream_pass.run(os.path.join(dream, "bed"), dream)         # ground inside the Dream
 
+    # an UNPOPULATED plane dir refuses BEFORE any store open — a chroma open runs
+    # create=True and would write scaffolding INSIDE the eidetic root (a ground-write
+    # the byte ward cannot see, since it sets the sqlite carrier aside).
+    half = str(tmp_path / "half-bed")
+    for sub in ("content", "structure", "form"):
+        os.makedirs(os.path.join(half, sub))
+    with pytest.raises(SystemExit):
+        dream_pass.run(half, str(tmp_path / "half-bed-dream"))
+    for sub in ("content", "structure", "form"):
+        assert os.listdir(os.path.join(half, sub)) == []          # the bare dirs stay bare
+
 
 def test_a_redream_replaces_the_prior_dream_whole(tmp_path):
     eidetic = str(tmp_path / "bed")

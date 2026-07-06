@@ -48,13 +48,17 @@ so the sqlite carrier cannot hold a byte-identity witness. The ward therefore ch
       set aside, before vs after;
 and the pass FAILS LOUD on either drift.
 
-RE-DREAM DETERMINISM, a named edge (witnessed): within one process a re-dream over the
-same ground reproduces the same constructicon; ACROSS processes the MDL's tie-breaks
-ride set-iteration order inside the shared induction organ, so equally-paying grammars
-may swap (3 vs 4 vs 5 templates over the 12-record bed, all valid MDL selections).
-Pinning PYTHONHASHSEED makes cross-process re-dreams byte-stable (witnessed twice
-identical under PYTHONHASHSEED=0). The replacement law holds either way — the prior
-Dream sweeps whole — and the as_of provenance never varies (it keys to the ground).
+RE-DREAM DETERMINISM (ranking sites cured downstream; one residual named): the MDL's
+RANKING tie-breaks now hold a total order in form_induction (the closed-sequence sort
+and the MDL candidate pool), so equal candidates rank by content, never arrival. A
+RESIDUAL site remains in the subtree miner's BOUNDED enumeration: the walk iterates
+set-seeded dict order, so the per-pass budget truncates a process-varying candidate
+SET (witnessed post-cure over the 12-record bed: 46/49/79 surfaced subtrees, 3-vs-5
+kept templates across fresh processes) — a differing set, which no ranking order can
+re-align. Until that walk holds a total order too, cross-process re-dreams over
+identical ground may keep equivalent MDL grammars that differ at the margin; within
+one process the grammar re-settles identically, the replacement law holds regardless,
+and the as_of provenance never varies (it keys to the ground).
 
 THE DAYDREAM SEAM (named, out of scope): daydream carries the READ-cheap concurrent
 reflection — it reads the Dream store's read face (get/scan + dream-manifest.json)
@@ -66,7 +70,7 @@ Usage (the mempalace venv):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 dream_pass.py run \
       --eidetic ~/.lares/testbeds/human-text-lares-memes [--dream <root>] \
       [--tolerance 0.25] [--min-support 2] [--max-forms 64] [--max-candidates 384] \
-      [--loci-cap 16]
+      [--loci-cap 32]
 
 Meme: lar:///ha.ka.ba/@lararium/sensorium/dream-pass
 """
@@ -97,7 +101,7 @@ _DREAM_MAX_CANDIDATES = 384
 _DEFAULT_TOLERANCE = 0.25    # the agreement tolerance the H1 gate reads at (one dial, recorded)
 _DEFAULT_MIN_SUPPORT = 2
 _DEFAULT_MAX_FORMS = 64
-_DEFAULT_LOCI_CAP = 16       # caps the loci/pairs a coherence record carries
+_DEFAULT_LOCI_CAP = 32       # caps the loci/pairs a coherence record carries; totals ride beside
 
 _PLANE_DIRS = ("content", "structure", "form")
 _SQLITE_CARRIER = "chroma.sqlite3"
@@ -141,11 +145,17 @@ def _ward_roots(eidetic_root: str, dream_root: str) -> None:
     if e.startswith(d + os.sep):
         raise SystemExit(f"dream_pass: REFUSED — the eidetic root {eidetic_root!r} sits inside "
                          "the Dream root; the ground never nests under the mutable store")
-    missing = [p for p in _PLANE_DIRS if not os.path.isdir(os.path.join(e, p))]
+    # A POPULATED store per plane, proven by its carrier file BEFORE any open: the store
+    # opens run create=True, so opening a bare/empty plane dir would CREATE chroma
+    # scaffolding inside the eidetic root — a write to the ground the byte ward cannot
+    # see (it sets the sqlite carrier aside). Refuse loud instead; the pass never opens
+    # what it cannot already read.
+    missing = [p for p in _PLANE_DIRS
+               if not os.path.isfile(os.path.join(e, p, _SQLITE_CARRIER))]
     if missing:
-        raise SystemExit(f"dream_pass: the eidetic root {eidetic_root!r} misses plane "
-                         f"store(s) {missing} — the pass reads a populated 3-plane bed; "
-                         "it never creates stores inside the ground")
+        raise SystemExit(f"dream_pass: the eidetic root {eidetic_root!r} misses populated "
+                         f"plane store(s) {missing} — the pass reads a populated 3-plane "
+                         "bed; it never creates stores inside the ground")
 
 
 def eidetic_byte_hash(root: str) -> str:
@@ -283,8 +293,11 @@ def consolidate_coherence(planes: dict, *, tolerance: float, loci_cap: int) -> d
         "dim_h1": obs["dimH1"],
         "r_sem": obs["cost"],
         "kind": obs["kind"],
+        # capped list + the uncapped total beside it — a capped seam always names how
+        # much it holds back (three planes yield 3 pairs; bigger fleets outgrow the cap).
         "pairs": [{"a": p["a"], "b": p["b"], "distance": p["distance"]}
                   for p in h0["pairs"]][:loci_cap],
+        "pairs_total": len(h0["pairs"]),
     }
     if verdict["verdict"] == "fuse":
         body["reading"] = "consensus"
@@ -301,6 +314,7 @@ def consolidate_coherence(planes: dict, *, tolerance: float, loci_cap: int) -> d
             "dim_h1": obs["dimH1"],
             "r_sem": obs["cost"],
             "loci": loci[:loci_cap],
+            "loci_total": len(loci),
             "note": "the planes' disagreement stands recorded whole — never averaged",
         }
     return body
@@ -341,10 +355,13 @@ def write_dream(dream_root: str, *, eidetic_root: str, as_of: str, schema: dict,
         for opt in ("name_hint", "dp", "tree"):
             if opt in f:
                 body[opt] = f[opt]
+        # Metadata stays SCALAR + filterable (kind/support/origin + a member COUNT);
+        # the member cid list rides the document body alone — an unbounded JSON blob in
+        # chroma metadata buys no filter and walls at scale.
         meta = {"lar_dream_kind": "template", **provenance,
                 "lar_dream_support": int(f.get("support", 0)),
                 "lar_dream_origin": str(f.get("origin", "seq")),
-                "lar_dream_members": json.dumps(members)}
+                "lar_dream_member_count": len(members)}
         store.put(cid, _canonical(body), _locator(cid), meta)
         counts["template"] += 1
 
@@ -353,7 +370,7 @@ def write_dream(dream_root: str, *, eidetic_root: str, as_of: str, schema: dict,
         body = {"eidetic_cid": c, "templates": hits}
         meta = {"lar_dream_kind": "membership", **provenance,
                 "lar_dream_ref_cid": c,
-                "lar_dream_templates": json.dumps(hits)}
+                "lar_dream_template_count": len(hits)}
         store.put(cid, _canonical(body), _locator(cid), meta)
         counts["membership"] += 1
 
