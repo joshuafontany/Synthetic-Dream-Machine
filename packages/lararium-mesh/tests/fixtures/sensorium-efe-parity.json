@@ -1,0 +1,305 @@
+{
+  "oracle": "sensorium_efe.py (py twin; TS re-computes and asserts)",
+  "planeReads": {
+    "content": [
+      0.687175,
+      1.117107,
+      0.821821,
+      0.529294,
+      0.046349,
+      -0.663081,
+      -0.761523,
+      -0.924157,
+      -0.803466,
+      -0.564435,
+      -0.567298,
+      0.188484,
+      -0.068123,
+      -0.608102,
+      -1.149889,
+      -0.992932,
+      -0.209982,
+      -0.512777,
+      -0.553424,
+      -0.43193,
+      -0.579319,
+      -0.552514,
+      -0.147457,
+      -0.191915
+    ],
+    "structure": [
+      -0.342658,
+      -0.345048,
+      -1.788526,
+      -1.236121,
+      -0.996397,
+      0.205511,
+      1.024104,
+      1.343265,
+      0.843609,
+      1.107516,
+      -1.010867,
+      -2.035753,
+      -0.053542,
+      -0.029518,
+      0.367567,
+      -0.166605,
+      0.132347,
+      0.826014,
+      0.262008,
+      0.690271,
+      0.893335,
+      0.035486,
+      0.107185,
+      0.08887
+    ],
+    "form": [
+      -0.150181,
+      0.489093,
+      0.575687,
+      0.443968,
+      -0.283976,
+      0.369287,
+      1.994325,
+      0.225471,
+      -0.778822,
+      -0.085764,
+      -0.938022,
+      0.955566,
+      0.638048,
+      -0.349406,
+      -0.718372,
+      -0.102312,
+      -0.299277,
+      1.054084,
+      0.565482,
+      0.916679,
+      -0.592521,
+      -0.062114,
+      -0.673999,
+      -0.855215
+    ]
+  },
+  "c": {
+    "mu": {
+      "content": 0,
+      "structure": 0,
+      "form": 0
+    }
+  },
+  "scoreCases": [
+    {
+      "verb": {
+        "verb": "hold",
+        "scale": 1,
+        "shift": 0,
+        "precisionGain": 1
+      },
+      "expected": {
+        "verb": "hold",
+        "efe": -0.41127449669065186,
+        "pragmatic": 0.25248295212448923,
+        "epistemic": -0.6637574488151411,
+        "optionLoss": 0.0,
+        "reversible": true
+      }
+    },
+    {
+      "verb": {
+        "verb": "align",
+        "scale": 0,
+        "shift": 0,
+        "precisionGain": 1
+      },
+      "expected": {
+        "verb": "align",
+        "efe": -0.44752246272716567,
+        "pragmatic": 0.21623498608797542,
+        "epistemic": -0.6637574488151411,
+        "optionLoss": 0.0,
+        "reversible": true
+      }
+    },
+    {
+      "verb": {
+        "verb": "collapse",
+        "scale": 1,
+        "shift": 0,
+        "precisionGain": 10000.0
+      },
+      "expected": {
+        "verb": "collapse",
+        "efe": 26.167374329718793,
+        "pragmatic": 13.015621220569656,
+        "epistemic": -14.479268006779414,
+        "optionLoss": 27.63102111592855,
+        "reversible": false
+      }
+    },
+    {
+      "verb": {
+        "verb": "expand",
+        "scale": 1,
+        "shift": 0,
+        "precisionGain": 0.001
+      },
+      "expected": {
+        "verb": "expand",
+        "efe": 1030.2905194019245,
+        "pragmatic": 1041.3159097692128,
+        "epistemic": 9.697875469658065,
+        "optionLoss": -20.72326583694641,
+        "reversible": true
+      }
+    },
+    {
+      "verb": {
+        "verb": "uneven",
+        "scale": 1,
+        "shift": 0.5,
+        "perPlane": {
+          "structure": {
+            "precisionGain": 4.0,
+            "shift": -0.25
+          }
+        }
+      },
+      "gamma": 0.5,
+      "preferenceVariance": 2.0,
+      "expected": {
+        "verb": "uneven",
+        "efe": 1.373337869881627,
+        "pragmatic": 1.3586430040092248,
+        "epistemic": -1.3569046293750864,
+        "optionLoss": 1.3862943611198906,
+        "reversible": false
+      }
+    }
+  ],
+  "selectCase": {
+    "verbs": [
+      {
+        "verb": "hold",
+        "scale": 1,
+        "shift": 0,
+        "precisionGain": 1
+      },
+      {
+        "verb": "align",
+        "scale": 0,
+        "shift": 0,
+        "precisionGain": 1
+      },
+      {
+        "verb": "collapse",
+        "scale": 1,
+        "shift": 0,
+        "precisionGain": 10000.0
+      },
+      {
+        "verb": "expand",
+        "scale": 1,
+        "shift": 0,
+        "precisionGain": 0.001
+      }
+    ],
+    "expected": {
+      "chosen": "align",
+      "margin": 0.03624796603651381,
+      "ranked": [
+        "align",
+        "hold",
+        "collapse",
+        "expand"
+      ],
+      "needsReview": true
+    }
+  },
+  "gateCases": [
+    {
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "content",
+            "variance": "sheaf",
+            "value": {
+              "a": 0.5,
+              "b": 0.5
+            }
+          },
+          {
+            "plane": "structure",
+            "variance": "sheaf",
+            "value": {
+              "b": 0.7,
+              "c": 0.5
+            }
+          },
+          {
+            "plane": "form",
+            "variance": "sheaf",
+            "value": {
+              "c": 0.7,
+              "a": 0.7
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      },
+      "agreementTolerance": 0.05,
+      "expected": {
+        "verdict": "select",
+        "chosen": "align"
+      }
+    },
+    {
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "content",
+            "variance": "sheaf",
+            "value": {
+              "a": 0.5,
+              "b": 0.5
+            }
+          },
+          {
+            "plane": "structure",
+            "variance": "sheaf",
+            "value": {
+              "b": 0.7,
+              "c": 0.5
+            }
+          },
+          {
+            "plane": "form",
+            "variance": "sheaf",
+            "value": {
+              "c": 0.7,
+              "a": 0.7
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      },
+      "agreementTolerance": 0.3,
+      "expected": {
+        "verdict": "surface-disagreement",
+        "dimH1": 1,
+        "cost": 0.0
+      }
+    }
+  ]
+}

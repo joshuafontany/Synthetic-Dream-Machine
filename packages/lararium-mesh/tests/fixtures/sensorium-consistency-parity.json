@@ -1,0 +1,1024 @@
+{
+  "oracle": "sensorium_consistency.py (py twin; TS re-computes and asserts)",
+  "radiusCases": [
+    {
+      "note": "glue \u2014 three planes agree on every overlap",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "u1": 0.5,
+            "u2": 0.3
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "u2": 0.3,
+            "u3": 0.8
+          }
+        },
+        {
+          "plane": "form",
+          "variance": "sheaf",
+          "value": {
+            "u3": 0.8,
+            "u1": 0.5
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "u1",
+          "u2",
+          "u3"
+        ]
+      },
+      "expected": {
+        "radius": 0.0,
+        "glues": true,
+        "vacuous": false,
+        "obstructionLocus": [],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": false
+          },
+          {
+            "a": "content",
+            "b": "form",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": false
+          },
+          {
+            "a": "structure",
+            "b": "form",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "obstruction \u2014 one pair disagrees by 0.4 at u2",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "u1": 0.5,
+            "u2": 0.3
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "u2": 0.7,
+            "u3": 0.8
+          }
+        },
+        {
+          "plane": "form",
+          "variance": "sheaf",
+          "value": {
+            "u3": 0.8,
+            "u1": 0.5
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "u1",
+          "u2",
+          "u3"
+        ]
+      },
+      "expected": {
+        "radius": 0.39999999999999997,
+        "glues": false,
+        "vacuous": false,
+        "obstructionLocus": [
+          "u2"
+        ],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.39999999999999997,
+            "locus": [
+              "u2"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "content",
+            "b": "form",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": false
+          },
+          {
+            "a": "structure",
+            "b": "form",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "vacuous \u2014 disjoint domains, no pair binds",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "a": 0.2
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "b": 0.9
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "a",
+          "b"
+        ]
+      },
+      "expected": {
+        "radius": 0.0,
+        "glues": false,
+        "vacuous": true,
+        "obstructionLocus": [],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": true
+          }
+        ]
+      }
+    },
+    {
+      "note": "locus tie \u2014 two units maximize the same pair disagreement",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "u1": 0.1,
+            "u2": 0.1,
+            "u3": 0.5
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "u1": 0.6,
+            "u2": 0.6,
+            "u3": 0.5
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "u1",
+          "u2",
+          "u3"
+        ]
+      },
+      "expected": {
+        "radius": 0.5,
+        "glues": false,
+        "vacuous": false,
+        "obstructionLocus": [
+          "u1",
+          "u2"
+        ],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.5,
+            "locus": [
+              "u1",
+              "u2"
+            ],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "stalk gate \u2014 units outside the stalk never constrain",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "u1": 0.5,
+            "ghost": 0.0
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "u1": 0.5,
+            "ghost": 1.0
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "u1"
+        ]
+      },
+      "expected": {
+        "radius": 0.0,
+        "glues": true,
+        "vacuous": false,
+        "obstructionLocus": [],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.0,
+            "locus": [],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "seeded random spread #0",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "r0u0": 0.5,
+            "r0u2": 0.6000000000000001,
+            "r0u3": 0.1
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "r0u0": 0.4,
+            "r0u1": 0.25,
+            "r0u2": 0.55,
+            "r0u3": 0.35000000000000003
+          }
+        },
+        {
+          "plane": "form",
+          "variance": "sheaf",
+          "value": {
+            "r0u0": 0.5,
+            "r0u1": 1.0,
+            "r0u3": 0.45,
+            "r0u4": 0.5
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "r0u0",
+          "r0u1",
+          "r0u2",
+          "r0u3",
+          "r0u4"
+        ]
+      },
+      "expected": {
+        "radius": 0.75,
+        "glues": false,
+        "vacuous": false,
+        "obstructionLocus": [
+          "r0u1",
+          "r0u3"
+        ],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.25,
+            "locus": [
+              "r0u3"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "content",
+            "b": "form",
+            "distance": 0.35,
+            "locus": [
+              "r0u3"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "structure",
+            "b": "form",
+            "distance": 0.75,
+            "locus": [
+              "r0u1"
+            ],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "seeded random spread #1",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "r1u0": 0.9,
+            "r1u1": 0.4,
+            "r1u2": 0.30000000000000004,
+            "r1u3": 0.75
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "r1u0": 0.9500000000000001,
+            "r1u1": 0.30000000000000004,
+            "r1u2": 0.15000000000000002,
+            "r1u3": 0.15000000000000002,
+            "r1u4": 0.9500000000000001
+          }
+        },
+        {
+          "plane": "form",
+          "variance": "sheaf",
+          "value": {
+            "r1u1": 0.2,
+            "r1u2": 0.5,
+            "r1u3": 0.30000000000000004,
+            "r1u4": 1.0
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "r1u0",
+          "r1u1",
+          "r1u2",
+          "r1u3",
+          "r1u4"
+        ]
+      },
+      "expected": {
+        "radius": 0.6,
+        "glues": false,
+        "vacuous": false,
+        "obstructionLocus": [
+          "r1u2",
+          "r1u3"
+        ],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.6,
+            "locus": [
+              "r1u3"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "content",
+            "b": "form",
+            "distance": 0.44999999999999996,
+            "locus": [
+              "r1u3"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "structure",
+            "b": "form",
+            "distance": 0.35,
+            "locus": [
+              "r1u2"
+            ],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "seeded random spread #2",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "r2u0": 0.55,
+            "r2u1": 0.9,
+            "r2u4": 0.9
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "r2u1": 0.8,
+            "r2u2": 0.35000000000000003,
+            "r2u3": 0.65,
+            "r2u4": 0.75
+          }
+        },
+        {
+          "plane": "form",
+          "variance": "sheaf",
+          "value": {
+            "r2u3": 0.0,
+            "r2u4": 0.4
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "r2u0",
+          "r2u1",
+          "r2u2",
+          "r2u3",
+          "r2u4"
+        ]
+      },
+      "expected": {
+        "radius": 0.65,
+        "glues": false,
+        "vacuous": false,
+        "obstructionLocus": [
+          "r2u3",
+          "r2u4"
+        ],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.15000000000000002,
+            "locus": [
+              "r2u4"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "content",
+            "b": "form",
+            "distance": 0.5,
+            "locus": [
+              "r2u4"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "structure",
+            "b": "form",
+            "distance": 0.65,
+            "locus": [
+              "r2u3"
+            ],
+            "vacuous": false
+          }
+        ]
+      }
+    },
+    {
+      "note": "seeded random spread #3",
+      "restrictions": [
+        {
+          "plane": "content",
+          "variance": "sheaf",
+          "value": {
+            "r3u0": 0.6000000000000001,
+            "r3u1": 0.8500000000000001,
+            "r3u2": 0.45,
+            "r3u3": 0.1,
+            "r3u4": 0.30000000000000004
+          }
+        },
+        {
+          "plane": "structure",
+          "variance": "sheaf",
+          "value": {
+            "r3u0": 0.8,
+            "r3u2": 0.35000000000000003,
+            "r3u3": 0.15000000000000002,
+            "r3u4": 0.1
+          }
+        },
+        {
+          "plane": "form",
+          "variance": "sheaf",
+          "value": {
+            "r3u0": 0.0,
+            "r3u2": 0.1,
+            "r3u3": 0.65,
+            "r3u4": 0.7000000000000001
+          }
+        }
+      ],
+      "stalk": {
+        "units": [
+          "r3u0",
+          "r3u1",
+          "r3u2",
+          "r3u3",
+          "r3u4"
+        ]
+      },
+      "expected": {
+        "radius": 0.8,
+        "glues": false,
+        "vacuous": false,
+        "obstructionLocus": [
+          "r3u0",
+          "r3u4"
+        ],
+        "pairs": [
+          {
+            "a": "content",
+            "b": "structure",
+            "distance": 0.20000000000000004,
+            "locus": [
+              "r3u4"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "content",
+            "b": "form",
+            "distance": 0.6000000000000001,
+            "locus": [
+              "r3u0"
+            ],
+            "vacuous": false
+          },
+          {
+            "a": "structure",
+            "b": "form",
+            "distance": 0.8,
+            "locus": [
+              "r3u0"
+            ],
+            "vacuous": false
+          }
+        ]
+      }
+    }
+  ],
+  "metricCases": {
+    "cosine": [
+      {
+        "note": "orthogonal",
+        "a": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "b": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "distance": 1.0
+      },
+      {
+        "note": "identical",
+        "a": [
+          0.3,
+          0.4,
+          0.5
+        ],
+        "b": [
+          0.3,
+          0.4,
+          0.5
+        ],
+        "distance": 2.220446049250313e-16
+      },
+      {
+        "note": "one-zero",
+        "a": [
+          0.0,
+          0.0
+        ],
+        "b": [
+          0.2,
+          0.9
+        ],
+        "distance": 1.0
+      },
+      {
+        "note": "both-zero",
+        "a": [
+          0.0,
+          0.0
+        ],
+        "b": [
+          0.0
+        ],
+        "distance": 0.0
+      },
+      {
+        "note": "random",
+        "a": [
+          0.25,
+          0.30000000000000004,
+          0.05,
+          0.4,
+          0.8,
+          0.25
+        ],
+        "b": [
+          0.9,
+          0.2,
+          0.65,
+          0.4,
+          0.8500000000000001,
+          0.45
+        ],
+        "distance": 0.1800060251211434
+      }
+    ],
+    "jaccard": [
+      {
+        "note": "identical",
+        "a": [
+          "x",
+          "y"
+        ],
+        "b": [
+          "x",
+          "y"
+        ],
+        "distance": 0.0
+      },
+      {
+        "note": "disjoint",
+        "a": [
+          "x"
+        ],
+        "b": [
+          "y",
+          "z"
+        ],
+        "distance": 1.0
+      },
+      {
+        "note": "both-empty",
+        "a": [],
+        "b": [],
+        "distance": 0.0
+      },
+      {
+        "note": "half",
+        "a": [
+          "x",
+          "y"
+        ],
+        "b": [
+          "y",
+          "z"
+        ],
+        "distance": 0.6666666666666667
+      }
+    ],
+    "deckard": [
+      {
+        "note": "identical",
+        "a": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "em",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "b": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "em",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "q": 2,
+        "distance": 0.0
+      },
+      {
+        "note": "near",
+        "a": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "em",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "b": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "strong",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "q": 2,
+        "distance": 0.17891237502206686
+      },
+      {
+        "note": "far",
+        "a": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "em",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "b": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "list",
+              "children": [
+                {
+                  "label": "item",
+                  "children": []
+                },
+                {
+                  "label": "item",
+                  "children": []
+                },
+                {
+                  "label": "item",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "q": 2,
+        "distance": 0.5
+      },
+      {
+        "note": "q3",
+        "a": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "em",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "b": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "h1",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "p",
+              "children": [
+                {
+                  "label": "text",
+                  "children": []
+                },
+                {
+                  "label": "strong",
+                  "children": [
+                    {
+                      "label": "text",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "q": 3,
+        "distance": 0.22063965128792334
+      },
+      {
+        "note": "delimiter-escape",
+        "a": {
+          "label": "weird(label)",
+          "children": [
+            {
+              "label": "a,b",
+              "children": [
+                {
+                  "label": "c\\d",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "b": {
+          "label": "doc",
+          "children": [
+            {
+              "label": "list",
+              "children": [
+                {
+                  "label": "item",
+                  "children": []
+                },
+                {
+                  "label": "item",
+                  "children": []
+                },
+                {
+                  "label": "item",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "q": 2,
+        "distance": 0.5
+      }
+    ]
+  }
+}

@@ -60,19 +60,19 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "both perception-F implementations stand (F = surprise + complexity); the fixture bridge rides the RUN arc's first py projector pass.",
   },
   {
-    ts: "sensorium-consistency.ts", py: null, status: "owed-py-twin",
-    fixtures: [],
-    note: "the H0 li/ki consistency-radius dual; py twin owed at the RUN arc (RUN-ARC.md #3 — spectral_geometry.py carries the H0-adjacent floor).",
+    ts: "sensorium-consistency.ts", py: "sensorium_consistency.py", status: "witnessed",
+    fixtures: ["fixtures/sensorium-consistency-parity.json"],
+    note: "the H0 li/ki consistency-radius dual; py twin computes, TS re-computes and asserts (sensorium_consistency.py fixture regenerates).",
   },
   {
-    ts: "sensorium-fusion.ts", py: null, status: "owed-py-twin",
-    fixtures: [],
-    note: "the H1 cohomological gate + heat-diffusion fuse; py twin owed at the RUN arc (RUN-ARC.md #3 — H1 over the agreement nerve).",
+    ts: "sensorium-fusion.ts", py: "sensorium_fusion.py", status: "witnessed",
+    fixtures: ["fixtures/sensorium-fusion-parity.json"],
+    note: "the H1 gate over the agreement nerve; py twin computes dimH1/dimH0/R*_sem + the exact H0 consensus, TS asserts (sensorium_fusion.py fixture regenerates; the Chebyshev diffusion dial stays TS-side telemetry around the same P_ker target).",
   },
   {
-    ts: "sensorium-efe.ts", py: null, status: "owed-py-twin",
-    fixtures: [],
-    note: "the EFE keystone (pragmatic + epistemic + optionLoss, H1-gated); py twin owed at the RUN arc (RUN-ARC.md #3).",
+    ts: "sensorium-efe.ts", py: "sensorium_efe.py", status: "witnessed",
+    fixtures: ["fixtures/sensorium-efe-parity.json"],
+    note: "the EFE keystone (pragmatic + epistemic + optionLoss, H1-gated); py twin computes every term + the gate fork, TS asserts (sensorium_efe.py fixture regenerates).",
   },
   {
     ts: "arl-dial.ts", py: "nalu_gate.py", status: "owed-fixture",

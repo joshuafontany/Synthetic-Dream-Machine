@@ -1,0 +1,420 @@
+{
+  "oracle": "sensorium_fusion.py (py twin; TS re-computes and asserts)",
+  "cases": [
+    {
+      "note": "hollow triangle BELOW tolerance \u2014 edges absent, no obstruction",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "content",
+            "variance": "sheaf",
+            "value": {
+              "a": 0.5,
+              "b": 0.5
+            }
+          },
+          {
+            "plane": "structure",
+            "variance": "sheaf",
+            "value": {
+              "b": 0.7,
+              "c": 0.5
+            }
+          },
+          {
+            "plane": "form",
+            "variance": "sheaf",
+            "value": {
+              "c": 0.7,
+              "a": 0.7
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      },
+      "agreementTolerance": 0.1,
+      "expected": {
+        "dimH1": 0,
+        "dimH0": 3,
+        "cost": 0.0,
+        "kind": "reconcilable",
+        "edges": 0,
+        "triangles": 0,
+        "verdict": "fuse",
+        "consensus": {
+          "a": 0.6,
+          "b": 0.6,
+          "c": 0.6
+        }
+      }
+    },
+    {
+      "note": "hollow triangle ABOVE tolerance \u2014 one H1 generator",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "content",
+            "variance": "sheaf",
+            "value": {
+              "a": 0.5,
+              "b": 0.5
+            }
+          },
+          {
+            "plane": "structure",
+            "variance": "sheaf",
+            "value": {
+              "b": 0.7,
+              "c": 0.5
+            }
+          },
+          {
+            "plane": "form",
+            "variance": "sheaf",
+            "value": {
+              "c": 0.7,
+              "a": 0.7
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      },
+      "agreementTolerance": 0.3,
+      "expected": {
+        "dimH1": 1,
+        "dimH0": 1,
+        "cost": 0.0,
+        "kind": "ontological",
+        "edges": 3,
+        "triangles": 0,
+        "verdict": "hold-open"
+      }
+    },
+    {
+      "note": "filled triangle \u2014 a common witness kills the cocycle",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "content",
+            "variance": "sheaf",
+            "value": {
+              "w": 0.5,
+              "u1": 0.2
+            }
+          },
+          {
+            "plane": "structure",
+            "variance": "sheaf",
+            "value": {
+              "w": 0.5,
+              "u2": 0.8
+            }
+          },
+          {
+            "plane": "form",
+            "variance": "sheaf",
+            "value": {
+              "w": 0.5,
+              "u3": 0.4
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "w",
+            "u1",
+            "u2",
+            "u3"
+          ]
+        }
+      },
+      "agreementTolerance": 1e-09,
+      "expected": {
+        "dimH1": 0,
+        "dimH0": 1,
+        "cost": 0.0,
+        "kind": "reconcilable",
+        "edges": 3,
+        "triangles": 1,
+        "verdict": "fuse",
+        "consensus": {
+          "w": 0.5,
+          "u1": 0.2,
+          "u2": 0.8,
+          "u3": 0.4
+        }
+      }
+    },
+    {
+      "note": "two agreement components \u2014 dimH0 = 2",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "p0",
+            "variance": "sheaf",
+            "value": {
+              "x": 0.3
+            }
+          },
+          {
+            "plane": "p1",
+            "variance": "sheaf",
+            "value": {
+              "x": 0.3
+            }
+          },
+          {
+            "plane": "p2",
+            "variance": "sheaf",
+            "value": {
+              "y": 0.7
+            }
+          },
+          {
+            "plane": "p3",
+            "variance": "sheaf",
+            "value": {
+              "y": 0.7
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "x",
+            "y"
+          ]
+        }
+      },
+      "agreementTolerance": 1e-09,
+      "expected": {
+        "dimH1": 0,
+        "dimH0": 2,
+        "cost": 0.0,
+        "kind": "reconcilable",
+        "edges": 2,
+        "triangles": 0,
+        "verdict": "fuse",
+        "consensus": {
+          "x": 0.3,
+          "y": 0.7
+        }
+      }
+    },
+    {
+      "note": "two independent triangles, gaps 0.1/0.4 \u2014 tolerance 0.2 mints ONE",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "contents0",
+            "variance": "sheaf",
+            "value": {
+              "as0": 0.5,
+              "bs0": 0.5
+            }
+          },
+          {
+            "plane": "structures0",
+            "variance": "sheaf",
+            "value": {
+              "bs0": 0.6,
+              "cs0": 0.5
+            }
+          },
+          {
+            "plane": "forms0",
+            "variance": "sheaf",
+            "value": {
+              "cs0": 0.6,
+              "as0": 0.6
+            }
+          },
+          {
+            "plane": "contents1",
+            "variance": "sheaf",
+            "value": {
+              "as1": 0.5,
+              "bs1": 0.5
+            }
+          },
+          {
+            "plane": "structures1",
+            "variance": "sheaf",
+            "value": {
+              "bs1": 0.9,
+              "cs1": 0.5
+            }
+          },
+          {
+            "plane": "forms1",
+            "variance": "sheaf",
+            "value": {
+              "cs1": 0.9,
+              "as1": 0.9
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "as0",
+            "bs0",
+            "cs0",
+            "as1",
+            "bs1",
+            "cs1"
+          ]
+        }
+      },
+      "agreementTolerance": 0.2,
+      "expected": {
+        "dimH1": 1,
+        "dimH0": 4,
+        "cost": 0.0,
+        "kind": "ontological",
+        "edges": 3,
+        "triangles": 0,
+        "verdict": "hold-open"
+      }
+    },
+    {
+      "note": "two independent triangles \u2014 tolerance 0.5 mints BOTH (R*_sem = 1 bit)",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "contents0",
+            "variance": "sheaf",
+            "value": {
+              "as0": 0.5,
+              "bs0": 0.5
+            }
+          },
+          {
+            "plane": "structures0",
+            "variance": "sheaf",
+            "value": {
+              "bs0": 0.6,
+              "cs0": 0.5
+            }
+          },
+          {
+            "plane": "forms0",
+            "variance": "sheaf",
+            "value": {
+              "cs0": 0.6,
+              "as0": 0.6
+            }
+          },
+          {
+            "plane": "contents1",
+            "variance": "sheaf",
+            "value": {
+              "as1": 0.5,
+              "bs1": 0.5
+            }
+          },
+          {
+            "plane": "structures1",
+            "variance": "sheaf",
+            "value": {
+              "bs1": 0.9,
+              "cs1": 0.5
+            }
+          },
+          {
+            "plane": "forms1",
+            "variance": "sheaf",
+            "value": {
+              "cs1": 0.9,
+              "as1": 0.9
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "as0",
+            "bs0",
+            "cs0",
+            "as1",
+            "bs1",
+            "cs1"
+          ]
+        }
+      },
+      "agreementTolerance": 0.5,
+      "expected": {
+        "dimH1": 2,
+        "dimH0": 2,
+        "cost": 1.0,
+        "kind": "ontological",
+        "edges": 6,
+        "triangles": 0,
+        "verdict": "hold-open"
+      }
+    },
+    {
+      "note": "reconcilable \u2014 the gate fuses to the exact H0 consensus",
+      "assignment": {
+        "restrictions": [
+          {
+            "plane": "content",
+            "variance": "sheaf",
+            "value": {
+              "u1": 0.2,
+              "u2": 0.6
+            }
+          },
+          {
+            "plane": "structure",
+            "variance": "sheaf",
+            "value": {
+              "u1": 0.2,
+              "u2": 0.6,
+              "u3": 0.4
+            }
+          },
+          {
+            "plane": "form",
+            "variance": "sheaf",
+            "value": {
+              "u3": 0.4,
+              "u1": 0.2
+            }
+          }
+        ],
+        "stalk": {
+          "units": [
+            "u1",
+            "u2",
+            "u3"
+          ]
+        }
+      },
+      "agreementTolerance": 1e-09,
+      "expected": {
+        "dimH1": 0,
+        "dimH0": 1,
+        "cost": 0.0,
+        "kind": "reconcilable",
+        "edges": 3,
+        "triangles": 1,
+        "verdict": "fuse",
+        "consensus": {
+          "u1": 0.20000000000000004,
+          "u2": 0.6,
+          "u3": 0.4
+        }
+      }
+    }
+  ]
+}
