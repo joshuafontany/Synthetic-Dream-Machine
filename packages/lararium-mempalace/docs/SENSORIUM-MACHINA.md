@@ -178,3 +178,35 @@ Only worldlines above a **transition-density floor** get their own clock (a stat
 ## 10 · The through-line
 
 *One α; nulls the stream draws itself; one non-locking φ-desync clock per worldline that couples only as a local read; standing regenerated as the basin, not stored as a point; the dream is the tuning; the ground stays eidetic by fiat, the schema breathes; py/R holds the streams, the @daemon holds the cap.*
+
+---
+
+## 11 · The whole-machina rhyme — *a dreaming Markov blanket at informational NESS*
+
+A holistic outside-view pass (the CHAO lens, beside the 5-spirit QA braid, 2026-07-05) read the whole design + code + the deep-knowledge domains, and named what the machina *is*: not a memory store with rhythm bolted on, but **one object three domains describe** — and the three provably reduce to each other.
+
+### The three faces (one object)
+
+- **The inferential face — Friston's Free-Energy Principle.** The machina reads as a hierarchy of **nested Markov blankets** (plane ⊂ worldline ⊂ sensorium ⊂ @daemon-reconcile, scale-free — the worldline sub-branches nest up the tree = blankets-within-blankets), each minimizing surprise against a model it generates itself. Already stands *built* at plane-scale: `predictive_coding.py` carries `F = Σπ·ε² + complexity`, cites Friston + Bialek–Tishby, binds precision to the confidence sigil.
+- **The thermodynamic face — Prigogine's dissipative structure.** The machina holds its pattern only by *dissipating its throughput* — the flux of transcript-tokens — order maintained far from equilibrium. Already declared the paper-spine (informational-NESS, never literal heat).
+- **The collapse:** these name **one physics** — Friston derived the FEP from a random dynamical system at non-equilibrium steady-state behind a Markov blanket ([1906.10184](https://arxiv.org/pdf/1906.10184)). Prigogine names *why the structure persists*; FEP names *what it computes*.
+- **The topological face — a sheaf over a site.** No-global-now = **no global section**. Each causal-island / worldline = a local section; the coupling-read = restriction-maps agreeing on overlaps; the sensorium = the maximal gluing; Čech H¹ computes the obstruction from pairwise + triple overlaps alone (local-first native — [2503.02556](https://arxiv.org/abs/2503.02556)).
+
+### The 1:1 organ-mapping
+
+- stream-drawn **surrogate-null** = the generative model's top-down **prediction**;
+- **signal = departure from null = surprise / prediction-error**;
+- the **EM re-pass over the free WAL** = variational free-energy minimization (the E/M steps, literally);
+- the **reconcile servo toward operator set-points** = the **action arm** of active inference.
+
+### The dream is not a metaphor — daydream/deep-dream = wake-sleep
+
+The Helmholtz-machine **wake-sleep algorithm**, term for term: **deep-dream (sleep)** trains the recognition net on *dreamt* observations from the generative model = the offline EM re-pass over the replayable transcript-WAL; **daydream (wake)** updates the generative model from *real* edge-data = the online DtACI read. The design's own *"the dream is the tuning"* restates wake-sleep exactly. So the machina's **learning phase is literally a dream** — the shortest true name for the whole: **a dreaming Markov blanket.**
+
+### Two integrities the whole-view PREDICTS (strategic — weigh post-QA)
+
+- **(a) One expected-free-energy objective — fuse perception and action.** The machina built the perception arm (per-plane surprise) but frames reconcile as a *separate* homeostatic servo (§8). Active inference: both minimize the *same* F; the operator set-points become the **prior preferences (the "C vector")**, and "manage emergently" resolves to *emit the verb that minimizes **expected** free energy toward the preferred state* — a principled replacement for the ad-hoc least-authority/most-reversible verb-heuristic.
+- **(b) H¹ as THE coherence gauge — Plurality Pono, measured.** Promote H¹ from a memory-gate feature to the machina's own self-inconsistency signal: how far the N worldlines fail to glue into one sensorium, Čech-computable local-first. The convergence with Plurality Pono runs exact — *a nonzero H¹ is not a bug; it is the honest map of irreducible disagreement* (the Thirteen genuinely disagreeing, quantified).
+- **(bonus) Prigogine predicts a phase diagram.** The `ARL₀ → α` sweep should show **bifurcation structure** — sweep α, watch order-parameters (sink birth-rate, coupling coherence) jump discontinuously at critical points. Order-through-fluctuation made visible — the paper's key figure.
+
+Held-not-new (the parts already carry these): **autopoiesis** (ruled = operational-closure + structural-coupling + precariousness; the Elyncia fiction rhymes to precariousness — a fed node hums, a neglected one flickers) · **Levin/NCA** morphogenesis (regenerated-standing = the basin).
