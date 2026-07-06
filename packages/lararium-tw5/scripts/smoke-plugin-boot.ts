@@ -1,11 +1,13 @@
 /**
- * smoke-plugin-boot — verify the V.2 plugin-tiddler boot path.
+ * smoke-plugin-boot — verify the plugin-tiddler boot path.
  *
- * Boots a fresh TW5Engine in-process. The boot path pushes
- * LARES_MEMETIC_WIKITEXT_PLUGIN into preloadTiddlers; TW5's standard
- * plugin loader unpacks it. We then assert that the unpacked artifacts
- * are present in the running wiki:
- *   - cascade config tiddlers at lar:///config/Lar/AhuTemplate/...
+ * Boots a fresh TW5Engine in-process, passing LARES_MEMETIC_WIKITEXT_PLUGIN
+ * as boot()'s plugin argument (the caller supplies plugins explicitly — the
+ * engine preloads nothing by itself); TW5's standard plugin loader unpacks
+ * it. We then assert that the unpacked artifacts are present in the running
+ * wiki:
+ *   - cascade config tiddlers at lar:///config/Lar/AhuTemplate/... (html
+ *     scope — the markdown-meme templates burned at 07866b34)
  *   - template tiddlers at lar:///ha.ka.ba/@lararium/templates/...
  *   - parser registered for text/x-memetic-wikitext
  *   - sigil widget tiddlers present (kau, ahu, aka, kahea, loulou, pranala — all TW5 \\widget)
@@ -16,6 +18,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import { LARES_MEMETIC_WIKITEXT_PLUGIN_URI } from "@lararium/mesh";
 import { TW5Engine } from "../src/tw5-vm.js";
+import { LARES_MEMETIC_WIKITEXT_PLUGIN } from "../src/plugin-tiddler.generated.js";
 import { exportMemeText } from "../src/meme-write.js";
 import { TW5_CORE_SCRIPT_FILENAME, TW5_CORE_DIR } from "../src/generated-tw5-version.js";
 
@@ -23,38 +26,26 @@ async function main(): Promise<void> {
   const corePath = path.join(TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME);
   const coreBlob = new Uint8Array(readFileSync(corePath));
   const engine = new TW5Engine();
-  await engine.boot(coreBlob);
+  await engine.boot(coreBlob, [LARES_MEMETIC_WIKITEXT_PLUGIN as unknown as Record<string, unknown>]);
 
   const failures: string[] = [];
   const wiki = engine.wiki;
 
+  // The html-scope survivors — the markdown-meme template twins burned at 07866b34 (pre-tide).
   const expectedTitles = [
     LARES_MEMETIC_WIKITEXT_PLUGIN_URI,
-    "lar:///config/Lar/AhuTemplate/markdown-meme",
     "lar:///config/Lar/AhuTemplate/html",
-    "lar:///config/Lar/AkaTemplate/markdown-meme",
     "lar:///config/Lar/AkaTemplate/html",
-    "lar:///config/Lar/PranalaHeaderTemplate/markdown-meme",
     "lar:///config/Lar/PranalaHeaderTemplate/html",
-    "lar:///config/Lar/KaheaTemplate/markdown-meme",
     "lar:///config/Lar/KaheaTemplate/html",
-    "lar:///config/Lar/LoulouTemplate/markdown-meme",
     "lar:///config/Lar/LoulouTemplate/html",
-    "lar:///config/Lar/PranalaTemplate/markdown-meme",
     "lar:///config/Lar/PranalaTemplate/html",
-    "lar:///ha.ka.ba/@lararium/templates/ahu/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/ahu/html",
-    "lar:///ha.ka.ba/@lararium/templates/aka/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/aka/html",
-    "lar:///ha.ka.ba/@lararium/templates/pranala-header/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/pranala-header/html",
-    "lar:///ha.ka.ba/@lararium/templates/kahea/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/kahea/html",
-    "lar:///ha.ka.ba/@lararium/templates/loulou/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/loulou/html",
-    "lar:///ha.ka.ba/@lararium/templates/pranala/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/pranala/html",
-    "lar:///ha.ka.ba/@lararium/templates/meme/markdown-meme",
     "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher",
     "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu",
     "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka",
@@ -63,9 +54,7 @@ async function main(): Promise<void> {
     "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala-header",
     "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala",
     "lar:///config/Lar/KauTemplate/html",
-    "lar:///config/Lar/KauTemplate/markdown-meme",
     "lar:///ha.ka.ba/@lararium/templates/kau/html",
-    "lar:///ha.ka.ba/@lararium/templates/kau/markdown-meme",
     "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau",
   ];
   for (const title of expectedTitles) {
@@ -181,19 +170,14 @@ async function main(): Promise<void> {
     if (!rendered.includes("trailing slot prose")) {
       failures.push(`slot round-trip lost postamble; got: ${rendered.slice(0, 300)}`);
     }
-    if (!rendered.includes("```toml iam") || !rendered.includes('field = "value"')) {
+    // the emitter may align the toml assignment — match the field through flexible spacing.
+    if (!rendered.includes("```toml iam") || !/field\s+= "value"/.test(rendered)) {
       failures.push(`slot round-trip lost iam toml; got: ${rendered.slice(0, 300)}`);
     }
   }
 
-  // J.2d — pranala block render should also wrap its body with blank lines.
-  const pranalaTemplateText = engine.wiki.getTiddlerText(
-    "lar:///ha.ka.ba/@lararium/templates/pranala/markdown-meme",
-    "",
-  );
-  if (!pranalaTemplateText.includes(">>\n\n<<pranala-body>>\n\n<<~/pranala >>")) {
-    failures.push(`pranala markdown template missing wrapped blank lines; got: ${JSON.stringify(pranalaTemplateText)}`);
-  }
+  // (J.2d retired: the pranala markdown-meme template burned at 07866b34; its html twin renders an
+  // inline span — no wrapped-blank-lines shape to probe, so no trivial stand-in exists.)
 
   if (failures.length > 0) {
     console.error("✖ smoke FAILED");
@@ -208,7 +192,6 @@ async function main(): Promise<void> {
   console.log(`  deserializer captured prologue + postamble fields on parent`);
   console.log(`  slot-structure split: preamble + iam fields + postamble on slot child`);
   console.log(`  slot round-trip emission: preamble + iam toml + postamble reconstructed via meme-template`);
-  console.log(`  pranala block emission: body wrapped with blank lines before and after content`);
   process.exit(0);
 }
 
