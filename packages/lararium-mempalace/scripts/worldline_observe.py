@@ -152,10 +152,16 @@ def _add_chain(store, chain: list, root_anchor: str, tick) -> int:
     (the RUN for a main chain, the HANDLE for a spirit chain). Returns the edges added-or-seen count.
 
     Every turn links `parent -> uuid`; a null parentUuid links `root_anchor -> uuid`, so the chain hangs
-    off the braid-anchor and `worldline_of` climbs to ONE session root. `tick` = the caller ordinal."""
+    off the braid-anchor and `worldline_of` climbs to ONE session root. `tick` = the caller ordinal.
+
+    PHANTOM-ROOT GUARD: a first turn whose `parentUuid` points OUTSIDE this transcript's own uuid-set
+    (a RESUMED session descending from a prior-session turn NOT in this file) ALSO roots at `root_anchor`
+    — else that phantom parent, never a `to` of any edge, would surface as a spurious braid-root in
+    `roots()`. Descent stays local: a parent counts only when it names a turn this transcript carries."""
+    own = {link.uuid for link in chain}   # the transcript's OWN uuids — a parent outside them phantoms
     added = 0
     for link in chain:
-        frm = link.parent or root_anchor
+        frm = link.parent if (link.parent and link.parent in own) else root_anchor
         store.linear(frm, link.uuid, next(tick))
         added += 1
     return added

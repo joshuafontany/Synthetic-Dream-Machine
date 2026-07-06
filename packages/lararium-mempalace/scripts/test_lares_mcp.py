@@ -67,6 +67,33 @@ def test_coordinator_kapae_cascade_round_trip(tmp_path):
     assert tks[1] in _live_turn_keys(coord)          # move-not-delete: un-kapae restores it to recall
 
 
+def test_harvest_builds_the_worldline_and_kapae_cascades_the_subtree(tmp_path):
+    # THE CROWN (step-1): harvest now rides capture_and_observe, so the fork-DAG BUILDS on the shipping
+    # path — coordinator.worldline() returns the REAL braid (not empty). And kapae over a fork-root mutes
+    # the whole SUBTREE across the sensorium (not just the named turn).
+    coord = _coord(tmp_path)
+    coord.harvest("claude", _FIXTURE, wing="w")
+
+    wl_dag = coord.worldline()
+    assert wl_dag["edges"], "harvest built no worldline — the observe leg never reached the entrypoint"
+    # the fixture's main chain roots at the RUN (the session id, the transcript basename minus .jsonl)
+    assert "claude-main" in coord._worldline.roots()
+
+    # a fork subtree: bind a child branch under a captured turn, then kapae the branch-ROOT — the whole
+    # subtree mutes (root + its descendants), not one turn.
+    tks = sorted({m["metadata"].get("lar_turn_key") for m in coord.recall("turn", 8)["matches"]
+                  if m["metadata"].get("lar_turn_key")})
+    assert len(tks) >= 2
+    coord._worldline.fork(tks[0], tks[1], 100)          # tks[1] rides a branch under tks[0]
+    assert set(coord._worldline.branch_keys(tks[0])) >= {tks[0], tks[1]}   # the subtree carries both
+    muted = coord.kapae(tks[0], 101)                     # mute the branch-ROOT
+    assert set(muted["branch"]) >= {tks[0], tks[1]}      # the cascade muted the WHOLE subtree
+    live = _live_turn_keys(coord)
+    assert tks[0] not in live and tks[1] not in live     # recall excludes the muted subtree
+    coord.un_kapae(tks[0], 102)
+    assert {tks[0], tks[1]} <= _live_turn_keys(coord)    # move-not-delete restores the subtree
+
+
 def test_grid_seats_the_verbs_by_reversibility_and_trust():
     for v in LIFECYCLE_VERBS:
         assert seat_of(v) == "HOTL"       # every lifecycle verb runs reversible + trusted

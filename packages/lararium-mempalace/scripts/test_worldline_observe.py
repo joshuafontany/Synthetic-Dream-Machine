@@ -127,6 +127,24 @@ def test_capture_and_observe_lands_content_and_builds_the_worldline(tmp_path):
     assert store.worldline_of("u2") == "sess-xyz"
 
 
+def test_resumed_transcript_roots_at_the_run_not_a_phantom(tmp_path):
+    # step-4: a RESUMED session — the first turn's parentUuid points OUTSIDE this file (a prior-session
+    # turn not captured here). Without the guard, that phantom parent (never a `to` of any edge) would
+    # surface as a spurious braid-root. The guard re-roots it at the RUN, so roots() stands clean.
+    main = tmp_path / "sess-resumed.jsonl"
+    main.write_text("\n".join([
+        _main_line("r1", "PRIOR-SESSION-TURN", "user", "resume the thread", "2026-07-05T11:00:00Z"),
+        _main_line("r2", "r1", "assistant", "carrying on", "2026-07-05T11:00:05Z"),
+    ]) + "\n", encoding="utf-8")
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    observe_worldline(store, str(main))
+
+    assert store.roots() == ["sess-resumed"]               # the RUN, never the phantom prior-session turn
+    assert "PRIOR-SESSION-TURN" not in store.roots()
+    assert store.worldline_of("r1") == "sess-resumed"      # r1 climbs to the run (its phantom parent dropped)
+    assert store.worldline_of("r2") == "sess-resumed"
+
+
 def test_detect_rewind_finds_the_diverged_prefix(tmp_path):
     # step-3 (A): a content-hash-chain surfaces an edited prefix the content-independent cid would skip.
     import content_io as cio

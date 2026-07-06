@@ -44,6 +44,25 @@ class ContentStoreLandCap:
     def land(self, cid: str, text: str, vector, metadata: dict) -> None:
         self._store.put(cid, text, vector, metadata or {})
 
+    def stored_chain(self, cid: str):
+        """The `lar_chain` the DURABLE row for `cid` carries, else None — the rewind-compare read. A
+        landed cid whose stored chain differs from the re-derivation marks an edited/answered prefix the
+        content-INDEPENDENT cid alone would silent-skip."""
+        row = self._store.get(cid)
+        return None if row is None else (row.get("metadata") or {}).get("lar_chain")
+
+    def reland(self, cid: str, text: str, vector, metadata: dict) -> str:
+        """The REWIND cure for an already-landed cid whose re-derived text DIVERGED. On the IMMUTABLE
+        Memory ground (append_only) a committed atom never overwrites — RETRACT the stale (kapae-mute,
+        metadata-only, so it stops recalling) and let the fresh-cid append-vector re-land ride a later
+        commit; on a MUTABLE store the re-land OVERWRITES in place (the new text supersedes the stale).
+        Returns "retracted" (immutable ground) or "relanded" (mutable overwrite)."""
+        if self._store.append_only:
+            self._store.mute(cid)          # RETRACT — the stale stops recalling; fresh-cid re-land deferred
+            return "retracted"
+        self._store.put(cid, text, vector, metadata or {})   # RE-LAND — the overwrite supersedes the stale
+        return "relanded"
+
 
 class Pipeline:
     """A composed capture pipeline (nameless — identity = its cap-stack). run_pass reads the source
@@ -59,29 +78,59 @@ class Pipeline:
     def run_pass(self, pointer) -> dict:
         """Process the source once: re-derive the un-landed (is_landed skips already-durable), embed
         (if embed-in-engine) + land each, ordered + audited by the drain-ledger. Idempotent — a
-        re-run lands nothing new (the re-derivation crash-cure). Returns the pass summary."""
+        re-run lands nothing new (the re-derivation crash-cure).
+
+        THE REWIND GUARD (the SILENT-CORRUPT cure): the cid keys on source+chunk (content-INDEPENDENT),
+        so an edited/answered prefix re-derives the SAME cid — is_landed ALONE would skip the new text
+        and keep serving the stale. So on an already-landed cid this compares the re-derived `lar_chain`
+        (each link binds its text + its predecessor) to the STORED one: a match confirms the durable row
+        IS this text (the cheap no-op — the common path pays only this compare), a divergence surfaces a
+        rewind at this turn and rides the land-cap's `reland` cure (retract the stale, re-land where the
+        store permits) — NEVER a silent skip. Returns the pass summary."""
         drain = DrainLedger()
-        landed = skipped = 0
+        # A land-cap that carries the rewind pair (stored_chain + reland) arms the guard; a minimal one
+        # (is_landed/land only) rides the plain skip — the guard never crashes a generic pipeline.
+        rewind_aware = hasattr(self._land, "stored_chain") and hasattr(self._land, "reland")
+        landed = skipped = relanded = retracted = 0
         for rec in self._source(pointer):
             seq, cid = rec["seq"], rec["cid"]
             drain.stage(seq, cid)
             if self._land.is_landed(cid):
-                drain.commit(seq)          # already durable — the re-derivation no-op
-                skipped += 1
+                # Pay the chain-compare ONLY on an already-landed cid (the common no-divergence path
+                # stays cheap). A held chain (or a non-rewind-aware land-cap) = the re-derivation no-op.
+                if not rewind_aware or self._land.stored_chain(cid) == (rec.get("metadata") or {}).get("lar_chain"):
+                    drain.commit(seq)      # already durable, chain holds — the re-derivation no-op
+                    skipped += 1
+                    continue
+                # a REWIND — the stored text diverged from this re-derivation: never silent-skip it.
+                cure = self._land.reland(cid, rec.get("text", ""), self._vector_for(rec),
+                                         rec.get("metadata", {}))
+                drain.commit(seq)          # the retract/re-land IS durable — advance the watermark
+                if cure == "relanded":
+                    relanded += 1
+                else:
+                    retracted += 1
                 continue
-            vector = rec.get("vector")
-            if vector is None and self._embed is not None:
-                vector = self._embed(rec["text"])   # embed-in-engine (the warm model)
-            self._land.land(cid, rec.get("text", ""), vector, rec.get("metadata", {}))
+            self._land.land(cid, rec.get("text", ""), self._vector_for(rec), rec.get("metadata", {}))
             drain.commit(seq)              # advance the watermark AFTER the durable land (accept != land)
             landed += 1
         return {
             "landed": landed,
             "skipped": skipped,
+            "relanded": relanded,
+            "retracted": retracted,
             "watermark": drain.watermark(),
             "backlog": drain.backlog(),
             "audit": drain.exactly_once_audit(),
         }
+
+    def _vector_for(self, rec):
+        """The record's vector — the caller-supplied one, else embed-in-engine (the warm model) when the
+        pipeline carries an embed-cap; None when neither (a caller-vector land-cap tolerates it)."""
+        vector = rec.get("vector")
+        if vector is None and self._embed is not None:
+            vector = self._embed(rec["text"])   # embed-in-engine (the warm model)
+        return vector
 
 
 def compose_pipeline(*, source, land, embed=None, schema=None) -> Pipeline:

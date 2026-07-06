@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import content_io as cio
 import worldline_io as wl
-from capture_session import drive_capture
+from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
@@ -92,7 +92,9 @@ class LaresCoordinator:
         self._embed_one, self._model = embed_factory()
         self._dim = len(self._embed_one("probe"))           # pin the width off the warm cap
         self._content = cio.ContentStore(palace_path, expected_dim=self._dim, expected_model=self._model)
-        self._worldline = wl.WorldlineStore(palace_path)
+        # The fork-DAG rides the ONE canonical `.worldline` dir the capture wire builds into — the same
+        # helper both sides call, so a harvest's braid IS the DAG this coordinator reads (no path split).
+        self._worldline = wl.WorldlineStore(worldline_path(palace_path))
 
     def harvest(self, surface: str, pointer: str, *, all: bool = False, writeback: bool = False,
                 dry_run: bool = False, wing: "str | None" = None,
@@ -102,9 +104,11 @@ class LaresCoordinator:
 
         The isomorphism contract carries the CLI's rich args onto this one spine: `all` sweeps every
         surface, `writeback` re-enriches a wing's drawers, `dry_run` previews without landing. The
-        per-pointer capture rides `drive_capture` here; the sweep/writeback/preview SHAPING rides the
-        CLI skin + the deferred @daemon-cap-wire (this task holds SHAPE + SEATS, never the re-point), so
-        the params stand in the signature and thread through as the wire lands them."""
+        per-pointer capture rides `capture_and_observe` here — it lands the content AND builds the
+        worldline fork-DAG into the shared `.worldline`, so `worldline()`/`kapae` read a REAL braid on
+        the shipping path; the sweep/writeback/preview SHAPING rides the CLI skin + the deferred
+        @daemon-cap-wire (this task holds SHAPE + SEATS, never the re-point), so the params stand in the
+        signature and thread through as the wire lands them."""
         if all or writeback or dry_run:
             # REFUSE HONESTLY, never silently ignore: dry_run especially would otherwise LAND on the
             # append-only ground (the tool advertises a preview it can't yet give). The sweep/writeback/
@@ -112,8 +116,8 @@ class LaresCoordinator:
             raise NotImplementedError(
                 "harvest all/writeback/dry_run: the sweep/writeback/preview shaping rides the deferred "
                 "@daemon-cap-wire (not yet wired) — refusing rather than capturing for real")
-        return drive_capture(self._palace, surface, pointer, wing=wing or self._wing, room=room,
-                             embed_factory=lambda: (self._embed_one, self._model))
+        return capture_and_observe(self._palace, surface, pointer, wing=wing or self._wing, room=room,
+                                   embed_factory=lambda: (self._embed_one, self._model))
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None) -> dict:

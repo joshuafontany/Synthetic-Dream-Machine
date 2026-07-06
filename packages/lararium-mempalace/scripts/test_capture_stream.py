@@ -53,3 +53,49 @@ def test_partial_then_full_recovers_the_tail(tmp_path):
     assert res["landed"] == 2 and res["skipped"] == 3        # the tail lands, the first 3 skipped
     assert store.get("c-5")["document"] == "turn 5"
     assert res["audit"]["ok"] and res["watermark"] == 5
+
+
+def _chained(texts):
+    # records whose cid is content-INDEPENDENT (c-0,c-1,c-2 — STABLE across passes) yet whose lar_chain
+    # binds each link's text + its predecessor (the capture_sources content-hash-chain grain). An edited
+    # text keeps its cid but BREAKS the chain — the exact SILENT-CORRUPT surface.
+    from capture_sources import _sha16
+    prev, out = "", []
+    for i, t in enumerate(texts):
+        chain = _sha16(t + prev)
+        prev = chain
+        out.append({"seq": i + 1, "cid": f"c-{i}", "text": t,
+                    "metadata": {"wing": "w", "room": "r", "lar_turn_key": f"t{i}", "lar_chain": chain}})
+    return out
+
+
+def test_rewind_is_detected_not_silent_skipped_mutable(tmp_path):
+    # THE CROWN (KA/BA/YIN): a turn's text changes between passes. is_landed alone would silent-skip the
+    # edited cid (content-INDEPENDENT) and keep serving the stale. The chain-compare DETECTS the rewind;
+    # a mutable store re-lands the new text (the overwrite supersedes) — never a silent skip.
+    store = cio.ContentStore(str(tmp_path / ".sess"))       # MUTABLE (append_only off)
+    pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store), embed=_fake_embed)
+
+    pipe.run_pass(_chained(["a", "b", "c"]))
+    assert store.get("c-1")["document"] == "b"
+
+    res = pipe.run_pass(_chained(["a", "B!", "c"]))         # turn-1 edited → its chain + turn-2's diverge
+    assert res["skipped"] == 1                               # c-0 ("a") holds — the cheap no-op
+    assert res["relanded"] == 2 and res["retracted"] == 0   # c-1 + c-2 re-landed (NOT silent-skipped)
+    assert store.get("c-1")["document"] == "B!"             # the new content LANDS over the stale
+    assert res["audit"]["ok"] and res["watermark"] == 3
+
+
+def test_rewind_retracts_on_the_immutable_ground(tmp_path):
+    # on the IMMUTABLE Memory ground a committed atom never overwrites — the rewind RETRACTS (kapae-mutes)
+    # the stale so recall stops serving it (the fresh-cid append-vector re-land rides a later commit).
+    store = cio.ContentStore(str(tmp_path / ".mem"), required_keys={"wing", "room"}, append_only=True)
+    pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store), embed=_fake_embed)
+
+    pipe.run_pass(_chained(["a", "b", "c"]))
+    res = pipe.run_pass(_chained(["a", "B!", "c"]))
+    assert res["skipped"] == 1                               # c-0 holds
+    assert res["retracted"] == 2 and res["relanded"] == 0   # the immutable ground retracts, never overwrites
+    assert store.get("c-1")["metadata"].get("lar_kapae") == "1"   # the stale is muted — recall excludes it
+    assert store.get("c-1")["document"] == "b"             # move-not-delete: the committed atom stays, muted
+    assert res["audit"]["ok"]

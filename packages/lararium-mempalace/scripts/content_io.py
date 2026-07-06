@@ -105,6 +105,13 @@ class ContentStore:
                              f"{self._expected_model!r} — a model swap over an existing palace searches an "
                              "incomparable space (palace-history identity floor); re-embed or open under the held model")
 
+    @property
+    def append_only(self) -> bool:
+        """Whether this store rides the IMMUTABLE-GROUND policy — a committed atom never overwrites (the
+        Memory sensorium). The rewind cure reads this to CHOOSE its move: retract-and-mute on immutable
+        ground vs a re-land overwrite on a mutable store."""
+        return self._append_only
+
     def _get_raw(self, cid: str) -> "dict | None":
         got = self._col.get(ids=[cid], include=["documents", "metadatas"])
         ids = got.get("ids") or []

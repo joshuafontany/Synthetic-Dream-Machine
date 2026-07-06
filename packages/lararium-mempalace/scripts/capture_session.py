@@ -39,6 +39,14 @@ from capture_sources import Record, SourceCap, resolve_source
 from sensorium import compose_memory_sensorium
 
 
+def worldline_path(palace_path: str) -> str:
+    """The ONE canonical worldline dir a Memory palace carries — a `.worldline` BESIDE the chroma palace
+    (the raw-sqlite-beside-chroma idiom). Both the capture wire (`capture_and_observe`) and the
+    LaresCoordinator resolve the fork-DAG HERE, so a harvest BUILDS the DAG the coordinator later reads —
+    the root-vs-`.worldline` path split closed."""
+    return os.path.join(palace_path, ".worldline")
+
+
 def stamp_embedder(source: SourceCap, model: str) -> SourceCap:
     """Wrap a source-cap so every record carries the embedder-model stamp (`lar_embedder_model`) — the
     driver owns the embedder identity, the source owns the transcript schema. The store's model-floor
@@ -91,7 +99,7 @@ def capture_and_observe(palace_path: str, surface: str, pointer: str, *, wing: "
     if surface == "claude":
         from worldline_observe import observe_worldline
         from worldline_io import WorldlineStore
-        wpath = worldline_palace or os.path.join(palace_path, ".worldline")
+        wpath = worldline_palace or worldline_path(palace_path)
         store = WorldlineStore(wpath)
         try:
             worldline = observe_worldline(store, pointer)
@@ -108,7 +116,10 @@ def main() -> None:
     ap.add_argument("--wing", default=None, help="the schema-floor wing (required for claude/codex; copilot defaults per-session)")
     ap.add_argument("--room", default="conversations", help="the schema-floor room")
     args = ap.parse_args()
-    summary = drive_capture(args.palace, args.surface, args.pointer, wing=args.wing, room=args.room)
+    # capture_and_observe on the shipping entrypoint: land the content AND build the worldline fork-DAG in
+    # one pass (the demux 1b wire reaches the live driver, not just the tests). Codex/copilot land content
+    # only; the claude surface also builds the braid beside the palace.
+    summary = capture_and_observe(args.palace, args.surface, args.pointer, wing=args.wing, room=args.room)
     sys.stdout.write(json.dumps(summary) + "\n")
 
 
