@@ -215,3 +215,14 @@ def test_cmd_induce_graceful_skip_when_no_store(tmp_path):
     summary = json.loads(buf.getvalue().strip().splitlines()[-1])
     assert summary["forms"] == 0
     assert "form-skipped" in summary["note"]
+
+
+def test_mine_sequences_bounds_long_repetitive_streams():
+    """The sequence miner slices each stream to _MAX_SEQ_SYMBOLS before mining — long
+    repetitive streams (the sectioned-chant regime: thousands of near-identical symbols)
+    explode the closed-pattern lattice unbounded; the capped miner returns promptly and
+    still surfaces the recurring patterns."""
+    streams = [(["paragraph", "inline", "text"] * 1200) + [f"tail{i}"] for i in range(8)]
+    out = fi.mine_sequences(streams, 2, max_forms=8, topk=True)
+    assert out                                          # the recurring motif still surfaces
+    assert all(len(f["seq"]) <= fi._MAX_SEQ_SYMBOLS for f in out)

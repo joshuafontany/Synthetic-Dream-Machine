@@ -73,6 +73,8 @@ _MAX_TREES = 20_000          # forest size ceiling for a single induce
 _MAX_STRUCTURE_COUNT = 500   # per-structure recurrence-expansion cap (a hot shape can't flood)
 _MAX_SUBTREE_NODES = 6       # the largest embedded subtree the TreeMiner grows to
 _MAX_CANDIDATES = 4_000      # candidate-pool ceiling (across all miners)
+_MAX_SEQ_SYMBOLS = 512       # per-stream slice the sequence miner reads (see mine_sequences)
+_MAX_SEQ_TOPK = 16           # topk ceiling for the closed-sequence search (see mine_sequences)
 _MAX_FORMS_DEFAULT = 64      # constructicon-size ceiling (the MDL rounds stop far sooner)
 _DEFAULT_MIN_SUPPORT = 2     # a template must recur at least this many trees/sequences
 _DP_MIN = 0.25               # the ΔP association floor for a candidate bigram
@@ -277,15 +279,29 @@ def mine_sequences(streams: list, min_support: int, *, max_forms: int = _MAX_FOR
     `topk=True` rides the package's branch-and-bound top-k (support-strongest first) instead
     of the exhaustive closed enumeration — `frequent(closed=True)` walks the WHOLE pattern
     lattice before any slice, which grinds for minutes on real ~500-symbol streams; the
-    bounded per-pass induce needs the strongest max_forms only."""
+    bounded per-pass induce needs the strongest max_forms only.
+
+    THREE bounds keep the pattern search from exploding on long repetitive streams (the
+    sectioned markdown chant regime: thousands of near-identical symbols), all measured
+    on the kumulipo bed: each stream slices to its first _MAX_SEQ_SYMBOLS (800-symbol
+    streams blow past 500s, uncapped never returns); the top-k request caps at
+    _MAX_SEQ_TOPK; and the top-k branch drops closed-pruning — the package's
+    canclosedprune/islocalclosed scans grind NON-monotonically (k=16 closed mines 54
+    streams in 0.1s yet blows past 60s on a 43-stream subset of the same data; plain
+    top-k runs 0.03-0.05s on both), and the MDL rounds already price away the redundant
+    non-closed prefixes while verifying every candidate against the FULL streams (the
+    same bounded-work discipline as _MAX_TREES / _MAX_CANDIDATES above)."""
+    streams = [s[:_MAX_SEQ_SYMBOLS] for s in streams]
     try:
         from prefixspan import PrefixSpan  # type: ignore
 
         ps = PrefixSpan(streams)
         ps.minlen = min_len
         if topk:
-            # branch-and-bound top-k by support, closed; the support floor still applies.
-            raw = [(s, p) for s, p in ps.topk(max_forms, closed=True) if s >= min_support]
+            # branch-and-bound top-k by support, WITHOUT closed-pruning (fragile, see
+            # above) — the support floor still applies, MDL dedups the prefixes.
+            raw = [(s, p) for s, p in ps.topk(min(max_forms, _MAX_SEQ_TOPK), closed=False)
+                   if s >= min_support]
         else:
             # closed=True → the BIDE-style closed set; frequent(minsup) is absolute-support.
             raw = ps.frequent(min_support, closed=True)
