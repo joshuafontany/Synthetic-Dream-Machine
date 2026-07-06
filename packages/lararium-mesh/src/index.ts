@@ -43,6 +43,7 @@ export * from "./tiddler-store.js";
 export * from "./recipe.js";
 export { bagStackFromRec } from "./bag-stack-from-rec.js";
 export * from "./composite-store.js";
+export * from "./sensorium-consistency-core.js";
 export * from "./itc.js";
 export * from "./ffz-clock.js";
 export * from "./ffz-project.js";

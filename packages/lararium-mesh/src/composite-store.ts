@@ -65,6 +65,21 @@ export interface ResidencyTouch {
   touch(bagUrl: string): Promise<void> | void;
 }
 
+/**
+ * One causal-stamped entry the composite resolves — a title's TOPMOST live manifestation plus the
+ * bag that answered and the causal coordinates (Automerge heads + changeId) it read AS-OF. The
+ * snapshot unit a wiki-sensorium projection folds over. See {@link CompositeStore.entries}.
+ */
+export interface CompositeEntry {
+  readonly title:    string;
+  readonly bagId:    string;
+  readonly record:   LarTiddlerRecord;
+  /** the answering layer's Automerge heads at read time, or null for a store with no CRDT backing. */
+  readonly heads:    readonly string[] | null;
+  /** the record's causal-history change-id, or null when unstamped. */
+  readonly changeId: string | null;
+}
+
 export class CompositeStore implements LarTiddlerStore {
   // Ordered lowest-priority → highest-priority.
   private readonly layers:      CompositeLayer[] = [];
@@ -478,6 +493,37 @@ export class CompositeStore implements LarTiddlerStore {
 
   get layerCount(): number { return this.layers.length; }
   get layerIds(): string[] { return this.layers.map((l) => l.bagId); }
+
+  /**
+   * Fold the island's OWN resolved surface into causal-stamped entries — a THIN pass over the
+   * existing `listVisible` → `resolveTopmost` cascade, no new iterator abstraction. Each title
+   * resolves to its TOPMOST live manifestation (kāpae-honored: a higher-bag tombstone stops the
+   * cascade, so a hidden title never surfaces), and each entry carries the answering bag plus a
+   * causal stamp — the layer's Automerge `getHeads()` (null for stores with no CRDT backing) and
+   * the record's `changeId` — so a snapshot reader knows AS-OF-WHICH-log it read (no global now).
+   *
+   * The read scopes to THIS composite's registered bagStack alone (local-first): it never reaches
+   * across islands. A wiki-sensorium projection folds this into its per-tiddler planes.
+   */
+  async entries(): Promise<CompositeEntry[]> {
+    const titles = await this.listVisible();
+    const out: CompositeEntry[] = [];
+    for (const title of titles) {
+      const top = await this.resolveTopmost(title);
+      if (!top) continue;   // a title tombstoned at the top drops out (kāpae) — never surfaced
+      const layer = this.layers.find((l) => l.bagId === top.bagId);
+      const getHeads = layer?.store.getHeads;
+      const heads = typeof getHeads === "function" ? await getHeads.call(layer!.store) : null;
+      out.push({
+        title,
+        bagId: top.bagId,
+        record: top.record,
+        heads,
+        changeId: top.record.meta?.changeId ?? null,
+      });
+    }
+    return out;
+  }
 
   // ---------------------------------------------------------------------------
   // Recipe helpers — topology-derived VM support

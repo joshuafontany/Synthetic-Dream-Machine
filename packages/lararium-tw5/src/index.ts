@@ -12,6 +12,23 @@
  *   builds the widgetTree and fakeDOM on each render call.
  */
 
+export {
+  WikiStoreAdapter,
+  projectWikiSensorium,
+  structureSalience,
+  shingles,
+  buildFixtureIsland,
+  runWikiConsistencyWitness,
+  GLUE_SEEDS,
+  OBSTRUCT_SEEDS,
+  FORM_SHINGLE_K,
+} from "./wiki-store-adapter.js";
+export type {
+  WikiTiddlerReading,
+  WikiSensoriumSnapshot,
+  FixtureTiddler,
+  WikiConsistencyWitness,
+} from "./wiki-store-adapter.js";
 export { TW5Engine } from "./tw5-vm.js";
 export { bagScopeOf, qualifyStackTag, stackOf } from "./has-stack.js";
 export type { StackEntry } from "./has-stack.js";
