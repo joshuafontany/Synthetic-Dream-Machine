@@ -44,6 +44,20 @@ async function compose(...args) {
   catch (e) { console.error(`  docker ${args.join(" ")} failed: ${e.message}`); return false; }
 }
 
+// This witness STOPS a container mid-run; an interrupt between the stop and the restore would leave the
+// mesh degraded. Track whether the relay stands down and restore it on any exit path — a signal (Ctrl-C),
+// an uncaught throw, or normal completion — so an aborted run never orphans a stopped node.
+let relay1Down = false;
+async function restoreRelay1() {
+  if (!relay1Down) return;
+  relay1Down = false;
+  console.log(`  restore: starting ${dockerRelay1} back up…`);
+  await compose("start", dockerRelay1);
+}
+for (const sig of ["SIGINT", "SIGTERM"]) {
+  process.on(sig, () => { void restoreRelay1().finally(() => process.exit(130)); });
+}
+
 const fail = (msg) => { console.error(`✗ PARTITION WITNESS FAILED: ${msg}`); process.exitCode = 1; };
 
 // ── baseline ──────────────────────────────────────────────────────────────────────────────────────
@@ -55,6 +69,7 @@ console.log(`  baseline: relay-2 carries "${NEEDLE}", pointer version=${base.ver
 // ── partition: cut relay-1 out ──────────────────────────────────────────────────────────────────────
 console.log(`  partition: stopping ${dockerRelay1} (relay-2's only configured peer)…`);
 if (!(await compose("stop", dockerRelay1))) { fail("could not stop the relay — restore the mesh by hand"); process.exit(1); }
+relay1Down = true;   // arm the restore-on-exit guard
 
 // SETTLE past any in-flight relay-1 pull that was already in flight at the moment of the stop — record the
 // version AFTER the chain has fully drained, so no single stale pull can masquerade as a live direct one.
@@ -77,9 +92,8 @@ for (let i = 1; i <= 25 && !advanced; i++) {
   } catch (e) { lastReason = String(e.message); console.log(`  attempt ${i}: ${lastReason}`); }
 }
 
-// ── restore relay-1 regardless of verdict ────────────────────────────────────────────────────────────
-console.log(`  restore: starting ${dockerRelay1} back up…`);
-await compose("start", dockerRelay1);
+// ── restore relay-1 regardless of verdict (the exit guard also covers an interrupt before this point) ──
+await restoreRelay1();
 
 // ── verdict ───────────────────────────────────────────────────────────────────────────────────────
 if (advanced) {
