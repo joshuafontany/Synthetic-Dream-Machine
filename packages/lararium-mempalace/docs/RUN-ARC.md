@@ -10,7 +10,7 @@ The enact-flow built the sensorium machina's instruments and proved the **mechan
 
 ## The ruling that shapes it (S5, operator)
 
-1. **ALL machine-code runs PY.** The TS `@daemon` (the wiki-island VM worker) **coordinates only** — it is not a compute home.
+1. **ALL machine-code runs PY.** The TS `@daemon` (the wiki-island VM worker) **coordinates only** — it is not a compute home. (Scoping: the wiki sensing ITSELF — the wiki-sensorium arc's cohere/recall over the daemon's own islands, VM-native TS — is the coordinator's **proprioception** and sits inside the coordinator seat, not the machina's compute; no breach of this ruling.)
 2. **`~/.mempalace/palace` = comparator only** (the clean dev-baseline). The RUN never writes it — a contaminated comparator loses its value.
 3. **Separate sensoriums:**
    - **GOAL** — a full **memory-sensorium of the AI-Operator worldlines** (the real session-chats + live capture).
