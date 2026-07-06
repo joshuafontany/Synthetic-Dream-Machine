@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from typing import Callable, Iterable, Iterator
 
@@ -72,6 +73,31 @@ def drive_capture(palace_path: str, surface: str, pointer: str, *, wing: "str | 
     summary = sensorium.capture(pointer)
     return {"surface": surface, "pointer": pointer, "wing": wing, "room": room,
             "embedder_model": model, "embedder_dim": dim, **summary}
+
+
+def capture_and_observe(palace_path: str, surface: str, pointer: str, *, wing: "str | None",
+                        room: str = "conversations", worldline_palace: "str | None" = None,
+                        embed_factory: "Callable | None" = None) -> dict:
+    """Drive the capture pass, THEN build the worldline fork-DAG over the SAME transcript (the demux 1b
+    wire). The two legs stay decoupled: `drive_capture` lands the content untouched; this coordinator
+    then feeds `worldline_io` the braid so `worldline_of` / `roots` / kapae read the landed turn-keys.
+
+    Only the Claude surface carries the parentUuid + `subagents/` provenance the observer reads, so the
+    worldline leg guards on it (codex/copilot lands content only, `worldline` reads None). `worldline_palace`
+    defaults to a `.worldline` dir BESIDE the Memory palace (the raw-sqlite-beside-chroma idiom)."""
+    summary = drive_capture(palace_path, surface, pointer, wing=wing, room=room, embed_factory=embed_factory)
+
+    worldline = None
+    if surface == "claude":
+        from worldline_observe import observe_worldline
+        from worldline_io import WorldlineStore
+        wpath = worldline_palace or os.path.join(palace_path, ".worldline")
+        store = WorldlineStore(wpath)
+        try:
+            worldline = observe_worldline(store, pointer)
+        finally:
+            store.close()
+    return {**summary, "worldline": worldline}
 
 
 def main() -> None:
