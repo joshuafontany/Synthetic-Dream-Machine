@@ -608,10 +608,10 @@ export interface DaemonMsg_WikiAlert {
 }
 
 /**
- * Vessel → wiki island: one S2 sensorium read-signal ridden over the worker wire. The message
+ * Vessel → wiki island: one sensorium read-signal ridden over the worker wire. The message
  * TYPE carries the signal name itself (`sensorium:cohere` / `sensorium:recall` / `sensorium:couple`),
  * so the kernel's dispatch delivers it STRAIGHT to the island's `hasWikiSensorium` cap — the wire
- * admits the S2 signal surface, it never re-implements the verbs. The island answers on its
+ * admits the wiki-sensorium cap's signal surface, it never re-implements the verbs. The island answers on its
  * `sensorium:frame` event (IslandMsg_Event), correlated by `requestId`; the vessel routes that
  * frame back through onWorkerEvent. Read-only end to end — no field of this message writes.
  */
@@ -623,7 +623,9 @@ export interface WikiMsg_SensoriumSignal {
   args?: Record<string, unknown>;
 }
 
-/** The three S2 verb-signal names the wire admits — ONE source; the tw5 cap types its claims against this. */
+/** The three verb-signal names the wire admits — ONE source; the tw5 cap types its claims against this.
+ *  The generic `sensorium:*` prefix stands as an INTENTIONAL namespace claim — the wiki sensorium rides
+ *  it first; future sensoria share the prefix (a rename fork stays the operator's). */
 export const SENSORIUM_SIGNAL_TYPES = ["sensorium:cohere", "sensorium:recall", "sensorium:couple"] as const;
 export type SensoriumSignalType = typeof SENSORIUM_SIGNAL_TYPES[number];
 

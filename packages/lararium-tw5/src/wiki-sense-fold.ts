@@ -85,7 +85,7 @@ export function structureSalience(text: string): number {
 export interface DocStalk {
   /** the form probe: the doc's distinct char k-gram shingles. */
   readonly shingleSet: ReadonlySet<string>;
-  /** the structure probe: sigil-head → how many strata carry it (the L2 reader's typed heads). */
+  /** the structure probe: sigil-head → how many strata carry it (the memetic-wikitext reader's typed heads). */
   readonly headCounts: ReadonlyMap<string, number>;
   /** the structure-plane load indicator [0,1]. */
   readonly structure: number;
@@ -97,7 +97,7 @@ export interface DocStalk {
  */
 export function deriveDocStalk(text: string): DocStalk {
   const headCounts = new Map<string, number>();
-  // the L2 reader stratifies the body; frame sigils bound rather than steer, so they stay out of
+  // the memetic-wikitext reader stratifies the body; frame sigils bound rather than steer, so they stay out of
   // the head index (a recall for "ahu" would name structure that governs nothing). The explicit
   // sourceCid skips the default sha256 stamp — the stalk reads strata only, and the VM sandbox
   // carries no TextEncoder for the crypto path.
@@ -173,7 +173,7 @@ export function corpusPlanes(fold: CorpusFold): CorpusPlanes {
 
 // ── cohere — the consistency verdict over a fold (BOTH mesh organs, one assignment) ─────────────────
 
-/** The cohere() verdict — the S0 planes folded through BOTH mesh organs over one snapshot. */
+/** The cohere() verdict — the consistency keystone's planes folded through BOTH mesh organs over one snapshot. */
 export interface WikiCoherenceVerdict {
   /** the Robinson li-radius: radius · glues · vacuous · per-pair loci · the union obstruction locus. */
   readonly consistency: ConsistencyRadius;
@@ -304,7 +304,7 @@ export function contentTier(fold: CorpusFold, probe: string, limit: number = REC
   return rankHits(hits, limit);
 }
 
-/** structure — the sigil-head strata the L2 reader typed; score = matching-strata count, max-normalized. */
+/** structure — the sigil-head strata the memetic-wikitext reader typed; score = matching-strata count, max-normalized. */
 export function structureTier(fold: CorpusFold, sigilHead: string, limit: number = RECALL_LIMIT): WikiRecallHit[] {
   if (sigilHead.length === 0) return [];
   const head = sigilHead.toLowerCase();

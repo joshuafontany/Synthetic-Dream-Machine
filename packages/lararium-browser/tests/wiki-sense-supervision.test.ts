@@ -1,8 +1,8 @@
 /**
- * wiki-sense-supervision (browser tier) — the S3 supervision witness over a REAL worker wire.
+ * wiki-sense-supervision (browser tier) — the supervision-reads witness over a REAL worker wire.
  *
  * The node tier proves the supervisor's hull in-process; THIS tier proves the whole crossing in
- * Chromium: the pool mounts a genuine Web Worker island carrying the S2 cap (the sensorium fixture),
+ * Chromium: the pool mounts a genuine Web Worker island carrying the wiki-sensorium cap (the sensorium fixture),
  * the supervisor's cohere/recall asks ride `placeSensoriumSignal` over postMessage, the island's
  * SENSORIUM_FRAME events route back through onWorkerEvent, and the proof-hold record lands in the
  * daemon-side store — daemon→island→back, end to end. The confused-deputy ward fires on an
@@ -36,7 +36,7 @@ const MOUNT_SPEC = {
   grants: { islandUrl: "automerge:fixture-lararium-url" },
 };
 
-describe("S3 wiki-sense supervision — browser tier (real worker wire)", () => {
+describe("wiki-sense supervision reads — browser tier (real worker wire)", () => {
   let pool: BrowserVesselIslandPool | null = null;
   let supervisor: WikiSenseSupervisor | null = null;
 
@@ -73,7 +73,7 @@ describe("S3 wiki-sense supervision — browser tier (real worker wire)", () => 
     const s = await standSupervised(proofStore);
 
     const reading = await s.cohere(ISLAND_A, { hold: true });
-    // the S2 verbs answered from INSIDE the worker (GLUE corpus → glues, gate reconcilable).
+    // the wiki-sensorium cap's verbs answered from INSIDE the worker (GLUE corpus → glues, gate reconcilable).
     expect(reading.verdict.consistency.glues).toBe(true);
     expect(reading.verdict.gate.kind).toBe("reconcilable");
     expect(reading.verdict.corpusSize).toBe(3);
@@ -89,7 +89,7 @@ describe("S3 wiki-sense supervision — browser tier (real worker wire)", () => 
     for (const seed of GLUE_SEEDS) expect(serialized).not.toContain(seed.text);
   });
 
-  test("recall rides the same wire — the S2 tiers answer from the worker island", async () => {
+  test("recall rides the same wire — the cap's tiers answer from the worker island", async () => {
     const s = await standSupervised();
     const result = await s.recall(ISLAND_A, { likeTitle: "canon-a" });
     expect(result.form.length).toBeGreaterThan(0);

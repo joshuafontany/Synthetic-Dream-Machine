@@ -15,7 +15,7 @@ module-type: tiddlerdeserializer
  * TiddlerFields[] (parent + ahu-slot children) leave.
  * Non-TW5 adaptation stops at this membrane; decomposition law begins here.
  *
- * Uses parseMemeText() from @lararium/mesh/meme-ast — isomorphic, no TW5 dep.
+ * Uses parseMemeText() from @lararium/tw5/meme-ast — isomorphic, no TW5 dep.
  *
  * Incoming (disk → wiki):
  *   memeticWikitextDeserializer — TW5 tiddlerdeserializer contract.

@@ -1,8 +1,8 @@
 /**
- * wiki-sensorium-cap (node tier) — the S2 cap-fold witness, node substrate.
+ * wiki-sensorium-cap (node tier) — the cap-fold witness, node substrate.
  *
  * The SAME hull runs here and in the browser tier (browser/tests/wiki-sensorium-cap.test.ts):
- * `runWikiSensoriumWitness()` stands the S0 fixture islands and drives every perceiver verb —
+ * `runWikiSensoriumWitness()` stands the consistency keystone's fixture islands and drives every perceiver verb —
  * cohere (glue + seeded obstruction, both organs), form-recall (shingle-Jaccard neighbors), the
  * semantic seam (the deterministic letter-frequency embedder — no model), and couple's honest
  * unbuilt refusal. This tier ALSO witnesses the node-reachable seams: the content/structure recall
@@ -23,8 +23,8 @@ import {
 import { buildFixtureIsland, GLUE_SEEDS } from "../src/wiki-store-adapter.js";
 import type { IslandContext } from "../src/island-context.js";
 
-describe("S2 hasWikiSensorium — node tier", () => {
-  test("cohere folds the S0 planes through BOTH organs — the radius flips, the gate classifies", async () => {
+describe("hasWikiSensorium — node tier", () => {
+  test("cohere folds the keystone planes through BOTH organs — the radius flips, the gate classifies", async () => {
     const w = await runWikiSensoriumWitness();
     // GLUE: structure and form agree on every unit → a global section stands, non-vacuously.
     expect(w.glue.consistency.glues).toBe(true);
@@ -61,7 +61,7 @@ describe("S2 hasWikiSensorium — node tier", () => {
     expect(w.semanticRecall.semantic![0]!.score).toBeCloseTo(1, 6);
   });
 
-  test("couple refuses honestly — the typed unbuilt answer names the S5 fork", async () => {
+  test("couple refuses honestly — the typed unbuilt answer names the mesh-of-wikis fork", async () => {
     const w = await runWikiSensoriumWitness();
     expect(w.coupling).toEqual({ status: "unbuilt", awaits: "S5:mesh-of-wikis" });
   });

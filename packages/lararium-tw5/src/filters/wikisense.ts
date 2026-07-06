@@ -11,7 +11,7 @@ module-type: filteroperator
  *                                          neighbors) — tiers CONCATENATE in that order and dedup;
  *                                          no fusion score gets invented across tiers.
  *   [wikisense:recall:title[probe]]      — the title tier alone (exact > prefix > substring).
- *   [wikisense:recall:structure[head]]   — the sigil-head tier alone (the L2 reader's strata).
+ *   [wikisense:recall:structure[head]]   — the sigil-head tier alone (the memetic-wikitext reader's strata).
  *   [wikisense:recall:form[title]]       — the shingle-neighbor tier alone (Jaccard-ranked).
  *   [wikisense:cohere[]]                 — ONE JSON string: the compact coherence verdict
  *                                          {radius, glues, vacuous, obstructionLocus, gate,

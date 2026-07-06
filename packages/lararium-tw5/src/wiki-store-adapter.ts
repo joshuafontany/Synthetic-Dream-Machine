@@ -25,10 +25,8 @@ import type { CompositeStore, CompositeEntry, ChangeOrigin } from "@lararium/mes
 import { consistencyRadius, type ConsistencyRadius, type ComparisonStalk, type PlaneRestriction } from "@lararium/mesh";
 import { CompositeStore as CompositeStoreCtor } from "@lararium/mesh";
 import { MemoryTiddlerStore } from "./memory-store.js";
-import { foldCorpus, corpusPlanes, type WikiSenseDoc } from "./wiki-sense-fold.js";
-
-// the per-title lenses live with the fold (the ONE math); the adapter re-exports the held names.
-export { shingles, structureSalience, FORM_SHINGLE_K } from "./wiki-sense-fold.js";
+import { foldCorpus, corpusPlanes } from "./wiki-sense-fold.js";
+import { senseDocOfEntry } from "./wiki-corpus-reader.js";
 
 // ── the per-tiddler plane readings (structure ⊥ form; content rides the perceiver's seam) ──────────
 
@@ -52,17 +50,6 @@ export interface WikiSensoriumSnapshot {
   readonly restrictions: readonly PlaneRestriction[];
 }
 
-/** Lift a composite entry onto the fold's sensed-entity shape — the WHOLE record, pass-through. */
-function docOfEntry(e: CompositeEntry): WikiSenseDoc {
-  return {
-    title: e.title,
-    fields: e.record.tiddler as Readonly<Record<string, unknown>>,
-    heads: e.heads,
-    bagId: e.bagId,
-    changeId: e.changeId,
-  };
-}
-
 /**
  * Project a CORPUS of causal-stamped entries into the snapshot — the pure-read fold, delegated to
  * the shared wiki-sense fold so every mouth speaks the same math. Structure reads per tiddler
@@ -71,7 +58,7 @@ function docOfEntry(e: CompositeEntry): WikiSenseDoc {
  * non-vacuous by construction.
  */
 export function projectWikiSensorium(entries: readonly CompositeEntry[]): WikiSensoriumSnapshot {
-  const fold = foldCorpus(entries.map(docOfEntry));
+  const fold = foldCorpus(entries.map(senseDocOfEntry));
   const { stalk, restrictions } = corpusPlanes(fold);
   const structureVal = restrictions[0]!.value;
   const formVal = restrictions[1]!.value;

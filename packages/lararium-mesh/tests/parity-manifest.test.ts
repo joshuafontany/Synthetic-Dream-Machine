@@ -109,11 +109,82 @@ const MANIFEST: readonly ParityEntry[] = [
     fixtures: [],
     note: "the ocap tier wiring over spectral-keel (read ⊂ write ⊂ anchor) — composition, not numerics; the numerics parity rides spectral-keel.ts.",
   },
+  // ── the coupling family (the streaming/coupling numerics riding the VM fold) ──────────────────
+  {
+    ts: "windowed-coupling.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the streaming coupling runtime (window policy + regime resets); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool, streaming epic).",
+  },
+  {
+    ts: "linearity-gate.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the Tier-0 nonlinearity screen over the Gaussian fit; py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "mesh-coupling.ts", py: "coupling.R", status: "owed-fixture",
+    fixtures: [],
+    note: "the directed coupling matrix over child sensoria; coupling.R (RTransferEntropy calc_ete pairwise matrix) carries the sidecar twin — the shared fixture remains owed.",
+  },
+  {
+    ts: "mesh-coupling-mv.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the multivariate Gaussian conditional-TE mesh coupling (the hoike's locked keel); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "transfer-entropy.ts", py: "coupling.R", status: "owed-fixture",
+    fixtures: [],
+    note: "the discrete conditional-TE keel; coupling.R (RTransferEntropy effective TE + bootstrap null) carries the sidecar twin — the shared fixture remains owed.",
+  },
+  {
+    ts: "change-point.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the mean+variance regime-shift detector; the py side detects via BOCPD (bands_sidecar.py) — a different estimator, so a direct twin stays owed (RUN-ARC debt pool).",
+  },
+  {
+    ts: "gaussian-cmi.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the closed-form Gaussian-CMI/conditional-Granger estimator; py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "cmi-significance.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the parametric chi-squared significance gate over Gaussian-CMI; py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "fisher-rao.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the register-simplex flow-lens (Fisher-Rao trajectory geometry); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "bures-metric.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the Bures/quantum-fidelity register-drift step; py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "temporal-rigidity.ts", py: "ffz_clock.py", status: "witnessed",
+    fixtures: ["../../lararium-mempalace/scripts/fixtures/clock-recovery-parity.json"],
+    note: "ffz_clock.py dominant_period ports temporal-rigidity.dominantPeriod; bound by the clock-recovery fixture (scripts/clock_recovery_fixture.ts imports dominantPeriod; test_ffz_clock.py consumes).",
+  },
+  {
+    ts: "subspace-track.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the online GROUSE subspace tracker (the keel's WRITE face); py twin owed at the streaming epic under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "clock-recovery.ts", py: "ffz_clock.py", status: "witnessed",
+    fixtures: ["../../lararium-mempalace/scripts/fixtures/clock-recovery-parity.json"],
+    note: "ffz_clock.py ports src/clock-recovery.ts (recover_clock); bound by the same TS-generated fixture the ffz-clock row names (test_ffz_clock.py consumes).",
+  },
+  {
+    ts: "numerics.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "shared scalar floor primitives (significance floor + soft-gate) — each py twin inlines its own; no standalone py twin planned.",
+  },
 ];
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|numerics)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {

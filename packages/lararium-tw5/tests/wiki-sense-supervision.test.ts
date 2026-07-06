@@ -1,7 +1,7 @@
 /**
- * wiki-sense-supervision (node tier) — the S3 supervision witness, node substrate.
+ * wiki-sense-supervision (node tier) — the supervision-reads witness, node substrate.
  *
- * Stands a REAL S2 perceiver island (the S0 GLUE corpus + `hasWikiSensorium`) behind an in-process
+ * Stands a REAL perceiver island (the consistency keystone's GLUE corpus + `hasWikiSensorium`) behind an in-process
  * channel shaped exactly like the worker wire (signal message in → SENSORIUM_FRAME back), then
  * drives the supervisor across it: a cohere read flows daemon→island→back and leaves a proof-hold
  * record in the daemon's own store, re-readable; recall rides the same surface; an ask naming an
@@ -84,8 +84,8 @@ async function standChannel(designations: readonly string[]): Promise<ChannelHar
   };
 }
 
-describe("S3 wiki-sense supervision — node tier", () => {
-  test("the wire admits the S2 signals — mkSensoriumSignal passes the vessel→island guard", () => {
+describe("wiki-sense supervision reads — node tier", () => {
+  test("the wire admits the sensorium signals — mkSensoriumSignal passes the vessel→island guard", () => {
     const msg = mkSensoriumSignal({ signal: "sensorium:cohere", requestId: "r1" });
     expect(isVesselToIslandMsg(msg)).toBe(true);
     expect(msg.args?.["requestId"]).toBe("r1");
@@ -99,7 +99,7 @@ describe("S3 wiki-sense supervision — node tier", () => {
     harness.bind(supervisor);
     try {
       const reading = await supervisor.cohere(ISLAND_A, { hold: true });
-      // the verdict — the S2 verbs answered, un-re-implemented (GLUE corpus glues, gate reconcilable).
+      // the verdict — the wiki-sensorium cap's verbs answered, un-re-implemented (GLUE corpus glues, gate reconcilable).
       expect(reading.island).toBe(ISLAND_A);
       expect(reading.verdict.consistency.glues).toBe(true);
       expect(reading.verdict.gate.kind).toBe("reconcilable");
@@ -129,7 +129,7 @@ describe("S3 wiki-sense supervision — node tier", () => {
     }
   });
 
-  test("recall rides the same supervised surface — all S2 tiers answer unchanged", async () => {
+  test("recall rides the same supervised surface — all the cap's tiers answer unchanged", async () => {
     const harness = await standChannel([ISLAND_A]);
     const supervisor = createWikiSenseSupervisor(harness.seams);
     harness.bind(supervisor);

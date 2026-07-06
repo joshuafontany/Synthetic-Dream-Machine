@@ -6,7 +6,7 @@
  *                   consistencyRadius + the H¹ cohomologyObstruction classifier) into one
  *                   verdict: radius · glues/vacuous · per-pair loci · reconcilable-vs-ontological.
  *   recall(query) — LOCAL-FIRST tiddler recall over the planes that exist today: title match (content
- *                   floor) · sigil-head match (structure, the L2 reader's strata) · shingle-Jaccard
+ *                   floor) · sigil-head match (structure, the memetic-wikitext reader's strata) · shingle-Jaccard
  *                   neighbors (form) · plus an OPTIONAL semantic tier behind the injectable
  *                   {@link TextEmbedder} seam (cosine flat-scan; no model dependency — the COOP/COEP
  *                   deployment fork stays the operator's).
@@ -77,7 +77,7 @@ function toNumbers(v: Float32Array): readonly number[] {
 export interface WikiRecallQuery {
   /** the content-floor probe: matches TITLES (exact > prefix > substring); also feeds the semantic tier. */
   readonly text?: string;
-  /** the structure probe: matches the L2 reader's sigil-head strata (e.g. "confidence", "ward"). */
+  /** the structure probe: matches the memetic-wikitext reader's sigil-head strata (e.g. "confidence", "ward"). */
   readonly sigilHead?: string;
   /** the form probe: a tiddler title whose recurring-shingle neighbors rank by Jaccard overlap. */
   readonly likeTitle?: string;

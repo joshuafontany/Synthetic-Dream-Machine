@@ -1,5 +1,5 @@
 /**
- * wiki-coherence-indicator (browser tier) — S1 witness of the DOM SINK, the ONLY platform seam.
+ * wiki-coherence-indicator (browser tier) — the coherence projection's DOM-SINK witness, the ONLY platform seam.
  *
  * The platform-blind organ (@lararium/tw5 projectCoherenceIndicator) shaped the frame; this witnesses
  * the DOM write that renders it — a real Chromium `document`, a real host element. The assertions:
@@ -7,7 +7,7 @@
  * and a STALE frame (older rev) drops (the coalesce ordering's main-thread half). One hull, differ by
  * grant not hull: swap THIS sink for a node no-op and the organ never changes.
  *
- * (Like the S0 browser witness, the RUN awaits the @vitest/browser harness repair; the sink drags in
+ * (Like the consistency keystone's browser witness, the RUN awaits the @vitest/browser harness repair; the sink drags in
  * zero node builtins — it imports @lararium/tw5 for the frame TYPE only, erased at runtime.)
  *
  * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-coherence-projection

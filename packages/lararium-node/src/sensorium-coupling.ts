@@ -3,7 +3,7 @@
  * setup path STAMPS `coupling.children[]` on the mesh + memetic-wikitext trees, but nothing ever READ
  * them back — the coupling plane sat decorative. This module resolves those child edges → the child
  * sensorium dirs → each child's SECTION over a shared comparison stalk → the H¹-GATED fusion
- * (sensorium-fusion.ts `fuse`):
+ * (@lararium/mesh `fuse`):
  *
  *   • H¹ = 0  → FUSE: the children's pairwise agreements admit a global section — diffuse toward the
  *               consensus (Chebyshev sheaf-Laplacian), return the fused pseudosection.

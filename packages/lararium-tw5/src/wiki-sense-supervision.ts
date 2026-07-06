@@ -1,7 +1,7 @@
 /**
- * wiki-sense-supervision — S3: the @daemon's supervision READ-verbs over its wiki islands + the
- * local proof-hold. The daemon asks a SUPERVISED island for `cohere` / `recall` by RIDING S2's
- * signal surface ({@link SENSORIUM_SIGNAL} in, {@link SENSORIUM_FRAME} back) — this module
+ * wiki-sense-supervision — the @daemon's supervision READ-verbs over its wiki islands + the
+ * local proof-hold. The daemon asks a SUPERVISED island for `cohere` / `recall` by RIDING the
+ * wiki-sensorium cap's signal surface ({@link SENSORIUM_SIGNAL} in, {@link SENSORIUM_FRAME} back) — this module
  * re-implements no perceiver verb; it correlates asks with answers across the worker wire.
  *
  * THE CONFUSED-DEPUTY WARD (house law, the recurring bug): every ask NAMES its target island and
@@ -19,7 +19,7 @@
  *
  * PROOF-FEDERATE stays UNBUILT: crossing the disclosure membrane (mesh-palace) reads as a
  * federation Act the OPERATOR gates — {@link WikiSenseFederateRefusal} answers honestly, typed,
- * mirroring S2's couple() refusal.
+ * mirroring the wiki-sensorium cap's couple() refusal.
  *
  * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sense-supervision
  */
@@ -214,7 +214,7 @@ export interface WikiSenseCohereReading {
 export interface WikiSenseSupervisor {
   /** Ask the DESIGNATED island for its coherence verdict; `hold: true` writes the proof locally. */
   cohere(island: string, opts?: { hold?: boolean }): Promise<WikiSenseCohereReading>;
-  /** Ask the DESIGNATED island for a recall read (all S2 tiers ride unchanged). */
+  /** Ask the DESIGNATED island for a recall read (all the wiki-sensorium cap's tiers ride unchanged). */
   recall(island: string, query: WikiRecallQuery): Promise<WikiRecallResult>;
   /** The federation crossing, refused typed — never built here, never faked. */
   proofFederate(island: string): WikiSenseFederateRefusal;
@@ -233,8 +233,8 @@ interface PendingAsk {
 }
 
 /**
- * Stand the supervisor over the vessel's seams. Read-only end to end: it sends only the S2 read
- * signals and consumes only the frames they answer with; the sole write it ever performs lands the
+ * Stand the supervisor over the vessel's seams. Read-only end to end: it sends only the wiki-sensorium
+ * cap's read signals and consumes only the frames they answer with; the sole write it ever performs lands the
  * proof record in the daemon's OWN store (local, self-sovereign — nothing crosses the membrane).
  */
 export function createWikiSenseSupervisor(
@@ -319,7 +319,7 @@ export function createWikiSenseSupervisor(
 
     proofFederate(island: string): WikiSenseFederateRefusal {
       // the honest refusal: crossing the disclosure membrane reads as a federation Act the
-      // OPERATOR gates — this surface never builds it, never fakes it (S2's couple() discipline).
+      // OPERATOR gates — this surface never builds it, never fakes it (the cap's couple() discipline).
       return {
         status:   "operator-gated",
         awaits:   "membrane-Act",

@@ -1,5 +1,5 @@
 /**
- * wiki-sensorium-consistency (browser tier) — S0 KEYSTONE witness, browser substrate.
+ * wiki-sensorium-consistency (browser tier) — the consistency KEYSTONE witness, browser substrate.
  *
  * Runs the IDENTICAL hull as node/tests/wiki-sensorium-consistency.test.ts — the SAME
  * `runWikiConsistencyWitness()` from `@lararium/tw5`, here inside a real Chromium harness. The
@@ -18,7 +18,7 @@ import {
   GLUE_SEEDS,
 } from "@lararium/tw5";
 
-describe("S0 wiki-sensorium consistency — browser tier", () => {
+describe("wiki-sensorium consistency keystone — browser tier", () => {
   test("the engineered stalk reads NON-VACUOUS (a genuine cross-plane overlap, not a false glue)", async () => {
     const { glue, obstruct } = await runWikiConsistencyWitness();
     expect(glue.vacuous).toBe(false);

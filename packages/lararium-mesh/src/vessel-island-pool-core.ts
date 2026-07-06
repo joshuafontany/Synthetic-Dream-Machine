@@ -336,7 +336,7 @@ export class VesselIslandPoolCore {
     slot.worker.post(mkWikiDomEvent(ev));
   }
 
-  /** Post one S2 sensorium read-signal INTO a live island — the daemon's supervision read ridden
+  /** Post one sensorium read-signal INTO a live island — the daemon's supervision read ridden
    *  over the worker wire. FAILS LOUD when the designation names no live island (the confused-deputy
    *  ward at the mechanism: the designation carries the authority; nothing falls back to a default
    *  island). Fire-and-forget on the wire — the island answers on its `sensorium:frame` event, which

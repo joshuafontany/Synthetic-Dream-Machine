@@ -15,13 +15,10 @@
 export {
   WikiStoreAdapter,
   projectWikiSensorium,
-  structureSalience,
-  shingles,
   buildFixtureIsland,
   runWikiConsistencyWitness,
   GLUE_SEEDS,
   OBSTRUCT_SEEDS,
-  FORM_SHINGLE_K,
 } from "./wiki-store-adapter.js";
 export type {
   WikiTiddlerReading,
@@ -83,7 +80,7 @@ export type {
   WikiCouplingUnbuilt,
   WikiSensoriumWitness,
 } from "./wiki-sensorium-cap.js";
-export { summarizeCoherence } from "./wiki-sense-fold.js";
+export { summarizeCoherence, shingles, structureSalience, FORM_SHINGLE_K } from "./wiki-sense-fold.js";
 export type { WikiSenseDoc, WikiCoherenceSummary, WikiSenseUniverse } from "./wiki-sense-fold.js";
 export {
   createWikiSenseSupervisor,

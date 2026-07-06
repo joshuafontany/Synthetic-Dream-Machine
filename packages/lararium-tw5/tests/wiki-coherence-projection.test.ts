@@ -1,5 +1,5 @@
 /**
- * wiki-coherence-projection (node tier) — S1 witness of the PURE organ + the coalesce-gate wiring.
+ * wiki-coherence-projection (node tier) — witness of the PURE organ + the coalesce-gate wiring.
  *
  * Two witnesses, both platform-blind (no DOM, no browser):
  *   1. projectCoherenceIndicator — a radius reading → the correct indicator frame (glue → coherent;
@@ -48,14 +48,14 @@ describe("projectCoherenceIndicator — the PURE radius → frame organ", () => 
     expect(f.label).toContain("ornate-novel"); // the label names WHERE the planes fracture
   });
 
-  test("a vacuous read → INDETERMINATE, never a false glue (S0 caution a)", () => {
+  test("a vacuous read → INDETERMINATE, never a false glue (the consistency keystone's caution a)", () => {
     const f = projectCoherenceIndicator(reading({ vacuous: true }));
     expect(f.status).toBe("indeterminate");
     expect(f.glues).toBe(false);
     expect(f.vacuous).toBe(true);
   });
 
-  test("the organ rides the LIVE S0 witness readings end-to-end (glue ⊥ obstruct)", async () => {
+  test("the organ rides the LIVE consistency-keystone witness readings end-to-end (glue ⊥ obstruct)", async () => {
     const { glue, obstruct } = await runWikiConsistencyWitness();
     expect(projectCoherenceIndicator(glue).status).toBe("coherent");
     const of = projectCoherenceIndicator(obstruct);

@@ -7,12 +7,8 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: "@lararium/tw5",                    replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
-      { find: "@lararium/mesh/node",             replacement: path.resolve(root, "../lararium-mesh/src/node.ts") },
-      { find: "@lararium/mesh/lar-uris",         replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
-      { find: "@lararium/mesh/reaction-graph",   replacement: path.resolve(root, "../lararium-mesh/src/reaction-graph.ts") },
+      // meme-ast resolves to a DIRECTORY barrel — the regex below would mis-map it to src/meme-ast.ts.
       { find: "@lararium/mesh/meme-ast",         replacement: path.resolve(root, "../lararium-mesh/src/meme-ast/index.ts") },
-      { find: "@lararium/mesh/mirror-paths",     replacement: path.resolve(root, "../lararium-mesh/src/mirror-paths.ts") },
-      { find: "@lararium/mesh/promotion-ceremony", replacement: path.resolve(root, "../lararium-mesh/src/promotion-ceremony.ts") },
       // Every remaining mesh subpath rides ONE regex → src/<sub>.ts (explicit entries above win first;
       // the bare "@lararium/mesh" below would otherwise swallow subpaths into "src/index.ts/<sub>").
       { find: /^@lararium\/mesh\/(.+)$/, replacement: path.resolve(root, "../lararium-mesh/src") + "/$1.ts" },

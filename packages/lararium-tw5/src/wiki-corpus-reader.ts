@@ -12,7 +12,7 @@
  * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
  */
 
-import type { CompositeStore } from "@lararium/mesh";
+import type { CompositeStore, CompositeEntry } from "@lararium/mesh";
 import type { WikiSenseDoc } from "./wiki-sense-fold.js";
 
 /** The seam ONE perceiver hull consumes — whole-record docs + a change pulse. Read-only. */
@@ -23,19 +23,25 @@ export interface WikiCorpusReader {
   subscribe(listener: () => void): () => void;
 }
 
+/** Lift ONE composite entry onto the sensed-entity shape — the WHOLE record, pass-through. The one
+ *  mapper every composite face rides (the reader here; the snapshot adapter imports it too). */
+export function senseDocOfEntry(e: CompositeEntry): WikiSenseDoc {
+  return {
+    title: e.title,
+    // the WHOLE record, pass-through — the store's tiddler object carries every field it holds.
+    fields: e.record.tiddler as Readonly<Record<string, unknown>>,
+    heads: e.heads,
+    bagId: e.bagId,
+    changeId: e.changeId,
+  };
+}
+
 /** Stand the seam over one VM-less wiki island's composite — resolved, kāpae-honored, causal-stamped. */
 export function compositeCorpusReader(store: CompositeStore): WikiCorpusReader {
   return {
     async docs(): Promise<readonly WikiSenseDoc[]> {
       const entries = await store.entries();
-      return entries.map((e) => ({
-        title: e.title,
-        // the WHOLE record, pass-through — the store's tiddler object carries every field it holds.
-        fields: e.record.tiddler as Readonly<Record<string, unknown>>,
-        heads: e.heads,
-        bagId: e.bagId,
-        changeId: e.changeId,
-      }));
+      return entries.map(senseDocOfEntry);
     },
     subscribe: (listener) => store.subscribe(listener),
   };

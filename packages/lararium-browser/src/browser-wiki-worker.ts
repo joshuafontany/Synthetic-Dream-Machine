@@ -23,7 +23,7 @@ import { makeWikiBehavior, mountProjection, mountCoherenceProjection, hasWikiSen
 //   1. mountProjection    — renders the story river into $tw.fakeDocument, emits `projection:frame`.
 //   2. mountCoherenceProjection — reads the wiki's OWN consistency radius, emits `coherence:frame`.
 // Both coalesce on the same wikistore change beat; the teardown tears them down LIFO.
-// caps = the S2 sensorium perceiver — the wiki island answers the daemon's supervision reads
+// caps = the wiki-sensorium perceiver cap — the wiki island answers the daemon's supervision reads
 // (sensorium:cohere/recall signals in, SENSORIUM_FRAME events back) over its OWN composite.
 runBrowserSovereignWorker(makeWikiBehavior({
   onBoot: (ctx) => {

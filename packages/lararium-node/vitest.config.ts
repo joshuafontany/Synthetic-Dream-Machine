@@ -10,20 +10,10 @@ export default defineConfig({
       // Subpath aliases MUST precede the generic "@lararium/tw5" — else the string prefix-match
       // mangles "@lararium/tw5/form-layer" into "src/index.ts/form-layer".
       { find: "@lararium/tw5/form-layer", replacement: path.resolve(root, "../lararium-tw5/src/form-layer/index.ts") },
-      // The meme-ast island scanner — the memetic-wikitext sensorium's disjoint-match reader. Aliased to
-      // SOURCE (like form-layer) so vitest resolves the `./meme-ast` subpath the package.json exports; the
-      // tw5 main barrel stays parser-free (the pono grammar boundary). MUST precede the generic below.
-      { find: "@lararium/tw5/meme-ast", replacement: path.resolve(root, "../lararium-tw5/src/meme-ast/index.ts") },
       { find: "@lararium/tw5/memetic-wikitext-sensorium", replacement: path.resolve(root, "../lararium-tw5/src/memetic-wikitext-sensorium.ts") },
       { find: "@lararium/tw5", replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
-      { find: "@lararium/mesh/lar-uris", replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
-      // Subpath aliases MUST precede the generic "@lararium/mesh" — else the string
-      // prefix-match mangles "@lararium/mesh/<sub>" into "src/index.ts/<sub>".
-      { find: "@lararium/mesh/harvest", replacement: path.resolve(root, "../lararium-mesh/src/harvest.ts") },
-      { find: "@lararium/mesh/bures-metric", replacement: path.resolve(root, "../lararium-mesh/src/bures-metric.ts") },
-      { find: "@lararium/mesh/node", replacement: path.resolve(root, "../lararium-mesh/src/node.ts") },
-      // Every remaining mesh subpath rides ONE regex → src/<sub>.ts (explicit entries above win first;
-      // the bare "@lararium/mesh" below would otherwise swallow subpaths into "src/index.ts/<sub>").
+      // Every mesh subpath rides ONE regex → src/<sub>.ts (the bare "@lararium/mesh" below would
+      // otherwise swallow subpaths into "src/index.ts/<sub>").
       { find: /^@lararium\/mesh\/(.+)$/, replacement: path.resolve(root, "../lararium-mesh/src") + "/$1.ts" },
       { find: "@lararium/mesh", replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
     ],

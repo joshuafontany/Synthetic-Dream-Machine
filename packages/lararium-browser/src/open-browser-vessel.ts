@@ -419,7 +419,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         }),
       );
       registry.register("residency", makeResidencyStatsReactor({ residency }));
-      // wiki-sense (S3) — the daemon's supervision READ-verbs over the islands this vessel's pool
+      // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
       // actually holds. The seams ARE the supervision grant: designation resolves through the pool
       // alone (confused-deputy ward — a name outside the pool fails loud at both ends), and the
       // proof-hold writes into the daemon's OWN @daemon layer (local, self-sovereign). The daemon

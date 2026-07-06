@@ -16,15 +16,8 @@ export default defineConfig({
       { find: /^(node:)?fs$/, replacement: path.resolve(root, "src/__stubs__/fs-stub.ts") },
       { find: /^(node:)?path$/, replacement: path.resolve(root, "src/__stubs__/path-stub.ts") },
       { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
-      { find: "@lararium/mesh/bures-metric",     replacement: path.resolve(root, "../lararium-mesh/src/bures-metric.ts") },
-      { find: "@lararium/mesh/cascade",          replacement: path.resolve(root, "../lararium-mesh/src/cascade.ts") },
-      { find: "@lararium/mesh/harvest",          replacement: path.resolve(root, "../lararium-mesh/src/harvest.ts") },
-      { find: "@lararium/mesh/lar-uris",         replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
-      { find: "@lararium/mesh/mirror-paths",     replacement: path.resolve(root, "../lararium-mesh/src/mirror-paths.ts") },
-      { find: "@lararium/mesh/promotion-ceremony", replacement: path.resolve(root, "../lararium-mesh/src/promotion-ceremony.ts") },
-      { find: "@lararium/mesh/reaction-graph",   replacement: path.resolve(root, "../lararium-mesh/src/reaction-graph.ts") },
-      // Every remaining mesh subpath rides ONE regex → src/<sub>.ts (explicit entries above win first;
-      // the bare "@lararium/mesh" below would otherwise swallow subpaths into "src/index.ts/<sub>").
+      // Every mesh subpath rides ONE regex → src/<sub>.ts (the bare "@lararium/mesh" below would
+      // otherwise swallow subpaths into "src/index.ts/<sub>").
       { find: /^@lararium\/mesh\/(.+)$/, replacement: path.resolve(root, "../lararium-mesh/src") + "/$1.ts" },
       { find: "@lararium/mesh",                  replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
       { find: "@lararium/tw5",                   replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },

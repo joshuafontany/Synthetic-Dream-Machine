@@ -46,7 +46,7 @@ export interface WikiBehaviorOptions {
    */
   onBoot?: (ctx: IslandContext) => (() => void) | undefined;
   /**
-   * Further #has caps the worker composes onto the wiki island's stack (e.g. the S2
+   * Further #has caps the worker composes onto the wiki island's stack (e.g. the
    * `hasWikiSensorium` perceiver). They fold AFTER the base caps, so the dispatch and
    * projection channels keep signal precedence; teardown mirrors (LIFO).
    */

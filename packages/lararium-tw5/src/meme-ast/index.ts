@@ -2,8 +2,8 @@
  * meme-ast/index.ts — barrel for @lararium/tw5 meme-ast sub-module.
  *
  * Public API for isomorphic memetic-wikitext parsing.
- * Import via: import { parseMemeText } from "@lararium/mesh/meme-ast"
- * Or from core barrel: import { parseMemeText } from "@lararium/mesh"
+ * Import via: import { parseMemeText } from "@lararium/tw5/meme-ast"
+ * (the tw5 main barrel stays parser-free — the pono grammar boundary)
  *
  * Composable files (each tracked by sync-heleuma):
  *   types.ts   — MemeAstNode union types + MemeNode root

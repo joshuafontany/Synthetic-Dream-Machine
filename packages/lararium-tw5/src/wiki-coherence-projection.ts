@@ -1,9 +1,9 @@
 /**
- * wiki-coherence-projection — S1: the wiki-sensorium's consistency radius made a LIVE coherence
+ * wiki-coherence-projection — the wiki-sensorium's consistency radius made a LIVE coherence
  * indicator. The SECOND projection-nalu over the same wiki island, twin of tw5-projection.
  *
  * The pattern integrity (projection-nalu):
- *   SOURCE (the wiki's own consistency read — S0's {@link WikiStoreAdapter} over the live
+ *   SOURCE (the wiki's own consistency read — the consistency keystone's {@link WikiStoreAdapter} over the live
  *           CompositeStore)
  *     → forward-pass (projectCoherenceIndicator, PURE — a `radius reading → indicator frame` map)
  *     → NALU (a COALESCE {@link CoalesceGate} — newest-wins, a burst of wikistore changes collapses
@@ -13,7 +13,7 @@
  *
  * Where tw5-projection carries the RENDERED story river (HTML+CSS), this carries the sensorium's
  * SELF-READING: does the wiki COHERE (radius 0 → the li-planes glue) or FRACTURE (radius >0 → an
- * obstruction, localized to the offending tiddler(s) — S0 already names them). Same coalesce family,
+ * obstruction, localized to the offending tiddler(s) — the consistency keystone already names them). Same coalesce family,
  * same post→main-thread shape.
  *
  * THE ORGAN STAYS PLATFORM-BLIND. {@link projectCoherenceIndicator} touches no DOM — it maps a
@@ -51,9 +51,9 @@ export interface CoherenceIndicatorFrame {
   readonly radius: number;
   /** a real global section stands — the li-planes glue (radius 0, non-vacuous). */
   readonly glues: boolean;
-  /** no engineered overlap constrained the read — a vacuous 0 that says nothing (S0 caution a). */
+  /** no engineered overlap constrained the read — a vacuous 0 that says nothing (the consistency keystone's caution a). */
   readonly vacuous: boolean;
-  /** the tiddler(s) where the planes disagree — S0's localized obstruction locus (empty when coherent). */
+  /** the tiddler(s) where the planes disagree — the consistency keystone's localized obstruction locus (empty when coherent). */
   readonly obstructing: readonly string[];
   /** a human line the indicator surfaces, verb-forward. */
   readonly label: string;
