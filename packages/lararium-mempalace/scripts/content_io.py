@@ -56,6 +56,11 @@ _MUTED_VALUES = {"1", "true", "yes"}
 # kapae'd hot-region bails with fewer-than-k live rows instead of scanning the whole collection (C5 scale).
 _POOL_CEILING_FACTOR = 32
 
+# The $in batch size — a scoped turn-key pull chunks its `where $in` so a wide braid never overflows
+# SQLite's bound-variable limit (SQLITE_MAX_VARIABLE_NUMBER floors at 999 on older builds). 500 clears
+# it with room for chroma's own bound params on the same statement.
+_IN_CHUNK = 500
+
 
 def _is_muted(metadata: "dict | None") -> bool:
     """A row reads muted when its `lar_kapae` slot carries a truthy mark. Absent/"0"/"" = live —
@@ -115,15 +120,20 @@ class ContentStore:
             self._assert_palace_model_history()
 
     def _assert_palace_model_history(self) -> None:
-        """The PALACE-HISTORY half of the identity floor: refuse to OPEN a palace that already holds
-        vectors from a DIFFERENT embedder. The record-level `expected_model` guard catches a mis-stamped
-        drawer, but a model-B driver re-opening a model-A palace stamps each record self-consistently
-        (stamp==pin) and slips it — yet its queries search an incomparable space (recall corruption of the
-        immutable ground). Peek one held drawer; a disagreeing model fails loud on compose."""
-        # SCAN pages until a STAMPED drawer surfaces — sampling only metas[0] slips a mixed-history
-        # palace (an unstamped or fresh-model first row hides a held DIFFERENT model deeper in). The
-        # first stamped drawer names the palace's real embedder; an all-unstamped palace has no history
-        # to disagree with.
+        """The PALACE-HISTORY half of the identity floor: refuse to OPEN a palace whose FIRST stamped
+        drawer names a DIFFERENT embedder than the driver's pin. A model-B driver re-opening a model-A
+        palace stamps each fresh record self-consistently (stamp==pin), so it clears the record-level
+        `expected_model` guard (put) — yet its queries search an incomparable space (recall corruption
+        of the immutable ground). This compose-time guard catches that slip: compare the pin against
+        the palace's first stamped drawer; a mismatch fails loud on compose.
+
+        SCOPE: this catches a driver-vs-first-stamped mismatch ONLY. A palace that ALREADY holds two
+        distinct stamped models internally rides the write-side record floor (put's `expected_model`
+        rejects the second model at land) — this open-time peek never re-scans for that."""
+        # SCAN pages until a STAMPED drawer surfaces — sampling only metas[0] would read an UNSTAMPED
+        # first row as no-history and skip a model stamped deeper in. The first stamped drawer names
+        # the palace's embedder to compare against the pin; an all-unstamped palace holds no history to
+        # disagree with.
         held = self._first_stamped_model()
         if held and held != self._expected_model:
             raise ContentFloorError(f"content palace already holds vectors from embedder {held!r} != expected "
@@ -132,7 +142,7 @@ class ContentStore:
 
     def _first_stamped_model(self, page: int = 512) -> "str | None":
         """The `lar_embedder_model` the FIRST stamped drawer carries — scanned page-by-page so an
-        unstamped/fresh prefix never hides a held model deeper in. None when the palace holds no stamped
+        UNSTAMPED prefix never hides a stamped model deeper in. None when the palace holds no stamped
         drawer at all (nothing to disagree with)."""
         offset = 0
         while True:
@@ -314,22 +324,30 @@ class ContentStore:
         """`turn_key -> [vectors]` for a GIVEN set of worldline turn-keys — the SCOPED vector pull
         (worldline_ffz reads only the braids it stamps, never a whole-corpus `scan`). A chroma `where`
         $in on `lar_turn_key` with embeddings included; drawers bound to no wanted key never ride out.
-        Empty/absent keys → {}."""
+        Empty/absent keys → {}.
+
+        CHUNKED: a wide braid (a deep fork-DAG) can name more turn-keys than SQLite binds in one
+        statement (SQLITE_MAX_VARIABLE_NUMBER, ~999 on older builds), and one $in over the whole set
+        would overflow the variable limit → a backend raise/mis-read. So the keys ride in batches and
+        the per-batch dicts MERGE — a turn's chunk-vectors accumulate even when the turn straddles no
+        batch (each key sits in exactly one batch, so no cross-batch double-count)."""
         keys = sorted({k for k in (turn_keys or []) if k})
         if not keys:
             return {}
-        got = self._col.get(where={TURN_KEY_META: {"$in": keys}}, include=["metadatas", "embeddings"])
-        ids = got.get("ids") or []
-        metas = got.get("metadatas") or []
-        embs = got.get("embeddings")
         out: dict = {}
-        for i in range(len(ids)):
-            emb = embs[i] if embs is not None and i < len(embs) and embs[i] is not None else None
-            if emb is None:
-                continue
-            tk = str((metas[i] or {}).get(TURN_KEY_META, "")).strip()
-            if tk:
-                out.setdefault(tk, []).append([float(x) for x in emb])
+        for start in range(0, len(keys), _IN_CHUNK):
+            batch = keys[start:start + _IN_CHUNK]
+            got = self._col.get(where={TURN_KEY_META: {"$in": batch}}, include=["metadatas", "embeddings"])
+            ids = got.get("ids") or []
+            metas = got.get("metadatas") or []
+            embs = got.get("embeddings")
+            for i in range(len(ids)):
+                emb = embs[i] if embs is not None and i < len(embs) and embs[i] is not None else None
+                if emb is None:
+                    continue
+                tk = str((metas[i] or {}).get(TURN_KEY_META, "")).strip()
+                if tk:
+                    out.setdefault(tk, []).append([float(x) for x in emb])
         return out
 
     def mute(self, cid: str, tick=None) -> dict:

@@ -49,6 +49,22 @@ def test_vectors_for_turns_scopes_the_pull_to_wanted_keys(tmp_path):
     assert s.vectors_for_turns([]) == {}                    # empty ask → empty pull
 
 
+def test_vectors_for_turns_chunks_a_wide_braid_past_the_variable_limit(tmp_path):
+    # A wide braid names more turn-keys than SQLite binds in one statement (SQLITE_MAX_VARIABLE_NUMBER
+    # floors at 999). One $in over 1200 keys would overflow → a backend raise; the chunked pull queries
+    # in batches and MERGES, returning the full union correctly.
+    s = cio.ContentStore(str(tmp_path / ".wide"))
+    n = 1200
+    assert n > 2 * cio._IN_CHUNK                             # forces >2 batches (the merge path)
+    keys = [f"t{i}" for i in range(n)]
+    for i, k in enumerate(keys):
+        s.put(f"c{i}", f"turn {i}", [float(i), 1.0], {"w": "v", cio.TURN_KEY_META: k})
+    got = s.vectors_for_turns(keys)
+    assert set(got) == set(keys)                            # the whole union rides out, no overflow
+    assert all(len(v) == 1 for v in got.values())           # one chunk-vector per turn, no double-count
+    assert got["t1000"][0] == pytest.approx([1000.0, 1.0])  # a key past the first batch resolves (float32)
+
+
 def _raiser(exc):
     def f(*_a, **_k):
         raise exc

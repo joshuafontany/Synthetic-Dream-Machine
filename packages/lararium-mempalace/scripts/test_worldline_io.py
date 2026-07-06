@@ -89,6 +89,32 @@ def test_add_edge_rejects_a_cycle_creating_spawn_edge(tmp_path):
     assert not any((e["frm"], e["to"]) in {("c", "a"), ("a", "a")} for e in store.dag()["edges"])
 
 
+def test_add_edge_refuses_a_second_distinct_open_fork_parent(tmp_path):
+    # A child holds AT MOST ONE open fork-parent. A second DISTINCT open fork onto an existing child
+    # clears the cycle-guard (a leaf child reaches nothing) yet would leave _up_parent picking a spawner
+    # arbitrarily → non-deterministic worldline membership. The second distinct parent is REFUSED legibly;
+    # the SAME fork-parent stays idempotent; the child's spawner stays the first (deterministic).
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    first = store.fork("p1", "child", tick=1)
+    assert first["added"] is True
+
+    same = store.fork("p1", "child", tick=1)                 # a re-observed spawn — idempotent, mints nothing
+    assert same["added"] is False and same.get("fork_conflict") is None
+
+    clash = store.fork("p2", "child", tick=2)                # a SECOND distinct open fork-parent — refused
+    assert clash == {"added": False, "fork_conflict": True, "frm": "p2", "to": "child",
+                     "relation": "fork", "held_parent": "p1"}
+
+    # the rejected edge never entered the rhizome; the spawner reads deterministically as the first parent
+    assert not any((e["frm"], e["to"]) == ("p2", "child") for e in store.dag()["edges"])
+    assert store.worldline_of("child") == "p1"
+
+    # after handback closes the first fork, the child re-forks free (only OPEN parents block)
+    store.handback("p1", "child", tick=3)
+    reforked = store.fork("p2", "child", tick=4)
+    assert reforked["added"] is True
+
+
 def test_fork_dag_spawn_handback_concurrent_replays(tmp_path):
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
     _build_rhizome(store)

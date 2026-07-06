@@ -143,13 +143,29 @@ class WorldlineStore:
         else a pure-cycle component (every node carrying an up-edge) would surface NO root in `roots()`
         and the demux would SILENT-DROP its turns. The reject reads legible (`added:False, cycle:True`),
         and the orphaned `to_node` roots itself instead of vanishing. A `join` runs upward-to-main and
-        rides no spawn-tree walk, so it never counts as a cycle here (a fork+join pair is not a walk-cycle)."""
+        rides no spawn-tree walk, so it never counts as a cycle here (a fork+join pair is not a walk-cycle).
+
+        FORK-PARENT GUARD: a child holds AT MOST ONE open fork-parent. A SECOND distinct open fork onto an
+        existing child clears the cycle-guard (a fresh child reaches nothing) yet leaves `_up_parent` to
+        pick a spawner arbitrarily among two — non-deterministic worldline membership on malformed lineage.
+        So a distinct open fork-parent is REJECTED legibly (`added:False, fork_conflict:True, held_parent`),
+        mirroring the cycle-reject; a re-add of the SAME fork-parent stays idempotent (falls through to the
+        exact-match drop below). Only OPEN forks (valid_to NULL) count — a handed-back child re-forks free."""
         if not frm or not to_node:
             raise ValueError("add_edge: frm and to_node required")
         if relation not in (REL_FORK, REL_LINEAR, REL_JOIN):
             raise ValueError(f"add_edge: unknown relation {relation!r}")
         if relation in _SPAWN_TREE and self._would_cycle(frm, to_node):
             return {"added": False, "cycle": True, "frm": frm, "to": to_node, "relation": relation}
+        if relation == REL_FORK:
+            other = self._conn.execute(
+                "SELECT frm FROM worldline_edges WHERE to_node=? AND relation=? AND valid_to IS NULL "
+                "AND frm<>? LIMIT 1",
+                (to_node, REL_FORK, frm),
+            ).fetchone()
+            if other:
+                return {"added": False, "fork_conflict": True, "frm": frm, "to": to_node,
+                        "relation": relation, "held_parent": other[0]}
         existing = self._conn.execute(
             "SELECT 1 FROM worldline_edges WHERE frm=? AND to_node=? AND relation=? AND valid_from IS ?",
             (frm, to_node, relation, tick),
