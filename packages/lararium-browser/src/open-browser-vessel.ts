@@ -35,7 +35,10 @@ import {
   loadCatalogCorpora, seedVesselDefaults,
   makeResidencyStatsReactor,
   PROJECTION_FRAME,
+  COHERENCE_FRAME,
 }                                            from "@lararium/tw5";
+import type { CoherenceStatus } from "@lararium/tw5";
+import type { CoherenceFrameWithRev } from "./wiki-coherence-sink.js";
 import { composeBrowser }                    from "./browser-caps.js";
 import type { VesselWikiSlot, VesselCoreResult, DaemonVmCore } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
@@ -140,6 +143,10 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   /** Projection-nalu sink: a `projection:frame` (rendered HTML+CSS) from the hot wiki island.
    *  The app applies it to a shadow root — the live wiki made visible. */
   onProjection?:   (frame: { html: string; css: string; rev: number }) => void;
+  /** Coherence-nalu sink: a `coherence:frame` (the wiki's own consistency-radius read as an indicator
+   *  frame) from the hot wiki island. The app applies it to a DOM coherence indicator via
+   *  {@link mountCoherenceIndicator} — the sensorium's self-reading made visible over the tiddler-view. */
+  onCoherence?:    (frame: CoherenceFrameWithRev) => void;
   /**
    * Mesh-LEAF standing (Epic 5, cut 1) — the browser carries-in the FLOW-map as a LEAF: it navigates
    * the mesh (pulls peers' public @meshpalace + re-ranks by l-space proximity) WITHOUT serving or
@@ -185,7 +192,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     idbName = "lares:vessel", displayName, onPhase,
     genesisSeed,
     genesisCasManifest, genesisCasBaseUrl,
-    daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl, relayGatePubKey,
+    daemonWorkerUrl, workerScriptUrl, onProjection, onCoherence, relayUrl, relayGatePubKey,
     meshLeaf,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
@@ -438,6 +445,23 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
               html: String(msg.payload["html"] ?? ""),
               css:  String(msg.payload["css"]  ?? ""),
               rev:  Number(msg.payload["rev"]  ?? 0),
+            });
+            return;
+          }
+          // Coherence-nalu frame → the DOM coherence indicator. `obstructing` rode the wire as JSON
+          // (the event payload admits only scalars); parse it back for the sink.
+          if (msg.listenable === COHERENCE_FRAME) {
+            let obstructing: string[] = [];
+            try { obstructing = JSON.parse(String(msg.payload["obstructing"] ?? "[]")) as string[]; }
+            catch { obstructing = []; }
+            onCoherence?.({
+              status:      String(msg.payload["status"] ?? "indeterminate") as CoherenceStatus,
+              radius:      Number(msg.payload["radius"] ?? 0),
+              glues:       Boolean(msg.payload["glues"]),
+              vacuous:     Boolean(msg.payload["vacuous"]),
+              obstructing,
+              label:       String(msg.payload["label"] ?? ""),
+              rev:         Number(msg.payload["rev"] ?? 0),
             });
             return;
           }

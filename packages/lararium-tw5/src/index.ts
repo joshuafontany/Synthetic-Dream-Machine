@@ -45,6 +45,19 @@ export type { ActiveWikiSelectionSource, ActiveWikiLayerMount, ActiveWikiSlotPla
 export type { CameraMount } from "./tw5-camera.js";
 export { mountCamera } from "./tw5-camera.js";
 export { mountProjection, PROJECTION_FRAME, dispatchProjectedEvent } from "./tw5-projection.js";
+export {
+  mountCoherenceProjection,
+  wireCoherenceProjection,
+  projectCoherenceIndicator,
+  COHERENCE_FRAME,
+  COHERENCE_COALESCE_MS,
+} from "./wiki-coherence-projection.js";
+export type {
+  CoherenceIndicatorFrame,
+  CoherenceStatus,
+  CoherenceProjector,
+  CoherenceProjectionSeams,
+} from "./wiki-coherence-projection.js";
 export { mountPanel, setPalette, setBootSplash } from "./tw5-browser-surface.js";
 export type {
   TW5Wiki,

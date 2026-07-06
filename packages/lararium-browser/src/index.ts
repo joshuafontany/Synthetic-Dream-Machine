@@ -16,6 +16,9 @@ export { openBrowserVessel } from "./open-browser-vessel.js";
 export { composeBrowser } from "./browser-caps.js";
 export type { BrowserVesselOptions, BrowserVesselResult } from "./open-browser-vessel.js";
 
+export { mountCoherenceIndicator } from "./wiki-coherence-sink.js";
+export type { CoherenceIndicatorSink, CoherenceFrameWithRev } from "./wiki-coherence-sink.js";
+
 export {
   generateOrLoadBrowserVesselIdentity, loadBrowserSigningSeed,
   openVesselIdb, idbGet, idbPut,

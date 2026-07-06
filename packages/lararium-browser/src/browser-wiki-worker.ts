@@ -17,8 +17,16 @@
  */
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
-import { makeWikiBehavior, mountProjection } from "@lararium/tw5";
+import { makeWikiBehavior, mountProjection, mountCoherenceProjection } from "@lararium/tw5";
 
-// onBoot = the projection-nalu, the browser twin of node's disk projector: the island renders
-// its story river into $tw.fakeDocument and emits `projection:frame` events to the main thread.
-runBrowserSovereignWorker(makeWikiBehavior({ onBoot: (ctx) => mountProjection(ctx) }));
+// onBoot = TWO projection-nalus over the one island (both the browser twin of a node projector):
+//   1. mountProjection    — renders the story river into $tw.fakeDocument, emits `projection:frame`.
+//   2. mountCoherenceProjection — reads the wiki's OWN consistency radius, emits `coherence:frame`.
+// Both coalesce on the same wikistore change beat; the teardown tears them down LIFO.
+runBrowserSovereignWorker(makeWikiBehavior({
+  onBoot: (ctx) => {
+    const stopRender = mountProjection(ctx);
+    const stopCoherence = mountCoherenceProjection(ctx);
+    return () => { stopCoherence(); stopRender(); };
+  },
+}));
