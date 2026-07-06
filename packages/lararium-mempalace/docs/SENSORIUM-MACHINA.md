@@ -8,6 +8,8 @@
 
 The machina **turns N interleaved AI-session streams into one living memory sensorium** — capturing every agent and sub-agent turn across projects and surfaces, clocking each by its own recovered rhythm, landing it durably, and letting structure and resonance *emerge* rather than get stamped ahead. It runs **py/R for the realtime streams**; the TS `@daemon` coordinates across the causal-island shore and carries no payload.
 
+**S5 sharpening (2026-07-05):** ALL machine-code runs **py**; the TS `@daemon` (wiki-island VM worker) **coordinates only** — not a compute home. The sensoriums stand **separate** (each a local cap; never federating): the **GOAL** = a full memory-sensorium of the **AI-Operator worldlines** (real sessions + live); the **TEST-BEDS** = ephemeral **human-text sensoriums** stood from curated frozen corpuses (controlled ground-truth for the independence test — the apophenia guard). `~/.mempalace/palace` serves as a **comparator only**. The RUN over real data = the RUN arc (`RUN-ARC.md`).
+
 Two laws bound everything below:
 - **No global now** (causal-islands): each stream, each worldline, each island reads only its own log. The machina mints **no shared cross-stream counter**.
 - **Emergence over pinning**: one operator scalar (ARL₀) survives; every other threshold refracts from it as the α-quantile of a stream-drawn null. A constant guesses; a servo tracks.
@@ -154,6 +156,8 @@ Only worldlines above a **transition-density floor** get their own clock (a stat
 
 **Built + witnessed (Phase 0–6b, ~26 commits, ~383 green):** the durable barrier · identity floors · compose_sensorium + 2 pins · warm embed · rhythm physics (`ffz_clock`/`nalu_gate`, static-corpus-null, TS↔py parity) · worldline + full kapae · multi-surface live capture · the isomorphic surface + the grid + the HITL-gate.
 
+**Built + witnessed — the enact-flow (2026-07-05):** the **SPINE** (S0–S3, TS **concept-witness**) — `bifurcation-bench.ts` (four order-parameters — complexity-entropy · ΔF · H¹ · the EFE gate-flip — on one ARL₀→α sweep, surrogate-null banded) + `sensorium-efe.ts` (the H¹-gated EFE keystone; the gate-flip **co-jumps at one α** on synthetic data — §11 ENACTED). The **HARDEN** (py C1b→C5, 413 green) — veiled worldline-root · poison-guard (fatal-split) · correctness/legibility/scale cures — the machina degrades on a gradient, never a cliff. **The S5 RULING:** py machine-code · TS `@daemon` coordinator-only · `~/.mempalace`=comparator · separate sensoriums (goal AI-Operator / ephemeral human-text test-beds) · the RUN over genuinely-independent real planes = a **new py arc** (`RUN-ARC.md`).
+
 **Designed, pending the streaming epic:** the demux-by-worldline · the per-worldline gate instancing · the emergent-dial dissolution (ARL₀ + null-harness wiring) · the boundary-clock hierarchy · the coupling-read=Ki wiring · the EM re-processing loop · the regenerated-standing readout · the @daemon-cap-wire + the coordination-brain.
 
 **Forks RESOLVED — ratchet-closed 2026-07-05** (a 3-part ratchet: internet → mempalace → internet, YIN/YANG trading each round). Through-line: **every frontier answer is no-global-now NATIVE** — differential-dataflow partial-orders · DESYNC local-only · Nested-Learning frequency-factored loops · NCA local update-rules. Reversibility, factoring-by-timescale, node-local adaptation, regrow-to-setpoint are the frontier's *names* for integrities the spine already carries. **The work is wiring + subtracting the one over-reach (anti-kindling), not invention.**
@@ -208,5 +212,14 @@ The Helmholtz-machine **wake-sleep algorithm**, term for term: **deep-dream (sle
 - **(a) One expected-free-energy objective — fuse perception and action.** The machina built the perception arm (per-plane surprise) but frames reconcile as a *separate* homeostatic servo (§8). Active inference: both minimize the *same* F; the operator set-points become the **prior preferences (the "C vector")**, and "manage emergently" resolves to *emit the verb that minimizes **expected** free energy toward the preferred state* — a principled replacement for the ad-hoc least-authority/most-reversible verb-heuristic.
 - **(b) H¹ as THE coherence gauge — Plurality Pono, measured.** Promote H¹ from a memory-gate feature to the machina's own self-inconsistency signal: how far the N worldlines fail to glue into one sensorium, Čech-computable local-first. The convergence with Plurality Pono runs exact — *a nonzero H¹ is not a bug; it is the honest map of irreducible disagreement* (the Thirteen genuinely disagreeing, quantified).
 - **(bonus) Prigogine predicts a phase diagram.** The `ARL₀ → α` sweep should show **bifurcation structure** — sweep α, watch order-parameters (sink birth-rate, coupling coherence) jump discontinuously at critical points. Order-through-fluctuation made visible — the paper's key figure.
+
+### ENACTED — the concept-witness (S0–S3, synthetic; 2026-07-05)
+
+All three predictions above were **built + witnessed on a seeded synthetic corpus** in the enact-flow (a TS **concept-witness**, `packages/lararium-node/probes/bifurcation-bench.ts` + `src/sensorium-efe.ts`):
+- **(a)** = the **H¹-gated EFE keystone** — `scoreEfe`/`efeSelect`/`efeGate`; `EFE = pragmatic (KL to the C-vector = operator set-point) + γ·epistemic + γ·optionLoss`; reversibility DERIVED from `optionLoss` (not a boolean grid); γ=1 C-only floor, seam for ARL₀→β.
+- **(b)** = **H¹ as an order-parameter** on the Bench (`cohomologyObstruction` → `dim H¹`, `R*_sem = log₂ dim H¹`).
+- **(bonus)** = **the co-jump** — four order-parameters (complexity-entropy · ΔF · H¹ · the EFE gate-flip) bifurcate on one ARL₀→α axis, with surrogate-null significance bands; the **EFE gate-flip co-jumps at the exact rung H¹ leaves 0**.
+
+**This witnesses the MECHANISM, not the thesis.** The synthetic co-jump proves the instruments run; a *load-bearing* co-jump needs genuinely-independent planes over real ground-truth. The **production RUN** — py machine-code (TS @daemon coordinating), over an ephemeral human-text test-bed first, then the AI-Operator memory-sensorium — is the crossing (see `RUN-ARC.md`). The TS spine freezes as the concept-witness + TS↔py parity oracle; the py arc carries the **contracts, not the code**.
 
 Held-not-new (the parts already carry these): **autopoiesis** (ruled = operational-closure + structural-coupling + precariousness; the Elyncia fiction rhymes to precariousness — a fed node hums, a neglected one flickers) · **Levin/NCA** morphogenesis (regenerated-standing = the basin).
