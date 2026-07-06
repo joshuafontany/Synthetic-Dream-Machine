@@ -187,3 +187,20 @@ def observe_worldline(store, transcript: str, *, tick0: int = 1) -> dict:
         observed.append(spirit.handle)
 
     return {"run": run, "main_turns": main_edges, "spirits": observed}
+
+
+def detect_rewind(store, drawers) -> "str | None":
+    """Compare a re-derived transcript's content-hash-chain to the STORED drawers' `lar_chain`, returning
+    the first turn-key where they DIVERGE — the rewind-point (an edited or diverged prefix); None when the
+    chain holds. The cid keys on source+index (content-INDEPENDENT), so an edit re-derives the SAME cid and
+    `is_landed` would skip it silently; the chain surfaces the tamper, so the caller kāpae-prunes from the
+    rewind-point (the retraction — the cascade re-projects downstream). `drawers` = the freshly re-derived
+    (cid, text, metadata) tuples for one source; a genuinely new tail turn (no stored drawer) reads as
+    growth, not a rewind."""
+    for cid, _text, meta in drawers:
+        stored = store.get(cid)
+        if stored is None:
+            continue                                       # a new tail turn — growth, not a rewind
+        if (stored.get("metadata") or {}).get("lar_chain") != meta.get("lar_chain"):
+            return meta.get("lar_turn_key")                # the chain diverged here — the rewind-point
+    return None

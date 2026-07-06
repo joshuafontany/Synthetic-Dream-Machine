@@ -82,15 +82,23 @@ def _drawers(source_file: str, turns: list, *, wing: str, room: str,
              extra: "dict | None" = None) -> Iterator[tuple]:
     """Yield (cid, text, metadata) per exchange — WITHOUT a seq (the caller assigns the dense pass seq,
     so a multi-session source runs one contiguous watermark). The metadata carries the schema floor
-    (wing/room), the drawer provenance (source_file/chunk_index), and the worldline binding
-    (lar_turn_key). `extra` folds in per-surface marks (lar_surface, lar_sidechain)."""
+    (wing/room), the drawer provenance (source_file/chunk_index), the worldline binding (lar_turn_key),
+    and `lar_chain` — a CONTENT-hash-chain (chain_i = sha16(text_i + chain_{i-1})) per source_file. The
+    cid keys on source+index (content-INDEPENDENT), so an edited/truncated prefix keeps the same cid and
+    is_landed would silently SKIP it; the chain binds each link to its text + predecessor, so a tampered
+    prefix BREAKS the chain and a re-capture pass detects the rewind (worldline_observe.detect_rewind).
+    `extra` folds in per-surface marks (lar_surface, lar_sidechain)."""
+    prev_chain = ""
     for chunk, ex in enumerate(_assemble_exchanges(turns)):
+        chain = _sha16(ex["text"] + prev_chain)   # each link binds its text + the predecessor's link
+        prev_chain = chain
         meta = {
             "wing": wing,
             "room": room,
             "source_file": source_file,
             "chunk_index": chunk,
             "lar_turn_key": _turn_key(source_file, ex),
+            "lar_chain": chain,
         }
         if extra:
             meta.update(extra)

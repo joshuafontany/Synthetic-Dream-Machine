@@ -125,3 +125,28 @@ def test_capture_and_observe_lands_content_and_builds_the_worldline(tmp_path):
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
     assert store.worldline_of("u1") == "sess-xyz"
     assert store.worldline_of("u2") == "sess-xyz"
+
+
+def test_detect_rewind_finds_the_diverged_prefix(tmp_path):
+    # step-3 (A): a content-hash-chain surfaces an edited prefix the content-independent cid would skip.
+    import content_io as cio
+    from capture_sources import _sha16, derive_cid
+    from worldline_observe import detect_rewind
+
+    store = cio.ContentStore(str(tmp_path / ".rewind"))
+    sf = "sess.jsonl"
+
+    def drawers(texts):
+        prev, out = "", []
+        for i, t in enumerate(texts):
+            chain = _sha16(t + prev)
+            prev = chain
+            out.append((derive_cid(sf, i), t, {"lar_turn_key": f"t{i}", "lar_chain": chain,
+                                               "wing": "w", "room": "r"}))
+        return out
+
+    for cid, t, m in drawers(["a", "b", "c"]):
+        store.put(cid, t, [0.1, 0.2], m)
+    assert detect_rewind(store, drawers(["a", "b", "c"])) is None       # chain holds -> no rewind
+    assert detect_rewind(store, drawers(["a", "B!", "c"])) == "t1"      # turn-1 edited -> chain diverges at t1
+    assert detect_rewind(store, drawers(["a", "b", "c", "d"])) is None  # a new tail turn = growth, not rewind
