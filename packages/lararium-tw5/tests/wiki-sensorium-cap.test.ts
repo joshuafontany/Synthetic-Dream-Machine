@@ -67,7 +67,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("content and structure tiers read the resolved corpus (title probe · sigil-head probe)", async () => {
-    const island = buildFixtureIsland("lar:///ha.ka.ba/@sensorium-tiers", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-tiers", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     try {
       const byTitle = await sense.recall({ text: "canon" });
@@ -83,7 +83,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("the volatile memo dies when the log moves — a write invalidates, the next read re-folds", async () => {
-    const island = buildFixtureIsland("lar:///ha.ka.ba/@sensorium-memo", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-memo", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     const origin: ChangeOrigin = { kind: "canon-hydrate", receipt: "memo-test" };
     try {
@@ -100,7 +100,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("the island cap claims the three verb signals and posts SENSORIUM_FRAME answers", async () => {
-    const island = buildFixtureIsland("lar:///ha.ka.ba/@sensorium-cap", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-cap", GLUE_SEEDS);
     const posted: Array<Record<string, unknown>> = [];
     // a minimal island context — only the seams this cap touches (composite · post · wikiUri).
     const ctx = {

@@ -38,7 +38,7 @@ const ORNATE_NOVEL: FixtureTiddler = {
 
 /** Fold the composite face over seeds and hand back the compact summary (the cross-beat's far mouth). */
 async function compositeSummary(bagId: string, seeds: readonly FixtureTiddler[]): Promise<WikiCoherenceSummary> {
-  const sense = createWikiSensorium(buildFixtureIsland(bagId, seeds));
+  const sense = createWikiSensorium(await buildFixtureIsland(bagId, seeds));
   try {
     return summarizeCoherence(await sense.cohere());
   } finally {

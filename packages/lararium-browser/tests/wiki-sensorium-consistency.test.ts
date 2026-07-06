@@ -39,7 +39,7 @@ describe("wiki-sensorium consistency keystone — browser tier", () => {
   });
 
   test("entries() folds the island's OWN resolved surface, causal-stamped", async () => {
-    const island = buildFixtureIsland("lar:///ha.ka.ba/@witness-browser", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/@witness-browser", GLUE_SEEDS);
     const snap = await new WikiStoreAdapter(island).snapshot();
     expect(snap.readings.map((r) => r.title).sort()).toEqual(["canon-a", "canon-b", "plain"]);
     for (const r of snap.readings) expect(r.heads).toBeNull();

@@ -44,7 +44,7 @@ describe("S0 wiki-sensorium consistency — node tier", () => {
   });
 
   test("entries() folds the island's OWN resolved surface, causal-stamped", async () => {
-    const island = buildFixtureIsland("lar:///ha.ka.ba/@witness-node", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/@witness-node", GLUE_SEEDS);
     const snap = await new WikiStoreAdapter(island).snapshot();
     expect(snap.readings.map((r) => r.title).sort()).toEqual(["canon-a", "canon-b", "plain"]);
     // memory-backed fixture carries no CRDT heads — the stamp reads honestly null, never fabricated.

@@ -13,7 +13,7 @@
  */
 
 import type { CompositeStore, CompositeEntry } from "@lararium/mesh";
-import type { WikiSenseDoc } from "./wiki-sense-fold.js";
+import { deriveDocStalk, senseBodyOf, type DocStalk, type WikiSenseDoc } from "./wiki-sense-fold.js";
 
 /** The seam ONE perceiver hull consumes — whole-record docs + a change pulse. Read-only. */
 export interface WikiCorpusReader {
@@ -21,6 +21,9 @@ export interface WikiCorpusReader {
   docs(): Promise<readonly WikiSenseDoc[]>;
   /** change subscription — fires when the corpus moves; returns the unsubscribe. */
   subscribe(listener: () => void): () => void;
+  /** OPTIONAL per-title stalk supplier — a reader with its own cache law fills foldCorpus's stalkOf
+   *  seam (the composite face memos per changeId; the VM face rides getCacheForTiddler instead). */
+  stalkOf?: (doc: WikiSenseDoc) => DocStalk;
 }
 
 /** Lift ONE composite entry onto the sensed-entity shape — the WHOLE record, pass-through. The one
@@ -36,13 +39,31 @@ export function senseDocOfEntry(e: CompositeEntry): WikiSenseDoc {
   };
 }
 
-/** Stand the seam over one VM-less wiki island's composite — resolved, kāpae-honored, causal-stamped. */
+/** Stand the seam over one VM-less wiki island's composite — resolved, kāpae-honored, causal-stamped.
+ *  Carries a PER-TITLE stalk memo keyed on the entry's changeId (the causal stamp): a refold after
+ *  one write re-derives ONE stalk, not the whole corpus — the composite face's warm-refold cure
+ *  (the VM face already rides TW5's getCacheForTiddler for the same law). */
 export function compositeCorpusReader(store: CompositeStore): WikiCorpusReader {
+  const memo = new Map<string, { changeId: string; stalk: DocStalk }>();
   return {
     async docs(): Promise<readonly WikiSenseDoc[]> {
       const entries = await store.entries();
-      return entries.map(senseDocOfEntry);
+      const docs = entries.map(senseDocOfEntry);
+      // move-not-leak: memo entries for titles no longer resolved die with the read.
+      const live = new Set(docs.map((d) => d.title));
+      for (const title of memo.keys()) if (!live.has(title)) memo.delete(title);
+      return docs;
     },
     subscribe: (listener) => store.subscribe(listener),
+    stalkOf: (doc) => {
+      const changeId = doc.changeId ?? null;
+      if (changeId !== null) {
+        const hit = memo.get(doc.title);
+        if (hit && hit.changeId === changeId) return hit.stalk;
+      }
+      const stalk = deriveDocStalk(senseBodyOf(doc.fields));
+      if (changeId !== null) memo.set(doc.title, { changeId, stalk });
+      return stalk;
+    },
   };
 }

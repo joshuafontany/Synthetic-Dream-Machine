@@ -27,6 +27,7 @@ import type { ConsistencyRadius } from "@lararium/mesh";
 import { CoalesceGate } from "@lararium/mesh";
 import type { IslandContext } from "./island-context.js";
 import { WikiStoreAdapter } from "./wiki-store-adapter.js";
+import { capLoci } from "./wiki-sense-fold.js";
 
 /** The `IslandMsg_Event.listenable` discriminator for a coherence indicator frame. */
 export const COHERENCE_FRAME = "coherence:frame";
@@ -53,8 +54,11 @@ export interface CoherenceIndicatorFrame {
   readonly glues: boolean;
   /** no engineered overlap constrained the read — a vacuous 0 that says nothing (the consistency keystone's caution a). */
   readonly vacuous: boolean;
-  /** the tiddler(s) where the planes disagree — the consistency keystone's localized obstruction locus (empty when coherent). */
+  /** the tiddler(s) where the planes disagree — the consistency keystone's localized obstruction locus
+   *  (empty when coherent; capped at the boundary loci budget — `lociTotal` carries the true count). */
   readonly obstructing: readonly string[];
+  /** the UNCAPPED obstruction count — how many tiddlers the full locus names. */
+  readonly lociTotal: number;
   /** a human line the indicator surfaces, verb-forward. */
   readonly label: string;
 }
@@ -75,6 +79,7 @@ export function projectCoherenceIndicator(reading: ConsistencyRadius): Coherence
       glues: false,
       vacuous: true,
       obstructing: [],
+      lociTotal: 0,
       label: "coherence reads indeterminate — no engineered overlap constrains the planes (a vacuous read)",
     };
   }
@@ -85,17 +90,25 @@ export function projectCoherenceIndicator(reading: ConsistencyRadius): Coherence
       glues: true,
       vacuous: false,
       obstructing: [],
+      lociTotal: 0,
       label: "the wiki coheres — structure and form glue on every tiddler",
     };
   }
-  const obstructing = [...reading.obstructionLocus];
-  const where = obstructing.length > 0 ? obstructing.join(", ") : "an unlocalized overlap";
+  // the frame crosses a serialized boundary — the locus caps at the loci budget; the label names
+  // the overflow so the operator still reads the true breadth.
+  const lociTotal = reading.obstructionLocus.length;
+  const obstructing = [...capLoci(reading.obstructionLocus)];
+  const overflow = lociTotal - obstructing.length;
+  const where = obstructing.length > 0
+    ? obstructing.join(", ") + (overflow > 0 ? ` (and ${overflow} more)` : "")
+    : "an unlocalized overlap";
   return {
     status: "obstructed",
     radius: reading.radius,
     glues: false,
     vacuous: false,
     obstructing,
+    lociTotal,
     label: `the planes fracture (radius ${reading.radius}) at: ${where}`,
   };
 }
@@ -129,19 +142,27 @@ export interface CoherenceProjector {
  * sink drops it (the coalesce ordering guarantee's main-thread half).
  */
 export function wireCoherenceProjection(seams: CoherenceProjectionSeams): CoherenceProjector {
+  let disposed = false;
   const gate = new CoalesceGate({
     windowMs: seams.windowMs ?? COHERENCE_COALESCE_MS,
     onFlush: (rev) => {
-      void seams.read().then((reading) => {
-        seams.emit(projectCoherenceIndicator(reading), rev);
-      });
+      seams.read()
+        .then((reading) => {
+          // a read resolving past dispose() emits nothing — the projector's teardown holds.
+          if (disposed) return;
+          seams.emit(projectCoherenceIndicator(reading), rev);
+        })
+        .catch((err) => {
+          // a failed read DROPS its frame and names the fault — never an unhandled rejection.
+          console.warn(`[wiki-coherence-projection] the consistency read failed — frame ${rev} dropped:`, err);
+        });
     },
     ...(seams.setTimer ? { setTimer: seams.setTimer } : {}),
     ...(seams.clearTimer ? { clearTimer: seams.clearTimer } : {}),
   });
   return {
     mark: () => gate.mark(),
-    dispose: () => gate.dispose(),
+    dispose: () => { disposed = true; gate.dispose(); },
   };
 }
 
@@ -168,6 +189,7 @@ export function mountCoherenceProjection(ctx: IslandContext): () => void {
           glues: frame.glues,
           vacuous: frame.vacuous,
           obstructing: JSON.stringify([...frame.obstructing]),
+          lociTotal: frame.lociTotal,
           label: frame.label,
           rev,
         },

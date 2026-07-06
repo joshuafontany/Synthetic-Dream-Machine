@@ -38,6 +38,9 @@ export function mountCoherenceIndicator(host: HTMLElement): CoherenceIndicatorSi
   let lastRev = 0;
   return {
     apply(frame: CoherenceFrameWithRev): void {
+      // rev 1 turns an EPOCH: a re-booted projector (worker restart / island remount) counts from 1
+      // again — the gate resets with it rather than dropping the new epoch's frames forever.
+      if (frame.rev === 1) lastRev = 0;
       if (frame.rev < lastRev) return; // stale — a newer frame already landed (coalesce ordering)
       lastRev = frame.rev;
       host.setAttribute("data-coherence", frame.status);

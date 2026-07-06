@@ -156,8 +156,14 @@ export interface Stratification {
   readonly associations: readonly AssociationEdge[];
 }
 
-/** Content-address a source (sha-256, hex) — the pin every standoff stratum carries. */
+/** Content-address a source (sha-256, hex) — the pin every standoff stratum carries. The hash rides
+ *  TextEncoder; a sandbox without one (the TW5 VM) gets a NAMED refusal, never a bare ReferenceError. */
 export function sourceCidOf(text: string): string {
+  if (typeof TextEncoder === "undefined") {
+    throw new Error(
+      "[memetic-wikitext-sensorium] the VM sandbox carries no TextEncoder — pass an explicit sourceCid to stratify()",
+    );
+  }
   return "sha256-" + sha256HexSync(text);
 }
 

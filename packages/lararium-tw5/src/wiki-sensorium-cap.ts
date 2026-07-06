@@ -138,8 +138,9 @@ export function createWikiSensoriumOverReader(
   let cached: Promise<CorpusFold> | null = null;
   // the log moved → the memo dies with the snapshot it summarized (never a stale read past a write).
   const unsub = reader.subscribe(() => { cached = null; });
+  // the reader's own stalk supplier (per-title memo / cache law) fills foldCorpus's seam when present.
   const fold = (): Promise<CorpusFold> =>
-    (cached ??= reader.docs().then((docs) => foldCorpus(docs)));
+    (cached ??= reader.docs().then((docs) => foldCorpus(docs, reader.stalkOf)));
 
   return {
     async cohere(): Promise<WikiCoherenceVerdict> {
@@ -149,7 +150,8 @@ export function createWikiSensoriumOverReader(
 
     async recall(query: WikiRecallQuery): Promise<WikiRecallResult> {
       const f = await fold();
-      const limit = Math.max(1, query.limit ?? RECALL_LIMIT);
+      // a non-finite limit (NaN/Infinity off a wire) falls back to the default — never a poisoned slice.
+      const limit = Number.isFinite(query.limit) ? Math.max(1, query.limit!) : RECALL_LIMIT;
 
       const content = query.text !== undefined ? contentTier(f, query.text, limit) : [];
       const structure = query.sigilHead !== undefined ? structureTier(f, query.sigilHead, limit) : [];
@@ -231,6 +233,20 @@ function postFrame(
   });
 }
 
+/** Post one verb's FAILURE as a SENSORIUM_FRAME error event — the ask-wire fails loud on BOTH ends:
+ *  the supervisor's timeout never stands in for an answerable fault (requestId echoes back). */
+function postErrorFrame(
+  ctx: IslandContext, verb: keyof typeof SENSORIUM_SIGNAL, requestId: string, error: unknown,
+): void {
+  ctx.post({
+    schema_version: 1,
+    type: "event",
+    wikiUri: ctx.wikiUri,
+    listenable: SENSORIUM_FRAME,
+    payload: { verb, requestId, error: error instanceof Error ? error.message : String(error) },
+  });
+}
+
 /**
  * The `hasWikiSensorium` cap — folds the perceiver into a wiki island's #has stack. onEa stands the
  * perceiver over the island's OWN composite (dispose rides the LIFO teardown); onSignal claims the
@@ -247,31 +263,46 @@ export function hasWikiSensorium(opts: WikiSensoriumOptions = {}): IslandCap {
       return () => { perceiver?.dispose(); perceiver = null; };
     },
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
-      if (!perceiver) return false;
-      const p = perceiver;
+      const verb: keyof typeof SENSORIUM_SIGNAL | null =
+        type === SENSORIUM_SIGNAL.cohere ? "cohere"
+        : type === SENSORIUM_SIGNAL.recall ? "recall"
+        : type === SENSORIUM_SIGNAL.couple ? "couple"
+        : null;
+      if (verb === null) return false;
+
       const sig = (raw ?? {}) as RecallSignal;
       const fields = sig.args ?? sig;
       const requestId = typeof fields.requestId === "string" ? fields.requestId : "";
 
-      if (type === SENSORIUM_SIGNAL.cohere) {
-        void p.cohere().then((v) => postFrame(ctx, "cohere", requestId, v));
+      // a claimed signal with NO live perceiver answers an ERROR frame — the ask-wire fails loud
+      // on this end too (the supervisor rejects on it, never idles into its timeout).
+      if (!perceiver) {
+        postErrorFrame(ctx, verb, requestId,
+          "the wiki-sensorium cap holds no live perceiver — the island answered before ea (or after teardown)");
         return true;
       }
-      if (type === SENSORIUM_SIGNAL.recall) {
+      const p = perceiver;
+
+      if (verb === "cohere") {
+        p.cohere()
+          .then((v) => postFrame(ctx, "cohere", requestId, v))
+          .catch((err) => postErrorFrame(ctx, "cohere", requestId, err));
+        return true;
+      }
+      if (verb === "recall") {
         const query: WikiRecallQuery = {
           ...(typeof fields.text === "string" ? { text: fields.text } : {}),
           ...(typeof fields.sigilHead === "string" ? { sigilHead: fields.sigilHead } : {}),
           ...(typeof fields.likeTitle === "string" ? { likeTitle: fields.likeTitle } : {}),
           ...(typeof fields.limit === "number" ? { limit: fields.limit } : {}),
         };
-        void p.recall(query).then((v) => postFrame(ctx, "recall", requestId, v));
+        p.recall(query)
+          .then((v) => postFrame(ctx, "recall", requestId, v))
+          .catch((err) => postErrorFrame(ctx, "recall", requestId, err));
         return true;
       }
-      if (type === SENSORIUM_SIGNAL.couple) {
-        postFrame(ctx, "couple", requestId, p.couple());
-        return true;
-      }
-      return false;
+      postFrame(ctx, "couple", requestId, p.couple());
+      return true;
     },
   };
 }
@@ -315,8 +346,8 @@ export interface WikiSensoriumWitness {
  * browser (Chromium) test assert the IDENTICAL verdict — one hull, two substrates, differ by grant not hull.
  */
 export async function runWikiSensoriumWitness(): Promise<WikiSensoriumWitness> {
-  const glueIsland = buildFixtureIsland("lar:///ha.ka.ba/@sensorium-glue", GLUE_SEEDS);
-  const obstructIsland = buildFixtureIsland("lar:///ha.ka.ba/@sensorium-obstruct", OBSTRUCT_SEEDS);
+  const glueIsland = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-glue", GLUE_SEEDS);
+  const obstructIsland = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-obstruct", OBSTRUCT_SEEDS);
   const plainBody = GLUE_SEEDS.find((s) => s.title === "plain")!.text;
 
   const bare = createWikiSensorium(glueIsland);

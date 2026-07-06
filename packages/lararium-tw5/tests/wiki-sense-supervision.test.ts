@@ -47,7 +47,7 @@ async function standChannel(designations: readonly string[]): Promise<ChannelHar
   const caps = new Map<string, { cap: IslandCap; ctx: IslandContext; down: (() => void | Promise<void>) | void }>();
 
   for (const designation of designations) {
-    const island = buildFixtureIsland(designation, GLUE_SEEDS);
+    const island = await buildFixtureIsland(designation, GLUE_SEEDS);
     const cap = hasWikiSensorium();
     const ctx = {
       composite: island,
@@ -206,7 +206,7 @@ describe("wiki-sense supervision reads — node tier", () => {
       asOf: ["h1", "h2"] as readonly string[],
       radius: 0.42, glues: false, vacuous: false,
       gateKind: "ontological" as const, dimH1: 2, cost: 1,
-      obstructionLoci: ["ornate-novel"] as readonly string[], corpusSize: 4,
+      obstructionLoci: ["ornate-novel"] as readonly string[], lociTotal: 1, corpusSize: 4,
     };
     const rec = buildProofRecordTiddler(proof, "lar:///ha.ka.ba/@daemon");
     expect(parseProofRecord(rec.tiddler as Record<string, unknown>)).toEqual(proof);

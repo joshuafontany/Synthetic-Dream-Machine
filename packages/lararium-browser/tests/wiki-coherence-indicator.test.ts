@@ -20,7 +20,7 @@ import type { CoherenceFrameWithRev } from "../src/wiki-coherence-sink.js";
 function frame(over: Partial<CoherenceFrameWithRev>): CoherenceFrameWithRev {
   return {
     status: "coherent", radius: 0, glues: true, vacuous: false,
-    obstructing: [], label: "the wiki coheres", rev: 1, ...over,
+    obstructing: [], lociTotal: 0, label: "the wiki coheres", rev: 1, ...over,
   };
 }
 
@@ -53,5 +53,19 @@ describe("mountCoherenceIndicator — the DOM coherence sink", () => {
     sink.apply(frame({ status: "coherent", label: "older", rev: 3 })); // stale — must not overwrite
     expect(host.getAttribute("data-coherence")).toBe("obstructed");
     expect(host.textContent).toBe("newer");
+  });
+
+  test("rev 1 turns an EPOCH — a re-booted projector's frames land, never drop forever", () => {
+    const host = document.createElement("div");
+    const sink = mountCoherenceIndicator(host);
+    sink.apply(frame({ status: "obstructed", label: "old epoch", rev: 9 }));
+    // the worker restarted: the new projector counts from 1 again — the gate resets with it.
+    sink.apply(frame({ status: "coherent", label: "new epoch", rev: 1 }));
+    expect(host.getAttribute("data-coherence")).toBe("coherent");
+    expect(host.textContent).toBe("new epoch");
+    // and the ordering guard re-arms WITHIN the new epoch.
+    sink.apply(frame({ status: "obstructed", label: "newer in epoch", rev: 3 }));
+    sink.apply(frame({ status: "coherent", label: "stale in epoch", rev: 2 }));
+    expect(host.textContent).toBe("newer in epoch");
   });
 });

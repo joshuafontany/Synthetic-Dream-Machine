@@ -62,13 +62,23 @@ export function senseBodyOf(fields: Readonly<Record<string, unknown>>): string {
 /** The shingle width the form lens mines — a small char k-gram, cheap and deterministic. */
 export const FORM_SHINGLE_K = 6;
 
-/** Shred a text into its DISTINCT char k-gram shingles (the form lens's atomic patterns). */
-export function shingles(text: string, k: number = FORM_SHINGLE_K): Set<string> {
+/** Per-doc shingle budget — a megabyte-scale tiddler contributes a BOUNDED, deterministic census
+ *  (measured unguarded: a 2.3MB tiddler minted ~298k shingles / ~37MB heap). */
+export const MAX_DOC_SHINGLES = 4096;
+
+/**
+ * Shred a text into its DISTINCT char k-gram shingles (the form lens's atomic patterns).
+ * A doc whose position count exceeds `cap` samples at a FIXED stride — deterministic (the same
+ * text always yields the same census on every face; the cross-beat agreement rides that).
+ */
+export function shingles(text: string, k: number = FORM_SHINGLE_K, cap: number = MAX_DOC_SHINGLES): Set<string> {
   const out = new Set<string>();
   const t = text.replace(/\s+/g, " ").trim();
   if (t.length === 0) return out;
   if (t.length <= k) { out.add(t); return out; }
-  for (let i = 0; i + k <= t.length; i++) out.add(t.slice(i, i + k));
+  const positions = t.length - k + 1;
+  const stride = positions > cap ? Math.ceil(positions / cap) : 1;
+  for (let i = 0; i + k <= t.length; i += stride) out.add(t.slice(i, i + k));
   return out;
 }
 
@@ -152,16 +162,22 @@ export interface CorpusPlanes {
 /**
  * Project a fold into the sensed planes. Structure reads per title (the RED register load); form reads
  * corpus-aware — a title participates in the recurring grammar when ANY of its shingles occurs in
- * ≥2 docs (load indicator). Both planes key EVERY title, so the engineered stalk carries a genuine
- * overlap — the radius reads non-vacuous by construction.
+ * ≥2 docs (load indicator), EXCLUDING stop-shingles: a shingle carried by more than half the corpus
+ * (floor 2) reads as ambient texture, not grammar — the idf-lite saturation tourniquet (probed: 10k
+ * plain-prose docs otherwise read radius=1 with EVERY title in the locus). Both planes key EVERY
+ * title, so the engineered stalk carries a genuine overlap — the radius reads non-vacuous by construction.
  */
 export function corpusPlanes(fold: CorpusFold): CorpusPlanes {
   const structureVal = new Map<string, number>();
   const formVal = new Map<string, number>();
+  const stopAbove = Math.max(2, fold.docs.length / 2);
   for (const d of fold.docs) {
     structureVal.set(d.title, d.stalk.structure);
     let recurring = 0;
-    for (const s of d.stalk.shingleSet) if ((fold.shingleDocFreq.get(s) ?? 0) >= 2) { recurring = 1; break; }
+    for (const s of d.stalk.shingleSet) {
+      const df = fold.shingleDocFreq.get(s) ?? 0;
+      if (df >= 2 && df <= stopAbove) { recurring = 1; break; }
+    }
     formVal.set(d.title, d.stalk.shingleSet.size > 0 ? recurring : 0);
   }
   const restrictions: PlaneRestriction[] = [
@@ -245,16 +261,29 @@ export function readTw5Universe(wiki: TW5Wiki, opts: WikiUniverseOptions = {}): 
   return docs;
 }
 
+/** The boundary loci budget — every SERIALIZED surface (filter wire, proof record, indicator frame)
+ *  caps the obstruction locus here and carries the true count as `lociTotal`; in-process verbs keep
+ *  the full read. */
+export const LOCI_CAP = 32;
+
+/** Cap a locus list for a serialized boundary — deterministic head slice (the loci arrive sorted
+ *  from the radius read); the caller carries the true total alongside. */
+export function capLoci(loci: readonly string[], cap: number = LOCI_CAP): readonly string[] {
+  return loci.length > cap ? loci.slice(0, cap) : loci;
+}
+
 /**
  * The COMPACT cohere verdict — the wikitext-idiomatic shape `[wikisense:cohere[]]` answers with
  * (one JSON string): flat scalars + the loci, never Maps, never corpus bytes. `pairs` folds to a
- * count; the full per-pair read stays on the in-process verbs.
+ * count; the full per-pair read stays on the in-process verbs. The locus caps at {@link LOCI_CAP};
+ * `lociTotal` carries the uncapped count.
  */
 export interface WikiCoherenceSummary {
   readonly radius: number;
   readonly glues: boolean;
   readonly vacuous: boolean;
   readonly obstructionLocus: readonly string[];
+  readonly lociTotal: number;
   readonly gate: WikiCoherenceVerdict["gate"];
   readonly corpusSize: number;
   readonly bindingPairs: number;
@@ -266,7 +295,8 @@ export function summarizeCoherence(v: WikiCoherenceVerdict): WikiCoherenceSummar
     radius: v.consistency.radius,
     glues: v.consistency.glues,
     vacuous: v.consistency.vacuous,
-    obstructionLocus: v.consistency.obstructionLocus,
+    obstructionLocus: capLoci(v.consistency.obstructionLocus),
+    lociTotal: v.consistency.obstructionLocus.length,
     gate: v.gate,
     corpusSize: v.corpusSize,
     bindingPairs: v.consistency.pairs.filter((p) => !p.vacuous).length,

@@ -105,15 +105,15 @@ export interface FixtureTiddler {
 /**
  * Build a wiki-causal-island fixture — a {@link CompositeStore} scoped to its OWN single writable bag
  * (the island's bagStack), seeded with tiddlers. The island differs from its sibling by GRANT (its
- * bag id), never by hull.
+ * bag id), never by hull. Awaits every seed put — the fixture hands back a fully-landed corpus.
  */
-export function buildFixtureIsland(bagId: string, seeds: readonly FixtureTiddler[]): CompositeStore {
+export async function buildFixtureIsland(bagId: string, seeds: readonly FixtureTiddler[]): Promise<CompositeStore> {
   const store = new CompositeStoreCtor();
   const bag = new MemoryTiddlerStore(bagId);
   store.addLayer({ bagId, store: bag, writable: true });
   const origin: ChangeOrigin = { kind: "canon-hydrate", receipt: bagId };
   for (const s of seeds) {
-    void bag.put({ tiddler: { title: s.title, text: s.text } }, origin);
+    await bag.put({ tiddler: { title: s.title, text: s.text } }, origin);
   }
   return store;
 }
@@ -157,8 +157,8 @@ export const OBSTRUCT_SEEDS: readonly FixtureTiddler[] = [
  * two substrates, proves the island-isomorphism — one hull, differ by grant not hull.
  */
 export async function runWikiConsistencyWitness(): Promise<WikiConsistencyWitness> {
-  const glueIsland = buildFixtureIsland("lar:///ha.ka.ba/@witness-glue", GLUE_SEEDS);
-  const obstructIsland = buildFixtureIsland("lar:///ha.ka.ba/@witness-obstruct", OBSTRUCT_SEEDS);
+  const glueIsland = await buildFixtureIsland("lar:///ha.ka.ba/@witness-glue", GLUE_SEEDS);
+  const obstructIsland = await buildFixtureIsland("lar:///ha.ka.ba/@witness-obstruct", OBSTRUCT_SEEDS);
   const glue = await new WikiStoreAdapter(glueIsland).consistency();
   const obstruct = await new WikiStoreAdapter(obstructIsland).consistency();
   return { glue, obstruct };

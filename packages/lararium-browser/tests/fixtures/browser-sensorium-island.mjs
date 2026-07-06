@@ -18,14 +18,14 @@ let cap = null;
 let ctx = null;
 let capDown = null;
 
-self.addEventListener("message", (e) => {
+self.addEventListener("message", async (e) => {
   const msg = e.data;
   if (typeof msg !== "object" || msg === null || msg.schema_version !== 1) return;
 
   if (msg.type === "manifest") {
     wikiUri = msg.wikiUri;
     // the island's OWN corpus — the perceiver reads it; nothing here writes back.
-    const island = buildFixtureIsland(wikiUri, GLUE_SEEDS);
+    const island = await buildFixtureIsland(wikiUri, GLUE_SEEDS);
     cap = hasWikiSensorium();
     ctx = {
       composite: island,

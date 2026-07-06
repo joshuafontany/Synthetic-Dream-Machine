@@ -477,6 +477,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
               glues:       Boolean(msg.payload["glues"]),
               vacuous:     Boolean(msg.payload["vacuous"]),
               obstructing,
+              lociTotal:   Number(msg.payload["lociTotal"] ?? obstructing.length),
               label:       String(msg.payload["label"] ?? ""),
               rev:         Number(msg.payload["rev"] ?? 0),
             });

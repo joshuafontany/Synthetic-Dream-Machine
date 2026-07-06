@@ -71,6 +71,14 @@ export function wikisense(
   const universe: WikiSenseUniverse = parts.includes("ordinary") ? "ordinary" : "whole";
   const operand = operator.operand ?? "";
 
+  // fail loud on a residual token naming neither a tier nor a universe — a typo never narrows silently.
+  const residual = parts.slice(1).find(
+    (p) => p !== "title" && p !== "structure" && p !== "form" && p !== "ordinary",
+  );
+  if (residual !== undefined) {
+    return [`wikisense: unknown suffix token "${residual}" (expected title|structure|form|ordinary)`];
+  }
+
   if (verb === "cohere") {
     const verdict = cohereFold(corpusOf(options.wiki, universe));
     return [JSON.stringify(summarizeCoherence(verdict))];

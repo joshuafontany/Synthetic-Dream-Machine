@@ -33,6 +33,7 @@ import type {
 } from "@lararium/mesh";
 import { SENSORIUM_SIGNAL } from "./wiki-sensorium-cap.js";
 import type { WikiCoherenceVerdict, WikiRecallQuery, WikiRecallResult } from "./wiki-sensorium-cap.js";
+import { capLoci } from "./wiki-sense-fold.js";
 import type { VerbTable } from "./verb-dispatcher.js";
 
 // ── the supervision verbs (the daemon-facing names) ─────────────────────────────────────────────────
@@ -46,6 +47,10 @@ export const WIKI_SENSE_VERB = {
 
 /** Per-ask reply budget — mirrors the pool's wiki:place-verb handshake budget. */
 const ASK_TIMEOUT_MS = 10_000;
+
+/** Proof-ledger ring size — the ledger keeps the last N proof records per island designation;
+ *  older records delete forward on write (the ledger stays a bounded ring, never a landfill). */
+const PROOF_RING = 32;
 
 // ── the seams (the vessel's grant — designation carries the authority) ──────────────────────────────
 
@@ -72,6 +77,8 @@ export interface WikiSenseSupervisorOptions {
   timeoutMs?: number;
   /** Override the proof event-id mint (tests). Defaults to the mesh {@link newEventId}. */
   newId?: () => string;
+  /** Proof-ledger ring size per island (tests tighten it). Default {@link PROOF_RING}. */
+  proofRing?: number;
 }
 
 // ── the proof record (the effect-record ledger idiom, proof plane) ──────────────────────────────────
@@ -89,9 +96,15 @@ export function proofRecordUri(bagUri: string, eventId: string): string {
   return `${proofLedgerPrefix(bagUri)}${eventId}`;
 }
 
-/** True when a title sits in a bag's proof ledger. */
-export function isProofRecordUri(title: string): boolean {
-  return /^lar:\/\/\/[^/]+\/@[^/]+\/ledger\/proof\/.+$/.test(title);
+/** True when a title sits in a bag's proof ledger. Pass the bag to pin the check to ONE ledger
+ *  ({@link proofLedgerPrefix}); absent, the bag-agnostic shape test answers — so a non-default
+ *  proofBag round-trips through build → parse unchanged. */
+export function isProofRecordUri(title: string, bagUri?: string): boolean {
+  if (bagUri !== undefined) {
+    const prefix = proofLedgerPrefix(bagUri);
+    return title.startsWith(prefix) && title.length > prefix.length;
+  }
+  return /^lar:\/\/\/.+\/ledger\/proof\/.+$/.test(title);
 }
 
 /**
@@ -116,8 +129,10 @@ export interface WikiSenseProofRecord {
   readonly dimH1:           number;
   /** R*_sem = log₂ dim H¹ (0 when reconcilable). */
   readonly cost:            number;
-  /** The union obstruction locus — tiddler TITLES only (where to look, never what it said). */
+  /** The union obstruction locus — tiddler TITLES only (where to look, never what it said);
+   *  capped at the boundary loci budget; `lociTotal` carries the uncapped count. */
   readonly obstructionLoci: readonly string[];
+  readonly lociTotal:       number;
   readonly corpusSize:      number;
 }
 
@@ -137,7 +152,8 @@ export function buildProofRecordTiddler(proof: WikiSenseProofRecord, bagUri: str
       "gate-kind":        proof.gateKind,
       "dim-h1":           String(proof.dimH1),
       cost:               String(proof.cost),
-      "obstruction-loci": JSON.stringify(proof.obstructionLoci),
+      "obstruction-loci": JSON.stringify(capLoci(proof.obstructionLoci)),
+      "loci-total":       String(proof.lociTotal),
       "corpus-size":      String(proof.corpusSize),
     },
     meta: { authority: "lares-proof-holder" },
@@ -165,21 +181,34 @@ export function parseProofRecord(fields: Record<string, unknown>): WikiSenseProo
       return Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
     } catch { return []; }
   };
-  const num = (k: string): number => Number(str(k) ?? "0");
+  // a poisoned numeric (NaN/Infinity) fails the WHOLE parse — a proof record never carries dead numbers.
+  const num = (k: string): number | null => {
+    const n = Number(str(k) ?? "0");
+    return Number.isFinite(n) ? n : null;
+  };
+  const radius     = num("radius");
+  const dimH1      = num("dim-h1");
+  const cost       = num("cost");
+  const corpusSize = num("corpus-size");
+  const lociTotal  = num("loci-total");
+  if (radius === null || dimH1 === null || cost === null || corpusSize === null || lociTotal === null) return null;
 
+  const obstructionLoci = jsonArr("obstruction-loci");
   return {
     eventId,
     island,
     requestId,
     asOf:            jsonArr("as-of"),
-    radius:          num("radius"),
+    radius,
     glues:           str("glues") === "true",
     vacuous:         str("vacuous") === "true",
     gateKind,
-    dimH1:           num("dim-h1"),
-    cost:            num("cost"),
-    obstructionLoci: jsonArr("obstruction-loci"),
-    corpusSize:      num("corpus-size"),
+    dimH1,
+    cost,
+    obstructionLoci,
+    // pre-ring records carry no loci-total field — the capped list's length answers honestly.
+    lociTotal:       lociTotal > 0 ? lociTotal : obstructionLoci.length,
+    corpusSize,
   };
 }
 
@@ -244,7 +273,27 @@ export function createWikiSenseSupervisor(
   const timeoutMs = opts.timeoutMs ?? ASK_TIMEOUT_MS;
   const proofBag  = opts.proofBag ?? DAEMON_BAG_ID;
   const newId     = opts.newId ?? newEventId;
+  const proofRing = Math.max(1, opts.proofRing ?? PROOF_RING);
   const pending   = new Map<string, PendingAsk>();
+
+  /** The ledger ring — keep the last `proofRing` records for one island; older ones delete forward.
+   *  Event-ids sort by their fixed-width ms prefix, so title order reads as write order. */
+  async function pruneProofLedger(store: LarTiddlerStore, island: string, requestId: string): Promise<void> {
+    const prefix = proofLedgerPrefix(proofBag);
+    const titles = (await store.listVisible()).filter((t) => t.startsWith(prefix));
+    const mine: Array<{ title: string; eventId: string }> = [];
+    for (const title of titles) {
+      const rec = await store.get(title);
+      const parsed = rec ? parseProofRecord(rec.tiddler as Record<string, unknown>) : null;
+      if (parsed && parsed.island === island) mine.push({ title, eventId: parsed.eventId });
+    }
+    if (mine.length <= proofRing) return;
+    mine.sort((a, b) => (a.eventId < b.eventId ? -1 : a.eventId > b.eventId ? 1 : 0));
+    const origin: ChangeOrigin = { kind: "lares-verb", requestId };
+    for (const old of mine.slice(0, mine.length - proofRing)) {
+      await store.remove(old.title, origin);
+    }
+  }
 
   /** The one ask primitive — ward the designation, send the signal, await the correlated frame. */
   function ask(
@@ -305,11 +354,15 @@ export function createWikiSenseSupervisor(
         gateKind:        verdict.gate.kind,
         dimH1:           verdict.gate.dimH1,
         cost:            verdict.gate.cost,
-        obstructionLoci: verdict.consistency.obstructionLocus,
+        // the record carries the CAPPED locus (the boundary budget); lociTotal keeps the true count.
+        obstructionLoci: capLoci(verdict.consistency.obstructionLocus),
+        lociTotal:       verdict.consistency.obstructionLocus.length,
         corpusSize:      verdict.corpusSize,
       };
       const origin: ChangeOrigin = { kind: "lares-verb", requestId };
       await opts.proofStore.put(buildProofRecordTiddler(proof, proofBag), origin, { bag: proofBag });
+      // delete-forward: the ledger stays a bounded ring per island designation.
+      await pruneProofLedger(opts.proofStore, island, requestId);
       return { island, verdict, proof };
     },
 
@@ -335,11 +388,23 @@ export function createWikiSenseSupervisor(
       // THE RETURN-LEG WARD: a frame carrying our requestId but arriving from an island OTHER than
       // the one asked never settles the ask — the exchange stays pinned to its designation.
       if (p.island !== island) return false;
+      // an ERROR frame (the island's fail-loud answer) rejects the ask with the island's own words.
+      const wireError = typeof payload["error"] === "string" && payload["error"].length > 0
+        ? payload["error"] : null;
+      if (wireError !== null) {
+        p.reject(new Error(`[wiki-sense] frame from "${island}" answered with an error — ${wireError}`));
+        return true;
+      }
       let result: unknown;
       try {
         result = JSON.parse(String(payload["result"] ?? "null"));
       } catch (err) {
         p.reject(new Error(`[wiki-sense] frame from "${island}" carried unparseable result — ${String(err)}`));
+        return true;
+      }
+      // a null/non-object result never resolves silently — every verb answers an object shape.
+      if (result === null || typeof result !== "object") {
+        p.reject(new Error(`[wiki-sense] frame from "${island}" carried a null/non-object result — the ask rejects, never resolves silently-null`));
         return true;
       }
       p.resolve(result);
