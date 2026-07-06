@@ -607,6 +607,26 @@ export interface DaemonMsg_WikiAlert {
   kind?: string;
 }
 
+/**
+ * Vessel → wiki island: one S2 sensorium read-signal ridden over the worker wire. The message
+ * TYPE carries the signal name itself (`sensorium:cohere` / `sensorium:recall` / `sensorium:couple`),
+ * so the kernel's dispatch delivers it STRAIGHT to the island's `hasWikiSensorium` cap — the wire
+ * admits the S2 signal surface, it never re-implements the verbs. The island answers on its
+ * `sensorium:frame` event (IslandMsg_Event), correlated by `requestId`; the vessel routes that
+ * frame back through onWorkerEvent. Read-only end to end — no field of this message writes.
+ */
+export interface WikiMsg_SensoriumSignal {
+  schema_version: ProtocolVersion;
+  type: SensoriumSignalType;
+  requestId: string;
+  /** verb fields (recall's text/sigilHead/likeTitle/limit) — the cap reads them off `args`. */
+  args?: Record<string, unknown>;
+}
+
+/** The three S2 verb-signal names the wire admits — ONE source; the tw5 cap types its claims against this. */
+export const SENSORIUM_SIGNAL_TYPES = ["sensorium:cohere", "sensorium:recall", "sensorium:couple"] as const;
+export type SensoriumSignalType = typeof SENSORIUM_SIGNAL_TYPES[number];
+
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
@@ -624,7 +644,8 @@ export type VesselToIslandMsg =
   | DaemonMsg_EvictResult
   | DaemonMsg_ResidencyOpResult
   | WikiMsg_PlaceVerb
-  | WikiMsg_DomEvent;
+  | WikiMsg_DomEvent
+  | WikiMsg_SensoriumSignal;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
 
@@ -790,7 +811,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event", ...SENSORIUM_SIGNAL_TYPES] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
@@ -1238,6 +1259,20 @@ export function mkWikiDomEvent(opts: {
     renderId: opts.renderId,
     eventType: opts.eventType,
     fields: opts.fields,
+  };
+}
+
+export function mkSensoriumSignal(opts: {
+  signal: SensoriumSignalType;
+  requestId: string;
+  args?: Record<string, unknown>;
+}): WikiMsg_SensoriumSignal {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: opts.signal,
+    requestId: opts.requestId,
+    // the S2 cap reads its fields off `args` when present — carry the requestId inside it too.
+    args: { requestId: opts.requestId, ...(opts.args ?? {}) },
   };
 }
 

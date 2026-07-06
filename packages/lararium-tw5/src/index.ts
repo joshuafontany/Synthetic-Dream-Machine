@@ -80,6 +80,25 @@ export type {
   WikiCouplingUnbuilt,
   WikiSensoriumWitness,
 } from "./wiki-sensorium-cap.js";
+export {
+  createWikiSenseSupervisor,
+  registerWikiSenseVerbs,
+  buildProofRecordTiddler,
+  parseProofRecord,
+  proofLedgerPrefix,
+  proofRecordUri,
+  isProofRecordUri,
+  WIKI_SENSE_VERB,
+  LARES_PROOF_RECORD_TAG,
+} from "./wiki-sense-supervision.js";
+export type {
+  WikiSenseSeams,
+  WikiSenseSupervisor,
+  WikiSenseSupervisorOptions,
+  WikiSenseCohereReading,
+  WikiSenseProofRecord,
+  WikiSenseFederateRefusal,
+} from "./wiki-sense-supervision.js";
 export { mountPanel, setPalette, setBootSplash } from "./tw5-browser-surface.js";
 export type {
   TW5Wiki,

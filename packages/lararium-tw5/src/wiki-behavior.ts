@@ -45,6 +45,12 @@ export interface WikiBehaviorOptions {
    * the disk projector is a node-held capability (fs), composed in, not forked.
    */
   onBoot?: (ctx: IslandContext) => (() => void) | undefined;
+  /**
+   * Further #has caps the worker composes onto the wiki island's stack (e.g. the S2
+   * `hasWikiSensorium` perceiver). They fold AFTER the base caps, so the dispatch and
+   * projection channels keep signal precedence; teardown mirrors (LIFO).
+   */
+  caps?: readonly IslandCap[];
 }
 
 /** The isomorphic primary-wiki island behavior. */
@@ -149,6 +155,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
 
   // The nameless wiki island = a #has cap stack. Order = the original onEa order (dispatch ·
   // projection · engine-watch · recipe-watch); composeIsland's LIFO teardown reproduces the old
-  // onHooAnu order (recipe · engine · projection-cleanup · registry-null) exactly.
-  return composeIsland([dispatchCap, projectionCap, hasEngineWatch(), hasRecipeWatch()]);
+  // onHooAnu order (recipe · engine · projection-cleanup · registry-null) exactly. Caller-supplied
+  // caps fold at the tail — added capability, never a re-ordering of the base channels.
+  return composeIsland([dispatchCap, projectionCap, hasEngineWatch(), hasRecipeWatch(), ...(opts.caps ?? [])]);
 }

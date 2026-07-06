@@ -11,7 +11,7 @@
  */
 
 import type { IslandMsg_Manifest } from "@lararium/mesh";
-import { exportMemeText, makeWikiBehavior } from "@lararium/tw5";
+import { exportMemeText, makeWikiBehavior, hasWikiSensorium } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
@@ -54,5 +54,8 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       });
       return projector.start(ctx.tw5);
     },
+    // caps = the S2 sensorium perceiver — the wiki island answers the daemon's supervision reads
+    // (sensorium:cohere/recall in, SENSORIUM_FRAME back). Platform-blind hull; same cap as browser.
+    caps: [hasWikiSensorium()],
   });
 }

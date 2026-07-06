@@ -36,7 +36,10 @@ import {
   makeResidencyStatsReactor,
   PROJECTION_FRAME,
   COHERENCE_FRAME,
+  SENSORIUM_FRAME,
+  createWikiSenseSupervisor, registerWikiSenseVerbs,
 }                                            from "@lararium/tw5";
+import type { WikiSenseSupervisor }          from "@lararium/tw5";
 import type { CoherenceStatus } from "@lararium/tw5";
 import type { CoherenceFrameWithRev } from "./wiki-coherence-sink.js";
 import { composeBrowser }                    from "./browser-caps.js";
@@ -274,6 +277,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // ── Residency MECHANISM (parity with node — a tab has finite memory too) ────
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
   let daemon!:     DaemonVmCore;      // set in openDaemon
+  let wikiSense!:  WikiSenseSupervisor;   // set in wireVerbs (post-daemon)
   let slotActiveWikiId = "";
   // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
   // materializes it fresh — never the old merge-into-stale reconcile. No engine
@@ -415,6 +419,19 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         }),
       );
       registry.register("residency", makeResidencyStatsReactor({ residency }));
+      // wiki-sense (S3) — the daemon's supervision READ-verbs over the islands this vessel's pool
+      // actually holds. The seams ARE the supervision grant: designation resolves through the pool
+      // alone (confused-deputy ward — a name outside the pool fails loud at both ends), and the
+      // proof-hold writes into the daemon's OWN @daemon layer (local, self-sovereign). The daemon
+      // worker reaches these verbs over its existing delegate loop.
+      wikiSense = createWikiSenseSupervisor(
+        {
+          supervises: (island) => vmManager.has(island),
+          sendSignal: (island, msg) => vmManager.placeSensoriumSignal(island, msg),
+        },
+        { proofStore: daemon.composite, proofBag: DAEMON_BAG_ID },
+      );
+      registerWikiSenseVerbs(registry, wikiSense);
     },
 
     afterDaemon: (_a, assembly) => {
@@ -463,6 +480,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
               label:       String(msg.payload["label"] ?? ""),
               rev:         Number(msg.payload["rev"] ?? 0),
             });
+            return;
+          }
+          // Sensorium-nalu frame → the wiki-sense supervisor's return leg. The FRAME's island id
+          // (the pool's wikiId, not any payload claim) pins the answer to the ask's designation.
+          if (msg.listenable === SENSORIUM_FRAME) {
+            wikiSense.acceptFrame(_id, msg.payload);
             return;
           }
           const verb    = typeof msg.payload["verb"]    === "string" ? msg.payload["verb"]    : undefined;

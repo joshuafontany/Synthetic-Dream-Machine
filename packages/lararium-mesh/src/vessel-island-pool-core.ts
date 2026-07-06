@@ -26,7 +26,9 @@ import {
   mkTeardown,
   mkWikiPlaceVerb,
   mkWikiDomEvent,
+  mkSensoriumSignal,
 } from "./island-protocol.js";
+import type { SensoriumSignalType } from "./island-protocol.js";
 import type {
   Repo,
 } from "@automerge/automerge-repo";
@@ -332,6 +334,26 @@ export class VesselIslandPoolCore {
     const slot = this._slots.get(wikiId);
     if (!slot || slot.temperature === "anu") return;
     slot.worker.post(mkWikiDomEvent(ev));
+  }
+
+  /** Post one S2 sensorium read-signal INTO a live island — the daemon's supervision read ridden
+   *  over the worker wire. FAILS LOUD when the designation names no live island (the confused-deputy
+   *  ward at the mechanism: the designation carries the authority; nothing falls back to a default
+   *  island). Fire-and-forget on the wire — the island answers on its `sensorium:frame` event, which
+   *  routes back through onWorkerEvent, correlated by `requestId`. */
+  placeSensoriumSignal(
+    wikiId: string,
+    msg: { signal: SensoriumSignalType; requestId: string; args?: Record<string, unknown> },
+  ): void {
+    const slot = this._slots.get(wikiId);
+    if (!slot || slot.temperature === "anu") {
+      throw new Error(
+        `[vessel-pool] sensorium signal refused — no live island for ${wikiId} ` +
+        `(the designation must name a supervised, live island; no ambient fallback)`,
+      );
+    }
+    slot.lastUsedAt = Date.now();
+    slot.worker.post(mkSensoriumSignal(msg));
   }
 
   // ── Accessors ────────────────────────────────────────────────────────────────

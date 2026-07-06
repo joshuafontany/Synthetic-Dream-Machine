@@ -26,7 +26,7 @@
  * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
  */
 
-import type { CompositeStore, CompositeEntry, LarTiddlerRecord, ConsistencyRadius } from "@lararium/mesh";
+import type { CompositeStore, CompositeEntry, LarTiddlerRecord, ConsistencyRadius, SensoriumSignalType } from "@lararium/mesh";
 import { consistencyRadius, cohomologyObstruction, jaccardDistance, cosineDistance } from "@lararium/mesh";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext } from "./island-context.js";
@@ -68,6 +68,9 @@ export interface WikiCoherenceVerdict {
   };
   /** how many resolved tiddlers the verdict folded — the corpus grain it speaks over. */
   readonly corpusSize: number;
+  /** the as-of stamp: the union of the answering layers' Automerge heads at the snapshot read
+   *  (dedup, sorted; empty for stores with no CRDT backing) — "as of my last sync", never "globally". */
+  readonly asOf: readonly string[];
 }
 
 /** One recall query — each present field licenses its tier; absent fields skip theirs. */
@@ -204,6 +207,8 @@ export function createWikiSensorium(
         consistency,
         gate: { kind: obs.kind, dimH1: obs.dimH1, cost: obs.cost },
         corpusSize: idx.entries.length,
+        // the snapshot's causal coordinates — the proof-hold's stamp rides these, never a wall clock.
+        asOf: [...new Set(idx.entries.flatMap((e) => e.heads ?? []))].sort(),
       };
     },
 
@@ -287,12 +292,13 @@ export function createWikiSensorium(
 /** The OUT-frame listenable every sensorium verb answers on (the S1/telemetry post-event family). */
 export const SENSORIUM_FRAME = "sensorium:frame";
 
-/** The three IN signals the cap claims — one per perceiver verb. */
+/** The three IN signals the cap claims — one per perceiver verb. Typed against the mesh wire union
+ *  ({@link SensoriumSignalType}) so the cap's claims and the protocol's admissions never drift. */
 export const SENSORIUM_SIGNAL = {
   cohere: "sensorium:cohere",
   recall: "sensorium:recall",
   couple: "sensorium:couple",
-} as const;
+} as const satisfies Record<string, SensoriumSignalType>;
 
 /** A recall signal's fields ride flat or under `args` (the signal-channel convention has-capture set). */
 interface RecallSignal {
