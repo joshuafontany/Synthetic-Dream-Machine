@@ -58,6 +58,28 @@ export type {
   CoherenceProjector,
   CoherenceProjectionSeams,
 } from "./wiki-coherence-projection.js";
+export {
+  createWikiSensorium,
+  hasWikiSensorium,
+  runWikiSensoriumWitness,
+  letterFrequencyEmbedder,
+  SENSORIUM_FRAME,
+  SENSORIUM_SIGNAL,
+  RECALL_LIMIT,
+} from "./wiki-sensorium-cap.js";
+export type {
+  TextEmbedder,
+  WikiSensorium,
+  WikiSensoriumHandle,
+  WikiSensoriumOptions,
+  WikiCoherenceVerdict,
+  WikiRecallQuery,
+  WikiRecallHit,
+  WikiRecallResult,
+  WikiCouplingRead,
+  WikiCouplingUnbuilt,
+  WikiSensoriumWitness,
+} from "./wiki-sensorium-cap.js";
 export { mountPanel, setPalette, setBootSplash } from "./tw5-browser-surface.js";
 export type {
   TW5Wiki,
