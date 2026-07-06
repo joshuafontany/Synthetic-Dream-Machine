@@ -37,7 +37,7 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
  */
 
-import { ar1FitPredict, gaussianKL, optimalPrecision } from "@lararium/mesh";
+import { ar1FitPredict, gaussianKL, optimalPrecision } from "./sensorium-pc.js";
 import {
   cohomologyObstruction, reconciliationCost,
   type SheafAssignment, type CohomologyObstruction, type CohomologyOptions,

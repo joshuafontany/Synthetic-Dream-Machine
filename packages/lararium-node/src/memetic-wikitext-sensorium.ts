@@ -40,6 +40,7 @@ import {
 } from "@lararium/mesh";
 import { buildSensoriumManifest, type SensoriumManifest, type SensoriumBands } from "./sensorium.js";
 import { FFZ_ADDRESS_ORDER, type FfzBand } from "@lararium/mesh";
+import type { ComparisonStalk, PlaneRestriction } from "@lararium/mesh";
 
 // ── the two axes ─────────────────────────────────────────────────────────────────────────────────
 
@@ -737,4 +738,62 @@ export function buildPeerSensorium(
     bands: defaultSensoriumBands(),
     ...(created !== undefined ? { created } : {}),
   });
+}
+
+// ── an ENGINEERED overlap over a real skeletal tier (consistency caution a, made concrete) ─────────
+
+/**
+ * Build the three sheaf-plane restrictions from a REAL {@link Stratification} — the engineered
+ * shared-comparison-stalk (the consistency organ's caution a; the organ itself lives platform-blind in
+ * `@lararium/mesh`, this adapter stays beside the corpus reader that produces its input). The stalk
+ * carries the skeletal tier: each anchor `s{i}` names a shared unit ALL THREE planes speak to (genuine
+ * redundancy, not disjoint aspects). Each plane gives every anchor a [0,1] salience through its OWN
+ * lens, so a coherent text has the three coincide (they glue), and a unit that reads content-heavy yet
+ * structurally trivial and pattern-absent makes them DIVERGE:
+ *
+ *   content   — normalized PROSE MASS (the recurring-coherence carrier: how much black prose the anchor holds).
+ *   structure — normalized ASSOCIATION DEGREE (the AST grain: how many red strata dock onto the anchor).
+ *   form      — RECURRING-RELATION participation (the induced grammar: 1 iff a relation label occurring
+ *               ≥2× across the associations governs the anchor, else 0).
+ *
+ * Returns `{ stalk, restrictions }` ready for `consistencyRadius`. On a well-formed corpus the three
+ * agree on the salient units and the radius sits ~0; seed a disagreement (an ungoverned prose anchor)
+ * and it goes positive, localized to that anchor.
+ */
+export function stratificationRestrictions(strat: Stratification): {
+  stalk: ComparisonStalk; restrictions: PlaneRestriction[];
+} {
+  const units = strat.skeletal.map((_, i) => `s${i}`);
+
+  // structure: association degree per anchor.
+  const degree = new Array<number>(strat.skeletal.length).fill(0);
+  // form: which relation labels recur (≥2 occurrences), and which anchors they govern.
+  const relCount = new Map<string, number>();
+  for (const e of strat.associations) relCount.set(e.relation, (relCount.get(e.relation) ?? 0) + 1);
+  for (const e of strat.associations) degree[e.anchor] = (degree[e.anchor] ?? 0) + 1;
+
+  const maxLen = Math.max(1, ...strat.skeletal.map((a) => a.span[1] - a.span[0]));
+  const maxDeg = Math.max(1, ...degree);
+
+  const content = new Map<string, number>();
+  const structure = new Map<string, number>();
+  const form = new Map<string, number>();
+  for (let i = 0; i < strat.skeletal.length; i++) {
+    const a = strat.skeletal[i]!;
+    content.set(units[i]!, (a.span[1] - a.span[0]) / maxLen);
+    structure.set(units[i]!, (degree[i] ?? 0) / maxDeg);
+  }
+  for (let i = 0; i < strat.skeletal.length; i++) form.set(units[i]!, 0);
+  for (const e of strat.associations) {
+    if ((relCount.get(e.relation) ?? 0) >= 2) form.set(units[e.anchor]!, 1);
+  }
+
+  return {
+    stalk: { units },
+    restrictions: [
+      { plane: "content", variance: "sheaf", value: content },
+      { plane: "structure", variance: "sheaf", value: structure },
+      { plane: "form", variance: "sheaf", value: form },
+    ],
+  };
 }

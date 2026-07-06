@@ -17,8 +17,9 @@
  *  (a) VALUE LIVES IN ENGINEERED OVERLAPS. The comparison stalk must encode GENUINE redundancy — a
  *      SHARED unit universe all three planes speak to. Planes with DISJOINT domains have no overlap to
  *      constrain, so the radius is VACUOUSLY 0 and buys nothing; {@link consistencyRadius} FLAGS that
- *      (`vacuous: true`) rather than reporting a false glue. {@link stratificationRestrictions} builds a
- *      REAL shared-comparison-stalk (the skeletal tier) so the overlap is engineered, not toy.
+ *      (`vacuous: true`) rather than reporting a false glue. The CORPUS-side adapters build the REAL
+ *      shared-comparison-stalks (node's `stratificationRestrictions` over a skeletal tier; tw5's
+ *      `WikiStoreAdapter` over a tiddler-title universe) so the overlap is engineered, not toy.
  *  (b) THE RESTRICTIONS ARE NON-LIPSCHITZ (a one-token edit re-roots a tree / flips a mined pattern), so
  *      the radius reads as a DISAGREEMENT SIGNAL, NEVER a distortion bound. `signalKind` says so on the
  *      wire; no caller may read it as a Lipschitz/metric-distortion guarantee.
@@ -31,9 +32,23 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
  */
 
-import type { Variance } from "./sensorium.js";
-import { SHEAF_PLANES } from "./sensorium.js";
-import type { Stratification } from "./memetic-wikitext-sensorium.js";
+// ── the li/ki plane taxonomy (the variance vocabulary the whole dual pair rides) ───────────────────
+//
+// HOME: this organ enforces the variance gate, so the taxonomy lives HERE (mesh, the platform-blind
+// floor); node's sensorium hull and every higher tier re-import it from `@lararium/mesh`.
+
+/** A plane's posture: `sheaf` RESTRICTS (li, contravariant, global→local) · `cosheaf` EXTENDS (ki, covariant, local→global). */
+export type Variance = "sheaf" | "cosheaf";
+
+/** The canonical LI (sheaf) planes — content/structure/form RESTRICT (contravariant, global→local). */
+export const SHEAF_PLANES = ["content", "structure", "form"] as const;
+
+/**
+ * The canonical KI (cosheaf) planes — bands/coupling EXTEND (covariant, local→global). They ride the
+ * manifest's own `bands`/`coupling` BASE-cap fields, never `has.*` (they store no leaf-dir bytes), so
+ * their cosheaf posture stays structural.
+ */
+export const COSHEAF_PLANES = ["bands", "coupling"] as const;
 
 // ── per-plane NATIVE pseudometrics (the stalk metrics) ─────────────────────────────────────────────
 //
@@ -494,62 +509,6 @@ export function consistencyRadius(
     ...(vacuous
       ? { note: "no pair shares a domain overlap — disjoint aspects, a vacuous 0 (caution a)." }
       : {}),
-  };
-}
-
-// ── an ENGINEERED overlap over a real skeletal tier (caution a, made concrete) ─────────────────────
-
-/**
- * Build the three sheaf-plane restrictions from a REAL {@link Stratification} — the engineered
- * shared-comparison-stalk (caution a). The stalk is the skeletal tier: each anchor `s{i}` is a shared
- * unit ALL THREE planes speak to (genuine redundancy, not disjoint aspects). Each plane gives every
- * anchor a [0,1] salience through its OWN lens, so a coherent text has the three coincide (they glue),
- * and a unit that is content-heavy yet structurally trivial and pattern-absent makes them DIVERGE:
- *
- *   content   — normalized PROSE MASS (the recurring-coherence carrier: how much black prose the anchor holds).
- *   structure — normalized ASSOCIATION DEGREE (the AST grain: how many red strata dock onto the anchor).
- *   form      — RECURRING-RELATION participation (the induced grammar: 1 iff the anchor is governed by a
- *               relation label that occurs ≥2× across the associations, else 0).
- *
- * Returns `{ stalk, restrictions }` ready for {@link consistencyRadius}. On a well-formed corpus the three
- * agree on the salient units and the radius is ~0; seed a disagreement (an ungoverned prose anchor) and it
- * goes positive, localized to that anchor.
- */
-export function stratificationRestrictions(strat: Stratification): {
-  stalk: ComparisonStalk; restrictions: PlaneRestriction[];
-} {
-  const units = strat.skeletal.map((_, i) => `s${i}`);
-
-  // structure: association degree per anchor.
-  const degree = new Array<number>(strat.skeletal.length).fill(0);
-  // form: which relation labels recur (≥2 occurrences), and which anchors they govern.
-  const relCount = new Map<string, number>();
-  for (const e of strat.associations) relCount.set(e.relation, (relCount.get(e.relation) ?? 0) + 1);
-  for (const e of strat.associations) degree[e.anchor] = (degree[e.anchor] ?? 0) + 1;
-
-  const maxLen = Math.max(1, ...strat.skeletal.map((a) => a.span[1] - a.span[0]));
-  const maxDeg = Math.max(1, ...degree);
-
-  const content = new Map<string, number>();
-  const structure = new Map<string, number>();
-  const form = new Map<string, number>();
-  for (let i = 0; i < strat.skeletal.length; i++) {
-    const a = strat.skeletal[i]!;
-    content.set(units[i]!, (a.span[1] - a.span[0]) / maxLen);
-    structure.set(units[i]!, (degree[i] ?? 0) / maxDeg);
-  }
-  for (let i = 0; i < strat.skeletal.length; i++) form.set(units[i]!, 0);
-  for (const e of strat.associations) {
-    if ((relCount.get(e.relation) ?? 0) >= 2) form.set(units[e.anchor]!, 1);
-  }
-
-  return {
-    stalk: { units },
-    restrictions: [
-      { plane: "content", variance: "sheaf", value: content },
-      { plane: "structure", variance: "sheaf", value: structure },
-      { plane: "form", variance: "sheaf", value: form },
-    ],
   };
 }
 

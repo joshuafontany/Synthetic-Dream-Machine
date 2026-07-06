@@ -28,37 +28,9 @@ export type {
 // (0 ⟺ they glue; positive ⟺ a localizable obstruction), PAIRED with the KI (cosheaf) co-consistency —
 // the PUSHFORWARD mirror over bands/coupling (0 ⟺ the flows co-extend; positive ⟺ a localizable
 // co-obstruction), the sheaf/cosheaf dual pair now complete.
-export {
-  cosineDistance, jaccardDistance, treeEditDistance, treeEditExact,
-  deckardDistance, characteristicVector, pqGramDistance, pqGramProfile,
-  chebyshevStalkMetric, consistencyRadius,
-  stratificationRestrictions, assertSheafPlanes,
-  energyCofaceMetric, kiCoConsistency, bandSynthesisCoRestrictions,
-} from "./sensorium-consistency.js";
-export type {
-  LabeledTree, TreeDistanceMethod, TreeDistanceOptions,
-  ComparisonStalk, PlaneRestriction, PairObstruction, ConsistencyRadius,
-  ConsistencyOptions, StalkMetric,
-  CofaceStalk, PlaneCoRestriction, CoPairObstruction, KiCoConsistency,
-  CofaceMetric, KiCoConsistencyOptions, ModwtMra, BandSynthesisOptions,
-} from "./sensorium-consistency.js";
-
-// The COHOMOLOGICAL GATE — the SECOND invariant beyond the H⁰ consistency-radius. H¹ = ker(δ¹)/im(δ⁰)
-// over the agreement nerve tells apart the EPISTEMIC no-global-now (H¹=0, reconcilable → FUSE via
-// Chebyshev sheaf-Laplacian diffusion toward H₀) from the ONTOLOGICAL one (H¹≠0, a genuine cocycle →
-// HOLD-OPEN, routed to Talk-Story, never averaged). Cost R*_sem = log₂ dim H¹ (Thomas–Chen).
-export {
-  cohomologyObstruction, agreementNerve, reconciliationCost, fuse,
-  denseHeatReference, chebyshevHeatDiffuse, kernelConsensus, coObservationOrder,
-} from "./sensorium-fusion.js";
-export type {
-  SheafAssignment, NerveSimplex, AgreementNerve, CohomologyOptions, CohomologyObstruction,
-  DiffusionOptions, FusedPseudosection, FuseResult, FuseOptions,
-} from "./sensorium-fusion.js";
-
-// The EXPECTED-FREE-ENERGY organ (B×C keystone) lives at ./sensorium-efe.js — a CONCEPT-WITNESS + TS↔py
-// parity oracle. The production EFE compute ports to py (machine-code=py ruling); the bench imports the organ
-// DIRECTLY. Held OFF the barrel until a node-side consumer earns the surface (no speculative re-export).
+// The consistency-radius organ (H⁰ li/ki dual), the cohomological gate (H¹ fusion), and the EFE organ
+// now live PLATFORM-BLIND in `@lararium/mesh` (the pono-homes lift: one hull, every tier — node, tw5,
+// browser — reaches the same organs; py mirrors them by contract). Import them from `@lararium/mesh`.
 
 // The memetic-wikitext SENSORIUM — the concrete neither-top, co-located-peers instance: the reader
 // (island-scan → standoff strata + skeletal tier + typed association graph, TWO axes span×channel), the
@@ -70,6 +42,7 @@ export {
   SIGIL_INJECTION, sigilInjectionQuery,
   PULSE_GRAIN, coupleAligned, stratumTicks, readKiStratum, ffzAlignTicks, readKiCorpus,
   readLi, readKi, defaultSensoriumBands, buildMemeticWikitextSensorium, buildPeerSensorium,
+  stratificationRestrictions,
 } from "./memetic-wikitext-sensorium.js";
 export type {
   ChannelTag, MuOp, Span, Stratum, SkeletalAnchor, AssociationEdge, SpreadDirection, Stratification,

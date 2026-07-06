@@ -28,9 +28,9 @@ import {
   surrogateNull, maxTNull, phaseScramble, timeReversalAsymmetry,
   type ArlDialOpts, type MaxTVerdict,
 } from "@lararium/mesh";
-import { cohomologyObstruction, type SheafAssignment } from "../src/sensorium-fusion.js";
-import { efeGate, efeSelect, type VerbDelta, type CVector } from "../src/sensorium-efe.js";
-import type { PlaneRestriction, ComparisonStalk } from "../src/sensorium-consistency.js";
+import { cohomologyObstruction, type SheafAssignment } from "@lararium/mesh";
+import { efeGate, efeSelect, type VerbDelta, type CVector } from "@lararium/mesh";
+import type { PlaneRestriction, ComparisonStalk } from "@lararium/mesh";
 
 // ── the CONTRACT: one scalar order parameter per α, over a corpus ───────────────────────────────────
 

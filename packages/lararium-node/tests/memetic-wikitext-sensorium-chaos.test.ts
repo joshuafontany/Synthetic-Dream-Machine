@@ -21,13 +21,10 @@ import { describe, test, expect } from "vitest";
 import {
   stratify, repairWellFormedness, intersectTiers, normalizeOcp,
   stratumTicks, readKiStratum, ffzAlignTicks, readKiCorpus, coupleAligned,
-  bandForSpanLength,
+  bandForSpanLength, stratificationRestrictions,
   type FfzCell, type AlignedTick,
 } from "../src/memetic-wikitext-sensorium.js";
-import {
-  consistencyRadius, stratificationRestrictions,
-  type PlaneRestriction,
-} from "../src/sensorium-consistency.js";
+import { consistencyRadius, type PlaneRestriction } from "@lararium/mesh";
 
 // Run the WHOLE LI pipeline over a text and assert it never throws + stays internally coherent.
 function pipelineHoldsFor(text: string): void {

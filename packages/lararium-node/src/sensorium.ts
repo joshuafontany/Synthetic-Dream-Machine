@@ -30,7 +30,8 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { isAbsolute, join, relative } from "node:path";
-import type { PersistencePolicy } from "@lararium/mesh";
+import type { PersistencePolicy, Variance } from "@lararium/mesh";
+import { SHEAF_PLANES, COSHEAF_PLANES } from "@lararium/mesh";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /** The manifest schema version — bump only on a breaking shape change. */
@@ -41,31 +42,19 @@ export const SENSORIUM_MANIFEST = "manifest.json";
 
 /**
  * The gluing POSTURE a plane's cap takes — the li/ki dual pair the sensorium holds SEPARATELY
- * (li-ki-integrities.md#crucible-tested):
+ * (li-ki-integrities.md#crucible-tested). The taxonomy LIVES in `@lararium/mesh` beside the organ
+ * that enforces it (sensorium-consistency); this hull re-imports and re-surfaces it for node callers:
  *
  *   `sheaf`   — li (理). CONTRAVARIANT restriction, global→local: a value defined over a region
- *               RESTRICTS onto a sub-region. content/structure/form ride here — each reads a pattern
- *               that localizes (a stalk's value is a genuine restriction of the whole).
+ *               RESTRICTS onto a sub-region. content/structure/form ride here.
  *   `cosheaf` — ki (氣). COVARIANT extension, local→global: a local value EXTENDS outward. bands/coupling
- *               ride here — a coarse wavelet coefficient depends on data OUTSIDE its span, so the
- *               contravariant restriction map isn't even well-defined; the transfer-entropy nagare glues
- *               local edges into a global flow.
+ *               ride here — read via {@link planeVariance}.
  *
  * The keystone (crucible): mixing them under ONE contravariant gluing SILENTLY corrupts — it penalizes
- * the flow (ki) for failing to be static (li). Consistency is computed SEPARATELY per posture
- * (li-restriction-consistency · ki-co-consistency), never merged.
+ * the flow (ki) for failing to be static (li). Consistency runs SEPARATELY per posture, never merged.
  */
-export type Variance = "sheaf" | "cosheaf";
-
-/** The canonical LI (sheaf) planes — content/structure/form RESTRICT (contravariant, global→local). */
-export const SHEAF_PLANES = ["content", "structure", "form"] as const;
-
-/**
- * The canonical KI (cosheaf) planes — bands/coupling EXTEND (covariant, local→global). They ride the
- * manifest's own `bands`/`coupling` BASE-cap fields, never `has.*` (they store no leaf-dir bytes), so
- * their cosheaf posture is structural, read via {@link planeVariance}.
- */
-export const COSHEAF_PLANES = ["bands", "coupling"] as const;
+export { SHEAF_PLANES, COSHEAF_PLANES } from "@lararium/mesh";
+export type { Variance } from "@lararium/mesh";
 
 /**
  * A FIBER-cap edge — THIN by law (has-stack clause 7): `dir` (relative-if-inside / absolute-if-outside)

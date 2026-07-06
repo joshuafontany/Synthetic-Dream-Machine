@@ -10,7 +10,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { buildSensoriumManifest, writeManifest } from "../src/sensorium.js";
 import { readCoupling, defaultChildRestriction, SALIENCES_SIDECAR, type ChildRestriction } from "../src/sensorium-coupling.js";
-import type { PlaneRestriction } from "../src/sensorium-consistency.js";
+import type { PlaneRestriction } from "@lararium/mesh";
 
 let root: string;
 beforeEach(() => { root = mkdtempSync(join(tmpdir(), "lar-coupling-")); });
