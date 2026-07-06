@@ -16,6 +16,15 @@ import os
 
 import worldline_io as wl
 from worldline_observe import derive_handle, observe_worldline, run_id_of
+from worldline_veil import veiled_root
+
+# A fixed WITNESS salt — the tests inject their own secret so they NEVER touch the operator's real keys.
+_SECRET = b"witness-worldline-salt-c1b"
+
+
+def _run(raw: str) -> str:
+    """The VEILED root a witness expects for a raw session basename (owner-recompute under `_SECRET`)."""
+    return veiled_root(raw, secret=_SECRET)
 
 
 def _main_line(uuid, parent, role, text, ts):
@@ -47,11 +56,13 @@ def _synth_session(tmp_path):
 def test_wire_builds_fork_chain_and_handback(tmp_path):
     main = _synth_session(tmp_path)
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
-    summary = observe_worldline(store, main)
+    summary = observe_worldline(store, main, veil_secret=_SECRET)
 
-    run, handle = "sess-xyz", "sess-xyz.aaa"
+    run = _run("sess-xyz")            # the VEILED root, never the bare session basename
+    handle = derive_handle(run, "aaa")
+    assert run.startswith("wl-")      # opaque — the bare "sess-xyz" never rides the graph
+    assert "sess-xyz" not in run
     assert summary == {"run": run, "main_turns": 4, "spirits": [handle]}
-    assert derive_handle(run, "aaa") == handle
 
     edges = {(e["frm"], e["to"]): e for e in store.dag()["edges"]}
     # the SPAWN fork run -> handle (the task's edge)
@@ -71,8 +82,8 @@ def test_wire_builds_fork_chain_and_handback(tmp_path):
 def test_worldline_of_climbs_to_the_session_root(tmp_path):
     main = _synth_session(tmp_path)
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
-    observe_worldline(store, main)
-    run = "sess-xyz"
+    observe_worldline(store, main, veil_secret=_SECRET)
+    run = _run("sess-xyz")
 
     # a SPIRIT turn climbs its chain -> handle -> (fork) run; a MAIN turn climbs its chain -> run
     assert store.worldline_of("s2") == run
@@ -86,11 +97,11 @@ def test_worldline_of_climbs_to_the_session_root(tmp_path):
 def test_re_run_mints_no_duplicate_edges(tmp_path):
     main = _synth_session(tmp_path)
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
-    observe_worldline(store, main)
+    observe_worldline(store, main, veil_secret=_SECRET)
     first = len(store.dag()["edges"])
-    observe_worldline(store, main)                    # a second pass over the same transcript
+    observe_worldline(store, main, veil_secret=_SECRET)  # a second pass over the same transcript
     assert len(store.dag()["edges"]) == first          # sink-idempotent: no duplicate edges
-    assert store.roots() == ["sess-xyz"]               # still one root after the re-run
+    assert store.roots() == [_run("sess-xyz")]         # still one (veiled) root after the re-run
 
 
 def test_no_host_wall_time_on_the_edge_path(tmp_path):
@@ -115,16 +126,45 @@ def test_capture_and_observe_lands_content_and_builds_the_worldline(tmp_path):
     main = _synth_session(tmp_path)
     res = capture_and_observe(str(tmp_path / ".mem"), "claude", main, wing="wing_proj",
                               worldline_palace=str(tmp_path / ".worldline"),
-                              embed_factory=_stub_embed_factory())
+                              embed_factory=_stub_embed_factory(), veil_secret=_SECRET)
     # content landed AND the worldline built in one pass
     assert res["landed"] == 2 and res["audit"]["ok"]           # two main exchanges (u1/a1, u2/a2)
-    assert res["worldline"]["run"] == "sess-xyz"
-    assert res["worldline"]["spirits"] == ["sess-xyz.aaa"]
+    run = _run("sess-xyz")
+    assert res["worldline"]["run"] == run                       # the VEILED root rides the summary
+    assert res["worldline"]["spirits"] == [derive_handle(run, "aaa")]
 
-    # the LANDED content turn-keys (the user-turn uuids) climb to the run — the demux partitions by root
+    # the LANDED content turn-keys (the user-turn uuids) climb to the VEILED run — demux partitions by root
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
-    assert store.worldline_of("u1") == "sess-xyz"
-    assert store.worldline_of("u2") == "sess-xyz"
+    assert store.worldline_of("u1") == run
+    assert store.worldline_of("u2") == run
+
+    # no vessel-key / did / raw signing material leaks into any landed drawer's metadata (the C1b witness)
+    import content_io as cio
+    cstore = cio.ContentStore(str(tmp_path / ".mem"))
+    metas = [r["metadata"] for r in cstore.scan(limit=256)["records"]]
+    assert metas                                       # drawers actually landed
+    leaky = ("verifyingKey", "signingKey", "did:", "vessel-key")
+    for meta in metas:
+        blob = json.dumps(meta)
+        for token in leaky:
+            assert token not in blob, f"identity material {token!r} leaked into a drawer"
+
+
+def test_veiled_root_is_opaque_and_owner_recomputable(tmp_path):
+    # C1b witness: the root reads opaque (`wl-<hash>`, no bare session id) AND the owner re-derives the
+    # SAME root from the same secret + run (so a drawer still binds to its braid), while a DIFFERENT
+    # secret yields a DIFFERENT root (an exfiltrator without the secret cannot recompute it).
+    main = _synth_session(tmp_path)
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    summary = observe_worldline(store, main, veil_secret=_SECRET)
+
+    root = summary["run"]
+    assert root.startswith("wl-") and len(root) == len("wl-") + 16
+    assert "sess-xyz" not in root
+    assert root == _run("sess-xyz")                            # owner re-derivation matches
+    assert veiled_root("sess-xyz", secret=b"another-salt") != root  # a foreign secret cannot recompute it
+    # a DIFFERENT run under the SAME secret mints a DIFFERENT root (per-worldline shape B)
+    assert veiled_root("sess-other", secret=_SECRET) != root
 
 
 def test_resumed_transcript_roots_at_the_run_not_a_phantom(tmp_path):
@@ -137,12 +177,13 @@ def test_resumed_transcript_roots_at_the_run_not_a_phantom(tmp_path):
         _main_line("r2", "r1", "assistant", "carrying on", "2026-07-05T11:00:05Z"),
     ]) + "\n", encoding="utf-8")
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
-    observe_worldline(store, str(main))
+    observe_worldline(store, str(main), veil_secret=_SECRET)
 
-    assert store.roots() == ["sess-resumed"]               # the RUN, never the phantom prior-session turn
+    run = _run("sess-resumed")
+    assert store.roots() == [run]                          # the (veiled) RUN, never the phantom prior turn
     assert "PRIOR-SESSION-TURN" not in store.roots()
-    assert store.worldline_of("r1") == "sess-resumed"      # r1 climbs to the run (its phantom parent dropped)
-    assert store.worldline_of("r2") == "sess-resumed"
+    assert store.worldline_of("r1") == run                 # r1 climbs to the run (its phantom parent dropped)
+    assert store.worldline_of("r2") == run
 
 
 def test_detect_rewind_finds_the_diverged_prefix(tmp_path):

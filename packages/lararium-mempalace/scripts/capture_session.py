@@ -85,7 +85,9 @@ def drive_capture(palace_path: str, surface: str, pointer: str, *, wing: "str | 
 
 def capture_and_observe(palace_path: str, surface: str, pointer: str, *, wing: "str | None",
                         room: str = "conversations", worldline_palace: "str | None" = None,
-                        embed_factory: "Callable | None" = None) -> dict:
+                        embed_factory: "Callable | None" = None,
+                        veil_secret: "bytes | str | None" = None, veil_context: str = "",
+                        identity_dir: "str | None" = None) -> dict:
     """Drive the capture pass, THEN build the worldline fork-DAG over the SAME transcript (the demux 1b
     wire). The two legs stay decoupled: `drive_capture` lands the content untouched; this coordinator
     then feeds `worldline_io` the braid so `worldline_of` / `roots` / kapae read the landed turn-keys.
@@ -102,7 +104,8 @@ def capture_and_observe(palace_path: str, surface: str, pointer: str, *, wing: "
         wpath = worldline_palace or worldline_path(palace_path)
         store = WorldlineStore(wpath)
         try:
-            worldline = observe_worldline(store, pointer)
+            worldline = observe_worldline(store, pointer, veil_secret=veil_secret,
+                                          veil_context=veil_context, identity_dir=identity_dir)
         finally:
             store.close()
     return {**summary, "worldline": worldline}

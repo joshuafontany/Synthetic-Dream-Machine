@@ -40,6 +40,8 @@ import os
 import re
 from dataclasses import dataclass, field
 
+from worldline_veil import veiled_root
+
 
 # --- transcript provenance readers (ported from subagent-mine.ts) -----------
 
@@ -73,8 +75,10 @@ def list_spirit_files(transcript_path: str) -> list:
 
 
 def derive_handle(run: str, agent_id: str) -> str:
-    """The lineage HANDLE `<run>.<agentId>` — IDENTICAL to deriveHandle / buildPatch's lar_agent_handle,
-    so this fork edge and the live capture lar_* name the SAME worldline."""
+    """The lineage HANDLE `<root>.<agentId>` — `run` here reads the VEILED worldline-root (`wl-<hash>`,
+    worldline_veil, C1b), so the handle rides opaque too. The cross-system worldline binding rides
+    `lar_turn_key` (the turn uuid, unchanged), NOT this handle string — so veiling the root leaks nothing
+    while the demux still joins a landed drawer to its braid by turn-key."""
     return f"{run}.{agent_id}"
 
 
@@ -122,10 +126,10 @@ class SpiritEdges:
     chain: list = field(default_factory=list)
 
 
-def derive_subagent_edges(transcript: str) -> list:
+def derive_subagent_edges(transcript: str, run: str) -> list:
     """Derive every spirit's fork shape from a session transcript — PURE (reads files, writes nothing).
-    The run-root = the session id; each spirit's handle = `<run>.<agentId>`. Empty when none spawned."""
-    run = run_id_of(transcript)
+    `run` = the VEILED worldline-root the caller minted; each spirit's handle = `<run>.<agentId>`. Empty
+    when none spawned."""
     out: list = []
     for af in list_spirit_files(transcript):
         agent_id = agent_id_of(af)
@@ -167,17 +171,22 @@ def _add_chain(store, chain: list, root_anchor: str, tick) -> int:
     return added
 
 
-def observe_worldline(store, transcript: str, *, tick0: int = 1) -> dict:
+def observe_worldline(store, transcript: str, *, tick0: int = 1, veil_secret: "bytes | str | None" = None,
+                      veil_context: str = "", identity_dir: "str | None" = None) -> dict:
     """Read `transcript` and build its whole worldline into `store` (a worldline_io.WorldlineStore).
+
+    The braid-anchor rides the VEILED worldline-root (`wl-<hash>`, worldline_veil C1b), NEVER the bare
+    session basename — so the graph carries an opaque, owner-recomputable root. `veil_secret` injects the
+    local secret (a witness passes an explicit test salt; None resolves the on-disk persona/worldline-salt).
 
     Order: the main linear chain (rooted at the RUN node) · then per spirit — the SPAWN fork
     (`run -> handle`), the spirit's own chain (rooted at the HANDLE), the HANDBACK close. Every edge
     takes a caller LOGICAL ORDINAL tick (monotonic in read-order), so a re-run mints the identical
     (frm, to, relation, tick) tuples and worldline_io's sink-idempotence dedups them — no duplicate edges.
 
-    Returns a summary: the run, the main-chain length, and the observed spirit handles."""
+    Returns a summary: the veiled run-root, the main-chain length, and the observed spirit handles."""
     tick = itertools.count(tick0)  # the pure logical ordinal — no host clock rides the edge path
-    run = run_id_of(transcript)
+    run = veiled_root(run_id_of(transcript), veil_context, secret=veil_secret, identity_dir=identity_dir)
 
     # 1. the MAIN linear chain — a null-parent main turn roots at the RUN node (the session braid-anchor).
     main_chain = read_chain(transcript)
@@ -185,7 +194,7 @@ def observe_worldline(store, transcript: str, *, tick0: int = 1) -> dict:
 
     # 2. per spirit — the SPAWN fork, the spirit chain under the handle, the HANDBACK close.
     observed: list = []
-    for spirit in derive_subagent_edges(transcript):
+    for spirit in derive_subagent_edges(transcript, run):
         store.fork(run, spirit.handle, next(tick))            # SPAWN: run -> <run>.<agentId>
         _add_chain(store, spirit.chain, spirit.handle, tick)  # the spirit's turns chain under the handle
         _derive_injections(run, spirit.handle, spirit.chain)  # INJECT hook — unbuilt (one-handoff model)
