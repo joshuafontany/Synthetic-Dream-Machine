@@ -77,6 +77,27 @@ export function gaussianCMISignificance(cmiBits: number, n: number, dfSource = 1
   return chiSquareSurvival(g2, dfSource * dfTarget);
 }
 
+/**
+ * The finite-sample-recentred p-value (the Miller-Madow / Bartlett cure). The parametric `2N·Î ~ χ²(df)`
+ * holds only asymptotically; at finite N the estimator carries a positive bias `≈ df/2N`, so the raw χ² tail
+ * over-rejects (the measured FPR ≈ 1.3–2.4α). Estimate `E[G²]` from the SAME surrogate null the coupling test
+ * already draws (its statistic under the true null), then rescale `G² → G²·df/E[G²_surrogate]` before the tail.
+ * `surrogateCmiBits` are the null-draw CMI values (bits); with none, this falls back to the raw parametric tail
+ * (no free recentring). Near-zero marginal cost — it reuses draws the surrogate keel computes anyway.
+ */
+export function recentredCMISignificance(
+  cmiBits: number, n: number, surrogateCmiBits: readonly number[], dfSource = 1, dfTarget = 1,
+): number {
+  const df = dfSource * dfTarget;
+  if (cmiBits <= 0 || n <= 0) return 1;
+  const g2 = 2 * n * cmiBits * LN2;
+  if (surrogateCmiBits.length === 0) return chiSquareSurvival(g2, df);
+  // mean null statistic; the recentring factor df/E[G²] pulls the biased null back onto the χ²(df) scale.
+  const meanNullG2 = surrogateCmiBits.reduce((s, b) => s + 2 * n * Math.max(0, b) * LN2, 0) / surrogateCmiBits.length;
+  const factor = meanNullG2 > 0 ? df / meanNullG2 : 1;
+  return chiSquareSurvival(g2 * factor, df);
+}
+
 /** Is the coupling significant at level `alpha`? A real edge, not the bias floor. `alpha` is REQUIRED of
  *  the decision-site caller (coupleMesh sources it from the ARL₀ dial → REFERENCE_ALPHA); the 0.05 fallback
  *  keeps this floor primitive pure (no policy import) and never fires when the caller passes the dial's α. */

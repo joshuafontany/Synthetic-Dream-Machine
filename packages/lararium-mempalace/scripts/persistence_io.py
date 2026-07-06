@@ -193,7 +193,21 @@ class PersistenceStore:
             edge["tick"] = tick
         log.append(edge)
         if len(log) > WITNESS_CAP:
-            log = log[-WITNESS_CAP:]  # audit history bounded; oldest same-signer noise sheds first
+            # Tombstone-exempt truncation (the Kafka log-compaction rule): a DEFEAT (polarity −1)
+            # must never shed silently — dropping it resurrects every vouch it defeated, and the
+            # standing law (`freshIndependentEdges`: +1 edges strictly AFTER the last defeat) then
+            # reads a false rise. So defeats stay compaction-exempt; only vouches (+1) truncate,
+            # oldest-first; the interleaved audit order survives so "after last defeat" reads true.
+            # Two bounded degenerates (both keep the invariant — never a false rise): (i) defeats > CAP
+            # keeps the NEWEST CAP defeats (the last-defeat boundary always survives; oldest defeats shed);
+            # (ii) after-defeat vouches > keep_vouches sheds the oldest of them — standing may UNDER-count
+            # distinct signers, never over-count.
+            indexed = list(enumerate(log))
+            defeats = [(i, e) for i, e in indexed if e["polarity"] < 0]
+            vouches = [(i, e) for i, e in indexed if e["polarity"] >= 0]
+            keep_vouches = max(0, WITNESS_CAP - len(defeats))
+            kept = defeats[-WITNESS_CAP:] + vouches[-keep_vouches:] if keep_vouches else defeats[-WITNESS_CAP:]
+            log = [e for _, e in sorted(kept, key=lambda ie: ie[0])]
         meta["lar_witnesses"] = json.dumps(log)
         # Re-upsert with the SAME embedding + document (the assertion + its text projection are
         # immutable; only the witness-log grows).

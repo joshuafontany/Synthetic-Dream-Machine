@@ -233,6 +233,90 @@ export function phaseScramble(series: readonly number[], rng: () => number): num
   return idftReal(re2, im2);
 }
 
+// ── the COUPLING nulls: two surrogates for two questions (the keystone fix). Reading a raw transfer-entropy
+//    as coupling demands a null that breaks ONLY the X→Y direction while PRESERVING the source's own dynamics.
+//    iid-shuffle and phase-scramble destroy the source's autocorrelation (or its nonlinearity), so a rejection
+//    conflates "X is structured" with "X drives Y" — anti-conservative on any autocorrelated process. The
+//    correct coupling null splits by conditioning arity:
+//      · BIVARIATE  I(X→Y)      → circular time-shift of the source (Quian Quiroga 2000): preserves amplitude
+//                                 distribution AND autocorrelation, breaks only the cross-alignment.
+//      · CONDITIONAL I(X→Y | Z) → local permutation within Z-neighborhoods (Runge 2018): preserves p(X | Z),
+//                                 breaks p(Y | X,Z). Circular-shift is WRONG here — it also breaks X↔Z, testing
+//                                 X ⟂ (Y,Z) instead of X ⟂ Y | Z, and over-rejects. ──
+
+/** Circular time-shift surrogate — roll the source by a guard-banded random offset, wrapping the tail to the
+ *  head. Preserves the amplitude distribution AND the autocorrelation exactly (a rotation of the same samples),
+ *  breaking only the cross-series alignment. The bivariate coupling null. `minShift` guards both ends away from
+ *  the near-identity shifts (τ≈0 or τ≈N) that would leak the true alignment through. */
+export function circularShiftSource(
+  series: readonly number[],
+  rng: () => number,
+  opts?: { minShift?: number },
+): number[] {
+  const n = series.length;
+  if (n < 3) return series.slice();
+  const guard = Math.max(1, Math.min(opts?.minShift ?? 1, Math.floor(n / 2)));
+  const span = n - 2 * guard;
+  // draw τ ∈ [guard, n−guard); if the guard band leaves no room, fall back to a mid-roll (n/2).
+  const tau = span > 0 ? guard + Math.floor(rng() * span) : Math.floor(n / 2);
+  const out = new Array<number>(n);
+  for (let i = 0; i < n; i++) out[i] = series[(i + tau) % n]!;
+  return out;
+}
+
+/** Local-permutation surrogate for CONDITIONAL coupling — permute `x` only among samples that share a
+ *  Z-neighborhood (the k_perm nearest in Z under the max-norm), so p(X | Z) survives and p(Y | X,Z) breaks.
+ *  Runge (AISTATS 2018), the CMIknn null. The brute-force max-norm kNN rides inline (correct at bench scale;
+ *  extract a kd-tree only when the calibration loop MEASURES it slow). Returns the permuted `x`. */
+export function localPermutationNull(
+  x: readonly number[],
+  z: ReadonlyArray<readonly number[]>,
+  rng: () => number,
+  opts?: { kPerm?: number },
+): number[] {
+  const n = x.length;
+  if (n < 3 || z.length !== n) return x.slice();
+  const kPerm = Math.max(1, Math.min(opts?.kPerm ?? 5, n - 1));
+  // per point, its kPerm nearest neighbors in Z (max-norm), excluding itself.
+  const neighborsOf = (i: number): number[] => {
+    const zi = z[i]!;
+    const d = new Array<number>(n);
+    for (let j = 0; j < n; j++) {
+      let m = 0;
+      const zj = z[j]!;
+      for (let c = 0; c < zi.length; c++) {
+        const a = Math.abs(zi[c]! - zj[c]!);
+        if (a > m) m = a;
+      }
+      d[j] = j === i ? Infinity : m;
+    }
+    return Array.from({ length: n }, (_, j) => j)
+      .sort((a, b) => d[a]! - d[b]!)
+      .slice(0, kPerm);
+  };
+  // assign each i a source drawn from its own Z-neighborhood — a conditional-preserving, CONSERVATIVE
+  // approximation (cheaper than the full Runge assignment): the self-fallback keeps a few points aligned when
+  // a neighborhood exhausts, so the null UNDER-rejects rather than over-rejects. Visit order rides a uniform
+  // Fisher-Yates (never `sort(rng)`, which V8's TimSort renders non-uniform + engine-dependent).
+  const used = new Uint8Array(n);
+  const out = new Array<number>(n);
+  const order = iidShuffle(Array.from({ length: n }, (_, i) => i), rng);
+  for (const i of order) {
+    const nb = neighborsOf(i);
+    let picked = -1;
+    for (let t = 0; t < nb.length; t++) {
+      const cand = nb[Math.floor(rng() * nb.length)]!;
+      if (!used[cand]) { picked = cand; break; }
+    }
+    // fall back to any free neighbor; else a free point anywhere (self only if i itself is still free) — so the
+    // output stays a strict permutation (no value duplicates, none drops).
+    if (picked < 0) picked = nb.find((c) => !used[c]) ?? order.find((c) => !used[c]) ?? i;
+    used[picked] = 1;
+    out[i] = x[picked]!;
+  }
+  return out;
+}
+
 /** Time-reversal asymmetry — the normalized third moment of increments, ⟨(xₜ−xₜ₋₁)³⟩/⟨(xₜ−xₜ₋₁)²⟩^{3/2}. ≈0
  *  for a time-symmetric linear-Gaussian process; large for a nonlinear/irreversible lock (a relaxation cycle,
  *  a sawtooth). The discriminator the phase-scramble null calibrates against (Schreiber & Schmitz 1997) — a

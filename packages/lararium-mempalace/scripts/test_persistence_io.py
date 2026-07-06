@@ -49,6 +49,22 @@ def test_witness_on_absent_is_honest_noop(tmp_path):
     assert _store(tmp_path).witness("ghost", "vessel-B", "f1", 1) == {"ok": False, "witnesses": 0}
 
 
+def test_truncation_never_sheds_a_defeat(tmp_path):
+    # A defeat born as the OLDEST entry must survive a vouch-storm that overruns WITNESS_CAP —
+    # dropping it would silently resurrect every vouch it defeated (the standing law reads a false
+    # rise). Defeats stay compaction-exempt; only vouches truncate, oldest-first.
+    s = _store(tmp_path)
+    s.put("t-1", "innovation", [1.0, 0.0], "vessel-A", "f0", {})
+    s.witness("t-1", "vessel-DEFEATER", "f-defeat", -1)          # the defeat: the OLDEST edge
+    for i in range(pio.WITNESS_CAP + 50):                         # a vouch-storm overruns the cap
+        s.witness("t-1", f"vessel-{i}", f"f{i}", 1)
+    log = s.get("t-1")["witnesses"]
+    assert len(log) <= pio.WITNESS_CAP                            # the log stays bounded
+    defeats = [e for e in log if e["polarity"] < 0]
+    assert defeats and defeats[0]["signer"] == "vessel-DEFEATER"  # the defeat SURVIVED the storm
+    assert log[0]["polarity"] < 0                                 # and stays the oldest (its audit slot holds)
+
+
 def test_put_preserves_witness_log_on_reput(tmp_path):
     s = _store(tmp_path)
     s.put("t-1", "innovation", [1.0, 0.0], "vessel-A", "f0", {})
