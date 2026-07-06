@@ -86,6 +86,72 @@ def test_rewind_is_detected_not_silent_skipped_mutable(tmp_path):
     assert res["audit"]["ok"] and res["watermark"] == 3
 
 
+class _PoisonLandCap(ContentStoreLandCap):
+    """A land-cap that THROWS on a chosen set of cids (a store reject / poison record stand-in). Clearing
+    the set heals the poison, so a re-run can re-attempt (the transient-poison path)."""
+
+    def __init__(self, store, poison: set) -> None:
+        super().__init__(store)
+        self.poison = poison
+
+    def land(self, cid, text, vector, metadata) -> None:
+        if cid in self.poison:
+            raise ValueError(f"poison record {cid}")
+        super().land(cid, text, vector, metadata)
+
+
+def test_poison_record_does_not_abort_the_tail(tmp_path):
+    # C2: one un-landable record (seq 3) must NOT swallow the tail. The tail past it still lands; the
+    # watermark HOLDS below the poison (the gap blocks the frontier); backlog + failed surface the stall.
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    pipe = compose_pipeline(source=lambda recs: recs,
+                            land=_PoisonLandCap(store, {"c-3"}), embed=_fake_embed)
+    res = pipe.run_pass(_records(5))
+
+    assert res["landed"] == 4                                 # the tail (c-4, c-5) still landed
+    assert res["failed"] == [{"seq": 3, "cid": "c-3",
+                              "error": "ValueError: poison record c-3"}]
+    assert res["watermark"] == 2                              # holds below the poison — never leaps the gap
+    assert res["backlog"] == [3]                              # the stall reads legible
+    assert store.get("c-3") is None                           # the poison never landed
+    assert store.get("c-5")["document"] == "turn 5"           # the tail past the poison IS durable
+    assert res["audit"]["ok"]
+
+
+def test_re_run_cleanly_re_attempts_the_poison(tmp_path):
+    # a re-run over the FULL source re-attempts: a HEALED poison lands and the watermark advances past it,
+    # the already-durable tail skips (idempotent). The stall clears without a special replay path.
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    land = _PoisonLandCap(store, {"c-3"})
+    pipe = compose_pipeline(source=lambda recs: recs, land=land, embed=_fake_embed)
+
+    pipe.run_pass(_records(5))                                # c-3 poisons; 1,2,4,5 land
+    land.poison.clear()                                       # the poison heals (e.g. a fixed record)
+    res = pipe.run_pass(_records(5))
+
+    assert res["landed"] == 1 and res["skipped"] == 4         # only the healed c-3 lands; the rest skip
+    assert res["failed"] == []                                # the stall cleared
+    assert res["watermark"] == 5 and res["backlog"] == []     # the frontier caught up past the old gap
+    assert store.get("c-3")["document"] == "turn 3"
+    assert res["audit"]["ok"]
+
+
+def test_systemic_floor_violation_propagates_loud_not_poison_swallowed(tmp_path):
+    # C2 boundary: a SYSTEMIC embedder-identity floor (wrong model) poisons EVERY record's recall — it
+    # MUST fail the pass LOUD, never hide behind `failed`/backlog. The poison-guard re-raises ContentFloorError
+    # (a per-record data poison would instead ride `failed`); the store's model-floor pins the contract.
+    import pytest
+
+    from content_io import ContentFloorError
+    store = cio.ContentStore(str(tmp_path / ".mem"), required_keys={"wing", "room"},
+                             expected_dim=2, expected_model="model-A/2")
+    pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store), embed=_fake_embed)
+    poisoned = [{"seq": 1, "cid": "c-1", "text": "t",
+                 "metadata": {"wing": "w", "room": "r", "lar_embedder_model": "model-B/2"}}]
+    with pytest.raises(ContentFloorError):
+        pipe.run_pass(poisoned)                              # a wrong-embedder pass aborts loud, not silent
+
+
 def test_rewind_retracts_on_the_immutable_ground(tmp_path):
     # on the IMMUTABLE Memory ground a committed atom never overwrites — the rewind RETRACTS (kapae-mutes)
     # the stale so recall stops serving it (the fresh-cid append-vector re-land rides a later commit).

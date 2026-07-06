@@ -23,6 +23,7 @@ Meme: lar:///ha.ka.ba/@lararium/sensorium/capture-stream (the composable pipelin
 from __future__ import annotations
 
 from capture_drain import DrainLedger
+from content_io import ContentFloorError
 
 
 class ContentStoreLandCap:
@@ -43,6 +44,13 @@ class ContentStoreLandCap:
 
     def land(self, cid: str, text: str, vector, metadata: dict) -> None:
         self._store.put(cid, text, vector, metadata or {})
+
+    def is_fatal(self, exc: BaseException) -> bool:
+        """Whether a land throw MUST abort the pass rather than ride the poison-guard: a SYSTEMIC
+        embedder-identity floor (wrong dim/model) poisons EVERY record, so it fails LOUD — never hides
+        behind a growing backlog. A per-record data poison (bad vector, missing schema key) returns False
+        and rides `failed`. The generic Pipeline duck-types this (a minimal land-cap without it catches all)."""
+        return isinstance(exc, ContentFloorError)
 
     def stored_chain(self, cid: str):
         """The `lar_chain` the DURABLE row for `cid` carries, else None — the rewind-compare read. A
@@ -86,39 +94,59 @@ class Pipeline:
         (each link binds its text + its predecessor) to the STORED one: a match confirms the durable row
         IS this text (the cheap no-op — the common path pays only this compare), a divergence surfaces a
         rewind at this turn and rides the land-cap's `reland` cure (retract the stale, re-land where the
-        store permits) — NEVER a silent skip. Returns the pass summary."""
+        store permits) — NEVER a silent skip.
+
+        THE POISON-GUARD (the SILENT-TAIL-ABORT cure, C2): one un-landable record (a store reject, an
+        embed throw, a schema violation) MUST NOT abort the whole pass and swallow the tail behind it. So
+        each record's land rides a try/except: a throw NEVER commits that seq — the watermark HOLDS below
+        it (the gap blocks the contiguous frontier) and `backlog` surfaces the stall — the pass records the
+        poison in `failed` and CONTINUES, so the tail past it still lands. A re-run cleanly re-attempts
+        (is_landed skips the durable prefix; a transient poison lands, a hard one re-fails and stays in
+        backlog). Returns the pass summary."""
         drain = DrainLedger()
         # A land-cap that carries the rewind pair (stored_chain + reland) arms the guard; a minimal one
         # (is_landed/land only) rides the plain skip — the guard never crashes a generic pipeline.
         rewind_aware = hasattr(self._land, "stored_chain") and hasattr(self._land, "reland")
         landed = skipped = relanded = retracted = 0
+        failed: list = []
         for rec in self._source(pointer):
             seq, cid = rec["seq"], rec["cid"]
-            drain.stage(seq, cid)
-            if self._land.is_landed(cid):
-                # Pay the chain-compare ONLY on an already-landed cid (the common no-divergence path
-                # stays cheap). A held chain (or a non-rewind-aware land-cap) = the re-derivation no-op.
-                if not rewind_aware or self._land.stored_chain(cid) == (rec.get("metadata") or {}).get("lar_chain"):
-                    drain.commit(seq)      # already durable, chain holds — the re-derivation no-op
-                    skipped += 1
+            try:
+                drain.stage(seq, cid)
+                if self._land.is_landed(cid):
+                    # Pay the chain-compare ONLY on an already-landed cid (the common no-divergence path
+                    # stays cheap). A held chain (or a non-rewind-aware land-cap) = the re-derivation no-op.
+                    if not rewind_aware or self._land.stored_chain(cid) == (rec.get("metadata") or {}).get("lar_chain"):
+                        drain.commit(seq)      # already durable, chain holds — the re-derivation no-op
+                        skipped += 1
+                        continue
+                    # a REWIND — the stored text diverged from this re-derivation: never silent-skip it.
+                    cure = self._land.reland(cid, rec.get("text", ""), self._vector_for(rec),
+                                             rec.get("metadata", {}))
+                    drain.commit(seq)          # the retract/re-land IS durable — advance the watermark
+                    if cure == "relanded":
+                        relanded += 1
+                    else:
+                        retracted += 1
                     continue
-                # a REWIND — the stored text diverged from this re-derivation: never silent-skip it.
-                cure = self._land.reland(cid, rec.get("text", ""), self._vector_for(rec),
-                                         rec.get("metadata", {}))
-                drain.commit(seq)          # the retract/re-land IS durable — advance the watermark
-                if cure == "relanded":
-                    relanded += 1
-                else:
-                    retracted += 1
+                self._land.land(cid, rec.get("text", ""), self._vector_for(rec), rec.get("metadata", {}))
+                drain.commit(seq)              # advance the watermark AFTER the durable land (accept != land)
+                landed += 1
+            except Exception as exc:  # noqa: BLE001 — the poison-guard: one bad record never aborts the tail
+                # A SYSTEMIC floor violation (wrong embedder) propagates LOUD — never buried in `failed`.
+                is_fatal = getattr(self._land, "is_fatal", None)
+                if is_fatal is not None and is_fatal(exc):
+                    raise
+                # else a per-record poison: DON'T commit — the seq stays staged-not-committed, so the
+                # watermark holds below it and backlog surfaces the stall; record it, carry the pass on.
+                failed.append({"seq": seq, "cid": cid, "error": f"{type(exc).__name__}: {exc}"})
                 continue
-            self._land.land(cid, rec.get("text", ""), self._vector_for(rec), rec.get("metadata", {}))
-            drain.commit(seq)              # advance the watermark AFTER the durable land (accept != land)
-            landed += 1
         return {
             "landed": landed,
             "skipped": skipped,
             "relanded": relanded,
             "retracted": retracted,
+            "failed": failed,
             "watermark": drain.watermark(),
             "backlog": drain.backlog(),
             "audit": drain.exactly_once_audit(),

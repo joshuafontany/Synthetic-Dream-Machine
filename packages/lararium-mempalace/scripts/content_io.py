@@ -61,6 +61,13 @@ def _idle_ttl_seconds() -> float:
     return idle_ttl_seconds(IDLE_TTL_ENV, DEFAULT_IDLE_TTL_SECONDS)
 
 
+class ContentFloorError(ValueError):
+    """A SYSTEMIC embedder-identity floor violation (dim / model / palace-history mismatch) — a wrong
+    embedder poisons EVERY record's recall, never one drawer, so it MUST fail the whole pass LOUD. It
+    subclasses ValueError (existing callers keep catching it), and the capture poison-guard re-raises it
+    (a per-record data poison rides `failed`; a systemic misconfig never hides behind a growing backlog)."""
+
+
 class ContentStore:
     """One open CONTENT collection: put a caller-vector content record (text=document,
     caller-supplied embedding) + get by cid + nearest-neighbor search. Caller-vector
@@ -101,7 +108,7 @@ class ContentStore:
             return  # empty palace — no history to disagree with
         held = str((metas[0] or {}).get("lar_embedder_model", "")).strip()
         if held and held != self._expected_model:
-            raise ValueError(f"content palace already holds vectors from embedder {held!r} != expected "
+            raise ContentFloorError(f"content palace already holds vectors from embedder {held!r} != expected "
                              f"{self._expected_model!r} — a model swap over an existing palace searches an "
                              "incomparable space (palace-history identity floor); re-embed or open under the held model")
 
@@ -142,15 +149,15 @@ class ContentStore:
                 raise ValueError(f"content put {cid}: missing/empty required schema keys {missing}")
         if self._expected_dim is not None and (not isinstance(embedding, (list, tuple)) or len(embedding) != self._expected_dim):
             got = len(embedding) if isinstance(embedding, (list, tuple)) else 0  # guard len(None) → a clean domain error
-            raise ValueError(f"content put {cid}: embedding dim {got} != expected {self._expected_dim} "
-                             "(embedder-identity floor — a model swap that changes the dim must fail loud)")
+            raise ContentFloorError(f"content put {cid}: embedding dim {got} != expected {self._expected_dim} "
+                                    "(embedder-identity floor — a model swap that changes the dim must fail loud)")
         if self._expected_model is not None:
             # the model-name half: the caller stamps `lar_embedder_model`; a same-dim different-model
             # swap slips the dim guard but corrupts recall — reject it (fail-closed on an absent tag too).
             got_model = str(meta.get("lar_embedder_model", "")).strip()
             if got_model != self._expected_model:
-                raise ValueError(f"content put {cid}: embedder model {got_model!r} != expected {self._expected_model!r} "
-                                 "(embedder-identity floor — a same-dim different-model swap corrupts recall silently)")
+                raise ContentFloorError(f"content put {cid}: embedder model {got_model!r} != expected {self._expected_model!r} "
+                                        "(embedder-identity floor — a same-dim different-model swap corrupts recall silently)")
         if self._append_only:
             # the immutable-ground guard: a committed atom's text is never overwritten (an edit rides
             # kapae, not a re-put). An identical re-put passes (idempotent re-derivation crash-cure).

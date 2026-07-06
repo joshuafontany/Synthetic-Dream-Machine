@@ -11,10 +11,20 @@ import os
 import pytest
 
 from lares_mcp import LIFECYCLE_VERBS, VERB_SEATS, LaresCoordinator, build_mcp, guard_hitl, seat_of
+from worldline_veil import veiled_root
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _FIXTURE = os.path.join(_HERE, "fixtures", "capture", "claude-main.jsonl")
 _CLI_VERBS = os.path.join(_HERE, "fixtures", "cli-verbs.json")
+
+# The coordinator harvest rides the shipping veil path (C1b) — pin a WITNESS salt for the whole module so
+# every harvest derives a DETERMINISTIC, portable worldline root (never the operator's on-disk persona key).
+_SALT = "witness-lares-mcp-salt"
+
+
+@pytest.fixture(autouse=True)
+def _pin_worldline_salt(monkeypatch):
+    monkeypatch.setenv("LAR_WORLDLINE_SALT", _SALT)
 
 
 def _fake_embed():
@@ -76,8 +86,11 @@ def test_harvest_builds_the_worldline_and_kapae_cascades_the_subtree(tmp_path):
 
     wl_dag = coord.worldline()
     assert wl_dag["edges"], "harvest built no worldline — the observe leg never reached the entrypoint"
-    # the fixture's main chain roots at the RUN (the session id, the transcript basename minus .jsonl)
-    assert "claude-main" in coord._worldline.roots()
+    # the fixture's main chain roots at the VEILED run (C1b) — `wl-<hash>` of the session basename, never
+    # the bare "claude-main" in the clear (owner-recomputable under the pinned salt).
+    run = veiled_root("claude-main", secret=_SALT.encode())
+    assert run.startswith("wl-") and run in coord._worldline.roots()
+    assert "claude-main" not in coord._worldline.roots()
 
     # a fork subtree: bind a child branch under a captured turn, then kapae the branch-ROOT — the whole
     # subtree mutes (root + its descendants), not one turn.
