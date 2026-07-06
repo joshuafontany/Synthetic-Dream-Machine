@@ -212,12 +212,12 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
         _all_nodes(t, nodes)
         for n in nodes:
             seen.add(str(n.get("type", "?")))
-        for lab in seen:
+        for lab in sorted(seen):   # sorted: the walk order (and thus the budget's survivor set) never rides string-hash order
             label_trees.setdefault(lab, []).append(t)
     # (label, depth)-sequence → its supporting corpus trees, BFS by size.
     frontier: list[tuple[list, list]] = []
     frequent: dict[tuple, dict] = {}
-    for lab, trees in label_trees.items():
+    for lab, trees in sorted(label_trees.items()):
         if len(trees) >= min_support:
             seq = [(lab, 0)]
             frequent[tuple(seq)] = {"seq": seq, "support": len(trees), "size": 1, "trees": trees}
@@ -230,7 +230,7 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
         last_depth = seq[-1][1]
         # rightmost-path depths a new node may attach at: 1 .. last_depth+1.
         for depth in range(1, last_depth + 2):
-            for lab in label_trees:
+            for lab in sorted(label_trees):
                 explored += 1
                 if explored >= max_candidates:
                     break
@@ -261,7 +261,7 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
             closed.append({
                 "seq": a["seq"], "tree": tree, "support": a["support"], "size": a["size"],
             })
-    closed.sort(key=lambda x: (-x["size"], -x["support"]))
+    closed.sort(key=lambda x: (-x["size"], -x["support"], x["seq"]))
     return closed
 
 
@@ -293,7 +293,7 @@ def mine_sequences(streams: list, min_support: int, *, max_forms: int = _MAX_FOR
         for support, pattern in raw:
             if len(pattern) >= min_len:
                 out.append({"seq": [str(x) for x in pattern], "support": int(support)})
-        out.sort(key=lambda x: (-len(x["seq"]), -x["support"]))
+        out.sort(key=lambda x: (-len(x["seq"]), -x["support"], x["seq"]))
         return out[:max_forms]
     except Exception as exc:  # noqa: BLE001 — prefixspan absent / faulted → native fallback
         sys.stderr.write(f"form_induction: prefixspan unavailable ({type(exc).__name__}) — native BIDE\n")
@@ -403,7 +403,7 @@ def delta_p_bigrams(streams: list, dp_min: float = _DP_MIN, min_support: int = _
         dp = max(dp_b_a, dp_a_b)
         if dp >= dp_min:
             out.append({"seq": [str(a), str(b)], "support": pair_streams[(a, b)], "dp": round(dp, 4)})
-    out.sort(key=lambda x: (-x["dp"], -x["support"]))
+    out.sort(key=lambda x: (-x["dp"], -x["support"], x["seq"]))
     return out
 
 
