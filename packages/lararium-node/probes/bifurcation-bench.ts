@@ -25,6 +25,7 @@ import {
   type ArlDialOpts, type MaxTVerdict,
 } from "@lararium/mesh";
 import { cohomologyObstruction, type SheafAssignment } from "../src/sensorium-fusion.js";
+import { efeGate, efeSelect, type VerbDelta, type CVector } from "../src/sensorium-efe.js";
 import type { PlaneRestriction, ComparisonStalk } from "../src/sensorium-consistency.js";
 
 // ── the CONTRACT: one scalar order parameter per α, over a corpus ───────────────────────────────────
@@ -389,6 +390,43 @@ export const complexityEntropyTrace: NamedTrace<BenchCorpus> = {
   measure: (corpus, alpha) => excessEntropyBits(noisyReadout(corpus, alpha), 6),
 };
 
+// ══ S3 — the EFE-gate regime (the thesis organ B×C acting) ═════════════════════════════════════════════
+// A 4th order parameter rides the SAME α-sweep: the EFE-gate REGIME. At each α the gate reads H¹ over the
+// corpus sheaf, then forks — H¹=0 → efeSelect (a global EFE, regime 0) · H¹≠0 → surfaceDisagreement (no
+// global section, regime 1). The trace routes THROUGH the built `efeGate` (the mechanism, not a threshold on
+// H¹), so the RUN shows the gate FLIPPING regime at the SAME critical α the H¹/ΔF/complexity jumps land —
+// the "mechanism acting" window, the co-incident 4th signal.
+// ══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+/** A tiny fixed verb-set the bench's EFE gate scores when H¹=0. Each carries a servo affine Δ (per-island):
+ *  · hold — identity (the autonomous forecast passes through) · align — steer the mean to the C set-point (0)
+ *  · collapse — a large precision gain (σ²→0, options collapse: IRREVERSIBLE) · expand — a tiny gain (σ² opens).
+ *  The set exercises both reversibility signs, so efeSelect's argmin + the derived sign(optionLoss) both read. */
+const BENCH_VERBS: readonly VerbDelta[] = [
+  { verb: "hold", scale: 1, shift: 0, precisionGain: 1 },
+  { verb: "align", scale: 0, shift: 0, precisionGain: 1 },      // mean → 0 = the C set-point
+  { verb: "collapse", scale: 1, shift: 0, precisionGain: 1e4 }, // σ²→0 ⇒ optionLoss high ⇒ EFE high ⇒ passed over
+  { verb: "expand", scale: 1, shift: 0, precisionGain: 1e-3 },  // σ² opens ⇒ optionLoss negative ⇒ reversible
+];
+
+/** The bench C-vector — a quiescent set-point (mean 0) on every predictive plane; `align` reaches it. */
+const BENCH_C: CVector = { mu: { content: 0, structure: 0, form: 0 } };
+
+/**
+ * Trace #4 — the EFE-gate regime. Reads α as the agreement tolerance the gate hands H¹, and RETURNS the
+ * regime the gate lands in: 0 while H¹=0 (efeSelect runs — a global EFE stands well-posed), 1 once H¹≠0
+ * (surfaceDisagreement runs — no global section). The flip is CO-INCIDENT with the H¹ staircase leaving 0
+ * (the gate reads the SAME `cohomologyObstruction` at the SAME α), so the bench witnesses the mechanism
+ * acting at the critical control budget.
+ */
+export const efeGateTrace: NamedTrace<BenchCorpus> = {
+  name: "efe_gate",
+  measure: (corpus, alpha) => {
+    const res = efeGate(corpus.sheaf, corpus.planes, BENCH_VERBS, BENCH_C, { agreementTolerance: alpha });
+    return res.verdict === "surface-disagreement" ? 1 : 0;
+  },
+};
+
 // ══ S2 ═══════════════════════════════════════════════════════════════════════════════════════════════
 // The paper's RIGOR FLOOR — significance, not eyeballing. Every trace's jump reads SIGNIFICANT-ABOVE-NULL
 // against a surrogate-null band (not a curve read by eye), and the AAFT discriminator separates a STRUCTURAL
@@ -713,26 +751,28 @@ function stage(name: string, ok: boolean, detail = ""): void {
 
 function main(): void {
   console.log("[bifurcation-bench] =========================================================");
-  console.log("[bifurcation-bench] S2 — THREE traces (H¹ · ΔF · excess-E) + surrogate-null significance + AAFT");
+  console.log("[bifurcation-bench] S3 — FOUR traces (H¹ · ΔF · excess-E · EFE-gate) + surrogate-null significance + AAFT");
   console.log("[bifurcation-bench] =========================================================");
 
   const triangles = 6;
   const corpus = buildBenchCorpus({ triangles, seed: 0x5eed });
   // strict → loose: ARL₀ 200 (α≈0.005, below every gap) down to 1.6 (α≈0.625, above every gap).
   const arl0s = geomArl0Range(200, 1.6, 28);
-  const traces = [h1BenchTrace, deltaFTrace, complexityEntropyTrace];
+  const traces = [h1BenchTrace, deltaFTrace, complexityEntropyTrace, efeGateTrace];
   const rows = sweepArl(corpus, traces, arl0s);
   const h1 = rows.map((r) => r.h1_dimH1!);
   const dF = rows.map((r) => r.deltaF!);
   const cE = rows.map((r) => r.complexity!);
+  const efeGateRegime = rows.map((r) => r.efe_gate!);
 
   // ── STAGE 1 — the rows come out well-formed (three finite columns) ──────────────
   const wellFormed = rows.every(
     (r) => Number.isFinite(r.arl0) && Number.isFinite(r.alpha) && Number.isInteger(r.h1_dimH1)
       && Number.isFinite(r.deltaF) && Number.isFinite(r.complexity)
+      && (r.efe_gate === 0 || r.efe_gate === 1)
       && Math.abs(r.alpha! - 1 / r.arl0!) < 1e-12,
   );
-  stage("1 WELL-FORMED — every row carries finite arl0, α=1/ARL₀, integer dim H¹, finite ΔF + excess-E",
+  stage("1 WELL-FORMED — every row carries finite arl0, α=1/ARL₀, integer dim H¹, finite ΔF + excess-E, binary EFE-gate",
     wellFormed && rows.length === 28, `rows=${String(rows.length)}`);
 
   // ── STAGE 2 — the H¹ order parameter MOVES with α (a non-flat curve) ────────────
@@ -841,6 +881,50 @@ function main(): void {
     `thr=${fam.threshold.toFixed(3)} · struct-z=[${fam.observed.map((o) => o.toFixed(2)).join(",")}] exceeds=[${fam.exceeds.map((e) => (e ? 1 : 0)).join(",")}]`
       + ` · null-z=[${nullFam.observed.map((o) => o.toFixed(2)).join(",")}] null-exceeds=[${nullFam.exceeds.map((e) => (e ? 1 : 0)).join(",")}]`);
 
+  // ══ S3 — the EFE organ + its gate-flip trace ═════════════════════════════════════════════════════════
+
+  // ── STAGE 13 — the EFE-gate regime FLIPS co-incident with the H¹ obstruction crossing 0→nonzero ──────
+  //    both read the SAME cohomologyObstruction at the SAME α, so the gate's 0→1 flip lands at the exact rung
+  //    the H¹ staircase leaves 0 — the "mechanism acting" window on the one α axis.
+  const firstH1Nonzero = h1.findIndex((v) => v > 0);
+  const firstGateFlip = efeGateRegime.findIndex((v) => v === 1);
+  const gateBinary = efeGateRegime.every((v) => v === 0 || v === 1);
+  const gateCoincident = firstH1Nonzero >= 0 && firstGateFlip === firstH1Nonzero
+    && efeGateRegime.every((v, i) => v === (h1[i]! > 0 ? 1 : 0));
+  stage("13 EFE-GATE FLIP — the gate regime flips 0→1 co-incident with H¹ crossing 0→nonzero",
+    gateBinary && gateCoincident,
+    `H¹-leaves-0@rung=${String(firstH1Nonzero)} (α=${rows[firstH1Nonzero]?.alpha?.toFixed(4) ?? "—"}) · gate-flip@rung=${String(firstGateFlip)} · regime=[${efeGateRegime.join("")}]`);
+
+  // ── STAGE 14 — efeSelect picks the min-EFE verb; the irreversible verb is penalized (derived, not vetoed) ─
+  //    Score the four bench verbs over the corpus planes. `align` (steer to the C set-point, options intact)
+  //    reads lowest EFE and wins; `collapse` (σ²→0) reads high optionLoss → high EFE → passed over, and its
+  //    reversibility FALLS OUT as sign(optionLoss) > 0 (irreversible); `expand` opens options (reversible).
+  const sel = efeSelect(corpus.planes, BENCH_VERBS, BENCH_C);
+  const byVerb: Record<string, (typeof sel.ranked)[number]> = {};
+  for (const s of sel.ranked) byVerb[s.verb] = s;
+  const collapse = byVerb.collapse!, expand = byVerb.expand!, align = byVerb.align!;
+  const selectPicksAlign = sel.chosen.verb === "align";
+  const collapsePenalized = collapse.optionLoss > 0 && !collapse.reversible && collapse.efe > align.efe;
+  const expandReversible = expand.optionLoss < 0 && expand.reversible;
+  stage("14 EFE-SELECT — argmin picks the C-reaching verb; the σ²→0 verb reads irreversible + is passed over",
+    selectPicksAlign && collapsePenalized && expandReversible,
+    `chosen=${sel.chosen.verb} (EFE=${align.efe.toFixed(2)}) · collapse: optionLoss=${collapse.optionLoss.toFixed(2)} EFE=${collapse.efe.toFixed(2)} reversible=${String(collapse.reversible)}`
+      + ` · expand: optionLoss=${expand.optionLoss.toFixed(2)} reversible=${String(expand.reversible)}`);
+
+  // ── STAGE 15 — the KEYSTONE GATE branches: H¹=0 → select · H¹≠0 → surface-disagreement(R*_sem) ────────
+  //    A strict-α gate (α below every gap ⇒ H¹=0) SELECTS a verb; a loose-α gate (α above every gap ⇒ H¹≠0)
+  //    SURFACES the disagreement carrying R*_sem = log₂ dim H¹ (never a reconcile move).
+  const strictGate = efeGate(corpus.sheaf, corpus.planes, BENCH_VERBS, BENCH_C, { agreementTolerance: 0.001 });
+  const looseGate = efeGate(corpus.sheaf, corpus.planes, BENCH_VERBS, BENCH_C, { agreementTolerance: 0.9 });
+  const selects = strictGate.verdict === "select" && strictGate.selection !== null;
+  const surfaces = looseGate.verdict === "surface-disagreement" && looseGate.disagreement !== null
+    && looseGate.disagreement.dimH1 > 0
+    && Math.abs(looseGate.disagreement.cost - Math.log2(looseGate.disagreement.dimH1)) < 1e-9;
+  stage("15 KEYSTONE GATE — H¹=0 branch selects a verb; H¹≠0 branch surfaces disagreement with R*_sem",
+    selects && surfaces,
+    `strict(α=0.001): ${strictGate.verdict}${strictGate.verdict === "select" ? ` → ${strictGate.selection.chosen.verb}` : ""}`
+      + ` · loose(α=0.9): ${looseGate.verdict}${looseGate.verdict === "surface-disagreement" ? ` dimH1=${String(looseGate.disagreement.dimH1)} R*_sem=${looseGate.disagreement.cost.toFixed(3)}` : ""}`);
+
   // ── the data-out: NUMBERS ONLY (JSON + CSV; the figure renders downstream) ──────
   console.log("[bifurcation-bench] --- AAFT verdicts (per trace + control pair: survives-AAFT structural vs spectral) ---");
   console.log(JSON.stringify({ traces: aaft, control: [ctrl.nonlinear, ctrl.linear] }, null, 0));
@@ -853,8 +937,8 @@ function main(): void {
 
   console.log("[bifurcation-bench] =========================================================");
   if (failures === 0) {
-    console.log("[bifurcation-bench] ALL STAGES PASS — three order parameters bifurcate SIGNIFICANTLY on ONE α axis.");
-    console.log("[bifurcation-bench] Each jump reads significant-above-null; the AAFT discriminator separates structural from spectral; S3 (EFE) plugs onto the same axis.");
+    console.log("[bifurcation-bench] ALL STAGES PASS — FOUR order parameters bifurcate on ONE α axis (three SIGNIFICANTLY + the EFE-gate regime).");
+    console.log("[bifurcation-bench] Each jump reads significant-above-null; the AAFT discriminator separates structural from spectral; the EFE gate flips regime co-incident with H¹.");
   } else {
     console.log(`[bifurcation-bench] ${String(failures)} STAGE(S) FAILED.`);
     process.exit(1);
