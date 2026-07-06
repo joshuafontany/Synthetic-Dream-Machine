@@ -715,6 +715,12 @@ def cmd_induce(args) -> None:
             "note": f"form-skipped: too few structures ({len(forest)} < min-support {args.min_support})",
         }) + "\n")
         return
+    # PERF DEBT, named to the projector arc (RUN-ARC #5): this batch face walks the MDL
+    # candidate pool UNBOUNDED (max_candidates stays None) — the per-pass bound cures
+    # capture only. Unhit at the 12-doc test-bed (run_projector reads the durable form
+    # plane, never re-mines); it bites HERE first when a big corpus rides this offline
+    # CLI — apply capture's bounded-enumeration discipline (a --max-candidates arg) at
+    # that crossing.
     res = induce_forest(forest, min_support=args.min_support, max_forms=args.max_forms)
     lines = [json.dumps(f, ensure_ascii=False) for f in res["forms"]]
     for line in lines:
