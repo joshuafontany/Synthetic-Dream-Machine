@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import math
 
+from chromadb.errors import NotFoundError
 from mempalace.palace import get_collection
 
 from sidecar_caps import (
@@ -115,15 +116,33 @@ class ContentStore:
         drawer, but a model-B driver re-opening a model-A palace stamps each record self-consistently
         (stamp==pin) and slips it — yet its queries search an incomparable space (recall corruption of the
         immutable ground). Peek one held drawer; a disagreeing model fails loud on compose."""
-        got = self._col.get(limit=1, include=["metadatas"])
-        metas = got.get("metadatas") or []
-        if not metas:
-            return  # empty palace — no history to disagree with
-        held = str((metas[0] or {}).get("lar_embedder_model", "")).strip()
+        # SCAN pages until a STAMPED drawer surfaces — sampling only metas[0] slips a mixed-history
+        # palace (an unstamped or fresh-model first row hides a held DIFFERENT model deeper in). The
+        # first stamped drawer names the palace's real embedder; an all-unstamped palace has no history
+        # to disagree with.
+        held = self._first_stamped_model()
         if held and held != self._expected_model:
             raise ContentFloorError(f"content palace already holds vectors from embedder {held!r} != expected "
                              f"{self._expected_model!r} — a model swap over an existing palace searches an "
                              "incomparable space (palace-history identity floor); re-embed or open under the held model")
+
+    def _first_stamped_model(self, page: int = 512) -> "str | None":
+        """The `lar_embedder_model` the FIRST stamped drawer carries — scanned page-by-page so an
+        unstamped/fresh prefix never hides a held model deeper in. None when the palace holds no stamped
+        drawer at all (nothing to disagree with)."""
+        offset = 0
+        while True:
+            got = self._col.get(limit=page, offset=offset, include=["metadatas"])
+            metas = got.get("metadatas") or []
+            if not metas:
+                return None                    # scanned to the end — no stamped drawer
+            for m in metas:
+                held = str((m or {}).get("lar_embedder_model", "")).strip()
+                if held:
+                    return held                # the first stamped drawer names the palace's model
+            if len(metas) < page:
+                return None                    # last page, none stamped
+            offset += len(metas)
 
     @property
     def append_only(self) -> bool:
@@ -241,8 +260,8 @@ class ContentStore:
         opts the raw index back (audit/debug)."""
         try:
             n = self._col.count()
-        except Exception:  # noqa: BLE001 — fresh/empty collection
-            n = 0
+        except NotFoundError:                  # ONLY the genuinely-absent collection reads as empty;
+            n = 0                              # a real backend error propagates LOUD (never look-empty)
         if n == 0:
             return {"matches": [], "scanned": 0, "matched": 0}
         pool = min(max(k, 1), n)
@@ -308,8 +327,8 @@ class ContentStore:
         offset to resume from, or null when the page ran short (the scan is drained)."""
         try:
             n = self._col.count()
-        except Exception:  # noqa: BLE001 — fresh/empty collection
-            n = 0
+        except NotFoundError:                  # ONLY the absent collection reads as empty; a real backend
+            n = 0                              # error propagates LOUD (never a look-empty page)
         if offset >= n:
             return {"records": [], "next": None, "total": n}
         got = self._col.get(

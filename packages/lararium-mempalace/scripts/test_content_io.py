@@ -21,6 +21,43 @@ def test_generic_store_accepts_arbitrary_metadata(tmp_path):
     assert s.get("c-1")["metadata"]["whatever"] == "shape"
 
 
+def _raiser(exc):
+    def f(*_a, **_k):
+        raise exc
+    return f
+
+
+def test_count_backend_error_propagates_loud_not_look_empty(tmp_path, monkeypatch):
+    # C4: a genuine backend error on count() must PROPAGATE (refuse-loud), never read as an empty
+    # collection. Only the genuinely-absent collection (NotFoundError) reads empty.
+    from chromadb.errors import NotFoundError
+    s = _store(tmp_path)
+    s.put("c1", "x", [0.1, 0.2, 0.3], {"w": "v"})
+    monkeypatch.setattr(s._col, "count", _raiser(RuntimeError("backend down")))
+    with pytest.raises(RuntimeError):
+        s.search([0.1, 0.2, 0.3], 3)                          # never a look-empty result on a real error
+    with pytest.raises(RuntimeError):
+        s.scan()
+    # the genuinely-absent collection still reads empty (the narrow, correct swallow)
+    monkeypatch.setattr(s._col, "count", _raiser(NotFoundError("no collection")))
+    assert s.search([0.1, 0.2, 0.3], 3) == {"matches": [], "scanned": 0, "matched": 0}
+    assert s.scan()["records"] == []
+
+
+def test_model_floor_scans_past_unstamped_drawers(tmp_path):
+    # C4: sampling only metas[0] slips a mixed-history palace — an unstamped prefix hides a held model.
+    # The scan finds the first STAMPED drawer, so opening under a different model fails loud regardless
+    # of where the stamped drawer sits.
+    p = str(tmp_path / ".mem")
+    s = cio.ContentStore(p, required_keys={"wing", "room"})    # no model pin — land a mixed history
+    for i in range(4):
+        s.put(f"u{i}", f"unstamped {i}", [0.1, 0.2, 0.3], {"wing": "w", "room": "r"})   # UNSTAMPED
+    s.put("stamped", "held", [0.1, 0.2, 0.3], {"wing": "w", "room": "r", "lar_embedder_model": "model-A/3"})
+    with pytest.raises(cio.ContentFloorError):
+        cio.ContentStore(p, expected_model="model-B/3")        # the held model-A hides behind the unstamped prefix
+    cio.ContentStore(p, expected_model="model-A/3")            # opening under the held model passes
+
+
 def test_non_finite_vector_value_fails_at_the_land_floor(tmp_path):
     # C3: a NaN/inf vector value never lands — it corrupts nearest-neighbor recall silently. A per-record
     # data poison (plain ValueError, so the capture poison-guard rides it to `failed`), not a systemic floor.

@@ -43,6 +43,7 @@ import json
 import os
 import sys
 
+from chromadb.errors import NotFoundError
 from mempalace.palace import get_collection
 
 # The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON serve-loop ·
@@ -77,15 +78,43 @@ class PersistenceStore:
     RMW witness-append + a nearest-neighbor read for the TS admit gate. DUMB by design — no
     standing, no admission decision (both live in the TS keel)."""
 
-    def __init__(self, palace_path: str, expected_dim: "int | None" = None) -> None:
+    def __init__(self, palace_path: str, expected_dim: "int | None" = None,
+                 expected_model: "str | None" = None) -> None:
         # create-or-open; identity check skipped (we never run the embedder — the assertion IS
         # the vector). get_collection os.makedirs the dir, so this IS `init` for a fresh palace.
-        # `expected_dim` opts IN the embedder-identity floor: a caller pins the assertion width so a
-        # model swap that changes the dim FAILS LOUD before it corrupts standing with vectors from an
-        # incomparable space (the model-tag half of identity rides the caller/coordinator). Unset →
-        # no guard (the testimony floor stays caller-trusting, as today).
+        # `expected_dim` opts IN the DIM half of the embedder-identity floor: a caller pins the assertion
+        # width so a model swap that CHANGES the dim FAILS LOUD before it corrupts standing. `expected_model`
+        # mirrors content_io's MODEL half: a same-dim DIFFERENT-model swap slips the dim guard yet searches
+        # an incomparable space (standing corruption) — so the store self-stamps the model on every put and
+        # refuses to OPEN a palace already holding a different model. Both unset → no guard (caller-trusting).
         self._expected_dim = expected_dim
+        self._expected_model = expected_model
         self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
+        if self._expected_model is not None:
+            self._assert_palace_model_history()
+
+    def _assert_palace_model_history(self) -> None:
+        """The palace-history half of the model floor (mirrors content_io): refuse to OPEN a
+        PersistencePalace already holding assertions from a DIFFERENT embedder — its queries would search
+        an incomparable space. Scan pages until a STAMPED record surfaces (an unstamped prefix never hides
+        a held model); an all-unstamped palace has no history to disagree with."""
+        offset, page = 0, 512
+        while True:
+            got = self._col.get(limit=page, offset=offset, include=["metadatas"])
+            metas = got.get("metadatas") or []
+            if not metas:
+                return
+            for m in metas:
+                held = str((m or {}).get("lar_embedder_model", "")).strip()
+                if held:
+                    if held != self._expected_model:
+                        raise ValueError(f"persistence palace already holds assertions from embedder {held!r} != "
+                                         f"expected {self._expected_model!r} — a model swap searches an incomparable "
+                                         "space (palace-history identity floor); re-embed or open under the held model")
+                    return
+            if len(metas) < page:
+                return
+            offset += len(metas)
 
     def _get_raw(self, claim_cid: str) -> "dict | None":
         got = self._col.get(ids=[claim_cid], include=["embeddings", "metadatas", "documents"])
@@ -140,6 +169,10 @@ class PersistenceStore:
             "lar_pubinfo": json.dumps(pubinfo or {}),
             "lar_witnesses": witnesses_json or "[]",
         }
+        # self-stamp the embedder model when the floor is armed — so the palace carries a model history the
+        # open-check reads (the model-tag rides the trusted coordinator, mirroring content_io's stamp).
+        if self._expected_model is not None:
+            meta["lar_embedder_model"] = self._expected_model
         # The document slot carries the OPTIONAL text projection (the "past text" design — text is
         # ONE projection of the vector-atom). Absent one, the id rides as a non-empty placeholder
         # (chroma requires a document); the atom stays the assertion vector.
@@ -172,8 +205,8 @@ class PersistenceStore:
         # collection ⇒ [] ⇒ the gate reads "first light, always novel". Read-only.
         try:
             n = self._col.count()
-        except Exception:  # noqa: BLE001 — a fresh/empty collection
-            n = 0
+        except NotFoundError:                  # ONLY the absent collection reads as first-light-empty;
+            n = 0                              # a real backend error propagates LOUD (never look-empty)
         if n == 0:
             return {"population": []}
         got = self._col.query(query_embeddings=[assertion], n_results=min(k, n), include=["embeddings"])
@@ -197,14 +230,15 @@ def _build_ops(store: PersistenceStore) -> dict:
     }
 
 
-def _serve(palace_path: str, expected_dim: "int | None" = None) -> None:
+def _serve(palace_path: str, expected_dim: "int | None" = None, expected_model: "str | None" = None) -> None:
     # Compose: the serve root acquires the per-palace singleton BEFORE build_dispatch opens the
-    # ChromaDB collection (the reap-don't-pile invariant, OS-enforced). expected_dim (unset =
-    # off) arms the embedder-identity floor for a caller that pins the assertion width.
+    # ChromaDB collection (the reap-don't-pile invariant, OS-enforced). expected_dim / expected_model
+    # (unset = off) arm the two halves of the embedder-identity floor.
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(PersistenceStore(palace_path, expected_dim=expected_dim))),
+        build_dispatch=lambda: make_dispatch(_build_ops(
+            PersistenceStore(palace_path, expected_dim=expected_dim, expected_model=expected_model))),
         idle_ttl=_idle_ttl_seconds(),
         singleton_msg="persistence_io: another holder already serves this palace; exiting (singleton)\n",
     )
@@ -217,7 +251,9 @@ def main() -> None:
     s.add_argument("--palace", required=True)
     s.add_argument("--expected-dim", type=int, default=None,
                    help="pin the assertion vector width; a dim mismatch fails loud (embedder-identity floor; unset = off)")
-    s.set_defaults(fn=lambda a: _serve(a.palace, expected_dim=a.expected_dim))
+    s.add_argument("--expected-model", type=str, default=None,
+                   help="pin the embedder model name; a same-dim different-model swap fails loud (embedder-identity floor; unset = off)")
+    s.set_defaults(fn=lambda a: _serve(a.palace, expected_dim=a.expected_dim, expected_model=a.expected_model))
     args = ap.parse_args()
     args.fn(args)
 

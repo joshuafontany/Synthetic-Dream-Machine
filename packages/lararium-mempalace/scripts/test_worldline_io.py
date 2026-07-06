@@ -32,6 +32,24 @@ def _build_rhizome(store):
     store.handback("t-root", "t-A", tick=4)  # child A hands back to parent root: join + close the fork
 
 
+def test_bogus_branch_kapae_reads_resolved_false(tmp_path):
+    # C4: a bogus/typo branch (no rhizome node, no bound content) reads resolved:false — a legible miss,
+    # never a silent no-op — and logs NO phantom mute. A real branch resolves true.
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    content = cio.ContentStore(str(tmp_path / ".mem"))
+    store.linear("a", "b", tick=1)                       # a -> b (a real branch)
+
+    miss = wl.cascade_kapae(store, [content], "NOPE-typo", tick=2)
+    assert miss == {"branch": [], "muted_entries": 0, "resolved": False}
+    assert not store.muted_turns()                       # the typo logged no phantom mute
+
+    hit = wl.cascade_kapae(store, [content], "a", tick=3)
+    assert hit["resolved"] is True and set(hit["branch"]) == {"a", "b"}
+    assert store.muted_turns() == {"a", "b"}             # the real branch muted
+    un = wl.cascade_un_kapae(store, [content], "NOPE-typo", tick=4)
+    assert un["resolved"] is False                       # un-kapae of a typo is legible too
+
+
 def test_add_edge_rejects_a_cycle_creating_spawn_edge(tmp_path):
     # C3: a spawn-tree edge that would close a cycle is REJECTED (never added), so no pure-cycle
     # component silent-drops its turns from the demux (roots()/worldline_of climb the spawn-tree). The

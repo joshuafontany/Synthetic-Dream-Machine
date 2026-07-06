@@ -293,6 +293,14 @@ class WorldlineStore:
 
     # -- kapae: the move-not-delete mute polarity-log ---------------------------------------
 
+    def has_node(self, node: str) -> bool:
+        """Whether `node` stands in the rhizome at all — it appears as the `frm` or `to` of some edge. A
+        bogus/typo branch names no node; kapae over it must read resolved:false, never a silent no-op."""
+        row = self._conn.execute(
+            "SELECT 1 FROM worldline_edges WHERE frm=? OR to_node=? LIMIT 1", (node, node)
+        ).fetchone()
+        return row is not None
+
     def muted_turns(self) -> set:
         """The live-muted turn-keys — each turn's LATEST polarity row (max id) reading 1. The log
         stays append-only, so this DERIVES the current mute-state; no row ever drops."""
@@ -347,10 +355,22 @@ class WorldlineStore:
 # a turn-key (content_io.cids_for_turn) and mutes/unmutes them (content_io.mute, vector-safe).
 
 
+def _branch_resolves(worldline: WorldlineStore, stores, branch_root: str) -> bool:
+    """Whether a branch NAMES something real — a rhizome node, OR a turn with bound content in some store
+    (a content-only turn carries no edge yet still mutes). A pure typo matches NEITHER — the caller reads
+    resolved:false instead of a silent no-op, and no phantom mute logs against a name for nothing."""
+    if worldline.has_node(branch_root):
+        return True
+    return any(store.cids_for_turn(branch_root) for store in stores)
+
+
 def cascade_kapae(worldline: WorldlineStore, stores, branch_root: str, tick) -> dict:
     """FULL kapae: mute the branch in the rhizome, then cascade the mute to EVERY store's entries
     for those turn-keys. `stores` = the sensoria's content stores (Memory + Dream). Returns the
-    branch + the total entries muted. Reversible via `cascade_un_kapae` (move-not-delete throughout)."""
+    branch + the total entries muted + `resolved` (false for a bogus/typo branch — a silent no-op today).
+    Reversible via `cascade_un_kapae` (move-not-delete throughout)."""
+    if not _branch_resolves(worldline, stores, branch_root):
+        return {"branch": [], "muted_entries": 0, "resolved": False}   # a pure typo — never a phantom mute
     keys = worldline.kapae(branch_root, tick)
     muted = 0
     for store in stores:
@@ -358,12 +378,15 @@ def cascade_kapae(worldline: WorldlineStore, stores, branch_root: str, tick) -> 
             for cid in store.cids_for_turn(tk):
                 store.mute(cid, tick)
                 muted += 1
-    return {"branch": sorted(keys), "muted_entries": muted}
+    return {"branch": sorted(keys), "muted_entries": muted, "resolved": True}
 
 
 def cascade_un_kapae(worldline: WorldlineStore, stores, branch_root: str, tick) -> dict:
     """Restore the branch across the rhizome AND every store — the entries reappear in recall. The
-    rows never left (move-not-delete), so cids_for_turn still finds them to un-mute."""
+    rows never left (move-not-delete), so cids_for_turn still finds them to un-mute. A bogus/typo branch
+    reads resolved:false (a silent no-op today)."""
+    if not _branch_resolves(worldline, stores, branch_root):
+        return {"branch": [], "restored_entries": 0, "resolved": False}
     keys = worldline.un_kapae(branch_root, tick)
     restored = 0
     for store in stores:
@@ -371,7 +394,7 @@ def cascade_un_kapae(worldline: WorldlineStore, stores, branch_root: str, tick) 
             for cid in store.cids_for_turn(tk):
                 store.unmute(cid, tick)
                 restored += 1
-    return {"branch": sorted(keys), "restored_entries": restored}
+    return {"branch": sorted(keys), "restored_entries": restored, "resolved": True}
 
 
 # ---------------------------------------------------------------------------

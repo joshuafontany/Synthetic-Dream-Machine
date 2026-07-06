@@ -88,3 +88,15 @@ def test_expected_dim_floor_rejects_mismatch_and_none(tmp_path):
         s.put("t-2", "innovation", [0.1, 0.2], "vessel-A", "f0", {})
     with pytest.raises(ValueError):                                          # None assertion → clean domain error (not len(None))
         s.put("t-3", "innovation", None, "vessel-A", "f0", {})
+
+
+def test_expected_model_floor_rejects_a_same_dim_swap(tmp_path):
+    # C4: mirror content_io's MODEL half — a same-dim DIFFERENT-model swap slips the dim guard yet
+    # searches an incomparable space (standing corruption). The store self-stamps the model on put; the
+    # palace-history open-check refuses to reopen the palace under a different model.
+    p = str(tmp_path / ".persist_model")
+    s = pio.PersistenceStore(p, expected_model="model-A/4")
+    s.put("t-1", "innovation", [0.1, 0.2, 0.3, 0.4], "vessel-A", "f0", {})  # stamps model-A
+    with pytest.raises(ValueError):                                          # same dim, DIFFERENT model → fail loud
+        pio.PersistenceStore(p, expected_model="model-B/4")
+    pio.PersistenceStore(p, expected_model="model-A/4")                     # the held model reopens clean
