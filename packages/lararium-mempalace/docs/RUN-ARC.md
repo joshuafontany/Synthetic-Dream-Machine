@@ -43,7 +43,9 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
 
 ## The first step (the unlock — BA)
 
-**A witnessed 3-plane capture over a small curated corpus:** add the corpus source-cap (#2) → wire the structure/form fan-out (#1) → compose an ephemeral test-bed sensorium over a curated markdown corpus → run ONE `run_pass` → **witness content + structure + form all populated** (prove-by-witness, not green units). That single pass turns the projector (#3) from blocked to buildable, and the real `~/.lares` memory-sensorium (#4) rides the same rails after.
+**LANDED 2026-07-06 (dc6e58d4)** — the corpus source-cap (`corpus_source`, single-cid gate, sighting-register mtimes), the plane fan-out (`plane_fanout.py`: structure + form ride the SAME records after the content leg resolves durable; independence law held — neither plane touches content embeddings), the ephemeral test-bed driver (`corpus_testbed.py`, ~/.mempalace-warded). Witnessed over 12 curated @lares memes: all three planes populated, one cid keys all three (form.struct_hash == structure_hash), pass 2 lands ZERO everywhere; 452 py green. The projector (#3) now stands BUILDABLE. Held to the projector arc: the unbounded batch form-induction walk (the per-pass bound cures capture only).
+
+The step, as originally named: **a witnessed 3-plane capture over a small curated corpus:** add the corpus source-cap (#2) → wire the structure/form fan-out (#1) → compose an ephemeral test-bed sensorium over a curated markdown corpus → run ONE `run_pass` → **witness content + structure + form all populated** (prove-by-witness, not green units). That single pass turns the projector (#3) from blocked to buildable, and the real `~/.lares` memory-sensorium (#4) rides the same rails after.
 
 ## Held / deferred (do not gate the RUN)
 
