@@ -19,7 +19,11 @@
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
  */
 
-import { makeArlDial, freeEnergy, iidShuffle, makeRng, type ArlDialOpts } from "@lararium/mesh";
+import {
+  makeArlDial, freeEnergy, iidShuffle, makeRng,
+  surrogateNull, maxTNull, phaseScramble, timeReversalAsymmetry,
+  type ArlDialOpts, type MaxTVerdict,
+} from "@lararium/mesh";
 import { cohomologyObstruction, type SheafAssignment } from "../src/sensorium-fusion.js";
 import type { PlaneRestriction, ComparisonStalk } from "../src/sensorium-consistency.js";
 
@@ -385,6 +389,307 @@ export const complexityEntropyTrace: NamedTrace<BenchCorpus> = {
   measure: (corpus, alpha) => excessEntropyBits(noisyReadout(corpus, alpha), 6),
 };
 
+// ══ S2 ═══════════════════════════════════════════════════════════════════════════════════════════════
+// The paper's RIGOR FLOOR — significance, not eyeballing. Every trace's jump reads SIGNIFICANT-ABOVE-NULL
+// against a surrogate-null band (not a curve read by eye), and the AAFT discriminator separates a STRUCTURAL
+// membership signature from a mere temporal-beat artifact. All of it RIDES the built null-harness organs
+// (surrogateNull, maxTNull, phaseScramble, iidShuffle) — the bench composes them, never re-rolls a quantile.
+//
+// THE BRIDGE: the null-harness organs run over a `series → scalar`; a bench trace reads a whole corpus and
+// returns a scalar-per-α. A {@link TraceSurrogate} bridges the two — it EXTRACTS the real-valued corpus slice
+// the trace's structure lives on (the thing a surrogate destroys) and REBUILDS the whole corpus around a
+// surrogated slice, so a surrogateNull over that slice literally "draws a surrogate corpus and recomputes the
+// trace." The observed value it reports on the un-surrogated slice re-derives the trace's own swept value.
+// ══════════════════════════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * A trace's SURROGATE ADAPTER — the bridge from the null-harness's `series → scalar` organs to a bench trace
+ * that reads a whole {@link BenchCorpus}. `series` extracts the corpus slice the trace's structure lives on
+ * (the null acts there); `rebuild` swaps a surrogated slice back; `bandStatistic` reads the significance
+ * statistic off the rebuilt corpus; `surrogate` is the STRUCTURAL null that dissolves this trace's structure.
+ *
+ * The band statistic is NOT always the trace value: ΔF is ALREADY a fitted-vs-shuffled DIFFERENCE, so wrapping
+ * it in a second shuffle-null double-counts (a shuffled corpus's own ΔF ≈ its structured ΔF) — its band reads
+ * the RAW fitted free energy F instead, which the shuffle genuinely collapses. And H¹'s obstruction count is
+ * SHUFFLE-INVARIANT (a random agreement-nerve obstructs comparably), so its structural null JITTERS the
+ * salience (dissolving the coordinated disagreement gaps) rather than permuting it. Each trace names the null
+ * that actually destroys ITS structure — the discipline the paper's rigor floor demands.
+ */
+interface TraceSurrogate {
+  /** the trace column-name the band/p/sig columns key onto. */
+  readonly name: string;
+  /** extract the real-valued corpus slice whose structure the trace depends on (the surrogate destroys it). */
+  readonly series: (c: BenchCorpus) => number[];
+  /** the (possibly capped) slice the O(n²) AAFT surrogate rides — full-`series` is O(n²) on the symbol stream. */
+  readonly aaftSeries: (c: BenchCorpus) => number[];
+  /** swap a surrogated slice back into the corpus and hand back the rebuilt whole. */
+  readonly rebuild: (c: BenchCorpus, slice: readonly number[]) => BenchCorpus;
+  /** the significance statistic read off a (rebuilt) corpus at α — the quantity the null bands. */
+  readonly bandStatistic: (c: BenchCorpus, alpha: number) => number;
+  /** the STRUCTURAL null that dissolves THIS trace's structure (iid-shuffle for ΔF/complexity, jitter for H¹). */
+  readonly surrogate: (slice: readonly number[], rng: () => number) => number[];
+}
+
+// ── slice extract/rebuild per trace (flatten a corpus slice → swap a surrogated slice back) ───────────
+
+/** Flatten every sheaf-restriction's per-unit salience into one vector, restriction+key insertion order. */
+function flattenSheaf(sheaf: SheafAssignment): number[] {
+  const out: number[] = [];
+  for (const r of sheaf.restrictions) for (const v of r.value.values()) out.push(v);
+  return out;
+}
+/** Swap a flattened salience vector back onto the SAME restriction/key skeleton (order matches the flatten). */
+function rebuildSheaf(sheaf: SheafAssignment, flat: readonly number[]): SheafAssignment {
+  let k = 0;
+  const restrictions = sheaf.restrictions.map((r) => {
+    const value = new Map<string, number>();
+    for (const key of r.value.keys()) value.set(key, flat[k++] ?? 0);
+    return { plane: r.plane, variance: r.variance, value };
+  });
+  return { restrictions, stalk: sheaf.stalk };
+}
+
+const PLANE_ORDER = ["content", "structure", "form"] as const;
+/** Concatenate the three predictive planes' frames in a fixed order into one vector. */
+function flattenPlanes(planes: Record<string, number[]>): number[] {
+  return PLANE_ORDER.flatMap((n) => planes[n] ?? []);
+}
+/** Split a concatenated frame vector back into the three planes (equal even slices). */
+function rebuildPlanes(flat: readonly number[]): Record<string, number[]> {
+  const per = Math.floor(flat.length / PLANE_ORDER.length);
+  const out: Record<string, number[]> = {};
+  PLANE_ORDER.forEach((n, i) => { out[n] = flat.slice(i * per, (i + 1) * per); });
+  return out;
+}
+
+/** The O(n²) DFT surrogate rides a CAPPED symbol slice — the full 4000-stream is O(16M) per draw, and a
+ *  1024-cap holds the excess-entropy estimate well while keeping the AAFT sub-test cheap. */
+const AAFT_SYMBOL_CAP = 1024;
+/** The jitter amplitude the H¹ structural null adds — above `gapHi` (0.45) so the coordinated disagreement
+ *  gaps that mint the hollow triangles DISSOLVE, while each salience stays near its own magnitude. */
+const H1_JITTER_AMP = 0.5;
+
+/** The JITTER surrogate — add uniform ±`amp` noise to each value. Unlike a permutation (which preserves the
+ *  value multiset and so leaves H¹'s obstruction count near-invariant), jitter dissolves the COORDINATED
+ *  disagreement gaps the hollow triangles rest on — the structural null H¹ genuinely stands above. */
+function jitterSurrogate(amp: number): (slice: readonly number[], rng: () => number) => number[] {
+  return (slice, rng) => slice.map((v) => v + (rng() * 2 - 1) * amp);
+}
+
+/** ΔF's band statistic — the RAW fitted free energy F (NOT the fitted-minus-shuffled difference). The trace
+ *  value ΔF is already null-differenced, so a second shuffle-null double-counts; the raw F rides high on a
+ *  tracked model and collapses under the shuffle, so its surrogate-null band discriminates cleanly. */
+function fittedFreeEnergy(planes: Record<string, number[]>, alpha: number): number {
+  const conf = alphaToConfidence(alpha);
+  const confidences: Record<string, number> = {};
+  for (const name of Object.keys(planes)) confidences[name] = conf;
+  return freeEnergy(planes, { model: "ar1", confidences }).F;
+}
+
+/** The three trace surrogate-adapters — one per column, each naming the null that dissolves ITS structure. */
+const traceSurrogates: readonly TraceSurrogate[] = [
+  {
+    // H¹ — its obstruction count is SHUFFLE-INVARIANT, so the structural null JITTERS the salience.
+    name: "h1_dimH1",
+    series: (c) => flattenSheaf(c.sheaf),
+    aaftSeries: (c) => flattenSheaf(c.sheaf),
+    rebuild: (c, slice) => ({ ...c, sheaf: rebuildSheaf(c.sheaf, slice) }),
+    bandStatistic: (c, alpha) => h1BenchTrace.measure(c, alpha),
+    surrogate: jitterSurrogate(H1_JITTER_AMP),
+  },
+  {
+    // ΔF — the band reads the RAW fitted F (the trace ΔF is already null-differenced); iid-shuffle collapses it.
+    name: "deltaF",
+    series: (c) => flattenPlanes(c.planes),
+    aaftSeries: (c) => flattenPlanes(c.planes),
+    rebuild: (c, slice) => ({ ...c, planes: rebuildPlanes(slice) }),
+    bandStatistic: (c, alpha) => fittedFreeEnergy(c.planes, alpha),
+    surrogate: iidShuffle,
+  },
+  {
+    // excess-entropy — a plain statistic of the symbol stream; iid-shuffle destroys the ordered backbone.
+    name: "complexity",
+    series: (c) => c.symbols.slice(),
+    aaftSeries: (c) => c.symbols.slice(0, AAFT_SYMBOL_CAP),
+    rebuild: (c, slice) => ({ ...c, symbols: slice.slice() }),
+    bandStatistic: (c, alpha) => complexityEntropyTrace.measure(c, alpha),
+    surrogate: iidShuffle,
+  },
+];
+
+// ── the AAFT surrogate (structural-vs-temporal discriminator) ─────────────────────────────────────────
+
+/**
+ * AAFT surrogate (amplitude-adjusted Fourier transform, Theiler et al. 1992) — phase-scramble the slice, then
+ * RANK-REMAP the result onto the ORIGINAL value multiset. Composes the BUILT {@link phaseScramble}. Preserving
+ * the power spectrum keeps the linear temporal beat (the autocorrelation); the rank-remap keeps the amplitude
+ * distribution (so surrogated symbols/salience stay VALID); only the nonlinear phase organization dissolves.
+ * So a statistic that stays ABOVE this null reads a STRUCTURAL-membership signature — a nonlinear organization
+ * AAFT destroys — rather than a linear-spectral (temporal-beat) artifact AAFT preserves.
+ */
+function aaftSurrogate(series: readonly number[], rng: () => number): number[] {
+  const scrambled = phaseScramble(series, rng);
+  // rank the scrambled positions; drop the sorted originals onto those ranks → the original multiset, re-ordered.
+  const order = scrambled.map((v, i) => [v, i] as const).sort((a, b) => a[0] - b[0]).map(([, i]) => i);
+  const sortedOrig = series.slice().sort((a, b) => a - b);
+  const out = new Array<number>(series.length).fill(0);
+  order.forEach((pos, rank) => { out[pos] = sortedOrig[rank]!; });
+  return out;
+}
+
+/** A deterministic logistic-map orbit `xₜ = r·xₜ₋₁·(1−xₜ₋₁)` (r=3.99) — broadband spectrum, STRONG nonlinear
+ *  phase structure (time-reversal asymmetry). The AAFT discriminator's positive control: it SURVIVES AAFT. */
+function logisticOrbit(n: number, x0: number): number[] {
+  const x = new Array<number>(n).fill(0);
+  x[0] = x0;
+  for (let t = 1; t < n; t++) x[t] = 3.99 * x[t - 1]! * (1 - x[t - 1]!);
+  return x;
+}
+
+// ── significance instruments (per-rung bands · AAFT verdicts · family-wise maxT) ──────────────────────
+
+/** Options steering the surrogate-null significance sweep. */
+interface SigOpts {
+  /** surrogate draws per null (per rung, per trace). */
+  readonly trials: number;
+  /** the significance rate α_sig — the band reads the (1 − α_sig) quantile of the null. */
+  readonly alphaSig: number;
+  /** the base PRNG seed — each rung offsets it, so the whole significance sweep regenerates deterministically. */
+  readonly seed: number;
+}
+
+/**
+ * Attach a surrogate-null significance band to EVERY row: for each (trace, rung), recompute the trace's band
+ * statistic over `trials` structural-null surrogate corpora at that rung's α, read the (1 − α_sig) quantile as
+ * the band, and mark the observed value SIGNIFICANT where it exceeds the band. Each trace rides ITS OWN
+ * structural null (jitter for H¹, iid-shuffle for ΔF/complexity — see {@link TraceSurrogate}). Rides the BUILT
+ * {@link surrogateNull}; a per-rung seed offset keeps it deterministic. Adds `<trace>_band/_p/_sig` columns.
+ */
+function attachSignificanceBands(
+  rows: SweepRow[], corpus: BenchCorpus, surrogates: readonly TraceSurrogate[], opts: SigOpts,
+): void {
+  rows.forEach((row, r) => {
+    const alpha = row.alpha!;
+    for (const s of surrogates) {
+      const stat = (slice: readonly number[]): number => s.bandStatistic(s.rebuild(corpus, slice), alpha);
+      const v = surrogateNull(s.series(corpus), stat, s.surrogate, {
+        alpha: opts.alphaSig, trials: opts.trials, seed: opts.seed + r,
+      });
+      row[`${s.name}_band`] = v.threshold;
+      row[`${s.name}_p`] = v.pValue;
+      row[`${s.name}_sig`] = v.exceeds ? 1 : 0;
+    }
+  });
+}
+
+/** One AAFT verdict — the observed statistic, its spectrum-preserving AAFT band, and survives-AAFT. */
+interface AaftVerdict {
+  readonly name: string;
+  readonly observed: number;
+  /** the (1 − α_sig) quantile of the statistic under the AAFT (spectrum-preserving) null. */
+  readonly aaftBand: number;
+  readonly pValue: number;
+  /** observed > AAFT-band ⇒ a STRUCTURAL signature (survives the spectrum-preserving surrogate). */
+  readonly survivesAaft: boolean;
+}
+
+/** Peak rung of a trace across the swept rows — where |observed| stands strongest (its signal peak). */
+function peakRung(rows: readonly SweepRow[], name: string): number {
+  let peak = 0, best = -Infinity;
+  rows.forEach((row, r) => { const v = Math.abs(row[name] ?? 0); if (v > best) { best = v; peak = r; } });
+  return peak;
+}
+
+/**
+ * The AAFT structural-vs-temporal discriminator, per trace. At each trace's peak rung, recompute the band
+ * statistic over `trials` AAFT surrogate corpora and read whether the observed value survives ABOVE the AAFT
+ * null. A survivor carries a nonlinear structural signature; one that sinks INTO its AAFT band reads as a
+ * linear-spectral (temporal-beat) artifact — the spectrum-preserving surrogate keeps it. On THIS corpus the
+ * three traces read SPECTRAL/topological (AR(1) is linear-spectral, the symbol backbone is periodic-spectral,
+ * H¹'s count is shuffle-invariant) — see {@link aaftControlPair} for the discriminator's positive control.
+ */
+function aaftDiscriminator(
+  rows: readonly SweepRow[], corpus: BenchCorpus, surrogates: readonly TraceSurrogate[], opts: SigOpts,
+): AaftVerdict[] {
+  return surrogates.map((s) => {
+    const alpha = rows[peakRung(rows, s.name)]!.alpha!;
+    const stat = (slice: readonly number[]): number => s.bandStatistic(s.rebuild(corpus, slice), alpha);
+    const v = surrogateNull(s.aaftSeries(corpus), stat, aaftSurrogate, {
+      alpha: opts.alphaSig, trials: opts.trials, seed: opts.seed,
+    });
+    return { name: s.name, observed: v.observed, aaftBand: v.threshold, pValue: v.pValue, survivesAaft: v.exceeds };
+  });
+}
+
+/**
+ * The AAFT discriminator's CONTROL PAIR — a nonlinear positive control vs a linear negative control, proving
+ * the machinery separates structure from spectrum. A deterministic logistic orbit (broadband, strongly
+ * nonlinear) SURVIVES the AAFT null; a linear-Gaussian AR(1) (its whole signal IS the power spectrum AAFT
+ * preserves) does NOT. Both read the BUILT {@link timeReversalAsymmetry} (the nonlinearity statistic the
+ * phase-scramble null calibrates) through the BUILT {@link surrogateNull} + the {@link aaftSurrogate}.
+ */
+function aaftControlPair(opts: SigOpts): { nonlinear: AaftVerdict; linear: AaftVerdict } {
+  const absTra = (s: readonly number[]): number => Math.abs(timeReversalAsymmetry(s));
+  const nl = surrogateNull(logisticOrbit(512, 0.31), absTra, aaftSurrogate,
+    { alpha: opts.alphaSig, trials: opts.trials, seed: opts.seed });
+  const ln = surrogateNull(ar1Series(512, 0.9, 42), absTra, aaftSurrogate,
+    { alpha: opts.alphaSig, trials: opts.trials, seed: opts.seed });
+  return {
+    nonlinear: { name: "logistic(nonlinear)", observed: nl.observed, aaftBand: nl.threshold, pValue: nl.pValue, survivesAaft: nl.exceeds },
+    linear: { name: "ar1(linear)", observed: ln.observed, aaftBand: ln.threshold, pValue: ln.pValue, survivesAaft: ln.exceeds },
+  };
+}
+
+/**
+ * The family-wise (maxT) band across the three traces (Westfall–Young multiplicity, strong control). The three
+ * traces carry INCOMMENSURABLE band statistics (a dim count, a free energy, a bit-rate), so each is STUDENTIZED
+ * against its own structural null (z = (observed − nullMean)/nullStd) into a common scale before the max. Then
+ * {@link maxTNull} reads ONE family-wise threshold off the null of the MAX studentized deviation across the
+ * three — the multiplicity inflation every trace must clear at once, no per-trace α inflation. Each node rides
+ * an index token; the shared surrogate re-draws that trace's studentized statistic, so the organ carries the
+ * heterogeneous family unchanged.
+ */
+function familyWiseMaxT(
+  corpus: BenchCorpus, surrogates: readonly TraceSurrogate[], rows: readonly SweepRow[], opts: SigOpts,
+): MaxTVerdict {
+  const peakAlpha: number[] = [];
+  const nullMean: number[] = [];
+  const nullStd: number[] = [];
+  const zObserved: number[] = [];
+  surrogates.forEach((s, i) => {
+    const alpha = rows[peakRung(rows, s.name)]!.alpha!;
+    peakAlpha[i] = alpha;
+    const base = s.series(corpus);
+    const observed = s.bandStatistic(s.rebuild(corpus, base), alpha);
+    const momRng = makeRng(opts.seed + 1000 + i);
+    const draws: number[] = [];
+    for (let m = 0; m < opts.trials; m++) draws.push(s.bandStatistic(s.rebuild(corpus, s.surrogate(base, momRng)), alpha));
+    const mean = draws.reduce((a, b) => a + b, 0) / draws.length;
+    const varr = draws.reduce((a, b) => a + (b - mean) ** 2, 0) / Math.max(1, draws.length - 1);
+    nullMean[i] = mean;
+    nullStd[i] = Math.sqrt(varr) + 1e-9;
+    zObserved[i] = (observed - mean) / nullStd[i]!;
+  });
+  const tokens = surrogates.map((_, i) => [i]);
+  // observed path: statistic([i]) → z_i ; surrogate path: statistic([i, z]) → z (the studentized draw rides arr[1]).
+  const statistic = (arr: readonly number[]): number => (arr.length === 1 ? zObserved[arr[0]!]! : arr[1]!);
+  const surrogate = (arr: readonly number[], rng: () => number): number[] => {
+    const i = arr[0]!;
+    const s = surrogates[i]!;
+    const raw = s.bandStatistic(s.rebuild(corpus, s.surrogate(s.series(corpus), rng)), peakAlpha[i]!);
+    return [i, (raw - nullMean[i]!) / nullStd[i]!];
+  };
+  return maxTNull(tokens, statistic, surrogate, { alpha: opts.alphaSig, trials: opts.trials, seed: opts.seed });
+}
+
+/** Destroy a corpus's SHEAF structure too (JITTER its salience, matching the H¹ structural null), so a
+ *  structure:0 corpus reads structureless on ALL three traces — the H¹ sheaf otherwise ignores the `structure`
+ *  knob. The full-null control the significance machinery must read as NOT-significant. */
+function destructureSheaf(corpus: BenchCorpus, seed: number): BenchCorpus {
+  const flat = jitterSurrogate(H1_JITTER_AMP)(flattenSheaf(corpus.sheaf), makeRng(seed));
+  return { ...corpus, sheaf: rebuildSheaf(corpus.sheaf, flat) };
+}
+
 // ── data-out (numbers only; NO plotting) ────────────────────────────────────────────────────────────
 
 /** Render the swept rows as CSV — a stable column order (`arl0`, `alpha`, then the trace columns). */
@@ -408,7 +713,7 @@ function stage(name: string, ok: boolean, detail = ""): void {
 
 function main(): void {
   console.log("[bifurcation-bench] =========================================================");
-  console.log("[bifurcation-bench] S1 — the Bifurcation Bench, THREE traces (H¹ · ΔF · excess-entropy)");
+  console.log("[bifurcation-bench] S2 — THREE traces (H¹ · ΔF · excess-E) + surrogate-null significance + AAFT");
   console.log("[bifurcation-bench] =========================================================");
 
   const triangles = 6;
@@ -481,16 +786,75 @@ function main(): void {
     specific,
     `ΔF|null|max=${dFnullMaxAbs.toFixed(3)} (vs structured ΔF∈[${dFmin.toFixed(1)},${dFmax.toFixed(1)}]) · excess-E|null|max=${cEnullMax.toFixed(3)} (vs peak ${cEmax.toFixed(3)})`);
 
+  // ══ S2 — SIGNIFICANCE, not eyeballing ═══════════════════════════════════════════════════════════════
+  const sigOpts: SigOpts = { trials: 60, alphaSig: 0.05, seed: 0x51611 };
+  const names = ["h1_dimH1", "deltaF", "complexity"] as const;
+
+  // attach the per-(trace,rung) surrogate-null bands onto the STRUCTURED rows (adds *_band/*_p/*_sig columns).
+  attachSignificanceBands(rows, corpus, traceSurrogates, sigOpts);
+  const sigCount: Record<string, number> = {};
+  for (const n of names) sigCount[n] = rows.reduce((a, row) => a + (row[`${n}_sig`] === 1 ? 1 : 0), 0);
+
+  // the full-null CONTROL: structure:0 AND a jitter-destructured sheaf, so ALL three traces read structureless.
+  const fullNull = destructureSheaf(buildBenchCorpus({ triangles, seed: 0x5eed, structure: 0 }), 0xc0117401);
+  const nullSweep = sweepArl(fullNull, traces, arl0s);
+  attachSignificanceBands(nullSweep, fullNull, traceSurrogates, sigOpts);
+  const nullSigCount: Record<string, number> = {};
+  for (const n of names) nullSigCount[n] = nullSweep.reduce((a, row) => a + (row[`${n}_sig`] === 1 ? 1 : 0), 0);
+
+  // ── STAGE 9 — SIGNIFICANCE: every structured trace jumps SIGNIFICANT above its surrogate-null band ──
+  const allSignificant = names.every((n) => (sigCount[n] ?? 0) > 0);
+  stage("9 SIGNIFICANT-ABOVE-NULL — each structured trace clears its surrogate-null band at ≥1 rung",
+    allSignificant,
+    names.map((n) => `${n}:${String(sigCount[n])}/${String(rows.length)}`).join(" "));
+
+  // ── STAGE 10 — the structureless CONTROL sits INSIDE its bands (the machinery discriminates) ─────────
+  //    expect ≤ ⌈α_sig · rungs⌉ false positives per trace (α_sig=0.05, 28 rungs ⇒ ≤ 2).
+  const fpFloor = Math.ceil(sigOpts.alphaSig * nullSweep.length);
+  const nullInside = names.every((n) => (nullSigCount[n] ?? 0) <= fpFloor);
+  stage("10 CONTROL INSIDE BANDS — the structureless corpus reads NOT-significant (≤ false-positive floor)",
+    nullInside,
+    `floor=${String(fpFloor)} · ${names.map((n) => `${n}:${String(nullSigCount[n])}`).join(" ")}`);
+
+  // ── STAGE 11 — the AAFT structural-vs-temporal discriminator (proven on a control pair) ──────────────
+  //    The three bench traces read SPECTRAL/topological on THIS corpus (AR(1) linear-spectral · periodic
+  //    backbone spectral · H¹ shuffle-invariant), so they do NOT survive AAFT — an honest sub-finding, NOT
+  //    a bug. The discriminator's DISCRIMINATING POWER is witnessed on a control pair: a nonlinear logistic
+  //    orbit SURVIVES AAFT, a linear-Gaussian AR(1) does NOT. (To make a bench trace itself survive AAFT, its
+  //    corpus backbone would need nonlinear-phase structure — an S0/S1 corpus change deferred to the operator.)
+  const aaft = aaftDiscriminator(rows, corpus, traceSurrogates, sigOpts);
+  const ctrl = aaftControlPair(sigOpts);
+  const discriminates = ctrl.nonlinear.survivesAaft && !ctrl.linear.survivesAaft;
+  stage("11 AAFT DISCRIMINATOR — nonlinear control SURVIVES AAFT, linear control reads SPECTRAL",
+    discriminates,
+    `NL:${ctrl.nonlinear.survivesAaft ? "survives" : "spectral"}(obs=${ctrl.nonlinear.observed.toFixed(2)} band=${ctrl.nonlinear.aaftBand.toFixed(2)} p=${ctrl.nonlinear.pValue.toFixed(3)})`
+      + ` LN:${ctrl.linear.survivesAaft ? "survives" : "spectral"}(obs=${ctrl.linear.observed.toFixed(2)} band=${ctrl.linear.aaftBand.toFixed(2)})`
+      + ` · traces=[${aaft.map((v) => `${v.name}:${v.survivesAaft ? "survives" : "spectral"}`).join(" ")}]`);
+
+  // ── STAGE 12 — the family-wise (maxT) band across the three traces (studentized Westfall–Young) ──────
+  const fam = familyWiseMaxT(corpus, traceSurrogates, rows, { ...sigOpts, trials: 200 });
+  const nullFam = familyWiseMaxT(fullNull, traceSurrogates, nullSweep, { ...sigOpts, trials: 200 });
+  const famAll = fam.exceeds.every((e) => e);
+  const nullFamNone = nullFam.exceeds.every((e) => !e);
+  stage("12 FAMILY-WISE (maxT) — all three structured traces clear ONE family-wise band; control clears none",
+    famAll && nullFamNone,
+    `thr=${fam.threshold.toFixed(3)} · struct-z=[${fam.observed.map((o) => o.toFixed(2)).join(",")}] exceeds=[${fam.exceeds.map((e) => (e ? 1 : 0)).join(",")}]`
+      + ` · null-z=[${nullFam.observed.map((o) => o.toFixed(2)).join(",")}] null-exceeds=[${nullFam.exceeds.map((e) => (e ? 1 : 0)).join(",")}]`);
+
   // ── the data-out: NUMBERS ONLY (JSON + CSV; the figure renders downstream) ──────
-  console.log("[bifurcation-bench] --- data-out (JSON rows: arl0, alpha, h1_dimH1, deltaF, complexity) ---");
+  console.log("[bifurcation-bench] --- AAFT verdicts (per trace + control pair: survives-AAFT structural vs spectral) ---");
+  console.log(JSON.stringify({ traces: aaft, control: [ctrl.nonlinear, ctrl.linear] }, null, 0));
+  console.log("[bifurcation-bench] --- family-wise maxT (nodes = the three traces; studentized band statistic) ---");
+  console.log(JSON.stringify({ threshold: fam.threshold, traces: names, studentizedObserved: fam.observed, exceeds: fam.exceeds, pValues: fam.pValues }, null, 0));
+  console.log("[bifurcation-bench] --- data-out (JSON rows: arl0, alpha, h1_dimH1, deltaF, complexity, *_band, *_p, *_sig) ---");
   console.log(JSON.stringify(rows, null, 0));
   console.log("[bifurcation-bench] --- data-out (CSV) ---");
   console.log(toCsv(rows));
 
   console.log("[bifurcation-bench] =========================================================");
   if (failures === 0) {
-    console.log("[bifurcation-bench] ALL STAGES PASS — three order parameters bifurcate on ONE α axis.");
-    console.log("[bifurcation-bench] The Bench carries H¹ · ΔF · excess-entropy; S2 (RQA/bands) plugs onto the same axis.");
+    console.log("[bifurcation-bench] ALL STAGES PASS — three order parameters bifurcate SIGNIFICANTLY on ONE α axis.");
+    console.log("[bifurcation-bench] Each jump reads significant-above-null; the AAFT discriminator separates structural from spectral; S3 (EFE) plugs onto the same axis.");
   } else {
     console.log(`[bifurcation-bench] ${String(failures)} STAGE(S) FAILED.`);
     process.exit(1);
