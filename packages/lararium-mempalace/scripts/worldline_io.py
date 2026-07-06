@@ -120,13 +120,36 @@ class WorldlineStore:
 
     # -- structure: add the rhizome edges (SINK-idempotent, kg_io's add-idiom) --------------
 
+    def _would_cycle(self, frm: str, to_node: str) -> bool:
+        """Whether a spawn-tree edge `frm -> to_node` would CLOSE a cycle — a self-loop, or `to_node`
+        already reaches `frm` DOWN the spawn-tree (so the new edge would loop it back). Cheap common case:
+        a fresh `to_node` with no spawn-tree out-edge reaches nothing (one indexed lookup), so a normal
+        chain/fork pays almost nothing; only a re-parent onto an existing subtree walks."""
+        if frm == to_node:
+            return True
+        has_out = self._conn.execute(
+            "SELECT 1 FROM worldline_edges WHERE frm=? AND relation IN (?,?) LIMIT 1",
+            (to_node, REL_FORK, REL_LINEAR),
+        ).fetchone()
+        if not has_out:
+            return False                       # to_node reaches nothing down the spawn-tree — no cycle
+        return frm in self.descendants(to_node)
+
     def add_edge(self, frm: str, to_node: str, relation: str, tick) -> dict:
         """Add one CAUSE->EFFECT edge at `tick`. SINK-idempotent: an identical (frm,to,relation)
-        opening at the SAME tick already stands (a re-observed spawn), so a re-run mints nothing."""
+        opening at the SAME tick already stands (a re-observed spawn), so a re-run mints nothing.
+
+        CYCLE-GUARD: a spawn-tree edge (fork/linear) that would close a cycle is REJECTED, never added —
+        else a pure-cycle component (every node carrying an up-edge) would surface NO root in `roots()`
+        and the demux would SILENT-DROP its turns. The reject reads legible (`added:False, cycle:True`),
+        and the orphaned `to_node` roots itself instead of vanishing. A `join` runs upward-to-main and
+        rides no spawn-tree walk, so it never counts as a cycle here (a fork+join pair is not a walk-cycle)."""
         if not frm or not to_node:
             raise ValueError("add_edge: frm and to_node required")
         if relation not in (REL_FORK, REL_LINEAR, REL_JOIN):
             raise ValueError(f"add_edge: unknown relation {relation!r}")
+        if relation in _SPAWN_TREE and self._would_cycle(frm, to_node):
+            return {"added": False, "cycle": True, "frm": frm, "to": to_node, "relation": relation}
         existing = self._conn.execute(
             "SELECT 1 FROM worldline_edges WHERE frm=? AND to_node=? AND relation=? AND valid_from IS ?",
             (frm, to_node, relation, tick),

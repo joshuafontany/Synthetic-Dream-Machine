@@ -21,6 +21,35 @@ def test_generic_store_accepts_arbitrary_metadata(tmp_path):
     assert s.get("c-1")["metadata"]["whatever"] == "shape"
 
 
+def test_non_finite_vector_value_fails_at_the_land_floor(tmp_path):
+    # C3: a NaN/inf vector value never lands — it corrupts nearest-neighbor recall silently. A per-record
+    # data poison (plain ValueError, so the capture poison-guard rides it to `failed`), not a systemic floor.
+    s = cio.ContentStore(str(tmp_path / ".sess"), required_keys={"wing", "room"}, expected_dim=3)
+    meta = {"wing": "w", "room": "r"}
+    with pytest.raises(ValueError) as ei:
+        s.put("nan", "t", [0.1, float("nan"), 0.3], meta)
+    assert not isinstance(ei.value, cio.ContentFloorError)    # a per-record poison, NOT the systemic floor
+    with pytest.raises(ValueError):
+        s.put("inf", "t", [0.1, 0.2, float("inf")], meta)
+    assert s.get("nan") is None and s.get("inf") is None      # neither poisoned the store
+    s.put("ok", "t", [0.1, 0.2, 0.3], meta)                   # a finite vector lands clean
+    assert s.get("ok") is not None
+
+
+def test_append_only_refuses_a_differing_vector_re_put(tmp_path):
+    # C3: the immutable ground refuses a same-TEXT DIFFERENT-VECTOR re-put (a silent model-drift the
+    # model-stamp missed corrupts recall as badly as a text edit). An identical re-put stays idempotent.
+    s = cio.ContentStore(str(tmp_path / ".mem"), required_keys={"wing", "room"}, append_only=True)
+    meta = {"wing": "w", "room": "r"}
+    s.put("a", "same text", [0.1, 0.2, 0.3], meta)
+    s.put("a", "same text", [0.1, 0.2, 0.3], meta)            # identical re-put — idempotent, no raise
+    with pytest.raises(ValueError):                            # same text, DIFFERENT vector → refused
+        s.put("a", "same text", [0.9, 0.8, 0.7], meta)
+    with pytest.raises(ValueError):                            # (the text-differ half still holds)
+        s.put("a", "edited text", [0.1, 0.2, 0.3], meta)
+    assert s.get("a")["document"] == "same text"              # the committed atom stands unchanged
+
+
 def test_session_memory_store_enforces_schema_and_dim(tmp_path):
     # the SESSION-MEMORY palace opts IN: required mempalace-schema keys + a pinned embedder dim.
     s = cio.ContentStore(str(tmp_path / ".sess"), required_keys={"wing", "room"}, expected_dim=3)

@@ -78,12 +78,12 @@ def test_w1_5d_landed_store_carries_distinct_full_hex_cids(tmp_path):
     from sensorium import compose_memory_sensorium
     s = compose_memory_sensorium(palace, source=lambda p: [], embed=None)
     for chunk in range(TURN_COUNT):
-        cid = derive_cid("claude-main.jsonl", chunk)
+        cid = derive_cid("claude:claude-main",chunk)
         got = s._land.store.get(cid)
         assert got is not None                                     # the single-gate cid round-trips
         assert len(cid.rsplit("_", 1)[0]) == 64                    # FULL hex, never [:24]
     # a re-derived cid matches the landed one (idempotent key)
-    assert s._land.store.get(derive_cid("claude-main.jsonl", 0)) is not None
+    assert s._land.store.get(derive_cid("claude:claude-main",0)) is not None
 
 
 def test_embedder_model_floor_rejects_a_mismatched_stamp(tmp_path):

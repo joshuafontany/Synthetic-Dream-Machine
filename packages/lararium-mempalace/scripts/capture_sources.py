@@ -32,11 +32,15 @@ SourceCap = Callable[[str], Iterable[Record]]
 
 
 def derive_cid(source_file: str, chunk_index: int) -> str:
-    """The SINGLE cid gate: `sha256(source_file)_<chunk>` — FULL hex (matches caller-vector-flush.ts).
+    """The SINGLE cid gate: `sha256(source_file)_<chunk>` — FULL hex.
 
-    The chunk ordinal disambiguates distinct turns of one source into distinct cids (no clobber); the
-    same (source_file, chunk) re-derives the same cid (idempotent re-derivation). The turn-key rides
-    metadata, not here — the cid names content-identity, the turn-key names the worldline binding."""
+    `source_file` now carries a SESSION + SURFACE-qualified key (`_source_key`, e.g. `claude:<session>`
+    or `claude:<parent>.<agentId>`), NOT the bare basename — so two sessions sharing a basename never
+    collide (QA C3). The chunk ordinal disambiguates distinct turns of one source into distinct cids (no
+    clobber); the same (source_file, chunk) re-derives the same cid (idempotent re-derivation). The
+    turn-key rides metadata, not here — the cid names content-identity, the turn-key names the worldline
+    binding. NOTE: the qualified key diverges from caller-vector-flush.ts's bare-basename drawerCid — the
+    TS side carries the same cross-session collision and wants the same qualification (a parity fork)."""
     src_hash = hashlib.sha256(source_file.encode("utf-8")).hexdigest()
     return f"{src_hash}_{chunk_index}"
 
@@ -47,10 +51,31 @@ def _sha16(s: str) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()[:16]
 
 
-def _turn_key(source_file: str, turn: dict) -> str:
+def _turn_key(source_file: str, turn: dict, chunk_index: int) -> str:
     """The user turn's stable identity — its native uuid, else a content-hash fallback (turnKeyOf port).
-    The kapae cascade + the rewind detector key on this SAME formula, so one gone uuid closes every leg."""
-    return turn.get("uuid") or _sha16(source_file + turn.get("ts", "") + turn.get("text", "")[:64])
+    The kapae cascade + the rewind detector key on this SAME formula, so one gone uuid closes every leg.
+    The fallback FOLDS `chunk_index`: two no-uuid turns (Codex user turns / Copilot) that share the same
+    ts + text-prefix would otherwise collapse to ONE key and kapae would mute both together — the ordinal
+    (stable across re-runs) keeps distinct turns distinct while staying idempotent."""
+    return turn.get("uuid") or _sha16(f"{source_file}#{chunk_index}#" + turn.get("ts", "") + turn.get("text", "")[:64])
+
+
+def _source_key(surface: str, pointer: str) -> str:
+    """A SESSION + SURFACE-qualified source key — the unit the cid, the content-hash chain, and the rewind
+    detector all key on. The BARE basename COLLIDES across sessions: two parent sessions each spawn an
+    `agent-aaa.jsonl`, two projects each hold a like-named rollout — conflating distinct turns under one
+    cid + kapae unit. Qualifying by surface + the session identity (a Claude sub-agent by its PARENT
+    session + agent-id, so distinct parents never collide) keeps every session's drawers disjoint."""
+    base = os.path.basename(pointer)
+    if base.endswith(".jsonl"):
+        base = base[: -len(".jsonl")]
+    if surface == "claude":
+        agent_id = _claude_agent_id(pointer)
+        if agent_id is not None:
+            # …/<session>/subagents/agent-<id>.jsonl — the parent session dir disambiguates the sub-agent.
+            parent = os.path.basename(os.path.dirname(os.path.dirname(pointer)))
+            base = f"{parent}.{agent_id}" if parent else base
+    return f"{surface}:{base}"
 
 
 def _assemble_exchanges(turns: list) -> list:
@@ -97,7 +122,7 @@ def _drawers(source_file: str, turns: list, *, wing: str, room: str,
             "room": room,
             "source_file": source_file,
             "chunk_index": chunk,
-            "lar_turn_key": _turn_key(source_file, ex),
+            "lar_turn_key": _turn_key(source_file, ex, chunk),
             "lar_chain": chain,
         }
         if extra:
@@ -135,7 +160,9 @@ def _claude_message_text(message) -> str:
 def _parse_claude(path: str) -> list:
     """Parse a Claude `.jsonl` transcript into turns (user/assistant only, non-empty text)."""
     turns: list = []
-    with open(path, encoding="utf-8") as fh:
+    # errors="replace": a lone non-UTF8 byte substitutes U+FFFD, never crashes the whole pass on one
+    # line (matches structure_router's decode idiom); the bad line still JSON-parses or skips cleanly.
+    with open(path, encoding="utf-8", errors="replace") as fh:
         for line in fh:
             line = line.strip()
             if not line:
@@ -171,7 +198,7 @@ def claude_source(*, wing: str, room: str = "conversations") -> SourceCap:
         extra = {"lar_surface": "claude"}
         if agent_id is not None:
             extra.update({"lar_sidechain": 1, "lar_agent": agent_id})  # int, isomorphic with the TS stamp (Q3)
-        yield from _seq_records(_drawers(os.path.basename(pointer), _parse_claude(pointer),
+        yield from _seq_records(_drawers(_source_key("claude", pointer), _parse_claude(pointer),
                                          wing=wing, room=room, extra=extra))
     return source
 
@@ -198,7 +225,8 @@ def _parse_codex(path: str) -> list:
     assistant message carries a stable `id`; a user message carries none (the turn-key falls back to
     the content hash)."""
     turns: list = []
-    with open(path, encoding="utf-8") as fh:
+    # errors="replace": one non-UTF8 byte never crashes the pass (matches _parse_claude / structure_router).
+    with open(path, encoding="utf-8", errors="replace") as fh:
         for line in fh:
             line = line.strip()
             if not line:
@@ -226,7 +254,7 @@ def _parse_codex(path: str) -> list:
 def codex_source(*, wing: str, room: str = "conversations") -> SourceCap:
     """The Codex source-cap. `pointer` names one rollout `.jsonl`."""
     def source(pointer: str) -> Iterator[Record]:
-        yield from _seq_records(_drawers(os.path.basename(pointer), _parse_codex(pointer),
+        yield from _seq_records(_drawers(_source_key("codex", pointer), _parse_codex(pointer),
                                          wing=wing, room=room, extra={"lar_surface": "codex"}))
     return source
 
@@ -245,7 +273,7 @@ def copilot_source(*, wing: "str | None" = None, room: str = "conversations") ->
         def all_drawers() -> Iterator[tuple]:
             for sid, cwd, turns in _copilot_read_sessions(pointer):
                 w = wing or "wing_copilot_unsorted"
-                yield from _drawers(f"{sid}.jsonl", turns, wing=w, room=room,
+                yield from _drawers(f"copilot:{sid}", turns, wing=w, room=room,
                                     extra={"lar_surface": "copilot-cli"})
         yield from _seq_records(all_drawers())
     return source

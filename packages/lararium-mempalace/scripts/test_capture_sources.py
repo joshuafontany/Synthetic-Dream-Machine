@@ -14,11 +14,58 @@ import sqlite3
 
 import pytest
 
-from capture_sources import claude_source, codex_source, copilot_source, derive_cid, resolve_source
+from capture_sources import (
+    _source_key,
+    _turn_key,
+    claude_source,
+    codex_source,
+    copilot_source,
+    derive_cid,
+    resolve_source,
+)
 
 FIXTURES = os.path.join(os.path.dirname(__file__), "fixtures", "capture")
 CLAUDE = os.path.join(FIXTURES, "claude-main.jsonl")
 CODEX = os.path.join(FIXTURES, "codex-rollout.jsonl")
+
+
+# --- C3 correctness batch: session-scoped keys, chunk-folded turn-key, UTF8-tolerant parse ----------
+
+def test_source_key_scopes_by_session_and_surface_no_cross_collision():
+    # C3: the bare basename COLLIDES — two parent sessions each spawn an `agent-aaa.jsonl`. The
+    # session+surface-qualified key keeps them disjoint; the surface prefix walls Claude off from Codex.
+    p1 = "/x/sess-one/subagents/agent-aaa.jsonl"
+    p2 = "/x/sess-two/subagents/agent-aaa.jsonl"       # same basename, DIFFERENT parent session
+    assert _source_key("claude", p1) == "claude:sess-one.aaa"
+    assert _source_key("claude", p2) == "claude:sess-two.aaa"
+    assert _source_key("claude", p1) != _source_key("claude", p2)   # no cross-session collision
+    assert derive_cid(_source_key("claude", p1), 0) != derive_cid(_source_key("claude", p2), 0)
+    # a MAIN session keys on its (unique) session id; the surface prefix separates like-named surfaces
+    assert _source_key("claude", "/x/sess-one.jsonl") == "claude:sess-one"
+    assert _source_key("codex", "/y/sess-one.jsonl") == "codex:sess-one"
+    assert _source_key("claude", "/x/sess-one.jsonl") != _source_key("codex", "/y/sess-one.jsonl")
+
+
+def test_turn_key_fallback_folds_chunk_no_collision():
+    # C3: two no-uuid turns (Codex user / Copilot) sharing ts + text-prefix would collapse to ONE key and
+    # kapae would mute both together — the chunk ordinal keeps them distinct while staying idempotent.
+    a = {"role": "user", "text": "yes do it", "ts": "2026-07-05T10:00:00Z"}      # no uuid
+    b = {"role": "user", "text": "yes do it", "ts": "2026-07-05T10:00:00Z"}      # identical no-uuid turn
+    assert _turn_key("s", a, 0) != _turn_key("s", b, 1)          # distinct chunks → distinct keys
+    assert _turn_key("s", a, 0) == _turn_key("s", a, 0)          # idempotent (stable across re-runs)
+    # a native uuid still wins verbatim, chunk-independent (the uuid IS the stable identity)
+    assert _turn_key("s", {"uuid": "u-9", "text": "t", "ts": "z"}, 3) == "u-9"
+
+
+def test_parse_tolerates_a_non_utf8_byte(tmp_path):
+    # C3: one non-UTF8 byte substitutes U+FFFD, never crashes the pass (errors="replace"). The valid
+    # turns still land; the mangled line either JSON-parses (U+FFFD in text) or skips cleanly.
+    p = tmp_path / "sess-bad.jsonl"
+    good = ('{"type":"user","uuid":"u1","timestamp":"t","sessionId":"s",'
+            '"message":{"role":"user","content":[{"type":"text","text":"hello"}]}}\n')
+    p.write_bytes(good.encode("utf-8") + b"\xff\xfe not valid utf8 here\n" + good.replace("u1", "u2").encode("utf-8"))
+    recs = list(claude_source(wing="w")(str(p)))       # NO crash on the bad byte
+    assert len(recs) >= 1                               # the valid turn(s) still land
 
 
 # --- W1.5d — the single cid gate -------------------------------------------
@@ -37,8 +84,9 @@ def test_distinct_same_source_turns_get_distinct_cids_no_clobber():
     recs = list(claude_source(wing="w")(CLAUDE))
     cids = [r["cid"] for r in recs]
     assert len(cids) == len(set(cids))                # no two turns share a cid (no turnKey clobber)
-    # every cid ties to the SAME source_file but a distinct chunk → the chunk is what disambiguates
-    assert {r["metadata"]["source_file"] for r in recs} == {"claude-main.jsonl"}
+    # every cid ties to the SAME source_file but a distinct chunk → the chunk is what disambiguates.
+    # source_file now carries the session+surface-qualified key (C3), never the bare basename.
+    assert {r["metadata"]["source_file"] for r in recs} == {"claude:claude-main"}
     assert sorted(r["metadata"]["chunk_index"] for r in recs) == [0, 1, 2]
 
 
@@ -56,7 +104,7 @@ def test_claude_parse_lands_correct_records():
     assert m["wing"] == "wing_proj" and m["room"] == "conversations"
     assert m["lar_turn_key"] == "u-1"                 # the user turn's uuid binds the worldline
     assert m["lar_surface"] == "claude"
-    assert first["cid"] == derive_cid("claude-main.jsonl", 0)        # the single gate
+    assert first["cid"] == derive_cid("claude:claude-main", 0)       # the single gate (qualified key, C3)
 
 
 def test_claude_subagent_file_marks_sidechain(tmp_path):
@@ -123,8 +171,8 @@ def test_copilot_reads_sqlite_not_events_jsonl(tmp_path):
     assert "not the deleted events.jsonl" in recs[0]["text"]
     m = recs[0]["metadata"]
     assert m["lar_surface"] == "copilot-cli" and m["wing"] == "wing_proj"
-    assert m["source_file"] == "cop-sess-1.jsonl"
-    assert recs[0]["cid"] == derive_cid("cop-sess-1.jsonl", 0)
+    assert m["source_file"] == "copilot:cop-sess-1"                  # session+surface-qualified key (C3)
+    assert recs[0]["cid"] == derive_cid("copilot:cop-sess-1", 0)
 
 
 def test_resolve_source_dispatch_and_wing_floor():

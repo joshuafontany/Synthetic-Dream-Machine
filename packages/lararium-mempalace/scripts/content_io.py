@@ -28,6 +28,7 @@ Run with the mempalace CLI's interpreter (it has the package + chroma):
 from __future__ import annotations
 
 import argparse
+import math
 
 from mempalace.palace import get_collection
 
@@ -55,6 +56,18 @@ def _is_muted(metadata: "dict | None") -> bool:
     """A row reads muted when its `lar_kapae` slot carries a truthy mark. Absent/"0"/"" = live —
     so the vast un-kapae'd corpus (no slot) never filters, and un-mute (flag -> "0") restores."""
     return str((metadata or {}).get(KAPAE_META, "")).strip().lower() in _MUTED_VALUES
+
+
+def _vectors_differ(a, b, *, tol: float = 1e-6) -> bool:
+    """Whether two stored vectors DIVERGE past a float-noise tolerance — the append-only vector-drift
+    guard. A deterministic re-embed of the same text mints the SAME vector (identical within `tol`), so a
+    real divergence names a same-text DIFFERENT-embedding re-put (a silent-corrupt of the immutable
+    ground). One present + one absent counts as differ; equal lengths compare element-wise."""
+    if a is None or b is None:
+        return (a is None) != (b is None)
+    if len(a) != len(b):
+        return True
+    return any(abs(float(x) - float(y)) > tol for x, y in zip(a, b))
 
 
 def _idle_ttl_seconds() -> float:
@@ -128,6 +141,18 @@ class ContentStore:
         metas = got.get("metadatas") or [None]
         return {"cid": ids[0], "document": docs[0], "metadata": metas[0] or {}}
 
+    def _get_raw_with_vector(self, cid: str) -> "dict | None":
+        """Like `_get_raw` but ALSO pulls the stored embedding — the append-only vector-drift compare needs
+        the durable vector, not just its text/metadata. None when the cid holds no row."""
+        got = self._col.get(ids=[cid], include=["documents", "embeddings"])
+        ids = got.get("ids") or []
+        if not ids:
+            return None
+        docs = got.get("documents") or [None]
+        embs = got.get("embeddings")
+        emb = [float(x) for x in embs[0]] if embs is not None and len(embs) > 0 and embs[0] is not None else None
+        return {"cid": ids[0], "document": docs[0], "embedding": emb}
+
     def get(self, cid: str) -> "dict | None":
         raw = self._get_raw(cid)
         if raw is None:
@@ -151,6 +176,14 @@ class ContentStore:
             got = len(embedding) if isinstance(embedding, (list, tuple)) else 0  # guard len(None) → a clean domain error
             raise ContentFloorError(f"content put {cid}: embedding dim {got} != expected {self._expected_dim} "
                                     "(embedder-identity floor — a model swap that changes the dim must fail loud)")
+        # the finite-value floor: a NaN/inf vector value never lands — it corrupts nearest-neighbor recall
+        # silently (a NaN distance sorts unpredictably). A per-record data poison (plain ValueError), so the
+        # capture poison-guard rides ONE bad vector to `failed` and carries the pass on.
+        if isinstance(embedding, (list, tuple)):
+            bad = next((x for x in embedding if not math.isfinite(x)), None)
+            if bad is not None:
+                raise ValueError(f"content put {cid}: non-finite vector value {bad!r} "
+                                 "(NaN/inf corrupts nearest-neighbor recall silently)")
         if self._expected_model is not None:
             # the model-name half: the caller stamps `lar_embedder_model`; a same-dim different-model
             # swap slips the dim guard but corrupts recall — reject it (fail-closed on an absent tag too).
@@ -159,12 +192,20 @@ class ContentStore:
                 raise ContentFloorError(f"content put {cid}: embedder model {got_model!r} != expected {self._expected_model!r} "
                                         "(embedder-identity floor — a same-dim different-model swap corrupts recall silently)")
         if self._append_only:
-            # the immutable-ground guard: a committed atom's text is never overwritten (an edit rides
-            # kapae, not a re-put). An identical re-put passes (idempotent re-derivation crash-cure).
-            existing = self._get_raw(cid)
-            if existing is not None and (existing.get("document") or "") != text:
-                raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
-                                 "atom's text cannot be overwritten; an edit rides kapae/worldline, never a re-put")
+            # the immutable-ground guard: a committed atom is never overwritten (an edit rides kapae, not a
+            # re-put). An identical re-put passes (idempotent re-derivation crash-cure). BOTH halves must
+            # match — same TEXT and same VECTOR: a same-text DIFFERENT-embedding re-put (a silent model
+            # drift the model-stamp missed) would corrupt recall of the immutable ground just as a text
+            # edit would, so it is refused too.
+            existing = self._get_raw_with_vector(cid)
+            if existing is not None:
+                if (existing.get("document") or "") != text:
+                    raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
+                                     "atom's text cannot be overwritten; an edit rides kapae/worldline, never a re-put")
+                if _vectors_differ(existing.get("embedding"), embedding):
+                    raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
+                                     "atom's VECTOR cannot be overwritten (same text, different embedding — a silent "
+                                     "recall-corrupt); re-embed under the held model or kapae the atom")
         # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
         # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
         # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.

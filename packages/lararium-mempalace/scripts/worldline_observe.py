@@ -96,7 +96,9 @@ def read_chain(path: str) -> list:
     later turn descends from a bodyless predecessor. Reads no timestamp — the edge path stays clock-pure."""
     out: list = []
     try:
-        with open(path, encoding="utf-8") as fh:
+        # errors="replace": one non-UTF8 byte substitutes U+FFFD, never crashes the observe pass on a
+        # single line (matches capture_sources / structure_router); the edge path stays clock-pure.
+        with open(path, encoding="utf-8", errors="replace") as fh:
             for line in fh:
                 line = line.strip()
                 if not line:

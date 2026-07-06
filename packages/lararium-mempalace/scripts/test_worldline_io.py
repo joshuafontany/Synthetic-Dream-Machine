@@ -32,6 +32,26 @@ def _build_rhizome(store):
     store.handback("t-root", "t-A", tick=4)  # child A hands back to parent root: join + close the fork
 
 
+def test_add_edge_rejects_a_cycle_creating_spawn_edge(tmp_path):
+    # C3: a spawn-tree edge that would close a cycle is REJECTED (never added), so no pure-cycle
+    # component silent-drops its turns from the demux (roots()/worldline_of climb the spawn-tree). The
+    # reject reads legible; the would-be-looped node roots itself instead of vanishing.
+    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store.linear("a", "b", tick=1)
+    store.linear("b", "c", tick=2)                        # chain a -> b -> c
+
+    res = store.linear("c", "a", tick=3)                  # c -> a would close a -> b -> c -> a
+    assert res == {"added": False, "cycle": True, "frm": "c", "to": "a", "relation": "linear"}
+    self_loop = store.fork("a", "a", tick=4)              # a self-loop is a trivial cycle
+    assert self_loop["added"] is False and self_loop["cycle"] is True
+
+    # never silent-dropped: the chain still roots at `a`, and every turn climbs to it (no vanished node).
+    assert store.roots() == ["a"]
+    assert store.worldline_of("c") == "a" and store.worldline_of("b") == "a"
+    # the rejected edges never entered the rhizome
+    assert not any((e["frm"], e["to"]) in {("c", "a"), ("a", "a")} for e in store.dag()["edges"])
+
+
 def test_fork_dag_spawn_handback_concurrent_replays(tmp_path):
     store = wl.WorldlineStore(str(tmp_path / ".worldline"))
     _build_rhizome(store)
