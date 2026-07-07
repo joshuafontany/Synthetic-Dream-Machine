@@ -15,6 +15,7 @@ from ffz_continuous_pour import (
     boundary_alignment,
     pour_ticks,
     probe_signal,
+    split_read,
     two_stage_bands,
 )
 
@@ -219,6 +220,37 @@ def test_scale_entities_stay_nameless_open_records():
         assert 0 <= t0 < t1 <= poured["n_ticks"]
         for link in rec["has"]["recurs"]:
             assert link["sim"] >= 0.9
+
+
+def test_split_read_names_the_borne():
+    """The placebo split reads the cross-domain ratio into open verdicts: a scale the
+    placebo kills reads content-borne, one the babble manufactures reads babble-borne,
+    one both pours peak reads shape-borne, the rest read null."""
+    def _band(band, scale, excess, peaked=False, q=0.3, beat=0):
+        return {"band": band, "scale_ticks": scale, "energy_excess": excess,
+                "peaked": peaked, "lock": {"lock_quality": q, "beat_ticks": beat}}
+    real = {"root": "r", "signals": [{"signal": "s", "bands": [
+        _band("F2", 4, 1.5, peaked=True), _band("C7", 8192, 0.68, q=0.58, beat=10240),
+        _band("F3", 8, 0.4), _band("C2", 256, 1.0)]}]}
+    placebo = {"root": "p", "signals": [{"signal": "s", "bands": [
+        _band("F2", 4, 1.5, peaked=True), _band("C7", 8192, 0.33, q=0.21),
+        _band("F3", 8, 0.8), _band("C2", 256, 1.05)]}]}
+    out = split_read(real, placebo)
+    rows = {r["band"]: r for r in out["signals"][0]["bands"]}
+    assert rows["F2"]["verdict"] == "shape-borne"
+    assert rows["C7"]["verdict"] == "content-borne"
+    assert rows["F3"]["verdict"] == "babble-borne"
+    assert rows["C2"]["verdict"] == "null"
+    assert out["signals"][0]["content_borne"] == ["C7"]
+
+
+def test_split_read_skips_flat_signals_honestly():
+    real = {"root": "r", "signals": [{"signal": "sigil-event",
+                                      "note": "signal-flat: skipped", "bands": []}]}
+    placebo = {"root": "p", "signals": [{"signal": "sigil-event",
+                                         "note": "signal-flat: skipped", "bands": []}]}
+    out = split_read(real, placebo)
+    assert out["signals"][0]["note"].startswith("signal-flat")
 
 
 def test_boundary_alignment_matches_within_tolerance():

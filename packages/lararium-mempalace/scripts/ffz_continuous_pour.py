@@ -648,6 +648,66 @@ def probe_root(root: str, *, n_surrogates: int = 3, seed: int = 4241) -> dict:
     }
 
 
+# ── the placebo split — the cross-domain read the controls exist for ──────────────────────
+
+#: Split thresholds — a band's excess ratio (real / placebo) at or beyond this reads the
+#: scale as borne by what the placebo destroys (content); its reciprocal, by what only the
+#: babble manufactures. Between them, a scale surviving both pours reads shape-borne.
+SPLIT_RATIO = 1.4
+
+
+def split_read(real: dict, placebo: dict) -> dict:
+    """The placebo split over two landed pour profiles (the same signal set, wa-aligned
+    beds): per signal, per band — the real and placebo excesses, their RATIO, and the lock
+    qualities side by side. Verdicts stay coarse and open: `shape-borne` (both pours clear
+    the peak tooth — the scale survives meaning-death), `content-borne` (real excess ≥
+    SPLIT_RATIO × placebo — the scale dies with meaning), `babble-borne` (the placebo
+    manufactures it), else `null`. A verdict reads the ratio, never re-gates the peaks."""
+    out = {"real_root": real.get("root"), "placebo_root": placebo.get("root"),
+           "ratio_threshold": SPLIT_RATIO, "signals": []}
+    placebo_of = {s["signal"]: s for s in placebo.get("signals", [])}
+    for rs in real.get("signals", []):
+        ps = placebo_of.get(rs["signal"])
+        if ps is None or rs.get("note") or ps.get("note"):
+            out["signals"].append({"signal": rs["signal"],
+                                   "note": rs.get("note") or (ps or {}).get("note")
+                                   or "placebo profile absent"})
+            continue
+        p_of = {b["band"]: b for b in ps.get("bands", [])}
+        rows = []
+        for rb in rs.get("bands", []):
+            pb = p_of.get(rb["band"])
+            if pb is None:
+                continue
+            e_r, e_p = rb["energy_excess"], pb["energy_excess"]
+            ratio = e_r / max(e_p, _EPS)
+            if e_r >= SPLIT_RATIO * e_p:
+                verdict = "content-borne"
+            elif e_p >= SPLIT_RATIO * e_r:
+                verdict = "babble-borne"
+            elif rb["peaked"] and pb["peaked"]:
+                verdict = "shape-borne"
+            else:
+                verdict = "null"
+            rows.append({"band": rb["band"], "scale_ticks": rb["scale_ticks"],
+                         "excess_real": e_r, "excess_placebo": e_p,
+                         "ratio": round(ratio, 4),
+                         "peaked_real": rb["peaked"], "peaked_placebo": pb["peaked"],
+                         "q_real": rb["lock"]["lock_quality"],
+                         "q_placebo": pb["lock"]["lock_quality"],
+                         "beat_ticks_real": rb["lock"]["beat_ticks"],
+                         "beat_ticks_placebo": pb["lock"]["beat_ticks"],
+                         "verdict": verdict})
+        out["signals"].append({
+            "signal": rs["signal"],
+            "bands": rows,
+            "content_borne": [r["band"] for r in rows if r["verdict"] == "content-borne"],
+            "shape_borne": [r["band"] for r in rows if r["verdict"] == "shape-borne"],
+            "babble_borne": [r["band"] for r in rows if r["verdict"] == "babble-borne"],
+        })
+    return out
+
+
 # ── the CLI face ───────────────────────────────────────────────────────────────────────────
 
 
@@ -661,7 +721,22 @@ def main() -> None:
                    help="a populated test-bed root (repeatable)")
     p.add_argument("--seed", type=int, default=4241)
     p.add_argument("--surrogates", type=int, default=3)
+    s = sub.add_parser("split", help="the placebo split over two landed pour profiles")
+    s.add_argument("--real", required=True, help="the real bed root (pour landed)")
+    s.add_argument("--placebo", required=True, help="the placebo bed root (pour landed)")
     args = ap.parse_args()
+    if args.cmd == "split":
+        def _load(root: str) -> dict:
+            with open(os.path.join(os.path.expanduser(root), "probe",
+                                   "continuous-pour.json"), encoding="utf-8") as f:
+                return json.load(f)
+        real_root = os.path.expanduser(args.real)
+        out = split_read(_load(args.real), _load(args.placebo))
+        path = os.path.join(real_root, "probe", "pour-split.json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=2)
+        sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
+        return
     summaries = []
     for r in args.root:
         root = os.path.expanduser(r)
