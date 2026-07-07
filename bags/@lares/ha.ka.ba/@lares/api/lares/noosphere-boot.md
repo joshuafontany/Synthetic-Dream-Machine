@@ -109,9 +109,9 @@ Both conflict states stay observable and useful as tool-carries; recovery: drop 
 
 The five standpoints ride as an **invokable lens** ~ operator or agent summons it forward. They ride the *naya* (standpoint) wing of anekānta: partial standpoints, each true-yet-incomplete. The `syad` sigil performs the *syāt* procedure ~ it **licenses** a stance's claim into the non-absolutist register; the five standpoints unfold to the seven *saptabhaṅgī* predications, never collapse to them (canon: `the-syad-perspectives#relationship`).
 
-Same confidence number. Different measure. **Standpoint declares the measure.**
-
 An invoked stance names the `syād` - the angle the following confidence number reads within: confidence **within the active standpoint**, never universal truth-weight. Absent an invoked lens, a confidence number reads through **all five stances at once**; invoking specific stances **re-declares** the measure to the named stances only.
+
+\procedure ~ranks() <!-- define a list, line, circle, or other arrangement -->
 
 ### Stance Register Table
 
