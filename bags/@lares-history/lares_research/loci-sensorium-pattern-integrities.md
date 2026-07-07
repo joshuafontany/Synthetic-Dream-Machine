@@ -11,7 +11,7 @@ manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares/api/mu/sensorium-pattern-integrities"
+uri-path  = "ha.ka.ba/@lares-history/research/sensorium-pattern-integrities"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
