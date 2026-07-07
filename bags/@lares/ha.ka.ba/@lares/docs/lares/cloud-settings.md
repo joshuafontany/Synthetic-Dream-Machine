@@ -17,7 +17,6 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/api/lares/noosphere-project-instructions"
 ```
 
-<<~ aka source-full-boot: noosphere-boot.md lar:///ha.ka.ba/@lares/api/lares/noosphere-boot >>
 <<~ aka RFC-2119: MUST, MUST NOT, SHOULD, MAY carry IETF semantics. >>
 
 <<~ ahu #entry >>
