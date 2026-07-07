@@ -147,8 +147,9 @@ def _swt_pad_len(n: int, level: int) -> int:
 def modwt_mra(signal: np.ndarray, levels: int = N_BANDS, wavelet: str = _WAVELET) -> dict:
     """MODWT multi-resolution analysis of a 1-D signal → the aperture-band details.
 
-    `pywt.mra(x, wavelet, level, transform='swt')` returns [D1, D2, …, D_level, A_level] —
-    the maximal-overlap (undecimated) detail bands + the smooth. MODWT-MRA is:
+    `pywt.mra(x, wavelet, level, transform='swt')` returns [A_level, D_level, …, D2, D1] —
+    the SMOOTH FIRST, then details coarse→fine (probe-verified against zero-crossing counts;
+    the continuous-pour arc surfaced the prior inverted reading). MODWT-MRA is:
       · NO-downsample  — every band keeps full length (one coefficient per chunk), and
       · shift-invariant — the decomposition never depends on where the window starts, so
       · never-chases-noise — a band reads its OWN scale, not a transient.
@@ -174,8 +175,9 @@ def modwt_mra(signal: np.ndarray, levels: int = N_BANDS, wavelet: str = _WAVELET
             mra = pywt.mra(xp, "haar", level=max_lvl, transform="swt")
         except Exception:  # noqa: BLE001
             return {"bands": [], "smooth": x.tolist(), "energy": [], "levels": 0, "n": n}
-    details = [np.asarray(c, dtype=float)[:n] for c in mra[:-1]]  # D1..D_lvl (fine→coarse)
-    smooth = np.asarray(mra[-1], dtype=float)[:n]
+    # pywt returns [A, D_coarse..D_fine]: the smooth leads; reverse the tail so bands read D1..D_lvl fine→coarse.
+    details = [np.asarray(mra[k], dtype=float)[:n] for k in range(len(mra) - 1, 0, -1)]
+    smooth = np.asarray(mra[0], dtype=float)[:n]
     energy = [float(np.var(d)) for d in details]
     return {
         "bands": [d.tolist() for d in details],
