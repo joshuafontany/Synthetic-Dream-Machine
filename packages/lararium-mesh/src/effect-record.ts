@@ -77,7 +77,11 @@ export function effectRecordUri(bagUri: string, eventId: string): string {
 
 /** True when a title sits in any bag's residency ledger. */
 export function isEffectRecordUri(title: string): boolean {
-  return /^lar:\/\/\/[^/]+\/@[^/]+\/ledger\/residency\/.+$/.test(title);
+  // Accept both `@<bag>/ledger/…` and `bags/@<bag>/ledger/…` — an effect-record title
+  // builds from the bag const, which carries the `bags/` kind-segment. Without the optional
+  // segment the projector fails to recognize an audit record and leaks it to disk as a
+  // carrier (it is audit data, never a carrier surface).
+  return /^lar:\/\/\/[^/]+\/(?:bags\/)?@[^/]+\/ledger\/residency\/.+$/.test(title);
 }
 
 // ── EffectRecord shape ─────────────────────────────────────────────────────

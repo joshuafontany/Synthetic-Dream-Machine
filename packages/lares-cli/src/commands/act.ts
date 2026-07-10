@@ -35,7 +35,7 @@ import { join, extname, resolve, relative, sep } from "node:path";
 import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
+import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId, OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, wantsJson, exitFor } from "../render.js";
@@ -270,7 +270,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   }
 
   const summary = summaryOutput(result) ?? {};
-  const auditUri = `lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`;
+  const auditUri = `${OUTCOME_URI_PREFIX}${result.requestId}`;
   emit(args, {
     ok: true,
     requestId: result.requestId,

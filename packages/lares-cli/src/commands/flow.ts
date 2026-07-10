@@ -12,7 +12,7 @@
  *                     mtime — positive seconds = turns landed after the last capture.
  *   4. palace       — live palace topology one-liner (livePalaceProcs, the mempalace-status
  *                     machinery reused).
- *   5. port         — daemon WS port probe (LAR_PORT, the status.ts probe reused).
+ *   5. daemon       — reachable-to-the-CLI = the UDS verb socket answers (not the WS relay port).
  *
  * One surface, two actors: prose on a TTY, the deterministic payload under `--json` (render.ts).
  */
@@ -23,8 +23,8 @@ import { join } from "node:path";
 import { larDataDir, larHarvestDir, larPort } from "../env.js";
 import { wingFromDir, readCwdFromTranscript } from "../wing-law.js";
 import { livePalaceProcs, fmtUptime, type PalaceProc } from "../palace-procs.js";
+import { udsAvailable } from "../local-connector.js";
 import { portHolderPids } from "../port-control.js";
-import { probePort } from "./status.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -123,7 +123,9 @@ export async function cmdFlow(args: ParsedArgs): Promise<number> {
   const wal = readWalGauge();
   const wings = readWingGauges();
   const { procs, line: palaceLine } = palaceTopology(port);
-  const portOpen = await probePort(port);
+  // The CLI reaches the daemon through the UDS verb socket; that names "vessel up",
+  // not the WS relay port (the browser vessel's channel).
+  const portOpen = udsAvailable();
 
   emit(args, {
     ok: true,
@@ -148,7 +150,7 @@ export async function cmdFlow(args: ParsedArgs): Promise<number> {
         console.log("  watermarks:  none — no wing captured yet");
       }
       console.log(`  palace:      ${palaceLine}`);
-      console.log(`  daemon:      port ${port} ${portOpen ? "OPEN (vessel up)" : "closed (vessel down)"}`);
+      console.log(`  daemon:      sock ${portOpen ? "OPEN (vessel up)" : "closed (vessel down)"}`);
     },
   });
   return 0;

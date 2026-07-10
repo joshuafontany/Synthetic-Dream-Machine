@@ -52,11 +52,9 @@ export const LARARIUM_BAG = LARARIUM_DOC_URI;
 /** @oracle — the runtime system island; the universal floor of every recipe. */
 export const ORACLE_BAG   = ORACLE_DOC_URI;
 
-/** Build a wiki's CANON BAG URI from a slug. The quine: a wiki's canon IS the
- *  `bags/@{slug}` bag — it MUST agree with the doc consts (DAEMON_BAG_ID etc), which
- *  the daemon's own composite mount and its event-store put both key on. (Phase 3
- *  separates the wiki IDENTITY `wikis/@{slug}` from this canon bag; here they still
- *  coincide as the quine, relocated under bags/.) */
+/** Build a wiki's CANON BAG URI from a slug. The quine: a wiki's canon IS its
+ *  `bags/@{slug}` bag — it MUST agree with the doc consts (DAEMON_BAG_ID etc), which the
+ *  daemon's composite mount and its event-store put both key on. */
 export function wikiBagUri(slug: string): SlotUri {
   return bagUri(slug) as SlotUri;
 }

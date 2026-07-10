@@ -77,16 +77,16 @@ export function stableTagUri(name: string): string {
 // `cid/<hash>` names a content-addressed artifact (immutable, the /ipfs/ plane).
 // Ownership never enters the address.
 //
-// A meme's URI carries NO relation to a bag's URI — a meme moves between bags and
-// lives in several at once; `bagsFileToUri` already discards the holding bag from
-// the meme's URI. So a kind-segment names IDENTITY alone; it never prefixes a meme
-// path, and the ha.ka.ba root arity holds unchanged.
+// A meme's URI carries NO relation to a bag's URI — a meme lives in several bags at
+// once, and `bagsFileToUri` derives a meme URI from its interior path alone, dropping
+// the holding bag. So a kind-segment names IDENTITY alone; it never prefixes a meme
+// path, and the ha.ka.ba root arity holds.
 //
-// These sit ABOVE the Content-plane consts on purpose — those consts (ORACLE_DOC_URI
-// et al.) call `bagUri` at module-init, so the minter must precede them (a const in a
-// TDZ cannot be read by a hoisted function called before its own line).
+// These minters MUST precede the Content-plane consts below: those consts call `bagUri`
+// at module-init, and a `const` in its temporal dead zone cannot be read by a hoisted
+// function called before its own line.
 //
-// Design-of-record: lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split
+// Canon: lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split
 export const BAGS_SEGMENT  = "bags"  as const;
 export const WIKIS_SEGMENT = "wikis" as const;
 export const CID_SEGMENT   = "cid"   as const;
@@ -110,9 +110,8 @@ export function cidUri(cid: string): string {
   return stableLarUri(`${CID_SEGMENT}/${cid}`);
 }
 
-/** Mint the PRE-SPLIT identity form (`lar:///ha.ka.ba/@{slug}`). A reader tries the
- *  canonical form first, then falls back here, so a store written before the split still
- *  resolves; a fresh regenesis mints only the canonical form. */
+/** Mint the bare `lar:///ha.ka.ba/@{slug}` form — a reader tries the canonical `bags/@`
+ *  form first, then falls back here to resolve a store that carries the un-prefixed shape. */
 export function legacyIdentityUri(slug: string): string {
   return stableLarUri(`@${slug.replace(/^@/, "")}`);
 }
@@ -135,10 +134,10 @@ export const LARARIUM_DOC_URI  = bagUri("lararium");
 export const CATALOG_DOC_URI   = bagUri("catalog");
 export const LARES_DOC_URI     = bagUri("lares");
 // The memetic-wikitext engine plugin — a named blob CARRIED IN @oracle's blobs. Its
-// title lives in the @lararium MEME NAMESPACE (not the bag doc): a meme/module address,
-// discarded-from-bag by the disk projector, keyed on by plugin.info + the TW5 pack
-// pipeline. It stays `@lararium/plugins/…` — the bags/@ move touches bag-doc identities
-// alone, never a meme namespace (BAG URIs and MEME URIs carry no relation).
+// title lives in the @lararium MEME NAMESPACE (not the bag doc): a meme/module address
+// the disk projector discards-from-bag, keyed on by plugin.info + the TW5 pack pipeline.
+// A meme namespace carries no relation to a bag-doc identity, so it takes no `bags/`
+// kind-segment.
 export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins/lares/memetic-wikitext");
 
 // Shared tag/state law — consumed by vessel projections, not owned by any one runtime.
@@ -238,8 +237,8 @@ export function bagDescriptorUri(bagId: string): string {
 
 // ── Social plane URI builders ──────────────────────────────────────────────
 
-// These nested titles live INSIDE a moved bag doc — built from the const so they
-// follow bags/@ and stay keyed to the doc the daemon composite actually mounts.
+// These nested titles live INSIDE a bag doc — built from the const so they stay keyed
+// to the doc the daemon composite mounts (a bare literal would drift from it).
 /** identityTiddlerUri("did:key:z…") → "…/bags/@identities/did:key:z…" */
 export function identityTiddlerUri(did: string): string {
   return `${IDENTITIES_DOC_URI}/${did}`;

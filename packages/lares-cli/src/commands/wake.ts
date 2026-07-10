@@ -14,7 +14,7 @@ import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath, larDataDir } from "../env.js";
-import { probePort } from "../port-control.js";
+import { udsAvailable } from "../local-connector.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -126,7 +126,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   }
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.
-  let nodeUp = await probePort(port);
+  // "Up" for the CLI means the UDS verb socket answers — the CLI reaches the daemon there
+  // alone (the WS relay is the browser vessel's channel, not the CLI's; the CLI carries
+  // one transport, the sock — lares↔lararium binding).
+  let nodeUp = udsAvailable();
   let started = false;
   let nodeNote = nodeUp ? "attached (already serving)" : "";
 
@@ -181,8 +184,20 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         await sleep(1500);
         if (/fatal:/.test(readAttestation())) phase = "fault";
       }
-      // `ready` = attested vessel-ready, no late fault, and the port is actually bound.
-      nodeUp = phase === "ready" && (await probePort(port));
+      // A verb rides the UDS SOCKET, which binds LATER than vessel-ready and later than the
+      // WS port — on a cold boot (post-regenesis), tens of seconds later. "Ready" must mean
+      // the socket answers, or a caller (the seed leg, a hook recall) fires into the gap and
+      // gets DaemonUnreachable. Poll the socket up to a cold-boot-generous deadline, still
+      // bailing on a late fatal.
+      if (phase === "ready") {
+        const sockDeadline = Date.now() + 120_000;
+        while (Date.now() < sockDeadline && !udsAvailable()) {
+          if (/fatal:/.test(readAttestation())) { phase = "fault"; break; }
+          await sleep(500);
+        }
+      }
+      // `ready` = attested vessel-ready, no late fault, AND the verb socket answers.
+      nodeUp = phase === "ready" && udsAvailable();
       nodeNote =
         phase === "ready"
           ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`

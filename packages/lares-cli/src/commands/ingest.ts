@@ -20,6 +20,7 @@ import { stdin, stdout } from "process";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit, wantsJson, exitFor } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
+import { OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngest } from "../ingest-core.js";
 
@@ -116,7 +117,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     return exitFor(code);
   }
   const summary = summaryOutput(result) ?? {};
-  const auditUri = `lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`;
+  const auditUri = `${OUTCOME_URI_PREFIX}${result.requestId}`;
   emit(args, {
     ok: true,
     requestId: result.requestId,

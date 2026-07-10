@@ -16,6 +16,7 @@
  */
 
 import { larRoot, larDataDir } from "../env.js";
+import { udsAvailable } from "../local-connector.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
@@ -168,18 +169,19 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
   };
   let residencyLine: string | null = null;
 
-  // C.4 — when the daemon is up, ask it for a residency snapshot. Cheap
-  // call (one verb-tiddler round-trip); if anything fails, fall through
-  // silently — `lares status` stays cheap and never errors.
-  if (portInUse) {
+  // C.4 — when the daemon is reachable, ask it for a residency snapshot. The CLI
+  // reaches the daemon through the UDS verb socket alone, so that — not the WS
+  // relay port — gates the read. Cheap call; any failure falls through silently.
+  const daemonReachable = udsAvailable();
+  if (daemonReachable) {
     try {
       const { summaryOutput } = await import("../verb-result.js");
       const { runVerb } = await import("../verb-call.js");
       const { loadVesselVerifyingKey } = await import("@lararium/node");
-      // UDS fast path, WS fallback (the lares↔lararium binding). Cheap probe;
-      // any failure falls through silently — `lares status` never errors. The
-      // residency verb is cap-gated, so it needs the real operator did (a non-did
-      // requestedBy cap-errors quietly — the old "lares-status" label always did).
+      // One line over the sock (the lares↔lararium binding). Cheap probe; any failure
+      // falls through silently — `lares status` never errors. The residency verb is
+      // cap-gated, so it needs the real operator did (a non-did requestedBy cap-errors
+      // quietly — the old "lares-status" label always did).
       const did = "0x" + (await loadVesselVerifyingKey(larDataDir()));
       const r = await runVerb("residency", {}, did, { timeoutMs: 2000 });
       if (r.status === "done") {

@@ -79,6 +79,13 @@ describe("effect-record URI builders", () => {
     expect(isEffectRecordUri("lar:///lararium.local.vm/@daemon/ledger/residency/x")).toBe(true);
   });
 
+  test("isEffectRecordUri accepts a bags/@ kind-segment title — the projector must skip it", () => {
+    // An audit title builds from the bag const, which carries the `bags/` segment. The
+    // projector recognizes it as audit data, never leaking it to disk as a carrier.
+    expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@lararium/ledger/residency/abc-123")).toBe(true);
+    expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@daemon/ledger/residency/x")).toBe(true);
+  });
+
   test("isEffectRecordUri rejects non-residency-log titles", () => {
     expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/some-tiddler")).toBe(false);
     expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/ledger/residency/")).toBe(false); // empty event-id

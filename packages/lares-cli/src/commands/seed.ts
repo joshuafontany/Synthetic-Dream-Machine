@@ -48,8 +48,8 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
   return names.sort().map((holding) => ({
     holding,
     source: join(bagsDir, holding),
-    // The disk dir `@elyncia` names bag `bags/@elyncia` — mint through bagUri so the
-    // seed targets the split's content plane, matching what the daemon registers.
+    // The disk dir `@elyncia` names bag `bags/@elyncia` — mint through bagUri so the seed
+    // targets the bag the daemon registers.
     toBag: bagUri(holding),
   }));
 }
