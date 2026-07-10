@@ -53,6 +53,38 @@ The boot seed rules path segments 0–4; a fifth reads as a degraded HUD. `@lare
 
 **Phase 5 — regenesis + witness.** A fresh `lares regenesis` mints everything in the new shape; a full-mesh witness proves resolution across the split. The pre-split store stays parked until 5/5 green.
 
+## Phase 2b resolved — the caller sort (recorded 2026-07-10)
+
+Mapping every `wikiBagUri` caller reveals the quine fuses TWO meanings the split must
+separate. The sort, drawn from the call sites:
+
+**→ `bagUri(slug)` (the CANON BAG, below the fold, shareable):**
+`vessel-island-pool-core.selfCanonBag` · `vessel-steps.mirrorBags` · `recipe-watch`
+stack layer · `epoch-handlers.wikiKey` · `island-recipe.writeLayer` fallback ·
+`sovereign-kernel` slot-match · the `genesis-doc` bag list (LARES/LARARIUM canon).
+
+**→ `wikiUri(slug)` (the WIKI IDENTITY, above the fold, per-wiki):**
+`wiki-mint.wikiKey` (the registered pointer) · `worker-data-verbs.list-wikis` identity ·
+`active-wiki.wikiKey`.
+
+**→ rooted at `wikiUri(slug)` (per-wiki layers, above the fold):**
+`wikiDraftBagUri` and the 12 `/drafts/${did}` sites · `@working`/`@draft`/`@temp` move
+from global singletons to `wikis/@{slug}/…`.
+
+**Fork resolutions (conservative, quine-preserving):**
+1. The canon bag KEEPS the slug: `wikis/@lares` composes `bags/@lares` (its canon) +
+   library bags + the `@oracle` floor. "Canon IS the @{slug} bag" holds — relocated
+   under `bags/`, never renamed.
+2. `wiki init` gains a second write: it registers the recipe under `wikis/@{slug}` AND
+   the canon bag under `bags/@{slug}`. `active-wiki` resolves content from `bags/@{slug}`.
+
+**The gate (why this does not big-bang blind):** `@lares`/`@lararium` bake into
+`genesis-doc.ts` as CID-rendered bags feeding `@oracle` — the DreamNet layer the operator
+fences for Cabal control. Re-pointing them changes the genesis blob shape and co-times with
+a store-wiping regenesis on that rendering path. The re-point executes as ONE change against
+this recorded sort, validated by regenesis + a full-mesh witness (Phase 5), never as a
+silent drift. Blast radius, not confidence, sets this gate.
+
 ## What does NOT change
 
 Meme URIs (all 4,517 refs / 3,772 titles). The `bagsFileToUri` disk law. The `ha.ka.ba` root arity. The noosphere-boot address. `@oracle` as the Cabal read-face.
