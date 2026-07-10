@@ -39,14 +39,31 @@ _SURFACE_ROOTS = {
 }
 
 
+def memory_sensorium_dir() -> str:
+    """The canonical Memory sensorium home — `<XDG_DATA_HOME>/lares/sensoriums/memory`, the same dir
+    `vessel-paths.ts` names, whose manifest declares the `#has` cap-stack. The filetree IS the
+    composition: `content/` beside `structure/`, `form/`, `persistence/`."""
+    data = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
+    return os.path.join(data, "lares", "sensoriums", "memory")
+
+
+def content_dir_of(root: str) -> str:
+    """The content plane sits at `<root>/content` — a sibling of the derived planes, never the root
+    itself. The lares content store REPLACES the vendored mempalace as the memory sensorium's content
+    plane; the manifest's `content.engine` names which one stands."""
+    return os.path.join(root, "content")
+
+
 def _refuse_comparator(root: str) -> None:
-    """The comparator ward: ~/.mempalace holds the clean dev-baseline — the RUN never writes it.
-    Designation carries authority; a root that reaches into the comparator fails LOUD."""
+    """The comparator ward: ~/.mempalace holds the clean dev-baseline — this driver never writes it.
+    Designation carries authority; a root that reaches into the comparator fails LOUD. (The memory
+    sensorium's content plane migrates OUT of ~/.mempalace into `<root>/content`; until the manifest
+    names the lares engine, the vendored palace stays read-only ground.)"""
     comparator = os.path.realpath(os.path.expanduser("~/.mempalace"))
     real = os.path.realpath(os.path.expanduser(root))
     if real == comparator or real.startswith(comparator + os.sep):
         raise SystemExit(f"memory_sensorium: REFUSED — {root!r} sits inside the comparator "
-                         "~/.mempalace (comparator only; the RUN never writes it)")
+                         "~/.mempalace (comparator only; this driver never writes it)")
 
 
 def transcripts(surface: str, *, project: "str | None" = None) -> list:
@@ -88,7 +105,11 @@ def tri_plane_witness(root: str, *, sample_limit: int = 200) -> dict:
 
     root = os.path.expanduser(root)
     embed_one, model = make_embed_cap()
-    store = cio.ContentStore(root, expected_dim=len(embed_one("probe")), expected_model=model)
+    # The content plane roots at `<root>/content`; an older layout rooted it at `<root>` itself.
+    content = content_dir_of(root)
+    if not os.path.exists(os.path.join(content, "chroma.sqlite3")):
+        content = root
+    store = cio.ContentStore(content, expected_dim=len(embed_one("probe")), expected_model=model)
     structure = StructurePalaceStore(os.path.join(root, "structure"))
     form = FormPalaceStore(os.path.join(root, "form"))
 
@@ -158,11 +179,14 @@ def run(root: str, *, surface: str, wing: str, room: str, pointers: list,
     os.makedirs(os.path.expanduser(root), exist_ok=True)
     root = os.path.expanduser(root)
 
+    content = content_dir_of(root)
+    worldline = os.path.join(root, ".worldline")
     passes = []
     for p in pointers:
         planes = compose_corpus_planes(root, min_support=min_support, max_forms=max_forms,
                                        max_candidates=max_candidates)
-        summary = capture_and_observe(root, surface, p, wing=wing, room=room, planes=planes)
+        summary = capture_and_observe(content, surface, p, wing=wing, room=room, planes=planes,
+                                      worldline_palace=worldline)
         plane = summary.get("planes", {})
         passes.append({
             "pointer": os.path.basename(p),
@@ -189,11 +213,12 @@ def main() -> None:
     ls.add_argument("--project", default=None, help="narrow to one project dir (claude)")
 
     w = sub.add_parser("witness", help="read the three planes back off a standing palace (no capture)")
-    w.add_argument("--root", required=True)
+    w.add_argument("--root", default=None)
     w.add_argument("--sample-limit", type=int, default=200, dest="sample_limit")
 
     r = sub.add_parser("run", help="capture transcripts onto content + structure + form, then witness")
-    r.add_argument("--root", required=True, help="the Memory palace root; never ~/.mempalace")
+    r.add_argument("--root", default=None,
+                   help="the Memory sensorium root (default: the canonical <data>/lares/sensoriums/memory); never ~/.mempalace")
     r.add_argument("--surface", default="claude", choices=sorted(_SURFACE_ROOTS))
     r.add_argument("--wing", required=True, help="the per-project wing slug (`lares wing-of <transcript>`)")
     r.add_argument("--room", default="conversations")
@@ -213,11 +238,13 @@ def main() -> None:
         return
 
     if args.cmd == "witness":
+        args.root = args.root or memory_sensorium_dir()
         _refuse_comparator(args.root)
         out = tri_plane_witness(args.root, sample_limit=args.sample_limit)
         sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
         return
 
+    args.root = args.root or memory_sensorium_dir()
     pointers = args.pointer or transcripts(args.surface, project=args.project)
     if args.limit is not None:
         pointers = pointers[: args.limit]
