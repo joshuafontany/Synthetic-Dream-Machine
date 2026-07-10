@@ -1,17 +1,17 @@
 /**
  * e2e/working-loop — the live working→canon loop, witnessed end-to-end.
  *
- * Operator ruling B (2026-06-19): residency verbs run IN the active wiki island
- * over ITS composite (where @working + canon both live), commanded via
- * `lares act --in-wiki` (→ the `wiki-act` forwarder → placeWikiVerb); the admin
- * never reaches the per-fingerprint @working binding.
+ * Residency verbs run IN the active wiki island over ITS composite (where the
+ * per-wiki working layer + canon both live), commanded via `lares act --in-wiki`
+ * (→ the `wiki-act` forwarder → placeWikiVerb); the admin never reaches the
+ * per-fingerprint working binding.
  *
- *   W1 — LOAD --to @working --in-wiki → the carrier projects to wikis/ (the
- *        @working live write-layer disk surface, V3).
- *   W2 — MOVE @working→@lares --in-wiki (PROMOTION) → the carrier publishes to
- *        bags/@lares (canon) AND retracts from wikis/.
+ *   W1 — LOAD --to wikis/@lares/working --in-wiki → the carrier projects to
+ *        wikis/ (the per-wiki working write-layer disk surface).
+ *   W2 — MOVE wikis/@lares/working → bags/@lares --in-wiki (PROMOTION) → the
+ *        carrier publishes to bags/@lares (canon) AND retracts from wikis/.
  *
- * Closes the working/canon spine's live loop: edit (→ @working → wikis/) →
+ * Closes the working/canon spine's live loop: edit (→ working → wikis/) →
  * promote (→ canon → bags/), island-local.
  */
 
@@ -21,11 +21,11 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
-const BOOT_URI  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot";
-const WORKING   = "lar:///ha.ka.ba/@working";
-const LARES     = "lar:///ha.ka.ba/@lares";
-const REL = "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md";
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
+const WORKING   = "lar:///ha.ka.ba/wikis/@lares/working";
+const LARES     = "lar:///ha.ka.ba/bags/@lares";
+const REL = "ha.ka.ba/@lares/api/lares/noosphere-boot.md";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 let lar: LarInstance;

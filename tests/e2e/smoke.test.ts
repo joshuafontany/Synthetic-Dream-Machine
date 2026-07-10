@@ -20,8 +20,8 @@ import { readFileSync } from "node:fs";
 import { targetInstance, bootDocUrl, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
-const LARES_URI = "lar:///ha.ka.ba/@lares";
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 let lar: LarInstance;
 
@@ -59,8 +59,8 @@ describe("smoke — residency canon through the real CLI", () => {
     // (parent + one record per ahu block) stays.
     const ahuCount = (readFileSync(BOOT_MEME, "utf8").match(/<<~ ahu #/g) ?? []).length;
     expect(data.count).toBe(1 + ahuCount);
-    expect(data.titles).toContain("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot");
-    expect(data.titles).toContain("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol");
+    expect(data.titles).toContain("lar:///ha.ka.ba/@lares/api/lares/noosphere-boot");
+    expect(data.titles).toContain("lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#exchange-protocol");
   });
 
   test("LOAD refuses a carrier-less gesture loudly (islands never fetch)", async () => {
@@ -78,11 +78,11 @@ describe("smoke — residency canon through the real CLI", () => {
     const v = await lar.cli(["wiki", "init", "grove", "--json"]);
     expect(v.json?.["ok"]).toBe(true);
 
-    const a = await lar.cli(["wiki", "add-bag", "garden", "lar:///ha.ka.ba/@lararium/wikis/grove", "--json"]);
+    const a = await lar.cli(["wiki", "add-bag", "garden", "lar:///ha.ka.ba/bags/@grove", "--json"]);
     expect(a.json?.["ok"]).toBe(true);
     const data = a.json?.["data"] as { status?: string; stack?: string[] };
     expect(data?.status).toBe("added");
-    expect(data?.stack?.join(" ")).toMatch(/wikis\/grove/);
+    expect(data?.stack?.join(" ")).toMatch(/bags\/@grove/);
   });
 
   test("bag stats answers with the operator's real identity (no placeholder DID)", async () => {

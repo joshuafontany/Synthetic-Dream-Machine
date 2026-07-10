@@ -21,8 +21,8 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
-const WORKING   = "lar:///ha.ka.ba/@working";
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const WORKING   = "lar:///ha.ka.ba/wikis/@lares/working";
 
 let lar: LarInstance;
 let wikisDir  = "";

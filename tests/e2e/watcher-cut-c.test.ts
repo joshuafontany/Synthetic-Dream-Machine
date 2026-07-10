@@ -28,8 +28,8 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const CLI_BIN   = join(REPO_ROOT, "packages/lares-cli/dist/src/bin/lares.js");
-const TICK_TMPL = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/tick.md");
-const LARES_URI = "lar:///ha.ka.ba/@lares";
+const TICK_TMPL = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/pono/tick.md");
+const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -39,10 +39,10 @@ let tickTemplate = "";
 
 /** Disk path a `cutc-<slug>` carrier projects to under the staged bags mirror. */
 function carrierPath(slug: string): string {
-  return join(lar.root, "bags/@lares/ha.ka.ba/@lares/v0.1/api/pono", `${slug}.md`);
+  return join(lar.root, "bags/@lares/ha.ka.ba/@lares/api/pono", `${slug}.md`);
 }
 function carrierUri(slug: string): string {
-  return `lar:///ha.ka.ba/@lares/v0.1/api/pono/${slug}`;
+  return `lar:///ha.ka.ba/@lares/api/pono/${slug}`;
 }
 
 /** Template a fresh carrier from tick.md, swapping ONLY the URI slug (the path

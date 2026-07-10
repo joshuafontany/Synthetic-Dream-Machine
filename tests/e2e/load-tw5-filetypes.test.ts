@@ -21,7 +21,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
-const LARES_URI = "lar:///ha.ka.ba/@lares";
+const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 let lar: LarInstance;
 let src = "";
@@ -35,7 +35,7 @@ beforeAll(async () => {
   src = mkdtempSync(join(tmpdir(), "lares-load-types-"));
   // memetic carrier — SOH heading, decomposes at the membrane
   writeFileSync(join(src, "memetic.md"),
-    "<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/test/memetic-witness >>\n# Memetic Witness\n\nbody under the way.\n");
+    "<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/test/memetic-witness >>\n# Memetic Witness\n\nbody under the way.\n");
   // .tid — carries its own title field (must win)
   writeFileSync(join(src, "note.tid"),
     "title: TestTidTitle\ntype: text/vnd.tiddlywiki\n\nA .tid tiddler body.\n");

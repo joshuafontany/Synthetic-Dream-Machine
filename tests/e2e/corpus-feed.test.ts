@@ -1,7 +1,7 @@
 /**
  * e2e/corpus-feed — vector 4's staged witness: the WHOLE @lares corpus
- * (bags/@lares/ha.ka.ba/@lares/v0.1, ~189 carriers) rides one directory-batch LOAD into a
- * staged vessel, and the disk co-projection writes back carrier-whole.
+ * (bags/@lares/ha.ka.ba/@lares, the hearth's content tree) rides one directory-batch LOAD
+ * into a staged vessel, and the disk co-projection writes back carrier-whole.
  *
  * What this soaks (first contact at scale for the 2026-06-11 grain burn):
  *   F1 — the batch LOAD lands (one gesture, one change-id family)
@@ -21,12 +21,12 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1");
-const LARES_URI = "lar:///ha.ka.ba/@lares";
+const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares");
+const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 const BOOT_REL  = "api/lares/noosphere-boot.md";
-// Projected (staged) siting under the full-path-inside-bag ruling (2026-06-12):
-const BOOT_PROJ = "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md";
-const BOOT_URI  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot";
+// Projected (staged) siting under the full-path-inside-bag rule:
+const BOOT_PROJ = "ha.ka.ba/@lares/api/lares/noosphere-boot.md";
+const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
 
 /** Canonical render of carrier text through the membrane. */
 function renderOf(text: string): string {
@@ -50,13 +50,13 @@ function walkFiles(dir: string): string[] {
   return out;
 }
 
-/** Distinct carrier-root URIs in the source corpus that mirror under @lares/v0.1. */
+/** Distinct carrier-root URIs in the source corpus that mirror under @lares. */
 function expectedRoots(): Set<string> {
   const files = execSync(`find ${CORPUS} -name '*.md'`, { encoding: "utf8" }).trim().split("\n");
   const roots = new Set<string>();
   for (const f of files) {
     const m = /<<~[^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/.exec(readFileSync(f, "utf8"));
-    if (m?.[1]?.startsWith("lar:///ha.ka.ba/@lares/v0.1/")) roots.add(m[1]);
+    if (m?.[1]?.startsWith("lar:///ha.ka.ba/@lares/")) roots.add(m[1]);
   }
   return roots;
 }

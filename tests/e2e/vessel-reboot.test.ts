@@ -24,8 +24,8 @@ const NODE_MAIN = join(REPO_ROOT, "packages/lararium-node/dist/src/main.js");
 const NODE_CWD  = join(REPO_ROOT, "packages/lararium-node");
 // The WHOLE corpus — the live failure rode a 1,464-record store while a
 // single-meme reboot passed; the vector must carry the real load.
-const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1");
-const LARES_URI = "lar:///ha.ka.ba/@lares";
+const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares");
+const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 let lar: LarInstance;
 let second: ChildProcess | null = null;
