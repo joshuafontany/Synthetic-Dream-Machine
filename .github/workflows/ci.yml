@@ -123,11 +123,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: noosphere-boot.md must stay under the 40000-char ceiling
+      - name: noosphere-boot.mem must stay under the 40000-char ceiling
         run: |
           node -e '
             const fs = require("node:fs");
-            const p = "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md";
+            const p = "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.mem";
             const n = [...fs.readFileSync(p, "utf8")].length;
             console.log("boot chars:", n, "/ 40000");
             if (n >= 40000) {

@@ -23,9 +23,9 @@ import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lara
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
-const BOOT_REL  = "api/lares/noosphere-boot.md";
+const BOOT_REL  = "api/lares/noosphere-boot.mem";
 // Projected (staged) siting under the full-path-inside-bag rule:
-const BOOT_PROJ = "ha.ka.ba/@lares/api/lares/noosphere-boot.md";
+const BOOT_PROJ = "ha.ka.ba/@lares/api/lares/noosphere-boot.mem";
 const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
 
 /** Canonical render of carrier text through the membrane. */

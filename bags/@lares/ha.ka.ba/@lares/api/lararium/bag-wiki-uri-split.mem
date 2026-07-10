@@ -31,7 +31,7 @@ A wiki's IDENTITY (`wikis/@slug`, its recipe/`#has`-stack) is distinct from its 
 
 ## Meme URIs carry NO relation to bag URIs
 
-A meme moves between bags freely, or lives in several at once. Bag identity NEVER prefixes a meme's URI — lexical containment is not real. `bagsFileToUri` enacts this: `bags/<holding>/<meme-path>.md` → `lar:///<meme-path>`, the holding bag discarded from the URI, so `bags/@lares/…/noosphere-boot.md` and `bags/@sdm/…/noosphere-boot.md` project the SAME meme URI. This keeps meme-URI arity safe: the boot seed rules path segments 0–4, `@lares/api/lares/noosphere-boot` is already four, and `bags/`/`wikis/` name IDENTITY (the bag, the stack), never the content inside — so no `bags/` prefix ever rides a meme URI.
+A meme moves between bags freely, or lives in several at once. Bag identity NEVER prefixes a meme's URI — lexical containment is not real. `bagsFileToUri` enacts this: `bags/<holding>/<meme-path>.md` → `lar:///<meme-path>`, the holding bag discarded from the URI, so `bags/@lares/…/noosphere-boot.mem` and `bags/@sdm/…/noosphere-boot.mem` project the SAME meme URI. This keeps meme-URI arity safe: the boot seed rules path segments 0–4, `@lares/api/lares/noosphere-boot` is already four, and `bags/`/`wikis/` name IDENTITY (the bag, the stack), never the content inside — so no `bags/` prefix ever rides a meme URI.
 
 ## The edit/publish shore
 

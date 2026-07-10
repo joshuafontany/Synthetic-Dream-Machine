@@ -21,7 +21,7 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
 const WORKING   = "lar:///ha.ka.ba/wikis/@lares/working";
 
 let lar: LarInstance;
@@ -41,7 +41,7 @@ function walk(dir: string): string[] {
 async function awaitWikisCarrier(timeoutMs = 60_000): Promise<string> {
   const start = Date.now();
   for (;;) {
-    const hit = walk(wikisDir).find((f) => f.endsWith("noosphere-boot.md"));
+    const hit = walk(wikisDir).find((f) => f.endsWith("noosphere-boot.mem"));
     if (hit) return hit;
     if (Date.now() - start > timeoutMs) throw new Error("boot carrier never projected under wikis/");
     await sleep(500);

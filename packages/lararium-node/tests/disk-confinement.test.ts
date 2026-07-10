@@ -17,9 +17,9 @@ const ROOT = "/srv/lar/bags/@lares";
 
 describe("disk ward — own-subdir confinement (default)", () => {
   test("a path under the mirror root passes", () => {
-    const r = confineMirrorWrite(ROOT, "ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+    const r = confineMirrorWrite(ROOT, "ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
   });
 
   test("dot-dot traversal out of the root refuses", () => {

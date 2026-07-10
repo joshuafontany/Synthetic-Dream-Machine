@@ -24,7 +24,7 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
 
@@ -107,7 +107,7 @@ describe("carrier-whole at rest — the kupono vectors", () => {
   test("V4 — the carrier round-trips content-whole; only iam framing normalizes", async () => {
     if (lar.mode !== "staged") return;
     const files = await awaitMirrorFiles(lar.root, 5_000);
-    const parent = files.find((f) => f.endsWith("noosphere-boot.md"));
+    const parent = files.find((f) => f.endsWith("noosphere-boot.mem"));
     expect(parent, "no whole-carrier projection of the loaded meme found").toBeTruthy();
     const projected = readFileSync(parent as string, "utf8");
     // Compare against the CANONICAL RENDER of the source — the law under

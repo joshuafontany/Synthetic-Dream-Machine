@@ -2,8 +2,8 @@
  * `lar:` URI resolution for the Lararium carrier spine.
  *
  * Resolution policy:
- * - ha.ka.ba/@lares/{path} → packages/lares-core/memes/{path}.md  (primary lares corpus path)
- * - ha.ka.ba/@lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.md  (engine corpus)
+ * - ha.ka.ba/@lares/{path} → packages/lares-core/memes/{path}.mem  (primary lares corpus path)
+ * - ha.ka.ba/@lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.mem  (engine corpus)
  * - AGENTS, LARES, README → virtual until expressed under @lares
  * - INDEXES/** and other ALL-CAPS roots → virtual namespace (caps-virtual)
  * - any other shape → virtual (no on-disk path; wiki-only)
@@ -59,7 +59,7 @@ function splitLarUri(uri: string): { root: string; childPath: string[]; fragment
   if (parts.length === 0) throw new Error(`lar URI needs a root segment: ${uri}`);
   const [root, ...childPath] = parts as [string, ...string[]];
   // Fragment-path (`#parent/child/grandchild`) projects onto disk as nested
-  // subdirectories — `lar:///foo#a/b` → `foo/a/b.md`. The single-hash + path
+  // subdirectories — `lar:///foo#a/b` → `foo/a/b.mem`. The single-hash + path
   // invariant comes from lar-uri.md §5.6 / memetic-wikitext.md §nested-ahu.
   const rawHash = decodeURIComponent(url.hash.replace(/^#/, ""));
   const fragmentPath = rawHash ? rawHash.split("/").filter(Boolean) : [];
@@ -161,7 +161,7 @@ export function resolveLarUri(uri: string): LarResolution {
   }
 
   if (isTupleRoot(root) && root === STABLE_TUPLE_ROOT) {
-    // lar:///ha.ka.ba/@lares/{rest} → packages/lares-core/memes/{rest}.md
+    // lar:///ha.ka.ba/@lares/{rest} → packages/lares-core/memes/{rest}.mem
     if (childPath[0] === LARES_SCOPE) {
       const rest = childPath.slice(1);
       if (rest.length === 1 && ["AGENTS", "LARES", "README"].includes(rest[0]!)) {

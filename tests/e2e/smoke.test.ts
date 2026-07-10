@@ -20,7 +20,7 @@ import { readFileSync } from "node:fs";
 import { targetInstance, bootDocUrl, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 let lar: LarInstance;

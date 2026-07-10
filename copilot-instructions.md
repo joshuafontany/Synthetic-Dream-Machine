@@ -1,4 +1,4 @@
--> [noosphere-boot.md](bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md)
+-> [noosphere-boot.mem](bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem)
 
 ## Copilot Adapter Surface
 
