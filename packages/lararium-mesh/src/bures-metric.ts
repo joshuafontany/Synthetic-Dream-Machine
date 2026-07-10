@@ -37,7 +37,7 @@
  * ρ extends it verbatim once amplitude phase is captured.
  *
  * Platform-blind: pure linear algebra, NO imports (the gaussian-cmi keel-style).
- * Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 /** A real symmetric PSD density matrix (Tr = 1) — an `n×n` row-major matrix. Real-Hermitian ground. */

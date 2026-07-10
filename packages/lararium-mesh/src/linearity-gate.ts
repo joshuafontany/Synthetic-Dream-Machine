@@ -17,7 +17,7 @@
  * higher-moment coupling with symmetric marginals slips both screens. Closed only by the Tier-1
  * IAAFT confirm or periodic Gaussian-vs-KSG calibration — a separate instrument, not this gate.
  *
- * Platform-blind: pure arithmetic. NO imports. Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Platform-blind: pure arithmetic. NO imports. Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 const EPS = 1e-12;

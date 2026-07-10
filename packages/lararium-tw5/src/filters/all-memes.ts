@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/filters/all-memes
+title: lar:///ha.ka.ba/lararium/tw5/filters/all-memes
 type: application/javascript
 module-type: allfilteroperator
 \*/

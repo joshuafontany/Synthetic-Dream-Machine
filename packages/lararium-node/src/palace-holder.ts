@@ -21,7 +21,7 @@
  * MESHPALACE, would compose this SAME transport plus a SOURCE-FEED cap (see {@link PalaceFeedCap})
  * — modeled here, federation deferred.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 import { spawn } from "node:child_process";

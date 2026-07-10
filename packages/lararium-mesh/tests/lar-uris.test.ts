@@ -8,7 +8,7 @@
  * layer is ORTHOGONAL to federation (the residency bag controls that, not the
  * namespace) and to persistence (every meme persists but volatile-VM scratch).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/lararium-identity#capability-and-petnames
+ * Meme: lar:///ha.ka.ba/lares/api/pono/lararium-identity#capability-and-petnames
  */
 
 import { describe, test, expect } from "vitest";
@@ -31,7 +31,7 @@ import {
 } from "../src/lar-uris.js";
 
 describe("lar-uris petname regions", () => {
-  const stable = stableLarUri("@oracle"); // lar:///ha.ka.ba/@oracle
+  const stable = stableLarUri("@oracle"); // lar:///ha.ka.ba/bags/@oracle
   const stableBare = `lar:///${STABLE_L_SPACE}`; // root, no trailing path
   const volatile = volatileVmUri("scratch/x"); // lar:///lararium.local.vm/scratch/x
   const unstable = "lar:///threshold.uncertain.opens/peer/handle"; // a living local petname
@@ -121,13 +121,13 @@ describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
 
   test("identitySlug returns null for a nested path — a bare identity carries none", () => {
     expect(identitySlug("lar:///ha.ka.ba/wikis/@lares/drafts/did%3Aweb")).toBeNull();
-    expect(identitySlug("lar:///ha.ka.ba/@lares/api/lares/noosphere-boot")).toBeNull();
+    expect(identitySlug("lar:///ha.ka.ba/lares/api/lares/noosphere-boot")).toBeNull();
     expect(identitySlug("lar:///threshold.uncertain.opens")).toBeNull();
   });
 
   test("a meme URI keeps its ha.ka.ba root arity — the split never touches it", () => {
     // Four path segments; the split adds no fifth (bag identity rides its own URI).
-    const meme = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
+    const meme = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
     expect(identitySlug(meme)).toBeNull();               // not an identity
     expect(meme.split("/").filter(Boolean).length).toBe(6); // scheme-empty + ha.ka.ba + 4 segs
   });

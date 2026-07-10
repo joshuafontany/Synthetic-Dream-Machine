@@ -8,7 +8,7 @@
  * cross-tier verdict; the browser test asserts the IDENTICAL verdict on a Chromium substrate. One hull,
  * two substrates, differ by grant not hull — the island-isomorphism made a witness.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
  */
 
 import { describe, test, expect } from "vitest";
@@ -44,7 +44,7 @@ describe("S0 wiki-sensorium consistency — node tier", () => {
   });
 
   test("entries() folds the island's OWN resolved surface, causal-stamped", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/@witness-node", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@witness-node", GLUE_SEEDS);
     const snap = await new WikiStoreAdapter(island).snapshot();
     expect(snap.readings.map((r) => r.title).sort()).toEqual(["canon-a", "canon-b", "plain"]);
     // memory-backed fixture carries no CRDT heads — the stamp reads honestly null, never fabricated.

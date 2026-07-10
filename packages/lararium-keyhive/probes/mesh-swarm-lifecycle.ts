@@ -20,7 +20,7 @@
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/mesh-swarm-lifecycle.ts
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { mkdirSync, writeFileSync, readdirSync, readFileSync, rmSync } from "fs";

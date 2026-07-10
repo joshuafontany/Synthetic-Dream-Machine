@@ -8,7 +8,7 @@
  * wiki:
  *   - cascade config tiddlers at lar:///config/Lar/AhuTemplate/... (html
  *     scope — the markdown-meme templates burned at 07866b34)
- *   - template tiddlers at lar:///ha.ka.ba/@lararium/templates/...
+ *   - template tiddlers at lar:///ha.ka.ba/lararium/templates/...
  *   - parser registered for text/x-memetic-wikitext
  *   - sigil widget tiddlers present (kau, ahu, aka, kahea, loulou, pranala — all TW5 \\widget)
  *
@@ -40,22 +40,22 @@ async function main(): Promise<void> {
     "lar:///config/Lar/KaheaTemplate/html",
     "lar:///config/Lar/LoulouTemplate/html",
     "lar:///config/Lar/PranalaTemplate/html",
-    "lar:///ha.ka.ba/@lararium/templates/ahu/html",
-    "lar:///ha.ka.ba/@lararium/templates/aka/html",
-    "lar:///ha.ka.ba/@lararium/templates/pranala-header/html",
-    "lar:///ha.ka.ba/@lararium/templates/kahea/html",
-    "lar:///ha.ka.ba/@lararium/templates/loulou/html",
-    "lar:///ha.ka.ba/@lararium/templates/pranala/html",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-loulou",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala-header",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala",
+    "lar:///ha.ka.ba/lararium/templates/ahu/html",
+    "lar:///ha.ka.ba/lararium/templates/aka/html",
+    "lar:///ha.ka.ba/lararium/templates/pranala-header/html",
+    "lar:///ha.ka.ba/lararium/templates/kahea/html",
+    "lar:///ha.ka.ba/lararium/templates/loulou/html",
+    "lar:///ha.ka.ba/lararium/templates/pranala/html",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-dispatcher",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ahu",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-aka",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kahea",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-loulou",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala-header",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala",
     "lar:///config/Lar/KauTemplate/html",
-    "lar:///ha.ka.ba/@lararium/templates/kau/html",
-    "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau",
+    "lar:///ha.ka.ba/lararium/templates/kau/html",
+    "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kau",
   ];
   for (const title of expectedTitles) {
     if (!wiki.getTiddler(title)) failures.push(`missing tiddler: ${title}`);
@@ -76,7 +76,7 @@ async function main(): Promise<void> {
   // wikitext into macro scope, so wikitext widget probes are pre-existing-broken
   // across all sigils (aka, kahea, loulou, etc.). Tiddler-presence checks above
   // cover sigil-ahu loading. Integration render coverage lives in test:tw5-flow.
-  if (!wiki.getTiddler("lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu")) {
+  if (!wiki.getTiddler("lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ahu")) {
     failures.push("sigil-ahu tiddler missing from plugin");
   }
 

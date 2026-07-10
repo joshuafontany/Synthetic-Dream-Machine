@@ -38,7 +38,7 @@
  *
  * Isomorphic: no Node or browser platform APIs. Runs in any sovereign Worker.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/verb-dispatcher
+ * Meme: lar:///ha.ka.ba/lararium/tw5/verb-dispatcher
  */
 
 import {

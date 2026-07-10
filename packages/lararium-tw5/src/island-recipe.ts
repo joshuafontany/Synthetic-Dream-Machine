@@ -75,14 +75,14 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
     if (!handle) continue; // CRDT slot not provided — skip (cold or unmapped)
     const store = new AutomergeDocStore(handle, slot);
     // All CRDT slots accept writes; the in-wiki bag-paths cascade decides routing
-    // (lar:///ha.ka.ba/@lararium/config/bag-paths). Ceremony writes pass an explicit `bag` field
+    // (lar:///ha.ka.ba/lararium/config/bag-paths). Ceremony writes pass an explicit `bag` field
     // to override the cascade and write to canonical slots.
     composite.addLayer({ bagId: slot, store, writable: true, defaultWritable: false });
     stores.push({ slot, store });
   }
 
-  // Per-wiki cascade reference — the default `lar:///ha.ka.ba/@lararium/config/bag-paths`
-  // reads this value via `{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}` to
+  // Per-wiki cascade reference — the default `lar:///ha.ka.ba/lararium/config/bag-paths`
+  // reads this value via `{lar:///ha.ka.ba/lararium/config/current-wiki-bag}` to
   // resolve `lar:` writes to the wiki's live WRITE LAYER. An operator content wiki
   // points at its per-wiki working slot (`wikis/@{slug}/working`, the saved live
   // layer projecting to disk wikis/@{slug}); its bags/@{slug} canon rides below as
@@ -97,10 +97,10 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
     const writeLayer = handleBySlot.has(workingSlot) ? workingSlot : wikiBagUri(recipe.wikiSlug);
     const slug = recipe.wikiSlug;
     const configSeed: Record<string, string> = {
-      "lar:///ha.ka.ba/@lararium/config/current-wiki-bag":      writeLayer,
-      "lar:///ha.ka.ba/@lararium/config/current-wiki-temp":     wikiSlotUri(slug, "temp"),
-      "lar:///ha.ka.ba/@lararium/config/current-wiki-draft":    wikiSlotUri(slug, "draft"),
-      "lar:///ha.ka.ba/@lararium/config/current-wiki-personal": wikiSlotUri(slug, "personal"),
+      "lar:///ha.ka.ba/lararium/config/current-wiki-bag":      writeLayer,
+      "lar:///ha.ka.ba/lararium/config/current-wiki-temp":     wikiSlotUri(slug, "temp"),
+      "lar:///ha.ka.ba/lararium/config/current-wiki-draft":    wikiSlotUri(slug, "draft"),
+      "lar:///ha.ka.ba/lararium/config/current-wiki-personal": wikiSlotUri(slug, "personal"),
     };
     for (const [title, text] of Object.entries(configSeed)) {
       void tempStore.put({ tiddler: { title, text } }, { kind: "canon-hydrate", receipt: "recipe-boot" });

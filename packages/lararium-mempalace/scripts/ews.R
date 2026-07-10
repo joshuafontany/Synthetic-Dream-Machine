@@ -15,7 +15,7 @@
 #
 # Run:  Rscript --vanilla ews.R  < request.ndjson
 #
-# Meme: lar:///ha.ka.ba/@lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+# Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
 
 # Add the user library so a --user install of earlywarnings is visible.
 suppressWarnings(try(.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths())), silent = TRUE))

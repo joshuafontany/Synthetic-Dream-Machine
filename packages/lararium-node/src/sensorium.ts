@@ -25,7 +25,7 @@
  * {@link capDecl} chooses; {@link resolveCapDir} inverts. The manifest thus stays a FAITHFUL snapshot
  * of where the bytes actually are, never a wishful canonical claim.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance · lar:///ha.ka.ba/@lares/api/pono/has-stack#runtime-twin
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance · lar:///ha.ka.ba/lares/api/pono/has-stack#runtime-twin
  */
 
 import { existsSync, readFileSync } from "node:fs";

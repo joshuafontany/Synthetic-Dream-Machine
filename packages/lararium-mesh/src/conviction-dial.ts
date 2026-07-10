@@ -8,7 +8,7 @@
  * (short half-life), earned-STANDING decays SLOW (long half-life). Never one α for both.
  *
  * Platform-blind: pure arithmetic. NO imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/the-veil-ladder
+ * Meme: lar:///ha.ka.ba/lares/api/pono/the-veil-ladder
  */
 
 /**

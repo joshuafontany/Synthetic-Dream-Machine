@@ -17,7 +17,7 @@
  * Pareidolia guard: a lone reader NEVER mints — the gate zeroes a lone plane's drive structurally, so a
  * receiver-boundary tag rides only on cross-plane intersubjective agreement (born), never one plane's noise.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { temporalRigidity, normalizeSignal } from "./temporal-rigidity.js";

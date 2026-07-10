@@ -9,7 +9,7 @@
  * once greedy embedding-selection is added; this file is that per-edge test, the floor beneath them.)
  *
  * Platform-blind: pure numerics (Lanczos ln-gamma + regularized incomplete gamma). NO imports.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 const LN2 = Math.log(2);

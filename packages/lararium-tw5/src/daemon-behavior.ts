@@ -13,7 +13,7 @@
  *
  * Island Sovereignty Law §9 applies: this behavior always runs inside a Worker.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/daemon-behavior
+ * Meme: lar:///ha.ka.ba/lararium/tw5/daemon-behavior
  */
 
 import {

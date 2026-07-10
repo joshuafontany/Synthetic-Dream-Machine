@@ -57,7 +57,7 @@
  * `parse` + the adapter object are pure over records; only {@link copilotCliAdapter.discover} touches
  * `node:fs`. Content-hashing is the injected `node:crypto` sha256/16 prefix (matching the CLI harvest `sha`).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/rewind-adapter
+ * Meme: lar:///ha.ka.ba/lararium/api/rewind-adapter
  */
 
 import { createHash } from "node:crypto";

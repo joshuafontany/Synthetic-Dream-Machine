@@ -4,7 +4,7 @@
  * rides ITC, the FfzClock stays rhythmic). Concurrency is first-class — siblings with no join
  * between them read "concurrent".
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  */
 
 import { describe, test, expect } from "vitest";

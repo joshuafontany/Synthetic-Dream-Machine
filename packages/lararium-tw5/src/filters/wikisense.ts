@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/filters/wikisense
+title: lar:///ha.ka.ba/lararium/tw5/filters/wikisense
 type: application/javascript
 module-type: filteroperator
 \*/

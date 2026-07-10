@@ -11,7 +11,7 @@
  *   tr.dir  — transition / directed: succession / lineage. The reconstruction landscape a recall
  *             descends (the canalization basin). Generates the SR geometry.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 export type EdgeKind = "fn.sym" | "eff.dir" | "tr.dir";

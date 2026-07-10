@@ -12,7 +12,7 @@
  * -inject-detect + the itc + ffz-clock primitives they ride). The libs themselves are UNCHANGED —
  * this barrel only re-publishes them on a bundlable subpath.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  */
 
 export * from "./itc.js";

@@ -18,7 +18,7 @@
  *
  * PURE: functions over (item, licensed-set, validate-seam). The caller draws `licensed` from the
  * drain's committed keys and routes each verdict (commit → the single writer · dead-letter → the
- * ERAD sink · skip → nothing). Meme: lar:///ha.ka.ba/@lararium/mesh/merge-gate ·
+ * ERAD sink · skip → nothing). Meme: lar:///ha.ka.ba/lararium/mesh/merge-gate ·
  * api/projection-nalu (the accumulate family's merge point).
  */
 

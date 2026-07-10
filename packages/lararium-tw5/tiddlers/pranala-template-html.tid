@@ -1,4 +1,4 @@
-title: lar:///ha.ka.ba/@lararium/templates/pranala/html
+title: lar:///ha.ka.ba/lararium/templates/pranala/html
 type: text/vnd.tiddlywiki
 
 <span class="lar-pranala" data-from=<<pranala-from>> data-to=<<pranala-to>><$list filter="[<pranala-family>!is[blank]]" variable="_"> data-family=<<pranala-family>></$list><$list filter="[<pranala-role>!is[blank]]" variable="_"> data-role=<<pranala-role>></$list>><$link to=<<pranala-from>>><<pranala-from>></$link>&rarr;<$link to=<<pranala-to>>><<pranala-to>></$link><$list filter="[<pranala-body>!is[blank]]" variable="_"><details class="lar-pranala-body"><summary>note</summary><<pranala-body>></details></$list></span>

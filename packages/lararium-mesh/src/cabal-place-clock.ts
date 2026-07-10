@@ -26,7 +26,7 @@
  *
  * Platform-blind: rides ./epoch-lease + ./cabal-place only. NO node: imports.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { leaseEpochPrefix, effectiveLeaseEpoch } from "./epoch-lease.js";

@@ -21,7 +21,7 @@
  * founding of the fresh place rides the Keyhive ceremony (fork-place-ceremony.ts).
  *
  * Platform-blind: rides ./cabal-place only. NO node: imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import type { CabalPlace } from "./cabal-place.js";

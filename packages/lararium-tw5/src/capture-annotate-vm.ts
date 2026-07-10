@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/capture-annotate-vm
+title: lar:///ha.ka.ba/lararium/tw5/modules/capture-annotate-vm
 type: application/javascript
 module-type: startup
 \*/

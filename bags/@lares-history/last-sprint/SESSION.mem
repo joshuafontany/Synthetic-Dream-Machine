@@ -107,7 +107,7 @@ body text…
 2. `file-path` absent in child iam when authored directly in TW5 UX (not via disk sync) — `source-file` field not set → `parentSourceFile` empty → `childFilePath` undefined. Acceptable by design: tiddlers not yet on disk have no disk path. Behaviour is consistent.
 3. `iam-source` mutex: explicit operator-authored block takes priority over generated iam. Correct.
 4. `TimeoutNegativeWarning` — pre-existing Automerge repo noise. Non-blocking.
-5. Heleuma drift `ha.ka.ba/@lararium/tw5/widgets/toml` — pre-existing, needs `--sync-modules --commit` to resolve.
+5. Heleuma drift `ha.ka.ba/lararium/tw5/widgets/toml` — pre-existing, needs `--sync-modules --commit` to resolve.
 
 **J.3 still open.** Parent + child tiddlers both land in wiki bag after `lares wiki sync`. `lares act MOVE` moves only the parent URI; children stay in wiki bag; canonical disk projector writes only what's in the canonical bag → child slot files never land in `packages/`. J.3 fix: promote handler must walk `#fragment` children and co-promote them atomically.
 
@@ -167,7 +167,7 @@ Global terminology alignment: every occurrence of the concept "room" as a _wiki 
 
 **Build result:** `pnpm -r build` clean, zero TypeScript errors. `.lararium/` wiped for re-init.
 
-**OODA-HA orient — next task:** Smoke J.3 child co-promotion with the live test artifact at `wikis/altar-fire/memes/docs/lares/the-lares-protocols.md`. This file contains multiple `<<~ ahu #slot >>` blocks. `lares wiki sync altar-fire` → `lares act MOVE ... --to lar:///ha.ka.ba/@lares --yes` should land _both_ the parent _and_ each `#fragment` child in `packages/lares-core/memes/docs/lares/the-lares-protocols/`. J.3 implement → smoke → verify.
+**OODA-HA orient — next task:** Smoke J.3 child co-promotion with the live test artifact at `wikis/altar-fire/memes/docs/lares/the-lares-protocols.md`. This file contains multiple `<<~ ahu #slot >>` blocks. `lares wiki sync altar-fire` → `lares act MOVE ... --to lar:///ha.ka.ba/bags/@lares --yes` should land _both_ the parent _and_ each `#fragment` child in `packages/lares-core/memes/docs/lares/the-lares-protocols/`. J.3 implement → smoke → verify.
 
 ---
 
@@ -185,7 +185,7 @@ Two commits:
 1. `lares reset --force` → fresh genesis + new operator key
 2. `lares serve` → daemon up, Keyhive initialized
 3. `lares wiki sync altar-fire` → `ingested: 1` — disk file landed in room bag; `splitRecursive` created parent + N child tiddlers in bag
-4. `lares act MOVE lar:///ha.ka.ba/@lares/docs/lares/the-lares-protocols --to lar:///ha.ka.ba/@lares --yes` → ceremony clean; audit tiddler written
+4. `lares act MOVE lar:///ha.ka.ba/lares/docs/lares/the-lares-protocols --to lar:///ha.ka.ba/bags/@lares --yes` → ceremony clean; audit tiddler written
 5. Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot >>` refs — **but no child slot files**
 
 **Gap named (J.3):** `lares act MOVE` is single-URI. `splitRecursive` creates `#fragment` child tiddlers in the bag alongside the parent, but the promote handler moves only the parent URI. Children stay in the room bag; disk projector for the canonical bag writes only what's in that bag. The parent renders correctly (always-split, always-kahea); the child meme files never land in `packages/lares-core/memes/`. The fix: promote handler must walk `#fragment` children of the promoted parent and co-promote them in the same ceremony. Named J.3 — recursive promote / child co-promotion.
@@ -480,7 +480,7 @@ Next code work: D.3 (operator-key bridge: tie `operator-key.ts` ed25519 to Keyhi
 
 Five-step sub-arc closed (A.1 → A.5):
 
-**A.1 `9461d7ca`** — `seedAdminDoc()` in `genesis-island.ts`; `reconcileWellKnownTiddlers` extended with optional `adminUrl`. AdminDoc reuses `MemeStoreDoc` shape — semantic distinction lives in URI/bag identity (`lar:///ha.ka.ba/@lararium/@admin`).
+**A.1 `9461d7ca`** — `seedAdminDoc()` in `genesis-island.ts`; `reconcileWellKnownTiddlers` extended with optional `adminUrl`. AdminDoc reuses `MemeStoreDoc` shape — semantic distinction lives in URI/bag identity (`lar:///ha.ka.ba/lararium/@admin`).
 
 **A.2 `23047176`** — `init-lararium.ts` seeds admin doc alongside identities/circles/sessions; admin oracle lands in `genesis/social-bootstrap.json`.
 
@@ -564,8 +564,8 @@ Browser peers reuse the same registry shape; only the registered kinds differ.
 - `ADMIN_ROOM_SLUG`, `ADMIN_ROOM_URI`, `ADMIN_BAG_ID` constants
 
 **Admin URI split (2026-05-07):**
-- Room URI (logical, in /rooms/ namespace): `lar:///ha.ka.ba/@lararium/rooms/admin`
-- Bag URI (Automerge doc, @-scope sibling to @identities/@circles/@sessions): `lar:///ha.ka.ba/@lararium/@admin`
+- Room URI (logical, in /rooms/ namespace): `lar:///ha.ka.ba/lararium/rooms/admin`
+- Bag URI (Automerge doc, @-scope sibling to @identities/@circles/@sessions): `lar:///ha.ka.ba/lararium/@admin`
 
 The two-URI split mirrors the bag-as-doc invariant: each Automerge doc gets its own sync boundary. Admin federation is device-scoped, not room-scoped — operator's other devices reach admin via `cap=infrastructure` device delegations (S7.1) gated at the ingress trust check (S7.4). Room peers can never prove the cap, so admin state stays operator-private without special plumbing.
 
@@ -753,7 +753,7 @@ All work in `@lararium/mesh`. Type-check clean (`pnpm tsc --noEmit` zero errors)
 **`social-doc.ts` changes:**
 - `PresenceSlot.clock: FfzClock` → `clocks: Record<string, FfzClock>` + `worldClockRef?: string` (lar: URI pointer to WorldClockTiddler)
 - `exchangeState?: ExchangeState` added to `PresenceSlot`
-- New `WorldClockTiddler` interface — lives at `lar:///ha.ka.ba/@world/{worldId}/clock`; has `writePolicy` (Keyhive capability string) + `tickPolicy: "autonomous"|"freeze"|"manual"` + `lastTickedAt`
+- New `WorldClockTiddler` interface — lives at `lar:///ha.ka.ba/bags/@world/{worldId}/clock`; has `writePolicy` (Keyhive capability string) + `tickPolicy: "autonomous"|"freeze"|"manual"` + `lastTickedAt`
 - New `ObservedClockTiddler` interface — LWW-Register cluster for external system clocks (Valheim, Minecraft, etc.); includes `externalClockHwm` (Flink watermark — never decreases) + `externalClockStale` + `externalClockReceived` (ffzSerialize at observation moment = bi-temporal anchor)
 - New `WorldTimeAdvancedEvent` interface — bi-temporal event (Verraes 2022 pattern); carries both `atSessionClock: FfzClock` and `atTickCounter: LarTickCounter`
 
@@ -812,20 +812,20 @@ Full findings in `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESE
 **lar:// URI — three families, no grammar change:**
 - `lar:///` (triple-slash, hostless) = system/content memes. Stable l-space: `ha.ka.ba`. Unstable: what3words-style roots.
 - `lar://alias:grant@host/` (hostful, existing) = active operators/agents on a machine (VS Code, MCP, etc.)
-- NEW: `lar:///ha.ka.ba/@nexus/<nexus-pubkey>` = Nexus identity + registry doc. New `@nexus` scope in resolver. New kind: `"nexus-doc"`. No URI grammar change.
+- NEW: `lar:///ha.ka.ba/bags/@nexus/<nexus-pubkey>` = Nexus identity + registry doc. New `@nexus` scope in resolver. New kind: `"nexus-doc"`. No URI grammar change.
 
 **Presence routing — three-layer:**
 `@lararium/mesh` (PresenceSlot + FfzClock types) → `@lararium/tw5` (`$:/temp/presence/{peerId}` tiddlers, already blocked from sync) → `@lararium/browser` or `@lararium/node` (`DocHandle.broadcast()` wiring) → UX layer. `meme-sync-adaptor.ts:49` already guards `$:/temp/*`.
 
 **FFZ Chronometer — `FfzClock` type to land in `@lararium/mesh` before S6 closes:**
 5-level bounded hierarchical logical clock. L0–L3 bounded (looping/musical time); L4 epoch unbounded (anti-aliasing). `SessionEvent.clock` and `PresenceSlot.clock` both use `FfzClock`, not `number`.
-Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / **Measure** (L2, default band) / **Arc** (L3) / **Theme** (L4). These sit above domain aliases (sub-action/action/session/day/epoch for Lares; Action/Round/Turn/Watch/Week for FTLS/TTRPG). Canonical meme: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`.
+Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / **Measure** (L2, default band) / **Arc** (L3) / **Theme** (L4). These sit above domain aliases (sub-action/action/session/day/epoch for Lares; Action/Round/Turn/Watch/Week for FTLS/TTRPG). Canonical meme: `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
 
 **NexusRegistryDoc — new doc type, S9 work:**
-`lar:///ha.ka.ba/@nexus/<pubkey>`. Fields: `nexusId`, `protocolVersion`, `capabilityFlags` (monotonic set), `allies`, `blocked`, `keyHistory`. Key rotation designed in from day one. Tombstoning eventual; blocked peers starved of capability tokens regardless.
+`lar:///ha.ka.ba/bags/@nexus/<pubkey>`. Fields: `nexusId`, `protocolVersion`, `capabilityFlags` (monotonic set), `allies`, `blocked`, `keyHistory`. Key rotation designed in from day one. Tombstoning eventual; blocked peers starved of capability tokens regardless.
 
 **Nexus naming — three-layer petname model (no global registry):**
-- Layer 1: `lar:///ha.ka.ba/@nexus/<pubkey>` — canonical, always
+- Layer 1: `lar:///ha.ka.ba/bags/@nexus/<pubkey>` — canonical, always
 - Layer 2: `NexusRegistryDoc.displayName` — operator-signed self-assertion, not authoritative
 - Layer 3: client-local petname map, user-controlled, overrides all
 - Disambiguation: truncated pubkey suffix in UI (`DreamDeck [ab3f…]`)
@@ -955,17 +955,17 @@ elyncia.app               — public domain; reverse proxy (web2 Kowloon ↔ web
 
 | Slot | Doc | URI |
 |---|---|---|
-| ha | `LarariumDoc` | `lar:///ha.ka.ba/@lararium` |
-| ka | `CatalogDoc` | `lar:///ha.ka.ba/@catalog` |
-| ba | `MemeStoreDoc` | `lar:///ha.ka.ba/@lares` |
+| ha | `LarariumDoc` | `lar:///ha.ka.ba/bags/@lararium` |
+| ka | `CatalogDoc` | `lar:///ha.ka.ba/bags/@catalog` |
+| ba | `MemeStoreDoc` | `lar:///ha.ka.ba/bags/@lares` |
 
 ### Local Social Tiga (keypair-authoritative, never federates)
 
 | Slot | Doc | URI |
 |---|---|---|
-| ha | `IdentitiesDoc` | `lar:///ha.ka.ba/@identities` |
-| ka | `CirclesDoc` | `lar:///ha.ka.ba/@circles` |
-| ba | `SessionsDoc` | `lar:///ha.ka.ba/@sessions` |
+| ha | `IdentitiesDoc` | `lar:///ha.ka.ba/bags/@identities` |
+| ka | `CirclesDoc` | `lar:///ha.ka.ba/bags/@circles` |
+| ba | `SessionsDoc` | `lar:///ha.ka.ba/bags/@sessions` |
 
 Dynamic children: `SessionEventLog` (one per session, AutomergeUrl in session tiddler).
 Ephemeral channel: `docHandle.broadcast()` for presence — not a doc.

@@ -16,7 +16,7 @@
  * drive). Recovery NEVER fabricates a beat from read-order — a static corpus carries no temporal beat
  * (the Reference-Fusion-in-time trap); below the lock threshold the bands stay provisional, never asserted.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { dominantPeriod } from "./temporal-rigidity.js";

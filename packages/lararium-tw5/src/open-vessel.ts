@@ -1,7 +1,7 @@
 /**
  * open-vessel — back-compat surface over the GRANULAR keel (core-caps).
  *
- * Canon: lar:///ha.ka.ba/@lararium/mesh/open-vessel + …/api/composable-keel. The monolithic
+ * Canon: lar:///ha.ka.ba/lararium/mesh/open-vessel + …/api/composable-keel. The monolithic
  * `openVesselCore` linear sequence RETIRED — its body decomposed into the six granular cap-modules
  * in `core-caps.ts` (substrate · wikislot · daemon · wiki · pool · mount), composed by
  * `composeCoreVessel`. This module keeps the historical export NAME as a thin alias so callers

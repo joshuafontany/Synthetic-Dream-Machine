@@ -10,7 +10,7 @@
  * ESM imports inside the CJS wiki context). The two copies MUST stay in sync
  * on the logic; the authoritative TS version lives here.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/cold-boot-ceremony
+ * Meme: lar:///ha.ka.ba/lararium/mesh/cold-boot-ceremony
  */
 
 import { identityTiddlerUri, circleTiddlerUri, IDENTITIES_DOC_URI, CIRCLES_DOC_URI } from "./lar-uris.js";

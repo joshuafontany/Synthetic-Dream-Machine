@@ -35,7 +35,7 @@
  *   - Concurrent unauthenticated connections are capped at MAX_PENDING.
  *   - Auth timeout is 5 s (machine-to-machine; no human interaction path).
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/daemon-auth-gate
+ * Meme: lar:///ha.ka.ba/lararium/node/daemon-auth-gate
  */
 
 import { EventEmitter }  from "node:events";

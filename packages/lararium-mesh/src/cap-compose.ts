@@ -16,7 +16,7 @@
  *
  * Rhymes: ZLayer (provide-the-graph, topological, build-or-fail) · Genode `init` (capability-routing,
  * default-deny) · OSGi-DS (declared cardinality) · the ocap powerbox (transient broad authority).
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel
  */
 
 /** A capability id — names a cap-module in a vessel's #has-cap-stack. */

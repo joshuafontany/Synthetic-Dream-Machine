@@ -17,7 +17,7 @@
  * Prior art: Verse subscribable<T>/listenable<T> (Epic UEFN), Nakama MatchLoop,
  * Flecs RateFilter, Akka timer+mailbox, structured concurrency (Kotlinx/Swift).
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/lar-event-bus
+ * Meme: lar:///ha.ka.ba/lararium/mesh/lar-event-bus
  */
 
 // ---------------------------------------------------------------------------

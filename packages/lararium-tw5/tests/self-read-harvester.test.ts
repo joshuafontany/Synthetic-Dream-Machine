@@ -1,6 +1,6 @@
 /**
  * self-read-harvester.test.ts — the sensorium that reads the house reading itself.
- * Research: a478d788. Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace.
+ * Research: a478d788. Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace.
  *
  * Verifies the ONE module unblocks BOTH North-Stars:
  *   - the teleodynamic triple (SelfRead) — with the LOAD-BEARING honesty ruling:

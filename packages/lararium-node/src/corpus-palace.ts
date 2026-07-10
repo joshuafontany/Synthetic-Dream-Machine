@@ -21,7 +21,7 @@
  * The deep ingest (bands / structure / form caps) lands in S1–S3; THIS sprint wires the lifecycle +
  * the store + a THIN, graceful ingest seam (a best-effort `mempalace mine` into the scratch dir).
  *
- * Meme: lar:///ha.ka.ba/@lararium/mempalace/genesis-doc#astral-multipalace
+ * Meme: lar:///ha.ka.ba/lararium/mempalace/genesis-doc#astral-multipalace
  */
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
@@ -106,7 +106,7 @@ function stampCorpusSensorium(dir: string, structures: number): void {
   try {
     writeSensoriumManifest(dir, buildSensoriumManifest(dir, {
       sensorium: "corpus",
-      lar: "lar:///ha.ka.ba/@lares/api/lares/corpus#astral-multipalace",
+      lar: "lar:///ha.ka.ba/lares/api/lares/corpus#astral-multipalace",
       caps: {
         content: { absDir: dir, engine: "mempalace" },
         ...(structures > 0 ? { structure: { absDir: corpusStructureDir(dir), engine: "structurepalace" } } : {}),

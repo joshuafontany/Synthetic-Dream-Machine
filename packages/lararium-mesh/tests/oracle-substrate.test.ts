@@ -5,7 +5,7 @@
  *   - the read face is content-addressed (rehash verifies; tamper is a different name);
  *   - the pointer is signed, monotone (anti-rollback), lineage-linked (anti-equivocation),
  *     and freshness-leased against the LOCAL clock — and the reader rule NEVER throws.
- * Canon: lar:///ha.ka.ba/@lares/api/pono/lararium-identity#the-oracle-plane
+ * Canon: lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-oracle-plane
  */
 
 import { describe, test, expect } from "vitest";

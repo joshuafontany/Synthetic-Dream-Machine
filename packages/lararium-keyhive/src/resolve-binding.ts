@@ -18,7 +18,7 @@
  * Daemon reads/writes go through the daemon-bag CompositeStore (`get` /
  * `put({bag: DAEMON_BAG_ID})`) — host: `daemonVm.composite`; island: `ctx.composite`.
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/personal-slot
+ * Canon: lar:///ha.ka.ba/lararium/api/personal-slot
  */
 
 import {

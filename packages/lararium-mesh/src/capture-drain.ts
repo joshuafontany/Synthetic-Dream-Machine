@@ -27,7 +27,7 @@
  * PURE + platform-blind: no store, no clock, no IO — the caller drives stage()/commit() from the
  * real nalu gate + store confirmations. This module owns only the ordering invariant.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/capture-drain
+ * Meme: lar:///ha.ka.ba/lararium/mesh/capture-drain
  */
 
 /** One turn's place in the drain: its arrival order + its idempotent store key. */

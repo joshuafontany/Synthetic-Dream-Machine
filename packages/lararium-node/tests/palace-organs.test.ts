@@ -132,7 +132,7 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     // The parent mesh manifest declares the three children as dumb coupling edges (no role vocab).
     const mesh = readManifest(meshSensoriumDir())!;
     expect(mesh.sensorium).toBe("mesh");
-    expect(mesh.lar).toBe("lar:///ha.ka.ba/@lararium/mesh");
+    expect(mesh.lar).toBe("lar:///ha.ka.ba/lararium/mesh");
     expect(mesh.has).toEqual({});                                // minimal own caps
     expect(mesh.coupling.children.map((c) => c.sensorium)).toEqual(["who", "authority", "flow"]);
     // resolveCapDir INVERTS the nesting back to the child dirs.
@@ -146,9 +146,9 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     const auth = readManifest(meshAuthorityDir())!;
     const flow = readManifest(meshFlowDir())!;
     expect([who.sensorium, auth.sensorium, flow.sensorium]).toEqual(["who", "authority", "flow"]);
-    expect(who.lar).toBe("lar:///ha.ka.ba/@lararium/mesh/who");
-    expect(auth.lar).toBe("lar:///ha.ka.ba/@lararium/mesh/authority");
-    expect(flow.lar).toBe("lar:///ha.ka.ba/@lararium/mesh/flow");
+    expect(who.lar).toBe("lar:///ha.ka.ba/lararium/mesh/who");
+    expect(auth.lar).toBe("lar:///ha.ka.ba/lararium/mesh/authority");
+    expect(flow.lar).toBe("lar:///ha.ka.ba/lararium/mesh/flow");
     // Every sensorium carries the persistence infrastructure (a cosheaf fiber + policy); the
     // perceptual fibers the parallel fills WHEN it perceives them.
     for (const m of [who, auth, flow]) {

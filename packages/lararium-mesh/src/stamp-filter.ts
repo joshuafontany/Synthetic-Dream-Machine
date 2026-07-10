@@ -21,7 +21,7 @@
  * Honest empties: the caller reports scanned vs matched — a filter that matches
  * nothing returns an empty result WITH its counts, never a silent drop.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/lararium/api/lar-telemetry
  */
 
 import { harvestTurnGradient, type HarvestBand } from "./turn-harvest.js";

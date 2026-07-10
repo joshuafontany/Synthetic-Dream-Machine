@@ -10,7 +10,7 @@
  * convention `sha256(source_file)_chunk` — so a caller-vector put is idempotent on re-flush AND
  * converges with imported mine-built data.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { defaultCryptoProvider, sha256Hex, utf8Bytes } from "@lararium/mesh";

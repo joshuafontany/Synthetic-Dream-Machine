@@ -15,7 +15,7 @@
  * Platform-blind: no node: imports. The in-memory impl here is the reference + the unit
  * substrate; the file/WS impls live node-side behind this interface.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 /** An opaque ceremony payload addressed across the channel, vessel→vessel (or → a place). */

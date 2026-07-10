@@ -36,7 +36,7 @@
  * CALLER's job — mirrors the founding ceremony, whose vessel/PersonaGroup agents are
  * already in-scope before addSentinelMember.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import {

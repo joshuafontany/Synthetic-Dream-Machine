@@ -18,7 +18,7 @@
  * fold-rate gate and the exact β(ARL₀) horizon defer to the null-calibration sprint; R1 folds plain (fixed
  * step) to prove convergence, not to feed the sink.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { jacobiEigen } from "./ffz-project.js";

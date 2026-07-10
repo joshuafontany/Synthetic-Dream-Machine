@@ -30,7 +30,7 @@ it returns nothing until a SendMessage-continue lifecycle lands a distinguishabl
 
 The worldline stays LOCAL — a py-local worldline_io fork-DAG, never a federated/meshed doc.
 
-Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution
+Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
 """
 from __future__ import annotations
 

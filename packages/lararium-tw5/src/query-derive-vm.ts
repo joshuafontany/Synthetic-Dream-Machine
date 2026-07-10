@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/query-derive-vm
+title: lar:///ha.ka.ba/lararium/tw5/modules/query-derive-vm
 type: application/javascript
 module-type: startup
 \*/

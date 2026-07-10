@@ -19,7 +19,7 @@ ordinal indexes the signal; the recovered beat rides in event-ordinal units. A s
 no temporal transitions, so it recovers NO beat — the clock reads holdover/provisional, never asserts
 a rhythm fabricated from read-order (the Reference-Fusion-in-time trap the null-witness guards).
 
-Meme: lar:///ha.ka.ba/@lares/sensorium/ffz-clock (the rhythm clock; the pipeline consumes it later).
+Meme: lar:///ha.ka.ba/lares/sensorium/ffz-clock (the rhythm clock; the pipeline consumes it later).
 """
 from __future__ import annotations
 

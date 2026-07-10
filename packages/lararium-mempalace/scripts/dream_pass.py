@@ -72,7 +72,7 @@ Usage (the mempalace venv):
       [--tolerance 0.25] [--min-support 2] [--max-forms 64] [--max-candidates 384] \
       [--loci-cap 32]
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/dream-pass
+Meme: lar:///ha.ka.ba/lararium/sensorium/dream-pass
 """
 from __future__ import annotations
 

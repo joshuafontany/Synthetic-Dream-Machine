@@ -20,7 +20,7 @@
  * compute ports to py (the RUN arc). py counterparts EXIST: `predictive_coding.py` (the F primitive) +
  * `bands_sidecar.py`. OWED in py: the H¹ gate · the EFE keystone · THESE bench strands.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
+ * Meme: lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested
  */
 
 import {

@@ -25,7 +25,7 @@ and the extracted bare text (the `#source-text` ahu interior only), so the wrapp
 extracted beds hold aligned units — a unit keeps ONE cid across both beds, and the delta
 between their sweeps reads the memetic red channel and nothing else.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/kumulipo-sections
+Meme: lar:///ha.ka.ba/lararium/sensorium/kumulipo-sections
 """
 from __future__ import annotations
 

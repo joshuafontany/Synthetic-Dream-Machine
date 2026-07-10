@@ -7,14 +7,14 @@
  * instead of settling the wait. The timeout error names the last breath heard,
  * so a dead mount says where breathing stopped.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/vessel-host
+ * Meme: lar:///ha.ka.ba/lararium/mesh/vessel-host
  */
 
 import { describe, test, expect } from "vitest";
 import { awaitIslandMsg } from "../src/vessel-host.js";
 import { mkEa, mkBreath, mkFault, type IslandMsg_Ea } from "../src/island-protocol.js";
 
-const WIKI = "lar:///ha.ka.ba/@test/wiki";
+const WIKI = "lar:///ha.ka.ba/bags/@test/wiki";
 
 /** A bare in-memory wire: handlers + an emit, standing in for worker.listen. */
 function fakeWire() {

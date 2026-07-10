@@ -22,7 +22,7 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
     try {
       const m = buildSensoriumManifest(dir, {
         sensorium: "memory",
-        lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
+        lar: "lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance",
         caps: {
           content:   { absDir: legacyContent,               engine: "mempalace" },  // OUTSIDE → absolute
           structure: { absDir: join(dir, "structure"),      engine: "structurepalace" },  // inside → relative
@@ -97,7 +97,7 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
   test("coupling nests child sub-sensoriums as dumb edges (the follow-on Meshpalace shape)", () => {
     const m = buildSensoriumManifest(dir, {
       sensorium: "mesh",
-      lar: "lar:///ha.ka.ba/@lararium/mesh",
+      lar: "lar:///ha.ka.ba/lararium/mesh",
       caps: {},
       children: [
         { sensorium: "who",       absDir: join(dir, "who") },

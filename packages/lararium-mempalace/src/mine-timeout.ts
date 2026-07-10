@@ -17,7 +17,7 @@
  *            from a BUSY lock (which the retry loop WAITS on). A kill is surfaced honestly, never
  *            masked, and does NOT retry the BUSY way (a hang retried is just another hang).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 /** EWMA smoothing — mirrors capture-engine's COST_EWMA_ALPHA (the slow-loop cost tracker). */

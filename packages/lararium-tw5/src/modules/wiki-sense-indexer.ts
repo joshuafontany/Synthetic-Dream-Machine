@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/wiki-sense-indexer
+title: lar:///ha.ka.ba/lararium/tw5/modules/wiki-sense-indexer
 type: application/javascript
 module-type: indexer
 \*/

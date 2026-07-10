@@ -32,7 +32,7 @@
  * (`_` — presence-of-the-band acknowledged, the cell unclaimed); trailing absent cells
  * are omitted entirely. A partial address still addresses.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
+ * Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock
  */
 
 /** The coarse→fine band order the `lar_ffz` address serializes in (Theme first). */

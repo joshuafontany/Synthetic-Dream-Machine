@@ -2,7 +2,7 @@
  * residency-surface — getOriginBag tests.
  *
  * Sprint:  Residency Model Epic — S3.3 / S3.4
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme:    lar:///ha.ka.ba/lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";
@@ -34,10 +34,10 @@ describe("getOriginBag", () => {
       "MyTiddler": {
         title:        "MyTiddler",
         text:         "from elyncia",
-        "origin-bag": "lar:///ha.ka.ba/@elyncia",
+        "origin-bag": "lar:///ha.ka.ba/bags/@elyncia",
       },
     });
-    expect(getOriginBag(wiki, "MyTiddler")).toBe("lar:///ha.ka.ba/@elyncia");
+    expect(getOriginBag(wiki, "MyTiddler")).toBe("lar:///ha.ka.ba/bags/@elyncia");
   });
 
   test("returns null for empty-string origin-bag (treated as absent)", () => {
@@ -55,10 +55,10 @@ describe("getOriginBag", () => {
     const wiki = makeWiki({
       "T": {
         title:        "T",
-        bag:          "lar:///ha.ka.ba/@personal",
-        "origin-bag": "lar:///ha.ka.ba/@personal",
+        bag:          "lar:///ha.ka.ba/bags/@personal",
+        "origin-bag": "lar:///ha.ka.ba/bags/@personal",
       },
     });
-    expect(getOriginBag(wiki, "T")).toBe("lar:///ha.ka.ba/@personal");
+    expect(getOriginBag(wiki, "T")).toBe("lar:///ha.ka.ba/bags/@personal");
   });
 });

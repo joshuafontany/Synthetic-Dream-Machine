@@ -14,7 +14,7 @@
  * flag or a forgotten hook can. The authoritative staleness gate (a fresh build
  * must produce no diff) rides CI; this is its always-on local-first companion.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/meme-normalize  (sibling: build-attestation)
+ * Meme: lar:///ha.ka.ba/lararium/tw5/meme-normalize  (sibling: build-attestation)
  */
 
 import { describe, test, expect } from "vitest";

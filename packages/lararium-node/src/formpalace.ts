@@ -19,7 +19,7 @@
  * structural hash, no AST payload stored here) but riding the IDENTICAL transport cap — two
  * op-surface shapes, one transport, no god base-class (the sidecar 2-shapes lesson, one up).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  */
 
 import { resolveFormEncoderSpawn } from "@lararium/mempalace";

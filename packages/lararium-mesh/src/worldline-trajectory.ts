@@ -23,7 +23,7 @@
  * the Well-1 causal foundation) from the durable edge-DAG (worldline-edge triples), per the
  * worldline-clock note "the ITC verdict re-projects from those triples when they land."
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  */
 
 import type { FfzClock, LarTickCounter } from "./ffz-clock.js";

@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/wikirules/lar-doctype-comment
+title: lar:///ha.ka.ba/lararium/tw5/wikirules/lar-doctype-comment
 type: application/javascript
 module-type: wikirule
 \*/

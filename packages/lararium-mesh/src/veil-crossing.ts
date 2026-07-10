@@ -24,7 +24,7 @@
  * the adjacent arc (deferred, operator's future).
  *
  * Platform-blind: rides ./persona-identity only. NO node: imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/persona-circle
+ * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
 import { deriveVeiledUserKey, type PersonaPath } from "./persona-identity.js";

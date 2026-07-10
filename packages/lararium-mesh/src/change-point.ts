@@ -10,7 +10,7 @@
  * silently pass a variance break (the pono-ground reason not to ship the easy mean-only version).
  * Per dimension: standardized mean-shift z + |log variance-ratio|; the score is the worst dim.
  *
- * Platform-blind: pure arithmetic. NO imports. Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Platform-blind: pure arithmetic. NO imports. Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 const EPS = 1e-12;

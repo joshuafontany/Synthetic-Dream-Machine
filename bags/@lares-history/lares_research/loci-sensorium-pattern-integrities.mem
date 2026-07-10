@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ? -> lar:///ha.ka.ba/@lares-history/research/sensorium-pattern-integrities >>
+<<~ ? -> lar:///ha.ka.ba/lares-history/research/sensorium-pattern-integrities >>
 ```toml iam
 cacheable = true
 hydrate   = true
@@ -11,10 +11,10 @@ manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares-history/research/sensorium-pattern-integrities"
+uri-path  = "ha.ka.ba/lares-history/research/sensorium-pattern-integrities"
 ```
 
-<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
 <<~ ahu #entry >>
 

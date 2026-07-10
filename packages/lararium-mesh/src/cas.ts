@@ -9,7 +9,7 @@
  * vessels-as-nameless-entities-with-#has-caps align isomorphically by composition,
  * never by a platform interface.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/cas
+ * Meme: lar:///ha.ka.ba/lararium/mesh/cas
  */
 
 import { ENGINE_CORE_ID } from "./base-doc.js";

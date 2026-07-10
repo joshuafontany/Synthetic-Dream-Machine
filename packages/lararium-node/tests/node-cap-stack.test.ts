@@ -6,7 +6,7 @@
  * openDaemon with NO slot, so registerBags omits the absent user-wiki bags (blind by structure). And
  * the read-face cap REFUSES to boot without the meshpalace it serves (mandatory-dep, loud, not a flag).
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
  */
 
 import { describe, test, expect, vi } from "vitest";

@@ -109,7 +109,7 @@ Maya insight: two bounded cycles with coprime periods generate a longer unique p
 
 ## Lares Level Mapping
 
-> Canonical attention-scale vocabulary: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`
+> Canonical attention-scale vocabulary: `lar:///ha.ka.ba/lares/api/pono/attention-scale`
 > Register names (Pulse/Beat/Measure/Arc/Theme) function as the unified labels that sit above domain aliases.
 
 ### Default (Collaborative Document / Presence)

@@ -424,12 +424,12 @@ Runtime      openNodeLarPeer (simplified)        finds docs; errors if uninitial
   mirroring the oracle tiddler shape (`title` / `text` / `fields` / `bag` / `authority`):
   ```json
   [
-    { "title": "lar:///ha.ka.ba/@identities", "text": "automerge:abc...",
-      "fields": { "kind": "social-bootstrap" }, "bag": "lar:///ha.ka.ba/@lararium",
+    { "title": "lar:///ha.ka.ba/bags/@identities", "text": "automerge:abc...",
+      "fields": { "kind": "social-bootstrap" }, "bag": "lar:///ha.ka.ba/bags/@lararium",
       "authority": "lararium-init" },
-    { "title": "lar:///ha.ka.ba/@circles",    "text": "automerge:def...", ... },
-    { "title": "lar:///ha.ka.ba/@sessions",   "text": "automerge:ghi...", ... },
-    { "title": "lar:///ha.ka.ba/@lares",      "text": "automerge:jkl...", ... }
+    { "title": "lar:///ha.ka.ba/bags/@circles",    "text": "automerge:def...", ... },
+    { "title": "lar:///ha.ka.ba/bags/@sessions",   "text": "automerge:ghi...", ... },
+    { "title": "lar:///ha.ka.ba/bags/@lares",      "text": "automerge:jkl...", ... }
   ]
   ```
   TW5 VM queries it directly: `[field[kind]exact[social-bootstrap]]`. No special loader needed.
@@ -461,7 +461,7 @@ S7.1 targets the init script callsite, not `openNodeLarPeer`.
 - [x] Content-equality guard in `AutomergeDocStore.put()` — kills file-watcher echo + Automerge churn
 - [x] Retire `_revisions` map in `MemeSyncAdaptor` (web2 revision concept; CRDT handles conflict resolution)
 - [x] Projection registry in `@lararium/mesh` — declarative, kind-based, factory-owned attachment
-- [x] `ADMIN_ROOM_URI` (`lar:///ha.ka.ba/@lararium/rooms/admin`) and `ADMIN_BAG_ID` (`lar:///ha.ka.ba/@lararium/@admin`) constants
+- [x] `ADMIN_ROOM_URI` (`lar:///ha.ka.ba/lararium/rooms/admin`) and `ADMIN_BAG_ID` (`lar:///ha.ka.ba/lararium/@admin`) constants
 - [x] Update `AGENTS.md` package map and boot sequence description
 - [x] Remove dead playwright config (empty `tests/e2e/`, missing `scripts/serve.ts`, web2 HTTP-test smell)
 
@@ -472,8 +472,8 @@ S7.1 targets the init script callsite, not `openNodeLarPeer`.
 **Goal:** Stand up an admin TW5 VM in the node peer. Move operator-private state out of `main.ts` imperative wiring and into a meme-driven coordinator room.
 
 **Two URIs, one Automerge doc:**
-- Logical room: `lar:///ha.ka.ba/@lararium/rooms/admin` (TW5 view, what the admin VM "lives in")
-- Bag (Automerge doc): `lar:///ha.ka.ba/@lararium/@admin` (sync boundary, sibling to @identities/@circles/@sessions)
+- Logical room: `lar:///ha.ka.ba/lararium/rooms/admin` (TW5 view, what the admin VM "lives in")
+- Bag (Automerge doc): `lar:///ha.ka.ba/lararium/@admin` (sync boundary, sibling to @identities/@circles/@sessions)
 
 **Federation:** scoped to the operator's own devices. Room peers cannot prove `cap=infrastructure`; admin doc never federates outside operator's device set. Trust gate at S7.4 (`checkIngressTrust`).
 
@@ -593,7 +593,7 @@ Full research: `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESEAR
 
 ### Settled Protocol Decisions (2026-05-06)
 
-- **lar:// URI** — three families, no grammar change. Nexus identity uses new `@nexus` scope: `lar:///ha.ka.ba/@nexus/<pubkey>`. Resolver gets `"nexus-doc"` kind. Triple-slash hostless form retained for all system/content memes.
+- **lar:// URI** — three families, no grammar change. Nexus identity uses new `@nexus` scope: `lar:///ha.ka.ba/bags/@nexus/<pubkey>`. Resolver gets `"nexus-doc"` kind. Triple-slash hostless form retained for all system/content memes.
 - **Presence routing** — `@lararium/mesh` types → `@lararium/tw5` tiddler representation → peer packages wire broadcast → UX layer consumes.
 - **FFZ Chronometer** — `FfzClock` type lands in `@lararium/mesh` before S6 closes. `PresenceSlot.clock` and `SessionEvent.clock` are `FfzClock`, not `number`. L4 (epoch) unbounded; L0–L3 bounded + looping.
 - **`capabilityFlags` forms a monotonic set** — never negotiate down. Protocol downgrade attack is mitigated structurally.

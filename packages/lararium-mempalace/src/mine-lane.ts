@@ -13,7 +13,7 @@
  * the CLI direct mine) block the thread and thus serialize by construction; the lane guards
  * the async spawns (the @daemon capture flush, any future async mine).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#nalu-flush-hardening
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#nalu-flush-hardening
  */
 
 import { canonicalPalacePath } from "./palace-path.js";

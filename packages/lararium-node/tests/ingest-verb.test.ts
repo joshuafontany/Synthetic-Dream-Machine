@@ -9,7 +9,7 @@
  *     (replace-by-group — LOAD never removes; INGEST must)
  *   - on conflict/refuse/noop: applies NOTHING; the decision rides the outcome.
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff (NEXT VECTOR, build 1)
+ * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff (NEXT VECTOR, build 1)
  */
 
 import { describe, test, expect } from "vitest";
@@ -24,9 +24,9 @@ import { registerActionReactors } from "../../lararium-tw5/src/action-handler.js
 import { memeticWikitextDeserializer, expandMemeRefs } from "../../lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
-const BOOT = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
-const URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
-const BAG  = "lar:///ha.ka.ba/@lares";
+const BOOT = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
+const URI  = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
+const BAG  = "lar:///ha.ka.ba/bags/@lares";
 
 const sha = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
 

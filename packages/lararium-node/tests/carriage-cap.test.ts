@@ -4,7 +4,7 @@
  * carriage-by-aggregate-reserve half of Lares Viales, witnessed at the cap level (composeVessel wires
  * it over a meshpalace-providing cap). Supersedes the retired createHerm/startHerm unit witness; the
  * live daemon-full relay-chain rides docker-compose.mesh.yml.
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
  */
 
 import { describe, test, expect } from "vitest";
@@ -34,7 +34,7 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
 
     // SOURCE — a vessel serving one public dial over a real read-face.
     const srcDial = dialEntryToRecord(
-      { bearing: "lar:///ha.ka.ba/@oracle", verifyingKeyHex: "a".repeat(64), endpoint: "ws://src/p", scale: "dreamnet" }, "src");
+      { bearing: "lar:///ha.ka.ba/bags/@oracle", verifyingKeyHex: "a".repeat(64), endpoint: "ws://src/p", scale: "dreamnet" }, "src");
     const srcHandle = repo.create<MeshPalaceDoc>({ schemaVersion: "0.1", tiddlers: { [srcDial.tiddler.title]: srcDial } });
     const srcServer = createServer();
     const srcPort = await listen(srcServer);
@@ -80,7 +80,7 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
       const tiddlers: Record<string, ReturnType<typeof dialEntryToRecord>> = {};
       endpoints.forEach((ep, i) => {
         const rec = dialEntryToRecord(
-          { bearing: `lar:///ha.ka.ba/@oracle/herm/d${i}`, verifyingKeyHex: "a".repeat(64), endpoint: ep, scale: "dreamnet" }, "test");
+          { bearing: `lar:///ha.ka.ba/bags/@oracle/herm/d${i}`, verifyingKeyHex: "a".repeat(64), endpoint: ep, scale: "dreamnet" }, "test");
         tiddlers[rec.tiddler.title] = rec;
       });
       return { schemaVersion: "0.1", tiddlers };
@@ -104,7 +104,7 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
     const self = { r: 1.0, theta: 0.4 };
     const tiddlers: Record<string, ReturnType<typeof dialEntryToRecord>> = {};
     const mk = (i: number, ep: string, r: number) => {
-      const b = `lar:///ha.ka.ba/@oracle/herm/n${i}`;
+      const b = `lar:///ha.ka.ba/bags/@oracle/herm/n${i}`;
       const dial = dialEntryToRecord({ bearing: b, verifyingKeyHex: "a".repeat(64), endpoint: ep, scale: "dreamnet" }, "test");
       const slot = routingSlotToRecord({ bearing: b, r, theta: 0.4 }, "test"); // same θ → distance = |r − self.r|
       tiddlers[dial.tiddler.title] = dial;

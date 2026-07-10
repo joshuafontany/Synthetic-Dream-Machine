@@ -5,7 +5,7 @@
  * daemon's sock — and a command reads an outcome here without reaching for the
  * invoker at all.
  *
- * See lar:///ha.ka.ba/@lararium/api/lares-lararium-binding — transport, authority,
+ * See lar:///ha.ka.ba/lararium/api/lares-lararium-binding — transport, authority,
  * and record decouple; this module holds the record's surface.
  */
 

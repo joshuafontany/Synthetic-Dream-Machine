@@ -20,7 +20,7 @@
  * so R earns its keep only in the nonlinear, data-rich, stationary regime (caller's call).
  *
  * Platform-blind: pure arithmetic. NO imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/the-veil-ladder
+ * Meme: lar:///ha.ka.ba/lares/api/pono/the-veil-ladder
  */
 
 type Sym = number;

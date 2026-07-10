@@ -21,7 +21,7 @@
  * reliable mid-flight injection signal. The mechanism (communicationEdge / worldlineInject) stands
  * ready for when a SendMessage-continue lifecycle lands a distinguishable signal.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
  */
 
 import { readFileSync } from "node:fs";

@@ -11,7 +11,7 @@
  * and their held offices (mintLaresIfAbsent stays in the node genesis
  * office — the gate enforces by placement).
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/genesis-intake
+ * Meme: lar:///ha.ka.ba/lararium/mesh/genesis-intake
  */
 
 import type { Repo, DocHandle, DocumentId } from "@automerge/automerge-repo";

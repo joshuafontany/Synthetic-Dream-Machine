@@ -1,7 +1,7 @@
 /**
  * lar-uris — lar:/// URI constants and builders for the Lararium namespace.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/lar-uris
- * Grammar doc: lar:///ha.ka.ba/@lararium/mesh/lar-uris (bags/@lararium/mesh/lar-uris.md)
+ * Meme: lar:///ha.ka.ba/lararium/mesh/lar-uris
+ * Grammar doc: lar:///ha.ka.ba/lararium/mesh/lar-uris (bags/@lararium/mesh/lar-uris.md)
  */
 
 import type { LarDoc } from "./base-doc.js";
@@ -29,7 +29,7 @@ export function isVolatileVmUri(uri: string): boolean {
 // ── Petname l-space regions (the NAMING / addressing layer) ───────────────
 // Petnames and TW5 titles ride the lar: grammar as their own abstraction layer,
 // SEPARATE from both federation and persistence
-// (lar:///ha.ka.ba/@lares/api/pono/lararium-identity#capability-and-petnames).
+// (lar:///ha.ka.ba/lares/api/pono/lararium-identity#capability-and-petnames).
 // This layer classifies an address by NAME-STABILITY only:
 //   STABLE   — root ha.ka.ba — a canonical, permanent, shared address.
 //   UNSTABLE — any other three-term attitude root — a session/per-relationship/
@@ -86,7 +86,7 @@ export function stableTagUri(name: string): string {
 // at module-init, and a `const` in its temporal dead zone cannot be read by a hoisted
 // function called before its own line.
 //
-// Canon: lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split
+// Canon: lar:///ha.ka.ba/lares/api/lararium/bag-wiki-uri-split
 export const BAGS_SEGMENT  = "bags"  as const;
 export const WIKIS_SEGMENT = "wikis" as const;
 export const CID_SEGMENT   = "cid"   as const;
@@ -110,7 +110,7 @@ export function cidUri(cid: string): string {
   return stableLarUri(`${CID_SEGMENT}/${cid}`);
 }
 
-/** Mint the bare `lar:///ha.ka.ba/@{slug}` form — a reader tries the canonical `bags/@`
+/** Mint the bare `lar:///ha.ka.ba/bags/@{slug}` form — a reader tries the canonical `bags/@`
  *  form first, then falls back here to resolve a store that carries the un-prefixed shape. */
 export function legacyIdentityUri(slug: string): string {
   return stableLarUri(`@${slug.replace(/^@/, "")}`);
@@ -138,7 +138,7 @@ export const LARES_DOC_URI     = bagUri("lares");
 // the disk projector discards-from-bag, keyed on by plugin.info + the TW5 pack pipeline.
 // A meme namespace carries no relation to a bag-doc identity, so it takes no `bags/`
 // kind-segment.
-export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins/lares/memetic-wikitext");
+export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("lararium/plugins/lares/memetic-wikitext");
 
 // Shared tag/state law — consumed by vessel projections, not owned by any one runtime.
 export const GRAMMAR_TAG = stableTagUri("SharktoothSigil");
@@ -165,10 +165,10 @@ export const SESSIONS_DOC_URI   = bagUri("sessions");
 
 /**
  * Canonical URI of a corpus bag.
- *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/@elyncia"
+ *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/bags/@elyncia"
  *
  * Every corpus is a first-class bag at child[1] under the bag-tag rule
- * (see lar:///ha.ka.ba/@lares/api/pono/lar-uri#bag-tag-rule).
+ * (see lar:///ha.ka.ba/lares/api/pono/lar-uri#bag-tag-rule).
  */
 export function corpusLarUri(slug: string): string {
   return bagUri(slug);
@@ -176,7 +176,7 @@ export function corpusLarUri(slug: string): string {
 
 /**
  * Registry-entry URI inside @catalog that points at a corpus bag.
- *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/@catalog/corpus/elyncia"
+ *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/bags/@catalog/corpus/elyncia"
  *
  * The tiddler at this title lives in the @catalog bag and carries the
  * corpus bag's AutomergeUrl as its `text` field. Registry pattern: catalog
@@ -222,7 +222,7 @@ export const PERSONA_BAG_ID    = bagUri("persona");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────
 
-/** e.g. recipeUri("@lararium", "default") → "lar:///ha.ka.ba/@lararium/recipes/default" */
+/** e.g. recipeUri("@lararium", "default") → "lar:///ha.ka.ba/lararium/recipes/default" */
 export function recipeUri(root: string, name: string): string {
   // Root-aware: a full bag URI (`bags/@x`) passes through; a bare slug or legacy `@slug`
   // normalizes to the bag root, so every call site follows the bags/@ move untouched.
@@ -230,7 +230,7 @@ export function recipeUri(root: string, name: string): string {
   return `${base}/recipes/${name}`;
 }
 
-/** e.g. bagDescriptorUri("lar:///ha.ka.ba/@lararium") → "lar:///ha.ka.ba/@lararium/descriptor" */
+/** e.g. bagDescriptorUri("lar:///ha.ka.ba/bags/@lararium") → "lar:///ha.ka.ba/lararium/descriptor" */
 export function bagDescriptorUri(bagId: string): string {
   return `${bagId}/descriptor`;
 }
@@ -319,7 +319,7 @@ export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_BAG_ID}/delegation/self
 // One fingerprint produces THREE bindings (@personal, @draft, @working) that
 // share a lifecycle. The binding tiddler title is `${PREFIX}/${fingerprintHex}`;
 // its `text` carries the bound URL.
-// Canon: lar:///ha.ka.ba/@lararium/api/personal-slot#core-claim
+// Canon: lar:///ha.ka.ba/lararium/api/personal-slot#core-claim
 export const PERSONAL_BINDINGS_PREFIX = `${PERSONA_BAG_ID}/personal-bindings`;
 export const DRAFT_BINDINGS_PREFIX    = `${PERSONA_BAG_ID}/draft-bindings`;
 // @working binds like @personal (PersonaGroup×fingerprint, cross-device) — the
@@ -334,7 +334,7 @@ export const WORKING_BINDINGS_PREFIX  = `${PERSONA_BAG_ID}/working-bindings`;
  * Vessel-wide system bag URIs. These exist once per vessel and serve all wikis.
  *
  * Per-wiki recipe slots (`@temp`, `@draft`, `@<wiki-slug>`, library bags) live
- * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/@<name>
+ * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/bags/@<name>
  * namespace. Structural slots arrive as typed IslandGrants on the manifest;
  * @lares rides the @lararium doc's well-known tiddlers; library bags resolve
  * island-side from @catalog.

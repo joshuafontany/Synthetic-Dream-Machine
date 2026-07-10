@@ -238,7 +238,7 @@ readonly nonceBurnSet?:      string;  // space-separated seen nonces (anti-repla
 ```typescript
 interface NexusTrustTiddler {
   readonly kind:          "nexus-trust";
-  readonly nexusId:       string;       // lar:///ha.ka.ba/@nexus/{pubkey}
+  readonly nexusId:       string;       // lar:///ha.ka.ba/bags/@nexus/{pubkey}
   readonly trustLevel:    "ally" | "neutral" | "hostile" | "unknown";
   readonly since:          string;      // ISO 8601
   readonly treatyRef?:    string;       // AutomergeUrl of treaty doc

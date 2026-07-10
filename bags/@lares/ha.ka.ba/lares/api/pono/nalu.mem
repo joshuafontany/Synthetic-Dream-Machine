@@ -1,0 +1,288 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/nalu >>
+```toml iam
+cacheable   = true
+file-path   = "bags/@lares/api/pono/nalu.mem"
+l-space     = "stable"
+mana        = 18
+manao       = 17
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ in-wiki nalu engine; yin-collapse law"
+status-date = "2026-05-30"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/lares/api/pono/nalu"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Nalu — The Changeset Wave
+
+*nalu* — Hawaiian: wave, surf; the wave-form that carries energy across distance.
+A nalu does not carry one molecule of water — it carries the entire shaped movement
+of the sea. The wave arrives as one coherent thing, composed of many.
+
+The nalu is the changeset delivery pulse — the moment when scattered writes become
+one consistent observed state delivered to all observers atomically. It is the
+architectural invariant below the grammar layer. Operators do not emit nalu; the
+engine delivers it.
+
+**Source authority:** Talk Story session 2026-05-15; Book of Verse ch. 14;
+TW5 SyncAdaptor contract; Elm Architecture (Czaplicki 2012); UEFN SceneGraph Beta.
+
+<<~/ahu >>
+
+<<~ ahu #the-wave-shape >>
+
+## The Wave Shape — Three Implementations, One Pattern
+
+The nalu appears as the same architectural shape in three layers of the Lararium stack:
+
+```
+TW5 layer:
+  Multiple wiki.addTiddler() calls    ← scattered writes accumulate
+  wiki.enqueueTiddlerEvent(title) ×N  ← change signals queued
+  wiki.nextTick(callback)             ← batch boundary: JS call stack empties
+  refresh(changedTiddlers)            ← WAVE ARRIVES: all widgets see same state
+
+Verse / UEFN SceneGraph layer:
+  Devices fire events, state mutates  ← scattered writes accumulate
+  Engine batches between frames       ← batch boundary: simulation tick
+  OnSimulate(StagedUpdates)<suspends> ← WAVE ARRIVES: all components see same updates
+
+Lararium nalu engine (in-wiki TW5 startup module):
+  CRDT merge patches arrive           ← scattered writes (from peers, from CRDT ops)
+  AutomergeDocStore → MemeProvider → IslandAdaptor → enqueueNalu(change) × N
+  rAF / setTimeout frame boundary     ← batch boundary: unified queue across ALL bags
+  wiki.transact(apply batch)          ← WAVE ARRIVES: one transact per frame, one nalu
+```
+
+**Unified-nalu law:** the in-wiki nalu engine collects changes from every CRDT bag into
+one shared queue and drains the lot in ONE `wiki.transact()` per frame. Prior art
+(Vue 3 scheduler, MobX `transaction`, Yjs `transact`, Solid `batch`, React 18 automatic
+batching, S.js tick, the DREAM glitch-freedom paper) all converge on this shape: one
+boundary per tick across heterogeneous sources beats N boundaries with the cascade-refresh
++ FRP-glitch anti-pattern. Our widget filter is O(1) hash-lookup, so the cost scales with
+*changed* hashes, not bag count — no fan-out objection applies.
+
+**A second nalu instance — local capture** (2026-06-25): the same collect-then-flush
+shape drives forward-facing capture, in a SEPARATE local **non-federated** worker-VM.
+Producers (parallel sessions · worker swarms · Codex/Claude/Copilot) enqueue
+born-annotated records into one unified queue; the **server tick** (the daemon's 20 Hz
+`setInterval` lar-event-bus loop — the `LarTickCounter`, server-side where the palace
+lives) crests, backpressure-gated; one drain files the batch to the mempalace web2
+sidecar via the RFC-002 source-adapter. Two nalu engines, one pattern, **two cadences**:
+the **federated** in-wiki nalu crests on `requestAnimationFrame` (CRDT waves → the widget
+shore); the **local capture** nalu crests on the server tick (CAPTURE waves → the palace
+— lar:///ha.ka.ba/lararium/api/capture-annotation-model#forward-facing-nalu). Do
+not conflate their boundaries: rAF rides the federated/browser engine, the 20 Hz server
+tick rides the local/daemon engine.
+
+**The capture nalu folds into @daemon as an idempotent cap** (2026-06-26): no longer a bespoke
+main-thread-fed worker_thread, nor even a standalone island — the `#has capture` cap rides the
+**@daemon** (the bound-operator's vessel-only worker, severed from federation). Every @daemon
+CARRIES the cap (tending the operator's session-capture is a daemon duty); its sink (the
+`mine --source ndjson` flush) and feed (the producers) may be unwired, and that inert state is a
+valid resting point — `role = capability ≠ platform`, the cap distinct so the FLOW capture never
+gates the daemon's AUTHORITY dispatch (the master cut holds at the cap seam). The main thread
+carries no data-plane. And every gate **breathes**: the threshold self-regulates per family —
+accumulate shrinks its batch depth under load, the variable-cost reconcile coalesce GROWS its
+window, the display coalesce stays frame-pinned (the projection-nalu #servo + #cells law: role =
+physics ≠ uniformity).
+
+**The home split (2026-07-03):** the **federated in-wiki nalu** (rAF-crested, CRDT waves → the widget
+shore) and the **CRDT⟷TW5 projection-nalu** stay **sovereign TS** — a first-class TS home, where much of
+the projection tech lives. The **capture / stream nalu-gate** re-homes **py-side**: the stream sensorium's
+gate runs in py/R per-stream, and the TS coordinator drives it — feeding the py gate, consuming its crests.
+The wave shape holds identically across the TS/py membrane — collect-then-flush on either bank, the
+substrate the water, the nalu the pattern.
+
+**The invariant:** The nalu is not one tiddler change. It is the atomic delivery
+of a *batch* of changes to all observers simultaneously. Every observer — every
+widget, every reaction handler — receives the same `changedTiddlers` set in the
+same synchronous execution context. No observer sees a partial state.
+
+<<~/ahu >>
+
+<<~ ahu #below-the-grammar >>
+
+## Below the Grammar Layer
+
+The nalu is **not** a sigil the operator emits. It is what the engine delivers.
+
+```
+Grammar layer (above nalu):
+  <<~ lele lar:///target >>    ← sigil declares intent
+  <<~ hui >>                   ← sigil declares sync shape
+  <<~ kukali trigger >>        ← sigil declares suspension
+
+Nalu layer (below grammar):
+  refresh(changedTiddlers)     ← engine delivers consistent state
+  OnSimulate(StagedUpdates)    ← engine delivers consistent state
+  [no sigil; no operator action; the engine acts]
+```
+
+The sigils in the grammar layer express *what should happen* — relationships,
+concurrency shapes, reactions. The nalu is *when consistent state arrives* — the
+moment all of those relationships become observable.
+
+**The `\tick` sigil (when it lands)** will live at the grammar layer — it will be
+a device lifecycle declaration that says "run this procedure every nalu." The nalu
+itself has no sigil; the `\tick` sigil hooks into the nalu.
+
+<<~/ahu >>
+
+<<~ ahu #yin-collapse-law >>
+
+## Yin-Collapse Law
+
+**Law:** The TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.
+The TS layer is the minimal membrane around it — only what TW5 cannot do from inside.
+
+**Landed architecture (2026-05-30):**
+
+```
+┌─────────────────────────────────────────────────────┐
+│  TW5: $tw.wiki             ← primary reactive engine │
+│  TW5: Widget tree          ← refresh = nalu delivery │
+│  TW5: nalu-engine          ← unified queue + drain   │
+│  TW5: reaction-router      ← routing as startup code │
+│  TW5: SharktoothSigil      ← grammar as tiddlers     │
+│  TW5: Reaction tiddlers    ← bindings as tiddler data│
+├─────────────────────────────────────────────────────┤
+│  TS:  IslandAdaptor        ← membrane: forward + echo│
+│  TS:  AutomergeDocStore    ← Automerge CRDT          │
+│  TS:  CompositeStore       ← recipe layer stack       │
+│  TS:  VesselIslandPool     ← multi-island coordination│
+│  TS:  Keyhive / network    ← crypto + peers          │
+└─────────────────────────────────────────────────────┘
+```
+
+**Inside the wiki (`module-type: startup`):**
+- `nalu-engine` — unified `LarTiddlerChange[]` queue across all bags + frame-aligned drain
+  + one `wiki.transact()` per frame + apply-time echo guard (`$tw.lares.isApplyingNalu`)
+- `reaction-router` — `wiki.addEventListener("change")` listener that fires `tm-verse-event`
+  for `lar:` tiddlers whose papalohe bindings name a listenable
+
+**TS-side membrane (irreducible — TW5 cannot do these):**
+- `AutomergeDocStore` — CRDT, patch subscription, MemeProvider fan-out
+- `IslandAdaptor` — forward `LarTiddlerChange` → `$tw.lares.enqueueNalu`, filter own
+  echoes, resolve cross-bag tombstones, route outbound saveTiddler/deleteTiddler
+- Network / WebRTC / WebSocket — browser/Node APIs
+- Keyhive capabilities — cryptographic operations
+- `VesselIslandPool` — multi-island coordination at the vessel layer
+
+**The prior art validating this collapse:**
+- **Elm Architecture** — one `Model`, one `update` loop, side effects as data (`Cmd`)
+  — the wiki IS the model; MemeSyncAdaptor Cmd produces tiddler writes; TW5 is the runtime
+- **Vue 3 reactive scheduler** — reactive effects queue, flush on nextTick atomically
+  — TW5 `enqueueTiddlerEvent` + `nextTick` + `refresh` is the same pattern
+- **MobX transaction/reaction** — `transaction(() => {})` batches mutations, defers
+  reactions until batch closes — TW5's nalu IS the MobX transaction close event
+
+<<~/ahu >>
+
+<<~ ahu #one-graph >>
+
+## One Graph, Not Two
+
+The causal islands are bags. Bags stack via TW5 recipe. The TW5 wiki is the
+unified logical graph. CRDT provides per-bag physical federation.
+
+```
+One wiki graph (logical):
+  TW5 recipe = [bag-A, bag-B, bag-C, ...]
+  $tw.wiki sees all tiddlers from all bags as one namespace
+  filter queries span all bags
+  refresh(changedTiddlers) fires once for changes from any bag
+
+Per-bag physical federation (Automerge):
+  Each bag = one Automerge document
+  CRDT merges happen per-document
+  MemeSyncAdaptor bridges each bag's CRDT state → TW5 wiki tiddlers
+  Nalu fires when adaptor flushes a batch of tiddler writes
+```
+
+**NOT two parallel reactive engines.** The CRDT layer is the distributed persistent
+store. TW5 is the live reactive view. The IslandAdaptor + nalu-engine boundary
+translates CRDT patch events into one batched `wiki.transact()` per frame.
+
+```
+CRDT (the sea)
+  → AutomergeDocStore / MemeProvider (the wind shaping water)
+    → IslandAdaptor.onUriChanged (filter + cross-bag resolution)
+      → $tw.lares.enqueueNalu(change) × N (the swell builds across bags)
+        → rAF / setTimeout frame boundary (the crest forms)
+          → wiki.transact(apply batch) (the wave arrives on shore — one nalu)
+```
+
+The shore is the widget tree. One shore receives one wave per frame from all bags.
+
+<<~/ahu >>
+
+<<~ ahu #tw5-scale-note >>
+
+## TW5 Unfiltered Delivery — Scale Note
+
+TW5's `refresh(changedTiddlers)` delivers to ALL widgets in the tree, unfiltered.
+Each widget checks `changedTiddlers` via hash lookup (O(1) per widget).
+
+**Performance profile:** 10 VMs × 60 CRDT patches/second × 500 widgets =
+300,000 hash lookups/second. This is manageable. Widget render cost (filter
+expressions, wikitext) dominates, not the delivery lookup.
+
+**Optimization path (without TW5 core rewrite):** Widget filter expressions
+that gate on `tiddler.bag === "bagX"` are hash lookups on a tiddler field.
+Fast by default. No per-bag scoping needed in TW5's core refresh cycle.
+
+**When a TW5 core extension becomes necessary:** If VmPool scale reaches
+100+ VMs with 1000+ widgets each, or if CRDT patch frequency exceeds 600/second
+per VM, re-evaluate. The Stranger's concern (unfiltered delivery at scale) is
+real but not yet triggered at current projected scale.
+
+<<~/ahu >>
+
+<<~ ahu #uefn-alignment >>
+
+## UEFN SceneGraph Alignment (Beta, June 2025)
+
+The SceneGraph Beta unifies editor and runtime — all scene elements are now
+Verse-addressable. `OnSimulate(StagedUpdates)<suspends>` is the canonical entry
+point for per-tick logic across the full unified scene.
+
+**Nalu ↔ OnSimulate mapping (confirmed):**
+
+| TW5 concept | Verse concept | Lararium concept |
+|---|---|---|
+| `wiki.enqueueTiddlerEvent()` | Event fires during frame | CRDT patch arrives |
+| `wiki.nextTick(cb)` | End-of-frame barrier | Per-island adaptor flush |
+| `refresh(changedTiddlers)` | `OnSimulate(StagedUpdates)` | **nalu** |
+| `changedTiddlers` map | `StagedUpdates` array | changeset batch |
+| Widget `refresh()` method | Device `OnSimulate()` method | per-observer delivery |
+
+**Coordinate system note (v36.00):** UEFN transitioned to LUF (Left, Up, Forward)
+coordinates. Any `spatial:contains`, `spatial:adjacent`, or `spatial:portal` pranala
+edges encoded with FRU orientation assumptions need migration. See `uefn-scene.md`.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

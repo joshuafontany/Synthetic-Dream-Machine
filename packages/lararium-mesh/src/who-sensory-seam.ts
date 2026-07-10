@@ -14,7 +14,7 @@
  *
  * Platform-blind: rides ./stream-adapter (their contract) + ./immune-read + ./mesh-coupling +
  * ./veil-ladder types. NO node: imports.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/who
+ * Meme: lar:///ha.ka.ba/lararium/mesh/who
  */
 
 import type { StreamAdapter, StreamFrame } from "./stream-adapter.js";

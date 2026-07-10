@@ -26,7 +26,7 @@ on the next pass — the same re-derivation discipline the content leg rides.
 CLOCK PURITY: nothing here reads the host clock; the stores' own sighting registers carry
 the only host-time marks (provenance, never ordering).
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/plane-fanout
+Meme: lar:///ha.ka.ba/lararium/sensorium/plane-fanout
 """
 from __future__ import annotations
 

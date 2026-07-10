@@ -8,7 +8,7 @@ three functor tests live beside it: engine-identity (the two modes share a subsp
 components (Hansen-Ghrist: dim ker L = the constant-sheaf sections), and the naturality square (geometry
 respects a structure-preserving quotient — a functor, not merely a function). Corpus-independent, numpy.
 
-Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
 """
 from __future__ import annotations
 

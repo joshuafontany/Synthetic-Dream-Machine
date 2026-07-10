@@ -1,10 +1,10 @@
 {
-  "title": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext",
+  "title": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
   "name": "memetic-wikitext",
   "description": "Memetic-wikitext sigil grammar + cascade-routed render templates for TiddlyWiki5",
   "author": "lares",
   "version": "0.1.0",
   "core-version": ">=5.4.0",
   "plugin-type": "plugin",
-  "list": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext/readme"
+  "list": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext/readme"
 }

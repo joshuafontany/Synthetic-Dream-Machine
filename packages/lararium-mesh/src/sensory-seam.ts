@@ -10,7 +10,7 @@
  * content-embed plane when the event carries one.
  *
  * Platform-blind: rides ./stream-adapter (their contract) + ./immune-read + ./mesh-coupling.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/who
+ * Meme: lar:///ha.ka.ba/lararium/mesh/who
  */
 
 import type { StreamAdapter, StreamFrame } from "./stream-adapter.js";

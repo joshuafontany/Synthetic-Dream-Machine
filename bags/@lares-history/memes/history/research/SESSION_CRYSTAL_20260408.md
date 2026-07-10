@@ -407,7 +407,7 @@ No structural changes to the format were needed. The protocol survived contact w
 **Micro-trace HUD — Promoted**
 
 Detailed witness text for this HUD promotion now lives at:
-- `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud`
+- `lar:///ha.ka.ba/lares/docs/lararium/signal/hud`
 
 This session crystal now keeps only the minimal historical marker that the promotion occurred.
 
@@ -450,7 +450,7 @@ Operator dispatched an Explore sub-agent to crawl the repo state after the brows
 
 | Decision | Status | Notes |
 |---|---|---|
-| HUD scope ruling / micro-trace promotion witness moved | `~:confidence[CS],[16]` | `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud` |
+| HUD scope ruling / micro-trace promotion witness moved | `~:confidence[CS],[16]` | `lar:///ha.ka.ba/lares/docs/lararium/signal/hud` |
 | Branch protection on main | `~:confidence[C],[18]` | Applied via `gh api`; carries through org transfer |
 | CODEOWNERS architecture | `~:confidence[CS],[16]` | Covers new top-level dir structure |
 | Work branches backed up | `~:confidence[C],[18]` | 13 branches on origin; will survive transfer |

@@ -1,6 +1,6 @@
 /**
  * constructicon-basis — P0 of the living-grammar form-layer (the discrete plane).
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  *
  * The two-planes form-capture rides a DISCRETE constructicon (the canonical
  * score — the grammar-SEED / spec / axes) ⋈ a CONTINUOUS fuzzy-membership

@@ -18,7 +18,7 @@
  *     FLOW-map + the read-face that serves it. NO wiki, NO pool. The @daemon STAYS (the immune core
  *     lives in both stacks); its registerBags simply omits the absent user-wiki bags — the decouple.
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
  */
 
 import type { Server } from "node:http";

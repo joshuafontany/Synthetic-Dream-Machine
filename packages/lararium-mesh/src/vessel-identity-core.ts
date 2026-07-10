@@ -14,7 +14,7 @@
  * naming, ContactCard custody; browser: IDB store names). The core owns only the
  * shared SHAPE + the control flow — never the platform secrets handling.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/vessel-identity-core
+ * Meme: lar:///ha.ka.ba/lararium/api/vessel-identity-core
  */
 
 import { hexToBytes } from "./crypto.js";

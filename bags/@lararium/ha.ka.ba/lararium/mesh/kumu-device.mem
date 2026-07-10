@@ -1,0 +1,198 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/kumu-device >>
+```toml iam
+cacheable   = true
+file-path   = "bags/@lararium/mesh/kumu-device.mem"
+l-space     = "lararium"
+mana        = 17
+manao       = 17
+manaoio     = 16
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "type-level device contract: KumuDeviceSpec, KumuListenable, KumuSubscribable, KumuInstanceRef — the @editable boundary for kumu devices; spec derives from pranala edges, not TS class hierarchy"
+source-file = "packages/lararium-mesh/src/kumu-device.ts"
+status-date = "2026-05-28"
+tags        = ["api/pono/meme"]
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/lararium/mesh/kumu-device"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Kumu Device Spec
+
+Type-level device contract for kumu devices. Derives from pranala edges.
+**Spec layer only — no runtime dispatch overhead.** Runtime derives bindings from the same
+pranala tiddler edges via `extractReactionBindings`.
+
+**No separate registration step.** Adding a kumu type means authoring a type meme with
+`reaction:listenable` and `reaction:subscribable` edges. The spec derives at parse time.
+
+**Verse alignment:** A kumu device meme is a Lararium `creative_device` equivalent.
+`@editable` properties = ahu slot URIs. OUTPUT pins = `KumuListenable`. INPUT pins = `KumuSubscribable`.
+
+<<~/ahu >>
+
+<<~ ahu #verse-model >>
+
+## Verse 5.6+ Device Model
+
+UEFN Verse 5.6+ uses single-inheritance class composition:
+
+```verse
+my_device := class(creative_device):
+    @editable
+    OnActivated : listenable(agent) = barrier_device.IsActivatedEvent
+
+    @editable
+    TargetUri : string = ""
+
+    Enable(Agent : agent) : void = ...
+```
+
+Lararium maps this directly:
+
+| Verse | Lararium |
+|---|---|
+| `class(creative_device)` | `control:extends` edge → `KumuDeviceSpec.extendsType` |
+| `class(P, I, J)` composition | worn components (`control:has` edges) → `KumuDeviceSpec.componentTypes` |
+| `listenable(T)` field | `KumuListenable` (`verseKind: "listenable"`) |
+| `event(T)` field | `KumuListenable` (`verseKind: "event"`) |
+| public input method | `KumuSubscribable` |
+| `@editable` property | ahu slot URI in `KumuDeviceSpec.slots` |
+| DEB editor wire | `papalohe` pranala edge (instance-level `ReactionBinding`) |
+| `Await(event)<suspends>` | `ReactionGraph.subscribeOnce()` (kukali primitive) |
+| `using { /Path }` | module namespace import — NOT trait composition |
+
+<<~/ahu >>
+
+<<~ ahu #exports >>
+
+## Exports
+
+### `KumuListenable` — OUTPUT event pin
+
+```
+name         — event name (e.g. "OnActivated", "OnDamaged", "OnReset")
+description? — human description
+verseKind?   — "listenable" (awaitable + subscribable) | "event" (signalable + awaitable only)
+payloadType? — Verse type string (e.g. "agent", "int"); absent = void
+```
+
+`verseKind` distinguishes:
+- **`listenable`** — engine-vended; supports `Subscribe()` (persistent multi-consumer). The common case for built-in UEFN device events.
+- **`event`** — user-instantiated (`event(T){}`); supports `Await()` + `Signal()` only. No `Subscribe()`. Fire-once semantics.
+
+When absent: treat as `"listenable"`.
+
+Declared via `reaction:listenable` pranala edges on the kumu type meme.
+
+---
+
+### `KumuSubscribable` — INPUT function pin
+
+```
+name         — handler name (e.g. "Enable", "Disable", "SetDamage")
+description? — human description
+payloadType? — Verse parameter type matching the connected listenable's payload
+effects?     — Verse effect specifiers as string array (e.g. ["suspends"], ["decides", "transacts"])
+```
+
+**`effects` field:** Space-separated Verse specifiers stored as metadata. Not interpreted in TS — available for canvas authoring tools and code generation. Verse semantics:
+- `suspends` — function may yield the calling fiber; analogous to TypeScript `async`
+- `decides` — function participates in branch/race/rush resolution
+- `transacts` — function participates in atomic transaction grouping
+
+Declared via `reaction:subscribable` pranala edges on the kumu type meme.
+
+---
+
+### `KumuDeviceSpec` — type-level device description
+
+Derives from the type meme's pranala edge list, not from a TS class hierarchy.
+
+```
+typeUri          — canonical type URI (no fragment)
+listenables      — OUTPUT pins (reaction:listenable edges)
+subscribables    — INPUT pins (reaction:subscribable edges)
+slots            — ahu slot URIs (@editable analogue; caller supplies)
+extendsType?     — single parent class URI (control:extends edge; Verse single inheritance)
+componentTypes   — worn component URIs (control:has edges; Verse class(...) composition, no privileged is-a parent)
+```
+
+**Three semantic layers — do not conflate:**
+
+1. **Ahu-slot tree** (document structure) — `fragment-parent` + `slot` tiddler fields. One `.md` decomposes into root + N slot fragment tiddlers. NOT a pranala edge.
+
+2. **`control:extends`** (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
+
+3. **`control:has`** (N edges) — Verse class(...) composition as worn components. Maps to `componentTypes`. N edges allowed.
+
+---
+
+### `KumuInstanceRef` — runtime instance address
+
+```
+typeUri       — type meme URI
+nameFragment  — user-selected friendly name (human label)
+uuidFragment  — crypto.randomUUID() stable wiring address
+```
+
+Both fragments produce tiddler title URIs:
+```
+lar:///type-path#nameFragment   — human-readable wiki-local label
+lar:///type-path#uuidFragment   — stable UUID address for papalohe wiring
+```
+
+### `kumuInstanceUris(ref) → { named, uuid }`
+
+Derives both tiddler URIs from a `KumuInstanceRef`.
+
+---
+
+### `kumuDeviceSpecFromEdges(typeUri, edges, slots?) → KumuDeviceSpec`
+
+Derives a `KumuDeviceSpec` from a flat edge list (pass `parseMemeEdges(typeUri, text)` directly).
+
+Selection rules:
+- `reaction:listenable` edges with `fromUri === typeUri` → `listenables`
+- `reaction:subscribable` edges with `fromUri === typeUri` → `subscribables`
+- `control:extends` edge → `extendsType`
+- `control:implements` edges → `implementsTypes`
+- Roles `observes`, `throttles`, `debounces` — not reflected in spec (future: modifier semantics)
+
+<<!/ahu >>
+
+<<~ ahu #reaction-engine-removal >>
+
+## ReactionEngine Removal
+
+`ReactionEngine` (TS class, inline dispatch) was removed in the yin-collapse sprint (2026-05-15).
+
+The dispatch surface it owned collapsed into:
+- `reaction-router.ts` TW5 startup module — nalu-driven dispatch (production path)
+- `ReactionGraph` in `reaction-graph.ts` — routing table and test dispatch surface
+
+No TS overlay engine runs beside TW5. The wiki IS the engine. The nalu IS the tick.
+See: `lar:///ha.ka.ba/lares/api/pono/nalu#yin-collapse-law`
+
+<<!/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-graph >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

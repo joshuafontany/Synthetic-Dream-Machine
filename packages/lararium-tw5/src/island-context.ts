@@ -13,7 +13,7 @@
  * Every TW5Engine lives inside a sovereign Worker. Behaviors therefore always
  * receive this context from within a Worker — never from a main-thread caller.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/island-context
+ * Meme: lar:///ha.ka.ba/lararium/tw5/island-context
  */
 
 import type { DocHandle }                        from "@lararium/mesh";
@@ -69,7 +69,7 @@ export interface IslandContext {
  * behaviors own what distinguishes one island type from another.
  *
  * Under the one-recipe model, write routing happens via the in-wiki cascade
- * (`lar:///ha.ka.ba/@lararium/config/bag-paths`) — daemon and wiki behaviors
+ * (`lar:///ha.ka.ba/lararium/config/bag-paths`) — daemon and wiki behaviors
  * share the same recipe shape; their differences live in `onEa` / `onSignal`.
  *
  * - `onEa`     — called after CompositeStore + IslandAdaptor wired, before ea.

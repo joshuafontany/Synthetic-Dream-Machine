@@ -18,7 +18,7 @@
  * fairness settings — parameters here, never baked.
  *
  * Platform-blind: rides ./veil-ladder types only. NO node: imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/the-veil-ladder
+ * Meme: lar:///ha.ka.ba/lares/api/pono/the-veil-ladder
  */
 
 import type { VeilRung } from "./veil-ladder.js";

@@ -19,7 +19,7 @@ from structure_router import _TOKEN_RE, parse_sigils, parse_to_tree, structural_
 # A wrapped mini-meme whose ENVELOPE carries sigil lines only (no black envelope prose),
 # so the black channel equals the #source-text interior modulo blank lines — the case
 # where the dial's lambda=0 must land ON the extraction, not near it.
-_SIGIL_ONLY_WRAPPED = """<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/testbed/dial/mini >>
+_SIGIL_ONLY_WRAPPED = """<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/dial/mini >>
 
 <<~ &#x0002; >>
 
@@ -43,7 +43,7 @@ Another paragraph closes it.
 
 # A wrapped meme with BLACK envelope matter too (a header paragraph outside the
 # source-text block) — the honest gap between lambda=0 and extraction.
-_MIXED_WRAPPED = """<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/testbed/dial/mixed >>
+_MIXED_WRAPPED = """<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/dial/mixed >>
 
 <<~ ahu #meme-header >>
 

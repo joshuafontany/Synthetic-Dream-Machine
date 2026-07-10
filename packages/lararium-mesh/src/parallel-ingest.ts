@@ -26,7 +26,7 @@
  * KAPPA: the SAME runtime serves live capture AND recovery/harvest — recovery is just this run fed
  * from offset 0. One path, one gate, one set of invariants.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/parallel-ingest
+ * Meme: lar:///ha.ka.ba/lararium/mesh/parallel-ingest
  */
 
 import { emptyDrain, stage, commit as commitDrain, watermark, backlog, type DrainLedger } from "./capture-drain.js";

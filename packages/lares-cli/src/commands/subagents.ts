@@ -19,7 +19,7 @@
  *
  *   lares subagents <session-transcript.jsonl> --wing <wing>
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/lararium/api/lar-telemetry
  */
 
 import { existsSync, mkdirSync, readFileSync } from "node:fs";

@@ -26,7 +26,7 @@
  * ITC registry stays the live causal READ; the persisted edge-DAG is the durable home, and the
  * ITC verdict re-projects from those triples via worldline-trajectory's worldlineCausalFromEdges.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  */
 
 import { itcSeed, itcFork, itcEvent, itcJoin, itcCompare, type ItcStamp, type ItcOrder, type ItcEvent } from "./itc.js";

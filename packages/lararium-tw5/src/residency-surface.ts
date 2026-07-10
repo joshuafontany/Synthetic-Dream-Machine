@@ -10,7 +10,7 @@
  * The `origin-bag` field gets written by the nalu engine on every inbound
  * CRDT change (see nalu-engine._toFields). This module reads it back.
  *
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme:    lar:///ha.ka.ba/lararium/api/residency-model
  * Source:  packages/lararium-tw5/src/residency-surface.ts
  */
 

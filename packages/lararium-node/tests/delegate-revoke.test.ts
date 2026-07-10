@@ -11,7 +11,7 @@ import { describe, test, expect } from "vitest";
 import { KeyhiveProvider } from "@lararium/keyhive";
 
 const memStore = () => ({ put: async () => {}, list: async () => [] });
-const BAG = "lar:///ha.ka.ba/@test/delegate-revoke";
+const BAG = "lar:///ha.ka.ba/bags/@test/delegate-revoke";
 
 describe("keyhive delegate → verify → revoke (concap round-trip)", () => {
   test("a revoked delegation loses access; re-revoke fails loud", async () => {

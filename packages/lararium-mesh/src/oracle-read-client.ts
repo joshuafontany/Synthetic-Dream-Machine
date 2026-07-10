@@ -9,7 +9,7 @@
  * Isomorphic: global `fetch` (Node 18+/browser) + `Automerge.load`; a browser vessel
  * reads exactly this way.
  *
- * Canon: lar:///ha.ka.ba/@lares/api/pono/lararium-identity#the-oracle-plane
+ * Canon: lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-oracle-plane
  */
 
 import { load as automergeLoad, type Doc } from "@automerge/automerge";

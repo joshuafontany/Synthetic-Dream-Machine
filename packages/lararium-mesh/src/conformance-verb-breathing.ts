@@ -15,7 +15,7 @@
  * barrel pull. The runner's `expect` arrives injected, so this carries no
  * test-runner dependency.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/conformance-verb-breathing
+ * Meme: lar:///ha.ka.ba/lararium/mesh/conformance-verb-breathing
  */
 
 import type { IslandMsg_Event } from "./island-protocol.js";

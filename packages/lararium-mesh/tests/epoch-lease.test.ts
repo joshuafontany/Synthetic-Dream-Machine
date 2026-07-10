@@ -4,7 +4,7 @@
  * Proves the load-bearing safety property: the effective epoch is the MAX over per-writer
  * slots, so it never decreases — a concurrent lower slot cannot pull a revoked grant back to
  * life (the failure a bare Automerge-LWW scalar would allow). Meme:
- * lar:///ha.ka.ba/@lares/api/pono/convergent-mesh#two-revocation-modes
+ * lar:///ha.ka.ba/lares/api/pono/convergent-mesh#two-revocation-modes
  */
 
 import { describe, test, expect } from "vitest";
@@ -39,7 +39,7 @@ describe("epoch-lease — coordinator-free max-register", () => {
   });
 
   test("slot URIs are prefix-scannable + charset-safe (resource/writer may carry slashes)", () => {
-    const resource = "lar:///ha.ka.ba/@wiki/foo";
+    const resource = "lar:///ha.ka.ba/bags/@wiki/foo";
     const prefix = leaseEpochPrefix(resource);
     const slot = leaseEpochSlotUri(resource, "0xabc/def");
     expect(slot.startsWith(prefix)).toBe(true);   // the verb scans the prefix to gather slots

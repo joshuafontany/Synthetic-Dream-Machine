@@ -380,7 +380,7 @@ lar:///rooms/the-altar-fire
     - operator group: read/sync/propose
     - public group: read visible public layer
 
-lar:///memes/ha.ka.ba/@lares/pono/federated-causal-islands
+lar:///memes/ha.ka.ba/lares/pono/federated-causal-islands
   group members:
     - admin group: write/promote
     - operator group: read/sync/propose
@@ -575,13 +575,13 @@ Promotion changes semantic authority by ceremony.
 Add to the future invariant meme:
 
 ```text
-lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands
+lar:///ha.ka.ba/lares/api/pono/federated-causal-islands
 ```
 
 Add a sibling capability meme:
 
 ```text
-lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities
+lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities
 ```
 
 Add test fixtures:
@@ -665,7 +665,7 @@ Local causality errors can be corrected inside a node. Cross-node causality erro
 Add a short invariant meme:
 
 ```text
-lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands
+lar:///ha.ka.ba/lares/api/pono/federated-causal-islands
 ```
 
 It should state:
@@ -868,8 +868,8 @@ Council task:
        d. pull-vs-read relay semantics
        e. edge-island boot/delta/receipt lifecycle
   3. Propose two invariant memes:
-       lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands
-       lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities
+       lar:///ha.ka.ba/lares/api/pono/federated-causal-islands
+       lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities
   4. Propose fixture tests before code:
        - relay has pull but not read
        - person group contains device keys

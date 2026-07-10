@@ -24,7 +24,7 @@
  * Pure + idempotent (re-running changes nothing). The SOH grammar mirrors the
  * deserializer's namespace extractor (`deserializer.ts`, `/^<<~([^&\n]*)&#x(0001|0011)/`).
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/meme-normalize
+ * Meme: lar:///ha.ka.ba/lararium/tw5/meme-normalize
  */
 
 /** `<<~ [namespace-glyphs]&#x0001;` — capture prefix · current namespace · SOH char. */

@@ -172,7 +172,7 @@ export function GENESIS_PLUGINS_CID(genesisDir?: string): string | undefined {
 // hearthTrueName — the hearth's PUBLIC true-name (the place's public face).
 // ---------------------------------------------------------------------------
 //
-// The hearth wears two faces, never fused (lar:///ha.ka.ba/@lares/api/pono/
+// The hearth wears two faces, never fused (lar:///ha.ka.ba/lares/api/pono/
 // lararium-identity#head). The PUBLIC face = the content-address of the place's
 // GRAMMAR — the engine content-CID ALONE (G-D3), the TW5 core + version, NOT the
 // plugins. Plugins compose per-operator (DreamNet-offered) and ride their own fast
@@ -239,7 +239,7 @@ export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): 
  * @lararium, @lares stand as three separate docs). Mirror
  * of mintLaresIfAbsent: the corpus pointer rides the @oracle system plane (the
  * island doc), never @catalog. The minted doc starts empty; corpus content fills
- * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/@lararium`) and the
+ * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/bags/@lararium`) and the
  * disk mirror carries it back to `bags/@lararium`. Node genesis office only.
  */
 export function mintLarariumIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): string {

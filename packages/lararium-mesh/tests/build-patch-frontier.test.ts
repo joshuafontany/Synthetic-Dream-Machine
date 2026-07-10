@@ -5,7 +5,7 @@
  * component keyed into the run-handle keeps the two forks DISTINCT; a normal spawn is
  * UNAFFECTED (no frontier ⇒ byte-identical to before).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#name (the rhizome fork-cut)
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#name (the rhizome fork-cut)
  */
 
 import { describe, test, expect } from "vitest";

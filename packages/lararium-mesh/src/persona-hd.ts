@@ -1,7 +1,7 @@
 /**
  * persona-hd — SLIP-0010 ed25519 hardened HD key derivation (the persona-side one-seed).
  *
- * Doctrine (canon: lar:///ha.ka.ba/@lares/api/pono/persona-circle):
+ * Doctrine (canon: lar:///ha.ka.ba/lares/api/pono/persona-circle):
  *   The VEILED-USER / persona keys all descend from ONE seed via ed25519
  *   hierarchical derivation, every path segment HARDENED (SLIP-0010). This file
  *   carries ONLY the persona-side derivation. The VESSEL-KEY stays device-minted
@@ -21,7 +21,7 @@
  * canonical hex helpers from ./crypto. NO node: imports. Async to match the
  * repo's ed25519 surface (getPublicKeyAsync / signAsync / verifyAsync).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/persona-hd
+ * Meme: lar:///ha.ka.ba/lararium/api/persona-hd
  */
 
 import { hmac } from "@noble/hashes/hmac.js";

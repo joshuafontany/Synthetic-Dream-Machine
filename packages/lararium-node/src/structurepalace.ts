@@ -20,7 +20,7 @@
  * that lives once in the transport cap. This is the distinguishing op-surface; the form
  * store #has a different one over the SAME transport (the sidecar 2-shapes lesson, carried up).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 import {

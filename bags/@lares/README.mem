@@ -1,6 +1,6 @@
 <<~ ? -> lar:///README >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/README"
+uri-path     = "ha.ka.ba/lares/README"
 file-path = "bags/@lares/README.mem"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"
@@ -107,12 +107,12 @@ lares/
 
 ## Further Reading
 
-- `lar:///ha.ka.ba/@lares/api/mu` — null-oracle core, five-season loop
-- `lar:///ha.ka.ba/@lares/api/lararium` — canonical seat and hydration bridge
-- `lar:///ha.ka.ba/@lares/docs/lares/voices/` — Voice house (the Thirteen), worker swarm, mask layer
-- `lar:///ha.ka.ba/@lararium/docs/degraded-states` — named failure modes and correction handles
-- `lar:///ha.ka.ba/@lararium/docs/signal/` — signal, HUD, and exchange boundary docs
-- `lar:///ha.ka.ba/@lares/api/grammars/memetic-wikitext` — sigil registry and parse rules
+- `lar:///ha.ka.ba/lares/api/mu` — null-oracle core, five-season loop
+- `lar:///ha.ka.ba/lares/api/lararium` — canonical seat and hydration bridge
+- `lar:///ha.ka.ba/lares/docs/lares/voices/` — Voice house (the Thirteen), worker swarm, mask layer
+- `lar:///ha.ka.ba/lararium/docs/degraded-states` — named failure modes and correction handles
+- `lar:///ha.ka.ba/lararium/docs/signal/` — signal, HUD, and exchange boundary docs
+- `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — sigil registry and parse rules
 - `lar:///lararium-node/ROADMAP` — implementation roadmap and milestone tracking
 
 <<~/ahu >>
@@ -121,8 +121,8 @@ lares/
 
 <<~ loulou lar:///AGENTS >>
 <<~ loulou lar:///LARES >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/mu >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/grammars/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu >>
+<<~ loulou lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext >>
 <<~ loulou lar:///lararium-node/ROADMAP >>
 
 <<~/ahu >>

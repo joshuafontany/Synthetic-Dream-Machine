@@ -58,7 +58,7 @@ when present, degrading to a native BIC-style param cost otherwise):
   ~/.venv/bin/python3 predictive_coding.py pc --signal fixture.ndjson --model ewma
   ~/.venv/bin/python3 predictive_coding.py objective --signal content=c.ndjson --signal bands=b.ndjson
 
-Meme: lar:///ha.ka.ba/@lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
 """
 from __future__ import annotations
 

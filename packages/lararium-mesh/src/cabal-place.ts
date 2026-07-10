@@ -3,7 +3,7 @@
  * virtual PLACE: named-not-ruled (content-addressed), LIVED by its own
  * epoch-lease, DISSOLVED by cooling to anu when the members stop feeding it.
  *
- * Canon: lar:///ha.ka.ba/@lares/api/pono/cabal-place — "a hearth beside, not a
+ * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-place — "a hearth beside, not a
  * category above." A group is not a container you are IN (a noun, a
  * membership-list needing a root admitter) but a thing you continuously DO (a
  * verb): members do not BELONG to the cabal, they MAINTAIN it. The place is
@@ -36,7 +36,7 @@
  *
  * Platform-blind: rides ./epoch-lease + ./bag-residency only. NO node: imports.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { leaseEpochSlotUri } from "./epoch-lease.js";

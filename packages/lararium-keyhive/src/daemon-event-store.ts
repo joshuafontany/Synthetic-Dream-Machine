@@ -4,7 +4,7 @@
  * Implements the EventStore interface against a CompositeStore writable layer
  * (the daemon VM's composite). Each Keyhive event becomes one tiddler:
  *
- *   title:    lar:///ha.ka.ba/@daemon/cap/<eventHash>
+ *   title:    lar:///ha.ka.ba/bags/@daemon/cap/<eventHash>
  *   tag:      lar:///ha.ka.ba/tags/cap-event (sub-tags by variant: .../prekey, .../cgka,
  *             .../delegation, .../revocation)
  *   fields:   variant, hash, bytes-len, is-delegated, is-revoked

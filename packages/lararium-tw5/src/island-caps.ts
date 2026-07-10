@@ -1,5 +1,5 @@
 /**
- * island-caps — the RUNTIME twin of the has-stack law (lar:///ha.ka.ba/@lares/api/pono/has-stack).
+ * island-caps — the RUNTIME twin of the has-stack law (lar:///ha.ka.ba/lares/api/pono/has-stack).
  *
  * has-stack models a DATA entity as nameless: a carrier tiddler whose `tags` are a stack of
  * component memes. This models a RUNTIME entity the same way — a sovereign **causal island** is a
@@ -19,7 +19,7 @@
  *   - onSignal — first cap to CLAIM a message wins (returns true); order = stack order.
  *   - onHooAnu — teardown: LIFO cleanups first (awaited), then each cap's onHooAnu.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/island-caps
+ * Meme: lar:///ha.ka.ba/lararium/tw5/island-caps
  */
 
 import type { IslandBehavior, IslandContext } from "./island-context.js";

@@ -43,7 +43,7 @@ Usage (the mempalace venv):
       [--rungs 28] [--arl-hi 200] [--arl-lo 1.6] [--trials 60] [--alpha-sig 0.05] \
       [--seed 333073] [--out <dir>]
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/run-projector
+Meme: lar:///ha.ka.ba/lararium/sensorium/run-projector
 """
 from __future__ import annotations
 

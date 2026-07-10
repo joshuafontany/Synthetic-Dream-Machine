@@ -15,7 +15,7 @@
  * If a captor can still reach the fork, fork-as-exit does not hold — surface it.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/fork-place-lifecycle.ts
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";

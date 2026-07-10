@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/filters/toml-field
+title: lar:///ha.ka.ba/lararium/tw5/filters/toml-field
 type: application/javascript
 module-type: filteroperator
 \*/

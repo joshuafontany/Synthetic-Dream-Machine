@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/md-file-router
+title: lar:///ha.ka.ba/lararium/tw5/modules/md-file-router
 type: application/javascript
 module-type: startup
 \*/

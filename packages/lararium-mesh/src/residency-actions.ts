@@ -28,7 +28,7 @@
  *   prior mesh identity). CLEAR / DROP operate on whole bags and carry no
  *   changeId.
  *
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme:    lar:///ha.ka.ba/lararium/api/residency-model
  * Source:  packages/lararium-mesh/src/residency-actions.ts
  */
 

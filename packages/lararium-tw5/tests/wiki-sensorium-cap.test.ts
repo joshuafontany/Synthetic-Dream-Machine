@@ -8,7 +8,7 @@
  * unbuilt refusal. This tier ALSO witnesses the node-reachable seams: the content/structure recall
  * tiers, the volatile memo's change-invalidation, and the island-cap signal surface.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
 import { describe, test, expect } from "vitest";
@@ -67,7 +67,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("content and structure tiers read the resolved corpus (title probe · sigil-head probe)", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-tiers", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-tiers", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     try {
       const byTitle = await sense.recall({ text: "canon" });
@@ -83,7 +83,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("the volatile memo dies when the log moves — a write invalidates, the next read re-folds", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-memo", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-memo", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     const origin: ChangeOrigin = { kind: "canon-hydrate", receipt: "memo-test" };
     try {
@@ -100,12 +100,12 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("the island cap claims the three verb signals and posts SENSORIUM_FRAME answers", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-cap", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-cap", GLUE_SEEDS);
     const posted: Array<Record<string, unknown>> = [];
     // a minimal island context — only the seams this cap touches (composite · post · wikiUri).
     const ctx = {
       composite: island,
-      wikiUri: "lar:///ha.ka.ba/@sensorium-cap",
+      wikiUri: "lar:///ha.ka.ba/bags/@sensorium-cap",
       post: (msg: unknown) => { posted.push(msg as Record<string, unknown>); },
     } as unknown as IslandContext;
 

@@ -6,7 +6,7 @@
  * the startup publishes them on `$tw.lares`, and the daemon-behavior channel round-trips a compare +
  * a trajectory request through those in-VM fns. Graceful when the VM is cold (the plugin-absent path).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  */
 
 import { describe, test, expect, afterEach } from "vitest";

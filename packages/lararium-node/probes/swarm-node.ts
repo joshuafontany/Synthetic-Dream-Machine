@@ -16,7 +16,7 @@
  * for the persistent file channel AND the ephemeral WS channel (a late/reconnecting joiner
  * catches a later invite). file/POST first; the WS relay-service is the strangler-fig swap.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { writeFileSync } from "node:fs";

@@ -5,7 +5,7 @@
  * graph code behind the causal-island boundary, upstream-tracked; NO LLM (the graph STORE — triple
  * EXTRACTION that fills it is greenfield, optionally LLM-assisted).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { resolveKgSpawn } from "@lararium/mempalace";

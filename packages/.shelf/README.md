@@ -1,6 +1,6 @@
 # `.shelf` — stale-but-kept planning torches
 
-These planning torches steered earlier sprints and now read stale. They rest here rather than burn — move-not-delete, the way `anu` cools a memory. The **live** dev torch sits at `bags/@lares/ha.ka.ba/@lares/docs/lares/handoff.md`; the **live** sprint board sits at `packages/SPRINT-01-GENESIS-MESH.md`.
+These planning torches steered earlier sprints and now read stale. They rest here rather than burn — move-not-delete, the way `anu` cools a memory. The **live** dev torch sits at `bags/@lares/ha.ka.ba/lares/docs/lares/handoff.md`; the **live** sprint board sits at `packages/SPRINT-01-GENESIS-MESH.md`.
 
 Shelved 2026-06-24 when the `packages/` root cleared for the genesis + federated-mesh sprint.
 

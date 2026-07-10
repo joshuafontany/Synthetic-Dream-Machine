@@ -11,7 +11,7 @@
  * needs `entities` metadata; search needs documents) — but the stack COMPOSES on every palace.
  * The meta-model cap is palace-LESS (a process-wide encoder), so it is NOT per-palace here.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { makeContentPalace, type ContentPalace, type ContentPalaceOptions } from "./content-palace.js";

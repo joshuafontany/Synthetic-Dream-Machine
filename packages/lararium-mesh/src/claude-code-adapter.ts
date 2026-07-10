@@ -19,7 +19,7 @@
  * Uses `node:crypto` for the default content-hasher and `node:fs` only in {@link discoverClaudeFiles}
  * (the fork-family grouping reads each file's root). The parse + adapter object are pure over records.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/rewind-adapter
+ * Meme: lar:///ha.ka.ba/lararium/api/rewind-adapter
  */
 
 import { createHash } from "node:crypto";

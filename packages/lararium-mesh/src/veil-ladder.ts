@@ -6,9 +6,9 @@
  * linkability clock. The pledge PROMOTES a lived anon into a published Handle on a
  * slashable voucher-edge (veil-vouch).
  *
- * Canon: lar:///ha.ka.ba/@lares/api/pono/the-veil-ladder.
+ * Canon: lar:///ha.ka.ba/lares/api/pono/the-veil-ladder.
  * Platform-blind: rides ./veil-vouch types + a fresh key from ./veil-crossing. NO node:.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/the-veil-ladder
+ * Meme: lar:///ha.ka.ba/lares/api/pono/the-veil-ladder
  */
 
 import type { Voucher } from "./veil-vouch.js";

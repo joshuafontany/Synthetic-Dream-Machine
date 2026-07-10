@@ -5,7 +5,7 @@
  *
  * Checks:
  *   1. Every sigil-*.tid has a lar-pono-uri field.
- *   2. The lar-pono-uri target file exists at bags/@lares/ha.ka.ba/@lares/api/pono/{slug}.md.
+ *   2. The lar-pono-uri target file exists at bags/@lares/ha.ka.ba/lares/api/pono/{slug}.md.
  *   3. Every sigil pono spec has a <<~ pranala #tiddler ? -> …/sigil-* … >> edge.
  *
  * Exit 1 if any check fails (for CI integration).
@@ -16,7 +16,7 @@ import { join, basename } from "path";
 
 const ROOT = join(import.meta.dirname, "../../..");
 const TIDDLERS_DIR = join(ROOT, "packages/lararium-tw5/tiddlers");
-const PONO_DIR = join(ROOT, "bags/@lares/ha.ka.ba/@lares/api/pono");
+const PONO_DIR = join(ROOT, "bags/@lares/ha.ka.ba/lares/api/pono");
 
 interface CheckResult {
   tiddler: string;
@@ -34,7 +34,7 @@ function parseFrontmatterField(content: string, field: string): string | null {
 }
 
 function ponoSlugFromUri(uri: string): string {
-  // lar:///ha.ka.ba/@lares/api/pono/slug → slug
+  // lar:///ha.ka.ba/lares/api/pono/slug → slug
   return uri.split("/").pop()!;
 }
 
@@ -45,7 +45,7 @@ function ponoFilePath(slug: string): string {
 function hasTiddlerEdge(ponoContent: string, tiddlerName: string): boolean {
   // Matches any <<~ pranala #tiddler* ? -> .../sigil-NAME … >> edge.
   // The slot name may be #tiddler (canonical) or #tiddler-sigil-X (alias entries).
-  const tiddlerUri = `lar:///ha.ka.ba/@lararium/tw5/tiddlers/${tiddlerName}`;
+  const tiddlerUri = `lar:///ha.ka.ba/lararium/tw5/tiddlers/${tiddlerName}`;
   const escapedUri = tiddlerUri.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const re = new RegExp(`<<~\\s*pranala\\s+#tiddler[^\\s>]*\\s+\\?\\s*->\\s*${escapedUri}`);
   return re.test(ponoContent);

@@ -1,0 +1,335 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/glyph-codeset >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/glyph-codeset.mem"
+l-space   = "stable"
+mana      = 17
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = true
+role      = "nine-category glyph codeset: Unicode ranges, semantic roles, authority matrix, UCAN attenuation, parsing pseudocode, validation rules, three-layer encoding"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lares/docs/pono/glyph-codeset"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Glyph Codeset — Nine Categories
+
+Canonical reference for the memetic wikitext glyph set system.
+Nine non-overlapping Unicode ranges. Category identified by range check — O(1) per glyph.
+Source: `memetic-wikitext-v3.md` (Glyph Codeset v0.3), consumed 2026-05-16.
+
+The glyph set inside a sigil's opening bracket answers: WHO, WHAT PROTOCOL, WHAT PROPERTIES, WHAT SCALE, WHAT DOMAIN, WHAT RELATIONS, WHAT DIRECTION. The address path carries BEARING. The Chronometer fragment answers WHEN. Three layers, three symbol sets, no collision.
+
+<<~/ahu >>
+
+<<~ ahu #category-table >>
+
+## Nine Categories
+
+```
+CAT  RANGE              BLOCK                    ROLE
+───  ─────              ─────                    ────
+ 1   &#0000;–&#0031;    C0 Controls              PROTOCOL
+ 2   &#0768;–&#0879;    Combining Diacriticals   AUXILIARY
+ 3   &#2304;–&#2431;    Devanagari               NAMESPACE
+ 4   &#8304;–&#8334;    Superscripts/Subscripts  SCALE
+ 5   &#8592;–&#8703;    Arrows                   DIRECTION
+ 6   &#8704;–&#8959;    Mathematical Operators   RELATION
+ 7   &#8960;–&#9215;    Miscellaneous Technical  TECHNICAL
+ 8   &#9472;–&#9631;    Box Drawing + Blocks     STRUCTURE
+ 9   &#9632;–&#9983;    Geometric + Misc Symbols SEMANTIC
+```
+
+<<~/ahu >>
+
+<<~ ahu #cat1-protocol >>
+
+## Category 1 — PROTOCOL (C0 Controls: &#0000;–&#0031;)
+
+Transmission lifecycle, handshake, flow control, boundaries.
+
+```
+Lifecycle:   SOH(&#0001;) STX(&#0002;) ETX(&#0003;) EOT(&#0004;)
+             heading      body-open    body-close   trans-end
+
+Handshake:   ENQ(&#0005;) ACK(&#0006;)              NAK(&#0021;)
+             probe        accept                    reject
+
+Flow:        DC1(&#0017;) DC2(&#0018;) DC3(&#0019;) DC4(&#0020;)
+             XON          ctrl-2       XOFF         ctrl-4
+
+Separators:  FS(&#0028;)  GS(&#0029;)  RS(&#0030;)  US(&#0031;)
+             collection   cluster      meme         field
+
+Mode:        SO(&#0014;)  SI(&#0015;)  DLE(&#0016;) ESC(&#0027;)
+             shift-out    shift-in     data-escape  escape
+
+Session:     CAN(&#0024;) EM(&#0025;)  SUB(&#0026;)
+             cancel       end-medium   substitute
+
+Signal:      NUL(&#0000;)              BEL(&#0007;)
+             void/no-op               alert
+```
+
+Validation: ≤1 lifecycle glyph (SOH|STX|ETX|EOT|ENQ|ACK|NAK); separators and mode switches may co-occur.
+
+<<~/ahu >>
+
+<<~ ahu #cat2-auxiliary >>
+
+## Category 2 — AUXILIARY (Combining Diacriticals: &#0768;–&#0879;)
+
+Modifying markers that apply to adjacent content. No limit; contradictory combinations produce a warning.
+
+```
+  ̃ (&#0771;)  Combining Tilde      provisional marker
+  ̊ (&#0778;)  Combining Ring       consecration marker
+  ̣ (&#0803;)  Combining Dot Below  ground/anchor (address-bound)
+  ̈ (&#0776;)  Combining Diaeresis  fork/split (dual reading)
+  ̄ (&#0772;)  Combining Macron     duration/persistence (stateful)
+```
+
+<<~/ahu >>
+
+<<~ ahu #cat3-namespace >>
+
+## Category 3 — NAMESPACE (Devanagari: &#2304;–&#2431;)
+
+Authority tier markers. Combination uses intersection semantics (most restrictive applies).
+
+```
+  ँ (&#2305;)  Chandrabindu   Admin / main stack
+  ं (&#2306;)  Anusvara       Operator / session
+  ः (&#2307;)  Visarga        User / provisional
+  ़ (&#2364;)  Nukta          System / internal
+```
+
+**Authority matrix:**
+
+| Glyph | Tier     | render    | evaluate       | unask  | modify |
+|-------|----------|-----------|----------------|--------|--------|
+| ँ     | Admin    | all       | all            | all    | all    |
+| ं     | Operator | all       | ≤ own consec.  | own    | none   |
+| ः     | User     | ≤ own c.  | none           | none   | none   |
+| ़     | System   | system    | system         | system | system |
+
+<<~/ahu >>
+
+<<~ ahu #cat4-scale >>
+
+## Category 4 — SCALE (Superscripts/Subscripts: &#8304;–&#8334;)
+
+Maps onto the FFZ Chronometer's five scales. ≤1 scale glyph per sigil. See `lar:///ha.ka.ba/lares/docs/pono/law-of-5s` for the full three-projection unification.
+
+```
+  ₀ (&#8320;)  Action scale  (⚡ finest grain)
+  ₁ (&#8321;)  Round scale   (⚔️ tactical)
+  ₂ (&#8322;)  Turn scale    (🔍 operational / meme-native default)
+  ₃ (&#8323;)  Watch scale   (⚙️ strategic / cross-meme)
+  ₄ (&#8324;)  Week scale    (🗺️ broadest arc)
+```
+
+The subscript index matches Chronometer slot position (rightmost=0/Action through leftmost=4/Week).
+
+<<~/ahu >>
+
+<<~ ahu #cat5-direction >>
+
+## Category 5 — DIRECTION (Arrows: &#8592;–&#8703;)
+
+≤1 primary arrow (→←↔↕) per sigil.
+
+```
+  → (&#8594;)  transformation (established in mu prototype)
+  ← (&#8592;)  reverse/return
+  ↔ (&#8596;)  bidirectional / symmetric
+  ↕ (&#8597;)  scale shift (up/down)
+  ⇒ (&#8658;)  implication / entailment
+  ⇔ (&#8660;)  equivalence
+  ↻ (&#8635;)  cycle / loop
+  ↺ (&#8634;)  reverse cycle / unwind
+```
+
+<<~/ahu >>
+
+<<~ ahu #cat6-relation >>
+
+## Category 6 — RELATION (Math Operators: &#8704;–&#8959;)
+
+No limit; compose naturally. The intersection operator (∩) reflects the UCAN glyph attenuation formula directly.
+
+```
+  ∈ (&#8712;)  element of / membership
+  ∉ (&#8713;)  exclusion
+  ⊂ (&#8834;)  subset / containment
+  ⊃ (&#8835;)  superset / contains
+  ∩ (&#8745;)  intersection (glyph set operation)
+  ∪ (&#8746;)  union
+  ∀ (&#8704;)  universal scope
+  ∃ (&#8707;)  existence assertion
+  ∅ (&#8709;)  empty set / void
+  ≡ (&#8801;)  structural equivalence
+  ≈ (&#8776;)  fuzzy equivalence
+```
+
+<<~/ahu >>
+
+<<~ ahu #cat7-technical >>
+
+## Category 7 — TECHNICAL (Miscellaneous Technical: &#8960;–&#9215;)
+
+Context-dependent. No combinatorial limit defined.
+
+```
+  ⌂ (&#8962;)  house / lararium / **lares** entity (agent-node; the syad-sigil entity glyph).
+  ⌘ (&#8984;)  command / operator action
+  ⏎ (&#9166;)  return / yield
+  ⏏ (&#9167;)  eject / disconnect
+```
+
+<<~/ahu >>
+
+<<~ ahu #cat9-semantic >>
+
+## Category 9 — SEMANTIC (Geometric + Misc Symbols: &#9632;–&#9983;)
+
+**Geometric sub-block (state indicators):**
+```
+  ■ (&#9632;)  active/present     (also Act OODA-HA HUD sigil)
+  □ (&#9633;)  inactive/absent
+  ◇ (&#9671;)  decision point     (also Decide OODA-HA HUD sigil)
+  ○ (&#9675;)  open/unresolved    (also Assess OODA-HA HUD sigil)
+  ● (&#9679;)  closed/resolved
+```
+
+**Miscellaneous Symbols sub-block (planetary / geomantic domain markers):**
+```
+  ☉ (&#9737;)  Sun       Fortuna Major/Minor
+  ☽ (&#9789;)  Moon      Populus/Via
+  ♂ (&#9794;)  Mars      Puer/Rubeus
+  ♀ (&#9792;)  Venus     Amissio/Puella
+  ♃ (&#9795;)  Jupiter   Acquisitio/Laetitia
+  ♄ (&#9796;)  Saturn    Carcer/Tristitia
+  ☿ (&#9791;)  Mercury   Albus/Conjunctio
+  ☊ (&#9738;)  Asc.Node  Caput Draconis
+  ☋ (&#9739;)  Desc.Node Cauda Draconis
+```
+
+**Note on HUD sigils:** the FFZ Chronometer HUD sigils (✶◎◇■○) and scale sigils (🗺️⚙️🔍⚔️⚡) sit partly inside and partly outside the &#0000;–&#9999; range. The emoji-style scale sigils sit above U+FFFF. These function as display/HUD elements, not as glyph-set members. Three layers, three symbol sets, no collision:
+- Glyph set: Categories 1–9
+- Chronometer record: its own symbol set (O/Ø/D/A/Å)
+- HUD rendering: emoji
+
+<<~/ahu >>
+
+<<~ ahu #ucan-attenuation >>
+
+## UCAN Attenuation Formula
+
+Inner sigils inherit their frame's glyph set by default. Attenuation applies per category:
+
+```
+effective(inner, frame) = {
+  per category:
+    if inner declares → inner ∩ frame  (intersection)
+    if inner empty    → frame          (full inheritance)
+}
+```
+
+- **Attenuate:** always valid (inner removes capabilities)
+- **Escalate:** never valid (inner cannot add; silently capped)
+- **Empty = inherit:** bare inner sigil gets full frame authority
+
+<<~/ahu >>
+
+<<~ ahu #parsing >>
+
+## Parsing Pseudocode
+
+```
+function categorize(cp):
+  if cp in 0..31:       return PROTOCOL
+  if cp in 768..879:    return AUXILIARY
+  if cp in 2304..2431:  return NAMESPACE
+  if cp in 8304..8334:  return SCALE
+  if cp in 8592..8703:  return DIRECTION
+  if cp in 8704..8959:  return RELATION
+  if cp in 8960..9215:  return TECHNICAL
+  if cp in 9472..9631:  return STRUCTURE
+  if cp in 9632..9983:  return SEMANTIC
+  return UNKNOWN
+
+function parseGlyphSet(stream, offset):
+  glyphs = {cat: Set() for cat in CATEGORIES}
+  while stream[offset] is not whitespace:
+    cp = readCodepoint(stream, offset)
+    cat = categorize(cp)
+    if cat == UNKNOWN: break
+    glyphs[cat].add(cp)
+    offset += codepointLength(cp)
+  return glyphs, offset
+```
+
+**Validation rules per category:**
+```
+PROTOCOL:   ≤1 lifecycle glyph (SOH|STX|ETX|EOT|ENQ|ACK|NAK)
+            separators + mode switches may co-occur
+NAMESPACE:  no limit; intersection semantics
+AUXILIARY:  no limit; contradictory combos → warning
+SCALE:      ≤1 scale glyph (₀|₁|₂|₃|₄)
+DIRECTION:  ≤1 primary arrow (→←↔↕)
+RELATION:   no limit; compose naturally
+TECHNICAL:  context-dependent
+STRUCTURE:  body-internal only
+SEMANTIC:   no limit; multiple domain markers = tag union
+```
+
+**Strictness modes:**
+```
+boot-mode:  strict. Unknown glyphs → error. All memes fully validated.
+run-mode:   permissive. Unknown glyphs → warning, treated as body.
+            Forward-compatible: new glyph types degrade gracefully.
+```
+
+<<~/ahu >>
+
+<<~ ahu #three-layer-encoding >>
+
+## W3C Three-Layer Encoding
+
+```
+LAYER        REPRESENTATION        CONTEXT
+─────        ──────────────        ───────
+Storage      Raw Unicode bytes     Binary storage, internal
+Interchange  HTML NCRs (&#x;)      XML/HTML, web transport
+Display      Control Pictures +    Human-readable views,
+             Unicode symbols       documentation, HUD
+```
+
+Maps onto the meme three-aspect model: Storage = corpus, Interchange = spiritus, Display = anima.
+
+Round-trip fidelity: Storage → Interchange → Storage MUST produce identical bytes.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/law-of-5s >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

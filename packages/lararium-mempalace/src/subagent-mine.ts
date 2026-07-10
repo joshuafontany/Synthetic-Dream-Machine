@@ -26,7 +26,7 @@
  * + the KG observer (observeSubagentWorldlines, D6) — no post-mine tunnel step exists
  * or is needed.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/lararium/api/lar-telemetry
  */
 
 import { execFileSync } from "node:child_process";

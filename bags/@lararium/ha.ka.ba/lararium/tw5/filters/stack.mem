@@ -1,0 +1,48 @@
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/filters/stack >>
+```toml iam
+cacheable  = true
+file-path  = "bags/@lararium/tw5/filters/stack.mem"
+mana       = 14
+module-ref = "lar:///ha.ka.ba/lararium/tw5/filters/stack"
+register   = "Synthesis"
+retain     = true
+role       = "filter operator: the has-stack query surface — stack[] emits qualified component URIs; stack:has[X] filters by holding (per-carrier relative-name qualification)"
+tags       = ["lar:///ha.ka.ba/lares/api/pono/has-stack"]
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lararium/tw5/filters/stack"
+written    = "2026-06-12"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Contract
+
+`stack[]` — emits each input carrier's qualified has-stack URIs, deduped: relative tags qualify against the carrier's OWN bag scope (`root/@bag/version` from its title); `lar:` tags pass through; system and free-form tags ride outside the stack.
+
+`stack:has[X]` — keeps carriers whose stack holds `X`; a `lar:` operand compares directly, a relative operand qualifies against each carrier's own scope. The kernel module gate (`tw5-module-gate`) and the HUD pill layer (`lists/components`) ride this surface — typing = running the query (the has-stack law; the retired `implementors` filter's successor).
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+## Source
+
+Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.ts`); operator shell: `packages/lararium-tw5/src/filters/stack.ts` (packed into the lares plugin).
+
+<<~ pranala #source ? -> packages/lararium-tw5/src/has-stack.ts family:code role:has >>
+<<~ pranala #source-filter ? -> packages/lararium-tw5/src/filters/stack.ts family:code role:has >>
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/filters/edge >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

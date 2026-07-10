@@ -1,7 +1,7 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kau
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: child-slot
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/kau
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/kau
 lar-pattern: <<~\s*kau\s+(#[\w-]+\s+)?([\w][\w.-]*)(?:\s+([^>]*))?\s*>>
 type: text/vnd.tiddlywiki
 
@@ -26,7 +26,7 @@ type: text/vnd.tiddlywiki
 <$set name="_kau-name" filter="[<_kau-after>split[ ]first[]]" emptyValue="">
 <$set name="_kau-props" filter="[<_kau-after>removeprefix<_kau-name>trim[]]" emptyValue="">
 <$let _kau-def={{{ [all[tiddlers+shadows]tag[lar:///ha.ka.ba/tags/kumu]field:kumu-name<_kau-name>first[]else[]] }}}
-      _kau-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/kau-template]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/@lararium/templates/kau/html]] }}}>
+      _kau-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/kau-template]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/lararium/templates/kau/html]] }}}>
 <$set name="kau-name" value=<<_kau-name>>><$set name="kau-def" value=<<_kau-def>>><$set name="kau-props" value=<<_kau-props>>><$set name="kau-frag" value=<<_kau-frag>>>
 <$list filter="[<_kau-frag>!match[]]" variable=ignore>
 <$set name="_kau-instance" filter="[<_kau-frag>!match[]]" value={{{ [<currentTiddler>addsuffix<_kau-frag>] }}} emptyValue=<<currentTiddler>>>
@@ -48,7 +48,7 @@ type: text/vnd.tiddlywiki
 \procedure ~aka~kau(slot:"" uri:"" p1:"")
 <$let _ak-slot={{{ [<slot>!match[]] ~[<p1>] }}}>
 <$let _ak-uri={{{ [<uri>!match[]!regexp[^lar:///unknown]] ~[<_ak-slot>regexp[^lar:]] ~[<currentTiddler>addsuffix<_ak-slot>] }}}
-      _ak-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/aka-template]!is[draft]!has[draft.of]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/@lararium/templates/aka/html]] }}}>
+      _ak-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/aka-template]!is[draft]!has[draft.of]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/lararium/templates/aka/html]] }}}>
 <$tiddler tiddler=<<_ak-uri>>>
 <$transclude $tiddler=<<_ak-template>>/>
 </$tiddler>

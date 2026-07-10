@@ -7,7 +7,7 @@
  * The mirror of node-caps' composeLararium; with this, all three vessel-KINDS (Lararium · Herm ·
  * browser) compose over the one composeVessel, and the wiki-slot tail unifies (no fork of the boot).
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel
  */
 
 import { composeCoreVessel } from "@lararium/tw5";

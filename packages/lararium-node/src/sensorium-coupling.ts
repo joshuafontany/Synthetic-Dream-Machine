@@ -20,7 +20,7 @@
  * (graceful — never fabricated). The comparison stalk is the UNION of the readable children's observed
  * units (the engineered overlap; disjoint peers glue vacuously and the note says so).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cohomological-gate · lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cohomological-gate · lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium
  */
 
 import { existsSync, readFileSync } from "node:fs";

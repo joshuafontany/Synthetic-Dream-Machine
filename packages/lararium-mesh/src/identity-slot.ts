@@ -34,9 +34,9 @@
  *   primitives can't live in the wiki). BUT the identity config (which DID to
  *   use, which OAuth provider, which capability token) MUST be stored as
  *   lar: URI tiddlers so users can inspect and override from within the wiki:
- *     lar:///ha.ka.ba/@lararium/config/identity/did
- *     lar:///ha.ka.ba/@lararium/config/identity/provider
- *     lar:///ha.ka.ba/@catalog
+ *     lar:///ha.ka.ba/lararium/config/identity/did
+ *     lar:///ha.ka.ba/lararium/config/identity/provider
+ *     lar:///ha.ka.ba/bags/@catalog
  *   Reserve $:/ ONLY for TW5 core + TW5 plugins. All Lararium config is lar:.
  *   Tiddlers with lar: URIs serve as the heleuma sync candidates; $:/ tiddlers do not.
  */

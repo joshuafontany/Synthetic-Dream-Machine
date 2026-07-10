@@ -16,7 +16,7 @@
  * GATES — identical whether the operator is new (just founded this boot) or
  * returning.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lararium/vessel-platform#authn-home
+ * Meme: lar:///ha.ka.ba/lares/api/lararium/vessel-platform#authn-home
  */
 
 import { KeyhiveProvider } from "./keyhive-provider.js";

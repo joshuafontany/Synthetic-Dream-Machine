@@ -12,7 +12,7 @@
  * neither (readiness reads local on both sides of the membrane). A watcher is
  * just this gesture fired on a settle instead of on an operator keystroke.
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff
+ * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
  */
 
 import { readFileSync, readdirSync, statSync } from "node:fs";

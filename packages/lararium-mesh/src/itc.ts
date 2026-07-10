@@ -18,7 +18,7 @@
  * causal rides ITC/the edge-DAG, FfzClock stays purely rhythmic). The comparison reads
  * the EVENT trees only (the history); the id trees carry ownership, never order.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  * Standard: Almeida/Baquero/Fonte, "Interval Tree Clocks", OPODIS 2008.
  */
 

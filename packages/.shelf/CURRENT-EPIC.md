@@ -1,6 +1,6 @@
 # Current Epic — Lararium Genesis Artifact + Protocol Stack
 
-> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/@lares/ha.ka.ba/@lares/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
+> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/@lares/ha.ka.ba/lares/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
 
 > Updated: 2026-05-27
 > Branch: feature/lararium-node-4
@@ -410,17 +410,17 @@ That slice gives the architecture a concrete proof point without waiting for the
 
 | Slot | Doc | URI | Role |
 |---|---|---|---|
-| ha | `LarariumDoc` | `lar:///ha.ka.ba/@lararium` | System island — genesis artifact |
-| ka | `CatalogDoc` | `lar:///ha.ka.ba/@catalog` | Corpus/room index |
-| ba | `MemeStoreDoc` | `lar:///ha.ka.ba/@lares` | Personal workspace |
+| ha | `LarariumDoc` | `lar:///ha.ka.ba/bags/@lararium` | System island — genesis artifact |
+| ka | `CatalogDoc` | `lar:///ha.ka.ba/bags/@catalog` | Corpus/room index |
+| ba | `MemeStoreDoc` | `lar:///ha.ka.ba/bags/@lares` | Personal workspace |
 
 ### Social Tiga (ha-ka-ba)
 
 | Slot | Doc | URI | Role |
 |---|---|---|---|
-| ha | `IdentitiesDoc` | `lar:///ha.ka.ba/@identities` | Principal records — device keys, delegation proofs |
-| ka | `CirclesDoc` | `lar:///ha.ka.ba/@circles` | Circles — collective authority, Keyhive capabilities |
-| ba | `SessionsDoc` | `lar:///ha.ka.ba/@sessions` | Session registry + per-session EventLog refs |
+| ha | `IdentitiesDoc` | `lar:///ha.ka.ba/bags/@identities` | Principal records — device keys, delegation proofs |
+| ka | `CirclesDoc` | `lar:///ha.ka.ba/bags/@circles` | Circles — collective authority, Keyhive capabilities |
+| ba | `SessionsDoc` | `lar:///ha.ka.ba/bags/@sessions` | Session registry + per-session EventLog refs |
 
 Dynamic child docs (not root-tiga slots):
 - `SessionEventLog` — one per session, `AutomergeUrl` stored in session tiddler

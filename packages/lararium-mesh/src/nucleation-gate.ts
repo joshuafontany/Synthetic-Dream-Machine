@@ -28,7 +28,7 @@
  * calibration of γ / supersaturation-baseline / thresholds all ride the feed-it-emerges Sink accumulator
  * (the next-phase redesign), never this function.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { softGate } from "./numerics.js";

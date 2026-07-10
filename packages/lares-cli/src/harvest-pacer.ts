@@ -17,7 +17,7 @@
  *
  * Pure math + injected seams (readDepth · rand) — the feeder wires the real WAL reader.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#nalu-flush-hardening
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#nalu-flush-hardening
  */
 
 import { adaptWindow, incommensurablePullMs, type WindowServo } from "@lararium/mesh";

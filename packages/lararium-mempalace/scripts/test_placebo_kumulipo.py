@@ -64,8 +64,8 @@ def test_envelope_survives_verbatim_modulo_namespace():
     for i, (r, f) in enumerate(zip(r_lines, f_lines)):
         if lo <= i < hi:
             continue                                    # the interior babbles
-        assert f == r.replace("ha.ka.ba/@lares/library/hawaii/kumulipo/",
-                              "ha.ka.ba/@lares/testbed/placebo/kumulipo/")
+        assert f == r.replace("ha.ka.ba/lares/library/hawaii/kumulipo/",
+                              "ha.ka.ba/lares/testbed/placebo/kumulipo/")
     # The placebo namespace actually lands (the swap fires, not vacuously).
     assert "testbed/placebo/kumulipo" in fake
     assert "library/hawaii/kumulipo" not in fake

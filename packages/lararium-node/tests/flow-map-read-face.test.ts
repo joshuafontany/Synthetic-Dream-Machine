@@ -3,7 +3,7 @@
  * membrane holds AT THE WIRE: only the coarse public projection crosses; the private territory
  * (vessel-local dial-records) never leaves. Proves serve → pull → verify end-to-end on localhost,
  * and witnesses the additive read-face refactor (the membrane export variant).
- * Canon: lar:///ha.ka.ba/@lararium/mesh/vessel-caps#lares-viales
+ * Canon: lar:///ha.ka.ba/lararium/mesh/vessel-caps#lares-viales
  */
 
 import { describe, test, expect } from "vitest";
@@ -26,9 +26,9 @@ describe("the FLOW-map read-face — a Herm serves the public projection, membra
 
     // a mesh-palace doc: one PUBLIC dial (dreamnet scale, crosses) + one vessel-LOCAL dial (no scale, stays).
     const pub = dialEntryToRecord(
-      { bearing: "lar:///ha.ka.ba/@oracle", verifyingKeyHex: "a".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" }, "test");
+      { bearing: "lar:///ha.ka.ba/bags/@oracle", verifyingKeyHex: "a".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" }, "test");
     const loc = dialEntryToRecord(
-      { bearing: "lar:///ha.ka.ba/@daemon", verifyingKeyHex: "b".repeat(64), endpoint: "ws://local/q" }, "test");
+      { bearing: "lar:///ha.ka.ba/bags/@daemon", verifyingKeyHex: "b".repeat(64), endpoint: "ws://local/q" }, "test");
     const handle = repo.create<MeshPalaceDoc>({
       schemaVersion: "0.1",
       tiddlers: { [pub.tiddler.title]: pub, [loc.tiddler.title]: loc },

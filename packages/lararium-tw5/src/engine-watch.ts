@@ -18,7 +18,7 @@
  *   - authority — deliberately ABSENT (held open until the wiki-mesh lives):
  *                 this watch trusts the @lararium doc's write-capability story.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/engine-watch
+ * Meme: lar:///ha.ka.ba/lararium/tw5/engine-watch
  */
 
 import {

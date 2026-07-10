@@ -13,7 +13,7 @@
  * sub-Pulse OFFSET (an index, not a tick — blocks in one inference share one emission instant).
  * The tick reads the HARNESS transcript's deterministic events, never the rendered grammar
  * (lose the HUD, keep the clock). Address = Theme.Arc.Measure.Beat.Segment[.block],
- * prefix-truncatable. Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock#rhythmic-address
+ * prefix-truncatable. Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address
  */
 
 import { ffzTick, ffzZero, type FfzClock, type FfzLevel, type LarTickCounter } from "./ffz-clock.js";

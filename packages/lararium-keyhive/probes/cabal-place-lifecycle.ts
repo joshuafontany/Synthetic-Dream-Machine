@@ -21,7 +21,7 @@
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/cabal-place-lifecycle.ts
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";

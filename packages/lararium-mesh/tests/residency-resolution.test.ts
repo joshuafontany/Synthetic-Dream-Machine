@@ -6,7 +6,7 @@
  * (listBagsHolding existed pre-sprint; resolveAll/resolveTopmost return
  * (bagId, record) pairs for operator-visible coordinate inspection).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme: lar:///ha.ka.ba/lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";
@@ -23,9 +23,9 @@ import type { LarTiddlerRecord, LarTiddlerStore, ChangeOrigin } from "../src/tid
 // Fixtures
 // ---------------------------------------------------------------------------
 
-const HIGH = "lar:///ha.ka.ba/@high";
-const MID  = "lar:///ha.ka.ba/@mid";
-const LOW  = "lar:///ha.ka.ba/@low";
+const HIGH = "lar:///ha.ka.ba/bags/@high";
+const MID  = "lar:///ha.ka.ba/bags/@mid";
+const LOW  = "lar:///ha.ka.ba/bags/@low";
 
 function rec(title: string, text: string): LarTiddlerRecord {
   return { tiddler: { title, text } };
@@ -290,8 +290,8 @@ class HeadsAwareStore implements LarTiddlerStore {
   async getHeads(): Promise<readonly string[] | null> { return this.heads; }
 }
 
-const BAG_A = "lar:///ha.ka.ba/@aleph";
-const BAG_B = "lar:///ha.ka.ba/@beth";
+const BAG_A = "lar:///ha.ka.ba/bags/@aleph";
+const BAG_B = "lar:///ha.ka.ba/bags/@beth";
 
 describe("CompositeStore.auditEpochs", () => {
   test("returns empty map when recipe has no bagEpochs", async () => {

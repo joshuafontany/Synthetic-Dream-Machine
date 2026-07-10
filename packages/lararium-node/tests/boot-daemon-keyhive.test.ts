@@ -12,7 +12,7 @@
  * via runFoundingCeremony into an in-memory Repo, exactly as the host platform
  * `loadBootstrap` does before the daemon worker spawns.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lararium/vessel-platform#authn-home
+ * Meme: lar:///ha.ka.ba/lares/api/lararium/vessel-platform#authn-home
  */
 
 import { describe, test, expect, beforeAll } from "vitest";

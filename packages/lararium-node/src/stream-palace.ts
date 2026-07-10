@@ -19,7 +19,7 @@
  *     NEXT adapter (a non-text on-box stream) builds against; the content/structure planes on the live
  *     path stay a documented seam (a numeric stream carries neither).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/corpus#the-caps
+ * Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-caps
  */
 
 import { existsSync, writeFileSync, rmSync } from "node:fs";

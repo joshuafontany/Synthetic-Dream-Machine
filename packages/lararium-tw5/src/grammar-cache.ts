@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/grammar-cache
+title: lar:///ha.ka.ba/lararium/tw5/modules/grammar-cache
 type: application/javascript
 module-type: startup
 \*/
@@ -11,7 +11,7 @@ module-type: startup
  *   Each tiddler's `lar-*` fields produce one SigilRule or FamilyRule.
  *   Adding a sigil = tagging a tiddler. No code change required.
  *   The `toml` data-fence sigil lives at:
- *     lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml
+ *     lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-toml
  *
  * Exported:
  *   name, platforms, after, startup  — TW5 startup lifecycle
@@ -124,7 +124,7 @@ function familyFromFields(title: string, fields: Readonly<Record<string, unknown
  *   - lar-kind == "family" → FamilyRule
  *
  * Grammar fully self-hosted: every sigil and family rule carries as a tiddler.
- * The `toml` data-fence sigil lives at lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml.
+ * The `toml` data-fence sigil lives at lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-toml.
  */
 function buildGrammarFromWiki(wiki: TW5Wiki): GrammarRules | null {
   const titles = wiki.filterTiddlers(`[tag[${GRAMMAR_TAG}]]`);

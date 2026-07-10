@@ -10,7 +10,7 @@
  * did rides the invocation for the daemon's verify-then-delegate (authority).
  * When the socket is absent/stale the caller has no daemon to talk to — the CLI
  * carries no second transport.
- * See lar:///ha.ka.ba/@lararium/api/lares-lararium-binding.
+ * See lar:///ha.ka.ba/lararium/api/lares-lararium-binding.
  */
 
 import { createConnection } from "node:net";

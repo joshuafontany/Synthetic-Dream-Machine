@@ -81,7 +81,7 @@ plugin.info + static .tid + TS module sources
 - Keep manifests acyclic: source facts first, packed artifact facts later.
 - Treat TW5 CLI packing as an external transformation wrapped by before/after
   manifests.
-- Keep `lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext` canonical.
+- Keep `lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext` canonical.
 - Keep `$:/plugins/lares/memetic-wikitext` as compatibility-only output.
 - `@lararium/mesh` MUST NOT import TW5, React, filesystem APIs, or DOM APIs.
   The hash primitive extracted there stays pure: no fs, no path, no TW5.

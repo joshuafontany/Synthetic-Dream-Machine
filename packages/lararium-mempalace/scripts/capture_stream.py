@@ -20,7 +20,7 @@ from the still-durable source. The `capture_drain` ledger orders the landing wit
 the exactly-once audit. The ~37x under-delivery dissolves: a pass processes the FULL source, never a
 stalled hot-pool.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/capture-stream (the composable pipeline; content_io serves as the land-cap).
+Meme: lar:///ha.ka.ba/lararium/sensorium/capture-stream (the composable pipeline; content_io serves as the land-cap).
 """
 from __future__ import annotations
 

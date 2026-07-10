@@ -9,7 +9,7 @@
  * `lensDirs`. Caps are composed per lens LAZILY (composePalaceCaps) and cached; `close()` releases all.
  * Independent of the spatial-projection model refinement — it rides the existing caps as they stand.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { composePalaceCaps, type PalaceCaps } from "./palace-caps.js";

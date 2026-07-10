@@ -6,7 +6,7 @@
  * non-computable; the operator reads, the members decide — the-veil-ladder#the-bounds).
  *
  * Platform-blind: composes ./cabal-place-clock + ./conviction-dial. NO node: imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import type { CabalPlaceMaintenanceProvenance } from "./cabal-place-clock.js";

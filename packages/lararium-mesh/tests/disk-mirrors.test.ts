@@ -8,14 +8,14 @@
  * static bags/ roots. OCAP-clean: authority in the grant, designation in the
  * recipe, the per-instance bag + subdir resolved here.
  *
- * Canon: lar:///ha.ka.ba/@lares/docs/pono/wiki-layer-ontology (#shore-law)
+ * Canon: lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology (#shore-law)
  */
 
 import { describe, test, expect } from "vitest";
 import { resolveDiskMirrors, type DiskMirrorGrant } from "../src/vessel-island-pool-core.js";
 import { wikiSlotUri, wikiBagUri } from "@lararium/mesh";
 
-const LARES = "lar:///ha.ka.ba/@lares";
+const LARES = "lar:///ha.ka.ba/bags/@lares";
 
 // The node vessel's real grant shape: a `wikiSlot` entry slug-expands BOTH its
 // bagId (→ wikis/@{slug}/working) and its leaf (→ wikis/@{slug}); a literal grant

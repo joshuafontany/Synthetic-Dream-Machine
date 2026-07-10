@@ -9,7 +9,7 @@
  * the ONE dial (ARL₀) calibrates Qα. Still deferred beneath it: the streaming/online pass (track/WRITE)
  * and the operator's rank-k cut.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { makeSink, type SinkEvent, type SinkVerdict, type SinkOptions } from "./sink.js";

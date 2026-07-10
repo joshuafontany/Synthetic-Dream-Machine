@@ -7,7 +7,7 @@
  * Pairs with WSMembershipChannel behind the same seam: file/POST first (a shared volume,
  * no relay service — the fast deployed path), the live-WS relay the strangler-fig follow.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { mkdirSync, writeFileSync, readdirSync, readFileSync } from "node:fs";

@@ -103,8 +103,8 @@ function toMemeRelPath(pathPart: string, frag: string | null): string | null {
  * directory = residency, interior path = the name, whole. Any bag projects
  * any stable name losslessly; reverse derivation = strip root, read name.
  *
- *   lar:///ha.ka.ba/@lares/api/pono/meme
- *     → ha.ka.ba/@lares/api/pono/meme.mem   (relative to the bag mirror root)
+ *   lar:///ha.ka.ba/lares/api/pono/meme
+ *     → ha.ka.ba/lares/api/pono/meme.mem   (relative to the bag mirror root)
  *
  * Fragments (#children) live inside their parent carrier file → null.
  * Unstable roots carry no siting → null (loci law).

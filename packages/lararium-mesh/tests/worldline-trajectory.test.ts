@@ -2,7 +2,7 @@
  * worldline-trajectory — the PERMAINAN SUBSTRATE: the Turn→Trajectory functor (TIME × SPACE), the
  * scale-graded null-readiness shuffle, and the ITC-registry-from-edge-DAG projection.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time
  */
 
 import { describe, test, expect } from "vitest";

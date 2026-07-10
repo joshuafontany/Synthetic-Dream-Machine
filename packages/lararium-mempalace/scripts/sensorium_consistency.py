@@ -30,7 +30,7 @@ one fixture per numeric):
   ~/.venv/bin/python3 sensorium_consistency.py fixture
   -> packages/lararium-mesh/tests/fixtures/sensorium-consistency-parity.json
 
-Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
+Meme: lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested
 """
 from __future__ import annotations
 

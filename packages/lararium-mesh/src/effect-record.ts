@@ -19,7 +19,7 @@
  * an `archival-verb` field with one of ARCHIVAL_VERBS, and the linking fields
  * that name which ACTION caused it.
  *
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme:    lar:///ha.ka.ba/lararium/api/residency-model
  * Source:  packages/lararium-mesh/src/effect-record.ts
  */
 

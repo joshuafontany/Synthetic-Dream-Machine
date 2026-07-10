@@ -77,7 +77,7 @@ Usage (the mempalace venv, from this directory):
   ~/.venv/bin/python3 ffz_continuous_pour.py pour --root <bed> [--root <bed> ...]
       [--seed 4241] [--surrogates 3]
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/ffz-continuous-pour
+Meme: lar:///ha.ka.ba/lararium/sensorium/ffz-continuous-pour
 """
 from __future__ import annotations
 

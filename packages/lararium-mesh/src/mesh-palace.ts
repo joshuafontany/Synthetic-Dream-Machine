@@ -23,10 +23,10 @@
  * throws on untrusted input; it returns null.
  *
  * Canon:
- *   lar:///ha.ka.ba/@lararium/mesh/vessel-caps   (the five-cap model)
- *   lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#node-addressing
- *   lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture#the-routing-substrate
- * Meme: lar:///ha.ka.ba/@lararium/mesh/mesh-palace
+ *   lar:///ha.ka.ba/lararium/mesh/vessel-caps   (the five-cap model)
+ *   lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#node-addressing
+ *   lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-routing-substrate
+ * Meme: lar:///ha.ka.ba/lararium/mesh/mesh-palace
  */
 
 import { from as automergeFrom, type Doc } from "@automerge/automerge";
@@ -87,7 +87,7 @@ export type WireCap = keyof typeof WIRE_CAPS;
 
 // ── The bag + URI builders ─────────────────────────────────────────────────
 
-/** The mesh-palace bag — `lar:///ha.ka.ba/@meshpalace`. */
+/** The mesh-palace bag — `lar:///ha.ka.ba/bags/@meshpalace`. */
 export const MESH_PALACE_BAG = bagUri("meshpalace");
 
 /** A bearing → a filesystem-safe slug for a dial/route tiddler title. */
@@ -414,9 +414,19 @@ const HERM_READABLE_BAGS: ReadonlySet<string> = new Set(["@oracle", "@lararium",
 /** A local operator's sovereign bags — the hearths a Herm NEVER reads (the territory). */
 const SOVEREIGN_BAGS: ReadonlySet<string> = new Set(["@catalog", "@persona", "@daemon"]);
 
-/** Extract the `@bag` segment from a `lar:///ha.ka.ba/@bag/…` URI (undefined when not one). */
+/**
+ * Extract the `@bag` identity a `lar:///ha.ka.ba/…` URI belongs to (undefined when not one):
+ * a surface `…/bags/@bag/…` names its bag directly; a bare meme `…/{namespace}/…` belongs to
+ * the `@{namespace}` bag. Reserved kind-planes (`wikis`, `cid`) are not readable bags here.
+ */
 export function bagOf(uri: string): string | undefined {
-  return /^lar:\/\/\/ha\.ka\.ba\/(@[^/]+)/.exec(uri)?.[1];
+  const m = /^lar:\/\/\/ha\.ka\.ba\/([^/]+)/.exec(uri);
+  if (!m) return undefined;
+  const seg = m[1]!;
+  if (seg === "bags") return /^lar:\/\/\/ha\.ka\.ba\/bags\/(@[^/]+)/.exec(uri)?.[1];
+  if (seg === "wikis" || seg === "cid") return undefined;   // not a readable bag surface
+  if (seg.startsWith("@")) return seg;                       // a pre-split flat bag ref
+  return `@${seg}`;                                          // a bare meme namespace → its bag
 }
 
 /**

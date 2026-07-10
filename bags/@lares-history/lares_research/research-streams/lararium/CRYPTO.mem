@@ -1,6 +1,6 @@
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/CRYPTO >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/CRYPTO"
+uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/CRYPTO.mem"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"

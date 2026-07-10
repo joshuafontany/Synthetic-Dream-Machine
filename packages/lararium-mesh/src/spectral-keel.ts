@@ -18,7 +18,7 @@
  * Laplacian BOTTOM-k (the boundary, current behavior); a future sharp/Fisher end bakes −L so its top-k lands
  * as bottom-k (λ↦−λ fixes the eigenvectors) — one selection under a sign flip, no keepTop branch downstream.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { jacobiEigen } from "./ffz-project.js";

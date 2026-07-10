@@ -45,8 +45,8 @@
  * KSG/kernel estimator rides the sidecar, not here). The fit is a THIN cap: it fits `(A_k, Σ_k)` by
  * one multivariate least-squares pass and reads the spectra — no iteration, no sidecar, no deps.
  *
- * Platform-blind, pure. Meme: lar:///ha.ka.ba/@lares/api/pono/scale-architecture (the EI-selection
- * north-star, here BUILT) · lar:///ha.ka.ba/@lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+ * Platform-blind, pure. Meme: lar:///ha.ka.ba/lares/api/pono/scale-architecture (the EI-selection
+ * north-star, here BUILT) · lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
  */
 
 import { jacobiEigen } from "./ffz-project.js";

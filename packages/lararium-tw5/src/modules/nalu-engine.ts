@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine
+title: lar:///ha.ka.ba/lararium/tw5/modules/nalu-engine
 type: application/javascript
 module-type: startup
 \*/
@@ -38,7 +38,7 @@ module-type: startup
  *   tiddler → projection bus → bridge → enqueueNalu(change). Next frame
  *   drains the lot in one transact. No special pre-sync buffer needed.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine
+ * Meme: lar:///ha.ka.ba/lararium/tw5/modules/nalu-engine
  */
 
 import type { TW5Instance, TW5Wiki } from "../types/tiddlywiki.js";

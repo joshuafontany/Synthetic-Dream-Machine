@@ -14,7 +14,7 @@
  *   · HOP — recompute every `hop` ticks (decouple update cadence from the long window).
  *
  * State is explicit + immutable (the caller owns persistence); each push returns the next state
- * and a CoupleTick. Platform-blind: composes ./mesh-couple + ./change-point. Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * and a CoupleTick. Platform-blind: composes ./mesh-couple + ./change-point. Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 import { coupleMesh } from "./mesh-couple.js";

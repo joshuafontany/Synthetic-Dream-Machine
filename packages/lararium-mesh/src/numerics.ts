@@ -4,7 +4,7 @@
  * those guard rounding, not significance, a different semantic; this module holds only the scale-relative
  * significance floor + the saturating soft-gate.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 /**

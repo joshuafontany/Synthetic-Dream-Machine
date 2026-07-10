@@ -14,7 +14,7 @@
  * Kāpae tests for CompositeStore (S4.3) live in
  * residency-resolution.test.ts.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme: lar:///ha.ka.ba/lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";
@@ -64,18 +64,18 @@ describe("ARCHIVAL_VERBS membership", () => {
 // ---------------------------------------------------------------------------
 
 describe("effect-record URI builders", () => {
-  const BAG = "lar:///ha.ka.ba/@elyncia";
+  const BAG = "lar:///ha.ka.ba/bags/@elyncia";
 
   test("effectLedgerPrefix appends /ledger/residency/ to the bag URI", () => {
-    expect(effectLedgerPrefix(BAG)).toBe("lar:///ha.ka.ba/@elyncia/ledger/residency/");
+    expect(effectLedgerPrefix(BAG)).toBe("lar:///ha.ka.ba/bags/@elyncia/ledger/residency/");
   });
 
   test("effectRecordUri appends event-id to the prefix", () => {
-    expect(effectRecordUri(BAG, "abc-123")).toBe("lar:///ha.ka.ba/@elyncia/ledger/residency/abc-123");
+    expect(effectRecordUri(BAG, "abc-123")).toBe("lar:///ha.ka.ba/bags/@elyncia/ledger/residency/abc-123");
   });
 
   test("isEffectRecordUri accepts well-formed log titles", () => {
-    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/ledger/residency/abc-123")).toBe(true);
+    expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@elyncia/ledger/residency/abc-123")).toBe(true);
     expect(isEffectRecordUri("lar:///lararium.local.vm/@daemon/ledger/residency/x")).toBe(true);
   });
 
@@ -87,8 +87,8 @@ describe("effect-record URI builders", () => {
   });
 
   test("isEffectRecordUri rejects non-residency-log titles", () => {
-    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/some-tiddler")).toBe(false);
-    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/ledger/residency/")).toBe(false); // empty event-id
+    expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@elyncia/some-tiddler")).toBe(false);
+    expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@elyncia/ledger/residency/")).toBe(false); // empty event-id
     expect(isEffectRecordUri("https://example.com")).toBe(false);
     expect(isEffectRecordUri("")).toBe(false);
   });
@@ -122,15 +122,15 @@ describe("EffectRecord encode/parse roundtrip", () => {
       archivalVerb: "accession",
       actionVerb:   "ADD",
       requestId:    "req-1",
-      bag:          "lar:///ha.ka.ba/@elyncia",
+      bag:          "lar:///ha.ka.ba/bags/@elyncia",
       actor:        "operator-x",
       timestamp:    "2026-05-31T00:00:00Z",
       tiddlerTitle: "MyTiddler",
       changeId:     "c-stable",
-      sourceBag:    "lar:///ha.ka.ba/@personal",
+      sourceBag:    "lar:///ha.ka.ba/bags/@personal",
     };
     const tiddler = buildEffectRecordTiddler(original);
-    expect(tiddler.tiddler.title).toBe("lar:///ha.ka.ba/@elyncia/ledger/residency/evt-1");
+    expect(tiddler.tiddler.title).toBe("lar:///ha.ka.ba/bags/@elyncia/ledger/residency/evt-1");
     expect(tiddler.tiddler["tags"]).toBe(LARES_EFFECT_RECORD_TAG);
 
     const parsed = parseEffectRecord(tiddler.tiddler as Record<string, unknown>);
@@ -140,7 +140,7 @@ describe("EffectRecord encode/parse roundtrip", () => {
     expect(parsed?.actionVerb).toBe("ADD");
     expect(parsed?.tiddlerTitle).toBe("MyTiddler");
     expect(parsed?.changeId).toBe("c-stable");
-    expect(parsed?.sourceBag).toBe("lar:///ha.ka.ba/@personal");
+    expect(parsed?.sourceBag).toBe("lar:///ha.ka.ba/bags/@personal");
   });
 
   test("MOVE-shaped deaccession record carries transferId and disposition", () => {
@@ -149,26 +149,26 @@ describe("EffectRecord encode/parse roundtrip", () => {
       archivalVerb: "deaccession",
       actionVerb:   "MOVE",
       requestId:    "req-2",
-      bag:          "lar:///ha.ka.ba/@personal",
+      bag:          "lar:///ha.ka.ba/bags/@personal",
       actor:        "op",
       timestamp:    "2026-05-31T00:00:00Z",
       tiddlerTitle: "T",
       changeId:     "c-1",
       transferId:   "tr-1",
-      sourceBag:    "lar:///ha.ka.ba/@personal",
-      destBag:      "lar:///ha.ka.ba/@wiki",
-      disposition:  "transferred-to:lar:///ha.ka.ba/@wiki",
+      sourceBag:    "lar:///ha.ka.ba/bags/@personal",
+      destBag:      "lar:///ha.ka.ba/bags/@wiki",
+      disposition:  "transferred-to:lar:///ha.ka.ba/bags/@wiki",
     };
     const parsed = parseEffectRecord(buildEffectRecordTiddler(original).tiddler as Record<string, unknown>);
     expect(parsed?.transferId).toBe("tr-1");
-    expect(parsed?.disposition).toBe("transferred-to:lar:///ha.ka.ba/@wiki");
+    expect(parsed?.disposition).toBe("transferred-to:lar:///ha.ka.ba/bags/@wiki");
   });
 
   test("parseEffectRecord returns null for non-effect tiddlers", () => {
     expect(parseEffectRecord({ title: "some-other-tiddler" })).toBeNull();
     expect(parseEffectRecord({})).toBeNull();
     expect(parseEffectRecord({
-      title:           "lar:///ha.ka.ba/@x/ledger/residency/y",
+      title:           "lar:///ha.ka.ba/bags/@x/ledger/residency/y",
       "archival-verb": "not-an-archival-verb",
       "action-verb":   "ADD",
       "event-id":      "e",
@@ -181,7 +181,7 @@ describe("EffectRecord encode/parse roundtrip", () => {
 
   test("parseEffectRecord requires all base fields (event-id, request-id, bag, actor, timestamp)", () => {
     const full: Record<string, unknown> = {
-      title:           "lar:///ha.ka.ba/@x/ledger/residency/y",
+      title:           "lar:///ha.ka.ba/bags/@x/ledger/residency/y",
       "archival-verb": "accession",
       "action-verb":   "ADD",
       "event-id":      "e",
@@ -217,15 +217,15 @@ describe("mapActionToEffects", () => {
     const base = makeActionBase();
     const action: AddAction = {
       ...base, verb: "ADD",
-      title: "T", fromBag: "lar:///ha.ka.ba/@personal", toBag: "lar:///ha.ka.ba/@elyncia", changeId: "c-1",
+      title: "T", fromBag: "lar:///ha.ka.ba/bags/@personal", toBag: "lar:///ha.ka.ba/bags/@elyncia", changeId: "c-1",
     };
     const effects = mapActionToEffects(action, opts);
     expect(effects).toHaveLength(1);
     expect(effects[0]!.archivalVerb).toBe("accession");
-    expect(effects[0]!.bag).toBe("lar:///ha.ka.ba/@elyncia");
+    expect(effects[0]!.bag).toBe("lar:///ha.ka.ba/bags/@elyncia");
     expect(effects[0]!.tiddlerTitle).toBe("T");
     expect(effects[0]!.changeId).toBe("c-1");
-    expect(effects[0]!.sourceBag).toBe("lar:///ha.ka.ba/@personal");
+    expect(effects[0]!.sourceBag).toBe("lar:///ha.ka.ba/bags/@personal");
     expect(effects[0]!.actionVerb).toBe("ADD");
     expect(effects[0]!.timestamp).toBe(NOW);
   });
@@ -234,7 +234,7 @@ describe("mapActionToEffects", () => {
     const base = makeActionBase();
     const action: CopyAction = {
       ...base, verb: "COPY",
-      title: "T", fromBag: "lar:///ha.ka.ba/@a", toBag: "lar:///ha.ka.ba/@b", changeId: "c",
+      title: "T", fromBag: "lar:///ha.ka.ba/bags/@a", toBag: "lar:///ha.ka.ba/bags/@b", changeId: "c",
     };
     const effects = mapActionToEffects(action, opts);
     expect(effects).toHaveLength(1);
@@ -246,36 +246,36 @@ describe("mapActionToEffects", () => {
     const base = makeActionBase();
     const action: MoveAction = {
       ...base, verb: "MOVE",
-      title: "T", fromBag: "lar:///ha.ka.ba/@personal", toBag: "lar:///ha.ka.ba/@wiki", changeId: "c-move",
+      title: "T", fromBag: "lar:///ha.ka.ba/bags/@personal", toBag: "lar:///ha.ka.ba/bags/@wiki", changeId: "c-move",
     };
     const effects = mapActionToEffects(action, opts);
     expect(effects).toHaveLength(2);
     const [accession, deaccession] = effects as [EffectRecord, EffectRecord];
     expect(accession.archivalVerb).toBe("accession");
-    expect(accession.bag).toBe("lar:///ha.ka.ba/@wiki");
+    expect(accession.bag).toBe("lar:///ha.ka.ba/bags/@wiki");
     expect(deaccession.archivalVerb).toBe("deaccession");
-    expect(deaccession.bag).toBe("lar:///ha.ka.ba/@personal");
+    expect(deaccession.bag).toBe("lar:///ha.ka.ba/bags/@personal");
     // transferId pairs them
     expect(accession.transferId).toBeDefined();
     expect(accession.transferId).toBe(deaccession.transferId);
     // disposition on the deaccession names the destination
-    expect(deaccession.disposition).toBe("transferred-to:lar:///ha.ka.ba/@wiki");
+    expect(deaccession.disposition).toBe("transferred-to:lar:///ha.ka.ba/bags/@wiki");
   });
 
   test("CLEAR produces one bag-level disposition record", () => {
     const base = makeActionBase();
-    const action: ClearAction = { ...base, verb: "CLEAR", bag: "lar:///ha.ka.ba/@scratch" };
+    const action: ClearAction = { ...base, verb: "CLEAR", bag: "lar:///ha.ka.ba/bags/@scratch" };
     const effects = mapActionToEffects(action, opts);
     expect(effects).toHaveLength(1);
     expect(effects[0]!.archivalVerb).toBe("disposition");
     expect(effects[0]!.disposition).toBe("bag-cleared");
-    expect(effects[0]!.bag).toBe("lar:///ha.ka.ba/@scratch");
+    expect(effects[0]!.bag).toBe("lar:///ha.ka.ba/bags/@scratch");
     expect(effects[0]!.tiddlerTitle).toBeUndefined(); // bag-level
   });
 
   test("DROP produces one bag-level disposition record", () => {
     const base = makeActionBase();
-    const action: DropAction = { ...base, verb: "DROP", bag: "lar:///ha.ka.ba/@retired" };
+    const action: DropAction = { ...base, verb: "DROP", bag: "lar:///ha.ka.ba/bags/@retired" };
     const effects = mapActionToEffects(action, opts);
     expect(effects).toHaveLength(1);
     expect(effects[0]!.archivalVerb).toBe("disposition");
@@ -286,7 +286,7 @@ describe("mapActionToEffects", () => {
     const base = makeActionBase();
     const action: LoadAction = {
       ...base, verb: "LOAD",
-      sourceUri: "https://example.org/seed.json", toBag: "lar:///ha.ka.ba/@elyncia", changeId: "c-load",
+      sourceUri: "https://example.org/seed.json", toBag: "lar:///ha.ka.ba/bags/@elyncia", changeId: "c-load",
     };
     const effects = mapActionToEffects(action, opts);
     expect(effects).toHaveLength(1);
@@ -325,7 +325,7 @@ describe("mapActionToEffects", () => {
 describe("writeEffectRecord", () => {
   test("writes the effect tiddler into the affected bag's own store", async () => {
     const composite = new CompositeStore();
-    const BAG = "lar:///ha.ka.ba/@elyncia";
+    const BAG = "lar:///ha.ka.ba/bags/@elyncia";
     composite.addLayer({ bagId: BAG, store: new MemoryTiddlerStore(), writable: true });
     const effect: EffectRecord = {
       eventId:      "evt-1",
@@ -350,7 +350,7 @@ describe("writeEffectRecord", () => {
       archivalVerb: "accession",
       actionVerb:   "ADD",
       requestId:    "req-x",
-      bag:          "lar:///ha.ka.ba/@nowhere",
+      bag:          "lar:///ha.ka.ba/bags/@nowhere",
       actor:        "op",
       timestamp:    "2026-05-31T00:00:00Z",
       tiddlerTitle: "T",
@@ -366,8 +366,8 @@ describe("withEffectRecord", () => {
     resolve: (bag: string) => Promise<LarTiddlerStore | null>;
   }> {
     const composite = new CompositeStore();
-    const bagA = "lar:///ha.ka.ba/@aleph";
-    const bagB = "lar:///ha.ka.ba/@beth";
+    const bagA = "lar:///ha.ka.ba/bags/@aleph";
+    const bagB = "lar:///ha.ka.ba/bags/@beth";
     composite.addLayer({ bagId: bagA, store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
     composite.addLayer({ bagId: bagB, store: new MemoryTiddlerStore(), writable: true });
     // Effect records ride each affected bag's OWN store (residency-model

@@ -1,8 +1,8 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ward
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ward
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: metadata
 lar-pattern: <<~\s*ward\b([\s\S]*?)>>
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#l-prime
+lar-pono-uri: lar:///ha.ka.ba/lares/api/lares/noosphere-boot#l-prime
 type: text/vnd.tiddlywiki
 
 <!-- ward — the L-Prime ward (Sword/Wand/etc. tool glyph). HUD-frame sigil: recognized in the tree,

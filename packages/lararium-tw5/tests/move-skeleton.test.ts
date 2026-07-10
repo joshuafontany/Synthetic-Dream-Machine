@@ -5,7 +5,7 @@
  * stream with prose stripped to `_`, and (b) the placeholdered graph. It is
  * validated against turn-harvest's own corpora (real turns).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  */
 
 import { describe, test, expect } from "vitest";

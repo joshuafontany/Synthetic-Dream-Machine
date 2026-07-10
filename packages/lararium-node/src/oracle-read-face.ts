@@ -12,7 +12,7 @@
  * signed). The monotone counter persists to disk so it never regresses across a reboot
  * (a reset counter would read as a ROLLBACK to every reader).
  *
- * Canon: lar:///ha.ka.ba/@lares/api/pono/lararium-identity#the-oracle-plane
+ * Canon: lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-oracle-plane
  * (the content-addressed floor; Hypercore live-streaming rides above it as the
  * deferred end-goal). The pure core (export/build/verify) lives in @lararium/mesh.
  */

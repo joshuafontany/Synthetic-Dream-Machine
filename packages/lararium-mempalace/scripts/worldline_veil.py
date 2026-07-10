@@ -24,7 +24,7 @@ shape (`worldline_observe.derive_handle`), now prefixed by the VEILED root rathe
 
 Clock-pure: this module imports no host clock (mirrors the sighting ward on the worldline edge path).
 
-Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#veiled-root
+Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#veiled-root
 """
 from __future__ import annotations
 

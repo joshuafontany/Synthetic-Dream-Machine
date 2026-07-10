@@ -7,7 +7,7 @@
  * them. After settle the breathing stops (the interval clears); the final
  * `ea` declaration alone speaks for a live island.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/sovereign-kernel
+ * Meme: lar:///ha.ka.ba/lararium/tw5/sovereign-kernel
  */
 
 import { describe, test, expect } from "vitest";
@@ -20,7 +20,7 @@ import {
 import { runSovereignKernel, type IslandHostSeam } from "../src/sovereign-kernel.js";
 import type { IslandBehavior } from "../src/island-context.js";
 
-const WIKI = "lar:///ha.ka.ba/@test/wiki";
+const WIKI = "lar:///ha.ka.ba/bags/@test/wiki";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 

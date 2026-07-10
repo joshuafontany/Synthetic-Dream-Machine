@@ -13,7 +13,7 @@
 
 **Nexus** — a *confederation of lararia* sharing a stable internal mesh. Named by community + place. e.g. "Floating Library of Mu, PNW Branch" — resources may be geographically wider than the name implies, but the confederation represents the local cohort. NOT a single server. NOT a single lararium.
 
-The Nexus keypair serves as the confederation keypair — ideally Keyhive-group-rooted when that ships; a founding-operator key until then. The `NexusRegistryDoc` lives at `lar:///ha.ka.ba/@nexus/<confederation-pubkey>`.
+The Nexus keypair serves as the confederation keypair — ideally Keyhive-group-rooted when that ships; a founding-operator key until then. The `NexusRegistryDoc` lives at `lar:///ha.ka.ba/bags/@nexus/<confederation-pubkey>`.
 
 **Within-Nexus sync**: Automerge CRDT — stable, reliable internal mesh.
 **Cross-Nexus federation**: explicit treaty, wild-magic-zone hops — unreliable, degraded-state-tolerant. Lives in `allies` field.
@@ -60,8 +60,8 @@ The `capabilityFlags` field in `NexusRegistryDoc` reflects which capabilities th
 
 ## NexusRegistryDoc Schema
 
-Lives at: `lar:///ha.ka.ba/@nexus/<nexus-pubkey>`
-Allied registry: `lar:///ha.ka.ba/@nexus/<nexus-pubkey>/allies`
+Lives at: `lar:///ha.ka.ba/bags/@nexus/<nexus-pubkey>`
+Allied registry: `lar:///ha.ka.ba/bags/@nexus/<nexus-pubkey>/allies`
 
 ```typescript
 type NexusRegistryDoc = {
@@ -101,8 +101,8 @@ type NexusRegistryDoc = {
 ### URI Resolution
 
 New `@nexus` scope in `resolver.ts`:
-- `lar:///ha.ka.ba/@nexus/<pubkey>` → Nexus identity + registry doc
-- `lar:///ha.ka.ba/@nexus/<pubkey>/allies` → federated ally sub-doc
+- `lar:///ha.ka.ba/bags/@nexus/<pubkey>` → Nexus identity + registry doc
+- `lar:///ha.ka.ba/bags/@nexus/<pubkey>/allies` → federated ally sub-doc
 - Resolver kind: `"nexus-doc"` (new branch, parallel to `@lares`/`@lararium`/`@catalog`)
 - No URI grammar change — triple-slash hostless form retained; `@nexus` is just a new scope segment
 

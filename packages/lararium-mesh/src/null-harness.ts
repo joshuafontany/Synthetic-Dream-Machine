@@ -20,7 +20,7 @@
  * The PRNG rides a local seed (mulberry32) — deterministic, reproducible, no global-now Math.random; the seed
  * lives per-call (a causal-island-local instrument, never a shared clock).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { type ArlDial, REFERENCE_ALPHA } from "./arl-dial.js";

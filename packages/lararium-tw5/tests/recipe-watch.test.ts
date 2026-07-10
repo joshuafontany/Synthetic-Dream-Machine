@@ -20,7 +20,7 @@ import type { IslandContext } from "../src/island-context.js";
 
 const SLUG     = "test-wiki";
 const WIKI_BAG = wikiBagUri(SLUG);
-const LIB_BAG  = "lar:///ha.ka.ba/@corpus/elyncia";
+const LIB_BAG  = "lar:///ha.ka.ba/bags/@corpus/elyncia";
 const RECIPE   = recipeUri("@catalog", SLUG);
 
 type Tiddlers = Record<string, LarTiddlerRecord>;

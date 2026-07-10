@@ -16,7 +16,7 @@ audit; the crash-safety itself rests on the durable transcript (the source) + co
 re-derivation, NOT on this in-memory ledger. Pure: no store, no clock, no IO — the engine drives
 stage()/commit() from the real transcript read + content_io land confirmations.
 
-Meme: lar:///ha.ka.ba/@lararium/mesh/capture-drain (py twin).
+Meme: lar:///ha.ka.ba/lararium/mesh/capture-drain (py twin).
 """
 from __future__ import annotations
 

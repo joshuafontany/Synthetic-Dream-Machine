@@ -11,7 +11,7 @@
  * against the bootstrap grammar (the query-derive-vm test pattern). The annotate takes no
  * clock — there is no time argument any more.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
+ * Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock
  */
 
 import { describe, test, expect } from "vitest";

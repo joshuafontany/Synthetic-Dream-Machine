@@ -1,9 +1,9 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/ROADMAP >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP >>
 
 ```toml iam
-uri-path = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/ROADMAP"
+uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem"
 type = "text/x-memetic-wikitext"
 confidence = 18
@@ -50,7 +50,7 @@ Two new design dimensions unlocked mid-session:
 Four model shifts locked this session:
 
   **Shift 1 — Grammar meme is a tiddler, not a blob.**
-  The grammar meme text (`lar:///ha.ka.ba/@lares/grammars/memetic-wikitext`) lives in the `system` bag of the engine Automerge doc as a first-class tiddler. NOT a binary blob in `LarariumDoc.blobs`. Binary blobs are for large, immutable, non-parseable assets (TW5 core JS, plugin bundles). Grammar text is small, mutable, and must remain human-readable. Compiled `GrammarRules` struct = in-memory cache only (fast to derive, no storage). Server re-derives from tiddler text on each VM boot.
+  The grammar meme text (`lar:///ha.ka.ba/lares/grammars/memetic-wikitext`) lives in the `system` bag of the engine Automerge doc as a first-class tiddler. NOT a binary blob in `LarariumDoc.blobs`. Binary blobs are for large, immutable, non-parseable assets (TW5 core JS, plugin bundles). Grammar text is small, mutable, and must remain human-readable. Compiled `GrammarRules` struct = in-memory cache only (fast to derive, no storage). Server re-derives from tiddler text on each VM boot.
 
   **Shift 2 — FFZ 5-scale changeset model replaces per-URI-only debounce.**
   `MemeProvider` previously emitted only Scale-1 events (one `onUriChanged` per URI per debounce window). At UEFN game-loop rates (100 actors × 60fps = 6000 callbacks/s), that model breaks. New model:
@@ -922,8 +922,8 @@ External architecture decisions must account for live exchange records.
 The URI parser and resolver model should treat:
 
 ```text
-lar:///ha.ka.ba/@lares/...                  canonical hostless meme
-lar://alias:grant@host/ha.ka.ba/@lares/...   live contextual exchange record
+lar:///ha.ka.ba/lares/...                  canonical hostless meme
+lar://alias:grant@host/ha.ka.ba/lares/...   live contextual exchange record
 ```
 
 as distinct identities.
@@ -1173,10 +1173,10 @@ The dead-weight `lararium → LARES` owns edge was removed. LARES is reached onc
 
 | URI | Role |
 |---|---|
-| `lar:///ha.ka.ba/@lares/api/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
-| `lar:///ha.ka.ba/@lares/api/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
-| `lar:///ha.ka.ba/@lares/api/lararium/l-space-trust` | Shared `lar:` l-space MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
-| `lar:///ha.ka.ba/@lares/api/lararium/exchange-vector` | Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content |
+| `lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
+| `lar:///ha.ka.ba/lares/api/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
+| `lar:///ha.ka.ba/lares/api/lararium/l-space-trust` | Shared `lar:` l-space MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
+| `lar:///ha.ka.ba/lares/api/lararium/exchange-vector` | Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content |
 
 All four implement `meme`, `loci`, and `invariant` interfaces. All four appear in the minimal boot closure at depth 3 under lararium.
 
@@ -1851,7 +1851,7 @@ All three laws landed:
 - ✓ MULTIPLAYER and ROADMAP docs updated to reflect single-page model as shipped
 
 **kumu template pipeline — fully wikitext-native**
-- ✓ Five template carriers at `lar:///ha.ka.ba/@lares/api/lararium/templates/meme-*` (in `ha.ka.ba/@lares/api` namespace — no adjacent namespace)
+- ✓ Five template carriers at `lar:///ha.ka.ba/lares/api/lararium/templates/meme-*` (in `ha.ka.ba/lares/api` namespace — no adjacent namespace)
 - ✓ `packages/lares-core/memes/api/lararium/templates/index.md` — namespace index, owns control edges to all five; wired from `lararium` meme via `#hydrate-templates` (control:owns)
 - ✓ Each template TOML body carries: `zoom-level`, `cascade` (filter predicate string), `priority`, `w`, `h`, `color`, `label`, `include-ahu`, `show-notes`, `show-carrier`, `opacity`
 - ✓ `<<~ kumu name(params) >>` / `<<~/kumu >>` direct form added to `SIGIL_SCANS` in `parser.ts` (alongside `\\widget` alias)
@@ -2214,7 +2214,7 @@ M9 closed the projection-cache authority arc and browser opening sequence. M10 t
 
 ### M10 Priority 2: Orichalcum ceremony surface
 
-`PUT /admin/promote` (local-operator) is live. Next: replace localhost guard with Orichalcum capability gate (Ed25519 principal, UCAN-shaped capability proof, room join WS gate at code 4003). See `lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities`.
+`PUT /admin/promote` (local-operator) is live. Next: replace localhost guard with Orichalcum capability gate (Ed25519 principal, UCAN-shaped capability proof, room join WS gate at code 4003). See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
 
 ### M10 Priority 3: Wiki-recipe carriers
 
@@ -2259,7 +2259,7 @@ The `ReactionGraph` IS the causal island manager. `fire(fromUri, trigger, payloa
 
 ### FFZ Chronometer as causal timestamp
 
-> Canonical attention-scale register names (Pulse/Beat/Measure/Arc/Theme): `lar:///ha.ka.ba/@lares/api/pono/attention-scale`
+> Canonical attention-scale register names (Pulse/Beat/Measure/Arc/Theme): `lar:///ha.ka.ba/lares/api/pono/attention-scale`
 > The `scale` field in the fragment below maps to these register names: Pulse=L0, Beat=L1, Measure=L2 (default band), Arc=L3, Theme=L4.
 
 The FFZ Chronometer fragment (`#O0.O3.D2.A7`) encodes `{ scale: Ladder5, phase: OodaHa5, counter: number }`. In the async model, each `fire()` call carries an implicit causal timestamp derived from the Chronometer — not a wall-clock time, but a logical position in the OODA-HA loop.
@@ -2325,13 +2325,13 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 ### Closed
 
-- **Streams plugin vendor** — sq/streams v1.2.24 by Saq Imtiaz (MIT) vendored at `lar:///ha.ka.ba/@lares/api/vendor/sq-streams`; stored in `packages/lares-core/memes/api/tw5-plugins/sq-streams-1.2.24.json`; vendor pipeline: `scripts/write-vendor-plugins.ts` reads `tw5-plugins/*.json` → `generated-vendor-plugins.ts` → preloaded at boot. Carrier documents field mapping (ahu-parent↔parent, ahu-slots↔stream-list) at `packages/lares-core/memes/api/lararium/plugins/sq-streams.md`
+- **Streams plugin vendor** — sq/streams v1.2.24 by Saq Imtiaz (MIT) vendored at `lar:///ha.ka.ba/lares/api/vendor/sq-streams`; stored in `packages/lares-core/memes/api/tw5-plugins/sq-streams-1.2.24.json`; vendor pipeline: `scripts/write-vendor-plugins.ts` reads `tw5-plugins/*.json` → `generated-vendor-plugins.ts` → preloaded at boot. Carrier documents field mapping (ahu-parent↔parent, ahu-slots↔stream-list) at `packages/lares-core/memes/api/lararium/plugins/sq-streams.md`
 
 - **Streams compat fields** — `splitCarrierToTiddlers` now emits both ahu fields (`ahu-parent`, `ahu-slots`) and Streams compat fields (`parent`, `stream-list`, `stream-type`) on parent/child tiddlers simultaneously. Both filter dialects work natively without glue code
 
 - **Mixed prose/children** — `generateParentText()` in `carrier-split.ts` walks AST in document order after STX sigil. Emits `<$transclude tiddler="uri#slot" mode="block"/>` for WorksiteNodes and inline prose for TextNodes. Interleaved content (daemon-in-the-walls pattern: prose before slot, prose between slots) preserved in document order. Parent `text` field is now mixed wikitext for TW5 VM; `carrier-text` field holds raw on-disk carrier
 
-- **Template rendering** — parent `text` is wikitext with transcludes + prose; template tiddler `lar:///ha.ka.ba/@lares/api/lararium/templates/meme` preloaded; meme template renders slot list for structured memes; `generateParentText` handles interleaved prose cases
+- **Template rendering** — parent `text` is wikitext with transcludes + prose; template tiddler `lar:///ha.ka.ba/lares/api/lararium/templates/meme` preloaded; meme template renders slot list for structured memes; `generateParentText` handles interleaved prose cases
 
 - **Peer-correct disk projector** — `LarDiskProjector` (was `LarDiskSyncAdaptor`) rewrote from TW5SyncAdaptor to direct Automerge store subscriber. Subscribes to `LarTiddlerStore.subscribe()` — receives ALL changes (local + remote peer) with `ChangeOrigin`. Server writes disk for every peer change. `readonly writing = new Set<string>()` exposed for file watcher echo-loop guard. `_writeDirect()` debounced per URI; `_writeSlot()` debounced per parent URI
 
@@ -2445,12 +2445,12 @@ room island     (bag: "room",  writable)        — primary content gate
 ## Edges
 
 <<~ loulou lar:///LARARIUM-NODE/RESEARCH-SEED >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/lararium/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/@lares/docs/lararium/signal/render-targets >>
-<<~ loulou lar:///ha.ka.ba/@lares/docs/graph/traversal >>
-<<~ loulou lar:///ha.ka.ba/@lares/docs/graph/pranala-parser >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium/signal/render-targets >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
 
 <<~ pranala #to-canvas-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
 <<~/ahu >>
@@ -2472,18 +2472,18 @@ Boot flow was LarariumDoc-first but the catalog oracle tiddler was keyed `CATALO
 
   | `lar:` URI | Doc | Stored where |
   |---|---|---|
-  | `lar:///ha.ka.ba/@lararium` | LarariumDoc (engine, blobs, self-ref) | LarariumDoc.tiddlers self-ref |
-  | `lar:///ha.ka.ba/@catalog`  | CatalogDoc (hallway, corpus list) | LarariumDoc.tiddlers + CatalogDoc.tiddlers self-ref |
-  | `lar:///ha.ka.ba/@elyncia`  | Elyncia corpus doc | CatalogDoc.tiddlers |
-  | `lar:///ha.ka.ba/@ftls`     | FTLS corpus doc | CatalogDoc.tiddlers |
-  | `lar:///ha.ka.ba/@sdm`      | SDM corpus doc | CatalogDoc.tiddlers |
-  | `lar:///ha.ka.ba/@lararium/rooms/{slug}` | Room identity URI (not a doc) | CatalogDoc.rooms key (Sprint 4 remaining) |
+  | `lar:///ha.ka.ba/bags/@lararium` | LarariumDoc (engine, blobs, self-ref) | LarariumDoc.tiddlers self-ref |
+  | `lar:///ha.ka.ba/bags/@catalog`  | CatalogDoc (hallway, corpus list) | LarariumDoc.tiddlers + CatalogDoc.tiddlers self-ref |
+  | `lar:///ha.ka.ba/bags/@elyncia`  | Elyncia corpus doc | CatalogDoc.tiddlers |
+  | `lar:///ha.ka.ba/bags/@ftls`     | FTLS corpus doc | CatalogDoc.tiddlers |
+  | `lar:///ha.ka.ba/bags/@sdm`      | SDM corpus doc | CatalogDoc.tiddlers |
+  | `lar:///ha.ka.ba/lararium/rooms/{slug}` | Room identity URI (not a doc) | CatalogDoc.rooms key (Sprint 4 remaining) |
 
   **Zelenka law preserved:** server seeds because it has disk access (a capability), not authority. Both browser and node peer follow the same oracle read path: open LarariumDoc → read `tiddlers[CATALOG_DOC_URI]` → open CatalogDoc.
 
 ◇ **Decide:**
 - Drop `_SLOT` suffix: `CATALOG_DOC_URI_SLOT` → `CATALOG_DOC_URI`. The constant is dual-purpose.
-- Add `corpusLarUri(slug): string` — single source of truth for `lar:///ha.ka.ba/@${slug}`.
+- Add `corpusLarUri(slug): string` — single source of truth for `lar:///ha.ka.ba/bags/@${slug}`.
 - `CatalogDoc` gains `tiddlers?: Record<string, Readonly<MutableLarRecord>>` (parallel to `LarariumDoc`).
 - Resolver: any `@`-prefixed first path segment that is not `@lares` or `@lararium` → `kind: "caps-virtual"`.
 - Node peer writes catalog self-ref tiddler in `blankCatalog()`.
@@ -2527,7 +2527,7 @@ pnpm --filter @lararium/app  build     # ✓ clean
 **Sprint 5 — Kill `make reseed` dead target + drop-data: ✓ COMPLETE**
 - `reseed:` Makefile target removed
 - `drop-data:` target added (`rm -rf .lararium-data`) — explicit local reset with no dead HTTP call
-- `identity-slot.ts` comment corrected to `lar:///ha.ka.ba/@catalog`
+- `identity-slot.ts` comment corrected to `lar:///ha.ka.ba/bags/@catalog`
 
 M17 complete. All 5 + Sprint 0 correction sprints landed. Build clean across core / node / app.
 
@@ -2547,7 +2547,7 @@ After M17 landed `CatalogDoc.tiddlers` and the `@`-prefix named-doc oracle patte
   **Corpus tiddler read/write isomorphism:**
   Node peer writes `catalogHandle.tiddlers[corpusLarUri(entry.id)]` with `text = corpusDocHandle.url`.
   Browser peer read from `catalog?.corpora` — a second source of truth that had to stay in sync manually.
-  Fix: browser walks `catalog?.tiddlers`, filters keys starting with `lar:///ha.ka.ba/@` (excluding `CATALOG_DOC_URI` and `LARARIUM_DOC_URI`), extracts `.text` as automerge URL. `catalog.corpora` becomes optimization index only, not the authoritative oracle.
+  Fix: browser walks `catalog?.tiddlers`, filters keys starting with `lar:///ha.ka.ba/bags/@` (excluding `CATALOG_DOC_URI` and `LARARIUM_DOC_URI`), extracts `.text` as automerge URL. `catalog.corpora` becomes optimization index only, not the authoritative oracle.
 
   **Self-describing corpus docs:**
   Each corpus `MemeStoreDoc` should carry `tiddlers[corpusLarUri(slug)] = { title: corpusUri, text: handle.url }`.
@@ -2593,14 +2593,14 @@ pnpm --filter @lararium/app  build     # ✓ clean
 The Beelay/Keyhive research confirmed that each self-describing Automerge doc should NOT carry upward pointers. The three-doc oracle chain (LarariumDoc → CatalogDoc → corpus/room leaves) has a structurally named fourth presence: LaresDoc — the `@lares` personality layer. The SDM metaphysics maps cleanly: ha (structure) = LarariumDoc, ka (fire/motion) = CatalogDoc, ba (personality/flow) = LaresDoc. The Tiga (Indonesian: triangle, Bucky Fuller's minimal stable geometry) names this as invariant. Before M19: `LARES_DOC_URI` constant did not exist; no ha→ba oracle tiddler existed; LaresDoc had no Automerge handle; the `lares` bag was absent from CompositeStore; the boot sequence in both peers named only ha and ka.
 
 ⏿ **Orient:**
-The Tiga closes when: (1) `LARES_DOC_URI = "lar:///ha.ka.ba/@lares"` exists as a typed constant; (2) `seedLaresDoc()` creates ba with a self-ref tiddler; (3) `reconcileWellKnownTiddlers` writes the ha→ba oracle tiddler; (4) both peers open LaresDoc from the ha oracle and add a `lares` bag between `system` and `corpus` in CompositeStore; (5) the browser corpus scanner excludes `LARES_DOC_URI` from the `@`-prefix tiddler walk. The `lares` bag slots above corpus so `@lares` memes have higher recipe priority than user corpus content but lower than system engine tiddlers.
+The Tiga closes when: (1) `LARES_DOC_URI = "lar:///ha.ka.ba/bags/@lares"` exists as a typed constant; (2) `seedLaresDoc()` creates ba with a self-ref tiddler; (3) `reconcileWellKnownTiddlers` writes the ha→ba oracle tiddler; (4) both peers open LaresDoc from the ha oracle and add a `lares` bag between `system` and `corpus` in CompositeStore; (5) the browser corpus scanner excludes `LARES_DOC_URI` from the `@`-prefix tiddler walk. The `lares` bag slots above corpus so `@lares` memes have higher recipe priority than user corpus content but lower than system engine tiddlers.
 
 ◇ **Decide:**
 Three OODA loops across four files:
 - Loop 1 — `lararium-island.ts`: add `LARES_DOC_URI` import + `MemeStoreDoc` type import; add `seedLaresDoc(repo)` export; update `reconcileWellKnownTiddlers` signature to accept optional `laresUrl` and write the ba tiddler.
 - Loop 2 — `open-node-lar-peer.ts`: import `seedLaresDoc` + `LARES_DOC_URI`; add Step 3b (LaresDoc open/seed after island); pass `laresHandle.url` to `reconcileWellKnownTiddlers`; update docblock boot sequence.
 - Loop 3 — `open-browser-lar-peer.ts`: import `LARES_DOC_URI`; add Step 4 (read ha oracle, open LaresDoc, add `lares` bag); exclude `LARES_DOC_URI` from corpus tiddler scan; update docblock.
-- Meme — `packages/lararium-mesh/memes/automerge-tiga.md` at `lar:///ha.ka.ba/@lararium/mesh/automerge-tiga`: invariant doc locking the Tiga law, Zelenka alignment, boot sequence mapping, structural law table.
+- Meme — `packages/lararium-mesh/memes/automerge-tiga.md` at `lar:///ha.ka.ba/lararium/mesh/automerge-tiga`: invariant doc locking the Tiga law, Zelenka alignment, boot sequence mapping, structural law table.
 
 ▶ **Act (files touched):**
 
@@ -2696,10 +2696,10 @@ TiddlerRecord `bag` field = lar: URI of the owning doc everywhere.
 ### OODA-HA receipt
 
 ✶ **Observe:**
-After M20, `corpusLarUri(slug)` returned `lar:///ha.ka.ba/@${slug}` — a pos-1 collision with root doc identities.  Any system scanning `@`-prefixed pos-1 URIs could not distinguish corpus child-docs from root docs.  The browser peer `CORPUS_PREFIX` used `"lar:///ha.ka.ba/@"` with a fragile exclusion list (`!== CATALOG_DOC_URI`, `!== LARARIUM_DOC_URI`, `!== LARES_DOC_URI`) — a list that would not grow automatically when new root docs arrived.  No social plane docs existed.  No recipe schema existed.  Tests still asserted the old `corpus:slug` opaque prefix and `BAG_IDS.system`/`BAG_IDS.room` stub keys.
+After M20, `corpusLarUri(slug)` returned `lar:///ha.ka.ba/bags/@${slug}` — a pos-1 collision with root doc identities.  Any system scanning `@`-prefixed pos-1 URIs could not distinguish corpus child-docs from root docs.  The browser peer `CORPUS_PREFIX` used `"lar:///ha.ka.ba/bags/@"` with a fragile exclusion list (`!== CATALOG_DOC_URI`, `!== LARARIUM_DOC_URI`, `!== LARES_DOC_URI`) — a list that would not grow automatically when new root docs arrived.  No social plane docs existed.  No recipe schema existed.  Tests still asserted the old `corpus:slug` opaque prefix and `BAG_IDS.system`/`BAG_IDS.room` stub keys.
 
 ⏿ **Orient:**
-The URI grammar carries the topology.  `@` at pos-1 = root doc (exactly 6 reserved).  `@` at pos-2 = child doc under a root.  Corpus docs belong at `lar:///ha.ka.ba/@catalog/@{slug}` — scoped under ka, not parallel to it.  Six root docs in two planes form the full address space: content Tiga (ha/ka/ba) + social plane (identities/groups/sessions).  A recipe tiddler stored inside ha island gives every TW5 VM a derivable bag stack without side-channel configuration.  Bag-ID law (M20) extends naturally: social docs use their lar: URI as bag ID.
+The URI grammar carries the topology.  `@` at pos-1 = root doc (exactly 6 reserved).  `@` at pos-2 = child doc under a root.  Corpus docs belong at `lar:///ha.ka.ba/bags/@catalog/@{slug}` — scoped under ka, not parallel to it.  Six root docs in two planes form the full address space: content Tiga (ha/ka/ba) + social plane (identities/groups/sessions).  A recipe tiddler stored inside ha island gives every TW5 VM a derivable bag stack without side-channel configuration.  Bag-ID law (M20) extends naturally: social docs use their lar: URI as bag ID.
 
 ◇ **Decide:**
 Four OODA loops in sequence, each with a build gate:
@@ -2716,7 +2716,7 @@ Four OODA loops in sequence, each with a build gate:
 | `lararium-doc.ts` | 6-root 2-plane grammar docblock; `IDENTITIES_DOC_URI`, `CIRCLES_DOC_URI`, `SESSIONS_DOC_URI`; `corpusLarUri` → pos-2 `@catalog/@{slug}` |
 | `composite-store.ts` | Import + add social plane to `BAG_IDS`; updated recipe order comment |
 | `resolver.ts` | Named-doc branch comment updated to describe pos-1 / pos-2 `@` law |
-| `open-browser-lar-peer.ts` | `CORPUS_PREFIX` → `"lar:///ha.ka.ba/@catalog/@"`; drop exclusion list; import social URI constants + empty constructors; social boot block |
+| `open-browser-lar-peer.ts` | `CORPUS_PREFIX` → `"lar:///ha.ka.ba/bags/@catalog/@"`; drop exclusion list; import social URI constants + empty constructors; social boot block |
 | `open-node-lar-peer.ts` | Switch corpus discovery to `catalog.tiddlers` oracle (was `catalog.corpora`); same `CORPUS_PREFIX` fix; social boot block; `seedDefaultRecipes` call |
 | `lararium-island.ts` | Import social types + `recipeUri`; `reconcileWellKnownTiddlers` extended to 6 args; `seedIdentitiesDoc`/`seedCirclesDoc`/`seedSessionsDoc`; `seedDefaultRecipes` |
 | `social-doc.ts` *(new)* | `IdentitiesDoc`, `CirclesDoc`, `SessionsDoc` + empty constructors; barrel-exported from `index.ts` |
@@ -2733,7 +2733,7 @@ pnpm --filter @lararium/mesh test      # ✓ 5/5 suites, 67 tests
 ```
 
 Architecture now live:
-- `lar:///ha.ka.ba/@catalog/@elyncia` — correct pos-2 corpus child-doc URI
+- `lar:///ha.ka.ba/bags/@catalog/@elyncia` — correct pos-2 corpus child-doc URI
 - Six root docs (2 planes) boot in both peers; oracle tiddlers reconciled on every boot
 - Three seed recipes stored as tiddlers in ha island: `full`, `default`, `catalog/default`
 - Bag ID law holds across all 8 root + leaf doc types
@@ -2877,7 +2877,7 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 - Browser peer: also call `seedBagDescriptors` at boot (currently node-only — browser receives via Automerge sync, but explicit seeding guards first-boot edge case)
 - Room/corpus bags seed their own `BagTiddler` descriptor when they boot
 - `writePolicy` enforcement in `putViaRecipe` (policy evaluation against identity/group)
-- Wiki-first: bag picker TW5 widget reads `[recipe[lar:///ha.ka.ba/@lararium/bags/]]` to list bags
+- Wiki-first: bag picker TW5 widget reads `[recipe[lar:///ha.ka.ba/lararium/bags/]]` to list bags
 
 <<~/ahu >>
 
@@ -2939,7 +2939,7 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 - Room/corpus bags seed their own `BagTiddler` descriptor when they boot (currently node-only)
 - Browser peer: explicit `seedBagDescriptors` + `seedBlobDescriptors` call at first-boot (currently received via Automerge sync; seeding guards edge case)
 - Social plane UX: identity picker + group membership TW5 widgets reading tiddler fields
-- `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - Tombstone priority: CompositeStore check at tombstone time whether higher-priority bag retains title
 
 <<~/ahu >>
@@ -3044,7 +3044,7 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 **Test gate:** 173 tests (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
 
 ↺ **M25 Loop 4 candidates:**
-- Draft bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - `lararium-island.ts` `systemTitles` oracle tiddler migration
 - tldraw `(ed.store as any).put()` × 3 wiki-first migration
 - MCP `hud`/`receipt` storage-dir fix
@@ -3155,7 +3155,7 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 - `MemeCanvasProjection.onUriChanged()` full render algorithm — meme-frame layout from `LarTiddlerChange`
 - `TldrawCanvasBinding.applyPatch()` meme-frame + edge-arrow translation via `createShapeId`
 - `richText: TLRichText` label on geo shapes (tldraw v4.5.10)
-- Draft bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - Connect screen cold-boot path
 - MCP `hud`/`receipt` storage-dir fix
 
@@ -3275,7 +3275,7 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 - `MemeCanvasProjection.onUriChanged()` full render algorithm — meme-frame layout from `LarTiddlerChange`
 - `TldrawCanvasBinding.applyPatch()` meme-frame + edge-arrow translation via `createShapeId`
 - `richText: TLRichText` label on geo shapes (tldraw v4.5.10)
-- Draft bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - Connect screen cold-boot path with "check for admin operators" idempotency guard
 - MCP `hud`/`receipt` storage-dir fix
 - Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration

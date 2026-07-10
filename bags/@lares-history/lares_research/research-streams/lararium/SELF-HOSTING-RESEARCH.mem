@@ -1,6 +1,6 @@
-<<~ ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
+uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH.mem"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"
@@ -38,7 +38,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 **Failure mode:** User incorrectly edits a shadow module → parse failure on next reload. Recovery: shadow layer always regenerable from embedded HTML core. User store is stored separately (browser localStorage or file) and can be blown away without losing the kernel.
 
-**Lararium adoption:** The `lares/ha.ka.ba/@lares/api/` carriers form the shadow layer. Grammar memes in `lares/grammars/` form the shadow grammar. User-authored carriers can OVERRIDE grammar rules at a different URI but cannot DELETE the shadow grammar. `loadGrammarRules()` reads the shadow grammar; user overrides layer on top. `/admin/reseed` is safe because shadow grammar regenerates from `lares/` on every compile — it is the embedded JSON equivalent.
+**Lararium adoption:** The `lares/ha.ka.ba/lares/api/` carriers form the shadow layer. Grammar memes in `lares/grammars/` form the shadow grammar. User-authored carriers can OVERRIDE grammar rules at a different URI but cannot DELETE the shadow grammar. `loadGrammarRules()` reads the shadow grammar; user overrides layer on top. `/admin/reseed` is safe because shadow grammar regenerates from `lares/` on every compile — it is the embedded JSON equivalent.
 
 <<~/ahu >>
 
@@ -84,7 +84,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 **Lararium adoption from Oberon:** Grammar meme versioning via boot receipt SHA. Each time `lares/grammars/memetic-wikitext.md` changes, a new `receiptSha` results — tracked in `BootReceipt`. Old grammar rules remain available in git history. Future: the `GrammarRules` object carries a version hash; if the running grammar version differs from the requested version, the server can reseed.
 
-**Lararium adoption from Self:** The prototype chain maps cleanly to Lararium's meme override model. A user meme at `lar:///user:joshu@local/grammars/memetic-wikitext` extends the shadow grammar at `lar:///ha.ka.ba/@lares/api/grammars/memetic-wikitext` — same override pattern as Self's parent slot.
+**Lararium adoption from Self:** The prototype chain maps cleanly to Lararium's meme override model. A user meme at `lar:///user:joshu@local/grammars/memetic-wikitext` extends the shadow grammar at `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — same override pattern as Self's parent slot.
 
 <<~/ahu >>
 
@@ -96,7 +96,7 @@ From the five systems, four mechanisms converge:
 
 | Mechanism | Source | Lararium form |
 |---|---|---|
-| Shadow layer (read-only defaults) | TW5 | `lares/ha.ka.ba/@lares/api/` + `lares/grammars/` — regenerable from lares/, never deletable via canvas edit |
+| Shadow layer (read-only defaults) | TW5 | `lares/ha.ka.ba/lares/api/` + `lares/grammars/` — regenerable from lares/, never deletable via canvas edit |
 | Method dictionary mutation | Smalltalk | `GrammarRules` object — loaded fresh on each `compileMinimalBoot()`, passed to parser as runtime data |
 | C kernel / Lisp surface | Emacs | `resolveLarUri()` + parse dispatch = C kernel; all grammar patterns + family contracts + templates = Lisp surface |
 | Module versioning | Oberon | `BootReceipt.sha256` — each grammar change produces a new receipt; old versions recoverable from git |
@@ -137,9 +137,9 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 <<~ ahu #edges >>
 
 <<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family:control role:extends >>
-<<~ pranala #to-grammar ? -> lar:///ha.ka.ba/@lares/api/grammars/memetic-wikitext family:control role:informs >>
+<<~ pranala #to-grammar ? -> lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext family:control role:informs >>
 <<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:control role:informs >>
 
 <<~/ahu >>
 
-<<~ ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>

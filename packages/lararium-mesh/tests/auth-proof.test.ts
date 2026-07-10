@@ -18,7 +18,7 @@ const base = {
   nonce:      "ab12cd",
   gatePubKey: "gate-pk-hex",
   peerPubKey: "peer-pk-hex",
-  aud:        "lar:///ha.ka.ba/@daemon",
+  aud:        "lar:///ha.ka.ba/bags/@daemon",
   ts:         "2026-06-07T00:00:00Z",
 };
 
@@ -70,7 +70,7 @@ describe("runPeerHandshake (platform-blind V3 peer half)", () => {
       recv:        async () => queue.shift(),
       send:        (m: LarAuthMsg) => { sent.push(m); },
       contactCard: "card", peerPubKey: "peer-pk", gatePubKey: "gate-pk",
-      aud:         "lar:///ha.ka.ba/@daemon",
+      aud:         "lar:///ha.ka.ba/bags/@daemon",
       sign:        () => "sig-hex",
       now:         () => "2026-06-07T00:00:00Z",
       sent,
@@ -108,7 +108,7 @@ describe("verifyAuthProof (V3 verifier half — real Ed25519 keys)", () => {
   const challenge = {
     nonce:      "ab12cd",
     gatePubKey: "00".repeat(32),                 // stands for the verifier's own key
-    aud:        "lar:///ha.ka.ba/@daemon",
+    aud:        "lar:///ha.ka.ba/bags/@daemon",
     ts:         "2026-06-07T00:00:00.000Z",
   };
 
@@ -182,7 +182,7 @@ describe("ed25519SignerFromSeed (the LIGHT leaf-identity signer)", () => {
     const sign   = ed25519SignerFromSeed(seed);               // the leaf signer
     const parts  = {
       nonce: "cafe".repeat(16), gatePubKey: "00".repeat(32),
-      peerPubKey: pub, aud: "lar:///ha.ka.ba/@daemon", ts: "2026-06-07T12:00:00.000Z",
+      peerPubKey: pub, aud: "lar:///ha.ka.ba/bags/@daemon", ts: "2026-06-07T12:00:00.000Z",
     };
     const msg    = await buildAuthResponse({ ...parts, contactCard: "card", sign });
     // The gate recomputes with its OWN key (= gatePubKey here) and the card-derived

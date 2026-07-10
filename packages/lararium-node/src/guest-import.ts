@@ -6,7 +6,7 @@
  * imports FROM, never a runtime coupling. Bulk by nature (the slow/neocortical front): a paged scan
  * feeds the single-writer caller-vector `put`.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import type { ContentPalace } from "./content-palace.js";

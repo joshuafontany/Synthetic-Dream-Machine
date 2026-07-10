@@ -9,7 +9,7 @@
  * agents to `provider` (they were members of the old place, so their contact cards are
  * in-scope — mirrors joinCabalPlace's precondition).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { forkSurvivors, forkGenesisUri, type CabalPlace, type PlaceFork } from "@lararium/mesh";

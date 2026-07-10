@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/wikirules/lar-sigil-pragma
+title: lar:///ha.ka.ba/lararium/tw5/wikirules/lar-sigil-pragma
 type: application/javascript
 module-type: wikirule
 \*/
@@ -16,7 +16,7 @@ module-type: wikirule
  * `\widget ~name` can be registered here with a `handler` field pointing at a
  * fully-qualified JS module title. The grammar-cache then wires it at boot.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/sigil-pragma
+ * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/sigil-pragma
  */
 
 export interface ParseTreeNode {

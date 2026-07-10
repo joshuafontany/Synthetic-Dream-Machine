@@ -10,7 +10,7 @@
  * counter, so the mint stays deterministic. The Ki-plane bridging node rides back as data (the planes it
  * joins), never a side-effect — the caller wires it into the reaction-graph.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import type { SinkVerdict } from "./sink.js";

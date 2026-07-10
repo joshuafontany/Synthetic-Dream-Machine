@@ -18,7 +18,7 @@
  * Gate proof: this file (node, pure Repo) +
  *             browser-repo-in-island.test.ts test 2 (browser pool).
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/federation-seam
+ * Meme: lar:///ha.ka.ba/lararium/node/federation-seam
  */
 
 import { describe, test, expect } from "vitest";
@@ -49,8 +49,8 @@ describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel
 
     // Vessel writes a change after the island is synced.
     wikiHandle.change((d) => {
-      d.tiddlers["lar:///ha.ka.ba/@test/federation/page"] = {
-        title: "lar:///ha.ka.ba/@test/federation/page",
+      d.tiddlers["lar:///ha.ka.ba/bags/@test/federation/page"] = {
+        title: "lar:///ha.ka.ba/bags/@test/federation/page",
         text: "archipelago",
       };
     });
@@ -62,7 +62,7 @@ describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel
         5_000,
       );
       const check = () => {
-        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/page"]) {
+        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/page"]) {
           clearTimeout(timer);
           resolve();
         }
@@ -72,7 +72,7 @@ describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel
     });
 
     expect(
-      found.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/page"],
+      found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/page"],
     ).toBeDefined();
 
     port1.close();
@@ -101,8 +101,8 @@ describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel
 
     // Island writes — vessel observes via the same channel.
     found.change((d) => {
-      d.tiddlers["lar:///ha.ka.ba/@test/federation/reply"] = {
-        title: "lar:///ha.ka.ba/@test/federation/reply",
+      d.tiddlers["lar:///ha.ka.ba/bags/@test/federation/reply"] = {
+        title: "lar:///ha.ka.ba/bags/@test/federation/reply",
         text: "pono",
       };
     });
@@ -113,7 +113,7 @@ describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel
         5_000,
       );
       const check = () => {
-        if (wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/reply"]) {
+        if (wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/reply"]) {
           clearTimeout(timer);
           resolve();
         }
@@ -123,7 +123,7 @@ describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel
     });
 
     expect(
-      wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/reply"],
+      wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/reply"],
     ).toBeDefined();
 
     port1.close();

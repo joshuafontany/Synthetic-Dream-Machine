@@ -1,4 +1,4 @@
-title: lar:///ha.ka.ba/@lararium/templates/kau/html
+title: lar:///ha.ka.ba/lararium/templates/kau/html
 type: text/vnd.tiddlywiki
 
 <$list filter="[<kau-frag>!match[]]" variable=ignore>

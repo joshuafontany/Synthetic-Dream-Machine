@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> ⚠ **STALE — FROZE 2026-06-07. The live handoff moved to `bags/@lares/ha.ka.ba/@lares/docs/lares/handoff.md` (the pantjar torch).** Everything below stops at the V3-peer-auth / S9-browser state and MISSES the entire arc that landed after: LOAD verb → mint gate → F-arc → hull watchdog → genesis-intake → the INGEST gesture + watcher (~30 commits through `e38bbd22`, 2026-06-13). Real suite state 2026-06-14: mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ (the 4 ingest RED found this session were fixture drift — fixed same day). Read the bags torch for the current vector; this file survives as git-style archaeology only.
+> ⚠ **STALE — FROZE 2026-06-07. The live handoff moved to `bags/@lares/ha.ka.ba/lares/docs/lares/handoff.md` (the pantjar torch).** Everything below stops at the V3-peer-auth / S9-browser state and MISSES the entire arc that landed after: LOAD verb → mint gate → F-arc → hull watchdog → genesis-intake → the INGEST gesture + watcher (~30 commits through `e38bbd22`, 2026-06-13). Real suite state 2026-06-14: mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ (the 4 ingest RED found this session were fixture drift — fixed same day). Read the bags torch for the current vector; this file survives as git-style archaeology only.
 
 > Updated: 2026-06-07 (task-ontology language · residency front door + V1 · V3 peer-auth halves)
 > Branch: `feature/lararium-node-4`
@@ -175,7 +175,7 @@ Operator directive: retire the ceremony completely; no un-pono language; no depr
 **Named pono-debt surfaced (not closed in this turn):**
 
 - `promotion-ceremony.ts` + `PROMOTION_RECEIPT_TAG` constant in `@lararium/mesh` — deep architectural surface that `causal-island.ts` references; retirement deferred to Sprint 5 (story S5.6).
-- ~~`ABILITY_LADDER` in `causal-island.ts` includes `"promote"`~~ — RESOLVED 2026-06-01. The ladder collapsed to the 4 Keyhive-native verbs (`pull`/`read`/`edit`/`admin`); `promote`+`propose` (2026-05-31) and `sync`+`revoke` (2026-06-01) retired. The ladder is now Axis 1 (ACCESS) of the 3-axis authority model; see `lar:///ha.ka.ba/@lares/api/pono/causal-islands` + `alignment-layer`.
+- ~~`ABILITY_LADDER` in `causal-island.ts` includes `"promote"`~~ — RESOLVED 2026-06-01. The ladder collapsed to the 4 Keyhive-native verbs (`pull`/`read`/`edit`/`admin`); `promote`+`propose` (2026-05-31) and `sync`+`revoke` (2026-06-01) retired. The ladder is now Axis 1 (ACCESS) of the 3-axis authority model; see `lar:///ha.ka.ba/lares/api/pono/causal-islands` + `alignment-layer`.
 - Worker tier-signal types in `the-lararium-hud.md` (line 454) still use `"promote"|"demote"` strings — describes a P.3 surface that hasn't fully landed; will harmonize with the ACTION verb register when Worker #1 ships.
 
 **Metrics:** mesh 213/213 (+33 from Sprint 4), tw5 73/73, node 64/64, browser 19/20 (1 pre-existing TW5-boot shim gap). Workspace 369/370. Typecheck 6/6 packages clean. Branch carries ~50 modified files across the four-sprint arc + cleanup; commit boundary remains operator's call.
@@ -239,23 +239,23 @@ converge on one-tick-boundary across heterogeneous sources.
 interface WikiRecipe { wikiSlug: string; canonBags?: readonly SlotUri[] }
 ```
 Expands to fixed cascade `[@temp, @draft, @<wikiSlug>, ...canon, @lares, @lararium]`.
-Slot URIs live in the `lar:///ha.ka.ba/@<name>` namespace alongside content
+Slot URIs live in the `lar:///ha.ka.ba/bags/@<name>` namespace alongside content
 URIs (no parallel naming system). Manifest carries `recipe: WikiRecipe +
 resolver: { slotUri → AutomergeUrl }` instead of `bagBindings[]`. `BagBinding`
 type retired; `BAG_IDS.scratch/projection/draft` deleted (slot URIs replace them).
-`ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/@admin` (was nested under @lararium).
+`ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/bags/@admin` (was nested under @lararium).
 `IslandBehavior.writeBagId` retired — admin/wiki behaviors share recipe shape;
 differences live in `onEa` / `onSignal`.
 
 **3. In-wiki bag-paths cascade (TW5 cascade pattern).**
 Write routing moves OUT of TS prefix-matching into the wiki itself. Default
-cascade ships as plugin tiddler `lar:///ha.ka.ba/@lararium/config/bag-paths`:
+cascade ships as plugin tiddler `lar:///ha.ka.ba/lararium/config/bag-paths`:
 
 ```
-[prefix[$:/temp/]then[lar:///ha.ka.ba/@temp]]
-[prefix[Draft of ]then[lar:///ha.ka.ba/@draft]]
+[prefix[$:/temp/]then[lar:///ha.ka.ba/bags/@temp]]
+[prefix[Draft of ]then[lar:///ha.ka.ba/bags/@draft]]
 [prefix[$:/]then[]]
-[prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]
+[prefix[lar:]then{lar:///ha.ka.ba/lararium/config/current-wiki-bag}]
 ```
 
 `IslandAdaptor._routeBag()` walks this cascade via `wiki.filterTiddlers(filter,
@@ -276,7 +276,7 @@ for explicit per-bag delete (publish semantics).
 island-context, island-behaviors, lar-admin-island, lar-wiki-island,
 browser-sovereign-island-model, browser-wiki-worker, memory-store, tw5-vm,
 island-protocol header). 4 `$:/config/Lar*` literal refs migrated to
-`lar:///ha.ka.ba/@lararium/config/*` namespace. Memes: deleted
+`lar:///ha.ka.ba/lararium/config/*` namespace. Memes: deleted
 `bags/@lares/api/lararium/island-accumulator.md` (class retired),
 rewrote [island-adaptor.md](../bags/@lares/api/lararium/island-adaptor.md),
 updated [nalu.md](../bags/@lares/api/pono/nalu.md), wrote new
@@ -1145,7 +1145,7 @@ monolith parse path retired in full. `GRAMMAR_TAG` as the single registration su
 
 **New:**
 - `packages/lararium-tw5/src/lib-smol-toml.ts` — smol-toml bundled once as a
-  TW5 `module-type: library` tiddler at `lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml`.
+  TW5 `module-type: library` tiddler at `lar:///ha.ka.ba/lararium/tw5/lib/smol-toml`.
   All other plugin modules externalize it via `require()` — zero per-module duplication.
 - `packages/lararium-tw5/tiddlers/sigil-toml.tid` — `toml` data-fence sigil as a
   SharktoothSigil tiddler (`lar-kind: data`, `lar-name: toml`). The `[[sigils]]`
@@ -1155,7 +1155,7 @@ monolith parse path retired in full. `GRAMMAR_TAG` as the single registration su
 **Modified:**
 - `packages/lararium-tw5/plugin-build/vite-plugin-build.ts` — smol-toml
   externalized for all modules except `lib-smol-toml` itself; `output.paths` maps
-  `smol-toml` → `lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml`.
+  `smol-toml` → `lar:///ha.ka.ba/lararium/tw5/lib/smol-toml`.
 - `packages/lararium-tw5/tiddlers/memetic-wikitext.tid` — `[[sigils]]` toml block
   removed; ahu #sigil-registry description updated to note SharktoothSigil migration.
 - `packages/lararium-tw5/src/grammar-cache.ts` — docstring rewritten; TOML fallback
@@ -1549,7 +1549,7 @@ lares reset --force
 lares serve
 lares status
 lares wiki list
-lares promote lar:///definitely-not-real --to lar:///ha.ka.ba/@lares --yes
+lares promote lar:///definitely-not-real --to lar:///ha.ka.ba/bags/@lares --yes
 ```
 
 ## Test Layout
@@ -1582,7 +1582,7 @@ Generated compatibility artifact only:
 
 - `packages/lararium-tw5/dist-plugin/lares-memetic-wikitext.tid`
   - `title: $:/plugins/lares/memetic-wikitext`
-  - Canonical artifact remains `lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext`.
+  - Canonical artifact remains `lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext`.
   - Decision needed: keep as explicitly non-canonical vanilla TW5 drag/drop
     export, or remove the `$:/plugins/...` variant entirely.
 

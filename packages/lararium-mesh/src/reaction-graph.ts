@@ -15,7 +15,7 @@
  *
  * Isomorphic: no Node/browser APIs. Works in vessel, island, and browser.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/reaction-graph
+ * Meme: lar:///ha.ka.ba/lararium/mesh/reaction-graph
  */
 
 // ---------------------------------------------------------------------------

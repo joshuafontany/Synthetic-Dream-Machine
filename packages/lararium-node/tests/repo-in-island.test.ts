@@ -14,7 +14,7 @@
  *   6. island emits event(repo:change) observable via onWorkerEvent
  *   7. assert event arrives — no routeChangeset call
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/repo-in-island
+ * Meme: lar:///ha.ka.ba/lararium/node/repo-in-island
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -27,7 +27,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 // ---------------------------------------------------------------------------
 
 const FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.meta.url);
-const WIKI_ID     = "lar:///ha.ka.ba/@test/repo-in-island";
+const WIKI_ID     = "lar:///ha.ka.ba/bags/@test/repo-in-island";
 
 
 // ---------------------------------------------------------------------------

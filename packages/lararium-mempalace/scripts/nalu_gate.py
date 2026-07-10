@@ -21,7 +21,7 @@ composable caps the pipeline wires later:
 CLOCK-PURITY: no cap here reads time.time(). The caller drives the ordinal (the recovered beat, or a
 tick counter); the gate constitutes its timing FROM that drive, never fetches a global now.
 
-Meme: lar:///ha.ka.ba/@lares/sensorium/nalu-gate (the gate physics; the pipeline composes it later).
+Meme: lar:///ha.ka.ba/lares/sensorium/nalu-gate (the gate physics; the pipeline composes it later).
 """
 from __future__ import annotations
 

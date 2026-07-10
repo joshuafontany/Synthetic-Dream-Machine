@@ -22,7 +22,7 @@
  * This is the isomorphic peer-symmetry seam: same message protocol whether the
  * host is a node server or a browser tab. No loadRecords, no renderCarrier.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/meme-worker-script
+ * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/meme-worker-script
  */
 
 import { TW5Engine } from "./tw5-vm.js";

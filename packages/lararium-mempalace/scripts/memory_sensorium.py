@@ -18,7 +18,7 @@ Two wards guard the run:
 Only the Claude surface carries the parentUuid + subagent provenance the worldline observer reads, so
 the fork-DAG leg rides claude alone; codex/copilot land content + planes and read `worldline: null`.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/lares-mcp
+Meme: lar:///ha.ka.ba/lararium/sensorium/lares-mcp
 """
 from __future__ import annotations
 

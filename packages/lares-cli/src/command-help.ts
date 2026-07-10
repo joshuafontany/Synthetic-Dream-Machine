@@ -9,7 +9,7 @@
  *
  * The registry is sparse on purpose: a command WITHOUT an entry renders its dispatch summary (passed
  * in by the caller) — the gap narrows command-by-command without a big-bang rewrite. The `corpus`
- * entry is the live source the design meme (lar:///ha.ka.ba/@lares/api/lares/corpus) mirrors.
+ * entry is the live source the design meme (lar:///ha.ka.ba/lares/api/lares/corpus) mirrors.
  */
 
 export interface CommandHelp {

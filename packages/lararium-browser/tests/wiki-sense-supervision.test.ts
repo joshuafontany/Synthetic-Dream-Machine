@@ -9,7 +9,7 @@
  * un-supervised designation (both the supervisor's grant check and the pool's live-island check
  * fail loud), and proof-federate refuses typed.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sense-supervision
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sense-supervision
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -27,8 +27,8 @@ import { BrowserVesselIslandPool } from "../src/browser-vessel-island-pool.js";
 
 const FIXTURE_URL = new URL("./fixtures/browser-sensorium-island.mjs", import.meta.url);
 
-const ISLAND_A = "lar:///ha.ka.ba/@sense-worker-a";
-const STRANGER = "lar:///ha.ka.ba/@sense-worker-stranger";
+const ISLAND_A = "lar:///ha.ka.ba/bags/@sense-worker-a";
+const STRANGER = "lar:///ha.ka.ba/bags/@sense-worker-stranger";
 
 const MOUNT_SPEC = {
   coreHash: null,

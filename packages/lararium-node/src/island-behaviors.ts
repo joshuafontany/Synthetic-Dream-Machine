@@ -7,7 +7,7 @@
  * projection (LarDiskProjector, fs). Browser supplies no onBoot — same behavior,
  * the disk capability simply absent.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/island-behaviors
+ * Meme: lar:///ha.ka.ba/lararium/node/island-behaviors
  */
 
 import type { IslandMsg_Manifest } from "@lararium/mesh";

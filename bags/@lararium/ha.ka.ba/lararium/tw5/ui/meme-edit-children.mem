@@ -1,0 +1,66 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/meme-edit-children >>
+```toml iam
+cacheable  = true
+file-path  = "bags/@lararium/tw5/ui/meme-edit-children.mem"
+list-after = "$:/core/ui/EditTemplate/body"
+mana       = 18
+manao      = 17
+manaoio    = 16
+register   = "Synthesis-Canon"
+retain     = true
+role       = "EditTemplate: inline editors for non-body ahu slots; body slot edited via core EditTemplate/body"
+tags       = ["$:/tags/EditTemplate", "lar:///ha.ka.ba/lares/api/pono/meme"]
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
+```
+
+<<~ &#x0002; >>
+
+\whitespace trim
+
+<!-- EditTemplate operates on "Draft of <<currentTiddler>>" — changes are local until save.
+     For ahu child slots we edit the child tiddler directly (no Draft copy) — this is
+     intentional: child edits flow immediately through replaceCarrierSlot to the carrier,
+     keeping the CRDT document consistent without a dangling draft state. -->
+
+<$list filter="[all[current]has[ahu-slots]]" variable="_" emptyMessage="">
+
+<div class="tc-lararium-ahu-edit-sections">
+<fieldset class="tc-lararium-ahu-edit-fieldset">
+<legend class="tc-lararium-ahu-edit-legend">ahu slots</legend>
+
+<$list filter="[enlist{!!ahu-slots}]" variable="childUri">
+<$set name="slotName" value={{{[<childUri>get[ahu-slot]]}}}>
+
+<!-- Skip #body (edited by core EditTemplate/body) and control/structural slots -->
+<$list filter="[<slotName>!matchregexp[^#(body|iam|exit|edges|stream-open|stream-close|stream-exit|body-open|body-close|meme-body-open|meme-body-close)$]]" variable="_" emptyMessage="">
+
+<div class="tc-lararium-ahu-edit-section">
+  <div class="tc-lararium-ahu-slot-header">
+    <code class="tc-ahu-slot-name"><<slotName>></code>
+    <$link to=<<childUri>> tooltip="Open slot tiddler">↗</$link>
+  </div>
+  <$edit-text tiddler=<<childUri>> field="text" tag="textarea"
+    class="tc-edit-texteditor tc-ahu-edit-body" rows="4"/>
+</div>
+
+</$list>
+</$set>
+</$list>
+
+</fieldset>
+</div>
+
+</$list>
+
+<<~ ahu #edges >>
+
+
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

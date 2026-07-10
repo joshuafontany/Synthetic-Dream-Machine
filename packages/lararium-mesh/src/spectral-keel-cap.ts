@@ -11,7 +11,7 @@
  * Confused-deputy ward (two levels): compose-time POLA (the resolver reaches only declared deps) + call-time
  * direct closure (each verb closes over ITS keel's own state — no ambient keel registry, no Π-by-id lookup).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import type { CapModule } from "./cap-compose.js";

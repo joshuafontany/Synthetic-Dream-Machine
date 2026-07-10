@@ -1,4 +1,4 @@
-title: lar:///ha.ka.ba/@lararium/templates/ahu/html
+title: lar:///ha.ka.ba/lararium/templates/ahu/html
 type: text/vnd.tiddlywiki
 
 <section class="lar-ahu" data-uri=<<currentTiddler>>><header class="lar-ahu-slot"><$link to=<<currentTiddler>>>{{!!slot}}</$link></header><div class="lar-ahu-body"><$transclude $tiddler=<<currentTiddler>> mode="block"/></div></section>

@@ -118,7 +118,7 @@ class ListeningWSServerAdapter extends NodeWSServerAdapter {
   override whenReady(): Promise<void> { return Promise.resolve(); }
 }
 /** Title of the social bootstrap plugin tiddler baked by lararium:init. */
-export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/@lararium/bootstrap/social";
+export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/lararium/bootstrap/social";
 
 /** @see LarOpenPhase in @lararium/mesh */
 export type NodeOpenPhase = LarOpenPhase;

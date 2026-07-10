@@ -20,7 +20,7 @@
  * VerbTable. Platform-blind: this file imports NO node-only module — the node helpers reach these caps
  * ONLY through the injected provider impls.
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel
  */
 
 import { composeVessel, readStampFilters, hitPassesStampFilters, drawerPassesStampFilters, type CapModule, type StampFilters } from "@lararium/mesh";

@@ -23,7 +23,7 @@
  * only and the structure plane derives downstream from the source path (the corpus router is
  * path-based, per-file); an injected `parse` fills `structure` per chunk.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/corpus#the-caps
+ * Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-caps
  */
 
 import type { NestedTree, StreamAdapter, StreamFrame } from "./stream-adapter.js";

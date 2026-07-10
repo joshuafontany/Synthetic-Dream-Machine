@@ -17,7 +17,7 @@
  * Failures are pono alignment intent vectors — they name the exact broken link
  * in the pipeline above.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/m3-breathing
+ * Meme: lar:///ha.ka.ba/lararium/node/m3-breathing
  */
 
 import { describe, test, expect } from "vitest";
@@ -75,7 +75,7 @@ function waitFor<T>(
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
-const WIKI_ID    = "lar:///ha.ka.ba/@test/m3-breathing";
+const WIKI_ID    = "lar:///ha.ka.ba/bags/@test/m3-breathing";
 const BUTTON_URI = "lar:///test/instances/move-button-1";
 const TIMEOUT    = 30_000;
 

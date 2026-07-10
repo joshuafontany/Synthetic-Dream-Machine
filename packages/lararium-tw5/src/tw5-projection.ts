@@ -15,7 +15,7 @@
  *
  * Isomorphic: uses only `$tw.fakeDocument` (no window.document) — safe in @lararium/tw5.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/tw5-projection
+ * Meme: lar:///ha.ka.ba/lararium/tw5/tw5-projection
  */
 
 import type { IslandContext } from "./island-context.js";

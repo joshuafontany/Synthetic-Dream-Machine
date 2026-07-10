@@ -19,7 +19,7 @@
  * the codebase's lightweight hand-written-worker fixture pattern (sibling of
  * browser-repo-in-island-echo.mjs). No build step, no checked-in bundle.
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/browser-verb-breathing
+ * Meme: lar:///ha.ka.ba/lararium/browser/browser-verb-breathing
  */
 
 import { describe, test, expect } from "vitest";
@@ -34,7 +34,7 @@ import { BrowserVesselIslandPool }   from "../src/browser-vessel-island-pool.js"
 
 const FIXTURE_WORKER_URL = new URL("./fixtures/browser-verb-island.mjs", import.meta.url);
 
-const WIKI_ID    = "lar:///ha.ka.ba/@test/browser-verb-breathing";
+const WIKI_ID    = "lar:///ha.ka.ba/bags/@test/browser-verb-breathing";
 const BUTTON_URI = "lar:///test/instances/move-button-1";
 
 // The shared verb→event contract — the SAME battery the node real-TW5 island runs.

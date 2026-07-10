@@ -14,7 +14,7 @@
  * Boots once per suite (the core blob rides tw5-core/, a build artifact) — the suite SKIPS loudly
  * when the blob stays absent (run `pnpm --filter @lararium/tw5 build:tw5-vendor` first).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
 import { describe, test, expect, beforeAll } from "vitest";
@@ -118,7 +118,7 @@ describe.skipIf(!coreBlobPresent)("wiki-sense — the VM-native beat (real TW5 b
     };
 
     const wikiBeat = JSON.parse(wiki.filterTiddlers("[wikisense:cohere:ordinary[]]")[0]!) as WikiCoherenceSummary;
-    const compositeBeat = await compositeSummary("lar:///ha.ka.ba/@cross-beat-glue", [...GLUE_SEEDS, pluginDoc]);
+    const compositeBeat = await compositeSummary("lar:///ha.ka.ba/bags/@cross-beat-glue", [...GLUE_SEEDS, pluginDoc]);
     // the two beats agree on the WHOLE verdict — radius, glue, vacuity, loci, gate, grain.
     expect(wikiBeat).toEqual(compositeBeat);
 
@@ -131,7 +131,7 @@ describe.skipIf(!coreBlobPresent)("wiki-sense — the VM-native beat (real TW5 b
     try {
       const wikiObstruct = JSON.parse(wiki.filterTiddlers("[wikisense:cohere:ordinary[]]")[0]!) as WikiCoherenceSummary;
       const compositeObstruct = await compositeSummary(
-        "lar:///ha.ka.ba/@cross-beat-obstruct", [...GLUE_SEEDS, pluginDoc, ORNATE_NOVEL],
+        "lar:///ha.ka.ba/bags/@cross-beat-obstruct", [...GLUE_SEEDS, pluginDoc, ORNATE_NOVEL],
       );
       expect(wikiObstruct).toEqual(compositeObstruct);
       expect(wikiObstruct.radius).toBeGreaterThan(0);

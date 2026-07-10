@@ -9,7 +9,7 @@
  * that proxies to the daemon island, which does receiveContactCard + verify
  * in-worker and returns the verdict plus the peer's Identifier hex.
  *
- * Gate: lar:///ha.ka.ba/@lararium/node/daemon-auth-gate
+ * Gate: lar:///ha.ka.ba/lararium/node/daemon-auth-gate
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
@@ -254,7 +254,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
 
   test("V3: armed with a gatePubKey, the challenge advertises it (gate-binding)", async () => {
     const { seam } = makeCapturingSeam();
-    gate.arm(seam, "lar:///ha.ka.ba/@daemon", "deadbeef".repeat(8));
+    gate.arm(seam, "lar:///ha.ka.ba/bags/@daemon", "deadbeef".repeat(8));
 
     const ws  = await connect(serverInfo.port);
     const msg = await nextMessage(ws) as { nonce: string; gatePubKey?: string };
@@ -267,7 +267,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
 
   test("V3: a lar:auth with sig+ts relays the proof {nonce, sig, ts} to the seam", async () => {
     const { seam, calls } = makeCapturingSeam();
-    gate.arm(seam, "lar:///ha.ka.ba/@daemon", "00".repeat(32));
+    gate.arm(seam, "lar:///ha.ka.ba/bags/@daemon", "00".repeat(32));
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };

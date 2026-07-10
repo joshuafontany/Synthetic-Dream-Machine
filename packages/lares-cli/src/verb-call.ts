@@ -8,7 +8,7 @@
  * did rides the invocation for the daemon's verify-then-delegate (authority); the
  * daemon's warm replica records the durable CRDT outcome (record). Transport,
  * authority, and record stay decoupled — see
- * lar:///ha.ka.ba/@lararium/api/lares-lararium-binding.
+ * lar:///ha.ka.ba/lararium/api/lares-lararium-binding.
  *
  * No leaf Repo, no WS sync-on-connect, no in-memory replica. A CLI process that
  * stood its own Automerge replica to reach a daemon holding the canonical one paid

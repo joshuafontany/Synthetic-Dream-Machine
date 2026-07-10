@@ -9,7 +9,7 @@ MCP tools stay thin skins over it, each verb named the same on both — harvest 
 · kapae · un_kapae (Phase-6a lifecycle floor; the extensions declare/attach/reconcile/release/daydream/
 deep-dream + the HITL/HOTL grid ride in at 6b).
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/lares-mcp (the isomorphic surface).
+Meme: lar:///ha.ka.ba/lararium/sensorium/lares-mcp (the isomorphic surface).
 """
 from __future__ import annotations
 

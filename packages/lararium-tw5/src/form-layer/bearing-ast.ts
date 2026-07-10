@@ -1,6 +1,6 @@
 /**
  * bearing-ast — the lar: URI bearing-vector AST (the form-layer's RED parser).
- * Meme: lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#lar-uri
+ * Meme: lar:///ha.ka.ba/lares/api/lares/noosphere-boot#lar-uri
  *
  * The aim/yield `lar://` URI rides the classifier channel — it STEERS (the red),
  * it is not prose (the black). bearing-harvest (mesh) holds it OPAQUE: it reads

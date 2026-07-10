@@ -1,8 +1,8 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-confidence
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-confidence
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: metadata
 lar-pattern: <<~\s*confidence\b([\s\S]*?)>>
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#l-prime
+lar-pono-uri: lar:///ha.ka.ba/lares/api/lares/noosphere-boot#l-prime
 type: text/vnd.tiddlywiki
 
 <!-- confidence — the certainty vow (register N/20). HUD-frame sigil: recognized in the tree, rendered as

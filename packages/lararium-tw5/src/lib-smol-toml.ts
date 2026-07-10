@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml
+title: lar:///ha.ka.ba/lararium/tw5/lib/smol-toml
 type: application/javascript
 module-type: library
 \*/
@@ -9,7 +9,7 @@ module-type: library
  * Ships smol-toml as a single `module-type: library` tiddler inside the
  * lares/memetic-wikitext plugin. Other module tiddlers require it via:
  *
- *   const { parse } = require("lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml");
+ *   const { parse } = require("lar:///ha.ka.ba/lararium/tw5/lib/smol-toml");
  *
  * Vite externalizes the `smol-toml` npm import in every other module build
  * and rewrites it to this require() call, so smol-toml travels once in the

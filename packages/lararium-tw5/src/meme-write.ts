@@ -23,7 +23,7 @@
  * framing (iam order/alignment, sigil spacing, block margins) normalizes
  * once; operator content bytes survive whole.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/meme-write
+ * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/meme-write
  */
 
 import { expandMemeRefs } from "./deserializer.js";

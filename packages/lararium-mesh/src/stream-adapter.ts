@@ -28,7 +28,7 @@
  *     door). Text's `signal` stays empty at ingest — cohesion is a CROSS-frame property of the
  *     embeddings, not producible from one chunk (see {@link composePalace}, the derived-bands door).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/corpus#the-caps
+ * Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-caps
  */
 
 // ── The frame — the modality-invariant carrier the planes consume ────────────────────────────────

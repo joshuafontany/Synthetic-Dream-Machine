@@ -9,7 +9,7 @@
  * holder. Caller-vector (the embedding arrives on the wire, no model load) — uniform with structure/
  * form/persistence AND split-ready: the parallel-ingest embeds upstream, this commits the vector.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu (the content plane)
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu (the content plane)
  */
 
 import { resolveContentPalaceSpawn } from "@lararium/mempalace";

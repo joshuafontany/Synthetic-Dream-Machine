@@ -11,7 +11,7 @@
  * confidence ladder (1/2/3 → provisional/firm/gong); the co-firing window admits temporally
  * spread coincidence; and symInvSqrt is a genuine inverse-sqrt.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
+ * Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock
  */
 
 import { describe, test, expect } from "vitest";

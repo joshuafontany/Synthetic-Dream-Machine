@@ -1,7 +1,7 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-elif
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-elif
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: control
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/kahawai
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/kahawai
 lar-alias-for: \elif
 lar-see-also: kahawai
 lar-pattern: <<~\s*\\elif\s+([^\n>]+?)\s*>>

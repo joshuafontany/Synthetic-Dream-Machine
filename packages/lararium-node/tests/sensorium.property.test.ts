@@ -55,7 +55,7 @@ function randManifest(u: () => number, sensoriumDir: string) {
   }
   const m = buildSensoriumManifest(sensoriumDir, {
     sensorium: `s${Math.floor(u() * 1e6)}`,
-    lar: `lar:///ha.ka.ba/@x/${Math.floor(u() * 1e9).toString(36)}`,
+    lar: `lar:///ha.ka.ba/bags/@x/${Math.floor(u() * 1e9).toString(36)}`,
     caps,
     bands: u() < 0.5 ? { grain: "wavelet", k: Math.floor(u() * 5) } : {},
     children: u() < 0.5 ? [{ sensorium: "kid", absDir: join(sensoriumDir, "kid") }] : [],

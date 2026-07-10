@@ -13,7 +13,7 @@
  * stale KG re-builds by nuke-and-pave + re-harvest (agent-worldline #time). These writes are
  * therefore best-effort durability, never the live causal authority (that stays the ITC read).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
  */
 
 import { execFileSync } from "node:child_process";

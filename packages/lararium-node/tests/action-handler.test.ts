@@ -9,7 +9,7 @@
  *   - change-id preserves across ADD / COPY / MOVE transfers
  *   - LOAD throws not-implemented (Sprint 5 scope honest about external fetch)
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme: lar:///ha.ka.ba/lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";
@@ -32,9 +32,9 @@ import { runLocalVerb } from "../../lararium-tw5/src/verb-local-dispatch.js";
 // Fixtures
 // ---------------------------------------------------------------------------
 
-const BAG_LOW  = "lar:///ha.ka.ba/@low";
-const BAG_MID  = "lar:///ha.ka.ba/@mid";
-const BAG_HIGH = "lar:///ha.ka.ba/@high";
+const BAG_LOW  = "lar:///ha.ka.ba/bags/@low";
+const BAG_MID  = "lar:///ha.ka.ba/bags/@mid";
+const BAG_HIGH = "lar:///ha.ka.ba/bags/@high";
 
 function makeComposite(): CompositeStore {
   const c = new CompositeStore();
@@ -159,7 +159,7 @@ describe("ADD handler", () => {
     // (Law 4 / confused-deputy guard) and MUST NOT mount the bag ephemerally —
     // the access-reach path resolves the bag's own doc, never a standing mount.
     const handler = table.get("ADD")!;
-    const UNMOUNTED = "lar:///ha.ka.ba/@unmounted-deep-bag";
+    const UNMOUNTED = "lar:///ha.ka.ba/bags/@unmounted-deep-bag";
     const args = { title: "T", "from-bag": BAG_LOW, "to-bag": UNMOUNTED, "change-id": cid };
     await expect(handler(args, makeContext(composite, "ADD", args)))
       .rejects.toThrow(/unreachable|no silent fall-through/i);
@@ -306,11 +306,11 @@ describe("LOAD handler", () => {
       "source-uri": "bags/@lares/api/lares/example.md",
       "to-bag": BAG_HIGH,
       "change-id": "c-load-1",
-      carriers: [{ title: "lar:///ha.ka.ba/@lares/example", text: "Aloha — carrier body.\n" }],
+      carriers: [{ title: "lar:///ha.ka.ba/lares/example", text: "Aloha — carrier body.\n" }],
     };
     const summary = await handler(args, makeContext(composite, "LOAD", args)) as { count: number; titles: string[] };
     expect(summary.count).toBeGreaterThanOrEqual(1);
-    const all = await composite.resolveAll("lar:///ha.ka.ba/@lares/example");
+    const all = await composite.resolveAll("lar:///ha.ka.ba/lares/example");
     const landed = all.find((e) => e.bagId === BAG_HIGH);
     expect(landed).toBeTruthy();
     expect(landed?.record.meta?.changeId).toBe("c-load-1");

@@ -19,7 +19,7 @@
  * collection lazily on first holder `put`, so `init` only needs to ensure the directory exists; the
  * verbatim mempalace needs the real `mempalace init` + the auto_save off-switch.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mempalace/genesis-doc
+ * Meme: lar:///ha.ka.ba/lararium/mempalace/genesis-doc
  */
 
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
@@ -240,7 +240,7 @@ function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensori
 export function materializeMemorySensorium(): PalaceSetupStep {
   return materializeSensorium("memory:manifest", memorySensoriumDir(), {
     sensorium: "memory",
-    lar: "lar:///ha.ka.ba/@lararium/api/living-grammar-palace#palace-instance",
+    lar: "lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance",
     caps: {
       // The content plane is a LARARIUM-OWNED store (<memory>/content), NOT the guest ~/.mempalace.
       // Adopting an existing user mempalace runs as a deliberate import Act, never a runtime binding —
@@ -268,7 +268,7 @@ export function materializeMemorySensorium(): PalaceSetupStep {
  * record) so the parallel fills the actual stores/engines WITHOUT a structure change, and dumb edges
  * carry no role vocabulary. Returns one ledger step per manifest (parent + who/authority/flow).
  *
- *   mesh      lar:///ha.ka.ba/@lararium/mesh            — minimal own caps; STRUCTURE = the 3 children.
+ *   mesh      lar:///ha.ka.ba/lararium/mesh            — minimal own caps; STRUCTURE = the 3 children.
  *   ├─ who        …/mesh/who        — identity/presence: content (presence-embeddings) + structure
  *   │                                 (the presence-graph) fill here; thin `has` until the parallel fills.
  *   ├─ authority  …/mesh/authority  — caps/keyhive: the cap-grant store; a thin content cap the parallel fills.
@@ -287,7 +287,7 @@ export function materializeMeshSensorium(): PalaceSetupStep[] {
   return [
     materializeSensorium("mesh:manifest", meshDir, {
       sensorium: "mesh",
-      lar: "lar:///ha.ka.ba/@lararium/mesh",
+      lar: "lar:///ha.ka.ba/lararium/mesh",
       caps: {},
       children: [
         { sensorium: "who",       absDir: whoDir  },
@@ -300,21 +300,21 @@ export function materializeMeshSensorium(): PalaceSetupStep[] {
     // structure) the parallel fills WHEN it perceives them; the persistence cap it #has from birth.
     materializeSensorium("mesh:who:manifest", whoDir, {
       sensorium: "who",
-      lar: "lar:///ha.ka.ba/@lararium/mesh/who",
+      lar: "lar:///ha.ka.ba/lararium/mesh/who",
       caps: { ...who.cap },
       persistencePolicy: who.persistencePolicy,
       ephemeral: false,
     }),
     materializeSensorium("mesh:authority:manifest", authDir, {
       sensorium: "authority",
-      lar: "lar:///ha.ka.ba/@lararium/mesh/authority",
+      lar: "lar:///ha.ka.ba/lararium/mesh/authority",
       caps: { ...auth.cap },
       persistencePolicy: auth.persistencePolicy,
       ephemeral: false,
     }),
     materializeSensorium("mesh:flow:manifest", flowDir, {
       sensorium: "flow",
-      lar: "lar:///ha.ka.ba/@lararium/mesh/flow",
+      lar: "lar:///ha.ka.ba/lararium/mesh/flow",
       caps: { ...flow.cap },
       persistencePolicy: flow.persistencePolicy,
       // BASE cap — the coupling-lobe RESERVES its child-edges (empty) for the node-stream effective-
@@ -343,7 +343,7 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
   return [
     materializeSensorium("memetic-wikitext:manifest", topDir, {
       sensorium: "memetic-wikitext",
-      lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium",
+      lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium",
       caps: {},                                        // the top holds NO byte-storing fiber cap
       bands,
       children: [
@@ -355,7 +355,7 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
     // Each peer carries the persistence infrastructure beside its content self-cap.
     materializeSensorium("memetic-wikitext:formal:manifest", formalDir, {
       sensorium: "formal",
-      lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium#formal",
+      lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium#formal",
       caps: { content: { absDir: formalDir, engine: "mempalace" }, ...formal.cap },   // memes-on-disk corpus (self-cap → ".") + persistence
       persistencePolicy: formal.persistencePolicy,
       bands,
@@ -363,7 +363,7 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
     }),
     materializeSensorium("memetic-wikitext:informal:manifest", informalDir, {
       sensorium: "informal",
-      lar: "lar:///ha.ka.ba/@lares/api/lares/memetic-wikitext-sensorium#informal",
+      lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium#informal",
       caps: { content: { absDir: informalDir, engine: "mempalace" }, ...informal.cap }, // chat-sessions corpus (self-cap → ".") + persistence
       persistencePolicy: informal.persistencePolicy,
       bands,

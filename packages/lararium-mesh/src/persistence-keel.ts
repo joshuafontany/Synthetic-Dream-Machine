@@ -31,7 +31,7 @@
  * Standing ceiling law: the mechanical lifecycle NEVER lifts the dial into the top band (kapu,
  * 17..20) — kapu seats by talk-story consensus only; the ceiling pins at 16 (ano's top).
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/persistence-keel
+ * Meme: lar:///ha.ka.ba/lararium/mesh/persistence-keel
  */
 
 import { meanVar } from "./change-point.js";

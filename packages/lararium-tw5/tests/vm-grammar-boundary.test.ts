@@ -38,7 +38,7 @@ describe("pono grammar boundary", () => {
   test("meme AST implementation is authored as a TW5 library tiddler", () => {
     const entry = read("src/meme-ast-entry.ts");
 
-    expect(entry).toContain("title: lar:///ha.ka.ba/@lararium/tw5/modules/meme-ast");
+    expect(entry).toContain("title: lar:///ha.ka.ba/lararium/tw5/modules/meme-ast");
     expect(entry).toContain("module-type: library");
     expect(entry).toContain("inside the TW5 VM");
   });

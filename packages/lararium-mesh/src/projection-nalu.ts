@@ -36,7 +36,7 @@
  *
  * Spine vocabulary (biogeochem): pool · flux · reservoir · residence-time (τ = X/I fixes latency).
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/lararium/projection-nalu
+ * Canon: lar:///ha.ka.ba/lararium/api/lararium/projection-nalu
  */
 
 // The accumulate-family engine + its gate live in capture-nalu.ts (the accumulate sibling of

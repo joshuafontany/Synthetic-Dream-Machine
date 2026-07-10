@@ -20,7 +20,7 @@
  *     WITHOUT knowing which vessel) is the crypto layer above, deferred.
  *
  * Platform-blind: rides ./epoch-lease + ./veil-crossing only. NO node: imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/persona-circle
+ * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
 import { leaseEpochSlotUri } from "./epoch-lease.js";

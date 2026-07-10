@@ -29,7 +29,7 @@
  * THE HULL RUNS PLATFORM-BLIND: no node builtins — the same cap composes on node AND in a browser
  * worker; {@link hasWikiSensorium} wears the existing {@link IslandCap} idiom (island-caps.ts).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
 import type { CompositeStore, SensoriumSignalType } from "@lararium/mesh";
@@ -346,8 +346,8 @@ export interface WikiSensoriumWitness {
  * browser (Chromium) test assert the IDENTICAL verdict — one hull, two substrates, differ by grant not hull.
  */
 export async function runWikiSensoriumWitness(): Promise<WikiSensoriumWitness> {
-  const glueIsland = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-glue", GLUE_SEEDS);
-  const obstructIsland = await buildFixtureIsland("lar:///ha.ka.ba/@sensorium-obstruct", OBSTRUCT_SEEDS);
+  const glueIsland = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-glue", GLUE_SEEDS);
+  const obstructIsland = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-obstruct", OBSTRUCT_SEEDS);
   const plainBody = GLUE_SEEDS.find((s) => s.title === "plain")!.text;
 
   const bare = createWikiSensorium(glueIsland);

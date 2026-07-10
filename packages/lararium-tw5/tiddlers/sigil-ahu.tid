@@ -1,7 +1,7 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ahu
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: child-slot
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/ahu
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/ahu
 lar-open-pattern: <<~[^>]*\bahu\s+(#[\w-]+)\s*>>
 lar-close-pattern: <<~\/ahu\s*>>
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 \widget ~ahu(slot:"" uri:"" p1:"")
 <$let _ahu-slot={{{ [<slot>!match[]] ~[<p1>] }}}>
 <$let _ahu-uri={{{ [<uri>!match[]!regexp[^lar:///unknown]] ~[<_ahu-slot>regexp[^lar:]] ~[<currentTiddler>addsuffix<_ahu-slot>] }}}
-      _ahu-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/ahu-template]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/@lararium/templates/ahu/html]] }}}>
+      _ahu-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/ahu-template]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/lararium/templates/ahu/html]] }}}>
 <$tiddler tiddler=<<_ahu-uri>>>
 <$transclude $tiddler=<<_ahu-template>>/>
 </$tiddler>
@@ -33,7 +33,7 @@ type: text/vnd.tiddlywiki
 \procedure ~aka~ahu(slot:"" uri:"" p1:"")
 <$let _a-slot={{{ [<slot>!match[]] ~[<p1>] }}}>
 <$let _a-uri={{{ [<uri>!match[]!regexp[^lar:///unknown]] ~[<_a-slot>regexp[^lar:]] ~[<currentTiddler>addsuffix<_a-slot>] }}}
-      _a-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/aka-template]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/@lararium/templates/aka/html]] }}}>
+      _a-template={{{ [all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/aka-template]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/lararium/templates/aka/html]] }}}>
 <$tiddler tiddler=<<_a-uri>>>
 <$transclude $tiddler=<<_a-template>>/>
 </$tiddler>

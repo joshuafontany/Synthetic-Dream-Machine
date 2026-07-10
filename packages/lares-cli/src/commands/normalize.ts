@@ -15,7 +15,7 @@
  *   --check   report carriers that WOULD change; write nothing. Exit 1 if any
  *             drift — for CI / pre-commit gates.
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff
+ * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
  */
 
 import { readFileSync, writeFileSync } from "node:fs";

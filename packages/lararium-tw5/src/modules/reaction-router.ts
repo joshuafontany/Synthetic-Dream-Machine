@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/reaction-router
+title: lar:///ha.ka.ba/lararium/tw5/modules/reaction-router
 type: application/javascript
 module-type: startup
 \*/
@@ -21,7 +21,7 @@ module-type: startup
  * Runs on both platforms so the island's TW5 instance and the browser's
  * TW5 instance both carry nalu-driven reaction routing.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/modules/reaction-router
+ * Meme: lar:///ha.ka.ba/lararium/tw5/modules/reaction-router
  */
 
 import type { TW5Wiki } from "../types/tiddlywiki.js";

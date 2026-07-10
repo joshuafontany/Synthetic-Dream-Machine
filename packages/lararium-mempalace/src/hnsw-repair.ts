@@ -20,7 +20,7 @@
  * respawns the MCP on its next tool-call and `mempalace_reconnect` refreshes it; lares cannot
  * restart the harness-owned MCP, only quiesce + rely on respawn.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/lararium/api/lar-telemetry
  */
 
 /** A parsed divergence reading off `mempalace repair-status` text. */

@@ -9,7 +9,7 @@
  * orthogonal turn, the FLOOR churn-guard, the CEIL staleness force). If this fails, the collapse
  * is wrong — fix until identical.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
+ * Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock
  */
 
 import { describe, test, expect } from "vitest";

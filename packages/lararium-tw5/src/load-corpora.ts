@@ -11,7 +11,7 @@
  *
  * Home = tw5 (it owns `addReadOnlyLayer` and imports the mesh helpers; mesh cannot import tw5).
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/load-corpora
+ * Meme: lar:///ha.ka.ba/lararium/tw5/load-corpora
  */
 
 import { addReadOnlyLayer } from "./vessel-steps.js";

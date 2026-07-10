@@ -22,7 +22,7 @@
  * returns `sovereign=true` (a positive independence VERDICT) built on ZERO shared observations, and its
  * whole-axis N is measurably anti-conservative. Tier-1 densify's honest-zero REFUSES that verdict.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 import { describe, test, expect } from "vitest";
 import {

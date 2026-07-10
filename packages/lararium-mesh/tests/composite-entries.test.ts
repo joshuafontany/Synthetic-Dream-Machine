@@ -5,7 +5,7 @@
  * each entry carrying the answering bag + a causal stamp (heads + changeId). It NEVER reaches across
  * islands (local-first). The wiki-sensorium projection folds this.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
  */
 
 import { describe, test, expect } from "vitest";
@@ -13,8 +13,8 @@ import { CompositeStore } from "../src/composite-store.js";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import type { ChangeOrigin } from "../src/tiddler-store.js";
 
-const HI = "lar:///ha.ka.ba/@wiki";
-const LO = "lar:///ha.ka.ba/@corpus";
+const HI = "lar:///ha.ka.ba/bags/@wiki";
+const LO = "lar:///ha.ka.ba/bags/@corpus";
 function origin(): ChangeOrigin { return { kind: "canon-hydrate", receipt: "test" }; }
 
 describe("CompositeStore.entries()", () => {

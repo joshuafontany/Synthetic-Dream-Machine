@@ -7,7 +7,7 @@
  *
  * No HTTP, no OAuth routes, no web2 auth ceremony.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lararium/node-host
+ * Meme: lar:///ha.ka.ba/lares/api/lararium/node-host
  */
 
 import { describe, test, expect } from "vitest";
@@ -36,15 +36,15 @@ describe("resolveLarUri — canonical URI topology", () => {
     expect(r.virtual).toBe(true);
   });
 
-  test("ha.ka.ba/@lares sub-path resolves as tuple-file, non-virtual", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/@lares/api/mu");
+  test("ha.ka.ba/bags/@lares sub-path resolves as tuple-file, non-virtual", () => {
+    const r = resolveLarUri("lar:///ha.ka.ba/lares/api/mu");
     expect(["file", "tuple-file"]).toContain(r.kind);
     expect(r.virtual).toBe(false);
     expect(r.root).toBe("ha.ka.ba");
   });
 
-  test("ha.ka.ba/@lares/AGENTS shorthand resolves as caps-file", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/@lares/AGENTS");
+  test("ha.ka.ba/lares/AGENTS shorthand resolves as caps-file", () => {
+    const r = resolveLarUri("lar:///ha.ka.ba/lares/AGENTS");
     expect(r.kind).toBe("caps-file");
     expect(r.virtual).toBe(false);
   });
@@ -55,7 +55,7 @@ describe("resolveLarUri — canonical URI topology", () => {
   });
 
   test("resolves laresRelPath for grammar carrier", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/@lares/api/mu");
+    const r = resolveLarUri("lar:///ha.ka.ba/lares/api/mu");
     expect(r.laresRelPath).toBeTruthy();
     expect(r.laresRelPath).toMatch(/\.mem$/);
   });
@@ -68,12 +68,12 @@ describe("resolveLarUri — canonical URI topology", () => {
 describe("isHostfulLarUri", () => {
   test("hostless lar:///path → false", () => {
     expect(isHostfulLarUri("lar:///AGENTS")).toBe(false);
-    expect(isHostfulLarUri("lar:///ha.ka.ba/@lares/api/mu")).toBe(false);
+    expect(isHostfulLarUri("lar:///ha.ka.ba/lares/api/mu")).toBe(false);
   });
 
   test("hostful lar://node.local/path → true", () => {
     expect(isHostfulLarUri("lar://test-wiki.local/rooms/main")).toBe(true);
-    expect(isHostfulLarUri("lar://elyncia.social/ha.ka.ba/@lares/api/mu")).toBe(true);
+    expect(isHostfulLarUri("lar://elyncia.social/ha.ka.ba/lares/api/mu")).toBe(true);
   });
 });
 

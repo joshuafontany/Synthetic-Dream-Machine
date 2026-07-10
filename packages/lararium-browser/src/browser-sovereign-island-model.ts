@@ -19,7 +19,7 @@
  *                   + N hot islands (session wikis, LRU-evicted to cold)
  *   Every hot island runs via runBrowserSovereignWorker(behavior).
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/browser-sovereign-island-model
+ * Meme: lar:///ha.ka.ba/lararium/browser/browser-sovereign-island-model
  */
 
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";

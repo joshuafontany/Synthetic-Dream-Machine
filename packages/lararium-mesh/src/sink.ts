@@ -25,7 +25,7 @@
  * the beat-derived window, and the recent-window / baseline-alpha knobs emerge from the recovered beat rather
  * than a chosen constant. The next pass carries γ + the null-thresholds + windowed support.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 import { nucleate, type NucleationVerdict, type PlaneSignal } from "./nucleation-gate.js";

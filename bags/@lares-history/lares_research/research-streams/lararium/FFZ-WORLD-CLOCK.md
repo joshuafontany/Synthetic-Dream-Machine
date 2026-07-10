@@ -63,14 +63,14 @@ For Lares: model `OperatorClock` and `WorldClock` as distinct tiddler types (dis
 Lives as a dedicated tiddler in the world's `LarDoc` at a canonical URI:
 
 ```
-lar:///ha.ka.ba/@world/{worldId}/clock
+lar:///ha.ka.ba/bags/@world/{worldId}/clock
 ```
 
 This makes the world clock a first-class tiddler — queryable via TW5 filter syntax, reachable via the lar: URI scheme, taggable, indexable.
 
 ```typescript
 // WorldClockTiddler — field shape for a world clock tiddler
-// Lives in the world's LarDoc at lar:///ha.ka.ba/@world/{worldId}/clock
+// Lives in the world's LarDoc at lar:///ha.ka.ba/bags/@world/{worldId}/clock
 interface WorldClockTiddler {
   readonly worldId:     string;         // matches world doc ID
   readonly kind:        "world-clock";

@@ -8,7 +8,7 @@ non-resonance); each node HOLDS the tool (its own low-discrepancy phase, chosen 
 its index). A HELD FORK stands beside this — φ+e-jitter (per-node 1-D) · coprime-integer (13/17) ·
 Kuramoto frequency-dispersion — the others compose the same interface; plastic-ρ leads.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/desync (the incommensurability tool).
+Meme: lar:///ha.ka.ba/lararium/sensorium/desync (the incommensurability tool).
 """
 from __future__ import annotations
 

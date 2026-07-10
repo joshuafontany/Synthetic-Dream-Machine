@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """form_encoder — the @daemon's Lares-INTEGRATION side of the two-planes form-capture.
 
-Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes (P2 of the
+Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes (P2 of the
 phased plan). This module COMPUTES the fuzzy-membership / sanction-degree FORM
 vector; the mempalace base merely STORES it as a caller-supplied vector for the
 "form" collection. It is the Lares-specific integration, never the base layer —

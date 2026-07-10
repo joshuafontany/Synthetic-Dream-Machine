@@ -4,7 +4,7 @@
  * loci cap (+ lociTotal), the ask-wire error frames (both ends fail loud), the non-finite
  * recall limit, the unknown filter-suffix refusal, and the non-default proofBag round-trip.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
 import { describe, test, expect } from "vitest";
@@ -85,7 +85,7 @@ describe("the ask-wire fails loud on BOTH ends", () => {
   test("a signal reaching a cap with NO live perceiver answers an ERROR frame (requestId echoed)", () => {
     const posted: Array<Record<string, unknown>> = [];
     const ctx = {
-      wikiUri: "lar:///ha.ka.ba/@sense-cold",
+      wikiUri: "lar:///ha.ka.ba/bags/@sense-cold",
       post: (msg: unknown) => { posted.push(msg as Record<string, unknown>); },
     } as unknown as IslandContext;
 
@@ -105,7 +105,7 @@ describe("the ask-wire fails loud on BOTH ends", () => {
       sendSignal: (_island, msg) => { sent.push({ requestId: msg.requestId }); },
     }, { timeoutMs: 5_000 });
     try {
-      const island = "lar:///ha.ka.ba/@sense-err";
+      const island = "lar:///ha.ka.ba/bags/@sense-err";
 
       const errAsk = supervisor.cohere(island);
       expect(supervisor.acceptFrame(island, { requestId: sent[0]!.requestId, error: "the fold blew a seam" })).toBe(true);
@@ -122,7 +122,7 @@ describe("the ask-wire fails loud on BOTH ends", () => {
 
 describe("the non-finite recall limit falls back to the default", () => {
   test("recall with limit NaN answers exactly what the default-limit read answers", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/@sense-limit", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sense-limit", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     try {
       const poisoned = await sense.recall({ text: "canon", limit: Number.NaN });
@@ -153,7 +153,7 @@ describe("a non-default proofBag round-trips", () => {
 
   test("build -> parse holds under a bag outside the @daemon shape", () => {
     const proof = {
-      eventId: "ev-9", island: "lar:///ha.ka.ba/@sense-a", requestId: "sense-r9",
+      eventId: "ev-9", island: "lar:///ha.ka.ba/bags/@sense-a", requestId: "sense-r9",
       asOf: [] as readonly string[],
       radius: 0, glues: true, vacuous: false,
       gateKind: "reconcilable" as const, dimH1: 0, cost: 0,

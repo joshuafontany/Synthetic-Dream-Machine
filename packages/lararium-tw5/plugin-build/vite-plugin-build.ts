@@ -50,11 +50,11 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
             generatedCode: { symbols: false },
             paths: (id: string) =>
               id === "lararium-wiki-sense-fold"
-                ? "lar:///ha.ka.ba/@lararium/tw5/lib/wiki-sense-fold"
+                ? "lar:///ha.ka.ba/lararium/tw5/lib/wiki-sense-fold"
                 : id === "lararium-meme-ast"
-                  ? "lar:///ha.ka.ba/@lararium/tw5/modules/meme-ast"
+                  ? "lar:///ha.ka.ba/lararium/tw5/modules/meme-ast"
                   : id === "smol-toml"
-                    ? "lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml"
+                    ? "lar:///ha.ka.ba/lararium/tw5/lib/smol-toml"
                     : id,
           },
         },

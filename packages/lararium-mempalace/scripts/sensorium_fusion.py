@@ -32,7 +32,7 @@ The `fixture` face regenerates the committed TS<->py parity fixture:
   ~/.venv/bin/python3 sensorium_fusion.py fixture
   -> packages/lararium-mesh/tests/fixtures/sensorium-fusion-parity.json
 
-Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
+Meme: lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested
 """
 from __future__ import annotations
 

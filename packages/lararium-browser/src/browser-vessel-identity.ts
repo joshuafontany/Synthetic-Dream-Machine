@@ -9,7 +9,7 @@
  * Key material lives only in the origin's IndexedDB under `<idbName>` / "keystore".
  * Never transferred to island Workers.
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/browser-vessel-identity
+ * Meme: lar:///ha.ka.ba/lararium/browser/browser-vessel-identity
  */
 
 import {

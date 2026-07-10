@@ -22,7 +22,7 @@
  * Excluded from default `pnpm test`; opt-in with:
  *   pnpm vitest run --config vitest.e2e.config.ts
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/two-vessel-mesh
+ * Meme: lar:///ha.ka.ba/lararium/node/two-vessel-mesh
  */
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";

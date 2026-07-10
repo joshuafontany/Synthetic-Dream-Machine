@@ -439,10 +439,10 @@ function runSyncModules(): { drift: number; missing: number; patched: number } {
     const moduleRef = toml["module-ref"];
     if (!moduleRef) continue;
 
-    // Convert lar URI to file path: lar:///ha.ka.ba/@lararium/tw5/{rest} -> tw5MemesRoot/{rest}.md
+    // Convert lar URI to file path: lar:///ha.ka.ba/lararium/tw5/{rest} -> tw5MemesRoot/{rest}.md
     const uriTrimmed = moduleRef.replace(/^lar:\/\/\//, "");
     const parts      = uriTrimmed.split("/");
-    // Strip ha.ka.ba/@lararium/tw5 prefix (4 segments)
+    // Strip ha.ka.ba/lararium/tw5 prefix (4 segments)
     const rest       = (parts[0] === "ha.ka.ba" && parts[1] === "@lararium" && parts[2] === "tw5")
       ? parts.slice(3).join("/")
       : parts.slice(2).join("/"); // legacy fallback
@@ -563,7 +563,7 @@ function collectDecoratorFiles(): DecoratorFile[] {
         }
 
         const memeDir   = resolve(tw5MemesRoot, memeSubDir);
-        const uriPrefix = `ha.ka.ba/@lararium/tw5/${uriSub}`;
+        const uriPrefix = `ha.ka.ba/lararium/tw5/${uriSub}`;
         results.push({ relPath, absPath, slug, kind, symbols, memeDir, uriPrefix, pkgName });
       }
     }
@@ -603,7 +603,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
   // ka handles a single symbol; ba handles multiple space-separated symbols
   const heleumaMode = d.symbols.length === 1 ? "ka" : "ba";
 
-  const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+  const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///${uriPath} >>
 \`\`\`toml iam

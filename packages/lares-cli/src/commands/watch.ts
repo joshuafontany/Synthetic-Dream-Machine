@@ -25,7 +25,7 @@
  * PROJECTOR (backup-on-write) — content is gone from disk by the time a delete
  * is seen here. Tracked as a burr; the CRDT op-log covers recovery until epoch.
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff
+ * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
  */
 
 import { watch as fsWatch, writeFileSync, rmSync, type FSWatcher } from "node:fs";
@@ -152,7 +152,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       const summary  = summaryOutput(result) ?? {};
       const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
       const del      = (summary as { deletions?: Record<string, unknown> })["deletions"];
-      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`);
+      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/bags/@daemon/outcomes/${result.requestId}`);
       for (const c of carriers) console.log(`    ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}`);
       if (del && (del as { decision?: string })["decision"] === "suspend") {
         console.error(`    ⚠ mass-delete brake TRIPPED — ${String((del as { reason?: string })["reason"] ?? "")}; nothing applied, re-run to confirm.`);

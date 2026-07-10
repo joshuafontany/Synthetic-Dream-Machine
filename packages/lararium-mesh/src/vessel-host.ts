@@ -10,7 +10,7 @@
  * Home: this is pure island-protocol transport (no TW5), so it lives in mesh —
  * the package that owns the protocol — not tw5. Both pools already import mesh.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/vessel-host
+ * Meme: lar:///ha.ka.ba/lararium/mesh/vessel-host
  */
 
 import { isIslandToVesselMsg } from "./island-protocol.js";

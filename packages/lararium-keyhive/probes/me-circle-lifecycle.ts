@@ -23,7 +23,7 @@
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/me-circle-lifecycle.ts
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/persona-circle
+ * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";

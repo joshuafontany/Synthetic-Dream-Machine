@@ -5,7 +5,7 @@
  * three grammar layers + the Voices + the OODA-HA phases + the ward-states, and
  * carry each sigil's parent family + grammar-layer band.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  */
 
 import { describe, test, expect } from "vitest";

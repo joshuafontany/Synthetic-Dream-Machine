@@ -16,7 +16,7 @@
  * antipattern; the target mints a DISTINCT key per vessel, delegated into the
  * PersonaGroup by a signed edge (the delegation IS the relationship — the vessel's stack
  * #has the edge). The behavioral vessel/operator-root split is held for the genesis
- * refactor. See lar:///ha.ka.ba/@lares/docs/lares/federation
+ * refactor. See lar:///ha.ka.ba/lares/docs/lares/federation
  * (Model A/B) and the #has-stack ontology (api/pono/has-stack-ontology).
  *
  * Storage law — identity lives OUTSIDE the wipe zone:

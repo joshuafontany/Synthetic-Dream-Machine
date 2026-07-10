@@ -29,7 +29,7 @@ RNG; the same seed regenerates the same bytes, so the fixtures commit and re-der
 Usage (writes the two fixture memes; deterministic, re-runnable):
   python3 shuffled_kumulipo.py generate [--library <dir>] [--out <dir>] [--seed N]
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/shuffled-kumulipo
+Meme: lar:///ha.ka.ba/lararium/sensorium/shuffled-kumulipo
 """
 from __future__ import annotations
 
@@ -57,10 +57,10 @@ FIXTURES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # The envelope swaps ONLY these address strings (file-path first — it contains the
 # library path as a substring, so order carries correctness; the placebo's discipline).
 _URI_SWAPS = (
-    ("bags/@lares/ha.ka.ba/@lares/library/hawaii/kumulipo/",
+    ("bags/@lares/ha.ka.ba/lares/library/hawaii/kumulipo/",
      "packages/lararium-mempalace/scripts/fixtures/shuffled-kumulipo/"),
-    ("ha.ka.ba/@lares/library/hawaii/kumulipo/",
-     "ha.ka.ba/@lares/testbed/shuffled/kumulipo/"),
+    ("ha.ka.ba/lares/library/hawaii/kumulipo/",
+     "ha.ka.ba/lares/testbed/shuffled/kumulipo/"),
 )
 
 

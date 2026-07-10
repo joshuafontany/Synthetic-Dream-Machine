@@ -3,7 +3,7 @@
  * transcript → a prov:Communication edge. Tested against the transcript SHAPE (the live signal awaits
  * a real continuation sample — see the module's feasibility flag).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
  */
 
 import { describe, test, expect } from "vitest";

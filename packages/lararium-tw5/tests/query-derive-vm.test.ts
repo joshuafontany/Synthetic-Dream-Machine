@@ -5,7 +5,7 @@
  * grammar, fold the harvest AND the meme-ast TREE into the move-skeleton (the STRUCTURAL plane
  * present, never the truncated `[]` the old node-side deriver suffered), pin to the live basis.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/modules/query-derive-vm
+ * Meme: lar:///ha.ka.ba/lararium/tw5/modules/query-derive-vm
  */
 
 import { describe, test, expect } from "vitest";

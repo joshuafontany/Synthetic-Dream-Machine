@@ -10,7 +10,7 @@ Short orientation for humans and agents reviewing `packages/`.
 - `packages/MEMPALACE-INTEGRATION.md` carries the mempalace ↔ `lares` memory
   integration — the `wake` harness-wiring flags, `harvest` modes, the `lar_*`
   metadata net, and the blank-slate refresh flow. Design/canon lives at
-  `lar:///ha.ka.ba/@lararium/api/mempalace-integration`.
+  `lar:///ha.ka.ba/lararium/api/mempalace-integration`.
 - Source lives under each package's `src/`.
 - Unit tests live under each package's `tests/`.
 - Cross-package and daemon/CLI integration flows live under repo-root `tests/`.

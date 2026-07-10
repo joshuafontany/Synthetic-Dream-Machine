@@ -8,7 +8,7 @@ same way; the TS @daemon supervises the fleet (spawns/points/drains, carries no 
 cap (the fork-DAG + kapae) wires in at Phase 4.
 
 Blind-by-composition (has-stack-ontology): compose REFUSES a missing required cap — a sensorium without
-a source/land/embed cannot exist, rather than erroring later. Meme: lar:///ha.ka.ba/@lararium/sensorium/compose.
+a source/land/embed cannot exist, rather than erroring later. Meme: lar:///ha.ka.ba/lararium/sensorium/compose.
 """
 from __future__ import annotations
 

@@ -33,7 +33,7 @@ const SYSTEM_HOLDINGS = new Set(["@lares", "@lararium"]);
 export interface SeedHolding {
   readonly holding: string;               // "@lares"
   readonly source: string;                // "<root>/bags/@lares"
-  readonly toBag: string;                 // "lar:///ha.ka.ba/@lares"
+  readonly toBag: string;                 // "lar:///ha.ka.ba/bags/@lares"
   readonly gesture: "ingest" | "load";    // the kind-route taken
   readonly exitCode: number;              // the gesture's verdict for this holding
 }

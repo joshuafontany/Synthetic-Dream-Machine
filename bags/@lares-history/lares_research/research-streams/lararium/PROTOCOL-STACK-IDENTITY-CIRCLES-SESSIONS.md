@@ -24,17 +24,17 @@ Two tigas (ha-ka-ba) each with three root Automerge docs. All six live in `larar
 
 | Slot | Doc type | URI | Role |
 |---|---|---|---|
-| **ha** | `LarariumDoc` | `lar:///ha.ka.ba/@lararium` | System island — genesis artifact, TW5 core + plugins, recipes, tiddlers |
-| **ka** | `CatalogDoc` | `lar:///ha.ka.ba/@catalog` | Index — corpus entries, room entries, projection entries, cross-doc URL map |
-| **ba** | `MemeStoreDoc` (LaresDoc) | `lar:///ha.ka.ba/@lares` | Personal workspace — operator memes, local tiddlers |
+| **ha** | `LarariumDoc` | `lar:///ha.ka.ba/bags/@lararium` | System island — genesis artifact, TW5 core + plugins, recipes, tiddlers |
+| **ka** | `CatalogDoc` | `lar:///ha.ka.ba/bags/@catalog` | Index — corpus entries, room entries, projection entries, cross-doc URL map |
+| **ba** | `MemeStoreDoc` (LaresDoc) | `lar:///ha.ka.ba/bags/@lares` | Personal workspace — operator memes, local tiddlers |
 
 ### Social Tiga
 
 | Slot | Doc type | URI | Role |
 |---|---|---|---|
-| **ha** | `IdentitiesDoc` | `lar:///ha.ka.ba/@identities` | Principal records — device keys, delegation proofs |
-| **ka** | `CirclesDoc` | `lar:///ha.ka.ba/@circles` | Collective authority — group membership, capability grants |
-| **ba** | `SessionsDoc` | `lar:///ha.ka.ba/@sessions` | Live session registry — one tiddler per session |
+| **ha** | `IdentitiesDoc` | `lar:///ha.ka.ba/bags/@identities` | Principal records — device keys, delegation proofs |
+| **ka** | `CirclesDoc` | `lar:///ha.ka.ba/bags/@circles` | Collective authority — group membership, capability grants |
+| **ba** | `SessionsDoc` | `lar:///ha.ka.ba/bags/@sessions` | Live session registry — one tiddler per session |
 
 All six docs: tiddler-first (`tiddlers: Record<string, MutableLarRecord>`), no typed Records outside `tiddlers`. Oracle tiddlers in the island doc point to the other five via `reconcileWellKnownTiddlers()`.
 

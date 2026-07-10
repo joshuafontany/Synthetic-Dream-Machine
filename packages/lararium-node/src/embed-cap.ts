@@ -6,7 +6,7 @@
  * the vector (the single writer). The vendored `mine` (embed-on-write) leaves the live path.
  *
  * Palace-less: the model is the resource, not a store dir — ONE holder per process (composeEncoder),
- * the spawn omits `--palace`. Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * the spawn omits `--palace`. Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { resolveEmbedSpawn } from "@lararium/mempalace";

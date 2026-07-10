@@ -27,7 +27,7 @@
  *   - destination-bag admin required for every verb
  *   - MOVE additionally requires source-bag admin (deaccession authority)
  *
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme:    lar:///ha.ka.ba/lararium/api/residency-model
  */
 
 import type {

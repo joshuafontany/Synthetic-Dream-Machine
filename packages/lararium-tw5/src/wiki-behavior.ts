@@ -9,7 +9,7 @@
  * needs fs) compose IN via the `onBoot` capability hook — node supplies it,
  * browser supplies none. No fs, no node coupling here.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/wiki-behavior
+ * Meme: lar:///ha.ka.ba/lararium/tw5/wiki-behavior
  */
 
 import {
@@ -116,7 +116,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       }
       const invocation: Verb = {
         requestId,
-        title:       `lar:///ha.ka.ba/@wiki/verbs/${requestId}`,
+        title:       `lar:///ha.ka.ba/bags/@wiki/verbs/${requestId}`,
         action:      msg.verb,
         args:        msg.args,
         targets:     msg.targets ?? [],

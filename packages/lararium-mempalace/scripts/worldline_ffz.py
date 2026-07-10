@@ -32,7 +32,7 @@ turn ORDINAL indexes the signal; the recovered beat rides in ordinal units; the 
 position, not a time. A re-run over the same drift recovers the same clock → the same address → an
 idempotent stamp. The worldline stays LOCAL — it never federates.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/worldline-ffz
+Meme: lar:///ha.ka.ba/lararium/sensorium/worldline-ffz
 """
 from __future__ import annotations
 

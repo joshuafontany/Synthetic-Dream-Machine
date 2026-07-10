@@ -9,7 +9,7 @@
  * Uses the real browser Web Worker API — proves the browser binding layer,
  * not just IslandKernel (already proven in lararium-node).
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/worker-lifecycle
+ * Meme: lar:///ha.ka.ba/lararium/browser/worker-lifecycle
  */
 
 import { describe, test, expect, afterEach } from "vitest";

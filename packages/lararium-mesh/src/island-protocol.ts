@@ -50,7 +50,7 @@
  * Platform-neutral: no Node `worker_threads` import, no browser `self` import.
  * Vessel entrypoints bind the I/O; this module names the envelopes only.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/island-protocol
+ * Meme: lar:///ha.ka.ba/lararium/mesh/island-protocol
  */
 
 import type { AuthProofWire } from "./auth-wire.js";
@@ -678,7 +678,7 @@ export interface IslandMsg_TeardownAck {
  *
  * In Hawaiian: ea = sovereignty, breath, life. The island declares its own standing;
  * the vessel records the declaration and considers the island live.
- * See: lar:///ha.ka.ba/@lares/api/pono/ea
+ * See: lar:///ha.ka.ba/lares/api/pono/ea
  */
 export interface IslandMsg_Ea {
   schema_version: ProtocolVersion;

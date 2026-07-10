@@ -3,10 +3,10 @@
  * thing that ever crosses the read-face wire. A pure disclosure MEMBRANE (mirrors
  * mesh-palace's `snapshotPublicFlowMap`): drop-private, keep-public.
  *
- * Canon: lar:///ha.ka.ba/@lares/api/pono/cabal-place#the-place (NAMED-not-ruled —
+ * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-place#the-place (NAMED-not-ruled —
  * "the place's identity is content-addressed; the name grants no authority" — though
  * it does leak metadata; see THE VEIL INVARIANT below)
- * + lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture ("cabalGroup = shared
+ * + lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture ("cabalGroup = shared
  * charter, read-scope"). The read/veil tier ALREADY EXISTS as the @oracle
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
  * THIS cut adds NO gate-loosening. It makes a CONTENT decision: it declares WHAT a
@@ -33,7 +33,7 @@
  * Platform-blind: rides ./cabal-place + ./oracle-substrate + automerge only. NO
  * node: imports.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { from as automergeFrom } from "@automerge/automerge";

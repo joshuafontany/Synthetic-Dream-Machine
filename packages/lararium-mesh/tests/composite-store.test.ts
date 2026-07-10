@@ -11,7 +11,7 @@
  * Bag ID law (M21): bag ID = lar: URI of the owning Automerge doc.
  * No opaque prefixes (e.g. "corpus:") — every bag carries a stable lar:/// address.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/automerge-tiga
+ * Meme: lar:///ha.ka.ba/lararium/mesh/automerge-tiga
  */
 
 import { describe, test, expect, beforeEach } from "vitest";
@@ -200,7 +200,7 @@ describe("CompositeStore — per-bag store getters", () => {
 
     expect(store.writableStoreForBag(TEST_WIKI_URI)).toBe(wiki);
     expect(store.writableStoreForBag(BAG_IDS.lararium)).toBeNull();           // read-only → no write store
-    expect(store.writableStoreForBag("lar:///ha.ka.ba/@unmounted")).toBeNull();
+    expect(store.writableStoreForBag("lar:///ha.ka.ba/bags/@unmounted")).toBeNull();
   });
 
   test("storeForBag returns ANY layer's store (read reaches a read-only library)", () => {
@@ -209,7 +209,7 @@ describe("CompositeStore — per-bag store getters", () => {
     store.addLayer({ bagId: BAG_IDS.lararium, store: lib, writable: false });
 
     expect(store.storeForBag(BAG_IDS.lararium)).toBe(lib);
-    expect(store.storeForBag("lar:///ha.ka.ba/@unmounted")).toBeNull();
+    expect(store.storeForBag("lar:///ha.ka.ba/bags/@unmounted")).toBeNull();
   });
 });
 
@@ -258,7 +258,7 @@ describe("CompositeStore — subscribe fan-out", () => {
 // ---------------------------------------------------------------------------
 
 describe("CompositeStore — getRecipe + buildLayersFromRecipe", () => {
-  const RECIPE_URI = "lar:///ha.ka.ba/@lararium/recipes/default";
+  const RECIPE_URI = "lar:///ha.ka.ba/lararium/recipes/default";
 
   test("getRecipe returns null when tiddler absent", async () => {
     const store = new CompositeStore();
@@ -334,7 +334,7 @@ describe("CompositeStore — putViaRecipe", () => {
     store.addLayer({ bagId: TEST_WIKI_URI,     store: wiki, writable: true  });
 
     const recipe = {
-      title:       "lar:///ha.ka.ba/@lararium/recipes/default",
+      title:       "lar:///ha.ka.ba/lararium/recipes/default",
       label:       "Default",
       bagStack:    [LARARIUM_DOC_URI, TEST_WIKI_URI],
       writableBag: TEST_WIKI_URI,
@@ -359,7 +359,7 @@ describe("CompositeStore — putViaRecipe", () => {
     store.addLayer({ bagId: TEST_WIKI_URI, store: wiki, writable: true });
 
     const recipe = {
-      title:     "lar:///ha.ka.ba/@lararium/recipes/default",
+      title:     "lar:///ha.ka.ba/lararium/recipes/default",
       label:     "Default",
       bagStack:  [TEST_WIKI_URI],
       updatedAt: "2026-05-03T00:00:00Z",
@@ -377,7 +377,7 @@ describe("CompositeStore — putViaRecipe", () => {
     store.addLayer({ bagId: BAG_IDS.lararium, store: ha, writable: false });
 
     const recipe = {
-      title:       "lar:///ha.ka.ba/@lararium/recipes/default",
+      title:       "lar:///ha.ka.ba/lararium/recipes/default",
       label:       "Default",
       bagStack:    [LARARIUM_DOC_URI],
       writableBag: TEST_WIKI_URI, // not registered

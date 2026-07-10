@@ -9,7 +9,7 @@
  * porous when not; ffzCoDepth still reads the ultrametric on the fuller address; and no
  * causal/edge/itc key rides the patch.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
+ * Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock
  */
 
 import { describe, test, expect } from "vitest";

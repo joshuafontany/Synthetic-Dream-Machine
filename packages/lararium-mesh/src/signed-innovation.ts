@@ -10,7 +10,7 @@
  * Rides the parallel session's predictive core (ewmaPredict) — the same one-step predictor the
  * sensorium uses; here we keep its SIGNED residual instead of squaring it into surprise.
  *
- * Platform-blind: composes ./sensorium-pc. Feeds ./mesh-coupling-mv. Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Platform-blind: composes ./sensorium-pc. Feeds ./mesh-coupling-mv. Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 import { ewmaPredict } from "./sensorium-pc.js";

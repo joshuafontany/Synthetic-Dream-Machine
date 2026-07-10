@@ -13,7 +13,7 @@
  * A static derive-once dial today; the deferred sprint makes each threshold EMERGE. This replaces the
  * scattered α=0.05 + quantum-0.1 constants with one number now (γ + rigidity await the null-calibration).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 export interface ArlDial {

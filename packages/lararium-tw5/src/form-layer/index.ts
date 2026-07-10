@@ -1,6 +1,6 @@
 /**
  * form-layer — the @daemon-side living-grammar form-capture (P0·P1).
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace
  *
  * The DISCRETE plane of the two-planes form-capture: P0 pins the constructicon
  * basis (the grammar-SEED axes); P1 emits the move-skeleton (the linear marker

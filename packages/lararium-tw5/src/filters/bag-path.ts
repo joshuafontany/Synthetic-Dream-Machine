@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/filters/bag-path
+title: lar:///ha.ka.ba/lararium/tw5/filters/bag-path
 type: application/javascript
 module-type: filteroperator
 \*/

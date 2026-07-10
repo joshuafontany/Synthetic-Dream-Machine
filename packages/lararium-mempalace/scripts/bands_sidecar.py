@@ -49,7 +49,7 @@ readback; `decompose` needs neither):
   ~/.venv/bin/python3 bands_sidecar.py decompose --signal fixture.ndjson
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 bands_sidecar.py analyze --palace <dir>
 
-Meme: lar:///ha.ka.ba/@lares/api/lares/corpus#the-bands
+Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-bands
 """
 from __future__ import annotations
 

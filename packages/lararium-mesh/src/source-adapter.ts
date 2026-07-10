@@ -34,7 +34,7 @@
  * (a `hash` fn on the identity context) so this module pulls no crypto — the node/CLI caller supplies
  * `node:crypto`; a TW5-VM caller supplies its own.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/rewind-adapter
+ * Meme: lar:///ha.ka.ba/lararium/api/rewind-adapter
  */
 
 // ── Records & sessions ──────────────────────────────────────────────────────

@@ -15,7 +15,7 @@
  *
  *   I(X;Y|Z) = ½·[ logdet Σ_XZ + logdet Σ_YZ − logdet Σ_Z − logdet Σ_XYZ ]   (nats; ÷ln2 → bits)
  *
- * Platform-blind: pure linear algebra, NO imports. Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Platform-blind: pure linear algebra, NO imports. Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 /** Ridge added to a covariance diagonal for numerical stability (near-singular / short windows). */

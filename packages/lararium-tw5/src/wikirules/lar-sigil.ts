@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/wikirules/lar-sigil
+title: lar:///ha.ka.ba/lararium/tw5/wikirules/lar-sigil
 type: application/javascript
 module-type: wikirule
 \*/

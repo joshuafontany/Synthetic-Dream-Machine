@@ -29,7 +29,7 @@
  * (it reads each rollout's header to chain the fork-family). Content-hashing is the injected `node:crypto`
  * sha256/16 prefix, matching the CLI harvest `sha` (and {@link claudeHash}).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/rewind-adapter
+ * Meme: lar:///ha.ka.ba/lararium/api/rewind-adapter
  */
 
 import { createHash } from "node:crypto";

@@ -19,7 +19,7 @@
  *     `formWeight` tilts the form leg, `register`/`grammarLayer` scope it by metadata where-filter,
  *     and `apertureGrain` (P6) re-weights the fused ranking toward the paragraph-scale basin-peak.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#dual-graph (+ #multi-aperture)
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#dual-graph (+ #multi-aperture)
  */
 
 import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";

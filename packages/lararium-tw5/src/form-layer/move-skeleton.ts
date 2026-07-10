@@ -1,6 +1,6 @@
 /**
  * move-skeleton — P1 of the living-grammar form-layer (the move-skeleton emitter).
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  *
  * Route A — abstract-then-encode: the CNL emits its own form-markers (the
  * classifier channel, the `<<~ … >>` sigils that steer). turn-harvest already

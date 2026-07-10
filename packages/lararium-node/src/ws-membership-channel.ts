@@ -11,7 +11,7 @@
  *
  * Node-side (the transport branch); the seam + the file impl stay platform-blind.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { WebSocketServer, WebSocket, type RawData } from "ws";

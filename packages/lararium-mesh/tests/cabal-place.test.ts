@@ -7,7 +7,7 @@
  * the join gate stays INERT (identity passes through unchanged — the
  * capture-gap left open, canon #the-unswept-corner).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { describe, test, expect } from "vitest";

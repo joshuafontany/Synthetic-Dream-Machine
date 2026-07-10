@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/testbed/placebo/kumulipo/kumulipo-liliuokalani >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-liliuokalani >>
 ```toml iam
 cacheable = false
 file-path = "packages/lararium-mempalace/scripts/fixtures/placebo-kumulipo/kumulipo-liliuokalani.md"
@@ -13,7 +13,7 @@ retain    = false
 role      = "hawaiian source witness meme, Kumulipo Liliʻuokalani-1897 translation locus, koʻihonua cosmogony shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares/testbed/placebo/kumulipo/kumulipo-liliuokalani"
+uri-path  = "ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-liliuokalani"
 ```
 
 <<~ &#x0002; >>
@@ -4115,7 +4115,7 @@ KAOLANIALII, LELEIOHOKU,
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/testbed/placebo/kumulipo/kumulipo-beckwith >>
+<<~ loulou lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-beckwith >>
 
 <<~/ahu >>
 

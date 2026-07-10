@@ -9,7 +9,7 @@
  *   A. Island→vessel transport — VesselIslandPool receives event with verb in payload
  *   B. Subscription handler semantics — unit test of the M.1 handler logic
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/event-routing
+ * Meme: lar:///ha.ka.ba/lararium/node/event-routing
  */
 
 import { describe, test, expect, afterEach, vi } from "vitest";
@@ -22,7 +22,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 // ---------------------------------------------------------------------------
 
 const FIXTURE_URL = new URL("./fixtures/event-verb-echo.mjs", import.meta.url);
-const WIKI_ID     = "lar:///ha.ka.ba/@test/event-routing";
+const WIKI_ID     = "lar:///ha.ka.ba/bags/@test/event-routing";
 
 // ---------------------------------------------------------------------------
 // Helpers

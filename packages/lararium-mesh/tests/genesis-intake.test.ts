@@ -7,7 +7,7 @@
  * emitter (genesis-doc.ts) in mesh; the platform wrappers keep only their
  * byte SOURCES (fs · bundle/IDB/OPFS/peer).
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/genesis-intake
+ * Meme: lar:///ha.ka.ba/lararium/mesh/genesis-intake
  */
 
 import { describe, test, expect, afterEach } from "vitest";

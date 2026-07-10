@@ -10,7 +10,7 @@
  * substrate cap-id rides here as a WIRE-STRING (`SUBSTRATE_CAP_ID`), matched by VALUE to tw5's
  * `CORE_CAP.substrate` at handshake time — cap-ids are handshake strings, matched by value, not by import.
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
  */
 
 import type { Repo, DocHandle } from "@automerge/automerge-repo";
@@ -80,7 +80,7 @@ export function meshPalaceCap(deps: { repo: Repo; residency?: BagResidencyManage
 /** The carriage handle a carriage cap exposes — a manual pull + the loop's stop. */
 const PHI_INV = 0.6180339887498949;
 /**
- * FFZ mesh-timing axis-2 (lar:///ha.ka.ba/@lararium/mesh/ffz-mesh-timing #axis-desync): a per-node
+ * FFZ mesh-timing axis-2 (lar:///ha.ka.ba/lararium/mesh/ffz-mesh-timing #axis-desync): a per-node
  * INCOMMENSURABLE, renewal-randomized pull delay — NEVER a global fixed interval. A synchronized
  * global cadence is the herd / single point of failure: multi-node FlipIt proves it strictly dominated
  * (one timing-model predicts every node's window at once). The DETERMINISTIC factor golden-rotates a
@@ -185,7 +185,7 @@ export function deriveMeshSelf(
   const label = opts.label ?? u.toString(36).slice(2, 8);
   return {
     endpoint: publicUrl,
-    bearing:  `lar:///ha.ka.ba/@oracle/node/${label}`,
+    bearing:  `lar:///ha.ka.ba/bags/@oracle/node/${label}`,
     coord:    { theta: u * 2 * Math.PI, r: opts.radius ?? Number(process.env["LAR_RADIUS"] ?? 1) },
     peers,
   };
@@ -201,7 +201,7 @@ export function deriveMeshLeaf(
 ): MeshSelf {
   const u = hashUnit(coordSeed);
   return {
-    bearing: `lar:///ha.ka.ba/@oracle/leaf/${u.toString(36).slice(2, 8)}`,
+    bearing: `lar:///ha.ka.ba/bags/@oracle/leaf/${u.toString(36).slice(2, 8)}`,
     coord:   { theta: u * 2 * Math.PI, r: opts.radius ?? 1 },
     peers,
     // no endpoint → a LEAF (the Spore-Diver's one-field tier: carry-in only, not dial-able)

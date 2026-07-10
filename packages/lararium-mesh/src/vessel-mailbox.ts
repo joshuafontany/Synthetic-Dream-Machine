@@ -16,7 +16,7 @@
 import { DAEMON_BAG_ID } from "./lar-uris.js";
 import type { CompositeStore } from "./composite-store.js";
 
-const MAILBOX_PREFIX = "lar:///ha.ka.ba/@daemon/mailbox/";
+const MAILBOX_PREFIX = "lar:///ha.ka.ba/bags/@daemon/mailbox/";
 
 export interface MailboxVerb {
   readonly verb:        string;

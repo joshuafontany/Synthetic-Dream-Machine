@@ -16,7 +16,7 @@
  * (the `palace-path.ts` singleton) — a second row for the same `--palace` names a
  * spelling-drift bug the topology now surfaces.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mempalace/palace-path
+ * Meme: lar:///ha.ka.ba/lararium/mempalace/palace-path
  */
 
 import { execFileSync } from "node:child_process";

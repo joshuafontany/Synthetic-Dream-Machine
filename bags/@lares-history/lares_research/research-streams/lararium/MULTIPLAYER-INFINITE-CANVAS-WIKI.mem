@@ -1,8 +1,8 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
+uri-path    = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.mem"
 type = "text/x-memetic-wikitext"
 confidence  = 18
@@ -137,7 +137,7 @@ lares/ editor/git/MCP write
 
 ## Trust Tiers and Access Control
 
-Four tiers. Promotion is gated by **Orichalcum capabilities** (see `lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities`) — not web2 role assignment. The Orichalcum profile is UCAN-compatible at the wire boundary; Lararium-native caveats (`rating`, `manaoio`, `kapu-scope`, `epoch`) govern semantic authority beyond crypto validity. Stage band is a UX rendering annotation — it is NOT an Orichalcum gate condition.
+Four tiers. Promotion is gated by **Orichalcum capabilities** (see `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`) — not web2 role assignment. The Orichalcum profile is UCAN-compatible at the wire boundary; Lararium-native caveats (`rating`, `manaoio`, `kapu-scope`, `epoch`) govern semantic authority beyond crypto validity. Stage band is a UX rendering annotation — it is NOT an Orichalcum gate condition.
 
 | Tier | Identity | Canvas access | Room access | Orichalcum ability |
 |------|----------|---------------|-------------|-------------------|
@@ -158,7 +158,7 @@ Server principal is stable (Ed25519 keypair, generated once, stored in `.larariu
 
 **Single-user-multi-session:** Capability is scoped to the principal identity, not the session. Multiple tabs with the same identity share the same capability level automatically.
 
-**Room WebSocket connections are NOT edge islands.** A room connection is session-scoped and ephemeral. An edge island is a named, capability-gated, durable-offset causal boundary between two Lares nodes — a different architectural layer (see `lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands`).
+**Room WebSocket connections are NOT edge islands.** A room connection is session-scoped and ephemeral. An edge island is a named, capability-gated, durable-offset causal boundary between two Lares nodes — a different architectural layer (see `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`).
 
 _Status: design only (trust tiers + Orichalcum gate). Authority seam (`LarariumAuthorityEnvelope`, `AuthorityFirstGuard`) shipped M9+. `PUT /admin/promote` local-operator path shipped M10._
 
@@ -403,7 +403,7 @@ All persistent content in Lararium receives a `lar:` URI. This is the foundation
 
 | Content type | URI pattern | Example |
 |---|---|---|
-| Invariant meme | `lar:///ha.ka.ba/@lares/api/pono/${name}` | `lar:///ha.ka.ba/@lares/api/lararium/the-altar-fire` |
+| Invariant meme | `lar:///ha.ka.ba/lares/api/pono/${name}` | `lar:///ha.ka.ba/lares/api/lararium/the-altar-fire` |
 | Wiki carrier | `lar:///${path}` | `lar:///AGENTS` |
 | RPG book meme | `lar:///synthetic-dream-machine/ftls/${slug}` | `lar:///synthetic-dream-machine/ftls/jump-drive` |
 | Imported text | `lar:///imported/${sha256-prefix}/${slug}` | `lar:///imported/3a9f/my-notes` |
@@ -521,7 +521,7 @@ The file backend wraps `fs.writeFileSync` + `git add` + `git commit`. The commit
 | Deep-save non-invariant meme | — | — | ✓ | ✓ |
 | Deep-save invariant meme | — | — | — | ✓ |
 | Canon-promote hostful → hostless URI | — | — | ✓ | ✓ |
-| Assign `lar:///ha.ka.ba/@lares/api/...` URI | — | — | — | ✓ |
+| Assign `lar:///ha.ka.ba/lares/api/...` URI | — | — | — | ✓ |
 
 ### Ceremony surface
 
@@ -720,10 +720,10 @@ These fields are projected into shape metadata or read from TW5 tiddler fields. 
 |---|---|---|
 | `all[memes]` | ✓ shipped | `[all[memes]]` → all ClosureEntry objects |
 | `field:key[value]` | ✓ shipped | `[field:rating[meme]]` |
-| `tag[uri]` | ✓ shipped | `[tag[lar:///ha.ka.ba/@lares/api/pono/loci]]` |
+| `tag[uri]` | ✓ shipped | `[tag[lar:///ha.ka.ba/lares/api/pono/loci]]` |
 | `nsort[field]` | ✓ shipped | `[nsort[depth]]` |
 | `limit[n]` | ✓ shipped | `[limit[5]]` |
-| `prefix[str]` | ✓ shipped | `[prefix[lar:///ha.ka.ba/@lares/api]]` |
+| `prefix[str]` | ✓ shipped | `[prefix[lar:///ha.ka.ba/lares/api]]` |
 | `toml:key[value]` | ✓ shipped | `[toml:register[CS]]` — translates → `field:key[value]` |
 | `edge:FAMILY[ROLE]` | ✓ shipped | `[edge:control[owns]]` → `has[edge-out-control-owns]`; edges pre-loaded from `BootArtifact.pranalaEdges` |
 | `edge:FAMILY[]` | ✓ shipped | `[edge:spatial[]]` → `has[edge-out-spatial]` (any role) |
@@ -755,7 +755,7 @@ const cascade = [{ filter: "[all[memes]edge:control[owns]]", override: { color: 
 const compiled = await compileCascade(cascade, closure, filterEngine, artifact.pranalaEdges);
 ```
 
-**Template namespace:** `lar:///ha.ka.ba/@lares/api/lararium/templates/` — inside the stable tuple root, no adjacent namespace. `templates/index` owns control edges to all five carriers and is reachable from the `lararium` meme via `#hydrate-templates`.
+**Template namespace:** `lar:///ha.ka.ba/lares/api/lararium/templates/` — inside the stable tuple root, no adjacent namespace. `templates/index` owns control edges to all five carriers and is reachable from the `lararium` meme via `#hydrate-templates`.
 
 **Parser addition:** `<<~ kumu name(params) >>` / `<<~/kumu >>` direct form added to `SIGIL_SCANS` alongside the `\\widget` alias. The `kumu` sigil is now parseable in canonical Hawaiian form.
 
@@ -1047,7 +1047,7 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 10. ✓ **Write-back gate (`PUT /admin/promote`) — shipped M10 (local-operator).** `writeFileSync` + lares/ watcher reseed. Full `LarStorageBackend` (file backend + git) deferred until Orichalcum ceremony lands.
 
-11. **Orichalcum capability implementation:** Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities`.
+11. **Orichalcum capability implementation:** Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
 
 12. **ATProto identity (BFF):** See `lares/lararium-node/AUTH-ATPROTO.md`.
 
@@ -1130,7 +1130,7 @@ ReactionGraph (causal)       — async/local event routing between kumu islands
 tldraw shapes                — visual projection output
 ```
 
-**Tier 3 note:** Cross-node federation edges (Tier 3) sit *above* lares/ in the authority hierarchy and *outside* the local Automerge/tldraw room machinery. They are not TLSocketRoom connections. They are named edge islands with their own lifecycle, governed by Orichalcum capabilities. See `#federation` and `lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands`.
+**Tier 3 note:** Cross-node federation edges (Tier 3) sit *above* lares/ in the authority hierarchy and *outside* the local Automerge/tldraw room machinery. They are not TLSocketRoom connections. They are named edge islands with their own lifecycle, governed by Orichalcum capabilities. See `#federation` and `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`.
 
 <<~/ahu >>
 
@@ -1183,8 +1183,8 @@ grammar-as-memes       →  all system components live as memes
 **Status: design locked (Track D, 2026-04-28). Implementation deferred until after M9 + Orichalcum Phase 1.**
 
 Cross-node pranala connections (Tier 3) are causal islands — not WebSockets, not room connections.
-Full law: `lar:///ha.ka.ba/@lares/api/pono/federated-causal-islands`
-Capability model: `lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities`
+Full law: `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`
+Capability model: `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`
 
 ### Three-tier architecture
 
@@ -1264,8 +1264,8 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:companion >>
 <<~ pranala #to-agents ? -> lar:///AGENTS family:control role:governed-by >>
-<<~ pranala #to-altar-fire ? -> lar:///ha.ka.ba/@lares/api/lararium/the-altar-fire family:control role:defines >>
-<<~ pranala #to-canon-promotion ? -> lar:///ha.ka.ba/@lares/api/pono/hooponopono family:control role:governed-by >>
+<<~ pranala #to-altar-fire ? -> lar:///ha.ka.ba/lares/api/lararium/the-altar-fire family:control role:defines >>
+<<~ pranala #to-canon-promotion ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono family:control role:governed-by >>
 <<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family:control role:governed-by >>
 
 <<~/ahu >>

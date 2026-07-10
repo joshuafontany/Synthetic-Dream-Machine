@@ -8,7 +8,7 @@
  * in the dep graph, so palace-path.ts imports it same-package while vessel-paths.ts imports it across the
  * existing `node → mempalace` edge (via the `@lararium/mempalace/xdg-base` subpath) — no cycle.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mempalace/xdg-base
+ * Meme: lar:///ha.ka.ba/lararium/mempalace/xdg-base
  */
 
 import { homedir } from "node:os";

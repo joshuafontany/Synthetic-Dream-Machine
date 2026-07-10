@@ -1,0 +1,55 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/kau >>
+```toml iam
+body-sha256   = "fe642b8721a69825fd3cf25d51db5b423b2acea3eb76e6fdf614b074259dd8e8"
+cacheable     = true
+file-path     = "bags/@lararium/tw5/modules/widgets/kau.mem"
+heleuma       = "ka"
+l-space       = "lararium"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: kau — scaffolded by sync-heleuma --scan-decorators --commit"
+source-symbol = "KauWidget"
+status-date   = "2026-05-03"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/kau"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# kau
+
+TW5 widget from `@lararium/tw5`.
+
+<<~/ahu >>
+
+<<~ ahu #contract >>
+
+Exported symbols: `KauWidget`.
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+```typescript
+export function KauWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
+  this.initialise(parseTreeNode, options);
+}
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

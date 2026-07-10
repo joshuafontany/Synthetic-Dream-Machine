@@ -1,0 +1,36 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/tiddler-text >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/mesh/tiddler-text.mem"
+heleuma   = "ba"
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "heleuma: oracle tiddler text-field reader"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/tiddler-text"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Contract
+
+`tiddlerText(record)` — accepts any `{ tiddler: { text?: unknown } } | null | undefined`, returns `string | null`.
+
+Oracle tiddlers (lararium, catalog, lares, wiki, corpus) carry their payload Automerge URL in `tiddler.text`. This helper centralises the `typeof text === "string"` guard so call sites stay one token.
+
+## Why here
+
+`open-node-lar-peer.ts` defined a local `recordText()`. `wiki-handlers.ts` defined an identical copy. Fifteen-plus inline `typeof rec?.tiddler.text === "string"` guards remain scattered across the node package. This file collapses them.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

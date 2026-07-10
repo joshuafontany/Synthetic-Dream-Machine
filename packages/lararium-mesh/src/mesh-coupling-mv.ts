@@ -15,7 +15,7 @@
  * invisible to any pairwise-conditioned matrix; separating synergy needs PID, a separate instrument.
  *
  * Platform-blind: composes ./gaussian-cmi + reuses ./mesh-coupling's MeshCoupling shape. NO imports.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 import { gaussianConditionalTE } from "./gaussian-cmi.js";

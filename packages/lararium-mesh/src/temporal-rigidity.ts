@@ -15,7 +15,7 @@
  * (so it emerges from the signal's own null rather than a chosen 0.5) and a period-swept kick, ride the
  * feed-it-emerges Sink accumulator (the next-phase redesign), not this pure function.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 export interface RigidityInput {

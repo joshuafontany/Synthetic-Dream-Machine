@@ -1,7 +1,7 @@
 /**
  * epoch-lease — the per-resource lease epoch, a coordinator-free MAX-REGISTER.
  *
- * The non-renewal half of revocation (lar:///ha.ka.ba/@lares/api/pono/convergent-mesh):
+ * The non-renewal half of revocation (lar:///ha.ka.ba/lares/api/pono/convergent-mesh):
  * a capability grant names a `boundEpoch` (`device-delegation`); the grant goes stale when the
  * resource's lease epoch rolls past it. The epoch is a LEASE, never a targeted revoker — targeted
  * revocation rides the Keyhive membership graph (`orichalcum-capabilities`).

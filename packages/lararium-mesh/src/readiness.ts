@@ -39,7 +39,7 @@
 // Well-known readiness keys
 // ---------------------------------------------------------------------------
 
-// Corpus meme: lar:///ha.ka.ba/@lares/api/lararium/schema/readiness-keys
+// Corpus meme: lar:///ha.ka.ba/lares/api/lararium/schema/readiness-keys
 export const READINESS_KEYS = [
   // Primary boot sequence
   "auth",

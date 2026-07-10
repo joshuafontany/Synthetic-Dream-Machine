@@ -16,7 +16,7 @@ distinct same-source turns derive DISTINCT cids — so no turn clobbers another 
 for the worldline binding, NEVER the cid — the address stays pure content-identity, the turn-key keys
 the kapae cascade. Idempotent by construction: the same (source_file, chunk) re-derives the same cid.
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/capture-sources
+Meme: lar:///ha.ka.ba/lararium/sensorium/capture-sources
 """
 from __future__ import annotations
 

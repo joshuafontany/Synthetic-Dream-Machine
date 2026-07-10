@@ -20,7 +20,7 @@
  *     → MemeProvider fan-out → this adaptor.onUriChanged → $tw.lares.enqueueNalu
  *     → next frame drains the lot in one wiki.transact()
  *
- * Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/island-adaptor
+ * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/island-adaptor
  */
 
 import type {
@@ -34,7 +34,7 @@ import type {
 import { toLarTiddlerRecord } from "@lararium/mesh";
 
 /** Cascade config tiddler — newline-separated filter expressions; first non-empty result wins. */
-const BAG_PATHS_CONFIG = "lar:///ha.ka.ba/@lararium/config/bag-paths";
+const BAG_PATHS_CONFIG = "lar:///ha.ka.ba/lararium/config/bag-paths";
 import type { TW5Engine } from "./tw5-vm.js";
 import type { LaresTw5Extension } from "./types/lares-globals.js";
 import { splitBodyTiddler } from "./deserializer.js";
@@ -104,7 +104,7 @@ export class IslandAdaptor implements MemeProjection {
    *
    * The cascade lives as a tiddler in the wiki — operator-configurable at
    * runtime. Per-wiki overlays compose naturally via the recipe cascade
-   * (a `lar:///ha.ka.ba/@lararium/config/bag-paths` overlaid in @<wikiSlug> wins over the
+   * (a `lar:///ha.ka.ba/lararium/config/bag-paths` overlaid in @<wikiSlug> wins over the
    * default in @lararium).
    */
   private _routeBag(title: string): SlotUri | null {
@@ -312,7 +312,7 @@ export class IslandAdaptor implements MemeProjection {
     const bodyText = fields["text"] ?? "";
     const { parent, children } = splitBodyTiddler(title, bodyText, fields);
     // Ceremony writes carry an explicit `bag` field to route to a canonical slot;
-    // live edits route by walking the in-wiki cascade (lar:///ha.ka.ba/@lararium/config/bag-paths).
+    // live edits route by walking the in-wiki cascade (lar:///ha.ka.ba/lararium/config/bag-paths).
     // The cascade returns null when no rule matches or an explicit-skip rule fires
     // (e.g. $:/* system tiddlers).
     // Explicit `bag` field (ceremony writes) short-circuits the cascade; only

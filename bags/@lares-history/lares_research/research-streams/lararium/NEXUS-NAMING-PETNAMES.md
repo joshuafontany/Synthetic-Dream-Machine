@@ -36,7 +36,7 @@ Any decentralized name system can have at most two of: human-meaningful, decentr
 ## Settled Decision: Three-Layer Petname Model
 
 ### Layer 1 — Key Name (canonical, always)
-`lar:///ha.ka.ba/@nexus/<pubkey-base58btc>`
+`lar:///ha.ka.ba/bags/@nexus/<pubkey-base58btc>`
 
 Global, unique, unambiguous, secure. Not human-readable. Never changes. This form grounds all protocol operations.
 

@@ -1,7 +1,7 @@
 /**
  * device-delegation — the signed capability edge that binds a vessel to its operator.
  *
- * Under capability-is-identity (lar:///ha.ka.ba/@lares/api/pono/lararium-identity
+ * Under capability-is-identity (lar:///ha.ka.ba/lares/api/pono/lararium-identity
  * #capability-and-petnames), the DELEGATION EDGE *is* the relationship and the capability:
  * the operator root signs "Operator O delegates to Device D at place P", and any peer
  * verifies it offline against a PINNED operator root (CAPABILITY-LAYER, Plane 0→1).

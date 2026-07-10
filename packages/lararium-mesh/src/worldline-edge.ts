@@ -15,7 +15,7 @@
  * (`kg_add` / `kg_invalidate`). The in-memory ITC verdict stays the live causal read; the KG
  * is the durable, re-derivable projection (nuke-and-pave + re-harvest, #time).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
  */
 
 /** The spawn edge — `actedOnBehalfOf` ⇄ prov:Delegation (PROV-AGENT, arXiv 2508.02866). */

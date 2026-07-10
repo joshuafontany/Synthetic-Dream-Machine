@@ -21,7 +21,7 @@ Usage (the mempalace venv):
       --corpus <dir> [--corpus <dir> ...] --root ~/.lares/testbeds/human-text-<name> \
       [--wing wing_testbed] [--room corpus] [--min-support 2] [--max-forms 64]
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/corpus-testbed
+Meme: lar:///ha.ka.ba/lararium/sensorium/corpus-testbed
 """
 from __future__ import annotations
 

@@ -7,7 +7,7 @@
  *
  * An InMemoryEventStore serves the smoke test and unit work. A
  * tiddler-backed DaemonEventStore persists events under
- * lar:///ha.ka.ba/@daemon/cap/<hash> in the daemon doc.
+ * lar:///ha.ka.ba/bags/@daemon/cap/<hash> in the daemon doc.
  *
  * On daemon boot, the EventStore lists all stored events and replays them
  * via Keyhive.ingestEventsBytes() to restore in-memory state. Events are

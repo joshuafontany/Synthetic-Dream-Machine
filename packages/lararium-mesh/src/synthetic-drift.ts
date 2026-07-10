@@ -7,7 +7,7 @@
  *
  * No-global-now: a LOCAL mulberry32 seed (reusing null-harness.makeRng) drives it — reproducible, no
  * wall-clock, no Math.random. Frames ride plain row-major arrays (number[] per frame) matching
- * projectBoundary / track. Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * projectBoundary / track. Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 import { makeRng } from "./null-harness.js";
 

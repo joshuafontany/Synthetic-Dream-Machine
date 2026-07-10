@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/lib/wiki-sense-fold
+title: lar:///ha.ka.ba/lararium/tw5/lib/wiki-sense-fold
 type: application/javascript
 module-type: library
 \*/
@@ -8,7 +8,7 @@ module-type: library
  * INSIDE the TW5 VM: this file ships as a `module-type: library` plugin tiddler, and the in-VM
  * WikiSenseIndexer + `wikisense` filter operator require it by URI —
  *
- *   require("lar:///ha.ka.ba/@lararium/tw5/lib/wiki-sense-fold")
+ *   require("lar:///ha.ka.ba/lararium/tw5/lib/wiki-sense-fold")
  *
  * (Vite externalizes the relative import in every other module build, so the fold travels ONCE in
  * the plugin.) VM-less islands (composite-store workers with no TW5 boot) import the same source
@@ -24,7 +24,7 @@ module-type: library
  * THE HULL RUNS PLATFORM-BLIND and store-blind: no node builtins, no store imports — the fold
  * takes docs, never a store.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
 // mesh SUBPATH imports (the grammar-cache precedent) — the root index drags automerge/wasm, which

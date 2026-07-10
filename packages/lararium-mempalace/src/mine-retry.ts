@@ -18,7 +18,7 @@
  * from a BUSY lock — a busy lock WAITS+retries, a hang retries at most
  * once (a hang retried the same way is just another hang) then surfaces honestly as MineHangError.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 import {

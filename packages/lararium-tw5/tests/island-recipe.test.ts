@@ -8,7 +8,7 @@
  * writable default path instead of throwing on the first cascade-routed edit
  * (the gate fix; the grant→layer→seed chain the adaptor flip witness skips).
  *
- * Canon: lar:///ha.ka.ba/@lares/docs/pono/wiki-layer-ontology#shore-law
+ * Canon: lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology#shore-law
  */
 
 import { describe, test, expect } from "vitest";
@@ -17,7 +17,7 @@ import { CompositeStore, wikiSlotUri, wikiBagUri } from "@lararium/mesh";
 import type { LarDoc, DocHandle, LarTiddlerRecord, SlotUri } from "@lararium/mesh";
 import type { TW5Engine } from "../src/tw5-vm.js";
 
-const CURRENT_WIKI_BAG = "lar:///ha.ka.ba/@lararium/config/current-wiki-bag";
+const CURRENT_WIKI_BAG = "lar:///ha.ka.ba/lararium/config/current-wiki-bag";
 
 /** Minimal TW5 engine — buildIslandRecipe only constructs an adaptor + flushes. */
 function fakeTw5(): TW5Engine {

@@ -1,7 +1,7 @@
 # mempalace integration — operator + dev reference
 
 Practical reference for the `lares` CLI ↔ mempalace memory integration.
-Design/canon: `lar:///ha.ka.ba/@lararium/api/mempalace-integration`.
+Design/canon: `lar:///ha.ka.ba/lararium/api/mempalace-integration`.
 
 **Two layers, one boundary.** mempalace holds verbatim session-history (drawers, behind a
 causal-island boundary). The lararium maps the domain knowledge graph. Curated flat-MD

@@ -5,7 +5,7 @@
  * standing (the rhythm re-locks — required on a temporal feed, waived on an atemporal corpus feed), and
  * supersaturation (real feeding, not a cold spike). PROPOSED never seals; the caller may hold it open.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/mesh/flow
+ * Meme: lar:///ha.ka.ba/lares/api/pono/mesh/flow
  */
 
 export type CommitState = "PROPOSED" | "RULED";

@@ -10,7 +10,7 @@
  * Home: keyhive (it owns the keyhive wiring) composes tw5's keyhive-free
  * makeDaemonBehavior. tw5 stays keyhive-free; keyhive → tw5 is acyclic.
  *
- * Meme: lar:///ha.ka.ba/@lararium/keyhive/operator-daemon-behavior
+ * Meme: lar:///ha.ka.ba/lararium/keyhive/operator-daemon-behavior
  */
 
 import {

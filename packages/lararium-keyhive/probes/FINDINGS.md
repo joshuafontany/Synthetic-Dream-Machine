@@ -72,7 +72,7 @@ For incremental sync (peer-to-peer, not full state shipment), Keyhive exposes:
 - `kh.eventHashesForAgent(agent)` → Array<hash>
 - `kh.pendingEventHashes()` → Set<hash>
 
-This is the seam for our admin-doc storage: persist the archive (or the event log) as tiddlers under `lar:///ha.ka.ba/@lararium/@admin/cap/...`. **D.4 design recommendation:** store events one-per-tiddler keyed by hash; reconstruct via `ingestEventsBytes` on daemon boot. Avoids serializing/deserializing the whole archive on every change.
+This is the seam for our admin-doc storage: persist the archive (or the event log) as tiddlers under `lar:///ha.ka.ba/lararium/@admin/cap/...`. **D.4 design recommendation:** store events one-per-tiddler keyed by hash; reconstruct via `ingestEventsBytes` on daemon boot. Avoids serializing/deserializing the whole archive on every change.
 
 ## Q5 — Bundle / startup time
 
@@ -102,7 +102,7 @@ Bundle size: 8.8 MB unpacked. Acceptable for a Node daemon. Browser bundle will 
 
 - **Adopt `@keyhive/keyhive` as our cap layer.** Pre-alpha is workable for our scale.
 - **Bag = Keyhive Document.** Each Automerge bag URL becomes a Keyhive scope document.
-- **Persist via incremental events, not full archive replays.** Store events as tiddlers under `lar:///ha.ka.ba/@lararium/@admin/cap/<hash>`; reconstruct by `ingestEventsBytes` at boot.
+- **Persist via incremental events, not full archive replays.** Store events as tiddlers under `lar:///ha.ka.ba/lararium/@admin/cap/<hash>`; reconstruct by `ingestEventsBytes` at boot.
 - **Pin our version.** Treat upgrades as planned breaking changes per operator's stated migration policy.
 - **Install `setPanicHook`** at every process boot (daemon + future browser).
 - **D.2 `CapabilityProvider` interface** wraps roughly: `init(seed)`, `delegate(audienceContactCard, bagUrl, ability)`, `revoke(delegation)`, `verify(delegation, ability, bagUrl)`, `serializeEvents()`, `ingestEvents(bytes)`. Narrower than the 10-method UCAN-shape — Keyhive does more in fewer calls.
@@ -161,7 +161,7 @@ Per event: `event.variant: string` + `event.toBytes(): Uint8Array` +
 `tryIntoSignedDelegation()` / `tryIntoSignedRevocation()`.
 
 **Implications for D.4 (cap state persistence):**
-- Persist each event as one tiddler under `lar:///ha.ka.ba/@lararium/@admin/cap/<eventHash>`.
+- Persist each event as one tiddler under `lar:///ha.ka.ba/lararium/@admin/cap/<eventHash>`.
 - Tiddler `text` field carries base64 of `event.toBytes()`.
 - Tiddler fields: `variant` (PREKEY_ROTATED|CGKA_OPERATION|DELEGATED|REVOKED|…), `bytes-len`, `is-delegated`, `is-revoked`.
 - On daemon boot, walk these tiddlers, sort by causality (TBD how), call `keyhive.ingestEventsBytes([…])` to restore state.

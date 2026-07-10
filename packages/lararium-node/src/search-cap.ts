@@ -8,7 +8,7 @@
  * Palace-keyed (composePalace): one search holder per palace dir; the query text is embedded inside
  * search_io (their model), so it needs no lares-side embed for the query.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { resolveSearchSpawn } from "@lararium/mempalace";

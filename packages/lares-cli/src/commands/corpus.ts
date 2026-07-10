@@ -10,7 +10,7 @@
  * dispatch + render shim. The examples-first help strings here are the SINGLE SOURCE the design meme
  * mirrors (the heleuma docs⇄help drift gate reads this anchor).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/corpus
+ * Meme: lar:///ha.ka.ba/lares/api/lares/corpus
  */
 
 import {

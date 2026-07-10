@@ -6,7 +6,7 @@
  * (closet-boost, entity/wing filters, hallways, tunnels). Their code behind the boundary, tunable
  * in-house; palace-less (one holder, the config is the resource).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { resolveMetaSpawn } from "@lararium/mempalace";

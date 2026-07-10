@@ -8,7 +8,7 @@
  * lives inside the Worker thread; the vessel holds no engine reference
  * (no-VM-on-main-thread).
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/vessel-island-pool
+ * Meme: lar:///ha.ka.ba/lararium/node/vessel-island-pool
  */
 
 import { join } from "path";

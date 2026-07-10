@@ -13,7 +13,7 @@
  * The atom's id is CONTENT-ADDRESSED (sha256 of {signer, frontier, assertion}) — pure-TS, computed
  * here, so an identical testimony collides idempotently and neither side waits on the other's id.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/persistence-keel · lar:///ha.ka.ba/@lares/api/pono/has-stack
+ * Meme: lar:///ha.ka.ba/lararium/mesh/persistence-keel · lar:///ha.ka.ba/lares/api/pono/has-stack
  */
 
 import {

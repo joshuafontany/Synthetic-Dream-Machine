@@ -13,7 +13,7 @@
  * the same path resolves in TS (here) and in bash (the hook script computes it
  * from `${LAR_ROOT:+$LAR_ROOT/state}` else `${XDG_STATE_HOME:-$HOME/.local/state}/lares`).
  *
- * Meme: lar:///ha.ka.ba/@lararium/mempalace/palace-path
+ * Meme: lar:///ha.ka.ba/lararium/mempalace/palace-path
  */
 
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";

@@ -35,7 +35,7 @@
  *   · register-coherence beside bures-metric.ts — same simplex, classical vs quantum step, factor 2.
  *
  * Platform-blind: pure math, NO imports (the bures-metric / gaussian-cmi keel-style).
- * Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 /** A register-point on the simplex Δ^{n−1} — a probability vector over the register bands. */

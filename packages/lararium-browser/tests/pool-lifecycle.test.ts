@@ -4,7 +4,7 @@
  * Proves the pono pool API: mountWiki / unmountWiki / disposeAll / has / inspect / size.
  * Uses the repo-in-island echo fixture — no TW5 boot required.
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/pool-lifecycle
+ * Meme: lar:///ha.ka.ba/lararium/browser/pool-lifecycle
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -13,8 +13,8 @@ import { BrowserVesselIslandPool } from "../src/browser-vessel-island-pool.js";
 
 const FIXTURE_URL = new URL("./fixtures/browser-repo-in-island-echo.mjs", import.meta.url);
 
-const WIKI_A = "lar:///ha.ka.ba/@test/pool-lifecycle/a";
-const WIKI_B = "lar:///ha.ka.ba/@test/pool-lifecycle/b";
+const WIKI_A = "lar:///ha.ka.ba/bags/@test/pool-lifecycle/a";
+const WIKI_B = "lar:///ha.ka.ba/bags/@test/pool-lifecycle/b";
 
 describe("BrowserVesselIslandPool lifecycle contract", () => {
   let pool: BrowserVesselIslandPool | null = null;
@@ -95,7 +95,7 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     repo = new Repo({ sharePolicy: async () => true });
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL });
 
-    await expect(pool.unmountWiki("lar:///ha.ka.ba/@test/nonexistent")).resolves.toBeUndefined();
+    await expect(pool.unmountWiki("lar:///ha.ka.ba/bags/@test/nonexistent")).resolves.toBeUndefined();
   });
 
   test("disposeAll removes all islands", async () => {

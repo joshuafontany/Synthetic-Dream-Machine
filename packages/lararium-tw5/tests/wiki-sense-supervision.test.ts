@@ -8,7 +8,7 @@
  * UN-supervised island fails loud (the confused-deputy ward, both legs); proof-federate refuses
  * typed. The Chromium twin (browser/tests) drives the SAME asks over a real Web Worker wire.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-sense-supervision
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sense-supervision
  */
 
 import { describe, test, expect } from "vitest";
@@ -27,9 +27,9 @@ import { MemoryTiddlerStore } from "../src/memory-store.js";
 import type { IslandContext } from "../src/island-context.js";
 import type { IslandCap } from "../src/island-caps.js";
 
-const ISLAND_A = "lar:///ha.ka.ba/@sense-supervised";
-const ISLAND_B = "lar:///ha.ka.ba/@sense-elsewhere";
-const STRANGER = "lar:///ha.ka.ba/@sense-unsupervised";
+const ISLAND_A = "lar:///ha.ka.ba/bags/@sense-supervised";
+const ISLAND_B = "lar:///ha.ka.ba/bags/@sense-elsewhere";
+const STRANGER = "lar:///ha.ka.ba/bags/@sense-unsupervised";
 
 /** One supervised island behind an in-process channel wearing the wire's message shape. */
 interface ChannelHarness {

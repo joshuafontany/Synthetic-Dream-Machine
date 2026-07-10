@@ -1,7 +1,7 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-widget
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-widget
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: pragma-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/widget
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/widget
 lar-alias-for: \widget
 lar-open-pattern: <<~\s*\\widget\s+([\w~-]+)(?:\s+([^>]*?))?\s*>>
 lar-close-pattern: <<~\/\\widget\s*>>

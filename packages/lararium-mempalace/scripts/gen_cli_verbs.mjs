@@ -14,7 +14,7 @@
  * Usage:  node scripts/gen_cli_verbs.mjs        (writes fixtures/cli-verbs.json)
  *         node scripts/gen_cli_verbs.mjs --check (fails if the on-disk fixture drifts)
  *
- * Meme: lar:///ha.ka.ba/@lararium/sensorium/cli-verbs-fixture
+ * Meme: lar:///ha.ka.ba/lararium/sensorium/cli-verbs-fixture
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";

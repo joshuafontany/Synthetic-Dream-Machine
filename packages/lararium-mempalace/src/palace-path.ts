@@ -18,7 +18,7 @@
  * live would spawn a SECOND daemon. The canonical spelling therefore takes effect
  * on the NEXT @daemon restart; never start a competing daemon against a running one.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mempalace/palace-path
+ * Meme: lar:///ha.ka.ba/lararium/mempalace/palace-path
  */
 
 import { realpathSync } from "node:fs";

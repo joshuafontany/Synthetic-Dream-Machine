@@ -46,7 +46,7 @@ def test_detect_kind_by_extension(name, expected):
 
 
 def test_detect_kind_promotes_memetic_by_doctype():
-    meme = b"<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->\n# x\n"
+    meme = b"<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->\n# x\n"
     assert sr.detect_kind("corpus.md", meme) == "memetic-wikitext"
 
 
@@ -125,7 +125,7 @@ def test_ahu_block_nests_inner_sigils():
 def test_doctype_and_pranala_header():
     src = (
         "<!-- <<~ !DOCTYPE = lar:///x/memetic-wikitext >> -->\n"
-        "<<~ ? -> lar:///ha.ka.ba/@lares/api/lares/corpus >>\n"
+        "<<~ ? -> lar:///ha.ka.ba/lares/api/lares/corpus >>\n"
     )
     tree = sr.parse_sigils(src)
     types = [c["type"] for c in tree["children"]]

@@ -28,7 +28,7 @@
  *
  * Platform-blind: rides ./cabal-place only. NO node: imports.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/persona-circle
+ * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
 import type { CabalPlace } from "./cabal-place.js";

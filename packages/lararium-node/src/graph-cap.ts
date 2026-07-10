@@ -5,7 +5,7 @@
  * layer reading the wing/entities/room metadata our meta-model consume stamps. Their graph code behind
  * the causal-island boundary, upstream-tracked; NO LLM.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/nalu
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
 import { resolveGraphSpawn } from "@lararium/mempalace";

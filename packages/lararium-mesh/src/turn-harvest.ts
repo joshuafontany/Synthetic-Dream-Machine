@@ -1,6 +1,6 @@
 /**
  * turn-harvest — the graceful-gradient harvester (island grammar over the boot HUD).
- * Meme: lar:///ha.ka.ba/@lararium/mesh/turn-harvest
+ * Meme: lar:///ha.ka.ba/lararium/mesh/turn-harvest
  *
  * The boot frame names a GRAMMAR, never a deterministic output. A grammar
  * manifests PROVISIONALLY in use — the juru in the fight rarely matches the

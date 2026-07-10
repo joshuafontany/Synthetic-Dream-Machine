@@ -7,7 +7,7 @@
  *     even when handed to it in the same input bag (the veil holds, structurally).
  *   · the charter round-trips its public fields + serializes deterministically.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { describe, test, expect } from "vitest";

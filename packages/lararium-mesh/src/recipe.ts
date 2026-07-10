@@ -10,8 +10,8 @@
  * TW5 FilterRecipe evaluation surface.
  *
  * Recipe tiddler addressing:
- *   recipeUri("@lararium", "default")  → "lar:///ha.ka.ba/@lararium/recipes/default"
- *   recipeUri("@catalog",  "elyncia")  → "lar:///ha.ka.ba/@catalog/recipes/elyncia"
+ *   recipeUri("@lararium", "default")  → "lar:///ha.ka.ba/lararium/recipes/default"
+ *   recipeUri("@catalog",  "elyncia")  → "lar:///ha.ka.ba/bags/@catalog/recipes/elyncia"
  *
  * Bag stack order: lowest-priority first → highest-priority last (TW5 convention).
  * Each entry in `bagStack` is a well-known lar: bag ID (a root doc URI or corpusLarUri).
@@ -19,7 +19,7 @@
  * Genesis seeds NO recipes — user recipes live in the user's @catalog (registry),
  * minted per-wiki by init-wiki. @lararium stays pure protocol substrate.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/recipe
+ * Meme: lar:///ha.ka.ba/lararium/mesh/recipe
  */
 
 // ---------------------------------------------------------------------------
@@ -37,7 +37,7 @@
 // Self-describing: each root-doc bag carries its own descriptor tiddler inside
 // the ha island.  Corpus / wiki bags seed their own descriptor inside their doc.
 //
-// Meme: lar:///ha.ka.ba/@lararium/mesh/bag
+// Meme: lar:///ha.ka.ba/lararium/mesh/bag
 // ---------------------------------------------------------------------------
 
 export interface BagTiddler {
@@ -111,7 +111,7 @@ export { recipeUri } from "./lar-uris.js";
  *
  * Returns [] for null / undefined / unrecognised types.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/recipe
+ * Meme: lar:///ha.ka.ba/lararium/mesh/recipe
  */
 /**
  * Parse a plugins value from a recipe tiddler field into a string array.

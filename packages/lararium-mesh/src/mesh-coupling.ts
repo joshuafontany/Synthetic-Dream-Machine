@@ -13,7 +13,7 @@
  *
  * Platform-blind: composes ./transfer-entropy + ./partition-monitor. NO node: imports; the node
  * side reads each child's aggregate signal from its dir and hands it here.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/who (the mesh sensorium tree)
+ * Meme: lar:///ha.ka.ba/lararium/mesh/who (the mesh sensorium tree)
  */
 
 import { effectiveTransferEntropy, conditionalTransferEntropy } from "./transfer-entropy.js";

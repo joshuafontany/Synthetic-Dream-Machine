@@ -11,7 +11,7 @@
  * Uses the real compiled node-wiki-island.js + genesis blob.
  * Requires: pnpm --filter @lararium/node build and build:genesis.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/verb-tiddler-dispatch
+ * Meme: lar:///ha.ka.ba/lararium/node/verb-tiddler-dispatch
  */
 
 import { describe, test, expect } from "vitest";
@@ -43,7 +43,7 @@ const skipReason =
 // Helpers
 // ---------------------------------------------------------------------------
 
-const WIKI_ID = "lar:///ha.ka.ba/@test/verb-tiddler-dispatch";
+const WIKI_ID = "lar:///ha.ka.ba/bags/@test/verb-tiddler-dispatch";
 const TIMEOUT = 30_000;
 
 function waitFor<T>(

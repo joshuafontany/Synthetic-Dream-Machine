@@ -10,7 +10,7 @@
  * exchange not yet implemented. These stubs mark the gap with clear operator
  * guidance rather than silent crashes.
  *
- * Design spec: lar:///ha.ka.ba/@lares/docs/lares/mesh-governance
+ * Design spec: lar:///ha.ka.ba/lares/docs/lares/mesh-governance
  * (pending — will carry the full ceremony protocol once transport lands)
  */
 
@@ -48,7 +48,7 @@ export async function cmdInviteSend(_args: ParsedArgs): Promise<number> {
     `Also creates community bags (catalog, reputation, ledger) with both\n` +
     `PersonaGroups as co-admins at first co-operator join.\n` +
     `\n` +
-    `Transport layer design: lar:///ha.ka.ba/@lares/docs/lares/mesh-governance`,
+    `Transport layer design: lar:///ha.ka.ba/lares/docs/lares/mesh-governance`,
   );
   return 1;
 }
@@ -69,7 +69,7 @@ export async function cmdInviteReceive(_args: ParsedArgs): Promise<number> {
     `\n` +
     `Contact the founding operator to initiate: \`lares invite-send\` runs on their node.\n` +
     `\n` +
-    `Transport layer design: lar:///ha.ka.ba/@lares/docs/lares/mesh-governance`,
+    `Transport layer design: lar:///ha.ka.ba/lares/docs/lares/mesh-governance`,
   );
   return 1;
 }

@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/testbed/shuffled/kumulipo/kumulipo-beckwith >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith >>
 ```toml iam
 cacheable = false
 file-path = "packages/lararium-mempalace/scripts/fixtures/shuffled-kumulipo/kumulipo-beckwith.md"
@@ -13,7 +13,7 @@ retain    = false
 role      = "hawaiian source witness meme, Kumulipo Beckwith-1951 translation+commentary locus, koʻihonua cosmogony shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares/testbed/shuffled/kumulipo/kumulipo-beckwith"
+uri-path  = "ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith"
 ```
 
 <<~ &#x0002; >>
@@ -11738,7 +11738,7 @@ GILL, REV. WILLIAM WYATT. Myths and Songs from the South Pacific. London, 1876.
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani >>
+<<~ loulou lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani >>
 
 <<~/ahu >>
 

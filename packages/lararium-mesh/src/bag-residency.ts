@@ -9,7 +9,7 @@
  * Model: a two-state thermal axis in ʻōlelo Hawaiʻi — wela (hot) / anu (cold) —
  * plus an orthogonal pin flag. The `warm` middle tier was cut.
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/residency-tiers
+ * Canon: lar:///ha.ka.ba/lararium/api/residency-tiers
  */
 
 import { DAEMON_BAG_ID } from "./lar-uris.js";
@@ -20,7 +20,7 @@ export type BagUrl = string;
 /**
  * Residency TEMPERATURE of an island/bag — the thermal axis, in ʻōlelo Hawaiʻi.
  *
- * Canon: lar:///ha.ka.ba/@lararium/api/residency-tiers
+ * Canon: lar:///ha.ka.ba/lararium/api/residency-tiers
  *
  *   wela ("hot")  — live + reacting; handle in cache; the island's Worker runs.
  *   anu  ("cold") — torn down; URL known, doc not loaded; resume by spawn + `ea`.

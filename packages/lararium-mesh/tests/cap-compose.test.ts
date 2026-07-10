@@ -1,7 +1,7 @@
 /**
  * cap-compose — the composable-keel engine's laws: a #has-cap-stack (declare) wires topologically
  * (build-or-refuse), each module reaches only its declared deps (POLA), teardown runs in reverse.
- * Canon: lar:///ha.ka.ba/@lararium/api/composable-keel
+ * Canon: lar:///ha.ka.ba/lararium/api/composable-keel
  */
 
 import { describe, test, expect } from "vitest";

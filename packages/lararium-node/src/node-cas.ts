@@ -8,7 +8,7 @@
  * reads what the main thread wrote — the nodefs face of the origin-shared OPFS CAS,
  * isomorphic by composition (vessels-as-#has-caps).
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/node-cas
+ * Meme: lar:///ha.ka.ba/lararium/node/node-cas
  */
 
 import { mkdirSync, writeFileSync, readFileSync, existsSync, copyFileSync } from "node:fs";

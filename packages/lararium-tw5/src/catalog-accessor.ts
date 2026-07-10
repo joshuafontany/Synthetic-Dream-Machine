@@ -18,7 +18,7 @@
  * [[project_sovereign_worker_model]] (the worker reaches @catalog this way once
  * the verbs land worker-side — no catalog render-layer in the daemon recipe).
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/catalog-accessor
+ * Meme: lar:///ha.ka.ba/lararium/tw5/catalog-accessor
  */
 
 import {

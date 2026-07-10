@@ -26,7 +26,7 @@
  * action-handler family executes the residency mutation wrapped in
  * withEffectRecord (writes the archival audit tiddlers).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme: lar:///ha.ka.ba/lararium/api/residency-model
  */
 
 import { createInterface } from "node:readline/promises";

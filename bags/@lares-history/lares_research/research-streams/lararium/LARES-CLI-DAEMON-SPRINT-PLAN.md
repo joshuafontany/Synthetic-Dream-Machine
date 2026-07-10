@@ -29,8 +29,8 @@ Hostless `lar:` URIs identify hot, warm, or cold storage artifacts, starting wit
 
 Examples:
 
-- hostless stable storage artifact: `lar:///ha.ka.ba/@lares/commands/promote/2026-05-18/...`
-- hostful live session artifact: `lar://node.alpha.local/ha.ka.ba/@sessions/live/...`
+- hostless stable storage artifact: `lar:///ha.ka.ba/lares/commands/promote/2026-05-18/...`
+- hostful live session artifact: `lar://node.alpha.local/ha.ka.ba/bags/@sessions/live/...`
 
 ### 4. l-space law
 

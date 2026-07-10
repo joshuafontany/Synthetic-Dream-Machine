@@ -8,7 +8,7 @@
  * Tombstoned titles disappear from listVisible() but remain readable via
  * get() with deleted:true — CRDT law: data only grows; tombstones are markers.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lararium/schema/change-origin
+ * Meme: lar:///ha.ka.ba/lares/api/lararium/schema/change-origin
  */
 
 import { describe, test, expect } from "vitest";

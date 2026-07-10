@@ -33,7 +33,7 @@ Usage (the mempalace venv):
       [--window 128] [--stride 8]
   ~/.venv/bin/python3 ffz_frozen_rhythm.py walk --root <bed>     # the wa-order deltaF re-walk
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/ffz-frozen-rhythm
+Meme: lar:///ha.ka.ba/lararium/sensorium/ffz-frozen-rhythm
 """
 from __future__ import annotations
 

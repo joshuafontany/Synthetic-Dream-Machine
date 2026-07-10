@@ -48,7 +48,7 @@ Usage (the mempalace venv):
       [--lambdas 0,0.25,0.5,0.75,1.0] [--out <dir>]
   ~/.venv/bin/python3 channel_dial.py compare --root-a <bed> --root-b <bed>
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/channel-dial
+Meme: lar:///ha.ka.ba/lararium/sensorium/channel-dial
 """
 from __future__ import annotations
 

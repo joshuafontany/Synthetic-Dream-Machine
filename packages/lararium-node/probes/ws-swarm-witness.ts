@@ -12,7 +12,7 @@
  *
  * Run: pnpm exec tsx packages/lararium-node/probes/ws-swarm-witness.ts
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */
 
 import { KeyhiveProvider, InMemoryEventStore, foundCabalPlace, joinCabalPlace, cabalPlaceRoster } from "@lararium/keyhive";

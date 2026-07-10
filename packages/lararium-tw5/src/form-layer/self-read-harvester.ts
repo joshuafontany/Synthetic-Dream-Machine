@@ -1,6 +1,6 @@
 /**
  * self-read-harvester — the sensorium that reads the house reading ITSELF.
- * Meme: lar:///ha.ka.ba/@lararium/api/living-grammar-palace#two-planes
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  * Research: a478d788 (the self-read-harvester unblocks BOTH North-Stars).
  *
  * ONE module, one feed, two blocked North-Stars unblocked:

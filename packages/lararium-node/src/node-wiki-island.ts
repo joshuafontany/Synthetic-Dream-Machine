@@ -17,7 +17,7 @@
  *
  * Write routing happens via the in-wiki bag-paths cascade.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/node-wiki-island
+ * Meme: lar:///ha.ka.ba/lararium/node/node-wiki-island
  */
 
 import { runSovereignWorker }      from "./sovereign-island-model.js";

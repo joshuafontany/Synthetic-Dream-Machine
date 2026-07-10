@@ -15,7 +15,7 @@
  * unhandled, never a silent drop). A vessel that wires the engine (a sink) + a producer that sends
  * the feed activate it; both may be unwired, and that is a valid resting state, not an error.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/island-caps
+ * Meme: lar:///ha.ka.ba/lararium/tw5/island-caps
  */
 
 import type { CaptureEngine, CapturePost } from "@lararium/mesh";

@@ -9,7 +9,7 @@
  * browser byte SOURCE: the OPFS content-addressed store (engine + plugin bytes by CID,
  * fetched over HTTP by manifest, read by the worker via resolveByCid).
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/browser-genesis
+ * Meme: lar:///ha.ka.ba/lararium/browser/browser-genesis
  */
 
 import {

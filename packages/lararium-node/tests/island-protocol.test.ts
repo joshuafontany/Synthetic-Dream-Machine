@@ -9,7 +9,7 @@
  * GP-3: Tiddler-level delta (integration — confirms added/deleted arrays cross the boundary)
  * GP-5: teardown handshake ordering (integration — cancel:confirmed before teardown:ack)
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/island-protocol
+ * Meme: lar:///ha.ka.ba/lararium/mesh/island-protocol
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -76,7 +76,7 @@ describe("WikiRecipe + grants — manifest payload shape", () => {
     const { port2: syncPort } = new MessageChannel();
     const recipe: WikiRecipe = {
       wikiSlug: "test",
-      libraryBags: ["lar:///ha.ka.ba/@sdm"],
+      libraryBags: ["lar:///ha.ka.ba/bags/@sdm"],
     };
     // Library bags (@sdm) never ride the grants — the island resolves them
     // from @catalog itself (boot = first reconcile).

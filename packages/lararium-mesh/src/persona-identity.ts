@@ -1,7 +1,7 @@
 /**
  * persona-identity — the persona master-seed lifecycle + the two-key atom.
  *
- * Doctrine (canon: lar:///ha.ka.ba/@lares/api/pono/persona-circle, #the-atom +
+ * Doctrine (canon: lar:///ha.ka.ba/lares/api/pono/persona-circle, #the-atom +
  * #composition):
  *
  *   The base atom carries TWO keys, a real two-axis substrate ≠ sovereignty:
@@ -32,7 +32,7 @@
  * social/trustee recovery, rotation-under-unlinkability). This cut carries the
  * basic lifecycle + derivation + atom assembly only.
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/persona-identity
+ * Meme: lar:///ha.ka.ba/lararium/api/persona-identity
  */
 
 import { derivePersonaKeypair } from "./persona-hd.js";

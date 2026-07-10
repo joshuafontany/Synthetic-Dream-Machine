@@ -1,8 +1,8 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/memes/history >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/memes/history >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares-history/memes/history"
+uri-path  = "ha.ka.ba/lares-history/memes/history"
 file-path = "wikis/@lares-history/memes/history/README.mem"
 type      = "text/x-memetic-wikitext"
 l-space   = "archive"

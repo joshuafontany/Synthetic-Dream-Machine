@@ -135,7 +135,7 @@ class LaresAdapter(BaseSourceAdapter):
         the drawer content rides verbatim (``declared_transformations`` stays empty —
         byte-preserving). Routing rides ``adapter_owns_routing``: the ``RouteHint`` comes
         from the record's ``metadata.wing/room/hall`` or an explicit ``route_hint``.
-        Depth: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#forward-facing-nalu.
+        Depth: lar:///ha.ka.ba/lararium/api/capture-annotation-model#forward-facing-nalu.
         """
         queue_path = source.local_path or source.uri
         if not queue_path:

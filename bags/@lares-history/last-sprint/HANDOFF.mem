@@ -157,7 +157,7 @@ Operational rule:
 |---|---|---|
 | S5.5 | ✅ | Causal correction — server finds, never seeds. Bootstrap plugin container. Content-equality guard. Revision-as-Date.now retired. |
 | S5.7 | ✅ | Bag-aware `LarDiskProjector` (canon leak closed). Genesis walks all `packages/*/memes/`. `lares heleuma` audit/scaffold. `lares-chapel-perilous-opens` removed. |
-| S5.6 | ✅ | Admin TW5 VM stood up. Admin doc at `lar:///ha.ka.ba/@lararium/@admin`. Bag-mirror configs read from admin tiddlers tagged `$:/tags/LarariumBagMirror`. |
+| S5.6 | ✅ | Admin TW5 VM stood up. Admin doc at `lar:///ha.ka.ba/lararium/@admin`. Bag-mirror configs read from admin tiddlers tagged `$:/tags/LarariumBagMirror`. |
 | S5.8 | ✅ | `@lares/cli` package + `lares` binary; command-tiddler CRDT protocol; TS dispatcher; promote/where/echo handlers; durable audit-event tiddlers. |
 | S6 | ✅ | `BagResidencyManager` end-to-end: pinned/hot/cold tiers, LRU + idle sweeper + sync-state guard, register-cold for oracle stubs, composite-store hydrate-on-read, `lares status` residency line. C.5 same-machine peer consolidation deferred to the dreamdeck-app sprint. |
 | S7.1 (D.1→D.6) | ✅ | @keyhive/keyhive (concap) integration complete. Operator-key bridge, AdminEventStore persistence, ctx.cap wired, action-handler enforces. Operator identity and admin proof survive daemon restarts. |
@@ -170,7 +170,7 @@ Operational rule:
 |---|---|---|
 | B.1 | `47d72020` | `@lares/cli` package scaffold. `bin/lares.ts` dispatcher + parse-args. `lares init` ports old `init-lararium.ts` via new `runInit()`. |
 | B.2 | `50a9c5be` | Full taxonomy port: `lares` covers status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma. Old pnpm scripts removed (operator chose immediate replacement). Init path-bug fixed. |
-| B.3 | `b564ef0c` | Command-tiddler protocol: title `lar:///ha.ka.ba/@lararium/@admin/cmd/<requestId>`, tag `$:/tags/LaresCommand`. TS `CommandDispatcher` + `CommandHandlerRegistry` mounted alongside admin VM. Echo handler for smoke. |
+| B.3 | `b564ef0c` | Command-tiddler protocol: title `lar:///ha.ka.ba/lararium/@admin/cmd/<requestId>`, tag `$:/tags/LaresCommand`. TS `CommandDispatcher` + `CommandHandlerRegistry` mounted alongside admin VM. Echo handler for smoke. |
 | B.4 | `1681e83f` | Promote handler (TS, factory closing over room composite). `tombstoneInBag()`, `hasWritableBag()` on CompositeStore. Durable audit-event tiddlers under `@admin/log/<requestId>`. Tagged `$:/tags/LaresCommandEvent`. |
 | B.5 | `1ff23ede` | `lares act MOVE` CLI: WS attach to daemon as Automerge-repo peer; recipe-presence preview via `where` handler; confirmation prompt; full polled round-trip + tombstone. |
 | B.6 | _(this commit)_ | Full smoke proven (where round-trip via CLI). HANDOFF + memory updates. Serve-cwd bug fix folded in. |
@@ -182,12 +182,12 @@ Operational rule:
 - **Canon-promotion law**: wiki edits land in `wikis/{slug}/` (gitignored). Promotion ceremony moves a tiddler from wiki bag → canonical bag; disk side effect = file move from `wikis/{slug}/` → `packages/`. Git diff IS the operator's signature on canon.
 - **TW5 VM primacy**: if it can happen in the VM, it MUST happen in the VM.
 - **Web3-only inter-process coordination**: NO HTTP/RPC dispatch surface. CLI ↔ daemon ride command-tiddlers in the admin doc, transported by the existing Automerge-repo WebSocket sync.
-- **Heleuma invariant**: every load-bearing source file (re-exported from `index.ts` or marked `@heleuma:required`) needs a self-describing meme at `lar:///ha.ka.ba/@{pkg-scope}/v{ver}/{slug}` whose `source-file` field anchors the off-bag artifact.
+- **Heleuma invariant**: every load-bearing source file (re-exported from `index.ts` or marked `@heleuma:required`) needs a self-describing meme at `lar:///ha.ka.ba/bags/@{pkg-scope}/v{ver}/{slug}` whose `source-file` field anchors the off-bag artifact.
 
 ## Command-tiddler protocol — quick reference
 
-- **Command URI:**  `lar:///ha.ka.ba/@lararium/@admin/cmd/<requestId>`  tag `$:/tags/LaresCommand`
-- **Audit URI:**    `lar:///ha.ka.ba/@lararium/@admin/log/<requestId>`  tag `$:/tags/LaresCommandEvent`
+- **Command URI:**  `lar:///ha.ka.ba/lararium/@admin/cmd/<requestId>`  tag `$:/tags/LaresCommand`
+- **Audit URI:**    `lar:///ha.ka.ba/lararium/@admin/log/<requestId>`  tag `$:/tags/LaresCommandEvent`
 - **Lifecycle:** CLI writes pending → dispatcher transitions running → done|error → CLI tombstones command-tiddler. Audit event survives.
 - **Handlers today:** `echo` (admin composite), `promote` (room composite), `where` (room composite, recipe-presence).
 - **Forward generalization:** when UEFN-Verse ReactionEngine lands, this dispatcher pattern federates across causal-island bounds; command-tiddlers become one shape of reaction trigger among many. Comments inline in command-dispatcher.ts and action-handler.ts.
@@ -330,7 +330,7 @@ Test artifact (`packages/lares-core/memes/docs/lares/the-lares-protocols.md`) de
 ### Path G — Other sigils via wikirule + cascade + templates
 Port the sigil set (`aka`, `kahea`, `kau`, `lele`, `papalohe`, `pranala`, `pae`) to the same architecture ahu now uses. Each sigil:
   - extends `wikirules/memetic-wikitext-sigil.ts` with its match patterns (block and/or inline modes per operator note);
-  - ships its own template tiddlers under `lar:///ha.ka.ba/@lararium/templates/{sigil}/{html,markdown-meme}`;
+  - ships its own template tiddlers under `lar:///ha.ka.ba/lararium/templates/{sigil}/{html,markdown-meme}`;
   - registers its cascade entries `$:/config/Lar/{Sigil}Template/*`;
   - keeps any sigil-specific JS widget thin (cascade-resolve + transclude).
 Open question per sigil: does it own a child tiddler (slot child) or fragment-render in place? `aka` projects, `kahea` invokes, `kau` places (with Keyhive UCAN attachment), `lele` flows, `pae` phases (LADDER/OODA-HA), `pranala` is an explicit edge. Each gets its template grammar.
@@ -370,7 +370,7 @@ lares reset --force      # wipes .lararium + bootstrap, re-init
 lares serve              # daemon foreground (alternate terminal)
 
 # In another terminal — smoke negative path:
-lares act MOVE lar:///definitely-not-real --to lar:///ha.ka.ba/@lares --yes
+lares act MOVE lar:///definitely-not-real --to lar:///ha.ka.ba/bags/@lares --yes
 # Expected: "tiddler not found in any bag: …"
 
 # Verify cap-layer round-trip:
@@ -413,7 +413,7 @@ lares act MOVE <uri> --to <target-bag>
 - `lares heleuma` flags 2 missing memes for `@lares/cli` source files (lares.ts, parse-args.ts) — lands in Path C.
 - Some legacy daemon log noise: `TimeoutNegativeWarning` from Automerge repo on attach. Cosmetic.
 - `meme-sync-adaptor.ts:129` — `targetBag` default string is `"room"` (stale from rooms→wikis rename). Cosmetic; production callers always pass an explicit bag ID.
-- Heleuma drift: `ha.ka.ba/@lararium/tw5/widgets/toml` needs `tsx scripts/sync-heleuma.ts --sync-modules --commit` to resolve.
+- Heleuma drift: `ha.ka.ba/lararium/tw5/widgets/toml` needs `tsx scripts/sync-heleuma.ts --sync-modules --commit` to resolve.
 - `file-path` absent in child iam when tiddler is authored directly in TW5 UX (not synced from disk) — `source-file` field not set → `parentSourceFile` empty. Correct by design (no disk path exists yet); J.3 MOVE (residency ACTION) will set it once children land in canonical bag.
 
 ## Active memory pointers (claude memory system)
@@ -442,7 +442,7 @@ lares act MOVE <uri> --to <target-bag>
 - **DID encoding.** Use `whoami: IndividualId` + own bytes-to-hex. NOT `idString` — strips per-byte leading zeros, breaks DID round-trip.
 - **ContactCard transport.** JSON via `toJson`/`fromJson`, wrap with TextEncoder. NOT bytes — alpha.56c doesn't expose `toBytes` for ContactCard.
 - **Cap-event home: D4.a — inside the bag's own Automerge doc** (TW5-native, decided post-research). Title shape `lar:///{bag-uri}/cap/{event-id}`, tag `$:/tags/CapEvent` (sub-tags `.../Prekey`, `.../Cgka`, `.../Delegation`, `.../Revocation`). Reasons: bags are TW5 policy boundaries, not performance boundaries; cap events MUST share the bag's sync surface (peer with bag but not cap log can't validate writes); Automerge has no cross-doc atomicity; TW5's own pattern co-locates high-churn runtime metadata (history, state, drafts) with content via `$:/` + tag, not via separate bag. Companion-doc shape is reserved for future *performance* tuning if cap-event volume crosses a threshold.
-- **TW5 system-namespace boundary (E.10.13).** Every Lares system tiddler TITLE lives in `lar:///`: cascade configs (`lar:///config/Lar/...`), global mounts (`lar:///mounts/...`), templates (`lar:///ha.ka.ba/@lararium/templates/...`), plugin envelopes (`lar:///plugins/lares/...`). Tag VALUES stay TW5-conventional `$:/tags/...` — tag values are not titles, do not intersect the sync filter, and let cascade entries plug into TW5's standard tag-discovery path. Drafts, ephemeral UX state, and shadow-tiddler defaults stay browser-local in `$:/` by design. For drag-and-drop community distribution, `$:/plugins/...` envelopes MAY re-emit the same plugin module code; canonical signature lives in the `lar:///` form. Decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md` (TW5 System Boundary section).
+- **TW5 system-namespace boundary (E.10.13).** Every Lares system tiddler TITLE lives in `lar:///`: cascade configs (`lar:///config/Lar/...`), global mounts (`lar:///mounts/...`), templates (`lar:///ha.ka.ba/lararium/templates/...`), plugin envelopes (`lar:///plugins/lares/...`). Tag VALUES stay TW5-conventional `$:/tags/...` — tag values are not titles, do not intersect the sync filter, and let cascade entries plug into TW5's standard tag-discovery path. Drafts, ephemeral UX state, and shadow-tiddler defaults stay browser-local in `$:/` by design. For drag-and-drop community distribution, `$:/plugins/...` envelopes MAY re-emit the same plugin module code; canonical signature lives in the `lar:///` form. Decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md` (TW5 System Boundary section).
 - **Plugin-tiddler boot path (E.10.13).** TW5Engine boots by pushing one envelope tiddler — `lar:///plugins/lares/memetic-wikitext` — into `preloadTiddlers`. The standard `$tw.modules` flow registers wikirule, parser, deserializer, and widget modules; cascade configs, templates, and the `<$lar-meme-split>` global mount materialize as shadow tiddlers. No imperative widget/parser/wikirule registration code remains. Parsers instantiate via the canonical TW5 construction path (not a hand-rolled prototype-chain dance). Do not reintroduce imperative `parsers["text/x-memetic-wikitext"] = ...` mutations.
 - Chapel-perilous-opens removed; unstable URIs resolve as virtual until promoted to a stable @-scope
 - Admin URI shape: room URI vs bag URI distinction is intentional

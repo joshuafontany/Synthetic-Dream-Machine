@@ -26,7 +26,7 @@
  *     @oracle      (CRDT, required — the universal floor: engine core + grammar + bag-oracle)
  *
  *   Write routing happens via the in-wiki cascade
- *   (`lar:///ha.ka.ba/@lararium/config/bag-paths`), not by behavior config.
+ *   (`lar:///ha.ka.ba/lararium/config/bag-paths`), not by behavior config.
  *
  * ## The host seam (composition, not adaptation)
  *
@@ -38,7 +38,7 @@
  *
  *   Same isomorphic flow; different pieces resolved. role ≠ platform.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/sovereign-kernel
+ * Meme: lar:///ha.ka.ba/lararium/tw5/sovereign-kernel
  */
 
 import {

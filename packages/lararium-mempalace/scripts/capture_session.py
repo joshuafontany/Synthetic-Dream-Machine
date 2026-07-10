@@ -25,7 +25,7 @@ Usage:
   · codex    pointer = a rollout `.jsonl`
   · copilot  pointer = the SQLite `session-store.db` (NOT the deleted events.jsonl)
 
-Meme: lar:///ha.ka.ba/@lararium/sensorium/capture-session
+Meme: lar:///ha.ka.ba/lararium/sensorium/capture-session
 """
 from __future__ import annotations
 

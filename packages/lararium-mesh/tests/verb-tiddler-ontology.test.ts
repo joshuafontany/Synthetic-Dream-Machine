@@ -13,12 +13,12 @@ import {
   buildVerb, summon, parseVerb,
 } from "../src/verb-tiddler.js";
 
-const BAG = "lar:///ha.ka.ba/@daemon";
+const BAG = "lar:///ha.ka.ba/bags/@daemon";
 
 describe("task/receipt URI ontology (seed)", () => {
   test("taskUri / receiptUri compose bag + kind + id", () => {
-    expect(taskUri(BAG, "abc")).toBe("lar:///ha.ka.ba/@daemon/task/abc");
-    expect(receiptUri(BAG, "abc")).toBe("lar:///ha.ka.ba/@daemon/receipt/abc");
+    expect(taskUri(BAG, "abc")).toBe("lar:///ha.ka.ba/bags/@daemon/task/abc");
+    expect(receiptUri(BAG, "abc")).toBe("lar:///ha.ka.ba/bags/@daemon/receipt/abc");
     expect(TASK_KIND).toBe("task");
     expect(RECEIPT_KIND).toBe("receipt");
   });

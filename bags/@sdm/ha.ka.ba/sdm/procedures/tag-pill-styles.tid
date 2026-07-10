@@ -1,0 +1,17 @@
+title: lar:///ha.ka.ba/bags/@sdm/procedures/tag-pill-styles
+tags: $:/tags/Stylesheet
+type: text/css
+
+.sdm-tag-pill {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  margin: 0.1em 0.15em;
+  border-radius: 1em;
+  background: <<colour muted-foreground>>;
+  color: #fff;
+  font-size: 0.85em;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sdm-tag-pill:hover { filter: brightness(1.15); }

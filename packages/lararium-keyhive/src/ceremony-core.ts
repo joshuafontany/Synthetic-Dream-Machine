@@ -29,9 +29,9 @@
  * per-vessel seed delegated into the PersonaGroup by a signed edge. runDeviceAdmitAccept
  * sketches that path (Model B) but waits on encrypted-content transport (Beelay,
  * Rust-only) — to be stood in temporarily behind a swap surface. See
- * lar:///ha.ka.ba/@lares/docs/lares/federation.
+ * lar:///ha.ka.ba/lares/docs/lares/federation.
  *
- * Meme: lar:///ha.ka.ba/@lararium/keyhive/ceremony-core
+ * Meme: lar:///ha.ka.ba/lararium/keyhive/ceremony-core
  */
 
 import type { Repo } from "@lararium/mesh";

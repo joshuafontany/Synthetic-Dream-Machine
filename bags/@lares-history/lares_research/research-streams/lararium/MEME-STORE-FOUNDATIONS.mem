@@ -1,6 +1,6 @@
-<<~ ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
+uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS.mem"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"
@@ -213,4 +213,4 @@ The identity and UCAN layer is now in place:
 
 <<~/ahu >>
 
-<<~ ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>

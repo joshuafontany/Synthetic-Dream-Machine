@@ -1,7 +1,7 @@
-title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-aka
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: edge-sugar
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/aka
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/aka
 lar-pattern: <<~\s*aka\s+([\w-]+\s+)?(\S+)\s*>>
 lar-alias-for: kahea
 lar-default-family: observe
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 
 \widget ~aka(p1:"" p2:"")
 <$set name="_a-uri" filter="[<p1>regexp[^#]]" value={{{ [<p1>addprefix<currentTiddler>] }}} emptyValue=<<p1>>>
-<$let _a-template={{{ [<p2>!match[]] ~[all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/aka-template]!is[draft]!has[draft.of]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/@lararium/templates/aka/html]] }}}>
+<$let _a-template={{{ [<p2>!match[]] ~[all[shadows+tiddlers]tag[lar:///ha.ka.ba/tags/aka-template]!is[draft]!has[draft.of]] :map:flat[subfilter{!!text}] +[first[]else[lar:///ha.ka.ba/lararium/templates/aka/html]] }}}>
 <$tiddler tiddler=<<_a-uri>>>
 <$transclude $tiddler=<<_a-template>>/>
 </$tiddler>

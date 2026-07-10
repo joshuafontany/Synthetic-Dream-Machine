@@ -1,0 +1,84 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/puka >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/puka.mem"
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "first-through-the-opening sigil — puka as the gap; Verse rush: first wins, losers continue until enclosing scope exits (NOT cancelled by winner); English alias: \\rush; async-first concurrency sprint pending"
+tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-puka"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lares/api/pono/puka"
+```
+
+<<~ ahu #head >>
+
+# Puka
+
+*puka* — Hawaiian: hole, opening, gap; doorway, exit. A puka marks where passage happens — the
+first thing through the opening wins. The others keep moving; they simply no longer determine
+the outcome.
+
+A first-through-the-opening sigil. The body of a puka block spawns parallel flows; the first
+flow to complete yields the result and the block continues — but the remaining flows run on in
+the background without cancellation. English alias: `\rush`.
+
+Verse equivalent: `rush` — parallel child flows race; first settler wins; losers continue running
+in background. Distinct from `race` (which cancels losers immediately). See `holo` for the
+cancelling-race form.
+
+The puka metaphor holds: when a fish finds the gap in the net, it passes through. The net
+remains open — the others may pass through later or not. The outcome already holds.
+
+Grammar only --- the selecting-race execution runtime awaits the async-first sprint.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+A puka block MUST spawn all child flows before any result lands.
+A puka block MUST propagate the first completing flow's result as the block's output.
+A puka block MUST NOT cancel remaining flows when the winner lands — they continue in background.
+A puka block MUST cancel remaining flows when the enclosing async context (function scope) exits.
+A puka block MUST NOT resume the containing flow until one child flow completes.
+A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```text
+<<~ puka >>
+  <<~ lele lar:///target-a >>
+  <<~ lele lar:///target-b >>
+<<~/puka >>
+
+<<~ \rush >>
+  <<~ \branch lar:///target-a >>
+  <<~ \branch lar:///target-b >>
+<<~/\rush >>
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-rush >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/holo >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -1,4 +1,4 @@
-title: lar:///ha.ka.ba/@lararium/templates/pranala-header/html
+title: lar:///ha.ka.ba/lararium/templates/pranala-header/html
 type: text/vnd.tiddlywiki
 
 <span class="lar-pranala-header" data-canonical-uri=<<pranala-header-uri>>>? &rarr; <$link to=<<pranala-header-uri>>><<pranala-header-uri>></$link></span>

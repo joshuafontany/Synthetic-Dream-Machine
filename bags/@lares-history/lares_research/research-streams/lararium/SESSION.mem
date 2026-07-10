@@ -1,9 +1,9 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SESSION >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION >>
 
 ```toml iam
-uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SESSION"
+uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem"
 type         = "text/x-memetic-wikitext"
 l-space      = "adjacent"
@@ -13,7 +13,7 @@ manaoio      = 17
 mana         = 18
 manao        = 17
 implements   = [
-  "lar:///ha.ka.ba/@lares/api/pono/meme"
+  "lar:///ha.ka.ba/lares/api/pono/meme"
 ]
 role         = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
 ```
@@ -57,7 +57,7 @@ Walking upward from Automerge doc → CompositeStore → MemeSyncAdaptor → VM 
 - `putViaRecipe` write routing: adaptor `direct` handler still calls `store.put()` (routes to last writable); full recipe-driven routing needs `RecipeTiddler` injected into adaptor or `CompositeStore.put()` routing by `record.bag`
 - tldraw canvas wiki-first migration: `projectFromTw5(tw5)` belongs in TW5 filter pipeline; `(ed.store as any).put()` × 3 awaits `createBindingId()` proper projection
 - `CompositeStore.addProjection` dynamic registration: layers added after `adaptor.start()` (async corpus) don't register adaptor with their MemeProvider — needs `addLayer` to fan new registrations
-- `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - `writePolicy` enforcement in `putViaRecipe` against Keyhive principal capabilities
 - Room/corpus bags: `BagTiddler` descriptor seeded at boot via `seedBagDescriptors`
 
@@ -106,7 +106,7 @@ The full Lararium Automerge doc stack aligns on `LarDoc`. No more flat-doc casts
 - Room/corpus bags: seed own `BagTiddler` descriptor at boot (not relying on Automerge sync alone)
 - Browser peer: explicit `seedBlobDescriptors` call at first-boot
 - Tombstone priority: `CompositeStore` check at tombstone time whether higher-priority bag retains title
-- `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - Social plane UX: identity picker + group membership TW5 widgets reading Keyhive tiddler fields
 
 ---
@@ -153,7 +153,7 @@ Bags now carry first-class policy tiddlers. The VM enforces highest-priority-bag
 - Social plane UX; room/corpus bags seed their own `BagTiddler` at boot
 - `writePolicy` enforcement in `putViaRecipe` against identity/group principals
 - Browser peer: explicit `seedBagDescriptors` call (currently receives via sync only)
-- Wiki-first bag picker widget reads `[bag[lar:///ha.ka.ba/@lararium]]tag[bag-descriptor]`
+- Wiki-first bag picker widget reads `[bag[lar:///ha.ka.ba/bags/@lararium]]tag[bag-descriptor]`
 
 ---
 
@@ -199,14 +199,14 @@ The VM sees only the recipe's bag slice. Both peers boot recipe-aware. The wiki 
 
 ## OODA-HA: M21 — 6-Root 2-Plane + Recipe Schema (2026-05-03)
 
-✶ `corpusLarUri(slug)` returned `lar:///ha.ka.ba/@${slug}` — pos-1 collision with root doc identities.  Browser peer `CORPUS_PREFIX` carried a growing exclusion list (`!== CATALOG_DOC_URI`, etc.) that would not auto-extend as new root docs arrived.  No social plane docs existed (no `@identities`, `@circles`, `@sessions`).  No recipe schema existed.  Tests still asserted the old `corpus:slug` opaque-prefix and `BAG_IDS.system`/`BAG_IDS.room` stub keys.
+✶ `corpusLarUri(slug)` returned `lar:///ha.ka.ba/bags/@${slug}` — pos-1 collision with root doc identities.  Browser peer `CORPUS_PREFIX` carried a growing exclusion list (`!== CATALOG_DOC_URI`, etc.) that would not auto-extend as new root docs arrived.  No social plane docs existed (no `@identities`, `@circles`, `@sessions`).  No recipe schema existed.  Tests still asserted the old `corpus:slug` opaque-prefix and `BAG_IDS.system`/`BAG_IDS.room` stub keys.
 
 ⏿ URI grammar law finalised (pos 0-indexed after `lar:///`):
   - pos 1 `@name` = root doc identity (exactly 6 reserved — `@lararium`, `@catalog`, `@lares`, `@identities`, `@circles`, `@sessions`)
   - pos 2 `@name` = child doc under a root (corpus: `@catalog/@elyncia`; future session: `@sessions/@slug`)
   - pos 2+ plain = leaf path (rooms: `@lararium/rooms/altar-fire`)
   - `@` NEVER at pos 3+
-  Corpus docs belong at pos-2 under ka.  `CORPUS_PREFIX = "lar:///ha.ka.ba/@catalog/@"` scopes naturally — no exclusion list needed.  Six root docs in two planes: content Tiga (ha/ka/ba) + social plane (identities/groups/sessions).  `RecipeTiddler` stored in ha island gives every VM a derivable bag stack.
+  Corpus docs belong at pos-2 under ka.  `CORPUS_PREFIX = "lar:///ha.ka.ba/bags/@catalog/@"` scopes naturally — no exclusion list needed.  Six root docs in two planes: content Tiga (ha/ka/ba) + social plane (identities/groups/sessions).  `RecipeTiddler` stored in ha island gives every VM a derivable bag stack.
 
 ◇ Four loops, each gated by `pnpm -r build` + `pnpm --filter @lararium/mesh test`:
   1. **Loop 1 (breaking)** — remap `corpusLarUri` to pos-2; 6-root grammar docblock; 3 social URI constants; fix both peers' `CORPUS_PREFIX`; update resolver named-doc comment
@@ -218,7 +218,7 @@ The VM sees only the recipe's bag slice. Both peers boot recipe-aware. The wiki 
 Build clean across core + node + app.  67/67 tests pass.
 
 ⤴ Architecture live on `feature/lararium-node-3`:
-  - `lar:///ha.ka.ba/@catalog/@elyncia` — correct pos-2 corpus URI
+  - `lar:///ha.ka.ba/bags/@catalog/@elyncia` — correct pos-2 corpus URI
   - Six root docs boot in both peers; oracle tiddlers reconciled on every boot
   - Three seed recipes in ha island tiddlers: `@lararium/recipes/full`, `@lararium/recipes/default`, `@catalog/recipes/default`
   - Bag ID law holds across all doc types; `CompositeStore` BAG_IDS includes all 6 roots
@@ -360,7 +360,7 @@ All 62 unit tests green after removal.
 
 ### Added this session (M10)
 
-- **Streams plugin vendor** — sq/streams v1.2.24 at `lar:///ha.ka.ba/@lares/api/vendor/sq-streams`; compat fields (`parent`/`stream-list`/`stream-type`) emitted from `splitCarrierToTiddlers`
+- **Streams plugin vendor** — sq/streams v1.2.24 at `lar:///ha.ka.ba/lares/api/vendor/sq-streams`; compat fields (`parent`/`stream-list`/`stream-type`) emitted from `splitCarrierToTiddlers`
 - **Mixed prose/children** — `generateParentText()` walks AST in document order; prose + transcludes interleaved (daemon-in-the-walls pattern)
 - **Peer-correct disk projector** — `LarDiskProjector` subscribes to Automerge store directly; `writing` Set exposes echo-loop guard to file watcher
 - **WorksiteWidget anchor** — no `renderChildren`; template owns all slot content; double-render eliminated
@@ -464,7 +464,7 @@ packages/lararium-node/
 
 ◇ FFZ 5-Scale changeset model, locked:
 
-  Attention-scale register names now canonical: **Pulse** (0) / **Beat** (1) / **Measure** (2, default band) / **Arc** (3) / **Theme** (4). Canonical meme: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`.
+  Attention-scale register names now canonical: **Pulse** (0) / **Beat** (1) / **Measure** (2, default band) / **Arc** (3) / **Theme** (4). Canonical meme: `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
 
   | Scale | Register Name | Automerge unit | MemeProvider event |
   |---|---|---|---|
@@ -492,14 +492,14 @@ packages/lararium-node/
 
   **Type meme** (hostless, canonical lares corpus):
   ```
-  lar:///ha.ka.ba/@elyncia/devices/altar-torch
+  lar:///ha.ka.ba/elyncia/devices/altar-torch
   ```
-  Lives on disk at `lares/memes/ha.ka.ba/@elyncia/devices/altar-torch.md`. Defines the device type: event ports, function ports, default fields, `control:implements` edges.
+  Lives on disk at `lares/memes/ha.ka.ba/elyncia/devices/altar-torch.md`. Defines the device type: event ports, function ports, default fields, `control:implements` edges.
 
   **Instance meme** (fragment of type URI):
   ```
-  lar:///ha.ka.ba/@elyncia/devices/altar-torch#east-wing-flame
-  lar:///ha.ka.ba/@elyncia/devices/altar-torch#3f2a1b9c-...
+  lar:///ha.ka.ba/elyncia/devices/altar-torch#east-wing-flame
+  lar:///ha.ka.ba/elyncia/devices/altar-torch#3f2a1b9c-...
   ```
   Two identity layers coexist for the same device spawn:
     - User-selected name fragment: `#east-wing-flame` — human readable, stable across renames of the instance content, the operator's mnemonic handle.
@@ -517,7 +517,7 @@ packages/lararium-node/
   <<~ kahea kau #east-wing-flame >>
   <<~ kahea kau #3f2a1b9c-8e4d-... >>
   ```
-  One `<<~ kahea kau #fragment >>` sigil per instance. The type meme's body thus serves as the authoritative roster of all active instances. The fragment after `#` becomes the tiddler title suffix: full title = `lar:///ha.ka.ba/@elyncia/devices/altar-torch#east-wing-flame`.
+  One `<<~ kahea kau #fragment >>` sigil per instance. The type meme's body thus serves as the authoritative roster of all active instances. The fragment after `#` becomes the tiddler title suffix: full title = `lar:///ha.ka.ba/elyncia/devices/altar-torch#east-wing-flame`.
 
 ◇ Bag assignment and movability:
   - Instance tiddler title: full lar URI with fragment, stored as a tiddler in the room Automerge doc.
@@ -837,7 +837,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 Each corpus `MemeStoreDoc` carries `tiddlers[corpusLarUri(slug)]` self-ref tiddler. Browser peer reads corpus discovery from `CatalogDoc.tiddlers`, not the legacy `corpora` Record.
 
 **M19 — Automerge Tiga:**
-`LARES_DOC_URI` constant. `seedLaresDoc()`. `reconcileWellKnownTiddlers` threaded with `laresUrl`. `lares` bag in `CompositeStore` both peers. `automerge-tiga.md` invariant meme at `lar:///ha.ka.ba/@lararium/mesh/automerge-tiga`. SDM metaphysics: ha = LarariumDoc (structure), ka = CatalogDoc (motion), ba = LaresDoc (personality).
+`LARES_DOC_URI` constant. `seedLaresDoc()`. `reconcileWellKnownTiddlers` threaded with `laresUrl`. `lares` bag in `CompositeStore` both peers. `automerge-tiga.md` invariant meme at `lar:///ha.ka.ba/lararium/mesh/automerge-tiga`. SDM metaphysics: ha = LarariumDoc (structure), ka = CatalogDoc (motion), ba = LaresDoc (personality).
 
 **M20 — Bag ID = lar: URI everywhere:**
 `LarariumDocStore<T>` generic over any `{ tiddlers? }` doc. `corpusBagId` = alias of `corpusLarUri`. `roomBagId` = alias of `roomLarUri`. `BAG_IDS` exports lar: URI constants. Catalog bag layer added to both peers. `fields: { bag }` duplication stripped from all oracle tiddler writes. `MemeSyncAdaptor` receives `roomLarUri(roomId)`. All three packages build clean.
@@ -950,7 +950,7 @@ Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adap
 84 core tests pass (5 new added). 173 total across all packages (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean. All `as unknown as` tiddler casts removed from lararium-island.ts. Island URL travels via oracle tiddler. Adaptor writes route to correct bag doc. Corpus layers arriving after boot register with active projections. TW5Engine API surface fully typed.
 
 ↺ **M25 Loop 4 candidates:**
-- Draft bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - `lararium-island.ts` `systemTitles` — consider moving to oracle tiddler rather than separate Automerge field
 - tldraw `(ed.store as any).put()` × 3 wiki-first migration
 - MCP `hud`/`receipt` — diagnose storage-dir issue
@@ -996,7 +996,7 @@ Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adap
 ↺ **M26 residue / M27 candidates:**
 - `TW5WorkerProxy` not yet wired to any VmPool in `@lararium/app` — Sprint 6 browser Worker isolation
 - `NodeOpenPhase` and `BrowserOpenPhase` are parallel string unions not shared — consider a canonical `LarOpenPhase` in core
-- Draft bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - tldraw `(ed.store as any).put()` × 3 wiki-first migration
 - Connect screen cold-boot path
 - MCP `hud`/`receipt` storage-dir fix
@@ -1077,7 +1077,7 @@ Three pressures converged. (1) `LarariumShell.tsx` held three `(ed.store as any)
 
 ↺ **Other open pressures:**
 - `TW5WorkerProxy` passed as `vmFactory` at call site (Sprint 6 browser Worker isolation)
-- Draft bag → stable lar: URI (`lar:///ha.ka.ba/@sessions/drafts/{did}`)
+- Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 - Connect screen cold-boot path
 - MCP `hud`/`receipt` storage-dir fix
 

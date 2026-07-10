@@ -10,7 +10,7 @@
  * the surface the node-side reader and the sensory-seam call; nothing downstream re-derives it.
  *
  * Platform-blind: composes ./signed-innovation + ./mesh-coupling-mv + ./cmi-significance.
- * Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+ * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
 import { whitenChildren } from "./signed-innovation.js";
@@ -97,7 +97,7 @@ export function coupleMesh(children: readonly ChildSignalMV[], opts: CoupleMeshO
 // (here: local smoothness). It is NOT truth. The HONEST-ZERO is the ground state: below the coverage
 // floor, across an un-bridgeable void, or with no shared grain for an edge, the densify REFUSES TO
 // EMIT rather than fabricate. Tier-2/3 (spline / GP interpolation; continuous-time-TE / CCC) stay a
-// NOTED follow-up — richer tunnels, still tunnels. Meme: lar:///ha.ka.ba/@lararium/mesh/flow
+// NOTED follow-up — richer tunnels, still tunnels. Meme: lar:///ha.ka.ba/lararium/mesh/flow
 
 /**
  * A STRATUM — a child signal observed on only part of the shared skeletal grid. Every stratum rides

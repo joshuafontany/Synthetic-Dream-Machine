@@ -7,7 +7,7 @@
  * 0 → >0 between glue and obstruct. node ≡ browser on this verdict IS the island-isomorphism proof —
  * one hull, two substrates, differ by grant not hull. No py, no embeddings, no cache, no cap-stack.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
  */
 
 import { describe, test, expect } from "vitest";
@@ -39,7 +39,7 @@ describe("wiki-sensorium consistency keystone — browser tier", () => {
   });
 
   test("entries() folds the island's OWN resolved surface, causal-stamped", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/@witness-browser", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@witness-browser", GLUE_SEEDS);
     const snap = await new WikiStoreAdapter(island).snapshot();
     expect(snap.readings.map((r) => r.title).sort()).toEqual(["canon-a", "canon-b", "plain"]);
     for (const r of snap.readings) expect(r.heads).toBeNull();

@@ -25,7 +25,7 @@
  * and re-runs the capture's own gradient reader for voice/band/drift (the search
  * wire returns no drawer metadata — see mesh/stamp-filter.ts).
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/lararium-memory#shared-mesh
+ * Meme: lar:///ha.ka.ba/lares/api/pono/lararium-memory#shared-mesh
  */
 
 import { loadVesselVerifyingKey } from "@lararium/node";

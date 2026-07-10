@@ -27,7 +27,7 @@
  * Above-stack projections defer (separate concern). When they land they will
  * subscribe to nalu events, not participate in the cascade.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/lararium/wiki-recipe
+ * Schema: lar:///ha.ka.ba/lares/api/lararium/wiki-recipe
  */
 
 import type { AutomergeUrl } from "@automerge/automerge-repo";
@@ -117,7 +117,7 @@ export function recipeHostFacets(wikiSlug: string, identityDid: string): WikiHos
 }
 
 /**
- * Extract the slug from a lar URI of the form `lar:///ha.ka.ba/@<slug>`.
+ * Extract the slug from a lar URI of the form `lar:///ha.ka.ba/bags/@<slug>`.
  * Falls back to the input string for malformed inputs (callers can detect
  * by comparing input === slugFromUri(input) — true means malformed).
  */
@@ -131,10 +131,10 @@ export function slugFromUri(uri: string): string {
  *
  *   daemonRecipe: { wikiSlug: "daemon" }
  *   sdmRecipe:   { wikiSlug: "synthetic-dream-machine",
- *                  libraryBags: ["lar:///ha.ka.ba/@sdm", "lar:///ha.ka.ba/@ftls"] }
+ *                  libraryBags: ["lar:///ha.ka.ba/bags/@sdm", "lar:///ha.ka.ba/bags/@ftls"] }
  */
 export interface WikiRecipe {
-  /** Identity slug; expands to lar:///ha.ka.ba/@<wikiSlug>. */
+  /** Identity slug; expands to lar:///ha.ka.ba/bags/@<wikiSlug>. */
   readonly wikiSlug: string;
   /**
    * Canon content bag URIs, ordered top→bottom within the canon slot —
@@ -288,11 +288,11 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
   ])];
 }
 
-// Write routing happens via the in-wiki `lar:///ha.ka.ba/@lararium/config/bag-paths` cascade
+// Write routing happens via the in-wiki `lar:///ha.ka.ba/lararium/config/bag-paths` cascade
 // (IslandAdaptor._routeBag walks it). The cascade evaluates filter expressions
 // against the saving tiddler — first non-empty result is the target slot URI.
 // Operator-configurable at runtime; per-wiki overlays compose via the recipe
-// cascade. See: lar:///ha.ka.ba/@lares/api/lararium/bag-paths-cascade
+// cascade. See: lar:///ha.ka.ba/lares/api/lararium/bag-paths-cascade
 
 // ── Recipe fingerprint ──────────────────────────────────────────────────────
 
@@ -326,7 +326,7 @@ export interface RecipeFingerprintInput {
  * does not change the fingerprint. `canonicalJson` sorts object keys for
  * further stability.
  *
- * @see lar:///ha.ka.ba/@lararium/api/personal-slot#questions Q4
+ * @see lar:///ha.ka.ba/lararium/api/personal-slot#questions Q4
  */
 export async function computeRecipeFingerprint(
   input: RecipeFingerprintInput,
