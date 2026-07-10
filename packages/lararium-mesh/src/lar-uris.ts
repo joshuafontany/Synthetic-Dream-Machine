@@ -162,15 +162,25 @@ export function parseMeshScale(s: string | null | undefined): MeshScale | undefi
 // Design-of-record: lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split
 export const BAGS_SEGMENT  = "bags"  as const;
 export const WIKIS_SEGMENT = "wikis" as const;
+export const CID_SEGMENT   = "cid"   as const;
 
-/** Mint the canonical URI of a BAG (a composable recipe piece). */
+/** Mint the canonical URI of a BAG (a composable recipe piece; mutable, the IPNS plane). */
 export function bagUri(slug: string): string {
   return stableLarUri(`${BAGS_SEGMENT}/@${slug.replace(/^@/, "")}`);
 }
 
-/** Mint the canonical URI of a WIKI (a #has bag-stack). */
+/** Mint the canonical URI of a WIKI (a #has bag-stack; mutable). */
 export function wikiUri(slug: string): string {
   return stableLarUri(`${WIKIS_SEGMENT}/@${slug.replace(/^@/, "")}`);
+}
+
+/** Mint the canonical URI of a content-addressed ARTIFACT — the /ipfs/ plane. The name
+ *  IS the content hash, so it never changes; a frozen blob answers to it forever, and the
+ *  @oracle `cid:` pointer (the /ipns/ plane) names which cid stands current. Per lar: law
+ *  this NAMES the artifact; the CAS store resolves it to bytes. No `@` — a cid carries no
+ *  petname, only its hash. */
+export function cidUri(cid: string): string {
+  return stableLarUri(`${CID_SEGMENT}/${cid}`);
 }
 
 /** Mint the PRE-SPLIT identity form (`lar:///ha.ka.ba/@{slug}`). A reader tries

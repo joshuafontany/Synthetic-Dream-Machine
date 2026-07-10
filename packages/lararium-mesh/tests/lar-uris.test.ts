@@ -25,6 +25,7 @@ import {
   parseMeshScale,
   bagUri,
   wikiUri,
+  cidUri,
   legacyIdentityUri,
   identitySlug,
 } from "../src/lar-uris.js";
@@ -129,5 +130,24 @@ describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
     const meme = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
     expect(identitySlug(meme)).toBeNull();               // not an identity
     expect(meme.split("/").filter(Boolean).length).toBe(6); // scheme-empty + ha.ka.ba + 4 segs
+  });
+});
+
+describe("cid — the /ipfs/ immutable-artifact plane", () => {
+  test("cidUri names an artifact by its content hash, no petname @", () => {
+    expect(cidUri("bafkreihi4cyml3fjm3pdjbxr44mjgae6aahz6275bpurvsfw42oxw6w3pq"))
+      .toBe("lar:///ha.ka.ba/cid/bafkreihi4cyml3fjm3pdjbxr44mjgae6aahz6275bpurvsfw42oxw6w3pq");
+    expect(cidUri("bafkreihi4cyml3fjm3pdjbxr44mjgae6aahz6275bpurvsfw42oxw6w3pq")).not.toContain("@");
+  });
+
+  test("the cid plane never collides with bags/ or wikis/ for a same-string slug", () => {
+    // A contrived overlap: the three planes stay disjoint by their segment.
+    expect(cidUri("x")).not.toBe(bagUri("x"));
+    expect(cidUri("x")).not.toBe(wikiUri("x"));
+  });
+
+  test("the same hash mints the same name — immutability by construction", () => {
+    const h = "bafkreiayqszi37beu6bgewomlwrj5ko7hjjxjs6nzp6qbntic4ufk4uehq";
+    expect(cidUri(h)).toBe(cidUri(h));
   });
 });

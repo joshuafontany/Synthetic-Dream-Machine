@@ -30,6 +30,36 @@ status       = "draft — awaiting operator greenlight per phase"
 
 The boot seed rules path segments 0–4; a fifth reads as a degraded HUD. `@lares/api/lares/noosphere-boot` is already four. If the `bags/` prefix rode the meme URI it would breach the law. **It does not.** Ruling 3 keeps the meme URI untouched: `bags/` and `wikis/` name IDENTITY (the bag, the stack), never the content inside. **~4,517 meme-path refs and 3,772 meme titles DO NOT CHANGE.** Only ~104 bag-IDENTITY refs move.
 
+## The three kind-planes (canonical)
+
+The KIND rides the first path segment. Three planes name the three things the system
+addresses — the pattern the IPFS/IPNS folk (Zelenka, Ink & Switch) drew, made native:
+
+<<~ranks kind-planes bags/@slug ~ a composable recipe piece · MUTABLE -> wikis/@slug ~ a #has bag-stack · MUTABLE -> cid/<hash> ~ a content-addressed artifact · IMMUTABLE >>
+
+- **`bags/@slug`** — the IPNS-shaped mutable content plane. Shared as the operator wishes.
+- **`wikis/@slug`** — a #has bag-stack; per-wiki layers route off it (above the fold).
+- **`cid/<hash>`** — the **/ipfs/ plane**: the name IS the content hash, so it never changes.
+  A frozen artifact answers to it forever. The complement already exists — the @oracle
+  `genesis-cid-*` tiddler carries a `cid:` FIELD naming which cid stands current (the
+  /ipns/ plane, "IPNS-minus-RFC3339"). `cid/` names the immutable artifact; the pointer
+  names the current one; together they are IPFS ⋈ IPNS. Per lar: law `cid/<hash>` NAMES —
+  the `genesis/cas/` store resolves bytes.
+
+## The two-layer model (@lares · @lararium)
+
+Approved 2026-07-10. `@lares`/`@lararium` carry TWO layers, never one:
+- **Frozen doctrine floor** — the genesis blob (the boot seed, noosphere-boot, the canon
+  that must survive a wipe). Built as before, rides the **@daemon wiki-worker's
+  `libraryBags`** (the immune core, Cabal-controlled, feeds @oracle), addressed by
+  **`cid/<hash>`** (reproducible from the hash, an edit can never reach it).
+- **Live layer** — **`bags/@lares`**, the operator's editable working bag, composed into a
+  **`wikis/@lares`** live wiki ON TOP of the frozen floor. `wikis/@lares` = `bags/@lares` ⊕
+  frozen-doctrine ⊕ `@oracle`.
+
+This makes the split ADDITIVE where it touches the Cabal path: the frozen floor stays put;
+the live layer mints fresh above it. No re-point of the genesis-rendering path is forced.
+
 ## The three registries the @catalog will hold
 
 - **bags** — `wikis/@{slug}`… no. `bags/@{slug}` → automerge url. Composable recipe pieces, each one doc. Shared per the user's wish.
