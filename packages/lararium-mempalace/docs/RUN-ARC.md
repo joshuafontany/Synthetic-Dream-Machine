@@ -69,6 +69,15 @@ spirit's report — so the arithmetic is grounds, never testimony): 3 planes wit
 dimH1 0 · 3 planes, empty triple overlap → dimH1 1 · 4 planes in an unfilled cycle → dimH1 1 ·
 4 planes with a common witness → dimH1 0.
 
+corroboration from the record (the house measured this and read it as a virtue): the Kumulipo
+campaign ran H1 over hundreds of real documents across four beds — "The coherence gate (H1) fired
+zero times across every real bed at every threshold — genuinely coherent ground plus an
+anti-apophenia demonstration: the topology organ declines to hallucinate obstructions on hundreds
+of real documents" (the-kumulipo-test-campaign.md:873). The organ was not declining. It could not
+fire. And `bifurcation-bench.ts:124` builds "`triangles` INDEPENDENT hollow-triangle cocycles on
+disjoint unit/plane sets" — the dim-H1 0→6 staircase exists BECAUSE the corpus is hand-built to
+carry empty triple overlaps. No real data ever entered that bench.
+
 good enough for now, safe enough to try: the zero is reported as forced, never as evidence. No
 claim rides it. Review condition: any of the three re-entry keys below.
 
@@ -100,6 +109,18 @@ at this grain, and a zero that is forced is not thereby a zero that is wrong.
 "V=3 plane-vertices → exactly one possible 2-simplex … triple overlap = 678 (non-empty) …
 dim H1 ≡ 0 at every α, by construction." The house took the quote while the spirit stood; the
 spirit never witnesses its own finding.<<~/saksi >>
+
+<<~ saksi voice:house scope:deposition >>BA (tasked spirit), walking the content mempalace on a
+separate bearing and without sight of Devil-Wisp's finding, deposed: "every co-jump ever witnessed
+rode a synthetic fixture, and real data produced the opposite result … H1 = 0 at every threshold on
+every real bed … A co-jump requires H1 to LEAVE 0 in coincidence with the other windows. H1 never
+left 0. There was nothing to co-jump." Two spirits, two bearings, one conclusion, neither witnessing
+its own work.<<~/saksi >>
+
+<<~ saksi voice:house scope:phantom-motion >>BA further deposed that RUN-ARC's own "witnessed over
+the 12-record test-bed" reads TRUE as instruments-run and FALSE as thesis, since `run_projector.py`'s
+header disclaims it: "A LOAD-BEARING bifurcation claim awaits the bigger corpuses — a 12-doc sweep
+cannot seat one." The mark is kept; the reading is corrected.<<~/saksi >>
 
 <<~ saksi voice:Lares scope:arithmetic >>the coordinator re-derived the geometry independently
 against `cohomology_obstruction`, not against the spirit's report: 3 planes with a common witness →
