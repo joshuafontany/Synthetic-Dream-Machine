@@ -11,10 +11,10 @@ describe("active-wiki-slot", () => {
       identityDid: "did:key:test",
     })).toEqual({
       wikiSlug: "altar-fire",
-      wikiKey: "lar:///ha.ka.ba/@altar-fire",
-      wikiBagId: "lar:///ha.ka.ba/@altar-fire",
-      draftBagId: "lar:///ha.ka.ba/@altar-fire/draft",
-      draftOracleTitle: "lar:///ha.ka.ba/@altar-fire/drafts/did%3Akey%3Atest",
+      wikiKey: "lar:///ha.ka.ba/bags/@altar-fire",
+      wikiBagId: "lar:///ha.ka.ba/bags/@altar-fire",
+      draftBagId: "lar:///ha.ka.ba/bags/@altar-fire/draft",
+      draftOracleTitle: "lar:///ha.ka.ba/bags/@altar-fire/drafts/did%3Akey%3Atest",
       vesselId: "lararium-node:altar-fire",
     });
   });
