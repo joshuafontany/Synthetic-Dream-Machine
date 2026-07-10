@@ -58,19 +58,47 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
    **tri-plane cids 678** · `struct_hash` agreement **200/200** on the sampled join. One cid keys all
    three planes over real worldlines.
 
-   **The finding that gates the co-jump — SELECTION, not coverage.** The structure plane lands only records
-   the router holds a grammar for. Sampled over 400 real turns: **375 sniff to `kind=None` → no grammar →
-   skipped**; the 25 that parse are `memetic-wikitext`. So the structure plane over the memory sensorium
-   currently sees **the house's own sigil output and almost nothing else** (tri-plane 678/10325 ≈ 6.6%,
-   matching the 6.3% sniff rate).
+   **The selection finding — surfaced, then CURED.** The first run's structure plane landed only records
+   the router held a grammar for. Sampled over 400 real turns: **375 sniffed to `kind=None` → skipped**;
+   the 25 that parsed were `memetic-wikitext`. The plane saw **the house's own sigil output and almost
+   nothing else** (tri-plane 678/10325 ≈ 6.6%). A co-jump over that subpopulation would have been selected
+   on the very structure it claims to detect.
 
-   A co-jump measured over that subpopulation would be **selected on the very structure it claims to
-   detect** — the apophenia the independence discipline exists to refuse (C2/C3). The 678 shared units
-   beat the old 12-record grain, and they are the WRONG 678 until the router carries a grammar for plain
-   conversational prose. **The projector MUST NOT read this palace for a load-bearing co-jump until that
-   fork resolves.** Two roads: give `structure_router` a prose grammar (paragraph/sentence tree) so
-   structure covers every turn; or keep the sigil-only subpopulation and declare the selection loudly in
-   every claim it carries. This arc has no third road that stays honest.
+   **The cure (operator ruling): the gradient, not a second grammar.** All AI-operator chat reads as
+   NATIVE memetic-wikitext; a turn invoking no sigil holds a DEGRADED state of the same grammar, never a
+   foreign one. So:
+   - `parse_sigils(text, prose=…)` grafts each inter-sigil span's own prose tree in place of a bare
+     structureless `text` node. Sigils wrap; prose fills (augment-and-wrap, never replace). Without this
+     every sigil-less document shared ONE structural hash — the degenerate view that made the skip look
+     like the safer choice.
+   - `_drawers` stamps `lar_kind = memetic-wikitext` on every AI-surface drawer (one seam, three surfaces),
+     so a chat turn never needs a file extension to be recognized as text.
+   - `parse_to_tree(None, …)` still returns None: an unlabelled BYTE BLOB carries no grammar and must not
+     be force-read as prose. The gradient rides the STAMP, not a blanket fallback.
+
+   Witnessed on a fresh probe palace (3 transcripts): content 19 · structure **19** · **structure coverage
+   19/19 = 100%** · tri-plane 5 · `struct_hash` agreement 5/5. Nothing skips.
+
+   **Determinism, scoped by the island.** Sensoriums stay local-only, behind the operator's causal-island
+   shore (only the DreamNet meshpalace federates), so a structural hash never has to agree across boxes.
+   The invariant is per-palace: ONE grammar epoch, ONE device, for the life of a corpus. Measured:
+   `STRUCTURE_ROUTER_DEVICE=cuda` and `=cpu` produce byte-identical structural hashes on the sampled turns
+   — but three samples prove nothing permanent. **OWED:** a device/version drift-detector fixture (C1 —
+   an invariant with no drift-detector already drifts), and a `grammar_epoch` stamped beside each
+   structural hash so a parser bump reads as a visible re-projection, never a silent hash storm.
+
+   **OWED — the standing memory palace holds pre-gradient hashes.** `~/.lares/sensorium/memory` was
+   captured before the cure; its 870 structure entries were computed under the degenerate parse. It needs
+   a rebuild before any projector reads it.
+
+   **The form plane still starves.** Coverage 914/10325 (8.9%) at scale, 5/19 on the probe, `dimension` as
+   low as 2. Diagnosis (research, unconfirmed): `min_support`/`max_candidates` starve induction BEFORE
+   selection. Named cure, ranked: grammar induction (RePair/Sequitur over a type-only tree serialization —
+   rule utility keeps any digram repeating twice, self-calibrating the dimension) as the primary inducer,
+   with MDL selection (scikit-mine SLIM / `SLIMVectorizer`) replacing the `max_forms` magic number. Raising
+   `min_support` is the CAUSE of the collapse, never the cure. Independence rule the form plane must keep:
+   consume only tree shape + structural/type labels, strip lexical leaves to type, never initialize from
+   the content vector — which is what makes `form ⊥ content` auditable rather than asserted.
 
 ## The first step (the unlock — BA)
 

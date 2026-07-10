@@ -48,11 +48,25 @@ import argparse
 import json
 import os
 import sys
+from typing import Callable
 
 # A hard cap on tree size — a pathological / huge file cannot make the encoder walk
 # unbounded. The shape vector saturates well before this; truncation only drops the
 # deepest tail, never the dominant silhouette.
 _MAX_NODES = 20_000
+
+
+def _count_nodes(children: list, cap: int) -> int:
+    """Nodes in a child list, counted no further than `cap` (an unbounded graft would let one
+    pathological span exhaust the whole tree budget)."""
+    n = 0
+    stack = list(children)
+    while stack and n <= cap:
+        node = stack.pop()
+        n += 1
+        if isinstance(node, dict):
+            stack.extend(node.get("children") or [])
+    return n
 _MAX_DEPTH = 200
 
 
@@ -214,10 +228,17 @@ def _sigil_node(role: str, word: str | None, inner: str) -> dict:
     return {"type": ntype, "children": children}
 
 
-def parse_sigils(text: str) -> dict:
+def parse_sigils(text: str, *, prose: "Callable[[str], dict] | None" = None) -> dict:
     """Parse the memetic-wikitext `<<~ … >>` layer to the structure AST. A stack balances
     block openers (ahu / kahea-compound / pranala-block) against their `<<~/word >>`
-    closers, so nesting depth is REAL; leaf sigils + inter-sigil prose attach as siblings."""
+    closers, so nesting depth is REAL; leaf sigils + inter-sigil prose attach as siblings.
+
+    `prose` supplies the NEXT RUNG DOWN the gradient: memetic-wikitext is a SUPERSET of the
+    prose beneath it, so an inter-sigil span parses through `prose` and its tree grafts in
+    place of a bare `text` node (augment-and-wrap, never replace). With `prose=None` a span
+    collapses to one structureless `text` node — which reads every sigil-less document as the
+    SAME shape. That degenerate view serves a sigil-only reading; it MUST NOT serve a corpus
+    where most records carry no sigils (their structural hashes would all collide)."""
     root: dict = {"type": "source_file", "children": []}
     stack: list[tuple[str, dict]] = [("", root)]  # (close-key, node)
     pos = 0
@@ -228,9 +249,19 @@ def parse_sigils(text: str) -> dict:
 
     def add_text(s: str) -> None:
         nonlocal budget
-        if budget > 0 and s.strip():
+        if budget <= 0 or not s.strip():
+            return
+        if prose is None:
             cur()["children"].append({"type": "text", "children": []})
             budget -= 1
+            return
+        sub = prose(s)
+        # Graft the span's own tree under a `text` node — the sigil layer keeps its shape and
+        # the prose beneath it carries its structure. The node budget bounds the graft.
+        children = sub.get("children", []) if isinstance(sub, dict) else []
+        cost = _count_nodes(children, budget)
+        cur()["children"].append({"type": "text", "children": children if cost <= budget else []})
+        budget -= min(cost, budget) + 1
 
     for m in _TOKEN_RE.finditer(text):
         if budget <= 0:
@@ -430,19 +461,35 @@ def parse_prose(text: str) -> dict:
 # ── the router front door ──────────────────────────────────────────────────────────────
 
 
+def parse_memetic(text: str) -> dict:
+    """memetic-wikitext, parsed down the GRACEFUL GRADIENT: the `<<~ … >>` sigil layer wraps, and
+    every span beneath it parses as prose. A turn that invokes no sigil degrades to its prose
+    constituency — never to one structureless `text` node, which would give every sigil-less
+    document the same structural hash.
+
+    The gradient IS the grammar: memetic-wikitext ⊃ wikitext ⊃ markdown ⊃ prose. A degraded state
+    is still a state; no record falls out of the structure plane for failing to speak sigils."""
+    return parse_sigils(text, prose=parse_prose)
+
+
 def parse_to_tree(kind: str | None, source: bytes | str) -> dict | None:
     """Route a corpus chunk of `kind` to its parser → the encoder's nested-dict tree.
-    A None kind (or one with no available parser) returns None (structure-skipped)."""
+
+    A None kind still returns None — an unlabelled BYTE BLOB carries no grammar and must not be
+    force-read as prose. Text that IS text says so: the AI-surface source-caps stamp
+    `lar_kind = memetic-wikitext`, and that kind rides the graceful gradient down to prose."""
     if kind is None:
         return None
     text = _decode(source) if isinstance(source, (bytes, bytearray)) else source
     raw = source if isinstance(source, (bytes, bytearray)) else text.encode("utf-8")
     if kind == "memetic-wikitext":
-        return parse_sigils(text)
+        return parse_memetic(text)
     if kind == "prose":
         return parse_prose(text)
     if kind in _TS_MODULE:
-        return _parse_treesitter(kind, raw)
+        # A text language whose grammar module is absent degrades down the gradient rather than
+        # dropping the record — the parse fails, the text does not stop being text.
+        return _parse_treesitter(kind, raw) or parse_memetic(text)
     return None
 
 

@@ -125,6 +125,11 @@ def _drawers(source_file: str, turns: list, *, wing: str, room: str,
             "chunk_index": chunk,
             "lar_turn_key": _turn_key(source_file, ex, chunk),
             "lar_chain": chain,
+            # AI-operator chat IS native memetic-wikitext — a turn that invokes no sigil holds a
+            # DEGRADED state of the same grammar, never a foreign one. The kind rides the drawer so
+            # the structure plane parses it down the graceful gradient (sigils wrap, prose fills)
+            # rather than skipping it for want of a file extension. One stamp, all three surfaces.
+            "lar_kind": "memetic-wikitext",
         }
         if extra:
             meta.update(extra)
