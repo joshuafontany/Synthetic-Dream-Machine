@@ -13,6 +13,7 @@ import {
   recipeUri,
   wikiBagUri,
   wikiDraftBagUri,
+  wikiDraftDocKey,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
@@ -30,9 +31,9 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     }
 
     const did = await opts.operatorDid();
-    const wikiKey = wikiBagUri(slug);            // the quine: a user wiki's canon IS @{slug}
+    const wikiKey = wikiBagUri(slug);            // canon (bags/@{slug}); identity rides wikis/@{slug}
     const draftBagId = wikiDraftBagUri(slug);
-    const draftKey = `${wikiKey}/drafts/${encodeURIComponent(did)}`;
+    const draftKey = wikiDraftDocKey(slug, did);
     // The user's wiki recipe is REGISTRY data (the user's composition choice) —
     // it lives in the user's @catalog, NOT @lararium (protocol substrate). Read
     // it through the accessor (access≠load), like the wiki/draft oracles.

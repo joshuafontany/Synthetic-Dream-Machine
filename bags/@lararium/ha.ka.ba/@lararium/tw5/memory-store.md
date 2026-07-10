@@ -53,7 +53,7 @@ routes the following TW5 title patterns to @temp:
 | `$:/status/*` | `$:/status/IsLoggedIn`, `$:/status/IsAnonymous`, `$:/status/IsReadOnly`, `$:/status/UserName` | TW5 status flags — per-device login state, not shared identity |
 | `$:/boot/*` | TW5 boot config set during startup | Boot-time only; rebuilt each session |
 | `$:/HistoryList` | Navigation back-stack (one entry per back-button click) | Per-device interaction history; meaningless across devices |
-| `$:/state/*` | UI fold/expand state, selected tabs, popup open-state | Per-device UI state today. The `@personal` slot itself now ships in `expandRecipe` (S7.1+S7.2 landed 2026-05-31), but the cascade rules that would route `$:/state/folded/*`, `$:/state/tab-*`, `$:/StoryList`, and `$:/palette` away from `@temp` still pend S7.3 — the rest stays here until those rules land. |
+| `$:/state/*` | UI fold/expand state, selected tabs, popup open-state | Per-device UI state. The cascade routes the cross-device viewing subset (`$:/state/folded/*`, `$:/state/tab-*`, `$:/StoryList`, `$:/palette`) to the per-wiki personal layer; the rest — genuinely per-device UI state — stays in temp. |
 
 **No catch-all rule.** The cascade only enumerates patterns it knows the
 destination for. Writes whose title matches nothing in the cascade fall out
@@ -84,26 +84,23 @@ wider mesh:
 | `$:/palette` | Operator's chosen color palette |
 | `$:/canvas/viewport/*` (future) | Infinite-canvas pan/zoom position |
 
-These belong in a **`@personal` slot** — a CRDT bag at the canonical URI
-`lar:///ha.ka.ba/@personal` (one address, per the bag-tag rule in lar-uri.md).
-The vessel's `BagResolver` binds the slot to a different Automerge doc per
-`(PersonaGroup × recipe-fingerprint)` pair at boot — same recipe + same
-operator's device cabal → same doc → shared state; different recipe or
-different cabal → different doc → no cross-talk. Approved 2026-05-30; see
-the proposal at
-[[personal-slot|lar:///ha.ka.ba/@lararium/api/personal-slot]] for
-boot wiring and the cascade rules that will activate it.
+These belong in a **personal slot** — a per-wiki CRDT layer at
+`lar:///ha.ka.ba/wikis/@{slug}/personal`. The vessel's `BagResolver` binds the slot
+to a different Automerge doc per `(PersonaGroup × recipe-fingerprint)` pair at boot —
+same recipe + same operator's device cabal → same doc → shared state; different recipe
+or different cabal → different doc → no cross-talk. The URI carries the address; the
+resolver hands over the per-fingerprint doc. See
+[[personal-slot|lar:///ha.ka.ba/@lararium/api/personal-slot]] for the slot grammar and
+binding storage.
 
-**Landing status (2026-05-31).** S7.1 + S7.2 of EPIC-RESIDENCY-MODEL landed:
-`PERSONAL_BAG` exists as a constant in `wiki-recipe.ts` and `expandRecipe()`
-now returns the slot URI between `@draft` and the wiki bag. Existing islands
-gracefully skip the slot when no resolver entry maps it (per the optional-
-slot semantics in `island-recipe.ts` and `sovereign-island-model.ts`), so the
-floor stays green pending the remaining S7 stories. Until S7.3 (cascade
-rules), S7.4 (recipe-fingerprint), S7.5 (resolver binding), and S7.6 (Keyhive
-PersonaGroup grant) land, the `$:/state/*` catch-all in the cascade routes
-the operator's viewing state to `@temp` — it doesn't yet survive device
-boundaries.
+`wiki-recipe.ts` mints the slot via `wikiSlotUri(slug, "personal")` and
+`expandRecipe()` lays it among the per-wiki live layers above the wiki's
+`bags/@{slug}` canon. An island whose resolver maps no personal doc gracefully
+skips the slot (the optional-slot semantics in `island-recipe.ts` and
+`sovereign-island-model.ts`); the cascade routes the operator's viewing state
+(`$:/StoryList`, `$:/state/folded/*`, `$:/palette`) to the personal layer via the
+`current-wiki-personal` config value, so it survives across the operator's device
+cabal per `(PersonaGroup × recipe-fingerprint)`.
 
 <<~/ahu >>
 

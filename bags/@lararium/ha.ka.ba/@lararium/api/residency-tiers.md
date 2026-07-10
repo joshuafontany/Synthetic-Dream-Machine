@@ -88,7 +88,7 @@ Consequences:
 
 - A bag referenced by ANY `wela` island is **`wela`** — its handle stays in cache.
 - A bag referenced by NO `wela` island is **`anu`** — its handle MAY drop (the eviction `automerge-repo` does not do on its own; see [issue #358](https://github.com/automerge/automerge-repo/issues/358)).
-- **Shared bags inherit liveness.** `@lares` / `@lararium` corpus, the session event-bus bag, `@personal` / `@draft` — these ride in multiple recipes. Referenced by the pinned admin/primary/Session islands, they are **`wela` by derivation**, never dropped while a pinned island holds them.
+- **Referenced bags inherit liveness.** `@lares` / `@lararium` corpus and the session event-bus bag ride in multiple recipes; a wiki's own per-wiki live slots (`wikis/@{slug}/{personal,draft,working}`) each bind one recipe. Either way, referenced by the pinned admin/primary/Session islands, they are **`wela` by derivation**, never dropped while a pinned island holds them.
 
 Two disciplines survive the collapse as bag-level mechanism (now driven by the pool, not an independent authority):
 

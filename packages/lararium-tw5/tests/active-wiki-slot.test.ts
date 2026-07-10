@@ -1,73 +1,41 @@
 import { describe, test, expect } from "vitest";
-import { CompositeStore } from "@lararium/mesh";
-import { MemoryTiddlerStore } from "../src/memory-store.js";
-import { ActiveWikiLayerSlot, planActiveWikiSlot } from "../src/active-wiki.js";
+import { recipeHostFacets, expandRecipe, wikiSlotUri, wikiBagUri, wikiUri } from "@lararium/mesh";
 
-describe("active-wiki-slot", () => {
-  test("planActiveWikiSlot derives wiki and draft identities", () => {
-    expect(planActiveWikiSlot({
-      hostId: "lararium-node",
-      wikiSlug: "test-wiki",
-      identityDid: "did:key:test",
-    })).toEqual({
-      wikiSlug: "test-wiki",
-      wikiKey: "lar:///ha.ka.ba/bags/@test-wiki",
-      wikiBagId: "lar:///ha.ka.ba/bags/@test-wiki",
-      draftBagId: "lar:///ha.ka.ba/bags/@test-wiki/draft",
-      draftOracleTitle: "lar:///ha.ka.ba/bags/@test-wiki/drafts/did%3Akey%3Atest",
-      vesselId: "lararium-node:test-wiki",
+// The isomorphic core: one recipe/slug, one set of slot minters, projected two
+// ways — recipeHostFacets (VM-free host) and expandRecipe (island cascade) — must
+// name identical bags. The bespoke planActiveWikiSlot/ActiveWikiLayerSlot are gone.
+describe("wiki host facets ⋈ recipe expansion", () => {
+  test("recipeHostFacets splits IDENTITY (wikis/@) from CANON (bags/@)", () => {
+    expect(recipeHostFacets("test-wiki", "did:key:test")).toEqual({
+      wikiSlug:         "test-wiki",
+      wikiKey:          "lar:///ha.ka.ba/wikis/@test-wiki",
+      wikiBagId:        "lar:///ha.ka.ba/bags/@test-wiki",
+      draftBagId:       "lar:///ha.ka.ba/wikis/@test-wiki/draft",
+      draftOracleTitle: "lar:///ha.ka.ba/wikis/@test-wiki/drafts/did%3Akey%3Atest",
     });
   });
 
-  test("mount adds wiki then draft layers and targets draft as default writable", () => {
-    const composite = new CompositeStore();
-    const slot = new ActiveWikiLayerSlot(composite);
-    const plan = planActiveWikiSlot({
-      hostId: "lararium-node",
-      wikiSlug: "test-wiki",
-      identityDid: "did:key:test",
-    });
-
-    slot.mount({
-      plan,
-      wikiStore: new MemoryTiddlerStore(plan.wikiBagId),
-      draftStore: new MemoryTiddlerStore(plan.draftBagId),
-    });
-
-    expect(composite.layerIds).toEqual([plan.wikiBagId, plan.draftBagId]);
-    expect(composite.defaultWritableBagId()).toBe(plan.draftBagId);
-    expect(slot.current).toEqual(plan);
+  test("host facets name the SAME bags the island cascade lays", () => {
+    const slug = "test-wiki";
+    const facets = recipeHostFacets(slug, "did:key:test");
+    const slots = expandRecipe({ wikiSlug: slug });
+    // The canon the host resolves == the canon slot in the island stack.
+    expect(slots).toContain(facets.wikiBagId);
+    expect(facets.wikiBagId).toBe(wikiBagUri(slug));
+    // The draft layer the host registers == the island's per-wiki draft slot.
+    expect(slots).toContain(facets.draftBagId);
+    expect(facets.draftBagId).toBe(wikiSlotUri(slug, "draft"));
+    // Identity is wikis/@, never bags/@.
+    expect(facets.wikiKey).toBe(wikiUri(slug));
   });
 
-  test("mount swaps prior active wiki layers out before mounting the next ones", () => {
-    const composite = new CompositeStore();
-    const slot = new ActiveWikiLayerSlot(composite);
-    const first = planActiveWikiSlot({
-      hostId: "lararium-node",
-      wikiSlug: "test-wiki",
-      identityDid: "did:key:first",
-    });
-    const second = planActiveWikiSlot({
-      hostId: "lararium-node",
-      wikiSlug: "ember-hall",
-      identityDid: "did:key:second",
-    });
-
-    slot.mount({
-      plan: first,
-      wikiStore: new MemoryTiddlerStore(first.wikiBagId),
-      draftStore: new MemoryTiddlerStore(first.draftBagId),
-    });
-    slot.mount({
-      plan: second,
-      wikiStore: new MemoryTiddlerStore(second.wikiBagId),
-      draftStore: new MemoryTiddlerStore(second.draftBagId),
-    });
-
-    expect(composite.hasBag(first.wikiBagId)).toBe(false);
-    expect(composite.hasBag(first.draftBagId)).toBe(false);
-    expect(composite.layerIds).toEqual([second.wikiBagId, second.draftBagId]);
-    expect(composite.defaultWritableBagId()).toBe(second.draftBagId);
-    expect(slot.current).toEqual(second);
+  test("expandRecipe lays the per-wiki live layers above the canon bag", () => {
+    const slug = "ember-hall";
+    const slots = expandRecipe({ wikiSlug: slug });
+    for (const kind of ["temp", "draft", "personal", "working"] as const) {
+      expect(slots).toContain(wikiSlotUri(slug, kind));
+    }
+    // working (live write) sits ABOVE canon (read-only) in the top-wins order.
+    expect(slots.indexOf(wikiSlotUri(slug, "working"))).toBeLessThan(slots.indexOf(wikiBagUri(slug)));
   });
 });

@@ -32,13 +32,11 @@ export type { StackEntry } from "./has-stack.js";
 export type { TW5CoreBootBlob } from "./tw5-vm.js";
 export {
   ACTIVE_WIKI_URI,
-  ActiveWikiLayerSlot,
   buildActiveWikiRecord,
-  planActiveWikiSlot,
   readActiveWikiSlug,
   selectActiveWikiSlug,
 } from "./active-wiki.js";
-export type { ActiveWikiSelectionSource, ActiveWikiLayerMount, ActiveWikiSlotPlan } from "./active-wiki.js";
+export type { ActiveWikiSelectionSource } from "./active-wiki.js";
 export type { CameraMount } from "./tw5-camera.js";
 export { mountCamera } from "./tw5-camera.js";
 export { mountProjection, PROJECTION_FRAME, dispatchProjectedEvent } from "./tw5-projection.js";

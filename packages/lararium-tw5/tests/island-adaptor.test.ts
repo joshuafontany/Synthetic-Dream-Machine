@@ -26,7 +26,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { IslandAdaptor }      from "../src/island-adaptor.js";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
-import { WORKING_BAG, type LarTiddlerChange, type ChangeOrigin } from "@lararium/mesh";
+import { wikiSlotUri, type LarTiddlerChange, type ChangeOrigin } from "@lararium/mesh";
 
 const BAG_PATHS_CONFIG = "lar:///ha.ka.ba/@lararium/config/bag-paths";
 const SHIPPED_TID = join(dirname(fileURLToPath(import.meta.url)), "..", "tiddlers", "lar-bag-paths.tid");
@@ -60,20 +60,23 @@ class FakeTW5Engine {
     [
       "lar:///ha.ka.ba/@lararium/config/bag-paths",
       [
-        "[prefix[$:/temp/]then[lar:///ha.ka.ba/@temp]]",
-        "[prefix[$:/status/]then[lar:///ha.ka.ba/@temp]]",
-        "[prefix[$:/boot/]then[lar:///ha.ka.ba/@temp]]",
-        "[prefix[$:/HistoryList]then[lar:///ha.ka.ba/@temp]]",
-        "[prefix[$:/StoryList]then[lar:///ha.ka.ba/@personal]]",
-        "[prefix[$:/state/folded/]then[lar:///ha.ka.ba/@personal]]",
-        "[prefix[$:/state/tab-]then[lar:///ha.ka.ba/@personal]]",
-        "[prefix[$:/palette]then[lar:///ha.ka.ba/@personal]]",
-        "[prefix[$:/state/]then[lar:///ha.ka.ba/@temp]]",
-        "[prefix[Draft of ]then[lar:///ha.ka.ba/@draft]]",
+        "[prefix[$:/temp/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]",
+        "[prefix[$:/status/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]",
+        "[prefix[$:/boot/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]",
+        "[prefix[$:/HistoryList]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]",
+        "[prefix[$:/StoryList]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]",
+        "[prefix[$:/state/folded/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]",
+        "[prefix[$:/state/tab-]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]",
+        "[prefix[$:/palette]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]",
+        "[prefix[$:/state/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]",
+        "[prefix[Draft of ]then{lar:///ha.ka.ba/@lararium/config/current-wiki-draft}]",
         "[prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]",
       ].join("\n"),
     ],
-    ["lar:///ha.ka.ba/@lararium/config/current-wiki-bag", "lar:///ha.ka.ba/@test-wiki/draft"],
+    ["lar:///ha.ka.ba/@lararium/config/current-wiki-bag",      wikiSlotUri("test-wiki", "working")],
+    ["lar:///ha.ka.ba/@lararium/config/current-wiki-temp",     wikiSlotUri("test-wiki", "temp")],
+    ["lar:///ha.ka.ba/@lararium/config/current-wiki-draft",    wikiSlotUri("test-wiki", "draft")],
+    ["lar:///ha.ka.ba/@lararium/config/current-wiki-personal", wikiSlotUri("test-wiki", "personal")],
   ]);
 
   readonly wiki = {
@@ -370,11 +373,12 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
   });
 
   // The working/canon split (shore-law): a LIVE edit (no explicit bag) routes
-  // via the cascade to the @working write layer — NOT straight into canon. The
-  // wiring lives in island-recipe.ts (current-wiki-bag → WORKING_BAG); this
-  // witnesses the routing semantics with the real constant.
-  test("live lar: edit (no explicit bag) → cascade routes to @working, not canon", async () => {
-    tw5.tiddlerTexts.set(CURRENT_WIKI_BAG, WORKING_BAG);
+  // via the cascade to the per-wiki working write layer — NOT straight into
+  // canon. The wiring lives in island-recipe.ts (current-wiki-bag → the working
+  // slot); this witnesses the routing semantics with the real per-wiki slot.
+  test("live lar: edit (no explicit bag) → cascade routes to the working layer, not canon", async () => {
+    const workingSlot = wikiSlotUri("test-wiki", "working");
+    tw5.tiddlerTexts.set(CURRENT_WIKI_BAG, workingSlot);
     const bags: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
@@ -383,11 +387,11 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     await flush();
     await done;
 
-    expect(bags).toContain(WORKING_BAG);                  // saved to the live write layer
+    expect(bags).toContain(workingSlot);                  // saved to the live write layer
     expect(bags).not.toContain("lar:///ha.ka.ba/@lares"); // never straight into canon
   });
 
-  test("$:/temp/ title → cascade routes to @temp", async () => {
+  test("$:/temp/ title → cascade routes to the per-wiki temp layer", async () => {
     const bags: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
@@ -396,10 +400,10 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     await flush();
     await done;
 
-    expect(bags).toContain("lar:///ha.ka.ba/@temp");
+    expect(bags).toContain(wikiSlotUri("test-wiki", "temp"));
   });
 
-  test("$:/StoryList → cascade routes to @personal", async () => {
+  test("$:/StoryList → cascade routes to the per-wiki personal layer", async () => {
     const bags: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
@@ -408,7 +412,7 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     await flush();
     await done;
 
-    expect(bags).toContain("lar:///ha.ka.ba/@personal");
+    expect(bags).toContain(wikiSlotUri("test-wiki", "personal"));
   });
 
   test("plain text title (no cascade rule) → skipped", async () => {

@@ -19,8 +19,8 @@ import {
   AutomergeDocStore,
   BAG_IDS,
   computeRecipeFingerprint,
-  LARES_DOC_URI, LARARIUM_DOC_URI, WORKING_BAG,
-  wikiBagUri,
+  LARES_DOC_URI, LARARIUM_DOC_URI,
+  wikiBagUri, wikiSlotUri,
   type Repo,
   type DocHandle,
   type AutomergeUrl,
@@ -106,9 +106,10 @@ export interface PrimaryMountInputs {
   catalogUrl:   string;
 }
 
-/** Canonical disk-mirror DESIGNATION. A pool's held grant decides whether it
- *  actually mirrors (node holds a disk grant; browser's empty grant ignores). */
-const PRIMARY_MIRROR_BAGS: readonly string[] = [LARES_DOC_URI, LARARIUM_DOC_URI, WORKING_BAG];
+/** Canonical disk-mirror DESIGNATION (system canon). A pool's held grant decides
+ *  whether it actually mirrors (node holds a disk grant; browser's empty grant
+ *  ignores). The per-wiki working layer + own canon append at mount (slug-scoped). */
+const PRIMARY_MIRROR_BAGS: readonly string[] = [LARES_DOC_URI, LARARIUM_DOC_URI];
 
 /**
  * Mount the primary wiki island — the isomorphic keystone both vessels run.
@@ -149,7 +150,7 @@ export async function mountPrimaryWiki(
   // sits in PRIMARY via a literal grant, so resolveDiskMirrors skips the dup.
   const recipe: WikiRecipe = {
     wikiSlug: inputs.wikiSlug,
-    mirrorBags: [...PRIMARY_MIRROR_BAGS, wikiBagUri(inputs.wikiSlug)],
+    mirrorBags: [...PRIMARY_MIRROR_BAGS, wikiSlotUri(inputs.wikiSlug, "working"), wikiBagUri(inputs.wikiSlug)],
   };
 
   await pool.mountWiki(

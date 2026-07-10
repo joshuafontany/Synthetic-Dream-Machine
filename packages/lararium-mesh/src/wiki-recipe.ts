@@ -1,24 +1,28 @@
 /**
  * wiki-recipe — one-model recipe spec for every wiki.
  *
- * Slot order = cascade order. Top of stack wins (TW5 cascade law).
+ * Slot order = cascade order. Top of stack wins (TW5 cascade law). The live
+ * "above the fold" layers are PER-WIKI (each rooted at the wiki's own identity),
+ * never global singletons — the address names the wiki (see wikiSlotUri):
  *
- *   lar:///ha.ka.ba/@temp       — volatile, in-memory, $:/temp/* lives here
- *   lar:///ha.ka.ba/@draft      — "Draft of …" tiddlers, CRDT, high-churn
- *   lar:///ha.ka.ba/@personal   — operator cross-device viewing state ($:/StoryList,
- *                                 $:/state/folded/*, $:/state/tab-*), CRDT, keyed per
- *                                 (PersonaGroup × recipe-fingerprint) by the vessel
- *                                 resolver (see personal-slot#scoping-mechanism).
- *                                 Slot URI literal here; per-recipe doc binding rides
- *                                 the manifest's typed grants, not the URI.
- *   lar:///ha.ka.ba/@<slug>     — wiki identity bag, CRDT, operator's edits land here
- *   libraryBags[]                 — optional content libraries, CRDT, read-only from wiki
- *                                 (the @lares wiki-recipe carries @lararium + @lares here)
- *   lar:///ha.ka.ba/@oracle     — runtime system island: engine core + plugins + grammar +
- *                                 bag-oracle; the UNIVERSAL FLOOR of every recipe, CRDT, required
+ *   wikis/@{slug}/temp     — volatile, in-memory, $:/temp/* lives here
+ *   wikis/@{slug}/draft    — "Draft of …" tiddlers, CRDT, high-churn (unsaved)
+ *   wikis/@{slug}/personal — operator cross-device viewing state ($:/StoryList,
+ *                            $:/state/folded/*, $:/state/tab-*), CRDT. The doc a
+ *                            slot binds to is keyed per (PersonaGroup × recipe-
+ *                            fingerprint) by the vessel resolver; the slot URI carries
+ *                            the address, the resolver hands over the per-fingerprint doc.
+ *   wikis/@{slug}/working  — the SAVED live write layer, CRDT; normal edits route here
+ *   bags/@{slug}           — the wiki's CANON bag (read-only from the wiki), published
+ *                            to only by a promotion MOVE (shore-law)
+ *   libraryBags[]          — optional content libraries, CRDT, read-only from wiki
+ *                            (the @lares wiki-recipe carries @lararium + @lares here)
+ *   @oracle                — runtime system island: engine core + plugins + grammar +
+ *                            bag-oracle; the UNIVERSAL FLOOR of every recipe, CRDT, required
  *
  * @lares (personality) and @lararium (engine corpus) are NOT the floor — they
  * ride a wiki's libraryBags. The @lares wiki-recipe = @oracle + @lararium + @lares.
+ * The memetic-wikitext plugin rides @oracle (CID-frozen), so it is universal.
  *
  * Above-stack projections defer (separate concern). When they land they will
  * subscribe to nalu events, not participate in the cascade.
@@ -29,39 +33,87 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { Heads } from "@automerge/automerge";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
-import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, bagUri } from "./lar-uris.js";
+import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, bagUri, wikiUri } from "./lar-uris.js";
 
-/** A slot URI in the lar:///ha.ka.ba/@<name> namespace. */
+/** A slot URI in the lar:///ha.ka.ba/{bags,wikis}/@<name> namespace. */
 export type SlotUri = string;
 
 /**
- * Seven fixed slot URIs always present in every recipe. The wiki identity slot
- * derives from `wikiSlug` via `wikiBagUri()`. @temp/@draft/@working/@personal
- * name themselves here (no canonical home elsewhere); @lares/@lararium
- * single-source from the derived `lar-uris.ts` consts so the URI lives once.
+ * The live "above the fold" layers a wiki #has — each rooted at the wiki's
+ * IDENTITY (`wikis/@{slug}`), never its canon bag. The binding is per-wiki
+ * (PersonaGroup × recipe-fingerprint); the URI now names the wiki too, so which
+ * wiki a layer belongs to reads from its address.
+ *
+ *   wikis/@{slug}/temp     — volatile, in-memory, $:/temp/* lives here
+ *   wikis/@{slug}/draft    — "Draft of …" tiddlers, CRDT, high-churn (unsaved)
+ *   wikis/@{slug}/working  — the SAVED live write layer, CRDT; normal edits route
+ *                            here, canon publishes on a promotion MOVE (shore-law)
+ *   wikis/@{slug}/personal — operator cross-device viewing state ($:/StoryList,
+ *                            $:/state/folded/*), CRDT
  */
-export const TEMP_BAG     = "lar:///ha.ka.ba/@temp"     as const;
-export const DRAFT_BAG    = "lar:///ha.ka.ba/@draft"    as const;
-/** @working — the wiki's SAVED live write layer (PersonaGroup×fingerprint-bound,
- *  cross-device); normal edits route here, canon publishes on a promotion MOVE
- *  (wiki-layer-ontology#shore-law). Distinct from @draft's unsaved drafts. */
-export const WORKING_BAG  = "lar:///ha.ka.ba/@working"  as const;
-export const PERSONAL_BAG = "lar:///ha.ka.ba/@personal" as const;
+export type WikiSlotKind = "temp" | "draft" | "working" | "personal";
+
+/** Mint a per-wiki live slot URI (`wikis/@{slug}/{kind}`). The one source both
+ *  `expandRecipe` (island cascade) and `recipeHostFacets` (host projection) walk,
+ *  so host and island name identical layers. */
+export function wikiSlotUri(slug: string, kind: WikiSlotKind): SlotUri {
+  return `${wikiUri(slug)}/${kind}`;
+}
+
 export const LARES_BAG    = LARES_DOC_URI;
 export const LARARIUM_BAG = LARARIUM_DOC_URI;
 /** @oracle — the runtime system island; the universal floor of every recipe. */
 export const ORACLE_BAG   = ORACLE_DOC_URI;
 
-/** Build a wiki's CANON BAG URI from a slug. The quine: a wiki's canon IS its
- *  `bags/@{slug}` bag — it MUST agree with the doc consts (DAEMON_BAG_ID etc), which the
- *  daemon's composite mount and its event-store put both key on. */
+/** Build a wiki's CANON BAG URI from a slug (`bags/@{slug}`) — the published,
+ *  promotion-target content plane, read-only from the wiki. MUST agree with the
+ *  doc consts (DAEMON_BAG_ID etc), which the daemon's composite mount and its
+ *  event-store put both key on. */
 export function wikiBagUri(slug: string): SlotUri {
   return bagUri(slug) as SlotUri;
 }
 
-/** The per-wiki draft bag, rooted at the wiki's own `@{slug}` canon. */
+/** The per-wiki draft layer (`wikis/@{slug}/draft`) — above the fold, the live
+ *  edit plane, never the canon bag. */
 export function wikiDraftBagUri(slug: string): SlotUri {
-  return `${wikiBagUri(slug)}/draft`;
+  return wikiSlotUri(slug, "draft");
+}
+
+/** The @catalog key for a per-DID draft doc (`wikis/@{slug}/drafts/{did}`) — the
+ *  per-operator draft-doc pointer, above the fold. ONE source for the host reader
+ *  (recipeHostFacets) and the mint/draft writers, so the round-trip never drifts. */
+export function wikiDraftDocKey(slug: string, identityDid: string): SlotUri {
+  return `${wikiUri(slug)}/drafts/${encodeURIComponent(identityDid)}`;
+}
+
+/**
+ * The host-side facets of a wiki, projected from its slug — the SAME minters
+ * `expandRecipe` walks, so the VM-free host composite and the island cascade name
+ * identical bags. This REPLACES the bespoke `planActiveWikiSlot`: one slug, one
+ * set of slot minters, every context (node vessel, browser vessel, future) flows
+ * through it (the isomorphic core — a wiki recipe is a nameless-entity #has-cap-stack).
+ */
+export interface WikiHostFacets {
+  readonly wikiSlug: string;
+  /** IDENTITY — `wikis/@{slug}`, the @catalog registry key for the wiki itself. */
+  readonly wikiKey: string;
+  /** CANON — `bags/@{slug}`, the write/canon content doc the host resolves + registers. */
+  readonly wikiBagId: string;
+  /** The per-wiki draft layer bagId (`wikis/@{slug}/draft`). */
+  readonly draftBagId: string;
+  /** The @catalog key for THIS operator's per-DID draft doc (`wikis/@{slug}/drafts/{did}`). */
+  readonly draftOracleTitle: string;
+}
+
+/** Project a wiki's host-side facets from its slug + the operator's DID. */
+export function recipeHostFacets(wikiSlug: string, identityDid: string): WikiHostFacets {
+  return {
+    wikiSlug,
+    wikiKey:          wikiUri(wikiSlug),
+    wikiBagId:        wikiBagUri(wikiSlug),
+    draftBagId:       wikiSlotUri(wikiSlug, "draft"),
+    draftOracleTitle: wikiDraftDocKey(wikiSlug, identityDid),
+  };
 }
 
 /**
@@ -214,19 +266,20 @@ export type EpochPinState =
  * Iterating bottom→top (reverse) gives the addLayer order for CompositeStore.
  */
 export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
-  // Deduped: when the wiki's OWN bag coincides with a structural slot (the
+  const slug = r.wikiSlug;
+  // Deduped: when the wiki's OWN canon bag coincides with a structural slot (the
   // @lares-as-wiki quine — slug "lares" → wikiBagUri = LARES_BAG), the slot
   // lays ONCE, at its highest-priority position.
   return [...new Set<SlotUri>([
-    TEMP_BAG,
-    DRAFT_BAG,
-    PERSONAL_BAG,
-    // @working = the live write layer (normal edits route here via the
-    // current-wiki-bag cascade); the wiki's own @{slug} bag rides BELOW as the
-    // read-only canon library member, published to only by a promotion MOVE
-    // (wiki-layer-ontology#shore-law). The quine no longer collapses them.
-    WORKING_BAG,
-    wikiBagUri(r.wikiSlug),
+    wikiSlotUri(slug, "temp"),
+    wikiSlotUri(slug, "draft"),
+    wikiSlotUri(slug, "personal"),
+    // working = the live write layer (normal edits route here via the
+    // current-wiki-bag cascade); the wiki's own bags/@{slug} canon rides BELOW as
+    // the read-only library member, published to only by a promotion MOVE
+    // (wiki-layer-ontology#shore-law). Working (live) and canon stay distinct layers.
+    wikiSlotUri(slug, "working"),
+    wikiBagUri(slug),
     ...(r.libraryBags ?? []),
     // @oracle = the universal floor (engine + grammar + bag-oracle). @lares and
     // @lararium are NOT the floor — they ride a wiki's libraryBags (the @lares
@@ -255,7 +308,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * not fork operator view state across devices.
  */
 export interface RecipeFingerprintInput {
-  /** The wiki identity bag's Automerge doc URL (grants.wikiUrl). */
+  /** The wiki canon bag's Automerge doc URL (grants.wikiUrl = bags/@{slug}). */
   readonly wikiDocId: string;
   /** Library bag doc URLs in any order — sorted internally before hashing. */
   readonly libraryBagDocIds: readonly string[];

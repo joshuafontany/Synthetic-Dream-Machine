@@ -13,7 +13,7 @@
 
 import { describe, test, expect } from "vitest";
 import { buildIslandRecipe } from "../src/island-recipe.js";
-import { CompositeStore, WORKING_BAG, wikiBagUri, TEMP_BAG } from "@lararium/mesh";
+import { CompositeStore, wikiSlotUri, wikiBagUri } from "@lararium/mesh";
 import type { LarDoc, DocHandle, LarTiddlerRecord, SlotUri } from "@lararium/mesh";
 import type { TW5Engine } from "../src/tw5-vm.js";
 
@@ -53,23 +53,25 @@ function fakeHandle(): DocHandle<LarDoc> {
 }
 
 async function currentWikiBag(
+  slug: string,
   stores: ReadonlyArray<{ slot: SlotUri; store: { get(t: string): Promise<LarTiddlerRecord | null> } }>,
 ): Promise<string | undefined> {
-  const temp = stores.find((s) => s.slot === TEMP_BAG)?.store;
+  const temp = stores.find((s) => s.slot === wikiSlotUri(slug, "temp"))?.store;
   const rec  = temp ? await temp.get(CURRENT_WIKI_BAG) : null;
   return rec?.tiddler.text as string | undefined;
 }
 
 describe("buildIslandRecipe — the write-layer seed gate", () => {
-  test("a @working grant present → live edits route to @working (operator content wiki)", async () => {
+  test("a working grant present → live edits route to the working layer (operator content wiki)", async () => {
     const composite = new CompositeStore();
+    const workingSlot = wikiSlotUri("myproject", "working");
     const { stores } = buildIslandRecipe({
       tw5: fakeTw5(),
       composite,
       recipe: { wikiSlug: "myproject" },
-      ready: [{ slot: WORKING_BAG, handle: fakeHandle() }],
+      ready: [{ slot: workingSlot, handle: fakeHandle() }],
     });
-    expect(await currentWikiBag(stores)).toBe(WORKING_BAG);
+    expect(await currentWikiBag("myproject", stores)).toBe(workingSlot);
   });
 
   test("no @working grant (the @daemon daemon) → falls back to its OWN bag, never throws", async () => {
@@ -81,6 +83,6 @@ describe("buildIslandRecipe — the write-layer seed gate", () => {
       ready: [],
     });
     // The control-plane daemon keeps its own bag as the default write path.
-    expect(await currentWikiBag(stores)).toBe(wikiBagUri("daemon"));
+    expect(await currentWikiBag("daemon", stores)).toBe(wikiBagUri("daemon"));
   });
 });

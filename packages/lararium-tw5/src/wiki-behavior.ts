@@ -14,7 +14,7 @@
 
 import {
   mkWikiVerbResult,
-  TEMP_BAG,
+  wikiSlotUri,
   type BatchMode,
   type WikiMsg_PlaceVerb,
   type WikiMsg_DomEvent,
@@ -94,7 +94,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
             },
           },
           origin,
-          { bag: TEMP_BAG },
+          { bag: wikiSlotUri(ctx.recipe.wikiSlug, "temp") },
         );
         return { seeded: true, title: REBOOT_ALERT_TITLE };
       });

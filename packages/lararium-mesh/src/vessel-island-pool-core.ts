@@ -18,7 +18,7 @@
 
 import { attachMessageChannelSync } from "./island-repo.js";
 import { awaitIslandMsg } from "./vessel-host.js";
-import { wikiBagUri } from "./wiki-recipe.js";
+import { wikiBagUri, wikiSlotUri, type WikiSlotKind } from "./wiki-recipe.js";
 import type { VesselWorkerHandle, VesselIslandHost } from "./vessel-host.js";
 import {
   isIslandToVesselMsg,
@@ -62,19 +62,21 @@ interface ColdSlot {
 
 type Slot = IslandSlot | ColdSlot;
 
-export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean }[];
+export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean; wikiSlot?: WikiSlotKind }[];
 
 /** Resolve a mount's disk mirrors: intersect the held grant (authority) with the
- *  recipe's `mirrorBags` (designation), then fill a per-wiki-slug grant's leaf —
- *  e.g. `@working` projecting to `wikis/@{slug}` — from the recipe's `wikiSlug`
- *  at mount time.
+ *  recipe's `mirrorBags` (designation), then fill a per-wiki grant's bag + leaf
+ *  from the recipe's `wikiSlug` at mount time.
  *
- *  A `selfCanon` entry is the per-wiki CANON authority: it expands BOTH its
- *  bagId and its leaf from the slug (the wiki's own `@{slug}` bag → `bags/@{slug}`),
- *  and yields only when the recipe designates that canon AND no literal grant
- *  already covers it — so a minted user wiki projects its canon to `bags/@{slug}`
- *  while the system wikis (@lares/@lararium, literal grants) keep their static
- *  roots and never double-project.
+ *  Two per-wiki authorities expand BOTH bagId and leaf from the slug:
+ *  - A `wikiSlot` entry names one of the live "above the fold" layers (e.g.
+ *    `working` → bag `wikis/@{slug}/working`, disk `wikis/@{slug}`) — the live
+ *    edit plane.
+ *  - A `selfCanon` entry is the per-wiki CANON authority (the wiki's own
+ *    `bags/@{slug}` bag → disk `bags/@{slug}`), yielding only when the recipe
+ *    designates that canon AND no literal grant already covers it — so system
+ *    wikis (@lares/@lararium, literal grants) keep their static roots and never
+ *    double-project.
  *
  *  OCAP-clean: authority stays in the static grant, designation in the synced
  *  recipe, the per-instance bag + subdir resolved here. */
@@ -83,17 +85,21 @@ export function resolveDiskMirrors(
   mirrorBags: readonly string[] | undefined,
   wikiSlug: string,
 ): DiskMirrorGrant {
-  const selfCanonBag = wikiBagUri(wikiSlug);
-  const literalBags = new Set(grant.filter((g) => !g.selfCanon).map((g) => g.bagId));
+  const perWikiBag = (g: DiskMirrorGrant[number]): string =>
+    g.selfCanon ? wikiBagUri(wikiSlug)
+    : g.wikiSlot ? wikiSlotUri(wikiSlug, g.wikiSlot)
+    : g.bagId;
+  const literalBags = new Set(grant.filter((g) => !g.selfCanon && !g.wikiSlot).map((g) => g.bagId));
   return grant
-    .filter((g) =>
-      g.selfCanon
-        ? Boolean(mirrorBags?.includes(selfCanonBag)) && !literalBags.has(selfCanonBag)
-        : Boolean(mirrorBags?.includes(g.bagId)),
-    )
+    .filter((g) => {
+      const bag = perWikiBag(g);
+      return g.selfCanon
+        ? Boolean(mirrorBags?.includes(bag)) && !literalBags.has(bag)
+        : Boolean(mirrorBags?.includes(bag));
+    })
     .map((g) =>
-      g.selfCanon
-        ? { ...g, bagId: selfCanonBag, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
+      (g.selfCanon || g.wikiSlot)
+        ? { ...g, bagId: perWikiBag(g), mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
         : g.perWikiSlug
           ? { ...g, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
           : g,

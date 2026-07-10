@@ -24,7 +24,7 @@ import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
 import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
-import { TEMP_BAG } from "./wiki-recipe.js";
+import { wikiSlotUri } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 
 /** The social-plane + daemon + persona doc URLs a vessel's bootstrap resolves (founding done). */
@@ -179,15 +179,18 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
 export async function mountWikiSlot(
   recipe: VesselRecipe,
   composite: CompositeStore,
-  slot: { wikiKey: string; wikiBagId: string; draftOracleTitle: string; draftBagId: string },
+  slot: { wikiSlug: string; wikiKey: string; wikiBagId: string; draftOracleTitle: string; draftBagId: string },
   /** Pre-resolved wiki doc — the @lares-as-wiki quine seats the operator-minted
    *  invariant doc as the write layer (its oracle lives on the @lararium doc,
    *  never in @catalog — no cross-plane resolution, no second mint). */
   presetWikiHandle?: DocHandle<LarDoc>,
 ): Promise<{ wikiHandle: DocHandle<LarDoc>; draftHandle: DocHandle<LarDoc> }> {
   const { repo, catalogHandle, waitHandle } = recipe;
+  // Resolve the CANON doc by its content key (bags/@{slug}) — where the mint
+  // writer keys it. The wiki IDENTITY (wikis/@{slug}, slot.wikiKey) is a separate
+  // registry entry, not the canon-doc lookup.
   const wikiHandle = presetWikiHandle ?? await resolveOracleDoc(
-    catalogHandle, slot.wikiKey,
+    catalogHandle, slot.wikiBagId,
     (url) => url ? waitHandle<LarDoc>(url as AutomergeUrl, () => blankDoc(repo)) : blankDoc(repo),
     "vessel-boot",
   );
@@ -203,7 +206,7 @@ export async function mountWikiSlot(
   );
   composite.addLayer({ bagId: slot.draftBagId, store: new AutomergeDocStore(draftHandle, slot.draftBagId), writable: true, defaultWritable: false });
 
-  composite.addLayer({ bagId: TEMP_BAG, store: recipe.tempStore(), writable: true, defaultWritable: true });
+  composite.addLayer({ bagId: wikiSlotUri(slot.wikiSlug, "temp"), store: recipe.tempStore(), writable: true, defaultWritable: true });
 
   return { wikiHandle, draftHandle };
 }

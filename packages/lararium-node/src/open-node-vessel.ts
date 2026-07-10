@@ -26,13 +26,13 @@ import type {
   LarDoc,
   LarariumVesselOptions, VesselResult, LarOpenPhase,
   VesselBootstrap, VesselCoreAssembly,
-  CompositeStore, MeshPalaceDoc,
+  CompositeStore, MeshPalaceDoc, DiskMirrorGrant,
 } from "@lararium/mesh";
 import {
   makeDurableMailbox,
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, WORKING_BAG,
+  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   BAG_IDS, slugFromUri,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
@@ -43,7 +43,6 @@ import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
 import {
   ACTIVE_WIKI_URI,
   MemoryTiddlerStore,
-  planActiveWikiSlot,
   selectActiveWikiSlug,
   seedVesselDefaults,
   loadCatalogCorpora,
@@ -376,14 +375,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     activeWikiSource = sel.source;
     slotActiveWikiId = sel.slug;
     const identity = new OpenIdentitySlot(`${hostId}:${sel.slug}`);
-    const plan = planActiveWikiSlot({ hostId, wikiSlug: sel.slug, identityDid: identity.did });
+    const facets = recipeHostFacets(slugFromUri(sel.slug), identity.did);
     return {
       activeWikiId:     sel.slug,
-      wikiSlug:         slugFromUri(sel.slug),
-      wikiKey:          plan.wikiKey,
-      wikiBagId:        plan.wikiBagId,
-      draftOracleTitle: plan.draftOracleTitle,
-      draftBagId:       plan.draftBagId,
+      wikiSlug:         facets.wikiSlug,
+      wikiKey:          facets.wikiKey,
+      wikiBagId:        facets.wikiBagId,
+      draftOracleTitle: facets.draftOracleTitle,
+      draftBagId:       facets.draftBagId,
     };
   };
 
@@ -646,13 +645,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     eventBus.start();
 
     const workerRootDir = rootDirOpt ?? repoRoot;
-    const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean }[] = [
+    const diskMirrorGrant: DiskMirrorGrant = [
       { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares"),    scope: "@lares" },
       { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium"), scope: "@lararium" },
-      // @working = the live write layer; projects per-wiki to wikis/@{slug} (the
-      // leaf slug fills at mount time — perWikiSlug). The authority (the wikis
-      // base) stays static here; designation rides the recipe's mirrorBags.
-      { bagId: WORKING_BAG,      mirrorRoot: join(workerRootDir, "wikis"),          scope: "@working", perWikiSlug: true },
+      // working = the live write layer; projects per-wiki to wikis/@{slug} (BOTH
+      // the bag `wikis/@{slug}/working` and the leaf fill from the slug at mount —
+      // wikiSlot). The authority (the wikis base) stays static here; designation
+      // rides the recipe's mirrorBags.
+      { bagId: "@working",       mirrorRoot: join(workerRootDir, "wikis"),          scope: "@working", wikiSlot: "working" },
       // self-canon = the per-wiki CANON authority: a minted user wiki's own
       // @{slug} bag projects to bags/@{slug} (both bagId and leaf fill from the
       // slug at mount). System wikis (@lares/@lararium) carry literal grants

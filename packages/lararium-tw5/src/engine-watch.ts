@@ -24,7 +24,7 @@
 import {
   BAG_IDS,
   ENGINE_CORE_ID,
-  TEMP_BAG,
+  wikiSlotUri,
   type ChangeOrigin,
   type DocHandle,
   type LarDoc,
@@ -83,7 +83,7 @@ export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {
         },
       },
       origin,
-      { bag: TEMP_BAG },
+      { bag: wikiSlotUri(ctx.recipe.wikiSlug, "temp") },
     );
   };
 

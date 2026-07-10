@@ -19,7 +19,7 @@ status      = "approved"
 tags        = ["lar:///ha.ka.ba/@lares/api/lararium/wiki-recipe"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/api/personal-slot"
-uri-shape   = "lar:///ha.ka.ba/@personal"
+uri-shape   = "lar:///ha.ka.ba/wikis/@{slug}/personal"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
@@ -32,19 +32,20 @@ uri-shape   = "lar:///ha.ka.ba/@personal"
 
 ## The tension that asked for the slot
 
-The WikiRecipe holds five fixed slots:
+The WikiRecipe holds a per-wiki live stack over a shared canon floor:
 
 ```
-1. @temp          volatile per-island, no CRDT
-2. @draft         drafts, CRDT, mesh-shared
-3. @<wikiSlug>    operator's wiki content, CRDT, mesh-shared
-4. canonBags[]    optional content libraries, CRDT, mesh-shared
-5. @lares         personality, CRDT, mesh-shared
-6. @lararium      system, CRDT, mesh-shared
+1. wikis/@{slug}/temp     volatile per-island, no CRDT
+2. wikis/@{slug}/draft    drafts, CRDT, mesh-shared
+3. wikis/@{slug}/working  the saved live write layer, CRDT, mesh-shared
+4. bags/@{slug}           the wiki's canon, CRDT, mesh-shared (read-only, promotion target)
+5. libraryBags[]          optional content libraries, CRDT, mesh-shared
+6. @lares                 personality, CRDT, mesh-shared
+7. @lararium              system, CRDT, mesh-shared
 ```
 
-Two federation scopes only — **device-local** (`@temp`) and **mesh-shared**
-(the rest). Nothing in between.
+Two federation scopes only — **device-local** (`wikis/@{slug}/temp`) and
+**mesh-shared** (the rest). Nothing in between.
 
 TW5 carries a category of state that lives between those two scopes — the
 operator's cross-device viewing state. TW5's own default `$:/config/SyncFilter`
@@ -61,20 +62,22 @@ Keyhive already names a `PersonaGroup`.
 
 ## The slot
 
-Insert `@personal` as a fixed slot between `@draft` and `@<wikiSlug>`:
+`personal` is a fixed per-wiki live slot, sitting between `draft` and `working`:
 
 ```
-1. @temp           volatile per-island, no CRDT
-2. @draft          drafts, CRDT, recipe-scoped
-3. @personal       cross-device viewing state, CRDT, PersonaGroup-scoped + recipe-scoped
-4. @<wikiSlug>     operator's wiki content, CRDT, mesh-shared
-5. canonBags[]     optional content libraries, CRDT, mesh-shared
-6. @lares          personality, CRDT, mesh-shared
-7. @lararium       system, CRDT, mesh-shared
+1. wikis/@{slug}/temp      volatile per-island, no CRDT
+2. wikis/@{slug}/draft     drafts, CRDT, recipe-scoped
+3. wikis/@{slug}/personal  cross-device viewing state, CRDT, PersonaGroup-scoped + recipe-scoped
+4. wikis/@{slug}/working   operator's saved live edits, CRDT, recipe-scoped
+5. bags/@{slug}            the wiki's canon, CRDT, mesh-shared (read-only)
+6. libraryBags[]           optional content libraries, CRDT, mesh-shared
+7. @lares                  personality, CRDT, mesh-shared
+8. @lararium               system, CRDT, mesh-shared
 ```
 
-Slot URI: `lar:///ha.ka.ba/@personal` — top-level, `child[1]` only, per the
-bag-tag rule (lar-uri.md). One canonical address.
+Slot URI: `lar:///ha.ka.ba/wikis/@{slug}/personal` — a per-wiki live layer rooted
+at the wiki's identity (`wikis/@{slug}`), one per wiki. The `BagResolver` binds the
+DOC per `(PersonaGroup × recipe-fingerprint)`; the URI carries the address.
 
 <<~/ahu >>
 
@@ -82,26 +85,26 @@ bag-tag rule (lar-uri.md). One canonical address.
 
 ## Yang / Yin / Chao — the design symmetry
 
-The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>`:
+The recipe carries a Tai Chi symmetry around the wiki's canon (`bags/@{slug}`):
 
 ```
-              @temp          ┐
-              @draft         │  YIN / Podge — every named @bag ABOVE @<wiki>
-              @personal      │  belongs to the wiki-recipe-session-instances-set
-                             │  (all open instances of this wiki carrying THIS
-                             ┘  exact bag-stack BELOW @<wiki>)
-        ┌───  @<wiki-named-bag>  ── CHAO / spin / Taiji ─────────────────────┐
-        │     the surface where activity accumulates — live multiplayer,    │
-        │     multi-session, the shared "space the wiki is."                │
+              wikis/@{slug}/temp     ┐
+              wikis/@{slug}/draft    │  YIN / Podge — every per-wiki live layer ABOVE
+              wikis/@{slug}/personal │  the canon belongs to the wiki-recipe-session-
+              wikis/@{slug}/working  │  instances-set (all open instances of this wiki
+                                     ┘  carrying THIS exact bag-stack BELOW the canon)
+        ┌───  bags/@{slug}  ── CHAO / spin / Taiji ──────────────────────────┐
+        │     the wiki's canon — the surface where activity accumulates:     │
+        │     live multiplayer, multi-session, the shared "space the wiki is."│
         └───────────────────────────────────────────────────────────────────┘
-              canonBags[]    ┐
-              @lares         │  YANG / Hodge — every named @bag BELOW @<wiki>
+              libraryBags[]  ┐
+              @lares         │  YANG / Hodge — every named bag BELOW the canon
               @lararium      ┘  is structured canon, mesh-shared, read-stable
 ```
 
-**Above @<wiki> slots** (`@temp`, `@draft`, `@personal`) are keyed by
-`(PersonaGroup × recipe-fingerprint)`, where the fingerprint covers the entire
-below-@<wiki> stack. Two devices share above-wiki state ONLY when their
+**The per-wiki live layers ABOVE the canon** (`wikis/@{slug}/{temp,draft,personal,working}`)
+are keyed by `(PersonaGroup × recipe-fingerprint)`, where the fingerprint covers the
+entire below-canon stack. Two devices share above-canon state ONLY when their
 recipe-fingerprints match.
 
 <<~/ahu >>
@@ -110,19 +113,20 @@ recipe-fingerprints match.
 
 ## Scoping mechanism — the resolver binds, the URI doesn't
 
-The slot URI stays generic across all recipes: `lar:///ha.ka.ba/@personal`.
-The recipe-fingerprint binding lives in the **`BagResolver` map** carried in
-the island manifest, not in the URI.
+The slot URI is per-wiki and fixed for a wiki: `lar:///ha.ka.ba/wikis/@{slug}/personal`.
+The recipe-fingerprint binding lives in the **`BagResolver` map** carried in the island
+manifest, not in the URI — so the SAME slot URI resolves to DIFFERENT docs as the wiki's
+below-canon recipe (its libraryBags) changes the fingerprint.
 
 ```typescript
-// Recipe A (synthetic-dream-machine + sdm + ftls canon):
-resolver["lar:///ha.ka.ba/@personal"] = "automerge:abc..."   // doc α
+// synthetic-dream-machine, Recipe A (sdm + ftls canon):
+resolver["lar:///ha.ka.ba/wikis/@synthetic-dream-machine/personal"] = "automerge:abc..."  // doc α
 
-// Recipe B (synthetic-dream-machine + sdm + ftls + elyncia canon, same operator):
-resolver["lar:///ha.ka.ba/@personal"] = "automerge:def..."   // doc β (different)
+// synthetic-dream-machine, Recipe B (sdm + ftls + elyncia canon, same operator):
+resolver["lar:///ha.ka.ba/wikis/@synthetic-dream-machine/personal"] = "automerge:def..."  // doc β (different)
 
 // Recipe A again, different device, same operator's PersonaGroup:
-resolver["lar:///ha.ka.ba/@personal"] = "automerge:abc..."   // doc α (shared)
+resolver["lar:///ha.ka.ba/wikis/@synthetic-dream-machine/personal"] = "automerge:abc..."  // doc α (shared)
 ```
 
 The slot URI is the **address**. The Automerge doc the resolver hands you
@@ -130,45 +134,46 @@ is the **house at that address right now in this recipe**. Different
 recipes deliver to different houses; same recipe across the operator's
 device cabal delivers to one shared house.
 
-Same mechanism applies to `@draft`:
+Same mechanism applies to `wikis/@{slug}/draft`:
 
 ```typescript
-resolver["lar:///ha.ka.ba/@draft"] = <recipe-A-draft-doc>   // device A
-resolver["lar:///ha.ka.ba/@draft"] = <recipe-A-draft-doc>   // device B, same recipe
-resolver["lar:///ha.ka.ba/@draft"] = <recipe-B-draft-doc>   // device C, different recipe
+resolver["lar:///ha.ka.ba/wikis/@{slug}/draft"] = <recipe-A-draft-doc>   // device A
+resolver["lar:///ha.ka.ba/wikis/@{slug}/draft"] = <recipe-A-draft-doc>   // device B, same recipe
+resolver["lar:///ha.ka.ba/wikis/@{slug}/draft"] = <recipe-B-draft-doc>   // device C, different recipe
 ```
 
-`@temp` stays per-island (no CRDT, no resolver entry needed — the slot URI
+`wikis/@{slug}/temp` stays per-island (no CRDT, no resolver entry needed — the slot URI
 resolves to a fresh MemoryTiddlerStore at boot).
 
 <<~/ahu >>
 
 <<~ ahu #cascade-rules >>
 
-## Cascade rules that activate @personal
+## Cascade rules that route to the personal layer
 
-The default `lar:///ha.ka.ba/@lararium/config/bag-paths` cascade adds rules
-above the `$:/state/` catch-all:
+The default `lar:///ha.ka.ba/@lararium/config/bag-paths` cascade routes by prefix to
+per-wiki config values (`current-wiki-*`), which the island seeds to the mounted wiki's
+own slots at boot — so a rule never hardcodes a wiki's identity:
 
 ```
-[prefix[$:/temp/]then[lar:///ha.ka.ba/@temp]]
-[prefix[$:/status/]then[lar:///ha.ka.ba/@temp]]
-[prefix[$:/boot/]then[lar:///ha.ka.ba/@temp]]
-[prefix[$:/HistoryList]then[lar:///ha.ka.ba/@temp]]
-[prefix[$:/state/popup/]then[lar:///ha.ka.ba/@temp]]
-[prefix[Draft of ]then[lar:///ha.ka.ba/@draft]]
-[prefix[$:/StoryList]then[lar:///ha.ka.ba/@personal]]           ← new
-[prefix[$:/state/folded/]then[lar:///ha.ka.ba/@personal]]       ← new
-[prefix[$:/state/tab-]then[lar:///ha.ka.ba/@personal]]          ← new
-[prefix[$:/palette]then[lar:///ha.ka.ba/@personal]]             ← new (Q3)
-[prefix[$:/state/]then[lar:///ha.ka.ba/@temp]]
+[prefix[$:/temp/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]
+[prefix[$:/status/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]
+[prefix[$:/boot/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]
+[prefix[$:/HistoryList]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]
+[prefix[$:/StoryList]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]
+[prefix[$:/state/folded/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]
+[prefix[$:/state/tab-]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]
+[prefix[$:/palette]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]
+[prefix[$:/state/]then{lar:///ha.ka.ba/@lararium/config/current-wiki-temp}]
+[prefix[Draft of ]then{lar:///ha.ka.ba/@lararium/config/current-wiki-draft}]
 [prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]
 ```
 
-The literal slot URI `lar:///ha.ka.ba/@personal` appears in the cascade;
-each island's resolver supplies the correct doc URL at boot. Under the
-residency model these entries hold as **first-write defaults**, not
-authoritative routing (see #residency-reconciliation).
+`island-recipe.ts` seeds `current-wiki-{temp,draft,personal,bag}` to the mounted wiki's
+own per-wiki slots (`wikis/@{slug}/{temp,draft,personal}` and its working/canon write
+layer) at boot; each island's resolver supplies the correct doc URL. Under the residency
+model these entries hold as **first-write defaults**, not authoritative routing (see
+#residency-reconciliation).
 
 <<~/ahu >>
 
@@ -327,12 +332,12 @@ Then `_mountWorker` only adds the pass-through URLs to the resolver — no logic
 const resolver: Record<string, string | null> = {
   [LARARIUM_BAG]:         this._laraiumDocUrl,
   [wikiBagUri(wikiSlug)]: rawDocUrl,
-  ...(ctx.personalDocUrl ? { [PERSONAL_BAG]: ctx.personalDocUrl } : {}),
-  ...(ctx.draftDocUrl    ? { [DRAFT_BAG]:    ctx.draftDocUrl    } : {}),
+  ...(ctx.personalDocUrl ? { [wikiSlotUri(wikiSlug, "personal")]: ctx.personalDocUrl } : {}),
+  ...(ctx.draftDocUrl    ? { [wikiSlotUri(wikiSlug, "draft")]:    ctx.draftDocUrl    } : {}),
 };
 ```
 
-`expandRecipe` (`wiki-recipe.ts:193`) already lists `@personal` between `@draft` and `@<wiki>`, so the slot walks at the right priority the moment the resolver carries its URL; absent the URL it resolves to nothing and the recipe skips it cleanly.
+`expandRecipe` lays the per-wiki live slots (`wikis/@{slug}/{temp,draft,personal,working}`) above the wiki's `bags/@{slug}` canon, so the personal slot walks at the right priority the moment the resolver carries its URL; absent the URL it resolves to nothing and the recipe skips it cleanly.
 
 ### Audience and grain — golden principles (research-verified 2026-06-03)
 
@@ -416,10 +421,10 @@ The handoff names "S9 / lararium-browser S4 real boot" as still in flight (Index
 
 ## Reconciliation with the Residency Model
 
-The approved [residency-model](residency-model.md) coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above `@<wiki>` all survive the residency model intact. Three layers compose, one operator gesture:
+The approved [residency-model](residency-model.md) coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above the `bags/@{slug}` canon all survive the residency model intact. Three layers compose, one operator gesture:
 
-- The cascade tiddler (`lar:///ha.ka.ba/@lararium/config/bag-paths`) routes `$:/StoryList` writes to `@personal` as a **first-write default**, not authoritative routing. Under the residency model a title MAY have residency in `@personal` AND `@<wiki>` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
-- The binding tiddler in the admin doc names which Automerge document THIS device, in THIS recipe, mounts at the `@personal` URI literal.
+- The cascade tiddler (`lar:///ha.ka.ba/@lararium/config/bag-paths`) routes `$:/StoryList` writes to the personal layer (via `current-wiki-personal`) as a **first-write default**, not authoritative routing. Under the residency model a title MAY have residency in `wikis/@{slug}/personal` AND `bags/@{slug}` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
+- The binding tiddler in the admin doc names which Automerge document THIS device, in THIS recipe, mounts at the `wikis/@{slug}/personal` URI.
 - The residency model surfaces `$:/StoryList` as the topmost manifestation in the resolver-defined priority order.
 
 Open the wiki; the StoryList syncs to your other devices because each layer holds its piece. Implementation coordinates with Sprint 7 of `packages/EPIC-RESIDENCY-MODEL.md` rather than landing as an independent migration.
@@ -430,8 +435,8 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 ## Migration sketch
 
-1. Add `PERSONAL_BAG` constant to `wiki-recipe.ts` (`lar:///ha.ka.ba/@personal`).
-2. Update `expandRecipe()` to insert `@personal` between `@draft` and the wiki bag.
+1. `wiki-recipe.ts` mints the per-wiki personal slot via `wikiSlotUri(slug, "personal")` (`lar:///ha.ka.ba/wikis/@{slug}/personal`).
+2. `expandRecipe()` lays `personal` among the per-wiki live slots above the wiki's `bags/@{slug}` canon.
 3. Update default cascade tiddler (`lar-bag-paths.tid`) with @personal rules.
 4. Wire vessel boot to compute the recipe fingerprint + resolve/create per-pair `@personal` and `@draft` doc URLs (host-inline, per #vessel-boot-flow).
 5. Inject the resolved URLs into `BagResolver` at manifest time.
@@ -442,8 +447,8 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
      - Two devices, different recipe, same PersonaGroup → write StoryList on device A, device B sees nothing.
      - Two devices, same recipe, different PersonaGroup → no cross-talk.
    - **Multi-bag residency (+2, from residency-model reconciliation):**
-     - **Test 8 (multi-bag overlay):** write `$:/StoryList` in `@personal`, then `lares act ADD --title $:/StoryList --from @personal --to @<wiki>`. Assert resolveAll returns both bags; resolveTopmost picks `@personal` per recipe priority; origin-bag field reads `@personal`; the `@<wiki>` Manifestation remains visible to `lares wiki resolve $:/StoryList`.
-     - **Test 9 (transfer effect record):** `lares act MOVE --title MyNote --from @personal --to @<wiki>` produces one `transfer` effect record pairing accession (`@<wiki>`) + deaccession (`@personal`); the deaccession log persists in `@personal/log/residency/` after the tiddler leaves.
+     - **Test 8 (multi-bag overlay):** write `$:/StoryList` in `wikis/@{slug}/personal`, then `lares act ADD --title $:/StoryList --from wikis/@{slug}/personal --to bags/@{slug}`. Assert resolveAll returns both bags; resolveTopmost picks the personal layer per recipe priority; origin-bag field reads `wikis/@{slug}/personal`; the `bags/@{slug}` Manifestation remains visible to `lares wiki resolve $:/StoryList`.
+     - **Test 9 (transfer effect record):** `lares act MOVE --title MyNote --from wikis/@{slug}/personal --to bags/@{slug}` produces one `transfer` effect record pairing accession (`bags/@{slug}`) + deaccession (`wikis/@{slug}/personal`); the deaccession log persists in `wikis/@{slug}/personal/log/residency/` after the tiddler leaves.
    - **Eventual-consistency (S7.7):** binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
 8. Update memory-store.md @personal references.
 
@@ -457,10 +462,10 @@ This unified ledger renumbers once; every in-body cross-reference resolves here.
 
 **Slot shape**
 
-Q1 (slot priority order) ✅ approved — `@personal` between `@draft` and `@<wikiSlug>`.
-Q2 (one @personal or per-wiki) ✅ resolved — single canonical URI, resolver binds per `(PersonaGroup × recipe-fingerprint)`.
-Q3 (`$:/palette` scope) ✅ resolved 2026-05-31 — palette routes to `@personal` (operator-across-devices). Cascade rule `[prefix[$:/palette]then[lar:///ha.ka.ba/@personal]]` lands above the `$:/state/` catch-all in S7.3. Custom palette definitions under `$:/palettes/*` are NOT covered — open follow-up if operator-built palettes need to travel across recipes.
-Q4 (fingerprint algorithm) ✅ revised 2026-05-31 — SHA-256 over canonical encoding of `(@<wiki>-doc-id + sorted canonBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same revision.
+Q1 (slot priority order) ✅ approved — `personal` among the per-wiki live slots, above the `bags/@{slug}` canon.
+Q2 (one @personal or per-wiki) ✅ resolved — a per-wiki slot URI (`wikis/@{slug}/personal`); the resolver binds the doc per `(PersonaGroup × recipe-fingerprint)`.
+Q3 (`$:/palette` scope) ✅ resolved — palette routes to the personal layer (operator-across-devices). The cascade rule `[prefix[$:/palette]then{lar:///ha.ka.ba/@lararium/config/current-wiki-personal}]` lands above the `$:/state/` catch-all. Custom palette definitions under `$:/palettes/*` are NOT covered — open follow-up if operator-built palettes need to travel across recipes.
+Q4 (fingerprint algorithm) ✅ resolved — SHA-256 over canonical encoding of `(bags/@{slug}-doc-id + sorted libraryBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same rule.
 
 **Binding storage**
 
@@ -475,7 +480,7 @@ Q9 (cross-fingerprint linkage) ✅ deferred 2026-06-01 — out of Sprint 7 scope
 
 **@draft binding**
 
-Q10 (`@draft` scoping) ✅ confirmed — follows the same `(PersonaGroup × recipe-fingerprint)` keying as `@personal`. Locked at slot URI `lar:///ha.ka.ba/@draft`, resolver-bound.
+Q10 (`@draft` scoping) ✅ confirmed — follows the same `(PersonaGroup × recipe-fingerprint)` keying as the personal slot. Per-wiki slot URI `lar:///ha.ka.ba/wikis/@{slug}/draft`, resolver-bound.
 Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice (a).** Operator ruled `@personal` and `@draft` bind **together** per-fingerprint — the #data-model intent holds. The fingerprint-keyed `@draft` **replaces** the boot's ad-hoc draft: the boot draft-mint site (`open-node-vessel.ts:696`) rewires to `resolveOrMintBinding({ kind: "draft-binding", … })`, so both slots converge across the operator's devices. S7.5 binds the pair; neither retires independently. The pseudocode in #vessel-boot-flow reflects this. **Subtlety for enactment:** the boot's existing `registerBag(draftBagId)` (`:594`) must move to (or be subsumed by) the helper's per-fingerprint `@draft` URL — the boot can no longer pre-register a fixed draft bag id ahead of fingerprint resolution.
 
 **Layering (raised + resolved 2026-06-01):** the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.

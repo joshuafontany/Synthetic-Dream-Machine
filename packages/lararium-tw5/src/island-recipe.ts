@@ -18,8 +18,7 @@ import {
   AutomergeDocStore,
   expandRecipe,
   wikiBagUri,
-  TEMP_BAG,
-  WORKING_BAG,
+  wikiSlotUri,
   type LarDoc,
   type DocHandle,
   type WikiRecipe,
@@ -58,13 +57,15 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
 
   const handleBySlot = new Map(ready.map((r) => [r.slot, r.handle]));
   const slots        = expandRecipe(recipe);
+  const tempSlot     = wikiSlotUri(recipe.wikiSlug, "temp");
+  const workingSlot  = wikiSlotUri(recipe.wikiSlug, "working");
   const stores: Array<{ slot: SlotUri; store: AutomergeDocStore | MemoryTiddlerStore }> = [];
 
   // Bottom-up addLayer order. Slot at index slots.length-1 (@oracle, the floor) lands first.
   let tempStore: MemoryTiddlerStore | null = null;
   for (let i = slots.length - 1; i >= 0; i--) {
     const slot = slots[i]!;
-    if (slot === TEMP_BAG) {
+    if (slot === tempSlot) {
       tempStore = new MemoryTiddlerStore();
       composite.addLayer({ bagId: slot, store: tempStore, writable: true, defaultWritable: true });
       stores.push({ slot, store: tempStore });
@@ -83,24 +84,27 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   // Per-wiki cascade reference — the default `lar:///ha.ka.ba/@lararium/config/bag-paths`
   // reads this value via `{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}` to
   // resolve `lar:` writes to the wiki's live WRITE LAYER. An operator content wiki
-  // points at @working (the saved live layer, projecting wikis/{slug}); its @{slug}
-  // canon rides below as read-only, published only by a promotion MOVE
-  // (wiki-layer-ontology#shore-law). A grant-less mount — @daemon itself,
-  // a control plane with no working/canon split — has no @working layer, so
-  // it falls back to its OWN bag (wikiBagUri(slug) = @daemon, granted), keeping a
-  // writable default path instead of throwing on the first cascade-routed edit.
-  // Volatile (lives in @temp), set once at boot, shadows any fallback by priority.
+  // points at its per-wiki working slot (`wikis/@{slug}/working`, the saved live
+  // layer projecting to disk wikis/@{slug}); its bags/@{slug} canon rides below as
+  // read-only, published only by a promotion MOVE (wiki-layer-ontology#shore-law).
+  // A grant-less mount — @daemon itself, a control plane with no working/canon
+  // split — has no working layer, so it falls back to its OWN bag (wikiBagUri(slug)
+  // = @daemon, granted), keeping a writable default path instead of throwing.
+  // Volatile (lives in the per-wiki temp), set once at boot, shadows any fallback
+  // by priority. The bag-paths cascade reads these to route by prefix to the wiki's
+  // OWN per-wiki live layers — the address tells the truth (no global slot names).
   if (tempStore) {
-    const writeLayer = handleBySlot.has(WORKING_BAG) ? WORKING_BAG : wikiBagUri(recipe.wikiSlug);
-    void tempStore.put(
-      {
-        tiddler: {
-          title: "lar:///ha.ka.ba/@lararium/config/current-wiki-bag",
-          text:  writeLayer,
-        },
-      },
-      { kind: "canon-hydrate", receipt: "recipe-boot" },
-    );
+    const writeLayer = handleBySlot.has(workingSlot) ? workingSlot : wikiBagUri(recipe.wikiSlug);
+    const slug = recipe.wikiSlug;
+    const configSeed: Record<string, string> = {
+      "lar:///ha.ka.ba/@lararium/config/current-wiki-bag":      writeLayer,
+      "lar:///ha.ka.ba/@lararium/config/current-wiki-temp":     wikiSlotUri(slug, "temp"),
+      "lar:///ha.ka.ba/@lararium/config/current-wiki-draft":    wikiSlotUri(slug, "draft"),
+      "lar:///ha.ka.ba/@lararium/config/current-wiki-personal": wikiSlotUri(slug, "personal"),
+    };
+    for (const [title, text] of Object.entries(configSeed)) {
+      void tempStore.put({ tiddler: { title, text } }, { kind: "canon-hydrate", receipt: "recipe-boot" });
+    }
   }
 
   const adaptor = new IslandAdaptor(tw5, composite, recipe.wikiSlug);

@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from "vitest";
-import { CompositeStore, BAG_IDS, ENGINE_CORE_ID, TEMP_BAG } from "@lararium/mesh";
+import { CompositeStore, BAG_IDS, ENGINE_CORE_ID, wikiSlotUri } from "@lararium/mesh";
 import type { DocHandle, LarDoc } from "@lararium/mesh";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
 import { startEngineWatch, ENGINE_WAITING_ALERT_TITLE } from "../src/engine-watch.js";
@@ -24,6 +24,8 @@ function fakeLarariumHandle(initial: { sha256: string; version: string }) {
   return { handle, setCore, listenerCount: () => listeners.size };
 }
 
+const TEMP_BAG = wikiSlotUri("test-wiki", "temp");
+
 function makeCtx(handle?: DocHandle<LarDoc>) {
   const composite = new CompositeStore();
   composite.addLayer({ bagId: TEMP_BAG, store: new MemoryTiddlerStore(TEMP_BAG), writable: true });
@@ -31,7 +33,7 @@ function makeCtx(handle?: DocHandle<LarDoc>) {
   if (handle) handles.set(BAG_IDS.oracle, handle);
   return {
     composite,
-    ctx: { composite, handles, engine: { ...BOOTED } } as unknown as IslandContext,
+    ctx: { composite, handles, engine: { ...BOOTED }, recipe: { wikiSlug: "test-wiki" } } as unknown as IslandContext,
   };
 }
 

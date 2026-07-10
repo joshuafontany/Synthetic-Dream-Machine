@@ -43,15 +43,12 @@
 
 import {
   CompositeStore,
-  TEMP_BAG,
-  DRAFT_BAG,
-  WORKING_BAG,
-  PERSONAL_BAG,
   LARES_BAG,
   LARARIUM_BAG,
   ORACLE_BAG,
   tiddlerText,
   wikiBagUri,
+  wikiSlotUri,
   expandRecipe,
   mkBreath,
   mkFault,
@@ -302,11 +299,12 @@ export function runSovereignKernel(
     // island already holds; user library bags resolve from @catalog; public bags
     // will resolve from @crossroads. Structural instance slots arrive as typed
     // grants.
+    const slug = msg.recipe.wikiSlug;
     const slotUrl = async (slot: SlotUri): Promise<string | null> => {
-      if (slot === DRAFT_BAG)                    return msg.grants.draftUrl    ?? null;
-      if (slot === WORKING_BAG)                  return msg.grants.workingUrl  ?? null;
-      if (slot === PERSONAL_BAG)                 return msg.grants.personalUrl ?? null;
-      if (slot === wikiBagUri(msg.recipe.wikiSlug)) return msg.grants.wikiUrl ?? null;
+      if (slot === wikiSlotUri(slug, "draft"))    return msg.grants.draftUrl    ?? null;
+      if (slot === wikiSlotUri(slug, "working"))  return msg.grants.workingUrl  ?? null;
+      if (slot === wikiSlotUri(slug, "personal")) return msg.grants.personalUrl ?? null;
+      if (slot === wikiBagUri(slug))              return msg.grants.wikiUrl ?? null;
       if (slot === ORACLE_BAG)                 return msg.grants.islandUrl;
       // System bags (@lares, @lararium) resolve from the @oracle doc's well-known
       // tiddlers — the system plane the island already holds. User library
@@ -320,7 +318,7 @@ export function runSovereignKernel(
     const ready: Array<{ slot: SlotUri; handle: DocHandle<LarDoc> }> = [];
 
     for (const slot of slots) {
-      if (slot === TEMP_BAG) continue;
+      if (slot === wikiSlotUri(slug, "temp")) continue;
       if (slot === ORACLE_BAG) { ready.push({ slot, handle: laraiumHandle }); continue; }
       const docUrl = await slotUrl(slot);
       if (!docUrl) continue;   // ungranted/unregistered slot — in-memory or absent

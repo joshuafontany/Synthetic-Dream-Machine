@@ -2,122 +2,70 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split >>
 ```toml iam
-confidence   = 12
+confidence   = 16
 content-type = "text/x-memetic-wikitext"
 file-path    = "bags/@lares/ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split.md"
-mana         = 15
-register     = "Synthesis"
-role         = "design-of-record for the bag/wiki URI split — the two kinds the @catalog tracks, cleanly separated"
-status       = "draft — awaiting operator greenlight per phase"
+mana         = 17
+register     = "Synthesis-Canon"
+role         = "the bag / wiki / cid kind-plane law — the three surfaces a lar: URI names, the edit/publish shore, and the isomorphic wiki core"
+status       = "canon"
 type         = "text/x-memetic-wikitext"
 uri-path     = "ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split"
 ```
 
 <<~ &#x0002; >>
 
-# The Bag / Wiki URI Split
+# The Bag / Wiki / CID Kind-Planes
 
-**The collapse being cured.** `lar:///ha.ka.ba/@lares` names three things at once today: the **bag** (`BAG_IDS.lares`, an automerge doc), the **wiki** (a `#has` recipe stack, `wiki list` shows it `[system]`), and — through `wikiBagUri` — the quine that fused them (*"a wiki's canon IS the @{slug} bag"*). One address, two kinds. The `@catalog` must track both, and cannot tell them apart.
-
-## The operator rulings this enacts
-
-1. **Two kinds, two prefixes** (2026-07-10): `BAG_PREFIX = lar:///ha.ka.ba/bags/@{slug}` · `WIKI_PREFIX = lar:///ha.ka.ba/wikis/@{slug}`. The KIND rides the first path segment — the heaviest-weight slot in `lar:` law — and is independent of ownership.
-2. **The fold.** *Above the fold* = wiki-specific layers, routed from the WIKI's URI (never shared between wikis: `@working`, `@draft`, per-wiki `@temp`, the recipe). *Below the fold* = bags, shared around as the user wishes.
-3. **Meme URIs carry NO relation to bag URIs.** A meme moves between bags freely, or lives in several at once. So bag identity NEVER prefixes a meme's URI — lexical containment is not real and never was. `bagsFileToUri` already proves this: `bags/<holding>/<meme-path>.md` → `lar:///<meme-path>`, the holding bag DISCARDED from the URI. `bags/@lares/…/noosphere-boot.md` and `bags/@sdm/…/noosphere-boot.md` project the SAME meme URI.
-4. **Local operator owns @lares + @lararium** (2026-07-10): no Cabal ownership layer yet; the sole DreamNet builder owns them. Once they are normal catalog-registered bags they leave the hardcoded `registerBags` list.
-
-## The keystone consequence: arity is SAFE
-
-The boot seed rules path segments 0–4; a fifth reads as a degraded HUD. `@lares/api/lares/noosphere-boot` is already four. If the `bags/` prefix rode the meme URI it would breach the law. **It does not.** Ruling 3 keeps the meme URI untouched: `bags/` and `wikis/` name IDENTITY (the bag, the stack), never the content inside. **~4,517 meme-path refs and 3,772 meme titles DO NOT CHANGE.** Only ~104 bag-IDENTITY refs move.
-
-## The three kind-planes (canonical)
-
-The KIND rides the first path segment. Three planes name the three things the system
-addresses — the pattern the IPFS/IPNS folk (Zelenka, Ink & Switch) drew, made native:
+A `lar:` URI names one of three surfaces, and the KIND rides the **first path segment** — the heaviest-weight slot in `lar:` law, independent of ownership:
 
 <<~ranks kind-planes bags/@slug ~ a composable recipe piece · MUTABLE -> wikis/@slug ~ a #has bag-stack · MUTABLE -> cid/<hash> ~ a content-addressed artifact · IMMUTABLE >>
 
-- **`bags/@slug`** — the IPNS-shaped mutable content plane. Shared as the operator wishes.
-- **`wikis/@slug`** — a #has bag-stack; per-wiki layers route off it (above the fold).
-- **`cid/<hash>`** — the **/ipfs/ plane**: the name IS the content hash, so it never changes.
-  A frozen artifact answers to it forever. The complement already exists — the @oracle
-  `genesis-cid-*` tiddler carries a `cid:` FIELD naming which cid stands current (the
-  /ipns/ plane, "IPNS-minus-RFC3339"). `cid/` names the immutable artifact; the pointer
-  names the current one; together they are IPFS ⋈ IPNS. Per lar: law `cid/<hash>` NAMES —
-  the `genesis/cas/` store resolves bytes.
+- **`bags/@slug`** — the IPNS-shaped mutable content plane: a bag (a CRDT surface, today an Automerge doc). A composable recipe piece, shared as the operator wishes.
+- **`wikis/@slug`** — a `#has` bag-stack: a wiki's IDENTITY. Its per-wiki layers route off it (above the fold).
+- **`cid/<hash>`** — the /ipfs/ plane: the name IS the content hash, so it never changes. A frozen artifact answers to it forever. Its complement is the /ipns/ pointer — the `@oracle` `genesis-cid-*` tiddler carries a `cid:` field naming which cid stands current. `cid/` names the immutable artifact; the pointer names the current one; together they are IPFS ⋈ IPNS. Per `lar:` law `cid/<hash>` NAMES — the `genesis/cas/` store resolves bytes.
+
+## Identity ⋈ canon — a wiki's two addresses
+
+A wiki's IDENTITY (`wikis/@slug`, its recipe/`#has`-stack) is distinct from its CANON (`bags/@slug`, its published content). `wiki init` registers BOTH: the recipe under `wikis/@slug` and the canonical home bag under `bags/@slug`. Content resolves from the canon bag; the recipe names the stack.
+
+## Meme URIs carry NO relation to bag URIs
+
+A meme moves between bags freely, or lives in several at once. Bag identity NEVER prefixes a meme's URI — lexical containment is not real. `bagsFileToUri` enacts this: `bags/<holding>/<meme-path>.md` → `lar:///<meme-path>`, the holding bag discarded from the URI, so `bags/@lares/…/noosphere-boot.md` and `bags/@sdm/…/noosphere-boot.md` project the SAME meme URI. This keeps meme-URI arity safe: the boot seed rules path segments 0–4, `@lares/api/lares/noosphere-boot` is already four, and `bags/`/`wikis/` name IDENTITY (the bag, the stack), never the content inside — so no `bags/` prefix ever rides a meme URI.
+
+## The edit/publish shore
+
+The two disk planes are the two STATES of a meme:
+
+- **`wikis/@{slug}`** — the LIVE wiki. The operator edits here; a live edit projects to the `/wikis/@{slug}/…` disk tree (`wikisFileToUri`). The `mirror-root: wikis/@{slug}` `wiki init` stamps is this projection.
+- **`bags/@{slug}`** — the CANONICAL bag. Published content, projecting to the `/bags/@{slug}/…` tree (`bagsFileToUri`).
+- **The MOVE is the shore.** The operator promotes a tiddler from the live wiki to the canonical bag of the same name; the projector re-projects it `/wikis/ → /bags/` (tiddler-store canon-promotion, `wiki-layer-ontology#shore-law`). Which state a meme is in reads from its URI alone.
+
+The per-wiki live layers ride above the fold, each rooted at the wiki's identity — `wikis/@{slug}/{temp,draft,working,personal}` (minted by `wikiSlotUri(slug, kind)`); the `bags/@{slug}` canon rides below as the read-only, promotion-target library member. The `@working`/`@draft`/`@personal` binding is per `(PersonaGroup × recipe-fingerprint)` — the slot URI carries the address, the resolver hands over the per-fingerprint doc.
 
 ## The two-layer model (@lares · @lararium)
 
-Approved 2026-07-10. `@lares`/`@lararium` carry TWO layers, never one:
-- **Frozen doctrine floor** — the genesis blob (the boot seed, noosphere-boot, the canon
-  that must survive a wipe). Built as before, rides the **@daemon wiki-worker's
-  `libraryBags`** (the immune core, Cabal-controlled, feeds @oracle), addressed by
-  **`cid/<hash>`** (reproducible from the hash, an edit can never reach it).
-- **Live layer** — **`bags/@lares`**, the operator's editable working bag, composed into a
-  **`wikis/@lares`** live wiki ON TOP of the frozen floor. `wikis/@lares` = `bags/@lares` ⊕
-  frozen-doctrine ⊕ `@oracle`.
+`@lares`/`@lararium` carry two layers that DO NOT compose into one wiki — the CID floor and the live edit surface are decoupled:
 
-This makes the split ADDITIVE where it touches the Cabal path: the frozen floor stays put;
-the live layer mints fresh above it. No re-point of the genesis-rendering path is forced.
+- **Frozen doctrine floor — @daemon only.** The genesis blob (the boot seed, `noosphere-boot`, the canon that survives a wipe) rides the **@daemon wiki-worker's `libraryBags`**, addressed by **`cid/<hash>`** — reproducible from the hash, unreachable by an edit. Only @daemon holds the CID `@lares`/`@lararium` content. @daemon runs on these frozen CIDs and its behaviour changes only when new CIDs launch to the mesh.
+- **Live edit surface — `wikis/@lares`, `wikis/@lararium`.** Operator edit surfaces over `bags/@lares` / `bags/@lararium` (plus their own draft/working layers). They do NOT compose the CID floor.
 
-## The three registries the @catalog will hold
+**The decoupling is the safety.** The boot floor is CID-frozen in @daemon and the live wikis never mount it, so editing `wikis/@lares` cannot break the boot. Promotion to the mesh renders the live edits to fresh CIDs and launches them to @daemon; only then does @daemon behaviour change. Edit freely, promote deliberately, immune core sealed until mint.
 
-- **bags** — `wikis/@{slug}`… no. `bags/@{slug}` → automerge url. Composable recipe pieces, each one doc. Shared per the user's wish.
+**The engine is universal; the corpus is content.** The memetic-wikitext plugin (parser, grammar, all-memes modules) rides **`@oracle`** — the genesis `pluginsCid`/`engineCid` CID blobs, referenced by the `@oracle` system doc (`${ORACLE_DOC_URI}/genesis-cid-plugins`), pulled by CID by every island (`pluginCidsFromIslandBlobs`). `expandRecipe` always appends `@oracle`, so the engine renders in every wiki, including a primary mount with no libraryBags. `@lararium` is the corpus CONTENT — a per-recipe library ride, not the engine.
+
+## The isomorphic wiki core
+
+One recipe expansion serves every context. `expandRecipe(recipe)` is the single slug-aware source of a wiki's slot cap-stack; the VM-free host derives a thin facet projection (`recipeHostFacets`: `wikiKey` = `wikis/@slug` identity · `wikiBagId` = `bags/@slug` canon · draft key · registration bags) from the same minters, so host and island name identical bags. A wiki recipe is an instance of the nameless-entity `#has`-cap-stack model — nameless (addressed by its `wikis/@slug` identity), `#has` a stack of bag-caps — conforming to the palace-entity pattern behaviorally (both expand to a cap-stack), never by a shared TS interface.
+
+## What the @catalog tracks
+
+Two registries, cleanly separated:
+
+- **bags** — `bags/@{slug}` → automerge url. Composable recipe pieces, each one doc, shared per the user's wish.
 - **wikis** — `wikis/@{slug}` → recipe (the `#has` bag-stack). Per-wiki layers route from here.
-- (**@oracle** stays the DreamNet read-face for the Cabal-rendered CIDs of `bags/@lares` + `bags/@lararium`.)
 
-## Live bugs this split resolves (found while scouting)
-
-- **`WIKI_PREFIX` desync — `wiki list` is BLIND to user wikis.** `worker-data-verbs.ts:41` holds a file-local `WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/"`, which `lar-uris.ts:153` and `active-wiki.ts:70` BOTH call retired ("pre-plane-split"). `wiki init` writes `wikiBagUri(slug)` (`@{slug}`) + `recipeUri("@catalog", slug)`; `list-wikis` reads the retired prefix. They never meet — a user wiki cannot appear in `lares wiki list`. Independent of the split; fixable in one const today, but the split SUPERSEDES the const, so fold it into Phase 2.
-- **Draft shape split.** 3 sites mint `@{slug}/drafts/<url-encoded-did>` (per-wiki, correct); `genesis-doc.ts` still uses `wikiDraftBagUri("lares")` → `@lares/draft` (singular, retired). Unify on the per-wiki-per-DID form under `wikis/@{slug}/drafts/<did>`.
-
-## Migration phases (each awaits operator greenlight)
-
-**Phase 1 — the minters, single-sourced.** In `lar-uris.ts` / `wiki-recipe.ts`: `bagUri(slug) = lar:///ha.ka.ba/bags/@{slug}` · `wikiUri(slug) = lar:///ha.ka.ba/wikis/@{slug}`. Re-point the 11 `stableLarUri("@name")` consts and `wikiBagUri`. Keep a `legacyBagUri` reader that recognizes the old `@{slug}` form so a pre-split store still resolves during transition. Choke point: ~11 + 1 sites.
-
-**Phase 2 — the registries + the WIKI_PREFIX bug.** `@catalog` gains `bags/` and `wikis/` namespaces; delete the retired `@lararium/wikis/` const; `list-wikis` reads `wikis/@…`, `catalogNamedBags` reads `bags/@…`. `wiki list` sees user wikis again.
-
-**Phase 3 — the fold made real.** `@working`/`@draft`/per-wiki `@temp` move from GLOBAL singletons to WIKI-routed (`wikis/@{slug}/working`, …). Drafts already half-do this; finish it and unify `genesis-doc.ts`.
-
-**Phase 4 — the ownership seam.** `bags/@lares` + `bags/@lararium` become catalog-registered operator bags (needs `CREATE`-adopts-existing-doc — the missing idempotent verb) and leave the hardcoded `registerBags` list. This is where ruling 4 lands.
-
-**Phase 5 — regenesis + witness.** A fresh `lares regenesis` mints everything in the new shape; a full-mesh witness proves resolution across the split. The pre-split store stays parked until 5/5 green.
-
-## Phase 2b resolved — the caller sort (recorded 2026-07-10)
-
-Mapping every `wikiBagUri` caller reveals the quine fuses TWO meanings the split must
-separate. The sort, drawn from the call sites:
-
-**→ `bagUri(slug)` (the CANON BAG, below the fold, shareable):**
-`vessel-island-pool-core.selfCanonBag` · `vessel-steps.mirrorBags` · `recipe-watch`
-stack layer · `epoch-handlers.wikiKey` · `island-recipe.writeLayer` fallback ·
-`sovereign-kernel` slot-match · the `genesis-doc` bag list (LARES/LARARIUM canon).
-
-**→ `wikiUri(slug)` (the WIKI IDENTITY, above the fold, per-wiki):**
-`wiki-mint.wikiKey` (the registered pointer) · `worker-data-verbs.list-wikis` identity ·
-`active-wiki.wikiKey`.
-
-**→ rooted at `wikiUri(slug)` (per-wiki layers, above the fold):**
-`wikiDraftBagUri` and the 12 `/drafts/${did}` sites · `@working`/`@draft`/`@temp` move
-from global singletons to `wikis/@{slug}/…`.
-
-**Fork resolutions (conservative, quine-preserving):**
-1. The canon bag KEEPS the slug: `wikis/@lares` composes `bags/@lares` (its canon) +
-   library bags + the `@oracle` floor. "Canon IS the @{slug} bag" holds — relocated
-   under `bags/`, never renamed.
-2. `wiki init` gains a second write: it registers the recipe under `wikis/@{slug}` AND
-   the canon bag under `bags/@{slug}`. `active-wiki` resolves content from `bags/@{slug}`.
-
-**The gate (why this does not big-bang blind):** `@lares`/`@lararium` bake into
-`genesis-doc.ts` as CID-rendered bags feeding `@oracle` — the DreamNet layer the operator
-fences for Cabal control. Re-pointing them changes the genesis blob shape and co-times with
-a store-wiping regenesis on that rendering path. The re-point executes as ONE change against
-this recorded sort, validated by regenesis + a full-mesh witness (Phase 5), never as a
-silent drift. Blast radius, not confidence, sets this gate.
-
-## What does NOT change
-
-Meme URIs (all 4,517 refs / 3,772 titles). The `bagsFileToUri` disk law. The `ha.ka.ba` root arity. The noosphere-boot address. `@oracle` as the Cabal read-face.
+`@oracle` stays the DreamNet read-face for the Cabal-rendered CIDs of `bags/@lares` + `bags/@lararium`. `@lares`/`@lararium` are ordinary catalog-registered operator bags — the local operator owns them until a Cabal ownership layer stands.
 
 <<~ &#x0003; >>
 

@@ -34,7 +34,8 @@ export interface VesselDaemonVm {
   resolveBinding: BindingResolver;
 }
 
-/** The active-wiki slot identity the recipe resolves (from planActiveWikiSlot). */
+/** The active-wiki slot identity the recipe resolves (projected from the wiki's
+ *  slug via `recipeHostFacets` — the isomorphic core, one minter set host + island). */
 export interface VesselWikiSlot {
   activeWikiId:     string;
   wikiSlug:         string;

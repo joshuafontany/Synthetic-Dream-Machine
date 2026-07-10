@@ -5,13 +5,15 @@
  * makeWikiPrimaryBehavior: disk projection (from manifest.diskMirrors) +
  * inline wiki:place-verb dispatch (sync-wiki, residency ACTION verbs).
  *
- * Recipe expansion (top wins; assembled by buildIslandRecipe):
- *   lar:///ha.ka.ba/@temp        (volatile per-island)
- *   lar:///ha.ka.ba/@draft       (CRDT, drafts)
- *   lar:///ha.ka.ba/@<wikiSlug>  (CRDT, operator's edits land here by default)
- *   canon bags                   (CRDT, optional content libraries)
- *   lar:///ha.ka.ba/@lares       (CRDT, personality)
- *   lar:///ha.ka.ba/@lararium    (CRDT, system / engine core)
+ * Recipe expansion (top wins; assembled by buildIslandRecipe) — per-wiki live
+ * layers above, canon + libraries + floor below:
+ *   wikis/@{slug}/temp     (volatile per-island)
+ *   wikis/@{slug}/draft    (CRDT, drafts)
+ *   wikis/@{slug}/personal (CRDT, cross-device view state)
+ *   wikis/@{slug}/working  (CRDT, operator's saved edits route here)
+ *   bags/@{slug}           (CRDT, the wiki's canon; read-only, promotion target)
+ *   libraryBags            (CRDT, optional content libraries: @lararium + @lares)
+ *   @oracle                (CRDT, engine core + plugins — the universal floor)
  *
  * Write routing happens via the in-wiki bag-paths cascade.
  *

@@ -28,8 +28,8 @@ function printUsage(): void {
   console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes]");
   console.log("  default  = preview (scan + two-leg diff, no submission);");
   console.log("  --apply  sends NEW+CHANGED carriers through the island's INGEST gate;");
-  console.log("  --in-wiki runs the INGEST in the active wiki island (the path for @working");
-  console.log("           ingest-back — a wikis/ source derives its URIs off the @working plane).");
+  console.log("  --in-wiki runs the INGEST in the active wiki island (the path for the working");
+  console.log("           write-layer ingest-back — a wikis/ source derives its URIs off that layer).");
 }
 
 export async function cmdIngest(args: ParsedArgs): Promise<number> {

@@ -103,7 +103,7 @@ An ACTION arrives as a `Verb` whose `verb` field belongs to `ACTION_VERBS` (the 
 
 ```
 verb           = "ADD"
-args           = '{"title":"MyTiddler","from-bag":"lar:///ha.ka.ba/@personal","to-bag":"lar:///ha.ka.ba/@elyncia","change-id":"c-stable-1"}'
+args           = '{"title":"MyTiddler","from-bag":"lar:///ha.ka.ba/wikis/@my-wiki/personal","to-bag":"lar:///ha.ka.ba/bags/@elyncia","change-id":"c-stable-1"}'
 request-id     = <requestId>
 requested-by   = <PersonaGroup-id>
 listenable     = "OnActivated"     # optional Verse event source
@@ -202,23 +202,23 @@ RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-han
 
 ## Yang / Yin / Chao symmetry preserved
 
-The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[personal-slot|lar:///ha.ka.ba/@lararium/api/personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
+The recipe carries a Tai Chi symmetry around the wiki's canon (`bags/@{slug}`) (see also [[personal-slot|lar:///ha.ka.ba/@lararium/api/personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
 
 ```
-              @temp          ┐
-              @draft         │  YIN / Podge — coordinates ABOVE @<wiki>
-              @personal      │  carry operator-private scope; keyed by
-                             ┘  (PersonaGroup × recipe-fingerprint)
-        ┌───  @<wiki-named-bag>  ── CHAO / spin / Taiji ─────────────────────┐
-        │     the live coordinate where shared activity accumulates —       │
-        │     multiplayer, multi-session, the spinning surface              │
+              wikis/@{slug}/temp     ┐
+              wikis/@{slug}/draft    │  YIN / Podge — coordinates ABOVE the canon
+              wikis/@{slug}/personal │  carry operator-private scope; keyed by
+              wikis/@{slug}/working  ┘  (PersonaGroup × recipe-fingerprint)
+        ┌───  bags/@{slug}  ── CHAO / spin / Taiji ──────────────────────────┐
+        │     the wiki's canon — the live coordinate where shared activity   │
+        │     accumulates: multiplayer, multi-session, the spinning surface  │
         └───────────────────────────────────────────────────────────────────┘
-              canonBags[]    ┐
-              @lares         │  YANG / Hodge — coordinates BELOW @<wiki>
+              libraryBags[]  ┐
+              @lares         │  YANG / Hodge — coordinates BELOW the canon
               @lararium      ┘  carry structured canon, mesh-shared, read-stable
 ```
 
-A tiddler MAY hold residency in multiple Yin coordinates simultaneously (personal note that also drafted into @draft), or multiple Yang coordinates (lore cross-referenced into two libraries), or both (live edit in @<wiki> shadowing a canonical version in a canon library). The recipe walks the stack in priority order.
+A tiddler MAY hold residency in multiple Yin coordinates simultaneously (personal note that also drafted into `wikis/@{slug}/draft`), or multiple Yang coordinates (lore cross-referenced into two libraries), or both (live edit in `wikis/@{slug}/working` shadowing a canonical version in `bags/@{slug}` or a canon library). The recipe walks the stack in priority order.
 
 <<~/ahu >>
 

@@ -22,7 +22,7 @@ import {
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, BagResidencyManager,
+  BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
@@ -31,7 +31,7 @@ import {
 }                                            from "@lararium/mesh";
 import {
   MemoryTiddlerStore,
-  planActiveWikiSlot, selectActiveWikiSlug,
+  selectActiveWikiSlug,
   loadCatalogCorpora, seedVesselDefaults,
   makeResidencyStatsReactor,
   PROJECTION_FRAME,
@@ -365,11 +365,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     wikiSlot: (_assembly: VesselCoreAssembly): VesselWikiSlot => {
       const sel = selectActiveWikiSlug(wikiId, undefined);
       slotActiveWikiId = sel.slug;
-      const plan = planActiveWikiSlot({ hostId, wikiSlug: sel.slug, identityDid: operatorDid });
+      const facets = recipeHostFacets(slugFromUri(sel.slug), operatorDid);
       return {
-        activeWikiId: sel.slug, wikiSlug: slugFromUri(sel.slug),
-        wikiKey: plan.wikiKey, wikiBagId: plan.wikiBagId,
-        draftOracleTitle: plan.draftOracleTitle, draftBagId: plan.draftBagId,
+        activeWikiId: sel.slug, wikiSlug: facets.wikiSlug,
+        wikiKey: facets.wikiKey, wikiBagId: facets.wikiBagId,
+        draftOracleTitle: facets.draftOracleTitle, draftBagId: facets.draftBagId,
       };
     },
 

@@ -91,13 +91,16 @@ session-form  = "//" authority "/" path    ; speaker named
 authority     = alias ":" grant "@" host    ; host per RFC 3986
 
 path          = stable-path / unstable-path / adjacent-path
-stable-path   = "ha.ka.ba" [ "/" bag-seg ] *( "/" segment )
-unstable-path = triple [ "/" bag-seg ] *( "/" segment )
-adjacent-path = segment                    ; no triple root, no bag-seg
+stable-path   = "ha.ka.ba" [ "/" tag-seg ] *( "/" segment )
+unstable-path = triple [ "/" tag-seg ] *( "/" segment )
+adjacent-path = segment                    ; no triple root, no tag-seg
 
 triple        = word "." word "." word     ; Ha heading . Ka angle . Ba dynamic
-bag-seg       = "@" name                    ; child[1] ONLY — one CRDT bag
-segment       = 1*( unreserved / pct-encoded )   ; child[2]+ : MUST NOT carry "@"
+tag-seg       = ns-seg / surface-seg       ; two registers of "@" — never conflate
+ns-seg        = "@" name                    ; child[1]: a meme minting namespace (NAME plane)
+surface-seg   = kind-plane "/" "@" name    ; a CRDT surface — bags/@slug or wikis/@slug
+kind-plane    = "bags" / "wikis"           ; child[1]: the KIND, heaviest-weight slot
+segment       = 1*( unreserved / pct-encoded )   ; MUST NOT carry a leading "@"
 word          = 1*( %x61-7A )              ; one slot: lowercase only
 name          = 1*( unreserved )
 alias         = 1*( unreserved )
@@ -142,27 +145,36 @@ The `lar:` scheme serves as the lararium **sync-filter predicate**: only `lar:`-
 
 ## Bag Surface — `@` Designates a CRDT Surface
 
-Within lar paths (`lar:///ha.ka.ba/...` OR `lar:///w1.w2.w3/...` style), exactly **one** path segment MAY carry an `@`-tag prefix: **`child[1]` only**. An `@`-tagged segment designates **a bag — a CRDT surface (today an Automerge doc)**. Every bag has exactly one canonical address.
+The `@`-tag reads in **two registers**, and they MUST NOT be conflated:
+
+- **A meme namespace** — `@<name>` at `child[1]` of a meme address (`lar:///ha.ka.ba/@lares/api/pono/meme`) names the **minting namespace** (the NAME plane, §five-planes), never a residency claim. The same meme lawfully lives in many bags; its URI never names the bag that holds it.
+- **A CRDT surface** — a bag or a wiki is NAMED by a **KIND plane** at `child[1]` (`bags` or `wikis`) with the `@`-tag at `child[2]`. This designates the resolvable surface (today an Automerge doc):
+
+- **`bags/@{slug}`** — a bag: a mutable content surface (a composable recipe piece).
+- **`wikis/@{slug}`** — a wiki: a `#has` bag-stack IDENTITY, distinct from its CANON (`bags/@{slug}`). Its per-wiki live layers ride below it as `wikis/@{slug}/{temp,draft,working,personal}`.
+
+A meme's namespace `@` and a surface's `bags/@`·`wikis/@` may share a token (`@lares` names a namespace in a meme URI AND a bag as `bags/@lares`) — the register is set by whether a KIND plane precedes it, never by the token alone.
 
 ```
-lar:///ha.ka.ba/@lares                     ← child[1]=@lares       : the personality bag
-lar:///ha.ka.ba/@lararium                  ← child[1]=@lararium    : the system bag
-lar:///ha.ka.ba/@daemon                     ← child[1]=@daemon       : the admin wiki bag
-lar:///ha.ka.ba/@synthetic-dream-machine   ← child[1]=@<wiki-slug> : a wiki bag
-lar:///ha.ka.ba/@elyncia                   ← child[1]=@<corpus>    : a canon content bag
-lar:///ha.ka.ba/@personal                  ← child[1]=@personal    : the personal slot
-lar:///ha.ka.ba/@draft                     ← child[1]=@draft       : the draft slot
-lar:///ha.ka.ba/@temp                      ← child[1]=@temp        : the volatile slot (no CRDT)
+lar:///ha.ka.ba/bags/@lares                     ← the personality bag
+lar:///ha.ka.ba/bags/@lararium                  ← the system corpus bag
+lar:///ha.ka.ba/bags/@daemon                     ← the admin daemon bag
+lar:///ha.ka.ba/wikis/@synthetic-dream-machine   ← a wiki IDENTITY (its #has-stack)
+lar:///ha.ka.ba/bags/@synthetic-dream-machine    ← that wiki's CANON content bag
+lar:///ha.ka.ba/bags/@elyncia                   ← a canon content bag
+lar:///ha.ka.ba/wikis/@synthetic-dream-machine/personal  ← that wiki's personal slot
+lar:///ha.ka.ba/wikis/@synthetic-dream-machine/draft     ← that wiki's draft slot
+lar:///ha.ka.ba/wikis/@synthetic-dream-machine/temp      ← that wiki's volatile slot (no CRDT)
 ```
 
 Law summary:
 
 1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
-2. `child[1]` MAY carry `@<name>` — names a top-level bag. Each bag has exactly one canonical address.
-3. `child[2]` and deeper name tiddlers (or path navigation) within the bag's address space; the `@`-prefix rides `child[1]` alone.
-4. Resolution: the runtime resolves an `@`-tagged segment to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the slot identity; the resolver maps it to the live doc. Two devices binding the same slot URI to different doc URLs (different recipes, different personal docs, etc.) is the normal case — the URI is the address, the doc is the house.
+2. A **meme address** MAY carry `@<name>` at `child[1]` — the minting namespace (NAME plane), not a surface. Deeper segments name the meme within that namespace.
+3. A **CRDT surface** is named by a KIND plane at `child[1]` (`bags` or `wikis`, the heaviest-weight slot, independent of ownership) with `@<slug>` at `child[2]`: a bag (`bags/@{slug}`) or a wiki identity (`wikis/@{slug}`), each with exactly one canonical address. A wiki's per-wiki live slots extend the identity at `child[3]` (`wikis/@{slug}/{kind}`).
+4. Resolution: the runtime resolves an `@`-tagged surface to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the slot identity; the resolver maps it to the live doc. Two devices binding the same slot URI to different doc URLs (different recipes, different personal docs, etc.) is the normal case — the URI is the address, the doc is the house.
 
-Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* pointing at OTHER bags. The canonical example is `@catalog`, which tracks corpus bags via entries at `lar:///ha.ka.ba/@catalog/corpus/<slug>` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/@<slug>` bag. Catalog catalogs; it does not host.
+Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* pointing at OTHER bags. The canonical example is `bags/@catalog`, which tracks corpus bags via entries at `lar:///ha.ka.ba/bags/@catalog/corpus/<slug>` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/bags/@<slug>` bag. Catalog catalogs; it does not host.
 
 <<~/ahu >>
 

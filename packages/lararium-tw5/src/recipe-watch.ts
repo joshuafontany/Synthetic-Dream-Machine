@@ -25,14 +25,11 @@
 
 import {
   AutomergeDocStore,
-  TEMP_BAG,
-  DRAFT_BAG,
-  WORKING_BAG,
-  PERSONAL_BAG,
   LARES_BAG,
   LARARIUM_BAG,
   ORACLE_BAG,
   wikiBagUri,
+  wikiSlotUri,
   recipeUri,
   bagStackFromRec,
   type AutomergeUrl,
@@ -87,7 +84,8 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
   // (wikiBagUri(slug) = `@{slug}`) is structural too — the mint registers it
   // under that one name now, so the bag-stack names no duplicate to re-mount.
   const structural = new Set<string>([
-    TEMP_BAG, DRAFT_BAG, WORKING_BAG, PERSONAL_BAG, wikiBagUri(slug), LARES_BAG, ORACLE_BAG,
+    wikiSlotUri(slug, "temp"), wikiSlotUri(slug, "draft"), wikiSlotUri(slug, "working"),
+    wikiSlotUri(slug, "personal"), wikiBagUri(slug), LARES_BAG, ORACLE_BAG,
   ]);
 
   const origin = (): ChangeOrigin =>
@@ -151,8 +149,9 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
     }
 
     // ── oracle moves: any mounted CRDT slot whose plane oracle changed doc URL ──
+    const tempBag = wikiSlotUri(slug, "temp");
     for (const bagId of ctx.composite.layerIds) {
-      if (bagId === TEMP_BAG) continue;
+      if (bagId === tempBag) continue;
       const current = ctx.handles.get(bagId)?.url;
       if (!current) continue;
       const docUrl = await urlOfBag(bagId);
@@ -165,8 +164,8 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
 
     // The change just applied live — the reboot-pending notice (if the daemon's
     // alert verb raced ahead of this reconcile) no longer holds.
-    if (applied && ctx.composite.hasWritableBag(TEMP_BAG)) {
-      await ctx.composite.tombstoneInBag(TEMP_BAG, REBOOT_ALERT_TITLE, origin());
+    if (applied && ctx.composite.hasWritableBag(tempBag)) {
+      await ctx.composite.tombstoneInBag(tempBag, REBOOT_ALERT_TITLE, origin());
     }
   };
 
