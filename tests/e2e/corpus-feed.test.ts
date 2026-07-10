@@ -25,8 +25,8 @@ const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 const BOOT_REL  = "api/lares/noosphere-boot.mem";
 // Projected (staged) siting under the full-path-inside-bag rule:
-const BOOT_PROJ = "ha.ka.ba/@lares/api/lares/noosphere-boot.mem";
-const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
+const BOOT_PROJ = "ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+const BOOT_URI  = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
 
 /** Canonical render of carrier text through the membrane. */
 function renderOf(text: string): string {
@@ -56,7 +56,7 @@ function expectedRoots(): Set<string> {
   const roots = new Set<string>();
   for (const f of files) {
     const m = /<<~[^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/.exec(readFileSync(f, "utf8"));
-    if (m?.[1]?.startsWith("lar:///ha.ka.ba/@lares/")) roots.add(m[1]);
+    if (m?.[1]?.startsWith("lar:///ha.ka.ba/lares/")) roots.add(m[1]);
   }
   return roots;
 }

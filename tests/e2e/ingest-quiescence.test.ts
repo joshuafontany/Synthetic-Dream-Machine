@@ -20,8 +20,8 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
-const BOOT_PROJ = "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem";
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
+const BOOT_PROJ = "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 let lar: LarInstance;
@@ -111,7 +111,7 @@ describe("ingest quiescence — the composed loop holds still", () => {
 
   test("Q4 — the NFC membrane assertion refuses foreign normal forms loudly", async () => {
     if (lar.mode !== "staged") return;
-    const nfdPath = join(lar.root, "bags/@lares/ha.ka.ba/@lares/api/lares/nfd-probe.md");
+    const nfdPath = join(lar.root, "bags/@lares/ha.ka.ba/lares/api/lares/nfd-probe.md");
     const body = readFileSync(projected, "utf8")
       .replace(/noosphere-boot/g, "nfd-probe")
       .replace("# Entry", "# Entrée".normalize("NFD"));   // é as e + combining accent
@@ -121,7 +121,7 @@ describe("ingest quiescence — the composed loop holds still", () => {
     const r = await ingest([]);
     const d = r.json?.["data"] as Record<string, unknown>;
     const nonNfc = d["nonNfc"] as string[];
-    expect(nonNfc).toContain("lar:///ha.ka.ba/@lares/api/lares/nfd-probe");
+    expect(nonNfc).toContain("lar:///ha.ka.ba/lares/api/lares/nfd-probe");
     expect(d["changed"]).toBe(0);
     expect(d["new"]).toBe(0);
   }, 60_000);

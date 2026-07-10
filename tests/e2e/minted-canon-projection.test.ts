@@ -25,7 +25,7 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const NODE_MAIN = join(REPO_ROOT, "packages/lararium-node/dist/src/main.js");
 const NODE_CWD  = join(REPO_ROOT, "packages/lararium-node");
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
 const SLUG      = "my-world";
 const MY_WORLD  = `lar:///ha.ka.ba/bags/@${SLUG}`;
 

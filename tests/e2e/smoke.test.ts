@@ -20,7 +20,7 @@ import { readFileSync } from "node:fs";
 import { targetInstance, bootDocUrl, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 let lar: LarInstance;
@@ -59,8 +59,8 @@ describe("smoke — residency canon through the real CLI", () => {
     // (parent + one record per ahu block) stays.
     const ahuCount = (readFileSync(BOOT_MEME, "utf8").match(/<<~ ahu #/g) ?? []).length;
     expect(data.count).toBe(1 + ahuCount);
-    expect(data.titles).toContain("lar:///ha.ka.ba/@lares/api/lares/noosphere-boot");
-    expect(data.titles).toContain("lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#exchange-protocol");
+    expect(data.titles).toContain("lar:///ha.ka.ba/lares/api/lares/noosphere-boot");
+    expect(data.titles).toContain("lar:///ha.ka.ba/lares/api/lares/noosphere-boot#exchange-protocol");
   });
 
   test("LOAD refuses a carrier-less gesture loudly (islands never fetch)", async () => {

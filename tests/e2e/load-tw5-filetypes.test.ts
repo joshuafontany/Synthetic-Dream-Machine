@@ -35,7 +35,7 @@ beforeAll(async () => {
   src = mkdtempSync(join(tmpdir(), "lares-load-types-"));
   // memetic carrier — SOH heading, decomposes at the membrane
   writeFileSync(join(src, "memetic.md"),
-    "<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/test/memetic-witness >>\n# Memetic Witness\n\nbody under the way.\n");
+    "<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/test/memetic-witness >>\n# Memetic Witness\n\nbody under the way.\n");
   // .tid — carries its own title field (must win)
   writeFileSync(join(src, "note.tid"),
     "title: TestTidTitle\ntype: text/vnd.tiddlywiki\n\nA .tid tiddler body.\n");
@@ -81,7 +81,7 @@ describe("LOAD — memetic memes AND all legal TW5 filetypes (via TW5's registry
 
   test("T5 — headless plain files land as text/plain, titled by the loci law", () => {
     if (lar.mode !== "staged") return;
-    expect(titles).toContain("lar:///ha.ka.ba/@lares/plain");
-    expect(titles).toContain("lar:///ha.ka.ba/@lares/notes");
+    expect(titles).toContain("lar:///ha.ka.ba/lares/plain");
+    expect(titles).toContain("lar:///ha.ka.ba/lares/notes");
   });
 });

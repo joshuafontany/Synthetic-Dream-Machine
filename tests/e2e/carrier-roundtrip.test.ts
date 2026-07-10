@@ -24,9 +24,9 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.mem");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
-const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
+const BOOT_URI  = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
 
 /** Canonical render of carrier text through the membrane (the V4 law's left side). */
 function renderOf(text: string, uri: string): string {
