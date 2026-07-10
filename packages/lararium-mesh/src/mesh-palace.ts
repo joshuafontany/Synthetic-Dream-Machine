@@ -34,7 +34,7 @@ import type { DocHandle } from "@automerge/automerge-repo";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord } from "./base-doc.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
-import { stableLarUri, type MeshScale } from "./lar-uris.js";
+import { stableLarUri, bagUri, type MeshScale } from "./lar-uris.js";
 import {
   type OracleSnapshot,
   type OraclePointer,
@@ -88,7 +88,7 @@ export type WireCap = keyof typeof WIRE_CAPS;
 // ── The bag + URI builders ─────────────────────────────────────────────────
 
 /** The mesh-palace bag — `lar:///ha.ka.ba/@meshpalace`. */
-export const MESH_PALACE_BAG = stableLarUri("@meshpalace");
+export const MESH_PALACE_BAG = bagUri("meshpalace");
 
 /** A bearing → a filesystem-safe slug for a dial/route tiddler title. */
 export function bearingSlug(bearing: string): string {

@@ -16,11 +16,11 @@
  * lease; targeted revocation does NOT ride this — convergent-mesh#two-revocation-modes).
  */
 
-import { stableLarUri } from "./lar-uris.js";
+import { DAEMON_BAG_ID } from "./lar-uris.js";
 
 /** Prefix for a resource's per-writer lease-epoch slots — scan tiddlers under this to read all slots. */
 export function leaseEpochPrefix(resourceId: string): string {
-  return stableLarUri(`@daemon/lease-epoch/${encodeURIComponent(resourceId)}/`);
+  return `${DAEMON_BAG_ID}/lease-epoch/${encodeURIComponent(resourceId)}/`;
 }
 
 /** The slot tiddler URI a single writer owns for a resource's lease epoch (LWW-safe — one owner). */

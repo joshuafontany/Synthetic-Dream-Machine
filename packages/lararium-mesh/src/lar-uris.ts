@@ -70,94 +70,21 @@ export function stableTagUri(name: string): string {
   return `${TAG_PREFIX}${name.replace(/^\/+/, "")}`;
 }
 
-// ── Content plane ─────────────────────────────────────────────────────────
-
-// @oracle = the runtime SYSTEM ISLAND (genesis-loaded: engine BLOBs + bag→doc
-// oracle + genesis-cid); the universal floor of every wiki-recipe. Split from
-// the @lararium memetic corpus (disk-projection #oracle-split).
-export const ORACLE_DOC_URI    = stableLarUri("@oracle");
-// @lararium = the engine's memetic CORPUS (authored self-doc memes; a library bag).
-export const LARARIUM_DOC_URI  = stableLarUri("@lararium");
-export const CATALOG_DOC_URI   = stableLarUri("@catalog");
-export const LARES_DOC_URI     = stableLarUri("@lares");
-// The memetic-wikitext engine plugin — a named blob CARRIED IN @oracle's blobs,
-// but its identity-title keeps the @lararium namespace (plugin.info + the TW5
-// pack pipeline key on this exact title; the doc that holds the blob is @oracle).
-export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins/lares/memetic-wikitext");
-
-// Shared tag/state law — consumed by vessel projections, not owned by any one runtime.
-export const GRAMMAR_TAG = stableTagUri("SharktoothSigil");
-export const PARSE_WARNING_TAG = stableTagUri("lararium-parse-warnings");
-export const LARARIUM_BAG_MIRROR_TAG = stableTagUri("lararium-bag-mirror");
-export const LARES_VERB_TAG = stableTagUri("lares-verb");
-export const LARES_VERB_EVENT_TAG = stableTagUri("lares-verb-event");
-export const LARES_PIN_TAG = stableTagUri("lares-pin");
-/** Keyhive capability events persisted in the daemon doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */
-export const CAP_EVENT_TAG = stableTagUri("cap-event");
-export const CAP_EVENT_PREKEY_TAG     = stableTagUri("cap-event/prekey");
-export const CAP_EVENT_CGKA_TAG       = stableTagUri("cap-event/cgka");
-export const CAP_EVENT_DELEGATION_TAG = stableTagUri("cap-event/delegation");
-export const CAP_EVENT_REVOCATION_TAG = stableTagUri("cap-event/revocation");
-export const BOOT_SPLASH_ACTIVE_URI = stableLarUri("state/boot-splash/active");
-
-// ── Social plane ──────────────────────────────────────────────────────────
-
-export const IDENTITIES_DOC_URI = stableLarUri("@identities");
-export const CIRCLES_DOC_URI    = stableLarUri("@circles");
-export const SESSIONS_DOC_URI   = stableLarUri("@sessions");
-
-// ── URI builders ──────────────────────────────────────────────────────────
-
-/**
- * Canonical URI of a corpus bag.
- *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/@elyncia"
- *
- * Every corpus is a first-class bag at child[1] under the bag-tag rule
- * (see lar:///ha.ka.ba/@lares/api/pono/lar-uri#bag-tag-rule).
- */
-export function corpusLarUri(slug: string): string {
-  return stableLarUri(`@${slug}`);
-}
-
-/**
- * Registry-entry URI inside @catalog that points at a corpus bag.
- *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/@catalog/corpus/elyncia"
- *
- * The tiddler at this title lives in the @catalog bag and carries the
- * corpus bag's AutomergeUrl as its `text` field. Registry pattern: catalog
- * catalogs; it does not host.
- */
-export function catalogCorpusEntryUri(slug: string): string {
-  return stableLarUri(`@catalog/corpus/${slug}`);
-}
-
-/** Prefix used to discover catalog corpus-registry entries. */
-export const CATALOG_CORPUS_PREFIX = stableLarUri("@catalog/corpus/");
-
-// ── Federation scale (the RESIDENCY-BAG axis) ─────────────────────────────
-// A catalog/residency entry MAY declare the federation scale of the bag it
-// registers — what controls how far the bag federates and (at boot) how long a
-// joiner waits for it. The five scales map to the five aperture bands; reach
-// (so patience) grows. Federation is governed HERE, on the bag's residency
-// entry — never by the lar: namespace (which is the naming layer above).
-export type MeshScale = "vessel" | "persona-group" | "cabal" | "nexus" | "dreamnet";
-export const MESH_SCALES: readonly MeshScale[] = ["vessel", "persona-group", "cabal", "nexus", "dreamnet"];
-
-/** Read a declared scale off a catalog entry; undefined when absent or unrecognized (the caller then defaults patience). */
-export function parseMeshScale(s: string | null | undefined): MeshScale | undefined {
-  return typeof s === "string" && (MESH_SCALES as readonly string[]).includes(s) ? (s as MeshScale) : undefined;
-}
-
-// ── Bag / Wiki identity — the two kinds the @catalog tracks ────────────────
+// ── Bag / Wiki / Cid identity — the three kind-planes ──────────────────────
 // The KIND rides the first path segment (the heaviest-weight slot in lar: law):
-// `bags/@slug` names a composable recipe piece (one doc, shared as the operator
-// wishes); `wikis/@slug` names a #has bag-stack (per-wiki layers route off it,
-// never shared). Ownership never enters the address.
+// `bags/@slug` names a composable recipe piece (mutable, the IPNS-shaped content
+// plane); `wikis/@slug` names a #has bag-stack (per-wiki layers route off it);
+// `cid/<hash>` names a content-addressed artifact (immutable, the /ipfs/ plane).
+// Ownership never enters the address.
 //
-// A meme's URI carries NO relation to a bag's URI — a meme moves between bags
-// and lives in several at once; `bagsFileToUri` already discards the holding bag
-// from the meme's URI. So the `bags/`/`wikis/` segment names IDENTITY alone; it
-// never prefixes a meme path, and the ha.ka.ba root arity holds unchanged.
+// A meme's URI carries NO relation to a bag's URI — a meme moves between bags and
+// lives in several at once; `bagsFileToUri` already discards the holding bag from
+// the meme's URI. So a kind-segment names IDENTITY alone; it never prefixes a meme
+// path, and the ha.ka.ba root arity holds unchanged.
+//
+// These sit ABOVE the Content-plane consts on purpose — those consts (ORACLE_DOC_URI
+// et al.) call `bagUri` at module-init, so the minter must precede them (a const in a
+// TDZ cannot be read by a hoisted function called before its own line).
 //
 // Design-of-record: lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split
 export const BAGS_SEGMENT  = "bags"  as const;
@@ -183,44 +110,125 @@ export function cidUri(cid: string): string {
   return stableLarUri(`${CID_SEGMENT}/${cid}`);
 }
 
-/** Mint the PRE-SPLIT identity form (`lar:///ha.ka.ba/@{slug}`). A reader tries
- *  the canonical form first, then falls back here, so a store written before the
- *  split still resolves; a fresh regenesis mints only the canonical form. */
+/** Mint the PRE-SPLIT identity form (`lar:///ha.ka.ba/@{slug}`). A reader tries the
+ *  canonical form first, then falls back here, so a store written before the split still
+ *  resolves; a fresh regenesis mints only the canonical form. */
 export function legacyIdentityUri(slug: string): string {
   return stableLarUri(`@${slug.replace(/^@/, "")}`);
 }
 
-/** Read the identity slug off a bag/wiki URI in ANY of the three forms
- *  (`bags/@x`, `wikis/@x`, legacy `@x`); return null when the URI names no bare
- *  identity (a nested path or a foreign shape carries none). */
+/** Read the identity slug off a bag/wiki URI in ANY of the three forms (`bags/@x`,
+ *  `wikis/@x`, legacy `@x`); return null when the URI names no bare identity. */
 export function identitySlug(uri: string): string | null {
   const m = /^lar:\/\/\/ha\.ka\.ba\/(?:bags\/|wikis\/)?@([^/]+)$/.exec(uri);
   return m ? m[1]! : null;
 }
 
+// ── Content plane ─────────────────────────────────────────────────────────
+
+// @oracle = the runtime SYSTEM ISLAND (genesis-loaded: engine BLOBs + bag→doc
+// oracle + genesis-cid); the universal floor of every wiki-recipe. Split from
+// the @lararium memetic corpus (disk-projection #oracle-split).
+export const ORACLE_DOC_URI    = bagUri("oracle");
+// @lararium = the engine's memetic CORPUS (authored self-doc memes; a library bag).
+export const LARARIUM_DOC_URI  = bagUri("lararium");
+export const CATALOG_DOC_URI   = bagUri("catalog");
+export const LARES_DOC_URI     = bagUri("lares");
+// The memetic-wikitext engine plugin — a named blob CARRIED IN @oracle's blobs. Its
+// title lives in the @lararium MEME NAMESPACE (not the bag doc): a meme/module address,
+// discarded-from-bag by the disk projector, keyed on by plugin.info + the TW5 pack
+// pipeline. It stays `@lararium/plugins/…` — the bags/@ move touches bag-doc identities
+// alone, never a meme namespace (BAG URIs and MEME URIs carry no relation).
+export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins/lares/memetic-wikitext");
+
+// Shared tag/state law — consumed by vessel projections, not owned by any one runtime.
+export const GRAMMAR_TAG = stableTagUri("SharktoothSigil");
+export const PARSE_WARNING_TAG = stableTagUri("lararium-parse-warnings");
+export const LARARIUM_BAG_MIRROR_TAG = stableTagUri("lararium-bag-mirror");
+export const LARES_VERB_TAG = stableTagUri("lares-verb");
+export const LARES_VERB_EVENT_TAG = stableTagUri("lares-verb-event");
+export const LARES_PIN_TAG = stableTagUri("lares-pin");
+/** Keyhive capability events persisted in the daemon doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */
+export const CAP_EVENT_TAG = stableTagUri("cap-event");
+export const CAP_EVENT_PREKEY_TAG     = stableTagUri("cap-event/prekey");
+export const CAP_EVENT_CGKA_TAG       = stableTagUri("cap-event/cgka");
+export const CAP_EVENT_DELEGATION_TAG = stableTagUri("cap-event/delegation");
+export const CAP_EVENT_REVOCATION_TAG = stableTagUri("cap-event/revocation");
+export const BOOT_SPLASH_ACTIVE_URI = stableLarUri("state/boot-splash/active");
+
+// ── Social plane ──────────────────────────────────────────────────────────
+
+export const IDENTITIES_DOC_URI = bagUri("identities");
+export const CIRCLES_DOC_URI    = bagUri("circles");
+export const SESSIONS_DOC_URI   = bagUri("sessions");
+
+// ── URI builders ──────────────────────────────────────────────────────────
+
+/**
+ * Canonical URI of a corpus bag.
+ *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/@elyncia"
+ *
+ * Every corpus is a first-class bag at child[1] under the bag-tag rule
+ * (see lar:///ha.ka.ba/@lares/api/pono/lar-uri#bag-tag-rule).
+ */
+export function corpusLarUri(slug: string): string {
+  return bagUri(slug);
+}
+
+/**
+ * Registry-entry URI inside @catalog that points at a corpus bag.
+ *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/@catalog/corpus/elyncia"
+ *
+ * The tiddler at this title lives in the @catalog bag and carries the
+ * corpus bag's AutomergeUrl as its `text` field. Registry pattern: catalog
+ * catalogs; it does not host.
+ */
+export function catalogCorpusEntryUri(slug: string): string {
+  return `${CATALOG_DOC_URI}/corpus/${slug}`;
+}
+
+/** Prefix used to discover catalog corpus-registry entries. */
+export const CATALOG_CORPUS_PREFIX = `${CATALOG_DOC_URI}/corpus/`;
+
+// ── Federation scale (the RESIDENCY-BAG axis) ─────────────────────────────
+// A catalog/residency entry MAY declare the federation scale of the bag it
+// registers — what controls how far the bag federates and (at boot) how long a
+// joiner waits for it. The five scales map to the five aperture bands; reach
+// (so patience) grows. Federation is governed HERE, on the bag's residency
+// entry — never by the lar: namespace (which is the naming layer above).
+export type MeshScale = "vessel" | "persona-group" | "cabal" | "nexus" | "dreamnet";
+export const MESH_SCALES: readonly MeshScale[] = ["vessel", "persona-group", "cabal", "nexus", "dreamnet"];
+
+/** Read a declared scale off a catalog entry; undefined when absent or unrecognized (the caller then defaults patience). */
+export function parseMeshScale(s: string | null | undefined): MeshScale | undefined {
+  return typeof s === "string" && (MESH_SCALES as readonly string[]).includes(s) ? (s as MeshScale) : undefined;
+}
+
 // The wiki canon/draft URI builders live in wiki-recipe.ts (wikiBagUri /
-// wikiDraftBagUri). Phase 2 of the split re-points them onto `bagUri`/`wikiUri`;
-// Phase 1 adds the vocabulary above without disturbing the live consts.
+// wikiDraftBagUri). The bag/wiki/cid minters they build on sit above the Content
+// plane consts (those consts call bagUri at module-init, so the minters precede them).
 
 // ── Daemon bag + Persona bag ─────────────────────────────────────────────────
 
 /** Daemon wiki bag id — the lararium's own central daemon `@daemon` bag (one-recipe model).
  *  SOVEREIGN-per-vessel: this vessel's own control-plane, never shared across vessels. */
-export const DAEMON_BAG_ID    = stableLarUri("@daemon");
+export const DAEMON_BAG_ID    = bagUri("daemon");
 
 /** Persona bag id — the operator's veiled-identity `@persona` bag (the PersonaGroup).
  *  Carries the Shadowtalk veiled True-name; the membership-sync surface that crosses the
  *  operator's vessels (vs `@daemon`, which stays sovereign-per-vessel). Founded alongside
  *  `@daemon` via the bootstrap (not in BAG_IDS — both ride the founding ceremony). The ONE
  *  daemon VM tends BOTH bags. */
-export const PERSONA_BAG_ID    = stableLarUri("@persona");
+export const PERSONA_BAG_ID    = bagUri("persona");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────
 
 /** e.g. recipeUri("@lararium", "default") → "lar:///ha.ka.ba/@lararium/recipes/default" */
 export function recipeUri(root: string, name: string): string {
-  const rootSlug = root.startsWith("@") ? root : `@${root}`;
-  return stableLarUri(`${rootSlug}/recipes/${name}`);
+  // Root-aware: a full bag URI (`bags/@x`) passes through; a bare slug or legacy `@slug`
+  // normalizes to the bag root, so every call site follows the bags/@ move untouched.
+  const base = root.startsWith("lar:") ? root : bagUri(root);
+  return `${base}/recipes/${name}`;
 }
 
 /** e.g. bagDescriptorUri("lar:///ha.ka.ba/@lararium") → "lar:///ha.ka.ba/@lararium/descriptor" */

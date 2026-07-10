@@ -71,11 +71,11 @@ describe("CompositeStore — layer management", () => {
     expect(store.hasBag(corpusId)).toBe(false);
   });
 
-  test("corpusBagId produces a top-level @<slug> bag URI", () => {
-    // Bag-tag rule: every bag has exactly one canonical address at child[1].
-    // Each corpus is a first-class bag at lar:///ha.ka.ba/@<slug>.
-    expect(corpusBagId("elyncia")).toBe("lar:///ha.ka.ba/@elyncia");
-    expect(corpusBagId("sdm")).toBe("lar:///ha.ka.ba/@sdm");
+  test("corpusBagId produces a bags/@<slug> bag URI (the split's content plane)", () => {
+    // Every corpus is a first-class bag; the KIND rides the first path segment,
+    // so a bag's canonical address is `bags/@<slug>` (bag-wiki-uri-split).
+    expect(corpusBagId("elyncia")).toBe("lar:///ha.ka.ba/bags/@elyncia");
+    expect(corpusBagId("sdm")).toBe("lar:///ha.ka.ba/bags/@sdm");
   });
 });
 
