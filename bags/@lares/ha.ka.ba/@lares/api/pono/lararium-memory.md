@@ -80,7 +80,7 @@ live exchange. It wears many client-skins and answers to none of them; it emptie
 turn boundary (`ooda-ha`); the holder reads only its own log, never a global now.
 
 **The Seat** holds what a mind *concludes* and returns to. A human persists
-**spatially** in the DreamDeckSurface (the composed home, the altar-fire canvas);
+**spatially** in the DreamDeckSurface (the composed home canvas);
 a node persists **propositionally** in Agent.MEMORY (the curated decisions, the
 `MEMORY.md` closet). Same office, two media.
 

@@ -72,14 +72,14 @@ describe("isHostfulLarUri", () => {
   });
 
   test("hostful lar://node.local/path → true", () => {
-    expect(isHostfulLarUri("lar://altar-fire.local/rooms/main")).toBe(true);
+    expect(isHostfulLarUri("lar://test-wiki.local/rooms/main")).toBe(true);
     expect(isHostfulLarUri("lar://elyncia.social/ha.ka.ba/@lares/api/mu")).toBe(true);
   });
 });
 
 describe("parseHostfulLarUri", () => {
   test("extracts host and path from a hostful lar: URI", () => {
-    const r = parseHostfulLarUri("lar://altar-fire:agent@elyncia.social/rooms/altar-fire");
+    const r = parseHostfulLarUri("lar://test-wiki:agent@elyncia.social/rooms/test-wiki");
     expect(r.authority.host).toBe("elyncia.social");
     expect(r.root).toBeDefined();
   });

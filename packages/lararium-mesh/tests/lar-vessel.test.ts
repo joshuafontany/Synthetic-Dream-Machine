@@ -42,8 +42,8 @@ function makeStore(): CompositeStore {
 describe("LarVessel — construction", () => {
   test("constructs with a CompositeStore and a vesselId", () => {
     const store = makeStore();
-    const vessel  = new LarVessel({ vesselId: "altar-fire", store });
-    expect(vessel.vesselId).toBe("altar-fire");
+    const vessel  = new LarVessel({ vesselId: "test-wiki", store });
+    expect(vessel.vesselId).toBe("test-wiki");
     expect(vessel.store).toBe(store);
   });
 
@@ -110,9 +110,9 @@ describe("LarVessel — capability presets", () => {
 
 describe("OpenIdentitySlot — DID shape", () => {
   test("DID encodes vesselId into did:web:elyncia.app/vessels/<id> namespace", () => {
-    const slot = new OpenIdentitySlot("altar-fire");
+    const slot = new OpenIdentitySlot("test-wiki");
     expect(slot.did).toContain("did:web:elyncia.app/vessels/");
-    expect(slot.did).toContain("altar-fire");
+    expect(slot.did).toContain("test-wiki");
   });
 
   test("deriveActorId returns a UUID-formatted string (stable per vesselId)", async () => {
@@ -177,11 +177,11 @@ describe("lararium-vessel contract — shared boot surface", () => {
   test("shared options carry host/wiki identity", () => {
     const options: LarariumVesselOptions = {
       hostId: "elyncia",
-      wikiId: "altar-fire",
+      wikiId: "test-wiki",
     };
 
     expect(options.hostId).toBe("elyncia");
-    expect(options.wikiId).toBe("altar-fire");
+    expect(options.wikiId).toBe("test-wiki");
   });
 
   test("shared result surface exposes vessel/repo/store/pool symmetry", () => {

@@ -7,15 +7,15 @@ describe("active-wiki-slot", () => {
   test("planActiveWikiSlot derives wiki and draft identities", () => {
     expect(planActiveWikiSlot({
       hostId: "lararium-node",
-      wikiSlug: "altar-fire",
+      wikiSlug: "test-wiki",
       identityDid: "did:key:test",
     })).toEqual({
-      wikiSlug: "altar-fire",
-      wikiKey: "lar:///ha.ka.ba/bags/@altar-fire",
-      wikiBagId: "lar:///ha.ka.ba/bags/@altar-fire",
-      draftBagId: "lar:///ha.ka.ba/bags/@altar-fire/draft",
-      draftOracleTitle: "lar:///ha.ka.ba/bags/@altar-fire/drafts/did%3Akey%3Atest",
-      vesselId: "lararium-node:altar-fire",
+      wikiSlug: "test-wiki",
+      wikiKey: "lar:///ha.ka.ba/bags/@test-wiki",
+      wikiBagId: "lar:///ha.ka.ba/bags/@test-wiki",
+      draftBagId: "lar:///ha.ka.ba/bags/@test-wiki/draft",
+      draftOracleTitle: "lar:///ha.ka.ba/bags/@test-wiki/drafts/did%3Akey%3Atest",
+      vesselId: "lararium-node:test-wiki",
     });
   });
 
@@ -24,7 +24,7 @@ describe("active-wiki-slot", () => {
     const slot = new ActiveWikiLayerSlot(composite);
     const plan = planActiveWikiSlot({
       hostId: "lararium-node",
-      wikiSlug: "altar-fire",
+      wikiSlug: "test-wiki",
       identityDid: "did:key:test",
     });
 
@@ -44,7 +44,7 @@ describe("active-wiki-slot", () => {
     const slot = new ActiveWikiLayerSlot(composite);
     const first = planActiveWikiSlot({
       hostId: "lararium-node",
-      wikiSlug: "altar-fire",
+      wikiSlug: "test-wiki",
       identityDid: "did:key:first",
     });
     const second = planActiveWikiSlot({

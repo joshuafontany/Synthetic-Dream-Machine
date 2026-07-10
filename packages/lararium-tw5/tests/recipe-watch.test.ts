@@ -18,7 +18,7 @@ import { startRecipeWatch } from "../src/recipe-watch.js";
 import { REBOOT_ALERT_TITLE } from "../src/wiki-behavior.js";
 import type { IslandContext } from "../src/island-context.js";
 
-const SLUG     = "altar-fire";
+const SLUG     = "test-wiki";
 const WIKI_BAG = wikiBagUri(SLUG);
 const LIB_BAG  = "lar:///ha.ka.ba/@corpus/elyncia";
 const RECIPE   = recipeUri("@catalog", SLUG);

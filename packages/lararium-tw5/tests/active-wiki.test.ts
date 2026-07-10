@@ -14,7 +14,7 @@ describe("active-wiki", () => {
   });
 
   test("readActiveWikiSlug trims and returns the marker slug", () => {
-    expect(readActiveWikiSlug({ tiddler: { title: ACTIVE_WIKI_URI, text: " altar-fire " } })).toBe("altar-fire");
+    expect(readActiveWikiSlug({ tiddler: { title: ACTIVE_WIKI_URI, text: " test-wiki " } })).toBe("test-wiki");
   });
 
   test("selectActiveWikiSlug falls back to the boot arg when the marker is absent", () => {
@@ -34,11 +34,11 @@ describe("active-wiki", () => {
   });
 
   test("buildActiveWikiRecord emits the canonical marker shape", () => {
-    const record = buildActiveWikiRecord("altar-fire", "lares-cli:wiki-open", "2026-05-21T00:00:00.000Z");
+    const record = buildActiveWikiRecord("test-wiki", "lares-cli:wiki-open", "2026-05-21T00:00:00.000Z");
     expect(record).toEqual({
       tiddler: {
         title: ACTIVE_WIKI_URI,
-        text: "altar-fire",
+        text: "test-wiki",
         "updated-at": "2026-05-21T00:00:00.000Z",
       },
       meta: { authority: "lares-cli:wiki-open" },
