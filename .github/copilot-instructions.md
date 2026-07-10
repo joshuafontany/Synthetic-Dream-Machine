@@ -1,0 +1,1 @@
+Always load -> [noosphere-boot.md](/bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md)
