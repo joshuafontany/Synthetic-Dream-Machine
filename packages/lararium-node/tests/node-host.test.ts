@@ -57,7 +57,7 @@ describe("resolveLarUri — canonical URI topology", () => {
   test("resolves laresRelPath for grammar carrier", () => {
     const r = resolveLarUri("lar:///ha.ka.ba/@lares/api/mu");
     expect(r.laresRelPath).toBeTruthy();
-    expect(r.laresRelPath).toMatch(/\.md$/);
+    expect(r.laresRelPath).toMatch(/\.mem$/);
   });
 });
 

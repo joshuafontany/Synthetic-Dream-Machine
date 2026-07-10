@@ -169,7 +169,7 @@ function applyBodySha256Patch(content: string, sha256: string): string {
 function runScan(): void {
   // Collect all URIs that already have a heleuma API meme
   const existingUris = new Set<string>();
-  for (const mdPath of walkExt(tw5MemesRoot, ".md")) {
+  for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
     const content = readFileSync(mdPath, "utf8");
     const tomlM   = TOML_RE.exec(content);
     if (!tomlM) continue;
@@ -272,7 +272,7 @@ function runScanPromote(): void {
   const existingNames = new Set<string>();
   const VOCAB_SLOT_RE = /<<~ ahu #schema >>([\s\S]*?)<<~\/ahu >>/g;
 
-  for (const mdPath of walkExt(tw5MemesRoot, ".md")) {
+  for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
     const content = readFileSync(mdPath, "utf8");
     const tomlM   = TOML_RE.exec(content);
     if (!tomlM) continue;
@@ -430,7 +430,7 @@ function extractModuleBody(content: string): string | null {
 function runSyncModules(): { drift: number; missing: number; patched: number } {
   let drift = 0, missing = 0, patched = 0;
 
-  for (const mdPath of walkExt(tw5MemesRoot, ".md")) {
+  for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
     const content = readFileSync(mdPath, "utf8");
     const tomlM   = TOML_RE.exec(content);
     if (!tomlM) continue;
@@ -575,7 +575,7 @@ function decoratorMemeExists(decoratorFile: DecoratorFile): string | null {
   // Returns the meme file path if a matching meme exists, null otherwise.
   // Matches by source-file field in meme TOML.
   let memeFiles: string[] = [];
-  try { memeFiles = walkExt(decoratorFile.memeDir, ".md"); } catch { return null; }
+  try { memeFiles = walkExt(decoratorFile.memeDir, ".mem"); } catch { return null; }
 
   for (const mdPath of memeFiles) {
     const content = readFileSync(mdPath, "utf8");
@@ -741,7 +741,7 @@ let totalDrift   = 0;
 let totalMissing = 0;
 let totalPatched = 0;
 
-for (const mdPath of walkExt(tw5MemesRoot, ".md")) {
+for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
   const content = readFileSync(mdPath, "utf8");
 
   const tomlM = TOML_RE.exec(content);

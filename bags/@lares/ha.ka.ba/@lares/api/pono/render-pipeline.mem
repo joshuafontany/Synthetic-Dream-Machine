@@ -1,0 +1,260 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/render-pipeline >>
+```toml iam
+cacheable     = true
+file-path     = "bags/@lares/api/pono/render-pipeline.mem"
+l-space       = "stable"
+mana          = 17
+manao         = 17
+manaoio       = 16
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
+source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
+tags          = ["api/pono/meme", "api/pono/memetic-wikitext"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/api/pono/render-pipeline"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Render Pipeline Law
+
+Render pipeline law names how a memetic object moves from disk surface to rendered output and back.
+
+Two distinct engines carry render work:
+
+1. **TW5 render engine** — runs inside the TW5 VM; the `lar-render-mode` variable drives mode dispatch; the template cascade selects the rendering tiddler per sigil
+2. **Isomorphic parse engine** — `@lararium/tw5/meme-ast`; emits typed `MemeAstNode[]` and `PranalaEdge[]` for the island adaptor, deserializer, and TW5 module consumers; compiles to TW5 JS via Vite; web3-native
+
+Both engines consume the same `text/x-memetic-wikitext` surface. The isomorphic parse engine lives in `@lararium/tw5` as a TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
+
+<<~/ahu >>
+
+<<~ ahu #render-axes >>
+
+## Render Axes — Stage, Surface, and Mode held apart
+
+Render work runs along orthogonal axes; naming them apart lets each vary without dragging the others. (The two engines above name a separate, independent axis — *which engine consumes* the surface — neither a surface nor a stage.)
+
+### Stage axis — the pipeline (parse → widget → DOM)
+
+One surface passes through three trees:
+
+1. **parse tree** — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
+2. **widget tree** — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here (the middle layer named at `memetic-wikitext#gaps-tensions-conflicts`, Gap 8).
+3. **DOM tree** — the widget tree renders into a document. In this stack that document reads as a *fakeDom*, not the browser's live one.
+
+### Surface axis — the cameras (which document the stage renders into)
+
+Two cameras read the **one shared** wiki world graph and render into **separate** documents (`camera-mount` law C-2):
+
+- **Story River camera** — backed by `window.document`; the **page** surface; child-slot widgets transclude content into the DOM (the `transclusion` family lands here).
+- **TLDraw canvas camera** — backed by an `OffscreenCanvas` document; the **flow** surface; pranala edges render as wired shapes (the `dataflow` / `reaction` / `spatial` families land here).
+
+The stage pipeline runs once per camera over the shared graph; only the DOM-tree target (which fakeDom) differs. **World graph shared; render surfaces separate.**
+
+### Mode axis — render posture (`lar-render-mode`)
+
+Orthogonal to surface: `""` (live), `carrier` (disk export), `projection` (frozen snapshot). A mode picks the output *form*, never the camera. Detailed at `#three-render-modes`.
+
+**Composition:** a *stage* renders the shared graph onto a *surface* (camera) under a *mode*, driven by an *engine*. Four axes, freely combined — none collapses into another.
+
+<<~/ahu >>
+
+<<~ ahu #causal-island >>
+
+## Causal Island Boundary
+
+```
+disk (.md / .tid)
+  ↓ deserializer
+wiki (TW5 live tiddlers — kahea-live refs + authoritative child tiddlers)
+  ↓ carrier render   (lar-render-mode = "carrier")
+disk (definition form, round-trip fidelity)
+  ↓ projection render (lar-render-mode = "projection")
+snapshot (aka-frozen sigil refs, human-readable carrier wikitext)
+```
+
+The boundary separates:
+- **disk → wiki** (deserializer expands flat carrier text into tiddler graph)
+- **wiki → disk** (carrier render collapses tiddler graph back to flat carrier text)
+- **wiki → snapshot** (projection render emits frozen `aka` references)
+
+Every render pass MUST declare its mode before it crosses the boundary.
+
+<<~/ahu >>
+
+<<~ ahu #three-render-modes >>
+
+## Three Render Modes
+
+`lar-render-mode` threads as a TW5 variable through the widget tree. All child-slot sigil widgets (`ahu`, `kau`, and any future `lar-kind: child-slot` sigil) participate in mode dispatch.
+
+```toml
+[[render_modes]]
+name        = ""
+label       = "HTML (default)"
+description = "story river rendering; child-slot widgets transclude child tiddler into DOM"
+
+[[render_modes]]
+name        = "carrier"
+label       = "Disk export"
+description = "each child-slot widget reads child body from wiki and emits inline definition sigil"
+trigger     = "wiki.renderTiddler('text/plain', uri, { variables: { 'lar-render-mode': 'carrier' } })"
+
+[[render_modes]]
+name        = "projection"
+label       = "Frozen projection"
+description = "each child-slot widget emits aka (shadow/frozen) sigil; content frozen at projection time"
+trigger     = "wiki.renderTiddler('text/plain', uri, { variables: { 'lar-render-mode': 'projection' } })"
+```
+
+**Round-trip fidelity:** carrier render MUST produce output that, when fed back through the deserializer, reproduces an equivalent tiddler graph. No layer should silently overwrite canonical field identity.
+
+**Extending to new child-slot sigils:** tag a tiddler `lar:///ha.ka.ba/tags/<sigil>-template`, define `\widget ~<sigil>(p1:"")` in the SharktoothSigil tiddler. No JS needed — the three-mode dispatch inherits automatically.
+
+<<~/ahu >>
+
+<<~ ahu #template-cascade >>
+
+## Template Cascade
+
+Each sigil's render output routes through a template cascade. The cascade picks the first matching template tiddler tagged with the sigil's template tag.
+
+```
+ahu render   → tag: lar:///ha.ka.ba/tags/ahu-template
+              fallback: lar:///ha.ka.ba/@lararium/templates/ahu/html
+
+kahea render → tag: lar:///ha.ka.ba/tags/kahea-template
+              fallback: lar:///ha.ka.ba/@lararium/templates/kahea/html
+
+aka render   → tag: lar:///ha.ka.ba/tags/aka-template
+              fallback: lar:///ha.ka.ba/@lararium/templates/aka/html
+
+loulou render → tag: lar:///ha.ka.ba/tags/loulou-template
+               fallback: lar:///ha.ka.ba/@lararium/templates/loulou/html
+
+pranala render → tag: lar:///ha.ka.ba/tags/pranala-template
+                fallback: lar:///ha.ka.ba/@lararium/templates/pranala/html
+
+kau render   → tag: lar:///ha.ka.ba/tags/kau-template
+              fallback: lar:///ha.ka.ba/@lararium/templates/kau/html
+```
+
+Template selection: `[all[shadows+tiddlers]tag[<template-tag>]!is[draft]] :map:flat[subfilter{!!text}] +[first[]else[<fallback>]]`
+
+A target adapter may replace the default template by tagging a custom tiddler with the appropriate template tag. The cascade picks the first non-draft match — ordering follows TW5 tiddler ordering rules.
+
+<<~/ahu >>
+
+<<~ ahu #child-slot-model >>
+
+## Child-Slot Model
+
+`ahu` and `kau` carry `lar-kind: child-slot`. They produce addressable child tiddlers during deserializer expansion.
+
+**ahu** — worksite text slot. URI = `parentUri + slotName`. In HTML mode the `~ahu` widget sets `currentTiddler` to the child URI and transcludes via the ahu-template cascade.
+
+**kau** — device instance slot. URI = `parentUri + "#" + deviceName`. In HTML mode the `~kau` widget renders the device instance or a placeholder hole if the definition tiddler is absent.
+
+**Compound forms:**
+```
+<<~ ahu #slot >>            → bare child-slot; ~ahu widget
+<<~ kahea ahu #slot >>      → live transclusion of child slot; ~kahea~ahu procedure
+<<~ aka ahu #slot >>        → frozen/projection read of child slot; ~aka~ahu procedure
+```
+
+The render posture difference (live vs. frozen) lives in the template cascade selection, not in sigil dispatch.
+
+<<~/ahu >>
+
+<<~ ahu #suppressed-worksites >>
+
+## Suppressed Worksites — Slots That Do Not Project
+
+Some `ahu` slots are structural, not content — they MUST NOT render as tldraw body nodes on the canvas surface. The carrier spine (`carrier-sigils`) carries identity and structure; the canvas projects content slots only.
+
+```toml
+# Source: packages/lararium-tldraw/src/project.ts SUPPRESSED_WORKSITES
+suppressed-worksites = ["iam", "meme-body-open", "body-close", "edges"]
+```
+
+<<~/ahu >>
+
+<<~ ahu #meme-ast-path >>
+
+## Non-TW5 Path — Meme AST
+
+`@lararium/tw5/meme-ast` provides a typed AST for consumers outside the TW5 VM.
+
+Implementation: `packages/lararium-tw5/tiddlers/src/meme-ast.js` (compiled from `meme-ast-entry.ts`)
+
+This path serves:
+- **island adaptor** (`island-adaptor.ts`) — causal island boundary crossing
+- **deserializer** (`deserializer.ts`) — disk → wiki expansion
+- **external mesh nodes** — non-TW5 processes that read meme structure
+
+Produced types:
+```typescript
+MemeAstNode    // structural node in the parse tree
+MemeNode       // named identity node (meme boundary)
+PranalaEdge    // typed graph edge (from/to/family/role/lifecycle)
+ParseMemeResult // full parse output
+```
+
+This AST represents the same surface that TW5 renders, but as a traversable typed graph rather than a TW5 widget tree. It does not duplicate TW5 rendering — it serves a different consumer class.
+
+**BOOTSTRAP_SCANS** — a minimal static scan set active before grammar tiddlers load. Provides enough structure for the deserializer to operate at cold boot.
+
+<<~/ahu >>
+
+<<~ ahu #kapu-render-open >>
+
+## Kapu Render Posture — Open Question
+
+`kapu` (`lar-kind: edge-sugar`) operates at the compile layer only and emits no HTML render output. It marks a threshold, restriction, or qualification in the edge graph.
+
+Open question: should `kapu` gain render presence in HTML mode — a visible boundary or disclosure annotation in the story river? Resolution waits on mesh-network testing. Until it resolves, compliant renderers MUST NOT invent render output for `kapu` sigils. The compile-layer annotation behavior holds stable; the render behavior stays open.
+
+<<~/ahu >>
+
+<<~ ahu #hooko-boundary >>
+
+## Hoʻoko — Render Mutation Boundary
+
+Only the commit step of a render pass may alter state: write a tiddler, mutate a render cache, publish a carrier to disk.
+
+The carrier render and projection render passes use `wiki.renderTiddler(...)` — read-only from the wiki's perspective but write-capable to their output target (disk file, artifact). A compliant render pass SHOULD:
+
+- declare its mode before crossing the output boundary
+- preserve enough relation that the output can round-trip back through the deserializer
+- not silently overwrite tiddler fields that belong to a different subsystem
+
+Trace continuity across the causal island boundary:
+1. disk carrier → deserializer → wiki tiddler (source map in `lar-source-uri` field)
+2. wiki tiddler → carrier render → disk carrier (faithful round-trip)
+3. wiki tiddler → projection render → snapshot (aka-frozen sigil refs carry source URI)
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/parser >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/ahu >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kahea >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -17,7 +17,7 @@ import { tw5MemesRoot } from "@lararium/tw5/tw5-memes-root";
 
 const __dirname  = dirname(fileURLToPath(import.meta.url));
 const bundlePath = resolve(__dirname, "../dist-bundle/lararium-tw5-modules.tw5.js");
-const memePath   = join(tw5MemesRoot, "modules/tw5-modules.md");
+const memePath   = join(tw5MemesRoot, "modules/tw5-modules.mem");
 
 const bundle = readFileSync(bundlePath, "utf8").trimEnd();
 const sha256 = createHash("sha256").update(bundle, "utf8").digest("hex");

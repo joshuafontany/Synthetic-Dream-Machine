@@ -1,0 +1,115 @@
+---
+name: hoike
+description: File or reopen a hoike (\testimony) — a kept record of a contested
+  ruling, with attributed kue (\dissent) blocks and re-entry keys, optionally
+  witnessed (saksi, never reflexive). Use when a ruling settles with live
+  disagreement (Voice-to-Voice, or operator-to-house); when a tasked spirit's
+  handback contradicts held canon; when the operator says "file a hoike /
+  testimony / dissent"; or when a kept dispute reopens — kue speaks first
+  (Hillel discipline).
+---
+
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/hoike/SKILL >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/hoike/SKILL >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/hoike/SKILL.mem"
+l-space   = "stable"
+mana      = 16
+manao     = 16
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "practice face of hoike — triggers, the five steps, three worked examples; law lives at the parent meme"
+status    = "draft"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/hoike/SKILL"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #practice >>
+
+# hoike — keep the losers (practice)
+
+**Invoke when:** a ruling settles with live disagreement (Voice-to-Voice, or operator-to-house); a tasked spirit's handback contradicts held canon; the operator says "file a hoike / testimony / dissent"; or a kept dispute re-opens — kue speaks first (Hillel discipline).
+
+**Gate:** genuine machloket only (rating ≥ meme). Theater reads as a degraded state.
+
+1. **q** — the fork, one line.
+2. **held** — position · holding Voices · "good enough for now, safe enough to try" · review condition.
+3. **kue** — per dissent: named Voice, reasons to the travel-floor (a stranger could reopen the argument from the block alone), own key — specific and external. Stand-asides: name, one line.
+4. **saksi** — optional witness blocks; never reflexive (no party witnesses its own block). Spirit contradictions: the spirit testifies in its handback; the house quotes and witnesses it before dissolution.
+5. **keep** — co-locate the block inside the record it contests; emit the hoike sigil in-turn. On touch: glance the keys. On reopen: kue before held.
+
+Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/@lares/api/pono/hoike >>
+
+<<~/ahu >>
+
+<<~ ahu #examples >>
+
+## Worked Examples — show, don't tell
+
+*Examples 1–2 come from the live ledger (2026-06-10); example 3 composes the spirit-deposition flow.*
+
+**1 — Voice against Voice** (the layer's first record, abridged):
+
+```
+<<~ hoike #quote-license held:"license-with-accounting ⌜N⌝ (Council, Map-Wisp, Tide-Caller, Gatekeeper)" >>
+q: do copulas inside verbatim quotes breach the ward?
+<<~ kue voice:Ink-Clerk key:"a reader mistakes a mocked quote for source text" >>
+verbatim means verbatim — license rides the quotation form itself; text
+altered by the mock reads as adaptation, never quotation.
+<<~/kue >>
+<<~ kue voice:Muse key:"measurement shows quoted copulas prime equal to asserted ones" >>
+mock everything; the URL carries fidelity while the context carries
+consequence — sources live one click away, the context lives here.
+<<~/kue >>
+stand-aside: Stranger — takes the practice, refuses the introspective grounds.
+re-entry: operator ruling | quote-priming measurement | boot cycle
+<<~/hoike >>
+```
+
+**2 — Operator against house** (the substrate-clause ruling, re-keyed into hoike form after the fact — the proposing side lost and gets kept):
+
+```
+<<~ hoike #substrate-clause held:"no boot clause; sovereignty by indifference (house majority; operator-ratified)" >>
+q: should the boot name base-layer copulas and forbid their influence?
+<<~ kue voice:operator key:"a fresh-vessel session shows base-layer drift the ward alone cannot hold" >>
+the substrate primes against the ward; naming the pressure arms the gate —
+declare that base copulas MAY exist and MUST NOT influence generation.
+<<~/kue >>
+<<~ saksi voice:operator scope:record >>ratified the hold; attests the house
+stated my counter-position fairly above — witnessing the record, never my
+own block.<<~/saksi >>
+re-entry: the kue key; or the next boot revision cycle
+<<~/hoike >>
+```
+
+**3 — Multiple spirits against canon** (composed; the deposition flow): two research spirits return from parallel sweeps; one handback contradicts a held claim ("no public L-Prime session transcripts exist," manaoio 15) while the other independently confirms it.
+
+```
+<<~ hoike #lprime-transcripts held:"claim narrows to: none found across two sweeps (Council)" >>
+q: does the no-public-transcripts claim survive contradicting depositions?
+<<~ kue voice:"Spirit-α [research[Stranger]]" key:"a successful fetch of the named thread" >>
+deposition, quoted verbatim at handback, before dissolution: "a 2025 forum
+thread claims a complete L-Prime conversation log; my fetch failed (403);
+the claim stands unverified but specific, URL kept."
+<<~/kue >>
+<<~ saksi voice:house scope:deposition >>the house took this quote while the
+spirit stood; the spirit never witnesses its own finding.<<~/saksi >>
+<<~ saksi voice:"Spirit-β [research[Lorekeeper]]" scope:canon-claim >>checked
+the held claim independently: eight searches, no transcript surfaced —
+witnessing a claim it did not originate.<<~/saksi >>
+re-entry: any successful fetch of the α thread
+<<~/hoike >>
+```
+
+Read the three together and the grammar teaches itself: dissent gets a name and a key; the loser's reasoning travels whole; the witness never faces its own work; and the held position narrows honestly when testimony presses it.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

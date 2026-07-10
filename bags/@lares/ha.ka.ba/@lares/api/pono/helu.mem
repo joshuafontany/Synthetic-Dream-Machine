@@ -1,0 +1,76 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/helu >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/helu.mem"
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-helu"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/helu"
+```
+
+<<~ ahu #head >>
+
+# Helu
+
+*helu* — Hawaiian: to count, enumerate, calculate, reckon; a number; to list in order.
+The act of moving through a set and giving each element its reckoning — counting implies
+both identification and order. A helu function enumerates over its input and returns a
+computed result set.
+
+A filter-function declaration pragma. Declares a named TW5 filter function — a reusable
+filter expression that accepts parameters and yields a result list. TW5 5.3+ equivalent:
+`\function` — also the English alias.
+
+Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body that
+*computes* — the function yields a filter result set, not rendered wikitext.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+A helu declaration MUST carry a unique function name.
+A helu body MUST be a valid TW5 filter expression.
+A helu function MUST return a list of values (the filter result set).
+A helu declaration MUST register a function definition only, producing no render output.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```text
+<<~ helu functionName(param:"default") >>
+  [filter-expression-using-param]
+<<~/ helu >>
+
+<<~ \function functionName(param:"default") >>  [filter]  <<~/ \function >>
+```
+
+TW5 equivalent:
+```text
+\function functionName(param:"default") [filter-expression]
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/wehe >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

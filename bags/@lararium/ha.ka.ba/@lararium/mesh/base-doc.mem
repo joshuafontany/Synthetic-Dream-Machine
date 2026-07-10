@@ -1,0 +1,66 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/base-doc >>
+```toml iam
+cacheable   = true
+file-path   = "bags/@lararium/mesh/base-doc.mem"
+l-space     = "lararium"
+mana        = 9
+manao       = 9
+register    = "Synthesis"
+retain      = true
+role        = "the LarDoc record/blob shapes + the bag→doc oracle resolve-and-write-back primitive (resolveOracleDoc) + blob descriptor addressing"
+source-file = "packages/lararium-mesh/src/base-doc.ts"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/mesh/base-doc"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Contract
+
+`base-doc.ts` owns the shapes every plane shares and the one primitive that
+turns a bag-URI into a live doc handle:
+
+- **`LarDoc` / `LarTiddlerRecord` / `LarBlobEntry`** — the Automerge document
+  shape (`tiddlers` map + `blobs` map) and its record/blob entries.
+- **`mutableLarRecord(title, fields, provenance)`** — the record builder every
+  writer routes through, stamping `meta.authority`.
+- **`ENGINE_CORE_ID`** (`"tiddlywikicore"`) — the primary `.blobs` key for the
+  TW5 boot kernel.
+- **`blobDescriptorUri(blobId)`** → `lar:///ha.ka.ba/@oracle/blobs/<safe>`.
+  Blobs live in the **`@oracle`** runtime system island beside the engine
+  bytes — never in the `@lararium` corpus seed (the 2026-06-16 carve; see
+  `disk-projection#oracle-split`).
+- **`resolveOracleDoc(registryHandle, oracleKey, resolve, provenance)`** — the
+  read → resolve → write-back-on-first-mint shape for a bag→doc pointer.
+  Reads the pointer (`text` field) from the registry doc; hands the URL (or
+  null) to the platform `resolve` strategy; writes the oracle tiddler back
+  only on first mint. Platform divergence rides the two arguments (`resolve`
+  = repo strategy, `provenance` = authority stamp), never the protocol.
+
+<<~/ahu >>
+
+<<~ ahu #two-plane >>
+
+## Two-Plane Oracle (operator ruling, 2026-06-16)
+
+`resolveOracleDoc` takes the **registry handle** as an argument, so the same
+primitive serves both pointer planes (`wiki-layer-ontology#oracle-planes`):
+
+- **system bags** (`@oracle`, `@lararium`, `@lares`) resolve and write their
+  pointer in the **`@oracle`** system-island doc the vessel already holds.
+- **user bags** resolve and write in **`@catalog`**.
+
+The caller (`open-vessel-core`) picks the plane per bag tier; `base-doc` stays
+plane-blind — it writes wherever the handed registry handle points. *(Caller
+plane-routing: ruled, enactment tracked at the live handoff torch; today the
+callers hand `@catalog` for every bag.)*
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

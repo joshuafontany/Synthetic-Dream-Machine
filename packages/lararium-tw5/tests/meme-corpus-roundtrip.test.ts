@@ -46,7 +46,7 @@ const sigilNorm = (s: string) => s
 const lawView = (s: string) => squeeze(sigilNorm(contentView(s)));
 
 function carriers(): Array<{ rel: string; src: string; uri: string }> {
-  const files = execSync(`find ${CORPUS} -name '*.md'`, { encoding: "utf8" }).trim().split("\n");
+  const files = execSync(`find ${CORPUS} -name '*.mem'`, { encoding: "utf8" }).trim().split("\n");
   const out: Array<{ rel: string; src: string; uri: string }> = [];
   for (const f of files) {
     const src = readFileSync(f, "utf8");

@@ -1,0 +1,65 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/heleuma/ha >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/heleuma/ha.mem"
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant capability: heleuma-ha — body/structure anchor; permanent compiled artifact with quine record"
+tags      = ["api/pono/heleuma"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/heleuma/ha"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Heleuma-Ha (Body / Structure)
+
+**Ha**: body, matter, structure, form, persistence. The containing form. Holds its shape across instances.
+
+A heleuma-ha anchor exists outside the `lar:///` corpus **by nature, not by stage**. It defines territory that the runtime inhabits. It does not promote.
+
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+✶ locate the compiled artifact and confirm it is structural territory, not a traveling soul.
+⏿ orient: does removing it break the containing form? If yes, this is ha.
+◇ declare `heleuma = "ha"`; confirm no `body-sha256` is claimed.
+▶ write `#source` slot with the verbatim artifact copy; close the quine record.
+↺ verify: `sync-heleuma` finds the symbol, compares the slot, reports clean; the anchor holds. The body persists. No ceremony expected.
+
+<<~/ahu >>
+
+<<~ ahu #required-fields >>
+
+## Required Fields (SHALL)
+
+A meme that carries `heleuma-ha` SHALL declare in `#iam` TOML:
+
+```toml
+heleuma      = "ha"
+```
+
+It SHALL hold a `#source` slot with the verbatim artifact body (the quine property).
+
+It SHALL NOT declare `body-sha256` — ha does not promote.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

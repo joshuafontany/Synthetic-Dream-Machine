@@ -121,9 +121,10 @@ function isCapsRoot(root: string): boolean {
   return root === root.toUpperCase() && /[A-Z]/.test(root);
 }
 
-function withMdSuffix(p: string): string {
+/** Append the meme extension when the last segment carries no extension. */
+function withMemeSuffix(p: string): string {
   const lastSegment = p.slice(p.lastIndexOf("/") + 1);
-  return lastSegment.includes(".") ? p : p + ".md";
+  return lastSegment.includes(".") ? p : p + ".mem";
 }
 
 /**
@@ -135,15 +136,18 @@ export function resolveLarUri(uri: string): LarResolution {
   const resourcePath = [root, ...childPath].join("/");
 
   // `appendFragment` mounts fragment-path segments as nested subdirectories
-  // on disk: `lar:///foo#a/b` → `foo/a/b.md`. Files materialize as
-  // `<dir>/index.md` for the root + `<dir>/<segs>.md` for each tagged-on-
-  // disk descendant. The disk-projector decides which fragment URIs become
-  // file roots via `lar:///ha.ka.ba/tags/meme-root`; the path strategy here just
-  // names where each URI WOULD project if it earns a file.
+  // on disk: `lar:///foo#a/b` → `foo/a/b.mem`. Files materialize as
+  // `<dir>/index.mem` for the root + `<dir>/<segs>.mem` for each tagged-on-
+  // disk descendant. It preserves the base's extension, so a caps-file adapter
+  // (`.md`) keeps `.md` fragments while a meme (`.mem`) keeps `.mem`. The disk-
+  // projector decides which fragment URIs become file roots via
+  // `lar:///ha.ka.ba/tags/meme-root`; this just names where each URI WOULD project.
   const appendFragment = (basePath: string): string => {
     if (fragmentPath.length === 0) return basePath;
-    const baseNoExt = basePath.replace(/\.md$/, "");
-    return `${baseNoExt}/${fragmentPath.join("/")}.md`;
+    const m = /(\.mem|\.md)$/.exec(basePath);
+    const ext = m ? m[1]! : ".mem";
+    const baseNoExt = m ? basePath.slice(0, -m[0].length) : basePath;
+    return `${baseNoExt}/${fragmentPath.join("/")}${ext}`;
   };
 
   // Caps-file roots resolve only when expressed under @lares.
@@ -164,11 +168,11 @@ export function resolveLarUri(uri: string): LarResolution {
         return { uri, root, childPath, resourcePath, laresRelPath: appendFragment(`${rest[0]}.md`), engineRelPath: null, kind: "caps-file", virtual: false };
       }
       const joined = rest.length > 0 ? rest.join("/") : "";
-      const laresRelPath = appendFragment(joined ? withMdSuffix(joined) : "index.md");
+      const laresRelPath = appendFragment(joined ? withMemeSuffix(joined) : "index.mem");
       return { uri, root, childPath, resourcePath, laresRelPath, engineRelPath: null, kind: "tuple-file", virtual: false };
     }
 
-    // lar:///ha.ka.ba/@lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.md
+    // lar:///ha.ka.ba/@lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.mem
     if (childPath[0] === ENGINE_SCOPE) {
       if (!childPath[1]) {
         return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
@@ -176,7 +180,7 @@ export function resolveLarUri(uri: string): LarResolution {
       const pkgSlug = `lararium-${childPath[1]}`;
       const pathParts = childPath.slice(2);
       const filePath = pathParts.length > 0 ? pathParts.join("/") : "index";
-      const engineRelPath = appendFragment(withMdSuffix(`${pkgSlug}/memes/${filePath}`));
+      const engineRelPath = appendFragment(withMemeSuffix(`${pkgSlug}/memes/${filePath}`));
       return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath, kind: "tuple-file", virtual: false };
     }
 

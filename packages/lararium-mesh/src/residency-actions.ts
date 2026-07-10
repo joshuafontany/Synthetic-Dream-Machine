@@ -129,7 +129,7 @@ export interface CreateAction extends ResidencyActionBase {
  *  optional when the carrier's own iam block names its uri-path. */
 export interface LoadCarrier {
   readonly title?: string;
-  /** File extension (e.g. ".tid", ".json", ".md") — lets the island route a
+  /** File extension (e.g. ".mem", ".tid", ".json") — lets the island route a
    *  non-memetic carrier through TW5's own deserializer registry by content-type.
    *  Absent → the island treats the text as a memetic-wikitext carrier. */
   readonly ext?:   string;

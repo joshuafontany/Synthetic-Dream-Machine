@@ -41,7 +41,7 @@ import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameS
 import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
-import { isEffectRecordUri, KeyedCoalesceGate } from "@lararium/mesh";
+import { isEffectRecordUri, KeyedCoalesceGate, stripMemeExt } from "@lararium/mesh";
 import type { ReadinessMap, WindowServo } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -274,7 +274,7 @@ export class LarDiskProjector {
         const jsonStr = (this._tw5.$tw.wiki as { getTiddlerAsJson?: (t: string) => string })
           .getTiddlerAsJson?.(tiddlerUri);
         if (jsonStr) {
-          const jsonPath = candidate.replace(/\.md$/, "") + ".json";
+          const jsonPath = stripMemeExt(candidate) + ".json";
           writeFileSync(jsonPath, jsonStr, "utf-8");
         }
       }

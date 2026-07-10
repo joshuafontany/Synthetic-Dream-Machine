@@ -1,0 +1,97 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/waiho >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/waiho.mem"
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "ephemeral variable binding — deposit without graph identity"
+tags      = ["api/pono/meme", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-waiho"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/waiho"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Waiho
+
+An ephemeral name deposit. Nothing persists past scope boundary.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #etymology >>
+
+## Etymology and Mythology
+
+**waiho** (Hawaiian): "to leave in place, to deposit for later retrieval, to set aside temporarily."
+
+The word carries the feel of a fisherman leaving bait at a known spot — the thing waits where placed, for the one who placed it, for as long as that context holds. When the context dissolves, the bait washes away. Nothing marks the spot afterward.
+
+Compare **kau** (placement with persistent identity) and **aka** (shadow/mirror, source-canonical). Waiho stands apart from both: it holds a value, not a thing. No URI. No mailbox. No graph edge. Just a name bound to a value, alive for the scope, gone at the close.
+
+In the Kumulipo creation chant, *waiho* appears in the context of primal material left at the boundary between sea and land — not yet formed into persistent shape, waiting for the conditions that will give it permanent address.
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law
+
+- Waiho MUST carry exactly one name and one value per pragma/block.
+- Carrier-scoped (`<<~! waiho name = val >>`) MUST hoist to the top of the carrier execution context before any render pass.
+- Block-scoped (`<<~ waiho name = val >>...<<~/waiho >>`) MUST bind name for the duration of the block only.
+- Waiho MUST NOT produce a graph node, URI, or edge in the pranala graph.
+- Waiho MUST NOT persist across carrier boundaries.
+- Implementations MUST treat `\const`, `\let`, `\var` as aliases that map to waiho before evaluation.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```
+<<~! waiho name = value >>                  carrier-scoped (hoisted, immutable by convention)
+<<~ waiho name = value >>...<<~/waiho >>    block-scoped
+\const name = value                         English alias (carrier-scoped)
+\let name = value ... /\let                 English alias (block-scoped)
+\var name = value ... /\var                 English alias (block-scoped, mutable)
+```
+
+<<~/ahu >>
+
+<<~ ahu #contrast >>
+
+## Waiho vs Kau vs Aka
+
+| sigil  | creates         | URI?  | graph edge? | scope       | lifetime        |
+|--------|-----------------|-------|-------------|-------------|-----------------|
+| waiho  | name binding    | no    | no          | carrier/block | evaporates at close |
+| kau    | device instance | yes   | no (internal) | carrier   | persistent, addressable |
+| aka    | shadow mirror   | no    | yes (observe) | carrier  | source-canonical |
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kau >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/aka >>
+
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-const >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-let >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-var >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

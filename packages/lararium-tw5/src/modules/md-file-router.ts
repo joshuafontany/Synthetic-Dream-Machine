@@ -62,7 +62,7 @@ export const synchronous = true;
 export function startup(): void {
   const tw = (globalThis as { $tw?: TwGlobal }).$tw;
   if (!tw?.utils?.registerFileType) return;
-  tw.utils.registerFileType(SNIFF_TYPE, "utf8", [".md", ".markdown"]);
+  tw.utils.registerFileType(SNIFF_TYPE, "utf8", [".mem"]);
 }
 
 // ---------------------------------------------------------------------------

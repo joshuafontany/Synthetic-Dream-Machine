@@ -58,13 +58,13 @@ function resolveGenesisDir(): string {
   return resolve(flagged ?? process.env["LAR_GENESIS"] ?? DEFAULT_GENESIS_DIR);
 }
 
-function walkMdFiles(dir: string): string[] {
+function walkMemeFiles(dir: string): string[] {
   const results: string[] = [];
   try {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const full = join(dir, entry.name);
-      if (entry.isDirectory()) results.push(...walkMdFiles(full));
-      else if (entry.name.endsWith(".md") || entry.name.endsWith(".mem")) results.push(full);
+      if (entry.isDirectory()) results.push(...walkMemeFiles(full));
+      else if (entry.name.endsWith(".mem")) results.push(full);
     }
   } catch { /* absent — skip */ }
   return results.sort();
@@ -100,8 +100,8 @@ function deriveActorSeed(tw5CorePath: string): string {
   }
 
   for (const memeRoot of existsSync(BAGS_ROOT) ? [BAGS_ROOT] : []) {
-    for (const f of walkMdFiles(memeRoot)) {
-      chunks.push(utf8Bytes(`md:${f}:`));
+    for (const f of walkMemeFiles(memeRoot)) {
+      chunks.push(utf8Bytes(`meme:${f}:`));
       chunks.push(new Uint8Array(readFileSync(f)));
     }
   }

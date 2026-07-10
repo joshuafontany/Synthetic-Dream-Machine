@@ -7,7 +7,7 @@
  */
 
 import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute, sep } from "path";
-import { MEME_WRITE_EXT, stripMemeExt, hasMemeExt } from "@lararium/mesh";
+import { MEME_EXT, stripMemeExt, hasMemeExt } from "@lararium/mesh";
 
 export type MirrorPathFn = (uri: string) => string | null;
 
@@ -89,12 +89,12 @@ function splitHash(s: string): [string, string | null] {
  * Carrier-whole at rest (disk-projection#granularity): a fragment record
  * (`…#slot`) never owns a disk file — its carrier root does. A fragment URI
  * resolves to null here; the projector routes a child change to its group
- * root before any path lookup. A fragment must never map to `base/frag.md` —
+ * root before any path lookup. A fragment must never map to `base/frag.mem` —
  * only its carrier root owns a file.
  */
-function toRelMd(pathPart: string, frag: string | null): string | null {
+function toMemeRelPath(pathPart: string, frag: string | null): string | null {
   if (frag) return null;
-  return `${stripMemeExt(pathPart)}${MEME_WRITE_EXT}`;
+  return `${stripMemeExt(pathPart)}${MEME_EXT}`;
 }
 
 /**
@@ -104,7 +104,7 @@ function toRelMd(pathPart: string, frag: string | null): string | null {
  * any stable name losslessly; reverse derivation = strip root, read name.
  *
  *   lar:///ha.ka.ba/@lares/api/pono/meme
- *     → ha.ka.ba/@lares/api/pono/meme.md   (relative to the bag mirror root)
+ *     → ha.ka.ba/@lares/api/pono/meme.mem   (relative to the bag mirror root)
  *
  * Fragments (#children) live inside their parent carrier file → null.
  * Unstable roots carry no siting → null (loci law).
@@ -115,7 +115,7 @@ export function fullPathBagPath(): MirrorPathFn {
     const bare = uri.slice("lar:///".length);
     if (!/^\w+\.\w+\.\w+\//.test(bare)) return null;
     const [pathPart, frag] = splitHash(bare);
-    return pathPart ? toRelMd(pathPart, frag) : null;
+    return pathPart ? toMemeRelPath(pathPart, frag) : null;
   };
 }
 
@@ -134,10 +134,10 @@ export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string)
 /**
  * One mirror plane's reverse-derivation — the loci law run backward under the
  * full-path-inside-bag ruling, shared by every disk mirror:
- *   `<root>/<rootDirName>/<holding-dir>/<full-uri-path>.md` ⇄ `lar:///<full-uri-path>`
+ *   `<root>/<rootDirName>/<holding-dir>/<full-uri-path>.mem` ⇄ `lar:///<full-uri-path>`
  * The first segment under the plane dir names the HOLDING SLOT (a residency
  * bag under bags/, a wiki slug under wikis/) and never enters the name; the
- * interior IS the name, whole. Returns null outside the plane dir, for non-.md
+ * interior IS the name, whole. Returns null outside the plane dir, for non-.mem
  * files, or when the interior carries no w.w.w root — the gesture reports
  * those as skipped, never guesses.
  */
@@ -148,7 +148,7 @@ function mirrorRootFileToUri(instanceRoot: string, filePath: string, rootDirName
   const rel = abs.slice(mirrorRoot.length + 1).split(sep);
   if (rel.length < 2) return null;                       // needs holding dir + interior
   const interior = rel.slice(1).join("/");
-  if (!hasMemeExt(interior)) return null;                // read either .mem or the legacy .md
+  if (!hasMemeExt(interior)) return null;                // read the meme extension
   const namePath = stripMemeExt(interior);
   if (!/^\w+\.\w+\.\w+\//.test(namePath)) return null;  // loci: stable names carry a w.w.w root
   return `lar:///${namePath}`;
@@ -156,7 +156,7 @@ function mirrorRootFileToUri(instanceRoot: string, filePath: string, rootDirName
 
 /**
  * Derive the carrier-root lar: URI a bags/ file projects — the canon plane:
- *   `bags/<residency-dir>/<full-uri-path>.md` ⇄ `lar:///<full-uri-path>`
+ *   `bags/<residency-dir>/<full-uri-path>.mem` ⇄ `lar:///<full-uri-path>`
  * The first segment under bags/ names the HOLDING BAG (residency plane).
  */
 export function bagsFileToUri(instanceRoot: string, filePath: string): string | null {
@@ -167,7 +167,7 @@ export function bagsFileToUri(instanceRoot: string, filePath: string): string | 
  * Derive the carrier-root lar: URI a wikis/ file projects — the per-wiki working
  * write-layer's disk surface run backward (the ingest-BACK leg). The working
  * layer (`wikis/@{slug}/working`) projects per-wiki to
- * `wikis/@{slug}/<full-uri-path>.md`; the first segment under wikis/ names the
+ * `wikis/@{slug}/<full-uri-path>.mem`; the first segment under wikis/ names the
  * WIKI SLUG (the write-layer instance), never the carrier name. The derived
  * records home to the working layer (the editing plane), not the named bag —
  * the ingest caller carries that designation in `--to`. Symmetric with the

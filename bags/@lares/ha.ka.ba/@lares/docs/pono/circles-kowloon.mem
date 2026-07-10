@@ -1,0 +1,179 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/pono/circles-kowloon >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/circles-kowloon.mem"
+mana      = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/docs/pono/circles-kowloon"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #core-inversion >>
+
+# Circles — Kowloon Reference Model
+
+> Source: github.com/jzellis/kowloon (Josh Ellis / jzellis)
+> Seeded: 2026-05-05 — authoritative design reference for CirclesDoc
+
+From Kowloon's `CLAUDE.md` (the repo's own design declaration):
+
+> "Kowloon has **no follow/unfollow system**. Instead, users organize people into **Circles** (like contact lists). Adding someone to a circle IS the follow. There are no followers/following counts, no social graph edges."
+
+From the README (unfederated activities table):
+
+> "**Follow/Unfollow** — Relationship visibility is private; never federate."
+> "**Add/Remove** — Circles are local 'playlist-like' constructs; never federate membership changes."
+
+This is social graph inversion: on centralized platforms, following creates a public-facing graph edge the platform owns and exposes. On Kowloon, that action — putting someone in your Following circle — creates no public record. The graph is sharded: each user's graph lives exclusively on their home server, cannot be queried from outside, and is never transmitted. No remote server can reconstruct who follows whom.
+
+<<~/ahu >>
+
+<<~ ahu #circle-data-model >>
+
+## Circle Data Model (Kowloon schema)
+
+From `schema/Circle.js`:
+
+```
+id          — "circle:<mongoId>@<domain>"  (Kowloon ID format)
+type        — "Circle" (user-created) | "System" (auto-managed)
+actorId     — owning user's Kowloon ID; one owner per circle, home-server only
+name        — display name
+summary     — optional description
+members     — embedded array of Member subdocuments (full actor snapshots, cached)
+memberCount — integer
+to          — addressing scope for the circle object itself
+canReply    — who may reply to content addressed to this circle
+canReact    — who may react
+signature   — RSA signature of id|name|to|sortedMemberIds (tamper-evident)
+```
+
+Key: members are **embedded snapshots** (full actor profile + `lastFetchedAt`), not join table references. The system does not call out to remote servers to check circle membership at read time — it uses the cached local snapshot.
+
+<<~/ahu >>
+
+<<~ ahu #circle-types >>
+
+## Circle Types
+
+**System Circles** (auto-created per user on registration):
+- `Following` — people the user actively reads
+- `All Following` — superset: followed servers + circles
+- `Circles` — tracks circle memberships (members are circle objects, not users)
+- `Blocked`
+- `Muted`
+
+**Group System Circles** (auto-created per group):
+- `Admins`, `Moderators`, `Members`, `Blocked`, `Pending`
+
+**User Circles**: operator-created personal lists (e.g. "Close Friends", "Work").
+
+<<~/ahu >>
+
+<<~ ahu #addressing-hierarchy >>
+
+## Addressing Hierarchy
+
+Every content object carries `to`, `canReply`, `canReact`. When set to a circle ID:
+
+```
+@public          — anyone, federated
+@<domain>        — server members only (creator's home server)
+<circleId>       — only members of that circle (must be owned by creator)
+<userId>         — only that user (DM)
+(blank)          — creator only
+```
+
+Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `targetCircle.actorId !== activity.actorId`. A circle can only be targeted by its owner.
+
+**Remote circles are never resolved.** Feed fan-out only checks local circle membership. "Privacy: we can't verify membership in remote circles. Performance: avoid fetching remote circle data." — `docs/FEED_FANOUT.md`.
+
+<<~/ahu >>
+
+<<~ ahu #lararium-mapping >>
+
+## Lararium Mapping
+
+> **Coherence note (2026-06-29).** The refined identity model resolves a Lararium group
+> as an **edge-closure** — the reciprocal-edge fan over signed, typed, `lar:`-named
+> member edges, *evaluated* as a query — never a central `CirclesDoc` object a single
+> node owns as a roster
+> (<<~ loulou lar:///ha.ka.ba/@lares/api/pono/group-as-closure >>). So the mapping rows
+> below that read a circle as one owner-held doc carry **retire-residue** framing: keep
+> them as the faithful Kowloon prior-art trace they document, but for *our* design read
+> `CirclesDoc`/`actorId`-ownership as the closure each member's own edge composes, and
+> read eviction as a kāpae on the membership stack
+> (<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kapae#membership-sense >>). The Kowloon
+> reference itself stands unchanged — Kowloon legitimately uses a central object.
+
+| Kowloon | Lararium |
+|---|---|
+| `type: "System"` | `kind: "System"` — auto-seeded at node boot |
+| `type: "Circle"` | `kind: "Circle"` — operator-created |
+| `actorId` | `bag: CIRCLES_DOC_URI`, authority of owning node |
+| `members[]` (embedded snapshots) | `memberDids` (TW5 list of DIDs); snapshots live in IdentitiesDoc |
+| `to/canReply/canReact` on circle | `addressingScope` field on CircleTiddler |
+| `to/canReply/canReact` on content | tiddler fields on content tiddlers (planned) |
+| `signature` | `encryptedShareHint` + Keyhive capability chain (S7) |
+| Never-federate membership | Circle membership stays in CirclesDoc, never in oracle tiddlers |
+| System circles per user | Seeded by `seedCirclesDoc()` at first boot |
+| Group system circles | Seeded when a nexus circle is created (nexus:user, nexus:operator, etc.) |
+
+<<~/ahu >>
+
+<<~ ahu #system-circles >>
+
+## System Circles to Auto-Seed
+
+At `seedCirclesDoc()` time, write these system circle tiddlers:
+
+```
+@circles/following       — people the operator actively reads
+@circles/all-following   — superset: followed nodes + circles
+@circles/circles         — tracks circle memberships
+@circles/blocked
+@circles/muted
+```
+
+Nexus authorization circles (seeded by nexus admin at nexus boot):
+```
+@circles/nexus:anon
+@circles/nexus:user
+@circles/nexus:operator
+@circles/nexus:admin
+```
+
+<<~/ahu >>
+
+<<~ ahu #not-adopted >>
+
+## What Lararium Does NOT Adopt from Kowloon
+
+- MongoDB schema — we use Automerge CRDTs + tiddler fields
+- ActivityPub fan-out — we use automerge-repo sync + oracle tiddlers
+- RSA signature on circle state → replaced by Keyhive convergent capabilities (S7)
+- `Members` as embedded subdocuments → member identity data lives in IdentitiesDoc; CirclesDoc holds only DIDs
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/local-first >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/heleuma/ka >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

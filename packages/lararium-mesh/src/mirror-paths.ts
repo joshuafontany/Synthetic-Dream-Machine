@@ -11,23 +11,20 @@ import { LARARIUM_DOC_URI, LARES_DOC_URI, LAR_PREFIX } from "./lar-uris.js";
 export type MirrorPathStrategy = "lares" | "engine" | "wiki-shadow";
 
 /**
- * Meme file extensions the disk layer reads. A meme carries memetic-wikitext,
- * not CommonMark, so `.mem` names the truth; `.md` reads as the legacy form
- * during the .mem migration (dual-accept). `MEME_WRITE_EXT` names the extension
- * the projector emits — it holds at `.md` until the corpus rename flips it.
+ * The meme file extension. A meme carries memetic-wikitext, not CommonMark, so
+ * `.mem` names the filetype on disk and the memetic-wikitext MIME
+ * (`text/x-memetic-wikitext`) rides it.
  */
-export const MEME_EXTS = [".mem", ".md"] as const;
-export const MEME_WRITE_EXT = ".md";
+export const MEME_EXT = ".mem";
 
-/** Strip a trailing meme extension (`.mem` or `.md`); pass anything else whole. */
+/** Strip a trailing `.mem`; pass anything else whole. */
 export function stripMemeExt(value: string): string {
-  for (const ext of MEME_EXTS) if (value.endsWith(ext)) return value.slice(0, -ext.length);
-  return value;
+  return value.endsWith(MEME_EXT) ? value.slice(0, -MEME_EXT.length) : value;
 }
 
-/** True when a filename carries a meme extension (`.mem` or `.md`). */
+/** True when a filename carries the meme extension. */
 export function hasMemeExt(value: string): boolean {
-  return MEME_EXTS.some((ext) => value.endsWith(ext));
+  return value.endsWith(MEME_EXT);
 }
 
 function splitHash(value: string): [string, string | null] {
@@ -36,7 +33,7 @@ function splitHash(value: string): [string, string | null] {
 }
 
 function withFrag(base: string, frag: string | null): string {
-  return frag ? `${base}/${frag}${MEME_WRITE_EXT}` : `${base}${MEME_WRITE_EXT}`;
+  return frag ? `${base}/${frag}${MEME_EXT}` : `${base}${MEME_EXT}`;
 }
 
 function larTail(uri: string): string | null {
@@ -86,7 +83,7 @@ export function wikiShadowMirrorRelPath(uri: string): string | null {
 
   const [pathPart, frag] = splitHash(rest);
   const base = stripMemeExt(pathPart ?? "");
-  return base ? (frag ? `${dirPrefix}${base}/${frag}${MEME_WRITE_EXT}` : `${dirPrefix}${base}${MEME_WRITE_EXT}`) : null;
+  return base ? (frag ? `${dirPrefix}${base}/${frag}${MEME_EXT}` : `${dirPrefix}${base}${MEME_EXT}`) : null;
 }
 
 export function mirrorRelPath(uri: string, strategy: MirrorPathStrategy): string | null {

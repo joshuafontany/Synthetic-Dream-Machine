@@ -6,12 +6,12 @@ describe("fullPathBagPath — the full-path-inside-bag siting function", () => {
 
   test("a stable name sites at its full uri-path", () => {
     expect(toRelPath("lar:///ha.ka.ba/@lares/api/pono/meme"))
-      .toBe("ha.ka.ba/@lares/api/pono/meme.md");
+      .toBe("ha.ka.ba/@lares/api/pono/meme.mem");
   });
 
   test("a FOREIGN name sites whole — any bag holds any name (the crack, closed)", () => {
     expect(toRelPath("lar:///ha.ka.ba/@other/v2/notes/thing"))
-      .toBe("ha.ka.ba/@other/v2/notes/thing.md");
+      .toBe("ha.ka.ba/@other/v2/notes/thing.mem");
   });
 
   test("fragments live inside their parent carrier — null", () => {
@@ -25,6 +25,6 @@ describe("fullPathBagPath — the full-path-inside-bag siting function", () => {
 
   test("unstable attitude roots DO site when projected (session-bag adoption path)", () => {
     expect(toRelPath("lar:///threshold.uncertain.opens/note"))
-      .toBe("threshold.uncertain.opens/note.md");
+      .toBe("threshold.uncertain.opens/note.mem");
   });
 });
