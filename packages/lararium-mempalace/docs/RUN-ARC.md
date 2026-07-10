@@ -45,7 +45,32 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
    the plug-in excess-entropy saturates at 12 symbols; the load-bearing co-jump awaits the bigger
    corpuses). Named follow-ups: family-wise maxT port · the sensorium-pc<->predictive_coding
    owed-fixture row. Original charge: **The py projector / RUN surface** — reads the populated planes, sweeps `arl-dial` ARL₀→α, emits the complexity-entropy diagram + ΔF (reuse `predictive_coding` F as evidence-codelength; BMR for the reduced family) + H¹ (a py twin — `spectral_geometry` has H⁰; H¹ over the agreement-nerve is owed) + the EFE gate (a py twin of `sensorium-efe`).
-4. **The memory-sensorium driver** — compose (`sensorium.py`) + run a capture pass over the real `~/.lares` corpus (the goal), and over the ephemeral test-bed (the proof-ground).
+4. **The memory-sensorium driver — RAN (first time).** `memory_sensorium.py` composes the goal sensorium
+   over the AI-operator worldlines and sweeps a surface's transcripts onto all three planes. The gap it
+   closed on the way: `compose_memory_sensorium` accepted `planes=`, and `drive_capture` never passed one
+   — so the GOAL sensorium had been landing **content only** while the test-bed carried three planes. Both
+   sides green; no test asked whether the two composition sites agreed (C1: an invariant with no
+   drift-detector already drifts).
+
+   **First witness** (472 claude transcripts, `wing_synthetic_dream_machine`, zero `failed`, worldline
+   observed on every pointer; a re-pass lands `skipped` and zero new — idempotence lives in the stores):
+   content **10325** · structure **870** entries covering **1388** cids · form **914** cids ·
+   **tri-plane cids 678** · `struct_hash` agreement **200/200** on the sampled join. One cid keys all
+   three planes over real worldlines.
+
+   **The finding that gates the co-jump — SELECTION, not coverage.** The structure plane lands only records
+   the router holds a grammar for. Sampled over 400 real turns: **375 sniff to `kind=None` → no grammar →
+   skipped**; the 25 that parse are `memetic-wikitext`. So the structure plane over the memory sensorium
+   currently sees **the house's own sigil output and almost nothing else** (tri-plane 678/10325 ≈ 6.6%,
+   matching the 6.3% sniff rate).
+
+   A co-jump measured over that subpopulation would be **selected on the very structure it claims to
+   detect** — the apophenia the independence discipline exists to refuse (C2/C3). The 678 shared units
+   beat the old 12-record grain, and they are the WRONG 678 until the router carries a grammar for plain
+   conversational prose. **The projector MUST NOT read this palace for a load-bearing co-jump until that
+   fork resolves.** Two roads: give `structure_router` a prose grammar (paragraph/sentence tree) so
+   structure covers every turn; or keep the sigil-only subpopulation and declare the selection loudly in
+   every claim it carries. This arc has no third road that stays honest.
 
 ## The first step (the unlock — BA)
 

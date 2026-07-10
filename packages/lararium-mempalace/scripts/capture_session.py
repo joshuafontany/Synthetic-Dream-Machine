@@ -60,10 +60,16 @@ def stamp_embedder(source: SourceCap, model: str) -> SourceCap:
 
 
 def drive_capture(palace_path: str, surface: str, pointer: str, *, wing: "str | None",
-                  room: str = "conversations", embed_factory: "Callable | None" = None) -> dict:
+                  room: str = "conversations", embed_factory: "Callable | None" = None,
+                  planes: "list | None" = None) -> dict:
     """Compose the Memory sensorium over a REAL palace with a warm embedder + the surface source-cap,
     then run ONE capture pass. `embed_factory` returns `(embed_one, model)` — defaults to the warm
-    minilm cap; a witness may inject a deterministic stand-in. Returns the pass summary dict."""
+    minilm cap; a witness may inject a deterministic stand-in. Returns the pass summary dict.
+
+    `planes` carries the structure/form plane caps so the SAME records land on all three planes (the
+    cross-plane thesis needs genuinely-independent projections over shared units, keyed by one cid).
+    None keeps the content-only pass — the caller decides, because standing the plane caps opens two
+    more chroma stores beside the palace."""
     if embed_factory is None:
         from embed_cap import make_embed_cap
         embed_factory = make_embed_cap
@@ -76,7 +82,7 @@ def drive_capture(palace_path: str, surface: str, pointer: str, *, wing: "str | 
 
     sensorium = compose_memory_sensorium(
         palace_path, source=source, embed=embed_one,
-        expected_dim=dim, expected_model=model,
+        expected_dim=dim, expected_model=model, planes=planes,
     )
     summary = sensorium.capture(pointer)
     return {"surface": surface, "pointer": pointer, "wing": wing, "room": room,
@@ -87,7 +93,7 @@ def capture_and_observe(palace_path: str, surface: str, pointer: str, *, wing: "
                         room: str = "conversations", worldline_palace: "str | None" = None,
                         embed_factory: "Callable | None" = None,
                         veil_secret: "bytes | str | None" = None, veil_context: str = "",
-                        identity_dir: "str | None" = None) -> dict:
+                        identity_dir: "str | None" = None, planes: "list | None" = None) -> dict:
     """Drive the capture pass, THEN build the worldline fork-DAG over the SAME transcript (the demux 1b
     wire). The two legs stay decoupled: `drive_capture` lands the content untouched; this coordinator
     then feeds `worldline_io` the braid so `worldline_of` / `roots` / kapae read the landed turn-keys.
@@ -95,7 +101,8 @@ def capture_and_observe(palace_path: str, surface: str, pointer: str, *, wing: "
     Only the Claude surface carries the parentUuid + `subagents/` provenance the observer reads, so the
     worldline leg guards on it (codex/copilot lands content only, `worldline` reads None). `worldline_palace`
     defaults to a `.worldline` dir BESIDE the Memory palace (the raw-sqlite-beside-chroma idiom)."""
-    summary = drive_capture(palace_path, surface, pointer, wing=wing, room=room, embed_factory=embed_factory)
+    summary = drive_capture(palace_path, surface, pointer, wing=wing, room=room,
+                            embed_factory=embed_factory, planes=planes)
 
     worldline = None
     if surface == "claude":
