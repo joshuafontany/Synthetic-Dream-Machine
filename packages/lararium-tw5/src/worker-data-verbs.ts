@@ -38,8 +38,6 @@ function listRegisteredDocUris(doc: LarDoc | undefined): string[] {
   return out;
 }
 
-const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
-
 /** A fire-and-forget poster for worker→main commands: residency-op (pin/unpin/
  *  register-cold) and wiki-alert (reboot-pending notice to affected live islands). */
 export type ResidencyOpPost = (msg: DaemonMsg_ResidencyOp | DaemonMsg_WikiAlert) => void;
@@ -117,14 +115,19 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
 export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: CatalogAccessor): VerbReactor {
   return async () => {
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null; kind: string }> = [];
-    // User wikis — @catalog WIKI_PREFIX oracle pointers.
+    // User wikis — read the @catalog RECIPE entries `wiki init` actually writes
+    // (`@catalog/recipes/{slug}`), mirroring the system-wiki path below. The old
+    // `@lararium/wikis/` prefix named a pre-plane-split shape nothing writes any
+    // longer, so this read returned zero user wikis (lar-uris.ts #retired-form).
     const cat = await catalog.handle();
+    const userRecipePrefix = recipeUri("@catalog", "");
     for (const [title, rec] of Object.entries((cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>)) {
-      if (!title.startsWith(WIKI_PREFIX)) continue;
+      if (!title.startsWith(userRecipePrefix)) continue;
       if (rec.meta?.deleted) continue;               // skip tombstones (listVisible parity)
-      const tail = title.slice(WIKI_PREFIX.length);
-      if (tail.includes("/")) continue;
-      wikis.push({ slug: tail, uri: title, automergeUrl: tiddlerText(rec), kind: "user" });
+      const slug = title.slice(userRecipePrefix.length);
+      if (!slug || slug.includes("/")) continue;
+      const bagUri = wikiBagUri(slug);
+      wikis.push({ slug, uri: bagUri, automergeUrl: await catalog.urlOf(bagUri), kind: "user" });
     }
     // System wikis — @oracle recipes (the @lares/@lararium quine system bags).
     // Their recipe lives in @oracle, the wiki bag IS the @ bag.
