@@ -29,7 +29,7 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { Heads } from "@automerge/automerge";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
-import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI } from "./lar-uris.js";
+import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, bagUri } from "./lar-uris.js";
 
 /** A slot URI in the lar:///ha.ka.ba/@<name> namespace. */
 export type SlotUri = string;
@@ -52,11 +52,13 @@ export const LARARIUM_BAG = LARARIUM_DOC_URI;
 /** @oracle — the runtime system island; the universal floor of every recipe. */
 export const ORACLE_BAG   = ORACLE_DOC_URI;
 
-/** Build a wiki identity bag URI from a slug. The quine: a wiki's canon IS the
- *  `@{slug}` bag (a user bag in @catalog, a system bag in @oracle) — never nested
- *  under the @lararium corpus (that was pre-plane-split ontology). */
+/** Build a wiki's CANON BAG URI from a slug. The quine: a wiki's canon IS the
+ *  `bags/@{slug}` bag — it MUST agree with the doc consts (DAEMON_BAG_ID etc), which
+ *  the daemon's own composite mount and its event-store put both key on. (Phase 3
+ *  separates the wiki IDENTITY `wikis/@{slug}` from this canon bag; here they still
+ *  coincide as the quine, relocated under bags/.) */
 export function wikiBagUri(slug: string): SlotUri {
-  return `lar:///ha.ka.ba/@${slug}`;
+  return bagUri(slug) as SlotUri;
 }
 
 /** The per-wiki draft bag, rooted at the wiki's own `@{slug}` canon. */

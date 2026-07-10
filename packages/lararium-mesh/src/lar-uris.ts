@@ -238,34 +238,36 @@ export function bagDescriptorUri(bagId: string): string {
 
 // ── Social plane URI builders ──────────────────────────────────────────────
 
-/** e.g. identityTiddlerUri("did:key:z…") → "lar:///ha.ka.ba/@identities/did:key:z…" */
+// These nested titles live INSIDE a moved bag doc — built from the const so they
+// follow bags/@ and stay keyed to the doc the daemon composite actually mounts.
+/** identityTiddlerUri("did:key:z…") → "…/bags/@identities/did:key:z…" */
 export function identityTiddlerUri(did: string): string {
-  return stableLarUri(`@identities/${did}`);
+  return `${IDENTITIES_DOC_URI}/${did}`;
 }
 
-/** e.g. circleTiddlerUri("admins") → "lar:///ha.ka.ba/@circles/admins" */
+/** circleTiddlerUri("admins") → "…/bags/@circles/admins" */
 export function circleTiddlerUri(id: string): string {
-  return stableLarUri(`@circles/${id}`);
+  return `${CIRCLES_DOC_URI}/${id}`;
 }
 
-/** e.g. sessionTiddlerUri("sess-abc") → "lar:///ha.ka.ba/@sessions/sess-abc" */
+/** sessionTiddlerUri("sess-abc") → "…/bags/@sessions/sess-abc" */
 export function sessionTiddlerUri(id: string): string {
-  return stableLarUri(`@sessions/${id}`);
+  return `${SESSIONS_DOC_URI}/${id}`;
 }
 
-/** e.g. sessionEventLogUri("sess-abc") → "lar:///ha.ka.ba/@sessions/sess-abc/events" */
+/** sessionEventLogUri("sess-abc") → "…/bags/@sessions/sess-abc/events" */
 export function sessionEventLogUri(sessionId: string): string {
-  return stableLarUri(`@sessions/${sessionId}/events`);
+  return `${SESSIONS_DOC_URI}/${sessionId}/events`;
 }
 
-/** e.g. deviceDelegationUri(opDid, devDid) → "lar:///ha.ka.ba/@identities/{opDid}/devices/{devDid}" */
+/** deviceDelegationUri(opDid, devDid) → "…/bags/@identities/{opDid}/devices/{devDid}" */
 export function deviceDelegationUri(operatorDid: string, deviceDid: string): string {
-  return stableLarUri(`@identities/${encodeURIComponent(operatorDid)}/devices/${encodeURIComponent(deviceDid)}`);
+  return `${IDENTITIES_DOC_URI}/${encodeURIComponent(operatorDid)}/devices/${encodeURIComponent(deviceDid)}`;
 }
 
-/** e.g. nexusTrustUri("abcdef…") → "lar:///ha.ka.ba/@identities/trust/nexus/abcdef…" */
+/** nexusTrustUri("abcdef…") → "…/bags/@identities/trust/nexus/abcdef…" */
 export function nexusTrustUri(nexusPubkey: string): string {
-  return stableLarUri(`@identities/trust/nexus/${nexusPubkey}`);
+  return `${IDENTITIES_DOC_URI}/trust/nexus/${nexusPubkey}`;
 }
 
 // ── Social plane doc-type aliases + empty constructors ────────────────────

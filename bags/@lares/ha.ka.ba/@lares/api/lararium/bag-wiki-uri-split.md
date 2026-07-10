@@ -1,16 +1,16 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split >>
-
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split"
-file-path    = "bags/@lares/ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split.md"
-content-type = "text/x-memetic-wikitext"
-register     = "Synthesis"
 confidence   = 12
+content-type = "text/x-memetic-wikitext"
+file-path    = "bags/@lares/ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split.md"
 mana         = 15
+register     = "Synthesis"
 role         = "design-of-record for the bag/wiki URI split — the two kinds the @catalog tracks, cleanly separated"
 status       = "draft — awaiting operator greenlight per phase"
+type         = "text/x-memetic-wikitext"
+uri-path     = "ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split"
 ```
 
 <<~ &#x0002; >>
@@ -120,4 +120,5 @@ silent drift. Blast radius, not confidence, sets this gate.
 Meme URIs (all 4,517 refs / 3,772 titles). The `bagsFileToUri` disk law. The `ha.ka.ba` root arity. The noosphere-boot address. `@oracle` as the Cabal read-face.
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

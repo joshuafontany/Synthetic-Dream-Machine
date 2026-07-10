@@ -32,7 +32,7 @@ describe("discoverHoldings — the discovered @* map", () => {
     expect(holdings[0]).toEqual({
       holding: "@elyncia",
       source: join(root, "bags", "@elyncia"),
-      toBag: "lar:///ha.ka.ba/@elyncia",
+      toBag: "lar:///ha.ka.ba/bags/@elyncia",
     });
   });
 

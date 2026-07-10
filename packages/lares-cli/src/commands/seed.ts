@@ -20,6 +20,7 @@
 
 import { readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { bagUri } from "@lararium/mesh";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit } from "../render.js";
 import { larRoot } from "../env.js";
@@ -47,7 +48,9 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
   return names.sort().map((holding) => ({
     holding,
     source: join(bagsDir, holding),
-    toBag: `lar:///ha.ka.ba/${holding}`,
+    // The disk dir `@elyncia` names bag `bags/@elyncia` — mint through bagUri so the
+    // seed targets the split's content plane, matching what the daemon registers.
+    toBag: bagUri(holding),
   }));
 }
 

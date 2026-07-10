@@ -28,7 +28,7 @@ const canonGrant: DiskMirrorGrant = [
   { bagId: WORKING, mirrorRoot: "/root/wikis",       scope: "@working", perWikiSlug: true },
   { bagId: "@self", mirrorRoot: "/root/bags",        scope: "@self",    perWikiSlug: true, selfCanon: true },
 ];
-const bagUri = (slug: string) => `lar:///ha.ka.ba/@${slug}`;
+const bagUri = (slug: string) => `lar:///ha.ka.ba/bags/@${slug}`;
 
 describe("resolveDiskMirrors — authority ∩ designation + per-wiki-slug leaf", () => {
   test("a per-wiki-slug grant (@working) resolves its leaf to wikis/@{slug}", () => {
