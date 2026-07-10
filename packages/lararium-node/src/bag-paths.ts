@@ -7,6 +7,7 @@
  */
 
 import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute, sep } from "path";
+import { MEME_WRITE_EXT, stripMemeExt, hasMemeExt } from "@lararium/mesh";
 
 export type MirrorPathFn = (uri: string) => string | null;
 
@@ -93,8 +94,7 @@ function splitHash(s: string): [string, string | null] {
  */
 function toRelMd(pathPart: string, frag: string | null): string | null {
   if (frag) return null;
-  const base = pathPart.endsWith(".md") ? pathPart.slice(0, -3) : pathPart;
-  return `${base}.md`;
+  return `${stripMemeExt(pathPart)}${MEME_WRITE_EXT}`;
 }
 
 /**
@@ -148,8 +148,8 @@ function mirrorRootFileToUri(instanceRoot: string, filePath: string, rootDirName
   const rel = abs.slice(mirrorRoot.length + 1).split(sep);
   if (rel.length < 2) return null;                       // needs holding dir + interior
   const interior = rel.slice(1).join("/");
-  if (!interior.endsWith(".md")) return null;
-  const namePath = interior.slice(0, -3);
+  if (!hasMemeExt(interior)) return null;                // read either .mem or the legacy .md
+  const namePath = stripMemeExt(interior);
   if (!/^\w+\.\w+\.\w+\//.test(namePath)) return null;  // loci: stable names carry a w.w.w root
   return `lar:///${namePath}`;
 }

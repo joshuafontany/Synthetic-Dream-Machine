@@ -17,7 +17,7 @@
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, sep } from "node:path";
-import { newChangeId, taskContentId } from "@lararium/mesh";
+import { newChangeId, taskContentId, hasMemeExt } from "@lararium/mesh";
 import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
@@ -61,7 +61,7 @@ export function listCarriers(source: string): string[] | null {
   try { st = statSync(source); } catch { return null; }
   if (!st.isDirectory()) return [source];
   return (readdirSync(source, { recursive: true }) as string[])
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => hasMemeExt(f))
     .map((f) => join(source, f));
 }
 

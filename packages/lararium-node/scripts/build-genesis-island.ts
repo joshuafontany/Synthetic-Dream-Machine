@@ -64,7 +64,7 @@ function walkMdFiles(dir: string): string[] {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const full = join(dir, entry.name);
       if (entry.isDirectory()) results.push(...walkMdFiles(full));
-      else if (entry.name.endsWith(".md")) results.push(full);
+      else if (entry.name.endsWith(".md") || entry.name.endsWith(".mem")) results.push(full);
     }
   } catch { /* absent — skip */ }
   return results.sort();
