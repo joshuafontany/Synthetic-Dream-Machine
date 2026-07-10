@@ -23,6 +23,10 @@ import {
   STABLE_L_SPACE,
   MESH_SCALES,
   parseMeshScale,
+  bagUri,
+  wikiUri,
+  legacyIdentityUri,
+  identitySlug,
 } from "../src/lar-uris.js";
 
 describe("lar-uris petname regions", () => {
@@ -85,5 +89,45 @@ describe("parseMeshScale — federation scale declared on a residency entry", ()
     expect(parseMeshScale("")).toBeUndefined();
     expect(parseMeshScale("planet")).toBeUndefined();
     expect(parseMeshScale("Vessel")).toBeUndefined(); // case-sensitive, exact match
+  });
+});
+
+describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
+  test("bagUri / wikiUri mint the kind into the first path segment", () => {
+    expect(bagUri("elyncia")).toBe("lar:///ha.ka.ba/bags/@elyncia");
+    expect(wikiUri("elyncia")).toBe("lar:///ha.ka.ba/wikis/@elyncia");
+  });
+
+  test("a leading @ on the slug never doubles", () => {
+    expect(bagUri("@lares")).toBe("lar:///ha.ka.ba/bags/@lares");
+    expect(wikiUri("@lares")).toBe("lar:///ha.ka.ba/wikis/@lares");
+  });
+
+  test("the two kinds NEVER collide for one slug", () => {
+    expect(bagUri("lares")).not.toBe(wikiUri("lares"));
+  });
+
+  test("legacyIdentityUri mints the pre-split form a prior store still carries", () => {
+    expect(legacyIdentityUri("lares")).toBe("lar:///ha.ka.ba/@lares");
+    expect(legacyIdentityUri("@lares")).toBe("lar:///ha.ka.ba/@lares");
+  });
+
+  test("identitySlug reads the slug from all three forms", () => {
+    expect(identitySlug(bagUri("sdm"))).toBe("sdm");
+    expect(identitySlug(wikiUri("sdm"))).toBe("sdm");
+    expect(identitySlug(legacyIdentityUri("sdm"))).toBe("sdm");
+  });
+
+  test("identitySlug returns null for a nested path — a bare identity carries none", () => {
+    expect(identitySlug("lar:///ha.ka.ba/wikis/@lares/drafts/did%3Aweb")).toBeNull();
+    expect(identitySlug("lar:///ha.ka.ba/@lares/api/lares/noosphere-boot")).toBeNull();
+    expect(identitySlug("lar:///threshold.uncertain.opens")).toBeNull();
+  });
+
+  test("a meme URI keeps its ha.ka.ba root arity — the split never touches it", () => {
+    // Four path segments; the split adds no fifth (bag identity rides its own URI).
+    const meme = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
+    expect(identitySlug(meme)).toBeNull();               // not an identity
+    expect(meme.split("/").filter(Boolean).length).toBe(6); // scheme-empty + ha.ka.ba + 4 segs
   });
 });

@@ -148,10 +148,49 @@ export function parseMeshScale(s: string | null | undefined): MeshScale | undefi
   return typeof s === "string" && (MESH_SCALES as readonly string[]).includes(s) ? (s as MeshScale) : undefined;
 }
 
-// The wiki canon/draft URI builders moved to wiki-recipe.ts (wikiBagUri /
-// wikiDraftBagUri) — a wiki's own canon IS the `@{slug}` bag (the quine),
-// never nested under the @lararium corpus (the pre-plane-split `@lararium/wikis/`
-// form is retired).
+// ── Bag / Wiki identity — the two kinds the @catalog tracks ────────────────
+// The KIND rides the first path segment (the heaviest-weight slot in lar: law):
+// `bags/@slug` names a composable recipe piece (one doc, shared as the operator
+// wishes); `wikis/@slug` names a #has bag-stack (per-wiki layers route off it,
+// never shared). Ownership never enters the address.
+//
+// A meme's URI carries NO relation to a bag's URI — a meme moves between bags
+// and lives in several at once; `bagsFileToUri` already discards the holding bag
+// from the meme's URI. So the `bags/`/`wikis/` segment names IDENTITY alone; it
+// never prefixes a meme path, and the ha.ka.ba root arity holds unchanged.
+//
+// Design-of-record: lar:///ha.ka.ba/@lares/api/lararium/bag-wiki-uri-split
+export const BAGS_SEGMENT  = "bags"  as const;
+export const WIKIS_SEGMENT = "wikis" as const;
+
+/** Mint the canonical URI of a BAG (a composable recipe piece). */
+export function bagUri(slug: string): string {
+  return stableLarUri(`${BAGS_SEGMENT}/@${slug.replace(/^@/, "")}`);
+}
+
+/** Mint the canonical URI of a WIKI (a #has bag-stack). */
+export function wikiUri(slug: string): string {
+  return stableLarUri(`${WIKIS_SEGMENT}/@${slug.replace(/^@/, "")}`);
+}
+
+/** Mint the PRE-SPLIT identity form (`lar:///ha.ka.ba/@{slug}`). A reader tries
+ *  the canonical form first, then falls back here, so a store written before the
+ *  split still resolves; a fresh regenesis mints only the canonical form. */
+export function legacyIdentityUri(slug: string): string {
+  return stableLarUri(`@${slug.replace(/^@/, "")}`);
+}
+
+/** Read the identity slug off a bag/wiki URI in ANY of the three forms
+ *  (`bags/@x`, `wikis/@x`, legacy `@x`); return null when the URI names no bare
+ *  identity (a nested path or a foreign shape carries none). */
+export function identitySlug(uri: string): string | null {
+  const m = /^lar:\/\/\/ha\.ka\.ba\/(?:bags\/|wikis\/)?@([^/]+)$/.exec(uri);
+  return m ? m[1]! : null;
+}
+
+// The wiki canon/draft URI builders live in wiki-recipe.ts (wikiBagUri /
+// wikiDraftBagUri). Phase 2 of the split re-points them onto `bagUri`/`wikiUri`;
+// Phase 1 adds the vocabulary above without disturbing the live consts.
 
 // ── Daemon bag + Persona bag ─────────────────────────────────────────────────
 
