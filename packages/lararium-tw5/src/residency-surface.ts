@@ -10,7 +10,6 @@
  * The `origin-bag` field gets written by the nalu engine on every inbound
  * CRDT change (see nalu-engine._toFields). This module reads it back.
  *
- * Sprint:  Residency Model Epic — S3.3
  * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  * Source:  packages/lararium-tw5/src/residency-surface.ts
  */
@@ -24,7 +23,7 @@ interface WikiLikeForOrigin {
 }
 
 /**
- * Residency Model S3.3 — return the bag URI that a tiddler's current value
+ * Residency Model — return the bag URI that a tiddler's current value
  * surfaced from in this wiki. TW5 `getShadowSource` analog at the residency
  * layer. Returns null when the tiddler does not exist or carries no
  * `origin-bag` annotation (the latter normally means an in-memory-only or

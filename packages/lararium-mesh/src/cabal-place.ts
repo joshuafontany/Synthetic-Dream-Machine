@@ -46,7 +46,7 @@ import type { BagResidencyManager, ResidencyTemperature } from "./bag-residency.
  * A cabal-place — a virtual PLACE three primitives co-define:
  *   · a Keyhive SENTINEL identity (the place's content-addressed name — a
  *     docId/agentId pair; knowing it grants no authority — #the-place NAMED-not-ruled
- *     — though it does leak metadata via the public pointer, crucible-corrected).
+ *     — though it does leak metadata via the public pointer).
  *     THIS CUT only TYPES this half — it does not mint or call Keyhive.
  *   · an Automerge SUBSTRATE doc (the shared content that the members maintain
  *     and that COOLS to anu when unfed — the residency-tracked half).
@@ -84,7 +84,7 @@ export function cabalPlaceLeaseSlot(placeDocIdHex: string, writerId: string): st
  *
  * "cooling" rides the type as the future intermediate, but the residency engine
  * exposes only the two settled states through its public surface (the `warm`
- * middle tier was CUT in the 2026-06-01 YIN pass, and the transient `evicting`
+ * middle tier was CUT, and the transient `evicting`
  * flag stays private to BagResidencyManager). So this pure function maps the two
  * derivable states only; a higher layer that can observe an in-flight cool may
  * report "cooling" itself. Keeping it a pure total function of the public tier.

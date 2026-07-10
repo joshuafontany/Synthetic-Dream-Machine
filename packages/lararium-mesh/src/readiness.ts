@@ -4,7 +4,7 @@
  * Replaces the single "app ready" gate with a named vector per shrine-light.
  * Well-known keys are typed; dynamic corpus/projection keys use string suffixes.
  *
- * Boot doctrine (FFZ web3, 2026-05-01):
+ * Boot doctrine (FFZ web3):
  *
  *   auth         — identity/receipt confirmed
  *   sw-shell     — Service island controls page; app shell from SW cache

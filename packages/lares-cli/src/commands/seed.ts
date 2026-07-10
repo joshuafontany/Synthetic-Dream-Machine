@@ -76,7 +76,7 @@ export async function seedRun(args: ParsedArgs): Promise<SeedHolding[]> {
     } else {
       // LOAD refuses an unregistered bag (cap-denied) — CREATE registers the
       // catalog-corpus entry first. CREATE converges idempotently (same content
-      // id → same outcome), witnessed 2026-07-01, so every seed run may lead
+      // id → same outcome), so every seed run may lead
       // with it. Applied runs only — a preview mutates nothing.
       const flags = args.flags["apply"]
         ? { ...args.flags, yes: true }

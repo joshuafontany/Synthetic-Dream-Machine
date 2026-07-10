@@ -7,7 +7,7 @@ const MODULE_MANA_THRESHOLD = 18;
 const MODULE_MANAO_THRESHOLD = 17;
 const MODULE_MANAOIO_THRESHOLD = 17;
 const MODULE_CONFIDENCE_THRESHOLD = 18;
-// The has-stack model (2026-06-12): a kernel-injectable module WEARS the
+// The has-stack model: a kernel-injectable module WEARS the
 // tw5-module component in its stack (tags), never "implements an interface".
 const MODULE_COMPONENT_URI = "lar:///ha.ka.ba/@lararium/tw5/tw5-module";
 const MODULE_AGGREGATE_URI = "lar:///ha.ka.ba/@lararium/tw5/modules/tw5-modules";

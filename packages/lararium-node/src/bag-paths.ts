@@ -88,8 +88,8 @@ function splitHash(s: string): [string, string | null] {
  * Carrier-whole at rest (disk-projection#granularity): a fragment record
  * (`…#slot`) never owns a disk file — its carrier root does. A fragment URI
  * resolves to null here; the projector routes a child change to its group
- * root before any path lookup. The old `frag → base/frag.md` ternary (hole
- * H1) burned 2026-06-11.
+ * root before any path lookup. A fragment must never map to `base/frag.md` —
+ * only its carrier root owns a file.
  */
 function toRelMd(pathPart: string, frag: string | null): string | null {
   if (frag) return null;
@@ -98,7 +98,7 @@ function toRelMd(pathPart: string, frag: string | null): string | null {
 }
 
 /**
- * The siting function (RULED 2026-06-12, lar-uri #five-planes): every file
+ * The siting function (lar-uri #five-planes): every file
  * on disk lives at its FULL uri-path inside its holding bag's mirror —
  * directory = residency, interior path = the name, whole. Any bag projects
  * any stable name losslessly; reverse derivation = strip root, read name.

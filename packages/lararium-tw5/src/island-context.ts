@@ -42,7 +42,7 @@ export interface IslandContext {
   catalogUrl: string | null;
   /**
    * The `@oracle` runtime system-island doc URL (= `grants.islandUrl`). The
-   * **system** oracle plane (operator ruling 2026-06-16): system bags (`@oracle`,
+   * **system** oracle plane: system bags (`@oracle`,
    * `@lararium`, `@lares`) + the system wiki-recipes resolve from here, the way
    * user bags resolve from `@catalog`. recipe-watch reads a system wiki's recipe
    * via `recipeUri("@oracle", slug)` and resolves system bags from this doc.

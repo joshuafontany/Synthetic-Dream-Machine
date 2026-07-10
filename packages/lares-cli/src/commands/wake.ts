@@ -16,7 +16,8 @@ import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath, larDataDir } from "../env.js";
 import { probePort } from "../port-control.js";
 import { emit } from "../render.js";
-import { connectDaemonVessel, submitVerb, summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
+import { runVerb } from "../verb-call.js";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
 import { setupMempalacePalace, type PalaceSetupStep } from "../setup-mempalace.js";
@@ -49,18 +50,15 @@ interface WakeRecall {
  * miss (no identity, daemon unreachable, recall error) returns {ok:false,note} and
  * the wake proceeds. A short timeout keeps it inside the SessionStart hook budget.
  */
-async function recallIntoWake(port: number): Promise<WakeRecall> {
+async function recallIntoWake(): Promise<WakeRecall> {
   const wing = wakeWing();
   let did: string;
   try { did = "0x" + (await loadVesselVerifyingKey(larDataDir())); }
   catch { return { ok: false, wing, note: "no operator identity" }; }
-  let vessel;
-  try { vessel = await connectDaemonVessel({ port }); }
-  catch { return { ok: false, wing, note: "daemon unreachable" }; }
   try {
     // One cold sidecar start can take ~8s; after that the @daemon pool is warm and
     // recall is sub-second. Give the first wake room; warm wakes return instantly.
-    const r = await submitVerb(vessel, "recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
+    const r = await runVerb("recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
     if (r.status !== "done") return { ok: false, wing, note: r.errorMessage ?? "recall error" };
     const out = summaryOutput(r) ?? {};
     const rows = Array.isArray(out["drawers"]) ? (out["drawers"] as Array<Record<string, unknown>>) : [];
@@ -71,8 +69,6 @@ async function recallIntoWake(port: number): Promise<WakeRecall> {
     return { ok: true, wing, drawers: typeof out["total"] === "number" ? out["total"] : rows.length, recent };
   } catch (e) {
     return { ok: false, wing, note: e instanceof Error ? e.message : String(e) };
-  } finally {
-    try { await vessel.disconnect(); } catch { /* best effort */ }
   }
 }
 
@@ -199,7 +195,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   // 2b. Recall-into-wake — pull this project's recent journey so the woken session
   //     climbs already-remembering. Best-effort: never breaks the wake; skipped when
   //     the node isn't up (verbatim-always / recall-eventual).
-  const recall = nodeUp ? await recallIntoWake(port) : undefined;
+  const recall = nodeUp ? await recallIntoWake() : undefined;
 
   // 3. Emit the live-delta frame (dual output). Graceful: never hard-fail the wake.
   const ok = integration.ok && nodeUp;

@@ -1,8 +1,8 @@
 /**
  * lares watch — the disk→records gesture, fired on a settle instead of an
- * operator keystroke (NEXT VECTOR build 4: the watcher daemon, last).
+ * operator keystroke.
  *
- *   lares watch --source <dir> --to <bagUri> [--apply] [--port N] [--debounce ms]
+ *   lares watch --source <dir> --to <bagUri> [--apply] [--debounce ms]
  *
  * A nalu-builder for the disk peer. Disk events are HINTS (§6); the watcher
  * coalesces a settle-window into ONE wave — one scan, one INGEST verb, one
@@ -11,13 +11,12 @@
  *
  * Settle, by the §6 law: a buffered path drains only after the events quiet
  * (trailing debounce) AND the scan's own hash gate confirms a real change — a
- * no-op save drops at the gate, never a timer alone. The watcher holds ONE
- * vessel connection across every wave of its life; the gesture re-opened one
- * per keystroke.
+ * no-op save drops at the gate, never a timer alone. Every wave rides one line
+ * over the daemon's sock — the watcher holds no replica of its own.
  *
- * Deletion (moʻolelo 2026-06-14): a vanished carrier enters a ~60s grace window
- * (separate from the edit debounce); a transient delete (git checkout flood)
- * self-heals when its path scans present again; a real delete rides the wave as
+ * Deletion: a vanished carrier enters a ~60s grace window (separate from the edit
+ * debounce); a transient delete (git checkout flood) self-heals when its path scans
+ * present again; a real delete rides the wave as
  * a `deletions[]` entry once due, OR rides EARLY when a candidate add shares its
  * synced-hash (a rename — the island re-links rather than tombstone+create).
  * The island gate applies the mass-delete brake (`--delete-fraction`).
@@ -26,20 +25,21 @@
  * PROJECTOR (backup-on-write) — content is gone from disk by the time a delete
  * is seen here. Tracked as a burr; the CRDT op-log covers recovery until epoch.
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff (NEXT VECTOR, build 4)
+ * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff
  */
 
 import { watch as fsWatch, writeFileSync, rmSync, type FSWatcher } from "node:fs";
 import { join, relative, isAbsolute } from "node:path";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit } from "../render.js";
-import { connectDaemonVessel, summaryOutput, type DaemonVesselHandle } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
+import { udsAvailable, udsSocketPath } from "../local-connector.js";
 import { larRoot, operatorDid } from "../env.js";
-import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngestOn, type PendingDeletion } from "../ingest-core.js";
+import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngest, type PendingDeletion } from "../ingest-core.js";
 
 const DEFAULT_DEBOUNCE_MS = 400;   // twillm's field-tested trailing window
 const COOKIE_TIMEOUT_MS   = 2_000; // a live backend echoes our own write well under this
-const DEFAULT_DELETE_GRACE_MS = 60_000;     // Syncthing's delete-pairing window (moʻolelo 2026-06-14)
+const DEFAULT_DELETE_GRACE_MS = 60_000;     // Syncthing's delete-pairing window
 const DEFAULT_MASS_DELETE_FRACTION = 0.25;  // tombstones above this fraction of the bag suspend
 
 /** Editor litter and our own projection sidecar never count as carrier events. */
@@ -53,7 +53,7 @@ function isNoise(rel: string): boolean {
 }
 
 function printUsage(): void {
-  console.log("usage: lares watch --source <dir> --to <bagUri> [--apply] [--port N] [--debounce ms] [--delete-grace ms] [--delete-fraction f]");
+  console.log("usage: lares watch --source <dir> --to <bagUri> [--apply] [--debounce ms] [--delete-grace ms] [--delete-fraction f]");
   console.log("  default = preview (logs what each settle WOULD ingest, submits nothing);");
   console.log("  --apply submits each settled wave through the island's INGEST gate;");
   console.log("  --delete-grace ms  hold a vanished carrier before tombstoning (default 60000);");
@@ -71,9 +71,8 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
   const deleteGraceMs = args.options["delete-grace"] ? Number(args.options["delete-grace"]) : DEFAULT_DELETE_GRACE_MS;
   const massDeleteFraction = args.options["delete-fraction"] ? Number(args.options["delete-fraction"]) : DEFAULT_MASS_DELETE_FRACTION;
 
-  // One vessel + one operator identity for the whole life of the watch (the
-  // gesture re-opened these per keystroke; the daemon holds them open).
-  let vessel: DaemonVesselHandle | undefined;
+  // One operator identity for the whole life of the watch. Each wave submits over
+  // the sock; the daemon holds the warm replica, so the watcher holds nothing.
   let did = "";
   if (apply) {
     try { did = await operatorDid(); } catch (err) {
@@ -81,11 +80,8 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       emit(args, { ok: false, error: msg, human: () => console.error(`lares watch: ${msg}`) });
       return 3;
     }
-    try {
-      const portOpt = args.options["port"];
-      vessel = await connectDaemonVessel(portOpt ? { port: Number(portOpt) } : {});
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
+    if (!udsAvailable()) {
+      const msg = `no lares daemon at ${udsSocketPath()}`;
       emit(args, { ok: false, error: msg, human: () => { console.error(`lares watch: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
       return 3;
     }
@@ -138,7 +134,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
     }
     const n = ++waveNo;
 
-    if (!apply || !vessel) {
+    if (!apply) {
       console.log(`  wave ${n} (preview): ${candidates.length} change(s), ${ride.length} deletion(s) of ${rows.length} touched`);
       for (const r of candidates) console.log(`    ${r.status.toUpperCase().padEnd(8)} ${r.uri}`);
       for (const d of ride)       console.log(`    DELETE   ${d.uri}`);
@@ -147,7 +143,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
     }
 
     try {
-      const result = await submitIngestOn(vessel, { source, toBag, candidates, did, deletions: ride, massDeleteFraction });
+      const result = await submitIngest({ source, toBag, candidates, did, deletions: ride, massDeleteFraction });
       if (result.status === "error") {
         console.error(`  wave ${n}: INGEST failed — ${result.errorMessage ?? "unknown"}`);
         return;
@@ -197,7 +193,6 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: msg, human: () => console.error(`lares watch: cannot watch "${source}": ${msg}`) });
-    if (vessel) await vessel.disconnect();
     return 3;
   }
 
@@ -223,7 +218,6 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
     process.once("SIGTERM", shutdown);
   });
 
-  if (vessel) await vessel.disconnect();
   console.log(`\nlares watch: stopped after ${waveNo} wave(s).`);
   return 0;
 }

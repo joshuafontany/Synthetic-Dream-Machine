@@ -5,11 +5,11 @@
  * information). The self-history is conditioned OUT — only the cross-flow is reported. That
  * is, structurally, "couple-then-decouple, never merge": the interior never crosses.
  *
- * HONEST VERB (crucible-bound, Lizier-Prokopenko): TE proves directed *predictability*, NOT
+ * HONEST VERB (Lizier-Prokopenko): TE proves directed *predictability*, NOT
  * *drive/causation*. Read every edge as "source INFORMS target's future", never "source
  * causes target". High TE can sit atop zero causal effect.
  *
- * TWO GUARDRAILS the crucible made mandatory:
+ * TWO MANDATORY GUARDRAILS:
  *   · CONDITIONAL TE — pairwise TE hallucinates coupling through a hidden common driver;
  *     conditioning on the other series (conditionalTransferEntropy) removes the phantom.
  *   · EFFECTIVE TE — raw TE carries a positive finite-sample bias; subtract the mean over

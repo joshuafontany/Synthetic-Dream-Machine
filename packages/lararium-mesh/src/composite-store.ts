@@ -40,7 +40,7 @@ export interface CompositeLayer {
    * When true (default), this layer becomes the composite's default writable
    * store on registration — unbagged writes route here. Set false for layers
    * that accept explicit `record.bag` routing but shouldn't override the
-   * default. The projection layer (E.2) uses this: writable=true so explicit
+   * default. The projection layer uses this: writable=true so explicit
    * writes targeting `bag: "projection"` route correctly, but the default
    * writable stays draft/wiki.
    */
@@ -216,12 +216,12 @@ export class CompositeStore implements LarTiddlerStore {
   }
 
   async put(record: LarTiddlerRecord, origin: ChangeOrigin, options?: { bag?: string }): Promise<void> {
-    // Explicit-target routing — the overlayfs decision tree (operator ruling
-    // 2026-06-16, prior-art-grounded; wiki-layer-ontology#write-law):
+    // Explicit-target routing — the overlayfs decision tree
+    // (wiki-layer-ontology#write-law):
     if (options?.bag) {
       //  a) a matching WRITABLE layer → write it (the upper). Serves only
       //     genuinely-mounted writable layers the wiki owns — the projection
-      //     layer (E.2), the daemon bag, draft routing. Residency-target writes
+      //     layer, the daemon bag, draft routing. Residency-target writes
       //     into a DEEP bag no longer route here: they reach the bag's own doc
       //     by access (catalog-accessor.storeOf) + write-then-sync, mounting
       //     nothing (action-handler resolveBagStores; wiki-layer-ontology#write-law).
@@ -315,7 +315,7 @@ export class CompositeStore implements LarTiddlerStore {
    *  getLive() is the variant ceremonies use when "is the tiddler actually
    *  there right now" matters (MOVE source-detection, draft-from).
    *
-   *  Residency Model S4.3 — **kāpae semantics**: a tombstone in a
+   *  Residency Model — **kāpae semantics**: a tombstone in a
    *  higher-priority bag stops the cascade rather than falling through. A
    *  tombstone-in-HIGH means "intentionally hidden at this priority"; lower
    *  bags do not surface. Anti-pattern #3 defense (kāpae resurrection —
@@ -346,7 +346,7 @@ export class CompositeStore implements LarTiddlerStore {
   }
 
   /**
-   * Residency Model S3.1 — return every (bagId, record) pair holding a
+   * Residency Model — return every (bagId, record) pair holding a
    * non-tombstoned manifestation of `title`, ordered highest-priority first.
    *
    * Surfaces multi-bag residency for operator inspection (lares wiki resolve)
@@ -366,7 +366,7 @@ export class CompositeStore implements LarTiddlerStore {
   }
 
   /**
-   * Residency Model S3.2 — return the winning (bagId, record) pair for `title`
+   * Residency Model — return the winning (bagId, record) pair for `title`
    * per recipe priority, or null when no live residency exists.
    *
    * Equivalent to getLive() but carries the source bag for operator-visible
@@ -374,7 +374,7 @@ export class CompositeStore implements LarTiddlerStore {
    * layer; consumers surface origin-bag in the read path (IslandAdaptor +
    * getOriginBag).
    *
-   * Residency Model S4.3 — **kāpae semantics**: tombstone in a
+   * Residency Model — **kāpae semantics**: tombstone in a
    * higher-priority bag stops the cascade and returns null. Anti-pattern #3
    * defense (kāpae resurrection). For multi-residency presence-reporting
    * that ignores the shadow, call `resolveAll(title)` instead.
@@ -394,7 +394,7 @@ export class CompositeStore implements LarTiddlerStore {
   }
 
   /**
-   * Residency Model S4.3 — list bag IDs that explicitly tombstone `title`,
+   * Residency Model — list bag IDs that explicitly tombstone `title`,
    * ordered highest-priority first. Sibling of resolveAll (presence report);
    * surfaces the kāpae hides for operator-visible coordinate
    * inspection. A title may BOTH appear in resolveAll (live in lower bags)

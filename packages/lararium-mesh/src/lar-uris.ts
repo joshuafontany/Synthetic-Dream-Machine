@@ -74,7 +74,7 @@ export function stableTagUri(name: string): string {
 
 // @oracle = the runtime SYSTEM ISLAND (genesis-loaded: engine BLOBs + bag→doc
 // oracle + genesis-cid); the universal floor of every wiki-recipe. Split from
-// the @lararium memetic corpus (disk-projection #oracle-split, 2026-06-15).
+// the @lararium memetic corpus (disk-projection #oracle-split).
 export const ORACLE_DOC_URI    = stableLarUri("@oracle");
 // @lararium = the engine's memetic CORPUS (authored self-doc memes; a library bag).
 export const LARARIUM_DOC_URI  = stableLarUri("@lararium");

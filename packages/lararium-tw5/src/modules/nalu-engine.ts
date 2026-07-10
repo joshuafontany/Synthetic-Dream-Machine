@@ -13,7 +13,7 @@ module-type: startup
  *   - the one `wiki.transact()` per nalu wrapping the entire batch
  *   - the apply-time echo guard (suppresses outbound writes during drain)
  *
- * Prior-art alignment (DriftWatch [PriorArt] → Map-Wisp 2026-05-29):
+ * Prior-art alignment (DriftWatch [PriorArt]):
  *   Vue 3 scheduler · MobX transaction · Yjs transact · React 18 auto-batch ·
  *   Solid batch · S.js tick · DREAM glitch-freedom.
  *
@@ -94,7 +94,7 @@ function _toFields(change: LarTiddlerChange): TW5TiddlerInputFieldsWithTitle {
   // CRDT records store the title as the doc key, not nested in `tiddler` —
   // restore it from `change.title` so the wiki tiddler carries its identity.
   //
-  // Residency Model S3.4 — every inbound write annotates `origin-bag` so the
+  // Residency Model — every inbound write annotates `origin-bag` so the
   // operator can answer "which bag does this come from?" at every read
   // (Anti-pattern #4 defense). The legacy `bag` field stays for outbound
   // write-target override; `origin-bag` carries inbound provenance.

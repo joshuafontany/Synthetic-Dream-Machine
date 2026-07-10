@@ -7,7 +7,7 @@
  *   GitHubIdentitySlot     — OAuth token mapped to did:web:github.com/<username>
  *   KeyhiveIdentitySlot    — Keyhive convergent capabilities (Ink & Switch)
  *
- * STATUS NOTE (2026-06-08, drift-reconcile): Keyhive is NO LONGER pending — it runs
+ * STATUS NOTE: Keyhive runs
  * LIVE at the OPERATOR level (bootDaemonKeyhive Gates A/B/C, the V3 peer-boundary gate,
  * resolveOrMintBinding) in @lararium/keyhive. THIS slot governs only USER-level access
  * (Bluesky/GitHub/keyhive-user), which remains the alpha stub. The node sharePolicy

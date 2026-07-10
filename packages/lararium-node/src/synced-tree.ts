@@ -26,7 +26,7 @@ export function contentHash(text: string): string {
 /** The canonical Synced-tree key: bag-id + carrier-root URI, NUL-joined.
  *  ONE source of truth — readers (ingest) and writers (projector) MUST call
  *  this, never hand-build the key (a separator drift silently reads every
- *  carrier as `new`; that bug cost the ingest-quiescence vectors 2026-06-15). */
+ *  carrier as `new`, breaking ingest quiescence). */
 export function syncedTreeKey(bagId: string, uri: string): string {
   return `${bagId}\0${uri}`;
 }

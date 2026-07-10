@@ -2,13 +2,13 @@
  * KeyhiveProvider — CapabilityProvider implementation atop @keyhive/keyhive
  * pre-alpha (0.0.0-alpha.56c).
  *
- * Mapping (from D.1 + D.1.5 findings):
+ * Mapping:
  *   - Lararium bag URL ↔ Keyhive Document, 1:1
  *   - Operator ed25519 seed → Signer.memorySignerFromBytes
  *   - Peer DID = hex-encoded Identifier bytes (matches Keyhive.idString)
  *   - Access "read" / "admin" passes through verbatim
  *
- * Bag URL ↔ DocumentId mapping lives in-memory; D.4 will persist it as
+ * Bag URL ↔ DocumentId mapping lives in-memory; TODO: persist it as
  * tiddler fields under each cap event so it survives daemon restart.
  *
  * Caveats (pre-alpha):
@@ -120,7 +120,7 @@ export class KeyhiveProvider implements CapabilityProvider {
       try {
         const variant = e.variant;
         const bytes   = e.toBytes();
-        // D.2 uses synthetic hashes via the in-memory store; D.4's
+        // The in-memory store uses synthetic hashes here; a
         // tiddler-backed store will compute content hashes itself.
         const hash    = `${variant}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
         void this.eventStore?.put({ hash, variant, bytes });

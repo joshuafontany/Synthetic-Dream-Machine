@@ -199,8 +199,8 @@ export function runSovereignKernel(
   // inferred from a fixed wall deadline: during a fresh-corpus boot both the
   // vessel main thread and this island wedge for whole seconds in synchronous
   // automerge/keyhive work, so a bare 8s `Promise.race` faulted a LIVE sync
-  // whose response sat queued behind the wedge (witnessed: @personal never
-  // "arrived" while its doc sat on disk the whole time — regenesis 2026-07-01).
+  // whose response sat queued behind the wedge (@personal never
+  // "arrived" while its doc sat on disk the whole time).
   // The vessel-host ea-wait carries the same law; this is its island-side twin:
   //   - the budget clocks port-silence, re-armed by ANY inbound sync traffic
   //     (a busy peer mid-corpus-sync reads live, not absent);
@@ -234,7 +234,7 @@ export function runSovereignKernel(
     // The silence budget clocks from max(last inbound message, THIS find's start):
     // slots that resolve from the island's own storage partition move no port
     // traffic, so quiet accrued BEFORE this find says nothing about this doc's
-    // request (witnessed: @draft faulted at 756ms elapsed under 9240ms of stale
+    // request (@draft faulted at 756ms elapsed under 9240ms of stale
     // pre-find silence when the big bags loaded locally).
     const silence = (): number => mono() - Math.max(_lastSyncHeardAt, started);
     for (;;) {
@@ -309,8 +309,8 @@ export function runSovereignKernel(
       if (slot === wikiBagUri(msg.recipe.wikiSlug)) return msg.grants.wikiUrl ?? null;
       if (slot === ORACLE_BAG)                 return msg.grants.islandUrl;
       // System bags (@lares, @lararium) resolve from the @oracle doc's well-known
-      // tiddlers — the system plane the island already holds (operator ruling
-      // 2026-06-16). User library bags fall through to @catalog.
+      // tiddlers — the system plane the island already holds. User library
+      // bags fall through to @catalog.
       if (slot === LARES_BAG)                    return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARES_BAG]) ?? null;
       if (slot === LARARIUM_BAG)                 return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARARIUM_BAG]) ?? null;
       return catalog ? await catalog.urlOf(slot) : null;   // user library bags

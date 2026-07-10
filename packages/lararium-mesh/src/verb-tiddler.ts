@@ -65,8 +65,8 @@ export const OUTCOME_URI_PREFIX = `${DAEMON_BAG_ID}/outcomes/`;
 /** Result map key for single-result (no explicit targets) verbs. */
 export const VERB_RESULT_KEY = "summary" as const;
 
-// ── Task / receipt ontology — content-addressed surface (SEED 2026-06-07) ────
-// The pono attractor (A/B/C approved): a TASK = a content-addressed invocation
+// ── Task / receipt ontology — content-addressed surface ──────────────────────
+// The pono attractor: a TASK = a content-addressed invocation
 // fact living in a bag; the BAG carries the addressing geometry (its keyhive
 // ring); a RECEIPT keys by the task it answers. The live verb/summons/outcome
 // path migrates onto this surface per packages/EPIC-TASK-ONTOLOGY.md. Until

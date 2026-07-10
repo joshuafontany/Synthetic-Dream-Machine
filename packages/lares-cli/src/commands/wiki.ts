@@ -17,27 +17,20 @@
 
 import { operatorDid } from "../env.js";
 import { emit } from "../render.js";
-import { summaryOutput, type SubmitResult, type SubmitOptions } from "../daemon-connector.js";
+import { summaryOutput, type SubmitResult, type SubmitOptions } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 type WikiSubcommand = (args: ParsedArgs) => Promise<number>;
 
-// The whole wiki surface runs over the lares↔lararium binding (UDS fast path, WS
-// fallback). Each subcommand keeps its connect+submit shape unchanged: tryConnect
-// is now a no-op handle (no per-command leaf replica) and the local submitVerb
-// routes a one-shot invocation through runVerb, surfacing a transport failure as an
-// error-result so each handler's `r.status === "error"` path reports it.
-async function tryConnect(): Promise<{ disconnect: () => Promise<void> }> {
-  return { disconnect: async () => { /* one-shot — nothing to close */ } };
-}
-
-async function submitVerb(
-  _vessel: { disconnect: () => Promise<void> },
-  name:    string,
-  args:    Record<string, unknown>,
-  did:     string,
-  opts:    SubmitOptions = {},
+// The whole wiki surface runs over the lares↔lararium binding: one line over the
+// daemon's sock. `call` surfaces a transport failure as an error-result so each
+// handler's `r.status === "error"` path reports it.
+async function call(
+  name: string,
+  args: Record<string, unknown>,
+  did:  string,
+  opts: SubmitOptions = {},
 ): Promise<SubmitResult> {
   try {
     return await runVerb(name, args, did, opts);
@@ -48,39 +41,33 @@ async function submitVerb(
 
 export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "list-wikis", {}, did);
-    if (r.status === "error") {
-      console.error(`list failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    const wikis = (result["wikis"] ?? []) as Array<{
-      slug: string;
-      uri: string;
-      automergeUrl: string | null;
-      kind?: string;
-    }>;
-    console.log("");
-    if (wikis.length === 0) {
-      console.log("(no wikis registered)");
-      console.log("");
-      return 0;
-    }
-    console.log(`wikis (${wikis.length}):`);
-    for (const w of wikis) {
-      const url = w.automergeUrl ? w.automergeUrl.slice(0, 40) + "…" : "(no doc)";
-      const tag = w.kind ? ` [${w.kind}]` : "";
-      console.log(`  ${w.slug.padEnd(20)}${tag} ${w.uri}`);
-      console.log(`    ↳ ${url}`);
-    }
+  const r = await call("list-wikis", {}, did);
+  if (r.status === "error") {
+    console.error(`list failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const result = summaryOutput(r) ?? {};
+  const wikis = (result["wikis"] ?? []) as Array<{
+    slug: string;
+    uri: string;
+    automergeUrl: string | null;
+    kind?: string;
+  }>;
+  console.log("");
+  if (wikis.length === 0) {
+    console.log("(no wikis registered)");
     console.log("");
     return 0;
-  } finally {
-    await vessel.disconnect();
   }
+  console.log(`wikis (${wikis.length}):`);
+  for (const w of wikis) {
+    const url = w.automergeUrl ? w.automergeUrl.slice(0, 40) + "…" : "(no doc)";
+    const tag = w.kind ? ` [${w.kind}]` : "";
+    console.log(`  ${w.slug.padEnd(20)}${tag} ${w.uri}`);
+    console.log(`    ↳ ${url}`);
+  }
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
@@ -90,34 +77,28 @@ export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "init-wiki", { slug }, did);
-    if (r.status === "error") {
-      const msg = r.errorMessage ?? "unknown";
-      emit(args, { ok: false, requestId: r.requestId, error: msg, human: () => console.error(`init failed: ${msg}`) });
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    emit(args, {
-      ok: true, requestId: r.requestId, data: { slug, ...result },
-      human: () => {
-        console.log("");
-        console.log(`wiki: ${slug}`);
-        console.log(`  status:    ${result["status"]}`);
-        console.log(`  wiki URI:  ${result["wikiUri"]}`);
-        console.log(`  wiki doc:  ${result["wikiDocUrl"]}`);
-        console.log(`  draft URI: ${result["draftBagId"]}`);
-        console.log(`  draft doc: ${result["draftDocUrl"]}`);
-        console.log(`  recipe:    ${result["recipeUri"]}`);
-        console.log("");
-      },
-    });
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("init-wiki", { slug }, did);
+  if (r.status === "error") {
+    const msg = r.errorMessage ?? "unknown";
+    emit(args, { ok: false, requestId: r.requestId, error: msg, human: () => console.error(`init failed: ${msg}`) });
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  emit(args, {
+    ok: true, requestId: r.requestId, data: { slug, ...result },
+    human: () => {
+      console.log("");
+      console.log(`wiki: ${slug}`);
+      console.log(`  status:    ${result["status"]}`);
+      console.log(`  wiki URI:  ${result["wikiUri"]}`);
+      console.log(`  wiki doc:  ${result["wikiDocUrl"]}`);
+      console.log(`  draft URI: ${result["draftBagId"]}`);
+      console.log(`  draft doc: ${result["draftDocUrl"]}`);
+      console.log(`  recipe:    ${result["recipeUri"]}`);
+      console.log("");
+    },
+  });
+  return 0;
 }
 
 export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
@@ -127,23 +108,17 @@ export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "open-wiki", { slug }, did);
-    if (r.status === "error") {
-      console.error(`open failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    console.log("");
-    console.log(`wiki: ${slug}  status: ${result["status"]}`);
-    if (typeof result["note"] === "string") console.log(`  ${result["note"]}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("open-wiki", { slug }, did);
+  if (r.status === "error") {
+    console.error(`open failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  console.log("");
+  console.log(`wiki: ${slug}  status: ${result["status"]}`);
+  if (typeof result["note"] === "string") console.log(`  ${result["note"]}`);
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
@@ -153,31 +128,25 @@ export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
-    if (r.status === "error") {
-      console.error(`sync failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    console.log("");
-    console.log(`sync ${slug}:`);
-    console.log(`  scanned:  ${result["scanned"]}`);
-    console.log(`  ingested: ${result["ingested"]}`);
-    console.log(`  skipped:  ${result["skipped"]}`);
-    const errors = (result["errors"] ?? []) as string[];
-    if (errors.length > 0) {
-      console.log(`  errors (${errors.length}):`);
-      for (const e of errors) console.log(`    ${e}`);
-    }
-    if (result["note"]) console.log(`  ${result["note"]}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("sync-wiki", { slug }, did, { timeoutMs: 30_000 });
+  if (r.status === "error") {
+    console.error(`sync failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  console.log("");
+  console.log(`sync ${slug}:`);
+  console.log(`  scanned:  ${result["scanned"]}`);
+  console.log(`  ingested: ${result["ingested"]}`);
+  console.log(`  skipped:  ${result["skipped"]}`);
+  const errors = (result["errors"] ?? []) as string[];
+  if (errors.length > 0) {
+    console.log(`  errors (${errors.length}):`);
+    for (const e of errors) console.log(`    ${e}`);
+  }
+  if (result["note"]) console.log(`  ${result["note"]}`);
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
@@ -187,25 +156,19 @@ export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "pin-wiki", { slug }, did);
-    if (r.status === "error") {
-      console.error(`pin failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    const pinned = (result["pinned"] ?? []) as Array<{ bagUrl: string; reason: string }>;
-    console.log("");
-    console.log(`wiki ${slug}: pinned ${pinned.length} bag(s)`);
-    for (const p of pinned) console.log(`  ${p.bagUrl}  (${p.reason})`);
-    if (result["note"]) console.log(`  ${result["note"]}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("pin-wiki", { slug }, did);
+  if (r.status === "error") {
+    console.error(`pin failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  const pinned = (result["pinned"] ?? []) as Array<{ bagUrl: string; reason: string }>;
+  console.log("");
+  console.log(`wiki ${slug}: pinned ${pinned.length} bag(s)`);
+  for (const p of pinned) console.log(`  ${p.bagUrl}  (${p.reason})`);
+  if (result["note"]) console.log(`  ${result["note"]}`);
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
@@ -215,24 +178,18 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "unpin-wiki", { slug }, did);
-    if (r.status === "error") {
-      console.error(`unpin failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    const unpinned = (result["unpinned"] ?? []) as string[];
-    console.log("");
-    console.log(`wiki ${slug}: unpinned ${unpinned.length} bag(s)`);
-    for (const u of unpinned) console.log(`  ${u}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("unpin-wiki", { slug }, did);
+  if (r.status === "error") {
+    console.error(`unpin failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  const unpinned = (result["unpinned"] ?? []) as string[];
+  console.log("");
+  console.log(`wiki ${slug}: unpinned ${unpinned.length} bag(s)`);
+  for (const u of unpinned) console.log(`  ${u}`);
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
@@ -243,33 +200,27 @@ export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "add-bag", { slug, bagUrl }, did);
-    if (r.status === "error") {
-      const msg = r.errorMessage ?? "unknown";
-      emit(args, { ok: false, requestId: r.requestId, error: msg, human: () => console.error(`add-bag failed: ${msg}`) });
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    emit(args, {
-      ok: true, requestId: r.requestId, data: { slug, ...result },
-      human: () => {
-        console.log("");
-        console.log(`wiki ${slug}: ${result["status"]}`);
-        console.log(`  bag:    ${result["bagUrl"]}`);
-        if (result["stack"]) {
-          console.log(`  stack:  ${(result["stack"] as string[]).join(" → ")}`);
-        }
-        if (result["error"]) console.log(`  error:  ${result["error"]}`);
-        console.log("");
-      },
-    });
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("add-bag", { slug, bagUrl }, did);
+  if (r.status === "error") {
+    const msg = r.errorMessage ?? "unknown";
+    emit(args, { ok: false, requestId: r.requestId, error: msg, human: () => console.error(`add-bag failed: ${msg}`) });
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  emit(args, {
+    ok: true, requestId: r.requestId, data: { slug, ...result },
+    human: () => {
+      console.log("");
+      console.log(`wiki ${slug}: ${result["status"]}`);
+      console.log(`  bag:    ${result["bagUrl"]}`);
+      if (result["stack"]) {
+        console.log(`  stack:  ${(result["stack"] as string[]).join(" → ")}`);
+      }
+      if (result["error"]) console.log(`  error:  ${result["error"]}`);
+      console.log("");
+    },
+  });
+  return 0;
 }
 
 export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
@@ -280,27 +231,21 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "remove-bag", { slug, bagUrl }, did);
-    if (r.status === "error") {
-      console.error(`remove-bag failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    console.log("");
-    console.log(`wiki ${slug}: ${result["status"]}`);
-    console.log(`  bag:    ${result["bagUrl"]}`);
-    if (result["stack"]) {
-      const stack = result["stack"] as string[];
-      console.log(`  stack:  ${stack.length === 0 ? "(empty)" : stack.join(" → ")}`);
-    }
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("remove-bag", { slug, bagUrl }, did);
+  if (r.status === "error") {
+    console.error(`remove-bag failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  console.log("");
+  console.log(`wiki ${slug}: ${result["status"]}`);
+  console.log(`  bag:    ${result["bagUrl"]}`);
+  if (result["stack"]) {
+    const stack = result["stack"] as string[];
+    console.log(`  stack:  ${stack.length === 0 ? "(empty)" : stack.join(" → ")}`);
+  }
+  console.log("");
+  return 0;
 }
 
 /**
@@ -318,26 +263,20 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
-    if (r.status === "error") {
-      console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    console.log("");
-    console.log(`wiki ${slug}: epoch on ${result["bagUrl"]}`);
-    console.log(`  old doc:    ${result["oldDocUrl"]}`);
-    console.log(`  new doc:    ${result["newDocUrl"]}`);
-    console.log(`  tiddlers:   ${result["tiddlerCount"]}  tombstones: ${result["tombstoneCount"]}`);
-    console.log(`  layer:      ${result["layerSwapped"] ? "swapped" : "not mounted"}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+  if (r.status === "error") {
+    console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  console.log("");
+  console.log(`wiki ${slug}: epoch on ${result["bagUrl"]}`);
+  console.log(`  old doc:    ${result["oldDocUrl"]}`);
+  console.log(`  new doc:    ${result["newDocUrl"]}`);
+  console.log(`  tiddlers:   ${result["tiddlerCount"]}  tombstones: ${result["tombstoneCount"]}`);
+  console.log(`  layer:      ${result["layerSwapped"] ? "swapped" : "not mounted"}`);
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
@@ -347,30 +286,24 @@ export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
-    if (r.status === "error") {
-      console.error(`rotate-recipe failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    console.log("");
-    console.log(`wiki ${slug}: rotated to generation ${result["generation"]}`);
-    console.log(`  new canon doc:   ${result["newCanonDocUrl"]}`);
-    console.log(`  previous canon:  ${result["previousCanonUri"]}`);
-    console.log(`    ↳ doc:         ${result["previousCanonDocUrl"]}`);
-    const stack = (result["stack"] ?? []) as string[];
-    console.log(`  recipe stack:    ${stack.length} bag(s)`);
-    for (const u of stack) console.log(`    • ${u}`);
-    console.log(`  layer:           ${result["layerSwapped"] ? "swapped" : "not mounted"}`);
-    if (result["note"]) console.log(`  note:            ${result["note"]}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
+  if (r.status === "error") {
+    console.error(`rotate-recipe failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  console.log("");
+  console.log(`wiki ${slug}: rotated to generation ${result["generation"]}`);
+  console.log(`  new canon doc:   ${result["newCanonDocUrl"]}`);
+  console.log(`  previous canon:  ${result["previousCanonUri"]}`);
+  console.log(`    ↳ doc:         ${result["previousCanonDocUrl"]}`);
+  const stack = (result["stack"] ?? []) as string[];
+  console.log(`  recipe stack:    ${stack.length} bag(s)`);
+  for (const u of stack) console.log(`    • ${u}`);
+  console.log(`  layer:           ${result["layerSwapped"] ? "swapped" : "not mounted"}`);
+  if (result["note"]) console.log(`  note:            ${result["note"]}`);
+  console.log("");
+  return 0;
 }
 
 export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
@@ -381,37 +314,31 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
   }
   const daysOpt = args.options["days"];
   const did     = await operatorDid();
-  const vessel  = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const cmdArgs: Record<string, unknown> = { slug };
-    if (daysOpt) cmdArgs["daysThreshold"] = Number(daysOpt);
-    const r = await submitVerb(vessel, "prune-stale", cmdArgs, did);
-    if (r.status === "error") {
-      console.error(`prune-stale failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    const stale  = (result["stale"] ?? []) as Array<{ title: string; lastUpdate: string | null; daysIdle: number }>;
-    console.log("");
-    console.log(`wiki ${slug} prune-stale (threshold: ${result["daysThreshold"]} days):`);
-    console.log(`  draft bag: ${result["draftBagId"]}`);
-    console.log(`  scanned:   ${result["scanned"]} tiddler(s)`);
-    console.log(`  stale:     ${stale.length}`);
-    if (stale.length > 0) {
-      console.log("");
-      for (const s of stale) {
-        const idleStr = s.daysIdle < 0 ? "no timestamp" : `${s.daysIdle}d idle`;
-        console.log(`    ${s.title}  (${idleStr})`);
-      }
-      console.log("");
-      console.log("  Decide each through a residency ACTION verb (lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD).");
-    }
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  const cmdArgs: Record<string, unknown> = { slug };
+  if (daysOpt) cmdArgs["daysThreshold"] = Number(daysOpt);
+  const r = await call("prune-stale", cmdArgs, did);
+  if (r.status === "error") {
+    console.error(`prune-stale failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result = summaryOutput(r) ?? {};
+  const stale  = (result["stale"] ?? []) as Array<{ title: string; lastUpdate: string | null; daysIdle: number }>;
+  console.log("");
+  console.log(`wiki ${slug} prune-stale (threshold: ${result["daysThreshold"]} days):`);
+  console.log(`  draft bag: ${result["draftBagId"]}`);
+  console.log(`  scanned:   ${result["scanned"]} tiddler(s)`);
+  console.log(`  stale:     ${stale.length}`);
+  if (stale.length > 0) {
+    console.log("");
+    for (const s of stale) {
+      const idleStr = s.daysIdle < 0 ? "no timestamp" : `${s.daysIdle}d idle`;
+      console.log(`    ${s.title}  (${idleStr})`);
+    }
+    console.log("");
+    console.log("  Decide each through a residency ACTION verb (lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD).");
+  }
+  console.log("");
+  return 0;
 }
 
 /**
@@ -421,8 +348,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
  * across bags in the recipe, ordered highest-priority first. The winning bag
  * (origin-bag for any current read) gets a `→` marker.
  *
- * Sprint:  Residency Model Epic — S8.2
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
  *
  * Reuses the `where` verb on the node side (composite.listBagsHolding —
  * live-only). Tombstone-inspection across bags waits on a sibling `resolve`
@@ -437,59 +363,53 @@ export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "resolve", { tiddler }, did);
-    if (r.status === "error") {
-      console.error(`resolve failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result        = summaryOutput(r) ?? {};
-    const manifestations = (result["manifestations"] ?? []) as Array<{ bagId: string; changeId?: string }>;
-    const tombstones    = (result["tombstones"]    ?? []) as string[];
-    const winning       = (result["winningBag"]    ?? null) as string | null;
-
-    console.log("");
-    console.log(`Residency for ${tiddler}`);
-    if (manifestations.length === 0 && tombstones.length === 0) {
-      console.log("  (no residency in any bag — tiddler unknown)");
-      console.log("");
-      return 5;
-    }
-    console.log("");
-
-    if (manifestations.length > 0) {
-      console.log("  Live Manifestations (highest priority first):");
-      for (const m of manifestations) {
-        const marker  = m.bagId === winning ? "→" : " ";
-        const idTag   = m.changeId ? `  [change-id: ${m.changeId}]` : "";
-        console.log(`    ${marker} ${m.bagId}${idTag}`);
-      }
-      console.log("");
-      console.log(`  Winning surface (origin-bag): ${winning}`);
-      console.log("");
-    } else {
-      console.log("  (no live Manifestations — the title carries only kāpae marks)");
-      console.log("");
-    }
-
-    if (tombstones.length > 0) {
-      console.log("  Kāpae marks (bags that have set this title aside at their priority):");
-      for (const b of tombstones) {
-        console.log(`      ${b}`);
-      }
-      console.log("");
-      console.log("  Note: a kāpae mark in a higher-priority bag stops the cascade.");
-      console.log("        See bags/@lararium/ha.ka.ba/@lararium/api/residency-model.md #conflict-resolution");
-      console.log("        — resolution surfaces to operator / cabal Talk Story.");
-      console.log("");
-    }
-
-    return manifestations.length > 0 ? 0 : 5;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("resolve", { tiddler }, did);
+  if (r.status === "error") {
+    console.error(`resolve failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result        = summaryOutput(r) ?? {};
+  const manifestations = (result["manifestations"] ?? []) as Array<{ bagId: string; changeId?: string }>;
+  const tombstones    = (result["tombstones"]    ?? []) as string[];
+  const winning       = (result["winningBag"]    ?? null) as string | null;
+
+  console.log("");
+  console.log(`Residency for ${tiddler}`);
+  if (manifestations.length === 0 && tombstones.length === 0) {
+    console.log("  (no residency in any bag — tiddler unknown)");
+    console.log("");
+    return 5;
+  }
+  console.log("");
+
+  if (manifestations.length > 0) {
+    console.log("  Live Manifestations (highest priority first):");
+    for (const m of manifestations) {
+      const marker  = m.bagId === winning ? "→" : " ";
+      const idTag   = m.changeId ? `  [change-id: ${m.changeId}]` : "";
+      console.log(`    ${marker} ${m.bagId}${idTag}`);
+    }
+    console.log("");
+    console.log(`  Winning surface (origin-bag): ${winning}`);
+    console.log("");
+  } else {
+    console.log("  (no live Manifestations — the title carries only kāpae marks)");
+    console.log("");
+  }
+
+  if (tombstones.length > 0) {
+    console.log("  Kāpae marks (bags that have set this title aside at their priority):");
+    for (const b of tombstones) {
+      console.log(`      ${b}`);
+    }
+    console.log("");
+    console.log("  Note: a kāpae mark in a higher-priority bag stops the cascade.");
+    console.log("        See bags/@lararium/ha.ka.ba/@lararium/api/residency-model.md #conflict-resolution");
+    console.log("        — resolution surfaces to operator / cabal Talk Story.");
+    console.log("");
+  }
+
+  return manifestations.length > 0 ? 0 : 5;
 }
 
 export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
@@ -499,29 +419,23 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
-  try {
-    const r = await submitVerb(vessel, "where", { tiddler }, did);
-    if (r.status === "error") {
-      console.error(`which failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result  = summaryOutput(r) ?? {};
-    const bags    = (result["bags"]       ?? []) as string[];
-    const primary = (result["primaryBag"] ?? null) as string | null;
-    console.log("");
-    console.log(`tiddler:    ${tiddler}`);
-    console.log(`primary:    ${primary ?? "(not found)"}`);
-    if (bags.length > 0) {
-      console.log(`all bags:`);
-      for (const b of bags) console.log(`  ${b}`);
-    }
-    console.log("");
-    return primary ? 0 : 5;
-  } finally {
-    await vessel.disconnect();
+  const r = await call("where", { tiddler }, did);
+  if (r.status === "error") {
+    console.error(`which failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
   }
+  const result  = summaryOutput(r) ?? {};
+  const bags    = (result["bags"]       ?? []) as string[];
+  const primary = (result["primaryBag"] ?? null) as string | null;
+  console.log("");
+  console.log(`tiddler:    ${tiddler}`);
+  console.log(`primary:    ${primary ?? "(not found)"}`);
+  if (bags.length > 0) {
+    console.log(`all bags:`);
+    for (const b of bags) console.log(`  ${b}`);
+  }
+  console.log("");
+  return primary ? 0 : 5;
 }
 
 const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: string }>> = {

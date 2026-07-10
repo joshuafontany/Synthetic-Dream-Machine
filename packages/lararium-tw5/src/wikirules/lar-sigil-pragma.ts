@@ -10,7 +10,7 @@ module-type: wikirule
  *
  * Currently a stub: produces a `set` pragma node carrying the raw source so
  * that disk round-trip preserves the declaration. Full sigil body parsing
- * (parameters, pattern, close pattern) lives in a future talk-story session.
+ * (parameters, pattern, close pattern) remains future work.
  *
  * Hook for complex behaviours: any sigil needing richer JS plumbing than
  * `\widget ~name` can be registered here with a `handler` field pointing at a

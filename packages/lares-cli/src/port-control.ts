@@ -1,6 +1,6 @@
 /**
  * port-control — idempotent single-instance reconcile primitives for the dev/test
- * loop (operator ruling 2026-06-16, hoike #dev-loop-restart; prior-art-grounded).
+ * loop.
  *
  * Web3-pono shape: the **port is the single-instance capability** (binding it = being
  * the instance), and the **OS port-table is the live authority** for who holds it —

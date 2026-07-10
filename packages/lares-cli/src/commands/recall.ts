@@ -13,7 +13,6 @@
  *   lares recall <kw> --k <n>           cap results (default 5); --limit stays as a back-compat alias
  *   lares recall --drawer <id>          fetch one drawer verbatim
  *   lares recall --list [--wing <w>]    list drawers (no query)
- *   lares recall ... --port <n>         daemon port
  *
  * The `--k` name mirrors the isomorphic MCP tool arg (`recall(query, k)`); `--limit`
  * keeps working for muscle-memory (`--k` wins when the operator passes both).
@@ -31,7 +30,7 @@
 
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -74,7 +73,6 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   if (limit !== undefined) verbArgs["limit"] = Number(limit);
   for (const k of filterKeys) if (args.options[k] !== undefined) verbArgs[k] = args.options[k];
 
-  const portOpt = args.options["port"];
 
   let did: string;
   try {
@@ -90,7 +88,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   // recall is read-only, so a generous budget costs nothing.
   let result;
   try {
-    result = await runVerb("recall", verbArgs, did, { ...(portOpt ? { port: Number(portOpt) } : {}), timeoutMs: 30_000 });
+    result = await runVerb("recall", verbArgs, did, { timeoutMs: 30_000 });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {

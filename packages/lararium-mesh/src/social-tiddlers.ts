@@ -56,7 +56,7 @@ export interface CircleTiddler {
   readonly memberSignature?:    string;
   /** Space-separated burned nonces — anti-replay for inbound invites. */
   readonly nonceBurnSet?:       string;
-  /** BeeKEM encrypted share hint (base64). Keyhive layer (S7.2+). */
+  /** BeeKEM encrypted share hint (base64). Keyhive layer. */
   readonly encryptedShareHint?: string;
   readonly capabilityPolicy?:   string;
   readonly readPolicy?:         string;

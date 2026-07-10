@@ -15,7 +15,7 @@
  * The `*WithServo` variants COMPOSE the self-tuning timeout servo (mine-timeout) ON TOP of the
  * busy-retry: each attempt runs under an adaptive `timeout` (the thunk passes it to execFileSync),
  * its duration is learned on completion, and a HANG (killed by the timeout) follows a DISTINCT path
- * from a BUSY lock — a busy lock WAITS+retries (unchanged YIN behavior), a hang retries at most
+ * from a BUSY lock — a busy lock WAITS+retries, a hang retries at most
  * once (a hang retried the same way is just another hang) then surfaces honestly as MineHangError.
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
@@ -107,7 +107,7 @@ export async function mineWithRetryAsync<T>(run: () => Promise<T>, maxAttempts =
 
 /** Options shared by the servo-composed retry entry points. */
 export interface ServoRetryOptions {
-  /** BUSY-lock retry budget (the YIN retry-on-busy). Default {@link DEFAULT_MINE_RETRY_ATTEMPTS} (8 ≈ 16s). */
+  /** BUSY-lock retry budget (the retry-on-busy). Default {@link DEFAULT_MINE_RETRY_ATTEMPTS} (8 ≈ 16s). */
   readonly maxAttempts?: number;
   /** HANG retry budget — a killed-by-timeout attempt retries at most this many times. Default 1. */
   readonly maxHangRetries?: number;

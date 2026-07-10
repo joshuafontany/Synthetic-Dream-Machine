@@ -195,7 +195,7 @@ export const GENESIS_CID_PLUGINS_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid-plugin
  * The well-known seed for the @oracle's deterministic DocumentId. STABLE FOREVER —
  * it derives from the @oracle's canonical URI alone, never from the engine/plugin
  * content, so the public crossroads board keeps ONE address across every engine
- * churn and every peer (GD-8: churn advances the pointer, never re-genesis). A
+ * churn and every peer (churn advances the pointer, never re-genesis). A
  * content-derived id would fork the board on each rebuild — the anti-pattern.
  */
 export const ORACLE_GENESIS_DOC_SEED = `${ORACLE_DOC_URI}#genesis-doc-id` as const;
@@ -211,7 +211,7 @@ export const ORACLE_GENESIS_DOC_SEED = `${ORACLE_DOC_URI}#genesis-doc-id` as con
  * Cross-VERSION caveat (the epoch-ratchet residual): two peers that materialize
  * fresh from DIFFERENT engine versions seed different histories under this one id.
  * In practice a peer SYNCS an existing board rather than re-materialize; the rare
- * structural shift rides the epoch boundary (GD-8), far-future.
+ * structural shift rides the epoch boundary, far-future.
  */
 export function oracleGenesisDocUrl(): AutomergeUrl {
   const binId = sha256BytesSync(utf8Bytes(ORACLE_GENESIS_DOC_SEED)).slice(0, 16) as BinaryDocumentId;
@@ -303,7 +303,7 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
     };
   }
 
-  // SYSTEM wiki-recipes (operator ruling 2026-06-16, GD-6) — @lares + @lararium quine
+  // SYSTEM wiki-recipes — @lares + @lararium quine
   // wikis ride the @oracle system plane, never @catalog (USER recipes mint into @catalog).
   const systemRecipe = (slug: string, bagStack: string, writableBag: string) => {
     const title = recipeUri("@oracle", slug);

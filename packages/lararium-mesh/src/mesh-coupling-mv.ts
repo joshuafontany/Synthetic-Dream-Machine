@@ -1,5 +1,5 @@
 /**
- * mesh-coupling-mv — the DEFAULT multivariate mesh coupling (the hoike's locked keel), the
+ * mesh-coupling-mv — the DEFAULT multivariate mesh coupling (the locked keel), the
  * continuous-vector twin of mesh-coupling. Each child is a CONTINUOUS signed-innovation VECTOR
  * series; each directed edge is a native Gaussian conditional-TE, conditioned on ALL the other
  * children JOINTLY (the full-N-way conditioning that keeps the read synergy-aware and kills the
@@ -10,7 +10,7 @@
  * linearity gate — neither is here. The wire carries continuous reals; discretization never touches
  * this path (it would break the Gaussian covariance the same way it breaks kNN geometry).
  *
- * KUE on the record (hoike #aggregate-signal-coupling): total conditional-TE reports that an edge
+ * KNOWN LIMITATION: total conditional-TE reports that an edge
  * exists, never whether it is synergistic vs redundant — a purely 3-way (XOR) coupling stays
  * invisible to any pairwise-conditioned matrix; separating synergy needs PID, a separate instrument.
  *

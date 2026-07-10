@@ -4,9 +4,8 @@
  * Dispatches the six ACTION verbs (ADD / COPY / MOVE / CLEAR / DROP / LOAD)
  * against a CompositeStore, wrapped in `withEffectRecord` so every bag
  * mutation lands together with its archival audit tiddler. The verb-tiddler
- * dispatch pipeline (M.2) routes operator-submitted verb-tiddlers through a
- * VerbTable; this module fills the table with the residency-action handlers
- * that the cleanup loop cleared from `island-behaviors.ts`.
+ * dispatch pipeline routes operator-submitted verb-tiddlers through a
+ * VerbTable; this module fills the table with the residency-action handlers.
  *
  * Per-verb mechanics:
  *
@@ -20,7 +19,7 @@
  *   DROP    tombstone every live title in bag (same enumeration as CLEAR) + the
  *           bag-level disposition record marks the bag retired. True bag-removal
  *           from the recipe is a separate operator gesture (recipe edit).
- *   LOAD    external content fetch — not in Sprint 5 scope. Handler throws an
+ *   LOAD    external content fetch — not implemented. Handler throws an
  *           explicit "not yet implemented" error so the verb-table registers but
  *           the operator surface fails loudly rather than silently no-ops.
  *
@@ -28,7 +27,6 @@
  *   - destination-bag admin required for every verb
  *   - MOVE additionally requires source-bag admin (deaccession authority)
  *
- * Sprint:  Residency Model Epic — S5.1 / S5.2 / S5.3 (registration helper)
  * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
@@ -91,8 +89,8 @@ export interface ActionHandlerOptions {
   /** Native TW5 filetype deserialization (LOAD), closing over the island's $tw. */
   readonly tw5?: Tw5Deserializer;
   /**
-   * Registry reach for **access-based** writes (operator ruling 2026-06-16, the
-   * edit/action split, `wiki-layer-ontology#write-law`): a residency action whose
+   * Registry reach for **access-based** writes (the edit/action split,
+   * `wiki-layer-ontology#write-law`): a residency action whose
    * target/source bag is not a mounted layer resolves it by ACCESS across both
    * oracle planes — mounted ephemerally for the action, released after. This
    * retires the daemon's standing system-bag mount: deep-bag writes become
@@ -220,7 +218,7 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
 
     // CREATE — mint a NEW bag; the destination doesn't exist yet, so it bypasses
     // the generic destBag cap + writable-store check. The cap is PLANE-AWARE
-    // (operator ruling): @catalog (household) -> read; @oracle (temple) -> admin.
+    // @catalog (household) -> read; @oracle (temple) -> admin.
     // This is the existing-primitive expression of the user<admin ladder; tighten
     // to verifySentinelMembership / Keyhive-native membership when that surface lands.
     if (action.verb === "CREATE") {
@@ -382,7 +380,7 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
 /**
  * A memetic-wikitext carrier opens with the SOH classifier (&#x0001; / &#x0011;).
  * NOTE: TW5's md-file-router does NOT reproduce the direct memetic decomposition
- * in this integration (witnessed: routing a memetic `.md` through the registry
+ * in this integration (routing a memetic `.md` through the registry
  * drops the heading-titled records) — so SOH carriers MUST take the direct
  * memetic path, never the registry. The de-dup toward md-file-router is un-pono here.
  */
@@ -664,7 +662,7 @@ function groupOf(titles: readonly string[], root: string): string[] {
 
 async function executeMove(action: MoveAction, access: BagAccess): Promise<Record<string, unknown>> {
   const o = origin(action);
-  // Carrier-group MOVE (operator ruling 2026-06-18): a MOVE of a carrier root
+  // Carrier-group MOVE: a MOVE of a carrier root
   // carries its WHOLE group — root + #fragment + /path — so promotion publishes
   // a meme entire and never orphans a fragment from its root (#shore-law). The
   // same group law the deletion/rename path uses; a single-title move of one
@@ -674,7 +672,8 @@ async function executeMove(action: MoveAction, access: BagAccess): Promise<Recor
   if (group.length === 0) throw new Error(`MOVE: source bag ${action.fromBag} does not hold ${action.title}`);
   // Order: land the whole group first, then tombstone the source group. If a
   // land fails, the source stays intact (no orphaned deaccession); a tombstone
-  // failure after land surfaces the error (the Sprint 4 atomicity gap stands).
+  // failure after land surfaces the error (the atomicity gap stands: a landed
+  // group is not rolled back).
   let moved = 0;
   for (const t of group) {
     const source = await readFromBag(access, action.fromBag, t);

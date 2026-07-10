@@ -1,7 +1,7 @@
 /**
  * LarDiskProjector — bag-aware unidirectional projection: store → disk.
  *
- * Co-projection model (operator ruling 2026-06-11): the operator's mind
+ * Co-projection model: the operator's mind
  * originates; the disk carrier and the CRDT record-set both PROJECT that
  * origin, each in its native grain — disk holds whole markdown memes, the
  * doc holds tid-sized records, the VM decomposes for transclusion. Merge
@@ -144,7 +144,7 @@ export class LarDiskProjector {
       return hash > 0 ? cur.slice(0, hash) : cur;
     };
 
-    // LEVEL-TRIGGERED (K8s reconciliation; prior-art 2026-06-19): every change is a NUDGE to
+    // LEVEL-TRIGGERED (K8s reconciliation prior-art): every change is a NUDGE to
     // reconcile this carrier root against the CURRENT settled VM state — never an edge that
     // licenses a destructive action off a transient view. The keyed gate debounces per ROOT (not
     // per bag+root) so a MOVE's source-tombstone and destination-add COALESCE into ONE reconcile

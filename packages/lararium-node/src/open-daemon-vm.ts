@@ -102,8 +102,8 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
 
   // The daemon holds NO standing system-bag mount: it reaches a deep target bag
   // by ACCESS per residency action (ephemeral mount, released after — the
-  // edit/action split, wiki-layer-ontology#write-law; the interim write-facet
-  // mount retired 2026-06-16). The daemon's own composite stays its recipe alone.
+  // edit/action split, wiki-layer-ontology#write-law). The daemon's own composite
+  // stays its recipe alone — it mounts no standing write facet.
   const recipe: WikiRecipe = {
     wikiSlug: "daemon",
     ...(libraryBags?.length ? { libraryBags } : {}),

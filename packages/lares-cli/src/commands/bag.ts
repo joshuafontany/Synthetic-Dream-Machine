@@ -10,15 +10,14 @@
  *   unpin <url>                   — remove the cooling exemption (bag rejoins the LRU sweep)
  *   stats                         — pinned / wela / anu residency snapshot
  *   register-cold <url>           — mark URL as known-but-not-loaded (oracle stub)
- *
- * E.1 ships these four; E.8 adds `bag epoch <url>` (DXOS-style snapshot-restart).
+ *   epoch <url>                   — DXOS-style snapshot-restart; bounds history
  */
 
 import { operatorDid } from "../env.js";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 

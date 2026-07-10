@@ -54,7 +54,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
   if (!ctx.catalogUrl && !ctx.oracleUrl) return undefined;
   const slug        = ctx.recipe.wikiSlug;
 
-  // Two registry planes (operator ruling 2026-06-16, wiki-layer-ontology#oracle-planes):
+  // Two registry planes (wiki-layer-ontology#oracle-planes):
   // the @oracle SYSTEM plane carries system-bag pointers + system wiki-recipes
   // (@lares, @lararium); @catalog carries USER bags + user recipes. A system
   // wiki's recipe lives in @oracle; system bags resolve from @oracle.

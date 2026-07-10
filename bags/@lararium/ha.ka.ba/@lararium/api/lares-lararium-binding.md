@@ -48,6 +48,12 @@ fast local **submit/await** channel. Every web3 invariant survives.
 
 <<~ranks bind co-located ~ Unix-domain socket (the docker.sock / tailscale-LocalAPI / gopls thin-client→warm-daemon shape); same machine = share the substrate -> remote ~ WebSocket + leaf-vessel + full sync; crossing the mesh = a real island boundary, full Ed25519 V3 gate >>
 
+**The CLI holds ONE end of that ladder.** A remote peer speaks WS to the **daemon's own
+relay** — the browser vessel does exactly this. The CLI carries no WS and no Automerge:
+a leaf `Repo` on loopback would pay a sync handshake to learn what the daemon, holding
+the canonical replica one socket away, already knows. `lares` speaks the sock or it
+speaks nothing.
+
 The thin-client→warm-daemon pattern marks the field's convergence (docker CLI→dockerd,
 tailscale CLI→tailscaled HTTP-over-UDS, gopls daemon). The CLI carries **no
 networking/state/replica** — it forwards a command and reads a result. UDS connect
@@ -113,8 +119,10 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 - **Socket perms `0600`/owner** + post-boot re-verify (some envs reset ownership).
 - **Stale-socket cleanup** on daemon restart (bind fails on a leftover path).
-- **The WS/TCP fallback keeps the Ed25519 gate** — peer-cred doesn't cross machines;
-  never an unauthenticated TCP bind (the `tcp://0.0.0.0:2375` anti-pattern).
+- **The daemon's own WS relay keeps the Ed25519 gate** — peer-cred doesn't cross
+  machines; never an unauthenticated TCP bind (the `tcp://0.0.0.0:2375` anti-pattern).
+  The CLI carries no second transport to fall back to: no socket → `DaemonUnreachable`,
+  which counsels `lares serve` rather than quietly standing a replica.
 - **Windows:** named pipe (or localhost) behind the one client abstraction; the
   Ed25519 proof keeps auth uniform across platforms.
 
@@ -129,9 +137,9 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
    that decodes a capability-bearing invocation, runs it through the **existing**
    VerbDispatcher, and returns the durable outcome. Alongside the WS — not replacing
    it. *(Touches the node boot/ingress — coordinate with the identity/boot work.)*
-2. **Thin CLI local-invoker** (lares-cli `admin-connector`): `invokeLocal(verb, args,
-   did)` — UDS connect · write invocation · read receipt. Commands prefer UDS when
-   the local socket exists; **fall back to WS** (remote `--host`, or no socket).
+2. **Thin CLI local-invoker** (lares-cli `local-connector`): `invokeLocal(verb, args,
+   did)` — UDS connect · write invocation · read receipt. **The CLI's only transport**
+   (`verb-call.runVerb`); an absent socket raises `DaemonUnreachable`, never a replica.
 3. **Auth:** SO_PEERCRED + socket perms gate the channel; the per-call Ed25519/
    capability stays the authority verified by the daemon.
 

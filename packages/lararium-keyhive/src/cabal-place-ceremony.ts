@@ -1,16 +1,16 @@
 /**
  * cabal-place-ceremony — the reusable cabal-place LIFECYCLE TRIO (found / join /
- * evict) over real Keyhive, composed onto cut 1's platform-blind mesh FLOOR
+ * evict) over real Keyhive, composed onto the platform-blind mesh FLOOR
  * (@lararium/mesh: cabal-place.ts + epoch-lease.ts + bag-residency.ts).
  *
- * Epic 2, cut 2. This GENERALIZES the one-off MeshCabal founding block in
+ * This GENERALIZES the one-off MeshCabal founding block in
  * ceremony-core.ts (~line 161 — createSentinelDoc(MESH_CABAL_SENTINEL_URI) +
  * addSentinelMember) into a primitive any number of cabal-places re-enact: a
  * place is FOUNDED by minting its sentinel Document identity, JOINED by adding a
  * member to that sentinel, EVICTED by convergent-removal. The mesh floor carries
  * the LIVENESS (lease + residency); this carries the AUTHORITY graph (Keyhive).
  *
- * RESOLVED FORKS (operator-seated):
+ * DESIGN CONSTRAINTS:
  *   · DOCUMENT-now, not Group. Keyhive's Group is the semantically-correct vehicle
  *     for a membership cabal, but GroupId has a private constructor in alpha (no
  *     round-trip from stored bytes), so it cannot persist hex-in-tiddler. Document
@@ -18,7 +18,7 @@
  *     correct — canon #the-place names the place by its content-addressed *doc*
  *     identity. Track the Group subduction for a later cut (provider NOTE ~line 281).
  *   · forward_secrecy STAYS false — a deliberate THREAT-MODEL CHOICE, not an
- *     architectural impossibility (crucible-corrected: BeeKEM the substrate DOES keep
+ *     architectural impossibility (BeeKEM the substrate DOES keep
  *     FS against a passive adversary; the FS is forgone one layer up, at Keyhive's
  *     whole-DOCUMENT-access — a current member reads the whole doc, so per-chunk FS
  *     buys little, and replayable access lets a later-admitted device derive the key.

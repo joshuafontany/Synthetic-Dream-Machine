@@ -94,7 +94,7 @@ export function resetMineTimeouts(): void {
 
 /**
  * A subprocess KILLED by its timeout — a HANG, distinct from a BUSY lock or a real non-zero exit.
- * Probed against Node's actual fields (2026-06-28): execFileSync timeout → `code:'ETIMEDOUT'`,
+ * Node's actual fields: execFileSync timeout → `code:'ETIMEDOUT'`,
  * `signal:'SIGKILL'`, `status:null`; execFileAsync timeout → `killed:true`, `signal:'SIGKILL'`. A
  * real non-zero exit carries `signal:null` + a numeric `status` → never reads as a hang. An
  * EXTERNAL `SIGTERM` reads as a CLEAN shutdown (a system/service stop reaping children) — our own

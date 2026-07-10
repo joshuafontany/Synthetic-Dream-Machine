@@ -205,15 +205,15 @@ export interface IslandMsg_Manifest {
  * Cool the wiki slot from `wela` (hot) to `anu` (cold) — teardown; thread
  * terminates. Type literal `"hooanu"` — Hawaiian: hoʻoanu, "to cool."
  *
- * Renamed from `"demote"` 2026-05-31 under the residency-model cleanup — the
- * temperature register replaces the old organizational rank register that
- * conflicted with the residency-model ACTION verb surface. The two thermal
- * states wear ʻōlelo Hawaiʻi: `wela` / `anu` (see residency-tiers.md).
+ * The temperature register replaces an organizational rank register (the old
+ * `"demote"`) that would conflict with the residency-model ACTION verb surface.
+ * The two thermal states wear ʻōlelo Hawaiʻi: `wela` / `anu` (see
+ * residency-tiers.md).
  *
  * Counterpart: `anu` → `wela` (hoʻowela, "to heat") happens at the vessel layer
  * via `vessel-island-pool.mountWiki` — a fresh worker boots and runs `ea` — not
  * via a worker-side signal. A `warm` middle tier (suspended-not-terminated,
- * resume by a hoʻomahana signal) was proposed and CUT 2026-06-01 (YIN pass): a
+ * resume by a hoʻomahana signal) was proposed and CUT: a
  * suspended Worker still holds its heap, so it did not shed memory, and the
  * proven virtual-actor runtimes use two states. Reintroduce only behind a
  * measured resume-cost problem AND a memory-shedding suspend — reopening

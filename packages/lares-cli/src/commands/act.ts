@@ -21,14 +21,12 @@
  *
  * Common flags:
  *   --yes             skip confirmation prompt
- *   --port <n>        daemon port
  *
  * Each invocation submits a verb-tiddler to the daemon vessel; the wiki island's
  * action-handler family executes the residency mutation wrapped in
  * withEffectRecord (writes the archival audit tiddlers).
  *
- * Sprint:  Residency Model Epic — S5.4
- * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
+ * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
 import { createInterface } from "node:readline/promises";
@@ -38,7 +36,7 @@ import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, wantsJson, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -81,7 +79,6 @@ function printUsage(): void {
   console.error("  LOAD               --source-uri <u> --to <bag> [--change-id <id>]");
   console.error("");
   console.error("  --yes              skip confirmation prompt");
-  console.error("  --port <n>         daemon port");
 }
 
 export async function cmdAct(args: ParsedArgs): Promise<number> {
@@ -190,8 +187,6 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   if (args.flags["dry-run"]) actionArgs["dry-run"] = true;
 
   // ── Operator identity ─────────────────────────────────────────────────
-  const portOpt = args.options["port"];
-  const connectOpts = portOpt ? { port: Number(portOpt) } : {};
 
   let did: string;
   try {
@@ -237,19 +232,19 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
   // --in-wiki: run the ACTION IN the active wiki island over ITS composite
   // (where @working + canon both live) — the daemon commands via `wiki-act`,
-  // never reaching the per-fingerprint @working binding (operator ruling B,
-  // 2026-06-19). The default path executes daemon-side (write-then-sync).
+  // never reaching the per-fingerprint @working binding. The default path
+  // executes daemon-side (write-then-sync).
   const inWiki     = Boolean(args.flags["in-wiki"]);
   const submitName = inWiki ? "wiki-act" : verb;
   const submitArgs = inWiki ? { verb, args: actionArgs } : actionArgs;
   const requestId = await taskContentId({ subject, command: submitName, args: submitArgs, nonce: "" });
-  // The ACK budget scales with the gesture: a directory-batch LOAD chews
-  // one island frame per carrier — a flat 10s ACK died on the first
-  // 189-carrier corpus feed (2026-06-11) while the verb itself succeeded.
+  // The ACK budget scales with the gesture: a directory-batch LOAD chews one
+  // island frame per carrier, so a flat budget times out the ACK while the verb
+  // itself succeeds.
   const timeoutMs = Math.max(10_000, 10_000 + carrierCount * 400);
   let result;
   try {
-    result = await runVerb(submitName, submitArgs, did, { ...connectOpts, requestId, timeoutMs });
+    result = await runVerb(submitName, submitArgs, did, { requestId, timeoutMs });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {

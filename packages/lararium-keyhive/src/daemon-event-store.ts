@@ -10,12 +10,11 @@
  *   fields:   variant, hash, bytes-len, is-delegated, is-revoked
  *   text:     base64-encoded `event.toBytes()` payload
  *
- * Scope (D.4 minimum-viable). All events route to the daemon doc, regardless
+ * Scope (minimum-viable). All events route to the daemon doc, regardless
  * of their semantic scope (operator-principal vs document vs group-CGKA).
  * The daemon doc is operator-private, which keeps routing simple and leaks no
- * metadata. Per-bag routing per the D4.a decision in HANDOFF.md remains a
- * known future refinement; this store will fan out across multiple writable
- * layers when that lands.
+ * metadata. Per-bag routing remains a known future refinement; this store
+ * will fan out across multiple writable layers when that lands.
  *
  * Hash: a content hash of `event.toBytes()` keyed via sha256. Used as the
  * tiddler title suffix and as a stable de-dup key — the same event ingested

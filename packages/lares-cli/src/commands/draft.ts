@@ -5,20 +5,18 @@
  * lower bag into a writable draft bag (default: the active wiki draft /
  * composite default writable). The source bag stays intact; the new copy
  * overlays via composite priority. Operator can then edit the draft and
- * land it into another bag through a residency ACTION verb (Sprint 5 of
- * the Residency Model Epic ships `lares act` for that purpose).
+ * land it into another bag through a residency ACTION verb (`lares act`).
  *
  * Flags:
  *   --to <bag>     target draft bag (default: active wiki draft)
  *   --yes          skip confirmation
- *   --port <n>     daemon port
  */
 
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -38,9 +36,6 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     return 2;
   }
 
-  const portOpt = args.options["port"];
-  const connectOpts = portOpt ? { port: Number(portOpt) } : {};
-
   let did: string;
   try {
     did = await operatorDid();
@@ -53,7 +48,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   // UDS fast path, WS fallback (the lares↔lararium binding).
   let where;
   try {
-    where = await runVerb("where", { tiddler }, did, connectOpts);
+    where = await runVerb("where", { tiddler }, did);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
@@ -109,7 +104,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   const draftArgs: Record<string, string> = { tiddler };
   if (toBag) draftArgs["toBag"] = toBag;
 
-  const result = await runVerb("draft", draftArgs, did, connectOpts);
+  const result = await runVerb("draft", draftArgs, did);
   if (result.status === "error") {
     const msg = result.errorMessage ?? "unknown";
     emit(args, {

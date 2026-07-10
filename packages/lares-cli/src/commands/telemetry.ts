@@ -8,7 +8,6 @@
  *
  *   lares telemetry --wing <w>        project readings onto a wing's drawers
  *   lares telemetry --wing <w> --limit N   cap drawers processed this pass
- *   lares telemetry --wing <w> --port <n>  daemon port
  *
  * Idempotent (the lar_hv gate skips already-current drawers). If the daemon is
  * down, telemetry no-ops (verbatim capture already landed; the lar_hv sweep
@@ -19,7 +18,7 @@
 
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -31,14 +30,13 @@ async function operatorDid(): Promise<string> {
 export async function cmdTelemetry(args: ParsedArgs): Promise<number> {
   const wing = args.options["wing"];
   if (!wing) {
-    console.error("usage: lares telemetry --wing <wing> [--limit <n>] [--port <n>]");
+    console.error("usage: lares telemetry --wing <wing> [--limit <n>]");
     return 2;
   }
 
   const verbArgs: Record<string, unknown> = { wing };
   if (args.options["limit"] !== undefined) verbArgs["limit"] = Number(args.options["limit"]);
 
-  const portOpt = args.options["port"];
 
   let did: string;
   try {
@@ -54,7 +52,7 @@ export async function cmdTelemetry(args: ParsedArgs): Promise<number> {
   // UDS fast path, WS fallback (the lares↔lararium binding).
   let result;
   try {
-    result = await runVerb("lar-telemetry", verbArgs, did, { ...(portOpt ? { port: Number(portOpt) } : {}), timeoutMs: 60_000 });
+    result = await runVerb("lar-telemetry", verbArgs, did, { timeoutMs: 60_000 });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {

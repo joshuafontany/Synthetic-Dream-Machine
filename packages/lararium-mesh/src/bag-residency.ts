@@ -1,16 +1,13 @@
 /**
  * Bag residency — the thermal residency engine for one vessel's bags.
  *
- * Restored to its own file (S11-collapse YIN pass): the residency runtime had
- * been relocated into causal-island.ts on 2026-06-01, glued atop the unrelated
- * federation-authority doctrine. The two share no types, functions, or imports —
- * so each now stands in its own file. This module carries the live, widely-imported
- * residency engine; the authority/edge-island doctrine lives in
- * causal-island-authority.ts.
+ * The residency runtime and the federation-authority doctrine share no types,
+ * functions, or imports, so each stands in its own file. This module carries the
+ * live, widely-imported residency engine; the authority/edge-island doctrine lives
+ * in causal-island-authority.ts.
  *
  * Model: a two-state thermal axis in ʻōlelo Hawaiʻi — wela (hot) / anu (cold) —
- * plus an orthogonal pin flag. The `warm` middle tier was cut (YIN pass,
- * 2026-06-01).
+ * plus an orthogonal pin flag. The `warm` middle tier was cut.
  *
  * Canon: lar:///ha.ka.ba/@lararium/api/residency-tiers
  */
@@ -28,12 +25,11 @@ export type BagUrl = string;
  *   wela ("hot")  — live + reacting; handle in cache; the island's Worker runs.
  *   anu  ("cold") — torn down; URL known, doc not loaded; resume by spawn + `ea`.
  *
- * TWO states only. The `warm` (mahana) middle tier was CUT 2026-06-01 — a YIN
- * pass (adversarial + kupono research + the Orleans/Akka two-state virtual-actor
- * precedent) found that a suspended Worker still holds its heap, so warm did NOT
- * shed the memory this model exists to bound, and it had no actor-system
- * precedent. Reintroduce only behind a measured resume-cost problem AND a real
- * memory-shedding suspend (isolate evicted, handle-cache retained).
+ * TWO states only. The `warm` (mahana) middle tier was cut: a suspended Worker
+ * still holds its heap, so warm did NOT shed the memory this model exists to
+ * bound, and it had no actor-system precedent (the Orleans/Akka two-state
+ * virtual-actor model). Reintroduce only behind a measured resume-cost problem
+ * AND a real memory-shedding suspend (isolate evicted, handle-cache retained).
  *
  * `pinned` is NOT a temperature — it is an ORTHOGONAL flag ("exempt from
  * cooling"), kupono-aligned with Orleans `[KeepAlive]` / Android foreground.
@@ -50,7 +46,7 @@ export type ResidencyTemperature = "wela" | "anu";
 /**
  * A bag's residency derives from the islands whose recipes reference it: if ANY
  * referencing island is `wela`, the bag is `wela`; otherwise `anu`. No
- * referencing island → anu. The collapse rule (EPIC S11.4) — bags carry no
+ * referencing island → anu. The collapse rule — bags carry no
  * independent tier; their temperature is reachability from a live island root.
  */
 export function deriveBagTemperature(
@@ -109,12 +105,12 @@ interface ResidencyState {
 /**
  * BagResidencyManager — owns the residency state for one vessel's bags.
  *
- * Single-map model (S11.2): every known bag carries a `ResidencyState`
- * (temperature + orthogonal pin flag). Temperature moves hot ↔ warm ↔ cold
+ * Single-map model: every known bag carries a `ResidencyState`
+ * (temperature + orthogonal pin flag). Temperature moves wela ↔ anu
  * via touch/cool; pin is set independently and exempts a bag from cooling.
  *
- * NOTE: this is the bag-level bookkeeping mechanism the Island Pool drives
- * (EPIC S11 collapse). Bag temperature ultimately DERIVES from the warmest
+ * NOTE: this is the bag-level bookkeeping mechanism the Island Pool drives.
+ * Bag temperature ultimately DERIVES from the warmest
  * referencing island (`deriveBagTemperature`); this manager records and bounds
  * that derived state plus the LRU/idle sweeper that frees handles.
  */
@@ -378,7 +374,7 @@ export class BagResidencyManager {
 
 // ---------------------------------------------------------------------------
 // Pin tiddler shape — pins persist as tiddlers in the daemon doc.
-// Same pattern as bag-mirror configs (S5.6 A.5). The dispatcher's residency
+// Same pattern as bag-mirror configs. The dispatcher's residency
 // manager reads pin tiddlers at boot and applies them.
 // ---------------------------------------------------------------------------
 

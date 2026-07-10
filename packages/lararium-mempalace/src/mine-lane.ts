@@ -3,7 +3,7 @@
  * rides a keyed promise-chain tail — key = the canonical palace path — so two concurrent
  * mines against ONE palace SERIALIZE (a work queue: queue, never drop/coalesce) instead of
  * racing the chroma hnsw compactor (the 20 transient compaction faults under concurrent
- * mines). The YIN shape: one Map of tails, no timers, no config — the lane's pace derives
+ * mines). The shape: one Map of tails, no timers, no config — the lane's pace derives
  * entirely from each mine's own completion.
  *
  * Scope (honest): this lane serializes within ONE process. Cross-process serialization

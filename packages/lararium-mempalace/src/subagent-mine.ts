@@ -9,10 +9,10 @@
  * only the top-level file, dropping it. This router does it right:
  *
  *   - DISTINCT: each spirit mines into `wing_<project>__spirits`, never the parent's.
- *   - IDENTIFIED BY UUID (RULED 2026-07-01): identity rides the worldline handle
+ *   - IDENTIFIED BY UUID: identity rides the worldline handle
  *     `<run>.<agentId>` (`lar_agent_handle`); the stage-name `spirit-<uuid8>` only
- *     labels. The handoff-parsed name ladder (Mask/Spirit markers, role pet-names)
- *     was a trial, now subtracted.
+ *     labels. No handoff-parsed name ladder (Mask/Spirit markers, role pet-names)
+ *     is used.
  *   - BOTH SIDES: mines the whole agent file (the injected exchange assembler pairs
  *     the handoff with the spirit's turns — the SAME reader the capture leg submits).
  *
@@ -113,10 +113,10 @@ export function spiritCaptureSourceFile(wing: string, name: string, agentId: str
 }
 
 /**
- * The spirit's stage-name — `spirit-<uuid8>`, derived from the agent UUID alone (RULED
- * 2026-07-01): subagent IDENTITY rides the worldline handle (`<run>.<agentId>` →
- * `lar_agent_handle`), never a mask or pet name — the handoff-parsed name ladder
- * (Mask/Spirit markers, role pet-names) was a trial, now subtracted. The stage-name
+ * The spirit's stage-name — `spirit-<uuid8>`, derived from the agent UUID alone:
+ * subagent IDENTITY rides the worldline handle (`<run>.<agentId>` →
+ * `lar_agent_handle`), never a mask or pet name — no handoff-parsed name ladder
+ * (Mask/Spirit markers, role pet-names) is used. The stage-name
  * only labels; nothing keys on it but the drawer's `lar_agent` display label.
  */
 export function spiritName(agentFile: string): string {
@@ -198,7 +198,7 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, op
       // exact invocation the @daemon capture flush spawns — capture-flush.ts.)
       // --palace passes the CANONICAL spelling (realpath/normalize) so this leg addresses the SAME
       // write-daemon singleton as the capture flush — without it, mempalace's own default resolution
-      // can key a SECOND daemon for the same physical palace (the pile-up root, 2026-06-28).
+      // can key a SECOND daemon for the same physical palace (the pile-up root).
       // A palace-lock BUSY signal (the daemon flush or a concurrent backfill holds it) WAITS+retries
       // via the shared backoff — it must not collapse to "mine-failed". A REAL error (after the
       // retries run out, or any non-busy fault) still falls to the honest "mine-failed" below.

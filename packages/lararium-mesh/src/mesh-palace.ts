@@ -365,7 +365,7 @@ export function bearingVector(c: Coord): readonly [number, number] {
 // ── The angular coordinate θ — seed random, grow from topology (the blessed derivation) ────────
 // θ is BORN uniform-random (the map-never-territory guarantee: a sampled angle leaks no sealed
 // content — you cannot leak what you drew from a die) and GROWS its kinship from tree-topology, never
-// from content (#the-routing-substrate; ruling 2026-06-28). Kinship is not encoded — it EMERGES from
+// from content (#the-routing-substrate). Kinship is not encoded — it EMERGES from
 // who-routes-with-whom (Popularity-Similarity). Option C (θ from content) stays dead.
 
 /** Seed a vessel's birth θ — uniform-random on the cyclic [0, 2π). `rng` injects determinism for

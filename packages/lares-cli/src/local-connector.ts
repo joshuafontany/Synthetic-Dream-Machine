@@ -8,7 +8,8 @@
  *
  * The socket's 0600 owner-only perms gate PRESENCE (substrate); the requestedBy
  * did rides the invocation for the daemon's verify-then-delegate (authority).
- * When the socket is absent/stale, the caller falls back to the WS vessel.
+ * When the socket is absent/stale the caller has no daemon to talk to — the CLI
+ * carries no second transport.
  * See lar:///ha.ka.ba/@lararium/api/lares-lararium-binding.
  */
 
@@ -16,7 +17,7 @@ import { createConnection } from "node:net";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { larDataDir } from "./env.js";
-import type { SubmitResult, SubmitOptions } from "./daemon-connector.js";
+import type { SubmitResult, SubmitOptions } from "./verb-result.js";
 
 /** The agreed socket path — both sides resolve <dataDir>/lares.sock (env contract). */
 export function udsSocketPath(dataDir?: string): string {
@@ -28,7 +29,7 @@ export function udsAvailable(dataDir?: string): boolean {
   try { return existsSync(udsSocketPath(dataDir)); } catch { return false; }
 }
 
-/** The local socket could not be reached (absent/stale) — caller may fall to WS. */
+/** The local socket refused (absent/stale) — `runVerb` turns this into DaemonUnreachable. */
 export class UdsUnreachable extends Error {}
 
 export async function invokeLocal(
@@ -67,7 +68,7 @@ export async function invokeLocal(
       catch { settle(() => reject(new Error("bad outcome json from local channel"))); }
     });
     sock.on("error", (e: NodeJS.ErrnoException) => {
-      // ENOENT (no socket file) / ECONNREFUSED (stale) → fall back to WS.
+      // ENOENT (no socket file) / ECONNREFUSED (stale) → no daemon holds the sock.
       if (e.code === "ENOENT" || e.code === "ECONNREFUSED") settle(() => reject(new UdsUnreachable(e.message)));
       else settle(() => reject(e));
     });

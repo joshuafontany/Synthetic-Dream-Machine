@@ -35,9 +35,8 @@ export async function cmdHeleuma(args: ParsedArgs): Promise<number> {
  *  Runs the BUILT dist, never tsx-source: the sovereign island workers spawn from
  *  compiled `.js` siblings (`node-daemon-island.js` / `node-wiki-island.js`, no
  *  `execArgv`), so a tsx-source run produces a half-dead vessel (port bound, daemon
- *  worker ERR_MODULE_NOT_FOUND). `node dist/src/main.js` is the design boot (= the
- *  package `start` script, the handoff's canonical hearth, the e2e harness). Scouted
- *  2026-06-16; hoike #dev-loop-restart. */
+ *  worker ERR_MODULE_NOT_FOUND). `node dist/src/main.js` names the only sound boot
+ *  (= the package `start` script, the e2e harness). */
 export async function cmdServe(args: ParsedArgs): Promise<number> {
   const { existsSync } = await import("node:fs");
   const distMain = join(NODE_PKG, "dist", "src", "main.js");
@@ -73,8 +72,8 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
  * call time (AFTER any --root sets LAR_ROOT). Exported for the wipe-list contract test:
  * the projection watermark dies WITH the store (GAP 1); identity NEVER appears here.
  *
- * The strangler RETIRED (2026-07-01): larDataDir()/larProjectionDir() resolve the canonical
- * XDG dirs deterministically — no legacy arm exists to dangle, so the wipe names them directly.
+ * larDataDir()/larProjectionDir() resolve the canonical XDG dirs deterministically —
+ * no legacy arm exists to dangle, so the wipe names them directly.
  */
 export function resetTargets(): Array<{ path: string; recursive: boolean }> {
   const gen = (name: string, recursive = false) => ({ path: join(larRoot(), "genesis", name), recursive });
@@ -91,7 +90,7 @@ export function resetTargets(): Array<{ path: string; recursive: boolean }> {
     gen("cas", true),                          // G-CAS slice 1: the blob bytes
     // The projection watermark (synced-tree) must die WITH the store — a surviving watermark makes the
     // post-reset ingest read every bags/*.md as "unchanged" and the fresh empty docs stay empty,
-    // silently (GAP 1, regenesis scout 2026-07-01).
+    // silently.
     { path: larProjectionDir(), recursive: true },
   ];
 }
@@ -161,8 +160,7 @@ export async function cmdRefresh(args: ParsedArgs): Promise<number> {
  * from ANY prior state (running / stale / none): stop the incumbent by ACCESS to the
  * OS port-table (graceful SIGTERM → poll port-free → bounded SIGKILL fallback — no PID
  * file, no supervisor), optional `--fresh` wipe, then serve. The port is the single-
- * instance capability; the EADDRINUSE bite that kept hitting us dies here.
- * Operator ruling 2026-06-16 (hoike #dev-loop-restart). `serve` stays fail-fast.
+ * instance capability, so EADDRINUSE never bites. `serve` stays fail-fast.
  */
 export async function cmdReconcile(args: ParsedArgs): Promise<number> {
   const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");

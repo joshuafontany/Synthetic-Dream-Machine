@@ -9,10 +9,10 @@
  * Architecture notes:
  *   - The CLI is a thin dispatch shim. Every command's logic lives in a
  *     library function (typically in @lararium/node), so the same operations
- *     can also run from inside the TW5 vm via the verb-tiddler protocol
- *     (see B.3 in packages/HANDOFF.md).
- *   - No HTTP/RPC surface here. CLI ↔ live-node coordination happens through
- *     the daemon Automerge doc — CRDT-native, web2-free.
+ *     can also run from inside the TW5 vm via the verb-tiddler protocol.
+ *   - No HTTP/RPC surface here. CLI ↔ live-node coordination rides a
+ *     capability-bearing verb-summons over the daemon's Unix socket, whose
+ *     outcome lands as a durable CRDT receipt — web2-free.
  *   - One surface, two actors (operator-peer #actor-parity): the same commands
  *     serve a HUMAN at a TTY and an AI AGENT acting programmatically. Output
  *     renders by audience — prose on a TTY, a deterministic structured payload

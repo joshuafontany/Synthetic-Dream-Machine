@@ -1,11 +1,11 @@
 /**
- * cmi-significance — the significance discipline the hoike made mandatory: never read a raw TE as
+ * cmi-significance — the mandatory significance discipline: never read a raw TE as
  * coupling (the finite-sample bias floor is nonzero). For the native Gaussian estimator this is
  * PARAMETRIC and needs NO surrogates — under conditional independence (X ⊥ Y | Z, jointly Gaussian)
  * the likelihood-ratio statistic G² = 2N·Î (nats) is asymptotically χ² with df = d_X·d_Y. So an
  * edge is real only when its χ² tail-probability clears the operator's α.
  *
- * (The IDTxl max/min/omnibus + FDR stack the hoike named layers ON TOP of a per-edge test like this
+ * (The IDTxl max/min/omnibus + FDR stack layers ON TOP of a per-edge test like this
  * once greedy embedding-selection is added; this file is that per-edge test, the floor beneath them.)
  *
  * Platform-blind: pure numerics (Lanczos ln-gamma + regularized incomplete gamma). NO imports.

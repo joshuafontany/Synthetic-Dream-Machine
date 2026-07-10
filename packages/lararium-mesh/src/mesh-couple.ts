@@ -6,7 +6,7 @@
  *   significance-gate (parametric χ²)  →  the MeshCoupling verdict
  *
  * so every surviving edge is a SIGNIFICANT, phantom-guarded, innovation-based directed coupling,
- * and non-significant edges are zeroed (never read as coupling — the hoike's discipline). This is
+ * and non-significant edges are zeroed (never read as coupling). This is
  * the surface the node-side reader and the sensory-seam call; nothing downstream re-derives it.
  *
  * Platform-blind: composes ./signed-innovation + ./mesh-coupling-mv + ./cmi-significance.
@@ -79,7 +79,7 @@ export function coupleMesh(children: readonly ChildSignalMV[], opts: CoupleMeshO
 
 // ── Tier-1 densify — couple STRATA of disjoint / gappy support without fabricating covariance ──
 //
-// GROUND (crucible, 2026-07-01): the χ²-gated Gaussian conditional-TE above holds only for
+// GROUND: the χ²-gated Gaussian conditional-TE above holds only for
 // WHOLE-AXIS, regular, jointly-Gaussian signals. When a child arrives as STRATA — sub-signals
 // each observed on only PART of the shared skeletal grid (disjoint / punched support) — the lagged
 // embedding is UNDEFINED over the gaps. The naive cure (align + zero-fill) FABRICATES covariance:

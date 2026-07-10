@@ -1,7 +1,7 @@
 /**
  * palace-procs — make the mempalace daemon/hook/capture topology OBSERVABLE.
  *
- * WHY THIS EXISTS (the daemon-spawn whack-a-mole, grounded 2026-06-28→07-01):
+ * WHY THIS EXISTS (the daemon-spawn whack-a-mole):
  *   Warm mempalace write-daemons spawn ON-DEMAND — a client `mempalace … mine
  *   --daemon` HANDS OFF to a per-palace write-daemon (`python -m mempalace.daemon
  *   serve --palace <p>`), auto-starting it if absent (capture-flush.ts). The

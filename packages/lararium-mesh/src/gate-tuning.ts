@@ -89,7 +89,7 @@ export interface WindowServo {
  * caller feeds the recently-observed (ideally EWMA-smoothed) flush cost; a deadband holds the window
  * inside the band so noise isn't chased; the result clamps to [minMs, maxMs].
  *
- * Verdict from the prior-art survey (2026-06-26): apply ONLY to the variable-cost reconcile gate
+ * Verdict: apply ONLY to the variable-cost reconcile gate
  * (disk). A DISPLAY-BOUND newest-wins gate stays FIXED, pinned to the frame clock — tuning its
  * window adds instability for no gain (the optimal upper bound is structurally the refresh interval).
  */

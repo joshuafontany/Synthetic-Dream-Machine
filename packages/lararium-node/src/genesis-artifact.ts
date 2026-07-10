@@ -2,7 +2,7 @@
  * genesis-artifact — node genesis byte SOURCE + the node genesis office.
  *
  * The intake core (validate → import → verify, CID reconcile) lives ONCE in
- * @lararium/mesh `genesis-intake` (isomorphism sweep 2026-06-12); this file
+ * @lararium/mesh `genesis-intake`; this file
  * keeps only what genuinely belongs to node:
  *   - the fs byte source (genesis/island.bin + sha256/cid sidecars)
  *   - GENESIS_CID — cached CIDv1 of the bundled artifact
@@ -235,8 +235,8 @@ export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): 
 }
 
 /**
- * mintLarariumIfAbsent — the @lararium memetic corpus as its OWN doc (operator
- * ruling 2026-06-16: @oracle, @lararium, @lares are three separate docs). Mirror
+ * mintLarariumIfAbsent — the @lararium memetic corpus as its OWN doc (@oracle,
+ * @lararium, @lares stand as three separate docs). Mirror
  * of mintLaresIfAbsent: the corpus pointer rides the @oracle system plane (the
  * island doc), never @catalog. The minted doc starts empty; corpus content fills
  * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/@lararium`) and the

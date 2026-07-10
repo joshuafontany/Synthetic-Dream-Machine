@@ -1,7 +1,7 @@
 /**
- * lares ingest — the disk→records gesture (NEXT VECTOR build 2).
+ * lares ingest — the disk→records gesture.
  *
- *   lares ingest --source <dir|file> --to <bagUri> [--apply] [--yes] [--port N]
+ *   lares ingest --source <dir|file> --to <bagUri> [--apply] [--yes]
  *
  * The gesture holds the disk grant and the Synced tree (the island holds
  * neither — readiness reads local on both sides of the membrane):
@@ -12,19 +12,19 @@
  *             verb; the island runs the full §6 gate (its currentRenderHash
  *             = the third leg) and answers per-carrier decisions
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff (NEXT VECTOR, build 2)
+ * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff
  */
 
 import { createInterface } from "readline/promises";
 import { stdin, stdout } from "process";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit, wantsJson, exitFor } from "../render.js";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { larRoot, operatorDid } from "../env.js";
-import { openSyncedTree, scanSource, candidatesOf, submitIngestOn } from "../ingest-core.js";
+import { openSyncedTree, scanSource, candidatesOf, submitIngest } from "../ingest-core.js";
 
 function printUsage(): void {
-  console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes] [--port N]");
+  console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes]");
   console.log("  default  = preview (scan + two-leg diff, no submission);");
   console.log("  --apply  sends NEW+CHANGED carriers through the island's INGEST gate;");
   console.log("  --in-wiki runs the INGEST in the active wiki island (the path for @working");
@@ -96,10 +96,10 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares ingest: ${msg}`) });
     return exitFor("not-found");
   }
-  // ── submit — UDS fast path, WS fallback (the lares↔lararium binding); one-shot ──
+  // ── submit — one line over the daemon's sock (the lares↔lararium binding) ──
   let result;
   try {
-    result = await submitIngestOn(null, {
+    result = await submitIngest({
       source, toBag, candidates, did,
       inWiki: Boolean(args.flags["in-wiki"]),
       ...(args.options["change-id"] ? { changeId: args.options["change-id"] } : {}),

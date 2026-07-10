@@ -6,8 +6,8 @@
  * `role = capability ≠ platform` — the engine is fixed; the SINK is the injected capability.
  * Three live instances: node lararium → disk · browser lararium → DOM · chat → mempalace.
  *
- * TWO GATE-FAMILIES — CONSERVED, not arbitrary. A three-domain rhyme survey (2026-06-26 —
- * physiology · earth-systems · human-systems) found both families running TOGETHER in one
+ * TWO GATE-FAMILIES — CONSERVED, not arbitrary. A three-domain rhyme (
+ * physiology · earth-systems · human-systems) shows both families running TOGETHER in one
  * substrate everywhere: a neuron is graded(coalesce) on its dendrites + spiking(accumulate) on its
  * axon; a hydrograph is baseflow(coalesce) + stormflow(accumulate); a ledger zeroes its temporary
  * accounts(coalesce) while rolling permanent ones forward(accumulate). KEEP THEM DISTINCT:

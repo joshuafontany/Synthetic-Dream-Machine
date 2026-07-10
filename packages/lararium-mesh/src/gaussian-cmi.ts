@@ -1,5 +1,5 @@
 /**
- * gaussian-cmi — the native, closed-form DEFAULT multivariate coupling estimator (the hoike's
+ * gaussian-cmi — the native, closed-form DEFAULT multivariate coupling estimator (the
  * locked keel: Gaussian-CMI / conditional-Granger). For jointly-Gaussian variables the conditional
  * mutual information has a closed form in covariance log-determinants, and Transfer Entropy equals
  * a conditional MI (Barnett-Barrett-Seth 2009: TE = GC/2 for Gaussians). So this needs NO kNN, NO
@@ -101,8 +101,8 @@ export function gaussianCMI(X: Obs, Y: Obs, Z: Obs): number {
 /**
  * Gaussian conditional Transfer Entropy TE(source → target | conds) in bits, at history length
  * `lag`. TE = I(target_t ; source_past | target_past, conds_past) — the target's own history AND
- * every conditioning child enter jointly (the full-N-way, synergy-safe conditioning the hoike
- * locked). Signals are CONTINUOUS vector series (rows = time, cols = dims). `conds=[]` ⇒ bivariate.
+ * every conditioning child enter jointly (the full-N-way, synergy-safe conditioning).
+ * Signals are CONTINUOUS vector series (rows = time, cols = dims). `conds=[]` ⇒ bivariate.
  */
 export function gaussianConditionalTE(
   source: Obs, target: Obs, conds: readonly Obs[] = [], lag = 1,

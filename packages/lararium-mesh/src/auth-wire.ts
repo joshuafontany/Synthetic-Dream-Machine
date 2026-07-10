@@ -177,10 +177,10 @@ export function mkLarAuthDenied(reason: string): LarAuthDeniedMsg {
  * Canonical JSON (stable key order) so sign and verify produce identical bytes.
  * NEVER sign the nonce alone.
  *
- * NOT YET WIRED (impl spike surfaced 2026-06-07): the peer signer (the CLI/
- * daemon-connector holds no seed today) and the worker-side Ed25519 verify against
- * the card key. This helper LOCKS the canonical what-to-sign; the sign/verify
- * plumbing is the next focused build.
+ * NOT YET WIRED: the peer signer and the
+ * worker-side Ed25519 verify against the card key. This helper LOCKS the canonical
+ * what-to-sign; the sign/verify plumbing is the next focused build. (The CLI left
+ * the peer surface entirely — it speaks the daemon's sock, gated by 0600 presence.)
  */
 export function authProofBytes(parts: {
   nonce:       string;  // gate-issued, single-use, short-TTL
@@ -287,7 +287,7 @@ export async function verifyAuthProof(parts: {
  * the operator signer (Signer.trySign / memorySignerFromBytes over the operator
  * seed). Pairs with authProofBytes (the gate's what-to-sign).
  *
- * NOT YET WIRED (V3 integration, planned 2026-06-07): the peer handshake does
+ * NOT YET WIRED (V3 integration): the peer handshake does
  * not exist yet (no live mkLarAuth caller) — the CLI must boot a keyhive/signer
  * and run challenge→response before Automerge sync; the gate must add gatePubKey
  * to lar:challenge and verify this sig via the worker seam.

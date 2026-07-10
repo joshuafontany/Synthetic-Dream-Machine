@@ -12,7 +12,7 @@
  */
 
 import { operatorDid } from "../env.js";
-import { summaryOutput } from "../daemon-connector.js";
+import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 

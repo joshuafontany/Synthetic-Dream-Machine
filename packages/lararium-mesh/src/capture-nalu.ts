@@ -4,9 +4,9 @@
  * runner + the reserve (WAL) sinks, so this stays testable and substrate-free.
  *
  * Modeled on the nalu (lar:///ha.ka.ba/@lares/api/pono/nalu) — collect-then-flush
- * across heterogeneous sources. Hardened by a four-domain pattern survey (2026-06-25 —
- * CS/observability · neurophysiology · hydrology · lean/queueing), whose convergent
- * findings are canon at capture-annotation-model#nalu-flush-hardening:
+ * across heterogeneous sources. Hardened by convergent findings across four domains
+ * (CS/observability · neurophysiology · hydrology · lean/queueing), canon at
+ * capture-annotation-model#nalu-flush-hardening:
  *
  *   - CEILING + spill-to-reserve (all four domains: bounded buffer · spillway-with-a-
  *     destination · WIP-cap · bounded RRP). `maxDepth` bounds the hot pool; overflow

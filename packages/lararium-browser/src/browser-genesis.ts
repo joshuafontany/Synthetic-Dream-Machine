@@ -5,7 +5,7 @@
  * in @lararium/mesh `genesis-intake`): the browser vessel materializes it FRESH from
  * the plain-data seed under the deterministic doc id, or reloads the persisted one by
  * find-first from IndexedDB — node-parity, no island.bin binary import, no merge-into-
- * stale reconcile (both retired 2026-06-28). This file now keeps ONLY the genuinely-
+ * stale reconcile. This file keeps ONLY the genuinely-
  * browser byte SOURCE: the OPFS content-addressed store (engine + plugin bytes by CID,
  * fetched over HTTP by manifest, read by the worker via resolveByCid).
  *

@@ -1,5 +1,5 @@
 /**
- * self-coupling — the SELF as the coupling READ-OUT, not a sixth sense (crucible-bound: IIT's
+ * self-coupling — the SELF as the coupling READ-OUT, not a sixth sense (IIT's
  * exclusion postulate — a sixth integrator would ABSORB the five; the self is the thin surface
  * OUTSIDE them). Bayesian Causal Inference (Körding et al.): given two cross-sense signals + how
  * well they CORRESPOND, infer P(common cause) — the probability they spring from ONE underlying

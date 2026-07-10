@@ -116,10 +116,10 @@ export interface WikiRecipe {
    * defense (schema drift across multi-bag residency). Cambria-style projection
    * from a record's stored schema-version into the consumer's expected shape.
    *
-   * **Why version-keyed, not bag-keyed (research-refined 2026-05-31):**
+   * **Why version-keyed, not bag-keyed:**
    * Per-bag keys duplicate the same lens across bags that share a schema
    * generation. Cambria's settled model keys lenses by `(sourceVersion,
-   * targetVersion)`. For Sprint 3 a flat `Map<sourceVersion, RecordLens>`
+   * targetVersion)`. A flat `Map<sourceVersion, RecordLens>`
    * suffices — each entry projects from `sourceVersion` to the recipe's
    * single current consumer shape. Promote to `Map<[fromV, toV], RecordLens>`
    * shortest-path resolution only when ≥3 concurrent versions live.
@@ -135,7 +135,7 @@ export interface WikiRecipe {
  * multi-bag residency). Cambria-style read-projection from a record's stored
  * shape into the consumer's expected shape. One-way only (read-projection,
  * not bidirectional writeback) — bidirectionality stays a research project
- * per the Cambria literature; Sprint 3 keeps the surface honest.
+ * per the Cambria literature; this surface stays honest to one-way.
  *
  * Signature: (record) => record. Pure function; no IO.
  */
@@ -166,7 +166,7 @@ export function lensFor(recipe: WikiRecipe, record: LarTiddlerRecord): RecordLen
 /**
  * Set-semantic equality for Automerge Heads.
  *
- * **Why set-semantics (research-refined 2026-05-31):** Automerge `Heads` is a
+ * **Why set-semantics:** Automerge `Heads` is a
  * mathematical *set* of change hashes — the DAG frontier — but the API
  * returns it as a string[]. Order is not contractually deterministic across
  * save/load or across implementations. Prior Automerge bugs traced to
@@ -230,7 +230,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     ...(r.libraryBags ?? []),
     // @oracle = the universal floor (engine + grammar + bag-oracle). @lares and
     // @lararium are NOT the floor — they ride a wiki's libraryBags (the @lares
-    // wiki-recipe = @oracle floor + @lararium + @lares). Operator ruling 2026-06-16.
+    // wiki-recipe = @oracle floor + @lararium + @lares).
     ORACLE_BAG,
   ])];
 }
@@ -241,7 +241,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
 // Operator-configurable at runtime; per-wiki overlays compose via the recipe
 // cascade. See: lar:///ha.ka.ba/@lares/api/lararium/bag-paths-cascade
 
-// ── Recipe fingerprint (Q5 revised 2026-05-31) ──────────────────────────────
+// ── Recipe fingerprint ──────────────────────────────────────────────────────
 
 import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvider } from "./crypto.js";
 
@@ -249,7 +249,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * Recipe-fingerprint input — the canonical bag-doc-id set that names "the
  * same recipe" for purposes of cross-device @personal binding.
  *
- * Per Q4 (fingerprint algorithm, revised 2026-05-31, personal-slot): only the wiki bag
+ * Fingerprint algorithm (personal-slot): only the wiki bag
  * doc-id and the libraryBags doc-ids participate. @lares and @lararium
  * doc-ids do NOT participate — switching personality or system bag does
  * not fork operator view state across devices.

@@ -54,8 +54,8 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
     // off the old main-thread jobRegistry; pool-touching residency reactors follow.
     wireWorkerVerbs: (registry, ctx: IslandContext) => {
       // `where` reaches every registered bag across both oracle planes by ACCESS
-      // (access≠load) — the daemon queries all bags, mounts none (reopened hoike
-      // #oracle-planes-verb-execution, 2026-06-16). resolve stays cascade-scoped.
+      // (access≠load) — the daemon queries all bags, mounts none. resolve stays
+      // cascade-scoped.
       registry.register("where",      makeWhereReactor(ctx.composite, { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl }));
       registry.register("resolve",    makeResolveReactor(ctx.composite));
       // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — verify-then-delegate
@@ -91,7 +91,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       if (ctx.catalogUrl) {
         const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
         // System plane (@oracle) accessor — list-wikis reads system wiki-recipes
-        // (@lares/@lararium) from here, user recipes from @catalog (two-plane, 2026-06-16).
+        // (@lares/@lararium) from here, user recipes from @catalog (two-plane).
         const sysPlane = ctx.oracleUrl ? makeCatalogAccessor(ctx.repo, ctx.oracleUrl) : undefined;
         const wikiMintOpts = {
           composite:   ctx.composite,

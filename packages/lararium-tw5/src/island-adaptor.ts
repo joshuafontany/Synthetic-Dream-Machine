@@ -287,7 +287,7 @@ export class IslandAdaptor implements MemeProjection {
       // source and surfaces in a lower bag; tagging it with the source's bag left
       // the projector targeting the stale source mirror (byte-identical → silent
       // hash-skip) and never publishing the destination. resolveTopmost carries
-      // the origin-bag the read path needs (residency-model S3.2 / anti-pattern #4).
+      // the origin-bag the read path needs (residency-model anti-pattern #4).
       this._enqueue({ title: change.title, record: survivor.record, origin: change.origin, bag: survivor.bagId });
     } else {
       this._enqueue(change);

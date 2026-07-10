@@ -10,7 +10,7 @@
  * update arrives as an offer; the operator holds the reboot capability, and
  * reboot re-verifies the new engine from genesis the same way the first booted.
  *
- * Hazard handling (engine-epoch design, 2026-06-09):
+ * Hazard handling (engine-epoch design):
  *   - rollback  — a pointer moving to a LOWER version gets named as such in the
  *                 alert body, never silently presented as an upgrade.
  *   - ethics    — "waiting" framing (Service-Worker vocabulary): readiness, not

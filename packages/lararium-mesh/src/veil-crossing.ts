@@ -11,11 +11,11 @@
  *     anon footprint has nothing to weld to. Right for a lived-public anon that wants to
  *     enter a private persona WITHOUT dragging its public history in.
  *
- * This is the crucible's owed cross-place unlinkability + the canon's Chaum move
+ * This is the owed cross-place unlinkability + the canon's Chaum move
  * (persona-circle#disclosure: "graduate by transferring a credential to a fresh
  * pseudonym, never by proving sameness, so the veil can re-close on a new key").
  *
- * WHAT "severed" MEANS, precisely (crucible-scoped): HOLD severs the PUBLIC link — a
+ * WHAT "severed" MEANS, precisely: HOLD severs the PUBLIC link — a
  * wire-watcher cannot derive/stitch the refound key from the anon key, because all-hardened
  * SLIP-0010 derivation is immune to public cross-path linkage (persona-hd, 28/28 vectors),
  * and the refound reuses NO key (no signature-reuse linker). The SEED holder (you) still

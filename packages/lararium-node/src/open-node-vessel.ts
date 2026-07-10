@@ -307,8 +307,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
       // @lares + @lararium system-bag mint — operator(admin) office, node home
       // only. Both pointers ride the @oracle system plane (the island doc);
-      // @oracle/@lararium/@lares stand as three separate docs (operator ruling
-      // 2026-06-16). The corpus doc starts empty; LOAD/ingest fills it.
+      // @oracle/@lararium/@lares stand as three separate docs. The corpus doc
+      // starts empty; LOAD/ingest fills it.
       mintLaresIfAbsent(repo, islandHandle);
       mintLarariumIfAbsent(repo, islandHandle);
 
@@ -562,7 +562,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       }),
     );
     // wiki-act: command a residency ACTION verb to run IN the active wiki
-    // island over ITS composite (operator ruling 2026-06-19: promotion executes
+    // island over ITS composite (promotion executes
     // where @working + canon both live — the island owns its composition; the
     // daemon commands, never reaches the per-fingerprint @working binding). The
     // inner verb (MOVE/LOAD/…) routes to the island's own action reactors.
@@ -674,8 +674,9 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const verbOpts = { verb: "system-alert", args: { message, cause: cause ?? "", kind: kind ?? "" }, requestedBy: "daemon" };
       void vmManager.placeWikiVerb(wikiId, verbOpts)
         // Not live → the verb PARKS durably and delivers on next mount —
-        // the silent skip died 2026-06-12 (Akka /deadLetters lesson:
-        // undeliverables go somewhere visible, never nowhere).
+        // a dropped verb must stay observable, a silent skip hides real faults
+        // (the Akka /deadLetters lesson: undeliverables go somewhere visible,
+        // never nowhere).
         .catch(() => mailbox.park(wikiId, verbOpts));
     });
     return vmManager;

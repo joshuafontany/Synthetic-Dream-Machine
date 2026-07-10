@@ -50,7 +50,7 @@ export const SENSORIUM_MANIFEST = "manifest.json";
  *   `cosheaf` — ki (氣). COVARIANT extension, local→global: a local value EXTENDS outward. bands/coupling
  *               ride here — read via {@link planeVariance}.
  *
- * The keystone (crucible): mixing them under ONE contravariant gluing SILENTLY corrupts — it penalizes
+ * The keystone: mixing them under ONE contravariant gluing SILENTLY corrupts — it penalizes
  * the flow (ki) for failing to be static (li). Consistency runs SEPARATELY per posture, never merged.
  */
 export { SHEAF_PLANES, COSHEAF_PLANES } from "@lararium/mesh";

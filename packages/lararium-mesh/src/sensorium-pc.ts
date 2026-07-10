@@ -4,9 +4,9 @@
  * update LOOP, and computes the variational free-energy objective
  *   F = Σ_i ½(π_i·ε_i² − ln π_i)  +  Σ_i KL[q_i(x) ‖ p_i(x)].
  *
- * ## Two crucible fixes (li-ki-integrities.md #crucible-tested, 2026-07-01)
+ * ## Two crucible fixes (li-ki-integrities.md #crucible-tested)
  *
- * The crucible demoted the old `F = Σπε² + complexity`: it earned only "the ACCURACY term of VFE"
+ * The old `F = Σπε² + complexity` earned only "the ACCURACY term of VFE"
  * because (1) it omitted the `−ln π` log-precision term — the tell — so precision had no interior
  * optimum, and (2) its complexity was an MDL param-cost, a description-length, NOT a real
  * `KL[q(x)‖p(x)]` to a NAMED prior over causes (so it read as precision-weighted regression in FEP
@@ -68,7 +68,7 @@ const EPS = 1e-9;
  * `π* = 1/(ε̄²+EPS_REL) ≤ PI_MAX` (a near-noiseless plane caps instead of blowing up), and the
  * π→confidence map hits the 20-ceiling as π→PI_MAX. It is RELATIVE (dimensionless) — the errors
  * are standardized (z²) before they reach here — so `ε̄²→0` never reintroduces ∞ at ANY scale.
- * Tied to machine epsilon (the old absolute `1e-9` floor was scale-blind, #crucible-tested 2026-07-01).
+ * Tied to machine epsilon (the old absolute `1e-9` floor was scale-blind, #crucible-tested).
  */
 const EPS_REL = Number.EPSILON;
 const PI_MAX = 1 / EPS_REL;
@@ -94,7 +94,7 @@ export function confidenceToPrecision(confidence: number): number {
  * but numerically robust: at `π→∞`, `1/(1+∞) = 0` ⇒ `20` EXACTLY (the naive `π/(1+π)` would form
  * `Inf/Inf ⇒ NaN`). The exact inverse of {@link confidenceToPrecision}; π=1 ⇒ 10/20 (neutral),
  * π→∞ ⇒ 20/20. An `isFinite` guard returns the ceiling for a non-finite π (Defect 3 fix,
- * #crucible-tested 2026-07-01). How a plane REPORTS trust in its own prediction.
+ * #crucible-tested). How a plane REPORTS trust in its own prediction.
  */
 export function precisionToConfidence(precision: number): number {
   const p = Math.max(0, precision);
@@ -140,7 +140,7 @@ export interface PrecisionSettle {
  * SETTLE a plane's precision at the free-energy precision term's optimum. With the `−ln π` penalty
  * the term `½(π·ε̄² − ln π)` is strictly convex with a unique interior minimum where the gradient
  * `½(ε̄² − 1/π)` vanishes — so the settle is the CLOSED FORM `π* = 1/(ε̄²+EPS_REL)`
- * ({@link optimalPrecision}), solved, not iterated (Defect 2 fix, #crucible-tested 2026-07-01: the
+ * ({@link optimalPrecision}), solved, not iterated (Defect 2 fix, #crucible-tested: the
  * old fixed-`lr` gradient flow was non-contractive for `ε̄² ≳ 2.83` — it STALLED or diverged to the
  * WRONG boundary; the optimum is analytic, so there is nothing to converge). Always `settled` — a
  * closed form carries no convergence risk. (A STREAMING caller tracking a moving `ε̄²` could run

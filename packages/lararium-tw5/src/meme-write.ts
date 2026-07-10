@@ -1,7 +1,7 @@
 /**
  * meme-write — disk export of memes: the recompose seam.
  *
- * Architecture (carrier-whole at rest, operator ruling 2026-06-11):
+ * Architecture (carrier-whole at rest):
  *   `exportMemeText` routes through `expandMemeRefs` (deserializer.ts) — the
  *   recompose inverse the doctrine names (disk-projection#granularity). The
  *   membrane module owns BOTH directions: ingest decomposes a carrier into
@@ -10,11 +10,9 @@
  *   carrier envelope. One meme, one file — a child change re-flushes its
  *   GROUP (the projector routes to the carrier root), never its own file.
  *
- *   The retired per-node law (every record renders its own file through the
- *   markdown-meme template) burned with hole H1; the whole markdown-meme
- *   template family followed it (2026-06-11) once no caller remained — the
- *   HTML templates serve the live story river; the projection-snapshot mode
- *   gets built fresh when a consumer exists. The carrier definition form
+ *   No per-node markdown-meme template renders each record to its own file;
+ *   the HTML templates serve the live story river, and the projection-snapshot
+ *   mode gets built fresh when a consumer exists. The carrier definition form
  *   recomposes in the membrane (expandMemeRefs, also on $tw.lares), where
  *   the round-trip harness proves parse∘render ≡ records. Wikifying the
  *   text field cannot carry byte-fidelity: `\rules` does not propagate

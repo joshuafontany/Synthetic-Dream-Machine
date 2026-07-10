@@ -1,5 +1,5 @@
 /**
- * windowed-coupling — the streaming coupling RUNTIME, built to the Window-crucible's full policy
+ * windowed-coupling — the streaming coupling RUNTIME, built to the full windowing policy
  * (no easy fixed-window shortcut, because the shortcut becomes what the system does):
  *
  *   · L = window length ≈ 15-20 · d_joint (windowLengthFor) — the estimator floor; below it the

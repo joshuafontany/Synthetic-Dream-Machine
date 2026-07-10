@@ -2,15 +2,15 @@
  * openBrowserVessel — local-first browser vessel factory.
  *
  * A thin RECIPE over `openVesselCore` (the one keel, both substrates) — the BROWSER
- * carries the SAME capabilities as node; only the SUBSTRATE differs. Radical-YIN cleanup
- * (2026-06-08): the prior browser fork drifted thin via easy-path shortcuts (coreless boot,
- * no residency manager, no corpus, a LarVessel wrapper). Those die. Genuine browser
+ * carries the SAME capabilities as node; only the SUBSTRATE differs. The browser must NOT
+ * drift thin via easy-path shortcuts (coreless boot, no residency manager, no corpus, a
+ * LarVessel wrapper) — it holds the full keel. Genuine browser
  * substrate (the ONLY divergence): IndexedDB storage, WebCrypto keys, founding-via-ceremony
  * (vs node's lares-init), Web Worker spawn, NO WS-server inbound gate (a browser cannot
  * listen on a socket), genesis-via-bytes/IDB/OPFS/peer. Capabilities held in common: the
  * BagResidencyManager mechanism, corpus loading, the verb plane, presence.
  *
- * Genesis REQUIRED (coreless deleted). The not-yet-held axis sits at anon↔keeper
+ * Genesis REQUIRED (no coreless boot). The not-yet-held axis sits at anon↔keeper
  * (PersonaGroup/admin), not genesis — see project-sovereign-worker-model.
  */
 
@@ -151,7 +151,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    *  {@link mountCoherenceIndicator} — the sensorium's self-reading made visible over the tiddler-view. */
   onCoherence?:    (frame: CoherenceFrameWithRev) => void;
   /**
-   * Mesh-LEAF standing (Epic 5, cut 1) — the browser carries-in the FLOW-map as a LEAF: it navigates
+   * Mesh-LEAF standing — the browser carries-in the FLOW-map as a LEAF: it navigates
    * the mesh (pulls peers' public @meshpalace + re-ranks by l-space proximity) WITHOUT serving or
    * dialing. A browser holds no listening socket, so a leaf advertises NO endpoint and seeds no
    * self-dial (`deriveMeshLeaf` → no endpoint; `meshSelfSeed` → []). The mirror of the node's `meshSelf`,
@@ -288,7 +288,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     onEvict: async (bagId) => { await vmManager.unmountWiki(bagId); },
   });
 
-  // ── The mesh carriage as a LEAF (Epic 5, cut 1) ───────────────────────────────
+  // ── The mesh carriage as a LEAF ───────────────────────────────
   // PRESENT → derive the leaf standing and compose the carriage ALONGSIDE the wiki core: meshpalace
   // (a writable @meshpalace FLOW-map, seeded with NO self-dial — `meshSelfSeed([leaf])` is [] for a
   // leaf) + carriage (pulls peers' public read-faces, re-ranks by l-space proximity). A LEAF has no

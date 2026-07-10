@@ -11,7 +11,7 @@
  * Comparison: lexicographic from L4 downward (epoch dominates).
  * Merge (CRDT LWW): dominant epoch wins; sub-epoch levels merge only within same epoch.
  *
- * Prior art survey (2026-05-06): no prior formalization combines bounded multi-level
+ * Prior art survey: no prior formalization combines bounded multi-level
  * cyclic hierarchy with unbounded epoch guard for CRDT ordering. Closest adjacent:
  *   - HLC (Kulkarni 2014): two-level, both unbounded, no cycling
  *   - ITC (Almeida 2008): tree for identity management, flat event counter

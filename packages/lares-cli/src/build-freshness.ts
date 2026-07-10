@@ -3,9 +3,9 @@
  *
  * A `lares` run loads the workspace packages from their BUILT dist. A stale dist
  * silently runs OLD code — and for a found/boot/mutate verb that means founding an
- * identity or booting the daemon with superseded logic. We witnessed this on
- * 2026-06-25: `lares init` ran a pre-Phase-2 `@lararium/node` dist, calling the new
- * keyhive ceremony without the signer seed → the founding crashed mid-ceremony.
+ * identity or booting the daemon with superseded logic — e.g. an `init` against a
+ * stale `@lararium/node` dist calls the keyhive ceremony without the signer seed and
+ * crashes mid-ceremony, leaving a half-founded vessel.
  *
  * Node caches modules at import, so building MID-process cannot reload them. The only
  * sound cure is **build-then-re-exec**: build the whole workspace, then re-run the SAME

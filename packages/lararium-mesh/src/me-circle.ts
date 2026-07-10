@@ -4,7 +4,7 @@
  * the blame at a time, and which the embodied human carries through space-time with
  * itself (body + environment).
  *
- * Operator's ruling (2026-06-30, myth-as-spec): a "me" composes as a single-principal
+ * A "me" composes as a single-principal
  * cabal-place — the SAME place machinery (cabal-place.ts), with the multi-principal
  * complexity DEGENERATE to trivial because there is ONE ordering authority: you.
  *   · COMPOSITION (Circle = who is me) ⊥ the optional shared substrate (the place).

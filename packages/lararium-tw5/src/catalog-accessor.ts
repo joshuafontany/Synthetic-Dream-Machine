@@ -1,7 +1,7 @@
 /**
  * catalog-accessor — one catalog-driven reach to ANY bag (access ≠ load).
  *
- * The bag-stack ontology (operator-approved 2026-06-09) splits two concerns the
+ * The bag-stack ontology splits two concerns the
  * old per-verb handle-plumbing fused: LOAD (tiddlers layered into a render
  * composite) vs ACCESS (data-plane reach to a bag's doc). `@catalog` IS the
  * registry — a bag-URI → AutomergeUrl map. Given the catalog doc URL and a Repo,

@@ -15,7 +15,7 @@
  * written for the stratum ({@link channelSignals}) is the shape composed for the corpus
  * ({@link corpusSignals}).
  *
- * THE READER (crucible: NO new parser): the meme-ast island scanner (`collectEvents`, disjoint-match) +
+ * THE READER (NO new parser): the meme-ast island scanner (`collectEvents`, disjoint-match) +
  * a tree-sitter INJECTION config ({@link sigilInjectionQuery}) + a source-CID-pinned STANDOFF stratum
  * table (per byte-range `{span, tag, sourceCid}`). Strata ASSOCIATE to a SKELETAL TIER (the prose/char
  * stream) via association edges — autosegmental, NOT position-identity.
@@ -134,7 +134,7 @@ export interface AssociationEdge {
   readonly direction: SpreadDirection;
   readonly crossBand: boolean;
   /**
-   * FLOAT + DOCK — the NCC cure (crucible-F2; Coleman & Local). The steer's nearest anchor lies PAST a
+   * FLOAT + DOCK — the NCC cure (Coleman & Local). The steer's nearest anchor lies PAST a
    * framing boundary; rather than spread-across (asserting A≺B ∧ A∘B at once — incoherent), the red
    * autosegment FLOATS out of its block and RE-DOCKS at the next block's boundary anchor. A licensed
    * hand-off, never a spread. `false` = an ordinary domain-local spread.

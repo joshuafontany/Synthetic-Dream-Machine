@@ -9,7 +9,7 @@
  *                the actor's own threat-pattern).
  *   ③ CORROBORATE — the immune-read's Signal-2 (an independent neighbor's flag) IS a mesh-coupling
  *                R-edge INTO who: does authority's or flow's stream INFORM the who-threat above a
- *                threshold? (The crucible's insight — the neighbor-signal is the coupling plane —
+ *                threshold? (The insight — the neighbor-signal is the coupling plane —
  *                made literal.)
  *
  * Platform-blind: rides ./stream-adapter (their contract) + ./immune-read + ./mesh-coupling +

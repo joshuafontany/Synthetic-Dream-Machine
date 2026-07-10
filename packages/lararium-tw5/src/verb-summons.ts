@@ -7,7 +7,7 @@
  * a volatile local invocation and tombstones the summons entry.
  * The summons names edge transport — a peer calling another peer to act. (The
  * term "signal" now names the Agent↔Operator HUD/legibility frame, a different
- * layer; the task-transport noun reads "summons", by research verdict 2026-06-07.)
+ * layer; the task-transport noun reads "summons".)
  * The volatile invocation tiddler holds the durable coordination the dispatcher watches.
  *
  * Isomorphic: no Node or browser platform APIs. Runs in any sovereign Worker.

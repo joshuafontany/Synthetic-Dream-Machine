@@ -8,7 +8,7 @@
  *
  * The registry keeps a kind→factory table and an id→stop table for running
  * instances. Configs live as tiddlers tagged lar:///ha.ka.ba/tags/lararium-projection in
- * the daemon wiki (S5.5+); until that lands, callers pass configs directly.
+ * the daemon wiki; until that lands, callers pass configs directly.
  *
  * Platform scoping: factories close over platform-specific deps (filesystem
  * roots, render functions) at registration time, so the same registry shape

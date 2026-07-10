@@ -21,8 +21,7 @@ const MEMPALACE_PLUGIN = join(MEMPALACE_DIR, ".claude-plugin", "plugin.json");
 /**
  * The Python interpreter that holds mempalace (venv-aware). ONE source of truth:
  * @lararium/mempalace owns the resolver; this re-export keeps `lares wake`'s cheap
- * check on the exact same logic — the former duplicate "kept in lockstep" is gone
- * (YIN cut, 2026-06-25).
+ * check on the exact same logic. A second copy kept "in lockstep" would drift.
  */
 export const resolvePython = resolveMempalacePython;
 

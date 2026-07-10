@@ -19,7 +19,6 @@
  * an `archival-verb` field with one of ARCHIVAL_VERBS, and the linking fields
  * that name which ACTION caused it.
  *
- * Sprint:  Residency Model Epic — S4.1 / S4.2 / S4.4 / S4.5
  * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  * Source:  packages/lararium-mesh/src/effect-record.ts
  */
@@ -28,7 +27,7 @@ import type { ResidencyAction, ActionVerb } from "./residency-actions.js";
 import { stableTagUri } from "./lar-uris.js";
 import type { LarTiddlerRecord, LarTiddlerStore, ChangeOrigin } from "./tiddler-store.js";
 
-// ── Archival verb vocabulary (S4.1) ────────────────────────────────────────
+// ── Archival verb vocabulary ────────────────────────────────────────────────
 
 /**
  * Archival profession verb vocabulary — SAA / IFLA LRM lineage. Each effect
@@ -64,7 +63,7 @@ export function isArchivalVerb(verb: string): verb is ArchivalVerb {
 /** Tag carried by every effect-record tiddler in the bag's residency ledger. */
 export const LARES_EFFECT_RECORD_TAG = stableTagUri("lares-effect-record");
 
-// ── URI shape (S4.2) ───────────────────────────────────────────────────────
+// ── URI shape ───────────────────────────────────────────────────────────────
 
 /** `lar:///ha.ka.ba/@<bag>/ledger/residency/` — residency-ledger prefix for one bag. */
 export function effectLedgerPrefix(bagUri: string): string {
@@ -207,7 +206,7 @@ export function parseEffectRecord(fields: Record<string, unknown>): EffectRecord
   };
 }
 
-// ── Action → Effects mapping (S4.4) ────────────────────────────────────────
+// ── Action → Effects mapping ────────────────────────────────────────────────
 
 interface MapOptions {
   /** Override timestamp (tests). Defaults to new Date().toISOString(). */
@@ -226,11 +225,11 @@ interface MapOptions {
  *   MOVE   → 2 effects: accession in to-bag + deaccession in from-bag,
  *                       paired by shared transferId
  *   CLEAR  → 1 effect: disposition at bag-level (per-tiddler deaccessions
- *                       belong to the handler that walks the bag at Sprint 5)
+ *                       belong to the handler that walks the bag)
  *   DROP   → 1 effect: disposition at bag-level (bag retired entirely)
  *   LOAD   → 1 effect: accession in to-bag with source-uri
  *
- * Handlers (Sprint 5) call mapActionToEffects() and write each record into the
+ * Handlers call mapActionToEffects() and write each record into the
  * bag named by its `bag` field. CLEAR's per-tiddler audit fans out at the
  * handler when it knows the bag's tiddler set.
  */
@@ -343,7 +342,7 @@ export function mapActionToEffects(action: ResidencyAction, opts?: MapOptions): 
   }
 }
 
-// ── Writer (S4.5) ──────────────────────────────────────────────────────────
+// ── Writer ──────────────────────────────────────────────────────────────────
 
 /**
  * Resolve the writable store for a bag — the access-reach surface. An effect
@@ -385,12 +384,11 @@ export async function writeEffectRecord(
  * mutation fails, no effect records get written; if the log writes fail after
  * a successful mutation, the error propagates with the mutation result intact.
  *
- * Sprint 4 gap (named explicitly): if `mutate` succeeds and a subsequent
+ * KNOWN GAP: if `mutate` succeeds and a subsequent
  * record-write fails partway through, the bag carries an inconsistent audit
  * trail. Atomic batching (one Automerge change containing both the residency
- * mutation and the effect-record tiddler) belongs to a later sprint that
- * exposes a transactional API on the store. Sprint 4 ships the discipline;
- * Sprint 5+ tightens the atomicity.
+ * mutation and the effect-record tiddler) awaits a transactional API on the
+ * store — the discipline ships now; the atomicity is still owed.
  *
  * Anti-pattern defense: **no silent unlink.** Every ACTION produces an audit
  * trail; failure during logging surfaces to the operator rather than passing.

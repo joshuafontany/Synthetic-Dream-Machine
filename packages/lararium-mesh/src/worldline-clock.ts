@@ -3,12 +3,12 @@
  * lineage HANDLE, over an agent's LOCAL work-memory. Pure functions; the caller owns
  * persistence and the harness-event reads.
  *
- * LOCALITY (operator ruling, 2026-06-25): an agent/subagent's memories-of-work — handles,
+ * LOCALITY: an agent/subagent's memories-of-work — handles,
  * edges, clocks — are a LOCAL causal island (the mempalace). They MUST NOT enter the
  * mesh/federation. So this clock rides a LOCAL `WorldlineLog`, never the mesh social
  * `SessionEventLog`.
  *
- * GRAIN (Loom-grounded, 2026-06-25): L0 Pulse = one generation SEGMENT (a `stop_reason` /
+ * GRAIN: L0 Pulse = one generation SEGMENT (a `stop_reason` /
  * tool_use round — the OTel span, the finest durably-addressable unit); a content-block is a
  * sub-Pulse OFFSET (an index, not a tick — blocks in one inference share one emission instant).
  * The tick reads the HARNESS transcript's deterministic events, never the rendered grammar

@@ -105,12 +105,12 @@ export interface DaemonWorldlineTrajectoryResult {
   nullBaseline?: unknown;
 }
 
-// The ea watchdog budget — a SILENCE window, not a mount deadline (debt
-// resolved 2026-06-12). The mounting island emits breath (sovereign-kernel:
+// The ea watchdog budget — a SILENCE window, not a mount deadline.
+// The mounting island emits breath (sovereign-kernel:
 // stage marks + a steady interval); each breath re-arms this timer, so a
 // long live mount never reads dead — silence alone times out, and the
-// rejection names the last breath heard (readiness reads local). History:
-// a flat 15s deadline died live (2026-06-11) because a fed store's mount
+// rejection names the last breath heard (readiness reads local). A fixed
+// deadline cannot bound this: a fed store's mount
 // scales with stored docs and disk latency; 120s stays as the silence
 // budget — tightening it reads as a later knob, never a correctness cut.
 const EA_SILENCE_TIMEOUT_MS = 120_000;

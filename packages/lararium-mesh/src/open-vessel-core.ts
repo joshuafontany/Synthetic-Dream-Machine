@@ -71,8 +71,8 @@ export interface VesselCoreAssembly {
   /** Null until the invariant plane reaches this vessel (node home mints;
    *  wild vessels federate it in). The keel never mints. */
   laresHandle:   DocHandle<LarDoc> | null;
-  /** The @lararium memetic corpus — its OWN doc (operator ruling 2026-06-16:
-   *  @oracle/@lararium/@lares are three separate docs). Pointer rides the
+  /** The @lararium memetic corpus — its OWN doc (@oracle/@lararium/@lares
+   *  are three separate docs). Pointer rides the
    *  @oracle system plane; null until federated/minted. */
   larariumHandle: DocHandle<LarDoc> | null;
   coreHash:      string;
@@ -125,8 +125,8 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
       addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
     }
   }
-  // @lararium — the memetic corpus as its OWN doc (operator ruling 2026-06-16:
-  // three separate docs). Its pointer rides the @oracle system plane (the island
+  // @lararium — the memetic corpus as its OWN doc (three separate docs).
+  // Its pointer rides the @oracle system plane (the island
   // doc), resolved the same way as @lares — never the conflated island URL. The
   // wiki-cascade composition (corpus as a library in a recipe) rides the island
   // composite via recipe-watch; this keel layer carries vessel-level access.

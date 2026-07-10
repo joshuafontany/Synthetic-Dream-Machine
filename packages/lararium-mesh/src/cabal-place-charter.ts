@@ -4,8 +4,8 @@
  * mesh-palace's `snapshotPublicFlowMap`): drop-private, keep-public.
  *
  * Canon: lar:///ha.ka.ba/@lares/api/pono/cabal-place#the-place (NAMED-not-ruled —
- * "the place's identity is content-addressed; the name grants no authority" — though,
- * crucible-corrected, it does leak metadata; see THE VEIL INVARIANT below)
+ * "the place's identity is content-addressed; the name grants no authority" — though
+ * it does leak metadata; see THE VEIL INVARIANT below)
  * + lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture ("cabalGroup = shared
  * charter, read-scope"). The read/veil tier ALREADY EXISTS as the @oracle
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
@@ -20,8 +20,8 @@
  *   · MEMBERS-ONLY — the substrate CONTENT + the member ROSTER + the liveness
  *                    lease slots + the epoch keys. NEVER crosses the membrane.
  *
- * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee — crucible-
- * scoped): `projectCabalPlaceCharter` reads ONLY the public fields of its input and
+ * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee):
+ * `projectCabalPlaceCharter` reads ONLY the public fields of its input and
  * constructs a literal naming ONLY charter fields. The members-only data (roster /
  * substrate content) rides the SAME input bag yet is structurally unreachable in the
  * output — the membrane never references it, so a roster or substrate content CANNOT

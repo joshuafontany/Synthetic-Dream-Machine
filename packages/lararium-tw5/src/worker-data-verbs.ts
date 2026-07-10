@@ -65,7 +65,7 @@ export const makeUnpinReactor = (post: ResidencyOpPost): VerbReactor => residenc
 export const makeRegisterColdReactor = (post: ResidencyOpPost): VerbReactor => residencyVerb("register-cold", post);
 
 /** `where` — global membership query: which registered bags hold a tiddler.
- *  Access≠load (operator ruling, reopened hoike 2026-06-16): the daemon reaches
+ *  Access≠load: the daemon reaches
  *  EVERY registered bag across both oracle planes (@catalog user + @oracle
  *  system) plus its mounted composite — no mounting required. Returns membership.
  *  `scope` names the horizon: THIS operator's registry, never the DreamNet
@@ -126,8 +126,8 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
       if (tail.includes("/")) continue;
       wikis.push({ slug: tail, uri: title, automergeUrl: tiddlerText(rec), kind: "user" });
     }
-    // System wikis — @oracle recipes (the @lares/@lararium quine system bags; two-plane
-    // ruling 2026-06-16). Their recipe lives in @oracle, the wiki bag IS the @ bag.
+    // System wikis — @oracle recipes (the @lares/@lararium quine system bags).
+    // Their recipe lives in @oracle, the wiki bag IS the @ bag.
     if (sysPlane) {
       const sys = await sysPlane.handle();
       const recipePrefix = recipeUri("@oracle", "");

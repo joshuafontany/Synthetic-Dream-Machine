@@ -55,7 +55,7 @@ const REGISTER_CODES: Record<string, string> = {
   PS: "Provisional-Synthesis",
   S: "Synthesis",
   SC: "Synthesis-Canon",
-  CS: "Synthesis-Canon", // old transposed form of SC (operator ruling 2026-06-19)
+  CS: "Synthesis-Canon", // old transposed form of SC
   C: "Canon",
 };
 const REGISTER_BANDS = new Set(Object.values(REGISTER_CODES));

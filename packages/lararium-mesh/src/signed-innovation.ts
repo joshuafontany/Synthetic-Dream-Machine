@@ -1,5 +1,5 @@
 /**
- * signed-innovation — the wire's signal, made real (the crucible's core correction): couple on the
+ * signed-innovation — the wire's signal, made real: couple on the
  * SIGNED prediction residual, never the squared surprise. Each child's raw vector signal is reduced
  * per-dimension to its innovation ε = actual − predicted (one-step EWMA forecast) — the white,
  * dimensionless residual that is the *sufficient statistic for the new information*, and the correct

@@ -163,8 +163,7 @@ export type RotateRecipeOptions = EpochHandlerOptions;
  *
  * Draft-drain into new canonical is deferred to F-arc routing rules.
  * Today the draft layer continues unchanged; operator can lift
- * draft → new canonical via residency ACTION verbs (Sprint 5 of the
- * Residency Model Epic ships `lares act MOVE`/`ADD`/`COPY`).
+ * draft → new canonical via residency ACTION verbs (`lares act MOVE`/`ADD`/`COPY`).
  */
 export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor {
   return async (args) => {

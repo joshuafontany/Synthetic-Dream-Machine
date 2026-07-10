@@ -4,9 +4,9 @@
  * The emitter lives next door (genesis-doc.ts: buildGenesisDoc /
  * verifyGenesisArtifact); this module carries the receiving side every
  * vessel runs: validate bytes → import → post-import verify, and the
- * CID-diverge reconcile. Until 2026-06-12 this logic lived twice —
- * genesis-artifact.ts (node) ⇆ browser-genesis.ts — and had already
- * drifted (record shape, authority string). One hull now; the platform
+ * CID-diverge reconcile. This logic once lived twice —
+ * genesis-artifact.ts (node) ⇆ browser-genesis.ts — and drifted
+ * (record shape, authority string). One hull now; the platform
  * wrappers keep only their byte SOURCES (fs · bundle/IDB/OPFS/peer)
  * and their held offices (mintLaresIfAbsent stays in the node genesis
  * office — the gate enforces by placement).

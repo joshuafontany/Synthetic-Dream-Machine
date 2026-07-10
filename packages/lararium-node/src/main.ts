@@ -5,14 +5,16 @@
  * browser vessels to sync through, and attaches a LarDiskProjector so
  * the bags/ tree stays in sync with the Automerge store.
  *
- * WS surface (sync):
- *   ws://localhost:8080/ws  → Automerge sync protocol
+ * Three surfaces mount here, not one:
+ *   ws://localhost:{port}/ws     → Automerge sync protocol (browser + remote mesh peers)
+ *   {storage}/lares.sock         → UDS verb channel (co-located CLI fast path)
+ *   http://localhost:{port}/…    → oracle read-face; federation pulls + verifies through it
  *
  * Usage:
  *   node dist/main.js [--port 8080] [--storage .lararium] [--wiki lares] [--root /alt/root]
  *
  * Environment:
- *   LAR_PORT     — WS server port (default 8080)
+ *   LAR_PORT     — server port (default 8080; docker-compose.yml overrides to 4321)
  *   LAR_STORAGE  — storage directory (default {root}/.lararium)
  *   LAR_WIKI     — wiki id (default lares — the @lares-as-wiki quine)
  *   LAR_CATALOG  — existing catalog automerge URL to join (optional)
@@ -55,7 +57,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   const storageDir = resolve(get("--storage", "LAR_STORAGE", larDataDir()));   // runtime → ~/.lares/.lararium
   // One genesis law, shared with the CLI env contract: <root>/genesis —
   // the repo root carries the REAL tracked genesis dir (the symlink and the
-  // package-dir home both died 2026-06-11; early alpha keeps no compatibility).
+  // package-dir home carry no compatibility path; early alpha keeps none).
   const genesisDir = resolve(get("--genesis", "LAR_GENESIS", join(rootDir, "genesis")));
   const recipe = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as NodeRecipe;
   return {
@@ -101,8 +103,7 @@ async function main(): Promise<void> {
 
   // Fail-fast on a busy port — the supervised vessel never manages its siblings
   // (12-factor / island sovereignty). A clean message, not an unhandled 'error'
-  // crash; `lares reconcile` is the verb that stops the incumbent (hoike
-  // #dev-loop-restart, 2026-06-16).
+  // crash; `lares reconcile` is the verb that stops the incumbent.
   httpServer.on("error", (err: NodeJS.ErrnoException) => {
     if (err.code === "EADDRINUSE") {
       console.error(`[lararium] port ${port} is already in use — a vessel is already running. Use \`lares reconcile\` to restart it, or free the port.`);
@@ -294,7 +295,7 @@ function isSerdeSkewFault(err: unknown): boolean {
   // Match the SYMPTOM (a Rust deserializer error), never the wrapper: matching any
   // `[vessel-host] fault` / `manifest handler threw` painted every island fault
   // (e.g. a slot-sync timeout) with the "run lares rebuild" cure — a wrong cure
-  // banner that cost real diagnosis time (witnessed: regenesis 2026-07-01).
+  // banner that costs real diagnosis time.
   return /tag for enum is not valid|failed to deserialize|invalid type:|serde/i.test(msg);
 }
 

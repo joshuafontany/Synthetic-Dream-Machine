@@ -1,6 +1,5 @@
 /**
- * persistence-keel — the PersistencePalace lifecycle, collapsed (the 2026-07-02 Keystone-Cutter
- * pass; strangles testimony-keel.ts). A persistence pattern-integrity ANY sensorium composes as a
+ * persistence-keel — the PersistencePalace lifecycle. A persistence pattern-integrity ANY sensorium composes as a
  * cosheaf `#has` cap: it persists content as an immutable TESTIMONY whose only dial is STANDING,
  * earned by distinct-signer witness edges and cooled by a per-instance half-life that IS the
  * maturation mode — differing stable-from-ephemeral by policy values alone.

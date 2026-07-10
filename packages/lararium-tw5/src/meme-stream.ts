@@ -49,7 +49,7 @@ export type MemeStreamEvent =
 // All control sigils use (?:[^>\n]|->) — resonance markers (ॐ, ⊙) and ->
 // sequences allowed, but a sigil NEVER crosses a line: the multi-line form
 // once let a quoted `<<~` mention swallow text down to a distant real sigil
-// (loci.md, 2026-06-11).
+// (loci.md).
 const SOH_RE  = /<<~(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
 const STX_RE  = /<<~(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/;
 const ETX_RE  = /<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
@@ -61,7 +61,7 @@ const AHU_CLOSE_RE = /<<~\/ahu\s*>>/;
 type Hit = { index: number; end: number; cap: string | undefined };
 
 /**
- * Fence-aware find (fence-mask law, 2026-06-11): quoted sigils never frame
+ * Fence-aware find (fence-mask law): quoted sigils never frame
  * a carrier — a fenced `<<~ &#x0003; >>` in teaching text MUST NOT close
  * the body. The parse cursor always rests outside quoted spans (a sigil
  * inside a span never gets consumed), so masking `remaining` per call

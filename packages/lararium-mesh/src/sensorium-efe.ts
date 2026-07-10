@@ -30,7 +30,7 @@
  *      does NOT gate the py `VERB_SEATS` HITL surface, which stays the house's kept HITL question, distinct
  *      from selection.
  *
- * PORT-STATUS — this organ stands the S0-S3 CONCEPT-WITNESS + the TS↔py parity oracle; the production EFE
+ * PORT-STATUS — this organ stands the CONCEPT-WITNESS + the TS↔py parity oracle; the production EFE
  * compute ports to py (the RUN arc). py counterparts EXIST: `predictive_coding.py` (the F primitive) +
  * `bands_sidecar.py`. OWED in py: the H¹ gate · THIS EFE keystone · the bench strands.
  *

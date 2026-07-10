@@ -32,7 +32,7 @@
  *   (args, context) → result — already ReactionEngine-compatible.
  *
  * Architecture laws:
- *   - TW5 vm primacy: handlers may invoke vm action-widgets (B.4).
+ *   - TW5 vm primacy: handlers may invoke vm action-widgets.
  *   - Web3 law: no HTTP/RPC control plane. Coordination is TW5 wiki events + CRDT sync.
  *   - Capability hooks: ctx.cap is bound per-invocation to requestedBy DID.
  *

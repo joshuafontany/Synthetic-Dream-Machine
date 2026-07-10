@@ -5,7 +5,7 @@
  * singleton off the palace path. The SAME physical palace addressed by DIFFERENT
  * spellings (a symlinked parent, a `..` segment, a relative vs absolute form, a
  * trailing slash) hashed to DISTINCT keys → multiple write-daemons → palace-lock
- * starvation (the daemon pile-up root, 2026-06-28).
+ * starvation (the daemon pile-up root).
  *
  * The cure: canonicalize at OUR single point of use, so one physical palace = one
  * spelling = one holder. `realpathSync.native` resolves symlinks AND normalizes;

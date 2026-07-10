@@ -62,7 +62,7 @@ export interface AhuBlock {
 export function findTopLevelAhuBlocks(text: string): AhuBlock[] {
   // Quoted sigils never open or close a block: a fenced or inline-code
   // `<<~ ahu … >>` is the operator SHOWING the grammar, not using it
-  // (fence-mask law, 2026-06-11).
+  // (fence-mask law).
   const mask = fencedSpans(text);
   const events: Array<{ kind: "open" | "close"; pos: number; end: number; slot: string }> = [];
   for (const m of maskedExecAll(text, AHU_OPEN_RE, mask)) {

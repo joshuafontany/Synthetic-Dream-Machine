@@ -205,7 +205,7 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
 // Structural marker patterns — strip these from parent text at ingest.
 // Control sigils live on ONE line by law — `[^>\n]` keeps the scan from
 // crossing lines (a greedy multi-line match once swallowed from a quoted
-// `<<~` mention down to the real closer; found on loci.md, 2026-06-11).
+// `<<~` mention down to the real closer; found on loci.md).
 const SOH_LINE_RE = /^<<~(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
 const STX_LINE_RE = /<<~(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
 
@@ -232,15 +232,15 @@ function splitMemeToTiddlers(
   // Strip structural markers to isolate header (SOH→STX) and body (STX→ETX).
   // Fence-mask law: a QUOTED control sigil (in a code fence or inline code)
   // never frames the carrier — before the mask, a fenced ETX mention
-  // truncated everything after it (real corpus loss, found 2026-06-11).
+  // truncated everything after it (real corpus loss).
   const hadSoh = SOH_LINE_RE.test(text);
   const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
   const etxM = maskedExec(noSoh, /\n?<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
   const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
   // Degraded-carrier surfacing: a closer swallowed by an UNCLOSED fence
   // tail would ride into the body as CONTENT — and every render would
-  // append a fresh closer pair, doubling without bound. Found live
-  // 2026-06-11 on fence-teaching docs CommonMark itself misread. A closer
+  // append a fresh closer pair, doubling without bound. This shows up
+  // on fence-teaching docs CommonMark itself misread. A closer
   // inside a properly CLOSED fence reads as deliberate quotation — benign,
   // no warning (the render adds the structural close lawfully).
   if (!etxM && /&#x0003;/.test(noSoh)) {
@@ -266,7 +266,7 @@ function splitMemeToTiddlers(
   const stxM = maskedExec(stripped, STX_LINE_RE);
   // A fully BARE doc (no SOH, no STX — the no-carrier fallback) reads as ALL BODY:
   // its content belongs between the minted &#x0002;/&#x0003; markers on recompose
-  // (operator ruling 2026-07-01 — the header-routed wrap left the body slot empty
+  // (the header-routed wrap left the body slot empty
   // and stacked blank lines). A degraded SOH-carrier missing its STX keeps the
   // header reading (its iam still parses; the gradient grades the miss).
   const bare = !hadSoh && !stxM;
@@ -385,9 +385,7 @@ function splitRecursive(
 
     const childUriPath  = childUri.startsWith("lar:///") ? childUri.slice(7) : childUri;
     // Record hygiene (carrier-whole at rest): children carry NO `file-path` —
-    // a fragment record never owns a disk file; its carrier root does. The
-    // old `parent/slot.md` stamp encoded the fragment-file law in the record
-    // stratum; it burned with hole H1 (2026-06-11).
+    // a fragment record never owns a disk file; its carrier root does.
 
     allChildren.push({
       ...childStructure.fields,
@@ -431,9 +429,9 @@ function extractRootTomlWithPos(text: string) { return findIamFence(text); }
 // extractSlotStructure — split a slot body into preamble + iam fields + text
 // + postamble. Same shape as the disk-version full-meme split, applied to
 // every ahu slot so each slot is itself a valid "full published meme MD
-// file" projection (operator clarification 2026-05-09).
+// file" projection.
 //
-// Convention (operator-confirmed):
+// Convention:
 //   - preamble = operator prose flanking the iam toml, before the first
 //     inner sigil. The iam toml's original position within the preamble
 //     is preserved as a `<<~ iam >>` sentinel marker — operators may
@@ -467,7 +465,7 @@ function extractSlotStructure(
   // fence is operator CONTENT (teaching matter, config examples) — swallowing
   // it into fields mutated content on round-trip (key reorder, re-alignment,
   // the fence relabeled `toml iam`). Carrier-whole law: content bytes survive
-  // whole; allowPlain burned 2026-06-11.
+  // whole.
   const iamM = findIamFence(bodyText, false);
 
   let preamble = "";
@@ -621,9 +619,9 @@ export function splitBodyTiddler(
 
 export type FieldsReader = (title: string) => TiddlerFields | undefined;
 
-// The single deny-set (the macro twin burned 2026-06-11, lar:///oldest.holder.named):
-// runtime/structural fields never re-emit into the iam fence — they live in
-// the envelope, the record stratum, or the VM, not in the operator's TOML.
+// The single deny-set: runtime/structural fields never re-emit into the iam
+// fence — they live in the envelope, the record stratum, or the VM, not in the
+// operator's TOML.
 const IAM_DENY: ReadonlySet<string> = new Set([
   "title", "text", "modified", "revision", "bag",
   "slot", "fragment-parent", "preamble", "postamble", "prologue",
@@ -631,7 +629,7 @@ const IAM_DENY: ReadonlySet<string> = new Set([
   "synced-at", "disk-projection", "lar-generated",
   "ahu-parent", "ahu-slot", "realm-origin", "origin-bag", "carrier-soh",
 ]);
-// Authored-identity resurrections (operator rulings 2026-06-11): the deny-set
+// Authored-identity resurrections: the deny-set
 // holds MACHINE stamps only. `type` re-emits verbatim — the carrier
 // self-describes its dialect at rest (TW5's content-type field shares the
 // name exactly; round trip = identity). `namespace` re-emits as explicit
@@ -683,8 +681,7 @@ function fmtNamespaceEntities(v: string): string {
 /** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key.
  *  Machine telemetry (`lar_*` — parse grades, lar-telemetry projections) NEVER
  *  re-emits: sensor readings stay off the operator's TOML (map never fuses to
- *  territory; operator ruling 2026-07-01 — the lar_parse_failures write-back
- *  bite, stamped since d9a83386 and projected into canon by the regenesis). */
+ *  territory). */
 function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
   const keys = Object.keys(fields).sort().filter((k) => {
     if (deny.has(k) || k.charAt(0) === "$" || k.startsWith("lar_")) return false;
@@ -753,7 +750,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // The EOT→postamble seam normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
-  // trailing closer, 2026-06-11).
+  // trailing closer).
   out += stripLeadingNewlines(str("postamble"));
   return out;
 }

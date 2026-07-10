@@ -29,7 +29,7 @@ export const PROJECTION_FRAME = "projection:frame";
 /** Coalesce window (ms): a burst of wiki "change" events collapses to one posted frame. Small
  *  (one display frame-ish) — interactive display, not the capture-nalu's 2 s recall budget.
  *
- *  FIXED BY DESIGN — do NOT add a window servo here. The prior-art survey (2026-06-26: rAF/React
+ *  FIXED BY DESIGN — do NOT add a window servo here. The prior-art survey (rAF/React
  *  scheduler · NIC/Net-DIM coalescing · AIMD · triple-buffering) is decisive: a display-bound,
  *  newest-wins projection's optimal window is structurally the frame interval — there is nothing to
  *  discover, so tuning it only adds instability. The DOM gate's correct self-regulation IS staying

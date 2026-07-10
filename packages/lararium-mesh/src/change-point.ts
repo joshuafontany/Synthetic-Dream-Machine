@@ -1,6 +1,6 @@
 /**
  * change-point — the distribution-shift detector that makes the coupling window's stationarity
- * LOCALLY TRUE (Window-crucible): a Gaussian conditional-TE estimate is only valid while the
+ * LOCALLY TRUE: a Gaussian conditional-TE estimate is only valid while the
  * window sits inside ONE regime; a regime shift IS a change in the distribution the estimator
  * assumes stable. So the runtime resets the window at a detected shift rather than averaging a
  * meaningless estimate across a break.

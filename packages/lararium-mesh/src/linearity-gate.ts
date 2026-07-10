@@ -1,14 +1,14 @@
 /**
  * linearity-gate — the Tier-0 cheap screen that decides whether the Gaussian coupling default is
- * leaving nonlinear signal on the table, and the heavy KSG-multivariate sidecar should be paid for
- * (Gate-crucible). Two near-free signals from what the Gaussian fit already computes:
+ * leaving nonlinear signal on the table, and the heavy KSG-multivariate sidecar should be paid for.
+ * Two near-free signals from what the Gaussian fit already computes:
  *
  *   · the dCor − |Pearson| GAP — distance correlation sees linear AND nonlinear dependence, Pearson
  *     only linear; a large gap means nonlinear structure the Gaussian estimator can't read.
  *   · the innovation EXCESS-KURTOSIS — the Gaussian estimator assumes joint Gaussianity, so a
  *     heavy-tailed linear residual violates it (and fingerprints nonlinear generating structure).
  *
- * PONO-GROUND (Gate-crucible, load-bearing): gate on EFFECT SIZE (|excess-kurtosis| floor), NOT a
+ * PONO-GROUND (load-bearing): gate on EFFECT SIZE (|excess-kurtosis| floor), NOT a
  * raw p-value — a normality test rejects on trivial deviations at large N, so a p-gate would fire
  * KSG needlessly on every long window. The effect-size floor is the non-noise version.
  *

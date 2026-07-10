@@ -1,7 +1,6 @@
 /**
  * ingest-core — the disk→records gesture, factored out of `cmdIngest` so the
- * one-shot CLI command AND the long-lived watcher daemon run the SAME proven
- * path (NEXT VECTOR build 4 reuses build 2, never re-implements it).
+ * one-shot CLI command AND the long-lived watcher daemon run the SAME path.
  *
  * Two legs live here; the third leg lives on the island:
  *   scan  — walk source for .md carriers, derive each uri by the loci law,
@@ -13,18 +12,14 @@
  * neither (readiness reads local on both sides of the membrane). A watcher is
  * just this gesture fired on a settle instead of on an operator keystroke.
  *
- * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff (NEXT VECTOR, builds 2 & 4)
+ * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff
  */
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, sep } from "node:path";
 import { newChangeId, taskContentId } from "@lararium/mesh";
 import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
-import {
-  submitVerb,
-  type DaemonVesselHandle,
-  type SubmitResult,
-} from "./daemon-connector.js";
+import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
 
 export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted";
@@ -169,27 +164,20 @@ export interface SubmitIngestOpts {
   readonly massDeleteFraction?: number;
   /**
    * Run the INGEST IN the active wiki island over ITS composite — the path
-   * for `@working` (the per-fingerprint write layer the daemon never reaches,
-   * operator ruling B 2026-06-19). The daemon commands via `wiki-act` wrapping
-   * the INGEST; the default path executes daemon-side (canon bags).
+   * for `@working` (the per-fingerprint write layer the daemon never reaches).
+   * The daemon commands via `wiki-act` wrapping the INGEST; the default path
+   * executes daemon-side (canon bags).
    */
   readonly inWiki?: boolean;
 }
 
 /**
- * Submit NEW+CHANGED carriers as ONE INGEST verb on an already-connected
- * vessel — hashes travel WITH the content; the island runs the full §6 gate
- * and answers per-carrier decisions. One call = one wave.
- *
- * The vessel stays the caller's to open and close: the CLI opens one per
- * gesture; the watcher holds one open across every wave of its lifetime.
+ * Submit NEW+CHANGED carriers as ONE INGEST verb — hashes travel WITH the content;
+ * the island runs the full §6 gate and answers per-carrier decisions. One call =
+ * one wave, one line over the sock. The one-shot gesture and the watcher's every
+ * wave submit identically; the daemon holds the warm replica across both.
  */
-export async function submitIngestOn(
-  // A persistent vessel (the watcher holds one across waves) → WS. `null` (the
-  // one-shot `lares ingest`) → the UDS fast path via runVerb. Same summons either way.
-  vessel: DaemonVesselHandle | null,
-  opts:   SubmitIngestOpts,
-): Promise<SubmitResult> {
+export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult> {
   const changeId = opts.changeId ?? newChangeId();
   const deletions = opts.deletions ?? [];
   const actionArgs: Record<string, unknown> = {
@@ -209,7 +197,5 @@ export async function submitIngestOn(
   const submitArgs = opts.inWiki ? { verb: "INGEST", args: actionArgs } : actionArgs;
   const requestId = await taskContentId({ subject: opts.toBag, command: submitName, args: submitArgs, nonce: "" });
   const timeoutMs = Math.max(10_000, 10_000 + (opts.candidates.length + deletions.length) * 400);
-  return vessel
-    ? await submitVerb(vessel, submitName, submitArgs, opts.did, { requestId, timeoutMs })
-    : await runVerb(submitName, submitArgs, opts.did, { requestId, timeoutMs });
+  return await runVerb(submitName, submitArgs, opts.did, { requestId, timeoutMs });
 }

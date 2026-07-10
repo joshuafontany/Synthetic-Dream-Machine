@@ -22,8 +22,8 @@
  * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
- * The OLD-else-NEW strangler RETIRED (2026-07-01): every resolver now answers the canonical XDG dir
- * deterministically — no legacy `~/.lares` fallback arm remains. The env seams
+ * Every resolver answers the canonical XDG dir deterministically — no legacy `~/.lares` fallback arm
+ * remains. The env seams
  * (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
  *
  * `LAR_ROOT` overrides the home root for ISOLATED instances (the test harness / staged pairs): each

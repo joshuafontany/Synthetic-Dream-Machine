@@ -3,7 +3,7 @@
  * majority can SEE a minority out-feeding it WHILE it happens (while exit is still
  * cheap). A pure, verdict-free read over the place's lease slots.
  *
- * Crucible finding (Capture-Diver, 4-spirit swarm 2026-06-30): the persistence ≠
+ * The persistence ≠
  * legitimacy gap is a HARD-BOUND — legitimacy cannot live in the join-gate without the
  * gate becoming the captured object, so the gate STAYS INERT. The buildable answer is
  * not prevention but ESCAPE (fork-as-exit) + SIGHT. This module is the SIGHT half: it
@@ -14,9 +14,9 @@
  * THE BOUNDARY — this clock SURFACES, it never JUDGES. It reports per-maintainer
  * standing + the spread + the leading-set concentration as raw numbers; it emits NO
  * "captured" verdict and holds NO threshold. WHAT spread or concentration counts as
- * capture is the operator's calibration — the legitimacy call the crucible proved
- * cannot be mechanized without recreating a root. The lens is here; the reading stays
- * the operator's seat (Epic 4, OPEN).
+ * capture is the operator's calibration — the legitimacy call cannot be mechanized
+ * without recreating a root. The lens is here; the reading stays
+ * the operator's seat (OPEN).
  *
  * What it can and cannot see: the lease is a coordinator-free MAX-REGISTER (current
  * epoch per writer, no history), so this reads a STANDING at a point in time — who

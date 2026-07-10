@@ -9,18 +9,18 @@ import type {
 /**
  * CapabilityProvider — narrow interface over Keyhive's pre-alpha API.
  *
- * Two-tier policy (decided after D.1.5):
+ * Two-tier policy:
  *   * Tier 1 (this interface) — Keyhive's binary access gate. read or admin.
  *     Cryptographic. Per-bag (one Keyhive Document per Lararium bag URL).
  *   * Tier 2 (application layer) — the ACCESS axis, a 1:1 lexical mirror of
  *     Keyhive's native verbs (pull, read, edit, admin), checked AFTER Keyhive's
- *     admin proof verifies. Lives in residency action handlers (Sprint 5 of the
- *     Residency Model Epic) and friends, not here. Not rungs: `promote`/`propose`
+ *     admin proof verifies. Lives in residency action handlers and friends, not
+ *     here. Not rungs: `promote`/`propose`
  *     (no consumer), `sync` (pull-at-scale), `revoke` (an admin operation). See
  *     the 3-axis model in causal-island.ts + lar:///ha.ka.ba/@lares/api/pono/causal-islands.
  *
  * The interface is provider-shaped so implementations can swap:
- *   * KeyhiveProvider (D.2) — wraps @keyhive/keyhive WASM
+ *   * KeyhiveProvider — wraps @keyhive/keyhive WASM
  *   * NoopProvider (test) — always-allows, no crypto
  *   * Future: a Beelay-shaped provider when upstream stabilizes
  */

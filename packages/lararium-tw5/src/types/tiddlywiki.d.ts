@@ -3,7 +3,7 @@
  *
  * **Coexistence with `tw5-typed`:**
  *
- * As of E.10.10, `tw5-typed` (linonetwo / tiddly-gittly) ships as a dev
+ * `tw5-typed` (linonetwo / tiddly-gittly) ships as a dev
  * dep and lives in `tsconfig.json::types`. It exports types under
  * upstream-canonical names (`Widget`, `ITiddlyWiki`, `IParseTreeNode`,
  * etc.) inside `declare module 'tiddlywiki'`. Our hand-rolled types

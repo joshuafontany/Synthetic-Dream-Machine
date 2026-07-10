@@ -22,13 +22,12 @@
  *   $:/state/tab-*       selected tab per tiddler
  *   $:/palette           operator's chosen color palette
  *
- * The above route to the `@personal` slot — approved canon (2026-06-01), a CRDT
+ * The above route to the `@personal` slot — a CRDT
  * bag scoped to the operator's Keyhive PersonaGroup (their authorised device
  * cabal), keyed per (PersonaGroup × recipe-fingerprint). The in-wiki bag-paths
  * cascade (lar:///ha.ka.ba/@lararium/config/bag-paths) decides routing, not this
  * store: prefix rules send those four above the `$:/state/` → @temp catch-all.
- * S7.1–S7.4 landed (slot, cascade, computeRecipeFingerprint); S7.5+ wires the
- * PersonaGroup binding map. See:
+ * See:
  *   bags/@lares/ha.ka.ba/@lararium/api/personal-slot.md
  *
  * Tombstoned titles disappear from listVisible() but remain readable via

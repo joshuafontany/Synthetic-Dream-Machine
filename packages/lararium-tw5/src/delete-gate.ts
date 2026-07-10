@@ -1,6 +1,6 @@
 /**
- * delete-gate — the wave-level deletion decision for the watcher (build 4,
- * moʻolelo ruling 2026-06-14). PURE: it compares, it never writes. The grace
+ * delete-gate — the wave-level deletion decision for the watcher.
+ * PURE: it compares, it never writes. The grace
  * window (~60s), durability, and the backup-before-tombstone write live in the
  * watcher; this layer splits a settled wave of vanished carriers into:
  *

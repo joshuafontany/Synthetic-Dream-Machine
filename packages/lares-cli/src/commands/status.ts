@@ -173,7 +173,7 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
   // silently — `lares status` stays cheap and never errors.
   if (portInUse) {
     try {
-      const { summaryOutput } = await import("../daemon-connector.js");
+      const { summaryOutput } = await import("../verb-result.js");
       const { runVerb } = await import("../verb-call.js");
       const { loadVesselVerifyingKey } = await import("@lararium/node");
       // UDS fast path, WS fallback (the lares↔lararium binding). Cheap probe;

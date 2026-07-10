@@ -97,7 +97,7 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   }
 
   // Cabal/Nexus membership (the former "Gate C") has LEFT the boot path — it is AFFILIATION,
-  // not identity (research-grounded 2026-06-25, api/pono/identity-vs-affiliation). A PersonaGroup
+  // not identity (see api/pono/identity-vs-affiliation). A PersonaGroup
   // belongs to MANY cabals/nexuses or none (M:N), so membership is a HELD CAPABILITY checked at
   // ACCESS to a cabal's shared canon, local-first — never a single boot gate (a boot gate
   // conflated ID-with-authz, assumed single-membership, and read a global "now"). Boot proves

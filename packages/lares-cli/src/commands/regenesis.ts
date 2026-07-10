@@ -1,7 +1,7 @@
 /**
  * `lares regenesis` — CRDT-layer rebirth from bags/ (alpha ritual).
  *
- * SCOPE (operator ruling 2026-07-01): the CRDT/wiki-bags layers + the CID'd genesis
+ * SCOPE: the CRDT/wiki-bags layers + the CID'd genesis
  * blobs ONLY. The mempalace nuke-and-pave runs at its own cadence as the Sensorium
  * implementations refine — reach for `lares palace-teardown --confirm` +
  * `lares harvest --all` when that tide comes; this verb never touches the palace.

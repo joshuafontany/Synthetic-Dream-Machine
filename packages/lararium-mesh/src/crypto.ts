@@ -10,8 +10,7 @@
  *   - The SYNC family (sha256BytesSync / sha256HexBytesSync / sha256HexSync) rides
  *     @noble/hashes/sha2 directly — audited, zero-dep, browser-shippable. The live runtime
  *     digest: tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
- *     memetic-wikitext reader's sourceCidOf all carry it. (The old build-time-only ward
- *     lagged this settled practice; cured 2026-07-06.)
+ *     memetic-wikitext reader's sourceCidOf all carry it.
  *   - The ASYNC seam (sha256Hex(bytes, provider) over CryptoProvider/SubtleCrypto) stays the
  *     home for callers that INJECT their digest (auditability, HSM/worker routing) or
  *     already live async.
@@ -139,7 +138,7 @@ export async function sha256Hex(bytes: Uint8Array, provider: DigestProvider): Pr
 /**
  * Synchronous SHA-256 of bytes.
  *
- * SCOPE (the live law, cured 2026-07-06 — the old build-time-only ward lagged settled practice):
+ * SCOPE (the live law):
  * @noble/hashes/sha2 serves as the platform-blind SYNC digest — it ships to browser runtimes and
  * already carries tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
  * memetic-wikitext reader's sourceCidOf. Reach for sha256Hex(bytes, provider) instead only where a
@@ -160,7 +159,7 @@ export function sha256HexBytesSync(bytes: Uint8Array): string {
 /**
  * Synchronous SHA-256 of a UTF-8 string, returned as lowercase hex.
  *
- * SCOPE (the live law, cured 2026-07-06 — the old build-time-only ward lagged settled practice):
+ * SCOPE (the live law):
  * @noble/hashes/sha2 serves as the platform-blind SYNC digest — it ships to browser runtimes and
  * already carries tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
  * memetic-wikitext reader's sourceCidOf. Reach for sha256Hex(bytes, provider) instead only where a

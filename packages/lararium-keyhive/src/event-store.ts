@@ -5,10 +5,9 @@
  * gets handed to our `event_handler` callback at the moment it fires. The
  * handler routes those events to the EventStore for durable persistence.
  *
- * Phase D.2 ships an InMemoryEventStore — sufficient for the smoke test
- * and unit work. D.4 introduces a tiddler-backed DaemonEventStore that
- * persists events under lar:///ha.ka.ba/@daemon/cap/<hash> in
- * the daemon doc.
+ * An InMemoryEventStore serves the smoke test and unit work. A
+ * tiddler-backed DaemonEventStore persists events under
+ * lar:///ha.ka.ba/@daemon/cap/<hash> in the daemon doc.
  *
  * On daemon boot, the EventStore lists all stored events and replays them
  * via Keyhive.ingestEventsBytes() to restore in-memory state. Events are
@@ -16,7 +15,7 @@
  */
 
 export interface EventRecord {
-  /** Identifier — for D.4 we'll use a content hash; D.2 uses a counter. */
+  /** Identifier — the durable store uses a content hash; the in-memory store uses a counter. */
   readonly hash:    string;
   /** Event variant (PREKEY_ROTATED / CGKA_OPERATION / DELEGATED / REVOKED). */
   readonly variant: string;
@@ -29,11 +28,11 @@ export interface EventStore {
   put(rec: EventRecord): Promise<void>;
   /** Read every stored event. Order doesn't matter — Keyhive resolves causality. */
   list(): Promise<readonly EventRecord[]>;
-  /** Optional bulk operation; D.4's tiddler-backed store batches writes. */
+  /** Optional bulk operation; the tiddler-backed store batches writes. */
   putMany?(records: readonly EventRecord[]): Promise<void>;
 }
 
-/** In-memory event store for tests + the D.2 smoke. Not durable. */
+/** In-memory event store for tests + the smoke test. Not durable. */
 export class InMemoryEventStore implements EventStore {
   private readonly records = new Map<string, EventRecord>();
   private counter = 0;
@@ -46,7 +45,7 @@ export class InMemoryEventStore implements EventStore {
     return [...this.records.values()];
   }
 
-  /** Generate a synthetic hash when the caller doesn't supply one (D.2 smoke). */
+  /** Generate a synthetic hash when the caller doesn't supply one (smoke test). */
   nextHash(): string {
     return `mem-${++this.counter}`;
   }

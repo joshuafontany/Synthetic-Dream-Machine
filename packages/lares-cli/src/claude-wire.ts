@@ -17,6 +17,7 @@ import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
+import { resolveMempalaceMcp } from "./mcp-resolve.js";
 
 /**
  * Acquire an exclusive write-lock (git-lockfile pattern: O_CREAT|O_EXCL) to serialize
@@ -40,19 +41,6 @@ async function acquireLock(lockPath: string): Promise<void> {
     }
   }
   throw new Error(`${lockPath} held by another writer — another \`lares wake --claude\` is running; retry shortly`);
-}
-
-/** Resolve the mempalace-mcp executable's absolute path (prefer ~/.local/bin, then PATH). */
-function resolveMempalaceMcp(): string | null {
-  const win = process.platform === "win32";
-  const exe = win ? "mempalace-mcp.exe" : "mempalace-mcp";
-  const dirs = [join(homedir(), ".local", "bin"), ...(process.env["PATH"] ?? "").split(win ? ";" : ":")];
-  for (const d of dirs) {
-    if (!d) continue;
-    const p = join(d, exe);
-    if (existsSync(p)) return p;
-  }
-  return null;
 }
 
 /**

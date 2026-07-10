@@ -16,7 +16,7 @@
  * antipattern; the target mints a DISTINCT key per vessel, delegated into the
  * PersonaGroup by a signed edge (the delegation IS the relationship — the vessel's stack
  * #has the edge). The behavioral vessel/operator-root split is held for the genesis
- * refactor (crucible-gated). See lar:///ha.ka.ba/@lares/docs/lares/federation
+ * refactor. See lar:///ha.ka.ba/@lares/docs/lares/federation
  * (Model A/B) and the #has-stack ontology (api/pono/has-stack-ontology).
  *
  * Storage law — identity lives OUTSIDE the wipe zone:
@@ -159,7 +159,7 @@ function fileKeypairStore(keyFile: string, login: string | null): KeypairStore {
 // the thief never saw. Pre-rotation CANNOT be retrofitted: a key that has already
 // signed has no valid inception window.
 //
-// MINIMAL hook (operator ruling 2026-06-24): the load-bearing part is the
+// MINIMAL hook: the load-bearing part is the
 // commit-the-next-key-digest-BEFORE-first-use ordering, captured here. The full KERI
 // KEL / CESR / SAID encoding + the `lares rotate-root` ceremony land later (the
 // `digestAlgo` field keeps the digest swappable to blake3-256 SAID at KERI-interop).

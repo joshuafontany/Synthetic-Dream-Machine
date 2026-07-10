@@ -4,7 +4,7 @@
  * Under capability-is-identity (lar:///ha.ka.ba/@lares/api/pono/lararium-identity
  * #capability-and-petnames), the DELEGATION EDGE *is* the relationship and the capability:
  * the operator root signs "Operator O delegates to Device D at place P", and any peer
- * verifies it offline against a PINNED operator root. S7.1 (CAPABILITY-LAYER, Plane 0→1).
+ * verifies it offline against a PINNED operator root (CAPABILITY-LAYER, Plane 0→1).
  *
  * The edge is a STANDING MEMBERSHIP grant (long-lived, revocable), NOT a per-use proof:
  * per-use replay defense (nonce + short exp + seen-cache) rides a separate INVOCATION
@@ -12,14 +12,14 @@
  * the CRDT membership graph (observed-remove — the PRIMARY targeted revoke). NON-renewal
  * rides the `boundEpoch` LEASE below: the grant names a per-resource max-register epoch and
  * goes stale when that epoch rolls past it (coordinator-free; the epoch is a LEASE, not a
- * targeted revoker — adversarial research 2026-06-24, api/pono/convergent-mesh).
+ * targeted revoker — api/pono/convergent-mesh).
  *
  * Canonical signed string (domain + version tagged for separation; every field strict-
  * charset so no `|` can shift a boundary):
  *   lar-device-delegation/v2|{operatorDid}|{deviceDid}|{deviceVerifyingKey}|{hearthTrueName}|{issuedAt}|{expiresAt}|{boundEpoch}
  *
  * Trust rides the SIGNATURE + the PINNED root, never a doc's write-ACL (confused-deputy
- * guard). Hardened against the verification swarm's kue (2026-06-24): never throws on
+ * guard). Hardened against untrusted input: never throws on
  * untrusted input · mandatory operator-root pin · exp/freshness · canonical lowercase DIDs
  * · strict ZIP215-off verify · domain/version separation. Reuses the mesh's bare-Ed25519
  * surface (@noble/ed25519 v3 + ./crypto hex).
