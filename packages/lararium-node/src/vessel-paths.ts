@@ -110,12 +110,15 @@ export function memorySensoriumDir(): string {
   return join(larDataHome(), "sensoriums", "memory");
 }
 
-/** The VERBATIM mempalace store dir (the `content` fiber cap) — `MEMPALACE_PALACE_PATH` (override,
- *  the relocation lever) else the upstream-default `~/.mempalace`. Per the content-cap-home ruling this
- *  cap stays EXTERNAL (never strangled into our tree); the memory-sensorium `#has` it by ABSOLUTE
- *  reference. This is the PARENT store (config.json + the `palace/` chroma dir + entities + locks + the
- *  worldline-KG knowledge_graph.sqlite3 that lives INSIDE it). The vendored mempalace subtree is
- *  never touched — the env lever relocates it; palace-path.ts derives the chroma from the SAME base. */
+/** The GUEST mempalace store dir — `MEMPALACE_PALACE_PATH` (override, the relocation lever) else the
+ *  upstream-default `~/.mempalace`. NOT a cap of the memory sensorium: the content-cap-home ruling that
+ *  once made it the `content` fiber was RETIRED, and the lararium owns its content plane at
+ *  {@link larContentDir}. This store is a GUEST — raised deliberately (`lares mempalace setup`), read
+ *  as a comparator, imported FROM (`guest-import.ts`); never bound into at runtime, and never written
+ *  by the boot (the S5 comparator ruling). This is the PARENT store (config.json + the `palace/` chroma
+ *  dir + entities + locks + the worldline-KG knowledge_graph.sqlite3 that lives INSIDE it). The vendored
+ *  mempalace subtree is never touched — the env lever relocates it; palace-path.ts derives the chroma
+ *  from the SAME base. */
 export function larMempalaceDir(): string {
   const env = process.env["MEMPALACE_PALACE_PATH"]?.trim();
   if (env) return env;

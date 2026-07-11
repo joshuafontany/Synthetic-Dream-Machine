@@ -164,6 +164,11 @@ export { importGuestPalace } from "./guest-import.js";
 export type { GuestImportResult } from "./guest-import.js";
 export { makeSearchCap } from "./search-cap.js";
 export type { SearchCap, SearchHit, SearchResult, SearchCapOptions } from "./search-cap.js";
+
+// The SOVEREIGN recall client — recall reads <memory>/content through the lararium's own caps
+// (content_io + the consumed hybrid search_io), never the guest ~/.mempalace.
+export { makeSensoriumRecallClient } from "./sensorium-recall.js";
+export type { SensoriumRecallClient, SensoriumRecallOptions } from "./sensorium-recall.js";
 export { makeKgCap } from "./kg-cap.js";
 export type { KgCap, TripleOpts, KgCapOptions } from "./kg-cap.js";
 export { makeMetaCap } from "./meta-cap.js";

@@ -36,7 +36,6 @@ import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed }        from "./node-vessel-identity.js";
-import { getMempalaceClient }           from "@lararium/mempalace";
 import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
@@ -224,13 +223,11 @@ async function main(): Promise<void> {
     onLog: (line) => console.log(`[lararium] ${line}`),
   });
 
-  // Pre-warm the mempalace read sidecar so the FIRST recall / recall-into-wake skips
-  // the ~8s cold chromadb start (the pool then stays warm for the daemon's life).
-  // Background + best-effort: never blocks boot, never fails it if mempalace is absent.
-  void getMempalaceClient().then(
-    () => console.log("[lararium] mempalace sidecar pre-warmed"),
-    (e) => console.log(`[lararium] mempalace pre-warm skipped: ${e instanceof Error ? e.message : String(e)}`),
-  );
+  // (The recall pre-warm lives in openNodeVessel, against the vessel's OWN recall client — see
+  // `preWarmRecall` there. It must not be done from here with a second client: the python holders
+  // enforce a cross-process flock singleton per palace dir, so a second client racing the vessel's
+  // makes one holder lose the lock and exit, and the caller sees a spurious "holder exited" fault.
+  // One owner, one client, one holder pair — the same discipline the guest never had.)
 
   // ── Graceful, DURABLE shutdown (flush-then-force) ────────────────────────────
   // A bare process.exit() (or a SIGKILL escalation when the handler is too slow)
