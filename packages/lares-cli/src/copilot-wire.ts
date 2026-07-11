@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
-import { resolveMempalaceMcp, type WireAction } from "./mcp-resolve.js";
+import { type WireAction } from "./mcp-resolve.js";
 
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
 
@@ -51,23 +51,18 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
   const steps: CopilotWireStep[] = [];
   let changed = false;
 
-  // 1. MCP server → ~/.copilot/mcp-config.json
-  const mcpCmd = resolveMempalaceMcp();
+  // 1. MCP server → CUT. `lares` registers no mempalace MCP (one writer per palace; the
+  //    mempalace plugin owns that seat). Reap an entry an older wiring left here.
   const mcpPath = join(dir, "mcp-config.json");
-  if (mcpCmd === null) {
-    steps.push({ item: "mcp:mempalace", action: "missing-script", detail: "mempalace-mcp not on PATH — run `lares wake --init`" });
+  const cfg = readJson<McpConfig>(mcpPath, {});
+  if (cfg.mcpServers?.["mempalace"] !== undefined) {
+    delete cfg.mcpServers["mempalace"];
+    if (existsSync(mcpPath)) copyFileSync(mcpPath, mcpPath + ".bak");
+    writeFileSync(mcpPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
+    steps.push({ item: "mcp:mempalace", action: "reaped", detail: "removed a stale mcp-config.json entry — one writer, the plugin's" });
+    changed = true;
   } else {
-    const cfg = readJson<McpConfig>(mcpPath, {});
-    const servers = (cfg.mcpServers ??= {});
-    if (servers["mempalace"] !== undefined) {
-      steps.push({ item: "mcp:mempalace", action: "present", detail: "already in mcp-config.json" });
-    } else {
-      servers["mempalace"] = { type: "local", command: mcpCmd, args: [], tools: ["*"] };
-      if (existsSync(mcpPath)) copyFileSync(mcpPath, mcpPath + ".bak");
-      writeFileSync(mcpPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
-      steps.push({ item: "mcp:mempalace", action: "wired", detail: `mcp-config.json — ${mcpCmd}` });
-      changed = true;
-    }
+    steps.push({ item: "mcp:mempalace", action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" });
   }
 
   // 2. sessionEnd ingest hook → ~/.copilot/hooks/lares.json

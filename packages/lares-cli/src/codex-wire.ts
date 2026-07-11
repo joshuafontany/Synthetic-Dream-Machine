@@ -20,7 +20,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
-import { resolveMempalaceMcp, type WireAction } from "./mcp-resolve.js";
+import { type WireAction } from "./mcp-resolve.js";
 
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
 const MCP_KEY = "[mcp_servers.mempalace]";
@@ -48,15 +48,13 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   const steps: CodexWireStep[] = [];
   const append: string[] = [];
 
-  // 1. MCP server block
-  const mcpCmd = resolveMempalaceMcp();
-  if (mcpCmd === null) {
-    steps.push({ item: "mcp:mempalace", action: "missing-script", detail: "mempalace-mcp not on PATH — run `lares wake --init`" });
-  } else if (toml.includes(MCP_KEY)) {
-    steps.push({ item: "mcp:mempalace", action: "present", detail: "already in config.toml" });
+  // 1. MCP server block — CUT. `lares` registers no mempalace MCP (one writer per palace;
+  //    the mempalace plugin owns that seat). Reap a stale block an older wiring appended.
+  if (toml.includes(MCP_KEY)) {
+    toml = stripTomlSection(toml, MCP_KEY);
+    steps.push({ item: "mcp:mempalace", action: "reaped", detail: `removed a stale ${MCP_KEY} — one writer, the plugin's` });
   } else {
-    append.push(`\n${MCP_KEY}\ncommand = ${JSON.stringify(mcpCmd)}\nargs = []\n`);
-    steps.push({ item: "mcp:mempalace", action: "wired", detail: `config.toml ${MCP_KEY} — ${mcpCmd}` });
+    steps.push({ item: "mcp:mempalace", action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" });
   }
 
   // 2. Stop ingest hook block
@@ -72,10 +70,29 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
 
   if (append.length > 0) {
     toml = (toml.endsWith("\n") || toml === "" ? toml : toml + "\n") + append.join("");
+  }
+  // The MCP reap mutates `toml` in place, so gate the write on the text — not on `append`,
+  // which a reap-only pass leaves empty.
+  if (toml !== original) {
     if (existsSync(configPath)) copyFileSync(configPath, configPath + ".bak");
     mkdirSync(dir, { recursive: true });
     writeFileSync(configPath, toml, "utf8");
   }
 
   return { configPath, changed: toml !== original, steps };
+}
+
+/**
+ * Drop a TOML table and its body — from the `[header]` line to the next table header (a
+ * line opening `[`) or EOF. Text-level, matching how this module appends: TOML never gets
+ * parsed here, so a strip must not disturb the operator's own formatting elsewhere.
+ */
+function stripTomlSection(toml: string, header: string): string {
+  const lines = toml.split("\n");
+  const start = lines.findIndex((l) => l.trim() === header);
+  if (start < 0) return toml;
+  let end = start + 1;
+  while (end < lines.length && !lines[end]!.trimStart().startsWith("[")) end++;
+  lines.splice(start, end - start);
+  return lines.join("\n").replace(/\n{3,}/g, "\n\n");
 }

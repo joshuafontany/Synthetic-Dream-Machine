@@ -17,7 +17,6 @@ import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
-import { resolveMempalaceMcp } from "./mcp-resolve.js";
 
 /**
  * Acquire an exclusive write-lock (git-lockfile pattern: O_CREAT|O_EXCL) to serialize
@@ -44,26 +43,27 @@ async function acquireLock(lockPath: string): Promise<void> {
 }
 
 /**
- * Register the mempalace MCP in the store Claude Code actually reads (~/.claude.json,
- * via `claude mcp add`) — NOT settings.json, which Claude ignores for mcpServers.
- * Idempotent (skips if already registered); graceful if the `claude` CLI is absent.
+ * Reap a `lares`-wired mempalace MCP from ~/.claude.json (via `claude mcp remove`).
+ *
+ * Chroma tolerates ONE writer on the palace. A `lares` registration standing beside the
+ * mempalace `.claude-plugin`'s own gave every session two sidecars on one index — the
+ * contention that truncated the HNSW segment and forced a drift-quarantine. `lares` now
+ * consumes mempalace as library code through the Memory sensorium; the plugin serves MCP
+ * alone. Reaping (rather than merely skipping) makes the decouple self-healing on hosts
+ * an older wiring already touched. Graceful if the `claude` CLI is absent.
  */
-function registerMempalaceMcp(): ClaudeWireStep {
-  const mcpCmd = resolveMempalaceMcp();
-  if (mcpCmd === null) {
-    return { item: "mcp:mempalace", action: "missing-script", detail: "mempalace-mcp not on PATH — run `lares wake --install`" };
-  }
+function reapMempalaceMcp(): ClaudeWireStep {
   const got = spawnSync("claude", ["mcp", "get", "mempalace"], { encoding: "utf8", timeout: 10_000 });
   if (got.error !== undefined) {
-    return { item: "mcp:mempalace", action: "missing-script", detail: `\`claude\` CLI not found — register: claude mcp add --scope user mempalace -- ${mcpCmd}` };
+    return { item: "mcp:mempalace", action: "absent", detail: "`claude` CLI not found — nothing to reap" };
   }
-  if (got.status === 0) {
-    return { item: "mcp:mempalace", action: "present", detail: "already registered (claude mcp / ~/.claude.json)" };
+  if (got.status !== 0) {
+    return { item: "mcp:mempalace", action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" };
   }
-  const r = spawnSync("claude", ["mcp", "add", "--scope", "user", "mempalace", "--", mcpCmd], { encoding: "utf8", timeout: 15_000 });
+  const r = spawnSync("claude", ["mcp", "remove", "--scope", "user", "mempalace"], { encoding: "utf8", timeout: 15_000 });
   return r.status === 0
-    ? { item: "mcp:mempalace", action: "wired", detail: `claude mcp add — ${mcpCmd}` }
-    : { item: "mcp:mempalace", action: "missing-script", detail: `claude mcp add failed: ${(r.stderr ?? "").trim().slice(0, 80)}` };
+    ? { item: "mcp:mempalace", action: "reaped", detail: "removed a stale lares-wired MCP — one writer, the plugin's" }
+    : { item: "mcp:mempalace", action: "missing-script", detail: `claude mcp remove failed: ${(r.stderr ?? "").trim().slice(0, 80)}` };
 }
 
 interface HookCommand {
@@ -114,7 +114,7 @@ const HOOK_SPECS: readonly HookSpec[] = [
  */
 export const CLEANUP_PERIOD_DAYS_FLOOR = 99999;
 
-export type WireAction = "wired" | "present" | "missing-script";
+export type WireAction = "wired" | "present" | "missing-script" | "reaped" | "absent";
 
 export interface ClaudeWireStep {
   readonly item: string;
@@ -206,14 +206,13 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
     steps.push({ item: "cleanupPeriodDays", action: "present", detail: low ? `${String(cur)} days (below floor — raise with \`lares cleanup-days\`)` : `${String(cur)} days` });
   }
 
-  // MCP lives in ~/.claude.json (via `claude mcp add`), NOT settings.json — Claude
-  // ignores mcpServers here. Clean up any dead settings.json entry from earlier wiring,
-  // then register through the real store.
+  // `lares` registers no mempalace MCP anywhere — it reaps its own past wirings from both
+  // stores: the dead settings.json key here, then ~/.claude.json via the `claude` CLI.
   if (settings.mcpServers !== undefined && settings.mcpServers["mempalace"] !== undefined) {
     delete settings.mcpServers["mempalace"];
     changed = true;
   }
-  steps.push(registerMempalaceMcp());
+  steps.push(reapMempalaceMcp());
 
   if (changed) {
     const tmp = settingsPath + ".tmp";
