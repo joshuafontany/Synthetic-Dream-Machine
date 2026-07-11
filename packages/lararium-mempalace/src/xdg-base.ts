@@ -26,14 +26,27 @@ export function larDataHome(): string {
 }
 
 /**
- * The verbatim mempalace's PARENT store dir (the `content` fiber cap). Per the operator's
- * content-cap-home ruling (talk-story): content stays at the UPSTREAM-default `~/.mempalace` — the
- * vendored mempalace nakama's OWN default, honoring the "mempalace is external, not-ours-to-change"
- * canon. It is NOT strangled into our sensorium tree; the memory-sensorium `#has` it by ABSOLUTE
- * reference (logical composition, not physical colocation). structure/form (OURS) live consolidated
- * inside the sensorium tree. The `MEMPALACE_PALACE_PATH` override — upstream's OWN relocation lever — is applied by the
- * CALLERS (it relocates the chroma dir, not this parent), so this stays the pure default both agree on.
+ * The GUEST mempalace's PARENT store dir — the upstream-default `~/.mempalace`.
+ *
+ * The content-cap-home ruling that once made this the memory sensorium's `content` fiber was RETIRED:
+ * the lararium OWNS its content plane ({@link memorySensoriumContentDir}), and this store demoted to a
+ * GUEST — a comparator to measure against, and the source of a deliberate one-way import Act. Never a
+ * runtime binding, and never written by the boot (the comparator ruling). The `MEMPALACE_PALACE_PATH`
+ * override — upstream's OWN relocation lever — is applied by the CALLERS (it relocates the chroma dir,
+ * not this parent), so this stays the pure default both agree on.
  */
 export function mempalaceContentParent(): string {
   return join(homedir(), ".mempalace");
+}
+
+/**
+ * The SOVEREIGN content plane — `<data>/sensoriums/memory/content`. The plane the capture path fills
+ * every turn, and therefore the plane every reader must NAME. An unpassed palace path is not a default:
+ * it is a silent reach into the guest, and it is why this store spent its life write-only.
+ *
+ * Kept here (not in `@lararium/node/vessel-paths`) so the mempalace package can name it without an
+ * import cycle — the same reason {@link larDataHome} lives here.
+ */
+export function memorySensoriumContentDir(): string {
+  return join(larDataHome(), "sensoriums", "memory", "content");
 }

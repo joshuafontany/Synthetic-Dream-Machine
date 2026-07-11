@@ -60,13 +60,12 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
+import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larStructurePalaceDir, larFormPalaceDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
-import { makeSensoriumRecallClient, type SensoriumRecallClient } from "./sensorium-recall.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
@@ -271,9 +270,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // worldline form pre-fetch (makeFormPalace ref-counts per canonical dir → one reference, never a
   // second process). Owned by the form provider impl below; closed implicitly at process exit / idle-reap.
   let recallFormPalace: FormPalace | null = null;
-  // The sovereign recall client (content_io + the consumed hybrid search_io over <memory>/content).
-  // Lazy + reused: both underlying caps are ref-counted per palace dir, so one holder each, never a pile.
-  let recallClient: SensoriumRecallClient | null = null;
   // The composed verb plane (the four provider-heavy groups, NESTED-composed). composeVerbPlane is async
   // but wireVerbs runs SYNCHRONOUSLY (daemonCap.build calls it un-awaited); the plane composes at the END
   // of openDaemon (where daemonVm is ready, awaited BEFORE wireVerbs inside daemonCap) and wireVerbs
@@ -508,30 +504,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // contribution stashes in `pendingVerbContribution`; wireVerbs applies it synchronously below.
     // Ordering: openDaemon runs (awaited) inside daemonCap.build BEFORE the un-awaited wireVerbs, and
     // daemonVm is set just above — so every injected impl is ready at this compose point.
-    // Recall reads the SOVEREIGN sensorium, never the guest. The provider keeps its name (the verb
-    // plane speaks a 3-method RecallClient and never cared whose store answered) — what changed is
-    // WHO answers: the lararium's own content plane through its own caps (content_io + the consumed
-    // hybrid search_io), one ref-counted holder per dir. `~/.mempalace` is now a guest you import
-    // FROM (`lares mempalace setup` / guest-import.ts), never a store the vessel reads through.
-    // This is what stops `<memory>/content` being write-only — and what ends the N-sidecars-on-one-
-    // Chroma-index contention, because harnesses reach memory through the node, not around it.
-    recallClient ??= makeSensoriumRecallClient();
     const mempalaceImpl: MempalaceProvider = {
-      withClient: (fn) => fn(recallClient as unknown as RecallClient),
-      turnsForHandleStubs: async (handle, opts) =>
-        orderHandleTurnsToStubs(await recallClient!.turnsForHandle(handle, opts)),
+      withClient: (fn) => withMempalace((client) => fn(client as unknown as RecallClient)),
+      turnsForHandleStubs: (handle, opts) =>
+        withMempalace(async (client) => orderHandleTurnsToStubs(await client.turnsForHandle(handle, opts))),
     };
-
-    // Pre-warm THIS client (never a second one): the first search pays the cold chromadb +
-    // embedding-model start, so recall-into-wake would otherwise eat it. The python holders enforce a
-    // cross-process flock singleton per palace dir — a second client racing this one makes a holder
-    // lose the lock and exit ("another holder already serves this palace"), surfacing as a spurious
-    // fault. So the warm-up rides the vessel's own client, and only ever that one.
-    // Background + best-effort: never blocks boot, never fails it if the planes are cold or absent.
-    void recallClient.search({ query: "wake", limit: 1 }).then(
-      () => console.log("[lararium] sensorium recall pre-warmed (content + hybrid search)"),
-      (e: unknown) => console.log(`[lararium] sensorium pre-warm skipped: ${e instanceof Error ? e.message : String(e)}`),
-    );
     const formImpl: FormPalaceProvider = {
       // The worldline form pre-fetch: a miss/fault → null (the worker keeps the turn's TIME slot, form
       // null). REUSES the recall form holder (one process).

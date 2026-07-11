@@ -1,19 +1,26 @@
 /**
- * mempalace-pool — a warm, reused read-client so the sidecar stays alive between
- * recall calls.
+ * mempalace-pool — the warm, reused READ client: ONE python reader, held for the daemon's life.
  *
- * MempalaceClient spawns `python -m mempalace.mcp_server` and cold-starts chromadb
- * (~8s) on every `start()`. Recall (and recall-into-wake at boot) called it
- * fresh-per-call → an 8s tax each time. This pool starts the sidecar ONCE (lazily)
- * and reuses it, self-healing if it dies. First recall pays the cold start; every
- * recall after is warm (sub-second). The @daemon seat holds the warm client for the
- * whole daemon lifetime — this is what makes recall-into-wake fast.
+ * The shape is already the pono one — the store lives in py, the TS @daemon only points at it and
+ * proxies (it computes nothing, holds no payload). What was WRONG was where it pointed.
+ *
+ * `MempalaceClient` supports `palacePath` and `defaultArgs()` appends `--palace <path>` — but this
+ * pool never passed it, so the sidecar fell back to whatever `~/.mempalace/config.json` named. That
+ * single omission is why recall read the GUEST comparator while the capture path filled the sovereign
+ * `<memory>/content` every turn: the lararium's own content plane was WRITE-ONLY, and every harness
+ * that wanted memory reached past the node to grab the guest palace itself — N readers on one Chroma
+ * index. It now reads the plane the vessel actually writes.
+ *
+ * ONE reader, pooled for the daemon's lifetime (not one per call, not one per harness session): the
+ * @daemon coordinates a py reader; it does not become one. First recall pays the chromadb cold start;
+ * every recall after is warm, which is what makes recall-into-wake fast.
  *
  * Read-only: the pool only ever hands back a client whose tools are list/get/search.
  */
 
 import { MempalaceClient } from "./mempalace-client.js";
 import { resolveMempalaceSpawn } from "./spawn-resolve.js";
+import { memorySensoriumContentDir } from "./xdg-base.js";
 
 let pooled: MempalaceClient | null = null;
 let starting: Promise<MempalaceClient> | null = null;
@@ -22,7 +29,12 @@ async function open(): Promise<MempalaceClient> {
   const spawn = resolveMempalaceSpawn();
   if (!spawn.sidecarPresent) throw new Error("mempalace submodule absent — run `lares wake --install`");
   if (!spawn.python) throw new Error("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
-  const client = new MempalaceClient({ submoduleRoot: spawn.submoduleRoot, python: spawn.python });
+  const client = new MempalaceClient({
+    submoduleRoot: spawn.submoduleRoot,
+    python: spawn.python,
+    // NAME the palace. An unpassed palacePath is not a default — it is a silent reach into the guest.
+    palacePath: memorySensoriumContentDir(),
+  });
   await client.start();
   return client;
 }
