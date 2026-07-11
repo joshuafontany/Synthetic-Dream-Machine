@@ -75,13 +75,14 @@ export function effectRecordUri(bagUri: string, eventId: string): string {
   return `${effectLedgerPrefix(bagUri)}${eventId}`;
 }
 
-/** True when a title sits in any bag's residency ledger. */
+/** True when a title sits in any bag's or slot's residency ledger. */
 export function isEffectRecordUri(title: string): boolean {
-  // Accept both `@<bag>/ledger/…` and `bags/@<bag>/ledger/…` — an effect-record title
-  // builds from the bag const, which carries the `bags/` kind-segment. Without the optional
-  // segment the projector fails to recognize an audit record and leaks it to disk as a
-  // carrier (it is audit data, never a carrier surface).
-  return /^lar:\/\/\/[^/]+\/(?:bags\/)?@[^/]+\/ledger\/residency\/.+$/.test(title);
+  // The `/ledger/residency/<event-id>` TAIL marks an effect record; the prefix
+  // that holds the ledger varies — `bags/@<bag>`, `wikis/@<slug>/working`, a bare
+  // `@<bag>`. Match on the tail after any holding path, so the projector skips an
+  // audit record on every plane (it is audit data, never a carrier surface). A
+  // narrower prefix pattern leaks a ledger record held by a per-wiki slot to disk.
+  return /^lar:\/\/\/[^/]+\/.+\/ledger\/residency\/[^/]+$/.test(title);
 }
 
 // ── EffectRecord shape ─────────────────────────────────────────────────────

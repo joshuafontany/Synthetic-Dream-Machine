@@ -86,6 +86,13 @@ describe("effect-record URI builders", () => {
     expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@daemon/ledger/residency/x")).toBe(true);
   });
 
+  test("isEffectRecordUri accepts a per-wiki-slot ledger title — the projector must skip it", () => {
+    // A residency verb run in a wiki writes its ledger under the working slot; the
+    // deeper `wikis/@<slug>/working/` prefix must still read as audit, never a carrier.
+    expect(isEffectRecordUri("lar:///ha.ka.ba/wikis/@lares/working/ledger/residency/1jt7fmda8-joc6o7ju")).toBe(true);
+    expect(isEffectRecordUri("lar:///ha.ka.ba/wikis/@synthetic-dream-machine/draft/ledger/residency/x")).toBe(true);
+  });
+
   test("isEffectRecordUri rejects non-residency-log titles", () => {
     expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@elyncia/some-tiddler")).toBe(false);
     expect(isEffectRecordUri("lar:///ha.ka.ba/bags/@elyncia/ledger/residency/")).toBe(false); // empty event-id
