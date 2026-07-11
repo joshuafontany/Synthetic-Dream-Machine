@@ -40,6 +40,11 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       const projector = new LarDiskProjector({
         mirrors,
         renderFn: (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
+        // Every bag holding a carrier — the shadow-aware stale-unlink gate. A
+        // working edit shadowing its canon copy keeps BOTH files; the canon mirror
+        // (bags/@slug) never loses its file just because the carrier surfaced in a
+        // working layer above it (the boot-seed-deletion cure).
+        bagsHolding: (uri) => ctx.composite.listBagsHolding(uri),
         // Disk-ward refusal → the daemon VM (the generic worker.event → placeVerb
         // bridge routes any event whose payload carries `verb`). The daemon audits
         // it durably and injects a $:/tags/Alert into the operator's pinned VM.

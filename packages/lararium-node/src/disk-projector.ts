@@ -51,6 +51,14 @@ export interface LarDiskProjectorOptions {
   readonly mirrors: readonly BagMirrorConfig[];
   /** Render a carrier-root URI to its canonical text. Null skips the write. */
   readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
+  /**
+   * Report every bag that currently HOLDS a carrier (`composite.listBagsHolding`).
+   * Gates the cross-mirror stale-unlink: a carrier still living in a bag — a
+   * working edit SHADOWING its canon copy — keeps its file in that bag's mirror.
+   * The stale-unlink fires ONLY where the carrier has genuinely LEFT the bag (a
+   * true MOVE/promotion). Absent → the unlink clears every other mirror by path.
+   */
+  readonly bagsHolding?: (tiddlerUri: string) => Promise<readonly string[]>;
   /** Debounce delay in ms (default 1000). */
   readonly debounceMs?: number;
   /** Fired on every disk-ward refusal — the island routes it to the daemon VM. */
@@ -93,6 +101,7 @@ export class LarDiskProjector {
 
   private readonly mirrors: readonly BagMirrorConfig[];
   private readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
+  private readonly bagsHolding: ((tiddlerUri: string) => Promise<readonly string[]>) | undefined;
   private readonly debounceMs: number;
   private readonly onRefusal: ((info: { bagId: string; uri: string; reason: string }) => void) | undefined;
   private readonly readinessMap: ReadinessMap | undefined;
@@ -103,6 +112,7 @@ export class LarDiskProjector {
   constructor(opts: LarDiskProjectorOptions) {
     this.mirrors      = opts.mirrors;
     this.renderFn     = opts.renderFn;
+    this.bagsHolding  = opts.bagsHolding;
     this.debounceMs   = opts.debounceMs ?? 1000;
     this.onRefusal    = opts.onRefusal;
     this.readinessMap = opts.readinessMap;
@@ -286,13 +296,18 @@ export class LarDiskProjector {
       this.writing.delete(tiddlerUri);
     }
 
-    // After writing the current mirror, unlink stale files from every mirror
-    // whose path DIFFERS from the one just rendered. This handles bag
-    // promotion: when a tiddler moves from wiki-bag → lares-bag, the old wiki
-    // mirror file is cleaned up on the first flush to the new mirror. One gate,
-    // one choke-point: the unlink path routes through the ward like every other
-    // mirror touch — never an inline confinement check.
+    // After writing the current mirror, unlink stale files from OTHER mirrors —
+    // but ONLY where the carrier has genuinely LEFT that bag (a true MOVE, e.g.
+    // promotion wiki-bag → lares-bag, cleaning the old scratch file). A carrier
+    // that STILL LIVES in a bag — a working edit SHADOWING its canon copy — keeps
+    // its file there: `bagsHolding` reports every bag holding it, and a bag on
+    // that list never gets its file unlinked. Without the callback, the unlink
+    // clears every other mirror by path. One gate, one choke-point: the unlink
+    // path routes through the ward like every other mirror touch.
+    const holdingBags = this.bagsHolding ? new Set(await this.bagsHolding(tiddlerUri)) : null;
     for (const otherMirror of this.mirrors) {
+      // The carrier still lives in this bag (shadowed, not moved) → keep its file.
+      if (holdingBags?.has(otherMirror.bagId)) continue;
       const staleRel = otherMirror.toRelPath(tiddlerUri);
       if (!staleRel) continue;
       const staleGate = confineMirrorWrite(otherMirror.mirrorRoot, staleRel, otherMirror.allowBagsRootFiles);

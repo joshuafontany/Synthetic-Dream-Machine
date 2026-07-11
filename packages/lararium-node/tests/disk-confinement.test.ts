@@ -8,9 +8,9 @@
  */
 
 import { describe, test, expect } from "vitest";
-import { mkdtempSync, rmSync, existsSync } from "fs";
+import { mkdtempSync, rmSync, existsSync, mkdirSync, writeFileSync } from "fs";
 import { tmpdir } from "os";
-import { join } from "path";
+import { join, dirname } from "path";
 import { confineMirrorWrite } from "../src/bag-paths.js";
 
 const ROOT = "/srv/lar/bags/@lares";
@@ -116,6 +116,42 @@ describe("disk ward — cross-mirror stale-unlink guards on PATH, not bag", () =
       await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
         .flush("@a", "lar:///ha.ka.ba/bags/@x/note");
       expect(existsSync(join(root, rel))).toBe(true);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+});
+
+describe("disk ward — a working edit SHADOWS its canon copy, never deletes it", () => {
+  test("a carrier held in BOTH working and canon keeps both files (the boot-seed-deletion cure)", async () => {
+    const { LarDiskProjector } = await import("../src/disk-projector.js");
+    const root = mkdtempSync(join(tmpdir(), "lar-shadow-"));
+    try {
+      const uri        = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
+      const canonRel   = "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+      const workingRel = "wikis/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+      const CANON   = "lar:///ha.ka.ba/bags/@lares";
+      const WORKING = "lar:///ha.ka.ba/wikis/@lares/working";
+      // The canon file — the read-only boot-seed source — sits on disk.
+      mkdirSync(dirname(join(root, canonRel)), { recursive: true });
+      writeFileSync(join(root, canonRel), "the boot seed", "utf-8");
+
+      const projector = new LarDiskProjector({
+        mirrors: [
+          { bagId: CANON,   mirrorRoot: root, toRelPath: (u) => (u === uri ? canonRel   : null) },
+          { bagId: WORKING, mirrorRoot: root, toRelPath: (u) => (u === uri ? workingRel : null) },
+        ],
+        renderFn: async () => "the boot seed",
+        // The carrier lives in BOTH bags — a working edit shadowing its canon copy.
+        bagsHolding: async () => [WORKING, CANON],
+        debounceMs: 1,
+      });
+
+      // LOAD into working → flush the working owner (as a --to working ingest does).
+      await (projector as unknown as { flush: (b: string, u: string) => Promise<void> }).flush(WORKING, uri);
+
+      expect(existsSync(join(root, workingRel)), "working projection not written").toBe(true);
+      expect(existsSync(join(root, canonRel)), "canon file deleted by a working shadow-load").toBe(true);
     } finally {
       rmSync(root, { recursive: true, force: true });
     }
