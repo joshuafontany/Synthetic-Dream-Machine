@@ -1,8 +1,10 @@
 /**
- * claude-wire — `lares wake --claude`: wire the Lares + mempalace plugin hooks
- * (and the mempalace MCP server) into the operator's ~/.claude/settings.json so a
- * Claude harness auto-wakes (SessionStart) and auto-keeps verbatim memory
- * (Stop / PreCompact), with recall via the mempalace MCP.
+ * claude-wire — `lares wake --claude`: wire the Lares hooks into ~/.claude/settings.json (so a Claude
+ * harness auto-wakes on SessionStart and auto-keeps verbatim memory on Stop/SessionEnd) and register
+ * the LARES MCP seat in ~/.claude.json (so recall reaches the memory sensorium THROUGH the lares
+ * house). Any stale `mempalace` MCP registration is reaped in the same pass — a harness holding its
+ * own palace sidecar reaches past the node into the store, and N sessions on one Chroma index is the
+ * contention that truncated the HNSW segment.
  *
  * Pono shape: a DEEP MERGE that PRESERVES everything already in settings.json (the
  * operator's permissions, model, theme, …). Idempotent — a hook already pointing at
@@ -17,6 +19,7 @@ import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
+import { resolveLaresMcp } from "./mcp-resolve.js";
 
 /**
  * Acquire an exclusive write-lock (git-lockfile pattern: O_CREAT|O_EXCL) to serialize
@@ -43,14 +46,9 @@ async function acquireLock(lockPath: string): Promise<void> {
 }
 
 /**
- * Reap a `lares`-wired mempalace MCP from ~/.claude.json (via `claude mcp remove`).
- *
- * Chroma tolerates ONE writer on the palace. A `lares` registration standing beside the
- * mempalace `.claude-plugin`'s own gave every session two sidecars on one index — the
- * contention that truncated the HNSW segment and forced a drift-quarantine. `lares` now
- * consumes mempalace as library code through the Memory sensorium; the plugin serves MCP
- * alone. Reaping (rather than merely skipping) makes the decouple self-healing on hosts
- * an older wiring already touched. Graceful if the `claude` CLI is absent.
+ * Reap a stale `mempalace` MCP from ~/.claude.json. A harness holding its own palace sidecar reaches
+ * PAST the node into the store — N sessions, N writers, one Chroma index. The `lares` seat below
+ * replaces it; this removes what an older wiring left, so the decouple heals on the next wake.
  */
 function reapMempalaceMcp(): ClaudeWireStep {
   const got = spawnSync("claude", ["mcp", "get", "mempalace"], { encoding: "utf8", timeout: 10_000 });
@@ -58,12 +56,44 @@ function reapMempalaceMcp(): ClaudeWireStep {
     return { item: "mcp:mempalace", action: "absent", detail: "`claude` CLI not found — nothing to reap" };
   }
   if (got.status !== 0) {
-    return { item: "mcp:mempalace", action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" };
+    return { item: "mcp:mempalace", action: "absent", detail: "not registered (memory rides the lares seat)" };
   }
   const r = spawnSync("claude", ["mcp", "remove", "--scope", "user", "mempalace"], { encoding: "utf8", timeout: 15_000 });
   return r.status === 0
-    ? { item: "mcp:mempalace", action: "reaped", detail: "removed a stale lares-wired MCP — one writer, the plugin's" }
+    ? { item: "mcp:mempalace", action: "reaped", detail: "removed a stale mempalace MCP — harnesses reach memory through lares now" }
     : { item: "mcp:mempalace", action: "missing-script", detail: `claude mcp remove failed: ${(r.stderr ?? "").trim().slice(0, 80)}` };
+}
+
+/**
+ * Register the LARES MCP seat in the store Claude Code actually reads (~/.claude.json, via
+ * `claude mcp add`) — NOT settings.json, which Claude ignores for mcpServers.
+ *
+ * This is the seat the mempalace MCP used to hold. The harness now reaches memory THROUGH the lares
+ * house (recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
+ * kapae) rather than opening a palace of its own. One owner, one writer.
+ *
+ * Idempotent (skips when already registered); graceful when the `claude` CLI is absent.
+ */
+function registerLaresMcp(): ClaudeWireStep {
+  const mcp = resolveLaresMcp();
+  if (mcp === null) {
+    return { item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" };
+  }
+  const got = spawnSync("claude", ["mcp", "get", "lares"], { encoding: "utf8", timeout: 10_000 });
+  if (got.error !== undefined) {
+    return { item: "mcp:lares", action: "missing-script", detail: "`claude` CLI not found — cannot register the lares seat" };
+  }
+  if (got.status === 0) {
+    return { item: "mcp:lares", action: "present", detail: "already registered (claude mcp / ~/.claude.json)" };
+  }
+  // Arg order matters: the NAME must precede `-e`. `claude mcp add`'s env flag is VARIADIC, so a
+  // trailing positional after it gets swallowed as another KEY=VAL and rejected ("Invalid environment
+  // variable format: lares"). The documented form is `claude mcp add <name> -e K=V -- <cmd> [args]`.
+  const env = Object.entries(mcp.env).flatMap(([k, v]) => ["-e", `${k}=${v}`]);
+  const r = spawnSync("claude", ["mcp", "add", "--scope", "user", "lares", ...env, "--", mcp.command, ...mcp.args], { encoding: "utf8", timeout: 15_000 });
+  return r.status === 0
+    ? { item: "mcp:lares", action: "wired", detail: `claude mcp add — the memory sensorium via ${mcp.args[0] ?? "lares_mcp.py"}` }
+    : { item: "mcp:lares", action: "missing-script", detail: `claude mcp add failed: ${(r.stderr ?? "").trim().slice(0, 80)}` };
 }
 
 interface HookCommand {
@@ -206,13 +236,15 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
     steps.push({ item: "cleanupPeriodDays", action: "present", detail: low ? `${String(cur)} days (below floor — raise with \`lares cleanup-days\`)` : `${String(cur)} days` });
   }
 
-  // `lares` registers no mempalace MCP anywhere — it reaps its own past wirings from both
-  // stores: the dead settings.json key here, then ~/.claude.json via the `claude` CLI.
+  // Memory reaches the harness through the LARES seat, never a palace sidecar of the harness's own.
+  // Reap the old mempalace registration from both stores (the dead settings.json key here, then
+  // ~/.claude.json via the `claude` CLI), then register the lares MCP in the seat it vacates.
   if (settings.mcpServers !== undefined && settings.mcpServers["mempalace"] !== undefined) {
     delete settings.mcpServers["mempalace"];
     changed = true;
   }
   steps.push(reapMempalaceMcp());
+  steps.push(registerLaresMcp());
 
   if (changed) {
     const tmp = settingsPath + ".tmp";

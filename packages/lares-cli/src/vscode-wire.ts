@@ -1,25 +1,23 @@
 /**
- * vscode-wire — `lares wake --vscode`: REAP a lares-wired mempalace MCP from VS Code,
- * across whichever variants are installed — stable + Insiders, remote-server (WSL/SSH)
- * + local-profile. Backs up before each change; preserves the operator's other servers.
+ * vscode-wire — `lares wake --vscode`: register the LARES MCP seat into VS Code, across whichever
+ * variants are installed — stable + Insiders, remote-server (WSL/SSH) + local-profile. Backs up
+ * before each change; preserves the operator's other servers.
  *
- * Registration has been CUT. Chroma tolerates one writer on the palace, and a `lares`
- * registration standing beside the mempalace `.claude-plugin`'s own gave every session two
- * sidecars on one index — the contention that truncated the HNSW segment and forced a
- * drift-quarantine. The plugin serves MCP alone; `lares` consumes mempalace as library
- * code through the Memory sensorium. The flag survives as the strangler: it removes what
- * an older wiring left, so the decouple heals every variant it once touched.
+ * The seat used to hold the *mempalace* MCP. That let each editor open the palace itself, and Chroma
+ * tolerates one writer — N harnesses on one index is the contention that truncated the HNSW segment
+ * and forced a drift-quarantine. VS Code now reaches memory THROUGH the lares house (`lares_mcp.py`
+ * over the memory sensorium), and a stale mempalace entry is reaped in the same pass, so a profile an
+ * older wiring touched heals on the next wake.
  *
- * VS Code went native-MCP in v1.102. Schema (DISTINCT from Claude/Cursor's `mcpServers`):
- * top-level key is **`servers`**. Under a remote window the config lives on the
- * remote-server side (.vscode-server data/User), not the local profile — we sweep every
- * present root.
+ * VS Code went native-MCP in v1.102. Schema (DISTINCT from Claude/Cursor's `mcpServers`): top-level
+ * key is **`servers`**. Under a remote window the config lives on the remote-server side
+ * (.vscode-server data/User), not the local profile — we sweep every present root.
  */
 
-import { readFileSync, writeFileSync, existsSync, copyFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
-import { type WireAction } from "./mcp-resolve.js";
+import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
 
 export interface VscodeWireStep {
   readonly item: string;
@@ -54,33 +52,53 @@ function variantRoots(home: string): Array<{ name: string; dir: string }> {
   ];
 }
 
-/** Reap a lares-wired mempalace MCP from every PRESENT VS Code variant's mcp.json. Idempotent. */
+/** Register the LARES MCP seat into every PRESENT VS Code variant's mcp.json, reaping a stale
+ *  mempalace entry in the same pass. Idempotent. */
 export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
   const home = opts.home ?? homedir();
   const steps: VscodeWireStep[] = [];
   let changed = false;
+
+  const laresMcp = resolveLaresMcp();
+  if (laresMcp === null) {
+    return { changed: false, steps: [{ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" }] };
+  }
 
   let found = 0;
   for (const v of variantRoots(home)) {
     if (!existsSync(v.dir)) continue; // sweep only variants the user actually has
     found += 1;
     const mcpPath = join(v.dir, "mcp.json");
-    if (!existsSync(mcpPath)) {
-      steps.push({ item: v.name, action: "absent", detail: "no mcp.json — nothing to reap" });
-      continue;
+    let cfg: McpFile = {};
+    if (existsSync(mcpPath)) {
+      // An EMPTY file is a fresh config, not a corrupt one — VS Code creates a 0-byte mcp.json the
+      // first time the pane opens. `JSON.parse("")` throws, so read it as {} rather than cry corrupt
+      // and skip a perfectly wireable profile.
+      const raw = readFileSync(mcpPath, "utf8").trim();
+      if (raw !== "") {
+        try { cfg = JSON.parse(raw) as McpFile; }
+        catch { steps.push({ item: v.name, action: "missing-script", detail: `${mcpPath} not valid JSON — skipped` }); continue; }
+      }
     }
-    let cfg: McpFile;
-    try { cfg = JSON.parse(readFileSync(mcpPath, "utf8")) as McpFile; }
-    catch { steps.push({ item: v.name, action: "missing-script", detail: `${mcpPath} not valid JSON — skipped` }); continue; }
+    const servers = (cfg.servers ??= {});
+    let dirty = false;
 
-    if (cfg.servers?.["mempalace"] === undefined) {
-      steps.push({ item: v.name, action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" });
+    // A harness holding its own palace sidecar reaches PAST the node into the store.
+    if (servers["mempalace"] !== undefined) { delete servers["mempalace"]; dirty = true; }
+
+    if (servers["lares"] === undefined) {
+      servers["lares"] = { type: "stdio", command: laresMcp.command, args: laresMcp.args, env: laresMcp.env };
+      dirty = true;
+    }
+
+    if (!dirty) {
+      steps.push({ item: v.name, action: "present", detail: "lares already in mcp.json" });
       continue;
     }
-    delete cfg.servers["mempalace"];
-    copyFileSync(mcpPath, mcpPath + ".bak");
+    if (existsSync(mcpPath)) copyFileSync(mcpPath, mcpPath + ".bak");
+    mkdirSync(v.dir, { recursive: true });
     writeFileSync(mcpPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
-    steps.push({ item: v.name, action: "reaped", detail: `removed from ${mcpPath} — one writer, the plugin's` });
+    steps.push({ item: v.name, action: "wired", detail: `${mcpPath} — the memory sensorium (stale mempalace reaped)` });
     changed = true;
   }
 

@@ -81,6 +81,21 @@ function resolveSidecarSpawn(scriptFile: string): SidecarSpawn {
 // The five sidecars name themselves by their one divergent bit — the script file. The `*Spawn`
 // type aliases keep each holder's declared surface stable (callers destructure the shared shape).
 
+/**
+ * `lares_mcp.py` — the LARES MCP surface (FastMCP): one @tool per lifecycle verb over the memory
+ * sensorium (recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
+ * kapae · un_kapae). NOT a palace holder — it takes `--palace <sensorium dir>` (the sensorium ROOT,
+ * not a leaf store; it resolves `<palace>/content` itself) and speaks MCP over stdio to a harness.
+ *
+ * This is the seat `lares wake --claude/--codex/--copilot/--vscode` registers, in place of the
+ * mempalace MCP it used to wire: a harness reaches memory THROUGH the lares house, never around it
+ * into a palace of its own — which is what let N harness sidecars pile onto one Chroma index.
+ */
+export type LaresMcpSpawn = SidecarSpawn;
+export function resolveLaresMcpSpawn(): LaresMcpSpawn {
+  return resolveSidecarSpawn("lares_mcp.py");
+}
+
 /** `structurepalace_io.py` — the persistent NDJSON `serve` holder for the `.structurepalace` AST store. */
 export type StructurePalaceSpawn = SidecarSpawn;
 export function resolveStructurePalaceSpawn(): StructurePalaceSpawn {

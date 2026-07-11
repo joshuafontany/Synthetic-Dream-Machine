@@ -1,6 +1,8 @@
 /**
- * codex-wire — `lares wake --codex`: wire the mempalace MCP (recall) and the Lares
- * session-ingest hook into the OpenAI Codex CLI home (~/.codex/config.toml).
+ * codex-wire — `lares wake --codex`: wire the LARES MCP seat (memory through the lares house) and
+ * the Lares session-ingest hook into the OpenAI Codex CLI home (~/.codex/config.toml). A stale
+ * mempalace MCP block is reaped in the same pass — a harness holding its own palace sidecar reaches
+ * past the node into the store, and N writers on one Chroma index is what corrupts it.
  *
  * Codex reads TOML:
  *   - MCP   → [mcp_servers.<name>]  (command / args / env)
@@ -20,10 +22,11 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
-import { type WireAction } from "./mcp-resolve.js";
+import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
 
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
-const MCP_KEY = "[mcp_servers.mempalace]";
+const MEMPALACE_MCP_KEY = "[mcp_servers.mempalace]";
+const LARES_MCP_KEY = "[mcp_servers.lares]";
 
 export interface CodexWireStep {
   readonly item: string;
@@ -48,13 +51,30 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   const steps: CodexWireStep[] = [];
   const append: string[] = [];
 
-  // 1. MCP server block — CUT. `lares` registers no mempalace MCP (one writer per palace;
-  //    the mempalace plugin owns that seat). Reap a stale block an older wiring appended.
-  if (toml.includes(MCP_KEY)) {
-    toml = stripTomlSection(toml, MCP_KEY);
-    steps.push({ item: "mcp:mempalace", action: "reaped", detail: `removed a stale ${MCP_KEY} — one writer, the plugin's` });
+  // 1a. Reap a stale mempalace MCP block — a harness holding its own palace sidecar reaches PAST the
+  //     node into the store (N sessions, N writers, one Chroma index). The lares seat replaces it.
+  if (toml.includes(MEMPALACE_MCP_KEY)) {
+    toml = stripTomlSection(toml, MEMPALACE_MCP_KEY);
+    steps.push({ item: "mcp:mempalace", action: "reaped", detail: `removed a stale ${MEMPALACE_MCP_KEY} — memory rides the lares seat now` });
   } else {
-    steps.push({ item: "mcp:mempalace", action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" });
+    steps.push({ item: "mcp:mempalace", action: "absent", detail: "not registered (memory rides the lares seat)" });
+  }
+
+  // 1b. The LARES MCP seat — recall/harvest/status/worldline over the memory sensorium, through the
+  //     lares house. Codex reads `env` as an inline TOML table.
+  const laresMcp = resolveLaresMcp();
+  if (laresMcp === null) {
+    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
+  } else if (toml.includes(LARES_MCP_KEY)) {
+    steps.push({ item: "mcp:lares", action: "present", detail: "already in config.toml" });
+  } else {
+    const env = Object.entries(laresMcp.env).map(([k, v]) => `${k} = ${JSON.stringify(v)}`).join(", ");
+    append.push(
+      `\n${LARES_MCP_KEY}\ncommand = ${JSON.stringify(laresMcp.command)}\n` +
+      `args = [${laresMcp.args.map((a) => JSON.stringify(a)).join(", ")}]\n` +
+      `env = { ${env} }\n`,
+    );
+    steps.push({ item: "mcp:lares", action: "wired", detail: `config.toml ${LARES_MCP_KEY} — the memory sensorium` });
   }
 
   // 2. Stop ingest hook block

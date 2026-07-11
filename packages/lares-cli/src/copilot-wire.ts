@@ -1,6 +1,8 @@
 /**
- * copilot-wire — `lares wake --copilot`: wire the mempalace MCP (recall) and the
- * Lares session-ingest hook into the GitHub Copilot CLI home (~/.copilot/).
+ * copilot-wire — `lares wake --copilot`: wire the LARES MCP seat (memory through the lares house)
+ * and the Lares session-ingest hook into the GitHub Copilot CLI home (~/.copilot/). A stale mempalace
+ * MCP entry is reaped in the same pass — a harness holding its own palace sidecar reaches past the
+ * node into the store, and N writers on one Chroma index is what corrupts it.
  *
  * Copilot CLI (GA 2026-02) reads JSON config, like Claude:
  *   - MCP   → ~/.copilot/mcp-config.json   ({ mcpServers: { name: {type,command,args,tools} } })
@@ -19,7 +21,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
-import { type WireAction } from "./mcp-resolve.js";
+import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
 
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
 
@@ -51,18 +53,37 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
   const steps: CopilotWireStep[] = [];
   let changed = false;
 
-  // 1. MCP server → CUT. `lares` registers no mempalace MCP (one writer per palace; the
-  //    mempalace plugin owns that seat). Reap an entry an older wiring left here.
+  // 1. The MCP seat → ~/.copilot/mcp-config.json. Reap a stale `mempalace` entry (a harness holding
+  //    its own palace sidecar reaches PAST the node into the store) and register the LARES seat in
+  //    its place — recall/harvest/status/worldline over the memory sensorium, through the lares house.
   const mcpPath = join(dir, "mcp-config.json");
   const cfg = readJson<McpConfig>(mcpPath, {});
-  if (cfg.mcpServers?.["mempalace"] !== undefined) {
-    delete cfg.mcpServers["mempalace"];
+  const servers = (cfg.mcpServers ??= {});
+  let mcpDirty = false;
+
+  if (servers["mempalace"] !== undefined) {
+    delete servers["mempalace"];
+    mcpDirty = true;
+    steps.push({ item: "mcp:mempalace", action: "reaped", detail: "removed a stale mcp-config.json entry — memory rides the lares seat now" });
+  } else {
+    steps.push({ item: "mcp:mempalace", action: "absent", detail: "not registered (memory rides the lares seat)" });
+  }
+
+  const laresMcp = resolveLaresMcp();
+  if (laresMcp === null) {
+    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
+  } else if (servers["lares"] !== undefined) {
+    steps.push({ item: "mcp:lares", action: "present", detail: "already in mcp-config.json" });
+  } else {
+    servers["lares"] = { type: "local", command: laresMcp.command, args: laresMcp.args, env: laresMcp.env, tools: ["*"] };
+    mcpDirty = true;
+    steps.push({ item: "mcp:lares", action: "wired", detail: "mcp-config.json — the memory sensorium" });
+  }
+
+  if (mcpDirty) {
     if (existsSync(mcpPath)) copyFileSync(mcpPath, mcpPath + ".bak");
     writeFileSync(mcpPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
-    steps.push({ item: "mcp:mempalace", action: "reaped", detail: "removed a stale mcp-config.json entry — one writer, the plugin's" });
     changed = true;
-  } else {
-    steps.push({ item: "mcp:mempalace", action: "absent", detail: "not registered by lares (the mempalace plugin serves MCP)" });
   }
 
   // 2. sessionEnd ingest hook → ~/.copilot/hooks/lares.json
