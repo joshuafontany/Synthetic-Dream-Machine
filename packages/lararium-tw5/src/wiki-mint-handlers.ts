@@ -90,9 +90,11 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     // Born-with-its-cap: register each freshly-minted wiki bag's Keyhive Document
     // + delegate admin in the same act as the mint, so the new wiki's canon and
     // draft bags hold their cap immediately — no cap-denied window (the @elyncia
-    // friction's sibling for wiki init).
-    if (!existingWikiUrl)  await opts.registerBag?.(wikiHandle.url);
-    if (!existingDraftUrl) await opts.registerBag?.(draftHandle.url);
+    // friction's sibling for wiki init). Key on the lar: bag URLs (wikiKey /
+    // draftBagId) — the strings the cap-gate verifies against; the automerge
+    // handle.url names each bag's CONTENT doc, a different object.
+    if (!existingWikiUrl)  await opts.registerBag?.(wikiKey);
+    if (!existingDraftUrl) await opts.registerBag?.(draftBagId);
 
     return {
       slug,

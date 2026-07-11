@@ -29,11 +29,12 @@ export interface WikiMintHandlerOptions {
   readonly rootDir:     string;
   /**
    * Register a freshly-minted wiki bag's Keyhive Document + delegate admin —
-   * called for each new canon/draft doc in the same act as the mint, so a new
+   * called for each new canon/draft bag in the same act as the mint, so a new
    * wiki's bags are born WITH their cap (no cap-denied window). Opaque: the
-   * keyhive-holding daemon supplies it; tw5 stays keyhive-free.
+   * keyhive-holding daemon supplies it; tw5 stays keyhive-free. The arg is the
+   * lar: BAG URL (the cap-gate's verify key), never the automerge doc url.
    */
-  readonly registerBag?: (bagDocUrl: string) => Promise<void>;
+  readonly registerBag?: (bagUrl: string) => Promise<void>;
 }
 
 /** prune-stale additionally reads the operator's draft oracle off the daemon

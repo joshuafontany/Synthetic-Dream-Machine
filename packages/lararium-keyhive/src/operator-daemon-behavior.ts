@@ -67,10 +67,12 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // resolveOrMintBinding sequence). Shared by CREATE and wiki init — a mint
       // that only writes a catalog entry leaves the bag cap-denied until restart.
       // `kh` binds late — booted before dispatch.
-      const registerBagCap = async (bagDocUrl: string): Promise<void> => {
+      const registerBagCap = async (bagUrl: string): Promise<void> => {
         if (!kh) throw new Error("mint: keyhive unbooted — cannot register the new bag's cap");
-        await kh.registerBag(bagDocUrl);
-        await kh.delegate({ bagUrl: bagDocUrl, audience: daemonAuth.personaGroupAgentIdHex, access: "admin" });
+        // bagUrl = the lar: bag URL — the key registerBag/delegate/verify all share,
+        // the same string boot-registration registers (never the automerge doc url).
+        await kh.registerBag(bagUrl);
+        await kh.delegate({ bagUrl, audience: daemonAuth.personaGroupAgentIdHex, access: "admin" });
       };
       registerActionReactors(registry, {
         composite: ctx.composite,

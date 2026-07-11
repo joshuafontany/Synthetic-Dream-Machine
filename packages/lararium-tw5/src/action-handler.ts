@@ -104,8 +104,9 @@ export interface ActionHandlerOptions {
    * born WITH its cap (designation + authority together, never split). Opaque:
    * the keyhive-holding daemon supplies it; tw5 stays keyhive-free. Absent (a
    * no-reach wiki island, tests) → the mint writes the catalog entry alone.
+   * The arg is the lar: BAG URL (the cap-gate's verify key), never the doc url.
    */
-  readonly registerBag?: (bagDocUrl: string) => Promise<void>;
+  readonly registerBag?: (bagUrl: string) => Promise<void>;
 }
 
 /**
@@ -377,8 +378,10 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
     // Born-with-its-cap: register the new bag's Keyhive Document + delegate admin
     // in the SAME act as the mint. Without it the bag holds a catalog entry
     // (designation) but no cap (authority) — a follow-up write cap-denies until a
-    // restart re-registers it (the @elyncia seed friction).
-    await opts.registerBag?.(docUrl);
+    // restart re-registers it (the @elyncia seed friction). Key on the lar: bag URL
+    // (`action.bag`) — the same string the cap-gate's verify() and boot-registration
+    // key on; the automerge docUrl names the CONTENT doc, a different object.
+    await opts.registerBag?.(action.bag);
     return { bag: action.bag, plane: action.plane, docUrl, count: 1 };
   });
 }
