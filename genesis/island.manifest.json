@@ -1,7 +1,7 @@
 {
   "format": "lararium-genesis-cas/v1",
-  "engineCid": "bafkreid77y2tacfkqfguz65f3sremqtw7ptgezc6t6r77dmvcd5nkkfrkq",
-  "pluginsCid": "bafkreiafi22s2ym2v6qn6vd6ywr2me4ugajyl6umsdml5breevf6jj6lym",
+  "engineCid": "bafkreid7rk5duo6cwokysj2ou36enixvlabgvzcpqourjhfofcbnfmehfi",
+  "pluginsCid": "bafkreicrm4gamscjwgsakzf7ystyo6xp4kkol6lezfhp2qexqrpqzha7my",
   "blobs": [
     {
       "cid": "17fcae33dc754c1535762ec4915b796410996f0ff21148ac4efcb66ac7fdf7f4",
@@ -10,22 +10,22 @@
       "version": "1.2.24"
     },
     {
-      "cid": "40f319e5beecbe12d5cbb9c8eb0e58027e4d68ffca1c4a7ea8d86381cc496675",
-      "id": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext",
+      "cid": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
+      "id": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
       "mimeType": "application/json",
       "version": "0.1.0"
     },
     {
-      "cid": "1a27b4e684c40cbd7db152b7b51ed4b6c163fd058912db0bf8c04df07108f612",
+      "cid": "95bde4c6cc3632ae67f4ee43e1bb0bfe8ac0a17c868a202e7aab5f9469b85ccd",
       "id": "lararium-boot-shadows",
       "mimeType": "application/json",
       "version": "unknown"
     },
     {
-      "cid": "823d0300f0249192e9e949e1556598ff15a386719b3db72b5af4ed63634ee3ee",
+      "cid": "7640b4f8a6931f93790f3d81893f9af81f0521e136323004e68a78ab8ea8509a",
       "id": "tiddlywikicore",
       "mimeType": "application/javascript",
-      "version": "5.4.1-prerelease"
+      "version": "5.5.0-prerelease"
     }
   ]
 }

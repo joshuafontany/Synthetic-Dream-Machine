@@ -1,12 +1,12 @@
 {
   "format": "lararium-genesis-seed/v1",
-  "actorSeed": "1090a648ee71c0097d5bca04eb4d0eed580932e3cc79aa500a8131447c179b78",
+  "actorSeed": "fbbbd5e65bee709999aaff097add55e535dcc7c6e2a229cdcbdf3d01b994d848",
   "schemaVersion": "0.1",
   "blobs": {
     "tiddlywikicore": {
       "id": "tiddlywikicore",
-      "version": "5.4.1-prerelease",
-      "sha256": "823d0300f0249192e9e949e1556598ff15a386719b3db72b5af4ed63634ee3ee",
+      "version": "5.5.0-prerelease",
+      "sha256": "7640b4f8a6931f93790f3d81893f9af81f0521e136323004e68a78ab8ea8509a",
       "mimeType": "application/javascript",
       "license": "BSD-3-Clause",
       "author": "UnaMesa Association",
@@ -15,14 +15,14 @@
     "lararium-boot-shadows": {
       "id": "lararium-boot-shadows",
       "version": "unknown",
-      "sha256": "1a27b4e684c40cbd7db152b7b51ed4b6c163fd058912db0bf8c04df07108f612",
+      "sha256": "95bde4c6cc3632ae67f4ee43e1bb0bfe8ac0a17c868a202e7aab5f9469b85ccd",
       "mimeType": "application/json",
       "license": "MIT"
     },
-    "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext": {
-      "id": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext",
+    "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
+      "id": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
       "version": "0.1.0",
-      "sha256": "40f319e5beecbe12d5cbb9c8eb0e58027e4d68ffca1c4a7ea8d86381cc496675",
+      "sha256": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
       "mimeType": "application/json",
       "license": "MIT",
       "author": "lares"
@@ -126,8 +126,8 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/recipes/lares",
         "label": "lares",
-        "bag-stack": "lar:///ha.ka.ba/bags/@oracle lar:///ha.ka.ba/bags/@lararium lar:///ha.ka.ba/bags/@lares lar:///ha.ka.ba/bags/@lares/draft",
-        "writable-bag": "lar:///ha.ka.ba/bags/@lares/draft"
+        "bag-stack": "lar:///ha.ka.ba/bags/@oracle lar:///ha.ka.ba/bags/@lararium lar:///ha.ka.ba/bags/@lares lar:///ha.ka.ba/wikis/@lares/draft",
+        "writable-bag": "lar:///ha.ka.ba/wikis/@lares/draft"
       },
       "meta": {
         "authority": "genesis"
@@ -137,16 +137,16 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/recipes/lararium",
         "label": "lararium",
-        "bag-stack": "lar:///ha.ka.ba/bags/@oracle lar:///ha.ka.ba/bags/@lararium lar:///ha.ka.ba/bags/@lararium/draft",
-        "writable-bag": "lar:///ha.ka.ba/bags/@lararium/draft"
+        "bag-stack": "lar:///ha.ka.ba/bags/@oracle lar:///ha.ka.ba/bags/@lararium lar:///ha.ka.ba/wikis/@lararium/draft",
+        "writable-bag": "lar:///ha.ka.ba/wikis/@lararium/draft"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/@oracle/blobs/plugins/sq/streams": {
+    "lar:///ha.ka.ba/bags/@oracle/blobs/plugins/sq/streams": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/@oracle/blobs/plugins/sq/streams",
+        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/plugins/sq/streams",
         "text": "$:/plugins/sq/streams",
         "sha256": "17fcae33dc754c1535762ec4915b796410996f0ff21148ac4efcb66ac7fdf7f4",
         "version": "1.2.24",
@@ -163,27 +163,27 @@
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/@oracle/blobs/lar_///ha.ka.ba/_lararium/plugins/lares/memetic-wikitext": {
+    "lar:///ha.ka.ba/bags/@oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/@oracle/blobs/lar_///ha.ka.ba/_lararium/plugins/lares/memetic-wikitext",
-        "text": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext",
-        "sha256": "40f319e5beecbe12d5cbb9c8eb0e58027e4d68ffca1c4a7ea8d86381cc496675",
+        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
+        "text": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
+        "sha256": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
         "version": "0.1.0",
         "mimeType": "application/json",
         "author": "lares",
         "license": "MIT",
         "buildAttestationFormat": "lararium-tw5-plugin-build/v1",
-        "canonicalTitle": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext",
+        "canonicalTitle": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "compatibilityTitle": "$:/plugins/lares/memetic-wikitext",
         "moduleManifestPath": "dist-plugin/module-manifest.json",
-        "moduleManifestSha256": "774ccf9ebfede2682a19f5ac814425eee431745fb1cdc708d94171a872e06218",
+        "moduleManifestSha256": "440336258d2ba98ffb3def41c16d444321a43d5fe5246792511fe8515c053893",
         "sourceManifestPath": "dist-plugin/plugin-source-manifest.json",
-        "sourceManifestSha256": "434609d290f03105579343b331ba361a638774c305b6e1e302be972e16bf4eb3",
+        "sourceManifestSha256": "50876d5a15ad26f99cc2ea43eb580d80896d5e4a30ed262aa77300f9e68d3bd5",
         "packTranscriptPath": "dist-plugin/pack-transcript.json",
-        "packTranscriptSha256": "d560377316ae2152e3c7cf53215beb1ab5aa89f1448dfcc901d8ef1106891769",
+        "packTranscriptSha256": "73194e5ee996d995f53b2a367f83e337b0907a435bd2a6049f01b5dd863ee7cc",
         "moduleCount": "23",
         "packedTiddlerCount": "115",
-        "pluginJsonSha256": "40f319e5beecbe12d5cbb9c8eb0e58027e4d68ffca1c4a7ea8d86381cc496675",
+        "pluginJsonSha256": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
         "tags": "blob-descriptor",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
@@ -191,11 +191,11 @@
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/@oracle/blobs/lararium-boot-shadows": {
+    "lar:///ha.ka.ba/bags/@oracle/blobs/lararium-boot-shadows": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/@oracle/blobs/lararium-boot-shadows",
+        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/lararium-boot-shadows",
         "text": "lararium-boot-shadows",
-        "sha256": "1a27b4e684c40cbd7db152b7b51ed4b6c163fd058912db0bf8c04df07108f612",
+        "sha256": "95bde4c6cc3632ae67f4ee43e1bb0bfe8ac0a17c868a202e7aab5f9469b85ccd",
         "version": "unknown",
         "mimeType": "application/json",
         "license": "MIT",
@@ -206,12 +206,12 @@
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/@oracle/blobs/tiddlywikicore": {
+    "lar:///ha.ka.ba/bags/@oracle/blobs/tiddlywikicore": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/@oracle/blobs/tiddlywikicore",
+        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/tiddlywikicore",
         "text": "tiddlywikicore",
-        "sha256": "823d0300f0249192e9e949e1556598ff15a386719b3db72b5af4ed63634ee3ee",
-        "version": "5.4.1-prerelease",
+        "sha256": "7640b4f8a6931f93790f3d81893f9af81f0521e136323004e68a78ab8ea8509a",
+        "version": "5.5.0-prerelease",
         "mimeType": "application/javascript",
         "author": "UnaMesa Association",
         "source": "https://tiddlywiki.com",
@@ -227,7 +227,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-engine",
         "text": "",
-        "cid": "bafkreid77y2tacfkqfguz65f3sremqtw7ptgezc6t6r77dmvcd5nkkfrkq",
+        "cid": "bafkreid7rk5duo6cwokysj2ou36enixvlabgvzcpqourjhfofcbnfmehfi",
         "note": "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
@@ -239,7 +239,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-plugins",
         "text": "",
-        "cid": "bafkreiafi22s2ym2v6qn6vd6ywr2me4ugajyl6umsdml5breevf6jj6lym",
+        "cid": "bafkreicrm4gamscjwgsakzf7ystyo6xp4kkol6lezfhp2qexqrpqzha7my",
         "note": "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
