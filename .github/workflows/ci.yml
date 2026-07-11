@@ -127,7 +127,7 @@ jobs:
         run: |
           node -e '
             const fs = require("node:fs");
-            const p = "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.mem";
+            const p = "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
             const n = [...fs.readFileSync(p, "utf8")].length;
             console.log("boot chars:", n, "/ 40000");
             if (n >= 40000) {
