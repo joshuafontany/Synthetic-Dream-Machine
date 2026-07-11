@@ -7,10 +7,10 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync, rmSync, mkdirSync, writeFileSync, existsSync, readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { palaceOrgans, setupPalaceOrgans, organHealthy } from "../src/palace-organs.js";
+import { palaceOrgans, setupPalaceOrgans, organHealthy, guestMempalaceOrgan } from "../src/palace-organs.js";
 import { readManifest, resolveCapDir } from "../src/sensorium.js";
 import {
-  larMempalaceDir, larStructurePalaceDir, larFormPalaceDir, larMeshPalaceDir,
+  larMempalaceDir, larContentDir, larStructurePalaceDir, larFormPalaceDir, larMeshPalaceDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
   memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
 } from "../src/vessel-paths.js";
@@ -36,10 +36,10 @@ afterEach(() => {
 });
 
 describe("palaceOrgans — the ONE registry both consumers read", () => {
-  test("enumerates the organs in dependency order — mempalace FIRST, the mesh TREE last", () => {
+  test("enumerates the SOVEREIGN organs in dependency order — contentpalace FIRST, the mesh TREE last", () => {
     const names = palaceOrgans().map((o) => o.name);
     expect(names).toEqual([
-      "mempalace", "structurepalace", "formpalace", "persistencepalace", "contentpalace",
+      "contentpalace", "structurepalace", "formpalace", "persistencepalace",
       "meshpalace",
       "mesh:who", "mesh:who:persistence",
       "mesh:authority", "mesh:authority:persistence",
@@ -50,9 +50,21 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
     ]);
   });
 
+  test("the GUEST ~/.mempalace never enters the sovereign registry (the comparator ruling)", () => {
+    // `wake --init` stands ONLY what the lararium owns. Standing the guest from the boot wrote the
+    // very comparator the RUN arc measures against (RUN-ARC.md:14). It rides its own lane now.
+    expect(palaceOrgans().map((o) => o.name)).not.toContain("mempalace");
+    expect(palaceOrgans().map((o) => o.dir)).not.toContain(larMempalaceDir());
+
+    // …and the guest lane still enumerates it, so `lares mempalace` can raise it deliberately.
+    const guest = guestMempalaceOrgan();
+    expect(guest.name).toBe("mempalace");
+    expect(guest.dir).toBe(larMempalaceDir());
+  });
+
   test("each organ resolves its dir from the SAME vessel-path resolver (no ambient default)", () => {
     const byName = Object.fromEntries(palaceOrgans().map((o) => [o.name, o.dir]));
-    expect(byName["mempalace"]).toBe(larMempalaceDir());
+    expect(byName["contentpalace"]).toBe(larContentDir());
     expect(byName["structurepalace"]).toBe(larStructurePalaceDir());
     expect(byName["formpalace"]).toBe(larFormPalaceDir());
     expect(byName["meshpalace"]).toBe(larMeshPalaceDir());
@@ -63,32 +75,33 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
     expect(byName["mesh:flow"]).toBe(meshFlowDir());
     expect(byName["mesh:who"].startsWith(meshSensoriumDir())).toBe(true);
     // all under the isolated temp roots — proof the env override flows through.
-    expect(byName["mempalace"]).toBe(mempalace);
+    expect(byName["contentpalace"].startsWith(home)).toBe(true);
     expect(byName["structurepalace"].startsWith(home)).toBe(true);
     expect(byName["meshpalace"].startsWith(home)).toBe(true);
+    // …and the guest lane honours $MEMPALACE_PALACE_PATH the same way.
+    expect(guestMempalaceOrgan().dir).toBe(mempalace);
   });
 });
 
 describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => {
   test("first run STANDS UP every absent organ; a re-run reads all 'present'", () => {
-    // Pre-create the mempalace config so its organ is healthy WITHOUT spawning the real `mempalace` CLI.
-    mkdirSync(mempalace, { recursive: true });
-    writeFileSync(join(mempalace, "config.json"), JSON.stringify({ hooks: { auto_save: false } }) + "\n");
-
+    // NOTE: no mempalace config is pre-created. The boot must not need one, and must not make one.
     const first = setupPalaceOrgans();
     // every step ok
     expect(first.every((s) => s.ok)).toBe(true);
-    // ast/form + the mesh tree + the memetic-wikitext tree were absent → init ran and created their dirs
+    // the li planes + the mesh tree + the memetic-wikitext tree were absent → init ran, dirs created
     for (const name of [
-      "structurepalace", "formpalace", "persistencepalace", "contentpalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
+      "contentpalace", "structurepalace", "formpalace", "persistencepalace", "meshpalace", "mesh:who", "mesh:authority", "mesh:flow",
       "memetic-wikitext", "memetic-wikitext:formal", "memetic-wikitext:informal",
     ]) {
       const step = first.find((s) => s.step === name)!;
       expect(step.ran).toBe(true);
       expect(existsSync(palaceOrgans().find((o) => o.name === name)!.dir)).toBe(true);
     }
-    // mempalace was present → skipped (no subprocess)
-    expect(first.find((s) => s.step === "mempalace")!.ran).toBe(false);
+    // THE COMPARATOR RULING (RUN-ARC.md:14): the boot never writes the guest. No step names it, and
+    // ~/.mempalace stays untouched on disk — no config, no dir conjured by standing the sensorium.
+    expect(first.find((s) => s.step === "mempalace")).toBeUndefined();
+    expect(existsSync(join(mempalace, "config.json"))).toBe(false);
     // the sensorium manifests stamped on the FIRST pass (memory + the four mesh + the three memetic-wikitext)
     for (const step of [
       "memory:manifest", "mesh:manifest", "mesh:who:manifest", "mesh:authority:manifest", "mesh:flow:manifest",
@@ -109,9 +122,10 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     mkdirSync(mempalace, { recursive: true });
     writeFileSync(join(mempalace, "config.json"), JSON.stringify({ hooks: { auto_save: true }, keep: "me" }) + "\n");
 
-    // Fire the mempalace organ's init directly: config PRESENT → the CLI spawn leg skips, and
-    // ONLY the auto-save off-switch (the atomic config write under witness) runs.
-    const steps = palaceOrgans().find((o) => o.name === "mempalace")!.init!();
+    // Fire the GUEST organ's init directly (the `lares mempalace` lane — never the boot): config
+    // PRESENT → the CLI spawn leg skips, and ONLY the auto-save off-switch (the atomic config write
+    // under witness) runs.
+    const steps = guestMempalaceOrgan().init!();
     const off = steps.find((s) => s.step === "mempalace:auto-save-off")!;
     expect(off.ran).toBe(true);
     expect(off.ok).toBe(true);

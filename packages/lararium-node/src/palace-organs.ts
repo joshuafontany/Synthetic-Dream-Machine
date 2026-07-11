@@ -1,23 +1,31 @@
 /**
- * palace-organs — the ONE shared enumerator for the local palace organs (the durable mempalace
- * instances the operator's vessel stands), so setup (`lares wake --init`) and teardown
- * (`lares palace-teardown`) read the SAME list and can never drift.
+ * palace-organs — the ONE shared enumerator for the local palace organs (the durable stores the
+ * operator's vessel stands), so setup (`lares wake --init`) and teardown (`lares palace-teardown`)
+ * read the SAME list and can never drift.
  *
- * The five organs (the astral palaces made filesystem):
- *   - mempalace   ~/.mempalace (or $MEMPALACE_PALACE_PATH) — the VERBATIM content store; the
- *                 worldline-KG knowledge_graph.sqlite3 lives INSIDE it, so it stands FIRST.
- *   - structurepalace   <memory>/structure  — the structural-AST store (a 2nd mempalace instance).
- *   - formpalace  <memory>/form       — the living-grammar FORM-vector store (a 3rd instance).
- *   - meshpalace  <data>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a live
- *                 node). It `#has` three nested child sensoriums — WHO · AUTHORITY · FLOW — each its
- *                 own dir + thin manifest; the mesh's own caps stay minimal. Here we wire only the
- *                 directory STRUCTURE + stamp the manifests; the feed/carriage + cap-content live elsewhere.
+ * SOVEREIGN ONLY. Every organ here lives inside the lararium's own tree. The guest `~/.mempalace`
+ * is NOT one of them: the swarm retired the content-cap-home ruling (`lararium-memory.mem:137-149`
+ * — "the sovereign contentpalace inherits mempalace's exact base schema; the read-only sidecar
+ * reach retires"), and the S5 comparator ruling forbids writing it at all (`RUN-ARC.md:14` —
+ * "~/.mempalace/palace = comparator only. The RUN never writes it"). Standing the guest from
+ * `wake --init` wrote the comparator it was meant to protect. That leg now lives in the guest lane
+ * (`lares mempalace setup`, {@link initGuestMempalace}), where an operator raises it DELIBERATELY as
+ * a standalone sidecar to compare against or to import FROM (`guest-import.ts` — the one-way Act).
+ *
+ * The memory sensorium's own planes (the astral palaces made filesystem):
+ *   - contentpalace     <memory>/content    — the LARARIUM-OWNED verbatim content plane (li/sheaf).
+ *   - structurepalace   <memory>/structure  — the structural-AST store (li/sheaf).
+ *   - formpalace        <memory>/form       — the living-grammar FORM-vector store (li/sheaf).
+ *   - persistencepalace <memory>/persistence — the Testimony/witness store (cosheaf cap).
+ *   - meshpalace        <data>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a
+ *                 live node). It `#has` three nested child sensoriums — WHO · AUTHORITY · FLOW —
+ *                 each its own dir + thin manifest. Here we wire only the directory STRUCTURE +
+ *                 stamp the manifests; the feed/carriage + cap-content live elsewhere.
  *
  * Each organ carries a resolved `dir` (never an ambient default), an optional `init` that STANDS it
  * up when absent (idempotent: a present dir is never re-init'd), and a cheap `healthProbe` that
- * answers "did the store materialize?". The ChromaDB-backed instances (ast/form/mesh) create their
- * collection lazily on first holder `put`, so `init` only needs to ensure the directory exists; the
- * verbatim mempalace needs the real `mempalace init` + the auto_save off-switch.
+ * answers "did the store materialize?". The ChromaDB-backed instances create their collection lazily
+ * on first holder `put`, so `init` only needs to ensure the directory exists.
  *
  * Meme: lar:///ha.ka.ba/lararium/mempalace/genesis-doc
  */
@@ -68,12 +76,18 @@ function errText(e: unknown): string {
 }
 
 /**
- * Stand up the VERBATIM mempalace: `mempalace init <repo> --yes --no-llm` when no config exists
- * (non-interactive, heuristics-only), then pin `hooks.auto_save = false` — THE re-pollution gate
- * (a fresh init defaults it true and the plugin hooks fire independent of settings.json, so without
- * this the `sessions` mega-wing returns on the first turn). Both legs idempotent.
+ * Stand up the GUEST mempalace as a standalone sidecar: `mempalace init <repo> --yes --no-llm` when
+ * no config exists (non-interactive, heuristics-only), then pin `hooks.auto_save = false` — THE
+ * re-pollution gate (a fresh init defaults it true and the plugin hooks fire independent of
+ * settings.json, so without this the `sessions` mega-wing returns on the first turn). Both legs
+ * idempotent.
+ *
+ * The GUEST LANE, never the boot path. `wake --init` no longer calls this — writing `~/.mempalace`
+ * from the boot contradicts the comparator ruling (`RUN-ARC.md:14`). `lares mempalace setup` calls
+ * it, so the operator raises the guest DELIBERATELY: as a standalone sanity-check sidecar to compare
+ * the sovereign sensorium against, or as the source of the one-way import Act (`guest-import.ts`).
  */
-function initMempalace(): PalaceSetupStep[] {
+export function initGuestMempalace(): PalaceSetupStep[] {
   const steps: PalaceSetupStep[] = [];
   const mp = resolveMempalaceExe();
   const cfgPath = PALACE_CONFIG();
@@ -156,27 +170,31 @@ function ensureDirOrgan(name: string, dir: string): () => PalaceSetupStep[] {
 }
 
 /**
- * The palace-organ registry — the ONE list both setup and teardown enumerate. Resolved dirs, in
- * dependency order: mempalace first (the worldline-KG lives inside it), ast/form in any order,
- * meshpalace last (it couples to a live node; the directory wiring is all we do here).
+ * The GUEST organ — `~/.mempalace` (or `$MEMPALACE_PALACE_PATH`). Enumerated SEPARATELY from
+ * {@link palaceOrgans} and reached only through the guest lane (`lares mempalace …`), never from
+ * `wake --init`: the sovereign vessel must not write the comparator it measures itself against.
+ */
+export function guestMempalaceOrgan(): PalaceOrgan {
+  const dir = larMempalaceDir();
+  return { name: "mempalace", dir, init: initGuestMempalace, healthProbe: () => existsSync(join(dir, "config.json")) };
+}
+
+/**
+ * The palace-organ registry — the ONE list both setup and teardown enumerate. SOVEREIGN ONLY: every
+ * dir here sits inside the lararium's tree (the guest `~/.mempalace` rides {@link guestMempalaceOrgan}).
+ * Resolved dirs, in dependency order: the memory sensorium's li planes first, then its cosheaf cap
+ * store, then meshpalace last (it couples to a live node; the directory wiring is all we do here).
  */
 export function palaceOrgans(): PalaceOrgan[] {
-  const mempalaceDir = larMempalaceDir();
   return [
-    {
-      name: "mempalace",
-      dir: mempalaceDir,
-      init: initMempalace,
-      healthProbe: () => existsSync(join(mempalaceDir, "config.json")),
-    },
+    // The LARARIUM-OWNED content plane — the memory sensorium's verbatim ground, sovereign from the
+    // guest `~/.mempalace`. Stands FIRST: recall reads it, and the other planes key against its cids.
+    { name: "contentpalace", dir: larContentDir(), init: ensureDirOrgan("contentpalace", larContentDir()) },
     { name: "structurepalace",  dir: larStructurePalaceDir(),  init: ensureDirOrgan("structurepalace",  larStructurePalaceDir())  },
     { name: "formpalace", dir: larFormPalaceDir(), init: ensureDirOrgan("formpalace", larFormPalaceDir()) },
     // The `persistence` cosheaf cap store (the 5th part) — a caller-vector instance holding Testimony
     // atoms; the `memory` sensorium composes it (authority mode). Lazy collection like ast/form: init = ensure dir.
     { name: "persistencepalace", dir: larPersistencePalaceDir(), init: ensureDirOrgan("persistencepalace", larPersistencePalaceDir()) },
-    // The LARARIUM-OWNED content plane — a caller-vector content store the memory sensorium owns
-    // (<memory>/content), sovereign from the guest ~/.mempalace. Lazy collection: init = ensure dir.
-    { name: "contentpalace", dir: larContentDir(), init: ensureDirOrgan("contentpalace", larContentDir()) },
     // The `mesh` sensorium TREE — the parent dir plus its three nested children (who/authority/flow),
     // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
     { name: "meshpalace",     dir: larMeshPalaceDir(),  init: ensureDirOrgan("meshpalace",     larMeshPalaceDir())  },
@@ -231,11 +249,12 @@ function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensori
 }
 
 /**
- * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges in a
- * MIXED layout: content ABSOLUTE (the content-cap-home ruling keeps it external at `~/.mempalace`),
- * structure/form RELATIVE (inside the tree) — {@link larMempalaceDir} et al. report where the bytes
- * actually are and {@link capDecl} chooses per cap. bands as the base-cap interval-grain (wavelet,
- * computed on read — NO dir), and an empty coupling (memory glues no sub-sensoriums).
+ * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges, ALL
+ * inside the tree. The old MIXED layout (content ABSOLUTE at the guest `~/.mempalace`, structure/form
+ * relative) died with the content-cap-home ruling: the lararium OWNS its content plane at
+ * `<memory>/content`, and adopting a user's mempalace history runs as a deliberate import Act
+ * (`guest-import.ts`), never a runtime binding. bands rides as the base-cap interval-grain (wavelet,
+ * computed on read — NO dir), and coupling stays empty (memory glues no sub-sensoriums).
  */
 export function materializeMemorySensorium(): PalaceSetupStep {
   return materializeSensorium("memory:manifest", memorySensoriumDir(), {

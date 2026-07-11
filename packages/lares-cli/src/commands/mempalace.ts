@@ -9,7 +9,15 @@
  * gracefully — PAUSE the hooks first (stop the minting), THEN SIGTERM-drain the
  * warm daemons (`quiesce`), and un-pause when the storm passes (`resume`).
  *
+ * THE GUEST LANE. `~/.mempalace` is a GUEST — a standalone sidecar the operator raises deliberately,
+ * never a runtime binding the vessel boots into. `lares wake --init` stands only the sovereign
+ * sensorium; standing the guest from the boot wrote the very store the S5 comparator ruling reserves
+ * as an untouched baseline (`RUN-ARC.md:14` — "the RUN never writes it"). So every guest verb lives
+ * HERE, behind an explicit operator act. Its uses: a sanity-check sidecar to compare the sovereign
+ * sensorium against, and the source of the one-way import Act (`guest-import.ts`).
+ *
  * Verbs:
+ *   setup                raise the guest standalone: `mempalace init` + pin hooks.auto_save=false
  *   status               live table: every daemon/sidecar/mine/hook-leg + its SPAWNER
  *   quiesce [--hold]     graceful stop-the-world: pause hooks → drain daemons → confirm zero
  *   resume               un-pause the hooks (the warm daemon re-spawns lazily on next use)
@@ -20,6 +28,7 @@
  * system is a clean no-op) · pidfile-less (the live process table is the authority).
  */
 
+import { initGuestMempalace, guestMempalaceOrgan, organHealthy } from "@lararium/node";
 import { livePalaceProcs, fmtUptime, type PalaceProc, type ProcKind } from "../palace-procs.js";
 import { hookPauseState, pauseHooks, resumeHooks } from "../hook-pause.js";
 import { portHolderPids } from "../port-control.js";
@@ -242,11 +251,43 @@ function cmdResume(args: ParsedArgs): number {
   return 0;
 }
 
+/**
+ * `lares mempalace setup` — raise the GUEST standalone: `mempalace init <repo> --yes --no-llm` when
+ * no config exists, then pin `hooks.auto_save = false` (the re-pollution gate). Idempotent.
+ *
+ * The boot does NOT do this, by law. An operator runs it to stand the guest as a sanity-check sidecar
+ * beside the sovereign sensorium, or to have something for the one-way import Act to read FROM.
+ */
+function cmdSetup(args: ParsedArgs): number {
+  const organ = guestMempalaceOrgan();
+  const already = organHealthy(organ);
+  const steps = initGuestMempalace();
+  const ok = steps.every((s) => s.ok);
+  emit(args, {
+    ok,
+    data: { guest: organ.dir, already, steps },
+    human: () => {
+      const lines = [
+        `guest mempalace  ${organ.dir}${already ? "  (present)" : "  (raised)"}`,
+        "",
+        ...steps.map((s) => `  ${s.ok ? "✓" : "✗"} ${s.step.padEnd(26)} ${s.ran ? "ran" : "skip"}  ${s.detail}`),
+        "",
+        "A GUEST, not an organ: the vessel never boots into it. Compare against it, or import FROM it.",
+      ];
+      return lines.join("\n");
+    },
+  });
+  return ok ? 0 : 1;
+}
+
 // ── dispatch ──────────────────────────────────────────────────────────────────
 
 function printHelp(): void {
   console.log("lares mempalace <verb>   (alias: lares palace <verb>)\n");
+  console.log("The GUEST lane. `~/.mempalace` is a standalone sidecar you raise deliberately — the");
+  console.log("vessel never boots into it (`lares wake --init` stands only the sovereign sensorium).\n");
   console.log("Verbs:");
+  console.log("  setup               raise the guest: `mempalace init` + pin hooks.auto_save=false (idempotent)");
   console.log("  status              live topology: every daemon/sidecar/mine/hook-leg + its SPAWNER");
   console.log("  quiesce [--hold]    graceful stop-the-world: pause hooks → drain daemons → confirm zero");
   console.log("  resume              un-pause the hooks (the warm daemon re-spawns lazily on next use)");
@@ -263,6 +304,7 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
     command: args.command, positional: args.positional.slice(1), options: args.options, flags: args.flags,
   };
   switch (verb) {
+    case "setup":   return cmdSetup(inner);
     case "status":  return cmdStatus(inner);
     case "quiesce": return await cmdQuiesce(inner);
     case "resume":  return cmdResume(inner);

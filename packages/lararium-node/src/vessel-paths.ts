@@ -10,13 +10,13 @@
  *   $XDG_CONFIG_HOME/lares  (~/.config/lares)       — config.json.
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
  *
- * The SENSORIUM consolidation (SHEAF-TRUE): structure ← the structurepalace, form ← the formpalace, both
- * co-located under `<data>/sensoriums/memory/{structure,form}` so the filetree IS the composition
- * (sensorium.ts). content ← the verbatim mempalace stays EXTERNAL at its upstream-default `~/.mempalace`
- * (the content-cap-home ruling — "mempalace is external, not-ours-to-change"); the memory-sensorium
- * `#has` it by ABSOLUTE reference (logical composition, respecting the vendored-sibling boundary), NOT
- * by physical colocation in the tree. bands + coupling are BASE caps — they live in the manifest,
- * never as dirs.
+ * The SENSORIUM consolidation (SHEAF-TRUE): content ← the contentpalace, structure ← the structurepalace,
+ * form ← the formpalace, ALL THREE co-located under `<data>/sensoriums/memory/{content,structure,form}`
+ * so the filetree IS the composition (sensorium.ts). The lararium OWNS its content plane — the earlier
+ * content-cap-home ruling (which kept content external at the guest `~/.mempalace`) was RETIRED by the
+ * swarm: the sovereign contentpalace inherits mempalace's exact base schema, and adopting a user's
+ * mempalace history runs as a deliberate one-way import Act (`guest-import.ts`), never a runtime
+ * binding. bands + coupling are BASE caps — they live in the manifest, never as dirs.
  *
  * The mesh federation store lives as its OWN `mesh` SENSORIUM that `#has` three nested child sensoriums
  * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own

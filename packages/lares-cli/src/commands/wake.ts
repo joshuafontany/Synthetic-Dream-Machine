@@ -20,7 +20,7 @@ import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
-import { setupMempalacePalace, type PalaceSetupStep } from "../setup-mempalace.js";
+import { setupSensorium, type PalaceSetupStep } from "../setup-sensorium.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
@@ -88,12 +88,16 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined;
   if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
 
-  // Under --init / --install: install the mempalace deps (submodule + pip, idempotent)
-  // AND stand up the palace itself (init if absent + pin hooks.auto_save=false — the
-  // re-pollution gate). Both no-op when already done. Bare `lares wake` only CHECKS.
+  // Under --init / --install: install the mempalace LIBRARY deps (submodule + pip — the sensorium's
+  // py organs import it as code) AND stand up the SOVEREIGN sensorium (content/structure/form/
+  // persistence/mesh). Both no-op when already done. Bare `lares wake` only CHECKS.
+  //
+  // What this no longer does: stand the GUEST `~/.mempalace`. Booting it from here wrote the store
+  // the comparator ruling reserves as an untouched baseline (RUN-ARC.md:14). The guest is raised
+  // deliberately, from its own lane — `lares mempalace setup`.
   let mempalaceSetup: { install: InstallStep[]; palace: PalaceSetupStep[] } | undefined;
   if (args.flags["init"] === true || args.flags["install"] === true) {
-    mempalaceSetup = { install: installMempalaceIntegration(), palace: setupMempalacePalace() };
+    mempalaceSetup = { install: installMempalaceIntegration(), palace: setupSensorium() };
   }
   const integration = checkMempalaceIntegration();
 

@@ -50,9 +50,12 @@ export type {
   AlignedTick, CoupleAlignedOptions, AlignedCouplingRead, FfzCell,
 } from "./memetic-wikitext-sensorium.js";
 
-// The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list.
+// The shared palace-organ registry — setup (`wake --init`) + teardown read the SAME list. SOVEREIGN
+// ONLY; the guest `~/.mempalace` rides its own lane (`guestMempalaceOrgan` / `initGuestMempalace`),
+// reached from `lares mempalace …`, never from the boot — the vessel must not write its comparator.
 export {
   palaceOrgans, setupPalaceOrgans, organHealthy,
+  guestMempalaceOrgan, initGuestMempalace,
   materializeMemorySensorium, materializeMeshSensorium, materializeMemeticWikitextSensorium,
 } from "./palace-organs.js";
 export type { PalaceOrgan, PalaceSetupStep } from "./palace-organs.js";

@@ -21,7 +21,7 @@ import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
-import { palaceOrgans, organHealthy, readMemeticWikitextCoupling } from "@lararium/node";
+import { palaceOrgans, organHealthy, guestMempalaceOrgan, readMemeticWikitextCoupling } from "@lararium/node";
 import { readClaudeCleanupPeriod, CLEANUP_PERIOD_DAYS_FLOOR } from "../claude-wire.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -36,6 +36,11 @@ const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is 
 function cmdStatusPalaces(args: ParsedArgs): number {
   const organs = palaceOrgans().map((o) => ({ name: o.name, dir: o.dir, healthy: organHealthy(o) }));
   const allHealthy = organs.every((o) => o.healthy);
+  // The GUEST rides BESIDE the table, never inside it — `~/.mempalace` is not an organ the vessel
+  // stands (the comparator ruling), so its absence must never read as an unhealthy sovereign store.
+  // Surfaced so the operator keeps sight of it: present or not, it is `lares mempalace setup`'s to raise.
+  const g = guestMempalaceOrgan();
+  const guest = { name: g.name, dir: g.dir, healthy: organHealthy(g) };
   // Read the memetic-wikitext coupling plane through the H¹ gate — makes `coupling.children`
   // load-bearing at the vessel surface (a fused reading OR a hold-open verdict, never a silent average).
   // Cheap + graceful: until the peer salience sidecars fill, it reports the honest no-coupling.
@@ -44,19 +49,22 @@ function cmdStatusPalaces(args: ParsedArgs): number {
   emit(args, {
     ok: true,
     data: {
-      palaces: organs, allHealthy,
+      palaces: organs, allHealthy, guest,
       ...(coupling ? { coupling: { sensorium: coupling.sensorium, readable: coupling.readable, sharedUnits: coupling.sharedUnits, verdict: coupling.fusion?.verdict ?? null, note: coupling.note } } : {}),
     },
     human: () => {
-      console.log("lares status — palace organs");
+      console.log("lares status — palace organs (sovereign)");
       for (const o of organs) {
         console.log(`  ${o.healthy ? "ok     " : "ABSENT "} ${o.name.padEnd(22)} ${o.dir}`);
       }
+      console.log("\n  guest (not an organ — the vessel never boots into it)");
+      console.log(`  ${guest.healthy ? "ok     " : "absent "} ${guest.name.padEnd(22)} ${guest.dir}`);
       if (coupling) {
         const verdict = coupling.fusion ? coupling.fusion.verdict : "insufficient";
         console.log(`\n  coupling (${coupling.sensorium}): ${verdict} — ${coupling.note}`);
       }
       if (!allHealthy) console.log("\n  → stand up absent organs:  lares wake --init");
+      if (!guest.healthy) console.log("  → raise the guest sidecar: lares mempalace setup");
     },
   });
   return 0;
