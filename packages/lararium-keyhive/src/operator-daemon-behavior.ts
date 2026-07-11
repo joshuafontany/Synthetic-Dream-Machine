@@ -62,17 +62,20 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // gated, the `lares act` front door. The daemon reaches a deep target bag by
       // ACCESS (ephemeral mount, released after — no standing system-bag mount; the
       // edit/action split, wiki-layer-ontology#write-law).
+      // A new bag is born WITH its cap: register its Keyhive Document + delegate
+      // admin to the operator's PersonaGroup, in the same act as the mint (the
+      // resolveOrMintBinding sequence). Shared by CREATE and wiki init — a mint
+      // that only writes a catalog entry leaves the bag cap-denied until restart.
+      // `kh` binds late — booted before dispatch.
+      const registerBagCap = async (bagDocUrl: string): Promise<void> => {
+        if (!kh) throw new Error("mint: keyhive unbooted — cannot register the new bag's cap");
+        await kh.registerBag(bagDocUrl);
+        await kh.delegate({ bagUrl: bagDocUrl, audience: daemonAuth.personaGroupAgentIdHex, access: "admin" });
+      };
       registerActionReactors(registry, {
         composite: ctx.composite,
         reach: { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl },
-        // CREATE mints a bag WITH its cap: register its Keyhive Document + delegate
-        // admin to the operator's PersonaGroup, in the same act as the mint (the
-        // resolveOrMintBinding sequence). `kh` binds late — booted before dispatch.
-        registerBag: async (bagDocUrl) => {
-          if (!kh) throw new Error("CREATE: keyhive unbooted — cannot mint the new bag's cap");
-          await kh.registerBag(bagDocUrl);
-          await kh.delegate({ bagUrl: bagDocUrl, audience: daemonAuth.personaGroupAgentIdHex, access: "admin" });
-        },
+        registerBag: registerBagCap,
         // LOAD lands every legal TW5 filetype via TW5's own deserializer registry,
         // resolved lazily through the daemon island's live $tw at action time.
         tw5: makeTw5Deserializer(ctx.tw5),
@@ -107,6 +110,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           catalog,
           rootDir:     "",
           operatorDid: async () => "0x" + daemonAuth.operatorVerifyingKey,
+          registerBag: registerBagCap,
         };
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
         registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog, post: ctx.post }));

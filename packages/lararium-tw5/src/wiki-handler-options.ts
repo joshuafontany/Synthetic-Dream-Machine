@@ -27,6 +27,13 @@ export interface WikiMintHandlerOptions {
   readonly catalog:     CatalogAccessor;
   readonly operatorDid: () => Promise<string> | string;
   readonly rootDir:     string;
+  /**
+   * Register a freshly-minted wiki bag's Keyhive Document + delegate admin —
+   * called for each new canon/draft doc in the same act as the mint, so a new
+   * wiki's bags are born WITH their cap (no cap-denied window). Opaque: the
+   * keyhive-holding daemon supplies it; tw5 stays keyhive-free.
+   */
+  readonly registerBag?: (bagDocUrl: string) => Promise<void>;
 }
 
 /** prune-stale additionally reads the operator's draft oracle off the daemon

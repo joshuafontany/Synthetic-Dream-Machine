@@ -87,6 +87,13 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
       }, "lares-cli:wiki-init");
     });
 
+    // Born-with-its-cap: register each freshly-minted wiki bag's Keyhive Document
+    // + delegate admin in the same act as the mint, so the new wiki's canon and
+    // draft bags hold their cap immediately — no cap-denied window (the @elyncia
+    // friction's sibling for wiki init).
+    if (!existingWikiUrl)  await opts.registerBag?.(wikiHandle.url);
+    if (!existingDraftUrl) await opts.registerBag?.(draftHandle.url);
+
     return {
       slug,
       status: existingWikiUrl ? "completed-partial" : "minted",
