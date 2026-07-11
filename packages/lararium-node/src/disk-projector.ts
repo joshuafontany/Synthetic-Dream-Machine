@@ -193,15 +193,17 @@ export class LarDiskProjector {
    * Level-triggered reconcile of ONE carrier root against the settled VM state
    * (the projector's authoritative view, per VM-Primacy). Live (a `bag` field
    * naming a mirror) → flush that owner (render + write + cross-mirror cleanup).
-   * Gone → unlink from every mirror (a true delete; a MOVE shows its new owner
-   * here, the add having merged within the debounce). Idempotent: a later nudge
-   * re-reconciles, so a transient "gone" self-heals when the destination lands —
-   * the destructive unlink can never be the final word for a live carrier.
+   * Gone from the resolved view → unlink from every mirror whose bag no longer
+   * holds it (a true delete; a bag still holding the carrier keeps its file). A
+   * MOVE shows its new owner here, the add having merged within the debounce.
+   * Idempotent: a later nudge re-reconciles, so a transient "gone" self-heals
+   * when the destination lands — the unlink can never be the final word for a
+   * carrier a bag still holds.
    */
   private async reconcile(rootUri: string): Promise<void> {
     const tiddler = this._tw5?.$tw.wiki.getTiddler?.(rootUri);
     if (!tiddler) {
-      this._scheduleUnlinkByTitle(rootUri);
+      await this._scheduleUnlinkByTitle(rootUri);
       return;
     }
     const fields = tiddler.fields as Record<string, string | string[] | undefined>;
@@ -211,9 +213,14 @@ export class LarDiskProjector {
     await this.flush(bagId, rootUri);
   }
 
-  /** Unlink by trying all mirrors whose path strategy resolves the URI. */
-  private _scheduleUnlinkByTitle(title: string): void {
+  /** Unlink by trying all mirrors whose path strategy resolves the URI — but a
+   *  mirror whose bag STILL HOLDS the carrier keeps its file (a carrier hidden
+   *  from the resolved view by a shadowing tombstone still lives in its lower
+   *  bag; each mirror reflects its OWN bag's content, never the resolved view). */
+  private async _scheduleUnlinkByTitle(title: string): Promise<void> {
+    const holdingBags = this.bagsHolding ? new Set(await this.bagsHolding(title)) : null;
     for (const mirror of this.mirrors) {
+      if (holdingBags?.has(mirror.bagId)) continue;
       const relPath = mirror.toRelPath(title);
       if (!relPath) continue;
       const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
