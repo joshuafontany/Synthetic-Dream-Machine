@@ -7,6 +7,7 @@ file-path     = "bags/@lares/api/pono/memetic-wikitext.mem"
 l-space       = "stable"
 mana          = 19
 manao         = 19
+manaoio       = 17
 namespace     = "&#x2299;"
 register      = "SC"
 retain        = true
