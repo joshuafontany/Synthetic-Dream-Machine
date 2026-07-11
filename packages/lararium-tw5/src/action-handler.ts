@@ -98,6 +98,14 @@ export interface ActionHandlerOptions {
    * composite-only (the wiki island, which holds its own write layer).
    */
   readonly reach?: { repo: Repo; catalogUrl: string | null; oracleUrl: string | null };
+  /**
+   * Register a freshly-minted bag's Keyhive Document + delegate admin to the
+   * operator — called by CREATE in the SAME act as the mint, so a new bag is
+   * born WITH its cap (designation + authority together, never split). Opaque:
+   * the keyhive-holding daemon supplies it; tw5 stays keyhive-free. Absent (a
+   * no-reach wiki island, tests) → the mint writes the catalog entry alone.
+   */
+  readonly registerBag?: (bagDocUrl: string) => Promise<void>;
 }
 
 /**
@@ -366,6 +374,11 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
       const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       tiddlers[action.bag] = mutableLarRecord(action.bag, { text: docUrl, kind: "oracle" }, "lares-verb:CREATE");
     });
+    // Born-with-its-cap: register the new bag's Keyhive Document + delegate admin
+    // in the SAME act as the mint. Without it the bag holds a catalog entry
+    // (designation) but no cap (authority) — a follow-up write cap-denies until a
+    // restart re-registers it (the @elyncia seed friction).
+    await opts.registerBag?.(docUrl);
     return { bag: action.bag, plane: action.plane, docUrl, count: 1 };
   });
 }

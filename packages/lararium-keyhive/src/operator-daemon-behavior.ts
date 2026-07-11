@@ -65,6 +65,14 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       registerActionReactors(registry, {
         composite: ctx.composite,
         reach: { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl },
+        // CREATE mints a bag WITH its cap: register its Keyhive Document + delegate
+        // admin to the operator's PersonaGroup, in the same act as the mint (the
+        // resolveOrMintBinding sequence). `kh` binds late — booted before dispatch.
+        registerBag: async (bagDocUrl) => {
+          if (!kh) throw new Error("CREATE: keyhive unbooted — cannot mint the new bag's cap");
+          await kh.registerBag(bagDocUrl);
+          await kh.delegate({ bagUrl: bagDocUrl, audience: daemonAuth.personaGroupAgentIdHex, access: "admin" });
+        },
         // LOAD lands every legal TW5 filetype via TW5's own deserializer registry,
         // resolved lazily through the daemon island's live $tw at action time.
         tw5: makeTw5Deserializer(ctx.tw5),
