@@ -56,6 +56,7 @@ from __future__ import annotations
 import argparse
 import os
 import sqlite3
+from contextlib import contextmanager
 
 from sidecar_caps import (
     canonical_path,
@@ -93,7 +94,21 @@ class WorldlineStore:
 
     def __init__(self, palace_path: str) -> None:
         os.makedirs(os.path.expanduser(palace_path), exist_ok=True)
-        self._conn = sqlite3.connect(_db_path(palace_path))
+        # MULTI-WRITER HARDENING. The `serve` path takes a per-palace flock singleton
+        # (sidecar_caps.acquire_serve_lock), so through the sidecar there is exactly one writer. But
+        # capture_session.py constructs this store DIRECTLY, in-process, bypassing the sidecar — so
+        # N concurrent harness sessions put N processes on this one file. Default sqlite settings
+        # (rollback journal, implicit transactions) turn `add_edge`'s check-then-insert guards into
+        # a TOCTOU race: two writers each pass the cycle- and fork-guards, then both INSERT, and the
+        # lineage is silently malformed. Not file corruption — worse, because it reads as valid.
+        #
+        # WAL lets readers run while a writer holds the file; `busy_timeout` makes a blocked writer
+        # WAIT rather than raise `database is locked`; `isolation_level=None` hands transaction
+        # control to us so the guards and their INSERT can ride ONE `BEGIN IMMEDIATE` (see `_write`).
+        self._conn = sqlite3.connect(_db_path(palace_path), timeout=30.0, isolation_level=None)
+        self._conn.execute("PRAGMA journal_mode=WAL")
+        self._conn.execute("PRAGMA busy_timeout=30000")
+        self._conn.execute("PRAGMA synchronous=NORMAL")   # WAL-safe; fsync per checkpoint, not per commit
         self._conn.execute(
             "CREATE TABLE IF NOT EXISTS worldline_edges ("
             "  id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -116,7 +131,27 @@ class WorldlineStore:
         self._conn.execute("CREATE INDEX IF NOT EXISTS ix_edges_frm ON worldline_edges(frm)")
         self._conn.execute("CREATE INDEX IF NOT EXISTS ix_edges_to ON worldline_edges(to_node)")
         self._conn.execute("CREATE INDEX IF NOT EXISTS ix_kapae_turn ON worldline_kapae(turn_key)")
-        self._conn.commit()
+        # (isolation_level=None → each statement above autocommits; no explicit commit needed.)
+
+    @contextmanager
+    def _write(self):
+        """One ATOMIC write transaction, serialized against every other writer on this file.
+
+        `BEGIN IMMEDIATE` takes sqlite's RESERVED lock at the START of the transaction rather than
+        lazily on first write. That is the whole point: the guard SELECTs inside a write block then
+        see a frozen file, so no other process can slip an INSERT between a guard and its INSERT.
+        Without it, `add_edge`'s cycle- and fork-guards are check-then-act and race under N sessions.
+
+        A concurrent writer blocks up to `busy_timeout` and then proceeds — it does not raise.
+        """
+        self._conn.execute("BEGIN IMMEDIATE")
+        try:
+            yield
+        except BaseException:
+            self._conn.execute("ROLLBACK")
+            raise
+        else:
+            self._conn.execute("COMMIT")
 
     # -- structure: add the rhizome edges (SINK-idempotent, kg_io's add-idiom) --------------
 
@@ -155,28 +190,33 @@ class WorldlineStore:
             raise ValueError("add_edge: frm and to_node required")
         if relation not in (REL_FORK, REL_LINEAR, REL_JOIN):
             raise ValueError(f"add_edge: unknown relation {relation!r}")
-        if relation in _SPAWN_TREE and self._would_cycle(frm, to_node):
-            return {"added": False, "cycle": True, "frm": frm, "to": to_node, "relation": relation}
-        if relation == REL_FORK:
-            other = self._conn.execute(
-                "SELECT frm FROM worldline_edges WHERE to_node=? AND relation=? AND valid_to IS NULL "
-                "AND frm<>? LIMIT 1",
-                (to_node, REL_FORK, frm),
+        # ATOMICITY: both guards READ the whole edge set, then we INSERT. Split across transactions
+        # that is check-then-act, and two concurrent sessions each pass a guard the other is about to
+        # invalidate. Inside ONE `BEGIN IMMEDIATE`, the guards read a file no one else can write —
+        # so a guard that passes STAYS passed until the INSERT lands. This is what makes the cycle-
+        # and fork-guards true invariants rather than hopeful ones.
+        with self._write():
+            if relation in _SPAWN_TREE and self._would_cycle(frm, to_node):
+                return {"added": False, "cycle": True, "frm": frm, "to": to_node, "relation": relation}
+            if relation == REL_FORK:
+                other = self._conn.execute(
+                    "SELECT frm FROM worldline_edges WHERE to_node=? AND relation=? AND valid_to IS NULL "
+                    "AND frm<>? LIMIT 1",
+                    (to_node, REL_FORK, frm),
+                ).fetchone()
+                if other:
+                    return {"added": False, "fork_conflict": True, "frm": frm, "to": to_node,
+                            "relation": relation, "held_parent": other[0]}
+            existing = self._conn.execute(
+                "SELECT 1 FROM worldline_edges WHERE frm=? AND to_node=? AND relation=? AND valid_from IS ?",
+                (frm, to_node, relation, tick),
             ).fetchone()
-            if other:
-                return {"added": False, "fork_conflict": True, "frm": frm, "to": to_node,
-                        "relation": relation, "held_parent": other[0]}
-        existing = self._conn.execute(
-            "SELECT 1 FROM worldline_edges WHERE frm=? AND to_node=? AND relation=? AND valid_from IS ?",
-            (frm, to_node, relation, tick),
-        ).fetchone()
-        if existing:
-            return {"added": False, "frm": frm, "to": to_node, "relation": relation}
-        self._conn.execute(
-            "INSERT INTO worldline_edges (frm, to_node, relation, valid_from, valid_to) VALUES (?,?,?,?,NULL)",
-            (frm, to_node, relation, tick),
-        )
-        self._conn.commit()
+            if existing:
+                return {"added": False, "frm": frm, "to": to_node, "relation": relation}
+            self._conn.execute(
+                "INSERT INTO worldline_edges (frm, to_node, relation, valid_from, valid_to) VALUES (?,?,?,?,NULL)",
+                (frm, to_node, relation, tick),
+            )
         return {"added": True, "frm": frm, "to": to_node, "relation": relation}
 
     def fork(self, parent: str, child: str, tick) -> dict:
@@ -191,13 +231,19 @@ class WorldlineStore:
         """HANDBACK — the twin-reunion: add the JOIN edge (child->parent, the parent stands after
         the child) AND CLOSE the still-open fork interval (bitemporal valid_to; move-not-delete —
         the fork row stays, only its interval closes). Idempotent: a re-handback closes nothing new."""
+        # TWO transactions, not one: `add_edge` opens its own `BEGIN IMMEDIATE`, and sqlite does not
+        # nest. Each leg is individually atomic and BOTH are idempotent, so a crash between them
+        # leaves a join added with the fork still open — and a re-handback closes it. The interval
+        # never tears; it can only lag, and the re-run is the cure (the same crash-cure discipline
+        # the rest of the capture wire carries).
         join = self.add_edge(child, parent, REL_JOIN, tick)
-        cur = self._conn.execute(
-            "UPDATE worldline_edges SET valid_to=? WHERE frm=? AND to_node=? AND relation=? AND valid_to IS NULL",
-            (tick, parent, child, REL_FORK),
-        )
-        self._conn.commit()
-        return {"join": join["added"], "fork_closed": cur.rowcount}
+        with self._write():
+            cur = self._conn.execute(
+                "UPDATE worldline_edges SET valid_to=? WHERE frm=? AND to_node=? AND relation=? AND valid_to IS NULL",
+                (tick, parent, child, REL_FORK),
+            )
+            closed = cur.rowcount
+        return {"join": join["added"], "fork_closed": closed}
 
     # -- reads: the bitemporal rhizome + the branch subtree + the ∥ verdict ------------------
 
@@ -341,11 +387,13 @@ class WorldlineStore:
         return {r[0] for r in rows if int(r[1]) == 1}
 
     def _log(self, branch_root: str, turn_keys, polarity: int, tick) -> None:
-        self._conn.executemany(
-            "INSERT INTO worldline_kapae (branch, turn_key, polarity, tick) VALUES (?,?,?,?)",
-            [(branch_root, tk, polarity, tick) for tk in turn_keys],
-        )
-        self._conn.commit()
+        # One transaction for the whole batch: a half-written mute cascade would leave a branch
+        # partly silenced, which reads as a real (wrong) state rather than a failed one.
+        with self._write():
+            self._conn.executemany(
+                "INSERT INTO worldline_kapae (branch, turn_key, polarity, tick) VALUES (?,?,?,?)",
+                [(branch_root, tk, polarity, tick) for tk in turn_keys],
+            )
 
     def kapae(self, branch_root: str, tick) -> list:
         """Mute the branch (root + spawn-tree subtree) — APPEND a polarity=1 row per turn-key
