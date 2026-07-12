@@ -49,6 +49,7 @@ import type { TW5Instance } from "./types/tiddlywiki.js";
 import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
 import { decideIngest } from "./ingest-gate.js";
+import { gradeOf } from "./meme-ast/diagnostics.js";
 import { decideDeletions } from "./delete-gate.js";
 
 /** Island default mass-delete brake when the wave carries no operator dial. */
@@ -523,12 +524,15 @@ async function executeIngest(action: IngestAction, access: BagAccess): Promise<R
       results.push({ uri, decision: "noop", reason: decision.reason });
       continue;
     }
+    // The gate grades what it recovered, so the operator hears about a carrier that landed degraded
+    // rather than only about one that got turned away.
+    const grade = gradeOf(decision.diagnostics);
     if (decision.kind === "refuse") {
-      results.push({ uri, decision: "refuse", warnings: [...decision.warnings] });
+      results.push({ uri, decision: "refuse", grade, warnings: [...decision.warnings] });
       continue;
     }
     if (decision.kind === "conflict") {
-      results.push({ uri, decision: "conflict" });
+      results.push({ uri, decision: "conflict", grade });
       continue;
     }
     const freshTitles = new Set<string>();
@@ -546,7 +550,7 @@ async function executeIngest(action: IngestAction, access: BagAccess): Promise<R
         tombstoned.push(t);
       }
     }
-    results.push({ uri, decision: "ingest", landed: freshTitles.size, tombstoned });
+    results.push({ uri, decision: "ingest", grade, landed: freshTitles.size, tombstoned });
   }
 
   // ── apply the deletion wave ──────────────────────────────────────────────
