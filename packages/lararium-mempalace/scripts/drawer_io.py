@@ -31,7 +31,22 @@ from mempalace.palace import get_collection
 # persistent serve sidecars). FORM_COLLECTION is the shared form-store name.
 from sidecar_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embeddings
 
-PALACE = os.path.expanduser("~/.mempalace/palace")
+"""The palace this process writes — set ONCE from `--palace`, never defaulted.
+
+It used to read `PALACE = os.path.expanduser("~/.mempalace/palace")`, hardcoded: no argument, no
+env override. So every `lar_*` writeback — `lares telemetry` (even routed THROUGH the @daemon),
+`lares harvest --writeback`, and every Stop hook — projected its metadata onto the GUEST comparator,
+while the content it described landed in the sovereign contentpalace. Two stores, one meaning,
+silently diverging.
+
+And after the guest is nuked, the hardcoded path does not fail loudly. It opens an EMPTY palace,
+matches nothing, updates nothing, and reports `applied: 0` as success — writing metadata onto
+drawers that no longer exist, forever, quietly. A default palace is not a convenience; it is a
+silent reach into whichever store happens to sit at the default.
+
+`_col()` raises when this stays unset, so a caller that forgot the argument fails LOUD.
+"""
+PALACE: "str | None" = None
 # Current harvest version — bump when the harvester's output shape changes, so a
 # re-harvest re-processes every drawer; unchanged, it skips already-done drawers.
 HARVEST_VERSION = 7  # bump in lockstep with LAR_HV in mesh/build-patch.ts (v7 = kapae convergence: lar_salience/lar_kapae/lar_frontier declared; the nuke-and-pave re-harvest re-stamps every drawer)
@@ -71,8 +86,20 @@ def _require_adapter() -> None:
         )
 
 
+def _palace() -> str:
+    """The palace, or a LOUD refusal. Never a fallback — an unnamed palace is how the writeback
+    silently found the guest, and how it would silently find nothing after the guest is paved."""
+    if not PALACE:
+        raise SystemExit(
+            "drawer_io: no palace named — pass `--palace <dir>`. This writes lar_* metadata onto "
+            "drawers; an unnamed palace would reach whichever store sits at a default, and after a "
+            "pave it would update nothing while reporting success."
+        )
+    return PALACE
+
+
 def _col():
-    return get_collection(PALACE, _skip_identity_check=True)
+    return get_collection(_palace(), _skip_identity_check=True)
 
 
 def cmd_export(args):
@@ -154,7 +181,7 @@ def cmd_form_embeddings(args):
     ⇒ the orchestrator degrades to the one CONTENT plane (N=1)."""
     out = sys.stdout
     try:
-        col = get_collection(PALACE, collection_name=FORM_COLLECTION, _skip_identity_check=True)
+        col = get_collection(_palace(), collection_name=FORM_COLLECTION, _skip_identity_check=True)
     except Exception as exc:  # noqa: BLE001 — no form store yet ⇒ 1-plane degrade
         sys.stderr.write(f"form-embeddings: no form collection ({type(exc).__name__}: {exc}) — 0 rows\n")
         return
@@ -304,6 +331,10 @@ def cmd_kapae(args):
 
 def main():
     ap = argparse.ArgumentParser(description="mempalace drawer I/O (boundary substrate side)")
+    # REQUIRED, never defaulted — see the PALACE note above. Every subcommand inherits it.
+    ap.add_argument("--palace", required=True,
+                    help="the palace dir this writes lar_* onto (no default: an unnamed palace "
+                         "silently reaches the guest, and silently no-ops after a pave)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     e = sub.add_parser("export")
     e.add_argument("--wing", required=True)
@@ -326,6 +357,8 @@ def main():
     k.add_argument("--salience", type=float, default=None, help=f"floor salience (default {KAPAE_FLOOR_SALIENCE})")
     k.set_defaults(fn=cmd_kapae)
     args = ap.parse_args()
+    global PALACE
+    PALACE = args.palace
     args.fn(args)
 
 

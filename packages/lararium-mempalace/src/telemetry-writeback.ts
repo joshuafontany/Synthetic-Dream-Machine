@@ -27,6 +27,7 @@ export { buildPatch, LAR_HV };
 import { repoRoot } from "@lararium/mesh/node";
 import { isoWholeSeconds } from "./worldline-kg.js";
 import { resolveMempalacePython } from "./spawn-resolve.js";
+import { memorySensoriumContentDir } from "./xdg-base.js";
 import { resolveComputeCapEnv } from "./compute-cap.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
@@ -67,8 +68,13 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   // HARD-fails to import onnxruntime-gpu without the CUDA runtime libs on LD_LIBRARY_PATH. Cap absent
   // (the QA box) ⇒ only the device hint rides and the embedder degrades to CPU. (Restart-safety P0.)
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(PY) };
+  // NAME the palace. drawer_io used to hardcode `~/.mempalace/palace`, so every lar_* writeback —
+  // even the one routed through the @daemon — stamped its metadata onto the GUEST while the content
+  // it described landed in the sovereign contentpalace: two stores, one meaning, silently diverging.
+  // The telemetry describes the drawers the capture path WROTE, so it writes where they LIVE.
+  const palace = memorySensoriumContentDir();
   const limit = opts.limit ?? 0;
-  const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
+  const exportArgs = ["--palace", palace, "export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
   // drawer_io export had NO timeout — the confirmed 9 h-stuck source. The servo bounds it: an
   // adaptive `timeout` + SIGKILL kills a wedged export ≤ CEIL and surfaces it (MineHangError),
   // and learns each export's real duration so a normal-but-slow run is never false-killed.
@@ -102,7 +108,7 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
     writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
     try {
       const applyOut = mineWithServo("drawer-io-apply", (timeoutMs) =>
-        execFileSync(PY, [DRAWER_IO, "apply", pf], {
+        execFileSync(PY, [DRAWER_IO, "--palace", palace, "apply", pf], {
           cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
           timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
         }),
@@ -124,7 +130,8 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
  * ONE `ended` across all three kapae legs so every trace of a rewind carries the same moment.
  * Best-effort: an absent python substrate is reported, never thrown (the rewind stays
  * unreconciled this run, re-derivable). Returns the count stamped, or `null` when the substrate is
- * absent. drawer_io targets the canonical palace (the same default as the apply/export legs).
+ * absent. The palace is NAMED (never defaulted) — the kapae stamp must land on the drawers the
+ * capture path actually wrote, which live in the sovereign contentpalace, not the guest comparator.
  */
 export function stampKapaeSalience(verbatimShas: readonly string[], ended?: string): { stamped: number } | null {
   if (verbatimShas.length === 0) return { stamped: 0 };
@@ -132,13 +139,14 @@ export function stampKapaeSalience(verbatimShas: readonly string[], ended?: stri
   if (!PY) return null;
   const DRAWER_IO = resolveDrawerIo();
   if (!existsSync(DRAWER_IO)) return null;
+  const palace = memorySensoriumContentDir();
   const endedIso = isoWholeSeconds(ended ?? new Date().toISOString());
   const submoduleRoot = join(repoRoot, "mempalace");
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(PY) };
   const pf = join(tmpdir(), `lar-kapae-salience-${process.pid}-${Date.now()}.ndjson`);
   writeFileSync(pf, verbatimShas.map((s) => JSON.stringify({ verbatim_sha: s, ended: endedIso })).join("\n") + "\n");
   try {
-    const out = execFileSync(PY, [DRAWER_IO, "kapae", pf], {
+    const out = execFileSync(PY, [DRAWER_IO, "--palace", palace, "kapae", pf], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 28, encoding: "utf8",
     });
     try { return { stamped: (JSON.parse(out.trim()) as { stamped: number }).stamped }; } catch { return { stamped: verbatimShas.length }; }

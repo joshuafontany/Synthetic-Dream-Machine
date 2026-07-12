@@ -466,12 +466,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // 20Hz tick + the self-regulating two-loop); it stays inert until a FEED sends
       // telemetry:place-verb. role = capability ≠ platform — node supplies the mempalace sink.
       telemetry: {
-        // The palace is the chroma dir ~/.mempalace/palace (config palace_path), NOT the parent
-        // ~/.mempalace — passing the parent targets a phantom second palace. MEMPALACE_PALACE_PATH
-        // overrides for a custom config. resolvePalacePath() CANONICALIZES it (realpath/normalize)
-        // so one physical palace = one spelling = one write-daemon (the pile-up cure); takes effect
-        // on this @daemon's NEXT restart, never racing a live daemon under an old spelling.
-        palacePath:     resolvePalacePath(),
+        // The SOVEREIGN content plane — never `resolvePalacePath()`, which names the GUEST
+        // ~/.mempalace. Nothing in the caller-vector path reads this any more (the engine lands
+        // through content_io), so feeding it the guest only armed the subprocess-mine fallback: one
+        // config-flip from silently re-writing the comparator. That fallback now REFUSES
+        // (node-capture-engine), and this names the plane the turns actually land in, so the two
+        // agree even if the branch is ever re-opened. The RUN never writes the comparator.
+        palacePath:     larContentDir(),
         // TRANSIENT flush batches → tmpfs (XDG_RUNTIME_DIR): write→mine→rm, never need to survive a
         // reboot. The DURABLE layer (WAL + quarantine) stays on disk — that's the crash-replay seam.
         spoolDir:       join(larRuntimeDir(), "capture-nalu"),

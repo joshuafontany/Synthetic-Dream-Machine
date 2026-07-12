@@ -281,6 +281,11 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     baseFlush = makeCallerVectorFlush(embed, content, meta);
     disposeCaps = async () => { await embed.close(); await content.close(); if (meta) await meta.close(); };
   } else {
+    // The legacy subprocess mine. Still reachable (the WAL/annotate/tick machinery rides it), but it
+    // can no longer land in the guest: `makeSubprocessFlush` REFUSES a comparator palace at the
+    // resource, so the ward holds for every caller rather than for whichever call site remembered.
+    // The vessel now passes the sovereign plane (open-node-vessel), so this branch is inert in
+    // production anyway — the caller-vector sink above is what runs.
     baseFlush = makeSubprocessFlush({
       spoolDir: opts.spoolDir,
       palacePath: opts.palacePath,

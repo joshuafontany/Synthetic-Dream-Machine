@@ -48,5 +48,15 @@ export function mempalaceContentParent(): string {
  * import cycle — the same reason {@link larDataHome} lives here.
  */
 export function memorySensoriumContentDir(): string {
-  return join(larDataHome(), "sensoriums", "memory", "content");
+  return join(memorySensoriumDir(), "content");
+}
+
+/**
+ * The `memory` sensorium root — `<data>/sensoriums/memory`. Home to the li planes AND to the
+ * worldline stores (the KG + the fork-DAG). The KG used to live INSIDE the guest
+ * (`~/.mempalace/palace/knowledge_graph.sqlite3`), so the spirit-lineage observer wrote the
+ * comparator on every harvest, and a pave of the guest would have destroyed the whole worldline.
+ */
+export function memorySensoriumDir(): string {
+  return join(larDataHome(), "sensoriums", "memory");
 }

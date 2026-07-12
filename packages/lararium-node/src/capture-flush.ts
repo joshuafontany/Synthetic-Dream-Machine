@@ -12,7 +12,8 @@
 
 import { execFile } from "node:child_process";
 import { mkdir, rm, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join, sep } from "node:path";
+import { homedir } from "node:os";
 import { promisify } from "node:util";
 
 import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
@@ -38,6 +39,31 @@ export interface SubprocessFlushOptions {
 }
 
 /**
+ * THE COMPARATOR WARD — refuse to mine into the guest `~/.mempalace`, whoever asks.
+ *
+ * The guest is the clean baseline the sensorium measures itself against; a comparator the RUN has
+ * written carries no information. Canon: the RUN never writes the comparator. This lives at the
+ * RESOURCE rather than at the call sites, because it only takes one call site forgetting — and one
+ * already did: the vessel fed this flush `resolvePalacePath()` (the guest) for its whole life, armed
+ * and one config-flip from live. A ward each caller must remember is a ward that fails.
+ *
+ * Honors `MEMPALACE_PALACE_PATH` (upstream's own relocation lever), so a relocated guest is still
+ * refused, and a genuine sovereign/tmp palace still passes.
+ */
+function refuseComparator(palacePath: string): void {
+  const guest = canonicalPalacePath(
+    process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace"),
+  );
+  if (palacePath === guest || palacePath.startsWith(guest + sep)) {
+    throw new Error(
+      `capture-flush: refusing to mine into the comparator (${palacePath}). ~/.mempalace is the ` +
+      "clean baseline the sensorium is measured against — the RUN never writes it. Point the capture " +
+      "sink at the sovereign content plane.",
+    );
+  }
+}
+
+/**
  * Build node's `CaptureFlush`: serialize → spawn the source-adapter flush → parse
  * `Drawers filed: N` → delete the transient file. THROWS on a failed/timed-out flush so
  * CaptureNalu re-queues; the in-memory queue stays the source of truth, so nothing lingers
@@ -53,6 +79,7 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
   // symlinked / `..` / relative spelling otherwise keys a SECOND daemon → lock
   // starve). Resolved once at construction (the path is stable for the cap's life).
   const palacePath = canonicalPalacePath(opts.palacePath);
+  refuseComparator(palacePath);
   let seq = 0;
 
   return async (batch: readonly CaptureRecord[]): Promise<number> => {

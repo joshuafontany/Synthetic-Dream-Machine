@@ -24,7 +24,7 @@ import { repoRoot } from "@lararium/mesh/node";
 import { rewindThenFork, type WorldlineEdgeTriple, type WorldlineEdgeClose, type RewindThenForkResult } from "@lararium/mesh";
 import { resolveMempalacePython } from "./spawn-resolve.js";
 import { resolveComputeCapEnv } from "./compute-cap.js";
-import { resolvePalacePath } from "./palace-path.js";
+import { memorySensoriumDir } from "./xdg-base.js";
 
 /** Raised when python / `kg_io.py` are absent — the caller renders a clean error. */
 export class KgUnavailable extends Error {}
@@ -83,7 +83,17 @@ function resolve(opts: WorldlineKgOptions): Resolved {
   if (!py) throw new KgUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
   const script = opts.script ?? resolveKgIo();
   if (!existsSync(script)) throw new KgUnavailable(`kg_io.py missing at ${script}`);
-  return { py, script, submoduleRoot: join(repoRoot, "mempalace"), palace: opts.palacePath ?? resolvePalacePath(), exec };
+  // The KG lands SOVEREIGN — `<memory>/knowledge_graph.sqlite3`, beside the fork-DAG's own
+  // `.worldline/worldline.sqlite3` — never `resolvePalacePath()`, which put it INSIDE the guest
+  // (`~/.mempalace/palace/knowledge_graph.sqlite3`). Two consequences of the old home, both bad:
+  // the spirit-lineage observer WROTE the comparator on every harvest (the RUN must never touch it),
+  // and a pave of the guest would have taken the whole worldline KG down with it — 525 entities,
+  // 532 triples, sitting in the belly of the store we wipe to get a clean baseline.
+  //
+  // NOTE (a held question, not settled here): this leaves TWO worldline stores — this KG (what
+  // `lares worldline` reads) and `worldline.sqlite3` (what capture writes). Both are sovereign now,
+  // so the pave is safe; WHICH one is canon is a floor still owed.
+  return { py, script, submoduleRoot: join(repoRoot, "mempalace"), palace: opts.palacePath ?? memorySensoriumDir(), exec };
 }
 
 /** Write NDJSON records to a pid-unique temp file, run kg_io.py, ALWAYS remove the temp. */

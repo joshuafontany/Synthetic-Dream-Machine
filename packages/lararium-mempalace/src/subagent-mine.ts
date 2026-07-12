@@ -190,31 +190,18 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, op
     mkdirSync(stage, { recursive: true });
     const spool = join(stage, `spirit-${agentId}.ndjson`);
     try { writeFileSync(spool, records.join("\n") + "\n", "utf8"); } catch { mined.push({ name, agentId, drawers: "spool-failed" }); continue; }
-    let drawers: number | string = 0;
-    try {
-      // --daemon HANDS OFF to the write-daemon's single palace handle (the seam) — the subagents
-      // leg was the confirmed racer that grabbed the lock and blocked the telemetry-nalu flush.
-      // Every writer through the seam = nothing races. (`mine --source ndjson --daemon` is the
-      // exact invocation the @daemon capture flush spawns — capture-flush.ts.)
-      // --palace passes the CANONICAL spelling (realpath/normalize) so this leg addresses the SAME
-      // write-daemon singleton as the capture flush — without it, mempalace's own default resolution
-      // can key a SECOND daemon for the same physical palace (the pile-up root).
-      // A palace-lock BUSY signal (the daemon flush or a concurrent backfill holds it) WAITS+retries
-      // via the shared backoff — it must not collapse to "mine-failed". A REAL error (after the
-      // retries run out, or any non-busy fault) still falls to the honest "mine-failed" below.
-      // execFileSync had NO timeout — a wedged mine blocked indefinitely (the 9 h-stuck class).
-      // The servo gives each attempt an adaptive `timeout` + SIGKILL: a hang dies ≤ CEIL and
-      // surfaces (caught below as "mine-failed"), while a BUSY lock still WAITS+retries.
-      const out = mineWithServo("subagent-mine", (timeoutMs) =>
-        execFileSync(
-          mpExe,
-          ["--palace", resolvePalacePath(), "mine", "--source", "ndjson", "--daemon", spool],
-          { maxBuffer: 1 << 30, encoding: "utf8", timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL },
-        ),
-      );
-      drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
-    } catch { drawers = "mine-failed"; }
-    mined.push({ name, agentId, drawers });
+
+    // NO DIRECT MINE. This leg used to fall back to
+    //   `mempalace --palace <guest> mine --source ndjson --daemon <spool>`
+    // whenever the @daemon capture leg came up empty — a raw verbatim mine straight into the GUEST
+    // comparator. `cmdCapture` deleted exactly this fallback when the single-path invariant landed;
+    // the spirits leg never got the same cut, so every daemon-down Stop hook quietly re-seeded the
+    // store we measure ourselves against. The RUN never writes the comparator.
+    //
+    // SUSPENDED, not lost: the spool stays staged, the transcript stays on disk, and the capture path
+    // is idempotent on cid — the next run re-derives this spirit's turns through the daemon and lands
+    // them in the sovereign plane. Crash-safety by RE-DERIVATION, never by a second write-target.
+    mined.push({ name, agentId, drawers: "suspended-no-daemon" });
   }
   return { spirits: mined.length, wing: sw, mined };
 }

@@ -316,28 +316,12 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
 // the harvest. The orchestration core lives in @lararium/mempalace (unit-tested); here we wire the
 // real commands. The MCP's stale handle re-opens out-of-band (harness respawn + mempalace_reconnect).
 
-/** Wire the real mempalace commands into the divergence-gated rebuild core. */
-function runHnswRepairTail(): Promise<HnswRepairResult> {
-  const palace = resolvePalacePath();
-  // The resource (FD-based) quiesce — NEVER `pkill -f <pattern>` (it self-matches the caller's own
-  // command line). `fuser` lists the PIDs holding the palace; `xargs -r` no-ops when none do.
-  const palaceMount = dirname(palace); // ~/.mempalace (honors MEMPALACE_PALACE_PATH overrides too)
-  return repairHnswIfDiverged({
-    checkStatus: async () =>
-      execFileSync(MP, ["--palace", palace, "repair-status"], { maxBuffer: 1 << 28, encoding: "utf8" }),
-    quiesce: async () => {
-      try {
-        execSync(`fuser ${JSON.stringify(palaceMount)} 2>/dev/null | xargs -r kill -TERM`, { stdio: "ignore" });
-      } catch { /* no holders (or fuser absent) — nothing to drop */ }
-    },
-    repair: async () => {
-      execFileSync(MP, ["--palace", palace, "repair", "--mode", "from-sqlite", "--archive-existing", "--yes"], {
-        maxBuffer: 1 << 28,
-        encoding: "utf8",
-      });
-    },
-  });
-}
+// The guest HNSW-repair tail is CUT (it had zero callers and sat armed): it ran
+//   `mempalace --palace <guest> repair --mode from-sqlite --archive-existing --yes`
+// — a WRITE to ~/.mempalace — plus `fuser ~/.mempalace | xargs kill -TERM`, a SIGTERM against
+// whatever held the comparator's mount. The RUN never writes the comparator. All telemetry now
+// flows through the @daemon to the SOVEREIGN sensorium, so there is nothing of ours in the guest
+// to repair. (The sovereign store's index health rides content_io's own chroma upsert.)
 
 /** Render the repair-tail outcome as one TTY line (the JSON rides in the command's `data`). */
 function hnswRepairLine(r: HnswRepairResult): string {
@@ -870,8 +854,13 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     }
   }
 
-  // The repair tail — divergence-gated + idempotent (a no-op when the index is in sync).
-  const hnsw = dryRun ? null : await runHnswRepairTail();
+  // No repair tail. It ran `mempalace repair --archive-existing --yes` against the GUEST
+  // ~/.mempalace — a WRITE to the comparator — plus `fuser ~/.mempalace | kill -TERM` on its holders.
+  // Divergence-gated, so it usually skipped; but the gate READ the guest, and the moment it read
+  // diverged it rewrote the baseline we measure the sensorium against. `runHarvestAll` already
+  // declined this tail and left the reasoning inline; the single-transcript path never got the cut.
+  // The RUN never writes the comparator.
+  const hnsw = null;
   emit(args, {
     ok: true,
     data: { ...summary, dryRun, ...(ephemeralSkips.length ? { ephemeralSkipped: ephemeralSkips } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}), ...(kapae ? { kapae } : {}) },
@@ -883,7 +872,6 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
       if (!dryRun) console.log(`  index:        ${indexPath}`);
       if (kapae) console.log(`  rewind:       ${kapae.goneTurns} gone turn(s) → ${kapae.closed} worldline edge(s) + ${kapae.structurepalace} structurepalace tally(ies) set aside (kapae)`);
-      if (hnsw) console.log(hnswRepairLine(hnsw));
     },
   });
   return 0;
