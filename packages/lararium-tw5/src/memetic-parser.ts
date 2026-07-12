@@ -30,6 +30,9 @@ module-type: parser
  * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/memetic-parser
  */
 
+import type { MemeDiagnostic as ParseDiagnostic } from "./meme-ast/diagnostics.js";
+import type { ParseFailure as ParseFailureLike } from "./meme-ast/types.js";
+
 const RULES_CONFIG_TIDDLER = "lar:///ha.ka.ba/config/memetic-rules-except";
 
 const MEMETIC_TYPE = "text/x-memetic-wikitext";
@@ -55,24 +58,6 @@ interface ParserInstance {
   blockRules?:  RuleInstance[];
   inlineRules?: RuleInstance[];
   diagnostics?: ParseDiagnostic[];
-}
-
-/** The core parse-diagnostics contract: any parser populates it, and `[parse-diagnostics[]]` reads it. */
-interface ParseDiagnostic {
-  from:     number;
-  to:       number;
-  severity: "error" | "warning" | "info" | "hint";
-  source:   string;
-  code:     string;
-  message:  string;
-}
-
-interface ParseFailureLike {
-  pos:         number;
-  raw:         string;
-  reason:      string;
-  recoveredAs: "water" | "repaired" | "missing";
-  sigilName?:  string;
 }
 
 interface ParserPrototype {
@@ -163,13 +148,15 @@ function MemeticParser(this: ParserInstance, type: string, text: string, options
     this.inlineRules = this.inlineRules.filter((r) => !r.name || !denyList.has(r.name));
   }
 
-  // The meme-ast driver already recovers span-keyed; surfacing its failures on the core
-  // contract lets the filter operator, the render plane and the ingest gate read one channel.
+  // The superset law: the standard parser recovered first and left its receipts here, so the sigil
+  // recoveries append to them rather than overwriting them. A memetic carrier therefore reports an
+  // unclosed emphasis delimiter and an unplaceable sigil on one channel, graded on one ladder.
   const uri = (options as { _canonical_uri?: string } | undefined)?._canonical_uri ?? type;
+  const inherited = this.diagnostics ?? [];
   try {
-    this.diagnostics = diagnosticsFrom(uri, text ?? "");
+    this.diagnostics = [...inherited, ...diagnosticsFrom(uri, text ?? "")];
   } catch {
-    this.diagnostics = this.diagnostics ?? [];
+    this.diagnostics = inherited;
   }
 }
 MemeticParser.prototype = Object.create(stdParser.prototype as object) as ParserPrototype;

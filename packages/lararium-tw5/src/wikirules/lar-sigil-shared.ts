@@ -11,6 +11,7 @@
  */
 
 import type { GrammarRules } from "../meme-ast/types.js";
+import type { MemeDiagnostic } from "../meme-ast/diagnostics.js";
 
 export interface ParseTreeNode {
   readonly type:        string;
@@ -23,14 +24,7 @@ export interface WikiParser {
   source: string;
   pos:    number;
   /** The core parse-diagnostics hook: a rule surfaces a recovery it performed rather than swallowing it. */
-  addDiagnostic?: (diagnostic: {
-    from:     number;
-    to:       number;
-    severity: "error" | "warning" | "info" | "hint";
-    source?:  string;
-    code:     string;
-    message:  string;
-  }) => void;
+  addDiagnostic?: (diagnostic: MemeDiagnostic) => void;
 }
 
 export interface RuleInstance {

@@ -20,6 +20,8 @@ module-type: wikirule
  */
 
 import { getGrammar } from "../grammar-cache.js";
+import { severityOfRung } from "../meme-ast/diagnostics.js";
+import type { RecoveryRung } from "../meme-ast/diagnostics.js";
 import {
   ParseTreeNode,
   WikiParser,
@@ -174,7 +176,7 @@ export function parse(this: RuleInstance): ParseTreeNode[] {
     parser.addDiagnostic?.({
       from,
       to,
-      severity: grade === "water" ? "warning" : "info",
+      severity: severityOfRung(grade as RecoveryRung),
       source:   "text/x-memetic-wikitext",
       code:     `unrecognized-sigil-${grade}`,
       message:  `The sigil form recovered as ${grade}, and its text stands verbatim`,

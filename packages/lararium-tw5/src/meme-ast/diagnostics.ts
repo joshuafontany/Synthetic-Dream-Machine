@@ -41,9 +41,21 @@ const SEVERITY_RANK: Readonly<Record<DiagnosticSeverity, number>> = {
  * confidence. Only the first costs the author their meaning, so only the first reads as an error.
  */
 export function severityOf(failure: ParseFailure): DiagnosticSeverity {
-  switch (failure.recoveredAs) {
+  return severityOfRung(failure.recoveredAs);
+}
+
+/**
+ * The render plane grades a sigil it could not place as `water` (no word at all) or `partial`
+ * (a word it knows, in a shape it does not). Both keep the text, so both sit below `error`, and
+ * both read on the same ladder as the driver's rungs rather than on a second one beside it.
+ */
+export type RecoveryRung = ParseFailure["recoveredAs"] | "partial";
+
+export function severityOfRung(rung: RecoveryRung): DiagnosticSeverity {
+  switch (rung) {
     case "missing":  return "error";
     case "water":    return "warning";
+    case "partial":  return "info";
     case "repaired": return "info";
     default:         return "warning";
   }
