@@ -340,7 +340,7 @@ const COPILOT_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts"
 const COPILOT_SQLITE_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_sqlite_normalize.py");
 
 /** One discovered transcript: where it is, which wing it routes to, and whether it needs normalizing. */
-interface HarvestEntry {
+export interface HarvestEntry {
   readonly file: string;
   readonly wing: string;
   readonly normalize: boolean; // true → copilot events.jsonl → run copilot_normalize.py
@@ -395,7 +395,7 @@ function scrapeWing(file: string): string | null {
   return best ? `wing_${best.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "")}` : null;
 }
 
-function discoverClaude(): HarvestEntry[] {
+export function discoverClaude(): HarvestEntry[] {
   const root = join(homedir(), ".claude", "projects");
   const out: HarvestEntry[] = [];
   if (!existsSync(root)) return out;
@@ -412,7 +412,7 @@ function discoverClaude(): HarvestEntry[] {
   return out;
 }
 
-function discoverCodex(): HarvestEntry[] {
+export function discoverCodex(): HarvestEntry[] {
   // ~/.codex/sessions covers BOTH the Codex CLI and the VS Code ChatGPT extension
   // (originator:codex_vscode) — same store. mempalace parses rollouts natively.
   const out: HarvestEntry[] = [];
@@ -423,7 +423,7 @@ function discoverCodex(): HarvestEntry[] {
   return out;
 }
 
-function discoverCopilotVscode(): HarvestEntry[] {
+export function discoverCopilotVscode(): HarvestEntry[] {
   const home = homedir();
   const wsRoots = [
     join(home, ".vscode-server", "data", "User", "workspaceStorage"),
@@ -450,7 +450,7 @@ function discoverCopilotVscode(): HarvestEntry[] {
   return out;
 }
 
-function discoverCopilotCli(): HarvestEntry[] {
+export function discoverCopilotCli(): HarvestEntry[] {
   const out: HarvestEntry[] = [];
   // New format (CLI 1.0.6x): one global SQLite store. Export each session to a
   // Claude-shaped jsonl via the python helper (python owns the sqlite read);
@@ -485,7 +485,13 @@ function discoverCopilotCli(): HarvestEntry[] {
 
 interface WingHarvest {
   readonly wing: string;
+  /** Transcripts that actually STAGED — never the count found. A staging failure is invisible on the
+   *  next pass (the file simply is not there), so a count that folds in what it dropped reads as
+   *  success over an empty stage. */
   readonly transcripts: number;
+  /** Transcripts that did NOT stage, and why. Surfaced, never swallowed. */
+  readonly dropped?: number;
+  readonly droppedFiles?: ReadonlyArray<{ file: string; why: string }>;
   readonly sources: string;
   readonly mined: number | string;
   /** Claude sessions whose tasked-spirit transcripts got swept (→ `<wing>__spirits`). */
@@ -591,15 +597,31 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     // mempalace's source_file dedup keeps the mine idempotent across runs.
     const stage = join(stageRoot, wing);
     mkdirSync(stage, { recursive: true });
+    // A transcript that fails to stage is REPORTED, never swallowed. A staging error is silent by
+    // nature — the file simply is not there on the next pass — so a count that includes what it
+    // dropped reads as success over an empty stage. `staged` counts what actually landed; `dropped`
+    // names what did not, with the reason.
+    const dropped: Array<{ file: string; why: string }> = [];
+    let staged = 0;
     for (const e of es) {
       // surface-prefixed so the drawer's source_file → lar_surface in the writeback
       const dst = join(stage, `${e.source}__${e.stageName}`);
-      if (existsSync(dst)) continue;
-      if (e.normalize) {
-        try { writeFileSync(dst, execFileSync(PY, [COPILOT_NORM, e.file], { maxBuffer: 1 << 30, encoding: "utf8" })); } catch { /* skip */ }
-      } else {
-        try { linkSync(e.file, dst); } catch { try { copyFileSync(e.file, dst); } catch { /* skip */ } }
+      if (existsSync(dst)) { staged += 1; continue; }
+      try {
+        if (e.normalize) {
+          writeFileSync(dst, execFileSync(PY, [COPILOT_NORM, e.file], { maxBuffer: 1 << 30, encoding: "utf8" }));
+        } else {
+          try { linkSync(e.file, dst); } catch { copyFileSync(e.file, dst); }
+        }
+        staged += 1;
+      } catch (err) {
+        dropped.push({ file: e.file, why: err instanceof Error ? err.message.slice(0, 120) : String(err) });
       }
+    }
+    if (dropped.length > 0) {
+      console.warn(`[harvest] ${wing}: ${dropped.length} transcript(s) did NOT stage — they are absent from this mine:`);
+      for (const d of dropped.slice(0, 5)) console.warn(`  ✗ ${d.file}\n      ${d.why}`);
+      if (dropped.length > 5) console.warn(`  … ${dropped.length - 5} more`);
     }
     let mined: number | string;
     try {
@@ -642,7 +664,8 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       await holdMs(pacing.delayMs);
     }
     results.push({
-      wing, transcripts: es.length, sources, mined,
+      wing, transcripts: staged, sources, mined,
+      ...(dropped.length ? { dropped: dropped.length, droppedFiles: dropped } : {}),
       ...(spiritSessions ? { spiritSessions } : {}),
       ...(spiritSweep ? { spiritSweep } : {}),
       ...(pacing ? { pacing } : {}),

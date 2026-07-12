@@ -33,6 +33,7 @@ import { livePalaceProcs, fmtUptime, type PalaceProc, type ProcKind } from "../p
 import { hookPauseState, pauseHooks, resumeHooks } from "../hook-pause.js";
 import { portHolderPids } from "../port-control.js";
 import { larPort } from "../env.js";
+import { cmdMempalaceHarvest } from "./mempalace-harvest.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -288,6 +289,9 @@ function printHelp(): void {
   console.log("vessel never boots into it (`lares wake --init` stands only the sovereign sensorium).\n");
   console.log("Verbs:");
   console.log("  setup               raise the guest: `mempalace init` + pin hooks.auto_save=false (idempotent)");
+  console.log("  harvest [--wing w]  mine EVERY harness transcript into the guest through the vendored miner's");
+  console.log("                      OWN vanilla path — no lar_* metadata, no sensorium planes. The clean");
+  console.log("                      comparator. `--dry-run` enumerates without staging or mining.");
   console.log("  status              live topology: every daemon/sidecar/mine/hook-leg + its SPAWNER");
   console.log("  quiesce [--hold]    graceful stop-the-world: pause hooks → drain daemons → confirm zero");
   console.log("  resume              un-pause the hooks (the warm daemon re-spawns lazily on next use)");
@@ -305,6 +309,7 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
   };
   switch (verb) {
     case "setup":   return cmdSetup(inner);
+    case "harvest": return await cmdMempalaceHarvest(inner);
     case "status":  return cmdStatus(inner);
     case "quiesce": return await cmdQuiesce(inner);
     case "resume":  return cmdResume(inner);
