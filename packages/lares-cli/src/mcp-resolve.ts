@@ -7,13 +7,13 @@
  * kapae · un_kapae), and that surface holds NO STORE: every verb rides the @daemon cap-wire
  * (`lares_uds.py`) to the one process that owns the palace holders.
  *
- * MCP is stdio-per-client, so N sessions means N of these processes. A surface that opened a chroma
- * client would therefore put N unsynchronized writers on one index — and no lock fixes that, because
- * the serve-holders speak NDJSON on raw stdin and only their spawning parent can reach them. There is
- * exactly ONE owner, and everyone else asks it. All the compute still runs py; the @daemon only routes.
+ * MCP speaks stdio-per-client, so N sessions run N of these processes. A surface that opened a chroma
+ * client would therefore put N unsynchronized writers on one index — and no lock cures that, because
+ * the serve-holders speak NDJSON on raw stdin and answer only their spawning parent. Exactly ONE OWNER
+ * holds the palace, and everyone else asks it. All the compute stays py; the @daemon only routes.
  *
- * The guest `~/.mempalace` holds no seat here. It is raised deliberately (`lares mempalace setup`) and
- * imported FROM (`guest-import.ts`), never bound into.
+ * The guest `~/.mempalace` holds no seat here. An operator raises it deliberately (`lares mempalace
+ * setup`) and imports FROM it (`guest-import.ts`); the vessel never binds into it.
  *
  * `reaped` / `absent`: a wire leg removes any mempalace registration it finds beside registering the
  * lares one, so a harness config converges on the one owner whatever state it arrives in.

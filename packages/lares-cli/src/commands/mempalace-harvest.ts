@@ -2,9 +2,9 @@
  * `lares mempalace harvest` — build the GUEST comparator from every harness transcript, through the
  * vendored miner's OWN vanilla path.
  *
- * The comparator is the clean baseline the memory sensorium is measured against. Its value rests
- * entirely on carrying no Lares vocabulary: a store stamped with our own `lar_*` gradient is not an
- * independent measurement, it is a mirror. So this mines with the plain
+ * The comparator holds the clean baseline the memory sensorium measures itself against. Its whole value
+ * rests on carrying no Lares vocabulary: a store stamped with our own `lar_*` gradient stops measuring
+ * and starts mirroring. So this mines with the plain
  *
  *     mempalace --palace <guest> mine <stage>/<wing> --mode convos --wing <wing>
  *
@@ -14,8 +14,9 @@
  * sweep. The drawer carries only mempalace's native metadata: source_file, wing, room, agent,
  * chunk_index, source_mtime, extract_mode.
  *
- * The guest lane, raised by hand. `lares harvest --all` is the RUN and feeds the sovereign sensorium;
- * the RUN never writes the comparator. This is an operator ACT, and the two never share a path.
+ * The guest lane, raised by hand. `lares harvest --all` carries the RUN and feeds the sovereign
+ * sensorium; the RUN never writes the comparator. This runs as an operator ACT, and the two lanes
+ * share no path.
  *
  * Idempotent with no state of our own: the vendored `mine_convos` dedups on (source_file, mtime,
  * NORMALIZE_VERSION), so a re-run over an unchanged transcript is a no-op it reports itself.
@@ -39,8 +40,8 @@ import {
  * The guest palace, spelled LITERALLY.
  *
  * Not `resolvePalacePath()`: that honors `MEMPALACE_PALACE_PATH`, and an env var that can redirect
- * the comparator can redirect it onto the sensorium. The one store this command may write is the one
- * store the RUN may not.
+ * the comparator can redirect it onto the sensorium. This command may write exactly the one store the
+ * RUN may not.
  */
 function guestPalace(): string {
   return join(homedir(), ".mempalace", "palace");

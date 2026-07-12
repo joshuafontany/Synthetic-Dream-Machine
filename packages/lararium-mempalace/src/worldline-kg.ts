@@ -90,9 +90,9 @@ function resolve(opts: WorldlineKgOptions): Resolved {
   // and a pave of the guest would have taken the whole worldline KG down with it — 525 entities,
   // 532 triples, sitting in the belly of the store we wipe to get a clean baseline.
   //
-  // NOTE (a held question, not settled here): this leaves TWO worldline stores — this KG (what
-  // `lares worldline` reads) and `worldline.sqlite3` (what capture writes). Both are sovereign now,
-  // so the pave is safe; WHICH one is canon is a floor still owed.
+  // NOTE (a held question, not settled here): TWO worldline stores stand — this KG (which
+  // `lares worldline` reads) and `worldline.sqlite3` (which capture writes). Both sit sovereign, so a
+  // pave carries no loss; WHICH one holds canon awaits a floor.
   return { py, script, submoduleRoot: join(repoRoot, "mempalace"), palace: opts.palacePath ?? memorySensoriumDir(), exec };
 }
 

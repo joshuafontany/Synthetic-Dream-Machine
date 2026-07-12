@@ -10,7 +10,7 @@ manao       = 17
 namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
-role        = "architectural invariant: the substrate IS the coupling — one sovereign body per stream; entrance block as an actively-held membrane; the coordinator's licence (gong, never conductor); r as alarm; the WAIT as a coupling channel"
+role        = "architectural invariant: the substrate COUPLES — one sovereign body per stream; entrance block as an actively-held membrane; the coordinator's licence (gong, never conductor); r as alarm; the WAIT as a coupling channel"
 status-date = "2026-07-11"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
@@ -23,15 +23,15 @@ uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
 
 <<~ ahu #the-law >>
 
-## The Law ~ the substrate IS the coupling
+## The Law ~ the substrate COUPLES
 
 <<~ confidence Canon 17/20 >> **A single body hosting many rhythms ENTRAINS them, because the body itself constitutes the coupling medium.**
 
-A shared substrate does not *risk* a false now. It **manufactures a real one — and then depends on it.**
+A shared substrate never merely *risks* a false now. It **manufactures a real one — and then leans on it.**
 
 Two domains reach this independently, sharing no vocabulary (2026-07-11, two tasked spirits):
 
-<<~ranks grounds cardiac ~ the Arnol'd tongues hold nonzero measure for ARBITRARILY SMALL coupling — no safe epsilon stands -> physarum ~ the tube contractions organize into a network-wide peristaltic wave; the entrainment IS the transport, and the shared cytoplasm couples the oscillators whether or not anyone wills it >>
+<<~ranks grounds cardiac ~ the Arnol'd tongues hold nonzero measure for ARBITRARILY SMALL coupling — no safe epsilon stands -> physarum ~ the tube contractions organize into a network-wide peristaltic wave; the entrainment CARRIES the transport, and the shared cytoplasm couples the oscillators whether or not anyone wills it >>
 
 Every resource N detectors share carries a phase-response curve: one event loop, one scheduler tick, one backpressure buffer, one GC pause. **A designer does not choose `K = 0` inside a shared body — only how small `K` runs, and the locking tongues open regardless.**
 
@@ -51,7 +51,7 @@ Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside
 
 <<~moves shared-substrate -> sovereign-body on/one-per-stream if/N-rhythms-carry-payload do/mount-the-membrane-at-the-process-wall >>
 
-**RULING (operator, 2026-07-11): ONE SOVEREIGN BODY PER STREAM.** One OS process per stream — its own asyncio loop, its own nalu gate, its own recovered beat. No shared scheduler tick, no shared heap, no shared GC. The process wall IS the entrance block; nothing smaller holds.
+**RULING (operator, 2026-07-11): ONE SOVEREIGN BODY PER STREAM.** One OS process per stream — its own asyncio loop, its own nalu gate, its own recovered beat. No shared scheduler tick, no shared heap, no shared GC. The process wall MOUNTS the entrance block; nothing smaller holds it.
 
 <<~/ahu >>
 
@@ -79,9 +79,9 @@ Canon already holds *"the @daemon carries verbs + a data-pointer, NO payload"* (
 
 **Any place a handler waits on the centre to advance its own recovery, the centre has become the clock.**
 
-This is what forecloses the shared asyncio serve-loop. A shared event loop IS a shared scheduler tick, and a shared scheduler tick IS coupling — whatever the topology diagram claims.
+This forecloses the shared asyncio serve-loop: a shared event loop HANDS every body one scheduler tick, and one shared tick COUPLES them — whatever the topology diagram claims.
 
-**Test every shared resource against the WAIT, never against the payload.** A shared model-holder a stream *points at* clears; a shared model-holder a stream *blocks on* couples.
+**Test every shared resource against the WAIT, never against the payload.** A stream that *points at* a shared model-holder clears the membrane; a stream that *blocks on* one couples through its queue.
 
 <<~/ahu >>
 
@@ -111,7 +111,7 @@ And the affirmative: **the SCN encodes DAY LENGTH in its phase dispersion.** Lon
 
 Coupling's legitimate gift names **variance reduction, never phase dictation.**
 
-<<~ranks pathology parkinsonian-beta ~ the excess phase-locking IS the disease -> epilepsy ~ runaway recruitment across a substrate that should have stayed partitioned -> low-HRV ~ a too-regular heartbeat predicts mortality >>
+<<~ranks pathology parkinsonian-beta ~ the excess phase-locking CONSTITUTES the disease -> epilepsy ~ runaway recruitment across a substrate that should have stayed partitioned -> low-HRV ~ a too-regular heartbeat predicts mortality >>
 
 **Three organs, three scales, one reading: high synchrony and high regularity read as SYMPTOMS.** A HUD reporting *"all streams nicely in phase"* reads as a fever, never a pass. Rising `r` names streams leaking into each other.
 

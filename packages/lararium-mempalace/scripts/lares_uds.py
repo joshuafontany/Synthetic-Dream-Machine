@@ -6,12 +6,11 @@ WHY A WIRE AND NOT A STORE HANDLE. The palace serve-holders (`content_io serve`,
 …) speak NDJSON over raw **stdin** — so only the process that SPAWNED a holder can reach it, and a
 per-palace flock makes a second holder exit rather than pile up. A py process that opens a store
 directly therefore cannot share the vessel's holder; it opens its OWN chroma client beside it, and N
-harness sessions become N unsynchronized clients on one index. There is no lock that fixes that, only
-one OWNER.
+harness sessions become N unsynchronized clients on one index. No lock cures that; only ONE OWNER does.
 
-So the shape is: the @daemon owns exactly one set of py holders; every other process — this one
-included — reaches memory THROUGH it, over this socket. All the COMPUTE stays py (the holders do the
-embedding, the search, the store); the TS @daemon only ROUTES. That is the coordinator's job:
+So the shape holds: the @daemon owns exactly one set of py holders, and every other process — this one
+included — reaches memory THROUGH it, over this socket. All the COMPUTE stays py (the holders embed,
+search, and store); the TS @daemon only ROUTES. Routing a verb counts as coordination, never compute:
 `@daemon coordinates, py computes`.
 
 THE WIRE (mirrors the TS `invokeLocal`): connect `<dataDir>/lares.sock`, write ONE JSON line
@@ -64,8 +63,8 @@ def identity_dir() -> str:
     """`<dirname(dataDir)>/.lararium-identity` — the SIBLING of the data dir.
 
     Identity sits beside the wipe-zone, never inside it, so no destructive storage verb can reach it.
-    The dir is derived from the SAME dataDir the socket is, which is what keeps the did we send and
-    the daemon that answers agreed on one keypair.
+    The dir derives from the SAME dataDir the socket does, which keeps the did we send and the daemon
+    that answers agreed on one keypair.
     """
     return os.path.join(os.path.dirname(data_dir()), ".lararium-identity")
 
@@ -96,7 +95,7 @@ def call(verb: str, args: "dict | None" = None, *, timeout: float = 30.0,
 
     Raises LaresDaemonUnreachable when no daemon holds the socket, and LaresVerbError when the daemon
     ran the verb and it failed. NEITHER falls back to opening a store: a fallback would put a second
-    writer on the palace, which is the one thing this wire exists to prevent.
+    writer on the palace — the one thing this wire stands to prevent.
     """
     path = socket_path()
     if not os.path.exists(path):
@@ -135,9 +134,9 @@ def output(verb: str, args: "dict | None" = None, **kw) -> dict:
     """`call` unwrapped to the verb's own payload.
 
     The daemon returns a RECEIPT, not a bare value: `{status, requestId, results: {summary: {ok,
-    output}}}`. The receipt is the durable record (it lands at @daemon/outcomes/<id>); `output` is what
-    the verb actually computed. Callers want the latter, so the envelope is peeled HERE — once — rather
-    than by every caller reaching through four keys and each getting it subtly wrong.
+    output}}}`. The receipt carries the durable record (it lands at @daemon/outcomes/<id>); `output` carries
+    what the verb actually computed. Callers want the latter, so the envelope peels HERE — once — rather
+    than in every caller, each reaching through four keys and each getting it subtly wrong.
     """
     out = call(verb, args, **kw)
     summary = ((out.get("results") or {}).get("summary")) or {}

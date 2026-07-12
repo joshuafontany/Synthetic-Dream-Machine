@@ -407,20 +407,20 @@ def build_mcp(coordinator: LaresCoordinator):
 class DaemonCoordinator:
     """The verb-router that HOLDS NOTHING — every verb rides the @daemon cap-wire (`lares_uds`).
 
-    MCP is stdio-per-client, so a harness with N sessions runs N of these processes. A coordinator that
-    opened a ContentStore would therefore put N unsynchronized chroma clients on one index — and no
-    lock fixes that, because the palace serve-holders speak NDJSON on raw stdin and can only be reached
-    by the process that spawned them. There is exactly one owner, the @daemon, and everyone else asks it.
+    MCP speaks stdio-per-client, so a harness running N sessions runs N of these processes. A coordinator
+    that opened a ContentStore would therefore put N unsynchronized chroma clients on one index — and no
+    lock cures that, because the palace serve-holders speak NDJSON on raw stdin and answer only the
+    process that spawned them. Exactly ONE OWNER holds the palace — the @daemon — and everyone else asks it.
 
-    All the COMPUTE still runs py: the daemon routes to the py holders it owns, which do the embedding,
-    the search and the store. The TS coordinator only carries the verb across. This surface is a skin.
+    All the COMPUTE still runs py: the daemon routes to the py holders it owns, which embed, search, and
+    store. The TS coordinator carries the verb across and nothing else. This surface holds nothing.
 
     A verb the daemon does not yet answer REFUSES. It never falls back to opening a store — a fallback
-    is how a second writer gets on the palace, which is the one thing this wire exists to prevent.
+    puts a second writer on the palace, the one thing this wire stands to prevent.
     """
 
-    # The verbs the @daemon answers today. The rest are OWED node-side; each needs a verb that routes
-    # to a holder the daemon owns (worldline_io, structurepalace_io, form_encoder, content_io).
+    # The verbs the @daemon answers today. The rest stay OWED node-side; each wants a verb that routes
+    # to a holder the daemon already owns (worldline_io, structurepalace_io, form_encoder, content_io).
     ROUTED = {"recall"}
 
     def __init__(self, wing: str = "wing_default") -> None:
@@ -465,9 +465,9 @@ def main() -> None:
                     help="open the stores directly instead of routing through the @daemon. ONE session only.")
     args = ap.parse_args()
 
-    # ROUTED is the default and the only multi-session-safe mode: the @daemon owns the holders, this
-    # process owns nothing. `--standalone` is the single-session escape hatch (a test-bed, a dead node),
-    # and it says so rather than pretending the direct open is free.
+    # ROUTED runs by default, and alone survives multiple sessions: the @daemon owns the holders, this
+    # process owns nothing. `--standalone` opens the single-session escape hatch (a test-bed, a dead
+    # node), and names its cost rather than pretending the direct open comes free.
     if args.standalone:
         if not args.palace:
             ap.error("--standalone needs --palace")

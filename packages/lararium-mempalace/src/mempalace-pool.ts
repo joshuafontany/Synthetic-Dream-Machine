@@ -1,21 +1,17 @@
 /**
  * mempalace-pool — the warm, reused READ client: ONE python reader, held for the daemon's life.
  *
- * The shape is already the pono one — the store lives in py, the TS @daemon only points at it and
- * proxies (it computes nothing, holds no payload). What was WRONG was where it pointed.
+ * The store lives in py; the TS @daemon points at it and proxies, computing nothing and holding no
+ * payload. The reader NAMES its palace (`palacePath` → `--palace <path>`): it reads the sovereign
+ * `<memory>/content`, the plane the capture path fills every turn. An unnamed palace would fall back to
+ * whatever `~/.mempalace/config.json` happens to name — a silent reach into the guest comparator, and
+ * a store the vessel writes but never reads.
  *
- * `MempalaceClient` supports `palacePath` and `defaultArgs()` appends `--palace <path>` — but this
- * pool never passed it, so the sidecar fell back to whatever `~/.mempalace/config.json` named. That
- * single omission is why recall read the GUEST comparator while the capture path filled the sovereign
- * `<memory>/content` every turn: the lararium's own content plane was WRITE-ONLY, and every harness
- * that wanted memory reached past the node to grab the guest palace itself — N readers on one Chroma
- * index. It now reads the plane the vessel actually writes.
+ * ONE reader, pooled for the daemon's lifetime — never one per call, never one per harness session.
+ * The @daemon coordinates a py reader; it never becomes one. The first recall pays the chromadb cold
+ * start; every recall after runs warm, which keeps recall-into-wake fast.
  *
- * ONE reader, pooled for the daemon's lifetime (not one per call, not one per harness session): the
- * @daemon coordinates a py reader; it does not become one. First recall pays the chromadb cold start;
- * every recall after is warm, which is what makes recall-into-wake fast.
- *
- * Read-only: the pool only ever hands back a client whose tools are list/get/search.
+ * Read-only: the pool hands back a client whose tools cover list/get/search, and nothing more.
  */
 
 import { MempalaceClient } from "./mempalace-client.js";

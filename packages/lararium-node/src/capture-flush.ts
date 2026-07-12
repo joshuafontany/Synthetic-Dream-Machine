@@ -41,12 +41,12 @@ export interface SubprocessFlushOptions {
 /**
  * THE COMPARATOR WARD — refuse to mine into the guest `~/.mempalace`, whoever asks.
  *
- * `~/.mempalace` is the clean baseline the sensorium measures itself against, and a comparator the
+ * `~/.mempalace` holds the clean baseline the sensorium measures itself against, and a comparator the
  * RUN has written carries no information. The RUN never writes the comparator.
  *
- * The ward sits at the RESOURCE, not at the call sites: a ward each caller must remember is a ward
- * that fails. Honors `MEMPALACE_PALACE_PATH` (upstream's own relocation lever), so a relocated guest
- * is refused too, and a sovereign or tmp palace passes.
+ * The ward sits at the RESOURCE, never at the call sites: a ward each caller must remember fails.
+ * It honors `MEMPALACE_PALACE_PATH` (upstream's own relocation lever), so a relocated guest refuses
+ * too, while a sovereign or tmp palace passes.
  */
 function refuseComparator(palacePath: string): void {
   const guest = canonicalPalacePath(

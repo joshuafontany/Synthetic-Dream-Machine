@@ -25,12 +25,12 @@
  */
 
 import { createHash } from "node:crypto";
-import { execFileSync, execSync } from "node:child_process";
-import { existsSync, mkdirSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
 import { homedir } from "node:os";
-import { basename, dirname, join } from "node:path";
+import { basename, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, resolvePalacePath, repairHnswIfDiverged, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, type HnswRepairResult, type WritebackResult } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds } from "@lararium/mempalace";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
@@ -323,15 +323,6 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
 // flows through the @daemon to the SOVEREIGN sensorium, so there is nothing of ours in the guest
 // to repair. (The sovereign store's index health rides content_io's own chroma upsert.)
 
-/** Render the repair-tail outcome as one TTY line (the JSON rides in the command's `data`). */
-function hnswRepairLine(r: HnswRepairResult): string {
-  switch (r.action) {
-    case "skip":         return `  hnsw index:   in sync${r.divergence !== null ? ` (divergence ${r.divergence})` : ""}`;
-    case "repaired":     return `  hnsw index:   REBUILT (was diverged ${r.divergence ?? "?"} → now ${r.afterDivergence ?? "?"})`;
-    case "repair-failed":return `  hnsw index:   repair FAILED (diverged ${r.divergence ?? "?"}) — harvest ok · ${r.note ?? ""}`;
-    case "check-failed": return `  hnsw index:   status unreadable — skipped · ${r.note ?? ""}`;
-  }
-}
 
 const COPILOT_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_normalize.py");
 // New copilot format: the conversation moved from per-session events.jsonl (gone in
