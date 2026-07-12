@@ -399,6 +399,24 @@ export function discoverClaude(): HarvestEntry[] {
     const cwd = readCwdFromTranscript(first);
     const wing = cwd ? wingFromDir(cwd) : `wing_${ent.name.replace(/^-+/, "").replace(/[^a-zA-Z0-9]+/g, "_").toLowerCase() || "unsorted"}`;
     for (const j of jsonls) out.push({ file: j, wing, normalize: false, stageName: basename(j), source: "claude" });
+
+    // The tasked spirits. Each session keeps its sub-agent transcripts one level DOWN, at
+    // `<session-id>/subagents/agent-<id>.jsonl`, so a flat read of the project dir sees none of them.
+    // They land in the session's SPIRITS wing — distinct from the parent's, so a spirit's work never
+    // blurs into the operator's, and the two populations stay countable apart.
+    for (const j of jsonls) {
+      const spiritDir = join(j.replace(/\.jsonl$/, ""), "subagents");
+      if (!existsSync(spiritDir)) continue;
+      for (const f of readdirSync(spiritDir).filter((f) => /^agent-.*\.jsonl$/.test(f))) {
+        out.push({
+          file: join(spiritDir, f),
+          wing: `${wing}__spirits`,
+          normalize: false,
+          stageName: `${basename(j, ".jsonl")}__${f}`,   // the parent session keys the spirit's provenance
+          source: "claude",
+        });
+      }
+    }
   }
   return out;
 }
