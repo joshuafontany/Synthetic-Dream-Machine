@@ -4,11 +4,8 @@
  * the SAME enumerator `lares palace-teardown` reads — so setup and teardown can never drift over
  * which organs exist.
  *
- * SOVEREIGN ONLY — the guest `~/.mempalace` is NOT stood here. It was, once, and that was the bug:
- * `wake --init` shelled `mempalace init` and pinned its config, writing the very store the S5
- * comparator ruling reserves as an untouched baseline (`RUN-ARC.md:14` — "the RUN never writes it").
- * The guest now rides `lares mempalace setup` (see commands/mempalace.ts), where an operator raises
- * it DELIBERATELY: as a standalone sanity-check sidecar, or as the source of the one-way import Act.
+ * SOVEREIGN ONLY. The guest `~/.mempalace` stands in its own lane (`lares mempalace setup`), raised
+ * by a deliberate operator act — the boot never writes the comparator it measures against.
  *
  * The registry stands, in dependency order:
  *   1. contentpalace   <memory>/content   — the LARARIUM-OWNED verbatim ground (li/sheaf). FIRST:

@@ -2,20 +2,17 @@
  * mcp-resolve — resolve the LARES MCP seat the harness-wire modules register, plus the shared
  * WireAction vocabulary.
  *
- * `lares` used to register the *mempalace* MCP into every harness. That was the bug: Chroma tolerates
- * one writer on a palace, and a harness holding its own sidecar reaches PAST the node into the store
- * directly — so N sessions meant N writers on one index, the contention that truncated the HNSW
- * segment and forced a drift-quarantine. The python holders enforce a flock singleton per palace dir,
- * which makes the collision loud but does not prevent it.
+ * A harness reaches memory through the LARES surface (`lares_mcp.py` — FastMCP over the memory
+ * sensorium: recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
+ * kapae · un_kapae), never by opening a palace of its own. Chroma tolerates one writer per palace, and
+ * a harness holding its own sidecar reaches PAST the node into the store — N sessions, N writers, one
+ * index. The python holders make that collision loud; only ONE OWNER prevents it.
  *
- * The cure is not a better lock; it is one owner. Harnesses now register the LARES surface
- * (`lares_mcp.py` — FastMCP over the memory sensorium: recall · recall_structure · recall_form ·
- * plane_record · harvest · status · worldline · kapae · un_kapae), which reaches memory through the
- * lares house. The guest `~/.mempalace` keeps no seat here at all; it is raised deliberately
- * (`lares mempalace setup`) and imported FROM (`guest-import.ts`), never bound into.
+ * The guest `~/.mempalace` holds no seat here. It is raised deliberately (`lares mempalace setup`) and
+ * imported FROM (`guest-import.ts`), never bound into.
  *
- * `reaped` / `absent` carry the strangler: each wire leg REMOVES a stale mempalace registration
- * beside registering the lares one, so a host an older wiring touched heals on the next wake.
+ * `reaped` / `absent`: a wire leg removes any mempalace registration it finds beside registering the
+ * lares one, so a harness config converges on the one owner whatever state it arrives in.
  */
 
 import { existsSync } from "node:fs";

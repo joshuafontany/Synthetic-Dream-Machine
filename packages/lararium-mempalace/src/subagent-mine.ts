@@ -16,12 +16,10 @@
  *   - BOTH SIDES: mines the whole agent file (the injected exchange assembler pairs
  *     the handoff with the spirit's turns — the SAME reader the capture leg submits).
  *
- * mempalace stays vendored: we mine THROUGH its CLI (`mine --source ndjson --daemon`,
- * the SAME road the @daemon capture flush takes — one spool per spirit), never edit it.
- * This is the daemon-down FALLBACK leg only; the primary path stays the @daemon capture
- * verb (lares subagents). Each record carries the daemon leg's exact `source_file`
- * (spiritCaptureSourceFile — `<wing>__spirits/<surface>__<name>__agent-<id>__run-<run>.jsonl`),
- * so BOTH legs share ONE dedup key and the stage layout never leaks into provenance.
+ * Every spirit turn lands through the @daemon `capture` verb, into the sovereign plane. Each record
+ * carries the `source_file` the capture leg keys on (spiritCaptureSourceFile —
+ * `<wing>__spirits/<surface>__<name>__agent-<id>__run-<run>.jsonl`), so provenance never leaks the
+ * stage layout. A daemon-down run SUSPENDS; it reaches for no second sink.
  * The child→parent LINK rides `lar_parent_handle` (buildPatch, off the staged basename)
  * + the KG observer (observeSubagentWorldlines, D6) — no post-mine tunnel step exists
  * or is needed.
@@ -29,13 +27,9 @@
  * Meme: lar:///ha.ka.ba/lararium/api/lar-telemetry
  */
 
-import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, mkdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, basename } from "node:path";
-import { resolvePalacePath } from "./palace-path.js";
-import { mineWithServo } from "./mine-retry.js";
-import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
 
 const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
 
@@ -145,14 +139,10 @@ export interface SubagentMineOptions {
 }
 
 /**
- * Mine every tasked-spirit transcript for a session into the project's spirits
- * wing, each labeled `spirit-<uuid8>` (identity = the worldline handle), capturing
- * both sides. The daemon-down FALLBACK leg (verbatim-always): it rides the SAME
- * `mine --source ndjson --daemon` road the @daemon capture flush takes, each record
- * carrying the daemon leg's exact relative `source_file` (spiritCaptureSourceFile) —
- * one dedup key across both legs, deterministic drawer ids
- * (`sha256(source_file)_chunk_index`), so a re-mine upserts in place. Returns
- * per-spirit counts.
+ * Stage every tasked-spirit transcript for a session into the project's spirits wing, each labeled
+ * `spirit-<uuid8>` (identity rides the worldline handle), capturing both sides. Records carry the
+ * capture leg's `source_file` (spiritCaptureSourceFile), so drawer ids stay deterministic
+ * (`sha256(source_file)_chunk_index`) and a re-run upserts in place. Returns per-spirit counts.
  */
 export function mineSubagentsForSession(transcriptPath: string, wing: string, opts: SubagentMineOptions): SubagentMineResult {
   const mpExe = opts.mpExe ?? resolveMempalaceExe();
@@ -191,16 +181,12 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, op
     const spool = join(stage, `spirit-${agentId}.ndjson`);
     try { writeFileSync(spool, records.join("\n") + "\n", "utf8"); } catch { mined.push({ name, agentId, drawers: "spool-failed" }); continue; }
 
-    // NO DIRECT MINE. This leg used to fall back to
-    //   `mempalace --palace <guest> mine --source ndjson --daemon <spool>`
-    // whenever the @daemon capture leg came up empty — a raw verbatim mine straight into the GUEST
-    // comparator. `cmdCapture` deleted exactly this fallback when the single-path invariant landed;
-    // the spirits leg never got the same cut, so every daemon-down Stop hook quietly re-seeded the
-    // store we measure ourselves against. The RUN never writes the comparator.
+    // Every spirit turn lands through the @daemon, into the sovereign plane. A daemon-down run
+    // SUSPENDS — it never reaches for a second write-target.
     //
-    // SUSPENDED, not lost: the spool stays staged, the transcript stays on disk, and the capture path
-    // is idempotent on cid — the next run re-derives this spirit's turns through the daemon and lands
-    // them in the sovereign plane. Crash-safety by RE-DERIVATION, never by a second write-target.
+    // Suspended, not lost: the spool stays staged, the transcript is the durable producer-log, and
+    // capture is idempotent on cid, so the next run re-derives this spirit's turns through the daemon.
+    // Crash-safety rides RE-DERIVATION, never a fallback sink.
     mined.push({ name, agentId, drawers: "suspended-no-daemon" });
   }
   return { spirits: mined.length, wing: sw, mined };

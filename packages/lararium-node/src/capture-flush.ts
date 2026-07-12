@@ -41,14 +41,12 @@ export interface SubprocessFlushOptions {
 /**
  * THE COMPARATOR WARD — refuse to mine into the guest `~/.mempalace`, whoever asks.
  *
- * The guest is the clean baseline the sensorium measures itself against; a comparator the RUN has
- * written carries no information. Canon: the RUN never writes the comparator. This lives at the
- * RESOURCE rather than at the call sites, because it only takes one call site forgetting — and one
- * already did: the vessel fed this flush `resolvePalacePath()` (the guest) for its whole life, armed
- * and one config-flip from live. A ward each caller must remember is a ward that fails.
+ * `~/.mempalace` is the clean baseline the sensorium measures itself against, and a comparator the
+ * RUN has written carries no information. The RUN never writes the comparator.
  *
- * Honors `MEMPALACE_PALACE_PATH` (upstream's own relocation lever), so a relocated guest is still
- * refused, and a genuine sovereign/tmp palace still passes.
+ * The ward sits at the RESOURCE, not at the call sites: a ward each caller must remember is a ward
+ * that fails. Honors `MEMPALACE_PALACE_PATH` (upstream's own relocation lever), so a relocated guest
+ * is refused too, and a sovereign or tmp palace passes.
  */
 function refuseComparator(palacePath: string): void {
   const guest = canonicalPalacePath(

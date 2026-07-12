@@ -31,20 +31,15 @@ from mempalace.palace import get_collection
 # persistent serve sidecars). FORM_COLLECTION is the shared form-store name.
 from sidecar_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embeddings
 
-"""The palace this process writes — set ONCE from `--palace`, never defaulted.
+"""The palace this process writes — named by `--palace`, never defaulted.
 
-It used to read `PALACE = os.path.expanduser("~/.mempalace/palace")`, hardcoded: no argument, no
-env override. So every `lar_*` writeback — `lares telemetry` (even routed THROUGH the @daemon),
-`lares harvest --writeback`, and every Stop hook — projected its metadata onto the GUEST comparator,
-while the content it described landed in the sovereign contentpalace. Two stores, one meaning,
-silently diverging.
+A default palace reaches whichever store happens to sit at the default, and this script WRITES
+(`col.update`). The `lar_*` metadata describes drawers the capture path landed, so it must reach the
+store those drawers LIVE in — a writeback that lands elsewhere leaves two stores holding one meaning.
 
-And after the guest is nuked, the hardcoded path does not fail loudly. It opens an EMPTY palace,
-matches nothing, updates nothing, and reports `applied: 0` as success — writing metadata onto
-drawers that no longer exist, forever, quietly. A default palace is not a convenience; it is a
-silent reach into whichever store happens to sit at the default.
-
-`_col()` raises when this stays unset, so a caller that forgot the argument fails LOUD.
+An empty palace also matches nothing and updates nothing: a caller that names the wrong store gets
+`applied: 0` and reads it as success. So an unnamed palace refuses (`_palace()`), loudly, rather than
+finding somewhere plausible to write.
 """
 PALACE: "str | None" = None
 # Current harvest version — bump when the harvester's output shape changes, so a
@@ -87,8 +82,8 @@ def _require_adapter() -> None:
 
 
 def _palace() -> str:
-    """The palace, or a LOUD refusal. Never a fallback — an unnamed palace is how the writeback
-    silently found the guest, and how it would silently find nothing after the guest is paved."""
+    """The palace, or a LOUD refusal. An unnamed palace reaches whichever store sits at a default,
+    and an empty one updates nothing while reporting success. Name it, or stop."""
     if not PALACE:
         raise SystemExit(
             "drawer_io: no palace named — pass `--palace <dir>`. This writes lar_* metadata onto "

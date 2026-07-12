@@ -68,10 +68,8 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   // HARD-fails to import onnxruntime-gpu without the CUDA runtime libs on LD_LIBRARY_PATH. Cap absent
   // (the QA box) ⇒ only the device hint rides and the embedder degrades to CPU. (Restart-safety P0.)
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(PY) };
-  // NAME the palace. drawer_io used to hardcode `~/.mempalace/palace`, so every lar_* writeback —
-  // even the one routed through the @daemon — stamped its metadata onto the GUEST while the content
-  // it described landed in the sovereign contentpalace: two stores, one meaning, silently diverging.
-  // The telemetry describes the drawers the capture path WROTE, so it writes where they LIVE.
+  // The telemetry describes the drawers the capture path landed, so it writes where they LIVE —
+  // the sovereign content plane. NAMED, never defaulted: drawer_io refuses an unnamed palace.
   const palace = memorySensoriumContentDir();
   const limit = opts.limit ?? 0;
   const exportArgs = ["--palace", palace, "export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];

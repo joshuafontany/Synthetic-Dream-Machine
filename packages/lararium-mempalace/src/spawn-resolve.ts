@@ -87,9 +87,8 @@ function resolveSidecarSpawn(scriptFile: string): SidecarSpawn {
  * kapae · un_kapae). NOT a palace holder — it takes `--palace <sensorium dir>` (the sensorium ROOT,
  * not a leaf store; it resolves `<palace>/content` itself) and speaks MCP over stdio to a harness.
  *
- * This is the seat `lares wake --claude/--codex/--copilot/--vscode` registers, in place of the
- * mempalace MCP it used to wire: a harness reaches memory THROUGH the lares house, never around it
- * into a palace of its own — which is what let N harness sidecars pile onto one Chroma index.
+ * The seat `lares wake --claude/--codex/--copilot/--vscode` registers: a harness reaches memory
+ * THROUGH the lares house, never around it into a palace of its own. One owner per palace.
  */
 export type LaresMcpSpawn = SidecarSpawn;
 export function resolveLaresMcpSpawn(): LaresMcpSpawn {
