@@ -165,15 +165,29 @@ export function parse(this: RuleInstance): ParseTreeNode[] {
     // The gradient made VISIBLE in the live wiki: a degraded sigil renders as a marked span (partial /
     // water) carrying its verbatim text — never silently dropped, never a crash. Styled via
     // $:/tags/Stylesheet so a pasted-and-saved turn shows its parse grade instead of a silent literal.
-    const grade = attrs["__degraded__"]!;
+    const grade   = attrs["__degraded__"]!;
+    const literal = attrs["__literal__"] ?? "";
+    const from    = this.matchPos ?? 0;
+    const to      = this.matchEnd ?? from + literal.length;
+    // The render plane showed the damage while the filter and the gate stayed blind to it, so the rule
+    // leaves the same receipt every other recovery leaves: a span nobody has to look at the DOM to find.
+    parser.addDiagnostic?.({
+      from,
+      to,
+      severity: grade === "water" ? "warning" : "info",
+      source:   "text/x-memetic-wikitext",
+      code:     `unrecognized-sigil-${grade}`,
+      message:  `The sigil form recovered as ${grade}, and its text stands verbatim`,
+    });
     return [{
       type: "element",
       tag: "span",
+      isRecovered: true,
       attributes: {
         class: { type: "string", value: `lar-sigil-degraded lar-sigil-${grade}` },
         title: { type: "string", value: `memetic-wikitext: ${grade} parse — unrecognized sigil form (verbatim preserved)` },
       },
-      children: [{ type: "text", text: attrs["__literal__"] ?? "" }],
+      children: [{ type: "text", text: literal }],
     } as unknown as ParseTreeNode];
   }
   if ("__literal__" in attrs) {
