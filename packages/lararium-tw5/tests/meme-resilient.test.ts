@@ -76,7 +76,7 @@ describe("meme-ast resilient recovery", () => {
 // their sense; `repaired` keeps both at lower confidence.
 // ---------------------------------------------------------------------------
 
-import { failuresToDiagnostics, gradeOf, severityOf } from "../src/meme-ast/diagnostics.js";
+import { failuresToDiagnostics, gradeOf, severityOf, membraneDiagnostic } from "../src/meme-ast/diagnostics.js";
 import type { ParseFailure } from "../src/meme-ast/types.js";
 
 describe("the recovery gradient reads onto the core severity ladder", () => {
@@ -87,8 +87,10 @@ describe("the recovery gradient reads onto the core severity ladder", () => {
     recoveredAs,
   });
 
-  test("grades a lost construct hardest, and a repaired one softest", () => {
-    expect(severityOf(failure("missing"))).toBe("error");
+  // Every recovery keeps the text, so every recovery grades below error. Error names the one fault
+  // that costs the operator their bytes: a carrier that stopped round-tripping.
+  test("grades every recovery below the line that names lost bytes", () => {
+    expect(severityOf(failure("missing"))).toBe("warning");
     expect(severityOf(failure("water"))).toBe("warning");
     expect(severityOf(failure("repaired"))).toBe("info");
   });
@@ -102,8 +104,12 @@ describe("the recovery gradient reads onto the core severity ladder", () => {
   });
 
   test("grades a carrier by the worst fault it holds", () => {
-    expect(gradeOf(failuresToDiagnostics([failure("repaired"), failure("missing")], 100))).toBe("error");
+    expect(gradeOf(failuresToDiagnostics([failure("repaired"), failure("missing")], 100))).toBe("warning");
     expect(gradeOf(failuresToDiagnostics([failure("repaired")], 100))).toBe("info");
     expect(gradeOf([])).toBe("clean");
+  });
+
+  test("only a carrier that stopped round-tripping grades error", () => {
+    expect(gradeOf([membraneDiagnostic("the fence mask lost a span", 100)])).toBe("error");
   });
 });

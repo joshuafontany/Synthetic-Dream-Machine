@@ -34,31 +34,49 @@ const SEVERITY_RANK: Readonly<Record<DiagnosticSeverity, number>> = {
 };
 
 /**
- * A recovery rung, read onto the severity ladder.
+ * The ladder, stated once.
  *
- * `missing` loses the author's construct outright, so the carrier no longer says what they wrote.
- * `water` keeps the bytes but drops their meaning to plain text. `repaired` keeps both, at lower
- * confidence. Only the first costs the author their meaning, so only the first reads as an error.
+ * `error` names the one fault that costs the operator their bytes: a carrier that stops
+ * round-tripping no longer says what their hands left, so the membrane refuses it rather than
+ * ingesting a lossy render. Every recovery sits below that line, because a recovery keeps the
+ * text: the driver stands an unplaceable construct back up verbatim in an Error node, and grades
+ * how far it fell. `warning` marks a construct the grammar could not place; `info` marks one it
+ * repaired at lower confidence. Refusing a recovery would drop the bytes to protect the grammar,
+ * which inverts what the membrane exists to do.
  */
 export function severityOf(failure: ParseFailure): DiagnosticSeverity {
   return severityOfRung(failure.recoveredAs);
 }
 
 /**
- * The render plane grades a sigil it could not place as `water` (no word at all) or `partial`
- * (a word it knows, in a shape it does not). Both keep the text, so both sit below `error`, and
- * both read on the same ladder as the driver's rungs rather than on a second one beside it.
+ * A recovery rung. The driver reports `missing`, `water` and `repaired`; the render plane reports
+ * `partial` (a word it knows, in a shape it does not). All four keep the text, so all four grade
+ * below `error`, on this ladder rather than on a second one beside it.
  */
 export type RecoveryRung = ParseFailure["recoveredAs"] | "partial";
 
 export function severityOfRung(rung: RecoveryRung): DiagnosticSeverity {
   switch (rung) {
-    case "missing":  return "error";
+    case "missing":  return "warning";
     case "water":    return "warning";
     case "partial":  return "info";
     case "repaired": return "info";
     default:         return "warning";
   }
+}
+
+/** The membrane's fault: the carrier stopped round-tripping, so ingesting it would lose the bytes. */
+export const MEMBRANE_FAULT_CODE = "membrane-round-trip";
+
+export function membraneDiagnostic(message: string, sourceLength: number): MemeDiagnostic {
+  return {
+    from:     0,
+    to:       sourceLength,
+    severity: "error",
+    source:   MEMETIC_SOURCE,
+    code:     MEMBRANE_FAULT_CODE,
+    message,
+  };
 }
 
 function clamp(value: number, low: number, high: number): number {

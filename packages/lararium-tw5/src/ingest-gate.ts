@@ -13,7 +13,7 @@
  *
  * Decision law (in order):
  *   1. disk == synced            → NOOP (nothing happened on disk)
- *   2. the parse grades error    → REFUSE (the author lost their meaning)
+ *   2. the parse grades error    → REFUSE (the carrier stopped round-tripping)
  *      anything milder            → carry the diagnostics forward, never drop the bytes
  *   3. render(parse(disk)) == current render → NOOP canonical-equivalent
  *      (the edit changed framing only; the gofmt-loop guard)
@@ -23,7 +23,7 @@
  *      Unison's law; the CRDT diff-splice path refines this later)
  */
 
-import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
+import { deserializeCarrier, expandMemeRefs } from "./deserializer.js";
 import type { TiddlerFields } from "./deserializer.js";
 import { parseMemeText } from "./meme-ast/parse.js";
 import { failuresToDiagnostics, gradeOf } from "./meme-ast/diagnostics.js";
@@ -59,18 +59,21 @@ export function decideIngest(input: IngestGateInput): IngestDecision {
     return { kind: "noop", reason: "disk-matches-synced" };
   }
 
-  // 2 — the membrane refuses only where the carrier stops round-tripping, since that alone loses
-  // the operator's bytes. A recovery keeps them: the driver already stood the text back up and
-  // graded how far it fell, so refusing on a recovery would drop the carrier to protect the
-  // grammar. Every decision below therefore carries the gradient forward as a receipt.
+  // 2 — the gradient gate. The parser and the membrane both report on one channel now, so the gate
+  // reads a grade rather than sniffing a synthesised tiddler title. It refuses at `error`, which
+  // names the one fault that costs the operator their bytes: a carrier that stopped round-tripping.
+  // Every recovery grades below that, keeps its text, and rides forward with its receipt attached.
   const failures = parseMemeText(uri, diskText, getGrammar() ?? undefined).failures;
-  const diagnostics = failuresToDiagnostics(failures, diskText.length);
-  const records = memeticWikitextDeserializer(diskText, { title: uri });
-  const warnRecords = records.filter((r) => String(r.title ?? "").includes("/parse-warning/"));
-  if (warnRecords.length > 0) {
+  const carrier = deserializeCarrier(diskText, { title: uri });
+  const records = carrier.records;
+  const diagnostics = [
+    ...failuresToDiagnostics(failures, diskText.length),
+    ...carrier.diagnostics,
+  ];
+  if (gradeOf(diagnostics) === "error") {
     return {
       kind: "refuse",
-      warnings: warnRecords.map((w) => String(w.text ?? "")),
+      warnings: diagnostics.filter((d) => d.severity === "error").map((d) => d.message),
       diagnostics,
     };
   }

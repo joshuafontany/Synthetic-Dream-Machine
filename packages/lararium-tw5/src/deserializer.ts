@@ -43,6 +43,8 @@ import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence
 // meme-ast internals (vm-grammar-boundary law).
 export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { parseTaploFields } from "./toml-ast.js";
+import { membraneDiagnostic } from "./meme-ast/diagnostics.js";
+import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 import { parseMemeText } from "./meme-ast/parse.js";
 export type { GrammarRules } from "./meme-ast/types.js";
@@ -753,4 +755,30 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // trailing closer).
   out += stripLeadingNewlines(str("postamble"));
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// The membrane's receipt, on the shared channel
+// ---------------------------------------------------------------------------
+
+/**
+ * The deserializer used to report a fault by synthesising a tiddler whose title carried the word
+ * `parse-warning`, which left every consumer sniffing a string to learn whether a carrier survived.
+ * The fault now rides the same diagnostics contract the parser and the render plane already speak,
+ * so the gate reads a grade rather than a title. The synthesised tiddler stays, since the live wiki
+ * surfaces it, but nothing downstream has to recognise it by name.
+ */
+export function deserializeCarrier(
+  text:   string,
+  fields: Record<string, unknown>,
+): { records: TiddlerFields[]; diagnostics: MemeDiagnostic[] } {
+  const records = memeticWikitextDeserializer(text, fields);
+  const diagnostics: MemeDiagnostic[] = [];
+  for (const record of records) {
+    if (!String(record.title ?? "").includes("/parse-warning/")) continue;
+    for (const line of String(record.text ?? "").split("\n")) {
+      if (line.trim()) diagnostics.push(membraneDiagnostic(line.trim(), text.length));
+    }
+  }
+  return { records, diagnostics };
 }
