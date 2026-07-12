@@ -1,4 +1,4 @@
-@bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem
+@noosphere-boot.md
 
 ## Claude Adapter Surface
 
