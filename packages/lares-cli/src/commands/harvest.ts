@@ -217,7 +217,7 @@ function loadIndexHashes(path: string): Map<string, string> {
  * keeps each scope independent: a scope is reconciled ONLY when its own source rode this run.
  */
 function rewindScope(session: string, agentId: string | null): string {
-  return `${session || "?"} ${agentId ?? ""}`;
+  return `${session || "?"}\u0000${agentId ?? ""}`;
 }
 
 /**

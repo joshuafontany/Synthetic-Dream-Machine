@@ -146,7 +146,7 @@ export interface TreeDistanceOptions {
 // ── DECKARD characteristic-vector embedding (the default hot path) ─────────────────────────────────
 
 /** The dummy/null label the pattern serializer never collides with (no real AST label carries a NUL). */
-const NUL = " ";
+const NUL = "\u0000";
 
 /** Escape the structural delimiters so a label containing `( ) , \` cannot forge a false pattern boundary. */
 function esc(label: string): string {

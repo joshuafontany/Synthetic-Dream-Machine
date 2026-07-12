@@ -440,7 +440,7 @@ export function orchestrateWing(
   // (today's behavior exactly). The NUL separator can never appear in either component.
   const sessions = new Map<string, DrawerVector[]>();
   for (const v of vectors) {
-    const key = v.frontier ? `${v.sourceFile} ${v.frontier}` : v.sourceFile;
+    const key = v.frontier ? `${v.sourceFile}\u0000${v.frontier}` : v.sourceFile;
     const arr = sessions.get(key);
     if (arr) arr.push(v);
     else sessions.set(key, [v]);
