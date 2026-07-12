@@ -32,6 +32,8 @@ module-type: parser
 
 const RULES_CONFIG_TIDDLER = "lar:///ha.ka.ba/config/memetic-rules-except";
 
+const MEMETIC_TYPE = "text/x-memetic-wikitext";
+
 const DEFAULT_RULES_EXCEPT: ReadonlySet<string> = new Set<string>();
 
 interface ParserCtor {
@@ -52,6 +54,25 @@ interface ParserInstance {
   pragmaRules?: RuleInstance[];
   blockRules?:  RuleInstance[];
   inlineRules?: RuleInstance[];
+  diagnostics?: ParseDiagnostic[];
+}
+
+/** The core parse-diagnostics contract: any parser populates it, and `[parse-diagnostics[]]` reads it. */
+interface ParseDiagnostic {
+  from:     number;
+  to:       number;
+  severity: "error" | "warning" | "info" | "hint";
+  source:   string;
+  code:     string;
+  message:  string;
+}
+
+interface ParseFailureLike {
+  pos:         number;
+  raw:         string;
+  reason:      string;
+  recoveredAs: "water" | "repaired" | "missing";
+  sigilName?:  string;
 }
 
 interface ParserPrototype {
@@ -78,9 +99,50 @@ interface WikiLike {
  * externalizes `$:/` paths so the require survives the bundle — TW5's
  * runtime resolves it.
  */
+interface TwLike {
+  utils?: {
+    makeParseDiagnostic?: (
+      diagnostic: unknown,
+      options: { source: string; sourceLength: number },
+    ) => unknown;
+  };
+}
+
+declare const $tw: TwLike | undefined;
 declare const require: (id: string) => Record<string, ParserCtor>;
 const stdParserModule = require("$:/core/modules/parsers/wikiparser/wikiparser.js");
 const stdParser: ParserCtor = stdParserModule["text/vnd.tiddlywiki"]!;
+
+/**
+ * The meme-ast library grades its own recoveries onto the severity ladder the core contract
+ * closes over, so the parser reads that one ladder rather than keeping a second copy of it.
+ * `$tw.utils.makeParseDiagnostic` then clamps each span to the source.
+ */
+interface MemeAstLibrary {
+  parseMemeText?: (uri: string, text: string, grammar?: unknown) => { failures?: readonly ParseFailureLike[] };
+  failuresToDiagnostics?: (
+    failures: readonly ParseFailureLike[],
+    sourceLength: number,
+    source?: string,
+  ) => ParseDiagnostic[];
+}
+
+function diagnosticsFrom(uri: string, text: string): ParseDiagnostic[] {
+  const memeAst = require("lar:///ha.ka.ba/lararium/tw5/modules/meme-ast") as unknown as MemeAstLibrary;
+  const grammarCache = require("lar:///ha.ka.ba/lararium/tw5/modules/grammar-cache") as unknown as {
+    getGrammar?: () => unknown;
+  };
+  if (typeof memeAst?.parseMemeText !== "function" || typeof memeAst?.failuresToDiagnostics !== "function") {
+    return [];
+  }
+  const failures = memeAst.parseMemeText(uri, text, grammarCache?.getGrammar?.() ?? undefined)?.failures ?? [];
+  const diagnostics = memeAst.failuresToDiagnostics(failures, text.length);
+  const make = $tw?.utils?.makeParseDiagnostic;
+  if (!make) {
+    return diagnostics;
+  }
+  return diagnostics.map((d) => make(d, { source: MEMETIC_TYPE, sourceLength: text.length }) as ParseDiagnostic);
+}
 
 function MemeticParser(this: ParserInstance, type: string, text: string, options: unknown): void {
   const wiki = (options as { wiki?: WikiLike } | undefined)?.wiki;
@@ -99,6 +161,15 @@ function MemeticParser(this: ParserInstance, type: string, text: string, options
   }
   if (Array.isArray(this.inlineRules)) {
     this.inlineRules = this.inlineRules.filter((r) => !r.name || !denyList.has(r.name));
+  }
+
+  // The meme-ast driver already recovers span-keyed; surfacing its failures on the core
+  // contract lets the filter operator, the render plane and the ingest gate read one channel.
+  const uri = (options as { _canonical_uri?: string } | undefined)?._canonical_uri ?? type;
+  try {
+    this.diagnostics = diagnosticsFrom(uri, text ?? "");
+  } catch {
+    this.diagnostics = this.diagnostics ?? [];
   }
 }
 MemeticParser.prototype = Object.create(stdParser.prototype as object) as ParserPrototype;

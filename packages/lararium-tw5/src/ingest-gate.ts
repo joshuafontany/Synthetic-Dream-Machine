@@ -13,7 +13,8 @@
  *
  * Decision law (in order):
  *   1. disk == synced            → NOOP (nothing happened on disk)
- *   2. membrane refuses the disk → REFUSE (parse warnings; never best-effort)
+ *   2. the parse grades error    → REFUSE (the author lost their meaning)
+ *      anything milder            → carry the diagnostics forward, never drop the bytes
  *   3. render(parse(disk)) == current render → NOOP canonical-equivalent
  *      (the edit changed framing only; the gofmt-loop guard)
  *   4. current render == synced  → INGEST (records unmoved since last
@@ -24,12 +25,16 @@
 
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
 import type { TiddlerFields } from "./deserializer.js";
+import { parseMemeText } from "./meme-ast/parse.js";
+import { failuresToDiagnostics, gradeOf } from "./meme-ast/diagnostics.js";
+import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
+import { getGrammar } from "./grammar-cache.js";
 
 export type IngestDecision =
   | { readonly kind: "noop"; readonly reason: "disk-matches-synced" | "canonical-equivalent" }
-  | { readonly kind: "ingest"; readonly records: readonly TiddlerFields[]; readonly canonicalText: string }
-  | { readonly kind: "conflict"; readonly records: readonly TiddlerFields[]; readonly canonicalText: string }
-  | { readonly kind: "refuse"; readonly warnings: readonly string[] };
+  | { readonly kind: "ingest"; readonly records: readonly TiddlerFields[]; readonly canonicalText: string; readonly diagnostics: readonly MemeDiagnostic[] }
+  | { readonly kind: "conflict"; readonly records: readonly TiddlerFields[]; readonly canonicalText: string; readonly diagnostics: readonly MemeDiagnostic[] }
+  | { readonly kind: "refuse"; readonly warnings: readonly string[]; readonly diagnostics: readonly MemeDiagnostic[] };
 
 export interface IngestGateInput {
   /** The carrier-root lar: URI this disk path projects. */
@@ -54,20 +59,25 @@ export function decideIngest(input: IngestGateInput): IngestDecision {
     return { kind: "noop", reason: "disk-matches-synced" };
   }
 
-  // 2 — the membrane's refusal posture extends to ingest: a carrier that
-  // does not round-trip provably never enters the merge seat best-effort.
+  // 2 — the membrane refuses only where the carrier stops round-tripping, since that alone loses
+  // the operator's bytes. A recovery keeps them: the driver already stood the text back up and
+  // graded how far it fell, so refusing on a recovery would drop the carrier to protect the
+  // grammar. Every decision below therefore carries the gradient forward as a receipt.
+  const failures = parseMemeText(uri, diskText, getGrammar() ?? undefined).failures;
+  const diagnostics = failuresToDiagnostics(failures, diskText.length);
   const records = memeticWikitextDeserializer(diskText, { title: uri });
   const warnRecords = records.filter((r) => String(r.title ?? "").includes("/parse-warning/"));
   if (warnRecords.length > 0) {
     return {
       kind: "refuse",
       warnings: warnRecords.map((w) => String(w.text ?? "")),
+      diagnostics,
     };
   }
   const map = new Map(records.map((r) => [String(r.title), r] as const));
   const canonicalText = expandMemeRefs((t) => map.get(t), uri) ?? "";
   if (canonicalText === "") {
-    return { kind: "refuse", warnings: [`${uri}: membrane produced no canonical render`] };
+    return { kind: "refuse", warnings: [`${uri}: membrane produced no canonical render`], diagnostics };
   }
 
   // 3 — canonical-equivalence gate: the edit changed framing only.
@@ -78,14 +88,14 @@ export function decideIngest(input: IngestGateInput): IngestDecision {
 
   // 4 — clean ingest: the records stand where the last projection left them.
   if (syncedHash !== null && currentRenderHash === syncedHash) {
-    return { kind: "ingest", records, canonicalText };
+    return { kind: "ingest", records, canonicalText, diagnostics };
   }
   // Never-projected carriers (syncedHash null) with no current-render match
   // read as fresh adoptions — clean ingest by definition.
   if (syncedHash === null) {
-    return { kind: "ingest", records, canonicalText };
+    return { kind: "ingest", records, canonicalText, diagnostics };
   }
 
   // 5 — both moved since the merge base: surface, never overwrite.
-  return { kind: "conflict", records, canonicalText };
+  return { kind: "conflict", records, canonicalText, diagnostics };
 }

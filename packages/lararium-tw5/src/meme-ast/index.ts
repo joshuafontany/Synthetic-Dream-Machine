@@ -44,3 +44,11 @@ export { parseMemeText, parseMemeNodes, parseMemeEdges } from "./parse.js";
 
 export type { AhuBlock } from "./ahu-scan.js";
 export { AHU_OPEN_RE, AHU_CLOSE_RE, CONTROL_SLOTS, findTopLevelAhuBlocks, composeSlotPath } from "./ahu-scan.js";
+
+export {
+  severityOf,
+  failuresToDiagnostics,
+  gradeOf,
+  MEMETIC_SOURCE,
+} from "./diagnostics.js";
+export type { MemeDiagnostic, DiagnosticSeverity } from "./diagnostics.js";

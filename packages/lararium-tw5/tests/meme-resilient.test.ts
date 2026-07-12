@@ -69,3 +69,41 @@ describe("meme-ast resilient recovery", () => {
     expect(node!.raw).toContain("aperture(0->20)"); // lossless
   });
 });
+
+// ---------------------------------------------------------------------------
+// The recovery rungs, read onto the severity ladder core TiddlyWiki closes over.
+// A `missing` construct loses the author's meaning; `water` keeps the bytes and drops
+// their sense; `repaired` keeps both at lower confidence.
+// ---------------------------------------------------------------------------
+
+import { failuresToDiagnostics, gradeOf, severityOf } from "../src/meme-ast/diagnostics.js";
+import type { ParseFailure } from "../src/meme-ast/types.js";
+
+describe("the recovery gradient reads onto the core severity ladder", () => {
+  const failure = (recoveredAs: ParseFailure["recoveredAs"]): ParseFailure => ({
+    pos: 3,
+    raw: "<<~ broken",
+    reason: "unclosed-sigil",
+    recoveredAs,
+  });
+
+  test("grades a lost construct hardest, and a repaired one softest", () => {
+    expect(severityOf(failure("missing"))).toBe("error");
+    expect(severityOf(failure("water"))).toBe("warning");
+    expect(severityOf(failure("repaired"))).toBe("info");
+  });
+
+  test("clamps a diagnostic span to the source it stands in", () => {
+    const [diagnostic] = failuresToDiagnostics([failure("water")], 6);
+    expect(diagnostic!.from).toBe(3);
+    expect(diagnostic!.to).toBe(6);
+    expect(diagnostic!.source).toBe("text/x-memetic-wikitext");
+    expect(diagnostic!.code).toBe("unclosed-sigil");
+  });
+
+  test("grades a carrier by the worst fault it holds", () => {
+    expect(gradeOf(failuresToDiagnostics([failure("repaired"), failure("missing")], 100))).toBe("error");
+    expect(gradeOf(failuresToDiagnostics([failure("repaired")], 100))).toBe("info");
+    expect(gradeOf([])).toBe("clean");
+  });
+});

@@ -14,6 +14,9 @@ module-type: library
  */
 
 export {
+  failuresToDiagnostics,
+  gradeOf,
+  severityOf,
   parseMemeText,
   parseMemeNodes,
   parseMemeEdges,

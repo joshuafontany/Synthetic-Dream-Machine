@@ -1,0 +1,86 @@
+/**
+ * diagnostics — the meme-ast recovery record, read onto the core TW5 parse-diagnostics contract.
+ *
+ * The driver already recovers span-keyed and out-of-band (`ParseFailure`). Core TiddlyWiki now
+ * closes over the same shape for any grammar: `{from, to, severity, source, code, message}` with
+ * severity drawn from `error | warning | info | hint`, read by `[parse-diagnostics[]]` through the
+ * parse cache. Mapping one onto the other lets the wiki, the filter, the render plane and the
+ * ingest gate read a single channel rather than three private ones.
+ *
+ * Pure and isomorphic: no `$tw`, so the gate imports it without dragging the VM in.
+ */
+
+import type { ParseFailure } from "./types.js";
+
+export type DiagnosticSeverity = "error" | "warning" | "info" | "hint";
+
+export interface MemeDiagnostic {
+  readonly from:     number;
+  readonly to:       number;
+  readonly severity: DiagnosticSeverity;
+  readonly source:   string;
+  readonly code:     string;
+  readonly message:  string;
+}
+
+export const MEMETIC_SOURCE = "text/x-memetic-wikitext";
+
+/** Worst severity first, so a grade moves only when the worst class of fault moves. */
+const SEVERITY_RANK: Readonly<Record<DiagnosticSeverity, number>> = {
+  error:   1,
+  warning: 2,
+  info:    3,
+  hint:    4,
+};
+
+/**
+ * A recovery rung, read onto the severity ladder.
+ *
+ * `missing` loses the author's construct outright, so the carrier no longer says what they wrote.
+ * `water` keeps the bytes but drops their meaning to plain text. `repaired` keeps both, at lower
+ * confidence. Only the first costs the author their meaning, so only the first reads as an error.
+ */
+export function severityOf(failure: ParseFailure): DiagnosticSeverity {
+  switch (failure.recoveredAs) {
+    case "missing":  return "error";
+    case "water":    return "warning";
+    case "repaired": return "info";
+    default:         return "warning";
+  }
+}
+
+function clamp(value: number, low: number, high: number): number {
+  return Math.max(low, Math.min(value, high));
+}
+
+export function failuresToDiagnostics(
+  failures: readonly ParseFailure[],
+  sourceLength: number,
+  source: string = MEMETIC_SOURCE,
+): MemeDiagnostic[] {
+  return failures.map((failure) => {
+    const from = clamp(failure.pos, 0, sourceLength);
+    const to   = clamp(failure.pos + failure.raw.length, from, sourceLength);
+    return {
+      from,
+      to,
+      severity: severityOf(failure),
+      source,
+      code:     failure.reason,
+      message:  failure.sigilName
+        ? `The ${failure.sigilName} sigil recovered as ${failure.recoveredAs}: ${failure.reason}`
+        : `The parser recovered this span as ${failure.recoveredAs}: ${failure.reason}`,
+    };
+  });
+}
+
+/** The carrier's grade: the worst severity it carries, or `clean` when it carries none. */
+export function gradeOf(diagnostics: readonly MemeDiagnostic[]): DiagnosticSeverity | "clean" {
+  let worst: DiagnosticSeverity | "clean" = "clean";
+  for (const diagnostic of diagnostics) {
+    if (worst === "clean" || SEVERITY_RANK[diagnostic.severity] < SEVERITY_RANK[worst]) {
+      worst = diagnostic.severity;
+    }
+  }
+  return worst;
+}
