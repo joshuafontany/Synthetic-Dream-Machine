@@ -18,6 +18,7 @@ import os
 
 import content_io as cio
 import worldline_io as wl
+import lares_uds as uds
 from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
 
@@ -403,14 +404,84 @@ def build_mcp(coordinator: LaresCoordinator):
     return mcp
 
 
+class DaemonCoordinator:
+    """The verb-router that HOLDS NOTHING — every verb rides the @daemon cap-wire (`lares_uds`).
+
+    MCP is stdio-per-client, so a harness with N sessions runs N of these processes. A coordinator that
+    opened a ContentStore would therefore put N unsynchronized chroma clients on one index — and no
+    lock fixes that, because the palace serve-holders speak NDJSON on raw stdin and can only be reached
+    by the process that spawned them. There is exactly one owner, the @daemon, and everyone else asks it.
+
+    All the COMPUTE still runs py: the daemon routes to the py holders it owns, which do the embedding,
+    the search and the store. The TS coordinator only carries the verb across. This surface is a skin.
+
+    A verb the daemon does not yet answer REFUSES. It never falls back to opening a store — a fallback
+    is how a second writer gets on the palace, which is the one thing this wire exists to prevent.
+    """
+
+    # The verbs the @daemon answers today. The rest are OWED node-side; each needs a verb that routes
+    # to a holder the daemon owns (worldline_io, structurepalace_io, form_encoder, content_io).
+    ROUTED = {"recall"}
+
+    def __init__(self, wing: str = "wing_default") -> None:
+        self._wing = wing
+
+    def _owed(self, verb: str):
+        raise RuntimeError(
+            f"lares_mcp: `{verb}` has no @daemon verb yet, and this surface holds no store of its own. "
+            "Opening one would put a second writer on the palace (N sessions, N clients, one index). "
+            f"Owed: a node verb for `{verb}` that routes to the holder the daemon already owns."
+        )
+
+    def recall(self, query: str, k: int = 8, *, wing: "str | None" = None,
+               drawer: "str | None" = None, **_) -> dict:
+        args: dict = {"limit": k}
+        if drawer:
+            args["drawer"] = drawer
+        else:
+            args["query"] = query
+        if wing or self._wing != "wing_default":
+            args["wing"] = wing or self._wing
+        return uds.output("recall", args)
+
+    def harvest(self, *a, **k):          return self._owed("harvest")
+    def status(self, *a, **k):           return self._owed("status")
+    def worldline(self, *a, **k):        return self._owed("worldline")
+    def kapae(self, *a, **k):            return self._owed("kapae")
+    def un_kapae(self, *a, **k):         return self._owed("un_kapae")
+    def recall_structure(self, *a, **k): return self._owed("recall_structure")
+    def recall_form(self, *a, **k):      return self._owed("recall_form")
+    def plane_record(self, *a, **k):     return self._owed("plane_record")
+
+
 def main() -> None:
     import argparse
 
     ap = argparse.ArgumentParser(description="lares_mcp — the isomorphic /mcp surface over the lares sensorium")
-    ap.add_argument("--palace", required=True, help="the sensorium palace dir this surface serves")
+    ap.add_argument("--palace", help="the sensorium palace dir (STANDALONE only — opens the stores directly; "
+                                     "unsafe with more than one live session)")
     ap.add_argument("--wing", default="wing_default", help="the default wing for captures lacking one")
+    ap.add_argument("--standalone", action="store_true",
+                    help="open the stores directly instead of routing through the @daemon. ONE session only.")
     args = ap.parse_args()
-    build_mcp(LaresCoordinator(args.palace, wing=args.wing)).run()   # stdio MCP serve
+
+    # ROUTED is the default and the only multi-session-safe mode: the @daemon owns the holders, this
+    # process owns nothing. `--standalone` is the single-session escape hatch (a test-bed, a dead node),
+    # and it says so rather than pretending the direct open is free.
+    if args.standalone:
+        if not args.palace:
+            ap.error("--standalone needs --palace")
+        coordinator = LaresCoordinator(args.palace, wing=args.wing)
+    else:
+        if not uds.available():
+            raise SystemExit(
+                f"lares_mcp: no lares daemon at {uds.socket_path()} — start one with `lares serve`.\n"
+                "  This surface routes every verb through the @daemon so the palace keeps ONE owner.\n"
+                "  For a single-session direct open, pass --standalone --palace <dir>."
+            )
+        coordinator = DaemonCoordinator(wing=args.wing)
+
+    build_mcp(coordinator).run()   # stdio MCP serve
 
 
 if __name__ == "__main__":

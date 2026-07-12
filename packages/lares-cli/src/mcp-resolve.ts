@@ -4,9 +4,13 @@
  *
  * A harness reaches memory through the LARES surface (`lares_mcp.py` — FastMCP over the memory
  * sensorium: recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
- * kapae · un_kapae), never by opening a palace of its own. Chroma tolerates one writer per palace, and
- * a harness holding its own sidecar reaches PAST the node into the store — N sessions, N writers, one
- * index. The python holders make that collision loud; only ONE OWNER prevents it.
+ * kapae · un_kapae), and that surface holds NO STORE: every verb rides the @daemon cap-wire
+ * (`lares_uds.py`) to the one process that owns the palace holders.
+ *
+ * MCP is stdio-per-client, so N sessions means N of these processes. A surface that opened a chroma
+ * client would therefore put N unsynchronized writers on one index — and no lock fixes that, because
+ * the serve-holders speak NDJSON on raw stdin and only their spawning parent can reach them. There is
+ * exactly ONE owner, and everyone else asks it. All the compute still runs py; the @daemon only routes.
  *
  * The guest `~/.mempalace` holds no seat here. It is raised deliberately (`lares mempalace setup`) and
  * imported FROM (`guest-import.ts`), never bound into.
@@ -40,11 +44,10 @@ export interface LaresMcpCommand {
 export function resolveLaresMcp(): LaresMcpCommand | null {
   const { python, script, submoduleRoot, scriptPresent } = resolveLaresMcpSpawn();
   if (python === null || !scriptPresent) return null;
-  const palace = memorySensoriumDir();
-  if (!existsSync(palace)) return null; // no sensorium stood yet — `lares wake --init` stands it
+  if (!existsSync(memorySensoriumDir())) return null; // no sensorium stood — `lares wake --init` stands it
   return {
     command: python,
-    args: [script, "--palace", palace],
+    args: [script],   // ROUTED: no --palace. The surface opens no store; it speaks to the @daemon.
     env: { PYTHONPATH: submoduleRoot },
   };
 }
