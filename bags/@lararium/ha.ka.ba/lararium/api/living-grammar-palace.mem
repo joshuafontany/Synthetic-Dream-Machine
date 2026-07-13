@@ -7,12 +7,12 @@ file-path = "bags/@lararium/api/living-grammar-palace.mem"
 hydrate   = true
 l-space   = "lararium"
 mana      = 19
-manao     = 18
+manao     = 19
 manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a multi-graph (CONTENT⊥FORM⊥STRUCTURE) cross-joined by sha + N-ary RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. The KEYSTONE unification (4-spirit convergence) reads the three palaces as ONE product-presheaf object P = Content × Form × Struct in [Bᵒᵖ,Vect] over the FFZ base — the cap-stack the projections, the verbatim-sha a pullback morphism (no morphism → no join, the formalism forbidding the vibe-coded cross-product); two floors (strict product unifies · Lawvere-enriched ultrametric measures drift); a SEPARATE fused-Measure arrow P→M (the common-cause log-opinion-pool / multivariate BOCPD gong, whitened against co-moving planes); functoriality = mālama pili (each vibe-coded sin = a dropped arrow); two operators (RRF=recall · quorum-servo=Measure-segmentation). Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and multi-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
+role      = "the living-grammar memory-palace — the design-of-record for capturing the FORM of the house's living grammar (its constructicon) alongside its CONTENT. ONE nameless palace-instance entity differentiated by its cap-stack (the daemon-collapse) · three registers (defined·formal·casual) × three grammar-layers (HTML⊂wikitext⊂x-memetic) · two-planes form-capture (discrete constructicon ⋈ continuous fuzzy-membership / sanction-degree vector) · a TOWER (CONTENT↠STRUCTURE↠FORM, each a coarsening) cross-joined by sha + N-ary RRF · full-tree payloads · multi-aperture retrieval · pono-gating caps. THE KEYSTONE (rewritten 2026-07-13, on measurement): the three palaces name ONE object under three COARSENINGS — a CHAIN in the partition lattice, Content↠Structure↠Form, H(form)≤H(structure)≤H(content), NEVER a product. Measured: structure carries 5.630 of the record's 5.755 bits (97.8%) — a near-deterministic quotient, so no complementary factor and no residual to factorize; `plane_capacity` reads H(plane) as the lattice HEIGHT (a count off the partition, no estimator, an upper bound that can only under-claim). The product-presheaf reading RETIRES: the theorem held and the premise failed. The chain DELETES the fusion problem — the log-opinion-pool, the multivariate BOCPD gong, the whitening, and every hand-tuned weight retire with it (the canon named the dependence and mis-priced it as nuisance covariance; the dependence IS the structure). The cut rides the TWO-PART CODE: l(G) the grammar bits (what recurs), l(D|G) the residual (what stays unique), the boundary set by CODE LENGTH and never a weight; a prior MAY ride, because MDL lets the corpus overrule it in bits. The chain's stop = the Kolmogorov minimal sufficient statistic. H1 keeps its job at a federation boundary and loses it at a plane boundary (a chain of quotients holds no obstruction to gluing — dim H1 = 0 by construction, which names why the gate always read health). The verbatim-sha pullback survives, and buys little: it gathers rows the tower already relates; functoriality = mālama pili (each vibe-coded sin = a dropped arrow); two operators (RRF=recall · quorum-servo=Measure-segmentation). Rests on 8 research libations from construction-grammar, ritual/performative theory, AST-vectors, multi-aperture retrieval, and multi-graph fusion. BINDS the FfzClock as the drawer's worldline-temporal facet — a CACHED PROJECTION over the edge-DAG (never the causal authority); φ as non-interference/scale-orthogonality (entrainment dropped); two P0 ladders (causal-depth · settledness), six deferred; the transaction-axis the one local-yet-essence carve-out under no-global-now ∧ L-Prime. Narrowed mufakat (12-Voice, 2026-06-29), five kept-hoike dissents live; three cross-substrate witnesses (φ/KAM · common-law · Borrill-locality); the pattern's honest status = a BRAID of proven single-strand patterns."
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/api/living-grammar-palace"
 written   = "2026-06-29"
@@ -36,10 +36,12 @@ in use.
 The design rests on four spines, each named below: a NAMELESS palace-instance entity (one daemon body,
 differentiated only by its cap-stack); THREE REGISTERS of the living grammar braided with a THREE-LAYER
 grammar-stack (a 3×3 grid); a TWO-PLANES form-capture (a discrete constructicon ⋈ a continuous fuzzy-
-membership manifestation); and a DUAL-GRAPH that keeps form orthogonal to content yet hash-joins the two.
+membership manifestation); and a TOWER in which form COARSENS structure, structure coarsens content, and
+the verbatim hash rejoins what the tower already relates.
 
-> **Constructicon names the score; the fuzzy-membership vector names the performance; the multi graph
-> keeps them apart yet rejoins them on the verbatim hash.**
+> **Constructicon names the score; the fuzzy-membership vector names the performance; and the planes NEST
+> — each a coarsening of the one below, the two-part code cutting grammar-bits from residual-bits, the
+> boundary set by CODE LENGTH.**
 
 <<~/ahu >>
 
@@ -189,9 +191,12 @@ and near-term.
 
 <<~ ahu #multi-graph >>
 
-## Multi-Graph ~ CONTENT ⊥ FORM ⊥ STRUCTURE …, hash-joined
+## Multi-Graph ~ CONTENT ↠ STRUCTURE ↠ FORM, a tower — hash-joined
 
-Content, form, and structure ride SEPARATE palaces, kept orthogonal — and the join generalizes to N:
+Content, form, and structure ride SEPARATE palaces and **NEST**: each COARSENS the one before it (#spine,
+the chain in the partition lattice). They never sit orthogonal — the measured ceiling puts structure at
+**97.8%** of the record's own bits, which names a near-deterministic quotient, never a complementary
+factor. The join generalizes to N, and it gathers rows the tower already relates:
 
 <<~ranks palace content ~ the verbatim mempalace; late-chunked over the session (the words) -> form ~ the formpalace; the fuzzy-constructicon move-vectors (the moves / the jurus) -> structure ~ the structurepalace; the canonical AST + structural-hash (the exact shape) >>
 
@@ -227,21 +232,48 @@ data; the multivariate change-point fusion (Cho-Fryzlewicz); the causal-inferenc
 convergence grounds the keel ([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]], *mālama pili* — keep the relations):
 **the join acts as a functor or it carries no meaning.**
 
-### The spine ~ P = Content × Form × Struct, a product in the presheaf category
+### The spine ~ Content ↠ Structure ↠ Form, a CHAIN OF COARSENINGS in the partition lattice
 
-The unification reads as a **PRODUCT** `P = Content × Form × Struct` in the presheaf category
-`[Bᵒᵖ, Vect]` — the functor category over the FFZ membership-tree (#ffz-binding,
-[[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) read as the base category **B**. The product computes **CELLWISE**
-(pointwise limits, nLab) — the limit taken at each cell of B. So the three palaces name **ONE object
-under three projections**, and the cap-stack (#palace-instance) IS the projection set:
+**The three palaces name ONE object under three projections — and each projection COARSENS the one
+before it.** They compose as a **TOWER**, never as a product:
 
-<<~ranks projection π_content ~ the mempalace; the verbatim words -> π_struct ~ the structurepalace; the canonical AST + structural-hash -> π_form ~ the formpalace; the fuzzy-constructicon move-vectors >>
+<<~ranks coarsening π_content ~ the mempalace; the verbatim words — the FINEST partition, one cell per record -> π_struct ~ the structurepalace; the canonical AST + structural-hash — a COARSENING: records sharing a pattern fall into one cell -> π_form ~ the formpalace; the induced constructicon — a coarsening of THAT: patterns sharing a template fall into one cell >>
 
-The nameless palace-entity carrying `[…, ContentFeedCap]` projects content; `[…, AstFeedCap]` projects
-structure; `[…, FormVectorCap]` projects form — three projections of the one product, the
-daemon-collapse (#palace-instance) read categorically. <<~ confidence Synthesis-Canon 13/20 >> The
-product computes cellwise as a theorem of the presheaf category, never a design preference — one object,
-three views.
+Each plane maps a record to a label, and a map into labels **partitions** the record set into its fibers.
+Partitions under refinement form a **LATTICE** (meet = coarsest common refinement; join = finest common
+coarsening), and the information lattice sits isomorphic to it (arXiv 2404.03131). So the spine reads as a
+**CHAIN IN THAT LATTICE**, and the entropies order themselves by construction:
+
+    H(form)  <=  H(structure)  <=  H(content)          and     I(target ; plane)  <=  H(plane)
+
+<<~ confidence Canon 17/20 >> **`H(plane)` names the plane's HEIGHT in the lattice, and `plane_capacity`
+measures it exactly** — a count off the partition, no estimator, an upper bound that can only under-claim.
+Measured on the extracted bed: **structure carries 5.630 of the record's 5.755 bits — 97.8%.**
+
+**A PRODUCT WOULD REQUIRE INDEPENDENT FACTORS, AND 97.8% NAMES A NEAR-DETERMINISTIC QUOTIENT.** A factor
+carrying almost the whole object contributes no complementary coordinate; it re-presents the object at a
+coarser grain. **There sits no residual to factorize.** `Content x Form x Struct` over-counts the one
+object roughly threefold, and its "projections" name coarsenings wearing a product's clothes. The
+earlier reading — a product in the presheaf category, the limit taken cellwise — **retires**: the theorem
+holds and the PREMISE fails, which ships a false conclusion at Canon register (the Confabulation-as-Canon
+tell). Category theory cannot rescue an object that is not there.
+
+**What the chain LICENSES, and the product never could:**
+
+<<~ranks licence order ~ a chain HAS one; a product needs a fusion rule to combine incomparable coordinates, and every hand-tuned weight in that stack (log-opinion-pool, RRF, whitening) reads as a symptom of the wrong algebra — the chain DELETES the fusion problem rather than solving it -> stop ~ a chain carries a distinguished point: the Kolmogorov MINIMAL SUFFICIENT STATISTIC, the coarsest model past which the residual reads indistinguishable from noise (the structure function locates it) — the no-imposed-prior law satisfied STRUCTURALLY, never by decree -> meet ~ the coarsest common refinement of two planes stands as a definite OBJECT; a product could only offer a correlation -> ceiling ~ a coarsening never GAINS information, so every plane's claim carries an exact estimator-free bound >>
+
+**And the honest consequence for the gates:** a chain of quotients holds **no obstruction to gluing**.
+`dim H1 = 0` by construction — which names exactly WHY the coherence gate reports health on every bed it
+has ever read. It certifies nothing there. **H1 keeps its job at a FEDERATION boundary (genuinely distinct
+contexts) and loses it at a PLANE boundary** (#federation, and the sensorium never federates).
+
+**The two-part code cuts where the chain wants cutting.** `l(G)` prices the GRAMMAR — what recurs, the
+reused bits: the object structure and form both reach for. `l(D|G)` prices the RESIDUAL — what stays
+unique per record: the object content reaches for. A candidate joins only where it LOWERS `l(G)+l(D|G)`,
+so **the cut rides CODE LENGTH — never a weight, never a routing table, never a typed k** (the ledger
+already runs, #form-plane / `form_induction.description_length`). **A prior MAY ride here: MDL lets the
+corpus overrule it, in bits.** A prior that must earn its keep never reads as an imposed prior — which
+names the strictest available form of the law, never a softening.
 
 ### The hash-join ~ a pullback over a shared codomain (the formalism forbids the vibe-coded join)
 
@@ -270,15 +302,37 @@ Synthesis 12/20 >> The FFZ rhythmic distance and the Measure drift ride the **SA
 floor** — the clock's containment-distance and the drift readout speak one currency, the [0,∞] the
 enrichment hands them.
 
-### The fused Measure ~ a separate arrow P → M (the drift readout, not the universal arrow into P)
+### The fused Measure ~ RETIRED. The tower answers the question the pool was invented to ask.
 
-Two arrows ride the product, pointing opposite ways. The **universal arrow INTO P** gathers the three
-views into the one object (the product's defining map, above). The **FUSED MEASURE** rides a SEPARATE
-arrow **P → M** — a map OUT of the product into a measure object, distinct from the universal arrow in.
-The Measure answers one causal-inference question (Körding's causal-inference / BCI):
+**The corroboration reading dies with the product, and it dies for the reason the meme itself named.**
 
-> **P(common-cause | content-drift · form-drift · structure-drift)** — did the three planes drift
-> together because ONE event moved them, or did they wander apart?
+The Measure asked one causal-inference question — *did the three planes drift together because ONE event
+moved them, or did they wander apart?* — and answered it by POOLING per-plane evidence, guarded by a
+whitening step the canon flagged as load-bearing (*"the planes are NOT conditionally independent … WHITEN
+before pooling, or the gong double-counts"*).
+
+<<~ confidence Canon 17/20 >> **That warning stands correct and mis-priced.** It read the dependence as a
+NUISANCE COVARIANCE to whiten away. **The dependence names the STRUCTURE.** Structure carries 97.8% of the
+record's bits (#spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — **one plane heard
+three times.** And a pool cannot be rescued by whitening: strip 97.8% of the signal and what returns IS the
+residual — **which the two-part code already names, and prices, without a fusion rule.** *The cure, taken
+seriously, collapses into the compression.* The canon walked to the edge of the finding and called it a
+covariance correction.
+
+<<~moves fuse-the-planes -> read-the-height on/the-chain if/the-planes-nest do/price-the-residual-in-bits >>
+
+**So the whole fusion stack retires** — the precision-weighted log-opinion-pool, the shared-hazard
+multivariate BOCPD, the sparsified threshold-then-sum, the corroboration ladder. **Every hand-tuned weight
+in it named a symptom of the wrong algebra** (#the-sins, Ad-Hoc-Weighting, which the meme already forbade).
+A chain HOLDS an order; it needs no rule for combining incomparable coordinates. **The chain deletes the
+fusion problem rather than solving it.**
+
+**What replaces it costs less and claims less.** Drift reads as a change in DESCRIPTION LENGTH: an event
+that moves the corpus lengthens `l(G)+l(D|G)` until the grammar re-earns its bits. One currency, one
+ledger, no pooling — and no gong that can fire on a single artifact wearing three coats.
+
+*(The paragraphs below record the retired mechanism; they stand for the reader who must recognize it, and
+they name no live surface.)*
 
 The readout computes as a **precision-weighted LOG-OPINION-POOL** — a **shared-hazard multivariate
 BOCPD** (Bayesian online change-point detection) with factorized per-plane likelihoods. Its character:
