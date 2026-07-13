@@ -277,3 +277,20 @@ def test_real_triple_wa_units_identical_across_modes():
     _, k_w = section_corpus_file("kumulipo-beckwith.md", beck, extract=False)
     _, k_e = section_corpus_file("kumulipo-beckwith.md", beck, extract=True)
     assert k_w["sections"] == k_e["sections"]   # the appendix = the built-in control
+
+
+def test_dispatch_keys_on_the_stem_not_the_extension():
+    """The carrier rename (.md -> .mem) silently landed the chant whole at chunk 0 —
+    the rule now reads the stem, so the next extension flip cannot re-silence it."""
+    from kumulipo_sections import section_corpus_file
+
+    text = "\n".join([
+        "<<~ ahu #source-text >>",
+        "## The First Era", "line one", "## The Second Era", "line two",
+        "<<~/ahu >>",
+    ])
+    for name in ("kumulipo-liliuokalani.md", "kumulipo-liliuokalani.mem"):
+        got = section_corpus_file(name, text, extract=False)
+        assert got is not None, name
+        assert got[0]["source"] == "kumulipo/liliuokalani"
+    assert section_corpus_file("unrelated.mem", text, extract=False) is None

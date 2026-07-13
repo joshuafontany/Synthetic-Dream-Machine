@@ -29,6 +29,7 @@ Meme: lar:///ha.ka.ba/lararium/sensorium/kumulipo-sections
 """
 from __future__ import annotations
 
+import os
 import re
 
 # ── the #source-text carrier (the extraction seam) ──────────────────────────────────────
@@ -185,10 +186,14 @@ def section_corpus_file(basename: str, text: str, *, extract: bool) -> "list | N
     `{"source": <stable key>, "sections": [(label, text), …]}` — or None for a file no
     rule names (the caller lands it whole). The Beckwith carrier yields TWO sources:
     its own translation and the Kalakaua appendix under its own address."""
-    if basename == "kumulipo-liliuokalani.md":
+    # dispatch by STEM: the carrier extension flipped once already (.md → .mem, the
+    # registered carrier rename) and silently landed the chant whole at chunk 0 —
+    # a rule keyed to the name, never the suffix, survives the next flip too.
+    stem = os.path.splitext(basename)[0]
+    if stem == "kumulipo-liliuokalani":
         return [{"source": "kumulipo/liliuokalani",
                  "sections": _section_liliuokalani(text, extract=extract)}]
-    if basename == "kumulipo-beckwith.md":
+    if stem == "kumulipo-beckwith":
         beckwith, kalakaua = _section_beckwith(text, extract=extract)
         return [{"source": "kumulipo/beckwith", "sections": beckwith},
                 {"source": "kumulipo/kalakaua-appendix", "sections": kalakaua}]
