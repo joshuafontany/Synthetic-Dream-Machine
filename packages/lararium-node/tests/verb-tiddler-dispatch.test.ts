@@ -46,23 +46,44 @@ const skipReason =
 const WIKI_ID = "lar:///ha.ka.ba/bags/@test/verb-tiddler-dispatch";
 const TIMEOUT = 30_000;
 
+/**
+ * Poll until `check` yields, or until the test's OWN budget runs out.
+ *
+ * The test carries exactly ONE deadline — the runner's. A second, smaller wall-clock budget nested
+ * inside it measures how busy the machine is and reports the answer as a failure of the code: a full
+ * TW5 boot plus CRDT sync overruns a tight inner deadline whenever the box is loaded, and the island
+ * was working the whole time. `budgetMs` therefore names the runner's budget, and the margin only
+ * reserves teardown room so the rejection lands with its LABEL instead of an anonymous runner kill.
+ */
 function waitFor<T>(
   check: () => T | null | undefined,
-  timeoutMs = 5000,
-  label = "condition",
+  startedAt: number,
+  label: string,
+  budgetMs = TIMEOUT,
+  teardownMarginMs = 3_000,
 ): Promise<T> {
   return new Promise((resolve, reject) => {
-    const start = Date.now();
     const interval = setInterval(() => {
       const result = check();
       if (result != null) { clearInterval(interval); resolve(result); }
-      else if (Date.now() - start > timeoutMs) {
+      else if (Date.now() - startedAt > budgetMs - teardownMarginMs) {
         clearInterval(interval);
-        reject(new Error(`timeout waiting for ${label} after ${timeoutMs}ms`));
+        reject(new Error(`timeout waiting for ${label} within the test's ${budgetMs}ms budget`));
       }
     }, 50);
   });
 }
+
+/**
+ * A verb tiddler whose event, once seen, proves the island has DRAINED every change written before it.
+ *
+ * Asserting a silence after `setTimeout(n)` asserts nothing: a loaded island that has not yet booted
+ * emits the same silence as an island that correctly refused to fire, so absence-of-looking and
+ * absence-of-finding generate identically and the test passes either way. A sentinel written AFTER the
+ * tiddler under observation converts the clock into a HAPPENS-BEFORE — its arrival is what licenses the
+ * claim that the observed tiddler fired nothing.
+ */
+const SENTINEL_URI = "lar:///test/devices/drain-sentinel";
 
 // ---------------------------------------------------------------------------
 // Suite
@@ -75,6 +96,7 @@ describe.skipIf(skipReason)(
   test(
     "tiddler with verb field triggers IslandMsg_Event with payload.verb via reaction-router",
     async () => {
+      const startedAt     = Date.now();
       const genesisBytes  = new Uint8Array(readFileSync(GENESIS_BIN));
       const genesisDoc    = automergeLoad<LarDoc>(genesisBytes);
       const coreHash      = (genesisDoc.blobs?.[ENGINE_CORE_ID]?.sha256 as string | undefined) ?? null;
@@ -127,10 +149,10 @@ describe.skipIf(skipReason)(
           };
         });
 
-        // Wait for the verb event to arrive via onWorkerEvent.
+        // Wait for the verb event to arrive via onWorkerEvent, against the test's own budget.
         const ev = await waitFor(
           () => events.find((e) => e.payload["verb"] === "MOVE"),
-          8000,
+          startedAt,
           "IslandMsg_Event with payload.verb=MOVE",
         );
 
@@ -152,6 +174,7 @@ describe.skipIf(skipReason)(
   test(
     "tiddler without verb field fires no verb event (observation-only)",
     async () => {
+      const startedAt     = Date.now();
       const genesisBytes  = new Uint8Array(readFileSync(GENESIS_BIN));
       const genesisDoc    = automergeLoad<LarDoc>(genesisBytes);
       const coreHash      = (genesisDoc.blobs?.[ENGINE_CORE_ID]?.sha256 as string | undefined) ?? null;
@@ -176,6 +199,8 @@ describe.skipIf(skipReason)(
         },
       });
 
+      const OBSERVED_URI = "lar:///test/devices/observation-only-1";
+
       try {
         await pool.mountWiki(WIKI_ID + "-obs", {
           coreHash,
@@ -183,22 +208,31 @@ describe.skipIf(skipReason)(
           grants:   { islandUrl: laraiumHandle.url, wikiUrl: wikiHandle.url },
         });
 
-        // Write a tiddler WITHOUT a verb field — should not trigger verb dispatch.
+        // The tiddler under observation carries NO verb, so the router must let it pass in silence.
+        // The SENTINEL follows it and does carry one. Both ride the same CRDT change, so the island
+        // sees the observed tiddler no later than the sentinel — and the sentinel's event is the only
+        // thing that licenses reading the silence as a REFUSAL rather than as a slow boot.
         wikiHandle.change((d) => {
           const tiddlers = (d as unknown as Record<string, unknown>)["tiddlers"] as
             Record<string, unknown>;
-          tiddlers["lar:///test/devices/observation-only-1"] = {
-            title: "lar:///test/devices/observation-only-1",
-            text:  "no verb here",
-            tags:  "",
+          tiddlers[OBSERVED_URI] = {
+            tiddler: { text: "no verb here", tags: "" },
+          };
+          tiddlers[SENTINEL_URI] = {
+            tiddler: { verb: "DRAIN", listenable: "InteractedWithEvent", text: "sentinel", tags: "" },
           };
         });
 
-        // Give the island time to process (if a verb event were to fire, it would
-        // arrive within ~1 s). Asserting silence after a wait window.
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        // The drain marker: the island has now processed every change written before it.
+        await waitFor(
+          () => verbEvents.find((e) => e.payload["verb"] === "DRAIN"),
+          startedAt,
+          "the DRAIN sentinel's IslandMsg_Event",
+        );
 
-        expect(verbEvents).toHaveLength(0);
+        // The silence now MEANS something: the router saw the observed tiddler and fired nothing for it.
+        expect(verbEvents.map((e) => e.payload["fromUri"])).not.toContain(OBSERVED_URI);
+        expect(verbEvents.filter((e) => e.payload["verb"] !== "DRAIN")).toHaveLength(0);
 
       } finally {
         await pool.disposeAll();
