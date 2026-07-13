@@ -127,3 +127,12 @@ bed rebuilds — corrections arrive as dated strikethroughs, never silent edits.
 - The regeneration witness (rederive == pour, dl bit-identical on the memes
   bed) rides commit 39130c48; the C-criteria sweeps proper (C1 shuffled
   twins side-by-side, C4 stops, C5 at scale) remain the next run.
+
+**2026-07-13 · corrections (dated, per the reading discipline).**
+- The beds table wrote ~~human-text-lares-library (251)~~ — under the
+  one-file-one-record law the library corpus lands 15 records (10 .mem books
+  + 5 .txt extracts); the 251-record scale bed predates that law and its
+  intended shape stands as an open operator fork. C5-at-scale reads against
+  whatever shape that ruling lands.
+- ~~tw5 / pidgin beds (in flight across the hearth)~~ — landed (commit
+  b24e6b09); their pre-run predictions stay owed by their builder.

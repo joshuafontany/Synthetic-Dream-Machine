@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """form_induction — the S3 FORM cap: the corpus's OWN grammar, induced BLIND.
 
-corpus.md #the-form-induction. The LAST of the four corpus planes (content · structure
-· bands · FORM). Where `form_encoder.py` scores a turn against a KNOWN constructicon
+corpus.md #the-form-induction. The COARSEST of the corpus planes (Content ↠ Structure
+↠ FORM — the chain of coarsenings; bands dissolved into the stored address). Where
+`form_encoder.py` scores a turn against a KNOWN constructicon
 (the fuzzy-membership plane, P2 of living-grammar-palace), THIS sidecar LEARNS the
 constructicon a corpus never told us it had — the nameless learner: miners surface the
 shape, description-length keeps only what pays, and the LLM names LAST (never inside the
@@ -19,10 +20,9 @@ THE STACK (corpus.md #the-form-induction)
                    Zaki's rightmost-extension enumeration, ported ~native so no dep;
                    CLOSED-filtered so a sub-pattern of an equally-frequent super-pattern
                    never spams the output).
-  PrefixSpan/BIDE— frequent CLOSED move-SEQUENCES over the pre-order node-type streams
-                   (the `prefixspan` PyPI package when present — PrefixSpan + BIDE-closed
-                   + top-k; a compact native fallback otherwise, so the miner never hard-
-                   faults on a bare venv).
+  MaximalRepeats — every recurring CONTIGUOUS run of the pre-order node-type streams,
+                   surfaced linearly over the FULL streams (maximal_repeats.py: suffix
+                   array + LCP intervals; the pool bounds by the string, never a knob).
   ΔP association — usage-based construction candidates by the c2xg association measure
                    (candidate → identify(ΔP) → evaluate(MDL)). c2xg-the-PACKAGE targets
                    raw NL words + a gensim word2vec basis; our units are content-free
@@ -87,7 +87,7 @@ def _children(node: dict) -> list:
 
 
 def _preorder_types(node: dict, out: list) -> None:
-    """The pre-order node-type stream of a tree — the sequence the PrefixSpan / ΔP miners
+    """The pre-order node-type stream of a tree — the sequence the repeat / ΔP miners
     read (and the linearization every subtree template is scored through in the MDL)."""
     t = node.get("type")
     out.append(str(t) if t is not None else "?")
@@ -387,7 +387,7 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
     return closed
 
 
-# ── PrefixSpan / BIDE — frequent CLOSED move-sequences over the streams ───────────────
+# ── maximal repeats — recurring contiguous runs over the streams ──────────────────────
 
 
 def mine_sequences(streams: list, min_support: int, *, max_forms: int = _MAX_FORMS_DEFAULT,
@@ -584,7 +584,6 @@ class _CoverScorer:
 
     def masks(self, pat: tuple) -> "tuple[list, int]":
         """Per-stream match-start booleans for one template + its occurrence count."""
-        np = self._np
         enc = [self._sym.get(x) for x in pat]
         L = len(enc)
         out: list = []
@@ -737,7 +736,7 @@ def induce_forest(forest: list, *, min_support: int = _DEFAULT_MIN_SUPPORT,
                   max_candidates: "int | None" = None) -> dict:
     """BLIND induction over a structure forest → the corpus's constructicon.
 
-    TreeMiner + PrefixSpan/BIDE + ΔP surface candidates; MDL over the streams selects the
+    TreeMiner + MaximalRepeats + ΔP surface candidates; MDL over the streams selects the
     ones that pay their bits; seeds ride the same ledger (kept only where earned). The LLM
     is NOT called — labelling is downstream. Returns {forms, summary}.
 
