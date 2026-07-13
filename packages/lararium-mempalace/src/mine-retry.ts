@@ -111,6 +111,14 @@ export interface ServoRetryOptions {
   readonly maxAttempts?: number;
   /** HANG retry budget — a killed-by-timeout attempt retries at most this many times. Default 1. */
   readonly maxHangRetries?: number;
+  /**
+   * The WORK this mine carries (transcripts presented). The servo learns a PER-ITEM rate and scales
+   * the kill-timeout by the count, because a mine's duration runs ~linear in its input and one key
+   * serves wings of wildly different size. Without it the EWMA averages a 2-transcript wing against a
+   * 756-transcript one, learns a number describing neither, and kills the big mine as a hang — which
+   * it did, silently, and reported the harvest as failed.
+   */
+  readonly items?: number;
 }
 
 /**
@@ -127,7 +135,7 @@ export function mineWithServo<T>(pathKey: string, run: (timeoutMs: number) => T,
   let hangs = 0;
   for (let attempt = 1; ; attempt++) {
     try {
-      return timeMine(pathKey, run);
+      return timeMine(pathKey, run, opts.items);
     } catch (e) {
       if (isMineHang(e)) {
         if (hangs < maxHangRetries) {
@@ -135,7 +143,7 @@ export function mineWithServo<T>(pathKey: string, run: (timeoutMs: number) => T,
           sleepSync(backoffMs(hangs));
           continue;
         }
-        throw new MineHangError(pathKey, adaptiveTimeoutMs(pathKey), hangs + 1, e);
+        throw new MineHangError(pathKey, adaptiveTimeoutMs(pathKey, opts.items), hangs + 1, e);
       }
       if (isMineAlreadyRunning(errMessage(e)) && attempt < maxAttempts) {
         sleepSync(backoffMs(attempt));
@@ -157,7 +165,7 @@ export async function mineWithServoAsync<T>(
   let hangs = 0;
   for (let attempt = 1; ; attempt++) {
     try {
-      return await timeMineAsync(pathKey, run);
+      return await timeMineAsync(pathKey, run, opts.items);
     } catch (e) {
       if (isMineHang(e)) {
         if (hangs < maxHangRetries) {
@@ -165,7 +173,7 @@ export async function mineWithServoAsync<T>(
           await sleepAsync(backoffMs(hangs));
           continue;
         }
-        throw new MineHangError(pathKey, adaptiveTimeoutMs(pathKey), hangs + 1, e);
+        throw new MineHangError(pathKey, adaptiveTimeoutMs(pathKey, opts.items), hangs + 1, e);
       }
       if (isMineAlreadyRunning(errMessage(e)) && attempt < maxAttempts) {
         await sleepAsync(backoffMs(attempt));

@@ -122,6 +122,9 @@ export async function cmdMempalaceHarvest(args: ParsedArgs): Promise<number> {
           execFileSync(MP, ["--palace", palace, "mine", stage, "--mode", "convos", "--wing", wing], {
             maxBuffer: 1 << 30, encoding: "utf8", timeout: timeoutMs, killSignal: "SIGKILL",
           }),
+          // The wing's transcript count IS the work. Hand it over, or the servo prices a 756-transcript
+          // wing at the mean of every wing it has seen and kills it as a hang.
+          { items: staged },
         ),
       );
       filed = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
