@@ -494,12 +494,106 @@ def description_length(streams: list, dictionary: list, alphabet_size: int) -> f
     return _grammar_len(dictionary, alphabet_size) + _encode_len(streams, dictionary, alphabet_size)
 
 
+class _CoverScorer:
+    """The vectorized cover scan behind the MDL rounds — same greedy longest-match cover
+    as _encode_len, restructured around three facts the naive loop re-derived every trial:
+    a candidate's MATCH POSITIONS never change across rounds (cached once, one boolean
+    array per stream); the kept dictionary changes once per round (the longest-match
+    baseline rebuilds then, never per trial); and a candidate can never save more units
+    than occurrences x (len-1) (each match replaces at most len emissions with one), so
+    a round skips exactly the trials that provably cannot beat the best found — an
+    MDL-derived bound, never a knob. Integer arithmetic throughout: deterministic."""
+
+    def __init__(self, streams: list) -> None:
+        import numpy as np
+
+        self._np = np
+        self._sym: dict = {}
+        arrs = []
+        for s in streams:
+            row = np.empty(len(s), dtype=np.int64)
+            for i, x in enumerate(s):
+                v = self._sym.get(x)
+                if v is None:
+                    v = len(self._sym)
+                    self._sym[x] = v
+                row[i] = v
+            arrs.append(row)
+        self._arrs = arrs
+        self._base = [np.zeros(a.shape[0], dtype=np.int32) for a in arrs]
+
+    def masks(self, pat: tuple) -> "tuple[list, int]":
+        """Per-stream match-start booleans for one template + its occurrence count."""
+        np = self._np
+        enc = [self._sym.get(x) for x in pat]
+        L = len(enc)
+        out: list = []
+        occ = 0
+        for a in self._arrs:
+            n = a.shape[0]
+            if any(e is None for e in enc) or L == 0 or L > n:
+                out.append(None)
+                continue
+            m = a[: n - L + 1] == enc[0]
+            for j in range(1, L):
+                m = m & (a[j : n - L + 1 + j] == enc[j])
+            if m.any():
+                out.append(m)
+                occ += int(m.sum())
+            else:
+                out.append(None)
+        return out, occ
+
+    def rebuild_base(self, kept_pats: "list[tuple[tuple, list]]") -> int:
+        """Re-derive the kept dictionary's longest-match array (once per accepted round)
+        and return the baseline unit count."""
+        np = self._np
+        self._base = [np.zeros(a.shape[0], dtype=np.int32) for a in self._arrs]
+        for pat, masks in kept_pats:
+            L = len(pat)
+            for bl, m in zip(self._base, masks):
+                if m is not None:
+                    np.maximum(bl[: m.shape[0]], np.where(m, L, 0), out=bl[: m.shape[0]])
+        self._base_units = self._units(self._base)
+        return self._base_units
+
+    def _units(self, bestlen: list) -> int:
+        total = 0
+        for bl in bestlen:
+            row = bl.tolist()  # scalar indexing runs far faster off a list
+            i, n, u = 0, len(row), 0
+            while i < n:
+                u += 1
+                step = row[i]
+                i += step if step else 1
+            total += u
+        return total
+
+    def units_with(self, pat: tuple, masks: list) -> int:
+        """The cover's unit count with one candidate riding beside the kept baseline."""
+        np = self._np
+        L = len(pat)
+        trial = []
+        for bl, m in zip(self._base, masks):
+            if m is None:
+                trial.append(bl)
+            else:
+                t = bl.copy()
+                np.maximum(t[: m.shape[0]], np.where(m, L, 0), out=t[: m.shape[0]])
+                trial.append(t)
+        return self._units(trial)
+
+
 def mdl_select(streams: list, candidates: list, *, min_support: int = _DEFAULT_MIN_SUPPORT,
                max_forms: int = _MAX_FORMS_DEFAULT, holdout: list | None = None) -> dict:
     """The greedy EM-style MDL rounds: add the candidate that most lowers the total
     description length each pass; STOP when none lowers it (l(G)+l(D|G) stops falling).
     A min-support floor + an optional held-out presence cross-check reject the memorize-few
-    corner. Returns {kept, rejected, dl0, dl, rounds}."""
+    corner. Returns {kept, rejected, dl0, dl, rounds}.
+
+    The cover scan rides _CoverScorer (cached match masks · once-per-round baseline ·
+    the occurrences x (len-1) unit bound) — verdict-identical to the reference
+    description_length trials, measured in seconds instead of minutes on real streams."""
     alphabet = sorted({x for s in streams for x in s})
     asize = max(len(alphabet), 1)
     dl0 = description_length(streams, [], asize)
@@ -521,31 +615,51 @@ def mdl_select(streams: list, candidates: list, *, min_support: int = _DEFAULT_M
     # (subtree (label, depth) pairs beside sequence symbol strings), and a raw tuple compare
     # throws exactly when supports tie ACROSS kinds — a latent break no single-kind corpus hits.
     pool.sort(key=lambda c: (-int(c.get("support", 0) or 0), _canonical(c["seq"])))
+
+    scorer = _CoverScorer(streams)
+    # the floors and the match masks never change across rounds — derived once, here.
+    trials = []
+    for c in pool:
+        key = tuple(c["seq"])
+        if _seq_support(streams, key) < min_support:
+            continue
+        if holdout and _seq_support(holdout, key) < 1:
+            continue
+        masks, occ = scorer.masks(key)
+        trials.append((c, key, masks, occ))
+
+    base_units = scorer.rebuild_base([])
+    kept_pats: list = []  # [(key, masks)] — the baseline's own ingredients
+    grammar_ids = 0  # sum of (len+1) over kept — the l(G) id count at shared bits-per
     dl = dl0
     rounds = 0
     while len(kept) < max_forms:
+        ext = asize + len(kept) + 1
+        bits_per = math.log2(ext) if ext > 1 else 1.0
         best = None
         best_dl = dl
-        for c in pool:
-            key = tuple(c["seq"])
+        best_masks = None
+        for c, key, masks, occ in trials:
             if key in kept_keys:
                 continue
-            # min-support floor over the training streams.
-            sup = _seq_support(streams, key)
-            if sup < min_support:
+            L = len(key)
+            # the unit bound: no cover can save more than occ x (L-1) units, so a trial
+            # whose floor already misses the best stays unscored — exact, knob-free.
+            floor_dl = (base_units - occ * (L - 1) + grammar_ids + L + 1) * bits_per
+            if floor_dl >= best_dl - 1e-9:
                 continue
-            # held-out cross-check: a generalizing template also appears in the holdout.
-            if holdout:
-                if _seq_support(holdout, key) < 1:
-                    continue
-            trial_dl = description_length(streams, kept + [c], asize)
+            trial_dl = (scorer.units_with(key, masks) + grammar_ids + L + 1) * bits_per
             if trial_dl < best_dl - 1e-9:
                 best_dl = trial_dl
                 best = c
+                best_masks = masks
         if best is None:
             break  # no candidate lowers the description length → the grammar has settled.
         kept.append(best)
         kept_keys.add(tuple(best["seq"]))
+        grammar_ids += len(best["seq"]) + 1
+        kept_pats.append((tuple(best["seq"]), best_masks))
+        base_units = scorer.rebuild_base(kept_pats)
         dl = best_dl
         rounds += 1
     # everything the rounds never took, recorded as rejected (it did not pay its bits / floor).

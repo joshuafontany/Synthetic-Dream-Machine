@@ -246,3 +246,57 @@ def test_emb_forest_survives_a_node_count_past_the_recursion_limit():
     for _ in range(3000):
         deep = ("d", (deep,))
     assert _emb_forest((("d", ()),), (deep,), {}) is True  # descent past the limit
+
+
+def test_mdl_select_matches_the_reference_trials_exactly():
+    """The vectorized cover (cached masks + once-per-round baseline + the unit bound)
+    must stay VERDICT-IDENTICAL to reference description_length trials — same kept
+    set, same dl, same rounds — over randomized corpora."""
+    import random
+
+    def reference(streams, candidates, min_support, max_forms, holdout):
+        alphabet = sorted({x for s in streams for x in s})
+        asize = max(len(alphabet), 1)
+        pool, seen = [], set()
+        for c in candidates:
+            key = tuple(c["seq"])
+            if key in seen or len(key) < 1:
+                continue
+            seen.add(key)
+            pool.append(dict(c))
+        pool.sort(key=lambda c: (-int(c.get("support", 0) or 0), fi._canonical(c["seq"])))
+        kept, kept_keys = [], set()
+        dl = fi.description_length(streams, [], asize)
+        rounds = 0
+        while len(kept) < max_forms:
+            best, best_dl = None, dl
+            for c in pool:
+                key = tuple(c["seq"])
+                if key in kept_keys or fi._seq_support(streams, key) < min_support:
+                    continue
+                if holdout and fi._seq_support(holdout, key) < 1:
+                    continue
+                trial = fi.description_length(streams, kept + [c], asize)
+                if trial < best_dl - 1e-9:
+                    best_dl, best = trial, c
+            if best is None:
+                break
+            kept.append(best)
+            kept_keys.add(tuple(best["seq"]))
+            dl = best_dl
+            rounds += 1
+        return [tuple(k["seq"]) for k in kept], round(dl, 6), rounds
+
+    rng = random.Random(4241)
+    for _ in range(12):
+        alpha = ["a", "b", "c", "d", "e"][: rng.randrange(3, 6)]
+        streams = [
+            [rng.choice(alpha) for _ in range(rng.randrange(20, 60))] for _ in range(4)
+        ]
+        holdout = [streams.pop()] if rng.random() < 0.5 else None
+        cands = fi.mine_sequences(streams, 2, max_forms=32)
+        got = fi.mdl_select(streams, cands, min_support=2, max_forms=8, holdout=holdout)
+        want_kept, want_dl, want_rounds = reference(streams, cands, 2, 8, holdout)
+        assert [tuple(k["seq"]) for k in got["kept"]] == want_kept
+        assert round(got["dl"], 6) == want_dl
+        assert got["rounds"] == want_rounds
