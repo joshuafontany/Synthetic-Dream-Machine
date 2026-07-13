@@ -17,8 +17,8 @@
   },
   "devDependencies": {
     "@lares/cli": "workspace:*",
-    "@types/node": "^22.0.0",
-    "concurrently": "^9.0.0",
+    "@types/node": "^26.1.1",
+    "concurrently": "^10.0.3",
     "playwright": "^1.61.1",
     "playwright-mcp-wsl": "^1.0.0",
     "tsx": "^4.23.0",
