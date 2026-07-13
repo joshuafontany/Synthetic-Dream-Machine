@@ -34,10 +34,10 @@
     "@octokit/rest": "^22.0.1",
     "@types/ws": "^8.18.1",
     "isomorphic-ws": "^5.0.0",
-    "ws": "^8.20.0"
+    "ws": "^8.21.0"
   },
   "devDependencies": {
-    "tsx": "^4.19.0",
+    "tsx": "^4.23.0",
     "vitest": "^3.2.0"
   }
 }

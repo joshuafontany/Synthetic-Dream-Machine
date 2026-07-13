@@ -20,7 +20,7 @@
   "devDependencies": {
     "@keyhive/keyhive": "0.1.0-alpha.3",
     "@lararium/keyhive": "workspace:*",
-    "vite": "^8.0.10",
+    "vite": "^8.1.4",
     "vite-plugin-arraybuffer": "^0.1.0",
     "vite-plugin-wasm": "^3.6.0"
   }

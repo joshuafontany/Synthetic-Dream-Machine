@@ -63,13 +63,13 @@
   "dependencies": {
     "@lararium/mesh": "workspace:*",
     "@taplo/lib": "^0.5.0",
-    "smol-toml": "^1.6.1",
+    "smol-toml": "^1.7.0",
     "tiddlywiki": "workspace:*"
   },
   "devDependencies": {
-    "tsx": "^4.19.0",
+    "tsx": "^4.23.0",
     "tw5-typed": "^1.1.5",
-    "vite": "^8.0.10",
+    "vite": "^8.1.4",
     "vitest": "^3.2.0"
   }
 }
