@@ -52,10 +52,10 @@ export function memorySensoriumContentDir(): string {
 }
 
 /**
- * The `memory` sensorium root — `<data>/sensoriums/memory`. Home to the li planes AND to the
- * worldline stores (the KG + the fork-DAG). The KG used to live INSIDE the guest
- * (`~/.mempalace/palace/knowledge_graph.sqlite3`), so the spirit-lineage observer wrote the
- * comparator on every harvest, and a pave of the guest would have destroyed the whole worldline.
+ * The `memory` sensorium root — `<data>/sensoriums/memory`. Home to the li planes AND to the worldline
+ * stores (the KG + the fork-DAG). It sits SOVEREIGN, never inside the guest comparator: a rite that
+ * paves the comparator must never reach a plane the RUN writes, and the worldline holds lineage the
+ * comparator has no claim on.
  */
 export function memorySensoriumDir(): string {
   return join(larDataHome(), "sensoriums", "memory");

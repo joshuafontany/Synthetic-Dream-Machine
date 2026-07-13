@@ -18,9 +18,13 @@ THE SIGNALS (named, per tick):
     punct | other; the apostrophe/okina folds into letter, the newline folds into
     WHITESPACE so this channel stays LINE-BLIND). Word texture, clause texture, and — if
     line lengths carry a real rhythm — line texture must EMERGE here, never get marked.
-  · break-weight — a graded structural-event channel: newline 1.0 · sentence-enders .!? 0.6
-    · clause marks ,;: 0.3 · else 0. The newline rides as a raw character the text itself
-    carries (no segmentation imposed); this channel corroborates the blind one.
+  · break-* — the structural marks the text ITSELF carries, one UNIT-HEIGHT channel per mark
+    class: break-newline · break-sentence (.!?) · break-clause (,;:) · break-any (any of the
+    three). No channel carries a weight, because a weight IS a prior — hand the ladder
+    `newline 1.0, sentence 0.6, clause 0.3` and every band inherits that ranking, then hands
+    it back as a finding. Split instead: each class rides its own pour, and the per-band
+    energy excess MEASURES which mark bears the rhythm at which scale (`discovered_weight`
+    in the emergence read). The instrument finds the weighting; it never supplies it.
   · sigil-event — 1.0 at each memetic-wikitext envelope mark (a `<<~` open or `>>` close).
     Active in the wrapped beds only; the extracted pour zeroes it (reported as flat).
   · recurrence — the CONTENT channel: 1.0 where the 12-gram ending at t has already
@@ -183,7 +187,10 @@ def pour_ticks(frames) -> dict:
     feature functions — no segmentation enters the signal loop."""
     cls_codes: list = []
     class_transition: list = []
-    break_weight: list = []
+    break_newline: list = []
+    break_sentence: list = []
+    break_clause: list = []
+    break_any: list = []
     sigil_event: list = []
     recurrence: list = []
     line_breaks: list = []
@@ -214,15 +221,19 @@ def pour_ticks(frames) -> dict:
                 class_transition.append(0.0)
             else:
                 class_transition.append(1.0 if c != prev_cls else 0.0)
-            if ch == "\n":
-                break_weight.append(1.0)
+            # THE MARKS RIDE SPLIT AND UNIT-HEIGHT. A graded channel would hand the ladder a ranking
+            # nobody measured, and every band would inherit it and hand it back as a finding. Split
+            # instead: each class pours its own unit-height channel, and the per-band excess MEASURES
+            # which mark bears the rhythm at which scale.
+            nl = 1.0 if ch == "\n" else 0.0
+            sent = 1.0 if ch in _SENTENCE_END else 0.0
+            claus = 1.0 if ch in _CLAUSE_MARK else 0.0
+            break_newline.append(nl)
+            break_sentence.append(sent)
+            break_clause.append(claus)
+            break_any.append(1.0 if (nl or sent or claus) else 0.0)
+            if nl:
                 line_breaks.append(t)
-            elif ch in _SENTENCE_END:
-                break_weight.append(0.6)
-            elif ch in _CLAUSE_MARK:
-                break_weight.append(0.3)
-            else:
-                break_weight.append(0.0)
             sigil_event.append(1.0 if i in sigil_at else 0.0)
             tail = (tail + ch)[-K_GRAM:]
             if len(tail) == K_GRAM:
@@ -239,7 +250,10 @@ def pour_ticks(frames) -> dict:
         "classes": np.asarray(cls_codes, dtype=np.uint8),
         "signals": {
             "class-transition": np.asarray(class_transition, dtype=float),
-            "break-weight": np.asarray(break_weight, dtype=float),
+            "break-any": np.asarray(break_any, dtype=float),
+            "break-newline": np.asarray(break_newline, dtype=float),
+            "break-sentence": np.asarray(break_sentence, dtype=float),
+            "break-clause": np.asarray(break_clause, dtype=float),
             "sigil-event": np.asarray(sigil_event, dtype=float),
             "recurrence": np.asarray(recurrence, dtype=float),
         },
@@ -626,10 +640,27 @@ def probe_root(root: str, *, n_surrogates: int = 3, seed: int = 4241) -> dict:
     if blind:
         for p in blind.get("peaked", []):
             line_refound = max(line_refound, p["witness"].get("line", {}).get("f1", 0.0))
+    # THE DISCOVERED WEIGHT — the reading that replaces the prior we cut. Each mark class poured its own
+    # unit-height channel, so the per-band energy excess now MEASURES what a typed constant used to
+    # assert: which mark bears the rhythm, at which scale. A class that peaks nowhere carries no rhythm,
+    # whatever weight a designer would have felt like giving it.
+    discovered = {}
+    for r in reads:
+        if not r["signal"].startswith("break-") or r["signal"] == "break-any":
+            continue
+        peaks = [b for b in r.get("bands", []) if b["peaked"]]
+        discovered[r["signal"]] = {
+            "n_peaked": r.get("n_peaked", 0),
+            "peak_bands": [{"band": b["band"], "scale_ticks": b["scale_ticks"],
+                            "energy_excess": b["energy_excess"]} for b in peaks],
+            "max_excess": max((b["energy_excess"] for b in r.get("bands", [])), default=0.0),
+        }
+
     return {
         "root": root,
         "n_ticks": poured["n_ticks"],
         "annotation_counts": {k: len(v) for k, v in ann.items()},
+        "discovered_break_weight": discovered,
         "design": {
             "tick": "character transition (finest honest grain; per-tick state = one char)",
             "stages": {"fine_levels": FINE_LEVELS, "coarse_decim": COARSE_DECIM,

@@ -15,6 +15,7 @@
 import { composePalaceCaps, type PalaceCaps } from "./palace-caps.js";
 import type { SearchResult } from "./search-cap.js";
 import type { Taxonomy } from "./content-palace.js";
+import { memorySensoriumLenses } from "./vessel-paths.js";
 
 /** A lens names a palace entity; the caller maps lens → dir in `lensDirs`. */
 export type Lens = string;
@@ -63,4 +64,19 @@ export function makeLaresQuery(lensDirs: Record<Lens, string>): LaresQuery {
       cache.clear();
     },
   };
+}
+
+/**
+ * THE CORRIDOR — the memory sensorium's four planes, behind the four verbs. The one binding the whole
+ * surface waited on.
+ *
+ * Every piece stood built and none of them touched: the py holders serve NDJSON, `composePalaceCaps`
+ * stacks any palace dir, `makeLaresQuery` takes the lens as a parameter — and nothing named the planes.
+ * This names them. The CLI, the MCP seat, and `lares_uds.py` all drive THIS, so one verb reaches any
+ * plane and no caller composes its own caps behind the daemon's back (a second cap-stack on a palace dir
+ * opens a second holder, the flock fires, and the holder exits — the single-owner law, learned the hard
+ * way).
+ */
+export function openMemorySensorium(): LaresQuery {
+  return makeLaresQuery(memorySensoriumLenses());
 }

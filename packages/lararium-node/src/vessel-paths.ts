@@ -105,9 +105,33 @@ export function larHome(): string {
 // ── The `memory` sensorium (content · structure · form) ──────────────────────────────────────────
 
 /** The `memory` sensorium dir — `<data>/sensoriums/memory`. Its manifest declares content/structure/
- *  form (fiber caps, leaf-dirs below) + bands/coupling (base caps, manifest-only). */
+ *  form/persistence (fiber caps, leaf-dirs below) + bands/coupling (base caps, manifest-only). */
 export function memorySensoriumDir(): string {
   return join(larDataHome(), "sensoriums", "memory");
+}
+
+/**
+ * THE LENS MAP — the memory sensorium's planes, keyed by the name the VERBS take as a parameter.
+ *
+ * `lares-query` exposes FOUR universal verbs (search · relate · structure · status) and takes the palace
+ * as a LENS, so the surface stays four verbs wide however many planes stand. A verb multiplied per plane
+ * (`recall_structure`, `recall_form`, …) grows as 4 caps x N palaces and buys nothing the parameter does
+ * not already carry.
+ *
+ * `persistence` rides here as an ordinary lens, which names what it holds: the plane where a ki finding
+ * earns standing through witness, and fades without it. Its store answers the same four verbs as any
+ * other palace, because a palace IS its composed caps.
+ *
+ * Feed this straight to {@link makeLaresQuery}; it is the whole binding.
+ */
+export function memorySensoriumLenses(): Record<string, string> {
+  const root = memorySensoriumDir();
+  return {
+    content: join(root, "content"),
+    structure: join(root, "structure"),
+    form: join(root, "form"),
+    persistence: join(root, "persistence"),
+  };
 }
 
 /** The GUEST mempalace store dir — `MEMPALACE_PALACE_PATH` (override, the relocation lever) else the

@@ -6,7 +6,7 @@ export {
   larMempalaceDir, larContentDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
   larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
-  memorySensoriumDir,
+  memorySensoriumDir, memorySensoriumLenses,
   // The `mesh` sensorium dir + its WHO/AUTHORITY/FLOW child dirs (the consolidated federation tree).
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
 } from "./vessel-paths.js";
@@ -172,7 +172,7 @@ export { makeGraphCap } from "./graph-cap.js";
 export type { GraphCap, GraphCapOptions } from "./graph-cap.js";
 export { composePalaceCaps } from "./palace-caps.js";
 export type { PalaceCaps, PalaceCapsOptions } from "./palace-caps.js";
-export { makeLaresQuery } from "./lares-query.js";
+export { makeLaresQuery, openMemorySensorium } from "./lares-query.js";
 export type { LaresQuery, Lens } from "./lares-query.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
