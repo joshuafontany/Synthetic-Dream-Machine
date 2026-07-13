@@ -99,7 +99,7 @@ def test_drawer_io_export_then_apply_round_trip(tmp_path):
         embeddings=[[0.1] * 8],
     )
 
-    exp = _run(["drawer_io.py", "export", "--wing", "w1"], home=tmp_path)
+    exp = _run(["drawer_io.py", "--palace", palace_path, "export", "--wing", "w1"], home=tmp_path)
     assert exp.returncode == 0, exp.stderr
     lines = _json_lines(exp.stdout)
     assert lines == [{"id": "d1", "content": "hello shore", "source_file": "claude__x"}]
@@ -107,13 +107,13 @@ def test_drawer_io_export_then_apply_round_trip(tmp_path):
     import drawer_io as dio  # the single source of HARVEST_VERSION (bumps must not break this round-trip)
     patch = tmp_path / "patch.ndjson"
     patch.write_text(json.dumps({"id": "d1", "patch": {"lar_hv": dio.HARVEST_VERSION}}) + "\n")
-    app = _run(["drawer_io.py", "apply", str(patch)], home=tmp_path)
+    app = _run(["drawer_io.py", "--palace", palace_path, "apply", str(patch)], home=tmp_path)
     assert app.returncode == 0, app.stderr
     out = json.loads(app.stdout)
     assert out["applied"] == 1 and out["hv"] == dio.HARVEST_VERSION
 
     # The patch landed: re-export now skips the (now-current) drawer.
-    exp2 = _run(["drawer_io.py", "export", "--wing", "w1"], home=tmp_path)
+    exp2 = _run(["drawer_io.py", "--palace", palace_path, "export", "--wing", "w1"], home=tmp_path)
     assert _json_lines(exp2.stdout) == []
 
 
@@ -136,7 +136,7 @@ def test_drawer_io_embeddings_reads_stored_vectors_in_session_order(tmp_path):
         embeddings=[[0.0, 1.0], [1.0, 0.0]],
     )
 
-    out = _run(["drawer_io.py", "embeddings", "--wing", "w1"], home=tmp_path)
+    out = _run(["drawer_io.py", "--palace", palace_path, "embeddings", "--wing", "w1"], home=tmp_path)
     assert out.returncode == 0, out.stderr
     rows = _json_lines(out.stdout)
     assert [r["id"] for r in rows] == ["d1", "d2"]  # chunk_index 0 before 1

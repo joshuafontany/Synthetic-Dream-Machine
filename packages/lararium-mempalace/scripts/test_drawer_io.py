@@ -98,13 +98,14 @@ def test_cmd_embeddings_skips_vectorless_drawer(monkeypatch, capsys):
 # ---------------------------------------------------------------------------
 
 
-def test_cmd_form_embeddings_dumps_flat_keyed_by_sha(monkeypatch, capsys):
+def test_cmd_form_embeddings_dumps_flat_keyed_by_sha(monkeypatch, capsys, tmp_path):
     # Native (unsorted) order is PRESERVED — the orchestrator joins on verbatim_sha.
     col = _FakeCollection(
         ids=["shaZ", "shaA", "shaM"],
         embeddings=[[0.9], [0.1], [0.5]],
         metadatas=[{"lar_verbatim_sha": "shaZ"}, {}, {"lar_verbatim_sha": "shaM"}],
     )
+    monkeypatch.setattr(dio, "PALACE", str(tmp_path))  # named palace; unnamed refuses LOUD
     monkeypatch.setattr(dio, "get_collection", lambda *a, **k: col)
     dio.cmd_form_embeddings(argparse.Namespace())
     rows = _lines(capsys)
@@ -114,10 +115,11 @@ def test_cmd_form_embeddings_dumps_flat_keyed_by_sha(monkeypatch, capsys):
     assert rows[0]["embedding"] == [0.9]
 
 
-def test_cmd_form_embeddings_degrades_when_no_form_collection(monkeypatch, capsys):
+def test_cmd_form_embeddings_degrades_when_no_form_collection(monkeypatch, capsys, tmp_path):
     def _boom(*a, **k):
         raise RuntimeError("no such collection: form")
 
+    monkeypatch.setattr(dio, "PALACE", str(tmp_path))  # named palace; unnamed refuses LOUD
     monkeypatch.setattr(dio, "get_collection", _boom)
     dio.cmd_form_embeddings(argparse.Namespace())  # must NOT raise
     assert _lines(capsys) == []  # 0 rows ⇒ the orchestrator stays 1-plane

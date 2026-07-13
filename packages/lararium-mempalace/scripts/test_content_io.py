@@ -334,4 +334,13 @@ def test_taxonomy_aggregates_metadata(tmp_path):
 
 
 def test_taxonomy_empty_store(tmp_path):
-    assert _store(tmp_path).taxonomy() == {"total": 0, "wings": [], "rooms": [], "halls": [], "entities": {}}
+    assert _store(tmp_path).taxonomy() == {
+        "total": 0,
+        "wings": [],
+        "rooms": [],
+        "halls": [],
+        "entities": {},
+        "facets": {},
+        "partial": False,
+        "scanned": 0,
+    }
