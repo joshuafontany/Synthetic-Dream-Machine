@@ -6,10 +6,28 @@
  * seat, never a raw CLI subprocess — so the spawn knowledge lives HERE, beside
  * MempalaceClient, not in the CLI (the dependency must not point node→cli).
  *
- * Venv-aware: prefers $VIRTUAL_ENV / ~/.venv (where mempalace + chromadb
- * pip-install) over the often PEP-668 externally-managed system python. Mirrors
- * the CLI's integration-check.resolvePython (kept in lockstep; that copy serves
- * `lares wake` before this package is in scope).
+ * ONE VENV — `~/.venv`, the root venv, beside `~/.lares`. The whole stack resolves the SAME
+ * interpreter, and `lares wake --install` stands it.
+ *
+ * Two interpreters with different powers diverge SILENTLY, which is the whole hazard. A second venv
+ * carries its own onnxruntime, its own chromadb, its own accelerators — so the machina embeds on the
+ * GPU while a script beside it falls to CPU, and neither says a word. Worse, a resolver that honors
+ * `$VIRTUAL_ENV` hands the choice to whatever the operator's shell last activated: the same command
+ * spawns a different python depending on the terminal it runs in.
+ *
+ * So the resolution runs NARROW and it VERIFIES:
+ *   1. `LARES_PYTHON` — the explicit operator override, for an isolated instance. Named, never guessed.
+ *   2. `~/.venv` — THE venv.
+ * and each candidate must actually IMPORT MEMPALACE. An interpreter that answers `--version` and cannot
+ * import the package it exists to spawn passes a liveness check and fails the only question that matters;
+ * it gets refused here rather than discovered three layers down.
+ *
+ * No `$VIRTUAL_ENV` capture, and no bare-`python3` fallback — a PEP-668 system python holds no chroma,
+ * and falling back to it converts a clear "run `lares wake --install`" into an obscure import error.
+ * `null` refuses loudly; the callers render the cure.
+ *
+ * Mirrors the CLI's integration-check.resolvePython (kept in lockstep; that copy serves `lares wake`
+ * before this package is in scope).
  */
 
 import { existsSync } from "node:fs";
@@ -20,23 +38,47 @@ import { repoRoot } from "@lararium/mesh/node";
 
 let _python: string | null | undefined;
 
-/** The Python interpreter that holds mempalace, or null when none responds. Cached. */
+/** `~/.venv` — THE venv. One interpreter for the whole stack; `lares wake --install` stands it. */
+export function laresVenvPython(): string {
+  const win = process.platform === "win32";
+  return join(homedir(), ".venv", win ? "Scripts" : "bin", win ? "python.exe" : "python3");
+}
+
+/** Whether an interpreter can actually IMPORT mempalace — the only question a spawn cares about. */
+function holdsMempalace(python: string, submoduleRoot: string): boolean {
+  try {
+    const r = spawnSync(python, ["-c", "import mempalace"], {
+      timeout: 20_000,
+      stdio: "ignore",
+      env: { ...process.env, PYTHONPATH: submoduleRoot },
+    });
+    return r.error === undefined && r.status === 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * THE interpreter, verified to hold mempalace — or null, which the callers render as
+ * "run `lares wake --install`". Cached for the process.
+ */
 export function resolveMempalacePython(): string | null {
   if (_python !== undefined) return _python;
-  const win = process.platform === "win32";
-  const venvPy = (base: string): string => join(base, win ? "Scripts" : "bin", win ? "python.exe" : "python3");
-  const cands: string[] = [];
-  if (process.env["VIRTUAL_ENV"]) cands.push(venvPy(process.env["VIRTUAL_ENV"]));
-  cands.push(venvPy(join(homedir(), ".venv")));
-  cands.push("python3", "python", "py");
+  const root = join(repoRoot, "mempalace");
+  const cands = [process.env["LARES_PYTHON"], laresVenvPython()].filter(Boolean) as string[];
   for (const cand of cands) {
-    try {
-      const r = spawnSync(cand, ["--version"], { timeout: 5_000, stdio: "ignore" });
-      if (r.error === undefined && r.status === 0) { _python = cand; return _python; }
-    } catch { /* try next */ }
+    if (holdsMempalace(cand, root)) {
+      _python = cand;
+      return _python;
+    }
   }
   _python = null;
   return _python;
+}
+
+/** Drop the cached interpreter (a fresh install stands a venv the last probe could not see). */
+export function _resetPythonCache(): void {
+  _python = undefined;
 }
 
 export interface MempalaceSpawn {

@@ -269,8 +269,10 @@ function listTranscripts(target: string, depth = 0): string[] {
 // Read mempalace drawer content, harvest it with the sovereign parser, and write
 // our domain metadata (the tension) back ONTO the drawer (the compression strut).
 
-// Venv-aware + cross-platform: prefers $VIRTUAL_ENV / ~/.venv (where mempalace +
-// chromadb live), else python3/python/py. NEVER a machine-specific hardcode.
+// ONE VENV — `~/.venv`, verified to import mempalace (resolveMempalacePython). A second interpreter
+// carries its own chromadb and its own accelerators, so the machina embeds on the GPU while a script
+// beside it falls to CPU and neither says a word. The `?? "python3"` tail only reaches a caller that
+// already refuses loudly upstream; it never silently stands in for the venv.
 const PY = resolvePython() ?? "python3";
 // The writeback core (buildPatch + writebackWing + lar_hv) lives ONCE in
 // @lararium/mempalace/telemetry-writeback (the lar-telemetry shared core) — both
