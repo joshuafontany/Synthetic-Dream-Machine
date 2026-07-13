@@ -208,29 +208,15 @@ def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
 # leaf (depth) / drops its extra siblings (fan-out); the recurring MOTIF scale survives intact.
 _MAX_TREE_DEPTH = 32
 _MAX_TREE_WIDTH = 16
-# Depth × width alone leave TOTAL node count unbounded (a dense sigil meme lands ~6000
-# nodes inside those two caps), and the value-keyed inclusion recurrence grinds on it —
-# tuple keys hash at O(subtree). The node budget bounds the walked forest itself; past it
-# a node truncates to a leaf. Truncation UNDER-counts support (a motif that only shows in
-# the trimmed tail loses its witness) — conservative: it can miss a form, never mint one.
-_MAX_TREE_NODES = 512
 
 
-def _as_forest(node: dict, depth: int = 0, budget: "list[int] | None" = None) -> tuple:
+def _as_forest(node: dict, depth: int = 0) -> tuple:
     """A tree → the immutable (label, children-forest) the inclusion recurrence walks, bounded to
-    motif scale so a deep-wide-or-dense AST cannot overflow or grind the recurrence."""
-    if budget is None:
-        budget = [_MAX_TREE_NODES]
+    motif scale so a deep-wide AST cannot overflow the recurrence."""
     label = str(node.get("type", "?"))
-    if depth >= _MAX_TREE_DEPTH or budget[0] <= 0:
+    if depth >= _MAX_TREE_DEPTH:
         return (label, ())
-    kids = []
-    for c in _children(node)[:_MAX_TREE_WIDTH]:
-        if budget[0] <= 0:
-            break
-        budget[0] -= 1
-        kids.append(_as_forest(c, depth + 1, budget))
-    return (label, tuple(kids))
+    return (label, tuple(_as_forest(c, depth + 1) for c in _children(node)[:_MAX_TREE_WIDTH]))
 
 
 def _embeds(pattern_forest: tuple, target: dict) -> bool:
