@@ -4,6 +4,17 @@
 
 *The handoff from the enact-flow (the instruments, built + witnessed on synthetic data) to the crossing (the RUN over real, genuinely-independent planes). Written at the S5 ruling, 2026-07-05.*
 
+> **Superseded in part (2026-07-13).** The compression re-founding
+> (`bags/@lares/ha.ka.ba/lares/api/pono/sensorium-machina.mem`) retired two
+> load-bearing pieces this arc still teaches: the planes form a CHAIN of
+> coarsenings, never a product — so **dim H¹ = 0 by construction at plane
+> boundaries and the H¹-gated EFE keystone certifies nothing there** (H¹ keeps
+> its seat at federation boundaries only) — and **bands dissolved into the
+> stored li address** (`ffz_address`; `bands_sidecar`'s MODWT spine and the
+> subharmonic ladder retired with it). The independence-of-planes discipline,
+> the S5 ruling, the null protocols, and the bed order all still stand. Bed
+> re-runs now answer to `EMERGENCE-PREREG.md` in this directory.
+
 ## The crossing this arc reaches
 
 The enact-flow built the sensorium machina's instruments and proved the **mechanism** on a seeded synthetic corpus: four order-parameters bifurcate on one ARL₀→α axis, and the H¹-gated EFE **gate-flip co-jumps at the same critical α** as the H¹/ΔF/complexity jumps. That is a concept-witness — *the instruments run*. It is **not** yet proof the machina **is** a dissipative structure: a co-jump means something only if the planes are **genuinely independent** projections of the same units. The RUN arc reaches that crossing.
