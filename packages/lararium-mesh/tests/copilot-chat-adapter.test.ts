@@ -6,16 +6,24 @@
  */
 import { describe, test, expect } from "vitest";
 import {
-  copilotChatAdapter,
-  parseCopilotChatJsonl,
-  replayCopilotChat,
-  discoverCopilotChatFiles,
-  copilotChatHash,
   analyzeSession,
   makeIdentityContext,
   identityLadder,
   type AdapterRecord,
 } from "../src/index.js";
+// The host adapters ride `../src/node.js` — they read transcripts off a disk, so they sit
+// behind the host door, never in the isomorphic barrel the browser vessel loads.
+import {
+  parseCopilotChatJsonl,
+  replayCopilotChat,
+  discoverCopilotChatFiles,
+} from "../src/node.js";
+// The host adapters ride `../src/node.js` — they read transcripts off a disk, so they sit
+// behind the host door and never in the isomorphic barrel the browser vessel loads.
+import {
+  copilotChatAdapter,
+  copilotChatHash,
+} from "../src/node.js";
 
 /** Serialize op rows back to the `.jsonl` op-log the replay reads. */
 function jsonl(rows: Array<Record<string, unknown>>): string {

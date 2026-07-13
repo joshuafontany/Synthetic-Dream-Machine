@@ -9,18 +9,26 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import {
-  codexAdapter,
-  codexHash,
-  parseCodexRollout,
-  parseCodexMeta,
-  groupCodexForkFamilies,
-  sessionIdFromFile,
   analyzeSession,
   identityLadder,
   makeIdentityContext,
   type AdapterRecord,
-  type CodexMeta,
 } from "../src/index.js";
+// The host adapters ride `../src/node.js` — they read transcripts off a disk, so they sit
+// behind the host door, never in the isomorphic barrel the browser vessel loads.
+import {
+  groupCodexForkFamilies,
+  sessionIdFromFile,
+  type CodexMeta,
+} from "../src/node.js";
+// The host adapters ride `../src/node.js` — they read transcripts off a disk, so they sit
+// behind the host door and never in the isomorphic barrel the browser vessel loads.
+import {
+  codexAdapter,
+  codexHash,
+  parseCodexRollout,
+  parseCodexMeta,
+} from "../src/node.js";
 
 /** Serialize typed records back to the rollout `.jsonl` line shape the parser reads. */
 function jsonl(rows: Array<Record<string, unknown>>): string {

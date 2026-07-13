@@ -517,7 +517,10 @@ def mdl_select(streams: list, candidates: list, *, min_support: int = _DEFAULT_M
         pool.append(dict(c))
     # total order over the candidate pool: first-improvement MDL ties resolve by support then seq,
     # never by the miners' process-varying emission order (re-dreams stay byte-stable across seeds).
-    pool.sort(key=lambda c: (-int(c.get("support", 0) or 0), tuple(c["seq"])))
+    # The seq key canonicalizes to ONE string: candidate kinds carry differently-shaped seqs
+    # (subtree (label, depth) pairs beside sequence symbol strings), and a raw tuple compare
+    # throws exactly when supports tie ACROSS kinds — a latent break no single-kind corpus hits.
+    pool.sort(key=lambda c: (-int(c.get("support", 0) or 0), _canonical(c["seq"])))
     dl = dl0
     rounds = 0
     while len(kept) < max_forms:

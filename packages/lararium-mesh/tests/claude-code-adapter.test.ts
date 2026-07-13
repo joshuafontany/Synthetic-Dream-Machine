@@ -4,16 +4,20 @@
  */
 import { describe, test, expect } from "vitest";
 import {
+  analyzeSession,
+  makeIdentityContext,
+  identityLadder,
+  type AdapterRecord,
+} from "../src/index.js";
+// The host adapters ride `../src/node.js` — they read transcripts off a disk, so they sit
+// behind the host door and never in the isomorphic barrel the browser vessel loads.
+import {
   claudeCodeAdapter,
   parseClaudeJsonl,
   groupForkFamilies,
   rootUuidOf,
-  analyzeSession,
-  makeIdentityContext,
-  identityLadder,
   claudeHash,
-  type AdapterRecord,
-} from "../src/index.js";
+} from "../src/node.js";
 
 const N = String.fromCharCode(0); // the session-namespace separator (matches source-adapter NS)
 const k = (session: string, id: string) => `${session}${N}${id}`;

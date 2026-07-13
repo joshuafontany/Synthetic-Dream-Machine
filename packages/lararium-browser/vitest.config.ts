@@ -9,13 +9,12 @@ export default defineConfig({
   plugins: [wasm()],
   resolve: {
     alias: [
-      // Stub Node's `crypto` module for browser tests — tw5-host-bridge uses createHash.
+      // Stub Node's `crypto` — tw5-host-bridge reaches for createHash.
       { find: /^(node:)?crypto$/, replacement: path.resolve(root, "src/__stubs__/crypto-stub.ts") },
-      // Stub Node's `fs`/`path` — the @lararium/mesh barrel re-exports host-only source
-      // adapters that carry top-level node:fs / node:path imports; the browser tier only
-      // loads their module graph (never runs them), so a load-safe stub keeps the hull whole.
-      { find: /^(node:)?fs$/, replacement: path.resolve(root, "src/__stubs__/fs-stub.ts") },
-      { find: /^(node:)?path$/, replacement: path.resolve(root, "src/__stubs__/path-stub.ts") },
+      // NO `fs`/`path` stub rides here, and none may. The isomorphic `@lararium/mesh` barrel carries no
+      // host code — its four transcript adapters sit behind `@lararium/mesh/node` — so the browser hull
+      // needs no patch to stay whole. A stub added back here would let a `node:fs` import cross into the
+      // hull and pass the suite, which is the leak this configuration exists to keep out.
       { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
       // Every mesh subpath rides ONE regex → src/<sub>.ts (the bare "@lararium/mesh" below would
       // otherwise swallow subpaths into "src/index.ts/<sub>").

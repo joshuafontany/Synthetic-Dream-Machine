@@ -1,6 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    // The vessel lane runs ON node, so it DECLARES the node ambient surface rather than
+    // discovering it. An undeclared surface is one a sibling package can inherit by accident —
+    // the browser and plugin lanes declare theirs too, and that is what keeps a `node:` import
+    // from typechecking where no node exists.
+    "types": ["node"],
     "rootDir": "src",
     "outDir": "dist"
   },
