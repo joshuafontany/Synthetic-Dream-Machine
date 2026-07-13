@@ -7,12 +7,29 @@ Two concerns ride here, both pure caps the pipeline composes later:
      never total causal order; the CRDT edge-DAG carries causality. L4 grows unbounded so an epoch
      never aliases when lower levels roll. Ports packages/lararium-mesh/src/ffz-clock.ts.
 
-  2. THE CLOCK RECOVERY (dominant_period / recover_clock) — THE Phase-3 physics. The nalu-gate
-     RECOVERS the beat FROM the fed stream the way a PLL locks to data transitions: it reads an
-     EVENT-INDEXED signal (per-event drift/cohesion), NEVER a wall-clock timestamp, and infers the
-     fundamental beat as the stream's dominant autocorrelation period. The 5 FFZ bands EMERGE as
-     nested subharmonics of that one beat. Ports src/clock-recovery.ts + the dominant_period read
-     from src/temporal-rigidity.ts.
+  2. THE CLOCK RECOVERY (dominant_period / recover_clock) — A PERIOD ESTIMATOR, AND NOTHING MORE.
+     It reads an EVENT-INDEXED signal and returns the stream's dominant autocorrelation period. It
+     touches no wall-clock, and within those bounds it answers honestly.
+
+     IT DOES NOT MAKE THE FFZ BANDS, AND MUST NOT BE READ AS DOING SO. A recovered fundamental with
+     bands hung off it as nested subharmonics is a LADDER OF COUNTS — each band defined by HOW MANY
+     ticks of the beat it spans. The grain forbids exactly that: a band names NESTED MEMBERSHIP, a
+     containment PATH, never a count, and a band whose COUNT carries the signal cannot be truncated
+     (the Hox anti-pattern — lop the prefix and the colinear meaning shatters). The bands stand as a
+     TREE, and `ffz_address` builds it: Theme.Arc.Measure.Beat.Segment, where a band answers WHICH
+     and never HOW MANY. Distance there reads as how far up two moments climb before they share a
+     band — order-free, ultrametric, no timeline crossed.
+       The canon retired the coupled-oscillator reading in 2026-06 ("Entrainment DROPS. The bands do
+     not couple"), and this estimator is what remains of it: a period, honestly measured, with no
+     ladder hanging beneath.
+
+     AND A PERIOD IS NOT A BOUNDARY. A bandpass reports where ENERGY AT ITS SCALE concentrates; a
+     change-point reports where the GENERATING REGIME turns over. Measured: the pour recovered the
+     Kumulipo's wā PERIOD (C7, beat ~10,240 ticks against a measured ~9.4k wā gap, killed by
+     meaning-death) and placed its BOUNDARIES at crest-recall 0.06. That gap names a CATEGORY ERROR,
+     never a tuning failure — a periodicity instrument was asked a change-point question. Boundaries
+     ride `kumulipo_boundary` (a cosine-drop / novelty read, which is what the grain specified all
+     along); this returns a period, and a period is what a caller may take from it.
 
 CLOCK-PURITY (two-clocks law): the recovery path touches NO host wall-time (no time.time()). Event
 ordinal indexes the signal; the recovered beat rides in event-ordinal units. A static corpus carries
@@ -40,8 +57,22 @@ FFZ_DEFAULT_BOUNDS: tuple[float, ...] = (64, 256, 1024, 365, math.inf)
 #: The five attention-scale register names, fine→coarse (Pulse/Beat/Measure/Arc/Theme).
 FFZ_REGISTER_NAMES: tuple[str, ...] = ("Pulse", "Beat", "Measure", "Arc", "Theme")
 
-#: The recovery bands, fine→coarse — the nested subharmonics the recovered beat expresses at.
-FFZ_BANDS_FINE_TO_COARSE: tuple[str, ...] = ("pulse", "beat", "measure", "arc", "theme")
+#: The SUBHARMONIC labels a recovered period expresses at, fine→coarse — a reporting convenience, and
+#: NOT the grain's bands.
+#:
+#: They borrow the grain's vocabulary and mean something else, which is the confusion worth naming: a
+#: subharmonic called `measure` names a MULTIPLE OF A PERIOD (how many beats it spans), while the grain's
+#: Measure names a CONTAINER (which topic a moment sits inside). One is a count; the other is a label.
+#: Every reader who saw the word imported the tree's meaning into a ladder of counts — the code wearing
+#: the canon's vocabulary while enacting its refutation.
+#:
+#: The grain's bands live in `ffz_address` (Theme.Arc.Measure.Beat.Segment — a membership PATH, where
+#: distance reads as how far up two moments climb before they share a band). A caller wanting the GRAIN
+#: reaches there. A caller wanting a period's harmonics may read these, knowing they tally.
+FFZ_SUBHARMONIC_LABELS: tuple[str, ...] = ("pulse", "beat", "measure", "arc", "theme")
+
+#: The name the recovery organs already spell. It aliases the labels above and carries their caution.
+FFZ_BANDS_FINE_TO_COARSE: tuple[str, ...] = FFZ_SUBHARMONIC_LABELS
 
 
 @dataclass(frozen=True)
