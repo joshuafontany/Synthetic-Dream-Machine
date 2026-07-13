@@ -142,11 +142,11 @@ export function initGuestMempalace(): PalaceSetupStep[] {
  */
 function persistenceInfra(sensoriumDir: string): {
   cap: { persistence: { absDir: string; engine: string; variance: "cosheaf" } };
-  persistencePolicy: { admitThreshold: number; halfLife: number | null };
+  persistencePolicy: { halfLife: number | null };
 } {
   return {
     cap: { persistence: { absDir: join(sensoriumDir, "persistence"), engine: "persistence", variance: "cosheaf" } },
-    persistencePolicy: { admitThreshold: 0.5, halfLife: null },
+    persistencePolicy: { halfLife: null },
   };
 }
 
@@ -274,7 +274,7 @@ export function materializeMemorySensorium(): PalaceSetupStep {
     bands: { grain: "wavelet", computed: "on-read" },
     // BASE cap — the persistence dials: authority/witness mode (halfLife null → the durable interoception
     // store never cools; only a defeater lowers standing). ORTHOGONAL to ephemeral (path-A un-fuse).
-    persistencePolicy: { admitThreshold: 0.5, halfLife: null },
+    persistencePolicy: { halfLife: null },
     // BASE cap — memory couples no sub-sensoriums (the `mesh` sensorium carries WHO/AUTHORITY/FLOW).
     children: [],
     ephemeral: false,

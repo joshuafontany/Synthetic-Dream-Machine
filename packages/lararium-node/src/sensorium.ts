@@ -114,7 +114,7 @@ export interface SensoriumManifest {
   readonly coupling: SensoriumCoupling;
   /**
    * BASE cap (optional) — the persistence dials for this sensorium's `has.persistence` cap (the 5th
-   * part). `admitThreshold` = the surprise floor at admission; `halfLife` = the maturation MODE:
+   * part). `halfLife` = the maturation MODE:
    * null = append-only-witness (authority, never cools — the Mempalace) · finite = affinity-
    * maturation (ephemeral exploratory sensoria; standing cools). Absent = the sensorium composes no
    * persistence cap. ORTHOGONAL to {@link ephemeral} (path-A un-fuse: `ephemeral` stays swept-on-

@@ -6,6 +6,7 @@
 import { describe, test, expect } from "vitest";
 import {
   recordTestimony, witness, reentryPrior, admit, maturationMode, WITNESS_POLICY,
+  emptyStoreCode, observeClaim, storeCodeFrom, prequentialBits,
   STANDING_FLOOR, STANDING_CEILING, type PersistencePolicy,
 } from "../src/index.js";
 
@@ -74,10 +75,10 @@ describe("persistence-keel — the standing law (witness mode)", () => {
 describe("persistence-keel — maturation mode = the half-life", () => {
   test("mode derives from halfLife", () => {
     expect(maturationMode(WITNESS_POLICY)).toBe("witness");
-    expect(maturationMode({ admitThreshold: 0.5, halfLife: 1000 })).toBe("affinity");
+    expect(maturationMode({ halfLife: 1000 })).toBe("affinity");
   });
 
-  const affinity: PersistencePolicy = { admitThreshold: 0.5, halfLife: 100 };
+  const affinity: PersistencePolicy = { halfLife: 100 };
 
   test("witness mode never cools; affinity mode cools an aged witness toward the floor", () => {
     const t = witness(born(), vouch("vessel-B", "f1", 0));   // vouched at tick 0
@@ -101,21 +102,135 @@ describe("persistence-keel — maturation mode = the half-life", () => {
   });
 });
 
-describe("persistence-keel — the admit gate (score+gate merged)", () => {
-  const population = Array.from({ length: 40 }, (_, i) => [10 + (i % 5) * 0.1, -3 + (i % 7) * 0.05]);
+describe("persistence-keel — the admit gate: the store's code against ignorance", () => {
+  // A deterministic directional corpus. No clock, no Math.random — the gate is pure, so its tests are too.
+  const rng = (seed: number) => { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 2 ** 32; }; };
+  const gauss = (r: () => number) => Math.sqrt(-2 * Math.log(r() + 1e-12)) * Math.cos(2 * Math.PI * r());
+  const unit = (v: number[]) => { const n = Math.hypot(...v) || 1; return v.map((x) => x / n); };
+  const DIMS = 384;                                   // the real embedding width — 2-D toys hide the failure
+  const r = rng(9);
+  const topic = Array.from({ length: DIMS }, () => gauss(r));
+  /** a claim that says roughly what `topic` says — the near-duplicate the gate exists to refuse. */
+  const nearTopic = () => unit(Array.from({ length: DIMS }, (_, i) => topic[i]! + 0.35 * gauss(r)));
+  /** a claim pointing somewhere the store has never looked. */
+  const fresh = () => unit(Array.from({ length: DIMS }, () => gauss(r)));
+  const corpus = (n: number) => Array.from({ length: n }, () => nearTopic());
 
-  test("a near-duplicate is refused; an outlier admits", () => {
-    expect(admit([10.2, -2.85], population).admit).toBe(false);
-    expect(admit([40, 12], population).admit).toBe(true);
+  test("a near-duplicate is refused; a fresh direction admits — at the width the store actually runs", () => {
+    const store = storeCodeFrom(corpus(120), DIMS);
+    expect(admit(nearTopic(), store).admit).toBe(false);
+    expect(admit(fresh(), store).admit).toBe(true);
   });
 
-  test("the first light is always novel (empty population admits)", () => {
-    expect(admit([1, 2], []).admit).toBe(true);
-    expect(admit([1, 2], []).score).toBe(Infinity);
+  test("first light admits — a store below two claims holds no direction to judge against", () => {
+    expect(admit(fresh(), emptyStoreCode(DIMS)).admit).toBe(true);
+    expect(admit(fresh(), [nearTopic()]).admit).toBe(true);
   });
 
-  test("the threshold is a policy dial — a stricter policy refuses more", () => {
-    const strict: PersistencePolicy = { admitThreshold: 100, halfLife: null };
-    expect(admit([10.5, -2.7], population, strict).admit).toBe(false);
+  test("the verdict IS the arithmetic — bits against bits, and the cosine threshold is INFERRED", () => {
+    const store = storeCodeFrom(corpus(120), DIMS);
+    const dup = admit(nearTopic(), store);
+    const nov = admit(fresh(), store);
+    // bitsSaved = log2( vMF(c) / uniform(c) ): what the store's code saves over ignorance, in real bits.
+    // The quantization step cancelled — both codes price the SAME claim at the SAME precision.
+    expect(dup.bitsSaved).toBeGreaterThan(0);          // the store already predicts it: it says nothing new
+    expect(nov.bitsSaved).toBeLessThan(0);             // the store's code prices it WORSE than pure ignorance
+    expect(dup.admit).toBe(dup.bitsSaved <= 0);        // the verdict is the sign of the ledger. Nothing else.
+    expect(nov.admit).toBe(nov.bitsSaved <= 0);
+    // The decision cosine falls OUT of the store's own concentration; nobody typed 0.5.
+    expect(dup.admit).toBe(dup.cosine < dup.cosStar);
+    expect(nov.admit).toBe(nov.cosine < nov.cosStar);
+    expect(dup.cosStar).toBeGreaterThan(0);
+    expect(dup.cosStar).toBeLessThan(1);
+  });
+
+  test("THE GATE TIGHTENS AS NEAR-DUPLICATES ACCUMULATE — never loosens", () => {
+    // THIS IS THE LOAD-BEARING PROPERTY, and it is the one an earlier reading got backwards. The fear was
+    // that a filling store would grow MORE permissive as duplicates piled up — the instrument manufacturing
+    // its own finding. Measured, the opposite holds and MUST keep holding: as the store sees the same
+    // direction again and again its concentration rises, so it prices that direction ever more cheaply and
+    // its refusal grows STRONGER. A store that admitted more as it filled would be broken; assert it cannot.
+    const probe = nearTopic();
+    let code = emptyStoreCode(DIMS);
+    const ledger: number[] = [];
+    for (let i = 1; i <= 200; i++) {
+      code = observeClaim(code, nearTopic());
+      if (i >= 2) ledger.push(admit(probe, code).bitsSaved);
+      if (i >= 2) expect(admit(probe, code).admit).toBe(false);   // refused at EVERY size, never re-admitted
+    }
+    expect(ledger[ledger.length - 1]!).toBeGreaterThan(ledger[0]!);   // conviction grows with the evidence
+  });
+
+  test("the small-sample charge — a young store cannot refuse the world on concentration it got by chance", () => {
+    // E[R̄²] = 1/n under uniform directions, in EVERY dimension. Subtracting that expectation is the model's
+    // complexity charge, and it is exact. Without it, two random claims read as a spike and lock the gate.
+    const rn = rng(31);
+    const noise = Array.from({ length: 200 }, () => unit(Array.from({ length: DIMS }, () => gauss(rn))));
+    const noiseStore = storeCodeFrom(noise, DIMS);
+    expect(noiseStore.n).toBe(200);
+    // a store of pure noise directions has learned NOTHING; its concentration must read at the floor…
+    expect(admit(fresh(), noiseStore).kappa).toBeLessThan(50);   // vs κ ≈ 3200 on the structured store
+    // …and it must therefore refuse almost nothing. An honest gate on a directionless store is a wide gate.
+    expect(admit(fresh(), noiseStore).admit).toBe(true);
+    // a two-claim store still lets genuine novelty through
+    expect(admit(fresh(), storeCodeFrom([nearTopic(), nearTopic()], DIMS)).admit).toBe(true);
+  });
+
+  test("the prequential ledger CERTIFIES the gate — and reports its own blindness when it has none", () => {
+    // Each claim priced by a code built from the claims admitted strictly BEFORE it (Dawid 1984). The code
+    // never sees the datum it judges, so it cannot manufacture the finding.
+    const rs = rng(51);
+    const novel = () => unit(Array.from({ length: DIMS }, () => gauss(rs)));
+    const stream = [...corpus(190), ...Array.from({ length: 10 }, () => novel())];
+    for (let i = stream.length - 1; i > 0; i--) { const j = Math.floor(rng(i + 3)() * (i + 1)); [stream[i], stream[j]] = [stream[j]!, stream[i]!]; }
+    const structured = prequentialBits(stream, DIMS);
+    expect(structured.bitsSaved).toBeGreaterThan(0);          // the store's code genuinely beats ignorance
+    expect(structured.admitted).toBeLessThan(20);             // it caught the 10 novel and dropped the 190 dups
+    expect(structured.admitted).toBeGreaterThanOrEqual(10);
+
+    // On a store with NO direction to learn, the code cannot beat uniform — and the ledger SAYS SO. A gate
+    // that reported confident verdicts here would be flipping coins and calling it novelty.
+    const rn = rng(31);
+    const noise = Array.from({ length: 200 }, () => unit(Array.from({ length: DIMS }, () => gauss(rn))));
+    const blind = prequentialBits(noise, DIMS);
+    expect(blind.bitsSaved).toBeLessThan(structured.bitsSaved / 100);   // no bits earned: the instrument is blind
+    expect(blind.admitted).toBeGreaterThan(150);                        // and it admits, honestly, rather than guesses
+  });
+
+  test("THE POPULATION IS NEVER A NEIGHBOURHOOD — a candidate-selected ball corrupts the LEDGER", () => {
+    // The earlier story ran: a k-NN ball shrinks the variance, inflates the z-score, and the gate admits MORE
+    // as the store fills. Measured, that is false — and so is its refutation. Under a code-length rule the
+    // ball usually reaches the same VERDICT; what it destroys is the NUMBER. A population selected by
+    // proximity makes the code a function of the candidate, so it normalizes to nothing and log2(p₁/p₀) stops
+    // being a difference of code lengths at all. The ledger then reads many-fold off — and the ledger is the
+    // thing the operator audits. In high dimension the k-NN list is not even local (hubness, JMLR 11:2487).
+    const pop = corpus(200);
+    const dup = nearTopic();
+    const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, x, i) => s + x * b[i]!, 0);
+    const ball = [...pop].sort((a, b) => dot(b, dup) - dot(a, dup)).slice(0, 16);
+
+    const againstStore = admit(dup, storeCodeFrom(pop, DIMS));
+    const againstBall = admit(dup, storeCodeFrom(ball, DIMS));
+    expect(againstStore.admit).toBe(false);
+    // the ball's fitted concentration exceeds the store's — it was SELECTED to be tight, so it reads a
+    // confidence the store never earned, and prices the claim against a code that is not a code.
+    expect(againstBall.kappa).toBeGreaterThan(againstStore.kappa);
+    expect(againstBall.bitsSaved).toBeGreaterThan(againstStore.bitsSaved);
+    // The live gate never takes a population at all: it reads ONE running vector sum over the admitted store,
+    // which no candidate can steer. This is why the neighbourhood cannot quietly come back.
+    expect(Object.keys(storeCodeFrom(pop, DIMS)).sort()).toEqual(["dims", "n", "sum"]);
+  });
+
+  test("THE KNOWN BLIND SPOT, kept in the light: a single vMF cannot see a minority mode", () => {
+    // The store's code is UNIMODAL. It refuses duplicates of the direction it mostly holds, and it is BLIND
+    // to a duplicate of a small off-axis cluster — a 4th copy of a 3-member topic reads as fresh. This is a
+    // real hole, measured, and it is named rather than hidden. The cure keeps the SAME rule: a mixture of vMF
+    // components (Banerjee et al. 2005) with the component count chosen by the prequential code length — the
+    // shortest code picks k, so no k is typed either. Do not close this test by weakening it.
+    const other = Array.from({ length: DIMS }, () => gauss(r));
+    const nearOther = () => unit(Array.from({ length: DIMS }, (_, i) => other[i]! + 0.3 * gauss(r)));
+    const lopsided = storeCodeFrom([...corpus(190), nearOther(), nearOther(), nearOther()], DIMS);
+    expect(admit(nearTopic(), lopsided).admit).toBe(false);   // the dominant mode: seen, refused
+    expect(admit(nearOther(), lopsided).admit).toBe(true);    // the minority mode: NOT seen — the blind spot
   });
 });

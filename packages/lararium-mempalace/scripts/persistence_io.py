@@ -8,9 +8,17 @@ formpalace — the SAME ChromaDB engine, a separate palace dir; it NEVER federat
 
 THIS STORE STAYS DUMB. The lifecycle LAW lives ONCE in the TS keel (persistence-keel.ts):
 standing derives from the witness-log, the admit gate scores novelty, mode = the half-life.
-This holder only PERSISTS and LOADS — put a record, get it back, RMW-append a witness edge,
-and read the nearest existing vectors so the TS side can run its admit gate. It never
-computes standing, never decides admission — that stays sovereign in TS.
+This holder only PERSISTS and LOADS — put a record, get it back, RMW-append a witness edge, and
+hand out a POPULATION so the TS side can run its admit gate. It never computes standing, never
+decides admission — that stays sovereign in TS.
+
+TWO POPULATION READS, AND THE DIFFERENCE IS LOAD-BEARING. `neighbors` returns the k NEAREST
+vectors — proximity, for a caller that wants proximity. `sample` returns a SEEDED UNIFORM DRAW of
+the store — and that is the one the admit gate reads. The gate asks whether a claim carries bits
+the store cannot already predict, so its model must describe THE STORE; a k-nearest population
+describes the candidate's own surroundings, which every candidate resembles by construction. Score
+the gate there and its variance shrinks as the store fills, so it admits MORE as near-duplicates
+accumulate — the instrument choosing its own finding.
 
 The assertion IS the embedding (caller-vector, `_skip_identity_check` — no model, no network),
 so the store is a similarity index over testimonies out of the box. The witness-log rides the
@@ -30,8 +38,9 @@ Protocol — NDJSON over stdin/stdout, one JSON object per line (only JSON to st
     -> {"id":4,"op":"witness","claim_cid":C,"signer":S,"frontier":F,"polarity":1,"tick":N}
     <- {"id":4,"ok":true,"result":{"ok":true,"witnesses":M}}
 
-    -> {"id":5,"op":"neighbors","assertion":[...],"k":16}
-    <- {"id":5,"ok":true,"result":{"population":[[...],[...],…]}}   # nearest existing vectors
+    -> {"id":5,"op":"neighbors","assertion":[...],"k":16}     # proximity — NEVER the admit gate
+    -> {"id":6,"op":"sample","k":256,"seed":4241}             # a uniform draw — the gate's population
+    <- {"id":5,"ok":true,"result":{"population":[[...],[...],…]}}
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
   PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 persistence_io.py serve --palace ~/.lares/.persistence
@@ -215,8 +224,10 @@ class PersistenceStore:
         return {"ok": True, "witnesses": len(log)}
 
     def neighbors(self, assertion: list, k: int = 16) -> dict:
-        # The population the TS admit gate scores against: the k nearest existing vectors. Empty
-        # collection ⇒ [] ⇒ the gate reads "first light, always novel". Read-only.
+        # The k NEAREST vectors — a proximity read, for a caller that wants proximity (a recall, a
+        # dedup-by-similarity). It MUST NOT feed the admit gate: a population selected by nearness to
+        # the candidate has its variance chosen by the candidate, and the gate scored against it grows
+        # more permissive exactly as near-duplicates accumulate. The gate reads `sample`.
         try:
             n = self._col.count()
         except NotFoundError:                  # ONLY the absent collection reads as first-light-empty;
@@ -226,6 +237,31 @@ class PersistenceStore:
         got = self._col.query(query_embeddings=[assertion], n_results=min(k, n), include=["embeddings"])
         embs = (got.get("embeddings") or [[]])[0]
         return {"population": [list(e) for e in embs]}
+
+    def sample(self, k: int = 256, seed: int = 4241) -> dict:
+        """A UNIFORM RANDOM SAMPLE of the admitted store — the population the admit gate scores against.
+
+        The gate asks whether a claim carries bits the store cannot already predict, so its model must
+        describe THE STORE. A k-nearest population describes the candidate's own neighbourhood, and a
+        model fitted there says only that the candidate resembles the things nearest it — which every
+        candidate does, by construction. The instrument would choose its own finding.
+
+        Seeded, so the draw reproduces: the same store and the same seed hand back the same population,
+        and an admission decision stays auditable rather than depending on a lucky draw.
+        """
+        import random
+
+        try:
+            n = self._col.count()
+        except NotFoundError:
+            n = 0
+        if n == 0:
+            return {"population": []}
+        got = self._col.get(include=["embeddings"])
+        embs = [list(e) for e in (got.get("embeddings") or [])]
+        if len(embs) <= k:
+            return {"population": embs}        # the whole store IS the sample; no draw needed
+        return {"population": random.Random(seed).sample(embs, k)}
 
 
 def _build_ops(store: PersistenceStore) -> dict:
@@ -241,6 +277,7 @@ def _build_ops(store: PersistenceStore) -> dict:
             int(req.get("polarity", 1)), req.get("tick"),
         ),
         "neighbors": lambda req: store.neighbors(req["assertion"], int(req.get("k", 16))),
+        "sample": lambda req: store.sample(int(req.get("k", 256)), int(req.get("seed", 4241))),
     }
 
 

@@ -18,8 +18,8 @@
 
 import {
   canonicalJsonBytes, defaultCryptoProvider, sha256Hex,
-  reentryPrior, admit as keelAdmit,
-  type Testimony, type Witness, type PersistencePolicy,
+  reentryPrior, admit as keelAdmit, storeCodeFrom, observeClaim,
+  type Testimony, type Witness, type PersistencePolicy, type StoreCode,
   WITNESS_POLICY,
 } from "@lararium/mesh";
 import { resolvePersistencePalaceSpawn } from "@lararium/mempalace";
@@ -54,10 +54,11 @@ export interface PersistencePalace {
    */
   reentry(claimCid: string, policy?: PersistencePolicy, now?: number): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null>;
   /**
-   * The admit gate THROUGH the keel: read the store's nearest population, score the candidate's
-   * novelty, return the verdict. The write-time decision the caller enacts before {@link record}.
+   * The admit gate THROUGH the keel: score the candidate against the store's OWN code — the diagonal
+   * predictive against its pooled-scale sibling — and admit iff the store's code cannot beat ignorance
+   * on it. The write-time decision the caller enacts before {@link record}. Carries no threshold.
    */
-  admit(candidate: readonly number[], policy?: PersistencePolicy): Promise<{ admit: boolean; score: number }>;
+  admit(candidate: readonly number[], policy?: PersistencePolicy): Promise<{ admit: boolean; score: number; bitsSaved: number }>;
   /** Release this reference to the shared holder; the process dies when the last reference closes. */
   close(): Promise<void>;
 }
@@ -84,12 +85,25 @@ export function makePersistencePalace(dir: string, opts: PersistencePalaceOption
   const claimCidOf = (kind: string, assertion: readonly number[], prov: RecordProvenance): Promise<string> =>
     sha256Hex(canonicalJsonBytes({ signer: prov.signer, frontier: prov.frontier, assertion }), defaultCryptoProvider);
 
+  // The store's CODE, held here and updated in O(d) per record. The keel's gate reads sufficient statistics
+  // over the ADMITTED store — never a neighbourhood, never a per-candidate refit — so one cold seed from a
+  // uniform draw of the store, then Welford forever after. A candidate cannot steer this.
+  let code: StoreCode | null = null;
+  const seedCode = async (dims: number): Promise<StoreCode> => {
+    if (code !== null && code.dims === dims) return code;
+    const r = (await p.send("sample", { k: 4096, seed: 4241 })) as { population?: number[][] } | null;
+    code = storeCodeFrom(r?.population ?? [], dims);
+    return code;
+  };
+
   return {
     async record(kind, assertion, provenance, pubinfo = {}, document = ""): Promise<{ claimCid: string }> {
       const claimCid = await claimCidOf(kind, assertion, provenance);
       await p.send("put", {
         claim_cid: claimCid, kind, assertion, signer: provenance.signer, frontier: provenance.frontier, pubinfo, document,
       });
+      // The code follows what the store actually holds; a recorded claim joins it, and only then.
+      if (code !== null && code.dims === assertion.length) code = observeClaim(code, assertion);
       return { claimCid };
     },
 
@@ -111,9 +125,14 @@ export function makePersistencePalace(dir: string, opts: PersistencePalaceOption
       return reentryPrior(t, policy, now);   // the keel derives standing+voice — the store never does
     },
 
-    async admit(candidate, policy = WITNESS_POLICY): Promise<{ admit: boolean; score: number }> {
-      const r = (await p.send("neighbors", { assertion: candidate, k: 32 })) as { population?: number[][] } | null;
-      return keelAdmit(candidate, r?.population ?? [], policy);   // the keel scores — the store only supplies the population
+    async admit(candidate, policy = WITNESS_POLICY): Promise<{ admit: boolean; score: number; bitsSaved: number }> {
+      // A code the candidate cannot select. The `neighbors` op stays available for RECALL, and it must never
+      // feed this gate: a k-nearest population makes the model a function of the candidate (so it normalizes
+      // to nothing and stops being a code at all), and in high dimension the k-NN list skews toward hubs near
+      // the centroid anyway, which admits antihubs on geometry rather than on novelty.
+      const c = await seedCode(candidate.length);
+      const v = keelAdmit(candidate, c, policy);   // the keel prices — the store only ever supplied the statistics
+      return { admit: v.admit, score: v.score, bitsSaved: v.bitsSaved };
     },
 
     close: p.close,
