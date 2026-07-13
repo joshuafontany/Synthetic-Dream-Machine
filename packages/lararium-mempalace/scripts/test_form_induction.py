@@ -226,3 +226,18 @@ def test_mine_sequences_bounds_long_repetitive_streams():
     out = fi.mine_sequences(streams, 2, max_forms=8, topk=True)
     assert out                                          # the recurring motif still surfaces
     assert all(len(f["seq"]) <= fi._MAX_SEQ_SYMBOLS for f in out)
+
+
+def test_emb_forest_survives_a_node_count_past_the_recursion_limit():
+    """Cases (b)/(c) splice children into the sibling row, so the naive recursion's depth
+    grows with the target's TOTAL node count — a dense sigil corpus blew ~6000 frames
+    through the motif bounds. The iterative driver must walk a 5000-sibling row flat."""
+    from form_induction import _emb_forest
+
+    wide = tuple(("x", ()) for _ in range(5000))
+    assert _emb_forest((("y", ()),), wide, {}) is False   # every skip, no match
+    assert _emb_forest((("x", ()),), wide, {}) is True    # first sibling matches
+    deep = ("d", ())
+    for _ in range(3000):
+        deep = ("d", (deep,))
+    assert _emb_forest((("d", ()),), (deep,), {}) is True  # descent past the limit

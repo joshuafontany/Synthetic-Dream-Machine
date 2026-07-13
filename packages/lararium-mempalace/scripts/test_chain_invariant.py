@@ -26,7 +26,7 @@ def test_a_straddle_breaks_the_chain_and_names_its_witnesses():
     broken_form = dict(FORM, c4="fY")
     rep = ci.chain_report(CIDS, {"content": CONTENT, "structure": STRUCTURE, "form": broken_form})
     assert rep["chain_holds"] is False
-    leg = next(l for l in rep["legs"] if l["fine"] == "structure")
+    leg = next(leg for leg in rep["legs"] if leg["fine"] == "structure")
     assert leg["violations"] == 1
     ex = leg["examples"][0]
     assert ex["fine_class"] == "sB"

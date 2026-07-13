@@ -194,8 +194,9 @@ def test_kapae_branch_excludes_then_unkapae_restores_across_both_sensoria(tmp_pa
 def test_worldline_of_climbs_to_the_braid_root(tmp_path):
     # the demux membership query: a sub-agent turn resolves to the MAIN-session root, not its own start.
     w = wl.WorldlineStore(str(tmp_path / ".wl-root"))
-    w.linear("m0", "m1", 1); w.linear("m1", "m2", 2)   # main chain m0→m1→m2
-    w.fork("m1", "s0", 2); w.linear("s0", "s1", 3)      # m1 spawns sub-agent s0→s1
+    # One braid per row — the semicolon holds a chain together so each row reads as one lineage.
+    w.linear("m0", "m1", 1); w.linear("m1", "m2", 2)   # noqa: E702 — main chain m0→m1→m2
+    w.fork("m1", "s0", 2); w.linear("s0", "s1", 3)      # noqa: E702 — m1 spawns sub-agent s0→s1
     w.linear("n0", "n1", 1)                             # a separate braid n0→n1
     assert w.worldline_of("s1") == "m0"   # climbs s1→s0 (linear) → m1 (fork) → m0 (linear) → root
     assert w.worldline_of("m2") == "m0"

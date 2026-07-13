@@ -50,8 +50,8 @@ def test_sectioner_cuts_placebo_at_identical_labels_both_modes():
     for extract in (False, True):
         r = section_corpus_file("kumulipo-beckwith.md", real, extract=extract)
         f = section_corpus_file("kumulipo-beckwith.md", fake, extract=extract)
-        assert [[l for l, _ in s["sections"]] for s in r] == \
-               [[l for l, _ in s["sections"]] for s in f]
+        assert [[ln for ln, _ in s["sections"]] for s in r] == \
+               [[ln for ln, _ in s["sections"]] for s in f]
         assert [s["source"] for s in r] == [s["source"] for s in f]
 
 
@@ -149,7 +149,7 @@ def test_real_carriers_mirror_within_ten_percent():
             r_srcs = section_corpus_file(basename, real, extract=extract)
             f_srcs = section_corpus_file(basename, fake, extract=extract)
             for r_src, f_src in zip(r_srcs, f_srcs):
-                assert [l for l, _ in r_src["sections"]] == [l for l, _ in f_src["sections"]]
+                assert [ln for ln, _ in r_src["sections"]] == [ln for ln, _ in f_src["sections"]]
                 for (label, r_body), (_, f_body) in zip(r_src["sections"], f_src["sections"]):
                     ratio = len(f_body) / max(1, len(r_body))
                     assert 0.9 <= ratio <= 1.1, f"{r_src['source']}/{label}: {ratio}"

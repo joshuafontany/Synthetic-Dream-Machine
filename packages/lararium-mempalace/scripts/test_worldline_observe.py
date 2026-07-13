@@ -15,7 +15,7 @@ import json
 import os
 
 import worldline_io as wl
-from worldline_observe import derive_handle, observe_worldline, run_id_of
+from worldline_observe import derive_handle, observe_worldline
 from worldline_veil import veiled_root
 
 # A fixed WITNESS salt — the tests inject their own secret so they NEVER touch the operator's real keys.

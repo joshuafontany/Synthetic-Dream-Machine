@@ -232,14 +232,15 @@ def test_corpus_source_edit_keeps_cid_breaks_chain(tmp_path):
 
 
 def test_corpus_source_multi_root_and_collision_fails_loud(tmp_path):
-    r1 = tmp_path / "one";  r1.mkdir();  (r1 / "x.md").write_text("# One\n", encoding="utf-8")
-    r2 = tmp_path / "two";  r2.mkdir();  (r2 / "y.md").write_text("# Two\n", encoding="utf-8")
+    # The rows align so the two roots differ ONLY in name — the comparison IS the assertion.
+    r1 = tmp_path / "one";  r1.mkdir();  (r1 / "x.md").write_text("# One\n", encoding="utf-8")  # noqa: E702
+    r2 = tmp_path / "two";  r2.mkdir();  (r2 / "y.md").write_text("# Two\n", encoding="utf-8")  # noqa: E702
     pointer = os.pathsep.join([str(r1), str(r2)])
     recs = list(corpus_source(wing="w")(pointer))
     assert sorted(r["metadata"]["source_file"] for r in recs) == ["corpus:one/x.md", "corpus:two/y.md"]
     # two roots whose basenames collide would fuse distinct files under one cid — FAIL LOUD instead.
-    d1 = tmp_path / "p1" / "mu";  d1.mkdir(parents=True);  (d1 / "z.md").write_text("# Z1\n", encoding="utf-8")
-    d2 = tmp_path / "p2" / "mu";  d2.mkdir(parents=True);  (d2 / "z.md").write_text("# Z2\n", encoding="utf-8")
+    d1 = tmp_path / "p1" / "mu";  d1.mkdir(parents=True);  (d1 / "z.md").write_text("# Z1\n", encoding="utf-8")  # noqa: E702
+    d2 = tmp_path / "p2" / "mu";  d2.mkdir(parents=True);  (d2 / "z.md").write_text("# Z2\n", encoding="utf-8")  # noqa: E702
     with pytest.raises(ValueError, match="collision"):
         list(corpus_source(wing="w")(os.pathsep.join([str(d1), str(d2)])))
 

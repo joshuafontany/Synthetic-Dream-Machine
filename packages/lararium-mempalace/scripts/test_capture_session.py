@@ -15,7 +15,7 @@ import os
 import pytest
 
 from capture_session import drive_capture
-from capture_sources import claude_source, derive_cid
+from capture_sources import derive_cid
 
 FIXTURES = os.path.join(os.path.dirname(__file__), "fixtures", "capture")
 CLAUDE = os.path.join(FIXTURES, "claude-main.jsonl")

@@ -89,7 +89,7 @@ def test_shuffle_never_crosses_a_wa_boundary():
     fake = shuffle_text(real, "kumulipo-liliuokalani.md", seed=7)
     r = section_corpus_file("kumulipo-liliuokalani.md", real, extract=True)[0]
     f = section_corpus_file("kumulipo-liliuokalani.md", fake, extract=True)[0]
-    assert [l for l, _ in r["sections"]] == [l for l, _ in f["sections"]]
+    assert [ln for ln, _ in r["sections"]] == [ln for ln, _ in f["sections"]]
     for (label, r_body), (_, f_body) in zip(r["sections"], f["sections"]):
         assert sorted(r_body.split("\n")) == sorted(f_body.split("\n")), label
 
@@ -100,8 +100,8 @@ def test_sectioner_cuts_identical_labels_both_modes_on_beckwith():
     for extract in (False, True):
         r = section_corpus_file("kumulipo-beckwith.md", real, extract=extract)
         f = section_corpus_file("kumulipo-beckwith.md", fake, extract=extract)
-        assert [[l for l, _ in s["sections"]] for s in r] == \
-               [[l for l, _ in s["sections"]] for s in f]
+        assert [[ln for ln, _ in s["sections"]] for s in r] == \
+               [[ln for ln, _ in s["sections"]] for s in f]
         assert [s["source"] for s in r] == [s["source"] for s in f]
 
 

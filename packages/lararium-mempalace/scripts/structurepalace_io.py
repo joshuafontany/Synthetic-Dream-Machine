@@ -59,14 +59,17 @@ import sys
 
 from mempalace.palace import get_collection
 
-# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON
-# serve-loop · ops-dispatch · the serve composition root — composed from the shared
-# foundation, NOT inherited. The thin module-level aliases below keep this sidecar's
-# names (`_acquire_serve_lock`, `_serve_loop`, `_fcntl`, …) stable for its tests.
+# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON serve-loop ·
+# ops-dispatch · the serve composition root — composed from the shared foundation, never inherited.
+#
+# `_fcntl`/`_select` re-export so the serve tests read them as MODULE ATTRIBUTES (`ap._fcntl is None`)
+# to gate their POSIX skip markers. A linter reads them as unused — it cannot see a cross-module
+# attribute read — so they carry the mark that says otherwise. Cutting them takes the skip markers with
+# them, and the serve tests then FAIL on a platform they mean to skip.
 from sidecar_caps import (
     ReverseIndex,
-    _fcntl,
-    _select,
+    _fcntl,  # noqa: F401 — read as `ap._fcntl` by the serve tests' POSIX skipif
+    _select,  # noqa: F401 — read as `ap._select` by the idle-reap tests' skipif
     acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,

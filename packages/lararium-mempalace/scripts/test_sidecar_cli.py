@@ -164,7 +164,7 @@ def test_structurepalace_io_serve_round_trip(tmp_path):
     proc = _run(["structurepalace_io.py", "serve", "--palace", palace], home=tmp_path, stdin=reqs)
     assert proc.returncode == 0, proc.stderr
     lines = _json_lines(proc.stdout)
-    by_id = {l["id"]: l for l in lines}
+    by_id = {ln["id"]: ln for ln in lines}
     assert by_id[1]["result"] == {"ready": True}
     assert by_id[2]["ok"] is True and by_id[2]["result"] == {"hash": h, "count": 1}
     assert by_id[3]["ok"] is True

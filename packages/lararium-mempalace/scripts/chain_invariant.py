@@ -140,7 +140,7 @@ def chain_report(
         "vacuous": vacuous,
         "chain_holds": measured
         and inequality_holds
-        and all(l["violations"] == 0 for l in legs),
+        and all(leg["violations"] == 0 for leg in legs),
     }
 
 

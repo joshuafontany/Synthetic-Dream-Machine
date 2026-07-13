@@ -223,7 +223,9 @@ def test_guard_raise_crosses_the_wire(tmp_path):
 def test_require_keys_flag_parsing_empty_yields_none():
     # the load-bearing empty-flag ward: serve --require-keys "" (or absent) must yield None (generic),
     # NEVER {""} — which would fire the guard on every put and reject all generic corpora.
-    parse = lambda s: ({k for k in s.split(",") if k} or None)  # mirrors content_io.main serve-flag logic
+    def parse(s):                       # mirrors content_io.main's serve-flag logic, shape for shape
+        return {k for k in s.split(",") if k} or None
+
     assert parse("") is None
     assert parse("wing,room") == {"wing", "room"}
     assert parse("wing,,room") == {"wing", "room"}  # a stray comma drops, never mints an empty key

@@ -47,6 +47,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re as _re
 import sys
 from typing import Callable
 
@@ -177,8 +178,6 @@ def _parse_treesitter(kind: str, source: bytes) -> dict | None:
 # Content-free for the encoder: a sigil's NAME rides a `sigil_name` leaf's nesting, never
 # its argument text. Block sigils (ahu, kahea-compound, pranala-block) nest their inner
 # sigils as real children, so an ahu-wrapped run reads DEEPER than a flat sigil row.
-
-import re as _re
 
 # A sharktooth token: <<~ … >> or a closer <<~/word >>. Non-greedy to the next >>.
 _TOKEN_RE = _re.compile(r"<<~/?[^\n]*?>>")

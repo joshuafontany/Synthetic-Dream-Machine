@@ -126,33 +126,79 @@ def _struct_hash(value) -> str:
 
 
 def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
-    if not pf:
-        return True
-    if not tf:
-        return False
     # The memo keys by VALUE (nested tuples hash structurally), never id(): the recurrence
     # builds fresh forest tuples every step (t0[1] + trest), so id-keys (a) almost never hit —
     # the recurrence blew up exponentially inside ONE check on a real ~170-node sigil tree —
     # and (b) can WRONG-hit when a freed tuple's id gets reused mid-walk. Value-keys restore
     # the polynomial memoized recurrence and make every hit a true subproblem match.
-    key = (pf, tf)
-    cached = memo.get(key)
-    if cached is not None:
-        return cached
-    p0, prest = pf[0], pf[1:]
-    t0, trest = tf[0], tf[1:]
-    result = False
-    # (a) map p0's root onto t0's root, then the rest of p after t0.
-    if p0[0] == t0[0] and _emb_forest(p0[1], t0[1], memo) and _emb_forest(prest, trest, memo):
-        result = True
-    # (b) descend into t0 (p0's image is a proper descendant of t0).
-    if not result and _emb_forest(pf, t0[1] + trest, memo):
-        result = True
-    # (c) skip t0 entirely.
-    if not result and _emb_forest(pf, trest, memo):
-        result = True
-    memo[key] = result
-    return result
+    #
+    # The driver runs ITERATIVE: cases (b)/(c) splice children into the sibling row, so the
+    # call depth of the naive recursion grows with the target's TOTAL node count — a dense
+    # sigil corpus blew ~6000 frames through the motif bounds. An explicit frame stack walks
+    # the same (a)→(b)→(c) short-circuit order; the recurrence itself stays Kilpeläinen–
+    # Mannila, byte-for-byte in verdicts.
+    root = (pf, tf)
+    stack = [[pf, tf, 0]]  # [pattern-forest, target-forest, stage]
+    while stack:
+        frame = stack[-1]
+        fpf, ftf, stage = frame
+        key = (fpf, ftf)
+        if stage == 0:
+            if key in memo:
+                stack.pop()
+                continue
+            if not fpf:
+                memo[key] = True
+                stack.pop()
+                continue
+            if not ftf:
+                memo[key] = False
+                stack.pop()
+                continue
+        p0, prest = fpf[0], fpf[1:]
+        t0, trest = ftf[0], ftf[1:]
+        if stage == 0:
+            # (a) map p0's root onto t0's root, then the rest of p after t0.
+            if p0[0] != t0[0]:
+                frame[2] = 2
+                continue
+            sub = (p0[1], t0[1])
+            if sub not in memo:
+                stack.append([sub[0], sub[1], 0])
+                continue
+            frame[2] = 1 if memo[sub] else 2
+            continue
+        if stage == 1:
+            sub = (prest, trest)
+            if sub not in memo:
+                stack.append([sub[0], sub[1], 0])
+                continue
+            if memo[sub]:
+                memo[key] = True
+                stack.pop()
+                continue
+            frame[2] = 2
+            continue
+        if stage == 2:
+            # (b) descend into t0 (p0's image is a proper descendant of t0).
+            sub = (fpf, t0[1] + trest)
+            if sub not in memo:
+                stack.append([sub[0], sub[1], 0])
+                continue
+            if memo[sub]:
+                memo[key] = True
+                stack.pop()
+                continue
+            frame[2] = 3
+            continue
+        # stage 3 — (c) skip t0 entirely.
+        sub = (fpf, trest)
+        if sub not in memo:
+            stack.append([sub[0], sub[1], 0])
+            continue
+        memo[key] = memo[sub]
+        stack.pop()
+    return memo[root]
 
 
 # Motif-scale bounds: the sinks we mine are SHALLOW recurring shapes, not whole deep-wide ASTs.
@@ -162,15 +208,29 @@ def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
 # leaf (depth) / drops its extra siblings (fan-out); the recurring MOTIF scale survives intact.
 _MAX_TREE_DEPTH = 32
 _MAX_TREE_WIDTH = 16
+# Depth × width alone leave TOTAL node count unbounded (a dense sigil meme lands ~6000
+# nodes inside those two caps), and the value-keyed inclusion recurrence grinds on it —
+# tuple keys hash at O(subtree). The node budget bounds the walked forest itself; past it
+# a node truncates to a leaf. Truncation UNDER-counts support (a motif that only shows in
+# the trimmed tail loses its witness) — conservative: it can miss a form, never mint one.
+_MAX_TREE_NODES = 512
 
 
-def _as_forest(node: dict, depth: int = 0) -> tuple:
+def _as_forest(node: dict, depth: int = 0, budget: "list[int] | None" = None) -> tuple:
     """A tree → the immutable (label, children-forest) the inclusion recurrence walks, bounded to
-    motif scale so a deep-wide AST cannot overflow the recurrence."""
+    motif scale so a deep-wide-or-dense AST cannot overflow or grind the recurrence."""
+    if budget is None:
+        budget = [_MAX_TREE_NODES]
     label = str(node.get("type", "?"))
-    if depth >= _MAX_TREE_DEPTH:
+    if depth >= _MAX_TREE_DEPTH or budget[0] <= 0:
         return (label, ())
-    return (label, tuple(_as_forest(c, depth + 1) for c in _children(node)[:_MAX_TREE_WIDTH]))
+    kids = []
+    for c in _children(node)[:_MAX_TREE_WIDTH]:
+        if budget[0] <= 0:
+            break
+        budget[0] -= 1
+        kids.append(_as_forest(c, depth + 1, budget))
+    return (label, tuple(kids))
 
 
 def _embeds(pattern_forest: tuple, target: dict) -> bool:

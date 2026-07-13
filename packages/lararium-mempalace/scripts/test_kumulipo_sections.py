@@ -138,7 +138,7 @@ def test_liliuokalani_sections_wrapped_vs_extracted_align():
     extracted = section_corpus_file("kumulipo-liliuokalani.md", text, extract=True)
     (w,), (e,) = wrapped, extracted
     assert w["source"] == e["source"] == "kumulipo/liliuokalani"
-    assert [l for l, _ in w["sections"]] == [l for l, _ in e["sections"]] == [
+    assert [label for label, _ in w["sections"]] == [label for label, _ in e["sections"]] == [
         "preamble", "the-first-era", "second-era", "postscript"]
     # The wa units carry IDENTICAL text both modes — only the envelope-bearing ends move.
     assert dict(w["sections"])["the-first-era"] == dict(e["sections"])["the-first-era"]
@@ -154,11 +154,11 @@ def test_beckwith_yields_two_sources_and_notes_never_mint_sections():
     (b, k) = section_corpus_file("kumulipo-beckwith.md", text, extract=True)
     assert b["source"] == "kumulipo/beckwith"
     assert k["source"] == "kumulipo/kalakaua-appendix"
-    labels = [l for l, _ in b["sections"]]
+    labels = [label for label, _ in b["sections"]]
     # Duplicate markers take occurrence ordinals; the Textual Notes' CHANT lines
     # (parenthetical style / inside the postscript span) mint nothing.
     assert labels == ["preamble", "chant-one", "chant-two", "chant-two-2", "postscript"]
-    assert [l for l, _ in k["sections"]] == ["preamble", "ka-wa-akahi", "ka-wa-elua"]
+    assert [label for label, _ in k["sections"]] == ["preamble", "ka-wa-akahi", "ka-wa-elua"]
     # The appendix reads as the SAME bytes in both modes — the ablation's control.
     (_, k_wrapped) = section_corpus_file("kumulipo-beckwith.md", text, extract=False)
     assert k_wrapped["sections"] == k["sections"]
@@ -256,18 +256,18 @@ _LIBRARY = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
 def test_real_triple_section_counts():
     lili = open(os.path.join(_LIBRARY, "kumulipo-liliuokalani.md"), encoding="utf-8").read()
     beck = open(os.path.join(_LIBRARY, "kumulipo-beckwith.md"), encoding="utf-8").read()
-    (l,) = section_corpus_file("kumulipo-liliuokalani.md", lili, extract=True)
+    (lil,) = section_corpus_file("kumulipo-liliuokalani.md", lili, extract=True)
     b, k = section_corpus_file("kumulipo-beckwith.md", beck, extract=True)
     # 16 wa + preamble + postscript · 17 chant markers (no CHANT TWELVE; THIRTEEN and
     # FIFTEEN in two PARTs) + preamble + postscript · 16 KA WA + preamble.
-    assert len(l["sections"]) == 18
+    assert len(lil["sections"]) == 18
     assert len(b["sections"]) == 19
     assert len(k["sections"]) == 17
     labels = [lab for lab, _ in b["sections"]]
     assert "chant-twelve" not in labels
     assert "chant-thirteen-2" in labels and "chant-fifteen-2" in labels
     # The extracted units ride bare — no sigil survives extraction anywhere.
-    for src in (l, b, k):
+    for src in (lil, b, k):
         assert all("<<~" not in t for _, t in src["sections"])
 
 

@@ -352,7 +352,7 @@ def _ecp_divisive_R(matrix: np.ndarray, min_size: int, sig_lvl: float) -> list[i
         )
         if proc.returncode != 0:
             return None
-        line = [l for l in proc.stdout.splitlines() if l.strip().startswith("{")]
+        line = [ln for ln in proc.stdout.splitlines() if ln.strip().startswith("{")]
         if not line:
             return None
         resp = json.loads(line[-1])
@@ -456,7 +456,7 @@ def _couple_ete_R(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int = 
         )
         if proc.returncode != 0:
             return None
-        line = [l for l in proc.stdout.splitlines() if l.strip().startswith("{")]
+        line = [ln for ln in proc.stdout.splitlines() if ln.strip().startswith("{")]
         if not line:
             return None
         resp = json.loads(line[-1])
@@ -891,7 +891,7 @@ def _ews_R(x: np.ndarray, window: int) -> dict | None:
                               capture_output=True, text=True, timeout=180)
         if proc.returncode != 0:
             return None
-        line = [l for l in proc.stdout.splitlines() if l.strip().startswith("{")]
+        line = [ln for ln in proc.stdout.splitlines() if ln.strip().startswith("{")]
         if not line:
             return None
         resp = json.loads(line[-1])

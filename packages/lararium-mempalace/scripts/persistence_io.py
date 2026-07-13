@@ -49,23 +49,19 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import sys
 
 from chromadb.errors import NotFoundError
 from mempalace.palace import get_collection
 
-# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON serve-loop ·
-# ops-dispatch · the serve composition root — composed from the shared foundation.
+# The serve cap-stack this sidecar #has, composed from the shared foundation. `run_sidecar` IS the
+# composition root — it holds the flock-singleton, the idle-reap, and the NDJSON serve-loop inside
+# itself, so this module names only what it calls. An import list that recites the whole stack while
+# calling one entry point declares caps the code does not hold, and the recital reads as the contract.
 from sidecar_caps import (
-    acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,
     mine_busy_retry,
-    release_serve_lock,
     run_sidecar,
-    serve_lock_path,
-    serve_loop,
 )
 
 # Cap the witness-log so a hot testimony cannot grow one record without bound — the log stays

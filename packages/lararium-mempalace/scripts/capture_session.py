@@ -33,7 +33,7 @@ import argparse
 import json
 import os
 import sys
-from typing import Callable, Iterable, Iterator
+from typing import Callable, Iterator
 
 from capture_sources import Record, SourceCap, resolve_source
 from sensorium import compose_memory_sensorium

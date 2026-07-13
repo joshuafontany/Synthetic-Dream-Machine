@@ -96,13 +96,16 @@ import math
 import sys
 from collections import Counter
 
-# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON
-# serve-loop · ops-dispatch · the serve composition root — composed from the shared
-# foundation (NOT inherited). `_fcntl`/`_select` re-export so this sidecar's serve
-# tests keep their POSIX skip markers.
+# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON serve-loop ·
+# ops-dispatch · the serve composition root — composed from the shared foundation, never inherited.
+#
+# `_fcntl`/`_select` re-export so the serve tests read them as MODULE ATTRIBUTES (`fe._fcntl is None`)
+# to gate their POSIX skip markers. A linter reads them as unused — it cannot see a cross-module
+# attribute read — so they carry the mark that says otherwise. Cutting them takes the skip markers with
+# them, and the serve tests then FAIL on a platform they mean to skip.
 from sidecar_caps import (
-    _fcntl,
-    _select,
+    _fcntl,  # noqa: F401 — read as `fe._fcntl` by the serve tests' POSIX skipif
+    _select,  # noqa: F401 — read as `fe._select` by the idle-reap tests' skipif
     acquire_serve_lock,
     idle_ttl_seconds,
     make_dispatch,

@@ -4,7 +4,6 @@ The TS<->py parity itself rides the committed fixture (the mesh vitest side cons
 these tests guard the twin's own semantics: the glue verdict, the vacuous flag, the
 variance gates both ways, the locus argmax, and the native pseudometrics' edges.
 """
-import math
 
 import pytest
 

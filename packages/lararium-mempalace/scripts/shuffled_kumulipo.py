@@ -111,8 +111,8 @@ def _verify_mirror(basename: str, real_text: str, fake_text: str) -> dict:
         fake_srcs = section_corpus_file(basename, fake_text, extract=extract)
         mode = "extracted" if extract else "wrapped"
         for r_src, f_src in zip(real_srcs, fake_srcs):
-            r_labels = [l for l, _ in r_src["sections"]]
-            f_labels = [l for l, _ in f_src["sections"]]
+            r_labels = [label for label, _ in r_src["sections"]]
+            f_labels = [label for label, _ in f_src["sections"]]
             if r_labels != f_labels:
                 raise ValueError(f"shuffled_kumulipo: {r_src['source']} section labels "
                                  f"diverge (extract={extract}): {r_labels} != {f_labels}")

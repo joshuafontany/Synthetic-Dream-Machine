@@ -227,7 +227,6 @@ def test_serve_loop_reaps_when_idle():
 def test_serve_loop_handles_then_exits_on_eof():
     r, w = os.pipe()
     out = io.StringIO()
-    seen = []
     done = threading.Event()
     dispatch = sc.make_dispatch({"ping": lambda req: {"ready": True}})
 

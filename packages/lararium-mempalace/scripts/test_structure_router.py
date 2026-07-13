@@ -14,7 +14,6 @@ and SKIP cleanly when it / the venv stack is absent. Run under the mempalace ven
 """
 import math
 import os
-import sys
 
 import pytest
 

@@ -49,7 +49,6 @@ def test_mid_log_corruption_quarantines_the_segment_and_raises(tmp_path):
     path = wal._segment_path(wal._gen)
     # the crash nobody expects: a byte flips INSIDE the second frame's payload
     with open(path, "r+b") as fh:
-        data = fh.read()
         second = len(cw.pack_frame({"cid": "c0"}))  # frames run equal-sized here
         fh.seek(second + cw._HEADER.size + 2)
         fh.write(b"\xff")

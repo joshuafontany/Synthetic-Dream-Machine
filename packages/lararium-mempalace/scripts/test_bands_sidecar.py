@@ -293,10 +293,10 @@ def test_cli_analyze_signal_emits_cells():
     lines = "\n".join(json.dumps(row.tolist()) for row in E)
     r = _run_cli(["analyze", "--signal", "-", "--boot", "10"], stdin=lines)
     assert r.returncode == 0, r.stderr
-    out_lines = [l for l in r.stdout.strip().splitlines() if l.strip()]
+    out_lines = [ln for ln in r.stdout.strip().splitlines() if ln.strip()]
     summary = json.loads(out_lines[-1])
     assert summary["cells"] == 90
-    cells = [json.loads(l) for l in out_lines[:-1]]
+    cells = [json.loads(ln) for ln in out_lines[:-1]]
     assert len(cells) == 90
     assert all("lar_ffz" in c and "repro_grade" in c for c in cells)
 

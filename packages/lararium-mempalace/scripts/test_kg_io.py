@@ -43,7 +43,6 @@ def test_invalidate_closes_the_edge(tmp_path):
 
 
 def test_build_ops_dispatch_shape():
-    ops = kg_io._build_ops.__wrapped__ if hasattr(kg_io._build_ops, "__wrapped__") else None
     # the ops registry names the full read+write surface
     names = set(kg_io._build_ops(_kg_stub()).keys())
     assert {"ping", "add_entity", "add_triple", "invalidate", "query_entity", "query_relationship", "timeline", "stats"} <= names

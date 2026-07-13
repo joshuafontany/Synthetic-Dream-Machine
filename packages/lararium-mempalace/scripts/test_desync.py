@@ -4,7 +4,7 @@
 """
 import pytest
 
-from desync import desync_phases, min_pairwise_gap, plastic_rho, roberts_phase
+from desync import desync_phases, min_pairwise_gap, plastic_rho
 
 
 def test_plastic_rho_solves_its_defining_equation():

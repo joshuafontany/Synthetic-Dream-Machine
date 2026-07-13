@@ -13,7 +13,6 @@ import os
 import subprocess
 import sys
 
-import pytest
 
 _SCRIPTS = os.path.dirname(os.path.abspath(__file__))
 _PY = sys.executable  # the venv interpreter running pytest (has chroma)
