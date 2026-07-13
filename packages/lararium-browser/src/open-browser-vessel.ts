@@ -44,7 +44,8 @@ import type { CoherenceStatus } from "@lararium/tw5";
 import type { CoherenceFrameWithRev } from "./wiki-coherence-sink.js";
 import { composeBrowser }                    from "./browser-caps.js";
 import type { VesselWikiSlot, VesselCoreResult, DaemonVmCore } from "@lararium/tw5";
-import { runFoundingCeremony }               from "@lararium/keyhive";
+import { runFoundingCeremony, runApplyAdmitPayload } from "@lararium/keyhive";
+import type { DeviceAdmitPayload } from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
 import {
   generateOrLoadBrowserVesselIdentity, loadBrowserSigningSeed,
@@ -139,6 +140,19 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    * this vessel's own operatorDid (the same-operator leaf, the prior behavior — back-compat).
    */
   relayGatePubKey?: string;
+  /**
+   * A `device-admit/v1` payload — this vessel JOINS an existing PersonaGroup instead of FOUNDING its
+   * own. The founder's root signed it, so it is self-verifying and CARRIAGE-AGNOSTIC: it may arrive by
+   * QR, by paste, by a URL fragment (which never reaches a server), by a file on a stick. It is DATA,
+   * never a fetch — a vessel that had to ASK a server for its own admission would be a client
+   * petitioning an authority, and it would need that authority REACHABLE at the moment of asking, which
+   * is a global now this house does not have.
+   *
+   * Absent, the vessel founds its own group (an anon at the floor) — which is a correct outcome, not a
+   * failure. Present, `runApplyAdmitPayload` seeds this vessel's OWN sovereign social docs and adopts
+   * the founder's `@persona` (membership crosses; @daemon stays sovereign-per-vessel).
+   */
+  admit?:           DeviceAdmitPayload;
   /** URL of the compiled browser daemon island Worker script. */
   daemonWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
@@ -196,7 +210,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     genesisSeed,
     genesisCasManifest, genesisCasBaseUrl,
     daemonWorkerUrl, workerScriptUrl, onProjection, onCoherence, relayUrl, relayGatePubKey,
-    meshLeaf,
+    meshLeaf, admit,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -217,7 +231,36 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   const bootKeys = await readBootKeys(idbName);
   const bootKeyWrites: BootKeyWrites = {};
   let bootstrap = bootKeys.bootstrap;
-  if (!bootstrap) {
+  if (!bootstrap && admit) {
+    // JOIN. The founder's root already signed this vessel's edge, so the ceremony here ADOPTS a binding
+    // rather than minting one: `runApplyAdmitPayload` seeds this vessel's OWN sovereign social docs and
+    // takes the founder's @persona (membership crosses; @daemon stays sovereign-per-vessel), then writes
+    // the oracle tiddlers and cap events the boot gates read.
+    //
+    // The payload arrived as DATA — carried, never fetched — so this path runs with no network, no clock
+    // and no server, which is also what makes it a pure function of its bytes and therefore testable.
+    // It fails closed on a missing binding field: a half-bound daemon doc is the confused-deputy hole.
+    const a = await runApplyAdmitPayload({
+      repo,
+      operatorVerifyingKey: operatorIdentity.verifyingKey,
+      operatorDisplayName:  displayName ?? "Browser Operator",
+      payload:              admit,
+    });
+    bootstrap = {
+      identitiesUrl: a.identitiesUrl, circlesUrl: a.circlesUrl, sessionsUrl: a.sessionsUrl,
+      daemonUrl: a.daemonUrl, personaUrl: a.personaUrl,
+      personaGroupDocIdHex: admit.personaGroupDocIdHex,
+      personaGroupAgentIdHex: admit.personaGroupAgentIdHex,
+      meshCabalDocIdHex: admit.meshCabalDocIdHex,
+      // The PINNED signer and the SIGNED edge ride from the payload, never from this vessel: an admitted
+      // leaf presents a binding it could not have written for itself, and that is the whole difference
+      // between joining a group and declaring one.
+      signerDid: admit.signerDid, deviceEdge: admit.deviceEdge,
+    };
+    bootKeyWrites.bootstrap = bootstrap;
+  } else if (!bootstrap) {
+    // FOUND. No admit — the vessel raises its own PersonaGroup and stands at the floor as an anon. This
+    // is a correct outcome, not a failure: fail-closed reads stay-at-the-floor, never destroy.
     const f = await runFoundingCeremony({
       repo, operatorSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,

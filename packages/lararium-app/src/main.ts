@@ -7,7 +7,8 @@
  * story). Location-agnostic: served from localhost / LAN / elyncia.app, the vessel
  * always runs here; the origin is a static host, never an authority.
  */
-import { openBrowserVessel, generateOrLoadBrowserVesselIdentity } from "@lararium/browser";
+import { openBrowserVessel, generateOrLoadBrowserVesselIdentity, parseAdmitCarriage } from "@lararium/browser";
+import type { DeviceAdmitPayload } from "@lararium/keyhive";
 import { pullAndVerifyOracle, type GenesisCasManifest, type GenesisSeed } from "@lararium/mesh";
 import { Idiomorph } from "idiomorph";
 // The materialize-fresh boot artifact: the PLAIN-DATA @oracle seed (island.genesis.json).
@@ -101,6 +102,22 @@ function applyProjection(frame: { html: string; css: string; rev: number }): voi
   }
 }
 
+/**
+ * Take a carried `device-admit/v1` payload off `location.hash`, and CLEAR the fragment once taken.
+ *
+ * The DECODE lives in `@lararium/browser` (parseAdmitCarriage) and is tested there against fixed bytes;
+ * this half holds only what needs a browser: reading the fragment, and clearing it. Clearing matters —
+ * a URL left holding a delegation leaves it in the address bar, the history, and every screenshot of the
+ * tab, and the payload has already reached the vessel by then.
+ */
+function takeAdmitFromLocation(): DeviceAdmitPayload | null {
+  const payload = parseAdmitCarriage(location.hash);
+  if (!payload) return null;
+  history.replaceState(null, "", location.pathname + location.search);
+  console.log("[vessel] ADMIT carried in — this vessel JOINS an existing PersonaGroup rather than founding one.");
+  return payload;
+}
+
 async function bootVessel(): Promise<void> {
   const phasesEl = $("phases");
   const paint = (p: string): void => {
@@ -125,6 +142,12 @@ async function bootVessel(): Promise<void> {
   // its own, and the proof fails closed — a correct refusal that looks exactly like a broken socket.
   // The node vessel prints this key in its boot banner.
   const relayGatePubKey = new URLSearchParams(location.search).get("gate") ?? undefined;
+  // #admit=<base64url> → a device-admit/v1 payload. It rides the FRAGMENT because a browser never
+  // transmits one: the bytes reach this vessel by whatever the human carried them with, and no server —
+  // not even the relay — sees them in transit. A signed capability needs no trusted channel; a carrier
+  // may withhold it, never forge it. Fetching it instead would make this vessel a client petitioning an
+  // authority for its own admission, and would demand that authority be reachable at the moment of asking.
+  const admit = takeAdmitFromLocation();
   // A local boot and a CROSSED boot look identical from the outside: both render, both say "ready". So
   // the vessel names which one it just performed. A seam nobody can see is a seam nobody watches, and an
   // absent crossing that reports nothing reads exactly like a crossing that worked.
@@ -173,6 +196,7 @@ async function bootVessel(): Promise<void> {
       onProjection: applyProjection,
       ...(relayUrl ? { relayUrl } : {}),
       ...(relayGatePubKey ? { relayGatePubKey } : {}),
+      ...(admit ? { admit } : {}),
       ...(meshLeaf ? { meshLeaf } : {}),
     });
     _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg

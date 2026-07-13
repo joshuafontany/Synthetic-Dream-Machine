@@ -138,5 +138,18 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     process.stdout.write(json + "\n");
   }
 
+  // The CARRIED form. The payload is a signed capability, so it needs no trusted channel and no
+  // reachable issuer: a hostile carrier may WITHHOLD it, never forge it. It rides in the URL FRAGMENT,
+  // which browsers do not transmit — so the bytes reach the vessel by whatever the human used (a paste,
+  // a QR held up to a screen, a file on a stick) and touch no network on the way.
+  //
+  // The alternative — a `GET /admit/<key>` the vessel calls — makes the vessel a client PETITIONING an
+  // authority for its own admission, and it demands that authority be REACHABLE at the moment of asking.
+  // That is a global now, and this house does not have one.
+  const b64 = Buffer.from(JSON.stringify(payload), "utf8").toString("base64url");
+  console.log("");
+  console.log("[lares device-admit] carry this to the joining vessel — the fragment never leaves the browser:");
+  console.log(`  #admit=${b64}`);
+
   return payload;
 }
