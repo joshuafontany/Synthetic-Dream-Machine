@@ -7,6 +7,8 @@ import math
 
 import pytest
 
+from plane_base import BASE_RECORD
+
 from sensorium_efe import (
     _FIXTURE_VERBS,
     _seeded_series,
@@ -30,8 +32,9 @@ def _reads():
 _C = {"mu": {"content": 0, "structure": 0, "form": 0}}
 
 
-def _sheaf(plane, value):
-    return {"plane": plane, "variance": "sheaf", "value": value}
+def _sheaf(plane, value, base=BASE_RECORD):
+    """The synthetic units name records; the base rides with the value (plane_base)."""
+    return {"plane": plane, "base": base, "variance": "sheaf", "value": value}
 
 
 def _hollow(gap=0.2):

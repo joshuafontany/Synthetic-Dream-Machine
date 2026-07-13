@@ -8,6 +8,8 @@ import math
 
 import pytest
 
+from plane_base import BASE_PATTERN, BASE_RECORD
+
 from sensorium_consistency import (
     characteristic_vector,
     consistency_radius,
@@ -18,12 +20,15 @@ from sensorium_consistency import (
 )
 
 
-def _sheaf(plane, value):
-    return {"plane": plane, "variance": "sheaf", "value": value}
+def _sheaf(plane, value, base=BASE_RECORD):
+    """The synthetic units name records; the li radius refuses a restriction with no base."""
+    return {"plane": plane, "base": base, "variance": "sheaf", "value": value}
 
 
-def _cosheaf(plane, value):
-    return {"plane": plane, "variance": "cosheaf", "value": value}
+def _cosheaf(plane, value, base=BASE_PATTERN):
+    """A ki face stands over the PATTERN base by default — the structure registry's own universe,
+    which is exactly the base the li radius does NOT read."""
+    return {"plane": plane, "base": base, "variance": "cosheaf", "value": value}
 
 
 class TestConsistencyRadius:

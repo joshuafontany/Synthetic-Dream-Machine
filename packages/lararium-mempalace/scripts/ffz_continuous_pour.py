@@ -1,81 +1,91 @@
 #!/usr/bin/env python3
 """ffz_continuous_pour — the continuous pour: true-stream FFZ wave decoupling over a corpus.
 
-THE QUESTION. The frozen-rhythm probe reads the corpus at ONE imposed grain (the line —
-a bootstrap pet-name). This probe drops every imposed segmentation: it pours the corpus
-end-to-end as ONE continuous character stream, decouples the stream into dyadic detail
-bands (MODWT), reads the FFZ lock PER BAND, and asks the data where its own scales live.
-Known grains (line breaks, wa/record joins, work joins) ride ONLY as held-out annotations
-for the witness read — they never enter the signal loop.
+THE QUESTION. Every imposed segmentation (the line, the record, the chunk) manufactures the
+finding it then reports (MAUP). This probe drops all of them: it pours the corpus end-to-end
+as ONE continuous character stream, decouples the stream into dyadic detail bands (MODWT),
+reads the FFZ lock PER BAND, and asks the data where its own scales live. Known grains (line
+breaks, wā/record joins, work joins) ride ONLY as held-out annotations for the witness read —
+they never enter the signal loop.
 
-THE TICK (chosen + justified): the CHARACTER TRANSITION. The finest honest grain the text
-carries — a word tick presupposes a tokenizer (an imposed segmentation), while a character
-arrives the way a real-time media sample arrives: one frame after another, no lookbehind
-past the previous frame's tail. Each tick t reads only (char[t-1], char[t]).
+THE TICK: the CHARACTER TRANSITION. The finest honest grain the text carries — a word tick
+presupposes a tokenizer (an imposed segmentation), while a character arrives the way a
+real-time media sample arrives: one frame after another, no lookbehind past the previous
+frame's tail. Each tick t reads only (char[t-1], char[t]).
 
-THE SIGNALS (named, per tick):
+THE SIGNALS (three; each names a distinct bearer of rhythm):
   · class-transition — 1.0 where the character CLASS changes (letter | digit | whitespace |
-    punct | other; the apostrophe/okina folds into letter, the newline folds into
-    WHITESPACE so this channel stays LINE-BLIND). Word texture, clause texture, and — if
-    line lengths carry a real rhythm — line texture must EMERGE here, never get marked.
-  · break-* — the structural marks the text ITSELF carries, one UNIT-HEIGHT channel per mark
-    class: break-newline · break-sentence (.!?) · break-clause (,;:) · break-any (any of the
-    three). No channel carries a weight, because a weight IS a prior — hand the ladder
-    `newline 1.0, sentence 0.6, clause 0.3` and every band inherits that ranking, then hands
-    it back as a finding. Split instead: each class rides its own pour, and the per-band
-    energy excess MEASURES which mark bears the rhythm at which scale (`discovered_weight`
-    in the emergence read). The instrument finds the weighting; it never supplies it.
+    punct | other; the apostrophe/okina folds into letter, the newline folds into WHITESPACE,
+    so this channel stays LINE-BLIND). Word texture, clause texture, and — if line lengths
+    carry a real rhythm — line texture must EMERGE here, never get marked.
   · sigil-event — 1.0 at each memetic-wikitext envelope mark (a `<<~` open or `>>` close).
-    Active in the wrapped beds only; the extracted pour zeroes it (reported as flat).
-  · recurrence — the CONTENT channel: 1.0 where the 12-gram ending at t has already
-    poured within the last 65536 ticks (a bounded recency memory — streaming-honest).
-    Refrains and genealogy list-frames pulse it; the placebo's Markov babble destroys
-    long repeats, so a scale alive here and dead in the placebo reads CONTENT-BORNE —
-    the shape channels alone cannot split shape from meaning.
+    The ENVELOPE channel: it fires on a wrapped bed and lies flat on an extracted one, so the
+    controls quarantine it by construction.
+  · recurrence — the CONTENT channel: 1.0 where the 12-gram ending at t has already poured
+    within the last 65536 ticks (a bounded recency memory — streaming-honest). Refrains and
+    genealogy list-frames pulse it; a Markov-babble placebo destroys long repeats, so a scale
+    alive here and dead in the placebo reads CONTENT-BORNE. The shape channel alone cannot
+    split shape from meaning.
 
-THE DECOUPLING (two-stage MODWT — the honest-decimation seam, surfaced): a full char-grain
-MODWT to whole-pour scale (~2^19 ticks) costs minutes per signal, so the pour splits:
-  · FINE stage — MODWT-MRA (db4, swt) at char grain, F1..F7 (scales 2..128 ticks);
-  · COARSE stage — block-mean decimate by 64 (anti-aliased: the mean over a 64-char block
-    reads the local event RATE, the natural coarse observable), then MODWT-MRA over the
-    rate, emitting only bands with ≥ 4 samples per period: C2..Ck (scales 256..~2^19).
-    Contiguous coverage tick→whole-pour, no band duplicated, no band under-resolved.
+WHY NO STRUCTURAL-MARK CHANNEL. A channel that pours the text's own punctuation and newlines
+(one unit-height train per mark class) reads its OWN typography back out. Measured: the mark
+channels' peaks MOVE between beds of the same chant — on the Hawaiian (63k ticks) the newline
+train peaked at scale 4 and the sentence train at scale 32, while the clause train peaked
+nowhere; on the Beckwith English (396k ticks) the newline and sentence trains peaked nowhere
+and the clause train peaked at scale 65536. A real band HOLDS under a change of grain; an
+ALIAS MOVES. All of them moved, so the pour carries none of them. The wā beat reached us
+through the RECURRENCE channel, never through a mark train.
 
-THE PER-BAND LOCK + THE ANTI-APOPHENIA TOOTH: any bandpass detail RINGS at its own scale —
-even white noise autocorrelates inside a band — so a raw per-band lock would fabricate.
-The cure extends the guard rather than weakening it: every band's energy AND lock read
-against N seeded BLOCK-SHUFFLE SURROGATES (block = half the band's scale, in stage
-samples) run through the IDENTICAL pipeline. Why per band: variance conservation makes a
-single global permutation null suppress every non-dominant scale (the dominant comb
-concentrates, the rest fall below the flat spread), so a global null masks real coarser
-structure; the block-shuffle keeps sub-band structure IN the null and kills only the
-band's own arrangement — the finest band's block of 1 degenerates to the full
-permutation, one law across the ladder. A band counts PEAKED only when its variance
-stands a local-max EXCESS ≥ the calibrated threshold over the null mean — excess-over-
-null, so neither filter ringing nor sub-scale texture manufactures a scale. THE LOCK GAUGE (found on the positive control, kept honest): the
-per-band locked-fraction CANNOT gate a peak — the surrogate's band rings and locks too,
-saturating both readings in the fine bands — so the lock reads as a REPORTED rhythm gauge
-(each band's beat + locked-fraction beside its surrogate's), never a peak tooth.
-recover_clock and SchmittLock run UNMODIFIED at shipped thresholds; each band
-stride-decimates to its own scale first (the band's passband sits below the decimated
-Nyquist, so no aliasing) — an adaptation at the signal, never at the guards. The threshold
-calibrates on the synthetic planted-period fixture (the instrument's own positive
-control), never on the corpus.
+THE ZONING LADDER (the decoupling, and the gate, in ONE operation). A pour at ONE grain cannot
+tell a band from an alias of its own grain. So the pour runs the SAME stream at a ladder of
+block-mean decimations D ∈ ZONING_LADDER (D = 1 pours at char grain; D > 1 pours the local
+event RATE over a length-D block, the natural coarse observable for an event train). Each
+zoning emits dyadic detail bands at scale_ticks = D·2^j. A band NAMES ITS SCALE, never its
+level, so the same scale is addressable across every zoning that can resolve it:
 
-THE EMERGENCE READ: for each peaked band, boundaries = the band's crest events (local
-maxima above the band RMS), and the spans between consecutive boundaries land as candidate
-SCALE-ENTITIES — nameless open records ({"span", "has": {…caps…}}), each with its band,
-extent, energy, and recurrence links (cosine over raw char-class histograms) to similar
-spans. No record carries a pre-label.
+    THE GATE — a scale earns REPRODUCED only by peaking under EVERY zoning eligible to
+    resolve it. A scale that peaks under some zonings and not others MOVED with the grain: it
+    reads as an artifact of the zoning, and the pour REFUSES it — no boundaries, no spans, no
+    entities. The refusal is the finding.
 
-CLOCK PURITY + STREAMING: the tick ordinal indexes everything; no wall-clock touches any
-path; every random draw seeds explicitly. The tick loop consumes FRAMES in sequence (an
-iterator with per-stream seq — the StreamAdapter shape real-time media will speak); the
-carried state spans one character, a 12-char gram tail, and the recurrence channel's
-bounded recency table. THE BATCH SEAM, surfaced honestly: MODWT-MRA here runs
-as a batch over the collected signal. An à-trous MODWT admits a causal streaming form with
-a per-level lag of (filter_len − 1)·2^(j−1) ticks; the media era needs that port — named
-here, not built.
+One operation, three defences: the anti-alias check, the MAUP sensitivity analysis, and the
+well-formedness check.
+
+ELIGIBILITY (an admissibility window, never a detection threshold — it decides what a band may
+be ASKED, never what the answer is): a zoning D resolves scale S only with ≥ SAMPLES_PER_CYCLE
+stage samples inside one cycle (S/D ≥ 4) and ≥ CYCLES_PER_POUR cycles inside the pour
+(n/S ≥ 4). A scale with fewer than MIN_ELIGIBLE_ZONINGS eligible rungs stands UNTESTABLE: the
+ladder's own floor sits at scale 4 (only D = 1 resolves it), so the finest bands cannot be
+re-zoned at all, and the gate says so instead of certifying them.
+
+THE SURROGATE'S LIMIT, SAID PLAINLY. The per-band block-shuffle null answers exactly one
+question — does this band hold more energy than a stream with its arrangement destroyed? It
+CANNOT catch a deterministic alias: an alias is perfectly reproducible, so it survives every
+noise-null, and it survives the surrogate BY CONSTRUCTION (the surrogate re-pours through the
+same filters at the same grain, so the grain's own artifact rides both the observation and the
+null). The surrogate therefore certifies ENERGY-ABOVE-NULL and nothing else. Alias duty sits
+with the zoning gate, which changes the grain the surrogate holds fixed.
+
+THE PER-BAND LOCK. Any bandpass detail RINGS at its own scale — even white noise autocorrelates
+inside a band — and the surrogate's band rings and locks too, saturating both readings in the
+fine bands. So the lock reads as a REPORTED rhythm gauge (each band's beat + locked-fraction
+beside its surrogate's), never a peak tooth. recover_clock and SchmittLock run UNMODIFIED at
+shipped thresholds; each band stride-decimates to its own scale first (the band's passband sits
+below the decimated Nyquist, so no aliasing) — an adaptation at the signal, never at the guards.
+
+THE EMERGENCE READ: for each REPRODUCED scale, boundaries = the crest events of its reference
+band (local maxima above the band RMS, read at the finest eligible zoning), and the spans
+between consecutive boundaries land as candidate SCALE-ENTITIES — nameless open records
+({"span", "has": {…caps…}}), each with its scale, extent, energy, and recurrence links (cosine
+over raw char-class histograms). No record carries a pre-label.
+
+CLOCK PURITY + STREAMING: the tick ordinal indexes everything; no wall-clock touches any path;
+every random draw seeds explicitly. The tick loop consumes FRAMES in sequence (an iterator with
+per-stream seq — the StreamAdapter shape real-time media will speak); the carried state spans
+one character, a 12-char gram tail, and the recurrence channel's bounded recency table. THE
+BATCH SEAM, surfaced honestly: MODWT-MRA here runs as a batch over the collected signal. An
+à-trous MODWT admits a causal streaming form with a per-level lag of (filter_len − 1)·2^(j−1)
+ticks; the media era needs that port — named here, not built.
 
 Usage (the mempalace venv, from this directory):
   ~/.venv/bin/python3 ffz_continuous_pour.py pour --root <bed> [--root <bed> ...]
@@ -103,8 +113,6 @@ _CLASSES = ("letter", "digit", "ws", "punct", "other")
 _N_CLASSES = len(_CLASSES)
 _C_LETTER, _C_DIGIT, _C_WS, _C_PUNCT, _C_OTHER = range(_N_CLASSES)
 
-_SENTENCE_END = frozenset(".!?")
-_CLAUSE_MARK = frozenset(",;:")
 _SIGIL_RE = re.compile(r"<<~|>>")
 
 #: The recurrence channel's grammar: a repeat fires when the K_GRAM-char tail ending at t
@@ -112,20 +120,34 @@ _SIGIL_RE = re.compile(r"<<~|>>")
 K_GRAM = 12
 RECUR_WINDOW = 65536
 
-#: The two decoupling stages: fine char-grain levels (scales 2..128 ticks), then the
-#: block-mean decimation factor and the coarse levels that carry coverage to whole-pour
-#: scale. The coarse stage EMITS only bands holding ≥ 4 samples per characteristic period
-#: (scale ≥ 4·decim — an under-resolved band would alias its own stage grain), so the
-#: ladder runs contiguous: F1..F7 = 2..128, C2..Ck = 256..~2^19.
-FINE_LEVELS = 7
-COARSE_DECIM = 64
-COARSE_LEVELS = 13
-COARSE_MIN_SAMPLES_PER_PERIOD = 4
+#: THE ZONING LADDER — the block-mean decimations the same stream pours through. D = 1 reads
+#: at char grain; D > 1 reads the event RATE over a length-D block. The rungs run dyadic so a
+#: scale addresses identically at every rung (D·2^j lands on one grid), which lets the gate
+#: compare a SCALE across grains without a matching tolerance to hand-set.
+ZONING_LADDER = (1, 2, 4, 8, 16, 32, 64, 128, 256)
+
+#: Bands per zoning: levels j = 2..LEVELS_PER_ZONING, i.e. scales D·4 .. D·2^L. The span sets
+#: the ladder's OVERLAP — every scale from 16 upward lands inside ≥ 3 rungs' reach, which is
+#: what makes the gate testable rather than vacuous.
+LEVELS_PER_ZONING = 10
+
+#: The admissibility window (what a band may be ASKED, never what the answer reads): a cycle
+#: needs ≥ 4 stage samples to exist at all, and the pour needs ≥ 4 cycles for a rhythm claim
+#: to mean anything. Both ends of the same sufficiency argument, one constant each.
+SAMPLES_PER_CYCLE = 4
+CYCLES_PER_POUR = 4
+
+#: A scale with fewer eligible rungs than this cannot be re-zoned, so the gate REFUSES to
+#: certify it and says UNTESTABLE. Three rungs = the minimum that can distinguish "holds"
+#: from "moves" (two rungs would let a single coincidence certify).
+MIN_ELIGIBLE_ZONINGS = 3
+
 _WAVELET = "db4"
 
-#: The peak tooth — calibrated on the synthetic planted-period fixture (the positive
-#: control), never on the corpus: a band peaks when its variance stands at a LOCAL MAX of
-#: the excess ladder AND clears this ratio over the surrogate-mean variance.
+#: The peak tooth — an INHERITED constant, calibrated on the synthetic planted-period fixture
+#: (the instrument's own positive control), never on a corpus: a band peaks when its variance
+#: stands at a LOCAL MAX of the excess ladder AND clears this ratio over the surrogate-mean
+#: variance. It gates ENERGY only; the zoning gate above it gates REALITY.
 PEAK_ENERGY_EXCESS = 1.25
 
 #: Output caps — the JSON stays bounded; totals report beside the capped lists.
@@ -179,18 +201,14 @@ def frames_from_bed(root: str):
 
 
 def pour_ticks(frames) -> dict:
-    """THE POUR — the single streaming pass. Consumes frames in sequence; the carried
-    state spans the previous character, a K_GRAM-char tail, and the recurrence channel's
-    bounded recency table — all crossing frame joins, so the stream runs truly continuous.
-    Returns the per-tick signals + the poured class codes + the HELD-OUT annotations
-    (newline ticks · record joins · work joins), which the walker collects OUTSIDE the
-    feature functions — no segmentation enters the signal loop."""
+    """THE POUR — the single streaming pass. Consumes frames in sequence; the carried state
+    spans the previous character, a K_GRAM-char tail, and the recurrence channel's bounded
+    recency table — all crossing frame joins, so the stream runs truly continuous. Returns the
+    per-tick signals + the poured class codes + the HELD-OUT annotations (newline ticks ·
+    record joins · work joins), which the walker collects OUTSIDE the feature functions — no
+    segmentation enters the signal loop, and the newline reaches no channel."""
     cls_codes: list = []
     class_transition: list = []
-    break_newline: list = []
-    break_sentence: list = []
-    break_clause: list = []
-    break_any: list = []
     sigil_event: list = []
     recurrence: list = []
     line_breaks: list = []
@@ -210,7 +228,7 @@ def pour_ticks(frames) -> dict:
             record_joins.append(t)
         prev_stream = frame["stream"]
         # Sigil marks scan per frame (a sigil never spans a record boundary — the
-        # sectioner cuts at wa markers, outside any envelope mark).
+        # sectioner cuts at wā markers, outside any envelope mark).
         sigil_at = set()
         for m in _SIGIL_RE.finditer(text):
             sigil_at.add(m.start())
@@ -221,19 +239,8 @@ def pour_ticks(frames) -> dict:
                 class_transition.append(0.0)
             else:
                 class_transition.append(1.0 if c != prev_cls else 0.0)
-            # THE MARKS RIDE SPLIT AND UNIT-HEIGHT. A graded channel would hand the ladder a ranking
-            # nobody measured, and every band would inherit it and hand it back as a finding. Split
-            # instead: each class pours its own unit-height channel, and the per-band excess MEASURES
-            # which mark bears the rhythm at which scale.
-            nl = 1.0 if ch == "\n" else 0.0
-            sent = 1.0 if ch in _SENTENCE_END else 0.0
-            claus = 1.0 if ch in _CLAUSE_MARK else 0.0
-            break_newline.append(nl)
-            break_sentence.append(sent)
-            break_clause.append(claus)
-            break_any.append(1.0 if (nl or sent or claus) else 0.0)
-            if nl:
-                line_breaks.append(t)
+            if ch == "\n":
+                line_breaks.append(t)      # a held-out annotation, never a channel
             sigil_event.append(1.0 if i in sigil_at else 0.0)
             tail = (tail + ch)[-K_GRAM:]
             if len(tail) == K_GRAM:
@@ -250,10 +257,6 @@ def pour_ticks(frames) -> dict:
         "classes": np.asarray(cls_codes, dtype=np.uint8),
         "signals": {
             "class-transition": np.asarray(class_transition, dtype=float),
-            "break-any": np.asarray(break_any, dtype=float),
-            "break-newline": np.asarray(break_newline, dtype=float),
-            "break-sentence": np.asarray(break_sentence, dtype=float),
-            "break-clause": np.asarray(break_clause, dtype=float),
             "sigil-event": np.asarray(sigil_event, dtype=float),
             "recurrence": np.asarray(recurrence, dtype=float),
         },
@@ -265,14 +268,18 @@ def pour_ticks(frames) -> dict:
     }
 
 
-# ── the decoupling — two-stage MODWT-MRA ──────────────────────────────────────────────────
+# ── the decoupling — one zoning, one dyadic band ladder ───────────────────────────────────
 
 
 def block_mean_decimate(x: np.ndarray, factor: int) -> np.ndarray:
     """Anti-aliased decimation: the mean over each length-`factor` block (the local event
-    RATE — the natural coarse observable for an event-train signal). The tail remainder
-    (< one block) drops; the loss stays under one coarse sample."""
+    RATE — the natural coarse observable for an event-train signal). Factor 1 passes the
+    stream through untouched. The tail remainder (< one block) drops; the loss stays under one
+    coarse sample."""
     x = np.asarray(x, dtype=float).ravel()
+    factor = max(1, int(factor))
+    if factor == 1:
+        return x.copy()
     n = (x.size // factor) * factor
     if n == 0:
         return np.zeros(0, dtype=float)
@@ -304,23 +311,51 @@ def _mra_details(x: np.ndarray, levels: int) -> list:
     return [np.asarray(d, dtype=float)[:n] for d in reversed(mra[1:])]
 
 
-def two_stage_bands(x: np.ndarray, *, fine_levels: int = FINE_LEVELS,
-                    coarse_decim: int = COARSE_DECIM, coarse_levels: int = COARSE_LEVELS) -> list:
-    """Decouple one tick signal into the full dyadic ladder, tick-grain → whole-pour:
-    fine-stage details at char grain (scales 2..2^fine_levels ticks), then coarse-stage
-    details over the block-mean-decimated rate signal (scales coarse_decim·2..
-    coarse_decim·2^coarse_levels ticks). Returns band rows fine→coarse:
-    {"band", "stage", "level", "scale_ticks", "sample_stride", "series", "variance"}."""
+def band_name(scale_ticks: int) -> str:
+    """A band NAMES ITS SCALE. The level is a property of the zoning that read it, so a band
+    named by level cannot be compared across grains — and a band that cannot be compared
+    across grains cannot be gated for alias."""
+    return f"S{int(scale_ticks)}"
+
+
+def eligible_zonings(scale_ticks: int, n_ticks: int,
+                     ladder: "tuple[int, ...]" = ZONING_LADDER) -> "list[int]":
+    """The rungs that may be ASKED about this scale: enough stage samples inside one cycle,
+    enough cycles inside the pour, and a level the ladder actually emits."""
     out = []
-    for j, d in enumerate(_mra_details(x, fine_levels), start=1):
-        out.append({"band": f"F{j}", "stage": "fine", "level": j, "scale_ticks": 1 << j,
-                    "sample_stride": 1, "series": d, "variance": float(np.var(d))})
-    y = block_mean_decimate(x, coarse_decim)
-    for j, d in enumerate(_mra_details(y, coarse_levels), start=1):
-        if (1 << j) < COARSE_MIN_SAMPLES_PER_PERIOD:
-            continue  # an under-resolved coarse band would alias its own stage grain
-        out.append({"band": f"C{j}", "stage": "coarse", "level": j,
-                    "scale_ticks": coarse_decim * (1 << j), "sample_stride": coarse_decim,
+    if n_ticks // max(scale_ticks, 1) < CYCLES_PER_POUR:
+        return out
+    for d in ladder:
+        if scale_ticks % d:
+            continue
+        ratio = scale_ticks // d
+        if ratio < SAMPLES_PER_CYCLE or ratio > (1 << LEVELS_PER_ZONING):
+            continue
+        if ratio & (ratio - 1):
+            continue                              # off the dyadic grid this rung emits
+        if (n_ticks // d) < 8:
+            continue                              # the stage carries no transform
+        out.append(d)
+    return out
+
+
+def zoning_bands(x: np.ndarray, decim: int, *, levels: int = LEVELS_PER_ZONING) -> list:
+    """Decouple the stream at ONE zoning: block-mean to the rung's grain, then dyadic detail
+    bands at scales decim·2^j for j = 2..levels (j < 2 would hold < SAMPLES_PER_CYCLE samples
+    per cycle — a band aliasing its own stage grain). Rows fine→coarse:
+    {"band", "zoning", "level", "scale_ticks", "sample_stride", "series", "variance"}."""
+    x = np.asarray(x, dtype=float).ravel()
+    n = x.size
+    y = block_mean_decimate(x, decim)
+    out = []
+    for j, d in enumerate(_mra_details(y, levels), start=1):
+        if (1 << j) < SAMPLES_PER_CYCLE:
+            continue
+        scale = decim * (1 << j)
+        if n // max(scale, 1) < CYCLES_PER_POUR:
+            continue
+        out.append({"band": band_name(scale), "zoning": decim, "level": j,
+                    "scale_ticks": scale, "sample_stride": decim,
                     "series": d, "variance": float(np.var(d))})
     return out
 
@@ -332,12 +367,12 @@ def band_lock(series: np.ndarray, level: int, *, window: int = 128, stride: int 
               step_budget: int = 4096) -> dict:
     """Stream ONE band through the UNMODIFIED lock machinery. The band stride-decimates to
     its own scale first — stride 2^(level−2), capped so ≥ 64 samples survive — which keeps
-    the band's characteristic period inside the detector's honest lag range without
-    touching a threshold (the passband sits below the decimated Nyquist: no aliasing).
-    recover_clock snapshots over a sliding window feed SchmittLock at shipped defaults; a
-    STEP BUDGET widens the snapshot stride on a very long band (cost bounding only — the
-    window, the thresholds, and the guards stand as shipped). Returns the streaming
-    verdict; `beat_ticks` reports in ORIGINAL tick units."""
+    the band's characteristic period inside the detector's honest lag range without touching a
+    threshold (the passband sits below the decimated Nyquist: no aliasing). recover_clock
+    snapshots over a sliding window feed SchmittLock at shipped defaults; a STEP BUDGET widens
+    the snapshot stride on a very long band (cost bounding only — the window, the thresholds,
+    and the guards stand as shipped). Returns the streaming verdict; `beat_ticks` reports in
+    ORIGINAL tick units."""
     x = np.asarray(series, dtype=float).ravel()
     within = max(1, 1 << max(0, level - 2))
     if x.size // within < 64:
@@ -375,14 +410,14 @@ def band_lock(series: np.ndarray, level: int, *, window: int = 128, stride: int 
     }
 
 
-# ── the surrogate tooth — per-band block-shuffle nulls through the identical pipeline ─────
+# ── the surrogate — an ENERGY null, and nothing more ──────────────────────────────────────
 
 
 def block_shuffle(x: np.ndarray, block: int, rng: np.random.Generator) -> np.ndarray:
     """One block-shuffle surrogate: contiguous length-`block` blocks permute (seeded), the
-    sub-block tail keeps its place at the end. Structure FINER than the block survives
-    intact; arrangement at the block scale and above dies. Block 1 degenerates to the full
-    permutation — the whole null ladder speaks one law."""
+    sub-block tail keeps its place at the end. Structure FINER than the block survives intact;
+    arrangement at the block scale and above dies. Block 1 degenerates to the full permutation
+    — the whole null ladder speaks one law."""
     x = np.asarray(x, dtype=float).ravel()
     block = max(1, int(block))
     nb = x.size // block
@@ -393,38 +428,48 @@ def block_shuffle(x: np.ndarray, block: int, rng: np.random.Generator) -> np.nda
 
 
 def null_profile(x: np.ndarray, bands: list, *, n_surrogates: int, seed: int) -> list:
-    """The anti-apophenia null, PER BAND: each band reads against N seeded BLOCK-SHUFFLE
-    surrogates with block = HALF the band's scale (in the band's own stage samples), run
-    through the identical decoupling + lock. Why per-band: variance conservation makes a
-    single global permutation null suppress every non-dominant scale (the dominant comb
-    concentrates, all other bands fall below the flat spread — real coarser structure
-    masks); the block-shuffle keeps the finer structure IN the null, so a band's excess
-    reads arrangement-at-its-own-scale and nothing else. Whatever energy/lock the null
-    band still shows reads as filter-ringing plus sub-scale texture, never as the scale's
-    own structure. Returns per-band rows {"band", "variance", "locked_frac"} (null means)
-    aligned with `bands`."""
+    """The ENERGY null, PER BAND: each band reads against N seeded BLOCK-SHUFFLE surrogates
+    with block = HALF the band's scale (in the band's own stage samples), run through the
+    identical decoupling + lock.
+
+    WHAT IT ANSWERS: does this band hold more energy than the same stream with its arrangement
+    at that scale destroyed? Per-band rather than global because variance conservation makes a
+    single global permutation suppress every non-dominant scale (the dominant comb
+    concentrates, the rest fall below the flat spread), masking real coarser structure; the
+    block-shuffle keeps sub-band texture IN the null and kills only the band's own arrangement.
+
+    WHAT IT CANNOT ANSWER, AND MUST NOT BE READ AS ANSWERING: whether the band names a real
+    scale. A deterministic alias of the zoning grain rides the surrogate exactly as it rides
+    the observation — the surrogate re-pours through the same filters at the same grain — and
+    an alias, being perfectly reproducible, survives any noise-null by construction. Alias duty
+    sits with the ZONING GATE, which varies the grain this null holds fixed.
+
+    Returns per-band rows {"band", "variance", "variance_std", "n_surrogates", "locked_frac"}
+    (null means) aligned with `bands`."""
     x = np.asarray(x, dtype=float).ravel()
-    y = block_mean_decimate(x, COARSE_DECIM)
     out = []
+    stage_of: dict = {}
     for row in bands:
-        src = x if row["stage"] == "fine" else y
+        d = int(row["zoning"])
+        if d not in stage_of:
+            stage_of[d] = block_mean_decimate(x, d)
+        src = stage_of[d]
         block = max(1, (1 << row["level"]) // 2)
-        # A coarse band holds few samples, so its variance ratio wobbles — and its null
-        # costs nothing — so the null DEEPENS where it runs noisy.
-        n_surr = max(1, n_surrogates) if row["stage"] == "fine" else max(16, n_surrogates)
+        # A short stage series' variance wobbles, and its null costs little — so the null
+        # DEEPENS where it runs noisy. A cost rule, never a finding rule.
+        n_surr = max(1, n_surrogates) if src.size >= 4096 else max(16, n_surrogates)
         variances: list = []
         lockfracs: list = []
         for s in range(n_surr):
-            rng = np.random.default_rng(seed + 7919 * s + 101 * row["level"]
-                                        + (0 if row["stage"] == "fine" else 4993))
+            rng = np.random.default_rng(seed + 7919 * s + 101 * row["level"] + 4993 * d)
             details = _mra_details(block_shuffle(src, block, rng), row["level"])
             if len(details) < row["level"]:
                 continue
-            d = details[row["level"] - 1]
-            variances.append(float(np.var(d)))
+            dser = details[row["level"] - 1]
+            variances.append(float(np.var(dser)))
             if s == 0:
                 # The lock reads as a REPORTED gauge, never a gate — one null carries it.
-                lockfracs.append(band_lock(d, row["level"])["locked_frac"])
+                lockfracs.append(band_lock(dser, row["level"])["locked_frac"])
         out.append({"band": row["band"],
                     "variance": float(np.mean(variances)) if variances else 0.0,
                     "variance_std": float(np.std(variances)) if variances else 0.0,
@@ -434,13 +479,16 @@ def null_profile(x: np.ndarray, bands: list, *, n_surrogates: int, seed: int) ->
 
 
 def peak_read(bands: list, locks: list, surr: list) -> list:
-    """Mark the bands the DATA elevates. Per band: excess = variance / surrogate-mean
-    variance. A band PEAKS when the excess clears PEAK_ENERGY_EXCESS at a LOCAL MAX along
-    the ladder — structure over the permutation null, so band-ringing never fabricates a
-    scale. The lock margin (locked_frac − surrogate locked_frac) reports as a rhythm gauge
-    beside each verdict; it cannot gate (the surrogate's own band rings and locks, so the
-    margin saturates flat in fine bands and runs noisy in short coarse ones). Returns
-    per-band verdict rows (fine→coarse)."""
+    """Mark the bands the DATA elevates ON ENERGY, within one zoning. Per band: excess =
+    variance / surrogate-mean variance. A band PEAKS when the excess clears PEAK_ENERGY_EXCESS
+    at a LOCAL MAX along the ladder AND clears the null's own spread (mean + 3σ over the
+    replicates, so a few-sample band's wobble never crosses on luck alone). The lock margin
+    (locked_frac − surrogate locked_frac) reports as a rhythm gauge beside each verdict; it
+    cannot gate (the surrogate's own band rings and locks, so the margin saturates flat in fine
+    bands and runs noisy in short coarse ones).
+
+    A peak here reads ENERGY-ABOVE-NULL AT THIS GRAIN — a candidate, never a finding. The
+    zoning gate rules on it."""
     surr_of = {r["band"]: r for r in surr}
     excess = []
     for row in bands:
@@ -454,14 +502,12 @@ def peak_read(bands: list, locks: list, surr: list) -> list:
         left = excess[i - 1] if i > 0 else -np.inf
         right = excess[i + 1] if i + 1 < len(excess) else -np.inf
         local_max = excess[i] >= left and excess[i] >= right
-        # The dispersion tooth: the observed variance must clear the null's own spread
-        # (mean + 3σ over the replicates), so a few-sample coarse band's wobble never
-        # crosses on luck alone.
         over_spread = row["variance"] >= (s.get("variance", 0.0)
                                           + 3.0 * s.get("variance_std", 0.0))
         peaked = bool(excess[i] >= PEAK_ENERGY_EXCESS and local_max and over_spread)
         out.append({
             "band": row["band"], "scale_ticks": row["scale_ticks"],
+            "zoning": row["zoning"],
             "variance": row["variance"],
             "surrogate_variance": s.get("variance", 0.0),
             "energy_excess": round(excess[i], 4),
@@ -474,14 +520,118 @@ def peak_read(bands: list, locks: list, surr: list) -> list:
     return out
 
 
+# ── THE ZONING GATE — a real band HOLDS, an alias MOVES ───────────────────────────────────
+
+
+def zoning_read(x: np.ndarray, *, ladder: "tuple[int, ...]" = ZONING_LADDER,
+                n_surrogates: int = 3, seed: int = 4241) -> dict:
+    """Pour ONE signal at every rung of the zoning ladder. Returns {decim: {"bands": rows,
+    "verdicts": rows, "locks": rows}} — the raw material the gate rules on."""
+    x = np.asarray(x, dtype=float).ravel()
+    out = {}
+    for d in ladder:
+        bands = zoning_bands(x, d)
+        if not bands:
+            continue
+        locks = [band_lock(row["series"], row["level"]) for row in bands]
+        for row, lk in zip(bands, locks):
+            lk["beat_ticks"] = int(lk["beat"] * row["sample_stride"]
+                                   * lk.get("within_stride", 1))
+        surr = null_profile(x, bands, n_surrogates=n_surrogates, seed=seed)
+        out[d] = {"bands": bands, "locks": locks,
+                  "verdicts": peak_read(bands, locks, surr)}
+    return out
+
+
+def zoning_gate(reads: dict, n_ticks: int,
+                ladder: "tuple[int, ...]" = ZONING_LADDER) -> list:
+    """THE GATE. For every scale any rung RAISED (the energy tooth fired), ask every rung
+    ELIGIBLE to resolve that scale whether the scale still stands there.
+
+    THE HOLD TEST, and why it reads ORDINALLY rather than by re-firing the tooth. A rung's
+    peak FLAG carries the inherited energy threshold and a 3σ dispersion tooth whose spread
+    widens as a rung's stage sample count falls, so the flag flickers at coarse rungs on a
+    scale whose excess plainly holds — demanding the flag at every rung would manufacture
+    REFUSALS the way a tuned threshold manufactures findings. So the hold test asks the two
+    questions that carry no tunable number:
+
+      · does the scale stand ABOVE ITS OWN NULL at this grain (excess ≥ 1 — the null's own
+        unit, not a chosen level)?
+      · does this rung ELEVATE that scale over its dyadic neighbours (a local max of the
+        rung's excess ladder — an ordering, not a threshold)?
+
+    A band locked to the ZONING GRAIN (the classic alias: the artifact sits at the rung's own
+    floor, scale 4·D) fails both at every rung whose floor lies elsewhere, because at those
+    rungs the artifact has moved to a different SCALE. That is the whole discrimination.
+
+      REPRODUCED — ≥ MIN_ELIGIBLE_ZONINGS eligible rungs, the tooth raised it somewhere, and
+                   EVERY eligible rung holds it. The scale survived re-zoning: a finding.
+      MOVED      — some eligible rung drops it. The scale rode the grain, not the text.
+                   REFUSED: it emits no boundaries, no spans, no entities.
+      UNTESTABLE — too few eligible rungs to re-zone at all (the ladder floor, scale 4, admits
+                   only D = 1). The gate declines to certify rather than passing it through.
+
+    Returns one row per raised scale, level-blind, sorted by scale."""
+    raised_at: dict = {}
+    excess_at: dict = {}
+    localmax_at: dict = {}
+    for d, r in reads.items():
+        for v in r["verdicts"]:
+            s = v["scale_ticks"]
+            excess_at.setdefault(s, {})[d] = v["energy_excess"]
+            localmax_at.setdefault(s, {})[d] = bool(v["energy_local_max"])
+            if v["peaked"]:
+                raised_at.setdefault(s, set()).add(d)
+    out = []
+    for scale in sorted(set(excess_at)):
+        elig = [d for d in eligible_zonings(scale, n_ticks, ladder) if d in reads]
+        raised = sorted(raised_at.get(scale, set()) & set(elig))
+        if not raised:
+            continue                              # no rung raised it — no claim to rule on
+        held = [d for d in elig
+                if excess_at[scale].get(d, 0.0) >= 1.0 and localmax_at[scale].get(d, False)]
+        if len(elig) < MIN_ELIGIBLE_ZONINGS:
+            verdict = "UNTESTABLE"
+        elif len(held) == len(elig):
+            verdict = "REPRODUCED"
+        else:
+            verdict = "MOVED"
+        out.append({
+            "band": band_name(scale),
+            "scale_ticks": scale,
+            "eligible_zonings": elig,
+            "raised_zonings": raised,
+            "held_zonings": held,
+            "dropped_zonings": [d for d in elig if d not in held],
+            "hold_fraction": round(len(held) / len(elig), 4) if elig else 0.0,
+            "energy_excess_by_zoning": {str(d): excess_at[scale].get(d) for d in elig},
+            "verdict": verdict,
+            "reproduced": verdict == "REPRODUCED",
+        })
+    return out
+
+
+def reference_row(reads: dict, scale: int, elig: list) -> "tuple[dict, dict, dict] | None":
+    """The band a REPRODUCED scale reports from: the FINEST eligible rung (most stage samples
+    → the sharpest crest localization). Returns (band, lock, verdict)."""
+    for d in sorted(elig):
+        r = reads.get(d)
+        if not r:
+            continue
+        for row, lk, v in zip(r["bands"], r["locks"], r["verdicts"]):
+            if row["scale_ticks"] == scale:
+                return row, lk, v
+    return None
+
+
 # ── the emergence read — boundaries, spans, nameless scale-entities ───────────────────────
 
 
 def band_boundaries(row: dict) -> list:
     """Boundary candidates for one band: the CREST events — local maxima of the band series
     standing above the band RMS — reported in original tick units (block centers for a
-    decimated stage). A pulse-train structure crests at its events; the crest sequence
-    carries the band's own segmentation."""
+    decimated stage). A pulse-train structure crests at its events; the crest sequence carries
+    the band's own segmentation."""
     d = np.asarray(row["series"], dtype=float)
     if d.size < 3:
         return []
@@ -508,11 +658,11 @@ def _span_features(classes: np.ndarray, t0: int, t1: int) -> np.ndarray:
 
 
 def scale_entities(row: dict, boundaries: list, classes: np.ndarray, n_ticks: int) -> dict:
-    """The candidate scale-entities for one peaked band: the spans between consecutive
+    """The candidate scale-entities for one REPRODUCED scale: the spans between consecutive
     boundaries, each an OPEN nameless record — {"span": [t0, t1], "has": {band · scale ·
     energy · recurs}} — never pre-labeled. Emission caps at MAX_SPANS_EMITTED (top spans by
-    energy); recurrence links ride cosine similarity over raw char-class histograms, each
-    span linking to its most similar PRIOR emitted span at or above LINK_SIM_FLOOR."""
+    energy); recurrence links ride cosine similarity over raw char-class histograms, each span
+    linking to its most similar PRIOR emitted span at or above LINK_SIM_FLOOR."""
     d = np.asarray(row["series"], dtype=float)
     stride = int(row["sample_stride"])
     edges = [0] + [b for b in boundaries if 0 < b < n_ticks] + [n_ticks]
@@ -557,9 +707,9 @@ def scale_entities(row: dict, boundaries: list, classes: np.ndarray, n_ticks: in
 def boundary_alignment(pred: list, true: list, tol: int) -> dict:
     """Greedy two-pointer matching of discovered boundaries against one held-out annotation
     set, within ± tol ticks. Precision reads over the predictions, recall over the truths;
-    each truth matches at most once. `tol_saturated` flags the vacuous case — a tolerance
-    wider than half the annotations' median gap matches almost anything, so a coarse
-    band's read against a fine grain names its own emptiness."""
+    each truth matches at most once. `tol_saturated` flags the vacuous case — a tolerance wider
+    than half the annotations' median gap matches almost anything, so a coarse band's read
+    against a fine grain names its own emptiness."""
     pred = sorted(int(p) for p in pred)
     true = sorted(int(t) for t in true)
     matched = 0
@@ -584,116 +734,123 @@ def boundary_alignment(pred: list, true: list, tol: int) -> dict:
 
 
 def probe_signal(name: str, x: np.ndarray, classes: np.ndarray, annotations: dict,
-                 *, n_surrogates: int = 3, seed: int = 4241) -> dict:
-    """The full read for ONE tick signal: decouple → per-band lock → surrogate tooth →
-    peak verdicts → per-peaked-band boundaries, witness alignment, and scale-entities.
-    A flat signal (no events — e.g. sigil-event over an extracted pour) skips honestly."""
+                 *, n_surrogates: int = 3, seed: int = 4241,
+                 ladder: "tuple[int, ...]" = ZONING_LADDER) -> dict:
+    """The full read for ONE tick signal: pour at every zoning → per-band energy null → the
+    ZONING GATE → for the scales that HELD, boundaries, witness alignment, and scale-entities.
+    A scale the gate refuses emits nothing but its refusal. A flat signal (no events — e.g.
+    sigil-event over an extracted pour) skips honestly."""
     x = np.asarray(x, dtype=float).ravel()
     n = x.size
     if float(np.var(x)) < _EPS:
         return {"signal": name, "note": "signal-flat: skipped", "n_ticks": n,
-                "bands": [], "n_peaked": 0, "peaked": []}
-    bands = two_stage_bands(x)
-    locks = [band_lock(row["series"], row["level"]) for row in bands]
-    for row, lk in zip(bands, locks):
-        lk["beat_ticks"] = int(lk["beat"] * row["sample_stride"] * lk.get("within_stride", 1))
-    surr = null_profile(x, bands, n_surrogates=n_surrogates, seed=seed)
-    verdicts = peak_read(bands, locks, surr)
-    peaked_rows = []
-    for row, lk, v in zip(bands, locks, verdicts):
-        if not v["peaked"]:
+                "gate": [], "n_reproduced": 0, "reproduced": [], "refused": [],
+                "untestable": []}
+    reads = zoning_read(x, ladder=ladder, n_surrogates=n_surrogates, seed=seed)
+    gate = zoning_gate(reads, n, ladder)
+    reproduced_rows = []
+    for g in gate:
+        if not g["reproduced"]:
             continue
+        ref = reference_row(reads, g["scale_ticks"], g["eligible_zonings"])
+        if ref is None:
+            continue
+        row, lk, _v = ref
         bounds = band_boundaries(row)
         tol = max(2, row["scale_ticks"] // 4)
         witness = {grain: boundary_alignment(bounds, marks, tol)
                    for grain, marks in annotations.items()}
-        entities = scale_entities(row, bounds, classes, n)
-        peaked_rows.append({"band": row["band"], "scale_ticks": row["scale_ticks"],
-                            "n_boundaries": len(bounds), "witness": witness,
-                            "entities": entities})
-    band_rows = []
-    for row, lk, v in zip(bands, locks, verdicts):
-        band_rows.append({**v, "lock": {k: lk[k] for k in
-                                        ("locked_frac", "final_state", "beat", "beat_ticks",
-                                         "lock_quality", "samples", "within_stride")
-                                        if k in lk}})
+        reproduced_rows.append({
+            "band": g["band"], "scale_ticks": g["scale_ticks"],
+            "reference_zoning": row["zoning"],
+            "n_boundaries": len(bounds),
+            "lock": {k: lk[k] for k in ("locked_frac", "final_state", "beat", "beat_ticks",
+                                        "lock_quality", "samples", "within_stride") if k in lk},
+            "witness": witness,
+            "entities": scale_entities(row, bounds, classes, n),
+        })
     return {
         "signal": name,
         "n_ticks": n,
-        "bands": band_rows,
-        "n_peaked": sum(1 for v in verdicts if v["peaked"]),
-        "peaked": peaked_rows,
+        "zonings": sorted(reads),
+        "gate": gate,
+        "n_reproduced": len(reproduced_rows),
+        "reproduced": reproduced_rows,
+        "refused": [g["band"] for g in gate if g["verdict"] == "MOVED"],
+        "untestable": [g["band"] for g in gate if g["verdict"] == "UNTESTABLE"],
     }
 
 
 def probe_root(root: str, *, n_surrogates: int = 3, seed: int = 4241) -> dict:
     """One bed's continuous pour: frames off the durable store → the tick signals → the
-    per-signal reads → the emergence summary. Writes nothing — the caller lands the JSON."""
+    per-signal zoning gate. Writes nothing — the caller lands the JSON."""
     poured = pour_ticks(frames_from_bed(root))
     ann = poured["annotations"]
     reads = [probe_signal(name, sig, poured["classes"], ann,
                           n_surrogates=n_surrogates, seed=seed)
              for name, sig in poured["signals"].items()]
-    # The emergence questions, answered per bed off the blind channel.
     blind = next((r for r in reads if r["signal"] == "class-transition"), None)
     line_refound = 0.0
     if blind:
-        for p in blind.get("peaked", []):
+        for p in blind.get("reproduced", []):
             line_refound = max(line_refound, p["witness"].get("line", {}).get("f1", 0.0))
-    # THE DISCOVERED WEIGHT — the reading that replaces the prior we cut. Each mark class poured its own
-    # unit-height channel, so the per-band energy excess now MEASURES what a typed constant used to
-    # assert: which mark bears the rhythm, at which scale. A class that peaks nowhere carries no rhythm,
-    # whatever weight a designer would have felt like giving it.
-    discovered = {}
-    for r in reads:
-        if not r["signal"].startswith("break-") or r["signal"] == "break-any":
-            continue
-        peaks = [b for b in r.get("bands", []) if b["peaked"]]
-        discovered[r["signal"]] = {
-            "n_peaked": r.get("n_peaked", 0),
-            "peak_bands": [{"band": b["band"], "scale_ticks": b["scale_ticks"],
-                            "energy_excess": b["energy_excess"]} for b in peaks],
-            "max_excess": max((b["energy_excess"] for b in r.get("bands", [])), default=0.0),
-        }
-
     return {
         "root": root,
         "n_ticks": poured["n_ticks"],
         "annotation_counts": {k: len(v) for k, v in ann.items()},
-        "discovered_break_weight": discovered,
         "design": {
             "tick": "character transition (finest honest grain; per-tick state = one char)",
-            "stages": {"fine_levels": FINE_LEVELS, "coarse_decim": COARSE_DECIM,
-                       "coarse_levels": COARSE_LEVELS, "wavelet": _WAVELET},
-            "peak_tooth": {"energy_excess": PEAK_ENERGY_EXCESS,
-                           "null": "per-band block-shuffle, block = scale/2 in stage samples",
-                           "surrogates": n_surrogates, "seed": seed,
-                           "lock_gauge": "reported beside its null, never a gate"},
+            "zoning_ladder": list(ZONING_LADDER),
+            "levels_per_zoning": LEVELS_PER_ZONING,
+            "wavelet": _WAVELET,
+            "energy_tooth": {"energy_excess": PEAK_ENERGY_EXCESS,
+                             "null": "per-band block-shuffle, block = scale/2 in stage samples",
+                             "surrogates": n_surrogates, "seed": seed,
+                             "limit": "an ENERGY null: blind to a deterministic alias"},
+            "zoning_gate": {"rule": "a scale peaks under EVERY eligible rung or it is REFUSED",
+                            "min_eligible_zonings": MIN_ELIGIBLE_ZONINGS},
         },
         "signals": reads,
         "emergence": {
-            "scales_peaked_blind": blind["n_peaked"] if blind else 0,
+            "scales_reproduced_blind": blind["n_reproduced"] if blind else 0,
             "line_refound_f1_blind": round(line_refound, 4),
-            "scales_peaked_by_signal": {r["signal"]: r.get("n_peaked", 0) for r in reads},
+            "reproduced_by_signal": {r["signal"]: [g["band"] for g in r.get("gate", [])
+                                                   if g["reproduced"]] for r in reads},
+            "refused_by_signal": {r["signal"]: r.get("refused", []) for r in reads},
         },
     }
 
 
 # ── the placebo split — the cross-domain read the controls exist for ──────────────────────
 
-#: Split thresholds — a band's excess ratio (real / placebo) at or beyond this reads the
-#: scale as borne by what the placebo destroys (content); its reciprocal, by what only the
-#: babble manufactures. Between them, a scale surviving both pours reads shape-borne.
+#: Split thresholds — a scale's excess ratio (real / placebo) at or beyond this reads the scale
+#: as borne by what the placebo destroys (content); its reciprocal, by what only the babble
+#: manufactures. Between them, a scale surviving both pours reads shape-borne.
 SPLIT_RATIO = 1.4
 
 
+def _gate_of(read: dict) -> dict:
+    return {g["band"]: g for g in read.get("gate", [])}
+
+
+def _excess_of(g: dict) -> float:
+    """A scale's excess at its FINEST eligible rung — the same rung the reproduced read
+    reports from, so the split and the gate speak of one band."""
+    ex = g.get("energy_excess_by_zoning") or {}
+    for d in sorted(int(k) for k in ex):
+        v = ex.get(str(d))
+        if v is not None:
+            return float(v)
+    return 0.0
+
+
 def split_read(real: dict, placebo: dict) -> dict:
-    """The placebo split over two landed pour profiles (the same signal set, wa-aligned
-    beds): per signal, per band — the real and placebo excesses, their RATIO, and the lock
-    qualities side by side. Verdicts stay coarse and open: `shape-borne` (both pours clear
-    the peak tooth — the scale survives meaning-death), `content-borne` (real excess ≥
-    SPLIT_RATIO × placebo — the scale dies with meaning), `babble-borne` (the placebo
-    manufactures it), else `null`. A verdict reads the ratio, never re-gates the peaks."""
+    """The placebo split over two landed pour profiles (the same signal set, wā-aligned beds):
+    per signal, per SCALE — the real and placebo excesses, their RATIO, and both gate verdicts
+    side by side. Verdicts stay coarse and open: `shape-borne` (both pours REPRODUCE the scale
+    — it survives meaning-death), `content-borne` (real excess ≥ SPLIT_RATIO × placebo — the
+    scale dies with meaning), `babble-borne` (the placebo manufactures it), else `null`. A
+    verdict reads the ratio; it never re-gates."""
     out = {"real_root": real.get("root"), "placebo_root": placebo.get("root"),
            "ratio_threshold": SPLIT_RATIO, "signals": []}
     placebo_of = {s["signal"]: s for s in placebo.get("signals", [])}
@@ -704,31 +861,28 @@ def split_read(real: dict, placebo: dict) -> dict:
                                    "note": rs.get("note") or (ps or {}).get("note")
                                    or "placebo profile absent"})
             continue
-        p_of = {b["band"]: b for b in ps.get("bands", [])}
+        p_of = _gate_of(ps)
         rows = []
-        for rb in rs.get("bands", []):
-            pb = p_of.get(rb["band"])
-            if pb is None:
-                continue
-            e_r, e_p = rb["energy_excess"], pb["energy_excess"]
+        for band, rg in _gate_of(rs).items():
+            pg = p_of.get(band)
+            e_r = _excess_of(rg)
+            e_p = _excess_of(pg) if pg else 0.0
             ratio = e_r / max(e_p, _EPS)
             if e_r >= SPLIT_RATIO * e_p:
                 verdict = "content-borne"
             elif e_p >= SPLIT_RATIO * e_r:
                 verdict = "babble-borne"
-            elif rb["peaked"] and pb["peaked"]:
+            elif rg["reproduced"] and pg and pg["reproduced"]:
                 verdict = "shape-borne"
             else:
                 verdict = "null"
-            rows.append({"band": rb["band"], "scale_ticks": rb["scale_ticks"],
-                         "excess_real": e_r, "excess_placebo": e_p,
+            rows.append({"band": band, "scale_ticks": rg["scale_ticks"],
+                         "excess_real": round(e_r, 4), "excess_placebo": round(e_p, 4),
                          "ratio": round(ratio, 4),
-                         "peaked_real": rb["peaked"], "peaked_placebo": pb["peaked"],
-                         "q_real": rb["lock"]["lock_quality"],
-                         "q_placebo": pb["lock"]["lock_quality"],
-                         "beat_ticks_real": rb["lock"]["beat_ticks"],
-                         "beat_ticks_placebo": pb["lock"]["beat_ticks"],
+                         "gate_real": rg["verdict"],
+                         "gate_placebo": pg["verdict"] if pg else "absent",
                          "verdict": verdict})
+        rows.sort(key=lambda r: r["scale_ticks"])
         out["signals"].append({
             "signal": rs["signal"],
             "bands": rows,
@@ -744,8 +898,8 @@ def split_read(real: dict, placebo: dict) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser(
-        description="ffz_continuous_pour — pour a bed end-to-end at char grain, decouple, "
-                    "and read where the data's own scales peak")
+        description="ffz_continuous_pour — pour a bed end-to-end at char grain, decouple at a "
+                    "ladder of zonings, and keep only the scales that HOLD under re-zoning")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("pour", help="the per-bed continuous-pour reading")
     p.add_argument("--root", action="append", required=True,

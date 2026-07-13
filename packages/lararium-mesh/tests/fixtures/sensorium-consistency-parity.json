@@ -6,6 +6,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u1": 0.5,
@@ -14,6 +15,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u2": 0.3,
@@ -22,6 +24,7 @@
         },
         {
           "plane": "form",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u3": 0.8,
@@ -71,6 +74,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u1": 0.5,
@@ -79,6 +83,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u2": 0.7,
@@ -87,6 +92,7 @@
         },
         {
           "plane": "form",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u3": 0.8,
@@ -140,6 +146,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "a": 0.2
@@ -147,6 +154,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "b": 0.9
@@ -180,6 +188,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u1": 0.1,
@@ -189,6 +198,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u1": 0.6,
@@ -231,6 +241,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u1": 0.5,
@@ -239,6 +250,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "u1": 0.5,
@@ -272,6 +284,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r0u0": 0.5,
@@ -281,6 +294,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r0u0": 0.4,
@@ -291,6 +305,7 @@
         },
         {
           "plane": "form",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r0u0": 0.5,
@@ -353,6 +368,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r1u0": 0.9,
@@ -363,6 +379,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r1u0": 0.9500000000000001,
@@ -374,6 +391,7 @@
         },
         {
           "plane": "form",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r1u1": 0.2,
@@ -436,6 +454,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r2u0": 0.55,
@@ -445,6 +464,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r2u1": 0.8,
@@ -455,6 +475,7 @@
         },
         {
           "plane": "form",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r2u3": 0.0,
@@ -515,6 +536,7 @@
       "restrictions": [
         {
           "plane": "content",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r3u0": 0.6000000000000001,
@@ -526,6 +548,7 @@
         },
         {
           "plane": "structure",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r3u0": 0.8,
@@ -536,6 +559,7 @@
         },
         {
           "plane": "form",
+          "base": "record",
           "variance": "sheaf",
           "value": {
             "r3u0": 0.0,

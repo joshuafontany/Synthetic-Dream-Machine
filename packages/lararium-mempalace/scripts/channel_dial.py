@@ -38,6 +38,19 @@ black-hash) pairs — and FORM TEMPLATES report both channels' counts side by si
 CONTENT plane never takes the dial (the charge scopes it to structure + form); its
 salience rides the stored embeddings, lambda-invariant.
 
+THE SPECTRUM IS THE OBSERVABLE, THE DIAL SETTING IS NOT. The mixture rides inside a mean,
+so each record's mixed centrality runs EXACTLY AFFINE in lambda and its rank changes ONLY
+where two lines cross. `rank_agreement.crossing_spectrum` enumerates those lam* in closed
+form; the sweep's ladder falls out of them (one rung per constant-order interval, plus the
+endpoints) — CORPUS-DERIVED, hand-set by nobody. A ladder of hand-picked rungs sees only
+the intervals it happens to land in and reports the boundaries it happens to straddle.
+
+THE ARMS CARRY UNEQUAL GRANULARITY. A 3-class wrapped structure arm read against a
+51-class one ties most of its pairs in BOTH arms, and a midrank correlation scores a
+double tie as agreement. Every rank read here routes through `rank_agreement.agreement`,
+which reports Kendall tau-c, both Somers' D directions, Fagin's K^(p) partial-ranking
+distance, and the PAIR CENSUS — the double-tie count rides beside every scalar.
+
 DETERMINISM + CLOCK PURITY: no RNG rides any dial path; the black forest mines in the
 projector's own stable record order (source_file, cid); no wall-clock anywhere; the
 comparator ward holds (~/.mempalace refused).
@@ -54,14 +67,29 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 import os
 import sys
 
 from corpus_testbed import _refuse_comparator
 from form_induction import _preorder_types, _seq_support, induce_forest
+from plane_base import (
+    BASE_RECORD,
+    combine_sum_histogram,
+    pushforward_origin,
+    records_to_patterns,
+    sheaf_section,
+    to_labeled,
+)
 from plane_fanout import _DEFAULT_MAX_CANDIDATES, _DEFAULT_MAX_FORMS, _DEFAULT_MIN_SUPPORT
-from run_projector import _centrality, _rank_salience, _read_planes, _to_labeled, build_assignment
+from rank_agreement import affine_centrality, agreement, crossing_spectrum, spectrum_rungs
+from rank_agreement import spearman as _spearman_lists
+from run_projector import (
+    _centrality,
+    _rank_salience,
+    _read_planes,
+    build_assignment,
+    structure_fibers,
+)
 from sensorium_consistency import (
     _angular_cosine,
     characteristic_vector,
@@ -71,8 +99,11 @@ from sensorium_consistency import (
 )
 from structure_router import _TOKEN_RE, parse_to_tree, structural_hash
 
-#: The dial's default rungs — the five-point ladder the sweep walks.
-DEFAULT_LAMBDAS = (0.0, 0.25, 0.5, 0.75, 1.0)
+#: The rungs the dial ALWAYS walks: the two channel-pure endpoints. Every interior rung
+#: comes from the bed's own crossing spectrum (`lambda_ladder`) — a hand-picked interior
+#: ladder observes only the intervals it lands in and straddles the rest, which is how a
+#: five-point ladder over (0, .25, .5, .75, 1) missed every crossing below lam ~ 0.30.
+ENDPOINT_LAMBDAS = (0.0, 1.0)
 
 #: The kind demotion law: a carrier the content sniff PROMOTED to memetic-wikitext
 #: (structure_router.detect_kind lifts markdown/prose/wikitext on sigil density) reads
@@ -159,14 +190,57 @@ def _mixed_rank(keys: list, d_red, d_black, lam: float) -> dict:
     return _rank_salience(cent)
 
 
-def dial_assignment(planes: dict, black: dict, lam: float) -> dict:
+def channel_views(planes: dict, black: dict) -> dict:
+    """The two channels' native pseudometrics, per dialled plane, over the RECORD base and
+    over the keys BOTH channels hold (the mixture needs both hands). One derivation feeds
+    both the dialled assignment and the crossing spectrum, so the lines the spectrum solves
+    and the ranks the sweep reads come from the same metric — never two drifting copies.
+
+    THE BASE LAW. The red structure channel keys on PATTERNS; it reaches the record base
+    only through `structure_fibers` (the `lar_provenance` pushforward, sum-histogram
+    colimit). The black structure channel derives one tree per record, so it stands over
+    the record base natively. Both arms therefore sit over BASE_RECORD before the mixture
+    touches them, and the mixture never crosses a universe."""
+    cids = [r["cid"] for r in planes["records"]]
+
+    cv_red = structure_fibers(planes["registry"], cids)
+    cv_black = {}
+    for c in cids:
+        t = black["trees"].get(c)
+        if t is not None:
+            lt = to_labeled(t)
+            if lt is not None:
+                cv_black[c] = characteristic_vector(lt)
+    skeys = [c for c in cids if c in cv_red and c in cv_black]
+
+    m_red = planes["memberships"]
+    m_black = black["memberships"]
+    fkeys = [c for c in cids if c in m_red and c in m_black]
+
+    return {
+        "structure": {
+            "keys": skeys,
+            "red": lambda a, b: _angular_cosine(cv_red[a], cv_red[b]),
+            "black": lambda a, b: _angular_cosine(cv_black[a], cv_black[b]),
+        },
+        "form": {
+            "keys": fkeys,
+            "red": lambda a, b: jaccard_distance(m_red[a], m_red[b]),
+            "black": lambda a, b: jaccard_distance(m_black[a], m_black[b]),
+        },
+    }
+
+
+def dial_assignment(planes: dict, black: dict, lam: float,
+                    views: "dict | None" = None) -> dict:
     """The lambda-dialled li-assignment over a wrapped bed: content salience off the
     stored embeddings (lambda-invariant), structure + form salience off the mixed
     channel metrics. A record enters a dialled plane only where BOTH channel views hold
-    it (the mixture needs both hands); the black view covers every red record on the
-    Kumulipo beds, so the restriction domains match the projector's."""
+    it; the black view covers every red record on the Kumulipo beds, so the restriction
+    domains match the projector's."""
     records = planes["records"]
     cids = [r["cid"] for r in records]
+    v = views or channel_views(planes, black)
 
     # content — stored warm-embed vectors, cosine hub-centrality (no dial: the charge
     # scopes lambda to the structure + form planes).
@@ -175,97 +249,94 @@ def dial_assignment(planes: dict, black: dict, lam: float) -> dict:
     content_sal = _rank_salience(_centrality(
         ckeys, lambda a, b: 1.0 - cosine_distance(vectors[a], vectors[b])))
 
-    # structure — DECKARD characteristic vectors per channel, angular-cosine mixed.
-    cv_red = {}
-    for c in cids:
-        t = planes["trees"].get(c)
-        if t is not None:
-            lt = _to_labeled(t)
-            if lt is not None:
-                cv_red[c] = characteristic_vector(lt)
-    cv_black = {}
-    for c in cids:
-        t = black["trees"].get(c)
-        if t is not None:
-            lt = _to_labeled(t)
-            if lt is not None:
-                cv_black[c] = characteristic_vector(lt)
-    skeys = [c for c in cids if c in cv_red and c in cv_black]
-    structure_sal = _mixed_rank(
-        skeys,
-        lambda a, b: _angular_cosine(cv_red[a], cv_red[b]),
-        lambda a, b: _angular_cosine(cv_black[a], cv_black[b]),
-        lam)
-
-    # form — membership sets per channel, Jaccard mixed. The red sets read the DURABLE
-    # form plane; the black sets read the fresh black induction.
-    m_red = planes["memberships"]
-    m_black = black["memberships"]
-    fkeys = [c for c in cids if c in m_red and c in m_black]
-    form_sal = _mixed_rank(
-        fkeys,
-        lambda a, b: jaccard_distance(m_red[a], m_red[b]),
-        lambda a, b: jaccard_distance(m_black[a], m_black[b]),
-        lam)
+    structure_sal = _mixed_rank(v["structure"]["keys"], v["structure"]["red"],
+                                v["structure"]["black"], lam)
+    form_sal = _mixed_rank(v["form"]["keys"], v["form"]["red"], v["form"]["black"], lam)
 
     restrictions = [
-        {"plane": "content", "variance": "sheaf", "value": content_sal},
-        {"plane": "structure", "variance": "sheaf", "value": structure_sal},
-        {"plane": "form", "variance": "sheaf", "value": form_sal},
+        sheaf_section("content", content_sal, base=BASE_RECORD),
+        # the red half of this arm crossed from the pattern base by the extension map; the
+        # origin travels with it, so the H0 gate sees how it earned its record-base reading.
+        sheaf_section("structure", structure_sal, base=BASE_RECORD,
+                      origin=pushforward_origin(combine_sum_histogram)),
+        sheaf_section("form", form_sal, base=BASE_RECORD),
     ]
     return {"restrictions": restrictions, "stalk": {"units": cids}}
 
 
+# ── the crossing spectrum (the dial's whole observable content) ───────────────────────────
+
+
+def dial_spectrum(planes: dict, black: dict, views: "dict | None" = None) -> dict:
+    """Per dialled plane, the exact affine centrality lines and every lam* in (0,1) where
+    two of them cross — the rank order stands constant between consecutive lam*, so this
+    exhausts what the dial can show. A DEGENERATE CONFLUENCE (many crossings piled on one
+    lam*, as the wrapped bed piles them on lam = 1) reads here as a coincident cut, not as
+    a cliff: the sweep's ladder merges it to one boundary."""
+    v = views or channel_views(planes, black)
+    out: dict = {}
+    for plane in ("structure", "form"):
+        keys = v[plane]["keys"]
+        coeffs = affine_centrality(keys, v[plane]["red"], v[plane]["black"])
+        sp = crossing_spectrum(coeffs)
+        out[plane] = {
+            "units": len(keys),
+            "interior_crossings": len(sp),
+            "lambda_star": [round(r["lambda"], 6) for r in sp],
+            "coefficients": {k: {"A": c[0], "B": c[1]} for k, c in coeffs.items()},
+        }
+    return out
+
+
+def lambda_ladder(spectrum: dict) -> tuple:
+    """The rungs the CORPUS dictates: the endpoints plus one representative inside every
+    constant-order interval the union of both planes' crossings carves out of [0,1]. No
+    rung comes from a hand. An empty spectrum (no interior crossing anywhere) collapses to
+    the endpoints, which then carry the whole truth."""
+    merged = sorted(
+        ({"lambda": lam}
+         for plane in spectrum
+         for lam in spectrum[plane]["lambda_star"]),
+        key=lambda r: r["lambda"])
+    return tuple(spectrum_rungs(merged))
+
+
 def structure_classes(planes: dict, black: dict, lam: float) -> int:
-    """The structure-class count the dial can honestly claim at a rung: distinct red
-    hashes at lambda=1, distinct black hashes at lambda=0, and at any interior lambda
-    the JOIN partition — distinct (red, black) hash pairs — because a parse tree admits
-    no interior point (surfaced in the module head, never fudged)."""
-    keys = [c for c in black["hash_of"] if c in planes["hash_of"]]
+    """The structure-class count the dial can honestly claim at a rung: the RED class of a
+    record reads as the SET of patterns lying over it (the registry's fiber, not one
+    last-write-wins hash); the BLACK class reads its own structural hash. lambda=1 counts
+    the red partition, lambda=0 the black one, and any interior lambda the JOIN — distinct
+    (red-set, black-hash) pairs — because a parse tree admits no interior point (surfaced
+    in the module head, never fudged)."""
+    cids = [r["cid"] for r in planes["records"]]
+    red = records_to_patterns(planes["registry"], cids)
+    keys = [c for c in cids if c in black["hash_of"] and red.get(c)]
     if lam >= 1.0:
-        return len({planes["hash_of"][c] for c in keys})
+        return len({red[c] for c in keys})
     if lam <= 0.0:
         return len({black["hash_of"][c] for c in keys})
-    return len({(planes["hash_of"][c], black["hash_of"][c]) for c in keys})
+    return len({(red[c], black["hash_of"][c]) for c in keys})
 
 
-# ── spearman (the cross-bed / cross-lambda comparison read) ───────────────────────────────
-
-
-def _ranks(values: list) -> list:
-    """Fractional average-tie ranks (1-based average over tie runs) — the Spearman grain."""
-    order = sorted(range(len(values)), key=lambda i: values[i])
-    ranks = [0.0] * len(values)
-    i = 0
-    while i < len(order):
-        j = i
-        while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
-            j += 1
-        avg = (i + j) / 2.0 + 1.0
-        for k in range(i, j + 1):
-            ranks[order[k]] = avg
-        i = j + 1
-    return ranks
+# ── the rank reads (tie-aware; spearman scoped) ───────────────────────────────────────────
 
 
 def spearman(a: dict, b: dict) -> "float | None":
-    """Spearman rank correlation over the SHARED keys of two salience dicts — Pearson of
-    the average-tie ranks. None where a side carries zero variance (the degenerate plane
-    the four-way read hit: constant membership yields no rank structure to correlate)."""
+    """Spearman rho over the SHARED keys of two salience dicts.
+
+    SAFE HERE, AND ONLY HERE: this verb serves the SAME-PLANE, SAME-GRANULARITY read — one
+    plane's salience on bed A against the same plane's salience on bed B (real vs placebo,
+    wrapped vs wrapped), where both arms come out of the same derivation over the same
+    record count and carry the same distinct-value budget, so double ties stay incidental.
+    Point it across granularities (a 3-class arm against a 51-class one) and it inflates
+    toward agreement, because a double tie reads as concordance while carrying zero
+    ordering information. Every cross-granularity read routes through
+    `rank_agreement.agreement`, which reports tau-c / Somers' D / Fagin beside the census.
+    None where a side carries zero rank variance."""
     keys = sorted(set(a) & set(b))
     if len(keys) < 3:
         return None
-    ra = _ranks([a[k] for k in keys])
-    rb = _ranks([b[k] for k in keys])
-    n = len(keys)
-    ma = sum(ra) / n
-    mb = sum(rb) / n
-    va = sum((x - ma) ** 2 for x in ra)
-    vb = sum((x - mb) ** 2 for x in rb)
-    if va == 0.0 or vb == 0.0:
-        return None
-    cov = sum((x - ma) * (y - mb) for x, y in zip(ra, rb))
-    return cov / math.sqrt(va * vb)
+    return _spearman_lists([a[k] for k in keys], [b[k] for k in keys])
 
 
 def _salience_by_plane(assignment: dict) -> dict:
@@ -274,55 +345,89 @@ def _salience_by_plane(assignment: dict) -> dict:
 
 def _pair_sups(assignment: dict) -> dict:
     """The pairwise sup-disagreements off the standing consistency instrument — the same
-    numbers the projector's H0 read reports."""
+    numbers the projector's H0 read reports. A sup over FRACTIONAL RANKS inherits the tie
+    disease whole: where one arm holds 3 classes and the other 51, most of the sup's pairs
+    sit in tie blocks, so the sweep reports `_pair_agreement` beside every sup and no
+    reader takes the sup alone."""
     h0 = consistency_radius(assignment["restrictions"], assignment["stalk"])
     return {f"{p['a']}-{p['b']}": round(p["distance"], 4) for p in h0["pairs"]}
+
+
+def _pair_agreement(sal: dict) -> dict:
+    """The tie-aware cross-plane read at one rung: for each plane pair, tau-c, both Somers'
+    D directions, Fagin's K^(p) and the PAIR CENSUS over the shared cids. The census is the
+    number the sup-norm never carried — a double-tie mass near 1 says the planes' arms
+    agree only because neither arm orders the pairs at all."""
+    planes = ("content", "structure", "form")
+    out: dict = {}
+    for i, p in enumerate(planes):
+        for q in planes[i + 1:]:
+            out[f"{p}-{q}"] = agreement(sal.get(p, {}), sal.get(q, {}))
+    return out
 
 
 # ── the sweep (the new instrument) ────────────────────────────────────────────────────────
 
 
-def sweep_lambdas(root: str, *, lambdas=DEFAULT_LAMBDAS, extracted_root: "str | None" = None,
+def sweep_lambdas(root: str, *, lambdas=None, extracted_root: "str | None" = None,
                   base_kind: str = BLACK_BASE_KIND) -> dict:
-    """Walk the dial over a wrapped bed: per lambda the plane readings + the cross-plane
-    numbers; where an extracted twin rides in, the lambda=0 reading compares against the
-    extracted bed's own assignment (how closely the dial reproduces extraction, rho per
-    plane over the shared cids)."""
+    """Walk the dial over a wrapped bed: per rung the plane readings, the cross-plane sups
+    and the TIE-AWARE agreement bundle beside them; where an extracted twin rides in, the
+    lowest rung compares against the extracted bed's own assignment.
+
+    `lambdas = None` (the default) takes the ladder from the bed's OWN crossing spectrum —
+    every constant-order interval gets one rung and the endpoints close it. An operator MAY
+    pass rungs explicitly; the output names which source ran, because a hand-set ladder
+    reads whatever it lands on and stays silent about the crossings it stepped over."""
     _refuse_comparator(root)
     planes = _read_planes(root)
     black = derive_black_planes(planes, base_kind=base_kind)
     red_forms = _red_form_dimension(root)
 
+    views = channel_views(planes, black)
+    spectrum = dial_spectrum(planes, black, views)
+    rungs = tuple(lambdas) if lambdas else lambda_ladder(spectrum)
+
     rows = []
     sal_at: dict = {}
-    for lam in lambdas:
-        assignment = dial_assignment(planes, black, lam)
+    for lam in rungs:
+        assignment = dial_assignment(planes, black, lam, views)
         sal = _salience_by_plane(assignment)
         sal_at[lam] = sal
-        sups = _pair_sups(assignment)
         rows.append({
             "lambda": lam,
             "structure_classes": structure_classes(planes, black, lam),
             "form_templates": {"red": red_forms, "black": black["forms"]},
-            "sup": sups,
+            "sup": _pair_sups(assignment),
+            "agreement": _pair_agreement(sal),
             "plane_units": {p: len(v) for p, v in sal.items()},
         })
 
-    out = {"root": root, "black_base_kind": base_kind, "rows": rows,
-           "black_induction": black["induction"]}
+    out = {
+        "root": root,
+        "black_base_kind": base_kind,
+        "lambda_source": "corpus-crossing-spectrum" if not lambdas else "operator-supplied",
+        "spectrum": {p: {k: v for k, v in spectrum[p].items() if k != "coefficients"}
+                     for p in spectrum},
+        "rungs": list(rungs),
+        "rows": rows,
+        "black_induction": black["induction"],
+    }
 
     if extracted_root:
         ext_planes = _read_planes(extracted_root)
-        ext_sal = _salience_by_plane(build_assignment(ext_planes))
-        low = min(lambdas)
+        ext_assignment = build_assignment(ext_planes)
+        ext_sal = _salience_by_plane(ext_assignment)
+        low = min(rungs)
         lam0 = sal_at[low]
         out["lambda0_vs_extracted"] = {
             "lambda": low,          # the rung compared — 0.0 unless the ladder omits it
             "extracted_root": extracted_root,
-            "rho": {p: (None if (r := spearman(lam0.get(p, {}), ext_sal.get(p, {}))) is None
-                        else round(r, 4))
-                    for p in ("content", "structure", "form")},
-            "extracted_sup": _pair_sups(build_assignment(ext_planes)),
+            # the dialled-black arm and the extracted arm carry DIFFERENT class budgets, so
+            # the bundle rides here and the census travels with every scalar.
+            "agreement": {p: agreement(lam0.get(p, {}), ext_sal.get(p, {}))
+                          for p in ("content", "structure", "form")},
+            "extracted_sup": _pair_sups(ext_assignment),
         }
     return out
 
@@ -345,20 +450,26 @@ def _red_form_dimension(root: str) -> "int | None":
 
 
 def compare_beds(root_a: str, root_b: str) -> dict:
-    """Per-plane Spearman rho between two beds' OWN salience assignments over the shared
-    cids — the read the four-way used (real vs placebo, wrapped vs extracted), stood up
-    as a durable verb so the shape-placebo cell reads with the same instrument."""
+    """Per-plane comparison of two beds' OWN salience assignments over the shared cids —
+    the read the four-way used (real vs placebo, wrapped vs extracted).
+
+    Spearman rides here beside the bundle because a SAME-PLANE, SAME-DERIVATION pair often
+    carries comparable granularity (wrapped structure against wrapped-placebo structure:
+    3 classes each) — but a WRAPPED bed against an EXTRACTED one does not (3 against 51),
+    so the bundle's `spearman_safe` flag decides per pair, and the census travels with the
+    scalars either way."""
     _refuse_comparator(root_a)
     _refuse_comparator(root_b)
     sal_a = _salience_by_plane(build_assignment(_read_planes(root_a)))
     sal_b = _salience_by_plane(build_assignment(_read_planes(root_b)))
+    planes = ("content", "structure", "form")
+    bundles = {p: agreement(sal_a.get(p, {}), sal_b.get(p, {})) for p in planes}
     return {
         "root_a": root_a, "root_b": root_b,
-        "rho": {p: (None if (r := spearman(sal_a.get(p, {}), sal_b.get(p, {}))) is None
-                    else round(r, 4))
-                for p in ("content", "structure", "form")},
-        "shared": {p: len(set(sal_a.get(p, {})) & set(sal_b.get(p, {})))
-                   for p in ("content", "structure", "form")},
+        "agreement": bundles,
+        "rho": {p: bundles[p].get("spearman") for p in planes},
+        "rho_safe": {p: bundles[p].get("spearman_safe") for p in planes},
+        "shared": {p: len(set(sal_a.get(p, {})) & set(sal_b.get(p, {}))) for p in planes},
     }
 
 
@@ -369,14 +480,17 @@ def main() -> None:
     ap = argparse.ArgumentParser(
         description="channel_dial — the RED/BLACK channel dial over a wrapped bed's planes")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("sweep", help="walk the lambda ladder; emit per-rung plane readings")
+    s = sub.add_parser("sweep", help="walk the corpus-derived ladder; emit per-rung readings")
     s.add_argument("--root", required=True, help="the wrapped bed root")
     s.add_argument("--extracted-root", default=None, dest="extracted_root",
-                   help="the extracted twin — lambda=0 compares against its own assignment")
-    s.add_argument("--lambdas", default=",".join(str(x) for x in DEFAULT_LAMBDAS),
-                   help="comma-separated lambda rungs in [0,1]")
+                   help="the extracted twin — the lowest rung compares against its assignment")
+    s.add_argument("--lambdas", default=None,
+                   help="comma-separated rungs in [0,1]; omitted, the bed's own crossing "
+                        "spectrum sets the ladder")
     s.add_argument("--out", default=None, help="rows land here (default <root>/channel-dial)")
-    c = sub.add_parser("compare", help="per-plane salience rho between two beds")
+    x = sub.add_parser("spectrum", help="the analytic lambda* crossing spectrum of a bed")
+    x.add_argument("--root", required=True, help="the wrapped bed root")
+    c = sub.add_parser("compare", help="per-plane tie-aware agreement between two beds")
     c.add_argument("--root-a", required=True, dest="root_a")
     c.add_argument("--root-b", required=True, dest="root_b")
     args = ap.parse_args()
@@ -384,11 +498,24 @@ def main() -> None:
         out = compare_beds(os.path.expanduser(args.root_a), os.path.expanduser(args.root_b))
         sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
         return
-    lambdas = tuple(float(x) for x in args.lambdas.split(",") if x.strip() != "")
-    for lam in lambdas:
-        if not 0.0 <= lam <= 1.0:
-            raise SystemExit(f"channel_dial: lambda {lam} falls outside [0,1]")
     root = os.path.expanduser(args.root)
+    if args.cmd == "spectrum":
+        _refuse_comparator(root)
+        planes = _read_planes(root)
+        black = derive_black_planes(planes)
+        spec = dial_spectrum(planes, black)
+        out = {"root": root,
+               "spectrum": {p: {k: v for k, v in spec[p].items() if k != "coefficients"}
+                            for p in spec},
+               "ladder": list(lambda_ladder(spec))}
+        sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
+        return
+    lambdas = None
+    if args.lambdas:
+        lambdas = tuple(float(v) for v in args.lambdas.split(",") if v.strip() != "")
+        for lam in lambdas:
+            if not 0.0 <= lam <= 1.0:
+                raise SystemExit(f"channel_dial: lambda {lam} falls outside [0,1]")
     out = sweep_lambdas(root, lambdas=lambdas,
                         extracted_root=os.path.expanduser(args.extracted_root)
                         if args.extracted_root else None)

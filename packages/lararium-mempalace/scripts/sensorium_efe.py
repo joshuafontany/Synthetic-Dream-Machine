@@ -39,6 +39,7 @@ import math
 import os
 import sys
 
+from plane_base import BASE_RECORD
 from sensorium_fusion import cohomology_obstruction, reconciliation_cost
 
 _EPS = 1e-9                       # the sensorium-pc scale floor
@@ -293,7 +294,8 @@ def _seeded_series(n: int, phi: float, seed: int) -> list:
 
 
 def _sheaf(plane: str, value: dict) -> dict:
-    return {"plane": plane, "variance": "sheaf", "value": value}
+    """The fixture's synthetic units name records; the base rides the wire (plane_base)."""
+    return {"plane": plane, "base": BASE_RECORD, "variance": "sheaf", "value": value}
 
 
 def _hollow_triangle(base: float, gap: float) -> dict:

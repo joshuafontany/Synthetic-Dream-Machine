@@ -11,8 +11,12 @@ the key cannot fit to it.
 
 WHAT RUNS (each answering a way the instrument could lie):
 
-  · THE POUR — the corpus end-to-end as one character stream, MODWT to the whole-pour scale, per-band
-    energy against per-band block-shuffle surrogates. Boundaries fall out of each peaked band's crests.
+  · THE POUR — the corpus end-to-end as one character stream, MODWT at a LADDER of zonings, per-band
+    energy against per-band block-shuffle surrogates.
+  · THE ZONING GATE — a scale earns REPRODUCED only by peaking under EVERY zoning eligible to resolve
+    it. A real band HOLDS under a change of grain; an ALIAS MOVES. A scale that moves gets REFUSED, and
+    emits no boundaries at all — so only scales that survived re-zoning ever reach the scorer. The gate
+    stands upstream of every number below it.
   · THE SCORE — the pre-registered ladder: the tolerance CURVE, never a number, each rung beside the
     recall a COIN FLIP would harvest at that width. The `lift` column strips a tolerance-driven score
     naked: a random detector scores 0.20 at +-50 and lifts by -0.007.
@@ -20,14 +24,6 @@ WHAT RUNS (each answering a way the instrument could lie):
     only their ORDER, so a band that survives it read the SHAPE of lines; a band that dies with it read
     the chant's own sequence. Meaning-death separates the two, and a discovery that survives meaning-death
     never found meaning.
-  · THE DISCOVERED WEIGHT — each structural mark poured its own unit-height channel, so the ladder now
-    MEASURES which mark bears the rhythm at which scale. The typed constant is gone; the reading replaces
-    it. A mark that peaks nowhere carries no rhythm, whatever weight a designer would have felt like
-    giving it.
-  · THE ZONING SWEEP (`--zoning`) — the gate the grain law has owed since it was written. A band earns
-    REPRODUCED only by surviving RE-ZONING, never by surviving mere resampling: a real band holds still
-    under a change of grain, and an ALIAS MOVES. Re-pour at several coarse-stage decimations and watch
-    whether a band's scale holds.
 
 WHY THIS CHANT AND NOT OUR OWN TRANSCRIPTS. The wā run 58 to 3352 lines — a 58x ratio. No single window
 resolves the sixth without shredding the eleventh. The chant stands as a MAUP counterexample WITH AN
@@ -46,13 +42,12 @@ import numpy as np
 
 from boundary_score import render, report
 from ffz_continuous_pour import (
-    COARSE_DECIM,
+    ZONING_LADDER,
     band_boundaries,
-    band_lock,
-    null_profile,
-    peak_read,
     pour_ticks,
-    two_stage_bands,
+    reference_row,
+    zoning_gate,
+    zoning_read,
 )
 from kumulipo_bed import bed_names, bed_text, ground_truth
 
@@ -86,38 +81,36 @@ def ticks_to_lines(ticks: "list[int]", offsets: "list[int]") -> "list[int]":
     return [max(0, int(np.searchsorted(offsets, t, side="right")) - 1) for t in ticks]
 
 
-def pour_bed(lines: "list[str]", *, seed: int, surrogates: int,
-             coarse_decim: int = COARSE_DECIM) -> dict:
-    """One bed, one pour: every signal decoupled, gated, and read for boundaries. Reads no answer key."""
+def pour_bed(lines: "list[str]", *, seed: int, surrogates: int) -> dict:
+    """One bed, one pour: every signal poured at the whole zoning ladder, ruled by the gate, and read
+    for boundaries ONLY where a scale HELD. Reads no answer key."""
     poured = pour_ticks(frames_from_lines(lines))
     offsets = line_offsets(lines)
     out = {"n_ticks": poured["n_ticks"], "signals": {}}
     for name, sig in poured["signals"].items():
         if float(np.var(sig)) < 1e-12:
-            out["signals"][name] = {"note": "flat — skipped", "peaked": []}
+            out["signals"][name] = {"note": "flat — skipped", "gate": [], "reproduced": []}
             continue
-        bands = two_stage_bands(sig, coarse_decim=coarse_decim)
-        locks = [band_lock(b["series"], b["level"]) for b in bands]
-        surr = null_profile(sig, bands, n_surrogates=surrogates, seed=seed)
-        verdicts = peak_read(bands, locks, surr)
-        peaked = []
-        for row, v in zip(bands, verdicts):
-            if not v["peaked"]:
+        reads = zoning_read(sig, ladder=ZONING_LADDER, n_surrogates=surrogates, seed=seed)
+        gate = zoning_gate(reads, poured["n_ticks"], ZONING_LADDER)
+        reproduced = []
+        for g in gate:
+            if not g["reproduced"]:
                 continue
-            bounds = band_boundaries(row)
-            peaked.append({
-                "band": row["band"], "scale_ticks": row["scale_ticks"],
-                "energy_excess": v["energy_excess"],
-                "boundary_lines": ticks_to_lines(bounds, offsets),
+            ref = reference_row(reads, g["scale_ticks"], g["eligible_zonings"])
+            if ref is None:
+                continue
+            row, _lk, _v = ref
+            reproduced.append({
+                "band": g["band"], "scale_ticks": g["scale_ticks"],
+                "energy_excess": g["energy_excess_by_zoning"].get(str(row["zoning"]), 0.0),
+                "boundary_lines": ticks_to_lines(band_boundaries(row), offsets),
             })
-        out["signals"][name] = {
-            "peaked": peaked,
-            "max_excess": max((v["energy_excess"] for v in verdicts), default=0.0),
-        }
+        out["signals"][name] = {"gate": gate, "reproduced": reproduced}
     return out
 
 
-def run_bed(bed: str, *, seed: int, surrogates: int, placebo: bool, zoning: bool) -> dict:
+def run_bed(bed: str, *, seed: int, surrogates: int, placebo: bool) -> dict:
     lines = bed_text(bed)                       # the instrument's ONLY door
     g = ground_truth(bed)                       # the SCORER crosses the wall; the pour never does
     print(f"\n{'═' * 78}\n  {bed.upper()} · {len(lines)} lines · {g['n_wa']} wā "
@@ -127,30 +120,36 @@ def run_bed(bed: str, *, seed: int, surrogates: int, placebo: bool, zoning: bool
     real = pour_bed(lines, seed=seed, surrogates=surrogates)
     print(f"  poured {real['n_ticks']:,} character ticks\n")
 
-    # THE DISCOVERED WEIGHT — what a typed constant used to assert, now measured.
-    print("  ── DISCOVERED BREAK WEIGHT (the prior we cut, now a reading)")
-    for name in ("break-newline", "break-sentence", "break-clause"):
-        s = real["signals"].get(name, {})
-        peaks = s.get("peaked", [])
-        scales = ", ".join(f"{p['band']}@{p['scale_ticks']}t×{p['energy_excess']:.2f}" for p in peaks)
-        print(f"     {name:<16} max-excess {s.get('max_excess', 0):>6.2f}  "
-              f"{'peaks: ' + scales if peaks else 'NO PEAK — this mark bears no rhythm'}")
+    print("  ── THE ZONING GATE (a real band HOLDS under re-zoning; an alias MOVES)")
+    for name, s in real["signals"].items():
+        if s.get("note"):
+            print(f"     {name:<18} {s['note']}")
+            continue
+        if not s["gate"]:
+            print(f"     {name:<18} no scale cleared the energy null at any zoning")
+            continue
+        for row in s["gate"]:
+            ex = ", ".join(f"D{d}:{row['energy_excess_by_zoning'].get(str(d), 0):.2f}"
+                           for d in row["eligible_zonings"])
+            print(f"     {name:<18} {row['band']:<8} {row['scale_ticks']:>7}t  "
+                  f"{row['verdict']:<10} held {len(row['held_zonings'])}/"
+                  f"{len(row['eligible_zonings'])} rungs  [{ex}]")
 
     plac = pour_bed(_shuffle_lines(lines, seed), seed=seed, surrogates=surrogates) if placebo else None
 
-    print("\n  ── THE WĀ TEST — each peaked band scored against the chant's own sixteen")
+    print("\n  ── THE WĀ TEST — the scales that SURVIVED the gate, scored against the chant's sixteen")
     results = {}
     for name, s in real["signals"].items():
-        for p in s.get("peaked", []):
+        for p in s.get("reproduced", []):
             bl = p["boundary_lines"]
             if not bl:
                 continue
             rep = report(bl, bed, ranked=bl)
             best = max(rep["tolerance_curve"], key=lambda r: r["lift"])
-            # A band that beats BOTH floors and survives meaning-death has found the chant, not itself.
+            # A scale that beats BOTH floors and survives meaning-death has found the chant, not itself.
             surviving = None
             if plac:
-                pb = [q for q in plac["signals"].get(name, {}).get("peaked", [])
+                pb = [q for q in plac["signals"].get(name, {}).get("reproduced", [])
                       if q["band"] == p["band"]]
                 surviving = bool(pb)
             key = f"{name}/{p['band']}"
@@ -163,21 +162,20 @@ def run_bed(bed: str, *, seed: int, surrogates: int, placebo: bool, zoning: bool
                   f"best-lift {best['lift']:+.3f} @±{best['tol']:<3} "
                   f"(recall {best['recall']:.2f} vs chance {best['chance_recall']:.2f})  "
                   f"{verdict}{flag}")
+    if not results:
+        print("     nothing to score — the gate refused every candidate scale")
 
     if results:
         star = max(results, key=lambda k: results[k]["best"]["lift"])
-        print(f"\n  ── THE STRONGEST BAND: {star}")
+        print(f"\n  ── THE STRONGEST SURVIVING SCALE: {star}")
         render(results[star]["report"])
 
-    if zoning:
-        print("\n  ── THE ZONING SWEEP (the gate the grain law owed: a real band HOLDS, an alias MOVES)")
-        for decim in (32, 64, 128):
-            z = pour_bed(lines, seed=seed, surrogates=surrogates, coarse_decim=decim)
-            rec = z["signals"].get("recurrence", {})
-            scales = [f"{p['band']}@{p['scale_ticks']}t" for p in rec.get("peaked", [])]
-            print(f"     decim {decim:>4}: recurrence peaks {scales or '—'}")
-
-    return {"bed": bed, "results": {k: v["best"] for k, v in results.items()}}
+    return {"bed": bed,
+            "gate": {name: [{k: row[k] for k in ("band", "scale_ticks", "verdict",
+                                                 "held_zonings", "eligible_zonings")}
+                            for row in s.get("gate", [])]
+                     for name, s in real["signals"].items()},
+            "results": {k: v["best"] for k, v in results.items()}}
 
 
 def _shuffle_lines(lines: "list[str]", seed: int) -> "list[str]":
@@ -200,13 +198,12 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=4241)
     ap.add_argument("--surrogates", type=int, default=3)
     ap.add_argument("--no-placebo", action="store_true", help="skip the meaning-death control")
-    ap.add_argument("--zoning", action="store_true", help="run the re-zoning gate")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
 
     beds = a.bed or bed_names()
-    out = [run_bed(b, seed=a.seed, surrogates=a.surrogates,
-                   placebo=not a.no_placebo, zoning=a.zoning) for b in beds]
+    out = [run_bed(b, seed=a.seed, surrogates=a.surrogates, placebo=not a.no_placebo)
+           for b in beds]
     if a.json:
         print(json.dumps(out, indent=1))
 

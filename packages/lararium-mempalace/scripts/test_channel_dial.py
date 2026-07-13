@@ -6,13 +6,18 @@ from __future__ import annotations
 
 from channel_dial import (
     _mixed_rank,
+    _pair_agreement,
     black_parse,
+    channel_views,
     dial_assignment,
+    dial_spectrum,
+    lambda_ladder,
     spearman,
     strip_red,
     structure_classes,
 )
 from kumulipo_sections import extract_source_text
+from plane_base import BASE_RECORD, PatternRegistry
 from run_projector import _centrality, _rank_salience
 from structure_router import _TOKEN_RE, parse_sigils, parse_to_tree, structural_hash
 
@@ -154,11 +159,12 @@ def test_mixture_moves_between_the_endpoints():
 
 
 def _toy_planes():
-    """Two synthetic records shaped like _read_planes output: red trees = flat sigil
-    skeletons (near-identical), black trees = distinct markdown parses."""
+    """Two synthetic records shaped like _read_planes output: a PATTERN REGISTRY on the red
+    side (the structure plane keys on structural hashes and lies over records through
+    `lar_provenance`), plus record-base content rows and form memberships. The black side
+    derives its own per-record trees off the same documents."""
     recs = []
-    trees = {}
-    hash_of = {}
+    registry = PatternRegistry()
     for i, body in enumerate(["# One\n\nalpha beta\n", "- a\n- b\n- c\n"]):
         cid = f"cid-{i}"
         wrapped = f"<<~ ahu #source-text >>\n{body}<<~/ahu >>\n"
@@ -166,10 +172,12 @@ def _toy_planes():
                      "embedding": [1.0, float(i)],
                      "metadata": {"source_file": f"corpus:t/{i}", "lar_kind": "memetic-wikitext"}})
         t = parse_sigils(wrapped)
-        trees[cid] = t
-        hash_of[cid] = structural_hash(t)
+        h = structural_hash(t)
+        registry.trees[h] = t
+        registry.count[h] = registry.count.get(h, 0) + 1
+        registry.exhibits.setdefault(h, []).append(cid)
     memberships = {"cid-0": {0}, "cid-1": {0}}
-    return {"records": recs, "trees": trees, "hash_of": hash_of, "memberships": memberships}
+    return {"records": recs, "registry": registry, "memberships": memberships}
 
 
 def test_dial_assignment_deterministic_and_endpoint_faithful():
@@ -200,7 +208,72 @@ def test_structure_classes_counts_join_at_interior():
     assert n_join >= max(n_red, n_black)
 
 
-# ── spearman ─────────────────────────────────────────────────────────────────────────────
+def test_dial_restrictions_carry_their_base_and_the_pushforward_origin():
+    from channel_dial import derive_black_planes
+
+    planes = _toy_planes()
+    a = dial_assignment(planes, derive_black_planes(planes), 0.5)
+    by = {r["plane"]: r for r in a["restrictions"]}
+    assert all(r["base"] == BASE_RECORD for r in a["restrictions"])
+    # the red structure arm crossed from the PATTERN base; the crossing names itself.
+    assert by["structure"]["origin"].startswith("pushforward:lar_provenance")
+    assert by["content"]["origin"] == "native"
+
+
+# ── the crossing spectrum (the dial's observable) ────────────────────────────────────────
+
+
+def test_spectrum_and_ladder_come_off_the_bed_not_off_a_hand():
+    from channel_dial import derive_black_planes
+
+    planes = _toy_planes()
+    black = derive_black_planes(planes)
+    spec = dial_spectrum(planes, black, channel_views(planes, black))
+    assert set(spec) == {"structure", "form"}
+    assert spec["structure"]["interior_crossings"] == len(spec["structure"]["lambda_star"])
+    ladder = lambda_ladder(spec)
+    assert ladder[0] == 0.0 and ladder[-1] == 1.0
+    # one rung per constant-order interval: the count follows the crossings, never a default.
+    cuts = sorted({round(x, 9) for p in spec for x in spec[p]["lambda_star"]})
+    assert len(ladder) == len(cuts) + 3      # endpoints + a rung inside each interval
+
+
+def test_rank_order_holds_between_crossings_and_turns_across_one():
+    from channel_dial import derive_black_planes
+
+    planes = _toy_planes()
+    black = derive_black_planes(planes)
+    views = channel_views(planes, black)
+    cuts = dial_spectrum(planes, black, views)["structure"]["lambda_star"]
+    keys = views["structure"]["keys"]
+    red, blk = views["structure"]["red"], views["structure"]["black"]
+
+    def order(lam):
+        r = _mixed_rank(keys, red, blk, lam)
+        return tuple(sorted(keys, key=lambda k: r[k]))
+
+    for cut in cuts:
+        if 1e-6 < cut < 1 - 1e-6:
+            assert order(cut - 1e-6) != order(cut + 1e-6)
+
+
+# ── the tie-aware read ───────────────────────────────────────────────────────────────────
+
+
+def test_pair_agreement_carries_the_census_beside_every_scalar():
+    from channel_dial import derive_black_planes
+
+    planes = _toy_planes()
+    a = dial_assignment(planes, derive_black_planes(planes), 1.0)
+    bundles = _pair_agreement({r["plane"]: r["value"] for r in a["restrictions"]})
+    assert set(bundles) == {"content-structure", "content-form", "structure-form"}
+    for b in bundles.values():
+        # two toy records give fewer than three shared keys — the bundle REFUSES a scalar
+        # rather than reporting one off a single pair.
+        assert b["census"] is None or "double_tied" in b["census"]
+
+
+# ── spearman (the scoped survivor) ───────────────────────────────────────────────────────
 
 
 def test_spearman_reads_agreement_and_reversal():
@@ -212,3 +285,16 @@ def test_spearman_reads_agreement_and_reversal():
 def test_spearman_refuses_zero_variance():
     a = {"x": 0.1, "y": 0.5, "z": 0.9}
     assert spearman(a, {"x": 0.5, "y": 0.5, "z": 0.5}) is None
+
+
+def test_spearman_inflates_where_the_bundle_says_it_may_not_run():
+    # a 3-class arm against a 12-class one, ordered identically in blocks: Spearman scores
+    # near-perfect agreement off pairs it never ordered. The bundle flags it unsafe.
+    from rank_agreement import agreement
+
+    coarse = {f"k{i}": float(i // 4) for i in range(12)}
+    fine = {f"k{i}": float(i) for i in range(12)}
+    bundle = agreement(coarse, fine)
+    assert spearman(coarse, fine) > 0.94              # 0.9461 — off 48 of 66 ordered pairs
+    assert bundle["spearman_safe"] is False
+    assert bundle["census"]["tied_x_only"] == 18      # the pairs the coarse arm never ordered

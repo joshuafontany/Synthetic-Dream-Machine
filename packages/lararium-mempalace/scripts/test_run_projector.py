@@ -10,12 +10,12 @@ import math
 
 import pytest
 
+from plane_base import BASE_RECORD, to_labeled
 from run_projector import (
     _alpha_to_confidence,
     _band,
     _jittered_assignment,
     _rank_salience,
-    _to_labeled,
     excess_entropy_bits,
     geom_arl0_range,
     to_csv,
@@ -101,21 +101,22 @@ class TestTreeFold:
     def test_folds_type_labels_and_container_children(self):
         tree = {"type": "doc", "body": [{"type": "p", "text": "hi"},
                                         {"type": "p", "text": "yo"}]}
-        lt = _to_labeled(tree)
+        lt = to_labeled(tree)
         assert lt["label"] == "type=doc"
         assert lt["children"][0]["label"] == "[list]"
         kids = lt["children"][0]["children"]
         assert [k["label"] for k in kids] == ["type=p", "type=p"]
 
     def test_scalars_fold_away(self):
-        assert _to_labeled("just text") is None
+        assert to_labeled("just text") is None
 
 
 class TestJitterNull:
     def test_jitter_moves_values_never_the_skeleton(self):
         assignment = {
             "restrictions": [
-                {"plane": "content", "variance": "sheaf", "value": {"u": 0.5, "w": 0.2}},
+                {"plane": "content", "base": BASE_RECORD, "variance": "sheaf",
+                 "value": {"u": 0.5, "w": 0.2}, "origin": "native"},
             ],
             "stalk": {"units": ["u", "w"]},
         }
@@ -123,6 +124,20 @@ class TestJitterNull:
         assert list(j["restrictions"][0]["value"].keys()) == ["u", "w"]
         assert j["stalk"] is assignment["stalk"]
         assert j["restrictions"][0]["value"] != assignment["restrictions"][0]["value"]
+
+    def test_the_null_carries_the_base_so_it_faces_the_same_gate(self):
+        """A surrogate that dropped `base` would sail past the gate the real assignment must clear,
+        and the null would then be testing a different instrument than the observation does."""
+        assignment = {
+            "restrictions": [
+                {"plane": "content", "base": BASE_RECORD, "variance": "sheaf",
+                 "value": {"u": 0.5}, "origin": "native"},
+            ],
+            "stalk": {"units": ["u"]},
+        }
+        j = _jittered_assignment(assignment, random.Random(3), 0.5)
+        assert j["restrictions"][0]["base"] == BASE_RECORD
+        assert j["restrictions"][0]["origin"] == "native"
 
 
 class TestCsv:

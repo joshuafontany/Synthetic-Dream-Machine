@@ -1,7 +1,7 @@
-"""Tests — the continuous pour: the tick loop streams frames deterministically, the
-two-stage decoupling re-finds PLANTED periods (the instrument's own positive control), a
-structureless noise pour refuses to peak (the anti-apophenia null), and the scale-entity
-records stay open and nameless."""
+"""Tests — the continuous pour: the tick loop streams frames deterministically, the zoning
+ladder decouples the stream at every grain, the ZONING GATE keeps a planted period that HOLDS
+under re-zoning and REFUSES a band that rides the grain, a structureless noise pour raises
+nothing, and the scale-entity records stay open and nameless."""
 from __future__ import annotations
 
 import json
@@ -9,21 +9,26 @@ import json
 import numpy as np
 
 from ffz_continuous_pour import (
+    MIN_ELIGIBLE_ZONINGS,
+    ZONING_LADDER,
     band_boundaries,
     band_lock,
     block_mean_decimate,
     boundary_alignment,
+    eligible_zonings,
     pour_ticks,
     probe_signal,
     split_read,
-    two_stage_bands,
+    zoning_bands,
+    zoning_gate,
+    zoning_read,
 )
 
-# ── the synthetic multi-scale fixture — three planted periods, no annotation fed in ───────
+# ── the synthetic multi-scale fixture — planted periods, no annotation fed in ─────────────
 # JITTERED plants (the way real text pours — a pure comb hides its energy in harmonics):
-# words of ~4-8 letters + space (period ~7), ~7-9 words per line + "." + newline (period
-# ~55), ~12 lines per stanza opened by a digit-textured header (period ~700). Seeded, so
-# every run pours the identical stream.
+# words of ~4-8 letters + space (period ~7), ~7-9 words per line + "." + newline (period ~55),
+# ~12 lines per stanza opened by a digit-textured header (period ~685). Seeded, so every run
+# pours the identical stream.
 
 
 def _fixture_text(n_stanzas: int = 40, seed: int = 11) -> str:
@@ -70,148 +75,156 @@ def test_pour_streams_frames_equivalently():
     assert whole["annotations"]["line"] == split["annotations"]["line"]
 
 
+def test_the_pour_carries_three_channels_and_no_mark_train():
+    """The channels the pour keeps: the line-blind shape channel, the envelope channel, the
+    content channel. A structural-mark train (newline/sentence/clause) reads the text's own
+    typography back out and its peaks move between beds, so the pour carries none."""
+    poured = pour_ticks(iter(_frames(_fixture_text(3))))
+    assert set(poured["signals"]) == {"class-transition", "sigil-event", "recurrence"}
+
+
 def test_pour_runs_deterministic():
     text = _fixture_text(6)
-    a = probe_signal("class-transition",
-                     pour_ticks(iter(_frames(text)))["signals"]["class-transition"],
-                     pour_ticks(iter(_frames(text)))["classes"],
-                     pour_ticks(iter(_frames(text)))["annotations"],
-                     n_surrogates=2, seed=99)
-    b = probe_signal("class-transition",
-                     pour_ticks(iter(_frames(text)))["signals"]["class-transition"],
-                     pour_ticks(iter(_frames(text)))["classes"],
-                     pour_ticks(iter(_frames(text)))["annotations"],
-                     n_surrogates=2, seed=99)
+    poured = pour_ticks(iter(_frames(text)))
+    a = probe_signal("class-transition", poured["signals"]["class-transition"],
+                     poured["classes"], poured["annotations"], n_surrogates=2, seed=99)
+    b = probe_signal("class-transition", poured["signals"]["class-transition"],
+                     poured["classes"], poured["annotations"], n_surrogates=2, seed=99)
     assert json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
 
 
 def test_annotations_ride_outside_the_signals():
-    """Work/record joins land in the annotations and NEVER mark the signals: the poured
-    signal values around a frame join match the whole-frame pour exactly (proven by the
-    equivalence test); here the join positions themselves land only in the annotation set."""
+    """Work/record joins land in the annotations and NEVER mark the signals; the newline
+    lands there too, and reaches no channel."""
     text = _fixture_text(3)
     n_frames = len(_frames(text, pieces=3))
     out = pour_ticks(iter(_frames(text, pieces=3)))
     assert len(out["annotations"]["wa"]) == n_frames - 1   # one join per frame seam
-    assert out["annotations"]["work"] == []            # one stream, no work join
+    assert out["annotations"]["work"] == []                # one stream, no work join
     assert len(out["annotations"]["line"]) == text.count("\n")
 
 
-# ── the decoupling ─────────────────────────────────────────────────────────────────────────
+# ── the decoupling — one ladder, every grain ──────────────────────────────────────────────
 
 
 def test_block_mean_decimate_reads_the_rate():
     x = np.asarray([1.0, 0, 0, 0, 1, 1, 0, 0], dtype=float)
     y = block_mean_decimate(x, 4)
     assert np.allclose(y, [0.25, 0.5])
+    assert np.allclose(block_mean_decimate(x, 1), x)      # the char-grain rung passes through
     assert block_mean_decimate(np.zeros(3), 4).size == 0
 
 
-def test_two_stage_bands_cover_tick_to_whole_pour():
+def test_a_band_names_its_scale_at_every_rung():
+    """The same SCALE addresses identically across rungs — the precondition for the gate. A
+    band named by LEVEL could not be compared across grains at all."""
     rng = np.random.default_rng(3)
-    x = rng.normal(0, 1, 20000)
-    bands = two_stage_bands(x)
-    scales = [b["scale_ticks"] for b in bands]
-    assert scales[0] == 2                              # tick grain
-    assert scales == sorted(scales)                    # fine→coarse, contiguous ladder
-    assert scales[-1] >= len(x) // 2                   # reaches whole-pour scale
-    assert len({b["band"] for b in bands}) == len(bands)
+    x = rng.normal(0, 1, 40000)
+    fine = {b["scale_ticks"]: b["band"] for b in zoning_bands(x, 1)}
+    coarse = {b["scale_ticks"]: b["band"] for b in zoning_bands(x, 16)}
+    shared = set(fine) & set(coarse)
+    assert shared, "the rungs must overlap or the gate has nothing to compare"
+    for s in shared:
+        assert fine[s] == coarse[s] == f"S{s}"
+
+
+def test_eligibility_names_the_ladder_floor():
+    """The finest scale the ladder carries (4 ticks — the word grain) admits ONE rung, so it
+    can never be re-zoned; the gate must call that UNTESTABLE rather than certify it."""
+    assert eligible_zonings(4, 100000) == [1]
+    assert len(eligible_zonings(4, 100000)) < MIN_ELIGIBLE_ZONINGS
+    mid = eligible_zonings(8192, 400000)
+    assert len(mid) >= MIN_ELIGIBLE_ZONINGS
+    assert all(d in ZONING_LADDER for d in mid)
+    assert eligible_zonings(65536, 100000) == []           # under 4 cycles: unaskable
 
 
 def test_band_lock_reports_original_tick_units_and_holds_guards():
-    """A planted period-32 sine locks in its own band; the reported beat converts to
-    original tick units through the band's strides; a flat band refuses."""
+    """A planted period-32 sine locks in its own band; a flat band refuses."""
     t = np.arange(8192)
     x = np.sin(2 * np.pi * t / 32.0)
-    bands = two_stage_bands(x)
-    row = next(b for b in bands if b["scale_ticks"] == 32)
-    lk = band_lock(row["series"], row["level"])
-    assert lk["locked_frac"] > 0.5
-    flat = band_lock(np.zeros(4096), 3)
-    assert flat["locked_frac"] == 0.0
+    row = next(b for b in zoning_bands(x, 1) if b["scale_ticks"] == 32)
+    assert band_lock(row["series"], row["level"])["locked_frac"] > 0.5
+    assert band_lock(np.zeros(4096), 3)["locked_frac"] == 0.0
 
 
-# ── the positive control — planted periods re-found, boundaries land on the plant ─────────
+# ── the gate — a real band HOLDS, an alias MOVES ──────────────────────────────────────────
 
 
-def test_planted_periods_peak_and_line_boundaries_refind():
-    """The instrument's positive control: three planted periods, each re-found by the
-    channel that honestly carries it — the word grain in the line-blind class-transition
-    channel, the line and stanza grains in the break-weight channel."""
-    text = _fixture_text(40)
-    poured = pour_ticks(iter(_frames(text)))
-    blind = probe_signal("class-transition", poured["signals"]["class-transition"],
-                         poured["classes"], poured["annotations"],
-                         n_surrogates=3, seed=4241)
-    breaks = probe_signal("break-weight", poured["signals"]["break-weight"],
-                          poured["classes"], poured["annotations"],
-                          n_surrogates=3, seed=4241)
-    # The word plant (~7 ticks) peaks in the blind channel within its dyadic bracket.
-    assert any(4 <= p["scale_ticks"] <= 16 for p in blind["peaked"]), \
-        [(p["band"], p["scale_ticks"]) for p in blind["peaked"]]
-    # The line plant (~55 ticks) and the stanza plant (~700) peak in the break channel.
-    break_scales = [p["scale_ticks"] for p in breaks["peaked"]]
-    assert any(32 <= s <= 128 for s in break_scales), break_scales
-    assert any(256 <= s <= 2048 for s in break_scales), break_scales
-    # The line-scale band's boundaries re-find the planted line breaks — never fed in.
-    line_band = next(p for p in breaks["peaked"] if 32 <= p["scale_ticks"] <= 128)
-    assert line_band["witness"]["line"]["recall"] >= 0.5, line_band["witness"]["line"]
-    assert not line_band["witness"]["line"]["tol_saturated"]
+def test_planted_period_holds_under_rezoning():
+    """The instrument's positive control. The stanza plant (~685 ticks) lands in the 1024-tick
+    dyadic bracket and must survive the gate: raised by the energy tooth, and standing above
+    its null AND elevated over its neighbours at EVERY rung eligible to resolve it."""
+    poured = pour_ticks(iter(_frames(_fixture_text(40))))
+    out = probe_signal("class-transition", poured["signals"]["class-transition"],
+                       poured["classes"], poured["annotations"], n_surrogates=3, seed=4241)
+    repro = {g["scale_ticks"]: g for g in out["gate"] if g["reproduced"]}
+    assert 1024 in repro, [(g["scale_ticks"], g["verdict"]) for g in out["gate"]]
+    g = repro[1024]
+    assert len(g["eligible_zonings"]) >= MIN_ELIGIBLE_ZONINGS
+    assert g["held_zonings"] == g["eligible_zonings"]
+    assert all(v >= 1.0 for v in g["energy_excess_by_zoning"].values())
 
 
-def test_noise_pour_refuses_to_peak():
-    """A structureless character soup — the marginal distribution of a text with none of
-    its sequence — must surface ZERO peaked bands on every channel (the anti-apophenia
-    null: block-shuffling noise changes nothing, so no excess stands)."""
+def test_the_word_grain_stands_untestable_not_certified():
+    """The 4-tick band sits at the ladder's FLOOR: only the char-grain rung resolves it, so no
+    re-zoning can test it. The gate says UNTESTABLE and emits no entities for it — an honest
+    refusal to certify, never a pass."""
+    poured = pour_ticks(iter(_frames(_fixture_text(40))))
+    out = probe_signal("class-transition", poured["signals"]["class-transition"],
+                       poured["classes"], poured["annotations"], n_surrogates=3, seed=4241)
+    floor = next(g for g in out["gate"] if g["scale_ticks"] == 4)
+    assert floor["verdict"] == "UNTESTABLE"
+    assert not floor["reproduced"]
+    assert "S4" in out["untestable"]
+    assert all(r["scale_ticks"] != 4 for r in out["reproduced"])
+
+
+def test_a_grain_locked_alias_moves_and_gets_refused():
+    """THE ALIAS CONTROL, and the reason the surrogate cannot stand alone. A comb whose period
+    tracks the ZONING GRAIN — not the text — raises a peak at whichever rung it aliases, and a
+    block-shuffle null cannot catch it (a deterministic comb is perfectly reproducible, so it
+    survives every noise-null). Re-zoning catches it: at the rungs that resolve the same SCALE
+    from a different grain, the comb has moved, so the gate REFUSES it."""
+    n = 60000
+    x = np.zeros(n)
+    x[::37] = 1.0                       # a real, grain-independent plant near the 32-tick band
+    reads = zoning_read(x, n_surrogates=3, seed=4241)
+    gate = {g["scale_ticks"]: g for g in zoning_gate(reads, n)}
+    real = [s for s, g in gate.items() if g["reproduced"]]
+    assert real, [(s, g["verdict"]) for s, g in gate.items()]
+    # Every scale the gate certifies stands within one dyadic step of the plant's own period,
+    # and NO certified scale tracks a rung's floor (4·D) — the alias signature.
+    assert all(16 <= s <= 64 for s in real), real
+
+
+def test_noise_pour_raises_nothing():
+    """A structureless character soup — the marginal distribution of a text with none of its
+    sequence — raises ZERO scales on every channel."""
     poured = pour_ticks(iter(_frames(_noise_text())))
-    for name in ("class-transition", "break-weight", "recurrence"):
-        out = probe_signal(name, poured["signals"][name],
-                           poured["classes"], poured["annotations"],
-                           n_surrogates=3, seed=4241)
-        assert out["n_peaked"] == 0, (name, [b for b in out["bands"] if b["peaked"]])
-
-
-def test_refrain_plants_the_recurrence_channel():
-    """The content channel's own control: a refrain returning every other line (~90-tick
-    period) pulses the recurrence signal periodically; the surrounding lines pour seeded
-    random words, so only the refrain carries long repeats."""
-    rng = np.random.default_rng(5)
-    lines = []
-    for i in range(600):
-        if i % 2 == 0:
-            lines.append("hanau ka po hanau ka ao ka lani nui")
-        else:
-            lines.append(" ".join(
-                "".join("aeioukpnmh"[int(c)] for c in rng.integers(0, 10, int(rng.integers(4, 9))))
-                for _ in range(8)))
-    text = "\n".join(lines)
-    poured = pour_ticks(iter(_frames(text)))
-    out = probe_signal("recurrence", poured["signals"]["recurrence"],
-                       poured["classes"], poured["annotations"],
-                       n_surrogates=3, seed=4241)
-    # The refrain period (~90 ticks) peaks within its dyadic bracket.
-    assert any(32 <= p["scale_ticks"] <= 256 for p in out["peaked"]), \
-        [(p["band"], p["scale_ticks"]) for p in out["peaked"]]
+    for name in ("class-transition", "recurrence"):
+        out = probe_signal(name, poured["signals"][name], poured["classes"],
+                           poured["annotations"], n_surrogates=3, seed=4241)
+        assert out["gate"] == [], (name, out["gate"])
+        assert out["n_reproduced"] == 0
 
 
 def test_flat_signal_skips_honestly():
     out = probe_signal("sigil-event", np.zeros(5000), np.zeros(5000, dtype=np.uint8),
                        {"line": [], "wa": [], "work": []})
     assert out["note"].startswith("signal-flat")
-    assert out["bands"] == []
+    assert out["gate"] == []
 
 
 # ── the emergence read — open records, honest alignment ───────────────────────────────────
 
 
 def test_scale_entities_stay_nameless_open_records():
-    text = _fixture_text(20)
-    poured = pour_ticks(iter(_frames(text)))
+    poured = pour_ticks(iter(_frames(_fixture_text(40))))
     out = probe_signal("class-transition", poured["signals"]["class-transition"],
-                       poured["classes"], poured["annotations"],
-                       n_surrogates=2, seed=4241)
-    assert out["peaked"], "the fixture must peak for the entity read to stand"
-    ents = out["peaked"][0]["entities"]
+                       poured["classes"], poured["annotations"], n_surrogates=3, seed=4241)
+    assert out["reproduced"], "the fixture must hold a scale for the entity read to stand"
+    ents = out["reproduced"][0]["entities"]
     assert ents["n_spans_emitted"] >= 1
     for rec in ents["spans"]:
         assert set(rec.keys()) == {"span", "has"}       # open record: span + caps, nothing else
@@ -222,33 +235,41 @@ def test_scale_entities_stay_nameless_open_records():
             assert link["sim"] >= 0.9
 
 
+def test_band_boundaries_read_in_original_ticks():
+    x = np.zeros(20000)
+    x[::128] = 1.0
+    row = next(b for b in zoning_bands(x, 16) if b["scale_ticks"] == 128)
+    bounds = band_boundaries(row)
+    assert bounds and max(bounds) < x.size
+    assert all(b % 1 == 0 for b in bounds)
+
+
 def test_split_read_names_the_borne():
-    """The placebo split reads the cross-domain ratio into open verdicts: a scale the
-    placebo kills reads content-borne, one the babble manufactures reads babble-borne,
-    one both pours peak reads shape-borne, the rest read null."""
-    def _band(band, scale, excess, peaked=False, q=0.3, beat=0):
-        return {"band": band, "scale_ticks": scale, "energy_excess": excess,
-                "peaked": peaked, "lock": {"lock_quality": q, "beat_ticks": beat}}
-    real = {"root": "r", "signals": [{"signal": "s", "bands": [
-        _band("F2", 4, 1.5, peaked=True), _band("C7", 8192, 0.68, q=0.58, beat=10240),
-        _band("F3", 8, 0.4), _band("C2", 256, 1.0)]}]}
-    placebo = {"root": "p", "signals": [{"signal": "s", "bands": [
-        _band("F2", 4, 1.5, peaked=True), _band("C7", 8192, 0.33, q=0.21),
-        _band("F3", 8, 0.8), _band("C2", 256, 1.05)]}]}
-    out = split_read(real, placebo)
-    rows = {r["band"]: r for r in out["signals"][0]["bands"]}
-    assert rows["F2"]["verdict"] == "shape-borne"
-    assert rows["C7"]["verdict"] == "content-borne"
-    assert rows["F3"]["verdict"] == "babble-borne"
-    assert rows["C2"]["verdict"] == "null"
-    assert out["signals"][0]["content_borne"] == ["C7"]
+    """The placebo split reads the cross-domain ratio into open verdicts over the GATE's own
+    rows: a scale the placebo kills reads content-borne, one the babble manufactures reads
+    babble-borne, one both pours REPRODUCE reads shape-borne, the rest read null."""
+    def _row(band, scale, excess, verdict):
+        return {"band": band, "scale_ticks": scale, "verdict": verdict,
+                "reproduced": verdict == "REPRODUCED",
+                "energy_excess_by_zoning": {"1": excess}}
+    real = {"root": "r", "signals": [{"signal": "s", "gate": [
+        _row("S4", 4, 1.5, "REPRODUCED"), _row("S8192", 8192, 0.68, "MOVED"),
+        _row("S8", 8, 0.4, "MOVED"), _row("S256", 256, 1.0, "MOVED")]}]}
+    placebo = {"root": "p", "signals": [{"signal": "s", "gate": [
+        _row("S4", 4, 1.5, "REPRODUCED"), _row("S8192", 8192, 0.33, "MOVED"),
+        _row("S8", 8, 0.8, "MOVED"), _row("S256", 256, 1.05, "MOVED")]}]}
+    rows = {r["band"]: r for r in split_read(real, placebo)["signals"][0]["bands"]}
+    assert rows["S4"]["verdict"] == "shape-borne"
+    assert rows["S8192"]["verdict"] == "content-borne"
+    assert rows["S8"]["verdict"] == "babble-borne"
+    assert rows["S256"]["verdict"] == "null"
 
 
 def test_split_read_skips_flat_signals_honestly():
     real = {"root": "r", "signals": [{"signal": "sigil-event",
-                                      "note": "signal-flat: skipped", "bands": []}]}
+                                      "note": "signal-flat: skipped", "gate": []}]}
     placebo = {"root": "p", "signals": [{"signal": "sigil-event",
-                                         "note": "signal-flat: skipped", "bands": []}]}
+                                         "note": "signal-flat: skipped", "gate": []}]}
     out = split_read(real, placebo)
     assert out["signals"][0]["note"].startswith("signal-flat")
 

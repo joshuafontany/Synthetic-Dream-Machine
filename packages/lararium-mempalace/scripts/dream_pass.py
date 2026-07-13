@@ -85,6 +85,7 @@ import sys
 import content_io as cio
 from corpus_testbed import _refuse_comparator
 from form_induction import _preorder_types, _seq_support, induce_forest
+from plane_base import sole_pattern_tree
 from run_projector import _read_planes, build_assignment
 from sensorium_consistency import consistency_radius
 from sensorium_fusion import cohomology_obstruction, fuse
@@ -252,14 +253,19 @@ def consolidate_schema(planes: dict, *, min_support: int, max_forms: int,
     symbol sequence rides the record's pre-order stream). Returns the induced forms,
     the per-record membership map, and the per-template member lists."""
     cids = [r["cid"] for r in planes["records"]]
-    forest = [planes["trees"][c] for c in cids if c in planes["trees"]]
+    # Induction reads ONE pre-order stream per record, so it needs a FUNCTIONAL structure map. The
+    # registry does not promise one — `sole_pattern_tree` hands it over where the corpus supplies it
+    # and raises, naming the records, where it does not (plane_base). It never picks.
+    trees = sole_pattern_tree(planes["registry"], cids,
+                              instrument="dream_pass.consolidate_schema")
+    forest = [trees[c] for c in cids if c in trees]
     res = induce_forest(forest, min_support=min_support, max_forms=max_forms,
                         max_candidates=max_candidates)
     forms = res["forms"]
 
     membership: dict = {}
     for c in cids:
-        tree = planes["trees"].get(c)
+        tree = trees.get(c)
         if tree is None:
             continue                    # no structure -> no membership (the chain holds honest)
         stream: list = []

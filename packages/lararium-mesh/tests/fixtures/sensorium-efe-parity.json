@@ -221,6 +221,7 @@
         "restrictions": [
           {
             "plane": "content",
+            "base": "record",
             "variance": "sheaf",
             "value": {
               "a": 0.5,
@@ -229,6 +230,7 @@
           },
           {
             "plane": "structure",
+            "base": "record",
             "variance": "sheaf",
             "value": {
               "b": 0.7,
@@ -237,6 +239,7 @@
           },
           {
             "plane": "form",
+            "base": "record",
             "variance": "sheaf",
             "value": {
               "c": 0.7,
@@ -263,6 +266,7 @@
         "restrictions": [
           {
             "plane": "content",
+            "base": "record",
             "variance": "sheaf",
             "value": {
               "a": 0.5,
@@ -271,6 +275,7 @@
           },
           {
             "plane": "structure",
+            "base": "record",
             "variance": "sheaf",
             "value": {
               "b": 0.7,
@@ -279,6 +284,7 @@
           },
           {
             "plane": "form",
+            "base": "record",
             "variance": "sheaf",
             "value": {
               "c": 0.7,

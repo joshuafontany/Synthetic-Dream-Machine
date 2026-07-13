@@ -6,6 +6,8 @@ the exact H0 consensus; the cosheaf refusal raises.
 """
 import pytest
 
+from plane_base import BASE_RECORD
+
 from sensorium_fusion import (
     agreement_nerve,
     cohomology_obstruction,
@@ -15,8 +17,10 @@ from sensorium_fusion import (
 )
 
 
-def _sheaf(plane, value):
-    return {"plane": plane, "variance": "sheaf", "value": value}
+def _sheaf(plane, value, base=BASE_RECORD):
+    """The synthetic units name records; every restriction carries the base it stands over, because
+    the H1 gate refuses one that does not (plane_base)."""
+    return {"plane": plane, "base": base, "variance": "sheaf", "value": value}
 
 
 def _hollow(base=0.5, gap=0.2):
@@ -54,7 +58,7 @@ class TestAgreementNerve:
     def test_cosheaf_refused(self):
         with pytest.raises(ValueError, match="SHEAF planes only"):
             agreement_nerve({"restrictions": [
-                {"plane": "bands", "variance": "cosheaf", "value": {"u": 1.0}}],
+                {"plane": "bands", "base": BASE_RECORD, "variance": "cosheaf", "value": {"u": 1.0}}],
                 "stalk": {"units": ["u"]}})
 
 

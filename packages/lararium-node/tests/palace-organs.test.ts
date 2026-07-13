@@ -167,7 +167,7 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
     // perceptual fibers the parallel fills WHEN it perceives them.
     for (const m of [who, auth, flow]) {
       expect(m.has["persistence"]!.variance).toBe("cosheaf");
-      expect(m.persistencePolicy).toEqual({ admitThreshold: 0.5, halfLife: null });
+      expect(m.persistencePolicy).toEqual({ halfLife: null });
     }
     // FLOW reserves its coupling-lobe child-edges (empty) for the node-stream effective-connectivity.
     expect(flow.coupling.children).toEqual([]);

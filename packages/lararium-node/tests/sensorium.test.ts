@@ -120,12 +120,12 @@ describe("sensorium — the persistence cap (the 5th part, path-A un-fuse)", () 
         content: { absDir: "/home/u/.mempalace", engine: "mempalace" },              // li sheaf (default)
         persistence: { absDir: dir + "/persistence", engine: "persistence", variance: "cosheaf" },
       },
-      persistencePolicy: { admitThreshold: 0.5, halfLife: null },                     // witness/authority mode
+      persistencePolicy: { halfLife: null },                     // witness/authority mode
     });
     expect(m.has["persistence"]!.variance).toBe("cosheaf");
     expect(planeVariance(m, "persistence")).toBe("cosheaf");                          // read from the fiber's own tag
     expect(planeVariance(m, "content")).toBe("sheaf");
-    expect(m.persistencePolicy).toEqual({ admitThreshold: 0.5, halfLife: null });
+    expect(m.persistencePolicy).toEqual({ halfLife: null });
   });
 
   test("path-A: the maturation mode rides halfLife, ORTHOGONAL to the ephemeral bool", () => {
@@ -134,7 +134,7 @@ describe("sensorium — the persistence cap (the 5th part, path-A un-fuse)", () 
     const m = buildSensoriumManifest(dir, {
       sensorium: "scratch", lar: "lar:///y",
       caps: { persistence: { absDir: dir + "/p", engine: "persistence", variance: "cosheaf" } },
-      persistencePolicy: { admitThreshold: 0.5, halfLife: 2592000 },                  // affinity mode
+      persistencePolicy: { halfLife: 2592000 },                  // affinity mode
       ephemeral: false,                                                               // but durable-on-disk
     });
     expect(m.ephemeral).toBe(false);                 // swept-on-exit axis UNTOUCHED

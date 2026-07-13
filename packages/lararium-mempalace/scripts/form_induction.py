@@ -412,7 +412,6 @@ def delta_p_bigrams(streams: list, dp_min: float = _DP_MIN, min_support: int = _
         then_b = sum(cnt for (_x, y), cnt in bigram.items() if y == b) or 1
         not_then_b = total_bigrams - then_b or 1
         a_before_b = n_ab
-        nota_before_b = then_b - n_ab
         p_a_given_b = a_before_b / then_b
         p_a_given_notb = max(n_a - n_ab, 0) / not_then_b
         dp_a_b = p_a_given_b - p_a_given_notb
@@ -699,7 +698,10 @@ def _read_structure_forest(structure_dir: str) -> tuple[list, str | None]:
         if not doc:
             continue
         meta = metas[i] if i < len(metas) else {}
-        if isinstance(meta, dict) and meta.get("lar_tombstoned_at"):
+        # The kapae gate reads `lar_tombstoned` — the key structurepalace_io actually stamps at
+        # set-aside. Any other spelling reads absent on every row and lets every set-aside structure
+        # straight into the forest.
+        if isinstance(meta, dict) and meta.get("lar_tombstoned"):
             continue
         try:
             tree = json.loads(doc)

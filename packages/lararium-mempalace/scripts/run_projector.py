@@ -64,9 +64,19 @@ from sensorium_consistency import (
     cosine_distance,
     jaccard_distance,
 )
+from plane_base import (
+    BASE_RECORD,
+    combine_sum_histogram,
+    pushforward,
+    pushforward_origin,
+    read_pattern_registry,
+    records_to_patterns,
+    sheaf_section,
+    to_labeled,
+)
+from plane_capacity import ceiling_index
 from sensorium_efe import efe_gate
 from sensorium_fusion import cohomology_obstruction
-from structurepalace_io import _node_label
 
 # The bench's fixed verb-set + quiescent C-vector — the gate's H1=0 branch scores these
 # (bifurcation-bench.ts BENCH_VERBS/BENCH_C, carried by contract).
@@ -108,12 +118,18 @@ def _alpha_to_confidence(alpha: float) -> float:
 
 
 def _read_planes(root: str) -> dict:
-    """Read the three durable plane stores under `root` — content rows + vectors,
-    structure trees keyed back to cids by provenance (tombstoned rows feed nothing),
-    form membership sets by cid. Record order sorts on (source_file, cid): a stable,
-    content-free corpus order every series reads through."""
+    """Read the durable plane stores under `root`, EACH OVER ITS OWN BASE.
+
+    · content — rows + warm-embed vectors, keyed by drawer cid (the RECORD base).
+    · structure — the PATTERN REGISTRY, read as itself: a fiber per structural hash carrying its
+      recurrence count, its sightings, and the record list `lar_provenance` lays it over. It does
+      NOT get flattened to one-tree-per-record here; the pushforward does that later, explicitly,
+      and a record exhibiting several patterns keeps all of them (plane_base).
+    · form — induced-template membership sets, keyed by drawer cid (the RECORD base).
+
+    Record order sorts on (source_file, cid): a stable, content-free corpus order every series
+    reads through."""
     from form_encoder import FormPalaceStore
-    from structurepalace_io import StructurePalaceStore
 
     store = cio.ContentStore(os.path.join(root, "content"))
     records = []
@@ -126,27 +142,7 @@ def _read_planes(root: str) -> dict:
         offset = page["next"]
     records.sort(key=lambda r: ((r.get("metadata") or {}).get("source_file", ""), r["cid"]))
 
-    structure_store = StructurePalaceStore(os.path.join(root, "structure"))
-    got = structure_store._col.get(include=["documents", "metadatas"])  # noqa: SLF001 — the projector reads the raw plane
-    trees: dict = {}
-    hash_of: dict = {}
-    for i, h in enumerate(got.get("ids") or []):
-        meta = (got.get("metadatas") or [{}])[i] or {}
-        if meta.get("lar_tombstoned_at"):
-            continue                       # kapae discipline: a set-aside structure feeds no plane
-        doc = (got.get("documents") or [None])[i]
-        try:
-            tree = json.loads(doc) if doc else None
-            provenance = json.loads(meta.get("lar_provenance") or "[]")
-        except (ValueError, TypeError):
-            continue
-        if not isinstance(tree, dict):
-            continue
-        for line in provenance:
-            cid = line.get("verbatim_sha")
-            if cid:
-                trees[cid] = tree
-                hash_of[cid] = h
+    registry = read_pattern_registry(root)   # the cosheaf, whole
 
     form_store = FormPalaceStore(os.path.join(root, "form"))
     fgot = form_store._col.get(include=["embeddings"])  # noqa: SLF001
@@ -159,8 +155,7 @@ def _read_planes(root: str) -> dict:
             continue
         memberships[cid] = {j for j, v in enumerate(vec) if float(v) > 0.0}
 
-    return {"records": records, "trees": trees, "hash_of": hash_of,
-            "memberships": memberships}
+    return {"records": records, "registry": registry, "memberships": memberships}
 
 
 def _rank_salience(values: dict) -> dict:
@@ -186,23 +181,22 @@ def _rank_salience(values: dict) -> dict:
     return ranks
 
 
-def _to_labeled(node) -> "dict | None":
-    """Fold a stored parser tree into the DECKARD LabeledTree grain — the content-free
-    label rides structurepalace_io's own _node_label (type/shape, never values)."""
-    if isinstance(node, dict):
-        label = _node_label(node)
-        kids = [v for v in node.values() if isinstance(v, (dict, list))]
-    elif isinstance(node, list):
-        label = "[list]"
-        kids = list(node)
-    else:
-        return None
-    children = []
-    for k in kids:
-        c = _to_labeled(k)
-        if c is not None:
-            children.append(c)
-    return {"label": label, "children": children}
+def structure_fibers(registry, cids: list) -> dict:
+    """THE STRUCTURE PLANE'S RECORD-BASE READING — and the ONLY way it is allowed to get one.
+
+    Each PATTERN carries its own DECKARD characteristic vector (a histogram over q-level subtree
+    patterns) — a fiber over the pattern base. `pushforward` carries those fibers along
+    `lar_provenance` onto the records they lie over, and `combine_sum_histogram` takes the colimit:
+    a record's characteristic vector = the SUM of the vectors of every pattern it exhibits.
+
+    A record exhibiting ONE pattern gets that pattern's vector back unchanged, so a one-to-one
+    corpus reads exactly as before. A record exhibiting several gets all of them — never whichever
+    one the store's row order happened to hand over last."""
+    def fiber(h):
+        lt = to_labeled(registry.trees[h])
+        return characteristic_vector(lt) if lt is not None else None
+
+    return pushforward(registry, cids, fiber, combine_sum_histogram)
 
 
 def _centrality(keys: list, sim) -> dict:
@@ -216,42 +210,44 @@ def _centrality(keys: list, sim) -> dict:
 
 
 def build_assignment(planes: dict) -> dict:
-    """Stand the li-assignment: one sheaf restriction per plane over the shared cid
-    universe, each value = the plane's OWN rank-centrality at that unit. The independence
-    law holds by construction — each block below touches ONE store's data only."""
+    """Stand the li-assignment: one sheaf restriction per plane over the shared RECORD base, each
+    value = the plane's OWN rank-centrality at that record.
+
+    THE INDEPENDENCE LAW holds by construction — each block touches ONE store's data only. THE BASE
+    LAW holds by declaration — content and form key on records natively; structure keys on PATTERNS
+    and reaches the record base only through `structure_fibers`, whose section stamps its origin as
+    the pushforward. Every restriction leaves here carrying the universe it stands over, so the H0
+    radius and the H1 gate can refuse a crossing they cannot see into."""
     records = planes["records"]
     cids = [r["cid"] for r in records]
+    registry = planes["registry"]
 
-    # content — stored warm-embed vectors, cosine hub-centrality (the content mechanism).
+    # content — stored warm-embed vectors, cosine hub-centrality (the content mechanism). Native.
     vectors = {r["cid"]: r.get("embedding") for r in records if r.get("embedding")}
     ckeys = [c for c in cids if c in vectors]
     content_sal = _rank_salience(_centrality(
         ckeys, lambda a, b: 1.0 - cosine_distance(vectors[a], vectors[b])))
 
-    # structure — stored parse trees, DECKARD characteristic-vector centrality.
-    labeled = {}
-    for cid in cids:
-        t = planes["trees"].get(cid)
-        if t is not None:
-            lt = _to_labeled(t)
-            if lt is not None:
-                labeled[cid] = characteristic_vector(lt)
+    # structure — the PATTERN registry, pushed forward onto records, then DECKARD centrality there.
+    labeled = structure_fibers(registry, cids)
     skeys = [c for c in cids if c in labeled]
     structure_sal = _rank_salience(_centrality(
         skeys, lambda a, b: 1.0 - _angular_cosine(labeled[a], labeled[b])))
 
-    # form — stored induced-template membership sets, Jaccard centrality.
+    # form — stored induced-template membership sets, Jaccard centrality. Native.
     members = planes["memberships"]
     fkeys = [c for c in cids if c in members]
     form_sal = _rank_salience(_centrality(
         fkeys, lambda a, b: 1.0 - jaccard_distance(members[a], members[b])))
 
     restrictions = [
-        {"plane": "content", "variance": "sheaf", "value": content_sal},
-        {"plane": "structure", "variance": "sheaf", "value": structure_sal},
-        {"plane": "form", "variance": "sheaf", "value": form_sal},
+        sheaf_section("content", content_sal, base=BASE_RECORD),
+        sheaf_section("structure", structure_sal, base=BASE_RECORD,
+                      origin=pushforward_origin(combine_sum_histogram)),
+        sheaf_section("form", form_sal, base=BASE_RECORD),
     ]
-    return {"restrictions": restrictions, "stalk": {"units": cids}}
+    return {"restrictions": restrictions, "stalk": {"units": cids},
+            "coverage": registry.coverage(cids)}
 
 
 def _plane_reads(assignment: dict, cids: list) -> dict:
@@ -265,18 +261,23 @@ def _plane_reads(assignment: dict, cids: list) -> dict:
 
 
 def _structure_symbols(planes: dict, cids: list) -> tuple:
-    """The symbol stream the complexity trace reads: each record's STRUCTURE-CLASS index
-    (distinct structural hash -> a small alphabet, first-sighting order) — a structure-
-    plane read, never a content one."""
+    """The symbol stream the complexity trace reads: each record's STRUCTURE CLASS on the RECORD
+    base — the SET of patterns lying over it, interned to a small alphabet in corpus order.
+
+    The class is a set because the pushforward is a set (plane_base): two records share a structure
+    symbol when they exhibit the SAME patterns, not when a store iteration order happened to hand
+    them the same one."""
+    per_record = records_to_patterns(planes["registry"], cids)
     classes: dict = {}
     symbols = []
     for cid in cids:
-        h = planes["hash_of"].get(cid)
-        if h is None:
+        fs = per_record.get(cid)
+        if not fs:
             continue
-        if h not in classes:
-            classes[h] = len(classes)
-        symbols.append(classes[h])
+        key = tuple(sorted(fs))
+        if key not in classes:
+            classes[key] = len(classes)
+        symbols.append(classes[key])
     return symbols, max(1, len(classes))
 
 
@@ -370,7 +371,10 @@ def _jittered_assignment(assignment: dict, rng: random.Random, amp: float) -> di
     restrictions = []
     for r in assignment["restrictions"]:
         value = {u: v + (rng.random() * 2.0 - 1.0) * amp for u, v in r["value"].items()}
-        restrictions.append({"plane": r["plane"], "variance": r["variance"], "value": value})
+        # base + origin ride through the null unchanged: a surrogate that dropped the base would
+        # sail past the very gate the real assignment must clear, and the null would test a
+        # DIFFERENT instrument than the observation does.
+        restrictions.append({**r, "value": value})
     return {"restrictions": restrictions, "stalk": assignment["stalk"]}
 
 
@@ -472,6 +476,27 @@ def run(root: str, *, rungs: int, arl_hi: float, arl_lo: float, trials: int,
         f.write(to_csv(rows) + "\n")
 
     per_plane = {r["plane"]: len(r["value"]) for r in result["assignment"]["restrictions"]}
+
+    # NO PLANE GETS REPORTED WITHOUT ITS CEILING BESIDE IT. Every salience series below rides a
+    # channel whose capacity is an exact, estimator-free upper bound (plane_capacity); a plane whose
+    # RECORD-base ceiling sits far under log2(N) cannot carry the record signal, and every downstream
+    # rank, disagreement and dial rung reading it is walking over a channel that already threw the
+    # signal away. The projector prints the bound so that never goes unnoticed again.
+    ceilings = ceiling_index(root)
+    plane_report = {}
+    for r in result["assignment"]["restrictions"]:
+        p = r["plane"]
+        c = ceilings.get(p, {})
+        plane_report[p] = {
+            "units": len(r["value"]),
+            "base": r.get("base"),
+            "origin": r.get("origin"),
+            "ceiling_bits": c.get("record_ceiling_bits"),
+            "record_bits": None if c.get("error") else round(math.log2(n), 4) if n > 1 else 0.0,
+            "share": c.get("share"),
+            "verdict": c.get("verdict") or c.get("error"),
+        }
+
     h1_series = [r["h1_dimH1"] for r in rows]
     gate_series = [r["efe_gate"] for r in rows]
     first_h1 = next((i for i, v in enumerate(h1_series) if v > 0), -1)
@@ -494,6 +519,8 @@ def run(root: str, *, rungs: int, arl_hi: float, arl_lo: float, trials: int,
         "root": root,
         "records": n,
         "plane_units": per_plane,
+        "planes": plane_report,                  # every plane, its base, its origin, ITS CEILING
+        "pushforward_coverage": result["assignment"]["coverage"],
         "alphabet": result["alphabet"],
         "consistency": consistency,
         "rungs": len(rows),

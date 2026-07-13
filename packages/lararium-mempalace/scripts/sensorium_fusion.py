@@ -44,13 +44,17 @@ import sys
 
 import numpy as np
 
+from plane_base import BASE_RECORD, require_base
 from sensorium_consistency import chebyshev_stalk_metric
 
 _DEFAULT_TOL = 1e-9
 
 
-def _assert_no_cosheaf(restrictions: list) -> None:
-    """Refuse any cosheaf plane — the flow-through-restriction silent corruption."""
+def _assert_sheaf_over_one_base(restrictions: list, base: str) -> None:
+    """The gate's TWO refusals. Variance: a ki flow read through a contravariant restriction corrupts
+    silently. Base: the nerve's edges and triangles are built from OVERLAPS of unit sets, so units
+    drawn from different universes produce empty overlaps (or worse, colliding ids) and the nerve
+    silently reports a topology of nothing. Both raise (li-ki-integrities.md#crucible-tested)."""
     bad = [r for r in restrictions if r.get("variance") != "sheaf"]
     if bad:
         names = ", ".join(r["plane"] for r in bad)
@@ -58,6 +62,7 @@ def _assert_no_cosheaf(restrictions: list) -> None:
             f"sensorium_fusion: the cohomology gate admits SHEAF planes only; got cosheaf "
             f"plane(s) [{names}] — a ki flow read through a contravariant restriction "
             f"corrupts silently (li-ki-integrities.md#crucible-tested).")
+    require_base(restrictions, base, instrument="sensorium_fusion.cohomology_obstruction")
 
 
 def _domain_of(restriction: dict, stalk_units: set) -> list:
@@ -69,12 +74,15 @@ def _domain_of(restriction: dict, stalk_units: set) -> list:
 
 
 def agreement_nerve(assignment: dict, *, stalk_metric=None,
-                    agreement_tolerance: float = _DEFAULT_TOL) -> dict:
+                    agreement_tolerance: float = _DEFAULT_TOL, base: str = BASE_RECORD) -> dict:
     """Build the agreement nerve over a li-assignment: an edge stands where two planes
     OVERLAP and AGREE there (disagreement <= tolerance); a triangle fills in where all
-    three edges stand AND a common witness unit lies in the triple overlap."""
+    three edges stand AND a common witness unit lies in the triple overlap.
+
+    Every restriction must stand over ONE declared base — a witness unit shared across planes only
+    witnesses anything if the planes mean the same thing by it."""
     restrictions = assignment["restrictions"]
-    _assert_no_cosheaf(restrictions)
+    _assert_sheaf_over_one_base(restrictions, base)
     metric = stalk_metric or chebyshev_stalk_metric
     eps = agreement_tolerance
     stalk_units = set(assignment["stalk"].get("units") or [])
@@ -128,13 +136,14 @@ def reconciliation_cost(dim_h1: int) -> float:
 
 
 def cohomology_obstruction(assignment: dict, *, stalk_metric=None,
-                           agreement_tolerance: float = _DEFAULT_TOL) -> dict:
+                           agreement_tolerance: float = _DEFAULT_TOL,
+                           base: str = BASE_RECORD) -> dict:
     """Compute the H1 COHOMOLOGICAL OBSTRUCTION of the assignment — the simplicial
     cohomology of the agreement nerve, H1 = ker(d1)/im(d0) over the reals.
     dim H1 = 0 <-> reconcilable; dim H1 > 0 <-> an ontological cocycle. Raises on a
     cosheaf plane."""
     nerve = agreement_nerve(assignment, stalk_metric=stalk_metric,
-                            agreement_tolerance=agreement_tolerance)
+                            agreement_tolerance=agreement_tolerance, base=base)
     V = len(nerve["vertices"])
     E = len(nerve["edges"])
     T = len(nerve["triangles"])
@@ -186,14 +195,14 @@ def kernel_consensus(assignment: dict) -> dict:
 
 
 def fuse(assignment: dict, *, stalk_metric=None,
-         agreement_tolerance: float = _DEFAULT_TOL) -> dict:
+         agreement_tolerance: float = _DEFAULT_TOL, base: str = BASE_RECORD) -> dict:
     """THE COHOMOLOGICAL GATE. Read H1 first, then fork:
       H1 = 0 -> {"verdict": "fuse", "consensus": {unit: value}} — the exact H0 projection;
       H1 > 0 -> {"verdict": "hold-open", "obstruction": {dimH1, cost}} — the ontological
                 cell, surfaced whole, never averaged away.
     Raises on a cosheaf plane."""
     obs = cohomology_obstruction(assignment, stalk_metric=stalk_metric,
-                                 agreement_tolerance=agreement_tolerance)
+                                 agreement_tolerance=agreement_tolerance, base=base)
     if obs["dimH1"] > 0:
         return {"verdict": "hold-open", "fused": None,
                 "obstruction": {"dimH1": obs["dimH1"], "cost": obs["cost"]}}
@@ -205,7 +214,8 @@ def fuse(assignment: dict, *, stalk_metric=None,
 
 
 def _sheaf(plane: str, value: dict) -> dict:
-    return {"plane": plane, "variance": "sheaf", "value": value}
+    """The fixture's synthetic units name records; the base rides the wire with the value."""
+    return {"plane": plane, "base": BASE_RECORD, "variance": "sheaf", "value": value}
 
 
 def _hollow_triangle(base: float, gap: float, tag: str = "") -> dict:
@@ -318,15 +328,24 @@ def cmd_selftest(args) -> None:
     gate = fuse(hollow, agreement_tolerance=0.3)
     try:
         cohomology_obstruction({"restrictions": [
-            {"plane": "bands", "variance": "cosheaf", "value": {"u": 1.0}}],
+            {"plane": "bands", "base": BASE_RECORD, "variance": "cosheaf", "value": {"u": 1.0}}],
             "stalk": {"units": ["u"]}})
         refused = False
     except ValueError:
         refused = True
+    try:
+        # A PATTERN-keyed plane entering the record-base nerve: the crossing raises, never computes.
+        cohomology_obstruction({"restrictions": [
+            _sheaf("content", {"u": 0.5}),
+            {"plane": "structure", "base": "pattern", "variance": "sheaf", "value": {"u": 0.5}}],
+            "stalk": {"units": ["u"]}})
+        base_refused = False
+    except TypeError:
+        base_refused = True
     report = {
         "below_dimH1": below["dimH1"], "above_dimH1": above["dimH1"],
         "gate_holds_open": gate["verdict"] == "hold-open",
-        "cosheaf_refused": refused,
+        "cosheaf_refused": refused, "mixed_base_refused": base_refused,
     }
     sys.stdout.write(json.dumps(report) + "\n")
 
