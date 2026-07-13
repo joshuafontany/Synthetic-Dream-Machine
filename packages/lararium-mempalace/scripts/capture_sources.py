@@ -531,7 +531,12 @@ def corpus_sectioned_source(*, wing: str, room: str = "corpus", extract: bool = 
                             # Wrapped: the carrier's whole text picks the grammar (the sigil
                             # envelope routes every section memetic); extracted: the bare
                             # section picks its own — the ablation's single code asymmetry.
-                            "lar_kind": detect_kind(fp, text if not extract else body) or "",
+                            # An extracted body the sniffer abstains on still IS text — the
+                            # sectioner pulled it out of #source-text by construction, so the
+                            # designation falls to prose rather than a kindless silent skip
+                            # (bare verse under a .mem path landed structure-less otherwise).
+                            "lar_kind": (detect_kind(fp, text) or "") if not extract
+                                        else (detect_kind(fp, body) or "prose"),
                             "lar_mtime_sighting": sighting,
                             "lar_section": label,
                             "lar_section_mode": mode,

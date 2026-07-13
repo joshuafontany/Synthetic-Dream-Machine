@@ -269,3 +269,23 @@ def test_corpus_source_refuses_loud_on_an_empty_yield(tmp_path):
     (root / "code.py").write_text("pass\n")  # filtered by extension; nothing lands
     with pytest.raises(SystemExit, match="ZERO records"):
         list(corpus_source(wing="wing_testbed")(str(root)))
+
+
+def test_sectioned_extract_designates_prose_when_the_sniffer_abstains(tmp_path):
+    # Bare verse pulled from #source-text IS text by construction — extracted mode
+    # designates prose where detect_kind abstains, so the structure plane never
+    # silently skips a whole thesis bed (the kumulipo-extracted regenesis catch).
+    carrier = "\n".join([
+        "<<~ ahu #source-text >>",
+        "## The First Era", "O ke au i kahuli wela ka honua", "",
+        "## The Second Era", "Hanau ka po", "",
+        "<<~/ahu >>",
+    ])
+    root = tmp_path / "kumulipo"
+    root.mkdir()
+    (root / "kumulipo-liliuokalani.mem").write_text(carrier)
+    from capture_sources import corpus_sectioned_source
+    recs = list(corpus_sectioned_source(wing="wing_testbed", extract=True)(str(root)))
+    assert recs, "the sectioner still cuts the carrier"
+    assert all(r["metadata"]["lar_kind"] for r in recs), "no record rides kindless"
+    assert {r["metadata"]["lar_kind"] for r in recs} <= {"prose", "markdown", "memetic-wikitext"}
