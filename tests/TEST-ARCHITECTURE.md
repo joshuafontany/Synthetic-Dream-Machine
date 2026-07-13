@@ -18,7 +18,13 @@
 | `@lararium/keyhive` | capability provider, ceremonies | `pnpm --filter @lararium/keyhive test` |
 | `@lares/cli` | command surfaces | `pnpm --filter @lares/cli test` |
 
-Whole workspace: **`pnpm -r test`** (also `pnpm test`).
+Whole workspace: **`pnpm test`** — which runs `pnpm -r --workspace-concurrency=1 test`.
+
+**The serialization is load-bearing, not a preference.** Several packages drive the SAME python palace
+holders and stand their own TW5 islands. Run the workspace concurrently and those packages contend for
+one holder, its RPC deadline expires, and a test fails naming a timeout — the suite reports the machine's
+spare capacity as the code's correctness. This is the single-owner law reaching the test runner: one
+sovereign body per store, tests included. Run `pnpm -r test` by hand and expect flakes under load.
 
 The browser worker bundle (for the M.3 breathing gate) is **package-local** — built into `packages/lararium-browser/tests/fixtures/` by `vite.worker-test.config.ts`. It does NOT live here.
 

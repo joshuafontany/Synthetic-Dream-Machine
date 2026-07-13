@@ -217,15 +217,20 @@ def test_cmd_induce_graceful_skip_when_no_store(tmp_path):
     assert "form-skipped" in summary["note"]
 
 
-def test_mine_sequences_bounds_long_repetitive_streams():
-    """The sequence miner slices each stream to _MAX_SEQ_SYMBOLS before mining — long
-    repetitive streams (the sectioned-chant regime: thousands of near-identical symbols)
-    explode the closed-pattern lattice unbounded; the capped miner returns promptly and
-    still surfaces the recurring patterns."""
+def test_mine_sequences_reads_full_streams_without_a_cap():
+    """The lattice walk retired: maximal repeats read the WHOLE streams (no slice, no
+    top-k) and return promptly on exactly the regime that blew the closed lattice —
+    long repetitive low-alphabet streams (the sectioned-chant shape)."""
+    import time
+
     streams = [(["paragraph", "inline", "text"] * 1200) + [f"tail{i}"] for i in range(8)]
+    t0 = time.time()
     out = fi.mine_sequences(streams, 2, max_forms=8, topk=True)
-    assert out                                          # the recurring motif still surfaces
-    assert all(len(f["seq"]) <= fi._MAX_SEQ_SYMBOLS for f in out)
+    assert time.time() - t0 < 60                       # the lattice never returned at all
+    assert out                                         # the recurring motif still surfaces
+    top = out[0]
+    assert top["support"] == 8                         # the motif rides every stream
+    assert ["paragraph", "inline", "text"] * 2 <= top["seq"] or "paragraph" in top["seq"]
 
 
 def test_emb_forest_survives_a_node_count_past_the_recursion_limit():

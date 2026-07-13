@@ -3,27 +3,26 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "baseUrl": ".",
     "paths": {
       "@lararium/mesh": [
-        "packages/lararium-mesh/src/index.ts"
+        "./packages/lararium-mesh/src/index.ts"
       ],
       "@lararium/mesh/*": [
-        "packages/lararium-mesh/*",
-        "packages/lararium-mesh/src/*"
+        "./packages/lararium-mesh/*",
+        "./packages/lararium-mesh/src/*"
       ],
-"@lararium/tw5": [
-        "packages/lararium-tw5/src/index.ts"
+      "@lararium/tw5": [
+        "./packages/lararium-tw5/src/index.ts"
       ],
       "@lararium/tw5/*": [
-        "packages/lararium-tw5/*",
-        "packages/lararium-tw5/src/*"
+        "./packages/lararium-tw5/*",
+        "./packages/lararium-tw5/src/*"
       ],
       "@lararium/mesh/meme-ast": [
-        "packages/lararium-mesh/src/meme-ast/index.ts"
+        "./packages/lararium-mesh/src/meme-ast/index.ts"
       ],
       "@lararium/mesh/node": [
-        "packages/lararium-mesh/src/node.ts"
+        "./packages/lararium-mesh/src/node.ts"
       ]
     },
     "strict": true,
@@ -34,7 +33,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "isolatedModules": true
   }
 }

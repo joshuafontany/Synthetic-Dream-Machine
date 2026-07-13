@@ -28,7 +28,11 @@ export interface DigestProvider {
 }
 
 export interface RandomProvider {
-  getRandomValues<T extends Uint8Array>(array: T): T;
+  // The view MUST sit over a plain ArrayBuffer: every provider behind this port fills through Web
+  // Crypto, which refuses a SharedArrayBuffer-backed view. Uint8Array carries its backing buffer as a
+  // type parameter, so an unconstrained `T extends Uint8Array` lets a caller hand over a shared view the
+  // implementation will reject at runtime — the port would promise a fill nobody performs.
+  getRandomValues<T extends Uint8Array<ArrayBuffer>>(array: T): T;
   randomUUID(): string;
 }
 
@@ -47,7 +51,10 @@ export async function webDigest(
   return new Uint8Array(await subtle.digest(algorithm, data.buffer as ArrayBuffer));
 }
 
-export function webGetRandomValues<T extends Uint8Array>(array: T): T {
+// The buffer type rides the constraint: Web Crypto fills a view over a plain ArrayBuffer and REFUSES a
+// SharedArrayBuffer-backed one. A bare `T extends Uint8Array` admits either, since Uint8Array carries its
+// backing buffer as a type parameter — so the signature promised a fill the runtime declines to perform.
+export function webGetRandomValues<T extends Uint8Array<ArrayBuffer>>(array: T): T {
   const fn = globalThis.crypto?.getRandomValues?.bind(globalThis.crypto);
   if (!fn) throw new Error("crypto.getRandomValues unavailable in this runtime");
   return fn(array);

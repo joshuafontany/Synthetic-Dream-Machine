@@ -73,8 +73,6 @@ _MAX_TREES = 20_000          # forest size ceiling for a single induce
 _MAX_STRUCTURE_COUNT = 500   # per-structure recurrence-expansion cap (a hot shape can't flood)
 _MAX_SUBTREE_NODES = 6       # the largest embedded subtree the TreeMiner grows to
 _MAX_CANDIDATES = 4_000      # candidate-pool ceiling (across all miners)
-_MAX_SEQ_SYMBOLS = 512       # per-stream slice the sequence miner reads (see mine_sequences)
-_MAX_SEQ_TOPK = 16           # topk ceiling for the closed-sequence search (see mine_sequences)
 _MAX_FORMS_DEFAULT = 64      # constructicon-size ceiling (the MDL rounds stop far sooner)
 _DEFAULT_MIN_SUPPORT = 2     # a template must recur at least this many trees/sequences
 _DP_MIN = 0.25               # the ΔP association floor for a candidate bigram
@@ -334,48 +332,35 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
 
 def mine_sequences(streams: list, min_support: int, *, max_forms: int = _MAX_FORMS_DEFAULT,
                    min_len: int = 2, topk: bool = False) -> list:
-    """Frequent CLOSED subsequences of the pre-order type streams. Prefers the `prefixspan`
-    package (PrefixSpan + BIDE-closed + top-k); falls back to a compact native BIDE-ish
-    miner so a bare venv still surfaces sequences. Returns [{seq, support}] as symbol lists.
+    """Recurring CONTIGUOUS runs of the pre-order type streams — every maximal repeat
+    over the FULL streams, surfaced linearly (maximal_repeats), priced downstream by
+    the MDL rounds. Returns [{seq, support, occurrences}] as symbol lists.
 
-    `topk=True` rides the package's branch-and-bound top-k (support-strongest first) instead
-    of the exhaustive closed enumeration — `frequent(closed=True)` walks the WHOLE pattern
-    lattice before any slice, which grinds for minutes on real ~500-symbol streams; the
-    bounded per-pass induce needs the strongest max_forms only.
+    THE LATTICE WALK RETIRED. The closed-subsequence miner (PrefixSpan/BIDE) ground
+    structurally on low-alphabet repetitive streams — the closed lattice runs
+    exponential in pattern length there, and every bound that hid it (the per-stream
+    symbol slice, the top-k cap, dropped closed-pruning) truncated silently. Maximal
+    repeats carry the contiguous case's closure by definition (extendable neither way
+    without losing an occurrence), the pool bounds by the STRING itself (<= n-2 per
+    stream — a theorem, never a knob), and gapped subsequences hand their job to the
+    tree lane, where ancestor/sibling-order gaps read structurally instead of joining
+    unrelated subtrees across a bracketless preorder stream.
 
-    THREE bounds keep the pattern search from exploding on long repetitive streams (the
-    sectioned markdown chant regime: thousands of near-identical symbols), all measured
-    on the kumulipo bed: each stream slices to its first _MAX_SEQ_SYMBOLS (800-symbol
-    streams blow past 500s, uncapped never returns); the top-k request caps at
-    _MAX_SEQ_TOPK; and the top-k branch drops closed-pruning — the package's
-    canclosedprune/islocalclosed scans grind NON-monotonically (k=16 closed mines 54
-    streams in 0.1s yet blows past 60s on a 43-stream subset of the same data; plain
-    top-k runs 0.03-0.05s on both), and the MDL rounds already price away the redundant
-    non-closed prefixes while verifying every candidate against the FULL streams (the
-    same bounded-work discipline as _MAX_TREES / _MAX_CANDIDATES above)."""
-    streams = [s[:_MAX_SEQ_SYMBOLS] for s in streams]
-    try:
-        from prefixspan import PrefixSpan  # type: ignore
+    `support` counts STREAMS carrying the run (the document frequency the old miner
+    reported); `occurrences` counts landings. No support threshold gates emission —
+    the MDL selector deletes what fails to pay — and `min_support`/`topk` stay in the
+    signature only so existing callers keep composing (neither gates anything here).
+    The [:max_forms] hand-off slice keeps the existing induce interface; candidates
+    order by potential saving (occurrences x (len-1)) so the slice keeps the
+    strongest-paying pool."""
+    del min_support, topk  # retired gates — the two-part code arbitrates now
+    from maximal_repeats import mine_maximal_repeats
 
-        ps = PrefixSpan(streams)
-        ps.minlen = min_len
-        if topk:
-            # branch-and-bound top-k by support, WITHOUT closed-pruning (fragile, see
-            # above) — the support floor still applies, MDL dedups the prefixes.
-            raw = [(s, p) for s, p in ps.topk(min(max_forms, _MAX_SEQ_TOPK), closed=False)
-                   if s >= min_support]
-        else:
-            # closed=True → the BIDE-style closed set; frequent(minsup) is absolute-support.
-            raw = ps.frequent(min_support, closed=True)
-        out = []
-        for support, pattern in raw:
-            if len(pattern) >= min_len:
-                out.append({"seq": [str(x) for x in pattern], "support": int(support)})
-        out.sort(key=lambda x: (-len(x["seq"]), -x["support"], x["seq"]))
-        return out[:max_forms]
-    except Exception as exc:  # noqa: BLE001 — prefixspan absent / faulted → native fallback
-        sys.stderr.write(f"form_induction: prefixspan unavailable ({type(exc).__name__}) — native BIDE\n")
-        return _native_sequences(streams, min_support, max_forms=max_forms, min_len=min_len)
+    out = [
+        {"seq": c["seq"], "support": c["doc_freq"], "occurrences": c["support"]}
+        for c in mine_maximal_repeats(streams, min_len=min_len)
+    ]
+    return out[:max_forms]
 
 
 def _seq_support(streams: list, pat: tuple) -> int:
@@ -386,43 +371,6 @@ def _seq_support(streams: list, pat: tuple) -> int:
         if all(any(x == p for x in it) for p in pat):
             n += 1
     return n
-
-
-def _native_sequences(streams: list, min_support: int, *, max_forms: int, min_len: int) -> list:
-    """A dependency-free PrefixSpan-ish fallback: grow frequent subsequences by right-extension
-    over the symbol alphabet, keep those recurring ≥ min_support, then a closed filter. Bounded
-    for safety (the package path is the primary; this only backstops a bare venv)."""
-    alphabet = sorted({x for s in streams for x in s})
-    frequent: dict[tuple, int] = {}
-    frontier = [((a,), _seq_support(streams, (a,))) for a in alphabet]
-    frontier = [(p, sup) for p, sup in frontier if sup >= min_support]
-    for p, sup in frontier:
-        frequent[p] = sup
-    explored = 0
-    while frontier and explored < _MAX_CANDIDATES:
-        pat, _sup = frontier.pop()
-        if len(pat) >= 8:
-            continue
-        for a in alphabet:
-            explored += 1
-            cand = pat + (a,)
-            sup = _seq_support(streams, cand)
-            if sup >= min_support:
-                frequent[cand] = sup
-                frontier.append((cand, sup))
-    items = [(p, s) for p, s in frequent.items() if len(p) >= min_len]
-    closed = []
-    for p, s in items:
-        if not any(len(q) > len(p) and sq == s and _is_subsequence(p, q) for q, sq in items):
-            closed.append({"seq": [str(x) for x in p], "support": s})
-    # total order: length, support, then the seq itself — no tie rides dict/set iteration order.
-    closed.sort(key=lambda x: (-len(x["seq"]), -x["support"], x["seq"]))
-    return closed[:max_forms]
-
-
-def _is_subsequence(a: tuple, b: tuple) -> bool:
-    it = iter(b)
-    return all(any(x == p for x in it) for p in a)
 
 
 # ── ΔP association — the c2xg candidate-identify METHOD, native over our streams ───────

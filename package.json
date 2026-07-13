@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
-    "test": "pnpm -r test",
+    "test": "pnpm -r --workspace-concurrency=1 test",
     "test:fresh": "pnpm -r build && pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm -r lint",
@@ -22,7 +22,7 @@
     "playwright": "^1.61.1",
     "playwright-mcp-wsl": "^1.0.0",
     "tsx": "^4.23.0",
-    "typescript": "^5.7.0"
+    "typescript": "^6.0.3"
   },
   "engines": {
     "node": ">=24.0.0",
