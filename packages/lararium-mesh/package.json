@@ -80,7 +80,7 @@
   },
   "devDependencies": {
     "tsx": "^4.23.0",
-    "vitest": "^3.2.0"
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "@automerge/automerge": "^3.2.6",

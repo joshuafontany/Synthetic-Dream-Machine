@@ -33,9 +33,10 @@
     "@lararium/tw5": "workspace:*"
   },
   "devDependencies": {
-    "@vitest/browser": "^3.2.0",
+    "@vitest/browser": "^4.1.10",
+    "@vitest/browser-playwright": "^4.1.10",
     "tsx": "^4.23.0",
     "vite-plugin-wasm": "^3.6.0",
-    "vitest": "^3.2.0"
+    "vitest": "^4.1.10"
   }
 }

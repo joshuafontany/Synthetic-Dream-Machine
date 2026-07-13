@@ -13,5 +13,3 @@ packages:
 allowBuilds:
   cbor-extract: true
   esbuild: true
-patchedDependencies:
-  '@vitest/browser@3.2.4': patches/@vitest__browser@3.2.4.patch

@@ -1,4 +1,5 @@
 import { defineConfig } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
 import wasm from "vite-plugin-wasm";
 import path from "path";
 
@@ -26,7 +27,10 @@ export default defineConfig({
   test: {
     browser: {
       enabled: true,
-      provider: "playwright",
+      // The provider rides as a FACTORY, never a name: the runner imports the driver it will actually
+      // use, so a missing provider fails at config load with the package that is absent — never mid-run
+      // with a string nothing resolved.
+      provider: playwright(),
       instances: [{ browser: "chromium" }],
     },
     include: ["tests/**/*.test.ts"],
