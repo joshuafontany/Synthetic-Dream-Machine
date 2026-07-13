@@ -1,12 +1,12 @@
 {
   "format": "lararium-genesis-seed/v1",
-  "actorSeed": "fbbbd5e65bee709999aaff097add55e535dcc7c6e2a229cdcbdf3d01b994d848",
+  "actorSeed": "b7f53f2d521391f766881e42a2b3a031eb86f85e163a15298386b9dec78c639d",
   "schemaVersion": "0.1",
   "blobs": {
     "tiddlywikicore": {
       "id": "tiddlywikicore",
       "version": "5.5.0-prerelease",
-      "sha256": "7640b4f8a6931f93790f3d81893f9af81f0521e136323004e68a78ab8ea8509a",
+      "sha256": "4d65f882349c665e1773ffcebb9592c36c58be64978d6f8e1c05f1bbc0ceca17",
       "mimeType": "application/javascript",
       "license": "BSD-3-Clause",
       "author": "UnaMesa Association",
@@ -22,7 +22,7 @@
     "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
       "id": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
       "version": "0.1.0",
-      "sha256": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
+      "sha256": "57f292467c50d1665bd77bf36e84d1d8ca1a97c90ee666b6b00183ed98a81b69",
       "mimeType": "application/json",
       "license": "MIT",
       "author": "lares"
@@ -167,7 +167,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "text": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
-        "sha256": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
+        "sha256": "57f292467c50d1665bd77bf36e84d1d8ca1a97c90ee666b6b00183ed98a81b69",
         "version": "0.1.0",
         "mimeType": "application/json",
         "author": "lares",
@@ -176,14 +176,14 @@
         "canonicalTitle": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "compatibilityTitle": "$:/plugins/lares/memetic-wikitext",
         "moduleManifestPath": "dist-plugin/module-manifest.json",
-        "moduleManifestSha256": "440336258d2ba98ffb3def41c16d444321a43d5fe5246792511fe8515c053893",
+        "moduleManifestSha256": "9624c1b590a754e7fd2e1ff675feeb7c010e12f2cd3caf16411620c7dd212dd2",
         "sourceManifestPath": "dist-plugin/plugin-source-manifest.json",
-        "sourceManifestSha256": "50876d5a15ad26f99cc2ea43eb580d80896d5e4a30ed262aa77300f9e68d3bd5",
+        "sourceManifestSha256": "a8861fc526cfbd13bcd6f440efef2e99d66f75677a1bd34572e07944b4995daa",
         "packTranscriptPath": "dist-plugin/pack-transcript.json",
-        "packTranscriptSha256": "73194e5ee996d995f53b2a367f83e337b0907a435bd2a6049f01b5dd863ee7cc",
+        "packTranscriptSha256": "6c7fd5e340701555f7ec8362c21cc871e6aede8b302d32980f8d62cabee72b0f",
         "moduleCount": "23",
         "packedTiddlerCount": "115",
-        "pluginJsonSha256": "bc3be0c8983b8e5fb3ea73c75ccb1527e19264d5c772337a3dac54ce6e310063",
+        "pluginJsonSha256": "57f292467c50d1665bd77bf36e84d1d8ca1a97c90ee666b6b00183ed98a81b69",
         "tags": "blob-descriptor",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
@@ -210,7 +210,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/blobs/tiddlywikicore",
         "text": "tiddlywikicore",
-        "sha256": "7640b4f8a6931f93790f3d81893f9af81f0521e136323004e68a78ab8ea8509a",
+        "sha256": "4d65f882349c665e1773ffcebb9592c36c58be64978d6f8e1c05f1bbc0ceca17",
         "version": "5.5.0-prerelease",
         "mimeType": "application/javascript",
         "author": "UnaMesa Association",
@@ -227,7 +227,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-engine",
         "text": "",
-        "cid": "bafkreid7rk5duo6cwokysj2ou36enixvlabgvzcpqourjhfofcbnfmehfi",
+        "cid": "bafkreif5aam2v3zvafk7feqsqu45j7ocnghcrb53y6gzkkdxh3l7g7527m",
         "note": "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
@@ -239,7 +239,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-plugins",
         "text": "",
-        "cid": "bafkreicrm4gamscjwgsakzf7ystyo6xp4kkol6lezfhp2qexqrpqzha7my",
+        "cid": "bafkreibxorfn62qnla4qvenv6u6e5tkn3q5lw44hunalrbkqqrb7cudwby",
         "note": "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
