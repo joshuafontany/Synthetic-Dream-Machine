@@ -463,10 +463,10 @@ export function discoverCopilotVscode(): HarvestEntry[] {
 
 export function discoverCopilotCli(): HarvestEntry[] {
   const out: HarvestEntry[] = [];
-  // New format (CLI 1.0.6x): one global SQLite store. Export each session to a
-  // Claude-shaped jsonl via the python helper (python owns the sqlite read);
-  // wing routing comes from sessions.cwd — no path-scraping. The exported jsonl
-  // is already Claude-shaped, so normalize:false (no second pass).
+  // The Copilot CLI keeps its conversations in ONE global SQLite store. Python owns the sqlite read and
+  // exports each session to a Claude-shaped jsonl, so these entries carry `normalize:false` — the miner
+  // eats them directly, with no second pass. Wing routing reads `sessions.cwd`, which the row states
+  // outright; nothing scrapes a path for it.
   const db = join(homedir(), ".copilot", "session-store.db");
   if (existsSync(db)) {
     const exportDir = join(larHarvestStageDir(), ".copilot-export");
@@ -479,17 +479,7 @@ export function discoverCopilotCli(): HarvestEntry[] {
         if (!m.path) continue;
         out.push({ file: m.path, wing: m.cwd ? wingFromDir(m.cwd) : "wing_copilot_unsorted", normalize: false, stageName: `${m.id}.jsonl`, source: "copilot-cli" });
       }
-      return out; // db is canonical — skip the legacy walk
-    } catch { /* fall through to legacy events.jsonl */ }
-  }
-  // Legacy fallback: older installs still write per-session events.jsonl.
-  const root = join(homedir(), ".copilot", "session-state");
-  if (!existsSync(root)) return out;
-  for (const d of readdirSync(root, { withFileTypes: true })) {
-    if (!d.isDirectory()) continue;
-    const f = join(root, d.name, "events.jsonl");
-    if (!existsSync(f)) continue;
-    out.push({ file: f, wing: scrapeWing(f) ?? "wing_copilot_unsorted", normalize: true, stageName: `${d.name}.jsonl`, source: "copilot-cli" });
+    } catch { /* the export failed — report nothing rather than a partial wing */ }
   }
   return out;
 }

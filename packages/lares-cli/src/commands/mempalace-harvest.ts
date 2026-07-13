@@ -29,6 +29,7 @@ import { join } from "node:path";
 import { withMineLane, mineWithServo } from "@lararium/mempalace";
 import { resolveMempalaceExe, larStateHome } from "@lararium/node";
 import { resolvePython } from "../integration-check.js";
+import { larRoot } from "../env.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 import {
@@ -50,6 +51,29 @@ function guestPalace(): string {
 /** The comparator's own stage — never the RUN's (`larHarvestStageDir`); the two lanes share nothing. */
 function comparatorStage(): string {
   return join(larStateHome(), "comparator-stage");
+}
+
+/**
+ * Which sources carry a native-format reader, keyed by `HarvestEntry.source` → script name.
+ *
+ * A source that declares `normalize` and sits ABSENT from this table gets dropped BY NAME (the staging
+ * loop below), so a missing reader reads as a missing reader rather than as a bare ENOENT.
+ *
+ * `copilot-cli` needs no entry — its sqlite export already lands Claude-shaped (`normalize:false`).
+ */
+const NORMALIZER_SCRIPTS: Readonly<Record<string, string>> = {
+  "copilot-vscode": "copilot_vscode_normalize.py",
+};
+
+/**
+ * Resolve a source's normalizer, or `null` when none exists.
+ *
+ * Off `larRoot()`, never `process.cwd()`: a cwd-relative script path binds the harvest to whichever
+ * directory the caller happened to stand in, and `lares` runs from anywhere.
+ */
+function normalizerFor(source: string): string | null {
+  const script = NORMALIZER_SCRIPTS[source];
+  return script ? join(larRoot(), "packages", "lararium-mempalace", "scripts", script) : null;
 }
 
 interface WingMine {
@@ -86,7 +110,15 @@ export async function cmdMempalaceHarvest(args: ParsedArgs): Promise<number> {
 
   for (const [wing, es] of [...byWing.entries()].sort()) {
     if (dryRun) {
-      results.push({ wing, staged: es.length, dropped: [], filed: "dry-run" });
+      // A dry-run stages nothing, so it cannot report a drop it would have HIT. It can report the drops
+      // it can PREDICT — every entry whose source declares `normalize` and carries no reader fails the
+      // same way every run. Reporting a flat `dropped: []` here answers "did anything drop?" with a zero
+      // the run never measured, and a preview that structurally cannot show a loss hides exactly the loss
+      // an operator previews for.
+      const willDrop = es
+        .filter((e) => e.normalize && !normalizerFor(e.source))
+        .map((e) => ({ file: e.file, why: `no normalizer for source '${e.source}' — its native format has no reader yet` }));
+      results.push({ wing, staged: es.length - willDrop.length, dropped: willDrop, filed: "dry-run" });
       continue;
     }
     const stage = join(stageRoot, wing);
@@ -102,7 +134,14 @@ export async function cmdMempalaceHarvest(args: ParsedArgs): Promise<number> {
       if (existsSync(dst)) { staged += 1; continue; }
       try {
         if (e.normalize) {
-          const norm = join(process.cwd(), "packages", "lararium-mempalace", "scripts", "copilot_normalize.py");
+          // A source that declares `normalize` needs a reader that turns its native shape into the
+          // Claude-shaped jsonl the vanilla miner eats. A source with no reader gets DROPPED BY NAME:
+          // reaching for a script and letting the spawn fail reports a bare ENOENT naming an absent
+          // PATH, which reads as a broken install rather than as the unwritten format reader it is.
+          const norm = normalizerFor(e.source);
+          if (!norm || !existsSync(norm)) {
+            throw new Error(`no normalizer for source '${e.source}' — its native format has no reader yet`);
+          }
           writeFileSync(dst, execFileSync(PY, [norm, e.file], { maxBuffer: 1 << 30, encoding: "utf8" }));
         } else {
           try { linkSync(e.file, dst); } catch { copyFileSync(e.file, dst); }
