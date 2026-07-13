@@ -100,6 +100,11 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "the standing-axis keel (halfLife regeneration) ↔ persistence_io policy+witness; the decay-curve fixture remains owed.",
   },
   {
+    ts: "capture-reading.ts", py: "capture_reading.py", status: "witnessed",
+    fixtures: ["../../lararium-mempalace/scripts/fixtures/capture-reading-parity.json"],
+    note: "the WHO-plane capture posture (concentration + the 1Hive convex bar, verdict-free); TS generates (scripts/capture_reading_fixture.ts), py matches — Infinity rides as the string \"Infinity\".",
+  },
+  {
     ts: "synthetic-drift.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
     note: "the seeded synthetic Claim-B corpus — a future-cut once the real test-beds supersede it (RUN-ARC held); no py twin planned.",
@@ -184,7 +189,7 @@ const MANIFEST: readonly ParityEntry[] = [
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|numerics)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {
