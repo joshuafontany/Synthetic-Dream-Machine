@@ -125,80 +125,96 @@ def _struct_hash(value) -> str:
 # is SUPPORTED by a corpus tree when it embeds anywhere inside it.
 
 
-def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
-    # The memo keys by VALUE (nested tuples hash structurally), never id(): the recurrence
-    # builds fresh forest tuples every step (t0[1] + trest), so id-keys (a) almost never hit —
-    # the recurrence blew up exponentially inside ONE check on a real ~170-node sigil tree —
-    # and (b) can WRONG-hit when a freed tuple's id gets reused mid-walk. Value-keys restore
-    # the polynomial memoized recurrence and make every hit a true subproblem match.
-    #
-    # The driver runs ITERATIVE: cases (b)/(c) splice children into the sibling row, so the
-    # call depth of the naive recursion grows with the target's TOTAL node count — a dense
-    # sigil corpus blew ~6000 frames through the motif bounds. An explicit frame stack walks
-    # the same (a)→(b)→(c) short-circuit order; the recurrence itself stays Kilpeläinen–
-    # Mannila, byte-for-byte in verdicts.
-    root = (pf, tf)
-    stack = [[pf, tf, 0]]  # [pattern-forest, target-forest, stage]
+def _flatten_forest(forest: tuple) -> "tuple[list, list]":
+    """A (label, children) tuple-forest → parallel preorder arrays (labels, scope), where
+    scope[i] names the index of node i's rightmost descendant (Zaki's s(x) = [x, y]). The
+    contiguity fact the indexed recurrence stands on: node i's children occupy
+    [i+1, scope[i]] and its right siblings occupy [scope[i]+1, ...] — always intervals."""
+    labels: list = []
+    scope: list = []
+    stack = [(node, False) for node in reversed(forest)]
+    starts: list = []
+    while stack:
+        node, done = stack.pop()
+        if done:
+            scope[starts.pop()] = len(labels) - 1
+            continue
+        labels.append(node[0])
+        scope.append(0)
+        starts.append(len(labels) - 1)
+        stack.append((node, True))
+        for child in reversed(node[1]):
+            stack.append((child, False))
+    return labels, scope
+
+
+def _emb_indexed(pl: list, ps: list, tl: list, ts: list) -> bool:
+    """Ordered EMBEDDED forest inclusion over preorder intervals — the Kilpeläinen–Mannila
+    recurrence re-KEYED, never re-shaped. The old formulation memoized on value-keyed
+    spliced tuples (O(subtree) hashing over an unbounded key space — the measured grind);
+    every spliced forest is in fact a contiguous preorder interval, so the state collapses
+    to four ints and the memo hashes O(1) at KM's own O(|P|·|T|) reachable-state bound.
+    Verdict-identical: (a) match root-to-root then children-in-children AND rest-in-rest;
+    (b) descend — drop the target root, its children join the sibling row, which in index
+    form reads simply [lo+1, hi). No structure discarded, no budget, no knob."""
+    memo: dict = {}
+    root = (0, len(pl), 0, len(tl))
+    stack = [[0, len(pl), 0, len(tl), 0]]  # [plo, phi, lo, hi, stage] — half-open
     while stack:
         frame = stack[-1]
-        fpf, ftf, stage = frame
-        key = (fpf, ftf)
+        plo, phi, lo, hi, stage = frame
+        key = (plo, phi, lo, hi)
         if stage == 0:
             if key in memo:
                 stack.pop()
                 continue
-            if not fpf:
+            if plo >= phi:
                 memo[key] = True
                 stack.pop()
                 continue
-            if not ftf:
+            if lo >= hi:
                 memo[key] = False
                 stack.pop()
                 continue
-        p0, prest = fpf[0], fpf[1:]
-        t0, trest = ftf[0], ftf[1:]
-        if stage == 0:
-            # (a) map p0's root onto t0's root, then the rest of p after t0.
-            if p0[0] != t0[0]:
-                frame[2] = 2
+            # (a) map the first pattern root onto the first target root.
+            if pl[plo] != tl[lo]:
+                frame[4] = 2
                 continue
-            sub = (p0[1], t0[1])
+            sub = (plo + 1, ps[plo] + 1, lo + 1, ts[lo] + 1)  # children in children
             if sub not in memo:
-                stack.append([sub[0], sub[1], 0])
+                stack.append([*sub, 0])
                 continue
-            frame[2] = 1 if memo[sub] else 2
+            frame[4] = 1 if memo[sub] else 2
             continue
         if stage == 1:
-            sub = (prest, trest)
+            sub = (ps[plo] + 1, phi, ts[lo] + 1, hi)  # rest of pattern after the subtree
             if sub not in memo:
-                stack.append([sub[0], sub[1], 0])
+                stack.append([*sub, 0])
                 continue
             if memo[sub]:
                 memo[key] = True
                 stack.pop()
                 continue
-            frame[2] = 2
+            frame[4] = 2
             continue
-        if stage == 2:
-            # (b) descend into t0 (p0's image is a proper descendant of t0).
-            sub = (fpf, t0[1] + trest)
-            if sub not in memo:
-                stack.append([sub[0], sub[1], 0])
-                continue
-            if memo[sub]:
-                memo[key] = True
-                stack.pop()
-                continue
-            frame[2] = 3
-            continue
-        # stage 3 — (c) skip t0 entirely.
-        sub = (fpf, trest)
+        # stage 2 — (b) descend: the target root drops, its children join the row.
+        sub = (plo, phi, lo + 1, hi)
         if sub not in memo:
-            stack.append([sub[0], sub[1], 0])
+            stack.append([*sub, 0])
             continue
         memo[key] = memo[sub]
         stack.pop()
     return memo[root]
+
+
+def _emb_forest(pf: tuple, tf: tuple, memo: dict) -> bool:
+    # The tuple-forest face the callers and witnesses hold; the work rides the indexed
+    # recurrence. `memo` stays accepted for the callers that pass one; the indexed DP
+    # carries its own (a value-keyed cross-call memo priced O(subtree) per hash — the
+    # exact grind the re-keying retired).
+    pl, ps = _flatten_forest(pf)
+    tl, ts = _flatten_forest(tf)
+    return _emb_indexed(pl, ps, tl, ts)
 
 
 # Motif-scale bounds: the sinks we mine are SHALLOW recurring shapes, not whole deep-wide ASTs.
