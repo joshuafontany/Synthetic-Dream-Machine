@@ -119,6 +119,17 @@ async function bootVessel(): Promise<void> {
   set("status", "booting…");
   // ?relay=ws://host:port/ws → the node↔browser spore crossing (opt-in; absent = pure local boot).
   const relayUrl = new URLSearchParams(location.search).get("relay") ?? undefined;
+  // A local boot and a CROSSED boot look identical from the outside: both render, both say "ready". So
+  // the vessel names which one it just performed. A seam nobody can see is a seam nobody watches, and an
+  // absent crossing that reports nothing reads exactly like a crossing that worked.
+  if (relayUrl) {
+    console.log(`[vessel] CROSSING → ${relayUrl} — this vessel dials the node vessel and syncs.`);
+  } else {
+    console.log(
+      "[vessel] PURE LOCAL BOOT — no node vessel dialled.\n" +
+      "         To cross, add a relay:  ?relay=ws://localhost:8080/ws",
+    );
+  }
   // ?genesis=<base> → where the static host serves genesis/ (manifest + cas/). Default /genesis.
   const genesisCasBaseUrl = new URLSearchParams(location.search).get("genesis") ?? "/genesis";
   // ?mesh=<readface,…> → carry-in as a mesh LEAF, bootstrapping the FLOW-map from peer @oracle
