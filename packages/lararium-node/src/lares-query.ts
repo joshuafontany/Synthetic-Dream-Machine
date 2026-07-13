@@ -15,7 +15,7 @@
 import { composePalaceCaps, type PalaceCaps } from "./palace-caps.js";
 import type { SearchResult } from "./search-cap.js";
 import type { Taxonomy } from "./content-palace.js";
-import { memorySensoriumLenses } from "./vessel-paths.js";
+import { sensoriumLenses } from "./vessel-paths.js";
 
 /** A lens names a palace entity; the caller maps lens → dir in `lensDirs`. */
 export type Lens = string;
@@ -78,5 +78,5 @@ export function makeLaresQuery(lensDirs: Record<Lens, string>): LaresQuery {
  * way).
  */
 export function openMemorySensorium(): LaresQuery {
-  return makeLaresQuery(memorySensoriumLenses());
+  return makeLaresQuery(sensoriumLenses());
 }

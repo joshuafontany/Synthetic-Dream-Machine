@@ -18,7 +18,7 @@
  * the @daemon's composed caps, and nothing behind it opens a store.
  */
 
-import { openMemorySensorium, memorySensoriumLenses } from "@lararium/node";
+import { openMemorySensorium, sensoriumLenses } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -29,7 +29,7 @@ export async function cmdSense(args: ParsedArgs): Promise<number> {
   // `--key value` lands in `options`; `--key` alone lands in `flags`. The lens carries a VALUE.
   const [verb, ...rest] = args.positional;
   const lens = args.options["lens"] ?? "content";
-  const known = Object.keys(memorySensoriumLenses());
+  const known = Object.keys(sensoriumLenses());
 
   if (!verb || !VERBS.includes(verb as Verb)) {
     emit(args, {

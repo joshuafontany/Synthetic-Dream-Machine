@@ -34,7 +34,7 @@
  * `larIdentityDir` (vessel-identity — a separate concern) stays at its `~/.lares` spelling.
  */
 
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -132,6 +132,68 @@ export function memorySensoriumLenses(): Record<string, string> {
     form: join(root, "form"),
     persistence: join(root, "persistence"),
   };
+}
+
+/** Every sensorium standing under `<data>/sensoriums` — the ones a lens may name. */
+export function sensoriumNames(): string[] {
+  const root = join(larDataHome(), "sensoriums");
+  try {
+    return readdirSync(root, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * THE LENS MAP, over EVERY sensorium — keyed `<sensorium>/<plane>`.
+ *
+ * The palace rides as a PARAMETER, and a sensorium is just a wider palace: three of them stand here
+ * (`memory` holds the journey, `memetic-wikitext` holds the canon, `mesh` holds the federation), each with
+ * the same plane family. A lens map naming only one of them hands the verbs a door into one room and calls
+ * it the house — the canon a caller asks for sits in a sensorium the map never mentioned, and the search
+ * answers confidently from the wrong one.
+ *
+ * So the lens carries BOTH coordinates. The verb surface stays four wide; the address does the widening.
+ * A bare plane name (`content`) still resolves against `memory`, which keeps the common read short.
+ */
+export function sensoriumLenses(): Record<string, string> {
+  const root = join(larDataHome(), "sensoriums");
+  const out: Record<string, string> = {};
+
+  // DISCOVER the palaces; never declare them. A sensorium `#has` EITHER planes OR child sensoriums —
+  // `memetic-wikitext` holds formal/informal, `mesh` holds who/authority/flow, and each child carries its
+  // own plane family. A map that enumerated a fixed plane list one level down would address `memory` and
+  // silently miss every canon plane two levels below it, then answer a canon query confidently from the
+  // journey. So the walk asks the FILETREE what stands, and a dir holding a chroma store IS a palace —
+  // the composition on disk names itself.
+  const walk = (dir: string, key: string, depth: number): void => {
+    if (depth > 4) return;
+    if (existsSync(join(dir, "chroma.sqlite3"))) {
+      out[key] = dir;
+      return;                                   // a palace is a leaf; nothing composes below it
+    }
+    let entries;
+    try {
+      entries = readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const e of entries) {
+      if (e.isDirectory() && !e.name.startsWith(".")) {
+        walk(join(dir, e.name), key ? `${key}/${e.name}` : e.name, depth + 1);
+      }
+    }
+  };
+  walk(root, "", 0);
+
+  // The short form: a bare plane name reads the `memory` sensorium — the journey, and the common case.
+  for (const [k, v] of Object.entries(memorySensoriumLenses())) {
+    if (existsSync(join(v, "chroma.sqlite3"))) out[k] = v;
+  }
+  return out;
 }
 
 /** The GUEST mempalace store dir — `MEMPALACE_PALACE_PATH` (override, the relocation lever) else the
