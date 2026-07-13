@@ -18,6 +18,28 @@ The li-radius verdict:
   radius  > 0                  ->  an OBSTRUCTION, localized per pair;
   vacuous                      ->  no engineered overlap constrained it — 0 buys nothing.
 
+THE FOURTH CAUTION, AND IT OUTRANKS THE THREE ABOVE — A TOWER GLUES FOR FREE.
+
+  The li planes hold neither disjoint NOR independent: they NEST. content -> structure -> form
+  each COARSEN the one before (the keystone, lar:///ha.ka.ba/lararium/api/living-grammar-palace#spine),
+  and structure carries 97.8% of the record's own bits (measured exactly, `plane_capacity` — a count
+  off the partition, no estimator). A chain of quotients holds NO OBSTRUCTION TO GLUING: dim H1 = 0
+  BY CONSTRUCTION. So the radius reads ~0 on every bed it has ever seen, and that zero names a
+  TAUTOLOGY — one plane heard three times — never a finding.
+
+  Caution (a) guards the wrong pathology. It fears planes too DISJOINT (a vacuous 0). The measured
+  pathology runs the other way: planes too DEPENDENT (a trivial 0). Both read 0; only one is caught.
+
+  SO THE RADIUS CERTIFIES NOTHING AT A PLANE BOUNDARY, and this organ says so rather than reporting
+  health it cannot earn. It keeps its job at a FEDERATION boundary — genuinely distinct contexts,
+  where an obstruction can exist to be found. The li-disagreement question re-seats on the two-part
+  code: an event that moves the corpus LENGTHENS l(G)+l(D|G) until the grammar re-earns its bits.
+  One currency, one ledger, no pooling — and no gong that fires on a single artifact wearing three
+  coats.
+
+  `verdict` therefore carries `tower_trivial` whenever the planes stand in a coarsening chain: the
+  zero gets NAMED, never spent.
+
 The native stalk pseudometrics ride along (cosine · jaccard · the DECKARD characteristic-
 vector tree distance — the structure plane's hot path). The shelved TS paths (pq-gram
 refine, cubic exact TED) stay TS-side; this twin carries the hot path only, named here.
@@ -41,10 +63,19 @@ import os
 import re
 import sys
 
+from plane_base import BASE_PATTERN, BASE_RECORD, require_base
+
 # ── the li/ki plane taxonomy (the variance vocabulary the dual pair rides) ────────────────
 
 SHEAF_PLANES = ("content", "structure", "form")
 COSHEAF_PLANES = ("bands", "coupling")
+
+# THE SECOND GATE (plane_base). `variance` names HOW a restriction maps — down (sheaf) or up
+# (cosheaf). It says nothing about WHICH universe the units live in, so a variance check alone
+# waves through a pattern-keyed reading and a record-keyed reading meeting in one sup-norm. Every
+# radius below therefore asserts a single, DECLARED base as well: the two checks are orthogonal
+# and both bind.
+LI_BASE = BASE_RECORD
 
 
 # ── per-plane NATIVE pseudometrics (the stalk metrics) ────────────────────────────────────
@@ -205,14 +236,22 @@ def _sup_over_pairs(restrictions: list, cells: list, metric) -> dict:
 # ── the li consistency radius (the sheaf posture) ─────────────────────────────────────────
 
 
-def consistency_radius(restrictions: list, stalk: dict, stalk_metric=None) -> dict:
+def consistency_radius(restrictions: list, stalk: dict, stalk_metric=None,
+                       base: str = LI_BASE) -> dict:
     """The Robinson CONSISTENCY-RADIUS over the LI (sheaf) planes — the SUP of pairwise
     disagreement on domain OVERLAPS, restricted to the engineered comparison stalk.
-    Admits `variance == "sheaf"` only; a cosheaf here raises LOUD (the silent-corruption
-    guard the TS oracle throws). Returns the same verdict shape the TS carries:
-    {radius, glues, vacuous, pairs, obstructionLocus, signalKind, note?}."""
+
+    TWO gates, both loud. `variance == "sheaf"` only (a cosheaf read through a restriction map
+    corrupts silently). And ONE declared `base` across every restriction (plane_base): the sup-norm
+    subtracts a value at unit u from a value at unit u, which means nothing at all unless both u's
+    name the same kind of thing. A pattern-keyed reading meeting a record-keyed one raises here.
+
+    Returns the TS verdict shape: {radius, glues, vacuous, pairs, obstructionLocus, signalKind, note?}."""
     metric = stalk_metric or chebyshev_stalk_metric
 
+    # Variance leads: a cosheaf here names a WRONG-DIRECTION map, the sharper diagnosis. The base
+    # gate follows and catches the subtler crossing — a correctly-covariant reading over the wrong
+    # universe, which reads as perfectly well-typed until you ask what its units mean.
     non_sheaf = [r for r in restrictions if r.get("variance") != "sheaf"]
     if non_sheaf:
         names = ", ".join(r["plane"] for r in non_sheaf)
@@ -221,6 +260,7 @@ def consistency_radius(restrictions: list, stalk: dict, stalk_metric=None) -> di
             f"plane(s) [{names}] — a cosheaf read through a restriction map corrupts "
             f"silently (li-ki-integrities.md#crucible-tested). Route bands/coupling to "
             f"ki_co_consistency.")
+    require_base(restrictions, base, instrument="sensorium_consistency.consistency_radius")
 
     units = stalk.get("units") or []
     if not units:
@@ -245,10 +285,17 @@ def consistency_radius(restrictions: list, stalk: dict, stalk_metric=None) -> di
 # ── the ki co-consistency (the cosheaf PUSHFORWARD mirror, caution c) ─────────────────────
 
 
-def ki_co_consistency(co_restrictions: list, stalk: dict, coface_metric=None) -> dict:
+def ki_co_consistency(co_restrictions: list, stalk: dict, coface_metric=None,
+                      base: str = BASE_PATTERN) -> dict:
     """The KI CO-CONSISTENCY-RADIUS over the KI (cosheaf) faces — the pushforward mirror:
     extension UP into a shared coface stalk, pairwise disagreement on codomain CO-OVERLAPS.
     Admits `variance == "cosheaf"` only; a sheaf here raises LOUD (the mirror corruption).
+
+    The base gate binds here too, and the DEFAULT differs on purpose: a cosheaf face reads over the
+    PATTERN base (the structure registry's own universe), where the li radius reads over records.
+    That difference IS the mistype the pushforward exists to bridge; the two radii never share a base
+    and the signature says so.
+
     Returns {radius, coExtends, vacuous, pairs, offendingCoface, signalKind, note?}."""
     metric = coface_metric or chebyshev_stalk_metric
 
@@ -259,6 +306,7 @@ def ki_co_consistency(co_restrictions: list, stalk: dict, coface_metric=None) ->
             f"sensorium_consistency: the ki-radius admits COSHEAF faces only; got sheaf "
             f"plane(s) [{names}] — a sheaf read through an extension map mirrors the "
             f"silent corruption. Route content/structure/form to consistency_radius.")
+    require_base(co_restrictions, base, instrument="sensorium_consistency.ki_co_consistency")
 
     cofaces = stalk.get("cofaces") or []
     if not cofaces:
@@ -286,7 +334,9 @@ def ki_co_consistency(co_restrictions: list, stalk: dict, coface_metric=None) ->
 
 
 def _sheaf(plane: str, value: dict) -> dict:
-    return {"plane": plane, "variance": "sheaf", "value": value}
+    """The fixture's synthetic units name records — the parity cases exercise the metric, and the
+    base rides along so the fixture travels the same wire the projector does."""
+    return {"plane": plane, "base": BASE_RECORD, "variance": "sheaf", "value": value}
 
 
 def _mulberry32(seed: int):
@@ -449,8 +499,8 @@ def cmd_fixture(args) -> None:
 
 
 def cmd_selftest(args) -> None:
-    """A no-fixture check: glue, obstruction, vacuous flag, the variance gate, and the ki
-    mirror all behave."""
+    """A no-fixture check: glue, obstruction, vacuous flag, the variance gate, the BASE gate, and
+    the ki mirror all behave."""
     glue = consistency_radius(
         [_sheaf("content", {"u": 0.5}), _sheaf("structure", {"u": 0.5})], {"units": ["u"]})
     obst = consistency_radius(
@@ -458,18 +508,29 @@ def cmd_selftest(args) -> None:
     vac = consistency_radius(
         [_sheaf("content", {"a": 0.1}), _sheaf("structure", {"b": 0.9})], {"units": ["a", "b"]})
     try:
-        consistency_radius([{"plane": "bands", "variance": "cosheaf", "value": {"u": 1.0}}],
-                           {"units": ["u"]})
+        consistency_radius([{"plane": "bands", "base": BASE_RECORD, "variance": "cosheaf",
+                             "value": {"u": 1.0}}], {"units": ["u"]})
         gate = False
     except ValueError:
         gate = True
+    # The base gate: a PATTERN-keyed structure reading meeting a RECORD-keyed content reading —
+    # the exact crossing the projector used to make in silence.
+    try:
+        consistency_radius(
+            [_sheaf("content", {"u": 0.5}),
+             {"plane": "structure", "base": BASE_PATTERN, "variance": "sheaf", "value": {"u": 0.9}}],
+            {"units": ["u"]})
+        base_gate = False
+    except TypeError:
+        base_gate = True
     ki = ki_co_consistency(
-        [{"plane": "D1", "variance": "cosheaf", "value": {"c0": 0.0}},
-         {"plane": "D2", "variance": "cosheaf", "value": {"c0": 0.3}}],
+        [{"plane": "D1", "base": BASE_PATTERN, "variance": "cosheaf", "value": {"c0": 0.0}},
+         {"plane": "D2", "base": BASE_PATTERN, "variance": "cosheaf", "value": {"c0": 0.3}}],
         {"cofaces": ["c0"]})
     report = {
         "glues": glue["glues"], "obstruction_radius": obst["radius"],
         "vacuous_flagged": vac["vacuous"], "variance_gate_raises": gate,
+        "base_gate_raises": base_gate,
         "ki_radius": ki["radius"], "ki_co_extends": ki["coExtends"],
     }
     sys.stdout.write(json.dumps(report) + "\n")
