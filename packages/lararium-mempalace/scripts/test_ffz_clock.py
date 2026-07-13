@@ -189,3 +189,19 @@ def test_coalesce_gate_collapses_a_burst_to_one_flush():
     assert gate.tick(now=6) is None       # nothing dirty
     gate.mark(now=7)
     assert gate.tick(now=12) == 2         # a fresh burst → the next flush, rev 2
+
+
+# ── WITNESS: pre-registration precondition P2 — a double run emits an identical recovery ──────
+
+def test_witness_recover_clock_double_run_identical():
+    """The recovery feeds bed re-runs; two reads of one signal must land the SAME snapshot,
+    field for field — any wobble here would masquerade as emergence downstream."""
+    rng = np.random.default_rng(4241)
+    period = 12
+    sig = [math.sin(2 * math.pi * i / period) + 0.05 * float(rng.standard_normal()) for i in range(144)]
+
+    a, b = fc.recover_clock(sig), fc.recover_clock(sig)
+    assert a == b
+    assert repr(a) == repr(b)
+    assert (a.beat, a.lock_quality, a.locked, a.holdover) == (b.beat, b.lock_quality, b.locked, b.holdover)
+    assert [(x.name, x.period, x.resolved) for x in a.bands] == [(x.name, x.period, x.resolved) for x in b.bands]

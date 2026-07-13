@@ -100,3 +100,24 @@ def test_bands_run_coarse_to_fine():
     """The path is written coarse→fine, so a PREFIX is always the coarser read — which is what makes
     truncation a zoom-out rather than a corruption."""
     assert BANDS == ("theme", "arc", "measure", "beat", "segment")
+
+
+# ── WITNESS: pre-registration precondition P2 — the census reads stay order-free and repeat-stable ──
+
+def test_census_reads_stay_order_free_and_repeat_stable():
+    """branching() and address_bits() feed the stored prefix code — a bed re-run must price the
+    same addresses at the same bits whatever order the corpus handed them over, twice over."""
+    rng = random.Random(4241)
+    pool = [_rand(rng) for _ in range(120)]
+    shuffled = list(pool)
+    random.Random(99).shuffle(shuffled)
+
+    first, again, reordered = branching(pool), branching(pool), branching(shuffled)
+    assert first == again == reordered
+
+    alphabet = first
+    bits = [address_bits(a, alphabet) for a in pool]
+    assert bits == [address_bits(a, alphabet) for a in pool]
+    # the path string round-trips byte-stable — the stored form IS the address
+    for a in pool:
+        assert str(parse(str(a))) == str(a)
