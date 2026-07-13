@@ -98,7 +98,7 @@ class ContentStore:
 
     def __init__(self, palace_path: str, required_keys: "set[str] | None" = None,
                  expected_dim: "int | None" = None, expected_model: "str | None" = None,
-                 append_only: bool = False) -> None:
+                 append_only: bool = False, collection_name: "str | None" = None) -> None:
         # GENERIC by default (arbitrary corpora — no schema, no identity guard). The SESSION-MEMORY
         # palace opts IN: `required_keys` names the mempalace-schema metadata a drawer MUST carry
         # (wing/room/source_file/chunk_index/lar_*). The EMBEDDER-IDENTITY FLOOR has two halves, both
@@ -115,7 +115,16 @@ class ContentStore:
         # rides kapae/worldline (a muted fork-branch), never a silent re-put. An idempotent same-text
         # re-put still passes (the re-derivation crash-cure). The Dream sensorium leaves this off (mutable).
         self._append_only = append_only
-        self._col = get_collection(palace_path, create=True, _skip_identity_check=True)
+        # WHICH COLLECTION a plane's records live in belongs to the plane, not to this class. A palace may
+        # hold several (the form registry writes a caller-vector `form` collection beside the base drawers),
+        # so a reader that always opens the base collection reads an empty sibling and reports the plane
+        # empty — a store speaks only through the collection you open. Unset falls to the base default.
+        self._collection_name = collection_name
+        self._col = (
+            get_collection(palace_path, collection_name=collection_name, create=True, _skip_identity_check=True)
+            if collection_name
+            else get_collection(palace_path, create=True, _skip_identity_check=True)
+        )
         if self._expected_model is not None:
             self._assert_palace_model_history()
 
@@ -403,18 +412,32 @@ class ContentStore:
 
     def taxonomy(self, limit: int = 4096) -> dict:
         """The STATUS/taxonomy read (the lift of list_wings/list_rooms/get_taxonomy): aggregate the
-        structuring metadata across drawers into distinct wings/rooms/halls + an entity frequency map
-        + the total. Pure metadata scan (no vectors); paginated up to `limit`."""
+        structuring metadata across drawers into distinct wings/rooms/halls + an entity frequency map.
+        Pure metadata scan (no vectors); the aggregation walks at most `limit` records.
+
+        `total` reports the COLLECTION'S CENSUS — what the store holds — and `scanned` reports how many
+        records the aggregation actually walked. The two MUST stay separate: a scan that stops at its own
+        limit and calls that number the total reports its sample size as a census, and the caller reads a
+        truncation as a population. `partial` says so out loud, so no reader has to infer it.
+        """
         wings, rooms, halls, entities = {}, {}, {}, {}
-        total, offset = 0, 0
+        seen: dict[str, dict[str, int]] = {}          # every metadata key the store actually carries
+        scanned, offset, census = 0, 0, 0
         while offset < limit:
             page = self.scan(offset, min(256, limit - offset))
+            census = int(page.get("total") or 0)   # the store's own count, never the walk's
             recs = page["records"]
             if not recs:
                 break
             for r in recs:
-                total += 1
+                scanned += 1
                 m = r.get("metadata") or {}
+                for k, v in m.items():
+                    if v is None or v == "":
+                        continue
+                    seen.setdefault(k, {})
+                    vk = str(v)
+                    seen[k][vk] = seen[k].get(vk, 0) + 1
                 for key, bag in (("wing", wings), ("room", rooms), ("hall", halls)):
                     v = m.get(key)
                     if v:
@@ -428,8 +451,24 @@ class ContentStore:
             if nxt is None:
                 break
             offset = nxt
+
+        # THE FACETS EMERGE — a plane's own metadata keys name what it groups by; nothing gets
+        # pre-assigned. `wing`/`room`/`hall` name CONTENT-plane concepts, and a plane that never records
+        # them (a form registry keys on struct_hash) answers them with silence — which a caller then reads
+        # as an empty store. So report every key the records carry, and let each key declare its own shape:
+        # a key whose values never repeat IDENTIFIES rather than groups, so it earns a distinct-count and
+        # no histogram. The split falls out of the data — no cardinality knob draws it.
+        facets = {
+            k: ({"distinct": len(vals), "identifier": True}
+                if len(vals) >= scanned and scanned > 1
+                else {"distinct": len(vals), "identifier": False, "values": vals})
+            for k, vals in sorted(seen.items())
+        }
         return {
-            "total": total,
+            "total": census,
+            "scanned": scanned,
+            "partial": scanned < census,
+            "facets": facets,
             "wings": sorted(wings.keys()),
             "rooms": sorted(rooms.keys()),
             "halls": sorted(halls.keys()),
@@ -453,14 +492,15 @@ def _build_ops(store: ContentStore) -> dict:
 
 
 def _serve(palace_path: str, required_keys: "set[str] | None" = None, expected_dim: "int | None" = None,
-           expected_model: "str | None" = None, append_only: bool = False) -> None:
+           expected_model: "str | None" = None, append_only: bool = False,
+           collection_name: "str | None" = None) -> None:
     # The guards ride optional kwargs into the store built inside the dispatch closure — so
     # run_sidecar is untouched, and the session-memory contract reaches the RPC face (the QA #1
     # fix: the coordinator's resolveMemoryContentSpawn passes the flags; a generic corpus omits them).
     run_sidecar(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
-        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim, expected_model=expected_model, append_only=append_only))),
+        build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim, expected_model=expected_model, append_only=append_only, collection_name=collection_name))),
         idle_ttl=_idle_ttl_seconds(),
         singleton_msg="content_io: another holder already serves this palace; exiting (singleton)\n",
     )
@@ -479,6 +519,8 @@ def main() -> None:
                    help="pin the embedder MODEL name (checked vs each drawer's lar_embedder_model); a same-dim different-model swap fails loud (session-memory opt-in; unset = off)")
     s.add_argument("--append-only", action="store_true",
                    help="immutable-ground policy (the Memory sensorium): a committed atom's text cannot be overwritten (an edit rides kapae); idempotent same-text re-put still passes")
+    s.add_argument("--collection", default=None,
+                   help="which collection in the palace holds this plane's records (the form registry writes 'form' beside the base drawers); unset = the base default")
     s.set_defaults(fn=lambda a: _serve(
         a.palace,
         # `if k` is load-bearing: an empty/absent --require-keys yields None (generic), never {""}
@@ -486,7 +528,8 @@ def main() -> None:
         required_keys=({k for k in a.require_keys.split(",") if k} or None),
         expected_dim=a.expected_dim,
         expected_model=a.expected_model,
-        append_only=a.append_only))
+        append_only=a.append_only,
+        collection_name=a.collection))
     args = ap.parse_args()
     args.fn(args)
 

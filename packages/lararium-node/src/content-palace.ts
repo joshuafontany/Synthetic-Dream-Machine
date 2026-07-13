@@ -49,9 +49,17 @@ export interface ScanPage {
   readonly total: number;
 }
 
-/** The status/taxonomy read: distinct wings/rooms/halls + an entity frequency map + the drawer total. */
+/**
+ * The status/taxonomy read: distinct wings/rooms/halls + an entity frequency map, over a census.
+ *
+ * `total` counts what the STORE holds; `scanned` counts what the aggregation WALKED, and `partial`
+ * fires when the walk stopped short. A reader that collapses the two takes a scan limit for a
+ * population — the aggregate fields below describe the `scanned` prefix, never the whole census.
+ */
 export interface Taxonomy {
   readonly total: number;
+  readonly scanned: number;
+  readonly partial: boolean;
   readonly wings: string[];
   readonly rooms: string[];
   readonly halls: string[];
@@ -122,7 +130,17 @@ export function makeContentPalace(dir: string, opts: ContentPalaceOptions = {}):
 
     async taxonomy(opts2 = {}): Promise<Taxonomy> {
       const r = (await p.send("taxonomy", { limit: opts2.limit ?? 4096 })) as Partial<Taxonomy> | null;
-      return { total: r?.total ?? 0, wings: r?.wings ?? [], rooms: r?.rooms ?? [], halls: r?.halls ?? [], entities: r?.entities ?? {} };
+      const total = r?.total ?? 0;
+      const scanned = r?.scanned ?? 0;
+      return {
+        total,
+        scanned,
+        partial: r?.partial ?? scanned < total,
+        wings: r?.wings ?? [],
+        rooms: r?.rooms ?? [],
+        halls: r?.halls ?? [],
+        entities: r?.entities ?? {},
+      };
     },
 
     close: p.close,
