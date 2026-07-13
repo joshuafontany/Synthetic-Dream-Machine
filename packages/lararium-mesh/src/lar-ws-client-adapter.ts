@@ -50,6 +50,8 @@ export class LarWSClientAdapter extends WebSocketClientAdapter {
   readonly #aud:        string;
   readonly #gatePubKey: string;
   readonly #now:        (() => string) | undefined;
+  /** The gate's refusal, once it has come. A leaf that holds one has ANERGIZED and does not re-present. */
+  #anergized: string | null = null;
 
   constructor(opts: LarWSClientOptions) {
     super(opts.url);
@@ -59,7 +61,15 @@ export class LarWSClientAdapter extends WebSocketClientAdapter {
     this.#now        = opts.now;
   }
 
+  /** The gate's refusal if this leaf has anergized, else null. A caller MAY read it to offer a vouch. */
+  get anergized(): string | null { return this.#anergized; }
+
   override connect(peerId: PeerId, peerMetadata?: PeerMetadata): void {
+    // An anergized leaf does not dial. The parent's reconnect path routes back through here, so the
+    // state must refuse at the DOOR — standing down the timer once, and then re-dialing on the next tick,
+    // would restore the flood with an extra step.
+    if (this.#anergized) return;
+
     this.peerId       = peerId;
     this.peerMetadata = peerMetadata ?? {};
 
@@ -111,8 +121,28 @@ export class LarWSClientAdapter extends WebSocketClientAdapter {
 
     socket.removeEventListener("message", onText);
     if (!verdict.ok) {
-      try { console.log(`[lar-leaf] verdict DENIED: ${verdict.reason ?? "(no reason)"}`); } catch { /* */ }
+      // ANERGY, not a retry (lar:///ha.ka.ba/lares/api/pono/lararium-identity #the-siege-gate).
+      //
+      // A refusal is not a transport fault. Closing the socket and letting the parent's reconnect timer
+      // dial again treats "you carry no vouch" as "the network hiccuped" — so an un-vouched leaf hammers
+      // the gate forever, which is a Sybil flood wearing a client's face. The gate is BORN BESIEGED and
+      // the doctrine names what a refused applicant does: it ANERGIZES — stays at the floor (anon),
+      // HYPORESPONSIVE, free to re-present LATER with a vouch. Fail-closed reads stay-at-the-floor, never
+      // destroy: the vessel keeps working locally, it simply stops presenting.
+      //
+      // Anergy is a STATE, never a longer timer. Nothing about re-dialing sooner or later supplies the
+      // second signal, so the leaf stops dialing until something changes — a vouch, a delegation edge, a
+      // gate key it did not have. `disconnect()` stands down the parent's reconnect loop.
+      this.#anergized = verdict.reason ?? "auth denied";
+      try {
+        console.warn(
+          `[lar-leaf] ANERGIZED: ${this.#anergized}\n` +
+          "           This leaf stays at the floor (anon, local-first) and will not re-present. A capability " +
+          "alone is signal-1; admission needs signal-2 — a VOUCH from an already-licensed member.",
+        );
+      } catch { /* a console is a courtesy, never a dependency */ }
       try { socket.close(4003, verdict.reason ?? "auth denied"); } catch { /* closed */ }
+      try { this.disconnect(); } catch { /* the parent may already have stood down */ }
       return;
     }
 

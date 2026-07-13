@@ -119,15 +119,31 @@ async function bootVessel(): Promise<void> {
   set("status", "booting…");
   // ?relay=ws://host:port/ws → the node↔browser spore crossing (opt-in; absent = pure local boot).
   const relayUrl = new URLSearchParams(location.search).get("relay") ?? undefined;
+  // ?gate=<hex> → the RELAY GATE's verifying key. The V3 proof commits to it, and a leaf must hold it
+  // out-of-band: the challenge carries it on the wire, but trusting the wire copy would let any relay
+  // impersonate the gate. Absent, the leaf binds its proof to its OWN did, the gate recomputes against
+  // its own, and the proof fails closed — a correct refusal that looks exactly like a broken socket.
+  // The node vessel prints this key in its boot banner.
+  const relayGatePubKey = new URLSearchParams(location.search).get("gate") ?? undefined;
   // A local boot and a CROSSED boot look identical from the outside: both render, both say "ready". So
   // the vessel names which one it just performed. A seam nobody can see is a seam nobody watches, and an
   // absent crossing that reports nothing reads exactly like a crossing that worked.
   if (relayUrl) {
-    console.log(`[vessel] CROSSING → ${relayUrl} — this vessel dials the node vessel and syncs.`);
+    console.log(`[vessel] CROSSING → ${relayUrl}`);
+    if (!relayGatePubKey) {
+      console.warn(
+        "[vessel] NO GATE KEY — the proof will bind to this vessel's OWN did and the gate will DENY it.\n" +
+        "         Add the node vessel's key:  &gate=<hex from the node's boot banner>",
+      );
+    }
+    // The operator cannot admit a stranger it cannot name. This vessel is the only place its own key
+    // exists, so it says it — with the command that turns it into an admission.
+    console.log(`[vessel] this leaf's key: ${did}`);
+    console.log(`[vessel] to admit it, on the node:  lares device-admit --joinee-key ${did}`);
   } else {
     console.log(
       "[vessel] PURE LOCAL BOOT — no node vessel dialled.\n" +
-      "         To cross, add a relay:  ?relay=ws://localhost:8080/ws",
+      "         To cross:  ?relay=ws://localhost:8080/ws&gate=<node's gate key>",
     );
   }
   // ?genesis=<base> → where the static host serves genesis/ (manifest + cas/). Default /genesis.
@@ -156,6 +172,7 @@ async function bootVessel(): Promise<void> {
       onPhase: paint,
       onProjection: applyProjection,
       ...(relayUrl ? { relayUrl } : {}),
+      ...(relayGatePubKey ? { relayGatePubKey } : {}),
       ...(meshLeaf ? { meshLeaf } : {}),
     });
     _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg

@@ -35,7 +35,7 @@ import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vesse
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
-import { loadVesselSigningSeed }        from "./node-vessel-identity.js";
+import { loadVesselSigningSeed, generateOrLoadVesselIdentity } from "./node-vessel-identity.js";
 import { getMempalaceClient }           from "@lararium/mempalace";
 import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
@@ -194,6 +194,21 @@ async function main(): Promise<void> {
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
   console.log(`[lararium] daemon:   ${result.daemon.daemonHandle.url}`);
   console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
+
+  // THE CROSSING, spoken aloud. A leaf's V3 proof commits to the GATE'S key, and the leaf must hold that
+  // key OUT-OF-BAND — the challenge carries it on the wire, but trusting it there would let any relay
+  // impersonate the gate (the anti-relay guarantee), so the wire copy is not a source. A leaf that never
+  // received the key binds its proof to its OWN did, the gate recomputes against its own, and the proof
+  // fails closed. That refusal is correct, and it looks exactly like a broken socket: dial, deny, re-dial.
+  //
+  // The gate arms with this vessel's operator verifying key, so this vessel already HOLDS the one thing a
+  // crossing leaf cannot obtain for itself. Printing it turns an unperformable ritual into an instruction.
+  // The load is idempotent — the same identity the gate armed with, read back, never a second one.
+  const gateIdentity = await generateOrLoadVesselIdentity(storageDir);
+  console.log(`[lararium] gate key: ${gateIdentity.verifyingKey}`);
+  console.log("[lararium] browser crossing:");
+  console.log(`[lararium]   http://localhost:5173/?relay=ws://localhost:${port}/ws&gate=${gateIdentity.verifyingKey}`);
+  console.log("[lararium]   (a leaf still needs an ADMIT — `lares device-admit --joinee-key <the leaf's key>`)");
 
   // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
   // floor) — served over THIS http server: GET /oracle/pointer · /oracle/<cid>.bin.
