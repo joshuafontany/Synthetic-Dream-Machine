@@ -300,3 +300,25 @@ def test_mdl_select_matches_the_reference_trials_exactly():
         assert [tuple(k["seq"]) for k in got["kept"]] == want_kept
         assert round(got["dl"], 6) == want_dl
         assert got["rounds"] == want_rounds
+
+
+def test_scope_list_support_matches_the_inclusion_dp():
+    """The scope-list join must count EXACTLY the trees the inclusion DP counts —
+    same relation, different vehicle — across randomized forests."""
+    import random
+
+    rng = random.Random(4241)
+    labs = ["a", "b", "c", "d"]
+
+    def rand_tree(depth=0):
+        kids = [] if depth >= 3 else [rand_tree(depth + 1) for _ in range(rng.randrange(0, 3))]
+        return {"type": rng.choice(labs), "children": kids}
+
+    for _ in range(6):
+        forest = [rand_tree() for _ in range(6)]
+        subs = fi.mine_subtrees(forest, min_support=2, max_candidates=400)
+        assert subs
+        for s in subs:
+            pat = (fi._as_forest(fi._seq_to_tree(s["seq"])),)
+            dp_support = sum(1 for t in forest if fi._embeds(pat, t))
+            assert dp_support == s["support"], (s["seq"], dp_support, s["support"])

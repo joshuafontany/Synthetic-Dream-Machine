@@ -262,31 +262,93 @@ def _seq_to_tree(seq: list) -> dict:
     return root
 
 
+def _tree_scopes(t: dict) -> "tuple[list, dict]":
+    """One preorder pass over a corpus tree → (scope, label_positions): scope[i] names
+    node i's rightmost descendant (Zaki's s(x) = [x, y]), and each label's positions
+    ride sorted for the interval joins. The scope arrays ARE the support machinery —
+    every embedded-attachment constraint below reads as interval algebra over them."""
+    scope: list = []
+    label_pos: dict = {}
+    stack = [(t, False)]
+    starts: list = []
+    while stack:
+        node, done = stack.pop()
+        if done:
+            scope[starts.pop()] = len(scope) - 1
+            continue
+        pos = len(scope)
+        scope.append(0)
+        starts.append(pos)
+        label_pos.setdefault(str(node.get("type", "?")), []).append(pos)
+        stack.append((node, True))
+        for child in reversed(_children(node)):
+            stack.append((child, False))
+    return scope, label_pos
+
+
+def _extend_occs(occs: dict, trees_ix: dict, lab: str, depth: int) -> dict:
+    """The scope-list join — one (label, depth) rightmost extension, per Zaki. An
+    occurrence carries ONLY its rightmost path (extensions never reference anything
+    left of it): attach at depth d under anc = path[d-1], with the new position q
+    riding (scope(path[d]), scope(anc)] when a depth-d sibling stands, else
+    (path[D], scope(path[D])] for the child-of-last case. Both read as one bisect
+    over the label's sorted positions — no inclusion DP anywhere."""
+    import bisect
+
+    out: dict = {}
+    for tid, paths in occs.items():
+        scope, label_pos = trees_ix[tid]
+        qs = label_pos.get(lab)
+        if not qs:
+            continue
+        grown = set()
+        for path in paths:
+            last = len(path) - 1
+            if depth > last + 1:
+                continue
+            if depth == last + 1:
+                lo, hi = path[last], scope[path[last]]
+            else:
+                lo, hi = scope[path[depth]], scope[path[depth - 1]]
+            for j in range(bisect.bisect_right(qs, lo), len(qs)):
+                q = qs[j]
+                if q > hi:
+                    break
+                grown.add(path[:depth] + (q,))
+        if grown:
+            out[tid] = grown
+    return out
+
+
 def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTREE_NODES,
                   max_candidates: int = _MAX_CANDIDATES) -> list:
     """Frequent CLOSED embedded ordered subtrees. Returns [{seq, tree, support, size}], the
-    templates sorted large-first then by support (the strongest structural forms lead)."""
-    # frequent single labels seed level 1.
-    label_trees: dict[str, list] = {}
-    for t in forest:
-        seen = set()
-        nodes: list = []
-        _all_nodes(t, nodes)
-        for n in nodes:
-            seen.add(str(n.get("type", "?")))
-        for lab in sorted(seen):   # sorted: the walk order (and thus the budget's survivor set) never rides string-hash order
-            label_trees.setdefault(lab, []).append(t)
-    # (label, depth)-sequence → its supporting corpus trees, BFS by size.
-    frontier: list[tuple[list, list]] = []
-    frequent: dict[tuple, dict] = {}
-    for lab, trees in sorted(label_trees.items()):
-        if len(trees) >= min_support:
+    templates sorted large-first then by support (the strongest structural forms lead).
+
+    Support rides SCOPE-LIST joins (Zaki, IEEE TKDE 17(8) 2005): each pattern carries
+    its occurrences' rightmost paths per tree, and every (label, depth) extension joins
+    by interval algebra over precomputed scopes — the per-candidate inclusion DP the
+    old miner ran against whole trees never runs here. Same enumeration order, same
+    budgets, same closed filter; only the support relation changed vehicle."""
+    # frequent single labels seed level 1; the per-tree scope index feeds every join.
+    trees_ix: dict = {}
+    label_trees: dict = {}
+    for tid, t in enumerate(forest):
+        scope, label_pos = _tree_scopes(t)
+        trees_ix[tid] = (scope, label_pos)
+        for lab in sorted(label_pos):  # sorted: the walk order never rides string-hash order
+            label_trees.setdefault(lab, []).append(tid)
+    frontier: list = []
+    frequent: dict = {}
+    for lab, tids in sorted(label_trees.items()):
+        if len(tids) >= min_support:
             seq = [(lab, 0)]
-            frequent[tuple(seq)] = {"seq": seq, "support": len(trees), "size": 1, "trees": trees}
-            frontier.append((seq, trees))
+            occs = {tid: {(p,) for p in trees_ix[tid][1][lab]} for tid in tids}
+            frequent[tuple(seq)] = {"seq": seq, "support": len(tids), "size": 1}
+            frontier.append((seq, occs))
     explored = 0
     while frontier and explored < max_candidates:
-        seq, support_trees = frontier.pop()
+        seq, occs = frontier.pop()
         if len(seq) >= max_nodes:
             continue
         last_depth = seq[-1][1]
@@ -297,14 +359,12 @@ def mine_subtrees(forest: list, min_support: int, *, max_nodes: int = _MAX_SUBTR
                 if explored >= max_candidates:
                     break
                 cand = seq + [(lab, depth)]
-                pat_tree = _seq_to_tree(cand)
-                pat_forest = (_as_forest(pat_tree),)
-                hits = [t for t in support_trees if _embeds(pat_forest, t)]
-                if len(hits) >= min_support:
+                grown = _extend_occs(occs, trees_ix, lab, depth)
+                if len(grown) >= min_support:
                     frequent[tuple(cand)] = {
-                        "seq": cand, "support": len(hits), "size": len(cand), "trees": hits
+                        "seq": cand, "support": len(grown), "size": len(cand)
                     }
-                    frontier.append((cand, hits))
+                    frontier.append((cand, grown))
     # CLOSED filter — a pattern is non-closed if a strictly larger frequent pattern with the
     # SAME support contains it (the sub-pattern adds nothing the super-pattern doesn't say).
     items = list(frequent.values())
