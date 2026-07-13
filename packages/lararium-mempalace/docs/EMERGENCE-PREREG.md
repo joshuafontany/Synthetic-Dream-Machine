@@ -110,3 +110,20 @@ Findings file against the law they press on, never only their method. A
 surprise outside these vows opens the next sheet's first row. Confidence
 vows precede claims. And the sheet itself stays append-only once the first
 bed rebuilds — corrections arrive as dated strikethroughs, never silent edits.
+
+## Results appendix — dated, append-only
+
+**2026-07-13 · preconditions + the gap witness.**
+- P1–P4 stand green across ALL EIGHT beds (two human-text + six kumulipo):
+  every chain holds non-vacuously after the two carrier-rename cures
+  (sectioner keys stems; extracted sections designate prose).
+- **The C1-adjacent gap witness ran** (the owed empirical test): on the
+  kumulipo-extracted thesis bed (54 sections, 238k stream tokens), the MDL
+  selector accepted the same template set with and without the exhumed
+  gapped-candidate pool — ZERO templates only gaps produced, dl identical
+  (1486962.3 → 1484888.7 both ways, min_support 2, the bed's own floor).
+  The gapped lane's deletion stands confirmed on this corpus; the question
+  reopens only if a future bed's diff lands non-empty.
+- The regeneration witness (rederive == pour, dl bit-identical on the memes
+  bed) rides commit 39130c48; the C-criteria sweeps proper (C1 shuffled
+  twins side-by-side, C4 stops, C5 at scale) remain the next run.
