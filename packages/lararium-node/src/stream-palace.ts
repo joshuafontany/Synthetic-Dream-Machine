@@ -71,8 +71,9 @@ function runSignalSidecar(
 /**
  * The DIRECT-SIGNAL / LIVE plane bank — the numeric door. Implements ONLY the planes a natively-numeric
  * stream affords: `bands` (MODWT+ecp over the raw signal) + `coupling` (RTransferEntropy lead-lag).
- * No dead content/structure legs — a numeric stream carries neither, so those planes skip by absence
- * (the SourceAdapter lesson: only the genuinely-per-modality legs exist).
+ * No dead content/structure legs — a numeric stream carries neither, so those planes skip by absence.
+ * A leg exists only where the modality genuinely affords it; a leg carried for symmetry is a leg that
+ * reports an empty answer as a real one.
  *
  * The bands leg's DERIVED door (text: signal from content embeddings) rides the batch corpus run, NOT
  * this frame sink — so a `derivedFromContent` call returns 0 here (the content path already banded it).

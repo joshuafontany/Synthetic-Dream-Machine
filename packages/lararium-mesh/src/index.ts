@@ -21,12 +21,6 @@ export * from "./boot-resolver.js";
 export * from "./build-patch.js";
 export * from "./branch-frontier.js";
 export * from "./gone-turns.js";
-// The source-adapter CONTRACT rides the isomorphic barrel; its four host IMPLEMENTATIONS ride
-// `@lararium/mesh/node`. Each of them reads transcripts off a disk (node:fs · node:path · node:crypto),
-// so a browser vessel has nothing for them to read — and re-exporting them here put `node:fs` into the
-// module graph of everything that imports this barrel, the browser hull included. The contract stays;
-// the platform leaves.
-export * from "./source-adapter.js";
 export * from "./stream-adapter.js";
 export * from "./text-stream-adapter.js";
 export * from "./sensorium-pc.js";

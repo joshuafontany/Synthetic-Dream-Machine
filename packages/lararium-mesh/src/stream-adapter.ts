@@ -9,14 +9,13 @@
  * supplies ONLY the intake (raw → {@link StreamFrame}s); the shared CORE ({@link composePalace})
  * routes each frame's populated slots to the matching plane.
  *
- * ## Composition-thin (the SourceAdapter lesson)
+ * ## Composition-thin
  *
- * The rewind {@link SourceAdapter} (source-adapter.ts) collapsed twice: a dead `normalizeIdentity`
- * every adapter filled identically, and a linear-branch body triplicated verbatim. The cure was to
- * push shared behavior into free functions the CORE applies, leaving each adapter ONLY its genuinely
- * app-specific bits. This module starts there: the adapter surface is EXACTLY `modality · mode ·
- * ingest`. Every plane behavior lives in the injected {@link PlaneSink}, applied by the shared driver
- * — NEVER re-declared per adapter. A new modality adds an `ingest`, nothing else.
+ * An adapter carries ONLY what is genuinely app-specific; every shared behavior lives in a free
+ * function the CORE applies. Give an adapter a slot each one fills identically and that slot becomes
+ * a field nobody reads; give it a body each one copies and the copies drift apart. So the surface
+ * here stays EXACTLY `modality · mode · ingest`, plane behavior lives in the injected
+ * {@link PlaneSink} the shared driver applies, and a new modality adds an `ingest` and nothing else.
  *
  * ## The two doors (why the frame carries three slots)
  *
@@ -88,7 +87,7 @@ export interface StreamAdapter<Raw = unknown> {
 
 /**
  * The PLANE BANK — the injected appliers the CORE routes frames to. This is the impurity boundary
- * (as source-adapter injects `hash`): the node/CLI caller wires the real python sidecars (content
+ * (the caller injects `hash` the same way): the node/CLI caller wires the real python sidecars (content
  * embed · structurepalace encoder · bands MODWT+ecp · RTransferEntropy coupling); a test wires a fake.
  * Each leg is OPTIONAL — an absent leg means that plane is skipped (graceful, like the corpus caps).
  * Each returns the count it filed (drawers · structure vectors · bands cells · coupling edges).

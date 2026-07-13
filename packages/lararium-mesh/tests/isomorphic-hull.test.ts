@@ -77,11 +77,11 @@ describe("the isomorphic hull — @lararium/mesh carries no platform", () => {
     ).toEqual([]);
   });
 
-  test("the host door still holds the host code — the seam exists to be used", () => {
-    // Guards the opposite failure: someone 'fixes' the test above by emptying node.ts, and the platform
-    // code silently loses its home. The four transcript adapters read transcripts off a disk; they belong
-    // here and nowhere else.
-    const breaches = platformBreaches(join(SRC, "node.ts"));
-    expect(breaches.length).toBeGreaterThan(0);
+  test("the host door stays a separate door — the barrel never re-exports it", () => {
+    // The cheapest way to undo all of this is one line: `export * from "./node.js"` in the barrel. It
+    // would typecheck, it would ship, and every host module behind the door would pour straight back into
+    // the browser's graph. The door only holds while it stays a door.
+    const barrel = readFileSync(join(SRC, "index.ts"), "utf8");
+    expect(barrel).not.toMatch(/(?:from|import)\s+["']\.\/node\.js["']/);
   });
 });

@@ -19,7 +19,7 @@
  *
  * The adapter surface is EXACTLY `modality · mode · ingest`. The two genuinely per-modality bits — how
  * to CHUNK text and (optionally) how to PARSE a chunk to a shape tree — ride the CONFIG (injected, as
- * source-adapter injects `hash`), never dead interface methods. Absent a `parse`, frames carry content
+ * the caller injects `hash`), never dead interface methods. Absent a `parse`, frames carry content
  * only and the structure plane derives downstream from the source path (the corpus router is
  * path-based, per-file); an injected `parse` fills `structure` per chunk.
  *

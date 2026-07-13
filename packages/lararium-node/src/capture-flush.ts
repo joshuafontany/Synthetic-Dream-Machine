@@ -62,7 +62,7 @@ function refuseComparator(palacePath: string): void {
 }
 
 /**
- * Build node's `CaptureFlush`: serialize → spawn the source-adapter flush → parse
+ * Build node's `CaptureFlush`: serialize → spawn the python flush sidecar → parse
  * `Drawers filed: N` → delete the transient file. THROWS on a failed/timed-out flush so
  * CaptureNalu re-queues; the in-memory queue stays the source of truth, so nothing lingers
  * on disk after a failure.

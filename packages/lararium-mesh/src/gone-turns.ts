@@ -28,7 +28,6 @@
  *     operator edited a user turn / regenerated an assistant turn).
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time (rewind = set-aside)
- *       lar:///ha.ka.ba/@lararium/api/rewind-adapter (the SourceAdapter contract this feeds)
  */
 
 /**

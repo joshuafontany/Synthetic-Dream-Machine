@@ -321,10 +321,10 @@ export function livePalaceHolderCount(label: string): number {
 /**
  * MESHPALACE shape — FLAGGED, MODELED, NOT BUILT HERE.
  *
- * The meshpalace = a mempalace-instance fed by the @meshpalace Automerge doc through a
- * SOURCE-ADAPTER, AND the cross-Lararium bridge (peer Lararia federate their ≥meme memes
- * through it). As a palace-instance it #has the SAME transport cap above PLUS this feed cap
- * — the doc→palace source-adapter. The op-surface would be read-oriented (search/get over
+ * The meshpalace = a mempalace-instance fed by the @meshpalace Automerge doc through a FEED
+ * ADAPTER, AND the cross-Lararium bridge (peer Lararia federate their ≥meme memes through it).
+ * As a palace-instance it #has the SAME transport cap above PLUS this feed cap — the doc→palace
+ * feed adapter. The op-surface would be read-oriented (search/get over
  * the federated corpus), the FEED replacing the per-turn local `encodeStore`/`put` write path.
  *
  * The full DreamNet peer-federation wiring (the @meshpalace AutomergeDocStore FLOW-map,
