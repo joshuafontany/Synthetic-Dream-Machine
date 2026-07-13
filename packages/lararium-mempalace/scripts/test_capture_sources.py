@@ -248,3 +248,23 @@ def test_resolve_source_knows_the_corpus_surface():
     assert resolve_source("corpus", wing="w") is not None
     with pytest.raises(ValueError):
         resolve_source("corpus")                      # the corpus cap requires a wing (the schema floor)
+
+
+def test_corpus_source_eats_mem_carriers(tmp_path):
+    # `.mem` names the registered memetic-wikitext carrier — a filter without it
+    # silently empties every meme bed (the memes-bed regenesis caught this live).
+    root = tmp_path / "memes"
+    root.mkdir()
+    (root / "seed.mem").write_text("<<~ ahu #entry >>\n\naloha\n\n<<~/ahu >>\n")
+    recs = list(corpus_source(wing="wing_testbed")(str(root)))
+    assert [r["metadata"]["source_file"] for r in recs] == ["corpus:memes/seed.mem"]
+
+
+def test_corpus_source_refuses_loud_on_an_empty_yield(tmp_path):
+    # A named corpus yielding nothing refuses — a silent empty bed builds
+    # "successfully" and reads as a finding downstream.
+    root = tmp_path / "empty"
+    root.mkdir()
+    (root / "code.py").write_text("pass\n")  # filtered by extension; nothing lands
+    with pytest.raises(SystemExit, match="ZERO records"):
+        list(corpus_source(wing="wing_testbed")(str(root)))

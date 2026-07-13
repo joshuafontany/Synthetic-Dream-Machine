@@ -350,8 +350,10 @@ def copilot_source(*, wing: "str | None" = None, room: str = "conversations") ->
 # AI surfaces, so the rewind guard + kapae legs cover a re-curated corpus too.
 
 # The human-text extensions this cap eats; other kinds (code/json/toml) wait for a
-# later arc — the test-bed proves the rails on prose-rich memes.
-_CORPUS_EXTS = (".md", ".markdown", ".txt", ".text")
+# later arc — the test-bed proves the rails on prose-rich memes. `.mem` carries the
+# memetic-wikitext memes (the registered carrier extension) — the corpus of the house
+# rides it, and a filter without it silently empties every meme bed.
+_CORPUS_EXTS = (".md", ".markdown", ".txt", ".text", ".mem")
 # One file lands as one record; a file past this ceiling skips (a curated corpus
 # holds prose memes, never blobs).
 _CORPUS_MAX_BYTES = 512_000
@@ -442,7 +444,20 @@ def corpus_source(*, wing: str, room: str = "corpus") -> SourceCap:
                     "lar_mtime_sighting": _mtime_sighting(fp),
                 }
                 yield derive_cid(source_file, 0), text, meta
-        yield from _seq_records(all_drawers())
+
+        landed = 0
+        for rec in _seq_records(all_drawers()):
+            landed += 1
+            yield rec
+        if landed == 0:
+            # A named corpus yielding nothing refuses LOUD — a silent empty bed
+            # builds "successfully" and reads as a finding downstream.
+            raise SystemExit(
+                f"corpus_source: the corpus at {pointer!r} yielded ZERO records — "
+                f"wrong path, or every file filtered (exts {_CORPUS_EXTS}, "
+                f"ceiling {_CORPUS_MAX_BYTES} bytes). Name a corpus that holds "
+                "records, or stop."
+            )
     return source
 
 
