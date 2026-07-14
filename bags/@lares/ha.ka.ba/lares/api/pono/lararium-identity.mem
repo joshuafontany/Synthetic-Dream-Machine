@@ -389,6 +389,45 @@ So @oracle wears **two faces**, joined by a publish-bridge:
 
 <<~/ahu >>
 
+<<~ ahu #publish-a-face >>
+
+## Publish a Face ~ recognition without a registry (BUILT)
+
+**A handle PUBLISHES so others RECOGNISE it — and the model was already half-shipped.** A `handle-card`
+(`handle-card.ts`, 10/10) is the public face of ONE handle: its verifying key (`nym`), a display glamour, a
+monotone `version`, a `prev` lineage link, a freshness lease, and an optional pointer to its reputation
+thread — **signed by the handle's own key**, riding the @oracle plane's signed-content-addressed-pointer
+discipline (#the-oracle-plane). Publishing a face reveals **nothing** of the vault or the human's other faces
+(persona-circle#the-vault): no shared key, no collector pointer, the seed never on the wire.
+
+**Recognition is SELF-CERTIFYING — the name contains the key.** The signing key rides IN the card, so a
+recogniser verifies the signature against the embedded key and consults **no registry.** This is Mazières'
+Self-certifying File System (1999) — `HostID = hash(pubkey)`, so the name carries the key and needs no PKI —
+restated with Ed25519; did:key and a Nostr `npub` are the same core. **Zooko's triangle resolves:** the
+identifier is secure-and-decentralised *because it IS the key*, memorable *because each recogniser keeps a
+LOCAL petname*. No SIN, no directory to capture.
+
+**Two steps, never conflated:** a card certifies ITSELF (a valid signature by the key it names), THEN the
+petname check asks whether that key is the one you know. A valid card can still be a stranger; only the local
+petname turns a key into "the mover who healed Neo-Thracia". **Recognition rests on the key, never the
+glamour** — impersonation by display name fails.
+
+**DISCOVERY is a three-channel bundle, none a global directory** (web survey 2026-07-13, Nostr/did:key/SFS
+grounding): **introduction** (a peer / QR / thread hands you the self-certifying identifier), **petname**
+(the local memorable name you assign after introduction — Stiegler), **follow-graph** (transitive discovery
+through keys you already trust, which doubles as a weak sybil filter). This IS Nostr's model shipped — kind-0
+signed metadata, pubkey-IS-identity, `nprofile` = key+pointer — and our ONE deviation, **a content-addressed
+read-open plane instead of relay-broadcast, is precisely the fix for Nostr's #1 failure: relay
+centralisation.**
+
+**THE REGISTRY-BACK-DOOR LAW** (the survey's hardest lesson): keep human-readable naming **STRICTLY LOCAL**
+(petnames) or **strictly optional and replaceable** — *the moment a global name→key lookup becomes mandatory,
+you have rebuilt the registry.* Every system that made first-contact convenient re-added a directory:
+NIP-05 → DNS, AT-proto handle → DNS/PLC, ENS → ledger. **A convenience layer may exist; it may NEVER be
+load-bearing.** The vouch-lineage (#the-siege-gate) carries standing; a name never carries authority.
+
+<<~/ahu >>
+
 <<~ ahu #encrypt-from-start >>
 
 ## Encrypt From the Start ~ the temporary keying
