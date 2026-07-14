@@ -251,3 +251,19 @@ chunks") changed what a newly-admitted member can read. Migration is SOUND (keyh
 boot-daemon-keyhive + admit-ceremony 6/6). The OPEN question is the alpha.6 cross-peer content pattern:
 ship the `tryEncrypt` `update_op`? use `tryEncryptKeyed` + `Encrypted.decryptWithKey(key)`? is read now
 forward-only (a new member reads future chunks, not pre-join content)? — UNRESOLVED, spirit dispatched.
+
+### alpha.6 RESOLVED — add-before-encrypt; crossing stays transport-not-crypto (route A)
+
+The "Key not found" was OUR ordering bug: the probe encrypted before adding the member. keyhive read is
+FORWARD-ONLY — a member reads content encrypted AT OR AFTER its add (keyhive core tests
+`test_cannot_decrypt_content_from_before_joining` asserts the failure, `test_encrypt_to_added_member` +
+`test_dual_instance_with_added_member_decrypt` assert the fix). REORDER: addMember FIRST → tryEncrypt →
+capture `eventsForAgent` AFTER the encrypt (it carries the PCS update op keying to the joinee's leaf).
+
+Re-run on alpha.6: `tryDecrypt` SUCCEEDS from public bytes + the joinee's own prekey secret, exit 0. So the
+crossing stays a TRANSPORT problem — no sealed channel — for content encrypted after the join.
+
+Pre-existing content (a device joining a PersonaGroup with older docs) takes ROUTE A: the founder RE-ENCRYPTS
+each existing chunk after the add (ships only public ops + ciphertext, still no secret in transit). ROUTE B
+(the `*Keyed` shortcut: hand the joinee the 32-byte applicationSecret) DOES ship a secret and DOES need a
+sealed channel — an opt-in escape hatch, not the default.

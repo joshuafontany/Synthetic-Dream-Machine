@@ -1,27 +1,26 @@
 /**
  * CROSS-PEER-DECRYPT PROBE — the decisive test the crossing rests on.
  *
- * The question no probe we hold has answered: can a DISTINCT-IDENTITY joinee (Model B — its own per-device
- * key, NOT a sibling of the founder's identity) decrypt a group's content having received ONLY PUBLIC bytes
- * — the delegation, the CGKA ops, the Encrypted blob — and NO `leafSecrets`, NO prekey-secret install, NO
- * archive?
+ * The question the crossing rests on: can a DISTINCT-IDENTITY joinee (Model B — its own per-device key, NOT a
+ * sibling of the founder's identity) decrypt a group's content having received ONLY PUBLIC bytes — the
+ * delegation, the CGKA ops, the Encrypted blob — with NO secret in transit (no prekey-secret install, no
+ * archive, no `*Keyed` application secret)?
  *
- *   · SUCCESS → keyhive's add-member sealed the group secret to the joinee's own prekey (clean TreeKEM),
- *     nothing secret crosses the relay, and the "libsodium sealed-box" the design note called for is
- *     REDUNDANT for Model B. The crossing reduces to transport of already-confidential bytes.
- *   · FAILURE (needs the leafSecrets install) → a SECRET must travel, so an untrusted relay demands a sealed
- *     channel, and the sealed-box (or equivalent) is REQUIRED. The design note stands.
+ * VERDICT (keyhive alpha.6, running code): YES — the joinee decrypts from public bytes + its OWN prekey
+ * secret alone. keyhive's CGKA keys content to the tree epoch, and add-member climbs a path that encrypts to
+ * the new leaf, so nothing secret crosses the relay. The crossing is a TRANSPORT problem, not a crypto one.
  *
- * We run `forward_secrecy = false` to match production (keyhive-provider.ts). On that path add-member
- * auto-rekeys and may hand the ADDER `AddMemberUpdate.leafSecrets` — raw `BTreeMap<ShareKey, ShareSecretKey>`
- * meant for a "sibling instance of this identity." This probe checks whether a DISTINCT identity needs them.
- *
- * The probe NEVER ships leafSecrets to the device. If the decrypt needs them, it fails HONESTLY — which is
- * the finding, not a bug.
+ * ORDER IS LOAD-BEARING — keyhive read is FORWARD-ONLY. A member reads content encrypted AT OR AFTER its
+ * add, never pre-join content (keyhive's own test_cannot_decrypt_content_from_before_joining asserts the
+ * "Key not found" that encrypt-before-add produces — "the forward-secrecy boundary of CGKA"). So the founder
+ * ADDS first, then ENCRYPTS, and captures the events AFTER the encrypt (they carry the PCS update op keying
+ * to the joinee's leaf). Granting a new member PRE-EXISTING content needs a founder RE-ENCRYPT per chunk
+ * (route A — still public ops + ciphertext) OR the `*Keyed` shortcut (route B — ships a 32-byte app secret,
+ * which DOES need a sealed channel; not used here).
  *
  * SELF-ASSERTING: exits 0 only when the joinee decrypts from public bytes alone; exits 1 on any failure. So
  * `tsx …/cross-peer-decrypt.ts` runs as the crossing's acceptance gate — a keyhive bump or a code change
- * that breaks the seal-to-prekey property trips a non-zero exit.
+ * that breaks the forward-read property trips a non-zero exit.
  *
  * Usage: pnpm exec tsx packages/lararium-keyhive/probes/cross-peer-decrypt.ts
  * Findings land in packages/lararium-keyhive/probes/FINDINGS.md.
@@ -70,27 +69,26 @@ async function main(): Promise<void> {
   await device.receiveContactCard(founderCard);
   console.log(`[probe] introduced; deviceIndividual=${deviceIndividual.id?.toString()?.slice(0, 24)}…`);
 
-  // Founder makes a doc and encrypts real content into it.
   const doc = await founder.generateDocument([], changeId(0), []);
   const docIdHex = Buffer.from(doc.id.toBytes()).toString("hex");
-  const PLAINTEXT = new TextEncoder().encode("the-crossing-holds — a secret only a member may read");
-  const enc = await founder.tryEncrypt(doc, changeId(50), [], PLAINTEXT);
-  const encrypted = enc.encrypted_content();
-  const encBytes  = encrypted.serialize();   // fromBytes pairs with serialize(), not toBytes()
-  console.log(`[probe] encrypted ${PLAINTEXT.length}B of content → ${encBytes.length}B blob on doc ${docIdHex.slice(0, 16)}…`);
 
-  // Founder admits the device as a reader.
+  // ORDER IS LOAD-BEARING (keyhive forward-secrecy boundary): ADD the member FIRST, then ENCRYPT. keyhive's
+  // CGKA keys content to the tree epoch at write time; a member reads only content encrypted AT OR AFTER its
+  // add. Encrypt-before-add → the PCS op never encrypted to the device's leaf → tryDecrypt "Key not found"
+  // (keyhive's own test_cannot_decrypt_content_from_before_joining asserts exactly this).
   const access = KH.Access.tryFromString("read") ?? KH.Access.tryFromString("admin");
   const deviceAgent = await founder.getAgent(deviceIndividual.id);
   if (!access || !deviceAgent) { console.log(`[probe] FAIL setup: access=${!!access} agent=${!!deviceAgent}`); return; }
-  // alpha.6: addMember returns a SignedDelegation directly — the AddMemberUpdate/leafSecrets pair was
-  // removed, so there is no per-add secret to withhold or ship at all. The read-scope question is now purely
-  // "does the joinee decrypt from public ops + its own prekey secret?" — which the decrypt below settles.
   const signedDelegation = await founder.addMember(deviceAgent, doc.toMembered(), access, []);
-  console.log(`[probe] ★ addMember → SignedDelegation (sig ${signedDelegation.signature.length}B); no leafSecrets surface in alpha.6`);
+  console.log(`[probe] ★ addMember → SignedDelegation (sig ${signedDelegation.signature.length}B) BEFORE encrypt`);
 
-  // Ship ONLY PUBLIC bytes to the device: the events keyhive routes to it, plus the Encrypted blob.
-  // No exportPrekeySecrets, no archive — the device holds only its OWN prekey secret.
+  // Encrypt AFTER the add — the fresh PCS update op now encrypts a path secret to the device's leaf.
+  const PLAINTEXT = new TextEncoder().encode("the-crossing-holds — a secret only a member may read");
+  const encBytes = (await founder.tryEncrypt(doc, changeId(50), [], PLAINTEXT)).encrypted_content().serialize();
+  console.log(`[probe] encrypted ${PLAINTEXT.length}B → ${encBytes.length}B blob on doc ${docIdHex.slice(0, 16)}…`);
+
+  // Ship ONLY PUBLIC bytes — captured AFTER the encrypt so they carry both the add op and the PCS update op.
+  // No exportPrekeySecrets, no archive, no *Keyed application secret — the device holds only its OWN prekey.
   const publicEvents = await publicEventsFor(founder, deviceAgent);
   const ingested = await device.ingestEventsBytes(publicEvents as unknown[]);
   // ingestEventsBytes returns a result array (errors/output), NOT an "applied" count — reachableDocs is truth.
