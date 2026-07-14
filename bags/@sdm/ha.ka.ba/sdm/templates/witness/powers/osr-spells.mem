@@ -25,7 +25,7 @@ uri-path  = "ha.ka.ba/sdm/templates/witness/powers/osr-spells"
 
 !! Intent
 
-A witness meme preserves provenance and conversion anchors for a Power module. It stays **cold** during ordinary play — it MUST NOT load for a live-play request. Load it for audit, source archaeology, recognizer history, or disputes about what an older surface implied.
+A witness meme preserves provenance and conversion anchors for a Power module. It stays ''cold'' during ordinary play — it MUST NOT load for a live-play request. Load it for audit, source archaeology, recognizer history, or disputes about what an older surface implied.
 
 <<~/ahu >>
 

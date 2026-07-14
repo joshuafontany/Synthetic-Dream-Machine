@@ -22,7 +22,7 @@ retain      = true
 
 ! Lararium Multiplayer Infinite-Canvas Wiki
 
-Lararium is a **local-first memetic wiki** with two live UX projections over the same tiddler corpus: TW5 wiki UX and tldraw infinite-canvas UX.
+Lararium is a ''local-first memetic wiki'' with two live UX projections over the same tiddler corpus: TW5 wiki UX and tldraw infinite-canvas UX.
 
 `lares/` is canon. The live room corpus is an Automerge document synced through `/meme-sync` and materialized into a room-scoped `LarariumTW5` instance. The canvas is a projection/edit lens over that TW5-backed corpus, not an independent source of meme truth.
 
@@ -48,7 +48,7 @@ What this system is not:
 
 !! Room Model
 
-**Core invariant: a room is a capability/filter/view scope over the shared memetic wiki corpus.**
+''Core invariant: a room is a capability/filter/view scope over the shared memetic wiki corpus.''
 
 The live corpus is a CRDT-backed tiddler document. Browser boot is local-first:
 
@@ -76,9 +76,9 @@ Current implementation details:
 
 The desired room-as-filter model still stands: a room recipe should run a TW5 filter expression, project only matching tiddlers into canvas shapes, and evict shapes that leave the filter. The code has the ingredients (`filterTiddlers`, `projectFromTw5`, `LarariumCrdtSyncAdaptor`) but the browser projection is currently a full initial projection with incremental update as M11 work.
 
-**Room identity today:** `/room/:roomId` serves room-specific HTML meta tags and is the capability/view-routing seam. The meme content doc is still global per server process; per-room recipes and per-room Automerge docs are not yet split. `DEFAULT_ROOM = "main"` in `serve.ts`; the browser host currently uses a fixed TW5 scope id for the open session.
+''Room identity today:'' `/room/:roomId` serves room-specific HTML meta tags and is the capability/view-routing seam. The meme content doc is still global per server process; per-room recipes and per-room Automerge docs are not yet split. `DEFAULT_ROOM = "main"` in `serve.ts`; the browser host currently uses a fixed TW5 scope id for the open session.
 
-**Session identity today:** Automerge peer identity + UCAN handshake is the content-sync identity path. The old tldraw `?sessionId=` path applies only to the legacy `/rooms/:roomId` socket.
+''Session identity today:'' Automerge peer identity + UCAN handshake is the content-sync identity path. The old tldraw `?sessionId=` path applies only to the legacy `/rooms/:roomId` socket.
 
 !!! Scale laws — room-as-view target
 
@@ -93,7 +93,7 @@ Prior art from YJS 3D spaces and TW5 large instances still informs the target, b
 | Eviction when leaving view | Frustum culling | Target: projection diff removes shapes no longer in the room filter |
 | Write amplification | TW5 `changedTiddlers` selective refresh | `tiddlerStore.subscribe()` + `tw5.onWikiChange()` + future projection diffing |
 
-**Target shape budget per room view:** ≤ 500 projected shapes at any time. Larger corpora should be navigated via TW5 recipes, portals, and zoom-level detail gates rather than by drawing the entire corpus.
+''Target shape budget per room view:'' ≤ 500 projected shapes at any time. Larger corpora should be navigated via TW5 recipes, portals, and zoom-level detail gates rather than by drawing the entire corpus.
 
 <<~/ahu >>
 
@@ -110,9 +110,9 @@ Current M10 opening path is local-first and TW5-centered:
 5. Browser creates a room-scoped `LarariumTW5`, runs `loadFromStore()` before `tw5-ready`, and starts `LarariumCrdtSyncAdaptor` both directions.
 6. `LarariumShell` seeds local tldraw from `projectFromTw5(tw5)` by putting emitted page/shape/binding records into the editor store.
 
-**Receipt delivery:** The receipt SHA now travels as `<meta name="lararium-receipt">` in the HTML shell. The hidden tldraw boot-receipt shape and `useBridgeReceiptFromEditor` pattern are deleted from the active path. `LarariumBootReceiptMeta` remains only as a deprecated compatibility type until the protocol surface is cleaned.
+''Receipt delivery:'' The receipt SHA now travels as `<meta name="lararium-receipt">` in the HTML shell. The hidden tldraw boot-receipt shape and `useBridgeReceiptFromEditor` pattern are deleted from the active path. `LarariumBootReceiptMeta` remains only as a deprecated compatibility type until the protocol surface is cleaned.
 
-**Reseed semantics changed:** `/admin/reseed` still evicts the legacy tldraw SQLite room and recomputes snapshot/receipt, but normal corpus changes now flow through disk ↔ Automerge:
+''Reseed semantics changed:'' `/admin/reseed` still evicts the legacy tldraw SQLite room and recomputes snapshot/receipt, but normal corpus changes now flow through disk ↔ Automerge:
 
 ```
 lares/ editor/git/MCP write
@@ -127,9 +127,9 @@ lares/ editor/git/MCP write
 
 `/admin/promote` writes `lares/` and patches Automerge immediately, so connected clients do not wait for a room reseed to see promoted text.
 
-**Projection status:** `projectFromTw5()` performs a full TW5 → tldraw emission. Incremental `tw5.onWikiChange → project affected URI → editor.store.put/remove` is the M11 shape-refresh target.
+''Projection status:'' `projectFromTw5()` performs a full TW5 → tldraw emission. Incremental `tw5.onWikiChange → project affected URI → editor.store.put/remove` is the M11 shape-refresh target.
 
-**Shape ID scoping:** Shape IDs remain URI-stable (`memeFrameId(uri)`). `emitTldrawRecords(..., { pageOverride })` still exists as a library option for multi-page/multi-room emission, but the active browser path does not seed the canvas from a server boot snapshot.
+''Shape ID scoping:'' Shape IDs remain URI-stable (`memeFrameId(uri)`). `emitTldrawRecords(..., { pageOverride })` still exists as a library option for multi-page/multi-room emission, but the active browser path does not seed the canvas from a server boot snapshot.
 
 <<~/ahu >>
 
@@ -137,16 +137,16 @@ lares/ editor/git/MCP write
 
 !! Trust Tiers and Access Control
 
-Four tiers. Promotion is gated by **Orichalcum capabilities** (see `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`) — not web2 role assignment. The Orichalcum profile is UCAN-compatible at the wire boundary; Lararium-native caveats (`rating`, `manaoio`, `kapu-scope`, `epoch`) govern semantic authority beyond crypto validity. Stage band is a UX rendering annotation — it is NOT an Orichalcum gate condition.
+Four tiers. Promotion is gated by ''Orichalcum capabilities'' (see `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`) — not web2 role assignment. The Orichalcum profile is UCAN-compatible at the wire boundary; Lararium-native caveats (`rating`, `manaoio`, `kapu-scope`, `epoch`) govern semantic authority beyond crypto validity. Stage band is a UX rendering annotation — it is NOT an Orichalcum gate condition.
 
 | Tier | Identity | Canvas access | Room access | Orichalcum ability |
 |------|----------|---------------|-------------|-------------------|
-| **anon** | Ephemeral session (no DID) | Lares chat rooms only | No boot room | `read` (public recipe only) |
-| **user** | Self-sovereign DID | User-owned lararium rooms | No boot room | `read + propose` |
-| **operator** | Promoted DID (delegated capability) | Full boot room (read + pending edits) | Yes | `read + sync + write + propose` |
-| **admin** | Root DID (capability issuer) | Full boot room (read + canon MOVE) | Yes | `promote + admin + revoke` |
+| ''anon'' | Ephemeral session (no DID) | Lares chat rooms only | No boot room | `read` (public recipe only) |
+| ''user'' | Self-sovereign DID | User-owned lararium rooms | No boot room | `read + propose` |
+| ''operator'' | Promoted DID (delegated capability) | Full boot room (read + pending edits) | Yes | `read + sync + write + propose` |
+| ''admin'' | Root DID (capability issuer) | Full boot room (read + canon MOVE) | Yes | `promote + admin + revoke` |
 
-**Orichalcum gate at room join:** Before `handleSocketConnect`, verify the presented Orichalcum capability (UCAN-shaped at wire) against the room's required ability and Lararium caveats. Reject with WS close code 4003 on failure.
+''Orichalcum gate at room join:'' Before `handleSocketConnect`, verify the presented Orichalcum capability (UCAN-shaped at wire) against the room's required ability and Lararium caveats. Reject with WS close code 4003 on failure.
 
 ```
 ws://host/rooms/:roomId?sessionId=X&cap=<capability-proof>
@@ -154,11 +154,11 @@ ws://host/rooms/:roomId?sessionId=X&cap=<capability-proof>
 
 Server principal is stable (Ed25519 keypair, generated once, stored in `.lararium-data/`). This is the Orichalcum audience for all room capabilities.
 
-**Anon path:** No capability required for public lares chat rooms. Ephemeral signed nonce (short TTL) for rate limiting only.
+''Anon path:'' No capability required for public lares chat rooms. Ephemeral signed nonce (short TTL) for rate limiting only.
 
-**Single-user-multi-session:** Capability is scoped to the principal identity, not the session. Multiple tabs with the same identity share the same capability level automatically.
+''Single-user-multi-session:'' Capability is scoped to the principal identity, not the session. Multiple tabs with the same identity share the same capability level automatically.
 
-**Room WebSocket connections are NOT edge islands.** A room connection is session-scoped and ephemeral. An edge island is a named, capability-gated, durable-offset causal boundary between two Lares nodes — a different architectural layer (see `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`).
+''Room WebSocket connections are NOT edge islands.'' A room connection is session-scoped and ephemeral. An edge island is a named, capability-gated, durable-offset causal boundary between two Lares nodes — a different architectural layer (see `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`).
 
 _Status: design only (trust tiers + Orichalcum gate). Authority seam (`LarariumAuthorityEnvelope`, `AuthorityFirstGuard`) shipped M9+. `PUT /admin/promote` local-operator path shipped M10._
 
@@ -170,20 +170,20 @@ _Status: design only (trust tiers + Orichalcum gate). Authority seam (`LarariumA
 
 `lares/` is promoted canon. The browser/TW5/Automerge ring is live room state.
 
-**Current two-layer model:**
-* **Canon layer:** `lares/` carrier files, git-trackable, hostless `lar:///...` addresses.
-* **Live room layer:** Automerge meme/tiddler records, materialized into TW5 and projected into tldraw. This layer may diverge locally/offline and sync later.
+''Current two-layer model:''
+* ''Canon layer:'' `lares/` carrier files, git-trackable, hostless `lar:///...` addresses.
+* ''Live room layer:'' Automerge meme/tiddler records, materialized into TW5 and projected into tldraw. This layer may diverge locally/offline and sync later.
 
 The old "confirmed SQLite vs pending tldraw" model is no longer the content authority model. SQLite/TLSocketRoom may still carry legacy layout state, but meme content promotion is governed by Automerge origins plus the explicit promote endpoint.
 
-**Promotion path (shipped M10 — local-operator only):**
+''Promotion path (shipped M10 — local-operator only):''
 1. Operator calls `PUT /admin/promote` with `{ uri, carrierText, shapeId? }` (localhost-only today).
 2. `canPromoteToCanon({ origin: "operator-import", authorityMode: "local-operator", target: uri })` executes as policy gate.
 3. `resolveLarUri(uri)` resolves to `laresRelPath`; path-traversal guard ensures path stays within `LARES_ROOT`.
 4. `writeFileSync(filePath, carrierText)` writes to `lares/`.
 5. Server patches the Automerge meme-store doc immediately; the lares/ watcher remains the external disk→Automerge path and echo-loop guard seam.
 
-**Target ceremony:**
+''Target ceremony:''
 * Canvas or TW5 detail editor triggers "promote" from selected/focused URI.
 * Server validates proposed carrier text against parser/pranala schema before writing.
 * Full Orichalcum/UCAN capability gate replaces localhost guard.
@@ -201,9 +201,9 @@ The old "confirmed SQLite vs pending tldraw" model is no longer the content auth
 | `operator-import` | ✓ allowed (operator-trusted) |
 | `projection-cache` | retired — no longer a `ChangeOrigin` |
 
-**Canvas write-back status:** `LarariumCanvas` contains a latent body-node text listener that writes `canvas-draft` changes to `AutomergeMemeStore`, but `projectToTldraw()` currently emits no `LarTLBodyNode` records. Therefore direct text editing on canvas is not functionally wired yet. TW5/detail-panel edits and MOVE (residency ACTION) are the near-term write path.
+''Canvas write-back status:'' `LarariumCanvas` contains a latent body-node text listener that writes `canvas-draft` changes to `AutomergeMemeStore`, but `projectToTldraw()` currently emits no `LarTLBodyNode` records. Therefore direct text editing on canvas is not functionally wired yet. TW5/detail-panel edits and MOVE (residency ACTION) are the near-term write path.
 
-**What requires promotion:** new memes, new pranala edges, ahu structure changes, and carrier text changes that should become `lares/` canon.
+''What requires promotion:'' new memes, new pranala edges, ahu structure changes, and carrier text changes that should become `lares/` canon.
 
 <<~/ahu >>
 
@@ -211,9 +211,9 @@ The old "confirmed SQLite vs pending tldraw" model is no longer the content auth
 
 !! Canvas Views — Single-Page Zoom-Gated Model
 
-**Current implementation (M10 local-first path):** The browser owns a local tldraw editor store and seeds it from `projectFromTw5(tw5)`. View "modes" are zoom-level gates — shape props are batch-updated via `applyZoomTemplate()` on threshold crossings, not by switching pages. Five zoom levels correspond to TW5 kumu layout tiddlers (`lar:///kumu/meme-strategic` through `lar:///kumu/meme-action`), read at runtime via `getActiveTW5().getZoomLayout(level)`. The older `shape.meta.templateProps` / `KumuRegistry` stamping path is superseded for active zoom layout.
+''Current implementation (M10 local-first path):'' The browser owns a local tldraw editor store and seeds it from `projectFromTw5(tw5)`. View "modes" are zoom-level gates — shape props are batch-updated via `applyZoomTemplate()` on threshold crossings, not by switching pages. Five zoom levels correspond to TW5 kumu layout tiddlers (`lar:///kumu/meme-strategic` through `lar:///kumu/meme-action`), read at runtime via `getActiveTW5().getZoomLayout(level)`. The older `shape.meta.templateProps` / `KumuRegistry` stamping path is superseded for active zoom layout.
 
-**Zoom-template routing (active) — Law of Fives axis 1:**
+''Zoom-template routing (active) — Law of Fives axis 1:''
 
 | Level | Threshold | Template | ahu visible | Ownership arrows | OODA-HA phase |
 |---|---|---|---|---|---|
@@ -223,7 +223,7 @@ The old "confirmed SQLite vs pending tldraw" model is no longer the content auth
 | combat | 0.80–1.50 | `meme-combat` | ✓ | ✓ (opacity 0.3) | decide |
 | action | ≥ 1.50 | `meme-action` | ✓ | ✓ (opacity 0.3) | act |
 
-**Rating and stage band rendering — Law of Fives axes 2 + 3:**
+''Rating and stage band rendering — Law of Fives axes 2 + 3:''
 
 Rating (structural quality) and stage (authority level) are seeded per-meme at projection time and inform visual rendering independent of zoom:
 
@@ -245,15 +245,15 @@ Rating (structural quality) and stage (authority level) are seeded per-meme at p
 
 Rating and register/stage-like fields travel in shape metadata and are recomputed from TW5 tiddler fields during projection. Zoom layout props now come from TW5 kumu layout tiddlers rather than pre-stamped `shape.meta.templateProps`. The wikitext-filter cascade target remains: filters should be able to select by rating/register/stage atoms once the recipe layer is complete.
 
-**Socket port shapes (active):** Each ahu slot emits a hidden `TLGeoShape` ellipse (8×8, `opacity:0`) as a stable arrow binding target. Pranala arrows bind permanently to socket shapes — not to ahu frames. `applyZoomTemplate` repositions sockets between two positions: `centerX/Y` (meme header zone, all zoom levels) and `spreadX/Y` (ahu frame center, combat/action only). Bindings never change; only socket position changes. This is the TW5-style selective refresh: the binding graph is stable, only rendering state moves.
+''Socket port shapes (active):'' Each ahu slot emits a hidden `TLGeoShape` ellipse (8×8, `opacity:0`) as a stable arrow binding target. Pranala arrows bind permanently to socket shapes — not to ahu frames. `applyZoomTemplate` repositions sockets between two positions: `centerX/Y` (meme header zone, all zoom levels) and `spreadX/Y` (ahu frame center, combat/action only). Bindings never change; only socket position changes. This is the TW5-style selective refresh: the binding graph is stable, only rendering state moves.
 
-**Ahu frame safety:** Ahu sub-frames are `isLocked:true` in projection emission to prevent tldraw from reparenting them when the operator drags a meme frame. At low zoom (meme frame shrunk to 60×28px), ahu frames at `y=108+` would escape parent bounds — the `opacity:0` hide prevents visual detachment and the lock prevents CRDT reparent.
+''Ahu frame safety:'' Ahu sub-frames are `isLocked:true` in projection emission to prevent tldraw from reparenting them when the operator drags a meme frame. At low zoom (meme frame shrunk to 60×28px), ahu frames at `y=108+` would escape parent bounds — the `opacity:0` hide prevents visual detachment and the lock prevents CRDT reparent.
 
 Shape IDs are URI-stable (`memeFrameId(uri)` — no per-page prefix scoping). The `pageOverride` contract in `emitTldrawRecords` is retained for future multi-room projection but is not used by the active browser projection.
 
-**Navigation:** `LarViewState` reducer (`ZOOM_IN`, `OPEN_GRAPH`, `CLOSE_GRAPH`, `NAVIGATE_BACK`, `GO_TO_ROOM`). `ZOOM_IN` drives `zoomToMeme()` camera animation. `GO_TO_ROOM` is currently a view/navigation action, not an active `useSync` WebSocket room switch in the browser path.
+''Navigation:'' `LarViewState` reducer (`ZOOM_IN`, `OPEN_GRAPH`, `CLOSE_GRAPH`, `NAVIGATE_BACK`, `GO_TO_ROOM`). `ZOOM_IN` drives `zoomToMeme()` camera animation. `GO_TO_ROOM` is currently a view/navigation action, not an active `useSync` WebSocket room switch in the browser path.
 
-**⌘K command palette:** Implemented and active. Replaces `SidePanel` as primary room/meme navigation. Two sections: **Spaces** (DEFAULT_ROOMS with chronometer glyphs) and **Memes** (URI filter). Arrow-key navigation, Enter to activate, Escape to dismiss.
+''⌘K command palette:'' Implemented and active. Replaces `SidePanel` as primary room/meme navigation. Two sections: ''Spaces'' (DEFAULT_ROOMS with chronometer glyphs) and ''Memes'' (URI filter). Arrow-key navigation, Enter to activate, Escape to dismiss.
 
 <<~/ahu >>
 
@@ -265,15 +265,15 @@ Every meme frame owns its ahu sub-frames, and every ahu owns its socket port sha
 
 **The problem `parentId` alone does not solve:** At low zoom, meme frames shrink to 60×28px. Ahu frames at `y=108+` are outside the parent bounds. tldraw's `parentId` keeps them structurally children, but their visual escape creates drag-reparenting risk and arrow binding instability.
 
-**The skeleton model:** Each meme→ahu and meme→socket relationship is also encoded as a `control:owns` arrow in the projection snapshot — the "ownership skeleton." These arrows are:
+''The skeleton model:'' Each meme→ahu and meme→socket relationship is also encoded as a `control:owns` arrow in the projection snapshot — the "ownership skeleton." These arrows are:
 * `isOwnership: true` — distinguished from pranala semantic arrows
 * `opacity: 0` at strategic/operational/tactical; `opacity: 0.3` at combat/action
 * `isLocked: true` — not draggable; structural, not cosmetic
 * `meta.ownsMemeId` — points back to the parent meme shape for zoom toggling
 
-**Why this matters for the widget tree:** The ownership skeleton is the tldraw-layer analogue of TW5's widget tree. When the render pass walks `WidgetNode[]` (Phase 3 target), it will use the ownership graph — not tldraw `parentId` — to find render targets. A template can ask "give me all ahu slots owned by meme X" by traversing `control:owns` arrows, not by inspecting shape hierarchy. This is queryable via `editor.getBindingsToShape()` and the MCP `lararium/edge/list` tool.
+''Why this matters for the widget tree:'' The ownership skeleton is the tldraw-layer analogue of TW5's widget tree. When the render pass walks `WidgetNode[]` (Phase 3 target), it will use the ownership graph — not tldraw `parentId` — to find render targets. A template can ask "give me all ahu slots owned by meme X" by traversing `control:owns` arrows, not by inspecting shape hierarchy. This is queryable via `editor.getBindingsToShape()` and the MCP `lararium/edge/list` tool.
 
-**Numbers (boot artifact, 2026-04-28):** 7 socket shapes, 14 ownership arrows (7 meme→ahu + 7 meme→socket), 6 pranala bindings (3 arrows × 2), 28 ownership bindings (14 arrows × 2). Total 56 shapes, 34 bindings.
+''Numbers (boot artifact, 2026-04-28):'' 7 socket shapes, 14 ownership arrows (7 meme→ahu + 7 meme→socket), 6 pranala bindings (3 arrows × 2), 28 ownership bindings (14 arrows × 2). Total 56 shapes, 34 bindings.
 
 <<~/ahu >>
 
@@ -283,7 +283,7 @@ Every meme frame owns its ahu sub-frames, and every ahu owns its socket port sha
 
 The Lararium node server will expose an MCP server alongside the HTTP/WS server. Claude connects to this MCP endpoint to read and act on the canvas without a browser.
 
-**Planned MCP tools:**
+''Planned MCP tools:''
 
 | Tool | Description |
 |------|-------------|
@@ -297,11 +297,11 @@ The Lararium node server will expose an MCP server alongside the HTTP/WS server.
 | `lararium/edge/list` | List pranala edges for a given meme URI |
 | `lararium/snapshot/export` | Export a room's current tldraw store as a snapshot JSON |
 
-**MCP server placement:** Current MCP code lives in `packages/lararium-mcp` as a stdio adapter. It can call the node HTTP surface (for example `/admin/reseed`) when `LARARIUM_HTTP_URL` is configured, but it does not share a `TLSocketRoom` instance with browser clients in-process. Future MCP-over-HTTP can colocate with `packages/lararium-node`, but the active bridge is process/HTTP based.
+''MCP server placement:'' Current MCP code lives in `packages/lararium-mcp` as a stdio adapter. It can call the node HTTP surface (for example `/admin/reseed`) when `LARARIUM_HTTP_URL` is configured, but it does not share a `TLSocketRoom` instance with browser clients in-process. Future MCP-over-HTTP can colocate with `packages/lararium-node`, but the active bridge is process/HTTP based.
 
-**MCP transport:** stdio (for Claude Desktop / Claude Code direct integration) or HTTP SSE (for networked Claude access). Both transports should be supported; stdio is the default for local development.
+''MCP transport:'' stdio (for Claude Desktop / Claude Code direct integration) or HTTP SSE (for networked Claude access). Both transports should be supported; stdio is the default for local development.
 
-**Trust model for MCP:** MCP connections are treated as operator-tier by default in local development (stdio = trusted). In networked mode, Orichalcum capability or API key authentication applies.
+''Trust model for MCP:'' MCP connections are treated as operator-tier by default in local development (stdio = trusted). In networked mode, Orichalcum capability or API key authentication applies.
 
 _Status: design only. Implementation follows room model stabilization._
 
@@ -311,13 +311,13 @@ _Status: design only. Implementation follows room model stabilization._
 
 !! Deployment Topology
 
-**Local development (current):**
+''Local development (current):''
 ```
 browser → http://127.0.0.1:4321  (static app + WS rooms)
 claude  → stdio MCP (planned)
 ```
 
-**Production target:**
+''Production target:''
 ```
 internet → nginx/caddy (TLS termination)
          → proxy_pass → lararium-node:4321 (loopback only)
@@ -326,26 +326,26 @@ claude   → HTTP SSE MCP endpoint (authenticated)
          → same lararium-node process
 ```
 
-**Security invariants:**
+''Security invariants:''
 * `lararium-node` binds `127.0.0.1` only in production. `0.0.0.0` is a dev-only override.
 * Static file serving normalizes and boundary-checks paths against `APP_DIST` before serving.
 * WebSocket URL injected into `index.html` is derived from the request `Host` header (not hardcoded `HOST:PORT`) so it works behind reverse proxies.
 * `x-forwarded-proto` is respected for `ws:` vs `wss:` selection.
 
-**Data directory:** `.lararium-data/` — contains the Automerge meme-store (`meme-store/`), the operator/server DID keypair, and any legacy per-room tldraw SQLite layout files. Not committed to git. Excluded via `.gitignore`.
+''Data directory:'' `.lararium-data/` — contains the Automerge meme-store (`meme-store/`), the operator/server DID keypair, and any legacy per-room tldraw SQLite layout files. Not committed to git. Excluded via `.gitignore`.
 
 <<~/ahu >>
 
 <<~ ahu #trust-grants >>
 
-**Trust-grants:**
+''Trust-grants:''
 
 | GRant | What they see | What they can do |
 |------|---------------|-----------------|
-| **anon** | Public memes only, read-only canvas, chat room surface | Browse, read, enter chat rooms |
-| **user** | Own lararium rooms + shared public rooms | Read + create in own rooms, pending edits |
-| **operator** | Full boot closure + promoted room list | Read + pending edits in boot room |
-| **admin** | Full boot closure + invariant meme surfaces | Read + write + canon-promotion |
+| ''anon'' | Public memes only, read-only canvas, chat room surface | Browse, read, enter chat rooms |
+| ''user'' | Own lararium rooms + shared public rooms | Read + create in own rooms, pending edits |
+| ''operator'' | Full boot closure + promoted room list | Read + pending edits in boot room |
+| ''admin'' | Full boot closure + invariant meme surfaces | Read + write + canon-promotion |
 
 <<~/ahu >>
 
@@ -353,7 +353,7 @@ claude   → HTTP SSE MCP endpoint (authenticated)
 
 !! Room Model — Extended
 
-A **room** is a named capability/view scope over the live meme corpus. The legacy layout channel may back a room with `TLSocketRoom`, but current meme content is shared through the Automerge store and projected locally into tldraw. Rooms are organized under a namespace hierarchy that mirrors the `lar:` URI structure.
+A ''room'' is a named capability/view scope over the live meme corpus. The legacy layout channel may back a room with `TLSocketRoom`, but current meme content is shared through the Automerge store and projected locally into tldraw. Rooms are organized under a namespace hierarchy that mirrors the `lar:` URI structure.
 
 !!! Room naming
 
@@ -372,11 +372,11 @@ Room names are slugs. Room IDs are content-addressed (`sha:${receipt.sha.slice(0
 
 !!! Wiki-recipes
 
-A **wiki-recipe** is a room seeding specification: a named bundle of memes, carriers, and pranala edges that defines the initial canvas for a given room. Recipes are stored as lares/ carriers under `lares/recipes/${slug}.md`. The RPG rooms (`ftls`, `wtf`) will each have a recipe that imports all book-content memes once they are wrapped in memetic-wikitext and assigned `lar:` URIs.
+A ''wiki-recipe'' is a room seeding specification: a named bundle of memes, carriers, and pranala edges that defines the initial canvas for a given room. Recipes are stored as lares/ carriers under `lares/recipes/${slug}.md`. The RPG rooms (`ftls`, `wtf`) will each have a recipe that imports all book-content memes once they are wrapped in memetic-wikitext and assigned `lar:` URIs.
 
 !!! Portal shapes
 
-A **portal** is a custom tldraw shape (`LarPortal`) that represents a navigable link to another room. Clicking a portal opens a WebSocket connection to the target room (in-tab navigation or new tab, user-selectable). Portals are part of the canvas state — they are room-level shapes, not lares/ canon, and do not require canon-promotion to be repositioned.
+A ''portal'' is a custom tldraw shape (`LarPortal`) that represents a navigable link to another room. Clicking a portal opens a WebSocket connection to the target room (in-tab navigation or new tab, user-selectable). Portals are part of the canvas state — they are room-level shapes, not lares/ canon, and do not require canon-promotion to be repositioned.
 
 Portal shape record:
 ```ts
@@ -399,7 +399,7 @@ type LarPortalShape = {
 
 All persistent content in Lararium receives a `lar:` URI. This is the foundational identity contract: if it exists and matters, it has an address.
 
-**URI assignment by content type:**
+''URI assignment by content type:''
 
 | Content type | URI pattern | Example |
 |---|---|---|
@@ -412,9 +412,9 @@ All persistent content in Lararium receives a `lar:` URI. This is the foundation
 | Live session meme | `lar://alias:grant@host/${path}` | `lar://joshu:operator@local/sketch/idea-draft` |
 | Committed user meme | `lar:///user/${did-fragment}/${slug}` | `lar:///user/did-key-abc123/my-meme` |
 
-**Hostless URIs** (`lar:///...`) are canonical — they name things that exist in `lares/` or are promoted canon. **Hostful URIs** (`lar://alias:grant@host/...`) are live/session-scoped — they name things that exist only in the current session's branch/room until committed.
+''Hostless URIs'' (`lar:///...`) are canonical — they name things that exist in `lares/` or are promoted canon. ''Hostful URIs'' (`lar://alias:grant@host/...`) are live/session-scoped — they name things that exist only in the current session's branch/room until committed.
 
-**Import flow:** When a user drops a text file or image onto the canvas, the server:
+''Import flow:'' When a user drops a text file or image onto the canvas, the server:
 1. Computes `sha256(content)`
 2. Assigns a hostful URI: `lar://alias:grant@host/imported/${sha256-prefix}/${slug}`
 3. Creates a tldraw shape with that URI as its `sourceUri`
@@ -440,9 +440,9 @@ TW5 wiki (virtual server, isomorphic)
     └─ draft surface   →  canvas/TW5 edit → AutomergeMemeStore → MOVE (residency ACTION) → lares/
 ```
 
-**Isomorphic law:** `LarariumTW5` boots on Node (server, MCP) and in the browser (browser host). The SyncAdaptor wiring is identical in both environments. You do not need to know which environment you're in to use TW5's filter or draft APIs.
+''Isomorphic law:'' `LarariumTW5` boots on Node (server, MCP) and in the browser (browser host). The SyncAdaptor wiring is identical in both environments. You do not need to know which environment you're in to use TW5's filter or draft APIs.
 
-**Draft → canon flow (full read/write):**
+''Draft → canon flow (full read/write):''
 
 ```
 canvas edit (shape text field updated)
@@ -457,9 +457,9 @@ canvas edit (shape text field updated)
     ↓  server reseed → new room snapshot with hostless URI
 ```
 
-**Canon-promotion assigns hostless URI:** A meme drafted on canvas has a hostful URI (`lar://alias:grant@host/...`). Promotion assigns `lar:///...` (hostless) and writes the carrier file. The tldraw shape's `meta.uri` is updated to the hostless URI after promotion — this is the only moment a shape URI changes.
+''Canon-promotion assigns hostless URI:'' A meme drafted on canvas has a hostful URI (`lar://alias:grant@host/...`). Promotion assigns `lar:///...` (hostless) and writes the carrier file. The tldraw shape's `meta.uri` is updated to the hostless URI after promotion — this is the only moment a shape URI changes.
 
-**TW5 renderTree and canvas shapes:** TW5's render pipeline produces HTML for the MemeDetailPanel rich-view. It does NOT create tldraw shapes directly — shape creation is server-side via `compileCascade`. The browser reads shapes from the CRDT; TW5 provides the rendered view of their content. Future: a TW5 canvas widget type could emit shape layout hints back to the server via the promote/write-back path, but it is not the authoritative shape source.
+''TW5 renderTree and canvas shapes:'' TW5's render pipeline produces HTML for the MemeDetailPanel rich-view. It does NOT create tldraw shapes directly — shape creation is server-side via `compileCascade`. The browser reads shapes from the CRDT; TW5 provides the rendered view of their content. Future: a TW5 canvas widget type could emit shape layout hints back to the server via the promote/write-back path, but it is not the authoritative shape source.
 
 <<~/ahu >>
 
@@ -467,7 +467,7 @@ canvas edit (shape text field updated)
 
 !! Write-Back Architecture
 
-**Current state:** Read-only for canon unless `PUT /admin/promote` is called. Live edits accumulate in Automerge room state. The direct tldraw body-node draft path is latent because body-node projection is not emitted yet; full draft→canon UX is the M11 target.
+''Current state:'' Read-only for canon unless `PUT /admin/promote` is called. Live edits accumulate in Automerge room state. The direct tldraw body-node draft path is latent because body-node projection is not emitted yet; full draft→canon UX is the M11 target.
 
 !!! The commit model — git-like confidence tiers
 
@@ -496,9 +496,9 @@ This maps directly onto:
 !!! Storage backend abstraction
 
 Write-back targets an abstract `LarStorageBackend` interface so the same promotion path works for:
-* **Files on disk** (`lares/` tree, git-tracked) — primary target
-* **Database** (future: PostgreSQL for cloud-hosted instances)
-* **IPFS / content-addressed store** (future: for DreamNet distribution)
+* ''Files on disk'' (`lares/` tree, git-tracked) — primary target
+* ''Database'' (future: PostgreSQL for cloud-hosted instances)
+* ''IPFS / content-addressed store'' (future: for DreamNet distribution)
 
 ```ts
 interface LarStorageBackend {
@@ -541,11 +541,11 @@ Kinopio (`kinopio.club`, Vue 3, open-source, not npm-publishable) is the closest
 
 !!! The Core Philosophy — Now Implemented
 
-**The canvas is primary. UI wraps around it — never blocks it.**
+''The canvas is primary. UI wraps around it — never blocks it.''
 
 Kinopio's `<Header>` is `position: fixed; pointer-events: none` with interaction re-enabled only on child buttons. The canvas fills 100% of the viewport. UI chrome exists at fixed viewport positions and *fades or repositions* during zoom.
 
-**This model is now the Lararium implementation.** `LarariumShell` wraps `LarariumCanvas` via React portal: all chrome (`LarariumHeader`, `LarariumFooter`, `LarariumCommandPalette`) is `position:fixed`, rendered into `document.body` outside the tldraw DOM tree. The canvas fills 100vw × 100vh. `PageMenu`, `NavigationPanel`, `MainMenu`, `ZoomMenu`, `QuickActions`, `HelperButtons`, `MenuPanel` are all suppressed in wiki mode via `TLComponents = null`.
+''This model is now the Lararium implementation.'' `LarariumShell` wraps `LarariumCanvas` via React portal: all chrome (`LarariumHeader`, `LarariumFooter`, `LarariumCommandPalette`) is `position:fixed`, rendered into `document.body` outside the tldraw DOM tree. The canvas fills 100vw × 100vh. `PageMenu`, `NavigationPanel`, `MainMenu`, `ZoomMenu`, `QuickActions`, `HelperButtons`, `MenuPanel` are all suppressed in wiki mode via `TLComponents = null`.
 
 **Canvas mode toggle (`` ` `` key):** Dims Lararium chrome (`opacity: 0.35, pointer-events: none`) and restores tldraw's full toolbar/style panel for freeform drawing. Toggle pill always visible at bottom-left. This is the Lararium answer to Kinopio's mode distinction — not a separate tool, just a chrome visibility gate.
 
@@ -583,31 +583,31 @@ On iOS, Kinopio dynamically repositions its header via `updatePositionInVisualVi
 └────────────────────────────────────────────────────────────┘
 ```
 
-**What is NOT in the layout:** persistent side drawers, slide-in panels as primary navigation, floating bubbles over the canvas. Every panel is contextual and transient.
+''What is NOT in the layout:'' persistent side drawers, slide-in panels as primary navigation, floating bubbles over the canvas. Every panel is contextual and transient.
 
 !!! Interaction Patterns to Implement
 
-**Paint-select (lasso):** tldraw already has this. Expose it clearly — click-drag on empty canvas starts paint-select. Kinopio renders the lasso as an SVG overlay; tldraw handles this natively. No custom implementation needed — just ensure our component config doesn't suppress it.
+''Paint-select (lasso):'' tldraw already has this. Expose it clearly — click-drag on empty canvas starts paint-select. Kinopio renders the lasso as an SVG overlay; tldraw handles this natively. No custom implementation needed — just ensure our component config doesn't suppress it.
 
-**Drag-from-edge to create pranala:** tldraw's arrow tool creates connections by dragging from shape edges. We should wire this so dragging from a meme frame edge creates a `pranala` arrow with a default `family: relation` (upgradeable to `control`/`observe`/`dataflow` via a right-click context menu on the arrow). This is standard tldraw arrow binding — no custom shape needed for the arrow itself.
+''Drag-from-edge to create pranala:'' tldraw's arrow tool creates connections by dragging from shape edges. We should wire this so dragging from a meme frame edge creates a `pranala` arrow with a default `family: relation` (upgradeable to `control`/`observe`/`dataflow` via a right-click context menu on the arrow). This is standard tldraw arrow binding — no custom shape needed for the arrow itself.
 
-**Click empty canvas → create meme:** Click on empty canvas → drop a new pending meme frame at that position. Label = empty, URI = live-session hostful URI assigned immediately. Begin typing to set the label. This is the Kinopio card-creation flow. tldraw: programmatically create a frame shape on `editor.pointerDown` when target is the canvas (no existing shape under cursor).
+''Click empty canvas → create meme:'' Click on empty canvas → drop a new pending meme frame at that position. Label = empty, URI = live-session hostful URI assigned immediately. Begin typing to set the label. This is the Kinopio card-creation flow. tldraw: programmatically create a frame shape on `editor.pointerDown` when target is the canvas (no existing shape under cursor).
 
-**Double-click meme frame → detail panel:** Already wired (Vector 2 from previous loop). The detail panel slides up from the bottom of the viewport (not a full-height sidebar). Shows: URI, carrier text, ahu sockets, pranala edges in/out, commit tier, trust gate.
+''Double-click meme frame → detail panel:'' Already wired (Vector 2 from previous loop). The detail panel slides up from the bottom of the viewport (not a full-height sidebar). Shows: URI, carrier text, ahu sockets, pranala edges in/out, commit tier, trust gate.
 
-**Zoom = navigation:** No page-switching in the normal flow. Zooming out shows the graph overview at small scale. Zooming in past a threshold snaps the camera to the nearest meme frame and expands it (ahu socket sub-frames become visible). This is zoom-gated rendering: sub-frame geometry is only added to the DOM/store above a zoom threshold, not always present.
+''Zoom = navigation:'' No page-switching in the normal flow. Zooming out shows the graph overview at small scale. Zooming in past a threshold snaps the camera to the nearest meme frame and expands it (ahu socket sub-frames become visible). This is zoom-gated rendering: sub-frame geometry is only added to the DOM/store above a zoom threshold, not always present.
 
-**Stick-to-cursor drag physics:** Kinopio's drag offset tracking (6–24px stretch-resistance based on card area) creates tactile feedback. tldraw handles drag natively, but we can augment: when dragging a meme frame, apply a subtle easing to `shape.x/y` updates rather than direct snap. Low priority but high feel.
+''Stick-to-cursor drag physics:'' Kinopio's drag offset tracking (6–24px stretch-resistance based on card area) creates tactile feedback. tldraw handles drag natively, but we can augment: when dragging a meme frame, apply a subtle easing to `shape.x/y` updates rather than direct snap. Low priority but high feel.
 
 !!! Space Model → Rooms
 
-Kinopio has no canonical "home space." We do: **the-altar-fire** is the home room for everyone.
+Kinopio has no canonical "home space." We do: ''the-altar-fire'' is the home room for everyone.
 
-**User home spaces** are instanced rooms — each user gets `user:${did}` as their private lararium. The altar fire memes are **transcluded** into the user's home space: they appear as locked (read-only) shapes at a dedicated position on the canvas. This is not a separate page or tab — the transclusion renders the same invariant frames in the user's room, visually distinct (silver border, lock icon), non-moveable.
+''User home spaces'' are instanced rooms — each user gets `user:${did}` as their private lararium. The altar fire memes are ''transcluded'' into the user's home space: they appear as locked (read-only) shapes at a dedicated position on the canvas. This is not a separate page or tab — the transclusion renders the same invariant frames in the user's room, visually distinct (silver border, lock icon), non-moveable.
 
 Transclusion implementation: when seeding a user room, the boot closure memes are projected as a locked cluster in a corner of the canvas. They reference their canonical lar URIs. When the user navigates to them (double-click), the detail panel shows the canonical carrier — but any edit creates a pending fork attached to the user's room, not the canonical meme.
 
-**Room switching — implemented:** `⌘K` command palette is the primary room switcher. Viewport-fixed overlay, full-width at top, filter-as-you-type. **Spaces** section shows DEFAULT_ROOMS with chronometer glyphs (🗺️⚙️🔍⚔️⚡). **Memes** section filters by URI substring. Arrow keys navigate across both sections. Enter activates. Escape dismisses. This replaces the SidePanel story-river — SidePanel is removed.
+''Room switching — implemented:'' `⌘K` command palette is the primary room switcher. Viewport-fixed overlay, full-width at top, filter-as-you-type. ''Spaces'' section shows DEFAULT_ROOMS with chronometer glyphs (🗺️⚙️🔍⚔️⚡). ''Memes'' section filters by URI substring. Arrow keys navigate across both sections. Enter activates. Escape dismisses. This replaces the SidePanel story-river — SidePanel is removed.
 
 !!! Portal Shapes
 
@@ -640,12 +640,12 @@ The altar fire canvas seeds with portal shapes for all registered rooms at initi
 | Ubuntu WSL (browser via WSLg or Windows Chrome) | Mouse + keyboard | Same rendering path as Windows 11 |
 | Android Samsung (Galaxy phone / tablet) | Touch + optional S-Pen stylus | Responsive layout required; no hover states as primary affordance |
 
-**Layout breakpoints:**
+''Layout breakpoints:''
 * Mobile (< 600px): header collapses to icon bar; footer hidden; minimap hidden; panels are full-screen overlays
 * Tablet (600–1024px): header shows room name + ⌘K; panels slide in from bottom (60vh max-height)
 * Desktop (> 1024px): full header + footer + minimap; panels contextual at 360px width
 
-**Touch affordances:**
+''Touch affordances:''
 * All tap targets ≥ 44×44px (Android Material + Apple HIG minimum)
 * Pinch-to-zoom is tldraw-native; we must not suppress it
 * Long-press on empty canvas → create meme (equivalent to click-empty on desktop)
@@ -653,7 +653,7 @@ The altar fire canvas seeds with portal shapes for all registered rooms at initi
 * tldraw's paint-select is drag-from-empty — works on touch natively; ensure no canvas `onTouchStart` handlers interfere
 * Android Chrome does NOT have the iOS visual viewport offset problem — no `updatePositionInVisualViewport` needed. Standard `position:fixed` works correctly on Android Chrome.
 
-**WSL development note:** `serve.ts` binds `127.0.0.1` in dev. When running in WSL2, the WSL network adapter has a separate IP. Use `LARARIUM_HOST=0.0.0.0` to expose to Windows-side browser during dev. Do NOT commit `0.0.0.0` as the default.
+''WSL development note:'' `serve.ts` binds `127.0.0.1` in dev. When running in WSL2, the WSL network adapter has a separate IP. Use `LARARIUM_HOST=0.0.0.0` to expose to Windows-side browser during dev. Do NOT commit `0.0.0.0` as the default.
 
 <<~/ahu >>
 
@@ -661,9 +661,9 @@ The altar fire canvas seeds with portal shapes for all registered rooms at initi
 
 !! TLDraw Template Model — Use Built-ins, Not Custom Shapes
 
-**Rule: do not roll custom shape utils when a tldraw built-in shape covers the use case.** Custom shapes (`ShapeUtil` subclasses) carry a maintenance tax: they must be registered with the store schema, their props must be versioned across migrations, and they break tldraw upgrades silently.
+''Rule: do not roll custom shape utils when a tldraw built-in shape covers the use case.'' Custom shapes (`ShapeUtil` subclasses) carry a maintenance tax: they must be registered with the store schema, their props must be versioned across migrations, and they break tldraw upgrades silently.
 
-**Current shape mapping (what we already emit):**
+''Current shape mapping (what we already emit):''
 
 | Lararium concept | tldraw shape type | Why |
 |---|---|---|
@@ -674,14 +674,14 @@ The altar fire canvas seeds with portal shapes for all registered rooms at initi
 | Portal shape | **`geo` with custom `meta`** | Built-in rect/rounded-rect + click handler via `onDoubleClickShape` |
 | Commit-tier indicator | `geo` dot shape | Small colored indicator overlaid on frame |
 
-**Custom shape utils required (genuinely novel):**
+''Custom shape utils required (genuinely novel):''
 * None currently. `LarPortalShapeUtil` was planned but a `geo` + meta approach is sufficient for MVP. Add a custom shape only when the built-in props model is demonstrably insufficient.
 
 !!! TiddlyWiki Template / Layout Cascade — Current Correction (2026-04-29)
 
 TW5's rendering pipeline remains the model: tiddler → cascade/filter → template/widget tree → DOM/projection. Operators should extend view behavior by authoring tiddlers, not by stamping one-off shape metadata.
 
-**Active zoom layout path:**
+''Active zoom layout path:''
 
 Template/layout carriers are loaded into the room-scoped TW5 wiki as `lar:///kumu/meme-*` tiddlers. `applyZoomTemplate()` does not read `shape.meta.templateProps`; it calls `getActiveTW5().getZoomLayout(level)` and then batch-updates frames, socket ports, ownership arrows, and future body nodes.
 
@@ -697,14 +697,14 @@ editor.updateShapes(frame/socket/body-node props)
 
 Each zoom layout tiddler may declare TOML keys such as `w`, `h`, `color`, `include-ahu`, and `show-carrier`. The older `KumuRegistry → buildTemplatePropsByLevel → shape.meta.templateProps` path is historical and should not be used as the active source of zoom truth.
 
-**Rating and stage band rendering (Law of Fives):**
+''Rating and stage band rendering (Law of Fives):''
 
 Two orthogonal axes inform visual rendering of each meme frame — distinct from zoom level:
 
 | Axis | Values | Shape property affected |
 |------|--------|------------------------|
-| **Rating** (structural) | Noise → Data → Meme → Ano → Kapu | border style, opacity, lock state |
-| **Stage** (authority) | GR → OS → US → CS → DS | color temperature, label prefix, ownership arrow opacity |
+| ''Rating'' (structural) | Noise → Data → Meme → Ano → Kapu | border style, opacity, lock state |
+| ''Stage'' (authority) | GR → OS → US → CS → DS | color temperature, label prefix, ownership arrow opacity |
 
 Rating encodes structural quality: a `Noise` carrier renders with a dashed border and low opacity — it has not achieved meme shape. A `Kapu` carrier renders with a solid accent border, locked, immovable. `Meme` is the baseline rendering target.
 
@@ -712,9 +712,9 @@ Stage encodes authority level: a `GR` meme renders muted/greyed (local, unratifi
 
 These fields are projected into shape metadata or read from TW5 tiddler fields. Zoom-level props are read from TW5 layout tiddlers at runtime, not from `shape.meta.templateProps`.
 
-**Epistemic fields on ClosureEntry (shipped 2026-04-28):** `confidence` (float scalar), `register` (operator confidence-register: C/SC/S/PS/P), `manaoio` (observability/interop score), `mana`, `manao` — all stored as tiddler fields in the wikitext-filter engine and queryable via `[toml:key[value]]` or `[field:key[value]]`. `stage` is a UX rendering annotation only — it is NOT a filter field.
+''Epistemic fields on ClosureEntry (shipped 2026-04-28):'' `confidence` (float scalar), `register` (operator confidence-register: C/SC/S/PS/P), `manaoio` (observability/interop score), `mana`, `manao` — all stored as tiddler fields in the wikitext-filter engine and queryable via `[toml:key[value]]` or `[field:key[value]]`. `stage` is a UX rendering annotation only — it is NOT a filter field.
 
-**wikitext-filter dialect — operator parity table (as of 2026-04-28):**
+''wikitext-filter dialect — operator parity table (as of 2026-04-28):''
 
 | Operator | Status | Example |
 |---|---|---|
@@ -730,7 +730,7 @@ These fields are projected into shape metadata or read from TW5 tiddler fields. 
 | `self[]` | ○ future | requires rendering context URI injection |
 | `ahu:id[X]` | ○ future | requires ahu index pre-loading |
 
-**FilterEngineFn — isomorphic injection (shipped 2026-04-28):**
+''FilterEngineFn — isomorphic injection (shipped 2026-04-28):''
 
 `FilterEngineFn` is the canonical async filter engine type, defined in `@lararium/mesh/tw-filter` and re-exported from `@lararium/mesh/cascade`. Signature: `(expr: string, closure: readonly ClosureEntry[], edges?: readonly EdgeRecord[]) => Promise<ClosureEntry[]>`. Package.json `browser` conditional + Vite alias ensure bundlers resolve to the correct runtime.
 
@@ -755,11 +755,11 @@ const cascade = [{ filter: "[all[memes]edge:control[owns]]", override: { color: 
 const compiled = await compileCascade(cascade, closure, filterEngine, artifact.pranalaEdges);
 ```
 
-**Template namespace:** `lar:///ha.ka.ba/lares/api/lararium/templates/` — inside the stable tuple root, no adjacent namespace. `templates/index` owns control edges to all five carriers and is reachable from the `lararium` meme via `#hydrate-templates`.
+''Template namespace:'' `lar:///ha.ka.ba/lares/api/lararium/templates/` — inside the stable tuple root, no adjacent namespace. `templates/index` owns control edges to all five carriers and is reachable from the `lararium` meme via `#hydrate-templates`.
 
-**Parser addition:** `<<~ kumu name(params) >>` / `<<~/kumu >>` direct form added to `SIGIL_SCANS` alongside the `\\widget` alias. The `kumu` sigil is now parseable in canonical Hawaiian form.
+''Parser addition:'' `<<~ kumu name(params) >>` / `<<~/kumu >>` direct form added to `SIGIL_SCANS` alongside the `\\widget` alias. The `kumu` sigil is now parseable in canonical Hawaiian form.
 
-**Phase 3 status correction (2026-04-29):** The three-tree target remains correct, but implementation is partial. Current code has the canonical parser and TW5 render bridge; `LarTLBodyNode` types and emission support exist, but `projectToTldraw()` still leaves `bodyNodes` empty. Therefore the tldraw structural skeleton and direct canvas body-node write-back are not shipped yet.
+''Phase 3 status correction (2026-04-29):'' The three-tree target remains correct, but implementation is partial. Current code has the canonical parser and TW5 render bridge; `LarTLBodyNode` types and emission support exist, but `projectToTldraw()` still leaves `bodyNodes` empty. Therefore the tldraw structural skeleton and direct canvas body-node write-back are not shipped yet.
 
 ```
 carrier text
@@ -772,13 +772,13 @@ TW5 UX/detail panel         tldraw projection
 (renderMeme/renderText)     (projectFromTw5 → frames/sockets/arrows today)
 ```
 
-**tldraw adapter today** — meme frames, ahu/socket structures, ownership arrows, pranala arrows. `LarTLBodyNode` is reserved for the action-zoom body skeleton, but no body nodes are currently projected.
+''tldraw adapter today'' — meme frames, ahu/socket structures, ownership arrows, pranala arrows. `LarTLBodyNode` is reserved for the action-zoom body skeleton, but no body nodes are currently projected.
 
-**React/TW5 adapter today** — `renderCarrierVDom()` and `renderMeme()` route carrier text through the TW5 widget pipeline for detail rendering and dispatch-node extraction. Kumu execution remains limited; full `KumuExecutor` lifecycle is M11.
+''React/TW5 adapter today'' — `renderCarrierVDom()` and `renderMeme()` route carrier text through the TW5 widget pipeline for detail rendering and dispatch-node extraction. Kumu execution remains limited; full `KumuExecutor` lifecycle is M11.
 
-**M11 target:** one parse/projection boundary should feed both the React/TW5 detail surface and the tldraw action-zoom body skeleton, after which the existing `canvas-draft` listener can become functional.
+''M11 target:'' one parse/projection boundary should feed both the React/TW5 detail surface and the tldraw action-zoom body skeleton, after which the existing `canvas-draft` listener can become functional.
 
-**Phase 4 (next):** Live Automerge/TW5 delta → projection diff into tldraw without full canvas rebuild. Carrier changes already reach TW5 through the adaptor; the missing piece is selective shape/body-node put/remove for affected URIs.
+''Phase 4 (next):'' Live Automerge/TW5 delta → projection diff into tldraw without full canvas rebuild. Carrier changes already reach TW5 through the adaptor; the missing piece is selective shape/body-node put/remove for affected URIs.
 
 !!! Built-in tldraw UI Components to Reuse
 
@@ -821,7 +821,7 @@ The UX shell is the React layer that wraps the tldraw canvas. It owns:
 * Command palette (room switcher, action palette)
 * Drag-and-drop import handler (canvas-level, not tldraw-level)
 
-**Stacking context law:** All Lararium chrome that competes with tldraw's panels MUST live inside tldraw's declared component slots. `position:fixed` DOM siblings outside tldraw create a separate stacking context that fights with tldraw's `.tlui-layout` (z-index 300). The correct model: one stacking context, tldraw owns it, Lararium fills the slots.
+''Stacking context law:'' All Lararium chrome that competes with tldraw's panels MUST live inside tldraw's declared component slots. `position:fixed` DOM siblings outside tldraw create a separate stacking context that fights with tldraw's `.tlui-layout` (z-index 300). The correct model: one stacking context, tldraw owns it, Lararium fills the slots.
 
 !!! Component Tree (target)
 
@@ -847,7 +847,7 @@ The UX shell is the React layer that wraps the tldraw canvas. It owns:
 </LarariumShell>
 ```
 
-**Slot rules:**
+''Slot rules:''
 * `TopPanel` / `SharePanel` / `HelperButtons` render inside `.tlui-layout` → same stacking context as tldraw chrome → zero z-index conflict in any mode
 * Wiki mode: `Toolbar: null` etc. suppresses tldraw's own widgets; our slots fill the space
 * Canvas mode: tldraw's Toolbar/StylePanel restored alongside our slots — they coexist without fighting
@@ -876,9 +876,9 @@ The UX shell is the React layer that wraps the tldraw canvas. It owns:
 [⬡ Lararium]  [room-name ▾]  [room-breadcrumb]  ··· [share] [presence-avatars] [⌘K]
 ```
 
-* **Logo + room name:** click room name → room switcher
-* **Breadcrumb:** `the-altar-fire > user:did > my-space` for nested navigation
-* **Presence avatars:** small circles, labeled on hover, positioned at their canvas location if visible
+* ''Logo + room name:'' click room name → room switcher
+* ''Breadcrumb:'' `the-altar-fire > user:did > my-space` for nested navigation
+* ''Presence avatars:'' small circles, labeled on hover, positioned at their canvas location if visible
 * **`⌘K`:** opens command palette
 
 !!! Canvas Interaction Wiring (tldraw overrides)
@@ -1006,50 +1006,50 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 !! Open Questions
 
-**Resolved:**
-* ✓ **Z-order / canvas mode chrome conflict:** All Lararium chrome moved into tldraw component slots (`MenuPanel`, `SharePanel`, `HelperButtons`). One stacking context, no z-index arithmetic. NavigationPanel (minimap+zoom) restored in both modes. See `#ux-shell`.
-* ✓ **Theme system (shipped 2026-04-27):** `src/lararium-theme.css` overrides tldraw CSS custom properties scoped to `html[data-theme]`. `useTheme()` hook, `localStorage` persistence, flash-prevention inline script in `index.html`. Cycle button (`◑/🌑/☀`) in `SharePanel`. tldraw `colorScheme` synced via `useEffect` in `LarariumCanvas`. Default: `gruvbox-dark`. See `#theme-system`.
-* ✓ **Meme list — CRDT-native (shipped 2026-04-27):** `editor.getCurrentPageShapes()` filtered to `meta.frameKind === "meme"` replaces `/api/memes` fetch. One-shot read on `synced-remote`. Reactive subscription (see open #2) still needed for live updates.
+''Resolved:''
+* ✓ ''Z-order / canvas mode chrome conflict:'' All Lararium chrome moved into tldraw component slots (`MenuPanel`, `SharePanel`, `HelperButtons`). One stacking context, no z-index arithmetic. NavigationPanel (minimap+zoom) restored in both modes. See `#ux-shell`.
+* ✓ ''Theme system (shipped 2026-04-27):'' `src/lararium-theme.css` overrides tldraw CSS custom properties scoped to `html[data-theme]`. `useTheme()` hook, `localStorage` persistence, flash-prevention inline script in `index.html`. Cycle button (`◑/🌑/☀`) in `SharePanel`. tldraw `colorScheme` synced via `useEffect` in `LarariumCanvas`. Default: `gruvbox-dark`. See `#theme-system`.
+* ✓ ''Meme list — CRDT-native (shipped 2026-04-27):'' `editor.getCurrentPageShapes()` filtered to `meta.frameKind === "meme"` replaces `/api/memes` fetch. One-shot read on `synced-remote`. Reactive subscription (see open #2) still needed for live updates.
 * ✓ the-altar-fire invariant meme: authored at `packages/lares-core/memes/api/pono/the-altar-fire.md`
 * ✓ Double-click frame → ZOOM_IN dispatch: wired via `doubleClickShape` + `meta.uri`
-* ✓ **UX shell refactor:** `LarariumShell` + `LarariumCtx` provider pattern. Slot components are stable module-level refs; all state via context. `SidePanel` removed. Footer merged into `MenuPanel` badge.
+* ✓ ''UX shell refactor:'' `LarariumShell` + `LarariumCtx` provider pattern. Slot components are stable module-level refs; all state via context. `SidePanel` removed. Footer merged into `MenuPanel` badge.
 * ✓ **Command palette (`⌘K`):** Spaces + Memes sections, unified arrow-key nav, `` ` `` key toggles canvas mode.
-* ✓ **Portal shapes:** `geo` + `meta.larPortal` pattern ships — no custom ShapeUtil. Double-click fires `GO_TO_ROOM`.
+* ✓ ''Portal shapes:'' `geo` + `meta.larPortal` pattern ships — no custom ShapeUtil. Double-click fires `GO_TO_ROOM`.
 * ✓ **Canvas mode toggle:** `` ` `` key + `HelperButtons` pill. Same chrome landmarks in both modes; tldraw drawing chrome (Toolbar, StylePanel) added in canvas mode alongside Lararium slots.
 
-**Open:**
+''Open:''
 
-1. ✓/⚠ **Zoom-gated rendering shipped; template source pivoted (2026-04-29 correction):** `applyZoomTemplate()` batch-updates frame/socket/body-node props on zoom threshold crossings. Active layout truth is TW5 `lar:///kumu/meme-*` tiddlers read via `getZoomLayout(level)`, with fallback defaults. Older `KumuRegistry` / `shape.meta.templateProps` stamping is historical. URI-stable shape IDs remain. See `#views` and `#tldraw-template-model`.
+1. ✓/⚠ ''Zoom-gated rendering shipped; template source pivoted (2026-04-29 correction):'' `applyZoomTemplate()` batch-updates frame/socket/body-node props on zoom threshold crossings. Active layout truth is TW5 `lar:///kumu/meme-*` tiddlers read via `getZoomLayout(level)`, with fallback defaults. Older `KumuRegistry` / `shape.meta.templateProps` stamping is historical. URI-stable shape IDs remain. See `#views` and `#tldraw-template-model`.
 
 1a. **Async `ReactionGraph`:** `fire()` must return `Promise<void>` before `hui`/`heihei`/`puka`/`kukali` have execution semantics. Zero structural changes required — this is a method signature change in `live-protocol.ts`. Fanout modes (`Promise.all`, `Promise.race`, `Promise.any` + cancel) follow immediately after. See `#causal-islands`.
 
-1b. **Wehe executor:** bind `SigilNode { sigilName:"kahea", attrs:{name,args} }` name-form calls against registered `wehe` definitions at render time. Closes TW5 template transclusion + Verse procedure call simultaneously. Depends on the TW5/kumu registry path, not the retired shape-meta template cache.
+1b. ''Wehe executor:'' bind `SigilNode { sigilName:"kahea", attrs:{name,args} }` name-form calls against registered `wehe` definitions at render time. Closes TW5 template transclusion + Verse procedure call simultaneously. Depends on the TW5/kumu registry path, not the retired shape-meta template cache.
 
-1c. ⚠ **kumu/widget-tree resolution pass (partial):** TW5 widget parsing/rendering is active for detail UX. The tldraw body-node structural skeleton is typed but not emitted (`projectToTldraw()` leaves `bodyNodes` empty). M11 should wire the single parse/projection boundary into `LarTLBodyNode[]`.
+1c. ⚠ ''kumu/widget-tree resolution pass (partial):'' TW5 widget parsing/rendering is active for detail UX. The tldraw body-node structural skeleton is typed but not emitted (`projectToTldraw()` leaves `bodyNodes` empty). M11 should wire the single parse/projection boundary into `LarTLBodyNode[]`.
 
-1d. ✓ **TW5 TemplateCascade type wired (shipped 2026-04-28):** `CascadeEntry { match: MemeCascadePredicate | fn, override: Partial<MemeTemplateProps>, levels? }` in `multi-view.ts`. `applyCascade()` evaluates per-meme at `renderAllViews` time — first match wins per zoom level. `MemeTemplateProps.cascade` string field (predicate stored in shape meta) maps to this runtime type. Future: thread wikitext-filter expression evaluation as `match` predicate.
+1d. ✓ ''TW5 TemplateCascade type wired (shipped 2026-04-28):'' `CascadeEntry { match: MemeCascadePredicate | fn, override: Partial<MemeTemplateProps>, levels? }` in `multi-view.ts`. `applyCascade()` evaluates per-meme at `renderAllViews` time — first match wins per zoom level. `MemeTemplateProps.cascade` string field (predicate stored in shape meta) maps to this runtime type. Future: thread wikitext-filter expression evaluation as `match` predicate.
 
-1e. ✓ **Spatial family + FAMILY_ROLES (shipped 2026-04-28):** All 8 pranala families have canonical role vocabularies in `FAMILY_ROLES` (pranala-parser.ts). `validatePranalaEdge` now emits `"unknown-role"` warnings for out-of-vocabulary roles across all `roleRecommended` families. Spatial roles: `contains | portal | adjacent | layer`. Unblocks portals-as-graph-edges (not just geo shapes with `meta.larPortal`).
+1e. ✓ ''Spatial family + FAMILY_ROLES (shipped 2026-04-28):'' All 8 pranala families have canonical role vocabularies in `FAMILY_ROLES` (pranala-parser.ts). `validatePranalaEdge` now emits `"unknown-role"` warnings for out-of-vocabulary roles across all `roleRecommended` families. Spatial roles: `contains | portal | adjacent | layer`. Unblocks portals-as-graph-edges (not just geo shapes with `meta.larPortal`).
 
-2. ✓ **Meme count reactive subscription (shipped 2026-04-27):** `store.listen` with `scope: "document"` + 150ms debounce added to `LarariumCanvas`. One-shot scan on `synced-remote`, live re-scan on any shape mutation. `MenuPanel` now reflects live meme count.
+2. ✓ ''Meme count reactive subscription (shipped 2026-04-27):'' `store.listen` with `scope: "document"` + 150ms debounce added to `LarariumCanvas`. One-shot scan on `synced-remote`, live re-scan on any shape mutation. `MenuPanel` now reflects live meme count.
 
-3. **LarPortalShapeUtil (future):** Only needed if `geo` + meta proves insufficient for portal UX (click area, label rendering). Current `geo`+meta is MVP-sufficient.
+3. ''LarPortalShapeUtil (future):'' Only needed if `geo` + meta proves insufficient for portal UX (click area, label rendering). Current `geo`+meta is MVP-sufficient.
 
 5. **User home rooms (`user:${did}`) with altar-fire transclusion:** Seed logic for per-user rooms. Altar-fire memes projected as locked cluster in corner of user room canvas. Depends on UCAN/identity.
 
 6. ⚠ **Room reseeding (`/admin/reseed`) — superseded semantics.** The endpoint still evicts the legacy tldraw SQLite room and recomputes receipt/snapshot state, but normal grammar/carrier hot reload now flows disk → Automerge → TW5. Use `/admin/reseed` for legacy layout reset or receipt refresh, not as the primary content update path.
 
-7. **Content-addressed room keys:** `boot-${receipt.sha.slice(0,16)}` for boot/full rooms. Named rooms use stable slugs. Transition path from `"boot"` needs client redirect.
+7. ''Content-addressed room keys:'' `boot-${receipt.sha.slice(0,16)}` for boot/full rooms. Named rooms use stable slugs. Transition path from `"boot"` needs client redirect.
 
-8. **Offline / IndexedDB persistence:** `@tldraw/store` persistence adapter for IndexedDB. Mirror Kinopio's dual-load: restore IndexedDB immediately, merge remote deltas after WS connect.
+8. ''Offline / IndexedDB persistence:'' `@tldraw/store` persistence adapter for IndexedDB. Mirror Kinopio's dual-load: restore IndexedDB immediately, merge remote deltas after WS connect.
 
-9. **Wiki-recipe carriers (M10):** `lares/recipes/` schema. RPG rooms (`ftls`, `wtf`) depend on this. Seeding path: `PUT /admin/promote` plumbing exists; recipe schema and per-room seed loop are the remaining deliverable.
+9. ''Wiki-recipe carriers (M10):'' `lares/recipes/` schema. RPG rooms (`ftls`, `wtf`) depend on this. Seeding path: `PUT /admin/promote` plumbing exists; recipe schema and per-room seed loop are the remaining deliverable.
 
 10. ✓ **Write-back gate (`PUT /admin/promote`) — shipped M10 (local-operator).** `writeFileSync` + lares/ watcher reseed. Full `LarStorageBackend` (file backend + git) deferred until Orichalcum ceremony lands.
 
-11. **Orichalcum capability implementation:** Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
+11. ''Orichalcum capability implementation:'' Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
 
-12. **ATProto identity (BFF):** See `lares/lararium-node/AUTH-ATPROTO.md`.
+12. ''ATProto identity (BFF):'' See `lares/lararium-node/AUTH-ATPROTO.md`.
 
 <<~/ahu >>
 
@@ -1061,7 +1061,7 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 !!! The model
 
-Each `kumu` instance on the canvas is a **causal island** — an isolated async execution boundary. Events cross island boundaries only via declared `papalohe` edges (the reaction family in the pranala graph). No shared mutable state crosses island walls directly.
+Each `kumu` instance on the canvas is a ''causal island'' — an isolated async execution boundary. Events cross island boundaries only via declared `papalohe` edges (the reaction family in the pranala graph). No shared mutable state crosses island walls directly.
 
 ```
   island A (kumu: DoorTrigger)      island B (kumu: LightPanel)
@@ -1100,11 +1100,11 @@ The canvas shows both: shape positions are CRDT-merged; event wires (`papalohe` 
 
 !!! TW5 / UEFN Verse child re-render research synthesis
 
-**TW5 (push-on-change):** When the tiddler store mutates, the root widget's `refresh(changedTiddlers)` propagates down the entire widget tree. Each widget self-checks whether its dependencies appear in `changedTiddlers` — skips re-render if not. The `$list` widget patches single-item add/remove without full rebuild. Rapid changes are coalesced before DOM writes. No explicit subscription wiring required.
+''TW5 (push-on-change):'' When the tiddler store mutates, the root widget's `refresh(changedTiddlers)` propagates down the entire widget tree. Each widget self-checks whether its dependencies appear in `changedTiddlers` — skips re-render if not. The `$list` widget patches single-item add/remove without full rebuild. Rapid changes are coalesced before DOM writes. No explicit subscription wiring required.
 
-**Verse (pull-on-demand):** No automatic child cascade on state change. Developers call `SetText()` / widget methods explicitly in response to `subscribable` var mutations or game events. The UI tree is inert until code reaches into it. This is correct for the UEFN device layer — deterministic, developer-controlled, no hidden reactive overhead.
+''Verse (pull-on-demand):'' No automatic child cascade on state change. Developers call `SetText()` / widget methods explicitly in response to `subscribable` var mutations or game events. The UI tree is inert until code reaches into it. This is correct for the UEFN device layer — deterministic, developer-controlled, no hidden reactive overhead.
 
-**Synthesis for Lararium:**
+''Synthesis for Lararium:''
 
 | Layer | Model | Mechanism |
 |---|---|---|
@@ -1130,7 +1130,7 @@ ReactionGraph (causal)       — async/local event routing between kumu islands
 tldraw shapes                — visual projection output
 ```
 
-**Tier 3 note:** Cross-node federation edges (Tier 3) sit *above* lares/ in the authority hierarchy and *outside* the local Automerge/tldraw room machinery. They are not TLSocketRoom connections. They are named edge islands with their own lifecycle, governed by Orichalcum capabilities. See `#federation` and `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`.
+''Tier 3 note:'' Cross-node federation edges (Tier 3) sit *above* lares/ in the authority hierarchy and *outside* the local Automerge/tldraw room machinery. They are not TLSocketRoom connections. They are named edge islands with their own lifecycle, governed by Orichalcum capabilities. See `#federation` and `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`.
 
 <<~/ahu >>
 
@@ -1144,7 +1144,7 @@ Research foundation: `lares/lararium-node/MEME-STORE-FOUNDATIONS.md`. Three laws
 
 A meme object, once admitted to the confirmed layer (`lares/` hostless URIs), is never mutated. The only valid write is a full replacement producing a new URI. Session edits accumulate in the hostful tier (`lar://alias:grant@host/path`). Canon-promotion is the atomic transition.
 
-**Refresh corollary:** after the local-first pivot, ordinary carrier refresh should be disk/Automerge/TW5 change propagation plus selective projection diffing. `/admin/reseed` is now a legacy layout reset / receipt recompute tool, not the primary content-refresh mechanism. Shape-level mutation outside the authorized store/projection path remains illegal.
+''Refresh corollary:'' after the local-first pivot, ordinary carrier refresh should be disk/Automerge/TW5 change propagation plus selective projection diffing. `/admin/reseed` is now a legacy layout reset / receipt recompute tool, not the primary content-refresh mechanism. Shape-level mutation outside the authorized store/projection path remains illegal.
 
 !!! Law 2: `pranala-schema-binding`
 
@@ -1180,7 +1180,7 @@ grammar-as-memes       →  all system components live as memes
 
 !! Federation — Tier 3 Design Law
 
-**Status: design locked (Track D, 2026-04-28). Implementation deferred until after M9 + Orichalcum Phase 1.**
+''Status: design locked (Track D, 2026-04-28). Implementation deferred until after M9 + Orichalcum Phase 1.''
 
 Cross-node pranala connections (Tier 3) are causal islands — not WebSockets, not room connections.
 Full law: `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`

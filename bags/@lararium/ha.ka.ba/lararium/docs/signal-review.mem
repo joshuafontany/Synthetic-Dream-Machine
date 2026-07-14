@@ -105,22 +105,22 @@ The branch already suggests a clean five-room split:
 
 !!! Main tensions
 
-1. **HUD overload**
-   - `hud.md` carries the highest rewrite pressure.
-   - The room currently mixes settled instructions with migration residue and long witness blocks.
+1. ''HUD overload''
+*** `hud.md` carries the highest rewrite pressure.
+*** The room currently mixes settled instructions with migration residue and long witness blocks.
 
-2. **Research bleed**
-   - FFZ chronometer work pushes on the branch strongly.
-   - Several branch claims should stay provisional until FFZ format and lifecycle work land more firmly.
+2. ''Research bleed''
+*** FFZ chronometer work pushes on the branch strongly.
+*** Several branch claims should stay provisional until FFZ format and lifecycle work land more firmly.
 
-3. **Ownership blur**
-   - The same concept sometimes appears in more than one room.
-   - The review needs one canonical home per concept.
+3. ''Ownership blur''
+*** The same concept sometimes appears in more than one room.
+*** The review needs one canonical home per concept.
 
-4. **Settlement blur**
-   - Some paragraphs read as stable contract.
-   - Nearby paragraphs read as working notebook.
-   - A later reader could misread temporary argument as branch law.
+4. ''Settlement blur''
+*** Some paragraphs read as stable contract.
+*** Nearby paragraphs read as working notebook.
+*** A later reader could misread temporary argument as branch law.
 
 !!! Working interpretation
 

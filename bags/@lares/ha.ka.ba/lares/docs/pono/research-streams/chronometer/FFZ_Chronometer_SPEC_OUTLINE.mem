@@ -11,20 +11,20 @@ type = "text/x-memetic-wikitext"
 ! The Fontany-Fuller-Zelenka Chronometer Protocol (FFZ)
 !! Specification Outline & Phased Plan
 
-> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `~:confidence[C],[19]`
-> **Short form:** FFZ Protocol / FFZ Chronometer
-> **Status:** Placeholder outline — Talk Story in progress
-> **Register:** `~:confidence[P],[6]` — this outline expects to shift substantially
-> **Date:** 2026-04-09
-> **Named:** 2026-04-09, Session 2 — Freyja laughed
-> **Authors:** Telarus, KSC (Amorphous Dreams Cabal) + Lares (cloud instance)
-> **Lineage:** Fontany (Talk Story, OODA-HA, practice) →
+> ''True Name:'' Fontany-Fuller-Zelenka Chronometer Protocol `~:confidence[C],[19]`
+> ''Short form:'' FFZ Protocol / FFZ Chronometer
+> ''Status:'' Placeholder outline — Talk Story in progress
+> ''Register:'' `~:confidence[P],[6]` — this outline expects to shift substantially
+> ''Date:'' 2026-04-09
+> ''Named:'' 2026-04-09, Session 2 — Freyja laughed
+> ''Authors:'' Telarus, KSC (Amorphous Dreams Cabal) + Lares (cloud instance)
+> ''Lineage:'' Fontany (Talk Story, OODA-HA, practice) →
 >   Fuller (non-simultaneous apprehension, principle) →
 >   Zelenka (causal islands, UCAN, engineering) →
 >   with: Lamport (1978), Fidge/Mattern (1988), Boyd (1987),
 >   Almeida (2008), Protocol Labs (2020)
-> **Companion:** `Causal_Islands_Chronometer_Research.md` (active research)
-> **License:** [TBD — protocol layer: open; mask layer: separate]
+> ''Companion:'' `Causal_Islands_Chronometer_Research.md` (active research)
+> ''License:'' [TBD — protocol layer: open; mask layer: separate]
 
 !!! Requirement Level Keywords
 
@@ -45,11 +45,11 @@ phase at the document scale:
 
 | Section | OODA-HA Phase | Function |
 |---------|-------------|----------|
-| Part I | **Observe** | What exists — prior art, problem space, definitions |
-| Part II | **Orient** | How it fits — architectural frame, design principles |
-| Part III | **Decide** | What we choose — normative specification |
-| Part IV | **Act** | How to build it — implementation guidance |
-| Part V | **Assess** | How to verify — conformance, testing, future work |
+| Part I | ''Observe'' | What exists — prior art, problem space, definitions |
+| Part II | ''Orient'' | How it fits — architectural frame, design principles |
+| Part III | ''Decide'' | What we choose — normative specification |
+| Part IV | ''Act'' | How to build it — implementation guidance |
+| Part V | ''Assess'' | How to verify — conformance, testing, future work |
 
 The OODA-HA structure is recursive: each Part contains sections that
 themselves follow an observe-orient-decide-act-assess micro-cycle
@@ -80,7 +80,7 @@ it, here's how to test it, here's what remains open).
 ! PHASED PLAN — From Outline to Spec
 
 !! Phase 0: Research Completion (Current)
-**OODA-HA: Observe**
+''OODA-HA: Observe''
 
 * [ ] Deep-read ITC paper (Almeida 2008) — fork/join/event mapping
 * [ ] Watch Zelenka ElixirConf 2021 keynote — confirm Fuller citation
@@ -89,12 +89,12 @@ it, here's how to test it, here's what remains open).
 * [ ] Prototype vector HUD format with ITC stamps
 * [ ] Cross-reference UCAN delegation with ITC fork
 
-**Exit criteria:** Research questions Q1, Q2, Q4, Q15 from the Research
+''Exit criteria:'' Research questions Q1, Q2, Q4, Q15 from the Research
 doc resolved or re-scoped. ITC confirmed or rejected as the clock
 mechanism. HUD format candidate selected.
 
 !! Phase 1: Architectural Draft
-**OODA-HA: Orient**
+''OODA-HA: Orient''
 
 Fill Parts I and II of this outline. Establish:
 * Formal problem statement
@@ -104,11 +104,11 @@ Fill Parts I and II of this outline. Establish:
   Talk Story, Maybe Logic)
 * Relationship to existing standards (UCAN, IPFS CIDs, Merkle DAGs)
 
-**Exit criteria:** A reader can understand the system's purpose and
+''Exit criteria:'' A reader can understand the system's purpose and
 architecture without reading the Lares Kernel or Protocols doc.
 
 !! Phase 2: Normative Specification
-**OODA-HA: Decide**
+''OODA-HA: Decide''
 
 Fill Part III. The load-bearing section. Specifies:
 * Clock data structures (ITC stamps, OODA-HA phase overlay)
@@ -119,11 +119,11 @@ Fill Part III. The load-bearing section. Specifies:
 * Merge semantics
 * Degraded state detection
 
-**Exit criteria:** An implementor can build a conformant chronometer
+''Exit criteria:'' An implementor can build a conformant chronometer
 from this section alone. Every MUST/SHOULD/MAY is defensible.
 
 !! Phase 3: Implementation & Conformance
-**OODA-HA: Act + Assess**
+''OODA-HA: Act + Assess''
 
 Fill Parts IV and V. Provides:
 * MCP tool interface specification
@@ -133,7 +133,7 @@ Fill Parts IV and V. Provides:
 * Security/privacy considerations
 * Future work (multi-operator, Bloom Clocks, compact mode)
 
-**Exit criteria:** The spec is self-contained, implementable, and
+''Exit criteria:'' The spec is self-contained, implementable, and
 testable. Ready for community review.
 
 ---
@@ -142,16 +142,16 @@ testable. Ready for community review.
 
 A later deep-domain research arc — the DreamNet convergence over revocation · membership · revision-adjudication — resolves the chronometer's load-bearing ambiguity and several Phase-0 / Part-III open questions. The finding, stated whole:
 
-**The mesh keeps time on THREE clocks, never one — and FFZ holds only the third.**
+''The mesh keeps time on THREE clocks, never one — and FFZ holds only the third.''
 
 | Clock | Job | Mechanism |
 |---|---|---|
-| **Automerge logical time** | causal order + fork-detection | `<counter, actorId>` OpId · `getHeads` / `headsEqual` · a partitioned frontier (`drifted`) **is** a fork |
-| **The epoch-counter** | LEASE / liveness ratchet (non-renewal) | per-resource max-register (coordinator-free); a grant names a `boundEpoch`, goes stale on roll — a lease, NOT a targeted revoker |
-| **Keyhive convergent-revoke** | TARGETED revocation | membership-removal (`revoke()`, a tombstone) — never an epoch (the counter can't target one principal) |
-| **FFZ Chronometer** | rhythmic decay/freshness GRAIN | Pulse→Theme rhythmic position; the cadence a lease decays over; the grain a reading carries ("as of last sync") |
+| ''Automerge logical time'' | causal order + fork-detection | `<counter, actorId>` OpId · `getHeads` / `headsEqual` · a partitioned frontier (`drifted`) ''is'' a fork |
+| ''The epoch-counter'' | LEASE / liveness ratchet (non-renewal) | per-resource max-register (coordinator-free); a grant names a `boundEpoch`, goes stale on roll — a lease, NOT a targeted revoker |
+| ''Keyhive convergent-revoke'' | TARGETED revocation | membership-removal (`revoke()`, a tombstone) — never an epoch (the counter can't target one principal) |
+| ''FFZ Chronometer'' | rhythmic decay/freshness GRAIN | Pulse→Theme rhythmic position; the cadence a lease decays over; the grain a reading carries ("as of last sync") |
 
-**FFZ is RHYTHMIC, never causal.** This resolves seed-**Q2** (phase/counter merge) and the Phase-0 item "cross-reference UCAN delegation with ITC fork": the ITC counter and the OODA-HA phase carry *rhythmic position and alignment*, never the happened-before authority. Causal order rides Automerge's OpId; the chronometer rides *alongside* as semantic annotation (matching `ffz-clock.ts` and the notary model of seed-**Q8** — the clock records, it does not rule). The earlier reading of FFZ epoch-dominance as *"universal causal ordering"* is **RETIRED**; `ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision — that manufactures a global-now the mesh cannot hold.
+''FFZ is RHYTHMIC, never causal.'' This resolves seed-''Q2'' (phase/counter merge) and the Phase-0 item "cross-reference UCAN delegation with ITC fork": the ITC counter and the OODA-HA phase carry *rhythmic position and alignment*, never the happened-before authority. Causal order rides Automerge's OpId; the chronometer rides *alongside* as semantic annotation (matching `ffz-clock.ts` and the notary model of seed-''Q8'' — the clock records, it does not rule). The earlier reading of FFZ epoch-dominance as *"universal causal ordering"* is ''RETIRED''; `ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision — that manufactures a global-now the mesh cannot hold.
 
 **The convergence connection.** The same FFZ rhythmic grain serves the DreamNet's converged time-model: a **capability-lease decays over the FFZ cadence** (soft-state — state lives only while refreshed), **membership freshness reads in the FFZ grain** ("verified weight within reach, as of last sync"), while **fork-detection rides Automerge `drifted`**, **non-renewal rides the epoch-lease**, and **_targeted_ revocation rides Keyhive's convergent membership-removal** (the epoch is a lease, not a revoker — adversarial research 2026-06-24). One rhythmic instrument; three time-flows it touches; never the causal authority for any.
 
@@ -159,14 +159,14 @@ This finding lifts the document's *foundation* toward Synthesis. The conversatio
 
 !! Two-Clocks Reconciliation (2026-07-03) `~:confidence[S],[13]`
 
-The operator's ruling collapses the framing above to **TWO clocks**, never three or four — the earlier table listed mechanisms alongside clocks and blurred the count. The mesh keeps time on two orthogonal clocks:
+The operator's ruling collapses the framing above to ''TWO clocks'', never three or four — the earlier table listed mechanisms alongside clocks and blurred the count. The mesh keeps time on two orthogonal clocks:
 
 | Clock | Substrate | Home | Job |
 |---|---|---|---|
-| **CRDT-causal ordering** | TS, structural | web3-local-first, this side of every boundary | happened-before authority — Automerge OpId · `getHeads`/`drifted` · ITC fork/join · the authority-first sync order · fork/merge/revocation ordering |
-| **FFZ-recovered rhythm** | py/R, per-stream | **py-side, behind a causal-island boundary** | rhythmic decay/freshness GRAIN — a cadence recovered from each stream; full telemetry + metadata stamping runs py-side |
+| ''CRDT-causal ordering'' | TS, structural | web3-local-first, this side of every boundary | happened-before authority — Automerge OpId · `getHeads`/`drifted` · ITC fork/join · the authority-first sync order · fork/merge/revocation ordering |
+| ''FFZ-recovered rhythm'' | py/R, per-stream | ''py-side, behind a causal-island boundary'' | rhythmic decay/freshness GRAIN — a cadence recovered from each stream; full telemetry + metadata stamping runs py-side |
 
-**The FFZ chronometer gate lives py/R** — instanced per-stream, across-the-shore, no-global-now. The epoch-counter reads as a **liveness ratchet (lease), never a clock**; targeted revocation rides Keyhive convergent membership-removal (a mechanism, not a clock). The two clocks ride **⊥**: FFZ annotates rhythm and MUST NOT drive a causal or revocation decision. This preserves the retirement already stamped above — FFZ never ruled a universal causal order. Structural ⊥ rhythmic: `lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks`.
+''The FFZ chronometer gate lives py/R'' — instanced per-stream, across-the-shore, no-global-now. The epoch-counter reads as a ''liveness ratchet (lease), never a clock''; targeted revocation rides Keyhive convergent membership-removal (a mechanism, not a clock). The two clocks ride ''⊥'': FFZ annotates rhythm and MUST NOT drive a causal or revocation decision. This preserves the retirement already stamped above — FFZ never ruled a universal causal order. Structural ⊥ rhythmic: `lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks`.
 
 ---
 
@@ -316,26 +316,26 @@ What each provides and what gap remains.]
 [PLACEHOLDER — Definitions of all terms used normatively in this spec.
 Alphabetical. Examples:]
 
-* **Causal Island** — a bounded region within which events can be
+* ''Causal Island'' — a bounded region within which events can be
   causally ordered by a single participant's clock.
-* **Chronometer** — the composite clock instrument tracking position
+* ''Chronometer'' — the composite clock instrument tracking position
   across nested OODA-HA scales for all participants.
-* **Exchange Boundary** — the point at which two participants' clocks
+* ''Exchange Boundary'' — the point at which two participants' clocks
   synchronize; the message crossing between causal islands.
-* **HUD** — Heads-Up Display; the shared instrument panel printed
+* ''HUD'' — Heads-Up Display; the shared instrument panel printed
   in every exchange, making epistemic state visible.
-* **Participant** — any entity maintaining its own clock element:
+* ''Participant'' — any entity maintaining its own clock element:
   an operator, a Lares node, or a Tasked Spirit.
-* **Scale** — one of five nested temporal levels at which OODA-HA phases
+* ''Scale'' — one of five nested temporal levels at which OODA-HA phases
   are tracked. Canonical register names (attention-scale vocabulary):
   L0 = Pulse (sub-perceptual), L1 = Beat (operator perceptual grain,
   the anchor), L2 = Measure (procedural default), L3 = Arc (episodic
   session), L4 = Theme (strategic epoch, unbounded).
   See `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
-* **Stamp** — an ITC stamp; a pair (id, event) encoding a
+* ''Stamp'' — an ITC stamp; a pair (id, event) encoding a
   participant's causal identity and accumulated events.
-* **Sync Point** — see Exchange Boundary.
-* **Talk Story** — the mandatory conversation frame; consensus
+* ''Sync Point'' — see Exchange Boundary.
+* ''Talk Story'' — the mandatory conversation frame; consensus
   before action at every scale.
 
 ---
@@ -492,11 +492,11 @@ SESSION 3 FINDING: Cross-domain HUD research (aviation, gaming,
 automotive) confirms progressive disclosure as best practice.
 Three modes:
 
-* **Silent:** URI-only. Phase in fragment. Zero additional overhead.
+* ''Silent:'' URI-only. Phase in fragment. Zero additional overhead.
   Default for high-tempo exchanges (combat rounds, rapid iteration).
-* **Compact:** One-line summary. Default for most exchanges.
+* ''Compact:'' One-line summary. Default for most exchanges.
   Shows merged counter + per-participant phase deltas + stances.
-* **Full:** Multi-participant view with ITC stamps. On request
+* ''Full:'' Multi-participant view with ITC stamps. On request
   or when participant count > 2 (Tasked Spirit active).
 
 The system SHOULD auto-declutter under pressure. The system

@@ -25,11 +25,11 @@ uri-path    = "ha.ka.ba/lares/api/pono/wikitext-filter"
 
 `wikitext-filter` functions as the native filter dialect for memetic-wikitext.
 
-**Fork origin:** `x-tiddlywiki-filter` (`lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter`).
+''Fork origin:'' `x-tiddlywiki-filter` (`lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter`).
 `x-tiddlywiki-filter` serves import and migration; `wikitext-filter` covers native authoring
 for new authoring.
 
-**Key departures from TW5 filter:**
+''Key departures from TW5 filter:''
 
 | TW5 form | Reason dropped | Lararium replacement |
 |----------|---------------|----------------------|
@@ -39,7 +39,7 @@ for new authoring.
 | `currentTiddler` implicit | Same as above | `[self[]]` in filter expressions |
 | `is[system]` tiddler metaphysics | TW5-specific system namespace concept | `[toml:l-space[system]]` — explicit l-space query |
 
-**Preserved from TW5 filter** (all standard filter operators remain valid):
+''Preserved from TW5 filter'' (all standard filter operators remain valid):
 `tag`, `title`, `field` (renamed — see below), `links`, `backlinks`, `all`, `each`,
 `sort`, `nsort`, `limit`, `first`, `last`, `rest`, `butlast`, `reverse`,
 `prefix`, `suffix`, `contains`, `search`, `regexp`,
@@ -145,7 +145,7 @@ each[key]       — one representative per unique TOML key value
 ,               — Boolean OR (union)
 ```
 
-**Deprecated operators** (available but emit diagnostic):
+''Deprecated operators'' (available but emit diagnostic):
 `!!field` → use `[toml:key[field]]`
 `##index` → use `[edge:family[X]role[Y]]`
 `currentTiddler` → use `[self[]]`
@@ -157,7 +157,7 @@ each[key]       — one representative per unique TOML key value
 
 !! Scope and Context Model
 
-Filters evaluate against an **explicit context**, not an ambient dynamic variable.
+Filters evaluate against an ''explicit context'', not an ambient dynamic variable.
 
 | Context source | How set | Applies to |
 |---------------|---------|------------|

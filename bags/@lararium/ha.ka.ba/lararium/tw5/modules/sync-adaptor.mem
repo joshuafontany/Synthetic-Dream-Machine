@@ -24,10 +24,10 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 
 `LarariumCrdtSyncAdaptor` implements two protocols simultaneously:
 
-**MemeProjection** (CRDT→TW5 direction)
+''MemeProjection'' (CRDT→TW5 direction)
 : Changes arriving from the Automerge store are applied to the live TW5 wiki under an echo-loop guard (`_applying` flag). During initial replay (`onSyncComplete`), changes are buffered and flushed in a single `bulkSetTiddlers` transaction to avoid one widget refresh per tiddler.
 
-**TW5 SyncAdaptor** (TW5→CRDT direction)
+''TW5 SyncAdaptor'' (TW5→CRDT direction)
 : When TW5 fires `saveTiddler` or `deleteTiddler`, the adaptor resolves a `SaveStrategy` by reading the corpus-driven save-cascade meme (`lar:///ha.ka.ba/lararium/tw5/sync/save-cascade`) and routes accordingly. Carrier-aware: ahu child tiddler writes trigger parent carrier reconstruction.
 
 Echo-loop guard rule:

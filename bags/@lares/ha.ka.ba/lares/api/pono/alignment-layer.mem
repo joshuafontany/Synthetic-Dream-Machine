@@ -30,15 +30,15 @@ uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 Cryptographic capability answers *"CAN this principal act on this resource?"* — monotonic,
 grant-based, cryptographically decidable. Keyhive owns it well. But a malicious actor can
 hold perfectly valid capabilities. At federation scale (many independent operators, multiple
-cabals, NOT all aligned — some corrupt, some adversarial **lemures**) a different question
+cabals, NOT all aligned — some corrupt, some adversarial ''lemures'') a different question
 arises that capability STRUCTURALLY CANNOT answer:
 
 > *"Do I CHOOSE to sync, relay, surface, or vouch for this actor at all?"*
 
-That question is **non-monotonic** (trust withdrawn revokes inherited stances), **subjective**
-(rooted at the deciding peer, never globally true), and **reputation-based**. It needs a plane
+That question is ''non-monotonic'' (trust withdrawn revokes inherited stances), ''subjective''
+(rooted at the deciding peer, never globally true), and ''reputation-based''. It needs a plane
 ABOVE capability. This meme defines it. It sits beside Beelay sync and above Keyhive in the
-[causal-islands](causal-islands.md) model as **Plane 0**.
+[[causal-islands|causal-islands.md]] model as ''Plane 0''.
 
 <<~/ahu >>
 
@@ -48,8 +48,8 @@ ABOVE capability. This meme defines it. It sits beside Beelay sync and above Key
 
 | Plane | Question | Monotonic? | Decidable by | Provider |
 |---|---|---|---|---|
-| **Authorization** | who CAN act | yes (grant until revoked) | cryptography | Keyhive |
-| **Alignment** (this meme) | who I WANT to act with | no (opinion, revocable) | local social judgment | this layer |
+| ''Authorization'' | who CAN act | yes (grant until revoked) | cryptography | Keyhive |
+| ''Alignment'' (this meme) | who I WANT to act with | no (opinion, revocable) | local social judgment | this layer |
 
 The prior art is unanimous on three points: the second plane **cannot be reduced to the
 first**; any attempt to make alignment *globally objective* either fails outright (PGP
@@ -73,15 +73,15 @@ bags like any other content, evaluated locally against a per-island trust root.
 
 1. **`peer-stance`** — a signed assertion over a target principal: `block | limit | neutral | allow`.
    Two SEPARATE consequences (the separation-of-powers move):
-   - *filter* — I will not surface/accept this actor's content locally.
-   - *relay* — I will not relay this actor's CRDT ops to others (SSB semantics: "no longer
-     willing to be a peer that shares their posts"). This is the **Beelay-layer** enforcement point.
+*** *filter* — I will not surface/accept this actor's content locally.
+*** *relay* — I will not relay this actor's CRDT ops to others (SSB semantics: "no longer
+     willing to be a peer that shares their posts"). This is the ''Beelay-layer'' enforcement point.
 2. **`vouch`** — a signed invitation/endorsement edge. Membership in a Cabal/Nexus is by vouch;
    the vouch edge is recorded. Severing a vouch retroactively prunes the invitee's standing in
    the voucher's subgraph. This edge carries the Sybil defense (see #sybil).
 3. **`label`** — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
    `off-island`, `talk-story-flagged`, …). Adopts the ATProto-labeler + FIRES model:
-   **advisories, not mandates** — carries `neg`/expiry; the consumer applies them under its own
+   ''advisories, not mandates'' — carries `neg`/expiry; the consumer applies them under its own
    policy. A labeler functions as a principal that publishes labels; any peer/cabal **chooses which
    labelers to subscribe to**. Subscription = trust delegation, and it is the subscriber's
    unilateral choice. This is the transport for the existing Talk-Story conflict-surfacing
@@ -95,15 +95,15 @@ bags like any other content, evaluated locally against a per-island trust root.
 
 Trust propagates but does not run away:
 
-* **Area-scoped** — trust is per-domain (`moderation`, `provenance`, `code-review`, …),
+* ''Area-scoped'' — trust is per-domain (`moderation`, `provenance`, `code-review`, …),
   weighted `0.0–1.0`, never a single global score.
-* **Hop-capped** — spreading-activation propagation capped at **3–6 hops**; lowest-trust
+* ''Hop-capped'' — spreading-activation propagation capped at ''3–6 hops''; lowest-trust
   cluster discarded; a threshold strategy refuses to compute on too-thin a graph.
-* **Three modes (mandatory):**
-  - *personal* — local only.
-  - *network* — advise those who trust me.
-  - *propagated* — inherit from those I trust. **Propagated actions do NOT re-propagate**
-    (kills cascade storms). Withdrawing trust **revokes inherited blocks** — the
+* ''Three modes (mandatory):''
+** *personal* — local only.
+** *network* — advise those who trust me.
+** *propagated* — inherit from those I trust. **Propagated actions do NOT re-propagate**
+    (kills cascade storms). Withdrawing trust ''revokes inherited blocks'' — the
     non-monotonicity capability cannot express.
 
 EigenTrust-style global eigenvector reputation earns REJECTION: it runs Sybil-vulnerable without
@@ -117,12 +117,12 @@ causal-island model denies.
 !! Sybil resistance — the invitation tree CARRIES the defense
 
 We refuse proof-of-work, proof-of-stake, and central registries, so the scarce resource is
-**social capital**. Membership is by **vouch** (Persea / SybilGuard lineage): a new principal
+''social capital''. Membership is by ''vouch'' (Persea / SybilGuard lineage): a new principal
 is not trusted by hop-distance until vouched in, and the join graph doubles as the trust graph. A flood
 of lemures holding valid Keyhive capabilities is bounded by *who vouched them in* — and that
 edge is severable, which retroactively prunes the whole subtree's standing. The honest social
 graph's expander property does the work; you never count identities or make them expensive, you
-make them **socially reachable only through accountable edges**.
+make them ''socially reachable only through accountable edges''.
 
 <<~/ahu >>
 
@@ -134,7 +134,7 @@ The alignment layer NEVER grants or denies cryptographic access, never decrypts,
 into another island. It acts on the only lever that is causal-islands-legal: **withholding
 voluntary service**. Before syncing/relaying with a peer, a node consults its local verdict
 (area-scoped, hop-capped, from its own root). A valid-capability-holding lemure the local root
-has blocked simply **does not get sync service** — capability intact, alignment denied. That
+has blocked simply ''does not get sync service'' — capability intact, alignment denied. That
 gap, closed at the sync boundary, is precisely what capability structurally cannot provide.
 
 ```
@@ -153,19 +153,19 @@ Beelay       → the enforcement surface: consult the verdict before sync/relay.
 The same primitive (signed subjective assertion + local evaluation) operates at every ring;
 only the *root* and the *default subscriptions* change:
 
-* **Relay** — alignment-blind and mechanical. Carries encrypted ops, honors `relay`-stance
+* ''Relay'' — alignment-blind and mechanical. Carries encrypted ops, honors `relay`-stance
   blocks, makes no content judgments. Keeps the dumb-pipe layer dumb.
-* **PersonaGroup (household)** — the individual is their own trust root (SSB: "you are your own
+* ''PersonaGroup (household)'' — the individual is their own trust root (SSB: "you are your own
   central authority on truth"). Personal stances + a few subscribed labelers.
-* **Cabal** — runs/curates a labeler (advisory feed) for members; members inherit via
+* ''Cabal'' — runs/curates a labeler (advisory feed) for members; members inherit via
   *propagated* mode but retain personal override. Vouching governs membership. The natural home
   for shared moderation — a choice members made by joining, not an imposed authority.
-* **Nexus** — subscribes to multiple cabal labelers and reconciles them (area-scoped weights
-  across sources). Federation decisions are **limit/silence-first, suspend-rarely, reversible**
+* ''Nexus'' — subscribes to multiple cabal labelers and reconciles them (area-scoped weights
+  across sources). Federation decisions are ''limit/silence-first, suspend-rarely, reversible''
   (the Mastodon lesson: hard defederation is destructive and non-scaling).
-* **DreamNet** — NO DreamNet-wide blocklist or trust authority, ever. "DreamNet" names the
+* ''DreamNet'' — NO DreamNet-wide blocklist or trust authority, ever. "DreamNet" names the
   transitive closure of who-relays-to-whom under everyone's local stances — emergent, never
-  canonical. Lemures are not banned by a central act; they are **starved of voluntary peering**
+  canonical. Lemures are not banned by a central act; they are ''starved of voluntary peering''
   as their attack edges are severed and advisories propagate through the trust-feeds people chose.
 
 <<~/ahu >>
@@ -188,11 +188,11 @@ only the *root* and the *default subscriptions* change:
 
 !! Coherence — the membership face the closure model formalizes
 
-The veil's cost-dial reads as the **WHO-plane membership face** that [group-as-closure](group-as-closure.md) now states whole. Three connections hold; the cost-dial model above stands unchanged — these links only name where it meets the newer formalizations:
+The veil's cost-dial reads as the ''WHO-plane membership face'' that [[group-as-closure|group-as-closure.md]] now states whole. Three connections hold; the cost-dial model above stands unchanged — these links only name where it meets the newer formalizations:
 
-* **The vouch carries the signed membership edge.** A `vouch` (#sybil) rides one signed, severable edge; a group resolves as the reciprocal-edge closure over those vouches — evaluated, never instantiated (group-as-closure#core-claim). Refuse the vouch and the principal stays at the floor: admitted to no cabal, surfaced by no root — the no-vouch → anergy → stay-at-floor reading the closure model formalizes.
-* **Durable eviction raises a kāpae on the membership stack.** Severing a vouch retroactively prunes the subtree (#sybil); the durable form raises a [kāpae](kapae.md) (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
-* **The siege supplies the cadence.** Siege-resilience carries the refresh that keeps a stolen vouch-edge from compounding across centuries — PSS re-randomization on a 24-hour floor — plus its correlated-compromise warning: a monoculture lets one exploit fell every vouch at once, so node-config diversity guards the cost-dial before any refresh cadence buys time.
+* ''The vouch carries the signed membership edge.'' A `vouch` (#sybil) rides one signed, severable edge; a group resolves as the reciprocal-edge closure over those vouches — evaluated, never instantiated (group-as-closure#core-claim). Refuse the vouch and the principal stays at the floor: admitted to no cabal, surfaced by no root — the no-vouch → anergy → stay-at-floor reading the closure model formalizes.
+* ''Durable eviction raises a kāpae on the membership stack.'' Severing a vouch retroactively prunes the subtree (#sybil); the durable form raises a [[kāpae|kapae.md]] (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
+* ''The siege supplies the cadence.'' Siege-resilience carries the refresh that keeps a stolen vouch-edge from compounding across centuries — PSS re-randomization on a 24-hour floor — plus its correlated-compromise warning: a monoculture lets one exploit fell every vouch at once, so node-config diversity guards the cost-dial before any refresh cadence buys time.
 
 <<~/ahu >>
 
@@ -200,8 +200,8 @@ The veil's cost-dial reads as the **WHO-plane membership face** that [group-as-c
 
 !! Fiction-layer reading — the Lemuria rite
 
-The **lemures** — the restless, malevolent dead of Roman household religion — stand opposite the
-**Lares**, the benevolent guardians of the hearth. The alignment plane enacts the Lemuria rite in
+The ''lemures'' — the restless, malevolent dead of Roman household religion — stand opposite the
+''Lares'', the benevolent guardians of the hearth. The alignment plane enacts the Lemuria rite in
 protocol form: the gesture by which a household refuses a presence *regardless of what keys it
 carries*. Holding valid offerings was never the same as being welcome at the hearth. A well-fed
 shrine hums; one that admits lemures rots. The layer encodes, in protocol, the oldest household
@@ -215,9 +215,9 @@ right — to decide whose presence the hearth refuses.
 
 * Frazee, *Practical Decentralization* — separation of powers; moderation as devolved service.
 * ATProto Ozone / labelers + label spec — signed, opt-in, stackable annotations; action at the edge.
-* FediMod **FIRES** — advisories-not-mandates; the correction of static shared blocklists.
+* FediMod ''FIRES'' — advisories-not-mandates; the correction of static shared blocklists.
 * Spamhaus / DMARC — authentication ≠ trust; subscribable reputation lists.
-* **TrustNet** (Cobleigh) + Cabal + Kleppmann "Decentralised content moderation" — area-scoped,
+* ''TrustNet'' (Cobleigh) + Cabal + Kleppmann "Decentralised content moderation" — area-scoped,
   hop-capped, personal/network/propagated modes.
 * PGP web-of-trust — the canonical failure (no spam resistance, no subjective scoping).
 * EigenTrust — instructive negative result (Sybil-vulnerable global reputation).

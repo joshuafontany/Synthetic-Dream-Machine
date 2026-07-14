@@ -68,17 +68,17 @@ A hoolele edge MUST carry a target URI as its first argument.
 
 `hoolele` is the escape hatch. Use it only for work that fits one of these cases:
 
-**1. Persistence across scope destruction**
+''1. Persistence across scope destruction''
 Work that must complete even if the UI, the widget, or the reaction handler
 that started it is torn down. Example: a CRDT write that must flush to peers
 even if the wiki VM is destroyed.
 
-**2. Cross-island work**
+''2. Cross-island work''
 Work that starts in one causal island and must complete in another, with no
 shared cancellation scope. Example: a capability delegation request sent to
 a remote peer.
 
-**3. Background daemon tasks**
+''3. Background daemon tasks''
 Work that runs indefinitely and should never be cancelled by normal flow.
 Example: the CRDT sync loop, the WebSocket keep-alive, the Keyhive heartbeat.
 
@@ -100,7 +100,7 @@ operators now have pono counterparts:
 | `holo` | `\race` | `race` | prune node — recursive subtree cancel | first winner triggers |
 | `puka` | `\rush` | `rush` | select node — first wins, losers continue | enclosing scope exit |
 | `lele` | `\branch` | `branch` | child node — scoped fire-and-continue | enclosing function scope exit |
-| **hoolele** | **\spawn** | **spawn** | **new root — exits tree** | **explicit Cancel() only** |
+| ''hoolele'' | ''\spawn'' | ''spawn'' | ''new root — exits tree'' | ''explicit Cancel() only'' |
 
 The five structured operators (`sync`, `race`, `rush`, `branch`, and the containing
 concurrency blocks) all create children in the task tree. `hoolele`/`spawn` is the
@@ -135,7 +135,7 @@ These are the natural `hoolele` boundaries:
   is disposed; spawn the flush, hold the task handle in the store.
 * **`VmPool` cross-VM coordination** — work that spans wiki VM instances has no
   single containing scope; spawn the coordination task at pool level.
-* **Keyhive capability delegation** — async crypto; survives the UI context that
+* ''Keyhive capability delegation'' — async crypto; survives the UI context that
   initiated it.
 
 The `MemeSyncAdaptor` boundary IS the `hoolele` boundary in the Lararium stack:

@@ -27,7 +27,7 @@ uri-path  = "ha.ka.ba/sdm/templates/modules/power"
 
 A Power module meme carries the playable default for one Power and addresses its facets with flat `#has` edges. It loads during play without dragging projection, witness, or design chatter into the hot path.
 
-The canonical SDM Power card (P/R/T/D/Ox + tags) **is** the `#default` block. The `#has` block addresses those tags as components and names the mount-point. That is the whole job.
+The canonical SDM Power card (P/R/T/D/Ox + tags) ''is'' the `#default` block. The `#has` block addresses those tags as components and names the mount-point. That is the whole job.
 
 <<~/ahu >>
 
@@ -43,7 +43,7 @@ The canonical SDM Power card (P/R/T/D/Ox + tags) **is** the `#default` block. Th
 #aftermath   open questions, not hidden assumptions
 ```
 
-The TOML `tags` field MUST mirror the `#has` component edges, for TW5-native filter compatibility. Pranala `#has` edges carry graph truth and address the **full meme** (lar: URI); TOML `tags` carry filter sugar and reference the **short tag pointer** (`@sdm/tags/{facet}/{slug}`), which points back to that same meme via its `meme` field.
+The TOML `tags` field MUST mirror the `#has` component edges, for TW5-native filter compatibility. Pranala `#has` edges carry graph truth and address the ''full meme'' (lar: URI); TOML `tags` carry filter sugar and reference the ''short tag pointer'' (`@sdm/tags/{facet}/{slug}`), which points back to that same meme via its `meme` field.
 
 ```toml
 tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags/hook/dangerous"]
@@ -55,7 +55,7 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 !! `#has` Law
 
-* `#has` is **flat**: no `family`, no `role`. The target path prefix carries semantics.
+* `#has` is ''flat'': no `family`, no `role`. The target path prefix carries semantics.
 * A module `#has` one mount-point and zero-or-more components.
 * Do NOT use the retired `implements` edge, and do NOT link an `interfaces/` meme. That inheritance spine retired with v0.0; v0.1 composes with flat `has`.
 
@@ -70,8 +70,8 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 !! Writing Law
 
-* **Heading-naming law.** A visible heading carries content, not the structural ahu id. The H1 is the Power name. `#has` renders as `## Composition`; `#default` carries **no** heading — the statline leads directly under the H1. Never surface `## Has` or `## Default` to a reader.
-* **Render-fence law.** Anything meant to render — transclusions, widgets, procedure calls — stays live wikitext, never in a code fence. Fence only what is shown *as text* (TOML data, literal quotes).
+* ''Heading-naming law.'' A visible heading carries content, not the structural ahu id. The H1 is the Power name. `#has` renders as `## Composition`; `#default` carries ''no'' heading — the statline leads directly under the H1. Never surface `## Has` or `## Default` to a reader.
+* ''Render-fence law.'' Anything meant to render — transclusions, widgets, procedure calls — stays live wikitext, never in a code fence. Fence only what is shown *as text* (TOML data, literal quotes).
 * Prefer table-action language over design chat. Name cost, range, target, duration, counterplay directly.
 * Keep `#default` reading like a Power entry, not a code block.
 * Card wording lives in the projection meme; source archaeology in the witness meme.

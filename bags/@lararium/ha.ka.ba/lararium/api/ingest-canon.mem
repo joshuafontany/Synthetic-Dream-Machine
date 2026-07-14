@@ -26,8 +26,8 @@ written   = "2026-06-27"
 
 The golden path for getting *any* chat session + its telemetry into the palace, locked by research
 (field + code) on 2026-06-27 under the operator's full manaoio. The un-pono shape it retires:
-**write-bare-then-enrich-in-a-second-pass** (ELT load-then-transform — a race window, an
-"eventually annotated" drawer). The cure: **annotate at the source, write once.**
+''write-bare-then-enrich-in-a-second-pass'' (ELT load-then-transform — a race window, an
+"eventually annotated" drawer). The cure: ''annotate at the source, write once.''
 
 <<~ranks flow source -> producer(exchange-assembler) -> capture-verb -> nalu(born-annotate+WAL) -> flush(mine --source ndjson) -> mempalace-drawer >>
 
@@ -50,7 +50,7 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 <<~Lock 8-busy-is-retryable "the palace lock is the cross-process coordination — a held lock (MineAlreadyRunning) is a BUSY signal (= SQLITE_BUSY), not an error; every writer retries with backoff+jitter. live+bulk coexist through the one lock (verified: 0 failures, pave 33619)" >>
 <<~Lock 9-one-runtime "ONE RUNTIME — the @daemon TW5 VM is the SOLE ingest + gradient runtime. DROP every outside-VM path: turn-harvest.ts/harvestTurnGradient RETIRES (no regex shadow, no VM-free projection, no fallback), no CLI-side annotate, no daemon-down direct-mine. Verbatim-always rides the DURABLE TRANSCRIPT (harness-written, always on disk) REPLAYED through the VM when it wakes — never an outside-VM mine. One grammar, one runtime, no fork to keep in lockstep" >>
 <<~Lock 10-superset "memetic-wikitext ⊃ TW5 wikitext — THREE NESTED TIERS: host TW5 wikitext (Jeremy's grammar, untouched) ⊂ +OVERLAY (our `<<~` SharktoothSigils, tokenizer-claimed FIRST) ⊂ +GUEST grammars (nakama, `hana`-bounded blocks). TWO realizations: (R) RENDER — the lares plugin registers `<<~` as a wikirule in TW5's own $tw wikiparser so TW5 parses ALL native wikitext, our overlay claims only sigil tokens (the Markdoc/MDX tokenizer-overlay pattern, host untouched). GRADIENT-RENDER SYMMETRY: a chat-born sigil typed into a LIVE wikitext input renders on the SAME gradient as the telemetry parse — complete=rich, drifted/partial=graded best-effort, NEVER a hard parse-error. The gradient lives in the WIKIRULE → one overlay, both surfaces (chat ingest · live wiki render); (A) meme-ast PARSE-TREE — standalone, opaque to TW5: only sigils are typed nodes, host wikitext rides as verbatim TextNodes (byte-exact raw slice). The host-passthrough is BY DESIGN, not a gap — host wikitext round-trips byte-exact via TextNode+verbatim; TW5-typed nodes deferred (no consumer needs structural queries over host wikitext). Guest grammar plugs in via an interpreter tiddler at lar:///…/hana-interpreter/<key>; the bounded hana block fences it from host+overlay tokens" >>
-<<~Lock 11-drawer-schema "DROP the flat lar_* index. DRAWER = { verbatim content (the document/embedding) + metadata{ `lar_hv`:int · `lar_ast`:JSON-string of the GRADED **full TW5+memetic-wikitext parse tree** } }. The tree is built by the @daemon's NATIVE TW5 parser flow (`$tw.wiki.parseText` with our `<<~` overlay wikirule loaded) — so HOST wikitext is TYPED (links/macros/headings/transclusions are real TW5 nodes) AND our sigils are typed, in ONE tree that RE-HYDRATES NATIVELY in any VM island (it IS the engine's own parse tree). NOT the standalone host-opaque meme-ast (that serves the disk-projection edges). The AST holds the whole gradient (buildPatch only PROJECTED from it — flat fields were redundant+lossy). KEEP FLAT only: `lar_hv` (the idempotency watermark, read every sweep client-side — never re-parse the tree for a version#) + the existing non-lar `wing` (the one chroma `where` filter). chroma metadata is flat (str|num|bool) so the AST rides as a JSON STRING (unfilterable by `where` — and nothing filters lar_* today, blast radius ~0). EXTRINSIC provenance (lar_surface · lar_agent_handle · lar_parent_handle · lar_root_handle · lar_sidechain · lar_ffz — NOT parse-derivable from prose) folds into the AST as an `envelope` provenance node, so the tree stays the single structural source. READ: semantic vector recall on verbatim (+ optional where{wing}) → re-hydrate `lar_ast` in the VM island → structural predicates (band≥X, voice∈{}, drift, aim) POST-recall — strictly MORE capable than today's flat filter" >>
+<<~Lock 11-drawer-schema "DROP the flat lar_* index. DRAWER = { verbatim content (the document/embedding) + metadata{ `lar_hv`:int · `lar_ast`:JSON-string of the GRADED ''full TW5+memetic-wikitext parse tree'' } }. The tree is built by the @daemon's NATIVE TW5 parser flow (`$tw.wiki.parseText` with our `<<~` overlay wikirule loaded) — so HOST wikitext is TYPED (links/macros/headings/transclusions are real TW5 nodes) AND our sigils are typed, in ONE tree that RE-HYDRATES NATIVELY in any VM island (it IS the engine's own parse tree). NOT the standalone host-opaque meme-ast (that serves the disk-projection edges). The AST holds the whole gradient (buildPatch only PROJECTED from it — flat fields were redundant+lossy). KEEP FLAT only: `lar_hv` (the idempotency watermark, read every sweep client-side — never re-parse the tree for a version#) + the existing non-lar `wing` (the one chroma `where` filter). chroma metadata is flat (str|num|bool) so the AST rides as a JSON STRING (unfilterable by `where` — and nothing filters lar_* today, blast radius ~0). EXTRINSIC provenance (lar_surface · lar_agent_handle · lar_parent_handle · lar_root_handle · lar_sidechain · lar_ffz — NOT parse-derivable from prose) folds into the AST as an `envelope` provenance node, so the tree stays the single structural source. READ: semantic vector recall on verbatim (+ optional where{wing}) → re-hydrate `lar_ast` in the VM island → structural predicates (band≥X, voice∈{}, drift, aim) POST-recall — strictly MORE capable than today's flat filter" >>
 
 <<~/ahu >>
 
@@ -58,23 +58,23 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 
 !! Migration (the circle-back work, after FFZ)
 
-**BUILD (ordered):** (1) **register the turn sigils** as gradient-valued SharktoothSigil tids —
+''BUILD (ordered):'' (1) ''register the turn sigils'' as gradient-valued SharktoothSigil tids —
 `lares aim/yield · confidence · hud · ward · oracle · syad` (word + gradient-reading + render) so the
-engine parses TURNS, not just documents. (2) **the VM gradient module** (lararium-tw5): run the NATIVE
+engine parses TURNS, not just documents. (2) ''the VM gradient module'' (lararium-tw5): run the NATIVE
 `$tw.wiki.parseText` flow (TW5's parser + our `<<~` overlay wikirule) → the FULL TW5+memetic parse
 tree (host wikitext typed + sigils typed) → walk + GRADE the sigil nodes (complete=high, drifted/
 unclosed=low; the grade-on-a-gradient) → the graded tree + an `envelope` provenance node (surface/
-handles/sidechain/ffz). Serializable + re-hydrates natively as the engine's own parse tree. (3) **wire the cap→VM seam** — thread `ctx.tw5` to the annotate; the cap calls the VM
-module (annotate is sync, `parseMemeText` sync in-worker). (4) **drawer-write** — `buildPatch` →
+handles/sidechain/ffz). Serializable + re-hydrates natively as the engine's own parse tree. (3) ''wire the cap→VM seam'' — thread `ctx.tw5` to the annotate; the cap calls the VM
+module (annotate is sync, `parseMemeText` sync in-worker). (4) ''drawer-write'' — `buildPatch` →
 `lar_ast = JSON.stringify(graded AST + envelope)` + `lar_hv`; DROP the flat `lar_*`; rewrite
 `LAR_SCHEMA` (adapter.py) to declare only `lar_hv`+`lar_ast`; bump `LAR_HV` 6→7 (lockstep
 telemetry-writeback.ts:32 + drawer_io.py:32) → next harvest re-projects stale drawers' METADATA
-(verbatim untouched — a metadata re-harvest, not a re-ingest). (5) **read-side helper** (lararium-tw5):
-re-hydrate `lar_ast` + structural-filter POST-recall. (6) **exchange-assembler** (`readExchanges` —
+(verbatim untouched — a metadata re-harvest, not a re-ingest). (5) ''read-side helper'' (lararium-tw5):
+re-hydrate `lar_ast` + structural-filter POST-recall. (6) ''exchange-assembler'' (`readExchanges` —
 done for live; route historical through the VM, Kappa replay). (7) `mine_palace_lock`+busy-retry around
 the version-gated `writebackWing`/`drawer_io cmd_apply` re-derive ceremony.
 
-**RETIRE (one runtime — no fallback):** `turn-harvest.ts`/`harvestTurnGradient` (the VM-free regex
+''RETIRE (one runtime — no fallback):'' `turn-harvest.ts`/`harvestTurnGradient` (the VM-free regex
 shadow) ENTIRELY · the FLAT `lar_*` projection (band/voices/aim/… → all in the AST now) · `convo_miner
 --extract exchange` (pairing moves into the producer; the VM is the sole decomposer) · the daemon-down
 direct-mine fallback (verbatim-always = the durable transcript replayed through the VM, not an
@@ -106,24 +106,24 @@ The grammar is self-hosted: a tiddler tagged `lar:///ha.ka.ba/tags/SharktoothSig
 parser a word (grammar-cache.ts reads `lar-*` fields → SigilRule; 62 sigils / 8 families today). The
 AST (meme-ast) parses the DOCUMENT sigils (ahu · pranala · edge-sugar · control · guest-grammar …).
 
-**THE HEADLINE GAP — the TURN sigils aren't registered.** `lares aim/yield` · `confidence` · `hud` ·
+''THE HEADLINE GAP — the TURN sigils aren't registered.'' `lares aim/yield` · `confidence` · `hud` ·
 `ward` · `oracle` · `syad` have NO `.tid` files and no bootstrap scans — the engine can't parse them
 (they fall to Dynamic/water); ONLY the regex shadow (`turn-harvest.ts`) reads them. So the engine
 decomposes documents but not TURNS. THE BUILD: register those ~6 turn sigils as gradient-valued
-SharktoothSigil tids (the Explore est. ~30 lines), each carrying the recalled triad — the **word**
-(teaches the parser) · the **gradient-reading** (how it grades: confidence 0–20 → band) · the
-**render**. Then the VM is the one turn-decomposer; the gradient module walks the AST.
+SharktoothSigil tids (the Explore est. ~30 lines), each carrying the recalled triad — the ''word''
+(teaches the parser) · the ''gradient-reading'' (how it grades: confidence 0–20 → band) · the
+''render''. Then the VM is the one turn-decomposer; the gradient module walks the AST.
 
-**GRADE ON A GRADIENT — the builder is binary where it should grade** (the creative-grammar cure):
+''GRADE ON A GRADIENT — the builder is binary where it should grade'' (the creative-grammar cure):
 * `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a **MalformedSigil /
   PartialNode** with a parse-confidence (`<<~ confidence ( <4` = opener+intent, broken close → ~0.4;
   `<<~`-far-from-close → ~0.2; no opener → prose 0). "Likely-a-sigil-but-drifted," not silent water.
-* per-sigil **form-confidence**: full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
+* per-sigil ''form-confidence'': full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
   numeric-fail = low. The node is GRADIENT-VALUED, never pass/fail (the harvester's law, in the VM).
 * degraded VOICE ladder (full+mask > full > bare-known > looks-like-voice) · edge-strictness · ahu
   nesting-depth — all binary today, all gradient candidates.
 
-**SECONDARY GAPS:** the `\sigil` pragma parser is a STUB (lar-sigil-pragma.ts:11-13, "full body parse
+''SECONDARY GAPS:'' the `\sigil` pragma parser is a STUB (lar-sigil-pragma.ts:11-13, "full body parse
 = future talk-story") → operator-authored sigil defs don't load back; KNOWN_VOICES is hardcoded in
 turn-harvest.ts (not a `sigil-family-voice.tid`). COVERAGE DIFF: parser knows structural sigils ·
 the regex shadow knows the turn/gradient sigils · the 6 turn sigils are the unbridged gap.
@@ -138,20 +138,20 @@ Plugin, NOT a fork — squarely the welcomed path (the official Markdown plugin 
 alternate syntax shipped as a plugin). Five findings, all sourced (talk.tiddlywiki, Jermolene/TW5,
 linonetwo's tw-react + TidGi):
 
-1. **Registration is ALREADY canonical.** `memetic-parser.ts` subclasses WikiParser for content-type
+1. ''Registration is ALREADY canonical.'' `memetic-parser.ts` subclasses WikiParser for content-type
    `text/x-memetic-wikitext` (deny-list now EMPTY → native rule flow unchanged); wikirules load via the
    stock `module-type: wikirule` path (`createClassesFromModules`). `<<~` claims by DISJOINT MATCH —
    TW5's `macrocallinline` skips it (`~` isn't a legal macro-name start), so no ordering-luck, no fork.
    We sidestep TW5's global token-collision pitfall TWO ways: our own content-type AND the non-colliding
    `<<~` namespace. Keep both. (One live test: confirm no `<<~ WORD …>>` validates as a macro call.)
 
-2. **SERIALIZATION RESOLVED — store the parse TREE as DATA, never the parser/widgets.** TW5's
+2. ''SERIALIZATION RESOLVED — store the parse TREE as DATA, never the parser/widgets.'' TW5's
    `wiki.parseText()` returns a Parser INSTANCE (holds a live `wiki` ref — NOT serializable); its `.tree`
    is plain nested objects (`{type,tag,attributes,children,text,start,end}`, JSON primitives only) →
    round-trips cleanly. So `lar_ast` = the extracted `.tree` (drop the parser wrapper). Widget refs/
    functions appear only at the later `makeWidget()` stage — never store those.
 
-3. **RE-HYDRATION (the VM-island model).** Rebuild the widget tree NATIVELY in the island —
+3. ''RE-HYDRATION (the VM-island model).'' Rebuild the widget tree NATIVELY in the island —
    `$tw.wiki.makeTranscludeWidget(title, {document: $tw.fakeDocument, importPageMacros:true})` →
    `node.render(container)` → `node.refresh()` (the canon `core/modules/startup/render.js` path; fakedom
    partial → LinkedOM the node-side drop-in). linonetwo's prior art confirms it: tw-react LIVE-MOUNTS
@@ -159,7 +159,7 @@ linonetwo's tw-react + TidGi):
    `worker_threads` workspace with an IPC syncadaptor (= our VM-in-worker islands). Serialize DATA,
    rehydrate WIDGETS natively — never serialize widgets.
 
-4. **GRADIENT-RENDER — the gap is real + small.** Today the wikirule hard-matches: unrecognized/partial
+4. ''GRADIENT-RENDER — the gap is real + small.'' Today the wikirule hard-matches: unrecognized/partial
    → `{type:"text", text:verbatim}` (lar-sigil.ts:132,157, the `__literal__` path) — survives as raw
    text, never graded. TW5 is fail-soft (unmatched→plaintext, unknown-widget→visible "Undefined
    widget", `$error`→`tc-error` span) BUT has NO per-widget try/catch (a JS throw isn't contained). THE
@@ -169,7 +169,7 @@ linonetwo's tw-react + TidGi):
    best-effort confidence-graded (`tc-error`-styled) span. Same gradient, both surfaces. (Finish the
    `lar-sigil-pragma.ts` stub too.)
 
-5. **PONO ENGAGEMENT.** Ship as a plugin (`$:/plugins/<pub>/<name>`) on our own content-type + `<<~`
+5. ''PONO ENGAGEMENT.'' Ship as a plugin (`$:/plugins/<pub>/<name>`) on our own content-type + `<<~`
    namespace; sign the UnaMesa CLA; announce in the talk.tiddlywiki Plugins category; NO `$:/core`
    wikitext edits. Jeremy's ethos welcomes plugin extension. Optional later: `module-type:
    wikiruleserializer` for lossless round-trip.

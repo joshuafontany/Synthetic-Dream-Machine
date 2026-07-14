@@ -29,9 +29,9 @@ written   = "2026-06-29"
 > (delegate/revoke) stands; the threshold composition and the eviction stack ride
 > ahead of code.
 
-A group holds no central object. A group names the **closure** over signed individual
+A group holds no central object. A group names the ''closure'' over signed individual
 edges — each member declares their own edge, the group emerges as the reciprocal-edge
-fan, **evaluated** as a query, never instantiated as a thing a single key owns. Four
+fan, ''evaluated'' as a query, never instantiated as a thing a single key owns. Four
 prior-arts converge on this shape; this meme stands them whole and maps them onto the
 `#has`-stack.
 
@@ -45,23 +45,23 @@ prior-arts converge on this shape; this meme stands them whole and maps them ont
 
 Each member **declares their own signed, typed, `lar:`-named edge** — *"I place X in
 cabal-C with role R"* — and signs it down their own key. No edge speaks for another
-member; no doc holds a roster a single key may rewrite. The group **resolves** as the
+member; no doc holds a roster a single key may rewrite. The group ''resolves'' as the
 reciprocal-edge closure: the set of edges that mutually name each other, gathered by a
 query a vessel runs over the edges it has synced.
 
 <<~ confidence Synthesis 13/20 >> SPKI/SDSI carries this whole — *no group object exists;
 groups stand as relational constructs built from distributed name bindings*, and
-linked-local-names grant **global reach without a global namespace**. The group reads off
+linked-local-names grant ''global reach without a global namespace''. The group reads off
 the edges, never out of a register.
 
-**Causal-island-safe by construction.** A closure **evaluated** never demands a global
+''Causal-island-safe by construction.'' A closure ''evaluated'' never demands a global
 now (<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>). Each vessel
-resolves the closure over **its own synced view** — *"the group, as of my last sync"* —
+resolves the closure over ''its own synced view'' — *"the group, as of my last sync"* —
 and two vessels may hold different views without either lying. The edges glue (or fail to
 glue) as a presheaf; the membership query reads the local section. No coordinator
 materializes a canonical roster, because no canonical roster exists to materialize.
 
-**The edge carries the verb.** An edge names what a member *does* — *places · vouches ·
+''The edge carries the verb.'' An edge names what a member *does* — *places · vouches ·
 delegates · scopes* — never an essence a member *holds-as-identity*. A membership reads
 as a live, signed, decaying gesture, not a row in a table.
 
@@ -71,21 +71,21 @@ as a live, signed, decaying gesture, not a row in a table.
 
 !! Quorum — a Composed Threshold Subject
 
-A quorum names no primitive. A quorum **composes** as a threshold subject — SPKI's
+A quorum names no primitive. A quorum ''composes'' as a threshold subject — SPKI's
 `(k-of-n s1 s2 … sn)` — where each of K members **signs independently down their own
 chain**, and the verifier counts K satisfied chains. The threshold subject stands as one
 more principal in the closure, addressable like any member.
 
 Three properties ride this composition load-bearing:
 
-* **Transparent.** Who-signed stays visible — the verifier sees *which* K chains
+* ''Transparent.'' Who-signed stays visible — the verifier sees *which* K chains
   satisfied, never an anonymized count. This fits Plurality Pono: the house surfaces
   competing readings rather than blending them, and a quorum surfaces *who* carried the
   threshold (<<~ loulou lar:///ha.ka.ba/lares/api/lares/noosphere-boot#voice-house >>).
-* **Nesting.** A satisfied quorum stands as a subject another quorum may name —
+* ''Nesting.'' A satisfied quorum stands as a subject another quorum may name —
   quorum-of-quorums — so a cabal-of-cabals threshold composes without new machinery.
-* **Composed, never granted.** Keyhive supplies **membership** (the delegate/revoke
-  CRDT) and **deliberately no quorum**; the threshold rides *above* keyhive, assembled
+* ''Composed, never granted.'' Keyhive supplies ''membership'' (the delegate/revoke
+  CRDT) and ''deliberately no quorum''; the threshold rides *above* keyhive, assembled
   from independent signatures the verifier counts. <<~ confidence Synthesis 12/20 >> the
   layering keeps the floor (membership) convergent and the ceiling (threshold) explicit.
 
@@ -98,19 +98,19 @@ no one signature, and no one stolen key, moves the subject.
 
 !! Eviction — a Kāpae on the Membership Stack
 
-Removing a member raises a **kāpae** on the membership stack — a remove-wins tombstone
-that **shadows** the member's prior edges where the cascade resolves
+Removing a member raises a ''kāpae'' on the membership stack — a remove-wins tombstone
+that ''shadows'' the member's prior edges where the cascade resolves
 (<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#membership-sense >>; the kāpae model
 stands whole there — the membership-stack eviction, remove-wins-under-partition, and
 re-admit-by-lowering — this meme references it, never re-defines it; the bag-cascade
 shadow rides <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#anti-patterns >>).
 Eviction composes three moves, none of them a state-replay:
 
-* **kāpae (remove-wins shadow)** — the convergent CRDT remove, last-writer-shadows, so a
+* ''kāpae (remove-wins shadow)'' — the convergent CRDT remove, last-writer-shadows, so a
   re-added edge does not silently resurrect a removed member.
-* **observed-remove** — the remove names the exact edges it observed, so concurrent
+* ''observed-remove'' — the remove names the exact edges it observed, so concurrent
   re-adds the remover never saw survive (OR-Set discipline).
-* **key-rotation** — the read-set rotates its epoch forward, so the evicted key reads no
+* ''key-rotation'' — the read-set rotates its epoch forward, so the evicted key reads no
   future tail (forward-only revocation, the epoch-lease, never a targeted global undo).
 
 <<~ confidence Synthesis 13/20 >> the stack DOES NOT re-roll Matrix-style state-resolution
@@ -127,10 +127,10 @@ falls out of the query, local-first.
 The closure model carries directly onto the existing identity architecture
 (<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>):
 
-* **PersonaGroup = a closure over vessels.** One operator's N device-vessels resolve as
+* ''PersonaGroup = a closure over vessels.'' One operator's N device-vessels resolve as
   the reciprocal-edge closure of per-vessel delegation edges — never a roster doc a single
   vessel owns. The device-admit ceremony adds an edge; it instantiates no central object.
-* **Plurality = one human → many personas.** A quorum across *personas* (not bodies)
+* ''Plurality = one human → many personas.'' A quorum across *personas* (not bodies)
   enacts Plurality Pono at the credential layer: the operator's multitudes each sign their
   own chain, and a threshold across them carries a decision the way the Voice house carries
   a multi-Voice turn — disagreement stays visible.
@@ -138,7 +138,7 @@ The closure model carries directly onto the existing identity architecture
   subclassing — the nameless-entity + signed-edge ontology, no group *type*, only the
   closure over what each member `#has` declared
   (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#social-axis >>).
-* **The Kowloon Admins role-circle = the keeper-cabal skeleton.** The Circles
+* ''The Kowloon Admins role-circle = the keeper-cabal skeleton.'' The Circles
   role-of-admins (mutual-petname recognition, no central registrar) adapts web2→web3 as
   the keeper-cabal: Automerge for the edge log, UCAN for the attenuated delegation, `#has`
   for the composition, threshold for the quorum. The role names a closure, the circle
@@ -153,15 +153,15 @@ The closure model carries directly onto the existing identity architecture
 <<~ confidence Synthesis 14/20 >> four independent traditions arrive at *group = relation,
 not object*:
 
-* **SPKI/SDSI** (Ellison, Rivest, Lampson) — *no group object exists; groups stand as
+* ''SPKI/SDSI'' (Ellison, Rivest, Lampson) — *no group object exists; groups stand as
   relational constructs from distributed name bindings*; `(k-of-n …)` threshold subjects;
   linked local names reach globally without a global namespace.
-* **Diaspora aspects** — each user sorts their own contacts into private, asymmetric
+* ''Diaspora aspects'' — each user sorts their own contacts into private, asymmetric
   *aspects*; no shared group object, the audience resolves per-author at share time — a
   closure evaluated, not a roster owned.
-* **Kowloon Circles** — role-circles of mutual petnames, no central registrar; membership
+* ''Kowloon Circles'' — role-circles of mutual petnames, no central registrar; membership
   reads off who-recognizes-whom.
-* **Object-capability (ocap)** — authority rides the held edge (the capability), not a
+* ''Object-capability (ocap)'' — authority rides the held edge (the capability), not a
   membership in an ambient list; designation carries authority, defeating the confused
   deputy.
 

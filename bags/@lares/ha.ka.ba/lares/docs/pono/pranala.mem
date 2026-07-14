@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/pranala"
 ! Pranala — Docs
 
 This file does not bind invariant law.
-Law lives at [pranala.md](../../api/pono/pranala.md).
+Law lives at [[pranala.md|../../api/pono/pranala.md]].
 
 This file holds examples, sigil-sugar long-forms, and reciprocal-edge guidance.
 

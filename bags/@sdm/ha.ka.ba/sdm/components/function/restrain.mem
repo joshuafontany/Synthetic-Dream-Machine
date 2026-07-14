@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/restrain"
 
 !! Definition
 
-The function of **seizing and holding** — grapple, constrict, pin, immobilise. Where `function/cargo` carries willing mass and `function/barrier` blocks a line, `restrain` closes on an unwilling target and refuses to let go.
+The function of ''seizing and holding'' — grapple, constrict, pin, immobilise. Where `function/cargo` carries willing mass and `function/barrier` blocks a line, `restrain` closes on an unwilling target and refuses to let go.
 
 <<~/ahu >>
 
@@ -32,7 +32,7 @@ The function of **seizing and holding** — grapple, constrict, pin, immobilise.
 
 !! Activation
 
-Orients a module toward **taking and keeping hold of a creature or object against its will**. It resolves the grip; the target resists to break free. Almost always paired with `hook/attack` — a restrain lands against Defense, not a save.
+Orients a module toward ''taking and keeping hold of a creature or object against its will''. It resolves the grip; the target resists to break free. Almost always paired with `hook/attack` — a restrain lands against Defense, not a save.
 
 <<~/ahu >>
 

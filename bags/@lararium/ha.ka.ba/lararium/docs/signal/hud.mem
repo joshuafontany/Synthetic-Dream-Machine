@@ -27,7 +27,7 @@ Not invariant law. The HUD instrument's law and teaching live in the pair:
 `lar:///ha.ka.ba/lares/docs/lares/hud` (line composition, the glyph / stance /
 tool / confidence-syadasti tables, field-annotation thresholds).
 
-This room frames the HUD as the **situational-awareness surface** within the signal branch.
+This room frames the HUD as the ''situational-awareness surface'' within the signal branch.
 
 <<~/ahu >>
 
@@ -41,10 +41,10 @@ bearing vector, the `Aperture` and `OODA-HA` gauges, the `ward`, `confidence`, a
 
 Within this branch the HUD relates to its sibling SA surfaces:
 
-* **drift** — recovery when situational awareness degrades (`lar:///ha.ka.ba/lararium/docs/signal/drift`)
-* **provenance** — the audit trail behind a reading (`lar:///ha.ka.ba/lararium/docs/signal/provenance`)
-* **sa-display** — shared-SA theory and the SA-vs-XAI framing (`lar:///ha.ka.ba/lararium/docs/signal/sa-display`)
-* **l-space** — the HAKABA address the HUD reads (`lar:///ha.ka.ba/lararium/docs/signal/l-space`)
+* ''drift'' — recovery when situational awareness degrades (`lar:///ha.ka.ba/lararium/docs/signal/drift`)
+* ''provenance'' — the audit trail behind a reading (`lar:///ha.ka.ba/lararium/docs/signal/provenance`)
+* ''sa-display'' — shared-SA theory and the SA-vs-XAI framing (`lar:///ha.ka.ba/lararium/docs/signal/sa-display`)
+* ''l-space'' — the HAKABA address the HUD reads (`lar:///ha.ka.ba/lararium/docs/signal/l-space`)
 
 The instrument grammar itself stays in the pair; this room holds only the signal-branch relation.
 

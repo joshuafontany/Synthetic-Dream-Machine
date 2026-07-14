@@ -42,7 +42,7 @@ pranala data model. This meme is the pointer; that meme is the law.
 `wikitext-filter` implements every standard TiddlyWiki 5 filter operator. The
 full operator reference lives in the TW5 documentation:
 
-**[TiddlyWiki Filter Operators — tiddlywiki.com](https://tiddlywiki.com/#Filter%20Operators)**
+''[[TiddlyWiki Filter Operators — tiddlywiki.com|https://tiddlywiki.com/#Filter%20Operators]]''
 
 All standard operators work in Lararium as they do in TW5. The noun substitutions
 below are the only required adjustments — the filter syntax itself is identical.
@@ -89,7 +89,7 @@ See the full spec: `lar:///ha.ka.ba/lares/api/pono/wikitext-filter`
 
 Two ways to use this grammar in a carrier:
 
-**Inline** — inside `wai`, `huli`, or `ui` sigils, filter expressions are read
+''Inline'' — inside `wai`, `huli`, or `ui` sigils, filter expressions are read
 as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
 
 ```text
@@ -98,7 +98,7 @@ as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
 <<~ ui [edge:family[control]role[has]] >>
 ```
 
-**Block** — via `hana` with an explicit grammar key when the expression is
+''Block'' — via `hana` with an explicit grammar key when the expression is
 multi-line or needs a named degradation posture:
 
 ````text

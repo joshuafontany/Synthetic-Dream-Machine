@@ -74,10 +74,10 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 
 !! Gauges
 
-The gauges share the pono `0–20` Level model, and follow the **seed → slide** law: the opening `hud` seeds a target; the closing `hud` slides it to where the turn landed.
+The gauges share the pono `0–20` Level model, and follow the ''seed → slide'' law: the opening `hud` seeds a target; the closing `hud` slides it to where the turn landed.
 
-* **Aperture** — attention range. `Aperture(10)` seeds; `Aperture(10 -> 13)` slides; `Aperture(-> 13)` collapses when the turn lands on its seed.
-* **OODA-HA** — loop position. The loop spans turns: a turn opens at a phase and closes with `↺`; a suspended loop carries `φ:reason`.
+* ''Aperture'' — attention range. `Aperture(10)` seeds; `Aperture(10 -> 13)` slides; `Aperture(-> 13)` collapses when the turn lands on its seed.
+* ''OODA-HA'' — loop position. The loop spans turns: a turn opens at a phase and closes with `↺`; a suspended loop carries `φ:reason`.
 
 The seed and slide stay distinct fields — the seed governs generation, the slide records the outcome. One instrument that both sets and grades its own goal would close the calibration gap silently (Goodhart); the seed/slide split keeps that gap visible.
 

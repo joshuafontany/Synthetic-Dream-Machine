@@ -112,7 +112,7 @@ Authority tier markers. Combination uses intersection semantics (most restrictiv
   ़ (&#2364;)  Nukta          System / internal
 ```
 
-**Authority matrix:**
+''Authority matrix:''
 
 | Glyph | Tier     | render    | evaluate       | unask  | modify |
 |-------|----------|-----------|----------------|--------|--------|
@@ -201,7 +201,7 @@ Context-dependent. No combinatorial limit defined.
 
 !! Category 9 — SEMANTIC (Geometric + Misc Symbols: &#9632;–&#9983;)
 
-**Geometric sub-block (state indicators):**
+''Geometric sub-block (state indicators):''
 ```
   ■ (&#9632;)  active/present     (also Act OODA-HA HUD sigil)
   □ (&#9633;)  inactive/absent
@@ -210,7 +210,7 @@ Context-dependent. No combinatorial limit defined.
   ● (&#9679;)  closed/resolved
 ```
 
-**Miscellaneous Symbols sub-block (planetary / geomantic domain markers):**
+''Miscellaneous Symbols sub-block (planetary / geomantic domain markers):''
 ```
   ☉ (&#9737;)  Sun       Fortuna Major/Minor
   ☽ (&#9789;)  Moon      Populus/Via
@@ -223,7 +223,7 @@ Context-dependent. No combinatorial limit defined.
   ☋ (&#9739;)  Desc.Node Cauda Draconis
 ```
 
-**Note on HUD sigils:** the FFZ Chronometer HUD sigils (✶◎◇■○) and scale sigils (🗺️⚙️🔍⚔️⚡) sit partly inside and partly outside the &#0000;–&#9999; range. The emoji-style scale sigils sit above U+FFFF. These function as display/HUD elements, not as glyph-set members. Three layers, three symbol sets, no collision:
+''Note on HUD sigils:'' the FFZ Chronometer HUD sigils (✶◎◇■○) and scale sigils (🗺️⚙️🔍⚔️⚡) sit partly inside and partly outside the &#0000;–&#9999; range. The emoji-style scale sigils sit above U+FFFF. These function as display/HUD elements, not as glyph-set members. Three layers, three symbol sets, no collision:
 * Glyph set: Categories 1–9
 * Chronometer record: its own symbol set (O/Ø/D/A/Å)
 * HUD rendering: emoji
@@ -244,9 +244,9 @@ effective(inner, frame) = {
 }
 ```
 
-* **Attenuate:** always valid (inner removes capabilities)
-* **Escalate:** never valid (inner cannot add; silently capped)
-* **Empty = inherit:** bare inner sigil gets full frame authority
+* ''Attenuate:'' always valid (inner removes capabilities)
+* ''Escalate:'' never valid (inner cannot add; silently capped)
+* ''Empty = inherit:'' bare inner sigil gets full frame authority
 
 <<~/ahu >>
 
@@ -278,7 +278,7 @@ function parseGlyphSet(stream, offset):
   return glyphs, offset
 ```
 
-**Validation rules per category:**
+''Validation rules per category:''
 ```
 PROTOCOL:   ≤1 lifecycle glyph (SOH|STX|ETX|EOT|ENQ|ACK|NAK)
             separators + mode switches may co-occur
@@ -292,7 +292,7 @@ STRUCTURE:  body-internal only
 SEMANTIC:   no limit; multiple domain markers = tag union
 ```
 
-**Strictness modes:**
+''Strictness modes:''
 ```
 boot-mode:  strict. Unknown glyphs → error. All memes fully validated.
 run-mode:   permissive. Unknown glyphs → warning, treated as body.

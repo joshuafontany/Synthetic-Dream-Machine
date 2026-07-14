@@ -25,9 +25,9 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 !! Read Magic
 *First Key, Archive Handshake*
 
-**P:** 2 · **R:** self · **T:** one magical inscription · **D:** 10 minutes
+''P:'' 2 · ''R:'' self · ''T:'' one magical inscription · ''D:'' 10 minutes
 
-Tune to the writing and read its magical interface layer. The referee gives the active meaning; mark that surface **recognized** — you read it freely after. If it resists, win an `ecm-scan` contest. A sacrificed read leaves one trace.
+Tune to the writing and read its magical interface layer. The referee gives the active meaning; mark that surface ''recognized'' — you read it freely after. If it resists, win an `ecm-scan` contest. A sacrificed read leaves one trace.
 
 <<~/ahu >>
 
@@ -35,9 +35,9 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 !! Overcharge
 
-* **x2 (P:4)** — read through one weak veil or damaged mark.
-* **x4 (P:8)** — read a linked inscription set; ask one structural question.
-* **x8 (P:16, dangerous)** — force a sealed/hostile archive; learn one hidden fact. On failure it reads back.
+* ''x2 (P:4)'' — read through one weak veil or damaged mark.
+* ''x4 (P:8)'' — read a linked inscription set; ask one structural question.
+* ''x8 (P:16, dangerous)'' — force a sealed/hostile archive; learn one hidden fact. On failure it reads back.
 
 <<~/ahu >>
 

@@ -31,7 +31,7 @@ Multi-voice architectural alignment session. The 13 Voices convened to align:
 5. Completion of the six-operator concurrency ontology (hoolele/\spawn as 6th operator)
 6. Visual Verse status (survey/vaporware; node-graph vs. blocks; UE6 ~2027)
 
-**Source authorities:** Book of Verse ch. 11/13/14/17; Unreal Fest 2023 "Verse Deep Dive" PDF;
+''Source authorities:'' Book of Verse ch. 11/13/14/17; Unreal Fest 2023 "Verse Deep Dive" PDF;
 Verse Calculus (ICFP 2023, Peyton Jones et al.); TW5 SyncAdaptor contract; Elm Architecture;
 UEFN SceneGraph Beta (June 2025); Visual Verse survey materials.
 
@@ -43,11 +43,11 @@ UEFN SceneGraph Beta (June 2025); Visual Verse survey materials.
 
 !!! Task Tree Topology (confirmed, ch. 14)
 
-Verse execution forms a **forest of parent-child task trees**.
+Verse execution forms a ''forest of parent-child task trees''.
 
-* Every async operator (branch/sync/race/rush) creates a **child node** in the current tree.
-* Cancellation propagates **downward only** — a parent cancelling kills all its children.
-* `spawn` creates a **new root** — a separate tree with no parent; cancellation does not propagate in.
+* Every async operator (branch/sync/race/rush) creates a ''child node'' in the current tree.
+* Cancellation propagates ''downward only'' — a parent cancelling kills all its children.
+* `spawn` creates a ''new root'' — a separate tree with no parent; cancellation does not propagate in.
 * The only way to exit the current task tree: `spawn` (hides `<suspends>` from the caller).
 
 !!! Six Async Operators (confirmed stable)
@@ -65,8 +65,8 @@ to `branch` semantics. `hoolele` (hoʻolele — "to cause to fly") fills the 6th
 
 !!! Critical `rush` Distinction
 
-`rush` / `puka`: losers receive `AbortSignal` and continue running until the **enclosing scope** exits.
-`race` / `holo`: losers are cancelled **immediately** (recursive subtree prune).
+`rush` / `puka`: losers receive `AbortSignal` and continue running until the ''enclosing scope'' exits.
+`race` / `holo`: losers are cancelled ''immediately'' (recursive subtree prune).
 These two had prior confusion in the Lararium pono specs. Both corrected.
 
 !!! Effects Bit-Vector (6 families)
@@ -91,7 +91,7 @@ persistable = closed constraint universe (excludes: any, comparable, type, ratio
 VC (ICFP 2023, Peyton Jones et al.) = untyped, no concurrency, research artifact.
 VC `choice` expression = formal ancestor of `race`/`rush`.
 UEFN Verse adds: type system, `<suspends>` effect, full task tree model.
-**Do not cite VC as evidence for UEFN Verse semantics.**
+''Do not cite VC as evidence for UEFN Verse semantics.''
 
 !!! Visual Verse / UE6
 
@@ -112,7 +112,7 @@ Full spec in `verse-event-lattice.md #unreleased-event-types`.
 
 !! Yin-Collapse Architectural Ruling
 
-**The 13 Voices reached consensus. Ruling recorded as law.**
+''The 13 Voices reached consensus. Ruling recorded as law.''
 
 !!! Primary Engine Law
 
@@ -136,8 +136,8 @@ What remains in TS: `MemeSyncAdaptor` + `LarTiddlerStore` + `VmPool` + `Keyhive`
 
 !!! One Graph, Not Two
 
-**Bags = CRDT federation units. Recipe stack = logical unification.**
-**TW5 wiki IS the unified logical graph. MemeSyncAdaptor per bag generates the nalu.**
+''Bags = CRDT federation units. Recipe stack = logical unification.''
+''TW5 wiki IS the unified logical graph. MemeSyncAdaptor per bag generates the nalu.''
 
 ```
 CRDT (the sea)
@@ -151,17 +151,17 @@ NOT two parallel reactive engines. CRDT = distributed persistent store. TW5 = li
 
 !!! `fireSync` Gap (documented)
 
-Current `fireSync` fires **inline** (before the nalu), not within `wiki.addEventListener("change")`.
+Current `fireSync` fires ''inline'' (before the nalu), not within `wiki.addEventListener("change")`.
 This violates the UEFN fidelity claim ("synchronous tick dispatch").
 Target: fire within `wiki.addEventListener("change")` callback (after the nalu).
 See `reaction-graph.md #yin-collapse-target` for full migration spec.
 
 !!! Prior Art Validating the Collapse
 
-* **Elm Architecture** — one `Model`, one `update` loop; TW5 wiki IS the model
-* **Solid.js fine-grained** — synchronous reactive graph; no separate routing layer
-* **MobX transaction** — `transaction()` IS the batch boundary; TW5 nalu = MobX close event
-* **Synchronous instantaneous reaction** (Esterel/Lustre lineage) — academic name for this pattern
+* ''Elm Architecture'' — one `Model`, one `update` loop; TW5 wiki IS the model
+* ''Solid.js fine-grained'' — synchronous reactive graph; no separate routing layer
+* ''MobX transaction'' — `transaction()` IS the batch boundary; TW5 nalu = MobX close event
+* ''Synchronous instantaneous reaction'' (Esterel/Lustre lineage) — academic name for this pattern
 
 <<~/ahu >>
 
@@ -173,7 +173,7 @@ Two concepts, often confused. The ruling separates them:
 
 !!! nalu (infrastructure, below grammar)
 
-The **changeset delivery wave** — the pulse when scattered writes become one consistent
+The ''changeset delivery wave'' — the pulse when scattered writes become one consistent
 observed state delivered atomically to all observers. Not a sigil. Not operator-visible.
 The engine delivers it. Operators write tiddlers; the nalu fires.
 
@@ -190,7 +190,7 @@ A device lifecycle hook that says "run this procedure once per nalu."
 Lives AT the grammar layer — it hooks INTO the nalu, but the nalu has no sigil.
 
 Verse equivalent: `OnSimulate(StagedUpdates)<suspends>` entry point.
-Hawaiian proper name: **DEFERRED** pending Visual Verse tick node shape confirmation (UE6 ~2027).
+Hawaiian proper name: ''DEFERRED'' pending Visual Verse tick node shape confirmation (UE6 ~2027).
 Grammar stub registered: `sigil-tick.tid`.
 
 **The operator authors `\tick` blocks. The engine delivers the nalu. These are not the same thing.**
@@ -201,30 +201,30 @@ Grammar stub registered: `sigil-tick.tid`.
 
 !! Voice Notes (abbreviated)
 
-**Gatekeeper:** Concurrency ontology correction landed clean. Six operators confirmed.
+''Gatekeeper:'' Concurrency ontology correction landed clean. Six operators confirmed.
 No contradiction with existing pono law once lele/hoolele semantics separated.
 
-**Lorekeeper:** `nalu` (Hawaiian: wave) — the wave-form that carries energy without carrying
+''Lorekeeper:'' `nalu` (Hawaiian: wave) — the wave-form that carries energy without carrying
 water. The changeset delivery pulse carries all of a batch's writes without carrying
 the writes themselves. Name holds.
 
-**Scryer:** `fireSync` fires before the nalu. The gap = current implementation runs inline,
+''Scryer:'' `fireSync` fires before the nalu. The gap = current implementation runs inline,
 not within `wiki.addEventListener("change")`. Map says: breach at the boundary.
 
-**Artificer:** Collapse sequence — reaction tiddlers already exist; startup module replaces
+''Artificer:'' Collapse sequence — reaction tiddlers already exist; startup module replaces
 3 TS abstractions; no new data structures. Implementation path: one TW5 startup module file.
 
-**Triage:** Scale math: 10 VMs × 60 patches/sec × 500 widgets = 300,000 hash lookups/second.
+''Triage:'' Scale math: 10 VMs × 60 patches/sec × 500 widgets = 300,000 hash lookups/second.
 Manageable. Widget render cost dominates, not delivery lookup. Stranger's concern (unfiltered
 delivery at scale) real but not triggered at current projected scale.
 
-**Stranger:** The risk is not one graph vs. two — it is the per-VM unfiltered delivery
+''Stranger:'' The risk is not one graph vs. two — it is the per-VM unfiltered delivery
 at scale. Documented in `nalu.md #tw5-scale-note`. Revisit at 100+ VMs.
 
-**Tide-Caller:** Proposed `nalu` as the name for the architectural wave. Accepted.
+''Tide-Caller:'' Proposed `nalu` as the name for the architectural wave. Accepted.
 `\tick` lives above it. "The sea does not name its waves. The surfer names the set."
 
-**Liminal:** `\tick`'s Hawaiian name deferred. Correct. The shape belongs to a concept
+''Liminal:'' `\tick`'s Hawaiian name deferred. Correct. The shape belongs to a concept
 (Visual Verse tick node) not yet stable. The name should emerge from the shape,
 not precede it. `\tick` and `\simulate` as stubs hold the space.
 

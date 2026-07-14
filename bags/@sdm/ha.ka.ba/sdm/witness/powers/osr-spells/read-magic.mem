@@ -72,9 +72,9 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 !! Conversion Analysis
 
-* `Range: 0`, self-only → **R: self**.
-* `1 turn` → **D: 10 minutes** in FTLS exploration language.
-* The durable "read it later without the spell" rule → the SDM **recognized** mark.
+* `Range: 0`, self-only → ''R: self''.
+* `1 turn` → ''D: 10 minutes'' in FTLS exploration language.
+* The durable "read it later without the spell" rule → the SDM ''recognized'' mark.
 * Spell-book owner access → owner-lock, attunement, or archive permission (relay-law: pull ≠ read).
 * The source defines magical literacy and archive access, not combat output — Read Magic carries no `attack` hook.
 * Expert list continuity confirms first-tier (P:2) and adds no new rule burden.

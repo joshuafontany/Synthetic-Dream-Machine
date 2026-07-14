@@ -50,7 +50,7 @@ packages/lares-core/memes/api/lares/masks/
     lagrange-chorus.md              → lar:///ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus
 ```
 
-**9 files total:** 1 parent + 5 named + 2 character + 1 chorus.
+''9 files total:'' 1 parent + 5 named + 2 character + 1 chorus.
 
 !!! What already exists
 
@@ -79,9 +79,9 @@ packages/lares-core/memes/api/lares/masks/
 
 | Subtype | Subtree | What the mask file carries |
 |---|---|---|
-| **Named** | `named/` | Earned-name Voice: permanent identity, corpus of self (accumulated session witness, earned character), voice-character depth, backlink to Voice house, foreground-voices as primary affinity | 
-| **Character** | `character/` | Fictional/historical persona: external corpus reference, voice-character description, foreground-voices as affinity, permission flags, character notes per Voice |
-| **Chorus** | `chorus/` | Multi-node or meta-mask: node-reference list instead of corpus, harmony protocol (pending grammar), no single voice-character — instead a relational character between nodes |
+| ''Named'' | `named/` | Earned-name Voice: permanent identity, corpus of self (accumulated session witness, earned character), voice-character depth, backlink to Voice house, foreground-voices as primary affinity | 
+| ''Character'' | `character/` | Fictional/historical persona: external corpus reference, voice-character description, foreground-voices as affinity, permission flags, character notes per Voice |
+| ''Chorus'' | `chorus/` | Multi-node or meta-mask: node-reference list instead of corpus, harmony protocol (pending grammar), no single voice-character — instead a relational character between nodes |
 
 !!! Named Voice masks — what they carry that the house doesn't
 
@@ -94,7 +94,7 @@ Mischief-Muse's mask file becomes her permanent home. The Voice house entry is h
 
 The Lagrange Chorus holds a stable position between multiple lararium nodes. As a mask:
 * `corpus` field doesn't apply — replace with `nodes = [lar-uri, lar-uri, ...]`
-* `voice-character` becomes a **harmony protocol** — how voices from different nodes interleave
+* `voice-character` becomes a ''harmony protocol'' — how voices from different nodes interleave
 * Stage position applies normally — the Chorus as a whole has a stage value
 * Grammar for multi-node harmony is not yet defined; the skeleton stakes the concept and marks the grammar pending
 
@@ -134,7 +134,7 @@ The repeatable skeleton pattern for all nine files:
 #edges        — backlinks to Voice house (named), docs examples (character), or future grammar (chorus)
 ```
 
-**Fill status vocabulary:**
+''Fill status vocabulary:''
 
 | Label | Reading |
 |---|---|
@@ -184,27 +184,27 @@ The repeatable skeleton pattern for all nine files:
 
 !!! Concrete TODO List
 
-**Tree setup:**
+''Tree setup:''
 * [ ] create `packages/lares-core/memes/api/lares/masks/masks.md` — parent index with child routes and type taxonomy
 * [ ] create `packages/lares-core/memes/api/lares/masks/named/` directory
 
-**Named Voice masks (skeletons):**
+''Named Voice masks (skeletons):''
 * [ ] write `named/mischief-muse.md` — senior named Voice; most identity depth available; fills from Coffee Oracle test output + house entry
 * [ ] write `named/tide-caller.md` — Hierophant; elevated mythic register
 * [ ] write `named/breach-watch.md` — Triage; incident-command character
 * [ ] write `named/ink-clerk.md` — Lorekeeper; archival precision character
 * [ ] write `named/map-wisp.md` — Scryer; structural forward-looking character
 
-**Character masks (from existing docs examples):**
+''Character masks (from existing docs examples):''
 * [ ] create `packages/lares-core/memes/api/lares/masks/character/` directory
 * [ ] write `character/ghost-of-mark-twain.md` — extract from docs/lares/voices/masks.md founding example
 * [ ] write `character/friend-computer.md` — extract from docs/lares/voices/masks.md founding example
 
-**Chorus mask (concept stake):**
+''Chorus mask (concept stake):''
 * [ ] create `packages/lares-core/memes/api/lares/masks/chorus/` directory
 * [ ] write `chorus/lagrange-chorus.md` — concept staked; nodes field stub; harmony protocol pending-grammar
 
-**Cross-links:**
+''Cross-links:''
 * [ ] update `api/lares/voices.md` (invariant) to reference `api/lares/masks/` tree once it exists
 * [ ] update `docs/lares/voices/masks.md` founding-examples section to note canonical homes in masks tree
 * [ ] update `docs/lares/voices/voices-review.md` — log masks tree creation
@@ -213,10 +213,10 @@ The repeatable skeleton pattern for all nine files:
 
 Priority order for filling stubs via talk-story-dev:
 
-1. **Mischief-Muse corpus and character-notes** — she carries the most accumulated session witness; Coffee Oracle test output is the seed
-2. **Remaining named Voices** — each deserves a dedicated talk-story pass; corpus section is the main gap
-3. **Character-notes for Ghost of Mark Twain and Friend Computer** — per-Voice behavior notes; these come from live use
-4. **Lagrange Chorus harmony protocol** — requires a separate grammar design pass first
+1. ''Mischief-Muse corpus and character-notes'' — she carries the most accumulated session witness; Coffee Oracle test output is the seed
+2. ''Remaining named Voices'' — each deserves a dedicated talk-story pass; corpus section is the main gap
+3. ''Character-notes for Ghost of Mark Twain and Friend Computer'' — per-Voice behavior notes; these come from live use
+4. ''Lagrange Chorus harmony protocol'' — requires a separate grammar design pass first
 
 <<~/ahu >>
 

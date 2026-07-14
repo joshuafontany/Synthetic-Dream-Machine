@@ -26,9 +26,9 @@ uri-path  = "ha.ka.ba/sdm/mount-points/structure"
 
 !! Contract
 
-A Structure seats a Power **in a Site**: shrine, ship-daemon, archive service, town ward, vehicle, domicile. **Location merges here (D1)** — a forest and an airship are the same Site. **Fixed-vs-mobile is not a mount-point distinction**; a Site is mobile when it `#has` a propulsion/mobility component. The Power-binding system reads `Site.mount-points` once, regardless of mobility.
+A Structure seats a Power ''in a Site'': shrine, ship-daemon, archive service, town ward, vehicle, domicile. ''Location merges here (D1)'' — a forest and an airship are the same Site. ''Fixed-vs-mobile is not a mount-point distinction''; a Site is mobile when it `#has` a propulsion/mobility component. The Power-binding system reads `Site.mount-points` once, regardless of mobility.
 
-**Capacity is not a fixed count (D3).** A Site carries **base attributes like a character** and gains slot/feature capacity by **purchasable upgrade** — XP + referee resources, tracked per attribute, **decoupled from a single Level** (OGA "Golden Age Item Upgrading"). "As many slots as you pay for." Levels matter most for vehicles (life/damage scale).
+''Capacity is not a fixed count (D3).'' A Site carries ''base attributes like a character'' and gains slot/feature capacity by ''purchasable upgrade'' — XP + referee resources, tracked per attribute, ''decoupled from a single Level'' (OGA "Golden Age Item Upgrading"). "As many slots as you pay for." Levels matter most for vehicles (life/damage scale).
 
 *Register held low: this contract is largely native design space. The corpus names the Site category ("Structure/Location, installed in gear/vehicles/infrastructure") but supplies no slot counts or penalties for it.*
 

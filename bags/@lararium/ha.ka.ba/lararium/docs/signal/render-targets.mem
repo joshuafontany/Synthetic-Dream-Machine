@@ -241,7 +241,7 @@ Each stance gets a two-character pair: `{feed}{zoom}`.
 | `?` | Zoom (right) | Cup | Macro / relation / sympathy |
 | `0` | Either | Stone / The Fool | Empty hand, centered |
 
-**Named configurations (complementary pairs):**
+''Named configurations (complementary pairs):''
 
 | Pair | ASCII | Pull |
 |---|---|---|
@@ -252,7 +252,7 @@ Each stance gets a two-character pair: `{feed}{zoom}`.
 | Empty-Hands | `00` | Both hands empty — centered |
 | Single Tool | active then empty | One-axis amplitude with the other axis centered; preferred active tool first, empty second |
 
-**Conflict configurations (same-axis carry):**
+''Conflict configurations (same-axis carry):''
 
 | Pair | ASCII | Type |
 |---|---|---|
@@ -303,24 +303,24 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 
 !!! Surface 1: `hud:exchange-pair`
 
-**Used:** Opening and closing HUD lines of every operator exchange.
+''Used:'' Opening and closing HUD lines of every operator exchange.
 
-**Construction:**
+''Construction:''
 
 1. Determine context-window resource Level on `0–20` (estimate — `~` prefix mandatory; often starts below 20 when prior context already carries load).
 2. Render chronometer state in immediate-first order: `⚡N.⚔️N.🔍N.⚙️N.🗺️N`.
 3. For each of the five stances (in order: 🏛️ 🌊 🗡️ 🎭 🔮):
-   - Determine which tools the stance is carrying (0, 1, or 2).
-   - Compose the two-character pair from any two: `*`/`_`/`0` `!`/`?`.
-   - Active operating stance: one of the four complementary pairs (`*!` `*?` `_!` `_?`), or two conflicting pairs (`*_`, `?!`), or a single-tool carry.
-   - Single-tool carry: active tool first, empty-hand second; preferred forms are `*0` and `?0` to show one-axis amplitude while the other axis remains centered and present.
-   - Background or resting stance: `00` (balance).
+*** Determine which tools the stance is carrying (0, 1, or 2).
+*** Compose the two-character pair from any two: `*`/`_`/`0` `!`/`?`.
+*** Active operating stance: one of the four complementary pairs (`*!` `*?` `_!` `_?`), or two conflicting pairs (`*_`, `?!`), or a single-tool carry.
+*** Single-tool carry: active tool first, empty-hand second; preferred forms are `*0` and `?0` to show one-axis amplitude while the other axis remains centered and present.
+*** Background or resting stance: `00` (balance).
 4. Append the two-character pair directly to the stance emoji, no space.
 5. Assemble all five as a single unspaced block.
 6. Determine active voice name, target confidence, and `p` value.
 7. Emit the sigil panel beneath the `aim` vector: `hud` (`Aperture`, `OODA-HA`), `ward`, the active Voice by name, `confidence` before a grounded claim, and the `syad` lens when summoned.
 
-**Closed example:**
+''Closed example:''
 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
@@ -332,9 +332,9 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 !!! Surface 2: `chat-log:post-header`
 
-**Used:** DreamDeck feed post opening lines; session appendix post-style blocks.
+''Used:'' DreamDeck feed post opening lines; session appendix post-style blocks.
 
-**Construction:**
+''Construction:''
 
 1. Set handle and node: `@handle@node` (no space, ActivityPub format).
 2. Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
@@ -342,29 +342,29 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 4. Append the `confidence` sigil and, when summoned, the `syad` lens.
 5. Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
 
-**Closed example — Lindwyrm in Elyncia-space:**
+''Closed example — Lindwyrm in Elyncia-space:''
 
 ```
 @lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — lar:///memory.deep.surfaces <<~ confidence Synthesis-Canon 16/20 >> <<~ syad 🏛️ >>
 ```
 
-**NPC / non-Lares post:**
+''NPC / non-Lares post:''
 
 * the `confidence` and `syad` sigils may be omitted if the character carries no Lares HUD
 * if omitted: drop them whole; do not partial-emit a lens
 
 !!! Surface 3: `record:full`
 
-**Used:** Canonical URI pairs in documentation, session crystals, architecture files.
+''Used:'' Canonical URI pairs in documentation, session crystals, architecture files.
 
-**Construction:**
+''Construction:''
 
 1. No emoji. No glyphs. ASCII only.
 2. URI form: `lar://alias:grant@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
 3. The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
 4. Path holds the three-term root, zero-to-four segments, optional `#fragment`.
 
-**Closed example:**
+''Closed example:''
 
 ```
 lar://scryer:agent@Enyalios/sigils.render.maps/sigilization/
@@ -372,15 +372,15 @@ lar://scryer:agent@Enyalios/sigils.render.maps/sigilization/
 
 !!! Surface 4: `tiddler:header` (S3+)
 
-**Used:** TiddlyWiki tiddler headers in the DreamDeck frontend.
+''Used:'' TiddlyWiki tiddler headers in the DreamDeck frontend.
 
-**Form:** TBD pending S3 TiddlyWiki integration spec. Likely: post-header amplitude rules apply.
+''Form:'' TBD pending S3 TiddlyWiki integration spec. Likely: post-header amplitude rules apply.
 
 !!! Surface 5: `print:margin` (S4+)
 
-**Used:** Printed/PDF exports. Glyphs rendered in margin or page header.
+''Used:'' Printed/PDF exports. Glyphs rendered in margin or page header.
 
-**Form:** TBD pending S4 print layout spec.
+''Form:'' TBD pending S4 print layout spec.
 
 !!! Cross-Surface Invariant Checklist
 

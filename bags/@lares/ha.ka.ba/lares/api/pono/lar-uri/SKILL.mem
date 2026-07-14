@@ -25,7 +25,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/lar-uri/SKILL"
 
 ! lar: URI Skill
 
-[lar-uri.md](../lar-uri.md) holds the scheme law.
+[[lar-uri.md|../lar-uri.md]] holds the scheme law.
 This skill carries the working procedure.
 
 <<~ ahu #load-contract >>

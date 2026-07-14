@@ -30,15 +30,15 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 !! TW5 — Shadow Tiddler Read-Through
 
-**Mechanism:** Core modules (`$:/core/modules/parser`, `$:/core/ui/ViewTemplate`, etc.) live as *shadow tiddlers* — read-only system objects embedded as JSON in the boot HTML. User tiddlers with the same name overlay the shadow; the shadow provides the safe canonical fallback. Shadow tiddlers always exist even if user data is corrupted.
+''Mechanism:'' Core modules (`$:/core/modules/parser`, `$:/core/ui/ViewTemplate`, etc.) live as *shadow tiddlers* — read-only system objects embedded as JSON in the boot HTML. User tiddlers with the same name overlay the shadow; the shadow provides the safe canonical fallback. Shadow tiddlers always exist even if user data is corrupted.
 
-**Bootstrap trick:** Boot phase 1 uses hard-coded JavaScript (the kernel) to unmarshal shadow tiddlers from embedded JSON. Boot phase 2 uses the shadow parser to parse user tiddlers. The kernel never uses its own parser for its own loading — the parser only becomes active after shadows are resident. Phase 1 and Phase 2 are cleanly separated.
+''Bootstrap trick:'' Boot phase 1 uses hard-coded JavaScript (the kernel) to unmarshal shadow tiddlers from embedded JSON. Boot phase 2 uses the shadow parser to parse user tiddlers. The kernel never uses its own parser for its own loading — the parser only becomes active after shadows are resident. Phase 1 and Phase 2 are cleanly separated.
 
-**Invariant:** Shadow tiddlers are never shown in the normal edit UI — only via a special `$:/ControlPanel` inspector. The underlying store separation (shadow store vs user store) is never bridged.
+''Invariant:'' Shadow tiddlers are never shown in the normal edit UI — only via a special `$:/ControlPanel` inspector. The underlying store separation (shadow store vs user store) is never bridged.
 
-**Failure mode:** User incorrectly edits a shadow module → parse failure on next reload. Recovery: shadow layer always regenerable from embedded HTML core. User store is stored separately (browser localStorage or file) and can be blown away without losing the kernel.
+''Failure mode:'' User incorrectly edits a shadow module → parse failure on next reload. Recovery: shadow layer always regenerable from embedded HTML core. User store is stored separately (browser localStorage or file) and can be blown away without losing the kernel.
 
-**Lararium adoption:** The `lares/ha.ka.ba/lares/api/` carriers form the shadow layer. Grammar memes in `lares/grammars/` form the shadow grammar. User-authored carriers can OVERRIDE grammar rules at a different URI but cannot DELETE the shadow grammar. `loadGrammarRules()` reads the shadow grammar; user overrides layer on top. `/admin/reseed` is safe because shadow grammar regenerates from `lares/` on every compile — it is the embedded JSON equivalent.
+''Lararium adoption:'' The `lares/ha.ka.ba/lares/api/` carriers form the shadow layer. Grammar memes in `lares/grammars/` form the shadow grammar. User-authored carriers can OVERRIDE grammar rules at a different URI but cannot DELETE the shadow grammar. `loadGrammarRules()` reads the shadow grammar; user overrides layer on top. `/admin/reseed` is safe because shadow grammar regenerates from `lares/` on every compile — it is the embedded JSON equivalent.
 
 <<~/ahu >>
 
@@ -46,15 +46,15 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 !! Smalltalk / Pharo — Method Dictionary Mutation
 
-**Mechanism:** Every class carries a *method dictionary* — a hash table from selector symbol to compiled method object. `defun` equivalent = overwriting a method dictionary entry. The method lookup algorithm walks the dictionary chain upward through superclasses. Because method lookup is an algorithm (C kernel), not a table entry, it cannot be overwritten by user code.
+''Mechanism:'' Every class carries a *method dictionary* — a hash table from selector symbol to compiled method object. `defun` equivalent = overwriting a method dictionary entry. The method lookup algorithm walks the dictionary chain upward through superclasses. Because method lookup is an algorithm (C kernel), not a table entry, it cannot be overwritten by user code.
 
-**Bootstrap trick:** The cold image contains a minimal pre-compiled binary. Booting from cold = deserializing the image binary, which contains all class/method objects including the compiler. No source files needed — the image IS the source and the compiled form simultaneously.
+''Bootstrap trick:'' The cold image contains a minimal pre-compiled binary. Booting from cold = deserializing the image binary, which contains all class/method objects including the compiler. No source files needed — the image IS the source and the compiled form simultaneously.
 
-**Invariant:** The message-dispatch mechanism (the C-level `send` instruction) is inviolable. Users can redefine ANY method, even `Object>>doesNotUnderstand:`, but the act of dispatching a message to a method dictionary entry remains immutable primitive behavior.
+''Invariant:'' The message-dispatch mechanism (the C-level `send` instruction) is inviolable. Users can redefine ANY method, even `Object>>doesNotUnderstand:`, but the act of dispatching a message to a method dictionary entry remains immutable primitive behavior.
 
-**Failure mode:** Circular class hierarchy or broken `doesNotUnderstand` → infinite loop / system lockup. Recovery: image snapshot from before the bad edit; Smalltalk has a cultural practice of frequent image saves before risky edits.
+''Failure mode:'' Circular class hierarchy or broken `doesNotUnderstand` → infinite loop / system lockup. Recovery: image snapshot from before the bad edit; Smalltalk has a cultural practice of frequent image saves before risky edits.
 
-**Lararium adoption:** `parsePranalaEdges()` = the method dictionary lookup algorithm — immutable kernel. `GrammarRules` = the method dictionary contents — fully replaceable at each compile. Phase 2.5 wires this: the parser receives `GrammarRules` as runtime data, reads patterns from it, falls back to built-ins when entries are missing. The interpretation engine (how a regex pattern fires against text) = the C kernel. The patterns themselves = the method dictionary.
+''Lararium adoption:'' `parsePranalaEdges()` = the method dictionary lookup algorithm — immutable kernel. `GrammarRules` = the method dictionary contents — fully replaceable at each compile. Phase 2.5 wires this: the parser receives `GrammarRules` as runtime data, reads patterns from it, falls back to built-ins when entries are missing. The interpretation engine (how a regex pattern fires against text) = the C kernel. The patterns themselves = the method dictionary.
 
 <<~/ahu >>
 
@@ -62,15 +62,15 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 !! Emacs — C Kernel / Lisp Surface Boundary
 
-**Mechanism:** C kernel owns: buffer model, event loop, character I/O, symbol table. Lisp surface owns: all user-visible behavior — keybindings, modes, commands, display logic. `defun` adds or replaces a symbol's function definition. At call time, the symbol is resolved from the symbol table to its current definition — late binding means any `defun` immediately affects future calls.
+''Mechanism:'' C kernel owns: buffer model, event loop, character I/O, symbol table. Lisp surface owns: all user-visible behavior — keybindings, modes, commands, display logic. `defun` adds or replaces a symbol's function definition. At call time, the symbol is resolved from the symbol table to its current definition — late binding means any `defun` immediately affects future calls.
 
-**Bootstrap trick:** Emacs dumps a "temacs" binary (C kernel + minimal Lisp). The `loadup.el` file then loads all Lisp source files in order to build the final `emacs` binary (via `make-docfile` and `unexec`). The result is a new binary with the Lisp state baked in. This is the Emacs equivalent of "embedding shadow tiddlers."
+''Bootstrap trick:'' Emacs dumps a "temacs" binary (C kernel + minimal Lisp). The `loadup.el` file then loads all Lisp source files in order to build the final `emacs` binary (via `make-docfile` and `unexec`). The result is a new binary with the Lisp state baked in. This is the Emacs equivalent of "embedding shadow tiddlers."
 
-**Invariant:** Primitive C functions (`backward-char`, `insert-char`, etc.) are protected — Lisp can advise them (wrap) but not replace their C body. The symbol table lookup mechanism itself is C-level and immutable.
+''Invariant:'' Primitive C functions (`backward-char`, `insert-char`, etc.) are protected — Lisp can advise them (wrap) but not replace their C body. The symbol table lookup mechanism itself is C-level and immutable.
 
-**Failure mode:** Redefining a primitive that is called deep in core logic → cascading failures. Recovery: `M-x load-file` to reload the correct definition; Emacs survives most such errors because broken defuns are only called on demand, not eagerly.
+''Failure mode:'' Redefining a primitive that is called deep in core logic → cascading failures. Recovery: `M-x load-file` to reload the correct definition; Emacs survives most such errors because broken defuns are only called on demand, not eagerly.
 
-**Lararium adoption:** `resolveLarUri()` + `parsePranalaEdges()` interpretation engine = C kernel — must never be mutable from the lares/ tree. Everything above: grammar patterns, family contracts, template definitions, layout strategies = Lisp surface = editable memes. The `advice` pattern maps to Lararium's future "meme override" system: a user meme at a different URI can wrap a grammar sigil's behavior without replacing the shadow grammar.
+''Lararium adoption:'' `resolveLarUri()` + `parsePranalaEdges()` interpretation engine = C kernel — must never be mutable from the lares/ tree. Everything above: grammar patterns, family contracts, template definitions, layout strategies = Lisp surface = editable memes. The `advice` pattern maps to Lararium's future "meme override" system: a user meme at a different URI can wrap a grammar sigil's behavior without replacing the shadow grammar.
 
 <<~/ahu >>
 
@@ -78,13 +78,13 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 !! Oberon / Self VM — Module Versioning and Live Reload
 
-**Oberon mechanism:** Modules compile to descriptors containing entry points and dependency pointers. Loading a new module version patches the descriptor in-place; callers holding references to the old descriptor continue working until GC reclaims them. Module interfaces (exported types and functions) are versioned — incompatible interface changes are detected at load time and rejected.
+''Oberon mechanism:'' Modules compile to descriptors containing entry points and dependency pointers. Loading a new module version patches the descriptor in-place; callers holding references to the old descriptor continue working until GC reclaims them. Module interfaces (exported types and functions) are versioned — incompatible interface changes are detected at load time and rejected.
 
-**Self VM mechanism:** Self uses a prototype-based object model (no classes) where every object has a parent slot. The parent chain is the equivalent of Smalltalk's class hierarchy. Objects are cloned and mutated directly; "cloning" is the equivalent of TW5's "create a tiddler from a shadow." The Self image is persistent — a running Self system IS the persisted state.
+''Self VM mechanism:'' Self uses a prototype-based object model (no classes) where every object has a parent slot. The parent chain is the equivalent of Smalltalk's class hierarchy. Objects are cloned and mutated directly; "cloning" is the equivalent of TW5's "create a tiddler from a shadow." The Self image is persistent — a running Self system IS the persisted state.
 
-**Lararium adoption from Oberon:** Grammar meme versioning via boot receipt SHA. Each time `lares/grammars/memetic-wikitext.md` changes, a new `receiptSha` results — tracked in `BootReceipt`. Old grammar rules remain available in git history. Future: the `GrammarRules` object carries a version hash; if the running grammar version differs from the requested version, the server can reseed.
+''Lararium adoption from Oberon:'' Grammar meme versioning via boot receipt SHA. Each time `lares/grammars/memetic-wikitext.md` changes, a new `receiptSha` results — tracked in `BootReceipt`. Old grammar rules remain available in git history. Future: the `GrammarRules` object carries a version hash; if the running grammar version differs from the requested version, the server can reseed.
 
-**Lararium adoption from Self:** The prototype chain maps cleanly to Lararium's meme override model. A user meme at `lar:///user:joshu@local/grammars/memetic-wikitext` extends the shadow grammar at `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — same override pattern as Self's parent slot.
+''Lararium adoption from Self:'' The prototype chain maps cleanly to Lararium's meme override model. A user meme at `lar:///user:joshu@local/grammars/memetic-wikitext` extends the shadow grammar at `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — same override pattern as Self's parent slot.
 
 <<~/ahu >>
 
@@ -101,7 +101,7 @@ From the five systems, four mechanisms converge:
 | C kernel / Lisp surface | Emacs | `resolveLarUri()` + parse dispatch = C kernel; all grammar patterns + family contracts + templates = Lisp surface |
 | Module versioning | Oberon | `BootReceipt.sha256` — each grammar change produces a new receipt; old versions recoverable from git |
 
-**The critical insight from bootstrapping:**
+''The critical insight from bootstrapping:''
 
 Every system uses a two-phase boot:
 1. Phase 1 (kernel): hard-coded, cannot use itself to load itself
@@ -112,7 +112,7 @@ Lararium maps exactly:
 * Phase 2: Boot closure contains `lares/grammars/memetic-wikitext.md` — `GrammarRules` object passed to parser for subsequent parses in the SAME boot
 * Phase 3 (future): Parser module itself lives in `lares/`; Phase 1 only runs during cold bootstrap
 
-**The invariant that must hold at all phases:**
+''The invariant that must hold at all phases:''
 
 `resolveLarUri()` — the mechanism that translates a `lar:///` string to a file path or virtual marker — is the inviolable C kernel. It must NEVER be modified by a meme. Everything else is fair game.
 

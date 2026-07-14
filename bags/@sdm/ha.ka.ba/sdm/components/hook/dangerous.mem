@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/dangerous"
 
 !! Definition
 
-A canonical risk hook: the Power forces a **Danger Roll** on activation regardless of skill or Level — d20 + ability + skill vs P, natural 1 always fails, failure runs the Corruption procedure.
+A canonical risk hook: the Power forces a ''Danger Roll'' on activation regardless of skill or Level — d20 + ability + skill vs P, natural 1 always fails, failure runs the Corruption procedure.
 
 <<~/ahu >>
 
@@ -32,7 +32,7 @@ A canonical risk hook: the Power forces a **Danger Roll** on activation regardle
 
 !! Activation
 
-**Modifies the activation protocol itself**, not the effect — it sits structurally above capability components. Where most components answer "what does it do," `dangerous` answers "what does pulling it risk."
+''Modifies the activation protocol itself'', not the effect — it sits structurally above capability components. Where most components answer "what does it do," `dangerous` answers "what does pulling it risk."
 
 <<~/ahu >>
 
@@ -40,7 +40,7 @@ A canonical risk hook: the Power forces a **Danger Roll** on activation regardle
 
 !! Interaction
 
-Composes with any domain or function. **Vertical-vs-flat pressure lives here:** the flat `#has` model treats `dangerous` as a peer of `ecm-scan`, but it modifies the crossing event, not the capability. Held flat on purpose (Principle); Sprint 4 tests whether flatness loses signal.
+Composes with any domain or function. ''Vertical-vs-flat pressure lives here:'' the flat `#has` model treats `dangerous` as a peer of `ecm-scan`, but it modifies the crossing event, not the capability. Held flat on purpose (Principle); Sprint 4 tests whether flatness loses signal.
 
 <<~/ahu >>
 

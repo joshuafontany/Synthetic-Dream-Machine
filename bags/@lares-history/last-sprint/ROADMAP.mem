@@ -10,15 +10,15 @@
 
 Every peer boots from a single content-addressed genesis artifact — an Automerge doc built at build time containing all blobs, tiddlers, and the TW5 core. No runtime disk reads. No seed functions. Any peer that holds the CID can clone the canonical state.
 
-The system folds into itself: the genesis artifact carries the engine that deserializes it. **Myth speaks reality into being.**
+The system folds into itself: the genesis artifact carries the engine that deserializes it. ''Myth speaks reality into being.''
 
 Social graph control inverts: circles are owned by their center, not the platform. Adding to a circle IS the follow. Membership never federates. (Kowloon / jzellis model.)
 
-**Settled terminology (2026-05-06):**
-* **DreamNet** — the entire distributed network of nexus-meshes: allied, neutral, and oppositional. Opposition is designed in. A Nexus may be hostile, degraded, or incompatible. "Not a single machine, nor merely a choir of helpful ghosts, but a living mesh of thresholds." (Elyncia_02)
-* **Lararium** — one operator's infrastructure: a `lararium-node` process + browser peers + devices. The household shrine. Smallest unit. Has two layers: *stable mesh* (lares/ carriers, genesis → `ha` content tiga) and *transitory flow* (operators, agents, sessions → social tiga).
-* **Nexus** — a *confederation of lararia* sharing a stable internal ley-line mesh. Named by community + place (e.g. "Floating Library of Mu, PNW Branch"). Resources may extend geographically beyond the name. Cross-Nexus connections = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. "Each node a city of spirits, not a solitary saint — but a city can be besieged." The Nexus keypair serves as the confederation keypair — Keyhive-group-rooted when available.
-* **DreamDeck** — the first personal browser app for accessing DreamNet. One UX surface among possible others. Package: `@dreamdeck/app`.
+''Settled terminology (2026-05-06):''
+* ''DreamNet'' — the entire distributed network of nexus-meshes: allied, neutral, and oppositional. Opposition is designed in. A Nexus may be hostile, degraded, or incompatible. "Not a single machine, nor merely a choir of helpful ghosts, but a living mesh of thresholds." (Elyncia_02)
+* ''Lararium'' — one operator's infrastructure: a `lararium-node` process + browser peers + devices. The household shrine. Smallest unit. Has two layers: *stable mesh* (lares/ carriers, genesis → `ha` content tiga) and *transitory flow* (operators, agents, sessions → social tiga).
+* ''Nexus'' — a *confederation of lararia* sharing a stable internal ley-line mesh. Named by community + place (e.g. "Floating Library of Mu, PNW Branch"). Resources may extend geographically beyond the name. Cross-Nexus connections = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. "Each node a city of spirits, not a solitary saint — but a city can be besieged." The Nexus keypair serves as the confederation keypair — Keyhive-group-rooted when available.
+* ''DreamDeck'' — the first personal browser app for accessing DreamNet. One UX surface among possible others. Package: `@dreamdeck/app`.
 * **`@lararium/*`** — DreamNet protocol/infra (core, tw5, node, browser, mcp)
 * **`@dreamdeck/*`** — DreamDeck app stack (tldraw, app)
 
@@ -55,7 +55,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 | V.1 | Vite plugin packaging — first artifact (E.10.12) | ✅ Complete | `vite.plugin.config.ts` + `scripts/build-plugin-tiddler.ts`. Output: `dist-plugin/lares-memetic-wikitext.tid` (71.3 KiB), drag-and-drop installable in any TW5 5.4+ wiki. Five JS module tiddlers (wikirule + 2 widgets + parser + deserializer) + seven data tiddlers (cascades + templates + mount + readme). |
 | V.2 | Boot-path conversion + lar:// namespace alignment (E.10.13) | ✅ Complete | TW5Engine pushes one envelope tiddler (`lar:///plugins/lares/memetic-wikitext`) into `preloadTiddlers`; TW5's standard plugin loader registers wikirule/parser/deserializer/widget modules and materializes cascade + template + mount shadow tiddlers. `_registerWidgets` / `_registerDeserializer` / parser-wrapper-injection block deleted. Single-backtick parser regression cured as a side effect (canonical `$tw.modules` construction path). Folded with namespace alignment: every Lares system title moved to `lar:///` (cascades, mount, templates, plugin envelope) so shadow-tiddler edits and in-VM plugin re-packs sync to disk through the existing `lar:`-only filter; canon MOVE ceremony no longer bugs out on `$:/`-prefixed system tiddlers. Tag VALUES stay TW5-conventional. Dual-distribution emits both `lar:///` (canonical, 72.2 KiB) and `$:/` (drag-and-drop) envelopes from one Vite library bundle. Decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md` (TW5 System Boundary). |
 | A | Canonical TW5 module export shapes (E.10.14) | ✅ Complete | Wikirule split into 3 module-type:wikirule files (lar-sigil-block / lar-sigil-inline / lar-doctype-comment). Parser exports as `{MemeticParser as "text/x-memetic-wikitext"}`. Widgets self-`require`("$:/core/.../widget.js"), set prototype chain, export under tag name. Plugin loader unpacks via canonical `$tw.modules.applyMethods` flow. In-process smoke harness at `scripts/smoke-plugin-boot.ts`. |
-| W | CodeMirror 6 / Lezer alignment + Memetic Wikitext LSP server | ⬜ Designed (way downstream — gated on CLI wiki stability) | Two-stage: (1) wikirule patterns map onto CM6 + Lezer grammar; `tobibeer/codemirror-6-tw5` is the closest active community effort. (2) **Operator's TW5-Grammar textmate VSCode plugin evolves into a full Memetic Wikitext LSP server** — Lezer grammar definitions feed both CM6 (browser TW5 + standalone) and the LSP (VSCode + JetBrains + neovim + any LSP-aware editor). Operator-stated trigger: "once CLI wikis stabilize completely." |
+| W | CodeMirror 6 / Lezer alignment + Memetic Wikitext LSP server | ⬜ Designed (way downstream — gated on CLI wiki stability) | Two-stage: (1) wikirule patterns map onto CM6 + Lezer grammar; `tobibeer/codemirror-6-tw5` is the closest active community effort. (2) ''Operator's TW5-Grammar textmate VSCode plugin evolves into a full Memetic Wikitext LSP server'' — Lezer grammar definitions feed both CM6 (browser TW5 + standalone) and the LSP (VSCode + JetBrains + neovim + any LSP-aware editor). Operator-stated trigger: "once CLI wikis stabilize completely." |
 | G.1→G.5 | Sigil family ports + factory | ✅ Complete | aka URI sigil (G.1), pranala-header (G.2), kahea + loulou URI sigils (G.3), pranala edge inline+block (G.4), `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget` factory collapses 5 widgets (G.5). Six sigils now ride template-cascade architecture (ahu, aka, kahea, loulou, pranala-header, pranala); five share factory. ahu stays bespoke (slot/uri/parentUri logic). kau retired from G — its dispatch is logic-heavy, not cascade-shaped. |
 | G.rest | Remaining sigils (lele, papalohe, pae) | ⬜ Less urgent | Less-load-bearing per operator; can land when use cases surface. Same factory pattern; mostly mechanical. |
 | H | Save-side auto-split | ✅ Complete (E.10.8 + 2026-05-11) | `<$lar-meme-split>` widget (wiki change event path) + `MemeSyncAdaptor` direct handler (CRDT store path): `splitBodyTiddler()` exported from `deserializer.ts`; `saveTiddler` detects `<<~ ahu` blocks, splits into parent + child records, tombstones removed children. ONE parser, FOUR call sites law complete. |
@@ -73,7 +73,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S0 — Web2 Pono Audit ✅
 
-**Goal:** Wipe the slate. Delete all runtime disk-read / reconcile patterns before designing replacements.
+''Goal:'' Wipe the slate. Delete all runtime disk-read / reconcile patterns before designing replacements.
 
 !!! Completed
 
@@ -94,16 +94,16 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S1 — Constitutional Invariants ✅
 
-**Goal:** Declare the full system's invariants before writing any new runtime code. The from-void design needs a written constitution.
+''Goal:'' Declare the full system's invariants before writing any new runtime code. The from-void design needs a written constitution.
 
 !!! Tasks
 
 * [x] Update `grammar-invariants.ts` Invariant 3: grammar travels in the genesis artifact; no runtime disk read on resume
 * [x] Create `packages/lararium-mesh/src/system-invariants.ts`:
-  - `SYSTEM_LAWS` — five architecture laws as typed witnessing constants
-  - `GENESIS_INVARIANTS` — causal origin, content-addressed identity, immutability, quine stub (`@phase: S5`)
-  - `PEER_INVARIANTS` — boot symmetry, operational divergence not authority, capability-from-receipt
-  - `CODEC_EXCEPTIONS` — catalog-url, BOOTSTRAP_SCANS, pre-S2 cold-boot, binary blobs
+** `SYSTEM_LAWS` — five architecture laws as typed witnessing constants
+** `GENESIS_INVARIANTS` — causal origin, content-addressed identity, immutability, quine stub (`@phase: S5`)
+** `PEER_INVARIANTS` — boot symmetry, operational divergence not authority, capability-from-receipt
+** `CODEC_EXCEPTIONS` — catalog-url, BOOTSTRAP_SCANS, pre-S2 cold-boot, binary blobs
 
 !!! Exit Criteria
 
@@ -115,16 +115,16 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S2 — Build-Time Genesis Builder ✅
 
-**Goal:** Move all disk reads and blob construction to build time. Produce a deterministic, content-addressed Automerge doc.
+''Goal:'' Move all disk reads and blob construction to build time. Produce a deterministic, content-addressed Automerge doc.
 
 !!! Tasks
 
 * [x] Create `packages/lararium-node/scripts/build-genesis-island.ts`
-  - Walk `LARES_MEMES_ROOT` at build time (not runtime)
-  - Load `.tw5.cjs` plugin blobs
-  - Serialize all tiddlers and blobs into a new `LarariumDoc`
-  - Export as a binary Automerge doc; write CID to `packages/lararium-node/genesis.cid`
-  - Write artifact bytes to `packages/lararium-node/genesis.bin` (git-tracked, deterministic)
+** Walk `LARES_MEMES_ROOT` at build time (not runtime)
+** Load `.tw5.cjs` plugin blobs
+** Serialize all tiddlers and blobs into a new `LarariumDoc`
+** Export as a binary Automerge doc; write CID to `packages/lararium-node/genesis.cid`
+** Write artifact bytes to `packages/lararium-node/genesis.bin` (git-tracked, deterministic)
 * [x] Extract `buildLaresPluginBlob()` body from `lararium-island.ts` into the script (remove the runtime call)
 * [x] Wire into `package.json` build script: runs before TypeScript compilation
 
@@ -138,14 +138,14 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S3 — Runtime Genesis Loader ✅
 
-**Goal:** At peer boot, load the genesis artifact from the bundled binary rather than constructing it from disk.
+''Goal:'' At peer boot, load the genesis artifact from the bundled binary rather than constructing it from disk.
 
 !!! Tasks
 
 * [x] Create `loadGenesisIsland(genesisBytes: Uint8Array): Promise<DocHandle<LarariumDoc>>` in `lararium-island.ts`
-  - Imports `genesis.bin` (bundled asset, no fs read at runtime)
-  - Calls `Automerge.load()` on the bytes
-  - Returns a live `DocHandle` ready for sync
+** Imports `genesis.bin` (bundled asset, no fs read at runtime)
+** Calls `Automerge.load()` on the bytes
+** Returns a live `DocHandle` ready for sync
 * [x] Add `reconcileIslandFromGenesis(islandHandle, genesisHandle)` — diffs live doc against genesis CID; applies only net-new content from genesis
 * [x] Remove `// SPRINT-2: reconcileIslandFromGenesis(...)` placeholder comments; replace with real calls
 
@@ -159,7 +159,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S4 — Peer Factory Rewrites ✅
 
-**Goal:** `openNodeLarPeer` and `openBrowserLarPeer` use `loadGenesisIsland()`; `seedLarariumDoc` disk-walk pattern disappears.
+''Goal:'' `openNodeLarPeer` and `openBrowserLarPeer` use `loadGenesisIsland()`; `seedLarariumDoc` disk-walk pattern disappears.
 
 !!! Tasks
 
@@ -179,7 +179,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S5 — Quine Round-Trip Verification ✅
 
-**Goal:** The engine that boots the system lives inside the system it boots.
+''Goal:'' The engine that boots the system lives inside the system it boots.
 
 !!! Tasks
 
@@ -198,7 +198,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S5.1 — Meme Namespace Consolidation ✅
 
-**Goal:** Eliminate the `grammars/` duplicate namespace; settle sigil discipline; audit misfiled memes; consolidate voice-house.
+''Goal:'' Eliminate the `grammars/` duplicate namespace; settle sigil discipline; audit misfiled memes; consolidate voice-house.
 
 !!! Completed
 
@@ -227,7 +227,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S5.3 — FfzClock Type ✅ Complete
 
-**Goal:** Define `FfzClock` in `@lararium/mesh` before S6 closes so `SessionEvent` and `PresenceSlot` use the right clock type from the start.
+''Goal:'' Define `FfzClock` in `@lararium/mesh` before S6 closes so `SessionEvent` and `PresenceSlot` use the right clock type from the start.
 
 !!! Completed
 
@@ -250,7 +250,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S5.4 — Multi-Clock Architecture ✅ Complete
 
-**Goal:** Extend `@lararium/mesh` type contracts to support multiple concurrent clocks, world/observed clocks, and the Verse-shaped event bus interface.
+''Goal:'' Extend `@lararium/mesh` type contracts to support multiple concurrent clocks, world/observed clocks, and the Verse-shaped event bus interface.
 
 !!! Completed
 
@@ -280,7 +280,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S6 — SessionEventLog 🔴 Active
 
-**Goal:** Per-session append-only event log; ephemeral presence via `broadcast()`.
+''Goal:'' Per-session append-only event log; ephemeral presence via `broadcast()`.
 
 !!! Tasks
 
@@ -307,19 +307,19 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 !! S7 — Circles + Identities Capability Layer 🔴 Active
 
-**Goal:** `IdentitiesDoc` and `CirclesDoc` acquire real protocol integrity across a
+''Goal:'' `IdentitiesDoc` and `CirclesDoc` acquire real protocol integrity across a
 hostile multi-Nexus mesh where not all peers are aligned or interoperable.
 
 !!! Key design decisions (from jzellis/kowloon audit + DreamNet redesign, 2026-05-06)
 
-**Confirmed from Kowloon source:**
+''Confirmed from Kowloon source:''
 * Follow = local circle add, never federated, never announced. `shouldFederate.js` confirms.
 * Visibility = writer sets `to`/`canReply`/`canReact` on content; reader's circle membership
   is evaluated locally at read time. No remote server query at check time.
 * Block/Mute = local circles, never cross-announced. Actor-level only.
 * Circle integrity: signed over `id|name|to|sortedMemberList` by owner's key.
 
-**DreamNet divergence (what Ellis cannot do):**
+''DreamNet divergence (what Ellis cannot do):''
 * Identity anchor = keypair (`did:key`), not server domain. Server is just another peer.
 * Circles span Nexus boundaries via Keyhive Group CRDT — not single-actor on single-server.
 * Hostile Nexus threat: Nexus-level trust assertions + nonce burn (anti-replay).
@@ -327,19 +327,19 @@ hostile multi-Nexus mesh where not all peers are aligned or interoperable.
 * Key rotation: Keyhive BeeKEM re-wrap on member change. Ellis has `keyRotationAt` field
   but no protocol.
 
-**Five identity planes (revised):**
+''Five identity planes (revised):''
 * Plane 0: Device (`did:key` Ed25519)
 * Plane 1: Operator (Keyhive person-as-group of device keys)
 * Plane 2: Circle (local CRDT for personal; Keyhive Group for Nexus-scoped)
 * Plane 3: Nexus (confederation keypair; signs cross-Nexus capability tokens)
 * Plane 4: DreamNet (no central authority; trust from Nexus treaty events only)
 
-**Three-tier authority separation:**
+''Three-tier authority separation:''
 * Tier 1 (local CRDT): `CirclesDoc` membership checked via TW5 filter. No crypto needed.
 * Tier 2 (Nexus CRDT): Keyhive Group replicates to all Nexus peers. Waits on Keyhive WASM.
 * Tier 3 (cross-Nexus token): UCAN-compatible token signed by source Nexus keypair. S9.
 
-**Addressing model (from Ellis, upgraded):**
+''Addressing model (from Ellis, upgraded):''
 * Three fields on every content tiddler: `to`, `canReply`, `canReact`
 * Values: `"@public"` | `"@nexus:{pubkey}"` | `"circle:{id}"` | `"group:{uri}"`
 * Replaces implicit follower-list visibility with explicit capability grants
@@ -378,11 +378,11 @@ Full design: `packages/lares-core/lararium-research/S7-CIRCLES-IDENTITIES-REDESI
 
 !! S8 — Kowloon Bridge ⬜ Designed
 
-**Goal:** DreamDeck users draft and publish to Kowloon from the local-first app. `elyncia.app` runs both services.
+''Goal:'' DreamDeck users draft and publish to Kowloon from the local-first app. `elyncia.app` runs both services.
 
 !!! Key design decisions (from research)
 
-**Option B wins:** separate bridge docs, social tiga stays clean. The `ha/ka/ba` tiga remains entirely local-first authoritative. The publish step is a deliberate authority handoff (user keypair → server key for ActivityPub signing) — not undermining, intentional boundary.
+''Option B wins:'' separate bridge docs, social tiga stays clean. The `ha/ka/ba` tiga remains entirely local-first authoritative. The publish step is a deliberate authority handoff (user keypair → server key for ActivityPub signing) — not undermining, intentional boundary.
 
 * **`KowloonOutbox`** — Automerge doc (tiddler-first) storing unpublished drafts as a mutation queue. On publish: POST to Kowloon API, mark `status: "published"` with `remoteRef`. Replicache outbox pattern.
 * **`KowloonInbox`** — Automerge doc caching feed items for display. Refreshed from `/.well-known/kowloon/pull`. Server wins on refresh (not a CRDT peer). Electric SQL shape pattern.
@@ -405,10 +405,10 @@ Full design: `packages/lares-core/lararium-research/S7-CIRCLES-IDENTITIES-REDESI
 
 !! S5.5 — Genesis Bootstrap Causal Correction ✅
 
-**Goal:** Remove all social Tiga seeding and identity ceremony from `openNodeLarPeer`.
+''Goal:'' Remove all social Tiga seeding and identity ceremony from `openNodeLarPeer`.
 The server finds what exists; it never authors. Init happens before the server starts.
 
-**Principle:** Three causal moments, strictly separated:
+''Principle:'' Three causal moments, strictly separated:
 
 ```
 Build time   scripts/build-genesis-island.ts    content Tiga → genesis/island.bin ✓ (done)
@@ -420,7 +420,7 @@ Runtime      openNodeLarPeer (simplified)        finds docs; errors if uninitial
 * Creates IdentitiesDoc, CirclesDoc, SessionsDoc
 * Runs `buildCeremonyTiddlers` (operator identity + system circles)
 * Creates `DeviceDelegationTiddler` with `cap: "infrastructure"` for the node device (S7.1)
-* Writes `genesis/social-bootstrap.json` as a **TW5 tiddler bundle** — a JSON array of tiddler objects
+* Writes `genesis/social-bootstrap.json` as a ''TW5 tiddler bundle'' — a JSON array of tiddler objects
   mirroring the oracle tiddler shape (`title` / `text` / `fields` / `bag` / `authority`):
   ```json
   [
@@ -442,13 +442,13 @@ Runtime      openNodeLarPeer (simplified)        finds docs; errors if uninitial
 * Throws `"Run lararium:init before starting the node"` if bootstrap file absent
 * Removes: `socialPlaneIsNew`, `seedIdentitiesDoc/Circles/Sessions`, `seedLaresDoc`, `buildCeremonyTiddlers`, `operatorIdentity` option
 
-**Browser cold-boot path:**
+''Browser cold-boot path:''
 Admin runs `lararium:pack` after init. Browser peer receives a bundle encoding:
 genesis CID + catalog AutomergeUrl + invite token (nonce-bearing, expiring, Seitan pattern).
 Browser loads `genesis/island.bin` from its bundled copy (content-addressed, same binary),
 then syncs live docs from the catalog URL. No server-side seeding needed.
 
-**Impact on S7.1:** `buildDeviceDelegation` + ceremony move to `init-lararium.ts`.
+''Impact on S7.1:'' `buildDeviceDelegation` + ceremony move to `init-lararium.ts`.
 S7.1 targets the init script callsite, not `openNodeLarPeer`.
 
 !!! Tasks
@@ -469,15 +469,15 @@ S7.1 targets the init script callsite, not `openNodeLarPeer`.
 
 !! S5.6 — Admin VM Lift 🔴 Next
 
-**Goal:** Stand up an admin TW5 VM in the node peer. Move operator-private state out of `main.ts` imperative wiring and into a meme-driven coordinator room.
+''Goal:'' Stand up an admin TW5 VM in the node peer. Move operator-private state out of `main.ts` imperative wiring and into a meme-driven coordinator room.
 
-**Two URIs, one Automerge doc:**
+''Two URIs, one Automerge doc:''
 * Logical room: `lar:///ha.ka.ba/lararium/rooms/admin` (TW5 view, what the admin VM "lives in")
 * Bag (Automerge doc): `lar:///ha.ka.ba/lararium/@admin` (sync boundary, sibling to @identities/@circles/@sessions)
 
-**Federation:** scoped to the operator's own devices. Room peers cannot prove `cap=infrastructure`; admin doc never federates outside operator's device set. Trust gate at S7.4 (`checkIngressTrust`).
+''Federation:'' scoped to the operator's own devices. Room peers cannot prove `cap=infrastructure`; admin doc never federates outside operator's device set. Trust gate at S7.4 (`checkIngressTrust`).
 
-**What lands in the admin doc:**
+''What lands in the admin doc:''
 * `DeviceDelegationTiddler`s tagged `cap=infrastructure` (S7.1)
 * `ProjectionTiddler`s tagged `$:/tags/LarariumProjection` (declarative manifest replacing the programmatic `registry.enable(...)` calls in `main.ts`)
 * Session tiddlers (operator → agent; sessions become an admin-room concern, not a room-room concern)
@@ -505,7 +505,7 @@ constitute separate peers with separate threat models:
 * Node peer: headless, autonomous, holds filesystem, manages social docs — `cap: "infrastructure"`
 * Browser/mobile peer: under direct operator attention — `cap: "social"`
 
-**Decided (2026-05-06):**
+''Decided (2026-05-06):''
 * `IdentityTiddler.kind` gains `"node"` as a distinct value (five kinds: operator/node/agent/service/device)
 * `DeviceDelegationTiddler.cap` scopes the grant: `"infrastructure" | "social" | "relay" | "full"`
 * Node peer's delegation carries `cap: "infrastructure"` — can sync, seed, oracle-sign, manage sessions; cannot sign social content or issue circle invites
@@ -518,7 +518,7 @@ A Node.js relay node participates in Automerge sync without holding read authori
 It passes opaque sync byte-streams between peers without deserializing document state.
 Analogous to a Tor relay — passes ciphertext, holds no plaintext key.
 
-**Design questions (inform NexusTrustTiddler + DeviceDelegationTiddler before they solidify):**
+''Design questions (inform NexusTrustTiddler + DeviceDelegationTiddler before they solidify):''
 * Can Automerge sync operate on a stripped transport-layer adapter without a full Repo?
 * Does a relay hold a `did:key` identity, or is it purely transport-layer?
 * Is the ley-line relay a Nexus peer with `trustLevel: "neutral"` or a distinct concept?
@@ -550,7 +550,7 @@ S0 Cleanup ✅
 
 !! S5.2 — Package Reboot ✅
 
-**Goal:** Delete the web2-brained app packages. Stub the new DreamNet-first package triad.
+''Goal:'' Delete the web2-brained app packages. Stub the new DreamNet-first package triad.
 
 !!! Completed
 
@@ -584,18 +584,18 @@ Full research: `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESEAR
 
 !!! Settled Decisions
 
-* **Nexus identity** = Ed25519 keypair. `lar://<nexus-pubkey>/<doc-id>` serves as the URI form. No DNS.
-* **Membership** = signed invite token: `sign_with_operator_key({ iss: nexus_did, cap: "join/nexus", exp, nonce })`. Offline-verifiable, nonce burned on redemption. No central registry.
-* **Auth substrate** = Keyhive (Ink & Switch, Brooklyn Zelenka) when TS/WASM bindings ship. Until then: node-local operator keypair + ucanto-compatible capability schemas as forward-compatible surface.
-* **Presence** = `DocHandle.broadcast()` + Yjs-awareness-style `{ userId, deviceId, cursor, viewport, selection, clock }` slot per peer. Last-write-wins per `(peerId, deviceId)`. 15s heartbeat, 30s expiry. Never written to Automerge doc.
-* **Session-local state** = never enters broadcast(). Enforced at schema level (tldraw three-tier model).
-* **DreamDeck visual principles**: spatial position carries semantic weight; nodes act as `lar://` resource containers; edge types function as first-class; no shared mutable state (Verse model, not Blueprint); export to open formats (JSON Canvas).
+* ''Nexus identity'' = Ed25519 keypair. `lar://<nexus-pubkey>/<doc-id>` serves as the URI form. No DNS.
+* ''Membership'' = signed invite token: `sign_with_operator_key({ iss: nexus_did, cap: "join/nexus", exp, nonce })`. Offline-verifiable, nonce burned on redemption. No central registry.
+* ''Auth substrate'' = Keyhive (Ink & Switch, Brooklyn Zelenka) when TS/WASM bindings ship. Until then: node-local operator keypair + ucanto-compatible capability schemas as forward-compatible surface.
+* ''Presence'' = `DocHandle.broadcast()` + Yjs-awareness-style `{ userId, deviceId, cursor, viewport, selection, clock }` slot per peer. Last-write-wins per `(peerId, deviceId)`. 15s heartbeat, 30s expiry. Never written to Automerge doc.
+* ''Session-local state'' = never enters broadcast(). Enforced at schema level (tldraw three-tier model).
+* ''DreamDeck visual principles'': spatial position carries semantic weight; nodes act as `lar://` resource containers; edge types function as first-class; no shared mutable state (Verse model, not Blueprint); export to open formats (JSON Canvas).
 
 !!! Settled Protocol Decisions (2026-05-06)
 
-* **lar:// URI** — three families, no grammar change. Nexus identity uses new `@nexus` scope: `lar:///ha.ka.ba/bags/@nexus/<pubkey>`. Resolver gets `"nexus-doc"` kind. Triple-slash hostless form retained for all system/content memes.
-* **Presence routing** — `@lararium/mesh` types → `@lararium/tw5` tiddler representation → peer packages wire broadcast → UX layer consumes.
-* **FFZ Chronometer** — `FfzClock` type lands in `@lararium/mesh` before S6 closes. `PresenceSlot.clock` and `SessionEvent.clock` are `FfzClock`, not `number`. L4 (epoch) unbounded; L0–L3 bounded + looping.
+* ''lar:// URI'' — three families, no grammar change. Nexus identity uses new `@nexus` scope: `lar:///ha.ka.ba/bags/@nexus/<pubkey>`. Resolver gets `"nexus-doc"` kind. Triple-slash hostless form retained for all system/content memes.
+* ''Presence routing'' — `@lararium/mesh` types → `@lararium/tw5` tiddler representation → peer packages wire broadcast → UX layer consumes.
+* ''FFZ Chronometer'' — `FfzClock` type lands in `@lararium/mesh` before S6 closes. `PresenceSlot.clock` and `SessionEvent.clock` are `FfzClock`, not `number`. L4 (epoch) unbounded; L0–L3 bounded + looping.
 * **`capabilityFlags` forms a monotonic set** — never negotiate down. Protocol downgrade attack is mitigated structurally.
 * **`keyHistory` designed in from day one** — key rotation proofs required; cannot be retrofitted.
 
@@ -625,7 +625,7 @@ fires `OnValueChanged`, which calls `Enable` on a wired target device.
 
 This is the Lararium's Verse-compatible scripting layer. Verse 5.6+ (UEFN) is the
 compatibility target: compositional device model, not Blueprint/inheritance. The
-`kumu-device.ts` sketch in `lararium-mesh/maybe/` is **throwaway TS** — the vocabulary
+`kumu-device.ts` sketch in `lararium-mesh/maybe/` is ''throwaway TS'' — the vocabulary
 and invariants in its comments are the load-bearing artifact. Implementation rewrites from
 scratch in Path R.
 
@@ -643,18 +643,18 @@ scratch in Path R.
 
 !!! Architectural invariants (do not re-decide)
 
-1. **RE and TW5Engine co-locate in the same Worker Thread.** RE reads TW5 state
+1. ''RE and TW5Engine co-locate in the same Worker Thread.'' RE reads TW5 state
    synchronously inside `onChangeset`. Cross-thread reads would break the Verse tick.
-2. **Ordering within a changeset: MemeSyncAdaptor fires first, RE second.** TW5 state
+2. ''Ordering within a changeset: MemeSyncAdaptor fires first, RE second.'' TW5 state
    must be current before RE fires. This ordering IS the tick boundary invariant.
    `ProjectionRegistry` must enforce it.
-3. **RE writes go through the composite store.** Handlers call `store.put()`. RE never
+3. ''RE writes go through the composite store.'' Handlers call `store.put()`. RE never
    touches `docHandle.change()` directly.
-4. **Device graph lives in the wiki, not in the RE.** `KumuDeviceSpec` is derived from
+4. ''Device graph lives in the wiki, not in the RE.'' `KumuDeviceSpec` is derived from
    pranala edges in tiddler text. RE caches `ReactionGraph` in memory; `onUriChanged`
    maintains it incrementally.
-5. **FfzClock tick = one RE turn.** `LarTickCounter` advances after each `onChangeset`.
-6. **No RE in cold-tier slots.** RE boots with the Worker when a slot promotes to hot.
+5. ''FfzClock tick = one RE turn.'' `LarTickCounter` advances after each `onChangeset`.
+6. ''No RE in cold-tier slots.'' RE boots with the Worker when a slot promotes to hot.
 
 !!! Cold-boot sequence per wiki
 
@@ -680,23 +680,23 @@ calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.
 
 !!! Wave 3 research findings (2026-05-11)
 
-* **Brooklyn Zelenka** is now a senior researcher at Ink & Switch working on Subduction
+* ''Brooklyn Zelenka'' is now a senior researcher at Ink & Switch working on Subduction
   and Keyhive. She is the UCAN spec editor; previously ran Fission.
-* **Subduction** (`inkandswitch/subduction`, v0.13.0) — P2P CRDT sync protocol, Rust +
-  WASM (Node.js + browser). Uses **Sedimentree** (hash-linked hierarchical storage) for
+* ''Subduction'' (`inkandswitch/subduction`, v0.13.0) — P2P CRDT sync protocol, Rust +
+  WASM (Node.js + browser). Uses ''Sedimentree'' (hash-linked hierarchical storage) for
   metadata-only diffing: peers sync by comparing hashes without decrypting content.
   Pluggable transports: WebSocket, HTTP long-poll, Iroh/QUIC. `subduction_keyhive` crate
   integrates Keyhive authorization. **This is the Ink & Switch answer to E2EE federated
   CRDT sync.** Watch for when it exits pre-alpha.
-* **Keyhive + Subduction = the federation stack.** Already adopted Keyhive at S7.1. When
+* ''Keyhive + Subduction = the federation stack.'' Already adopted Keyhive at S7.1. When
   lararium↔lararium federation firms up (post-S9), Subduction is the protocol to evaluate
   before building bespoke sync.
-* **BeeKEM** (inside Keyhive): key encapsulation mechanism that makes relay nodes hold
+* ''BeeKEM'' (inside Keyhive): key encapsulation mechanism that makes relay nodes hold
   ciphertext only by construction. Forcing function for the ley-line relay design.
-* **Multi-tenant RE isolation:** each user's wiki runs in its own Worker Thread. Handlers
+* ''Multi-tenant RE isolation:'' each user's wiki runs in its own Worker Thread. Handlers
   in wiki A cannot access wiki B's heap. Keyhive cap check at `re.subscribe()` ensures
   handler registration requires proof of write access to the bag.
-* **CRDT + RE federation:** when two larraria merge Automerge changes, each RE fires
+* ''CRDT + RE federation:'' when two larraria merge Automerge changes, each RE fires
   independently on receipt of its merged changeset. Reactions apply causally-after-merge,
   in declaration order. Interleaving across larraria is acceptable under the same model
   Verse uses for networked game state: CRDT eventual consistency + best-effort local

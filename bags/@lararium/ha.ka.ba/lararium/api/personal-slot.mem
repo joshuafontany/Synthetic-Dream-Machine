@@ -44,8 +44,8 @@ The WikiRecipe holds a per-wiki live stack over a shared canon floor:
 7. @lararium              system, CRDT, mesh-shared
 ```
 
-Two federation scopes only — **device-local** (`wikis/@{slug}/temp`) and
-**mesh-shared** (the rest). Nothing in between.
+Two federation scopes only — ''device-local'' (`wikis/@{slug}/temp`) and
+''mesh-shared'' (the rest). Nothing in between.
 
 TW5 carries a category of state that lives between those two scopes — the
 operator's cross-device viewing state. TW5's own default `$:/config/SyncFilter`
@@ -53,7 +53,7 @@ demonstrates the distinction: it excludes `$:/state/*` and `$:/HistoryList`
 from sync but **leaves `$:/StoryList` syncable** because the open story
 river represents operator intent worth carrying to their other devices.
 
-The missing scope: **the operator's authorised device vessel mesh** — what
+The missing scope: ''the operator's authorised device vessel mesh'' — what
 Keyhive already names a `PersonaGroup`.
 
 <<~/ahu >>
@@ -102,7 +102,7 @@ The recipe carries a Tai Chi symmetry around the wiki's canon (`bags/@{slug}`):
               @lararium      ┘  is structured canon, mesh-shared, read-stable
 ```
 
-**The per-wiki live layers ABOVE the canon** (`wikis/@{slug}/{temp,draft,personal,working}`)
+''The per-wiki live layers ABOVE the canon'' (`wikis/@{slug}/{temp,draft,personal,working}`)
 are keyed by `(PersonaGroup × recipe-fingerprint)`, where the fingerprint covers the
 entire below-canon stack. Two devices share above-canon state ONLY when their
 recipe-fingerprints match.
@@ -129,8 +129,8 @@ resolver["lar:///ha.ka.ba/wikis/@synthetic-dream-machine/personal"] = "automerge
 resolver["lar:///ha.ka.ba/wikis/@synthetic-dream-machine/personal"] = "automerge:abc..."  // doc α (shared)
 ```
 
-The slot URI is the **address**. The Automerge doc the resolver hands you
-is the **house at that address right now in this recipe**. Different
+The slot URI is the ''address''. The Automerge doc the resolver hands you
+is the ''house at that address right now in this recipe''. Different
 recipes deliver to different houses; same recipe across the operator's
 device cabal delivers to one shared house.
 
@@ -172,7 +172,7 @@ own slots at boot — so a rule never hardcodes a wiki's identity:
 `island-recipe.ts` seeds `current-wiki-{temp,draft,personal,bag}` to the mounted wiki's
 own per-wiki slots (`wikis/@{slug}/{temp,draft,personal}` and its working/canon write
 layer) at boot; each island's resolver supplies the correct doc URL. Under the residency
-model these entries hold as **first-write defaults**, not authoritative routing (see
+model these entries hold as ''first-write defaults'', not authoritative routing (see
 #residency-reconciliation).
 
 <<~/ahu >>
@@ -181,9 +181,9 @@ model these entries hold as **first-write defaults**, not authoritative routing 
 
 !! Binding storage — admin-doc-stored
 
-The `(personGroupHex × recipe-fingerprint) → @personal-docUrl` mapping (and the parallel mapping for `@draft`) MUST live as tiddlers inside the operator's **admin doc** (`lar:///ha.ka.ba/bags/@daemon`), under a deterministic prefix. The admin doc already carries Keyhive PersonaGroup membership gating and already replicates across the operator's own devices through the founding/admit ceremonies. Storing the bindings there gives cross-device convergence for free and avoids inventing a parallel storage layer.
+The `(personGroupHex × recipe-fingerprint) → @personal-docUrl` mapping (and the parallel mapping for `@draft`) MUST live as tiddlers inside the operator's ''admin doc'' (`lar:///ha.ka.ba/bags/@daemon`), under a deterministic prefix. The admin doc already carries Keyhive PersonaGroup membership gating and already replicates across the operator's own devices through the founding/admit ceremonies. Storing the bindings there gives cross-device convergence for free and avoids inventing a parallel storage layer.
 
-**Tiddler key shape:**
+''Tiddler key shape:''
 
 ```
 lar:///ha.ka.ba/bags/@daemon/personal-bindings/${fingerprintHex}
@@ -203,15 +203,15 @@ lar:///ha.ka.ba/bags/@daemon/draft-bindings/${fingerprintHex}
 
 Five forces converge here. Each one rules out a parallel storage option.
 
-**1. PersonaGroup scoping comes free.** The admin doc carries `cap=admin` for the operator's PersonaGroup. Any device admitted to the PersonaGroup MAY read and write the admin doc; non-member vessels cannot. The `(PersonaGroup × fingerprint)` keying matches admin-doc semantics 1:1 — different PersonaGroup = different admin doc = no shared bindings.
+''1. PersonaGroup scoping comes free.'' The admin doc carries `cap=admin` for the operator's PersonaGroup. Any device admitted to the PersonaGroup MAY read and write the admin doc; non-member vessels cannot. The `(PersonaGroup × fingerprint)` keying matches admin-doc semantics 1:1 — different PersonaGroup = different admin doc = no shared bindings.
 
-**2. Cross-device convergence comes free.** When device A mints a fresh `@personal` doc for recipe-fingerprint F and writes the binding tiddler, the admin doc CRDT replicates the write to device B on next sync. Device B reads the same tiddler at boot, finds the same docUrl, mounts the same `@personal` document. No coordination required.
+''2. Cross-device convergence comes free.'' When device A mints a fresh `@personal` doc for recipe-fingerprint F and writes the binding tiddler, the admin doc CRDT replicates the write to device B on next sync. Device B reads the same tiddler at boot, finds the same docUrl, mounts the same `@personal` document. No coordination required.
 
-**3. Local-first / causal-island pono holds.** No web2 storage layer (no central service, no operator-private filesystem cache that needs syncing). The admin doc IS the operator's sovereign Automerge bag; the bindings tiddlers ride its existing CRDT history.
+''3. Local-first / causal-island pono holds.'' No web2 storage layer (no central service, no operator-private filesystem cache that needs syncing). The admin doc IS the operator's sovereign Automerge bag; the bindings tiddlers ride its existing CRDT history.
 
-**4. No new dependency, no new abstraction.** A filesystem cache would force per-vessel persistence + a sync layer. An IndexedDB cache would split node/browser code paths. A dedicated Automerge bag (`@personal-registry`) would add a slot to every recipe + a sync gate to the manifest. The admin doc already carries the right shape; reusing it costs nothing and adds nothing to the slot grammar.
+''4. No new dependency, no new abstraction.'' A filesystem cache would force per-vessel persistence + a sync layer. An IndexedDB cache would split node/browser code paths. A dedicated Automerge bag (`@personal-registry`) would add a slot to every recipe + a sync gate to the manifest. The admin doc already carries the right shape; reusing it costs nothing and adds nothing to the slot grammar.
 
-**5. Lifecycle stories collapse.** PersonaGroup revocation, device admit, device-leaves-the-cabal — each already handled by the admin-doc + Keyhive layer. The bindings inherit these stories without per-binding reinvention.
+''5. Lifecycle stories collapse.'' PersonaGroup revocation, device admit, device-leaves-the-cabal — each already handled by the admin-doc + Keyhive layer. The bindings inherit these stories without per-binding reinvention.
 
 <<~/ahu >>
 
@@ -247,15 +247,15 @@ The bindings TIDDLERS live inside the admin doc. The `@personal` and `@draft` AU
 
 !! Vessel boot flow
 
-**Layering law (corrected 2026-06-01 after three research spirits converged on (A)).** Binding-resolution — compute fingerprint → look up → mint-on-absent → Keyhive-delegate → write binding tiddler — MUST run at the **host / composition layer** (`open-node-vessel.ts`), NOT inside `VesselIslandPool`. The pool stays envelope-only per its design law (vessel-island-pool.ts header); it holds no `repo`/`composite`/`keyhive`/admin-doc references and MUST NOT gain them. The host resolves the `@personal`/`@draft` doc URLs and passes them **through** `WikiBootContext` into the pool, which merely adds them to the manifest `resolver` map.
+''Layering law (corrected 2026-06-01 after three research spirits converged on (A)).'' Binding-resolution — compute fingerprint → look up → mint-on-absent → Keyhive-delegate → write binding tiddler — MUST run at the ''host / composition layer'' (`open-node-vessel.ts`), NOT inside `VesselIslandPool`. The pool stays envelope-only per its design law (vessel-island-pool.ts header); it holds no `repo`/`composite`/`keyhive`/admin-doc references and MUST NOT gain them. The host resolves the `@personal`/`@draft` doc URLs and passes them ''through'' `WikiBootContext` into the pool, which merely adds them to the manifest `resolver` map.
 
 Three convergent justifications:
 
-* **Composition Root** (Seemann) — side-effectful object-graph wiring belongs at the entry point that already holds the deps; pushing it into a leaf inverts the pattern.
-* **Service-Locator anti-pattern** — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
-* **Object-capability "only a holder may delegate"** (Miller, *Capability Myths Demolished*) + **POLA** + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonaGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
+* ''Composition Root'' (Seemann) — side-effectful object-graph wiring belongs at the entry point that already holds the deps; pushing it into a leaf inverts the pattern.
+* ''Service-Locator anti-pattern'' — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
+* ''Object-capability "only a holder may delegate"'' (Miller, *Capability Myths Demolished*) + ''POLA'' + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonaGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
 
-**Established repo grain (codebase spirit):** draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:696`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`); the boot's own `registerBag` sweep (`:586-594`) is the precedent for minting a Keyhive Document before delegating. The new helper follows that grain exactly.
+''Established repo grain (codebase spirit):'' draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:696`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`); the boot's own `registerBag` sweep (`:586-594`) is the precedent for minting a Keyhive Document before delegating. The new helper follows that grain exactly.
 
 !!! Primary-wiki path (the only live path today)
 
@@ -343,16 +343,16 @@ const resolver: Record<string, string | null> = {
 
 Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKEM lineage) converged on the delegation shape:
 
-* **Document-as-group is the *intended* Keyhive shape, not a workaround smell.** A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph **orthogonal to BeeKEM key rotation**. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: **bind to the stable agent-id** (never rotating key material), and **keep that id stable for the group's whole lifetime** (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
-* **Group-as-audience is object-capability-idiomatic.** Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
-* **Access cascades transitively and retroactively** through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
-* **Grain debt (POLA).** `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds **up** to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [causal-islands](../pono/causal-islands.md).
+* ''Document-as-group is the *intended* Keyhive shape, not a workaround smell.'' A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph ''orthogonal to BeeKEM key rotation''. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: ''bind to the stable agent-id'' (never rotating key material), and ''keep that id stable for the group's whole lifetime'' (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
+* ''Group-as-audience is object-capability-idiomatic.'' Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
+* ''Access cascades transitively and retroactively'' through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
+* ''Grain debt (POLA).'' `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds ''up'' to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [[causal-islands|../pono/causal-islands.md]].
 
 !!! Session-wiki path (deferred — additional hot-tier mounts)
 
-`mountWiki` is now the **one** mount path: the primary rides it pinned (`{ pinned: true }`), future session wikis ride it unpinned. An earlier draft claimed the primary path *could not* use the admin-VM delegate-verb seam because the mount ran before `workerEa` — **S11.5 reversed that.** `await adminVm.workerEa` (`:770`) now precedes the mount (`:782`), so the admin VM is live for every mount. The primary path therefore resolves **host-inline** (composition-root, per the ocap ruling above). A future multiplexed session-mount path MAY instead route resolution through the **admin-VM delegate-verb** seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`) if it needs to resolve off the host thread. `resolveOrMintBinding` stays callable from both.
+`mountWiki` is now the ''one'' mount path: the primary rides it pinned (`{ pinned: true }`), future session wikis ride it unpinned. An earlier draft claimed the primary path *could not* use the admin-VM delegate-verb seam because the mount ran before `workerEa` — ''S11.5 reversed that.'' `await adminVm.workerEa` (`:770`) now precedes the mount (`:782`), so the admin VM is live for every mount. The primary path therefore resolves ''host-inline'' (composition-root, per the ocap ruling above). A future multiplexed session-mount path MAY instead route resolution through the ''admin-VM delegate-verb'' seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`) if it needs to resolve off the host thread. `resolveOrMintBinding` stays callable from both.
 
-**First delegate() call site.** S7.6's `keyhive.delegate(...)` is the first active call to that method in the repo (the method exists; no caller yet). This binding flow establishes the delegation call pattern; the ocap research above governs where it lives.
+''First delegate() call site.'' S7.6's `keyhive.delegate(...)` is the first active call to that method in the repo (the method exists; no caller yet). This binding flow establishes the delegation call pattern; the ocap research above governs where it lives.
 
 <<~/ahu >>
 
@@ -360,19 +360,19 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 !! Lifecycle
 
-**Mint-on-absent.** First device to boot a vessel into a recipe-fingerprint mints fresh `@personal` and `@draft` Automerge docs, delegates each to the operator's PersonaGroup, writes the bindings.
+''Mint-on-absent.'' First device to boot a vessel into a recipe-fingerprint mints fresh `@personal` and `@draft` Automerge docs, delegates each to the operator's PersonaGroup, writes the bindings.
 
-**Reuse-on-present.** Subsequent device boots into the same fingerprint read the binding tiddlers from the admin doc and mount the existing Automerge docs.
+''Reuse-on-present.'' Subsequent device boots into the same fingerprint read the binding tiddlers from the admin doc and mount the existing Automerge docs.
 
-**Never-delete.** Operator view state carries durability — `$:/StoryList`, `$:/state/folded/*`, `$:/state/tab-*`, and `$:/palette` represent the operator's actual viewing history per recipe. Bindings persist indefinitely; the operator's view state across all recipes they have ever opened stays recoverable.
+''Never-delete.'' Operator view state carries durability — `$:/StoryList`, `$:/state/folded/*`, `$:/state/tab-*`, and `$:/palette` represent the operator's actual viewing history per recipe. Bindings persist indefinitely; the operator's view state across all recipes they have ever opened stays recoverable.
 
-**Cap-rotation on PersonaGroup membership change.** When the operator admits a new device, the founding ceremony already grants the new device admin access to the admin doc. The new device reads the admin doc, sees existing binding tiddlers, mounts the same `@personal`/`@draft` docs. Keyhive's CRDT-of-capabilities means the new device also gains access to the underlying `@personal`/`@draft` docs (each carries a delegation to the PersonaGroup, and the new device joined the PersonaGroup) — no per-binding re-grant required. *(Verified 2026-06-03: access is membership-graph reachability, so the new edge covers every doc the group can reach, retroactively.)*
+''Cap-rotation on PersonaGroup membership change.'' When the operator admits a new device, the founding ceremony already grants the new device admin access to the admin doc. The new device reads the admin doc, sees existing binding tiddlers, mounts the same `@personal`/`@draft` docs. Keyhive's CRDT-of-capabilities means the new device also gains access to the underlying `@personal`/`@draft` docs (each carries a delegation to the PersonaGroup, and the new device joined the PersonaGroup) — no per-binding re-grant required. *(Verified 2026-06-03: access is membership-graph reachability, so the new edge covers every doc the group can reach, retroactively.)*
 
-**Authorized-but-undecryptable window (eventual consistency).** Access is *granted* by membership-graph reachability, but Keyhive sync is two-phase: the membership op AND the BeeKEM rekey ops must both reach a device before it can *decrypt*. Automerge heads ride outside the encryption envelope, so a device MAY see a binding's docUrl and the doc's existence before it holds the key. Therefore `resolveOrMintBinding` reuse-on-present MUST mount-when-ready and MUST NOT block boot on a binding whose doc is not yet decryptable on this device; the UI reads "current as of last sync" (causal-islands doctrine). On concurrent device churn BeeKEM MAY blank the group root, requiring a member's Update-Key before readers decrypt — outer delegations survive; readers wait. S7.7 wants a test: *binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.*
+''Authorized-but-undecryptable window (eventual consistency).'' Access is *granted* by membership-graph reachability, but Keyhive sync is two-phase: the membership op AND the BeeKEM rekey ops must both reach a device before it can *decrypt*. Automerge heads ride outside the encryption envelope, so a device MAY see a binding's docUrl and the doc's existence before it holds the key. Therefore `resolveOrMintBinding` reuse-on-present MUST mount-when-ready and MUST NOT block boot on a binding whose doc is not yet decryptable on this device; the UI reads "current as of last sync" (causal-islands doctrine). On concurrent device churn BeeKEM MAY blank the group root, requiring a member's Update-Key before readers decrypt — outer delegations survive; readers wait. S7.7 wants a test: *binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.*
 
-**Cap-rotation on PersonaGroup contraction.** When the operator removes a device from the PersonaGroup, Keyhive's revocation propagates to the admin doc + all PersonaGroup-delegated bags. The removed device loses access to `@personal`/`@draft` at the same time it loses access to the admin doc — atomic by construction.
+''Cap-rotation on PersonaGroup contraction.'' When the operator removes a device from the PersonaGroup, Keyhive's revocation propagates to the admin doc + all PersonaGroup-delegated bags. The removed device loses access to `@personal`/`@draft` at the same time it loses access to the admin doc — atomic by construction.
 
-**Long-term garbage collection.** Not in scope for Sprint 7. A future sprint MAY add operator-facing inspection of binding tiddlers (`lares wiki personal --list`) and explicit revocation (`lares wiki personal --forget <fingerprint>`). For now, bindings accumulate forever and that reads as the correct default.
+''Long-term garbage collection.'' Not in scope for Sprint 7. A future sprint MAY add operator-facing inspection of binding tiddlers (`lares wiki personal --list`) and explicit revocation (`lares wiki personal --forget <fingerprint>`). For now, bindings accumulate forever and that reads as the correct default.
 
 <<~/ahu >>
 
@@ -391,15 +391,15 @@ capability only while the grantor stays reachable, because the grant names
 authority over a resource in the grantor's keeping. A fleet whose only
 capability-grantor sleeps when the authoring device sleeps cannot act.
 
-**The pono move: pre-delegate.** The PersonaGroup reads as an *owned namespace* (the
+''The pono move: pre-delegate.'' The PersonaGroup reads as an *owned namespace* (the
 Meadowcap pattern): the owner key mints *attenuated* delegated capabilities to each
 of its own devices. By pre-delegating the load-bearing capabilities to an
-**always-on device** (the node vessel), the fleet keeps functioning while the
+''always-on device'' (the node vessel), the fleet keeps functioning while the
 authoring device sleeps — the always-on device answers handoffs on the fleet's
 behalf, strictly within the attenuated envelope it holds.
 
-**Push vs pull by liveness.** Treat always-on, reachable devices as push targets for
-a handoff; treat intermittent leaves (phone, closed tab) as **pull / mailbox**
+''Push vs pull by liveness.'' Treat always-on, reachable devices as push targets for
+a handoff; treat intermittent leaves (phone, closed tab) as ''pull / mailbox''
 consumers that drain work when they wake, never push targets. Discovery names a
 candidate; a live broker or a direct probe confirms it lives before a handoff lands.
 
@@ -421,9 +421,9 @@ The handoff names "S9 / lararium-browser S4 real boot" as still in flight (Index
 
 !! Reconciliation with the Residency Model
 
-The approved [residency-model](residency-model.md) coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above the `bags/@{slug}` canon all survive the residency model intact. Three layers compose, one operator gesture:
+The approved [[residency-model|residency-model.md]] coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above the `bags/@{slug}` canon all survive the residency model intact. Three layers compose, one operator gesture:
 
-* The cascade tiddler (`lar:///ha.ka.ba/lararium/config/bag-paths`) routes `$:/StoryList` writes to the personal layer (via `current-wiki-personal`) as a **first-write default**, not authoritative routing. Under the residency model a title MAY have residency in `wikis/@{slug}/personal` AND `bags/@{slug}` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
+* The cascade tiddler (`lar:///ha.ka.ba/lararium/config/bag-paths`) routes `$:/StoryList` writes to the personal layer (via `current-wiki-personal`) as a ''first-write default'', not authoritative routing. Under the residency model a title MAY have residency in `wikis/@{slug}/personal` AND `bags/@{slug}` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
 * The binding tiddler in the admin doc names which Automerge document THIS device, in THIS recipe, mounts at the `wikis/@{slug}/personal` URI.
 * The residency model surfaces `$:/StoryList` as the topmost manifestation in the resolver-defined priority order.
 
@@ -442,14 +442,14 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 5. Inject the resolved URLs into `BagResolver` at manifest time.
 6. Keyhive PersonaGroup grant + capability check on the `@personal` and `@draft` bags.
 7. Tests:
-   - **Single-bag residency (original 7):**
-     - Two devices, same recipe, same PersonaGroup → write StoryList on device A, observe on device B.
-     - Two devices, different recipe, same PersonaGroup → write StoryList on device A, device B sees nothing.
-     - Two devices, same recipe, different PersonaGroup → no cross-talk.
-   - **Multi-bag residency (+2, from residency-model reconciliation):**
-     - **Test 8 (multi-bag overlay):** write `$:/StoryList` in `wikis/@{slug}/personal`, then `lares act ADD --title $:/StoryList --from wikis/@{slug}/personal --to bags/@{slug}`. Assert resolveAll returns both bags; resolveTopmost picks the personal layer per recipe priority; origin-bag field reads `wikis/@{slug}/personal`; the `bags/@{slug}` Manifestation remains visible to `lares wiki resolve $:/StoryList`.
-     - **Test 9 (transfer effect record):** `lares act MOVE --title MyNote --from wikis/@{slug}/personal --to bags/@{slug}` produces one `transfer` effect record pairing accession (`bags/@{slug}`) + deaccession (`wikis/@{slug}/personal`); the deaccession log persists in `wikis/@{slug}/personal/log/residency/` after the tiddler leaves.
-   - **Eventual-consistency (S7.7):** binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
+*** **Single-bag residency (original 7):**
+'''' Two devices, same recipe, same PersonaGroup → write StoryList on device A, observe on device B.
+'''' Two devices, different recipe, same PersonaGroup → write StoryList on device A, device B sees nothing.
+'''' Two devices, same recipe, different PersonaGroup → no cross-talk.
+*** **Multi-bag residency (+2, from residency-model reconciliation):**
+'''' ''Test 8 (multi-bag overlay):'' write `$:/StoryList` in `wikis/@{slug}/personal`, then `lares act ADD --title $:/StoryList --from wikis/@{slug}/personal --to bags/@{slug}`. Assert resolveAll returns both bags; resolveTopmost picks the personal layer per recipe priority; origin-bag field reads `wikis/@{slug}/personal`; the `bags/@{slug}` Manifestation remains visible to `lares wiki resolve $:/StoryList`.
+'''' ''Test 9 (transfer effect record):'' `lares act MOVE --title MyNote --from wikis/@{slug}/personal --to bags/@{slug}` produces one `transfer` effect record pairing accession (`bags/@{slug}`) + deaccession (`wikis/@{slug}/personal`); the deaccession log persists in `wikis/@{slug}/personal/log/residency/` after the tiddler leaves.
+*** **Eventual-consistency (S7.7):** binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
 8. Update memory-store.md @personal references.
 
 <<~/ahu >>
@@ -460,30 +460,30 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 This unified ledger renumbers once; every in-body cross-reference resolves here.
 
-**Slot shape**
+''Slot shape''
 
 Q1 (slot priority order) ✅ approved — `personal` among the per-wiki live slots, above the `bags/@{slug}` canon.
 Q2 (one @personal or per-wiki) ✅ resolved — a per-wiki slot URI (`wikis/@{slug}/personal`); the resolver binds the doc per `(PersonaGroup × recipe-fingerprint)`.
 Q3 (`$:/palette` scope) ✅ resolved — palette routes to the personal layer (operator-across-devices). The cascade rule `[prefix[$:/palette]then{lar:///ha.ka.ba/lararium/config/current-wiki-personal}]` lands above the `$:/state/` catch-all. Custom palette definitions under `$:/palettes/*` are NOT covered — open follow-up if operator-built palettes need to travel across recipes.
 Q4 (fingerprint algorithm) ✅ resolved — SHA-256 over canonical encoding of `(bags/@{slug}-doc-id + sorted libraryBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same rule.
 
-**Binding storage**
+''Binding storage''
 
-Q5 (`recipe-trace` field) ✅ resolved 2026-06-01 — **keep.** Inspection beats minimal storage in early alpha (~200 bytes per binding tiddler).
-Q6 (`@draft` separation in storage) ✅ resolved 2026-06-01 — **split.** One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain.
-Q7 (mint atomicity) ✅ resolved 2026-06-01 — **orphan-tolerant idempotent mint** accepted for early alpha. `repo.create()` → `registerBag()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl (and possibly a registered-but-undelegated Keyhive Document). Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
+Q5 (`recipe-trace` field) ✅ resolved 2026-06-01 — ''keep.'' Inspection beats minimal storage in early alpha (~200 bytes per binding tiddler).
+Q6 (`@draft` separation in storage) ✅ resolved 2026-06-01 — ''split.'' One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain.
+Q7 (mint atomicity) ✅ resolved 2026-06-01 — ''orphan-tolerant idempotent mint'' accepted for early alpha. `repo.create()` → `registerBag()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl (and possibly a registered-but-undelegated Keyhive Document). Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
 
-**Subscription + linkage**
+''Subscription + linkage''
 
 Q8 (subscription gesture) ✅ deferred 2026-05-31 — S7.6 ships with implicit-on-PersonaGroup-membership as the default subscription gesture; the per-wiki explicit opt-out toggle becomes follow-up sprint scope once the operator has lived with the implicit default.
 Q9 (cross-fingerprint linkage) ✅ deferred 2026-06-01 — out of Sprint 7 scope; a future sprint MAY add `lares wiki personal --import-from <fingerprint>`.
 
-**@draft binding**
+''@draft binding''
 
 Q10 (`@draft` scoping) ✅ confirmed — follows the same `(PersonaGroup × recipe-fingerprint)` keying as the personal slot. Per-wiki slot URI `lar:///ha.ka.ba/wikis/@{slug}/draft`, resolver-bound.
-Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice (a).** Operator ruled `@personal` and `@draft` bind **together** per-fingerprint — the #data-model intent holds. The fingerprint-keyed `@draft` **replaces** the boot's ad-hoc draft: the boot draft-mint site (`open-node-vessel.ts:696`) rewires to `resolveOrMintBinding({ kind: "draft-binding", … })`, so both slots converge across the operator's devices. S7.5 binds the pair; neither retires independently. The pseudocode in #vessel-boot-flow reflects this. **Subtlety for enactment:** the boot's existing `registerBag(draftBagId)` (`:594`) must move to (or be subsumed by) the helper's per-fingerprint `@draft` URL — the boot can no longer pre-register a fixed draft bag id ahead of fingerprint resolution.
+Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — ''slice (a).'' Operator ruled `@personal` and `@draft` bind ''together'' per-fingerprint — the #data-model intent holds. The fingerprint-keyed `@draft` ''replaces'' the boot's ad-hoc draft: the boot draft-mint site (`open-node-vessel.ts:696`) rewires to `resolveOrMintBinding({ kind: "draft-binding", … })`, so both slots converge across the operator's devices. S7.5 binds the pair; neither retires independently. The pseudocode in #vessel-boot-flow reflects this. ''Subtlety for enactment:'' the boot's existing `registerBag(draftBagId)` (`:594`) must move to (or be subsumed by) the helper's per-fingerprint `@draft` URL — the boot can no longer pre-register a fixed draft bag id ahead of fingerprint resolution.
 
-**Layering (raised + resolved 2026-06-01):** the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
+''Layering (raised + resolved 2026-06-01):'' the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
 
 <<~/ahu >>
 
@@ -499,7 +499,7 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice
 <<~ loulou lar:///ha.ka.ba/lararium/config/bag-paths >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 
-**Tie ~ palettes as casual register.** A per-operator overlay (palette, view-state) reads as the CASUAL
+''Tie ~ palettes as casual register.'' A per-operator overlay (palette, view-state) reads as the CASUAL
 register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]
 #three-registers).
 

@@ -59,13 +59,13 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 !! Five clauses hold the law
 
-1. **Holds carries composition, refuses essence.** `<<~holds … x … >>` places x
+1. ''Holds carries composition, refuses essence.'' `<<~holds … x … >>` places x
    into a carrier's stack; the carrier wears x, the carrier never turns
    into x. A line that reads `X holds Y` where prose fused `X ${copula} Y`
    clears the ward only once Y resolves to a carrier of its own. The held
    thing speaks; the edge keeps silent.
 
-2. **A holding resolves to a carrier, never to an adjective.** Every
+2. ''A holding resolves to a carrier, never to an adjective.'' Every
    `<<~holds x >>` demands x name a component meme — a thing holding its own
    definition. A bare quality (`<<~holds hot >>`, `<<~holds stable >>`) smuggles the
    dead water back through a quiet door; refuse it. A quality enters a
@@ -75,20 +75,20 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    the one berth a quality keeps — red annotates the holding, never
    black-asserts it, and the aside stays out of the carrier's canonical bytes.
 
-3. **A bare holding reads fertile.** A `<<~holds x >>` whose definition meme has
-   not yet landed stands **declared-unresolved** — lawful, promotable, no
+3. ''A bare holding reads fertile.'' A `<<~holds x >>` whose definition meme has
+   not yet landed stands ''declared-unresolved'' — lawful, promotable, no
    error sounds (the rating ladder governs, per has-stack §4). An absent
    holding reads open-world: the carrier knows nothing of x yet, the
    carrier never pronounces x false. The Arcana holds no vector.
 
-4. **Tables fall to holds by one rule.** A header-and-rows table rewrites
+4. ''Tables fall to holds by one rule.'' A header-and-rows table rewrites
    mechanically: the header vows the families (the column grain); each body
    row authors one carrier, adding one `family/cell` to its `<<~holds … >>` set
    per column it fills. A row skips the columns it leaves empty — open-world omission,
    never a null. The boot's carrier-tables fall to this rule untouched by
    hand; `meme` governs the copy-shape that results.
 
-5. **Ordered runs, crossings, and grades each ride their own verb.** `holds`
+5. ''Ordered runs, crossings, and grades each ride their own verb.'' `holds`
    governs the *set* — composition, order-free, the held things unranked;
    `meme` serializes it one canonical way — NFC, deduped, sorted by family
    then member — so the same set lands the same bytes.
@@ -96,7 +96,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    past a holds-flattening; `#when-not-holds` routes each to its verb —
    `flows`/`loops`, `moves`, `ranks`.
 
-**Two faces, one verb.** `<<~holds f/m f/m … >>` authors a carrier's
+''Two faces, one verb.'' `<<~holds f/m f/m … >>` authors a carrier's
 whole set (the definition face). `<<~holds? f/m >>` asks the predicate
 (the query face) — the `*` wildcard folds the old shapes: `<<~holds? * >>`
 holds anything, `<<~holds? element/* >>` any member of a family. The query
@@ -118,7 +118,7 @@ The Mu table, before — the header vows, the cells honor by position:
 | name | ascii | element | glyph | pull |
 |---|---|---|---|---|
 
-After — one **family constructor** sets the pattern, then each carrier invokes
+After — one ''family constructor'' sets the pattern, then each carrier invokes
 it as a named sigil. The constructor takes two params: `~Type` (the name,
 defaulting to the family's ground member) and `~Params` (the whole holds-body
 as one string — an absent slot just stays unwritten). It hands `~Params` to the
@@ -144,22 +144,22 @@ A stack too wide for one line wears the block form — `<<~holds >>`, one
 
 !! When not to reach for holds ~ the other copula-free grammars
 
-`holds` cures one fused relation: **identity** (`X ${copula} Y`, map
+`holds` cures one fused relation: ''identity'' (`X ${copula} Y`, map
 welded to territory). The dead water welds *other* relations too —
 sequence, crossing, grade — and `holds` flattens each. A row that
 *orders*, *moves*, or *ranks* wants its own verb. Reach past `holds` only
-once a row fails the **compose-test**.
+once a row fails the ''compose-test''.
 
 !!! The diagnostic ~ ask one question
 
-Ask of the row's relation: **what does it DO?** The answer routes the verb.
+Ask of the row's relation: ''what does it DO?'' The answer routes the verb.
 
 | when the relation... | rides... | authors as... | and cures the dead water of... |
 |---|---|---|---|
-| **composes · wears** *(default)* | a holds-set | `<<~holds family/member … >>` | identity |
-| **follows · flows** | a flow-chain | `<<~flows a -> b -> c >>` · `<<~loops … >>` | sequence-fused-as-identity |
-| **moves across** | a transition | `<<~moves X -> Y on/trigger if/guard do/effect >>` | before-welded-to-after |
-| **grades · ranks** | a gradation | `<<~ranks family a -> b -> c >>` | level-welded-to-meaning |
+| ''composes · wears'' *(default)* | a holds-set | `<<~holds family/member … >>` | identity |
+| ''follows · flows'' | a flow-chain | `<<~flows a -> b -> c >>` · `<<~loops … >>` | sequence-fused-as-identity |
+| ''moves across'' | a transition | `<<~moves X -> Y on/trigger if/guard do/effect >>` | before-welded-to-after |
+| ''grades · ranks'' | a gradation | `<<~ranks family a -> b -> c >>` | level-welded-to-meaning |
 
 `holds` carries most of the boot; the other three carry a minority — the
 ordered loops, the graded registers. Default to `holds`; reach past it
@@ -187,7 +187,7 @@ arrow *moves*; nothing welds to anything. (Each ladder earns its own meme;
 A relation that carries a thing *across* conditions — a phase change, a
 degraded-state recovery (a tell, then a recovery) — moves as transition.
 The state-machine grammar runs verb-forward by nature: a transition names
-**what fires it, what gates it, what it does**, and never pronounces the
+''what fires it, what gates it, what it does'', and never pronounces the
 after welded to the before.
 
 ```
@@ -218,8 +218,8 @@ aside and never welds the number to the meaning.
 
 !!! The fork, ruled ~ four verbs, three spines
 
-Ruled 2026-06-14: the law speaks **four verbs** — `holds` · `flows`/`loops`
-· `moves` · `ranks` — over **three spines**. The *set* spine (order-free,
+Ruled 2026-06-14: the law speaks ''four verbs'' — `holds` · `flows`/`loops`
+· `moves` · `ranks` — over ''three spines''. The *set* spine (order-free,
 sorted, deduped) carries `holds`. The *arrow-chain* spine (order-preserving,
 never sorted) carries `flows`/`loops` and `ranks` alike — one bytes-law, two
 readings: the arrow sequences for `flows`, ascends ordinally for `ranks`

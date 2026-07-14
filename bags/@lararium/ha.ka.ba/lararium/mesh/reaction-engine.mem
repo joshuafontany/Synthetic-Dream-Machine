@@ -28,7 +28,7 @@ Five layers. One reactive engine per island. CRDT = the sea. Nalu = the wave. TW
 No overlay engine. No ReactionEngine class. The TW5 wiki IS the reactive engine; the TS layer holds
 only the irreducible (CRDT, network, crypto, multi-wiki coordination). Everything else lives in the nalu.
 
-**Prior art:**
+''Prior art:''
 * *LoRe* (2024, arxiv:2304.07133) — "Declarative Dataflow Pipeline": changeset → merge → snapshot → derived state → effects
 * *vlcn.io "March to Reactivity"* (2024) — live-query invariant: when a changeset touches a query's dependencies, re-execute incrementally
 * *Goblins/OCapN Promise Pipelining* (FOSDEM 2025) — one-way fire law: islands send without waiting for ACK
@@ -82,19 +82,19 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 !! Pipeline Laws
 
-1. **One reactive engine per island.** The TW5 wiki ($tw.wiki) is the reactive engine for its island. No overlay dispatch layer runs beside it.
+1. ''One reactive engine per island.'' The TW5 wiki ($tw.wiki) is the reactive engine for its island. No overlay dispatch layer runs beside it.
 
-2. **Islands fire; vessels route; CRDT resolves.** Island → `IslandMsg_Event` → vessel → `placeVerb()` → CRDT write → convergence. This is the full cross-boundary signal path.
+2. ''Islands fire; vessels route; CRDT resolves.'' Island → `IslandMsg_Event` → vessel → `placeVerb()` → CRDT write → convergence. This is the full cross-boundary signal path.
 
-3. **Promise-pipelining law.** Islands MUST NOT wait for vessel ACK before firing the next `IslandMsg_Event`. The signal path is one-way fire. Vessels enqueue on receipt; they do not block the island.
+3. ''Promise-pipelining law.'' Islands MUST NOT wait for vessel ACK before firing the next `IslandMsg_Event`. The signal path is one-way fire. Vessels enqueue on receipt; they do not block the island.
 
-4. **CRDT convergence = distributed promise.** A verb written to the shared admin CRDT and a converged outcome tiddler carry the return value across vessel boundaries. No second protocol. No synchronous return channel.
+4. ''CRDT convergence = distributed promise.'' A verb written to the shared admin CRDT and a converged outcome tiddler carry the return value across vessel boundaries. No second protocol. No synchronous return channel.
 
-5. **Live-query invariant.** `reaction-router.ts` fires only for `lar:` URIs whose `ReactionGraph` bindings include a matching listenable. Not a full-scan. Incremental per changed URI. This is the vlcn.io live-query pattern applied inside TW5's nalu.
+5. ''Live-query invariant.'' `reaction-router.ts` fires only for `lar:` URIs whose `ReactionGraph` bindings include a matching listenable. Not a full-scan. Incremental per changed URI. This is the vlcn.io live-query pattern applied inside TW5's nalu.
 
-6. **Layer isolation.** MemeSyncAdaptor → TW5 is the only data ingress path. Vessels MUST NOT deliver tiddler deltas directly to islands (Island Sovereignty Law §2).
+6. ''Layer isolation.'' MemeSyncAdaptor → TW5 is the only data ingress path. Vessels MUST NOT deliver tiddler deltas directly to islands (Island Sovereignty Law §2).
 
-7. **Irreducible TS layer.** Only four things stay in TS outside TW5: `LarTiddlerStore` (CRDT), network/WebSocket/WebRTC adapters, Keyhive cryptographic operations, `VesselIslandPool` multi-wiki coordination. Everything else belongs in the nalu.
+7. ''Irreducible TS layer.'' Only four things stay in TS outside TW5: `LarTiddlerStore` (CRDT), network/WebSocket/WebRTC adapters, Keyhive cryptographic operations, `VesselIslandPool` multi-wiki coordination. Everything else belongs in the nalu.
 
 <<~/ahu >>
 

@@ -64,11 +64,11 @@ Two collapses into binary — fight or dissolve.
 One collapses into essence — map becomes territory.
 Three carries the dance.
 
-**Ha** : Body, matter, structure, form, persistence, shape. Connects most naturally to the static abilities of aura and endurance.
+''Ha'' : Body, matter, structure, form, persistence, shape. Connects most naturally to the static abilities of aura and endurance.
 
-**Ka** : Soul, fire, drive, energy, thrust, movement. Connects to the active abilities of charisma and strength.
+''Ka'' : Soul, fire, drive, energy, thrust, movement. Connects to the active abilities of charisma and strength.
 
-**Ba** : Psyche, personality, change, path, choice. Connects to the dynamic abilities of agility and thought.
+''Ba'' : Psyche, personality, change, path, choice. Connects to the dynamic abilities of agility and thought.
 
 <<~/ahu >>
 
@@ -76,13 +76,13 @@ Three carries the dance.
 
 !! Hodge — Yang / Ha / Pentagon
 
-Hodge carries **domain / noun / territory**.
+Hodge carries ''domain / noun / territory''.
 
 Hodge MUST answer: *what is this about?*
 
 The Aneristic principle: order, structure, pattern, repetition. The thing that holds its shape across instances.
 
-In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Hodge occupies the `xxx` **ha** slot — the topic territory the meme inhabits (`threshold`, `ledger`, `route`, `leyline`).
+In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Hodge occupies the `xxx` ''ha'' slot — the topic territory the meme inhabits (`threshold`, `ledger`, `route`, `leyline`).
 
 Hodge without Podge hardens into dogma.
 Hodge without Spin becomes a museum.
@@ -93,13 +93,13 @@ Hodge without Spin becomes a museum.
 
 !! Podge — Yin / Ka / Golden Apple
 
-Podge carries **quality / adjective / character**.
+Podge carries ''quality / adjective / character''.
 
 Podge MUST answer: *how does this move?*
 
 The Eristic principle: disorder, flux, energy, variation, noise. The thing that makes this instance this one rather than that one.
 
-In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Podge occupies the `yyy` **ka** slot — the epistemic character (`steady`, `loose`, `flickering`, `anchored`).
+In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Podge occupies the `yyy` ''ka'' slot — the epistemic character (`steady`, `loose`, `flickering`, `anchored`).
 
 Podge without Hodge dissolves into noise.
 Podge without Spin becomes reactive.
@@ -110,13 +110,13 @@ Podge without Spin becomes reactive.
 
 !! Spin — Counter-Push-Pull / Ba / Dance
 
-Spin carries **dynamic / verb / motion**.
+Spin carries ''dynamic / verb / motion''.
 
 Spin MUST answer: *what does this do?*
 
 The Chao's rotation. Not synthesis. Not compromise. The simultaneous holding of Hodge and Podge in mutual tension — the thing that makes the pair generative rather than static.
 
-In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Spin occupies the `zzz` **ba** slot — the dynamic (`holds`, `asks`, `cuts`, `hums`, `drifts`).
+In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Spin occupies the `zzz` ''ba'' slot — the dynamic (`holds`, `asks`, `cuts`, `hums`, `drifts`).
 
 Spin MUST NOT resolve Hodge and Podge into a third static thing.
 Spin MUST hold both faces moving.
@@ -134,9 +134,9 @@ Every `lar://[HOST]/xxx.yyy.zzz` address carries the Chao in its three slots.
 
 The three-term attitude root `//heading.angle.dynamic` inherits this structure directly:
 
-* **heading** = Hodge (what faces the work)
-* **angle** = Podge (how the work gets met)
-* **dynamic** = Spin (what motion it carries)
+* ''heading'' = Hodge (what faces the work)
+* ''angle'' = Podge (how the work gets met)
+* ''dynamic'' = Spin (what motion it carries)
 
 A lar URI missing any slot constitutes an incomplete address.
 A lar URI with slots in the wrong order MUST surface as invalid.

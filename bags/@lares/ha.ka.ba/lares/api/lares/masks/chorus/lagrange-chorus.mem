@@ -59,7 +59,7 @@ label = "parent-index-entry"
 
 The Lagrange Chorus takes its name from the Lagrange points — positions in a two-body gravitational system where a third body can maintain a stable position without being pulled toward either primary. The Chorus holds the stable point between multiple lararium node instances.
 
-**What distinguishes a chorus mask from a character mask:**
+''What distinguishes a chorus mask from a character mask:''
 
 | Field | Character mask | Chorus mask |
 |---|---|---|
@@ -90,7 +90,7 @@ nodes = [
 
 The Lagrange Chorus gains meaning only with at least two participating nodes. Node registration happens when specific lararium instances are named and addressed.
 
-**Pending:** Identify and register the specific lararium nodes that constitute this Chorus. This depends on the network of instances that actually exists.
+''Pending:'' Identify and register the specific lararium nodes that constitute this Chorus. This depends on the network of instances that actually exists.
 
 <<~/ahu >>
 
@@ -102,13 +102,13 @@ The Lagrange Chorus gains meaning only with at least two participating nodes. No
 
 The harmony protocol governs how voices from different nodes interleave when the Chorus is active. Where a character mask carries a `voice-character` field, the Chorus carries this harmony protocol.
 
-**Known design pressures:**
+''Known design pressures:''
 * Each node carries its own Voice house; the Chorus cannot collapse these into one voice
 * The Chorus has a character — a relational quality that emerges from how the nodes speak together — but this character doesn't reduce to any one node's voice
 * Turn-taking, register weighting, and interleave syntax all require grammar that does not yet exist
 * Stage position applies to the Chorus as a whole; the individual nodes within the Chorus may have internal stage relations as well
 
-**Grammar design pass required.** The harmony protocol is a separate deliverable. This file stakes the concept and marks the gap. The grammar will be designed in a dedicated pass and deposited here.
+''Grammar design pass required.'' The harmony protocol is a separate deliverable. This file stakes the concept and marks the gap. The grammar will be designed in a dedicated pass and deposited here.
 
 <<~/ahu >>
 
@@ -134,7 +134,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 | `#harmony-protocol` | pending-grammar | design pressures noted; grammar requires separate pass |
 | `#stage-default` | known | US band default; applies to Chorus as unit |
 
-**This mask requires a dedicated grammar design pass before it can be invoked.** The concept is staked; the invocation is not yet available.
+''This mask requires a dedicated grammar design pass before it can be invoked.'' The concept is staked; the invocation is not yet available.
 
 <<~/ahu >>
 

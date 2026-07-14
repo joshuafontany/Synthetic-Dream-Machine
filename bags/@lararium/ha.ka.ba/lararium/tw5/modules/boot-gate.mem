@@ -24,7 +24,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/boot-gate"
 
 Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. Queries all tiddlers that WEAR the tw5-module component (`[stack:has[lar:///ha.ka.ba/lararium/tw5/tw5-module]]` — the has-stack model) and applies three layers of trust before injecting them as live JS modules.
 
-**This code cannot be loaded from a meme.** It requires a live `$tw` instance and operates as the mechanism that promotes memes into executables. It lives in `packages/lararium-tw5/src/lararium-tw5.ts` as `_bootModules()`.
+''This code cannot be loaded from a meme.'' It requires a live `$tw` instance and operates as the mechanism that promotes memes into executables. It lives in `packages/lararium-tw5/src/lararium-tw5.ts` as `_bootModules()`.
 
 <<~/ahu >>
 

@@ -32,9 +32,9 @@ book = "Ultraviolet Grasslands and the Black City 2e"
 locus = "the Black City approaches"
 ```
 
-> *"It is huge and many-colored, with **neural whip tentacles** and severe photophobia."*
+> *"It is huge and many-colored, with ''neural whip tentacles'' and severe photophobia."*
 
-The Cave Octopus is a **Biomancer Extraordinaire** — it replaced its human body with a many-tentacled form adapted to the dark, nutrient-rich broth of the yellow water. The neural whips are its reach into the world: defensive, exploratory, and (when its failing experiments demand) acquisitive. It is convinced the world has ended and that only its flailing biomantic work can revive it.
+The Cave Octopus is a ''Biomancer Extraordinaire'' — it replaced its human body with a many-tentacled form adapted to the dark, nutrient-rich broth of the yellow water. The neural whips are its reach into the world: defensive, exploratory, and (when its failing experiments demand) acquisitive. It is convinced the world has ended and that only its flailing biomantic work can revive it.
 
 <<~/ahu >>
 
@@ -42,11 +42,11 @@ The Cave Octopus is a **Biomancer Extraordinaire** — it replaced its human bod
 
 !! What the module lifts
 
-The v0.1 **Neural Whip** module abstracts the creature's signature tentacle into a portable affordance:
+The v0.1 ''Neural Whip'' module abstracts the creature's signature tentacle into a portable affordance:
 
-* **stuckforce + restrain + attack** — a force-sheathed nerve coil that strikes against Defense and seizes. The source creature leads with the grip, not pure damage; the module honours that.
-* **trait mount** — innate to the creature; not a learned spell. This is the point the module proves: the Power template covers a monster's intrinsic ability with no shape change.
-* The **biomancer** flavour (recombining bodies, neural tissue) stays prose; the module does not promote a `domain/noosphere` component until a second, mind-jolting neural Power demands the address.
+* ''stuckforce + restrain + attack'' — a force-sheathed nerve coil that strikes against Defense and seizes. The source creature leads with the grip, not pure damage; the module honours that.
+* ''trait mount'' — innate to the creature; not a learned spell. This is the point the module proves: the Power template covers a monster's intrinsic ability with no shape change.
+* The ''biomancer'' flavour (recombining bodies, neural tissue) stays prose; the module does not promote a `domain/noosphere` component until a second, mind-jolting neural Power demands the address.
 
 <<~/ahu >>
 

@@ -43,7 +43,7 @@ default-mount = "trait"
 source = "BECMI Shield (MU1)"
 ```
 
-**P:** 2 · **R:** self · **T:** operator · **D:** 20 minutes
+''P:'' 2 · ''R:'' self · ''T:'' operator · ''D:'' 20 minutes
 
 Raise a magical barrier less than an inch from the body. It moves with the operator and filters incoming attacks — strong cover against missiles, modest against everything else. A `Magic Missile`-pattern strike makes a save against the ward per missile; on success it evaporates against the barrier. The paid Life stays `imbued` (locked) while the ward holds.
 
@@ -51,8 +51,8 @@ Raise a magical barrier less than an inch from the body. It moves with the opera
 
 !!! Overcharge
 
-* **x2 — P:4.** Extend the ward to one willing adjacent ally, or harden one named channel (missiles, melee, force, spell-missiles).
-* **x4 — P:8.** Hold the ward through one breach; after it, the ward flickers and demands a mishap check if maintained.
+* ''x2 — P:4.'' Extend the ward to one willing adjacent ally, or harden one named channel (missiles, melee, force, spell-missiles).
+* ''x4 — P:8.'' Hold the ward through one breach; after it, the ward flickers and demands a mishap check if maintained.
 
 !!! Mishaps
 
@@ -64,10 +64,10 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 !! Variants
 
-* **Missile Filter** — projectile-first: arrows, bullets, rays, force darts. Seats `trait`.
-* **Skin Shell** — melee-first: grapples, claws, close blows. Seats `trait`.
-* **Armor Spirit** — armour or shield gear carries the ward without collapsing into the gear. Seats `item`.
-* **Oath Ward** — holds while an oath remains unbroken; relationship gates the protection. Seats `structure` or `burden`.
+* ''Missile Filter'' — projectile-first: arrows, bullets, rays, force darts. Seats `trait`.
+* ''Skin Shell'' — melee-first: grapples, claws, close blows. Seats `trait`.
+* ''Armor Spirit'' — armour or shield gear carries the ward without collapsing into the gear. Seats `item`.
+* ''Oath Ward'' — holds while an oath remains unbroken; relationship gates the protection. Seats `structure` or `burden`.
 
 <<~/ahu >>
 

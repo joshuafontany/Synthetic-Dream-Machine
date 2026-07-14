@@ -66,31 +66,31 @@ Stored as a frozen dataclass so that edge records remain hashable and sortable.
 | `confidence` | `float \| None` | `confidence` field in TOML | `None` |
 | `render_mode` | `str \| None` | `render-mode` field in TOML | `None` |
 
-**Family values:** `control`, `relation`, `dataflow`, `message`, `constraint`, `observe`
+''Family values:'' `control`, `relation`, `dataflow`, `message`, `constraint`, `observe`
 
-**Lifecycle values:** `template`, `instance`, `trace`
+''Lifecycle values:'' `template`, `instance`, `trace`
 
-**Role values:** `owns`, `references`, `composes`, `constrains`, `implements`, or `None`
+''Role values:'' `owns`, `references`, `composes`, `constrains`, `implements`, or `None`
 
-**Cardinality values:** `one-to-one`, `one-to-many`, `many-to-one`, `many-to-many`, or `None`
+''Cardinality values:'' `one-to-one`, `one-to-many`, `many-to-one`, `many-to-many`, or `None`
 
-**Polarity values:** `affirming`, `negating`, `contrasting`, `neutral`, or `None`
+''Polarity values:'' `affirming`, `negating`, `contrasting`, `neutral`, or `None`
 
-**Status values (instance lifecycle):** `declared`, `bound`, `observed`, `stale`
+''Status values (instance lifecycle):'' `declared`, `bound`, `observed`, `stale`
 * `declared` — edge appears in authored form
 * `bound` — all required fields for its family are present
 * `observed` — a runtime or tool pass witnessed the edge firing (does not replace `trace` lifecycle)
 * `stale` — edge no longer matches the current carrier context
 
-**Independence law (from canonical pranala kānāwai):**
+''Independence law (from canonical pranala kānāwai):''
 `family`, `role`, `traversal`, and `propagation` are four independent concerns and MUST NOT collapse into each other.
 A single `control` edge MAY carry `traversal: source-to-target` AND `propagation: push-back` simultaneously.
 
-**Hydration-critical predicate:**
+''Hydration-critical predicate:''
 An edge gates hydration order when `family == "control"`.
 `role` carries ownership semantics independently; the boot walk does not require `role` to determine traversal order.
 
-**Sugar-form origins:**
+''Sugar-form origins:''
 * `<<~ loulou URI >>` → `family="relation"`, `lifecycle="instance"`, `role=None`
 * `<<~ aka URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
 * `<<~ kahea URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
@@ -104,10 +104,10 @@ An edge gates hydration order when `family == "control"`.
 One resolved carrier in the graph. Class name `Meme` preferred; `CarrierMeme` is a fallback if module namespace collision requires disambiguation. Decision deferred to Phase 1.
 Built from a `CarrierRecord` (ingress result from `carrier.py`) plus content hash.
 
-**Locus (subtype):**
+''Locus (subtype):''
 A meme that carries `control/implements` edges pointing to pono interface URIs is a locus. The subtype name `Locus` remains valid for code paths that need to distinguish interface-implementing memes. It does not replace `Meme` as the general node name.
 
-**ECS parallel (UEFN Scene Graph):**
+''ECS parallel (UEFN Scene Graph):''
 A meme maps to `entity` — a pure URI container with no embedded business logic.
 Each `control/implements` edge maps to a `component` attachment — a capability interface the meme declares.
 A `lifecycle: template` pranala edge maps to a `prefab` — declared connectivity the compiler stamps into the walk.
@@ -125,7 +125,7 @@ The compiler adds and removes memes via `add_meme` / `dispose` semantics (childr
 | `virtual` | `bool` | resolver flag | `False` |
 | `exists` | `bool` | `path.exists()` for file-backed | `False` for virtual |
 
-**Content hash contract:**
+''Content hash contract:''
 
 ```
 meme_hash = SHA256(uri + ":" + file_bytes)
@@ -163,9 +163,9 @@ Neither causes the compilation to abort; the artifact remains valid with a `Fals
 Adjacency structure over all reachable memes.
 Built incrementally as the compiler reads carriers and parses their pranala edges.
 
-**Uncertainty:** class name `MemeGraph` preferred; `Graph` is a plausible shorter form once the module namespace makes the referent clear. Decision deferred to Phase 1.
+''Uncertainty:'' class name `MemeGraph` preferred; `Graph` is a plausible shorter form once the module namespace makes the referent clear. Decision deferred to Phase 1.
 
-**Internal structure:**
+''Internal structure:''
 
 ```
 memes: dict[str, Meme]
@@ -175,7 +175,7 @@ adjacency: dict[str, dict[str, list[PranalaEdge]]]
     family → from_uri → [PranalaEdge, ...]
 ```
 
-**Core operations:**
+''Core operations:''
 
 | Method | Signature | Behaviour |
 |---|---|---|
@@ -186,7 +186,7 @@ adjacency: dict[str, dict[str, list[PranalaEdge]]]
 | `topological_sort` | `(uri_set)` → `list[str]` | Kahn's algorithm (in-degree BFS) restricted to given URI set |
 | `closure_hash` | `(uri_list, edge_list)` → `str` | SHA256 of sorted meme hashes + serialised edge records |
 
-**Depset traversal orders supported:**
+''Depset traversal orders supported:''
 
 * `postorder` — leaves before roots (dependency resolution order)
 * `preorder` — roots before leaves (hydration loading order)
@@ -224,9 +224,9 @@ A virtual resource that maps a `meme_hash` value back to the raw carrier text.
 
 The resolver expands `lar:///CONTENT/sha256:{hex}` → reads the matching meme from disk (looked up by reverse hash map) and returns its text.
 
-**Purpose:** a client can request a single meme by content address without knowing its URI path — useful for cache miss fills and cross-session identity.
+''Purpose:'' a client can request a single meme by content address without knowing its URI path — useful for cache miss fills and cross-session identity.
 
-**Index contract:**
+''Index contract:''
 
 | Index | URI | Content |
 |---|---|---|

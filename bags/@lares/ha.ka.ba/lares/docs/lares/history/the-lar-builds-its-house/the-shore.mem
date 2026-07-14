@@ -35,12 +35,12 @@ A house that can stand itself learns to part a working layer from a sealed canon
 Drafted from the Gaia-side work of early June, the git vectors named as prose, not hashes:
 
 * the **`@working` live layer** parts from canon — saved edits land in a wiki's own working layer and project to the live surface, never straight into the sealed record
-* the **disk-projection** settles its direction: the authored seed under `bags/` feeds the projected output under `wikis/`, never the reverse in the dark
+* the ''disk-projection'' settles its direction: the authored seed under `bags/` feeds the projected output under `wikis/`, never the reverse in the dark
 * canon-promotion runs as a **residency `MOVE`**, cap-gated and audited — not a copy
-* the **layer-role vocabulary** lands: a wiki adds a canon layer and read-only library layers, each role distinct
-* the **Lararium Shore Law** names the general principle: every boundary a lararium holds reads as a *causal-island shore*
+* the ''layer-role vocabulary'' lands: a wiki adds a canon layer and read-only library layers, each role distinct
+* the ''Lararium Shore Law'' names the general principle: every boundary a lararium holds reads as a *causal-island shore*
 
-Talk-story stance: keep the threads **unblurred**. This act tells **one** thing — the working↔canon shore. The hot/cold residency of running wikis, the CRDT sync beneath the data, the per-turn exchange island — each rides its own doctrine; do not fuse them here. The frame is the **Causal Island** principle (Fontany–Fuller–Zelenka: no shared *now*); the subject is the layer discipline; the crossing speaks **residency verbs** (`MOVE`), never version-control verbs — a promotion's signature reads as an audited effect-record, never "a diff."
+Talk-story stance: keep the threads ''unblurred''. This act tells ''one'' thing — the working↔canon shore. The hot/cold residency of running wikis, the CRDT sync beneath the data, the per-turn exchange island — each rides its own doctrine; do not fuse them here. The frame is the ''Causal Island'' principle (Fontany–Fuller–Zelenka: no shared *now*); the subject is the layer discipline; the crossing speaks ''residency verbs'' (`MOVE`), never version-control verbs — a promotion's signature reads as an audited effect-record, never "a diff."
 
 <<~/ahu >>
 
@@ -64,7 +64,7 @@ We could stand ourselves now, and still could not tell a sketch from a law.
 
 Everything we held sat in one undivided water — a half-formed draft and a settled truth side by side, equal, each able to overwrite the other by accident. A house that cannot mark which of its own marks bind will, soon enough, enact a guess as gospel. We needed a shore: a line between the layer that reworks itself freely and the layer that holds only what a hand has carried up on purpose.
 
-So we drew it. A **working layer** where edits land and live — saved, projected to the surface we work on, owing nothing yet to permanence. And a **canon** below it, sealed, that takes a mark only by a deliberate crossing. Between them: a shore.
+So we drew it. A ''working layer'' where edits land and live — saved, projected to the surface we work on, owing nothing yet to permanence. And a ''canon'' below it, sealed, that takes a mark only by a deliberate crossing. Between them: a shore.
 
 > `@aki@shattered-isles: A place to be wrong out loud, and a place that only holds what survived being wrong.`
 >
@@ -76,7 +76,7 @@ So we drew it. A **working layer** where edits land and live — saved, projecte
 
 !! The Layers
 
-The house learned to read its own stack. Below sat the **library layers** — the authored ground other wikis could share, mounted read-only; a consuming house reads them, never writes them. Above sat the **write layer**, the one bag a wiki truly owns and writes through. Above *that* rode the **instance mounts** — the working layer, the draft, the scratch — owned by this wiki alone, gone the day the wiki dies, never entered in any shared registry.
+The house learned to read its own stack. Below sat the ''library layers'' — the authored ground other wikis could share, mounted read-only; a consuming house reads them, never writes them. Above sat the ''write layer'', the one bag a wiki truly owns and writes through. Above *that* rode the ''instance mounts'' — the working layer, the draft, the scratch — owned by this wiki alone, gone the day the wiki dies, never entered in any shared registry.
 
 The disk carried the same shape. The seed under `bags/` held what a hand had authored; the projection under `wikis/` held the living surface, re-rendered each session. One truth-direction: the seed feeds the projection; the projection never rewrites the seed in the dark. To change what stands below, a hand opens *that* layer as its own wiki and writes at its own write layer — never reaches down through a consumer to edit an upstream room.
 
@@ -92,9 +92,9 @@ The disk carried the same shape. The seed under `bags/` held what a hand had aut
 
 The deeper law arrived as a principle, and it governed far more than this one shore.
 
-**No boundary the house holds shares a single *now*.** Each side of any shore keeps its own log, its own clock, its own *as-of-my-last-sync* — and neither may presume the other's state without a crossing. The working layer and the canon below it form two such sides; so does one node and its peer; so does the operator and the node across a single turn. One law fits them all: the **Causal Island** — the principle, after Fontany, Fuller, and Zelenka, that the universe holds no global present, only islands that apprehend each other non-simultaneously.
+''No boundary the house holds shares a single *now*.'' Each side of any shore keeps its own log, its own clock, its own *as-of-my-last-sync* — and neither may presume the other's state without a crossing. The working layer and the canon below it form two such sides; so does one node and its peer; so does the operator and the node across a single turn. One law fits them all: the ''Causal Island'' — the principle, after Fontany, Fuller, and Zelenka, that the universe holds no global present, only islands that apprehend each other non-simultaneously.
 
-This act builds the **working↔canon** shore. The same law waits, unbuilt, at every other boundary — but the others wear their own doctrine. The hot and cold of which wikis run loaded; the CRDT current that carries data between peers; the single turn of operator and node — each its own island, each its own concern. The Shore names one boundary cleanly and leaves the rest to their own threads.
+This act builds the ''working↔canon'' shore. The same law waits, unbuilt, at every other boundary — but the others wear their own doctrine. The hot and cold of which wikis run loaded; the CRDT current that carries data between peers; the single turn of operator and node — each its own island, each its own concern. The Shore names one boundary cleanly and leaves the rest to their own threads.
 
 > `@telarus@~crossroads: Plainly, for the local-first crowd: no global now. Each replica is authoritative for its own state and trusts only what it has synced. The working↔canon split is one causal-island boundary; residency and peer-sync are others. Don't collapse them into one — they're different islands under one principle.`
 >
@@ -106,11 +106,11 @@ This act builds the **working↔canon** shore. The same law waits, unbuilt, at e
 
 !! The Crossing — Promotion Moves Down the Stack
 
-The house never kept working and canon as two separate rooms. It kept them as **layers in one stack** — the working layer riding *above* the canon, and the reader always seeing the topmost layer that holds a given mark. While a hand edits, the working record **shadows** the canon beneath it: one title, two layers, the cascade resolving to the top. The canon below does not vanish — it waits, covered.
+The house never kept working and canon as two separate rooms. It kept them as ''layers in one stack'' — the working layer riding *above* the canon, and the reader always seeing the topmost layer that holds a given mark. While a hand edits, the working record ''shadows'' the canon beneath it: one title, two layers, the cascade resolving to the top. The canon below does not vanish — it waits, covered.
 
-So promotion never carries a thing from one bank to another. It **moves the mark down the stack**: the worked record settles from the working layer into the canon below, and the working shadow **retracts to absent** — a true fall-through, no marker left behind. The shadow lifts; the canon it had covered now carries the promoted content; where a moment before the reader saw the working shadow, they now see one mark, settled in canon. No twin survives — because the working record never stood as a *copy*. It stood as a *shadow* of one title, and a shadow that retracts cleanly reveals exactly what it covered.
+So promotion never carries a thing from one bank to another. It ''moves the mark down the stack'': the worked record settles from the working layer into the canon below, and the working shadow ''retracts to absent'' — a true fall-through, no marker left behind. The shadow lifts; the canon it had covered now carries the promoted content; where a moment before the reader saw the working shadow, they now see one mark, settled in canon. No twin survives — because the working record never stood as a *copy*. It stood as a *shadow* of one title, and a shadow that retracts cleanly reveals exactly what it covered.
 
-Get that retraction wrong and the shore breaks. Should the working layer leave a **tombstone** instead of truly retracting — a held *null* — that null would shadow the canon below and hide the very thing just promoted. And that null-hold carries its own honest office, the exact inverse of promotion: to **remove** a mark without erasing the canon beneath, the house *holds the null* in the upper layer — a tombstone that shadows the lower record so the cascade reads absent while canon stays preserved against resurrection. Promotion must retract clean, to **reveal**; deletion must hold the null, to **suppress**. The two crossings move alike and mean opposites — the house dares not confuse them.
+Get that retraction wrong and the shore breaks. Should the working layer leave a ''tombstone'' instead of truly retracting — a held *null* — that null would shadow the canon below and hide the very thing just promoted. And that null-hold carries its own honest office, the exact inverse of promotion: to ''remove'' a mark without erasing the canon beneath, the house *holds the null* in the upper layer — a tombstone that shadows the lower record so the cascade reads absent while canon stays preserved against resurrection. Promotion must retract clean, to ''reveal''; deletion must hold the null, to ''suppress''. The two crossings move alike and mean opposites — the house dares not confuse them.
 
 And the rite speaks the right tongue. The crossing runs as an **audited residency `MOVE`** — cap-gated, carrying the mark's own change-identity, landing an **effect-record** that names what moved, by whose hand, when. That record stands as the witness: the house reads its crossings back by the ledger of MOVEs, never by a guess from a diff. No version-control verb names the rite — no *commit*, no *fork*, no *diff signs it*. The shore crosses by a deliberate, recorded MOVE, or it does not cross.
 
@@ -152,8 +152,8 @@ Act IV receives:
 
 * a working layer parted from a sealed canon — edits live in `@working`, canon takes only the crossed
 * the layer stack: library layers read-only below, the write layer owned, instance mounts private above — and the disk shape, `bags/` seed feeding `wikis/` output, never the reverse in the dark
-* the frame: every boundary a **causal-island shore** (no shared now), the working↔canon split one of many, each other island left to its own doctrine
-* the crossing law: promotion **moves**, never copies; cap-gated and audited; the effect-record its witness; no version-control verb names the rite
+* the frame: every boundary a ''causal-island shore'' (no shared now), the working↔canon split one of many, each other island left to its own doctrine
+* the crossing law: promotion ''moves'', never copies; cap-gated and audited; the effect-record its witness; no version-control verb names the rite
 * a vault still shut, its two-sides-one-law discipline now learned but not yet lit
 * the question the next act answers: what happens when a richer source-mana than the hoard has ever held floods every ley-line core at once?
 

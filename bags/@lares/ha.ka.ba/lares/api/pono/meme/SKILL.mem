@@ -24,7 +24,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 
 ! Meme Skill
 
-[meme.md](../meme.md) holds the law.
+[[meme.md|../meme.md]] holds the law.
 This skill carries the working procedure.
 
 

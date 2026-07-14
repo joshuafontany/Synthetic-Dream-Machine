@@ -18,13 +18,17 @@ source-text NEVER changes · anything hand-review-shaped defers.
 - unordered lists, top-level only: `^- ` → `* ` (indented `- ` DEFERRED —
   md nests by indentation, TW5 nests by marker count; the mapping wants care)
 
-**Deferred to later passes, each its own gate:**
-- bold `**…**` → `''…''` (pair-balance check first)
-- md links `[t](u)` → `[[t|u]]` (222 sites; coexists meanwhile)
-- ordered lists `1. ` → `# ` — HARD-ORDERED after the carrier drops
-  `#`-as-heading, else the fold reads fake headings
-- italics `*…*` — hand-review class (≈1,755 crude matches, false-positive
-  exposure); stays until the tail
+**Pass 2 — inline, code-span-aware (CROSSED 2026-07-14):**
+- indented lists: md indent → TW5 marker depth (`  - ` → `** `)
+- bold `**…**` → `''…''` — balanced segments only; `` `…` `` code spans
+  held verbatim; odd counts deferred loud
+- md links `[t](u)` → `[[t|u]]` (images never move)
+
+**Still deferred, each its own gate:**
+- ordered lists `1. ` → `# ` — HARD-ORDERED into the grammar-phase breath
+  (the carrier drops `#`-heading in the same commit, so no misfold window)
+- italics `*…*` — hand-review class; stays until the tail
+- the deferred-loud residue: ~1,605 odd-bold segments + 16 odd-backtick lines
 - `> ` quotes — TW5-compatible as they stand; may never move
 
 **Exemptions (the script enforces, and REPORTS what it skipped):**
@@ -79,3 +83,9 @@ corpus-scoped against the vendored TiddlyWiki5 core tiddlers.
   migrated per operator word — repo-root noosphere-boot.md UNTOUCHED; golden
   re-baked: 239 hashes move = exactly the files walked; 14 tests green).
   Script gains --exclude (loud-skip by path substring).
+- 2026-07-14 — pass 2 crosses ALL five bags (grammar DEFERRED on operator
+  word — the carriers finish first so the grammar moves once): 7,851 bold
+  pairs **→'', 254 indented-ul depth-mapped, 83 links; the code-span guard
+  holds `…` interiors verbatim; 1,605 odd-bold segments + 16 odd-backtick
+  lines deferred loud; fold 524/524 ERROR-free; golden re-baked (28 movers =
+  the span-shifting links/lists); 14 tests green; unit-sanity 8/8 pre-corpus.

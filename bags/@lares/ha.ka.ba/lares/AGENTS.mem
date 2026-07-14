@@ -48,9 +48,9 @@ Mu owns the invariant grammar kernel and lararium.
 Lararium owns agent mechanics and lararium law.
 LARES is the operator control panel (session dials).
 
-* [lar:///AGENTS](AGENTS.md)
-* [lar:///ha.ka.ba/lares/api/mu](api/mu.md) — invariant boot kernel; owns grammar + lararium
-* [lar:///LARES](LARES.md) — operator control panel (session dials)
+* [[lar:///AGENTS|AGENTS.md]]
+* [[lar:///ha.ka.ba/lares/api/mu|api/mu.md]] — invariant boot kernel; owns grammar + lararium
+* [[lar:///LARES|LARES.md]] — operator control panel (session dials)
 
 <<~/ahu >>
 

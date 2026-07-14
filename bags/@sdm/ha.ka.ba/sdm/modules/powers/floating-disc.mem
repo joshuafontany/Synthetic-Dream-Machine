@@ -42,14 +42,14 @@ default-mount = "trait"
 source = "Ultraviolet Grasslands and the Black City 2e"
 ```
 
-**P:** 2 · **R:** 30m · **T:** point · **D:** 1 hour
+''P:'' 2 · ''R:'' 30m · ''T:'' point · ''D:'' 1 hour
 
 Create a concave disc of stuckforce one metre across. It hovers at waist height, takes a load, and follows or is pushed at a walking pace. Tilt it and it becomes an almost impenetrable barrier — a wall, a bridge, a roof. It veers from collisions rather than ramming. The disc vanishes if it travels more than 30m from the operator, dropping whatever it carried.
 
 !!! Overcharge
 
-* **x2 — P:4.** The disc spans up to 5m and moves at the operator's spoken command.
-* **x4 — P:8.** Two discs, or one that bears a creature safely (a stretcher, a lift).
+* ''x2 — P:4.'' The disc spans up to 5m and moves at the operator's spoken command.
+* ''x4 — P:8.'' Two discs, or one that bears a creature safely (a stretcher, a lift).
 
 !!! Mishaps
 
@@ -61,10 +61,10 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 
 !! Variants
 
-* **Mage's Mule** — cargo-first: salvage, loot, casualty evacuation, caravan logistics. Seats `trait` or `item`.
-* **Shield of the Righteous** — barrier-first: tilted cover, bridge-making, corridor denial. Seats `trait`.
-* **Stuckforce Relic** — a found disc or pebble-machine holds position until pushed. Seats `item`.
-* **Shrine Porter** — a shrine grants cargo support for offerings or pilgrims. Seats `structure`.
+* ''Mage's Mule'' — cargo-first: salvage, loot, casualty evacuation, caravan logistics. Seats `trait` or `item`.
+* ''Shield of the Righteous'' — barrier-first: tilted cover, bridge-making, corridor denial. Seats `trait`.
+* ''Stuckforce Relic'' — a found disc or pebble-machine holds position until pushed. Seats `item`.
+* ''Shrine Porter'' — a shrine grants cargo support for offerings or pilgrims. Seats `structure`.
 
 <<~/ahu >>
 

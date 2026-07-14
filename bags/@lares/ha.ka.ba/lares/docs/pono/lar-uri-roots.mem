@@ -35,13 +35,13 @@ The resolver classifies the root segment before walking the child path.
 
 A hostless `lar:///` URI of the form `lar:///ROOT/child/path` resolves as follows:
 
-**caps-file roots** — resolve against the lares/ directory tree on disk.
+''caps-file roots'' — resolve against the lares/ directory tree on disk.
 These are the operator-authored corpus roots. The resolver maps root → directory.
 
-**virtual caps roots** — resolve to in-memory or computed records.
+''virtual caps roots'' — resolve to in-memory or computed records.
 No disk file exists; the resolver synthesizes the result at query time.
 
-**stable tuple root** — `ha.ka.ba` names the invariant API tuple space.
+''stable tuple root'' — `ha.ka.ba` names the invariant API tuple space.
 All canonical infrastructure memes live under `lar:///ha.ka.ba/lares/api/`.
 The tuple root does not resolve via the caps-file mechanism; it resolves
 through the Automerge doc store and lares/ hydration path.

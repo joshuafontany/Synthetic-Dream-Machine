@@ -34,7 +34,7 @@ holding the bag can render any filtered view of the scene graph without a runnin
 
 These three relationships look similar but operate at different levels. Keep them distinct:
 
-**Ahu-slot tree** (document / tiddler structure) — `fragment-parent` + `slot` fields on tiddlers.
+''Ahu-slot tree'' (document / tiddler structure) — `fragment-parent` + `slot` fields on tiddlers.
 One `.md` file decomposes into a root tiddler and N named slot fragment tiddlers. This is the
 meme parent/child/grandchild tree. It expresses *document containment*, not type relationships.
 Not a pranala edge. Never use `control:has` to express ahu-slot ancestry.
@@ -53,22 +53,22 @@ a type *has* its components. Composition only — the `extends` / is-a framing s
 
 Every UEFN scene element maps to exactly one of three tiddler kinds:
 
-**Type meme** (`lar:///scene-bag/types/{ClassName}`) — one per Verse class definition.
-  - `kumu` pragma: element-type declaration
-  - `reaction:listenable` edges: OUTPUT event pins (`listenable(T)` fields)
-  - `reaction:subscribable` edges: INPUT function pins (public methods of matching arity)
-  - `control:has` edges: every URI in the Verse `class(Parent, Iface1, Iface2, ...)` list —
+''Type meme'' (`lar:///scene-bag/types/{ClassName}`) — one per Verse class definition.
+** `kumu` pragma: element-type declaration
+** `reaction:listenable` edges: OUTPUT event pins (`listenable(T)` fields)
+** `reaction:subscribable` edges: INPUT function pins (public methods of matching arity)
+** `control:has` edges: every URI in the Verse `class(Parent, Iface1, Iface2, ...)` list —
     one edge per item, parent and interfaces alike (no privileged is-a parent)
-  - `spatial:contains` edges: nested class relationships
+** `spatial:contains` edges: nested class relationships
 
-**Instance meme** (`lar:///scene-bag/instances/{placementId}`) — one per placed device.
-  - `kahea` edge to its type meme: `<<~ kahea lar:///scene-bag/types/{ClassName} >>`
-  - `papalohe` edges: Direct Event Binding wires (`listenable` → subscribable function)
-  - Ahu slots: `@editable` property values as child tiddlers
+''Instance meme'' (`lar:///scene-bag/instances/{placementId}`) — one per placed device.
+** `kahea` edge to its type meme: `<<~ kahea lar:///scene-bag/types/{ClassName} >>`
+** `papalohe` edges: Direct Event Binding wires (`listenable` → subscribable function)
+** Ahu slots: `@editable` property values as child tiddlers
 
-**Scene meme** (`lar:///scene-bag`) — one per scene / level.
-  - `spatial:contains` edges: all top-level placed instances
-  - `control:has` edge to the base world type (composition, not is-a)
+''Scene meme'' (`lar:///scene-bag`) — one per scene / level.
+** `spatial:contains` edges: all top-level placed instances
+** `control:has` edge to the base world type (composition, not is-a)
 
 <<~/ahu >>
 
@@ -153,7 +153,7 @@ works in any Lararium peer: browser, Node server, TW5 wiki.
 
 !!! Blocking Constraint — DEB Has No Public Export API
 
-**DEB (Direct Event Binding) wires have no standalone export format.**
+''DEB (Direct Event Binding) wires have no standalone export format.''
 Epic stores DEB bindings inside each device actor's property blob within the `.umap`
 file (standard Unreal Engine actor serialization). No public API, graph file, or
 runtime introspection endpoint exposes them independently.
@@ -163,9 +163,9 @@ Two viable import paths, each with limits:
 | Path | How | Limit |
 |---|---|---|
 | **`.umap` binary parse** | Read UE asset file directly; deserialize actor properties to extract DEB arrays | Requires UE asset format knowledge; format can shift across engine versions |
-| **Verse relay device** | A custom Verse device placed in the level subscribes to all target events on `OnBegin` and emits its own inventory at runtime | Can only observe events it subscribes to; cannot introspect arbitrary device graphs it wasn't designed for |
+| ''Verse relay device'' | A custom Verse device placed in the level subscribes to all target events on `OnBegin` and emits its own inventory at runtime | Can only observe events it subscribes to; cannot introspect arbitrary device graphs it wasn't designed for |
 
-**Sprint entry gate:** the import pipeline sprint MUST resolve this path before committing to a DEB extraction approach. No code work begins on the importer until one path is selected and prototyped.
+''Sprint entry gate:'' the import pipeline sprint MUST resolve this path before committing to a DEB extraction approach. No code work begins on the importer until one path is selected and prototyped.
 
 <<~/ahu >>
 
@@ -173,7 +173,7 @@ Two viable import paths, each with limits:
 
 !! Verse Effect Specifiers in the Graph
 
-Verse effects are a **bit-vector** (6 families) propagated upward through call chains.
+Verse effects are a ''bit-vector'' (6 families) propagated upward through call chains.
 Effect specifiers on device functions carry semantic meaning in the Lararium graph:
 
 | Family | Specifier | Lararium role | Sigil analogue |
@@ -192,7 +192,7 @@ of the spawned function. The calling context does NOT need `<suspends>`. This is
 formal mechanism that makes `spawn` an unstructured escape from the task tree. See
 `verse-task-tree` for the tree-topology consequence.
 
-**Safe parallelism rule:** Functions without `<writes>` can execute in parallel
+''Safe parallelism rule:'' Functions without `<writes>` can execute in parallel
 without locks. Use `<computes>` or `<reads>` specifiers on subscribable handlers
 to signal parallelism-safety in the graph.
 

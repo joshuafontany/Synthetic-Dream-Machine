@@ -24,9 +24,9 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/kau"
 `<<~ kau #frag Name props >>` places a device instance into the carrier. kau = "to place upon, set down with intention" (Hawaiian).
 
 Each kau placement creates a device instance with:
-* **Instance URI**: `carrierUri#fragment` (explicit `#frag` required; auto-UUID deferred to action tiddler when Keyhive WASM lands)
-* **Own execution context**: `currentTiddler` set to instance URI before transcluding the kumu def
-* **Persistent addressability**: instance URI becomes UCAN resource for per-instance capability grants (Keyhive deferred)
+* ''Instance URI'': `carrierUri#fragment` (explicit `#frag` required; auto-UUID deferred to action tiddler when Keyhive WASM lands)
+* ''Own execution context'': `currentTiddler` set to instance URI before transcluding the kumu def
+* ''Persistent addressability'': instance URI becomes UCAN resource for per-instance capability grants (Keyhive deferred)
 
 `p1` parse: first token starting with `#` = fragment; remainder = name + props.
 

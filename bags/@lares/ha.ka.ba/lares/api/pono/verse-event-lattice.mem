@@ -29,7 +29,7 @@ Lararium device model. The core asymmetry — **user code fires events; the engi
 vends listens** — is the design invariant that separates kukali (widget dispatch)
 from the projection bus (ReactionEngine subscription).
 
-**Source authority:** Verse Language Reference (Epic Games, 2024–2025); local-first.fm
+''Source authority:'' Verse Language Reference (Epic Games, 2024–2025); local-first.fm
 episode 19 (Brooklyn Zelenka) for the peer model alignment.
 
 <<~/ahu >>
@@ -48,7 +48,7 @@ signalable(t:type) := interface:
 A handle with a single capability: fire. No subscription, no await.
 Used when one system triggers another without coupling to the response.
 
-**Lararium mapping:** `dispatchEvent({type: "tm-verse-event", uri, listenable})` from
+''Lararium mapping:'' `dispatchEvent({type: "tm-verse-event", uri, listenable})` from
 `KukaliWidget` is a signalable call — fires into the TW5 wiki event bus and returns.
 
 ---
@@ -63,11 +63,11 @@ awaitable(t:type) := interface:
 A handle with a single capability: suspend until a value arrives.
 `Await()` is a `<suspends>` callsite — it yields the current fiber cooperatively.
 
-**Critical distinction:** `<suspends>` is an **effect specifier**, not a return type modifier.
+''Critical distinction:'' `<suspends>` is an ''effect specifier'', not a return type modifier.
 It says the function *may* yield the calling fiber; it says nothing about whether the
 function returns a value. A function returning `void` can be `<suspends>`.
 
-**Lararium mapping:** `MemeProjection.onChangeset()` is awaitable-shaped —
+''Lararium mapping:'' `MemeProjection.onChangeset()` is awaitable-shaped —
 the caller suspends (or schedules) until the changeset resolves.
 
 ---
@@ -82,7 +82,7 @@ subscribable(t:type) := interface:
 A handle with a single capability: register a persistent callback.
 Returns a `cancelable` so the subscriber can unsubscribe.
 
-**Lararium mapping:** `tw5.wiki.addEventListener("change", handler)` follows this
+''Lararium mapping:'' `tw5.wiki.addEventListener("change", handler)` follows this
 pattern exactly. `ReactionEngine.onVerseEvent(engine)` returns a teardown
 function — the cancelable equivalent.
 
@@ -104,7 +104,7 @@ a consumer can `.Await()` it within a `<suspends>` context.
 Crucially: **no `Subscribe()`**. Persistent multi-consumer callbacks are not
 available on user-instantiated events. Only the engine may vend `listenable`.
 
-**Lararium mapping:** a KukaliWidget event is an `event(t)` — the widget fires it
+''Lararium mapping:'' a KukaliWidget event is an `event(t)` — the widget fires it
 (signalable); the ReactionEngine awaits it (awaitable) in a reaction fiber.
 
 ---
@@ -118,13 +118,13 @@ listenable(t:type) := interface:
     Subscribe(Callback:(t):void):cancelable = ...
 ```
 
-The persistent subscription type. Only the **engine** vends `listenable` handles.
+The persistent subscription type. Only the ''engine'' vends `listenable` handles.
 User code receives them; user code does not create them.
 
 This is the design-boundary invariant: if you can `Subscribe()` to it, the engine
 controls its lifecycle. If you can only `Await()` it, you are in a fiber.
 
-**Lararium mapping:** the `listenable` field on `ReactionBinding` is an engine-vended
+''Lararium mapping:'' the `listenable` field on `ReactionBinding` is an engine-vended
 handle. `ReactionEngine` holds `listenable` references and subscribes to them
 (`tw5.wiki.addEventListener` is the `Subscribe()` equivalent in the TW5 host).
 
@@ -134,7 +134,7 @@ handle. `ReactionEngine` holds `listenable` references and subscribes to them
 
 !! `<suspends>` — Effect Specifier
 
-`<suspends>` is not a return type. It is an **effect annotation** on a function or
+`<suspends>` is not a return type. It is an ''effect annotation'' on a function or
 expression that declares: "this callsite may suspend the current logical task."
 
 ```verse
@@ -166,7 +166,7 @@ The MemeSyncAdaptor properly awaits it inside an async wrapper — this is corre
 
 !! `agent` and `player` — Simulation Participant Types
 
-From `/Verse.org/Simulation` module. These function as **class-level types**, not interfaces.
+From `/Verse.org/Simulation` module. These function as ''class-level types'', not interfaces.
 
 * **`agent`** — the universal participant supertype. Covers all live entities: session-connected participants (`player` subtype) AND non-player entities (generic wiki entities, NPCs, scripted actors). `game_action_instigator` gets implemented by "player or agents" — confirming agent as the general case.
 * **`player`** — the session-connected subtype. A `player` holds a live connection to the current session; a non-player `agent` does not. NOT limited to humans — anything with a live session link qualifies as a `player` in Verse type terms.
@@ -175,15 +175,15 @@ From `/Verse.org/Simulation` module. These function as **class-level types**, no
 
 **Why events use `listenable(agent)` rather than `listenable(player)`:** The entering entity may qualify as a non-player wiki entity, not a session-connected participant. `agent` serves as the correct general-case payload type; `listenable(player)` would exclude all non-player entities.
 
-**Lararium mapping:**
+''Lararium mapping:''
 * Verse `agent` → **`lar_agent`**: supertype for all addressable live entities on the wiki canvas. **Identity splits here:** player-class subtypes (Operator, Guest, `lares-daemon`) carry a Keyhive principal identity; Wiki Entities / NPCs (non-player `agent` subtypes) do not.
-* Verse `player` *(human)* → **Operator / Guest**: human session-connected participant with Keyhive identity. Operator = primary human principal (threshold relation). Guest = invited, limited cap.
-* Verse `player` *(system)* → **`lares-daemon`**: session-connected AI coordinator(s) with Keyhive identity. Verse class = `player`. Lares class = system principal with additional authority (admin doc, Session RE, Keyhive system keypair). May run multiple per session. As **coordinator**, its verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos), offloading stream-processing to py rather than pulling it through the TS stack.
-* Verse `agent` *(non-player)* → **Wiki Entity / NPC**: not session-connected; no Keyhive identity. Reactive wiki entities — they carry a `lar_character` tiddler and respond to RE reactions, but hold no principal. Interactive characters, scripted actors, game NPCs. Population open-ended.
-* Verse `session` → **Lares Session Wiki**: the coordinator `lar_playspace` for the round; pinned-wela. A session hosts N `lar_playspace` wikis; the Session Wiki coordinates them (broadest recipe, owns the session event-bus bag).
+* Verse `player` *(human)* → ''Operator / Guest'': human session-connected participant with Keyhive identity. Operator = primary human principal (threshold relation). Guest = invited, limited cap.
+* Verse `player` *(system)* → **`lares-daemon`**: session-connected AI coordinator(s) with Keyhive identity. Verse class = `player`. Lares class = system principal with additional authority (admin doc, Session RE, Keyhive system keypair). May run multiple per session. As ''coordinator'', its verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos), offloading stream-processing to py rather than pulling it through the TS stack.
+* Verse `agent` *(non-player)* → ''Wiki Entity / NPC'': not session-connected; no Keyhive identity. Reactive wiki entities — they carry a `lar_character` tiddler and respond to RE reactions, but hold no principal. Interactive characters, scripted actors, game NPCs. Population open-ended.
+* Verse `session` → ''Lares Session Wiki'': the coordinator `lar_playspace` for the round; pinned-wela. A session hosts N `lar_playspace` wikis; the Session Wiki coordinates them (broadest recipe, owns the session event-bus bag).
 * Verse `fort_character` → **`lar_character`**: tiddler representing an Agent's embodied presence on the canvas. Position, state, event pins.
 
-The compound type `listenable(agent)` functions as the canonical event type for **any participant action** in both Verse and Lares. Device events parameterized on `agent` do NOT restrict to human players.
+The compound type `listenable(agent)` functions as the canonical event type for ''any participant action'' in both Verse and Lares. Device events parameterized on `agent` do NOT restrict to human players.
 
 <<~/ahu >>
 
@@ -192,7 +192,7 @@ The compound type `listenable(agent)` functions as the canonical event type for 
 !! `@editable` — Design/Logic Boundary
 
 In Verse, `@editable` marks a property as configurable in the UEFN editor UI.
-It is the **design boundary**: above `@editable` is visual/authoring-time configuration;
+It is the ''design boundary'': above `@editable` is visual/authoring-time configuration;
 below is runtime logic.
 
 ```verse
@@ -204,16 +204,16 @@ my_device := class(creative_prop):
     TargetUri:string = "lar:///ha.ka.ba/lares/api/lararium/home"
 ```
 
-**Lararium alignment:**
+''Lararium alignment:''
 
 The `@editable` boundary maps onto the distinction between:
-* **React props / TW5 widget attributes** (authoring-time; editable in the editor)
-* **ReactionEngine subscriptions** (runtime; wired at boot)
+* ''React props / TW5 widget attributes'' (authoring-time; editable in the editor)
+* ''ReactionEngine subscriptions'' (runtime; wired at boot)
 
 A `KukaliWidget` accepts its `uri` and `listenable` attributes as props — these are
 the `@editable` surface. The internal `dispatchEvent` call is the runtime logic.
 
-**Rule:** Any URI or event handle that a device exposes to the room author is an
+''Rule:'' Any URI or event handle that a device exposes to the room author is an
 `@editable`-equivalent. It MUST stay author-editable, declared as data rather than hardcoded in runtime logic.
 
 <<~/ahu >>
@@ -227,15 +227,15 @@ using { /Verse.org/Verse }
 using { /EpicGames/Devices }
 ```
 
-`using` in Verse is a **module namespace import**. It brings exported identifiers
+`using` in Verse is a ''module namespace import''. It brings exported identifiers
 into scope from a module path. It has no relation to trait bounds, mixins, or
 interface composition.
 
-**Common confusion:** developers from Rust/Haskell backgrounds read `using` as
+''Common confusion:'' developers from Rust/Haskell backgrounds read `using` as
 `impl Trait for Type` or `derive`. It is not. It is closer to Python's
 `from module import *` scoped to a namespace path.
 
-**Lararium implication:** When Verse code is cited in Lararium architecture docs as
+''Lararium implication:'' When Verse code is cited in Lararium architecture docs as
 justification for an interface design, `using` lines are module imports — not
 statements about structural subtyping. The type lattice (signalable/awaitable/
 subscribable/event/listenable) is the structural system; `using` is how you
@@ -258,7 +258,7 @@ A `KukaliWidget` is a Verse creative_prop equivalent:
 | `spawn { device.OnEvent.Await() }` | ReactionEngine fiber registered via `onVerseEvent()` |
 | `cancelable` from `Subscribe()` | teardown function returned by `onVerseEvent()` |
 
-**The KukaliWidget loop:**
+''The KukaliWidget loop:''
 
 ```
 1. Widget renders with uri + listenable props     (@editable boundary)
@@ -273,7 +273,7 @@ A `KukaliWidget` is a Verse creative_prop equivalent:
 Step 4 exists only because `onVerseEvent()` wired the subscribable side.
 Without it, the event fires and nobody hears it — the fiber is never spawned.
 
-**Law:** `KukaliWidget` MUST use `dispatchEvent` (signalable). `ReactionEngine` MUST
+''Law:'' `KukaliWidget` MUST use `dispatchEvent` (signalable). `ReactionEngine` MUST
 subscribe via `onVerseEvent` (subscribable). These are never the same call.
 The asymmetry is the point.
 
@@ -294,7 +294,7 @@ In Lararium graph terms, this maps as follows:
 | `listenable(t) := interface:` | `control` | `has` | N per conforming type |
 | `event(t) := class<final>:` (carries signalable + awaitable) | `control` | `has` | N (no named parent in Verse; structural conformance) |
 
-**Key rule:** `control:has` = "this type carries component X" (N edges allowed) — parent class and capabilities alike; the graph holds no is-a parent (web3 composition).
+''Key rule:'' `control:has` = "this type carries component X" (N edges allowed) — parent class and capabilities alike; the graph holds no is-a parent (web3 composition).
 Ahu-slot children (`fragment-parent` field) = document structure — not a pranala edge.
 
 The engine-vended boundary: `listenable(t)` carries `control:has` edges to
@@ -318,14 +318,14 @@ sticky_event(t:type) := class<final>:
     Await()<suspends>:t = ...
 ```
 
-Extends `event(t)` semantics with **retained last signal**: after the first Signal,
+Extends `event(t)` semantics with ''retained last signal'': after the first Signal,
 all subsequent Await() calls receive the cached last value immediately without
 suspending. A subscriber who arrives after the event has fired still gets the result.
 
 Compare to `event(t)` which consumes each signal exactly once — if no awaiter is
 present when Signal() fires, the signal is dropped.
 
-**Lararium implication:** `sticky_event` maps to "remember last value" semantics —
+''Lararium implication:'' `sticky_event` maps to "remember last value" semantics —
 useful for device state that late-joining agents need to catch up to.
 
 !!! subscribable_event(t)
@@ -342,10 +342,10 @@ subscribable_event(t:type) := class<final>:
 Combines signalable + awaitable + subscribable. Subscribe() returns a `cancelable`
 (unsubscribe handle). Multiple subscribers receive every signal.
 
-**Critical:** The `cancelable` returned by Subscribe() is an **unsubscribe handle**,
+''Critical:'' The `cancelable` returned by Subscribe() is an ''unsubscribe handle'',
 NOT a `task(t)`. Same `cancelable` interface, different semantic role.
 
-**Lararium implication:** `subscribable_event` maps to the TW5
+''Lararium implication:'' `subscribable_event` maps to the TW5
 `wiki.addEventListener("change", handler)` pattern exactly. The teardown function
 returned by `onVerseEvent()` is the cancelable equivalent.
 

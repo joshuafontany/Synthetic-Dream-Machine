@@ -64,7 +64,7 @@ effect = "disc remains within 6 ft"
 reversible = false
 ```
 
-As Basic, with the clarification that the disc follows at the caster's current movement rate and **veers away** from anything it might run into. No saving throw.
+As Basic, with the clarification that the disc follows at the caster's current movement rate and ''veers away'' from anything it might run into. No saving throw.
 
 <<~/ahu >>
 
@@ -72,8 +72,8 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 !! Conversion Analysis
 
-* OSR `Range: 0` (self-following, within 6 ft) → SDM/UVG **R: 30m, point**, a freer force-platform that vanishes past range. The SDM surface widens the leash deliberately.
-* `6 turns` → **D: 1 hour** — a long exploration utility, distinct from Read Magic's 10 minutes.
+* OSR `Range: 0` (self-following, within 6 ft) → SDM/UVG ''R: 30m, point'', a freer force-platform that vanishes past range. The SDM surface widens the leash deliberately.
+* `6 turns` → ''D: 1 hour'' — a long exploration utility, distinct from Read Magic's 10 minutes.
 * 5000 cn cargo cap and "never a weapon" anchor it as logistics, not attack — no `attack` hook.
 * The RC veer-away / no-save note → soft-collision behaviour (the disc avoids impact). Carries `function/barrier` only when deliberately tilted.
 * Occupied-space restriction → cannot conjure inside a creature or packed obstacle.

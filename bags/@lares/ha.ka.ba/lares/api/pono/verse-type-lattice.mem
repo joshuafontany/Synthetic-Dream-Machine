@@ -22,11 +22,11 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-type-lattice"
 
 ! Verse Type Lattice
 
-Verse's type system is a **lattice**, not a simple tree. At the top sits `any`
+Verse's type system is a ''lattice'', not a simple tree. At the top sits `any`
 (universal supertype); at the bottom lies `false` (uninhabited bottom type).
 Between them: all primitives, containers, classes, and interfaces as subtypes of `any`.
 
-**Source authority:** Book of Verse ch. 11 (verselang.github.io/book/11_types/),
+''Source authority:'' Book of Verse ch. 11 (verselang.github.io/book/11_types/),
 ch. 13 (effects), ch. 17 (persistable); Epic Games developer documentation.
 
 <<~/ahu >>
@@ -92,11 +92,11 @@ Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 `<persistable>` is NOT a node in the type lattice. It is a constraint on type
 composition: a type is persistable if it stores ONLY persistable-compatible values.
 
-**Built-in persistable types:**
+''Built-in persistable types:''
 * Primitives: `logic`, `int`, `float`, `string`, `char`, `char32`
 * Containers: `array`, `map`, `option`, `tuple` — when element types are persistable
 
-**Types that CANNOT appear in persistable class/struct fields:**
+''Types that CANNOT appear in persistable class/struct fields:''
 * `any` — erases type info; not persistable-safe
 * `comparable` — constraint type; not persistable-safe
 * `type` — meta-type; not persistable-safe
@@ -106,7 +106,7 @@ composition: a type is persistable if it stores ONLY persistable-compatible valu
 * Interface types — not persistable-safe
 * Non-persistable user types
 
-**Structural rules for persistable classes:**
+''Structural rules for persistable classes:''
 * Must be marked `<final>` (no subclasses)
 * Must be marked `<persistable>` on the class declaration
 * All fields must themselves be of persistable type
@@ -120,7 +120,7 @@ game sessions. This is Verse's equivalent of cross-session player storage.
 
 !! Effects System — Six Families
 
-Verse effects are a **bit-vector** propagated upward through call chains. Each
+Verse effects are a ''bit-vector'' propagated upward through call chains. Each
 function declares which effect bits it sets; callers must declare at least the same
 bits (or more). Six families:
 
@@ -133,7 +133,7 @@ bits (or more). Six families:
 | Prediction | `<predicts>` | Deterministic/pure prediction | edge is reproducible |
 | Purity | `<computes>` | No side effects (composite of read-only) | edge is safe to parallelize |
 
-**Composition specifiers:**
+''Composition specifiers:''
 * `<computes>` — pure: no heap writes, no suspension, no failure, no divergence
 * `<transacts>` — default: heap reads + writes + allocation
 * `<reads>` — read-only heap access
@@ -143,7 +143,7 @@ without locks. This is the Verse-native condition for safe concurrent edges.
 
 !!! Propagation and hiding
 
-Effects propagate **upward**: calling a `<suspends>` function from a non-suspends
+Effects propagate ''upward'': calling a `<suspends>` function from a non-suspends
 function requires marking the caller `<suspends>`. The effect bit flows up the call
 chain.
 

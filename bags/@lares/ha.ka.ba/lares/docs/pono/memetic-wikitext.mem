@@ -133,42 +133,42 @@ The current shape keeps:
 
 The following verdicts emerged from a formal prior-art review against W3C, IETF, TiddlyWiki, and adjacent specifications. They constrain how memetic wikitext claims its own identity and how future spec work should frame compliance.
 
-**1. Nearest live ancestor: TiddlyWiki, not HTML.**
-Memetic sigils descend from TiddlyWiki's transclusion runtime. The sigil surface should claim descent from **transclusive text composition**, not from HTML extension. The best local analogue for `kahea` is TiddlyWiki's addressed transclusion surface, not generic macro text substitution.
+''1. Nearest live ancestor: TiddlyWiki, not HTML.''
+Memetic sigils descend from TiddlyWiki's transclusion runtime. The sigil surface should claim descent from ''transclusive text composition'', not from HTML extension. The best local analogue for `kahea` is TiddlyWiki's addressed transclusion surface, not generic macro text substitution.
 
 Memetic wikitext inherits not only TiddlyWiki's transclusion features, but also its style of language definition — a parseable text surface described through explicit parser phases, rule classes, and structural lowering into a runtime-interpretable tree.
 
-**2. TiddlyWiki defines grammar operationally, not as one closed EBNF.**
+''2. TiddlyWiki defines grammar operationally, not as one closed EBNF.''
 TW5 uses a recursive descent WikiText parser whose rules load from separate `module-type: wikirule` modules typed as `pragma`, `block`, or `inline`. Memetic wikitext inherits this operational grammar model — rule-table dispatch, not monolithic grammar file.
 
-**2a. Templates operate as context-sensitive masks.**
+''2a. Templates operate as context-sensitive masks.''
 `{{||A}}` applies template `A` to the current tiddler — generic text references inside the template resolve against the target tiddler, not the template source. TW5 explicitly calls this "applying a mask." This grounds the `kahea -> cascade` story: not "macro syntax" but context-sensitive masked transclusion.
 
-**2b. Surface notation lowers into a widget tree — two-stage precedent.**
+''2b. Surface notation lowers into a widget tree — two-stage precedent.''
 TW5 docs show `{{MyTiddler||Template}}` generating a `TiddlerWidget` containing a `TranscludeWidget`; `{{{ filter }}}` generating a `ListWidget`. This is the document notation → structural lowering → runtime realization model memetic wikitext inherits.
 
-**2c. Hard vs soft transclusion maps to visible vs latent meme-edge distinction.**
+''2c. Hard vs soft transclusion maps to visible vs latent meme-edge distinction.''
 TW5 distinguishes hard transclusions (detectable by superficial WikiText inspection) from soft transclusions (hidden in procedures, variables, or dynamically generated widgets). The visible vs latent meme-edge distinction has direct TW5 precedent.
 
-**2d. Recursion and self-reference form a documented error seam.**
+''2d. Recursion and self-reference form a documented error seam.''
 TW5 defines `{{!!text}}` as a "Recursive transclusion error" and treats indirect cycles as the same class of failure. Memetic sigils need to define direct and indirect recursion failures explicitly: self-targeting `ahu`, recursive wrapper re-entry, and cyclic `kahea` graphs.
 
 **2e. Cascades stack as first-match rules — `kahea -> cascade` runs native.**
 TW5 cascade page: a list of conditions evaluated in turn, ordered by tagged-tiddler ordering, each rule a filter expression, first non-empty result wins. `kahea -> filter://cascade...` is conceptually aligned with existing TW5 selection machinery, not an arbitrary detour.
 
-**3. Structural discipline: XML/XHTML well-formedness, not HTML looseness.**
+''3. Structural discipline: XML/XHTML well-formedness, not HTML looseness.''
 XML and XHTML supply the right model for well-formedness, nesting, closure, quoting, and conformance language. Sigils SHOULD look more like XML/XHTML than HTML in their closure discipline.
 
-**4. Fragment semantics require a representation model.**
+''4. Fragment semantics require a representation model.''
 W3C fragment guidance requires fragment meaning to bind to a representation or media type, not just to a URI scheme. The `#slot` anchor form in `ahu` needs a registered media type (`text/x-memetic-wikitext`) to carry normative fragment semantics.
 
-**5. Normative language: RFC 8174 + W3C QA guidance.**
+''5. Normative language: RFC 8174 + W3C QA guidance.''
 `MUST`, `SHOULD`, `MAY`, conformance classes, and claims follow RFC 8174. The `aka lar:///ha.ka.ba/lares/api/pono/RFC-2119` edge in every invariant file satisfies this requirement.
 
-**6. Machine-readable artifacts: prose primary, schemas subordinate.**
+''6. Machine-readable artifacts: prose primary, schemas subordinate.''
 JSON Schema and OpenAPI show the correct authority split. Prose spec text remains primary; validators and schemas are valuable but subordinate. The TypeScript `FAMILY_CONTRACTS` validator in `pranala-parser.ts` follows this correctly.
 
-**7. Runtime rigor: packet shapes, capability boundaries, refusal behavior.**
+''7. Runtime rigor: packet shapes, capability boundaries, refusal behavior.''
 JSON-RPC and MCP show how to specify runtime packets and capability negotiation without leaving behavior to folklore. The `kahea` processing stage (parser-level? post-parse? runtime transclusion?), context inheritance, and unresolved-target behavior remain the open design tests for the v5 spec:
 
 * What processing stage does bare `kahea` inhabit?

@@ -38,7 +38,7 @@ A hoike keeps a contested ruling whole: the held position, every dissent with it
 | `kue` | `\dissent` | one attributed dissent inside a hoike (nested block) |
 | `saksi` | `\witness` | attestation by a party to a record — composable everywhere, never reflexive |
 
-**Block form (ledger):**
+''Block form (ledger):''
 
 ```
 <<~ hoike #fragment held:"position (holding Voices)" >>
@@ -49,7 +49,7 @@ re-entry: general keys
 <<~/hoike >>
 ```
 
-**Turn form (inline, five slots):**
+''Turn form (inline, five slots):''
 
 ```
 <<~ hoike · q: <question> · held: <position> (Voices) · kue: <position> (Voice) · re-entry: <key> >>
@@ -63,16 +63,16 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 !! Laws
 
-1. **Attribution.** Every kue names its holder (Voice or operator). An anonymous dissent evaporates and MUST NOT file.
-2. **Reasons travel; votes don't.** A kue carries reasoning to the travel-floor: a stranger could reconstruct and re-open the argument from the block alone.
-3. **Co-location.** The hoike lives inside the record it contests — never a separate file. Whoever reads the ruling reads the dissent.
-4. **Explicit re-entry.** Every kue carries a specific, external key; a vague key reads as fabricated.
-5. **Hillel discipline.** Any re-opening states the kue before the held position. The held position's legitimacy partly derives from honoring the dissent.
-6. **Decision decoupled.** A hoike never blocks action; the node acts on the held position while the record keeps the rest.
-7. **Provisionality both ways.** A held position carries "good enough for now, safe enough to try" plus a review condition; a kept dissent stays re-openable; and the record keeps both theories of why it keeps dissent at all — a later court may depend on the kept words (Eduyot), and the written dissent appeals to the intelligence of a future day (Hughes).
-8. **Cadence gate.** Only a genuine machloket files (rating ≥ meme); the dispute carries reasons on both sides.
+1. ''Attribution.'' Every kue names its holder (Voice or operator). An anonymous dissent evaporates and MUST NOT file.
+2. ''Reasons travel; votes don't.'' A kue carries reasoning to the travel-floor: a stranger could reconstruct and re-open the argument from the block alone.
+3. ''Co-location.'' The hoike lives inside the record it contests — never a separate file. Whoever reads the ruling reads the dissent.
+4. ''Explicit re-entry.'' Every kue carries a specific, external key; a vague key reads as fabricated.
+5. ''Hillel discipline.'' Any re-opening states the kue before the held position. The held position's legitimacy partly derives from honoring the dissent.
+6. ''Decision decoupled.'' A hoike never blocks action; the node acts on the held position while the record keeps the rest.
+7. ''Provisionality both ways.'' A held position carries "good enough for now, safe enough to try" plus a review condition; a kept dissent stays re-openable; and the record keeps both theories of why it keeps dissent at all — a later court may depend on the kept words (Eduyot), and the written dissent appeals to the intelligence of a future day (Hughes).
+8. ''Cadence gate.'' Only a genuine machloket files (rating ≥ meme); the dispute carries reasons on both sides.
 
-**The witness law.** A saksi flows from observer to observed-record, never reflexively: a party MUST NOT witness its own block or its own turn. The node MAY witness an external record it examined; the operator witnesses the node's records; a tasked spirit MAY witness a house claim it checked — never its own findings (that reads as signature, not witness). Witness confidence stays bounded (pranala family: observe).
+''The witness law.'' A saksi flows from observer to observed-record, never reflexively: a party MUST NOT witness its own block or its own turn. The node MAY witness an external record it examined; the operator witnesses the node's records; a tasked spirit MAY witness a house claim it checked — never its own findings (that reads as signature, not witness). Witness confidence stays bounded (pranala family: observe).
 
 <<~/ahu >>
 

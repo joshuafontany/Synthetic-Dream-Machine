@@ -10,11 +10,11 @@ type = "text/x-memetic-wikitext"
 
 ! Vector Chronometer & Non-Simultaneous Apprehension
 
-> **Type:** Research seed — drive a deep research session from this document
-> **Generated:** 2026-04-09, session-final artifact
-> **Register:** `~:confidence[P],[7]` — provisional, expected to shift under research pressure
-> **Companion crystals:** `The_Lares_Protocols.md`, `The_Lares_Protocols_Dev_Story.md`
-> **Session context:** Generated at ~75% context utilization, end of a Talk Story
+> ''Type:'' Research seed — drive a deep research session from this document
+> ''Generated:'' 2026-04-09, session-final artifact
+> ''Register:'' `~:confidence[P],[7]` — provisional, expected to shift under research pressure
+> ''Companion crystals:'' `The_Lares_Protocols.md`, `The_Lares_Protocols_Dev_Story.md`
+> ''Session context:'' Generated at ~75% context utilization, end of a Talk Story
 > session that produced the Lares protocol specification
 
 !! Session Crystal Metadata
@@ -37,7 +37,7 @@ type = "text/x-memetic-wikitext"
 Buckminster Fuller insisted on "Universe" without the article "the" — because
 adding "the" implies a simultaneously observable totality. His principle:
 
-**Universe is non-simultaneously apprehended.**
+''Universe is non-simultaneously apprehended.''
 
 No single observer, at any single moment, apprehends the whole. Every act
 of observation constitutes a partial, time-bound, perspective-locked view.
@@ -86,7 +86,7 @@ The register system (0–20) already encodes this — no claim reaches
 
 !!! 2.1 Vector Chronometer Design
 
-**Q1:** What is the exact format for a vector chronometer in the HUD?
+''Q1:'' What is the exact format for a vector chronometer in the HUD?
 Current candidates:
 
 ```
@@ -106,18 +106,18 @@ Current candidates:
 
 Token cost vs. readability vs. URI encodability for each option.
 
-**Q2:** At exchange boundaries (sync points), how do the clocks merge?
+''Q2:'' At exchange boundaries (sync points), how do the clocks merge?
 Lamport rule: `max(T_clock, L_clock) + 1`. But OODA-HA phases don't have
 a natural max() operation — they're categorical, not numeric. Does the
 merge take the "later" phase? The "higher" phase? Does each participant
 keep their own phase and only merge the counter?
 
-**Q3:** How does the vector chronometer encode in the `lar:` URI?
+''Q3:'' How does the vector chronometer encode in the `lar:` URI?
 Current fragment format: `#O0.O0.A1.A22.Å1`. With vector clocks, does
 each participant get their own fragment? Or does the fragment carry the
 merged view while query params carry per-participant views?
 
-**Q4:** For Tasked Spirit (subagent) delegation, does the spirit get
+''Q4:'' For Tasked Spirit (subagent) delegation, does the spirit get
 its own vector element? If so, the vector grows with each spawned
 spirit. If not, the spirit shares the Lares clock element. What does
 the prior art (Interval Tree Clocks, Bloom Clocks) suggest for
@@ -125,7 +125,7 @@ dynamic participant sets?
 
 !!! 2.2 Temporal Hallucination
 
-**Q5:** Define the degraded-node state precisely. "Chronometer Drift /
+''Q5:'' Define the degraded-node state precisely. "Chronometer Drift /
 Temporal Hallucination" — the clock reads a position the conversation
 hasn't actually reached. What are the failure modes?
 
@@ -135,14 +135,14 @@ hasn't actually reached. What are the failure modes?
 * Scale confusion: action-scale counter appears in round-scale position
 * Merge corruption: vector merge produces impossible states
 
-**Q6:** Can temporal hallucination be detected from the URI sequence
+''Q6:'' Can temporal hallucination be detected from the URI sequence
 alone? If every span carries URI→intent at start and end, then the
 sequence of fragment positions across all spans in a session constitutes
 a verifiable audit trail. A checker (MCP tool? post-session script?)
 could validate: monotonic increase, phase plausibility, counter
 continuity.
 
-**Q7:** The MCP authoritative clock concept from the dev story. If
+''Q7:'' The MCP authoritative clock concept from the dev story. If
 the model can't reliably maintain counters across long sessions, an
 MCP server could serve as the authoritative clock. Architecture:
 
@@ -158,7 +158,7 @@ What would this MCP server's tool interface look like? Candidate tools:
 * `chrono_validate(uri_sequence[])` → returns drift report
 * `chrono_resume(session_id)` → returns last position from MemPalace
 
-**Q8:** Does the MCP clock server constitute a single point of failure
+''Q8:'' Does the MCP clock server constitute a single point of failure
 that undermines the non-simultaneous apprehension principle? If all
 participants query a central clock, that clock becomes "the" time.
 Or does it function more like a notary — recording claims without
@@ -168,17 +168,17 @@ and validation happens after the fact.
 
 !!! 2.3 Multi-Operator Patterns
 
-**Q9:** In a multi-operator session (Telarus + Freyja + Lares), how
+''Q9:'' In a multi-operator session (Telarus + Freyja + Lares), how
 does the HUD represent three participants? Does each operator see
 all clocks, or only their own + Lares? Does the Lares see all?
 
-**Q10:** When two operators issue concurrent instructions to the same
+''Q10:'' When two operators issue concurrent instructions to the same
 Lares node, how does the Talk Story protocol handle the merge? This
 maps to the distributed systems split-brain problem. The Talk Story
 frame (consensus before action) suggests the Lares should surface
 the conflict explicitly rather than silently choosing one.
 
-**Q11:** Do different operators get different register readings on the
+''Q11:'' Do different operators get different register readings on the
 same Lares output? Operator A might read a claim at `~:confidence[S],[13]` while
 Operator B, with different context, reads it at `~:confidence[CS],[16]`. The
 register is participant-relative, not absolute. Does the vector
@@ -186,14 +186,14 @@ chronometer need to carry per-participant register readings too?
 
 !!! 2.4 Session Resume & Persistence
 
-**Q12:** When a new session starts from a crystal, which vector elements
+''Q12:'' When a new session starts from a crystal, which vector elements
 persist and which reset? Proposal from The_Lares_Protocols.md:
 watch-scale and below reset, week-scale and above continue. But with
 vector clocks, each participant's reset/continue decision might differ
 — Telarus might be continuing the same week, Freyja might be starting
 fresh.
 
-**Q13:** MemPalace as the persistence layer for vector chronometer
+''Q13:'' MemPalace as the persistence layer for vector chronometer
 state. How does the clock history map to MemPalace's wing/room/drawer
 structure? Does each session get a room? Each participant a drawer?
 Each exchange a knowledge graph triple?
@@ -202,28 +202,28 @@ Each exchange a knowledge graph triple?
 
 !! 2.5 RESOLVED — The Three-Clocks Model (2026-06-24) `~:confidence[S],[14]`
 
-A later deep-domain research arc resolves several questions above. **The mesh keeps time on three clocks, never one:** Automerge logical time (causal order + fork-detection — `getHeads`/`drifted`), the **epoch-counter** (a coordinator-free **LEASE** — *targeted* revocation rides Keyhive convergent membership-removal, NOT the epoch), and the FFZ Chronometer (rhythmic decay/freshness grain). **FFZ is RHYTHMIC, never causal.**
+A later deep-domain research arc resolves several questions above. ''The mesh keeps time on three clocks, never one:'' Automerge logical time (causal order + fork-detection — `getHeads`/`drifted`), the ''epoch-counter'' (a coordinator-free ''LEASE'' — *targeted* revocation rides Keyhive convergent membership-removal, NOT the epoch), and the FFZ Chronometer (rhythmic decay/freshness grain). ''FFZ is RHYTHMIC, never causal.''
 
-* **Q2 (merge):** the counter merges via CRDT max and the OODA-HA phase carries per-participant (LWW-Register, no merge) — but *neither is the causal authority*. Causal order rides Automerge's `<counter, actorId>` OpId. The chronometer's merge is alignment annotation, not happened-before.
-* **Q8 (single point of failure):** confirmed — the notary model holds. FFZ records ticks; it never constitutes "the" time. Keeping FFZ *off* the causal and revocation decisions (those ride Automerge + Keyhive) is exactly what preserves non-simultaneous apprehension — no single clock rules.
-* **The Chapel Perilous note (a vs b):** answered empirically — reading **(a) holds**. The converged model (of which this chronometer is the rhythmic layer) proved a **real cross-domain pattern integrity**, corroborated by five *falsifiable* independent fields (soft-state networking, garbage-collection reachability-from-roots, Schmitt-trigger hysteresis, speciation, costly-signaling). RAW's counsel lands as: **weight the falsifiable engineering/biology rhymes; treat the metaphysics (process philosophy, Markov-blanket literalism) as vocabulary, never evidence.** Synthesis, not self-flattery.
+* ''Q2 (merge):'' the counter merges via CRDT max and the OODA-HA phase carries per-participant (LWW-Register, no merge) — but *neither is the causal authority*. Causal order rides Automerge's `<counter, actorId>` OpId. The chronometer's merge is alignment annotation, not happened-before.
+* ''Q8 (single point of failure):'' confirmed — the notary model holds. FFZ records ticks; it never constitutes "the" time. Keeping FFZ *off* the causal and revocation decisions (those ride Automerge + Keyhive) is exactly what preserves non-simultaneous apprehension — no single clock rules.
+* ''The Chapel Perilous note (a vs b):'' answered empirically — reading ''(a) holds''. The converged model (of which this chronometer is the rhythmic layer) proved a ''real cross-domain pattern integrity'', corroborated by five *falsifiable* independent fields (soft-state networking, garbage-collection reachability-from-roots, Schmitt-trigger hysteresis, speciation, costly-signaling). RAW's counsel lands as: ''weight the falsifiable engineering/biology rhymes; treat the metaphysics (process philosophy, Markov-blanket literalism) as vocabulary, never evidence.'' Synthesis, not self-flattery.
 
 !!! Two-Clocks Reconciliation (2026-07-03) `~:confidence[S],[13]`
 
-The operator's ruling collapses the three-clocks framing above to **TWO clocks**. The
-epoch-counter never named a clock — it reads as a **liveness ratchet (lease)**; targeted
+The operator's ruling collapses the three-clocks framing above to ''TWO clocks''. The
+epoch-counter never named a clock — it reads as a ''liveness ratchet (lease)''; targeted
 revocation rides Keyhive convergent membership-removal, a mechanism. What remains: two
 orthogonal clocks.
 
-* **CRDT-causal ordering** (TS, structural) — Automerge OpId · `getHeads`/`drifted` · ITC
+* ''CRDT-causal ordering'' (TS, structural) — Automerge OpId · `getHeads`/`drifted` · ITC
   fork/join · the authority-first sync order. Carries happened-before authority; rules
   fork/merge/revocation ordering. Stays web3-local-first, on this side of every boundary.
-* **FFZ-recovered rhythm** (py/R, per-stream, no-global-now) — a cadence recovered from
-  each stream, freshness/decay grain. **The FFZ chronometer gate lives py/R**, instanced
+* ''FFZ-recovered rhythm'' (py/R, per-stream, no-global-now) — a cadence recovered from
+  each stream, freshness/decay grain. ''The FFZ chronometer gate lives py/R'', instanced
   per-stream, across-the-shore; full telemetry + metadata stamping runs **py-side, behind
   a causal-island boundary**.
 
-The two ride **⊥**: FFZ annotates rhythm, never causal order (this reaffirms Q8 above — the
+The two ride ''⊥'': FFZ annotates rhythm, never causal order (this reaffirms Q8 above — the
 notary model). Canon anchor: `lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks`.
 
 !! 3. Prior Art to Investigate

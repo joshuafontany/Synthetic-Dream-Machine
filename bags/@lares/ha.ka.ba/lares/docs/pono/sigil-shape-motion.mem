@@ -42,7 +42,7 @@ The double-chevron shape evolved for the informational physics of the surface �
 
 Named closers `<<~/SIGIL >>` add a typed jaw: the closer carries the sigil name, making the boundary self-describing without requiring a parser to backtrack.
 
-**Shape at zoom-out:** a reader scanning a large document sees only the bracket pairs. That skeleton reveals graph topology — which zones carry sigil structure and which carry plain prose — before any inner content reads.
+''Shape at zoom-out:'' a reader scanning a large document sees only the bracket pairs. That skeleton reveals graph topology — which zones carry sigil structure and which carry plain prose — before any inner content reads.
 
 <<~/ahu >>
 
@@ -61,7 +61,7 @@ Detail reads as the "barb on the tooth" — the payload that determines what the
 
 At zoom-in, the reader engages with the detail layer. At zoom-out, the detail stays invisible; only the shape registers.
 
-**Document time vs render time:** the `->` arrow inside the detail marks the transition from passive reference to active invocation. A sigil without `->` references; a sigil with `->` executes. The arrow functions as a directional vector — a lunge from document time into render time.
+''Document time vs render time:'' the `->` arrow inside the detail marks the transition from passive reference to active invocation. A sigil without `->` references; a sigil with `->` executes. The arrow functions as a directional vector — a lunge from document time into render time.
 
 <<~/ahu >>
 
@@ -71,15 +71,15 @@ At zoom-in, the reader engages with the detail layer. At zoom-out, the detail st
 
 Motion registers in the open/close posture of the sigil:
 
-* **Block form** (open sigil … body … named close): the bracket holds a body — the content between open and close belongs to the sigil's scope
-* **Inline form** (open sigil, no body, implicit close `>>`): the bracket marks a reference or edge without enclosing content
+* ''Block form'' (open sigil … body … named close): the bracket holds a body — the content between open and close belongs to the sigil's scope
+* ''Inline form'' (open sigil, no body, implicit close `>>`): the bracket marks a reference or edge without enclosing content
 
 The motion axis answers: does this sigil grip and contain, or does it point and release?
 
 * `<<~ ahu #slot >>body<<~/ahu >>` — grips; the jaw closes around the body; WorksiteNode
 * `<<~ loulou lar:///target >>` — points; the tooth breaks the surface and exits; EdgeNode
 
-**Temporal scarring:** when a render-time sigil closes (`>>`), the surrounding document resumes, but the output of the sigil remains — the "scar" the jaw left in the text. The document changes shape at that point.
+''Temporal scarring:'' when a render-time sigil closes (`>>`), the surrounding document resumes, but the output of the sigil remains — the "scar" the jaw left in the text. The document changes shape at that point.
 
 <<~/ahu >>
 
@@ -97,7 +97,7 @@ Memetic wikitext reads at three zoom levels simultaneously:
 
 A human author can write at any zoom level freely. The sigil layer (skeleton) provides the addressable structure. The flesh layers fill the meaning.
 
-**Progressive collapse rule:** a display system may render only the skeleton when the tiddler's manaʻoʻiʻo falls below a threshold, or when a layout engine requests outline mode. The skeleton remains legible without the flesh; the flesh does not remain legible without the skeleton.
+''Progressive collapse rule:'' a display system may render only the skeleton when the tiddler's manaʻoʻiʻo falls below a threshold, or when a layout engine requests outline mode. The skeleton remains legible without the flesh; the flesh does not remain legible without the skeleton.
 
 This differs from the technical three-mode render dispatch (`html` / `carrier` / `projection`) in `memetic-wikitext.tid #render-modes`, which controls serialization format. Progressive display controls *reading posture* — a human/agent concern, not a wire-format concern.
 

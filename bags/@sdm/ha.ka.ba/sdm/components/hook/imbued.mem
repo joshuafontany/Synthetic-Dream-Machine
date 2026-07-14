@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/imbued"
 
 !! Definition
 
-A canonical cost hook: the Life paid to activate stays **locked** until the Power deactivates. The practitioner runs at reduced Life for the duration.
+A canonical cost hook: the Life paid to activate stays ''locked'' until the Power deactivates. The practitioner runs at reduced Life for the duration.
 
 <<~/ahu >>
 

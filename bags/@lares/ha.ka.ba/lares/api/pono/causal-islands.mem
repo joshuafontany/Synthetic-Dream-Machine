@@ -28,7 +28,7 @@ A causal island carries its own trigger surface, event horizon, and capability g
 The doctrine partitions cross-node causality (MUST) from within-node causality (MAY).
 Authority MUST precede content — this invariant holds without exception.
 
-**Authority has three structural axes plus one alignment plane** (refined 2026-06-01
+''Authority has three structural axes plus one alignment plane'' (refined 2026-06-01
 against Frazee, *Practical Decentralization*, and prior-art research across ATProto,
 SSB, Holochain, Nostr, IPFS, ActivityPub, and the local-first lineage). The earlier
 single linear ability-ladder fused into one rope what are really independent axes;
@@ -44,32 +44,32 @@ this version separates them.
 
 | Dimension | Kind | What it answers | Where it lives |
 |---|---|---|---|
-| **Axis 1 — Access** | monotonic, cryptographic, per-bag | "may this principal pull / read / edit / admin this bag?" | this meme + Keyhive |
-| **Axis 2 — Scale** | monotonic, composition | "which membership ring is this?" | Keyhive group nesting |
-| **Axis 3 — Powers** | functional decomposition | "which faculty does this provider hold?" | separation-of-powers doctrine |
-| **Plane 0 — Alignment** | NON-monotonic, subjective | "do I *choose* to sync/relay/surface/vouch for this actor?" | [alignment-layer](alignment-layer.md) |
+| ''Axis 1 — Access'' | monotonic, cryptographic, per-bag | "may this principal pull / read / edit / admin this bag?" | this meme + Keyhive |
+| ''Axis 2 — Scale'' | monotonic, composition | "which membership ring is this?" | Keyhive group nesting |
+| ''Axis 3 — Powers'' | functional decomposition | "which faculty does this provider hold?" | separation-of-powers doctrine |
+| ''Plane 0 — Alignment'' | NON-monotonic, subjective | "do I *choose* to sync/relay/surface/vouch for this actor?" | [[alignment-layer|alignment-layer.md]] |
 
-**Axis 1 — Access.** Four levels, a 1:1 lexical mirror of Keyhive's native Access enum
+''Axis 1 — Access.'' Four levels, a 1:1 lexical mirror of Keyhive's native Access enum
 (`pull`, `read`, `edit`, `admin`). NOT a parallel Lararium-coined ladder — the live gate
 is `CapabilityVerifier.verify({ access: "read" | "admin" })`; the four-verb tuple gives
 the edge-island federation scaffolding a typed vocabulary for the same levels. The
 relay-law exception governs the bottom rung.
 
-**Grain debt (POLA, 2026-06-03).** Because the live gate collapses to `read | admin`, an
+''Grain debt (POLA, 2026-06-03).'' Because the live gate collapses to `read | admin`, an
 `edit`-intent delegation — the POLA-correct grain for a surface a principal co-edits but
-should NOT re-delegate — currently rounds **up** to `admin`. Documented over-grant: e.g.
+should NOT re-delegate — currently rounds ''up'' to `admin`. Documented over-grant: e.g.
 delegating an operator's `@personal`/`@draft` view-state to their own PersonaGroup grants
 `admin` where `edit` is the true least-authority. Acceptable while the principal set is
 homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal authority
 ≈ 0). Adopt the true `edit` grain at the delegation call sites the moment
 `CapabilityVerifier.verify` accepts it. First live call site + ocap rationale:
-[personal-slot](../lararium/personal-slot.md).
+[[personal-slot|../lararium/personal-slot.md]].
 
-**Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups on the **SOCIAL axis**:
+''Axis 2 — Scale.'' Membership nests as Keyhive groups-within-groups on the ''SOCIAL axis'':
 `Individual ⊂ PersonaGroup ⊂ Cabal`. Each social ring forms a causal island with a **cryptographic
 membrane** — the Keyhive delegation chain carries the join-rule. **Delegation tops at the Cabal**
-(2026-06-29 cohere); above it the mesh scales on the orthogonal **INFRA axis** — `Nexus` and
-`DreamNet` join by **treaty / mutual-carriage contract** (who relays whose sealed bytes), never by
+(2026-06-29 cohere); above it the mesh scales on the orthogonal ''INFRA axis'' — `Nexus` and
+`DreamNet` join by ''treaty / mutual-carriage contract'' (who relays whose sealed bytes), never by
 delegation-up, a relay carrying without reading
 (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>). "DreamNet"
 names no registry and no canonical graph; it emerges as the transitive closure of who-relays-to-whom
@@ -77,7 +77,7 @@ under everyone's local stances. Read the earlier single rope
 (`⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet` as delegation-nested SOCIAL rings) as retire-residue the
 two-axis treaty split supersedes — neighborhood/city now ride the INFRA shrine-tiers, not a WHO ring.
 
-**Axis 3 — Powers.** The faculties of infrastructure are separable and each devolvable to
+''Axis 3 — Powers.'' The faculties of infrastructure are separable and each devolvable to
 a distinct provider: `host · relay · aggregate · address · moderate`. **Host-independent
 `lar:///` addressing is the lever** that makes them separable (a `lar:///` URI names content
 by identity, the resolver binds it to a doc at boot — no host appears in the address). The
@@ -85,11 +85,11 @@ governing law, learned from ATProto's failures: **every power you separate but m
 expensive or central re-concentrates** (their PLC ledger, their single capital-intensive
 Appview, their shared rotation keys each re-grew the monopoly they meant to escape).
 
-**Plane 0 — Alignment.** Capability answers *"CAN this actor act?"* — monotonic, and a
+''Plane 0 — Alignment.'' Capability answers *"CAN this actor act?"* — monotonic, and a
 malicious actor can hold cryptographically valid capabilities. Alignment answers
 *"do I WANT to peer with this actor?"* — non-monotonic, subjective, reputation-rooted, and
 capability structurally cannot express it. Lives in its own invariant
-([alignment-layer.md](alignment-layer.md)); enforced by **withholding voluntary sync at the
+([[alignment-layer.md|alignment-layer.md]]); enforced by **withholding voluntary sync at the
 Beelay boundary**, never by reaching into another island's data. The "lemures" plane.
 
 <<~/ahu >>
@@ -98,31 +98,31 @@ Beelay boundary**, never by reaching into another island's data. The "lemures" p
 
 !! Law
 
-**Authority-first invariant**: the authority graph (Orichalcum capabilities, delegations, revocations) MUST sync before content (manifests, receipts, delta payloads) flows.
+''Authority-first invariant'': the authority graph (Orichalcum capabilities, delegations, revocations) MUST sync before content (manifests, receipts, delta payloads) flows.
 A relay MUST complete step 2 before receiving step 4 or later.
 A peer MUST complete step 3 before requesting individual meme deltas.
 
-**Relay-law** (Access axis, bottom rung): `pull` does NOT imply `read`. A shrine relay holds
+''Relay-law'' (Access axis, bottom rung): `pull` does NOT imply `read`. A shrine relay holds
 `pull`; it carries ENCRYPTED offerings it cannot decrypt or render. All other access levels
 imply every level below them. (We are strictly stronger than ATProto here: their relay reads
 a plaintext firehose; ours forwards ciphertext it cannot open — the correct boundary for a
 private mesh of households rather than a public broadcast medium.)
 
-**Visibility gate**: ALL six conditions must hold for a meme to federate across an edge island.
+''Visibility gate'': ALL six conditions must hold for a meme to federate across an edge island.
 Stage band is a UX annotation — NOT a gate condition.
 
-**Membrane law** (Scale axis): joining a **social** ring (≤ Cabal) requires a capability delegation
+''Membrane law'' (Scale axis): joining a ''social'' ring (≤ Cabal) requires a capability delegation
 from that ring's Keyhive group. The delegation chain functions as the join-rule for the SOCIAL axis;
-no central admission authority stands. **Above the Cabal the INFRA axis takes over** — `Nexus` and
-`DreamNet` join by **treaty / mutual-carriage contract**, never delegation-up (2026-06-29 cohere →
+no central admission authority stands. ''Above the Cabal the INFRA axis takes over'' — `Nexus` and
+`DreamNet` join by ''treaty / mutual-carriage contract'', never delegation-up (2026-06-29 cohere →
 dreamnet-architecture#two-axis-topology).
 
-**Alignment law** (Plane 0): trust assertions are ordinary signed content, evaluated LOCALLY
+''Alignment law'' (Plane 0): trust assertions are ordinary signed content, evaluated LOCALLY
 against a per-island root. No global consensus, no central registry, no global trust score.
-A valid-capability-holding lemure is refused by being **starved of voluntary peering**, never
-by a central ban. See [alignment-layer.md](alignment-layer.md).
+A valid-capability-holding lemure is refused by being ''starved of voluntary peering'', never
+by a central ban. See [[alignment-layer.md|alignment-layer.md]].
 
-**Exchange-island law**: the operator↔node exchange runs as a causal island of its own ---
+''Exchange-island law'': the operator↔node exchange runs as a causal island of its own ---
 two logs, no global now across the turn boundary. The turn-frame syncs it: `yield … -> ?`
 hands the node's log forward and awaits the operator's next sync. The node MUST NOT presume
 the operator's next turn, nor claim a closure or block the two logs have not jointly reached;
@@ -135,20 +135,20 @@ pretending to a global now reads as the managing failure
 
 !! Two clocks, orthogonal — causal ⊥ rhythmic
 
-The mesh keeps time on **two clocks that never collapse into one**:
+The mesh keeps time on ''two clocks that never collapse into one'':
 
-* **CRDT-causal ordering** (TS, structural). Automerge `<counter, actorId>` OpId, `getHeads`/`headsEqual`,
-  ITC fork/join, and the authority-first sync order below carry it. This clock rules **happened-before** —
+* ''CRDT-causal ordering'' (TS, structural). Automerge `<counter, actorId>` OpId, `getHeads`/`headsEqual`,
+  ITC fork/join, and the authority-first sync order below carry it. This clock rules ''happened-before'' —
   the causal poset the "no global now" gluing obstruction lives in
   (`lar:///ha.ka.ba/lares/api/pono/federated-causal-islands#formal-model`). It stays TS-native,
-  web3-local-first, on this side of every causal-island boundary. **AUTHORITY(safety) rides here.**
-* **FFZ-recovered rhythm** (py/R, per-stream, across-the-shore). The chronometer gate recovers a cadence
+  web3-local-first, on this side of every causal-island boundary. ''AUTHORITY(safety) rides here.''
+* ''FFZ-recovered rhythm'' (py/R, per-stream, across-the-shore). The chronometer gate recovers a cadence
   (Pulse→Theme) from each stream and stamps freshness/decay grain — the reading a node carries "as of my
-  last sync." Full telemetry and metadata stamping runs **py-side, behind a causal-island boundary**
+  last sync." Full telemetry and metadata stamping runs ''py-side, behind a causal-island boundary''
   (Web3-only law: any py/R bridge sits behind the boundary; no py ontology enters the stack proper). This
   clock annotates *rhythm*, never happened-before.
 
-The two ride **⊥**: FFZ names rhythmic position and alignment, never the causal order. An LWW rhythmic
+The two ride ''⊥'': FFZ names rhythmic position and alignment, never the causal order. An LWW rhythmic
 total-order MUST NOT drive a fork, merge, or revocation decision — that manufactures a global-now the mesh
 cannot hold. Liveness ratchets (the epoch-lease, non-renewal) and targeted revocation (Keyhive convergent
 membership-removal) name authority/liveness mechanisms, never clocks. Full rhythmic model:
@@ -315,20 +315,20 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 Named so the stack never grows them (each re-created the power problem its source protocol
 meant to escape):
 
-* ✗ **Central identity ledger** (ATProto's `did:plc`). Resolve identity *within the island*
+* ✗ ''Central identity ledger'' (ATProto's `did:plc`). Resolve identity *within the island*
   via Keyhive + Automerge causal history. `did:web`-style domain identity is acceptable ONLY
   as an optional bridge at the external Kowloon web2.5 boundary.
-* ✗ **Public plaintext firehose as backbone.** Propagate encrypted, capability-gated
+* ✗ ''Public plaintext firehose as backbone.'' Propagate encrypted, capability-gated
   change-sets. A firehose is fine *inside* a consenting cabal; it terminates at the island boundary.
-* ✗ **Capital-intensive single global index** (ATProto's Appview monopoly). We hold no
+* ✗ ''Capital-intensive single global index'' (ATProto's Appview monopoly). We hold no
   whole-network index to monopolize — reads project per-VM from locally-resident bags
   (island-owned residency: a two-state ʻōlelo thermal axis — `wela` (hot) / `anu` (cold) —
   plus an orthogonal pin-flag; bag residency derives by reachability from a live (`wela`)
   referencing island — see `lar:///ha.ka.ba/lararium/api/residency-tiers`). Keep
   aggregation a swappable edge view over data the aggregator may sync but not read.
-* ✗ **Shared / highly-reused rotation keys.** Per-operator, ideally per-bag rotation/admin
+* ✗ ''Shared / highly-reused rotation keys.'' Per-operator, ideally per-bag rotation/admin
   capabilities — never a shared master key over a ring's members.
-* ✗ **Global blocklists / global trust scores** (EigenTrust-style). Sybil-vulnerable without
+* ✗ ''Global blocklists / global trust scores'' (EigenTrust-style). Sybil-vulnerable without
   costly identity, and they imply a global "now" we do not have. Trust roots are plural and chosen.
 
 <<~/ahu >>

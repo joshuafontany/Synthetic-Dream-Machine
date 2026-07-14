@@ -23,12 +23,12 @@ written   = "2026-06-27"
 
 ! The Dev Loop ~ idempotent cures after a code change
 
-A Lararium vessel boots from **compiled dist**, founds from a **baked genesis seed**, and runs from
-**vessel state in the operator's home**. After editing code, three things can be stale — the dist,
-the genesis blob, the on-disk vessel — and each has a cure. The cures are **idempotent**: safe to
+A Lararium vessel boots from ''compiled dist'', founds from a ''baked genesis seed'', and runs from
+''vessel state in the operator's home''. After editing code, three things can be stale — the dist,
+the genesis blob, the on-disk vessel — and each has a cure. The cures are ''idempotent'': safe to
 run from any prior state (running · stale · none), so the loop never needs a clean-slate ritual.
 
-**The one to reach for after editing code:** `lares refresh`.
+''The one to reach for after editing code:'' `lares refresh`.
 
 <<~/ahu >>
 
@@ -61,16 +61,16 @@ half-dead vessel: port bound, worker `ERR_MODULE_NOT_FOUND`). So after a TS edit
 
 !! Where state lives ~ vessel-home vs corpus (the ~/.lares split)
 
-The CORPUS + code live in the **repo** (versioned); the vessel's RUNTIME STATE lives in the
-operator's **home** (`~/.lares`). This is the `@daemon` ontology made filesystem — the
+The CORPUS + code live in the ''repo'' (versioned); the vessel's RUNTIME STATE lives in the
+operator's ''home'' (`~/.lares`). This is the `@daemon` ontology made filesystem — the
 bound-operator's vessel-only worker belongs to the operator, not a checkout.
 
 <<~ranks home ~/.lares/.lararium:storage·key·socket -> .lararium-identity:keypair -> .lararium-projection:synced-tree -> harvest·harvest-stage:memories >>
 <<~ranks corpus repo/genesis:baked-island.bin-seed+bootstrap -> repo/bags:seed-memes -> repo/packages:code >>
 
-**The resolver** — ONE source, `@lararium/node/vessel-paths.ts` (`larHome` · `larDataDir` ·
+''The resolver'' — ONE source, `@lararium/node/vessel-paths.ts` (`larHome` · `larDataDir` ·
 `larIdentityDir` · `larProjectionDir` · `larHarvest*`), so the CLI (local-connector) and the daemon
-(uds-channel) always agree on the **UDS socket** path. The palace stays `~/.mempalace`
+(uds-channel) always agree on the ''UDS socket'' path. The palace stays `~/.mempalace`
 (mempalace's own home; `MEMPALACE_PALACE_PATH` overrides).
 
 **`LAR_ROOT`** overrides the home root for ISOLATED instances (the test harness / staged pairs) —
@@ -85,14 +85,14 @@ default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat 
 
 <<~ranks law dist-not-tsx -> genesis-before-init -> identity-survives-reset -> only-explicit-LAR_ROOT -> deterministic-genesis >>
 
-* **dist, not tsx** — island workers spawn compiled; a stale dist is a half-dead vessel. `refresh` rebuilds.
-* **genesis before init** — init founds the hearth FROM the engine CID, so the baked artifact must
-  exist first. `reset` order is delete → **rebuild genesis** → init (the reverse fails "engine CID absent").
-* **identity survives reset** — `~/.lares/.lararium-identity` is a sibling of the wipe-zone; `reset`
+* ''dist, not tsx'' — island workers spawn compiled; a stale dist is a half-dead vessel. `refresh` rebuilds.
+* ''genesis before init'' — init founds the hearth FROM the engine CID, so the baked artifact must
+  exist first. `reset` order is delete → ''rebuild genesis'' → init (the reverse fails "engine CID absent").
+* ''identity survives reset'' — `~/.lares/.lararium-identity` is a sibling of the wipe-zone; `reset`
   preserves the operator's keypair/DID. A true re-found (new DID) needs an explicit identity wipe.
 * **only explicit `--root` sets `LAR_ROOT`** — never thread a `REPO_ROOT` default through reset/init
   (it silently relocates the vessel into the repo).
-* **deterministic genesis** — a re-bake with unchanged code is byte-identical (no churn); a diff means
+* ''deterministic genesis'' — a re-bake with unchanged code is byte-identical (no churn); a diff means
   the engine/plugin blob genuinely changed.
 
 <<~/ahu >>

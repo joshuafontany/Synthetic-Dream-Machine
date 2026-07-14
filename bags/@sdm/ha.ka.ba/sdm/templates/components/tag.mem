@@ -41,16 +41,16 @@ A component meme gives one facet — a domain, function, hook, or posture — an
 #aftermath    open questions
 ```
 
-**Two tiddlers per component.**
+''Two tiddlers per component.''
 
-1. **The full meme** — this `.md`, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
+1. ''The full meme'' — this `.md`, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
 
 ```toml
 title   = "lar:///ha.ka.ba/sdm/components/function/ecm-scan"
 caption = "ecm-scan"
 ```
 
-2. **The short tag pointer** — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A *virtual* tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
+2. ''The short tag pointer'' — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A *virtual* tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
 
 ```
 title: @sdm/tags/function/ecm-scan
@@ -58,7 +58,7 @@ caption: ecm-scan
 meme: lar:///ha.ka.ba/sdm/components/function/ecm-scan
 ```
 
-Modules and cards tag with the **short** form. `<<tag-pill>>` reads the pointer's `caption` for the label and follows its `meme` field to open the full meme. Filters harvest `[tags[]prefix[@]]`.
+Modules and cards tag with the ''short'' form. `<<tag-pill>>` reads the pointer's `caption` for the label and follows its `meme` field to open the full meme. Filters harvest `[tags[]prefix[@]]`.
 
 <<~/ahu >>
 
@@ -66,7 +66,7 @@ Modules and cards tag with the **short** form. `<<tag-pill>>` reads the pointer'
 
 !! Promote / Demote Law
 
-A component earns its address by serving a filter query. Tags start as TOML header entries; promote to an addressed component meme only when a query demands the address. If a promoted component proves unused, **demote it back to a header tag and delete the meme** (Principle 6). Do not split too fine — `ecm-scan` not `ecm-scan-passive`/`ecm-scan-active` (the nano-service trap).
+A component earns its address by serving a filter query. Tags start as TOML header entries; promote to an addressed component meme only when a query demands the address. If a promoted component proves unused, ''demote it back to a header tag and delete the meme'' (Principle 6). Do not split too fine — `ecm-scan` not `ecm-scan-passive`/`ecm-scan-active` (the nano-service trap).
 
 <<~/ahu >>
 

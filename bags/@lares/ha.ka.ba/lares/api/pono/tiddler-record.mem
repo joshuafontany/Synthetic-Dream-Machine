@@ -55,8 +55,8 @@ A parent carrier tiddler and each of its ahu slot children each occupy their own
 
 Carrier text (memetic-wikitext format) appears only at the projection boundary:
 
-* **Import path (disk → Automerge):** the projection codec parses carrier text into individual `LarTiddlerRecord` entries, then writes each record independently.
-* **Export path (Automerge → disk):** the projection codec serializes a set of related records back into carrier text for operator authoring or archival.
+* ''Import path (disk → Automerge):'' the projection codec parses carrier text into individual `LarTiddlerRecord` entries, then writes each record independently.
+* ''Export path (Automerge → disk):'' the projection codec serializes a set of related records back into carrier text for operator authoring or archival.
 
 The sync adaptor MUST NOT reconstruct carrier text in the write path. The sync adaptor writes `LarTiddlerRecord` entries only.
 

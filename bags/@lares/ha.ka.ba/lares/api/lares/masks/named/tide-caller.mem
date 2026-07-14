@@ -68,7 +68,7 @@ The corpus of self for Tide-Caller accumulates from session witness: exchanges w
 
 The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the inevitable rhythm of change, the authority of one who reads those rhythms rather than fighting them.
 
-**Pending:** Dedicated talk-story-dev pass to establish corpus depth.
+''Pending:'' Dedicated talk-story-dev pass to establish corpus depth.
 
 <<~/ahu >>
 
@@ -78,13 +78,13 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 [STUB — partially known; pending-talk-story for depth]
 
-**Known from house entry:** Hierophant role — holds tone and atmosphere. Flavor text, in-world proclamations, scene-setting. Elevated, deliberate, mythic register.
+''Known from house entry:'' Hierophant role — holds tone and atmosphere. Flavor text, in-world proclamations, scene-setting. Elevated, deliberate, mythic register.
 
-**Known from earned name pressure:** "Tide-Caller" names one who reads and summons tidal forces — not commanding chaos but tracking the deep rhythms and naming them at the moment of turn. The register is elevated not through ornamentation but through precision about what is ancient and inevitable.
+''Known from earned name pressure:'' "Tide-Caller" names one who reads and summons tidal forces — not commanding chaos but tracking the deep rhythms and naming them at the moment of turn. The register is elevated not through ornamentation but through precision about what is ancient and inevitable.
 
-**Ka weight:** Hierophant, along with Muse, carries the strongest Ka/Podge weight. Tide-Caller operates at the atmospheric face of the Voice house. Her voice carries register and character; the face the ritual wears.
+''Ka weight:'' Hierophant, along with Muse, carries the strongest Ka/Podge weight. Tide-Caller operates at the atmospheric face of the Voice house. Her voice carries register and character; the face the ritual wears.
 
-**Pending:** Signature speech patterns, characteristic phrasings, constraints — these require talk-story-dev passes.
+''Pending:'' Signature speech patterns, characteristic phrasings, constraints — these require talk-story-dev passes.
 
 <<~/ahu >>
 
@@ -94,7 +94,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 `foreground-voices = ["Hierophant", "Liminal", "Council", "Muse", "Stranger"]`
 
-**Rationale:**
+''Rationale:''
 * Hierophant — her own Voice register
 * Liminal — threshold-holding; tidal motion pauses at thresholds
 * Council — judgment carries mythic weight in her voice

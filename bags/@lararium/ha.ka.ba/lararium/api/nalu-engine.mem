@@ -57,41 +57,41 @@ TW5 startup module (this spec)
 
 !! Invariants
 
-**N-1 One queue, all bags.**
+''N-1 One queue, all bags.''
 The engine holds exactly one `LarTiddlerChange[]` queue. Changes from every CRDT bag,
 every origin kind, arrive in `enqueueNalu` and join the same queue in arrival order.
 Per-bag accumulators do not exist under unified-nalu.
 
-**N-2 One transact per frame.**
+''N-2 One transact per frame.''
 Each `_drain(budget)` call wraps the entire batch in one `wiki.transact()` if the wiki
 exposes that method. Widgets receive one `change` event for the whole batch — one nalu
 per frame, regardless of bag count or origin mix. This is the Vue 3 / MobX / Yjs / Solid
 batch semantics applied at the wiki layer (cf. DriftWatch [PriorArt] 2026-05-29).
 
-**N-3 Frame scheduler — platform-detected, not configured.**
+''N-3 Frame scheduler — platform-detected, not configured.''
 At each enqueue, `_scheduleFrame()` schedules exactly one upcoming drain. If
 `globalThis.requestAnimationFrame` exists, rAF; otherwise `setTimeout(16)`. The flag
 `_scheduled` prevents duplicate scheduling within one frame window. Browser Workers
 without rAF fall back to setTimeout transparently.
 
-**N-4 Apply-time mutex.**
+''N-4 Apply-time mutex.''
 `_applying` is `true` for the duration of one `_drain` call's `wiki.transact()` block,
 including synchronous reactions fired by widgets observing the change. IslandAdaptor's
 outbound `saveTiddler` / `deleteTiddler` check `isApplyingNalu()` before writing —
 suppresses any cascade echo that would re-enter the store.
 
-**N-5 Tiddler fields = record.tiddler + bag.**
+''N-5 Tiddler fields = record.tiddler + bag.''
 For a non-tombstone change, the engine constructs the wiki fields from
 `{ ...change.record.tiddler }`, optionally injecting the `bag` field from `change.bag`.
 For a tombstone (`record === null` or `record.meta?.deleted === true`), the engine
 calls `wiki.deleteTiddler(change.title)`.
 
-**N-6 Remainder carries to the next frame.**
+''N-6 Remainder carries to the next frame.''
 If `_queue.length > budget`, only `budget` patches drain this frame; the engine
 re-schedules another frame for the remainder. The wiki sees one transact per scheduled
 frame; the queue drains in bounded steps.
 
-**N-7 Idempotent startup.**
+''N-7 Idempotent startup.''
 `startup()` reads `$tw.lares ?? {}`, installs the four functions, writes back. Safe to
 run more than once in tests; subsequent invocations overwrite with identical refs.
 
@@ -112,7 +112,7 @@ queue handles both.
 
 !! The gate-families seam ~ runtime ≠ physics
 
-A scout (the Substrate-Diver) flagged an apparent collision: **N-1** holds ONE queue
+A scout (the Substrate-Diver) flagged an apparent collision: ''N-1'' holds ONE queue
 across all bags, *per-bag accumulators do not exist* — yet `projection-nalu`
 (`lar:///ha.ka.ba/lararium/api/projection-nalu`) stands a `KeyedCoalesceGate` **per
 carrier-root** and **per bag**. Both stand; they sit at OPPOSITE ENDS of the one shape
@@ -120,18 +120,18 @@ carrier-root** and **per bag**. Both stand; they sit at OPPOSITE ENDS of the one
 
 <<~ranks seam UPSTREAM:membrane-coalesce-per-key -> DOWNSTREAM:engine-unified-queue-per-frame >>
 
-* **UPSTREAM — the membrane gates (physics).** `MemeProvider` (the TS-side, before the
+* ''UPSTREAM — the membrane gates (physics).'' `MemeProvider` (the TS-side, before the
   membrane crossing) draws the coalesce gates: a per-URI debounce window collapses the
   8–50 replay patches a fresh vessel-connect fires for one URI down to ONE latest-state
   change, and the 5th-shore `_changesetGate` (`meme-provider.ts:64`) coalesces a storm of
   large Automerge transactions to ONE `onChangeset(union)` per bag. This is the
-  **coalesce** family — intermediates lawfully DROP, newest-per-key wins. The drop happens
+  ''coalesce'' family — intermediates lawfully DROP, newest-per-key wins. The drop happens
   HERE, before a change ever reaches `enqueueNalu`.
-* **DOWNSTREAM — the engine queue (runtime).** Each surviving change crosses the membrane
+* ''DOWNSTREAM — the engine queue (runtime).'' Each surviving change crosses the membrane
   via `IslandAdaptor.onUriChanged → enqueueNalu` and joins the ONE unified queue in arrival
   order (N-1), delivered as ONE `wiki.transact()` per frame (N-2). The engine drops
   NOTHING further — every survivor lands — and batches them by the FRAME clock. This is the
-  nalu **crest**: the projection-nalu *periodic / nested-periodic* flush-trigger rendered as
+  nalu ''crest'': the projection-nalu *periodic / nested-periodic* flush-trigger rendered as
   the rAF frame, the Aperture-ladder pulse made delivery.
 
 So N-1's "no per-bag accumulators" governs the DELIVERY runtime — the engine refuses to

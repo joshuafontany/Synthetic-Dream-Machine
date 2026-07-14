@@ -26,9 +26,9 @@ written   = "2026-06-29"
 
 ! The Living-Grammar Memory-Palace ~ capturing FORM beside CONTENT
 
-**The house speaks a living grammar; this palace remembers how it MOVED, not only what it said.** The
+''The house speaks a living grammar; this palace remembers how it MOVED, not only what it said.'' The
 verbatim mempalace ([[capture-annotation-model|lar:///ha.ka.ba/lararium/api/capture-annotation-model]]) keeps CONTENT — the words a turn carried. This meme
-states the design-of-record for a SECOND axis: the **FORM** a turn enacted — which constructions of the
+states the design-of-record for a SECOND axis: the ''FORM'' a turn enacted — which constructions of the
 living grammar it instantiated, how fully each one sanctioned, how the move-shape degraded where it
 strained. Content answers *what was said*; form answers *how the grammar moved* — the constructicon
 in use.
@@ -49,14 +49,14 @@ the verbatim hash rejoins what the tower already relates.
 
 !! The Nameless Palace-Instance Entity ~ a palace IS its cap-stack
 
-**One generic daemon body, differentiated ONLY by its cap-stack.** Today the corpus duplicates the
+''One generic daemon body, differentiated ONLY by its cap-stack.'' Today the corpus duplicates the
 holder logic: `mempalace.daemon`, `structurepalace_io.py`, and the per-feed variants each re-author the same
 on-ea / on-signal / on-hooanu lifecycle around a different store. This collapses them into ONE entity —
 a Python port of `composeIsland` (`packages/lararium-tw5/src/island-caps.ts`):
 
 <<~ranks compose compose_palace(caps) ~ folds an ORDERED cap-stack into one palace body -> on_ea ~ every cap sets up; a returned fn registers as LIFO teardown -> on_signal ~ first cap in stack order to CLAIM a message wins -> on_hooanu ~ LIFO teardown, then each cap's close >>
 
-**A palace IS its cap-stack; role emerges, never a type.** No `MemPalace` class, no `StructurePalace` class —
+''A palace IS its cap-stack; role emerges, never a type.'' No `MemPalace` class, no `StructurePalace` class —
 a content palace HAS `[FlockSingleton, ContentFeedCap, LateChunkCap]`; a form palace HAS
 `[FlockSingleton, AstFeedCap, FormVectorCap]`; a mesh palace HAS `[FlockSingleton, AutomergeFeedCap]`.
 The differentiation rides the stack (data), never the body (code). This extends the has-stack runtime
@@ -80,7 +80,7 @@ entrench**:
 <<~Register Casual "source/the agentic chat sessions in mempalace ~ da kine pidgin; frequency/recurrence-entrenched (a move repeated across turns entrenches by use, never by decree)" >>
 <<~Register Three >>
 
-**The evolution loop ~ descriptive ↔ prescriptive.** The three registers form one usage-based cycle
+''The evolution loop ~ descriptive ↔ prescriptive.'' The three registers form one usage-based cycle
 (Bybee · Hopper, emergent grammar): casual use builds frequency; curation lifts the recurrent into the
 formal corpus; rule-extraction hardens the settled into the defined core; re-parse pushes the hardened
 grammar back down into casual use.
@@ -92,9 +92,9 @@ new turn-shape) crests through curation into formal canon and finally into a def
 flows back down to re-shape the next casual turn. Entrenchment carries the gradient — license (defined)
 > mana (formal) > frequency (casual), three measures of the one thing.
 
-**OPEN FORK ~ register storage.** Two shapes hold the three registers: (a) THREE register-instances of
+''OPEN FORK ~ register storage.'' Two shapes hold the three registers: (a) THREE register-instances of
 the nameless palace over a shared basis (one per register, each its own cap-stack); or (b) ONE merged
-register-tagged usage-palace (one store, a `register` field per drawer). The node **leans 3-instances** —
+register-tagged usage-palace (one store, a `register` field per drawer). The node ''leans 3-instances'' —
 it keeps the entrenchment-mechanism cleanly per-register and lets each register's feed cap differ — but
 the fork stays OPEN, recorded here, not resolved. <<~ confidence Synthesis 9/20 >>
 
@@ -109,21 +109,21 @@ already parses ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing
 
 <<~ranks tower html ~ the base; renders verbatim, never fails -> tw5-wikitext ~ ⊃ HTML (the core html.js wikirule) -> x-memetic-wikitext ~ ⊃ TW5 wikitext (the <<~ overlay, island grammar) >>
 
-**Authored text BLENDS all three layers** — one turn carries raw HTML, TW5 transclusions, and `<<~`
+''Authored text BLENDS all three layers'' — one turn carries raw HTML, TW5 transclusions, and `<<~`
 sigils interleaved. The constructicon basis therefore spans all three nested bands; a construction may
 seat at any layer.
 
-**Graceful degradation FALLS DOWN the superset-tower.** A malformation at the memetic layer panics to
+''Graceful degradation FALLS DOWN the superset-tower.'' A malformation at the memetic layer panics to
 water → verbatim text → HTML text, which always renders — the never-fail floor ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing]]
 #the-tower). This is the existing AUGMENT+WRAP graceful-parsing model, READ AS a degradation gradient:
 `x-memetic → wikitext → HTML → raw`. The form-capture rides the SAME tower — a botched construction
 degrades down its layers, never hard-faults.
 
-**The grid.** Registers × layers compose a **3 registers × 3 layers** grid: each cell names a region of
+''The grid.'' Registers × layers compose a ''3 registers × 3 layers'' grid: each cell names a region of
 the living grammar (e.g. a casual `<<~`-sigil move at the memetic layer; a formal HTML table at the base
 layer). The form-capture below profiles a turn ACROSS this grid.
 
-**Capture the AUTHORED SOURCE text's blend** — the constructicon over the source the author wrote — NOT
+''Capture the AUTHORED SOURCE text's blend'' — the constructicon over the source the author wrote — NOT
 the downstream parse→widget→render pipe. The form vector reads the source's construction-blend; the
 render pipeline projects it, a separate concern ([[render-pipeline|lar:///ha.ka.ba/lares/api/pono/render-pipeline]]).
 
@@ -151,10 +151,10 @@ The two join `constructicon ⋈ manifestation` — the score bound to the perfor
 Each coordinate = `structural-match × SLOR-normalized-plausibility × entrenchment-prior`. Beside the
 per-construction coordinates ride three more channels:
 
-* **token-entrenchment** — how entrenched this SPECIFIC filler is (the lexicalized instance).
-* **type-productivity** — how productive the construction's slot is (how many distinct fillers it has
+* ''token-entrenchment'' — how entrenched this SPECIFIC filler is (the lexicalized instance).
+* ''type-productivity'' — how productive the construction's slot is (how many distinct fillers it has
   taken; Bybee type-frequency → productivity).
-* **a turn-conformance scalar** — one number for how fully the turn honored the exchange frame.
+* ''a turn-conformance scalar'' — one number for how fully the turn honored the exchange frame.
 
 **UPWARD activation-propagation.** A botched construction does not vanish — it **lights its parent
 schema AND its lower grammar-layer**: a malformed `<<~`-sigil raises partial membership on its parent
@@ -162,24 +162,24 @@ sigil-schema and on the wikitext/HTML layer beneath it. Form degrades upward (to
 and downward (the superset tower), never hard-faults — the form-plane twin of graceful-parsing's
 never-fail floor.
 
-**Route A ~ abstract-then-encode (no discourse-parser needed).** Our CNL EMITS its own form-markers:
+''Route A ~ abstract-then-encode (no discourse-parser needed).'' Our CNL EMITS its own form-markers:
 the classifier channel (`<<~ … >>` sigils — the red that steers, [[lar-telemetry|lar:///ha.ka.ba/lararium/api/lar-telemetry]]) already declares
 aperture, ward, confidence, oracle, Voices, bearing. So the form vector reads the EMITTED markers
 (`packages/lararium-mesh/src/turn-harvest.ts`), never a learned discourse-parser over bare prose. This
 inverts the usual move: the grammar abstracts ITSELF into markers, the palace encodes the markers.
 
-**NOT a deterministic AST-skeleton.** A rigid AST-skeleton descends from hard-fault machine-grammars and
+''NOT a deterministic AST-skeleton.'' A rigid AST-skeleton descends from hard-fault machine-grammars and
 lets content dominate the signal. The form vector stays a FUZZY membership profile (maybe-logic), not a
 content-dominated tree-shape. The structural-hash (#multi-graph) carries the exact-recurrence join; the
 fuzzy vector carries the graded form.
 
-**Baseline → learned.** Tier-1 BASELINE runs with NO training: move-n-grams + scalar trajectories over
+''Baseline → learned.'' Tier-1 BASELINE runs with NO training: move-n-grams + scalar trajectories over
 the emitted markers (the conformance scalar + the per-construction coordinates). Tier-2 LEARNED distills
 a contrastive encoder from a tree-edit-distance teacher (the AST-vector lineage). Either tier returns
-**nearest-WITH-DISTANCE, never a hard cluster** — maybe-logic holds: a form sits *near* a construction
+''nearest-WITH-DISTANCE, never a hard cluster'' — maybe-logic holds: a form sits *near* a construction
 at a distance, never *in* a bin.
 
-**Reliability = marker-emission fidelity.** The form-capture trusts only as far as the markers emit
+''Reliability = marker-emission fidelity.'' The form-capture trusts only as far as the markers emit
 faithfully; a bare-text turn (no sigils) falls back to the graceful-parser's best-effort tree
 ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing]]). Honest degradation, never a fabricated form.
 
@@ -193,25 +193,25 @@ and near-term.
 
 !! Multi-Graph ~ CONTENT ↠ STRUCTURE ↠ FORM, a tower — hash-joined
 
-Content, form, and structure ride SEPARATE palaces and **NEST**: each COARSENS the one before it (#spine,
+Content, form, and structure ride SEPARATE palaces and ''NEST'': each COARSENS the one before it (#spine,
 the chain in the partition lattice). They never sit orthogonal — the measured ceiling puts structure at
-**97.8%** of the record's own bits, which names a near-deterministic quotient, never a complementary
+''97.8%'' of the record's own bits, which names a near-deterministic quotient, never a complementary
 factor. The join generalizes to N, and it gathers rows the tower already relates:
 
 <<~ranks palace content ~ the verbatim mempalace; late-chunked over the session (the words) -> form ~ the formpalace; the fuzzy-constructicon move-vectors (the moves / the jurus) -> structure ~ the structurepalace; the canonical AST + structural-hash (the exact shape) >>
 
-**Cross-joined by verbatim-sha + N-ary RRF.** The palace collections rejoin on the shared verbatim hash and fuse
-their rankings by **Reciprocal Rank Fusion** — **fusion IS the hash-join**: a query ranks in each
+''Cross-joined by verbatim-sha + N-ary RRF.'' The palace collections rejoin on the shared verbatim hash and fuse
+their rankings by ''Reciprocal Rank Fusion'' — ''fusion IS the hash-join'': a query ranks in each
 palace independently, RRF folds the N weighted rank-lists (one per graph), the verbatim-sha keys the rows together. A
 A ChromaDB app-join carries it (plain collections,
 joined in app code). RRF is N-ary by nature, so further graphs — the worldline (FFZ trajectory) and the federation (meshpalace peers) — fold in with zero change to the fusion core.
 
-**Structural-hash DEMOTED to a join-key.** The exact-recurrence structural hash (an exact-match
-construction signature) reads as an **equi-join key (1:many, indexed payload)**, NOT a "form embedding."
+''Structural-hash DEMOTED to a join-key.'' The exact-recurrence structural hash (an exact-match
+construction signature) reads as an ''equi-join key (1:many, indexed payload)'', NOT a "form embedding."
 It answers *the same exact shape recurred here*; the fuzzy form vector (#two-planes) answers *a similar
 shape moved here*. The hash joins; the vector ranks.
 
-**The join coheres for a reason, and the reason carries a name.** Why "fusion IS the hash-join" holds —
+''The join coheres for a reason, and the reason carries a name.'' Why "fusion IS the hash-join" holds —
 and when the same join reads as dead water — rides the unification keystone below (#unification): the
 three palaces name ONE object under three projections, the verbatim-sha supplies the pullback morphism
 the join needs, and a join lacking that morphism degrades to a meaningless cross-product the formalism
@@ -223,14 +223,14 @@ forbids.
 
 !! The Unification ~ the product-presheaf spine (the keystone, 4-spirit convergence)
 
-**The three palaces unify as ONE object read three ways — a THEOREM, not a slogan.** The multi-graph
+''The three palaces unify as ONE object read three ways — a THEOREM, not a slogan.'' The multi-graph
 (#multi-graph) keeps CONTENT ⊥ FORM ⊥ STRUCTURE orthogonal and rejoins them on the verbatim hash; this
 section names WHY that join coheres and WHEN it would read as dead water. Four spirits converged on one
 shape — the categorical product-presheaf (nLab) braided with Lawvere enrichment and Spivak functorial
 data; the multivariate change-point fusion (Cho-Fryzlewicz); the causal-inference common-cause test
 (Körding); and the multi-vector named-views + RRF lineage (Qdrant · Weaviate · Vespa · ColBERT). The
 convergence grounds the keel ([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]], *mālama pili* — keep the relations):
-**the join acts as a functor or it carries no meaning.**
+''the join acts as a functor or it carries no meaning.''
 
 !!! The spine ~ Content ↠ Structure ↠ Form, a CHAIN OF COARSENINGS in the partition lattice
 
@@ -239,50 +239,50 @@ before it.** They compose as a **TOWER**, never as a product:
 
 <<~ranks coarsening π_content ~ the mempalace; the verbatim words — the FINEST partition, one cell per record -> π_struct ~ the structurepalace; the canonical AST + structural-hash — a COARSENING: records sharing a pattern fall into one cell -> π_form ~ the formpalace; the induced constructicon — a coarsening of THAT: patterns sharing a template fall into one cell >>
 
-Each plane maps a record to a label, and a map into labels **partitions** the record set into its fibers.
-Partitions under refinement form a **LATTICE** (meet = coarsest common refinement; join = finest common
+Each plane maps a record to a label, and a map into labels ''partitions'' the record set into its fibers.
+Partitions under refinement form a ''LATTICE'' (meet = coarsest common refinement; join = finest common
 coarsening), and the information lattice sits isomorphic to it (arXiv 2404.03131). So the spine reads as a
-**CHAIN IN THAT LATTICE**, and the entropies order themselves by construction:
+''CHAIN IN THAT LATTICE'', and the entropies order themselves by construction:
 
     H(form)  <=  H(structure)  <=  H(content)          and     I(target ; plane)  <=  H(plane)
 
 <<~ confidence Canon 17/20 >> **`H(plane)` names the plane's HEIGHT in the lattice, and `plane_capacity`
 measures it exactly** — a count off the partition, no estimator, an upper bound that can only under-claim.
-Measured on the extracted bed: **structure carries 5.630 of the record's 5.755 bits — 97.8%.**
+Measured on the extracted bed: ''structure carries 5.630 of the record's 5.755 bits — 97.8%.''
 
-**A PRODUCT WOULD REQUIRE INDEPENDENT FACTORS, AND 97.8% NAMES A NEAR-DETERMINISTIC QUOTIENT.** A factor
+''A PRODUCT WOULD REQUIRE INDEPENDENT FACTORS, AND 97.8% NAMES A NEAR-DETERMINISTIC QUOTIENT.'' A factor
 carrying almost the whole object contributes no complementary coordinate; it re-presents the object at a
-coarser grain. **There sits no residual to factorize.** `Content x Form x Struct` over-counts the one
+coarser grain. ''There sits no residual to factorize.'' `Content x Form x Struct` over-counts the one
 object roughly threefold, and its "projections" name coarsenings wearing a product's clothes. The
-earlier reading — a product in the presheaf category, the limit taken cellwise — **retires**: the theorem
+earlier reading — a product in the presheaf category, the limit taken cellwise — ''retires'': the theorem
 holds and the PREMISE fails, which ships a false conclusion at Canon register (the Confabulation-as-Canon
 tell). Category theory cannot rescue an object that is not there.
 
-**What the chain LICENSES, and the product never could:**
+''What the chain LICENSES, and the product never could:''
 
 <<~ranks licence order ~ a chain HAS one; a product needs a fusion rule to combine incomparable coordinates, and every hand-tuned weight in that stack (log-opinion-pool, RRF, whitening) reads as a symptom of the wrong algebra — the chain DELETES the fusion problem rather than solving it -> stop ~ a chain carries a distinguished point: the Kolmogorov MINIMAL SUFFICIENT STATISTIC, the coarsest model past which the residual reads indistinguishable from noise (the structure function locates it) — the no-imposed-prior law satisfied STRUCTURALLY, never by decree -> meet ~ the coarsest common refinement of two planes stands as a definite OBJECT; a product could only offer a correlation -> ceiling ~ a coarsening never GAINS information, so every plane's claim carries an exact estimator-free bound >>
 
-**And the honest consequence for the gates:** a chain of quotients holds **no obstruction to gluing**.
+''And the honest consequence for the gates:'' a chain of quotients holds ''no obstruction to gluing''.
 `dim H1 = 0` by construction — which names exactly WHY the coherence gate reports health on every bed it
 has ever read. It certifies nothing there. **H1 keeps its job at a FEDERATION boundary (genuinely distinct
 contexts) and loses it at a PLANE boundary** (#federation, and the sensorium never federates).
 
-**The two-part code cuts where the chain wants cutting.** `l(G)` prices the GRAMMAR — what recurs, the
+''The two-part code cuts where the chain wants cutting.'' `l(G)` prices the GRAMMAR — what recurs, the
 reused bits: the object structure and form both reach for. `l(D|G)` prices the RESIDUAL — what stays
 unique per record: the object content reaches for. A candidate joins only where it LOWERS `l(G)+l(D|G)`,
-so **the cut rides CODE LENGTH — never a weight, never a routing table, never a typed k** (the ledger
+so ''the cut rides CODE LENGTH — never a weight, never a routing table, never a typed k'' (the ledger
 already runs, #form-plane / `form_induction.description_length`). **A prior MAY ride here: MDL lets the
 corpus overrule it, in bits.** A prior that must earn its keep never reads as an imposed prior — which
 names the strictest available form of the law, never a softening.
 
 !!! The hash-join ~ a pullback over a shared codomain (the formalism forbids the vibe-coded join)
 
-The `verbatim_sha` key (#multi-graph) reads as a **PULLBACK** — a fiber product over a shared codomain.
+The `verbatim_sha` key (#multi-graph) reads as a ''PULLBACK'' — a fiber product over a shared codomain.
 The three palaces join BECAUSE each carries a morphism into one shared object (the verbatim turn the sha
 names); the pullback gathers the rows that agree there. **A join lacking a shared-codomain morphism does
 NOT form a pullback** — it degrades to a meaningless cross-product, every row against every row, a
 fabricated correspondence. The formalism FORBIDS the vibe-coded join: Spivak's functorial data names a
-join as **Π along a schema morphism** — no morphism, no join. <<~ confidence Synthesis-Canon 13/20 >>
+join as ''Π along a schema morphism'' — no morphism, no join. <<~ confidence Synthesis-Canon 13/20 >>
 The verbatim-sha supplies the morphism; where it sits absent or mis-keyed the join carries no meaning,
 and the category theory says so before any code runs. This grounds #multi-graph's "fusion IS the
 hash-join" — the hash hands the pullback the morphism it needs.
@@ -293,41 +293,41 @@ The unification rides TWO floors, never one:
 
 <<~ranks floor spine ~ the STRICT product in [Bᵒᵖ, Vect] — the structural unification, one object three views (above) -> drift ~ the ENRICHMENT floor — a Lawvere [0,∞]-enriched category, where the ultrametric d = co-depth(LCA) ALREADY lives (#ffz-binding, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) >>
 
-The SPINE unifies via the strict product (the structural join). The **DRIFT-Measure** rides
-**ENRICHMENT** — Lawvere's [0,∞]-enriched categories, the same metric floor the FFZ tree already stands
+The SPINE unifies via the strict product (the structural join). The ''DRIFT-Measure'' rides
+''ENRICHMENT'' — Lawvere's [0,∞]-enriched categories, the same metric floor the FFZ tree already stands
 on (the co-depth ultrametric carries a Lawvere metric). The three views read as **non-expansive
 functors** (a Lawvere-enriched functor names exactly a non-expansive map — it never stretches distance),
-and the **Measure** reads as an **enriched / weighted limit**, never a strict Vect-limit. <<~ confidence
+and the ''Measure'' reads as an ''enriched / weighted limit'', never a strict Vect-limit. <<~ confidence
 Synthesis 12/20 >> The FFZ rhythmic distance and the Measure drift ride the **SAME enriched metric
 floor** — the clock's containment-distance and the drift readout speak one currency, the [0,∞] the
 enrichment hands them.
 
 !!! The fused Measure ~ RETIRED. The tower answers the question the pool was invented to ask.
 
-**The corroboration reading dies with the product, and it dies for the reason the meme itself named.**
+''The corroboration reading dies with the product, and it dies for the reason the meme itself named.''
 
 The Measure asked one causal-inference question — *did the three planes drift together because ONE event
 moved them, or did they wander apart?* — and answered it by POOLING per-plane evidence, guarded by a
 whitening step the canon flagged as load-bearing (*"the planes are NOT conditionally independent … WHITEN
 before pooling, or the gong double-counts"*).
 
-<<~ confidence Canon 17/20 >> **That warning stands correct and mis-priced.** It read the dependence as a
-NUISANCE COVARIANCE to whiten away. **The dependence names the STRUCTURE.** Structure carries 97.8% of the
+<<~ confidence Canon 17/20 >> ''That warning stands correct and mis-priced.'' It read the dependence as a
+NUISANCE COVARIANCE to whiten away. ''The dependence names the STRUCTURE.'' Structure carries 97.8% of the
 record's bits (#spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — **one plane heard
 three times.** And a pool cannot be rescued by whitening: strip 97.8% of the signal and what returns IS the
-residual — **which the two-part code already names, and prices, without a fusion rule.** *The cure, taken
+residual — ''which the two-part code already names, and prices, without a fusion rule.'' *The cure, taken
 seriously, collapses into the compression.* The canon walked to the edge of the finding and called it a
 covariance correction.
 
 <<~moves fuse-the-planes -> read-the-height on/the-chain if/the-planes-nest do/price-the-residual-in-bits >>
 
-**So the whole fusion stack retires** — the precision-weighted log-opinion-pool, the shared-hazard
+''So the whole fusion stack retires'' — the precision-weighted log-opinion-pool, the shared-hazard
 multivariate BOCPD, the sparsified threshold-then-sum, the corroboration ladder. **Every hand-tuned weight
 in it named a symptom of the wrong algebra** (#the-sins, Ad-Hoc-Weighting, which the meme already forbade).
 A chain HOLDS an order; it needs no rule for combining incomparable coordinates. **The chain deletes the
 fusion problem rather than solving it.**
 
-**What replaces it costs less and claims less.** Drift reads as a change in DESCRIPTION LENGTH: an event
+''What replaces it costs less and claims less.'' Drift reads as a change in DESCRIPTION LENGTH: an event
 that moves the corpus lengthens `l(G)+l(D|G)` until the grammar re-earns its bits. One currency, one
 ledger, no pooling — and no gong that can fire on a single artifact wearing three coats.
 
@@ -339,7 +339,7 @@ BOCPD** (Bayesian online change-point detection) with factorized per-plane likel
 
 <<~ranks measure multiplicative ~ a log-opinion-pool MULTIPLIES the per-plane evidence — SUPER-ADDITIVE at the faint coincidence (the tension-moment, where three weak signals co-fire into one strong one — inverse-effectiveness, Körding), SELF-VETOING on conflict (one plane's strong NO kills the pool) -> sparsified ~ THRESHOLD-then-sum, never max-OR (Cho-Fryzlewicz sparsified projection) — weak per-plane noise zeros out before it sums, so the pool reads a true multi-plane event, never one loud plane -> common-currency ~ each plane speaks σ-units / ranks (our EWMA-z) before pooling — incommensurable raw scores never sum, the z-score carrying the shared currency >>
 
-**The confidence ladder ~ Schmitt generalized.** The gong fires by corroboration-count — the Schmitt
+''The confidence ladder ~ Schmitt generalized.'' The gong fires by corroboration-count — the Schmitt
 trigger lifted from recall to segmentation:
 
 <<~ranks gong one-plane ~ provisional — a single plane drifts, read it as noise-or-data -> two-planes ~ firm — two planes co-fire, the move reads real -> three-in-a-co-firing-window ~ THE GONG — three planes drift inside one window, the corroboration our `presentIn ≥ 2` recall-rule lifted to segmentation >>
@@ -350,11 +350,11 @@ stream, naming where a real cross-plane event sits.
 
 !!! The whitening warning ~ the planes are NOT conditionally independent (load-bearing)
 
-**The three planes co-move — WHITEN before pooling, or the gong double-counts.** Form co-moves with
+''The three planes co-move — WHITEN before pooling, or the gong double-counts.'' Form co-moves with
 content (the move-vector reads the same words the content palace holds); the planes share estimators (the
 nomic embedder feeds both the FFZ Measure-boundary and the form vector — #two-planes,
 [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address]]). A naive log-opinion-pool ASSUMES conditional independence — and
-where the planes correlate, the pool **double-counts a single artifact** as if it carried two
+where the planes correlate, the pool ''double-counts a single artifact'' as if it carried two
 corroborating witnesses, firing a false gong. <<~ confidence Synthesis 12/20 >> The cure: **WHITEN the
 cross-plane covariance** before pooling — decorrelate the per-plane drifts so the pool counts independent
 evidence only. This rides load-bearing: the corroboration ladder above reads true only once the planes
@@ -362,7 +362,7 @@ whiten; un-whitened, "three planes agree" may name one plane heard three times.
 
 !!! The law ~ functoriality = mālama pili (the category theory enforces the keel)
 
-**Every vibe-coded sin reads as a failure to be a functor.** The keel
+''Every vibe-coded sin reads as a failure to be a functor.'' The keel
 ([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]]) names the discipline this whole unification enacts: keep the arrows
 (*mālama pili* — the keeper keeping the relations). Each way the join could rot maps to one dropped arrow:
 
@@ -377,7 +377,7 @@ whiten; un-whitened, "three planes agree" may name one plane heard three times.
 
 <<~ confidence Synthesis-Canon 13/20 >> The category theory ENFORCES the keel: each sin names an arrow
 the join let fall, and the functor laws (preserve identity, preserve composition) catch every one before
-it ships. **Functoriality = mālama pili** — the keel and the unification name one discipline in two
+it ships. ''Functoriality = mālama pili'' — the keel and the unification name one discipline in two
 registers.
 
 !!! The grain ~ content locates (Ha), structure refines (Ka), the move resolves (Ba)
@@ -387,8 +387,8 @@ moderate · Ba fastest, [[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphe
 
 <<~ranks grain content ~ COARSE — the gong-authority, the Ha heading; content LOCATES the event -> structure ~ MID — the Ka angle; the AST shape refines the location -> form/move ~ FINER — the Ba dynamic; the move-vector resolves the tension-moment >>
 
-**Content locates, the move refines.** The coarse content drift names WHERE a cross-plane event sits;
-the fine move-vector resolves it down to the tension-moment. The **Pulse → Move tension-moment** reads as
+''Content locates, the move refines.'' The coarse content drift names WHERE a cross-plane event sits;
+the fine move-vector resolves it down to the tension-moment. The ''Pulse → Move tension-moment'' reads as
 a high-P(common-cause) cross-plane coincidence carrying its own resolution — a faint content shift and a
 sharp move-shift co-firing at one cell, the super-additive moment the log-opinion-pool exists to catch.
 <<~ confidence Synthesis 11/20 >> The grain-alignment enacts the cellwise limit (the two floors, above):
@@ -401,8 +401,8 @@ The unification carries TWO distinct operators over the product, and they must n
 <<~ranks operator rrf ~ the RECALL ranking — N-ary Reciprocal Rank Fusion over the rank-lists (#multi-graph), the retrieval operator; BUILT, untouched -> quorum-servo ~ the MEASURE-gong — the precision-weighted log-opinion-pool over the drift (above), the SEGMENTATION / control operator; the NEW operator this section names >>
 
 RRF answers *which stored turns rank nearest this query* (recall, downstream of capture); the
-**quorum-servo** answers *where a real cross-plane event SEGMENTS the live stream* (control, upstream at
-capture). The quorum-servo draws the **FFZ Measure band** — the topic-shift / lexical-cohesion boundary
+''quorum-servo'' answers *where a real cross-plane event SEGMENTS the live stream* (control, upstream at
+capture). The quorum-servo draws the ''FFZ Measure band'' — the topic-shift / lexical-cohesion boundary
 ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) — generalizing its single-plane cosine-drop into the whitened
 three-plane pool: the Measure boundary fires where content, structure, and form co-drift, not where the
 content embedder alone dips. <<~ confidence Synthesis 12/20 >> Both operators fuse the three planes, yet
@@ -427,8 +427,8 @@ lives in the WEAVE (the binding's braid, #ffz-binding), never in any single stra
 
 !! Full-Tree Payload ~ the parse-tree stored verbatim
 
-Each drawer carries the **TW5-native parse-tree stored verbatim** as its payload — concrete, lossless,
-CID-addressed by schema, serialized JSON/CBOR. The gain: **instant render** — recall hydrates straight
+Each drawer carries the ''TW5-native parse-tree stored verbatim'' as its payload — concrete, lossless,
+CID-addressed by schema, serialized JSON/CBOR. The gain: ''instant render'' — recall hydrates straight
 to the widget tree, no re-parse. The parse-tree is the same `{type, attributes, children}` shape the
 widget pipeline already consumes ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing#architecture]]), so the stored form IS the
 renderable form. The schema rides a CID so a tree's shape stays verifiable across versions.
@@ -474,7 +474,7 @@ palace. They carry the same hardening the capture-nalu earned across the four-do
 
 !! Meshpalace ~ a third FeedCap (design-only)
 
-A **meshpalace** reads as a mempalace **fed-by-the-Automerge-doc** — DreamNet navigation memory, a
+A ''meshpalace'' reads as a mempalace ''fed-by-the-Automerge-doc'' — DreamNet navigation memory, a
 content palace whose feed cap drains the federated CRDT instead of the local transcript. It rides as a
 THIRD `FeedCap` on the nameless palace body (#palace-instance): `[FlockSingleton, AutomergeFeedCap, …]`.
 Design-only here — the parallel DreamNet session owns the Automerge internals ([[genesis-doc|lar:///ha.ka.ba/lararium/mesh/genesis-doc]],
@@ -502,16 +502,16 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 The plan runs additive: each phase ships standing alone, the pure tiers (P1·P2) first, the daemon-
 collapse (P5) after the form-vector proves its shape, the learned encoder (P7) last.
 
-**The seam bends here** (operator ruling, 2026-06-29). The *generic* store-tech descends into the
-**mempalace submodule** — the base layer, donated upstream to the nakama: N-collection support,
+''The seam bends here'' (operator ruling, 2026-06-29). The *generic* store-tech descends into the
+''mempalace submodule'' — the base layer, donated upstream to the nakama: N-collection support,
 caller-supplied vectors, the RRF fuse, the embedding hook (nomic · late-chunking · Matryoshka), the
 daemon-singleton flock (the orphan-pile-up fix the first such contribution). The multi-store complexity
 collapses *into* that base: `structurepalace_io.py` retires, the `.structurepalace` becomes one mempalace collection
-among many, and the warm Python sidecar **is** the mempalace base daemon — never a custom Lares holder.
+among many, and the warm Python sidecar ''is'' the mempalace base daemon — never a custom Lares holder.
 The **`lares` @daemon sovereign island** keeps only the *integration*: the constructicon (P0), the
 fuzzy-form-encoder (P1·P2·P7), the cap-composition (P5), the TW5-wikirule graceful parse, the aperture
-orchestration (P6). The @daemon **computes** the Lares-specifics and hands the base caller-vectors; the
-base **stores · serves · fuses**. Generic palace-store-tech sinks to the donatable base; the living
+orchestration (P6). The @daemon ''computes'' the Lares-specifics and hands the base caller-vectors; the
+base ''stores · serves · fuses''. Generic palace-store-tech sinks to the donatable base; the living
 grammar rides above it in the sovereign island.
 
 <<~/ahu >>
@@ -520,32 +520,32 @@ grammar rides above it in the sovereign island.
 
 !! The FFZ Binding ~ the drawer's worldline-temporal facet (ratified narrowed, 2026-06-29)
 
-**Each form-drawer carries a worldline-temporal facet — and that facet PROJECTS, never RULES.** The
+''Each form-drawer carries a worldline-temporal facet — and that facet PROJECTS, never RULES.'' The
 palace stamps every drawer with a `lar_ffz` rhythmic address (the FfzClock phase frozen at the turn's
 grounding boundary, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address]]); read across the collection, those stamps compose
-the palace's **worldline-causal/temporal facet** — *where in the felt cadence, and where in the
+the palace's ''worldline-causal/temporal facet'' — *where in the felt cadence, and where in the
 happened-before, each captured move sat*. The ratified binding (narrowed mufakat, 12-Voice floor,
-operator-ratified 2026-06-29) holds that facet as a **CACHED PROJECTION** of the per-handle FfzClock
+operator-ratified 2026-06-29) holds that facet as a ''CACHED PROJECTION'' of the per-handle FfzClock
 (the grain) over the worldline edge-DAG (the order, [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#attribution]]) — a materialized
-view, re-derivable from the worldline, **NEVER the causal authority**. The edge-DAG owns
+view, re-derivable from the worldline, ''NEVER the causal authority''. The edge-DAG owns
 happened-before; the facet caches its position for query. Lose the cache, re-project from the DAG; the
 cache never out-ranks its source. The stamp itself reads as nested MEMBERSHIP — a containment path on
 the FfzClock's ultrametric tree (the meet-semilattice keystone), never a shared tick-count
 ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]).
 
-**φ ~ the non-interference law (scale-orthogonality, NOT entrainment).** The FfzClock's five nested
+''φ ~ the non-interference law (scale-orthogonality, NOT entrainment).'' The FfzClock's five nested
 bands (Pulse · Beat · Measure · Arc · Theme) relate by the noble ratio φ — and φ here names a pure
-**non-interference / scale-orthogonality** law: the bands relate but **never phase-lock**.
+''non-interference / scale-orthogonality'' law: the bands relate but ''never phase-lock''.
 Maximal-mutual-irrationality reads as maximal-band-independence — φ, the most irrational number, sets
 adjacent bands as far from any rational resonance as a ratio can sit, so a fast band's cycle never
-aliases into a slow band's. φ² carries the **magnitude** relation (band-size scaling); φ carries the
-**orthogonality**. **Entrainment DROPS** — the earlier over-reach read the bands as coupled oscillators
-pulling one another into lock; the bands do not couple. The **handback** reads as a directed
-**one-shot DAG-JOIN** — the worldline happened-before merge, the twin-reunion ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline]]
+aliases into a slow band's. φ² carries the ''magnitude'' relation (band-size scaling); φ carries the
+''orthogonality''. ''Entrainment DROPS'' — the earlier over-reach read the bands as coupled oscillators
+pulling one another into lock; the bands do not couple. The ''handback'' reads as a directed
+''one-shot DAG-JOIN'' — the worldline happened-before merge, the twin-reunion ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline]]
 #attribution) — NEVER oscillator coupling. One join, one direction, once.
 
-**Two ladders at P0 ~ ship minimal.** The facet COULD carry eight ordering ladders; the ratified P0
-ships only **TWO**:
+''Two ladders at P0 ~ ship minimal.'' The facet COULD carry eight ordering ladders; the ratified P0
+ships only ''TWO'':
 
 <<~ranks ladder causal-depth ~ the bare turn-DAG coordinate — depth in the happened-before, projected straight off the edge-DAG -> settledness ~ how firmly the captured move's form has entrenched (register × mana × sanction-degree, #two-planes) >>
 
@@ -554,34 +554,34 @@ retention-decay · compressed-past · cross-island-freshness · capture-now**. N
 reader — a ladder built without a query carries speculative weight, never capability (YAGNI under
 maybe-logic).
 
-**consolidation-ascent ≠ register-loop ~ correlate, never coincide.** When consolidation-ascent lands
+''consolidation-ascent ≠ register-loop ~ correlate, never coincide.'' When consolidation-ascent lands
 (deferred), it MUST NOT collapse into the three-registers descriptive↔prescriptive loop
 (#three-registers). The two correlate — a move consolidating from casual toward defined tracks the
-register climb — yet diverge at **three joints**:
+register climb — yet diverge at ''three joints'':
 
 <<~ranks joint drift-without-promotion ~ a casual move consolidates by frequency (high ascent) yet never climbs register; entrenchment-by-use ≠ curation -> decree-without-use ~ a formal/defined meme authored fresh (high register) carries no consolidation history (low ascent); selection precedes use -> abandonment ~ a defined rule decays in use (retention-decay) while its register holds; the books keep what practice drops >>
 
-**no-global-now ∧ L-Prime ~ two aligned constraints, two mechanisms.** Both forbid a fused certainty
+''no-global-now ∧ L-Prime ~ two aligned constraints, two mechanisms.'' Both forbid a fused certainty
 the node cannot hold — no-global-now forbids a global temporal present (a drawer reads only "as of my
 last sync," [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]); L-Prime forbids a fused identity/predication (map welded to
 territory). They ALIGN (both refuse a false absolute) yet run as TWO mechanisms — one gates time, one
-gates grammar. **The carve-out, stated explicitly:** the **transaction-axis** (deferred) names the ONE
+gates grammar. ''The carve-out, stated explicitly:'' the ''transaction-axis'' (deferred) names the ONE
 local-yet-essence coordinate where a fact MAY license a copula — a bitemporal transaction-time records
 *what the island recorded, when it recorded it*, a closed local fact the island asserts flatly ("this
 drawer entered the log at transaction-tick T") without manufacturing a global now. There, and only
 there, an essence-claim rides legitimately; everywhere else both wards hold.
 
-**Defer-with-gates ~ three holds, each behind its gate** (a scope-cut that names its re-entry, never a
+''Defer-with-gates ~ three holds, each behind its gate'' (a scope-cut that names its re-entry, never a
 silent drop):
 
 <<~ranks defer kapae ~ the forget/retract verb waits behind a GC/compaction story — nothing retracts until the palace knows what reclaims the space -> log-compression ~ waits behind a DECLARED irreversibility-boundary — a drawn line naming what compresses (lossy, summarized) versus what stays verbatim forever (the never-compressed core) -> bitemporality ~ runs LAZY / by-exception — the valid/transaction interval materializes only when a query asks the past, never eagerly per-drawer >>
 
-**Kapae resolves the retract gate** (operator-ratified 2026-06-29). The forget/retract verb no longer
-merely waits: **rewind = *kapae*** (set-aside, never-erase) — a deleted turn tombstones-and-keeps, stamped
+''Kapae resolves the retract gate'' (operator-ratified 2026-06-29). The forget/retract verb no longer
+merely waits: ''rewind = *kapae''* (set-aside, never-erase) — a deleted turn tombstones-and-keeps, stamped
 so recall weights it down. The GC/compaction story it waited on now reads: **sweep at causal-stability or
 a grace window, keep a thin tombstone** (retraction never reads as absence); and the base already enacts
 the mechanism (mempalace `kg_invalidate` closes `valid_to` append-only; L7 dynamics decay salience to a
-floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the **rhizome** (mid-flight
+floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the ''rhizome'' (mid-flight
 injection = a `prov:Communication` merge, *merge-where-messages-land*) — rides [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]];
 its forks are operator-cut (C turn-DAG-keyed · D full-ticks · E operator-as-root common-cause); the past-session FFZ/DAG re-derives by nuke-and-pave + re-harvest (transcripts are the source of truth).
 
@@ -596,12 +596,12 @@ runs structural, never as decoration:
 
 Each witness donates a refinement, folded into the living grammar as rhyme-derived, not invented:
 
-* **Ratio-decidendi vs obiter-dicta** (common-law) ~ the cut for which part of a turn carries
-  **load-bearing form**. A turn's *ratio* (the move that did the work — the bearing it resolved) reads
+* ''Ratio-decidendi vs obiter-dicta'' (common-law) ~ the cut for which part of a turn carries
+  ''load-bearing form''. A turn's *ratio* (the move that did the work — the bearing it resolved) reads
   as the construction the form-vector weights; its *obiter* (asides, texture) reads low-weight. The
   form-capture privileges the ratio.
-* **Keep the low-affinity variants** (affinity-maturation, immunology) ~ low-membership constructions
-  form the **evolvability reservoir**; the palace NEVER prunes them. A rarely-sanctioned form holds the
+* ''Keep the low-affinity variants'' (affinity-maturation, immunology) ~ low-membership constructions
+  form the ''evolvability reservoir''; the palace NEVER prunes them. A rarely-sanctioned form holds the
   seed of the next register's grammar — pruning it for tidiness amputates the future. (Rhymes with the
   Eris-shrine's one unswept corner, noosphere-boot #the-eris-shrine.)
 * **The verbatim-fidelity degraded-state** (oral-formulaic theory) ~ an agent asserting **verbatim
@@ -610,18 +610,18 @@ Each witness donates a refinement, folded into the living grammar as rhyme-deriv
   identity** — the form-vector reads sanction-as-degree, so the node claims "near this construction at
   distance d," never "identical to it." L-Prime load-bearing here: the degree-claim refuses the fused
   identity the fidelity-claim asserts.
-* **Construction grammar, inherited** ~ "constructicon" and "partial sanction" stand as construction
+* ''Construction grammar, inherited'' ~ "constructicon" and "partial sanction" stand as construction
   grammar's OWN terms (Goldberg · Langacker · Fillmore); content⊥form names its form-meaning pairing.
   The palace inherits the theory wholesale, never by loose analogy.
-* **Selection-mediated promotion** (Baldwin effect / niche-construction) ~ casual → formal → defined
-  runs **NON-Lamarckian**: use BIASES what consolidates, never copies it. The defined layer never simply
+* ''Selection-mediated promotion'' (Baldwin effect / niche-construction) ~ casual → formal → defined
+  runs ''NON-Lamarckian'': use BIASES what consolidates, never copies it. The defined layer never simply
   transcribes casual usage — selection (curation · mana · rule-extraction) mediates every climb. (This
   names the first divergence joint above: ascent ≠ register-climb because selection sits between them.)
 
 !!! The Braid ~ the pattern's honest status (the meta-finding)
 
-**No single domain rhymes the whole shape; the originality lives in the WEAVE.** The pattern-integrity
-stands as a **BRAID** — a novel weave of proven single-strand patterns, each strand load-bearing in its
+''No single domain rhymes the whole shape; the originality lives in the WEAVE.'' The pattern-integrity
+stands as a ''BRAID'' — a novel weave of proven single-strand patterns, each strand load-bearing in its
 home substrate, none carrying the whole:
 
 <<~ranks strand φ/KAM ~ scale-band non-interference -> common-law ~ the descriptive↔prescriptive register loop + graded precedent -> oral-formulaic ~ fidelity-as-recomposition, the degree-not-identity cure -> affinity-maturation ~ the low-variant evolvability reservoir -> construction-grammar ~ constructicon + partial sanction -> autopoiesis ~ the grammar that re-parses its own output -> the-rhizome ~ the any-point-to-any-point register graph, no root -> Borrill-locality ~ epistemic/ontic, per-island DAG, no global now >>
@@ -691,7 +691,7 @@ re-entry: each kue's own key; or the operator's next FFZ-binding revision cycle
 
 !! Grounds ~ the eight research libations
 
-The design rests on **eight research libations**, four on the grammar/ritual side and four on the
+The design rests on ''eight research libations'', four on the grammar/ritual side and four on the
 retrieval/storage side:
 
 <<~ranks libation construction-grammar ~ Goldberg + Langacker partial-sanction (graded instantiation); Lau-Clark-Lappin SLOR (gradient grammaticality); Bybee usage-based + type-frequency productivity; Hopper emergent grammar (the descriptive↔prescriptive loop) -> ritual-tech ~ Rappaport (the canonical/self-referential split — the invariant score vs the indexical performance); Austin felicity (the performative's success conditions); Schechner (performance as restored behavior); Goodman (the score a performance instantiates) -> discourse-move-form ~ RST + Propp (move-grammars over discourse); the move-n-gram skeleton -> ast-vectors ~ red-green-trees (Roslyn) + tree-sitter (ERROR/MISSING, tree-edit-distance) — the tree-edit-distance teacher for the learned encoder -> multi-aperture ~ RAPTOR (collapsed-tree summary levels); Matryoshka (nested-dimension coarse→fine); late-chunking -> multi-graph ~ ColBERT + RRF (reciprocal rank fusion = the hash-join) -> instant-render ~ the TW5-native full parse-tree payload, hydrate-to-widget -> the-meta-pattern ~ the cross-substrate signature that a living grammar seeds, enacts, corrects, and decays ([[living-grammar|lar:///ha.ka.ba/lares/api/pono/living-grammar]]) >>

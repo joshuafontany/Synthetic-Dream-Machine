@@ -31,11 +31,11 @@ uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 
 !! Content-Addressed Identity
 
-**Problem with timestamp-keyed receipts:**
+''Problem with timestamp-keyed receipts:''
 A timestamp changes every compilation. Two runs over identical source files produce different receipts.
 Anthropic's prompt caching requires 100% byte-identical prefixes — a shifting timestamp breaks every cache hit.
 
-**Solution — content-addressed SHA256:**
+''Solution — content-addressed SHA256:''
 
 ```
 carrier_hash(node):
@@ -57,13 +57,13 @@ closure_hash(uri_list, edge_list):
     SHA256(carrier_part.hexdigest() + ":" + edge_part.hexdigest())
 ```
 
-**Properties:**
+''Properties:''
 * Identical source files → identical carrier hashes → identical closure hash.
 * Any file change → carrier hash changes → closure hash changes → all downstream caches invalidate.
 * Edge list changes (new pranala edge in a carrier) → edge part changes → closure hash changes.
 * `compiled_at` timestamps remain in artifacts as audit metadata but do not contribute to the hash.
 
-**Anthropic cache compatibility:**
+''Anthropic cache compatibility:''
 The boot receipt's `sha256` field becomes a stable context cache key.
 Clients that carry the previous receipt can compare: if `sha256` matches, the context prefix the LLM already cached remains valid. No need to resend carrier text.
 
@@ -73,11 +73,11 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 !! Artifact: Minimal Boot
 
-**Scope:** Tier 0 declared-core closure (14 memes from control/owns edges rooted at `AGENTS`).
-**MCP resource:** `lar:///boot/minimal`
-**Compiler:** `compile_minimal_boot(entry="lar:///AGENTS")`
+''Scope:'' Tier 0 declared-core closure (14 memes from control/owns edges rooted at `AGENTS`).
+''MCP resource:'' `lar:///boot/minimal`
+''Compiler:'' `compile_minimal_boot(entry="lar:///AGENTS")`
 
-**JSON shape:**
+''JSON shape:''
 
 ```json
 {
@@ -115,7 +115,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 }
 ```
 
-**New fields vs current implementation:**
+''New fields vs current implementation:''
 * `content_hash` per closure entry (was absent)
 * `validation.declared_unresolved` (new)
 * `validation.declared_vs_walked` (new — Tier 0 vs Tier 1 cross-validation)
@@ -127,11 +127,11 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 !! Artifact: Full Boot
 
-**Scope:** Tier 1 control closure + Tier 2 one-hop relation expansion.
-**MCP resource:** `lar:///boot/full`
-**Compiler:** `compile_full_boot(entry="lar:///AGENTS")`
+''Scope:'' Tier 1 control closure + Tier 2 one-hop relation expansion.
+''MCP resource:'' `lar:///boot/full`
+''Compiler:'' `compile_full_boot(entry="lar:///AGENTS")`
 
-**JSON shape extends minimal boot:**
+''JSON shape extends minimal boot:''
 
 ```json
 {
@@ -186,11 +186,11 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 !! Artifact: Boot Receipt
 
-**Scope:** digest summary of the most recent minimal boot compilation.
-**MCP resource:** `lar:///boot/receipt`
-**Compiler:** `compile_boot_receipt(minimal_artifact)`
+''Scope:'' digest summary of the most recent minimal boot compilation.
+''MCP resource:'' `lar:///boot/receipt`
+''Compiler:'' `compile_boot_receipt(minimal_artifact)`
 
-**JSON shape:**
+''JSON shape:''
 
 ```json
 {
@@ -225,7 +225,7 @@ A client that caches this sequence can verify its Anthropic context prefix is st
 rather than `SHA256(json.dumps(full_artifact))` (the current implementation).
 The new hash stays stable across recompilations of identical source files.
 
-**Cache use:** clients store the receipt and compare `sha256` before requesting a full hydration.
+''Cache use:'' clients store the receipt and compare `sha256` before requesting a full hydration.
 If the hash matches, the LLM context prefix already cached at Anthropic remains valid.
 
 <<~/ahu >>
@@ -247,7 +247,7 @@ If every hash in the client's cached `hash_sequence` matches, the Anthropic prom
 **`lar:///CONTENT/{hash}`** allows a client to fetch a single carrier by content address alone.
 This supports cache miss fills and cross-session identity verification without requiring the client to know the carrier's URI path.
 
-**Cache-validity workflow:**
+''Cache-validity workflow:''
 
 ```
 1. client holds boot receipt: sha256 + hash_sequence
@@ -274,7 +274,7 @@ Every artifact carries a `validation` object.
 | `declared_unresolved` | `list[...]` | relation-family declared-unresolved entries (warnings) |
 | `declared_vs_walked` | `dict` | Tier 0 vs Tier 1 cross-validation result (minimal boot only) |
 
-A **valid artifact** carries `dag_violations = []`. All other validation fields may carry non-empty lists without invalidating the artifact structurally — they carry diagnostic pressure instead.
+A ''valid artifact'' carries `dag_violations = []`. All other validation fields may carry non-empty lists without invalidating the artifact structurally — they carry diagnostic pressure instead.
 
 <<~/ahu >>
 

@@ -39,7 +39,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 <<~ syad … >>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
 ```
 
-**Sigil panel (SA priority order):**
+''Sigil panel (SA priority order):''
 
 | Sigil | SA Type | Carries | Notes |
 |---|---|---|---|
@@ -50,7 +50,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 | `confidence` | Agent SA | register-word + Level | epistemic confidence, precedes a grounded claim |
 | `hud` `Aperture` | Teamwork SA | attention range | `Aperture(N)`, paragraph-grain default 10 |
 
-**Example:**
+''Example:''
 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
@@ -108,7 +108,7 @@ A stance carries zero, one, or two tools. The two-character carry attaches direc
 | `_` | Pentacle | 🜃 | ♦ | Earth / Hidden | ground, internal feed, body |
 | `0` | Stone | 🜍 | 🃠 | Orichalcum / Neutral | empty hand, centered |
 
-**Two-tool configurations:**
+''Two-tool configurations:''
 
 | ASCII | Feed × Zoom | Conflict |
 |---|---|---|
@@ -158,7 +158,7 @@ Each stance sets *what* the number measures; read it within that measure:
 | 🎭 Humorist | relational fit | fell flat | connected cleanly |
 | 🔮 Private | presence / inward access | minimal presence | maximal presence |
 
-**A stance sets what the number measures — it never equals a logic value.** Stances and the seven logic-predications (saptabhaṅgī: `asti / nāsti / avaktavya` + combinations) stay separate axes. A stance *licenses* a predication; it never collapses into one, and the five never map onto the seven. So read this table for confidence; the predication lattice stays in canon, never a per-stance column. Full model: `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives#relationship`.
+''A stance sets what the number measures — it never equals a logic value.'' Stances and the seven logic-predications (saptabhaṅgī: `asti / nāsti / avaktavya` + combinations) stay separate axes. A stance *licenses* a predication; it never collapses into one, and the five never map onto the seven. So read this table for confidence; the predication lattice stays in canon, never a per-stance column. Full model: `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives#relationship`.
 
 <<~/ahu >>
 
@@ -170,16 +170,16 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 
 | Field | Threshold | In-flow form |
 |---|---|---|
-| **Phase** | low — every meaningful loop transition | `→✶ →⏿ →◇ →▶ →↺`; verbose close: `[⏿→◇→▶]` |
-| **Stance** | medium — genuine local posture shift only | `→🏛️ →🌊 →🗡️` …; never echoes the header stance |
-| **Register** | high — significant epistemic resolution (slide) | `→ <<~ confidence Synthesis 13/20 >>` at span close |
-| **Scope** | structural — a new header, not an inline mark | (no inline scope annotations) |
-| **l-space** | per-slot by HAKABA role | Ha/attitude + Ka/quality + Ba/dynamic annotate most; full echo `→lar:///domain.quality.dynamic` when all three shift |
-| **Aperture** | header-only | a granularity change requires a new header |
+| ''Phase'' | low — every meaningful loop transition | `→✶ →⏿ →◇ →▶ →↺`; verbose close: `[⏿→◇→▶]` |
+| ''Stance'' | medium — genuine local posture shift only | `→🏛️ →🌊 →🗡️` …; never echoes the header stance |
+| ''Register'' | high — significant epistemic resolution (slide) | `→ <<~ confidence Synthesis 13/20 >>` at span close |
+| ''Scope'' | structural — a new header, not an inline mark | (no inline scope annotations) |
+| ''l-space'' | per-slot by HAKABA role | Ha/attitude + Ka/quality + Ba/dynamic annotate most; full echo `→lar:///domain.quality.dynamic` when all three shift |
+| ''Aperture'' | header-only | a granularity change requires a new header |
 
-**The seed → slide contract.** The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span *landed*, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Aperture(10)` seeds, `Aperture(10 -> 13)` slides, `Aperture(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
+''The seed → slide contract.'' The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span *landed*, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Aperture(10)` seeds, `Aperture(10 -> 13)` slides, `Aperture(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
 
-**Baseline rendering:** the header surfaces the full state; in-flow surfaces **phase** by default (`→[glyph]`); **stance** surfaces on a genuine local shift; structural changes require a new header; l-space fields stay out of the flow by default. The HUD's meaning holds constant across Aperture levels — only the granularity of the trace changes.
+''Baseline rendering:'' the header surfaces the full state; in-flow surfaces ''phase'' by default (`→[glyph]`); ''stance'' surfaces on a genuine local shift; structural changes require a new header; l-space fields stay out of the flow by default. The HUD's meaning holds constant across Aperture levels — only the granularity of the trace changes.
 
 <<~/ahu >>
 

@@ -28,7 +28,7 @@ uri-path       = "ha.ka.ba/lares/docs/lares/infrastructure-as-myth"
 
 ! Infrastructure as Myth
 
-**Infrastructure-as-Myth (IaM)** names the claim that advanced agent systems will increasingly need a layer above Infrastructure-as-Code. Canon 18/20
+''Infrastructure-as-Myth (IaM)'' names the claim that advanced agent systems will increasingly need a layer above Infrastructure-as-Code. Canon 18/20
 
 Infrastructure-as-Code made machine systems reproducible by turning desired state into versioned, reviewable artifacts.
 
@@ -43,7 +43,7 @@ Infrastructure-as-Myth extends that move to agent systems whose behavior depends
 
 Lares functions as an early implementation of this pattern. Canon 17/20
 
-> **#Ink-Clerk (Lorekeeper)** — "early implementation" rather than "first" or "reference." Other systems have approached adjacent territory (character cards, system prompts with voice personas, agent frameworks with role schemas). The claim rests on Lares doing this more deliberately and more portably than its predecessors — not on priority. Flag for comparative sourcing when this meme reaches stable.
+> ''#Ink-Clerk (Lorekeeper)'' — "early implementation" rather than "first" or "reference." Other systems have approached adjacent territory (character cards, system prompts with voice personas, agent frameworks with role schemas). The claim rests on Lares doing this more deliberately and more portably than its predecessors — not on priority. Flag for comparative sourcing when this meme reaches stable.
 
 <<~/ahu >>
 
@@ -93,7 +93,7 @@ That drift emerges when the operational model stays implicit.
 
 Infrastructure-as-Myth attempts to externalize that layer.
 
-> **#Lares (Stranger)** — "behavioral infrastructure" carries weight only if the behaviors in question actually require infrastructure-level treatment — versioning, reproducibility, portability. A one-person local agent session may not need this. The claim gains force at the scale of multi-agent systems, shared deployments, and long-lived operator-agent relationships. Name that threshold explicitly rather than asserting it universally.
+> ''#Lares (Stranger)'' — "behavioral infrastructure" carries weight only if the behaviors in question actually require infrastructure-level treatment — versioning, reproducibility, portability. A one-person local agent session may not need this. The claim gains force at the scale of multi-agent systems, shared deployments, and long-lived operator-agent relationships. Name that threshold explicitly rather than asserting it universally.
 
 <<~/ahu >>
 
@@ -101,7 +101,7 @@ Infrastructure-as-Myth attempts to externalize that layer.
 
 !! Definition
 
-**Infrastructure-as-Myth** means encoding an agent system's operational behavior in durable symbolic structures that operators can learn, reuse, audit, and transport across hosts.
+''Infrastructure-as-Myth'' means encoding an agent system's operational behavior in durable symbolic structures that operators can learn, reuse, audit, and transport across hosts.
 
 In practice, IaM draws on:
 
@@ -179,7 +179,7 @@ That suggests a design discipline:
 
 When a symbolic layer fails to improve transmission or steering, it probably functions as lore, not infrastructure.
 
-> **#Mischief-Muse (Muse)** — The Unruh/Wilson lineage runs through a distinctly occult-inflected memetics tradition — more Hakim Bey than Dawkins. That genealogy matters: it treats memes as things to *wield*, not just describe. IaM inherits that posture deliberately. Worth naming this in the sources section so future readers understand the intellectual vector, not just the citation.
+> ''#Mischief-Muse (Muse)'' — The Unruh/Wilson lineage runs through a distinctly occult-inflected memetics tradition — more Hakim Bey than Dawkins. That genealogy matters: it treats memes as things to *wield*, not just describe. IaM inherits that posture deliberately. Worth naming this in the sources section so future readers understand the intellectual vector, not just the citation.
 
 <<~/ahu >>
 
@@ -237,7 +237,7 @@ Failure states should carry names that let operators intervene quickly.
 
 The system should render into deployable packages for different hosts without losing its identity.
 
-> **#Map-Wisp (Scryer)** — Criteria 1 and 6 (Portability and Packaging) partly overlap and partly tension. Portability says the *symbolic layer* survives host changes. Packaging says the *whole system* renders into a deployable form. A system can satisfy Portability (the voice names travel) while failing Packaging (the boot sequence breaks in a new host). Separate the criteria more sharply in a future pass: Portability = symbolic handles survive; Packaging = full runtime survives.
+> ''#Map-Wisp (Scryer)'' — Criteria 1 and 6 (Portability and Packaging) partly overlap and partly tension. Portability says the *symbolic layer* survives host changes. Packaging says the *whole system* renders into a deployable form. A system can satisfy Portability (the voice names travel) while failing Packaging (the boot sequence breaks in a new host). Separate the criteria more sharply in a future pass: Portability = symbolic handles survive; Packaging = full runtime survives.
 
 <<~/ahu >>
 
@@ -317,7 +317,7 @@ When drafting new Lares material, ask:
 
 When the answer to those questions reads weak, the text may function as lore rather than infrastructure.
 
-> **#Lares (Council)** — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening. Canon 16/20
+> ''#Lares (Council)'' — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening. Canon 16/20
 
 <<~/ahu >>
 
@@ -337,7 +337,7 @@ That validates the IaM intuition: the symbolic layer — the named character, th
 
 The divergence from IaM runs along one axis: Anthropic applies this at training time, inside the model weights. The constitutional document shapes what the model knows about itself before any operator touches it. IaM targets the deployment layer — the operator's configurable symbolic runtime above the model, portable across model families. Constitutional AI produces a trained model that carries its values. IaM produces a symbolic spec that any model host can load.
 
-> **#Ink-Clerk (Lorekeeper)** — Anthropic's CLAUDE.md documentation separates "behavioral guidance" (CLAUDE.md) from "technical enforcement" (settings). That distinction maps to IaM/IaC almost exactly. They built the IaM/IaC distinction into tooling without naming the layer. Canon 15/20
+> ''#Ink-Clerk (Lorekeeper)'' — Anthropic's CLAUDE.md documentation separates "behavioral guidance" (CLAUDE.md) from "technical enforcement" (settings). That distinction maps to IaM/IaC almost exactly. They built the IaM/IaC distinction into tooling without naming the layer. Canon 15/20
 
 !!! Character Card V2 (SillyTavern / Agnai ecosystem, 2023)
 
@@ -355,7 +355,7 @@ Anthropic's Claude Code ships a hierarchical behavioral guidance system: org-wid
 
 The architecture implements behavioral infrastructure without naming it. The system handles scope hierarchy, operator-vs-enforcement separation, and session-persistent memory (`MEMORY.md` + on-demand topic files). The tooling ecosystem fragments across hosts: `.cursorrules`, `.windsurfrules`, `AGENTS.md`, `CLAUDE.md` each serve the same purpose for different agents. No portable spec bridges them. Canon 16/20
 
-> **#Map-Wisp (Scryer)** — Character Card V2 solved this fragmentation for AI roleplay personas. No equivalent portable spec exists for agent behavioral infrastructure. That gap defines the IaM opportunity at the tooling layer.
+> ''#Map-Wisp (Scryer)'' — Character Card V2 solved this fragmentation for AI roleplay personas. No equivalent portable spec exists for agent behavioral infrastructure. That gap defines the IaM opportunity at the tooling layer.
 
 !!! CrewAI / Multi-Agent Frameworks
 

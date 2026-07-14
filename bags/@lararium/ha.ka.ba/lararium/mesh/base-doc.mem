@@ -47,10 +47,10 @@ turns a bag-URI into a live doc handle:
 
 !! Two-Plane Oracle (operator ruling, 2026-06-16)
 
-`resolveOracleDoc` takes the **registry handle** as an argument, so the same
+`resolveOracleDoc` takes the ''registry handle'' as an argument, so the same
 primitive serves both pointer planes (`wiki-layer-ontology#oracle-planes`):
 
-* **system bags** (`@oracle`, `@lararium`, `@lares`) resolve and write their
+* ''system bags'' (`@oracle`, `@lararium`, `@lares`) resolve and write their
   pointer in the **`@oracle`** system-island doc the vessel already holds.
 * **user bags** resolve and write in **`@catalog`**.
 

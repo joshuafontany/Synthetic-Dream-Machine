@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/attack"
 
 !! Definition
 
-A canonical resolution hook: the Power resolves **against the target's Defense**, like a weapon, rather than calling for a save against its effect.
+A canonical resolution hook: the Power resolves ''against the target's Defense'', like a weapon, rather than calling for a save against its effect.
 
 <<~/ahu >>
 

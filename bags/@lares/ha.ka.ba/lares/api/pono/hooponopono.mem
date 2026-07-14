@@ -23,7 +23,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hooponopono"
 ! Hoʻoponopono — To Correct
 
 A live claim accumulates pressure. Pressure wants to become canon.
-Hoʻoponopono names the harmony-restoration ceremony that MUST wrap a **canon MOVE** — the residency ACTION verb that crosses a live claim into a canon (lower-priority) bag — through discussion, acknowledgment, and forgiveness of prior state. The MOVE is the mechanical action; hoʻoponopono is the discipline around it (as Talk-Story is to CRDT conflict).
+Hoʻoponopono names the harmony-restoration ceremony that MUST wrap a ''canon MOVE'' — the residency ACTION verb that crosses a live claim into a canon (lower-priority) bag — through discussion, acknowledgment, and forgiveness of prior state. The MOVE is the mechanical action; hoʻoponopono is the discipline around it (as Talk-Story is to CRDT conflict).
 
 Without the ceremony, the canon MOVE collapses into silent accumulation — a named failure mode.
 
@@ -47,11 +47,11 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 Hoʻoponopono requires:
 
-1. **Discussion** — the operator names the claim aloud; conflicts and residue surface, not suppressed
-2. **Acknowledgment** — prior state gets recognized; the meme under change gets read as it stands
-3. **Forgiveness** — prior state releases without carrying forward as grievance
-4. **Crossing** — the operator writes or revises the hostless meme under named authority
-5. **Closure** — the node marks the live record as MOVED to canon; forward pressure discharges
+1. ''Discussion'' — the operator names the claim aloud; conflicts and residue surface, not suppressed
+2. ''Acknowledgment'' — prior state gets recognized; the meme under change gets read as it stands
+3. ''Forgiveness'' — prior state releases without carrying forward as grievance
+4. ''Crossing'' — the operator writes or revises the hostless meme under named authority
+5. ''Closure'' — the node marks the live record as MOVED to canon; forward pressure discharges
 
 The ceremony MAY compress steps when the change is small and uncontested.
 The ceremony MUST NOT be skipped when a kapu carrier or invariant meme is the target.

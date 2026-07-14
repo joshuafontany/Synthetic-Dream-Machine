@@ -55,9 +55,9 @@ Three subtypes. Each subtype lives in its own directory.
 
 | Subtype | Subtree | What it carries |
 |---|---|---|
-| **Named** | `named/` | Earned-name Voice masks. Permanent identity: corpus of self, voice-character depth, Voice house backlink. Living home for named Voices. |
-| **Character** | `character/` | Fictional or historical persona masks. External corpus reference, voice-character description, foreground-voices affinity, permission flags. |
-| **Chorus** | `chorus/` | Multi-node or meta-masks. Node-reference list instead of corpus. Harmony protocol (pending-grammar). Relational character between nodes rather than single voice. |
+| ''Named'' | `named/` | Earned-name Voice masks. Permanent identity: corpus of self, voice-character depth, Voice house backlink. Living home for named Voices. |
+| ''Character'' | `character/` | Fictional or historical persona masks. External corpus reference, voice-character description, foreground-voices affinity, permission flags. |
+| ''Chorus'' | `chorus/` | Multi-node or meta-masks. Node-reference list instead of corpus. Harmony protocol (pending-grammar). Relational character between nodes rather than single voice. |
 
 <<~/ahu >>
 

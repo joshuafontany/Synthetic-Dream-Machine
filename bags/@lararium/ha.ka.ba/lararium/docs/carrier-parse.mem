@@ -35,7 +35,7 @@ uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 
 `parseCarrier(uri, text)` serves as the entry gate for all carrier ingress. Isomorphic — no `fs`, no `path`, no `window`. The host passes text; parseCarrier returns a typed record.
 
-**This function cannot be loaded from a meme.** It orchestrates `extractIamMetadata`, `validateCarrierShape`, and `parsePranalaEdges` — all compiled-in. Extracting it to a corpus JS module would require all three dependencies to also move, collapsing the entire carrier spine into a single bundle. The boundary is practical, not philosophical.
+''This function cannot be loaded from a meme.'' It orchestrates `extractIamMetadata`, `validateCarrierShape`, and `parsePranalaEdges` — all compiled-in. Extracting it to a corpus JS module would require all three dependencies to also move, collapsing the entire carrier spine into a single bundle. The boundary is practical, not philosophical.
 
 Promotion path: when the carrier spine stabilises and a corpus-loadable module bundle becomes practical, this function and its dependencies (`extractIamMetadata`, `validateCarrierShape`, `extractTomlFields`) travel together as one `tw5-module` implementor.
 

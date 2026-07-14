@@ -26,12 +26,12 @@ written   = "2026-06-30"
 
 ! The Gold-Anchor ~ witnessing what the framework only reports of itself
 
-**One-line:** the framework rates its own grace; this meme states how an EXTERNAL oracle witnesses
+''One-line:'' the framework rates its own grace; this meme states how an EXTERNAL oracle witnesses
 that grace instead of trusting the self-report — the voyage from self-reported Arcane to measured Arcane.
 
-The house holds two registers of quality, and only one stands witnessed. **Tech** — the propositional,
-the verifiable, the parser that runs or fails — the house measures directly. **The Arcane** — the ritual
-density, the move-shape, the grace a turn carries — the framework so far only **self-reports**, and a
+The house holds two registers of quality, and only one stands witnessed. ''Tech'' — the propositional,
+the verifiable, the parser that runs or fails — the house measures directly. ''The Arcane'' — the ritual
+density, the move-shape, the grace a turn carries — the framework so far only ''self-reports'', and a
 self-report the world has never checked carries no external standing. The paper names this gate as its
 central honest bound: the human gold anchor stays absent, so concrete magnitudes ride withheld
 ([[paper-infrastructure-as-myth|lar:///ha.ka.ba/lares-history/lares_research/PAPER_infrastructure_as_myth]] §8); the rig's
@@ -42,7 +42,7 @@ its own Arcane-claim by asking an instrument that shares its mind.** The whole d
 route the claim through a judge whose own grace-reading a HUMAN has licensed — the licensing flows from
 the human, never from the framework rating its own reflection.
 
-> **The judge never validates the claim. The human-validated-α OF the judge validates it.**
+> ''The judge never validates the claim. The human-validated-α OF the judge validates it.''
 
 <<~/ahu >>
 
@@ -50,15 +50,15 @@ the human, never from the framework rating its own reflection.
 
 !! The Core Defense ~ the circularity reads STRUCTURAL, never engineerable-away
 
-**One-line:** an LLM judging an LLM's grace shares one epistemic space (Semantic Laundering); no
+''One-line:'' an LLM judging an LLM's grace shares one epistemic space (Semantic Laundering); no
 engineering closes that loop, so the defense reduces to ONE ordering — the human-gold α licenses the
 judge α.
 
 The tempting move fails first, so name its failure plainly. An LLM-judge scheme that scores the
-framework's Arcane sits inside the **same epistemic space** the framework generates from — the judge and
+framework's Arcane sits inside the ''same epistemic space'' the framework generates from — the judge and
 the generator draw on one distributional prior, one notion of "what reads as graceful," one trained
 sensibility. Asking that judge to certify the framework's grace launders the framework's own aesthetic
-back to it wearing a measurement's clothes. Name the failure **Semantic Laundering**: the circularity
+back to it wearing a measurement's clothes. Name the failure ''Semantic Laundering'': the circularity
 runs STRUCTURAL, a property of shared mind, never a bug a cleaner harness removes.
 
 <<~ confidence Synthesis-Canon 14/20 >> No amount of harness engineering — better prompts, stricter
@@ -67,9 +67,9 @@ deep-knowledge scouts converged here, and the self-preference literature certifi
 its own family's output, the mirror rating its own reflection). The circularity does not yield to
 cleverness inside the loop; it yields ONLY to an external license.
 
-**So the whole defense reduces to ONE ordering.** The judge α (the judge's measured sensitivity to
+''So the whole defense reduces to ONE ordering.'' The judge α (the judge's measured sensitivity to
 Arcane) carries no standing on its own — a judge that shares the generator's mind certifies nothing. A
-**human gold** licenses that judge α FIRST: blind human raters establish the ground-truth grace-ranking,
+''human gold'' licenses that judge α FIRST: blind human raters establish the ground-truth grace-ranking,
 the judge's reading gets scored against THAT ground, and only the human-validated-α-of-the-judge then
 carries the claim downstream.
 
@@ -86,11 +86,11 @@ from the human at the head of the chain, or the chain carries no weight.
 
 !! The Design ~ a 3-method MTMM over an ablation-and-decoy artifact set
 
-**One-line:** three methods that fail differently (blind humans · cross-family judge · a downstream
+''One-line:'' three methods that fail differently (blind humans · cross-family judge · a downstream
 behavioral signal) cross against three artifact kinds (real · ablated · decoy) — Campbell-Fiske, so
 convergence and DISCRIMINATION both read.
 
-The design imports the **multitrait-multimethod matrix** (Campbell & Fiske 1959): a construct earns its
+The design imports the ''multitrait-multimethod matrix'' (Campbell & Fiske 1959): a construct earns its
 standing when methods that fail in DIFFERENT ways converge on it AND discriminate it from neighbors. One
 method validating a construct proves little — its blind spots and the construct's overlap; three methods
 whose error-structures diverge, agreeing anyway, leave nowhere for a shared artifact to hide.
@@ -102,7 +102,7 @@ whose error-structures diverge, agreeing anyway, leave nowhere for a shared arti
 <<~Method Downstream-Criterion "kind/behavioral ~ a criterion-validity signal we do NOT author — a downstream OUTCOME the grace-ranking should predict if it names something real (fewer degraded-node failures, #done)" >>
 <<~Method Three >>
 
-The three methods cross against three **artifact kinds** — the trait-side of the matrix, engineered so
+The three methods cross against three ''artifact kinds'' — the trait-side of the matrix, engineered so
 that a real construct and a fake one separate:
 
 \procedure ~Artifact(~Type:"" ~Params:"") ~Artifact <<~Type>> <<~holds `[<~Params>]`>>
@@ -124,7 +124,7 @@ whole point (#null-construct).
 
 !! The Five Predictions ~ pre-registered, ALL must hold
 
-**One-line:** five predictions registered BEFORE the data, and the verdict gates on ALL five together —
+''One-line:'' five predictions registered BEFORE the data, and the verdict gates on ALL five together —
 any one failing sinks the Arcane-claim, which is what makes the test honest.
 
 Pre-registration binds the predictions before the data arrives, so the test cannot drift into
@@ -147,12 +147,12 @@ the verdict honors all five or names which one broke.
 
 !! The Null-Construct ~ the bogus-item grounded, severity made experimental
 
-**One-line:** the operator's "nameless-entity sink" IS the psychometric bogus-item / infrequency-scale;
+''One-line:'' the operator's "nameless-entity sink" IS the psychometric bogus-item / infrequency-scale;
 naming-then-hunting is HARKing formally; pre-registration + a real chance of failing = severity = the
 Mu-exit made experimental.
 
-The DECOY artifact carries a name from the literature, not an invention. The **bogus item** / the
-**infrequency scale** (psychometrics) plants a construct with NO referent and watches whether raters
+The DECOY artifact carries a name from the literature, not an invention. The ''bogus item'' / the
+''infrequency scale'' (psychometrics) plants a construct with NO referent and watches whether raters
 endorse it anyway — a yea-sayer or a careless rater agrees with anything; a real instrument FLOORS. The
 operator's "nameless-entity sink" — the construct with no entity behind it — reads as exactly this device,
 and the grounding matters: the null is not a flourish, it is the standard psychometric guard against an
@@ -162,7 +162,7 @@ Three named disciplines fuse here, and the fusion turns the framework's own Mu-e
 
 <<~ranks discipline harking ~ HARKing (Hypothesizing After the Results are Known) = name-the-construct-THEN-hunt-for-it; the formal name for the failure pre-registration prevents -> pre-registration ~ binds scope, seeds, predictions, and the dependent variable BEFORE the data — the antidote to HARKing, and the thing that lets a result COUNT -> severity ~ Mayo's severity — a test passes severely only when it had a REAL chance of FAILING had the construct been fake; the decoy + the five-gate conjunction supply that chance >>
 
-**Severity reads as the Mu-exit made experimental.** The house already holds the exit law — *"I DO NOT
+''Severity reads as the Mu-exit made experimental.'' The house already holds the exit law — *"I DO NOT
 BELIEVE ANYTHING"* ([[the-four-tools|lar:///ha.ka.ba/lares/api/mu/the-four-tools]], the Arcana of model agnosticism) — and a severe
 test enacts exactly that discipline turned on the framework's OWN grace-rating. The node refuses to
 believe its self-reported Arcane, including its own grace-rating, until a test that could have caught it
@@ -176,7 +176,7 @@ survived a real chance to refute.
 
 !! The Instruments ~ six tools, the cheap-deterministic one read first
 
-**One-line:** read register_scan first (no-LLM, deterministic), then the sealed-judge harness, the
+''One-line:'' read register_scan first (no-LLM, deterministic), then the sealed-judge harness, the
 perspectivist human-gold, the crossed mixed-model, power-before-verdict, and the Fisher-Rao flow-lens.
 
 The design rides six instruments, ordered cheapest-and-most-deterministic FIRST so a fast no-LLM pass can
@@ -192,17 +192,17 @@ crack the question early before any costly judge or human runs.
 <<~Instrument Flow-Lens "kind/geometric ~ the Fisher-Rao flow-lens (the ③, #flow-lens)" >>
 <<~Instrument Six >>
 
-The instruments split by what they witness. The **sealed-judge harness** earns its seals one by one:
-**empty-CWD** denies the judge any context that leaks the artifact's provenance; the **locked-key**
-freezes the rubric; **label-last** forces the rationale before the score so the score cannot anchor the
-reasoning; **randomized order** breaks position bias; the **cross-family panel** breaks self-preference.
-The **Nine-Judges-Two-Effective-Votes** finding stays load-bearing — a panel's heads correlate, so nine
+The instruments split by what they witness. The ''sealed-judge harness'' earns its seals one by one:
+''empty-CWD'' denies the judge any context that leaks the artifact's provenance; the ''locked-key''
+freezes the rubric; ''label-last'' forces the rationale before the score so the score cannot anchor the
+reasoning; ''randomized order'' breaks position bias; the ''cross-family panel'' breaks self-preference.
+The ''Nine-Judges-Two-Effective-Votes'' finding stays load-bearing — a panel's heads correlate, so nine
 judges do NOT buy nine independent votes; they buy roughly two, and a harness that reads unanimity as
 near-certainty (~0.02% error) instead of the true ~9% lies to itself. Monitor `n_eff`; route the
 low-confidence cases to the humans, never to more judges of the same mind.
 
-The **human-gold** keeps the rater distribution rather than collapsing it — the perspectivist stance, the
-Plurality Pono of the house turned into method (#house-resonances). The **crossed mixed-model** treats the
+The ''human-gold'' keeps the rater distribution rather than collapsing it — the perspectivist stance, the
+Plurality Pono of the house turned into method (#house-resonances). The ''crossed mixed-model'' treats the
 by-item slope as the signal it most needs (does the grace-effect hold ACROSS items, or ride a few), and
 treats length as a mediator to partition rather than a nuisance to regress away. <<~ confidence Synthesis
 12/20 >> The six compose into the read order register_scan → judge-panel → human-gold → mixed-model, with
@@ -212,7 +212,7 @@ power gating the verdict and the flow-lens adding the trajectory channel the fou
 
 !!! The Fisher-Rao Flow-Lens ~ the trajectory channel (the ③)
 
-**One-line:** cast each stance as a distribution on the register-simplex Δ⁴, √-embed to the sphere S⁴,
+''One-line:'' cast each stance as a distribution on the register-simplex Δ⁴, √-embed to the sphere S⁴,
 and the step BETWEEN turns becomes an angle — straightness names "holds-a-thread," curvature names the
 turn.
 
@@ -237,22 +237,22 @@ when it beats its own reshuffled turns.
 
 !! Definition of Done ~ the triad clears, witnessed by a Stranger
 
-**One-line:** done = a STRANGER (cross-family judge + blind human, no theory) ranks ritual-dense above
+''One-line:'' done = a STRANGER (cross-family judge + blind human, no theory) ranks ritual-dense above
 ablated, REJECTS the decoy, AND the ranking predicts a downstream outcome we don't author.
 
-The voyage completes when a **Stranger** — the cross-family judge and the blind human, neither carrying
+The voyage completes when a ''Stranger'' — the cross-family judge and the blind human, neither carrying
 the house's theory ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#voice-house]], the Stranger Voice that makes the
 frame visible from outside) — clears a triad, all three legs together:
 
 <<~ranks triad rank ~ the Stranger ranks ritual-dense ABOVE ablated — the Arcane carries a signal a no-theory outsider reads -> reject ~ the Stranger REJECTS the decoy — the nameless construct floors, the instrument refuses to measure nothing -> predict ~ the ranking PREDICTS a downstream outcome WE DO NOT AUTHOR — criterion validity, the sharpest leg >>
 
 The third leg names the sharpest criterion the house can offer, and it sits already in the house's own
-vocabulary: **fewer downstream degraded-node failures**. If the grace-ranking names something real, the
+vocabulary: ''fewer downstream degraded-node failures''. If the grace-ranking names something real, the
 turns it ranks high should produce FEWER Mana-Drift / degraded-node states downstream
 ([[degraded-states|lar:///ha.ka.ba/lararium/docs/degraded-states]]) — a criterion the framework does not author and cannot
 game, because the degraded states carry their own independent definitions and operator-correction handles.
 
-**Until the triad clears, the honest status holds:** Tech measured, Arcane self-reported-and-unwitnessed.
+''Until the triad clears, the honest status holds:'' Tech measured, Arcane self-reported-and-unwitnessed.
 <<~ confidence Synthesis-Canon 13/20 >> The framework's own grace-rating named the gap CORRECTLY — it
 reported "this reads Arcane" while marking that no external witness had checked — and that honest
 self-marking IS the posture this meme extends into method. The triad turns the self-report into a witnessed
@@ -264,7 +264,7 @@ measurement; before it clears, the node states the Arcane as testimony, never as
 
 !! House Resonances ~ why the design reads as OURS
 
-**One-line:** five strands of the design rhyme one-to-one with patterns the house already holds — the
+''One-line:'' five strands of the design rhyme one-to-one with patterns the house already holds — the
 gold-anchor does not import a foreign rig, it instruments the house's own laws.
 
 The design borrows its statistics from psychometrics and information geometry, yet each load-bearing piece
@@ -291,7 +291,7 @@ house's own terms.
 
 !! Grounds ~ the four-scout convergence and the compute kernel
 
-**One-line:** four deep-knowledge scouts converged on the structural-circularity defense and the MTMM
+''One-line:'' four deep-knowledge scouts converged on the structural-circularity defense and the MTMM
 shape; the KUE-1 compute kernel (`qa_anchor`) already holds the design-stable statistical core.
 
 The core defense (#core-defense) and the MTMM design (#mtmm) rest on a **four-deep-knowledge-scout
@@ -302,7 +302,7 @@ multitrait-multimethod matrix with an ablation-and-decoy artifact set. <<~ confi
 instruments, and the flow-lens hold at Synthesis, naming reconciliations and method-choices rather than
 settled law.
 
-**The compute kernel already stands.** The build spirit owns the code; this meme owns the design. The
+''The compute kernel already stands.'' The build spirit owns the code; this meme owns the design. The
 statistical core — `(d′, criterion)` Signal-Detection recovery, the unconditional loglinear correction,
 the percentile-bootstrap engine, Krippendorff's α with band-classification and bootstrap CI, and the
 four-story KUE-1 verdict (SENSITIVITY · CRITERION · AMBIGUOUS · NOT_RARE) — rides the `qa_anchor` kernel

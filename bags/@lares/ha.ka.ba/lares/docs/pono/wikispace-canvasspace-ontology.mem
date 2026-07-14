@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology"
 
 ! Wikispace × Canvasspace Ontology
 
-Lares fuses three traditions nobody has fused whole: a **transclude-capable wiki** (TiddlyWiki5 / Xanadu lineage) × an **infinite canvas** × **visual scripting**. This doctrine holds how they cohere as **one meme-graph model projected onto two surfaces** — the wiki document surface and the infinite canvas — without either surface's concerns leaking into the model.
+Lares fuses three traditions nobody has fused whole: a ''transclude-capable wiki'' (TiddlyWiki5 / Xanadu lineage) × an ''infinite canvas'' × ''visual scripting''. This doctrine holds how they cohere as ''one meme-graph model projected onto two surfaces'' — the wiki document surface and the infinite canvas — without either surface's concerns leaking into the model.
 
 <<~/ahu >>
 
@@ -32,12 +32,12 @@ Lares fuses three traditions nobody has fused whole: a **transclude-capable wiki
 
 !! One Model, Two Cameras
 
-The meme-graph holds composition in the has-stack (iam tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that *does* something as a **wire entity** — a `lar:` addressed record wearing its family as a stack component (`wire`, 2026-06-12; the old families-as-edge-attributes form retired). Two cameras project that one graph (`render-pipeline#render-axes`):
+The meme-graph holds composition in the has-stack (iam tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that *does* something as a ''wire entity'' — a `lar:` addressed record wearing its family as a stack component (`wire`, 2026-06-12; the old families-as-edge-attributes form retired). Two cameras project that one graph (`render-pipeline#render-axes`):
 
-* the **Story-River camera** — `window.document`, the page/document surface;
-* the **TLDraw canvas camera** — `OffscreenCanvas`, the infinite flow surface.
+* the ''Story-River camera'' — `window.document`, the page/document surface;
+* the ''TLDraw canvas camera'' — `OffscreenCanvas`, the infinite flow surface.
 
-The worn family component carries the **meaning**; the surface picks the **render template**. A `wires/dataflow` entity *means* "typed value between pins" whether the canvas draws it as a wire or the Story River renders it as a dependency note. The discipline mirrors projectional editing (JetBrains MPS): **the model node carries no intrinsic surface form** — every appearance reads as a projection. Confirmed novel — no prior system fuses content-identity transclusion + infinite canvas + typed-pin dataflow under one addressed graph.
+The worn family component carries the ''meaning''; the surface picks the ''render template''. A `wires/dataflow` entity *means* "typed value between pins" whether the canvas draws it as a wire or the Story River renders it as a dependency note. The discipline mirrors projectional editing (JetBrains MPS): ''the model node carries no intrinsic surface form'' — every appearance reads as a projection. Confirmed novel — no prior system fuses content-identity transclusion + infinite canvas + typed-pin dataflow under one addressed graph.
 
 <<~/ahu >>
 
@@ -45,9 +45,9 @@ The worn family component carries the **meaning**; the surface picks the **rende
 
 !! Graph-Primacy — the Inversion
 
-Lares runs the **opposite** of Shipman-Marshall spatial hypertext. There, canvas proximity *infers* structure (near-means-related). Here, **the explicit graph entity (worn stack, loulou, wire) comes first, and the canvas renders it**: explicit-graph → spatial-form, never spatial-arrangement → inferred-edge.
+Lares runs the ''opposite'' of Shipman-Marshall spatial hypertext. There, canvas proximity *infers* structure (near-means-related). Here, ''the explicit graph entity (worn stack, loulou, wire) comes first, and the canvas renders it'': explicit-graph → spatial-form, never spatial-arrangement → inferred-edge.
 
-A reader may drag two node-shapes adjacent without intending a relation; bare proximity creates no edge. The canvas reads as the **reading surface**; the graph reads as the **authority surface**.
+A reader may drag two node-shapes adjacent without intending a relation; bare proximity creates no edge. The canvas reads as the ''reading surface''; the graph reads as the ''authority surface''.
 
 <<~/ahu >>
 
@@ -57,12 +57,12 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 The boundary runs not between "graph" and "not-graph" — **both sides carry `lar:` URIs**. It runs between *which entity holds what*:
 
-* **Model** — a meme, its has-stack, and its wire entities: identity (`lar:` URI), the worn components, wire records (`from`/`to` / `lifecycle` / `traversal` / `propagation`), `confidence`, the `#iam` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
-* **View** — stored as **its own lar-URI-addressed entities**, separate from any meme's `#iam`: canvas shape position / extent / z-order, camera pan+zoom, Story-River order, level-of-detail, render-template selection.
+* ''Model'' — a meme, its has-stack, and its wire entities: identity (`lar:` URI), the worn components, wire records (`from`/`to` / `lifecycle` / `traversal` / `propagation`), `confidence`, the `#iam` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
+* ''View'' — stored as ''its own lar-URI-addressed entities'', separate from any meme's `#iam`: canvas shape position / extent / z-order, camera pan+zoom, Story-River order, level-of-detail, render-template selection.
 
-TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette state hold view-state as system tiddlers; per `lar-uri#tw5-system-boundary`, the view-state that persists or federates carries a `lar:///` title and syncs. So a canvas node exists as a lar-URI entity (the model meme) **and** its canvas/camera state exists as lar-URI entities (the view tiddlers) — distinct, uniformly addressable. **The quine reaches into the view layer.**
+TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette state hold view-state as system tiddlers; per `lar-uri#tw5-system-boundary`, the view-state that persists or federates carries a `lar:///` title and syncs. So a canvas node exists as a lar-URI entity (the model meme) ''and'' its canvas/camera state exists as lar-URI entities (the view tiddlers) — distinct, uniformly addressable. ''The quine reaches into the view layer.''
 
-**The one hard rule:** a meme MUST NOT carry its own canvas coordinates in `#iam`. Position lives in a view-state entity the camera reads (the Obsidian-Canvas lesson). The meme stays surface-agnostic; the view-state tiddler holds the placement.
+''The one hard rule:'' a meme MUST NOT carry its own canvas coordinates in `#iam`. Position lives in a view-state entity the camera reads (the Obsidian-Canvas lesson). The meme stays surface-agnostic; the view-state tiddler holds the placement.
 
 <<~/ahu >>
 
@@ -72,11 +72,11 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 | Class | Families | Reading |
 |---|---|---|
-| **Surface-invariant** | `control` · `relation` · `observe` · `message` · `constraint` | render legibly on both cameras (hierarchy/arrow, citation/connection, monitoring-wire/citation) |
-| **Wikispace-primary (dual-meaning)** | `transclusion` | inline document embed ↔ canvas content-window (#transclusion) |
-| **Canvasspace-primary** | `dataflow` · `reaction` · `spatial` | typed value-wires, event-wires, spatial topology |
+| ''Surface-invariant'' | `control` · `relation` · `observe` · `message` · `constraint` | render legibly on both cameras (hierarchy/arrow, citation/connection, monitoring-wire/citation) |
+| ''Wikispace-primary (dual-meaning)'' | `transclusion` | inline document embed ↔ canvas content-window (#transclusion) |
+| ''Canvasspace-primary'' | `dataflow` · `reaction` · `spatial` | typed value-wires, event-wires, spatial topology |
 
-`observe` reads **surface-invariant** (monitoring-wire on canvas, source-citation in prose) — no rename needed.
+`observe` reads ''surface-invariant'' (monitoring-wire on canvas, source-citation in prose) — no rename needed.
 
 <<~/ahu >>
 
@@ -84,12 +84,12 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 !! Transclusion — Surface-Split
 
-The **core holds surface-invariant**: content-identity (Nelson — "the same thing knowably in two places", *not* a copy), `aka` (frozen/shadow) vs `kahea` (live/subscription-fresh), acyclicity, and the firm line **transclusion carries content-identity; `dataflow` carries a computed value** — these never blur, even where both render as arrows on canvas.
+The ''core holds surface-invariant'': content-identity (Nelson — "the same thing knowably in two places", *not* a copy), `aka` (frozen/shadow) vs `kahea` (live/subscription-fresh), acyclicity, and the firm line **transclusion carries content-identity; `dataflow` carries a computed value** — these never blur, even where both render as arrows on canvas.
 
-What **splits is the content-position**:
+What ''splits is the content-position'':
 
-* **Into a node — coherent, no new primitive.** A node's body (an `ahu` slot) carries `aka`/`kahea`; the Story-River camera resolves the embed; the canvas camera displays the result inside the node shape.
-* **Into an edge — RESOLVED BY REIFICATION (2026-06-12).** The wire ruling dissolves the old hesitation: a wire reads as its own entity, so "embedding into an edge" means transcluding into a wire entity's body — ordinary kahea into an ordinary carrier, no schema extension. (RDF reification reached the same shape; here it arrives as law, not workaround.) **Annotation *on* a wire ≠ transclusion *into* a wire** — the distinction stands; both now read lawful.
+* ''Into a node — coherent, no new primitive.'' A node's body (an `ahu` slot) carries `aka`/`kahea`; the Story-River camera resolves the embed; the canvas camera displays the result inside the node shape.
+* ''Into an edge — RESOLVED BY REIFICATION (2026-06-12).'' The wire ruling dissolves the old hesitation: a wire reads as its own entity, so "embedding into an edge" means transcluding into a wire entity's body — ordinary kahea into an ordinary carrier, no schema extension. (RDF reification reached the same shape; here it arrives as law, not workaround.) ''Annotation *on* a wire ≠ transclusion *into* a wire'' — the distinction stands; both now read lawful.
 
 <<~/ahu >>
 
@@ -99,8 +99,8 @@ What **splits is the content-position**:
 
 `dataflow` / `reaction` (papalohe) / `message` / `spatial` / `control` map cleanly onto the universal node-graph wire kinds. Two settled points:
 
-* **No naked execution wire — by Verse alignment.** Verse sequences through fibers / suspension / `spawn`, not visual "do-this-then-that" arrows. So **`reaction:papalohe` (listenable→subscribable) *is* the Verse-native execution wire** — same "this causes that to run", carried as a named, event-conditional arc. Fine-grained `A(); B(); C()` stays *inside* node bodies as Verse code; only coarse event-causation becomes a wire.
-* **Pin *types* live on the node, not the edge.** A `dataflow` edge names the role (reads/writes/streams/buffers/pipes); the data **type** (float / vector / geometry) declares on the `kumu` node-type's pin. The edge inherits the type by endpoint; the canvas colors the wire from the pin type (the Blender pattern). The edge schema stays clean.
+* ''No naked execution wire — by Verse alignment.'' Verse sequences through fibers / suspension / `spawn`, not visual "do-this-then-that" arrows. So **`reaction:papalohe` (listenable→subscribable) *is* the Verse-native execution wire** — same "this causes that to run", carried as a named, event-conditional arc. Fine-grained `A(); B(); C()` stays *inside* node bodies as Verse code; only coarse event-causation becomes a wire.
+* ''Pin *types* live on the node, not the edge.'' A `dataflow` edge names the role (reads/writes/streams/buffers/pipes); the data ''type'' (float / vector / geometry) declares on the `kumu` node-type's pin. The edge inherits the type by endpoint; the canvas colors the wire from the pin type (the Blender pattern). The edge schema stays clean.
 
 When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-event fires → the node updates).
 
@@ -110,13 +110,13 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 !! The Spatial Family + Watch-Outs
 
-`spatial` (`contains` / `portal` / `adjacent` / `layer`) names **graph-layer claims the canvas renders** — they hold whether or not the canvas currently shows them. Guard the surface-meaning splits:
+`spatial` (`contains` / `portal` / `adjacent` / `layer`) names ''graph-layer claims the canvas renders'' — they hold whether or not the canvas currently shows them. Guard the surface-meaning splits:
 
 * **Bare proximity ≠ `spatial:adjacent`** — graph-primacy: edges drive proximity rendering, not the reverse.
 * **A tldraw Frame ≠ `spatial:contains`** — dropping a shape in a frame is a view act; the containment edge declares explicitly. (Frames render `contains`; Groups carry no graph claim.)
 * **Z-order ≠ `spatial:layer`** — render-on-top within a viewport differs from ontological stratum membership.
 * **`spatial:portal` crosses the surface** — uniquely it carries a *camera-navigation* payload (click → the viewport moves to the target); it reads as more than a connector.
-* **Zoom level-of-detail** stays **view-intrinsic** — no graph analog; the camera owns which detail a meme reveals at which zoom.
+* ''Zoom level-of-detail'' stays ''view-intrinsic'' — no graph analog; the camera owns which detail a meme reveals at which zoom.
 
 <<~/ahu >>
 
@@ -128,8 +128,8 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 * **`transclusion` on canvas — APPROVED** as one family with a content-window render template (not a `spatial:portal` split); the model-meaning stays unified.
 * **`dataflow` / `reaction` in Story-River — APPROVED:** they carry prose render templates where useful; an omitted wire reads as a view choice, not a model loss.
 * **`spatial:portal` navigation payload — APPROVED.**
-* **Zoom-LoD — APPROVED** as view-intrinsic render-logic (revisit if a graph-level mode parameter proves needed).
-* **Transclude-into-an-edge — DEFERRED (provisional)**, per #transclusion.
+* ''Zoom-LoD — APPROVED'' as view-intrinsic render-logic (revisit if a graph-level mode parameter proves needed).
+* ''Transclude-into-an-edge — DEFERRED (provisional)'', per #transclusion.
 
 <<~/ahu >>
 

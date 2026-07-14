@@ -39,65 +39,65 @@ It adds explicit ahu markers around the major research sections so the file can 
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Session 5 opened with the full web2 sidecar rip complete from the previous session: 19 dead web2-era source files replaced by typed stubs; 19 `.web2.ts` sidecars created (verbatim originals, excluded from tsc). All 5 tsconfigs updated with `*.web2.ts` exclusions. The `tsc` surface confirmed exactly four rebuild-target errors and nothing else. Three rounds of talk-story orient ran — API surface friction, FFZ web3 redesign direction, Verse UEFN 5.6+ alignment, grammar boot model, changeset scale, graph co-existence, datablob inventory — all decisions locked.
 
 Two new design dimensions unlocked mid-session:
-  1. **Kumu instance URI scheme** — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
-  2. **SESSION.md** — written as the canonical session handoff crystal; three new OODA-HA ahu sections recorded.
+  1. ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
+  2. ''SESSION.md'' — written as the canonical session handoff crystal; three new OODA-HA ahu sections recorded.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 Four model shifts locked this session:
 
-  **Shift 1 — Grammar meme is a tiddler, not a blob.**
+  ''Shift 1 — Grammar meme is a tiddler, not a blob.''
   The grammar meme text (`lar:///ha.ka.ba/lares/grammars/memetic-wikitext`) lives in the `system` bag of the engine Automerge doc as a first-class tiddler. NOT a binary blob in `LarariumDoc.blobs`. Binary blobs are for large, immutable, non-parseable assets (TW5 core JS, plugin bundles). Grammar text is small, mutable, and must remain human-readable. Compiled `GrammarRules` struct = in-memory cache only (fast to derive, no storage). Server re-derives from tiddler text on each VM boot.
 
-  **Shift 2 — FFZ 5-scale changeset model replaces per-URI-only debounce.**
+  ''Shift 2 — FFZ 5-scale changeset model replaces per-URI-only debounce.''
   `MemeProvider` previously emitted only Scale-1 events (one `onUriChanged` per URI per debounce window). At UEFN game-loop rates (100 actors × 60fps = 6000 callbacks/s), that model breaks. New model:
-  - Scale 1–2 (human-pace): per-URI `onUriChanged` after `DEBOUNCE_MS=40`
-  - Scale 3 (game-loop, bulk import): `onChangeset(uris, origin)` — one call per Automerge `change()` transaction when ≥`CHANGESET_THRESHOLD=10` URIs touched
-  - Scale 4 (realm sync): `onSyncComplete(islandId)` — unchanged
+** Scale 1–2 (human-pace): per-URI `onUriChanged` after `DEBOUNCE_MS=40`
+** Scale 3 (game-loop, bulk import): `onChangeset(uris, origin)` — one call per Automerge `change()` transaction when ≥`CHANGESET_THRESHOLD=10` URIs touched
+** Scale 4 (realm sync): `onSyncComplete(islandId)` — unchanged
   Scale 3 is opt-in: projections declare `onChangeset?` to receive it; others fall back to N debounced calls.
 
-  **Shift 3 — Kumu/Verse 5.6+ is compositional, not hierarchical.**
+  ''Shift 3 — Kumu/Verse 5.6+ is compositional, not hierarchical.''
   Old mental model: kumu devices subclass/extend a type (Blueprint/class-hierarchy). Rejected — that's Unreal 4 Blueprint thinking. Verse 5.6+ uses pure composition via `using`/`trait`. Lararium mapping: type composition via `control:implements` pranala edges (already exists). Device instances carry no inheritance chain. Behavior = assembled from `implements` edges + `papalohe` bindings (reaction:listenable). Instance UUID = crypto.randomUUID() now; Keyhive-group-derived UUID later.
 
-  **Shift 4 — MemeGraph is a pure adjacency structure, not a carrier renderer.**
+  ''Shift 4 — MemeGraph is a pure adjacency structure, not a carrier renderer.''
   Old web2 `Meme.shape: CarrierShape | null` field dropped entirely. `MemeRating` lives on `MemeRecord` (ingest boundary output), not on the graph node. The graph sees only `Meme` (structural: uri, laresRelPath, contentHash, metadata, edgesOut, virtual, exists). Shape is a projection-layer concern. `MemeRecord` is the ingest boundary output used by the compiler; `Meme` is what the graph stores and traverses.
 
-◇ **Decide:**
+◇ ''Decide:''
 Three sprints enacted:
 
-  **Sprint 0:**
-  - `reaction-query.ts`: `parsePranalaEdges` → `parseMemeEdges` (dead import cleared)
-  - `grammar-invariants.ts`: created in `lararium-mesh/src/` — 7 invariants, 3 constants, `GrammarVersionGate` Keyhive stub
-  - `meme-provider.ts`: `onChangeset?` added to `MemeProjection`, `CHANGESET_THRESHOLD=10`, `handleChange()` rewritten for Scale-3 dispatch
+  ''Sprint 0:''
+** `reaction-query.ts`: `parsePranalaEdges` → `parseMemeEdges` (dead import cleared)
+** `grammar-invariants.ts`: created in `lararium-mesh/src/` — 7 invariants, 3 constants, `GrammarVersionGate` Keyhive stub
+** `meme-provider.ts`: `onChangeset?` added to `MemeProjection`, `CHANGESET_THRESHOLD=10`, `handleChange()` rewritten for Scale-3 dispatch
 
-  **Sprint 1:**
-  - `meme-graph.ts`: full rebuild — `MemeRating`, `MemeRecord`, `Meme` (no shape), `DeclaredUnresolved`; `MemeGraph` class with `addMeme`, `successors`, `edgesOut`, `oneHopRelation`, `memesByInterface`, `allTransitiveDeps`, `resolvedClosure`, `topologicalSort` (Kahn), `declaredUnresolved`, `detectCycles` (DFS); `memeImplements()`, `makeMemeHash()`, `declaredUnresolvedFromEdge()`
-  - `compiler.ts`: implicit-`any` params fixed; `declaredUnresolved()` added to `MemeGraph` surface
-  - `lararium-mesh tsc`: **ZERO ERRORS** — node boot chain (compiler → serve.ts → `compileBootArtifact()`) unblocked
+  ''Sprint 1:''
+** `meme-graph.ts`: full rebuild — `MemeRating`, `MemeRecord`, `Meme` (no shape), `DeclaredUnresolved`; `MemeGraph` class with `addMeme`, `successors`, `edgesOut`, `oneHopRelation`, `memesByInterface`, `allTransitiveDeps`, `resolvedClosure`, `topologicalSort` (Kahn), `declaredUnresolved`, `detectCycles` (DFS); `memeImplements()`, `makeMemeHash()`, `declaredUnresolvedFromEdge()`
+** `compiler.ts`: implicit-`any` params fixed; `declaredUnresolved()` added to `MemeGraph` surface
+** `lararium-mesh tsc`: ''ZERO ERRORS'' — node boot chain (compiler → serve.ts → `compileBootArtifact()`) unblocked
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
 | `@lararium/tw5` `reaction-query.ts` | Dead `parsePranalaEdges` import swapped to `parseMemeEdges` from `@lararium/mesh` |
-| `@lararium/mesh` `grammar-invariants.ts` | **New** — 7 invariants, `GRAMMAR_MEME_URI`, `GRAMMAR_BAG`, `GRAMMAR_LARES_REL_PATH`, `GrammarVersionGate` stub |
+| `@lararium/mesh` `grammar-invariants.ts` | ''New'' — 7 invariants, `GRAMMAR_MEME_URI`, `GRAMMAR_BAG`, `GRAMMAR_LARES_REL_PATH`, `GrammarVersionGate` stub |
 | `@lararium/mesh` `meme-provider.ts` | `MemeProjection.onChangeset?`, `CHANGESET_THRESHOLD=10`, Scale-3 dispatch in `handleChange()` |
-| `@lararium/mesh` `meme-graph.ts` | **Full rebuild** — `MemeRating`, `MemeRecord`, `Meme`, `MemeGraph` class, all traversal/query/sort/cycle methods |
+| `@lararium/mesh` `meme-graph.ts` | ''Full rebuild'' — `MemeRating`, `MemeRecord`, `Meme`, `MemeGraph` class, all traversal/query/sort/cycle methods |
 | `@lararium/mesh` `compiler.ts` | Implicit-`any` params typed; now compiles clean |
 | `packages/lares-core/memes/SESSION.md` | Updated — iam block bumped; 3 new OODA-HA ahu sections |
 | `packages/lares-core/lararium-node/ROADMAP.md` | This section |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 cd packages/lararium-mesh && npx tsc --noEmit  # ✓ ZERO errors
 cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ one rebuild-target (MemeticParser only)
 ```
 
-↺ **Aftermath / M13 open work:**
+↺ ''Aftermath / M13 open work:''
 
 * `MemeticParser` (lararium-tw5): Sprint 3 complete ✓
 * Grammar multi-doc boot: Sprint 2 complete ✓
@@ -118,53 +118,53 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ one rebuild-target (Memetic
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Session continued from M13. The `PranalaEdge` → `PranalaEdge` family rename was enacted (LSP missed tail files; sed sweep completed two passes). Backward-compat aliases stripped. Core rebuilt to zero errors. Sprint 4 then revealed a vocabulary gap: the original `kumu-device.ts` used Blueprint/class-hierarchy terms (`Input`/`Output`) that contradict the locked Shift 3 — Verse 5.6+ compositional model. A full Verse alignment pass enacted.
 
-✶ **UEFN Verse 5.6+ Golden Principles (locked):**
+✶ ''UEFN Verse 5.6+ Golden Principles (locked):''
 
-  1. **No inheritance for behavior.** Devices are `class(creative_device)` — behavior is assembled via `using` trait composition, not subclassing. Lararium: `control:implements` pranala edges. No device-class hierarchy in type memes.
+  1. ''No inheritance for behavior.'' Devices are `class(creative_device)` — behavior is assembled via `using` trait composition, not subclassing. Lararium: `control:implements` pranala edges. No device-class hierarchy in type memes.
 
-  2. **Events are typed first-class values.** In Verse: `OnActivated : listenable([]void) = event[]void{}`. An event is a VALUE that can be passed, subscribed to, awaited, or wired in the editor. NOT a callback registration pattern. Lararium: `reaction:listenable` pranala edges — the edge IS the event declaration.
+  2. ''Events are typed first-class values.'' In Verse: `OnActivated : listenable([]void) = event[]void{}`. An event is a VALUE that can be passed, subscribed to, awaited, or wired in the editor. NOT a callback registration pattern. Lararium: `reaction:listenable` pranala edges — the edge IS the event declaration.
 
-  3. **Two distinct pin kinds — directional, not symmetric:**
-     - **OUTPUT event pin** (`listenable` event): something this device EMITS — others subscribe. Verse: `OnActivated`. Lararium: `KumuListenable`, `reaction:listenable` role.
-     - **INPUT function pin** (callable): something this device EXPOSES — others call. Verse: `ActivateButton()<suspends>` / `@subscribes`. Lararium: `KumuSubscribable`, `reaction:subscribable` role.
-     - Wiring direction: `source.OutputEvent → target.InputHandler` — never the reverse.
+  3. ''Two distinct pin kinds — directional, not symmetric:''
+'''' ''OUTPUT event pin'' (`listenable` event): something this device EMITS — others subscribe. Verse: `OnActivated`. Lararium: `KumuListenable`, `reaction:listenable` role.
+'''' ''INPUT function pin'' (callable): something this device EXPOSES — others call. Verse: `ActivateButton()<suspends>` / `@subscribes`. Lararium: `KumuSubscribable`, `reaction:subscribable` role.
+'''' Wiring direction: `source.OutputEvent → target.InputHandler` — never the reverse.
 
-  4. **Wiring is declarative, resolved at device-graph load time.** UEFN: editor connects event pin to function pin, stored as the device graph. Lararium: `papalohe` pranala edges on the instance meme (not hardcoded in the type meme).
+  4. ''Wiring is declarative, resolved at device-graph load time.'' UEFN: editor connects event pin to function pin, stored as the device graph. Lararium: `papalohe` pranala edges on the instance meme (not hardcoded in the type meme).
 
   5. **Single-shot async = `Await(event)<suspends>`.** A `suspends` coroutine awaits one event then continues linearly. No callback nesting. Lararium: `ReactionGraph.subscribeOnce()` — already implemented. Same semantic.
 
-  6. **Game-loop actor tick = synchronous declaration order.** At 60fps, all wired handlers for a changeset fire in one synchronous tick. No async interleaving within a tick. Lararium: `ReactionEngine.onChangeset()` → `fireSync()` per URI per unique trigger.
+  6. ''Game-loop actor tick = synchronous declaration order.'' At 60fps, all wired handlers for a changeset fire in one synchronous tick. No async interleaving within a tick. Lararium: `ReactionEngine.onChangeset()` → `fireSync()` per URI per unique trigger.
 
   7. **`@editable` attributes = designer-visible props = ahu slots.** Properties exposed to the level designer in the UEFN editor. Lararium: `ahu` socket URIs on the type meme (`KumuDeviceSpec.slots`).
 
-⏿ **Orient:**
+⏿ ''Orient:''
 
-  **Shift 5 — Verse pin vocabulary replaces Input/Output.**
+  ''Shift 5 — Verse pin vocabulary replaces Input/Output.''
   `KumuDeviceInput` / `KumuDeviceOutput` discarded. Correct Verse-aligned types:
-  - `KumuDeviceEvent` — OUTPUT pin (event this device emits; Verse `listenable`)
-  - `KumuDeviceHandler` — INPUT function pin (handler this device exposes; Verse callable)
+** `KumuDeviceEvent` — OUTPUT pin (event this device emits; Verse `listenable`)
+** `KumuDeviceHandler` — INPUT function pin (handler this device exposes; Verse callable)
   `KumuDeviceSpec` fields renamed: `inputs` → `handlers`, `outputs` → `events`.
 
-  **Shift 6 — Pranala role vocabulary locked for device spec derivation.**
+  ''Shift 6 — Pranala role vocabulary locked for device spec derivation.''
   `reaction:listenable` = event declaration (OUTPUT). `reaction:subscribable` = handler declaration (INPUT). `reaction:subscription` and bare edges are NOT type-level declarations — they are instance-level wiring annotations. `kumuDeviceSpecFromEdges` maps strictly on role.
 
   **Shift 7 — `_fireForUri` deduplication invariant.**
   `ReactionEngine._fireForUri` MUST collect unique listenable names before calling `fireSync`. Calling `fireSync(uri, listenable)` fans out to ALL subscribers for that `(uri, listenable)` pair. Iterating bindings naively = fires each subscriber once per matching binding = N×M dispatch bug at game-loop rates.
 
-◇ **Decide:**
+◇ ''Decide:''
 
-  **Sprint 4a:** `parseMemeEdges` + `ReactionGraph` + `ReactionBinding` + `extractReactionBindings` — confirmed already present in `live-protocol.ts` and `meme-ast/parse.ts`. Sprint satisfied by prior rebuild.
+  ''Sprint 4a:'' `parseMemeEdges` + `ReactionGraph` + `ReactionBinding` + `extractReactionBindings` — confirmed already present in `live-protocol.ts` and `meme-ast/parse.ts`. Sprint satisfied by prior rebuild.
 
-  **Sprint 4b:** `kumu-device.ts` — written, barrel-exported, then corrected in this session. Two rounds:
-  - Round 1: initial file written with `KumuDeviceInput`/`KumuDeviceOutput` (Blueprint vocabulary)
-  - Round 2: Verse alignment pass — full vocabulary correction, bug fixes, tsc verify
+  ''Sprint 4b:'' `kumu-device.ts` — written, barrel-exported, then corrected in this session. Two rounds:
+** Round 1: initial file written with `KumuDeviceInput`/`KumuDeviceOutput` (Blueprint vocabulary)
+** Round 2: Verse alignment pass — full vocabulary correction, bug fixes, tsc verify
 
-  **Pranala rename:** `PranalaEdge` → `PranalaEdge`, `PranalaEdgeViolation` → `PranalaEdgeViolation`, `PranaViolationSeverity` → `PranalaViolationSeverity`, `validatePranalaEdge` → `validatePranalaEdge`. All backward-compat aliases removed (alpha dev, no consumers). sed sweep + rebuild.
+  ''Pranala rename:'' `PranalaEdge` → `PranalaEdge`, `PranalaEdgeViolation` → `PranalaEdgeViolation`, `PranaViolationSeverity` → `PranalaViolationSeverity`, `validatePranalaEdge` → `validatePranalaEdge`. All backward-compat aliases removed (alpha dev, no consumers). sed sweep + rebuild.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -175,12 +175,12 @@ Session continued from M13. The `PranalaEdge` → `PranalaEdge` family rename wa
 | `packages/lararium-mesh/src/meme-ast/index.ts` | Re-exports renamed; self-aliases removed |
 | `packages/lararium-mesh/src/compiler.ts` | `PranalaEdgeViolation` import + usages renamed |
 | Tests (3 files) | All `validatePranalaEdge` / `PranalaEdge` → new names |
-| `@lararium/mesh` `kumu-device.ts` | **New** — `KumuDeviceEvent`, `KumuDeviceHandler`, `KumuDeviceSpec`, `KumuInstanceRef`, `kumuInstanceUris`, `kumuDeviceSpecFromEdges`, `ReactionEngine implements MemeProjection` |
+| `@lararium/mesh` `kumu-device.ts` | ''New'' — `KumuDeviceEvent`, `KumuDeviceHandler`, `KumuDeviceSpec`, `KumuInstanceRef`, `kumuInstanceUris`, `kumuDeviceSpecFromEdges`, `ReactionEngine implements MemeProjection` |
 | `@lararium/mesh` `index.ts` | `export * from "./kumu-device.js"` added |
 | `packages/lares-core/lararium-node/ROADMAP.md` | This section |
 | `packages/lares-core/memes/SESSION.md` | Updated — new OODA-HA ahu section |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 cd packages/lararium-mesh && npx tsc --noEmit  # ✓ ZERO errors
@@ -188,10 +188,10 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 # lararium-node: 14 pre-existing web2 rebuild targets only (unchanged)
 ```
 
-↺ **Aftermath / M14 open work:**
+↺ ''Aftermath / M14 open work:''
 
-* **Sprint 5 complete ✓:** `meme-sync-adaptor.ts` — see `#m14-sprint5-meme-sync-adaptor-2026-05-02`
-* **Sprint 6 next:** `meme-browser-host.ts` — Automerge browser repo + IndexedDB. Research-before-act.
+* ''Sprint 5 complete ✓:'' `meme-sync-adaptor.ts` — see `#m14-sprint5-meme-sync-adaptor-2026-05-02`
+* ''Sprint 6 next:'' `meme-browser-host.ts` — Automerge browser repo + IndexedDB. Research-before-act.
 * `sw.ts` tsconfig lib issues: pre-existing, separate fix
 * `system` + `projection` bag store impls: still pending (D stubs)
 * Milestone F (presence split): 0%, not started
@@ -205,32 +205,32 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 After Sprint 4b landed `KumuDeviceSpec` with Verse-aligned types, a second vocabulary gap remained: `REACTION_ROLES` still used Blueprint-era English names `"triggers"` and `"handles"`, and the internal payload fields were `"trigger"` / `"fn"`. Verse 5.6+ canonical English: `listenable` (OUTPUT event pin) and `@subscribes` callable (INPUT fn pin). A targeted rename pass was enacted across 8 files.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 
-  **Shift 8 — REACTION_ROLES use Verse canonical English strings.**
+  ''Shift 8 — REACTION_ROLES use Verse canonical English strings.''
   `"triggers"` → `"listenable"` (REACTION_ROLES[0], role on kumu type memes — OUTPUT event pin).
   `"handles"` → `"subscribable"` (REACTION_ROLES[1], role on kumu type memes — INPUT fn pin).
   `FAMILY_ROLES.reaction` updated to match.
 
-  **Shift 9 — Payload field keys match role strings.**
+  ''Shift 9 — Payload field keys match role strings.''
   `payload["trigger"]` → `payload["listenable"]`.
   `payload["fn"]` → `payload["subscribable"]`.
   `ReactionBinding.trigger` → `.listenable`; `ReactionBinding.fn` → `.subscribable`.
   `PranalaSugarNode.trigger` → `.listenable`; `.fn` → `.subscribable`.
   All `ReactionGraph` method signatures: `trigger` parameter → `listenable`.
 
-  **Shift 10 — KumuDeviceEvent/KumuDeviceHandler renamed to UEFN English.**
+  ''Shift 10 — KumuDeviceEvent/KumuDeviceHandler renamed to UEFN English.''
   `KumuDeviceEvent` → `KumuListenable`; `KumuDeviceHandler` → `KumuSubscribable`.
   `KumuDeviceSpec.events` → `.listenables`; `.handlers` → `.subscribables`.
   `ReactionBinding.source: "static"|"dynamic"` → `"wired"|"subscribed"`.
 
-◇ **Decide:**
+◇ ''Decide:''
 8-file rename pass. tsc verify after each batch.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -247,14 +247,14 @@ After Sprint 4b landed `KumuDeviceSpec` with Verse-aligned types, a second vocab
 | `packages/lares-core/lararium-node/ROADMAP.md` | Shifts 5–7 text corrected; this section |
 | `packages/lares-core/memes/SESSION.md` | New OODA-HA ahu section |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 cd packages/lararium-mesh && npx tsc --noEmit  # ✓ ZERO errors
 cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 ```
 
-↺ **Aftermath / open work:**
+↺ ''Aftermath / open work:''
 
 * Sprint 5 complete ✓ — see `#m14-sprint5-meme-sync-adaptor-2026-05-02` below
 * Grammar alignment pass (future): `meme-grammar.ts` and grammar definition files may need a separate pass to ensure Hawaiian sigil names align with UEFN vocabulary throughout the full grammar spec
@@ -267,13 +267,13 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Sprint 5 target: `meme-sync-adaptor.ts` — replace the dead `sync-adaptor.ts` stub with a working `MemeSyncAdaptor` class. Read `sync-adaptor.web2.ts` sidecar + `meme-write.ts` before writing. Both packages clean from prior session.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 Web2 adaptor used `splitCarrierToTiddlers` (carrier-write.ts) in the outbound save handler to split carrier text into parent + children. Meme model shift: ahu slot children store as independent `lar:///parent#slot` records and receive their own `saveTiddler` calls — no outbound split needed. Inbound direction unchanged: `tw5.deserializeCarrier` still handles meme records arriving from the CRDT store (backward compat with inline-body records).
 
-◇ **Decide:**
+◇ ''Decide:''
 Write `meme-sync-adaptor.ts` — new class `MemeSyncAdaptor implements MemeProjection`. Delta from web2:
 1. Import `buildDirectRecord` from `./meme-write.js` (drop `carrier-write.js` import)
 2. Drop `splitCarrierToTiddlers` — not needed in outbound path
@@ -281,27 +281,27 @@ Write `meme-sync-adaptor.ts` — new class `MemeSyncAdaptor implements MemeProje
 4. All guards (echo-loop Map, canon, temp, draft, cascade) preserved verbatim
 5. Export from `index.ts` barrel
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
-| `@lararium/tw5` `meme-sync-adaptor.ts` | **New** — `MemeSyncAdaptor implements MemeProjection`; all invariants from web2 sidecar preserved |
+| `@lararium/tw5` `meme-sync-adaptor.ts` | ''New'' — `MemeSyncAdaptor implements MemeProjection`; all invariants from web2 sidecar preserved |
 | `@lararium/tw5` `index.ts` | `export { MemeSyncAdaptor } from "./meme-sync-adaptor.js"` |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 cd packages/lararium-tw5 && npx tsc --noEmit  # ✓ ZERO errors
 ```
 
-↺ **Aftermath / open work:**
+↺ ''Aftermath / open work:''
 
-* **Sprint 6 next:** `meme-browser-host.ts` — Automerge browser repo + IndexedDB. Research-before-act (read Automerge browser repo + Keyhive codebase before writing any code).
+* ''Sprint 6 next:'' `meme-browser-host.ts` — Automerge browser repo + IndexedDB. Research-before-act (read Automerge browser repo + Keyhive codebase before writing any code).
 * `sw.ts` tsconfig lib issues: pre-existing, separate fix
 * `system` + `projection` bag store impls: still pending (D stubs)
 * Milestone F (presence split): 0%, not started
 * Keyhive UUID derivation for `KumuInstanceRef.uuidFragment`: post-Sprint 6
-* **Web3 rip-out Sprint (this session):** see `#m15-web3-rip-sprint-2026-05-02` below
+* ''Web3 rip-out Sprint (this session):'' see `#m15-web3-rip-sprint-2026-05-02` below
 
 <<~/ahu >>
 
@@ -311,10 +311,10 @@ cd packages/lararium-tw5 && npx tsc --noEmit  # ✓ ZERO errors
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Session opened with a 10-directive architecture refactor after a pre-Sprint 6 spike identified web2 design smells across the full `@lararium/tw5` API surface. Prior session had `LarariumTW5` as a 826-line monolith carrying carrier-era dead methods (`loadClosure`, `filterClosure`, `startSyncer`, `loadFromStore`, `buildReactionGraph`) alongside live boot/render logic. `getActiveTW5`/`setActiveTW5` global singleton existed. `filterOperators` registered as string regex rewrites (`toCanonicalWikitext`) rather than native TW5 operators. `LarDiskProjector` lived in `@lararium/tw5` despite using Node-only fs APIs. `MemeSyncAdaptor` existed but lacked `onChangeset()` (Scale-3 gap).
 
-⏿ **Orient:**
+⏿ ''Orient:''
 
 Ten architecture directives locked:
 
@@ -331,11 +331,11 @@ Ten architecture directives locked:
 
 Two new design principles locked:
 
-  **Composable file size invariant:** Each source file must remain small enough to become a self-describing quine meme. No consolidation of multiple operators/widgets into one file.
+  ''Composable file size invariant:'' Each source file must remain small enough to become a self-describing quine meme. No consolidation of multiple operators/widgets into one file.
 
-  **TW5 VM as causal island:** Filter operators live *inside* the wiki as `filteroperator` module-type tiddlers, not as string pre-processors outside. The VM IS the island boundary.
+  ''TW5 VM as causal island:'' Filter operators live *inside* the wiki as `filteroperator` module-type tiddlers, not as string pre-processors outside. The VM IS the island boundary.
 
-◇ **Decide:**
+◇ ''Decide:''
 
 Enacted immediately (no research needed):
 * `lararium-tw5.ts` → `lararium-tw5.web2.ts` (git mv)
@@ -356,14 +356,14 @@ Deferred to Sprint 6 research phase (items 5, 9, 10):
 * Grammar-wired deserializer (`splitCarrierToTiddlers` → `parseMemeText`)
 * Multi-doc boot order analysis for browser host
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
 | `@lararium/tw5` `lararium-tw5.ts` | Renamed → `lararium-tw5.web2.ts` (git mv; verbatim original preserved) |
-| `@lararium/tw5` `tw5-vm.ts` | **New** — `TW5Engine` class: boot, mountPanel, render, tiddler mutation, deserialize, wiki events |
-| `@lararium/tw5` `tw5-filter.ts` | **New** — `registerLarariumFilters()` entry + `toCanonicalWikitext` compat shim |
-| `@lararium/tw5` `filters/memes.ts` | **New** — `memes` TW5 filteroperator; ignores input source; iterates `options.wiki.each()` |
+| `@lararium/tw5` `tw5-vm.ts` | ''New'' — `TW5Engine` class: boot, mountPanel, render, tiddler mutation, deserialize, wiki events |
+| `@lararium/tw5` `tw5-filter.ts` | ''New'' — `registerLarariumFilters()` entry + `toCanonicalWikitext` compat shim |
+| `@lararium/tw5` `filters/memes.ts` | ''New'' — `memes` TW5 filteroperator; ignores input source; iterates `options.wiki.each()` |
 | `@lararium/tw5` `tw5-widgets.ts` | `registerImplementorsOperator` → delegates to `registerLarariumFilters` |
 | `@lararium/tw5` `meme-sync-adaptor.ts` | `onChangeset(uris, origin)` implemented (Scale-3 async bulk path) |
 | `@lararium/tw5` `meme-recipe-vm.ts` | `LarariumTW5` → `TW5Engine` |
@@ -380,7 +380,7 @@ Deferred to Sprint 6 research phase (items 5, 9, 10):
 | `@lararium/app` `LarariumShell.tsx` | `buildReactionGraph(tw5.wiki)` / `bindingsForUri(tw5.wiki, uri)` standalone; `b.trigger` → `b.listenable` |
 | `@lararium/app` `lararium-context.tsx` | `DEFAULT_ROOMS.map` implicit-any fixed |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
@@ -388,7 +388,7 @@ cd packages/lararium-node && npx tsc --noEmit  # ✓ ZERO errors
 cd packages/lararium-app  && npx tsc --noEmit  # ✓ ZERO errors (tldraw/sw.ts pre-existing)
 ```
 
-↺ **Aftermath / open work:**
+↺ ''Aftermath / open work:''
 
 * `toCanonicalWikitext` shim: remove from `TW5Engine.filterTiddlers()` once `all[memes]` source registration lands (TW5 `allfilteroperator` module type vs `filterOperators` dispatch gap)
 * `buildReactionGraph`/`bindingsForUri` re-exports from `reaction-query.web2.ts`: replace with `ReactionEngine implements MemeProjection` (Sprint 6+ target)
@@ -406,22 +406,22 @@ cd packages/lararium-app  && npx tsc --noEmit  # ✓ ZERO errors (tldraw/sw.ts p
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Session resumed from M15 context-limit boundary. Five standards memes needed; web2 stores still live; KukaliWidget still used `_larKukaliHook` singleton. Keyhive state unknown — needed scoping before any peer code.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 Keyhive confirmed pre-alpha (no npm package, no security audit, WASM bindings auto-generated but unstable). LarPeer keyhive slot MUST be opaque optional interface. `registerProjectionBus` replaces `registerKukaliHook` as the correct Verse-aligned coupling.
 
-◇ **Decide:**
+◇ ''Decide:''
 Write five standards memes in sequence: `verse-event-lattice`, `vm-projection-bus`, `quine-principles` (pattern-integrity and local-first already written). Retire `automerge-store.ts` and `node-meme-store.ts`. Fix KukaliWidget. Add `TW5Engine.registerProjectionBus()`. Update `LarariumPanel.tsx` stub wire.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
-| `packages/lares-core/memes/api/pono/verse-event-lattice.md` | **New** — Verse 5.6 event lattice: 4 types, `<suspends>` effect specifier, `@editable` boundary, `using` import clarification, device model alignment table |
-| `packages/lares-core/memes/api/pono/vm-projection-bus.md` | **New** — VM Pool→Projection Messaging Standard; event contract; VmPool wiring; `_larKukaliHook` migration; Verse alignment table |
-| `packages/lares-core/memes/api/pono/quine-principles.md` | **New** — P1-P4 quine properties; TW5 vs Smalltalk table; "if it CAN live in the wiki it MUST" rule; IPLD bridge; Heleuma anchor system |
+| `packages/lares-core/memes/api/pono/verse-event-lattice.md` | ''New'' — Verse 5.6 event lattice: 4 types, `<suspends>` effect specifier, `@editable` boundary, `using` import clarification, device model alignment table |
+| `packages/lares-core/memes/api/pono/vm-projection-bus.md` | ''New'' — VM Pool→Projection Messaging Standard; event contract; VmPool wiring; `_larKukaliHook` migration; Verse alignment table |
+| `packages/lares-core/memes/api/pono/quine-principles.md` | ''New'' — P1-P4 quine properties; TW5 vs Smalltalk table; "if it CAN live in the wiki it MUST" rule; IPLD bridge; Heleuma anchor system |
 | `@lararium/app` `automerge-store.ts` | → `automerge-store.web2.ts` (git mv) |
 | `@lararium/node` `node-meme-store.ts` | → `node-meme-store.web2.ts` (git mv) |
 | `@lararium/app` `lararium-browser-host.ts` | Import path updated: `automerge-store.js` → `automerge-store.web2.js` |
@@ -430,7 +430,7 @@ Write five standards memes in sequence: `verse-event-lattice`, `vm-projection-bu
 | `@lararium/tw5` `types/tiddlywiki.d.ts` | `_larKukaliHook` slot removed; comment updated to projection bus |
 | `@lararium/app` `LarariumPanel.tsx` | Kukali hook block → `registerProjectionBus` stub wire |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm -r --filter "@lararium/tw5"  typecheck  # ✓ ZERO errors
@@ -438,7 +438,7 @@ pnpm -r --filter "@lararium/node" typecheck  # ✓ ZERO errors
 pnpm -r --filter "@lararium/app"  typecheck  # ✓ (tldraw/sw.ts pre-existing only)
 ```
 
-↺ **Aftermath / open work:**
+↺ ''Aftermath / open work:''
 
 * `AutomergeDocStore` isomorphic base not yet written (`@lararium/mesh`)
 * `LarPeer` / `NodeLarPeer` / `BrowserLarPeer` interfaces not yet written
@@ -454,14 +454,14 @@ pnpm -r --filter "@lararium/app"  typecheck  # ✓ (tldraw/sw.ts pre-existing on
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 `LarPeer` + `AutomergeDocStore` in `@lararium/mesh` written but not wired.
 `LarariumShell` still used dead `useLarariumHostOpen` stub (throws at runtime).
 29 web2 archive files still on disk. `ReactionGraph` still required `buildReactionGraph`/`bindingsForUri` web2 scan on every wiki change.
 `LarariumPanel` was a portal overlay conflicting with tldraw's z-index hierarchy.
 Research needed on HUD best practices before writing the frame.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 Two research agents returned:
 1. tldraw z-index model: `--tl-layer-panels = 300`; flex sibling avoids all conflicts.
 2. Kinopio: four-corner distribution; no persistent sidebar; contextual panels.
@@ -469,7 +469,7 @@ Two research agents returned:
 4. Shadow DOM + TW5: `mountPanel()` uses `fakeDocument` + raw `addEventListener` — NOT React synthetic events, so retargeting bug doesn't apply.
 5. Excalidraw: push vs overlay split at container width breakpoint.
 
-◇ **Decide:**
+◇ ''Decide:''
 * Wire `useBrowserLarPeer` into `LarariumShell` (retire web2 host open).
 * Delete all 29 safely-removable web2 archive files.
 * Promote `ReactionEngine` (was dispatcher-only) to own its `ReactionGraph`:
@@ -478,24 +478,24 @@ Two research agents returned:
 * Write `LarHUD`: flex sibling (not portal), 3-state, shadow DOM mount stays live.
 * Write `lar-hud.md` doctrine meme.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
-| `@lararium/app` `open-browser-lar-peer.ts` | **New** — 7-step browser factory (IndexedDB+BC Repo → catalog → room → LarPeer → TW5 → adaptor → VmPool) |
-| `@lararium/node` `open-node-lar-peer.ts` | **New** — 7-step node factory (NodeFS+NodeWSServer Repo → same chain) |
+| `@lararium/app` `open-browser-lar-peer.ts` | ''New'' — 7-step browser factory (IndexedDB+BC Repo → catalog → room → LarPeer → TW5 → adaptor → VmPool) |
+| `@lararium/node` `open-node-lar-peer.ts` | ''New'' — 7-step node factory (NodeFS+NodeWSServer Repo → same chain) |
 | `@lararium/app` `LarariumShell.tsx` | `useLarariumHostOpen` → `useBrowserLarPeer`; `graphRef<ReactionGraph>` → `engineRef<ReactionEngine>` |
 | `@lararium/app` `lararium-context.tsx` | `LarariumOpenPhase` → `BrowserOpenPhase`; `tiddlerStore: CompositeStore` → `peer: LarPeer`; `reactionGraph: ReactionGraph` → `ReactionEngine` |
 | `@lararium/app` `BootSplash.tsx` | Rewritten for `BrowserOpenPhase` string union; ReadinessMap removed |
 | `@lararium/app` `LarariumCanvas.tsx` | `tiddlerStore` → `peer?.store` |
 | `@lararium/app` `LarariumPanel.tsx` | → `LarariumPanel.web2.tsx` |
-| `@lararium/app` `LarHUD.tsx` | **New** — flex-sibling VSCode-style TW5 dock (3-state, shadow mount, ⌘K cycle, Escape collapse) |
+| `@lararium/app` `LarHUD.tsx` | ''New'' — flex-sibling VSCode-style TW5 dock (3-state, shadow mount, ⌘K cycle, Escape collapse) |
 | `@lararium/mesh` `kumu-device.ts` | `ReactionEngine` promoted: owns graph, `boot(wiki)`, `onUriChanged` graph maintenance, `subscribeByFn`/`fireSync` delegation |
 | `@lararium/tw5` `tw5-vm.ts` | `getTiddlerText()` added to satisfy `BootScanSurface` |
 | 29 `*.web2.*` files | Deleted (carrier, indexes, node-host, disk-watcher, recipe-vm, sync-adaptor, server-api, parser, ast, memetic-parser, bundle-entry, active-tw5, lararium-tw5.web2, carrier-write/split/codec, pranala-parser, filter-compat, closure-fields, tw5-worker-script, project.web2, browser-host, automerge-store, serve, void-boot, node-meme-store, cli, meme-graph.web2) |
-| `packages/lares-core/memes/api/lararium/ui/lar-hud.md` | **New** — doctrine meme |
+| `packages/lares-core/memes/api/lararium/ui/lar-hud.md` | ''New'' — doctrine meme |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm -r --filter "@lararium/mesh" typecheck  # ✓ ZERO errors
@@ -509,7 +509,7 @@ git log --oneline -5
 # bce4b14a fix+feat: admin-gated full VM access
 ```
 
-↺ **Aftermath / open work:**
+↺ ''Aftermath / open work:''
 
 * `reaction-query.web2.ts` — last web2 file; orphaned now (no live callers), delete in next pass
 * `LarariumPanel.web2.tsx` — retire once LarHUD carries all panel functions (`fireMeme`, wiki nav)
@@ -526,16 +526,16 @@ git log --oneline -5
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Full monorepo reorganization completed this session under `packages/` root with per-package `memes/` trees. Git history: `ebb72a58` → `0ad9a2db` (path remapping, URI rewrites, ha.ka.ba corpus relocation). E-prime 0.8 + OODA-HA 0.8 operating rules locked. Five open-work OODA-HA loops enacted.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 The sprint closed the gap between the post-M11 causal-island split and the FFZ web3 local-first doctrine. Key invariants locked: (1) no server-rendered CRDT projections as HTML ("web2 SPA pattern" rejected); (2) disk + HTTP responses are projections, Automerge store is the mind; (3) `tw-vm` gates early as the isomorphic rendering VM kernel — before room tiddlers hydrate, parallel with room-content arrival; (4) server and browser peer at the same VM boot flow.
 
-◇ **Decide:**
+◇ ''Decide:''
 Five loops enacted in sequence: readiness light (disk-projector), engine blob reconciliation (B.1→100%), bag slot constants (D→80%), sw-shell first paint (C, FFZ-correct), PromotionReceipt scaffold (E→25%). `snapshot` key renamed `sw-shell`. `tw-vm` promoted to early boot gate (post-catalog, parallel with room-content).
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -551,7 +551,7 @@ Five loops enacted in sequence: readiness light (disk-projector), engine blob re
 | `@lararium/node` `promote-guard.test.ts` | 6 `abilityImplies` gate tests |
 | `lares/memes/lararium-node/` research packet | Milestone state table updated (B.1→100%, C→60%, D→80%, E→25%) |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm --filter @lararium/mesh build     # ✓ clean
@@ -560,7 +560,7 @@ pnpm --filter @lararium/node typecheck # ✓ clean
 pnpm --filter @lararium/node test      # ✓ 48/48 pass
 ```
 
-↺ **Aftermath / M12 open work:**
+↺ ''Aftermath / M12 open work:''
 
 * `sw.ts` in `@lararium/app` has pre-existing tsconfig lib issues (SW global scope) — not from this session; needs separate fix
 * `system` + `projection` bag store implementations still pending (D stubs exist, no impls)
@@ -579,9 +579,9 @@ pnpm --filter @lararium/node test      # ✓ 48/48 pass
 
 The repository currently contains a working, read-only Python MCP server under `lares/lararium_mcp` with a local stdio JSON-RPC transport, explicit MCP resources/tools/prompts, and deliberately light runtime dependencies. The entrypoint is `python -m lares.lararium_mcp`, and local client configs in `.mcp.json`, `.vscode/mcp.json`, and `.codex/config.toml` all launch it that way. The package metadata still targets Python `>=3.8`, with `setuptools` as the build backend and only `pytest` / `pytest-cov` as declared dev extras; there are no declared third-party runtime dependencies for the core package itself.     
 
-The most important migration conclusion is architectural rather than translational: do **not** replace `lararium_mcp` with a monolithic TypeScript MCP server. Build `lararium-node` as the Node host/runtime around an isomorphic `lararium-mesh`, then keep MCP as an adapter package. That matches your stated constraints better, isolates the MCP SDK’s version churn, and cleanly supports both file-backed server mode and single-bundle browser mode without letting Node/browser APIs leak into core. The repository’s own design docs already point in that direction: the current MCP server is framed as a bootstrap spine, TiddlyWiki Filter Language is explicitly bounded as a guest grammar rather than the constitutional runtime, render projection is defined as a layer *after* execution, and Kowloon / tldraw are adapter targets rather than core semantics.    
+The most important migration conclusion is architectural rather than translational: do ''not'' replace `lararium_mcp` with a monolithic TypeScript MCP server. Build `lararium-node` as the Node host/runtime around an isomorphic `lararium-mesh`, then keep MCP as an adapter package. That matches your stated constraints better, isolates the MCP SDK’s version churn, and cleanly supports both file-backed server mode and single-bundle browser mode without letting Node/browser APIs leak into core. The repository’s own design docs already point in that direction: the current MCP server is framed as a bootstrap spine, TiddlyWiki Filter Language is explicitly bounded as a guest grammar rather than the constitutional runtime, render projection is defined as a layer *after* execution, and Kowloon / tldraw are adapter targets rather than core semantics.    
 
-There is also an important repo-state nuance: the Python package on the branch you highlighted already contains a more mature graph/compiler direction than a simple “resolver port.” It adds `pranala_parser.py`, `meme_graph.py`, revised `compiler.py`, and dedicated tests for parser/graph invariants. That means the real parity target is **not only** the default-branch stdio server; it is the union of the user-visible MCP surface plus the branch’s newer graph-parsing semantics. If you migrate only what is on the current default branch, you will institutionalize stale compiler behavior and immediately create design debt.      
+There is also an important repo-state nuance: the Python package on the branch you highlighted already contains a more mature graph/compiler direction than a simple “resolver port.” It adds `pranala_parser.py`, `meme_graph.py`, revised `compiler.py`, and dedicated tests for parser/graph invariants. That means the real parity target is ''not only'' the default-branch stdio server; it is the union of the user-visible MCP surface plus the branch’s newer graph-parsing semantics. If you migrate only what is on the current default branch, you will institutionalize stale compiler behavior and immediately create design debt.      
 
 For the MCP adapter specifically, the safest near-term choice is to treat the official TypeScript SDK as a moving boundary and pin to the stable generation that fits your delivery horizon. The official SDK docs still show the current production package shape around `@modelcontextprotocol/sdk` with `McpServer`, stdio transport, resources/tools/prompts, and Streamable HTTP support, while the official SDK repository also states that its `main` branch is a v2 line still labeled pre-alpha and that v1.x remains the recommended production line until v2 fully settles. That is exactly why the MCP-facing code should live in `packages/lararium-mcp`, not in `lararium-mesh` or even `lararium-node`. 
 
@@ -625,12 +625,12 @@ This implies `lararium-mesh` should produce canonical records and projection-rea
 
 !!! TiddlyWiki as VerseGraph Core — Isomorphic Helper
 
-TW5 is a **first-class binding layer**, not an optional guest. It is summoned wherever the CRDT store lives — Node, browser, edge — and provides:
+TW5 is a ''first-class binding layer'', not an optional guest. It is summoned wherever the CRDT store lives — Node, browser, edge — and provides:
 
-* **Filter engine** — wikitext-filter expressions over the tiddler corpus; `filterClosure()` evaluates room recipes, template cascades, and palette search
-* **Virtual server** — `LarariumCrdtSyncAdaptor` binds `AutomergeMemeStore` / `LarTiddlerStore` to TW5’s wiki; CRDT deltas propagate into TW5 tiddlers; TW5 tiddler saves propagate back to the store (echo-loop guarded). `MemoryTiddlerStore` is now tests/fixtures only.
-* **Parse bridge** — a registered `text/x-memetic-wikitext` TW5 parser module delegates to `parseMemeCarrier()` in `@lararium/mesh`; TW5’s render pipeline can then produce HTML from carrier tiddlers without being the canonical parser
-* **Draft surface** — target flow is canvas/TW5 edit → `AutomergeMemeStore.put(origin: "canvas-draft" | "tw-local")` → live room state → `PUT /admin/promote` ceremony → `lares/` file (canon). The tldraw body-node draft listener exists, but body nodes are not emitted yet.
+* ''Filter engine'' — wikitext-filter expressions over the tiddler corpus; `filterClosure()` evaluates room recipes, template cascades, and palette search
+* ''Virtual server'' — `LarariumCrdtSyncAdaptor` binds `AutomergeMemeStore` / `LarTiddlerStore` to TW5’s wiki; CRDT deltas propagate into TW5 tiddlers; TW5 tiddler saves propagate back to the store (echo-loop guarded). `MemoryTiddlerStore` is now tests/fixtures only.
+* ''Parse bridge'' — a registered `text/x-memetic-wikitext` TW5 parser module delegates to `parseMemeCarrier()` in `@lararium/mesh`; TW5’s render pipeline can then produce HTML from carrier tiddlers without being the canonical parser
+* ''Draft surface'' — target flow is canvas/TW5 edit → `AutomergeMemeStore.put(origin: "canvas-draft" | "tw-local")` → live room state → `PUT /admin/promote` ceremony → `lares/` file (canon). The tldraw body-node draft listener exists, but body nodes are not emitted yet.
 
 The three-tree pipeline remains:
 
@@ -640,14 +640,14 @@ resolveWidgetTree() → WidgetNode[]        (widget tree — @lararium/tldraw + 
 renderCarrier() → React.ReactNode         (render tree — @lararium/app, view-only)
 ```
 
-TW5 binds across all three trees as a **projection accelerator and filter host**, not as the canonical parser or render runtime. The canonical parser is `parseMemeCarrier()`. TW5’s renderer is used for HTML preview output (MemeDetailPanel rich mode) but does not produce CRDT shapes.
+TW5 binds across all three trees as a ''projection accelerator and filter host'', not as the canonical parser or render runtime. The canonical parser is `parseMemeCarrier()`. TW5’s renderer is used for HTML preview output (MemeDetailPanel rich mode) but does not produce CRDT shapes.
 
 Previously-listed avoids, revised:
 
 | Old "Avoid" | Revised ruling |
 |---|---|
 | DOM widget tree as canonical execution model | Still avoid — the three-tree pipeline is canonical; TW5 DOM is view output only |
-| TiddlyWiki runtime as carrier-law dependency | **Superseded** — TW5 is the isomorphic filter host and virtual server; it IS the binding layer |
+| TiddlyWiki runtime as carrier-law dependency | ''Superseded'' — TW5 is the isomorphic filter host and virtual server; it IS the binding layer |
 | editable executable JS as first-class content primitive | Still avoid — JS-as-tiddler is TW5 internals; Lararium carriers are wikitext only |
 | shadow-tiddler override semantics as mutation model | Still avoid — mutation goes through the canon-MOVE (residency ACTION), not tiddler shadowing |
 
@@ -688,19 +688,19 @@ Projection packages must not define core ontology.
 
 !!! Kowloon Integration Model
 
-Lararium's live service is **elyncia.app** — a lararium node with Kowloon federation. The canvas and the social graph are the same thing. The Kowloon read-only posture was a bootstrap scaffold; the design direction is bidirectional.
+Lararium's live service is ''elyncia.app'' — a lararium node with Kowloon federation. The canvas and the social graph are the same thing. The Kowloon read-only posture was a bootstrap scaffold; the design direction is bidirectional.
 
-**Canvas actions that ARE Kowloon activities:**
+''Canvas actions that ARE Kowloon activities:''
 * Drawing a follow edge between two actor nodes → Follow activity (`family:relation role:follows`)
 * Adding a node to a circle (drag into circle shape) → Circle.updateOne
 * Publishing a meme from the canvas → Post activity (`to: @public | circle:<id> | group:<id>`)
 * Creating a room → Group creation with 5 system circles
 
-**Minimum viable Kowloon payload** (still valid for bootstrap):
+''Minimum viable Kowloon payload'' (still valid for bootstrap):
 * `type`, `actor`, `object`, `published`
 * `lar_uri`, `source_uri`, `sha256` / receipt hash when available
 
-**Posture going forward:** `lararium-kowloon` begins as a read + publish adapter. Write-back (circle membership, follow graph) follows after the canvas social graph visualization milestone. Stay agnostic about implementation order — the model is aligned, the build sequence is OODA-HA.
+''Posture going forward:'' `lararium-kowloon` begins as a read + publish adapter. Write-back (circle membership, follow graph) follows after the canvas social graph visualization milestone. Stay agnostic about implementation order — the model is aligned, the build sequence is OODA-HA.
 
 !!! Golden Fixtures Over Semantics
 
@@ -769,7 +769,7 @@ This report prioritizes the GitHub connector evidence from `amorphous-dreams/Syn
 
 The following assumptions are explicit, because several of them materially affect the recommendation. You have full repo access. The target runtime and deployment environment are unspecified. The target host may remain local-only initially. Lararium names and URI contracts should be preserved unless there is a formal breaking-change memo. `lararium-mesh` must stay isomorphic and therefore must not import `fs`, `path`, `process`, `window`, or `document`. TiddlyWiki is now an intentional runtime dependency of `@lararium/tw5` and the browser host; it remains outside `@lararium/mesh`. Write-back is no longer fully blocked: `/admin/promote` and disk↔Automerge sync are live, while general canvas body-node write-back still waits on projection and UX tests. These assumptions are consistent with your prompt and with the repository’s own TW boundary and projection documents.  
 
-One major limitation is that I did **not** find public, official documentation for a finished `lares/lararium-node` package. In this report, “lararium-node” therefore means a proposed Node-based target derived from your migration brief, the repo’s own architectural documents, and official MCP/TiddlyWiki/tldraw sources. Where a `lararium-node` behavior is not directly documented, I mark it as recommended or inferred rather than existing fact.  
+One major limitation is that I did ''not'' find public, official documentation for a finished `lares/lararium-node` package. In this report, “lararium-node” therefore means a proposed Node-based target derived from your migration brief, the repo’s own architectural documents, and official MCP/TiddlyWiki/tldraw sources. Where a `lararium-node` behavior is not directly documented, I mark it as recommended or inferred rather than existing fact.  
 
 !!! Added Assumptions from Lararium Context
 
@@ -786,7 +786,7 @@ Additional assumptions now bind this roadmap:
 
 !! Repo inventory and the surviving contract
 
-The verified files below are the code/config/build/test/design surfaces that either **are** `lares/lararium_mcp`, launch it, test it, or define the architecture it is expected to grow into.
+The verified files below are the code/config/build/test/design surfaces that either ''are'' `lares/lararium_mcp`, launch it, test it, or define the architecture it is expected to grow into.
 
 | Path | Purpose | Language | How it integrates | Source |
 |---|---|---|---|---|
@@ -882,19 +882,19 @@ That translates into the following Lararium posture:
 
 | TiddlyWiki pattern | Lararium decision | Why |
 |---|---|---|
-| Small boot kernel that loads higher layers | **Copy** | `lararium-mesh` should be small, deterministic, and bootable in Node or browser without transport/framework assumptions.  |
-| Tiddlers as universal data/code unit | **Inspire** | Carriers/memes can fill the same “universal unit” role, but Lararium should keep its own file/AST/graph semantics.  |
-| JavaScript modules as tiddlers | **Inspire, not literal-copy** | Useful as precedent for self-describing modules, but embedding executable JS inside carriers would blur code/data boundaries too early.  |
-| Plugins as bundled tiddlers | **Inspire** | Good model for Lararium package bundles and fixture corpora; not necessary as the exact package runtime.  |
-| Node.js wiki-folder storage | **Copy** | Strong precedent for `lararium-node` file-backed mode scanning a folder tree of carriers.  |
-| Single-file wiki storage | **Inspire** | Good precedent for a browser bundle / serialized snapshot mode, but Lararium should not adopt TW’s HTML-container format as canonical storage.  |
-| Filters and transclusion | **Inspire, with strict boundary** | TW filters are useful as guest grammar / query precedent; the repo explicitly keeps them out of constitutional center status.   |
-| `parse tree -> widget tree -> DOM` pipeline | **Copy structurally, avoid literally** | The right Lararium analogue is `source -> AST -> execution graph -> projection`, not widget runtime reuse.    |
-| Full TiddlyWiki runtime as app center | **Avoid** | Your own repo docs explicitly reject this for v1.  |
+| Small boot kernel that loads higher layers | ''Copy'' | `lararium-mesh` should be small, deterministic, and bootable in Node or browser without transport/framework assumptions.  |
+| Tiddlers as universal data/code unit | ''Inspire'' | Carriers/memes can fill the same “universal unit” role, but Lararium should keep its own file/AST/graph semantics.  |
+| JavaScript modules as tiddlers | ''Inspire, not literal-copy'' | Useful as precedent for self-describing modules, but embedding executable JS inside carriers would blur code/data boundaries too early.  |
+| Plugins as bundled tiddlers | ''Inspire'' | Good model for Lararium package bundles and fixture corpora; not necessary as the exact package runtime.  |
+| Node.js wiki-folder storage | ''Copy'' | Strong precedent for `lararium-node` file-backed mode scanning a folder tree of carriers.  |
+| Single-file wiki storage | ''Inspire'' | Good precedent for a browser bundle / serialized snapshot mode, but Lararium should not adopt TW’s HTML-container format as canonical storage.  |
+| Filters and transclusion | ''Inspire, with strict boundary'' | TW filters are useful as guest grammar / query precedent; the repo explicitly keeps them out of constitutional center status.   |
+| `parse tree -> widget tree -> DOM` pipeline | ''Copy structurally, avoid literally'' | The right Lararium analogue is `source -> AST -> execution graph -> projection`, not widget runtime reuse.    |
+| Full TiddlyWiki runtime as app center | ''Avoid'' | Your own repo docs explicitly reject this for v1.  |
 
 For MCP, the official picture is in flux. The public SDK docs still present the stable Node/TypeScript server experience around `@modelcontextprotocol/sdk`, `McpServer`, `StdioServerTransport`, resources/tools/prompts, and Streamable HTTP. The official repository, however, says its `main` branch is a v2 line that is still pre-alpha and that v1.x remains the production recommendation while the v2 branch settles. The MCP transport spec itself is clear on a few things that matter operationally: stdio is newline-delimited JSON-RPC with strict stdout purity; Streamable HTTP replaces the old HTTP+SSE transport; HTTP servers should validate `Origin`, bind locally when appropriate, and implement authentication when exposed remotely; and authorization is optional, HTTP-focused, and explicitly *not* intended for stdio, where environment-based credentials are the preferred model. 
 
-That yields a cautious SDK recommendation. If `lararium-node` is being built for near-term production parity, use the stable production SDK generation and isolate it in `packages/lararium-mcp`. Do **not** let the SDK’s package structure dictate core or Node runtime APIs. If you later choose the monorepo/v2 package split, the adapter package can be upgraded locally without forcing changes into parser/compiler code. 
+That yields a cautious SDK recommendation. If `lararium-node` is being built for near-term production parity, use the stable production SDK generation and isolate it in `packages/lararium-mcp`. Do ''not'' let the SDK’s package structure dictate core or Node runtime APIs. If you later choose the monorepo/v2 package split, the adapter package can be upgraded locally without forcing changes into parser/compiler code. 
 
 For tldraw, the official docs point to a record-centric and schema-centric data model that fits Lararium projection quite well. The store is a reactive database of typed records; snapshots divide cleanly into `document` and `session` parts; migrations are first-class and can occur at record or store scope; record scopes are explicitly `document`, `session`, and `presence`; and sync uses `@tldraw/sync` / `TLSocketRoom` with one authoritative room per shared document. The important design lesson is that Lararium should define an internal record model that can *project into* tldraw shapes/bindings without making tldraw’s own record taxonomy the canonical Lararium ontology. 
 
@@ -906,7 +906,7 @@ The minimum read-only Kowloon projection payload should therefore stay very smal
 
 TiddlyWiki remains useful because it demonstrates a quine-like content/kernel/storage pattern.
 However, Lararium should not import the word “tiddler” into its ontology.
-The Lararium unit is a **meme**: a sigil-marked memetic-wikitext carrier with a `lar` URI.
+The Lararium unit is a ''meme'': a sigil-marked memetic-wikitext carrier with a `lar` URI.
 
 Use the TiddlyWiki comparison this way:
 
@@ -995,7 +995,7 @@ server.registerPrompt(
 await server.connect(new StdioServerTransport())
 ```
 
-That MCP adapter should **not** hand-write JSON-RPC unless parity tests prove a missing SDK feature. The existing Python `handle_jsonrpc_message()` mostly exists because Python is manually dispatching protocol methods. In the TypeScript target, resource/tool/prompt registration should replace manual switch logic. That reduces protocol risk and aligns with the official SDK’s intended programming model.  
+That MCP adapter should ''not'' hand-write JSON-RPC unless parity tests prove a missing SDK feature. The existing Python `handle_jsonrpc_message()` mostly exists because Python is manually dispatching protocol methods. In the TypeScript target, resource/tool/prompt registration should replace manual switch logic. That reduces protocol risk and aligns with the official SDK’s intended programming model.  
 
 The clearest config migration is to replace Python launcher settings with Node shims while preserving the server name and local stdio posture:
 
@@ -1301,10 +1301,10 @@ All target outcomes delivered:
 * ✓ Hostful `lar://alias:grant@host/path` URI parsing: `parseHostfulLarUri()`, `isHostfulLarUri()` in `lararium-mesh`; hostful records always virtual, never resolve to lares/ files; `resolveLarUri()` explicitly rejects hostful form
 * ✓ 22 property tests for nested `ahu` `? ->` resolution in `lararium-mesh`
 * ✓ **Grammar fix: `fromSlot` separated from `fromSocket`** — the critical invariant:
-  - `fromSocket` = the enclosing ahu worksite (always set from the ahu stack)
-  - `fromSlot` = the named outgoing slot on that ahu (set only when pranala carries an explicit `#fragment`)
-  - Before: `#hydrate-hud` on a pranala overrode `#core-hydration` as fromSocket. Now: `fromSocket=#core-hydration`, `fromSlot=#hydrate-hud`
-  - Bug fixed simultaneously: `AHU_CLOSE_RE` was missing `~`, so `<<~/ahu>>` never popped the stack
+** `fromSocket` = the enclosing ahu worksite (always set from the ahu stack)
+** `fromSlot` = the named outgoing slot on that ahu (set only when pranala carries an explicit `#fragment`)
+** Before: `#hydrate-hud` on a pranala overrode `#core-hydration` as fromSocket. Now: `fromSocket=#core-hydration`, `fromSlot=#hydrate-hud`
+** Bug fixed simultaneously: `AHU_CLOSE_RE` was missing `~`, so `<<~/ahu>>` never popped the stack
 * ✓ Streamable HTTP canary (`packages/lararium-mcp/src/http.ts`): separate entrypoint, Origin validation gate, auth hook stub, `LARARIUM_HTTP_PORT/HOST/ALLOWED_ORIGINS` env config, `lararium-mcp-http` bin
 * ✓ `lararium-tldraw` skeleton: pure projection, no tldraw runtime import (optional peer), `LarProjectionRecord` union (page/frame/arrow/note), `projectToTldraw()`, story river layout, TiddlyWiki mapping documented in source
 
@@ -1318,25 +1318,25 @@ All target outcomes delivered:
 
 * ✓ `lararium-web` Vite bundle: `dist/lararium-web.es.js` + `dist/lararium-web.umd.js` (22.67 kB / 18.10 kB), zero build warnings
 * ✓ `crypto-shim.ts`: deterministic djb2-inspired 32-byte mixing shim satisfies `createHash('sha256')` in browser build; vite.config.ts aliases `crypto → src/crypto-shim.ts`
-* ⚠ **Async crypto shim debt** — `crypto-shim.ts` is NOT a real SHA-256. It uses djb2-inspired mixing: deterministic and collision-resistant for carrier content hashing, but not cryptographically secure. When browser callers become `async`-capable, replace `hashBuf()` in `crypto-shim.ts` with `await crypto.subtle.digest('SHA-256', buf)` and update `BrowserHash.digest()` to return `Promise<string>`. Callers in `lararium-mesh` (boot receipt, carrier hash) will need to be awaited. Track: `packages/lararium-web/src/crypto-shim.ts` TODO comment.
-* ✓ **TW5 Filter Language — single canonical engine** (hand-rolled evaluator removed):
-  - `tw-filter.ts` (Node): `filterMemesTW(entries, twExpr)` + `precomputeRooms()` via `tiddlywiki` devDep + `createRequire`. ClosureEntry → tiddler fields (`title=uri`, `tags=implements`, `depth/rating/role`). `[all[memes]]` aliases `[all[tiddlers]]`.
-  - `tw-filter-browser.ts`: same API in browser, backed by pre-built `src/generated/tw-filter-engine.browser.js` (154 modules, 106 operators, 410 KB). Vite aliases swap Node path for browser path at bundle time.
-  - `scripts/build-tw-browser-filter.mjs`: deterministic extraction script — boots TW5, serializes filter+wiki+utils modules to ESM. Upgrade process: `pnpm update tiddlywiki` → re-run script → run tests.
-  - `LarSnapshot.rooms`: pre-computed room filter results embedded in snapshot for instant browser load.
-  - Deterministic process: bump `tiddlywiki` dep → all 86+ TW operators available automatically. No vendoring, no code extraction.
-  - `buildBootClosure(graph, entryUri)` extracted to `lararium-mesh/compiler.ts` — pure BFS+topoSort on a pre-loaded MemeGraph (enables browser boot without file system).
-* ✓ **Infinite canvas app bootstrap** (`lararium-web/src/app.ts`):
-  - `bootApp(snapshotUrl)`, `bootFromSnapshot(snapshot)`, `bootFromRuntime(runtime)`, `bootFromEmbedded(scriptId)` — four boot modes
-  - `renderAppViews(app)` — dynamic-imports `@lararium/tldraw`, calls `renderAllViews()`, attaches emission to app
-  - `LarApp { runtime, artifact, receipt, emission }` — single live state object
+* ⚠ ''Async crypto shim debt'' — `crypto-shim.ts` is NOT a real SHA-256. It uses djb2-inspired mixing: deterministic and collision-resistant for carrier content hashing, but not cryptographically secure. When browser callers become `async`-capable, replace `hashBuf()` in `crypto-shim.ts` with `await crypto.subtle.digest('SHA-256', buf)` and update `BrowserHash.digest()` to return `Promise<string>`. Callers in `lararium-mesh` (boot receipt, carrier hash) will need to be awaited. Track: `packages/lararium-web/src/crypto-shim.ts` TODO comment.
+* ✓ ''TW5 Filter Language — single canonical engine'' (hand-rolled evaluator removed):
+** `tw-filter.ts` (Node): `filterMemesTW(entries, twExpr)` + `precomputeRooms()` via `tiddlywiki` devDep + `createRequire`. ClosureEntry → tiddler fields (`title=uri`, `tags=implements`, `depth/rating/role`). `[all[memes]]` aliases `[all[tiddlers]]`.
+** `tw-filter-browser.ts`: same API in browser, backed by pre-built `src/generated/tw-filter-engine.browser.js` (154 modules, 106 operators, 410 KB). Vite aliases swap Node path for browser path at bundle time.
+** `scripts/build-tw-browser-filter.mjs`: deterministic extraction script — boots TW5, serializes filter+wiki+utils modules to ESM. Upgrade process: `pnpm update tiddlywiki` → re-run script → run tests.
+** `LarSnapshot.rooms`: pre-computed room filter results embedded in snapshot for instant browser load.
+** Deterministic process: bump `tiddlywiki` dep → all 86+ TW operators available automatically. No vendoring, no code extraction.
+** `buildBootClosure(graph, entryUri)` extracted to `lararium-mesh/compiler.ts` — pure BFS+topoSort on a pre-loaded MemeGraph (enables browser boot without file system).
+* ✓ ''Infinite canvas app bootstrap'' (`lararium-web/src/app.ts`):
+** `bootApp(snapshotUrl)`, `bootFromSnapshot(snapshot)`, `bootFromRuntime(runtime)`, `bootFromEmbedded(scriptId)` — four boot modes
+** `renderAppViews(app)` — dynamic-imports `@lararium/tldraw`, calls `renderAllViews()`, attaches emission to app
+** `LarApp { runtime, artifact, receipt, emission }` — single live state object
 * ✓ View-switching architecture: `LarViewState` navigation model, three-view rendering (story-river/meme-detail/graph), camera transition helpers in `lararium-tldraw`
-  - `view-state.ts`: pure `LarViewState` type + `viewStateReducer()` (8 tests)
-  - `multi-view.ts`: `renderAllViews()` → 3 tldraw pages in one emission (story-river/meme-detail/graph); `focusSnapshot()` filters to one meme + direct neighbours
-  - `layout.ts`: `memeDetailLayout()` (320px frames, 120px gap) and `graphLayout()` (160px frames, overview scale) added alongside `storyRiverLayout()`
-  - `nav.ts`: `zoomToMeme()`, `zoomToFitAll()`, `switchToPage()`, `goToStoryRiver()`, `goToGraph()` — duck-typed against tldraw Editor, no runtime import required
-  - `emitTldrawRecords()` accepts `pageOverride` option for multi-page emission
-  - 33 tests total in lararium-tldraw; 75 across monorepo
+** `view-state.ts`: pure `LarViewState` type + `viewStateReducer()` (8 tests)
+** `multi-view.ts`: `renderAllViews()` → 3 tldraw pages in one emission (story-river/meme-detail/graph); `focusSnapshot()` filters to one meme + direct neighbours
+** `layout.ts`: `memeDetailLayout()` (320px frames, 120px gap) and `graphLayout()` (160px frames, overview scale) added alongside `storyRiverLayout()`
+** `nav.ts`: `zoomToMeme()`, `zoomToFitAll()`, `switchToPage()`, `goToStoryRiver()`, `goToGraph()` — duck-typed against tldraw Editor, no runtime import required
+** `emitTldrawRecords()` accepts `pageOverride` option for multi-page emission
+** 33 tests total in lararium-tldraw; 75 across monorepo
 
 <<~/ahu >>
 
@@ -1344,7 +1344,7 @@ All target outcomes delivered:
 
 !! tldraw Sync Architecture Decision (2026-04-26)
 
-> **2026-04-29 supersession:** this section is preserved as historical design archaeology. The active browser path no longer uses `useSync` as meme-content authority. `serve.ts` still exposes `/rooms/:roomId` backed by `TLSocketRoom` + `SQLiteSyncStorage`, but the browser canvas now opens Automerge `/meme-sync`, hydrates a room-scoped `LarariumTW5`, and projects tldraw records locally via `projectFromTw5()`. Read the TLSocketRoom plan below as the M5/M9 layout-sync path, not the current content model.
+> ''2026-04-29 supersession:'' this section is preserved as historical design archaeology. The active browser path no longer uses `useSync` as meme-content authority. `serve.ts` still exposes `/rooms/:roomId` backed by `TLSocketRoom` + `SQLiteSyncStorage`, but the browser canvas now opens Automerge `/meme-sync`, hydrates a room-scoped `LarariumTW5`, and projects tldraw records locally via `projectFromTw5()`. Read the TLSocketRoom plan below as the M5/M9 layout-sync path, not the current content model.
 
 !!! Problem Identified
 
@@ -1352,7 +1352,7 @@ The snapshot-injection model (inject `LarSnapshot` JSON into HTML `<script>` tag
 
 !!! Decision: Skip Phase 1 Static Snapshot — Go Straight to TLSocketRoom
 
-**tldraw's own production pattern (tldraw.com, 400k+ users):**
+''tldraw's own production pattern (tldraw.com, 400k+ users):''
 
 ```
 lares/ → compileMinimalBoot() → renderAllViews() → TLStoreSnapshot
@@ -1374,9 +1374,9 @@ No snapshot injection in HTML. No `loadSnapshot()` on the client. Browser calls 
 
 * `TLSocketRoom` accepts `initialSnapshot` on first creation — this is the seeding path from our projection
 * `SQLiteSyncStorage` is now the default persistence backend (SQLite, not in-memory, survives process restarts)
-* `initialSnapshot` and `onDataChange` are **deprecated** in favor of pluggable `storage` option
+* `initialSnapshot` and `onDataChange` are ''deprecated'' in favor of pluggable `storage` option
 * One `TLSocketRoom` per document — our three pages (story-river, meme-detail, graph) are partitions within one room
-* tldraw sync keeps confirmed server state and optimistic client pending state as **separate layers** — this structurally enforces `canon-boundary` without extra code
+* tldraw sync keeps confirmed server state and optimistic client pending state as ''separate layers'' — this structurally enforces `canon-boundary` without extra code
 * `useSync` (from `@tldraw/sync`) replaces the local store; clients never "load" a snapshot, they join a live room
 
 !!! Room Key = BootReceipt SHA
@@ -1436,7 +1436,7 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 
 !!! Completed
 
-**Crypto provider boundary (replaces djb2 crypto-shim)**
+''Crypto provider boundary (replaces djb2 crypto-shim)''
 * ✓ `CryptoProvider` / `DigestProvider` / `RandomProvider` interfaces in `lararium-mesh/src/crypto.ts`
 * ✓ `webDigest()`, `webGetRandomValues()`, `webRandomUUID()`, `defaultCryptoProvider`
 * ✓ Canonical bytes helpers: `utf8Bytes()`, `canonicalJson()`, `canonicalJsonBytes()`, `hex()`, `sha256Hex()`
@@ -1446,16 +1446,16 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 * ✓ All callers (stdio.ts, cli.ts, app.ts, no-write-gate.test.ts, parity.test.ts) updated to `await`
 * ✓ `lares/lararium-node/CRYPTO.md` doctrine carrier
 
-**ATProto / Bluesky login doctrine**
+''ATProto / Bluesky login doctrine''
 * ✓ Doctrine-only — no implementation
 * ✓ `lares/lararium-node/AUTH-ATPROTO.md`: BFF-preferred, SDK-managed PKCE/PAR/DPoP, seven identity layers, k256 out of scope
 
-**Infinite canvas app scaffold**
+''Infinite canvas app scaffold''
 * ✓ `packages/lararium-app/` created: `index.html`, `main.tsx`, `App.tsx`, `LarariumCanvas.tsx`, `SidePanel.tsx`
 * ✓ `viewStateReducer` wired; Back and Graph buttons in `SidePanel`
 * ✓ All packages typecheck clean
 
-**Multiplayer sync server (replaces snapshot injection)**
+''Multiplayer sync server (replaces snapshot injection)''
 * ✓ `packages/lararium-node/scripts/serve.ts` rewritten as `TLSocketRoom` + `SQLiteSyncStorage` WebSocket server
 * ✓ `better-sqlite3` backend (not `node:sqlite`) — matches official tldraw template
 * ✓ Room seeded from `renderAllViews(artifact)` on first connection if SQLite empty; idempotent on resume
@@ -1464,12 +1464,12 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 * ✓ Static file server injects `<meta name="lararium-ws">` into `index.html` (no snapshot blob)
 * ✓ WebSocket handler follows official tldraw simple-server-example: sessionId from URL query param, message buffering pattern, ws passed directly to `handleSocketConnect`
 
-**Browser client upgrade**
+''Browser client upgrade''
 * ✓ `App.tsx` rewritten: reads `wsUrl` from `<meta name="lararium-ws">` or same-host fallback; `useReducer(viewStateReducer)` nav state; `app={null}` (sync mode, no local boot)
 * ✓ `LarariumCanvas.tsx` rewritten: `useSync({ uri: wsUrl })`, `loading` / `error` / `synced-remote` states handled; `useEffect([store.status, navState])` drives `syncNavState`
 * ✓ `SidePanel.tsx` accepts `app: LarApp | null`; gracefully shows `--- memes` when null
 
-**tldraw v4 schema compliance (found and fixed during browser testing)**
+''tldraw v4 schema compliance (found and fixed during browser testing)''
 * ✓ All shape IDs must start with `shape:` — `memeFrameId`, `ahuFrameId`, `edgeArrowId`, note IDs all fixed in `records.ts` / `project.ts`
 * ✓ Index key format: replaced broken `a${n.toString(36)}` with `getIndexAbove`/`getIndicesAbove` from `@tldraw/utils`
 * ✓ Multi-view shape ID scoping: `scopeId()` rewrites `shape:foo` → `shape:${pageSlug}__foo` — collision-free across views, `shape:` prefix preserved
@@ -1478,13 +1478,13 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 * ✓ Note props: `labelColor: "black"`, `font: "draw"`, `fontSizeAdjustment: 0` added
 * ✓ 34/34 `@lararium/tldraw` tests pass; 36 `@lararium/node` tests pass
 
-**Build hygiene**
+''Build hygiene''
 * ✓ `tldraw` and `tiddlywiki5` git submodules removed; versioned npm deps replace them
 * ✓ `@tldraw/utils@^4.5.10` added to `lararium-tldraw`; `pnpm-workspace.yaml` no longer includes `tldraw/packages/*`
 * ✓ TW5 help banner suppressed during `boot.boot()` in `tw-filter.ts` (stdout redirect during init)
 * ✓ `mempalace`, `kowloon`, `kowloon-frontend`, `kowloon-client` submodules retained (private/co-developed)
 
-**Design docs**
+''Design docs''
 * ✓ `lares/lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI.md` — canonical design constitution for the multiplayer canvas system (system role, room model, seeding contract, trust tiers, canon boundary, views, MCP surface plan, deployment topology, open questions)
 
 !!! Known Open Items (carry to Milestone 5)
@@ -1505,13 +1505,13 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 
 !!! Completed (this session)
 
-**Canvas UX + Kinopio Alignment Sprint**
+''Canvas UX + Kinopio Alignment Sprint''
 
 * ✓ `TLArrowBindingRecord` emitted and seeded into store — drag-follows-arrow Kinopio behavior wired at the binding layer
 * ✓ Multi-view bindings merged across story/detail/graph emissions
 * ✓ Dead layout constants removed from `project.ts` (FRAME_W/H were computed but never stored — data layer is now geometry-free)
 * ✓ `LarariumShell` — Kinopio-style chrome: `position:fixed; pointer-events:none` header; canvas fills 100vh; canvas mode toggle (`` ` `` key, dims Lararium chrome, restores tldraw toolbar); error boundary with reload button; debug globals gated to `NODE_ENV=development`
-* ✓ `⌘K` command palette: **Spaces** section (DEFAULT_ROOMS with chronometer glyphs) above **Memes** section; unified arrow-key navigation across both sections
+* ✓ `⌘K` command palette: ''Spaces'' section (DEFAULT_ROOMS with chronometer glyphs) above ''Memes'' section; unified arrow-key navigation across both sections
 * ✓ `zoom-levels.ts` — five-level ontology: `strategic/operational/tactical/combat/action` → 🗺️⚙️🔍⚔️⚡ mapped to chronometer scale positions; `classifyZoom()`, `ZOOM_SNAP`, `ZOOM_PAGE`; exported from `@lararium/tldraw`
 * ✓ Zoom auto page-switching: `editor.store.listen()` detects zoom threshold crossings → auto-switches to graph page (strategic/operational) or story page (tactical); `onZoomLevel` callback surfaces level to shell footer glyph
 * ✓ `LarPortalShapeUtil` — custom tldraw shape: hexagonal badge, blue border, `targetRoomId` + `label` props; registered via `shapeUtils` prop
@@ -1523,16 +1523,16 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 
 !!! Also completed in M5 session (2026-04-27)
 
-**Schema/validation fix**
+''Schema/validation fix''
 * ✓ `lar-portal` custom shape type replaced with built-in `geo` (hexagon) + `meta: { larPortal, targetRoomId, label }` — tldraw's server-side schema (`DEFAULT_INITIAL_SNAPSHOT.schema`) rejects unknown types on sync; no custom `ShapeUtil` or schema registration needed
 * ✓ `LarPortalShapeUtil` deleted; portal detection in double-click handler reads `shape.meta.larPortal`
 * ✓ Zoom `store.listen` scoped to `{ scope: "session" }` — camera is session-scoped; fires ~100× less than unscoped
 
-**Security hardening**
+''Security hardening''
 * ✓ Path traversal guard: `resolve(filePath)` checked against `APP_DIST` prefix; 403 on escape
 * ✓ WS URL from `req.headers.host` + `x-forwarded-proto` — LAN/proxy clients get correct address
 
-**UX shell + kinopio alignment (2026-04-27)**
+''UX shell + kinopio alignment (2026-04-27)''
 * ✓ `LarariumShell` — kinopio-model chrome: `position:fixed; pointer-events:none` header, all UI via React portal into `document.body`, canvas fills 100vh
 * ✓ ⌘K command palette: Spaces + Memes sections, unified arrow-key nav
 * ✓ Canvas mode toggle (`` ` `` key): dims Lararium chrome, restores tldraw toolbar; toggle pill bottom-left
@@ -1540,7 +1540,7 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 * ✓ Zoom-level ontology (strategic/operational/tactical/combat/action) with FTLS-scale thresholds (0.15/0.35/0.80/1.50); footer glyph tracks live
 * ✓ MULTIPLAYER-INFINITE-CANVAS-WIKI.md and ROADMAP.md aligned to current implementation
 
-**Pending browser smoke (Milestone 6 opens)**
+''Pending browser smoke (Milestone 6 opens)''
 * ⚠ Drag-follows-arrow: binding records type-correct; tactile test pending
 * ⚠ Portal double-click: geo+meta → GO_TO_ROOM path untested live
 * ⚠ Zoom auto page-switch: threshold logic correct; live camera interaction untested
@@ -1570,8 +1570,8 @@ Eight structural gaps found by walking all packages against the kinopio/multipla
 
 | # | Location | Issue | Severity |
 |---|---|---|---|
-| T1 | `LarariumShell.tsx` header | Breadcrumb hardcodes `"the-altar-fire"` — never updates on `GO_TO_ROOM` | **Broken live** |
-| T2 | `App.tsx` → `LarariumCommandPalette` | Meme list from `/api/memes` fetch — fails in all dev paths; palette Memes section always empty | **Broken live** |
+| T1 | `LarariumShell.tsx` header | Breadcrumb hardcodes `"the-altar-fire"` — never updates on `GO_TO_ROOM` | ''Broken live'' |
+| T2 | `App.tsx` → `LarariumCommandPalette` | Meme list from `/api/memes` fetch — fails in all dev paths; palette Memes section always empty | ''Broken live'' |
 | T3 | `multi-view.ts` `ROOM_PAGE` | Duplicates `room.ts` `roomPageId()` — two sources of truth for room→page mapping, can drift | Mechanical fix |
 | T4 | `room.ts` `portalShapeId` | Returns `frame:portal_${...}` — portals are now `shape:portal_${...}` geo shapes; function is wrong and unused | Dead export |
 | T5 | `view-state.ts` `ZOOM_OUT` action | Exported, reducer handles it, nothing dispatches it — shadow nav | Orphan |
@@ -1586,8 +1586,8 @@ Fix order: T1 → T2 → T3+T4+T5 (mechanical batch) → T6+T7+T8 (commentary).
 Console error on boot: `fetch /api/memes` hits Vite (5173), returns HTML 404.
 
 Decision required (one of):
-* **(a) Vite proxy:** add `server.proxy` in `vite.config.ts` forwarding `/api/*` and `/rooms/*` to `serve.ts:4321`. Preserves HMR. Requires `serve.ts` running in parallel dev loop.
-* **(b) Skip fetch entirely:** replace `App.tsx` fetch with `editor.getShapes()` filtered to `meta.frameKind === "meme"` — CRDT-native, no separate endpoint. This is the target model (MULTIPLAYER §open-questions #2). Zero backend dependency.
+* ''(a) Vite proxy:'' add `server.proxy` in `vite.config.ts` forwarding `/api/*` and `/rooms/*` to `serve.ts:4321`. Preserves HMR. Requires `serve.ts` running in parallel dev loop.
+* ''(b) Skip fetch entirely:'' replace `App.tsx` fetch with `editor.getShapes()` filtered to `meta.frameKind === "meme"` — CRDT-native, no separate endpoint. This is the target model (MULTIPLAYER §open-questions #2). Zero backend dependency.
 
 Option (b) is the architecturally correct path. Option (a) is simpler if `serve.ts` is already running.
 
@@ -1598,19 +1598,19 @@ Option (b) is the architecturally correct path. Option (a) is simpler if `serve.
 
 !!! Priority 4: MCP integration (partially complete 2026-04-26)
 
-**Done**
+''Done''
 * ✓ `wikitext-filter` tool: TW5 filter expression evaluated against boot closure — `[all[memes]tag[...invariant]]`, `[field:depth[0]]`, etc.
 * ✓ `lararium-room_list` tool: DEFAULT_ROOMS with page IDs and filter expressions
 * ✓ `lararium-edge_list` tool: all pranala arrows from projection, optional family filter
 * ✓ `filterMemesTW` + `precomputeRooms` exported from `@lararium/node` via new `@lararium/mesh/tw-filter` subpath export (keeps browser bundle clean)
 
-**Remaining**
+''Remaining''
 * ⚠ MCP ↔ canvas bridge: `stdio.ts` compiles fresh from `lares/` on each tool call — it cannot see live room state (active connections, shape positions, session camera). Bridge requires either: (a) `stdio.ts` queries `serve.ts` HTTP API for live state, or (b) both run in the same process. Env var `LARARIUM_HTTP_URL` would let `stdio.ts` query the canvas server.
 * ⚠ `lararium-meme_list` tool: currently `lararium-compile_minimal_boot` covers this but lacks the flat URI+depth+kind summary format that is optimally tool-shaped
 
 !!! Priority 5: UX chrome — tldraw component slot integration ✓ (2026-04-27)
 
-**Implemented.** All Lararium chrome moved into tldraw component slots. No `position:fixed` header competing with tldraw panels.
+''Implemented.'' All Lararium chrome moved into tldraw component slots. No `position:fixed` header competing with tldraw panels.
 
 Slot mapping (as shipped):
 
@@ -1623,14 +1623,14 @@ Slot mapping (as shipped):
 | Command palette overlay | `position:fixed` | Intentionally covers everything; z-index: 800 |
 
 Key patterns:
-* Slot components are stable **module-level** refs in `lararium-context.tsx` — tldraw never remounts them
+* Slot components are stable ''module-level'' refs in `lararium-context.tsx` — tldraw never remounts them
 * All state is shared via `LarariumCtx` React context — slot components read it without prop drilling
 * `WIKI_COMPONENTS`: Toolbar/StylePanel/PageMenu/MainMenu/ZoomMenu/QuickActions/TopPanel all null; Lararium slots + NavigationPanel default
 * `CANVAS_COMPONENTS`: PageMenu/TopPanel null; Lararium slots + NavigationPanel + tldraw drawing chrome (Toolbar, StylePanel etc.) restored
 
 !!! Priority 6: Theme system — Gruvbox CSS tokens + selector ✓ (2026-04-27)
 
-**Implemented.**
+''Implemented.''
 
 * `src/lararium-theme.css` — CSS custom property overrides scoped to `html[data-theme]`. Selector specificity: `html[data-theme="gruvbox-dark"] .tl-theme__dark { ... }` beats tldraw defaults without `!important`.
 * `useTheme()` hook in `lararium-context.tsx` — reads `localStorage("lararium.theme")`, applies `data-theme` on init, cycles via `cycleTheme()`.
@@ -1644,7 +1644,7 @@ See MULTIPLAYER `#theme-system` for full CSS token tables.
 
 !!! Priority 7: Meme count reactive subscription ✓ (2026-04-27)
 
-**Implemented.** `store.listen(() => { debounce(scanMemes, 150) }, { scope: "document" })` added inside the `synced-remote` `useEffect` in `LarariumCanvas`. One-shot scan on first sync, then live re-scan on any shape add/remove/meta change. `scope: "document"` skips camera/presence records — fires ~100x less than default. Cleanup returns both `unsub()` and `clearTimeout`.
+''Implemented.'' `store.listen(() => { debounce(scanMemes, 150) }, { scope: "document" })` added inside the `synced-remote` `useEffect` in `LarariumCanvas`. One-shot scan on first sync, then live re-scan on any shape add/remove/meta change. `scope: "document"` skips camera/presence records — fires ~100x less than default. Cleanup returns both `unsub()` and `clearTimeout`.
 
 Do not in Milestone 6:
 * Canon MOVE / write-back to `lares/`
@@ -1691,11 +1691,11 @@ Three laws:
 
 !!! Priority 8: `/admin/reseed` endpoint ✓ (shipped in Milestone 5)
 
-**Completed.** `GET /admin/reseed?roomId=boot` kills the SQLite room entry and re-seeds from `renderAllViews(artifact)` on next WebSocket connect. `/api/rooms` endpoint lists active rooms. Both gated to non-prod. Unlocks the `lares/` edit → live canvas loop without restarting the server.
+''Completed.'' `GET /admin/reseed?roomId=boot` kills the SQLite room entry and re-seeds from `renderAllViews(artifact)` on next WebSocket connect. `/api/rooms` endpoint lists active rooms. Both gated to non-prod. Unlocks the `lares/` edit → live canvas loop without restarting the server.
 
 !!! Priority 9: Pranala family property contracts + compile-time validation ✓ (2026-04-27)
 
-**Implemented.** `validatePranalaEdge(edge)` added to `pranala-parser.ts`. `FAMILY_CONTRACTS` map defines per-family rules. `validateClosure()` in `compiler.ts` runs the validator against all edges in the graph and populates `ValidationResult.edgeViolations`. `BootReceipt.validation` surfaces `edgeViolationCount` + `edgeErrors` counts.
+''Implemented.'' `validatePranalaEdge(edge)` added to `pranala-parser.ts`. `FAMILY_CONTRACTS` map defines per-family rules. `validateClosure()` in `compiler.ts` runs the validator against all edges in the graph and populates `ValidationResult.edgeViolations`. `BootReceipt.validation` surfaces `edgeViolationCount` + `edgeErrors` counts.
 
 Violation model:
 | Severity | Rule | Condition |
@@ -1710,18 +1710,18 @@ Future: extract `FAMILY_CONTRACTS` to `lares/grammars/pranala-families.md` carri
 
 !!! Priority 10: Grammar Phase 2 scaffolding ✓ (2026-04-27)
 
-**Implemented (Phase 2 scaffold — wiring deferred to Phase 2.5).**
+''Implemented (Phase 2 scaffold — wiring deferred to Phase 2.5).''
 
 * `lares/grammars/memetic-wikitext.md` — grammar carrier meme with `[[sigils]]` and `[[families]]` TOML arrays; full sigil registry (ahu, pranala, loulou, aka, kahea, iam, header) and family contracts table
 * `GrammarRules`, `SigilRule`, `FamilyRule` interfaces exported from `@lararium/mesh` (`pranala-parser.ts`)
 * `loadGrammarRules()` function in `node-host.ts` — reads grammar carrier from `lares/grammars/memetic-wikitext.md`, extracts `[[sigils]]` + `[[families]]` into a `GrammarRules` object, returns `null` on missing file (bootstrap safety net)
 * 85/85 tests pass
 
-**Phase 2.5 complete (2026-04-27):** `GrammarRules` threaded as optional third arg to `parsePranalaEdges`. Hard-coded regex constants promoted to configurable values derived from the grammar meme when present; fall back to built-in constants on missing file. `loadGrammarRules()` in `node-host.ts` reads `lares/grammars/memetic-wikitext.md`, parses `[[sigils]]` + `[[families]]` TOML arrays. `buildControlClosure` calls it at boot and passes `grammar` through all downstream meme loaders. TOML parser uses self-terminating quoted-string regex — `#` inside quoted strings is not treated as comment. 95/95 tests passing including 11 grammar-loader tests.
+''Phase 2.5 complete (2026-04-27):'' `GrammarRules` threaded as optional third arg to `parsePranalaEdges`. Hard-coded regex constants promoted to configurable values derived from the grammar meme when present; fall back to built-in constants on missing file. `loadGrammarRules()` in `node-host.ts` reads `lares/grammars/memetic-wikitext.md`, parses `[[sigils]]` + `[[families]]` TOML arrays. `buildControlClosure` calls it at boot and passes `grammar` through all downstream meme loaders. TOML parser uses self-terminating quoted-string regex — `#` inside quoted strings is not treated as comment. 95/95 tests passing including 11 grammar-loader tests.
 
-**Hot-reload path now live:** Edit grammar carrier in `lares/grammars/memetic-wikitext.md` → `GET /admin/reseed` → server rebuilds from fresh disk → grammar rule changes take effect without TypeScript rebuild.
+''Hot-reload path now live:'' Edit grammar carrier in `lares/grammars/memetic-wikitext.md` → `GET /admin/reseed` → server rebuilds from fresh disk → grammar rule changes take effect without TypeScript rebuild.
 
-**Phase 3 (next):** Parser itself becomes a meme. Template cascade (tldraw projection) driven by grammar memes. Canvas can edit its own renderer. Sigil rules and family contracts editable as canvas shapes, promoted via canon-MOVE (residency ACTION).
+''Phase 3 (next):'' Parser itself becomes a meme. Template cascade (tldraw projection) driven by grammar memes. Canvas can edit its own renderer. Sigil rules and family contracts editable as canvas shapes, promoted via canon-MOVE (residency ACTION).
 
 <<~/ahu >>
 
@@ -1789,14 +1789,14 @@ Phase 2 substantially complete. Grammar meme at 40 registered sigils (post-M7 se
 
 After the Phase 2 session documented above, a further grammar extension session completed the remaining gaps and added the 7th pranala family.
 
-**New sigils registered:**
+''New sigils registered:''
 
 * `kau` — variable binding; `<<~! kau name = val >>` = carrier-scoped (hoisted pragma); `<<~ kau name = val >>...<<~/kau >>` = block-scoped; `!` carries scope elevation promise
 * `kumu` — element type definition (`\widget` equivalent); declares a new grammar node type (distinct from `wehe` which is text/content template)
 * `papalohe` — reaction family edge sugar; *pāpālohe* (Lua martial arts: body-listening reflex, heightened reflexive awareness); UEFN device graph event wire; `trigger` property carries event name
 * `kapu` block form — added `open_pattern`/`close_pattern` alongside existing inline `pattern`
 
-**New English aliases registered:**
+''New English aliases registered:''
 
 `\const`, `\let`, `\var` → `kau` | `\widget`, `\type`, `\typos` → `kumu` | `\import` → `kahea` | `\constraint` → `pono`
 
@@ -1804,9 +1804,9 @@ After the Phase 2 session documented above, a further grammar extension session 
 
 "When source fires event, target awakens." UEFN device graph event subscriptions. `papalohe` is the sugar sigil. Wired in `KNOWN_FAMILIES`, `FAMILY_CONTRACTS`, event loop, `ActiveRegexes`. `trigger` property stored in `payload["trigger"]`.
 
-**AST type layer (Phase 3 — compressed):**
+''AST type layer (Phase 3 — compressed):''
 
-`packages/lararium-mesh/src/ast.ts` — `MemeAstNode` union compressed to **8 node kinds**. 15 typed interfaces collapsed into `SigilNode { sigilName, attrs, body }`. `MetadataNode` removed — `toml`/`iam` are now `SigilNode`. `DynamicNode` added as grammar-meme escape hatch. `#ast-node-types` spec section updated to reflect compressed model.
+`packages/lararium-mesh/src/ast.ts` — `MemeAstNode` union compressed to ''8 node kinds''. 15 typed interfaces collapsed into `SigilNode { sigilName, attrs, body }`. `MetadataNode` removed — `toml`/`iam` are now `SigilNode`. `DynamicNode` added as grammar-meme escape hatch. `#ast-node-types` spec section updated to reflect compressed model.
 
 **Phase 3 parser (`parseMemeCarrier`):**
 
@@ -1814,7 +1814,7 @@ New primary API: `parseMemeCarrier(uri, text, grammar?) → MemeAstNode[]`. SAX-
 
 **`wikitext-filter.md`:** Added `[edge:family[reaction]trigger[X]]` operators section.
 
-**Test count:** 64 → 84 (20 new tests in `grammar-phase2x.test.ts` + `parser-phase3.test.ts` covering `papalohe`, reaction family contracts, Phase 3 tree structure, parity with `parsePranalaEdges`, alias erasure, `DynamicNode`, kau scope).
+''Test count:'' 64 → 84 (20 new tests in `grammar-phase2x.test.ts` + `parser-phase3.test.ts` covering `papalohe`, reaction family contracts, Phase 3 tree structure, parity with `parsePranalaEdges`, alias erasure, `DynamicNode`, kau scope).
 
 <<~/ahu >>
 
@@ -1832,7 +1832,7 @@ All three laws landed:
 | — | `lares/README.md` → carrier meme + resolver registration | ✓ shipped M7 (2026-04-27) |
 | — | `lares/.laresignore` + full `lares/` tree walk | ✓ shipped M7 (2026-04-27) |
 
-**Parity baseline change:** `lar:///README` now resolves as a `CAPS_FILE_ROOT` to `lares/README.md`. Carrier index and full boot closure will include it from next boot. Fixture counts will increase by one.
+''Parity baseline change:'' `lar:///README` now resolves as a `CAPS_FILE_ROOT` to `lares/README.md`. Carrier index and full boot closure will include it from next boot. Fixture counts will increase by one.
 
 <<~/ahu >>
 
@@ -1842,7 +1842,7 @@ All three laws landed:
 
 !!! Completed
 
-**Single-page zoom-gated rendering (replaces three-page model)**
+''Single-page zoom-gated rendering (replaces three-page model)''
 * ✓ `renderAllViews()` collapsed to one page (`page:boot`) — URI-stable shape IDs, no `pageOverride` scoping
 * ✓/⚠ `applyZoomTemplate(editor, level)` — batch `editor.updateShapes()` on zoom threshold crossings; active code reads TW5 `getZoomLayout(level)` with fallback defaults, not `shape.meta.templateProps[level]`
 * ✓ `ratingFromShape()` helper — maps `meta.rating` → tldraw color string; used by `color="rating"` template prop
@@ -1850,7 +1850,7 @@ All three laws landed:
 * ✓ Multi-view tests updated: 34/34 pass against single-page model
 * ✓ MULTIPLAYER and ROADMAP docs updated to reflect single-page model as shipped
 
-**kumu template pipeline — fully wikitext-native**
+''kumu template pipeline — fully wikitext-native''
 * ✓ Five template carriers at `lar:///ha.ka.ba/lares/api/lararium/templates/meme-*` (in `ha.ka.ba/lares/api` namespace — no adjacent namespace)
 * ✓ `packages/lares-core/memes/api/lararium/templates/index.md` — namespace index, owns control edges to all five; wired from `lararium` meme via `#hydrate-templates` (control:owns)
 * ✓ Each template TOML body carries: `zoom-level`, `cascade` (filter predicate string), `priority`, `w`, `h`, `color`, `label`, `include-ahu`, `show-notes`, `show-carrier`, `opacity`
@@ -1862,11 +1862,11 @@ All three laws landed:
 * ✓ `CRDT-native carrier text` — `shape.meta.carrierText` seeded at projection; `MemeDetailPanel` reads from store
 * ✓ Boot closure now includes 25 memes (up from 19); all exist; `allExist: true`; 229/229 tests green
 
-**CRDT-native carrier text + Meme detail panel**
+''CRDT-native carrier text + Meme detail panel''
 * ✓ `shape.meta.carrierText` — carrier text seeded at projection time, stored in tldraw CRDT store; no HTTP fetch
 * ✓ `MemeDetailPanel` — slides up from viewport bottom on `meme-detail` view; reads carrier text from store via context editor; parses with `parseMemeCarrier`; Escape/backdrop dismisses
 
-**TW5 cascade + UEFN instance model research (2026-04-28)**
+''TW5 cascade + UEFN instance model research (2026-04-28)''
 * ✓ TW5 `:cascade` filter run prefix: priority-ordered list of tagged tiddlers; each evaluates arbitrary filter expression against tiddler context; first non-empty result is the template title. Cascade rules are authored as tiddlers — no core JS modification.
 * ✓ UEFN Verse `creative_device`: class definition in `.verse` source (shared code); per-instance `@editable` props stored as level data (serialized at editor time, hydrated at simulation start). The class/instance seam is the exact `kumu` definition / placed instance seam. Inter-device topology is flat, pre-baked into per-instance level data — no runtime scene graph traversal. Maps directly to pranala edges declared in carrier fields.
 
@@ -1910,7 +1910,7 @@ Phase 3 design:
 
 Phase 3 entry condition: `lares/grammars/wikitext-filter.md` dialect carrier is already live; Phase 2.5 wiring means the grammar meme drives the parser today. Phase 3 crosses the line where the parser dispatch table itself is meme-authored.
 
-**Phase 2.x parser wiring (complete 2026-04-27):** `pono` (constraint family sugar) and `lele` (message family sugar) wired into `parsePranalaEdges`. `KNOWN_FAMILIES` and `FAMILY_CONTRACTS` extended with `message` + `constraint`. `SigilRule.kind` union extended with all grammar-meme kinds (`concurrency`, `query`, `guest-grammar`, `guest-grammar-alias`, `query-alias`, `pragma`). 10 new tests added; full suite 146/146 green.
+''Phase 2.x parser wiring (complete 2026-04-27):'' `pono` (constraint family sugar) and `lele` (message family sugar) wired into `parsePranalaEdges`. `KNOWN_FAMILIES` and `FAMILY_CONTRACTS` extended with `message` + `constraint`. `SigilRule.kind` union extended with all grammar-meme kinds (`concurrency`, `query`, `guest-grammar`, `guest-grammar-alias`, `query-alias`, `pragma`). 10 new tests added; full suite 146/146 green.
 
 !!! Priority 5: Wiki-recipe carriers
 
@@ -1929,7 +1929,7 @@ A lararium node is (or connects to) a full Kowloon server. The canvas is a Kowlo
 Kowloon architecture grounding:
 * Objects: Posts, Replies, Reacts, Circles, Groups — each with global ID `type:<id>@domain`
 * Addressing: `to: @public | @<domain> | circle:<id> | group:<id> | <userId>`
-* **The inversion:** Circles are *your* data structure, not the platform's. You follow someone *into a circle you own*. Author gates with `to: circle:<id>`; reader assembles their graph. Neither side sees the other's structure.
+* ''The inversion:'' Circles are *your* data structure, not the platform's. You follow someone *into a circle you own*. Author gates with `to: circle:<id>`; reader assembles their graph. Neither side sees the other's structure.
 * Federation: hybrid push (direct actions) + pull (discovery). Replication boundary = Group/Circle membership.
 * FeedItems coarse-sanitizes visibility (no circle IDs leaked); FeedFanOut is the authoritative grant table.
 
@@ -1961,16 +1961,16 @@ Device types map to `kumu` (element type definition). UEFN `@editable` propertie
 
 !! Design Decision: Law of Fives — Invariant Scale + Phase Model
 
-**Decision**: Two orthogonal const arrays (`LADDER_5`, `OODA_HA_5`) are canonical invariants in `ast.ts`. All domain ladders — scope, zoom, Kowloon addressing, lifecycle, temporal scale — are projections of `LADDER_5`. All phase/confidence/stance systems are projections of `OODA_HA_5`.
+''Decision'': Two orthogonal const arrays (`LADDER_5`, `OODA_HA_5`) are canonical invariants in `ast.ts`. All domain ladders — scope, zoom, Kowloon addressing, lifecycle, temporal scale — are projections of `LADDER_5`. All phase/confidence/stance systems are projections of `OODA_HA_5`.
 
 ```
 LADDER_5  (scale, finest → coarsest):  action · round · turn · watch · week
 OODA_HA_5 (phase, active → reflective): act · decide · orient · observe · aftermath
 ```
 
-These axes run in **opposite directions**: `act` is the finest-grain phase (Action/ephemeral); `observe` is the widest-lens phase (Week/universal). The tension is productive — it models the operator-agent loop as a live crossing of scale and phase, not a single timeline.
+These axes run in ''opposite directions'': `act` is the finest-grain phase (Action/ephemeral); `observe` is the widest-lens phase (Week/universal). The tension is productive — it models the operator-agent loop as a live crossing of scale and phase, not a single timeline.
 
-**Domain alignment table:**
+''Domain alignment table:''
 
 | Ladder5  | Scope5      | Zoom (canvas) | Kowloon  | Lifecycle   | OODA-HA    | Discordian |
 |----------|-------------|---------------|----------|-------------|------------|------------|
@@ -1982,7 +1982,7 @@ These axes run in **opposite directions**: `act` is the finest-grain phase (Acti
 
 **`SCOPE_TO_LADDER`**: a `Record<Scope5, Ladder5>` projection lives in `ast.ts`. Scope narrows the ladder to the state-ownership read.
 
-**TW5 ↔ Verse resolution via OODA-HA pipeline phases:**
+''TW5 ↔ Verse resolution via OODA-HA pipeline phases:''
 
 The apparent tension between TW5 (everything is `Record<string,string>`) and UEFN Verse (statically typed, execution-phase) resolves when read as pipeline phases:
 
@@ -1996,9 +1996,9 @@ The apparent tension between TW5 (everything is `Record<string,string>`) and UEF
 
 `attrs: Record<string,string>` is correct at Observe phase. "Parse, don't validate" (King 2019) and the blame calculus (Wadler & Findler) both say: parse at the boundary once, carry typed values through. The single parse path (`parsePranalaEdges` → thin shim over `parseMemeCarrier` + `edgesFromAst`) enacts this.
 
-**Chronometer decoupling**: the FFZ Chronometer fantasy was useful as inspiration for discovering LADDER_5 as emergent, but the Chronometer itself is a rendering concern. LADDER_5 and OODA_HA_5 are grammar invariants, not clock state. They are `const` arrays in `ast.ts`, not timer types.
+''Chronometer decoupling'': the FFZ Chronometer fantasy was useful as inspiration for discovering LADDER_5 as emergent, but the Chronometer itself is a rendering concern. LADDER_5 and OODA_HA_5 are grammar invariants, not clock state. They are `const` arrays in `ast.ts`, not timer types.
 
-**Stances (Syad perspectives) + Tools (Chapel Perilous) as phase postures:**
+''Stances (Syad perspectives) + Tools (Chapel Perilous) as phase postures:''
 
 Stances are epistemic standpoints that modulate how an operator reads a meme. Tools are orientation postures that modulate how an agent acts. Both are 5-point projections of OODA_HA_5.
 
@@ -2050,22 +2050,22 @@ Required context now present in-document:
 
 !!! Parser + AST sprint (this session)
 
-**kahea dual dispatch — Tension 4 closed:**
+''kahea dual dispatch — Tension 4 closed:''
 
 * ✓ `kahea` split into two regex entries in `parseMemeCarrier`: URI form (matches `lar:`, path `/`, fragment `#`) → `EdgeSugarNode { sigil:"kahea", family:"dataflow" }` — compile + render, dataflow edge. Name form (plain identifier, optional `name(args)`) → `SigilNode { sigilName:"kahea", attrs:{ name, args } }` — render-only, zero graph edge.
 * ✓ `CANONICAL_SIGILS` includes `"kahea-call"` internal name; case dispatch in `buildAst`
 * ✓ 12 tests: URI→EdgeSugar+edge, name→SigilNode+no-edge, args captured, wehe parameter interpolation, mixed carrier — all pass
 * ✓ `parsePranalaEdges("<<~ kahea greeting >>")` → zero dataflow edges (invariant confirmed)
 
-**ReactionGraph + live protocol:**
+''ReactionGraph + live protocol:''
 
 * ✓ `packages/lararium-mesh/src/live-protocol.ts` (new) — isomorphic WebSocket protocol types + `ReactionGraph` class
-  - `LiveMsgSnapshot`, `LiveMsgDelta`, `LiveMsgEvent`, `LiveMsgFire`, `LiveClientMsg`, `LiveServerMsg`
-  - `ReactionGraph`: `load(bindings)`, `subscribe(fromUri, trigger, handler)`, `fire(fromUri, trigger, payload)`
-  - `extractReactionBindings(edges)` — filters `family:"reaction"` edges to `ReactionBinding[]`
+** `LiveMsgSnapshot`, `LiveMsgDelta`, `LiveMsgEvent`, `LiveMsgFire`, `LiveClientMsg`, `LiveServerMsg`
+** `ReactionGraph`: `load(bindings)`, `subscribe(fromUri, trigger, handler)`, `fire(fromUri, trigger, payload)`
+** `extractReactionBindings(edges)` — filters `family:"reaction"` edges to `ReactionBinding[]`
 * ✓ Exported from `@lararium/mesh` via `index.ts`
 
-**UEFN file-watcher operational model (serve.ts):**
+''UEFN file-watcher operational model (serve.ts):''
 
 * ✓ `watch(LARES_ROOT, { recursive: true })` debounced 400ms — batch rapid editor auto-save bursts
 * ✓ On change: evict room + delete SQLite → rebuild projection → reseed new room → rebuild reaction graph
@@ -2073,7 +2073,7 @@ Required context now present in-document:
 * ✓ Socket tagging: `ws._larariumRoomId` for targeted broadcast
 * ✓ `buildReactionGraph(runtime)` reconstructs `ReactionGraph` from fresh boot artifact on each reseed
 
-**Three-graph stances model (ast.ts):**
+''Three-graph stances model (ast.ts):''
 
 * ✓ `SYAD_7` 7 Jain predicates; `Syad7` type; `STANCE_SYAD: Record<Stance, Syad7>` natural register per stance
 * ✓ `SATIRIST_OPERATIONAL: Syad7 = "nasti-avaktavya"` — P6 gradient marker
@@ -2082,14 +2082,14 @@ Required context now present in-document:
 * ✓ Grammar meme updated: `[[stances]]`, `[[predicates]]` (7 Syad), `[[tools]]` with `feed`/`aperture`
 * ✓ `papalohe` render_mode and reaction family canonical_roles wired in spec
 
-**Parity confidence assessment (complete):**
+''Parity confidence assessment (complete):''
 
 * TW5 compile/graph layer: ~18 — identity, tags, links, transclusion URI form, shadow, import, filter notation solid; `kahea` macro-call now ✓ at parse layer (SigilNode); wehe executor and render layer execution pending
 * UEFN Verse graph layer: ~16 — entity/ECS, event wiring (papalohe), hot-reload (UEFN CRDT model), lifecycle:template solid; async concurrency (hui/heihei/puka), kukali/suspends, wehe call execution pending
 
 !!! Also completed this session (2026-04-28)
 
-**Async ReactionGraph (live-protocol.ts):**
+''Async ReactionGraph (live-protocol.ts):''
 * ✓ `ReactionHandler` type: `(binding, payload) => void | Promise<void>`
 * ✓ `fire()` returns `Promise<void>` — awaits all handlers via `Promise.all`
 * ✓ `fireAll()` alias for `fire()` — `hui` semantics
@@ -2098,22 +2098,22 @@ Required context now present in-document:
 * ✓ `load()` placeholder handler bug fixed — no phantom no-op in handlers list
 * ✓ `serve.ts` wired: browser `{ type:"fire", fromUri, trigger, payload }` → `reactionGraph.fire()` → `broadcastToRoom` event
 
-**Widget tree + kumu type system (ast.ts, widget-tree.ts):**
+''Widget tree + kumu type system (ast.ts, widget-tree.ts):''
 * ✓ `KumuDef { name, params, carrierUri, body }` — compiled kumu type definition
 * ✓ `WidgetNode { kind:"Widget", kumuName, def, resolvedProps, body }` — widget-tree node
 * ✓ `KumuRegistry` class — `register/get/has/size/entries`
 * ✓ `buildKumuRegistry(defs)` — convenience constructor
 * ✓ `resolveWidgetTree(ast, registry): WidgetNode[]` — Phase 3 parse→widget pass
-  - kahea name-form `SigilNode → WidgetNode { def }` (registered) or `{ def: null }` (typed hole)
-  - Typed hole = Hazel semantics: unresolved kumu name stays live, partial edit doesn't crash
-  - URI-form kahea (`EdgeSugarNode`) ignored — not a widget call
+** kahea name-form `SigilNode → WidgetNode { def }` (registered) or `{ def: null }` (typed hole)
+** Typed hole = Hazel semantics: unresolved kumu name stays live, partial edit doesn't crash
+** URI-form kahea (`EdgeSugarNode`) ignored — not a widget call
 * ✓ `collectKumuDefs(carrierUri, ast): KumuDef[]` — extracts kumu sigil nodes from parsed carrier
 * ✓ `BootArtifact.kumuDefs?: KumuDef[]` — field added; population deferred to Phase 3 compiler pass
 * ✓ Exported from `@lararium/mesh` index
 * ✓ 117/117 tests pass (23 new widget-tree tests + 9 async ReactionGraph tests)
 * ✓ All packages typecheck clean
 
-**Research synthesis recorded:**
+''Research synthesis recorded:''
 * OMeta/Ohm bootstrap pattern: TypeScript parser = cold-start kernel (confirmed correct); grammar meme = extensions only
 * Unison hash identity: our `lar:///` URIs + BootReceipt SHA is this pattern
 * Hazel typed holes: `WidgetNode { def: null }` is the implementation
@@ -2122,18 +2122,18 @@ Required context now present in-document:
 
 !!! Critical path forward (M8 close conditions)
 
-1. ~~**ReactionGraph async**~~ ✓ shipped 2026-04-28 — `fire/fireAll/fireRace/fireRush` all async
-2. ~~**kumu → widget-tree**~~ ✓ shipped 2026-04-28 — `KumuRegistry`, `resolveWidgetTree`, `collectKumuDefs`, typed holes
-3. ~~**Wehe executor**~~ ✓ shipped 2026-04-28 — `kumu-executor.ts`: `executeKumu`, `executeBatch`, `substituteProps`, `detectSuspension`; 136/136 tests pass
-4. ~~**BootArtifact.kumuDefs population**~~ ✓ shipped 2026-04-28 — `collectKumuDefsFromGraph()` wired in `node-host.ts`; `artifact.kumuDefs` populated with 5 kumu defs (meme-strategic → meme-action); `buildKumuRegistry(artifact.kumuDefs)` live at boot; `renderAllViews` receives registry; `templateProps` seeded from lares carriers not hardcoded defaults.
-5. ~~**kukali**~~ ✓ shipped 2026-04-28 — `BOOTSTRAP_SCANS` entry, `attrsFromGroups` case, `CANONICAL_SIGILS` entry, grammar meme `[[sigils]]` entry, `\suspends` alias — all wired; 3 tests pass.
-6. **Browser smoke** (Priority 1 from M8 original scope) — still pending.
+1. ~~''ReactionGraph async''~~ ✓ shipped 2026-04-28 — `fire/fireAll/fireRace/fireRush` all async
+2. ~~''kumu → widget-tree''~~ ✓ shipped 2026-04-28 — `KumuRegistry`, `resolveWidgetTree`, `collectKumuDefs`, typed holes
+3. ~~''Wehe executor''~~ ✓ shipped 2026-04-28 — `kumu-executor.ts`: `executeKumu`, `executeBatch`, `substituteProps`, `detectSuspension`; 136/136 tests pass
+4. ~~''BootArtifact.kumuDefs population''~~ ✓ shipped 2026-04-28 — `collectKumuDefsFromGraph()` wired in `node-host.ts`; `artifact.kumuDefs` populated with 5 kumu defs (meme-strategic → meme-action); `buildKumuRegistry(artifact.kumuDefs)` live at boot; `renderAllViews` receives registry; `templateProps` seeded from lares carriers not hardcoded defaults.
+5. ~~''kukali''~~ ✓ shipped 2026-04-28 — `BOOTSTRAP_SCANS` entry, `attrsFromGroups` case, `CANONICAL_SIGILS` entry, grammar meme `[[sigils]]` entry, `\suspends` alias — all wired; 3 tests pass.
+6. ''Browser smoke'' (Priority 1 from M8 original scope) — still pending.
 
-**Behavioral invariant discovered during testing:** Unbound params in a kumu body are NOT silently empty — they propagate as typed holes (`unresolved-hole`). Callers that want "empty string for missing prop" must explicitly pass `paramName:""`. Verse alignment: no silent wrong output.
+''Behavioral invariant discovered during testing:'' Unbound params in a kumu body are NOT silently empty — they propagate as typed holes (`unresolved-hole`). Callers that want "empty string for missing prop" must explicitly pass `paramName:""`. Verse alignment: no silent wrong output.
 
 !!! Also completed this session (2026-04-28, post-M8-core)
 
-**Socket port shapes + ownership skeleton (this session):**
+''Socket port shapes + ownership skeleton (this session):''
 
 * ✓ `LarTLSocket` record type + `socketShapeId()` ID function — stable arrow binding target, child of meme frame
 * ✓ Socket port shapes emitted as `TLGeoShape` (ellipse, 8×8, opacity:0) — one per ahu slot per meme; `meta.socketKind:"port"`, `meta.centerX/Y` (meme header zone), `meta.spreadX/Y` (ahu frame center)
@@ -2146,7 +2146,7 @@ Required context now present in-document:
 * ✓ `LarTLArrow.isOwnership?: boolean` — flag distinguishes skeleton arrows from pranala semantic arrows
 * ✓ 229/229 tests green (was 226/226)
 
-**TW5 / UEFN Verse child re-render research (this session):**
+''TW5 / UEFN Verse child re-render research (this session):''
 
 * ✓ TW5: push-on-change model — `changedTiddlers` map propagates down widget tree; each widget self-checks dependency; `$list` patches single-item add/remove without full rebuild; rapid changes coalesced. This is the target model for Lararium's CRDT delta → template refresh path.
 * ✓ Verse: pull-on-demand model — explicit `SetText()` / method calls; no automatic child cascade; `subscribable` vars as reactive sources. This is the target model for the Kumu device layer in UEFN — explicit `papalohe` wiring, not reactive tree.
@@ -2162,7 +2162,7 @@ M8 delivered the first kumu type pipeline bottom-up: AST → kumuDefs → KumuRe
 
 !!! Priority 1: resolveWidgetTree render pass ✓ (shipped 2026-04-28)
 
-**Shipped:**
+''Shipped:''
 * `kumu-react-render.tsx` — React render adapter extracted from `MemeDetailPanel`; pure function `renderCarrier(ast, widgetMap)` walks `WidgetNode[]` not raw `MemeAstNode[]`; kahea sigil nodes delegate to `widgetMap.get(node.pos)` for O(1) slot lookup; typed holes (no registry match) render as Hazel-style dashed placeholders; all 8 pranala families colored
 * `render-target.ts` — explicit boundary contract: `RenderTargetAdapter` interface, `RENDER_TARGET_ADAPTERS` machine-readable registry, `WidgetSlot`, `buildWidgetMap`, `projectCarrier` (single-parse guarantee: one `parseMemeCarrier` + `resolveWidgetTree` per carrier; both adapters consume the result)
 * `LarTLBodyNode[]` — tldraw structural skeleton: `text | widget | hole` body nodes emitted inside meme frames; opacity:0 until action zoom; toggled by `applyZoomTemplate` Pass 4 via `memeShowCarrier` map; widget nodes show `kumuName(k:v ...)` label (UEFN device slot — not executed); hole nodes render dashed grey
@@ -2194,7 +2194,7 @@ All M5/M6/M7/M8/M9 tactile behaviors unverified by automated browser. Manual smo
 
 `PUT /admin/promote` endpoint shipped in `serve.ts` (M10): localhost-only, reads `{ uri, carrierText, shapeId? }`, calls `canPromoteToCanon` as gate, resolves via `resolveLarUri`, path-traversal guard, writes to `lares/`, lares/ watcher triggers reseed. 7 integration tests in `promote-guard.test.ts`.
 
-**M10 ceremony scope:** Full Orichalcum capability gate replaces localhost guard. Canvas-side "promote" action (⌘↩). Schema validation before write.
+''M10 ceremony scope:'' Full Orichalcum capability gate replaces localhost guard. Canvas-side "promote" action (⌘↩). Schema validation before write.
 
 !!! Priority 5: Wiki-recipe carriers → M10
 
@@ -2208,9 +2208,9 @@ M9 closed the projection-cache authority arc and browser opening sequence. M10 t
 
 8-test baseline shipped at `packages/lararium-app/tests/e2e/smoke.spec.ts` (N1–N8 native mode, T1–T2 TW5 mode). All 8 pass against fresh server.
 
-**Next:** projection diffing on `tw5.onWikiChange`, body-node emission/write-back, double-click → `MemeDetailPanel` coverage, ⌘K navigation coverage, canvas mode coverage, and disk→Automerge→TW5 hot-reload assertions.
+''Next:'' projection diffing on `tw5.onWikiChange`, body-node emission/write-back, double-click → `MemeDetailPanel` coverage, ⌘K navigation coverage, canvas mode coverage, and disk→Automerge→TW5 hot-reload assertions.
 
-**Operator note:** Server process must restart after `@lararium/tldraw` rebuild before reseed takes effect (Node module cache). `strings <room>.sqlite | grep '"text":""'` verifies clean state.
+''Operator note:'' Server process must restart after `@lararium/tldraw` rebuild before reseed takes effect (Node module cache). `strings <room>.sqlite | grep '"text":""'` verifies clean state.
 
 !!! M10 Priority 2: Orichalcum ceremony surface
 
@@ -2230,14 +2230,14 @@ TW5 enters bundle unconditionally (1.95MB / 586KB gzip). Dynamic `import()` spli
 
 !! Design Decision: Async-First + Causal Islands
 
-**Date:** 2026-04-28
-**Pressure sources:** UEFN causal island model, FFZ Chronometer research, TW5 multiplayer history
+''Date:'' 2026-04-28
+''Pressure sources:'' UEFN causal island model, FFZ Chronometer research, TW5 multiplayer history
 
 !!! The decision
 
 `ReactionGraph.fire()` MUST be async-first from the start. Not retrofitted later.
 
-**Why:** TW5's multiplayer history and IPFS's content-addressed model both demonstrate that getting the causal model wrong at the base level is expensive to fix. UEFN avoids this via *causal islands*: each device runs in an isolated async boundary; events cross island boundaries only via declared ports (device graph edges — our `papalohe`). No shared mutable state across islands.
+''Why:'' TW5's multiplayer history and IPFS's content-addressed model both demonstrate that getting the causal model wrong at the base level is expensive to fix. UEFN avoids this via *causal islands*: each device runs in an isolated async boundary; events cross island boundaries only via declared ports (device graph edges — our `papalohe`). No shared mutable state across islands.
 
 ```
   causal island A          causal island B
@@ -2266,7 +2266,7 @@ The FFZ Chronometer fragment (`#O0.O3.D2.A7`) encodes `{ scale: Ladder5, phase: 
 
 This is the *why* behind decoupling Chronometer from grammar invariants: `LADDER_5` and `OODA_HA_5` are static arrays in `ast.ts`; the Chronometer generates a *live causal cursor* at runtime. They share vocabulary but live in different layers.
 
-**Causal ordering law:** an event fired at `(scale: "Pulse", phase: "act")` [L0 / game alias: "action"] cannot causally precede an event in the same island at `(scale: "Beat", phase: "decide")` [L1 / game alias: "round"]. The Chronometer encodes this ordering as a sortable fragment, not as a wall clock. CRDT CRDTs maintain causal ordering structurally; the Chronometer makes it readable.
+''Causal ordering law:'' an event fired at `(scale: "Pulse", phase: "act")` [L0 / game alias: "action"] cannot causally precede an event in the same island at `(scale: "Beat", phase: "decide")` [L1 / game alias: "round"]. The Chronometer encodes this ordering as a sortable fragment, not as a wall clock. CRDT CRDTs maintain causal ordering structurally; the Chronometer makes it readable.
 
 !!! `kumu` as the widget-tree node type
 
@@ -2325,29 +2325,29 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 !!! Closed
 
-* **Streams plugin vendor** — sq/streams v1.2.24 by Saq Imtiaz (MIT) vendored at `lar:///ha.ka.ba/lares/api/vendor/sq-streams`; stored in `packages/lares-core/memes/api/tw5-plugins/sq-streams-1.2.24.json`; vendor pipeline: `scripts/write-vendor-plugins.ts` reads `tw5-plugins/*.json` → `generated-vendor-plugins.ts` → preloaded at boot. Carrier documents field mapping (ahu-parent↔parent, ahu-slots↔stream-list) at `packages/lares-core/memes/api/lararium/plugins/sq-streams.md`
+* ''Streams plugin vendor'' — sq/streams v1.2.24 by Saq Imtiaz (MIT) vendored at `lar:///ha.ka.ba/lares/api/vendor/sq-streams`; stored in `packages/lares-core/memes/api/tw5-plugins/sq-streams-1.2.24.json`; vendor pipeline: `scripts/write-vendor-plugins.ts` reads `tw5-plugins/*.json` → `generated-vendor-plugins.ts` → preloaded at boot. Carrier documents field mapping (ahu-parent↔parent, ahu-slots↔stream-list) at `packages/lares-core/memes/api/lararium/plugins/sq-streams.md`
 
-* **Streams compat fields** — `splitCarrierToTiddlers` now emits both ahu fields (`ahu-parent`, `ahu-slots`) and Streams compat fields (`parent`, `stream-list`, `stream-type`) on parent/child tiddlers simultaneously. Both filter dialects work natively without glue code
+* ''Streams compat fields'' — `splitCarrierToTiddlers` now emits both ahu fields (`ahu-parent`, `ahu-slots`) and Streams compat fields (`parent`, `stream-list`, `stream-type`) on parent/child tiddlers simultaneously. Both filter dialects work natively without glue code
 
-* **Mixed prose/children** — `generateParentText()` in `carrier-split.ts` walks AST in document order after STX sigil. Emits `<$transclude tiddler="uri#slot" mode="block"/>` for WorksiteNodes and inline prose for TextNodes. Interleaved content (daemon-in-the-walls pattern: prose before slot, prose between slots) preserved in document order. Parent `text` field is now mixed wikitext for TW5 VM; `carrier-text` field holds raw on-disk carrier
+* ''Mixed prose/children'' — `generateParentText()` in `carrier-split.ts` walks AST in document order after STX sigil. Emits `<$transclude tiddler="uri#slot" mode="block"/>` for WorksiteNodes and inline prose for TextNodes. Interleaved content (daemon-in-the-walls pattern: prose before slot, prose between slots) preserved in document order. Parent `text` field is now mixed wikitext for TW5 VM; `carrier-text` field holds raw on-disk carrier
 
-* **Template rendering** — parent `text` is wikitext with transcludes + prose; template tiddler `lar:///ha.ka.ba/lares/api/lararium/templates/meme` preloaded; meme template renders slot list for structured memes; `generateParentText` handles interleaved prose cases
+* ''Template rendering'' — parent `text` is wikitext with transcludes + prose; template tiddler `lar:///ha.ka.ba/lares/api/lararium/templates/meme` preloaded; meme template renders slot list for structured memes; `generateParentText` handles interleaved prose cases
 
-* **Peer-correct disk projector** — `LarDiskProjector` (was `LarDiskSyncAdaptor`) rewrote from TW5SyncAdaptor to direct Automerge store subscriber. Subscribes to `LarTiddlerStore.subscribe()` — receives ALL changes (local + remote peer) with `ChangeOrigin`. Server writes disk for every peer change. `readonly writing = new Set<string>()` exposed for file watcher echo-loop guard. `_writeDirect()` debounced per URI; `_writeSlot()` debounced per parent URI
+* ''Peer-correct disk projector'' — `LarDiskProjector` (was `LarDiskSyncAdaptor`) rewrote from TW5SyncAdaptor to direct Automerge store subscriber. Subscribes to `LarTiddlerStore.subscribe()` — receives ALL changes (local + remote peer) with `ChangeOrigin`. Server writes disk for every peer change. `readonly writing = new Set<string>()` exposed for file watcher echo-loop guard. `_writeDirect()` debounced per URI; `_writeSlot()` debounced per parent URI
 
-* **WorksiteWidget anchor** — `WorksiteWidget.prototype.render` is now a pure structural anchor: emits `<span data-lar-kind="worksite" data-lar-slot="..." data-lar-uri="..."/>`, no `renderChildren`. Template owns all slot content rendering; double-render eliminated
+* ''WorksiteWidget anchor'' — `WorksiteWidget.prototype.render` is now a pure structural anchor: emits `<span data-lar-kind="worksite" data-lar-slot="..." data-lar-uri="..."/>`, no `renderChildren`. Template owns all slot content rendering; double-render eliminated
 
-* **Slot overlay UI** — four new tiddlers preloaded via `generated-ui-preloads.ts`:
-  - `meme-view-children.md` — slot-name labels + inline-edit toggle (`$:/state/lar-ahu-edit/<<childUri>>`); ViewTemplate tagged `$:/tags/ViewTemplate list-after $:/core/ui/ViewTemplate/body`; filters control/body slots with `!matchregexp`
-  - `meme-edit-children.md` — `$edit-text` per non-body, non-control slot in `<fieldset>`; EditTemplate; child edits bypass Draft (intentional for CRDT)
-  - `ahu-breadcrumb.md` — slot badge + parent link for any tiddler with `ahu-slot` field; ViewTemplate `list-before body`
-  - `ahu-styles.md` — CSS for ahu sections, slot header, inline edit area, breadcrumb, worksite anchor `display:none`
+* ''Slot overlay UI'' — four new tiddlers preloaded via `generated-ui-preloads.ts`:
+** `meme-view-children.md` — slot-name labels + inline-edit toggle (`$:/state/lar-ahu-edit/<<childUri>>`); ViewTemplate tagged `$:/tags/ViewTemplate list-after $:/core/ui/ViewTemplate/body`; filters control/body slots with `!matchregexp`
+** `meme-edit-children.md` — `$edit-text` per non-body, non-control slot in `<fieldset>`; EditTemplate; child edits bypass Draft (intentional for CRDT)
+** `ahu-breadcrumb.md` — slot badge + parent link for any tiddler with `ahu-slot` field; ViewTemplate `list-before body`
+** `ahu-styles.md` — CSS for ahu sections, slot header, inline edit area, breadcrumb, worksite anchor `display:none`
 
-* **TOML fence stripping** — leading ` ```toml ``` ` fence in child ahu body is parsed into fields AND stripped from display `text` in `splitCarrierToTiddlers`; metadata parsed into tiddler fields (type, mime-type, etc.), not shown in body
+* ''TOML fence stripping'' — leading ` ```toml ``` ` fence in child ahu body is parsed into fields AND stripped from display `text` in `splitCarrierToTiddlers`; metadata parsed into tiddler fields (type, mime-type, etc.), not shown in body
 
 * **`serializeCarrier` round-trip fix** — now prefers `carrier-text` field (raw on-disk carrier format) over `parent.text` (which is now mixed wikitext with `<$transclude>` blocks). Guard: `if (!parent.text.includes("<$transclude"))` as secondary fallback
 
-* **ROADMAP** — this file; created as a carrier meme at `lar:///lararium-node/ROADMAP`; journey-log format
+* ''ROADMAP'' — this file; created as a carrier meme at `lar:///lararium-node/ROADMAP`; journey-log format
 
 !!! Invariants added in M10
 
@@ -2360,11 +2360,11 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 !!! Open pressures entering M11
 
-* **M11 P0 — browser manual QA** — never done; all development unit-test-gated only. First live browser run is the gate
-* **CSS colour resolution** — `ahu-styles.md` uses `<<colour primary>>`; needs TW5 palette at boot or hard-coded fallback
+* ''M11 P0 — browser manual QA'' — never done; all development unit-test-gated only. First live browser run is the gate
+* ''CSS colour resolution'' — `ahu-styles.md` uses `<<colour primary>>`; needs TW5 palette at boot or hard-coded fallback
 * **`templates/meme.md`** — preloaded but superseded by `generateParentText` for interleaved prose; repurpose or mark vestigial
 * **Non-SOH `.md` files in templates/** — meme-action.md, meme-combat.md, etc. produce console warnings in `build:ui`; add exclusion list
-* **New slot creation UI** — no UX for adding ahu slots inline (Streams-style Tab/Enter)
+* ''New slot creation UI'' — no UX for adding ahu slots inline (Streams-style Tab/Enter)
 * **`carrier-text` staleness** — when child edited inline, parent tiddler's `carrier-text` in TW5 is stale until next Automerge resync; disk write-back correct (reads from disk via `_writeSlot`), but TW5 VM holds stale copy
 
 ---
@@ -2373,7 +2373,7 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 !!! Architecture invariant added
 
-**The TW5 engine is a corpus island.** The `tiddlywikicore-*.js` blob lives in its own Automerge doc (`LarariumDoc`), separate from any content corpus. The catalog doc holds only a `CatalogEngineEntry` reference: `{ version, docUrl, sha256 }`. No CDN dependency exists for engine delivery once the first peer has seeded the blob.
+''The TW5 engine is a corpus island.'' The `tiddlywikicore-*.js` blob lives in its own Automerge doc (`LarariumDoc`), separate from any content corpus. The catalog doc holds only a `CatalogEngineEntry` reference: `{ version, docUrl, sha256 }`. No CDN dependency exists for engine delivery once the first peer has seeded the blob.
 
 Engine island topology:
 
@@ -2391,7 +2391,7 @@ Mid-session engine update: `catalogHandle.on("change", onCatalogChange)` with `D
 
 !!! Disk projector — unidirectional projection law
 
-**The disk is a projection. The Automerge store is the mind.**
+''The disk is a projection. The Automerge store is the mind.''
 
 `LarDiskProjector` (in `@lararium/tw5`) replaced the old inline `exportCarrierText` + `writeFileSync` subscriber in `serve.ts`. Law:
 
@@ -2430,7 +2430,7 @@ room island     (bag: "room",  writable)        — primary content gate
 | E | Draft MOVE (residency ACTION) | ~10% |
 | F | Presence split (presence never in durable corpus/room doc) | 0% |
 
-**Projection law (Fontany-Fuller-Zelenka):** The snapshot/projection lane is a read artifact. It MUST NOT seed or bootstrap any Automerge doc. Causal islands own their own history. The projection is a window, not the source.
+''Projection law (Fontany-Fuller-Zelenka):'' The snapshot/projection lane is a read artifact. It MUST NOT seed or bootstrap any Automerge doc. Causal islands own their own history. The projection is a window, not the source.
 
 !!! Tests at M10 close
 
@@ -2461,10 +2461,10 @@ room island     (bag: "room",  writable)        — primary content gate
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 Boot flow was LarariumDoc-first but the catalog oracle tiddler was keyed `CATALOG_DOC_URI_SLOT` — a name that implied a "slot" holding a value rather than a named-doc identity. Room entries in `CatalogDoc.rooms` used opaque short slugs (`"altar-fire"`) with no stable address. `CatalogDoc` had no `tiddlers` field — it could not self-describe. The resolver had no rule for `@`-prefixed scopes other than `@lares` and `@lararium`. Browser peer still referenced `CATALOG_DOC_URI_SLOT` and used `readCatalogUrl()` (pre-Sprint 3 name).
 
-⏿ **Orient:**
+⏿ ''Orient:''
 
   **Named-doc `@`-prefix pattern (crystallised):**
 
@@ -2479,9 +2479,9 @@ Boot flow was LarariumDoc-first but the catalog oracle tiddler was keyed `CATALO
   | `lar:///ha.ka.ba/bags/@sdm`      | SDM corpus doc | CatalogDoc.tiddlers |
   | `lar:///ha.ka.ba/lararium/rooms/{slug}` | Room identity URI (not a doc) | CatalogDoc.rooms key (Sprint 4 remaining) |
 
-  **Zelenka law preserved:** server seeds because it has disk access (a capability), not authority. Both browser and node peer follow the same oracle read path: open LarariumDoc → read `tiddlers[CATALOG_DOC_URI]` → open CatalogDoc.
+  ''Zelenka law preserved:'' server seeds because it has disk access (a capability), not authority. Both browser and node peer follow the same oracle read path: open LarariumDoc → read `tiddlers[CATALOG_DOC_URI]` → open CatalogDoc.
 
-◇ **Decide:**
+◇ ''Decide:''
 * Drop `_SLOT` suffix: `CATALOG_DOC_URI_SLOT` → `CATALOG_DOC_URI`. The constant is dual-purpose.
 * Add `corpusLarUri(slug): string` — single source of truth for `lar:///ha.ka.ba/bags/@${slug}`.
 * `CatalogDoc` gains `tiddlers?: Record<string, Readonly<MutableLarRecord>>` (parallel to `LarariumDoc`).
@@ -2490,7 +2490,7 @@ Boot flow was LarariumDoc-first but the catalog oracle tiddler was keyed `CATALO
 * Node peer reconciles corpus tiddlers alongside corpus-entry open loop.
 * Browser peer inline `blankCatalog` gets `tiddlers: {}` to stay in sync with `emptyCatalogDoc()`.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -2501,7 +2501,7 @@ Boot flow was LarariumDoc-first but the catalog oracle tiddler was keyed `CATALO
 | `@lararium/node` `open-node-lar-peer.ts` | Import `CATALOG_DOC_URI, corpusLarUri`; `blankCatalog()` writes self-ref tiddler; corpus loop reconciles `corpusLarUri(entry.id)` tiddler; `tiddlers: {}` in inline blank |
 | `@lararium/app` `open-browser-lar-peer.ts` | `CATALOG_DOC_URI_SLOT` → `CATALOG_DOC_URI`; `blankCatalog` inline gets `tiddlers: {}` |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm --filter @lararium/mesh build     # ✓ clean
@@ -2509,7 +2509,7 @@ pnpm --filter @lararium/node build     # ✓ clean
 pnpm --filter @lararium/app  build     # ✓ clean
 ```
 
-↺ **Aftermath / open work (Sprint backlog, updated):**
+↺ ''Aftermath / open work (Sprint backlog, updated):''
 
 **Sprint 2 — `@catalog` URI + CatalogDoc tiddlers: ✓ COMPLETE this session**
 * All six files updated, build clean.
@@ -2539,28 +2539,28 @@ M17 complete. All 5 + Sprint 0 correction sprints landed. Build clean across cor
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 After M17 landed `CatalogDoc.tiddlers` and the `@`-prefix named-doc oracle pattern, one alignment gap remained: the browser peer at Step 4 still read corpus discovery from `catalog?.corpora` (the `Record<string, CatalogCorpusEntry>` field) rather than from `catalog?.tiddlers`. The node peer wrote corpus tiddlers with the comment "Zelenka: keep tiddler store current so any peer can enumerate corpora without walking the corpora Record." The browser ignored that writing entirely. Additionally, each corpus `MemeStoreDoc` carried no tiddler pointing to itself — it could not answer "what lar: URI am I?"
 
-⏿ **Orient:**
+⏿ ''Orient:''
 
-  **Corpus tiddler read/write isomorphism:**
+  ''Corpus tiddler read/write isomorphism:''
   Node peer writes `catalogHandle.tiddlers[corpusLarUri(entry.id)]` with `text = corpusDocHandle.url`.
   Browser peer read from `catalog?.corpora` — a second source of truth that had to stay in sync manually.
   Fix: browser walks `catalog?.tiddlers`, filters keys starting with `lar:///ha.ka.ba/bags/@` (excluding `CATALOG_DOC_URI` and `LARARIUM_DOC_URI`), extracts `.text` as automerge URL. `catalog.corpora` becomes optimization index only, not the authoritative oracle.
 
-  **Self-describing corpus docs:**
+  ''Self-describing corpus docs:''
   Each corpus `MemeStoreDoc` should carry `tiddlers[corpusLarUri(slug)] = { title: corpusUri, text: handle.url }`.
   Mirrors the LarariumDoc self-ref pattern. Any peer opening a corpus doc can discover its own lar: identity.
   Helper: `reconcileCorpusSelfRef(corpusHandle, corpusUri)` exported from `lararium-island.ts`.
 
-◇ **Decide:**
+◇ ''Decide:''
 * Add `reconcileCorpusSelfRef` to `lararium-island.ts`.
 * Node peer corpus loop calls it after `waitHandleLocal`.
 * Browser peer Step 4 reads `catalog?.tiddlers` not `catalog?.corpora`.
 * Fix stale `CATALOG_DOC_URI_SLOT` in browser peer file docblock and inline comment.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -2568,7 +2568,7 @@ After M17 landed `CatalogDoc.tiddlers` and the `@`-prefix named-doc oracle patte
 | `@lararium/node` `open-node-lar-peer.ts` | Corpus loop calls `reconcileCorpusSelfRef` after `waitHandleLocal` |
 | `@lararium/app` `open-browser-lar-peer.ts` | Step 4 reads `catalog?.tiddlers` not `catalog?.corpora`; `CATALOG_DOC_URI_SLOT` comments fixed |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm --filter @lararium/mesh build     # ✓ clean
@@ -2576,7 +2576,7 @@ pnpm --filter @lararium/node build     # ✓ clean
 pnpm --filter @lararium/app  build     # ✓ clean
 ```
 
-↺ **Aftermath / M19 candidates:**
+↺ ''Aftermath / M19 candidates:''
 * `catalog.corpora` Record: optimization index only; can be retired once all peers run M18+
 * Room docs self-ref tiddler: same pattern, not yet done
 * Connect screen UX (Sprint 5 from M17 backlog)
@@ -2589,20 +2589,20 @@ pnpm --filter @lararium/app  build     # ✓ clean
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 The Beelay/Keyhive research confirmed that each self-describing Automerge doc should NOT carry upward pointers. The three-doc oracle chain (LarariumDoc → CatalogDoc → corpus/room leaves) has a structurally named fourth presence: LaresDoc — the `@lares` personality layer. The SDM metaphysics maps cleanly: ha (structure) = LarariumDoc, ka (fire/motion) = CatalogDoc, ba (personality/flow) = LaresDoc. The Tiga (Indonesian: triangle, Bucky Fuller's minimal stable geometry) names this as invariant. Before M19: `LARES_DOC_URI` constant did not exist; no ha→ba oracle tiddler existed; LaresDoc had no Automerge handle; the `lares` bag was absent from CompositeStore; the boot sequence in both peers named only ha and ka.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 The Tiga closes when: (1) `LARES_DOC_URI = "lar:///ha.ka.ba/bags/@lares"` exists as a typed constant; (2) `seedLaresDoc()` creates ba with a self-ref tiddler; (3) `reconcileWellKnownTiddlers` writes the ha→ba oracle tiddler; (4) both peers open LaresDoc from the ha oracle and add a `lares` bag between `system` and `corpus` in CompositeStore; (5) the browser corpus scanner excludes `LARES_DOC_URI` from the `@`-prefix tiddler walk. The `lares` bag slots above corpus so `@lares` memes have higher recipe priority than user corpus content but lower than system engine tiddlers.
 
-◇ **Decide:**
+◇ ''Decide:''
 Three OODA loops across four files:
 * Loop 1 — `lararium-island.ts`: add `LARES_DOC_URI` import + `MemeStoreDoc` type import; add `seedLaresDoc(repo)` export; update `reconcileWellKnownTiddlers` signature to accept optional `laresUrl` and write the ba tiddler.
 * Loop 2 — `open-node-lar-peer.ts`: import `seedLaresDoc` + `LARES_DOC_URI`; add Step 3b (LaresDoc open/seed after island); pass `laresHandle.url` to `reconcileWellKnownTiddlers`; update docblock boot sequence.
 * Loop 3 — `open-browser-lar-peer.ts`: import `LARES_DOC_URI`; add Step 4 (read ha oracle, open LaresDoc, add `lares` bag); exclude `LARES_DOC_URI` from corpus tiddler scan; update docblock.
 * Meme — `packages/lararium-mesh/memes/automerge-tiga.md` at `lar:///ha.ka.ba/lararium/mesh/automerge-tiga`: invariant doc locking the Tiga law, Zelenka alignment, boot sequence mapping, structural law table.
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -2612,7 +2612,7 @@ Three OODA loops across four files:
 | `@lararium/app` `open-browser-lar-peer.ts` | Step 4 LaresDoc open from ha oracle; `lares` bag added; corpus scan excludes ba; docblock updated |
 | `packages/lararium-mesh/memes/automerge-tiga.md` | Invariant Tiga meme created |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm --filter @lararium/mesh build     # ✓ clean
@@ -2624,7 +2624,7 @@ CompositeStore recipe is now: `system → lares → corpus:* → room → draft`
 All three Tiga oracle tiddlers reconciled on every boot: self, ka, ba.
 `lares=pending` log line disappears once LaresDoc handle exists on resume boot.
 
-↺ **Aftermath / M20 candidates:**
+↺ ''Aftermath / M20 candidates:''
 * `catalog.corpora` Record: legacy optimization index; retire once all peers run M18+
 * Room docs self-ref tiddler: same `seedSelfRef` pattern as corpus and lares, not yet done
 * Connect screen UX: `readBootstrap() === null` cold-boot path still unimplemented
@@ -2639,13 +2639,13 @@ All three Tiga oracle tiddlers reconciled on every boot: self, ka, ba.
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 After M19 locked the Tiga, `CompositeStore` still used opaque short strings as bag IDs (`"system"`, `"catalog"`, `"lares"`, `"corpus:slug"`, `"room"`, `"draft"`). TiddlerRecord `bag` fields inside oracle tiddlers duplicated identity in two ways: a top-level `bag:` field AND a nested `fields: { bag: "..." }` object. `LarariumDocStore` was typed to `DocHandle<LarariumDoc>` only, preventing reuse for CatalogDoc. `corpusBagId(slug)` returned `"corpus:slug"` — inconsistent with `corpusLarUri(slug)`. Browser peer had no `catalog` layer in CompositeStore. `MemeSyncAdaptor` hardcoded `"room"` as write target.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 Bag ID = lar: URI of the owning Automerge doc is the correct invariant. One doc = one bag = one URI. This makes the TW5 recipe derivable from the CompositeStore bag topology without any side-channel. The `fields: { bag }` duplication was a leftover from an earlier schema where `fields` mirrored top-level fields — the top-level `bag` field is authoritative. `LarariumDocStore` is generic over any `{ tiddlers? }` doc — same adapter serves ha and ka. `corpusBagId` IS `corpusLarUri` — they were always the same concept.
 
-◇ **Decide:**
+◇ ''Decide:''
 One sweep across 8 files:
 * `composite-store.ts`: import Tiga URI constants; `BAG_IDS` uses lar: URIs; `corpusBagId` re-exports as alias of `corpusLarUri`; `roomBagId` re-exported as alias of `roomLarUri`
 * `grammar-invariants.ts`: `GRAMMAR_BAG` re-exports as `LARARIUM_DOC_URI`
@@ -2654,7 +2654,7 @@ One sweep across 8 files:
 * `open-node-lar-peer.ts`: catalog layer added; all bag IDs use `BAG_IDS.*` or computed URIs; `roomBagId = roomLarUri(roomId)`; `MemeSyncAdaptor` receives `roomBagId`
 * `open-browser-lar-peer.ts`: same; catalog layer added before lararium in step 3
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -2667,7 +2667,7 @@ One sweep across 8 files:
 | `lararium-doc.ts` | Docblock: updated recipe priority comment |
 | `catalog.ts` | Docblock: `bag: "catalog"` → `bag: CATALOG_DOC_URI` note |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm --filter @lararium/mesh build     # ✓ clean
@@ -2679,7 +2679,7 @@ CompositeStore recipe: `LARARIUM_DOC_URI → CATALOG_DOC_URI → LARES_DOC_URI �
 TiddlerRecord `bag` field = lar: URI of the owning doc everywhere.
 `MemeSyncAdaptor` writes to `roomLarUri(roomId)` — correct named bag.
 
-↺ **M21 candidates:**
+↺ ''M21 candidates:''
 * `"draft"` bag: needs a stable lar: URI (per-user-per-room, e.g. `roomLarUri(slug) + "/drafts/" + did`)
 * Room docs self-ref tiddler: `title: roomLarUri(slug), text: handle.url, bag: roomLarUri(slug)`
 * `catalog.corpora` Record: legacy index, safe to retire
@@ -2695,21 +2695,21 @@ TiddlerRecord `bag` field = lar: URI of the owning doc everywhere.
 
 !!! OODA-HA receipt
 
-✶ **Observe:**
+✶ ''Observe:''
 After M20, `corpusLarUri(slug)` returned `lar:///ha.ka.ba/bags/@${slug}` — a pos-1 collision with root doc identities.  Any system scanning `@`-prefixed pos-1 URIs could not distinguish corpus child-docs from root docs.  The browser peer `CORPUS_PREFIX` used `"lar:///ha.ka.ba/bags/@"` with a fragile exclusion list (`!== CATALOG_DOC_URI`, `!== LARARIUM_DOC_URI`, `!== LARES_DOC_URI`) — a list that would not grow automatically when new root docs arrived.  No social plane docs existed.  No recipe schema existed.  Tests still asserted the old `corpus:slug` opaque prefix and `BAG_IDS.system`/`BAG_IDS.room` stub keys.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 The URI grammar carries the topology.  `@` at pos-1 = root doc (exactly 6 reserved).  `@` at pos-2 = child doc under a root.  Corpus docs belong at `lar:///ha.ka.ba/bags/@catalog/@{slug}` — scoped under ka, not parallel to it.  Six root docs in two planes form the full address space: content Tiga (ha/ka/ba) + social plane (identities/groups/sessions).  A recipe tiddler stored inside ha island gives every TW5 VM a derivable bag stack without side-channel configuration.  Bag-ID law (M20) extends naturally: social docs use their lar: URI as bag ID.
 
-◇ **Decide:**
+◇ ''Decide:''
 Four OODA loops in sequence, each with a build gate:
 
-* **Loop 1 (breaking):** remap `corpusLarUri` to pos-2 + add 6-root grammar docblock + add 3 social plane URI constants + fix browser/node peer CORPUS_PREFIX + update resolver named-doc comment
-* **Loop 2 (additive):** create `social-doc.ts` (IdentitiesDoc / CirclesDoc / SessionsDoc) + extend `reconcileWellKnownTiddlers` to 6 oracle tiddlers + boot social docs in both peers
-* **Loop 3 (additive):** create `recipe.ts` (RecipeTiddler + `recipeUri()`) + `seedDefaultRecipes` in island + wire into node peer boot
-* **Test gate:** update `composite-store.test.ts` to assert lar: URI bag IDs (M21 law), remove stale `corpus:slug` and `BAG_IDS.system`/`BAG_IDS.room` expectations
+* ''Loop 1 (breaking):'' remap `corpusLarUri` to pos-2 + add 6-root grammar docblock + add 3 social plane URI constants + fix browser/node peer CORPUS_PREFIX + update resolver named-doc comment
+* ''Loop 2 (additive):'' create `social-doc.ts` (IdentitiesDoc / CirclesDoc / SessionsDoc) + extend `reconcileWellKnownTiddlers` to 6 oracle tiddlers + boot social docs in both peers
+* ''Loop 3 (additive):'' create `recipe.ts` (RecipeTiddler + `recipeUri()`) + `seedDefaultRecipes` in island + wire into node peer boot
+* ''Test gate:'' update `composite-store.test.ts` to assert lar: URI bag IDs (M21 law), remove stale `corpus:slug` and `BAG_IDS.system`/`BAG_IDS.room` expectations
 
-▶ **Act (files touched):**
+▶ ''Act (files touched):''
 
 | File | Change |
 |---|---|
@@ -2723,7 +2723,7 @@ Four OODA loops in sequence, each with a build gate:
 | `recipe.ts` *(new)* | `RecipeTiddler` interface + `recipeUri(root, name)` helper; barrel-exported from `index.ts` |
 | `composite-store.test.ts` | Updated to M21 bag ID law: `BAG_IDS.lararium` replaces `system`, `roomLarUri("test-room")` replaces `BAG_IDS.room`, corpus expectations assert full lar: URI |
 
-⤴ **Ho'oko:**
+⤴ ''Ho'oko:''
 
 ```sh
 pnpm --filter @lararium/mesh build     # ✓ clean
@@ -2738,7 +2738,7 @@ Architecture now live:
 * Three seed recipes stored as tiddlers in ha island: `full`, `default`, `catalog/default`
 * Bag ID law holds across all 8 root + leaf doc types
 
-↺ **M22 candidates:**
+↺ ''M22 candidates:''
 * `"draft"` bag: needs a stable lar: URI (per-user-per-room `roomLarUri(slug)/drafts/{did}`)
 * `meme-provider.ts` line 273: hardcoded `"room"` inferred bag — thread `roomId` context through
 * `CompositeStore.getRecipe(uri)` + `buildLayersFromRecipe(recipe)` (Loop 4 placeholder)
@@ -2749,38 +2749,38 @@ Architecture now live:
 
 !! Project OODA-HA — 2026-05-03 (M17–M20 sprint close)
 
-✶ **Observe:**
+✶ ''Observe:''
 In a single session (2026-05-03), the project completed M17 through M20 — four milestones. The oracle chain is complete and consistent: `fragment → ha (LarariumDoc) → ka (CatalogDoc) → ba (LaresDoc) → corpus leaves → room leaf`. Every Automerge doc in the system has a stable `lar:` URI that equals its `CompositeStore` bag ID and equals the `bag` field stamped on every tiddler it owns. The Beelay/Keyhive alignment is locked: no upward pointers; reachability flows root-downward from ha; the oracle tiddler chain IS the pre-Keyhive reachability index. The Automerge Tiga (ha/ka/ba) is documented as an invariant meme. The TW5 `bag` = lar: URI = Automerge doc mapping is now structurally enforced, not just conventional.
 
-⏿ **Orient:**
+⏿ ''Orient:''
 The identity layer is complete. What remains is three distinct concerns at different zoom levels:
 
-  **Zoom 1 — Cleanup (M21, tight):** `"draft"` bag URI, room self-ref tiddler, `catalog.corpora` retirement, `meme-provider.ts` hardcoded `"room"`, Web2 orphan removal. These are individually small; none is a design question.
+  ''Zoom 1 — Cleanup (M21, tight):'' `"draft"` bag URI, room self-ref tiddler, `catalog.corpora` retirement, `meme-provider.ts` hardcoded `"room"`, Web2 orphan removal. These are individually small; none is a design question.
 
-  **Zoom 2 — UX gate (M21–M22):** Connect screen for `readBootstrap() === null`. This is the only hard blocker to handing a URL to a new user and having it work without developer intervention.
+  ''Zoom 2 — UX gate (M21–M22):'' Connect screen for `readBootstrap() === null`. This is the only hard blocker to handing a URL to a new user and having it work without developer intervention.
 
-  **Zoom 3 — Architecture (Phase 4):** TW5 VM recipe derived dynamically from `CompositeStore.layerIds()`. Today the recipe is implicit (construction order). The TW5 bag/recipe model should read the lar: URI layer IDs and construct the wiki recipe from them — making the wiki a direct projection of the Automerge topology. This is the "wiki VM = Automerge topology" invariant. It unlocks: room-switching without re-boot, federation bag injection, Keyhive group membership → recipe derivation.
+  ''Zoom 3 — Architecture (Phase 4):'' TW5 VM recipe derived dynamically from `CompositeStore.layerIds()`. Today the recipe is implicit (construction order). The TW5 bag/recipe model should read the lar: URI layer IDs and construct the wiki recipe from them — making the wiki a direct projection of the Automerge topology. This is the "wiki VM = Automerge topology" invariant. It unlocks: room-switching without re-boot, federation bag injection, Keyhive group membership → recipe derivation.
 
-  **Zoom 4 — Federation (Phase 5):** Keyhive group-identity integration. The Tiga becomes a Keyhive root group. `corpusLarUri(slug)` URIs become Keyhive document identifiers. Federation = two lararium deployments sharing a corpus bag by syncing the same Automerge doc URL through CatalogDoc.tiddlers.
+  ''Zoom 4 — Federation (Phase 5):'' Keyhive group-identity integration. The Tiga becomes a Keyhive root group. `corpusLarUri(slug)` URIs become Keyhive document identifiers. Federation = two lararium deployments sharing a corpus bag by syncing the same Automerge doc URL through CatalogDoc.tiddlers.
 
-◇ **Decide:**
+◇ ''Decide:''
 * M21 is a cleanup sprint — no design questions. Execute fast.
 * Connect screen (M22) unblocks real user testing.
 * Phase 4 (TW5 recipe from topology) is the next architectural milestone. Research spike in M22 or M23.
 * Phase 5 (Keyhive) follows Phase 4 naturally — Keyhive membership graph → CompositeStore layer set → TW5 recipe.
 
-▶ **Priority order for M21:**
+▶ ''Priority order for M21:''
 1. `"draft"` bag lar: URI (structural completeness — closes the one remaining opaque bag ID)
 2. Room self-ref tiddler (pattern parity with corpus and lares)
 3. `catalog.corpora` Record retirement (removes dual source-of-truth)
 4. Connect screen (user-facing blocker)
 5. Web2 cleanup (dead code)
 
-⤴ **Phase boundary:**
+⤴ ''Phase boundary:''
 M17–M20 = Phase 3 close (identity + oracle layer complete).
 M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 
-↺ **Residue carried forward:**
+↺ ''Residue carried forward:''
 * `LarDiskProjector` migration (`@lararium/tw5` → `@lararium/node`) — independent of Phase 4
 * Isomorphic `AutomergeStoreBase` / grammar-wired deserializer — Sprint 6 research
 * Browser smoke / Playwright QA — no automated tests for the boot sequence yet
@@ -2791,7 +2791,7 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 
 !!! Loop 4: Recipe → VM bag scoping
 
-**Delivered:**
+''Delivered:''
 
 | Change | File | Detail |
 |--------|------|--------|
@@ -2807,17 +2807,17 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 | Browser peer recipe option | `open-browser-lar-peer.ts` | Same pattern as node peer; `pool.get("slot-0")` passes `vmBagStack` to `DirectMemeRecipeVm` |
 | 4 new tests | `composite-store.test.ts` | `getRecipe` null (absent), parse string bagStack, `buildLayersFromRecipe` ordering + skip, tombstone null |
 
-**Test gate:** 71/71 tests pass (`@lararium/mesh`). Full workspace: 138 tests pass. `@lararium/mcp` 2 failures pre-existing (not introduced by M22).
+''Test gate:'' 71/71 tests pass (`@lararium/mesh`). Full workspace: 138 tests pass. `@lararium/mcp` 2 failures pre-existing (not introduced by M22).
 
-**Build gate:** `pnpm -r build` clean — `exactOptionalPropertyTypes` fix applied to `getRecipe` return (`writableBag` spread conditionally).
+''Build gate:'' `pnpm -r build` clean — `exactOptionalPropertyTypes` fix applied to `getRecipe` return (`writableBag` spread conditionally).
 
-**Architectural invariants upheld:**
+''Architectural invariants upheld:''
 * TW5 VM law: bag+recipe logic lives in wiki filters (`[bag[]]`, `[recipe[]]`); TS peer code calls `composite.getRecipe()` only to scope the initial VM bag list
 * `parseBagStack` handles both wire formats — forward compat with any serializer
 * Both peers follow identical recipe-derivation boot path (web3 / local-first)
 * Tombstones always pass through `DirectMemeRecipeVm` regardless of bagStack
 
-↺ **M23 candidates:**
+↺ ''M23 candidates:''
 * `"draft"` bag → stable lar: URI (`roomLarUri(slug)/drafts/{did}`)
 * `catalog.corpora` legacy Record — retire after confirming all peers read from tiddlers oracle
 * Social plane UX: identity picker + group membership TW5 widgets
@@ -2833,9 +2833,9 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 
 !!! Loop 1: First-class bag descriptors, priority-correct VM, putViaRecipe
 
-**Source reference:** TW5 MultiWikiServer Bags and Recipes Model (https://mws.tiddlywiki.com/)
+''Source reference:'' TW5 MultiWikiServer Bags and Recipes Model (https://mws.tiddlywiki.com/)
 
-**Gaps identified against the TW5 model:**
+''Gaps identified against the TW5 model:''
 
 | TW5 Model Requirement | Prior state | Gap |
 |---|---|---|
@@ -2844,7 +2844,7 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 | Writes route to recipe's writable bag | `writableBag` field existed but ignored on put path | `CompositeStore.put` always went to last `writable: true` layer |
 | Bag descriptors as tiddlers | `BAG_IDS` constants only | No tiddler representation of bag labels, policies |
 
-**Delivered:**
+''Delivered:''
 
 | Change | File | Detail |
 |--------|------|--------|
@@ -2858,18 +2858,18 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 | `seedBagDescriptors` called in node peer | `open-node-lar-peer.ts` | Called after `seedDefaultRecipes` in the island-ready block |
 | 12 new tests | `composite-store.test.ts`, `meme-recipe-vm.test.ts` | `putViaRecipe` routing + error, access policy field acceptance; VM priority gate (6 cases: high wins, low blocked, high overwrites low, out-of-stack rejected, tombstone pass-through, no-bagStack full-pass) |
 
-**Test gate:** 75/75 `@lararium/mesh`, 37/37 `@lararium/tw5` (7 new VM tests), 153 total workspace passes. `@lararium/mcp` 2 failures pre-existing.
+''Test gate:'' 75/75 `@lararium/mesh`, 37/37 `@lararium/tw5` (7 new VM tests), 153 total workspace passes. `@lararium/mcp` 2 failures pre-existing.
 
-**Build gate:** `pnpm -r build` clean.
+''Build gate:'' `pnpm -r build` clean.
 
-**Architectural invariants upheld:**
+''Architectural invariants upheld:''
 * Bag descriptor URI = `bagId + "/descriptor"` — clean leaf path, no `@` at pos-3+, self-addressing
 * All 6 root-doc bag descriptors live in ha island → single-doc sync delivers all bag metadata
 * `putViaRecipe` is the ONLY correct write path when a recipe is active; `put()` remains for internal/system writes
 * Priority gate in VM uses bagStack index (0 = lowest) — same ordering convention as TW5 and CompositeStore
 * `getTiddlerField` added to TW5Engine as minimal read surface; no broader wiki API leakage
 
-↺ **M24 candidates (forward from M23):**
+↺ ''M24 candidates (forward from M23):''
 * `"draft"` bag → stable lar: URI
 * `catalog.corpora` Record retirement
 * Social plane UX: identity picker + group membership TW5 widgets
@@ -2887,7 +2887,7 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 
 !!! Loop 1: Universal LarDoc schema — all Automerge docs extend `{ schemaVersion, tiddlers }`
 
-**Problem statement:**
+''Problem statement:''
 Every Automerge doc in the Lararium stack carried its own flat or partial tiddler map shape.
 `MutableLarRecord` lived in `meme-store-doc.ts` causing circular-import risk and TS2308 when
 re-exported via two paths. Social plane docs (`IdentitiesDoc`, `CirclesDoc`, `SessionsDoc`) had
@@ -2896,12 +2896,12 @@ separate typed Records outside `tiddlers`. Seed functions wrote flat-doc entries
 same broken flat-write pattern. `AutomergeDocStore` only accepted `DocHandle<MemeStoreDoc>`,
 forcing `as unknown as` casts for every social doc handle.
 
-**LarDoc invariant (adopted):**
+''LarDoc invariant (adopted):''
 Every Automerge doc extends `LarDoc = { readonly schemaVersion: string; readonly tiddlers: Record<string, MutableLarRecord> }`.
 Anything outside `tiddlers` (blobs, systemTitles, legacy Records) MUST have a self-describing
 descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
-**Delivered:**
+''Delivered:''
 
 | Change | File | Detail |
 |--------|------|--------|
@@ -2920,11 +2920,11 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `emptyMemeStoreDoc` exported + imported | `index.ts`, all peers | Factory imported alongside `emptyIdentitiesDoc` etc. |
 | `seedBlobDescriptors(islandHandle)` (new) | `lararium-island.ts` | Iterates `LarariumDoc.blobs`; writes `blobDescriptorUri(id)` tiddler per blob (sha256, version, mimeType, author, source, license as fields; no binary data); idempotent (skips when sha256 matches); called in node peer after `seedBagDescriptors` |
 
-**Test gate:** 153 total passes (75 core, 37 tw5, 25 tldraw, 16 node). `@lararium/mcp` 2 failures pre-existing (not a regression).
+''Test gate:'' 153 total passes (75 core, 37 tw5, 25 tldraw, 16 node). `@lararium/mcp` 2 failures pre-existing (not a regression).
 
-**Build gate:** `pnpm -r build` clean — no TS errors across all packages.
+''Build gate:'' `pnpm -r build` clean — no TS errors across all packages.
 
-**Architectural invariants upheld:**
+''Architectural invariants upheld:''
 * `MutableLarRecord` lives in `base-doc.ts` only — single canonical definition, zero circular deps
 * All Automerge docs extend `LarDoc` — `schemaVersion + tiddlers` invariant holds everywhere
 * `AutomergeDocStore` is generic over `LarDoc` via structural typing — no web2 casts needed
@@ -2933,7 +2933,7 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * Social plane Keyhive fields (`verifyingKey`, `encryptedShareHint`, `capabilityToken`) stored in tiddler fields — queryable from TW5 wiki filters without TS interop
 * Self-describing law: every non-tiddlers doc field MUST have a descriptor tiddler (blobs → `blobDescriptorUri`; bags → `bagDescriptorUri`)
 
-↺ **M25 candidates (forward from M24):**
+↺ ''M25 candidates (forward from M24):''
 * `catalog.corpora` / `catalog.rooms` Records full retirement — migrate remaining callers to tiddlers oracle
 * `writePolicy` enforcement in `putViaRecipe` (policy evaluation against identity/group)
 * Room/corpus bags seed their own `BagTiddler` descriptor when they boot (currently node-only)
@@ -2948,9 +2948,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
 !! M25 Loop 1 — Stack Upward Walk (2026-05-03)
 
-**Scope:** Walk the full stack upward from Automerge doc → CompositeStore → MemeSyncAdaptor → VM → UX, removing all legacy web2 patterns and duck-type seams identified in the M25 audit.
+''Scope:'' Walk the full stack upward from Automerge doc → CompositeStore → MemeSyncAdaptor → VM → UX, removing all legacy web2 patterns and duck-type seams identified in the M25 audit.
 
-**Changes delivered:**
+''Changes delivered:''
 
 | File | Change |
 |---|---|
@@ -2961,9 +2961,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `tw5-vm.ts` | `getTiddler(title): Record<string, unknown> \| null` added after `getTiddlerField` |
 | `LarariumShell.tsx` | `scanMemesFromTw5()`: `tw5.wiki as any` → `tw5.getTiddler(uri)`; field access via string index |
 
-**Test gate:** 153/153 tests pass. Build clean across all 6 packages. MCP 2 pre-existing failures unchanged.
+''Test gate:'' 153/153 tests pass. Build clean across all 6 packages. MCP 2 pre-existing failures unchanged.
 
-↺ **M25 Loop 2 candidates:**
+↺ ''M25 Loop 2 candidates:''
 * `putViaRecipe` write routing: adaptor `direct` handler still calls `store.put()` (routes to last writable); needs recipe injection or `CompositeStore.put()` route by `record.bag`
 * `CompositeStore.addProjection` dynamic registration: async corpus layers added after `adaptor.start()` don't register with their MemeProvider — `addLayer` needs to fan active projections
 * tldraw canvas wiki-first migration: `projectFromTw5(tw5)` to TW5 filter; `(ed.store as any).put()` × 3 awaits `createBindingId()` projection fix
@@ -2976,9 +2976,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
 !! M25 Loop 2 — QA Gap Survey + Sync Bridge Tests (2026-05-03)
 
-**Scope:** Rebuilt from void. Surveyed all packages for gaps blocking real web3 session QA. Executed highest-priority fixes.
+''Scope:'' Rebuilt from void. Surveyed all packages for gaps blocking real web3 session QA. Executed highest-priority fixes.
 
-**Changes delivered:**
+''Changes delivered:''
 
 | File | Change |
 |---|---|
@@ -2986,22 +2986,22 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `tests/meme-sync-adaptor.test.ts` (NEW) | `FakeTW5Engine` stub + 15 tests: lifecycle / inbound / outbound / echo-loop-guard |
 | `composite-store.test.ts` | 4 `addProjection` fan-out tests appended |
 
-**Gaps surfaced (OODA-HA orient):**
+''Gaps surfaced (OODA-HA orient):''
 
 | Gap | Impact | Status |
 |---|---|---|
-| Node peer room/draft oracle divergence | Rendezvous broken for real multi-peer sync | **Fixed** |
-| `MemeSyncAdaptor` zero tests | Sync bridge regressions invisible | **Fixed** |
-| `CompositeStore.addProjection` zero tests | M25 Loop 1 fan-out feature untested | **Fixed** |
+| Node peer room/draft oracle divergence | Rendezvous broken for real multi-peer sync | ''Fixed'' |
+| `MemeSyncAdaptor` zero tests | Sync bridge regressions invisible | ''Fixed'' |
+| `CompositeStore.addProjection` zero tests | M25 Loop 1 fan-out feature untested | ''Fixed'' |
 | Island doc `as any` in node peer | Type safety; non-blocking | M25 Loop 3 |
 | `lararium-island.ts` tiddler casts × 10+ | Type hygiene | M25 Loop 3 |
 | `putViaRecipe` routing in adaptor | Wrong write destination | M25 Loop 3 |
 | tldraw `(ed.store as any).put()` × 3 | Wiki-first violation | M25 Loop 3 |
 | MCP `hud`/`receipt` pre-existing | Storage dir absent in test | M25 Loop 3 |
 
-**Test gate:** 172/172 tests pass (79 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
+''Test gate:'' 172/172 tests pass (79 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
 
-↺ **M25 Loop 3 candidates:**
+↺ ''M25 Loop 3 candidates:''
 * Node peer island doc registration: `(doc as any).larariumDoc` → oracle tiddler in catalog
 * `lararium-island.ts` cast cleanup (× 10+)
 * `putViaRecipe` adaptor injection
@@ -3014,9 +3014,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
 !! M25 Loop 3 — Cast Cleanup + Bag Routing + Dynamic Projections (2026-05-03)
 
-**Scope:** Executed all M25 Loop 3 candidates identified in the Loop 2 gap survey. All `as unknown as` tiddler casts removed. Bag routing and dynamic projection registration implemented and tested.
+''Scope:'' Executed all M25 Loop 3 candidates identified in the Loop 2 gap survey. All `as unknown as` tiddler casts removed. Bag routing and dynamic projection registration implemented and tested.
 
-**Changes delivered:**
+''Changes delivered:''
 
 | File | Change |
 |---|---|
@@ -3027,23 +3027,23 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `tw5-projection.ts` | `wiki as any` removed; uses `tw5.getTiddler()` + `tw5.getTiddlerText()` |
 | `composite-store.test.ts` | +8 tests: 3 bag-routing + 2 dynamic-projection tests; 84 core total |
 
-**Gaps surfaced (OODA-HA orient):**
+''Gaps surfaced (OODA-HA orient):''
 
 | Gap | Impact | Status |
 |---|---|---|
-| `lararium-island.ts` × 12 casts | Hidden recipe field misalignment (bagStack unreadable via `getRecipe()`) | **Fixed** |
-| Node peer island doc `(doc as any).larariumDoc` | Island URL outside oracle tiddler pattern | **Fixed** |
-| `CompositeStore.put()` ignores `record.bag` | Writes always to last writable, not intended bag | **Fixed** |
-| `CompositeStore.addProjection` static-only | Async corpus layers got no projection | **Fixed** |
-| `tw5-projection.ts` `wiki as any` | Bypassed TW5Engine API | **Fixed** |
+| `lararium-island.ts` × 12 casts | Hidden recipe field misalignment (bagStack unreadable via `getRecipe()`) | ''Fixed'' |
+| Node peer island doc `(doc as any).larariumDoc` | Island URL outside oracle tiddler pattern | ''Fixed'' |
+| `CompositeStore.put()` ignores `record.bag` | Writes always to last writable, not intended bag | ''Fixed'' |
+| `CompositeStore.addProjection` static-only | Async corpus layers got no projection | ''Fixed'' |
+| `tw5-projection.ts` `wiki as any` | Bypassed TW5Engine API | ''Fixed'' |
 | `systemTitles` as separate Automerge field | Not oracle-tiddler pattern | M25 Loop 4 |
 | tldraw `(ed.store as any).put()` × 3 | Wiki-first violation | M25 Loop 4 |
 | MCP `hud`/`receipt` storage-dir | Pre-existing; storage path absent in test | M25 Loop 4 |
 | Connect screen cold-boot | User-facing; `readBootstrap() === null` path untested | M25 Loop 4 |
 
-**Test gate:** 173 tests (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
+''Test gate:'' 173 tests (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
 
-↺ **M25 Loop 4 candidates:**
+↺ ''M25 Loop 4 candidates:''
 * Draft bag → stable lar: URI (`lar:///ha.ka.ba/bags/@sessions/drafts/{did}`)
 * `lararium-island.ts` `systemTitles` oracle tiddler migration
 * tldraw `(ed.store as any).put()` × 3 wiki-first migration
@@ -3054,9 +3054,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
 !! M26 — Isomorphic VmPool + WorkerFactory Injection (2026-05-04)
 
-**Scope:** Moved isomorphic contracts to `@lararium/mesh`; injected `WorkerFactory` into `TW5WorkerProxy`; fixed sha256 gate error propagation; fixed node peer pool key.
+''Scope:'' Moved isomorphic contracts to `@lararium/mesh`; injected `WorkerFactory` into `TW5WorkerProxy`; fixed sha256 gate error propagation; fixed node peer pool key.
 
-**Changes delivered:**
+''Changes delivered:''
 
 | File | Change |
 |---|---|
@@ -3070,37 +3070,37 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `lararium-app/src/open-browser-lar-peer.ts` | `VmPool`+`MemeRecipeVm` from core; sha256 gate: `throw new Error(...)` |
 | `lararium-node/src/open-node-lar-peer.ts` | `VmPool`+`MemeRecipeVm` from core; `"slot-0"` → `resolvedRecipeUri` |
 
-**Gaps surfaced (OODA-HA orient):**
+''Gaps surfaced (OODA-HA orient):''
 
 | Gap | Impact | Status |
 |---|---|---|
-| `setPhase("error")` in sha256 gate — wrong fn, wrong phase | Silent boot-continue with tampered blob | **Fixed** |
-| `VmPool`/`MemeRecipeVm` in `@lararium/tw5` | Forced tw5 dep in both platform packages | **Fixed** |
-| `TW5WorkerProxy.spawnWorker()` env-detection branch | Non-isomorphic; dead Node code in browser bundle | **Fixed** |
-| Node peer `"slot-0"` pool key | Pool key collision risk; recipe URI ignored | **Fixed** |
-| `TW5WorkerProxy` doc shows old `new URL(...)` API | Misleading after refactor | **Fixed** |
+| `setPhase("error")` in sha256 gate — wrong fn, wrong phase | Silent boot-continue with tampered blob | ''Fixed'' |
+| `VmPool`/`MemeRecipeVm` in `@lararium/tw5` | Forced tw5 dep in both platform packages | ''Fixed'' |
+| `TW5WorkerProxy.spawnWorker()` env-detection branch | Non-isomorphic; dead Node code in browser bundle | ''Fixed'' |
+| Node peer `"slot-0"` pool key | Pool key collision risk; recipe URI ignored | ''Fixed'' |
+| `TW5WorkerProxy` doc shows old `new URL(...)` API | Misleading after refactor | ''Fixed'' |
 | `NodeOpenPhase`/`BrowserOpenPhase` parallel string unions | Duplicated; drift risk | M27 (or intentional divergence) |
 | `TW5WorkerProxy` not wired to VmPool in `@lararium/app` | Worker isolation not used yet | Sprint 6 |
 
 | Corpus `as unknown as { tiddlers }` cast in both peers | Missing `fields: {}` on corpus self-ref writes — runtime `MutableLarRecord` invariant violation | M26 Loop 1 |
 | `(tiddler as { text?: string })` cast in both peers | Unnecessary — `MutableLarRecord.text?: string` | M26 Loop 1 |
 
-**Test gate:** 173 tests (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
+''Test gate:'' 173 tests (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean.
 
 !! M26 Loop 1 — Corpus Cast Audit (2026-05-04)
 
-**Scope:** Removed `as unknown as` and unnecessary `as` casts from corpus write paths in both platform peers. Root cause: missing `fields: {}` on corpus self-ref tiddler writes (same `MutableLarRecord.fields` invariant as M25 Loop 3 for `lararium-island.ts`).
+''Scope:'' Removed `as unknown as` and unnecessary `as` casts from corpus write paths in both platform peers. Root cause: missing `fields: {}` on corpus self-ref tiddler writes (same `MutableLarRecord.fields` invariant as M25 Loop 3 for `lararium-island.ts`).
 
-**Changes delivered:**
+''Changes delivered:''
 
 | File | Change |
 |---|---|
 | `lararium-app/src/open-browser-lar-peer.ts` | `tiddler.text` direct; `doc.tiddlers[corpusUri] = {..., fields: {}}` |
 | `lararium-node/src/open-node-lar-peer.ts` | Same; plus `catalogHandle.change()` fixed; `wss as any` comment improved |
 
-**Test gate:** 173 tests. Build clean.
+''Test gate:'' 173 tests. Build clean.
 
-↺ **M27 candidates:**
+↺ ''M27 candidates:''
 * `TW5WorkerProxy` wired to VmPool in `@lararium/app` (Sprint 6 browser Worker isolation)
 * Canonical `LarOpenPhase` shared type in `@lararium/mesh` (or document intentional divergence)
 * Draft bag → stable lar: URI
@@ -3112,9 +3112,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
 !! M27 — tldraw Wiki-First Migration + LarOpenPhase + vmFactory Injection (2026-05-04)
 
-**Scope:** Full delete + rebuild of `@lararium/tldraw`; eliminated all `(store as any).put()` casts; introduced `LarOpenPhase` canonical type in `@lararium/mesh`; landed `vmFactory` injectable option on both platform peers.
+''Scope:'' Full delete + rebuild of `@lararium/tldraw`; eliminated all `(store as any).put()` casts; introduced `LarOpenPhase` canonical type in `@lararium/mesh`; landed `vmFactory` injectable option on both platform peers.
 
-**Changes delivered:**
+''Changes delivered:''
 
 | File | Change |
 |---|---|
@@ -3134,23 +3134,23 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `lararium-app/src/LarariumShell.tsx` | `MemeCanvasProjection` wired to projection bus; all three `store.put()` calls removed |
 | `lararium-app/src/LarariumCanvas.tsx` | `TldrawCanvasBinding` bound in `onMount`; `as unknown as TldrawEditorLike` cast removed |
 
-**Gaps surfaced (OODA-HA orient):**
+''Gaps surfaced (OODA-HA orient):''
 
 | Gap | Impact | Status |
 |---|---|---|
-| `(ed.store as any).put()` × 3 in tldraw path | Bypassed projection bus; wiki-first violation | **Fixed** |
-| `BrowserOpenPhase` / `NodeOpenPhase` parallel unions | Drift risk; no canonical anchor | **Fixed** |
-| `vmFactory` option absent from both peers | `TW5WorkerProxy` not injectable at call site | **Fixed** |
-| `tw5-projection.ts` dep on `@lararium/tw5` | Forced tw5 dep into tldraw package | **Fixed (deleted)** |
-| `nav.ts` imported `memeFrameId` from deleted `records.ts` | Would not compile after tldraw rewrite | **Fixed** |
-| `as unknown as TldrawEditorLike` in `LarariumCanvas.tsx` | Unnecessary alias cast | **Fixed** |
+| `(ed.store as any).put()` × 3 in tldraw path | Bypassed projection bus; wiki-first violation | ''Fixed'' |
+| `BrowserOpenPhase` / `NodeOpenPhase` parallel unions | Drift risk; no canonical anchor | ''Fixed'' |
+| `vmFactory` option absent from both peers | `TW5WorkerProxy` not injectable at call site | ''Fixed'' |
+| `tw5-projection.ts` dep on `@lararium/tw5` | Forced tw5 dep into tldraw package | ''Fixed (deleted)'' |
+| `nav.ts` imported `memeFrameId` from deleted `records.ts` | Would not compile after tldraw rewrite | ''Fixed'' |
+| `as unknown as TldrawEditorLike` in `LarariumCanvas.tsx` | Unnecessary alias cast | ''Fixed'' |
 | `MemeCanvasProjection.onUriChanged()` render algorithm | No-op stub — Sprint 7 work | Sprint 7 |
 | `TldrawCanvasBinding.applyPatch()` shape translation | No-op stub — Sprint 7 work | Sprint 7 |
 | `TW5WorkerProxy` passed as `vmFactory` at call site | Worker isolation not activated yet | Sprint 6 |
 
-**Test gate:** 164 tests (84 core + 16 tldraw + 52 tw5 + 16 node, 4 node skipped). Build clean.
+''Test gate:'' 164 tests (84 core + 16 tldraw + 52 tw5 + 16 node, 4 node skipped). Build clean.
 
-↺ **M28 candidates:**
+↺ ''M28 candidates:''
 * `TW5WorkerProxy` passed as `vmFactory` at call site (Sprint 6 browser Worker isolation)
 * `MemeCanvasProjection.onUriChanged()` full render algorithm — meme-frame layout from `LarTiddlerChange`
 * `TldrawCanvasBinding.applyPatch()` meme-frame + edge-arrow translation via `createShapeId`
@@ -3163,9 +3163,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 
 !!! M28 — Cold-Boot Ceremony + Keyhive Identity Bridge + Heleuma Packaging Ownership (2026-05-04)
 
-**Sprint: Pre-Keyhive Identity Bridge**
+''Sprint: Pre-Keyhive Identity Bridge''
 
-⊙ **Observe:**
+⊙ ''Observe:''
 
 * `operator-key.ts` held a stub — no keypair generation, no DID derivation, no social doc write
 * `IdentitiesDoc` seeded on first boot but left empty (no operator principal ever written)
@@ -3174,11 +3174,11 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * Keypair file used a fixed name `.operator-key.json` — multi-developer local dev would collide
 * `did:web:github.com:{login}` sketched as principal ID — web2 smell, requires GitHub availability
 
-↻ **Orient:**
+↻ ''Orient:''
 
 * Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed25519-rooted, no registry needed
-  - Format: `"did:key:z" + base58btc(0xed 0x01 || 32-byte-pubkey)` (multicodec `0xed01`, varint of `0x1300`)
-  - Keyhive BeeKEM alignment: `verifyingKey` field = upgrade slot for CGKA group key agreement
+** Format: `"did:key:z" + base58btc(0xed 0x01 || 32-byte-pubkey)` (multicodec `0xed01`, varint of `0x1300`)
+** Keyhive BeeKEM alignment: `verifyingKey` field = upgrade slot for CGKA group key agreement
 * Keypair-precedes-docs law: Ed25519 device identity must be established before any Automerge doc opens
 * Causal-islands law governs write path: `IdentitiesDoc` and `CirclesDoc` are separate islands from room bag;
   TW5 sync adaptor targets room bag only → ceremony writes MUST use direct `handle.change()`
@@ -3186,14 +3186,14 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * `build:heleuma --commit` should own the full TS→CJS cycle; `source-symbol = "*"` enables whole-file `#source` ahu for small composable modules
 * GitHub CLI login state drives keypair file naming for local dev — different developers each get their own device keypair; keypair remains random Ed25519, not derived from GitHub credentials
 
-⊘ **Decide:**
+⊘ ''Decide:''
 
 * `cold-boot-ceremony.ts` in `@lararium/tw5` — self-contained CJS; exports `didKeyFromVerifyingKey` + `buildCeremonyTiddlers`
 * `operator-key.ts` in `lararium-node` — real `generateKeyPairSync("ed25519")`; login-keyed file naming; `OperatorIdentity = { verifyingKey, displayName? }`
 * `sync-heleuma.ts` — `source-symbol = "*"` whole-file pass-through; `--commit` spawns `write-tiddler-memes.ts` subprocess
 * Ceremony write in `open-node-lar-peer.ts` — `socialPlaneIsNew` gate; direct `identitiesHandle.change()` + `groupsHandle.change()`; idempotency guard on `doc.tiddlers[t.title]`
 
-⊕ **Act:**
+⊕ ''Act:''
 
 | File | Change |
 |---|---|
@@ -3209,7 +3209,7 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 | `lararium-tw5/dist-widgets/` (all IIFEs) | Rebuilt: all widget + filter IIFEs refreshed (user side work) |
 | `lararium-tw5/memes/widgets/` + `memes/filters/` | `body-sha256` updated for rebuilt IIFEs (user side work) |
 
-⤴ **Advance:**
+⤴ ''Advance:''
 
 164 tests (84 core + 16 tldraw + 52 tw5 + 16 node, 4 node skipped). Build clean.
 Causal-islands sanity check passed: ceremony LOGIC in TW5 CJS module; ceremony WRITES via direct `handle.change()`.
@@ -3219,15 +3219,15 @@ Causal-islands sanity check passed: ceremony LOGIC in TW5 CJS module; ceremony W
 
 !!! M28 Loop 2 — Self-Documenting Quine: `#source` ahu Coverage Pass (2026-05-04)
 
-**Sprint: TW5 module quine law — all code tiddlers carry their source**
+''Sprint: TW5 module quine law — all code tiddlers carry their source''
 
-⊙ **Observe:** All anchor memes (`heleuma = "ka"`) for packaged TW5 tiddlers were missing `#source` ahu slots. The compiled `-tw5.md` tiddlers had no backlink to their canonical source. Deserializer anchor meme was explicitly called out as a pre-existing condition. `node-host.md` and `tw5-widgets.md` hold non-packageable Node/barrel code with no source listing. `tw5-modules.md` (bundle descriptor) had no build provenance record.
+⊙ ''Observe:'' All anchor memes (`heleuma = "ka"`) for packaged TW5 tiddlers were missing `#source` ahu slots. The compiled `-tw5.md` tiddlers had no backlink to their canonical source. Deserializer anchor meme was explicitly called out as a pre-existing condition. `node-host.md` and `tw5-widgets.md` hold non-packageable Node/barrel code with no source listing. `tw5-modules.md` (bundle descriptor) had no build provenance record.
 
-↻ **Orient:** Quine law requires the wiki to be able to regenerate its source files. Self-documenting tiddler = anchor meme with `#source` ahu holding the live TS source. Compiled `-tw5.md` artifacts should carry a backlink to their anchor, not the full source (the CJS/CJS body IS the compiled artifact). Non-packageable code (Node paths, barrel re-exports) gets a source listing tiddler noting why it can't be packaged as CJS.
+↻ ''Orient:'' Quine law requires the wiki to be able to regenerate its source files. Self-documenting tiddler = anchor meme with `#source` ahu holding the live TS source. Compiled `-tw5.md` artifacts should carry a backlink to their anchor, not the full source (the CJS/CJS body IS the compiled artifact). Non-packageable code (Node paths, barrel re-exports) gets a source listing tiddler noting why it can't be packaged as CJS.
 
-⊘ **Decide:** Four anchor memes get full `#source` ahu + `source-symbol = "*"`. All 17 `-tw5.md` compiled tiddlers get `#source` ahu with anchor backlink + build command. Agent handles the batch `-tw5.md` updates in parallel.
+⊘ ''Decide:'' Four anchor memes get full `#source` ahu + `source-symbol = "*"`. All 17 `-tw5.md` compiled tiddlers get `#source` ahu with anchor backlink + build command. Agent handles the batch `-tw5.md` updates in parallel.
 
-⊕ **Act:**
+⊕ ''Act:''
 
 | File | Change |
 |---|---|
@@ -3237,25 +3237,25 @@ Causal-islands sanity check passed: ceremony LOGIC in TW5 CJS module; ceremony W
 | `memes/modules/tw5-modules.md` | `#source` ahu added (bundle entry-point listing + build instruction) |
 | All 17 `*-tw5.md` compiled tiddlers | `#source` ahu added after ETX: anchor URI + `source-file`/`source-symbol` + build command |
 
-⤴ **Advance:** 164 tests pass. All `heleuma = "ka"` anchor memes carry `#source`. All compiled tiddlers carry anchor backlinks. Quine law holds across the packaged TW5 surface.
+⤴ ''Advance:'' 164 tests pass. All `heleuma = "ka"` anchor memes carry `#source`. All compiled tiddlers carry anchor backlinks. Quine law holds across the packaged TW5 surface.
 
 ---
 
 !!! M28 Loop 3 — CJS Module Wrapper Cleanup (2026-05-04)
 
-**Sprint: TW5 module system alignment — CJS wrapper removal**
+''Sprint: TW5 module system alignment — CJS wrapper removal''
 
-⊙ **Observe:** `vite.tiddlers.config.ts` used `format: 'cjs'` which produced:
+⊙ ''Observe:'' `vite.tiddlers.config.ts` used `format: 'cjs'` which produced:
 ```js
 var __lar_X = (function(exports) { exports.X = X; return exports; })({});
 ```
 The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` object is never touched. Every `require("lar:///...{module}")` returns `{}`. Widget registration, deserializer registration, and library module exports were all broken. `window.__lararium_tw5_modules` global declared in `vite.bundle.config.ts` had zero runtime readers (dead web2 remnant). All 17 `dist-widgets/*.cjs.js` files had misleading extension — not IIFEs after the fix.
 
-↻ **Orient:** TW5 wraps all plugin tiddler code in its own CommonJS scope, injecting real `exports`. CJS output (`format: 'cjs'`) targets TW5's actual `exports` object directly. Deserializer needs MIME-key footer (`exports["text/x-memetic-wikitext"] = exports.memeticWikitextDeserializer`) since `"text/x-memetic-wikitext"` is not a valid TypeScript export identifier. `.cjs.js` suffix → `.tw5.js` (format-agnostic; describes what the file IS). `vite.bundle.config.ts` gets same treatment; `write-tiddler-memes.ts` + `write-module-meme.ts` updated to match.
+↻ ''Orient:'' TW5 wraps all plugin tiddler code in its own CommonJS scope, injecting real `exports`. CJS output (`format: 'cjs'`) targets TW5's actual `exports` object directly. Deserializer needs MIME-key footer (`exports["text/x-memetic-wikitext"] = exports.memeticWikitextDeserializer`) since `"text/x-memetic-wikitext"` is not a valid TypeScript export identifier. `.cjs.js` suffix → `.tw5.js` (format-agnostic; describes what the file IS). `vite.bundle.config.ts` gets same treatment; `write-tiddler-memes.ts` + `write-module-meme.ts` updated to match.
 
-⊘ **Decide:** `format: 'cjs'`, remove CJS `name:`, add `esModule: false` + `exports: "named"` in rollup output, footer injection for deserializer MIME key, rename all dist files and build pipeline references.
+⊘ ''Decide:'' `format: 'cjs'`, remove CJS `name:`, add `esModule: false` + `exports: "named"` in rollup output, footer injection for deserializer MIME key, rename all dist files and build pipeline references.
 
-⊕ **Act:**
+⊕ ''Act:''
 
 | File | Change |
 |---|---|
@@ -3268,9 +3268,9 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 | `dist-bundle/lararium-tw5-modules.cjs.js` | Renamed → `lararium-tw5-modules.tw5.js` |
 | All 17 `*-tw5.md` meme bodies | Re-spliced: `var __lar_X = (function(exports){...})({})` wrapper gone; direct `exports.X = X` |
 
-⤴ **Advance:** 164 tests pass. Build clean. No `.cjs.js` files remain anywhere. `require()` calls to all TW5 module tiddlers now return correct exports for the first time.
+⤴ ''Advance:'' 164 tests pass. Build clean. No `.cjs.js` files remain anywhere. `require()` calls to all TW5 module tiddlers now return correct exports for the first time.
 
-↺ **M29 candidates:**
+↺ ''M29 candidates:''
 * `TW5WorkerProxy` passed as `vmFactory` at call site (Sprint 6 browser Worker isolation)
 * `MemeCanvasProjection.onUriChanged()` full render algorithm — meme-frame layout from `LarTiddlerChange`
 * `TldrawCanvasBinding.applyPatch()` meme-frame + edge-arrow translation via `createShapeId`

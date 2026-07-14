@@ -25,12 +25,12 @@ uri-path          = "ha.ka.ba/lares/api/pono/cabal-place"
 
 ! Cabal-Place ~ a hearth beside, not a category above
 
-A **CabalGroup** (the multi-human social tier above the PersonaGroups) reads not as a *super-category* — a containing class with members as a subset, top-down, needing a root admitter — but as a **virtual PLACE the members agree to share and maintain**: a place **defined by the relationships, which dissolves if they break.** The Crossroads shrine of the fiction (a district hearth fed by collective offering), made literal.
+A ''CabalGroup'' (the multi-human social tier above the PersonaGroups) reads not as a *super-category* — a containing class with members as a subset, top-down, needing a root admitter — but as a ''virtual PLACE the members agree to share and maintain'': a place ''defined by the relationships, which dissolves if they break.'' The Crossroads shrine of the fiction (a district hearth fed by collective offering), made literal.
 
-Triple-cruci­bled (your recorded design · the deep web · the canon). The model braids **three shipped bodies of work**, and the braid holds: <<~ confidence Synthesis-Canon 15/20 >>
-* **Ostrom's common-pool-resource governance** (the social layer),
-* **the federated place-abstraction** — a Matrix room *is* a replicated event-DAG many homeservers maintain; an SSB feed lives only while followed (the systems layer),
-* **Clark's soft-state + CRDT tombstones** (the liveness layer).
+Triple-cruci­bled (your recorded design · the deep web · the canon). The model braids ''three shipped bodies of work'', and the braid holds: <<~ confidence Synthesis-Canon 15/20 >>
+* ''Ostrom's common-pool-resource governance'' (the social layer),
+* ''the federated place-abstraction'' — a Matrix room *is* a replicated event-DAG many homeservers maintain; an SSB feed lives only while followed (the systems layer),
+* ''Clark's soft-state + CRDT tombstones'' (the liveness layer).
 
 <<~/ahu >>
 
@@ -38,9 +38,9 @@ Triple-cruci­bled (your recorded design · the deep web · the canon). The mode
 
 !! A Verb, Not a Noun (the Mu)
 
-A group is not a *container you are in* (a noun — a membership-list, needing a root admitter, a single point of capture). It is **a thing you continuously DO** (a verb). The commons historians name it exactly: *"there is no commons without commoning — the commons is a verb."* Members do not **belong to** the cabal; they **maintain** it. Inversion of control, reified as a commons.
+A group is not a *container you are in* (a noun — a membership-list, needing a root admitter, a single point of capture). It is ''a thing you continuously DO'' (a verb). The commons historians name it exactly: *"there is no commons without commoning — the commons is a verb."* Members do not ''belong to'' the cabal; they ''maintain'' it. Inversion of control, reified as a commons.
 
-But the Mu cuts both ways: a **verb-place carries a defended noun-boundary.** Drop the boundary (Ostrom P1) and the verb-place either *starves* (false dissolution) or gets *captured*. The surviving shape: **a verb that keeps a boundary.**
+But the Mu cuts both ways: a ''verb-place carries a defended noun-boundary.'' Drop the boundary (Ostrom P1) and the verb-place either *starves* (false dissolution) or gets *captured*. The surviving shape: ''a verb that keeps a boundary.''
 
 <<~/ahu >>
 
@@ -48,10 +48,10 @@ But the Mu cuts both ways: a **verb-place carries a defended noun-boundary.** Dr
 
 !! The Place ~ named, ruled, lived, dissolved
 
-* **NAMED, not ruled** — the place's identity is **content-addressed** (its genesis CID, #GEN_2). The name grants no *authority* (#ISLAND_4, DocUrl-not-authority) — but, crucible-corrected, it grants no *privacy* either: a stable place-id advanced by a same-key signed pointer carries a public **linkability + timing surface** — existence, version-history, activity cadence, and (via epoch-rotation timing) membership-change events leak to any reader even with the roster veiled (Pfitzmann-Hansen · PURBs). A name carries no root; it does carry a trackable handle. A name, never a root.
-* **RULED by the closure** — authority is the **closure of mutual maintenance edges** (`group-as-closure`: "no central object, evaluated as a query, never instantiated"). The doc is the shared **substrate**; the relationships are the **authority**. Share substrate, not sovereignty (#causal-islands) — each member keeps their own vessel-key.
-* **LIVED by its epoch** — the place carries its **own epoch/lease**, the collective-maintenance heartbeat.
-* **DISSOLVED by cooling** — break the maintenance and the place **cools to anu** (the residency model) — it *never deletes* (a hard-deleted CRDT item a peer still holds flows back and resurrects); it goes cold, re-warmable. *A fed node hums, a neglected one flickers.*
+* ''NAMED, not ruled'' — the place's identity is ''content-addressed'' (its genesis CID, #GEN_2). The name grants no *authority* (#ISLAND_4, DocUrl-not-authority) — but, crucible-corrected, it grants no *privacy* either: a stable place-id advanced by a same-key signed pointer carries a public ''linkability + timing surface'' — existence, version-history, activity cadence, and (via epoch-rotation timing) membership-change events leak to any reader even with the roster veiled (Pfitzmann-Hansen · PURBs). A name carries no root; it does carry a trackable handle. A name, never a root.
+* ''RULED by the closure'' — authority is the ''closure of mutual maintenance edges'' (`group-as-closure`: "no central object, evaluated as a query, never instantiated"). The doc is the shared ''substrate''; the relationships are the ''authority''. Share substrate, not sovereignty (#causal-islands) — each member keeps their own vessel-key.
+* ''LIVED by its epoch'' — the place carries its ''own epoch/lease'', the collective-maintenance heartbeat.
+* ''DISSOLVED by cooling'' — break the maintenance and the place ''cools to anu'' (the residency model) — it *never deletes* (a hard-deleted CRDT item a peer still holds flows back and resurrects); it goes cold, re-warmable. *A fed node hums, a neglected one flickers.*
 
 <<~/ahu >>
 
@@ -59,12 +59,12 @@ But the Mu cuts both ways: a **verb-place carries a defended noun-boundary.** Dr
 
 !! The Tie-Break ~ the place's epoch (BeeKEM), not a person
 
-The held multi-principal key-handover break — concurrent add-while-remove leaks a key, equal peers, no senior to order it — resolves **in the place, not a person**: the place's epoch carries it, **exactly the MLS pattern lifted to decentralized causal-order CGKA** (DCGKA · causal TreeKEM · **BeeKEM — already on our stack via Keyhive**). Concurrent membership ops **converge by deterministic blank-on-merge** — concurrent leaves sorted, racing paths blanked, replicas agree on tree *shape* — *no human adjudicates the merge.* Coordinator-free, no kahu, no smuggled root. But, crucible-corrected, **converge ≠ heal**: after a concurrent merge the tree holds *no root secret* until a later **non-concurrent** commit lands — the no-root-secret window; post-compromise security is **deferred, not delivered**, by the merge (Bienstock-Dodis-Rösler: PCS cost grows with concurrency degree).
+The held multi-principal key-handover break — concurrent add-while-remove leaks a key, equal peers, no senior to order it — resolves ''in the place, not a person'': the place's epoch carries it, ''exactly the MLS pattern lifted to decentralized causal-order CGKA'' (DCGKA · causal TreeKEM · ''BeeKEM — already on our stack via Keyhive''). Concurrent membership ops ''converge by deterministic blank-on-merge'' — concurrent leaves sorted, racing paths blanked, replicas agree on tree *shape* — *no human adjudicates the merge.* Coordinator-free, no kahu, no smuggled root. But, crucible-corrected, ''converge ≠ heal'': after a concurrent merge the tree holds *no root secret* until a later ''non-concurrent'' commit lands — the no-root-secret window; post-compromise security is ''deferred, not delivered'', by the merge (Bienstock-Dodis-Rösler: PCS cost grows with concurrency degree).
 
-**The residuals the model OWNS (or it over-claims):**
-* **HEAL ≠ PREVENT.** A member who saw epoch N saw it forever; post-compromise security recovers *forward only*. The leak is bounded, never un-shared.
-* **No clean-winner epoch.** Concurrent rolls **merge by blanking**, not max-register-pick; the cost is weakened forward-secrecy on forked child-epochs (DMLS/BeeKEM repair it). "Coordinator-free max-register" was right about *convergence + no lockout*, wrong if it meant *one epoch wins free*.
-* **The epoch guards liveness, NOT authority.** Any member can re-key (a churn/DoS the math does not stop). Membership-*authorization* rides **Plane B (device-admit/delegation)**, orthogonal — and **malicious removal rides Keyhive's convergent-removal tombstone, NEVER the counter** (a malicious re-minter rides the max-register *up* and survives). The epoch heals honest churn; the tombstone *converges* the removal — but, crucible-corrected, **eviction is eventual, not final**: a still-authorized principal who hasn't seen the remove can issue a legitimate concurrent re-add the CGKA will not reject (the *remove-the-remover* race — adjudicated in the auth-graph, liveness-gated, never the merge). <<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
+''The residuals the model OWNS (or it over-claims):''
+* ''HEAL ≠ PREVENT.'' A member who saw epoch N saw it forever; post-compromise security recovers *forward only*. The leak is bounded, never un-shared.
+* ''No clean-winner epoch.'' Concurrent rolls ''merge by blanking'', not max-register-pick; the cost is weakened forward-secrecy on forked child-epochs (DMLS/BeeKEM repair it). "Coordinator-free max-register" was right about *convergence + no lockout*, wrong if it meant *one epoch wins free*.
+* ''The epoch guards liveness, NOT authority.'' Any member can re-key (a churn/DoS the math does not stop). Membership-*authorization* rides ''Plane B (device-admit/delegation)'', orthogonal — and ''malicious removal rides Keyhive's convergent-removal tombstone, NEVER the counter'' (a malicious re-minter rides the max-register *up* and survives). The epoch heals honest churn; the tombstone *converges* the removal — but, crucible-corrected, ''eviction is eventual, not final'': a still-authorized principal who hasn't seen the remove can issue a legitimate concurrent re-add the CGKA will not reject (the *remove-the-remover* race — adjudicated in the auth-graph, liveness-gated, never the merge). <<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
 
 <<~/ahu >>
 
@@ -72,12 +72,12 @@ The held multi-principal key-handover break — concurrent add-while-remove leak
 
 !! Governance ~ the boundary the verb must keep (Ostrom)
 
-Without these the place is the *un*-governed commons that collapses (Hardin), not the Ostrom commons that endures. **MUST ride:**
-* **P1 — bounded, costly membership.** Content-addressing *names* but does not make *scarce* — a keypair is free, so identity ≠ Sybil-resistance. The **voucher cost-dial** (the held siege-gate: marginal, `rb>c`, co-pay-and-watch) puts a price on the join.
-* **P4 — mutual monitoring.** The maintenance edges stay observable to members, or capture hides.
-* **P5 — graduated sanctions.** Gossip → reminder → **anergy-not-ban** (already held in the network-edge doctrine).
-* **P2 — benefit ∝ maintenance.** The place remembers who fed it; defeats free-riding.
-* **Soft-state discipline** — a generous re-warm K-factor (so a still-wanted place doesn't falsely starve) + bounded cold-GC by causal stability (so tombstones don't bloat every replica forever).
+Without these the place is the *un*-governed commons that collapses (Hardin), not the Ostrom commons that endures. ''MUST ride:''
+* ''P1 — bounded, costly membership.'' Content-addressing *names* but does not make *scarce* — a keypair is free, so identity ≠ Sybil-resistance. The ''voucher cost-dial'' (the held siege-gate: marginal, `rb>c`, co-pay-and-watch) puts a price on the join.
+* ''P4 — mutual monitoring.'' The maintenance edges stay observable to members, or capture hides.
+* ''P5 — graduated sanctions.'' Gossip → reminder → ''anergy-not-ban'' (already held in the network-edge doctrine).
+* ''P2 — benefit ∝ maintenance.'' The place remembers who fed it; defeats free-riding.
+* ''Soft-state discipline'' — a generous re-warm K-factor (so a still-wanted place doesn't falsely starve) + bounded cold-GC by causal stability (so tombstones don't bloat every replica forever).
 
 <<~/ahu >>
 
@@ -85,14 +85,14 @@ Without these the place is the *un*-governed commons that collapses (Hardin), no
 
 !! The Unswept Corner ~ persistence ≠ legitimacy (OPEN)
 
-The one failure mode with **no off-the-shelf fix**, named so it stays visible: **liveness-by-maintenance rewards PERSISTENCE, not LEGITIMACY.** A small hostile faction can **out-maintain an apathetic majority and keep a captured place as theirs** — soft-state has no defense, it rewards whoever keeps feeding. The place dissolves when *everyone* abandons it, never when the *wrong* hands keep it warm.
+The one failure mode with ''no off-the-shelf fix'', named so it stays visible: ''liveness-by-maintenance rewards PERSISTENCE, not LEGITIMACY.'' A small hostile faction can ''out-maintain an apathetic majority and keep a captured place as theirs'' — soft-state has no defense, it rewards whoever keeps feeding. The place dissolves when *everyone* abandons it, never when the *wrong* hands keep it warm.
 
-The crucible (4-spirit swarm: Steem→Hive · Hirschman · Vitalik-legitimacy · SybilLimit · RFC-7282) **bounds** the cure rather than dissolving it — the gap survives as a genuine **hard-bound**: *legitimacy cannot live in the join-gate.* Legitimacy reads as **higher-order acceptance** one level up, and any gate that tried to compute it would *become* the captured object. So the join-gate **stays inert by design**, and the buildable answer is **escape + sight, never prevention**:
-* **Fork-as-exit (primary) — BUILT + witnessed** (`fork-place.ts` + real-Keyhive probe): the legitimate maintainers carry the place's roster into a **fresh sentinel place** that **excludes the captors by OMISSION** (build-corrected: a fork is a place you LEAVE, so the captors are simply never added to the fresh sentinel — no membership key — cleaner than convergent-removal, which evicts from a place you KEEP; the Steem→Hive airdrop-exclusion made native). Each vessel **re-points its own petname** to the fork (Zooko: the id changing is the feature — no global consensus, no admitter), and the fork records **forkedFrom** for continuity. *Witnessed: the captor's `verifySentinelMembership` reads FALSE on the fork; the survivors' TRUE.* Hirschman's bound: exit disciplines a captor *only while forking stays cheap* — so the build must lower switching cost, or the cure is theatre.
-* **A capture-clock, not a gate — BUILT** (`cabal-place-clock.ts`): surface *who feeds the place and since when* (free; the liveness signal already kept) so the majority **sees** a minority out-feeding them *while it happens*, while exit is still cheap. Verdict-free — the threshold is the operator's calibration.
-* **Vouching only as an optional speed-bump** — attack-edge-bounded (SybilLimit over the delegation graph), never a flat quorum-of-N (which just **vouch-farms**). Price + time-for-the-fork, **never the wall**; mandatory vouching *is* a root admitter wearing N masks.
+The crucible (4-spirit swarm: Steem→Hive · Hirschman · Vitalik-legitimacy · SybilLimit · RFC-7282) ''bounds'' the cure rather than dissolving it — the gap survives as a genuine ''hard-bound'': *legitimacy cannot live in the join-gate.* Legitimacy reads as ''higher-order acceptance'' one level up, and any gate that tried to compute it would *become* the captured object. So the join-gate ''stays inert by design'', and the buildable answer is ''escape + sight, never prevention'':
+* ''Fork-as-exit (primary) — BUILT + witnessed'' (`fork-place.ts` + real-Keyhive probe): the legitimate maintainers carry the place's roster into a ''fresh sentinel place'' that ''excludes the captors by OMISSION'' (build-corrected: a fork is a place you LEAVE, so the captors are simply never added to the fresh sentinel — no membership key — cleaner than convergent-removal, which evicts from a place you KEEP; the Steem→Hive airdrop-exclusion made native). Each vessel ''re-points its own petname'' to the fork (Zooko: the id changing is the feature — no global consensus, no admitter), and the fork records ''forkedFrom'' for continuity. *Witnessed: the captor's `verifySentinelMembership` reads FALSE on the fork; the survivors' TRUE.* Hirschman's bound: exit disciplines a captor *only while forking stays cheap* — so the build must lower switching cost, or the cure is theatre.
+* ''A capture-clock, not a gate — BUILT'' (`cabal-place-clock.ts`): surface *who feeds the place and since when* (free; the liveness signal already kept) so the majority ''sees'' a minority out-feeding them *while it happens*, while exit is still cheap. Verdict-free — the threshold is the operator's calibration.
+* ''Vouching only as an optional speed-bump'' — attack-edge-bounded (SybilLimit over the delegation graph), never a flat quorum-of-N (which just ''vouch-farms''). Price + time-for-the-fork, ''never the wall''; mandatory vouching *is* a root admitter wearing N masks.
 
-This stays **OPEN — the operator's design seat**: the residual is calibration (how cheap the fork must be · how the petname re-point coordinates at scale — the Schelling-point risk), and the honest hard-bound that capture is made **survivable + visible, never prevented**. Every shrine keeps one unswept corner; this is the cabal's.
+This stays ''OPEN — the operator's design seat'': the residual is calibration (how cheap the fork must be · how the petname re-point coordinates at scale — the Schelling-point risk), and the honest hard-bound that capture is made ''survivable + visible, never prevented''. Every shrine keeps one unswept corner; this is the cabal's.
 
 <<~/ahu >>
 

@@ -25,7 +25,9 @@ import sys
 
 _HEADING = re.compile(r"^(#{1,6}) ")
 _TOP_UL = re.compile(r"^- ")
-_INDENTED_UL = re.compile(r"^\s+- ")
+_INDENTED_UL = re.compile(r"^([ \t]+)- ")
+# an md inline link, never an image (the `!` guard) and never nested brackets
+_MD_LINK = re.compile(r"(?<!\!)\[([^\]\[]+)\]\((\S+?)\)")
 _FENCE = re.compile(r"^```")
 _SOURCE_TEXT_OPEN = re.compile(r"^<<~\s*ahu\s+#source-text\b")
 _AHU_OPEN = re.compile(r"^<<~\s*ahu\b")
@@ -40,10 +42,48 @@ def _git_dirty(repo_root: str, path: str) -> bool:
     return bool(out)
 
 
-def realign_text(text: str, counts: dict) -> str:
-    """One file's pass-1 walk. Fence state toggles on ``` lines; a source-text
-    ahu suspends transforms until its close (nesting depth tracked so an inner
-    ahu never re-opens the gate early)."""
+_CODE_SPAN = re.compile(r"`[^`\n]*`")
+
+
+def _pass2_inline(line: str, counts: dict) -> str:
+    """Pass-2 inline transforms on one already-guarded line, CODE-SPAN AWARE:
+    `…` interiors pass through verbatim (a code example showing `**` stays
+    an example); an unbalanced backtick defers the whole line, counted loud.
+    Outside code spans: balanced bold `**…**` → `''…''` (odd `**` count
+    defers loud) and md links `[t](u)` → `[[t|u]]` (images never move)."""
+    if "**" not in line and not _MD_LINK.search(line):
+        return line
+    if line.count("`") % 2 != 0:
+        counts["skip_unbalanced_backtick"] += 1
+        return line
+
+    def _transform(seg: str) -> str:
+        if "**" in seg:
+            if seg.count("**") % 2 == 0:
+                counts["bold"] += seg.count("**") // 2
+                seg = seg.replace("**", "''")
+            else:
+                counts["skip_unbalanced_bold"] += 1
+        if _MD_LINK.search(seg):
+            seg, n = _MD_LINK.subn(r"[[\1|\2]]", seg)
+            counts["link"] += n
+        return seg
+
+    out, pos = [], 0
+    for m in _CODE_SPAN.finditer(line):
+        out.append(_transform(line[pos:m.start()]))
+        out.append(m.group(0))
+        pos = m.end()
+    out.append(_transform(line[pos:]))
+    return "".join(out)
+
+
+def realign_text(text: str, counts: dict, pass2: bool = False) -> str:
+    """One file's walk. Fence state toggles on ``` lines; a source-text ahu
+    suspends transforms until its close (nesting depth tracked so an inner
+    ahu never re-opens the gate early). Pass 1 = headings + top-level lists;
+    pass 2 adds indented lists (md indents → TW5 marker depth), balanced
+    bold, and md links."""
     out_lines = []
     in_fence = False
     source_depth = 0  # >0 while inside a source-text ahu (any nesting)
@@ -71,15 +111,27 @@ def realign_text(text: str, counts: dict) -> str:
         m = _HEADING.match(line)
         if m:
             counts["heading"] += 1
-            out_lines.append("!" * len(m.group(1)) + " " + line[m.end():])
+            line = "!" * len(m.group(1)) + " " + line[m.end():]
+            out_lines.append(_pass2_inline(line, counts) if pass2 else line)
             continue
         if _TOP_UL.match(line):
             counts["ul"] += 1
-            out_lines.append("* " + line[2:])
+            line = "* " + line[2:]
+            out_lines.append(_pass2_inline(line, counts) if pass2 else line)
             continue
-        if _INDENTED_UL.match(line):
+        mi = _INDENTED_UL.match(line)
+        if mi:
+            if pass2:
+                # md nests by indent (~2 spaces/level; a tab reads as one
+                # level); TW5 nests by marker count. depth 1 = top level.
+                indent = mi.group(1).replace("\t", "  ")
+                depth = (len(indent) + 1) // 2 + 1
+                counts["indented_ul"] += 1
+                line = "*" * depth + " " + line[mi.end():]
+                out_lines.append(_pass2_inline(line, counts))
+                continue
             counts["skip_indented_ul"] += 1
-        out_lines.append(line)
+        out_lines.append(_pass2_inline(line, counts) if pass2 else line)
     return "".join(out_lines)
 
 
@@ -89,6 +141,8 @@ def main() -> int:
     ap.add_argument("--apply", action="store_true", help="write changes (default: dry-run)")
     ap.add_argument("--exclude", action="append", default=[],
                     help="path substring to skip, reported loud (e.g. the boot seed)")
+    ap.add_argument("--pass2", action="store_true",
+                    help="add indented lists, balanced bold, and md links")
     args = ap.parse_args()
 
     root = os.path.abspath(args.root)
@@ -99,9 +153,10 @@ def main() -> int:
         capture_output=True, text=True, cwd=root,
     ).stdout.strip()
 
-    total = {"heading": 0, "ul": 0, "skip_fence": 0, "skip_source_text": 0,
-             "skip_indented_ul": 0, "skip_library": 0, "skip_dirty": 0,
-             "skip_excluded": 0}
+    total = {"heading": 0, "ul": 0, "indented_ul": 0, "bold": 0, "link": 0,
+             "skip_fence": 0, "skip_source_text": 0, "skip_indented_ul": 0,
+             "skip_unbalanced_bold": 0, "skip_unbalanced_backtick": 0,
+             "skip_library": 0, "skip_dirty": 0, "skip_excluded": 0}
     touched = []
     for dirpath, _dirs, files in os.walk(root):
         if f"{os.sep}library" in dirpath + os.sep or dirpath.endswith("library"):
@@ -122,7 +177,7 @@ def main() -> int:
             with open(path, encoding="utf-8") as fh:
                 text = fh.read()
             counts = {k: 0 for k in total}
-            new = realign_text(text, counts)
+            new = realign_text(text, counts, pass2=args.pass2)
             for k, v in counts.items():
                 total[k] += v
             if new != text:
@@ -137,9 +192,15 @@ def main() -> int:
           f"{len(touched)} files change")
     print(f"  headings #→!  : {total['heading']}")
     print(f"  lists -→*     : {total['ul']}")
+    if args.pass2:
+        print(f"  indented ul   : {total['indented_ul']}")
+        print(f"  bold **→''    : {total['bold']}")
+        print(f"  links []()→[[]]: {total['link']}")
     print(f"  skipped       : fence-lines={total['skip_fence']} "
           f"source-text-lines={total['skip_source_text']} "
           f"indented-ul={total['skip_indented_ul']} "
+          f"unbalanced-bold-lines={total['skip_unbalanced_bold']} "
+          f"unbalanced-backtick-lines={total['skip_unbalanced_backtick']} "
           f"library-files={total['skip_library']} dirty-files={total['skip_dirty']} "
           f"excluded-files={total['skip_excluded']}")
     for rel, h, u in touched[:20]:

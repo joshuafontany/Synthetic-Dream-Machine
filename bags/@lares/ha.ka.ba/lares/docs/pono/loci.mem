@@ -27,24 +27,24 @@ Not a law surface. Explanation, evaluation guidance, and research that belongs o
 
 | Form | Usual `register` band | Document opener form | Reading |
 |---|---|---|---|
-| **Noise** | none or `P` | none, fragmentary, or `<<~ &#x0001; ? -> lar:///...` | URI appears as signal; convention too thin for loci authority. |
-| **Data** | `P` or `PS` | fragmentary or proto-meme | Detectable structure makes the signal machine-usable; not yet memetic. |
-| **Meme** | `PS` or `S` | `<<~ &#x0001; ? -> lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
-| **Typed Meme** | `S` or `CS` | `<<~ &#x0001; ? -> lar:///...` | Carrier satisfies `loci` interface; routing convention surfaces or sharpens; MCP tension may remain. |
-| **Canon Typed Meme** | `C` | `<<~ &#x0001; lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
+| ''Noise'' | none or `P` | none, fragmentary, or `<<~ &#x0001; ? -> lar:///...` | URI appears as signal; convention too thin for loci authority. |
+| ''Data'' | `P` or `PS` | fragmentary or proto-meme | Detectable structure makes the signal machine-usable; not yet memetic. |
+| ''Meme'' | `PS` or `S` | `<<~ &#x0001; ? -> lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
+| ''Typed Meme'' | `S` or `CS` | `<<~ &#x0001; ? -> lar:///...` | Carrier satisfies `loci` interface; routing convention surfaces or sharpens; MCP tension may remain. |
+| ''Canon Typed Meme'' | `C` | `<<~ &#x0001; lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
 
 Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
 
 !!! Movement Criteria
 
-**Noise → Data** — detectable structure makes the signal machine-usable.
+''Noise → Data'' — detectable structure makes the signal machine-usable.
 
-**Data → Meme** requires:
+''Data → Meme'' requires:
 * implements `meme` interface
 * declared `lar:` address
 * explicit role and function above raw data
 
-**Meme → Typed Meme** (satisfies `loci` interface) requires:
+''Meme → Typed Meme'' (satisfies `loci` interface) requires:
 * `lar:` URI root path segment matches `\w\.\w\.\w`; stable root `ha.ka.ba`; unstable root at `lares/chapel-perilous-opens/{root}/`
 * declares stable-address intent; satisfies `loci` interface law
 * explicit routing convention sufficient to evaluate the stable-address claim
@@ -54,7 +54,7 @@ Higher `CS` posture additionally requires:
 * all nine required elements (R1–R9) per `lar:///ha.ka.ba/lares/api/pono/meme`
 * stable-address discipline justifying `CS`
 
-**Typed Meme → Canon Typed Meme** additionally requires:
+''Typed Meme → Canon Typed Meme'' additionally requires:
 * all address-stability conditions satisfied
 * operator or admin confirmation
 * no outstanding declared-unresolved sub-meme addresses (O7 rule per `lar:///ha.ka.ba/lares/api/pono/meme#optional-elements`)

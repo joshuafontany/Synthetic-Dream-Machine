@@ -49,18 +49,18 @@ No arrows go upstream. No package adds a dep that reaches into a downstream pack
 
 What this means in practice:
 
-**AL-1 — Automerge core lives in mesh.**
+''AL-1 — Automerge core lives in mesh.''
 `@automerge/automerge` sits in direct dependency position for `@lararium/mesh`. Vessel packages
 (`@lararium/node`, `@lararium/browser`) consume Automerge types and utilities from
 mesh's public surface. They do not add their own `@automerge/automerge` dependency
 unless a platform-specific surface requires something mesh does not re-export.
 
-**AL-2 — automerge-repo lives in mesh.**
+''AL-2 — automerge-repo lives in mesh.''
 `@automerge/automerge-repo` sits in direct dependency position for `@lararium/mesh`.
 `DocHandle`, `Repo`, `Heads`, and related types surface through mesh's public exports.
 Vessel packages import these from `@lararium/mesh`, not directly from automerge-repo.
 
-**AL-3 — Shared contracts live in mesh.**
+''AL-3 — Shared contracts live in mesh.''
 Vessel law, pool law, worker lease contracts, tiddler store interfaces, causal island
 types, and projection contracts all live in `@lararium/mesh`. If a type needs to cross
 the node↔browser boundary, it belongs in mesh, not in either vessel package.
@@ -71,13 +71,13 @@ TW5-specific types live in `@lararium/tw5`. Mesh holds the `MemeRecipeVm` interf
 and `VmPool` because those provide vessel-level coordination types; the implementations
 belong to `@lararium/tw5`.
 
-**AL-5 — Platform-specific concerns live in the platform package.**
+''AL-5 — Platform-specific concerns live in the platform package.''
 Node filesystem, piscina, `worker_threads`, and `@automerge/automerge-repo-storage-nodefs`
 live in `@lararium/node`. Browser IndexedDB, Web Workers, `BroadcastChannel`, and
 `@automerge/automerge-repo-network-websocket` (if browser-only) live in `@lararium/browser`.
 Neither crosses into mesh.
 
-**AL-6 — Platform-neutral construction lives in mesh; I/O belongs to the caller.**
+''AL-6 — Platform-neutral construction lives in mesh; I/O belongs to the caller.''
 Any function that constructs or transforms Automerge documents from assembled byte inputs
 belongs in mesh, regardless of which surface will eventually call it. Callers supply the bytes;
 mesh builds the doc; callers write the result. The three-layer split applies to genesis

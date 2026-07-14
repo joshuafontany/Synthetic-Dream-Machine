@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loci"
 
 ! Loci
 
-The **mandatory component** — the one intrinsic every placed carrier holds, after the manner of the Scene Graph's default transform: *where this entity stands*. A carrier holds loci **by title** — the `lar:` address itself — never by tag; everything else composes through the has-stack.
+The ''mandatory component'' — the one intrinsic every placed carrier holds, after the manner of the Scene Graph's default transform: *where this entity stands*. A carrier holds loci ''by title'' — the `lar:` address itself — never by tag; everything else composes through the has-stack.
 
 Routing convention and stable-address law for `lar:` URI carriers.
 A carrier holds `loci` when its `lar:` URI root segment matches `\w.\w.\w` and satisfies this law's convention surfaces. An entity without loci reads as not-yet-placed; the rating ladder prices that honestly.
@@ -55,11 +55,11 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
 Five buckets mark the structural rating of a carrier (law-of-5s):
 
-1. **Noise** — raw signal, no stable machine-usable structure.
-2. **Data** — structured language usable without memetic wrappers.
-3. **Meme** — data with memetic wrappers, traveling as a contextual meaning-unit.
-4. **Ano** — meme wearing one or more **defined** has-stack components; loci itself stands as the mandatory first, held by title. (Hawaiian: kind, type, nature)
-5. **Kapu** — above base namespace; wears the kapu grant (operator-minted); kernel/sacred tier. (Hawaiian: set apart, restricted)
+1. ''Noise'' — raw signal, no stable machine-usable structure.
+2. ''Data'' — structured language usable without memetic wrappers.
+3. ''Meme'' — data with memetic wrappers, traveling as a contextual meaning-unit.
+4. ''Ano'' — meme wearing one or more ''defined'' has-stack components; loci itself stands as the mandatory first, held by title. (Hawaiian: kind, type, nature)
+5. ''Kapu'' — above base namespace; wears the kapu grant (operator-minted); kernel/sacred tier. (Hawaiian: set apart, restricted)
 
 Rating derives from structure — a predicate run against the carrier, never a class consulted.
 Promotion to lares/ canon (live session → branch commit → hostless URI) follows a separate ceremony.
@@ -72,7 +72,7 @@ Promotion to lares/ canon (live session → branch commit → hostless URI) foll
 
 !! Derivation Algorithm — siting
 
-Converts a (holding-bag, `lar:` URI) pair to its filepath — **the full-path-inside-bag ruling (2026-06-12, operator)**: directory = residency, interior path = the name, whole (`lar-uri #five-planes`). Any bag holds any name losslessly; the multi-bag crack closes. One root law: the repo IS the vessel; mirrors live under `bags/`.
+Converts a (holding-bag, `lar:` URI) pair to its filepath — ''the full-path-inside-bag ruling (2026-06-12, operator)'': directory = residency, interior path = the name, whole (`lar-uri #five-planes`). Any bag holds any name losslessly; the multi-bag crack closes. One root law: the repo IS the vessel; mirrors live under `bags/`.
 
 ```
 Given: lar-uri (string)
@@ -160,7 +160,7 @@ A `lar:` URI counts as stable when:
 1. `register` falls in `CS` or `C`
 2. The `lar:` URI in the document opener stays coherent with the meme's carrier identity and derived filepath through migration and promotion
 
-A stable `lar:` URI stays **immutable**.
+A stable `lar:` URI stays ''immutable''.
 Its primary carrier MUST remain at the derived filepath.
 Child items MUST grow beneath the sibling sub-directory.
 The parent carrier MUST NOT move.

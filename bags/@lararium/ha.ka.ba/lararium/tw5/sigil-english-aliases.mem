@@ -40,7 +40,7 @@ This document records the bidirectional alias map.
 | `\widget` | (none yet) | TW5 widget declaration; `~` prefix convention |
 | `\function` | (none yet) | TW5 5.3+ filter-function declaration |
 
-**Cross-ref fields on SharktoothSigil tiddlers:**
+''Cross-ref fields on SharktoothSigil tiddlers:''
 * English sigils carry `lar-see-also: <hawaiian>` pointing to their Hawaiian counterpart.
 * Hawaiian sigils (when authored in Path G.SharktoothSigil) carry `lar-see-also: \<english>` as the reverse pointer.
 * `lar-alias-for` on English sigils points to the TW5 pragma name (e.g. `\procedure`) for grammar aliasing.

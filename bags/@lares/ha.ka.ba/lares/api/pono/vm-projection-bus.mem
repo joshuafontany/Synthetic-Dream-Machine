@@ -28,7 +28,7 @@ The projection bus is the coupling between the TW5 VM (widget tree, render event
 and the ReactionEngine (CRDT projection, meme store mutations). It carries a Verse-aligned `signalable`/`subscribable`
 asymmetry baked into the TW5 wiki event system.
 
-**Law:** TW5Engine does not know about ReactionEngine. ReactionEngine registers
+''Law:'' TW5Engine does not know about ReactionEngine. ReactionEngine registers
 itself onto TW5Engine at runtime. The direction of dependency is:
 `ReactionEngine → TW5Engine`, never the reverse.
 
@@ -108,8 +108,8 @@ class VmPool {
 }
 ```
 
-**Slot 0** = local wiki (always active).
-**Slot N** = foreign realm projection (activated on cross-realm sync request).
+''Slot 0'' = local wiki (always active).
+''Slot N'' = foreign realm projection (activated on cross-realm sync request).
 
 Each slot has an independent projection bus wire. A kukali event in slot 0 does not
 propagate to slot 1 — the wiki event buses are per-VM, not shared.
@@ -144,7 +144,7 @@ const teardown = vm.onVerseEvent(reactionEngine);
 teardown();
 ```
 
-**MUST:** `_larKukaliHook` MUST NOT exist in any non-web2 file.
+''MUST:'' `_larKukaliHook` MUST NOT exist in any non-web2 file.
 Any file referencing `_larKukaliHook` outside a `*.web2.*` path FAILS FPI-1.
 
 <<~/ahu >>
@@ -172,7 +172,7 @@ The asymmetry is preserved:
 
 !! Scope 1 ~ the mesh projection surface [surgical 2026-07-03]
 
-The projection bus serves as a **Scope-1** mesh surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The `VerseEventConsumer` interface lives in `@lararium/mesh`; the CRDT projection it couples **runs in TS** (structural causality, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of **Scope 2** (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling seats this bus on the TS side of the split.
+The projection bus serves as a ''Scope-1'' mesh surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The `VerseEventConsumer` interface lives in `@lararium/mesh`; the CRDT projection it couples ''runs in TS'' (structural causality, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of ''Scope 2'' (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling seats this bus on the TS side of the split.
 
 <<~/ahu >>
 

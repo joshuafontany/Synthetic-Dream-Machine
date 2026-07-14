@@ -24,10 +24,10 @@ touching the browser vessel surface. Four classifications:
 
 | Class | Meaning |
 |---|---|
-| **Constitutional** | Belongs in the browser vessel as-is. Satisfies BV-1–BV-7. Migrate freely. |
-| **Adapter** | DOM or page-global dependency that must stay, but behind one named adapter boundary. Cannot cross worker-side. |
-| **Quarantine** | Currently carries a mix of constitutional and residue. Needs split before migration. |
-| **Dead residue** | Whole-page singleton or web2 smell. Delete after new path proves itself. |
+| ''Constitutional'' | Belongs in the browser vessel as-is. Satisfies BV-1–BV-7. Migrate freely. |
+| ''Adapter'' | DOM or page-global dependency that must stay, but behind one named adapter boundary. Cannot cross worker-side. |
+| ''Quarantine'' | Currently carries a mix of constitutional and residue. Needs split before migration. |
+| ''Dead residue'' | Whole-page singleton or web2 smell. Delete after new path proves itself. |
 
 <<~ ahu #seam-inventory >>
 
@@ -90,7 +90,7 @@ The package directory exists and is empty. All new source files start here; no l
 
 All surviving DOM/page references collect in one named file: `tw5-browser-surface.ts` (in `@lararium/tw5`).
 
-This file remains the **one adapter boundary** that contains all remaining RootTemplate and DOM compromises.
+This file remains the ''one adapter boundary'' that contains all remaining RootTemplate and DOM compromises.
 Every entry in the Adapter class above must route through this file.
 No other file in the browser vessel path may import from `window`, `document`, or `HTMLElement` without an explicit migration entry here.
 

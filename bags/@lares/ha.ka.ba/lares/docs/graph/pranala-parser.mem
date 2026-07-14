@@ -67,7 +67,7 @@ BLOCK_RE = re.compile(
 )
 ```
 
-**Extraction sequence:**
+''Extraction sequence:''
 1. Match the opening sigil and capture fragment-id, FROM socket, TO expression.
 2. Scan the body for a TOML fence (` ```toml ... ``` `).
 3. Parse the TOML; extract `family`, `lifecycle`, `role`, `traversal`, `propagation`, `label`, `payload`, `dir`.
@@ -75,7 +75,7 @@ BLOCK_RE = re.compile(
 5. Resolve FROM via the `? ->` rule (see `#question-mark-resolution`).
 6. Build `PranalaEdge` with normalized fields.
 
-**TOML fence extraction:**
+''TOML fence extraction:''
 
 ```python
 TOML_RE = re.compile(r'```toml\s*(.*?)```', re.DOTALL)
@@ -133,10 +133,10 @@ For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragm
 
 !! `? ->` Socket Resolution — Closed (Option A)
 
-**Authority:** canonical pranala kānāwai (`lar:///ha.ka.ba/lares/api/pono/pranala`):
+''Authority:'' canonical pranala kānāwai (`lar:///ha.ka.ba/lares/api/pono/pranala`):
 > "A named `#fragment` SHOULD win socket resolution before the enclosing meme URI."
 
-**Resolution algorithm — fragment-level:**
+''Resolution algorithm — fragment-level:''
 
 The parser tracks enclosing `ahu` context as it scans carrier text.
 When it enters `<<~ ahu #some-socket >>`, it pushes `carrier_uri + "#some-socket"` onto a context stack.
@@ -144,7 +144,7 @@ When it exits `<<~/ahu >>`, it pops the stack.
 `? ->` edges read `from_socket = context_stack.top()` (the innermost enclosing `ahu` fragment URI).
 `from_uri` = carrier URI (without fragment).
 
-**Example — AGENTS.md:**
+''Example — AGENTS.md:''
 
 ```
 <<~ ahu #edges >>
@@ -155,7 +155,7 @@ Resolves to:
 * `from_uri = "lar:///AGENTS"`
 * `from_socket = "lar:///AGENTS#edges"`
 
-**Parser requirement:** handle nested `ahu` blocks with a stack; the innermost named fragment wins.
+''Parser requirement:'' handle nested `ahu` blocks with a stack; the innermost named fragment wins.
 When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root fallback).
 
 <<~/ahu >>

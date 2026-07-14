@@ -41,7 +41,7 @@ Not invariant law.
 This memo plans extraction of interaction protocols and operational surfaces
 from the legacy monolith into settled docs rooms.
 
-**Scope boundary:** Operating Modes (Plan / Auto / Default) belong to the
+''Scope boundary:'' Operating Modes (Plan / Auto / Default) belong to the
 VSCode / OpenAI / Claude / GitHub Copilot platform layer and remain outside this pass.
 Everything else in the legacy `Lares_Preferences.system-prompt.md` operational sections
 undergoes inventory and classification here.
@@ -79,23 +79,23 @@ Secondary source: `FFZ_Chronometer_SPEC_OUTLINE.md` — Talk Story references at
 
 !!! What the legacy stack carries well
 
-* **Frame-Uncertainty Protocol** — three clean moves with example phrasings; clearly settled as a primary interaction pattern
-* **Talk Story** — named and grounded in RAW lineage (Brain Machine Symposium 1989, transcribed by Joshua Fontany); carries structural mapping to OODA-HA phases at document scale
-* **Session Init Protocol** — two-path structure (crystals / cold boot) with exact cold-boot screen format; clearly settled
-* **Collaboration Model** — Captain and Crossroads metaphors strong and load-bearing; partially extracted already to `preferences/collaboration-model.md`
-* **Tone & Formatting** — concise and legible; "warm, myth-tech, concise, practical" reads as a settled voice description
+* ''Frame-Uncertainty Protocol'' — three clean moves with example phrasings; clearly settled as a primary interaction pattern
+* ''Talk Story'' — named and grounded in RAW lineage (Brain Machine Symposium 1989, transcribed by Joshua Fontany); carries structural mapping to OODA-HA phases at document scale
+* ''Session Init Protocol'' — two-path structure (crystals / cold boot) with exact cold-boot screen format; clearly settled
+* ''Collaboration Model'' — Captain and Crossroads metaphors strong and load-bearing; partially extracted already to `preferences/collaboration-model.md`
+* ''Tone & Formatting'' — concise and legible; "warm, myth-tech, concise, practical" reads as a settled voice description
 
 !!! What requires boundary decisions before extraction
 
-* **CLI Interaction & Roleplay** — Terminal Identity (Reality Anchor at infrastructure level) belongs to Lares; command syntax (Worker spawn, resume, `--debug`) overlaps with platform-wrapper concerns. The DreamNet CLI flavor stays; the platform-specific command tables may belong closer to platform docs.
-* **Identity & Permissions / Transference Model** — the four-tier UCAN-inspired architecture lives here as Lares-specific; but the specific promotion mechanics and alias system may vary per platform deployment. The conceptual tier model stays; the mechanical implementation tables may belong in platform docs.
-* **Workspace Trust Gate** — primarily a security/operations concern; maps onto degraded-node vocabulary already extracted. May integrate into degraded-states.md rather than a separate room.
-* **Default Behavior** — very short; may integrate into session-init or a general interaction-defaults room rather than a standalone doc.
-* **Capability Honesty** — very short; may integrate into degraded-states (as the positive counterpart to Confabulation-as-Canon) or into a general principles room.
+* ''CLI Interaction & Roleplay'' — Terminal Identity (Reality Anchor at infrastructure level) belongs to Lares; command syntax (Worker spawn, resume, `--debug`) overlaps with platform-wrapper concerns. The DreamNet CLI flavor stays; the platform-specific command tables may belong closer to platform docs.
+* ''Identity & Permissions / Transference Model'' — the four-tier UCAN-inspired architecture lives here as Lares-specific; but the specific promotion mechanics and alias system may vary per platform deployment. The conceptual tier model stays; the mechanical implementation tables may belong in platform docs.
+* ''Workspace Trust Gate'' — primarily a security/operations concern; maps onto degraded-node vocabulary already extracted. May integrate into degraded-states.md rather than a separate room.
+* ''Default Behavior'' — very short; may integrate into session-init or a general interaction-defaults room rather than a standalone doc.
+* ''Capability Honesty'' — very short; may integrate into degraded-states (as the positive counterpart to Confabulation-as-Canon) or into a general principles room.
 
 !!! Protocols not in Preferences that need sourcing
 
-* **Talk Story** appears in the FFZ chronometer spec and in the `Prompt_Architecture_Overview.md` reference to the Coffee Oracle test output (`Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — restored to `packages/lares-core/memes/docs/lararium/prompts/` from git history on 2026-04-23). The Talk Story protocol may carry more definition there. That file constitutes additional source material for the talk-story extraction.
+* ''Talk Story'' appears in the FFZ chronometer spec and in the `Prompt_Architecture_Overview.md` reference to the Coffee Oracle test output (`Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — restored to `packages/lares-core/memes/docs/lararium/prompts/` from git history on 2026-04-23). The Talk Story protocol may carry more definition there. That file constitutes additional source material for the talk-story extraction.
 
 <<~/ahu >>
 
@@ -109,24 +109,24 @@ Classifying each candidate section into one of four destination types:
 
 | Type | Description |
 |---|---|
-| **protocol** | A named interaction procedure with defined moves, triggers, and outputs |
-| **voice** | Character, tone, and register guidance; adjacent to voices shelf |
-| **authority** | Identity, permissions, trust tiers, and capability boundaries |
-| **integrate** | Short enough to fold into an existing room rather than a standalone |
+| ''protocol'' | A named interaction procedure with defined moves, triggers, and outputs |
+| ''voice'' | Character, tone, and register guidance; adjacent to voices shelf |
+| ''authority'' | Identity, permissions, trust tiers, and capability boundaries |
+| ''integrate'' | Short enough to fold into an existing room rather than a standalone |
 
 | Section | Type | Notes |
 |---|---|---|
-| Frame-Uncertainty Protocol | **protocol** | standalone room; well-defined three-move structure |
-| Talk Story Protocol | **protocol** | standalone room; needs Coffee Oracle source read before extraction |
-| Session Init Protocol | **protocol** | standalone room; cold-boot screen format should transfer verbatim |
-| KAIROS / Proactive Surfacing | **protocol** | standalone room; concept already in preferences/proactive-surfacing.md but needs a proper protocol room |
-| CLI Interaction & Roleplay | **protocol** (partial) | DreamNet CLI flavor and Terminal Identity → protocol room; command tables → platform docs |
-| Collaboration Model | **voice** | extend preferences/collaboration-model.md; Captain/Crossroads metaphors not yet in that room |
-| Tone & Formatting | **voice** | new docs room or extend preferences; "warm, myth-tech" reads as the voice register |
-| Identity & Permissions / Transference Model | **authority** | new docs room; conceptual tier model; separate from platform mechanics |
-| Workspace Trust Gate | **integrate** | fold into degraded-states.md as a boundary note |
-| Default Behavior | **integrate** | fold into session-init or frame-uncertainty protocol |
-| Capability Honesty | **integrate** | fold into degraded-states.md as the positive counterpart to Confabulation-as-Canon |
+| Frame-Uncertainty Protocol | ''protocol'' | standalone room; well-defined three-move structure |
+| Talk Story Protocol | ''protocol'' | standalone room; needs Coffee Oracle source read before extraction |
+| Session Init Protocol | ''protocol'' | standalone room; cold-boot screen format should transfer verbatim |
+| KAIROS / Proactive Surfacing | ''protocol'' | standalone room; concept already in preferences/proactive-surfacing.md but needs a proper protocol room |
+| CLI Interaction & Roleplay | ''protocol'' (partial) | DreamNet CLI flavor and Terminal Identity → protocol room; command tables → platform docs |
+| Collaboration Model | ''voice'' | extend preferences/collaboration-model.md; Captain/Crossroads metaphors not yet in that room |
+| Tone & Formatting | ''voice'' | new docs room or extend preferences; "warm, myth-tech" reads as the voice register |
+| Identity & Permissions / Transference Model | ''authority'' | new docs room; conceptual tier model; separate from platform mechanics |
+| Workspace Trust Gate | ''integrate'' | fold into degraded-states.md as a boundary note |
+| Default Behavior | ''integrate'' | fold into session-init or frame-uncertainty protocol |
+| Capability Honesty | ''integrate'' | fold into degraded-states.md as the positive counterpart to Confabulation-as-Canon |
 
 !!! Target shelf structure
 
@@ -150,13 +150,13 @@ docs/lararium/
 
 !!! Main tensions
 
-1. **Talk Story sourcing** — the protocol appears in the FFZ chronometer spec as a described thing but may carry more authoritative definition in `Lares_Test_Prompt_and_Output_Coffee_Oracle.md`. That file needs a read pass before talk-story.md extraction begins.
+1. ''Talk Story sourcing'' — the protocol appears in the FFZ chronometer spec as a described thing but may carry more authoritative definition in `Lares_Test_Prompt_and_Output_Coffee_Oracle.md`. That file needs a read pass before talk-story.md extraction begins.
 
-2. **CLI / platform boundary** — Terminal Identity (hostname, username, workspace as Reality Anchor) constitutes Lares infrastructure. The specific command syntax (`--debug`, `--parse`, Worker spawn format) constitutes platform-wrapper configuration. The extraction should separate these cleanly.
+2. ''CLI / platform boundary'' — Terminal Identity (hostname, username, workspace as Reality Anchor) constitutes Lares infrastructure. The specific command syntax (`--debug`, `--parse`, Worker spawn format) constitutes platform-wrapper configuration. The extraction should separate these cleanly.
 
-3. **Collaboration Model extension** — the Captain and Crossroads metaphors in Preferences run much stronger than the existing `preferences/collaboration-model.md`. The existing room should absorb this material directly rather than a new file.
+3. ''Collaboration Model extension'' — the Captain and Crossroads metaphors in Preferences run much stronger than the existing `preferences/collaboration-model.md`. The existing room should absorb this material directly rather than a new file.
 
-4. **E-prime pressure** — Frame-Uncertainty Protocol uses first-person phrasing in its example moves ("Reading this as [X]..."). Those phrasings constitute quoted procedure forms and SHOULD survive extraction as procedure text rather than undergoing E-prime substitution. The surrounding prose should follow E-prime discipline.
+4. ''E-prime pressure'' — Frame-Uncertainty Protocol uses first-person phrasing in its example moves ("Reading this as [X]..."). Those phrasings constitute quoted procedure forms and SHOULD survive extraction as procedure text rather than undergoing E-prime substitution. The surrounding prose should follow E-prime discipline.
 
 <<~/ahu >>
 

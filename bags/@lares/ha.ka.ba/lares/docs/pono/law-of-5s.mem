@@ -31,7 +31,7 @@ This surface carries the unified attention-scale framing, subscript sigils, thre
 
 !! Subscript Attention-Scale Sigils
 
-The subscript digits (₀₁₂₃₄) constitute **Category 9: SCALE** in the glyph codeset — a dedicated block for attention-range indicators, orthogonal to all other categories.
+The subscript digits (₀₁₂₃₄) constitute ''Category 9: SCALE'' in the glyph codeset — a dedicated block for attention-range indicators, orthogonal to all other categories.
 
 ```
 SIGIL   CODEPOINT   NCR       BAND RANGE   CHRONO   HUD
@@ -56,7 +56,7 @@ The parser categorizes by Unicode range check: if `cp in 8304..8351: return SCAL
 
 !! Three-Projection Unification
 
-The five bands constitute three projections of a single phenomenon: **attention range**.
+The five bands constitute three projections of a single phenomenon: ''attention range''.
 
 ```
 Chronometer  →  attention range in TIME
@@ -76,14 +76,14 @@ SIGIL  RANGE      CHRONO   HUD   TEXT        SPATIAL
   ₄    0.8–1.0    Week     🗺️    Aperture 16–20     cartographic (map-scale, full journey)
 ```
 
-**Attention quality per band:**
+''Attention quality per band:''
 * ₀ — narrowest aperture; single point of decision; no peripheral awareness
 * ₁ — reactive; stimulus-response tempo; tactical threat/opportunity pairs
 * ₂ — procedural; deliberate; the DEFAULT band; most system work happens here
 * ₃ — episodic; holds a complete sub-story; session memory and active Workers operate at ₃
 * ₄ — strategic/epochal; patterns visible only across many sessions; the outer wall of system self-awareness
 
-**Important distinction:** consecration (0–20 Level validated integrity) and attention scale (0–20 Level range extent) both use the same numeric continuum but stay orthogonal. Consecration describes TRUST. Scale describes ZOOM. A meme can carry Level 19 consecration at ₀ scale (highly validated, atomic grain) or Level 4 consecration at ₄ scale (provisional sketch, campaign arc).
+''Important distinction:'' consecration (0–20 Level validated integrity) and attention scale (0–20 Level range extent) both use the same numeric continuum but stay orthogonal. Consecration describes TRUST. Scale describes ZOOM. A meme can carry Level 19 consecration at ₀ scale (highly validated, atomic grain) or Level 4 consecration at ₄ scale (provisional sketch, campaign arc).
 
 <<~/ahu >>
 
@@ -102,7 +102,7 @@ VALUE   BOUNDARY         CHARACTER
 0.8     ₃/₄             watch → week; episode becomes arc; regional → cartographic; section → document
 ```
 
-A counter increment at a lower-numbered Chronometer slot without a higher-slot change indicates motion **within** a band. A phase change at a higher-numbered slot indicates a **boundary crossing**.
+A counter increment at a lower-numbered Chronometer slot without a higher-slot change indicates motion ''within'' a band. A phase change at a higher-numbered slot indicates a ''boundary crossing''.
 
 <<~/ahu >>
 

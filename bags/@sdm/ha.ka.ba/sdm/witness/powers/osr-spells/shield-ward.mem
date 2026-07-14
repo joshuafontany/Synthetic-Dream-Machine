@@ -44,7 +44,7 @@ effect = "the magic-user only"
 reversible = false
 ```
 
-A magical barrier all around the magic-user, less than an inch away, moving with them. While it lasts, the caster is **AC 2 against missiles, AC 4 against all other attacks**. A Magic Missile shot at the warded caster allows a Saving Throw vs. Spells per missile; on success the missile has no effect — it strikes the barrier and evaporates.
+A magical barrier all around the magic-user, less than an inch away, moving with them. While it lasts, the caster is ''AC 2 against missiles, AC 4 against all other attacks''. A Magic Missile shot at the warded caster allows a Saving Throw vs. Spells per missile; on success the missile has no effect — it strikes the barrier and evaporates.
 
 <<~/ahu >>
 
@@ -88,7 +88,7 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 * `Range: 0`, self-only, inch-close, body-following → a skin-close force shell, not carried gear. Carries `function/ward` (selective) over `function/barrier` (the shell itself).
 * Distinct AC vs missiles / other → typed defensive filtering; surfaces as the `ward`'s "named channel" overcharge.
 * The Magic-Missile save → a special anti-spell-projectile interaction, not general immunity. Candidate for a `negate`/`#modifies` rule at counterpoint (Sprint 4).
-* `2 turns` → **D: 20 minutes**. The paid Life reads as `imbued` (locked while the ward holds).
+* `2 turns` → ''D: 20 minutes''. The paid Life reads as `imbued` (locked while the ward holds).
 
 <<~/ahu >>
 

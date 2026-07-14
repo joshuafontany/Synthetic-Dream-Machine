@@ -59,22 +59,22 @@ The tier map below names these boundaries from innermost to outermost.
 
 !!! The formal model ~ sheaf-gluing / H¹ obstruction (load-bearing, 2026-06-26)
 
-A four-domain validation (`lar:///ha.ka.ba/lararium/api/causal-island-pattern`) carries the exact mathematics of "no global now," promoted here from intuition to law. The federation reads as a **presheaf** of local causal-logs that is **not a sheaf**: the local sections (each island's state) need not glue to a global section, and *that failure carries the content* — "no global now" **IS** the gluing obstruction, and it lives in **H¹** (sheaf cohomology; Goguen, sheaf-semantics of concurrent interacting objects). Two consequences ride load-bearing:
+A four-domain validation (`lar:///ha.ka.ba/lararium/api/causal-island-pattern`) carries the exact mathematics of "no global now," promoted here from intuition to law. The federation reads as a ''presheaf'' of local causal-logs that is ''not a sheaf'': the local sections (each island's state) need not glue to a global section, and *that failure carries the content* — "no global now" ''IS'' the gluing obstruction, and it lives in ''H¹'' (sheaf cohomology; Goguen, sheaf-semantics of concurrent interacting objects). Two consequences ride load-bearing:
 
-1. **No-global-now entails a partial order (the causal poset), not a probability.** Probability is an *overlay* the system adds to wager about which sections will glue; the island's own confidence is itself situated (no island holds the global measure). The poset is the truth; the w.h.p. is the wager.
-2. **The system supplies its own site** — what counts as a cover, and what "agree on the overlap" means under conflicting writes (the CRDT merge IS the restriction map). The math does not hand the site over; the design declares it.
+1. ''No-global-now entails a partial order (the causal poset), not a probability.'' Probability is an *overlay* the system adds to wager about which sections will glue; the island's own confidence is itself situated (no island holds the global measure). The poset is the truth; the w.h.p. is the wager.
+2. ''The system supplies its own site'' — what counts as a cover, and what "agree on the overlap" means under conflicting writes (the CRDT merge IS the restriction map). The math does not hand the site over; the design declares it.
 
-The master cut rides ABOVE the gluing: **AUTHORITY(safety) ⊥ FLOW(liveness)** — flow may glue probabilistically and eventually; authority never (safety cannot be earned from local sections alone; Ashby's requisite-variety floor — a global-variety invariant must be *attenuated* to a local one or *amplified* by modelling peers, never locally faked).
+The master cut rides ABOVE the gluing: ''AUTHORITY(safety) ⊥ FLOW(liveness)'' — flow may glue probabilistically and eventually; authority never (safety cannot be earned from local sections alone; Ashby's requisite-variety floor — a global-variety invariant must be *attenuated* to a local one or *amplified* by modelling peers, never locally faked).
 
 !!! The two clocks ~ causal ⊥ rhythmic (2026-07-03)
 
-The master cut sorts a second pair beneath it: the mesh keeps time on **two orthogonal clocks**, never one.
+The master cut sorts a second pair beneath it: the mesh keeps time on ''two orthogonal clocks'', never one.
 
 * **The CRDT-causal clock** (TS, structural) carries the happened-before poset — Automerge `<counter,
   actorId>` OpId, `getHeads`/`drifted`, ITC fork/join, the authority-first sync order below. It alone rules
   fork-detection, merge, and revocation ordering; AUTHORITY/safety cannot glue from local sections alone,
   so this clock stays TS-native and web3-local-first.
-* **The FFZ-recovered rhythm clock** (py/R, per-stream, no-global-now) rides alongside as *rhythmic
+* ''The FFZ-recovered rhythm clock'' (py/R, per-stream, no-global-now) rides alongside as *rhythmic
   annotation* — a cadence recovered from each stream, freshness/decay grain stamped py-side behind the
   causal-island boundary. FFZ reads RHYTHMIC, never causal: its LWW total-order MUST NOT drive an authority
   decision.
@@ -172,16 +172,16 @@ A peer MUST complete step 3 before requesting individual meme deltas.
 stable sediment | current boot receipt | live delta tail
 ```
 
-* **Join:** receive boot receipt first — the shape of the visible world at join time.
+* ''Join:'' receive boot receipt first — the shape of the visible world at join time.
   This does not provide a full CRDT sync. It provides a snapshot of what this peer currently
   authorized to see.
-* **After join:** request missing deltas from the last known offset.
-* **Revocation:** epoch rolls. The revoked principal receives no future live tail.
+* ''After join:'' request missing deltas from the last known offset.
+* ''Revocation:'' epoch rolls. The revoked principal receives no future live tail.
   Past sediment encrypted at prior epoch keys stays readable by those who held
   those keys. Revocation runs forward-only.
-* **Receipt:** emitted after join, after each epoch change, after each
+* ''Receipt:'' emitted after join, after each epoch change, after each
   canon residency action (MOVE into a lower-priority bag). Receipts keep hash stability and prompt-cache usability.
-* **Re-seeding:** boot receipt re-issued; sediment layers may compact;
+* ''Re-seeding:'' boot receipt re-issued; sediment layers may compact;
   live tail resets from new offset zero.
 
 <<~/ahu >>
@@ -220,41 +220,41 @@ peer that holds it. The handoff follows the federation law above — authority
 crosses before content, the relay carries what it cannot read — and adds a task
 shape on top.
 
-**Two orthogonal planes (kupono intent for the network uplift).** This section is the
-**AUTHORITY** plane — who may · signed · exactly-once (lease+fence). It rides ORTHOGONAL to the
-**FLOW** plane — the projection-nalu gates that pace *how much · how often · backpressure*
+''Two orthogonal planes (kupono intent for the network uplift).'' This section is the
+''AUTHORITY'' plane — who may · signed · exactly-once (lease+fence). It rides ORTHOGONAL to the
+''FLOW'' plane — the projection-nalu gates that pace *how much · how often · backpressure*
 (`lar:///ha.ka.ba/lararium/api/projection-nalu#network-ring`: accumulate→reliable-ordered,
 coalesce→gossip, servo→congestion-control). Authority clears WHO *before* flow paces HOW-MUCH; the
 flow gate never absorbs the authority check, the way the two gate-families stay distinct. Keep them
 separate at the ring.
 
-**The shape (the pono model).**
-* A **task** travels as a *signed capability-invocation written as a CRDT fact*,
+''The shape (the pono model).''
+* A ''task'' travels as a *signed capability-invocation written as a CRDT fact*,
   never an RPC — the existing verb-tiddler, extended to name an executor peer.
   Intent. It survives the requester going offline the instant after it asks.
-* An **outcome** travels back as a *signed receipt written as a CRDT fact* — the
+* An ''outcome'' travels back as a *signed receipt written as a CRDT fact* — the
   existing outcome-tiddler. The "executor crashed before replying" failure
   dissolves: nothing exists to lose; the outcome converges or it does not, and
   its absence reads plainly.
-* **Authority rides WITH the task** (a UCAN invocation shape over the keyhive
+* ''Authority rides WITH the task'' (a UCAN invocation shape over the keyhive
   grant): the invocation carries its proof-chain back to the owner, attenuated;
   the executor verifies the chain + the attenuation predicates against the args,
   then acts STRICTLY within that envelope, never on its own ambient authority —
   defeating the confused deputy by construction (no designation without authority).
-* **Attenuation only narrows** down the chain; expiry/TTL carries the only
+* ''Attenuation only narrows'' down the chain; expiry/TTL carries the only
   fully-decentralized revocation (no global now).
-* **Selection ≠ authority.** Liveness + reputation pick WHICH capable peer
+* ''Selection ≠ authority.'' Liveness + reputation pick WHICH capable peer
   receives the task (a soft hint); the capability bounds the damage if the pick
   goes wrong. No coordinator/super-peer accrues trust-authority.
 
-**Live vs store-and-forward.** Two concurrently-connected vessels MAY use a live
+''Live vs store-and-forward.'' Two concurrently-connected vessels MAY use a live
 capability-RPC (CapTP / Cap'n Web — designation-as-invocation, promise pipelining);
 the verb/outcome-over-CRDT form stays the always-correct, offline-tolerant record.
 
-**Prior art:** UCAN invocation / delegation / receipt (Brooklyn Zelenka — UCAN's
+''Prior art:'' UCAN invocation / delegation / receipt (Brooklyn Zelenka — UCAN's
 author, now at Ink & Switch); OCapN CapTP three-party handoff; Cloudflare Cap'n Web.
-The OPEN sub-problem — a peer's **kuleana** over a task (the held right-and-duty
-to run it, time-bound) + a **precedence mark** (the monotonic guard so a
+The OPEN sub-problem — a peer's ''kuleana'' over a task (the held right-and-duty
+to run it, time-bound) + a ''precedence mark'' (the monotonic guard so a
 lapsed-then-returned claimant cannot double-apply) for the concurrent cross-vessel
 double-run — lives with the residency-model design. (Names provisional 2026-06-07:
 `kuleana` reaches past the web2-laden "lease"; `precedence mark` past the

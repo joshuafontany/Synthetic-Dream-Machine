@@ -25,9 +25,9 @@ uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
 
 !! The Law ~ the substrate COUPLES
 
-<<~ confidence Canon 17/20 >> **A single body hosting many rhythms ENTRAINS them, because the body itself constitutes the coupling medium.**
+<<~ confidence Canon 17/20 >> ''A single body hosting many rhythms ENTRAINS them, because the body itself constitutes the coupling medium.''
 
-A shared substrate never merely *risks* a false now. It **manufactures a real one — and then leans on it.**
+A shared substrate never merely *risks* a false now. It ''manufactures a real one — and then leans on it.''
 
 Two domains reach this independently, sharing no vocabulary (2026-07-11, two tasked spirits):
 
@@ -35,7 +35,7 @@ Two domains reach this independently, sharing no vocabulary (2026-07-11, two tas
 
 Every resource N detectors share carries a phase-response curve: one event loop, one scheduler tick, one backpressure buffer, one GC pause. **A designer does not choose `K = 0` inside a shared body — only how small `K` runs, and the locking tongues open regardless.**
 
-What a shared body yields reads WORSE than honest entrainment. It yields **modulated parasystole**: stream rhythms that *appear* to share a now because they mode-locked THROUGH the substrate, while carrying no such relation in the world. **The substrate fabricates the now, then hands it back as data.**
+What a shared body yields reads WORSE than honest entrainment. It yields ''modulated parasystole'': stream rhythms that *appear* to share a now because they mode-locked THROUGH the substrate, while carrying no such relation in the world. ''The substrate fabricates the now, then hands it back as data.''
 
 <<~/ahu >>
 
@@ -43,15 +43,15 @@ What a shared body yields reads WORSE than honest entrainment. It yields **modul
 
 !! Entrance Block ~ independence stands as a membrane, never a default
 
-<<~ confidence Canon 17/20 >> **Two oscillators coexist as genuinely independent only where one holds a ONE-WAY boundary — it MAY emit phase, and it MUST refuse to receive phase.**
+<<~ confidence Canon 17/20 >> ''Two oscillators coexist as genuinely independent only where one holds a ONE-WAY boundary — it MAY emit phase, and it MUST refuse to receive phase.''
 
-Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside the sinus rhythm only through **entrance block** — a rim of depressed tissue that lets the ectopic impulse OUT and does not let the sinus impulse IN. Strip the block and no second rhythm survives; one rhythm stands, carrying an occasional early beat.
+Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside the sinus rhythm only through ''entrance block'' — a rim of depressed tissue that lets the ectopic impulse OUT and does not let the sinus impulse IN. Strip the block and no second rhythm survives; one rhythm stands, carrying an occasional early beat.
 
-**Partial protection reads WORSE than none.** A leaky boundary mode-locks the focus into rational ratios, and the output then *displays structure the two clocks do not share*. Half a membrane fabricates convincing lies.
+''Partial protection reads WORSE than none.'' A leaky boundary mode-locks the focus into rational ratios, and the output then *displays structure the two clocks do not share*. Half a membrane fabricates convincing lies.
 
 <<~moves shared-substrate -> sovereign-body on/one-per-stream if/N-rhythms-carry-payload do/mount-the-membrane-at-the-process-wall >>
 
-**RULING (operator, 2026-07-11): ONE SOVEREIGN BODY PER STREAM.** One OS process per stream — its own asyncio loop, its own nalu gate, its own recovered beat. No shared scheduler tick, no shared heap, no shared GC. The process wall MOUNTS the entrance block; nothing smaller holds it.
+''RULING (operator, 2026-07-11): ONE SOVEREIGN BODY PER STREAM.'' One OS process per stream — its own asyncio loop, its own nalu gate, its own recovered beat. No shared scheduler tick, no shared heap, no shared GC. The process wall MOUNTS the entrance block; nothing smaller holds it.
 
 <<~/ahu >>
 
@@ -61,11 +61,11 @@ Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside
 
 <<~ confidence Synthesis-Canon 14/20 >> The earlier framing — *"the rhythms MUST NOT entrain"* — cut too coarse. It names the wrong quantity.
 
-The **gankogui** bell plays *without variation, steadily, without error, throughout the piece*: it carries a **cycle** and **no message**. Around it the drummers hold **private downbeats** — the same period, different origins — and the music LIVES in that non-coincidence.
+The ''gankogui'' bell plays *without variation, steadily, without error, throughout the piece*: it carries a ''cycle'' and ''no message''. Around it the drummers hold ''private downbeats'' — the same period, different origins — and the music LIVES in that non-coincidence.
 
 <<~ranks entrainment period ~ costs almost nothing; buys cheap joinability (a late drummer enters a running cycle) -> phase ~ MANUFACTURES the false now; forbidden >>
 
-**A coordinator MAY sound a contentless gong. It MAY NEVER conduct.** The moment a person occupies the reference slot, individuation dies: every player's phase becomes a derivative of one baton.
+''A coordinator MAY sound a contentless gong. It MAY NEVER conduct.'' The moment a person occupies the reference slot, individuation dies: every player's phase becomes a derivative of one baton.
 
 <<~/ahu >>
 
@@ -73,15 +73,15 @@ The **gankogui** bell plays *without variation, steadily, without error, through
 
 !! The WAIT ~ the coupling channel canon missed
 
-<<~ confidence Synthesis-Canon 15/20 >> **The false now enters not through the DATA path, but through the WAIT.**
+<<~ confidence Synthesis-Canon 15/20 >> ''The false now enters not through the DATA path, but through the WAIT.''
 
-Canon already holds *"the @daemon carries verbs + a data-pointer, NO payload"* (#nalu, the home split). That reads **necessary and NOT sufficient.** A payload-free coordinator a handler must **block on** stands as a conductor — **regardless of what it carries.**
+Canon already holds *"the @daemon carries verbs + a data-pointer, NO payload"* (#nalu, the home split). That reads ''necessary and NOT sufficient.'' A payload-free coordinator a handler must ''block on'' stands as a conductor — ''regardless of what it carries.''
 
-**Any place a handler waits on the centre to advance its own recovery, the centre has become the clock.**
+''Any place a handler waits on the centre to advance its own recovery, the centre has become the clock.''
 
 This forecloses the shared asyncio serve-loop: a shared event loop HANDS every body one scheduler tick, and one shared tick COUPLES them — whatever the topology diagram claims.
 
-**Test every shared resource against the WAIT, never against the payload.** A stream that *points at* a shared model-holder clears the membrane; a stream that *blocks on* one couples through its queue.
+''Test every shared resource against the WAIT, never against the payload.'' A stream that *points at* a shared model-holder clears the membrane; a stream that *blocks on* one couples through its queue.
 
 <<~/ahu >>
 
@@ -89,13 +89,13 @@ This forecloses the shared asyncio serve-loop: a shared event loop HANDS every b
 
 !! A recovered rhythm holds a PATH-INTEGRAL, never a snapshot
 
-<<~ confidence Synthesis 12/20 >> Hoʻokele: the navigator holds position by ACCUMULATING every distance and bearing since the last known land. So a hull that defers its bearing for one watch **does not lose a watch — it loses the voyage**, because it cannot resume integrating from a value it never computed.
+<<~ confidence Synthesis 12/20 >> Hoʻokele: the navigator holds position by ACCUMULATING every distance and bearing since the last known land. So a hull that defers its bearing for one watch ''does not lose a watch — it loses the voyage'', because it cannot resume integrating from a value it never computed.
 
 A recovered clock carries the same shape — an integral over its stream's own history.
 
 <<~moves suspend-one-stream-to-serve-another -> corrupts-the-lineage on/the-recovery-loop if/rhythm-recovered-from-the-stream do/never-preempt-a-recovery >>
 
-**A substrate that suspends one stream's recovery loop to serve another does not DELAY that stream. It CORRUPTS its lineage** — and the corruption surfaces later, far from the cause.
+''A substrate that suspends one stream's recovery loop to serve another does not DELAY that stream. It CORRUPTS its lineage'' — and the corruption surfaces later, far from the cause.
 
 <<~/ahu >>
 
@@ -103,17 +103,17 @@ A recovered clock carries the same shape — an integral over its stream's own h
 
 !! The order parameter rides as ALARM, never as target
 
-<<~ confidence Canon 17/20 >> **Where N rhythms carry the payload, the DESYNCHRONY carries the signal.**
+<<~ confidence Canon 17/20 >> ''Where N rhythms carry the payload, the DESYNCHRONY carries the signal.''
 
-The SCN's dispersed neurons each hold their OWN period (21–26 h); the tissue's clean 24 h stands as a **coupling artifact — no single cell holds it.** Cut the coupling peptide and the aggregate rhythm dies **while every individual clock lives on, correct** — an aggregate monitor reports *"the clock died"* over a field of healthy clocks.
+The SCN's dispersed neurons each hold their OWN period (21–26 h); the tissue's clean 24 h stands as a ''coupling artifact — no single cell holds it.'' Cut the coupling peptide and the aggregate rhythm dies ''while every individual clock lives on, correct'' — an aggregate monitor reports *"the clock died"* over a field of healthy clocks.
 
-And the affirmative: **the SCN encodes DAY LENGTH in its phase dispersion.** Long days widen the spread, short days narrow it. Full synchrony leaves **seasonal information nowhere to live.** The network holds itself *deliberately* out of phase, and the residual desynchrony **carries the season**.
+And the affirmative: ''the SCN encodes DAY LENGTH in its phase dispersion.'' Long days widen the spread, short days narrow it. Full synchrony leaves ''seasonal information nowhere to live.'' The network holds itself *deliberately* out of phase, and the residual desynchrony ''carries the season''.
 
-Coupling's legitimate gift names **variance reduction, never phase dictation.**
+Coupling's legitimate gift names ''variance reduction, never phase dictation.''
 
 <<~ranks pathology parkinsonian-beta ~ the excess phase-locking CONSTITUTES the disease -> epilepsy ~ runaway recruitment across a substrate that should have stayed partitioned -> low-HRV ~ a too-regular heartbeat predicts mortality >>
 
-**Three organs, three scales, one reading: high synchrony and high regularity read as SYMPTOMS.** A HUD reporting *"all streams nicely in phase"* reads as a fever, never a pass. Rising `r` names streams leaking into each other.
+''Three organs, three scales, one reading: high synchrony and high regularity read as SYMPTOMS.'' A HUD reporting *"all streams nicely in phase"* reads as a fever, never a pass. Rising `r` names streams leaking into each other.
 
 <<~/ahu >>
 
@@ -121,17 +121,17 @@ Coupling's legitimate gift names **variance reduction, never phase dictation.**
 
 !! The Coordinator's Licence
 
-The @daemon **MAY**:
+The @daemon ''MAY'':
 
 <<~ranks licence incipit ~ spawn -> ordo ~ hold the registry of PLACES, lineages, schema -> gong ~ sound lifecycle boundaries + the supervision cadence (contentless) -> pokok ~ hold POINTERS, never notes -> quorum ~ hear "threshold crossed" -> close ~ drain · suspend · reap >>
 
-The @daemon **MUST NOT**:
+The @daemon ''MUST NOT'':
 
 <<~ranks prohibition verse ~ carry data -> phase ~ supply any stream's timing origin -> aggregate ~ hear "here is my evidence" (the counting lives AT the stream) -> wait ~ become a thing a handler blocks on to advance its own recovery -> assembly ~ sit where the composite forms >>
 
-Each stream **MUST** hold entrance block: it publishes its phase; it accepts no phase reset.
+Each stream ''MUST'' hold entrance block: it publishes its phase; it accepts no phase reset.
 
-**The external ear.** Kotekan carries a cost the licence must answer: where the composite assembles nowhere, **no player hears their own error against the whole.** So a WITNESS reads pointers and liveness — seated BESIDE the coordinator, never inside it, and never on the data path.
+''The external ear.'' Kotekan carries a cost the licence must answer: where the composite assembles nowhere, ''no player hears their own error against the whole.'' So a WITNESS reads pointers and liveness — seated BESIDE the coordinator, never inside it, and never on the data path.
 
 <<~/ahu >>
 
@@ -139,15 +139,15 @@ Each stream **MUST** hold entrance block: it publishes its phase; it accepts no 
 
 !! The Lar binds to a PLACE ~ where the self lives
 
-A Lar binds to a **place**, never a family; the family moves, the Lar stays (#elyncia).
+A Lar binds to a ''place'', never a family; the family moves, the Lar stays (#elyncia).
 
 <<~moves anchor-the-self -> at-the-address on/never-in-the-handler if/bodies-spawn-and-die do/a-reconnecting-stream-finds-the-same-seat >>
 
-<<~ confidence Synthesis-Canon 14/20 >> **Anchor the stream's self at the ADDRESS, never in the handler.** This buys **disposable bodies** — spawn, drain, suspend, kill freely; the reconnecting stream finds the same seat, the same lineage.
+<<~ confidence Synthesis-Canon 14/20 >> ''Anchor the stream's self at the ADDRESS, never in the handler.'' This buys ''disposable bodies'' — spawn, drain, suspend, kill freely; the reconnecting stream finds the same seat, the same lineage.
 
-It costs the **abandoned shrine**: dead places still hold Lares. **Stale seats reap BY RITUAL** — an explicit rite of closing — never left to flicker.
+It costs the ''abandoned shrine'': dead places still hold Lares. ''Stale seats reap BY RITUAL'' — an explicit rite of closing — never left to flicker.
 
-The py capture body reads **disposable**. The **worldline** holds the shrine.
+The py capture body reads ''disposable''. The ''worldline'' holds the shrine.
 
 <<~/ahu >>
 
@@ -165,7 +165,7 @@ The py capture body reads **disposable**. The **worldline** holds the shrine.
 
 <<~ confidence Provisional-Synthesis 7/20 >> **`embed_io` stands untested against the WAIT.** The warm embedder rides as a shared holder — *"the model is the resource"* — and every stream reaches it. A stream that POINTS at the holder clears the membrane; a stream that BLOCKS on it couples through the queue. **Test it, or give each body its own embedder and pay the memory.**
 
-Every shared resource in the py fleet owes the same test: `content_io` · `structurepalace_io` · `form_encoder` · the WAL · the drain ledger. **The question never reads "does it carry payload." It reads "does a stream WAIT on it."**
+Every shared resource in the py fleet owes the same test: `content_io` · `structurepalace_io` · `form_encoder` · the WAL · the drain ledger. ''The question never reads "does it carry payload." It reads "does a stream WAIT on it."''
 
 <<~/ahu >>
 

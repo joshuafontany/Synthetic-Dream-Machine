@@ -32,47 +32,47 @@ sub-memes; this carries the keel + the meme map.
 
 !! The Load-Bearing Laws
 
-1. **Causal islands / no global now.** Each island (vessel · wiki · meme · node-edge)
+1. ''Causal islands / no global now.'' Each island (vessel · wiki · meme · node-edge)
    holds its own partially-ordered log; it knows only "as of my last sync." Local-first:
    read own state, never a global truth. ([[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island]])
-2. **Share substrate, not sovereignty.** Co-located vessels MAY share a substrate
+2. ''Share substrate, not sovereignty.'' Co-located vessels MAY share a substrate
    (machine · disk · relay · canon read) but MUST NOT share sovereignty (replica · heap ·
    storage scope · keys · log · "now"). Boundary = mutable state, not hardware.
-3. **Isomorphism by composition.** A vessel composes from sovereign pieces (a recipe),
+3. ''Isomorphism by composition.'' A vessel composes from sovereign pieces (a recipe),
    native-first resolution, seams derived by SUBTRACTION. Web2 ports/adapters/DI towers =
    un-pono. Proof = behavioral conformance, not type-conformance. ([[feedback_isomorphism_by_composition]])
-4. **Same structure, differing capabilities (Ink & Switch).** Node and browser differ
+4. ''Same structure, differing capabilities (Ink & Switch).'' Node and browser differ
    ONLY in capabilities, never in structure. The capability set GROWS — init/PersonaGroup/
    genesis/corpus/residency SHALL become browser-composable. Absent reads not-yet-held,
    never cannot-hold; no `isNode` fork, no permanently-absent slot. ([[open-vessel|lar:///ha.ka.ba/lararium/mesh/open-vessel]])
-5. **No VM on the main thread.** Every TW5 VM / reaction engine boots in a Worker
+5. ''No VM on the main thread.'' Every TW5 VM / reaction engine boots in a Worker
    (worker_threads · DedicatedWorker); the main thread only COORDINATES the pool over
    MessagePort. ([[project_no_vm_on_main_thread]])
-6. **Authority-first sync + verify-then-delegate.** Capability (Keyhive) syncs before
+6. ''Authority-first sync + verify-then-delegate.'' Capability (Keyhive) syncs before
    content; the relay-law exception holds (pull ≠ read — a relay forwards ciphertext it
    cannot read). The keyholder WORKER verifies BEFORE delegating; authority travels WITH
    the task (UCAN-invocation shape), never an ambient bearer token. ([[project_verification_placement]])
-7. **Two-register persona, two-lane vessel.** Userbase = presence (ley-line threshold) +
+7. ''Two-register persona, two-lane vessel.'' Userbase = presence (ley-line threshold) +
    office (held grants), no stored tiers. Every vessel runs one always-resident admin VM
    lane + zero-or-more wiki lanes; lanes coordinate via the command/receipt tiddler
    surface, never shared state. ([[operator-peer|lar:///ha.ka.ba/lararium/mesh/operator-peer]], [[project_two_register_persona_model]])
-8. **Island-owned residency.** Bags hold no tier manager; residency (wela/anu + orthogonal
+8. ''Island-owned residency.'' Bags hold no tier manager; residency (wela/anu + orthogonal
    pin) flows DOWN from islands by reachability — a bag reads wela if any wela island
    reaches it. ([[project_residency_tiers_unified]])
-9. **Plural authority, not one ladder.** access (pull<read<edit<admin, monotonic) × scale
+9. ''Plural authority, not one ladder.'' access (pull<read<edit<admin, monotonic) × scale
    (Keyhive nesting) × powers (host/relay/aggregate/address/moderate) + a non-monotonic
-   alignment plane. The live model seats these on the **two orthogonal axes** (law #12): the
+   alignment plane. The live model seats these on the ''two orthogonal axes'' (law #12): the
    access-ladder + Keyhive-nesting climb the WHO axis (read · membership), the carriage powers
    climb the INFRA axis — and the relay cap stands OUTSIDE the access-ladder, granting carriage
    of sealed bytes the read-ladder never reaches. ([[project_authority_model_refined]],
    <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#capability-layer >>)
-10. **Web3-only, Kowloon-external.** The stack runs web3 local-first + causal-islands; any
+10. ''Web3-only, Kowloon-external.'' The stack runs web3 local-first + causal-islands; any
     web2 bridge sits behind a causal-island boundary as an external web2.5 adapter. ([[feedback_web3_only_lares]])
-11. **Tiddler-format law + disk projection.** Documentation memes live in `bags/` as `.md`
+11. ''Tiddler-format law + disk projection.'' Documentation memes live in `bags/` as `.md`
     memetic-wikitext; `.tid` carry runtime TW5 code only. `@bag`=automerge doc; bags/=seed/
     canon, wikis/=projection; RENDER not copy. ([[feedback_bags_docs_over_tids]], [[project_disk_projection_model]])
-12. **DreamNet topology — two orthogonal axes, never one ladder.** The earlier single chain
-    (device-vessel → PersonaGroup → Cabal → Nexus → DreamNet) **retires** as fused-ladder residue —
+12. ''DreamNet topology — two orthogonal axes, never one ladder.'' The earlier single chain
+    (device-vessel → PersonaGroup → Cabal → Nexus → DreamNet) ''retires'' as fused-ladder residue —
     it crossed WHO (read) with FLOW (carriage) on one rope. The live model splits them: the **WHO
     axis** (read · pledge-gated) climbs vessel-key → PersonaGroup → CabalGroup (each WHO scale a **closure** over signed delegation edges, never a roster a single key owns — <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>), and the **INFRA axis**
     (carriage · contract-gated) climbs relay-floor → Lararium → Nexus → DreamNet — the two crossing at
@@ -103,7 +103,7 @@ sub-memes; this carries the keel + the meme map.
            └ @lares/cli       — LEAF tool: admin-connector (vessel-not-RPC) · render (dual surface) · commands
 ```
 
-**Boundary law:** mesh holds the VM-FREE substrate keel; tw5 holds the VM-in-Worker;
+''Boundary law:'' mesh holds the VM-FREE substrate keel; tw5 holds the VM-in-Worker;
 keyhive holds identity; node/browser/cli hold ONLY I/O adapters + held capabilities.
 mesh ← tw5 ← keyhive, one-way. No platform code in mesh or in a shared tw5 function.
 
@@ -116,15 +116,15 @@ mesh ← tw5 ← keyhive, one-way. No platform code in mesh or in a shared tw5 f
 We define "a vessel" as a composition (a recipe), not a platform fork. The seven sovereign pieces,
 each a protocol the vessel composes rather than re-implements:
 
-1. **Identity** — keyhive / did:key; keypair + self-certifying ContactCard (leaf: cached
+1. ''Identity'' — keyhive / did:key; keypair + self-certifying ContactCard (leaf: cached
    card + bare-Ed25519 signer, no keyhive — the engine boots only on the relay).
-2. **Replica** — Automerge Repo = own log + own storage scope.
-3. **Peering** — NetworkAdapter + inbound-access as a CAPABILITY piece (relay: V3 gate;
+2. ''Replica'' — Automerge Repo = own log + own storage scope.
+3. ''Peering'' — NetworkAdapter + inbound-access as a CAPABILITY piece (relay: V3 gate;
    browser: admit same-origin/in-process — a legitimate asymmetry, never an open default).
-4. **Recipe + residency** — CompositeStore bag-cascade + island-owned residency.
-5. **Sovereign islands** — TW5-in-Worker VM pool; syncPort per island.
-6. **Admin island** — authn/z home; keyhive-in-worker; verb dispatch + binding.
-7. **Verb plane** — verb-tiddler invocation → outcome (UCAN-invocation shape).
+4. ''Recipe + residency'' — CompositeStore bag-cascade + island-owned residency.
+5. ''Sovereign islands'' — TW5-in-Worker VM pool; syncPort per island.
+6. ''Admin island'' — authn/z home; keyhive-in-worker; verb dispatch + binding.
+7. ''Verb plane'' — verb-tiddler invocation → outcome (UCAN-invocation shape).
 
 Boot sequence (invariant on every substrate): `boot → repo-open → catalog-ready →
 island-ready → wiki-ready → vessel-ready → corpus-ready → tw5-booted → live`, gating on
@@ -138,16 +138,16 @@ substrate atoms + the capability pieces they hold. ([[open-vessel|lar:///ha.ka.b
 
 !! Capability vs Platform (the distinction that stops the fork-paralysis)
 
-* **Substrate atoms** resolve native-first INSIDE a piece (storage backend · worker kind ·
+* ''Substrate atoms'' resolve native-first INSIDE a piece (storage backend · worker kind ·
   crypto · transport · genesis source · catalog anchor). A browser cannot be NodeFS — this
   difference holds legitimately; it never branches the core.
-* **Capability pieces** ride as recipe pieces a vessel MAY hold (inbound peering · disk/OPFS
+* ''Capability pieces'' ride as recipe pieces a vessel MAY hold (inbound peering · disk/OPFS
   mirror · corpus · resident verbs · residency sweeper · founding/PersonaGroup/genesis). Wired
   on node today, structurally browser-composable; the seam stays OPEN on both substrates.
-* **Role** (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
+* ''Role'' (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
   growing set, never a platform identity. A node MAY run thin; a browser MAY grow heavy. The
-  full cap-stack model — role names the **expressed** cap-set (hold-vs-express), the five caps in
-  two families (CARRIAGE ⊥ VESSEL), and the **Herm** (Lares Viales) as the minimal composition
+  full cap-stack model — role names the ''expressed'' cap-set (hold-vs-express), the five caps in
+  two families (CARRIAGE ⊥ VESSEL), and the ''Herm'' (Lares Viales) as the minimal composition
   that still runs the whole @daemon + mesh-palace keel (NOT a stripped pipe) — stands at
   <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>.
 
@@ -180,20 +180,20 @@ and load-bearing:
 
 The model converges; these seams stay open and SHOULD reconcile (not re-debate):
 
-1. **Stub memes vs load-bearing code** — recipe / resolver / capability / lar-uris /
+1. ''Stub memes vs load-bearing code'' — recipe / resolver / capability / lar-uris /
    tiddler-store memes sit at mana 3 (TODO) while their code carries load. Fill them or fold
    into this model. (Dead-pointer stubs burned 2026-06-12 — the YIN shelf sweep.)
-2. **VM-pool vs island-owned residency** — operator-peer says "pool manages residency";
+2. ''VM-pool vs island-owned residency'' — operator-peer says "pool manages residency";
    residency-tiers says residency flows from islands. Island-owned wins (law #8); reconcile
    operator-peer's wording.
-3. **Relay/leaf symmetry** — open-vessel says equal-peer composition; operator-peer #actor-parity
+3. ''Relay/leaf symmetry'' — open-vessel says equal-peer composition; operator-peer #actor-parity
    says "light leaf, engine on relay." Both true: symmetric STRUCTURE, asymmetric currently-held
-   CAPABILITIES (law #4). The **hold-vs-express** model now carries this canon — one held
+   CAPABILITIES (law #4). The ''hold-vs-express'' model now carries this canon — one held
    cap-stack, a subset expressed per context (<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#hold-vs-express >>).
-4. **OpenIdentitySlot stub** — sharePolicy returns true (legit for same-origin browser peers; the
+4. ''OpenIdentitySlot stub'' — sharePolicy returns true (legit for same-origin browser peers; the
    real network gate = V3 on node). User-level identity slots (Bluesky/GitHub/keyhive) remain
    future; the meme reads one generation behind the live keyhive operator gates.
-5. **EPIC-VESSEL-COLLAPSE decisions** — the 9 BEHAVIOR rows decided convergent-open 2026-06-08
+5. ''EPIC-VESSEL-COLLAPSE decisions'' — the 9 BEHAVIOR rows decided convergent-open 2026-06-08
    ("one pono model, isomorphism, capabilities as meaningful distinctions"); enact onto open-vessel-core.
 
 <<~ confidence Synthesis-Canon 16/20 >> Three independent corpus scouts (bags · core-stack ·
@@ -211,11 +211,11 @@ CLOUD instances (claude.ai project context) + the Codex `model_instructions_file
 hold no local meme graph at boot. It MUST NOT depend on a pranala to THIS meme (a cloud
 node cannot fetch a `lar:` URI). So hydration routes by audience:
 
-* **Local fs agent** (Claude Code): reads THIS directly from `bags/` — the boot router
+* ''Local fs agent'' (Claude Code): reads THIS directly from `bags/` — the boot router
   (`@lares/AGENTS.md` → mu → lararium) carries the meme-graph edge to it.
-* **MCP-equipped instance** (Codex / cloud with the `lararium` MCP): pulls THIS via
+* ''MCP-equipped instance'' (Codex / cloud with the `lararium` MCP): pulls THIS via
   `read_lar_resource` on its `lar:` URI on demand — the bag space the MCP serves.
-* **Bare cloud** (no MCP, no fs): the operator pastes THIS alongside `noosphere-boot` as a
+* ''Bare cloud'' (no MCP, no fs): the operator pastes THIS alongside `noosphere-boot` as a
   companion curated artifact (it stands self-contained — the keel inline, depth via the
   pranala'd children a bare cloud node simply does not follow).
 
@@ -238,7 +238,7 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/living-grammar >>
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/noosphere-boot >>
 
-**Tie ~ the living grammar.** The house's grammar lives as a pattern-integrity ([[living-grammar|lar:///ha.ka.ba/lares/api/pono/living-grammar]]) —
+''Tie ~ the living grammar.'' The house's grammar lives as a pattern-integrity ([[living-grammar|lar:///ha.ka.ba/lares/api/pono/living-grammar]]) —
 seeded by the boot, enacted per turn, corrected by degree, decaying untended; the memory-palace that
 captures its FORM beside the verbatim CONTENT stands at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]].
 

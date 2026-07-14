@@ -23,17 +23,17 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widget-module"
 
 TW5 discovers widget modules via tiddlers with `module-type = "widget"`. The widget prototype chain must be wired after `boot()` once the real `Widget` base class exists at `$:/core/modules/widgets/widget.js`.
 
-**Two-phase protocol:**
+''Two-phase protocol:''
 
-**Phase 1 — preload:** `LARARIUM_WIDGETS_TIDDLER` is pushed into `instance.preloadTiddlers` before `boot()`. It carries an empty stub body (`"// Lararium widget bindings — registered via LarariumTW5._registerWidgets()"`). TW5 sees the `module-type = "widget"` marker and reserves the slot, but the stub exports nothing.
+''Phase 1 — preload:'' `LARARIUM_WIDGETS_TIDDLER` is pushed into `instance.preloadTiddlers` before `boot()`. It carries an empty stub body (`"// Lararium widget bindings — registered via LarariumTW5._registerWidgets()"`). TW5 sees the `module-type = "widget"` marker and reserves the slot, but the stub exports nothing.
 
-**Phase 2 — wire:** After `boot()`, `_bootModules()` calls `createLarariumWidgets(tw)` which returns constructor functions for each widget tag. `_registerWidgets()` then:
+''Phase 2 — wire:'' After `boot()`, `_bootModules()` calls `createLarariumWidgets(tw)` which returns constructor functions for each widget tag. `_registerWidgets()` then:
 1. Resolves `WidgetCtor` from the live TW5 module registry
 2. Calls `tw.modules.applyMethods("widget", {})` if `widgetClasses` is not yet initialised
 3. Sets `Object.setPrototypeOf(cls.prototype, WidgetCtor.prototype)` for each widget
 4. Registers each class in `WidgetCtor.prototype.widgetClasses[name]`
 
-**This code cannot be loaded from a meme.** Phase 2 requires access to the compiled TypeScript classes and the live `WidgetCtor` from the TW5 module registry. The corpus path (if it passes the boot gate) subsumes all of this via `tw5-modules` — a prebuilt bundle that includes MemeticParser + all widget classes. See `lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules`.
+''This code cannot be loaded from a meme.'' Phase 2 requires access to the compiled TypeScript classes and the live `WidgetCtor` from the TW5 module registry. The corpus path (if it passes the boot gate) subsumes all of this via `tw5-modules` — a prebuilt bundle that includes MemeticParser + all widget classes. See `lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules`.
 
 <<~/ahu >>
 

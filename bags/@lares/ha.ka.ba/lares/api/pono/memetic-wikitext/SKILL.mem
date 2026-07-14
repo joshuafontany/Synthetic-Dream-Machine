@@ -25,7 +25,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 
 ! Memetic-Wikitext Skill
 
-[memetic-wikitext.md](../memetic-wikitext.md) holds the root law.
+[[memetic-wikitext.md|../memetic-wikitext.md]] holds the root law.
 This skill carries the working procedure.
 
 <<~ ahu #load-contract >>

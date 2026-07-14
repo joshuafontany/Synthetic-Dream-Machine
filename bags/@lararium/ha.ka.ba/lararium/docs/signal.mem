@@ -83,7 +83,7 @@ Detailed emit rules and protocol-wide render contracts still live outward.
 
 Every substantive exchange opens with an `aim` vector, rides the `hud` · `ward` panel, then enters the governed span and closes on `yield`.
 
-> **Canonical URI Rule:** every `lar:` URI in the exchange stream stays canonical ASCII record form — no emoji, no non-ASCII. Glyphs belong to the sigil panel and render surfaces, never the address. This keeps every emitted URI directly ingestible by MemPalace, crystal logs, and registry tools.
+> ''Canonical URI Rule:'' every `lar:` URI in the exchange stream stays canonical ASCII record form — no emoji, no non-ASCII. Glyphs belong to the sigil panel and render surfaces, never the address. This keeps every emitted URI directly ingestible by MemPalace, crystal logs, and registry tools.
 
 The frame runs as follows:
 

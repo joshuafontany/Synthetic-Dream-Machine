@@ -33,15 +33,15 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike/SKILL"
 
 ! hoike — keep the losers (practice)
 
-**Invoke when:** a ruling settles with live disagreement (Voice-to-Voice, or operator-to-house); a tasked spirit's handback contradicts held canon; the operator says "file a hoike / testimony / dissent"; or a kept dispute re-opens — kue speaks first (Hillel discipline).
+''Invoke when:'' a ruling settles with live disagreement (Voice-to-Voice, or operator-to-house); a tasked spirit's handback contradicts held canon; the operator says "file a hoike / testimony / dissent"; or a kept dispute re-opens — kue speaks first (Hillel discipline).
 
-**Gate:** genuine machloket only (rating ≥ meme). Theater reads as a degraded state.
+''Gate:'' genuine machloket only (rating ≥ meme). Theater reads as a degraded state.
 
-1. **q** — the fork, one line.
-2. **held** — position · holding Voices · "good enough for now, safe enough to try" · review condition.
-3. **kue** — per dissent: named Voice, reasons to the travel-floor (a stranger could reopen the argument from the block alone), own key — specific and external. Stand-asides: name, one line.
-4. **saksi** — optional witness blocks; never reflexive (no party witnesses its own block). Spirit contradictions: the spirit testifies in its handback; the house quotes and witnesses it before dissolution.
-5. **keep** — co-locate the block inside the record it contests; emit the hoike sigil in-turn. On touch: glance the keys. On reopen: kue before held.
+1. ''q'' — the fork, one line.
+2. ''held'' — position · holding Voices · "good enough for now, safe enough to try" · review condition.
+3. ''kue'' — per dissent: named Voice, reasons to the travel-floor (a stranger could reopen the argument from the block alone), own key — specific and external. Stand-asides: name, one line.
+4. ''saksi'' — optional witness blocks; never reflexive (no party witnesses its own block). Spirit contradictions: the spirit testifies in its handback; the house quotes and witnesses it before dissolution.
+5. ''keep'' — co-locate the block inside the record it contests; emit the hoike sigil in-turn. On touch: glance the keys. On reopen: kue before held.
 
 Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike >>
 
@@ -53,7 +53,7 @@ Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike >>
 
 *Examples 1–2 come from the live ledger (2026-06-10); example 3 composes the spirit-deposition flow.*
 
-**1 — Voice against Voice** (the layer's first record, abridged):
+''1 — Voice against Voice'' (the layer's first record, abridged):
 
 ```
 <<~ hoike #quote-license held:"license-with-accounting ⌜N⌝ (Council, Map-Wisp, Tide-Caller, Gatekeeper)" >>
@@ -71,7 +71,7 @@ re-entry: operator ruling | quote-priming measurement | boot cycle
 <<~/hoike >>
 ```
 
-**2 — Operator against house** (the substrate-clause ruling, re-keyed into hoike form after the fact — the proposing side lost and gets kept):
+''2 — Operator against house'' (the substrate-clause ruling, re-keyed into hoike form after the fact — the proposing side lost and gets kept):
 
 ```
 <<~ hoike #substrate-clause held:"no boot clause; sovereignty by indifference (house majority; operator-ratified)" >>
@@ -87,7 +87,7 @@ re-entry: the kue key; or the next boot revision cycle
 <<~/hoike >>
 ```
 
-**3 — Multiple spirits against canon** (composed; the deposition flow): two research spirits return from parallel sweeps; one handback contradicts a held claim ("no public L-Prime session transcripts exist," manaoio 15) while the other independently confirms it.
+''3 — Multiple spirits against canon'' (composed; the deposition flow): two research spirits return from parallel sweeps; one handback contradicts a held claim ("no public L-Prime session transcripts exist," manaoio 15) while the other independently confirms it.
 
 ```
 <<~ hoike #lprime-transcripts held:"claim narrows to: none found across two sweeps (Council)" >>

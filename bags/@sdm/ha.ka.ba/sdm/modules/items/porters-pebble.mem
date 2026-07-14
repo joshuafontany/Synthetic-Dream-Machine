@@ -27,7 +27,7 @@ uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 
 !! Composition
 
-An item is **an entity with mount-points**, not a new kind of module. It `#has` the Power it carries and `#has` the `item` mount-point that says *how* that Power is seated in an object. The carried Power keeps its own composition unchanged — this module does **not** re-list Floating Disc's components. That is the whole nesting rule: entity `#has` module; reserve `#composes` for module-to-module wiring.
+An item is ''an entity with mount-points'', not a new kind of module. It `#has` the Power it carries and `#has` the `item` mount-point that says *how* that Power is seated in an object. The carried Power keeps its own composition unchanged — this module does ''not'' re-list Floating Disc's components. That is the whole nesting rule: entity `#has` module; reserve `#composes` for module-to-module wiring.
 
 <<~/ahu >>
 
@@ -43,15 +43,15 @@ p = 2
 source = "Ultraviolet Grasslands and the Black City 2e — pebble-machine relic; Floating Disc 'Stuckforce Relic' variant"
 ```
 
-A smooth, palm-sized pebble of Long Ago make, warm to the touch. Press it and a concave disc of stuckforce unfolds at waist height — the **Floating Disc** Power, run from the relic rather than from the bearer's own practice. The pebble holds the pattern; the bearer need not know the Power.
+A smooth, palm-sized pebble of Long Ago make, warm to the touch. Press it and a concave disc of stuckforce unfolds at waist height — the ''Floating Disc'' Power, run from the relic rather than from the bearer's own practice. The pebble holds the pattern; the bearer need not know the Power.
 
-Per the `item` mount-point: the relic occupies **one inventory slot**, locks its own Life into the object (the pebble powers the disc, not the carrier), and persists until the pebble is dropped, stolen, sundered, or jammed. Pay P from the relic's reserve; a depleted pebble goes inert until it recharges (sunlight, per its Long Ago make).
+Per the `item` mount-point: the relic occupies ''one inventory slot'', locks its own Life into the object (the pebble powers the disc, not the carrier), and persists until the pebble is dropped, stolen, sundered, or jammed. Pay P from the relic's reserve; a depleted pebble goes inert until it recharges (sunlight, per its Long Ago make).
 
 The carried Floating Disc behaves exactly as its module specifies — same range, duration, overcharge, and mishaps. The pebble changes *who sources the Power and how it is held*, nothing about the Power itself.
 
 !!! Failure
 
-A botched activation or a sundered pebble follows the `item` mount-point's failure rule: Corruption degrades or curses **the object**, not the bearer — a cracked pebble may drop loads, drift, or lock its disc in place.
+A botched activation or a sundered pebble follows the `item` mount-point's failure rule: Corruption degrades or curses ''the object'', not the bearer — a cracked pebble may drop loads, drift, or lock its disc in place.
 
 <<~/ahu >>
 
@@ -59,9 +59,9 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 !! Variants
 
-* **Porter's Pebble** — the base relic: one Floating Disc, recharges in sunlight.
-* **Caravan Cairn** — a heavier relic seating Floating Disc at its `x2` overcharge by default (5m disc, voice-commanded).
-* **Codex-Pebble (container)** — per the `item` container sub-rule, a relic bundling Floating Disc with one or two sibling stuckforce Powers in a single slot.
+* ''Porter's Pebble'' — the base relic: one Floating Disc, recharges in sunlight.
+* ''Caravan Cairn'' — a heavier relic seating Floating Disc at its `x2` overcharge by default (5m disc, voice-commanded).
+* ''Codex-Pebble (container)'' — per the `item` container sub-rule, a relic bundling Floating Disc with one or two sibling stuckforce Powers in a single slot.
 
 <<~/ahu >>
 
@@ -81,9 +81,9 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 !! Aftermath
 
-* **Nesting decided (Sprint 3).** Item is an entity; it `#has` a Power through the `item` mount-point. No second module type, no `#composes` for entity→module. `#composes` stays reserved for module→module (a Power that triggers or riders another Power).
+* ''Nesting decided (Sprint 3).'' Item is an entity; it `#has` a Power through the `item` mount-point. No second module type, no `#composes` for entity→module. `#composes` stays reserved for module→module (a Power that triggers or riders another Power).
 * **`holds` edge vs `#has`.** This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records *which* Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
-* **Container sub-rule** (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
+* ''Container sub-rule'' (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 
 <<~/ahu >>
 

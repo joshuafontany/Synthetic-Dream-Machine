@@ -27,10 +27,10 @@ written   = "2026-06-25"
 
 ! Async Flows ~ timing insight for human and agent
 
-**Long ops must never go silent.** Mining, writeback, multi-session sweeps, and
+''Long ops must never go silent.'' Mining, writeback, multi-session sweeps, and
 swarm-mines run seconds-to-minutes (a 9-spirit mine blew past 2 minutes blind).
-The whole field has converged on one shape — **submit → request-id → poll/wait** —
-and `lares` already owns all three pieces: a **daemon-job model** (submit→id→poll),
+The whole field has converged on one shape — ''submit → request-id → poll/wait'' —
+and `lares` already owns all three pieces: a ''daemon-job model'' (submit→id→poll),
 **durable results by request-id** (re-queryable after disconnect), and a **dual
 prose/JSON renderer**. The work is wiring, not invention (Beacon, cited).
 
@@ -43,7 +43,7 @@ prose/JSON renderer**. The work is wiring, not invention (Beacon, cited).
 
 !! The Contract ~ four verbs over the request-id
 
-Every long op returns its **request-id fast** (the durable idempotency key we
+Every long op returns its ''request-id fast'' (the durable idempotency key we
 already mint). On a TTY with no `--detach` it transparently attaches to `watch`;
 off-TTY / `--detach` it returns the id and exits.
 
@@ -65,8 +65,8 @@ Precedent: `gh run watch --exit-status`, `kubectl wait --for=condition --timeout
 
 <<~ranks job working ~ in progress -> input_required ~ awaiting the operator -> completed ~ ok, terminal -> failed ~ error, terminal -> cancelled ~ stopped, terminal >>
 
-**Terminal-once:** once a job reaches completed/failed/cancelled it never moves
-again. **Poll is authoritative** (not pushed notifications, which drop) — non-terminal
+''Terminal-once:'' once a job reaches completed/failed/cancelled it never moves
+again. ''Poll is authoritative'' (not pushed notifications, which drop) — non-terminal
 = keep working, terminal = stop + fetch the result. `status` emits a server-side
 **`pollInterval`** (ms) so an agent polls without overloading (the MCP async-task
 shape). The result is fetched after terminal, by id.
@@ -81,7 +81,7 @@ The load-bearing split (every source agrees): **stdout = the machine-readable
 result (the API contract); progress + diagnostics → stderr.** Switch on `isatty`.
 One progress event stream; the existing renderer splits it:
 
-* **TTY (human):** a redrawing bar / spinner / elapsed-heartbeat on **stderr**
+* ''TTY (human):'' a redrawing bar / spinner / elapsed-heartbeat on ''stderr''
   (`\r` rewrite, animation only when isatty) — stdout stays clean.
 * **off-TTY / `--json` (agent):** **NDJSON progress lines** (Terraform `apply_progress`
   + BuildKit `rawjson` shape), result alone on stdout:
@@ -101,11 +101,11 @@ One progress event stream; the existing renderer splits it:
 
 !! Progress & ETA
 
-* **Never silent:** show something in <100ms; never a blank wait (clig.dev).
-* **Determinate** (count/total → % · bar · ETA) when the total is known — the swarm
-  mine knows "9 spirits," a sweep knows its file count. **Indeterminate** (spinner /
+* ''Never silent:'' show something in <100ms; never a blank wait (clig.dev).
+* ''Determinate'' (count/total → % · bar · ETA) when the total is known — the swarm
+  mine knows "9 spirits," a sweep knows its file count. ''Indeterminate'' (spinner /
   elapsed-seconds heartbeat) when it isn't.
-* **ETA** by an **exponential moving average of per-item rate** (tqdm) — recent items
+* ''ETA'' by an ''exponential moving average of per-item rate'' (tqdm) — recent items
   weighted, so ETA tracks rate changes without jitter.
 
 <<~/ahu >>
@@ -114,17 +114,17 @@ One progress event stream; the existing renderer splits it:
 
 !! Timeouts · Cancellation · Resumability
 
-* **Heartbeat, not hard-fail.** The 2-minute silent overrun cure: the work lives in
+* ''Heartbeat, not hard-fail.'' The 2-minute silent overrun cure: the work lives in
   the daemon-job (unbounded, heartbeating); the foreground `wait --timeout` returns
-  a **structured "still running, here's progress"** (with the requestId + current
+  a ''structured "still running, here's progress"'' (with the requestId + current
   `{phase,done,total,eta}`), never killing the work.
-* **Exit codes:** **124 = timeout** (GNU `timeout` convention, so scripts/agents tell
+* ''Exit codes:'' ''124 = timeout'' (GNU `timeout` convention, so scripts/agents tell
   timeout from failure) + semantic codes (0 ok · 1 general · 2 usage · 3 not-found ·
   4 denied · 5 conflict).
-* **Cancellation:** Ctrl-C **detaches** (job runs on, re-attach by id); `cancel <id>`
-  **stops** (cancelled terminal state). On SIGINT: say so immediately, then time-boxed
+* ''Cancellation:'' Ctrl-C ''detaches'' (job runs on, re-attach by id); `cancel <id>`
+  ''stops'' (cancelled terminal state). On SIGINT: say so immediately, then time-boxed
   cleanup.
-* **No-loss by construction:** the **durable request-id IS the idempotency key**
+* ''No-loss by construction:'' the ''durable request-id IS the idempotency key''
   (Stripe/MCP shape) — a re-submit returns the stored result if completed, the
   in-progress handle if running; a timeout is re-queryable, never lost.
 
@@ -134,12 +134,12 @@ One progress event stream; the existing renderer splits it:
 
 !! Agent Ergonomics ~ never block the agent's context
 
-* **fire-and-get-id**, poll-by-id — an orchestrating agent submits, gets the id,
+* ''fire-and-get-id'', poll-by-id — an orchestrating agent submits, gets the id,
   and polls; it never holds a blocking call across its context.
-* `wait --timeout` returns **"PROCESSING: job <id> still running (original ask: …)"**
+* `wait --timeout` returns ''"PROCESSING: job <id> still running (original ask: …)"''
   — carrying the context so the agent needn't hold it.
 * **`--yes` / `--force`** (an agent cannot type `y`; a prompt-hang kills its workflow).
-* **Parseable error CODES, not prose** (`not-found`, not "Error occurred").
+* ''Parseable error CODES, not prose'' (`not-found`, not "Error occurred").
 
 <<~/ahu >>
 
@@ -151,13 +151,13 @@ The three pieces already exist:
 
 <<~ranks have daemon-jobs ~ mempalace `--daemon --background` → job-id → daemon jobs/wait/status (we call mine SYNCHRONOUSLY instead) -> durable-results ~ lares summons → @daemon/outcomes/<requestId> (CRDT, survives a CLI timeout, re-queryable) -> dual-render ~ render.ts prose/JSON (the progress-event split seam) >>
 
-**Implementation order** (write-toward; confirm interfaces first — see caveat):
-1. Make long ops **return the request-id fast** (+ `--detach`); default TTY attaches to `watch`.
+''Implementation order'' (write-toward; confirm interfaces first — see caveat):
+1. Make long ops ''return the request-id fast'' (+ `--detach`); default TTY attaches to `watch`.
 2. Add **`lares status|watch|wait|cancel <id>`** over the durable-result + daemon-job stores.
-3. Emit the **progress event stream** (job → NDJSON on stderr / bar on TTY; result on stdout); route mempalace `--daemon --background` for the heavy mines + surface its `daemon jobs/wait`.
-4. **Exit-124 timeout** + the semantic codes + `pollInterval` in `status`.
+3. Emit the ''progress event stream'' (job → NDJSON on stderr / bar on TTY; result on stdout); route mempalace `--daemon --background` for the heavy mines + surface its `daemon jobs/wait`.
+4. ''Exit-124 timeout'' + the semantic codes + `pollInterval` in `status`.
 
-**Caveat (Beacon, Cup):** the research did not read the repo — confirm whether the
+''Caveat (Beacon, Cup):'' the research did not read the repo — confirm whether the
 daemon-job/durable-result interfaces already emit *intermediate* progress (vs only
 terminal status) before binding the verbs. The event shape above is the target to
 write toward, not a description of current emission.

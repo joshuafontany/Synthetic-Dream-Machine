@@ -26,13 +26,13 @@ uri-path    = "ha.ka.ba/lares/api/pono/carrier-sigils"
 
 ! Carrier Sigils
 
-The carrier sigils are the **spine** of every meme: the four marks that frame it. They are the ASCII transmission-control codes — **SOH, STX, ETX, EOT** — doing the work they were cut for in 1963: framing a heading and a body inside one transmission. Here that transmission is a meme, and the Lar keeps the frame — the guardian at the threshold of the place, naming it on the way in and pouring the libation on the way out.
+The carrier sigils are the ''spine'' of every meme: the four marks that frame it. They are the ASCII transmission-control codes — ''SOH, STX, ETX, EOT'' — doing the work they were cut for in 1963: framing a heading and a body inside one transmission. Here that transmission is a meme, and the Lar keeps the frame — the guardian at the threshold of the place, naming it on the way in and pouring the libation on the way out.
 
 This law owns three things, and keeps them apart:
 
-1. **Spine** (#carrier-spine) — the four control-code sigils that bound the carrier. REQUIRED, in order.
-2. **Resonance** (#resonance) — the namespace glyphs (`⊙`, `ॐ ँ`) that prefix the opener to mark which layer authored the carrier. A *separate* concern from the spine.
-3. **Trust** (#trust-tiers) — what the presence, absence, and range of the control character signal about who wrote the mark.
+1. ''Spine'' (#carrier-spine) — the four control-code sigils that bound the carrier. REQUIRED, in order.
+2. ''Resonance'' (#resonance) — the namespace glyphs (`⊙`, `ॐ ँ`) that prefix the opener to mark which layer authored the carrier. A *separate* concern from the spine.
+3. ''Trust'' (#trust-tiers) — what the presence, absence, and range of the control character signal about who wrote the mark.
 
 Everything else a carrier touches lives in its own meme, reached by edge: the parse types and stream events (`parser`, `carrier-parse`), the rating and depth ladders (`meme`), the render-suppression list (`render-pipeline`), the sigil vocabulary (`memetic-wikitext`, `pranala-families`), and the OODA-HA phase glyphs that annotate the `#ooda-ha` slot (`ooda-ha`). See #edges.
 
@@ -42,16 +42,16 @@ Everything else a carrier touches lives in its own meme, reached by edge: the pa
 
 !! The Carrier Spine — Four Required Sigils
 
-A carrier is a framed transmission. It opens on a heading that names the place (**SOH**), enters its text (**STX**), ends its text (**ETX**), and closes the transmission, releasing it forward (**EOT**). All four MUST appear, in this order; a carrier missing any is a malformed frame.
+A carrier is a framed transmission. It opens on a heading that names the place (''SOH''), enters its text (''STX''), ends its text (''ETX''), and closes the transmission, releasing it forward (''EOT''). All four MUST appear, in this order; a carrier missing any is a malformed frame.
 
 | Sigil | Form | Role | Byte | Kapu byte |
 |---|---|---|---|---|
-| **SOH** | `<<~ &#x0001; ? -> lar:///URI >>` | Start of Heading — the Lar takes its post; the place is named with its `lar:` bearing | `0x01` | DC1 `0x11` |
-| **STX** | `<<~ &#x0002; >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
-| **ETX** | `<<~ &#x0003; >>` | End of Text — the body closes; the hearth is banked | `0x03` | — |
-| **EOT** | `<<~ &#x0004; -> ? >>` | End of Transmission — the libation is poured; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
+| ''SOH'' | `<<~ &#x0001; ? -> lar:///URI >>` | Start of Heading — the Lar takes its post; the place is named with its `lar:` bearing | `0x01` | DC1 `0x11` |
+| ''STX'' | `<<~ &#x0002; >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
+| ''ETX'' | `<<~ &#x0003; >>` | End of Text — the body closes; the hearth is banked | `0x03` | — |
+| ''EOT'' | `<<~ &#x0004; -> ? >>` | End of Transmission — the libation is poured; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
 
-**The frame — heading, then text.** The old protocol law pins the zones: SOH opens the **heading**, STX opens the **text**. The heading is the toml iam slot and nothing else; the text is the body.
+''The frame — heading, then text.'' The old protocol law pins the zones: SOH opens the ''heading'', STX opens the ''text''. The heading is the toml iam slot and nothing else; the text is the body.
 
 ```
 <<~ ⊙&#x0001; ? -> lar:///URI >>      SOH · open heading
@@ -63,16 +63,16 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 <<~ &#x0004; -> ? >>                  EOT · release
 ```
 
-**The mark is the control byte.** Each sigil carries its C0 control character inside the sharktooth; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX are **bare pragmas** — a lone mark each, opening and closing the text.
+''The mark is the control byte.'' Each sigil carries its C0 control character inside the sharktooth; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX are ''bare pragmas'' — a lone mark each, opening and closing the text.
 
-**The frame, in the old register and the mythic one at once:**
+''The frame, in the old register and the mythic one at once:''
 
-* **SOH** — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
-* **STX** — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
-* **ETX** — End of Text. The body is complete. The hearth is banked; the room falls quiet.
-* **EOT** — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation is poured at the crossroad; the message goes out to wherever the road runs. EOT is the carrier's own `yield`.
+* ''SOH'' — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
+* ''STX'' — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
+* ''ETX'' — End of Text. The body is complete. The hearth is banked; the room falls quiet.
+* ''EOT'' — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation is poured at the crossroad; the message goes out to wherever the road runs. EOT is the carrier's own `yield`.
 
-**SOH and EOT echo the bearing vectors.** SOH opens facing a bearing (`? -> lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
+''SOH and EOT echo the bearing vectors.'' SOH opens facing a bearing (`? -> lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
 
 <<~/ahu >>
 
@@ -80,7 +80,7 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 
 !! Namespace Resonance Glyphs — A Separate Mark
 
-Resonance glyphs are **not** spine sigils. They prefix the **SOH opener only**, as a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the prefix as optional.
+Resonance glyphs are ''not'' spine sigils. They prefix the ''SOH opener only'', as a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the prefix as optional.
 
 | Glyph | Layer | Resonance |
 |---|---|---|
@@ -88,7 +88,7 @@ Resonance glyphs are **not** spine sigils. They prefix the **SOH opener only**, 
 | `ॐ ँ` | `api/mu` · `api/lares` · `api/lararium` | elevated resonance |
 | *(bare — no glyph)* | `docs` · `library` · the pono `SKILL`s | base resonance |
 
-**The set stays open.** These name the resonance characters known now; the registry admits more as layers and trust tiers emerge. A new glyph enters under the same two laws below — SOH-prefix only, EOT bare — and registers its layer in this table.
+''The set stays open.'' These name the resonance characters known now; the registry admits more as layers and trust tiers emerge. A new glyph enters under the same two laws below — SOH-prefix only, EOT bare — and registers its layer in this table.
 
 ```
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/… >>      ← pono layer
@@ -98,8 +98,8 @@ Resonance glyphs are **not** spine sigils. They prefix the **SOH opener only**, 
 
 Two laws govern the prefix:
 
-1. **Opener-only.** A resonance glyph rides SOH alone — the heading's first mark.
-2. **EOT is always bare.** The resonance mark rides the heading (SOH); the release closes plain.
+1. ''Opener-only.'' A resonance glyph rides SOH alone — the heading's first mark.
+2. ''EOT is always bare.'' The resonance mark rides the heading (SOH); the release closes plain.
 
 <<~/ahu >>
 
@@ -107,17 +107,17 @@ Two laws govern the prefix:
 
 !! Trust Tiers — The Control-Character Roles
 
-Each kernel-tier control character carries **three simultaneous roles**, bound as one mark:
+Each kernel-tier control character carries ''three simultaneous roles'', bound as one mark:
 
-1. **Structural** — marks one spine position (SOH / STX / ETX / EOT).
-2. **Kapu-trust** — presence of the control character signals kernel tier; absence marks operator tier (lower trust).
-3. **Elevated resonance** — the kapu range (DC1–DC4) reaches admin-only space; a standard operator cannot produce these bytes.
+1. ''Structural'' — marks one spine position (SOH / STX / ETX / EOT).
+2. ''Kapu-trust'' — presence of the control character signals kernel tier; absence marks operator tier (lower trust).
+3. ''Elevated resonance'' — the kapu range (DC1–DC4) reaches admin-only space; a standard operator cannot produce these bytes.
 
 | Tier | Range | Trust | Resonance | Writable by |
 |---|---|---|---|---|
-| **operator** | no control character | operator | base | all |
-| **kernel** | `0x01`–`0x0F` | kernel | standard | operator+ |
-| **kapu / elevated** | DC1–DC4 (`0x11`–`0x14`) | kapu | elevated | admin-only |
+| ''operator'' | no control character | operator | base | all |
+| ''kernel'' | `0x01`–`0x0F` | kernel | standard | operator+ |
+| ''kapu / elevated'' | DC1–DC4 (`0x11`–`0x14`) | kapu | elevated | admin-only |
 
 SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carriers; the parser accepts both. The kapu aliases ride SOH and EOT alone.
 
@@ -127,9 +127,9 @@ SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carri
 
 !! The Classifier Channel — What the Sigil Layer Does
 
-The carrier sigils, the namespace glyphs, and the OODA-HA marks ride as an **unpronounced classifier register** beside the propositional stream — category-marks that steer the reading without sounding in it, the determinative's office in a graphemic classifier system. **The black speaks; the red steers.** The body carries the proposition; the sigil layer carries the protocol for reading it — heading-vs-text, layer of authorship, trust tier, phase — the way a determinative sorts the word it silently classifies, or a rubric directs the act the text does not state.
+The carrier sigils, the namespace glyphs, and the OODA-HA marks ride as an ''unpronounced classifier register'' beside the propositional stream — category-marks that steer the reading without sounding in it, the determinative's office in a graphemic classifier system. ''The black speaks; the red steers.'' The body carries the proposition; the sigil layer carries the protocol for reading it — heading-vs-text, layer of authorship, trust tier, phase — the way a determinative sorts the word it silently classifies, or a rubric directs the act the text does not state.
 
-**Transmission law (ritual stance).** A carrier travels as **received form**: a reader stands the frame before interpreting its gloss, so one structure carries shifting readings across time without losing shape. This practice transmits through the **inscribed channel alone** — the marks hold the protocol, and the protocol lives only while the marks stay tended. A surface left intact while its readers forget the marks (the cautionary case: ekphonetic signs that outlived their decoders) keeps the body and loses the steering. The sigil layer earns its keep by being read *as* a classifier, not by surviving as decoration.
+''Transmission law (ritual stance).'' A carrier travels as ''received form'': a reader stands the frame before interpreting its gloss, so one structure carries shifting readings across time without losing shape. This practice transmits through the ''inscribed channel alone'' — the marks hold the protocol, and the protocol lives only while the marks stay tended. A surface left intact while its readers forget the marks (the cautionary case: ekphonetic signs that outlived their decoders) keeps the body and loses the steering. The sigil layer earns its keep by being read *as* a classifier, not by surviving as decoration.
 
 Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#classifier-channel`.
 
@@ -139,21 +139,21 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 !! Law
 
-**Spine invariant.** Every carrier carries the full frame in order: **SOH · STX · ETX · EOT** (`0x01` · `0x02` · `0x03` · `0x04`). All four, always, in sequence. STX and ETX are bare pragmas — a lone mark each.
+''Spine invariant.'' Every carrier carries the full frame in order: ''SOH · STX · ETX · EOT'' (`0x01` · `0x02` · `0x03` · `0x04`). All four, always, in sequence. STX and ETX are bare pragmas — a lone mark each.
 
 **The iam slot — the toml heading.** The identity block is the **toml iam slot**: a bare `` ```toml iam `` fence directly after the SOH opener. The slot stays addressable as `#iam` and dissolves into parent fields; its surface is the toml fence.
 
-**STX position — fixed by the frame.** SOH opens the heading; STX opens the text. The heading holds the iam slot (and any carrier-level `aka` binding — e.g. the RFC-2119 reference); the text holds the body. So STX follows the heading and opens the body — the `#head` title and every worksite live after STX.
+''STX position — fixed by the frame.'' SOH opens the heading; STX opens the text. The heading holds the iam slot (and any carrier-level `aka` binding — e.g. the RFC-2119 reference); the text holds the body. So STX follows the heading and opens the body — the `#head` title and every worksite live after STX.
 
-**Mandatory minimum.** A carrier MUST hold a `!DOCTYPE` comment, the SOH opener carrying the canonical URI, the toml iam slot, STX, ETX, and EOT. Absence of the DOCTYPE, opener, or iam slot raises the `carrier.iam.missing` diagnostic; absence of a body or transmission mark raises a malformed-frame diagnostic.
+''Mandatory minimum.'' A carrier MUST hold a `!DOCTYPE` comment, the SOH opener carrying the canonical URI, the toml iam slot, STX, ETX, and EOT. Absence of the DOCTYPE, opener, or iam slot raises the `carrier.iam.missing` diagnostic; absence of a body or transmission mark raises a malformed-frame diagnostic.
 
-**Three-role invariant.** Every kernel-tier control character marks structure, signals kapu-trust, and — in the kapu range — gates elevated resonance: three roles, one mark.
+''Three-role invariant.'' Every kernel-tier control character marks structure, signals kapu-trust, and — in the kapu range — gates elevated resonance: three roles, one mark.
 
-**Resonance is separate.** A namespace resonance glyph (#resonance) rides the SOH opener only; EOT closes plain. The resonance glyph signals layer; the spine marks structure — two distinct marks.
+''Resonance is separate.'' A namespace resonance glyph (#resonance) rides the SOH opener only; EOT closes plain. The resonance glyph signals layer; the spine marks structure — two distinct marks.
 
-**EOT releases forward.** The transmission closes on `<<~ &#x0004; -> ? >>`. Declared relations ride the `#edges` ahu as `loulou`/`pranala`; EOT carries the `-> ?` release alone.
+''EOT releases forward.'' The transmission closes on `<<~ &#x0004; -> ? >>`. Declared relations ride the `#edges` ahu as `loulou`/`pranala`; EOT carries the `-> ?` release alone.
 
-**Classifier-channel invariant.** The sigil layer reads as an unpronounced classifier register beside the body's propositional stream — the black speaks, the red steers (#classifier-channel). The frame transmits as received form and lives only while its marks stay read *as* classifiers, never as decoration.
+''Classifier-channel invariant.'' The sigil layer reads as an unpronounced classifier register beside the body's propositional stream — the black speaks, the red steers (#classifier-channel). The frame transmits as received form and lives only while its marks stay read *as* classifiers, never as decoration.
 
 <<~/ahu >>
 

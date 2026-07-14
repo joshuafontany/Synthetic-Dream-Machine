@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 
 !! TW5 Boot Gate — Contract
 
-`LarariumTW5._bootModules()` runs after `instance.boot.boot()` resolves. It attempts to register TW5 parser and widget modules from the **live corpus** (tiddlers already in the wiki from `preloadTiddlers` + early `loadFromStore`). If no corpus meme passes the gate, it falls through to the **imperative fallback** (compiled-in TypeScript classes).
+`LarariumTW5._bootModules()` runs after `instance.boot.boot()` resolves. It attempts to register TW5 parser and widget modules from the ''live corpus'' (tiddlers already in the wiki from `preloadTiddlers` + early `loadFromStore`). If no corpus meme passes the gate, it falls through to the ''imperative fallback'' (compiled-in TypeScript classes).
 
 ```
 _bootModules()
@@ -42,7 +42,7 @@ _bootModules()
             createLarariumWidgets() → _registerWidgets()
 ```
 
-**Why two paths?** The corpus path is the target steady state: all logic lives as `lar:` memes, verified by hash and keyhive capability proof. The imperative fallback ensures the app boots and is functional offline, on cold start, and before a meme has passed all gate layers.
+''Why two paths?'' The corpus path is the target steady state: all logic lives as `lar:` memes, verified by hash and keyhive capability proof. The imperative fallback ensures the app boots and is functional offline, on cold start, and before a meme has passed all gate layers.
 
 <<~/ahu >>
 
@@ -69,7 +69,7 @@ Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encode
 
 `_bootModules()` requires a live `$tw` reference to call `wiki.filterTiddlers()`, `wiki.addTiddler()`, and `tw.modules.define()`. These are runtime calls against the TW5 instance created by `boot()`. The gate logic itself cannot be expressed in wikitext or loaded as a tiddler — it is the mechanism that decides which memes become executable.
 
-The **implementors interface** it queries IS a meme: `lar:///ha.ka.ba/lares/api/lararium/modules/tw5-module-interface`. Any meme that declares `implements = "lar:///ha.ka.ba/lares/api/lararium/modules/tw5-module-interface"` with content-type `application/javascript` and passing signal fields will be injected by the corpus path.
+The ''implementors interface'' it queries IS a meme: `lar:///ha.ka.ba/lares/api/lararium/modules/tw5-module-interface`. Any meme that declares `implements = "lar:///ha.ka.ba/lares/api/lararium/modules/tw5-module-interface"` with content-type `application/javascript` and passing signal fields will be injected by the corpus path.
 
 <<~/ahu >>
 

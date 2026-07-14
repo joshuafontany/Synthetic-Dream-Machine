@@ -31,9 +31,9 @@ deserializer(text: string, fields: Record<string, unknown>) → TiddlerFields[]
 ```
 
 Stream model:
-* **Multi-carrier**: MemeStreamParser emits one `carrier-close` per meme; each becomes `[parent, ...children]`.
-* **Partial carrier** (no ETX): `flush()` emits best-effort; no crash.
-* **Bare body** (no SOH framing): treated as a single carrier with `fields.title` as URI.
+* ''Multi-carrier'': MemeStreamParser emits one `carrier-close` per meme; each becomes `[parent, ...children]`.
+* ''Partial carrier'' (no ETX): `flush()` emits best-effort; no crash.
+* ''Bare body'' (no SOH framing): treated as a single carrier with `fields.title` as URI.
 
 Parent tiddler: `text = original carrier text`, `type = "text/x-memetic-wikitext"`.
 Child tiddlers (ahu slots): `text = ahu body text`, also `type = "text/x-memetic-wikitext"`.

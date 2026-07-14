@@ -26,13 +26,13 @@ uri-path    = "ha.ka.ba/lararium/mesh/kumu-device"
 ! Kumu Device Spec
 
 Type-level device contract for kumu devices. Derives from pranala edges.
-**Spec layer only — no runtime dispatch overhead.** Runtime derives bindings from the same
+''Spec layer only — no runtime dispatch overhead.'' Runtime derives bindings from the same
 pranala tiddler edges via `extractReactionBindings`.
 
-**No separate registration step.** Adding a kumu type means authoring a type meme with
+''No separate registration step.'' Adding a kumu type means authoring a type meme with
 `reaction:listenable` and `reaction:subscribable` edges. The spec derives at parse time.
 
-**Verse alignment:** A kumu device meme is a Lararium `creative_device` equivalent.
+''Verse alignment:'' A kumu device meme is a Lararium `creative_device` equivalent.
 `@editable` properties = ahu slot URIs. OUTPUT pins = `KumuListenable`. INPUT pins = `KumuSubscribable`.
 
 <<~/ahu >>
@@ -124,9 +124,9 @@ extendsType?     — single parent class URI (control:extends edge; Verse single
 componentTypes   — worn component URIs (control:has edges; Verse class(...) composition, no privileged is-a parent)
 ```
 
-**Three semantic layers — do not conflate:**
+''Three semantic layers — do not conflate:''
 
-1. **Ahu-slot tree** (document structure) — `fragment-parent` + `slot` tiddler fields. One `.md` decomposes into root + N slot fragment tiddlers. NOT a pranala edge.
+1. ''Ahu-slot tree'' (document structure) — `fragment-parent` + `slot` tiddler fields. One `.md` decomposes into root + N slot fragment tiddlers. NOT a pranala edge.
 
 2. **`control:extends`** (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
 

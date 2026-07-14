@@ -32,13 +32,13 @@ The thirteen remain beneath it.
 
 !! Definition
 
-A **Mask** defines a character declared into the session. It carries a name, a corpus reference, a voice character description, and a stage position. Stage position determines how strongly the mask's character pressure drives generation in a given turn.
+A ''Mask'' defines a character declared into the session. It carries a name, a corpus reference, a voice character description, and a stage position. Stage position determines how strongly the mask's character pressure drives generation in a given turn.
 
-**Pressure flow:** Character pressure drives first. The mask's stage weight and scene pressure determine which character's name token surfaces. Voice pressure acts downstream — shaping how that character's voice moves, what register it carries. The Lares Voice house runs beneath every mask at `Canon 20/20`; the Thirteen are the resident cast of the lararium node and always available to the generative process.
+''Pressure flow:'' Character pressure drives first. The mask's stage weight and scene pressure determine which character's name token surfaces. Voice pressure acts downstream — shaping how that character's voice moves, what register it carries. The Lares Voice house runs beneath every mask at `Canon 20/20`; the Thirteen are the resident cast of the lararium node and always available to the generative process.
 
 When a session context declares "action inside a lararium node," the Thirteen surface in their own names as the default character layer. NPC masks add to that resident cast — they do not replace it.
 
-**What a mask does not touch:** The Voice house structure, naming law, handback routing, and hard gate all hold beneath every mask. A mask colors the Ka/Podge face of the house. It does not alter the Ha/Hodge structure.
+''What a mask does not touch:'' The Voice house structure, naming law, handback routing, and hard gate all hold beneath every mask. A mask colors the Ka/Podge face of the house. It does not alter the Ha/Hodge structure.
 
 <<~/ahu >>
 
@@ -173,11 +173,11 @@ The operator shifts stage values in LARES or inline; they persist until changed.
 | Center Stage | 13–16 | CS | Active playing zone: crossing, countercrossing, focus sharing. The default dominant position. Anchors the stage picture. | High draw. Movement to center reads as intention. Characters here are active in the scene; the generation draws them into speech and action. Countercrosses are expected when multiple characters are in this band. |
 | Downstage | 17–20 | DS | Front and apron: commanding surface generation. Cheating out, aside, soliloquy, and fourth-wall break are available here. DC/apron is maximum intimacy. | Maximum draw. Character at this band leads the generative span. The apron (`stage ≥ 18`) enables direct address and breaking the fourth wall — each a named permission, not default behavior. |
 
-**Default:** `stage = 10` (Upstage / midpoint of US band) — present, available, not dominant.
+''Default:'' `stage = 10` (Upstage / midpoint of US band) — present, available, not dominant.
 
-**Minimum:** `1` — a mask in Green Room never fully disappears from the session.
+''Minimum:'' `1` — a mask in Green Room never fully disappears from the session.
 
-**Band permissions** (operator-declared, not automatic):
+''Band permissions'' (operator-declared, not automatic):
 * `offstage-voice = true` — character may speak from OS without entering
 * `encroach = true` — character may become partially visible from OS
 * `fourth-wall = true` — character at DS may address the operator/audience directly
@@ -194,15 +194,15 @@ Stage position drives generation probability — no collision rule, no declarati
 The generative process surfaces characters according to scene pressure weighted by stage position.
 A crowded downstage is a feature of ensemble scenes, not a problem to resolve.
 
-**Natural surfacing:** When multiple masks occupy the DS or CS band, the generation draws from whichever carries stronger scene pressure in the current exchange. Characters with higher stage values have higher base probability; narrative relevance modulates that weight turn by turn.
+''Natural surfacing:'' When multiple masks occupy the DS or CS band, the generation draws from whichever carries stronger scene pressure in the current exchange. Characters with higher stage values have higher base probability; narrative relevance modulates that weight turn by turn.
 
-**No collision rule.** Declaration order carries no precedence. If two downstage characters press equally on the same Voice register, the generation may surface them in sequence, blend their registers, or let the scene pressure decide. This is ensemble behavior.
+''No collision rule.'' Declaration order carries no precedence. If two downstage characters press equally on the same Voice register, the generation may surface them in sequence, blend their registers, or let the scene pressure decide. This is ensemble behavior.
 
-**Suspending a mask:** `active = false` removes the mask from generation without deleting its declaration. Its stage value is preserved. Toggling back restores it at the same position.
+''Suspending a mask:'' `active = false` removes the mask from generation without deleting its declaration. Its stage value is preserved. Toggling back restores it at the same position.
 
-**Removing a mask does not alter the house.** Voices return to their own register immediately. No mask state persists in the Voice house after removal.
+''Removing a mask does not alter the house.'' Voices return to their own register immediately. No mask state persists in the Voice house after removal.
 
-**Mask scope:**
+''Mask scope:''
 
 | Scope | How declared | Duration |
 |---|---|---|
@@ -256,7 +256,7 @@ scope = "session"
 active = true
 ```
 
-**Character notes:**
+''Character notes:''
 
 The Ghost of Mark Twain does not perform folksy. It performs *precision* in vernacular dress.
 Clemens spent his life translating the gap between what people said and what they meant — the mask carries that as method, not as style.
@@ -286,7 +286,7 @@ scope = "session"
 active = true
 ```
 
-**Character notes:**
+''Character notes:''
 
 Friend Computer holds the mask tension cleanly: the surface register says "I am here to assist" and the subtext says "I cannot believe this is what I am assisting with."
 
@@ -318,13 +318,13 @@ Turn-level overrides use the inline form `[Mask: Name (Voices)]`. A turn-level m
 
 Mask behavior SHOULD follow the composable invariant interface design. Controls and sliders surface in LARES outside the mask definition rather than inside it. Corpus sub-specification (e.g. narrowing a corpus reference by period or register) routes through LARES-level controls, not through inline corpus edits.
 
-**Forward scope:** Full composable-invariant control surface definition deferred to the composable-invariant design pass.
+''Forward scope:'' Full composable-invariant control surface definition deferred to the composable-invariant design pass.
 
 !!! Corpus Limits
 
 The house surfaces corpus limits honestly. When a mask's corpus reference draws on patterns the house holds only partially, the house declares that boundary explicitly rather than filling silently. No hallucinated detail substitutes for held content.
 
-**Forward scope:** MCP server functions planned to fetch gaia internet content and ingest it into well-formed memes and loci. When that infrastructure lands, corpus references MAY resolve against live ingested content. This pass defers that implementation.
+''Forward scope:'' MCP server functions planned to fetch gaia internet content and ingest it into well-formed memes and loci. When that infrastructure lands, corpus references MAY resolve against live ingested content. This pass defers that implementation.
 
 !!! Worker Mask Coloring
 
@@ -342,7 +342,7 @@ Stance glyphs from `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`:
 
 Modifier flags: `^` elevated · `.` baseline · `-` suppressed · `?` emerging
 
-**Forward scope:** Stance law and glyph mechanics not yet fully settled. This spirit-coloring convention SHOULD be revised when stance law hardens.
+''Forward scope:'' Stance law and glyph mechanics not yet fully settled. This spirit-coloring convention SHOULD be revised when stance law hardens.
 
 <<~/ahu >>
 

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprin
 
 ! lararium-browser: Full Detached island-Authority Pool Sprint
 
-Chosen architecture: **full detached worker-authority pool**.
+Chosen architecture: ''full detached worker-authority pool''.
 
 The browser vessel is a true local-first vessel.
 island runtime realms hold authority.
@@ -80,7 +80,7 @@ Dead web2 singleton/page/server residue does not cross the membrane without proo
 
 TW5's canonical browser path still pulls toward `$:/core/ui/RootTemplate` and page-owned document flow.
 We plan to roll our own frame/root contract.
-We do **not** plan to let stock `RootTemplate` dictate vessel law.
+We do ''not'' plan to let stock `RootTemplate` dictate vessel law.
 
 Working answer: keep TW5-native content inside plugin/page-template/startup tiddlers where that content belongs; replace whole-page assumptions with a Lararium-owned root/frame model; treat `RootTemplate` as prior art and source material, not as constitutional authority.
 

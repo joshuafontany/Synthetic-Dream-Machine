@@ -57,7 +57,7 @@ Tool render mode controls how ASCII tool-carry symbols project to glyphs on HUD 
 
 !! Required Handoff — Masks
 
-**Masks** allow persistent session-level overlays on Lares Voices.
+''Masks'' allow persistent session-level overlays on Lares Voices.
 A mask colors the Ka/Podge face of the Voice house without touching the Ha/Hodge structure.
 Grammar defined in `lar:///ha.ka.ba/lares/docs/lares/voices/masks`.
 

@@ -25,9 +25,9 @@ uri-path  = "ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip"
 !! Neural Whip
 *The Biomancer's Reach*
 
-**P:** 3 · **R:** 10m · **T:** one creature · **D:** instant (hold sustained)
+''P:'' 3 · ''R:'' 10m · ''T:'' one creature · ''D:'' instant (hold sustained)
 
-A neural tentacle of stuckforce lashes out and strikes **against Defense** — no save. On a hit: a lash of force, and the target is **seized** at reach, dragged 1m closer each round. Held creatures act at disadvantage and cannot move off. Break free on a contested Strength test vs P, or sever the tentacle.
+A neural tentacle of stuckforce lashes out and strikes ''against Defense'' — no save. On a hit: a lash of force, and the target is ''seized'' at reach, dragged 1m closer each round. Held creatures act at disadvantage and cannot move off. Break free on a contested Strength test vs P, or sever the tentacle.
 
 <<~/ahu >>
 
@@ -35,8 +35,8 @@ A neural tentacle of stuckforce lashes out and strikes **against Defense** — n
 
 !! Overcharge
 
-* **x2 (P:6)** — two tentacles; two targets or one crushing double-grip.
-* **x4 (P:12)** — lift and constrict; the held creature is hauled off the ground, helpless.
+* ''x2 (P:6)'' — two tentacles; two targets or one crushing double-grip.
+* ''x4 (P:12)'' — lift and constrict; the held creature is hauled off the ground, helpless.
 
 <<~/ahu >>
 

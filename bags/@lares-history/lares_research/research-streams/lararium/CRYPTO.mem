@@ -183,7 +183,7 @@ Do not use Lararium code to implement:
 * `node:crypto.createHash()` in `lararium-mesh` or `lararium-web`
 
 The `packages/lararium-web/src/crypto-shim.ts` djb2 implementation is
-**deprecated** and must be replaced with `webDigest()` calls once
+''deprecated'' and must be replaced with `webDigest()` calls once
 `compileBootReceipt()` is made async. See Milestone 4.
 
 <<~/ahu >>

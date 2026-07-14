@@ -21,13 +21,13 @@ uri-path  = "ha.ka.ba/lararium/docs/peer-discovery"
 
 !! The Core Constraint
 
-Automerge-repo 2.x has **no native peer advertisement or document gossip protocol**.
+Automerge-repo 2.x has ''no native peer advertisement or document gossip protocol''.
 All doc URLs are random UUIDs — not content-addressed, not deterministic.
 `repo.find(url)` is the only entry point; the URL must arrive via a side-channel.
 
 Once two peers share a relay and one holds a doc URL, the sync protocol's
 Bloom-filter set reconciliation propagates that doc automatically. The hard
-problem is the very first URL exchange — **cold bootstrap**.
+problem is the very first URL exchange — ''cold bootstrap''.
 
 !! Six-Tier Discovery Ladder
 
@@ -58,7 +58,7 @@ Browser cold-start:
   4. Cache URL in localStorage for subsequent loads without meta tag.
 ```
 
-**Implementation**: meta tag injection is done. Complement with:
+''Implementation'': meta tag injection is done. Complement with:
 * `GET /api/catalog` HTTP endpoint on node server (for non-HTML clients)
 * `localStorage["lararium:catalog-url:<hostId>"]` cache (already implemented)
 
@@ -72,13 +72,13 @@ https://elyncia.app/#wiki=automerge:xyz789@garden
 ```
 
 On load, read `location.hash`, call `repo.find(catalogUrl)`. This is the
-**Jazz.tools pattern**: `/invite/<encrypted-id>/<secret>`. The fragment is
+''Jazz.tools pattern'': `/invite/<encrypted-id>/<secret>`. The fragment is
 never sent to the server (hash privacy) but is copyable as a link.
 
 Single-use variant: the node server issues a short-lived token that resolves to
 the catalog URL, consumed once, deleted after use. Prevents replay.
 
-**Magic Wormhole** short-code variant for in-person handshake:
+''Magic Wormhole'' short-code variant for in-person handshake:
 1. Node server generates `nameplate:word-word` code.
 2. Peers exchange code verbally or via QR.
 3. Both sides run SPAKE2 PAKE; encrypted channel carries the catalog URL.
@@ -102,7 +102,7 @@ new BroadcastChannelNetworkAdapter({
 //   → offline tabs bootstrap without hitting the server
 ```
 
-**Namespace convention**: channel name = app name (e.g. `"lararium"`), not the
+''Namespace convention'': channel name = app name (e.g. `"lararium"`), not the
 random doc ID. All Lararium tabs join the same BC channel; doc-level sync is
 handled by Automerge's own sync protocol on top.
 
@@ -135,7 +135,7 @@ Any peer that resolves `did:web:elyncia.social` gets the WS URL and catalog URL
 without out-of-band communication. This is how Lararium becomes self-announcing
 via the owner's DID.
 
-**AT Protocol variant (Groundmist pattern)**: post a custom Lexicon record to
+''AT Protocol variant (Groundmist pattern)'': post a custom Lexicon record to
 the user's PDS:
 
 ```
@@ -169,22 +169,22 @@ Works for local dev and studio/home setups with no internet.
 
 !! Tier 5 — Social Graph Record
 
-**Nostr** — NIP-51 kind:30001 list, `r` tags containing Lararium wiki URLs:
+''Nostr'' — NIP-51 kind:30001 list, `r` tags containing Lararium wiki URLs:
 
 ```
 r: "lararium:automerge:abc123@wss://elyncia.app/ws"
 ```
 
 Any Nostr follower fetches the list, bootstraps the wiki. Discovery =
-side-effect of follow. **nostr-crdt** (YousefED) already does Yjs over
+side-effect of follow. ''nostr-crdt'' (YousefED) already does Yjs over
 kind:9001 anchor events — same pattern, different CRDT.
 
-**AT Protocol** — custom Lexicon record in PDS (Groundmist-style). No shipped
+''AT Protocol'' — custom Lexicon record in PDS (Groundmist-style). No shipped
 group primitive yet; land after AT Protocol "shared data" ships (2025 H2).
 
 !! UCAN / Keyhive Bootstrap
 
-**UCAN invitation flow** (alpha placeholder, pre-Keyhive):
+''UCAN invitation flow'' (alpha placeholder, pre-Keyhive):
 
 1. Wiki creator issues a UCAN: `iss=did:web:elyncia.social`, `aud=<new-peer-did>`,
    `att=[{ with: "automerge:<catalogUrl>", can: "automerge/sync" }]`.
@@ -192,10 +192,10 @@ group primitive yet; land after AT Protocol "shared data" ships (2025 H2).
 3. Recipient presents UCAN to node server's `sharePolicy`; server verifies chain.
 4. `sharePolicy` returns `true` → doc syncs.
 
-**AWAKE** (ucan-wg/awake) extends this with an X25519 ECDH handshake gating
+''AWAKE'' (ucan-wg/awake) extends this with an X25519 ECDH handshake gating
 the first sync message — removes the need for TLS as the transport trust layer.
 
-**Keyhive flow** (future, when `keyhive_wasm` ships):
+''Keyhive flow'' (future, when `keyhive_wasm` ships):
 
 1. Wiki creator calls `doc.addMember(newPeerEd25519PublicKey)` → signed op in
    doc's Keyhive ACL log.
@@ -227,11 +227,11 @@ the first sync message — removes the need for TLS as the transport trust layer
 
 !! What NOT to Build
 
-* **Automerge DHT / content-addressed URLs**: not supported; random UUIDs are
+* ''Automerge DHT / content-addressed URLs'': not supported; random UUIDs are
   the protocol. Do not try to derive deterministic doc IDs from content hashes.
-* **Server-as-authority**: the node server does not hold content truth, only relays.
+* ''Server-as-authority'': the node server does not hold content truth, only relays.
   Discovery tiers give peers URLs; authority flows from CRDT merge, not server.
-* **mDNS in the browser**: not available (no UDP multicast in browsers). LAN
+* ''mDNS in the browser'': not available (no UDP multicast in browsers). LAN
   discovery for browser peers routes through the node server's mDNS discovery.
 
 <<~ &#x0003; >>

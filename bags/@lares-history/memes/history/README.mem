@@ -34,11 +34,11 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 | Record | Source (deleted) | What it preserves |
 |---|---|---|
-| [genesis-sharktooth-chatlog](genesis-sharktooth-chatlog.md) | `lares_research/memetic-wikitext/sigil-research.md` | April 12 2026 Gemini chatlog; origin of shark-teeth, Shape/Detail/Motion, document-time/render-time; Mu origin moment; Wild Magic grammar first taxonomy |
-| [prior-art-comparison](prior-art-comparison.md) | `sigil-research.md` + `w3c-spec-research-v01.md` | 8-system comparison (TW5/MediaWiki/XInclude/DITA/AsciiDoc/Jekyll/Hugo/XSLT); per-system design pressure; 7 open design tests for v5 spec |
-| [mu-emergence-sequence](mu-emergence-sequence.md) | `lares_research/memetic-wikitext/mu-meme.md` | Boot grammar emergence narrative; four-layer model (Frame/SOH/STX/ETX origin); UCAN attenuation first appearance; null-oracle three-negative-constraints |
+| [[genesis-sharktooth-chatlog|genesis-sharktooth-chatlog.md]] | `lares_research/memetic-wikitext/sigil-research.md` | April 12 2026 Gemini chatlog; origin of shark-teeth, Shape/Detail/Motion, document-time/render-time; Mu origin moment; Wild Magic grammar first taxonomy |
+| [[prior-art-comparison|prior-art-comparison.md]] | `sigil-research.md` + `w3c-spec-research-v01.md` | 8-system comparison (TW5/MediaWiki/XInclude/DITA/AsciiDoc/Jekyll/Hugo/XSLT); per-system design pressure; 7 open design tests for v5 spec |
+| [[mu-emergence-sequence|mu-emergence-sequence.md]] | `lares_research/memetic-wikitext/mu-meme.md` | Boot grammar emergence narrative; four-layer model (Frame/SOH/STX/ETX origin); UCAN attenuation first appearance; null-oracle three-negative-constraints |
 
-**Not recoverable:** `memetic-wikitext-v3.md`, `memetic-wikitext.md`, `memetic-wikitext-full.md`, `AGENTS.md` — deleted without read in the 2026-05-16 consume pass. Version history of the v3 and pre-v4 spec drafts cannot be reconstructed from this session.
+''Not recoverable:'' `memetic-wikitext-v3.md`, `memetic-wikitext.md`, `memetic-wikitext-full.md`, `AGENTS.md` — deleted without read in the 2026-05-16 consume pass. Version history of the v3 and pre-v4 spec drafts cannot be reconstructed from this session.
 
 <<~/ahu >>
 
@@ -46,13 +46,13 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 !! Pono-Alignment Note (2026-06-20)
 
-The history curation aligned the **lossless instrument field** to current pono and **deliberately preserves** the period-forms below as testimony — the HUD reads as it read when the carrier was authored. Each carrier's HUD modernizes when it **lifts into canon** (as the Lindwyrm arc did), not before; the genesis-arc index carries the same constraint (*don't read current pono back onto the early forms*).
+The history curation aligned the ''lossless instrument field'' to current pono and ''deliberately preserves'' the period-forms below as testimony — the HUD reads as it read when the carrier was authored. Each carrier's HUD modernizes when it ''lifts into canon'' (as the Lindwyrm arc did), not before; the genesis-arc index carries the same constraint (*don't read current pono back onto the early forms*).
 
 Aligned corpus-wide:
 
 * `iam` `register` CODE → band-word (`CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis · `S` → Synthesis · `P` → Provisional · `C` → Canon)
 
-Preserved as period-form — **not** updated; carries the early HUD as testimony:
+Preserved as period-form — ''not'' updated; carries the early HUD as testimony:
 
 ```text
 ~:confidence[CODE],[N]   old inline confidence   → now  <<~ confidence <Register> N/20 >>

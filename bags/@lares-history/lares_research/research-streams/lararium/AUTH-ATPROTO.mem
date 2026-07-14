@@ -76,7 +76,7 @@ Rationale:
 
 Browser-only / public-client login using `@atproto/oauth-client-browser`.
 
-**Label this explicitly as public-client risk posture.**
+''Label this explicitly as public-client risk posture.''
 
 Rules when using browser-only flow:
 * Do not store long-lived secrets or refresh tokens in `localStorage` or `sessionStorage`
@@ -167,7 +167,7 @@ General:
 
 !! Curve Policy
 
-Use **P-256 / ES256** where ATProto OAuth / DPoP requires it.
+Use ''P-256 / ES256'' where ATProto OAuth / DPoP requires it.
 
 Do not implement k256 / secp256k1 in Lararium.
 

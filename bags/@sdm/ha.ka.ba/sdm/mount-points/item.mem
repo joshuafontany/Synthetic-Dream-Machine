@@ -26,9 +26,9 @@ uri-path  = "ha.ka.ba/sdm/mount-points/item"
 
 !! Contract
 
-An Item seats a Power **in an object**: spellbook, rod, idol-cartridge, living pistol. Capacity is **7 + Strength** slots (canonical, Vastlands Guidebook). Carried Powers persist — usable many times.
+An Item seats a Power ''in an object'': spellbook, rod, idol-cartridge, living pistol. Capacity is ''7 + Strength'' slots (canonical, Vastlands Guidebook). Carried Powers persist — usable many times.
 
-**Container sub-rule (D2).** Power albums, technocodices, and spell books let a number of Powers ride in a **single inventory slot** (Vastlands Guidebook). This is one Item mount-point with a container sub-rule, **not** separate mount-points per container type. A container is one Item slot whose contents are a themed bundle.
+''Container sub-rule (D2).'' Power albums, technocodices, and spell books let a number of Powers ride in a ''single inventory slot'' (Vastlands Guidebook). This is one Item mount-point with a container sub-rule, ''not'' separate mount-points per container type. A container is one Item slot whose contents are a themed bundle.
 
 <<~/ahu >>
 

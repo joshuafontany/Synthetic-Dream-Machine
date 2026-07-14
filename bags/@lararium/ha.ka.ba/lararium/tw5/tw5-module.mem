@@ -49,9 +49,9 @@ The kernel holds the `$tw.wiki` reference. Injecting a module meme into TW5 hand
 to the bundle's execution context. Three gate layers must all pass before the kernel hands `$tw.wiki`
 to any meme body:
 
-1. **Threshold** (`mana` ≥ 18, `manao` ≥ 17, `manaoio` ≥ 17, `confidence` ≥ 18) — declared intent
-2. **Content hash** (`body-sha256` matches `sha256(text)`) — body integrity; set at build time by `pnpm bundle`, verified at inject time; a tampered or stale body fails here
-3. **Keyhive capability proof** (planned) — Ed25519-signed authorization from a keyhive principal; replaces the pre-keyhive `promoted-at` timestamp sketch; not yet implemented; gate currently passes on layers 1–2 only
+1. ''Threshold'' (`mana` ≥ 18, `manao` ≥ 17, `manaoio` ≥ 17, `confidence` ≥ 18) — declared intent
+2. ''Content hash'' (`body-sha256` matches `sha256(text)`) — body integrity; set at build time by `pnpm bundle`, verified at inject time; a tampered or stale body fails here
+3. ''Keyhive capability proof'' (planned) — Ed25519-signed authorization from a keyhive principal; replaces the pre-keyhive `promoted-at` timestamp sketch; not yet implemented; gate currently passes on layers 1–2 only
 
 A meme that fails any layer falls through to the imperative fallback path and is not executed.
 The build process (`pnpm bundle`) is the trust anchor for layers 1–2; keyhive will be the trust

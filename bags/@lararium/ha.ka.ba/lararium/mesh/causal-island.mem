@@ -24,7 +24,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/causal-island"
 <<~ ahu #contract >>
 
 `causal-island.ts` owns the ontological law that names where one island ends and
-another begins, the per-bag **ACCESS** axis (a 1:1 mirror of Keyhive's native
+another begins, the per-bag ''ACCESS'' axis (a 1:1 mirror of Keyhive's native
 Access enum), and the edge-island federation scaffolding. The boundary law sits
 above any vessel implementation; every vessel honors it.
 
@@ -36,7 +36,7 @@ above any vessel implementation; every vessel honors it.
 
 Fuller-Zelenka: the Universe holds no simultaneously-apprehended present. A node
 never grasps the full state of a distributed system "at once" — it holds a
-snapshot of what it has synchronized so far. This topology **defines** the
+snapshot of what it has synchronized so far. This topology ''defines'' the
 system; it names no limitation the system suffers.
 
 Simultaneously apprehended: the local Automerge doc snapshot, right now.
@@ -44,8 +44,8 @@ Non-simultaneously apprehended: every other peer's state (seen at last sync),
 every other reachable Realm, every un-hydrated tiddler, every active-meme
 instance with its own event horizon.
 
-**Law:** any boundary across which causality cannot stand guaranteed-simultaneous
-marks a **causal island boundary**.
+''Law:'' any boundary across which causality cannot stand guaranteed-simultaneous
+marks a ''causal island boundary''.
 
 <<~/ahu >>
 
@@ -55,10 +55,10 @@ marks a **causal island boundary**.
 
 | Tier | Boundary | Status |
 |---|---|---|
-| **0** | Active memes (kumu / UEFN device instances) | MAY become islands — own event horizon, params, trigger surface; promotion optional, correction local |
-| **1** | Memes inside a wiki (within the local doc window) | Simultaneously apprehended; peer state of the same doc remains non-simultaneous |
-| **2** | Automerge Realms (other docs reachable from this one) | Always non-simultaneous |
-| **3** | Lares nodes (federation edge) | A pranala/peer connection between nodes MUST count as an island boundary |
+| ''0'' | Active memes (kumu / UEFN device instances) | MAY become islands — own event horizon, params, trigger surface; promotion optional, correction local |
+| ''1'' | Memes inside a wiki (within the local doc window) | Simultaneously apprehended; peer state of the same doc remains non-simultaneous |
+| ''2'' | Automerge Realms (other docs reachable from this one) | Always non-simultaneous |
+| ''3'' | Lares nodes (federation edge) | A pranala/peer connection between nodes MUST count as an island boundary |
 
 <<~/ahu >>
 
@@ -66,34 +66,34 @@ marks a **causal island boundary**.
 
 !! Share Substrate, Not Sovereignty (load-bearing)
 
-A causal island earns its identity from **a separate log + no shared now** — never
+A causal island earns its identity from ''a separate log + no shared now'' — never
 from separate silicon. Co-location collapses nothing by itself: many sovereign
 vessels MAY run on one machine. The smell lives one layer down — whether they
-share **mutable state** or merely a **substrate**.
+share ''mutable state'' or merely a ''substrate''.
 
 | Substrate — MAY co-hold | Sovereignty — MUST stay separate |
 |---|---|
-| the machine, the disk device | the Automerge **replica** (each peer holds its own) |
-| a **relay** peer (carries sync, holds no authority) | the **heap / process** (no shared mutable RAM) |
-| the network, the loopback transport | the **storage scope** (own dir / own IndexedDB) |
-| canon bags (read, by CRDT merge) | the **keys + the log + the "now"** |
+| the machine, the disk device | the Automerge ''replica'' (each peer holds its own) |
+| a ''relay'' peer (carries sync, holds no authority) | the ''heap / process'' (no shared mutable RAM) |
+| the network, the loopback transport | the ''storage scope'' (own dir / own IndexedDB) |
+| canon bags (read, by CRDT merge) | the ''keys + the log + the "now"'' |
 
-**Two boundaries, both MUST hold.** **Vessel ↔ vessel** reconciles via CRDT over
+''Two boundaries, both MUST hold.'' ''Vessel ↔ vessel'' reconciles via CRDT over
 a transport — each vessel its own replica; the loopback WS between two local
 processes counts as a real Tier-3 boundary (the V3 auth gate guards it). **Island
 ↔ island within one vessel** passes structured-clone messages over a MessagePort —
 Worker threads never share a heap (the no-VM-on-main law,
 [[project_no_vm_on_main_thread]]).
 
-**The anti-pattern, named:** several "vessels" behind one Repo, one heap, or one
+''The anti-pattern, named:'' several "vessels" behind one Repo, one heap, or one
 storage dir — a distributed monolith wearing many costumes (fake sovereignty). The
 tree already refuses it: the CLI carries an ephemeral in-RAM replica and syncs over
 WS (it touches no daemon storage), and in-process ephemeral boot stays deferred until
 contention rules around NodeFS storage land.
 
-**Efficiency rides the role split, not a shared heap.** Role reads as a held
+''Efficiency rides the role split, not a shared heap.'' Role reads as a held
 Keyhive capability, not a platform (`[[feedback_isomorphism_by_composition]]`). One
-**relay** (the heavy peer) carries the canonical replica + the disk; **leaf** peers
+''relay'' (the heavy peer) carries the canonical replica + the disk; ''leaf'' peers
 (CLI, AI agent) stay thin — they hold only the bags they reach, sync from the relay,
 own their keys. *Heavy peer = substrate, not authority.* So co-located peers share a
 relay (infrastructure), never a replica (sovereignty).
@@ -114,7 +114,7 @@ The `ABILITY_LADDER` mirrors Keyhive's native Access enum (Pull, Read, Edit, Adm
 ordered tuple gives the edge-island scaffolding a typed vocabulary for the same four
 levels.
 
-**Relay-law exception:** `pull` does NOT imply `read`. A relay holds pull and
+''Relay-law exception:'' `pull` does NOT imply `read`. A relay holds pull and
 forwards ENCRYPTED bytes it cannot decrypt or render. Every other level implies all
 levels beneath it.
 

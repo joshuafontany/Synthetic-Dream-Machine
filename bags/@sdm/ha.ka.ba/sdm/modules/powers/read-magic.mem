@@ -43,16 +43,16 @@ duration = "10 minutes"
 default-mount = "trait"
 ```
 
-**P:** 2 · **R:** self · **T:** one magical inscription or encoded magical surface · **D:** 10 minutes
+''P:'' 2 · ''R:'' self · ''T:'' one magical inscription or encoded magical surface · ''D:'' 10 minutes
 
-Tune your ha-ka-ba pattern to the writing and read its magical interface layer. On a clean read, the referee gives the active meaning — instruction, warning, spell pattern, command phrase, name, lineage, trigger, or ward rule — and the operator marks that surface, rune-family, or notation **recognized**: later reads need no Power.
+Tune your ha-ka-ba pattern to the writing and read its magical interface layer. On a clean read, the referee gives the active meaning — instruction, warning, spell pattern, command phrase, name, lineage, trigger, or ward rule — and the operator marks that surface, rune-family, or notation ''recognized'': later reads need no Power.
 
 When something resists, resolve it as an `ecm-scan` contest. On a sacrificed read the meaning still comes, but it leaves one trace: an owner ping, an archive echo, a roused ward, a glyph migraine, or a false certainty that bites later.
 
 !!! Overcharge
 
-* **x2 — P:4.** Read through one weak veil: a damaged inscription, archaic dialect, or hostile copy-mark.
-* **x4 — P:8.** Read a linked inscription set from one archive lineage and ask one structural question: who wrote this, what pattern it encodes, what guards it, or what triggers it.
+* ''x2 — P:4.'' Read through one weak veil: a damaged inscription, archaic dialect, or hostile copy-mark.
+* ''x4 — P:8.'' Read a linked inscription set from one archive lineage and ask one structural question: who wrote this, what pattern it encodes, what guards it, or what triggers it.
 * **x8 — P:16, `dangerous`.** Force-read a sealed, hostile, or living archive layer. Learn the meaning plus one hidden interface fact — command phrase, lock condition, true owner, or safe activation path. On failure the archive reads back (Danger Roll → Corruption).
 
 !!! Mishaps
@@ -65,10 +65,10 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 !! Variants
 
-* **Thread Reading** — silk-knot, web-vibration, and woven ward notation (spider-folk). Seats as `trait`.
-* **Archive Handshake** — a shrine, wiki, or ship-daemon service reads interface layers for authorized operators. Seats as `structure`.
-* **Grimoire Lens** — an item pays or focuses the cost through charge, attunement, or breakage risk. Seats as `item`.
-* **Cursed Literacy** — the operator cannot stop reading magical surfaces; archives may read back. Seats as `burden`, carries `hook/dangerous`.
+* ''Thread Reading'' — silk-knot, web-vibration, and woven ward notation (spider-folk). Seats as `trait`.
+* ''Archive Handshake'' — a shrine, wiki, or ship-daemon service reads interface layers for authorized operators. Seats as `structure`.
+* ''Grimoire Lens'' — an item pays or focuses the cost through charge, attunement, or breakage risk. Seats as `item`.
+* ''Cursed Literacy'' — the operator cannot stop reading magical surfaces; archives may read back. Seats as `burden`, carries `hook/dangerous`.
 
 <<~/ahu >>
 

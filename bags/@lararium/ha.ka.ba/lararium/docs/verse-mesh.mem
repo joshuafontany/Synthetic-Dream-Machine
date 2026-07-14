@@ -22,8 +22,8 @@ uri-path  = "ha.ka.ba/lararium/docs/verse-mesh"
 
 !! What a Peer Owns
 
-A lararium peer owns **bags** (Automerge documents), not wikis.
-A wiki is a **recipe** — an ordered composition of bags.
+A lararium peer owns ''bags'' (Automerge documents), not wikis.
+A wiki is a ''recipe'' — an ordered composition of bags.
 The peer assembles a wiki on demand by stacking bags in priority order.
 The same CRDT source bags yield different rendered views for different operators
 and different application surfaces.
@@ -32,9 +32,9 @@ The invariant: bags persist, wikis compose.
 
 !! N Local Clocks — Polychronous CRDT Mesh
 
-The Verse mesh runs **N local clocks**, one per TW5 VM instance.
+The Verse mesh runs ''N local clocks'', one per TW5 VM instance.
 Each VM constitutes one clock domain (Signal/INRIA polychronous model, Berry 1991).
-Rendezvous between clock domains happens **only at CRDT merge boundaries** —
+Rendezvous between clock domains happens ''only at CRDT merge boundaries'' —
 when Automerge delivers a remote patch, the IslandAccumulator gates it to the
 next local frame boundary.
 
@@ -78,14 +78,14 @@ IslandAccumulator chains but do not emit paint frames.
 On slot promotion (e.g. recipe switch), the new live slot already holds current state.
 No full replay needed on switch.
 
-Node peers hold **no live slot by default**.
+Node peers hold ''no live slot by default''.
 All slots stay warm.
 The node peer renders on demand by promoting a warm slot briefly (SSR path),
 capturing the render output, then returning to warm.
 
 !! Camera Model — Story River Is the First Camera
 
-A **camera** = one view frustum over the TW5 wiki world-state.
+A ''camera'' = one view frustum over the TW5 wiki world-state.
 
 !!! Three-Tree Chain — Per Camera
 
@@ -119,20 +119,20 @@ These two concerns stay separate:
 
 Each camera holds:
 * its own `IslandAccumulator` — drains at its own tick rate
-* its own **widget tree** — TW5 widget graph rooted at a filter or transclusion tiddler
-* its own **fake DOM** — render target (`window.document`, `$tw.fakeDocument`, `OffscreenCanvas`, etc.)
+* its own ''widget tree'' — TW5 widget graph rooted at a filter or transclusion tiddler
+* its own ''fake DOM'' — render target (`window.document`, `$tw.fakeDocument`, `OffscreenCanvas`, etc.)
 * its own input/output surface — user events in, wiki writes out
 
 !!! Shared World Graph — Inverted Control
 
-All cameras in one VM slot **share one TW5 wiki** (world graph).
+All cameras in one VM slot ''share one TW5 wiki'' (world graph).
 The wiki fires a `change` event after each `wiki.transact()`.
 Each widget tree registered via `wiki.addEventListener("change", tree.refresh)`
 reacts independently — widget trees with no dependency on the changed tiddlers
 return `refresh()` in O(1) without repaint.
 
-The **view frustum** lives in the widget tree's root filter tiddler, not in the accumulator.
-The accumulator carries no camera identity — **inverted control**.
+The ''view frustum'' lives in the widget tree's root filter tiddler, not in the accumulator.
+The accumulator carries no camera identity — ''inverted control''.
 
 !!! Input Path — No New Machinery
 
@@ -144,11 +144,11 @@ Outbound writes — when a user saves a tiddler from any camera — go through
 `IslandAdaptor.saveTiddler → store.put()`, the same path the Story River uses today.
 No new write-back machinery is necessary for additional cameras.
 
-The TW5 Story River is the **first camera** — the primary rendered view
+The TW5 Story River is the ''first camera'' — the primary rendered view
 into the Verse graph for browser peers.
 It does not occupy the only camera slot.
 
-The **second camera slot** targets TLDraw.js or another JavaScript infinite canvas.
+The ''second camera slot'' targets TLDraw.js or another JavaScript infinite canvas.
 That canvas renders a different projection of the same bag state —
 spatial, relational, or visual-graph views of the same Automerge documents.
 
@@ -159,7 +159,7 @@ Further camera slots remain open for:
 * Headless render targets (PDF export, MCP tool surface, LLM context projection)
 * Spectator/witness views with different read authority
 
-**Causal islands, fractal:** causal islands exist inside the lararium (bag boundaries),
+''Causal islands, fractal:'' causal islands exist inside the lararium (bag boundaries),
 outside the lararium (peer-to-peer CRDT sync), inside the TW5 VM (per-camera tick
 domains), and outside the TW5 VM (warm slots accumulating but not painting).
 As above, so below.
@@ -187,7 +187,7 @@ VM Slot (one TW5 wiki)
     └── wiki.addEventListener("change", minimapWidget.refresh)
 ```
 
-**Configurable refresh rates + input priority:**
+''Configurable refresh rates + input priority:''
 Lower `tickMs` = higher render priority.
 Cameras that accept user input (typing, drawing) register outbound handlers
 (`saveTiddler`, `dispatchEvent`) on their widget tree.
@@ -200,7 +200,7 @@ The IslandAccumulator drains patches for all queued tiddlers by default.
 At document scale (5 000+ tiddlers), a full drain per frame blows the 16ms budget.
 
 The visibility gate defers this:
-only flush patches for tiddlers the **active story river currently renders**.
+only flush patches for tiddlers the ''active story river currently renders''.
 Background bags (cold layers not in the active recipe view) accumulate indefinitely
 and flush on the next explicit navigation event.
 

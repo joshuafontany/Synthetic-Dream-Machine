@@ -22,11 +22,11 @@ retain       = true
 
 Three architectural forces pull on the Lararium stack simultaneously. This carrier holds the research synthesis and names the design law for each.
 
-1. **Meme store + re-seeding** — what is the correct replacement contract for a CRDT-backed carrier store?
-2. **Schema enforcement on pranala edges** — how does data-layer type binding prevent graph corruption?
-3. **AST / self-hosting grammar** — how do system components (parser, schema, router, templates) themselves become memes?
+1. ''Meme store + re-seeding'' — what is the correct replacement contract for a CRDT-backed carrier store?
+2. ''Schema enforcement on pranala edges'' — how does data-layer type binding prevent graph corruption?
+3. ''AST / self-hosting grammar'' — how do system components (parser, schema, router, templates) themselves become memes?
 
-These are not separate priorities. They converge at one point: **a meme is the atom of everything, and meme immutability is the load-bearing invariant that makes the rest possible.**
+These are not separate priorities. They converge at one point: ''a meme is the atom of everything, and meme immutability is the load-bearing invariant that makes the rest possible.''
 
 <<~/ahu >>
 
@@ -36,14 +36,14 @@ These are not separate priorities. They converge at one point: **a meme is the a
 
 TiddlyWiki 5 never mutates a tiddler in place. When content changes, the entire tiddler object is replaced in the store. This fires a widget refresh cascade: `ViewTemplate` walks a priority-ordered list of type-specific templates, picks the first match, and re-renders the affected widget subtree. The reactive cascade is triggered by identity change, not diff.
 
-**Lararium translation:**
+''Lararium translation:''
 
 A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boundary, hostful URIs for session edits). Edits create a new hostful carrier at `lar://alias:grant@host/path`. Canon-promotion assigns a new hostless `lar:///` address and rebuilds the boot closure. The boot closure rebuild is the equivalent of TW5's full tiddler replacement — it fires the full reactive cascade: compiler → boot receipt → tldraw snapshot → CRDT merge.
 
-**Law:** `meme-immutability`
+''Law:'' `meme-immutability`
 > A meme object, once admitted to the confirmed layer, is never mutated. The only valid write is a full replacement producing a new URI. Pending edits accumulate in the hostful tier; they do not touch confirmed state. Canon-promotion is the atomic transition between tiers.
 
-**Refresh corollary:** after the Automerge pivot, ordinary carrier refresh is disk → Automerge → TW5, followed by projection diffing in the browser. `/admin/reseed` remains only a legacy tldraw layout reset / receipt recompute path. Shape-level mutation outside the authorized store/projection path is always illegal.
+''Refresh corollary:'' after the Automerge pivot, ordinary carrier refresh is disk → Automerge → TW5, followed by projection diffing in the browser. `/admin/reseed` remains only a legacy tldraw layout reset / receipt recompute path. Shape-level mutation outside the authorized store/projection path is always illegal.
 
 <<~/ahu >>
 
@@ -53,11 +53,11 @@ A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boun
 
 Unreal Engine 5.6 World Partition enforces actor schemas at the data layer: each actor has a type-bound property schema; violation blocks instantiation. UEFN's Verse language extends this to runtime — static types prevent assignment of values that break the schema. Schema enforcement is not an afterthought on top of the data; it is the first gate before data enters the scene.
 
-**Lararium translation:**
+''Lararium translation:''
 
 Pranala edges carry fixed properties: `family` (`control | relation | observe | dataflow`), `role`, `lifecycle`, `confidence`. The boot compiler's `dagViolations` check enforces a DAG invariant on `control` edges. But enforcement is currently post-hoc — parser runs first, violations are caught at compile time, not at edge-creation time.
 
-**Target model:** Schema enforcement at edge creation, not compile time.
+''Target model:'' Schema enforcement at edge creation, not compile time.
 
 | UE5 concept | Lararium equivalent |
 |---|---|
@@ -67,10 +67,10 @@ Pranala edges carry fixed properties: `family` (`control | relation | observe | 
 | Level streaming boundary | Confirmed / hostful tier boundary |
 | Verse static types | Pranala family-specific property contracts |
 
-**Law:** `pranala-schema-binding`
+''Law:'' `pranala-schema-binding`
 > Each pranala family declares an invariant property contract. A pranala that violates its family contract is not admitted to the boot closure. The validator runs at parse time, not compile time. Schema definitions themselves live as memes in `lares/grammars/`, seeded in the boot closure, so operators can extend edge semantics without modifying TypeScript source.
 
-**Fortnite / CRDT convergence:** World Partition's streaming boundary maps to Lararium's room boundary. Rooms stream in shapes (actors) on WebSocket connect; the room seed is the level. Re-seeding = level reload. The pranala DAG across rooms is the scene graph.
+''Fortnite / CRDT convergence:'' World Partition's streaming boundary maps to Lararium's room boundary. Rooms stream in shapes (actors) on WebSocket connect; the room seed is the level. Re-seeding = level reload. The pranala DAG across rooms is the scene graph.
 
 <<~/ahu >>
 
@@ -82,7 +82,7 @@ TW5's parser is modular and recursive. Parsing rules live as tiddlers tagged `$:
 
 Lararium's memetic-wikitext kernel uses `<<~ ahu ... >>` (worksites), `<<~ pranala ... >>` (edges), and `<<~ loulou ... >>` (relation sugar) sigils. Currently the parser (`carrier.ts`, `pranala-parser.ts`) is hard-coded TypeScript. This is Phase 1. 
 
-**Phase progression:**
+''Phase progression:''
 
 | Phase | State | Description |
 |---|---|---|
@@ -90,7 +90,7 @@ Lararium's memetic-wikitext kernel uses `<<~ ahu ... >>` (worksites), `<<~ prana
 | 2 — grammar memes | next | Grammar rules extracted to `lares/grammars/memetic-wikitext.md` carrier; parser reads rules from boot closure |
 | 3 — self-hosting | future | Parser and template cascade are themselves memes; system can edit its own renderer |
 
-**Phase 2 architecture:**
+''Phase 2 architecture:''
 
 A `lares/grammars/memetic-wikitext.md` carrier declares:
 * Sigil registry (ahu, pranala, loulou, ...) as a TOML table
@@ -99,7 +99,7 @@ A `lares/grammars/memetic-wikitext.md` carrier declares:
 
 The boot compiler reads this carrier during compilation. The TypeScript parser becomes a thin runtime that interprets grammar rules from the closure — not a hard-coded recogniser.
 
-**AST shape (unified/remark analogy):**
+''AST shape (unified/remark analogy):''
 
 ```
 MemeAST
@@ -114,7 +114,7 @@ MemeAST
 
 The tldraw projection layer (`lararium-tldraw`) already operates on a `LarProjectionRecord` union. Phase 2 feeds the AST into the projection — each `AhuBlock` becomes a frame, each `PranalaEdge` becomes an arrow, text nodes become notes. The template cascade (`selectLayout()`) already has the right shape.
 
-**Law:** `grammar-as-memes`
+''Law:'' `grammar-as-memes`
 > All grammar rules, parse patterns, and template definitions SHALL live as carrier memes in `lares/grammars/`. The TypeScript parser runtime is a thin interpreter; it MUST NOT hard-code sigil semantics. When a grammar meme changes and is promoted to canon, the parser is hot-reloaded without a TypeScript rebuild.
 
 <<~/ahu >>
@@ -133,11 +133,11 @@ grammar-as-memes       →  all system components live as memes
 
 These are not features. They are the substrate. Once all three hold:
 
-* **Re-seeding** is safe: replace the full room snapshot, not individual shapes. No shape-level mutation outside CRDT. The room reload is a tiddler replacement — triggers full projection cascade.
-* **Schema enforcement** is self-describing: pranala families are defined in lares/, readable by agents and humans. Operators extend the schema by writing memes, not TypeScript.
-* **Self-hosting** becomes tractable: the parser reads its own grammar from the boot closure. Editing `lares/grammars/memetic-wikitext.md` should propagate through disk → Automerge → TW5; parser-rule hot-reload may still require explicit rebuild/restart until the grammar interpreter is fully live.
+* ''Re-seeding'' is safe: replace the full room snapshot, not individual shapes. No shape-level mutation outside CRDT. The room reload is a tiddler replacement — triggers full projection cascade.
+* ''Schema enforcement'' is self-describing: pranala families are defined in lares/, readable by agents and humans. Operators extend the schema by writing memes, not TypeScript.
+* ''Self-hosting'' becomes tractable: the parser reads its own grammar from the boot closure. Editing `lares/grammars/memetic-wikitext.md` should propagate through disk → Automerge → TW5; parser-rule hot-reload may still require explicit rebuild/restart until the grammar interpreter is fully live.
 
-**Convergence point:** `lares/` IS the operating system. The TypeScript packages are its kernel — thin, stable, fast. The memes are the userland — editable, extensible, self-describing. The tldraw canvas is the shell — the UI over the OS.
+''Convergence point:'' `lares/` IS the operating system. The TypeScript packages are its kernel — thin, stable, fast. The memes are the userland — editable, extensible, self-describing. The tldraw canvas is the shell — the UI over the OS.
 
 This is the Lararium architecture thesis. Everything else is implementation detail.
 

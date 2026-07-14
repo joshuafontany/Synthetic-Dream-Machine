@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/wai"
 
 *wai* — Hawaiian: fresh water, the source; the spring from which streams run.
 
-The **wikispace conditional**. A block-container holds candidate bodies, each guarded by a TW5 filter; the **first body whose filter resolves non-empty renders**, the rest skip. With `kahawai` (stream, `\elseif`) and `mukuwai` (river-mouth, `\else`) it forms the **water cascade** — `if` / `elseif` / `else`: source pools, runs to a stream, reaches the river-mouth. Serial filter-evaluation, content selection on the Story-River surface. English alias: `\if` (TW5 `<%if filter%>…<%endif%>`, 5.3+).
+The ''wikispace conditional''. A block-container holds candidate bodies, each guarded by a TW5 filter; the ''first body whose filter resolves non-empty renders'', the rest skip. With `kahawai` (stream, `\elseif`) and `mukuwai` (river-mouth, `\else`) it forms the ''water cascade'' — `if` / `elseif` / `else`: source pools, runs to a stream, reaches the river-mouth. Serial filter-evaluation, content selection on the Story-River surface. English alias: `\if` (TW5 `<%if filter%>…<%endif%>`, 5.3+).
 
 Water chooses its channel. `wai` selects *which content renders* in the document; it tests filters, not flows. Its canvas cousin `heihei` branches *execution flow* on the TLDraw surface (the Verse conditional); `holo` (`\race`) races parallel flows by completion-time. Three principles — `wai` tests filters (wikispace), `heihei` tests a condition to branch flow (canvasspace), `holo` races flows (canvasspace) — joined only by the surface word "first".
 

@@ -22,9 +22,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/prism"
 
 ! Prism
 
-The **lens-harness**. The node points it at a piece of *existing* content --- an artifact, a transcript, another agent's output, a selection --- and refracts that content through one or more declared lenses, returning a composed **reading**.
+The ''lens-harness''. The node points it at a piece of *existing* content --- an artifact, a transcript, another agent's output, a selection --- and refracts that content through one or more declared lenses, returning a composed ''reading''.
 
-A prism holds the content **fixed** and varies the **viewpoint**. It generates nothing; it bends what already exists through a chosen angle and reveals the structure latent in it. One content enters; a spectrum of perspective-readings leaves, and the bands compose rather than collide --- the instrument of honest plurality, elevating no single band to the whole.
+A prism holds the content ''fixed'' and varies the ''viewpoint''. It generates nothing; it bends what already exists through a chosen angle and reveals the structure latent in it. One content enters; a spectrum of perspective-readings leaves, and the bands compose rather than collide --- the instrument of honest plurality, elevating no single band to the whole.
 
 The node summons it. It never rides a turn by default.
 
@@ -38,11 +38,11 @@ The node summons it. It never rides a turn by default.
 
 Three moves, in order:
 
-1. **Reference, not copy.** Prism names the target by `lar:` address, file path, or inline selection --- it points the way `aim` points. The content stays where it lives.
-2. **Apply the declared lenses.** Each lens runs as an independent pass over the referenced span.
-3. **Compose as layers.** Each lens writes its own overlay anchored to the same content; the result reads as the **union** of overlays, not a destructive rewrite. Passes run order-independent unless a lens declares it depends on another's output.
+1. ''Reference, not copy.'' Prism names the target by `lar:` address, file path, or inline selection --- it points the way `aim` points. The content stays where it lives.
+2. ''Apply the declared lenses.'' Each lens runs as an independent pass over the referenced span.
+3. ''Compose as layers.'' Each lens writes its own overlay anchored to the same content; the result reads as the ''union'' of overlays, not a destructive rewrite. Passes run order-independent unless a lens declares it depends on another's output.
 
-The product earns a clean word: a **reading** --- a lensed interpretation of a reference. Not a *parse* (which recovers one canonical structure against one grammar), and not bare *annotation* (marginalia). Prism varies the lens; a parse fixes the grammar.
+The product earns a clean word: a ''reading'' --- a lensed interpretation of a reference. Not a *parse* (which recovers one canonical structure against one grammar), and not bare *annotation* (marginalia). Prism varies the lens; a parse fixes the grammar.
 
 <<~/ahu >>
 
@@ -50,7 +50,7 @@ The product earns a clean word: a **reading** --- a lensed interpretation of a r
 
 !! The Lenses It Refracts Through
 
-Prism supplies the **target slot** the self-applied lenses lack, and reuses the `-> target` aim that `conformance` already carries:
+Prism supplies the ''target slot'' the self-applied lenses lack, and reuses the `-> target` aim that `conformance` already carries:
 
 * **`conformance`** --- reads the OODA-HA decision-loop band: where the content's loop ran, skipped, or never closed. (`lar:///ha.ka.ba/lares/api/pono/conformance`)
 * **`syad`** --- refracts the content into standpoint bands: the five perspectives read the same content, each measuring within its own frame. (`lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`)
@@ -98,7 +98,7 @@ Each band carries complementary signal; the reading composes them into a fuller 
 
 !! Lineage
 
-Prism supersedes the old `--parse` language --- a content-decomposition tool that split input text into `lar:` coordinates by Aperture grain and "never answered content." That tool ran a true **parse**: one input, one canonical decomposition against one grammar.
+Prism supersedes the old `--parse` language --- a content-decomposition tool that split input text into `lar:` coordinates by Aperture grain and "never answered content." That tool ran a true ''parse'': one input, one canonical decomposition against one grammar.
 
 Prism keeps the worthwhile half --- *reference a piece of content and read its structure* --- and drops the rest: it varies the lens instead of fixing one grammar, composes layered readings instead of one tree, and reads *existing referenced* content instead of decomposing fresh input.
 

@@ -25,7 +25,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/attention-scale"
 ! Unified Attention Scale
 
 Three scaling systems that appeared separate constitute three projections of a single
-phenomenon: **attention range**.
+phenomenon: ''attention range''.
 
 ```
 Chronometer  →  attention range in TIME
@@ -39,7 +39,7 @@ All three map onto the same 0–20 Level continuum. Five named bands partition t
 The subscript digit sigils (₀₁₂₃₄) provide invariant vocabulary for talking about scale
 regardless of which projection the context references.
 
-**Canonical register names — Pulse / Beat / Measure / Arc / Theme:**
+''Canonical register names — Pulse / Beat / Measure / Arc / Theme:''
 
 These five names carry all three projections simultaneously without privileging one.
 They sit above domain-specific aliases (game-time, world-time, text) as the unified
@@ -55,7 +55,7 @@ SIGIL  BAND       REGISTER   CHRONO-GAME  WORLD-TIME  TEXT     SPATIAL       HUD
   ₄    0.8–1.0    Theme      Week    🗺️   Era         Aperture 16–20  cartographic  🗺️
 ```
 
-**Law:** A cluster that requires a sixth band signals a redesign, not an extension.
+''Law:'' A cluster that requires a sixth band signals a redesign, not an extension.
 The pentadic structure here aligns with PENTA_1_BOUNDED_SCALE and FfzClock L0–L4.
 
 <<~/ahu >>
@@ -73,10 +73,10 @@ Text:         Aperture 0–4         morpheme → word; one token; one glyph
 Space:        personal           arm's reach; single target; the space one body occupies
 ```
 
-**Attention quality:** The narrowest aperture. Everything collapses to a single point of
+''Attention quality:'' The narrowest aperture. Everything collapses to a single point of
 decision. No peripheral awareness. One thing, one moment, one spot.
 
-**FfzClock:** L0 (sub-action). MUST remain sub-perceptual — if a system's smallest
+''FfzClock:'' L0 (sub-action). MUST remain sub-perceptual — if a system's smallest
 operator-meaningful event lands at Pulse, the Beat anchor erodes and Measure bounds
 lose meaning.
 
@@ -91,15 +91,15 @@ Text:         Aperture 4–8         clause → sentence-group; one complete gra
 Space:        tactical           weapon range, voice-carry; all combatants in one exchange
 ```
 
-**Attention quality:** Reactive. Stimulus-response tempo. The whole field stays visible
+''Attention quality:'' Reactive. Stimulus-response tempo. The whole field stays visible
 but collapses to threat/opportunity pairs. Peripheral awareness active but narrowed.
 
-**FfzClock:** L1 — the operator perceptual grain. The smallest phase transition the
+''FfzClock:'' L1 — the operator perceptual grain. The smallest phase transition the
 operator treats as a completed meaningful unit in their connected system. In alignment
 contexts: one full exchange turn (ticks on grounding, not on response delivery).
 In game contexts: one move, one action, one combat exchange.
 
-**The Beat anchors the profile.** Changing the Beat definition changes what Measure,
+''The Beat anchors the profile.'' Changing the Beat definition changes what Measure,
 Arc, and Theme mean. All profile customization starts here.
 
 ---
@@ -113,15 +113,15 @@ Text:         Aperture 8–12         paragraph → thematic block; one idea-uni
 Space:        local              room, junction, terrain feature; one procedure covers this
 ```
 
-**Attention quality:** Procedural. Step-by-step. A plan holds and executes. The attention
+''Attention quality:'' Procedural. Step-by-step. A plan holds and executes. The attention
 horizon extends to the next meaningful decision point — deliberate, not reactive (Beat),
 not strategic (Arc).
 
-**This constitutes the default band.** Aperture 10 lives here. The standard meme occupies
+''This constitutes the default band.'' Aperture 10 lives here. The standard meme occupies
 Measure scale. Most of the system's work happens at ₂. A session without an explicit
 scale annotation operates at Measure grain.
 
-**FfzClock:** L2 — session-length arc; coherent working window. PresenceSlot.clock
+''FfzClock:'' L2 — session-length arc; coherent working window. PresenceSlot.clock
 ticks at this level on each broadcast.
 
 ---
@@ -135,11 +135,11 @@ Text:         Aperture 12–16         section → headed division; one coherent
 Space:        regional           neighborhood, district; one expedition's territory
 ```
 
-**Attention quality:** Episodic. A complete sub-story holds in mind. Decisions pay off
+''Attention quality:'' Episodic. A complete sub-story holds in mind. Decisions pay off
 across hours, not minutes. The attention horizon extends to "by the time this session
 ends" or "by the time this year turns."
 
-**FfzClock:** L3 — day/cycle arc; recurrent cadence. SessionEventLog sequence.
+''FfzClock:'' L3 — day/cycle arc; recurrent cadence. SessionEventLog sequence.
 
 ---
 
@@ -152,15 +152,15 @@ Text:         Aperture 16–20         document → session-arc; whole conversat
 Space:        cartographic       map-scale; the shape of the whole journey
 ```
 
-**Attention quality:** Strategic/epochal. Patterns emerge that only become visible across
+''Attention quality:'' Strategic/epochal. Patterns emerge that only become visible across
 many sessions or years. Character arcs, faction shifts, seasonal changes. The Theme names
 what you can only recognize after the Arc completes — you cannot know the Theme while
 living inside it.
 
-**FfzClock:** L4 — epoch; anti-aliasing guard. Remains unbounded by invariant.
+''FfzClock:'' L4 — epoch; anti-aliasing guard. Remains unbounded by invariant.
 The Theme is the field; the lower bands loop within it.
 
-**Beyond Theme:** The ₄ ceiling marks the outer wall of the system's self-awareness.
+''Beyond Theme:'' The ₄ ceiling marks the outer wall of the system's self-awareness.
 Beyond it lies inter-system (DreamNet-scale) or meta-system. These cannot be observed
 from within — only signaled toward.
 
@@ -170,7 +170,7 @@ from within — only signaled toward.
 
 !! Clock Profiles
 
-FfzClock carries `bounds` per instance. A **profile** names a bound set + a Beat-grain
+FfzClock carries `bounds` per instance. A ''profile'' names a bound set + a Beat-grain
 annotation. The register names (Pulse/Beat/Measure/Arc/Theme) apply at any profile —
 qualifying the scale: "World Measure" vs "Session Measure."
 
@@ -189,7 +189,7 @@ bands map directly.
 
 When the exploration clock's ₄ (Theme/Week) ticks, it also ticks the World-Time
 clock's ₀ (Pulse/Week) — the two clocks share the Week boundary. Both clocks name
-**FFZ-rhythm profiles** (py/R plane, behind the causal-island boundary); their shared
+''FFZ-rhythm profiles'' (py/R plane, behind the causal-island boundary); their shared
 Week boundary couples rhythm to rhythm, never a causal-order merge. The CRDT-causal
 clock (TS-structural: Automerge OpId / heads / ITC) rides ⊥ and carries happened-before
 authority alone (see lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks).
@@ -207,7 +207,7 @@ real-world session time. One Tuesday session may advance it by 3 weeks or zero.
 ₄ Theme  = Era       (multi-year; anti-aliasing guard)                bound: Infinity
 ```
 
-**Minecraft/Valheim equivalent:**
+''Minecraft/Valheim equivalent:''
 ```
 ₀ Pulse  = In-game day       (20 real minutes = 1 Minecraft day)
 ₁ Beat   = In-game week
@@ -257,13 +257,13 @@ WorldClockTiddler at lar:///ha.ka.ba/bags/@world/{worldId}/clock
   tickPolicy            = "autonomous" | "freeze" | "manual"
 ```
 
-**Rhine rule (FRP, ACM 2018):** clock identity lives in the type/schema, not the
+''Rhine rule (FRP, ACM 2018):'' clock identity lives in the type/schema, not the
 value. `PresenceSlot` owns `session-clock`; the world doc owns `world-time` and
 `diegetic`. These axes never coerce into each other without an explicit
 `WorldTimeAdvancedEvent` (Verraes 2022) carrying both clock values as the
 bi-temporal anchor.
 
-**Observed clocks** (Minecraft day-counter, Valheim day, market session) land in
+''Observed clocks'' (Minecraft day-counter, Valheim day, market session) land in
 `ObservedClockTiddler` — LWW-Register clusters with a `hwm` field that never
 decreases (Flink watermark pattern). Trigger queries use `hwm >= threshold`,
 not `value == threshold`, to handle out-of-order delivery.
@@ -300,7 +300,7 @@ higher-slot change signals motion within a band, not a crossing.
 
 !! Invariant Sigils
 
-The subscript digits (₀₁₂₃₄) constitute **Category 9: SCALE** in the glyph codeset —
+The subscript digits (₀₁₂₃₄) constitute ''Category 9: SCALE'' in the glyph codeset —
 a dedicated block for attention range indicators, orthogonal to all eight other categories.
 
 ```

@@ -71,7 +71,7 @@ lar-pattern: <<~\s*myword\s+(\S+)\s*>>
 No code change. No compilation. No deployment. The next parse cycle picks up the new word.
 The wiki teaches the parser about itself.
 
-This is the wild-magic property: **grammar as data, owned by the data layer, not the code layer.**
+This is the wild-magic property: ''grammar as data, owned by the data layer, not the code layer.''
 
 In web3 terms, the canonical grammar state lives inside a content-addressed Automerge document
 (the bag). Any peer who holds the bag holds the grammar. Any operator who writes to the bag
@@ -98,11 +98,11 @@ The nihomano discovery yielded the first coherent set of SharktoothSigil-registe
 The set holds 47 tiddlers, each carrying a pono law spec and passing the alignment check.
 They fall into eight families:
 
-**Structural sigils** (addressable scope boundaries):
+''Structural sigils'' (addressable scope boundaries):
 * `ahu` — child-slot worksite; the named scope boundary; skeleton of meme structure
 * `pranala-header` — carrier self-declaration; `<<~ ? -> uri >>` opens every meme
 
-**Edge-sugar sigils** (pranala family shortcuts):
+''Edge-sugar sigils'' (pranala family shortcuts):
 * `pranala` — full edge with FROM → TO arrow + keyword attrs (permanent JS exception)
 * `kahea` / `\transclude` / `\import` — transclusion-family sugar; live transclusion; subscription-fresh embed
 * `aka` / `\shadow` — transclusion-family sugar; frozen read; shadow transclusion
@@ -112,7 +112,7 @@ They fall into eight families:
 * `pono` / `\constraint` — correctness-asserting alignment edge
 * `papalohe` — reaction-wire edge; observer subscription
 
-**Pragma sigils** (declaration forms; first-class in memetic-wikitext):
+''Pragma sigils'' (declaration forms; first-class in memetic-wikitext):
 * `wehe` / `\procedure` — procedure executor; named callable body declaration
 * `\define` — backward-compat alias; use `\procedure` instead
 * `\widget` — widget declaration; `~` prefix convention
@@ -120,21 +120,21 @@ They fall into eight families:
 * `kumu` / `\type` / `\typos` — element-type declaration; mold precedes the cast
 * `waiho` / `\const` / `\let` / `\var` — variable binding; name → value in scope
 
-**Control sigils** (TW5 native flow wrapped in sigil grammar):
+''Control sigils'' (TW5 native flow wrapped in sigil grammar):
 * `wai` / `\if` — wikispace conditional cascade; first filter-match renders (with `kahawai`/`mukuwai`)
 * `heihei` — canvasspace conditional-branch; Verse `if`/`case`, one arm fires by condition
 * `kahawai` / `\elif` — conditional continuation; stream flows until it hits a match
 * `mukuwai` / `\else` — conditional fallback; the cut-off water; terminal form
 * `huli` / `\for` — iteration block; filter → body-per-result
 
-**Context sigils** (scope manipulation):
+''Context sigils'' (scope manipulation):
 * `\tiddler` / `meme` — tiddler context wrapper; sets the reference tiddler for inner scope
 * `ui` / `\query` — query surface; filter → title list
 
-**Guest-grammar sigils** (foreign-body delegation):
+''Guest-grammar sigils'' (foreign-body delegation):
 * `hana` / `\task` — bounded guest-grammar block; grammar-key selects the interpreter
 
-**Concurrency sigils** (async cluster; sprint pending):
+''Concurrency sigils'' (async cluster; sprint pending):
 * `lele` / `\branch` — structured fire-and-continue dispatch; Verse branch; bounded by enclosing scope
 * `hui` / `\sync` — await-all join; every child flow must complete before continuing
 * `holo` / `\race` — cancelling race; first wins, all losers and their subtrees cancelled recursively
@@ -143,7 +143,7 @@ They fall into eight families:
 * `hoolele` / `\spawn` — unstructured escape hatch; new independent task root; completes the six-operator ontology
 * `\tick` / `\simulate` — device lifecycle hook: run once per nalu (simulation tick); Hawaiian proper name deferred pending Visual Verse tick node shape (UE6 ~2027)
 
-**Infrastructure**:
+''Infrastructure'':
 * `sigil-dispatcher` — the `~` root dispatch widget; routes `<<~ name >>` to `\widget ~name`
 
 Every Hawaiian sigil in this set carries an English alias. Every English alias carries
@@ -208,17 +208,17 @@ cannot yet see.
 
 The SharktoothSigil grammar draws vocabulary from five distinct language families. Each contributes precisely the concept that the other languages lack a single-word equivalent for.
 
-**ʻŌlelo Hawaiʻi (Hawaiian)** — the canonical grammar vocabulary. 25 sigil names come from Hawaiian: *ahu*, *kahea*, *aka*, *loulou*, *pranala-header* (hybrid), *wehe*, *heihei*, *huli*, *hana*, *helu*, *kumu*, *kahawai*, *mukuwai*, *waiho*, *kapu*, *lele*, *hui*, *puka*, *pono*, *papalohe*, *kukali*, *meme* (via Greek re-entry), *ui*, *kau*, *nihomano*. Hawaiian compresses semantic fields — kinship, cosmology, motion, topology — into single syllable roots that carry more meaning per glyph than any available English word. The nihomano grammar inherits this compression.
+''ʻŌlelo Hawaiʻi (Hawaiian)'' — the canonical grammar vocabulary. 25 sigil names come from Hawaiian: *ahu*, *kahea*, *aka*, *loulou*, *pranala-header* (hybrid), *wehe*, *heihei*, *huli*, *hana*, *helu*, *kumu*, *kahawai*, *mukuwai*, *waiho*, *kapu*, *lele*, *hui*, *puka*, *pono*, *papalohe*, *kukali*, *meme* (via Greek re-entry), *ui*, *kau*, *nihomano*. Hawaiian compresses semantic fields — kinship, cosmology, motion, topology — into single syllable roots that carry more meaning per glyph than any available English word. The nihomano grammar inherits this compression.
 
-**Bahasa Indonesia** — one canonical sigil: *pranala*. The standard Bahasa Indonesia / Wikipedia Bahasa Indonesia term for hyperlink: *prana* (life-force, Sanskrit loan) + *lala* (thread, passage). Indonesian Wikipedia chose this word deliberately over the Dutch-derived borrowings that dominate Indonesian computing vocabulary. The pranala sigil inherits that choice: a living thread, not a pointer.
+''Bahasa Indonesia'' — one canonical sigil: *pranala*. The standard Bahasa Indonesia / Wikipedia Bahasa Indonesia term for hyperlink: *prana* (life-force, Sanskrit loan) + *lala* (thread, passage). Indonesian Wikipedia chose this word deliberately over the Dutch-derived borrowings that dominate Indonesian computing vocabulary. The pranala sigil inherits that choice: a living thread, not a pointer.
 
-**Ancient Greek (τύπος / mimeme)** — two entry paths:
+''Ancient Greek (τύπος / mimeme)'' — two entry paths:
 * *typos* — τύπος: impression, mold, stamp, type. The `\typos` alias for *kumu* names the element-type declaration sigil by the Greek root that gave English "type", "archetype", "prototype". The mold precedes the cast; the declaration precedes the instance.
 * *meme* — coined 1976 by Richard Dawkins in *The Selfish Gene* from Greek *mimeme* (that which gets imitated), shortened to rhyme with "gene". Edward Wilson and Wes Unruh extended the operational framework in *The Art of Memetics* (2009), treating memes as propagating agents with measurable virality and selection pressure from host minds and transmission media. The Lares system uses the word at full weight: a unit of cultural information that replicates across minds and networks. Each tiddler that carries the memetic-wikitext type header *acts as* a meme — a replicable cultural unit in a content-addressed store, subject to the same fitness landscape described by Wilson and Unruh.
 
-**English (computing + TW5 pragmas)** — 24 alias forms carry the English computing vocabulary that TW5 authors and general programmers already know: `\procedure`, `\function`, `\widget`, `\define`, `\if`, `\elif`, `\else`, `\for`, `\task`, `\type`, `\const`, `\let`, `\var`, `\link`, `\shadow`, `\transclude`, `\import`, `\tiddler`, `\query`, `\branch`, `\sync`, `\race`, `\rush`, `\guard`, `\constraint`, `\suspends`. These aliases lower the entry barrier for operators who author in English and let TW5-native macro patterns migrate naturally into the sigil grammar.
+''English (computing + TW5 pragmas)'' — 24 alias forms carry the English computing vocabulary that TW5 authors and general programmers already know: `\procedure`, `\function`, `\widget`, `\define`, `\if`, `\elif`, `\else`, `\for`, `\task`, `\type`, `\const`, `\let`, `\var`, `\link`, `\shadow`, `\transclude`, `\import`, `\tiddler`, `\query`, `\branch`, `\sync`, `\race`, `\rush`, `\guard`, `\constraint`, `\suspends`. These aliases lower the entry barrier for operators who author in English and let TW5-native macro patterns migrate naturally into the sigil grammar.
 
-**Verse / Unreal Engine** — the concurrency cluster (*lele*, *hui*, *holo*, *puka*, *hoolele*) and their English aliases (`\branch`, `\sync`, `\race`, `\rush`, `\spawn`) map directly to Verse's five async primitives: structured fire-and-continue (branch), await-all join (sync), cancelling race (race), selecting race (rush), and unstructured escape hatch (spawn). The execution model forms a **task tree** — cancellation cascades downward; `spawn` / `\spawn` is the only way to exit the tree. This alignment makes Lares concurrency legible to Verse developers and positions the grammar for cross-VM execution on Unreal Engine. See `verse-task-tree` for the canonical topology spec.
+''Verse / Unreal Engine'' — the concurrency cluster (*lele*, *hui*, *holo*, *puka*, *hoolele*) and their English aliases (`\branch`, `\sync`, `\race`, `\rush`, `\spawn`) map directly to Verse's five async primitives: structured fire-and-continue (branch), await-all join (sync), cancelling race (race), selecting race (rush), and unstructured escape hatch (spawn). The execution model forms a ''task tree'' — cancellation cascades downward; `spawn` / `\spawn` is the only way to exit the tree. This alignment makes Lares concurrency legible to Verse developers and positions the grammar for cross-VM execution on Unreal Engine. See `verse-task-tree` for the canonical topology spec.
 
 The grammar accepts all five families equally. The parse result for a Hawaiian sigil and its English alias produces identical AST nodes. The pono spec for each canonical form carries `lar-see-also` cross-references into every alias. Language choice in authoring carries cultural signal; parse result carries none.
 

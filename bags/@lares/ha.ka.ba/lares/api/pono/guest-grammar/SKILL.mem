@@ -25,7 +25,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/guest-grammar/SKILL"
 
 ! Guest-Grammar Skill
 
-[guest-grammar.md](../guest-grammar.md) holds the law.
+[[guest-grammar.md|../guest-grammar.md]] holds the law.
 This skill carries the working procedure.
 
 <<~ ahu #load-contract >>

@@ -36,13 +36,13 @@ Path K / F-arc: outbound hygiene for sustained live wiki authoring.
 `IslandAdaptor.saveTiddler` acts as the boundary where TW5 wiki edits cross
 into the Automerge store. Without hygiene here, sustained editing produces:
 
-* **Write amplification** — every keystroke fires a store write + CRDT patch +
+* ''Write amplification'' — every keystroke fires a store write + CRDT patch +
   disk-projector file write. At 5 keystrokes/sec over a 10-minute session:
   3 000 store writes, 3 000 disk writes, all for the same tiddler.
-* **Noisy projection state** — parse-warning tiddlers, `$:/state/*` fragments,
+* ''Noisy projection state'' — parse-warning tiddlers, `$:/state/*` fragments,
   and boot-splash signals accumulate in the wiki. Some carry `lar:` URIs and
   could bleed into the store without guards.
-* **Draft routing confusion** — `"Draft of …"` tiddlers from TW5 editing UX
+* ''Draft routing confusion'' — `"Draft of …"` tiddlers from TW5 editing UX
   should reach the per-wiki draft bag, not get silently dropped.
 
 <<~/ahu >>
@@ -53,7 +53,7 @@ into the Automerge store. Without hygiene here, sustained editing produces:
 
 !!! SP-1 — Capture Debounce
 
-`saveTiddler` MUST debounce per title. The debounce window: **400 ms**.
+`saveTiddler` MUST debounce per title. The debounce window: ''400 ms''.
 
 * While the timer runs, subsequent saves for the same title cancel the
   prior timer and restart it with the latest fields.
@@ -86,7 +86,7 @@ TW5 startup module.
 (the wiki's top draft bag) and MUST NOT be silently dropped.
 
 Current state: the `isDraft` guard in `saveTiddler` silently drops drafts.
-**Target:** remove the isDraft guard; let drafts write to `this.targetBag`
+''Target:'' remove the isDraft guard; let drafts write to `this.targetBag`
 like any other live edit. The per-wiki draft bag at the top of the recipe
 stack absorbs them naturally.
 

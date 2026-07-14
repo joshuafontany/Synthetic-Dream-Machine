@@ -44,11 +44,11 @@ Authority gate for wiki islands, edge islands, and canon MOVE.
 
 An Orichalcum capability answers five questions:
 
-1. **Who grants?** `issuer` — a `LarPrincipal`
-2. **Who receives?** `audience` — a `LarPrincipal`
-3. **What resource?** `resource` — a `lar:///` canonical URI or `edge:` island id
-4. **What actions?** `abilities` — one or more from the ability ladder (see below)
-5. **Under what Lararium truth conditions?** `caveats` — Lararium-native predicates
+1. ''Who grants?'' `issuer` — a `LarPrincipal`
+2. ''Who receives?'' `audience` — a `LarPrincipal`
+3. ''What resource?'' `resource` — a `lar:///` canonical URI or `edge:` island id
+4. ''What actions?'' `abilities` — one or more from the ability ladder (see below)
+5. ''Under what Lararium truth conditions?'' `caveats` — Lararium-native predicates
 
 A cryptographically valid UCAN-shaped proof that fails any Lararium caveat is NOT authorized.
 Crypto validity is necessary but not sufficient. Semantic validity requires caveat passage.
@@ -85,7 +85,7 @@ These are not the same object. Keep device identity below operator identity.
 
 !! Ability Ladder
 
-The ladder maps onto the **ACCESS axis** (Axis 1) of the [causal-islands](causal-islands.md)
+The ladder maps onto the ''ACCESS axis'' (Axis 1) of the [[causal-islands|causal-islands.md]]
 model — a 1:1 lexical mirror of Keyhive's native Access verbs.
 
 ```

@@ -21,9 +21,9 @@ uri-path    = "ha.ka.ba/lararium/mesh/recipe"
 
 !! Contract
 
-`recipe.ts` owns the **stored** shape of composition — the tiddler records
+`recipe.ts` owns the ''stored'' shape of composition — the tiddler records
 that describe a wiki as an ordered bag stack — distinct from `wiki-recipe.ts`,
-which owns the **runtime** slot model (`WikiRecipe` / `expandRecipe`) an
+which owns the ''runtime'' slot model (`WikiRecipe` / `expandRecipe`) an
 island mounts from.
 
 * `RecipeTiddler` — `{ title, label, bagStack, writableBag?, plugins?,
@@ -45,14 +45,14 @@ island mounts from.
 
 Recipes split by bag tier, each plane its own home:
 
-* **System wiki-recipes** (`@lares` wiki, `@lararium` wiki) live in the
+* ''System wiki-recipes'' (`@lares` wiki, `@lararium` wiki) live in the
   **`@oracle`** runtime-system-island plane — protocol substrate, seeded at
   genesis beside the system bag→doc oracle. `@lares`/`@lararium` are DreamNet
-  **system bags**; their recipes are substrate, not user composition.
+  ''system bags''; their recipes are substrate, not user composition.
 * **User wiki-recipes** live in the user's **`@catalog`** (registry), minted
   per-wiki by init-wiki and read+written via the catalog accessor (access≠load).
 
-The bag-oracle reach runs **two-source**: system bags resolve from the
+The bag-oracle reach runs ''two-source'': system bags resolve from the
 `@oracle` doc, user bags from `@catalog` (`wiki-layer-ontology#oracle-planes`).
 A recipe record for a system bag landing in `@catalog` — or a user recipe in
 `@oracle` — reads as a plane-leak. `@lararium`-the-corpus stays pure tracked

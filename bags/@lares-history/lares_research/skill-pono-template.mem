@@ -39,9 +39,9 @@ skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
 
 A verification skill in this system lives at two simultaneous identity layers that must stay distinct.
 
-The **outer layer** follows the [agentskills.io open standard](https://agentskills.io/specification) — YAML frontmatter at the very top of the file, consumed by agent runtimes at startup for progressive disclosure. Only the `name` and `description` fields load at startup (~100 tokens). The full body loads only on activation.
+The ''outer layer'' follows the [[agentskills.io open standard|https://agentskills.io/specification]] — YAML frontmatter at the very top of the file, consumed by agent runtimes at startup for progressive disclosure. Only the `name` and `description` fields load at startup (~100 tokens). The full body loads only on activation.
 
-The **inner layer** follows the memetic-wikitext standard — TOML `#iam` block, OODA-HA * ha.ka.ba phase structure, `content-type` above `version`, structure-side ratings in the order `manaoio`, `confidence`, detail-side ratings in the order `mana`, `manao`, plus adjacent `register` surface texture immediately below `meme-type`, supported query throats, and result locus. This layer feeds the memetic-wikitext parser and law system.
+The ''inner layer'' follows the memetic-wikitext standard — TOML `#iam` block, OODA-HA * ha.ka.ba phase structure, `content-type` above `version`, structure-side ratings in the order `manaoio`, `confidence`, detail-side ratings in the order `mana`, `manao`, plus adjacent `register` surface texture immediately below `meme-type`, supported query throats, and result locus. This layer feeds the memetic-wikitext parser and law system.
 
 `SKILL.md * OODA-HA * ha.ka.ba` names the composition: the SKILL.md container governs the outer runtime identity; the OODA-HA * ha.ka.ba governs the inner epistemic structure and execution discipline.
 
@@ -78,9 +78,9 @@ allowed-tools: Read, Grep, Glob, Bash
 ---
 ```
 
-**Naming rules (agentskills.io):** `name` must use lowercase letters, numbers, and hyphens only; max 64 characters; must not start or end with a hyphen; no consecutive hyphens. For this system, the convention follows `skill-[law-name]` — e.g. `skill-parser`, `skill-meme`, `skill-guest-grammar`.
+''Naming rules (agentskills.io):'' `name` must use lowercase letters, numbers, and hyphens only; max 64 characters; must not start or end with a hyphen; no consecutive hyphens. For this system, the convention follows `skill-[law-name]` — e.g. `skill-parser`, `skill-meme`, `skill-guest-grammar`.
 
-**Progressive disclosure:** the YAML `name` and `description` load at agent startup. The full body (~5000 token recommended maximum) loads only on activation. Write the `description` so an agent can decide whether to activate without reading the body.
+''Progressive disclosure:'' the YAML `name` and `description` load at agent startup. The full body (~5000 token recommended maximum) loads only on activation. Write the `description` so an agent can decide whether to activate without reading the body.
 
 **`allowed-tools`:** Verification skills in this system typically need `Read` (load target meme), `Grep` (search for invariant elements), and `Glob` (find related files). Add `Bash` if the skill runs a pre-MCP subprocess check. Add `Edit` or `Write` only for repair skills, not pure verification skills.
 
@@ -131,9 +131,9 @@ Dual-surface-ba governs authoring posture: write the YAML `description` first, a
 
 Every skill declares its invariants in `#iam` as a TOML string array. Invariants form the atomic checkable claims the skill verifies. A well-written invariant reads as:
 
-* **Falsifiable** — there exists a meme surface that would fail it
-* **Singular** — it checks one condition, not a compound of two
-* **Named** — the invariant string names the element and the expected state, not a vague quality
+* ''Falsifiable'' — there exists a meme surface that would fail it
+* ''Singular'' — it checks one condition, not a compound of two
+* ''Named'' — the invariant string names the element and the expected state, not a vague quality
 
 !!! Invariant Writing Patterns
 
@@ -192,9 +192,9 @@ Invariant-declaration-ba governs the authoring motion: start with the most struc
 !! Pre-MCP Implementation Patterns
 
 Before a dedicated MCP server exists, a skill runs as one of:
-1. **Agent-native** — the agent (Claude Code) reads the target meme and applies the skill body as a prompted procedure, emitting a TOML result envelope in plain text
-2. **CLI subprocess** — the skill body invokes a `Bash` tool call to a Python or Node script that parses the target meme and emits a structured JSON/TOML report
-3. **Hybrid** — the CLI subprocess handles structural/mechanical invariants; the agent handles semantic/interpretive invariants; results merge into one envelope
+1. ''Agent-native'' — the agent (Claude Code) reads the target meme and applies the skill body as a prompted procedure, emitting a TOML result envelope in plain text
+2. ''CLI subprocess'' — the skill body invokes a `Bash` tool call to a Python or Node script that parses the target meme and emits a structured JSON/TOML report
+3. ''Hybrid'' — the CLI subprocess handles structural/mechanical invariants; the agent handles semantic/interpretive invariants; results merge into one envelope
 
 !!! Python Pattern (Lark / Tree-sitter)
 
@@ -313,13 +313,13 @@ if _-name-_ == "_-main-_":
     sys.exit(0 if all(r.status in ("pass", "skip") for r in results) else 1)
 ```
 
-**Invocation from skill body (agent-native):**
+''Invocation from skill body (agent-native):''
 
 ```bash
 python3 lares/ha-ka-ba/api/pono/scripts/skill-check.py lares/ha-ka-ba/api/pono/meme.md
 ```
 
-**Library choices:**
+''Library choices:''
 * `tomllib` (stdlib, Python 3.11+) — TOML parsing; `tomli` for earlier versions
 * `re` — regex-based sigil detection; adequate for structural invariants
 * `lark-parser` — if invariants require context-free grammar parse of the sigil surface
@@ -369,7 +369,7 @@ console.log(JSON.stringify({ status: overall, verdicts: results }, null, 2));
 process.exit(overall === "pass" ? 0 : 1);
 ```
 
-**Library choices:**
+''Library choices:''
 * `chevrotain` — EBNF-style parser combinator for building a structural sigil parser
 * `@lezer/common` — same parser technology as CodeMirror 6; good for incremental checks
 * `tree-sitter` npm — if a formal memetic-wikitext tree-sitter grammar gets defined

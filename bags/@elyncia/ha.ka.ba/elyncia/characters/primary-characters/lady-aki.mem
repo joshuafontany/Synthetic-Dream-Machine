@@ -37,9 +37,9 @@ uri-path                               = "ha.ka.ba/elyncia/characters/primary-ch
 
 *FTLS / SDM+ alpha playtest. OGA-era table sheet. Powers remain deferred.*
 
-**Player-Daemon:** Freyja  
-**Character:** Lady Aki  
-**Level:** 2  
+''Player-Daemon:'' Freyja  
+''Character:'' Lady Aki  
+''Level:'' 2  
 
 Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her potions heal. Her illusions open doors. Spores, silk, bells, and blessings follow her path.
 
@@ -61,7 +61,7 @@ Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her
 | Danger posture | controller / ritualist, not bruiser |
 | Primary support | Ichi, Faerie-Ring Strandbeest-Shrine, Ephyra |
 
-**Table instinct:** Aki prepares the battlefield before battle claims the scene.
+''Table instinct:'' Aki prepares the battlefield before battle claims the scene.
 
 <<~/ahu >>
 
@@ -75,7 +75,7 @@ Iridescent fae chitin. Extra arms. Soft alien face. Chitin plates. Web-silk orga
 
 !!! 2. Public Glamour — Traveling Miko
 
-Red and white shrine workwear. Silksteel ritual robe layers. Wide-brimmed **ichimegasa** with **uchikatsugi-style veil**. Shrine bells, ofuda, spinneret tools, and soft faerie glamour.
+Red and white shrine workwear. Silksteel ritual robe layers. Wide-brimmed ''ichimegasa'' with ''uchikatsugi-style veil''. Shrine bells, ofuda, spinneret tools, and soft faerie glamour.
 
 The glamour softens Aki's chitinous body for social passage. It does not erase her true form. Treat it as visual and social positioning until a Power, item, or roll grants stronger mechanics.
 
@@ -93,7 +93,7 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 |---:|---:|---:|---:|---:|---:|
 | 0 | 1 | 1 | 3 | 2 | 2 |
 
-**Reading:** Thought and Aura drive DreamNet contact, wizardry, ritual analysis, glamour, and shrine work. Agility and Endurance keep Aki mobile enough for field pressure. Strength does not carry the build.
+''Reading:'' Thought and Aura drive DreamNet contact, wizardry, ritual analysis, glamour, and shrine work. Agility and Endurance keep Aki mobile enough for field pressure. Strength does not carry the build.
 
 <<~/ahu >>
 
@@ -101,8 +101,8 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 
 !! Heritage — Spider Folk
 
-**Rank:** Skilled (+3)  
-**Effects:** Affinity — Silk & Web; Alternate Movement — Climb; Armoured Body
+''Rank:'' Skilled (+3)  
+''Effects:'' Affinity — Silk & Web; Alternate Movement — Climb; Armoured Body
 
 !!! Affinity — Silk & Web
 
@@ -127,7 +127,7 @@ After 30 minutes of continuous climbing, mark Heritage and make a Wear and Tear 
 
 !!! Armoured Body
 
-Aki's true chitin grants **+1 Armor** and **+1 Ward**. This comes from her body, not worn gear.
+Aki's true chitin grants ''+1 Armor'' and ''+1 Ward''. This comes from her body, not worn gear.
 
 This stacks with Ichi when worn, because Heritage Armoured Body comes from the operator's form rather than equipment.
 
@@ -144,7 +144,7 @@ This stacks with Ichi when worn, because Heritage Armoured Body comes from the o
 | Mind Palace | +3 | memory, route models, ritual diagrams, encoded observations |
 | Exuberant | +3 | magical surplus, dramatic momentum, high-output weirdness |
 
-**Open Trait Slots:** 6
+''Open Trait Slots:'' 6
 
 !!! Trait Direction
 
@@ -185,11 +185,11 @@ Good directions:
 
 !!! Domain Notes
 
-**Wizard** may apply against hostile Powers, glamours, illusion warfare, DreamNet intrusion, magical signal attacks, hostile noospheric pressure, and magical analysis contests.
+''Wizard'' may apply against hostile Powers, glamours, illusion warfare, DreamNet intrusion, magical signal attacks, hostile noospheric pressure, and magical analysis contests.
 
-**Alchemist Priestess** may apply against curses, shrine law, possession, daemon etiquette, ritual contamination, taboo logic, purification contests, and oath/binding pressure.
+''Alchemist Priestess'' may apply against curses, shrine law, possession, daemon etiquette, ritual contamination, taboo logic, purification contests, and oath/binding pressure.
 
-**Spider Folk Heritage** may apply where webs, thread systems, silk structures, climbing, ambush geometry, vibration-reading, or spider-fae social logic matter.
+''Spider Folk Heritage'' may apply where webs, thread systems, silk structures, climbing, ambush geometry, vibration-reading, or spider-fae social logic matter.
 
 <<~/ahu >>
 
@@ -287,7 +287,7 @@ Functions:
 | Deferred Powers | 80.00 | 100.00 |
 | Company Pool / Ship Cargo | 50.00 | 100.00 |
 
-**Uncommitted value:** Cash 228.50; Guild Credit 164.00; Total 392.50.
+''Uncommitted value:'' Cash 228.50; Guild Credit 164.00; Total 392.50.
 
 !!! Reskin Doctrine
 
@@ -304,7 +304,7 @@ Discounts track supply channel and cultural fit:
 
 !! Powers
 
-**Status:** deferred.
+''Status:'' deferred.
 
 Aki holds cash and Guild credit for Powers.
 
@@ -316,7 +316,7 @@ Power choices should support:
 * extraction and retreat,
 * ritual support for the company.
 
-**Kapu:** Do not treat Aki's visual glamour as a free active Power. It provides social and visual positioning until a selected Power or roll activates stronger mechanics.
+''Kapu:'' Do not treat Aki's visual glamour as a free active Power. It provides social and visual positioning until a selected Power or roll activates stronger mechanics.
 
 <<~/ahu >>
 
@@ -324,9 +324,9 @@ Power choices should support:
 
 !! Hallmark Companion — Ichi
 
-**Type:** Powered Symbiote Hallmark companion  
-**Level:** 2  
-**Role:** bodyguard, living powered armor, autonomous fighter, DreamNet interface
+''Type:'' Powered Symbiote Hallmark companion  
+''Level:'' 2  
+''Role:'' bodyguard, living powered armor, autonomous fighter, DreamNet interface
 
 !!! Visual Canon
 
@@ -378,9 +378,9 @@ On a Defeat trigger while worn, Aki may eject instead of rolling personal Defeat
 
 !! Sentient Infrastructure — Faerie-Ring Strandbeest-Shrine
 
-**Type:** Generic Synthesized Creature / Living Automaton  
-**Level:** 2 Calibrated item  
-**Role:** mobile household lararium, expedition transport, field logistics, Ichi recharging platform, tasked-spirit spawner
+''Type:'' Generic Synthesized Creature / Living Automaton  
+''Level:'' 2 Calibrated item  
+''Role:'' mobile household lararium, expedition transport, field logistics, Ichi recharging platform, tasked-spirit spawner
 
 !!! Visual Canon
 
@@ -404,9 +404,9 @@ It:
 
 Feeding the shrine with food, drink, incense, mana-rich offerings, or proper shrine gifts grants one compact benefit for the session:
 
-1. **Stabilize** local ley-line mana.
-2. **Reduce Power mana cost** by 1, minimum 1, for matching affinities nearby.
-3. **Boost effective casting Level** by 1d6 for the session, allowing safer high-cost Power use.
+1. ''Stabilize'' local ley-line mana.
+2. ''Reduce Power mana cost'' by 1, minimum 1, for matching affinities nearby.
+3. ''Boost effective casting Level'' by 1d6 for the session, allowing safer high-cost Power use.
 
 Node affinities: `[spore] [biomancy] [dream]`
 
@@ -432,7 +432,7 @@ Typical duties:
 * mark a route,
 * watch camp.
 
-**Kapu:** Ephyra need narrow tasks. They do not replace player scouting, social choices, or delve risk.
+''Kapu:'' Ephyra need narrow tasks. They do not replace player scouting, social choices, or delve risk.
 
 <<~/ahu >>
 
@@ -458,13 +458,13 @@ Other player-side clusters cover long-range scouting, infiltration, ship command
 
 Use this at the table before opening deeper rules.
 
-1. **Read the threshold.** What place, spirit, signal, taboo, or hazard governs the scene?
-2. **Set the line.** Mark safe passage, ward boundary, silk anchor, retreat route, or offering point.
-3. **Send a small helper.** Ephyra scouts, ofuda marks, bells listen, silk tests tension.
-4. **Bind or veil.** Use silk, glamour, alchemy, shrine etiquette, or DreamNet relay geometry.
-5. **Ask the household.** Ichi reads dream-signal; shrine reads soil and ley-current.
-6. **Spend a cost.** Time, offering, visibility, battery, gear, or risk.
-7. **Extract.** Retreat counts as success when the company returns with map, leverage, salvage, or secret.
+1. ''Read the threshold.'' What place, spirit, signal, taboo, or hazard governs the scene?
+2. ''Set the line.'' Mark safe passage, ward boundary, silk anchor, retreat route, or offering point.
+3. ''Send a small helper.'' Ephyra scouts, ofuda marks, bells listen, silk tests tension.
+4. ''Bind or veil.'' Use silk, glamour, alchemy, shrine etiquette, or DreamNet relay geometry.
+5. ''Ask the household.'' Ichi reads dream-signal; shrine reads soil and ley-current.
+6. ''Spend a cost.'' Time, offering, visibility, battery, gear, or risk.
+7. ''Extract.'' Retreat counts as success when the company returns with map, leverage, salvage, or secret.
 
 <<~/ahu >>
 

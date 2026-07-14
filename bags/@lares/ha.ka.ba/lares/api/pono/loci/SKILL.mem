@@ -23,7 +23,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/loci/SKILL"
 
 ! Loci / SKILL
 
-Read [loci.md](./loci.md) first.
+Read [[loci.md|./loci.md]] first.
 Treat that loci as constitutional.
 This skill runs that law through the OODA-HA cycle.
 This skill does not widen, soften, or reinterpret it.
@@ -39,7 +39,7 @@ Loci SKILL opens the procedural stream here.
 
 !! Load Contract
 
-* [loci.md](./loci.md) stays the constitutional source
+* [[loci.md|./loci.md]] stays the constitutional source
 * derivation algorithm runs in full step order; never skip
 * `resolved` and `declared-unresolved` stay distinct; declared-unresolved carries real forward pressure
 * rating commitment stays truthful; a path hit never overrides unresolved tension

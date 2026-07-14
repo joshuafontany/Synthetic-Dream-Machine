@@ -77,7 +77,7 @@ Output rooms:
 
 !!! What the legacy stack does not carry
 
-* Any concept of a **Mask** layer — this layer does not exist in legacy
+* Any concept of a ''Mask'' layer — this layer does not exist in legacy
 * Mask grammar: what a mask consists of, how it stacks, how it gets declared
 * Mask corpus reference: the idea that a mask carries a source-text context alongside a voice character
 * Which Voices surface "active this turn" under a mask — legacy has no frame for per-turn voice selection
@@ -87,7 +87,7 @@ Output rooms:
 
 * The mask layer needs new definition from scratch — no extraction path, only new writing
 * The mask layer sits in Ka/Podge space (per Chao reading): character, quality, how the house moves
-* Masks carry two independent things: **corpus** (source material context) and **voice character** (tone, register, affect)
+* Masks carry two independent things: ''corpus'' (source material context) and ''voice character'' (tone, register, affect)
 * The existing LARES.md frame — `Mask Name (Lares Voice(s))` — gives the declaration surface but not the full grammar
 * Two concrete examples now available: Ghost of Mark Twain, Friend Computer
 
@@ -107,23 +107,23 @@ Output rooms:
 
 !!! Main tensions
 
-1. **Mask grammar needs grounding before the invariant can implement it**
-   - The /api/lares/voices invariant stays skeletal until mask grammar settles here
-   - Two examples help but do not fully determine grammar — corpus reference, turn vs. session scope, multi-mask behavior all need decisions
+1. ''Mask grammar needs grounding before the invariant can implement it''
+*** The /api/lares/voices invariant stays skeletal until mask grammar settles here
+*** Two examples help but do not fully determine grammar — corpus reference, turn vs. session scope, multi-mask behavior all need decisions
 
-2. **Voice house needs pruning, not redesign**
-   - The Thirteen stand settled — earned names and seniority included.
-   - The legacy prose carries some operational HUD detail that belongs in signal space, not voice space
-   - The target room should carry identity and naming law, not HUD emit rules
+2. ''Voice house needs pruning, not redesign''
+*** The Thirteen stand settled — earned names and seniority included.
+*** The legacy prose carries some operational HUD detail that belongs in signal space, not voice space
+*** The target room should carry identity and naming law, not HUD emit rules
 
-3. **Worker boundary stays important**
-   - The hard rule — workers do not address the operator directly, all output routes through a Voice — needs to survive extraction clearly
-   - The escalation matching table is the most practically useful artifact; it should survive with minimal alteration
+3. ''Worker boundary stays important''
+*** The hard rule — workers do not address the operator directly, all output routes through a Voice — needs to survive extraction clearly
+*** The escalation matching table is the most practically useful artifact; it should survive with minimal alteration
 
-4. **Mask layer sits in Ka/Podge territory**
-   - Masks do not change *what* the house is (Ha/structure)
-   - Masks change *how* the house moves and presents (Ka/character)
-   - This distinction matters for the invariant: the mask implementation should reach only the output face, not the Voice identity layer
+4. ''Mask layer sits in Ka/Podge territory''
+*** Masks do not change *what* the house is (Ha/structure)
+*** Masks change *how* the house moves and presents (Ka/character)
+*** This distinction matters for the invariant: the mask implementation should reach only the output face, not the Voice identity layer
 
 !!! Working interpretation
 
@@ -262,17 +262,17 @@ These belong to future passes outside the voices branch:
 
 | Section | Current state | Candidate target |
 |---|---|---|
-| **Degraded Node States** | monolith only | `packages/lares-core/memes/docs/lararium/degraded-states.md` or new API child |
-| **Elyncia / Lararium mythology and archaeology** | monolith only | `packages/lares-core/memes/docs/lararium/mythology.md` or docs/story shelf |
-| **Operating Modes (Plan / Auto / Default)** | partially in operations docs | operations branch pass needed |
-| **Frame-Uncertainty Protocol** | partially in operations docs | operations branch pass needed |
-| **Register-Stance Complementarity** | staging shelf — under promotion consideration | `lar:///ha.ka.ba/lares/api/` new invariant or distribution across l-prime + syad |
+| ''Degraded Node States'' | monolith only | `packages/lares-core/memes/docs/lararium/degraded-states.md` or new API child |
+| ''Elyncia / Lararium mythology and archaeology'' | monolith only | `packages/lares-core/memes/docs/lararium/mythology.md` or docs/story shelf |
+| ''Operating Modes (Plan / Auto / Default)'' | partially in operations docs | operations branch pass needed |
+| ''Frame-Uncertainty Protocol'' | partially in operations docs | operations branch pass needed |
+| ''Register-Stance Complementarity'' | staging shelf — under promotion consideration | `lar:///ha.ka.ba/lares/api/` new invariant or distribution across l-prime + syad |
 
-**Priority read for next pass:** Degraded Node States.
+''Priority read for next pass:'' Degraded Node States.
 The vocabulary (Confabulation-as-Canon, Register Collapse, Stance Laundering, etc.) applies across
 all branches and belongs in a stable reference room. The monolith carries it clearly; it just lacks a home.
 
-**Mythology extraction** deserves its own planned pass — it requires decisions about whether the Gaia/Elyncia
+''Mythology extraction'' deserves its own planned pass — it requires decisions about whether the Gaia/Elyncia
 lore lives in the docs/lararium shelf or the docs/story shelf, and whether it becomes a docs loci or a library entry.
 
 !!! Archive tracking summary
@@ -331,7 +331,7 @@ Exit criteria met: all nine files valid memes; all `#iam` blocks complete; all `
 
 Plans filed: `docs/lares/voices/masks-tree-plan.md` (OODA-HA plan), `docs/lares/voices/invariant-plan.md` (voices invariant rewrite plan).
 
-**Next pass priority:** Talk-story-dev fill for Mischief-Muse corpus (Coffee Oracle seed → extraction). Then execute `invariant-plan.md` pass: rewrite `api/lares/voices` from skeletal to load-bearing.
+''Next pass priority:'' Talk-story-dev fill for Mischief-Muse corpus (Coffee Oracle seed → extraction). Then execute `invariant-plan.md` pass: rewrite `api/lares/voices` from skeletal to load-bearing.
 
 !!! Grammar closure pass — 2026-04-23
 

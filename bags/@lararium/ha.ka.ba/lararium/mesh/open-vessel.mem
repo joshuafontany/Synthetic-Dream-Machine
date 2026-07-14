@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 ! The Vessel — One Composable Web3 Design
 
 The authority contract lives in [[operator-peer|lar:///ha.ka.ba/lararium/mesh/operator-peer]] (two-lane law, ea, actor-parity).
-This meme owns the **compositional structure**: what a vessel composes FROM, and the
+This meme owns the ''compositional structure'': what a vessel composes FROM, and the
 ONE factory shape both platforms instance. It supersedes the per-platform factory
 drift (see #drift).
 
@@ -30,7 +30,7 @@ drift (see #drift).
 
 !! The Law
 
-A vessel composes from **sovereign web3-protocol participations** — it never reads as
+A vessel composes from ''sovereign web3-protocol participations'' — it never reads as
 an application with platform branches. The factory derives by SUBTRACTION: the lines
 that differ between the working hosts name the seam, and nothing else earns one
 (Rule-of-Three). The core holds zero platform code; no `if (platform)` enters it.
@@ -40,12 +40,12 @@ that differ between the working hosts name the seam, and nothing else earns one
 Node and browser **differ ONLY in capabilities, never in structure or
 pattern-integrity** (Ink & Switch). The composition — the seven participations, their
 order, the protocol sequence — stands IDENTICAL on every substrate. What differs reads
-as which **capability pieces a vessel currently holds**, plus the few genuinely
+as which ''capability pieces a vessel currently holds'', plus the few genuinely
 substrate-bound resolutions inside each piece (storage backend, worker kind, crypto
 provider, transport). A substrate constrains how a piece resolves; it never removes the
 piece from the structure.
 
-**Hold the convergence open (MUST).** The capability set GROWS. Many capabilities wired
+''Hold the convergence open (MUST).'' The capability set GROWS. Many capabilities wired
 on node today — founding/init, PersonaGroup ceremonies, genesis authoring, corpus
 loading, residency — SHALL become composable in the browser. The design therefore
 treats no capability as structurally node-bound: each rides as a piece any vessel MAY
@@ -64,13 +64,13 @@ them, it does not re-implement them.
 
 | # | Participation | Protocol | Source |
 |---|---|---|---|
-| 1 | **Identity** | keyhive / did:key — keypair + self-certifying ContactCard | [[operator-peer|lar:///ha.ka.ba/lararium/mesh/operator-peer#actor-parity]] (light leaf identity) |
-| 2 | **Replica** | Automerge Repo = own log + own storage scope; no global now | [[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island#substrate-not-sovereignty]] |
-| 3 | **Peering** | NetworkAdapter + inbound-access policy as a **capability** | V3 peer-auth (auth-wire); sharePolicy |
-| 4 | **Recipe + residency** | CompositeStore bag-cascade + residency tiers | [[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island]], residency-tiers, disk-projection |
-| 5 | **Sovereign islands** | TW5-in-Worker VM pool; syncPort per island | [[project_no_vm_on_main_thread]], island-protocol |
-| 6 | **Admin island** | authn/z home; keyhive-in-worker; verb dispatch + binding | verify-then-delegate; admin-vm-core |
-| 7 | **Verb plane** | verb-tiddler invocation → outcome (UCAN-invocation shape) | verb-tiddler; [[project_asymmetric_peer_handoff]] |
+| 1 | ''Identity'' | keyhive / did:key — keypair + self-certifying ContactCard | [[operator-peer|lar:///ha.ka.ba/lararium/mesh/operator-peer#actor-parity]] (light leaf identity) |
+| 2 | ''Replica'' | Automerge Repo = own log + own storage scope; no global now | [[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island#substrate-not-sovereignty]] |
+| 3 | ''Peering'' | NetworkAdapter + inbound-access policy as a ''capability'' | V3 peer-auth (auth-wire); sharePolicy |
+| 4 | ''Recipe + residency'' | CompositeStore bag-cascade + residency tiers | [[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island]], residency-tiers, disk-projection |
+| 5 | ''Sovereign islands'' | TW5-in-Worker VM pool; syncPort per island | [[project_no_vm_on_main_thread]], island-protocol |
+| 6 | ''Admin island'' | authn/z home; keyhive-in-worker; verb dispatch + binding | verify-then-delegate; admin-vm-core |
+| 7 | ''Verb plane'' | verb-tiddler invocation → outcome (UCAN-invocation shape) | verb-tiddler; [[project_asymmetric_peer_handoff]] |
 
 <<~/ahu >>
 
@@ -87,7 +87,7 @@ admin-first). The same shape composes one level down (admin-vm, sovereign-kernel
 island-pool already compose this way; automerge-repo composes its Repo from pieces
 too) — this composes one level up.
 
-**The substrate resolves native-first INSIDE each piece, not in a host tower.** The
+''The substrate resolves native-first INSIDE each piece, not in a host tower.'' The
 platform difference lives within the sovereign piece that owns it — the Replica piece
 resolves NodeFS-or-IndexedDB; the Identity piece resolves disk-or-IDB; the Islands
 piece resolves worker_threads-or-Web-Worker. No fat `Host` interface sits between a
@@ -103,17 +103,17 @@ phase sequence), never type-conformance to a port.
 
 !! Role Names Which Pieces the Recipe Carries (the keystone reframe)
 
-The drift's root: **role baked into platform** (node = relay, browser = keeper). Pono:
-**role names the capability pieces a vessel CURRENTLY HOLDS** — a snapshot of a growing
+The drift's root: ''role baked into platform'' (node = relay, browser = keeper). Pono:
+''role names the capability pieces a vessel CURRENTLY HOLDS'' — a snapshot of a growing
 set, decoupled from the runtime it runs on ([[feedback_isomorphism_by_composition]]). A
 role adds or omits a PIECE; it never toggles a flag or fills an optional port method.
 The substrate NEVER gates which pieces a vessel MAY hold (Ink & Switch, #the-law): a
 piece absent today reads as not-yet-held, never cannot-hold.
 
-* The **relay** recipe carries, in addition to the seven base pieces: the inbound-peer
+* The ''relay'' recipe carries, in addition to the seven base pieces: the inbound-peer
   gate (V3), the disk-mirror grant, the full resident-verb plane, the residency
   sweeper.
-* The **leaf / keeper** recipe simply OMITS those pieces and carries the outbound
+* The ''leaf / keeper'' recipe simply OMITS those pieces and carries the outbound
   peer-handshake instead. An omitted piece reads as absent from the cascade — no
   no-op stub, no `if (platform)`, nothing for the composition to branch on.
 

@@ -109,7 +109,7 @@ confidence-bounded  = false
 
 !! Family Notes
 
-**control** — structural authority edges (owns, has, configures, delegates).
+''control'' — structural authority edges (owns, has, configures, delegates).
 The primary composition grammar. Most meme graphs lead with control edges.
 
 Role semantics (each distinct):
@@ -119,26 +119,26 @@ Role semantics (each distinct):
 These are all distinct from the ahu-slot tree (`fragment-parent` tiddler field),
 which expresses document-level parent/child containment and is not a pranala edge.
 
-**relation** — semantic association without directional authority.
+''relation'' — semantic association without directional authority.
 Free-form roles; used when the relationship resists categorization.
 
-**observe** — monitoring, measurement, attention edges.
+''observe'' — monitoring, measurement, attention edges.
 confidence-bounded: an observer cannot claim more confidence than its source.
 
-**transclusion** — content embedding edges (page / Story-River surface). `aka` (frozen/shadow) and `kahea` (live/subscription-fresh) carry a *content identity* into the source, not a computed value. confidence-bounded: a frozen embed can age from its source. *(English surface name retained — "transclusion" carries crisp, established semantics; operator 2026-06-06.)*
+''transclusion'' — content embedding edges (page / Story-River surface). `aka` (frozen/shadow) and `kahea` (live/subscription-fresh) carry a *content identity* into the source, not a computed value. confidence-bounded: a frozen embed can age from its source. *(English surface name retained — "transclusion" carries crisp, established semantics; operator 2026-06-06.)*
 
-**dataflow** — value-wire edges (canvas / flow surface). Typed value or geometry transport between node pins (reads/writes/streams/buffers/pipes). Carries a computed value, not content — distinct from `transclusion`.
+''dataflow'' — value-wire edges (canvas / flow surface). Typed value or geometry transport between node pins (reads/writes/streams/buffers/pipes). Carries a computed value, not content — distinct from `transclusion`.
 
-**message** — async communication edges.
+''message'' — async communication edges.
 papalohe/kukali/lele widget wiring uses message family edges.
 
-**constraint** — negation, prohibition, boundary edges.
+''constraint'' — negation, prohibition, boundary edges.
 Kapu, scope limits, access denial. Free-form roles accepted.
 
-**reaction** — event-triggered causal edges (papalohe reaction wires).
+''reaction'' — event-triggered causal edges (papalohe reaction wires).
 `reaction-wire` render mode activates for reaction family edges.
 
-**spatial** — containment, portal, adjacency, layer edges.
+''spatial'' — containment, portal, adjacency, layer edges.
 Unlocks portal-as-graph-edge and multi-level room navigation.
 
 <<~/ahu >>

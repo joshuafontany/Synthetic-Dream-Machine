@@ -32,11 +32,11 @@ An ephemeral name deposit. Nothing persists past scope boundary.
 
 !! Etymology and Mythology
 
-**waiho** (Hawaiian): "to leave in place, to deposit for later retrieval, to set aside temporarily."
+''waiho'' (Hawaiian): "to leave in place, to deposit for later retrieval, to set aside temporarily."
 
 The word carries the feel of a fisherman leaving bait at a known spot — the thing waits where placed, for the one who placed it, for as long as that context holds. When the context dissolves, the bait washes away. Nothing marks the spot afterward.
 
-Compare **kau** (placement with persistent identity) and **aka** (shadow/mirror, source-canonical). Waiho stands apart from both: it holds a value, not a thing. No URI. No mailbox. No graph edge. Just a name bound to a value, alive for the scope, gone at the close.
+Compare ''kau'' (placement with persistent identity) and ''aka'' (shadow/mirror, source-canonical). Waiho stands apart from both: it holds a value, not a thing. No URI. No mailbox. No graph edge. Just a name bound to a value, alive for the scope, gone at the close.
 
 In the Kumulipo creation chant, *waiho* appears in the context of primal material left at the boundary between sea and land — not yet formed into persistent shape, waiting for the conditions that will give it permanent address.
 

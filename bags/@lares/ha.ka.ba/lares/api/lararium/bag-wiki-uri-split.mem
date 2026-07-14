@@ -17,7 +17,7 @@ uri-path     = "ha.ka.ba/lares/api/lararium/bag-wiki-uri-split"
 
 ! The Bag / Wiki / CID Kind-Planes
 
-A `lar:` URI names one of three surfaces, and the KIND rides the **first path segment** — the heaviest-weight slot in `lar:` law, independent of ownership:
+A `lar:` URI names one of three surfaces, and the KIND rides the ''first path segment'' — the heaviest-weight slot in `lar:` law, independent of ownership:
 
 <<~ranks kind-planes bags/@slug ~ a composable recipe piece · MUTABLE -> wikis/@slug ~ a #has bag-stack · MUTABLE -> cid/<hash> ~ a content-addressed artifact · IMMUTABLE >>
 
@@ -39,7 +39,7 @@ The two disk planes are the two STATES of a meme:
 
 * **`wikis/@{slug}`** — the LIVE wiki. The operator edits here; a live edit projects to the `/wikis/@{slug}/…` disk tree (`wikisFileToUri`). The `mirror-root: wikis/@{slug}` `wiki init` stamps is this projection.
 * **`bags/@{slug}`** — the CANONICAL bag. Published content, projecting to the `/bags/@{slug}/…` tree (`bagsFileToUri`).
-* **The MOVE is the shore.** The operator promotes a tiddler from the live wiki to the canonical bag of the same name; the projector re-projects it `/wikis/ → /bags/` (tiddler-store canon-promotion, `wiki-layer-ontology#shore-law`). Which state a meme is in reads from its URI alone.
+* ''The MOVE is the shore.'' The operator promotes a tiddler from the live wiki to the canonical bag of the same name; the projector re-projects it `/wikis/ → /bags/` (tiddler-store canon-promotion, `wiki-layer-ontology#shore-law`). Which state a meme is in reads from its URI alone.
 
 The per-wiki live layers ride above the fold, each rooted at the wiki's identity — `wikis/@{slug}/{temp,draft,working,personal}` (minted by `wikiSlotUri(slug, kind)`); the `bags/@{slug}` canon rides below as the read-only, promotion-target library member. The `@working`/`@draft`/`@personal` binding is per `(PersonaGroup × recipe-fingerprint)` — the slot URI carries the address, the resolver hands over the per-fingerprint doc.
 
@@ -47,10 +47,10 @@ The per-wiki live layers ride above the fold, each rooted at the wiki's identity
 
 `@lares`/`@lararium` carry two layers that DO NOT compose into one wiki — the CID floor and the live edit surface are decoupled:
 
-* **Frozen doctrine floor — @daemon only.** The genesis blob (the boot seed, `noosphere-boot`, the canon that survives a wipe) rides the **@daemon wiki-worker's `libraryBags`**, addressed by **`cid/<hash>`** — reproducible from the hash, unreachable by an edit. Only @daemon holds the CID `@lares`/`@lararium` content. @daemon runs on these frozen CIDs and its behaviour changes only when new CIDs launch to the mesh.
+* ''Frozen doctrine floor — @daemon only.'' The genesis blob (the boot seed, `noosphere-boot`, the canon that survives a wipe) rides the **@daemon wiki-worker's `libraryBags`'', addressed by ''`cid/<hash>`** — reproducible from the hash, unreachable by an edit. Only @daemon holds the CID `@lares`/`@lararium` content. @daemon runs on these frozen CIDs and its behaviour changes only when new CIDs launch to the mesh.
 * **Live edit surface — `wikis/@lares`, `wikis/@lararium`.** Operator edit surfaces over `bags/@lares` / `bags/@lararium` (plus their own draft/working layers). They do NOT compose the CID floor.
 
-**The decoupling is the safety.** The boot floor is CID-frozen in @daemon and the live wikis never mount it, so editing `wikis/@lares` cannot break the boot. Promotion to the mesh renders the live edits to fresh CIDs and launches them to @daemon; only then does @daemon behaviour change. Edit freely, promote deliberately, immune core sealed until mint.
+''The decoupling is the safety.'' The boot floor is CID-frozen in @daemon and the live wikis never mount it, so editing `wikis/@lares` cannot break the boot. Promotion to the mesh renders the live edits to fresh CIDs and launches them to @daemon; only then does @daemon behaviour change. Edit freely, promote deliberately, immune core sealed until mint.
 
 **The engine is universal; the corpus is content.** The memetic-wikitext plugin (parser, grammar, all-memes modules) rides **`@oracle`** — the genesis `pluginsCid`/`engineCid` CID blobs, referenced by the `@oracle` system doc (`${ORACLE_DOC_URI}/genesis-cid-plugins`), pulled by CID by every island (`pluginCidsFromIslandBlobs`). `expandRecipe` always appends `@oracle`, so the engine renders in every wiki, including a primary mount with no libraryBags. `@lararium` is the corpus CONTENT — a per-recipe library ride, not the engine.
 
@@ -62,8 +62,8 @@ One recipe expansion serves every context. `expandRecipe(recipe)` is the single 
 
 Two registries, cleanly separated:
 
-* **bags** — `bags/@{slug}` → automerge url. Composable recipe pieces, each one doc, shared per the user's wish.
-* **wikis** — `wikis/@{slug}` → recipe (the `#has` bag-stack). Per-wiki layers route from here.
+* ''bags'' — `bags/@{slug}` → automerge url. Composable recipe pieces, each one doc, shared per the user's wish.
+* ''wikis'' — `wikis/@{slug}` → recipe (the `#has` bag-stack). Per-wiki layers route from here.
 
 `@oracle` stays the DreamNet read-face for the Cabal-rendered CIDs of `bags/@lares` + `bags/@lararium`. `@lares`/`@lararium` are ordinary catalog-registered operator bags — the local operator owns them until a Cabal ownership layer stands.
 

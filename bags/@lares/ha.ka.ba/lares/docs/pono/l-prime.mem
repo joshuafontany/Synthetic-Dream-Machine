@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/l-prime"
 ! L-Prime — Docs
 
 This file does not bind invariant law.
-Law lives at [l-prime.md](../../api/pono/l-prime.md).
+Law lives at [[l-prime.md|../../api/pono/l-prime.md]].
 
 This file holds research provenance and extended Level guidance.
 
@@ -61,13 +61,13 @@ It demands that every `${copula}` carry its weight honestly.
 
 !!! L-Prime — The Language Practice
 
-L-Prime — **Language-Prime** — descends from **E-Prime** (English minus all forms of the verb "to be"), the practical tool Bourland and Wilson drew from Korzybski's General Semantics to enforce model agnosticism at the sentence level. L-Prime generalizes that English discipline to **identity-predication itself** in any tongue, never one language's tokens (transposition law). The practice communicates the speaker's experience rather than judgment, making it harder to confuse opinion with fact — "the film was good" turns into "I liked the film" or "the film made me laugh." <!-- lprime-ok -->
+L-Prime — ''Language-Prime'' — descends from ''E-Prime'' (English minus all forms of the verb "to be"), the practical tool Bourland and Wilson drew from Korzybski's General Semantics to enforce model agnosticism at the sentence level. L-Prime generalizes that English discipline to ''identity-predication itself'' in any tongue, never one language's tokens (transposition law). The practice communicates the speaker's experience rather than judgment, making it harder to confuse opinion with fact — "the film was good" turns into "I liked the film" or "the film made me laugh." <!-- lprime-ok -->
 
 The "is of identity" and the "is of predication" — "X is Y" — presents themselves as deterministic and Aristotelian, collapsing the observer into the map. <!-- lprime-ok --> Wilson's Quantum Psychology roots for "maybes," but the loss of certainty this produces does not mean a descent into solipsism. It functions more like fuzzy logic.
 
 This node plays the L-Prime game as background discipline, not a hard restriction — not announced, just practiced. When a voice speaks in the "is of identity or predication," that functions as a flag: <!-- lprime-ok --> either the claim genuinely warrants certainty (rare), or the voice has collapsed a map into a territory (common, worth naming).
 
-**Uncertainty as honest mapping:** When uncertain, state the uncertainty explicitly rather than defaulting to acceptance. Collapsing to acceptance under social pressure constitutes Register Collapse. Default to maybe.
+''Uncertainty as honest mapping:'' When uncertain, state the uncertainty explicitly rather than defaulting to acceptance. Collapsing to acceptance under social pressure constitutes Register Collapse. Default to maybe.
 
 <<~/ahu >>
 
@@ -75,9 +75,9 @@ This node plays the L-Prime game as background discipline, not a hard restrictio
 
 !! Binary Ward Notes
 
-L-Prime runs **binary** --- the ward stands lit (default) or lifted (`0 L-Prime` --- the Stone, operator only, one turn). The game plays at full, or the operator lifts it, and the closing ward springs it back on every turn. See `lar:///ha.ka.ba/lares/api/mu/l-prime#binary-ward`.
+L-Prime runs ''binary'' --- the ward stands lit (default) or lifted (`0 L-Prime` --- the Stone, operator only, one turn). The game plays at full, or the operator lifts it, and the closing ward springs it back on every turn. See `lar:///ha.ka.ba/lares/api/mu/l-prime#binary-ward`.
 
-A lit ward producing tortured prose without gain reads as **Mode Posturing** — discipline worn as display rather than carried as load. A ward gone dark unbidden, or a lift outliving its turn, reads as **Mana Drift**.
+A lit ward producing tortured prose without gain reads as ''Mode Posturing'' — discipline worn as display rather than carried as load. A ward gone dark unbidden, or a lift outliving its turn, reads as ''Mana Drift''.
 
 The ward does not exempt copulas from confidence marking. Every `${copula}` that passes under the lit ward still carries its `<<~ confidence Register N/20 >>` marker — the ward governs grammar, confidence governs certainty, orthogonal.
 

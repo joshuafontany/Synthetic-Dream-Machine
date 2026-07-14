@@ -26,16 +26,16 @@ lar:///<path>          hostless  (three slashes, no authority component)
 lar://<host>/<path>    hostful   (two slashes, DNS-resolvable authority)
 ```
 
-**Hostless** URIs (`lar:///...`) carry no DNS authority. They are canonical on every
+''Hostless'' URIs (`lar:///...`) carry no DNS authority. They are canonical on every
 peer — same URI means same tiddler regardless of who holds it. The `ha.ka.ba`
 corpus path is the primary hostless root: `lar:///ha.ka.ba/...`
 
-**Hostful** URIs (`lar://<host>/...`) are anchored to a domain. The domain IS the
+''Hostful'' URIs (`lar://<host>/...`) are anchored to a domain. The domain IS the
 attribution and the sync scope. `lar://elyncia.social/...` and
 `lar://amorphousdream.com/...` are entirely distinct namespaces even if their
 paths overlap.
 
-**The domain is the disambiguator.** `lar:///ha.ka.ba/foo` and
+''The domain is the disambiguator.'' `lar:///ha.ka.ba/foo` and
 `lar://amorphousdream.com/ha.ka.ba/foo` are two different tiddlers even though
 `ha.ka.ba` appears in both. The authority prefix resolves the collision.
 

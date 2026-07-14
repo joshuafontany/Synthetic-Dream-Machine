@@ -25,7 +25,7 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward"
 !! Shield Ward
 *Skin-Close Barrier, Missile Filter*
 
-**P:** 2 · **R:** self · **T:** operator · **D:** 20 minutes
+''P:'' 2 · ''R:'' self · ''T:'' operator · ''D:'' 20 minutes
 
 A barrier less than an inch from your skin, moving with you. Strong cover against missiles, modest against the rest. A Magic-Missile strike lets you save per missile; on success it evaporates on the barrier. Your paid Life stays locked (`imbued`) while it holds.
 
@@ -35,8 +35,8 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 !! Overcharge
 
-* **x2 (P:4)** — extend to one adjacent ally, or harden one named channel.
-* **x4 (P:8)** — hold through one breach, then flicker (mishap check to maintain).
+* ''x2 (P:4)'' — extend to one adjacent ally, or harden one named channel.
+* ''x4 (P:8)'' — hold through one breach, then flicker (mishap check to maintain).
 
 <<~/ahu >>
 
