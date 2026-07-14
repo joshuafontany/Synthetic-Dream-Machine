@@ -164,3 +164,13 @@ bed rebuilds — corrections arrive as dated strikethroughs, never silent edits.
   compression.
 - Environment: post-repave beds (corpus_testbed pours, chain green),
   stanza on cuda, sweep runtime ≈ minutes across all eight.
+
+**2026-07-15 · the collision-rate measurement ran (the braid's test 1),
+same session as the trial.** Structural-hash collision rate = 0.0000 on
+kumulipo-extracted (54/54 distinct), memes (16/16), library (15/15),
+wrapped (53/53). VERDICT: at bed scale the shape reading runs FULLY
+INJECTIVE — it canonicalizes expression variance and coarsens nothing;
+plane-carriage figures at this scale restate as injectivity, and the
+chain's one real coarsening step rides shape ↠ idiom. The subsample-curve
+arm and a corpus-scale re-measure (146k drawers, where short/templated
+records may genuinely collide) stay open.
