@@ -64,10 +64,10 @@ DEFAULT_SEED = 0x51611
 
 #: The placebo carriers keep the REAL basenames (the sectioner routes on basename); the
 #: namespace swap below keeps their addresses clearly out of the library.
-CARRIERS = ("kumulipo-liliuokalani.md", "kumulipo-beckwith.md")
+CARRIERS = ("kumulipo-liliuokalani.mem", "kumulipo-beckwith.mem")
 
 #: The real library shelf (relative to the repo root) and the fixtures home.
-LIBRARY_DIR = os.path.join("bags", "@lares", "ha.ka.ba", "@lares", "library",
+LIBRARY_DIR = os.path.join("bags", "@lares", "ha.ka.ba", "lares", "library",
                            "hawaii", "kumulipo")
 FIXTURES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             "fixtures", "placebo-kumulipo")

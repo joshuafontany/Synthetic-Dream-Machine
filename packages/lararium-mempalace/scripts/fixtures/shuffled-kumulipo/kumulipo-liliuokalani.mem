@@ -1,0 +1,4128 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani >>
+```toml iam
+cacheable = false
+file-path = "packages/lararium-mempalace/scripts/fixtures/shuffled-kumulipo/kumulipo-liliuokalani.mem"
+l-space   = "stable"
+mana      = 18
+manao     = 18
+manaoio   = 18
+register  = "Canon"
+retain    = false
+role      = "hawaiian source witness meme, Kumulipo Liliʻuokalani-1897 translation locus, koʻihonua cosmogony shelf"
+tags      = ["api/pono/meme", "api/pono/loci"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #meme-header >>
+
+! The Kumulipo — Liliʻuokalani Translation (1897)
+
+Queen Liliʻuokalani's English translation of the Hawaiian creation chant, rendered while she was held under house arrest at ʻIolani Palace (1895) and completed at Washington, D.C., May 20, 1897. The koʻihonua (genealogical cosmogony) is attributed to the eighteenth-century chanter Keaulumoku and moves from the slime that established the earth, through sea and land life, to the genealogy of the ruling line.
+
+Combined here from the per-era pages of the sacred-texts.com edition into one witness text, in reading order. Era headers and page markers `{p. N}` preserved.
+
+<<~/ahu >>
+
+<<~ ahu #provenance >>
+
+!! Provenance
+
+Source: //An Account of the Creation of the World According to Hawaiian Tradition//, translated by Queen Liliʻuokalani of Hawaii. Lee and Shepard, Boston [1897]. Composition attributed to Keaulumoku (~1700).
+
+Digital edition scanned at sacred-texts.com, April 2005, John Bruno Hare, redactor; public domain in the United States (published before 1923).
+
+Retrieved 2026-06-21 via the Internet Archive Wayback Machine (snapshot `web.archive.org/web/20050413`) because sacred-texts.com now sits behind a Cloudflare interstitial. Source index: `https://sacred-texts.com/pac/lku/index.htm` (pages `lku00`–`lku18`).
+
+The attribution notice from the original scan is retained inline in the Title Page section, per its terms.
+
+<<~/ahu >>
+
+<<~ ahu #source-text >>
+```toml iam
+## Introduction
+BY
+```
+
+It will be seen, therefore, that as connecting the earlier kings of ancient history with the monarchs latest upon the throne this chant is a contribution to the history of the Hawaiian Islands, and as it is the only record of its kind in existence it seemed to me worthy of preservation in convenient form.
+
+Lee and Shepard, Boston
+
+{p. ix}
+
+This historical character is distinct from the Lonoikamakahiki, son of Keawenuiaumi, the same one who challenged
+
+Kakuhihewa at checkers, Konane. He figured at a different period. There were really three persons of the name of Lonoikamakahiki; the first of these was the son of Keawenuiaumi; the second was a celebrated hunchback son of Kapulehuwaihele, and belonged to Makakaualii. The third Lonoikamakahiki is the one for whom this prayer was composed. His parents were Keaweikekahialiiokamoku and Lonomaikaamaka. Ka-I-i-mamao was the father of Kalaniopuu, this last-named being ancestor in the third degree of King Kalakaua, who reigned over the Hawaiian kingdom from 1874 to 1891, and of Liliuokalani, who reigned from 1891 to 1893. He was also ancestor in second and third degree to the wife of Kalakaua, at present the dowager Queen Kapiolani.
+
+I hope that to some interested in all that pertains to Hawaii, this may give one-half the pleasure which it gave to me in the translation and preparation of the manuscript.
+
+This is the very chant which was sung by Puou, the High Priest of our ancient worship, to Captain Cook whom they had surnamed Lono, one of the four chief gods, dwelling high in the heavens, but at times appearing on the earth. This was the cause of the deification of Captain Cook under that name, and of the offerings to him made at the temple or Heiau at Hikiau, Kealakekua, where this song was rendered.
+
+LILIUOKALANI, of Hawaii,       
+
+role = "source-text interior — transcribed as received, md-era rendering"
+
+Captain Cook's appearance was regarded by our people then as a confirmation of their own traditions. For it was prophesied by priests at the time of the death of Ka-I-i-mamao that he, Lono, would return anew from the sea in a Spanish man-of-war or Auwaalalua. To the great navigator they accordingly gave a welcome with the name of Lono.
+
+Before he was deposed by the people of Kau he was called Wakea on account of his wicked actions, and, like Wakea, he married his own daughter. By this name he wandered through the wilds of Kahihikolo at Kalihikai, Kalihiwai, and Hanalei, and ultimately became demented. Through all his wanderings he was followed by his faithful attendant and retainer Kapaihi a Hilina.
+
+COMPOSED BY
+
+I have endeavored to give the definition of each name as far as it came within my knowledge of words, but in some cases this could not be done because the true signification has been lost. The ancient Hawaiians were astronomers, and the terms used appertained to the heavens, the stars, terrestrial science, and the gods. Curious students will notice in this chant analogies between its accounts of the creation and that given by modern science or Sacred Scripture. As with other religions, our ancient people recognized an all-powerful evil spirit: Mea was the King of Milu as Satan is of the infernal regions, or hell.
+
+OF
+
+{p. x}
+
+[1897]
+
+AN ACCOUNT
+
+KA Ii MAMAO
+
+LILIUOKALANI'S GREAT-GRANDMOTHER
+
+TRANSLATED FROM ORIGINAL MANUSCRIPTS PRESERVED EXCLUSIVELY IN HER MAJESTY'S FAMILY
+
+HAWAIIAN TRADITION
+PRAYER OF DEDICATION
+
+---
+
+KEAULUMOKU IN 1700 AND TRANSLATED BY LILIUOKALANI DURING HER IMPRISONMENT IN 1895 AT IOLANI PALACE AND AFTERWARDS AT WASHINGTON PLACE HONOLULU WAS COMPLETED AT WASHINGTON D.C. MAY 20, 1897
+
+ACCORDING TO
+
+Scanned at sacred-texts.com, April 2005. John Bruno Hare, redactor. This text is in the public domain in the United States because it was published prior to 1923. These files may be used for any non-commercial purpose provided this notice of attribution is left intact in all copies.
+
+The chanters of this great poem were Hewahewa and Ahukai, and by them it was originally dedicated to Alapai, our ancestress, a woman-chief of the highest rank, then at Koko Oahu. Keeaumoku was lying on his death-bed. The Lonoikamakahiki, of whom this chant sings so eloquently in our native tongue, is none other than Kalaninuiiamamao (Ka-I-i-mamao). His name was also Lonoikamakahiki. He was thus called by his mother, Lonomaikanaka, from the very moment of his birth. It was his grandmother Keakealani who changed his name at the time he was dedicated to the gods and the sacred tabus of the Wela, Hoano, and the Moe; or, translated, Fire, Honor, and Adoration were conferred upon him at the time when his navel string was cut at the Heiau at Nueku, Kahaluu, Kona, Hawaii. The correct name of this chief was Ka-I-i-mamao, but the bards of his day named him in their chants Kalaninuiiamamao; thus he was styled in their Mele or chant called Kekoauli-kookea ka lani. The words "lani nui" were simply inserted by them as it was their intention to hand the young prince's name down to posterity in song, while to explain the object of the parents in naming him Ka-I-i-mamao it signified that when Keawe married Lonoma-I-Kanaka it was an infusion of a new royal blood with that of their own royal line of I, the father of Ahu, the grandfather of Lonomaikanaka. By this it was also intended to show that he, that is Ka-I-i-mamao, was above all other I's, for there were many families, descendants of I, a high and powerful chief, and the last term, "mamao," means "far off" and above all the rest of the I's.
+
+THE CREATION
+
+type = "text/markdown"
+
+FOR
+
+NOTICE OF ATTRIBUTION
+
+THE CREATION OF THE WORLD
+
+LILIUOKALANI OF HAWAII
+
+INTRODUCTION.
+
+THERE are several reasons for the publication of this work, the translation of which pleasantly employed me while imprisoned by the present rulers of Hawaii. It will be to my friends a souvenir of that part of my own life, and possibly it may also be of value to genealogists and scientific men of a few societies to which a copy will be forwarded. The folk-lore or traditions of an aboriginal people have of late years been considered of inestimable value; language itself changes, and there are terms and allusions herein to the natural history of Hawaii, which might be forgotten in future years without some such history as this to preserve them to posterity. Further, it is the special property of the latest ruling family of the Hawaiian Islands, being nothing less than the genealogy in remote times of the late King Kalakaua,--who had it printed in the original Hawaiian language,--and myself.
+
+Patron of the Polynesian Historical Society.
+
+{p. vii}
+
+## Title Page
+
+FROM HIM TO HIS DAUGHTER
+ALAPAI WAHINE
+
+---
+
+## The First Era
+
+THE FIRST ERA, OR AGE.
+
+_____________________________________
+
+The Kikalamoa was born and lived in the sea;
+
+TENTH VERSE.
+
+Through a channel; water is life to trees;
+
+Man by Waiololi, woman by Waiolola,
+
+                       Shell-fish.
+
+Through a channel; water is life to trees;
+
+_____________________________________
+
+The Makaiaulu was born, the Opihi was its offspring.
+
+A night of flight by noises
+
+A night of flight by noises
+A night of flight by noises
+To filling, ’tis full,
+The Halula was born Halula (sea urchin).
+Man by Waiololi, woman by Waiolola,
+So the gods may enter, but not man.
+FOURTEENTH VERSE.
+The starfish was born, whose children were born starry.
+That filled and kept on filling
+Of the depth of darkness, of the depth of darkness,
+HE PULE HOOLAA ALII.
+
+Guarded by the Neneleau that grew in the forest.
+
+Man by Waiololi, woman by Waiolola,
+
+Kane was born to Waiololi, a female to Waiolola.
+FIRST VERSE.
+                         ’Tis night.
+Man by Waiololi, woman by Waiolola,
+FROM HIM TO HIS DAUGHTER, ALAPAI WAHINE.
+The Ina was born Ina (sea egg).
+             Seaweed and grasses
+The Haukeuke was born, the Uhalula was its offspring.
+Kumulipo was born in the night, a male.
+Made deafening by the swiftness of Time
+Man by Waiololi, woman by Waiolola,
+Through a channel; water is life to trees;
+A night of flight by noises
+The Leho was born, the Puleholeho was its offspring (cowry).
+Guarded by the Ko punapuna Koeleele that grew in the forest.
+The Akiaki was born and lived in the sea;
+So the gods may enter, but not man.
+At the time when the heavens turned and changed,
+So the gods may enter, but not man.
+A night of flight by noises
+Through a channel; water is life to trees;
+
+Through a channel; water is life to trees;
+Guarded by the Lipuu that grew in the forest.
+NINTH VERSE.
+The Ole was born, the Oleole was its offspring (conch).
+The phosphorous was born, whose children were born phosphorescent.
+Through a channel; water is life to trees;
+Man by Waiololi, woman by Waiolola,
+
+A night of flight by noises
+
+At the time that turned the heat of the earth,
+
+A night of flight by noises
+The Limukele was born and lived in the sea;
+Through a channel; water is life to trees;
+The Papaua was born, the Olepe was its offspring (pearl and oyster).
+             Seaweed and grasses
+A being, produced by earth and spread,
+A night of flight by noises
+
+The Hulu-waena was born and lived in the sea;
+
+The Koeleele was born and lived in the sea;
+At the time of the night of Makalii (winter)
+The earth worm was born, which gathered earth into mounds,
+A night of flight by noises
+HE KUMULIPO
+Through a channel; water is life to trees;
+
+                                    It is night,
+
+Poele was born in the night, a female.
+Man by Waiololi, woman by Waiolola,
+The Hawae was born, the Wana-ku was its offspring.
+SEVENTH VERSE.
+Through a channel; water is life to trees;
+Through a channel; water is life to trees;
+
+Guarded by the Kalo Manauea that grew in the forest.
+
+The Makaloa was born, the Pupuawa was its offspring.
+THIRTEENTH VERSE.
+And supported the earth, which held the heaven
+Man by Waiololi, woman by Waiolola,
+Through a channel; water is life to trees;
+A night of flight by noises
+A night of flight by noises
+
+On the wing of Time, the night is for Kumulipo (creation),
+
+So the gods may enter, but not man.
+Of the darkness of the sun, in the depth of night,
+ELEVENTH VERSE.
+
+So the gods may enter, but not man.
+The Pioe was born, the Pipi was its offspring (clam oyster).
+The Ne was born and lived in the sea;
+FOR
+
+A coral insect was born, from which was born perforated coral.
+
+Man by Waiololi, woman by Waiolola,
+FIFTH VERSE.
+The Aalaula was born and lived in the sea;
+EIGHTH VERSE.
+THIRD VERSE.
+So the gods may enter, but not man.
+
+So the gods may enter, but not man.
+
+Through a channel; water is life to trees;
+The source of deepest darkness.
+Guarded by the Kalamaloloa that grew in the forest.
+So the gods may enter, but not man.
+The Loloa was born and lived in the sea;
+The Lipuupuu was born and lived in the sea;
+
+The Pipipi was born, the Kupee was its offspring (limpets).
+
+TWELFTH VERSE.
+            Seaweed and grasses
+A night of flight by noises
+The Wi was born, the Kiki was its offspring.
+Guarded by the Manienie Akiaki that grew in the forest.
+Of filling, until, filled
+
+A night of flight by noises
+
+{p. 4}
+A husband of gourd, and yet a god,
+A tendril strengthened by water and grew
+KA I I MAMAO.
+To cause light to break forth,
+{p. 5}
+
+FIFTEENTH VERSE.
+
+The Nahawele was born, the Unauna was its offspring (muscle and crab in a shell).
+
+So the gods may enter, but not man.
+The Naka was born, its offspring was Kupekala (rock oysters).
+Man by Waiololi, woman by Waiolola,
+Through a channel; water is life to trees;
+Man by Waiololi, woman by Waiolola,
+Guarded by the Akala that grew in the forest.
+{p. 2}
+
+FOURTH VERSE.
+
+So the gods may enter but not man.
+Man by Waiololi, woman by Waiolola,
+Guarded by the Ekele that grew in the forest.
+Then began the slime which established the earth,
+Guarded by the Huluhulu Ieie that grew in the forest.
+So the gods may enter, but not man.
+(THE CREATION)
+
+The Manauea was born and lived in the sea;
+
+Guarded by the Ekahakaha that grew in the forest.
+From it were born worms full of holes.
+Of the Hee that lengthened through the night,
+The Puaiki was born and lived in the sea;
+                                    So was night born.
+SIXTH VERSE.
+
+SECOND VERSE.
+
+(An ancient prayer for the dedication of the high chief Lonoikamakahiki to the gods, soon after his birth, and at which time the honors of Kapu, Wela, Hoano, and Moe were conferred on him by his father, Keaweikekahialiiokamoku, King of Hawaii. After the ceremony his name was changed to Ka I i Mamao.)
+At the time when the light of the sun was subdued
+The Limukala was born and lived in the sea;
+The Akaha's home was the sea;
+Guarded by the Alaalawainui that grew in the forest.
+So the gods may enter, but not man.
+{p. 3}
+Guarded by the Moamoa that grew in the forest.
+Guarded by the Lauaki that grew in the forest.
+            Seaweed and grasses
+So the gods may enter, but not man.
+
+---
+
+## Second Era
+
+Guarded by Kou that grew in the forest.
+
+          Fish and Awa
+
+Guarded by the Uhi 1 that grew in the forest.
+
+Man by Waiololi, woman by Waiolola,
+Amongst piles of heated coral
+Through a channel; salt water is life to fish;
+On which Pouliuli sat.
+To disagree and turn sour,
+A night of flight by noises
+                 Fish and bread-fruit.
+A night of flight by noises
+Man by Waiololi, woman by Waiolola,
+The Mau was born, the Maumau was born in the sea and swam.
+The Kalakala was born, the Huluhulu was born in the sea and swam.
+Guarded by the Lauhue that grew in the forest.
+So the gods may enter, but not man.
+On their path so narrow, so slim, to move,
+The Pakukui was born and lived in the sea;
+And Powehiwehi his wife.
+The Nake was born, the Make was born in the sea and swam.
+Then the seven waters became calm.
+So the gods may enter, but not man.
+Till Pimoe (a mermaid) is found in the depth of her cave,
+The Napa was born, the Nala was born in the sea and swam.
+Man by Waiololi, woman by Waiolola,
+                                Fish.
+So the gods may enter, but not man.
+The Mao was born, the Maomao was born in the sea and swam.
+So the gods may enter, but not man.
+The Ono (large fish) was born, the Omo was born in the sea and swam.
+
+SIXTH VERSE.
+The Aku (bonito) was born, the Ahi (same kind) was born in the sea and swam.
+And the Kumimi (a crab) and Lohelohe (a locust) cling together
+{p. 8}
+Then was born a child (kama), ’twas a Hilu and swam.
+THIRTEENTH VERSE.
+EIGHTH VERSE.
+The Hee was born and lived in the sea;
+               Fish and vine.
+                ’Tis night.
+             (Kawa).
+Through a channel; salt water is life to fish;
+          Fish and large tree.
+Through a channel; water is life to fish;
+Through a channel; salt water is life to fish;
+Man by Waiololi, woman by Waiolola,
+Through a channel; salt water is life to fish;
+Suppressed the noise of the growth of unripe fruit,
+               Fish and vine.
+
+FIFTH VERSE.
+
+The Ehu was born, the Nehu was born in the sea and swam.
+
+{p. 10}
+The Moi was born, the Loiloi was born in the sea and swam.
+The Laumilo was born and lived in the sea;
+A night of flight by noises
+For pits of darkness and pits of night.
+The Hilu is a fish with standing fins,
+
+So the gods may enter, but not man.
+
+Embracing only the deep blue waters,
+The Ulae was born and lived in the sea;
+A night of flight by noises
+And lived in the land of Pohomiluamea (sloughy hill of Mea);
+Footnotes
+And when the land recedes from them
+{p. 11}
+
+Guarded by the Puhala that grew in the forest.
+
+Tossed up land for Pouliuli (darkest night),
+The first child born of Powehiwehi (dusky night)
+The Maiii was born, the Alaihi was born in the sea and swam.
+The Pahau was born in the sea;
+A night of flight by noises
+For Mahiuma or Maapuia,
+FIRST VERSE.
+
+Guarded by the Uwila that lived in the forest.
+
+{p. 7}
+NINTH VERSE.
+The Kaku was born, the A'ua'u was born in the sea and swam.
+The Nenue was born and lived in the sea;
+               Fish and shrub.
+THIRD VERSE.
+Man by Waiololi, woman by Waiolola,
+
+So the gods may enter, but not man.
+
+Through a channel; salt water is life to fish;
+So the gods may enter, but not man.
+The Weke was born, the Lele was born in the sea and swam.
+Man by Waiololi, woman by Waiolola,
+With Hikawainui, and Hikawaina
+Man by Waiololi, woman by Waiolola,
+A night of flight by noises
+
+Guarded by the Lauhau that grew in the forest.
+
+Surely it must be dismal, that unknown deep;
+
+The Pahau (striped flatfish) was born, the Lauhau was born in the sea and swam.
+The Palaoa (sea-elephant) was born and lived in the sea;
+The Nana was born, the Mana was born in the sea and swam.
+Through a channel; water is life to fish;
+So the gods may enter, but not man.
+A night of flight by noises
+                   Eel and tree.
+
+The train of Palaoa (walrus) that swim by
+
+To the rolling motion of their cradle
+FOURTEENTH VERSE.
+So the gods may enter, but not man.
+Guarded by the Milo that grew in the forest.
+The Puhi kauwila was born and lived in the sea;
+            Fish and grass.
+FIFTEENTH VERSE.
+
+Guarded by the Awa that grew in the forest.
+
+A night of flight by noises
+The Ulua was born, the Hahalua was born in the sea and swam.
+The Opelu (same as above) was born, the Akule was born in the sea and swam.
+A night of flight by noises
+The Aoaonui was born, the Pakukui was born in the sea and swam.
+Through a channel; salt water is life to fish;
+Guarded by the Ulei that grew in the forest.
+
+The Ao was born, the Awa was born in the sea and swam.
+
+SEVENTEENTH VERSE.
+SEVENTH VERSE.
+FOURTH VERSE.
+TENTH VERSE.
+A night of flight by noises
+The Haha was born and lived in the sea;
+10:1 There are four varieties known to me--the Aura, Clisle, Pia, Manalo.
+
+The Aawa was born and lived in the sea;
+
+A night of flight by noises
+
+                   Eel and tree.
+Also the Opule that move in schools,
+               Fish and shrub.
+The Halahala was born, the Palapala was born in the sea and swam.
+            Sea and water fish.
+Man by Waiololi, woman by Waiolola,
+Through a channel; salt water is life to fish;
+
+Through a channel; salt water is life to fish;
+
+The east is still in darkness of night,
+The Pea (starfish) was born, the Lupe was born in the sea and swam.
+A night of flight by noises
+So the gods may enter, but not man.
+For Pouliuli was husband
+SIXTEENTH VERSE.
+ELEVENTH VERSE.
+The Pala was born, the Kala was born in the sea and swam.
+
+Through a channel; water is life to fish;
+
+Man by Waiololi, woman by Waiolola,
+        Fish and yam or Uhi
+So the gods may enter, but not man.
+SECOND VERSE.
+Man by Waiololi, woman by Waiolola,
+THE SECOND ERA.
+
+The Amaama (mullet) was born, the Anae (large kind) was born in the sea and swam.
+
+Man by Waiololi, woman by Waiolola,
+For fear Uliuli would cause it to burst, and the stench
+The Umaumalei was born and lived in the sea;
+The Oo was born, the Akilolo was born in the sea and swam.
+Through a channel; salt water is life to fish;
+And fish was born, the Naia (porpoise) was born in the sea and swam.
+So the gods may enter, but not man.
+Through a channel; salt water is life to fish;
+
+The Palani was born, the Nuku Moni was born in the sea and swam.
+
+Guarded by the Oopuwai that lived in the forest.
+
+So undecided seemed Powehiwehi,
+Guarded by the Mokae that grew in the forest.
+Man by Waiololi, woman by Waiolola,
+Through a channel; salt water is life to fish;
+         (Impomea batatas).
+                   Eel and tree.
+A night of flight by noises
+
+So the gods may enter, but not man.
+
+That were thrown in piles unevenly,
+Guarded by the Aoa that grew in the forest.
+{p. 6}
+The Kupou was born, the Kupoupou was born in the sea and swam.
+Guarded by Laukukui that grew in the forest.
+The Mano (shark) was born, the Moana was born in the sea and swam.
+
+So the gods may enter, but not man.
+
+The Hauliuli was born and lived in the sea;
+Guarded by the Walahee that grew in the forest.
+{p. 9}
+The Kapoou was born and lived in the sea;
+Man by Waiololi, woman by Waiolola,
+The Iao (used for bait) was born, the Aoao was born in the sea and swam.
+So thin and scraggy in the blue tide.
+’Tis a sea of coral from the depth of Paliuli,
+The Paka (an eel) was born, the Papa (crab) was born in the sea and swam.
+The Oopukai was born and lived in the sea;
+TWELFTH VERSE.
+The deep is as nothing to them.
+A night of flight by noises
+A night of flight by noises
+The Weke was born and lived in the sea;
+So the gods may enter, but not man.
+Man by Waiololi, woman by Waiolola,
+
+Through a channel; salt water is life to fish;
+
+Guarded by the Wauke that grew in the forest.
+
+---
+
+## The Third Era
+
+And the Palai (fern) sprout that shot forth leaves of high chiefs
+
+The Noeo was born and lived on the sea,
+
+The Haha grew and had nine leaves,
+
+The Hualua was born and became parent;
+The Naonao (an ant) was born and became parent;
+Its offspring was a flying Pulelehua (butterfly).
+The Kiki was born and became parent;
+Shoot forth their young sprouts and spread
+Man by Waiololi, woman by Waiolola,
+The Kolea of the island lived on the sea,
+Eggs and Io are life to birds,
+The Noio lived on the sea,
+A night of flight by noises.
+Guarded by the Nene that lived in the forest.
+A night of flight by noises.
+
+As the Ape sprout whose delicate shoots
+
+The Ka Iwa was born and became parent (sea-bird);
+Its offspring was an Au, and flew (a species of plover).
+             And usually light on the sea beach
+Brought forth Poeleele, a man (darkness),
+Its offspring was an Uhini, and flew (grasshopper).
+Guarded by the Io that lived in the forest.
+Man by Waiololi, woman by Waiolola,
+FOURTH VERSE.
+The Naio was born and became parent (waterworms);
+Its offspring was a Moli, and flew.
+Guarded by the Kolea that flew on land.
+NINTH VERSE.
+Its offspring was a Pinao (dragonfly).
+Eggs and the Io are life to birds,
+Its offspring was Elepaio, and flew (woodpecker).
+Man by Waiololi, woman by Waiolola,
+            Sea-birds.
+             And darkest age--of bubbly night.
+             It was so on that night,
+A night of flight by noises.
+Its offspring was a Alaiaha, and flew.
+
+And the woman was born in the age of bubbles.
+This is the leaping point of the bird Halulu
+Eggs and Io are life to birds,
+The Akekeke was born and became parent (sea-bird);
+A night of flight by noises.
+Man was born of Waiololi, woman Waiolola,
+Who lived with Pohaha, a woman (bubbles),
+Its offspring was a Kaula, and flew (sea-bird).
+Of Kiwaa, the bird of many notes,
+Its offspring was a bird, and flew.
+The Alae was born and became parent (mud hen);
+The waters spread, the mountains spread,
+             Insects.
+Its offspring was a Koae, and flew (man-of-war hawk).
+Their gall burst easily with a smack
+So the gods may enter, but not man.
+             It was so this night,
+THIRD VERSE.
+Eggs and Io are life to birds,
+Guarded by the Pueo that lived in the forest.
+                          ’Tis night.
+Guarded by the Lupe that grew in the forest.
+They cover the land with their young to the rock's edge,
+THE THIRD ERA.
+
+             It was dark at the time with Poeleele,
+
+He was the man and she the woman;
+So the gods may enter, but not man.
+{p. 15}
+FIRST VERSE.
+Man by Waiololi, woman by Waiolola,
+The Moha was born and became parent (wingless bird);
+So the gods may enter, but not man.
+And bring forth in their birth many branches.
+So the gods may enter, but not man.
+
+His offspring, a Hahalelelele, was born.
+
+Its offspring was the Ukihi, and flew.
+
+The Eea was born and became parent;
+EIGHTH VERSE.
+So the gods may enter, but not man.
+Its offspring was the Oo, and flew (black woodpecker).
+The Poniu grew tall with advancing time,
+And brought forth generations of Haha (kalo tops).
+
+They covered the land of Kanehunamoku.
+
+So the gods may enter, but not man.
+{p. 12}
+Eggs and Io are food for birds,
+And birds of the sea.
+                      The Haha was born.
+Through a channel; the Io is life to birds;
+
+Guarded by the Ekupuu that grew on land.
+
+The Peelua (caterpillar) was born and became parent;
+Its offspring was a Nalo, and flew (flies).
+A night of flight by noises.
+               Birds.
+             These birds fly together in flocks
+Its offspring was a Kolea, and flew (plover).
+
+The Hehe was born and lived on the sea,
+
+Its offspring was a Kukuluaeo, and flew (crane).
+The man that was born in the dark age,
+The sea spread, the land spread,
+The Unia was born and became parent;
+The Mamo was born and became parent (the royal bird);
+The Lupe was born and lived in the sea;
+
+{p. 14}
+
+Man by Waiololi, woman by Waiolola,
+The Aukuu was born and lived on the sea (Pewit),
+Its offspring was an Aukuu, and flew.
+             And array themselves in line.
+
+Then was born the Unauna (shell-fish, part crab);
+The Haha was born and became parent;
+{p. 13}
+
+SIXTH VERSE.
+
+SECOND VERSE.
+The Kioea was born and became parent (stork);
+The Alala was born and became parent (crow);
+The A-o was born and became parent;
+Its offspring was an Alawi, and flew.
+A night of flight by noises
+The Ulili was born and became parent (snipe);
+SEVENTH VERSE.
+And of those birds that fly closely together as to shade the sun,
+These were born birds of the land
+Its offspring was an Apapane, and flew (red woodpecker).
+FIFTH VERSE.
+The Kala was born and became parent (sea-bird);
+
+---
+
+## The Fourth Era
+
+The earth was born and lived by the sea;
+
+The birth night of the lazy monster
+{p. 18}
+The Okea was born and lived in the sea;
+Guarded by the Oheohe that grew in the forest (bamboo).
+So the night must wait for motion.
+As it crept up and yet crept down
+And brought forth creeping families
+Watch in the night for the land turtle.
+And is unsteady.,
+Night dug deep for jelly fish,
+A night of flight by noises
+SEVENTH VERSE.
+And Night loudly called for roughness.
+
+A night of flight by noises
+ELEVENTH VERSE.
+Till to earth they become a burden
+These live on dirt and mire;
+The Wawa was born and lived in the sea;
+Man was created by Waiololi, woman by Waiolola,
+To increase in the night by the thousands.
+
+A night of flight by noises
+
+A night of flight by noises
+Guarded by the Kuhonua that grew in land (a shrub).
+Night gave birth to wailing
+So the gods may enter, but not man.
+SECOND VERSE.
+Man by Waiololi, woman by Waiolola,
+Eat and rest, eat and throw up;
+Guarded by the Piko that grew in the forest.
+Through a channel; la-i is food and creeps;
+Man by Waiololi, woman by Waiolola,
+Made unsafe, until one reels
+And with humpy lumpy lashes sweeps
+Through a channel; la-i is food, and creeps;
+So the gods may enter, but not man.
+Night was born.
+{p. 16}
+
+Through a channel, la-i is food, and creeps;
+
+A night of flight by noises
+At this age take your children to the beach.
+                         ’Tis night.
+A night of flight by noises
+Man by Waiololi, woman by Waiolola,
+
+The Nene was born and lived in the sea (geese);
+
+Man was born to increase--
+The Wili was born and lived in the sea;
+Of mud that's made,
+Man by Waiololi, woman by Waiolola,
+
+So the gods may enter, but not man.
+Through a channel; la-i is food, and creeps;
+Was a wet night for the rolling monster.
+
+Go thou to the land of creepers,
+
+They are the children born of night.
+They exist on filth, are low-born beings,
+Through a channel; the la-i is food, and creeps;
+Envied the sea that washed the land,
+{p. 17}
+Night was rolled for the pleasure of gods,
+
+Night gave birth to slush,
+
+EIGHTH VERSE.
+SIXTH VERSE.
+Guarded by the Nonanona that lived in the forest (ants).
+The Liko was born and lived in the sea;
+That crept on their backs and crept on their front,
+Guarded by the Ahakea that grew in the forest.
+
+Guarded by the Wanawana that lived in the forest.
+
+The Ape aumoa with faintest strife
+A night of drawback to oblivion,
+Guarded by the Manene that lived in the forest (weed).
+So the gods may enter, but not man.
+And trails along in filthy places.
+The Okeope was born and lived in the sea;
+
+TENTH VERSE.
+
+Established in the dawn of Laa's light
+The Nananana was born and lived in the sea (spider);
+Of darkness, of darkness,
+And Polalowehi his wife,
+Night gave birth to the brown lobster,
+Guarded by the Wiliwili that grew on land (tiger's claws tree).
+
+FIFTH VERSE.
+
+So the gods may enter, but not man.
+
+For Kaneaka Papanopano is born (dawn).
+NINTH VERSE.
+The Aio was born and lived in the sea;
+Night gave birth to high noses,
+Man by Waiololi, woman by Waiolola,
+Night gave birth to the split-back turtle.
+
+At this age there is a lull--
+
+TWELFTH VERSE.
+With long and waving lengthy tail,
+Guarded by the Naio that grew in the forest (mock sandalwood).
+So the gods may enter, but not man.
+The night of commotion for the Alii (?) lobster,
+Man by Waiololi, woman by Waiolola,
+
+Night was born of great delight,
+
+THIRD VERSE.
+Through a channel; la-i is food, and creeps;
+Through a channel; the la-i is food, and creeps;
+The dancing motion till creeping crept
+With pulses that beat in front and rounding backs,
+Man by Waiololi, woman by Waiolola,
+
+Through a channel; la-i is food, and creeps;
+
+Where families of creepers were born in one night.
+So Popanopano the man
+FOURTH VERSE.
+A night of flight by noises
+A night of flight by noises
+Through a channel; the la-i is food, and creeps.
+Night gave birth to clinging beings,
+FIRST VERSE.
+So the gods may enter, but not man.
+Children play at heaping sands.
+A night of flight by noises
+With faces in front and claws to feel
+So the gods may enter, but not man.
+Man by Waiololi, woman by Waiolola,
+
+---
+
+## The Fifth Era
+
+The Makuakua was born, and became kuakua (great).
+
+The Huelo Maewa was born, with very long tail.
+
+The Hulu was born, and became a-aia (demented).
+
+The Poomahakea was born, his skin was fair.
+                            ’Tis night.
+THE FIFTH ERA.
+The Lawalawa was born, becomes a lawalawa.
+The Pukaua was born, and became a warrior.
+             For Umi who is to possess the land,
+The Hewahewa was born, and he remained so (light-headed).
+A trail as fine as the choicest hair of this pig,
+{p. 20}
+He raised a hill for his gods,
+             For Umi who is to reign anon;
+The Pooapahu was born, was a hairy man.
+SECOND VERSE.
+That is his, this is in shreds.
+He dug until he raised a great mound,
+His snout was of great size and with it dug the earth;
+The Luheluhe was born, and became luheluhe (limber).
+Was the darkness of the famous Polalouli (night in the deep),
+The Puuwelu was born, and became weluwelu (ragged).
+The Meleuli was born, and became melemele (yellow-haired).
+The advance of age when Kapokanokano (night of strength)
+
+A being was born half pig, half god,
+
+FIRST VERSE.
+Who became the wife of Polalouli.
+Who married for wife Kapokanokano.
+The Halahala was born, decorated with lei Hala.
+Till relations are enrolled from Kapokanokano
+The Pooauli was born, is dark complexioned.
+Established heaps in the Polalouli (depth of night),
+The Poohiwahiwa was born, he appeared noble.
+The Hulu liha was born, and became lihelihe (hairy eggs).
+The Meheula was born, and became red.
+The Hooipo was born, and became hooipoipo (loving).
+
+And the land grew and spread,
+Then came the children of Loiloa,
+And rested by the patches of Loiloa,
+The Hilahila was born, and became hilahila (very bashful).
+The Awaawa was born, and became awaawa (sour disposed).
+The Poomeumeu was born, is a short man.
+The Poohaole was born, he became a haole (foreigner).
+The land where Kapokanokano dwelt,
+The Poopahapaha was born, his head was flat and spread.
+At the time of life of Kapokanokano,
+Built a house and paid the forest
+{p. 19}
+The Aliilii was born, and became liilii (puny).
+And the goblet of wish was lowered
+The Poowaawaa was born, his head was uneven.
+             Night was born.
+The Haupo was born, and became hauponuinui (noble-chested).
+For the offspring of a pig which was born;
+The Kenakena was born, and became kenakena (bitter).
+To which place laid a path of frailest trail,
+The Hulupii was born, and became piipii (curly-headed).
+Of songs that grasp of Oma's friends
+                          At yester eve.
+Of affections for the tribe of relations,
+The Eweewe was born, who was proud of his pedigree.
+A hill, a precipice in front,
+And the dark fresh color of the earth thrown up
+
+---
+
+## The Sixth Era
+
+Which fills the faint-hearted with awe,
+There huddle together the little mice.
+That sends out its stiff branches as a sacred frill,
+Those are beings who eat by gushing waters,
+There in hollow places the parent rats dwell,
+
+But brings such ones to claim friendship.
+The child of Uli-a-kama last night.
+20:1 The royal plume.
+They gave birth to beings that leaped in the night, that moved away
+That hides and peeps.
+A sacred emblem 1 is the kahili of Kuakamano
+
+Footnotes
+They were born in the night that moved away.
+They run over the pebbles,
+A puny child born in the night of the crash.
+Who eat also by the dashing sea,
+The tiny mice spring as they move.
+There are also rabbits
+The tiniest mice move by crawling;
+There are rats inland, there are rats at sea.
+They live in nests inside ditches,
+It is they who keep the changes of the month.
+Whose lashes stand,
+The propagating pebbles where no inland ohia bear.
+’Tis Mehe the reddish seaweed
+The mites of the land,
+                          ’Tis night.
+That were born in the night of the crash--
+
+{p. 21}
+
+The mites of the water,
+
+---
+
+## The Seventh Era
+
+’Tis fearful the amount eaten and left--
+That the rising surf might give it birth.
+{p. 22}
+Over the mountains silence reigns--
+The silence of night filled with people,
+Else he'd repent for having no hair,
+And the silence of night that cometh,
+He is equal to the blowing breeze,
+A speckled bird was first sacrificed,
+
+From great to small,
+Else he'd repent for having no covering,
+The silence of night that has moved away,
+And go naked on the road to Malama,
+And the silence of night of dispersing.
+’Tis fearful the steps and narrow trails--
+That offspring a dog,
+A dog without hair, sent by the gods,
+The younger brother of the god
+The night that went by and brought forth an offspring,
+                           ’Tis night.
+A yellow dog, a tiny dog,
+From tall to short,
+Sprang the bat and moved away,
+The hairy bats. Sprang the bat with many claws--
+’Tis fearful the night past and gone,
+From which sprang the gods of the bats--
+The easiest path for children,
+A dog sent for sacrifice.
+The awful stillness of the night that came--
+
+---
+
+## The Eighth Era
+
+After them was born Wehiloa.
+Kanaloa was born a god, the great Kaheehaunawela (Octopus).
+And lived in the land of Lua (deep hole).
+Laiolo was born by Kane.
+That woman was Lailai of the distant night,
+Beings were born to increase.
+Then Olohelohe was born in the day a man,
+Maila was born and called Lopalapala (ingenious),
+Dwelt with people of Kapokinikini.
+Male was born of Waiololi,
+Hahapoele was born a woman,
+Their chins are light.
+From them these were born,
+
+The child in the time of riding distant surf in the night.
+                           ’Tis day.
+These men that flew naked were the men of the day.
+Called Moanaliha.
+A man of long life and very high rank.
+The little beings who were cross-eyed,
+The last was Kupololiilialiimuaoloipo,
+Of men lying down,
+The child in the time of numerous night,
+Her other name was void or nakedness,
+
+That of man is dark.
+They slept long sleep in the distant time,
+                            ’Tis day
+And Olohelohe was born at the time, a woman,
+{p. 23}
+Kawaomaaukele came next.
+Then calmness spread in the time of Kapokinikini--
+Poelei and Poelea were born twins.
+O night! O God of Night!
+And it was called there Lailai.
+The forehead of the gods is red.
+Hapopo was born a woman.
+O kupa, Kupakupa kupa, the settler!
+Kapopo was born a woman,
+Female was born of Waiolola,
+And went staggering when they walked.
+And lived with Kane.
+Lailai, the woman. Kapokinikini
+Kii was born a man.
+Lailai was born a woman,
+So the place was called Olohelohe lua.
+That stood in numbers and moved in myriads.
+The drums were born,
+Kane a god was born.
+The child of Uli, of Uli of Ke,
+Men that stood,
+
+Then Kupakupa the settler, the woman who sat sideway,
+Calm in the time of Kapoheenalu mamao,
+Then was born the night of gods,
+{p. 24}
+
+---
+
+## The Ninth Era
+
+Then the signs appeared and cast their shadow
+A woman with dark skin, from the land of Iipakalani,
+Haha Poele was born a woman,
+And on the boughs of the Aoa tree, in Nuumealani stayed,
+This woman ascending to heaven,
+A woman whose person was never seen,
+The times of those people came to naught.
+Onehenehe flew where the earth rose.
+Children of Kii that were born from the brain,
+On their chins shot roots of fire.
+A tribe, a generation of great strength,
+Lohelohe was born last of all.
+Lailai, of the quaking earth,
+Hapopo was born,
+On their forehead, a bread fruit was impressed,
+Where numbers of men lived in the heat.
+Were born and flew, both flew to heaven.
+These were the children of this woman.
+Climbed to heaven by the forest.
+This woman was from a race of delusions (myth),
+Became pregnant, and the earth was born.
+From her to Kane of Kapokinikini.
+She alone flew to her abode,
+This woman lived in Nuumealani,
+Who stripped with great ease the leaves of the Koa;
+Land where the Aoa thrived,
+Of great heat and noise, and opening heavens,
+From her to Kii, from him to Kane,
+                            ’Tis day.
+
+---
+
+## The Tenth Era
+
+For the younger child of the younger branch.
+
+Hakea was born a man,
+
+Kamamale was born a man,
+Kamakalua a woman,
+Halia was born a woman,
+Yield the sacred right to Kii;
+Then hid and dared not claim kin,
+The Muki, Muka, and Mukekeke were born (kisses, smacks, chirruping),
+And Kane of Kapokinikini was support, Kii was helpless.
+Then Wehiwelawehi loa.
+{p. 25}
+                            Is born.
+That is why first-born are always hakus (superiors, lords),
+THE TENTH ERA.
+Laioloolo was born and lived at Kapapa.
+Maila, with Lailai for protection,
+For to be with Kii, ’tis his to claim.
+The heavens deny the right of kin (being of younger branch),
+Lailai went back to Kane,
+The men became speechless from sulkiness,
+Kane then taunts her eldest for this,
+{p. 26}
+Poeleieholo a child,
+Kii retaliates through Lailai for his being the younger branch;
+He flings a stone and hits Kane;
+Of the woman who is brave and fearless,
+The sign of life for the younger.
+First through Lailai, next by Kii,
+Kane, furious with jealous anger, struck her for faithlessness
+Their first-born with sacred birthright
+Became cross from envy of ours,
+Moku, Monu, mumuleana (strife, broils, and huffiness),
+Smacks, boils, and other weaknesses,
+To claim kin with her child.
+Kamahaina was born a man,
+
+Poeleaaholo a child,
+Hai was born a woman,
+Then is heard the sound of the drum,
+
+---
+
+## The Eleventh Era
+
+Akia (bit in two, a tree).
+Liilikalele.
+Laukunu (broiled leaf).
+Leleiona (fly towards him).
+Liilila.
+Ilimaka (raw skin or hide).
+Liipulama.
+Polehua (night of lehua).
+Hoomeha (loneliness).
+Maumau (over and over again).
+Liilimahimahi.
+Puuha Keewe (fourth heap of relation or generation).
+Helepuau (I went also).
+Liilihuliana.
+
+Huli (turn over).
+
+Kupolonaanaa (dark night of cramps).
+Aiano (it is there).
+Kahu (servant).
+Meia (thus).
+Holehole (stripped of bark).
+Pakaikai (a weed).
+Ponouli.
+Poeleele (dark night).
+
+Pepa.
+Kuleha (looked askance).
+Ahiahihia (were belated last eve).
+Papaa (slab).
+Kaena (boaster).
+
+Haipule (devout).
+
+Mauaka (two shadows).
+Pulukea (damp and light).
+Liiluakini.
+Wife.--The meaning.
+Milio.
+Iho (go down, downwards).
+Heleiamai (drawing down the lower eyelid).
+Loinuiloi.
+
+Holeha (used for haole).
+Hemolua (loosed in pairs).
+Keaho (the breath).
+Onanana (pain of travail).
+
+Muamamao.
+
+Wife.--The meaning.
+
+Naio (worms).
+Muahale (future of house).
+Lulu (contribute, shake, calm).
+Aukai (swim in the sea).
+{p. 50}
+
+Kalau (the leaf).
+Opiliwale (shiver from cold).
+Kealapii (the ladder).
+Kuwahine (female Ku, sister).
+Ailakau (permanently burnt by the sun).
+Aliikilo (chief of science).
+Makou (us, healthy complexion).
+Panakahikenahu (one stroke and then a bite).
+Hapuu (fern-root, a mountain).
+The husband.--The meaning.
+Kuamoo (path).
+Hoohiwa (to make much of).
+Ehu (yellow).
+Kulukaua (rain drops).
+Au (swim, tide, date or time).
+Maikomo (nearly caught).
+
+Nahalau.
+Then Storm was born, the Tide was born,
+Laohe (day of bamboo).
+Nolu (soft, spongy).
+Makanalau (numbers of presents).
+Lelea (to jump or leap, he leapt the fence).
+Apoapoahi (catching fire).
+Helemai (come here).
+
+Loihalalu.
+Wanaku (standing sea egg).
+Haleakeaka (house of shadow).
+Mau (fastened, caught, things, more than one).
+Palemo (slip through, drown).
+Kuinewa (blow from a club).
+
+Makuma (pimply face).
+
+Poloikanahele (Polo of the forest).
+Kai (sea).
+Eleiku (standing black).
+Hoonahu (pretend to bite).
+
+Kakai (range of mountain, straps).
+Leleipaoa (flew at dead of night).
+Manoa (thickness).
+Pohinakau (misty).
+Pono (right).
+Muanaluhaki.
+Aliihonupuu (chief with throat like a turtle).
+Aliilanahu (charcoal chief).
+Kelea (surface made smooth).
+Kamanuhaahaa (humble-bird).
+The husband.--The meaning.
+Pano (deep darkness).
+Keanalii (the chief's cave).
+Kapuhi (the eel, a favorite).
+Kukeleau (I am drenched).
+{p. 51}
+
+Laulaha (spread abroad).
+Mokukapewa (cut the tail of a fish).
+Pihapiha (frills or full to over-flowing).
+Kona (his, its, south wind).
+Wailuhi (drink that inebriates).
+Hunu.
+Aliikiloloa (chief that saw in the future).
+
+Meihiolo (things that fell).
+Peleu (broad).
+Piala (sprinkle water on the rocks).
+Mua (first).
+Kuponakanaka (dark night of trembling).
+Oopuola (live mudfish).
+
+Kolokolo (to persist).
+
+Lewelimakenahu (five swings and then a bite).
+
+Huluaka (old feather).
+The husband.--The meaning.
+Lukau.
+Loikoiii.
+Ko'u (damp).
+Puainea (something delicate and nice).
+Loiloikopea.
+Uliuli (darkness, black).
+Puhimaka (raw eels).
+Paua (rainy fence).
+Aliikilomalama (chief skilled about observing the months).
+Mahuli (turn over and over).
+Hulili (glisten in the sun).
+Liko (young shoot of tree or shrub).
+Poloihanahana.
+Poloikalua (Polo in the ditch).
+Umu (native oven).
+Haleluakini (house of worship).
+Heia (entombed, caught, chased).
+Kaheka (pits in the rocks on seashores).
+Kalawela (the hot day).
+Oheohe (slight, slim).
+Opala (rubbish).
+Molemole (lag behind, roots).
+Malu (shade, protection).
+Helimaia (that is a hand).
+Paa (to hold, obstruction).
+Hoomahilu (try to be distant).
+Manukele (wet-bird).
+Pololani (night of Lo's in the heavens).
+Muailoiloi.
+Melemele (yellow).
+
+Kaua (we, us).
+
+Pokopoko (stubby, short, little bits).
+The husband.--The meaning.
+Niniahu.
+Mulemulea (bitter).
+Liiliholowaa.
+Halula (sea eggs).
+Napuuikahakahinalea (fourth heap by Hinalea).
+Opuopu (filled to overflowing).
+Kupololaiaku (dark night of calmness going).
+Paluaakaeaakilolo (second by the turtle Akilolo).
+{p. 48}
+Kaahiki (journey).
+Lukona.
+Maku (thick paste).
+Pae (arrive).
+Halulu (crash).
+Kulu (drop).
+Polokaulani (Polo's night in heaven).
+Polohaihai (Lo's dark night of breaking).
+The husband.--The meaning.
+Hoohuli (tip over).
+Kahaiau (temple).
+Kauhi (the coverlet, a yam).
+Lanai (veranda, an island).
+Henahuno (it does bite, stomach ache).
+Manukoha (chirping bird).
+Hanahana (hot, excessive heat).
+Uhuau.
+Kupololili (dark night of Lo jealousy).
+Halawai (meeting, met).
+Nenee (stunted, creep).
+Amoi.
+
+Laumeki (a kind of eel).
+
+Helelu (walk and strew).
+
+Kahiko (old, stale).
+Ukianu (coarse grass growing in cold places).
+Paepae (steps of a house).
+Meualua.
+Lena (yellowish).
+{p. 36}
+Pahilo (delicate person, sickly).
+Polomauli.
+Nauia (that is yours; chew it).
+Kaio (a piece of fish, a bird).
+Makana (present).
+Papahuli (overturned board).
+Kaumai (laid on, lay it on).
+Piopio (the cry of chicks).
+{p. 54}
+Ohiohikahanu (quick breath).
+Kalaku (proclaim).
+Poloahiluna (fire god above).
+Liilimiha.
+Loiahuahu.
+Kunewa (stagger).
+Poloikamakani (Polo in the wind).
+Limaauki (hand of ki stalks).
+
+Loiloinaka.
+
+Lana (float, launch).
+Napoi (cover of calabash).
+Loiloi (fastidious).
+Leawale (ecstasy).
+Hoowili (repetition).
+Kimopu (to fall together).
+Meheia.
+Maua (two persons, we).
+Hawane (Hawaiian palm).
+The husband.--The meaning.
+Muapo (future darkness).
+Kupohilili (dark night).
+Hulikahikeoma.
+Hahooili (landed tribe).
+Lou (hook, a wink of the eye).
+Liilikakii.
+Muahoopo.
+Hulikau (overturned on top).
+Keohoko (leaves of sugarcane).
+Mailu (small, insignificant).
+Helemau (go often).
+Moolelo (a tale, history).
+{p. 34}
+
+Aliikilohooilo (chief skilled about summer).
+
+Kini (1,000, forties, friends).
+
+Mahele (to divide, share).
+Lohi (late, slowly).
+Liiaupa.
+Poloi.
+The husband.--The meaning.
+{p. 56}
+Ahiakapoloa (fire of a long night).
+Waiku (standing water).
+He (grave, it is).
+Kupolonakunaku (dark night to wallow).
+Naalo (the two fronts).
+Meua (we).
+Luka (drop and shake).
+Paani (play, amusements).
+Mualupe.
+Hoolaumiki.
+Helenaku (walk shuffling).
+Aliilehelehe (chief with lips).
+Aila (eaten by the heat of the sun).
+Nakumau (the large calabashes).
+Polomehewa.
+Wife.--The meaning.
+Keoa (the rafters).
+Kupoka (so it is night).
+
+Hulili (glare).
+
+Manaaala.
+The husband.--The meaning.
+Mano (four thousand).
+Loikalakala.
+Ipulau (bowl of leaves).
+Nahae (torn, slit).
+Mama (swift, chew).
+Moulikaina.
+Aliiwalaau (noisy chief).
+Kupo-e (suddenly dark).
+Manuala (that bird, sweet bird).
+Nohilo.
+Liiliau.
+Mainahu (stomach ache).
+Muaokahanuu.
+Miko (salted, preserved).
+Apuwaiolika (draught of water).
+Poloimauna (Polo of the mountain).
+Kukululiulu (drops).
+Polowe-na.
+Kalu (cleaning taro patch).
+Muanalupopoi.
+Manomano (persistence).
+Hoohali (draw out to betray).
+
+Loiihiihi.
+
+Upa (slammed, banged, slapped).
+
+Mahea (where).
+Aliikilonalu (chief skilled about surfs).
+Malumalu (shade, safety).
+Loipo.
+Paakaeakenahu (held the breath and then a bite).
+{p. 37}
+Nakulii (grovellers, small stands).
+Koiele (swing).
+Wife.--The meaning.
+Nahu (stomach ache, to bite).
+Wife.--The meaning.
+Wife.--The meaning.
+Haliluna (take up).
+Puiki (embrace).
+Hepahuno (it has burst).
+Milimili (handle, fondle).
+Liho (something choice).
+The husband--The meaning.
+Mulemule (easily offended).
+Mania (smooth, drowsy).
+Muaahilu.
+Loikamakele.
+Kawele (drag, wipe up, wave gracefully).
+Holi (thin, slight).
+Poilumai (night of strewing).
+
+Heanaipu (cave of gourds).
+
+Aliikilohulu (chief skilled about feathers).
+Namu (little people, midgets).
+Miloha (rope of four-strand twist).
+Nakai (the seas).
+Huhu (anger).
+Poloihilima.
+Aliinewa.
+Moemole.
+Paka (cut off in pieces, tobacco).
+Kealo (the right side of anything, or front).
+Mokukaha (wide cut).
+Makaiao (watching of the dawn).
+Pohea (which or what, night or night of call).
+Puukolukolu (three heaps).
+Liiluakii.
+Hiwa (choice, precious).
+Halima.
+Hoomaka (to begin).
+Hemo (undone, wrenched, taken of, separated).
+Kahiona (countenance).
+Loiahemahema.
+Upa (to slam, cut).
+Muanaluhaikakala.
+Hoopiopio (sorcery).
+Brought increase to the world.
+
+Hoolua (cook in Ti leaves, name of a wind).
+
+Keomo (plug).
+
+Kanamu (little gods).
+Hapoe.
+Poimoimo (blinking night).
+Kulana (unsteady, position).
+Luahiko.
+The husband.--The meaning
+Aliikilomoo (chief skilled about serpents).
+Nanaikala (look at the sun).
+Lono (heard).
+Muanalu.
+Liilinohoana.
+Koiniho (axe of teeth).
+Pakapaka (blotches).
+Muaokeoma.
+Hilipalahalaha (broad braid).
+Lanalana (hopeful).
+Muawaa (prow of a canoe).
+Kuamaulu (tired back).
+Makini.
+Kahikahi (to rub, smooth).
+Muaokepahai.
+Mahinalea (moonlight enjoyment).
+Loimua.
+Leho (cowrie).
+Manamana (fingers).
+Kupololililili (dark night of extreme jealousy).
+Omaka (sprout, budding, sowing of).
+Emio (taken secretly).
+Aliinana (staring chief, kind chief).
+
+Ukilelewa (coarse grass hanging).
+
+Loianomeha.
+Holio (constantly before one's eyes or thoughts).
+Muaapoi.
+Ahiakapokau (fire of night in the season).
+Liilipukiu.
+Pulupuli.
+Pahili (deceive, pretence).
+Mouo (buoy).
+Koikua (falseness, to go back of).
+Kulamau (forgiven repeatedly).
+Hilahila (shame, diffident).
+Liiliwalewale.
+Pana (bow and arrow, snapped).
+Kalakala (rough surface).
+Hiko.
+Liilikaliaka.
+The husband.--The meaning.
+Hookonokono (to insist).
+Kokoiele (swing).
+Auli (whoredom, by Uli the god).
+Aliikilomakalii (chief skilled about observing the winter).
+{p. 35}
+Paepae (sill of a door).
+Hooilo (winter months).
+Aliikomokomo (turning in chief).
+Kapala (smirch, leavings).
+Liilikaumai.
+Menea.
+Hiileia (precious burden).
+
+Manuakele.
+
+Ikuwa (swell of sound).
+
+Mokukaia (the fish is cut).
+Hoopulu (make damp).
+Hoomu (left in a pile).
+Kuaiwakelekenahu (nine watery bites).
+Halepaio (house of dispute).
+Poniponi (very black).
+Kupolohalala (dark night of reeling).
+Auhuhu (poisonous shrub).
+The husband.--The meaning.
+Kamau (to eat, to fasten firmly).
+Aliikilomakani (chief skilled about the wind).
+Nuu (to gauge, steps, upper grade).
+Launie (smooth).
+Memeha (alone).
+Liiohinu.
+Hoaka (glitter, second night of the moon).
+Puiiliili (frequent embraces).
+Liilipaluku.
+Kuamu (like a moth).
+Panionio (many colored).
+Kupololaiolo.
+Aumalani.
+Halimau (carry often).
+Miomio (slick, prim).
+Lauahi (scoop together).
+Kaalo (passed by).
+
+Pehe.
+
+Hiamanu.
+Pulu (wet).
+Poulua (Ulua night).
+Ukiakamau (coarse grass, often shaken).
+Hoopaa (make fast).
+Muaokalani.
+Uli (dark, bruise).
+Hano (asthma).
+Pomea (night of things).
+Wife.--The meaning.
+Polokokoiele.
+Holiolio (passing objects).
+Kinikahi.
+Kahuli (changeable, overturned).
+Malaia (stale).
+Nanaue (looking askance).
+Kakiwi (plant slips of branches).
+Loipakeke.
+Naku (wallow, wade).
+Maliu (listen to me, hearken to me).
+Komo (enter).
+Poloikai (Polo towards the sea).
+Ulupo (dense forest, darkness).
+Kamahaina was born a man,
+Kalahuiwale (forgiveness).
+Loiomalelewaa.
+
+Wife--The meaning.
+
+Hulihele (search around).
+
+Muumuu (maimed, broken limbed).
+Mukala.
+Loiimanini.
+Liililimanu.
+Eiaau (here I am).
+Loiikeluea.
+Pilimai (cling to me).
+Opelau (many bundles).
+Huluheu (hairy down).
+Loialuluka.
+Pelemau (frequently, loose ground).
+Napoo (disappear’d).
+Kupolele (dark night of flight).
+Loiahamahamau.
+Aliikuhikuhi (pointing chief).
+Muahilo.
+Nanale (void).
+Hinakolu (thrice thrown).
+Eiwa (nine).
+Kealaula (dawn).
+Hao (iron, to grab).
+Nalu (surf).
+Helua (hole, counted, worn out).
+Haole (foreign).
+Hilo (to entwine, land on Hawaii).
+
+Moolio (taut).
+
+Hapulu (stem of a Pulu tree).
+Liipaepae.
+Aliikaanaau (chief skilled about hearts or thoughts).
+Luke.
+Uli (black, dark, bruise).
+Alliikilokau (chief skilled about observing the seasons).
+Kupohaha (dark night of feeling).
+Ha (to breathe through the mouth).
+Moomoo (soaking and bundling of tapa before pounding).
+Hole (strip).
+{p. 43}
+Wife.--The meaning.
+Liipalama.
+Kikala (the thighs).
+Muaalealea.
+Kamio (to disappear).
+Paukolu (third relation or generation).
+Mauli (gasping).
+Koielea Kaewe (swung in relation or generation).
+Liilipihapiha.
+The Crash was born, and also bursts of bubbles.
+Popolohuamea (berries of mea).
+Muawekea.
+Pula (mote).
+Polokau (Lo's night of hanging or put up).
+
+Muakala.
+
+Maoki (streak).
+
+Polonananana (spider god).
+Mu (moth or ogre).
+Poloahiko.
+Lelehewa (mistaken interference).
+Oloolo (baggy, hang loosely).
+Kukulu (build, implant).
+Apiapi (gills of a fish).
+Muaumeumeke.
+Halilalo (take down).
+Eho.
+Aliikono (chief's invitation).
+Lahipoko (short banana).
+Hokii (sickly, consumptive).
+Wife--The meaning.
+Hinapu (fall together).
+Lepeake.
+Kamehai (wonderful, strange).
+Maukele (caught in mud).
+Pulama (fondle, make great deal of).
+Loikulukulu.
+Aliialii (chief of chiefs).
+{p. 28}
+
+Ulalena (name of a wind on Maui).
+
+Wife.--The meaning.
+Omali (sickly, feeble).
+Loiimaumaua.
+Hiliahu (weave the cloth).
+Puiliaku (hold on to it, catch it).
+Ahi (fire).
+Loihalululu.
+Kauwewe (rushes, put over heated stones).
+Kumuniu (cocoanut tree)
+Ohao (fasten a dog, tumor in the stomach).
+Kaale (ocean wave, swallow).
+Muaokahaiku.
+Kakio (boils).
+The husband.--The meaning.
+Aliimau (always a chief).
+Hali (carry).
+Pule (pray, prayer).
+Liilimanua.
+Loa (long, high).
+Milokua (returned secretly).
+Wife.--The meaning.
+Na-o (mucus, phlegm).
+
+Hamahuna.
+
+Mula (a bugbear).
+
+Mahealani (16th night of the moon).
+Loioloolo.
+Disappeared in the darkest night.
+Wana (sea egg).
+Malanaopi (fold loosely).
+Aa (rocky).
+Ponoi (one's own).
+Pulemo (slipped through).
+Loiakama.
+Muku (short, stubby).
+Ume (draw downwards).
+Nainai (shallow, prominent chest).
+Kuemi (draw backward).
+Akua (god, feared).
+Auau (bathe, bathing).
+Kuamauu (grass on the back).
+Lohilohi (slowly).
+Ui-a (beautiful or charming).
+Kamanu (the bird).
+Lanaki (float ki).
+Huli (turn over or to seek).
+
+O Lii (finest, tiny).
+
+Kalani (the heavens).
+Ponia (crowned).
+Muli (younger).
+Amo (to shoulder anything, carry).
+Liilileoleo.
+Ma-ka (face).
+Kila (steel, seal).
+Ahiluna (fire above).
+Ailapau (the last burning of the sun.)
+Water became lakes and formed houses;
+Luu (dive).
+Muaikumuka.
+Kamakolu (three-fingered mesh).
+Kupololuana (dark night of a gathering).
+Liilikamau.
+Loiloipololo.
+Manainai (flat).
+Aliiaka (shadow of a chief).
+Muahaipu.
+Ena (shy, to keep away).
+Aliikilokua (chief skilled about one's back).
+
+{p. 32}
+
+Heoioi (’tis pointed).
+
+Hokuaala (fragrant shoulder).
+Muapoipoi (first to fondle).
+Muaikawaa.
+Kaohi (hold back, gather).
+Ahiakamake (fire of death).
+}Kaeahonu (life of the turtle).
+Nunua (pile upon pile).
+Ahiakulumau (constantly dropping fire).
+Polokinau.
+Manahulu.
+Nahinahi.
+Polouli (Lo's night of darkness).
+Heamokau (stick for carrying bundles).
+She that was full of enjoyments and lived in the heavens,
+Loihilimau.
+Meu (blunt).
+And shouts ascended when the spear of Kauikaho was flung.
+Kaohiohi (hold back).
+Koponee (the night of your removal).
+Nahalau (the sheds, large sheds).
+Stormy night was born.
+Kiola (throw away).
+Pulukene.
+
+Lepea (turned over).
+
+Kulukau (hanging drops).
+Kauhale (houses).
+Mauna (mountain, hill).
+Wanamelu (decomposed wana).
+Kikana.
+Kaulua (double canoe, two).
+Koikoi (heavy).
+Liilikahuli.
+Liilinohopali.
+Melu (soft, spongy).
+Piko (navel, centre).
+Wife.--The meaning.
+Paepae (pillow, door-sill).
+Naele (swampy).
+Manaweulani (by the tasselly heaven).
+{p. 49}
+Ia'u (me).
+Kulaimoku (overturn the ship).
+Loiloi.
+Lepau (point).
+Liilipulepule.
+Kukala (proclaim).
+Wikani (drawn too tight, too salt).
+
+Mahiapo (work till night).
+
+Haihai (break into pieces).
+
+Kinohili (thrashed body).
+Holeaku (strip it).
+Polowaikaua.
+Holi (thin).
+Wala (overturn).
+Nanio.
+Kupohelemai (dark night of coming).
+Kapalamalama (some ceremony of tabu).
+Kupololailai (dark night of a calm).
+Laulau (gathered in a bundle).
+Iliuli (dark skin).
+Manu (bird).
+Keanukapu.
+Oamio (hidden beneath).
+Puapua (birds' tail feathers).
+Hamu (eating this, that, and everything, to search).
+Nakino (those bodies).
+Aliikilola (chief skilled about observing the sun).
+Loimoemoe.
+Holookoa (whole, actually ran).
+Halale (noise, swashing waves).
+Kala (forgiven, wrench open).
+Hipa (odd).
+Leleiluna (fly upwards).
+
+Pau (finished).
+
+Lau (leaf).
+Kunewa (unsteady).
+Kuku (prickles, standing up).
+Leleio (fly and disappear suddenly).
+Lahulahu.
+Nini (pour out, offended).
+Alii (chief, person of rank).
+Loiloinui.
+Mahinahina (name of a land).
+Polinahe (small stomach).
+Wanakaulani (wana in the heavens).
+Kahakaua (division of war).
+Kupolokamanao (dark night of thoughts).
+Lukama.
+Loikalokalo.
+Ume (draw towards you).
+Kupomaiana (very dark it became).
+Maumau (over and over).
+Pelapela (filthy, smutty).
+Hoouli (to turn dark).
+Makeamo (by the carrying).
+Olopule.
+Hoohene (to make fun of).
+Lived up there with Kii and became his wife,
+
+Hinaulu (growing Hina, growing gray).
+
+Confusion was born, also rushing, rumbling, shaking earth.
+
+Keleauma.
+Kupolohulimai (dark night to turn backward).
+Halemoeanu (cold sleeping house).
+Hamama (open, to gap).
+Hina (fall).
+Wife.--The meaning.
+Kamakani (the wind).
+Auhee (scatter, flee).
+Kapehi (to strike, throw at).
+Muaokaoliko.
+Second night was born in the presence of Wakea.
+Ewa (uneven, district in Oahu).
+Muakahukahu.
+The husband.--The meaning.
+Liiomaka.
+{p. 41}
+Kepooha (the four heads).
+Pololii.
+Loiihiialo.
+Iwiaku (bone of the bonito).
+Maikokahi.
+Miliamau (fondle often).
+Helemua (went first).
+
+Kinana (brood of chickens).
+
+Muahai.
+O A (light, on fire, some thing brilliant).
+Pohakukau (piling stone).
+Hoopoloiho.
+Wife.--The meaning.
+Loiihiikua.
+The leaves bore and disappeared,
+Loiomilu.
+Pionuu (curving ascent).
+Panaluakenahu (two strokes and then a bite).
+Nahili (put on a false trail).
+Lipoa (a seaweed).
+Amoaku (carry it away).
+Kukuhale (beam of a house).
+Liilililulilo.
+Kapalama (seclusion).
+Kapilipili (paste together).
+Aliikilokai (chief skilled about the seas).
+Liikauunahele.
+Liililiili.
+Hoomauke-a (continue to burn).
+Kupolohelele (dark night of flying Lo or being).
+Akahiakaeaakilolo (first by the turtle Akilolo).
+
+Panakolukenahu (three strokes and then a bite).
+
+Kupolonaunau (dark night of chewing).
+
+The husband.--The meaning.
+Loipouli.
+Wife.--The meaning.
+Akahi Keewe (first relation or generation).
+The husband.--The meaning.
+Mii (clasp).
+Pakala (small Kala, a fish).
+Makanewanewa (moving eyes).
+Kealakikee (the crooked path).
+Maele (cramped).
+Polohipa (strange polo).
+Hewa (sin, wrong, mistake).
+Polohili (Lo's night of striking).
+Hau (snow, dews, frost).
+Lehuane (dust of ashes).
+Loikoikoi.
+Kukala (proclaim).
+Mimika.
+Kaulani (on the heavens or sacred place).
+Naele (two blacks, miry).
+Kulana (unsteady).
+
+Laaumele (singing wood).
+
+Aa (dwarf, fearless, root of a tree or shrub).
+Kolo (creep).
+Ohouma (narrow chested).
+Pokii (younger in birth).
+Mau (permanent).
+Uluea (growing turtles).
+Kilo (foretell).
+Kupokanaha (forty standing nights).
+Liipau.
+Muaokahanai.
+Hui (together).
+Kaimai (led hither).
+Hahane.
+Kelekeau (the fat gall).
+Aliikamanomano (chief fond of encroaching).
+Muakau (the first of the season).
+Loiipulau.
+Kupolokalili (dark night of Lo with jealousy).
+Kulewa (stand in space).
+Ukiki (small, stunted).
+Muakekele.
+
+{p. 45}
+
+Kilaua.
+
+Kamaulia Kaewe (hanging on relation or generation).
+Hulema.
+Lena (stare, bilious).
+Iamama (’tis finished).
+Polokane.
+Ailamua (first eaten by the sun).
+The husband.--The meaning.
+Loihialoa.
+Liilipoipo.
+Haehae (to tear).
+Loaa (found).
+Hulahe.
+Aliikilopoko (chief that had no depth).
+Mukiki (kisses, smacking lips when hurt).
+Hiloauama.
+Heleupa (walk and clash the knees or heels).
+
+Makilo (beggar).
+
+Kupolili (dark night of jealousy).
+Huluhe (dripping gum).
+Niolo (long and slight, wiry).
+Manu (bird)
+Wife.--The meaning.
+Kupolohanuai (stand and pretend to seek food).
+The husband.--The meaning.
+Kii (image, went after something).
+Iaka (a shadow).
+Umikaua (tenth battle, let's smother him).
+Aliinohouka (chief who lived in the mountains).
+Liiokioki.
+Kaukeahu (heap in a pile).
+Popolomea (something polo).
+Polohi-hele-hele-lahiki.
+Panakahi (one snap).
+
+Kaumau (always up, on an elevation).
+
+The husband.--The meaning.
+
+Mamau (held down).
+Keala (fragrance, pathway).
+Polohemo.
+Huluau (I take, name of a wind).
+Omiomio (things with small tips).
+Puluea (dust of Pulu).
+Iwaiwa (maiden-hair fern).
+Kupoloololaimai (dark night of calmness coming).
+Helehele (cut up in strips).
+Hiliha (to braid with four strands).
+Unauna (crab in a shell).
+Makioi.
+Hoopulu (dampen).
+Loimanomano.
+Makolu (deep cut, measure three fingers).
+Mualala.
+Maluape (protecting ape).
+Kahaka (ladder).
+Uliau (I am bruised).
+Halekuamu (house of the goddess Kuamu).
+
+Poloku (night of danger).
+
+Heiau (temple).
+Omoomo (suck).
+Liilimelau.
+Poepoe (round).
+Popolokaia.
+Heleaku (go hence).
+Wiwini (pointed).
+Liilikapili.
+Naio (worms in food or water).
+Pulama (make great deal of).
+Lelepe (fringy).
+Aliipahu (stabbing chief).
+Malamu (field of moths).
+Hooiloli (pregnancy).
+Nanewa (the clubs).
+Liilihemoaku.
+Polohiwa (choice polo).
+Makauma (eye for wrestling).
+Kapouhinaha (four fallen posts).
+Halu (yield when pressed).
+
+Loilolohi.
+
+Kaha (large, fat).
+
+Ulukua (grew on the back).
+Niuhuli (upset cocoanut).
+Kalai (clear sky).
+Palimakahana (work by fives).
+Nenue (a fish of the kind called perch).
+Malama (careful).
+Liinewaku.
+Kamau (luncheon, follow up).
+We-na (red glow).
+Malimali (entice with flattery).
+Lana (float).
+Pelepele (swampy).
+Lauohokena (that's a hair).
+Muaiopele.
+Pamakani (hibiscus).
+Muala (pebble insect).
+Mai (come hither).
+Makua (parents).
+Nanaku.
+
+Kaunuka (draw up the thighs).
+
+Polohipakeke.
+Kupee (bracelets, anklets).
+Kupolokeweka.
+Puaakame.
+Pui (fat).
+Kalelemauliaka (last breath of vapor).
+Holomau (constantly running).
+Keanu (the cold).
+Loaa was the husband, Nakelea the wife;
+Pa (hit, barren woman, plate).
+Nakinolua (two bodies).
+Hoohila (act timid).
+Pilia (joined together).
+Liilinanaia.
+Kamehani.
+The husband.--The meaning.
+Hilipo (thrash the night, wander in the night).
+Puameli (honey flower).
+Holiholi (thin, slight).
+
+Luluka (name of a chief).
+
+Luli (roll, turn one way or the other).
+
+Kupoloahilo (dark night of Hilo, night of the moon).
+Liilipukaua.
+Hapele (loose ground like slush.)
+Hei (caught).
+The husband.--The meaning.
+Koula (red sugar cane).
+Papalele (flying board).
+Muaipoipo.
+Aanai (grind).
+Laau (wood, stick).
+Pooku (standing head).
+Kaluakekane (the husband's second).
+Muaipapio.
+Kelelua (to dampen).
+Opihi (shell-fish).
+Kua (back or to fall).
+Piliwale (to impose on your friends).
+Kanahele (forest of trees).
+
+Kini (friends, many).
+
+Hokelona.
+Mala (soreness).
+Mahili (braid of strands).
+Kahiliapoapo (brush and catch).
+Pilimauu (flower grass).
+Kalama (Lama tree).
+Peleiomo (Pele's sudden disappearance).
+Polonini (Lo's night of anger, pour).
+Muaokamoi.
+Muakaukeha (future of pride).
+Nukueleele (dark lips).
+Loiloikaka.
+Wife.--The meaning.
+Kupokalalau (dark night of wandering).
+Ololi (narrow).
+Kanaia (it is his).
+Mauka (on land, toward the mountain).
+Poloikukulu (Polo did build).
+
+The husband.--The meaning.
+
+Kamamule his brother;
+
+Aliihukeakea.
+{p. 42}
+Wife--The meaning.
+Palimawaleahinalea (fifth heap by Hinalea).
+{p. 59}
+Nohinohi (variegated).
+Kaolo (baggy).
+Polohi-paukahiki.
+Melemele (yellow).
+Aliaoe (you go away, or stand aside).
+Kupoliilii (dark night of littleness).
+Leheluhe (hanging lip).
+Hele (go or went).
+Mahoe (twins).
+Polomua (the first polo).
+A-aa (veins).
+Liilikauhale.
+Kahiwahiwa (the precious sacred one).
+Luulea (dove indeed).
+
+Liili.
+
+Laa (dedicated to a deity or high chief).
+Mano (shark).
+Hilohilo (twine ropes).
+Papio (to face downwards).
+Moonawe (slow, writhing snake).
+Hulipumai (they all turned over).
+Loiloinahu.
+Puuhakahaaakilolo (fourth heap by the turtle Akilolo).
+Makalii (very fine, summer).
+Puukoluakaeaakilolo (third heap by the turtle Akilolo).
+Humuhumu (sew, to stitch together).
+Pahila.
+Kulaa (his person is sacred during tabuday).
+Leha (glance).
+Wife.--The meaning.
+Pulau (applied to fishing).
+Papakele (wet board).
+Muaikekele.
+Nananaka (cracks).
+
+Aliihelu (chief who tells of his favors).
+
+Kekumu (the foundation).
+
+Kele (mire).
+{p. 46}
+Keia (this).
+Ahiakaolu (fire of comfort).
+Kupolahauma (dark night of wrestling).
+Poloheihei (pretending racing).
+Lewa (swing).
+Loimia.
+Ahulimai (turn to me).
+Muaoma.
+Mahinale.
+Hilahea.
+Lipowao (dark forest).
+Palemo (slip through, drowned).
+Liiliauau.
+Konakona (disgusted).
+Liilinuunuu.
+Kuwala (somersault).
+Pahu (punch, push, burst).
+Huini (name of a wind).
+Aiku (toughened).
+Aliiaku (made chief of).
+Laapilo.
+Kupolokulu (dark night of dropping).
+Hanehane (voices from spirit land).
+Poloihoomoe.
+
+Aliikiloluna (chief astrologer).
+
+Kealanuu (terraced path).
+Maaku (to sling with a stone).
+Loiomakana.
+Kukelemio (hidden swamp).
+Paila (boiling, a pile, heap).
+Onaho.
+Aliikilomua (chief skilled about one's future).
+Kimonaue (a game).
+Maia (by that).
+Palamau (always ripe).
+Kalino (rope for throttling).
+Nanana (spider).
+Pihaulu (full of balls or bread fruit).
+Loiopilihala.
+Kolealea (woman who leaves her child for pleasure).
+Ilimai (willed to me, a legacy).
+Pulelehu (like ashes).
+Kanawai (laws, to be warned).
+Hamohulu (brush with feather).
+Omanaio.
+O Polo (night of Lo).
+        These are myths of Gods.
+He wrestled with Kanaloa, Kanikahoe.
+Mahoa.
+Kuamu (god fond of red color).
+Ohi (gather, collect).
+
+Hoolewa (swing, carry from place to place).
+
+Heleihea (go where).
+
+Halululu (rumbling sounds).
+Kakelii (belong to the chief).
+Moeiho (lie down).
+{p. 53}
+Kupolohaihai (dark night of breaking).
+Loaa was born a man,
+Kahaleai (eating-house).
+Palimu (mount of midgets).
+Kaholookaiwa (the flight of the Iwa).
+Mahili.
+Liiliahula.
+Kumaua (we stood).
+Nawa (insignificant beings).
+Kukawa (between times).
+Mokiweo.
+Lahikama.
+Hookaukau (about to sleep).
+Pilomoku (bad odor from a ship).
+Puunaue (divide).
+Ekukukapolo (the standing polo).
+Loiipukapuka.
+Loiloikala.
+Loiieleele.
+
+Heiaumana (powerful temple).
+
+Loikahi.
+Liililanaau.
+Loiakio.
+Kaneiwa (nine husbands).
+Then Kupololiilialiimuaoloipo died;
+Kelenanahu (besmeared with charcoal).
+Kupololiili (dark night of changing pebbles).
+Pili (be together, a grass, to bet).
+Kinohi (beginning).
+Halelo (smutty).
+Aliikilohonua (chief skilled in the earth).
+Kulua (stood together, two).
+Popoko (short night).
+Nakulu (drops, rumbling noise).
+Poloilaau (Polo of the wood).
+Lelekau (leaped up).
+Nana (look, audacious, month).
+Hala (missed, gone, pandanus).
+Wife.--The meaning.
+Huamua (first word).
+Lilio (taut, drawn back or forward).
+Panaakahiahinalea (first stroke by Hinalea).
+Makua (parents, aunts, or uncles).
+
+Opikana.
+
+Maiko (name of a fish).
+
+Liilihomole.
+Hilipo (slash in the night).
+Loiiopoe.
+Ohekele (watery tube).
+Na'u (mine).
+Kaukeoa (place the rafters).
+Imihia (sought for).
+Pioanuenue (arching rainbow).
+Makohi (dig, traces of footsteps).
+Muahaipu (first to break).
+Hekau (pile on).
+Maia (banana).
+Loiloloilo.
+Opuupuu (full of lumps).
+Puili (embrace, clasp).
+Kanakau.
+Nanawaa (look for canoes).
+Hoiha.
+Loiloipa.
+Liiliholomau.
+Ahia (lighter color, how many).
+Pakapaka (coarse, rough).
+Kalele (lean on).
+Niau (stalk in cocoanut leaf).
+Muahanuala.
+Noenoe (misty, foggy).
+Poloioaiku.
+Kelemau (constant dampness).
+Kupohalalu (dark night of Halalu fishes).
+
+Pulama (brought up with care).
+
+Wife.--The meaning.
+Haaa (tube of roots).
+Puehu (scatter, all gone).
+Palakeaka (stained shadow).
+Kalukuu (the shaking down).
+Polomakiawa.
+Hulimua (seek first).
+Kanulau (plant sprouts).
+Oiaku (that's it).
+Liimolohi.
+Huelo (tail).
+Maluipo (shelter for lover).
+Ahi (fire).
+Pineha.
+Leleamio (jump sprightly).
+Leleamio (leap neatly).
+Wanaku (pierced by wana).
+Hehe (laughter).
+Wanawana (ragged edge).
+Kilou (hook on).
+Kupolomalimali (dark night of Lo seeking favor).
+Holehole (as above).
+Eiawale (there it is, they have arrived).
+Opilopilo (stench).
+Amiami (sway one's body backward and forth).
+Aliimakolu (chief thrice the rank).
+Hekaunano (only four).
+Hele (walk).
+Mailo (sickly, delicate).
+
+Holopulau (run altogether).
+
+Liilii (tiny bits).
+
+Paliiuka (precipice near the mountain).
+Omaulikekenahu (all hold together and then a bite).
+Loiloloikapu.
+Pukapu (sacred couch).
+The sea became calm and mountains rose;
+Paio (quarrel).
+Aoao (side).
+Kupolohilihili (dark night of strokes).
+Wamakona (time of unfriendliness).
+Melemele (yellow).
+Muaokalele.
+Pipika (shrink from bashfulness).
+Kapoulena (the yellow post).
+Kuhinu (besmear).
+Alohi (dazzling).
+Plenty was born.
+Kupoloimo (dark night of Lo winking).
+Liilipelu-a.
+{p. 30}
+Namaka (the eyes).
+Makili (wrench from, parted).
+Aliipuuone (chief who made sand-hill).
+Kupolomene.
+Liililanakila.
+Kaluli (rolling motion).
+Kupoloale (dark night of Lo swallowing).
+Paleamakau (ward off with fear).
+Poinanaia (forgot the fishes).
+Liilimama.
+Liilihalula.
+
+Polohehewa.
+
+Nahawiliea.
+Hoeue (motion of paddling).
+Lipo (darkness).
+Konukonu (deep).
+Lahiki (sun is come).
+Hilohilo (old skin).
+Pulepule (insane).
+Liilihanahana.
+Ii (mouldy).
+Kinohi (beginning).
+Kupolokahuli (dark night of overthrow).
+Muaanoano (sacred future).
+Malii.
+The husband.--The meaning.
+Pelu (doubled, folded).
+Peleaku.
+Olepe (oysters, thrown over).
+Haluku (dashing noise of water).
+Po-i (cover up the dish, cover of a dish).
+Hinakona (he will slip up).
+Meao (something to pierce).
+Liimuliawa.
+Kawala (dash it away).
+Kaohi (reserved, hold back).
+Eiamai (here it is).
+Kaiwi (the bone).
+Liawa.
+Loilua.
+Loiloilele.
+Ahiahi (evening).
+
+Pauha (disappoint).
+
+Kupolopaiuma (dark night of slapping chest).
+
+Nanailuna (look upwards).
+Hulimea (seek something).
+Ounauna (hermit crab).
+Palahalaha (flat).
+Houpo (breast, bosom).
+{p. 29}
+Hiwa (anything precious is a hiwa).
+Komokomo (ring within ring, entered).
+Haleimiloea (house of science).
+Kukamaka (pierced the eye or face).
+Loikolohonua.
+Mohalu (anything that yields when pressed).
+Wife.--The meaning.
+Lehiwa (to admire).
+Liilihelelima.
+Po'u (wet night).
+Ehoaka (cast shadow)
+Kalawe was the husband, Kamau the wife;
+Milo (twine, drag downwards).
+Iiwa.
+Hulimakele (turn to swampy place).
+Piliaiku (drenching wet).
+Pilimau (close companionship).
+{p. 33}
+Mahiopu (motion of digging).
+Kilika (thrash around).
+Hoolana (float).
+Welawela (heat warm).
+Makau (fear, fish hooks).
+
+Mai (sick).
+
+The husband.--The meaning.
+Lahilahi (delicate, thin).
+Lima (hands).
+Polohi-pakaka.
+Liilikaili.
+Wife.--The meaning.
+Ohi (gather).
+Awaia (treachery on some one).
+Hama.
+Muakahukahu.
+Aliikaanamalama (chief skilled about dividing months).
+Haihae (traitor).
+Anana (measure, six feet).
+Mua (first, future).
+Ewa (uneven, make faces).
+The husband.--The meaning.
+Kukona (forbidding looks).
+Mahilu.
+Kulou was the husband, Halau the wife.
+Hoomoe (laid down).
+Piliamoa (leant like a chicken).
+Muaohupu.
+Uli (bruised, dark, to steer).
+Mahina (moon).
+Keahu (the pile).
+Moku (island, cut, pulled apart).
+Kaheihei (the race).
+Le was the husband, Kanu the wife;
+Keoma.
+
+Napulu (that light substance found in a Pulu tree).
+
+Makiaoea (sickly fingernail).
+
+Haui (sideways).
+Loiokanaha.
+Elieli (dig, dug).
+Wife.--The meaning.
+Kea (white, to be crossed).
+Polohamu (Lo's night of greed).
+Eau (quickly, to swim).
+Poloaku.
+Nolunolu (soft as down).
+Wawa (noised abroad).
+Koikoi (begged, entreated, heavy).
+Piioha (go up for kalo tops).
+Helemaka (moving eye).
+Puaa (pig).
+Loiloipili.
+Hookilo (pretend skill in sciences).
+
+Pulima Kaewe (five handfuls of relation or generation).
+
+Makaimoimo (winking eyes).
+        These are myths of Gods.
+Alii (a chief, person of rank).
+Hulu (feather, down).
+Malie (calm, gently).
+Halimaikapolo.
+Kuawa (noisome).
+Kalaniahu (robe of heaven).
+{p. 55}
+Muahalekapu (future of sacred house).
+Hinalo (the flower of the pandanus).
+Nawai (by whom).
+Kalelenohinalea (the sacrifice of Hinalea).
+Naio (sill, edge).
+Muaunu.
+Kalukalu (name of a grass at Kauai).
+
+Muaanoa.
+Pohopoho (exposing the back).
+
+Aliikiloau (chief skilled in swimming).
+
+Kumeheu (stand on the trail).
+Hailau (to be sacrificed in numbers).
+Aliikilohope (chief skilled about one's fate).
+Laalaau (woody, branches).
+Wife.--The meaning.
+
+Heamo (suck, bring on the shoulder).
+Pilimau (constantly together).
+Puluka (stalk of the Pulu).
+Aliikilokilo (chief of prophecy).
+Kalino (a rope for hanging).
+
+{p. 44}
+
+Muahaka (future of war).
+
+Kaili (snatch, skin).
+Kelewaa (canoe steerer).
+Makani (wind).
+Puluka (wet and dashed).
+Moekau (sleep through seasons).
+Kilohi (look backward with self-admiration).
+Manu (bird).
+Kupolomakanui (dark night of big eyes).
+Halepoi (house cover).
+Loiipololo.
+Kupolohulu (dark night of Lo's feathers).
+Loikinikini.
+Loipilipa.
+Ialo (a front).
+Nawai (for whom).
+Palama (seclusion).
+        Myths of Gods.
+Kiamo (any material used for filling cracks, napkin).
+Kau (put up, season).
+Oma (oven).
+Pa-e (heard).
+Helu (count).
+
+Luna (upward, above, official).
+
+Iwia.
+Lelemau (leap often).
+Huluemau.
+Newaiku (stagger’d from a stroke).
+Hulu (feather).
+Ike (to see).
+Omo (suck).
+Ewalu (eight).
+Kupololo (dark night of palsy or brain).
+Liiumu.
+Mauawa (looks after, frequent use of awa).
+Honika (kiss with emphasis).
+Aliikolo (creeping chief).
+Wife.--The meaning.
+Oloolohu (festered, bubbled).
+Hanehane (spirit voices).
+Naku (wade).
+Kekaliholiho (the choice sprig).
+The husband.--The meaning.
+Maiau (natty, dainty, clever).
+Mualele (future of escape).
+Anapu (flash).
+
+Kakai (range).
+
+Loiloloilo.
+
+Halekumu (house founded).
+Kupoko (the night of success).
+Kaeamauli (Mauli's turtle).
+Poipoi (smother fire or words).
+Aliikiloahu (chief skilled about mounds).
+Kulia (stand firmly).
+Hooku (to fit, to be made to stand).
+Nahiole (no fires).
+Liililanalana.
+Lahi (a species of banana).
+Lopiana.
+Wife.--The meaning.
+Muainakalo.
+Hoolohe (listen, obey, heard).
+Noakawalu (the eighth is free).
+
+Helua (counted).
+
+Ahiakane (fire or light of Kane).
+Poloula (redness of the god Polo).
+Hulu (feather).
+Poloikamehana (Polo in heat).
+Hohonupuu (deep hill).
+Naua (name of a society).
+Umala.
+Pihi (small).
+Piha (full), pi-ha (dried branches).
+A fowl was born on the back of Wakea.
+Ma-ina (a groan).
+{p. 58}
+Hiipoi.
+Loiomiliapo.
+Mahakea (barren field).
+
+Poi (praise, exalt, food).
+
+Mauka (towards the mountain).
+
+Walaau (noisy).
+Nekue.
+Kaio (a bird, flesh, disappearance).
+Hamunu.
+Muaikauka.
+Pekau.
+Piao (fold up).
+Alakai (lead).
+Olioli (joy).
+Muaokapahu.
+Loipilopilo.
+The husband.--The meaning.
+The husband.--The meaning.
+Kahale (the house).
+Malie (calm).
+Imo (wink, twinkle).
+Wife.--The meaning.
+{p. 31}
+Wili (twirl, twist).
+Newa (stagger, a club).
+Aluaku (slack away).
+Hanuai (search for food).
+Pua (flower, glow).
+Oamaamaku (schools of mullet).
+
+Panahakenahu (four strokes and then a bite).
+
+Lelekeamo (the shoulder-stick flew).
+Hoomailu (make small).
+Wali (ground).
+Heleaua (went with stinginess).
+Liiliwahipali.
+Poloimu.
+Polokaumai (Polo's night above).
+{p. 27}
+Kumau (firmness, large calabash, long-standing).
+Polohilele.
+Loiloloi.
+Kune.
+Kaomi (press down).
+Aliiponi (chief dedicated).
+Pulanaia.
+Nuunuu (crimpy).
+Waikeha.
+Ula (red, bright).
+Aliikilohoku (chief skilled about observing the stars).
+Kupololalala (dark night of sun bath).
+Loimanuwa.
+Kala (a bird, the sun, a fish).
+Aliiume (chief that would drag you down).
+Pilikamau (hanger on).
+
+Ko'uko'u (talkative).
+
+Aliikaanaua (chief who divides the rain).
+
+Hanau (give birth, was born).
+Kaloa (24th, 25th, 26th night of the moon).
+Eapaipai (flapping tortoise).
+Makalewa (hanging eyes).
+Kupou (stoop down).
+Puaena (bright glow).
+Kealakau (a high path).
+Polomai.
+Nanaahu (inspect the tapas).
+Kamakulua was born, the youngest a woman;
+Pilikoa (mollusk).
+Polokii.
+Muakamalulu.
+Aliikuwala (acrobat chief).
+Omana.
+Hinamai (fall towards you).
+The husband.--The meaning.
+Loiikukii.
+The husband.--The meaning.
+Lehu (ashes).
+The husband--The meaning.
+Ehoku.
+Niniha (cross, ill temper).
+Loilalolo.
+O Aliiemi (backward chief).
+Pueo (owl).
+Nuu (eat with relish).
+Hoolahalaha (make flat).
+Aliihimuhani.
+Loipilipili.
+Kuaua (heavy shower).
+
+Kalahai (broken or interrupted day).
+
+Mailu (not sufficient, little).
+Ukinahina (coarse grass for Hina).
+Liilii (small bits).
+Hulipena.
+Hulimakeau (turn with the tide).
+Hapeleau (swim in slush).
+Kakau (an object before them).
+Kupoloololi (dark night of unevenness).
+Enaena (great heat).
+Pililauhea.
+Helemai (come here).
+Liihomali.
+Paele (daubed with black).
+Manini (a fish).
+Hununu (humpy, lumpy).
+Aka (shadow, laugh, but).
+Koiele (swing).
+Peleuwao (Peles' protection).
+The husband--The meaning.
+Waiau (swimming water).
+Waiakea (broad water).
+Liilimaemae.
+Haina (betrayed).
+Liiakauliilii.
+Hulimakani (change of wind).
+Maaa (name of Lahama wind).
+Aliikiloalo (chief skilled about one's front).
+Kaiwi (the bones).
+Puhemo (weakly, fainting).
+Poloii (yellow polo).
+Aiko (eat sugar-cane).
+
+Meia (with him or her, so).
+
+Polokakahia.
+
+Liilihakahaka.
+Muaamama.
+The husband.--The meaning.
+Noelo (insinuate, tease).
+Moana (ocean, on the deep).
+Liilimalana.
+Wife.--The meaning.
+Muaokaipu.
+Kupolohulilau (dark night of search leaves).
+Ia-a (those rocks).
+Kuai (sell).
+Poloanewa.
+Liiakamama.
+Ewa (uneven).
+Koielehakenahu (four swings and then a bite).
+Painaina (crackling noise).
+Kaukahi (elevated alone).
+Palua Keewe (second relation or generation).
+Helule (limber).
+Ohinu (to besmear, to roast).
+{p. 47}
+Kupolomaikau (dark night of chronic sickness).
+She that lived in the heavens and Piolani (married her brother),
+Haiola (life offered for sacrifice).
+Wife.--The meaning.
+Muaokahai.
+Hoohinu (polish up, smear with grease).
+Hulipau (search thoroughly).
+Puulele (flying lump).
+Loiapele.
+{p. 57}
+Aliiheluone (chief who dug sand).
+Hoomaku (lowering clouds).
+Nahele (forest, woods weeds).
+
+Haikala.
+
+Kapouhina (the fallen post).
+Nawaikaua (whose are we? rain water).
+Poloahiwa.
+Poiwa (ninth night).
+Kaukahi (singly).
+Paikekalua (hit in the hole).
+Halipau (carry the last).
+Loiloikapu.
+Uliuli (dark, blackness).
+Kupolonehea.
+Liiliaolo.
+Malele (not a pinch was given away).
+Loiloipo.
+Wela (warm, heat, burnt).
+Namu (bugbear).
+Kupolohaliu (dark night of facing you, or up or anywhere).
+Pulumakau (wet hook).
+Kamahaina lived with Hali.
+Muakahu.
+Maluolua (both in peace).
+Liilihou.
+Kahiki (foreign land).
+Maha (rested).
+Milo (dragged downwards).
+Muaiopola.
+Makino.
+Kepoolimaha (the four-headed hands).
+Imi (search).
+Keokeo (white).
+Peleau (name of a place).
+Aheaka (it is a shadow).
+Hoku (star).
+Paliikai (precipice near the sea).
+Mahinuele (shiny black).
+
+Kinopu (prancing).
+
+Kupokeleau (dark night of swamps.)
+
+Hewa (Sin).
+Oliiloa.
+Pola (centre platform of a double canoe).
+Paeheunui (large hairy bank).
+Naihu (the noses; the prows).
+Kinika.
+Poloimaumau (Polo of firmness).
+Lua (hole, wrestle).
+Maikolua.
+Mama (swift, chew).
+Helelinaa (walk on crags).
+Lilioma.
+Noeula (red mist).
+Polomahimahi.
+Loiloimai.
+Ukulii (a mite).
+Aliihala (chief full of crime).
+Kulea.
+Muaokahana.
+Nahuila (the red fires).
+Hoopioaka (make a curving shadow).
+The Aukaha Opikokahonua died; he was a warrior.
+Kupolupaiuma (dark night of scattering strokes of chest).
+Wanakau (hanging wana).
+Naia (porpoise, fishes).
+Wife.--The meaning.
+{p. 39}
+Kapu (sacred).
+Kulewa (beyond depth).
+{p. 40}
+Nahele (weeds or forest).
+Nihohoe (tooth like a paddle).
+
+Puulimakaeaakaakilolo (fifth heap by the turtle Akilolo).
+
+Polokuaiwa.
+Makii (flattened).
+Hulupehu (swollen feather).
+Maikaiwa (from the ninth).
+Wene.
+Wife.--The meaning.
+Kiekie (high).
+Pililau (enormous stakes on bet).
+Puukoluakukahinalea (third heap by Hinalea).
+Maumaua (to retain).
+Kuakahi (single).
+Loiloila.
+Aliileleiona (flyaway chief).
+Mele (chant, song, to sing).
+Aliikilolono (chief skilled in sound).
+Polo (to pretend).
+Mali (fasten the bait with twine, deceive).
+Meia (that's it, with that person).
+Ikai (at sea, bring some salt water).
+Moena (mat).
+Ikamu (little people, midgets).
+Kelau (tail end).
+Liialiilii.
+Kamainau was born next,
+Palia (craggy precipice).
+Auwe (an exclamation, oh!).
+Kelekele (fat, muddy).
+Liiliha.
+Olua (you two).
+Ehio (to lean).
+Poloahaumea (Haumea's polo night).
+Poloa (long night).
+
+Panaikaluakahinlea (second stroke by Hinalea).
+
+Melia (with Lia).
+
+Apomai (embrace one).
+Eapu (to grasp or gulp it down).
+Kuaiwaa Kaewe (ground by canoes the numbers relation or generation).
+O Polokahiau.
+Aliipauku (half a chief).
+{p. 52}
+Kapili (to join together).
+Hiwauli (precious one of darkness).
+Maeleele (numbness).
+Anoano (holy).
+With great awe the posts rose,
+Muanalukalohe.
+Napuueha (four heaps or hillocks).
+Leleiluna (flew upwards).
+Heleua (walk in the rain).
+Pokipoki (a bug).
+Muaahuliau.
+Aliilaa (chief dedicated).
+Muapule.
+Aliikilouli (chief skilled in prophesying).
+Aliipoi (chief made much of).
+Paia (walls).
+Naka (shake, tremble with fear).
+Muanuunuu.
+Ua (rain, shower, shout).
+Olo (baggy, water jug).
+Kona (his or hers, land on Hawaii).
+Aina (land).
+Makea (barren country).
+Noio (Mother Cary's chickens).
+Lawaia (to fish, or bird catcher).
+Nakulu (the drops).
+
+Lehelehe (lips, talkative).
+
+Nohopali (sit on precipice).
+Niau (glide away).
+Opelele (flying bundle).
+Poloulaa (overturning god).
+Ukinala (coarse grass plaited).
+Ewæwa (make faces).
+{p. 38}
+Poopoo (deep hole).
+Lilo (gone, given away).
+Wahine (woman, female).
+Muakohukohu.
+Polohauhau (striking polo).
+Waiakaea Kaewe (oceans full of relation or generation):
+Polaa (sacred night) was born.
+Ipu (container, a vessel or dish).
+Walihooke.
+Liiamama.
+Kaniho (a tooth).
+Loiokiikii.
+Uluoha (to grow finely).
+Moi (a high chief, a fish).
+Nahenahe (soft, flimsy, gentle).
+Naia (porpoise, the fishes).
+Lulu (shake, lull).
+Newaku (stood unsteady).
+Nahunahu (in travail, bitten in bits).
+Poloikaha.
+Puoho (awakened).
+Haumea (a goddess).
+Keleakaku.
+Kaekaea (palatable).
+Polopolo.
+
+Muakalaikii.
+
+Muaikaunukukanaka.
+Muahelei (first to stretch).
+Apikili.
+Poiauwale (night gone without incidents).
+Nilea.
+Leleawa (fly across an opening).
+Pakau (plate hung or put up).
+Maluli.
+Lupuhi (shaking eels).
+Aliikaea (tired chief).
+Muapali.
+Heleau (I go).
+Koliau (I whittle).
+Eliakapolo (the digging of the polo).
+Eiaku (there it is).
+Loiokanaloa.
+Malanai (name of a wind).
+
+---
+
+## The Twelfth Era
+
+Kepoo (the head).
+
+Polomailani.
+Palimauua.
+Haalepo (dirtyish).
+Palimoe (leaning precipice).
+Kauikau.
+Hamaku.
+Kiloahipea.
+The husband.--The meaning.
+Niniaulani (offended heavens).
+Hooanu (to make cold).
+Piowai (curving waters).
+
+Ahukai (last in birth). 1
+
+Pahiolo (sawing implement).
+Mohala (open, spread out).
+Poopoolani (depth of the heavens).
+Kapoli (the bosom).
+Kaiwiloko (inner bone).
+Hoonuanua.
+Kaukaha.
+Luaanahinakiipapa.
+Kuua (lowered).
+Haneeiluna (slide from above).
+Hiikalaulau.
+
+Kakai (girdle).
+
+Kahikolupa.
+
+Haanahinakiipapa.
+65:1 Triplets.
+Kelemalamahiku.
+Hakolaoa.
+Oliua.
+Malanaopiha-e.
+Holiakea (thin and white).
+Lohanahanahinakiipapa.
+Hoouna (to send).
+Hakihua (breaking waves).
+Kumananaiea.
+Naukelemauna.
+Maunanee (moving mountain).
+Kauwila (the lightning).
+Kahele (the walk).
+Minialani.
+Oilialolo (from the brain).
+Ololo was born (uneven), he was the husband.
+Kukaalani.
+Opuuhanahana (rising heat).
+Ulunui (luxuriant growth).
+Kawakupua (age of myths).
+
+Kalolomauna (brain of the hills).
+
+Kopohelei.
+Wife.--The meaning.
+Halulu (rumbling sound).
+Huku (a lump).
+Paweo (look askance).
+Kikona.
+Keleikanuupia.
+Lauhohola.
+Kaumai (come aboard).
+Kahikoleiulu (decorate with balls).
+Pahula (dancing yard).
+Keleikapouli.
+Kukukalani (thorny heavens).
+Lelepau (full confidence).
+Naholokauihiku.
+Koluanahinakiiakea.
+Wife--The meaning.
+Kaimai (lead this way).
+Hoopailani.
+Hulipu (turn over, upset).
+Kanaloa (a god). 1
+Hawaii (name of largest island).
+
+Halalai (calmly).
+
+Aamoa (tendon of a chicken).
+
+Holoalani (passing heavens).
+Opiopuaka.
+Haloiho (peer beneath).
+Hoouka (place on top).
+Puepue.
+The husband--The meaning.
+Mahinakea.
+Hookahua (establish foundation).
+
+Kaoiwi (the form).
+
+Kukamokia.
+Hoopilihai.
+Kaulana (famous).
+Mahikona.
+Polohiua.
+Ulukauu.
+Hoomau.
+Hooliu (to be salted).
+
+{p. 64}
+Kaloloaa (brain full of veins).
+Kuiaeonaka (strike and tremble).
+
+Opuukalahiwa.
+Hoomaopulani.
+Kaloloamoana (brain of the sea).
+Meheaka.
+Kahianakiiakea (open space for gods).
+Hoomahinukala.
+Mukumulani.
+Kealonainai (short breasted).
+Holehana.
+Laiohopawa.
+Nakia.
+Kukaluakini.
+Nauanuu (grade in Naua).
+Pokaukahi (on the first night).
+Wakea who was husband of Haumea, Papa, and Hoohokukalani, and Haloa was born.
+Kaioia (was pierced).
+Paniokaukea.
+Hoopiimoana.
+Auna (flock).
+
+Opuumauna (hillocks).
+Hookumulani (commencing the heavens).
+Pilimeha-e (lonely companion).
+Koha (popping sound).
+Kamaka (the eyes).
+Manamanaokalea.
+Palimoe (slanting precipice).
+Nakiauaawa.
+Pepepekaua.
+Lanipuke (clashing heavens).
+Kapuu (the mound or hill).
+The husband.--The meaning.
+Kelekauikaui.
+Mokumokalani.
+Kaulamaokoke.
+Palihoolapa (precipice of ravines).
+Keakenui (great longing).
+Kalolopiko (centre of the brain).
+Nakao (the shooting stars).
+
+Nahunahupuakea.
+
+Makuaikawaokapu (parents of the sacred fields).
+
+Leleiao (flown at dawn).
+Lohalohai.
+Kiamanu.
+Hikuanahinakiiakea.
+Maunaku.
+Pilihonua.
+Kahikoleikau (hang decoration).
+Punalauka.
+Opuuhaha (budding of taro flower).
+Lanipahiolo (sawing heavens).
+Makele (swampy).
+Lenawale (turn yellow easily).
+Wife.--The meaning.
+Koele (a noise).
+Meheau.
+Mauka-o.
+Piheelalo.
+Kumukanikekaa.
+Hooipomalama (courting months).
+Kupo (stood at night).
+Kepoo (the head, at the top).
+Ouoanahinakiipapa.
+Palipali (hilly).
+Puhiliakea.
+Kalalomaiao.
+Opuukalaua.
+Hanaku (do as you please).
+Wife.--The meaning.
+Nuualani (steps of heaven).
+Maliiluna (attached above).
+Hinapahilani.
+Kahilinaokalani (the thrashing of the heavens).
+(Wakea was the first man and Papa the first woman.)
+
+Haakauwila (low lightning).
+
+Lohelau.
+Haamomoe (all lay low).
+Opuukalalele.
+Laaniha.
+{p. 63}
+Heanalani (heavenly cave).
+Huakalani (heaven bore fruit).
+Ulahuanu.
+Hoohewahewa (not recognized).
+Hikaulunui.
+Kailiokalani (the skin of the heavens).
+Piheeluna.
+Pihana.
+Opaikumulani.
+Hoohiolokalani.
+Kukulani.
+Kahikoleihonua (decorate the earth).
+Poupehiwa.
+Kuliaimua.
+{p. 62}
+{p. 66}
+(page 66, from whence another line of Paliku branched off).
+Milimilipo (fondle at night).
+Kukaimukanaka.
+Opuukalauli.
+Hoopumehana (warmed).
+Ohemokukalani.
+Kaunuuula (the red furnace).
+Kanemakaikaeleue.
+Lukaua (cease war).
+Hoomalae (pretend).
+Kalelewaa.
+Awekeau.
+
+Heiheiao (race in the day).
+
+Hoopihapihia.
+
+Kukahauli.
+Kanioi (name of a poisonous tree).
+Palelaa.
+Hahalua (full of holes, ruts).
+Kalanimakuakaapu.
+Haapipili.
+Hoonewa (staggered).
+Kuaaala (fragrant forest).
+Hoopailimua.
+Oopukoha (noise of the Oopu).
+Haakukui (rumbling sound).
+Poi (food made from the taro).
+Laukohakohai.
+Wakaau.
+Kaopeopo (the bundle).
+Pepe (crushed, humble, flattened).
+Maninikalani (weeping heavens).
+Hoopalepale (to push away).
+Kakelekaipu.
+Opumakaua (timid).
+Kakahiaka (morning).
+Welaahilauinui (burning heat of her beauty).
+Kanikumuhele.
+Nukuono (sweet lips).
+Hoomauolani.
+Paliomahilo.
+Kuukuu.
+Kimana.
+Miahulu.
+Iwaanahinakiiakea.
+Kauhoaka.
+Pihaehae.
+Hemua (the sprout).
+Wife.--The meaning.
+The husband.--The meaning.
+Puanue.
+The husband--The meaning.
+
+Aukuu (kingfisher).
+
+Kainio.
+Mihikulani.
+Footnotes
+Mahikona.
+Kihalaaupoe was born a Wauke (the tapa tree);
+Kapiko (the centre, the navel).
+Meimeikalani.
+Lapai.
+Kaulunokalani.
+The younger branch was born called
+Kau-a-wana (season for Wana).
+Kaukealani.
+Kanaua.
+Hoopialu.
+Laheamanu (stench of birds).
+The husband.--The meaning
+Kapawaolani.
+                      Yes, ’twas Haloa.
+Kunikunihia (singed, burnt).
+Kilokau (watch the season).
+Kekihe-i.
+Kekoha (the loud report).
+Keleikanuulani.
+Hoopililani.
+Ahukele (swampy).
+Kuka Moi.
+Kumuhonua (foundation of earth).
+Palialiku.
+Kahiolo.
+Hoomaua.
+Poiao.
+Opuele (black stomach).
+Lanukuaaala.
+Limaanahinakiiakea.
+Paliku was born (as a precipice).
+Nuukoiula.
+Hoopilipilikane (betrothal).
+
+Leua (yellowish).
+
+Wife.--The meaning.
+
+Opuupuu (lumpy).
+Hoolehu (to turn to ashes).
+Maunahiolo (mountain slide).
+Piipiiwaa.
+Kulukau.
+Ololonuu the wife.
+Waawaa (uneven, rough, fool).
+Pioalewa (arching bow).
+Haakoakoalauleia.
+Hainuawa.
+Maunapapapa (low mountain).
+Hinahookaea (despised Hina).
+Kapaeniho (set of teeth).
+Okea (whitish).
+Hoonakuku (moving heavens).
+Kane (a god) (first two were born together). 1
+Kukaailani.
+Kapaulaia (this is the end).
+Makaukau (ready).
+Kauikaiakea.
+Makohilani (grip the heavens).
+Pilikana (relationship).
+
+Hooahu.
+
+Kuhimakani.
+Nakukalani.
+Kanalu (the surf).
+{p. 61}
+Opuuhamahamau (beginning to suppress).
+Hiliapale.
+Wife.--The meaning.
+Uhuihi (screen, to hide, to cover).
+Kanikaniaula.
+Lalohana (low work).
+Hoolepau (deny outright).
+Opuupe (slimy bowels).
+Pioalani (arching heavens).
+The Ulu was born an Ulu (bread fruit);
+Liahu.
+Palihoomoe.
+Haneenee (creep along, grow low).
+Haulanuiiakea (broad glow light).
+Puukahonua (hill in the earth).
+A-aa (full of roots or veins).
+Hoolawakua.
+Kaneiakoakahonua.
+
+Wife.--The meaning.
+
+Kaulakelemoana.
+
+Kahikoluamea (strewing of age of Mea).
+Kuemakaokalani (eyebrow of the heavens).
+Manawahua (dyspepsia).
+Heleaeiluna (walk upwards).
+Opuukalakea.
+Hopulani (catch the heavens).
+Makelewaa.
+Hoolilihia.
+Leleimoimo.
+Nahaeikekaua (torn by war).
+Kupulanakehau.
+
+Panionio (variegated colors).
+
+Ahuahuakea.
+Apoapoakea.
+{p. 60}
+Kukauhalelaa.
+Kekilaau.
+Aluka (in a crowd).
+Kawakahiko (the olden times).
+Lalomai (beneath).
+Maunahaahaa (low mountain).
+Palimaka.
+Nuakeapaka.
+
+Kaikainakea (white sister).
+
+Kuiau (I strike).
+
+Hoopalipali.
+Kalolo (the brain).
+
+Kalaniku (standing heavens).
+{p. 65}
+
+Punalakai.
+Polohilani.
+Laulaulani.
+
+Nanue.
+
+Palaau (picket fence).
+Lanikupo (the night of standing heavens).
+Kumakumalani.
+Hooholihae.
+Kapua.
+Hoopilimoena.
+Hoopilimeha-e (deep solitude).
+
+Pipili (to attach one's self).
+Pouhana (foundation).
+Hauli.
+Milihoopo.
+Maunanui (big mountain).
+Puunaueakea.
+Kapaia (the walls).
+
+Palipalihia (mountainous).
+
+Kuaiwalono.
+
+Laaumenea.
+Hoopalaha.
+Hoopulupulu (made into lint).
+Ikawaoelilo (abduct while in the woods).
+Ohuku (projection of land).
+Kaulalo.
+The husband.--The meaning.
+The husband.--The meaning.
+Mahikoha (noise of the Mahi).
+Kalimalimalimalau (the fifteen leaves).
+Kupomakaikaeleue.
+
+Owe (grating sound).
+
+Nawihioililani.
+Wakaaumai.
+Holiliakea.
+Palikomokomo (precipice with entrances).
+Newaa (beg for a canoe).
+Oili (appeared).
+Waluanahinakiipapa.
+Opaiakalani.
+Kaakoakoaikeaukahonua.
+Malanaopiopi.
+Kapili (bound together).
+
+Paepaemalama.
+Kaupeku.
+Mahiliaka.
+
+Aa (clinkers, bright fire).
+
+Kiihalani.
+
+---
+
+## A Branch of the Twelfth Era
+
+And established sacred tabus across his threshold.
+
+Kainainakea.
+
+Kahakuiaweaukelekele.
+                            Thrived.
+Hinawainonolo (Hina of the gurgling waters).
+Kamaulikainaina.
+Puukahalelo (standing heap).
+Where Haumea's grandchildren increased.
+Hikapuanaiea.
+Palihai (broken precipice).
+{p. 67}
+
+Nuumea was the land, Nuupapakini the earth,
+
+Hinamanouluae.
+This woman that gave birth from her head,
+By "Papa who sought the heavens" (chief),
+And the nights of Hilo to be first;
+Kapapapahu (short board).
+Kapapaianapa (board that flashed).
+Haunuu.
+Such was the house that Wakea lived in.
+Kapapaiaoa (groaning board).
+
+The husband.--The meaning.
+
+So grew the sprout of Haloa in the day and
+
+Kauahulihonua.
+Mauluikonanui (tired of greatness).
+Who lived with Kanaloaakua.
+(Turn to the 65th page, from whence this genealogy of Paliku began.)
+The husband.--The meaning.
+
+Kapapaku (standing board).
+
+Changed the days and months,
+By Papa the great producer of lands,
+Kapapaluna (board above).
+Kapapanuiialeka.
+Gave birth to Kahakauakoko through the brain.
+
+The Uhaloa for its life-giving properties became sacred;
+
+Keaona (to be taught).
+Kapapaholahola (spread board).
+Kualeikahu (back that bore his follower).
+Ordered the nights of Kane towards the last of the month
+
+Mulinaha (last of broken birth).
+Luukaualani (showers that deluged heaven).
+Then was born
+Haulani.
+
+Gave birth to Laumiha through the brain;
+Ohomaili (beautiful hair).
+
+Kauakahiakua was born from the brains;
+Kapapanuiakalaula.
+Ipoi (held up).
+Kapapapoukahi (single board post).
+Palikaa (rolling precipice).
+The Auhuhu (pungent and bitter) became sacred;
+
+Her children were mostly born from the brains;
+Kapoheenalu (the night of surf riding).
+Kapapakiilaula (the broad board of idols).
+Kapapahanauua (board that brought rain).
+Accompanying its birth were anger and jealousy.
+Kapapapaa (firm board).
+
+And at the birth of Hikapuanaiea her breasts were caught by the heavens.
+
+Wakea became false to Papa.
+The Ape, so bitter, became sacred;
+Oliaikuhonua was born in the night of Puukahonualani.
+Hinawaioki (Hina of the cutting waters).
+Haumea of mythical form, Haumea with eight different forms,
+Hanauua (birth of rain).
+Then next in birth was
+
+Wife.--The meaning.
+{p. 68}
+Kukauakahi, the man who dwelt with Kuaimehana.
+Kapapanuikahulipali.
+
+By Papa who lived with Wakea.
+
+Kahaula, the woman that dwelt with Kuhulihonua.
+
+The Laalo, so acid, became sacred;
+Haumea was the same woman
+Haalolo was born a woman.
+Olekailuna (naught above).
+The food of the parent chief became sacred;
+By "Papa who sought the earth" (people),
+Kapapauli (dark board).
+In Kio sickness ended, the brains began to roll.
+Laumiha, the woman that dwelt with Kekahakualani.
+With great slime was the birth from the brain
+This woman of the darkest night, of Nuumea,
+Kahakauakoko, the woman that dwelt with Kulaniehu.
+Children were born from her brains.
+Mehakuakoko.
+{p. 69}
+Panaheenalu (surf board).
+Paliku (standing precipice).
+The Haloa that grow by the edge of the patch became sacred.
+Kapapaiakea (wide board).
+Palihiolo (falling precipice).
+Kahookokohipapa.
+Kapapapoha (board of loud report).
+Haumea was discovered.
+Haumea who dwelt with Kanaloaakua.
+And lived at Mulinaha,
+Papaiao (board of day).
+This woman of Nuumea was discovered by a dog.
+Plant the Haloa, the leaves will grow tall;
+Haumea of several forms, Haumea in form of a shark.
+Kehaukea (white dews).
+Huhune.
+
+Kapapanuinuiauakea.
+Gave birth to Kahaula, a woman, through the brain;
+Kahokuhookelemoana.
+The Akia (sour) became sacred;
+Whose many forms took different shapes,
+Wife.--The meaning.
+Lakaunihau.
+Nalaunuu (eaten leaves).
+Honuakau (earth hung).
+Kapapamoe (lying board).
+Mohala (opening).
+Kapapailalo (board beneath).
+
+---
+
+## The Fourteenth Era
+
+Hiona (features).
+
+Strewed the seeds from Hina; Lonomaku was formed like jelly,
+The husband.--The meaning.
+Kamanookalani (shark of heavens).
+    Hung the Hiku (seven stars, Pleiades), hung Hiku kahi (first seven),
+Strewed fine seed of gods, the sun became a god,
+    Hung Kokoiki (little blood), hung Humu (to sew),
+Hung the little stars of fighting omen,
+Kupukupualani (sprouting forth heavenly).
+Hina wanted food and Wakea provided,
+Lukahakona (shake of rottenness).
+Kaleiokalani (wreath of the heavens).
+Hung Puanakau, hung up enjoyment,
+
+Who lived with Kahiko, the Kahikoluamea,
+
+Pomanomano (many nights).
+    Hung Kalalani (row of stars), hung the Kekepue,
+Loaa (received, found).
+That came from the seed of Kaeoeo
+Hoao (betrothed).
+Upalu (tender, soft).
+Wakea grew angry and tried to brush it off;
+Keakahulihonua (shadow that sought the earth).
+    Hung Kamalie (calmness), hung Kamaliemua (the first calm),
+Paiaalani (walls of heaven).
+Hung Kaawela (red streak), hung Hanakalanai,
+Shook it off, and it lit on the roof.
+
+A fowl was born and clung to Wakea's back.
+
+Honuailalo (earth beneath).
+
+Causing Hinaiaa kamalama to float, a sprig,
+Hung the flower of the heavens Kauluaihaimohai,
+Koiaakalani was born a woman.
+Hung, twice hung, Lanikuhana,
+    Hung Kanikaniaula, hung Kauamea,
+To them was born Paupaniakea,
+Haule (fallen, lost).
+{p. 71}
+Hung Kaakaa (Open vision), hung the Poloula,
+Blackstone was born, volcanic rocks were born,
+    Hung Kamaliehope (later calmness),
+After them came men with great bundles
+Kanikekoa (report from the corals).
+Kupulauakehau the woman
+Malakupua.
+
+In the starry space.
+
+Kinilauemano.
+That fowl on the roof,
+Milipomea (fondle night objects).
+Kupukupuanuu (sprout forth).
+    Hung Hiku oni (seventh moon), hung Hiku pau (final seven),
+Kamooalewa (serpent in space).
+Lalokona.
+Mokulu.
+Hung the bunch of stars that rained in Wahilaninui,
+The husband.--The meaning.
+Wife--The meaning.
+Kahuaokalani (fringe of the heavens).
+The stars secured were hung in space.
+Laweakeao (taken to the clouds).
+    Hung Kukui (lamp), hung Konamaukuku (their spikes),
+
+Kupulanakehau was born a woman.
+    Hung na Kao (the goat, Capricorn).
+Polelehu (dusky night).
+Rocking here and rocking there
+Hung Auhaku (composing period), hung Kamakaunulau,
+Set his gods up and well bolstered,
+Whereby she was named Hinahalakoa.
+{p. 73}
+    Hung Makalii (fineness), hung Nahuihui (the group of stars, Orion),
+Pohakoikoi (heavy report).
+Hung Malana (unsteady), hung the Kakae (name of a place on Maui),
+Corals were born and eels were born,
+Liaikuhonua (longing for earth).
+
+Kamoku (an island).
+Hung Hinalani (stumbled heavens), hung the Keoea (turtle clouds),
+Hung Kapakapa (edges), hung the Mananalo (insipid),
+Hung Pouhanuu (the post of tiers), hung Kailiula (red skin),
+Hung Lanakamalama, hung the Nana (float), one of the months.
+Hung Hokuula (red star), hung Poloahilani,
+Hung Maliu (yield), hung the Kaulua (postpone), one of the months.
+Kamaookalani (quietness of the heavens).
+Laka (subdued).
+Honuapoiluna (upper earth in darkness).
+The food on which subsisted Hinahanaikamalama or Waka,
+Which were tied together and hung up in the night of Makalii.
+Hung Hinaonalailena (Hina of the glowing calm),
+That climbs in space.
+    Hung Mahapili, hung huihui (cluster),
+The earth does swing
+Hung in tiers, hung Kahailono firmly,
+Hung Kaaona, hung Hinaieeleele (black Hina),
+Hung Hooleia (thrown away), hung Makeaupea,
+Hung Kikiula, hung Kehooea,
+Wife--The meaning.
+Strewed the seeds, finest seeds of stars in the heavens;
+Halo (peer around).
+Keaaokahonua (roots of the earth).
+Hung Hikikauelia, hung Kaelo,
+’Twas a stain, this fowl that grew on the back of Wakea;
+That fowl was a chief
+Hung Kanihaalilo, hung the U-u (a fish),
+Who is no other than Wakea, or Lehuula, or Makulukulukaeeaulani.
+Wakea, provoked and annoyed,
+Kapapaialaka (board that's laka's).
+Lapuukahonua (doubled up earth).
+
+Maluapo (shade of night).
+Hookumukapo (beginning of night).
+Sought for by Wakea in the deep blue sea,
+    Hung Uliuli (blackness), hung Melemele (yellow),
+’Twas flung into his canoe, she was thereby called Hina the sprig;
+Lalohana (low work).
+    Hung Hiku alua (second seven), hung Hiku kolu (third
+Kamakaokalani (eyes of the heavens).
+Kapuohiki (pile of ohikis).
+Namea (those things).
+    Hung Hiku hana (fourth seven), hung Hiku lima (fifth seven),
+Lalohooaniani (air, lower work).
+Sea-urchins were born, sea-eggs were born.
+Panainai (flat bottom).
+Hung Ihuku (peaked nose), hung Ihumoa (chicken nose),
+Then went after Hinakaweoa to be his wife.
+Keaomele (day of songs).
+Keohookalani (hair of the heavens).
+Kalanianoho (sitting heavens).
+             Names of stars.
+Hung Welo (trailing), hung Ikiiki (suffocating),
+Hung Wainaku, hung it firmly,
+{p. 70}
+             Names of the months.
+Hung Pipa (sneak), hung the Hoeu (stir up),
+Set them nicely in a row;
+Taken ashore and warmed by the fire.
+Hung Kona (south), hung the Waileia,
+Nananuu (crimpy).
+Hung Kamaio, hung the Kaululena (name of a wind),
+    Hung Kaalolo (heap of brains), hung the Kaulanakala (resting place of the sun),
+
+    Hung Moha'i, hung Kauluokaoka (accumulation of little things),
+Keaoaoalani.
+{p. 72}
+Hung the bunches of swift offerings,
+Walea (comfort).
+Kinilauewalu.
+Hanahanaiau (to make current).
+Niaulani (heavenward).
+Hung A-a (bird), hung the Ololu,
+Kamoleokahonua (foundation of the earth).
+Hung Kapawa (midnight), hung Hikkaulonomeha,
+In the coral mound, ’mongst rough waves,
+The heavens did swing,
+Streaks of dawn were hung up with Kupoilaniva in space.
+Pokinikini (many nights).
+Kulaniehu was born a man.
+Kalalii (day of chiefs).
+    Hung Hao (curious), hung the Aua (a fish),
+
+---
+
+## The Fifteenth Era
+
+They fought hard with Maui and were thrown,
+Married her grandson Haloa, whose wife was Hinamanoulu;
+Shook the floor; her breast was like that of a dog;
+As the deep darkness is the greatness of her rank,
+The great god of the bats.
+Married her son Kaukahi, whose wife was Kuaimehani;
+Which scratched the eyes of Peapea with eight eyes.
+Her back was wrinkled as well as front.
+That is the hook, ’tis called Manaiakalani.
+Waikalani was the man and Kekauilani was his wife.
+A strange woman was Haumea in her life,
+He is the great magician that caught
+Hina denied he had a father;
+That the malo of Kalana was his father.
+Kuheleimoana was the man and Mapuuaiaaala was his wife.
+
+By strategy the war
+Her husband was not a fowl,
+An egg was that child, which Hina brought forth.
+{p. 74}
+Pimoe was wooed and won by the Ina of Maui.
+The two posts that guarded the low cave;
+For she married her grandchildren,
+Ulu was the man, Punuu his wife.
+Then came the second shower by Maui.
+Embraced Hawaii, encompassed Maui,
+’Tis there you will find line and hook;
+Felt bitterness in his breast, anger and jealousy of his rival,
+From Kamehaikaua, god of Kauakahi,
+            Yes! of the land.
+And Winter (Makalii) won the sun,
+Kio was born and Haumea was discovered,
+Kii was the man and Hinakoula his wife.
+When the child cooed Hina asked,
+They fetched from the sacred Awa bush of Kane and Kanaloa.
+They are Hina's brothers,
+Kauai, around Oahu.
+For the noose that Maui laid.
+Took deep root from this woman of the forest.
+Her form was irregular,
+Landed on the island of Lua, of Ahu a Lua, and stayed at Wawau.
+Whose wife was Hulihoma;
+Married her grandson Wailoa, whose wife was Hikopuanaiea.
+The royal fish that raise commotion in the sea.
+’Twas Uaia who discovered that she was filthy.
+First Maui was the man and Central Maui was born.
+Go hence to your father;
+When the hook catches land ’twill bring the old seas together.
+So showers in plenty were sent by Maui
+They were taken ashore, eaten by Maui, all but the fins.
+Konohiki was the man and Hakaululena was his wife.
+Married her grandson Nauakahili, whose wife was Haulani;
+
+By the mouth and fins Pimoe,
+He stamped on her breast, which shook down the wall of Nuumea;
+Then he longed for fish for Hinaakeahi,
+Of the great fiery showers caused by Maui.
+They drank of the yellow waters to the dregs
+Ole was born the man and his wife.
+Pupue was the man and Kamahele his wife.
+Hinakeka was abducted by Peapea (the bat),
+Married her grandson Kauahulihonua,
+This female god, wife of Makea,
+Nana was the man and Kapulani was his wife.
+Kahiko was the man and Kaea his wife.
+{p. 75}
+The sacred lonely heavens from Kamahaikaua,
+Yes, his wife.
+Married her grandson Waia, whose wife was Huhune;
+Haumea, she of Nuumea that stood in loose ground
+But pity sprang for Mahanauluehu,
+Crouching Maui was born, Maui with a malo was born.
+Bring hither the large Alae of Hina,
+Yet a chicken was brought to life.
+Nanaielani was the man and Hinakinau was his wife.
+For this is Maui of the malo,
+Luakahakona was the man and Koulamaikalani his wife.
+And red water flowed freely from Maui's forehead.
+At Kahaluu was the after birth, at Waikane the navel.
+It dropped at Hakipuu, at Kualoa.
+The malo with which Akalana girded his loins
+Waolena was the man and Mahuie was his wife.
+I have no husband, yet a child is born.
+The children of Pimoe.
+Of Mehani Nuu's thick sward at Kuaihealani at Paliuli,
+
+They fought a battle with Moemoe.
+Of Kane and Kanaloa.
+And married her children;
+Manaku was the man and Hikohoale his wife.
+Mahanauluehu was saved by the tail.
+Married her grandson Hinanalo, whose wife was Haunuu;
+Maui became reckless and fought the sun
+The fourth shower was the sacred bamboo of Kane and Kanaloa.
+{p. 76}
+The third shower was when the elbow of the Awa was broken.
+The sister bird
+Was Haumea the great and fearless one.
+A brave child is born to Hinaakeahi (Hina of the fire).
+This was the first shower by Maui.
+The fifth shower was the edge of the umu (oven).
+Who cut the sacred step, and cut the heavenly Haiuli,
+Haumea was found to be wrinkled,
+So Summer was won by Maui.
+From which Hina became pregnant, and by fire brought to life a fowl.
+The wonder of the land,
+Learnt the art of fishing, was sent by Hinaakeahi.
+Maui sobbed and inquired for his father.
+Very aged, with watery eyes;
+Akalana was the man and Hinaakeahi was his wife.
+Was sour temper’d and crabbed.
+The sixth shower was the first rise.
+Luanuu was the man and Kawaomaaukele his wife.
+Nanaie was the man and Kahaumokuleia was his wife.
+Those breasts which raised high chiefs
+It roused the anger of Kialoa and Kiaakapoko (tall post and short post).
+Ulu was born, Nanaulu was born.
+So Pimoe was saved by the fins.
+
+---
+
+## The Sixteenth Era
+
+Mauiloa the man, Kauhua was born.
+
+Hema snatched the goblet in the scuffle with Luamahaheau.
+
+Mapuleo.
+Nanamoa was the man and Hinakapaikua the wife.
+Hulumalailena was the man, Hinamaikalani the wife.
+Kahekili.
+Hua the man, Hikiiluna the wife.
+Kaheka (ditches).
+Kapohanaupuni.
+Wakalana (time of straining) was the man.
+Paukei.
+Hanalaanui was born, Hanalaaiki was born.
+Kaumana.
+And lord of the famed lands of Pakini,
+Piilani. Piikea was born and married Umi; to
+Kaulahea.
+Kapawa was the man, Kukuluhiokalani the wife.
+Hanalaaiki the man, Kapukapu was born.
+Haho the man, Kauwilaianapu the wife.
+Kawaukaohele was born, also Keleanuinohoanaapiapi,--
+Kuhimau.
+THE SIXTEENTH ERA.
+From whence Laielohelohe was born and who married
+Paunuikaikeanaina the man, Manokalililani the wife.
+Nanakuae was the man, Keauhonua the wife.
+Kahainui of Hema was born, Hinauluohia the wife.
+Aikanaka was the man, Hinaaiakamalama the wife.
+Paunuikuakaolokea the man, Kapuhookia the wife.
+Wahieloa the man, Hoolaukahili the wife.
+
+Hinaapoapo.
+Hauanuihoniala.
+Of the sliding Ohia and the weaving of the islands of Hawaii
+Kulai was the man and Hinahoopaia the wife.
+Kamaluohua.
+To Ahu--to Ahu of I, of Lono,
+
+Whose power and right to execute,
+{p. 77}
+Kanunokokuhelii the man, Keikauhale.
+Palena the man, Hikawainui the wife.
+Waohaakuna.
+Pumainua was born, then Hema and Puna last of all.
+
+Kapohauola.
+
+Puia the wife.
+Maui was the man and Hinakealohaila was the wife.
+Kapu.
+Kamaeokalani.
+Kakae.
+Loe.
+Kahokuohua.
+Alo (dodge) was the man.
+
+Kamea the man, Popomaile the wife.
+Luanuu the man, Kapokuleiula the wife.
+Laka the man, Hikawaolena the wife.
+Alau the man, Moeikeana was born.
+{p. 78}
+Lonomai (heard from) was the man.
+                     Of Lonoikamakahiki.
+Hikakauwila.
+
+The woman that lived at Kalamakua,
+Kolu (third) the wife.
+Heleipawa was the man, Kookookumaikalani the wife.
+Their son, Makua, was the only high chief (wohi kukahi) of the island. Kapohelemai, his wife, whose rank as sacred wohi Alii and Honor. So their heir I, the I of the Kingdom,
+Kawai (the water) the wife.
+Huanuiekalalailaikai the man, Kapoea the wife.
+Kumalaenui of Umi was the husband of Kunuunuipuawalau.
+Luakoa.
+Pohukaina the man, Huahuakapolei the wife.
+Kumalaenuia Umi, who owned those precipices from whence slaves were held.
+Mailou the wife.
+Painalea.
+
+---
+
+## Kalakaua and Liliuokalani's Genealogy
+
+ALAPAIWAHINE,
+
+KEPOOKALANI,
+
+LONOMA-I-KANAKA,
+
+HON. A. S. CLEGHORN,
+
+KAIMINAAUAO,
+
+Child.
+
+KAOLANIALII,
+
+descendants of
+
+LONOIKAMAKAHIKI KA-I-IMAMAO.
+VICTORIA KAIULANI
+KALAKALA,
+LILIUOKALANI,
+
+KAMOKUIKI,
+ANNA KAIULANI,
+LIKELIKE,
+KAOLANIALII,
+
+LONOIKAMAKAHIKI OF KA-I-IMAMAO,
+KAPAAKEA,
+KA-I-IMANIAO,
+KALAKAUA AND LILIUOKALANI'S GENEALOGY.
+
+KAPAIHI AHU,
+
+KEAWEIKEKAHIALIIOKAMOKU.
+
+Father.
+KEOHOKALOLE.
+ALAPAIWAHINE,
+MIRIAM LIKELIKE,
+WM. PITT LELEIOHOKU,
+{p. 79}
+KAMANAWA,
+
+KAMANAWA,
+
+Mother.
+
+JAMES KALIOKALANI,
+
+   "      "
+KAPAAKEA.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
