@@ -31,9 +31,9 @@ import json
 import os
 import subprocess
 
+# the host rides INSIDE the artifact bundle — the grammar sits one hop up
 _GRAMMAR_DIR = os.path.normpath(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                 "..", "..", "tree-sitter-memetic-wikitext")
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 )
 
 #: captures that never nest anything (leaves of the MemeAst)

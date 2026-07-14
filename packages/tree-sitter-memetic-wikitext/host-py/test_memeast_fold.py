@@ -65,7 +65,7 @@ def test_golden_corpus_hashes_hold():
     import os
 
     here = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(here, "fixtures", "memeast", "golden-corpus.json")) as fh:
+    with open(os.path.join(here, "..", "fixtures", "golden-corpus.json")) as fh:
         golden = json.load(fh)
     bags = os.path.expanduser("~/Synthetic-Dream-Machine/bags/@lares")
     if not os.path.isdir(bags):
