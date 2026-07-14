@@ -1,5 +1,5 @@
 /**
- * admission-price — the gate as a PRICE, composed from parts that already stood.
+ * admission-price — the gate as a PRICE, composed from the parts that stand.
  *
  * NOTHING NEW GETS INVENTED HERE. `lineage-rank` supplies the seed-rooted vouch mass; `conviction-dial`
  * supplies the 1Hive convex bar and the half-life decay; `capture-reading` supplies the discipline this

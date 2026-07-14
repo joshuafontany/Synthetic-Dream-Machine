@@ -93,9 +93,9 @@ Pure inversion-of-control **breaks at the multi-principal key-handover**: with e
 
 ## The Vault ~ the collector is a secret, never a group
 
-**Four blind domains converged (HD wallets · anonymous credentials · group-key agreement · petname/SDSI
-naming, web-research 2026-07-13): the layer that knows "all these handles are me" is a SECRET, held
-private, and it must NEVER be a published group.**
+**Four blind domains converge (HD wallets · anonymous credentials · group-key agreement · petname/SDSI
+naming): the layer that knows "all these handles are me" is a SECRET, held private, and it must NEVER be a
+published group.**
 
 - **HD wallets** ship it as the Monero **view key** — one secret recognises a thousand unlinkable
   subaddresses, holds no spend authority, publishes no link.
@@ -118,20 +118,18 @@ party who holds the master table.
 private secret that derives them. Both hold the load-bearing property — **single-principal, never
 wholesale-disclosed, no global self.** The place-framing and the key-framing agree.
 
-**But a human holds MANY vaults / me-Circles, each a compartment, deliberately unlinkable even from each
-other.** Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — **separate seeds, separate namespaces**, and
-**NOTHING stands above them that links them** (a layer above the vaults would BE the Nymwars root). A single
-me-Circle that held *all* a human's handles would be exactly that root — so the correction to the earlier
-"the human = one me-Circle" reading is **plural**: a me-Circle collects the handles of ONE compartment, and
-the human keeps as many compartments as their life demands. The vault is the top; the meat-brain is the only
-join between compartments, and it is never on any wire.
+**A human holds MANY vaults / me-Circles, each a compartment, deliberately unlinkable even from each other.**
+Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — **separate seeds, separate namespaces**, and **NOTHING
+stands above them that links them** (a layer above the vaults would BE the Nymwars root). A single me-Circle
+over *all* a human's handles IS that root — so a me-Circle collects the handles of ONE compartment, and the
+human keeps as many compartments as their life demands. The vault stands at the top; the meat-brain holds the
+only join between compartments, and it never rides any wire.
 
-**THE LIVE FIX (found in our own stack, 2026-07-13):** `ceremony-core.ts` joins each PersonaGroup by the
-vessel's **immutable device key** (`addSentinelMember(vesselIdentifierHex, …)`). So two handles run on one
-device share a roster entry — and by the co-membership law, anyone in either group **links them**. The cure
-adds no new axis: a vessel MUST join each handle-group under a **per-handle pseudonymous credential** (a key
-DERIVED per handle), never its raw vessel Individual. The deck stays one deck; the face it wears differs per
-handle.
+**A vessel joins each handle-group under a PER-HANDLE PSEUDONYMOUS CREDENTIAL, never its raw device key.** A
+vessel that joins by its **immutable device key** puts that one key on every handle-group's roster, so two
+handles on one device share a roster entry — and by the co-membership law (RFC 9420; Keyhive), anyone in
+either group **links them**. The credential is DERIVED per handle: the deck stays one deck; the face it wears
+differs per handle, and no roster carries a key that appears on another.
 
 **THE UPGRADE — the nym must PROVE itself, not merely look unlinkable.** SLIP-0010 `handle'/context'`
 derivation is right in *shape* and unverifiable in *fact*: a relying party cannot check the derivation, cannot
@@ -150,7 +148,7 @@ because it IS the committed secret.**
 
 The model closes **only the key layer** — and there it closes well: unlinkable-by-construction at the *key* layer on ed25519-HD. It does **NOT** deliver cross-self unlinkability against an observer who sees the wire, the disclosed credentials, or the prose:
 
-- **disclosure-protocol** — the graduate move is now BUILT (lift/hold veil-crossing, #disclosure). The richer *selective*-disclosure is **SHIPPED, not owed** (web-research 2026-07-13): **BBS** signatures (IRTF CFRG standard-track — reveal a subset, prove the rest in a re-randomised, unlinkable presentation) and **Coconut** (NDSS 2019 — *threshold* issuance, t-of-n authorities, no single trusted issuer, which fits a causal-island confederation exactly). Adopt over the surface; the primitive is solved. The ZK-vouch stays owed.
+- **disclosure-protocol** — the graduate move is now BUILT (lift/hold veil-crossing, #disclosure). The richer *selective*-disclosure is a SOLVED, standard-track primitive: **BBS** signatures (IRTF CFRG standard-track — reveal a subset, prove the rest in a re-randomised, unlinkable presentation) and **Coconut** (NDSS 2019 — *threshold* issuance, t-of-n authorities, no single trusted issuer, which fits a causal-island confederation exactly). Adopt over the surface; the primitive is solved. The ZK-vouch stays owed.
 - **transport** — OPEN (mixnet/private-routing territory; do not lean on it as solved). The wallet literature confirms the boundary: de-anonymisation is graph/behavioral (Meiklejohn; Möser), *never a key break* — the keys were never the leak.
 - **behavioral** — OPEN (fingerprint/stylometry defeat key hygiene; crypto cannot touch it).
 - **the collector leaks below the key layer** — the handles being unlinkable-by-key is NECESSARY, never SUFFICIENT. The link re-enters through everything the selves SHARE beneath the keys: a published roster (SSB metafeeds *list* subfeeds), a shared substrate (container tabs isolate cookies, never IP/fingerprint), a shared relay/IdP, correlated timing, or a **Janus** interactive-receipt probe. A "switch/manage between handles" flow MUST NOT become a Janus oracle.
