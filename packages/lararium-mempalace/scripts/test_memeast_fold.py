@@ -56,12 +56,11 @@ def test_canonical_json_sorts_keys_and_leaks_no_host_fields():
     assert '"_' not in cj  # no host/internal field ever enters the parity currency
 
 
-def test_golden_corpus_hashes_hold(tmp_path):
+def test_golden_corpus_hashes_hold():
     """THE PARITY GATE: every meme's canonical MemeAst hash, pinned. A grammar
     or fold change that moves ANY hash fails loud — the divergence then rides
     the bump ritual (classify INTENDED, re-bake in the same commit; or fix the
     REGRESSION). This same fixture gates the TS host when it lands."""
-    import glob
     import json
     import os
 
