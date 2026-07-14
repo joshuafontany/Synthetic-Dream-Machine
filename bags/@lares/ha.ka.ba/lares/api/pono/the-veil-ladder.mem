@@ -88,6 +88,8 @@ Bad actors are met ''one vessel-veil at a time'' by immune systems — some auto
 
 Reputation across a break is ''priced, not policed''. ''Positive'' rep the holder carries freely (BBS+, no watcher). ''Negative'' rep is never carried — the honest bound (anonymity ⊥ non-transferability): you cannot both shed a name unlinkably //and// drag its debts. So the model ''prices the shedding'': a ''burn'' forfeits the multi-vessel caps + the published standing — dear for the accrued, worthless to a throwaway (differential, again). The anon floor is the reset; you may always drop to it, but you arrive with nothing until you earn or are pledged anew. The lifecycle breathes: //throwaway → (works) → lived → (rotate freely) · (pledge up) → Handle → (burn = the price) → anon → (re-pledge) → new Handle.//
 
+''The forfeit runs cryptographic, not clerical.'' Shared-doc access rides keyhive membership: content encrypts INTO a PersonaGroup document, and keyhive read runs ''FORWARD-ONLY'' — a member reads only content encrypted at or after its own add. A burn ''REVOKES'' the handle's membership and re-keys the group, so the burned handle decrypts nothing shared after the burn; it keeps only what it already read, never the next chunk. <<~ confidence Synthesis-Canon 16/20 >> A running test proves it (`persona-content-crossing`): before the burn the handle reads the shared doc; after `revoke` + re-key, the same handle reads `Key not found`. The Shadowrun tell — a blown SIN //burned// — carries its own enforcement: no watcher pulls access, the re-key does. The `*Keyed` escape hatch (hand a chunk's 32-byte key over a sealed channel) sidesteps this, so it stays reserved for content deliberately shared PAST a burn, never the default.
+
 <<~/ahu >>
 
 <<~ ahu #the-bounds >>

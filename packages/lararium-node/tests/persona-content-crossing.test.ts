@@ -51,6 +51,31 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
   });
 
+  test("burning a handle forfeits access to NEW shared docs — ShadowTalk, made cryptographic", async () => {
+    // The-veil-ladder #the-price: "a burn forfeits the multi-vessel caps + the published standing." keyhive
+    // enforces it: revoke the handle, re-key, and the burned handle reads nothing encrypted after the burn.
+    const founder = await makeVessel(3);
+    const device  = await makeVessel(102);
+    const deviceAgentId = await introduce(founder, device);
+
+    const { docId } = await founder.registerBag(BAG);
+    const { delegationId } = await founder.delegate({ bagUrl: BAG, audience: deviceAgentId, access: "read" });
+
+    // Before the burn: the handle reads shared content.
+    const before = await founder.encryptContent(BAG, new TextEncoder().encode("v1 — the handle still holds"));
+    device.adoptBag(BAG, docId);
+    await device.ingestPeerEvents(await founder.eventsForPeer(deviceAgentId));
+    expect(new TextDecoder().decode(await device.decryptContent(BAG, before))).toContain("v1");
+
+    // BURN — revoke the handle's membership (a convergent CRDT op).
+    await founder.revoke(delegationId);
+
+    // After the burn: new shared content keys to the re-keyed group, WITHOUT the burned handle.
+    const after = await founder.encryptContent(BAG, new TextEncoder().encode("v2 — after the burn"));
+    await device.ingestPeerEvents(await founder.eventsForPeer(deviceAgentId));
+    await expect(device.decryptContent(BAG, after)).rejects.toThrow();
+  });
+
   test("forward-only boundary: content encrypted BEFORE the add stays unreadable (route A owes a re-encrypt)", async () => {
     const founder = await makeVessel(2);
     const device  = await makeVessel(101);
