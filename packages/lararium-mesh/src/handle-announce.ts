@@ -6,8 +6,16 @@
  * This module lands a signed card in a LarDoc as a namespaced tiddler and reads cards back out — nothing more.
  * Once the card is a tiddler in a read-open doc, the EXISTING Automerge sync distributes it over the relay
  * (browser↔node↔browser) with no new channel, exactly as the @daemon doc already carries keyhive cap-events.
- * Which read-open bag HOSTS the announce (its @oracle plane, a dedicated @handles bag) is the caller's wiring
- * choice — the cards ride under their own key prefix, so they coexist cleanly with whatever else the doc holds.
+ * Which read-open bag HOSTS the announce is the caller's wiring choice — the cards ride under their own key
+ * prefix, so they coexist cleanly with whatever else the doc holds.
+ *
+ * NEXUS-SCOPED, NEVER GLOBAL (causal islands). "Public" here means public within the causal island that has
+ * synced the announce doc — the largest practical such island is the Nexus (the WHO plane, sibling to the
+ * @meshpalace FLOW-map's WHERE plane). There is no global DreamNet registry of Handles, because there is no
+ * global now: a Handle federates exactly as far as its announce doc syncs, and crossing to another Nexus
+ * RE-ANNOUNCES. Re-announcement is cheap by the card's self-certifying design — the SAME signed card re-lands
+ * in the target Nexus's doc with no re-sign, and the tiddler key stays stable (it names the identity KIND, so
+ * recognition carries across islands), while the hosting bag carries the island-scoped reach.
  *
  * Pure and I/O-free: it mutates a LarDoc draft the caller opened inside `handle.change()`, and reads a plain
  * LarDoc. It holds no key and touches no network. Untrusted by construction — a card arrives from an open
