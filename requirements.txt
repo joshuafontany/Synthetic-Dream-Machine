@@ -25,6 +25,12 @@ stanza>=1.10
 spacy>=3.8
 nltk
 
+# --- memetic-wikitext LSP (packages/lararium-mempalace/scripts/memetic_lsp.py) ---
+# The server rides the SAME committed grammar artifact the pipe folds with
+# (tree-sitter-memetic-wikitext + its shipped queries); pygls carries the
+# stdio JSON-RPC skin. pygls 2.x (lsprotocol types) — the 1.x API differs.
+pygls>=2.1
+
 # --- OPTIONAL GPU compute cap (this box #has it; the QA-lab box does not) ---
 # A card is a CAP the box composes, never a dependency. On a GPU box install onnxruntime-gpu
 # (the mempalace[gpu] extra) — the content embedder (all-MiniLM / embeddinggemma, ONNX) then
