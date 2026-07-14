@@ -1,0 +1,214 @@
+[
+  {
+    "type": "ahu_block",
+    "named": true,
+    "fields": {
+      "close": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "sigil_close",
+            "named": true
+          }
+        ]
+      },
+      "open": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "sigil",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "ahu_block",
+          "named": true
+        },
+        {
+          "type": "blank_line",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "fenced_block",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        },
+        {
+          "type": "sigil",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "ahu_block",
+          "named": true
+        },
+        {
+          "type": "blank_line",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "fenced_block",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        },
+        {
+          "type": "sigil",
+          "named": true
+        },
+        {
+          "type": "text_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fenced_block",
+    "named": true,
+    "fields": {
+      "info": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "fence_open",
+            "named": true
+          }
+        ]
+      },
+      "line": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "fence_line",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "fence_close",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sigil",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sigil_body",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "sigil_close",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sigil_body",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "<<~",
+    "named": false
+  },
+  {
+    "type": "<<~/",
+    "named": false
+  },
+  {
+    "type": ">>",
+    "named": false
+  },
+  {
+    "type": "blank_line",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "fence_close",
+    "named": true
+  },
+  {
+    "type": "fence_line",
+    "named": true
+  },
+  {
+    "type": "fence_open",
+    "named": true
+  },
+  {
+    "type": "heading",
+    "named": true
+  },
+  {
+    "type": "sigil_body",
+    "named": true
+  },
+  {
+    "type": "text_line",
+    "named": true
+  }
+]
