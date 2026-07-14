@@ -242,10 +242,10 @@ Build clean across core + node + app.  67/67 tests pass.
 ⏿ The model is coherent: browser = authoritative editor, Automerge = shared truth, disk = canon projection, lares/ file watcher = external edits (git, editor, promote endpoint) → Automerge. No server-side TW5 in the write path. `startSyncer` gates on `title.startsWith("lar:")` — the lar: URI as title invariant is now a hard boundary. Draft (`$:/temp/*`) never reaches shared store; disk write only fires for `lar:` URIs.
 
 ◇ Remaining gaps / tensions:
-** **Projection refresh**: `LarariumShell` seeds tldraw from `projectFromTw5(tw5)` once; `tw5.onWikiChange → projection diff → editor.store.put/remove` not wired.
-** **Body-node write-back**: `LarariumCanvas` has a `canvas-draft` listener for `meta.bodyNodeKind`, but `projectToTldraw()` emits no body nodes. Latent, not functional.
-** **Room split**: `/room/:roomId` exists, but content still uses one Automerge meme-store doc. Per-room recipes/docs are M11+.
-** **Legacy layout channel**: `serve.ts` still hosts `/rooms/:roomId` with `TLSocketRoom` + SQLite. Browser content path no longer uses it as authority; decide whether to retire or repurpose.
+** ''Projection refresh'': `LarariumShell` seeds tldraw from `projectFromTw5(tw5)` once; `tw5.onWikiChange → projection diff → editor.store.put/remove` not wired.
+** ''Body-node write-back'': `LarariumCanvas` has a `canvas-draft` listener for `meta.bodyNodeKind`, but `projectToTldraw()` emits no body nodes. Latent, not functional.
+** ''Room split'': `/room/:roomId` exists, but content still uses one Automerge meme-store doc. Per-room recipes/docs are M11+.
+** ''Legacy layout channel'': `serve.ts` still hosts `/rooms/:roomId` with `TLSocketRoom` + SQLite. Browser content path no longer uses it as authority; decide whether to retire or repurpose.
 
 ▶ Local-first architecture coherent for content. M11 opens with projection diffing, body-node canvas write-back, Playwright e2e, room recipe partitioning.
 

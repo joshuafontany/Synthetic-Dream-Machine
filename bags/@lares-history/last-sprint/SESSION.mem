@@ -253,8 +253,8 @@ One commit (`0adc3697` E.10.13) retired two architectural debts in a single swin
 | `0adc3697` E.10.13 | TW5Engine boot path converted to plugin-tiddler load. `_registerWidgets` / `_registerDeserializer` / parser-wrapper-injection block deleted. Boot pushes one envelope tiddler (`lar:///plugins/lares/memetic-wikitext`) into `preloadTiddlers`; TW5's standard plugin loader unpacks wikirule, parser, deserializer, widget modules + materializes cascade configs, templates, and `<$lar-meme-split>` global mount as shadow tiddlers. Folded with namespace alignment: every Lares system title moved from `$:/...` to `lar:///...` (cascades, mount, templates, plugin envelope). Tag VALUES stay TW5-conventional `$:/tags/...`. Dual-distribution build emits both `lares-memetic-wikitext.lar.tid` (canonical, sync-eligible) and `lares-memetic-wikitext.tid` (drag-and-drop) from one Vite library bundle (72.2 KiB each, 5 modules + 7 data tiddlers). |
 
 ''Operator-flagged debts retired:''
-** **Construction-path debt.** Parsers now instantiate via the canonical `$tw.modules` path. The single-backtick regression — produced by hand-rolled `stdParser.call(this, ...)` prototype-chain wrapping — is gone as a side effect.
-** **Sync-namespace debt.** Browser-side shadow-tiddler edits + in-VM plugin re-pack now sync to disk because every Lares system title sits in the `lar:`-only sync namespace. The MOVE (residency ACTION) no longer bugs out on `$:/`-prefixed system tiddlers. Drafts and per-operator UX state stay browser-local in `$:/` by design.
+** ''Construction-path debt.'' Parsers now instantiate via the canonical `$tw.modules` path. The single-backtick regression — produced by hand-rolled `stdParser.call(this, ...)` prototype-chain wrapping — is gone as a side effect.
+** ''Sync-namespace debt.'' Browser-side shadow-tiddler edits + in-VM plugin re-pack now sync to disk because every Lares system title sits in the `lar:`-only sync namespace. The MOVE (residency ACTION) no longer bugs out on `$:/`-prefixed system tiddlers. Drafts and per-operator UX state stay browser-local in `$:/` by design.
 
 ''Decision recorded'' in `packages/lares-core/memes/api/pono/lar-uri.md` under a new "TW5 System Boundary" subsection of Path Taxonomy. Rule: lar:// for everything that crosses the sync filter; $:/ for browser-local UX state; tag values stay TW5-conventional in either case; `$:/`-titled plugin envelopes are a drag-and-drop packaging convention only.
 
@@ -283,10 +283,10 @@ Two layers of work landed: (a) yin-mode architectural collapse driven by web-res
 | `99530399` E.10.12 (Path V.1) | Vite plugin config + build script ship `dist-plugin/lares-memetic-wikitext.tid` (71.3 KiB drag-and-drop artifact). |
 
 ''Architecture invariant established (operator-confirmed):''
-** **Always-split, always-kahea.** Deserializer + `<$lar-meme-split>` widget split every ahu sigil into its own tiddler at sync/save time. Parent text always carries `<<~ kahea ahu #slot >>` references for slot children. Disk emission canonical: parent file + N child files.
-** **Single source of truth.** ahu scanner + control-slot set + slot-path composer live in `@lararium/mesh/meme-ast/ahu-scan.ts`. Three callers (deserializer, action widget, wikirule) import from there. Drift = bug.
-** **Roslyn / recast / XInclude consensus**: serialization is a function of the tree, never of external metadata. Tag-driven discrimination (the `$:/tags/Lar/MemeRoot`-gated cascade) was the named anti-pattern; eliminated in E.10.9.
-** **Drag-and-drop ecosystem play.** `dist-plugin/lares-memetic-wikitext.tid` (V.1) installs in any TW5 5.4+ wiki; gives memetic-wikitext authoring + export without lararium-node infrastructure. Bidirectional: operators can author in vanilla TW5, export to .md, ingest into lararium. Same plugin code in both.
+** ''Always-split, always-kahea.'' Deserializer + `<$lar-meme-split>` widget split every ahu sigil into its own tiddler at sync/save time. Parent text always carries `<<~ kahea ahu #slot >>` references for slot children. Disk emission canonical: parent file + N child files.
+** ''Single source of truth.'' ahu scanner + control-slot set + slot-path composer live in `@lararium/mesh/meme-ast/ahu-scan.ts`. Three callers (deserializer, action widget, wikirule) import from there. Drift = bug.
+** ''Roslyn / recast / XInclude consensus'': serialization is a function of the tree, never of external metadata. Tag-driven discrimination (the `$:/tags/Lar/MemeRoot`-gated cascade) was the named anti-pattern; eliminated in E.10.9.
+** ''Drag-and-drop ecosystem play.'' `dist-plugin/lares-memetic-wikitext.tid` (V.1) installs in any TW5 5.4+ wiki; gives memetic-wikitext authoring + export without lararium-node infrastructure. Bidirectional: operators can author in vanilla TW5, export to .md, ingest into lararium. Same plugin code in both.
 
 ''Web-research dividends cited inline:''
 ** Roslyn / red-green CST: serialization is a tree function, never metadata.
@@ -298,7 +298,7 @@ Two layers of work landed: (a) yin-mode architectural collapse driven by web-res
 
 ''Outstanding (V.2 next push):''
 ** Boot path conversion: `tw5-vm.ts` still runs imperative widget/parser registration mutations. V.2 replaces with plugin-tiddler load via TW5's `$tw.modules` flow.
-** **Single-backtick parser regression resolves as side effect** — TW5's plugin loader instantiates parsers via the proper construction path; eliminates our hand-rolled `stdParser.call(this, ...)` prototype-chain workaround.
+** ''Single-backtick parser regression resolves as side effect'' — TW5's plugin loader instantiates parsers via the proper construction path; eliminates our hand-rolled `stdParser.call(this, ...)` prototype-chain workaround.
 ** Engine corpus integration: load the plugin artifact at lararium daemon boot.
 
 ---

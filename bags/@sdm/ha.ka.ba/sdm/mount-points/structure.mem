@@ -30,7 +30,7 @@ A Structure seats a Power ''in a Site'': shrine, ship-daemon, archive service, t
 
 ''Capacity is not a fixed count (D3).'' A Site carries ''base attributes like a character'' and gains slot/feature capacity by ''purchasable upgrade'' — XP + referee resources, tracked per attribute, ''decoupled from a single Level'' (OGA "Golden Age Item Upgrading"). "As many slots as you pay for." Levels matter most for vehicles (life/damage scale).
 
-*Register held low: this contract is largely native design space. The corpus names the Site category ("Structure/Location, installed in gear/vehicles/infrastructure") but supplies no slot counts or penalties for it.*
+//Register held low: this contract is largely native design space. The corpus names the Site category ("Structure/Location, installed in gear/vehicles/infrastructure") but supplies no slot counts or penalties for it.//
 
 <<~/ahu >>
 

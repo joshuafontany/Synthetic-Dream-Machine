@@ -442,14 +442,14 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 # Inject the resolved URLs into `BagResolver` at manifest time.
 # Keyhive PersonaGroup grant + capability check on the `@personal` and `@draft` bags.
 # Tests:
-*** **Single-bag residency (original 7):**
+*** ''Single-bag residency (original 7):''
 '''' Two devices, same recipe, same PersonaGroup → write StoryList on device A, observe on device B.
 '''' Two devices, different recipe, same PersonaGroup → write StoryList on device A, device B sees nothing.
 '''' Two devices, same recipe, different PersonaGroup → no cross-talk.
-*** **Multi-bag residency (+2, from residency-model reconciliation):**
+*** ''Multi-bag residency (+2, from residency-model reconciliation):''
 '''' ''Test 8 (multi-bag overlay):'' write `$:/StoryList` in `wikis/@{slug}/personal`, then `lares act ADD --title $:/StoryList --from wikis/@{slug}/personal --to bags/@{slug}`. Assert resolveAll returns both bags; resolveTopmost picks the personal layer per recipe priority; origin-bag field reads `wikis/@{slug}/personal`; the `bags/@{slug}` Manifestation remains visible to `lares wiki resolve $:/StoryList`.
 '''' ''Test 9 (transfer effect record):'' `lares act MOVE --title MyNote --from wikis/@{slug}/personal --to bags/@{slug}` produces one `transfer` effect record pairing accession (`bags/@{slug}`) + deaccession (`wikis/@{slug}/personal`); the deaccession log persists in `wikis/@{slug}/personal/log/residency/` after the tiddler leaves.
-*** **Eventual-consistency (S7.7):** binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
+*** ''Eventual-consistency (S7.7):'' binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
 # Update memory-store.md @personal references.
 
 <<~/ahu >>

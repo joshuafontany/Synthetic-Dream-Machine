@@ -190,3 +190,16 @@ the vendored TiddlyWiki5 core tiddlers.
   23 bold, 7 italics. The first whole-book conversion now reads TW5-whole:
   153 headings + 601 list nodes + 154 ahu blocks as STRUCTURE. Golden 1
   mover; 15 green.
+- 2026-07-14 — THE RESIDUE RESOLVES TO ZERO ACTIONABLES (operator + node,
+  together): the deep-list-marker bold class cured (23 pairs — the balanced
+  pass had never stripped markers) · 14 same-line italic asides/witness
+  notes converted (the 200-char cap hid them) · the indented-fence audit
+  found NO damage (interiors carried nothing transformable; TW5 has no
+  indented fences — archival md artifacts, left) · cross-line inline code
+  = LEGAL (codeinline scans to its end-marker across newlines; left) ·
+  linguistic \*balay + sigil-body globs = notation (left forever) ·
+  ahu-styles.mem = CORRECT BY CONSTRUCTION (\$:/tags/Stylesheet + rules-only
+  pragma: no emphasis rule ever runs; raw CSS is the pattern). REVIEW-
+  RESIDUE.md DELETED per its own law. Sole remainder: the boot-seed italic
+  quote (noosphere-boot.mem:144) — folded into the standing boot-seed
+  dialect fork @operator. The corpus migration closes WHOLE.

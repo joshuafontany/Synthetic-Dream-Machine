@@ -35,7 +35,7 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 The pranala-edge DAG replaces static enumeration as the source of truth for boot closure.
 
 ''Terminology Note:''
-*A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.*
+//A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.//
 
 Three structural claims drive the redesign:
 
@@ -46,7 +46,7 @@ Three structural claims drive the redesign:
 # ''ECS plane pattern.'' UEFN's Scene Graph separates `entity` (pure container, no data), `component` (attached capability, owns data and logic), and `prefab` (reusable template, stamps instances). Lararium maps exactly: a ''meme'' is the entity (URI + path, no business logic), the `control:has` bundle is the component list (each component URI is an attached capability, loci among them), and `lifecycle: template` pranala edges are prefabs (declared intent that the compiler stamps into the walk). Pranala families form separate graph planes, each traversed by its own rules. Collapsing them into one walk loses the plane distinctions.
 
    ''Three semantic layers — keep distinct:''
-*** **Ahu-slot tree** (`fragment-parent` / `slot` tiddler fields) — document-level parent/child structure. One `.md` carrier file decomposes into a root tiddler and N named slot fragment tiddlers. Not a pranala edge.
+*** ''Ahu-slot tree'' (`fragment-parent` / `slot` tiddler fields) — document-level parent/child structure. One `.md` carrier file decomposes into a root tiddler and N named slot fragment tiddlers. Not a pranala edge.
 * ''`control:has`'' (N edges) — Verse class composition: every URI in `class(Parent, Iface1, Iface2, ...)`, parent and interfaces alike (no is-a parent). ECS analogy: the attached component list. `MemeGraph.memesByComponent()` indexes this.
 
 # ''Dual-index content addressing.'' TiddlyWiki maintains multiple parallel indexes over the same tiddler corpus. `lar:///INDEXES/hashes` (URI → SHA256 map, lightweight poll) and `lar:///CONTENT/{hash}` (hash → carrier text, virtual resource) implement the same pattern. The boot receipt's `sha256` field becomes a stable Anthropic prompt cache key: a client that holds a matching receipt need not resend carrier text.

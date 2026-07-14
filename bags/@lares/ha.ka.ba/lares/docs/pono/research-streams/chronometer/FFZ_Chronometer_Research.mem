@@ -1032,9 +1032,9 @@ Five principles from cross-domain HUD design:
    more than the absolute.
 
 # ''Three HUD modes minimum:''
-*** **Silent:** URI-only. Phase in fragment. Zero overhead.
-*** **Compact:** One-line summary. Default for most exchanges.
-*** **Full:** Multi-participant view with ITC stamps. On request
+*** ''Silent:'' URI-only. Phase in fragment. Zero overhead.
+*** ''Compact:'' One-line summary. Default for most exchanges.
+*** ''Full:'' Multi-participant view with ITC stamps. On request
      or when participant count > 2.
 
 # ''Auto-declutter under pressure.'' During high-tempo exchanges,

@@ -252,7 +252,7 @@ against it, and ''it never moves again''; every number rides beside its ''chance
 fails to clear the floor reads as //the tolerance doing the work//).
 
 <<~ confidence Canon 17/20 >> ''`boundary_score` carries the anti-manufacture law in code.'' A detector
-placing *n* boundaries ''uniformly at random'' still scores, and scores HIGH once the tolerance opens
+placing //n// boundaries ''uniformly at random'' still scores, and scores HIGH once the tolerance opens
 (`expected recall ≈ 1 − (1 − (2w+1)/N)^n`). ''Tune the tolerance after seeing a result and the scorer''
 ''becomes the last place the imposed prior hides.'' The harness lands first; the instrument second.
 

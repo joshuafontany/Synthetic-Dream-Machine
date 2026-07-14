@@ -102,7 +102,7 @@ Trust propagates but does not run away:
 * ''Three modes (mandatory):''
 ** //personal// — local only.
 ** //network// — advise those who trust me.
-** //propagated// — inherit from those I trust. **Propagated actions do NOT re-propagate**
+** //propagated// — inherit from those I trust. ''Propagated actions do NOT re-propagate''
     (kills cascade storms). Withdrawing trust ''revokes inherited blocks'' — the
     non-monotonicity capability cannot express.
 
