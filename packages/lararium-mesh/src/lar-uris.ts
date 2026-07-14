@@ -269,6 +269,31 @@ export function nexusTrustUri(nexusPubkey: string): string {
   return `${IDENTITIES_DOC_URI}/trust/nexus/${nexusPubkey}`;
 }
 
+// ── The @nexus plane — a confederation's per-Nexus faces (causal island) ──────
+// A Nexus is a confederation of lararia (PersonaGroup → MeshCabal → Nexus), a causal
+// island: no global now, no global registry (canon: causal-islands, oracle-governance).
+// Each face keys by the confederation's nexus-pubkey (the MeshCabal key), so it scopes
+// to ONE island; crossing to another Nexus re-announces onto that island's own faces.
+
+/** The `@nexus` bag root — the confederation plane, one sub-tree per nexus-pubkey. */
+export const NEXUS_DOC_URI = bagUri("nexus");
+
+/** nexusRegistryUri("abcdef…") → "…/bags/@nexus/abcdef…" — the confederation's MEMBERS roster (its lararia). */
+export function nexusRegistryUri(nexusPubkey: string): string {
+  return `${NEXUS_DOC_URI}/${nexusPubkey}`;
+}
+
+/**
+ * nexusHandlesUri("abcdef…") → "…/bags/@nexus/abcdef…/handles" — the per-Nexus WHO face: the announced
+ * Handles known in this confederation. A DISTINCT doc from the members registry (WHO ⊥ the lararia roster),
+ * sibling to it under the same nexus-pubkey. Handle-cards ride it as tiddlers keyed by their own nym (the
+ * portable identity KIND), while this doc URI carries the island-scoped REACH — so the same card re-announces
+ * onto another Nexus's handles-face under a stable key. Federates read-open within the island; never global.
+ */
+export function nexusHandlesUri(nexusPubkey: string): string {
+  return `${NEXUS_DOC_URI}/${nexusPubkey}/handles`;
+}
+
 // ── Social plane doc-type aliases + empty constructors ────────────────────
 
 /** IdentitiesDoc — each principal = one tiddler at identityTiddlerUri(did). */

@@ -26,6 +26,9 @@ import {
   bagUri,
   wikiUri,
   cidUri,
+  nexusRegistryUri,
+  nexusHandlesUri,
+  NEXUS_DOC_URI,
   legacyIdentityUri,
   identitySlug,
 } from "../src/lar-uris.js";
@@ -149,5 +152,23 @@ describe("cid — the /ipfs/ immutable-artifact plane", () => {
   test("the same hash mints the same name — immutability by construction", () => {
     const h = "bafkreiayqszi37beu6bgewomlwrj5ko7hjjxjs6nzp6qbntic4ufk4uehq";
     expect(cidUri(h)).toBe(cidUri(h));
+  });
+});
+
+describe("@nexus — the confederation plane, scoped per causal island", () => {
+  const NX = "abcdef0123456789";
+
+  test("the registry and the handles-face are DISTINCT docs, siblings under one nexus-pubkey", () => {
+    expect(nexusRegistryUri(NX)).toBe(`${NEXUS_DOC_URI}/${NX}`);
+    expect(nexusHandlesUri(NX)).toBe(`${NEXUS_DOC_URI}/${NX}/handles`);
+    // WHO ⊥ the members roster — the two faces never collapse to one doc
+    expect(nexusHandlesUri(NX)).not.toBe(nexusRegistryUri(NX));
+    expect(nexusHandlesUri(NX).startsWith(nexusRegistryUri(NX))).toBe(true);   // sibling under the same root
+  });
+
+  test("each Nexus scopes to its own island — a different pubkey is a different WHO face", () => {
+    expect(nexusHandlesUri("nexusA")).not.toBe(nexusHandlesUri("nexusB"));
+    // the reach lives in the doc URI (per nexus); the identity KIND lives in the tiddler key (portable)
+    expect(nexusHandlesUri("nexusA")).toContain("nexusA");
   });
 });
