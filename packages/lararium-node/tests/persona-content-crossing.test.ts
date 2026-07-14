@@ -108,6 +108,30 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
   });
 
+  test("the joinee needs NO founder card — membership capEvents are self-contained (hydrate-only path)", async () => {
+    // Load-bearing for the admit wiring: bootDaemonKeyhive hydrates the capEvents with no side-channel. This
+    // proves the joinee decrypts from the hydrated membership ops ALONE — no receiveContactCard(founder),
+    // no prekey install. So the admit payload carries only capEvents; the boot path needs no founder-card step.
+    const founder = await makeVessel(9);
+    const joineeStore = new InMemoryEventStore();
+    const joinee = new KeyhiveProvider();
+    await joinee.init({ seed: seedOf(108), eventStore: joineeStore });
+
+    const { id: joineeAgentId } = await founder.receiveContactCard(await joinee.contactCard());
+    const { docId } = await founder.registerBag(BAG);
+    await founder.delegate({ bagUrl: BAG, audience: joineeAgentId, access: "read" });
+    const ciphertext = await founder.encryptContent(BAG, new TextEncoder().encode("self-contained membership"));
+
+    for (const [i, bytes] of (await founder.eventsForPeer(joineeAgentId)).entries()) {
+      await joineeStore.put({ hash: `evt-${i}`, variant: "cap", bytes });
+    }
+    // Hydrate WITHOUT ever receiving the founder's card.
+    joinee.adoptBag(BAG, docId);
+    await joinee.hydrateFromEventStore();
+    const recovered = await joinee.decryptContent(BAG, ciphertext);
+    expect(new TextDecoder().decode(recovered)).toContain("self-contained");
+  });
+
   test("burning a handle forfeits access to NEW shared docs — ShadowTalk, made cryptographic", async () => {
     // The-veil-ladder #the-price: "a burn forfeits the multi-vessel caps + the published standing." keyhive
     // enforces it: revoke the handle, re-key, and the burned handle reads nothing encrypted after the burn.
