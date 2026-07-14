@@ -1,8 +1,13 @@
 /**
- * bind-under-handle.test.ts — the milestone: two vessels BIND under one human-chosen Handle (PersonaGroup)
- * and the joinee reads the group's shared content, end to end through the REAL ceremony + boot + archive.
+ * bind-under-handle.test.ts — the PERSONAGROUP layer: two of a human's vessels BIND into one PersonaGroup so
+ * they sync shared content (wikis), end to end through the REAL ceremony + boot + archive.
  *
- * This is the load-bearing core of "two anon vessels bind together under a Handle": the founder vessel mints
+ * LAYER NOTE (do not conflate): this proves the PersonaGroup — the vessel-binding that syncs content between a
+ * human's own devices. It does NOT prove the HANDLE — the veiled-user pseudonym's SOCIAL announcement on the
+ * DreamNet, which rides the separate `handle-card` (mesh/handle-card.ts). A PersonaGroup CARRIES one Handle,
+ * but binding vessels (here) and announcing the Handle (publishing the card) are two distinct acts.
+ *
+ * The load-bearing content-sync core: the founder vessel mints
  * the joinee into its PersonaGroup (packPersonaCrossing), ships the membership as capEvents in the admit
  * payload, the joinee applies it (runApplyAdmitPayload → @daemon), then BOOTS restoring its own Archive so
  * its prekeys match the card the founder minted-to (bootDaemonKeyhive), hydrates, and decrypts the shared
