@@ -37,6 +37,14 @@ export interface CapabilityProviderInitOpts {
   readonly seed:        Uint8Array;
   /** Where Keyhive events get persisted. */
   readonly eventStore:  EventStoreRef;
+  /**
+   * OPTIONAL prior-identity Archive bytes (from a previous `exportArchive()`). When present, the provider
+   * RESTORES the whole keyhive identity from it — prekey SECRETS + the stable contact card — instead of
+   * generating fresh prekeys. A joinee MUST restore from its archive so membership sealed to its earlier
+   * card still decrypts after a reboot (keyhive prekeys generate per-init otherwise). Raw secret material:
+   * the caller persists it ENCRYPTED-AT-REST.
+   */
+  readonly archiveBytes?: Uint8Array;
 }
 
 /** Lightweight reference shape so this file doesn't depend on event-store.ts.

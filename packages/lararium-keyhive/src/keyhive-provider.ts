@@ -140,7 +140,27 @@ export class KeyhiveProvider implements CapabilityProvider {
     // replaying events (the multi-vessel admit path / Model-B) — replayable access, the right default for
     // one operator's own device swarm (threat model = the operator's devices). keyhive fixes this behavior;
     // it retains secrecy of concurrent and future chunks without a per-init forward-secrecy toggle.
-    this.kh = await KH.Keyhive.init(signer, store, handler);
+    //
+    // RESTORE-OR-FRESH: keyhive prekeys generate per-init, so a joinee that was admitted (its membership
+    // sealed to its earlier prekeys) MUST restore from its Archive — which carries the prekey SECRETS and the
+    // stable card — or a fresh init orphans them and the shared content reads "Key not found". Absent an
+    // archive, mint a fresh identity (the founding path, and every not-yet-admitted vessel).
+    this.kh = opts.archiveBytes
+      ? await new KH.Archive(opts.archiveBytes).tryToKeyhive(store, signer, handler)
+      : await KH.Keyhive.init(signer, store, handler);
+  }
+
+  /**
+   * Serialize this vessel's WHOLE keyhive identity — prekey secrets, membership/CGKA state, and the stable
+   * contact card — for durable restore across reboots (feed the bytes back via `init({ archiveBytes })`).
+   *
+   * The bytes carry RAW SECRET key material; persist them ENCRYPTED-AT-REST, never in the clear. A joinee
+   * exports right after generating the card it hands the founder, so the identity the founder mints-to is the
+   * identity that boots. The canonical whole-identity path (probe: `prekey-persist-reboot` — restore keeps
+   * both decrypt AND the same card, where `exportPrekeySecrets` alone loses the card).
+   */
+  async exportArchive(): Promise<Uint8Array> {
+    return (await this.requireKh().toArchive()).toBytes();
   }
 
   private requireKh(): KH.Keyhive {
