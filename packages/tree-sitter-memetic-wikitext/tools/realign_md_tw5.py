@@ -143,6 +143,8 @@ def main() -> int:
                     help="path substring to skip, reported loud (e.g. the boot seed)")
     ap.add_argument("--pass2", action="store_true",
                     help="add indented lists, balanced bold, and md links")
+    ap.add_argument("--walk-library", action="store_true",
+                    help="walk library/ FRAMING prose (source-text interiors stay exempt regardless)")
     args = ap.parse_args()
 
     root = os.path.abspath(args.root)
@@ -159,7 +161,7 @@ def main() -> int:
              "skip_library": 0, "skip_dirty": 0, "skip_excluded": 0}
     touched = []
     for dirpath, _dirs, files in os.walk(root):
-        if f"{os.sep}library" in dirpath + os.sep or dirpath.endswith("library"):
+        if not args.walk_library and (f"{os.sep}library" in dirpath + os.sep or dirpath.endswith("library")):
             total["skip_library"] += sum(1 for f in files if f.endswith(".mem"))
             continue
         for name in sorted(files):

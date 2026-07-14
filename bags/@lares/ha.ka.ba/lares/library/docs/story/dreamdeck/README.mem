@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/library/docs/story/dreamdeck/README"
 
 <<~ &#x0002; >>
 
-# Epic: DREAMDECK — DreamDeck Integration
+! Epic: DREAMDECK — DreamDeck Integration
 
 > Backlog prefix: `DECK-*`
 > Sprint target: S5
@@ -23,21 +23,21 @@ uri-path  = "ha.ka.ba/lares/library/docs/story/dreamdeck/README"
 
 ---
 
-## Scope
+!! Scope
 
 The full elyncia.app prototype — the Elyncian DreamNet made real on Gaia:
 
-- `tldraw` canvas — visual session map; sprint/epic/story visualization
-- Kowloon feeds — ActivityPub backend; live social view of DreamDeck threads
-- TiddlyWiki sidebar — static knowledge archive; tiddler-format export from the registry
-- Bluesky / AT Protocol identity — `@handle@node` canonical identity form live on public network
-- DreamDeck feed archive format — JackPoint/Shadowtalk rendering; `chat-log:post-header` render target live
+* `tldraw` canvas — visual session map; sprint/epic/story visualization
+* Kowloon feeds — ActivityPub backend; live social view of DreamDeck threads
+* TiddlyWiki sidebar — static knowledge archive; tiddler-format export from the registry
+* Bluesky / AT Protocol identity — `@handle@node` canonical identity form live on public network
+* DreamDeck feed archive format — JackPoint/Shadowtalk rendering; `chat-log:post-header` render target live
 
-## Key Source
+!! Key Source
 
 [`lares/scrum/sprints/00005/ELYNCIA_APP_SEEDS.md`](../sprints/00005/ELYNCIA_APP_SEEDS.md) — DreamDeck stack seeds, `~:confidence[SP],[9]`.
 
-## Backlog Seed Items (DECK-01 through DECK-07)
+!! Backlog Seed Items (DECK-01 through DECK-07)
 
 Full backlog lives in `ELYNCIA_APP_SEEDS.md`. Short form:
 
@@ -51,7 +51,7 @@ Full backlog lives in `ELYNCIA_APP_SEEDS.md`. Short form:
 | DECK-06 | MemPalace ↔ DreamDeck integration (story archive search) |
 | DECK-07 | elyncia.app prototype deployment |
 
-## Narrative Beat
+!! Narrative Beat
 
 *The DreamDeck opens. The Lindwyrm's origin story — the same thread that began this whole project, Telarus asking a question in #origin-stories — is the first post in the archive. The feed is live. The Lar speaks through it. The tldraw canvas shows the sprint map. The TiddlyWiki sidebar shows the knowledge graph. The Bluesky handle resolves.*
 

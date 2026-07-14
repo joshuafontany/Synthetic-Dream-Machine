@@ -46,7 +46,7 @@ source-text NEVER changes · anything hand-review-shaped defers.
 | bags/@lares-history | 20 | ~656 lines | none | ✅ 2026-07-14 (656 headings · 1,527 lists · 134 indented-ul deferred) |
 | bags/@lararium | 210 | ~1,022 | none | ✅ 2026-07-14 (968 headings · 938 lists · 65 indented-ul deferred) |
 | bags/@lares (api/, docs/, cli/ — library/ excluded) | 239 of 249 | ~2,181 | RE-BAKE golden-corpus.json same commit | ✅ 2026-07-14 (2,181 headings · 2,265 lists · 239 hashes re-baked = files touched · 14 tests green) |
-| bags/@lares library/ + source-text | — | — | re-bake + sectioner lockstep (`kumulipo_sections.py` keys `^##`) | DEFERRED |
+| bags/@lares library/ (framing only) | 10 | 62 framing headings | sectioner keys live INSIDE source-text → UNTOUCHED | ✅ 2026-07-14 (62 headings · 48 lists · 50 bold · 4 links · 19,220 source-text lines held) |
 | the boot seed (`noosphere-boot.mem` + repo `noosphere-boot.md` + `~/.claude` copy) | 1×3 | ~40 | cache-stable attractor — operator co-edits | DEFERRED @operator |
 
 ## The witness ritual (every sub-tree, before its commit)
@@ -101,3 +101,9 @@ the vendored TiddlyWiki5 core tiddlers.
   LSP strips both marks; canon witness 524/524 at 0.0000% ERROR coverage,
   4,438 heading + 5,427 list nodes now read as STRUCTURE; golden re-baked
   (240 movers, INTENDED); 15 tests green.
+- 2026-07-14 — the library rung crosses: FRAMING prose only (62 headings, 48
+  lists, 50 bold, 4 links) while 19,220 source-text lines held; the sectioner
+  keys (`## The First Era` era/chant markers) live INSIDE source-text and
+  never moved — kumulipo_sections stays untouched, its 11 tests green; fold
+  10/10 clean; golden re-baked (5 movers ≤ 10 walked); script gains
+  --walk-library (explicit, loud; source-text exemption holds regardless).

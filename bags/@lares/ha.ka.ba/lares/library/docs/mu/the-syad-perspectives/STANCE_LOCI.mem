@@ -22,50 +22,50 @@ uri-path          = "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE
 
 <<~ &#x0002; >>
 
-# Grammar: Stance + Syadasti Reading Rule
+! Grammar: Stance + Syadasti Reading Rule
 
-> **Register:** `Synthesis-Canon 16/20` — grounded in the live Syadasti discovery and current HUD practice
-> **Question:** Which evaluation frame gives this claim its meaning?
+> ''Register:'' `Synthesis-Canon 16/20` — grounded in the live Syadasti discovery and current HUD practice
+> ''Question:'' Which evaluation frame gives this claim its meaning?
 
 ---
 
 <!-- ahu lar:///grammar.stance.defines/stance/#loop-position -->
 
-## Loop Position
+!! Loop Position
 
 Stance shapes the HOW layer of the grammar. It does not tell the reader what a claim says. It tells
 the reader how to read the claim.
 
 Stance receives:
 
-- claim shape
-- evaluative pressure
-- live voice pressure
-- confidence tags
+* claim shape
+* evaluative pressure
+* live voice pressure
+* confidence tags
 
 Stance changes:
 
-- undifferentiated evaluation into framed evaluation
-- flat register reading into stance-specific meaning
-- hidden spread into visible spread
+* undifferentiated evaluation into framed evaluation
+* flat register reading into stance-specific meaning
+* hidden spread into visible spread
 
 Stance hands forward:
 
-- an active evaluation frame
-- amplitude pattern across the five stances
-- audible fuzz when more than one frame carries weight
+* an active evaluation frame
+* amplitude pattern across the five stances
+* audible fuzz when more than one frame carries weight
 
 Stance should not:
 
-- pretend one frame covers all claims
-- flatten poetic, satiric, or private readings into proposition-only logic
-- hide spread when multiple stances stay active
+* pretend one frame covers all claims
+* flatten poetic, satiric, or private readings into proposition-only logic
+* hide spread when multiple stances stay active
 
 ---
 
 <!-- ahu lar:///grammar.stance.defines/stance/#handoff -->
 
-## Handoff
+!! Handoff
 
 Stance hands directly into confidence interpretation.
 
@@ -82,7 +82,7 @@ If those answers stay unclear, confidence starts sounding universal when it only
 
 <!-- ahu lar:///grammar.stance.defines/stance/#surface -->
 
-## Composable Surface
+!! Composable Surface
 
 | Stance | Sigil | Register Measures |
 |---|---|---|
@@ -92,7 +92,7 @@ If those answers stay unclear, confidence starts sounding universal when it only
 | Humorist | `🎭` | relational appropriateness |
 | Private | `🔮` | nominal presence |
 
-**Amplitude surface:** every rendered URI should show all five positions in canonical order. Elevated,
+''Amplitude surface:'' every rendered URI should show all five positions in canonical order. Elevated,
 suppressed, baseline, or uncertain amplitude gives the reader the spread pattern without needing a
 second notation system.
 
@@ -100,7 +100,7 @@ second notation system.
 
 <!-- ahu lar:///grammar.stance.defines/stance/#conventions -->
 
-## Conventions
+!! Conventions
 
 | Rule | Weight | Rationale |
 |---|---|---|
@@ -110,14 +110,14 @@ second notation system.
 | Surface multi-stance pressure when it materially changes reading | MUST | Hidden spread distorts the claim |
 | Keep stance tied to evaluation, not identity branding | SHOULD | Stance should read as frame, not costume |
 
-**Syadasti rule:** register measures confidence within the active stance's evaluation frame, not
+''Syadasti rule:'' register measures confidence within the active stance's evaluation frame, not
 truth-weight universally.
 
 ---
 
 <!-- ahu lar:///grammar.stance.defines/stance/#procedures -->
 
-## Procedures
+!! Procedures
 
 1. Ask what kind of evaluation the claim actually needs.
 2. Select the leading stance.
@@ -125,36 +125,36 @@ truth-weight universally.
 4. Carry the resulting amplitude pattern into the URI and HUD.
 5. Read confidence through that frame.
 
-**Failure mode:** using `🏛️` as a silent default for everything. That move erases the very distinction
+''Failure mode:'' using `🏛️` as a silent default for everything. That move erases the very distinction
 the system built the stance layer to preserve.
 
 ---
 
 <!-- ahu lar:///grammar.stance.defines/stance/#reading-test -->
 
-## Reading Test
+!! Reading Test
 
 A stance span passes when a future reader can recover all of this:
 
-- the leading evaluation frame
-- any meaningful secondary spread
-- the meaning of the register inside that frame
-- the reason that frame fits the claim
+* the leading evaluation frame
+* any meaningful secondary spread
+* the meaning of the register inside that frame
+* the reason that frame fits the claim
 
 If the reader still has to guess what `0.65` means here, stance has not yet done its work.
 
 ---
 
-## Cross-References
+!! Cross-References
 
-- [confidence/LOCI.md](../confidence/LOCI.md)
-- [l-prime/LOCI.md](../l-prime/LOCI.md)
-- [SYADASTI_READING_RULE.md](SYADASTI_READING_RULE.md)
-- [../../modules/uri-schema/URI_SCHEMA.md](../../modules/uri-schema/URI_SCHEMA.md)
+* [[confidence/LOCI.md|../confidence/LOCI.md]]
+* [[l-prime/LOCI.md|../l-prime/LOCI.md]]
+* [[SYADASTI_READING_RULE.md|SYADASTI_READING_RULE.md]]
+* [[../../modules/uri-schema/URI_SCHEMA.md|../../modules/uri-schema/URI_SCHEMA.md]]
 
 ---
 
-## Loci Registry
+!! Loci Registry
 
 | Path | Status | Contents |
 |---|---|---|
