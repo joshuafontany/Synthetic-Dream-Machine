@@ -108,6 +108,30 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
   });
 
+  test("PREKEY PERSISTENCE is required — membership minted to one instance's card fails at another same-seed instance", async () => {
+    // Load-bearing for the admit wiring: keyhive prekeys are RANDOM per init, not seed-deterministic. A
+    // founder seals membership to the prekeys a joinee's contact card advertised; a joinee that generates its
+    // card then REBOOTS a fresh keyhive holds DIFFERENT prekeys and reads "Key not found". So the admit path
+    // MUST persist the joinee's prekey secrets from card-generation to boot — a throwaway card breaks E2E.
+    const founder = await makeVessel(10);
+    const instanceA = new KeyhiveProvider(); await instanceA.init({ seed: seedOf(109), eventStore: noopStore });
+    const instanceB = new KeyhiveProvider(); await instanceB.init({ seed: seedOf(109), eventStore: noopStore }); // SAME seed, fresh instance
+
+    // Same seed, DIFFERENT cards — prekeys generate per init.
+    expect(new TextDecoder().decode(await instanceA.contactCard()))
+      .not.toBe(new TextDecoder().decode(await instanceB.contactCard()));
+
+    const { id: aAgentId } = await founder.receiveContactCard(await instanceA.contactCard());
+    const { docId } = await founder.registerBag(BAG);
+    await founder.delegate({ bagUrl: BAG, audience: aAgentId, access: "read" });
+    const ct = await founder.encryptContent(BAG, new TextEncoder().encode("minted for A's prekeys"));
+
+    // Instance B (same seed, its OWN prekeys) cannot read — the persistence requirement, proven.
+    instanceB.adoptBag(BAG, docId);
+    await instanceB.ingestPeerEvents(await founder.eventsForPeer(aAgentId));
+    await expect(instanceB.decryptContent(BAG, ct)).rejects.toThrow();
+  });
+
   test("the joinee needs NO founder card — membership capEvents are self-contained (hydrate-only path)", async () => {
     // Load-bearing for the admit wiring: bootDaemonKeyhive hydrates the capEvents with no side-channel. This
     // proves the joinee decrypts from the hydrated membership ops ALONE — no receiveContactCard(founder),
