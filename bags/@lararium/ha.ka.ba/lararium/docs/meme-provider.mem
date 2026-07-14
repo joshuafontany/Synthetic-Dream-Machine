@@ -18,6 +18,7 @@ uri-path    = "ha.ka.ba/lararium/docs/meme-provider"
 
 <<~ &#x0002; >>
 
+```typescript
 /**
  * MemeProvider — coalescing fan-out layer between an Automerge DocHandle
  * and multiple typed projections (TW5 wiki, disk write-back, canvas, MCP).
@@ -199,6 +200,7 @@ export class MemeProvider {
     }
   }
 }
+```
 
 <<~ &#x0003; >>
 
