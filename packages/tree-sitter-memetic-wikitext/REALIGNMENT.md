@@ -124,9 +124,8 @@ the vendored TiddlyWiki5 core tiddlers.
   #source-text unclosed since before this arc — depth 2 at EOF). REPAIRED:
   both closers seated (balance restored, span now (30, 3239)); its slot iam
   re-declared text/x-memetic-wikitext (what the interior factually speaks).
-  OPEN FORK @operator: the tarot port's final shape — keep #source-text
-  wrapping (extraction takes the whole structured port) vs restructure
-  (chapters ride as meme body, raw prose alone wears #source-text); and
-  whether its 154 md headings + TOC links migrate as curation or hold as
-  quoted rendering. All gates green: fold 0.0000%, golden 1 mover (tarot),
+  FORK RESOLVED (operator): the memetic-wikitext #source-text reads pono —
+  the first whole-book conversion attempt keeps its shape and its
+  text/x-memetic-wikitext declaration; only its interior md remnants
+  (154 headings · TOC links) stay on the hand-review tail. All gates green: fold 0.0000%, golden 1 mover (tarot),
   sectioner 12, host-py 15, roundtrip 2/2.
