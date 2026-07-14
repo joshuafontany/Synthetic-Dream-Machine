@@ -209,3 +209,22 @@ export interface EventStore {
 The application `ABILITY_LADDER` (promote/write/etc.) checks happen
 at a layer ABOVE this interface — in the promote-handler, gated on
 the Keyhive admin proof being present.
+
+## cross-peer-decrypt — the sealed-box is REDUNDANT for Model B (running-code verdict)
+
+Probe: `cross-peer-decrypt.ts` (keyhive 0.1.0-alpha.3, `forward_secrecy=false`).
+
+A DISTINCT-identity device (its own seed — Model B) decrypted a group's `Encrypted` content
+holding ONLY: (a) its own locally-generated prekey secret, and (b) the PUBLIC bytes keyhive routes
+to it (`eventsForAgent` → serialized StaticEvent bytes) plus the content blob. `leafSecrets` (72B,
+produced by the non-FS auto-rekey) was WITHHELD. `tryDecrypt` SUCCEEDED.
+
+Conclusion: `addMember` seals the group secret to the joinee's OWN prekey (clean TreeKEM). `leafSecrets`
+is the SAME-identity sibling path (a tab ↔ its SharedWorker), NOT needed by a per-device joinee. So the
+cross-device crossing (flow 1: vessel → PersonaGroup) is a TRANSPORT problem, not a crypto one — no
+libsodium sealed-box, no X25519. Ship public CGKA/membership ops + the `Encrypted` blob over our relay;
+the joinee decrypts. The design note's "envelope key-handoff (sealed-box)" was provisional; retire it for flow 1.
+
+API grains the probe pinned: `Encrypted.serialize()` (not `toBytes()`) pairs with `Encrypted.fromBytes`;
+`DocumentId` must be rebuilt from bytes on the joinee (WASM objects do not cross instances);
+`ingestEventsBytes` returns a result array (not an applied-count — read `reachableDocs()` for truth).
