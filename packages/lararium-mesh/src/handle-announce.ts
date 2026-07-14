@@ -22,8 +22,9 @@ import { HANDLE_CARD_DOMAIN, type HandleCard } from "./handle-card.js";
 import { HandleBook } from "./handle-book.js";
 import type { CardVerdict } from "./handle-card.js";
 
-/** The tiddler-key prefix announced handle-cards ride under, so they namespace apart from a doc's other content. */
-export const HANDLE_ANNOUNCE_PREFIX = "lar:///ha.ka.ba/lares/handles/" as const;
+/** The tiddler-key prefix announced handle-cards ride under, so they namespace apart from a doc's other content.
+ *  On the DreamNet plane, not one lararium's `lares` API — an announced Handle is a super-mesh-wide face. */
+export const HANDLE_ANNOUNCE_PREFIX = "lar:///ha.ka.ba/dreamnet/handles/" as const;
 
 /** The tiddler key one Handle's card announces under — keyed by nym, so a nym's newest card supersedes in place. */
 export function handleAnnounceKey(nym: string): string {
