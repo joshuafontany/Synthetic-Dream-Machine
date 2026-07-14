@@ -370,7 +370,7 @@
   },
   "ha.ka.ba/lares/api/pono/li-ki-integrities.mem": {
    "bytes": 13751,
-   "hash": "0731d8e3b0e3eed002fbe9b752bfaa387f777cd5c51fd7c211978e4c0625a8db"
+   "hash": "e6f7facb455ae948adae3e023ee487d0d5276fca6617365fd16133ac67a2a3fc"
   },
   "ha.ka.ba/lares/api/pono/living-grammar.mem": {
    "bytes": 11321,
@@ -502,7 +502,7 @@
   },
   "ha.ka.ba/lares/api/pono/sensorium-machina.mem": {
    "bytes": 42608,
-   "hash": "42d0d86b644fceef7f50f6b13ddc8158d0dab4f957dbe1098e074f95d0f592c2"
+   "hash": "22eac201cea3163b67c26c88d8b6d6c964b4f50cb9343a7e2c00b26a94e52ca8"
   },
   "ha.ka.ba/lares/api/pono/sensorium-rhymes.mem": {
    "bytes": 30628,
@@ -530,7 +530,7 @@
   },
   "ha.ka.ba/lares/api/pono/the-veil-ladder.mem": {
    "bytes": 9673,
-   "hash": "3201820d320bc6ffe3cfa715154329f66ffac8ea8aafa26c4c82dcf279f7649e"
+   "hash": "c7a36eb323c304f98caa352b052c58f6d2195fd7a4145ca054afe18dfb4ce772"
   },
   "ha.ka.ba/lares/api/pono/tick.mem": {
    "bytes": 1328,
