@@ -97,7 +97,13 @@ from sensorium_consistency import (
     cosine_distance,
     jaccard_distance,
 )
-from structure_router import _TOKEN_RE, parse_to_tree, structural_hash
+import re as _re
+
+from structure_router import parse_to_tree, structural_hash
+
+# A sharktooth token span: `<<~ … >>` or a closer `<<~/word >>` — the dial's own
+# span-finder (it strips sigil SPANS from the black channel; tree shape never enters).
+_TOKEN_RE = _re.compile(r"<<~/?[^\n]*?>>")
 
 #: The rungs the dial ALWAYS walks: the two channel-pure endpoints. Every interior rung
 #: comes from the bed's own crossing spectrum (`lambda_ladder`) — a hand-picked interior

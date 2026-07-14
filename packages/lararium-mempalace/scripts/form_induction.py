@@ -501,12 +501,11 @@ def house_seeds() -> list:
     """The house's own known forms, as sequence templates over node-type / sigil labels."""
     return [
         # the exchange chiasmus open→close (noosphere-boot#exchange-protocol).
-        {"seq": ["sharktooth_sigil", "sharktooth_sigil", "sharktooth_sigil"], "origin": "seed",
-         "name_hint": "sigil-row"},
-        # the ahu section block wrapping an inner sigil.
-        {"seq": ["ahu_block", "sigil_name"], "origin": "seed", "name_hint": "ahu-block"},
-        # the aim/yield bearing bracket.
-        {"seq": ["pranala_header", "sharktooth_sigil"], "origin": "seed", "name_hint": "pranala-open"},
+        {"seq": ["sigil", "sigil", "sigil"], "origin": "seed", "name_hint": "sigil-row"},
+        # the ahu section block wrapping its opening sigil.
+        {"seq": ["ahu_block", "sigil"], "origin": "seed", "name_hint": "ahu-block"},
+        # the entry bracket: the doctype comment + the pranala-header sigil.
+        {"seq": ["comment", "sigil"], "origin": "seed", "name_hint": "pranala-open"},
     ]
 
 

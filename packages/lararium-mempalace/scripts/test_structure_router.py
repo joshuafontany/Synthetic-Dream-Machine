@@ -95,14 +95,13 @@ def test_sigil_row_parses_each_sharktooth():
         "<<~ hud Aperture(11) OODA-HA(9) >>\n"
         "<<~ ward * L-Prime >>\n"
     )
-    tree = sr.parse_sigils(src)
-    assert tree["type"] == "source_file"
-    sharks = [c for c in tree["children"] if c["type"] == "sharktooth_sigil"]
-    assert len(sharks) == 3
-    # each carries a sigil_name leaf + counted arg leaves (fan-out = SHAPE signal)
-    for s in sharks:
-        assert s["children"][0]["type"] == "sigil_name"
-        assert any(c["type"] == "arg" for c in s["children"])
+    tree = sr.parse_to_tree("memetic-wikitext", src.encode())
+    assert tree["type"] == "document"
+    sigils = [c for c in tree["children"] if c["type"] == "sigil"]
+    assert len(sigils) == 3
+    # each carries its body (the carrier's one inner span; names ride the fold layer)
+    for node in sigils:
+        assert any(c["type"] == "sigil_body" for c in node["children"])
 
 
 def test_ahu_block_nests_inner_sigils():
@@ -113,12 +112,12 @@ def test_ahu_block_nests_inner_sigils():
         "<<~ pranala a -> b >>\n"
         "<<~/ahu >>\n"
     )
-    tree = sr.parse_sigils(src)
+    tree = sr.parse_to_tree("memetic-wikitext", src.encode())
     ahu = [c for c in tree["children"] if c["type"] == "ahu_block"]
     assert len(ahu) == 1
-    inner_types = {c["type"] for c in ahu[0]["children"]}
-    assert "sharktooth_sigil" in inner_types  # the confidence sigil nested INSIDE the block
-    assert "pranala" in inner_types
+    inner = [c for c in ahu[0]["children"] if c["type"] == "sigil"]
+    assert len(inner) >= 2  # confidence + pranala both nest INSIDE the block (carrier reads form, not vocabulary)
+    assert any(c["type"] == "text" for c in ahu[0]["children"])  # the prose graft rides under the block
 
 
 def test_doctype_and_pranala_header():
@@ -126,16 +125,16 @@ def test_doctype_and_pranala_header():
         "<!-- <<~ !DOCTYPE = lar:///x/memetic-wikitext >> -->\n"
         "<<~ ? -> lar:///ha.ka.ba/lares/api/lares/corpus >>\n"
     )
-    tree = sr.parse_sigils(src)
+    tree = sr.parse_to_tree("memetic-wikitext", src.encode())
     types = [c["type"] for c in tree["children"]]
-    assert "doctype_comment" in types
-    assert "pranala_header" in types
+    assert "comment" in types  # the doctype comment reads as a comment node
+    assert "sigil" in types    # the pranala header reads as a sigil (vocabulary rides the fold)
 
 
-def test_memetic_routes_through_sigil_parser():
+def test_memetic_routes_through_the_carrier():
     meme = b"<<~ ahu #x >>\n<<~ confidence Canon 18/20 >>\n<<~/ahu >>"
     tree = sr.parse_to_tree("memetic-wikitext", meme)
-    assert tree["type"] == "source_file"
+    assert tree["type"] == "document"
     assert tree["children"][0]["type"] == "ahu_block"
 
 

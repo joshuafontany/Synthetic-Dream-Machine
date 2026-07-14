@@ -20,9 +20,10 @@ ROUTING — by corpus-KIND, auto-detected from extension + content:
   json                -> tree-sitter-json
   toml                -> tree-sitter-toml
   wikitext (.tid …)   -> tree-sitter-wikitext
-  memetic-wikitext    -> the SIGIL parser (our own `<<~ … >>` forms — the read-side
-                         twin of the lar-sigil TW5 wikirules; the tree-sitter grammar
-                         lives at grammars/tree-sitter-lar-sigil/grammar.js)
+  memetic-wikitext    -> THE CARRIER (tree-sitter-memetic-wikitext, the one grammar
+                         artifact — sigils + ahu + the TW5 forms), prose grafted
+                         under text runs (the graceful gradient)
+  tiddlywiki (.tid)   -> the same carrier (ours supersets TW5 — the dialect wall)
   prose               -> stanza constituency (Stanford, maintained, modern-torch — the
                          nested SPANS are the form-induction template candidates) → spaCy
                          dependency tree → nltk sentence/word → regex (graceful tiers)
@@ -32,7 +33,7 @@ records `structure-skipped` and the content plane still stands. The heavy tree-s
 / spaCy imports are LAZY (per-kind), so `parse` of one kind never pays for another.
 
 Protocol — three faces:
-  * the library: `detect_kind`, `parse_to_tree`, `parse_sigils`, `parse_prose`
+  * the library: `detect_kind`, `parse_to_tree`, `parse_prose`
   * `parse  --path <file> [--kind K]`     -> the tree as JSON on stdout (one object)
   * `ingest --path <src>  --palace <dir>` -> walk a path, parse each file, push each
         tree through the structurepalace encoder into a structure chroma-palace under <dir>;
@@ -49,7 +50,6 @@ import json
 import os
 import re as _re
 import sys
-from typing import Callable
 
 # A hard cap on tree size — a pathological / huge file cannot make the encoder walk
 # unbounded. The shape vector saturates well before this; truncation only drops the
@@ -87,7 +87,7 @@ _EXT_KIND = {
 }
 
 # The memetic-wikitext doctype marker the house stamps on its own memes (corpus.md, the
-# sigil tiddlers): its presence (or a dense run of `<<~`) routes a file to the SIGIL parser.
+# sigil tiddlers): its presence (or a dense run of `<<~`) promotes a file to the carrier.
 _MEMETIC_DOCTYPE = "memetic-wikitext"
 _SIGIL_OPEN = "<<~"
 _SIGIL_DENSITY = 3  # ≥ this many `<<~` opens ⇒ treat a markdown/text file as memetic
@@ -200,145 +200,61 @@ def _carrier_parser():
     return parser
 
 
-def _parse_carrier(source: bytes) -> dict | None:
+def _parse_carrier(source: bytes, prose=None) -> dict | None:
     """TW5/memetic ground → the encoder's nested-dict tree via the carrier grammar.
-    Content-free: node TYPES ride, text never does — the structure plane's currency."""
+    Content-free: node TYPES ride, text never does — the structure plane's currency.
+    With `prose`, consecutive text-line runs graft their constituency subtree (the
+    graceful gradient: the superset's skeleton above, the prose's own shape below)."""
     parser = _carrier_parser()
     if parser is None:
         return None
     raw = source if isinstance(source, (bytes, bytearray)) else source.encode("utf-8")
     tree = parser.parse(raw)
     budget = [_MAX_NODES]
-    return _ts_to_tree(tree.root_node, 0, budget)
+    return _carrier_to_tree(tree.root_node, raw, budget, prose, 0)
 
 
-# ── the SIGIL parser — the read-side twin of the lar-sigil TW5 wikirules ───────────────
-#
-# Mirrors packages/lararium-tw5/src/wikirules/lar-sigil*.ts (the WRITE side). The node
-# types match grammars/tree-sitter-lar-sigil/grammar.js (the formal tree-sitter twin):
-#   source_file · doctype_comment · pranala_header · pranala · ahu_block ·
-#   sharktooth_sigil(→ sigil_name, arg*) · text
-# Content-free for the encoder: a sigil's NAME rides a `sigil_name` leaf's nesting, never
-# its argument text. Block sigils (ahu, kahea-compound, pranala-block) nest their inner
-# sigils as real children, so an ahu-wrapped run reads DEEPER than a flat sigil row.
+def _carrier_to_tree(node, raw: bytes, budget: list[int], prose, depth: int) -> dict:
+    """Carrier CST → encoder tree. Consecutive text_line runs coalesce into ONE
+    `text` node (blank lines inside a run keep the paragraph breaks the prose
+    tier splits on), grafted through `prose` under the node budget."""
+    children: list[dict] = []
+    buf: list[tuple[int, int]] = []  # [start_byte, end_byte] of the open text run
 
-# A sharktooth token: <<~ … >> or a closer <<~/word >>. Non-greedy to the next >>.
-_TOKEN_RE = _re.compile(r"<<~/?[^\n]*?>>")
-# Block openers whose matching closer we balance (mirrors lar-sigil BLOCK_CLOSERS +
-# the kahea/aka compound child-slot form that closes on word1).
-_BLOCK_OPENERS = {"ahu", "pranala", "kahea"}
-_CHILD_SLOTS = {"ahu", "kau"}
-
-
-def _sigil_first_word(inner: str) -> str | None:
-    """The leading sigil keyword of a `<<~ … >>` inner body (after stripping control /
-    pragma / doctype markers), or None for a bare/control sigil."""
-    m = _re.match(r"^[!⊙]?\s*(?:&#x[0-9a-fA-F]+;)?\s*(\\?[A-Za-z?][\w-]*)?", inner)
-    w = m.group(1) if m else None
-    return w.lstrip("\\") if w else None
-
-
-def _classify_token(tok: str):
-    """(role, word) for a sharktooth token. role ∈ {close, doctype, pranala_header,
-    sharktooth}; word is the sigil keyword (or close-key)."""
-    inner = tok[3:-2].strip()  # drop <<~ … >>
-    if inner.startswith("/"):
-        return "close", inner[1:].strip().split()[0] if inner[1:].strip() else ""
-    if inner.startswith("!DOCTYPE"):
-        return "doctype", "DOCTYPE"
-    if _re.match(r"^\?\s*->", inner):
-        return "pranala_header", "?"
-    return "sharktooth", _sigil_first_word(inner)
-
-
-def _sigil_node(role: str, word: str | None, inner: str) -> dict:
-    """A leaf sharktooth/pranala/doctype node: the sigil_name + one arg-token per
-    whitespace-separated argument (capped), all content-free TYPE leaves."""
-    if role == "pranala_header":
-        return {"type": "pranala_header", "children": [{"type": "sigil_name", "children": []}]}
-    if role == "doctype":
-        return {"type": "doctype_comment", "children": [{"type": "sigil_name", "children": []}]}
-    ntype = "pranala" if word == "pranala" else "sharktooth_sigil"
-    children = [{"type": "sigil_name", "children": []}]
-    # args: the whitespace tokens after the keyword — counted for SHAPE (fan-out), capped.
-    rest = inner
-    if word:
-        idx = inner.find(word)
-        rest = inner[idx + len(word):] if idx >= 0 else inner
-    for _ in rest.split()[:32]:
-        children.append({"type": "arg", "children": []})
-    return {"type": ntype, "children": children}
-
-
-def parse_sigils(text: str, *, prose: "Callable[[str], dict] | None" = None) -> dict:
-    """Parse the memetic-wikitext `<<~ … >>` layer to the structure AST. A stack balances
-    block openers (ahu / kahea-compound / pranala-block) against their `<<~/word >>`
-    closers, so nesting depth is REAL; leaf sigils + inter-sigil prose attach as siblings.
-
-    `prose` supplies the NEXT RUNG DOWN the gradient: memetic-wikitext is a SUPERSET of the
-    prose beneath it, so an inter-sigil span parses through `prose` and its tree grafts in
-    place of a bare `text` node (augment-and-wrap, never replace). With `prose=None` a span
-    collapses to one structureless `text` node — which reads every sigil-less document as the
-    SAME shape. That degenerate view serves a sigil-only reading; it MUST NOT serve a corpus
-    where most records carry no sigils (their structural hashes would all collide)."""
-    root: dict = {"type": "source_file", "children": []}
-    stack: list[tuple[str, dict]] = [("", root)]  # (close-key, node)
-    pos = 0
-    budget = _MAX_NODES
-
-    def cur() -> dict:
-        return stack[-1][1]
-
-    def add_text(s: str) -> None:
-        nonlocal budget
-        if budget <= 0 or not s.strip():
+    def flush() -> None:
+        if not buf:
+            return
+        start, end = buf[0][0], buf[-1][1]
+        buf.clear()
+        span = raw[start:end].decode("utf-8", errors="replace")
+        if not span.strip() or budget[0] <= 0:
             return
         if prose is None:
-            cur()["children"].append({"type": "text", "children": []})
-            budget -= 1
+            children.append({"type": "text", "children": []})
+            budget[0] -= 1
             return
-        sub = prose(s)
-        # Graft the span's own tree under a `text` node — the sigil layer keeps its shape and
-        # the prose beneath it carries its structure. The node budget bounds the graft.
-        children = sub.get("children", []) if isinstance(sub, dict) else []
-        cost = _count_nodes(children, budget)
-        cur()["children"].append({"type": "text", "children": children if cost <= budget else []})
-        budget -= min(cost, budget) + 1
+        sub = prose(span)
+        kids = sub.get("children", []) if isinstance(sub, dict) else []
+        cost = _count_nodes(kids, budget[0])
+        children.append({"type": "text", "children": kids if cost <= budget[0] else []})
+        budget[0] -= min(cost, budget[0]) + 1
 
-    for m in _TOKEN_RE.finditer(text):
-        if budget <= 0:
-            break
-        add_text(text[pos:m.start()])
-        pos = m.end()
-        tok = m.group(0)
-        role, word = _classify_token(tok)
-        inner = tok[3:-2].strip()
-        if role == "close":
-            # pop to the matching opener (tolerate an unbalanced closer = no-op)
-            for i in range(len(stack) - 1, 0, -1):
-                if stack[i][0] == word:
-                    del stack[i:]
-                    break
-            continue
-        if role == "sharktooth" and word in _BLOCK_OPENERS:
-            # block IFF a matching closer exists ahead (mirrors lar-sigil findCloseEnd).
-            close_key = word
-            # kahea/aka compound child-slot: <<~ kahea ahu #slot >> closes on word1 (kahea)
-            tail = inner[len(word):].strip().split()
-            if word in ("kahea", "aka") and tail and tail[0] in _CHILD_SLOTS:
-                close_key = word
-            if f"<<~/{close_key}" in text[pos:]:
-                node = {"type": "ahu_block" if word == "ahu" else "sharktooth_block",
-                        "children": [{"type": "sigil_name", "children": []}]}
-                cur()["children"].append(node)
-                stack.append((close_key, node))
-                budget -= 1
+    if depth < _MAX_DEPTH:
+        for child in node.named_children:
+            if budget[0] <= 0:
+                break
+            if child.type == "text_line":
+                buf.append((child.start_byte, child.end_byte))
                 continue
-        # leaf sigil / pranala-header / doctype / non-block sharktooth
-        cur()["children"].append(_sigil_node(role, word, inner))
-        budget -= 1
-    add_text(text[pos:])
-    return root
+            if child.type == "blank_line":
+                if buf:
+                    buf.append((child.start_byte, child.end_byte))
+                continue
+            flush()
+            budget[0] -= 1
+            children.append(_carrier_to_tree(child, raw, budget, prose, depth + 1))
+        flush()
+    return {"type": node.type, "children": children}
 
 
 # ── the PROSE tier — stanza constituency → spaCy dependency → nltk → regex ─────────────
@@ -503,17 +419,6 @@ def parse_prose(text: str) -> dict:
 # ── the router front door ──────────────────────────────────────────────────────────────
 
 
-def parse_memetic(text: str) -> dict:
-    """memetic-wikitext, parsed down the GRACEFUL GRADIENT: the `<<~ … >>` sigil layer wraps, and
-    every span beneath it parses as prose. A turn that invokes no sigil degrades to its prose
-    constituency — never to one structureless `text` node, which would give every sigil-less
-    document the same structural hash.
-
-    The gradient IS the grammar: memetic-wikitext ⊃ wikitext ⊃ markdown ⊃ prose. A degraded state
-    is still a state; no record falls out of the structure plane for failing to speak sigils."""
-    return parse_sigils(text, prose=parse_prose)
-
-
 def parse_to_tree(kind: str | None, source: bytes | str) -> dict | None:
     """Route a corpus chunk of `kind` to its parser → the encoder's nested-dict tree.
 
@@ -525,7 +430,9 @@ def parse_to_tree(kind: str | None, source: bytes | str) -> dict | None:
     text = _decode(source) if isinstance(source, (bytes, bytearray)) else source
     raw = source if isinstance(source, (bytes, bytearray)) else text.encode("utf-8")
     if kind == "memetic-wikitext":
-        return parse_memetic(text)
+        # the house dialect rides the ONE carrier; prose grafts under text runs
+        # (the graceful gradient). Absent artifact ⇒ prose serves, degraded loud.
+        return _parse_carrier(raw, prose=parse_prose) or parse_prose(text)
     if kind == "tiddlywiki":
         # THE DIALECT WALL: three kinds stay distinct as DECLARED dialects —
         # memetic-wikitext (ours, the superset) ⊃ tiddlywiki (TW5, this route) ⊥
@@ -533,13 +440,13 @@ def parse_to_tree(kind: str | None, source: bytes | str) -> dict | None:
         # carrier grammar natively BECAUSE ours supersets it; the kind stamp
         # still says what the author declared, never which parser read it.
         # Absent artifact, the sigil parser + prose gradient still serves.
-        return _parse_carrier(raw) or parse_memetic(text)
+        return _parse_carrier(raw, prose=parse_prose) or parse_prose(text)
     if kind == "prose":
         return parse_prose(text)
     if kind in _TS_MODULE:
         # A text language whose grammar module is absent degrades down the gradient rather than
         # dropping the record — the parse fails, the text does not stop being text.
-        return _parse_treesitter(kind, raw) or parse_memetic(text)
+        return _parse_treesitter(kind, raw) or _parse_carrier(raw, prose=parse_prose) or parse_prose(text)
     return None
 
 

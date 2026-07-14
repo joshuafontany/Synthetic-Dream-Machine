@@ -19,7 +19,8 @@ from channel_dial import (
 from kumulipo_sections import extract_source_text
 from plane_base import BASE_RECORD, PatternRegistry
 from run_projector import _centrality, _rank_salience
-from structure_router import _TOKEN_RE, parse_sigils, parse_to_tree, structural_hash
+from channel_dial import _TOKEN_RE
+from structure_router import parse_to_tree, structural_hash
 
 # A wrapped mini-meme whose ENVELOPE carries sigil lines only (no black envelope prose),
 # so the black channel equals the #source-text interior modulo blank lines — the case
@@ -86,21 +87,34 @@ def test_strip_red_deterministic():
 def test_channels_complement_the_sigil_parse():
     # The sigil parser reads tokens as nodes and inter-token spans as text leaves; the
     # split reads the SAME token grammar, so black + red account for the whole text.
-    tree = parse_sigils(_SIGIL_ONLY_WRAPPED)
+    tree = parse_to_tree("memetic-wikitext", _SIGIL_ONLY_WRAPPED.encode())
     n_tokens = len(_TOKEN_RE.findall(_SIGIL_ONLY_WRAPPED))
-    top_types = [c["type"] for c in tree["children"]]
-    n_sigil_nodes = sum(1 for t in top_types if t != "text")
-    # ahu opener + closer fold into ONE block node; the other four tokens stand alone.
-    assert n_sigil_nodes == n_tokens - 1
+
+    def _walk_count(node, kinds):
+        own = 1 if node["type"] in kinds else 0
+        return own + sum(_walk_count(c, kinds) for c in node.get("children", []))
+
+    # every sharktooth token survives as a node (opener + closer included); the
+    # ahu block rides ABOVE them as pure structure — the whole text stays accounted.
+    assert _walk_count(tree, ("sigil", "sigil_close")) == n_tokens
+    assert _walk_count(tree, ("ahu_block",)) == 1
 
 
 # ── lambda=0 vs extraction ───────────────────────────────────────────────────────────────
 
 
+def _squeeze_blanks(text: str) -> str:
+    """Collapse blank-line runs to one — the MODULO the fixture vows (stripped sigil
+    spans leave blanks where tokens stood; markdown seats paragraph breaks on them)."""
+    import re
+
+    return re.sub(r"\n\s*\n+", "\n\n", text).strip() + "\n"
+
+
 def test_black_parse_reproduces_extraction_on_sigil_only_envelope():
-    black_tree = black_parse(_SIGIL_ONLY_WRAPPED, "memetic-wikitext")
+    black_tree = parse_to_tree("markdown", _squeeze_blanks(strip_red(_SIGIL_ONLY_WRAPPED)))
     extracted = extract_source_text(_SIGIL_ONLY_WRAPPED)
-    extracted_tree = parse_to_tree("markdown", extracted)
+    extracted_tree = parse_to_tree("markdown", _squeeze_blanks(extracted))
     assert black_tree is not None and extracted_tree is not None
     assert structural_hash(black_tree) == structural_hash(extracted_tree)
 
@@ -171,7 +185,7 @@ def _toy_planes():
         recs.append({"cid": cid, "document": wrapped,
                      "embedding": [1.0, float(i)],
                      "metadata": {"source_file": f"corpus:t/{i}", "lar_kind": "memetic-wikitext"}})
-        t = parse_sigils(wrapped)
+        t = parse_to_tree("memetic-wikitext", wrapped.encode())
         h = structural_hash(t)
         registry.trees[h] = t
         registry.count[h] = registry.count.get(h, 0) + 1

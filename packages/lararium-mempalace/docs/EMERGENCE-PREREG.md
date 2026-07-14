@@ -267,3 +267,16 @@ size, induce constructicons separately, then:
 Vowed at Provisional-Synthesis 6/20: both legs pass, and the
 living-grammar-palace's register axis (defined · formal · casual) earns its
 first measurement. A failed leg files as fast as a passed one.
+
+**2026-07-15 · STRUCTURE-PLANE EPOCH: the caps-merge landed (operator-ruled).**
+The hand parser (parse_sigils/parse_memetic) retired; both nested dialects
+(memetic-wikitext · tiddlywiki) now parse through the ONE carrier artifact
+(0.1.0, TW5-rich), with prose constituency grafted under coalesced text runs
+— the merge keeps both eyes: the carrier's skeleton above, the prose's shape
+below. Structure trees change shape BY DESIGN (an intended divergence with
+no hash-parity possible); every bed poured before this note carries
+prior-epoch structure and wants a `rederive` before cross-epoch comparison;
+the memory sensorium joins the rederive queue after the running reap lands.
+house_seeds() re-keyed to carrier vocabulary. The register-separation trial
+MUST run entirely inside this epoch (one parser's eyes across all registers
+— the cross-dialect confound this merge exists to kill).
