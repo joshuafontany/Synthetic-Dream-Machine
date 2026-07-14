@@ -81,7 +81,8 @@ _EXT_KIND = {
     ".json": "json",
     ".md": "markdown", ".markdown": "markdown",
     ".toml": "toml",
-    ".tid": "wikitext", ".wiki": "wikitext", ".mediawiki": "wikitext", ".wikitext": "wikitext",
+    ".tid": "tiddlywiki",
+    ".wiki": "wikitext", ".mediawiki": "wikitext", ".wikitext": "wikitext",
     ".txt": "prose", ".text": "prose",
 }
 
@@ -106,7 +107,7 @@ def detect_kind(path: str, content: bytes | str | None = None) -> str | None:
         text = _decode(content if isinstance(content, (bytes, bytearray)) else content.encode())
         head = text[:4096]
         is_memetic = (_MEMETIC_DOCTYPE in head) or (text.count(_SIGIL_OPEN) >= _SIGIL_DENSITY)
-        if is_memetic and kind in (None, "markdown", "prose", "wikitext"):
+        if is_memetic and kind in (None, "markdown", "prose", "wikitext", "tiddlywiki"):
             return "memetic-wikitext"
     return kind
 
@@ -165,6 +166,48 @@ def _parse_treesitter(kind: str, source: bytes) -> dict | None:
     if parser is None:
         return None
     tree = parser.parse(source if isinstance(source, (bytes, bytearray)) else source.encode("utf-8"))
+    budget = [_MAX_NODES]
+    return _ts_to_tree(tree.root_node, 0, budget)
+
+
+# ── the CARRIER route — TW5 + memetic ground through the one grammar artifact ──────────
+
+_carrier_parser_cache: list[object | None] | None = None
+
+
+def _carrier_parser():
+    """The committed carrier grammar (tree-sitter-memetic-wikitext), loaded through the
+    fold's own single-source loader — one grammar, every host, this route included.
+    Absent artifact ⇒ None (graceful: the kind rides the gradient down)."""
+    global _carrier_parser_cache
+    if _carrier_parser_cache is not None:
+        return _carrier_parser_cache[0]
+    parser = None
+    try:
+        host_py = os.path.normpath(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "..", "..", "tree-sitter-memetic-wikitext", "host-py"))
+        if host_py not in sys.path:
+            sys.path.insert(0, host_py)
+        import memeast_fold as _mf
+        from tree_sitter import Parser
+
+        parser = Parser(_mf._language())
+    except Exception as exc:  # noqa: BLE001 — artifact absent ⇒ the gradient serves
+        sys.stderr.write(f"structure_router: carrier grammar unavailable ({type(exc).__name__}: {exc})\n")
+        parser = None
+    _carrier_parser_cache = [parser]
+    return parser
+
+
+def _parse_carrier(source: bytes) -> dict | None:
+    """TW5/memetic ground → the encoder's nested-dict tree via the carrier grammar.
+    Content-free: node TYPES ride, text never does — the structure plane's currency."""
+    parser = _carrier_parser()
+    if parser is None:
+        return None
+    raw = source if isinstance(source, (bytes, bytearray)) else source.encode("utf-8")
+    tree = parser.parse(raw)
     budget = [_MAX_NODES]
     return _ts_to_tree(tree.root_node, 0, budget)
 
@@ -483,6 +526,14 @@ def parse_to_tree(kind: str | None, source: bytes | str) -> dict | None:
     raw = source if isinstance(source, (bytes, bytearray)) else text.encode("utf-8")
     if kind == "memetic-wikitext":
         return parse_memetic(text)
+    if kind == "tiddlywiki":
+        # THE DIALECT WALL: three kinds stay distinct as DECLARED dialects —
+        # memetic-wikitext (ours, the superset) ⊃ tiddlywiki (TW5, this route) ⊥
+        # wikitext (MediaWiki, foreign — its own pip grammar). TW5 rides the
+        # carrier grammar natively BECAUSE ours supersets it; the kind stamp
+        # still says what the author declared, never which parser read it.
+        # Absent artifact, the sigil parser + prose gradient still serves.
+        return _parse_carrier(raw) or parse_memetic(text)
     if kind == "prose":
         return parse_prose(text)
     if kind in _TS_MODULE:

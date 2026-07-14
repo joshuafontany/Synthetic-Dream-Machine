@@ -353,7 +353,7 @@ def copilot_source(*, wing: "str | None" = None, room: str = "conversations") ->
 # later arc — the test-bed proves the rails on prose-rich memes. `.mem` carries the
 # memetic-wikitext memes (the registered carrier extension) — the corpus of the house
 # rides it, and a filter without it silently empties every meme bed.
-_CORPUS_EXTS = (".md", ".markdown", ".txt", ".text", ".mem")
+_CORPUS_EXTS = (".md", ".markdown", ".txt", ".text", ".mem", ".tid")
 # One file lands as one record; a file past this ceiling skips (a curated corpus
 # holds prose memes, never blobs).
 _CORPUS_MAX_BYTES = 512_000

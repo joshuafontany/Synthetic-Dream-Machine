@@ -37,7 +37,7 @@ def _count(tree) -> int:
     [
         ("a.js", "javascript"), ("a.tsx", "javascript"), ("a.mjs", "javascript"),
         ("a.json", "json"), ("a.md", "markdown"), ("a.toml", "toml"),
-        ("a.tid", "wikitext"), ("a.txt", "prose"), ("a.bin", None),
+        ("a.tid", "tiddlywiki"), ("a.txt", "prose"), ("a.bin", None),
     ],
 )
 def test_detect_kind_by_extension(name, expected):
