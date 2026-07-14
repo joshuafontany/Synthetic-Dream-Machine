@@ -116,3 +116,17 @@ the vendored TiddlyWiki5 core tiddlers.
   roundtrip lens-law suite 2/2 green; golden re-baked (6 movers = 6 declared).
   THE v0.1 BREATH UNBLOCKS: #-heading may now drop without a quoted-ground
   misread — the interiors carry their own dialect.
+- 2026-07-14 — the mixing census (operator question): FIVE of six interiors
+  hold pure (zero memetic forms inside; text/markdown declarations true).
+  common-sense-tarot exposed as a STRUCTURED PORT mis-wrapped in
+  #source-text: its interior carries the whole ahu-chapter tree + a
+  working-notes ahu, AND two closers had gone missing (#chapter-16 +
+  #source-text unclosed since before this arc — depth 2 at EOF). REPAIRED:
+  both closers seated (balance restored, span now (30, 3239)); its slot iam
+  re-declared text/x-memetic-wikitext (what the interior factually speaks).
+  OPEN FORK @operator: the tarot port's final shape — keep #source-text
+  wrapping (extraction takes the whole structured port) vs restructure
+  (chapters ride as meme body, raw prose alone wears #source-text); and
+  whether its 154 md headings + TOC links migrate as curation or hold as
+  quoted rendering. All gates green: fold 0.0000%, golden 1 mover (tarot),
+  sectioner 12, host-py 15, roundtrip 2/2.

@@ -29,8 +29,8 @@ Current lar address follows the file path now on disk.
 
 <<~ ahu #source-text >>
 ```toml iam
-role = "source-text interior — transcribed as received, md-era rendering"
-type = "text/markdown"
+role = "source-text interior — a STRUCTURED PORT (ahu chapters wrap the book text); md-era remnants pending the port fork"
+type = "text/x-memetic-wikitext"
 ```
 ---
 # Layout & Page Setup
@@ -3119,6 +3119,8 @@ Yes, but the results are mixed. Since I usually know what I want to happen, I te
 
 <<~/ahu >>
 
+<<~/ahu >>
+
 <<~ ahu #chapter-17 >>
 
 ## Chapter 17 **BEING THE BEST READER POSSIBLE—A REVIEW**
@@ -3232,6 +3234,8 @@ P.O. Box 7589
 Van Nuys, CA 91409
 
 Cover design: Michele Lanci-Altomare
+
+<<~/ahu >>
 
 <<~/ahu >>
 
