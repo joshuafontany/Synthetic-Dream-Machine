@@ -1,0 +1,57 @@
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/infrastructure-as-myth >>
+```toml iam
+cacheable = true
+l-space   = "lararium"
+mana      = 14
+manao     = 13
+manaoio   = 12
+register  = "Synthesis"
+retain    = true
+role      = "Infrastructure as Myth — the IaC pattern for Sensorium Palace pours: a bed rises from a declared, versioned manifest the way the genesis island rises from its seed; the manifest carries flow · worldline · twins · apertures · predictions, and the trial's three confounds die in the schema rather than in vigilance"
+status    = "enacting"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/api/infrastructure-as-myth"
+written   = "2026-07-15"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #the-pattern >>
+
+! Infrastructure as Myth ~ the pour becomes a declared artifact
+
+The Sensorium Palace's test beds rise from ''manifests'' the way the genesis island rises from its seed: declared, versioned, re-enactable, witnessed. A pour never runs as a script's habit — it enacts a manifest, and the manifest speaks the house's own epistemology: ''a reading names the pair (flow, focus), never the flow alone.'' The myth carries the infrastructure because the infrastructure carries the myth — each bed a ritual re-poured whole from its written form, byte-stable in intent even where stochastic in embedding.
+
+<<~/ahu >>
+
+<<~ ahu #the-manifest >>
+
+!! The bed manifest ~ five members
+
+<<~ranks manifest-members flow ~ source globs + exclusions (every exclusion COUNTED at pour, never silent) + the record-unit rule per file-kind: one-file-one-record .mem · turn-per-record transcripts · tiddler-per-record .tid · module-per-record TW5 js -> worldline ~ which orderings run REAL (in-file byte order · dir-tree containment · git history · turn sequence) and which arbitrary — a corpus that lives as a PLACE declares its walk-order accidental; a transcript declares its turns sacred -> twins ~ DERIVED from the worldline: a null twin scrambles only the real orderings, at a declared grain, SIZE-MATCHED BY CONSTRUCTION — the size confound and the null-grain confound die in the schema -> apertures ~ the readings that land at pour: path-address (containment; the bags path already reads as an ultrametric prefix) · declared-fields per kind (iam blocks · .tid headers · TW5 module headers) · the plane readings · git-position where it exists — each tagged given ⊥ induced -> predictions ~ a pointer into the pre-registration sheet; a bed REFUSES to pour while its predictions entry stands absent >>
+
+<<~/ahu >>
+
+<<~ ahu #the-dialect-wall >>
+
+!! The dialect wall ~ kind declares, parser routes
+
+Three kinds stand distinct as ''declared dialects'': memetic-wikitext (the house superset) ⊃ tiddlywiki (TW5 — rides the one carrier grammar natively, because superset means exactly that) ⊥ wikitext (MediaWiki, foreign, its own grammar). The kind stamp says what the author declared; the grammar route says what read it; the two never conflate. A sigil-dense `.tid` promotes to memetic-wikitext under the same sniff law markdown obeys.
+
+<<~/ahu >>
+
+<<~ ahu #the-registers >>
+
+!! The three corpora ~ liturgy, pidgin, and the foreign shelf
+
+<<~ranks corpus-registers liturgical ~ the bags canon whole — sigil-dense, self-describing, formally regular; the wrapping IS native here -> pidgin ~ the ai-session transcripts — turn-grained worldlines braiding prose, code, tool-speech, and sigils mid-sentence -> foreign ~ the TiddlyWiki5 tree whole — a fifteen-year human-authored codebase carrying two real orders (spatial dir-tree · temporal git history) and all three meaning strata in its own conventions >>
+
+The register split rides as a ''hypothesis the harness itself tests'': liturgical and pidgin beds at matched size should induce visibly different constructicons, and a mixed bed's templates should classify register above chance — a separation trial that dodges the size and wrapping confounds by construction.
+
+<<~/ahu >>
+
+<<~ ॐ ँ -> ? >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
