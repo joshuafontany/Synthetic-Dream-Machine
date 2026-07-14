@@ -30,8 +30,8 @@ Render pipeline law names how a memetic object moves from disk surface to render
 
 Two distinct engines carry render work:
 
-1. ''TW5 render engine'' — runs inside the TW5 VM; the `lar-render-mode` variable drives mode dispatch; the template cascade selects the rendering tiddler per sigil
-2. ''Isomorphic parse engine'' — `@lararium/tw5/meme-ast`; emits typed `MemeAstNode[]` and `PranalaEdge[]` for the island adaptor, deserializer, and TW5 module consumers; compiles to TW5 JS via Vite; web3-native
+# ''TW5 render engine'' — runs inside the TW5 VM; the `lar-render-mode` variable drives mode dispatch; the template cascade selects the rendering tiddler per sigil
+# ''Isomorphic parse engine'' — `@lararium/tw5/meme-ast`; emits typed `MemeAstNode[]` and `PranalaEdge[]` for the island adaptor, deserializer, and TW5 module consumers; compiles to TW5 JS via Vite; web3-native
 
 Both engines consume the same `text/x-memetic-wikitext` surface. The isomorphic parse engine lives in `@lararium/tw5` as a TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
 
@@ -47,9 +47,9 @@ Render work runs along orthogonal axes; naming them apart lets each vary without
 
 One surface passes through three trees:
 
-1. ''parse tree'' — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
-2. ''widget tree'' — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here (the middle layer named at `memetic-wikitext#gaps-tensions-conflicts`, Gap 8).
-3. ''DOM tree'' — the widget tree renders into a document. In this stack that document reads as a *fakeDom*, not the browser's live one.
+# ''parse tree'' — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
+# ''widget tree'' — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here (the middle layer named at `memetic-wikitext#gaps-tensions-conflicts`, Gap 8).
+# ''DOM tree'' — the widget tree renders into a document. In this stack that document reads as a *fakeDom*, not the browser's live one.
 
 !!! Surface axis — the cameras (which document the stage renders into)
 
@@ -238,9 +238,9 @@ The carrier render and projection render passes use `wiki.renderTiddler(...)` �
 * not silently overwrite tiddler fields that belong to a different subsystem
 
 Trace continuity across the causal island boundary:
-1. disk carrier → deserializer → wiki tiddler (source map in `lar-source-uri` field)
-2. wiki tiddler → carrier render → disk carrier (faithful round-trip)
-3. wiki tiddler → projection render → snapshot (aka-frozen sigil refs carry source URI)
+# disk carrier → deserializer → wiki tiddler (source map in `lar-source-uri` field)
+# wiki tiddler → carrier render → disk carrier (faithful round-trip)
+# wiki tiddler → projection render → snapshot (aka-frozen sigil refs carry source URI)
 
 <<~/ahu >>
 

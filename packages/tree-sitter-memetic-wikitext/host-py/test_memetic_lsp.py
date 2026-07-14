@@ -4,7 +4,7 @@ import memetic_lsp as ml
 
 _DOC = (
     "<<~ ahu #entry >>\n"
-    "# The Hearth\n"
+    "! The Hearth\n"
     "prose rides beneath the carrier\n"
     "```toml iam\n"
     "mana = 16\n"

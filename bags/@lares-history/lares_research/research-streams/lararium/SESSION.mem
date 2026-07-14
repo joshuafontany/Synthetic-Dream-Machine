@@ -122,9 +122,9 @@ M22 wired VM bag scoping but left three gaps against the TW5 Bags and Recipes ca
 
 ⏿ ''Orient:''
 The TW5 Bags/Recipes model specifies three things we needed to close:
-1. Bags carry access controls (read/write policy) — first-class tiddlers, not runtime flags
-2. Tiddler conflict resolution = highest-priority bag wins — the VM must enforce this on every incoming delta
-3. Recipe-scoped writes route to `writableBag` — the recipe IS the routing table, not registration order
+# Bags carry access controls (read/write policy) — first-class tiddlers, not runtime flags
+# Tiddler conflict resolution = highest-priority bag wins — the VM must enforce this on every incoming delta
+# Recipe-scoped writes route to `writableBag` — the recipe IS the routing table, not registration order
 
 ◇ ''Decide:''
 * `BagTiddler` interface + `bagDescriptorUri` → self-addressing leaf URIs under each bag's root doc
@@ -166,9 +166,9 @@ M21 landed the 6-root 2-plane URI grammar with the social plane and recipe schem
 
 ⏿ ''Orient:''
 The architecture demanded a closure: if the recipe declares which bags the VM sees, the VM MUST see only those bags — both at boot and on every subsequent CRDT delta. Three sites needed to move together:
-1. ''Core'' — CompositeStore needed `getRecipe()` and `buildLayersFromRecipe()`, recipe.ts needed `parseBagStack` to handle both TW5 wire format (space-separated) and JS arrays
-2. ''Wiki-first'' — the bag+recipe query logic belongs in TW5 filters (`[bag[bagId]]`, `[recipe[recipeUri]]`), not in TS peer code
-3. ''Both peers'' — `openNodeLarPeer` and `openBrowserLarPeer` needed to derive `vmBagStack` from the seeded recipe tiddler and pass it to `DirectMemeRecipeVm`
+# ''Core'' — CompositeStore needed `getRecipe()` and `buildLayersFromRecipe()`, recipe.ts needed `parseBagStack` to handle both TW5 wire format (space-separated) and JS arrays
+# ''Wiki-first'' — the bag+recipe query logic belongs in TW5 filters (`[bag[bagId]]`, `[recipe[recipeUri]]`), not in TS peer code
+# ''Both peers'' — `openNodeLarPeer` and `openBrowserLarPeer` needed to derive `vmBagStack` from the seeded recipe tiddler and pass it to `DirectMemeRecipeVm`
 
 ◇ ''Decide:''
 * `parseBagStack` handles both wire formats — no assumption about serializer
@@ -612,9 +612,9 @@ packages/lararium-node/
 
 ✶ ''Observe:''
 Sprint 4 (KumuDeviceSpec + ReactionEngine) completed with initial Blueprint-era vocabulary. Shift 3 (Verse 5.6+ compositional model) locked in ROADMAP but not yet reflected in the vocabulary layer. Three vocabulary gaps identified:
-1. `REACTION_ROLES = ["subscription", "handler", "callback"]` — Blueprint inheritance thinking; "subscription" is instance-level wiring, not a type declaration.
-2. `RENDER_MODES = ["reaction-wire"]` — English internal alias used as the primary name; `papalohe` is the Hawaiian grammar sigil already established everywhere else.
-3. `FAMILY_ROLES.reaction` included `"subscription"` — wrong layer; subscription is an instance-level papalohe edge payload concept.
+# `REACTION_ROLES = ["subscription", "handler", "callback"]` — Blueprint inheritance thinking; "subscription" is instance-level wiring, not a type declaration.
+# `RENDER_MODES = ["reaction-wire"]` — English internal alias used as the primary name; `papalohe` is the Hawaiian grammar sigil already established everywhere else.
+# `FAMILY_ROLES.reaction` included `"subscription"` — wrong layer; subscription is an instance-level papalohe edge payload concept.
 
 ⏿ ''Orient:''
 
@@ -889,9 +889,9 @@ Gap B — ''Sync bridge untested'': `MemeSyncAdaptor` lifecycle, buffering per i
 Gap C — ''addProjection fan-out untested'': `CompositeStore.addProjection` was new in M25 Loop 1 with no test.
 
 ◇ ''Decide:''
-1. Mirror browser peer oracle tiddler fix to node peer (typed writes, remove `as any`).
-2. Write 15 `MemeSyncAdaptor` tests: lifecycle, inbound CRDT→TW5, outbound TW5→CRDT, echo-loop guard.
-3. Write 4 `CompositeStore.addProjection` tests.
+# Mirror browser peer oracle tiddler fix to node peer (typed writes, remove `as any`).
+# Write 15 `MemeSyncAdaptor` tests: lifecycle, inbound CRDT→TW5, outbound TW5→CRDT, echo-loop guard.
+# Write 4 `CompositeStore.addProjection` tests.
 
 ■ ''Act:''
   1. `open-node-lar-peer.ts` — `import type { MutableLarRecord }` from `@lararium/mesh`; room URL read: oracle tiddler first, legacy fallback retained; room write: `doc.tiddlers[roomKey] = { title, text: roomHandle.url, fields }` (typed); `draftKey` → `draftTiddlerKey = {roomKey}/drafts/{encodedDid}`; draft oracle read/write same pattern; removed 4 `as any` + eslint-disable comments.
@@ -932,11 +932,11 @@ Routing B: `CompositeStore.put(record)` ignores `record.bag`. `MemeSyncAdaptor` 
 Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adaptor.start()` called `addProjection()` before corpus layers arrived, those layers got no MemeProvider projection — their changes arrive via plain `subscribe()`, losing per-island debounce and `onSyncComplete` coalescing.
 
 ◇ ''Decide:''
-1. Add `fields: {}` to all oracle seed writes; move recipe/bag-descriptor domain metadata into `fields: {...}` matching `getRecipe()` + bag filter read patterns.
-2. Oracle tiddler for island URL in catalog: `catalog.tiddlers[LARARIUM_DOC_URI]` primary; `catalog.larariumDoc?.docUrl` legacy fallback.
-3. `CompositeStore.put()`: route by `record.bag` to matching writable layer first; fallback to `writableStore`.
-4. `CompositeStore.addProjection()`: store in `Map<MemeProjection, unsubs[]>`; `addLayer()` fans active projections to new layers.
-5. `tw5-projection.ts`: use `tw5.getTiddler()` + `tw5.getTiddlerText()` directly.
+# Add `fields: {}` to all oracle seed writes; move recipe/bag-descriptor domain metadata into `fields: {...}` matching `getRecipe()` + bag filter read patterns.
+# Oracle tiddler for island URL in catalog: `catalog.tiddlers[LARARIUM_DOC_URI]` primary; `catalog.larariumDoc?.docUrl` legacy fallback.
+# `CompositeStore.put()`: route by `record.bag` to matching writable layer first; fallback to `writableStore`.
+# `CompositeStore.addProjection()`: store in `Map<MemeProjection, unsubs[]>`; `addLayer()` fans active projections to new layers.
+# `tw5-projection.ts`: use `tw5.getTiddler()` + `tw5.getTiddlerText()` directly.
 
 ■ ''Act:''
   1. `lararium-island.ts` — 12 casts removed: `doc.tiddlers[K] = { title, text, fields: {}, bag, authority }`; recipe seeds restructured with `fields: { label, bagStack, updatedAt, authority, bag }`; bag descriptors `fields: { label, readPolicy, writePolicy, updatedAt, authority, bag }`.

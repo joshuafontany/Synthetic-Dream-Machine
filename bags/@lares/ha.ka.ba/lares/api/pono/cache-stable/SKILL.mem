@@ -64,21 +64,21 @@ If the task concerns general documentation, long policy prose, or a sidecar-only
 
 This skill owns four main paths:
 
-1. compose a new downstream cache-stable meme
-2. compress an existing meme toward cache-stable compliance
-3. audit a meme for cache-stable drift
-4. split non-cache-stable matter into sidecars
+# compose a new downstream cache-stable meme
+# compress an existing meme toward cache-stable compliance
+# audit a meme for cache-stable drift
+# split non-cache-stable matter into sidecars
 
 Use this workflow:
 
-1. load the canonical loci first
-2. identify the job, boundary, and target meme surface
-3. separate cache-stable law from sidecar matter
-4. preserve or restore visible ahu, visible pranala, and explicit OODA-HA
-5. keep the cache-stable compact enough to recur stably
-6. fill domain-specific OODA-HA phases when the work targets a downstream cache-stable meme
-7. push explanation, long examples, procedures, traces, and audits outward
-8. return a compact result with any honest residue named
+# load the canonical loci first
+# identify the job, boundary, and target meme surface
+# separate cache-stable law from sidecar matter
+# preserve or restore visible ahu, visible pranala, and explicit OODA-HA
+# keep the cache-stable compact enough to recur stably
+# fill domain-specific OODA-HA phases when the work targets a downstream cache-stable meme
+# push explanation, long examples, procedures, traces, and audits outward
+# return a compact result with any honest residue named
 
 Do not:
 

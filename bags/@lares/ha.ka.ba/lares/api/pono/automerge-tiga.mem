@@ -71,22 +71,22 @@ Ha holds oracle tiddlers for all five non-ha docs (both planes).
 
 ''Content plane:''
 
-1. Ha holds ka. `LarariumDoc.tiddlers[CATALOG_DOC_URI].text` = CatalogDoc automerge URL.
-2. Ha holds ba. `LarariumDoc.tiddlers[LARES_DOC_URI].text` = LaresDoc automerge URL.
-3. Ka holds corpus child-docs. `CatalogDoc.tiddlers[corpusLarUri(slug)].text` = corpus doc automerge URL (pos-2: `@catalog/@{slug}`).
-4. Ka holds wiki leaves. `CatalogDoc.tiddlers[wikiBagUri(slug)].text` = wiki leaf doc automerge URL.
+# Ha holds ka. `LarariumDoc.tiddlers[CATALOG_DOC_URI].text` = CatalogDoc automerge URL.
+# Ha holds ba. `LarariumDoc.tiddlers[LARES_DOC_URI].text` = LaresDoc automerge URL.
+# Ka holds corpus child-docs. `CatalogDoc.tiddlers[corpusLarUri(slug)].text` = corpus doc automerge URL (pos-2: `@catalog/@{slug}`).
+# Ka holds wiki leaves. `CatalogDoc.tiddlers[wikiBagUri(slug)].text` = wiki leaf doc automerge URL.
 
 ''Social plane (oracle tiddlers stored in ha):''
 
-5. Ha holds identities. `LarariumDoc.tiddlers[IDENTITIES_DOC_URI].text` = IdentitiesDoc automerge URL.
-6. Ha holds groups. `LarariumDoc.tiddlers[CIRCLES_DOC_URI].text` = CirclesDoc automerge URL.
-7. Ha holds sessions. `LarariumDoc.tiddlers[SESSIONS_DOC_URI].text` = SessionsDoc automerge URL.
+# Ha holds identities. `LarariumDoc.tiddlers[IDENTITIES_DOC_URI].text` = IdentitiesDoc automerge URL.
+# Ha holds groups. `LarariumDoc.tiddlers[CIRCLES_DOC_URI].text` = CirclesDoc automerge URL.
+# Ha holds sessions. `LarariumDoc.tiddlers[SESSIONS_DOC_URI].text` = SessionsDoc automerge URL.
 
 ''Invariants across both planes:''
 
-8. No leaf carries upward pointers. Leaves self-describe only (own lar: URI → own automerge URL).
-9. Reachability flows ha → {ka, ba, identities, groups, sessions} → leaves. No back-edges.
-10. `@` appears ONLY at pos-1 (root doc) or pos-2 (corpus child-doc under @catalog). Never at pos-3+.
+# No leaf carries upward pointers. Leaves self-describe only (own lar: URI → own automerge URL).
+# Reachability flows ha → {ka, ba, identities, groups, sessions} → leaves. No back-edges.
+# `@` appears ONLY at pos-1 (root doc) or pos-2 (corpus child-doc under @catalog). Never at pos-3+.
 
 ''Self-description rule (all six root docs):''
 

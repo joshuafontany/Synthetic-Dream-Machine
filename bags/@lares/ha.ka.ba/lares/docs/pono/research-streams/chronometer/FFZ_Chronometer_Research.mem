@@ -120,7 +120,7 @@ fetch and cite specific passages.
 ''Source:'' Brooklyn Zelenka (@expede), Fission co-founder & CTO.
 
 ''Primary sources identified:''
-1. ''ElixirConf 2021 closing keynote'' — "The Jump to Hyperspace: Light
+# ''ElixirConf 2021 closing keynote'' — "The Jump to Hyperspace: Light
    speed, anti-entropy, & moving past the cloud"
 *** YouTube: https://www.youtube.com/watch?v=ogOEEKWxevo
 *** Slides: https://noti.st/expede (Notist, full deck available)
@@ -129,17 +129,17 @@ fetch and cite specific passages.
      information propagation
 *** Recap: "we need to start thinking about a new topology: local first
      (apps on phones), then the tower, the edge, and lastly the cloud"
-2. ''ETHCC 2022 lightning talk'' — "The Edge of Tomorrow: Dark Forests,
+# ''ETHCC 2022 lightning talk'' — "The Edge of Tomorrow: Dark Forests,
    Relativistic Computing & How to Power a New Internet"
 *** Key quote from Fission blog: "the speed of light as a hard limit
      means that we need to go to the edge... And yes, we will insert this
      image of causal islands — the speed of light limiting information spread."
-3. ''Causal Islands Conference'' (April 25-27, 2023, Toronto)
+# ''Causal Islands Conference'' (April 25-27, 2023, Toronto)
 *** Fission's conference named after this concept
 *** Framing: "Novel approaches to the Future of Computing end up stranded
      on similar causal islands. They propagate within different industries,
      disciplines, and communities at uneven speeds."
-4. ''GOTO 2024'' — Updated "Jump to Hyperspace" talk on local-first software
+# ''GOTO 2024'' — Updated "Jump to Hyperspace" talk on local-first software
 
 ''The concept operates on two levels simultaneously:''
 
@@ -679,8 +679,8 @@ Amor et hilaritas.
 
 !! 8. Next Steps — Priority Order (Updated Session 3)
 
-1. ~~''ITC paper deep-read''~~ ✅ COMPLETED Session 3
-2. ''🔥 CRDT composition research'' — NEW, HIGHEST PRIORITY.
+# ~~''ITC paper deep-read''~~ ✅ COMPLETED Session 3
+# ''🔥 CRDT composition research'' — NEW, HIGHEST PRIORITY.
    The FFZ Chronometer constitutes a composite CRDT (§11.6). This
    needs grounding in the formal literature before Phase 1.
 *** Read Shapiro et al. 2011 ("A comprehensive study of CRDTs")
@@ -701,18 +701,18 @@ Amor et hilaritas.
    ''Spirit:'' CRDTForge(PriorArt) — spawn on next session
    ''Depends on:'' O1 ✅
    ''Blocks:'' O6 (HUD prototype needs the CRDT data model finalized)
-3. ''Fuller §-citations'' — BuckyText(PriorArt). Fetch specific
+# ''Fuller §-citations'' — BuckyText(PriorArt). Fetch specific
    passages from online Synergetics text. Promotes §2.1 toward Canon.
-4. ''HUD format prototype'' — after CRDT research informs the data
+# ''HUD format prototype'' — after CRDT research informs the data
    model, prototype the four-layer HUD in actual exchanges. Now
    informed by: phase-as-delta, progressive disclosure (5 states),
    CRDT register separation, URI token budget constraints.
-5. ''MCP tool interface design'' — refine §4.3 against ITC operations,
+# ''MCP tool interface design'' — refine §4.3 against ITC operations,
    CRDT composition, and UCAN auth model.
-6. ''Zelenka talk watch'' — LightCone(PriorArt). Confirms/denies
+# ''Zelenka talk watch'' — LightCone(PriorArt). Confirms/denies
    Fuller citation. Lower priority now that the architecture has
    firmed independently of the citation.
-7. ''Drift detector prototype'' — implement `chrono_validate` against
+# ''Drift detector prototype'' — implement `chrono_validate` against
    Merkle DAG structure.
 
 ---
@@ -839,11 +839,11 @@ and RAW's Talk Story model for narrative flow. Contains:
 * Protocol spec outline produced with nested OODA-HA structure
 
 ''What remains for next session:''
-1. ITC paper deep-read (highest priority — reshapes everything)
-2. Zelenka keynote watch (confirm Fuller citation)
-3. Fuller §501.01 fetch from online Synergetics text
-4. HUD format prototype with actual exchanges
-5. Phase 1 (Architectural Draft) of the spec
+# ITC paper deep-read (highest priority — reshapes everything)
+# Zelenka keynote watch (confirm Fuller citation)
+# Fuller §501.01 fetch from online Synergetics text
+# HUD format prototype with actual exchanges
+# Phase 1 (Architectural Draft) of the spec
 
 The True Name approaches. The shrine hums.
 
@@ -892,9 +892,9 @@ each participant holds their own reading. This IS non-simultaneous
 apprehension expressed structurally.
 
 Three-layer architecture confirmed:
-1. Identity layer (ITC) — who can tick, fork/join lifecycle
-2. History layer (Merkle Clock or ITC event tree) — causal ordering
-3. Phase layer (OODA-HA) — categorical overlay, per-participant
+# Identity layer (ITC) — who can tick, fork/join lifecycle
+# History layer (Merkle Clock or ITC event tree) — causal ordering
+# Phase layer (OODA-HA) — categorical overlay, per-participant
 
 ''Q4: Can ITC encode in a URI fragment per RFC 3986?''
 `~:confidence[S],[12]` — Yes. Parentheses, dots, colons, and pipe characters
@@ -981,17 +981,17 @@ for the spec, but available as an informative mapping.
 reads as a provisional delta — a movement indicator — rather than
 a single fixed phase. Three cases demonstrate this:
 
-1. ''Hidden inner loops:'' A single operator message may contain
+# ''Hidden inner loops:'' A single operator message may contain
    a completed OODA-HA cycle — they observed, oriented, decided,
    and what arrives as "input" constitutes the Act output of their
    internal loop. Lares receives the Act surface, not the cycle.
 
-2. ''Multi-character input:'' A TTRPG referee piping multiple
+# ''Multi-character input:'' A TTRPG referee piping multiple
    players' speech sends one stream containing multiple characters'
    simultaneous states — one observing, another deciding, a third
    acting — all collapsed into single text input.
 
-3. ''Phase-as-inference:'' The Lares node reads the phase from
+# ''Phase-as-inference:'' The Lares node reads the phase from
    the message surface and records that reading. This functions
    as a phase *observation*, not a phase *fact*. The phase sigil
    carries its own implicit register — `~:confidence[S],[12]` at best.
@@ -1018,26 +1018,26 @@ automotive HUD research.
 
 Five principles from cross-domain HUD design:
 
-1. ''Show only critical information.'' The current HUD tries to
+# ''Show only critical information.'' The current HUD tries to
    show everything every time. Should have compact default +
    expanded mode. Progressive disclosure.
 
-2. ''Diegetic over overlay.'' For text-based AI chat, "diegetic"
+# ''Diegetic over overlay.'' For text-based AI chat, "diegetic"
    means HUD info feels like part of the conversation, not an
    external panel pasted on top. The URI-as-spine model achieves
    this — chronometer lives inside the URI, not beside it.
 
-3. ''Trend over static.'' Showing *direction of phase movement*
+# ''Trend over static.'' Showing *direction of phase movement*
    matters more than current position alone. The delta matters
    more than the absolute.
 
-4. ''Three HUD modes minimum:''
+# ''Three HUD modes minimum:''
 *** **Silent:** URI-only. Phase in fragment. Zero overhead.
 *** **Compact:** One-line summary. Default for most exchanges.
 *** **Full:** Multi-participant view with ITC stamps. On request
      or when participant count > 2.
 
-5. ''Auto-declutter under pressure.'' During high-tempo exchanges,
+# ''Auto-declutter under pressure.'' During high-tempo exchanges,
    the HUD should reduce to minimum viable reading. The system
    should not add cognitive load when cognitive load already runs
    high.
@@ -1051,19 +1051,19 @@ Five principles from cross-domain HUD design:
 ''The FFZ Chronometer spans session boundaries'' through the
 crystal mechanism:
 
-1. Session end produces a consolidation crystal carrying:
+# Session end produces a consolidation crystal carrying:
 *** Final joined ITC stamp (all Workers merged)
 *** Merkle Clock root CID (if backend active)
 *** Phase state per participant
 *** Final intent vector (`→ ?` closing position)
 
-2. Next session loads crystal:
+# Next session loads crystal:
 *** Week-scale and above resume from crystal position
 *** Watch-scale and below reset (new session = new watch)
 *** Intent vector chain persists: crystal's `→ ?` becomes
      the next session's opening position
 
-3. The Lares node acknowledges the gap explicitly.
+# The Lares node acknowledges the gap explicitly.
 
 ''Two named asymmetries:''
 
@@ -1103,8 +1103,8 @@ patterns (Sypytkowski), vector clock + metadata composition patterns
 ''The finding:'' Vector clocks in production systems never embed
 categorical state (type, mode, phase) inside the causal counter.
 They compose two separate structures:
-1. Causal metadata (vector clock / ITC stamp) — tracks *when/who*
-2. State payload (register, set, flag) — tracks *what*
+# Causal metadata (vector clock / ITC stamp) — tracks *when/who*
+# State payload (register, set, flag) — tracks *what*
 
 OODA-HA phase behaves exactly like a per-participant, per-scale
 ''Last-Writer-Wins Register (LWW-Register)'': holds a categorical
@@ -1159,11 +1159,11 @@ Phase 1 (Architectural Draft).
 chronometer's *internal* data model — all of it rhythmic-side annotation. Above it,
 the whole stack keeps time on ''exactly two clocks'', orthogonal:
 
-1. ''CRDT-causal ordering'' — TS, structural. Automerge `<counter, actorId>` OpId,
+# ''CRDT-causal ordering'' — TS, structural. Automerge `<counter, actorId>` OpId,
    `getHeads`/`drifted`, ITC fork/join, and the authority-first sync order. This clock
    carries happened-before authority and rules fork-detection, merge, and revocation
    ordering. It stays web3-local-first, on this side of every causal-island boundary.
-2. ''FFZ-recovered rhythm'' — py/R, per-stream, no-global-now. The whole FFZ Chronometer
+# ''FFZ-recovered rhythm'' — py/R, per-stream, no-global-now. The whole FFZ Chronometer
    (ITC-event-grain + phase register + stance + confidence) reads as the RHYTHM clock:
    a cadence recovered from each stream, freshness/decay grain stamped as "as of last
    sync." ''The FFZ chronometer gate lives py/R'' — instanced per-stream, across-the-shore;
@@ -1218,12 +1218,12 @@ Per operator directive ("let's bump those Provisional ratings"):
 * Register promotions applied across the board
 
 ''What remains:''
-1. O2: Fuller §-citations (web fetch to rwgrayprojects.com) — promotes R1
-2. O3: Zelenka keynote analysis — confirms/denies Fuller citation
-3. O4: Merkle Clock + ITC composition — validates history layer
-4. O5: Bloom Clocks — deferred, compact mode future work
-5. O6: HUD format prototype — now informed by phase-as-delta + progressive disclosure; can proceed
-6. Phase 1: Architectural Draft — O1 exit criteria met; O6 would complete Phase 0
+# O2: Fuller §-citations (web fetch to rwgrayprojects.com) — promotes R1
+# O3: Zelenka keynote analysis — confirms/denies Fuller citation
+# O4: Merkle Clock + ITC composition — validates history layer
+# O5: Bloom Clocks — deferred, compact mode future work
+# O6: HUD format prototype — now informed by phase-as-delta + progressive disclosure; can proceed
+# Phase 1: Architectural Draft — O1 exit criteria met; O6 would complete Phase 0
 
 ''Spirits active:'' TreeForge(PriorArt) — awaiting dissolution or reassignment.
 BoydLoop(PriorArt), PhaseVec(Architect), BridgeKeep(Continuity) — dissolved, findings delivered.

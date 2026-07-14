@@ -36,9 +36,9 @@ The `lar:` URI names the bearing a Lares node exchange takes — a shared naviga
 
 Each URI component carries a distinct, non-overlapping concern across three semantic layers:
 
-1. ''WHO'' — authority (`alias:grant@host`) identifies speaker and machine host
-2. ''BEARING'' — the HA.KA.BA address (path) names semantic attitude
-3. ''SECTION'' — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
+# ''WHO'' — authority (`alias:grant@host`) identifies speaker and machine host
+# ''BEARING'' — the HA.KA.BA address (path) names semantic attitude
+# ''SECTION'' — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
 
 Resource-state annotations such as the mana/context-window pool are HUD adjuncts, not core URI components. This value uses the shared `0–20` Level model as a navigational resource estimate. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
 
@@ -230,11 +230,11 @@ These are orthogonal. A URI may carry multiple `~` markers on different componen
 
 ''Rules:''
 
-1. `~` is valid in canonical record form as an inline provisionality prefix on HA.KA.BA slots (`~uri.schema.question`). Use the `provisional=` query parameter when you need a separate, machine-parseable provisionality field for storage or filtering.
-2. Multiple `~` markers may appear in a single URI simultaneously.
-3. All closing/forward-looking URIs are implicitly trajectory-provisional. Explicit `~` on a closing URI signals *unusual* uncertainty about the trajectory — not routine forward-look status.
-4. Reading provisionality on the operator URI marks the ''node's interpretation'' as potentially inaccurate — not the operator's intent as ambiguous. These are different claims.
-5. The `~` marker applies only to the specific component it prefixes. Unprefixed components are declared with normal confidence.
+# `~` is valid in canonical record form as an inline provisionality prefix on HA.KA.BA slots (`~uri.schema.question`). Use the `provisional=` query parameter when you need a separate, machine-parseable provisionality field for storage or filtering.
+# Multiple `~` markers may appear in a single URI simultaneously.
+# All closing/forward-looking URIs are implicitly trajectory-provisional. Explicit `~` on a closing URI signals *unusual* uncertainty about the trajectory — not routine forward-look status.
+# Reading provisionality on the operator URI marks the ''node's interpretation'' as potentially inaccurate — not the operator's intent as ambiguous. These are different claims.
+# The `~` marker applies only to the specific component it prefixes. Unprefixed components are declared with normal confidence.
 
 ''Examples:''
 
@@ -338,38 +338,38 @@ Module descriptors use `version_num` or semver-like fields for content versionin
 
 A `lar:` URI is ''well-formed'' when:
 
-1. Scheme is exactly `lar:`
-2. If authority is present: userinfo contains exactly two colon-delimited sub-fields (`alias:grant`); no parenthetical phase sub-field
-3. Host is a valid `machine_id` (alphanumeric + hyphens)
-4. Path contains exactly three HA.KA.BA slots after the leading `/`
-5. Path slots contain no whitespace, path separators, or quotes (inherits l-space Address anti-collision rules)
-7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `Synthesis 13/20`, `Synthesis-Canon 16/20`, `Canon 18/20`)
-8. `p` value is a decimal in range `[0.0, 1.0]`
-10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
+# Scheme is exactly `lar:`
+# If authority is present: userinfo contains exactly two colon-delimited sub-fields (`alias:grant`); no parenthetical phase sub-field
+# Host is a valid `machine_id` (alphanumeric + hyphens)
+# Path contains exactly three HA.KA.BA slots after the leading `/`
+# Path slots contain no whitespace, path separators, or quotes (inherits l-space Address anti-collision rules)
+# `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `Synthesis 13/20`, `Synthesis-Canon 16/20`, `Canon 18/20`)
+# `p` value is a decimal in range `[0.0, 1.0]`
+# Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
 
 !!! 9.2 Consistency
 
 A spanSpan record is ''consistent'' when:
 
-1. All URI fields are canonical ASCII record form (no emoji, no non-ASCII)
-2. `lares_address` is the path-only strip of `start_uri` (no authority, no query, no fragment)
+# All URI fields are canonical ASCII record form (no emoji, no non-ASCII)
+# `lares_address` is the path-only strip of `start_uri` (no authority, no query, no fragment)
 
 !!! 9.3 Stable Address Derivation
 
 `lares_address` is correctly derived from `lar_uri` when:
 
-1. Scheme is `lar:`
-2. Authority is empty (double-slash, no host)
-3. Path is identical to the `lar_uri` path (record form: `/` separators)
-4. Query and fragment are absent
+# Scheme is `lar:`
+# Authority is empty (double-slash, no host)
+# Path is identical to the `lar_uri` path (record form: `/` separators)
+# Query and fragment are absent
 
 !!! 9.4 Canonical Form and Comparison
 
-1. Convert both to record form (apply normalization — HUD → record — before comparison)
-2. Compare path components ''case-insensitively''
-3. Canonical form uses ''lowercase'' path components
-4. Two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical
-5. Query and fragment components are excluded from stable-address comparison
+# Convert both to record form (apply normalization — HUD → record — before comparison)
+# Compare path components ''case-insensitively''
+# Canonical form uses ''lowercase'' path components
+# Two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical
+# Query and fragment components are excluded from stable-address comparison
 
 <<~/ahu >>
 
@@ -377,15 +377,15 @@ A spanSpan record is ''consistent'' when:
 
 !! 10. Security Considerations
 
-1. ''Non-dereferenceable:'' `lar:` URIs are pure identifiers. No network resolution occurs — there is no server to attack via URI injection.
+# ''Non-dereferenceable:'' `lar:` URIs are pure identifiers. No network resolution occurs — there is no server to attack via URI injection.
 
-2. ''No credential transport:'' The `alias:grant` userinfo encodes an application-layer signal role, not an authentication credential. Real authentication is handled by the underlying identity layer (DID, OAuth, UCAN capability tokens). A `lar:` URI MUST NOT be treated as proof of identity.
+# ''No credential transport:'' The `alias:grant` userinfo encodes an application-layer signal role, not an authentication credential. Real authentication is handled by the underlying identity layer (DID, OAuth, UCAN capability tokens). A `lar:` URI MUST NOT be treated as proof of identity.
 
-3. ''Fragment client-side:'' Per RFC 3986 §3.5, the fragment is not sent over the wire. The fragment carries only section anchors — no chronometer, no signal state. This reduces the information exposed in client-side contexts.
+# ''Fragment client-side:'' Per RFC 3986 §3.5, the fragment is not sent over the wire. The fragment carries only section anchors — no chronometer, no signal state. This reduces the information exposed in client-side contexts.
 
-4. ''Render-target injection:'' Glyph-rich render targets (sigil panels, post headers) transform canonical URIs into display strings containing Unicode characters. Implementations that render these strings in HTML or terminal contexts MUST sanitize output to prevent injection of control characters or markup.
+# ''Render-target injection:'' Glyph-rich render targets (sigil panels, post headers) transform canonical URIs into display strings containing Unicode characters. Implementations that render these strings in HTML or terminal contexts MUST sanitize output to prevent injection of control characters or markup.
 
-5. ''HA.KA.BA semantic leakage:'' Path components encode semantic territory (what the speaker is thinking about). Applications that expose `lar:` URIs to untrusted parties should consider whether the HA.KA.BA path reveals sensitive operational context.
+# ''HA.KA.BA semantic leakage:'' Path components encode semantic territory (what the speaker is thinking about). Applications that expose `lar:` URIs to untrusted parties should consider whether the HA.KA.BA path reveals sensitive operational context.
 
 > ''Status:'' Security section partially complete — required for IANA registration (RFC 7595 §7.4). To be expanded with formal threat model before any provisional IANA registration attempt.
 

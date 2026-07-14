@@ -150,13 +150,13 @@ docs/lararium/
 
 !!! Main tensions
 
-1. ''Talk Story sourcing'' — the protocol appears in the FFZ chronometer spec as a described thing but may carry more authoritative definition in `Lares_Test_Prompt_and_Output_Coffee_Oracle.md`. That file needs a read pass before talk-story.md extraction begins.
+# ''Talk Story sourcing'' — the protocol appears in the FFZ chronometer spec as a described thing but may carry more authoritative definition in `Lares_Test_Prompt_and_Output_Coffee_Oracle.md`. That file needs a read pass before talk-story.md extraction begins.
 
-2. ''CLI / platform boundary'' — Terminal Identity (hostname, username, workspace as Reality Anchor) constitutes Lares infrastructure. The specific command syntax (`--debug`, `--parse`, Worker spawn format) constitutes platform-wrapper configuration. The extraction should separate these cleanly.
+# ''CLI / platform boundary'' — Terminal Identity (hostname, username, workspace as Reality Anchor) constitutes Lares infrastructure. The specific command syntax (`--debug`, `--parse`, Worker spawn format) constitutes platform-wrapper configuration. The extraction should separate these cleanly.
 
-3. ''Collaboration Model extension'' — the Captain and Crossroads metaphors in Preferences run much stronger than the existing `preferences/collaboration-model.md`. The existing room should absorb this material directly rather than a new file.
+# ''Collaboration Model extension'' — the Captain and Crossroads metaphors in Preferences run much stronger than the existing `preferences/collaboration-model.md`. The existing room should absorb this material directly rather than a new file.
 
-4. ''E-prime pressure'' — Frame-Uncertainty Protocol uses first-person phrasing in its example moves ("Reading this as [X]..."). Those phrasings constitute quoted procedure forms and SHOULD survive extraction as procedure text rather than undergoing E-prime substitution. The surrounding prose should follow E-prime discipline.
+# ''E-prime pressure'' — Frame-Uncertainty Protocol uses first-person phrasing in its example moves ("Reading this as [X]..."). Those phrasings constitute quoted procedure forms and SHOULD survive extraction as procedure text rather than undergoing E-prime substitution. The surrounding prose should follow E-prime discipline.
 
 <<~/ahu >>
 
@@ -168,15 +168,15 @@ docs/lararium/
 
 This pass produces:
 
-1. `docs/lararium/protocols/frame-uncertainty.md`
-2. `docs/lararium/protocols/talk-story.md` *(after Coffee Oracle source read)*
-3. `docs/lararium/protocols/session-init.md`
-4. `docs/lararium/protocols/proactive-surfacing.md`
-5. `docs/lararium/protocols/cli-dreamnet.md` *(DreamNet CLI flavor only; not command tables)*
-6. Extensions to `preferences/collaboration-model.md` *(Captain and Crossroads metaphors)*
-7. `preferences/voice-register.md` *(tone and formatting)*
-8. `authority/transference-model.md` *(conceptual tier model)*
-9. Integrations into `degraded-states.md` *(Workspace Trust Gate, Capability Honesty, Default Behavior notes)*
+# `docs/lararium/protocols/frame-uncertainty.md`
+# `docs/lararium/protocols/talk-story.md` *(after Coffee Oracle source read)*
+# `docs/lararium/protocols/session-init.md`
+# `docs/lararium/protocols/proactive-surfacing.md`
+# `docs/lararium/protocols/cli-dreamnet.md` *(DreamNet CLI flavor only; not command tables)*
+# Extensions to `preferences/collaboration-model.md` *(Captain and Crossroads metaphors)*
+# `preferences/voice-register.md` *(tone and formatting)*
+# `authority/transference-model.md` *(conceptual tier model)*
+# Integrations into `degraded-states.md` *(Workspace Trust Gate, Capability Honesty, Default Behavior notes)*
 
 !!! Section status vocabulary
 
@@ -208,17 +208,17 @@ This pass produces:
 
 !!! Extraction order
 
-1. Read `Lares_Test_Prompt_and_Output_Coffee_Oracle.md` → gather Talk Story definition
-2. Extract `protocols/frame-uncertainty.md`
-3. Extract `protocols/session-init.md` (includes Default Behavior as sub-section)
-4. Extract `protocols/proactive-surfacing.md`
-5. Extract `protocols/cli-dreamnet.md`
-6. Extract `protocols/talk-story.md`
-7. Extend `preferences/collaboration-model.md`
-8. Write `preferences/voice-register.md`
-9. Write `authority/transference-model.md`
-10. Fold integrations into `degraded-states.md`
-11. Write `protocols/protocols.md` parent router
+# Read `Lares_Test_Prompt_and_Output_Coffee_Oracle.md` → gather Talk Story definition
+# Extract `protocols/frame-uncertainty.md`
+# Extract `protocols/session-init.md` (includes Default Behavior as sub-section)
+# Extract `protocols/proactive-surfacing.md`
+# Extract `protocols/cli-dreamnet.md`
+# Extract `protocols/talk-story.md`
+# Extend `preferences/collaboration-model.md`
+# Write `preferences/voice-register.md`
+# Write `authority/transference-model.md`
+# Fold integrations into `degraded-states.md`
+# Write `protocols/protocols.md` parent router
 
 <<~/ahu >>
 

@@ -147,11 +147,11 @@ SomeFunc()<suspends>:t
 
 !!! Rules
 
-1. A function annotated `<suspends>` may only be called from within a `<suspends>` context
+# A function annotated `<suspends>` may only be called from within a `<suspends>` context
    or from a `spawn` expression (which creates a new fiber).
-2. `<suspends>` propagates upward: calling a `<suspends>` function from a non-suspends
+# `<suspends>` propagates upward: calling a `<suspends>` function from a non-suspends
    function requires marking the caller `<suspends>`.
-3. Fibers are cooperative: the runtime suspends at `Await()` callsites only.
+# Fibers are cooperative: the runtime suspends at `Await()` callsites only.
    No preemptive suspension.
 
 !!! Lararium consequence

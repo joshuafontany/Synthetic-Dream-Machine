@@ -175,10 +175,10 @@ lar:///ha.ka.ba/cid/bafy…                        ← an immutable artifact
 
 Law summary:
 
-1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
-2. `child[1]` forks: a reserved ''kind-plane'' word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word is a ''meme namespace'' — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
-3. A CRDT surface carries exactly one canonical address. A wiki's per-wiki live slots extend its identity at `child[3]` (`wikis/@{slug}/{kind}`).
-4. Resolution: the runtime resolves an `@`-tagged surface to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the identity; the resolver maps it to the live doc. Two devices binding the same surface URI to different doc URLs (different recipes, different personal docs) is the normal case — the URI is the address, the doc is the house.
+# `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
+# `child[1]` forks: a reserved ''kind-plane'' word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word is a ''meme namespace'' — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
+# A CRDT surface carries exactly one canonical address. A wiki's per-wiki live slots extend its identity at `child[3]` (`wikis/@{slug}/{kind}`).
+# Resolution: the runtime resolves an `@`-tagged surface to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the identity; the resolver maps it to the live doc. Two devices binding the same surface URI to different doc URLs (different recipes, different personal docs) is the normal case — the URI is the address, the doc is the house.
 
 Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* pointing at other surfaces. The canonical example is `bags/@catalog`, which tracks corpus bags via entries at `lar:///ha.ka.ba/bags/@catalog/corpus/{slug}` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/bags/@{slug}` bag. Catalog catalogs; it does not host.
 
@@ -190,11 +190,11 @@ Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* poi
 
 The schema carries five independent planes; conflating them trips residency, projection, and federation work. This reading runs ahead of settled field vocabulary and stays open to better words.
 
-1. ''NAME'' — the URI identifies, full stop. A bare `child[1]` segment names the ''minting namespace'' (the authority that named the unit), never a residency claim. The name survives COPY, MOVE, multi-bag presence, deletion, and federation unchanged (coordinate ⊥ change-identity).
-2. ''RESIDENCY'' — which surfaces hold a manifestation NOW = a queried relation (`listBagsHolding`, catalog holdings, recipe stacks), never derived from the path. The same URI lawfully exists in a draft layer AND a canon bag AND a personal layer at once, shadowed by layer order. Name and holding surface coincide only by convention.
-3. ''SITING'' — where a projection of a manifestation lands on disk: a per-bag mirror convention (`loci` derivation = the canon-bag rule, one projection rule among possible many), gated by the disk-mirror GRANT, never implied by the name.
-4. ''SPEECH'' — the hostful session form (`lar://alias:grant@host/...`): who speaks, under what grant, from where — a speech-act envelope for exchange spans, never storage.
-5. ''STABILITY'' — literal `ha.ka.ba` (settled namespace) vs unstable attitude roots (session bearing, declared-unresolved until adopted into a bag).
+# ''NAME'' — the URI identifies, full stop. A bare `child[1]` segment names the ''minting namespace'' (the authority that named the unit), never a residency claim. The name survives COPY, MOVE, multi-bag presence, deletion, and federation unchanged (coordinate ⊥ change-identity).
+# ''RESIDENCY'' — which surfaces hold a manifestation NOW = a queried relation (`listBagsHolding`, catalog holdings, recipe stacks), never derived from the path. The same URI lawfully exists in a draft layer AND a canon bag AND a personal layer at once, shadowed by layer order. Name and holding surface coincide only by convention.
+# ''SITING'' — where a projection of a manifestation lands on disk: a per-bag mirror convention (`loci` derivation = the canon-bag rule, one projection rule among possible many), gated by the disk-mirror GRANT, never implied by the name.
+# ''SPEECH'' — the hostful session form (`lar://alias:grant@host/...`): who speaks, under what grant, from where — a speech-act envelope for exchange spans, never storage.
+# ''STABILITY'' — literal `ha.ka.ba` (settled namespace) vs unstable attitude roots (session bearing, declared-unresolved until adopted into a bag).
 
 The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable names; adoption moves a unit to NAME-stable; LOAD/INGEST set RESIDENCY; the mirror grant sets SITING. No plane ever answers for another.
 
@@ -206,10 +206,10 @@ The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable na
 
 `lar:` ''names''; it does not fetch. A processor MUST resolve a `lar:` reference against the local world graph only:
 
-1. Parse the URI to its form (local / session), path class, and optional fragment.
-2. For an `@`-surface (`bags/@…` or `wikis/@…`), map the surface identity to a live doc via the island manifest's `BagResolver`.
-3. Resolve the remaining path to a named unit within that bag's address space.
-4. Resolve a `#fragment` to a section / `ahu` / pranala anchor within the named unit.
+# Parse the URI to its form (local / session), path class, and optional fragment.
+# For an `@`-surface (`bags/@…` or `wikis/@…`), map the surface identity to a live doc via the island manifest's `BagResolver`.
+# Resolve the remaining path to a named unit within that bag's address space.
+# Resolve a `#fragment` to a section / `ahu` / pranala anchor within the named unit.
 
 Session form names the speaker through the authority. It MUST stay within exchange spans, away from stable graph addresses, system resource names, and other storage.
 

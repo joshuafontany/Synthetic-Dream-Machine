@@ -36,9 +36,9 @@ Nine research spirits swept the field across two days. What follows binds as kup
 
 The strict-bytes vs canonical-form fork resolves ''canonical-form'' (field-wide convergence: gofmt, Prettier, jj's render-then-reparse conflict loop; strict bytes would require Roslyn-style trivia fields leaking formatting into records and souring merges). Three guarantees bind as LAW:
 
-1. ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<~ &#x0002; >>`, spaced).
-2. ''No unsolicited sweeps'' (the Logseq sin): normalization touches only memes whose records actually changed; the projector MUST NOT reformat-the-world on boot or upgrade.
-3. ''Semantic identity verified:'' `parse(render(records)) ≡ records` — the harness proves it, never assertion.
+# ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<~ &#x0002; >>`, spaced).
+# ''No unsolicited sweeps'' (the Logseq sin): normalization touches only memes whose records actually changed; the projector MUST NOT reformat-the-world on boot or upgrade.
+# ''Semantic identity verified:'' `parse(render(records)) ≡ records` — the harness proves it, never assertion.
 
 * ''Echo suppression by content, not event-window'' (Dropbox Nucleus; Syncthing): the `writing` set works as a degenerate one-tree model; the upgrade path = persisted last-projected ''content hash'' per file, ingest drops no-op loads. Burr-grade, not blocking.
 * ''Best practices:'' atomic temp-file + rename writes; watcher coalescing on file *stability*; periodic full-scan backstop; property-test the loop with seeded randomness (Dropbox runs millions nightly).

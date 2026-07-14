@@ -107,9 +107,9 @@ The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki
 
 Code moves into `@lararium/browser` only when it satisfies ''all three'' tests:
 
-1. ''Law test.'' The code's responsibility belongs to one of the BV-1–BV-8 assignments above, and satisfies Island Sovereignty Law §1–§8 (`island-protocol.ts`).
-2. ''Proof test.'' Moving this code makes a cheap-check falsifier pass, not merely easier to imagine passing.
-3. ''Residue test.'' The code carries no unresolved web2 smell (see `deletion-map.md`). If it carries residue, the residue gets quarantined behind a named adapter boundary before migration.
+# ''Law test.'' The code's responsibility belongs to one of the BV-1–BV-8 assignments above, and satisfies Island Sovereignty Law §1–§8 (`island-protocol.ts`).
+# ''Proof test.'' Moving this code makes a cheap-check falsifier pass, not merely easier to imagine passing.
+# ''Residue test.'' The code carries no unresolved web2 smell (see `deletion-map.md`). If it carries residue, the residue gets quarantined behind a named adapter boundary before migration.
 
 Code that passes all three gets a migration entry in `deletion-map.md#migration-log`.
 
@@ -121,11 +121,11 @@ Code that passes all three gets a migration entry in `deletion-map.md#migration-
 
 These questions do not block charter adoption. They require measurement before resolution.
 
-1. ''Pre-attach render prep.'' How much render work can the island authority complete before a frame attaches? The answer affects projection contract design.
-2. ''Projection data shape.'' Which minimal data crosses the worker boundary per render cycle? Prefer structured-clone-friendly small payloads; transferables only where size warrants.
-3. ''DOM-bound TW5 hooks.'' Which TW5 refresh/action hooks still require DOM access? Each dependency earns an explicit named adapter entry.
-4. ''Sharedisland timing.'' Dedicated workers first. Sharedisland deferred until dedicated path proves stable.
-5. ''Pool topology.'' Hot wiki and admin wiki may share one pool with capability flags or run two pools with shared law. Defer until pool metrics land.
+# ''Pre-attach render prep.'' How much render work can the island authority complete before a frame attaches? The answer affects projection contract design.
+# ''Projection data shape.'' Which minimal data crosses the worker boundary per render cycle? Prefer structured-clone-friendly small payloads; transferables only where size warrants.
+# ''DOM-bound TW5 hooks.'' Which TW5 refresh/action hooks still require DOM access? Each dependency earns an explicit named adapter entry.
+# ''Sharedisland timing.'' Dedicated workers first. Sharedisland deferred until dedicated path proves stable.
+# ''Pool topology.'' Hot wiki and admin wiki may share one pool with capability flags or run two pools with shared law. Defer until pool metrics land.
 
 <<~/ahu >>
 

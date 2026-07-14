@@ -163,10 +163,10 @@ Keep weakness visible while a carrier still sits short of full alignment. Do not
 
 Decide applies four verdicts to each field:
 
-1. keep
-2. merge
-3. derive later
-4. keep as useful weakness
+# keep
+# merge
+# derive later
+# keep as useful weakness
 
 A field that changes no parse, routing, execution, or truth does not survive. A field that repeats another field should merge into the sharper of the two. A field that only matters in explanation should move to prose or a child law.
 
@@ -180,11 +180,11 @@ Act rewrites live carriers conservatively.
 
 First:
 
-1. freeze `ha`
-2. densify `ka`
-3. collapse `ba`
-4. patch the child laws that govern surviving special keys
-5. leave named weakness visible where migration still remains incomplete
+# freeze `ha`
+# densify `ka`
+# collapse `ba`
+# patch the child laws that govern surviving special keys
+# leave named weakness visible where migration still remains incomplete
 
 The child law for `file-path` follows next because `file-path` carries the most immediate agreement pressure between metadata and route.
 

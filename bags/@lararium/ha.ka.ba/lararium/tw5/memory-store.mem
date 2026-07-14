@@ -27,11 +27,11 @@ to emit bag-tagged change events through the projection bus.
 
 Two callers exist:
 
-1. ''Tests and fixtures.'' Direct construction with optional `bagId`. Test
+# ''Tests and fixtures.'' Direct construction with optional `bagId`. Test
    helpers `_seed(record)` and `_snapshot()` give synchronous access without
    triggering subscribers.
 
-2. **The `@temp` slot in every booted island.** Constructed by
+# **The `@temp` slot in every booted island.** Constructed by
    `buildIslandRecipe()` at the top of the cascade (highest priority).
    Comes up empty on every island boot; tears down on demote. No CRDT,
    no wire, no disk.

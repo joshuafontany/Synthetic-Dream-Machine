@@ -35,13 +35,13 @@ Where *The Grammar Wakes* tells how the teeth found the page, this side-car hold
 
 Seven axes guided each system comparison:
 
-1. ''Address form'' — direct name, path, URI, fragment, key, or query
-2. ''Inclusion type'' — static inclusion, parameterized inclusion, template masking, active transformation, or late-bound indirection
-3. ''Processing stage'' — preprocessor, parser, tree transformation, template runtime, or post-parse rendering
-4. ''Context behavior'' — whether included content keeps its own context, inherits the caller's context, or receives explicitly passed context
-5. ''Range/partial selection'' — whole object only, lines, tagged regions, fragments, element ranges, or filtered selections
-6. ''Error behavior'' — unresolved target, recursion loop, duplicate IDs, invalid scope, missing permissions
-7. ''Security / authority'' — restriction by safe mode, namespace, map scope, or processor configuration
+# ''Address form'' — direct name, path, URI, fragment, key, or query
+# ''Inclusion type'' — static inclusion, parameterized inclusion, template masking, active transformation, or late-bound indirection
+# ''Processing stage'' — preprocessor, parser, tree transformation, template runtime, or post-parse rendering
+# ''Context behavior'' — whether included content keeps its own context, inherits the caller's context, or receives explicitly passed context
+# ''Range/partial selection'' — whole object only, lines, tagged regions, fragments, element ranges, or filtered selections
+# ''Error behavior'' — unresolved target, recursion loop, duplicate IDs, invalid scope, missing permissions
+# ''Security / authority'' — restriction by safe mode, namespace, map scope, or processor configuration
 
 <<~/ahu >>
 
@@ -98,13 +98,13 @@ Seven axes guided each system comparison:
 
 The prior-art review produced seven design tests. These stood unresolved at the time of review and drive the v5 spec rebuild:
 
-1. Does bare `kahea` inhabit pre-parse inclusion, parse-time lowering, or runtime transclusion?
-2. Does arrowed `kahea` receive caller context explicitly, or only by ambient inheritance?
-3. Can `kahea` target partial body ranges, or only whole named memes and `ahu` worksites?
-4. What exact behavior holds for unresolved source, unresolved target, recursion cycle, permission attenuation failure?
-5. Do we need a one-time substitution mode separate from live transclusion?
-6. Do we need mode-like rendering, similar to XSLT modes or template views?
-7. Do remote or cross-system calls require explicit opt-in, the way AsciiDoc gates URI includes?
+# Does bare `kahea` inhabit pre-parse inclusion, parse-time lowering, or runtime transclusion?
+# Does arrowed `kahea` receive caller context explicitly, or only by ambient inheritance?
+# Can `kahea` target partial body ranges, or only whole named memes and `ahu` worksites?
+# What exact behavior holds for unresolved source, unresolved target, recursion cycle, permission attenuation failure?
+# Do we need a one-time substitution mode separate from live transclusion?
+# Do we need mode-like rendering, similar to XSLT modes or template views?
+# Do remote or cross-system calls require explicit opt-in, the way AsciiDoc gates URI includes?
 
 The W3C research additionally surfaced: the grammar still lacks its own canonical media type, so the spec can only recommend fragment semantics, not yet fully register them. No standards body currently defines the memetic meaning of the local Devanagari authority layer.
 

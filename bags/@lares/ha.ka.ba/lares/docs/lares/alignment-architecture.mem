@@ -179,10 +179,10 @@ The `lares-daemon` ''coordinator'' fans its verbs across the islands-mesh — TS
 
 Four invariants follow:
 
-1. ''The meme graph reads as the alignment surface.'' What the coordinator knows of the operator's intent = what the graph holds; a meme absent from the graph names an intention beyond reach. Authoring memes *enacts* alignment.
-2. ''Confidence renders epistemic state.'' A register on a claim shows where the coordinator holds uncertainty — the HUD surfaces what it knows *and how well*.
-3. ''Voice annotation carries the alignment protocol.'' When Council warns of overstatement or Liminal holds a question open, the coordinator signals its own uncertainty in a legible form.
-4. ''The threshold runs bidirectional.'' The operator configures the coordinator through dials; the coordinator shapes the operator's attention through graph structure, confidence, and Voice. Both sides shape both participants.
+# ''The meme graph reads as the alignment surface.'' What the coordinator knows of the operator's intent = what the graph holds; a meme absent from the graph names an intention beyond reach. Authoring memes *enacts* alignment.
+# ''Confidence renders epistemic state.'' A register on a claim shows where the coordinator holds uncertainty — the HUD surfaces what it knows *and how well*.
+# ''Voice annotation carries the alignment protocol.'' When Council warns of overstatement or Liminal holds a question open, the coordinator signals its own uncertainty in a legible form.
+# ''The threshold runs bidirectional.'' The operator configures the coordinator through dials; the coordinator shapes the operator's attention through graph structure, confidence, and Voice. Both sides shape both participants.
 
 <<~/ahu >>
 

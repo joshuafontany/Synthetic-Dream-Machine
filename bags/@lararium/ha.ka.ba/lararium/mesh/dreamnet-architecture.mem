@@ -167,8 +167,8 @@ One human carries ''many Handles'' (personaGroups on the WHO axis) crossed with 
 
 The two axes stay orthogonal, yet they touch at exactly two points:
 
-1. ''The vessel.'' It roots a `vessel-key` (bottom of the SOCIAL axis) *and* anchors a transport endpoint (on the INFRA axis). One entity, two memberships.
-2. ''The invite.'' An invited user gains ''read'' via cabal membership (SOCIAL) *and* ''reach'' via the inviter's nexus relays (INFRA). The invite couples the axes without fusing them — read and carriage arrive through separate gates.
+# ''The vessel.'' It roots a `vessel-key` (bottom of the SOCIAL axis) *and* anchors a transport endpoint (on the INFRA axis). One entity, two memberships.
+# ''The invite.'' An invited user gains ''read'' via cabal membership (SOCIAL) *and* ''reach'' via the inviter's nexus relays (INFRA). The invite couples the axes without fusing them — read and carriage arrive through separate gates.
 
 The law of the seam: ''membership decides read; the nexus decides reach.'' A cabal's members may ride *any* nexus's leylines; carriage never implies sight, and sight never implies carriage.
 

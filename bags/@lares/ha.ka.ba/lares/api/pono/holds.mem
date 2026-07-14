@@ -59,13 +59,13 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 !! Five clauses hold the law
 
-1. ''Holds carries composition, refuses essence.'' `<<~holds … x … >>` places x
+# ''Holds carries composition, refuses essence.'' `<<~holds … x … >>` places x
    into a carrier's stack; the carrier wears x, the carrier never turns
    into x. A line that reads `X holds Y` where prose fused `X ${copula} Y`
    clears the ward only once Y resolves to a carrier of its own. The held
    thing speaks; the edge keeps silent.
 
-2. ''A holding resolves to a carrier, never to an adjective.'' Every
+# ''A holding resolves to a carrier, never to an adjective.'' Every
    `<<~holds x >>` demands x name a component meme — a thing holding its own
    definition. A bare quality (`<<~holds hot >>`, `<<~holds stable >>`) smuggles the
    dead water back through a quiet door; refuse it. A quality enters a
@@ -75,20 +75,20 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    the one berth a quality keeps — red annotates the holding, never
    black-asserts it, and the aside stays out of the carrier's canonical bytes.
 
-3. ''A bare holding reads fertile.'' A `<<~holds x >>` whose definition meme has
+# ''A bare holding reads fertile.'' A `<<~holds x >>` whose definition meme has
    not yet landed stands ''declared-unresolved'' — lawful, promotable, no
    error sounds (the rating ladder governs, per has-stack §4). An absent
    holding reads open-world: the carrier knows nothing of x yet, the
    carrier never pronounces x false. The Arcana holds no vector.
 
-4. ''Tables fall to holds by one rule.'' A header-and-rows table rewrites
+# ''Tables fall to holds by one rule.'' A header-and-rows table rewrites
    mechanically: the header vows the families (the column grain); each body
    row authors one carrier, adding one `family/cell` to its `<<~holds … >>` set
    per column it fills. A row skips the columns it leaves empty — open-world omission,
    never a null. The boot's carrier-tables fall to this rule untouched by
    hand; `meme` governs the copy-shape that results.
 
-5. ''Ordered runs, crossings, and grades each ride their own verb.'' `holds`
+# ''Ordered runs, crossings, and grades each ride their own verb.'' `holds`
    governs the *set* — composition, order-free, the held things unranked;
    `meme` serializes it one canonical way — NFC, deduped, sorted by family
    then member — so the same set lands the same bytes.

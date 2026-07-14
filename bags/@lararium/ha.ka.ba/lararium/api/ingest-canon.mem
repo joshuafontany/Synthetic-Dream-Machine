@@ -138,20 +138,20 @@ Plugin, NOT a fork — squarely the welcomed path (the official Markdown plugin 
 alternate syntax shipped as a plugin). Five findings, all sourced (talk.tiddlywiki, Jermolene/TW5,
 linonetwo's tw-react + TidGi):
 
-1. ''Registration is ALREADY canonical.'' `memetic-parser.ts` subclasses WikiParser for content-type
+# ''Registration is ALREADY canonical.'' `memetic-parser.ts` subclasses WikiParser for content-type
    `text/x-memetic-wikitext` (deny-list now EMPTY → native rule flow unchanged); wikirules load via the
    stock `module-type: wikirule` path (`createClassesFromModules`). `<<~` claims by DISJOINT MATCH —
    TW5's `macrocallinline` skips it (`~` isn't a legal macro-name start), so no ordering-luck, no fork.
    We sidestep TW5's global token-collision pitfall TWO ways: our own content-type AND the non-colliding
    `<<~` namespace. Keep both. (One live test: confirm no `<<~ WORD …>>` validates as a macro call.)
 
-2. ''SERIALIZATION RESOLVED — store the parse TREE as DATA, never the parser/widgets.'' TW5's
+# ''SERIALIZATION RESOLVED — store the parse TREE as DATA, never the parser/widgets.'' TW5's
    `wiki.parseText()` returns a Parser INSTANCE (holds a live `wiki` ref — NOT serializable); its `.tree`
    is plain nested objects (`{type,tag,attributes,children,text,start,end}`, JSON primitives only) →
    round-trips cleanly. So `lar_ast` = the extracted `.tree` (drop the parser wrapper). Widget refs/
    functions appear only at the later `makeWidget()` stage — never store those.
 
-3. ''RE-HYDRATION (the VM-island model).'' Rebuild the widget tree NATIVELY in the island —
+# ''RE-HYDRATION (the VM-island model).'' Rebuild the widget tree NATIVELY in the island —
    `$tw.wiki.makeTranscludeWidget(title, {document: $tw.fakeDocument, importPageMacros:true})` →
    `node.render(container)` → `node.refresh()` (the canon `core/modules/startup/render.js` path; fakedom
    partial → LinkedOM the node-side drop-in). linonetwo's prior art confirms it: tw-react LIVE-MOUNTS
@@ -159,7 +159,7 @@ linonetwo's tw-react + TidGi):
    `worker_threads` workspace with an IPC syncadaptor (= our VM-in-worker islands). Serialize DATA,
    rehydrate WIDGETS natively — never serialize widgets.
 
-4. ''GRADIENT-RENDER — the gap is real + small.'' Today the wikirule hard-matches: unrecognized/partial
+# ''GRADIENT-RENDER — the gap is real + small.'' Today the wikirule hard-matches: unrecognized/partial
    → `{type:"text", text:verbatim}` (lar-sigil.ts:132,157, the `__literal__` path) — survives as raw
    text, never graded. TW5 is fail-soft (unmatched→plaintext, unknown-widget→visible "Undefined
    widget", `$error`→`tc-error` span) BUT has NO per-widget try/catch (a JS throw isn't contained). THE
@@ -169,7 +169,7 @@ linonetwo's tw-react + TidGi):
    best-effort confidence-graded (`tc-error`-styled) span. Same gradient, both surfaces. (Finish the
    `lar-sigil-pragma.ts` stub too.)
 
-5. ''PONO ENGAGEMENT.'' Ship as a plugin (`$:/plugins/<pub>/<name>`) on our own content-type + `<<~`
+# ''PONO ENGAGEMENT.'' Ship as a plugin (`$:/plugins/<pub>/<name>`) on our own content-type + `<<~`
    namespace; sign the UnaMesa CLA; announce in the talk.tiddlywiki Plugins category; NO `$:/core`
    wikitext edits. Jeremy's ethos welcomes plugin extension. Optional later: `module-type:
    wikiruleserializer` for lossless round-trip.

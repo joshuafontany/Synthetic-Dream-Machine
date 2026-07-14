@@ -168,9 +168,9 @@ Lararium's answer: a filter expression that returns the self-describing layer.
 This is the operational enforcement of P1–P4 combined.
 
 ''Test:'' Can this logic be expressed as:
-1. A self-contained tiddler with `type: application/javascript` or `text/x-memetic-wikitext`?
-2. Accessible via `filterTiddlers()` or `renderTiddler()`?
-3. Updatable at runtime via `MemeSyncAdaptor.onChangeset()`?
+# A self-contained tiddler with `type: application/javascript` or `text/x-memetic-wikitext`?
+# Accessible via `filterTiddlers()` or `renderTiddler()`?
+# Updatable at runtime via `MemeSyncAdaptor.onChangeset()`?
 
 If yes to all three: it MUST move to a meme. The TypeScript file becomes the
 fallback only (Heleuma Stage 4: meme is authoritative, TS is fallback).

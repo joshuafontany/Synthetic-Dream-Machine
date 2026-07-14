@@ -404,9 +404,9 @@ It:
 
 Feeding the shrine with food, drink, incense, mana-rich offerings, or proper shrine gifts grants one compact benefit for the session:
 
-1. ''Stabilize'' local ley-line mana.
-2. ''Reduce Power mana cost'' by 1, minimum 1, for matching affinities nearby.
-3. ''Boost effective casting Level'' by 1d6 for the session, allowing safer high-cost Power use.
+# ''Stabilize'' local ley-line mana.
+# ''Reduce Power mana cost'' by 1, minimum 1, for matching affinities nearby.
+# ''Boost effective casting Level'' by 1d6 for the session, allowing safer high-cost Power use.
 
 Node affinities: `[spore] [biomancy] [dream]`
 
@@ -458,13 +458,13 @@ Other player-side clusters cover long-range scouting, infiltration, ship command
 
 Use this at the table before opening deeper rules.
 
-1. ''Read the threshold.'' What place, spirit, signal, taboo, or hazard governs the scene?
-2. ''Set the line.'' Mark safe passage, ward boundary, silk anchor, retreat route, or offering point.
-3. ''Send a small helper.'' Ephyra scouts, ofuda marks, bells listen, silk tests tension.
-4. ''Bind or veil.'' Use silk, glamour, alchemy, shrine etiquette, or DreamNet relay geometry.
-5. ''Ask the household.'' Ichi reads dream-signal; shrine reads soil and ley-current.
-6. ''Spend a cost.'' Time, offering, visibility, battery, gear, or risk.
-7. ''Extract.'' Retreat counts as success when the company returns with map, leverage, salvage, or secret.
+# ''Read the threshold.'' What place, spirit, signal, taboo, or hazard governs the scene?
+# ''Set the line.'' Mark safe passage, ward boundary, silk anchor, retreat route, or offering point.
+# ''Send a small helper.'' Ephyra scouts, ofuda marks, bells listen, silk tests tension.
+# ''Bind or veil.'' Use silk, glamour, alchemy, shrine etiquette, or DreamNet relay geometry.
+# ''Ask the household.'' Ichi reads dream-signal; shrine reads soil and ley-current.
+# ''Spend a cost.'' Time, offering, visibility, battery, gear, or risk.
+# ''Extract.'' Retreat counts as success when the company returns with map, leverage, salvage, or secret.
 
 <<~/ahu >>
 

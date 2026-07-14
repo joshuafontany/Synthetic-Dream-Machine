@@ -248,10 +248,10 @@ Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope> >>` bl
 
 A renderer MUST maintain a render stack per chain. When it evaluates a transclusion (`aka`/`kahea`):
 
-1. target already on the stack → ''recursion'';
-2. stack depth ≥ 8 (default) → ''depth exceeded'';
-3. either case → emit a visible break stub `[⬡ ∞ lar:///uri]`;
-4. otherwise → push, render, pop.
+# target already on the stack → ''recursion'';
+# stack depth ≥ 8 (default) → ''depth exceeded'';
+# either case → emit a visible break stub `[⬡ ∞ lar:///uri]`;
+# otherwise → push, render, pop.
 
 The compile-time DAG guard (boot-closure cycles) and the render-time stack guard run ''orthogonally''; a processor MUST hold both. A break stub MUST stay visible, non-crashing, and traceable to the URI that triggered it.
 

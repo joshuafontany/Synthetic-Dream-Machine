@@ -44,9 +44,9 @@ On the DreamNet, any entity that holds its own CRDT state, owns its own timing, 
 
 Three conditions for `ea`:
 
-1. ''Own state'' — the island holds a CRDT doc set/stack (Automerge or equivalent) it governs directly. It never derives state from oracle deltas pushed by another party.
-2. ''Own timing'' — the island owns its drain loop: rAF (browser), setInterval (Node), or equivalent. Nothing external clocks it.
-3. ''Own truth'' — the island's outputs derive from its own CRDT truth. Incoming sync carries peer traffic only — no command authority crosses that channel.
+# ''Own state'' — the island holds a CRDT doc set/stack (Automerge or equivalent) it governs directly. It never derives state from oracle deltas pushed by another party.
+# ''Own timing'' — the island owns its drain loop: rAF (browser), setInterval (Node), or equivalent. Nothing external clocks it.
+# ''Own truth'' — the island's outputs derive from its own CRDT truth. Incoming sync carries peer traffic only — no command authority crosses that channel.
 
 When all three hold, the island may emit `ea` — the sovereignty declaration that signals readiness to the wider mesh.
 

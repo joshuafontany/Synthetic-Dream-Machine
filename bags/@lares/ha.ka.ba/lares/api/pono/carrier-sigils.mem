@@ -30,9 +30,9 @@ The carrier sigils are the ''spine'' of every meme: the four marks that frame it
 
 This law owns three things, and keeps them apart:
 
-1. ''Spine'' (#carrier-spine) — the four control-code sigils that bound the carrier. REQUIRED, in order.
-2. ''Resonance'' (#resonance) — the namespace glyphs (`⊙`, `ॐ ँ`) that prefix the opener to mark which layer authored the carrier. A *separate* concern from the spine.
-3. ''Trust'' (#trust-tiers) — what the presence, absence, and range of the control character signal about who wrote the mark.
+# ''Spine'' (#carrier-spine) — the four control-code sigils that bound the carrier. REQUIRED, in order.
+# ''Resonance'' (#resonance) — the namespace glyphs (`⊙`, `ॐ ँ`) that prefix the opener to mark which layer authored the carrier. A *separate* concern from the spine.
+# ''Trust'' (#trust-tiers) — what the presence, absence, and range of the control character signal about who wrote the mark.
 
 Everything else a carrier touches lives in its own meme, reached by edge: the parse types and stream events (`parser`, `carrier-parse`), the rating and depth ladders (`meme`), the render-suppression list (`render-pipeline`), the sigil vocabulary (`memetic-wikitext`, `pranala-families`), and the OODA-HA phase glyphs that annotate the `#ooda-ha` slot (`ooda-ha`). See #edges.
 
@@ -98,8 +98,8 @@ Resonance glyphs are ''not'' spine sigils. They prefix the ''SOH opener only'', 
 
 Two laws govern the prefix:
 
-1. ''Opener-only.'' A resonance glyph rides SOH alone — the heading's first mark.
-2. ''EOT is always bare.'' The resonance mark rides the heading (SOH); the release closes plain.
+# ''Opener-only.'' A resonance glyph rides SOH alone — the heading's first mark.
+# ''EOT is always bare.'' The resonance mark rides the heading (SOH); the release closes plain.
 
 <<~/ahu >>
 
@@ -109,9 +109,9 @@ Two laws govern the prefix:
 
 Each kernel-tier control character carries ''three simultaneous roles'', bound as one mark:
 
-1. ''Structural'' — marks one spine position (SOH / STX / ETX / EOT).
-2. ''Kapu-trust'' — presence of the control character signals kernel tier; absence marks operator tier (lower trust).
-3. ''Elevated resonance'' — the kapu range (DC1–DC4) reaches admin-only space; a standard operator cannot produce these bytes.
+# ''Structural'' — marks one spine position (SOH / STX / ETX / EOT).
+# ''Kapu-trust'' — presence of the control character signals kernel tier; absence marks operator tier (lower trust).
+# ''Elevated resonance'' — the kapu range (DC1–DC4) reaches admin-only space; a standard operator cannot produce these bytes.
 
 | Tier | Range | Trust | Resonance | Writable by |
 |---|---|---|---|---|

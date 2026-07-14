@@ -56,10 +56,10 @@ not a sub-graph inside the actor containment tree.
 ''Source:'' control-family pranala edges with `role:owns` parsed directly from the entry carrier (AGENTS).
 
 ''Algorithm:''
-1. Parse `control`/`owns` pranala edges from `AGENTS`.
-2. Resolve each `to_uri` through the resolver.
-3. Read each carrier record (shape, metadata, pranala edges).
-4. Produce closure entries in parse order (no reordering — depth 0 = entry, depth 1 = direct owns, depth 2 = sub-graph children).
+# Parse `control`/`owns` pranala edges from `AGENTS`.
+# Resolve each `to_uri` through the resolver.
+# Read each carrier record (shape, metadata, pranala edges).
+# Produce closure entries in parse order (no reordering — depth 0 = entry, depth 1 = direct owns, depth 2 = sub-graph children).
 
 ''Depth assignment:'' BFS hop count from entry over `control/owns` edges only.
 
@@ -108,10 +108,10 @@ Walk(entry_uri):
 ```
 
 ''Topological sort (Kahn's algorithm)'' applied after DFS to produce stable ordering:
-1. Build in-degree map over the control-reachable set.
-2. Seed queue with zero-in-degree nodes (entry first).
-3. Emit each node; decrement in-degrees of successors; enqueue newly-zero nodes.
-4. Any node remaining after the queue drains indicates a cycle (caught by DFS coloring first).
+# Build in-degree map over the control-reachable set.
+# Seed queue with zero-in-degree nodes (entry first).
+# Emit each node; decrement in-degrees of successors; enqueue newly-zero nodes.
+# Any node remaining after the queue drains indicates a cycle (caught by DFS coloring first).
 
 ''Depth assignment:'' BFS hop count from entry URI. Entry = 0. Each hop increments depth.
 

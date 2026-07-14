@@ -55,11 +55,11 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
 Five buckets mark the structural rating of a carrier (law-of-5s):
 
-1. ''Noise'' — raw signal, no stable machine-usable structure.
-2. ''Data'' — structured language usable without memetic wrappers.
-3. ''Meme'' — data with memetic wrappers, traveling as a contextual meaning-unit.
-4. ''Ano'' — meme wearing one or more ''defined'' has-stack components; loci itself stands as the mandatory first, held by title. (Hawaiian: kind, type, nature)
-5. ''Kapu'' — above base namespace; wears the kapu grant (operator-minted); kernel/sacred tier. (Hawaiian: set apart, restricted)
+# ''Noise'' — raw signal, no stable machine-usable structure.
+# ''Data'' — structured language usable without memetic wrappers.
+# ''Meme'' — data with memetic wrappers, traveling as a contextual meaning-unit.
+# ''Ano'' — meme wearing one or more ''defined'' has-stack components; loci itself stands as the mandatory first, held by title. (Hawaiian: kind, type, nature)
+# ''Kapu'' — above base namespace; wears the kapu grant (operator-minted); kernel/sacred tier. (Hawaiian: set apart, restricted)
 
 Rating derives from structure — a predicate run against the carrier, never a class consulted.
 Promotion to lares/ canon (live session → branch commit → hostless URI) follows a separate ceremony.
@@ -157,8 +157,8 @@ MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`b
 
 A `lar:` URI counts as stable when:
 
-1. `register` falls in `CS` or `C`
-2. The `lar:` URI in the document opener stays coherent with the meme's carrier identity and derived filepath through migration and promotion
+# `register` falls in `CS` or `C`
+# The `lar:` URI in the document opener stays coherent with the meme's carrier identity and derived filepath through migration and promotion
 
 A stable `lar:` URI stays ''immutable''.
 Its primary carrier MUST remain at the derived filepath.
@@ -178,10 +178,10 @@ Routing convention reads as explicit when an agent can point to the surfaces jus
 
 Convention surfaces:
 
-1. `lar:` URI in the document opener
-2. `#iam` rating cluster and `register`
-3. derivation algorithm, relative-name qualification, and file-path convention (this file)
-4. canon-MOVE criteria (`lar:///ha.ka.ba/lares/api/pono/loci/iam`)
+# `lar:` URI in the document opener
+# `#iam` rating cluster and `register`
+# derivation algorithm, relative-name qualification, and file-path convention (this file)
+# canon-MOVE criteria (`lar:///ha.ka.ba/lares/api/pono/loci/iam`)
 
 Convention fails when:
 

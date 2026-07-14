@@ -94,9 +94,9 @@ No naked payloads. The version field enables forward-compatible evolution; lock 
 
 TW5 and the reaction engine occupy the ''same'' Worker thread (co-located, synchronous reads) precisely to keep the StructuredClone boundary off the hot path. The engine reads tiddlers via `filterTiddlers()` — a synchronous in-memory call, no `postMessage`, no clone. The boundary applies only to three bounded message types:
 
-1. ''Main → Worker'' — changeset notification: `{ schema_version: 1, type: "changeset", changeset: Uint8Array }`
-2. ''Worker → Main'' — event emission: `{ schema_version: 1, type: "event", listenable: string, payload: {...} }`
-3. ''Main → Worker'' — tier signal: `{ schema_version: 1, type: "teardown" | "hoʻowela" | "hoʻoanu" }`
+# ''Main → Worker'' — changeset notification: `{ schema_version: 1, type: "changeset", changeset: Uint8Array }`
+# ''Worker → Main'' — event emission: `{ schema_version: 1, type: "event", listenable: string, payload: {...} }`
+# ''Main → Worker'' — tier signal: `{ schema_version: 1, type: "teardown" | "hoʻowela" | "hoʻoanu" }`
 *** `hoʻowela` ("to heat") — resume a cooled slot to **`wela`** (live, reacting); resume = spawn + `ea` handshake.
 *** `hoʻoanu` ("to cool") — tear a slot down to **`anu`** (cold). Subscription teardown (`KumuCancelable.cancel()`) MUST precede a cool.
 *** The thermal axis runs **two-state** (`wela` / `anu`) with an orthogonal pin-flag (pinned = exempt from cooling); the transition verbs take the causative `hoʻo-` prefix. No warm middle tier exists — see `lar:///ha.ka.ba/lararium/api/residency-tiers#third-tier-gate`.

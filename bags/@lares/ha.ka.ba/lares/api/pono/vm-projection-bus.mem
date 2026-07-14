@@ -130,10 +130,10 @@ TW5Engine._larKukaliHook = (uri, trigger) => {
 ```
 
 Problems with this pattern:
-1. Global mutable state — breaks with multiple VMs in the pool
-2. Reverse dependency direction — TW5Engine references ReactionEngine type
-3. Not isomorphic — browser and node had different hook installation sites
-4. Non-cancellable — no teardown path; leaked on VM disposal
+# Global mutable state — breaks with multiple VMs in the pool
+# Reverse dependency direction — TW5Engine references ReactionEngine type
+# Not isomorphic — browser and node had different hook installation sites
+# Non-cancellable — no teardown path; leaked on VM disposal
 
 The pattern:
 

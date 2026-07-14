@@ -139,13 +139,13 @@ Common patterns:
 
 !! Recommended Compiler Order
 
-1. validate `meme` copy-shape
-2. validate `invariant` pressure/cacheability when declared
-3. extract `implements` interface bundle
-4. resolve `loci` and parent/child tree
-5. parse memetic-wikitext primitives
-6. lower `pranala` edges
-7. lower AST → execution → render
+# validate `meme` copy-shape
+# validate `invariant` pressure/cacheability when declared
+# extract `implements` interface bundle
+# resolve `loci` and parent/child tree
+# parse memetic-wikitext primitives
+# lower `pranala` edges
+# lower AST → execution → render
 
 Carrier truth stays ahead of syntax swell.
 

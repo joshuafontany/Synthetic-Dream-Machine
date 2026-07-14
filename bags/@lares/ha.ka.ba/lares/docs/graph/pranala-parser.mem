@@ -68,12 +68,12 @@ BLOCK_RE = re.compile(
 ```
 
 ''Extraction sequence:''
-1. Match the opening sigil and capture fragment-id, FROM socket, TO expression.
-2. Scan the body for a TOML fence (` ```toml ... ``` `).
-3. Parse the TOML; extract `family`, `lifecycle`, `role`, `traversal`, `propagation`, `label`, `payload`, `dir`.
-4. Resolve the TO expression to a full `lar:///` URI.
-5. Resolve FROM via the `? ->` rule (see `#question-mark-resolution`).
-6. Build `PranalaEdge` with normalized fields.
+# Match the opening sigil and capture fragment-id, FROM socket, TO expression.
+# Scan the body for a TOML fence (` ```toml ... ``` `).
+# Parse the TOML; extract `family`, `lifecycle`, `role`, `traversal`, `propagation`, `label`, `payload`, `dir`.
+# Resolve the TO expression to a full `lar:///` URI.
+# Resolve FROM via the `? ->` rule (see `#question-mark-resolution`).
+# Build `PranalaEdge` with normalized fields.
 
 ''TOML fence extraction:''
 

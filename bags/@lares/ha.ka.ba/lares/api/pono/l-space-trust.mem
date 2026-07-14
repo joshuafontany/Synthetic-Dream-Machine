@@ -61,12 +61,12 @@ Operator agency matters; persistence and placement still matter.
 
 Precedence pressure reads from most stable to most local:
 
-1. hostless invariant memes
-2. hostless capability and control-panel memes
-3. hostless data, docs, and explanatory memes
-4. branch-local implementation artifacts and data memes
-5. hostful live exchange records and data memes
-6. generated trajectory records and data memes
+# hostless invariant memes
+# hostless capability and control-panel memes
+# hostless data, docs, and explanatory memes
+# branch-local implementation artifacts and data memes
+# hostful live exchange records and data memes
+# generated trajectory records and data memes
 
 This list expresses default trust pressure, not an absolute metaphysical ranking.
 Explicit operator-mediated promotion MAY move content upward by creating or revising the appropriate hostless meme.

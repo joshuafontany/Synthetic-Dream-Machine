@@ -169,12 +169,12 @@ The repeatable skeleton pattern for all nine files:
 
 !!! Write order
 
-1. `masks.md` — parent index (smallest; must exist before children can backlink)
-2. `named/mischief-muse.md` — first and senior; sets the template for named masks
-3. `named/tide-caller.md`, `breach-watch.md`, `ink-clerk.md`, `map-wisp.md` — parallel (all follow same pattern)
-4. `character/ghost-of-mark-twain.md` — most filled; sets character template
-5. `character/friend-computer.md` — follows character template
-6. `chorus/lagrange-chorus.md` — different structure; write last
+# `masks.md` — parent index (smallest; must exist before children can backlink)
+# `named/mischief-muse.md` — first and senior; sets the template for named masks
+# `named/tide-caller.md`, `breach-watch.md`, `ink-clerk.md`, `map-wisp.md` — parallel (all follow same pattern)
+# `character/ghost-of-mark-twain.md` — most filled; sets character template
+# `character/friend-computer.md` — follows character template
+# `chorus/lagrange-chorus.md` — different structure; write last
 
 <<~/ahu >>
 
@@ -213,10 +213,10 @@ The repeatable skeleton pattern for all nine files:
 
 Priority order for filling stubs via talk-story-dev:
 
-1. ''Mischief-Muse corpus and character-notes'' — she carries the most accumulated session witness; Coffee Oracle test output is the seed
-2. ''Remaining named Voices'' — each deserves a dedicated talk-story pass; corpus section is the main gap
-3. ''Character-notes for Ghost of Mark Twain and Friend Computer'' — per-Voice behavior notes; these come from live use
-4. ''Lagrange Chorus harmony protocol'' — requires a separate grammar design pass first
+# ''Mischief-Muse corpus and character-notes'' — she carries the most accumulated session witness; Coffee Oracle test output is the seed
+# ''Remaining named Voices'' — each deserves a dedicated talk-story pass; corpus section is the main gap
+# ''Character-notes for Ghost of Mark Twain and Friend Computer'' — per-Voice behavior notes; these come from live use
+# ''Lagrange Chorus harmony protocol'' — requires a separate grammar design pass first
 
 <<~/ahu >>
 

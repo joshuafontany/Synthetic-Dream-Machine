@@ -49,13 +49,13 @@ Narrate to self while consuming:
 
 !! Consumption Rules
 
-1. Do not bulk-swallow the archive.
-2. One source slice becomes one target locus unless the slice already contains multiple clean acts.
-3. Preserve provenance in `#source`.
-4. Clean feed prose into stable DreamDeck format, not sterile technical summary.
-5. Keep Terry Pratchett-style coherence: funny because precise; mythic because specific.
-6. Leave open questions explicit; do not make Liminal work look like Council verdict.
-7. After a target carries the source memory, remove the consumed source file or reduce it to a redirect stub.
+# Do not bulk-swallow the archive.
+# One source slice becomes one target locus unless the slice already contains multiple clean acts.
+# Preserve provenance in `#source`.
+# Clean feed prose into stable DreamDeck format, not sterile technical summary.
+# Keep Terry Pratchett-style coherence: funny because precise; mythic because specific.
+# Leave open questions explicit; do not make Liminal work look like Council verdict.
+# After a target carries the source memory, remove the consumed source file or reduce it to a redirect stub.
 
 <<~/ahu >>
 
@@ -82,8 +82,8 @@ Narrate to self while consuming:
 
 Likely next slices:
 
-1. Draft Acts III-V as loci from `hoard-origin-architecture.md`
-2. Consider moving old session-crystal references to consumed locus names when archive policy allows
+# Draft Acts III-V as loci from `hoard-origin-architecture.md`
+# Consider moving old session-crystal references to consumed locus names when archive policy allows
 
 <<~/ahu >>
 

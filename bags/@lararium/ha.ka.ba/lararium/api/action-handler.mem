@@ -63,25 +63,25 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''neve
 
 !! Handler Law
 
-1. ''No mutation without audit.'' `executeAction(action, composite)` runs inside
+# ''No mutation without audit.'' `executeAction(action, composite)` runs inside
    `withEffectRecord(action, composite, …)` — mutate-then-log order, so a failed
    mutation produces no effect record. The archival audit (Sprint 4) is not
    optional decoration; it is the gate.
-2. ''Cap before mutate.'' Every verb verifies `cap("admin", toBag)` before any
+# ''Cap before mutate.'' Every verb verifies `cap("admin", toBag)` before any
    write. ''MOVE additionally'' verifies `cap("admin", fromBag)` — deaccession
    authority over the source. A denied cap throws before `withEffectRecord` runs,
    so a gated verb leaves zero effect records.
-3. ''Change-id preservation'' (Anti-pattern #1 defense). ADD / COPY / MOVE carry
+# ''Change-id preservation'' (Anti-pattern #1 defense). ADD / COPY / MOVE carry
    the source record's `change-id` into the destination Manifestation — the Work
    keeps its causal identity across bags.
-4. ''Kāpae or retract, never silent delete'' (Anti-pattern #3 defense). CLEAR /
+# ''Kāpae or retract, never silent delete'' (Anti-pattern #3 defense). CLEAR /
    DROP raise a ''kāpae'' tombstone (shadows lower bags — resurrection-prevention);
    MOVE ''retracts'' its source to *absent* (hard-remove → falls through, so the
    canonical copy beneath surfaces — never a kāpae, else promotion `@working → canon`
    would shadow its own target). `resolveAll` reports live presence; `listKapaeBags`
    surfaces which bags explicitly hide a title. (the toggleable shadow-vs-fall-through
    cut: [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]])
-5. ''Parse-or-reject.'' `parseResidencyAction(invocation)` validates verb
+# ''Parse-or-reject.'' `parseResidencyAction(invocation)` validates verb
    membership + per-verb required args; malformed input throws before dispatch.
 
 <<~/ahu >>

@@ -43,11 +43,11 @@ Boundary projection (lineage + possible interop, NOT internal canon — `project
 * verb ↔ UCAN ''Invocation'' · outcome ↔ ''Receipt'' · the work-unit ↔ ''Task'' (identity from the content-address of `{subject, command, args, nonce}`). Projected only at the peer boundary — the way Kowloon=web2.5 sits behind the causal-island seam. The house speaks its grammar; the wire may speak UCAN.
 
 The cuts that pull this surface forward (each its own loop, none forced now):
-1. ''Content-addressed identity'' — derive the requestId from the hash of `{subject, command, args, nonce}` (Automerge change-hash, our native content-address), not a UUID. The durable-idempotency keystone (`lar:///verb.replayed.dedups`) then keys off content, and cross-peer memoization falls out free.
-2. ''Forward-effects on the outcome'' — an outcome that enqueues successor verb-tiddlers (`fx: {fork, join}`): fork = concurrent successors, join = continuation. The outcome becomes a dataflow node, not a terminal record.
-3. ''Promise pipelining'' — a verb's args referencing a not-yet-existing result by CID (`await/ok | await/error | await/ptr`); whole dependent pipelines authored before results land.
-4. ''Determinism / managed-effect boundary'' — verb bodies stay deterministic so any peer re-verifies by re-running; non-determinism (disk, net, time, sends) hides behind a managed-effect descriptor that returns its own receipt. This makes "signed receipt = verifiable outcome" true rather than hoped.
-5. ''Invoker / executor split + arg-policy as the execution gate'' — composes with the verify-then-delegate decision (`project_verification_placement`).
+# ''Content-addressed identity'' — derive the requestId from the hash of `{subject, command, args, nonce}` (Automerge change-hash, our native content-address), not a UUID. The durable-idempotency keystone (`lar:///verb.replayed.dedups`) then keys off content, and cross-peer memoization falls out free.
+# ''Forward-effects on the outcome'' — an outcome that enqueues successor verb-tiddlers (`fx: {fork, join}`): fork = concurrent successors, join = continuation. The outcome becomes a dataflow node, not a terminal record.
+# ''Promise pipelining'' — a verb's args referencing a not-yet-existing result by CID (`await/ok | await/error | await/ptr`); whole dependent pipelines authored before results land.
+# ''Determinism / managed-effect boundary'' — verb bodies stay deterministic so any peer re-verifies by re-running; non-determinism (disk, net, time, sends) hides behind a managed-effect descriptor that returns its own receipt. This makes "signed receipt = verifiable outcome" true rather than hoped.
+# ''Invoker / executor split + arg-policy as the execution gate'' — composes with the verify-then-delegate decision (`project_verification_placement`).
 
 Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<event-id>` (the indelible effect-record ledger), distinct from the per-request receipt at `@daemon/outcomes/`. The web2 word "log" left the surface 2026-06-07.
 

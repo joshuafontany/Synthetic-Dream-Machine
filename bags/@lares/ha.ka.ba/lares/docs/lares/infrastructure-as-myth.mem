@@ -310,10 +310,10 @@ Trust and authority docs should describe not only who may act, but how authority
 
 When drafting new Lares material, ask:
 
-1. What operational burden does this symbolic term carry?
-2. What behavior becomes easier to remember or enforce because of it?
-3. Does this improve transmission across users, agents, and platforms?
-4. If removed, does the system become harder to steer?
+# What operational burden does this symbolic term carry?
+# What behavior becomes easier to remember or enforce because of it?
+# Does this improve transmission across users, agents, and platforms?
+# If removed, does the system become harder to steer?
 
 When the answer to those questions reads weak, the text may function as lore rather than infrastructure.
 

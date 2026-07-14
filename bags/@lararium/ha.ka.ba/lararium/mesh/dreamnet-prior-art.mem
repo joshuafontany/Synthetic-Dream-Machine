@@ -26,11 +26,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 !! Table of Contents
 
-1. [[Source Syntheses|#source-syntheses]]
-2. [[Layer Mapping: Prior Art → DreamNet|#layer-mapping]]
-3. [[Where DreamNet Aligns with Best Practices|#alignment]]
-4. [[Where DreamNet Diverges and Why|#divergences]]
-5. [[Identified Gaps|#gaps]]
+# [[Source Syntheses|#source-syntheses]]
+# [[Layer Mapping: Prior Art → DreamNet|#layer-mapping]]
+# [[Where DreamNet Aligns with Best Practices|#alignment]]
+# [[Where DreamNet Diverges and Why|#divergences]]
+# [[Identified Gaps|#gaps]]
 
 ---
 
@@ -40,13 +40,13 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''No Spinners'': The application must work without waiting for the network. Local state holds primacy; remote state stays secondary.
-2. ''Your Work Is Not Trapped on One Device'': Data must move freely across all devices belonging to a user.
-3. ''The Network Is Optional'': A crash or server outage must never result in data loss or inability to work.
-4. ''Collaboration with Your Colleagues'': Multiple users can work on the same document simultaneously, including while offline, with automatic merge on reconnect.
-5. ''The Long Now'': Software must remain usable after the vendor disappears. Proprietary cloud lock-in poses an existential risk to data.
-6. ''Security and Privacy by Default'': The local-first model preserves privacy by construction: data lives on your machine first.
-7. ''You Retain Ultimate Ownership and Control'': The user's device, not a server, anchors the authoritative source of truth.
+# ''No Spinners'': The application must work without waiting for the network. Local state holds primacy; remote state stays secondary.
+# ''Your Work Is Not Trapped on One Device'': Data must move freely across all devices belonging to a user.
+# ''The Network Is Optional'': A crash or server outage must never result in data loss or inability to work.
+# ''Collaboration with Your Colleagues'': Multiple users can work on the same document simultaneously, including while offline, with automatic merge on reconnect.
+# ''The Long Now'': Software must remain usable after the vendor disappears. Proprietary cloud lock-in poses an existential risk to data.
+# ''Security and Privacy by Default'': The local-first model preserves privacy by construction: data lives on your machine first.
+# ''You Retain Ultimate Ownership and Control'': The user's device, not a server, anchors the authoritative source of truth.
 
 ''Design Decisions Mapping to DreamNet:''
 
@@ -68,11 +68,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''Network-agnostic data structure'': Automerge provides a pure data library; it does not know or care about transport.
-2. ''Immutable snapshots'': Every Automerge state object keeps immutable value semantics. Mutations produce new state objects.
-3. ''Automatic merge, no coordinator'': CRDT semantics guarantee convergence without a master node.
-4. ''Portable'': JS (Node, Electron, browser), Rust (WASM, C FFI, iOS). Same algorithm, same merge semantics, everywhere.
-5. ''Operation history'': Full change log. Branch, diff, merge workflows become possible as a first-class feature.
+# ''Network-agnostic data structure'': Automerge provides a pure data library; it does not know or care about transport.
+# ''Immutable snapshots'': Every Automerge state object keeps immutable value semantics. Mutations produce new state objects.
+# ''Automatic merge, no coordinator'': CRDT semantics guarantee convergence without a master node.
+# ''Portable'': JS (Node, Electron, browser), Rust (WASM, C FFI, iOS). Same algorithm, same merge semantics, everywhere.
+# ''Operation history'': Full change log. Branch, diff, merge workflows become possible as a first-class feature.
 
 ''Design Decisions:''
 * ''Causal ordering via vector clocks'' (Lamport counters embedded in actor IDs): No wall clock trust required.
@@ -94,13 +94,13 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''Trustless delegation'': Authority can move from peer to peer without an online Authorization Server. The chain of cryptographic signatures provides the proof.
-2. ''Certificate capabilities, not ACLs'': Authorization uses a bearer token (like a movie ticket), not a list lookup (like a bouncer's clipboard). No server needs consultation at auth time.
-3. ''Principle of Least Authority (PoLA)'': Every delegation MUST either restate or attenuate (narrow) its authority. You cannot grant what you do not hold. You can always grant less.
-4. ''Inversion of control'': The resource owner issues UCANs to agents; no Authorization Server sits between requestor and resource. The resource anchors the root of trust.
-5. ''Content-addressed tokens'': Each UCAN hashes to a unique CIDv1. The token carries its own identity. Revocation proceeds by CID.
-6. ''Short expiry windows'': Keeping validity windows short limits blast radius.
-7. ''DID-based principals'': All actors use `did:key` (or equivalent), not email or username.
+# ''Trustless delegation'': Authority can move from peer to peer without an online Authorization Server. The chain of cryptographic signatures provides the proof.
+# ''Certificate capabilities, not ACLs'': Authorization uses a bearer token (like a movie ticket), not a list lookup (like a bouncer's clipboard). No server needs consultation at auth time.
+# ''Principle of Least Authority (PoLA)'': Every delegation MUST either restate or attenuate (narrow) its authority. You cannot grant what you do not hold. You can always grant less.
+# ''Inversion of control'': The resource owner issues UCANs to agents; no Authorization Server sits between requestor and resource. The resource anchors the root of trust.
+# ''Content-addressed tokens'': Each UCAN hashes to a unique CIDv1. The token carries its own identity. Revocation proceeds by CID.
+# ''Short expiry windows'': Keeping validity windows short limits blast radius.
+# ''DID-based principals'': All actors use `did:key` (or equivalent), not email or username.
 
 ''Design Decisions:''
 * ''Delegation chain as provenance log'': The UCAN chain provides an inherent audit trail. Every grant stays traceable to its root.
@@ -125,10 +125,10 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles (reconstructed from secondary references):''
 
-1. ''Group membership as CRDT'': Rather than a central server managing membership, group state replicates as a CRDT across all members.
-2. ''Device admission via out-of-band ceremony'': Adding a new device to a PersonaGroup does not require any server. A signed message from an existing device provides sufficient proof. This follows the "Seitan token exchange" pattern.
-3. ''Sentinel documents as group anchors'': Each group level (person, cabal, nexus) carries a sentinel document — a CID-addressed genesis artifact that defines the group's charter.
-4. ''Capability delegation through the group hierarchy'': A Keyhive PersonaGroup grants capabilities that can be delegated to devices. A MeshCabal grants capabilities to PersonaGroups.
+# ''Group membership as CRDT'': Rather than a central server managing membership, group state replicates as a CRDT across all members.
+# ''Device admission via out-of-band ceremony'': Adding a new device to a PersonaGroup does not require any server. A signed message from an existing device provides sufficient proof. This follows the "Seitan token exchange" pattern.
+# ''Sentinel documents as group anchors'': Each group level (person, cabal, nexus) carries a sentinel document — a CID-addressed genesis artifact that defines the group's charter.
+# ''Capability delegation through the group hierarchy'': A Keyhive PersonaGroup grants capabilities that can be delegated to devices. A MeshCabal grants capabilities to PersonaGroups.
 
 ''Design Decisions:''
 * ''Local-first membership'': Group state replicates via the same CRDT mechanism as application data. No separate membership server.
@@ -144,9 +144,9 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''State synchronization as a first-class HTTP primitive'': Braid extends HTTP to be a state *synchronization* protocol, with versioning, subscriptions, patches, and merge types.
-2. ''Interoperability across merge algorithms'': Different CRDTs and OT implementations speak the same Braid message format. No single algorithm gets mandated.
-3. ''P2P semantics levels'': Level 0 = today's HTTP. Level 1 = subscriptions. Level 2 = patches/versions/merges. Levels 3–4 = P2P semantics.
+# ''State synchronization as a first-class HTTP primitive'': Braid extends HTTP to be a state *synchronization* protocol, with versioning, subscriptions, patches, and merge types.
+# ''Interoperability across merge algorithms'': Different CRDTs and OT implementations speak the same Braid message format. No single algorithm gets mandated.
+# ''P2P semantics levels'': Level 0 = today's HTTP. Level 1 = subscriptions. Level 2 = patches/versions/merges. Levels 3–4 = P2P semantics.
 
 ''Design Decisions:''
 * ''Merge-type negotiation'': Client and server declare which CRDT/OT algorithm they support. Interoperability requires shared merge-type.
@@ -166,12 +166,12 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''No single point of control'': Room state replicates across all homeservers whose users participate.
-2. ''Event graphs (DAGs), not ordered logs'': Room history follows a DAG of events with causal ordering.
-3. ''Eventual consistency, not strong consistency'': Matrix explicitly optimizes for AP (Availability + Partition tolerance).
-4. ''Homeserver as sovereign unit'': Each homeserver manages its own users' accounts.
-5. ''State events vs. message events'': Persistent room state gets modeled separately from transient messages.
-6. ''Power levels, not capabilities'': Matrix uses a numeric power level (0–100) to gate actions.
+# ''No single point of control'': Room state replicates across all homeservers whose users participate.
+# ''Event graphs (DAGs), not ordered logs'': Room history follows a DAG of events with causal ordering.
+# ''Eventual consistency, not strong consistency'': Matrix explicitly optimizes for AP (Availability + Partition tolerance).
+# ''Homeserver as sovereign unit'': Each homeserver manages its own users' accounts.
+# ''State events vs. message events'': Persistent room state gets modeled separately from transient messages.
+# ''Power levels, not capabilities'': Matrix uses a numeric power level (0–100) to gate actions.
 
 ''Design Decisions:''
 * ''State resolution algorithm enforces deterministic, server-independent output'': Given the same event graph, any server must compute the same resolved state. Key to federation without coordination.
@@ -193,11 +193,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles (reconstructed from secondary references):''
 
-1. ''The Small Web'': Decentralization fails if users must run servers. Sovereignty requires that the user's device IS the server.
-2. ''Noosphere'': Protocol for a user-sovereign note graph. Content-addressed (CID), user-keyed (DID), linked (URI).
-3. ''Permissionless composition'': Any app can link to any note by its CID without requesting permission.
-4. ''Shared language, not shared data'': Interoperability across networks comes from agreeing on vocabulary (ontology), not from centralizing data.
-5. ''The Sphere'': User's unit of sovereignty — a CID-rooted DAG of notes owned by a keypair.
+# ''The Small Web'': Decentralization fails if users must run servers. Sovereignty requires that the user's device IS the server.
+# ''Noosphere'': Protocol for a user-sovereign note graph. Content-addressed (CID), user-keyed (DID), linked (URI).
+# ''Permissionless composition'': Any app can link to any note by its CID without requesting permission.
+# ''Shared language, not shared data'': Interoperability across networks comes from agreeing on vocabulary (ontology), not from centralizing data.
+# ''The Sphere'': User's unit of sovereignty — a CID-rooted DAG of notes owned by a keypair.
 
 ''Named Patterns:''
 * Noosphere protocol — content-addressed, DID-keyed note graph
@@ -209,11 +209,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''Object capabilities support distributed programming'': In OCapN/Goblins, sending a message to a networked object looks identical to calling a local method.
-2. ''Capabilities ARE references'': In a pure ocap system, having a reference to an object IS having permission to use it.
-3. ''Promise pipelining'': Results of remote calls can be passed as arguments to the next call without waiting for the network round-trip.
-4. ''3rd-party handoffs'': A peer can introduce two other peers to each other by passing a capability reference.
-5. ''CRDTs + capabilities compose cleanly'' (Nov 2025 Spritely blog): "Composing capability security and conflict-free replicated data types" — direct prior art for DreamNet's combination of Automerge + ABILITY_LADDER.
+# ''Object capabilities support distributed programming'': In OCapN/Goblins, sending a message to a networked object looks identical to calling a local method.
+# ''Capabilities ARE references'': In a pure ocap system, having a reference to an object IS having permission to use it.
+# ''Promise pipelining'': Results of remote calls can be passed as arguments to the next call without waiting for the network round-trip.
+# ''3rd-party handoffs'': A peer can introduce two other peers to each other by passing a capability reference.
+# ''CRDTs + capabilities compose cleanly'' (Nov 2025 Spritely blog): "Composing capability security and conflict-free replicated data types" — direct prior art for DreamNet's combination of Automerge + ABILITY_LADDER.
 
 ''Design Decisions:''
 * ''Netlayers as transport abstraction'': OCapN runs over Tor, libp2p, TCP+TLS, IBC. Transport-independent.
@@ -235,11 +235,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''Location independence'': CIDs name content, not servers.
-2. ''Cryptographic integrity'': Any difference in content produces a different CID.
-3. ''Self-describing'': CIDv1 embeds the hash algorithm, codec, and encoding in the identifier itself.
-4. ''DAG structure'': Large content gets chunked into blocks linked by CIDs, forming a Merkle DAG.
-5. ''CID profiles for reproducibility'': CID profiles document canonical parameter sets for interoperability.
+# ''Location independence'': CIDs name content, not servers.
+# ''Cryptographic integrity'': Any difference in content produces a different CID.
+# ''Self-describing'': CIDv1 embeds the hash algorithm, codec, and encoding in the identifier itself.
+# ''DAG structure'': Large content gets chunked into blocks linked by CIDs, forming a Merkle DAG.
+# ''CID profiles for reproducibility'': CID profiles document canonical parameter sets for interoperability.
 
 ''Design Decisions:''
 * **`dag-cbor` as canonical encoding**: UCAN mandates DAG-CBOR for signing; IPLD's DAG-CBOR provides the natural bridge.
@@ -258,11 +258,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''Logical clocks over system time'': System clocks cannot be trusted. Lamport counters and Hybrid Logical Clocks (HLCs) provide causally correct ordering.
-2. ''Two-timestamp pattern'': For efficient delta sync, retain both `row_time` (merge semantics) and `local_row_time` (peer-seen state). Conflation causes proxy divergence.
-3. ''Deterministic tie-breaking'': Concurrent edits at the same logical time must be resolved by a deterministic, total-order comparator.
-4. ''CRDTs work in centralized systems too'': Git provides the canonical example.
-5. ''Performance no longer blocks adoption'': Modern CRDTs handle 100KB documents efficiently. 6 million text edits/second in Rust (Diamond Types).
+# ''Logical clocks over system time'': System clocks cannot be trusted. Lamport counters and Hybrid Logical Clocks (HLCs) provide causally correct ordering.
+# ''Two-timestamp pattern'': For efficient delta sync, retain both `row_time` (merge semantics) and `local_row_time` (peer-seen state). Conflation causes proxy divergence.
+# ''Deterministic tie-breaking'': Concurrent edits at the same logical time must be resolved by a deterministic, total-order comparator.
+# ''CRDTs work in centralized systems too'': Git provides the canonical example.
+# ''Performance no longer blocks adoption'': Modern CRDTs handle 100KB documents efficiently. 6 million text edits/second in Rust (Diamond Types).
 
 ''Named Patterns:''
 * HLC (Hybrid Logical Clock) — combines wall clock with Lamport counter for causal correctness
@@ -275,12 +275,12 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''Capabilities as the only access mechanism'': In a pure ocap system, the only way to affect an object comes through a reference (capability). No ambient authority.
-2. ''No separation of authority from reference'': Possession of the capability carries authorization. This eliminates confused deputy attacks by construction.
-3. ''Composability'': Capability systems compose without interference.
-4. ''Attenuation by wrapping'': Any capability can be wrapped in a facet that attenuates its powers.
-5. ''Principle of Least Authority (POLA)'': Grant only the minimum capability needed for a task.
-6. ''The Structure of Authority (Miller et al.)'': Treating security as a separate concern failed repeatedly. Security requires integration with knowledge of what constitutes least authority.
+# ''Capabilities as the only access mechanism'': In a pure ocap system, the only way to affect an object comes through a reference (capability). No ambient authority.
+# ''No separation of authority from reference'': Possession of the capability carries authorization. This eliminates confused deputy attacks by construction.
+# ''Composability'': Capability systems compose without interference.
+# ''Attenuation by wrapping'': Any capability can be wrapped in a facet that attenuates its powers.
+# ''Principle of Least Authority (POLA)'': Grant only the minimum capability needed for a task.
+# ''The Structure of Authority (Miller et al.)'': Treating security as a separate concern failed repeatedly. Security requires integration with knowledge of what constitutes least authority.
 
 ''Named Patterns:''
 * E language (Mark Miller) — the original object capability programming language
@@ -294,11 +294,11 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-1. ''One writer, many readers'': A Hypercore provides an append-only log with a single writer (keypair) and unlimited readers.
-2. ''Reading IS authorization'': Possessing the Hypercore `key` (public key) authorizes reading.
-3. ''Sparse replication'': Peers can replicate only the blocks they need.
-4. ''Autobase = multi-writer CRDT'': Multi-writer layer that merges contributions from multiple per-user Hypercores.
-5. ''Hyperswarm = topic-based peer discovery'': No central server required.
+# ''One writer, many readers'': A Hypercore provides an append-only log with a single writer (keypair) and unlimited readers.
+# ''Reading IS authorization'': Possessing the Hypercore `key` (public key) authorizes reading.
+# ''Sparse replication'': Peers can replicate only the blocks they need.
+# ''Autobase = multi-writer CRDT'': Multi-writer layer that merges contributions from multiple per-user Hypercores.
+# ''Hyperswarm = topic-based peer discovery'': No central server required.
 
 ''Design Decisions:''
 * ''Single-writer append-only log'': Each vessel writes to its own log; Autobase handles multi-writer merge. Maps cleanly to DreamNet's device-vessel.

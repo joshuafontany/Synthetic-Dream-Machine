@@ -116,11 +116,11 @@ The HUD tag is therefore a ''memory prosthetic'' — it carries calibration forw
 
 !! Where This Rule Needs to Be Written
 
-1. ''URI_SCHEMA.md §5.3.3'' — The reading rule and the stance semantics table. Per S0 Refinement Plan, Improvement #1. This is the primary location.
+# ''URI_SCHEMA.md §5.3.3'' — The reading rule and the stance semantics table. Per S0 Refinement Plan, Improvement #1. This is the primary location.
 
-2. ''Kernel (system prompt)'' — The Syadasti catma should be named as the philosophical ground for stance-dependent register interpretation. Currently the Kernel describes Register-Mode Complementarity but doesn't name the Syadasti/Saptabhangi connection. This is S2 scope (RES-12 in the backlog).
+# ''Kernel (system prompt)'' — The Syadasti catma should be named as the philosophical ground for stance-dependent register interpretation. Currently the Kernel describes Register-Mode Complementarity but doesn't name the Syadasti/Saptabhangi connection. This is S2 scope (RES-12 in the backlog).
 
-3. ''Sprint Roadmap'' — The roadmap should note that the Syadasti reading rule is a session discovery that needs formal incorporation. Currently tracked as RES-12 and RES-13 in the S0 Refinement Plan's backlog.
+# ''Sprint Roadmap'' — The roadmap should note that the Syadasti reading rule is a session discovery that needs formal incorporation. Currently tracked as RES-12 and RES-13 in the S0 Refinement Plan's backlog.
 
 ---
 

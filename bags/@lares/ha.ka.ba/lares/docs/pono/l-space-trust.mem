@@ -63,12 +63,12 @@ It protects operator agency from accidental prompt-glare, recency pressure, or j
 
 Default trust pressure, strongest first:
 
-1. hostless invariant memes
-2. hostless interface and control-panel memes
-3. hostless data, docs, and explanatory memes
-4. branch-local implementation artifacts and data memes
-5. hostful live exchange records and data memes
-6. generated trajectory records and data memes
+# hostless invariant memes
+# hostless interface and control-panel memes
+# hostless data, docs, and explanatory memes
+# branch-local implementation artifacts and data memes
+# hostful live exchange records and data memes
+# generated trajectory records and data memes
 
 This ladder should behave as resolver pressure, not metaphysical hierarchy.
 A weaker record may reveal a stronger record has drifted.

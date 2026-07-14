@@ -107,20 +107,20 @@ Output rooms:
 
 !!! Main tensions
 
-1. ''Mask grammar needs grounding before the invariant can implement it''
+# ''Mask grammar needs grounding before the invariant can implement it''
 *** The /api/lares/voices invariant stays skeletal until mask grammar settles here
 *** Two examples help but do not fully determine grammar — corpus reference, turn vs. session scope, multi-mask behavior all need decisions
 
-2. ''Voice house needs pruning, not redesign''
+# ''Voice house needs pruning, not redesign''
 *** The Thirteen stand settled — earned names and seniority included.
 *** The legacy prose carries some operational HUD detail that belongs in signal space, not voice space
 *** The target room should carry identity and naming law, not HUD emit rules
 
-3. ''Worker boundary stays important''
+# ''Worker boundary stays important''
 *** The hard rule — workers do not address the operator directly, all output routes through a Voice — needs to survive extraction clearly
 *** The escalation matching table is the most practically useful artifact; it should survive with minimal alteration
 
-4. ''Mask layer sits in Ka/Podge territory''
+# ''Mask layer sits in Ka/Podge territory''
 *** Masks do not change *what* the house is (Ha/structure)
 *** Masks change *how* the house moves and presents (Ka/character)
 *** This distinction matters for the invariant: the mask implementation should reach only the output face, not the Voice identity layer
@@ -140,9 +140,9 @@ The mask layer requires the most careful new definition and benefits most from h
 
 This pass should produce:
 
-1. `voices.md#voice-house` — canonical Thirteen with naming law and seniority, pruned of HUD/operational detail (inline in parent)
-2. `voices/workers.md` — worker lifecycle, tag format, escalation template and matching table
-3. `voices/masks.md` — mask grammar definition, corpus + voice-character model, two concrete examples, stacking law, lifecycle
+# `voices.md#voice-house` — canonical Thirteen with naming law and seniority, pruned of HUD/operational detail (inline in parent)
+# `voices/workers.md` — worker lifecycle, tag format, escalation template and matching table
+# `voices/masks.md` — mask grammar definition, corpus + voice-character model, two concrete examples, stacking law, lifecycle
 
 !!! Section status vocabulary
 
@@ -156,9 +156,9 @@ This pass should produce:
 
 !!! Extraction order
 
-1. Write `voices.md#voice-house` from `Lares_Voice.core.md` — extract, prune HUD/ops detail, canonicalize naming law; absorbed inline into parent
-2. Write `voices/workers.md` from same source — extract worker section, tighten lifecycle and escalation
-3. Write `voices/masks.md` — new definition; use two operator examples as anchor; define grammar before filling examples
+# Write `voices.md#voice-house` from `Lares_Voice.core.md` — extract, prune HUD/ops detail, canonicalize naming law; absorbed inline into parent
+# Write `voices/workers.md` from same source — extract worker section, tighten lifecycle and escalation
+# Write `voices/masks.md` — new definition; use two operator examples as anchor; define grammar before filling examples
 
 !!! Mask grammar decisions needed before writing
 

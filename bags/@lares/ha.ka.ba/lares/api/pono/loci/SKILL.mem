@@ -57,21 +57,21 @@ Loci SKILL opens the procedural stream here.
 
 Four main paths:
 
-1. fresh routing-and-rating pass on a `lar:` URI
-2. audit an existing carrier for loci convention compliance
-3. cross a file-siting migration as a bounded Hoʻoko transaction
-4. evaluate a carrier for canon-MOVE readiness
+# fresh routing-and-rating pass on a `lar:` URI
+# audit an existing carrier for loci convention compliance
+# cross a file-siting migration as a bounded Hoʻoko transaction
+# evaluate a carrier for canon-MOVE readiness
 
 Workflow:
 
-1. load the canonical loci
-2. identify the request: URI to resolve, migration to cross, or carrier to audit
-3. run the derivation algorithm in full step order
-4. classify resolution state; read convention surfaces
-5. commit to resolution posture, rating posture, canon-lifecycle stage
-6. prepare the routing product
-7. cross any file-siting or opener change as a named Hoʻoko transaction
-8. emit aftermath with all declared-unresolved addresses named
+# load the canonical loci
+# identify the request: URI to resolve, migration to cross, or carrier to audit
+# run the derivation algorithm in full step order
+# classify resolution state; read convention surfaces
+# commit to resolution posture, rating posture, canon-lifecycle stage
+# prepare the routing product
+# cross any file-siting or opener change as a named Hoʻoko transaction
+# emit aftermath with all declared-unresolved addresses named
 
 Do not:
 

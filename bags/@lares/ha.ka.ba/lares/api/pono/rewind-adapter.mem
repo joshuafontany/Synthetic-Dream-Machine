@@ -109,10 +109,10 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 
 `normalizeIdentity` walks a ''four-rung ladder'', taking the highest rung the source affords. Every rung stays ''session-namespaced'' and ''carries the parent-link'' (the edge to the turn it descends from — the branch structure the diff walks):
 
-1. ''native-uuid'' — the source hands a stable id (`uuid`, `turn_id`, `messageId`, `bubbleId`). Take it.
-2. ''(sessionId ⊕ monotonic-index)'' — no uuid, but a per-session running index. <<~ confidence Synthesis-Canon 14/20 >> ''Once namespaced to its session, a monotonic index carries as much identity as a uuid'' — the pair is globally unique and stably ordered. ''CAVEAT (swarm-proven, #adapters-built):'' this holds only for a ''per-message'' index; a ''per-turn'' id (Codex `turn_id`, Copilot-CLI `turn_index`) MUST drop to rung 3 — it re-keys on edit and collides same-turn siblings.
-3. ''content-hash(role ‖ normalized-text)'' — no index either. Hash the normalized turn body under its role. Collides only on genuinely identical turns.
-4. ''positional'' — the floor (Aider's transcript). Identity rides position alone; the parent-link comes from the surrounding structure (for Aider, the git-reflog, not the markdown).
+# ''native-uuid'' — the source hands a stable id (`uuid`, `turn_id`, `messageId`, `bubbleId`). Take it.
+# ''(sessionId ⊕ monotonic-index)'' — no uuid, but a per-session running index. <<~ confidence Synthesis-Canon 14/20 >> ''Once namespaced to its session, a monotonic index carries as much identity as a uuid'' — the pair is globally unique and stably ordered. ''CAVEAT (swarm-proven, #adapters-built):'' this holds only for a ''per-message'' index; a ''per-turn'' id (Codex `turn_id`, Copilot-CLI `turn_index`) MUST drop to rung 3 — it re-keys on edit and collides same-turn siblings.
+# ''content-hash(role ‖ normalized-text)'' — no index either. Hash the normalized turn body under its role. Collides only on genuinely identical turns.
+# ''positional'' — the floor (Aider's transcript). Identity rides position alone; the parent-link comes from the surrounding structure (for Aider, the git-reflog, not the markdown).
 
 The ladder degrades by degree, never hard-faults — the graceful-parsing discipline ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing]]) in the identity register.
 

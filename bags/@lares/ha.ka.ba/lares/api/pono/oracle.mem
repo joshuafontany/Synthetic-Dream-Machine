@@ -74,17 +74,17 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
 
 !! Five clauses hold the drain
 
-1. ''Three marks agree.'' `die == (N) == tail length` — the die face, the
+# ''Three marks agree.'' `die == (N) == tail length` — the die face, the
    parenthetical count, and the glyph-count of the tail (the sentinel counts as
    position 1) read one number. Disagreement flags drift.
-2. **`↯0` flags a dead turn.** A zero ebb reads suspect — a turn that drained
+# **`↯0` flags a dead turn.** A zero ebb reads suspect — a turn that drained
    nothing surfaces as a drift tell, never a clean close.
-3. ''Only the tail roams.'' A meaning-bearing glyph past the `✲` sentinel reads
+# ''Only the tail roams.'' A meaning-bearing glyph past the `✲` sentinel reads
    as Oracle Creep; the spend, scatter, die, and count stay structural, the tail
    stays random.
-4. ''Fires first, drains before the Sword.'' The oracle leads the close; the
+# ''Fires first, drains before the Sword.'' The oracle leads the close; the
    Sword (`ward !`) draws clean below it, the pull already bled off (#l-prime).
-5. ''Certifies nothing.'' The oracle predicates nothing, fuses no map to
+# ''Certifies nothing.'' The oracle predicates nothing, fuses no map to
    territory; the close runs confession-grade with or without it.
 
 <<~/ahu >>

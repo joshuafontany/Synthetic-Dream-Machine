@@ -24,9 +24,9 @@ parseMemeCarrier(uri: string, text: string, grammar?: GrammarRules): CarrierNode
 ```
 
 Stages:
-1. `collectEvents` — tokenise sigil boundaries (STX/ETX/ahu/pranala/pae markers)
-2. `buildAst` — fold events into nested `MemeAstNode` tree
-3. Returns `CarrierNode` — root wrapper with `uri`, `children[]`, `metadata`
+# `collectEvents` — tokenise sigil boundaries (STX/ETX/ahu/pranala/pae markers)
+# `buildAst` — fold events into nested `MemeAstNode` tree
+# Returns `CarrierNode` — root wrapper with `uri`, `children[]`, `metadata`
 
 Invariants:
 * Pure function — no I/O, no side effects

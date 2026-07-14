@@ -198,13 +198,13 @@ Current state (Milestone 3):
 * `vite.config.ts` aliases `crypto → crypto-shim.ts` as a workaround
 
 Target state (Milestone 4):
-1. Add `CryptoProvider` interface + `webDigest()` to `lararium-mesh/src/crypto.ts`
-2. Make `compileBootReceipt(artifact, provider)` accept a `DigestProvider`
-3. Update Node callers: pass `{ digest: (alg, data) => require('node:crypto').webcrypto.subtle.digest(alg, data) }`
-4. Update browser callers: pass `{ digest: webDigest }` (uses `globalThis.crypto.subtle`)
-5. Remove `crypto-shim.ts` and the vite alias
-6. Add known-vector test: SHA-256("abc") = `ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad`
-7. Verify boot receipts match between Node and browser builds
+# Add `CryptoProvider` interface + `webDigest()` to `lararium-mesh/src/crypto.ts`
+# Make `compileBootReceipt(artifact, provider)` accept a `DigestProvider`
+# Update Node callers: pass `{ digest: (alg, data) => require('node:crypto').webcrypto.subtle.digest(alg, data) }`
+# Update browser callers: pass `{ digest: webDigest }` (uses `globalThis.crypto.subtle`)
+# Remove `crypto-shim.ts` and the vite alias
+# Add known-vector test: SHA-256("abc") = `ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad`
+# Verify boot receipts match between Node and browser builds
 
 <<~/ahu >>
 

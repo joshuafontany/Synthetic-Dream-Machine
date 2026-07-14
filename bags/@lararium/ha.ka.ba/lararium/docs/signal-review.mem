@@ -105,19 +105,19 @@ The branch already suggests a clean five-room split:
 
 !!! Main tensions
 
-1. ''HUD overload''
+# ''HUD overload''
 *** `hud.md` carries the highest rewrite pressure.
 *** The room currently mixes settled instructions with migration residue and long witness blocks.
 
-2. ''Research bleed''
+# ''Research bleed''
 *** FFZ chronometer work pushes on the branch strongly.
 *** Several branch claims should stay provisional until FFZ format and lifecycle work land more firmly.
 
-3. ''Ownership blur''
+# ''Ownership blur''
 *** The same concept sometimes appears in more than one room.
 *** The review needs one canonical home per concept.
 
-4. ''Settlement blur''
+# ''Settlement blur''
 *** Some paragraphs read as stable contract.
 *** Nearby paragraphs read as working notebook.
 *** A later reader could misread temporary argument as branch law.
@@ -137,21 +137,21 @@ The branch needs a boundary pass, a settlement pass, and a reduction pass focuse
 
 This review pass should produce:
 
-1. one clear owner per concept
-2. one clear split between settled docs and active research
-3. one concrete reduction plan for `signal/hud.md`
-4. one dependency note marking which claims wait on FFZ
+# one clear owner per concept
+# one clear split between settled docs and active research
+# one concrete reduction plan for `signal/hud.md`
+# one dependency note marking which claims wait on FFZ
 
 !!! Review order
 
 Read and decide in this order:
 
-1. `signal.md`
-2. `signal/l-space.md`
-3. `signal/sa-display.md`
-4. `signal/render-targets.md`
-5. `signal/hud.md`
-6. `signal/chronometer/*`
+# `signal.md`
+# `signal/l-space.md`
+# `signal/sa-display.md`
+# `signal/render-targets.md`
+# `signal/hud.md`
+# `signal/chronometer/*`
 
 !!! Section status vocabulary
 
@@ -190,12 +190,12 @@ Use the following labels during the review:
 
 !!! Suggested rewrite order
 
-1. tighten `signal.md`
-2. tighten `signal/l-space.md`
-3. tighten `signal/sa-display.md`
-4. tighten `signal/render-targets.md`
-5. reduce and restructure `signal/hud.md`
-6. leave `signal/chronometer/*` for separate research/spec work
+# tighten `signal.md`
+# tighten `signal/l-space.md`
+# tighten `signal/sa-display.md`
+# tighten `signal/render-targets.md`
+# reduce and restructure `signal/hud.md`
+# leave `signal/chronometer/*` for separate research/spec work
 
 !!! Working matrix template
 

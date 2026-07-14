@@ -22,9 +22,9 @@ retain       = true
 
 Three architectural forces pull on the Lararium stack simultaneously. This carrier holds the research synthesis and names the design law for each.
 
-1. ''Meme store + re-seeding'' — what is the correct replacement contract for a CRDT-backed carrier store?
-2. ''Schema enforcement on pranala edges'' — how does data-layer type binding prevent graph corruption?
-3. ''AST / self-hosting grammar'' — how do system components (parser, schema, router, templates) themselves become memes?
+# ''Meme store + re-seeding'' — what is the correct replacement contract for a CRDT-backed carrier store?
+# ''Schema enforcement on pranala edges'' — how does data-layer type binding prevent graph corruption?
+# ''AST / self-hosting grammar'' — how do system components (parser, schema, router, templates) themselves become memes?
 
 These are not separate priorities. They converge at one point: ''a meme is the atom of everything, and meme immutability is the load-bearing invariant that makes the rest possible.''
 

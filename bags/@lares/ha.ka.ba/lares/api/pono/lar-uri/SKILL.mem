@@ -51,17 +51,17 @@ Keep these points active when the skill loads:
 
 Use this skill for three common jobs:
 
-1. author a new `lar:` address for a meme, bag, or system resource
-2. validate an address against the scheme law (form, path class, slots, @-placement)
-3. audit a surface for path-class blur, mis-placed `@`-bags, or session-form leakage
+# author a new `lar:` address for a meme, bag, or system resource
+# validate an address against the scheme law (form, path class, slots, @-placement)
+# audit a surface for path-class blur, mis-placed `@`-bags, or session-form leakage
 
 Working order:
 
-1. read the address and name its form (local / session) and path class
-2. check slot count, slot legality (lowercase ASCII), and the single `child[1]` `@`-bag
-3. confirm a `#fragment` names an anchor only
-4. for session form, confirm the span — it never persists into storage
-5. report a clean address or name the precise violation
+# read the address and name its form (local / session) and path class
+# check slot count, slot legality (lowercase ASCII), and the single `child[1]` `@`-bag
+# confirm a `#fragment` names an anchor only
+# for session form, confirm the span — it never persists into storage
+# report a clean address or name the precise violation
 
 Do not:
 

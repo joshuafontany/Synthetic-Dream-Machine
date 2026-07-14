@@ -104,8 +104,8 @@ From the five systems, four mechanisms converge:
 ''The critical insight from bootstrapping:''
 
 Every system uses a two-phase boot:
-1. Phase 1 (kernel): hard-coded, cannot use itself to load itself
-2. Phase 2 (surface): uses Phase 1 output to load the surface layer
+# Phase 1 (kernel): hard-coded, cannot use itself to load itself
+# Phase 2 (surface): uses Phase 1 output to load the surface layer
 
 Lararium maps exactly:
 * Phase 1: TypeScript hard-coded parser reads `lares/` files — builds the boot closure
@@ -124,11 +124,11 @@ Lararium maps exactly:
 
 Phase 2.5 wires `GrammarRules` into `parsePranalaEdges`. The correct form from the research:
 
-1. `parsePranalaEdges(uri, text, grammar?)` — optional third arg
-2. When `grammar` present: resolve each sigil's regex pattern from `grammar.sigils` lookup, fall back to hard-coded constant if missing
-3. When `grammar` present: validate edges against `grammar.families` contracts instead of `FAMILY_CONTRACTS` map
-4. `buildControlClosure()` in `node-host.ts` calls `loadGrammarRules()` once before the walk, passes the result to a grammar-aware `loadMeme()` variant
-5. All existing two-arg call sites continue working unchanged — the optional arg preserves backward compat
+# `parsePranalaEdges(uri, text, grammar?)` — optional third arg
+# When `grammar` present: resolve each sigil's regex pattern from `grammar.sigils` lookup, fall back to hard-coded constant if missing
+# When `grammar` present: validate edges against `grammar.families` contracts instead of `FAMILY_CONTRACTS` map
+# `buildControlClosure()` in `node-host.ts` calls `loadGrammarRules()` once before the walk, passes the result to a grammar-aware `loadMeme()` variant
+# All existing two-arg call sites continue working unchanged — the optional arg preserves backward compat
 
 This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch engine) stays fixed; the rule table it reads becomes externally supplied data.
 

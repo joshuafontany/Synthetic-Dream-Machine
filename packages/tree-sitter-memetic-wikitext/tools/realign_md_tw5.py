@@ -26,6 +26,8 @@ import sys
 _HEADING = re.compile(r"^(#{1,6}) ")
 _TOP_UL = re.compile(r"^- ")
 _INDENTED_UL = re.compile(r"^([ \t]+)- ")
+_TOP_OL = re.compile(r"^\d{1,3}\. ")
+_INDENTED_OL = re.compile(r"^[ \t]+\d{1,3}\. ")
 # an md inline link, never an image (the `!` guard) and never nested brackets
 _MD_LINK = re.compile(r"(?<!\!)\[([^\]\[]+)\]\((\S+?)\)")
 _FENCE = re.compile(r"^```")
@@ -78,7 +80,7 @@ def _pass2_inline(line: str, counts: dict) -> str:
     return "".join(out)
 
 
-def realign_text(text: str, counts: dict, pass2: bool = False) -> str:
+def realign_text(text: str, counts: dict, pass2: bool = False, pass3: bool = False) -> str:
     """One file's walk. Fence state toggles on ``` lines; a source-text ahu
     suspends transforms until its close (nesting depth tracked so an inner
     ahu never re-opens the gate early). Pass 1 = headings + top-level lists;
@@ -119,6 +121,15 @@ def realign_text(text: str, counts: dict, pass2: bool = False) -> str:
             line = "* " + line[2:]
             out_lines.append(_pass2_inline(line, counts) if pass2 else line)
             continue
+        if pass3:
+            mo = _TOP_OL.match(line)
+            if mo:
+                counts["ol"] += 1
+                line = "# " + line[mo.end():]
+                out_lines.append(_pass2_inline(line, counts) if pass2 else line)
+                continue
+            if _INDENTED_OL.match(line):
+                counts["skip_indented_ol"] += 1
         mi = _INDENTED_UL.match(line)
         if mi:
             if pass2:
@@ -143,6 +154,8 @@ def main() -> int:
                     help="path substring to skip, reported loud (e.g. the boot seed)")
     ap.add_argument("--pass2", action="store_true",
                     help="add indented lists, balanced bold, and md links")
+    ap.add_argument("--pass3", action="store_true",
+                    help="ordered lists 1. → # (rides the grammar breath that drops #-heading)")
     ap.add_argument("--walk-library", action="store_true",
                     help="walk library/ FRAMING prose (source-text interiors stay exempt regardless)")
     args = ap.parse_args()
@@ -155,7 +168,8 @@ def main() -> int:
         capture_output=True, text=True, cwd=root,
     ).stdout.strip()
 
-    total = {"heading": 0, "ul": 0, "indented_ul": 0, "bold": 0, "link": 0,
+    total = {"heading": 0, "ul": 0, "ol": 0, "indented_ul": 0, "bold": 0, "link": 0,
+             "skip_indented_ol": 0,
              "skip_fence": 0, "skip_source_text": 0, "skip_indented_ul": 0,
              "skip_unbalanced_bold": 0, "skip_unbalanced_backtick": 0,
              "skip_library": 0, "skip_dirty": 0, "skip_excluded": 0}
@@ -179,7 +193,7 @@ def main() -> int:
             with open(path, encoding="utf-8") as fh:
                 text = fh.read()
             counts = {k: 0 for k in total}
-            new = realign_text(text, counts, pass2=args.pass2)
+            new = realign_text(text, counts, pass2=args.pass2, pass3=args.pass3)
             for k, v in counts.items():
                 total[k] += v
             if new != text:
@@ -198,6 +212,8 @@ def main() -> int:
         print(f"  indented ul   : {total['indented_ul']}")
         print(f"  bold **→''    : {total['bold']}")
         print(f"  links []()→[[]]: {total['link']}")
+    if args.pass3:
+        print(f"  ol 1.→#       : {total['ol']} (indented deferred: {total['skip_indented_ol']})")
     print(f"  skipped       : fence-lines={total['skip_fence']} "
           f"source-text-lines={total['skip_source_text']} "
           f"indented-ul={total['skip_indented_ul']} "

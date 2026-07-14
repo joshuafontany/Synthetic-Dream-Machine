@@ -81,19 +81,19 @@ Hydration-critical means `family = control` and `role` in `owns`, `composes`, or
 
 Minimal boot:
 
-1. start from entry meme
-2. walk only `control` edges whose roles own or compose hydration
-3. collect reachable memes
-4. resolve in topological order
-5. stop when required-core closes
+# start from entry meme
+# walk only `control` edges whose roles own or compose hydration
+# collect reachable memes
+# resolve in topological order
+# stop when required-core closes
 
 Full boot target:
 
-1. walk all `control` edges
-2. walk `relation` edges one hop from each control-reachable meme
-3. collect and resolve in topological order
-4. reject DAG violations
-5. materialize edge, interface, and invariant indexes
+# walk all `control` edges
+# walk `relation` edges one hop from each control-reachable meme
+# collect and resolve in topological order
+# reject DAG violations
+# materialize edge, interface, and invariant indexes
 
 Current implementation still uses static required-core and carrier-index scans in places.
 `StaticMapDriftTests` guard those maps until the true pranala walker replaces them.

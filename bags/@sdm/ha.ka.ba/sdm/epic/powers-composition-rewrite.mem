@@ -158,55 +158,55 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 !! Principles
 
-1. ''Name what exists.'' The canonical SDM rules already run composition.
+# ''Name what exists.'' The canonical SDM rules already run composition.
    This epic gives each piece an address and connects them. Do not invent
    new game mechanics.
 
-2. ''One verb, flat.'' `#has`. Target URI carries semantics. No family/role.
+# ''One verb, flat.'' `#has`. Target URI carries semantics. No family/role.
    Queries distinguish components from mount-points by target path prefix
    (`components/` vs `mount-points/`), not by edge metadata.
 
-3. ''Pattern and instance.'' Pranala graph = stable pattern definition
+# ''Pattern and instance.'' Pranala graph = stable pattern definition
    (what Read Magic consists of). TW5 data fields = mutable instance state
    (what Lady Aki currently holds and how it mutated). Never mix layers.
    Instance state never enters the Pranala graph.
 
-4. ''Cards as mnemonic doorways.'' Tag pills on every card serve double duty:
+# ''Cards as mnemonic doorways.'' Tag pills on every card serve double duty:
    mnemonics on paper (players learn `[ecm-scan]` as a keyword over sessions),
    doorways on screen (click through to the full component tiddler). Printed
    cards carry the mnemonic. Digital cards carry both. See `#progressive-display`.
 
-5. ''Complexity changes address, not quantity.'' Decomposing a Power into
+# ''Complexity changes address, not quantity.'' Decomposing a Power into
    components does not reduce complexity — it distributes it. If the
    distribution doesn't match how referees think about Powers, it hurts more
    than it helps. The nano-service trap applies: too many tiny component memes
    create cognitive load that exceeds the query value.
 
-6. ''Demote freely, promote reluctantly.'' Tags start as TOML header entries.
+# ''Demote freely, promote reluctantly.'' Tags start as TOML header entries.
    Promote to addressed component memes only when a filter query actually
    demands the address. If a promoted component proves unused by queries,
    demote it back to a header tag. Sprint 0 writes only the ~14 memes
    Sprint 1 actually uses.
 
-7. ''Mount-points carry contracts.'' Trait, Item, Structure, Burden — each
+# ''Mount-points carry contracts.'' Trait, Item, Structure, Burden — each
    changes how a mounted module activates, what it costs, how it fails, and
    how it leaves. The same module behaves differently depending on which
    mount-point holds it. These contracts come from the canonical Vastlands
    Guidebook rules — the epic gives them addresses, not new rules.
 
-8. ''Aftermath as ecology.'' Every noospheric crossing leaves a trace:
+# ''Aftermath as ecology.'' Every noospheric crossing leaves a trace:
    recognition mark, daemon ping, corruption tick, ward echo, owner trace.
    The instance layer can accumulate these traces across sessions. The
    architecture permits this without enforcing it — each table chooses how
    much ecology to run.
 
-9. ''Practitioner state matters.'' What a pattern does depends on who holds
+# ''Practitioner state matters.'' What a pattern does depends on who holds
    it, how they stand, and what they maintain. The instance layer may carry
    stance, relationship-state, and paradigm alongside variant and mutation
    data. This remains open design pressure from the Hawaiian, Sera, and
    Chaos Magick research — not yet settled into architecture.
 
-10. ''Start as modular monolith.'' Write the three proof modules as self-
+# ''Start as modular monolith.'' Write the three proof modules as self-
     contained memes with component tags in the TOML header AND as `#has`
     edges to addressed component memes. If Sprint 1 proves the addressed
     memes carry query value, continue the pattern. If only the TOML tags
@@ -333,14 +333,14 @@ The TOML `tags` field mirrors the Pranala `#has` edges. `#has` edges carry graph
 
 Power cards serve two functions simultaneously:
 
-1. ''Mnemonic device.'' The card's P/R/T/D block, effect text, and tag pills
+# ''Mnemonic device.'' The card's P/R/T/D block, effect text, and tag pills
    give the player everything needed to activate the Power at the table.
    The tag pills read as short flavor labels: `[ecm-scan]` `[divination]`
    `[archive]`. A player who reads these pills over several sessions
    builds an intuitive vocabulary for the Powers space without studying
    the architecture.
 
-2. ''Doorway to the live wiki.'' In a digital (TW5) context, every tag pill
+# ''Doorway to the live wiki.'' In a digital (TW5) context, every tag pill
    links to the component tiddler. Clicking `[ecm-scan]` opens the full
    component meme with `#definition`, `#activation`, `#interaction`, and a
    filter listing every other module that shares this component. The card

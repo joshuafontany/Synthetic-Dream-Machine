@@ -41,10 +41,10 @@ Invariant law remains in API loci; quote witnesses remain here.
 
 !! Texture and Tension
 
-1. Prior-art can justify architecture and still leave breakage pathways untested.
-2. Adversarial posture can find faults and still drift without doctrine-level meaning.
-3. Capability law needs both cryptographic validity and semantic caveat validity.
-4. Worker/channel reliability gains can trade off with observability unless receipts stay explicit.
+# Prior-art can justify architecture and still leave breakage pathways untested.
+# Adversarial posture can find faults and still drift without doctrine-level meaning.
+# Capability law needs both cryptographic validity and semantic caveat validity.
+# Worker/channel reliability gains can trade off with observability unless receipts stay explicit.
 
 Bridge pattern:
 

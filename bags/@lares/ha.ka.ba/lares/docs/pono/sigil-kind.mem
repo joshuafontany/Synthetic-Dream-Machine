@@ -69,9 +69,9 @@ Dispatch: `compound` path with `closeKey = sigil.name`. Body captured between op
 Three render modes participate: HTML (transclude child), carrier (emit inline definition sigil), projection (emit `aka` frozen sigil).
 
 New child-slot sigils require:
-1. A SharktoothSigil tiddler with `lar-kind: child-slot`
-2. A `\widget ~<name>(p1:"")` definition in the tiddler body
-3. A template tiddler tagged `lar:///ha.ka.ba/tags/<name>-template`
+# A SharktoothSigil tiddler with `lar-kind: child-slot`
+# A `\widget ~<name>(p1:"")` definition in the tiddler body
+# A template tiddler tagged `lar:///ha.ka.ba/tags/<name>-template`
 
 No JS change needed.
 

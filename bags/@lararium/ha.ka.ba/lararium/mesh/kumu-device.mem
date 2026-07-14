@@ -126,11 +126,11 @@ componentTypes   — worn component URIs (control:has edges; Verse class(...) co
 
 ''Three semantic layers — do not conflate:''
 
-1. ''Ahu-slot tree'' (document structure) — `fragment-parent` + `slot` tiddler fields. One `.md` decomposes into root + N slot fragment tiddlers. NOT a pranala edge.
+# ''Ahu-slot tree'' (document structure) — `fragment-parent` + `slot` tiddler fields. One `.md` decomposes into root + N slot fragment tiddlers. NOT a pranala edge.
 
-2. **`control:extends`** (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
+# **`control:extends`** (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
 
-3. **`control:has`** (N edges) — Verse class(...) composition as worn components. Maps to `componentTypes`. N edges allowed.
+# **`control:has`** (N edges) — Verse class(...) composition as worn components. Maps to `componentTypes`. N edges allowed.
 
 ---
 

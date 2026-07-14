@@ -43,14 +43,14 @@ A component meme gives one facet — a domain, function, hook, or posture — an
 
 ''Two tiddlers per component.''
 
-1. ''The full meme'' — this `.md`, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
+# ''The full meme'' — this `.md`, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
 
 ```toml
 title   = "lar:///ha.ka.ba/sdm/components/function/ecm-scan"
 caption = "ecm-scan"
 ```
 
-2. ''The short tag pointer'' — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A *virtual* tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
+# ''The short tag pointer'' — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A *virtual* tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
 
 ```
 title: @sdm/tags/function/ecm-scan

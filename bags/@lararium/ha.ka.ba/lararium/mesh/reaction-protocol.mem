@@ -105,9 +105,9 @@ Live wiring map + handler registry.
 `fireSync(fromUri, listenable, payload)` — synchronous UEFN game-loop tick fidelity.
 
 Dispatch order:
-1. `onFireSync` observers (monitoring — receive full context before any handler)
-2. Direct handlers for `(fromUri, listenable)` key
-3. Per-fn handlers for every binding where `fromUri+listenable` matches, via `subscribable` name
+# `onFireSync` observers (monitoring — receive full context before any handler)
+# Direct handlers for `(fromUri, listenable)` key
+# Per-fn handlers for every binding where `fromUri+listenable` matches, via `subscribable` name
 
 ---
 

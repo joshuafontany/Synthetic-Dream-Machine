@@ -132,15 +132,15 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 !! Wiring (when the identity work pauses)
 
-1. ''Daemon UDS verb-channel'' (lararium-node): a Unix-domain listener at
+# ''Daemon UDS verb-channel'' (lararium-node): a Unix-domain listener at
    `~/.lares/lares.sock` (perms `0600`, stale-cleanup, Windows named-pipe fallback)
    that decodes a capability-bearing invocation, runs it through the ''existing''
    VerbDispatcher, and returns the durable outcome. Alongside the WS — not replacing
    it. *(Touches the node boot/ingress — coordinate with the identity/boot work.)*
-2. **Thin CLI local-invoker** (lares-cli `local-connector`): `invokeLocal(verb, args,
+# **Thin CLI local-invoker** (lares-cli `local-connector`): `invokeLocal(verb, args,
    did)` — UDS connect · write invocation · read receipt. **The CLI's only transport**
    (`verb-call.runVerb`); an absent socket raises `DaemonUnreachable`, never a replica.
-3. ''Auth:'' SO_PEERCRED + socket perms gate the channel; the per-call Ed25519/
+# ''Auth:'' SO_PEERCRED + socket perms gate the channel; the per-call Ed25519/
    capability stays the authority verified by the daemon.
 
 ''Measured (first live run, recall + status migrated):'' the per-command connect+sync

@@ -76,9 +76,9 @@ Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 
 The `aka-template-html.tid` shows a preview image when available:
 
-1. **`thumbnail` field** on the target tiddler — displayed as `<img class="lar-aka-thumb">`.
+# **`thumbnail` field** on the target tiddler — displayed as `<img class="lar-aka-thumb">`.
    Any resolver that fetches metadata writes this field.
-2. ''Domain favicon fallback'' — for HTTP/HTTPS URIs with no `thumbnail` field, the template
+# ''Domain favicon fallback'' — for HTTP/HTTPS URIs with no `thumbnail` field, the template
    renders `<img src="https://icons.duckduckgo.com/ip3/{domain}.ico">` with `onerror` hide.
    DuckDuckGo favicon endpoint: privacy-respecting, no tracking, silently fails offline.
    `lar:///` URIs skip this path (no domain to extract).
@@ -87,13 +87,13 @@ The `aka-template-html.tid` shows a preview image when available:
 
 When the Lararium node resolves an external `aka` URI (HTTP/HTTPS), it should:
 
-1. Fetch `HEAD` then parse `og:image`, `og:title`, `og:description`, `og:site_name` from the page.
-2. Write the result as fields on the local shadow tiddler:
+# Fetch `HEAD` then parse `og:image`, `og:title`, `og:description`, `og:site_name` from the page.
+# Write the result as fields on the local shadow tiddler:
 *** `thumbnail` = `og:image` URL
 *** `og-title` = `og:title`
 *** `og-description` = `og:description`
 *** `og-fetched-at` = ISO timestamp
-3. Refresh on a configurable TTL (default: 7 days).
+# Refresh on a configurable TTL (default: 7 days).
 
 Implementation home: `disk-projector.ts` or a dedicated `og-metadata-fetcher.ts` in `lararium-node`.
 The template renders whatever fields are present — no template changes needed for Tier 2 rollout.

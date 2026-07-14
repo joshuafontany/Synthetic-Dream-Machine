@@ -71,15 +71,15 @@ trust — spammers pass DMARC. Authenticity passes as necessary but insufficient
 The alignment layer adds NO new transport. Its primitives are signed assertions that live in
 bags like any other content, evaluated locally against a per-island trust root.
 
-1. **`peer-stance`** — a signed assertion over a target principal: `block | limit | neutral | allow`.
+# **`peer-stance`** — a signed assertion over a target principal: `block | limit | neutral | allow`.
    Two SEPARATE consequences (the separation-of-powers move):
 *** *filter* — I will not surface/accept this actor's content locally.
 *** *relay* — I will not relay this actor's CRDT ops to others (SSB semantics: "no longer
      willing to be a peer that shares their posts"). This is the ''Beelay-layer'' enforcement point.
-2. **`vouch`** — a signed invitation/endorsement edge. Membership in a Cabal/Nexus is by vouch;
+# **`vouch`** — a signed invitation/endorsement edge. Membership in a Cabal/Nexus is by vouch;
    the vouch edge is recorded. Severing a vouch retroactively prunes the invitee's standing in
    the voucher's subgraph. This edge carries the Sybil defense (see #sybil).
-3. **`label`** — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
+# **`label`** — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
    `off-island`, `talk-story-flagged`, …). Adopts the ATProto-labeler + FIRES model:
    ''advisories, not mandates'' — carries `neg`/expiry; the consumer applies them under its own
    policy. A labeler functions as a principal that publishes labels; any peer/cabal **chooses which

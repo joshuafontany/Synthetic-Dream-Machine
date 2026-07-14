@@ -148,13 +148,13 @@ summons/outcome rail slice-1 `recall` proved).
 
 <<~flows turn -> @daemon-reads-the-instruments -> hold(enqueueNalu) -> next-nalu-flush -> Cmd-projects-lar_*-across-the-shore -> mempalace-drawer >>
 
-1. ''Read'' — the @daemon VM wikifies the turn through the instrument `\procedures`;
+# ''Read'' — the @daemon VM wikifies the turn through the instrument `\procedures`;
    `$wikify output="parsetree"` (or `wiki.renderTiddler("text/html")` + read the
    `data-*` attributes) yields the structured gradient readings.
-2. **Hold** — @daemon **`enqueueNalu`**s the readings: they sit on the shared queue,
+# **Hold** — @daemon **`enqueueNalu`**s the readings: they sit on the shared queue,
    scheduled, undelivered. *The swell builds.* (`nalu` = the changeset wave;
    `lar:///ha.ka.ba/lares/api/pono/nalu`.)
-3. ''Flush on the next nalu'' — the frame-aligned drain delivers the readings
+# ''Flush on the next nalu'' — the frame-aligned drain delivers the readings
    atomically; a ''nalu-triggered effect'' (the Elm `Cmd` shape) projects them
    across the causal-island shore as `lar_*` ''tension on the mempalace drawer''.
 

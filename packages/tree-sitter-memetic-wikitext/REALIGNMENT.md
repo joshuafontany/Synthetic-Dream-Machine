@@ -129,3 +129,11 @@ the vendored TiddlyWiki5 core tiddlers.
   text/x-memetic-wikitext declaration; only its interior md remnants
   (154 headings · TOC links) stay on the hand-review tail. All gates green: fold 0.0000%, golden 1 mover (tarot),
   sectioner 12, host-py 15, roundtrip 2/2.
+- 2026-07-14 — THE WINDOW CLOSES (the v0.1 breath, one commit): corpus
+  `1. `→`# ` lands first (1,080 lines across all bags + library framing;
+  67 indented-ol deferred loud; source-text held), then the grammar drops
+  `#`-heading and seats `[*#]+` lists (TW5 mixable markers, strict space).
+  Canon witness 524/524 at 0.0000% — 4,218 headings + 6,776 list nodes;
+  golden re-baked (79 movers, INTENDED); host-py 15 + sectioner 12 +
+  roundtrip 2/2 green. The carrier now speaks TW5 line forms with NO md
+  window; remaining md in the corpus = the hand-review tail only.

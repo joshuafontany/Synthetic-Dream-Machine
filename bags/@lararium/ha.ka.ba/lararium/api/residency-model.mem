@@ -48,8 +48,8 @@ A prior design pivot proposed retiring the single-canonical `promote` ceremony i
 
 Two adjacent traditions hold the right primitives. Neither surfaced through the git framing:
 
-1. ''RDF named graphs + SPARQL Update'' (W3C 2013) — the quad `(s, p, o, g)` makes "the same triple in multiple graphs" first-class. SPARQL Update settled the action verb vocabulary in 2013 after twenty years of practice.
-2. ''FRBR / IFLA LRM + the archival profession'' (1998 / late-19th c.) — Work / Expression / Manifestation / Item dissolves the identity question; SAA professional discipline forbids silent unlink.
+# ''RDF named graphs + SPARQL Update'' (W3C 2013) — the quad `(s, p, o, g)` makes "the same triple in multiple graphs" first-class. SPARQL Update settled the action verb vocabulary in 2013 after twenty years of practice.
+# ''FRBR / IFLA LRM + the archival profession'' (1998 / late-19th c.) — Work / Expression / Manifestation / Item dissolves the identity question; SAA professional discipline forbids silent unlink.
 
 ''Willow protocol'' sits closest among CRDT-adjacent substrates — Entry `(namespace, subspace, path, payload_digest)` separates coordinate from payload by design. ''No shipping CRDT system has composed multi-bag residency with operator-facing gestures.'' SDM fills a real gap.
 
@@ -168,11 +168,11 @@ This dual-surface design — ACTION verbs for the *gesture*, archival verbs for 
 
 Any implementation of this model MUST hold all five:
 
-1. ''Coordinate-first, not timeline-first.'' The recipe acts as a query plan over `(tiddler-title × bag)`, not a merge of branches.
-2. ''Work-identity preserved across residencies.'' FRBR/LRM levels: tiddler-title = Work; per-bag CRDT doc = Manifestation; independent histories by design.
-3. ''Operator-visible coordinate surface.'' Every read MUST surface origin-bag the way SPARQL exposes `GRAPH ?g`. TW5's `getShadowSource` carries the prior-art pattern. Without this surface, the architecture degrades to shadow-tiddler confusion at CRDT scale.
-4. ''Audit-trail discipline.'' Every residency change writes an indelible effect record. Silent unlink violates the model.
-5. ''Verb vocabulary from set-algebra + cataloging.'' The *residency* ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that *folds* state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#conflict-resolution), or it reads as a banned merge verb.
+# ''Coordinate-first, not timeline-first.'' The recipe acts as a query plan over `(tiddler-title × bag)`, not a merge of branches.
+# ''Work-identity preserved across residencies.'' FRBR/LRM levels: tiddler-title = Work; per-bag CRDT doc = Manifestation; independent histories by design.
+# ''Operator-visible coordinate surface.'' Every read MUST surface origin-bag the way SPARQL exposes `GRAPH ?g`. TW5's `getShadowSource` carries the prior-art pattern. Without this surface, the architecture degrades to shadow-tiddler confusion at CRDT scale.
+# ''Audit-trail discipline.'' Every residency change writes an indelible effect record. Silent unlink violates the model.
+# ''Verb vocabulary from set-algebra + cataloging.'' The *residency* ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that *folds* state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#conflict-resolution), or it reads as a banned merge verb.
 
 <<~/ahu >>
 

@@ -435,13 +435,13 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 !! Migration sketch
 
-1. `wiki-recipe.ts` mints the per-wiki personal slot via `wikiSlotUri(slug, "personal")` (`lar:///ha.ka.ba/wikis/@{slug}/personal`).
-2. `expandRecipe()` lays `personal` among the per-wiki live slots above the wiki's `bags/@{slug}` canon.
-3. Update default cascade tiddler (`lar-bag-paths.tid`) with @personal rules.
-4. Wire vessel boot to compute the recipe fingerprint + resolve/create per-pair `@personal` and `@draft` doc URLs (host-inline, per #vessel-boot-flow).
-5. Inject the resolved URLs into `BagResolver` at manifest time.
-6. Keyhive PersonaGroup grant + capability check on the `@personal` and `@draft` bags.
-7. Tests:
+# `wiki-recipe.ts` mints the per-wiki personal slot via `wikiSlotUri(slug, "personal")` (`lar:///ha.ka.ba/wikis/@{slug}/personal`).
+# `expandRecipe()` lays `personal` among the per-wiki live slots above the wiki's `bags/@{slug}` canon.
+# Update default cascade tiddler (`lar-bag-paths.tid`) with @personal rules.
+# Wire vessel boot to compute the recipe fingerprint + resolve/create per-pair `@personal` and `@draft` doc URLs (host-inline, per #vessel-boot-flow).
+# Inject the resolved URLs into `BagResolver` at manifest time.
+# Keyhive PersonaGroup grant + capability check on the `@personal` and `@draft` bags.
+# Tests:
 *** **Single-bag residency (original 7):**
 '''' Two devices, same recipe, same PersonaGroup → write StoryList on device A, observe on device B.
 '''' Two devices, different recipe, same PersonaGroup → write StoryList on device A, device B sees nothing.
@@ -450,7 +450,7 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 '''' ''Test 8 (multi-bag overlay):'' write `$:/StoryList` in `wikis/@{slug}/personal`, then `lares act ADD --title $:/StoryList --from wikis/@{slug}/personal --to bags/@{slug}`. Assert resolveAll returns both bags; resolveTopmost picks the personal layer per recipe priority; origin-bag field reads `wikis/@{slug}/personal`; the `bags/@{slug}` Manifestation remains visible to `lares wiki resolve $:/StoryList`.
 '''' ''Test 9 (transfer effect record):'' `lares act MOVE --title MyNote --from wikis/@{slug}/personal --to bags/@{slug}` produces one `transfer` effect record pairing accession (`bags/@{slug}`) + deaccession (`wikis/@{slug}/personal`); the deaccession log persists in `wikis/@{slug}/personal/log/residency/` after the tiddler leaves.
 *** **Eventual-consistency (S7.7):** binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
-8. Update memory-store.md @personal references.
+# Update memory-store.md @personal references.
 
 <<~/ahu >>
 

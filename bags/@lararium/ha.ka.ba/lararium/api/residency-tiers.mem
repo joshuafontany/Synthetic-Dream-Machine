@@ -34,8 +34,8 @@ The lararium node holds ''one'' residency model, owned by the ''Island Pool''. T
 
 Residency decomposes into two orthogonal dimensions, the thermal axis named in ʻōlelo Hawaiʻi:
 
-1. **Temperature** — a **two-state** thermal axis: **`wela`'' (hot — live + reacting) / ''`anu`** (cold — torn down, URL known, resume by spawn + `ea`). Names a STATE and how fast it resumes.
-2. ''Pin'' — an orthogonal boolean flag. `pinned` means "exempt from cooling." Not a temperature.
+# **Temperature** — a **two-state** thermal axis: **`wela`'' (hot — live + reacting) / ''`anu`** (cold — torn down, URL known, resume by spawn + `ea`). Names a STATE and how fast it resumes.
+# ''Pin'' — an orthogonal boolean flag. `pinned` means "exempt from cooling." Not a temperature.
 
 `pinned` therefore does NOT rank among `wela`/`anu` — it crosses a separate axis. The always-resident set (identity, admin, active wiki, Session Wiki) reads as ''pinned-wela'': live islands the cooler never touches.
 

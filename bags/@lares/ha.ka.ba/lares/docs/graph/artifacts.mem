@@ -284,10 +284,10 @@ A ''valid artifact'' carries `dag_violations = []`. All other validation fields 
 
 When a hydration packet grows past context limits, the compaction pass applies in order:
 
-1. Keep all `closure` entries in full — memes stay intact.
-2. Truncate `pranala_edges` to `family: control` edges only.
-3. Drop `interface_index` and `invariant_index` body — keep counts only (`interface_count`, `invariant_count`).
-4. Record the loss in `compaction_notes` with a brief description of what dropped.
+# Keep all `closure` entries in full — memes stay intact.
+# Truncate `pranala_edges` to `family: control` edges only.
+# Drop `interface_index` and `invariant_index` body — keep counts only (`interface_count`, `invariant_count`).
+# Record the loss in `compaction_notes` with a brief description of what dropped.
 
 Minimal boot should remain small enough to avoid compaction (14 carriers × ~200 bytes per entry ≈ 2.8 KB).
 Full boot may trigger compaction once the relation expansion reaches larger graphs.

@@ -24,12 +24,12 @@ status-date = "2026-05-15"
 
 Multi-voice architectural alignment session. The 13 Voices convened to align:
 
-1. Verse graph ontology research findings (Book of Verse ch. 11/13/14/17 + Unreal Fest 2023)
-2. TW5 synchronous tick semantics ↔ UEFN `OnSimulate(StagedUpdates)` ↔ Verse task tree
-3. Yin-collapse: TW5 wiki as primary reactive engine; ReactionGraph as provisional bridge
-4. Nalu / \tick semantic split: infrastructure wave vs. grammar-layer hook
-5. Completion of the six-operator concurrency ontology (hoolele/\spawn as 6th operator)
-6. Visual Verse status (survey/vaporware; node-graph vs. blocks; UE6 ~2027)
+# Verse graph ontology research findings (Book of Verse ch. 11/13/14/17 + Unreal Fest 2023)
+# TW5 synchronous tick semantics ↔ UEFN `OnSimulate(StagedUpdates)` ↔ Verse task tree
+# Yin-collapse: TW5 wiki as primary reactive engine; ReactionGraph as provisional bridge
+# Nalu / \tick semantic split: infrastructure wave vs. grammar-layer hook
+# Completion of the six-operator concurrency ontology (hoolele/\spawn as 6th operator)
+# Visual Verse status (survey/vaporware; node-graph vs. blocks; UE6 ~2027)
 
 ''Source authorities:'' Book of Verse ch. 11/13/14/17; Unreal Fest 2023 "Verse Deep Dive" PDF;
 Verse Calculus (ICFP 2023, Peyton Jones et al.); TW5 SyncAdaptor contract; Elm Architecture;

@@ -86,9 +86,9 @@ Two articles, two readings of ATProto: Connected Places flags one operator three
 
 Reed sharpens the question further. *Topology* — the structure of boundaries between apps and the data they manipulate — describes "where power attaches: not to code or devices, but to the relationships structuring access to work itself." Three successive arrangements degraded user agency:
 
-1. ''Unix file-stream era.'' Files served as portable objects independent of any specific tool. The boundary between application and document remained legible; competitors could build alternative tools against the same format.
-2. ''Enclosed application era.'' Proprietary formats (.psd, .doc) kept files intact but made them legible only inside a vendor's ecosystem. Internalization absorbed discrete files into opaque application databases — iTunes replacing MP3 folders, iPhoto's .photoslibrary, Outlook's .pst. The DMCA criminalized circumventing these boundaries.
-3. ''Cloud era.'' Work lives "as rows in someone else's database," "accessible through their interface, on their terms," with export pathways ranging from "genuinely functional to essentially vestigial."
+# ''Unix file-stream era.'' Files served as portable objects independent of any specific tool. The boundary between application and document remained legible; competitors could build alternative tools against the same format.
+# ''Enclosed application era.'' Proprietary formats (.psd, .doc) kept files intact but made them legible only inside a vendor's ecosystem. Internalization absorbed discrete files into opaque application databases — iTunes replacing MP3 folders, iPhoto's .photoslibrary, Outlook's .pst. The DMCA criminalized circumventing these boundaries.
+# ''Cloud era.'' Work lives "as rows in someone else's database," "accessible through their interface, on their terms," with export pathways ranging from "genuinely functional to essentially vestigial."
 
 > "Enclosure succeeds not by offering users less, but by bundling genuine capability gains with topological restructuring."
 > — Reed
@@ -116,11 +116,11 @@ Lares answers the diagnostic with a fourth arrangement:
 
 The Lares stack takes the article's challenge seriously. Five architecture laws encode protocol-shaping quine commitments rather than leaving them silent:
 
-1. ''Web2 smell test.'' If a design needs server authority, it gets redesigned from local-first.
-2. ''TW5 vm primacy.'' If logic *can* run in the vm, it MUST. One source of truth.
-3. ''TS files as TW5 plugin projections.'' Code lives as authoring ergonomics; the vm owns runtime.
-4. ''Tiddler-format law.'' All data crosses sync boundaries shaped as {title, text, fields, bag, authority} with lar: URI titles.
-5. ''Meme files render-project from vms.'' Disk holds output, not source of truth.
+# ''Web2 smell test.'' If a design needs server authority, it gets redesigned from local-first.
+# ''TW5 vm primacy.'' If logic *can* run in the vm, it MUST. One source of truth.
+# ''TS files as TW5 plugin projections.'' Code lives as authoring ergonomics; the vm owns runtime.
+# ''Tiddler-format law.'' All data crosses sync boundaries shaped as {title, text, fields, bag, authority} with lar: URI titles.
+# ''Meme files render-project from vms.'' Disk holds output, not source of truth.
 
 Two further commitments arrived this branch:
 

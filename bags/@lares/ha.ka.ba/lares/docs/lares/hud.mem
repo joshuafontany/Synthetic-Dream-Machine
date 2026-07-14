@@ -60,9 +60,9 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
 
-1. Each sigil renders inline (`<<~ word args >>`), a panel adjacent to the prose — never inside the URI.
-2. The `lar:` URI carries bearing only; per-turn signal rides the sigils.
-3. The gauges share the pono `0–20` Level model, and follow seed → slide (the opening seeds a target, the close slides to the landing).
+# Each sigil renders inline (`<<~ word args >>`), a panel adjacent to the prose — never inside the URI.
+# The `lar:` URI carries bearing only; per-turn signal rides the sigils.
+# The gauges share the pono `0–20` Level model, and follow seed → slide (the opening seeds a target, the close slides to the landing).
 
 <<~/ahu >>
 

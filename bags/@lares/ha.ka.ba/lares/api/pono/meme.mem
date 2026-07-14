@@ -57,14 +57,14 @@ through a social network.
 
 A boot-legal meme should carry these surfaces:
 
-1. memetic-wikitext doctype comment
-2. document opener with declared `lar:` address
-3. the toml `iam` slot with canonical payload and role
-4. title plus one to three sentences naming scope and boundary
-5. body-open and body-close thresholds
-6. one six-line OODA-HA phase map
-7. edges block
-8. honest return throat
+# memetic-wikitext doctype comment
+# document opener with declared `lar:` address
+# the toml `iam` slot with canonical payload and role
+# title plus one to three sentences naming scope and boundary
+# body-open and body-close thresholds
+# one six-line OODA-HA phase map
+# edges block
+# honest return throat
 
 Optional depth may add:
 

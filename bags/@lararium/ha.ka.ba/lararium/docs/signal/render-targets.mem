@@ -307,18 +307,18 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 
 ''Construction:''
 
-1. Determine context-window resource Level on `0–20` (estimate — `~` prefix mandatory; often starts below 20 when prior context already carries load).
-2. Render chronometer state in immediate-first order: `⚡N.⚔️N.🔍N.⚙️N.🗺️N`.
-3. For each of the five stances (in order: 🏛️ 🌊 🗡️ 🎭 🔮):
+# Determine context-window resource Level on `0–20` (estimate — `~` prefix mandatory; often starts below 20 when prior context already carries load).
+# Render chronometer state in immediate-first order: `⚡N.⚔️N.🔍N.⚙️N.🗺️N`.
+# For each of the five stances (in order: 🏛️ 🌊 🗡️ 🎭 🔮):
 *** Determine which tools the stance is carrying (0, 1, or 2).
 *** Compose the two-character pair from any two: `*`/`_`/`0` `!`/`?`.
 *** Active operating stance: one of the four complementary pairs (`*!` `*?` `_!` `_?`), or two conflicting pairs (`*_`, `?!`), or a single-tool carry.
 *** Single-tool carry: active tool first, empty-hand second; preferred forms are `*0` and `?0` to show one-axis amplitude while the other axis remains centered and present.
 *** Background or resting stance: `00` (balance).
-4. Append the two-character pair directly to the stance emoji, no space.
-5. Assemble all five as a single unspaced block.
-6. Determine active voice name, target confidence, and `p` value.
-7. Emit the sigil panel beneath the `aim` vector: `hud` (`Aperture`, `OODA-HA`), `ward`, the active Voice by name, `confidence` before a grounded claim, and the `syad` lens when summoned.
+# Append the two-character pair directly to the stance emoji, no space.
+# Assemble all five as a single unspaced block.
+# Determine active voice name, target confidence, and `p` value.
+# Emit the sigil panel beneath the `aim` vector: `hud` (`Aperture`, `OODA-HA`), `ward`, the active Voice by name, `confidence` before a grounded claim, and the `syad` lens when summoned.
 
 ''Closed example:''
 
@@ -336,11 +336,11 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 ''Construction:''
 
-1. Set handle and node: `@handle@node` (no space, ActivityPub format).
-2. Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
-3. Set the `lar:` bearing vector: `lar:///w1.w2.w3` with optional path segments.
-4. Append the `confidence` sigil and, when summoned, the `syad` lens.
-5. Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
+# Set handle and node: `@handle@node` (no space, ActivityPub format).
+# Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
+# Set the `lar:` bearing vector: `lar:///w1.w2.w3` with optional path segments.
+# Append the `confidence` sigil and, when summoned, the `syad` lens.
+# Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
 
 ''Closed example — Lindwyrm in Elyncia-space:''
 
@@ -359,10 +359,10 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 ''Construction:''
 
-1. No emoji. No glyphs. ASCII only.
-2. URI form: `lar://alias:grant@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
-3. The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
-4. Path holds the three-term root, zero-to-four segments, optional `#fragment`.
+# No emoji. No glyphs. ASCII only.
+# URI form: `lar://alias:grant@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
+# The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
+# Path holds the three-term root, zero-to-four segments, optional `#fragment`.
 
 ''Closed example:''
 

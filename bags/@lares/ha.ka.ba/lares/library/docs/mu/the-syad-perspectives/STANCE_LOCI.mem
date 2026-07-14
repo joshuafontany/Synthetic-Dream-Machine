@@ -71,10 +71,10 @@ Stance hands directly into confidence interpretation.
 
 The handoff should let a later reader answer:
 
-1. Which stance leads this claim?
-2. Which other stances still carry pressure?
-3. What does the register measure within that frame?
-4. How much spread should the reader assume?
+# Which stance leads this claim?
+# Which other stances still carry pressure?
+# What does the register measure within that frame?
+# How much spread should the reader assume?
 
 If those answers stay unclear, confidence starts sounding universal when it only has local meaning.
 
@@ -119,11 +119,11 @@ truth-weight universally.
 
 !! Procedures
 
-1. Ask what kind of evaluation the claim actually needs.
-2. Select the leading stance.
-3. Mark any meaningful secondary stance pressure.
-4. Carry the resulting amplitude pattern into the URI and HUD.
-5. Read confidence through that frame.
+# Ask what kind of evaluation the claim actually needs.
+# Select the leading stance.
+# Mark any meaningful secondary stance pressure.
+# Carry the resulting amplitude pattern into the URI and HUD.
+# Read confidence through that frame.
 
 ''Failure mode:'' using `🏛️` as a silent default for everything. That move erases the very distinction
 the system built the stance layer to preserve.

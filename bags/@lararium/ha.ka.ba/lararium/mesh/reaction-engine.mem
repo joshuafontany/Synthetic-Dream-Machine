@@ -82,19 +82,19 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 !! Pipeline Laws
 
-1. ''One reactive engine per island.'' The TW5 wiki ($tw.wiki) is the reactive engine for its island. No overlay dispatch layer runs beside it.
+# ''One reactive engine per island.'' The TW5 wiki ($tw.wiki) is the reactive engine for its island. No overlay dispatch layer runs beside it.
 
-2. ''Islands fire; vessels route; CRDT resolves.'' Island → `IslandMsg_Event` → vessel → `placeVerb()` → CRDT write → convergence. This is the full cross-boundary signal path.
+# ''Islands fire; vessels route; CRDT resolves.'' Island → `IslandMsg_Event` → vessel → `placeVerb()` → CRDT write → convergence. This is the full cross-boundary signal path.
 
-3. ''Promise-pipelining law.'' Islands MUST NOT wait for vessel ACK before firing the next `IslandMsg_Event`. The signal path is one-way fire. Vessels enqueue on receipt; they do not block the island.
+# ''Promise-pipelining law.'' Islands MUST NOT wait for vessel ACK before firing the next `IslandMsg_Event`. The signal path is one-way fire. Vessels enqueue on receipt; they do not block the island.
 
-4. ''CRDT convergence = distributed promise.'' A verb written to the shared admin CRDT and a converged outcome tiddler carry the return value across vessel boundaries. No second protocol. No synchronous return channel.
+# ''CRDT convergence = distributed promise.'' A verb written to the shared admin CRDT and a converged outcome tiddler carry the return value across vessel boundaries. No second protocol. No synchronous return channel.
 
-5. ''Live-query invariant.'' `reaction-router.ts` fires only for `lar:` URIs whose `ReactionGraph` bindings include a matching listenable. Not a full-scan. Incremental per changed URI. This is the vlcn.io live-query pattern applied inside TW5's nalu.
+# ''Live-query invariant.'' `reaction-router.ts` fires only for `lar:` URIs whose `ReactionGraph` bindings include a matching listenable. Not a full-scan. Incremental per changed URI. This is the vlcn.io live-query pattern applied inside TW5's nalu.
 
-6. ''Layer isolation.'' MemeSyncAdaptor → TW5 is the only data ingress path. Vessels MUST NOT deliver tiddler deltas directly to islands (Island Sovereignty Law §2).
+# ''Layer isolation.'' MemeSyncAdaptor → TW5 is the only data ingress path. Vessels MUST NOT deliver tiddler deltas directly to islands (Island Sovereignty Law §2).
 
-7. ''Irreducible TS layer.'' Only four things stay in TS outside TW5: `LarTiddlerStore` (CRDT), network/WebSocket/WebRTC adapters, Keyhive cryptographic operations, `VesselIslandPool` multi-wiki coordination. Everything else belongs in the nalu.
+# ''Irreducible TS layer.'' Only four things stay in TS outside TW5: `LarTiddlerStore` (CRDT), network/WebSocket/WebRTC adapters, Keyhive cryptographic operations, `VesselIslandPool` multi-wiki coordination. Everything else belongs in the nalu.
 
 <<~/ahu >>
 

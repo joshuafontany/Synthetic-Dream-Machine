@@ -79,9 +79,9 @@ Single-use variant: the node server issues a short-lived token that resolves to
 the catalog URL, consumed once, deleted after use. Prevents replay.
 
 ''Magic Wormhole'' short-code variant for in-person handshake:
-1. Node server generates `nameplate:word-word` code.
-2. Peers exchange code verbally or via QR.
-3. Both sides run SPAKE2 PAKE; encrypted channel carries the catalog URL.
+# Node server generates `nameplate:word-word` code.
+# Peers exchange code verbally or via QR.
+# Both sides run SPAKE2 PAKE; encrypted channel carries the catalog URL.
 No infrastructure beyond the relay mailbox server.
 
 !! Tier 2 — BroadcastChannel `peerMetadata`
@@ -186,23 +186,23 @@ group primitive yet; land after AT Protocol "shared data" ships (2025 H2).
 
 ''UCAN invitation flow'' (alpha placeholder, pre-Keyhive):
 
-1. Wiki creator issues a UCAN: `iss=did:web:elyncia.social`, `aud=<new-peer-did>`,
+# Wiki creator issues a UCAN: `iss=did:web:elyncia.social`, `aud=<new-peer-did>`,
    `att=[{ with: "automerge:<catalogUrl>", can: "automerge/sync" }]`.
-2. UCAN delivered as URL fragment or QR code.
-3. Recipient presents UCAN to node server's `sharePolicy`; server verifies chain.
-4. `sharePolicy` returns `true` → doc syncs.
+# UCAN delivered as URL fragment or QR code.
+# Recipient presents UCAN to node server's `sharePolicy`; server verifies chain.
+# `sharePolicy` returns `true` → doc syncs.
 
 ''AWAKE'' (ucan-wg/awake) extends this with an X25519 ECDH handshake gating
 the first sync message — removes the need for TLS as the transport trust layer.
 
 ''Keyhive flow'' (future, when `keyhive_wasm` ships):
 
-1. Wiki creator calls `doc.addMember(newPeerEd25519PublicKey)` → signed op in
+# Wiki creator calls `doc.addMember(newPeerEd25519PublicKey)` → signed op in
    doc's Keyhive ACL log.
-2. New peer's Ed25519 pubkey = their DID's key material; the signed "add" entry
+# New peer's Ed25519 pubkey = their DID's key material; the signed "add" entry
    IS the invitation artifact.
-3. New peer receives the wiki URL + "add" op out-of-band (any tier above).
-4. `beelay` sync authenticates using the key chain; ciphertext-only relay.
+# New peer receives the wiki URL + "add" op out-of-band (any tier above).
+# `beelay` sync authenticates using the key chain; ciphertext-only relay.
 
 !! Lararium Bootstrap Sequence (Current Implementation)
 

@@ -157,18 +157,18 @@ STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in
 
 !! What Would Prove It ~ the experiments, none of them run
 
-1. ''Re-derive Lemma 3 under an append-only signed vouch DAG'' (the attacker cannot rewrite an acquired
+# ''Re-derive Lemma 3 under an append-only signed vouch DAG'' (the attacker cannot rewrite an acquired
    node's out-edges). Does the bound tighten, hold, or vanish? **Until this runs, C1 stands on someone
    else's model.**
-2. ''Implement the one-pass fold and attack it.'' Build the DAG, mint sybils, measure the realised
+# ''Implement the one-pass fold and attack it.'' Build the DAG, mint sybils, measure the realised
    `benefit/cost` against `1/ε`. ''A single run either shows the bound or shows we misread it.''
-3. ''Settle the dangling-sink policy'' (C2's refutation). Seed-return versus uniform — does either launder?
-4. **Attempt the counterexample to C4.** A monotone, mass-conserving fold. **Failing to find one is not a
+# ''Settle the dangling-sink policy'' (C2's refutation). Seed-return versus uniform — does either launder?
+# **Attempt the counterexample to C4.** A monotone, mass-conserving fold. **Failing to find one is not a
    proof, and this outline must never say otherwise.**
-5. **Measure the DISTORTION.** The same paper proves that absent fast mixing, **no PageRank variant achieves
+# **Measure the DISTORTION.** The same paper proves that absent fast mixing, **no PageRank variant achieves
    low distortion'' — honest, distant kin starve. ''That is our false-rejection rate on Neo-Thracia, and it
    is the price of C1.** How steep is it, in our topology, at our depths?
-6. ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
+# ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
    the failure is invisible from inside and ''every gate we own would glow green through it.''
 
 <<~ confidence Provisional 5/20 >> **Nothing above has been attempted. This meme is an outline and a

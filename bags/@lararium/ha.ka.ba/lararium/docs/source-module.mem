@@ -95,11 +95,11 @@ These files are the highest-value source-module memes:
 
 The `write-source-memes.ts` script MUST:
 
-1. Run after each successful build in affected packages.
-2. For each priority source file: read, hash, emit a carrier meme into the store.
-3. Use origin `{ kind: "operator-import" }` — source memes enter as canon-hydrate peers.
-4. Overwrite existing carrier if content-hash differs; no-op if hash matches.
-5. Never emit noise or data files — only files with named exports that implement
+# Run after each successful build in affected packages.
+# For each priority source file: read, hash, emit a carrier meme into the store.
+# Use origin `{ kind: "operator-import" }` — source memes enter as canon-hydrate peers.
+# Overwrite existing carrier if content-hash differs; no-op if hash matches.
+# Never emit noise or data files — only files with named exports that implement
    invariant capabilities or architectural law.
 
 <<~/ahu >>

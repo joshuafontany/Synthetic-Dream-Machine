@@ -146,12 +146,12 @@ whole point. parse5-floor confirmed by triple empirical proof (parse5 flattens `
 is BLIND to `$`-widgets, `$` not a legal HTML name-start · CANNOT even find tag BOUNDARIES — an
 unquoted `<<macro>>` value's `>` ends the tag early per the HTML5 unquoted-attr-value state → the
 hybrid (B) is unsound, not just lossy). The three driver changes (`core/.../rules/html.js`):
-1. `parseTag` contract `node|null` → ''always-a-tree + diagnostics''. Missing-`>` (`html.js:146`): no
+# `parseTag` contract `node|null` → ''always-a-tree + diagnostics''. Missing-`>` (`html.js:146`): no
    longer null — synthesize a zero-width **MISSING `>`**, set `openTagEnd = pos`, keep the attrs
    already parsed, emit a diagnostic. Recovery-set = next `>` | newline | `<`.
-2. Bad/unterminated tag-name (`:114`,`:123`): emit an ''Error node'' wrapping the `<…` span VERBATIM
+# Bad/unterminated tag-name (`:114`,`:123`): emit an ''Error node'' wrapping the `<…` span VERBATIM
    (`recoveredAs:"water"`, raw confidence), advance ''≥1 char'' (progress invariant).
-3. Attribute loop (`:127-134`): when `parseAttribute` returns null on a malformed `<<` (its guard
+# Attribute loop (`:127-134`): when `parseAttribute` returns null on a malformed `<<` (its guard
    `parseutils.js:579-581` — must still NOT silently bind `"true"`), don't abort the tag — skip to the
    recovery-set, wrap the bad span as a graded attribute-error, continue under the ≥1-char invariant.
 
@@ -257,12 +257,12 @@ non-iso dep fights the node/browser/cli/worker quad our island layer runs in) + 
 already-island-shaped parser.
 
 ''AUGMENT'' our `meme-ast/` island layer (it's ALREADY an island grammar — purely additive):
-1. add an **`Error` node kind** to `MemeAstKind` `{reason, recoveredAs, pos, raw}` — emitted at the
+# add an **`Error` node kind** to `MemeAstKind` `{reason, recoveredAs, pos, raw}` — emitted at the
    three silent-loss sites (orphan close `builder.ts:258`, EOF force-close `builder.ts:277-281`,
    dropped near-miss sigils `scanner.ts`).
-2. add **`confidence: number`** to `MemeAstBase` (0–20 aperture ladder; reuse the existing edge-
+# add **`confidence: number`** to `MemeAstBase` (0–20 aperture ladder; reuse the existing edge-
    confidence convention `types.ts:34`) — 20 = clean, lower for force-closed/recovered/Dynamic-unknown.
-3. ''phrase-level recovery'' in `findCloseEnd` (`lar-sigil-shared.ts:202`) + the builder EOF sweep —
+# ''phrase-level recovery'' in `findCloseEnd` (`lar-sigil-shared.ts:202`) + the builder EOF sweep —
    bound a force-closed frame at the next blank line / next opener instead of swallowing to EOF.
 
 ''WRAP'' for full TW5 core wikitext — ''NO FORK NEEDED, plugin-override-preload (VERIFIED).'' TW5

@@ -103,11 +103,11 @@ body text…
 
 ''OODA-HA code review findings (non-blocking smells):''
 
-1. `meme-sync-adaptor.ts:129` — `targetBag` default is `"room"` (stale string from rooms→wikis rename). Cosmetic; the actual bag ID comes from each adaptor instance's constructor call in production.
-2. `file-path` absent in child iam when authored directly in TW5 UX (not via disk sync) — `source-file` field not set → `parentSourceFile` empty → `childFilePath` undefined. Acceptable by design: tiddlers not yet on disk have no disk path. Behaviour is consistent.
-3. `iam-source` mutex: explicit operator-authored block takes priority over generated iam. Correct.
-4. `TimeoutNegativeWarning` — pre-existing Automerge repo noise. Non-blocking.
-5. Heleuma drift `ha.ka.ba/lararium/tw5/widgets/toml` — pre-existing, needs `--sync-modules --commit` to resolve.
+# `meme-sync-adaptor.ts:129` — `targetBag` default is `"room"` (stale string from rooms→wikis rename). Cosmetic; the actual bag ID comes from each adaptor instance's constructor call in production.
+# `file-path` absent in child iam when authored directly in TW5 UX (not via disk sync) — `source-file` field not set → `parentSourceFile` empty → `childFilePath` undefined. Acceptable by design: tiddlers not yet on disk have no disk path. Behaviour is consistent.
+# `iam-source` mutex: explicit operator-authored block takes priority over generated iam. Correct.
+# `TimeoutNegativeWarning` — pre-existing Automerge repo noise. Non-blocking.
+# Heleuma drift `ha.ka.ba/lararium/tw5/widgets/toml` — pre-existing, needs `--sync-modules --commit` to resolve.
 
 ''J.3 still open.'' Parent + child tiddlers both land in wiki bag after `lares wiki sync`. `lares act MOVE` moves only the parent URI; children stay in wiki bag; canonical disk projector writes only what's in the canonical bag → child slot files never land in `packages/`. J.3 fix: promote handler must walk `#fragment` children and co-promote them atomically.
 
@@ -182,11 +182,11 @@ Two commits:
 
 ''Smoke result — happy path confirmed, gap revealed:''
 
-1. `lares reset --force` → fresh genesis + new operator key
-2. `lares serve` → daemon up, Keyhive initialized
-3. `lares wiki sync altar-fire` → `ingested: 1` — disk file landed in room bag; `splitRecursive` created parent + N child tiddlers in bag
-4. `lares act MOVE lar:///ha.ka.ba/lares/docs/lares/the-lares-protocols --to lar:///ha.ka.ba/bags/@lares --yes` → ceremony clean; audit tiddler written
-5. Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot >>` refs — ''but no child slot files''
+# `lares reset --force` → fresh genesis + new operator key
+# `lares serve` → daemon up, Keyhive initialized
+# `lares wiki sync altar-fire` → `ingested: 1` — disk file landed in room bag; `splitRecursive` created parent + N child tiddlers in bag
+# `lares act MOVE lar:///ha.ka.ba/lares/docs/lares/the-lares-protocols --to lar:///ha.ka.ba/bags/@lares --yes` → ceremony clean; audit tiddler written
+# Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot >>` refs — ''but no child slot files''
 
 ''Gap named (J.3):'' `lares act MOVE` is single-URI. `splitRecursive` creates `#fragment` child tiddlers in the bag alongside the parent, but the promote handler moves only the parent URI. Children stay in the room bag; disk projector for the canonical bag writes only what's in that bag. The parent renders correctly (always-split, always-kahea); the child meme files never land in `packages/lares-core/memes/`. The fix: promote handler must walk `#fragment` children of the promoted parent and co-promote them in the same ceremony. Named J.3 — recursive promote / child co-promotion.
 
@@ -453,8 +453,8 @@ Sprint paused after C.1 to scope S7 — the cap layer is what S7 needs and chang
 
 Two research streams reframed the original "use UCAN, swap to Keyhive later" plan:
 
-1. ''UCAN library survey'' returned with: *Keyhive does NOT use UCAN.* It uses concap (convergent capabilities, CRDT-shaped revocation). Migration UCAN→Keyhive is re-implementation, not swap.
-2. ''Keyhive deep-dive'' confirmed: concap spec is design-phase ("very recently begun to implement" per Notebook 01), but `keyhive_wasm` (npm `@keyhive/keyhive`) ships as pre-alpha 0.0.0-alpha.56c with TypeScript bindings. Operator chose ''adopt directly'' rather than hand-roll concap-shape from incomplete spec.
+# ''UCAN library survey'' returned with: *Keyhive does NOT use UCAN.* It uses concap (convergent capabilities, CRDT-shaped revocation). Migration UCAN→Keyhive is re-implementation, not swap.
+# ''Keyhive deep-dive'' confirmed: concap spec is design-phase ("very recently begun to implement" per Notebook 01), but `keyhive_wasm` (npm `@keyhive/keyhive`) ships as pre-alpha 0.0.0-alpha.56c with TypeScript bindings. Operator chose ''adopt directly'' rather than hand-roll concap-shape from incomplete spec.
 
 D.1 probe (`packages/lararium-keyhive/probes/operator-delegate-device.ts`) end-to-end exercised init → contact-card exchange → registerBag → addMember → SignedDelegation. Verdict: ''WORKABLE.'' D.1.5 enumerated `Access.tryFromString` → only `read` and `admin` accepted (binary, NOT our 8-step ABILITY_LADDER). Captured event variants per ceremony: PREKEY_ROTATED (frequent ~172B), CGKA_OPERATION (3×), DELEGATED (2×).
 
@@ -881,11 +881,11 @@ Attention-scale register names now canonical: ''Pulse'' (L0) / ''Beat'' (L1) / '
 | `kapu.md` | `<<~⊙&#x0011;` | `<<~⊙&#x0014;` (DC1/DC4 — intentional) |
 
 ''Misfile audit — five moves:''
-1. `pono/circles-kowloon.md` → `docs/pono/circles-kowloon.md` (doc companion, not binding law)
-2. `pono/pattern-integrity.md` → `mu/pattern-integrity.md` (cosmological, not protocol)
-3. `docs/grammars/tiddlywiki-filter.md` → `docs/pono/tiddlywiki-filter.md` (docs/grammars/ deleted)
-4. `pono/source-module.md` → `docs/lararium/source-module.md` (reference companion)
-5. `masks/**` → `lares/masks/**` — voice-house consolidated under `lares/voices.md`
+# `pono/circles-kowloon.md` → `docs/pono/circles-kowloon.md` (doc companion, not binding law)
+# `pono/pattern-integrity.md` → `mu/pattern-integrity.md` (cosmological, not protocol)
+# `docs/grammars/tiddlywiki-filter.md` → `docs/pono/tiddlywiki-filter.md` (docs/grammars/ deleted)
+# `pono/source-module.md` → `docs/lararium/source-module.md` (reference companion)
+# `masks/**` → `lares/masks/**` — voice-house consolidated under `lares/voices.md`
 
 ''Voice-house:''
 * `lares/voices.md` now functions as the invariant parent of `lares/masks/`
@@ -984,11 +984,11 @@ The publish step is a deliberate authority handoff: user keypair authorizes the 
 
 !! Five Architecture Laws (Do Not Re-Derive)
 
-1. ''Web2 smell test'' — if it smells like web2, throw it aside and redesign from web3 local-first principles
-2. ''TW5 vm primacy'' — if it CAN happen in the TW5 vm pool, it MUST happen there
-3. ''TS files as TW5 plugin projections'' — vite translates TS to TW5 plugin; keep TS to design JS tiddlers
-4. ''Tiddler format law'' — all data as `{ title, text, fields, bag, authority }`
-5. ''Meme files as tiddler-package projections'' — `*.md` = projection of parent+fragment tiddlers; deserialize in vm; write via `renderTiddler`
+# ''Web2 smell test'' — if it smells like web2, throw it aside and redesign from web3 local-first principles
+# ''TW5 vm primacy'' — if it CAN happen in the TW5 vm pool, it MUST happen there
+# ''TS files as TW5 plugin projections'' — vite translates TS to TW5 plugin; keep TS to design JS tiddlers
+# ''Tiddler format law'' — all data as `{ title, text, fields, bag, authority }`
+# ''Meme files as tiddler-package projections'' — `*.md` = projection of parent+fragment tiddlers; deserialize in vm; write via `renderTiddler`
 
 ---
 

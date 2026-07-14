@@ -103,12 +103,12 @@ Prior art from YJS 3D spaces and TW5 large instances still informs the target, b
 
 Current M10 opening path is local-first and TW5-centered:
 
-1. Server starts `Repo` with `NodeFSStorageAdapter` at `.lararium-data/meme-store/`.
-2. If no Automerge meme-store doc exists, server builds `snapshotMemes` from `lares/` and seeds the doc with `{ title, fields, text }` records.
-3. Server injects HTML meta tags: `lararium-meme-store`, `lararium-meme-sync`, `lararium-operator-did`, `lararium-receipt`, and route room id.
-4. Browser opens `Repo` with `IndexedDBStorageAdapter` first, then connects to `/meme-sync` as a peer.
-5. Browser creates a room-scoped `LarariumTW5`, runs `loadFromStore()` before `tw5-ready`, and starts `LarariumCrdtSyncAdaptor` both directions.
-6. `LarariumShell` seeds local tldraw from `projectFromTw5(tw5)` by putting emitted page/shape/binding records into the editor store.
+# Server starts `Repo` with `NodeFSStorageAdapter` at `.lararium-data/meme-store/`.
+# If no Automerge meme-store doc exists, server builds `snapshotMemes` from `lares/` and seeds the doc with `{ title, fields, text }` records.
+# Server injects HTML meta tags: `lararium-meme-store`, `lararium-meme-sync`, `lararium-operator-did`, `lararium-receipt`, and route room id.
+# Browser opens `Repo` with `IndexedDBStorageAdapter` first, then connects to `/meme-sync` as a peer.
+# Browser creates a room-scoped `LarariumTW5`, runs `loadFromStore()` before `tw5-ready`, and starts `LarariumCrdtSyncAdaptor` both directions.
+# `LarariumShell` seeds local tldraw from `projectFromTw5(tw5)` by putting emitted page/shape/binding records into the editor store.
 
 ''Receipt delivery:'' The receipt SHA now travels as `<meta name="lararium-receipt">` in the HTML shell. The hidden tldraw boot-receipt shape and `useBridgeReceiptFromEditor` pattern are deleted from the active path. `LarariumBootReceiptMeta` remains only as a deprecated compatibility type until the protocol surface is cleaned.
 
@@ -177,11 +177,11 @@ _Status: design only (trust tiers + Orichalcum gate). Authority seam (`LarariumA
 The old "confirmed SQLite vs pending tldraw" model is no longer the content authority model. SQLite/TLSocketRoom may still carry legacy layout state, but meme content promotion is governed by Automerge origins plus the explicit promote endpoint.
 
 ''Promotion path (shipped M10 — local-operator only):''
-1. Operator calls `PUT /admin/promote` with `{ uri, carrierText, shapeId? }` (localhost-only today).
-2. `canPromoteToCanon({ origin: "operator-import", authorityMode: "local-operator", target: uri })` executes as policy gate.
-3. `resolveLarUri(uri)` resolves to `laresRelPath`; path-traversal guard ensures path stays within `LARES_ROOT`.
-4. `writeFileSync(filePath, carrierText)` writes to `lares/`.
-5. Server patches the Automerge meme-store doc immediately; the lares/ watcher remains the external disk→Automerge path and echo-loop guard seam.
+# Operator calls `PUT /admin/promote` with `{ uri, carrierText, shapeId? }` (localhost-only today).
+# `canPromoteToCanon({ origin: "operator-import", authorityMode: "local-operator", target: uri })` executes as policy gate.
+# `resolveLarUri(uri)` resolves to `laresRelPath`; path-traversal guard ensures path stays within `LARES_ROOT`.
+# `writeFileSync(filePath, carrierText)` writes to `lares/`.
+# Server patches the Automerge meme-store doc immediately; the lares/ watcher remains the external disk→Automerge path and echo-loop guard seam.
 
 ''Target ceremony:''
 * Canvas or TW5 detail editor triggers "promote" from selected/focused URI.
@@ -415,10 +415,10 @@ All persistent content in Lararium receives a `lar:` URI. This is the foundation
 ''Hostless URIs'' (`lar:///...`) are canonical — they name things that exist in `lares/` or are promoted canon. ''Hostful URIs'' (`lar://alias:grant@host/...`) are live/session-scoped — they name things that exist only in the current session's branch/room until committed.
 
 ''Import flow:'' When a user drops a text file or image onto the canvas, the server:
-1. Computes `sha256(content)`
-2. Assigns a hostful URI: `lar://alias:grant@host/imported/${sha256-prefix}/${slug}`
-3. Creates a tldraw shape with that URI as its `sourceUri`
-4. On commit: promotes to hostless `lar:///imported/...` and writes a carrier file
+# Computes `sha256(content)`
+# Assigns a hostful URI: `lar://alias:grant@host/imported/${sha256-prefix}/${slug}`
+# Creates a tldraw shape with that URI as its `sourceUri`
+# On commit: promotes to hostless `lar:///imported/...` and writes a carrier file
 
 <<~/ahu >>
 
@@ -526,8 +526,8 @@ The file backend wraps `fs.writeFileSync` + `git add` + `git commit`. The commit
 !!! Ceremony surface
 
 Canon MOVE is always an explicit two-step:
-1. Operator/admin triggers "MOVE to canon" on a pending shape
-2. Server validates shape against Lararium schema, assigns hostless URI, writes carrier file, triggers recompile
+# Operator/admin triggers "MOVE to canon" on a pending shape
+# Server validates shape against Lararium schema, assigns hostless URI, writes carrier file, triggers recompile
 
 The tldraw canvas shows a visible distinction between pending (dashed border, amber) and confirmed (solid border, default) shapes. This is cosmetic enforcement of the canon-boundary invariant.
 
@@ -932,9 +932,9 @@ Footer glyph tracks zoom level live via `onZoomLevel` callback from `LarariumCan
 !!! Offline / Reconnection Model
 
 Mirror Kinopio's dual-load strategy:
-1. On room open: restore IndexedDB snapshot immediately → render instantly
-2. Simultaneously: connect WS → receive deltas → merge with local state
-3. On disconnect: continue editing locally → queue mutations → replay on reconnect
+# On room open: restore IndexedDB snapshot immediately → render instantly
+# Simultaneously: connect WS → receive deltas → merge with local state
+# On disconnect: continue editing locally → queue mutations → replay on reconnect
 
 This requires `@tldraw/store`'s persistence adapter wired to IndexedDB. Not yet implemented — see open questions.
 
@@ -1019,7 +1019,7 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 ''Open:''
 
-1. ✓/⚠ ''Zoom-gated rendering shipped; template source pivoted (2026-04-29 correction):'' `applyZoomTemplate()` batch-updates frame/socket/body-node props on zoom threshold crossings. Active layout truth is TW5 `lar:///kumu/meme-*` tiddlers read via `getZoomLayout(level)`, with fallback defaults. Older `KumuRegistry` / `shape.meta.templateProps` stamping is historical. URI-stable shape IDs remain. See `#views` and `#tldraw-template-model`.
+# ✓/⚠ ''Zoom-gated rendering shipped; template source pivoted (2026-04-29 correction):'' `applyZoomTemplate()` batch-updates frame/socket/body-node props on zoom threshold crossings. Active layout truth is TW5 `lar:///kumu/meme-*` tiddlers read via `getZoomLayout(level)`, with fallback defaults. Older `KumuRegistry` / `shape.meta.templateProps` stamping is historical. URI-stable shape IDs remain. See `#views` and `#tldraw-template-model`.
 
 1a. **Async `ReactionGraph`:** `fire()` must return `Promise<void>` before `hui`/`heihei`/`puka`/`kukali` have execution semantics. Zero structural changes required — this is a method signature change in `live-protocol.ts`. Fanout modes (`Promise.all`, `Promise.race`, `Promise.any` + cancel) follow immediately after. See `#causal-islands`.
 
@@ -1031,25 +1031,25 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 1e. ✓ ''Spatial family + FAMILY_ROLES (shipped 2026-04-28):'' All 8 pranala families have canonical role vocabularies in `FAMILY_ROLES` (pranala-parser.ts). `validatePranalaEdge` now emits `"unknown-role"` warnings for out-of-vocabulary roles across all `roleRecommended` families. Spatial roles: `contains | portal | adjacent | layer`. Unblocks portals-as-graph-edges (not just geo shapes with `meta.larPortal`).
 
-2. ✓ ''Meme count reactive subscription (shipped 2026-04-27):'' `store.listen` with `scope: "document"` + 150ms debounce added to `LarariumCanvas`. One-shot scan on `synced-remote`, live re-scan on any shape mutation. `MenuPanel` now reflects live meme count.
+# ✓ ''Meme count reactive subscription (shipped 2026-04-27):'' `store.listen` with `scope: "document"` + 150ms debounce added to `LarariumCanvas`. One-shot scan on `synced-remote`, live re-scan on any shape mutation. `MenuPanel` now reflects live meme count.
 
-3. ''LarPortalShapeUtil (future):'' Only needed if `geo` + meta proves insufficient for portal UX (click area, label rendering). Current `geo`+meta is MVP-sufficient.
+# ''LarPortalShapeUtil (future):'' Only needed if `geo` + meta proves insufficient for portal UX (click area, label rendering). Current `geo`+meta is MVP-sufficient.
 
-5. **User home rooms (`user:${did}`) with altar-fire transclusion:** Seed logic for per-user rooms. Altar-fire memes projected as locked cluster in corner of user room canvas. Depends on UCAN/identity.
+# **User home rooms (`user:${did}`) with altar-fire transclusion:** Seed logic for per-user rooms. Altar-fire memes projected as locked cluster in corner of user room canvas. Depends on UCAN/identity.
 
-6. ⚠ **Room reseeding (`/admin/reseed`) — superseded semantics.** The endpoint still evicts the legacy tldraw SQLite room and recomputes receipt/snapshot state, but normal grammar/carrier hot reload now flows disk → Automerge → TW5. Use `/admin/reseed` for legacy layout reset or receipt refresh, not as the primary content update path.
+# ⚠ **Room reseeding (`/admin/reseed`) — superseded semantics.** The endpoint still evicts the legacy tldraw SQLite room and recomputes receipt/snapshot state, but normal grammar/carrier hot reload now flows disk → Automerge → TW5. Use `/admin/reseed` for legacy layout reset or receipt refresh, not as the primary content update path.
 
-7. ''Content-addressed room keys:'' `boot-${receipt.sha.slice(0,16)}` for boot/full rooms. Named rooms use stable slugs. Transition path from `"boot"` needs client redirect.
+# ''Content-addressed room keys:'' `boot-${receipt.sha.slice(0,16)}` for boot/full rooms. Named rooms use stable slugs. Transition path from `"boot"` needs client redirect.
 
-8. ''Offline / IndexedDB persistence:'' `@tldraw/store` persistence adapter for IndexedDB. Mirror Kinopio's dual-load: restore IndexedDB immediately, merge remote deltas after WS connect.
+# ''Offline / IndexedDB persistence:'' `@tldraw/store` persistence adapter for IndexedDB. Mirror Kinopio's dual-load: restore IndexedDB immediately, merge remote deltas after WS connect.
 
-9. ''Wiki-recipe carriers (M10):'' `lares/recipes/` schema. RPG rooms (`ftls`, `wtf`) depend on this. Seeding path: `PUT /admin/promote` plumbing exists; recipe schema and per-room seed loop are the remaining deliverable.
+# ''Wiki-recipe carriers (M10):'' `lares/recipes/` schema. RPG rooms (`ftls`, `wtf`) depend on this. Seeding path: `PUT /admin/promote` plumbing exists; recipe schema and per-room seed loop are the remaining deliverable.
 
-10. ✓ **Write-back gate (`PUT /admin/promote`) — shipped M10 (local-operator).** `writeFileSync` + lares/ watcher reseed. Full `LarStorageBackend` (file backend + git) deferred until Orichalcum ceremony lands.
+# ✓ **Write-back gate (`PUT /admin/promote`) — shipped M10 (local-operator).** `writeFileSync` + lares/ watcher reseed. Full `LarStorageBackend` (file backend + git) deferred until Orichalcum ceremony lands.
 
-11. ''Orichalcum capability implementation:'' Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
+# ''Orichalcum capability implementation:'' Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
 
-12. ''ATProto identity (BFF):'' See `lares/lararium-node/AUTH-ATPROTO.md`.
+# ''ATProto identity (BFF):'' See `lares/lararium-node/AUTH-ATPROTO.md`.
 
 <<~/ahu >>
 

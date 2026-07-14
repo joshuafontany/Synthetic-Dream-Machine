@@ -192,9 +192,9 @@ Invariant-declaration-ba governs the authoring motion: start with the most struc
 !! Pre-MCP Implementation Patterns
 
 Before a dedicated MCP server exists, a skill runs as one of:
-1. ''Agent-native'' — the agent (Claude Code) reads the target meme and applies the skill body as a prompted procedure, emitting a TOML result envelope in plain text
-2. ''CLI subprocess'' — the skill body invokes a `Bash` tool call to a Python or Node script that parses the target meme and emits a structured JSON/TOML report
-3. ''Hybrid'' — the CLI subprocess handles structural/mechanical invariants; the agent handles semantic/interpretive invariants; results merge into one envelope
+# ''Agent-native'' — the agent (Claude Code) reads the target meme and applies the skill body as a prompted procedure, emitting a TOML result envelope in plain text
+# ''CLI subprocess'' — the skill body invokes a `Bash` tool call to a Python or Node script that parses the target meme and emits a structured JSON/TOML report
+# ''Hybrid'' — the CLI subprocess handles structural/mechanical invariants; the agent handles semantic/interpretive invariants; results merge into one envelope
 
 !!! Python Pattern (Lark / Tree-sitter)
 

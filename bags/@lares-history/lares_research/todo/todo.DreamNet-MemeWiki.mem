@@ -155,11 +155,11 @@ Orient maps the gathered findings into an implementable architecture.
 
 The current best reading of the research is a five-layer spine:
 
-1. `kernel` - a Node-first MemeWiki runtime with meme store, parser ingress, IR, deterministic render, and browser-resume readiness
-2. `authoring` - a Lezer grammar and CodeMirror 6 editor that operate against the same memetic syntax family as the kernel
-3. `application bridge` - a Kowloon-facing API or service layer plus React embedding strategy that exposes the kernel without bypassing existing app conventions
-4. `collaboration` - TLDraw sync, presence, and canvas embedding for shared visual work, ideally without inventing a second incompatible state model
-5. `semantic or graph bridge` - a later MemPalace adaptor for graph query, semantic persistence, and related sync surfaces
+# `kernel` - a Node-first MemeWiki runtime with meme store, parser ingress, IR, deterministic render, and browser-resume readiness
+# `authoring` - a Lezer grammar and CodeMirror 6 editor that operate against the same memetic syntax family as the kernel
+# `application bridge` - a Kowloon-facing API or service layer plus React embedding strategy that exposes the kernel without bypassing existing app conventions
+# `collaboration` - TLDraw sync, presence, and canvas embedding for shared visual work, ideally without inventing a second incompatible state model
+# `semantic or graph bridge` - a later MemPalace adaptor for graph query, semantic persistence, and related sync surfaces
 
 !!! Dependency Order
 

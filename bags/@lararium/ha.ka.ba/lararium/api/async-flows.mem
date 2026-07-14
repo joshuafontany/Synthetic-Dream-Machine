@@ -152,10 +152,10 @@ The three pieces already exist:
 <<~ranks have daemon-jobs ~ mempalace `--daemon --background` → job-id → daemon jobs/wait/status (we call mine SYNCHRONOUSLY instead) -> durable-results ~ lares summons → @daemon/outcomes/<requestId> (CRDT, survives a CLI timeout, re-queryable) -> dual-render ~ render.ts prose/JSON (the progress-event split seam) >>
 
 ''Implementation order'' (write-toward; confirm interfaces first — see caveat):
-1. Make long ops ''return the request-id fast'' (+ `--detach`); default TTY attaches to `watch`.
-2. Add **`lares status|watch|wait|cancel <id>`** over the durable-result + daemon-job stores.
-3. Emit the ''progress event stream'' (job → NDJSON on stderr / bar on TTY; result on stdout); route mempalace `--daemon --background` for the heavy mines + surface its `daemon jobs/wait`.
-4. ''Exit-124 timeout'' + the semantic codes + `pollInterval` in `status`.
+# Make long ops ''return the request-id fast'' (+ `--detach`); default TTY attaches to `watch`.
+# Add **`lares status|watch|wait|cancel <id>`** over the durable-result + daemon-job stores.
+# Emit the ''progress event stream'' (job → NDJSON on stderr / bar on TTY; result on stdout); route mempalace `--daemon --background` for the heavy mines + surface its `daemon jobs/wait`.
+# ''Exit-124 timeout'' + the semantic codes + `pollInterval` in `status`.
 
 ''Caveat (Beacon, Cup):'' the research did not read the repo — confirm whether the
 daemon-job/durable-result interfaces already emit *intermediate* progress (vs only

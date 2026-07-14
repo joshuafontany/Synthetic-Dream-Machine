@@ -44,14 +44,14 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 
 !! Wire Law
 
-1. ''One wire, one entity.'' A wire exists as one `lar:` addressed record carrying `from` and `to` (each a `lar:` URI or `URI#socket`). It MUST NOT exist as an attribute on a line of prose — the corpus-wide attribute-edge form retired 2026-06-12.
-2. ''Semantics worn, never typed-in-place.'' A wire wears its family as a stack component — `wires/dataflow`, `wires/message`, `wires/control`, `wires/constraint`, `wires/observe` ride as *examples, not an enum* (has-stack clause 4: open minting, ladder-judged). The family definition meme carries the meaning; the wire record carries only endpoints and fields.
-3. ''The four concerns stay independent'' (inherited whole from the prior edge law): `traversal` (how a query moves) · `propagation` (how invalidation fires) · arity (family-declared, has-stack clause 5) · lifecycle. They ride as ''fields'' on the wire record and MUST NOT collapse into each other.
-4. ''Lifecycle = template · instance · trace.'' A template wire carries slots and defaults; an instance binds real endpoints; a ''trace'' records a firing, failure, or event — each its own entity, so the event history merges and federates like any record.
-5. ''Directed, acyclic per family.'' One wire carries one arc. Reciprocal pressure uses two wires. Cycles within a family read as degraded structure.
-6. ''Wires hold grants.'' As entities, wires wear kapu and capability components like any carrier — a message route can require an operator mint; an attribute on a line never could. Authority = what the wire holds.
-7. ''The engine vends liveness, wires declare intent.'' A `wires/message` instance compiles into the reaction plane (`ReactionBinding`; engine-vended `listenable`s — `verse-event-lattice` law unchanged). The wire = the authored, addressable declaration; the binding = the engine's live subscription. Events ride wires and lifetime edges — never a global bus.
-8. ''Canvas renders, never infers.'' The explicit wire entity precedes its spatial form (graph-primacy, `wikispace-canvasspace-ontology`); proximity creates nothing. Wire view-state (path, routing, label placement) lives in view-state entities, never on the wire record.
+# ''One wire, one entity.'' A wire exists as one `lar:` addressed record carrying `from` and `to` (each a `lar:` URI or `URI#socket`). It MUST NOT exist as an attribute on a line of prose — the corpus-wide attribute-edge form retired 2026-06-12.
+# ''Semantics worn, never typed-in-place.'' A wire wears its family as a stack component — `wires/dataflow`, `wires/message`, `wires/control`, `wires/constraint`, `wires/observe` ride as *examples, not an enum* (has-stack clause 4: open minting, ladder-judged). The family definition meme carries the meaning; the wire record carries only endpoints and fields.
+# ''The four concerns stay independent'' (inherited whole from the prior edge law): `traversal` (how a query moves) · `propagation` (how invalidation fires) · arity (family-declared, has-stack clause 5) · lifecycle. They ride as ''fields'' on the wire record and MUST NOT collapse into each other.
+# ''Lifecycle = template · instance · trace.'' A template wire carries slots and defaults; an instance binds real endpoints; a ''trace'' records a firing, failure, or event — each its own entity, so the event history merges and federates like any record.
+# ''Directed, acyclic per family.'' One wire carries one arc. Reciprocal pressure uses two wires. Cycles within a family read as degraded structure.
+# ''Wires hold grants.'' As entities, wires wear kapu and capability components like any carrier — a message route can require an operator mint; an attribute on a line never could. Authority = what the wire holds.
+# ''The engine vends liveness, wires declare intent.'' A `wires/message` instance compiles into the reaction plane (`ReactionBinding`; engine-vended `listenable`s — `verse-event-lattice` law unchanged). The wire = the authored, addressable declaration; the binding = the engine's live subscription. Events ride wires and lifetime edges — never a global bus.
+# ''Canvas renders, never infers.'' The explicit wire entity precedes its spatial form (graph-primacy, `wikispace-canvasspace-ontology`); proximity creates nothing. Wire view-state (path, routing, label placement) lives in view-state entities, never on the wire record.
 
 <<~/ahu >>
 
@@ -68,11 +68,11 @@ Co-projection applied to wires: the operator's mind originates; the carrier body
 | canvas | rendered wire + drag-authoring | view; writes records | direct manipulation |
 | runtime | engine-vended `ReactionBinding` | ephemeral | compiled from records |
 
-1. ''The text authors; the record exists; the CRDT merges.'' A body sigil MUST NOT carry runtime authority — the same boundary Verse itself draws between source text and scene entities.
-2. ''Deterministic identity.'' A body-authored wire derives its address as `<parent-uri>/wires/<anchor>` — the `#anchor` names the wire; re-ingest converges (normalize-once). A sigil without an anchor never compiles; `loulou` stays adjacency forever.
-3. ''Hierarchy = lifetime, applied.'' A body-authored wire lives as its carrier's child: dies with it, projects back into that carrier's file alone (projection follows lifetime; a wire never re-renders into a body it did not originate from). Cross-carrier wires owned by neither endpoint get authored as their own entities — the canvas gesture's native case.
-4. ''Declared-unresolved wires read fertile.'' A body pranala whose wire entity has not yet materialized stands as a lawful placeholder — the memory-palace form — awaiting the compiler, exactly as a bare tag awaits its definition.
-5. ''The compiler rides INGEST.'' Body-sigil → wire-record compilation shares the membrane's organs (replace-by-group apply, three-way diff, echo-proof round-trip) and SHALL ride that vector, never precede it. `edgesFromMemeAst` already walks sigils into flat edge records — the compiler's front half, standing.
+# ''The text authors; the record exists; the CRDT merges.'' A body sigil MUST NOT carry runtime authority — the same boundary Verse itself draws between source text and scene entities.
+# ''Deterministic identity.'' A body-authored wire derives its address as `<parent-uri>/wires/<anchor>` — the `#anchor` names the wire; re-ingest converges (normalize-once). A sigil without an anchor never compiles; `loulou` stays adjacency forever.
+# ''Hierarchy = lifetime, applied.'' A body-authored wire lives as its carrier's child: dies with it, projects back into that carrier's file alone (projection follows lifetime; a wire never re-renders into a body it did not originate from). Cross-carrier wires owned by neither endpoint get authored as their own entities — the canvas gesture's native case.
+# ''Declared-unresolved wires read fertile.'' A body pranala whose wire entity has not yet materialized stands as a lawful placeholder — the memory-palace form — awaiting the compiler, exactly as a bare tag awaits its definition.
+# ''The compiler rides INGEST.'' Body-sigil → wire-record compilation shares the membrane's organs (replace-by-group apply, three-way diff, echo-proof round-trip) and SHALL ride that vector, never precede it. `edgesFromMemeAst` already walks sigils into flat edge records — the compiler's front half, standing.
 
 <<~/ahu >>
 

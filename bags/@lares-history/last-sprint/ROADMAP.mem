@@ -643,18 +643,18 @@ scratch in Path R.
 
 !!! Architectural invariants (do not re-decide)
 
-1. ''RE and TW5Engine co-locate in the same Worker Thread.'' RE reads TW5 state
+# ''RE and TW5Engine co-locate in the same Worker Thread.'' RE reads TW5 state
    synchronously inside `onChangeset`. Cross-thread reads would break the Verse tick.
-2. ''Ordering within a changeset: MemeSyncAdaptor fires first, RE second.'' TW5 state
+# ''Ordering within a changeset: MemeSyncAdaptor fires first, RE second.'' TW5 state
    must be current before RE fires. This ordering IS the tick boundary invariant.
    `ProjectionRegistry` must enforce it.
-3. ''RE writes go through the composite store.'' Handlers call `store.put()`. RE never
+# ''RE writes go through the composite store.'' Handlers call `store.put()`. RE never
    touches `docHandle.change()` directly.
-4. ''Device graph lives in the wiki, not in the RE.'' `KumuDeviceSpec` is derived from
+# ''Device graph lives in the wiki, not in the RE.'' `KumuDeviceSpec` is derived from
    pranala edges in tiddler text. RE caches `ReactionGraph` in memory; `onUriChanged`
    maintains it incrementally.
-5. ''FfzClock tick = one RE turn.'' `LarTickCounter` advances after each `onChangeset`.
-6. ''No RE in cold-tier slots.'' RE boots with the Worker when a slot promotes to hot.
+# ''FfzClock tick = one RE turn.'' `LarTickCounter` advances after each `onChangeset`.
+# ''No RE in cold-tier slots.'' RE boots with the Worker when a slot promotes to hot.
 
 !!! Cold-boot sequence per wiki
 

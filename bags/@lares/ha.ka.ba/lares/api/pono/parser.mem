@@ -29,8 +29,8 @@ Parser law names the parsing contract for `text/x-memetic-wikitext`.
 
 Two implementations carry this law:
 
-1. `MemeticParser` — TW5 WikiParser subclass; governs parse for all `text/x-memetic-wikitext` tiddlers inside the TW5 VM
-2. `@lararium/mesh/meme-ast` — non-TW5 AST consumer path; governs parse for island adaptor, deserializer, and external mesh nodes
+# `MemeticParser` — TW5 WikiParser subclass; governs parse for all `text/x-memetic-wikitext` tiddlers inside the TW5 VM
+# `@lararium/mesh/meme-ast` — non-TW5 AST consumer path; governs parse for island adaptor, deserializer, and external mesh nodes
 
 Both share the same sigil grammar. Their outputs differ in shape and consumer.
 
@@ -61,11 +61,11 @@ Implementation: `packages/lararium-tw5/src/wikirules/lar-sigil.ts`
 
 Dispatch proceeds in this fixed order on every `<<~` encounter:
 
-1. ''pranala-header'' — `<<~ ? -> uri >>` permanent JS exception; `?` marks the self-reference token (this carrier). Cannot generalise into compound.
-2. ''pranala block'' — `<<~ pranala FROM -> TO >>body<<~/pranala >>` permanent JS exception; arrow+keyword syntax structurally distinct from `<<~ WORD ARGS >>`.
-3. ''pranala inline'' — `<<~ pranala FROM -> TO [attrs] >>` leaf form of the same exception.
-4. ''compound sigil'' — `<<~ WORD1 [WORD2] ARGS >>` covers all remaining named sigils. Child-slot detection (`ahu`, `kau`, future) uses `grammarChildSlotNames()` — dynamic, not hardcoded. Compound with `closeKey` scans for `<<~/SIGIL >>` body; compound without `closeKey` produces a leaf node.
-5. ''generic fallback'' — covers `<<~WORD>>` (no-space), C0 control-char forms, and any `<<~` not claimed above. If the generic sigil has a registered closer and its name is not `pranala`, the fallback attempts block capture.
+# ''pranala-header'' — `<<~ ? -> uri >>` permanent JS exception; `?` marks the self-reference token (this carrier). Cannot generalise into compound.
+# ''pranala block'' — `<<~ pranala FROM -> TO >>body<<~/pranala >>` permanent JS exception; arrow+keyword syntax structurally distinct from `<<~ WORD ARGS >>`.
+# ''pranala inline'' — `<<~ pranala FROM -> TO [attrs] >>` leaf form of the same exception.
+# ''compound sigil'' — `<<~ WORD1 [WORD2] ARGS >>` covers all remaining named sigils. Child-slot detection (`ahu`, `kau`, future) uses `grammarChildSlotNames()` — dynamic, not hardcoded. Compound with `closeKey` scans for `<<~/SIGIL >>` body; compound without `closeKey` produces a leaf node.
+# ''generic fallback'' — covers `<<~WORD>>` (no-space), C0 control-char forms, and any `<<~` not claimed above. If the generic sigil has a registered closer and its name is not `pranala`, the fallback attempts block capture.
 
 Dispatch output: `macrocall` nodes with `$variable = "~"` and `name = SIGIL` for compound forms; `$variable = "~pranala"` with `from`/`to`/`body` keyword attrs for pranala forms.
 

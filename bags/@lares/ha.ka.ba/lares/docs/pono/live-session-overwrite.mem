@@ -81,9 +81,9 @@ The useful middle path records the signal without granting it the wrong authorit
 
 Mitigation needs three cooperating layers:
 
-1. `lar:` URI authority distinguishes hostless and hostful records.
-2. trust tier separates source authority from speaker authority.
-3. promotion boundary requires an explicit crossing into hostless meme space.
+# `lar:` URI authority distinguishes hostless and hostful records.
+# trust tier separates source authority from speaker authority.
+# promotion boundary requires an explicit crossing into hostless meme space.
 
 This bug should become a regression fixture in the TypeScript port.
 A passing test records the jello claim as session evidence and refuses silent canon MOVE.

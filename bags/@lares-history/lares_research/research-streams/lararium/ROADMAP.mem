@@ -275,11 +275,11 @@ Web2 adaptor used `splitCarrierToTiddlers` (carrier-write.ts) in the outbound sa
 
 ◇ ''Decide:''
 Write `meme-sync-adaptor.ts` — new class `MemeSyncAdaptor implements MemeProjection`. Delta from web2:
-1. Import `buildDirectRecord` from `./meme-write.js` (drop `carrier-write.js` import)
-2. Drop `splitCarrierToTiddlers` — not needed in outbound path
-3. Outbound `direct` handler collapses to single `store.put(buildDirectRecord(…))` — no carrier split
-4. All guards (echo-loop Map, canon, temp, draft, cascade) preserved verbatim
-5. Export from `index.ts` barrel
+# Import `buildDirectRecord` from `./meme-write.js` (drop `carrier-write.js` import)
+# Drop `splitCarrierToTiddlers` — not needed in outbound path
+# Outbound `direct` handler collapses to single `store.put(buildDirectRecord(…))` — no carrier split
+# All guards (echo-loop Map, canon, temp, draft, cascade) preserved verbatim
+# Export from `index.ts` barrel
 
 ▶ ''Act (files touched):''
 
@@ -318,16 +318,16 @@ Session opened with a 10-directive architecture refactor after a pre-Sprint 6 sp
 
 Ten architecture directives locked:
 
-1. JKD: rename `lararium-tw5.ts` → `.web2.ts`, start fresh `tw5-vm.ts` (absorb useful, discard rest)
-2. Browser gets same isomorphic VmPool as server — server is a peer, not an authority
-3. Delete dead web2 code; mark remaining clearly as `*.web2.*`
-4. Implement `onChangeset()` in `MemeSyncAdaptor` (Scale-3 gap closure)
-5. Multidoc store needs isomorphic composable class base in `@lararium/mesh`
-6. Delete `setActiveTW5`/`getActiveTW5` global entirely
-7. Core isomorphic in `@lararium/mesh`; composable variants in each `lararium-*`
-8. Causal islands all the way down
-9. Remove all "carrier"-tagged code; wire deserializer through new grammar
-10. Research-before-act for items 5, 9, 10 before Sprint 6+
+# JKD: rename `lararium-tw5.ts` → `.web2.ts`, start fresh `tw5-vm.ts` (absorb useful, discard rest)
+# Browser gets same isomorphic VmPool as server — server is a peer, not an authority
+# Delete dead web2 code; mark remaining clearly as `*.web2.*`
+# Implement `onChangeset()` in `MemeSyncAdaptor` (Scale-3 gap closure)
+# Multidoc store needs isomorphic composable class base in `@lararium/mesh`
+# Delete `setActiveTW5`/`getActiveTW5` global entirely
+# Core isomorphic in `@lararium/mesh`; composable variants in each `lararium-*`
+# Causal islands all the way down
+# Remove all "carrier"-tagged code; wire deserializer through new grammar
+# Research-before-act for items 5, 9, 10 before Sprint 6+
 
 Two new design principles locked:
 
@@ -463,11 +463,11 @@ Research needed on HUD best practices before writing the frame.
 
 ⏿ ''Orient:''
 Two research agents returned:
-1. tldraw z-index model: `--tl-layer-panels = 300`; flex sibling avoids all conflicts.
-2. Kinopio: four-corner distribution; no persistent sidebar; contextual panels.
-3. VSCode: activity bar icon strip → sidebar → expanded 3-state machine.
-4. Shadow DOM + TW5: `mountPanel()` uses `fakeDocument` + raw `addEventListener` — NOT React synthetic events, so retargeting bug doesn't apply.
-5. Excalidraw: push vs overlay split at container width breakpoint.
+# tldraw z-index model: `--tl-layer-panels = 300`; flex sibling avoids all conflicts.
+# Kinopio: four-corner distribution; no persistent sidebar; contextual panels.
+# VSCode: activity bar icon strip → sidebar → expanded 3-state machine.
+# Shadow DOM + TW5: `mountPanel()` uses `fakeDocument` + raw `addEventListener` — NOT React synthetic events, so retargeting bug doesn't apply.
+# Excalidraw: push vs overlay split at container width breakpoint.
 
 ◇ ''Decide:''
 * Wire `useBrowserLarPeer` into `LarariumShell` (retire web2 host open).
@@ -724,13 +724,13 @@ Parser tests should include byte offsets or span identity wherever possible.
 
 !!! Sevenfold Test Matrix
 
-1. Golden fixtures from Python.
-2. Property tests for URI normalization and fragment resolution.
-3. Parser span tests for byte offsets and anchor identity.
-4. Boot receipt stability tests.
-5. MCP smoke tests for stdio list/read/invoke/get-prompt.
-6. Browser hydration tests comparing Node-built bundles to browser reconstruction.
-7. Projection snapshot tests.
+# Golden fixtures from Python.
+# Property tests for URI normalization and fragment resolution.
+# Parser span tests for byte offsets and anchor identity.
+# Boot receipt stability tests.
+# MCP smoke tests for stdio list/read/invoke/get-prompt.
+# Browser hydration tests comparing Node-built bundles to browser reconstruction.
+# Projection snapshot tests.
 
 !!! Node Development Runner Note
 
@@ -1218,8 +1218,8 @@ Three Docker environments. Each has a distinct purpose and a distinct level of l
 
 Browser clients (`lararium-web`, tldraw surfaces, future DreamNet room views) follow a two-step boot pattern:
 
-1. Boot `lararium-mesh` from an embedded snapshot or a pre-built JSON bundle (the same carrier graph the Node compiler produces).
-2. Sync from a locally pulled repo clone if available, or from a cloud-served bundle endpoint if not.
+# Boot `lararium-mesh` from an embedded snapshot or a pre-built JSON bundle (the same carrier graph the Node compiler produces).
+# Sync from a locally pulled repo clone if available, or from a cloud-served bundle endpoint if not.
 
 Session-scoped "rooms" gate what subset of the carrier graph a given view sees. Room filtering is deferred — the carrier graph itself stays complete; projection packages and the session layer determine what surfaces in a given room. This is the same pattern as the record scope model (document / session / presence) already in the architecture.
 
@@ -1245,11 +1245,11 @@ No Python in the GitHub Actions pipeline. Python served as a sketch; the golden 
 
 **`ci.yml`** — runs on every push and PR:
 
-1. Install Node 22+, install pnpm, install workspace deps.
-2. Typecheck all packages (`pnpm -r typecheck`).
-3. Build all packages (`pnpm -r build`).
-4. Run parity tests (`pnpm --filter @lararium/node test`).
-5. Run MCP stdio smoke: spawn `node packages/lararium-mcp/dist/stdio.js` as a child process, send `initialize` + `resources/list` + `tools/list` + `prompts/list` over stdin, assert response shape and meme count against the frozen fixture. This is a real protocol smoke — not a unit call — because stdout purity and JSON-RPC framing are the things most likely to silently regress.
+# Install Node 22+, install pnpm, install workspace deps.
+# Typecheck all packages (`pnpm -r typecheck`).
+# Build all packages (`pnpm -r build`).
+# Run parity tests (`pnpm --filter @lararium/node test`).
+# Run MCP stdio smoke: spawn `node packages/lararium-mcp/dist/stdio.js` as a child process, send `initialize` + `resources/list` + `tools/list` + `prompts/list` over stdin, assert response shape and meme count against the frozen fixture. This is a real protocol smoke — not a unit call — because stdout purity and JSON-RPC framing are the things most likely to silently regress.
 
 **`parity-drift.yml`** — scheduled weekly:
 
@@ -1421,10 +1421,10 @@ It is no longer the primary browser boot path.
 
 !!! Implementation Order
 
-1. Upgrade `serve.ts` to WebSocket server with `TLSocketRoom` + `SQLiteSyncStorage`
-2. Seed room from `renderAllViews()` on first connection if SQLite empty
-3. Replace `bootFromEmbedded` + `loadSnapshot` in `App.tsx` with `useSync`
-4. Add `@tldraw/sync` as dep to `lararium-app`, `@tldraw/sync-core` to `lararium-node`
+# Upgrade `serve.ts` to WebSocket server with `TLSocketRoom` + `SQLiteSyncStorage`
+# Seed room from `renderAllViews()` on first connection if SQLite empty
+# Replace `bootFromEmbedded` + `loadSnapshot` in `App.tsx` with `useSync`
+# Add `@tldraw/sync` as dep to `lararium-app`, `@tldraw/sync-core` to `lararium-node`
 
 Do not ship the snapshot-injection server as the primary path. Offline mode only.
 
@@ -2122,12 +2122,12 @@ Required context now present in-document:
 
 !!! Critical path forward (M8 close conditions)
 
-1. ~~''ReactionGraph async''~~ ✓ shipped 2026-04-28 — `fire/fireAll/fireRace/fireRush` all async
-2. ~~''kumu → widget-tree''~~ ✓ shipped 2026-04-28 — `KumuRegistry`, `resolveWidgetTree`, `collectKumuDefs`, typed holes
-3. ~~''Wehe executor''~~ ✓ shipped 2026-04-28 — `kumu-executor.ts`: `executeKumu`, `executeBatch`, `substituteProps`, `detectSuspension`; 136/136 tests pass
-4. ~~''BootArtifact.kumuDefs population''~~ ✓ shipped 2026-04-28 — `collectKumuDefsFromGraph()` wired in `node-host.ts`; `artifact.kumuDefs` populated with 5 kumu defs (meme-strategic → meme-action); `buildKumuRegistry(artifact.kumuDefs)` live at boot; `renderAllViews` receives registry; `templateProps` seeded from lares carriers not hardcoded defaults.
-5. ~~''kukali''~~ ✓ shipped 2026-04-28 — `BOOTSTRAP_SCANS` entry, `attrsFromGroups` case, `CANONICAL_SIGILS` entry, grammar meme `[[sigils]]` entry, `\suspends` alias — all wired; 3 tests pass.
-6. ''Browser smoke'' (Priority 1 from M8 original scope) — still pending.
+# ~~''ReactionGraph async''~~ ✓ shipped 2026-04-28 — `fire/fireAll/fireRace/fireRush` all async
+# ~~''kumu → widget-tree''~~ ✓ shipped 2026-04-28 — `KumuRegistry`, `resolveWidgetTree`, `collectKumuDefs`, typed holes
+# ~~''Wehe executor''~~ ✓ shipped 2026-04-28 — `kumu-executor.ts`: `executeKumu`, `executeBatch`, `substituteProps`, `detectSuspension`; 136/136 tests pass
+# ~~''BootArtifact.kumuDefs population''~~ ✓ shipped 2026-04-28 — `collectKumuDefsFromGraph()` wired in `node-host.ts`; `artifact.kumuDefs` populated with 5 kumu defs (meme-strategic → meme-action); `buildKumuRegistry(artifact.kumuDefs)` live at boot; `renderAllViews` receives registry; `templateProps` seeded from lares carriers not hardcoded defaults.
+# ~~''kukali''~~ ✓ shipped 2026-04-28 — `BOOTSTRAP_SCANS` entry, `attrsFromGroups` case, `CANONICAL_SIGILS` entry, grammar meme `[[sigils]]` entry, `\suspends` alias — all wired; 3 tests pass.
+# ''Browser smoke'' (Priority 1 from M8 original scope) — still pending.
 
 ''Behavioral invariant discovered during testing:'' Unbound params in a kumu body are NOT silently empty — they propagate as typed holes (`unresolved-hole`). Callers that want "empty string for missing prop" must explicitly pass `paramName:""`. Verse alignment: no silent wrong output.
 
@@ -2303,11 +2303,11 @@ The *missing middle layer* is the widget tree. `parseMemeCarrier` produces `Meme
 
 !!! Implementation order
 
-1. Make `ReactionGraph.fire()` return `Promise<void>` — zero-cost change; no callers await today
-2. Add `fireAll` / `fireRace` / `fireRush` fanout methods
-3. Build `KumuRegistry` — a `Map<string, KumuDef>` populated from the boot artifact's `kumu` sigil nodes
-4. Add widget-tree resolution pass: `resolveWidgetTree(ast: MemeAstNode[], registry: KumuRegistry): WidgetNode[]`
-5. Render pass reads `WidgetNode[]` instead of raw `MemeAstNode[]`
+# Make `ReactionGraph.fire()` return `Promise<void>` — zero-cost change; no callers await today
+# Add `fireAll` / `fireRace` / `fireRush` fanout methods
+# Build `KumuRegistry` — a `Map<string, KumuDef>` populated from the boot artifact's `kumu` sigil nodes
+# Add widget-tree resolution pass: `resolveWidgetTree(ast: MemeAstNode[], registry: KumuRegistry): WidgetNode[]`
+# Render pass reads `WidgetNode[]` instead of raw `MemeAstNode[]`
 
 Steps 1–2 are pure `live-protocol.ts` changes. Steps 3–5 are the Phase 3 self-hosting pivot.
 
@@ -2770,11 +2770,11 @@ The identity layer is complete. What remains is three distinct concerns at diffe
 * Phase 5 (Keyhive) follows Phase 4 naturally — Keyhive membership graph → CompositeStore layer set → TW5 recipe.
 
 ▶ ''Priority order for M21:''
-1. `"draft"` bag lar: URI (structural completeness — closes the one remaining opaque bag ID)
-2. Room self-ref tiddler (pattern parity with corpus and lares)
-3. `catalog.corpora` Record retirement (removes dual source-of-truth)
-4. Connect screen (user-facing blocker)
-5. Web2 cleanup (dead code)
+# `"draft"` bag lar: URI (structural completeness — closes the one remaining opaque bag ID)
+# Room self-ref tiddler (pattern parity with corpus and lares)
+# `catalog.corpora` Record retirement (removes dual source-of-truth)
+# Connect screen (user-facing blocker)
+# Web2 cleanup (dead code)
 
 ⤴ ''Phase boundary:''
 M17–M20 = Phase 3 close (identity + oracle layer complete).

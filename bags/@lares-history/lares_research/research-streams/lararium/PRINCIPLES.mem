@@ -37,40 +37,40 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~ ahu #authority-law >>
 !! Authority Law
 
-1. ''Carrier canon first.'' Hostless `lar:///` carriers under `lares/` carry canon.
-2. ''Projection never promotes itself.'' TW5, tldraw, HUD, MCP, DreamDeck, and future Kowloon surfaces render and draft; they do not silently promote.
-3. ''Fork before overwrite.'' Live/session material may fork, annotate, propose, and request merge; it must not silently override invariant loci.
-4. ''Ceremony marks canon MOVE.'' Agentic or operator writes that reach `lares/` need actor, origin, target URI, diff, receipt, and rollback path.
+# ''Carrier canon first.'' Hostless `lar:///` carriers under `lares/` carry canon.
+# ''Projection never promotes itself.'' TW5, tldraw, HUD, MCP, DreamDeck, and future Kowloon surfaces render and draft; they do not silently promote.
+# ''Fork before overwrite.'' Live/session material may fork, annotate, propose, and request merge; it must not silently override invariant loci.
+# ''Ceremony marks canon MOVE.'' Agentic or operator writes that reach `lares/` need actor, origin, target URI, diff, receipt, and rollback path.
 
 <<~/ahu >>
 
 <<~ ahu #round-trip-law >>
 !! Round-Trip Law
 
-1. ''Round-trip or refuse.'' Any carrier → tiddler/widget/shape → carrier path must preserve law-bearing structure or emit explicit loss residue.
-2. ''Small semantic chunks keep stable addresses.'' Ahu slots, anchors, fields, and edges need durable identity.
-3. ''Metadata counts as body law.'' Stripped display metadata must remain available for write-back.
-4. ''Regex may assist, not rule.'' Parser-backed spans should replace regex membranes where loss pressure grows.
+# ''Round-trip or refuse.'' Any carrier → tiddler/widget/shape → carrier path must preserve law-bearing structure or emit explicit loss residue.
+# ''Small semantic chunks keep stable addresses.'' Ahu slots, anchors, fields, and edges need durable identity.
+# ''Metadata counts as body law.'' Stripped display metadata must remain available for write-back.
+# ''Regex may assist, not rule.'' Parser-backed spans should replace regex membranes where loss pressure grows.
 
 <<~/ahu >>
 
 <<~ ahu #local-first-law >>
 !! Local-First Law
 
-1. The operator can boot, inspect, edit, and recover locally.
-2. Network sync serves local agency; it does not define truth by itself.
-3. Every mutation carries visible origin: `canon-hydrate`, `tw-local`, `crdt-remote`, `canvas-draft`, `operator-import`, or another explicit class.
-4. Queue at projection boundaries where many live events target one artifact.
+# The operator can boot, inspect, edit, and recover locally.
+# Network sync serves local agency; it does not define truth by itself.
+# Every mutation carries visible origin: `canon-hydrate`, `tw-local`, `crdt-remote`, `canvas-draft`, `operator-import`, or another explicit class.
+# Queue at projection boundaries where many live events target one artifact.
 
 <<~/ahu >>
 
 <<~ ahu #receipt-law >>
 !! Receipt Law
 
-1. Boot, promote, reseed, sync epoch, and projection batches should carry receipt lineage.
-2. Debug HUD state should agree with server authority state.
-3. Hashes exclude unstable timestamps unless the timestamp itself forms the claimed artifact.
-4. Missing or empty receipt state counts as visible boot residue.
+# Boot, promote, reseed, sync epoch, and projection batches should carry receipt lineage.
+# Debug HUD state should agree with server authority state.
+# Hashes exclude unstable timestamps unless the timestamp itself forms the claimed artifact.
+# Missing or empty receipt state counts as visible boot residue.
 
 <<~/ahu >>
 

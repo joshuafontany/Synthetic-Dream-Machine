@@ -45,12 +45,12 @@ The has-stack ruling (2026-06-12) split the old typed-edge law in three: ''compo
 
 !! Pranala Law (Kānāwai)
 
-1. A pranala carries one ''anchored pointer'': `<<~ pranala #anchor ? -> TARGET >>` — the `#anchor` names the pointer's office in this carrier; `?` resolves to the nearest enclosing socket or `#fragment-id`; `TARGET` names a `lar:` URI (optionally `#fragment`) or a repo file path.
-2. ''Retired-reserved (2026-06-12):'' the `role:` vocabulary (implements, owns, governed-by, and the rest of the feral taxonomy) and `family:` as an inline edge type. The corpus-wide burn converted them to tags, loulou, and (where relations *do* something) the wire plane. Retired terms stay reserved, never reused.
-3. ''One attributed form survives at rest:'' the code source-pointer — `<<~ pranala #anchor ? -> packages/<path> family:code role:has >>` — until the parser's edge-field plane recuts; new attribute vocabulary MUST NOT mint.
-4. Sugar, unchanged: `<<~ loulou URI >>` (adjacency) · `<<~ aka URI >>` (shadow transclusion) · `<<~ kahea URI >>` (live transclusion).
-5. Anything heavier — direction, propagation, payload, lifecycle, arity — belongs to a ''wire entity'', never to this sigil.
-6. ''The carrier-grain wire form.'' An anchored body pranala MAY author a wire (`wire #authoring`): the sigil = the carrier-grain projection, the wire entity = the existence, the compiler (INGEST-era) = the membrane between. Until the compiler lands, such sigils stand as declared-unresolved wires — lawful memory-palace placeholders, never errors.
+# A pranala carries one ''anchored pointer'': `<<~ pranala #anchor ? -> TARGET >>` — the `#anchor` names the pointer's office in this carrier; `?` resolves to the nearest enclosing socket or `#fragment-id`; `TARGET` names a `lar:` URI (optionally `#fragment`) or a repo file path.
+# ''Retired-reserved (2026-06-12):'' the `role:` vocabulary (implements, owns, governed-by, and the rest of the feral taxonomy) and `family:` as an inline edge type. The corpus-wide burn converted them to tags, loulou, and (where relations *do* something) the wire plane. Retired terms stay reserved, never reused.
+# ''One attributed form survives at rest:'' the code source-pointer — `<<~ pranala #anchor ? -> packages/<path> family:code role:has >>` — until the parser's edge-field plane recuts; new attribute vocabulary MUST NOT mint.
+# Sugar, unchanged: `<<~ loulou URI >>` (adjacency) · `<<~ aka URI >>` (shadow transclusion) · `<<~ kahea URI >>` (live transclusion).
+# Anything heavier — direction, propagation, payload, lifecycle, arity — belongs to a ''wire entity'', never to this sigil.
+# ''The carrier-grain wire form.'' An anchored body pranala MAY author a wire (`wire #authoring`): the sigil = the carrier-grain projection, the wire entity = the existence, the compiler (INGEST-era) = the membrane between. Until the compiler lands, such sigils stand as declared-unresolved wires — lawful memory-palace placeholders, never errors.
 
 <<~/ahu >>
 

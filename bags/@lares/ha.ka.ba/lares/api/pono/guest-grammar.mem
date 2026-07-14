@@ -76,9 +76,9 @@ This law does not govern:
 `hana` serves as the canonical block worksite for guest grammar that performs data or code processing.
 A lawful `hana` region keeps three things distinct:
 
-1. explicit opener and closer
-2. local priming payload, usually fenced `toml`, when present
-3. guest instruction body after the priming payload
+# explicit opener and closer
+# local priming payload, usually fenced `toml`, when present
+# guest instruction body after the priming payload
 
 Canonical meme identity stays in `ahu #iam`.
 It does not migrate into `hana`.

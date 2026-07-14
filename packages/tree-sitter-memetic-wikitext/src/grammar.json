@@ -203,14 +203,14 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "(!{1,6}|#{1,6})[ \\t][^\\n]*\\n?"
+        "value": "!{1,6}[ \\t][^\\n]*\\n?"
       }
     },
     "list_item": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "\\*+[ \\t][^\\n]*\\n?"
+        "value": "[*#]+[ \\t][^\\n]*\\n?"
       }
     },
     "comment": {

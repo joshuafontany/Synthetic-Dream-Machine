@@ -42,10 +42,10 @@ explicit avoidance of direct natural-language overwrite.
 
 !!! Operator rulings confirmed
 
-1. `[C]` **`wai`** is the conditional opener. Meaning: water / liquid / the elemental source flow.
-2. `[C]` **`mukuwai`** is the fallback/else branch. Meaning: mouth of the water / where flow terminates.
-3. The choice deliberately moves away from English-calque pressure (rejecting `inā` = "if").
-4. ''Chaining model confirmed:'' `<<~ kahea [another-grammar-command] ...>>` is valid. Sigils compose.
+# `[C]` **`wai`** is the conditional opener. Meaning: water / liquid / the elemental source flow.
+# `[C]` **`mukuwai`** is the fallback/else branch. Meaning: mouth of the water / where flow terminates.
+# The choice deliberately moves away from English-calque pressure (rejecting `inā` = "if").
+# ''Chaining model confirmed:'' `<<~ kahea [another-grammar-command] ...>>` is valid. Sigils compose.
    Sugar forms (`kahea`, `loulou`, etc.) may be re-used in compound positions; they do not lock out
    downstream command words.
 
@@ -298,15 +298,15 @@ Function expression.
 
 !!! Host sigil boundary rules
 
-1. `<<` and `>>` are the host sigil boundary.
-2. Leading `~` marks active command/widget mode.
-3. `/` immediately after `~` marks a closing command: `<<~/wai>>`, `<<~/ahu>>`.
-4. First word after `~` is the command name.
-5. Remaining words are command arguments unless parsed by a command-specific expression grammar.
-6. Hawaiian command words must not absorb arbitrary natural-language ambiguity.
-7. Guest expressions, filters, targets, and arrows stay separate from command names.
-8. Prefer explicit block closure over indentation-only syntax.
-9. Block/inline mode is a first-class parse property.
+# `<<` and `>>` are the host sigil boundary.
+# Leading `~` marks active command/widget mode.
+# `/` immediately after `~` marks a closing command: `<<~/wai>>`, `<<~/ahu>>`.
+# First word after `~` is the command name.
+# Remaining words are command arguments unless parsed by a command-specific expression grammar.
+# Hawaiian command words must not absorb arbitrary natural-language ambiguity.
+# Guest expressions, filters, targets, and arrows stay separate from command names.
+# Prefer explicit block closure over indentation-only syntax.
+# Block/inline mode is a first-class parse property.
 
 !!! Command definition contract
 
@@ -363,25 +363,25 @@ When editing grammar meme or parser:
 
 !!! Open
 
-1. ''Concurrency sigils'' — `[SC]` approved 2026-04-27. Registered in grammar meme.
+# ''Concurrency sigils'' — `[SC]` approved 2026-04-27. Registered in grammar meme.
 *** `hui` → `sync`: wait for all parallel flows (gather, assemble)
 *** `heihei` → Verse `if`/`case`: canvasspace conditional-branch, one arm fires by condition (the race/compete sense belongs to `holo`)
 *** `puka` → `rush`: first wins, rest cancelled (emerge/break through)
 *** `lele` → `branch`: fire and forget (leap/fly off); only one that produces compile-time graph artifact (pranala family:message)
 
-2. **`message`/`constraint` sugar sigils** — families exist; no sigil sugar yet.
+# **`message`/`constraint` sugar sigils** — families exist; no sigil sugar yet.
    Candidates: `hau` (gift/reciprocal) for message, `pono` (rightness/rule) for constraint.
    Requires invariant loci before registration.
 
-3. ''Variable/let scoping'' — closed by decision: `meme` sigil provides lexical context binding;
+# ''Variable/let scoping'' — closed by decision: `meme` sigil provides lexical context binding;
    no ambient lookup; `wehe` parameters handle argument binding at call sites. No `var`/`let` sigil needed.
 
-4. ''Heritage community consultation'' — no canonical public vocabulary located. Hold all `[SC]`
+# ''Heritage community consultation'' — no canonical public vocabulary located. Hold all `[SC]`
    sigils subject to revision if UH Hilo / Pūnana Leo community guidance emerges.
 
-5. **Bare `<<`** — reserved; TW5 macro-call compat deferred. Do not allocate.
+# **Bare `<<`** — reserved; TW5 macro-call compat deferred. Do not allocate.
 
-6. ''Chained command composition'' — `<<~ kahea [other-command] ...>>` valid intent confirmed;
+# ''Chained command composition'' — `<<~ kahea [other-command] ...>>` valid intent confirmed;
    parser rule for nested command words not yet written.
 
 <<~/ahu >>
