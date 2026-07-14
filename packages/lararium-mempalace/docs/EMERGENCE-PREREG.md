@@ -136,3 +136,31 @@ bed rebuilds — corrections arrive as dated strikethroughs, never silent edits.
   whatever shape that ruling lands.
 - ~~tw5 / pidgin beds (in flight across the hearth)~~ — landed (commit
   b24e6b09); their pre-run predictions stay owed by their builder.
+
+**2026-07-15 · THE C1+C4 TRIAL RAN — all eight beds, post-realignment pours
+(TW5-form corpus, carrier 0.0.1), one invocation each with its seeded twin.**
+
+- **C1 as vowed: PASSES 8/8.** Every bed's total code beats ignorance and
+  every real corpus strictly out-saves its seeded shuffle twin. Real beds:
+  library 224,985 bits saved (ratio 1.47) · memes 288,042 (1.85) · thesis
+  512,359 (1.33) · wrapped 510,877 (1.72).
+- **The sharper separation rides KEPT FORMS, not the ratio.** Thesis keeps
+  46 templates; its placebo keeps 3, its shuffled twin-bed 6 — a 8–15×
+  form-count separation. The meaning_ratio itself runs CONFOUNDED as a
+  real-vs-control separator: the control beds post ratios FARTHER from 1
+  (placebo-extracted 2.41, shuffled-extracted 3.23) because section-order
+  shuffling preserves intra-verse language that the sweep's deeper-grain
+  twin then destroys — the ratio measures order-at-twin-grain, not
+  meaning-vs-control. The real-vs-placebo separation vow (wā-grain q-score,
+  frozen-rhythm) stays OWED to its own instrument, which this sweep does
+  not carry.
+- **C4: chains hold 8/8, non-vacuous, no silence attractor — but
+  DEGENERATELY on the big beds:** H(content) = H(structure) = H(form) to
+  four decimals (library 3.9069 ×3 · memes 4.0 ×3 · thesis 5.7549 ×3);
+  only the wrapped beds coarsen visibly (5.7549 → 5.7179). Equal heights
+  read as near-injective quotients at bed scale — the braid's
+  collision-rate measurement (li-chain test 1) moves from queued to URGENT:
+  until it runs, plane-carriage numbers restate as injectivity, not
+  compression.
+- Environment: post-repave beds (corpus_testbed pours, chain green),
+  stanza on cuda, sweep runtime ≈ minutes across all eight.
