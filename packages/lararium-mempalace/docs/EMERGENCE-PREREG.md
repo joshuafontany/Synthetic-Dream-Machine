@@ -174,3 +174,21 @@ plane-carriage figures at this scale restate as injectivity, and the
 chain's one real coarsening step rides shape ↠ idiom. The subsample-curve
 arm and a corpus-scale re-measure (146k drawers, where short/templated
 records may genuinely collide) stay open.
+
+**2026-07-15 · correction (same evening, per the discipline — the house's own
+council caught the overstatement).** The appendix above wrote ~~"an 8–15×
+form-count separation"~~ — that comparison rides a SIZE CONFOUND: the thesis
+bed carries 238k tokens against its extracted controls' ~18k, and kept-form
+counts scale with corpus size. At MATCHED size (the wrapped trio, ~177k
+each) real-vs-shuffled reads 64 vs 61 kept / 510,877 vs 509,581 bits — a
+near-tie, explained by the ablation ruling (sigil-wrapping manufactures
+form identically in both). VERDICT AS CORRECTED: this run demonstrates C1
+as vowed (order matters, every bed) and instrument fidelity; it demonstrates
+real-vs-control separation NOWHERE — that question now rests entirely on
+(a) the wā-grain/frozen-rhythm arm (which separated 0.58-vs-0.21 pre-
+founding and stays owed post-founding) and (b) a size-matched extracted
+control bed (to pour). The mined-vocabulary rung proceeds at
+Provisional-Synthesis until one of those speaks. Noted in passing: the
+placebo-extracted bed COARSENS (H 5.59 < 5.75) where real text stays
+injective — collision rate itself may serve as a texture aperture (held
+as a maybe, undesigned).
