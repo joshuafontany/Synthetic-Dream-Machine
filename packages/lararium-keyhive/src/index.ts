@@ -9,6 +9,8 @@ export type {
 } from "./capability-provider.js";
 
 export { KeyhiveProvider, ensureKeyhiveWasm, setKeyhiveWasmBytes } from "./keyhive-provider.js";
+export { packPersonaCrossing, applyPersonaCrossing } from "./persona-crossing.js";
+export type { PersonaCrossingBundle, CrossingContent, CrossingPlaintext } from "./persona-crossing.js";
 
 export { InMemoryEventStore } from "./event-store.js";
 export type { EventStore, EventRecord } from "./event-store.js";
