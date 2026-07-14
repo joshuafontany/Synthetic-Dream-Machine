@@ -29,10 +29,11 @@ Current lar address follows the file path now on disk.
 
 <<~ ahu #source-text >>
 ```toml iam
-role = "source-text interior — a STRUCTURED PORT (ahu chapters wrap the book text); md-era remnants pending the port fork"
+role = "source-text interior — a STRUCTURED PORT (ahu chapters wrap the book text); curated to pono TW5 forms 2026-07-14"
 type = "text/x-memetic-wikitext"
 ```
----
+
+```yaml
 # Layout & Page Setup
 layout: book_page        # The HTML layout file in _layouts/
 title: "Common Sense Tarot"      # Main title of the book
@@ -48,27 +49,27 @@ series: "The Count of Fives" # Optional
 volume: 1                # Optional
 genres: [nonfiction, spirituality, esoterica, tarot]
 version: "1.0.0"           # Optional semver
----
+```
 
-# **COMMON SENSE TAROT: The Complete Guide to Tarot Reading**
+! ''COMMON SENSE TAROT: The Complete Guide to Tarot Reading''
 
 by Camden Benares
 
 ![Cover (Page A)](images/page-A.png)
 
-*Digitized by the Internet Archive (2024)*
+//Digitized by the Internet Archive (2024)//
 
 <https://archive.org/details/commonsensetarot0000bena>
 
-*Converted to Markdown by the Floating Librarians of Mu (2026)*
+//Converted to Markdown by the Floating Librarians of Mu (2026)//
 
-**COMMON SENSE TAROT**
+''COMMON SENSE TAROT''
 
-*The Complete Guide to Tarot Reading*
+//The Complete Guide to Tarot Reading//
 
 by Camden Benares
 
-This work is a *pusaka tulen* ("holy heirloom") of the Erisian church.
+This work is a //pusaka tulen// ("holy heirloom") of the Erisian church.
 
 Preserved for Eternity by the Floating Library of Mu. Hail Eris. All Hail Discordia.
 
@@ -92,182 +93,182 @@ Printed in the United States of America
 
 <<~ ahu #contents >>
 
-## CONTENTS
+!! CONTENTS
 
-[Introduction by Mary K. Greer](#introduction)
+[[Introduction by Mary K. Greer|#introduction]]
 
-1. [About Tarot Reading](#chapter-01)
+# [[About Tarot Reading|#chapter-01]]
 
-2. [Learning The Meanings Of The Cards](#chapter-02)
+# [[Learning The Meanings Of The Cards|#chapter-02]]
 
-3. [The Major Arcana](#chapter-03)
-   - [3.00 — THE FOOL](#chapter-03-00)
-   - [3.01 — THE MAGICIAN](#chapter-03-01)
-   - [3.02 — THE HIGH PRIESTESS](#chapter-03-02)
-   - [3.03 — THE EMPRESS](#chapter-03-03)
-   - [3.04 — THE EMPEROR](#chapter-03-04)
-   - [3.05 — THE HIEROPHANT](#chapter-03-05)
-   - [3.06 — THE LOVERS](#chapter-03-06)
-   - [3.07 — THE CHARIOT](#chapter-03-07)
-   - [3.08 — JUSTICE](#chapter-03-08)
-   - [3.09 — THE HERMIT](#chapter-03-09)
-   - [3.10 — FORTUNE](#chapter-03-10)
-   - [3.11 — STRENGTH](#chapter-03-11)
-   - [3.12 — THE HANGED MAN](#chapter-03-12)
-   - [3.13 — DEATH](#chapter-03-13)
-   - [3.14 — TEMPERANCE](#chapter-03-14)
-   - [3.15 — THE DEVIL](#chapter-03-15)
-   - [3.16 — THE TOWER](#chapter-03-16)
-   - [3.17 — THE STAR](#chapter-03-17)
-   - [3.18 — THE MOON](#chapter-03-18)
-   - [3.19 — THE SUN](#chapter-03-19)
-   - [3.20 — JUDGMENT](#chapter-03-20)
-   - [3.21 — THE WORLD](#chapter-03-21)
+# [[The Major Arcana|#chapter-03]]
+#* [[3.00 — THE FOOL|#chapter-03-00]]
+#* [[3.01 — THE MAGICIAN|#chapter-03-01]]
+#* [[3.02 — THE HIGH PRIESTESS|#chapter-03-02]]
+#* [[3.03 — THE EMPRESS|#chapter-03-03]]
+#* [[3.04 — THE EMPEROR|#chapter-03-04]]
+#* [[3.05 — THE HIEROPHANT|#chapter-03-05]]
+#* [[3.06 — THE LOVERS|#chapter-03-06]]
+#* [[3.07 — THE CHARIOT|#chapter-03-07]]
+#* [[3.08 — JUSTICE|#chapter-03-08]]
+#* [[3.09 — THE HERMIT|#chapter-03-09]]
+#* [[3.10 — FORTUNE|#chapter-03-10]]
+#* [[3.11 — STRENGTH|#chapter-03-11]]
+#* [[3.12 — THE HANGED MAN|#chapter-03-12]]
+#* [[3.13 — DEATH|#chapter-03-13]]
+#* [[3.14 — TEMPERANCE|#chapter-03-14]]
+#* [[3.15 — THE DEVIL|#chapter-03-15]]
+#* [[3.16 — THE TOWER|#chapter-03-16]]
+#* [[3.17 — THE STAR|#chapter-03-17]]
+#* [[3.18 — THE MOON|#chapter-03-18]]
+#* [[3.19 — THE SUN|#chapter-03-19]]
+#* [[3.20 — JUDGMENT|#chapter-03-20]]
+#* [[3.21 — THE WORLD|#chapter-03-21]]
 
-4. [The Suit Of Pentacles](#chapter-04)
-   - [4.01 — THE ACE OF PENTACLES](#chapter-04-01)
-   - [4.02 — THE 2 OF PENTACLES](#chapter-04-02)
-   - [4.03 — THE 3 OF PENTACLES](#chapter-04-03)
-   - [4.04 — THE 4 OF PENTACLES](#chapter-04-04)
-   - [4.05 — THE 5 OF PENTACLES](#chapter-04-05)
-   - [4.06 — THE 6 OF PENTACLES](#chapter-04-06)
-   - [4.07 — THE 7 OF PENTACLES](#chapter-04-07)
-   - [4.08 — THE 8 OF PENTACLES](#chapter-04-08)
-   - [4.09 — THE 9 OF PENTACLES](#chapter-04-09)
-   - [4.10 — THE 10 OF PENTACLES](#chapter-04-10)
-   - [4.11 — THE PAGE OF PENTACLES](#chapter-04-11)
-   - [4.12 — THE KNIGHT OF PENTACLES](#chapter-04-12)
-   - [4.13 — THE QUEEN OF PENTACLES](#chapter-04-13)
-   - [4.14 — THE KING OF PENTACLES](#chapter-04-14)
+# [[The Suit Of Pentacles|#chapter-04]]
+#* [[4.01 — THE ACE OF PENTACLES|#chapter-04-01]]
+#* [[4.02 — THE 2 OF PENTACLES|#chapter-04-02]]
+#* [[4.03 — THE 3 OF PENTACLES|#chapter-04-03]]
+#* [[4.04 — THE 4 OF PENTACLES|#chapter-04-04]]
+#* [[4.05 — THE 5 OF PENTACLES|#chapter-04-05]]
+#* [[4.06 — THE 6 OF PENTACLES|#chapter-04-06]]
+#* [[4.07 — THE 7 OF PENTACLES|#chapter-04-07]]
+#* [[4.08 — THE 8 OF PENTACLES|#chapter-04-08]]
+#* [[4.09 — THE 9 OF PENTACLES|#chapter-04-09]]
+#* [[4.10 — THE 10 OF PENTACLES|#chapter-04-10]]
+#* [[4.11 — THE PAGE OF PENTACLES|#chapter-04-11]]
+#* [[4.12 — THE KNIGHT OF PENTACLES|#chapter-04-12]]
+#* [[4.13 — THE QUEEN OF PENTACLES|#chapter-04-13]]
+#* [[4.14 — THE KING OF PENTACLES|#chapter-04-14]]
 
-5. [The Suit Of Cups](#chapter-05)
-   - [5.01 — THE ACE OF CUPS](#chapter-05-01)
-   - [5.02 — THE 2 OF CUPS](#chapter-05-02)
-   - [5.03 — THE 3 OF CUPS](#chapter-05-03)
-   - [5.04 — THE 4 OF CUPS](#chapter-05-04)
-   - [5.05 — THE 5 OF CUPS](#chapter-05-05)
-   - [5.06 — THE 6 OF CUPS](#chapter-05-06)
-   - [5.07 — THE 7 OF CUPS](#chapter-05-07)
-   - [5.08 — THE 8 OF CUPS](#chapter-05-08)
-   - [5.09 — THE 9 OF CUPS](#chapter-05-09)
-   - [5.10 — THE 10 OF CUPS](#chapter-05-10)
-   - [5.11 — THE PAGE OF CUPS](#chapter-05-11)
-   - [5.12 — THE KNIGHT OF CUPS](#chapter-05-12)
-   - [5.13 — THE QUEEN OF CUPS](#chapter-05-13)
-   - [5.14 — THE KING OF CUPS](#chapter-05-14)
+# [[The Suit Of Cups|#chapter-05]]
+#* [[5.01 — THE ACE OF CUPS|#chapter-05-01]]
+#* [[5.02 — THE 2 OF CUPS|#chapter-05-02]]
+#* [[5.03 — THE 3 OF CUPS|#chapter-05-03]]
+#* [[5.04 — THE 4 OF CUPS|#chapter-05-04]]
+#* [[5.05 — THE 5 OF CUPS|#chapter-05-05]]
+#* [[5.06 — THE 6 OF CUPS|#chapter-05-06]]
+#* [[5.07 — THE 7 OF CUPS|#chapter-05-07]]
+#* [[5.08 — THE 8 OF CUPS|#chapter-05-08]]
+#* [[5.09 — THE 9 OF CUPS|#chapter-05-09]]
+#* [[5.10 — THE 10 OF CUPS|#chapter-05-10]]
+#* [[5.11 — THE PAGE OF CUPS|#chapter-05-11]]
+#* [[5.12 — THE KNIGHT OF CUPS|#chapter-05-12]]
+#* [[5.13 — THE QUEEN OF CUPS|#chapter-05-13]]
+#* [[5.14 — THE KING OF CUPS|#chapter-05-14]]
 
-6. [The Suit Of Swords](#chapter-06)
-   - [6.01 — THE ACE OF SWORDS](#chapter-06-01)
-   - [6.02 — THE 2 OF SWORDS](#chapter-06-02)
-   - [6.03 — THE 3 OF SWORDS](#chapter-06-03)
-   - [6.04 — THE 4 OF SWORDS](#chapter-06-04)
-   - [6.05 — THE 5 OF SWORDS](#chapter-06-05)
-   - [6.06 — THE 6 OF SWORDS](#chapter-06-06)
-   - [6.07 — THE 7 OF SWORDS](#chapter-06-07)
-   - [6.08 — THE 8 OF SWORDS](#chapter-06-08)
-   - [6.09 — THE 9 OF SWORDS](#chapter-06-09)
-   - [6.10 — THE 10 OF SWORDS](#chapter-06-10)
-   - [6.11 — THE PAGE OF SWORDS](#chapter-06-11)
-   - [6.12 — THE KNIGHT OF SWORDS](#chapter-06-12)
-   - [6.13 — THE QUEEN OF SWORDS](#chapter-06-13)
-   - [6.14 — THE KING OF SWORDS](#chapter-06-14)
+# [[The Suit Of Swords|#chapter-06]]
+#* [[6.01 — THE ACE OF SWORDS|#chapter-06-01]]
+#* [[6.02 — THE 2 OF SWORDS|#chapter-06-02]]
+#* [[6.03 — THE 3 OF SWORDS|#chapter-06-03]]
+#* [[6.04 — THE 4 OF SWORDS|#chapter-06-04]]
+#* [[6.05 — THE 5 OF SWORDS|#chapter-06-05]]
+#* [[6.06 — THE 6 OF SWORDS|#chapter-06-06]]
+#* [[6.07 — THE 7 OF SWORDS|#chapter-06-07]]
+#* [[6.08 — THE 8 OF SWORDS|#chapter-06-08]]
+#* [[6.09 — THE 9 OF SWORDS|#chapter-06-09]]
+#* [[6.10 — THE 10 OF SWORDS|#chapter-06-10]]
+#* [[6.11 — THE PAGE OF SWORDS|#chapter-06-11]]
+#* [[6.12 — THE KNIGHT OF SWORDS|#chapter-06-12]]
+#* [[6.13 — THE QUEEN OF SWORDS|#chapter-06-13]]
+#* [[6.14 — THE KING OF SWORDS|#chapter-06-14]]
 
-7. [The Suit Of Wands](#chapter-07)
-   - [7.01 — THE ACE OF WANDS](#chapter-07-01)
-   - [7.02 — THE 2 OF WANDS](#chapter-07-02)
-   - [7.03 — THE 3 OF WANDS](#chapter-07-03)
-   - [7.04 — THE 4 OF WANDS](#chapter-07-04)
-   - [7.05 — THE 5 OF WANDS](#chapter-07-05)
-   - [7.06 — THE 6 OF WANDS](#chapter-07-06)
-   - [7.07 — THE 7 OF WANDS](#chapter-07-07)
-   - [7.08 — THE 8 OF WANDS](#chapter-07-08)
-   - [7.09 — THE 9 OF WANDS](#chapter-07-09)
-   - [7.10 — THE 10 OF WANDS](#chapter-07-10)
-   - [7.11 — THE PAGE OF WANDS](#chapter-07-11)
-   - [7.12 — THE KNIGHT OF WANDS](#chapter-07-12)
-   - [7.13 — THE QUEEN OF WANDS](#chapter-07-13)
-   - [7.14 — THE KING OF WANDS](#chapter-07-14)
+# [[The Suit Of Wands|#chapter-07]]
+#* [[7.01 — THE ACE OF WANDS|#chapter-07-01]]
+#* [[7.02 — THE 2 OF WANDS|#chapter-07-02]]
+#* [[7.03 — THE 3 OF WANDS|#chapter-07-03]]
+#* [[7.04 — THE 4 OF WANDS|#chapter-07-04]]
+#* [[7.05 — THE 5 OF WANDS|#chapter-07-05]]
+#* [[7.06 — THE 6 OF WANDS|#chapter-07-06]]
+#* [[7.07 — THE 7 OF WANDS|#chapter-07-07]]
+#* [[7.08 — THE 8 OF WANDS|#chapter-07-08]]
+#* [[7.09 — THE 9 OF WANDS|#chapter-07-09]]
+#* [[7.10 — THE 10 OF WANDS|#chapter-07-10]]
+#* [[7.11 — THE PAGE OF WANDS|#chapter-07-11]]
+#* [[7.12 — THE KNIGHT OF WANDS|#chapter-07-12]]
+#* [[7.13 — THE QUEEN OF WANDS|#chapter-07-13]]
+#* [[7.14 — THE KING OF WANDS|#chapter-07-14]]
 
-8. [Learning The Layouts](#chapter-08)
-   - [8.01 — ADDITIONAL LAYOUT INFORMATION](#chapter-08-01)
-   - [8.02 — THE EXPANSION LAYOUT](#chapter-08-02)
-   - [8.03 — CHANGES LAYOUT](#chapter-08-03)
-   - [8.04 — NEAR-FUTURE LAYOUT](#chapter-08-04)
-   - [8.05 — YES OR NO LAYOUT](#chapter-08-05)
+# [[Learning The Layouts|#chapter-08]]
+#* [[8.01 — ADDITIONAL LAYOUT INFORMATION|#chapter-08-01]]
+#* [[8.02 — THE EXPANSION LAYOUT|#chapter-08-02]]
+#* [[8.03 — CHANGES LAYOUT|#chapter-08-03]]
+#* [[8.04 — NEAR-FUTURE LAYOUT|#chapter-08-04]]
+#* [[8.05 — YES OR NO LAYOUT|#chapter-08-05]]
 
-9. [The Flower Of Life Layout](#chapter-09)
-   - [9.01 — Sample Flower of Life Reading](#chapter-09-01)
-   - [9.02 — Sample Flower of Life Interpretation](#chapter-09-02)
+# [[The Flower Of Life Layout|#chapter-09]]
+#* [[9.01 — Sample Flower of Life Reading|#chapter-09-01]]
+#* [[9.02 — Sample Flower of Life Interpretation|#chapter-09-02]]
 
-10. [The Clock Layout](#chapter-10)
-   - [10.01 — Sample Clock Reading](#chapter-10-01)
-   - [10.02 — Sample Clock Interpretation](#chapter-10-02)
+# [[The Clock Layout|#chapter-10]]
+#* [[10.01 — Sample Clock Reading|#chapter-10-01]]
+#* [[10.02 — Sample Clock Interpretation|#chapter-10-02]]
 
-11. [The Triangle Layout](#chapter-11)
-   - [11.01 — Sample Triangle Reading](#chapter-11-01)
-   - [11.02 — Sample Triangle Interpretation](#chapter-11-02)
+# [[The Triangle Layout|#chapter-11]]
+#* [[11.01 — Sample Triangle Reading|#chapter-11-01]]
+#* [[11.02 — Sample Triangle Interpretation|#chapter-11-02]]
 
-12. [The Pyramid Layout](#chapter-12)
-   - [12.01 — Sample Pyramid Reading](#chapter-12-01)
-   - [12.02 — Sample Pyramid Interpretation](#chapter-12-02)
+# [[The Pyramid Layout|#chapter-12]]
+#* [[12.01 — Sample Pyramid Reading|#chapter-12-01]]
+#* [[12.02 — Sample Pyramid Interpretation|#chapter-12-02]]
 
-13. [The Octave Path Layout](#chapter-13)
-   - [13.01 — Sample Octave Path Reading](#chapter-13-01)
-   - [13.02 — Sample Octave Path Interpretation](#chapter-13-02)
+# [[The Octave Path Layout|#chapter-13]]
+#* [[13.01 — Sample Octave Path Reading|#chapter-13-01]]
+#* [[13.02 — Sample Octave Path Interpretation|#chapter-13-02]]
 
-14. [About Practice Readings](#chapter-14)
+# [[About Practice Readings|#chapter-14]]
 
-15. [Clients And Compensation](#chapter-15)
+# [[Clients And Compensation|#chapter-15]]
 
-16. [Probable Questions And Possible Answers](#chapter-16)
-   - [16.01 — WHERE DOES THE READING INFORMATION COME FROM?](#chapter-16-01)
-   - [16.02 — ISN’T THIS DELVING INTO THE OCCULT OR DEVIL’S WORK?](#chapter-16-02)
-   - [16.03 — HOW CAN YOU KNOW ABOUT ME UNLESS SOMEONE TOLD YOU?](#chapter-16-03)
-   - [16.04 — WHY DIDN’T THE THINGS YOU SAID PERTAIN TO MY LIFE? THE PERSON YOU TALKED ABOUT ISN’T ANYTHING LIKE ME.](#chapter-16-04)
-   - [16.05 — WHAT WOULD HAVE HAPPENED IF I PICKED A DIFFERENT CARD TO START?](#chapter-16-05)
-   - [16.06 — WOULD I GET THE SAME INFORMATION FROM ANOTHER READER?](#chapter-16-06)
-   - [16.07 — HOW LONG WILL IT BE BEFORE THE THINGS YOU SAID WILL HAPPEN?](#chapter-16-07)
-   - [16.08 — DID YOU USE THE CARDS AS A WAY TO GIVE ME ADVICE?](#chapter-16-08)
-   - [16.09 — WHY SHOULD I LISTEN TO WHAT YOU HAVE TO SAY?](#chapter-16-09)
-   - [16.10 — MAY I BRING A TAPE RECORDER TO TAPE THE READING?](#chapter-16-10)
-   - [16.11 — I NEVER HAD A READING BEFORE. WHAT DO I DO?](#chapter-16-11)
-   - [16.12 — MAY I BRING A FRIEND WITH ME TO THE READING?](#chapter-16-12)
-   - [16.13 — WHY DIDN’T YOUR READING TELL ME WHAT I WANTED TO KNOW?](#chapter-16-13)
-   - [16.14 — HOW DID YOU LEARN TO DO THIS?](#chapter-16-14)
-   - [16.15 — HOW ACCURATE ARE YOUR READINGS?](#chapter-16-15)
-   - [16.16 — DO CLIENTS EVER REVEAL EMBARRASSING INFORMATION TO YOU ABOUT THEIR LIVES?](#chapter-16-16)
-   - [16.17 — DO YOU THINK THAT SOME OF YOUR CLIENTS LIE TO YOU?](#chapter-16-17)
-   - [16.18 — DO CLIENTS TELL YOU ABOUT THEIR SEX LIVES?](#chapter-16-18)
-   - [16.19 — WHY DO PEOPLE LISTEN TO WHAT YOU SAY?](#chapter-16-19)
-   - [16.20 — DO YOU FEEL RESPONSIBLE IF WHAT YOU TELL A CLIENT CAUSES THEM PROBLEMS?](#chapter-16-20)
-   - [16.21 — AREN’T THERE SOME TAROT READERS WHO ARE CONFIDENCE TRICKSTERS?](#chapter-16-21)
-   - [16.22 — WHY ARE THERE SO MANY DIFFERENT TAROT DECKS?](#chapter-16-22)
-   - [16.23 — WHAT TYPE OF CLIENT DO YOU FIND DIFFICULT?](#chapter-16-23)
-   - [16.24 — DOES THE AGE OF THE CLIENT HAVE AN EFFECT ON THE READING?](#chapter-16-24)
-   - [16.25 — DO YOU HAVE PSYCHIC ABILITIES?](#chapter-16-25)
-   - [16.26 — HAVE YOU EVER SAID ANYTHING IN A READING THAT YOU DIDN’T KNOW YOU WERE GOING TO SAY?](#chapter-16-26)
-   - [16.27 — CAN YOU DO A READING ABOUT SOMEONE WHO ISN’T PRESENT?](#chapter-16-27)
-   - [16.28 — WHY SHOULD I PAY YOU FOR SOMETHING THAT I’M NOT SURE I BELIEVE IN, WHICH MIGHT NOT BE ANY USE TO ME AT ALL?](#chapter-16-28)
-   - [16.29 — IN MY LAST READING YOU TOLD ME SOMETHING THAT I DIDN’T UNDERSTAND; CAN YOU EXPLAIN IT TO ME NOW?](#chapter-16-29)
-   - [16.30 — CAN I TELEPHONE YOU LATER TO ASK YOU MORE ABOUT SOMETHING YOU PREDICTED?](#chapter-16-30)
-   - [16.31 — I THINK MY FRIEND NEEDS A READING BUT SHE IS RELUCTANT. HOW CAN I GET HER TO COME FOR A READING?](#chapter-16-31)
-   - [16.32 — WHAT IS THE RELATIONSHIP BETWEEN RELIGION AND TAROT?](#chapter-16-32)
-   - [16.33 — WHERE DID THE USE OF TAROT CARDS START?](#chapter-16-33)
-   - [16.34 — IF ALL THE CARDS HAVE DEFINITE MEANINGS TO YOU, WHY IS EACH READING DIFFERENT?](#chapter-16-34)
-   - [16.35 — IF YOU SAW SOMETHING TERRIBLE IN THE CARDS, LIKE IMMINENT DEATH, WOULD YOU TELL THE CLIENT?](#chapter-16-35)
-   - [16.36 — HOW OFTEN SHOULD A CLIENT GET A READING?](#chapter-16-36)
-   - [16.37 — HAS A TAROT READING EVER CHANGED YOUR LIFE?](#chapter-16-37)
-   - [16.38 — DO YOU READ THE CARDS FOR YOURSELF?](#chapter-16-38)
+# [[Probable Questions And Possible Answers|#chapter-16]]
+#* [[16.01 — WHERE DOES THE READING INFORMATION COME FROM?|#chapter-16-01]]
+#* [[16.02 — ISN’T THIS DELVING INTO THE OCCULT OR DEVIL’S WORK?|#chapter-16-02]]
+#* [[16.03 — HOW CAN YOU KNOW ABOUT ME UNLESS SOMEONE TOLD YOU?|#chapter-16-03]]
+#* [[16.04 — WHY DIDN’T THE THINGS YOU SAID PERTAIN TO MY LIFE? THE PERSON YOU TALKED ABOUT ISN’T ANYTHING LIKE ME.|#chapter-16-04]]
+#* [[16.05 — WHAT WOULD HAVE HAPPENED IF I PICKED A DIFFERENT CARD TO START?|#chapter-16-05]]
+#* [[16.06 — WOULD I GET THE SAME INFORMATION FROM ANOTHER READER?|#chapter-16-06]]
+#* [[16.07 — HOW LONG WILL IT BE BEFORE THE THINGS YOU SAID WILL HAPPEN?|#chapter-16-07]]
+#* [[16.08 — DID YOU USE THE CARDS AS A WAY TO GIVE ME ADVICE?|#chapter-16-08]]
+#* [[16.09 — WHY SHOULD I LISTEN TO WHAT YOU HAVE TO SAY?|#chapter-16-09]]
+#* [[16.10 — MAY I BRING A TAPE RECORDER TO TAPE THE READING?|#chapter-16-10]]
+#* [[16.11 — I NEVER HAD A READING BEFORE. WHAT DO I DO?|#chapter-16-11]]
+#* [[16.12 — MAY I BRING A FRIEND WITH ME TO THE READING?|#chapter-16-12]]
+#* [[16.13 — WHY DIDN’T YOUR READING TELL ME WHAT I WANTED TO KNOW?|#chapter-16-13]]
+#* [[16.14 — HOW DID YOU LEARN TO DO THIS?|#chapter-16-14]]
+#* [[16.15 — HOW ACCURATE ARE YOUR READINGS?|#chapter-16-15]]
+#* [[16.16 — DO CLIENTS EVER REVEAL EMBARRASSING INFORMATION TO YOU ABOUT THEIR LIVES?|#chapter-16-16]]
+#* [[16.17 — DO YOU THINK THAT SOME OF YOUR CLIENTS LIE TO YOU?|#chapter-16-17]]
+#* [[16.18 — DO CLIENTS TELL YOU ABOUT THEIR SEX LIVES?|#chapter-16-18]]
+#* [[16.19 — WHY DO PEOPLE LISTEN TO WHAT YOU SAY?|#chapter-16-19]]
+#* [[16.20 — DO YOU FEEL RESPONSIBLE IF WHAT YOU TELL A CLIENT CAUSES THEM PROBLEMS?|#chapter-16-20]]
+#* [[16.21 — AREN’T THERE SOME TAROT READERS WHO ARE CONFIDENCE TRICKSTERS?|#chapter-16-21]]
+#* [[16.22 — WHY ARE THERE SO MANY DIFFERENT TAROT DECKS?|#chapter-16-22]]
+#* [[16.23 — WHAT TYPE OF CLIENT DO YOU FIND DIFFICULT?|#chapter-16-23]]
+#* [[16.24 — DOES THE AGE OF THE CLIENT HAVE AN EFFECT ON THE READING?|#chapter-16-24]]
+#* [[16.25 — DO YOU HAVE PSYCHIC ABILITIES?|#chapter-16-25]]
+#* [[16.26 — HAVE YOU EVER SAID ANYTHING IN A READING THAT YOU DIDN’T KNOW YOU WERE GOING TO SAY?|#chapter-16-26]]
+#* [[16.27 — CAN YOU DO A READING ABOUT SOMEONE WHO ISN’T PRESENT?|#chapter-16-27]]
+#* [[16.28 — WHY SHOULD I PAY YOU FOR SOMETHING THAT I’M NOT SURE I BELIEVE IN, WHICH MIGHT NOT BE ANY USE TO ME AT ALL?|#chapter-16-28]]
+#* [[16.29 — IN MY LAST READING YOU TOLD ME SOMETHING THAT I DIDN’T UNDERSTAND; CAN YOU EXPLAIN IT TO ME NOW?|#chapter-16-29]]
+#* [[16.30 — CAN I TELEPHONE YOU LATER TO ASK YOU MORE ABOUT SOMETHING YOU PREDICTED?|#chapter-16-30]]
+#* [[16.31 — I THINK MY FRIEND NEEDS A READING BUT SHE IS RELUCTANT. HOW CAN I GET HER TO COME FOR A READING?|#chapter-16-31]]
+#* [[16.32 — WHAT IS THE RELATIONSHIP BETWEEN RELIGION AND TAROT?|#chapter-16-32]]
+#* [[16.33 — WHERE DID THE USE OF TAROT CARDS START?|#chapter-16-33]]
+#* [[16.34 — IF ALL THE CARDS HAVE DEFINITE MEANINGS TO YOU, WHY IS EACH READING DIFFERENT?|#chapter-16-34]]
+#* [[16.35 — IF YOU SAW SOMETHING TERRIBLE IN THE CARDS, LIKE IMMINENT DEATH, WOULD YOU TELL THE CLIENT?|#chapter-16-35]]
+#* [[16.36 — HOW OFTEN SHOULD A CLIENT GET A READING?|#chapter-16-36]]
+#* [[16.37 — HAS A TAROT READING EVER CHANGED YOUR LIFE?|#chapter-16-37]]
+#* [[16.38 — DO YOU READ THE CARDS FOR YOURSELF?|#chapter-16-38]]
 
-17. [Being The Best Reader Possible—A Review](#chapter-17)
+# [[Being The Best Reader Possible—A Review|#chapter-17]]
 
 <<~ ahu #table-of-contents-update-plan >>
 
-### Table of Contents Update Plan
+!!! Table of Contents Update Plan
 
-- Top-level entries now point at compact chapter `ahu` fragments (`#chapter-NN`).
-- Second-level entries now surface card, layout, and FAQ subsection links.
-- Next check: verify fragment resolution in the target renderer and decide whether the old page-number leader style still earns its keep.
+* Top-level entries now point at compact chapter `ahu` fragments (`#chapter-NN`).
+* Second-level entries now surface card, layout, and FAQ subsection links.
+* Next check: verify fragment resolution in the target renderer and decide whether the old page-number leader style still earns its keep.
 
 THIS PAGE INTENTIONALLY LEFT BLANK
 
@@ -277,7 +278,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #introduction >>
 
-## **INTRODUCTION**
+!! ''INTRODUCTION''
 
 by Mary K. Greer
 
@@ -311,7 +312,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-01 >>
 
-## Chapter 1 **ABOUT TAROT READING**
+!! Chapter 1 ''ABOUT TAROT READING''
 
 Perhaps the greatest benefit of becoming a Tarot-card reader is the increase that you will experience in knowledge and intuitive ability. Every reading adds to the Tarot reader’s knowledge of human beings and of the world in ways that few other experiences can offer. It is also one of the best methods of sharpening your intuitive abilities. Becoming a Tarot reader assures that your life will be more interesting. It is a certain way to achieve personal growth, increase your enjoyment of life, and feel more fully alive.
 
@@ -345,14 +346,14 @@ Every Minor Arcana card is identified by a symbol of the suit to which it belong
 one cup on its face side, the 2 of Cups has two cups, and so on up through the 10 of Cups. Each one of the four court cards of Cups—page, knight, queen, and king—also has a cup on the front side.
 
 Within the Minor Arcana section:
-- The ace to 10 cards represent activities, feelings, conditions, and other aspects of life.
-- The court cards usually represent people in the client’s life.
+* The ace to 10 cards represent activities, feelings, conditions, and other aspects of life.
+* The court cards usually represent people in the client’s life.
 
 Each Minor Arcana suit is identified with a certain area of life:
-- Pentacles are associated with the physical world.
-- Cups are associated with emotions.
-- Swords are associated with mental activity.
-- Wands are associated with the spirit and motivating forces.
+* Pentacles are associated with the physical world.
+* Cups are associated with emotions.
+* Swords are associated with mental activity.
+* Wands are associated with the spirit and motivating forces.
 
 Unlike playing cards, the numbered cards of a Minor Arcana suit may or may not have pictures on their front side, depending on the deck. These pictures include the symbol of the suit and other details that help the reader to recall and understand the meaning of the card. The Major Arcana consists of 22 pictorial cards that are numbered from 0 to 21 in Arabic numbers, or blank (sometimes Q) to XXI in Roman numerals. Each card of the Major Arcana represents a person, force, element, or circumstance of human existence. The Major Arcana cards are considered more powerful and more important than the
 
@@ -408,11 +409,11 @@ The reader also uses the intuitive mode of consciousness, which Tarot reading he
 Most people, whether they are Tarot readers or not, have intuitive experiences.
 
 Some common ones are:
-- Hearing the telephone ring when no call is expected and being certain who is calling.
-- Perceiving something without awareness of rational thought about it, such as realizing someone is married or pregnant or undergoing an unexpected change.
-- Realizing that an impromptu visit to friends is intrusive, although neither their actions nor speech indicate any.
-- Expecting to find a parking place in a congested area and then driving directly to it.
-- Feeling under observation and confirming it by a quick look over the shoulder.
+* Hearing the telephone ring when no call is expected and being certain who is calling.
+* Perceiving something without awareness of rational thought about it, such as realizing someone is married or pregnant or undergoing an unexpected change.
+* Realizing that an impromptu visit to friends is intrusive, although neither their actions nor speech indicate any.
+* Expecting to find a parking place in a congested area and then driving directly to it.
+* Feeling under observation and confirming it by a quick look over the shoulder.
 
 Similar intuitive experiences occur among people in all cultures even if the culture doesn’t emphasize the importance of intuition. Cultures often devalue intuitive information because the rational mode of consciousness is considered more important to individual survival and cultural continuance. Intuitive information is often the most exciting part of a Tarot reading, sometimes making the client suspect that the reader has paranormal powers.
 
@@ -428,7 +429,7 @@ In summary, a Tarot reading consists of information about a client which is inte
 
 <<~ ahu #chapter-02 >>
 
-## Chapter 2 **LEARNING THE MEANINGS OF THE CARDS**
+!! Chapter 2 ''LEARNING THE MEANINGS OF THE CARDS''
 
 After the potential reader has obtained a deck of Tarot cards, the next step in becoming a reader is learning the meanings of the cards. This requires memorization work. There is no way to avoid it. Just as an actor must learn the lines of the play for performing on-stage, the potential Tarot reader must learn the meanings of all the cards in order to do a reading.
 
@@ -472,7 +473,7 @@ After determining meanings for all 78 cards to your satisfaction, continue the m
 
 <<~ ahu #chapter-03 >>
 
-## Chapter 3 **THE MAJOR ARCANA**
+!! Chapter 3 ''THE MAJOR ARCANA''
 
 This chapter provides the meanings of the 22 Major Arcana cards. The meanings listed here are not the only possible meanings. They are a composite list adapted from a number of books, instructions, and readers. Some of the meanings are old and traditional; others are new and reflect the knowledge and insights of modern-day Tarot designers and readers.
 The names assigned to the Major Arcana here are traditional. They will not exactly match those in some decks, especially those of recent design. You should, nevertheless, have no difficulty in identifying which Major Arcana card in any deck is associated with the meanings given here. The assigned name or number may just be different. For example, some decks identify Major Arcanum 5 as The High Priest or The Pope instead of The Hierophant. The listed meanings still apply because these different titles all
@@ -483,7 +484,7 @@ Do not consider any one particular meaning essential to an understanding of Taro
 
 <<~ ahu #chapter-03-00 >>
 
-### 0—THE FOOL
+!!! 0—THE FOOL
 
 Some Tarot decks designate The Fool card as number 22 (or XXII) instead of number 0. The Fool, by either number, still has the same meanings for the reader.
 
@@ -494,17 +495,17 @@ The Fool signifies the essence of life with all its dualities and possibilities.
 In the reading, depending on the position in which The Fool card appears, it frequently represents the client or another person who may affect the client’s life.
 
 Possible meanings are:
-- Going on a journey,
-- Discovering something new,
-- Taking chances,
-- Turning experience into wisdom,
-- Exploring the spirit of life.
+* Going on a journey,
+* Discovering something new,
+* Taking chances,
+* Turning experience into wisdom,
+* Exploring the spirit of life.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-01 >>
 
-### 1—THE MAGICIAN
+!!! 1—THE MAGICIAN
 
 The Magician card represents a person with power and talent, who knows how to work creatively within the framework of his or her own limitations. He or she is open to whatever opportunities exist and is able to use them. The Magician symbolizes the ability to utilize inner resources to achieve aspirations.
 
@@ -513,17 +514,17 @@ The Magician acts and operates in the physical world, which is his main concern.
 The Magician card represents the abilities to cheer people, to cure them, to communicate powerful ideas, and to help people learn about themselves. It can also represent trickery or deceit.
 
 Possible meanings are:
-- Opportunity utilized,
-- Power,
-- Talent,
-- Benefits,
-- Trickery or deceit, revealed or concealed.
+* Opportunity utilized,
+* Power,
+* Talent,
+* Benefits,
+* Trickery or deceit, revealed or concealed.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-02 >>
 
-### 2—THE HIGH PRIESTESS
+!!! 2—THE HIGH PRIESTESS
 
 The High Priestess card represents the nurturing of potential. She intuitively knows what others need to grow and develop. She has knowledge, wisdom, and perceptions that can easily be brought to influence the material world. She symbolizes consciousness and all principles identified as feminine.
 
@@ -532,17 +533,17 @@ The High Priestess is calm and emotionally self-sufficient. Her wisdom gives her
 In a reading The High Priestess card can represent the client, the female aspect of the client, or an influence on the client.
 
 Possible meanings are:
-- Nurturing,
-- Giving,
-- Raising consciousness,
-- Emotional balance,
-- Wisdom.
+* Nurturing,
+* Giving,
+* Raising consciousness,
+* Emotional balance,
+* Wisdom.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-03 >>
 
-### 3—THE EMPRESS
+!!! 3—THE EMPRESS
 
 The Empress card is the female authority figure who symbolizes protection and preservation. She is creative and has the ability to revive, resurrect, and reconstruct. She uses her powers wisely and with great practicality.
 
@@ -553,17 +554,17 @@ provides abundance, sometimes in a very pragmatic way. Often she is concerned mo
 Those who want the total attention of The Empress for extended periods of time will be disappointed. She intends to deal fairly with everyone in an open manner. The Empress card can indicate the overcoming of a shallow and possessive inclination.
 
 Possible meanings are:
-- Fertility,
-- Abundance,
-- Protection,
-- Preservation,
-- Shallowness and possessiveness overcome.
+* Fertility,
+* Abundance,
+* Protection,
+* Preservation,
+* Shallowness and possessiveness overcome.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-04 >>
 
-### 4—THE EMPEROR
+!!! 4—THE EMPEROR
 
 The Emperor card is the male authority figure responsible for making things work efficiently and correctly in the physical world. He is organized and believes strongly in organizations with firm structures. He is the ultimate leader, the leader of other leaders.
 
@@ -572,17 +573,17 @@ The Emperor is an initiator, an active empire-builder who trusts his judgment an
 The Emperor expects everyone over whom he has power to follow his rules. He allows little room for individual initiative on the part of those he considers his followers or underlings. His tendency is to stifle individuals whose talents and abilities he does not consider useful to him. He has little use for spontaneity in himself or others.
 
 Possible meanings are:
-- Authority,
-- Organizational ability,
-- Decisiveness,
-- Compulsion to achieve,
-- Lack of spontaneity.
+* Authority,
+* Organizational ability,
+* Decisiveness,
+* Compulsion to achieve,
+* Lack of spontaneity.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-05 >>
 
-### 5—THE HIEROPHANT
+!!! 5—THE HIEROPHANT
 
 The Hierophant card is the high priest and represents the spiritual world as understood by the intellect. He has large inner resources. He has power and authority based on his position in the realm of spirituality.
 
@@ -593,34 +594,34 @@ The Hierophant wants to help people and show that he cares for them. His advice 
 In a reading this card may signify an outside spiritual force, or it may represent the beliefs, morals, and ethics of the client.
 
 Possible meanings are:
-- Spiritual growth,
-- Informed advice,
-- Ethical awareness,
-- Inflexibility,
-- Culture shock.
+* Spiritual growth,
+* Informed advice,
+* Ethical awareness,
+* Inflexibility,
+* Culture shock.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-06 >>
 
-### 6—THE LOVERS
+!!! 6—THE LOVERS
 
 The Lovers card represents the union of opposites. It refers to the emotional growth that is necessary for shared human activity in a committed relationship. This voluntary sharing, influenced by sexual desire and emotional needs, is an effective way for the individual to transcend the view of the physical self as separate from others and from the rest of the world. Lovers know that they are not separate from the world but connected to all of it through each other.
 
 The Lovers card symbolizes a romantic joining in which the individuals go beyond the fantasies of the culture and the limited sexual roles superficially represented in their society. Successful lovers in their emotional partnering achieve a harmony of their inner and outer lives that allows them to transcend many perils and pitfalls.
 
 Possible meanings are:
-- Union of opposites,
-- Emotional growth,
-- Romance,
-- Harmony,
-- Correct choice made.
+* Union of opposites,
+* Emotional growth,
+* Romance,
+* Harmony,
+* Correct choice made.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-07 >>
 
-### 7—THE CHARIOT
+!!! 7—THE CHARIOT
 
 The Chariot card represents movement in life and its accompanying physical changes. It reflects the continuing motion of the earth and the principle of expansion in the individual's life.
 
@@ -631,17 +632,17 @@ individual is in charge of this motion even if he or she is not the sole initiat
 The illusion of staying in one place has been dispelled. The forces are in motion that will bring the individual to a better place.
 
 Possible meanings are:
-- Travel,
-- Physical changes in residence,
-- Goals approached,
-- Getting things done,
-- Renewed vigor.
+* Travel,
+* Physical changes in residence,
+* Goals approached,
+* Getting things done,
+* Renewed vigor.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-08 >>
 
-### 8—JUSTICE
+!!! 8—JUSTICE
 (NOTE: This card is numbered 11 in some decks that deviate from the older Tarot tradition, and identify the Strength card as number 8.)
 
 The card of Justice represents the effort to restore balance and harmony in the world with fairness. Justice has the necessary force to endure and proceed in efforts to restore equilibrium. It sees all sides of the issue with objectivity and is blind to subjectivity. Justice is impartial and impersonal because its decisions are concerned with the circumstances and the rules, not with the personalities involved.
@@ -649,34 +650,34 @@ The card of Justice represents the effort to restore balance and harmony in the 
 Justice requires the taking of responsibility and making of decisions. It requires that the individual take responsibility for his or her actions, correctly seeing irresponsibility as guilt. When the individual exercises freedom without assuming the responsibility for it, Justice steps in to limit freedom until responsibility is learned. Justice sees guilt as the failure to act responsibly
 
 Possible meanings are:
-- Balance,
-- Harmony,
-- Impersonal forces,
-- Decisions,
-- Responsibility.
+* Balance,
+* Harmony,
+* Impersonal forces,
+* Decisions,
+* Responsibility.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-09 >>
 
-### 9—THE HERMIT
+!!! 9—THE HERMIT
 
 The Hermit card minimizes worldly distractions in an effort to realize a wider objective. This objective is the formulation of a personal philosophy that embraces both the physical and spiritual aspects of existence. The objective is approached by a partial withdrawal from the world so that wisdom can be gained through solitude and silence.
 
 The Hermit signifies the inward look that must be taken after a significant period of accomplishment and development. The achievements of the past must be examined in order to determine how previous actions and events can be viewed with a perspective that embraces past, present, and future. The Hermit is self-sufficient, demanding nothing and making-do with the resources that have been accumulated and developed during a productive period. What The Hermit achieves is an increase of power and a deeper understanding of what life means.
 
 Possible meanings are:
-- Introspection,
-- Re-evaluation,
-- Philosophical understanding,
-- Spiritual development,
-- Wisdom.
+* Introspection,
+* Re-evaluation,
+* Philosophical understanding,
+* Spiritual development,
+* Wisdom.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-10 >>
 
-### 10—FORTUNE
+!!! 10—FORTUNE
 
 The Fortune card represents a constantly-spinning wheel of life, which brings prosperity and a wealth of opportunities for greater expansion and flexibility. The individual who relies on more than just luck will find favorable conditions to help recycle the wealth of the physical world.
 
@@ -685,17 +686,17 @@ Fortune may well involve activities connected to speculation, but not to gamblin
 Fortune symbolizes the acquisition of the good things of the world in return for honest, intelligent effort. A person receives Fortune not because of the feeling that he or she deserves it but because it is a return on sharing and investing.
 
 Possible meanings are:
-- Prosperity,
-- Opportunities,
-- Expansion,
-- Greater resources,
-- Sharing rewarded.
+* Prosperity,
+* Opportunities,
+* Expansion,
+* Greater resources,
+* Sharing rewarded.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-11 >>
 
-### 11—STRENGTH
+!!! 11—STRENGTH
 (NOTE: In some decks that deviate from the older Tarot tradition, this card may be numbered 8 instead of 11.)
 
 The card of Strength represents the intelligent use of your forces to achieve your purposes. The person with Strength is well-centered, has self-respect, and possesses earned confidence. This card suggests that the individual has control over mind and emotion as well as physical resources.
@@ -705,51 +706,51 @@ Strength symbolizes the enduring quality of the spirit, a sense of permanence, a
 person with these qualities is able to maintain balance and equilibrium, achieving reasonableness even when outside pressures seem unreasonable. Reasonableness is characteristic of the person who is secure in the knowledge of his or her own strong resources. If the person lacks reasonableness, the danger of Strength is a desire for control that wastes inner resources through domination, intimidation, and oppression.
 
 Possible meanings are:
-- Strength,
-- Self-esteem,
-- Resources,
-- Balance,
-- Control.
+* Strength,
+* Self-esteem,
+* Resources,
+* Balance,
+* Control.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-12 >>
 
-### 12—THE HANGED MAN
+!!! 12—THE HANGED MAN
 
 The Hanged Man card does not represent someone being executed, but a person who is in a hung-up condition. It suggests a period in a person's life in which nothing seems to change. It does not mean that conditions are bad. The existing conditions, regardless of whatever they are, seem inclined to endure for awhile longer. The person must be patient. If good conditions exist, they should be affirmed. Actions should be taken to maintain life as it is. Bad conditions can be mitigated by the awareness that this is the state prior to the emergence of a feeling of renewal.
 
 The Hanged Man is stationary. Little movement is possible, and no change or expansion can come soon. The forces that have produced this environmental limbo are beyond the control of the individual. This is the time to develop patience, to accept what is instead of what might have been or what may be someday.
 
 Possible meanings are:
-- Stagnation,
-- Requirement for patience,
-- Acceptance of the present,
-- No impending changes,
-- A calm preceding a storm.
+* Stagnation,
+* Requirement for patience,
+* Acceptance of the present,
+* No impending changes,
+* A calm preceding a storm.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-13 >>
 
-### 13—DEATH
+!!! 13—DEATH
 
 The card of Death signifies an abrupt change that has not been anticipated. Rarely does this card refer to physical death. Instead it signifies the impermanence of all things, reminding us that everything changes with the passage of time. Death symbolizes a great change that is coming soon. If anticipated, it is not the change to which this card refers.
 
 Death symbolizes the process that allows the new to flourish when the old is gone. Old habits must vanish if new habits are to be put in their place. If everything were permanent, there would be no movement. This card represents a movement that comes as a surprise, something so unexpected that there can be no preparation. It symbolizes irreversible change in thinking, experiencing, or existing. Because the individual is not alerted to it, that brings startling surprise.
 
 Possible meanings are:
-- Abrupt change,
-- Unexpected change,
-- Impermanence,
-- Reorientation,
-- An ending.
+* Abrupt change,
+* Unexpected change,
+* Impermanence,
+* Reorientation,
+* An ending.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-14 >>
 
-### 14—TEMPERANCE
+!!! 14—TEMPERANCE
 
 Temperance is the card of reasonableness, of avoiding
 
@@ -760,17 +761,17 @@ Temperance is the middle way, a point of reasonableness between the extremes. Th
 Temperance comes from the emotional and intellectual maturity that recognizes the value of others and avoids damaging actions. Temperance indicates that an active intelligence is involved in emotional matters.
 
 Possible meanings are:
-- Reasonableness,
-- Moderation,
-- Emotional balance,
-- Active intelligence,
-- Avoidance of extremes.
+* Reasonableness,
+* Moderation,
+* Emotional balance,
+* Active intelligence,
+* Avoidance of extremes.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-15 >>
 
-### 15—THE DEVIL
+!!! 15—THE DEVIL
 
 The Devil card represents denial, lack of recognition, lack of acceptance, and unintelligent extremes. It suggests a failure to recognize that good and evil are abstract terms based on individual judgment. The Devil tries to avoid individual responsibility. The Devil assigns unpleasant or unpopular thoughts, feelings, and actions onto someone or something else, instead of admitting that these come from within oneself.
 
@@ -779,17 +780,17 @@ The Devil symbolizes unethical and unintelligent behavior such as prejudice, dis
 actions and those who experience or perceive the results. The irony of such ignorance in action is that it damages both the actors and those acted upon. The damage to the victims is often more apparent but the perpetrators are likewise diminished. They allow all that The Devil represents to live in their minds and bodies until they learn to think and act with kindness and understanding.
 
 Possible meanings are:
-- Dishonesty,
-- Bigotry,
-- Ignorance,
-- Chauvinism,
-- Prejudice.
+* Dishonesty,
+* Bigotry,
+* Ignorance,
+* Chauvinism,
+* Prejudice.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-16 >>
 
-### 16—THE TOWER
+!!! 16—THE TOWER
 
 The Tower card signifies great change in the life of the individual. New inputs or insights reveal that the structure created from belief and understood experience is being changed whether the individual is ready or not. The Tower symbolizes this structure. The card shows that the structure will never be the same.
 
@@ -798,17 +799,17 @@ The Tower represents a deep, radical mental reorientation as the result of spiri
 The Tower portrays a restructuring that involves the discarding of inappropriate defenses. Chaos and confusion last until the liberating reorientation becomes solid.
 
 Possible meanings are:
-- Sudden change in personal belief structure,
-- Involuntary mental reorientation,
-- Permanent perceptual change,
-- Need for courage and strength,
-- Chaos preceding liberation.
+* Sudden change in personal belief structure,
+* Involuntary mental reorientation,
+* Permanent perceptual change,
+* Need for courage and strength,
+* Chaos preceding liberation.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-17 >>
 
-### 17—THE STAR
+!!! 17—THE STAR
 
 The Star card represents the enlightenment that brings a meaningful personal knowledge of reality. Each person lives in a separate reality created by the mind as it filters, classifies, and packages the input from experience and from thought. The recognition that the individual can take responsibility for this process is symbolized by the light of The Star.
 
@@ -817,17 +818,17 @@ The Star signifies productive and progressive mental growth accompanied by optim
 The individual now glows with an inner light. Anything is seen to be possible. The light of The Star illuminates both the mental and spiritual landscapes. An increase in trust allows the individual to identify with all of humanity.
 
 Possible meanings are:
-- Enlightenment,
-- Mental growth,
-- Increased compassion,
-- Greater trust,
-- Identification with all of humanity.
+* Enlightenment,
+* Mental growth,
+* Increased compassion,
+* Greater trust,
+* Identification with all of humanity.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-18 >>
 
-### 18—THE MOON
+!!! 18—THE MOON
 
 The Moon card reminds us that cycles in all things are part of a natural order. Knowledge of such patterns of gradual change facilitates emotional maturity and greater harmony in life. The continuity of transformation perpetually creates new beginnings as the present is gently replaced by the future.
 
@@ -836,17 +837,17 @@ The Moon also symbolizes the light that guides during the night and illuminates 
 The Moon also indicates a time when old relationships and emotional attachments enter into a new phase that reflects increasing emotional maturity.
 
 Possible meanings are:
-- Cycles of gradual change,
-- Prophetic dreams,
-- Increased intuition,
-- Evolving relationships,
-- Emotional maturity.
+* Cycles of gradual change,
+* Prophetic dreams,
+* Increased intuition,
+* Evolving relationships,
+* Emotional maturity.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-19 >>
 
-### 19—THE SUN
+!!! 19—THE SUN
 
 The Sun card symbolizes what is essential to life. The brilliant energy of this card is an omen of good things in combination—health, awareness, productivity, harmony, and realization of material goals. All the positive things associated with sunshine are symbolized here. The Sun indicates that good fortune in its many aspects is shining down. It predicts that things will go smoothly and swiftly in the desired direction.
 
@@ -857,17 +858,17 @@ within reach, and aspirations are prelude to achievement. The energy of The Sun 
 The Sun is a harbinger of harmony in both work and play, expanding consciousness to embrace all of life.
 
 Possible meanings are:
-- Health,
-- Joyful awareness,
-- Productivity,
-- Harmony,
-- Realization of material goals.
+* Health,
+* Joyful awareness,
+* Productivity,
+* Harmony,
+* Realization of material goals.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-20 >>
 
-### 20—JUDGMENT
+!!! 20—JUDGMENT
 
 The card of Judgment is concerned with understanding. Judgment indicates a time for clearing away the emotions of the past. It indicates an understanding that the past is not what is occurring now. The past is actually a thought process that is individually shaped by each person. Judgment is the time for understanding this, so as to leave the emotions of the past in order to fully experience the emotions of the present.
 
@@ -876,18 +877,18 @@ The understanding within the Judgment card leads to forgiveness, not only of oth
 Judgment is associated with punishment and reward. The punishment comes from clinging to displaced emotions of the past. The reward comes from the emotional freedom to live in the present.
 
 Possible meanings are:
-- Emotional understanding,
-- Forgiveness of self,
+* Emotional understanding,
+* Forgiveness of self,
 
-- Forgiveness of others,
-- Acceptance of the past,
-- Feeling emotional freedom.
+* Forgiveness of others,
+* Acceptance of the past,
+* Feeling emotional freedom.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-03-21 >>
 
-### 21—THE WORLD
+!!! 21—THE WORLD
 
 The World card indicates that all things in the world are possible. It is a symbol of the centered individual in the center of all things. It represents the conviction that the world is a positive framework.
 
@@ -896,11 +897,11 @@ The World signifies success, both in the subjective world and the objective worl
 The World suggests that a person's challenges have been successfully mastered. The necessary lessons have been learned. The journey of discovery begun by The Fool is now complete; the individual is now able to act intelligently based on deep understanding of his or her experience. Realistic possibilities can be perceived with clarity. This is the card of wholeness.
 
 Possible meanings are:
-- Internal balance and humor,
-- Being in the center of things,
-- Extensive knowledge of the world,
-- Success,
-- Wholeness.
+* Internal balance and humor,
+* Being in the center of things,
+* Extensive knowledge of the world,
+* Success,
+* Wholeness.
 
 <<~/ahu >>
 
@@ -908,7 +909,7 @@ Possible meanings are:
 
 <<~ ahu #chapter-04 >>
 
-## Chapter 4 **THE SUIT OF PENTACLES**
+!! Chapter 4 ''THE SUIT OF PENTACLES''
 
 The Minor Arcana suit traditionally called Pentacles is named for the five-pointed star that is its symbol or icon. In various Tarot decks this suit is designated as Coins, Disks, Jades, Worlds, or other names that describe a similar circular icon.
 
@@ -918,7 +919,7 @@ When cards from this suit predominate in a layout, it signals the reader that th
 
 <<~ ahu #chapter-04-01 >>
 
-### THE ACE OF PENTACLES
+!!! THE ACE OF PENTACLES
 
 The 1 or Ace of Pentacles card represents prosperity, a
 
@@ -929,34 +930,34 @@ The Ace of Pentacles favors new business ventures. There is ample ability to pro
 The Ace of Pentacles can signify good physical health as well as good fortune. This is the card of productive physical activity, for the body is capable at this time of meeting all demands placed on it.
 
 Possible meanings are:
-- Success,
-- Prosperity,
-- Health,
-- Abundance,
-- Productive physical activity.
+* Success,
+* Prosperity,
+* Health,
+* Abundance,
+* Productive physical activity.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-02 >>
 
-### THE 2 OF PENTACLES
+!!! THE 2 OF PENTACLES
 
 The 2 of Pentacles card represents duality. The time is one of competition, perhaps in business negotiations or in sports and games. Security and strength are required. Dangerous risks should be avoided or postponed if possible. Times are changing and efforts should be concentrated on projects in process. Starting new ventures at this time could require more juggling of physical assets than is comfortable
 
 or reasonable. All physical and material options should be examined carefully because the future is full of uncertainty. Physical acts undertaken at this time may be missing the emotional context necessary to make them meaningful and enjoyable. Efforts should be made to keep things as simple as possible in the physical world. This is the time to consider the possible benefits of austerity and frugality in connection with the physical world.
 
 Possible meanings are:
-- Duality,
-- Competition,
-- Uncertainty,
-- Physical limitations,
-- Austerity.
+* Duality,
+* Competition,
+* Uncertainty,
+* Physical limitations,
+* Austerity.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-03 >>
 
-### THE 3 OF PENTACLES
+!!! THE 3 OF PENTACLES
 
 The 3 of Pentacles is a card of nurturing and growth. The physical actions taken thus far have been correct, and now the process must be supported to produce the desired results. Creativity will soon be rewarded if the nurturing process is continued.
 
@@ -965,17 +966,17 @@ Labor has been productive. The attention paid to high standards of craftsmanship
 The probabilities of material gain and monetary reward are high. The possibility of attracting a patron or sponsor arises in the near future. This individual or group will recognize and nurture creativity while appreciating knowledge and ability.
 
 Possible meanings are:
-- Nurturing,
-- Growth,
-- Productivity,
-- Material gain,
-- Monetary reward.
+* Nurturing,
+* Growth,
+* Productivity,
+* Material gain,
+* Monetary reward.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-04 >>
 
-### THE 4 OF PENTACLES
+!!! THE 4 OF PENTACLES
 
 The 4 of Pentacles is a card that signifies new beginnings. The commencement of a new endeavor looks promising. New seeds should be sown because it is a time for planting. There are assurances that growth is a certainty.
 
@@ -984,17 +985,17 @@ Unexpected resources are just out of sight, but can soon be utilized. An unexpec
 It is a time to enjoy the present and be ready for pleasant surprises. The present physical situation is propitious, and can ripen into advantage with little effort. Personal security is assured, having been established by previous actions. Confidence in all things pertaining to the senses is warranted.
 
 Possible meanings are:
-- New beginnings,
-- A new endeavor,
-- A gift or legacy,
-- Security,
-- Confidence.
+* New beginnings,
+* A new endeavor,
+* A gift or legacy,
+* Security,
+* Confidence.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-05 >>
 
-### THE 5 OF PENTACLES
+!!! THE 5 OF PENTACLES
 
 The 5 of Pentacles card signals the possibility of unexpected difficulties in the tangible matters. There is a 
 
@@ -1005,17 +1006,17 @@ A setback in some aspect of physical reality is likely. Even the weather is apt 
 A setback may end a project or task that was filled with hope—not every seed can thrive. Things grow old and die so that they can be replaced by new growth, an inescapable pattern of life. Do not mourn for what is lost; now is the time to make room for something new.
 
 Possible meanings are:
-- Unexpected difficulties,
-- Setbacks,
-- Unfavorable weather,
-- Failure of a project,
-- An end leading to a new start.
+* Unexpected difficulties,
+* Setbacks,
+* Unfavorable weather,
+* Failure of a project,
+* An end leading to a new start.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-06 >>
 
-### THE 6 OF PENTACLES
+!!! THE 6 OF PENTACLES
 
 The 6 of Pentacles card suggests that assets from a variety of sources have come together in a bountiful way. Physical attributes from many different areas coalesce into a whole that is greater than the sum of its parts. This causes a surge of creative energy to be released.
 
@@ -1024,17 +1025,17 @@ It is a time for sharing, for giving and receiving presents, for generosity, end
 Resources of the individual may be combined with the resources of others to create new possibilities. Much can be achieved with cooperation and teamwork. The path is open for the achievement of major goals.
 
 Possible meanings are:
-- Combination of assets,
-- Creative energy unleashed,
-- Giving and receiving,
-- Teamwork,
-- Cooperation.
+* Combination of assets,
+* Creative energy unleashed,
+* Giving and receiving,
+* Teamwork,
+* Cooperation.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-07 >>
 
-### THE 7 OF PENTACLES
+!!! THE 7 OF PENTACLES
 
 The 7 of Pentacles card is concerned with finances, for all matters dealing with money are influenced by it. The time of shortage has ended, and an abundant supply is indicated. The budget now allows for more than the basic necessities; some luxuries can become a reality.
 
@@ -1045,17 +1046,17 @@ Property, real estate, and finances are easily managed. Fund-raising drives and 
 This card represents financial breakthrough, a time that has been long awaited. Look for success in business and all pecuniary matters that can be enhanced by this card.
 
 Possible meanings are:
-- More money,
-- Success in business,
-- Gains associated with real estate,
-- Financial breakthrough,
-- An end to frugality.
+* More money,
+* Success in business,
+* Gains associated with real estate,
+* Financial breakthrough,
+* An end to frugality.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-08 >>
 
-### THE 8 OF PENTACLES
+!!! THE 8 OF PENTACLES
 
 The 8 of Pentacles is the card of positive pleasure in the world of material things. Enjoyable work is going to
 
@@ -1066,17 +1067,17 @@ The 8 of Pentacles signifies that the person's environment lends support to what
 Completion of a cycle is implied in the aspects of this card. This is a positive sign of growth and recognized achievement. The identity of the individual is joyously confirmed.
 
 Possible meanings are:
-- Positive physical pleasure,
-- Enjoyable work,
-- Interesting projects,
-- Supportive environment,
-- Completion of a cycle.
+* Positive physical pleasure,
+* Enjoyable work,
+* Interesting projects,
+* Supportive environment,
+* Completion of a cycle.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-09 >>
 
-### THE 9 OF PENTACLES
+!!! THE 9 OF PENTACLES
 
 The 9 of Pentacles card indicates a harvest, a time of life in which to enjoy and appreciate material success.
 
@@ -1088,16 +1089,16 @@ Projects can be finished, business affairs completed. The accumulated garbage of
 
 Possible Meanings are:
 e Appreciation of material success,
-- Increased leisure,
-- Enjoyment of the physical world,
-- Projects finished,
-- Business affairs completed. 
+* Increased leisure,
+* Enjoyment of the physical world,
+* Projects finished,
+* Business affairs completed. 
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-10 >>
 
-### THE 10 OF PENTACLES
+!!! THE 10 OF PENTACLES
 
 The 10 of Pentacles card represents the completion of a major cycle of physical existence. The individual is rewarded with material success for work well-done. The rewards exceed need, and wealth is available for sharing.
 
@@ -1106,17 +1107,17 @@ This is a time of abundance that has been earned through effort and sincere appl
 There is a glow of satisfaction that comes with the rewards inherent in this card. The individual receives this reward not by chance but as the result of achievement, diligence, and determination. Earthly matters have all been dealt with properly and respectfully.
 
 Possible meanings are:
-- Reward,
-- Material success,
-- Wealth,
-- Completion,
-- Satisfaction.
+* Reward,
+* Material success,
+* Wealth,
+* Completion,
+* Satisfaction.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-11 >>
 
-### THE PAGE OF PENTACLES
+!!! THE PAGE OF PENTACLES
 
 The Page of Pentacles card represents a young person, possibly a child, who has not yet been given full rights in the culture and society. He or she is an apprentice, not yet initiated into the concerns of the adult world.
 
@@ -1127,17 +1128,17 @@ The need and desire for change and transformation is strong, and often affects h
 The person represented by this card is primarily concerned with the phenomenal world. The Page seeks someone to be a guide in the ways of worldly matters, but is drawn to and remains open to anything that is fresh and new.
 
 Possible characteristics of this person are:
-- Childlike,
-- Childish,
-- Little status,
-- Open,
-- Seeking change.
+* Childlike,
+* Childish,
+* Little status,
+* Open,
+* Seeking change.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-12 >>
 
-### THE KNIGHT OF PENTACLES
+!!! THE KNIGHT OF PENTACLES
 
 The Knight of Pentacles card represents a person who has passed through puberty but is still young, and most likely unmarried. This youth is physically active, possibly athletic or into a regular program of intensive physical activity.
 
@@ -1150,17 +1151,17 @@ The Knight of Pentacles is an agent of physical change who has
 a strong drive for worldly expansiveness. He or she is open-minded, and willing to listen and absorb new ideas. This is a person deeply interested in the opinions of others who are more experienced.
 
 Possible characteristics of this person are:
-- Unmarried,
-- Physically active,
-- Loyal,
-- Expansive,
-- Willing to listen.
+* Unmarried,
+* Physically active,
+* Loyal,
+* Expansive,
+* Willing to listen.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-13 >>
 
-### THE QUEEN OF PENTACLES
+!!! THE QUEEN OF PENTACLES
 
 The Queen of Pentacles card represents a mature woman of marriageable age. She is a nurturer and provider, with great endurance. Her skills and talents suggest a superb homemaker, if that is her choice.
 
@@ -1169,17 +1170,17 @@ She believes in and strives to preserve tradition; she understands the social fa
 She is concerned with the physical health and well-being of the family. She has nursing instincts. She is motivated by her emotions, which are the strongest influence on her many worldly actions. She is loving and generous. She is dependable and has great endurance.
 
 Possible characteristics of this person are:
-- Nurturer,
-- Preserver,
-- Traditional,
-- Family-oriented,
-- Endurance.
+* Nurturer,
+* Preserver,
+* Traditional,
+* Family-oriented,
+* Endurance.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-04-14 >>
 
-### THE KING OF PENTACLES
+!!! THE KING OF PENTACLES
 
 The King of Pentacles card represents a mature male of marriageable age, a provider and an achiever. He is a good manager and watchful of his money without being overly cautious. He is disciplined and resourceful.
 
@@ -1188,11 +1189,11 @@ The King of Pentacles is concerned with the welfare of the family. He is product
 The King of Pentacles is motivated by the necessity of providing for his family or clan. He can be generous without loss of practicality. He is status-oriented and focused on worldly gain. He is driven to produce, build, and change the physical world.
 
 Possible characteristics of this person are:
-- Provider,
-- Achiever,
-- Generous,
-- Practical,
-- Determined.
+* Provider,
+* Achiever,
+* Generous,
+* Practical,
+* Determined.
 
 THIS PAGE INTENTIONALLY LEFT BLANK
 
@@ -1202,7 +1203,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-05 >>
 
-## Chapter 5 **THE SUIT OF CUPS**
+!! Chapter 5 ''THE SUIT OF CUPS''
 
 This suit of the Minor Arcana is named Cups in almost every Tarot deck. This may be because cups as containers are as prevalent today as they were when Tarot cards first became common.
 
@@ -1212,7 +1213,7 @@ When Cups are numerous in a layout, it signals the reader that the information i
 
 <<~ ahu #chapter-05-01 >>
 
-### THE ACE OF CUPS
+!!! THE ACE OF CUPS
 
 The 1 or Ace of Cups card represents ecstasy, a temporary but delightful feeling of being blessed, of experiencing perfection, of having attained emotional fulfillment. The ecstatic individual feels the full bloom of a peak emotional experience, free from all worry.
 
@@ -1223,17 +1224,17 @@ The cup of emotions is full. All the pleasant emotions combine into a state of u
 The experience is in no way diminished by the knowledge that the condition is only temporary.
 
 Possible meanings are:
-- Ecstasy
-- Emotional peak experience
-- Mutually desired marriage proposal accepted
-- Mutually desired pregnancy confirmed
-- Emotional communication breakthrough
+* Ecstasy
+* Emotional peak experience
+* Mutually desired marriage proposal accepted
+* Mutually desired pregnancy confirmed
+* Emotional communication breakthrough
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-02 >>
 
-### THE 2 OF CUPS
+!!! THE 2 OF CUPS
 
 The 2 of Cups card signifies lovers in harmony, in which two are emotionally as one. There is a balance of emotions in the union of opposites who willingly give and take. The flow of emotions is strong and steady in a very natural and non-threatening manner for both.
 
@@ -1244,17 +1245,17 @@ can be a sign of reconciliation. There can be renewed cooperation in relationshi
 The individual's reservoir of emotional vitality gives a feeling of being complete, of being able to ride the flow of emotions without sinking into unpleasantness. This card often points to successful love in a harmonious marriage.
 
 Possible meanings are:
-- Lovers in harmony
-- Emotional balance
-- Marriage
-- Partnership
-- Reconciliation
+* Lovers in harmony
+* Emotional balance
+* Marriage
+* Partnership
+* Reconciliation
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-03 >>
 
-### THE 3 OF CUPS
+!!! THE 3 OF CUPS
 
 The 3 of Cups card is about the sharing of love. The emotional life is flourishing. Things underway will come to a conclusion that is pleasant for everyone. Love continues to expand and to grow.
 
@@ -1265,18 +1266,18 @@ Lovers will enjoy the blossoms and fruits of their love.
 This love can be a bonding force that makes them individually feel part of the group or community. If there has been sickness, the healing has already begun. If comfort is needed, it is now available.
 
 Possible meanings are:
-- Love shared
-- Flourishing emotional life
+* Love shared
+* Flourishing emotional life
 
-- Possibility of having a child
-- Healing
-- Comfort
+* Possibility of having a child
+* Healing
+* Comfort
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-04 >>
 
-### THE 4 OF CUPS
+!!! THE 4 OF CUPS
 
 The 4 of Cups card frequently indicates that certain emotional rewards are available but veiled from awareness. The rewards can be attained if the person realizes that the problems causing wariness of involvement are more imagined than real.
 
@@ -1285,17 +1286,17 @@ The individual may be suffering from undirected anger that may explode or produc
 This card indicates that defensiveness is probably excessive, not warranted by the circumstance. This is a time to survey those things that have been overlooked, to release lingering anger that does not pertain to the present situation, and to discard old emotional baggage.
 
 Possible meanings are:
-- Unseen but available emotional rewards
-- Imaginary problems
-- Remembered anger
-- Excessive defensiveness
-- Old emotional baggage
+* Unseen but available emotional rewards
+* Imaginary problems
+* Remembered anger
+* Excessive defensiveness
+* Old emotional baggage
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-05 >>
 
-### THE 5 OF CUPS
+!!! THE 5 OF CUPS
 
 The Five of Cups card indicates disappointment. Something that was wanted is no longer available, and the
 
@@ -1306,17 +1307,17 @@ This card indicates a period of emotional confusion. The individual has overanal
 The person experiences difficulty in enjoying things without becoming attached to them.
 
 Possible meanings are:
-- Depression
-- Anger
-- Frustration
-- Suffering
-- Attachment
+* Depression
+* Anger
+* Frustration
+* Suffering
+* Attachment
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-06 >>
 
-### THE 6 OF CUPS
+!!! THE 6 OF CUPS
 
 The 6 of Cups card indicates enjoyment of friends, family, and past associations. There is a possibility of a gift or an inheritance coming. Memories bring pleasure and emotional warmth but are not free from the possible specter of sorrow.
 
@@ -1327,17 +1328,17 @@ This card signifies that the individual must be ready to undergo an emotional pu
 for what might have been may be needed to wash away attachments to the past.
 
 Possible meanings are:
-- Enjoyment of friends and family
-- Possible gift or inheritance
-- Sorrow from excessive nostalgia
-- Emotional purification
-- Tears
+* Enjoyment of friends and family
+* Possible gift or inheritance
+* Sorrow from excessive nostalgia
+* Emotional purification
+* Tears
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-07 >>
 
-### THE 7 OF CUPS
+!!! THE 7 OF CUPS
 
 The 7 of Cups card is a reminder of the danger of fear. Fear must be recognized for what it is. Is it based on reality?
 
@@ -1348,18 +1349,18 @@ Fear can be created by emotional greed, hindering the individual from attainment
 All fears can be named. Once they are named, they become less terrible and easier to deal with on the emotional level. This is the time to examine and name fears so that the individual is not fearful of fear itself.
 
 Possible meanings are:
-- Fear
-- Emotional greed
-- Paranoia
+* Fear
+* Emotional greed
+* Paranoia
 
-- Unwarranted dread
-- A need to name and define fears
+* Unwarranted dread
+* A need to name and define fears
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-08 >>
 
-### THE 8 OF CUPS
+!!! THE 8 OF CUPS
 
 The 8 of Cups card identifies a time of emotional stability based on a degree of maturity created by experience and growth. This is a time for emotional rest before a new phase is begun. The new phase will, in all probability, lead to greater emotional understanding.
 
@@ -1368,17 +1369,17 @@ This period of emotional stability may be a period of emotional stagnation. Desp
 This card signifies a time to emotionally unwind while everything seems to continue in a routine manner. Let the lack of present excitement be a resting place, a time of quiet that may be boring but is necessary before the next emotional wave arrives.
 
 Possible meanings are:
-- Emotional stagnation
-- Emotional stability
-- Fatigue
-- Routine events and activities
-- A rest period preceding a new emotional drive
+* Emotional stagnation
+* Emotional stability
+* Fatigue
+* Routine events and activities
+* A rest period preceding a new emotional drive
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-09 >>
 
-### THE 9 OF CUPS
+!!! THE 9 OF CUPS
 
 The 9 of Cups card indicates enjoyment and contentment, a feeling of emotional satisfaction derived from achievements. Beauty graces the person's environment, all the emotional support systems are in place, and the individual is happy with the general conditions of life.
 
@@ -1387,17 +1388,17 @@ This is the time of fulfillment. Efforts have been rewarded, talents recognized,
 This card signifies an emotional maturity that is itself an outstanding achievement. The pettiness of envy, jealousy, and coveting has been shed like an old garment. The individual is comfortable in the new clothes of positive emotions that bring satisfaction without pain and joy without reservation.
 
 Possible meanings are:
-- Enjoyment
-- Contentment
-- Fulfillment
-- Satisfaction without pain
-- Joy without reservation
+* Enjoyment
+* Contentment
+* Fulfillment
+* Satisfaction without pain
+* Joy without reservation
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-10 >>
 
-### THE 10 OF CUPS
+!!! THE 10 OF CUPS
 
 The 10 of Cups card signifies passions realized. Life is rich with meaning. Excitement is balanced with awareness.
 
@@ -1408,17 +1409,17 @@ A major emotional cycle has been completed, bringing fulfillment of wishes. Ener
 This card indicates satisfaction of the passions without diminishing them. The emotional cups of life are brimming with all that is desired. There is no hurry to drink, because the cups cannot be drained. The thrill of life constantly renews itself.
 
 Possible meanings are:
-- Passion
-- Emotional fulfillment
-- Exciting emotional base for life
-- Desires satisfied
-- Emotional maturity achieved
+* Passion
+* Emotional fulfillment
+* Exciting emotional base for life
+* Desires satisfied
+* Emotional maturity achieved
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-11 >>
 
-### THE PAGE OF CUPS
+!!! THE PAGE OF CUPS
 
 The Page of Cups card represents a young person, probably a child who has not yet experienced puberty. This person is emotional, sensitive, and sentimental. This individual spontaneously expresses feelings, no matter how fleeting, in an open, honest, and quite unsophisticated way. Most of the emotions flow swiftly.
 
@@ -1427,17 +1428,17 @@ The Page of Cups is inclined to be a bit dreamy but is basically good and willin
 The individual represented by this card is mostly concerned with the emotional side of life in all aspects. He or she needs and wants emotional guides to help shape an increasing awareness of the emotional complexity of life and relationships. This person is also concerned with individual tastes.
 
 Possible characteristics of this person are:
-- Below the age of puberty
-- Seeking emotional change
-- Courageous
-- Expressive
-- Wanting emotional guidelines
+* Below the age of puberty
+* Seeking emotional change
+* Courageous
+* Expressive
+* Wanting emotional guidelines
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-12 >>
 
-### THE KNIGHT OF CUPS
+!!! THE KNIGHT OF CUPS
 
 The Knight of Cups card represents a young person of either sex who is past the age of puberty but not yet married. This youth is emotional and sensitive and may be the younger lover of an older partner or possibly the student of an older, learned person.
 
@@ -1446,17 +1447,17 @@ The Knight of Cups identifies a person who has a nurturing nature, capable of em
 This person is sensual and tender, proceeding toward emotional maturity at a rapid rate. He or she makes a dedicated and motivated relation, lover, friend, or associate who will honor commitments as well as contribute honest effort to joint projects.
 
 Possible characteristics of this person are:
-- Unmarried
-- Emotionally growing
-- Expansive
-- Dedicated
-- Motivated
+* Unmarried
+* Emotionally growing
+* Expansive
+* Dedicated
+* Motivated
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-13 >>
 
-### THE QUEEN OF CUPS
+!!! THE QUEEN OF CUPS
 
 The Queen of Cups card represents a mature woman of marriageable age. She is extroverted and emotionally outgoing, with an unusual ability to sense the emotions of others. She is creative and enchanting.
 
@@ -1469,17 +1470,17 @@ She is concerned with emotions, her own as well as those of family, friends, nei
 by a loving nature that strongly influences her behavior. Her strength and many talents are often unsuspected by others.
 
 Possible characteristics of this person are:
-- Extroverted
-- Emotionally outgoing
-- Rejoicing
-- Involved
-- Talented
+* Extroverted
+* Emotionally outgoing
+* Rejoicing
+* Involved
+* Talented
 
 <<~/ahu >>
 
 <<~ ahu #chapter-05-14 >>
 
-### THE KING OF CUPS
+!!! THE KING OF CUPS
 
 The King of Cups card represents a mature man of marriageable age. He is a leader who volunteers his efforts to help others. He has an affinity for the sea. He is not only dependable but also very resourceful.
 
@@ -1488,11 +1489,11 @@ The King of Cups is a kind and considerate leader who never shirks from his resp
 He has strong persuasive powers but knows the value of compromise—not only with others but with his own inclinations. He guards against a slight tendency toward personal laziness, self-indulgence, and the enjoyment of decadence. He calculatingly discriminates which emotions to express, and enjoys the exhilaration of emotional highs.
 
 Possible characteristics of this person are:
-- Leader
-- Volunteer
-- Persuasive
-- Calculating
-- Enjoys emotional highs
+* Leader
+* Volunteer
+* Persuasive
+* Calculating
+* Enjoys emotional highs
 
 THIS PAGE INTENTIONALLY LEFT BLANK
 
@@ -1502,7 +1503,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-06 >>
 
-## Chapter 6 **THE SUIT OF SWORDS**
+!! Chapter 6 ''THE SUIT OF SWORDS''
 
 This suit of the Minor Arcana is traditionally called Swords in almost all Tarot decks. Some modern decks use other names to avoid the idea of weapons associated with destruction.
 
@@ -1512,41 +1513,41 @@ When Swords are numerous in a layout, it signals the reader that the information
 
 <<~ ahu #chapter-06-01 >>
 
-### THE ACE OF SWORDS
+!!! THE ACE OF SWORDS
 
 The 1 or Ace of Swords card represents new insights, new concepts, and new ideas. The mind now acts with brilliance that can be likened to an awakening. Shadows and confusion dissolve in a flash of light that brings great clarity to all matters at hand.
 
 The Ace of Swords signifies excellent communication within the mind itself and with other minds. There is a new and important understanding of the sources and processes of belief systems, philosophies, moral structures, and ethical standards. Willful ignorance is abolished as the mind becomes aware of its powers. These powers, including analysis, logic, and rational thinking, become apparent at this time. The individual should use them to the fullest extent and develop an appreciation for them.
 
 Possible meanings are:
-- Sudden insight
-- Clarity of thinking
-- Intellectual understanding
-- An end to confusion
-- Increased mental powers
+* Sudden insight
+* Clarity of thinking
+* Intellectual understanding
+* An end to confusion
+* Increased mental powers
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-02 >>
 
-### THE 2 OF SWORDS
+!!! THE 2 OF SWORDS
 
 The 2 of Swords card indicates the ability to see both sides of a present issue and hold possibly conflicting choices while determining where the balance is located. It signifies an end to one-dimensional thinking, an awareness of duality that the mind must evaluate.
 
 The 2 of Swords can symbolize two alternative answers to a question. The mind is not swayed by arguments designed to appeal to the emotions only; it recognizes that emotions form no basis for rational discussion.
 
 Possible meanings are:
-- Mental balance
-- Seeing both sides
-- Recognition of emotional arguments
-- Seeing more than one possibility
-- Making wise compromises
+* Mental balance
+* Seeing both sides
+* Recognition of emotional arguments
+* Seeing more than one possibility
+* Making wise compromises
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-03 >>
 
-### THE 3 OF SWORDS
+!!! THE 3 OF SWORDS
 
 The 3 of Swords card symbolizes the triangle, a strong support for any structure. It suggests the strength and expanse of the mind that is capable of seeing a middle ground beyond the illusion of duality.
 
@@ -1555,35 +1556,35 @@ This card represents a stage of mental growth in which all things are not seen a
 There is a threefold blossoming of the mind that allows the individual to consider wider choices, broader horizons, and participate in areas of mental activity that were not previously perceived. The mind becomes a strong support system that allows the individual to make mental excursions into what was unknown or neglected territory.
 
 Possible meanings are:
-- Strength of mind
-- Seeing beyond the illusion of duality
-- Mental growth
+* Strength of mind
+* Seeing beyond the illusion of duality
+* Mental growth
 
-- Wider mental choices,
-- Interesting mental excursions.
+* Wider mental choices,
+* Interesting mental excursions.
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-04 >>
 
-### THE 4 OF SWORDS
+!!! THE 4 OF SWORDS
 
 The 4 of Swords card is concerned with the use of logic, one of the mind’s most powerful tools. Using logic, the individual can chart a course that is understandable, possible, and open to unexpected changes that can be managed.
 
 This is a time to reflect on the logical means of making future choices, to weigh the actions of the past and decide if they should be continued. Thus the mind can be used as a laboratory of experience and a factory of ideas that will more likely produce the desired results. This is a time for creating new mental foundations based on logic. Speculative actions should cease.
 
 Possible meanings are:
-- Logical thinking
-- Charting a new course
-- New plans
-- New mental foundations
-- No speculative ventures
+* Logical thinking
+* Charting a new course
+* New plans
+* New mental foundations
+* No speculative ventures
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-05 >>
 
-### THE 5 OF SWORDS
+!!! THE 5 OF SWORDS
 
 The 5 of Swords card indicates a flurry of mental activity after a period of relatively calm reflection. There may be some mental confusion due to the sheer number of things to be considered. Activity at this time is mental rather than physical: plans and decisions should be made before any action is taken.
 
@@ -1596,17 +1597,17 @@ must be found rapidly. Attend to getting things into the proper order despite ot
 This card indicates a need for rapid but thorough thinking in order to avoid confusion and carelessness that could lead to future problems. Now is the time for speeding up mental processes to find correct answers within the limited time available.
 
 Possible meanings are:
-- Flurry of mental activity
-- Confusion
-- No time for leisurely thinking
-- Many problems to be solved mentally
-- Mental speed required
+* Flurry of mental activity
+* Confusion
+* No time for leisurely thinking
+* Many problems to be solved mentally
+* Mental speed required
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-06 >>
 
-### THE 6 OF SWORDS
+!!! THE 6 OF SWORDS
 
 The 6 of Swords card indicates the need to apply the mind to appropriate tasks. A great deal of progress is now possible through proper mental effort. New ideas will be welcomed if the thinking needed to promote them is done skillfully.
 
@@ -1615,18 +1616,18 @@ This is the time of accepting responsibility, of rendering mental service where 
 There is emotional support in this card for the mental actions required. Publicity is favorable if it is ethically generated. New projects can be well thought out at this time, with a good chance of successful completion.
 
 Possible meanings are:
-- Mental application to proper tasks
-- Progress
+* Mental application to proper tasks
+* Progress
 
-- Promotion
-- Good publicity
-- Emotional support of mental effort
+* Promotion
+* Good publicity
+* Emotional support of mental effort
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-07 >>
 
-### THE 7 OF SWORDS
+!!! THE 7 OF SWORDS
 
 The 7 of Swords card indicates that good advice and counsel are going to be offered. Mental plans that have been well thought out can now be turned into physical action.
 
@@ -1641,17 +1642,17 @@ The necessary mental preparations have been made.
 There is no reason for further delay. Projects can be begun on time and finished according to schedule. No hesitation is required or desirable when opinions are called for.
 
 Possible meanings are:
-- Good advice offered
-- Physical action
-- Write down ideas
-- Further education
-- Voicing of opinions
+* Good advice offered
+* Physical action
+* Write down ideas
+* Further education
+* Voicing of opinions
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-08 >>
 
-### THE 8 OF SWORDS
+!!! THE 8 OF SWORDS
 
 The 8 of Swords card indicates that the combining of ideas from diverse sources is now taking place. New understandings can be achieved as connections are made 
 
@@ -1663,17 +1664,17 @@ There can be a blending of mind, body, and spirit that creates a bond between me
 Philosophy is comprehended not in the abstract but as a tool to shape reality, foster action, and achieve a higher level of integrated mental activity than was previously thought possible. The excitement of mental activity has reached a peak that was previously hidden in the clouds.
 
 Possible meanings are:
-- Combining of ideas
-- New insights
-- Greater understanding
-- Integrated mental activity
-- Mental excitement
+* Combining of ideas
+* New insights
+* Greater understanding
+* Integrated mental activity
+* Mental excitement
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-09 >>
 
-### THE 9 OF SWORDS
+!!! THE 9 OF SWORDS
 
 The 9 of Swords card indicates that major decisions must be made, some of which will be difficult. Unpleasantness is associated with the problems confronting the mind. There may be disappointment regarding deception that may come from within or be due to outside forces. If associated cards in the layout suggest ill health or sudden changes, this card may indicate the possibility of death.
 
@@ -1682,17 +1683,17 @@ This card also signifies a narrowness of mind that can be either negative or pos
 compartments in the mind. In the positive sense, the individual can sharply and narrowly focus on what problems actually exist and turn away from idle speculations, wishful thinking, and unlikely scenarios.
 
 Possible meanings are:
-- Difficult decisions
-- Unpleasantness
-- Deception
-- Death
-- Restriction or focus of mind
+* Difficult decisions
+* Unpleasantness
+* Deception
+* Death
+* Restriction or focus of mind
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-10 >>
 
-### THE 10 OF SWORDS
+!!! THE 10 OF SWORDS
 
 The 10 of Swords card is the card of delusion. These are delusions of the mind, created by the desire to see what is not there, to interpret reality in ways that are not justified by the data. These delusions are self-created products of mental distraction.
 
@@ -1701,81 +1702,81 @@ This is the time for major philosophical change, for purging the mind of outmode
 These delusions damage the self and others; they must be abandoned. More attention should be paid to intuitive input and the meaningful feedback that comes both from one’s environment and from others.
 
 Possible meanings are:
-- Delusion
-- Erroneous thought
-- Damaging beliefs
+* Delusion
+* Erroneous thought
+* Damaging beliefs
 
-- New philosophy needed
-- Pay attention to intuition
+* New philosophy needed
+* Pay attention to intuition
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-11 >>
 
-### THE PAGE OF SWORDS
+!!! THE PAGE OF SWORDS
 
 The Page of Swords card represents a child of either sex who may be on the threshold of puberty. This person represented is somewhat secretive and investigates people and events in a manner designed to be undetectable. This individual is mentally alert, very curious, and has a great desire to learn in an independent manner.
 
 The Page of Swords is thoughtful and vigilant, with a certain grace of movement that helps him or her appear unobtrusive while observing everything. The observation is not noted by others because the child appears to pay attention to something else. This individual is hungry for intellectual stimulation and knowledge, especially regarding those things that adults tend to conceal or not explain.
 
 Possible characteristics of this person are:
-- Approaching puberty rapidly
-- Secretive
-- Curious
-- Great desire to learn
-- Seeks restricted information
+* Approaching puberty rapidly
+* Secretive
+* Curious
+* Great desire to learn
+* Seeks restricted information
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-12 >>
 
-### THE KNIGHT OF SWORDS
+!!! THE KNIGHT OF SWORDS
 
 The Knight of Swords card represents a person of either sex who is past puberty but has not yet contemplated marriage. This youth has a surprising amount of knowledge, which is attributable to a thirst for information, and an aggressive, sometimes rash, approach to obtaining experience of the world.
 
 The person identified with this card has great respect for formal education and is inclined to be a perfectionist. He or she is a great defender of systems of ideas, regardless of whether tested or not. Such dogmatic beliefs and actions are often a handicap in dealing with others who distrust ideas that are inherently imprudent.
 
 Possible characteristics of this person are:
-- Youthful
-- Knowledgeable
-- Rash
-- Aggressive
-- Defender of untested belief systems
+* Youthful
+* Knowledgeable
+* Rash
+* Aggressive
+* Defender of untested belief systems
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-13 >>
 
-### THE QUEEN OF SWORDS
+!!! THE QUEEN OF SWORDS
 
 The Queen of Swords card depicts a full-grown woman who may or not be married but has mothering attributes. Although protective of herself and others, she is strong-minded and assertive. She is secure in her extensive knowledge of herself and the world. The Queen of Swords is willing to fight for what she knows is right and understands what tactics are effective in hostile encounters.
 
 She likes fresh air and has little toleration for stuffy situations, narrow-minded people, and small-minded ideas. She puts her personal idealism to practical use in her dealings with the world. Her skills as a researcher, teacher, or mentor are formidable. Her philosophical and studious nature does not deter her from being aggressive when that is effective or practical.
 
 Possible characteristics of this person are:
-- Mothering instincts
-- Willing to confront
+* Mothering instincts
+* Willing to confront
 
-- Idealistic
-- Skilled teacher
-- Studious and philosophical
+* Idealistic
+* Skilled teacher
+* Studious and philosophical
 
 <<~/ahu >>
 
 <<~ ahu #chapter-06-14 >>
 
-### THE KING OF SWORDS
+!!! THE KING OF SWORDS
 
 The King of Swords card is a mature male who may or may not be married. He is mentally creative, capable of generating new and useful ideas, and is conversant with science and technology. He is a defender and protector who may have military or quasi-military experience.
 
 The King of Swords is a clear thinker, capable of making wise decisions in a firm manner. His alertness enables him to accumulate knowledge that others seldom tap. His extensive experience has been analyzed, filed away in his mind, and is available for appropriate use as needed. He is motivated by necessity and understands the use of tactics in difficult situations. He is willing to use revolutionary approaches if necessary.
 
 Possible characteristics of this person are:
-- Creative
-- Defender and protector
-- Clear thinker
-- Extensive experience
-- Willing to change the world
+* Creative
+* Defender and protector
+* Clear thinker
+* Extensive experience
+* Willing to change the world
 
 THIS PAGE INTENTIONALLY LEFT BLANK
 
@@ -1785,7 +1786,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-07 >>
 
-## Chapter 7 **THE SUIT OF WANDS**
+!! Chapter 7 ''THE SUIT OF WANDS''
 
 This suit of the Minor Arcana is traditionally called Wands in most Tarot decks. A few decks name this suit Staffs or Rods. Each card in the suit usually depicts the icons as long shafts of wood, sometimes with a budding twig to indicate its living energy. The suit of Wands is identified with spirituality and energy, the inner fire that burns within each individual. All the cards in this suit are concerned with the spirit and passions of the individual, not necessarily sexual, whose intensity produces the energy that burns like an internal flame. This suit deals with all matters of the spirit, all things in life that make a person feel positively energized. This includes working at occupations or avocations that fulfill an inner need or desire, and express creative energy and deeply felt aspirations.
 
@@ -1793,24 +1794,24 @@ When Wands are numerous in a layout, it signals the reader that the information 
 
 <<~ ahu #chapter-07-01 >>
 
-### THE ACE OF WANDS
+!!! THE ACE OF WANDS
 
 The 1 or Ace of Wands card represents a spiritual centering, an illuminating awakening. This can be a sudden great insight or may have been preceded by a period of conscious spiritual work or a search for personally valid answers.
 
 The Ace of Wands signifies something new and fortunate, such as creative insights, good luck, an unexpected gift or inheritance, a rebirth, or possibly an addition to the family through birth or legal proceedings. This new thing is very positive, which assures the completion of important goals. A new understanding of the forces of internal energy enables the individual to achieve objectives with deep inner meanings. This could be a breakthrough in the person's occupation, possibly the transformation of an avocation into a desirable occupation or enjoyable sideline.
 
 Possible meanings are:
-- Spiritual centering
-- Spiritual awakening
-- Unleashing of positive energy
-- New understanding
-- Positive changes in occupation
+* Spiritual centering
+* Spiritual awakening
+* Unleashing of positive energy
+* New understanding
+* Positive changes in occupation
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-02 >>
 
-### THE 2 OF WANDS
+!!! THE 2 OF WANDS
 
 The 2 of Wands card indicates a spiritual choice to be made, with intuition playing the most important role in making the choice. Alternatives with great potential must be selected on the basis of a pure spirit. Great adventures are being offered but they must be viewed with discrimination. The 2 of Wands can symbolize twin spiritual paths 
 
@@ -1819,17 +1820,17 @@ that each beckon with the possibility of growth and excitement. The perception r
 The potential for experiencing wondrous events and activities is strong. Only the spiritually aware choice is the correct one.
 
 Possible meanings are:
-- Spiritual choices
-- Intuition is important
-- Alternatives available
-- Adventure possible
-- Holistic approach
+* Spiritual choices
+* Intuition is important
+* Alternatives available
+* Adventure possible
+* Holistic approach
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-03 >>
 
-### THE 3 OF WANDS
+!!! THE 3 OF WANDS
 
 The 3 of Wands card represents a combining of energetic forces, possibly in a business or occupational venture that can be approached with optimism and confidence. If a partnership is formed, it should be with others of a strong and practical nature.
 
@@ -1838,17 +1839,17 @@ This card signifies a time to be open to opportunities, with compassion for all 
 There is an end to adversity. Profits and rewards await the individual who responds with the vision of improving things for all concerned. Energy is available to achieve goals that are productive and satisfying.
 
 Possible meanings are:
-- Combining of energetic forces
-- New business or occupational venture
-- Optimism and confidence
-- Practical partners
-- Visionary insight
+* Combining of energetic forces
+* New business or occupational venture
+* Optimism and confidence
+* Practical partners
+* Visionary insight
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-04 >>
 
-### THE 4 OF WANDS
+!!! THE 4 OF WANDS
 
 The 4 of Wands card indicates that spiritual centering has occurred. The individual has found harmony and is comfortable on the path of spiritual growth and development. This is a card of peace and of balance. There is support, perhaps from a sponsor, for spiritual growth.
 
@@ -1857,17 +1858,17 @@ The 4 of Wands suggests a celebration to recognize achievements. There may be a 
 No difficult striving is currently required. The person's honesty is recognized and rewarded. Energy flows in a steady stream to keep everything on the correct course.
 
 Possible meanings are:
-- Spiritual centering
-- Harmony
-- Celebration
-- Honesty recognized
-- Good energy
+* Spiritual centering
+* Harmony
+* Celebration
+* Honesty recognized
+* Good energy
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-05 >>
 
-### THE 5 OF WANDS
+!!! THE 5 OF WANDS
 
 The 5 of Wands card indicates that there is work to be done, and courage is needed. After passing through a period of stability, the individual is again facing
 
@@ -1876,17 +1877,17 @@ uncertainty. There is still freedom of choice, but the choices are numerous, com
 The 5 of Wands indicates a time to review priorities, to think things through and make new plans. Existing belief systems must be examined because they will be challenged by the confusion of choices. Only the person involved can determine if these belief systems are valid in this situation. If they fail to provide useful answers, then they must be changed, replaced, or abandoned to create the spiritual constructs that will yield the answers required.
 
 Possible meanings are:
-- Difficult work
-- Uncertainty
-- Courage required
-- Review priorities
-- Examine belief systems
+* Difficult work
+* Uncertainty
+* Courage required
+* Review priorities
+* Examine belief systems
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-06 >>
 
-### THE 6 OF WANDS
+!!! THE 6 OF WANDS
 
 The 6 of Wands card depicts victory after a difficult contest. There is recognition of spiritual values gained and appreciation for the energies expended. Progress has been made without moral compromise. The trust placed in others has been rewarded and shown to be justified.
 
@@ -1895,17 +1896,17 @@ The 6 of Wands shows that the period of waiting is over, and that longed-for res
 which others can learn. The person involved is appreciated by others as a teacher who personally shows the way.
 
 Possible meanings are:
-- Victory
-- Recognition
-- Reward
-- Promotion
-- Appreciation
+* Victory
+* Recognition
+* Reward
+* Promotion
+* Appreciation
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-07 >>
 
-### THE 7 OF WANDS
+!!! THE 7 OF WANDS
 
 The 7 of Wands card shows the individual having to face tough competition. Inner energy is needed to light a darkened field. A refinement of one’s belief systems may be required if events in the near future are to have the desired results. These events are physical but their impact will affect spiritual values.
 
@@ -1914,34 +1915,34 @@ The 7 of Wands indicates that negotiations will be successful. Indecision may ha
 Although victory is virtually assured, it will not come without work.
 
 Possible meanings are:
-- Tough competition
-- Adjustment of beliefs
-- Strength and courage required
-- Improved relationships
-- Probable victory
+* Tough competition
+* Adjustment of beliefs
+* Strength and courage required
+* Improved relationships
+* Probable victory
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-08 >>
 
-### THE 8 OF WANDS
+!!! THE 8 OF WANDS
 
 The 8 of Wands card indicates that harmony is being achieved via the middle path. Emotional forces and spiritual energy are balanced in a way that provides peace of mind. There is a confirmed sense of purpose. Energy is at a high level.
 
 The path of spiritual growth is firmly established. Rapid advances may come soon. The condition of harmony through balance is not accidental, but the result of cutting away the undergrowth of distractions so that the path is obvious. The individual’s sense of purpose leads to a situation of great promise and happiness. Disputes and quarrels can be settled in an ethical manner. Differences are resolved by honorable and open means.
 
 Possible meanings are:
-- Harmony
-- Emotions and spirit working together
-- Confirmed sense of purpose
-- High energy
-- Disputes settled ethically
+* Harmony
+* Emotions and spirit working together
+* Confirmed sense of purpose
+* High energy
+* Disputes settled ethically
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-09 >>
 
-### THE 9 OF WANDS
+!!! THE 9 OF WANDS
 
 The 9 of Wands card indicates that the individual must be true to his or her values and retain integrity in the face of challenges. Any difficulties now are similar to past difficulties that have been overcome. This time, unexpected or hidden resources are available to aid the individual whose mental and spiritual energies are united.
 
@@ -1950,34 +1951,34 @@ The 9 of Wands signifies that losses suffered in conflict are minor in nature. T
 It is a time for integrating the spirit and the mind to help oneself deal with the vagaries of life. From this comes strength in reserve, the sources of which cannot he lost.
 
 Possible meanings are:
-- Integrity retained
-- Difficulties are minor
-- Unexpected resource
-- Integration of spirit and mind
-- Strength in reserve
+* Integrity retained
+* Difficulties are minor
+* Unexpected resource
+* Integration of spirit and mind
+* Strength in reserve
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-10 >>
 
-### THE 10 OF WANDS
+!!! THE 10 OF WANDS
 
 The 10 of Wands card indicates spiritual growth and the completion of a long cycle. But it is not the end, because spiritual growth can spiral upward throughout life if the individual is willing to work with the paradoxes involved. A certain spiritual fulfillment has been attained, but not the end of the journey for the person who desires to experience the ultimate in spiritual growth.
 
 There may be a certain hesitation, a time for pausing to recharge for the next level of attainment. Presently there is excellent spiritual communication. The person should consider exploring beyond the experiences sought by the average seeker. These areas, although complex, hold a promise that is now only suspected—the promise of mastering the realm of the spirit.
 
 Possible meanings are:
-- Spiritual growth
-- A long cycle completed
-- Spiritual attainment
-- A time for pausing
-- Spiritual mastery possible
+* Spiritual growth
+* A long cycle completed
+* Spiritual attainment
+* A time for pausing
+* Spiritual mastery possible
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-11 >>
 
-### THE PAGE OF WANDS
+!!! THE PAGE OF WANDS
 
 The Page of Wands depicts a child of either sex who has not yet reached puberty. This child has bountiful energy and seeks information about the spiritual aspects of the world.
 
@@ -1986,17 +1987,17 @@ The child wants to learn about intuition, insight, and inspiration in order to s
 The Page of Wands is concerned with transmission of information and may act as a go-between or messenger. Sometimes the messages are delivered in person but frequently the telephone or post system is used to cover the distances involved. This energetic person is interested in communicating the news to all concerned, especially when pertaining to new opportunities, unexpected events, and exciting ideas. This person seeks spiritual growth and expansion.
 
 Possible characteristics of this person are:
-- Near puberty
-- Inquisitive
-- Sensitive
-- Introspective
-- Messenger
+* Near puberty
+* Inquisitive
+* Sensitive
+* Introspective
+* Messenger
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-12 >>
 
-### THE KNIGHT OF WANDS
+!!! THE KNIGHT OF WANDS
 
 The Knight of Wands card represents a young person of either sex who has not yet married. This person tends to be impetuous, delving deeply into events and situations, trying to get to the bottom of things that others might prefer left alone.
 
@@ -2008,17 +2009,17 @@ leader with high energy, but requires inspiration to act.
 The Knight of Wands carries messages from which he is always learning, even though he does not always understand their contents.
 
 Possible characteristics of this person are:
-- Youthful
-- Impetuous
-- One who stirs things up
-- Impatient with formality
-- Messenger and student
+* Youthful
+* Impetuous
+* One who stirs things up
+* Impatient with formality
+* Messenger and student
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-13 >>
 
-### THE QUEEN OF WANDS
+!!! THE QUEEN OF WANDS
 
 The Queen of Wands card depicts a woman who has attained her majority. She is vibrant and bright, expert in metaphysics and other matters pertaining to the human spirit. She may be a channel for insight into the unknown.
 
@@ -2027,29 +2028,29 @@ She is sensitive and sensuous, capable of passionately giving and receiving love
 Her charm enables her to move swiftly and gracefully through obstacles that might stymie others. Her formidable knowledge of the world is primarily experiential, obtained by watching and seeing how others accomplish things. She is skilled at adapting means to assure worthy ends. Her aggressiveness, although never hostile, may be unexpected by others and can arouse resentment when discovered. Her wisdom sometimes makes others think she is all-knowing, although she knows better.
 
 Possible characteristics of this person are:
-- Vibrant
-- Bright
+* Vibrant
+* Bright
 
-- Knowledgeable in metaphysics
-- Sensuous
-- Wise
+* Knowledgeable in metaphysics
+* Sensuous
+* Wise
 
 <<~/ahu >>
 
 <<~ ahu #chapter-07-14 >>
 
-### THE KING OF WANDS
+!!! THE KING OF WANDS
 
 The King of Wands card depicts a mature male who may or may not be married. Easily fulfilling the role of spiritual advisor, he is both intuitive and introspective. He is skilled in the ways of mediation. His introspection sometimes causes him to delay in reaching an opinion, but his judgments are characterized by justice. He has the potential to be an effective healer through the use of his hands.
 
 The King of Wands has a spiritual and passionate nature. He understands a variety of belief systems to which he has been exposed in his lifetime. His bearing is that of a minister, and he may have considered becoming one. He keenly understands the force of necessity in his own life and in the lives of others. He is secure in his own identity to the extent that he feels no need to defend who he is. This enables him to act out the various roles that are appropriate to his position in life.
 
 Possible characteristics of this person are:
-- Spiritual advisor
-- Intuitive
-- Introspective
-- Mediator
-- Secure in his identity
+* Spiritual advisor
+* Intuitive
+* Introspective
+* Mediator
+* Secure in his identity
 
 THIS PAGE INTENTIONALLY LEFT BLANK
 
@@ -2059,7 +2060,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-08 >>
 
-## Chapter 8 **LEARNING THE LAYOUTS**
+!! Chapter 8 ''LEARNING THE LAYOUTS''
 
 Once you have learned the meanings of the cards, the hardest part is done. You should be pleased with having accomplished the most time-consuming step in becoming a reader. The next thing you must learn is one or more layouts, which refers to particular ways of dealing the Tarot cards so they can be interpreted for a client. There are innumerable possible layouts you can use, or you may even invent your own. Learning any specific layout is relatively simple. All you have to do is select a layout from this book or from any other source.
 
@@ -2088,7 +2089,7 @@ Many readers have a layout that they prefer to use the first time they read for 
 
 <<~ ahu #chapter-08-01 >>
 
-### ADDITIONAL LAYOUT INFORMATION
+!!! ADDITIONAL LAYOUT INFORMATION
 
 Some clients will be satisfied with the reading as presented by the reader, but others will want additional information about individual cards in the reading. There are various additional abbreviated layouts that can be used to expand on the meaning of any particular card in a primary layout in order to answer these questions. Since any of these additional layouts can be used with any of the primary layouts described in the subsequent chapters, they are separately described here.
 
@@ -2096,7 +2097,7 @@ Some clients will be satisfied with the reading as presented by the reader, but 
 
 <<~ ahu #chapter-08-02 >>
 
-### THE EXPANSION LAYOUT
+!!! THE EXPANSION LAYOUT
 
 The Expansion Layout merely consists of dealing more cards from the deck around the card about which more information is wanted. This card is called the key card.
 
@@ -2119,7 +2120,7 @@ As the reader interprets the cards in positions 1 through 4 pertaining to the ke
 
 <<~ ahu #chapter-08-03 >>
 
-### CHANGES LAYOUT
+!!! CHANGES LAYOUT
 
 Another method of gaining more information about a particular card in the primary reading is the Changes Layout. To do this layout, deal four cards from the top of the deck next to the key card. Deal them face-up in a row after the key card.
 
@@ -2140,7 +2141,7 @@ As in all methods of gaining additional information about a primary reading, the
 
 <<~ ahu #chapter-08-04 >>
 
-### NEAR-FUTURE LAYOUT
+!!! NEAR-FUTURE LAYOUT
 
 This layout provides a quick look at the near future. It can be appended to any reading or can be used as a short, separate reading of its own. Deal four cards from the deck in any convenient place.
 
@@ -2159,7 +2160,7 @@ Significance of the Positions:
 
 <<~ ahu #chapter-08-05 >>
 
-### YES OR NO LAYOUT
+!!! YES OR NO LAYOUT
 
 If the client has a question, the reader can use five cards from the deck to give the client a Yes, No, or Maybe answer—even if the reader does not know what the question is. The reader may have no idea whether the client is looking for a Yes or a No. Deal five cards from the deck in a straight line or row.
 
@@ -2177,7 +2178,7 @@ All positions have equal value. A majority of positive meanings indicates a prob
 
 <<~ ahu #chapter-09 >>
 
-## Chapter 9 **THE FLOWER OF LIFE LAYOUT**
+!! Chapter 9 ''THE FLOWER OF LIFE LAYOUT''
 
 Deal the cards from the deck in the sequence shown by the following numbers. Position the cards so that their corners touch as shown, creating a representation of a blossoming flower.
 
@@ -2205,7 +2206,7 @@ Significance of the Positions:
 
 <<~ ahu #chapter-09-01 >>
 
-### Sample Flower of Life Reading
+!!! Sample Flower of Life Reading
 
 The Cards in the Sample Layout:
 [1] 5 of Pentacles,
@@ -2223,7 +2224,7 @@ The Cards in the Sample Layout:
 
 <<~ ahu #chapter-09-02 >>
 
-### Sample Flower of Life Interpretation
+!!! Sample Flower of Life Interpretation
 
 The reader points to the first card, in position 1, and says, “The position of this card refers to something in the past. Here the card dealt is the 5 of Pentacles. The suit of Pentacles deals with tangible things, things that can be seen and touched. What this card in this position tells me is that in the past you have suffered a serious difficulty that pertains to the physical world. This could have been a financial
 problem, a health problem, or the failure of a project that you expected to be successful.”
@@ -2264,7 +2265,7 @@ In closing, the reader lets the client know that the reading represents only wha
 
 <<~ ahu #chapter-10 >>
 
-## Chapter 10 **THE CLOCK LAYOUT**
+!! Chapter 10 ''THE CLOCK LAYOUT''
 
 Deal the cards from the deck in the sequence indicated by the numbers below. Position them so that the empty space in the center of the layout is about equal to the size of four cards. Side-by-side cards should touch each other.
 
@@ -2287,7 +2288,7 @@ This layout is called the Clock because it deals with events in the client’s l
 
 <<~ ahu #chapter-10-01 >>
 
-### Sample Clock Reading
+!!! Sample Clock Reading
 
 The Cards in the Sample Layout:
 [1] 7 of Cups, reversed,
@@ -2307,7 +2308,7 @@ The Cards in the Sample Layout:
 
 <<~ ahu #chapter-10-02 >>
 
-### Sample Clock Interpretation
+!!! Sample Clock Interpretation
 
 The reader points to the first three cards dealt in the layout, in positions 1, 2, and 3, and says, “The positions of the first three cards all represent early influences.”
 The reader now points to or touches the first card and says, “Here the first card is the 7 of Cups, reversed. The suit of Cups represents emotions. This card indicates that one of the major 
@@ -2341,7 +2342,7 @@ In closing, the reader lets the client know that the reading represents only wha
 
 <<~ ahu #chapter-11 >>
 
-## Chapter 11 **THE TRIANGLE LAYOUT**
+!! Chapter 11 ''THE TRIANGLE LAYOUT''
 
 Deal the cards in the sequence indicated by the numbers below. Position the cards next to each other so the edges touch.
 
@@ -2369,7 +2370,7 @@ The disadvantage of this procedure is that the client may have difficulty decidi
 
 <<~ ahu #chapter-11-01 >>
 
-### Sample Triangle Reading
+!!! Sample Triangle Reading
 
 The Cards in the Layout:
 [1] King of Swords,
@@ -2393,7 +2394,7 @@ The Cards in the Layout:
 
 <<~ ahu #chapter-11-02 >>
 
-### Sample Triangle Interpretation
+!!! Sample Triangle Interpretation
 
 During the reading, the reader allows for feedback from the client with brief pauses as appropriate. The reader should encourage feedback but not require it, as some clients may be unwilling.
 To begin, the reader points to the first card, in position 1, and says, “This card position represents you as the client in your present situation. Here is the King of Swords. The suit of Swords deals with mental activity. This card indicates that you are a creative and experienced person who thinks clearly and is willing to make changes in the world.”
@@ -2424,7 +2425,7 @@ The reader has now told the client what the individual cards mean and has summar
 
 <<~ ahu #chapter-12 >>
 
-## Chapter 12 **THE PYRAMID LAYOUT**
+!! Chapter 12 ''THE PYRAMID LAYOUT''
 
 Deal the cards in the sequence indicated by the numbers below. The first 15 cards all touch their adjacent cards. Cards 16 and 17 stand alone as shown.
 
@@ -2438,18 +2439,18 @@ Layout Positions:
 ```
 
 Significance of the Positions:
-- [1–5] People and events in the client’s life,
-- [6–9] Factors that connect those people and events,
+* [1–5] People and events in the client’s life,
+* [6–9] Factors that connect those people and events,
 
-- [10–12] How the client presents reality to others,
-- [13–14] How the client presents reality to self,
-- [15] Meaning of the pattern when completed,
-- [16] Describes the pattern as it waxes or develops,
-- [17] Describes the pattern as it wanes or completes.
+* [10–12] How the client presents reality to others,
+* [13–14] How the client presents reality to self,
+* [15] Meaning of the pattern when completed,
+* [16] Describes the pattern as it waxes or develops,
+* [17] Describes the pattern as it wanes or completes.
 
 <<~ ahu #chapter-12-01 >>
 
-### Sample Pyramid Reading
+!!! Sample Pyramid Reading
 
 The Cards in the Layout:
 [1] King of Wands, reversed,
@@ -2474,7 +2475,7 @@ The Cards in the Layout:
 
 <<~ ahu #chapter-12-02 >>
 
-### Sample Pyramid Interpretation
+!!! Sample Pyramid Interpretation
 
 In the following, as in all readings, the reader pauses as appropriate for possible feedback from the client. To begin, the reader looks over the cards and says, “There are a number of 
 
@@ -2528,7 +2529,7 @@ The reader has now told the client what the cards have revealed in this reading.
 
 <<~ ahu #chapter-13 >>
 
-## Chapter 13 **THE OCTAVE PATH LAYOUT**
+!! Chapter 13 ''THE OCTAVE PATH LAYOUT''
 
 Deal the cards in the sequence indicated by the numbers below. The cards all touch adjacent cards.
 
@@ -2540,37 +2541,37 @@ Layout Positions:
 ```
 
 Significance of the Positions:
-- [1] Past views,
-- [2] Past intentions,
-- [3] Past speech (action),
-- [4] Past conduct (action),
-- [5] Past vocation (action),
-- [6] Past effort (action),
-- [7] Past alertness (action),
+* [1] Past views,
+* [2] Past intentions,
+* [3] Past speech (action),
+* [4] Past conduct (action),
+* [5] Past vocation (action),
+* [6] Past effort (action),
+* [7] Past alertness (action),
 
-- [8] Past concentration,
-- [9] Present views,
-- [10] Present intentions,
-- [11] Present speech (action),
-- [12] Present conduct (action),
-- [13] Present vocation (action),
-- [14] Present effort (action),
-- [15] Present alertness (action),
-- [16] Present concentration,
-- [17] Future views,
-- [18] Future intentions,
-- [19] Future speech (action),
-- [20] Future conduct (action),
-- [21] Future vocation (action),
-- [22] Future effort (action),
-- [23] Future alertness (action),
-- [24] Future concentration.
+* [8] Past concentration,
+* [9] Present views,
+* [10] Present intentions,
+* [11] Present speech (action),
+* [12] Present conduct (action),
+* [13] Present vocation (action),
+* [14] Present effort (action),
+* [15] Present alertness (action),
+* [16] Present concentration,
+* [17] Future views,
+* [18] Future intentions,
+* [19] Future speech (action),
+* [20] Future conduct (action),
+* [21] Future vocation (action),
+* [22] Future effort (action),
+* [23] Future alertness (action),
+* [24] Future concentration.
 
 In this layout, the eight cards in each of the three rows are a feedback system that reports on the client's experience of life in the past, present, and future, respectively.
 
 <<~ ahu #chapter-13-01 >>
 
-### Sample Octave Path Reading
+!!! Sample Octave Path Reading
 
 The Cards in the Layout:
 [1] 7 of Wands,
@@ -2603,7 +2604,7 @@ The Cards in the Layout:
 
 <<~ ahu #chapter-13-02 >>
 
-### Sample Octave Path Interpretation
+!!! Sample Octave Path Interpretation
 
 During the reading, the reader pauses as appropriate to receive any feedback from the client. Any information from the client may make the reading more meaningful. The reader should be certain to inform the client that any feedback is welcome, because the client may believe that he or she should not say anything to interrupt the reader's narrative flow.
 
@@ -2687,7 +2688,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-14 >>
 
-## Chapter 14 **ABOUT PRACTICE READINGS**
+!! Chapter 14 ''ABOUT PRACTICE READINGS''
 
 Having now become familiar with a number of layouts as well as meanings of the cards, the next step is practice readings. These should probably first be done without a client and with reference materials on card meanings and layout positions at hand.
 
@@ -2745,7 +2746,7 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-15 >>
 
-## Chapter 15 **CLIENTS AND COMPENSATION**
+!! Chapter 15 ''CLIENTS AND COMPENSATION''
 
 A beginning Tarot reader’s first clients are usually friends, relatives, or acquaintances, and possibly other individuals who are interested in learning to read Tarot cards. These people will have patience with the novice who needs to check source materials during a reading, and whose style and continuity of reading are as yet undeveloped. These clients are a great help to the learning process.
 
@@ -2789,13 +2790,13 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 <<~ ahu #chapter-16 >>
 
-## Chapter 16 **PROBABLE QUESTIONS AND POSSIBLE ANSWERS**
+!! Chapter 16 ''PROBABLE QUESTIONS AND POSSIBLE ANSWERS''
 
 The questions and answers in this chapter are not about any specific Tarot reading. These are probable questions that clients and potential clients might ask about Tarot readings in general or about their own readings. The possible answers are those that might be given by any Tarot reader. As an individual Tarot reader, your own answers will be based on your own personal ideas and experience. You may find these generalized answers useful as a frame of reference.
 
 <<~ ahu #chapter-16-01 >>
 
-### WHERE DOES THE READING INFORMATION COME FROM?
+!!! WHERE DOES THE READING INFORMATION COME FROM?
 
 The information comes from what I know about the meaning of the cards and the significance of their positions in the layout. I also use all the knowledge I have from rational and intuitive sources, including what I know about how people think, believe, and behave. I also have some 
 
@@ -2805,7 +2806,7 @@ information about the clients, based on how they present themselves insofar as a
 
 <<~ ahu #chapter-16-02 >>
 
-### ISN’T THIS DELVING INTO THE OCCULT OR DEVIL’S WORK?
+!!! ISN’T THIS DELVING INTO THE OCCULT OR DEVIL’S WORK?
 
 No. What I do is storytelling, a highly respected human activity as old as human language. As a Tarot reader, I speak the words of a story that uses cards instead of pictures, slides, printed words, actors, puppets, film, or tape.
 
@@ -2813,7 +2814,7 @@ No. What I do is storytelling, a highly respected human activity as old as human
 
 <<~ ahu #chapter-16-03 >>
 
-### HOW CAN YOU KNOW ABOUT ME UNLESS SOMEONE TOLD YOU?
+!!! HOW CAN YOU KNOW ABOUT ME UNLESS SOMEONE TOLD YOU?
 
 No one told me anything about you except that you wanted a reading. My experience enables me to interpret the cards and your reactions to them. My information comes from both you and the cards. Some of my readings are more meaningful than others, but I try to make all my readings as meaningful as possible. I have described many things to you in general terms. Some of them may have seemed very specific to you but I have no way of knowing that unless I hear it from you.
 
@@ -2821,7 +2822,7 @@ No one told me anything about you except that you wanted a reading. My experienc
 
 <<~ ahu #chapter-16-04 >>
 
-### WHY DIDN’T THE THINGS YOU SAID PERTAIN TO MY LIFE? THE PERSON YOU TALKED ABOUT ISN’T ANYTHING LIKE ME.
+!!! WHY DIDN’T THE THINGS YOU SAID PERTAIN TO MY LIFE? THE PERSON YOU TALKED ABOUT ISN’T ANYTHING LIKE ME.
 
 I did my best to give you a good reading. If you think it did not relate to you, that probably means that I am not the person who should read cards for you. I am sincerely sorry that you didn’t find it helpful.
 
@@ -2829,7 +2830,7 @@ I did my best to give you a good reading. If you think it did not relate to you,
 
 <<~ ahu #chapter-16-05 >>
 
-### WHAT WOULD HAVE HAPPENED IF I PICKED A DIFFERENT CARD TO START?
+!!! WHAT WOULD HAVE HAPPENED IF I PICKED A DIFFERENT CARD TO START?
 
 The information would have been a bit different but very similar overall. Picking a different card would mean that you wanted a different perspective on the information. You would have learned more about one aspect of the reading and less about another. I ask the client to select the first card so that you know you are influencing the cards in the layout. You selected by intuition. So, in a way, you are asking me what would the reading be like if your intuition was different. There are several answers to that. It could mean that you would be a different person than you are and would therefore set a different reading. It could mean that you are interested in other aspects of your life than the ones contained in the reading. There are multiple possibilities for speculation but it wouldn’t change anything now because it didn’t happen that way. Therefore, you should think about the actual information in the reading and consider how to use it.
 
@@ -2837,7 +2838,7 @@ The information would have been a bit different but very similar overall. Pickin
 
 <<~ ahu #chapter-16-06 >>
 
-### WOULD I GET THE SAME INFORMATION FROM ANOTHER READER?
+!!! WOULD I GET THE SAME INFORMATION FROM ANOTHER READER?
 
 You might get very similar information. I know of many instances in which a client immediately received a second reading from a different reader and reported that it was very similar. It’s like hearing the details of a movie from two different people who had similar responses to it. At psychic fairs it is common for a person to get more than one reading and then say that both were similar. Often many of the same cards show up in both readings. But the readings could be different depending on the layouts used, the meanings understood by different readers, and their reader’s unique 
 
@@ -2847,7 +2848,7 @@ abilities. But speculating on what another reader might tell you is something be
 
 <<~ ahu #chapter-16-07 >>
 
-### HOW LONG WILL IT BE BEFORE THE THINGS YOU SAID WILL HAPPEN?
+!!! HOW LONG WILL IT BE BEFORE THE THINGS YOU SAID WILL HAPPEN?
 
 It is usually difficult to estimate time in a reading. A lot of the information comes from my intuition, which is not concerned with clock time. In looking at the cards, I make estimates that are both relative and speculative. I can’t be sure about the time involved.
 
@@ -2855,7 +2856,7 @@ It is usually difficult to estimate time in a reading. A lot of the information 
 
 <<~ ahu #chapter-16-08 >>
 
-### DID YOU USE THE CARDS AS A WAY TO GIVE ME ADVICE?
+!!! DID YOU USE THE CARDS AS A WAY TO GIVE ME ADVICE?
 
 No. If I had seriously just wanted to give you advice, I could have done so without going to the effort required to read the cards. The advice in the reading was based on what I perceived from the cards. I use them to tell a story that relates to your life in some way. I don’t make your decisions because you have much more information about your life than I will ever have. If you feel my advice was helpful, I’m pleased. What you do with the information given is up to you.
 
@@ -2863,7 +2864,7 @@ No. If I had seriously just wanted to give you advice, I could have done so with
 
 <<~ ahu #chapter-16-09 >>
 
-### WHY SHOULD I LISTEN TO WHAT YOU HAVE TO SAY?
+!!! WHY SHOULD I LISTEN TO WHAT YOU HAVE TO SAY?
 
 Because I am going to tell you an entertaining story about the person you are most interested in—yourself. It will give you the benefit of someone else’s perspective on some aspects of your life. Maybe it will help you, or maybe it will be interesting. Only you can decide, but first you have to listen.
 
@@ -2871,7 +2872,7 @@ Because I am going to tell you an entertaining story about the person you are mo
 
 <<~ ahu #chapter-16-10 >>
 
-### MAY I BRING A TAPE RECORDER TO TAPE THE READING?
+!!! MAY I BRING A TAPE RECORDER TO TAPE THE READING?
 
 Yes, I have no objections to that.
 
@@ -2879,7 +2880,7 @@ Yes, I have no objections to that.
 
 <<~ ahu #chapter-16-11 >>
 
-### I NEVER HAD A READING BEFORE. WHAT DO I DO?
+!!! I NEVER HAD A READING BEFORE. WHAT DO I DO?
 
 Just listen to what I say about what I perceive from the cards. If you have questions and comments, I am receptive to them. You can speak at any time. After you have received the information, it is up to you to evaluate it. If some of it pertains to possible future events, you cannot evaluate all of it now. So I recommend that you listen and remember it (or tape it if you have brought a recorder). Then you can compare the information to your reality and see if it helps you to understand some aspects of your life.
 
@@ -2887,7 +2888,7 @@ Just listen to what I say about what I perceive from the cards. If you have ques
 
 <<~ ahu #chapter-16-12 >>
 
-### MAY I BRING A FRIEND WITH ME TO THE READING?
+!!! MAY I BRING A FRIEND WITH ME TO THE READING?
 
 Yes, but you need to decide beforehand whether you want your friend to observe the reading. Since the reading may deal with some private aspects of your life or something that pertains to your relationship with your friend, you might find it embarrassing or awkward.
 
@@ -2895,7 +2896,7 @@ Yes, but you need to decide beforehand whether you want your friend to observe t
 
 <<~ ahu #chapter-16-13 >>
 
-### WHY DIDN’T YOUR READING TELL ME WHAT I WANTED TO KNOW?
+!!! WHY DIDN’T YOUR READING TELL ME WHAT I WANTED TO KNOW?
 
 If you are willing to tell me what that is, I will deal a few more cards and see what they reveal about it. If you don’t want to tell me specifically what that is, rephrase it as a question that can be answered Yes, No, or Maybe. I will deal a few more cards that answer the question. If it cannot be put in the form of a question, I can still deal a few more cards and tell you what they mean in relation to what you want to know.
 
@@ -2905,7 +2906,7 @@ Sometimes there isn’t a good answer to the question as phrased. For example, i
 
 <<~ ahu #chapter-16-14 >>
 
-### HOW DID YOU LEARN TO DO THIS?
+!!! HOW DID YOU LEARN TO DO THIS?
 
 I decided that it was something I wanted to do. So I bought a deck of Tarot cards, and began to learn about the meanings of the cards, the layouts, and giving readings. It took a lot of my time but I thought it would be worth it. From the layouts I studied, I picked one that seemed right for me and memorized it. I began practicing by doing readings without a client, trying to tell an interesting tale based on the cards in the layout. At first I was not very adept but I gradually learned. I have been doing it for some time now and it has gotten easier. Also I think my readings are more entertaining and potentially useful now.
 
@@ -2915,7 +2916,7 @@ Reading cards is simply an ability that one learns like any other. You improve b
 
 <<~ ahu #chapter-16-15 >>
 
-### HOW ACCURATE ARE YOUR READINGS?
+!!! HOW ACCURATE ARE YOUR READINGS?
 
 Only my clients can judge that. Some of them tell me that my readings are very accurate. Others don’t give me any feedback at all. Clients who are regulars—those who return every few months or whenever something new is happening in their lives—come back because they find the readings accurate enough to be useful to them. Some clients don’t come back, so I can’t verify any predictions I made. I never know why some clients don’t come back. Maybe they were satisfied with one reading, or maybe they were dissatisfied and one reading was enough. Friends and acquaintances whom I regularly see tell me that the readings I give them are helpful, but with strangers I only know what they tell me at the time, which may be very little. The clients who return for more readings and recommend me to others usually judge my readings to be more right than wrong.
 
@@ -2923,7 +2924,7 @@ Only my clients can judge that. Some of them tell me that my readings are very a
 
 <<~ ahu #chapter-16-16 >>
 
-### DO CLIENTS EVER REVEAL EMBARRASSING INFORMATION TO YOU ABOUT THEIR LIVES?
+!!! DO CLIENTS EVER REVEAL EMBARRASSING INFORMATION TO YOU ABOUT THEIR LIVES?
 
 I am able to accept whatever the client tells me without any personal involvement. I accept the information for what it is—something that the client thinks is important for me to know. I treat all information in a reading as confidential. I respect and protect the client’s privacy.
 
@@ -2931,7 +2932,7 @@ I am able to accept whatever the client tells me without any personal involvemen
 
 <<~ ahu #chapter-16-17 >>
 
-### DO YOU THINK THAT SOME OF YOUR CLIENTS LIE TO YOU?
+!!! DO YOU THINK THAT SOME OF YOUR CLIENTS LIE TO YOU?
 
 It’s possible. Sometimes people deceive themselves as a defense mechanism or to feel better about something. Almost everyone occasionally misrepresents themselves, either deliberately or accidentally. Some people believe the lies they tell to themselves. They may present those lies to others as the 
 
@@ -2941,7 +2942,7 @@ truth. I give the reading within the framework of doing the best I can with the 
 
 <<~ ahu #chapter-16-18 >>
 
-### DO CLIENTS TELL YOU ABOUT THEIR SEX LIVES?
+!!! DO CLIENTS TELL YOU ABOUT THEIR SEX LIVES?
 
 Sometimes, but I don’t discuss what they tell me.
 
@@ -2949,7 +2950,7 @@ Sometimes, but I don’t discuss what they tell me.
 
 <<~ ahu #chapter-16-19 >>
 
-### WHY DO PEOPLE LISTEN TO WHAT YOU SAY?
+!!! WHY DO PEOPLE LISTEN TO WHAT YOU SAY?
 
 Because they want to hear it. If you are lost or confused, you can ask directions from a stranger without placing unlimited trust in the information. A Tarot reading is like that. You don’t have to take the information on blind faith. Just listen to it and see if it is useful to you.
 
@@ -2957,7 +2958,7 @@ Because they want to hear it. If you are lost or confused, you can ask direction
 
 <<~ ahu #chapter-16-20 >>
 
-### DO YOU FEEL RESPONSIBLE IF WHAT YOU TELL A CLIENT CAUSES THEM PROBLEMS?
+!!! DO YOU FEEL RESPONSIBLE IF WHAT YOU TELL A CLIENT CAUSES THEM PROBLEMS?
 
 No. I do take responsibility for the information I give to the client, but I don’t present it as immutable truth. The information represents only a possibility that I see. The client decides how to use that information. I take no responsibility for the actions of others, and I never claim that anything in a reading is more than a possibility. It is only my opinion, based on what I discern from the cards. I try to give clients helpful information, but I never tell them how to act.
 
@@ -2965,7 +2966,7 @@ No. I do take responsibility for the information I give to the client, but I don
 
 <<~ ahu #chapter-16-21 >>
 
-### AREN’T THERE SOME TAROT READERS WHO ARE CONFIDENCE TRICKSTERS?
+!!! AREN’T THERE SOME TAROT READERS WHO ARE CONFIDENCE TRICKSTERS?
 
 None that I associate with. There probably have been 
 
@@ -2977,7 +2978,7 @@ There are some dishonest people engaged in almost any human activity who will tr
 
 <<~ ahu #chapter-16-22 >>
 
-### WHY ARE THERE SO MANY DIFFERENT TAROT DECKS?
+!!! WHY ARE THERE SO MANY DIFFERENT TAROT DECKS?
 
 Tarot cards are like any other commodity. If there is variety, it was created to satisfy the market. All Tarot deck designers have their own ideas about what the cards should be. It takes all kinds of different decks to satisfy different people.
 
@@ -2985,7 +2986,7 @@ Tarot cards are like any other commodity. If there is variety, it was created to
 
 <<~ ahu #chapter-16-23 >>
 
-### WHAT TYPE OF CLIENT DO YOU FIND DIFFICULT?
+!!! WHAT TYPE OF CLIENT DO YOU FIND DIFFICULT?
 
 Any client who is hostile to Tarot readings in general, or is antagonistic to the reader, is understandably difficult to read for. People who are more interested in their skepticism or unfriendly personal beliefs than acquiring information often block out what is presented. Their negative reactions and statements serve only to destroy any possible rapport with the reader.
 
@@ -2993,7 +2994,7 @@ Any client who is hostile to Tarot readings in general, or is antagonistic to th
 
 <<~ ahu #chapter-16-24 >>
 
-### DOES THE AGE OF THE CLIENT HAVE AN EFFECT ON THE READING?
+!!! DOES THE AGE OF THE CLIENT HAVE AN EFFECT ON THE READING?
 
 Not necessarily. Children or adolescents are often difficult to read for because they are still developing their characters and personalities. Also, they have shorter attention spans, which hampers rapport with the reader.
 
@@ -3001,7 +3002,7 @@ Not necessarily. Children or adolescents are often difficult to read for because
 
 <<~ ahu #chapter-16-25 >>
 
-### DO YOU HAVE PSYCHIC ABILITIES?
+!!! DO YOU HAVE PSYCHIC ABILITIES?
 
 I don’t claim any particular psychic abilities. Tarot reading is not necessarily a psychic process although some clients and readers do hold that belief. I present myself as an entertainer who uses the Tarot cards to tell people possibly informative stories about their lives.
 
@@ -3009,7 +3010,7 @@ I don’t claim any particular psychic abilities. Tarot reading is not necessari
 
 <<~ ahu #chapter-16-26 >>
 
-### HAVE YOU EVER SAID ANYTHING IN A READING THAT YOU DIDN’T KNOW YOU WERE GOING TO SAY?
+!!! HAVE YOU EVER SAID ANYTHING IN A READING THAT YOU DIDN’T KNOW YOU WERE GOING TO SAY?
 
 Yes, that often happens. Sometimes words come out of my mouth before I’m aware they were in my head. I don’t try to block that because I consider it intuitive and spontaneous. There is no way that I can make it happen. I just accept it when it does, in the same way I accept that occasionally I say something unplanned or unexpected in conversation.
 
@@ -3017,7 +3018,7 @@ Yes, that often happens. Sometimes words come out of my mouth before I’m aware
 
 <<~ ahu #chapter-16-27 >>
 
-### CAN YOU DO A READING ABOUT SOMEONE WHO ISN’T PRESENT?
+!!! CAN YOU DO A READING ABOUT SOMEONE WHO ISN’T PRESENT?
 
 Your question could mean two different things. If you asked me to give you a reading about someone else, the answer would be no. In a reading about you, there might be information about someone else in your life but that is still your reading. If the question means could someone contact me by telephone or mail to get a reading, the answer is that I personally don’t do readings that way because I prefer to read for people in person. However, I know that some Tarot readers do readings over the telephone and taped readings by mail.
 
@@ -3025,7 +3026,7 @@ Your question could mean two different things. If you asked me to give you a rea
 
 <<~ ahu #chapter-16-28 >>
 
-### WHY SHOULD I PAY YOU FOR SOMETHING THAT I’M NOT SURE I BELIEVE IN, WHICH MIGHT NOT BE ANY USE TO ME AT ALL?
+!!! WHY SHOULD I PAY YOU FOR SOMETHING THAT I’M NOT SURE I BELIEVE IN, WHICH MIGHT NOT BE ANY USE TO ME AT ALL?
 
 If you are already certain that the information I will
 
@@ -3035,7 +3036,7 @@ give you is worthless, then you shouldn’t get a reading from me. In any case, 
 
 <<~ ahu #chapter-16-29 >>
 
-### IN MY LAST READING YOU TOLD ME SOMETHING THAT I DIDN’T UNDERSTAND; CAN YOU EXPLAIN IT TO ME NOW?
+!!! IN MY LAST READING YOU TOLD ME SOMETHING THAT I DIDN’T UNDERSTAND; CAN YOU EXPLAIN IT TO ME NOW?
 
 I give many different readings to different people. Some things stay in my memory but I often do not remember much about any specific reading. I’m willing to give you a reading now if you wish, but I have no meaningful recall of the previous reading. Even if you have a tape recording of it, I am not operating within the framework of that reading now. I would rather see what a new reading would reveal than attempt to explain the previous one to you now.
 
@@ -3043,7 +3044,7 @@ I give many different readings to different people. Some things stay in my memor
 
 <<~ ahu #chapter-16-30 >>
 
-### CAN I TELEPHONE YOU LATER TO ASK YOU MORE ABOUT SOMETHING YOU PREDICTED?
+!!! CAN I TELEPHONE YOU LATER TO ASK YOU MORE ABOUT SOMETHING YOU PREDICTED?
 
 My policy is not to discuss previous readings, even if you want to talk about something that happened as I predicted.
 
@@ -3051,7 +3052,7 @@ My policy is not to discuss previous readings, even if you want to talk about so
 
 <<~ ahu #chapter-16-31 >>
 
-### I THINK MY FRIEND NEEDS A READING BUT SHE IS RELUCTANT. HOW CAN I GET HER TO COME FOR A READING?
+!!! I THINK MY FRIEND NEEDS A READING BUT SHE IS RELUCTANT. HOW CAN I GET HER TO COME FOR A READING?
 
 Your friend has her own reasons for not wanting a reading. I don’t try to convince people that they should have a reading.
 
@@ -3061,7 +3062,7 @@ If your friend is concerned about my fee, you might offer to pay for her reading
 
 <<~ ahu #chapter-16-32 >>
 
-### WHAT IS THE RELATIONSHIP BETWEEN RELIGION AND TAROT?
+!!! WHAT IS THE RELATIONSHIP BETWEEN RELIGION AND TAROT?
 
 Religion is not connected with Tarot. My religious beliefs are not connected with Tarot readings. There are some religions that encourage the development of such abilities, many that are neutral, and some that are opposed. If I was a member of a religious group that opposed Tarot reading, I wouldn’t have spent the time and effort necessary to learn how to do it.
 
@@ -3069,7 +3070,7 @@ Religion is not connected with Tarot. My religious beliefs are not connected wit
 
 <<~ ahu #chapter-16-33 >>
 
-### WHERE DID THE USE OF TAROT CARDS START?
+!!! WHERE DID THE USE OF TAROT CARDS START?
 
 There are many different theories about their origin but no proof substantiating any of them. It is known that they became popular in Europe in the Middle Ages, but no clear-cut starting point has ever been established. They may have come to Europe from some Eastern or Middle Eastern area but this is not proven either. Like many other human artifacts, Tarot cards were created at an unknown time by an unknown person or persons. Later they became common. The variety and number of different decks have increased over the centuries as new creators were inspired by existing decks. It is widely accepted that present-day playing cards are adapted from the Minor Arcana. The present-day Joker card is a representation of The Fool card in the Major Arcana.
 
@@ -3077,7 +3078,7 @@ There are many different theories about their origin but no proof substantiating
 
 <<~ ahu #chapter-16-34 >>
 
-### IF ALL THE CARDS HAVE DEFINITE MEANINGS TO YOU, WHY IS EACH READING DIFFERENT?
+!!! IF ALL THE CARDS HAVE DEFINITE MEANINGS TO YOU, WHY IS EACH READING DIFFERENT?
 
 Each position in a layout has a different significance and there are many different layouts. Some positions refer to the past,
 
@@ -3087,7 +3088,7 @@ some to various aspects of the present, and some to different possibilities in t
 
 <<~ ahu #chapter-16-35 >>
 
-### IF YOU SAW SOMETHING TERRIBLE IN THE CARDS, LIKE IMMINENT DEATH, WOULD YOU TELL THE CLIENT?
+!!! IF YOU SAW SOMETHING TERRIBLE IN THE CARDS, LIKE IMMINENT DEATH, WOULD YOU TELL THE CLIENT?
 
 Yes. I consider it my responsibility to accurately tell the client what I see in the cards. However, I would also tell the client that the future is not predetermined. What I see in the cards, I see as a possibility—never as a certainty. If I reveal to the client this “something terrible” that I see as a possibility, he or she may well know it already. If the client has a serious health problem, he may have been told the same thing by a doctor. Or the client may have a relative, friend, or associate who is severely ill or in some type of potentially dangerous situation, occupation, or activity.
 
@@ -3097,7 +3098,7 @@ I am always honest with the client because only the client can determine if the 
 
 <<~ ahu #chapter-16-36 >>
 
-### HOW OFTEN SHOULD A CLIENT GET A READING?
+!!! HOW OFTEN SHOULD A CLIENT GET A READING?
 
 That depends on how rapidly things are changing in the client’s life. If the client’s life seems to be unfolding in an understandable or predictable way, then an annual reading might be considered useful and adequate. If the client experiences unexpected changes, the client may want to get a reading each time such change occurs. This is particularly true if readings from a known reader have proven helpful earlier.
 
@@ -3105,7 +3106,7 @@ That depends on how rapidly things are changing in the client’s life. If the c
 
 <<~ ahu #chapter-16-37 >>
 
-### HAS A TAROT READING EVER CHANGED YOUR LIFE?
+!!! HAS A TAROT READING EVER CHANGED YOUR LIFE?
 
 Yes. I have had readings that made me look at the circumstances and events in my life in different and more complete ways. Particularly at crucial points of decision in my life, being shown a wider point of view opened me up to new ideas and greater possibilities that in turn led to significant changes in my life.
 
@@ -3113,7 +3114,7 @@ Yes. I have had readings that made me look at the circumstances and events in my
 
 <<~ ahu #chapter-16-38 >>
 
-### DO YOU READ THE CARDS FOR YOURSELF?
+!!! DO YOU READ THE CARDS FOR YOURSELF?
 
 Yes, but the results are mixed. Since I usually know what I want to happen, I tend to interpret the cards from that bias. I find that I usually get more useful information from another reader.
 
@@ -3123,7 +3124,7 @@ Yes, but the results are mixed. Since I usually know what I want to happen, I te
 
 <<~ ahu #chapter-17 >>
 
-## Chapter 17 **BEING THE BEST READER POSSIBLE—A REVIEW**
+!! Chapter 17 ''BEING THE BEST READER POSSIBLE—A REVIEW''
 
 The potential reader becomes an actual reader by a series of steps. All of these steps are important if any reader is going to become the best reader that she or he can possibly be. The first step is deciding to become a reader. No one becomes a reader by accident or chance. There has to be a conscious decision to commit time and effort toward developing the skills and abilities that a reader needs. After the decision has been made, the potential reader must obtain a Tarot deck. If the potential reader is going to be taught by someone else in a class or by individual instruction, then it is important to get a Tarot deck that the teacher accepts as appropriate. It is possible that some decks might be unacceptable to the teacher for any number of reasons. Remember that the teacher has the right to determine what teaching materials are required. If the potential reader is going to be self-taught, as many readers are, then the
 
@@ -3177,7 +3178,7 @@ Newcastle Publishing Co., Inc.
 13419 Saticoy Street  
 North Hollywood, CA 91605
 
-**Individuals**: To order any of the books listed in our catalog, fill out the order form, check the number of copies of each title desired, and enclose a check or money order for the full amount plus $3.00 postage and handling for the first book ordered and $1.00 for each additional book. California residents, please add the current sales tax to every order.
+''Individuals'': To order any of the books listed in our catalog, fill out the order form, check the number of copies of each title desired, and enclose a check or money order for the full amount plus $3.00 postage and handling for the first book ordered and $1.00 for each additional book. California residents, please add the current sales tax to every order.
 
 VISA AND MASTERCARD ACCEPTED  
 $15 MINIMUM ORDER
@@ -3190,20 +3191,20 @@ Al Saunders, Publisher
 
 THIS PAGE INTENTIONALLY LEFT BLANK
 
-**OTHER BOOKS OF INTEREST FROM NEWCASTLE PUBLISHING CO.**
+''OTHER BOOKS OF INTEREST FROM NEWCASTLE PUBLISHING CO.''
 
-- Haindl Tarot, Vol. 1 — Rachel Pollack ($9.95)
-- Haindl Tarot, Vol. 2 — Rachel Pollack ($9.95)
-- Karmic Tarot — William Lammey ($12.95)
-- Key of Destiny — Homer Curtis ($9.95)
-- Key to the Universe — Homer Curtis ($9.95)
-- Tarot: Apprentice, Vol. 1 (Classic), illustrated with the Rider-Waite deck — Eileen Connolly ($12.95)
-- Tarot: Apprentice, Vol. 1 (Revised), illustrated with the Connolly deck — Eileen Connolly ($12.95)
-- Tarot: Journeyman, Vol. 2 (Rider-Waite deck) — Eileen Connolly ($12.95)
-- Tarot for Your Self — Mary K. Greer ($14.95)
-- Tarot Constellations — Mary K. Greer ($14.95)
-- Tarot Mirrors — Mary K. Greer ($14.95)
-- Thursday Night Tarot — Jason Lotterhand ($14.95)
+* Haindl Tarot, Vol. 1 — Rachel Pollack ($9.95)
+* Haindl Tarot, Vol. 2 — Rachel Pollack ($9.95)
+* Karmic Tarot — William Lammey ($12.95)
+* Key of Destiny — Homer Curtis ($9.95)
+* Key to the Universe — Homer Curtis ($9.95)
+* Tarot: Apprentice, Vol. 1 (Classic), illustrated with the Rider-Waite deck — Eileen Connolly ($12.95)
+* Tarot: Apprentice, Vol. 1 (Revised), illustrated with the Connolly deck — Eileen Connolly ($12.95)
+* Tarot: Journeyman, Vol. 2 (Rider-Waite deck) — Eileen Connolly ($12.95)
+* Tarot for Your Self — Mary K. Greer ($14.95)
+* Tarot Constellations — Mary K. Greer ($14.95)
+* Tarot Mirrors — Mary K. Greer ($14.95)
+* Thursday Night Tarot — Jason Lotterhand ($14.95)
 
 Many Tarot decks are also available from Newcastle. Please write or call for availability.
 
@@ -3213,21 +3214,21 @@ THIS PAGE INTENTIONALLY LEFT BLANK
 
 TAROT/DIVINATION — $9.95
 
-*A NEWCASTLE ORIGINAL*
+//A NEWCASTLE ORIGINAL//
 
-**COMMON SENSE TAROT: The Complete Guide to Tarot Reading** is a comprehensive, in-depth introduction to the world of Tarot reading. The easy, step-by-step instructions enable you to interpret the cards for yourself and others, for pleasure and for profit. This complete guide shows you how to:
+''COMMON SENSE TAROT: The Complete Guide to Tarot Reading'' is a comprehensive, in-depth introduction to the world of Tarot reading. The easy, step-by-step instructions enable you to interpret the cards for yourself and others, for pleasure and for profit. This complete guide shows you how to:
 
-- find clients
-- set fees
-- reveal the past, present, and future
-- unlock the secrets of the human psyche
-- use your intuition to weave storytelling into a reading
-- answer your clients’ questions about their lives and loves
-- and more!
+* find clients
+* set fees
+* reveal the past, present, and future
+* unlock the secrets of the human psyche
+* use your intuition to weave storytelling into a reading
+* answer your clients’ questions about their lives and loves
+* and more!
 
 COMMON SENSE TAROT probes the meaning of the cards with clarity and intelligence. Five new layouts for the cards are introduced, along with sample readings. The insights and techniques shared are inspirational as well as instructive. This practical guidebook activates your innate sensitivity—the soul of a successful Tarot reader—enabling you to help yourself and others through the ancient teachings of the Tarot.
 
-Camden Benares is the author of *Zen Without Zen Master* and *A Handful of Zen*.
+Camden Benares is the author of //Zen Without Zen Master// and //A Handful of Zen//.
 
 Newcastle Publishing Co.  
 P.O. Box 7589  

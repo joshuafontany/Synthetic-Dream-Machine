@@ -183,3 +183,10 @@ the vendored TiddlyWiki5 core tiddlers.
   class — bold around code spans (segment-odd, line-even, invisible to both
   the converter and the counter): 612 pairs crossed with code spans opaque.
   Canon 524/524 clean · golden 18 movers · suites green.
+- 2026-07-14 — the tarot interior CURATES to pono (operator word): the
+  Jekyll front-matter fences as yaml (its # comments protected), then the
+  full transform set walks the port — 152 headings, 453+131 lists (TOC ol
+  chapters # with #* nested questions), 149 anchor links [[t|#chapter-N]],
+  23 bold, 7 italics. The first whole-book conversion now reads TW5-whole:
+  153 headings + 601 list nodes + 154 ahu blocks as STRUCTURE. Golden 1
+  mover; 15 green.
