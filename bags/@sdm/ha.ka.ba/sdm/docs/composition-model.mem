@@ -50,8 +50,8 @@ One verb joins them: **`#has`**. Flat. No `family`, no `role`. The target URI pa
 
 ''Never mix layers. Instance state never enters the Pranala graph.''
 
-* ''Pattern (stable).'' The Pranala `#has` graph + module/component/mount-point memes. What *Read Magic consists of*. Lives in `bags/@sdm/**` as memetic-wikitext.
-* ''Instance (mutable).'' TW5 data fields / YAML. What *Lady Aki currently holds*, which variant, what mutated, what locked. Lives in character/entity data, not in the meme graph.
+* ''Pattern (stable).'' The Pranala `#has` graph + module/component/mount-point memes. What //Read Magic consists of//. Lives in `bags/@sdm/**` as memetic-wikitext.
+* ''Instance (mutable).'' TW5 data fields / YAML. What //Lady Aki currently holds//, which variant, what mutated, what locked. Lives in character/entity data, not in the meme graph.
 
 Instance shape (example):
 

@@ -36,7 +36,7 @@ The Elyncia.app / DreamDeck identity model holds three distinct layers. ''Do not
 |---|---|---|
 | ''DID'' | `did:plc:abc123` | AT Protocol canonical identity — the cryptographic key holder. Resolved via Bluesky auth (OAuth over DID). This names the actual principal in UCAN capability tokens. |
 | ''Handle'' | `@telarus.elyncia.social` (AT Protocol/Bluesky) or `@telarus@elyncia.social` (ActivityPub/Kowloon) | A resolution alias over the DID — human-readable, not authoritative. |
-| ''lar: alias'' | `telarus:operator@enyalios` | Application-layer signal state — names the *operational role* of the speaker in a `lar:` exchange. Not a network identity; not a DID alias. |
+| ''lar: alias'' | `telarus:operator@enyalios` | Application-layer signal state — names the //operational role// of the speaker in a `lar:` exchange. Not a network identity; not a DID alias. |
 
 **Why the lar: alias carries no leading `@`:** the handle (`@telarus@elyncia.social`) already serves as a resolution alias over the DID. The lar: `alias` field holds a third distinct thing — it tags the operational role in the signal exchange. Adding `@` to a lar: alias would conflate the social-handle layer with the application-signal layer.
 
@@ -89,7 +89,7 @@ The `record:full` and `hud:exchange-pair` render targets live in the lar-uri sch
 
 !! Stance Tool-Carry in Render Targets
 
-In HUD render targets, stance tool-carry modifiers attach directly to the preceding stance emoji as a two-character pair (no space) — `🏛️:*!`. The tool grammar itself (Wand · Cup · Sword · Pentacle · Stone) lives in the four-tools law; this surface only fixes the *attachment* convention for render targets. The `syad` lens carries the invoked standpoints; the optional `:` binds a tool to a standpoint.
+In HUD render targets, stance tool-carry modifiers attach directly to the preceding stance emoji as a two-character pair (no space) — `🏛️:*!`. The tool grammar itself (Wand · Cup · Sword · Pentacle · Stone) lives in the four-tools law; this surface only fixes the //attachment// convention for render targets. The `syad` lens carries the invoked standpoints; the optional `:` binds a tool to a standpoint.
 
 See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint grammar.
 

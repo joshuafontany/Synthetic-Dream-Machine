@@ -27,7 +27,7 @@ written   = "2026-06-29"
 
 ! Composable Keel ~ declare the stack, wire it or refuse
 
-A vessel ''declares'' what it carries; a separate move ''wires'' that declaration into a live thing. The `#has-cap-stack` names the caps a vessel holds (#the-vessel-is-its-caps in <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>) — flat, dependency-blind, what a vessel *is*. The ''composable keel'' names the other half: a ''composition-root'' reads that stack and builds the running components, in dependency order, or ''refuses to boot, loud''.
+A vessel ''declares'' what it carries; a separate move ''wires'' that declaration into a live thing. The `#has-cap-stack` names the caps a vessel holds (#the-vessel-is-its-caps in <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>) — flat, dependency-blind, what a vessel //is//. The ''composable keel'' names the other half: a ''composition-root'' reads that stack and builds the running components, in dependency order, or ''refuses to boot, loud''.
 
 <<~ranks keel declare -> wire -> run-or-refuse >>
 
@@ -41,13 +41,13 @@ A vessel ''declares'' what it carries; a separate move ''wires'' that declaratio
 
 !! Declare ~ the cap-stack as ECS inventory
 
-The `#has-cap-stack` reads **entity-component-system** (ECS) and stays purely declarative: a **nameless vessel** carries a **flat set of `#has`-cap tags** — *what is present*, nothing more. It carries **no edges** (the retired-typed-edge ruling holds, <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>): the stack never says *how* caps connect, only *which* a vessel holds.
+The `#has-cap-stack` reads **entity-component-system** (ECS) and stays purely declarative: a **nameless vessel** carries a **flat set of `#has`-cap tags** — //what is present//, nothing more. It carries **no edges** (the retired-typed-edge ruling holds, <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>): the stack never says //how// caps connect, only //which// a vessel holds.
 
 ```text
 #has-cap-stack = (VesselId, Set<CapModule>)   — flat, edgeless, dependency-blind
 ```
 
-This declaration answers *what a vessel IS* — a full node holds `{lararium-core, daemon, mesh-palace, read-face, …}`; a Herm holds `{substrate, daemon, mesh-palace, read-face}` and nothing more. ECS supplies the ''inventory vocabulary'' (entity = vessel · component = cap · system = behavior), never the boot engine. The stack sits inert until a root wires it.
+This declaration answers //what a vessel IS// — a full node holds `{lararium-core, daemon, mesh-palace, read-face, …}`; a Herm holds `{substrate, daemon, mesh-palace, read-face}` and nothing more. ECS supplies the ''inventory vocabulary'' (entity = vessel · component = cap · system = behavior), never the boot engine. The stack sits inert until a root wires it.
 
 <<~/ahu >>
 
@@ -59,7 +59,7 @@ The ''composition-root'' (`composeVessel`) reads the flat stack and ''topologica
 
 * **each module declares `requires` (1..1) and `optional` (0..1)** — the module names its own deps, the way OSGi Declarative Services names component cardinality.
 * ''the root builds in dependency order'' — a topological walk over (requires + present-optional) edges, so a mandatory dep stands built before its consumer.
-* ''the root hands each module a least-authority resolver'' — `resolve(id)` reaches ''only that module's declared deps''; resolving an undeclared id throws. POLA by construction: a module reaches exactly what it routed, never the ambient graph (Genode's default-deny `init`; Granovetter's *"only connectivity begets connectivity"*).
+* ''the root hands each module a least-authority resolver'' — `resolve(id)` reaches ''only that module's declared deps''; resolving an undeclared id throws. POLA by construction: a module reaches exactly what it routed, never the ambient graph (Genode's default-deny `init`; Granovetter's //"only connectivity begets connectivity"//).
 * ''a missing mandatory dep, a cycle, or a duplicate cap = the vessel REFUSES TO BOOT, loud'' — an error at compose time, never a runtime flag, never a silent fall-through to ambient authority.
 
 <<~ confidence Synthesis-Canon 15/20 >> The refusal carries the integrity: a vessel that cannot wire its declared stack ''does not start half-built''. The composer surfaces the gap (which cap requires which absent dep, or the cycle path) and stops — the build-or-fail discipline, not a degraded run.
@@ -76,7 +76,7 @@ refuse:   daemon present, substrate ABSENT → throw "[compose] vessel refuses t
 
 !! Absence ~ un-routed authority, by structure
 
-A Herm does ''not'' read as *"a node with `wiki = false"`*. A Herm reads as a ''cap-stack that never declares the wiki cap'' — so nothing routes to it, and the vessel runs ''blind by structure'', never by a flag a later bug could flip. The relay floor's `#has-NOT read` (vessel-caps#the-five-caps) lands here as ''absence of a routed capability'', the Genode reading: *an absent cap grants no authority.*
+A Herm does ''not'' read as //"a node with `wiki = false"`//. A Herm reads as a ''cap-stack that never declares the wiki cap'' — so nothing routes to it, and the vessel runs ''blind by structure'', never by a flag a later bug could flip. The relay floor's `#has-NOT read` (vessel-caps#the-five-caps) lands here as ''absence of a routed capability'', the Genode reading: //an absent cap grants no authority.//
 
 So the disclosure boundary holds at the ''shape of the composition'', not at a checked condition. A Herm cannot reach the operator-content wikis because no edge in its wired graph reaches them — the confused-deputy guard made structural (the standing covenant: designation carries authority, and an absent designation fails closed). ''Absence = un-routed authority'', the cleanest cut the keel makes.
 
@@ -88,7 +88,7 @@ So the disclosure boundary holds at the ''shape of the composition'', not at a c
 
 The composition-root holds broad authority for exactly one moment — it touches every cap-module to wire the graph — then ''drops it''. It hands back a ''read-face'' (`get(id)`, `order`, `dispose`) over the built components and ''retains no god-object'': the boot extracts the few entry-points it needs and lets the broad-authority builder fall away. This rides the ''ocap powerbox'' pattern — a transient broad grant that distributes narrow caps and then disappears, so no standing principal holds the whole graph.
 
-Teardown mirrors the build: `dispose` runs in ''reverse build order'', so a consumer releases before the dep it consumed. The keel composes *and* decomposes by the same declared order.
+Teardown mirrors the build: `dispose` runs in ''reverse build order'', so a consumer releases before the dep it consumed. The keel composes //and// decomposes by the same declared order.
 
 <<~/ahu >>
 
@@ -113,10 +113,10 @@ The keel runs; the parts below carry their grounds:
 
 The keel invents nothing structural; four well-worn patterns each carry a face of it:
 
-* ''ZLayer'' (Scala / ZIO) — *provide the dependency graph*: layers declare their inputs/outputs, the runtime wires them ''topologically'' and ''fails the build'' on a missing or cyclic layer. The declare ⊥ wire seam, library-grade.
-* **Genode `init`** — *capability-routing, default-deny*: a component reaches only the services explicitly **routed** to it; an unrouted service grants no authority. Our POLA resolver + absence-is-structural read.
-* ''OSGi Declarative Services'' — *declared cardinality*: a component declares mandatory (1..1) and optional (0..1) references; the runtime satisfies them or holds the component unsatisfied. Our per-module `requires` / `optional`.
-* ''the ocap powerbox / Granovetter'' — *transient broad authority, then POLA*: a one-shot broad grant distributes narrow caps and steps away; *"only connectivity begets connectivity."* Our transient composer (#transient-composer).
+* ''ZLayer'' (Scala / ZIO) — //provide the dependency graph//: layers declare their inputs/outputs, the runtime wires them ''topologically'' and ''fails the build'' on a missing or cyclic layer. The declare ⊥ wire seam, library-grade.
+* **Genode `init`** — //capability-routing, default-deny//: a component reaches only the services explicitly **routed** to it; an unrouted service grants no authority. Our POLA resolver + absence-is-structural read.
+* ''OSGi Declarative Services'' — //declared cardinality//: a component declares mandatory (1..1) and optional (0..1) references; the runtime satisfies them or holds the component unsatisfied. Our per-module `requires` / `optional`.
+* ''the ocap powerbox / Granovetter'' — //transient broad authority, then POLA//: a one-shot broad grant distributes narrow caps and steps away; //"only connectivity begets connectivity."// Our transient composer (#transient-composer).
 
 <<~ confidence Synthesis 12/20 >> Four domains converging on one shape reads as a real pattern integrity, not a local trick — the convergence carries the weight (the BREAK-not-bless survey discipline, <<~ loulou lar:///ha.ka.ba/lararium/api/causal-island-pattern >>).
 

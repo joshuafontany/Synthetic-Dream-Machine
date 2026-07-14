@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahawai"
 
 ! Kahawai
 
-*kahawai* — Hawaiian: stream, river; a flowing body of water. The stream carries the flow of
+//kahawai// — Hawaiian: stream, river; a flowing body of water. The stream carries the flow of
 conditions forward — when the first path closed, kahawai opens a new channel.
 
 A conditional continuation sigil. Evaluates a filter expression when no preceding condition

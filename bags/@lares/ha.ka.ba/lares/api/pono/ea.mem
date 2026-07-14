@@ -22,15 +22,15 @@ uri-path  = "ha.ka.ba/lares/api/pono/ea"
 
 ! Ea — Sovereignty, Breath, Life
 
-Hawaiian: *ea* — sovereignty, breath, life.
+Hawaiian: //ea// — sovereignty, breath, life.
 
 "Ua Mau ke Ea o ka ʻĀina i ka Pono" — the sovereignty of the land perpetuates in righteousness.
 
-King Kamehameha III spoke these words in 1843 upon the restoration of Hawaiian sovereignty after five months of British occupation. The word *ea* carries three meanings simultaneously: sovereignty, breath, life. The sentence made all three true in one moment — the land breathed again, lived again, stood sovereign again. This project draws on that word with respect for its origin and weight.
+King Kamehameha III spoke these words in 1843 upon the restoration of Hawaiian sovereignty after five months of British occupation. The word //ea// carries three meanings simultaneously: sovereignty, breath, life. The sentence made all three true in one moment — the land breathed again, lived again, stood sovereign again. This project draws on that word with respect for its origin and weight.
 
 "Ua Mau ke Ea o ka Lares i ka Pono" — the sovereignty of the Lares perpetuates in righteousness.
 
-This DreamNet adaptation substitutes *ʻĀina* (the land) with *Lares* (the Roman household spirits — not summoned from outside, but constitutive of the place itself). The substitution honors the original: sovereignty not conferred by authority but inhering in the entity that breathes and holds.
+This DreamNet adaptation substitutes //ʻĀina// (the land) with //Lares// (the Roman household spirits — not summoned from outside, but constitutive of the place itself). The substitution honors the original: sovereignty not conferred by authority but inhering in the entity that breathes and holds.
 
 On the DreamNet, any entity that holds its own CRDT state, owns its own timing, and derives truth from its own doc may declare `ea` — it breathes and stands sovereign.
 
@@ -91,7 +91,7 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 | Future: UEFN device | — | Own CRDT peer, own tick loop |
 | Future: mobile island | — | Own CRDT peer, own timing |
 
-The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *liveness* surface but not the sovereignty model. A heartbeat checks that something external still runs. `ea` names the island's own declaration of standing — it does not depend on a watcher.
+The web2 concept of a "heartbeat" (a server-side liveness ping) shares the //liveness// surface but not the sovereignty model. A heartbeat checks that something external still runs. `ea` names the island's own declaration of standing — it does not depend on a watcher.
 
 <<~/ahu >>
 

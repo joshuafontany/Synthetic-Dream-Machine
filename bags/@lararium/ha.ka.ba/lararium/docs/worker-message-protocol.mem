@@ -47,7 +47,7 @@ This meme lifts that protocol out of the alignment-architecture doctrine so oper
 |---|---|
 | plain objects `{ [key:string]: primitive }` | tiddler records — matches the TW5 field model |
 | Map, Set, Array | changeset indexes, event queues |
-| ArrayBuffer *(transferable)* | Automerge change bytes — prefer ''transfer'' (zero-copy); the sender's buffer neuters, as expected |
+| ArrayBuffer //(transferable)// | Automerge change bytes — prefer ''transfer'' (zero-copy); the sender's buffer neuters, as expected |
 | TypedArray (Uint8Array) | Automerge binary — cloneable; buffer transferable |
 | CryptoKey | Keyhive key handles survive clone — never serialize to JSON (exposes key material) |
 | Error (name + message) | fault signals across the boundary |

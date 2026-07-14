@@ -543,7 +543,7 @@ Kinopio (`kinopio.club`, Vue 3, open-source, not npm-publishable) is the closest
 
 ''The canvas is primary. UI wraps around it — never blocks it.''
 
-Kinopio's `<Header>` is `position: fixed; pointer-events: none` with interaction re-enabled only on child buttons. The canvas fills 100% of the viewport. UI chrome exists at fixed viewport positions and *fades or repositions* during zoom.
+Kinopio's `<Header>` is `position: fixed; pointer-events: none` with interaction re-enabled only on child buttons. The canvas fills 100% of the viewport. UI chrome exists at fixed viewport positions and //fades or repositions// during zoom.
 
 ''This model is now the Lararium implementation.'' `LarariumShell` wraps `LarariumCanvas` via React portal: all chrome (`LarariumHeader`, `LarariumFooter`, `LarariumCommandPalette`) is `position:fixed`, rendered into `document.body` outside the tldraw DOM tree. The canvas fills 100vw × 100vh. `PageMenu`, `NavigationPanel`, `MainMenu`, `ZoomMenu`, `QuickActions`, `HelperButtons`, `MenuPanel` are all suppressed in wiki mode via `TLComponents = null`.
 
@@ -1077,7 +1077,7 @@ The `ReactionGraph` is the causal island manager. `fire(fromUri, trigger, payloa
 
 !!! Why this matters for the canvas
 
-The live corpus CRDT (Automerge) handles meme/tiddler synchronization. The tldraw editor currently renders a local projection of that corpus; the legacy `TLSocketRoom` may still handle layout/reaction socket experiments. Causal islands handle *event execution*. These are separate layers:
+The live corpus CRDT (Automerge) handles meme/tiddler synchronization. The tldraw editor currently renders a local projection of that corpus; the legacy `TLSocketRoom` may still handle layout/reaction socket experiments. Causal islands handle //event execution//. These are separate layers:
 
 * Automerge/TW5 content state: which carrier text, fields, and bindings exist — CRDT semantics
 * tldraw projection/layout state: where projected shapes appear and how zoom templates render them
@@ -1116,7 +1116,7 @@ The socket port shape repositioning in `applyZoomTemplate` is the concrete imple
 
 !!! Relation to CRDT model
 
-The UEFN operational model (file watcher → evict → reseed) is already live. Hot-reload works. The causal island layer sits *above* the CRDT room and *below* the canon-promotion boundary:
+The UEFN operational model (file watcher → evict → reseed) is already live. Hot-reload works. The causal island layer sits //above// the CRDT room and //below// the canon-promotion boundary:
 
 ```
 lares/ (canon)               — immutable truth
@@ -1130,7 +1130,7 @@ ReactionGraph (causal)       — async/local event routing between kumu islands
 tldraw shapes                — visual projection output
 ```
 
-''Tier 3 note:'' Cross-node federation edges (Tier 3) sit *above* lares/ in the authority hierarchy and *outside* the local Automerge/tldraw room machinery. They are not TLSocketRoom connections. They are named edge islands with their own lifecycle, governed by Orichalcum capabilities. See `#federation` and `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`.
+''Tier 3 note:'' Cross-node federation edges (Tier 3) sit //above// lares/ in the authority hierarchy and //outside// the local Automerge/tldraw room machinery. They are not TLSocketRoom connections. They are named edge islands with their own lifecycle, governed by Orichalcum capabilities. See `#federation` and `lar:///ha.ka.ba/lares/api/pono/federated-causal-islands`.
 
 <<~/ahu >>
 

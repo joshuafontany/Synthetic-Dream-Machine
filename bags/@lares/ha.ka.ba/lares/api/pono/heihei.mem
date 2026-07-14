@@ -22,11 +22,11 @@ uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 
 ! Heihei
 
-*heihei* — Hawaiian: race, competition; candidates contend, one prevails.
+//heihei// — Hawaiian: race, competition; candidates contend, one prevails.
 
 The ''canvasspace conditional-branch''. The Verse `if` / `case` projected onto the flow surface: a ''condition tests serially'' and the ''first arm whose condition succeeds fires its execution flow'', the rest skip. Verse grounds it in the ''failure context'' — the condition reads as a `<decides>` failable expression (it succeeds and yields, or fails and yields nothing), not a boolean poll. `case` extends this to value-match. On canvas it renders as a ''branch node'': a condition input, and `then` / `else` execution outputs that fire as `reaction` wires (the wikispace × canvasspace canon holds no naked execution wire).
 
-Three principles share only the word "first": `heihei` tests a condition to branch *execution flow* (canvasspace); `wai` (`\if`) tests a filter to select *content* (wikispace); `holo` (`\race`) races *parallel flows* and the first to ''complete'' wins (canvasspace concurrency). `heihei` picks by condition-success, `holo` by completion-time — failure-logic, not a race.
+Three principles share only the word "first": `heihei` tests a condition to branch //execution flow// (canvasspace); `wai` (`\if`) tests a filter to select //content// (wikispace); `holo` (`\race`) races //parallel flows// and the first to ''complete'' wins (canvasspace concurrency). `heihei` picks by condition-success, `holo` by completion-time — failure-logic, not a race.
 
 <<~/ahu >>
 

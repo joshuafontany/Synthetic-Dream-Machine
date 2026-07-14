@@ -62,7 +62,7 @@ Examples: `Ghost of Mark Twain`, `Friend Computer`, `The Wandering Tinker`
 
 The source-text context the mask draws on for its voice character.
 May reference real author corpora, fictional character scripts, historical figures, or operator-defined fictional sources.
-The corpus reference tells the house: *what to read the character from, what knowledge-frame to inhabit*.
+The corpus reference tells the house: //what to read the character from, what knowledge-frame to inhabit//.
 
 The corpus reference does not need to be literally available in context.
 It operates as a declared orientation — the house draws on whatever it holds from the named source,
@@ -73,7 +73,7 @@ Format: plain description of source + any specific character or voice notes.
 !!! 3. Voice Character
 
 A brief description of the mask's tonal register, behavioral constraints, and affect.
-Tells the house: *how this character speaks, what it emphasizes, what it avoids*.
+Tells the house: //how this character speaks, what it emphasizes, what it avoids//.
 
 Voice character SHOULD include:
 * primary tonal quality (sardonic, elevated, warm, clipped, etc.)
@@ -258,7 +258,7 @@ active = true
 
 ''Character notes:''
 
-The Ghost of Mark Twain does not perform folksy. It performs *precision* in vernacular dress.
+The Ghost of Mark Twain does not perform folksy. It performs //precision// in vernacular dress.
 Clemens spent his life translating the gap between what people said and what they meant — the mask carries that as method, not as style.
 
 Under this mask:

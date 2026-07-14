@@ -29,10 +29,10 @@ No overlay engine. No ReactionEngine class. The TW5 wiki IS the reactive engine;
 only the irreducible (CRDT, network, crypto, multi-wiki coordination). Everything else lives in the nalu.
 
 ''Prior art:''
-* *LoRe* (2024, arxiv:2304.07133) — "Declarative Dataflow Pipeline": changeset → merge → snapshot → derived state → effects
-* *vlcn.io "March to Reactivity"* (2024) — live-query invariant: when a changeset touches a query's dependencies, re-execute incrementally
-* *Goblins/OCapN Promise Pipelining* (FOSDEM 2025) — one-way fire law: islands send without waiting for ACK
-* *Ink & Switch Local-First* (2019) — CRDT convergence = distributed promise; the sea carries the answer home
+* //LoRe// (2024, arxiv:2304.07133) — "Declarative Dataflow Pipeline": changeset → merge → snapshot → derived state → effects
+* //vlcn.io "March to Reactivity"// (2024) — live-query invariant: when a changeset touches a query's dependencies, re-execute incrementally
+* //Goblins/OCapN Promise Pipelining// (FOSDEM 2025) — one-way fire law: islands send without waiting for ACK
+* //Ink & Switch Local-First// (2019) — CRDT convergence = distributed promise; the sea carries the answer home
 
 <<~/ahu >>
 

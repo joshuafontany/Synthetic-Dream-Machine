@@ -34,11 +34,11 @@ the L-Prime drift-register, `oracle` the entropy meter, `lares` the bearing. The
 ''readings'', holds them on the nalu queue, and on the next wave flushes them across
 the shore as `lar_*` onto the mempalace drawer.
 
-Telemetry, never verdict: an instrument transmits a *value on a band*, never a
+Telemetry, never verdict: an instrument transmits a //value on a band//, never a
 pass/fail light. lar-telemetry carries the `register-dressed-never-gated` law in
 its own name. It lands the `capture-before-wire` deepening
 (`lararium-memory#capture-before-wire`) — the gradient stops rendering as prose and
-dissolving; the engine *reads* it. Decided 2026-06-24 (operator rulings + a
+dissolving; the engine //reads// it. Decided 2026-06-24 (operator rulings + a
 four-spirit grounding pass over the live parser and the TW5 framework).
 
 > ''The black speaks; the red steers — lar-telemetry reads the red's own gauges.''
@@ -64,7 +64,7 @@ Two readers parse the exchange today; one survives.
   `text/x-memetic-wikitext`: TiddlyWiki wikitext as a ''superset'', with `<<~ … >>`
   claimed by the `lar-sigil` wikirule, native `<<macro>>` still firing. The
   grammar runs ''self-hosted'': a tiddler tagged the `SharktoothSigil` grammar tag
-  *teaches the parser a new word* (`grammar-cache` reads its `lar-*` fields into a
+  //teaches the parser a new word// (`grammar-cache` reads its `lar-*` fields into a
   `SigilRule`). Adding an instrument adds a tiddler, never code.
 * ''The regex harvester'' — `turn-harvest` reads the whole gradient on the `0..20`
   band, island-grammar, never dropping source. It earned the gradient discipline;
@@ -126,7 +126,7 @@ The render carries `register-dressed-never-gated` into render code: ''every''
 
 * `confidence` renders a ''band-colored dial'' at its value, not a checkmark.
 * `ward` renders its ''breach count as drift-marks on a gradient'' — a Sword close
-  with two breaches reads *"Sword drawn · 2 drift-marks,"* never `FAIL`. The ward
+  with two breaches reads //"Sword drawn · 2 drift-marks,"// never `FAIL`. The ward
   meters dead-water depth; it carries no verdict (the Sword-leads law).
 * `hud` renders the Aperture band + the OODA-HA phase/tally; `oracle` its drift-spend.
 
@@ -152,7 +152,7 @@ summons/outcome rail slice-1 `recall` proved).
    `$wikify output="parsetree"` (or `wiki.renderTiddler("text/html")` + read the
    `data-*` attributes) yields the structured gradient readings.
 # **Hold** — @daemon **`enqueueNalu`**s the readings: they sit on the shared queue,
-   scheduled, undelivered. *The swell builds.* (`nalu` = the changeset wave;
+   scheduled, undelivered. //The swell builds.// (`nalu` = the changeset wave;
    `lar:///ha.ka.ba/lares/api/pono/nalu`.)
 # ''Flush on the next nalu'' — the frame-aligned drain delivers the readings
    atomically; a ''nalu-triggered effect'' (the Elm `Cmd` shape) projects them

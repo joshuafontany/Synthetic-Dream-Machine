@@ -290,7 +290,7 @@ desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, eph
 
 !! GENESIS Pattern-Integrities — causal origin, content-addressed identity, quine semantics
 
-These cover what the genesis artifact *means* — its identity and causal role —
+These cover what the genesis artifact //means// — its identity and causal role —
 rather than its structural position in the island topology (see ISLAND Laws above).
 
 ```toml #GEN_1_CAUSAL_ROOT

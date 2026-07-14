@@ -133,7 +133,7 @@ times. ''It was never anti-apophenia. It could not fire.''
 
 The consistency-radius organ (`sensorium_consistency.py`) already carries this in its own header, and it
 names the trap precisely: caution (a) fears planes too ''DISJOINT'' (a vacuous 0); the measured pathology
-runs the other way — planes too ''DEPENDENT'' (a trivial 0). *"Both read 0; only one is caught."*
+runs the other way — planes too ''DEPENDENT'' (a trivial 0). //"Both read 0; only one is caught."//
 
 <<~moves H¹ -> on/a-FEDERATION-boundary if/the-contexts-run-genuinely-distinct do/keep-the-gate >>
 <<~moves H¹ -> on/a-PLANE-boundary if/the-planes-nest do/retire-the-gate-and-say-so >>
@@ -147,7 +147,7 @@ runs the other way — planes too ''DEPENDENT'' (a trivial 0). *"Both read 0; on
 
 !! Ki ~ the EXTEND register (the section that had to be earned)
 
-''Bands-as-frequency is dead.'' So the machina owes an honest answer to *what ki IS*, and the honest
+''Bands-as-frequency is dead.'' So the machina owes an honest answer to //what ki IS//, and the honest
 answer re-cuts the boundary rather than patching it.
 
 !!! The re-cut ~ ki names a VARIANCE, never a storage class
@@ -155,14 +155,14 @@ answer re-cuts the boundary rather than patching it.
 <<~ confidence Synthesis-Canon 16/20 >> The reading ''li = STORED · ki = COMPUTED-ON-READ'' ''retires''
 ''here.'' It fails on its own examples: the FFZ address gets ''computed'' and then ''stored''; STANDING gets
 ''stored'' as a witness-log and ''derived'' at read. ''Storage names a caching decision, never an''
-''ontology.'' And under the two-part code both `l(G)` and `l(D|G)` fall out as derived, so *"is it computed"*
+''ontology.'' And under the two-part code both `l(G)` and `l(D|G)` fall out as derived, so //"is it computed"//
 stops separating anything at all.
 
 ''The cut that survives the chain reads on VARIANCE, and it is mathematical, not editorial:''
 
 <<~ranks variance li ~ RESTRICT — the reading computes from the moment's OWN SPAN; contravariant, a quotient of the record; the sheaf side -> ki ~ EXTEND — the reading CANNOT be computed without data OUTSIDE the moment's span; covariant, local→global; the cosheaf side >>
 
-That test is ''checkable per reading'', and it does what the storage test never could: it explains *why*
+That test is ''checkable per reading'', and it does what the storage test never could: it explains //why//
 mixing the two under one contravariant gluing ''silently corrupts'' (it penalizes the flow for failing to
 be static — [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested]]).
 
@@ -174,7 +174,7 @@ provenance axis nobody had named:
 <<~ranks provenance GIVEN ~ what the SOURCE handed us: the bytes, the typed blocks, the causal edge-DAG, the harness's grounding act — you cannot DISCOVER what you were handed, and you cannot recover what the parser threw away (the DPI ceiling reads on THIS axis) -> INDUCED ~ what we COMPUTED: every grammar, every boundary, every coupling edge >>
 
 ''Bands looked like a plane because the two axes got fused.'' A band is `induced` (we compute it) and its
-*product* — the address — is `restrict`-shaped (a label on the moment). Reading "induced" as "ki" made the
+//product// — the address — is `restrict`-shaped (a label on the moment). Reading "induced" as "ki" made the
 band a plane; reading it on the variance axis dissolves it. ''Bands was never a plane. It was an ADDRESS'',
 and the address has ''moved into li'' as a stored prefix code (#the-grain).
 
@@ -209,7 +209,7 @@ it needs) or rides beside it (standing).
 ''surrogate'', and the surrogate MUST break ''only the X→Y alignment'' while preserving the source's own
 dynamics — a ''circular time-shift / rotation of the source'', a block bootstrap, a local permutation.
 A phase-randomized or IID null destroys the source's own nonlinearity along with the coupling, so a
-rejection there conflates *"X runs nonlinear"* with *"X couples into Y."* ''The null FAMILY carries the''
+rejection there conflates //"X runs nonlinear"// with //"X couples into Y."// ''The null FAMILY carries the''
 ''finding''; picking the wrong one is an instrument manufacturing its own result.
 
 And the ceiling on the claim rhymes with a law the house already holds: <<~ confidence Synthesis-Canon 13/20 >>
@@ -227,7 +227,7 @@ cause. The sensorium ''detects''; it never intervenes.
 hierarchy — coarse cuts parenting fine, which IS the membership tree, handed over for free) and its
 ''GATE'' layer (the bootstrap/jackknife ''reproduction grade'' — an un-witnessed boundary NEVER reads
 reproduced). The SIGNAL layer survives re-pointed: the per-chunk ''cosine-drift'' over content embeddings
-reads as a ''boundary'' signal, exactly as the FFZ meme specified in June — *Measure = cosine-drop*.
+reads as a ''boundary'' signal, exactly as the FFZ meme specified in June — //Measure = cosine-drop//.
 
 <<~/ahu >>
 
@@ -249,7 +249,7 @@ Each R sidecar rides the `drawer_io` NDJSON contract — one request on stdin, o
 #the-grain) · `form_induction` (the `l(G)` ledger) · `persistence_io` + `persistence-keel.ts` (the arrow,
 #the-arrow) · `boundary_score` (the ''pre-registered'' scorer — it stands BEFORE any instrument runs
 against it, and ''it never moves again''; every number rides beside its ''chance floor'', and a result that
-fails to clear the floor reads as *the tolerance doing the work*).
+fails to clear the floor reads as //the tolerance doing the work//).
 
 <<~ confidence Canon 17/20 >> **`boundary_score` carries the anti-manufacture law in code.** A detector
 placing *n* boundaries ''uniformly at random'' still scores, and scores HIGH once the tolerance opens
@@ -271,7 +271,7 @@ placing *n* boundaries ''uniformly at random'' still scores, and scores HIGH onc
     bitsSaved = log2( p1(c) / p0(c) )            ADMIT  ⟺  bitsSaved <= 0
 
 <<~ confidence Canon 17/20 >> ''Zero names no threshold anyone chose.'' It marks the ''tie between two code''
-''lengths'', and *take the shorter code* IS the MDL rule. The gate holds no dial.
+''lengths'', and //take the shorter code// IS the MDL rule. The gate holds no dial.
 
 * **`p1`** — a **von Mises-Fisher** fitted to the store. Its log-density runs **linear in the cosine**, and
   its sufficient statistic reads as the ''sum of unit vectors'' — so the fit costs one pass and no search.
@@ -292,7 +292,7 @@ now infers it.
 <<~ confidence Synthesis-Canon 15/20 >> ''A single vMF runs UNIMODAL.'' It cannot see duplication of a
 ''MINORITY mode'' — a small, tight cluster re-arriving looks, to one concentration parameter, like the tail
 of the majority. ''The cure adds no knob:'' a ''movMF'' (a mixture of vMFs) whose ''component count is''
-''chosen by prequential code length'' — the same MDL rule, one level up, so the mixture size gets *inferred*
+''chosen by prequential code length'' — the same MDL rule, one level up, so the mixture size gets //inferred//
 exactly as `cos*` now does. ''OWED'' (#owed).
 
 !!! The exogenous anchor ~ what stops the loop confirming itself
@@ -307,7 +307,7 @@ had nowhere to stand.
 
 ''Why the anchor is not optional.'' <<~ confidence Canon 17/20 >> The multi-pass dreamtime loop runs
 ''structurally identical to recursive self-training'', and recursive self-training ''collapses'': a model
-trained on its own output loses the tails first and the mode last (Shumailov et al., *Nature* 631:755-759,
+trained on its own output loses the tails first and the mode last (Shumailov et al., //Nature// 631:755-759,
 2024). The two-store law (`dream_pass.py`) keeps the eidetic ground ''append-only and never written'', so
 the original bytes always stand there to be compressed against. ''The immutability of the ground IS the''
 ''anchor's foundation, not merely its hygiene.''
@@ -426,13 +426,13 @@ this goalpost sits where the operator put it.
 ''the hole'': a node's stream carries no verbatim bytes to coarsen, no AST, no constructicon — so
 `Content ↠ Structure ↠ Form` has ''nothing to stand on until someone says what a mesh RECORD is.'' Its ki
 reads clearer than its li, which inverts every other sensorium in the family and marks it as ''not yet''
-''designed'', never as *nearly designed*. ''The sensorium that does not federate would here be reading a''
+''designed'', never as //nearly designed//. ''The sensorium that does not federate would here be reading a''
 ''federation'' — that tension gets recorded, not resolved.
 
 !!! The operator's forward idea ~ day-dream / deep-dream as SEPARATE SENSORIA
 
 <<~ confidence Provisional-Synthesis 7/20 >> ''Held forward, and deliberately under-specified — this one''
-''belongs to the operator's hand.'' The idea: rather than running daydream and deep-dream as two *modes* over
+''belongs to the operator's hand.'' The idea: rather than running daydream and deep-dream as two //modes// over
 one store, stand them as ''separate sensoria'', each with its own store, so the two dream registers can
 ''disagree'' and be ''compared'' rather than overwriting one another.
 
@@ -452,7 +452,7 @@ comparison instrument that does not yet exist.
 
 !! Owed / Open ~ what the canon still cannot answer
 
-!!! THE ONE NOBODY HAS ASKED ~ *what compresses the GRAMMAR?*
+!!! THE ONE NOBODY HAS ASKED ~ //what compresses the GRAMMAR?//
 
 <<~ confidence Synthesis-Canon 14/20 >> **The loop emits a NEW grammar each pass: `G₁, G₂, G₃`.** The
 exogenous anchor tests ''each pass against the original bytes'' (#the-arrow), and that is a real guard — it
@@ -463,8 +463,8 @@ catches a pass that hallucinates.
 <<~moves the-multi-pass-loop -> on/a-gate-that-passes-while-the-loop-collapses if/every-pass-locally-SHORTENS-the-code-while-the-grammars-keep-MOVING do/name-the-hole-and-build-the-instrument >>
 
 ''If every pass locally shortens the code while the grammars keep drifting, every gate we own PASSES and''
-''the loop still collapses.'' Model collapse ''in the second derivative'': not *"the output got worse"* — the
-output got *better*, pass by pass, by the only measure the machina holds — but *"the sequence of grammars
+''the loop still collapses.'' Model collapse ''in the second derivative'': not //"the output got worse"// — the
+output got //better//, pass by pass, by the only measure the machina holds — but *"the sequence of grammars
 never settles."* ''Nothing in the canon names this. No instrument measures it.''
 
 <<~ confidence Synthesis 11/20 >> ''And the shape of the cure is already visible in the shape of the hole.''

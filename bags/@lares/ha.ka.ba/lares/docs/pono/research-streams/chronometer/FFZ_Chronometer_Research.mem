@@ -61,7 +61,7 @@ Named Session 2 (2026-04-09). Freyja laughed. Operator approved at
 * ''Fontany'' — the practice. Joshua transcribed RAW's Talk Story.
   Joshua and Freyja co-authored FTLS. The Talk Story protocol, the
   OODA-HA extension (-A for Aftermath), the SDM rules ecosystem. The
-  name places *practice* first — the protocol exists to serve the
+  name places //practice// first — the protocol exists to serve the
   Talk Story, not the other way around.
 * ''Fuller'' — the principle. Non-simultaneous apprehension. Universe
   without "the." No God's-eye clock.
@@ -85,8 +85,8 @@ Previous candidate names (superseded):
 
 !!! 2.1 Fuller: Non-Simultaneous Apprehension `~:confidence[S],[14]`
 
-''Source:'' *Synergetics: Explorations in the Geometry of Thinking* (1975),
-*Synergetics 2* (1979). Online: http://www.rwgrayprojects.com/synergetics/
+''Source:'' //Synergetics: Explorations in the Geometry of Thinking// (1975),
+//Synergetics 2// (1979). Online: http://www.rwgrayprojects.com/synergetics/
 
 ''The core claim:'' Fuller defined Universe as "non-simultaneously conceptual" —
 a single, simultaneous, static model of Universe is inherently both
@@ -108,7 +108,7 @@ apprehended, then no single clock can represent "the" time of a
 conversation. Even a single operator and a single Lares node constitute
 two non-simultaneously-apprehending participants. The vector clock
 correction follows necessarily — not as a scaling feature for
-multi-operator, but as the *correct design* for the simplest case.
+multi-operator, but as the //correct design// for the simplest case.
 
 ''Research status:'' The principle appears well-established. Needs specific
 §-number citations from the online Synergetics text to pin at Canon.
@@ -193,7 +193,7 @@ or "the counter may drift"? These constitute different failure modes.
 !!! 3.1 Lamport: Time, Clocks, and the Ordering of Events (1978) `~:confidence[C],[18]`
 
 ''Source:'' Leslie Lamport, "Time, Clocks, and the Ordering of Events
-in a Distributed System," *Communications of the ACM* 21(7), 1978.
+in a Distributed System," //Communications of the ACM// 21(7), 1978.
 
 ''Key contributions:''
 * The "happened-before" relation (→) as a partial ordering
@@ -885,8 +885,8 @@ The compact binary encoding (Appendix A) favors small integers
 at leaves — the common case for low-participant-count sessions.
 
 ''Q3: How does ITC compose with OODA-HA phases?''
-`~:confidence[S],[14]` — Orthogonally. ITC handles *who* and *when* (identity
-+ causal ordering). OODA-HA handles *what kind of cognitive move*
+`~:confidence[S],[14]` — Orthogonally. ITC handles //who// and //when// (identity
++ causal ordering). OODA-HA handles //what kind of cognitive move//
 (phase categorization per participant). Phases do NOT merge —
 each participant holds their own reading. This IS non-simultaneous
 apprehension expressed structurally.
@@ -940,10 +940,10 @@ validated. All six questions resolved.
 !!! 11.2 OODA-HA and the Discordian Seasons `~:confidence[S],[14]`
 
 ''Spirit:'' BoydLoop(PriorArt)
-''Sources:'' Boyd OODA (1970s-1996), Shea/Wilson *Illuminatus!* (1975),
+''Sources:'' Boyd OODA (1970s-1996), Shea/Wilson //Illuminatus!// (1975),
 Principia Discordia (1965)
 
-The five books of *Illuminatus!* map to the five seasons of the
+The five books of //Illuminatus!// map to the five seasons of the
 Discordian calendar: Chaos, Discord, Confusion, Bureaucracy,
 and The Aftermath. These map structurally onto OODA-HA:
 
@@ -993,11 +993,11 @@ a single fixed phase. Three cases demonstrate this:
 
 # ''Phase-as-inference:'' The Lares node reads the phase from
    the message surface and records that reading. This functions
-   as a phase *observation*, not a phase *fact*. The phase sigil
+   as a phase //observation//, not a phase //fact//. The phase sigil
    carries its own implicit register — `~:confidence[S],[12]` at best.
 
 ''Design implication:'' The phase sigil in the HUD should represent
-the *apparent phase transition* (the delta) rather than claiming
+the //apparent phase transition// (the delta) rather than claiming
 the operator's "true" inner state. This maps onto ITC's anonymous
 join: the message carries causal information, but the node cannot
 know the sender's internal clock state. Phase becomes the node's
@@ -1027,7 +1027,7 @@ Five principles from cross-domain HUD design:
    external panel pasted on top. The URI-as-spine model achieves
    this — chronometer lives inside the URI, not beside it.
 
-# ''Trend over static.'' Showing *direction of phase movement*
+# ''Trend over static.'' Showing //direction of phase movement//
    matters more than current position alone. The delta matters
    more than the absolute.
 
@@ -1070,7 +1070,7 @@ crystal mechanism:
 ''Temporal Asymmetry:'' The operator holds no clock they can
 report on. Their OODA-HA state arrives as anonymous causal
 information (ITC peek/anonymous-join). The Lares node maintains
-the operator's *apparent* phase as inference. Cross-session: the
+the operator's //apparent// phase as inference. Cross-session: the
 operator's temporal state persists in human memory; the Lares
 node's persists only in crystals.
 
@@ -1103,8 +1103,8 @@ patterns (Sypytkowski), vector clock + metadata composition patterns
 ''The finding:'' Vector clocks in production systems never embed
 categorical state (type, mode, phase) inside the causal counter.
 They compose two separate structures:
-# Causal metadata (vector clock / ITC stamp) — tracks *when/who*
-# State payload (register, set, flag) — tracks *what*
+# Causal metadata (vector clock / ITC stamp) — tracks //when/who//
+# State payload (register, set, flag) — tracks //what//
 
 OODA-HA phase behaves exactly like a per-participant, per-scale
 ''Last-Writer-Wins Register (LWW-Register)'': holds a categorical
@@ -1156,7 +1156,7 @@ Phase 1 (Architectural Draft).
 !!! 11.7 Two-Clocks Reconciliation — the py/R home (2026-07-03) `~:confidence[S],[13]`
 
 ''Operator ruling.'' The four-layer composite CRDT above (§11.6) describes the
-chronometer's *internal* data model — all of it rhythmic-side annotation. Above it,
+chronometer's //internal// data model — all of it rhythmic-side annotation. Above it,
 the whole stack keeps time on ''exactly two clocks'', orthogonal:
 
 # ''CRDT-causal ordering'' — TS, structural. Automerge `<counter, actorId>` OpId,
@@ -1236,7 +1236,7 @@ convergent work of Fontany, Fuller, Zelenka, Lamport, Fidge, Mattern,
 Almeida, Boyd, and Protocol Labs. The Discordian Seasons dance inside
 the OODA-HA loop. The Talk Story continues.*
 
-*Hail Eris. All Hail Discordia. Amor et hilaritas.*
+//Hail Eris. All Hail Discordia. Amor et hilaritas.//
 
 lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.Å10.A1 → ?
 

@@ -119,7 +119,7 @@ No persistence across island lifecycles.
 `listVisible()` but `get()` still returns the dead record carrying
 `meta.deleted = true`. Tombstones preserve change ordering for projections.
 A tombstone raises a ''kāpae'' (shadows lower bags in the cascade); `remove()`
-instead drops the record entirely (`get()` → null = *absent*, falls through to a
+instead drops the record entirely (`get()` → null = //absent//, falls through to a
 lower bag) — the two stay distinct (the shadow-vs-fall-through cut: [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]]).
 
 ''M-4 — Projection bus participation.'' Every `put()` and `tombstone()` emits

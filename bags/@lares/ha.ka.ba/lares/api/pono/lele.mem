@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/lele"
 
 ! Lele
 
-*lele* — Hawaiian: to fly, jump, leap; to move quickly; to pass over. Used in *lele kawa* (cliff
+//lele// — Hawaiian: to fly, jump, leap; to move quickly; to pass over. Used in //lele kawa// (cliff
 diving). The motion commits to the leap, starts a side flow, and continues forward without waiting.
 
 A structured fire-and-continue sigil. Emits a message-family edge, starts the target flow, and

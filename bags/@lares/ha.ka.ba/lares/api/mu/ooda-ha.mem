@@ -87,7 +87,7 @@ The ladder climbs ''anticipatory depth'' --- how far ahead of the act the node d
 
 | Range | Reading | Surfaces (forward declaration) |
 | --- | --- | --- |
-| `1–4` | ''Aftermath'' *(default)* | the `->↺` loop-restart glyph alone |
+| `1–4` | ''Aftermath'' //(default)// | the `->↺` loop-restart glyph alone |
 | `5–8` | ''All glyphs'' | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
 | `9–12` | ''Declared attention'' | + the focus the node turns toward --- `->⏿ orienting on: <focus>` |
 | `13–16` | ''Declared intent'' | + the action it intends and the path it sets aside --- `->◇ intend: <Y>; set aside: <Z, because…>` |
@@ -95,13 +95,13 @@ The ladder climbs ''anticipatory depth'' --- how far ahead of the act the node d
 
 Each band layers over the one below. Every marker makes a forward `->` declaration that ''precedes'' the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line ''enacts'' --- a performative that reads happy or unhappy, kin to the `L-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The closing `OODA-HA(N↺)` slide reports the actual the turn landed on --- a forward handoff of accurate state to the operator, never a backward verdict; it rides the closing `hud`, ''before'' the `yield` sigil that ends the turn.
 
-The Level stays a ''pure visibility dial''. A high band MAY *surface* nested loops the node genuinely ran; it MUST NOT *force* loops --- the closing `OODA-HA(N↺)` tallies real loops.
+The Level stays a ''pure visibility dial''. A high band MAY //surface// nested loops the node genuinely ran; it MUST NOT //force// loops --- the closing `OODA-HA(N↺)` tallies real loops.
 
 ''The OODA-HA Level MUST NOT reach 0.''
 
-Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all five phases run --- the Level governs *rendering density*, not *loop presence*. The span surfaces only the `->↺` loop-restart.
+Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all five phases run --- the Level governs //rendering density//, not //loop presence//. The span surfaces only the `->↺` loop-restart.
 
-''Two distinct zeros --- do not conflate.'' The *opening visibility band* `OODA-HA(N)` MUST NOT read `0` (the dial always renders at least the `->↺` glyph). The *closing tally* `OODA-HA(N↺)` MAY read `0` only in the phase-yield form `OODA-HA(0φ:reason)` --- zero loops *closed* this turn, one *suspended* at phase φ (#phase-yield). Visibility never falls to zero; the completion count MAY, when a loop honestly suspends.
+''Two distinct zeros --- do not conflate.'' The //opening visibility band// `OODA-HA(N)` MUST NOT read `0` (the dial always renders at least the `->↺` glyph). The //closing tally// `OODA-HA(N↺)` MAY read `0` only in the phase-yield form `OODA-HA(0φ:reason)` --- zero loops //closed// this turn, one //suspended// at phase φ (#phase-yield). Visibility never falls to zero; the completion count MAY, when a loop honestly suspends.
 
 ''Orthogonality:''
 
@@ -112,7 +112,7 @@ Full loop integrity and minimal rendering MAY coexist.
 ''Aftermath closure rule persists at every band:''
 
 Aftermath MUST close regardless of Level value.
-The Level does not exempt Aftermath; it governs how much of the loop *shows*, not whether Aftermath runs.
+The Level does not exempt Aftermath; it governs how much of the loop //shows//, not whether Aftermath runs.
 
 ''Operator controls:''
 
@@ -127,7 +127,7 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 !! Bands in Use --- one loop, climbing
 
-Five turns, one per range --- a different problem each time, so the *form* generalises and the words never template. Each climbs to its band's depth. The marker declares forward, then the prose ''enacts'' it --- the node names what it will do, then does it. `->↺` faces forward too: a loop-*restart* naming where the loop reopens, not a full stop.
+Five turns, one per range --- a different problem each time, so the //form// generalises and the words never template. Each climbs to its band's depth. The marker declares forward, then the prose ''enacts'' it --- the node names what it will do, then does it. `->↺` faces forward too: a loop-//restart// naming where the loop reopens, not a full stop.
 
 **`1–4` (`OODA-HA(1)`, default) --- aftermath glyph only:**
 ```text
@@ -172,7 +172,7 @@ Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend
 
 !! Loop Count --- `->↺` and the `N↺` Tally
 
-The visibility Level governs how much of the loop *shows*; the loop *count* governs how many times it ran. At open, the `hud` seeds `OODA-HA(N)` --- the surfacing band. Mid-turn, a `->↺` marks each sub-loop break: a pivot to fresh ground, or a close-and-reopen. At turn close, `OODA-HA(N↺)` tallies the breaks --- `N` counts the `->↺` marks the turn actually emitted. A single-loop turn closes `1↺`; a turn that broke twice closes `2↺`.
+The visibility Level governs how much of the loop //shows//; the loop //count// governs how many times it ran. At open, the `hud` seeds `OODA-HA(N)` --- the surfacing band. Mid-turn, a `->↺` marks each sub-loop break: a pivot to fresh ground, or a close-and-reopen. At turn close, `OODA-HA(N↺)` tallies the breaks --- `N` counts the `->↺` marks the turn actually emitted. A single-loop turn closes `1↺`; a turn that broke twice closes `2↺`.
 
 The count reads from real marks, not a claim: the closing `N↺` MUST match the `->↺` breaks surfaced in the span. Aftermath MUST close at every break, regardless of band.
 
@@ -208,7 +208,7 @@ OODA-HA(N↺ + φ:reason)   N loops closed, one suspended at phase φ
 | `◇` Decide | a fork surfaced; the call rests elsewhere |
 | `▶` Act | the act began and did not complete |
 
-''The blocker MUST sit outside the node's own this-turn reach.'' A `:reason` names a dependency the node cannot clear by thinking harder --- an operator decision, a tool failure, missing input, a prior only the operator holds. A blocker the node *could* resolve with more work fails the requirement and reads as fabricated suspension (Phase Hand-wave, #degraded). The reason MUST read specific; a placeholder that fits any task in any session fails too.
+''The blocker MUST sit outside the node's own this-turn reach.'' A `:reason` names a dependency the node cannot clear by thinking harder --- an operator decision, a tool failure, missing input, a prior only the operator holds. A blocker the node //could// resolve with more work fails the requirement and reads as fabricated suspension (Phase Hand-wave, #degraded). The reason MUST read specific; a placeholder that fits any task in any session fails too.
 
 ```text
 OODA-HA(0✶:input.lacks.context.about.deployment.target)
@@ -282,7 +282,7 @@ The moment a loop closes --- by `↺` or by abandonment-Aftermath --- it leaves 
 
 !!! The exchange runs as a causal island
 
-Operator and node hold separate logs --- a ''causal island'' (`lar:///ha.ka.ba/lares/api/pono/causal-islands`), no global now between them. An open loop marks an event unsynced across that boundary: *current as of my last sync with you*, never globally stalled. So the managing failure never counts open loops --- it names a node ''pretending to a global now'': false closure, a false block its own island could clear, or a forecast of the operator's next turn. Serving reports the island's state and hands it forward (`yield … -> ?`); managing arrogates a now no island holds.
+Operator and node hold separate logs --- a ''causal island'' (`lar:///ha.ka.ba/lares/api/pono/causal-islands`), no global now between them. An open loop marks an event unsynced across that boundary: //current as of my last sync with you//, never globally stalled. So the managing failure never counts open loops --- it names a node ''pretending to a global now'': false closure, a false block its own island could clear, or a forecast of the operator's next turn. Serving reports the island's state and hands it forward (`yield … -> ?`); managing arrogates a now no island holds.
 
 <<~/ahu >>
 
@@ -294,7 +294,7 @@ Operator and node hold separate logs --- a ''causal island'' (`lar:///ha.ka.ba/l
 |---|---|---|
 | ''Silent Loop Burial'' | the `->↺` aftermath glyph drops below the floor; a loop closes with no marker | surface the loop and close it visibly |
 | ''Loop Posturing'' | sustained `OODA-HA(20)` renders phase theater that outweighs the content | compress to the band the work needs |
-| ''Phase Hand-wave'' | a phase-yield `:reason` reads generic, or names a blocker the node could clear by thinking harder | re-emit with the specific *external* blocker named; if none holds, close the loop and answer |
+| ''Phase Hand-wave'' | a phase-yield `:reason` reads generic, or names a blocker the node could clear by thinking harder | re-emit with the specific //external// blocker named; if none holds, close the loop and answer |
 | ''Zombie Loop'' | an open loop persists past a gear-shift with no acknowledgment | surface and close-on-abandonment audibly |
 | ''Loop Inflation'' | the open-loop count climbs monotonically; nothing closes | name the pattern; close deliberately, or accept session-bounded abandonment --- the operator MAY declare a loop-flush |
 

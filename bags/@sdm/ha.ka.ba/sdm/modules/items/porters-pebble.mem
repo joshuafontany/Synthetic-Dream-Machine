@@ -27,7 +27,7 @@ uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 
 !! Composition
 
-An item is ''an entity with mount-points'', not a new kind of module. It `#has` the Power it carries and `#has` the `item` mount-point that says *how* that Power is seated in an object. The carried Power keeps its own composition unchanged — this module does ''not'' re-list Floating Disc's components. That is the whole nesting rule: entity `#has` module; reserve `#composes` for module-to-module wiring.
+An item is ''an entity with mount-points'', not a new kind of module. It `#has` the Power it carries and `#has` the `item` mount-point that says //how// that Power is seated in an object. The carried Power keeps its own composition unchanged — this module does ''not'' re-list Floating Disc's components. That is the whole nesting rule: entity `#has` module; reserve `#composes` for module-to-module wiring.
 
 <<~/ahu >>
 
@@ -47,7 +47,7 @@ A smooth, palm-sized pebble of Long Ago make, warm to the touch. Press it and a 
 
 Per the `item` mount-point: the relic occupies ''one inventory slot'', locks its own Life into the object (the pebble powers the disc, not the carrier), and persists until the pebble is dropped, stolen, sundered, or jammed. Pay P from the relic's reserve; a depleted pebble goes inert until it recharges (sunlight, per its Long Ago make).
 
-The carried Floating Disc behaves exactly as its module specifies — same range, duration, overcharge, and mishaps. The pebble changes *who sources the Power and how it is held*, nothing about the Power itself.
+The carried Floating Disc behaves exactly as its module specifies — same range, duration, overcharge, and mishaps. The pebble changes //who sources the Power and how it is held//, nothing about the Power itself.
 
 !!! Failure
 
@@ -82,7 +82,7 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 !! Aftermath
 
 * ''Nesting decided (Sprint 3).'' Item is an entity; it `#has` a Power through the `item` mount-point. No second module type, no `#composes` for entity→module. `#composes` stays reserved for module→module (a Power that triggers or riders another Power).
-* **`holds` edge vs `#has`.** This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records *which* Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
+* **`holds` edge vs `#has`.** This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records //which// Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
 * ''Container sub-rule'' (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 
 <<~/ahu >>

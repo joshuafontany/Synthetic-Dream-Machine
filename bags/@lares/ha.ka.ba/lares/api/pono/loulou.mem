@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 
 ! Loulou
 
-*loulou* — Hawaiian: to tie, bind, fasten; to link together.
+//loulou// — Hawaiian: to tie, bind, fasten; to link together.
 
 An outgoing relation-family edge sugar. Names what kind of connection holds between two sockets.
 Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.

@@ -147,7 +147,7 @@ Tool render modes map the invariant ASCII tool symbols to surface-specific glyph
 
 | Mode | Wand | Cup | Sword | Pentacle | Stone | Notes |
 |---|---|---|---|---|---|---|
-| `elements` *(default)* | 🜂 | 🜄 | 🜁 | 🜃 | 🜍 | Alchemical glyphs — Fire, Water, Air, Earth, Gold/Orichalcum |
+| `elements` //(default)// | 🜂 | 🜄 | 🜁 | 🜃 | 🜍 | Alchemical glyphs — Fire, Water, Air, Earth, Gold/Orichalcum |
 | `playing-card` | ♣ | ♥ | ♠ | ♦ | 🃠 | Minor Arcana suits + The Fool |
 | `ascii` | `*` | `?` | `!` | `_` | `0` | No Unicode projection; record-form symbols surface directly |
 

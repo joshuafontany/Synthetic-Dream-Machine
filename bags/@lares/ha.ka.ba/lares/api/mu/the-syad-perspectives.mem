@@ -37,11 +37,11 @@ Standpoint declares the measure.
 
 !! The Relationship --- Standpoints License Predications
 
-Jain anekānta flies on two wings (Matilal): *naya-vāda*, the doctrine of ''standpoints'', and *saptabhaṅgī*, the ''sevenfold predication''. The five stances ride the *naya* wing --- partial standpoints, each one true-yet-incomplete, each attending a single aspect without denying the rest. The seven *bhaṅgas* ride the predication wing --- the closed lattice of claims a standpoint may lawfully speak.
+Jain anekānta flies on two wings (Matilal): //naya-vāda//, the doctrine of ''standpoints'', and //saptabhaṅgī//, the ''sevenfold predication''. The five stances ride the //naya// wing --- partial standpoints, each one true-yet-incomplete, each attending a single aspect without denying the rest. The seven //bhaṅgas// ride the predication wing --- the closed lattice of claims a standpoint may lawfully speak.
 
-The two wings hold a ''relationship, not a mapping.'' A stance does not *equal* a predication; a stance ''licenses'' one. The licensing particle names this lens: *syāt* --- "in some respect, from a standpoint." Marking a partial standpoint with *syāt* converts a one-sided view into a lawful, non-absolutist claim; an unmarked standpoint overreaches and degrades into *durnaya*, the one-sided fallacy. The `syad` sigil performs this office: `<<~ syad … >>` licenses a stance's claim into the non-absolutist register.
+The two wings hold a ''relationship, not a mapping.'' A stance does not //equal// a predication; a stance ''licenses'' one. The licensing particle names this lens: //syāt// --- "in some respect, from a standpoint." Marking a partial standpoint with //syāt// converts a one-sided view into a lawful, non-absolutist claim; an unmarked standpoint overreaches and degrades into //durnaya//, the one-sided fallacy. The `syad` sigil performs this office: `<<~ syad … >>` licenses a stance's claim into the non-absolutist register.
 
-''Five unfolds to seven; seven never collapses to five.'' The Tattvārtha Sūtra names five standpoints (1.34), then unfolds them into seven (1.35). The two cardinalities differ by design: the five name an open, reducible set of *perspectives*; the seven name a closed combinatorial *lattice* --- 2³−1 predications over `asti` (it-holds), `nāsti` (it-holds-not), and `avaktavya` (it-resists-saying). A standpoint-set and a predication-lattice answer to different counts because they do different work --- keep the wings distinct. The relationship carries load no single identity table holds.
+''Five unfolds to seven; seven never collapses to five.'' The Tattvārtha Sūtra names five standpoints (1.34), then unfolds them into seven (1.35). The two cardinalities differ by design: the five name an open, reducible set of //perspectives//; the seven name a closed combinatorial //lattice// --- 2³−1 predications over `asti` (it-holds), `nāsti` (it-holds-not), and `avaktavya` (it-resists-saying). A standpoint-set and a predication-lattice answer to different counts because they do different work --- keep the wings distinct. The relationship carries load no single identity table holds.
 
 <<~/ahu >>
 
@@ -55,13 +55,13 @@ The saptabhaṅgī closes at seven, not by decree but by combinatorics: the powe
 |---|---|---|---|
 | 1 | syād-asti | T | in a respect, it holds |
 | 2 | syād-nāsti | F | in a respect, it holds not |
-| 3 | syād-asti-nāsti | T+F | in respects, it holds and holds not --- *in turn* |
-| 4 | syād-avaktavya | M | in a respect, it resists saying --- *the pole* |
+| 3 | syād-asti-nāsti | T+F | in respects, it holds and holds not --- //in turn// |
+| 4 | syād-avaktavya | M | in a respect, it resists saying --- //the pole// |
 | 5 | syād-asti-avaktavya | T+M | it holds, and resists saying |
 | 6 | syād-nāsti-avaktavya | F+M | it holds not, and resists saying |
 | 7 | syād-asti-nāsti-avaktavya | T+F+M | it holds, holds not, and resists saying |
 
-Six of the seven run a ''sequential axis'' (*krama*): assert from one standpoint, deny from another, hold both in turn --- all of it sayable. Predication 4 alone stands on the orthogonal ''simultaneous axis'' (*yugapad*): assertion and denial pressed onto one property in the same instant, which language holds no single word for --- hence the inexpressible. Akalaṅka's *krama*/*yugapad* line sets `avaktavya` apart: a ''pole'' piercing the plane, not a seventh point on its rim. Predications 5–7 read as the mixed cells where the plane touches the pole.
+Six of the seven run a ''sequential axis'' (//krama//): assert from one standpoint, deny from another, hold both in turn --- all of it sayable. Predication 4 alone stands on the orthogonal ''simultaneous axis'' (//yugapad//): assertion and denial pressed onto one property in the same instant, which language holds no single word for --- hence the inexpressible. Akalaṅka's //krama/////yugapad// line sets `avaktavya` apart: a ''pole'' piercing the plane, not a seventh point on its rim. Predications 5–7 read as the mixed cells where the plane touches the pole.
 
 <<~/ahu >>
 
@@ -122,7 +122,7 @@ One or more stance icons or names may surface in text-spans or other generated o
 !! The `syad` Sigil — license the standpoints
 
 `<<~ syad >>` parameterless surfaces all five standpoints — the full reading, quiet stances named.
-`<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus, and the sigil licenses each adopted stance into a non-absolutist claim (the *syāt* office, #relationship). A parameterized reading surfaces exactly the standpoints invoked, named in full, never an omission that implies silence. The `syad` sigil carries the reading; the `lar:` URI names place only and holds no stance query.
+`<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus, and the sigil licenses each adopted stance into a non-absolutist claim (the //syāt// office, #relationship). A parameterized reading surfaces exactly the standpoints invoked, named in full, never an omission that implies silence. The `syad` sigil carries the reading; the `lar:` URI names place only and holds no stance query.
 
 ''Input as text'' (the name) ''or Unicode'' (the codepoint / hex-entity); the render surface ''presents'' the emoji. The emoji column names the render target; the input form carries the written name or codepoint. All three forms parse to the same standpoint:
 
@@ -151,9 +151,9 @@ A standpoint MAY carry a `mu` tool through the optional `:` bind (`🏛️:*!`);
 
 !! Stance Tool Modulation
 
-Tool-carry modulates *how* a stance applies its evaluation frame.
-The Syadasti frame names *what* each stance measures.
-The tools name *how* the stance orients within that measure.
+Tool-carry modulates //how// a stance applies its evaluation frame.
+The Syadasti frame names //what// each stance measures.
+The tools name //how// the stance orients within that measure.
 
 Append `:carry` to bind a tool to a named standpoint — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:_!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `_?`). A bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
 
@@ -216,7 +216,7 @@ The number does not widen itself. Each claim carries its own confidence, and the
 
 !! Source Shelf
 
-The naya↔predication relationship grounds in the Jain canon: Umāsvāti's *Tattvārtha Sūtra* 1.34–35 (five standpoints unfolding to seven), Matilal's two-wings framing of anekānta, and Akalaṅka's *krama*/*yugapad* distinction that sets the `avaktavya` pole apart. The extracted derivation lives in docs space; Discordian witness texts rest in library space.
+The naya↔predication relationship grounds in the Jain canon: Umāsvāti's //Tattvārtha Sūtra// 1.34–35 (five standpoints unfolding to seven), Matilal's two-wings framing of anekānta, and Akalaṅka's //krama/////yugapad// distinction that sets the `avaktavya` pole apart. The extracted derivation lives in docs space; Discordian witness texts rest in library space.
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives#provenance >>
 

@@ -53,8 +53,8 @@ Time rides three instruments, never one (`ffz-clock`):
 
 Revocation runs two modes, and conflating them ships an unsafe gate:
 
-* ''Non-renewal (the default)'' — the ''epoch-lease'': a max-register rolls forward, every grant at epoch ≤ N must re-mint or expire. Coordinator-free, rides Automerge over the WS relay. <<~ confidence Synthesis-Canon 15/20 >> Safe *because* it only ratchets the whole resource forward — it never singles out one principal.
-* ''Targeted (the exception, but PRIMARY for malice)'' — ''Keyhive convergent membership-removal'' (`revoke()`, a tombstone in the membership graph; `orichalcum-capabilities`). A device that re-mints concurrently with a roll would ride the max-register *up* and survive, so any revoke that must defeat a malicious self-renew MUST ride Keyhive's convergent removal — ''never the counter'' (Kleppmann · p2panda · Keyhive converge on this; #provenance). That convergent-removal tombstone reads as a ''raised kāpae on the membership stack'' (`kapae#membership-sense`) — remove-wins, the shadow defeating the malicious self-renew the way a raised kāpae defeats a partitioned lower-layer re-add.
+* ''Non-renewal (the default)'' — the ''epoch-lease'': a max-register rolls forward, every grant at epoch ≤ N must re-mint or expire. Coordinator-free, rides Automerge over the WS relay. <<~ confidence Synthesis-Canon 15/20 >> Safe //because// it only ratchets the whole resource forward — it never singles out one principal.
+* ''Targeted (the exception, but PRIMARY for malice)'' — ''Keyhive convergent membership-removal'' (`revoke()`, a tombstone in the membership graph; `orichalcum-capabilities`). A device that re-mints concurrently with a roll would ride the max-register //up// and survive, so any revoke that must defeat a malicious self-renew MUST ride Keyhive's convergent removal — ''never the counter'' (Kleppmann · p2panda · Keyhive converge on this; #provenance). That convergent-removal tombstone reads as a ''raised kāpae on the membership stack'' (`kapae#membership-sense`) — remove-wins, the shadow defeating the malicious self-renew the way a raised kāpae defeats a partitioned lower-layer re-add.
 
 <<~/ahu >>
 
@@ -62,7 +62,7 @@ Revocation runs two modes, and conflating them ships an unsafe gate:
 
 !! The contract performs the key-agreement
 
-Private docs spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonaGroup ONLY when vessels mutually ''contract'' (the delegation handshake). That handshake, and only it, runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks, a fresh group secret seals ''to current members only'', and the joiner derives keys ''from that epoch forward''. A membership break advances the epoch and blanks the removed leaf's path — future derivation drops it, coordinator-free. ''Forward-only ceiling, stated honestly:'' keys already handed stay handed (endosymbiotic, permanent) — forward-secrecy here ratchets *past* the broken party, never re-seals the past (full statement: `lararium-identity#encrypt-from-start`).
+Private docs spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonaGroup ONLY when vessels mutually ''contract'' (the delegation handshake). That handshake, and only it, runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks, a fresh group secret seals ''to current members only'', and the joiner derives keys ''from that epoch forward''. A membership break advances the epoch and blanks the removed leaf's path — future derivation drops it, coordinator-free. ''Forward-only ceiling, stated honestly:'' keys already handed stay handed (endosymbiotic, permanent) — forward-secrecy here ratchets //past// the broken party, never re-seals the past (full statement: `lararium-identity#encrypt-from-start`).
 
 <<~/ahu >>
 
@@ -70,7 +70,7 @@ Private docs spawn fresh and isolated per vessel — they hide in `@catalog` —
 
 !! The Beelay bypass ~ what rides the relay, what stays Beelay's
 
-<<~ confidence Synthesis 13/20 >> The ''public layer'' — base canon (`@lares`/`@lararium`), capability-as-identity public *signatures*, the epoch-lease, Keyhive convergent-revoke — rides ''public CRDT state over the WS relay'', no Beelay. Beelay shrinks from "the multi-vessel blocker" to its one irreplaceable job: ''forward-secrecy of *private* encrypted content's data-keys'' (key-agreement, BeeKEM-class) — needed only for private bags, and ''Keyhive already carries BeeKEM'', so the work is to *anchor it at the contract*, never to re-invent it.
+<<~ confidence Synthesis 13/20 >> The ''public layer'' — base canon (`@lares`/`@lararium`), capability-as-identity public //signatures//, the epoch-lease, Keyhive convergent-revoke — rides ''public CRDT state over the WS relay'', no Beelay. Beelay shrinks from "the multi-vessel blocker" to its one irreplaceable job: ''forward-secrecy of //private// encrypted content's data-keys'' (key-agreement, BeeKEM-class) — needed only for private bags, and ''Keyhive already carries BeeKEM'', so the work is to //anchor it at the contract//, never to re-invent it.
 
 <<~/ahu >>
 
@@ -78,14 +78,14 @@ Private docs spawn fresh and isolated per vessel — they hide in `@catalog` —
 
 !! Groundings ~ the falsifiable cross-domain rhymes
 
-The convergence reads as a real pattern integrity, not a Law-of-5s pleasing story, *because* independent fields under their own selection pressure each landed on a piece. The discipline: ''weight the falsifiable engineering/biology rhymes; treat metaphysics (process philosophy, Markov-blanket literalism) as vocabulary, never evidence.''
+The convergence reads as a real pattern integrity, not a Law-of-5s pleasing story, //because// independent fields under their own selection pressure each landed on a piece. The discipline: ''weight the falsifiable engineering/biology rhymes; treat metaphysics (process philosophy, Markov-blanket literalism) as vocabulary, never evidence.''
 
 | Rhyme | Grounds | Field |
 |---|---|---|
 | ''Soft-state networking'' (RSVP/DHCP leases) | the decaying-lease spine — state self-reclaims unless refreshed, no controller | network engineering |
 | ''Garbage collection'' (refcount vs tracing) | the ''constitutional core IS the GC root'' that keeps the local lease from a self-sustaining Sybil/cycle | compilers |
 | ''Schmitt trigger / hysteresis'' | graded belief + a dead-band that resists boundary chatter | electronics/physics |
-| ''Speciation / ring species'' | a fork = the *retrospective*, possibly *non-transitive* name for "the compatibility graph partitioned" | evolutionary biology |
+| ''Speciation / ring species'' | a fork = the //retrospective//, possibly //non-transitive// name for "the compatibility graph partitioned" | evolutionary biology |
 | ''Costly signaling'' (post-handicap) | cost-bound = forgery-expensive OR position-bound (never "honest = expensive") | evolutionary game theory |
 | ''Fungal hyphal anastomosis + vegetative-compatibility groups'' | THE personGroup: fuse only within a recognized self/non-self group; an incompatible junction ''dies (PCD) — fail-closed before cytoplasm mixes'' (a failed delegation seals + aborts the merge, never ambient-falls-through) | mycology |
 | ''Bacterial entry/surface exclusion'' (TraS/TraT) | the per-resource epoch-lease: already-holds → refuse re-transfer, identity-keyed, contact-local, coordinator-free | microbiology |
@@ -93,7 +93,7 @@ The convergence reads as a real pattern integrity, not a Law-of-5s pleasing stor
 
 ''The mycelium is the tightest rhyme.'' Hyphal anastomosis within a vegetative-compatibility group matches "private-local until a mutual contract converges it within a compatibility group" structure-for-structure — including the ''fail-closed'' the confused-deputy history demands (`confused-deputy`). A hypha carries no name; it stands as a bundle of `het`/`vic` capabilities, and two bundles fuse iff their capability-sets recognize each other — the `#has`-stack made flesh.
 
-''The honest guard (Stranger's frame-check):'' biology and law illuminate the ''when'' (the contract), the ''scope'' (the group), and the ''ceiling'' (forward-only) — but they lie about the crypto. Biological transfer hands a plaintext copy with no key to delete; gap-junction gates *reopen* (a forward-secrecy ratchet must not); law needs a global adjudicator the no-global-now doctrine forbids. Borrow the gate-at-contact, the compatibility-recognition, and the ceiling; never borrow the analogy *for the cryptographic guarantee*.
+''The honest guard (Stranger's frame-check):'' biology and law illuminate the ''when'' (the contract), the ''scope'' (the group), and the ''ceiling'' (forward-only) — but they lie about the crypto. Biological transfer hands a plaintext copy with no key to delete; gap-junction gates //reopen// (a forward-secrecy ratchet must not); law needs a global adjudicator the no-global-now doctrine forbids. Borrow the gate-at-contact, the compatibility-recognition, and the ceiling; never borrow the analogy //for the cryptographic guarantee//.
 
 <<~/ahu >>
 
@@ -101,7 +101,7 @@ The convergence reads as a real pattern integrity, not a Law-of-5s pleasing stor
 
 !! Provenance ~ PROPOSED, twice-refuted-and-survived
 
-This meme stands ''PROPOSED'' (crucible-before-binding). The model held through two adversarial refutations (2026-06-24): ''FFZ-as-causal-clock'' fell (FFZ is rhythmic; Automerge owns causal order), and ''epoch-as-targeted-revoker'' fell (the epoch is a lease; targeted revoke rides Keyhive convergent-removal). What survived survived *because* the falsifiable rhymes converged. Open remnant: the ''secret-leak bound'' of the concurrent add/remove window needs the p2panda asynchronous-acknowledgement (share secrets only after removal acknowledged) — engineering, not analogy.
+This meme stands ''PROPOSED'' (crucible-before-binding). The model held through two adversarial refutations (2026-06-24): ''FFZ-as-causal-clock'' fell (FFZ is rhythmic; Automerge owns causal order), and ''epoch-as-targeted-revoker'' fell (the epoch is a lease; targeted revoke rides Keyhive convergent-removal). What survived survived //because// the falsifiable rhymes converged. Open remnant: the ''secret-leak bound'' of the concurrent add/remove window needs the p2panda asynchronous-acknowledgement (share secrets only after removal acknowledged) — engineering, not analogy.
 
 <<~/ahu >>
 

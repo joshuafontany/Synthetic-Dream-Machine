@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/aka"
 
 ! Aka
 
-*aka* — Hawaiian: shadow, reflection; to be like; also-known-as.
+//aka// — Hawaiian: shadow, reflection; to be like; also-known-as.
 
 A transclusion-family edge sugar. Embeds a frozen shadow of the target at the source — read-only, no ownership stake. TW5 shadow-tiddler semantics: the target's content shows through at the source position.
 Sugar for `<<~ pranala ? -> URI family:transclusion >>`. The `transclusion` family is confidence-bounded:

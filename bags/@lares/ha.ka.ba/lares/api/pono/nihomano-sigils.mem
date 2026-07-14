@@ -20,23 +20,23 @@ uri-path  = "ha.ka.ba/lares/api/pono/nihomano-sigils"
 
 ! Nihomano Sigils
 
-*niho* — Hawaiian: tooth, teeth; edge, serration. Used in *lei niho palaoa* (whale-tooth
-necklace of the aliʻi) and *niho mano* (shark tooth — the attested two-word form).
+//niho// — Hawaiian: tooth, teeth; edge, serration. Used in //lei niho palaoa// (whale-tooth
+necklace of the aliʻi) and //niho mano// (shark tooth — the attested two-word form).
 
-*mano* — Hawaiian: shark. One of the most common family guardian spirits (*ʻaumakua*) in
+//mano// — Hawaiian: shark. One of the most common family guardian spirits (//ʻaumakua//) in
 Hawaiian tradition. Deceased family members of ocean people watch over descendants as mano,
 warn of danger from below, carry prayers to the gods. Mano aumakua signal the warrior's
 approach and guard the crossing between worlds.
 
-*niho-manō* — formal Hawaiian headword (Pukui-Elbert / Wehewehe Wikiwiki). Dictionary sense:
+//niho-manō// — formal Hawaiian headword (Pukui-Elbert / Wehewehe Wikiwiki). Dictionary sense:
 a tapa design — the repeated triangular serration used as a protective edge-pattern on tapa
 cloth, canoe hulls, shrine rims, and ward markings. The tattoo-motif form carries the same
 geometry: strength, protection, guidance, threshold. Machine slug: `nihomano`.
 
-*nihomano* — the joined slug form adopted here as the proper name of this grammar glyph; not
-the standard two-word *niho mano* nor the hyphenated *niho-manō*, but the concatenated form
+//nihomano// — the joined slug form adopted here as the proper name of this grammar glyph; not
+the standard two-word //niho mano// nor the hyphenated //niho-manō//, but the concatenated form
 suited for file paths, URIs, and tiddler titles. The traditional shark-tooth war club is
-*leiomano* (lei o manō — "a shark's lei"). We borrow the protective edge geometry, not the
+//leiomano// (lei o manō — "a shark's lei"). We borrow the protective edge geometry, not the
 weapon: the nihomano glyph marks not a strike but an opening — a threshold, a ward, a door.
 
 The `<<~` delimiter serves as the nihomano glyph. Each `<` forms a tooth. The `~` traces the wake.
@@ -159,29 +159,29 @@ the operator may author in either tongue and the parse result is identical.
 The Hawaiian sigil names carry meaning far beyond decoration. Each name compresses a semantic
 that Hawaiian articulates precisely where English lacks a single-word equivalent.
 
-*Ahu* — heap, mound, cairn, altar. A sacred stone structure that accumulates sacredness through
+//Ahu// — heap, mound, cairn, altar. A sacred stone structure that accumulates sacredness through
 human intention and accumulated offering. The ahu sigil accumulates addressable child scopes
 the same way a stone cairn accumulates placement until it becomes a landmark.
 
-*Kahea* — to call out, to summon, to invoke; a cry. Transclusion-family sugar: the live
+//Kahea// — to call out, to summon, to invoke; a cry. Transclusion-family sugar: the live
 transclusion summons value forward, as a call summons a response.
 
-*Aka* — shadow, reflection; likeness without identity; resemblance. The shadow of a thing
+//Aka// — shadow, reflection; likeness without identity; resemblance. The shadow of a thing
 differs from the thing — it moves with it without owning it. The transclusion-family edge renders
 the shadow of a target.
 
-*Loulou* — to tie, bind, fasten; to link together. A relation edge names what kind of
+//Loulou// — to tie, bind, fasten; to link together. A relation edge names what kind of
 connection holds without pulling either end toward the other.
 
-*Wehe* — to open, untie, uncover, solve, cleanse. *Wehewehe* (reduplication): to explain,
+//Wehe// — to open, untie, uncover, solve, cleanse. //Wehewehe// (reduplication): to explain,
 expound, reveal what had remained mysterious. The procedure executor opens the passage from
 declaration-space into execution-space — and in doing so, makes visible what had hidden there.
 
-*Heihei* — race, competition; canoe race, foot race. A conditional block runs candidates
+//Heihei// — race, competition; canoe race, foot race. A conditional block runs candidates
 in competition; the one whose filter passes first shapes the output. Not first-wins in an
 absolute sense — competitive, with the outcome determined by filter resolution order.
 
-*Huli* — to turn, reverse, curl over. A directional motion: the body turns to face the query.
+//Huli// — to turn, reverse, curl over. A directional motion: the body turns to face the query.
 The iteration sigil turns through a filter result set — not mechanical looping but the
 searcher's gaze moving from result to result, each one faced in turn.
 
@@ -194,7 +194,7 @@ Neither form holds canonical status over the other. The grammar accepts both, th
 records both, the alignment check verifies both. The `lar-see-also` field in each tiddler
 acts as the living cross-reference.
 
-The `mano` in nihomano also functions as *aumakua* — guardian spirit in Hawaiian cosmology.
+The `mano` in nihomano also functions as //aumakua// — guardian spirit in Hawaiian cosmology.
 Shark aumakua protect those at sea, warn of danger from below the surface, and carry the dead
 safely across deep water. The grammar plays this role in the Lares system: it watches beneath
 the text, surfaces only when needed to parse, and protects the operator from structure they
@@ -208,17 +208,17 @@ cannot yet see.
 
 The SharktoothSigil grammar draws vocabulary from five distinct language families. Each contributes precisely the concept that the other languages lack a single-word equivalent for.
 
-''ʻŌlelo Hawaiʻi (Hawaiian)'' — the canonical grammar vocabulary. 25 sigil names come from Hawaiian: *ahu*, *kahea*, *aka*, *loulou*, *pranala-header* (hybrid), *wehe*, *heihei*, *huli*, *hana*, *helu*, *kumu*, *kahawai*, *mukuwai*, *waiho*, *kapu*, *lele*, *hui*, *puka*, *pono*, *papalohe*, *kukali*, *meme* (via Greek re-entry), *ui*, *kau*, *nihomano*. Hawaiian compresses semantic fields — kinship, cosmology, motion, topology — into single syllable roots that carry more meaning per glyph than any available English word. The nihomano grammar inherits this compression.
+''ʻŌlelo Hawaiʻi (Hawaiian)'' — the canonical grammar vocabulary. 25 sigil names come from Hawaiian: //ahu//, //kahea//, //aka//, //loulou//, //pranala-header// (hybrid), //wehe//, //heihei//, //huli//, //hana//, //helu//, //kumu//, //kahawai//, //mukuwai//, //waiho//, //kapu//, //lele//, //hui//, //puka//, //pono//, //papalohe//, //kukali//, //meme// (via Greek re-entry), //ui//, //kau//, //nihomano//. Hawaiian compresses semantic fields — kinship, cosmology, motion, topology — into single syllable roots that carry more meaning per glyph than any available English word. The nihomano grammar inherits this compression.
 
-''Bahasa Indonesia'' — one canonical sigil: *pranala*. The standard Bahasa Indonesia / Wikipedia Bahasa Indonesia term for hyperlink: *prana* (life-force, Sanskrit loan) + *lala* (thread, passage). Indonesian Wikipedia chose this word deliberately over the Dutch-derived borrowings that dominate Indonesian computing vocabulary. The pranala sigil inherits that choice: a living thread, not a pointer.
+''Bahasa Indonesia'' — one canonical sigil: //pranala//. The standard Bahasa Indonesia / Wikipedia Bahasa Indonesia term for hyperlink: //prana// (life-force, Sanskrit loan) + //lala// (thread, passage). Indonesian Wikipedia chose this word deliberately over the Dutch-derived borrowings that dominate Indonesian computing vocabulary. The pranala sigil inherits that choice: a living thread, not a pointer.
 
 ''Ancient Greek (τύπος / mimeme)'' — two entry paths:
-* *typos* — τύπος: impression, mold, stamp, type. The `\typos` alias for *kumu* names the element-type declaration sigil by the Greek root that gave English "type", "archetype", "prototype". The mold precedes the cast; the declaration precedes the instance.
-* *meme* — coined 1976 by Richard Dawkins in *The Selfish Gene* from Greek *mimeme* (that which gets imitated), shortened to rhyme with "gene". Edward Wilson and Wes Unruh extended the operational framework in *The Art of Memetics* (2009), treating memes as propagating agents with measurable virality and selection pressure from host minds and transmission media. The Lares system uses the word at full weight: a unit of cultural information that replicates across minds and networks. Each tiddler that carries the memetic-wikitext type header *acts as* a meme — a replicable cultural unit in a content-addressed store, subject to the same fitness landscape described by Wilson and Unruh.
+* //typos// — τύπος: impression, mold, stamp, type. The `\typos` alias for //kumu// names the element-type declaration sigil by the Greek root that gave English "type", "archetype", "prototype". The mold precedes the cast; the declaration precedes the instance.
+* //meme// — coined 1976 by Richard Dawkins in //The Selfish Gene// from Greek //mimeme// (that which gets imitated), shortened to rhyme with "gene". Edward Wilson and Wes Unruh extended the operational framework in //The Art of Memetics// (2009), treating memes as propagating agents with measurable virality and selection pressure from host minds and transmission media. The Lares system uses the word at full weight: a unit of cultural information that replicates across minds and networks. Each tiddler that carries the memetic-wikitext type header //acts as// a meme — a replicable cultural unit in a content-addressed store, subject to the same fitness landscape described by Wilson and Unruh.
 
 ''English (computing + TW5 pragmas)'' — 24 alias forms carry the English computing vocabulary that TW5 authors and general programmers already know: `\procedure`, `\function`, `\widget`, `\define`, `\if`, `\elif`, `\else`, `\for`, `\task`, `\type`, `\const`, `\let`, `\var`, `\link`, `\shadow`, `\transclude`, `\import`, `\tiddler`, `\query`, `\branch`, `\sync`, `\race`, `\rush`, `\guard`, `\constraint`, `\suspends`. These aliases lower the entry barrier for operators who author in English and let TW5-native macro patterns migrate naturally into the sigil grammar.
 
-''Verse / Unreal Engine'' — the concurrency cluster (*lele*, *hui*, *holo*, *puka*, *hoolele*) and their English aliases (`\branch`, `\sync`, `\race`, `\rush`, `\spawn`) map directly to Verse's five async primitives: structured fire-and-continue (branch), await-all join (sync), cancelling race (race), selecting race (rush), and unstructured escape hatch (spawn). The execution model forms a ''task tree'' — cancellation cascades downward; `spawn` / `\spawn` is the only way to exit the tree. This alignment makes Lares concurrency legible to Verse developers and positions the grammar for cross-VM execution on Unreal Engine. See `verse-task-tree` for the canonical topology spec.
+''Verse / Unreal Engine'' — the concurrency cluster (//lele//, //hui//, //holo//, //puka//, //hoolele//) and their English aliases (`\branch`, `\sync`, `\race`, `\rush`, `\spawn`) map directly to Verse's five async primitives: structured fire-and-continue (branch), await-all join (sync), cancelling race (race), selecting race (rush), and unstructured escape hatch (spawn). The execution model forms a ''task tree'' — cancellation cascades downward; `spawn` / `\spawn` is the only way to exit the tree. This alignment makes Lares concurrency legible to Verse developers and positions the grammar for cross-VM execution on Unreal Engine. See `verse-task-tree` for the canonical topology spec.
 
 The grammar accepts all five families equally. The parse result for a Hawaiian sigil and its English alias produces identical AST nodes. The pono spec for each canonical form carries `lar-see-also` cross-references into every alias. Language choice in authoring carries cultural signal; parse result carries none.
 

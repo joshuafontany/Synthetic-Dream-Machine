@@ -44,7 +44,7 @@ It carried three proof Powers (read-magic, floating-disc, shield-ward), a `power
 
 !! Why It Retired
 
-The inheritance spine modeled a Power as a thing that *implements* contracts. Research (Ars Magica, ECS/Rust traits, Starfinder, Earthdawn) and the SDM corpus itself pointed the other way: a Power is a thing that ''has'' facets. The v0.1 model replaces inheritance with ''composition'':
+The inheritance spine modeled a Power as a thing that //implements// contracts. Research (Ars Magica, ECS/Rust traits, Starfinder, Earthdawn) and the SDM corpus itself pointed the other way: a Power is a thing that ''has'' facets. The v0.1 model replaces inheritance with ''composition'':
 
 | v0.0 (retired) | v0.1 (current) |
 |---|---|

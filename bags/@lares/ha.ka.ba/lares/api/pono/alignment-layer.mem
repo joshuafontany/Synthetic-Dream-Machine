@@ -27,13 +27,13 @@ uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 
 ! The Alignment Layer — Plane 0
 
-Cryptographic capability answers *"CAN this principal act on this resource?"* — monotonic,
+Cryptographic capability answers //"CAN this principal act on this resource?"// — monotonic,
 grant-based, cryptographically decidable. Keyhive owns it well. But a malicious actor can
 hold perfectly valid capabilities. At federation scale (many independent operators, multiple
 cabals, NOT all aligned — some corrupt, some adversarial ''lemures'') a different question
 arises that capability STRUCTURALLY CANNOT answer:
 
-> *"Do I CHOOSE to sync, relay, surface, or vouch for this actor at all?"*
+> //"Do I CHOOSE to sync, relay, surface, or vouch for this actor at all?"//
 
 That question is ''non-monotonic'' (trust withdrawn revokes inherited stances), ''subjective''
 (rooted at the deciding peer, never globally true), and ''reputation-based''. It needs a plane
@@ -52,7 +52,7 @@ ABOVE capability. This meme defines it. It sits beside Beelay sync and above Key
 | ''Alignment'' (this meme) | who I WANT to act with | no (opinion, revocable) | local social judgment | this layer |
 
 The prior art is unanimous on three points: the second plane ''cannot be reduced to the''
-''first''; any attempt to make alignment *globally objective* either fails outright (PGP
+''first''; any attempt to make alignment //globally objective// either fails outright (PGP
 web-of-trust collapsed) or recreates the central authority it meant to escape (a single
 canonical blocklist becomes a contested chokepoint — Mastodon's unified Oliphant list was
 retired); and the winning pattern everywhere is ''subjective, subscribable, devolved trust as''
@@ -73,8 +73,8 @@ bags like any other content, evaluated locally against a per-island trust root.
 
 # **`peer-stance`** — a signed assertion over a target principal: `block | limit | neutral | allow`.
    Two SEPARATE consequences (the separation-of-powers move):
-*** *filter* — I will not surface/accept this actor's content locally.
-*** *relay* — I will not relay this actor's CRDT ops to others (SSB semantics: "no longer
+*** //filter// — I will not surface/accept this actor's content locally.
+*** //relay// — I will not relay this actor's CRDT ops to others (SSB semantics: "no longer
      willing to be a peer that shares their posts"). This is the ''Beelay-layer'' enforcement point.
 # **`vouch`** — a signed invitation/endorsement edge. Membership in a Cabal/Nexus is by vouch;
    the vouch edge is recorded. Severing a vouch retroactively prunes the invitee's standing in
@@ -100,9 +100,9 @@ Trust propagates but does not run away:
 * ''Hop-capped'' — spreading-activation propagation capped at ''3–6 hops''; lowest-trust
   cluster discarded; a threshold strategy refuses to compute on too-thin a graph.
 * ''Three modes (mandatory):''
-** *personal* — local only.
-** *network* — advise those who trust me.
-** *propagated* — inherit from those I trust. **Propagated actions do NOT re-propagate**
+** //personal// — local only.
+** //network// — advise those who trust me.
+** //propagated// — inherit from those I trust. **Propagated actions do NOT re-propagate**
     (kills cascade storms). Withdrawing trust ''revokes inherited blocks'' — the
     non-monotonicity capability cannot express.
 
@@ -119,7 +119,7 @@ causal-island model denies.
 We refuse proof-of-work, proof-of-stake, and central registries, so the scarce resource is
 ''social capital''. Membership is by ''vouch'' (Persea / SybilGuard lineage): a new principal
 is not trusted by hop-distance until vouched in, and the join graph doubles as the trust graph. A flood
-of lemures holding valid Keyhive capabilities is bounded by *who vouched them in* — and that
+of lemures holding valid Keyhive capabilities is bounded by //who vouched them in// — and that
 edge is severable, which retroactively prunes the whole subtree's standing. The honest social
 graph's expander property does the work; you never count identities or make them expensive, you
 make them ''socially reachable only through accountable edges''.
@@ -151,14 +151,14 @@ Beelay       → the enforcement surface: consult the verdict before sync/relay.
 !! Composition with the scale ladder
 
 The same primitive (signed subjective assertion + local evaluation) operates at every ring;
-only the *root* and the *default subscriptions* change:
+only the //root// and the //default subscriptions// change:
 
 * ''Relay'' — alignment-blind and mechanical. Carries encrypted ops, honors `relay`-stance
   blocks, makes no content judgments. Keeps the dumb-pipe layer dumb.
 * ''PersonaGroup (household)'' — the individual is their own trust root (SSB: "you are your own
   central authority on truth"). Personal stances + a few subscribed labelers.
 * ''Cabal'' — runs/curates a labeler (advisory feed) for members; members inherit via
-  *propagated* mode but retain personal override. Vouching governs membership. The natural home
+  //propagated// mode but retain personal override. Vouching governs membership. The natural home
   for shared moderation — a choice members made by joining, not an imposed authority.
 * ''Nexus'' — subscribes to multiple cabal labelers and reconciles them (area-scoped weights
   across sources). Federation decisions are ''limit/silence-first, suspend-rarely, reversible''
@@ -179,7 +179,7 @@ only the *root* and the *default subscriptions* change:
 * Cryptographic access MUST live in Keyhive's plane; alignment governs only whom I voluntarily
   sync/relay/surface/vouch.
 * Objectionable content MUST surface as a per-stance filter (Kleppmann's caveat) — subjective
-  filtering protects *my* island; cabal-internal governance (Talk-Story) handles "what is
+  filtering protects //my// island; cabal-internal governance (Talk-Story) handles "what is
   acceptable here."
 
 <<~/ahu >>
@@ -213,7 +213,7 @@ right — to decide whose presence the hearth refuses.
 
 !! Prior art
 
-* Frazee, *Practical Decentralization* — separation of powers; moderation as devolved service.
+* Frazee, //Practical Decentralization// — separation of powers; moderation as devolved service.
 * ATProto Ozone / labelers + label spec — signed, opt-in, stackable annotations; action at the edge.
 * FediMod ''FIRES'' — advisories-not-mandates; the correction of static shared blocklists.
 * Spamhaus / DMARC — authentication ≠ trust; subscribable reputation lists.

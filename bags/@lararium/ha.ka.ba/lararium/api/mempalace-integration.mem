@@ -34,9 +34,9 @@ mempalace serves as a ''library-kind member of the bag stack'', accessed-not-loa
 
 !! The Tensegrity ~ compression members + tension
 
-The verbatim **drawers** stand as compression members — hard, isolated, local-only, ground-truth-of-*what-was-said*. Our **`lar_*` metadata** rides as the continuous tension spanning them — the bearing, the Voices, the confidence marks, the function-hall, the surface — ground-truth-of-*what-it-means*. Neither bears the load alone; each multiplies the other.
+The verbatim **drawers** stand as compression members — hard, isolated, local-only, ground-truth-of-//what-was-said//. Our **`lar_*` metadata** rides as the continuous tension spanning them — the bearing, the Voices, the confidence marks, the function-hall, the surface — ground-truth-of-//what-it-means//. Neither bears the load alone; each multiplies the other.
 
-The founder's own thesis names the shape: *remember the way I remember — not the conclusions alone, but the journey.* The drawer keeps the journey; the `lar_` net makes it walkable; the lararium graph names where it leads.
+The founder's own thesis names the shape: //remember the way I remember — not the conclusions alone, but the journey.// The drawer keeps the journey; the `lar_` net makes it walkable; the lararium graph names where it leads.
 
 <<~/ahu >>
 
@@ -44,7 +44,7 @@ The founder's own thesis names the shape: *remember the way I remember — not t
 
 !! The @daemon Memory-Shore ~ the verb flow
 
-The `@daemon` wiki-island serves as the **causal-island shore** between the chat session and the mempalace metadata. One pure **`enrich()`** (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one ''idempotent upsert'' writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: ''the mode lives in the *feeder* only, never in the transform.''
+The `@daemon` wiki-island serves as the **causal-island shore** between the chat session and the mempalace metadata. One pure **`enrich()`** (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one ''idempotent upsert'' writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: ''the mode lives in the //feeder// only, never in the transform.''
 
 * ''Live'' ~ a thin Stop/SessionEnd hook calls the shore per turn; new drawers carry `lar_*` from birth.
 * ''Backfill'' ~ the same pair sweeps the corpus (`lares harvest --all`).
@@ -57,7 +57,7 @@ The CLI projects the verb; the verb's true home rises into the `@daemon` VM as v
 
 !! The `lar_` Net ~ declared, never smuggled
 
-The maintainer's anti-pattern names *undeclared* writes, not chroma writes. So every `lar_*` field declares itself as a ''RFC-002 source-adapter schema'' (`mempalace_source_lares`, `BaseSourceAdapter.describe_schema`), and every write validates against it and stamps the adapter identity. A declared write serves as sovereign enrichment; the same write undeclared collapses to the anti-pattern.
+The maintainer's anti-pattern names //undeclared// writes, not chroma writes. So every `lar_*` field declares itself as a ''RFC-002 source-adapter schema'' (`mempalace_source_lares`, `BaseSourceAdapter.describe_schema`), and every write validates against it and stamps the adapter identity. A declared write serves as sovereign enrichment; the same write undeclared collapses to the anti-pattern.
 
 The net (flat scalars — chroma's law):
 
@@ -71,7 +71,7 @@ The net (flat scalars — chroma's law):
 
 !! The Surfaces ~ every harness, one sweep
 
-Memory recalls *and* captures across every harness, and each drawer carries its origin in `lar_surface`:
+Memory recalls //and// captures across every harness, and each drawer carries its origin in `lar_surface`:
 
 \procedure ~Surface(~Type:"" ~Params:"") ~Surface <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -80,7 +80,7 @@ Memory recalls *and* captures across every harness, and each drawer carries its 
 <<~Surface Copilot-Vscode "store/workspaceStorage/<hash>/GitHub.copilot-chat/transcripts route/path-scrape parse/normalize ~ own store, no cwd" >>
 <<~Surface Copilot-Cli "store/~~/.copilot/session-state/<id>/events.jsonl route/path-scrape parse/normalize ~ standalone CLI" >>
 
-''Recall'' rides MCP (`mempalace-mcp`, a generic stdio server) into each harness home + every VS Code variant (stable + Insiders, remote + local). ''Capture'' mines the stored transcripts — editors fire no CLI hooks, so capture sweeps after the fact, *transcripts only*.
+''Recall'' rides MCP (`mempalace-mcp`, a generic stdio server) into each harness home + every VS Code variant (stable + Insiders, remote + local). ''Capture'' mines the stored transcripts — editors fire no CLI hooks, so capture sweeps after the fact, //transcripts only//.
 
 <<~/ahu >>
 
@@ -92,7 +92,7 @@ The curation files (CLAUDE.md · AGENTS.md · MEMORY.md · Copilot `memory-tool`
 
 Mining `bags/` design memes through `--mode projects` clears, as docs-substrate. Mining `MEMORY.md` / `project_*.md` does not.
 
-''Settled (the operator's hand, 2026-06-24):'' the question MU'd — not *which* layer owns recall but ''what context each owns''. The curated notes (Agent.MEMORY) keep the distilled conclusions; mempalace keeps the verbatim PLACE journey; the quine keeps the ley-line canon. Recall ''composes across all four registers'' and surfaces conflict to Talk-Story, never arbitrating one over another. Full model: <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-memory#shared-mesh >>.
+''Settled (the operator's hand, 2026-06-24):'' the question MU'd — not //which// layer owns recall but ''what context each owns''. The curated notes (Agent.MEMORY) keep the distilled conclusions; mempalace keeps the verbatim PLACE journey; the quine keeps the ley-line canon. Recall ''composes across all four registers'' and surfaces conflict to Talk-Story, never arbitrating one over another. Full model: <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-memory#shared-mesh >>.
 
 <<~/ahu >>
 

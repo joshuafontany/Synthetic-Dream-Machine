@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/vessel-caps"
 
 ! Vessel Caps ~ a vessel is its composed cap-stack
 
-A vessel does not have a **type**. A vessel **carries a composed `#has`-stack of capabilities**, and its role *emerges* from which caps it holds and lights. Enumerating vessel-kinds (node-lararium, node-relay, browser-lararium) re-grows the subclass-explosion the `#has`-ontology already retired (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>). This meme replaces that enumeration with ''composition'' — so a full node, a bare relay, a browser, a Mudlet instance, an Unreal Engine instance, and the next vessel nobody has built yet all mesh by the ''same move: declaring the caps they carry.''
+A vessel does not have a **type**. A vessel **carries a composed `#has`-stack of capabilities**, and its role //emerges// from which caps it holds and lights. Enumerating vessel-kinds (node-lararium, node-relay, browser-lararium) re-grows the subclass-explosion the `#has`-ontology already retired (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>). This meme replaces that enumeration with ''composition'' — so a full node, a bare relay, a browser, a Mudlet instance, an Unreal Engine instance, and the next vessel nobody has built yet all mesh by the ''same move: declaring the caps they carry.''
 
 <<~ ahu #the-five-caps >>
 
@@ -35,11 +35,11 @@ The mesh untangles into ''five distinct capabilities in two families'' — the m
 | | **bulb** | seed-inside | a snapshot carrying its own next generation | the **`cacheable` boot-seed / genesis** |
 | | ''corm'' | renew-by-self-replacement | spent each cycle, a fresh one forms on the husk | the ''epoch-as-lease'' |
 
-The two families cross the ''AUTHORITY ⊥ FLOW'' master cut: VESSEL caps carry sovereignty and state (a *severable-but-viable* node), CARRIAGE caps carry connection and flow (the line between nodes). Biology witnesses both in one organism — a clonal plant's ramets stay severable-yet-viable while resource flows source→sink along the rhizome.
+The two families cross the ''AUTHORITY ⊥ FLOW'' master cut: VESSEL caps carry sovereignty and state (a //severable-but-viable// node), CARRIAGE caps carry connection and flow (the line between nodes). Biology witnesses both in one organism — a clonal plant's ramets stay severable-yet-viable while resource flows source→sink along the rhizome.
 
-''Do not over-purify.'' The rhizome *itself* caches en-route; a carriage cap holding some replicated state breaks no law (botanically, the connector stores too). The cut names the ''primary verb'', never an absolute exclusion.
+''Do not over-purify.'' The rhizome //itself// caches en-route; a carriage cap holding some replicated state breaks no law (botanically, the connector stores too). The cut names the ''primary verb'', never an absolute exclusion.
 
-**`read` is a SCOPED cap, never a switch.** A vessel reads *which bags* — the capability-layer names the bag a cap applies to, so read runs per-bag, never all-or-nothing. The relay floor's `#has-NOT read` therefore means ''no read on SOVEREIGN content'' — a local operator's `@catalog`, the sealed territory — while the ''public floor stays legible'': `@oracle` (base-ontology, engine-blob CIDs) and a vessel's own mesh-palace (the public FLOW-map). Blind to the territory, sighted on the map.
+**`read` is a SCOPED cap, never a switch.** A vessel reads //which bags// — the capability-layer names the bag a cap applies to, so read runs per-bag, never all-or-nothing. The relay floor's `#has-NOT read` therefore means ''no read on SOVEREIGN content'' — a local operator's `@catalog`, the sealed territory — while the ''public floor stays legible'': `@oracle` (base-ontology, engine-blob CIDs) and a vessel's own mesh-palace (the public FLOW-map). Blind to the territory, sighted on the map.
 
 <<~/ahu >>
 
@@ -47,12 +47,12 @@ The two families cross the ''AUTHORITY ⊥ FLOW'' master cut: VESSEL caps carry 
 
 !! Hold vs Express
 
-One vessel, one `#has`-substrate — yet a vessel ''holds'' a cap-stack and ''expresses'' a subset, the way one genome differentiates a cell by *which genes light*. So:
+One vessel, one `#has`-substrate — yet a vessel ''holds'' a cap-stack and ''expresses'' a subset, the way one genome differentiates a cell by //which genes light//. So:
 
 * every lararium ''holds'' the rhizome (relay) cap intrinsically (#the-relay-floor) —
 * but ''expresses'' it — actually carries others' traffic — only when it lights the cap.
 
-Role = the ''expressed'' cap-set, not the held one. The same vessel differentiates into full-node / bare-relay / browser-leaf / Mudlet / Unreal by which caps it lights against its context and capacity. *Holding broadly, expressing by situation* — the sovereignty dial.
+Role = the ''expressed'' cap-set, not the held one. The same vessel differentiates into full-node / bare-relay / browser-leaf / Mudlet / Unreal by which caps it lights against its context and capacity. //Holding broadly, expressing by situation// — the sovereignty dial.
 
 <<~/ahu >>
 
@@ -68,9 +68,9 @@ cap      = a component               — the data/authority a behavior needs
 behavior = a system                  — runs over whichever vessels hold the matching caps
 ```
 
-A ''role'' computes as a ''structural predicate over the cap-stack'' — *"if a vessel `#has` these caps, it may play this role"* — satisfied, never declared (duck-typing / traits / structural interfaces). No nominal class, no type-tag, no central registry; a would-be "vessel-type" reads as just a ''named point in cap-composition space.''
+A ''role'' computes as a ''structural predicate over the cap-stack'' — //"if a vessel `#has` these caps, it may play this role"// — satisfied, never declared (duck-typing / traits / structural interfaces). No nominal class, no type-tag, no central registry; a would-be "vessel-type" reads as just a ''named point in cap-composition space.''
 
-''ECS shapes the *declaration*, never the boot engine.'' The `entity = vessel, component = cap` reading stays exact — but as the ''inventory vocabulary'': the flat, dependency-blind set of caps a vessel HAS (*what a vessel IS*). A separate move does the ''wiring'' — a ''composition-root'' (`composeVessel`) reads the stack and topologically builds the live components, build-or-REFUSE on a missing mandatory dep, a cycle, or a dup. So ECS answers *what* a vessel holds; the composable keel answers *how it wires or refuses to boot*: <<~ loulou lar:///ha.ka.ba/lararium/api/composable-keel >>.
+''ECS shapes the //declaration//, never the boot engine.'' The `entity = vessel, component = cap` reading stays exact — but as the ''inventory vocabulary'': the flat, dependency-blind set of caps a vessel HAS (//what a vessel IS//). A separate move does the ''wiring'' — a ''composition-root'' (`composeVessel`) reads the stack and topologically builds the live components, build-or-REFUSE on a missing mandatory dep, a cycle, or a dup. So ECS answers //what// a vessel holds; the composable keel answers //how it wires or refuses to boot//: <<~ loulou lar:///ha.ka.ba/lararium/api/composable-keel >>.
 
 <<~/ahu >>
 
@@ -84,7 +84,7 @@ A vessel joins the mesh by ''advertising its cap-stack'', and the wire-shape nee
 * ''advertise only what you will serve; asymmetry first-class'' (the libp2p `identify` semantics): a bare relay advertises `rhizome.forward` only; a full node adds `tuber.author`. A vessel that initiates but won't respond says so.
 * ''negotiate per-interaction, stay backward-compatible'' (IRCv3 `CAP` / XMPP service-discovery): list, request the matching subset, proceed.
 
-A vessel that speaks fewer caps simply plays fewer roles — never a rejected *kind*.
+A vessel that speaks fewer caps simply plays fewer roles — never a rejected //kind//.
 
 <<~/ahu >>
 
@@ -95,9 +95,9 @@ A vessel that speaks fewer caps simply plays fewer roles — never a rejected *k
 Whether a vessel ''expresses'' the rhizome cap — takes on carriage duty — is ''self-elected by measured capacity'', never assigned by a coordinator and never forced on all. The mechanism reads identically in two domains:
 
 * ''Gnutella ultrapeers'' (CS): a node self-tests reachability · spare bandwidth · uptime, advertises carriage-capable only when it measures spare capacity, and ''accepts demotion'' on request.
-* ''Response-threshold task allocation'' (ant colonies): each unit carries a threshold on a demand stimulus; it engages when demand crosses *its* threshold, the cap deepens by use (reinforcement), and the collective ''re-covers automatically'' when a carrier drops.
+* ''Response-threshold task allocation'' (ant colonies): each unit carries a threshold on a demand stimulus; it engages when demand crosses //its// threshold, the cap deepens by use (reinforcement), and the collective ''re-covers automatically'' when a carrier drops.
 
-The carriage-demand stimulus reads off `r` — the carriage-standing coordinate (#the-routing-substrate). So the relay floor was never *"every node must carry"*; it is *"every node may, and self-elects by load."* A home browser carries nothing and meshes fine; a fat reachable node volunteers heavy carriage.
+The carriage-demand stimulus reads off `r` — the carriage-standing coordinate (#the-routing-substrate). So the relay floor was never //"every node must carry"//; it is //"every node may, and self-elects by load."// A home browser carries nothing and meshes fine; a fat reachable node volunteers heavy carriage.
 
 <<~/ahu >>
 
@@ -114,9 +114,9 @@ The smallest composition that still meshes — ''the Hermai'', the crossroads-ma
 
 !!! Immune teeth ~ why the keel, not a pipe
 
-The `@daemon` carries the ''autonomy organ'': it runs the siege repair-kit — ''re-key · evict · heal · re-share'' — at the Herm's ''own shrine tier''. A dumb pipe holds no such organ and cannot defend the segment it carries; the keel grows the teeth. This follows ''Stafford Beer's VSM recursion'' — the viable-system kit runs at *every* tier, each tier autonomous, never one central immune system. So a Herm at a crossroads repairs its own neighborhood: it re-keys a soured leyline, evicts a bad peer, heals a torn segment, re-shares the floor. Carrying the engine-blob, it brings ''the fire to cold hearths'' — any traveler kindles a fresh node from the wayfarer's own bulb.
+The `@daemon` carries the ''autonomy organ'': it runs the siege repair-kit — ''re-key · evict · heal · re-share'' — at the Herm's ''own shrine tier''. A dumb pipe holds no such organ and cannot defend the segment it carries; the keel grows the teeth. This follows ''Stafford Beer's VSM recursion'' — the viable-system kit runs at //every// tier, each tier autonomous, never one central immune system. So a Herm at a crossroads repairs its own neighborhood: it re-keys a soured leyline, evicts a bad peer, heals a torn segment, re-shares the floor. Carrying the engine-blob, it brings ''the fire to cold hearths'' — any traveler kindles a fresh node from the wayfarer's own bulb.
 
-A Herm ''boots permissionlessly'' (its own self-certifying key, anon — no blessing asked, #integrity); every leyline it forms rides a ''separately-signed PEER/TRANSIT edge'', never a membership grant — carriage means transit, not trust. It reads the public floor and routes the map, yet the ''disclosure membrane holds at the wire'': sovereign content never crosses it. The Lares Viales proves the architecture's floor in one figure — ''immune-core ⊕ blind-carriage ⊕ public-read'' — the minimal node every richer vessel composes *up* from (the Hello-World of the stack, now with teeth). The fiction names it the road-lares and the crossroads-herm: <<~ loulou lar:///ha.ka.ba/elyncia/concepts/lares-viales >>.
+A Herm ''boots permissionlessly'' (its own self-certifying key, anon — no blessing asked, #integrity); every leyline it forms rides a ''separately-signed PEER/TRANSIT edge'', never a membership grant — carriage means transit, not trust. It reads the public floor and routes the map, yet the ''disclosure membrane holds at the wire'': sovereign content never crosses it. The Lares Viales proves the architecture's floor in one figure — ''immune-core ⊕ blind-carriage ⊕ public-read'' — the minimal node every richer vessel composes //up// from (the Hello-World of the stack, now with teeth). The fiction names it the road-lares and the crossroads-herm: <<~ loulou lar:///ha.ka.ba/elyncia/concepts/lares-viales >>.
 
 ''Retire-residue (attractor).'' An earlier draft named the Herm a ''minimal serve-carry process'' — a stripped pipe serving the public FLOW-map and forwarding bytes, with no `@daemon` and no engine. That picture ''superseded'': a pipe grows no immune function, so a mesh of pipes cannot repair itself under siege. The current model keeps the figure (minimal, blind-carriage, public-read) and ''adds the keel'' — the @daemon + mesh-palace immune core — so the floor defends itself at every tier.
 
@@ -126,9 +126,9 @@ A Herm ''boots permissionlessly'' (its own self-certifying key, anon — no bles
 
 !! The Seam ~ store ⊗ connect as symbiosis
 
-Storage and carriage meet at a ''declared exchange seam'', never fuse in one obligation — the mycorrhizal pattern: the fungus carries (rhizome), the plant stores (tuber), and the *seam* (not the vessel) holds the bidirectional contract; each partner reaches what the other cannot. So ''custody ⊥ findability'': a tuber announces *"I hold X"* into a routing layer any rhizome can serve (the provider-record indirection), and carriage never implies custody.
+Storage and carriage meet at a ''declared exchange seam'', never fuse in one obligation — the mycorrhizal pattern: the fungus carries (rhizome), the plant stores (tuber), and the //seam// (not the vessel) holds the bidirectional contract; each partner reaches what the other cannot. So ''custody ⊥ findability'': a tuber announces //"I hold X"// into a routing layer any rhizome can serve (the provider-record indirection), and carriage never implies custody.
 
-The whole mesh reads as a ''holobiont'' — a heterogeneous symbiosis whose emergent capability *is* the cap-set its vessels currently declare, fast-adapting as vessels join and leave. No vessel need be complete; the *composition* is.
+The whole mesh reads as a ''holobiont'' — a heterogeneous symbiosis whose emergent capability //is// the cap-set its vessels currently declare, fast-adapting as vessels join and leave. No vessel need be complete; the //composition// is.
 
 <<~/ahu >>
 
@@ -138,7 +138,7 @@ The whole mesh reads as a ''holobiont'' — a heterogeneous symbiosis whose emer
 
 Each cap rides as an ''unforgeable, delegable reference'' (the object-capability model) — so ''composing caps composes authority'', reachable only along explicit edges, with no ambient authority and no central principal registry. A vessel exercises exactly the role its held caps grant, by construction; an unsigned or absent cap ''fails loud'', never falls through to ambient trust (the confused-deputy guard, a standing covenant).
 
-Sovereignty binds to the ''key, never the path'' (the Iroh discipline, already our transport): the tuber *is* the keypair; rhizome relays stay fungible, stateless, and step out the moment a direct path forms.
+Sovereignty binds to the ''key, never the path'' (the Iroh discipline, already our transport): the tuber //is// the keypair; rhizome relays stay fungible, stateless, and step out the moment a direct path forms.
 
 <<~/ahu >>
 
@@ -146,7 +146,7 @@ Sovereignty binds to the ''key, never the path'' (the Iroh discipline, already o
 
 !! Build ~ invent nothing structural
 
-The model assembles from adopted parts; the `#has`-ontology *is* the protocol (build + witness pending where noted):
+The model assembles from adopted parts; the `#has`-ontology //is// the protocol (build + witness pending where noted):
 
 * ''in-process'' → ECS (entity = vessel, component = cap, system = behavior).
 * ''on-wire'' → the cap-handshake (BEP-10 dictionary + libp2p `identify` + IRCv3 `CAP` / XMPP disco).
@@ -154,7 +154,7 @@ The model assembles from adopted parts; the `#has`-ontology *is* the protocol (b
 * ''integrity'' → ocap references over ''Iroh'' (key-sovereign transport, fungible relays).
 * ''differentiation'' → hold-vs-express (light the cap-set per context).
 
-What stays to ''write'' is narrow and named — the cap *vocabulary* itself (`rhizome.forward`, `tuber.author`, …) and the wiring; the *structure* is all adopt. See <<~ loulou lar:///ha.ka.ba/lares/memory/build-leverage-ledger >>.
+What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`rhizome.forward`, `tuber.author`, …) and the wiring; the //structure// is all adopt. See <<~ loulou lar:///ha.ka.ba/lares/memory/build-leverage-ledger >>.
 
 <<~/ahu >>
 

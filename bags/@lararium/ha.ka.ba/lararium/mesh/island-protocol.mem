@@ -31,7 +31,7 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 # Every island boots a Repo-in-island via a transferred `syncPort` (MessagePort).
 # The island derives tiddler state from its own CRDT doc — never from vessel oracle deltas.
 # The island owns its timing. The in-wiki nalu engine drives frame-aligned drain (browser `requestAnimationFrame` with Safari fallback; node `setTimeout(16ms)`); deltas accumulate via `$tw.lares.enqueueNalu`; one `wiki.transact()` per frame across all bags. No raw-message-receipt drains.
-# *(retired)* The frame-completion ACK signal — drain timing stays island-internal.
+# //(retired)// The frame-completion ACK signal — drain timing stays island-internal.
 # Vessel oracle delta delivery removed. CRDT sync via `syncPort` stands as the sole source of tiddler truth.
 # `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `recipe` (WikiRecipe slot structure), `grants` (IslandGrants — typed structural capabilities), and `coreHash` (content-address intent vector; null = pre-CAS). TW5 core bytes do NOT ride the manifest — islands read them from `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc after `handle.whenReady()`; two vessels federating @lararium share the engine automatically via Automerge sync.
 # The vessel MUST close `mainPort` at evict/unmount time. Failure leaks the Automerge NetworkAdapter silently. Structural: every vessel holds `mainPort: MessagePort` on its hot slot and calls `mainPort.close()` in teardown. No exceptions.

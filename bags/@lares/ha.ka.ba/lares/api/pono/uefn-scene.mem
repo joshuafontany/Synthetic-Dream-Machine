@@ -36,14 +36,14 @@ These three relationships look similar but operate at different levels. Keep the
 
 ''Ahu-slot tree'' (document / tiddler structure) — `fragment-parent` + `slot` fields on tiddlers.
 One `.md` file decomposes into a root tiddler and N named slot fragment tiddlers. This is the
-meme parent/child/grandchild tree. It expresses *document containment*, not type relationships.
+meme parent/child/grandchild tree. It expresses //document containment//, not type relationships.
 Not a pranala edge. Never use `control:has` to express ahu-slot ancestry.
 
 **`control:has`** (N edges per type meme) — Verse class composition. Every URI in a Verse
 `class(...)` list becomes one `control:has` edge — the parent class and every interface alike.
 `my_device := class(creative_device, challengeable, listenable_t):` → three `control:has` edges
 (`creative_device`, `challengeable`, `listenable_t`). The graph holds no privileged is-a parent:
-a type *has* its components. Composition only — the `extends` / is-a framing stays retired (web3).
+a type //has// its components. Composition only — the `extends` / is-a framing stays retired (web3).
 
 <<~/ahu >>
 

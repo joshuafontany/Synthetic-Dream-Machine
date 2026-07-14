@@ -125,7 +125,7 @@ Free-form roles; used when the relationship resists categorization.
 ''observe'' — monitoring, measurement, attention edges.
 confidence-bounded: an observer cannot claim more confidence than its source.
 
-''transclusion'' — content embedding edges (page / Story-River surface). `aka` (frozen/shadow) and `kahea` (live/subscription-fresh) carry a *content identity* into the source, not a computed value. confidence-bounded: a frozen embed can age from its source. *(English surface name retained — "transclusion" carries crisp, established semantics; operator 2026-06-06.)*
+''transclusion'' — content embedding edges (page / Story-River surface). `aka` (frozen/shadow) and `kahea` (live/subscription-fresh) carry a //content identity// into the source, not a computed value. confidence-bounded: a frozen embed can age from its source. //(English surface name retained — "transclusion" carries crisp, established semantics; operator 2026-06-06.)//
 
 ''dataflow'' — value-wire edges (canvas / flow surface). Typed value or geometry transport between node pins (reads/writes/streams/buffers/pipes). Carries a computed value, not content — distinct from `transclusion`.
 

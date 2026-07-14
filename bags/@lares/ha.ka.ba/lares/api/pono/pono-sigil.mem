@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 
 ! Pono (Sigil)
 
-*pono* — Hawaiian: rightness, correctness, balance, moral alignment; proper, fit, just.
+//pono// — Hawaiian: rightness, correctness, balance, moral alignment; proper, fit, just.
 
 An edge-sugar sigil that asserts a correctness or constraint relationship between two nodes.
 English alias: `\constraint`.

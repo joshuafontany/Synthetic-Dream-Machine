@@ -333,7 +333,7 @@ Two new design principles locked:
 
   ''Composable file size invariant:'' Each source file must remain small enough to become a self-describing quine meme. No consolidation of multiple operators/widgets into one file.
 
-  ''TW5 VM as causal island:'' Filter operators live *inside* the wiki as `filteroperator` module-type tiddlers, not as string pre-processors outside. The VM IS the island boundary.
+  ''TW5 VM as causal island:'' Filter operators live //inside// the wiki as `filteroperator` module-type tiddlers, not as string pre-processors outside. The VM IS the island boundary.
 
 ◇ ''Decide:''
 
@@ -579,7 +579,7 @@ pnpm --filter @lararium/node test      # ✓ 48/48 pass
 
 The repository currently contains a working, read-only Python MCP server under `lares/lararium_mcp` with a local stdio JSON-RPC transport, explicit MCP resources/tools/prompts, and deliberately light runtime dependencies. The entrypoint is `python -m lares.lararium_mcp`, and local client configs in `.mcp.json`, `.vscode/mcp.json`, and `.codex/config.toml` all launch it that way. The package metadata still targets Python `>=3.8`, with `setuptools` as the build backend and only `pytest` / `pytest-cov` as declared dev extras; there are no declared third-party runtime dependencies for the core package itself.     
 
-The most important migration conclusion is architectural rather than translational: do ''not'' replace `lararium_mcp` with a monolithic TypeScript MCP server. Build `lararium-node` as the Node host/runtime around an isomorphic `lararium-mesh`, then keep MCP as an adapter package. That matches your stated constraints better, isolates the MCP SDK’s version churn, and cleanly supports both file-backed server mode and single-bundle browser mode without letting Node/browser APIs leak into core. The repository’s own design docs already point in that direction: the current MCP server is framed as a bootstrap spine, TiddlyWiki Filter Language is explicitly bounded as a guest grammar rather than the constitutional runtime, render projection is defined as a layer *after* execution, and Kowloon / tldraw are adapter targets rather than core semantics.    
+The most important migration conclusion is architectural rather than translational: do ''not'' replace `lararium_mcp` with a monolithic TypeScript MCP server. Build `lararium-node` as the Node host/runtime around an isomorphic `lararium-mesh`, then keep MCP as an adapter package. That matches your stated constraints better, isolates the MCP SDK’s version churn, and cleanly supports both file-backed server mode and single-bundle browser mode without letting Node/browser APIs leak into core. The repository’s own design docs already point in that direction: the current MCP server is framed as a bootstrap spine, TiddlyWiki Filter Language is explicitly bounded as a guest grammar rather than the constitutional runtime, render projection is defined as a layer //after// execution, and Kowloon / tldraw are adapter targets rather than core semantics.    
 
 There is also an important repo-state nuance: the Python package on the branch you highlighted already contains a more mature graph/compiler direction than a simple “resolver port.” It adds `pranala_parser.py`, `meme_graph.py`, revised `compiler.py`, and dedicated tests for parser/graph invariants. That means the real parity target is ''not only'' the default-branch stdio server; it is the union of the user-visible MCP surface plus the branch’s newer graph-parsing semantics. If you migrate only what is on the current default branch, you will institutionalize stale compiler behavior and immediately create design debt.      
 
@@ -876,7 +876,7 @@ they must not silently override hostless invariant memes.
 
 !! External architecture findings
 
-TiddlyWiki5 is highly relevant as architectural precedent, but the repo’s existing boundary document is correct: it should inspire core Lararium design without becoming the runtime substrate. TiddlyWiki’s boot kernel is deliberately tiny and sufficient only to load plugins/modules and start the rest of the application; it treats tiddlers as the universal content unit, can load from the browser DOM or the Node file system, packages plugins as bundles of tiddlers, implements JavaScript modules *as* tiddlers, and distinguishes parsing from widget/render stages. Official docs also show that Node mode stores tiddlers as individual files while single-file mode embeds them inside the HTML document. 
+TiddlyWiki5 is highly relevant as architectural precedent, but the repo’s existing boundary document is correct: it should inspire core Lararium design without becoming the runtime substrate. TiddlyWiki’s boot kernel is deliberately tiny and sufficient only to load plugins/modules and start the rest of the application; it treats tiddlers as the universal content unit, can load from the browser DOM or the Node file system, packages plugins as bundles of tiddlers, implements JavaScript modules //as// tiddlers, and distinguishes parsing from widget/render stages. Official docs also show that Node mode stores tiddlers as individual files while single-file mode embeds them inside the HTML document. 
 
 That translates into the following Lararium posture:
 
@@ -892,11 +892,11 @@ That translates into the following Lararium posture:
 | `parse tree -> widget tree -> DOM` pipeline | ''Copy structurally, avoid literally'' | The right Lararium analogue is `source -> AST -> execution graph -> projection`, not widget runtime reuse.    |
 | Full TiddlyWiki runtime as app center | ''Avoid'' | Your own repo docs explicitly reject this for v1.  |
 
-For MCP, the official picture is in flux. The public SDK docs still present the stable Node/TypeScript server experience around `@modelcontextprotocol/sdk`, `McpServer`, `StdioServerTransport`, resources/tools/prompts, and Streamable HTTP. The official repository, however, says its `main` branch is a v2 line that is still pre-alpha and that v1.x remains the production recommendation while the v2 branch settles. The MCP transport spec itself is clear on a few things that matter operationally: stdio is newline-delimited JSON-RPC with strict stdout purity; Streamable HTTP replaces the old HTTP+SSE transport; HTTP servers should validate `Origin`, bind locally when appropriate, and implement authentication when exposed remotely; and authorization is optional, HTTP-focused, and explicitly *not* intended for stdio, where environment-based credentials are the preferred model. 
+For MCP, the official picture is in flux. The public SDK docs still present the stable Node/TypeScript server experience around `@modelcontextprotocol/sdk`, `McpServer`, `StdioServerTransport`, resources/tools/prompts, and Streamable HTTP. The official repository, however, says its `main` branch is a v2 line that is still pre-alpha and that v1.x remains the production recommendation while the v2 branch settles. The MCP transport spec itself is clear on a few things that matter operationally: stdio is newline-delimited JSON-RPC with strict stdout purity; Streamable HTTP replaces the old HTTP+SSE transport; HTTP servers should validate `Origin`, bind locally when appropriate, and implement authentication when exposed remotely; and authorization is optional, HTTP-focused, and explicitly //not// intended for stdio, where environment-based credentials are the preferred model. 
 
 That yields a cautious SDK recommendation. If `lararium-node` is being built for near-term production parity, use the stable production SDK generation and isolate it in `packages/lararium-mcp`. Do ''not'' let the SDK’s package structure dictate core or Node runtime APIs. If you later choose the monorepo/v2 package split, the adapter package can be upgraded locally without forcing changes into parser/compiler code. 
 
-For tldraw, the official docs point to a record-centric and schema-centric data model that fits Lararium projection quite well. The store is a reactive database of typed records; snapshots divide cleanly into `document` and `session` parts; migrations are first-class and can occur at record or store scope; record scopes are explicitly `document`, `session`, and `presence`; and sync uses `@tldraw/sync` / `TLSocketRoom` with one authoritative room per shared document. The important design lesson is that Lararium should define an internal record model that can *project into* tldraw shapes/bindings without making tldraw’s own record taxonomy the canonical Lararium ontology. 
+For tldraw, the official docs point to a record-centric and schema-centric data model that fits Lararium projection quite well. The store is a reactive database of typed records; snapshots divide cleanly into `document` and `session` parts; migrations are first-class and can occur at record or store scope; record scopes are explicitly `document`, `session`, and `presence`; and sync uses `@tldraw/sync` / `TLSocketRoom` with one authoritative room per shared document. The important design lesson is that Lararium should define an internal record model that can //project into// tldraw shapes/bindings without making tldraw’s own record taxonomy the canonical Lararium ontology. 
 
 Kowloon is more verifiable than it first appears. The Synthetic-Dream-Machine repo and its integration matrix describe `kowloon/` as the backend/feed/activity/social substrate, `kowloon-client/` as an isomorphic client bridge, and `kowloon-frontend/` as the operator UI/reference surface. The actual `kowloon` repo `package.json` confirms a Node/Express-style backend with routes, methods, workers, schema imports, ActivityParser modules, storage SDKs, JWT/auth tooling, and Jest tests; `kowloon-client` explicitly describes itself as an isomorphic JavaScript client for Node/browser/React Native; and `kowloon-frontend` depends on `@kowloon/client` and a Vite/React front-end stack. So for Lararium purposes, Kowloon is not a scene graph target and not a core runtime; it is a backend/event/feed publication lane with client and frontend companion packages.    
 
@@ -1793,7 +1793,7 @@ After the Phase 2 session documented above, a further grammar extension session 
 
 * `kau` — variable binding; `<<~! kau name = val >>` = carrier-scoped (hoisted pragma); `<<~ kau name = val >>...<<~/kau >>` = block-scoped; `!` carries scope elevation promise
 * `kumu` — element type definition (`\widget` equivalent); declares a new grammar node type (distinct from `wehe` which is text/content template)
-* `papalohe` — reaction family edge sugar; *pāpālohe* (Lua martial arts: body-listening reflex, heightened reflexive awareness); UEFN device graph event wire; `trigger` property carries event name
+* `papalohe` — reaction family edge sugar; //pāpālohe// (Lua martial arts: body-listening reflex, heightened reflexive awareness); UEFN device graph event wire; `trigger` property carries event name
 * `kapu` block form — added `open_pattern`/`close_pattern` alongside existing inline `pattern`
 
 ''New English aliases registered:''
@@ -1929,7 +1929,7 @@ A lararium node is (or connects to) a full Kowloon server. The canvas is a Kowlo
 Kowloon architecture grounding:
 * Objects: Posts, Replies, Reacts, Circles, Groups — each with global ID `type:<id>@domain`
 * Addressing: `to: @public | @<domain> | circle:<id> | group:<id> | <userId>`
-* ''The inversion:'' Circles are *your* data structure, not the platform's. You follow someone *into a circle you own*. Author gates with `to: circle:<id>`; reader assembles their graph. Neither side sees the other's structure.
+* ''The inversion:'' Circles are //your// data structure, not the platform's. You follow someone //into a circle you own//. Author gates with `to: circle:<id>`; reader assembles their graph. Neither side sees the other's structure.
 * Federation: hybrid push (direct actions) + pull (discovery). Replication boundary = Group/Circle membership.
 * FeedItems coarse-sanitizes visibility (no circle IDs leaked); FeedFanOut is the authoritative grant table.
 
@@ -2237,7 +2237,7 @@ TW5 enters bundle unconditionally (1.95MB / 586KB gzip). Dynamic `import()` spli
 
 `ReactionGraph.fire()` MUST be async-first from the start. Not retrofitted later.
 
-''Why:'' TW5's multiplayer history and IPFS's content-addressed model both demonstrate that getting the causal model wrong at the base level is expensive to fix. UEFN avoids this via *causal islands*: each device runs in an isolated async boundary; events cross island boundaries only via declared ports (device graph edges — our `papalohe`). No shared mutable state across islands.
+''Why:'' TW5's multiplayer history and IPFS's content-addressed model both demonstrate that getting the causal model wrong at the base level is expensive to fix. UEFN avoids this via //causal islands//: each device runs in an isolated async boundary; events cross island boundaries only via declared ports (device graph edges — our `papalohe`). No shared mutable state across islands.
 
 ```
   causal island A          causal island B
@@ -2264,7 +2264,7 @@ The `ReactionGraph` IS the causal island manager. `fire(fromUri, trigger, payloa
 
 The FFZ Chronometer fragment (`#O0.O3.D2.A7`) encodes `{ scale: Ladder5, phase: OodaHa5, counter: number }`. In the async model, each `fire()` call carries an implicit causal timestamp derived from the Chronometer — not a wall-clock time, but a logical position in the OODA-HA loop.
 
-This is the *why* behind decoupling Chronometer from grammar invariants: `LADDER_5` and `OODA_HA_5` are static arrays in `ast.ts`; the Chronometer generates a *live causal cursor* at runtime. They share vocabulary but live in different layers.
+This is the //why// behind decoupling Chronometer from grammar invariants: `LADDER_5` and `OODA_HA_5` are static arrays in `ast.ts`; the Chronometer generates a //live causal cursor// at runtime. They share vocabulary but live in different layers.
 
 ''Causal ordering law:'' an event fired at `(scale: "Pulse", phase: "act")` [L0 / game alias: "action"] cannot causally precede an event in the same island at `(scale: "Beat", phase: "decide")` [L1 / game alias: "round"]. The Chronometer encodes this ordering as a sortable fragment, not as a wall clock. CRDT CRDTs maintain causal ordering structurally; the Chronometer makes it readable.
 
@@ -2286,7 +2286,7 @@ carrier text → MemeAstNode[] (parseMemeCarrier)
              → tldraw shapes / rendered output
 ```
 
-The *missing middle layer* is the widget tree. `parseMemeCarrier` produces `MemeAstNode[]` — a generic parse tree. The widget tree re-types each parse node into a `kumu`-typed node that knows its renderer. This is Phase 3 self-hosting:
+The //missing middle layer// is the widget tree. `parseMemeCarrier` produces `MemeAstNode[]` — a generic parse tree. The widget tree re-types each parse node into a `kumu`-typed node that knows its renderer. This is Phase 3 self-hosting:
 
 * `<<~! kumu myCard(title body) >> ... <<~/kumu >>` defines a new node type
 * `<<~ kahea myCard(title:Welcome) >>` (name form) emits a `SigilNode { sigilName:"kahea", attrs:{name:"myCard", args:"title:Welcome"} }`
@@ -2719,8 +2719,8 @@ Four OODA loops in sequence, each with a build gate:
 | `open-browser-lar-peer.ts` | `CORPUS_PREFIX` → `"lar:///ha.ka.ba/bags/@catalog/@"`; drop exclusion list; import social URI constants + empty constructors; social boot block |
 | `open-node-lar-peer.ts` | Switch corpus discovery to `catalog.tiddlers` oracle (was `catalog.corpora`); same `CORPUS_PREFIX` fix; social boot block; `seedDefaultRecipes` call |
 | `lararium-island.ts` | Import social types + `recipeUri`; `reconcileWellKnownTiddlers` extended to 6 args; `seedIdentitiesDoc`/`seedCirclesDoc`/`seedSessionsDoc`; `seedDefaultRecipes` |
-| `social-doc.ts` *(new)* | `IdentitiesDoc`, `CirclesDoc`, `SessionsDoc` + empty constructors; barrel-exported from `index.ts` |
-| `recipe.ts` *(new)* | `RecipeTiddler` interface + `recipeUri(root, name)` helper; barrel-exported from `index.ts` |
+| `social-doc.ts` //(new)// | `IdentitiesDoc`, `CirclesDoc`, `SessionsDoc` + empty constructors; barrel-exported from `index.ts` |
+| `recipe.ts` //(new)// | `RecipeTiddler` interface + `recipeUri(root, name)` helper; barrel-exported from `index.ts` |
 | `composite-store.test.ts` | Updated to M21 bag ID law: `BAG_IDS.lararium` replaces `system`, `roomLarUri("test-room")` replaces `BAG_IDS.room`, corpus expectations assert full lar: URI |
 
 ⤴ ''Ho'oko:''

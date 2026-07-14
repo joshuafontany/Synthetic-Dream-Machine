@@ -36,7 +36,7 @@ all to see*. This meme answers ''who governs it, at what scale, and how it stays
 ''guards.''
 
 **One `@oracle`, two faces — never a second board.** This governance board reads as the
-''read face'' over the *same* `@oracle` substrate the registry/recipe plane already holds.
+''read face'' over the //same// `@oracle` substrate the registry/recipe plane already holds.
 The ''content/registry face'' mints the recipe + engine-blob CIDs + protocol invariants
 (<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology#oracle-planes >>); the
 governed ''read face'' named here projects that content for public verify-only sight. The
@@ -57,7 +57,7 @@ board for all of DreamNet. The grounds run ''OWNERSHIP and SCALE'', never no-glo
 * ''Scale'' — a planet-wide board concentrates write-pressure and read-fan into one
   bottleneck; per-nexus boards keep the lattice flat.
 
-''Correct the no-global-now framing (MUST).'' A *global* `@oracle` does NOT violate
+''Correct the no-global-now framing (MUST).'' A //global// `@oracle` does NOT violate
 no-global-now. A shared `docId` names a ''rendezvous'' — an address, not a shared present.
 Each peer that dials it ''materializes its own converging causal island'' over that
 address; the address coordinates, the state stays local-first. *That IS no-global-now
@@ -85,9 +85,9 @@ converging causal state behind it.*
         └─► ... users run their OWN topic boards off the same root
 ```
 
-The root names *where to begin*; each topic island converges on its own. A reader walks
+The root names //where to begin//; each topic island converges on its own. A reader walks
 the reachability fan from the root and materializes only the topics it cares to read —
-no peer holds the whole board *at once*, and none needs to.
+no peer holds the whole board //at once//, and none needs to.
 
 **Coheres with the established `@oracle` (no new invention).** The corpus already names
 `@oracle` the ''public crossroads bulletin board'' — a host-independent-docId CRDT the
@@ -97,7 +97,7 @@ pointer/recipe plane
 <<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>). This meme adds the
 ''governance face'' over that existing board — who signs its public-read projection, at
 what scale — never a second `@oracle`. The forkability the genesis doc already grants
-IS the *liveness* coupling below.
+IS the //liveness// coupling below.
 
 <<~/ahu >>
 
@@ -123,7 +123,7 @@ authority at all
 ''projection AND run their own topic boards'' off the well-known root — the board hands out
 sight, never a write-throne.
 
-<<~ confidence Synthesis 13/20 >> moving the cap-tier from the *doc* to the *signing
+<<~ confidence Synthesis 13/20 >> moving the cap-tier from the //doc// to the *signing
 quorum* keeps FLOW ⊥ WHO at the governance layer the same way the relay floor keeps it at
 the carriage layer: the public can carry and read the projection without holding any
 authority over it.
@@ -139,16 +139,16 @@ another:
 
 * ''① Origin.'' The root `docId` seeds from the ''founding @daemon'' — a content-bound
   birth, not a deed. ''Origin ≠ ownership'': the founder names the address; it does not
-  thereby command the board forever. *The founder seeds.*
+  thereby command the board forever. //The founder seeds.//
 * ''② Governance.'' The ''keeper-cabal-quorum signs'' the steward source — a threshold
   subject composed as a closure over the keepers' independent signatures
   (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>). No one keeper, and no
-  one stolen key, moves the board. *The circle governs.*
+  one stolen key, moves the board. //The circle governs.//
 * ''③ Liveness.'' The board rides ''content-addressed'' snapshots; the trust edge resolves
-  by ''petname / TOFU introduction'' (home-nexus *listed*, never *required*). And the
+  by ''petname / TOFU introduction'' (home-nexus //listed//, never //required//). And the
   whole board stays ''forkable'' — the fork that guards: a capture, a charter the readers
   reject, a dead steward set, and the readers carry the content-addressed board onto a new
-  steward source without permission. *The fork guards.*
+  steward source without permission. //The fork guards.//
 
 <<~ confidence Synthesis 12/20 >> the forkable backstop carries the deepest guarantee:
 governance never needs to be perfect because exit stays cheap — content-addressing makes

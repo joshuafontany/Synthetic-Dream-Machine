@@ -93,7 +93,7 @@ The `<<` `>>` pair forms the outer delimiter family for every active sigil. The 
 | `<<~/` | block close | `<<~/ahu >>` |
 | `<<~!` | pragma (definition) | `<<~! wehe name(p) >>` |
 | `<<~?` | unresolved-pressure | `<<~? #fragment >>` |
-| `<<` *(bare)* | inherited TW5 macro call (superset) | `<<macroName params>>` |
+| `<<` //(bare)// | inherited TW5 macro call (superset) | `<<macroName params>>` |
 
 Memetic-wikitext SHALL read as a ''superset of TW5 wikitext'': every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 
@@ -210,17 +210,17 @@ A pranala edge MUST declare a ''family'' from the canonical set. Families carry 
 
 | family | sugar | surface | carries |
 |---|---|---|---|
-| `control` | *(explicit `pranala`)* | graph | structural authority (`role:has`; composition only) |
+| `control` | //(explicit `pranala`)// | graph | structural authority (`role:has`; composition only) |
 | `constraint` | `pono` | graph | a rule that MUST hold; no execution pulse |
 | `relation` | `loulou` | page | a navigable link, no auto-embed |
-| `observe` | *(monitoring)* | page | inspection / measurement / attention; confidence-bounded |
+| `observe` | //(monitoring)// | page | inspection / measurement / attention; confidence-bounded |
 | **`transclusion`** | `aka`, `kahea` | ''page'' | a ''content identity'' embedded into the source — `aka` frozen, `kahea` live (subscription-fresh); confidence-bounded |
-| `dataflow` | *(value-wire)* | canvas | a typed ''value'' between node pins (reads/writes/streams) |
+| `dataflow` | //(value-wire)// | canvas | a typed ''value'' between node pins (reads/writes/streams) |
 | `reaction` | `papalohe` | canvas | an event wire — fires when the source event activates |
 | `message` | `lele` | canvas | fire-and-forget async dispatch |
-| `spatial` | *(pending)* | canvas | containment / portal / adjacency / layer |
+| `spatial` | //(pending)// | canvas | containment / portal / adjacency / layer |
 
-''Transclusion ≠ dataflow.'' A `transclusion` edge carries a *content identity* (render-time, page surface); a `dataflow` edge carries a *computed value* (graph-execution order, canvas surface). A processor MUST route content identities through transclusion edges and computed values through dataflow wires. *(The `transclusion` family surfaces under its English name; its pono Hawaiian name stays held.)*
+''Transclusion ≠ dataflow.'' A `transclusion` edge carries a //content identity// (render-time, page surface); a `dataflow` edge carries a //computed value// (graph-execution order, canvas surface). A processor MUST route content identities through transclusion edges and computed values through dataflow wires. //(The `transclusion` family surfaces under its English name; its pono Hawaiian name stays held.)//
 
 <<~/ahu >>
 
@@ -238,7 +238,7 @@ State carries one of five principled scopes. A `kau` binding and a `kapu` qualif
 | `collective` | shared by group identity | group governance |
 | `universal` | no gate | no one — federated |
 
-Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope> >>` block renders only when the active scope reads at that level or wider. Context binds ''lexically'' through the `meme` sigil — a template MUST take its context through `meme` alone. *(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)*
+Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope> >>` block renders only when the active scope reads at that level or wider. Context binds ''lexically'' through the `meme` sigil — a template MUST take its context through `meme` alone. //(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)//
 
 <<~/ahu >>
 

@@ -26,7 +26,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/ffz-clock"
 ! FfzClock ~ the rhythmic grain of the whole house (Fuller-Fontany-Zelenka Chronometer)
 
 `ffz-clock.ts` owns one surface: a ''5-level bounded hierarchical RHYTHMIC clock'' —
-where a node sits *within its cycles*, never who-acted-before-whom. `FfzClock {
+where a node sits //within its cycles//, never who-acted-before-whom. `FfzClock {
 levels, bounds, actorId }` carries `ffzTick` · `ffzCompare` · `ffzMerge` · `ffzZero`
 and the named `FFZ_PROFILES` (per-domain bound tuples).
 
@@ -41,7 +41,7 @@ sub-perceptual (an operator-meaningful event at L0 erodes the L1 anchor → leve
 it up). The five bands read as nested MEMBERSHIP — a containment path, never a count
 (#the-spine, the keystone the whole clock rests on).
 
-''The clock holds no decaying scalar.'' It names rhythmic POSITION — *where* a drawer
+''The clock holds no decaying scalar.'' It names rhythmic POSITION — //where// a drawer
 sits in the cadence — never freshness, never age, never an "as of last sync." The
 ''manaoio'' freshness/decay register serves the MEMES (the wiki / the on-disk bags, which
 ripen and stale); it NEVER welds onto this chat-session clock. Position carries no decay:
@@ -54,7 +54,7 @@ a coordinate stays exactly as fresh whenever it gets read, because it counts not
 !! The spine ~ a membership TREE, never a tick-count (the keystone, 2026-06-30)
 
 **A grain names NESTED MEMBERSHIP — a containment PATH, never a count.** `Theme ⊃ Arc ⊃ Measure
-⊃ Beat ⊃ Pulse`: each band declares *which* container a moment sits inside, never *how many*
+⊃ Beat ⊃ Pulse`: each band declares //which// container a moment sits inside, never //how many//
 ticks have elapsed. <<~ confidence Synthesis-Canon 16/20 >> The moment a band hardens into a
 count that scales palace-wide, it manufactures a global now — the un-pono failure
 ([[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]]). The retired wall-clock
@@ -89,7 +89,7 @@ content-community, where a shared clock never could. <<~ confidence Synthesis-Ca
 !!! Glossary ~ island ≡ Arc, never a vessel
 
 ''island ≡ Arc'' — a ''session-island within ONE local store'' (the `source_file`, given
-free), never a vessel. ''Theme'' spans these session-islands *within a store* by CONTENT
+free), never a vessel. ''Theme'' spans these session-islands //within a store// by CONTENT
 (incremental, local community-detection — a fresh node joins with no global recompute);
 crossing a ''VESSEL'' never rides the rhythm — it happens at operator ask / cost, the
 @daemon→@daemon wiki-bag-CRDT handshake (the clock-domain-crossing rhymes the cell-membrane
@@ -116,10 +116,10 @@ the spine refuses — <<~ confidence Synthesis-Canon 15/20 >> ''never let a band
 ''whose count is the signal.'' A Hox band cannot be truncated or read locally: lop the prefix and
 the colinear meaning shatters, because the position WAS the content.
 
-''The seal ~ each band LABELS a cell, never tallies a count.'' A band answers *which* — which
-turn · which topic · which session · which thread — never *how many*. Even the lowest band's
-local ordinal (the Segment, the Beat) reads as a cell-''LABEL'' (*which-turn*), never as a
-count or a sequence (*how-many*): the address names the cell it sits in, and the ordinal
+''The seal ~ each band LABELS a cell, never tallies a count.'' A band answers //which// — which
+turn · which topic · which session · which thread — never //how many//. Even the lowest band's
+local ordinal (the Segment, the Beat) reads as a cell-''LABEL'' (//which-turn//), never as a
+count or a sequence (//how-many//): the address names the cell it sits in, and the ordinal
 SEQUENCE — what-came-before-what — belongs on the ''edge-DAG'', NEVER in the address
 ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]). This is why the
 address truncates cleanly (a label drops, the rest still reads) where a Hox sequence cannot. The
@@ -144,7 +144,7 @@ sharpens the boundary rather than weakening it.
 
 !! Rhythm, not causality ~ the two-domain boundary (the operator's cut, 2026-06-25)
 
-''FfzClock measures rhythmic POSITION — *where* a moment sits in the cadence — never''
+''FfzClock measures rhythmic POSITION — //where// a moment sits in the cadence — never''
 ''causal order as a CRDT verdict, and never a decay/freshness scalar (the manaoio register''
 ''serves the MEMES, never this clock).'' The boundary follows the actor-boundary; it splits
 clean in two:
@@ -152,9 +152,9 @@ clean in two:
 <<~ranks domain inside-automerge ~ docs · wiki-CRDTs: ''Automerge logical time'' owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, lar:///ha.ka.ba/lares/api/pono/causal-islands) -> everywhere-else ~ all non-Automerge domains where its rhythmic position applies: the ''agent-worldline cadence'' (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see lar:///ha.ka.ba/lararium/api/agent-worldline#time; FfzClock paces the worldline's grain only) · ''external streams'' pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · ''capability-leases'' (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
 
 ''The retired over-claim stays retired.'' Earlier chronometer research read FfzClock's
-epoch-dominance as *"universal causal ordering across all instances."* That reading
+epoch-dominance as //"universal causal ordering across all instances."// That reading
 retires: <<~ confidence Synthesis-Canon 16/20 >> `ffzMerge`'s LWW total-order serves
-*rhythmic alignment* across instances — useful, coordinator-free — but it is ''not'' a
+//rhythmic alignment// across instances — useful, coordinator-free — but it is ''not'' a
 happened-before partial order and never rules a causal question. Causal order rides
 Automerge (inside its docs) or the reified edge-DAG (on a worldline); FfzClock rides
 the grain.
@@ -185,8 +185,8 @@ not couple. A worldline ''handback'' reads as a directed ''one-shot DAG-JOIN'' �
 merge, the twin-reunion (lar:///ha.ka.ba/lararium/api/agent-worldline#attribution) — NEVER oscillator
 coupling. One join, one direction, once.
 
-''The rhizome generalizes the join'' (2026-06-29). Handback is not the *only* DAG-join — a mid-flight
-''injection'' (`prov:Communication`, operator or parent reaching a running spirit) is *also* a directed
+''The rhizome generalizes the join'' (2026-06-29). Handback is not the //only// DAG-join — a mid-flight
+''injection'' (`prov:Communication`, operator or parent reaching a running spirit) is //also// a directed
 one-shot join, landing ''where the message lands'' (the vector-clock law), not only at reunion. Each join
 stays one-shot-directed (φ non-interference holds per-edge); there are simply ''many'' join-points, not
 one. Mechanism: the worldline rides the ''edge-DAG stamped into the mempalace'' (the chat-session store —
@@ -209,7 +209,7 @@ Dewey, a trie, the p-adic metric) breaks, because each hides a global positional
 fixed radix couples the bands through shared factors. φ refuses the coupling, so the spine stays
 a TREE and never a number-line. <<~ confidence Canon 18/20 >> Every surveyed domain confirms the
 load-bearing claim: ''an independent feature per band'' (the scale-orthogonality the bands need).
-But the SECOND claim — that the golden ratio SPECIFICALLY (φ, not merely *some* mutually-
+But the SECOND claim — that the golden ratio SPECIFICALLY (φ, not merely //some// mutually-
 incommensurate spacing) tunes the bands — rests on a single contested neuroscience line.
 <<~ confidence Provisional 4/20 >> Hold the golden-ratio-specifically reading as provisional; the
 non-interference law needs only the independent-feature-per-band claim, which stands at Canon.
@@ -253,7 +253,7 @@ All profiles leave L4 = ∞ (operator-declared epoch). The register names
 (Pulse/Beat/Measure/Arc/Theme) apply uniformly; only the bounds differ.
 
 ''The bounds name per-island RATCHET depths, not membership grains.'' A profile's numbers set how
-far a *local* count laps before carry (the per-island ratchet the keystone permits, #the-spine) —
+far a //local// count laps before carry (the per-island ratchet the keystone permits, #the-spine) —
 never a shared palace-wide counter. Where an older tuple labels `Measure = session` or `Arc = day`,
 read the SEMANTIC grain from the membership schema (#the-spine, which re-levels session → Arc and
 retires the day band) and the number as the local lap-count. The two never collide: the count stays
@@ -280,7 +280,7 @@ above the session clock. Canonical grain reference:
 ''boundary'' — the agent-work analogue of somitogenesis (the wavefront freezes a free-running
 oscillator's phase into a permanent ordered address; the clock runs on and stores nothing,
 the boundary samples it). It stamps onto LOCAL work-memory drawers (never the mesh —
-lar:///ha.ka.ba/lararium/api/agent-worldline#time), and answers *"where in the felt cadence did this sit?"* — a query
+lar:///ha.ka.ba/lararium/api/agent-worldline#time), and answers //"where in the felt cadence did this sit?"// — a query
 `filed_at` (wall-clock) cannot.
 
 !!! The address ~ a prefix-truncatable materialized PATH (the membership tree)
@@ -298,12 +298,12 @@ lattice meet, #the-spine) — a membership tree, never a count.
 
 ''The tick fires at the SEGMENT, the block is an OFFSET.'' <<~ confidence Synthesis-Canon 16/20 >>
 Every dominant agent-observability standard (OTel GenAI, Langfuse, LangSmith, Phoenix) draws
-the same line: the finest *durably-recorded, independently-addressable* unit is the ''span =''
+the same line: the finest //durably-recorded, independently-addressable// unit is the ''span =''
 ''one LLM call / one tool call = one generation segment'' (`stop_reason` boundary). Content-blocks
 exist durably (`message.content[]`) but model as ''intra-span structure addressed by offset'',
 never their own node — "one choice cannot split across messages; parts nest inside." And the
 rhythm clinches it: blocks in one inference ''share a single emission instant'' — a finer
-*address*, no finer *beat*. So tick L0 on the segment; carry the block as a sub-Pulse offset.
+//address//, no finer //beat//. So tick L0 on the segment; carry the block as a sub-Pulse offset.
 This delivers "address the specific block" (operator's need, validated — 100+ turn worldlines
 reach thousands of segments) WITHOUT the cardinality of block-grain ticks. Tatum/tactus made
 literal: ''store at the block, navigate at the segment.''
@@ -313,13 +313,13 @@ literal: ''store at the block, navigate at the segment.''
 ''The clock ticks on the HARNESS transcript's deterministic events — never on the rendered''
 ''grammar.'' L0 reads each generation segment (`stop_reason`); L1 reads the operator's grounding
 turn (the recorded next user-message). The HUD / `lares yield` is a ''render'' of the clock, a
-*map*, not its *source*; it degrades, partial-renders, drifts — and loses no tick, because the
-*territory* (the transcript) persists. ''Lose the HUD, keep the clock.'' (L-Prime's map/territory,
+//map//, not its //source//; it degrades, partial-renders, drifts — and loses no tick, because the
+//territory// (the transcript) persists. ''Lose the HUD, keep the clock.'' (L-Prime's map/territory,
 applied to time.)
 
 !!! Recall by contiguity
 
-Stamped, `lar_ffz` is a *retrieval cue*, not just a label (Temporal Context Model): recall by
+Stamped, `lar_ffz` is a //retrieval cue//, not just a label (Temporal Context Model): recall by
 ''reinstating the position'' — "what else sat near here in the felt cadence" — surfaces neighbors
 (the contiguity effect), a query wall-clock can't answer.
 
@@ -361,10 +361,10 @@ The DreamNet mesh keeps time on three instruments, never one:
   `headsEqual`; the `drifted` frontier stands as a fork). The proximal/internal order.
 * ''The epoch-counter'' — the LEASE / liveness ratchet: a per-resource ''max-register''
   (merge = max, coordinator-free) a grant names a `boundEpoch` against; the grant goes
-  stale when the counter rolls past it (*re-mint or expire*). Safe coordinator-free
-  *because* it only ratchets the whole resource forward, never singles out a principal.
+  stale when the counter rolls past it (//re-mint or expire//). Safe coordinator-free
+  //because// it only ratchets the whole resource forward, never singles out a principal.
 * ''FfzClock'' — the rhythmic POSITION grain: the cadence the epoch-lease rolls on,
-  naming *where in the rhythm* a reading sits. It carries no decay and no "as of last
+  naming //where in the rhythm// a reading sits. It carries no decay and no "as of last
   sync" of its own (that freshness register — manaoio — rides the memes, never this clock).
 
 A lease rides the ''epoch-counter'' for its value, ''FfzClock'' for its cadence; a
@@ -372,7 +372,7 @@ wall-clock `exp` stays a replay backstop only. ''Revocation is NOT a clock'': tw
 ride beside the instruments — ''non-renewal'' (the epoch-lease expires un-refreshed) and
 ''targeted'' (Keyhive convergent membership-removal, `revoke()` — a tombstone in the
 membership graph, never an epoch). <<~ confidence Synthesis-Canon 15/20 >> A device
-re-minting concurrently with a roll rides the max-register *up* and survives, so
+re-minting concurrently with a roll rides the max-register //up// and survives, so
 targeted revocation MUST ride Keyhive's convergent removal, never the counter
 (Kleppmann · p2panda · Keyhive converge; adversarial research 2026-06-24).
 

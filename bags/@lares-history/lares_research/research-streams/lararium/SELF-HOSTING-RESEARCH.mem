@@ -30,7 +30,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 !! TW5 — Shadow Tiddler Read-Through
 
-''Mechanism:'' Core modules (`$:/core/modules/parser`, `$:/core/ui/ViewTemplate`, etc.) live as *shadow tiddlers* — read-only system objects embedded as JSON in the boot HTML. User tiddlers with the same name overlay the shadow; the shadow provides the safe canonical fallback. Shadow tiddlers always exist even if user data is corrupted.
+''Mechanism:'' Core modules (`$:/core/modules/parser`, `$:/core/ui/ViewTemplate`, etc.) live as //shadow tiddlers// — read-only system objects embedded as JSON in the boot HTML. User tiddlers with the same name overlay the shadow; the shadow provides the safe canonical fallback. Shadow tiddlers always exist even if user data is corrupted.
 
 ''Bootstrap trick:'' Boot phase 1 uses hard-coded JavaScript (the kernel) to unmarshal shadow tiddlers from embedded JSON. Boot phase 2 uses the shadow parser to parse user tiddlers. The kernel never uses its own parser for its own loading — the parser only becomes active after shadows are resident. Phase 1 and Phase 2 are cleanly separated.
 
@@ -46,7 +46,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 !! Smalltalk / Pharo — Method Dictionary Mutation
 
-''Mechanism:'' Every class carries a *method dictionary* — a hash table from selector symbol to compiled method object. `defun` equivalent = overwriting a method dictionary entry. The method lookup algorithm walks the dictionary chain upward through superclasses. Because method lookup is an algorithm (C kernel), not a table entry, it cannot be overwritten by user code.
+''Mechanism:'' Every class carries a //method dictionary// — a hash table from selector symbol to compiled method object. `defun` equivalent = overwriting a method dictionary entry. The method lookup algorithm walks the dictionary chain upward through superclasses. Because method lookup is an algorithm (C kernel), not a table entry, it cannot be overwritten by user code.
 
 ''Bootstrap trick:'' The cold image contains a minimal pre-compiled binary. Booting from cold = deserializing the image binary, which contains all class/method objects including the compiler. No source files needed — the image IS the source and the compiled form simultaneously.
 

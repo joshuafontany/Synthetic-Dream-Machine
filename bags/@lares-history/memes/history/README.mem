@@ -23,7 +23,7 @@ retain    = false
 ! History — Provenance Records
 
 Development arc records: origin conversations, early drafts, reasoning that produced current design doctrine.
-These memes show *how* the design arrived, not *what* it contains.
+These memes show //how// the design arrived, not //what// it contains.
 Doctrine lives in `bags/` and `packages/`. These records live here.
 
 <<~/ahu >>
@@ -46,7 +46,7 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 !! Pono-Alignment Note (2026-06-20)
 
-The history curation aligned the ''lossless instrument field'' to current pono and ''deliberately preserves'' the period-forms below as testimony — the HUD reads as it read when the carrier was authored. Each carrier's HUD modernizes when it ''lifts into canon'' (as the Lindwyrm arc did), not before; the genesis-arc index carries the same constraint (*don't read current pono back onto the early forms*).
+The history curation aligned the ''lossless instrument field'' to current pono and ''deliberately preserves'' the period-forms below as testimony — the HUD reads as it read when the carrier was authored. Each carrier's HUD modernizes when it ''lifts into canon'' (as the Lindwyrm arc did), not before; the genesis-arc index carries the same constraint (//don't read current pono back onto the early forms//).
 
 Aligned corpus-wide:
 

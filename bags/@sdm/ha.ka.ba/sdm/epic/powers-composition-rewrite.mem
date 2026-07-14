@@ -142,7 +142,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 | Source | Design lesson for this architecture |
 |---|---|
-| ''Ars Magica'' | Technique + Form (5 verbs × 10 nouns) turns a spell list into a composable grammar. A wizard who knows *Creo Ignem* can spontaneously generate any fire-creation effect at lower power — fluency, not memorization. SDM components work the same way: `[ecm-scan]` + `[divination]` names what Read Magic does the way *Intellego Vim* names "I perceive magic." The covenant model grounds power in place and institution — directly maps to Structure mount-points and shrine services. |
+| ''Ars Magica'' | Technique + Form (5 verbs × 10 nouns) turns a spell list into a composable grammar. A wizard who knows //Creo Ignem// can spontaneously generate any fire-creation effect at lower power — fluency, not memorization. SDM components work the same way: `[ecm-scan]` + `[divination]` names what Read Magic does the way //Intellego Vim// names "I perceive magic." The covenant model grounds power in place and institution — directly maps to Structure mount-points and shrine services. |
 | ''Mage: Ascension/Awakening'' | Paradigm determines affordance — the consensus field pushes back against workings it doesn't recognize. Paradox maps directly to SDM's Corruption/Wild Magic Danger Roll: exceed what the local reality permits, and reality notices. Awakening's Practice ladder (Knowing → Unveiling → Ruling → Unraveling → Making) gives a vocabulary for overcharge depth: P:2 reads (Knowing), P:4 pierces veils (Scrutiny), P:8 analyzes structure (Ruling), P:16 forces through hostile defenses (Unraveling, with Paradox as price). |
 | ''Jennell Jaquays'' | Multiple entrances, vertical connections, faction dynamics, loops that reward exploration. Applied to Powers: follow any component tag and discover every module that shares it. Follow a different tag and find a different cross-section. `[dangerous]` cuts vertically through everything like a shaft between dungeon levels. The component graph gives Powers the topology Thracia gave dungeons. |
 | ''ECS / Rust traits'' | Composition over inheritance. Entity = ID + components. Behavior emerges from what an entity currently holds, not from what it inherits. The `has-a` relationship can change at runtime — inventory, not identity. The flat `#has` edge follows this directly. |
@@ -150,7 +150,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 | ''Musical counterpoint'' | Harmony emerges from the interaction of independent voices, not from inside any single voice. Two co-active Powers on the same entity may produce emergent effects neither carries alone. The component model captures melody (internal structure). A counterpoint doctrine would capture harmony (interaction rules for co-active modules). |
 | ''Hawaiian mana-kapu'' | Power flows through maintained relationships, not possessed components. The shrine checks standing, not inventory. Mount-point contracts may need relationship preconditions — "do you honor the compact?" not just "do you have the right tag?" |
 | ''Sera (Silat Serak)'' | Base-angle-lever: structure gates technique. You cannot throw the djuru unless you hold the correct langkah. Posture/stance tags may function as activation prerequisites, not just descriptive labels. The base precedes the technique. |
-| ''Chaos Magick'' | Belief as mutable tool — same pattern, different paradigm, different result. The instance layer may carry the operator's current paradigm relationship to the pattern, not just mutation records. Discordian catma tradition (already in Lares boot) says: a module's component list names what the pattern affords *under the current paradigm*. |
+| ''Chaos Magick'' | Belief as mutable tool — same pattern, different paradigm, different result. The instance layer may carry the operator's current paradigm relationship to the pattern, not just mutation records. Discordian catma tradition (already in Lares boot) says: a module's component list names what the pattern affords //under the current paradigm//. |
 
 <<~/ahu >>
 
@@ -485,7 +485,7 @@ composition once as tags and calls one `<<~ kahea … >>`.
 Every meme's TW5 title is its full `lar:///` URI (= `lar:///` + `uri-path`). A
 component/mount is addressed by ''two tiddlers'':
 * the ''full meme'' (`.md`, in recipe) — lar URI title, `caption`, all content;
-* a ''short tag pointer'' (`.tid`, *virtual* — not stacked unless an operator edits
+* a ''short tag pointer'' (`.tid`, //virtual// — not stacked unless an operator edits
   a membership) titled `@sdm/tags/{facet}/{slug}` (mirrors `$:/tags/…`, reconstructs
   its own lar URI), carrying `caption` + a `meme` field that forwards to the full meme.
 
@@ -575,7 +575,7 @@ modifies the Power), `#interaction` (how it plays with other components),
 ''Caution (Principle 6):'' if any component proves to carry no query value
 during Sprint 1, demote it back to a TOML header tag and delete the meme.
 
-**S0.6 — Write the `<<tag-pill>>` procedure.** *(RESOLVED — see `#decisions-resolved`)*
+**S0.6 — Write the `<<tag-pill>>` procedure.** //(RESOLVED — see `#decisions-resolved`)//
 A TW5 **`\procedure`** (NOT a `\define` macro — macros are superseded since
 TW5 5.3.0 and pass params by brittle textual substitution that breaks on `@`/`/`
 titles). It reads the `caption` field from the target component tiddler via

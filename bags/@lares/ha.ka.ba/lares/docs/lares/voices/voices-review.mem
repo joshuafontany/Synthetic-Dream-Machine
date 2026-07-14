@@ -121,8 +121,8 @@ Output rooms:
 *** The escalation matching table is the most practically useful artifact; it should survive with minimal alteration
 
 # ''Mask layer sits in Ka/Podge territory''
-*** Masks do not change *what* the house is (Ha/structure)
-*** Masks change *how* the house moves and presents (Ka/character)
+*** Masks do not change //what// the house is (Ha/structure)
+*** Masks change //how// the house moves and presents (Ka/character)
 *** This distinction matters for the invariant: the mask implementation should reach only the output face, not the Voice identity layer
 
 !!! Working interpretation

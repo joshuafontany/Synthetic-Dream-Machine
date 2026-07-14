@@ -390,7 +390,7 @@ When editing grammar meme or parser:
 
 !! Source Notes
 
-* Pukui, M.K. & Elbert, S.H. *Hawaiian Dictionary* (revised ed., 1986). Primary Hawaiian lexical authority.
+* Pukui, M.K. & Elbert, S.H. //Hawaiian Dictionary// (revised ed., 1986). Primary Hawaiian lexical authority.
 * CBC Radio / The Current (2019–2021 period): documented Hawaiian-language coding pedagogy using river/water metaphors for flow control. Operator-provided account; CBC article referenced but URL not confirmed.
 * `loulou` named by cultural team in direct exchange; recorded in project grammar as `[C]` origin.
 * TW5 widget/transclusion model: TiddlyWiki5 documentation (tiddlywiki.com). Underlying transclusion and widget grammar serves as ~19 confidence core model for parity mapping. TW5 `$list` widget supplies the nearest analog for `huli`: it displays tiddlers matching a filter, renders each result through body content or a template, and supports binding the current listed title to a variable. Counter variable support exists in `$list` but falls outside the current `huli` approval scope.

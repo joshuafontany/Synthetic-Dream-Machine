@@ -54,13 +54,13 @@ Named render targets: `record:full` (identity projection of the canonical form),
 We carry a palimpsest lineage through this HA.KA.BA reinterpretation.
 
 * SDM (Luka Rejec) feeds the ''hakaba matrix'' --- the existential trinity ''Ha'' (body), ''Ka'' (soul), ''Ba'' (psyche); the lar-uri inherits it directly (body → heading, soul → angle, psyche → dynamic).
-* Hawaiian *hā* lends threshold-breath resonance to `ha`.
+* Hawaiian //hā// lends threshold-breath resonance to `ha`.
 * Egyptian soul grammar frames `ka`/`ba` as 'standing double' and 'returning bird'.
 * Flight dynamics lends the orientation triad (yaw · pitch · roll) and keeps the reading on attitude, never mapped position.
 * what3words lends mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
 * hoʻokele steers doctrine: hold bearing, infer position.
 
-Source bind (on the `sdm/` shelf): Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" --- *"the existential trinity of body (ha), soul (ka), and psyche (ba)"*, adapted from the Egyptian *Coffin Texts* / *Book of the Dead*; indexed in *UVG 2e* pp. 230–234. Files: `sdm/Vastlands_Guidebook/`, `sdm/Ultraviolet_Grasslands_and_the_Black_City_2e/`. Hawaiian *hā* layers as palimpsest resonance.
+Source bind (on the `sdm/` shelf): Luka Rejec, //Vastlands Guidebook// §"Death and Hakaba" --- //"the existential trinity of body (ha), soul (ka), and psyche (ba)"//, adapted from the Egyptian //Coffin Texts// / //Book of the Dead//; indexed in //UVG 2e// pp. 230–234. Files: `sdm/Vastlands_Guidebook/`, `sdm/Ultraviolet_Grasslands_and_the_Black_City_2e/`. Hawaiian //hā// layers as palimpsest resonance.
 
 Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
 
@@ -103,7 +103,7 @@ Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward * L-Prime >>
 
 ''Step 5 — Generate, then close.'' OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 
-> ''SA grounding:'' the `aim` is prospective AI transparency — what the node *will* do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). *Source: `_todo/E-deep-research-report.md` §§2.1, 3.2*
+> ''SA grounding:'' the `aim` is prospective AI transparency — what the node //will// do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). //Source: `_todo/E-deep-research-report.md` §§2.1, 3.2//
 
 <<~/ahu >>
 
@@ -173,7 +173,7 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the
 | 5 | ''path'' | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/lares/` | `/threshold.uncertain.opens` |
 | 6 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
 
-> **Layout validation `Canon 18/20`:** The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
+> **Layout validation `Canon 18/20`:** The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. //Source: `_todo/E-deep-research-report.md` §4.2//
 
 <<~/ahu >>
 
@@ -181,7 +181,7 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the
 
 !!! 3.3.1 Identity Addressing
 
-Identity addressing lives at `lar:///ha.ka.ba/lares/docs/pono/identity-stack` — the DID / handle / lar: alias stack, the ActivityPub handle form, and the DreamDeck `chat-log:post-header` render target. That reference names *who speaks* and projects identity onto the social layer; this scheme names the bearing. The scheme's own render targets (`record:full`, `hud:exchange-pair`) ride here, in §1 Design Intent.
+Identity addressing lives at `lar:///ha.ka.ba/lares/docs/pono/identity-stack` — the DID / handle / lar: alias stack, the ActivityPub handle form, and the DreamDeck `chat-log:post-header` render target. That reference names //who speaks// and projects identity onto the social layer; this scheme names the bearing. The scheme's own render targets (`record:full`, `hud:exchange-pair`) ride here, in §1 Design Intent.
 
 <<~/ahu >>
 
@@ -232,7 +232,7 @@ These are orthogonal. A URI may carry multiple `~` markers on different componen
 
 # `~` is valid in canonical record form as an inline provisionality prefix on HA.KA.BA slots (`~uri.schema.question`). Use the `provisional=` query parameter when you need a separate, machine-parseable provisionality field for storage or filtering.
 # Multiple `~` markers may appear in a single URI simultaneously.
-# All closing/forward-looking URIs are implicitly trajectory-provisional. Explicit `~` on a closing URI signals *unusual* uncertainty about the trajectory — not routine forward-look status.
+# All closing/forward-looking URIs are implicitly trajectory-provisional. Explicit `~` on a closing URI signals //unusual// uncertainty about the trajectory — not routine forward-look status.
 # Reading provisionality on the operator URI marks the ''node's interpretation'' as potentially inaccurate — not the operator's intent as ambiguous. These are different claims.
 # The `~` marker applies only to the specific component it prefixes. Unprefixed components are declared with normal confidence.
 
@@ -259,14 +259,14 @@ Trajectory provisional: "I predict our next territory is the updated schema — 
 
 !! 5. Marker Ontology — the authoring surface
 
-The marker grammar — the meme span opener `? ->` and closer `→ ?`, the `ahu` waypoint, the `kahea` transclusion, and their cultural nomenclature (*method of loci* · *ahu* · *kāhea*) — names the ''authoring surface'', not the URI scheme. It lives, with full treatment (ABNF patterns, pranala families, propagation), at:
+The marker grammar — the meme span opener `? ->` and closer `→ ?`, the `ahu` waypoint, the `kahea` transclusion, and their cultural nomenclature (//method of loci// · //ahu// · //kāhea//) — names the ''authoring surface'', not the URI scheme. It lives, with full treatment (ABNF patterns, pranala families, propagation), at:
 
 * `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` — the writing-system law, and its docs companion `docs/pono/memetic-wikitext`
 * `lar:///ha.ka.ba/lares/api/pono/ahu` — the waypoint marker
 * `lar:///ha.ka.ba/lares/api/pono/kahea` — the transclusion marker
 * `lar:///ha.ka.ba/lares/api/pono/meme` — meme shape; `loci` — stable-address coherence
 
-A `lar:` URI *names* a meme; how memes, waypoints, and transclusions get *written* belongs to the authoring surface above. The per-marker semantics — what each marker settles and what it leaves open — live rigorously in `ahu` and `kahea`.
+A `lar:` URI //names// a meme; how memes, waypoints, and transclusions get //written// belongs to the authoring surface above. The per-marker semantics — what each marker settles and what it leaves open — live rigorously in `ahu` and `kahea`.
 
 <<~/ahu >>
 

@@ -113,7 +113,7 @@ queue handles both.
 !! The gate-families seam ~ runtime ≠ physics
 
 A scout (the Substrate-Diver) flagged an apparent collision: ''N-1'' holds ONE queue
-across all bags, *per-bag accumulators do not exist* — yet `projection-nalu`
+across all bags, //per-bag accumulators do not exist// — yet `projection-nalu`
 (`lar:///ha.ka.ba/lararium/api/projection-nalu`) stands a `KeyedCoalesceGate` ''per''
 ''carrier-root'' and ''per bag''. Both stand; they sit at OPPOSITE ENDS of the one shape
 `SOURCE → gate → SINK`, never the same layer.
@@ -131,7 +131,7 @@ across all bags, *per-bag accumulators do not exist* — yet `projection-nalu`
   via `IslandAdaptor.onUriChanged → enqueueNalu` and joins the ONE unified queue in arrival
   order (N-1), delivered as ONE `wiki.transact()` per frame (N-2). The engine drops
   NOTHING further — every survivor lands — and batches them by the FRAME clock. This is the
-  nalu ''crest'': the projection-nalu *periodic / nested-periodic* flush-trigger rendered as
+  nalu ''crest'': the projection-nalu //periodic / nested-periodic// flush-trigger rendered as
   the rAF frame, the Aperture-ladder pulse made delivery.
 
 So N-1's "no per-bag accumulators" governs the DELIVERY runtime — the engine refuses to

@@ -43,7 +43,7 @@ Residency decomposes into two orthogonal dimensions, the thermal axis named in �
 
 Bag residency lives in the Island Pool concepts (operator ruling): one manager --- the `VesselIslandPool` --- holds the residency tiers.
 
-''"bag" stays a term.'' The collapse touches residency *authority*, not the TW5 vocabulary. A ''bag'' remains the TW5 layer/coordinate — one Automerge document, one axis of the recipe query plan (residency-model, linked in #edges). What collapses is the standalone *residency manager*: the methods that pin, hydrate, and cool docs (today in `bag-residency.ts`, a side-file predating the causal-islands model) MUST move into the ''causal-island code'' — the module that owns the causal-islands model is where residency methods belong. No one-off side file outranks the model it predates.
+''"bag" stays a term.'' The collapse touches residency //authority//, not the TW5 vocabulary. A ''bag'' remains the TW5 layer/coordinate — one Automerge document, one axis of the recipe query plan (residency-model, linked in #edges). What collapses is the standalone //residency manager//: the methods that pin, hydrate, and cool docs (today in `bag-residency.ts`, a side-file predating the causal-islands model) MUST move into the ''causal-island code'' — the module that owns the causal-islands model is where residency methods belong. No one-off side file outranks the model it predates.
 
 <<~/ahu >>
 
@@ -92,7 +92,7 @@ Consequences:
 
 Two disciplines survive the collapse as bag-level mechanism (now driven by the pool, not an independent authority):
 
-* ''Stub-on-oracle-traversal.'' A URL found in `tiddler.text` during traversal does NOT force `find()`/hydration. The bag lands cold (URL known, doc not loaded) until something reads through it. Lazy hydration stays a bag concern; the *tier* is the island's to set.
+* ''Stub-on-oracle-traversal.'' A URL found in `tiddler.text` during traversal does NOT force `find()`/hydration. The bag lands cold (URL known, doc not loaded) until something reads through it. Lazy hydration stays a bag concern; the //tier// is the island's to set.
 * ''Don't drop while syncing.'' A bag mid-replication is unsafe to evict even if its referencing island cooled. The handle-drop on island cool MUST check `syncActive` before releasing.
 
 ''Code homing (operator ruling 2026-06-01).'' The residency methods — pin / unpin / hydrate / cool / handle-drop / `ChunkStore` — MUST move OUT of the standalone `bag-residency.ts` side-file (which predates the causal-islands model) and INTO the ''causal-island code'' (`causal-island.ts` for the model + contracts; the Island Pool for the Worker-lifecycle mechanism). The module that owns the causal-islands model hosts residency; no older side-file holds a parallel authority. After the move there is no independent tier vocabulary, no separate bag cap, no independent LRU — **one cap governs the node: the Island Pool's `wela` (live) slot budget**, and bag handles follow by derivation. The relocation landed 2026-06-01 (S11.1: `bag-residency.ts` → `causal-island.ts`); "bag" stays the TW5 layer term throughout.
@@ -118,7 +118,7 @@ Pin/unpin gestures carry no verb name (the state change describes itself). `hoʻ
 
 !! Third tier — the gate
 
-The model holds two tiers (`wela` live / `anu` torn down). A third (warm / frozen) tier enters ONLY when BOTH hold: (a) a *measured* island resume-latency problem under real focus-rotation, AND (b) a definition that genuinely ''sheds memory'' — isolate evicted, handle-cache retained, resume re-instantiates the engine against still-warm handles and skips the `ea` handshake (the bfcache lineage done right). At that point adopt bfcache vocabulary (freeze / resume / evict), a freeze-disqualifier discipline (mid-replication may not freeze), and a second-chance reference bit on the sweeper (pure-age LRU today).
+The model holds two tiers (`wela` live / `anu` torn down). A third (warm / frozen) tier enters ONLY when BOTH hold: (a) a //measured// island resume-latency problem under real focus-rotation, AND (b) a definition that genuinely ''sheds memory'' — isolate evicted, handle-cache retained, resume re-instantiates the engine against still-warm handles and skips the `ea` handshake (the bfcache lineage done right). At that point adopt bfcache vocabulary (freeze / resume / evict), a freeze-disqualifier discipline (mid-replication may not freeze), and a second-chance reference bit on the sweeper (pure-age LRU today).
 
 <<~/ahu >>
 

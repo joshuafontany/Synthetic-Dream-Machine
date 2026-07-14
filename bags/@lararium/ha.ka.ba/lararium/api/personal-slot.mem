@@ -253,7 +253,7 @@ Three convergent justifications:
 
 * ''Composition Root'' (Seemann) — side-effectful object-graph wiring belongs at the entry point that already holds the deps; pushing it into a leaf inverts the pattern.
 * ''Service-Locator anti-pattern'' — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
-* ''Object-capability "only a holder may delegate"'' (Miller, *Capability Myths Demolished*) + ''POLA'' + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonaGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
+* ''Object-capability "only a holder may delegate"'' (Miller, //Capability Myths Demolished//) + ''POLA'' + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonaGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
 
 ''Established repo grain (codebase spirit):'' draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:696`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`); the boot's own `registerBag` sweep (`:586-594`) is the precedent for minting a Keyhive Document before delegating. The new helper follows that grain exactly.
 
@@ -343,14 +343,14 @@ const resolver: Record<string, string | null> = {
 
 Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKEM lineage) converged on the delegation shape:
 
-* ''Document-as-group is the *intended* Keyhive shape, not a workaround smell.'' A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph ''orthogonal to BeeKEM key rotation''. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: ''bind to the stable agent-id'' (never rotating key material), and ''keep that id stable for the group's whole lifetime'' (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
-* ''Group-as-audience is object-capability-idiomatic.'' Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
-* ''Access cascades transitively and retroactively'' through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
+* ''Document-as-group is the //intended// Keyhive shape, not a workaround smell.'' A Keyhive Document //is// a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph ''orthogonal to BeeKEM key rotation''. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: ''bind to the stable agent-id'' (never rotating key material), and ''keep that id stable for the group's whole lifetime'' (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
+* ''Group-as-audience is object-capability-idiomatic.'' Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, //Capability Myths Demolished//.
+* ''Access cascades transitively and retroactively'' through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted //after// the delegation, with no per-document re-grant.
 * ''Grain debt (POLA).'' `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds ''up'' to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [[causal-islands|../pono/causal-islands.md]].
 
 !!! Session-wiki path (deferred — additional hot-tier mounts)
 
-`mountWiki` is now the ''one'' mount path: the primary rides it pinned (`{ pinned: true }`), future session wikis ride it unpinned. An earlier draft claimed the primary path *could not* use the admin-VM delegate-verb seam because the mount ran before `workerEa` — ''S11.5 reversed that.'' `await adminVm.workerEa` (`:770`) now precedes the mount (`:782`), so the admin VM is live for every mount. The primary path therefore resolves ''host-inline'' (composition-root, per the ocap ruling above). A future multiplexed session-mount path MAY instead route resolution through the ''admin-VM delegate-verb'' seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`) if it needs to resolve off the host thread. `resolveOrMintBinding` stays callable from both.
+`mountWiki` is now the ''one'' mount path: the primary rides it pinned (`{ pinned: true }`), future session wikis ride it unpinned. An earlier draft claimed the primary path //could not// use the admin-VM delegate-verb seam because the mount ran before `workerEa` — ''S11.5 reversed that.'' `await adminVm.workerEa` (`:770`) now precedes the mount (`:782`), so the admin VM is live for every mount. The primary path therefore resolves ''host-inline'' (composition-root, per the ocap ruling above). A future multiplexed session-mount path MAY instead route resolution through the ''admin-VM delegate-verb'' seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`) if it needs to resolve off the host thread. `resolveOrMintBinding` stays callable from both.
 
 ''First delegate() call site.'' S7.6's `keyhive.delegate(...)` is the first active call to that method in the repo (the method exists; no caller yet). This binding flow establishes the delegation call pattern; the ocap research above governs where it lives.
 
@@ -366,9 +366,9 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 ''Never-delete.'' Operator view state carries durability — `$:/StoryList`, `$:/state/folded/*`, `$:/state/tab-*`, and `$:/palette` represent the operator's actual viewing history per recipe. Bindings persist indefinitely; the operator's view state across all recipes they have ever opened stays recoverable.
 
-''Cap-rotation on PersonaGroup membership change.'' When the operator admits a new device, the founding ceremony already grants the new device admin access to the admin doc. The new device reads the admin doc, sees existing binding tiddlers, mounts the same `@personal`/`@draft` docs. Keyhive's CRDT-of-capabilities means the new device also gains access to the underlying `@personal`/`@draft` docs (each carries a delegation to the PersonaGroup, and the new device joined the PersonaGroup) — no per-binding re-grant required. *(Verified 2026-06-03: access is membership-graph reachability, so the new edge covers every doc the group can reach, retroactively.)*
+''Cap-rotation on PersonaGroup membership change.'' When the operator admits a new device, the founding ceremony already grants the new device admin access to the admin doc. The new device reads the admin doc, sees existing binding tiddlers, mounts the same `@personal`/`@draft` docs. Keyhive's CRDT-of-capabilities means the new device also gains access to the underlying `@personal`/`@draft` docs (each carries a delegation to the PersonaGroup, and the new device joined the PersonaGroup) — no per-binding re-grant required. //(Verified 2026-06-03: access is membership-graph reachability, so the new edge covers every doc the group can reach, retroactively.)//
 
-''Authorized-but-undecryptable window (eventual consistency).'' Access is *granted* by membership-graph reachability, but Keyhive sync is two-phase: the membership op AND the BeeKEM rekey ops must both reach a device before it can *decrypt*. Automerge heads ride outside the encryption envelope, so a device MAY see a binding's docUrl and the doc's existence before it holds the key. Therefore `resolveOrMintBinding` reuse-on-present MUST mount-when-ready and MUST NOT block boot on a binding whose doc is not yet decryptable on this device; the UI reads "current as of last sync" (causal-islands doctrine). On concurrent device churn BeeKEM MAY blank the group root, requiring a member's Update-Key before readers decrypt — outer delegations survive; readers wait. S7.7 wants a test: *binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.*
+''Authorized-but-undecryptable window (eventual consistency).'' Access is //granted// by membership-graph reachability, but Keyhive sync is two-phase: the membership op AND the BeeKEM rekey ops must both reach a device before it can //decrypt//. Automerge heads ride outside the encryption envelope, so a device MAY see a binding's docUrl and the doc's existence before it holds the key. Therefore `resolveOrMintBinding` reuse-on-present MUST mount-when-ready and MUST NOT block boot on a binding whose doc is not yet decryptable on this device; the UI reads "current as of last sync" (causal-islands doctrine). On concurrent device churn BeeKEM MAY blank the group root, requiring a member's Update-Key before readers decrypt — outer delegations survive; readers wait. S7.7 wants a test: //binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.//
 
 ''Cap-rotation on PersonaGroup contraction.'' When the operator removes a device from the PersonaGroup, Keyhive's revocation propagates to the admin doc + all PersonaGroup-delegated bags. The removed device loses access to `@personal`/`@draft` at the same time it loses access to the admin doc — atomic by construction.
 
@@ -391,8 +391,8 @@ capability only while the grantor stays reachable, because the grant names
 authority over a resource in the grantor's keeping. A fleet whose only
 capability-grantor sleeps when the authoring device sleeps cannot act.
 
-''The pono move: pre-delegate.'' The PersonaGroup reads as an *owned namespace* (the
-Meadowcap pattern): the owner key mints *attenuated* delegated capabilities to each
+''The pono move: pre-delegate.'' The PersonaGroup reads as an //owned namespace// (the
+Meadowcap pattern): the owner key mints //attenuated// delegated capabilities to each
 of its own devices. By pre-delegating the load-bearing capabilities to an
 ''always-on device'' (the node vessel), the fleet keeps functioning while the
 authoring device sleeps — the always-on device answers handoffs on the fleet's
@@ -405,7 +405,7 @@ candidate; a live broker or a direct probe confirms it lives before a handoff la
 
 This composes with the @personal slot: the binding map already lives admin-doc-
 stored and PersonaGroup-scoped; pre-delegation extends the same owned-namespace
-authority graph from *viewing state* to *task-execution authority*.
+authority graph from //viewing state// to //task-execution authority//.
 
 <<~/ahu >>
 

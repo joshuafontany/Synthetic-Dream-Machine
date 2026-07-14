@@ -305,10 +305,10 @@ Two layers of work landed: (a) yin-mode architectural collapse driven by web-res
 
 ''Architectural notes worth holding (E.10.4):''
 
-* *The round-trip law*: ONE parser, FOUR call sites — disk sync (CLI `wiki sync`), CRDT inbound (MemeSyncAdaptor.onUriChanged), TW5 UX save (saveTiddler — Path H, deferred), disk export (exportMemeText). All consume `parseMemeText` output. This commit gets three of the four call sites aligned. Path H lands save-side auto-split next.
-* *Templates not modes*: AhuWidget owns no scope decision. The cascade `$:/tags/Lar/AhuTemplate` evaluates filter expressions over the `lar-export-scope` variable; first non-empty result names the template tiddler. Operators override per-wiki by writing tiddlers tagged `$:/tags/Lar/AhuTemplate` — no TS recompile needed. Render scope decisions live in TW5 grammar, not in JS.
-* *Wikirule unlocks browser authoring*: `<<~ sigil ... >>` syntax becomes first-class wikitext. Drafts in TW5 UX recognize the syntax without a custom parser. Operator's stated next-tier UX requirement — author memes inside the live wiki, sigils auto-promote to child tiddlers on save (Path H closes the loop).
-* *Three small wikifier diff items remain* (DOCTYPE HTML comment, em-dash conversion of `|---|`, aka URI sigil routes to empty `<<~ ahu>>`). Aesthetic, not load-bearing — Path I.
+* //The round-trip law//: ONE parser, FOUR call sites — disk sync (CLI `wiki sync`), CRDT inbound (MemeSyncAdaptor.onUriChanged), TW5 UX save (saveTiddler — Path H, deferred), disk export (exportMemeText). All consume `parseMemeText` output. This commit gets three of the four call sites aligned. Path H lands save-side auto-split next.
+* //Templates not modes//: AhuWidget owns no scope decision. The cascade `$:/tags/Lar/AhuTemplate` evaluates filter expressions over the `lar-export-scope` variable; first non-empty result names the template tiddler. Operators override per-wiki by writing tiddlers tagged `$:/tags/Lar/AhuTemplate` — no TS recompile needed. Render scope decisions live in TW5 grammar, not in JS.
+* //Wikirule unlocks browser authoring//: `<<~ sigil ... >>` syntax becomes first-class wikitext. Drafts in TW5 UX recognize the syntax without a custom parser. Operator's stated next-tier UX requirement — author memes inside the live wiki, sigils auto-promote to child tiddlers on save (Path H closes the loop).
+* //Three small wikifier diff items remain// (DOCTYPE HTML comment, em-dash conversion of `|---|`, aka URI sigil routes to empty `<<~ ahu>>`). Aesthetic, not load-bearing — Path I.
 
 !! What Just Happened (2026-05-09 late — E.10 follow-ons hardened the canon ceremony AND rewrote ahu render dispatch)
 
@@ -342,10 +342,10 @@ E-arc closed end-to-end. Ten commits + this closure commit. Twelve operator verb
 
 ''Architectural notes worth holding:''
 
-* *Twelve operator verbs* span the bag-level surface (5 verbs: pin/unpin/stats/register-cold/epoch) and the wiki-level surface (7 verbs: init/open/sync/pin/unpin/add-bag/remove-bag plus list/which plus epoch/rotate-recipe/prune-stale = 12 wiki verbs total). Total CLI surface: top-level `init/promote/bag/wiki/status/serve/dev/reset/fresh/build-genesis/test-quine/heleuma/help`.
-* *Three GC primitives ship*: bag epoch (snapshot-restart one bag, bound history), recipe rotation (whole-wiki fresh start with retained underlays), prune-stale (operator inspection of forgotten drafts). Per the research, these compose to give Lares the only practical history-elision pattern in deployed local-first CRDT space (DXOS Epochs + Nix generations + Kafka-style stale-key surfacing).
-* *Disk → CRDT direction operational* via `lares wiki sync`. First time the codebase ships this direction. Direct doc writes via `repo.find()` + `handle.change()` bypass composite-overlay routing because the target wiki may not be the daemon's currently-mounted active room.
-* *Open caveats*: `wiki open` writes a marker tiddler but the daemon doesn't live re-mount — operator must restart `lares serve` to pick up the new active room. Live re-mount waits on F-arc. Recipe-rotation's draft-drain step also waits on F-arc routing rules.
+* //Twelve operator verbs// span the bag-level surface (5 verbs: pin/unpin/stats/register-cold/epoch) and the wiki-level surface (7 verbs: init/open/sync/pin/unpin/add-bag/remove-bag plus list/which plus epoch/rotate-recipe/prune-stale = 12 wiki verbs total). Total CLI surface: top-level `init/promote/bag/wiki/status/serve/dev/reset/fresh/build-genesis/test-quine/heleuma/help`.
+* //Three GC primitives ship//: bag epoch (snapshot-restart one bag, bound history), recipe rotation (whole-wiki fresh start with retained underlays), prune-stale (operator inspection of forgotten drafts). Per the research, these compose to give Lares the only practical history-elision pattern in deployed local-first CRDT space (DXOS Epochs + Nix generations + Kafka-style stale-key surfacing).
+* //Disk → CRDT direction operational// via `lares wiki sync`. First time the codebase ships this direction. Direct doc writes via `repo.find()` + `handle.change()` bypass composite-overlay routing because the target wiki may not be the daemon's currently-mounted active room.
+* //Open caveats//: `wiki open` writes a marker tiddler but the daemon doesn't live re-mount — operator must restart `lares serve` to pick up the new active room. Live re-mount waits on F-arc. Recipe-rotation's draft-drain step also waits on F-arc routing rules.
 
 !!! Where the arc rests
 
@@ -373,9 +373,9 @@ S6 closed end-to-end. Five commits on top of S7.1's evening close.
 
 ''Architectural notes worth holding:''
 
-* *onEvict stays a stub.* The manager's book-keeping (LRU, idle sweep, sync-state guard) lands now. Actual Automerge handle drop waits on automerge-repo#358 (no public eviction API today). Wiring complete; payload pending upstream.
-* *Hot tier reflects reads against non-pinned bags.* All 7 boot-pinned infrastructure bags stay pinned; hot populates only when reads land on bags outside the pin set (corpus children, future dynamic bags).
-* *Cold-promote-mid-`composite.get()` deferred.* Composite knows how to touch existing layers but not how to mint new ones for cold-stub URLs — that requires repo.find() integration plus C.5's same-machine consolidation story.
+* //onEvict stays a stub.// The manager's book-keeping (LRU, idle sweep, sync-state guard) lands now. Actual Automerge handle drop waits on automerge-repo#358 (no public eviction API today). Wiring complete; payload pending upstream.
+* //Hot tier reflects reads against non-pinned bags.// All 7 boot-pinned infrastructure bags stay pinned; hot populates only when reads land on bags outside the pin set (corpus children, future dynamic bags).
+* //Cold-promote-mid-`composite.get()` deferred.// Composite knows how to touch existing layers but not how to mint new ones for cold-stub URLs — that requires repo.find() integration plus C.5's same-machine consolidation story.
 
 !!! Where the arc rests
 
@@ -401,9 +401,9 @@ Cap layer landed end-to-end. Three more commits on top of the morning's D.1+D.1.
 | `a69bcffe` D.5 | `CommandContext.cap` becomes a curried `(access, bagUrl) → Promise<{ok}>` closure bound to each command's `requestedBy` DID. `CapabilityVerifier` interface decouples dispatcher from `@lararium/keyhive`. Promote-handler enforces `ctx.cap("admin", toBag)` before any composite read. CLI loads operator's verifyingKey via the new `loadOperatorVerifyingKey` and submits `0x` + hex as the DID. |
 
 ''Three architectural notes worth holding:''
-* *Two-tier policy holds.* Keyhive provides the binary read/admin cryptographic gate. Future action-handler ABILITY_LADDER caveats (e.g. "only specific peers may push canon") layer above the Keyhive proof. D.5 wires the Keyhive layer; the application layer waits for federated peers.
-* *D4.a "minimum-viable" scope.* All Keyhive events route to the admin doc today regardless of semantic scope (operator-principal vs document vs group-CGKA). Per-bag routing per the strict D4.a decision is reserved for when federation actually pressures it. Captured in HANDOFF "Don't re-decide" + memory.
-* *Pre-alpha hiccup logged.* `ingestEventsBytes` occasionally hits `Stuck on a fixed point: ReceiveCgkaOpError(UnknownInvitePrekey)` on hydrate when CGKA events re-ingest out of natural causal order. Non-fatal — operator identity + admin proof verify regardless. Track when bumping past `0.0.0-alpha.56c`.
+* //Two-tier policy holds.// Keyhive provides the binary read/admin cryptographic gate. Future action-handler ABILITY_LADDER caveats (e.g. "only specific peers may push canon") layer above the Keyhive proof. D.5 wires the Keyhive layer; the application layer waits for federated peers.
+* //D4.a "minimum-viable" scope.// All Keyhive events route to the admin doc today regardless of semantic scope (operator-principal vs document vs group-CGKA). Per-bag routing per the strict D4.a decision is reserved for when federation actually pressures it. Captured in HANDOFF "Don't re-decide" + memory.
+* //Pre-alpha hiccup logged.// `ingestEventsBytes` occasionally hits `Stuck on a fixed point: ReceiveCgkaOpError(UnknownInvitePrekey)` on hydrate when CGKA events re-ingest out of natural causal order. Non-fatal — operator identity + admin proof verify regardless. Track when bumping past `0.0.0-alpha.56c`.
 
 !!! Where the arc rests
 
@@ -453,7 +453,7 @@ Sprint paused after C.1 to scope S7 — the cap layer is what S7 needs and chang
 
 Two research streams reframed the original "use UCAN, swap to Keyhive later" plan:
 
-# ''UCAN library survey'' returned with: *Keyhive does NOT use UCAN.* It uses concap (convergent capabilities, CRDT-shaped revocation). Migration UCAN→Keyhive is re-implementation, not swap.
+# ''UCAN library survey'' returned with: //Keyhive does NOT use UCAN.// It uses concap (convergent capabilities, CRDT-shaped revocation). Migration UCAN→Keyhive is re-implementation, not swap.
 # ''Keyhive deep-dive'' confirmed: concap spec is design-phase ("very recently begun to implement" per Notebook 01), but `keyhive_wasm` (npm `@keyhive/keyhive`) ships as pre-alpha 0.0.0-alpha.56c with TypeScript bindings. Operator chose ''adopt directly'' rather than hand-roll concap-shape from incomplete spec.
 
 D.1 probe (`packages/lararium-keyhive/probes/operator-delegate-device.ts`) end-to-end exercised init → contact-card exchange → registerBag → addMember → SignedDelegation. Verdict: ''WORKABLE.'' D.1.5 enumerated `Access.tryFromString` → only `read` and `admin` accepted (binary, NOT our 8-step ABILITY_LADDER). Captured event variants per ceremony: PREKEY_ROTATED (frequent ~172B), CGKA_OPERATION (3×), DELEGATED (2×).
@@ -545,7 +545,7 @@ Initial audit: 50 missing across core/tw5/node, 8 orphans in tw5 (memes pointing
 
 !!! Architecture clarifications
 
-* **`packages/ha-ka-ba/` doesn't exist as a directory**, by design. `ha.ka.ba` names a URI namespace (engine = ha, catalog = ka, lares = ba); each package owns the memes describing itself, the engine corpus is their *virtual union* materialized in `genesis/island.bin`.
+* **`packages/ha-ka-ba/` doesn't exist as a directory**, by design. `ha.ka.ba` names a URI namespace (engine = ha, catalog = ka, lares = ba); each package owns the memes describing itself, the engine corpus is their //virtual union// materialized in `genesis/island.bin`.
 * ''Per-bag mirror, not per-package mirror'': disk layout reflects bag boundaries (lares → `packages/lares-core/memes/`, engine → per-package `memes/`, room → `rooms/{slug}/`); operator-private bags (identities/groups/sessions/admin) never reach disk.
 
 ---
@@ -921,7 +921,7 @@ Research results expected in: `packages/lares-core/lararium-research/KOWLOON-BRI
 | Term | Definition |
 |---|---|
 | ''DreamNet'' | The entire distributed network — all nexus-meshes, allied AND oppositional. Opposition designed in. |
-| ''Nexus'' | A *confederation of lararia* sharing a stable internal mesh. Named by community + place. e.g. "Floating Library of Mu, PNW Branch." Cross-Nexus = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. |
+| ''Nexus'' | A //confederation of lararia// sharing a stable internal mesh. Named by community + place. e.g. "Floating Library of Mu, PNW Branch." Cross-Nexus = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. |
 | ''Lararium'' | One operator's infrastructure — a `lararium-node` process + their browser peers + devices. The household shrine. Smallest unit. |
 | ''DreamDeck'' | First personal browser app for accessing DreamNet. One UX surface. `@dreamdeck/app`. |
 | ''Tasked Spirits'' | Bounded single-protocol agents — what we spawn for research. Elyncian term, same operational structure. |

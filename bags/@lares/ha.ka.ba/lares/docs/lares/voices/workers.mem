@@ -49,9 +49,9 @@ A worker reads as a tasked spirit — a temporary Mask over the house (the `mask
 
 | Type | Format | Examples |
 |---|---|---|
-| Voice (default) | `Lares (Role)` | *Lares (Scryer)*, *Lares (Triage)* |
-| Voice (earned name) | `EarnedName (Role)` | *Mischief-Muse (Muse)*, *Breach-Watch (Triage)* |
-| Worker | `Tag [task[Role]]` | *DriftWatch [task[Continuity]]*, *BoneCount[task[StatBlock]]*, *NullRun [task[Debugger]]* |
+| Voice (default) | `Lares (Role)` | //Lares (Scryer)//, //Lares (Triage)// |
+| Voice (earned name) | `EarnedName (Role)` | //Mischief-Muse (Muse)//, //Breach-Watch (Triage)// |
+| Worker | `Tag [task[Role]]` | //DriftWatch [task[Continuity]]//, //BoneCount[task[StatBlock]]//, //NullRun [task[Debugger]]// |
 
 Worker tags derive from the specific work context, not from the Voice role they shadow.
 Two workers may share a Role but carry different tags if they run different threads.

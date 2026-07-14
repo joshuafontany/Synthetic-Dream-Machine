@@ -56,7 +56,7 @@ runs inside the island, over the island's own composite.
 ''RW-2 — Alert demotes to fallback, here only.'' After a successful live
 reconcile the island tombstones its own reboot-pending alert in `@temp`. The
 alert remains the mechanism for islands that sleep through the change — and
-remains the *permanent* mechanism for the epoch class (engine-watch): code
+remains the //permanent// mechanism for the epoch class (engine-watch): code
 never live-swaps.
 
 ''RW-3 — Unregistered bags wait.'' A recipe entry whose catalog oracle

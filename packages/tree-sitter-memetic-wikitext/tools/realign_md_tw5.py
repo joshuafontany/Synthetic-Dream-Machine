@@ -81,6 +81,69 @@ def _pass2_inline(line: str, counts: dict) -> str:
 
 
 _LIST_MARKER = re.compile(r"^[*#]+[ \t]")
+_SIGIL_SPAN = re.compile(r"<<~[^>\n]*(?:>[^>\n][^>\n]*)*>>")
+_ITALIC = re.compile(r"(?<![*\w])\*([^\s*][^*\n]{0,200}[^\s*])\*(?![*\w])")
+
+
+def _convert_italics(text: str, counts: dict) -> str:
+    """Pass 5: md `*emphasis*` → TW5 `//emphasis//`, single-line only, under
+    the full ward set — code spans and sigil bodies pass through verbatim;
+    a span carrying interior `//` or interleaved `''` marks defers loud;
+    fence interiors and source-text ride the standard walk guards."""
+    out = []
+    in_fence = False
+    source_depth = 0
+    for line in text.splitlines(keepends=True):
+        if _FENCE.match(line):
+            in_fence = not in_fence
+            out.append(line)
+            continue
+        if in_fence:
+            out.append(line)
+            continue
+        if source_depth > 0:
+            if _AHU_OPEN.match(line):
+                source_depth += 1
+            elif _AHU_CLOSE.match(line):
+                source_depth -= 1
+            out.append(line)
+            continue
+        if _SOURCE_TEXT_OPEN.match(line):
+            source_depth = 1
+            out.append(line)
+            continue
+        if "*" not in line:
+            out.append(line)
+            continue
+        # carve the guarded spans (code + sigil) out of reach
+        guarded = []
+        for m in _CODE_SPAN.finditer(line):
+            guarded.append((m.start(), m.end()))
+        for m in _SIGIL_SPAN.finditer(line):
+            guarded.append((m.start(), m.end()))
+
+        def _shielded(a: int, b: int) -> bool:
+            return any(ga <= a < gb or ga < b <= gb for ga, gb in guarded)
+
+        def _swap(m: re.Match) -> str:
+            inner = m.group(1)
+            if _shielded(m.start(), m.end()):
+                return m.group(0)
+            if "//" in inner or "''" in inner:
+                counts["skip_italic_guarded"] += 1
+                return m.group(0)
+            counts["italic"] += 1
+            return "//" + inner + "//"
+
+        new = _ITALIC.sub(_swap, line)
+        # the dangling-* counter: emphasis marks that survive OUTSIDE guards
+        # (a would-be multi-line italic) get counted, never converted
+        residue = _ITALIC.sub("", new)
+        stars = [m.start() for m in re.finditer(r"(?<![*\w])\*(?![*\s])", residue)]
+        if any(not _shielded(i, i + 1) for i in stars):
+            counts["skip_dangling_italic"] += 1
+        out.append(new)
+    return "".join(out)
 
 
 def _split_multiline_bold(text: str, counts: dict) -> str:
@@ -259,6 +322,8 @@ def main() -> int:
                     help="ordered lists 1. → # (rides the grammar breath that drops #-heading)")
     ap.add_argument("--pass4", action="store_true",
                     help="multi-line bold: SPLIT at the newline into balanced single-line spans (cross-line '' spans = the TW5 bug class; never emit one)")
+    ap.add_argument("--pass5", action="store_true",
+                    help="italics *x* → //x// (boundary + code-span + sigil-span + interior-// guards; dangling * paragraphs held loud)")
     ap.add_argument("--walk-library", action="store_true",
                     help="walk library/ FRAMING prose (source-text interiors stay exempt regardless)")
     args = ap.parse_args()
@@ -272,7 +337,8 @@ def main() -> int:
     ).stdout.strip()
 
     total = {"heading": 0, "ul": 0, "ol": 0, "indented_ul": 0, "bold": 0, "link": 0,
-             "bold_split": 0, "skip_unprovable_bold_para": 0, "skip_indented_ol": 0,
+             "bold_split": 0, "italic": 0, "skip_italic_guarded": 0,
+             "skip_dangling_italic": 0, "skip_unprovable_bold_para": 0, "skip_indented_ol": 0,
              "skip_fence": 0, "skip_source_text": 0, "skip_indented_ul": 0,
              "skip_unbalanced_bold": 0, "skip_unbalanced_backtick": 0,
              "skip_library": 0, "skip_dirty": 0, "skip_excluded": 0}
@@ -299,6 +365,8 @@ def main() -> int:
             new = realign_text(text, counts, pass2=args.pass2, pass3=args.pass3)
             if args.pass4:
                 new = _split_multiline_bold(new, counts)
+            if args.pass5:
+                new = _convert_italics(new, counts)
             for k, v in counts.items():
                 total[k] += v
             if new != text:
@@ -321,6 +389,8 @@ def main() -> int:
         print(f"  ol 1.→#       : {total['ol']} (indented deferred: {total['skip_indented_ol']})")
     if args.pass4:
         print(f"  bold split    : {total['bold_split']} lines (unprovable paras deferred: {total['skip_unprovable_bold_para']})")
+    if args.pass5:
+        print(f"  italics *→//  : {total['italic']} (guarded-span deferred: {total['skip_italic_guarded']}, dangling-* lines: {total['skip_dangling_italic']})")
     print(f"  skipped       : fence-lines={total['skip_fence']} "
           f"source-text-lines={total['skip_source_text']} "
           f"indented-ul={total['skip_indented_ul']} "

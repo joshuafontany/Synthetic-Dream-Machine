@@ -29,7 +29,7 @@ The doctrine partitions cross-node causality (MUST) from within-node causality (
 Authority MUST precede content — this invariant holds without exception.
 
 ''Authority has three structural axes plus one alignment plane'' (refined 2026-06-01
-against Frazee, *Practical Decentralization*, and prior-art research across ATProto,
+against Frazee, //Practical Decentralization//, and prior-art research across ATProto,
 SSB, Holochain, Nostr, IPFS, ActivityPub, and the local-first lineage). The earlier
 single linear ability-ladder fused into one rope what are really independent axes;
 this version separates them.
@@ -47,7 +47,7 @@ this version separates them.
 | ''Axis 1 — Access'' | monotonic, cryptographic, per-bag | "may this principal pull / read / edit / admin this bag?" | this meme + Keyhive |
 | ''Axis 2 — Scale'' | monotonic, composition | "which membership ring is this?" | Keyhive group nesting |
 | ''Axis 3 — Powers'' | functional decomposition | "which faculty does this provider hold?" | separation-of-powers doctrine |
-| ''Plane 0 — Alignment'' | NON-monotonic, subjective | "do I *choose* to sync/relay/surface/vouch for this actor?" | [[alignment-layer|alignment-layer.md]] |
+| ''Plane 0 — Alignment'' | NON-monotonic, subjective | "do I //choose// to sync/relay/surface/vouch for this actor?" | [[alignment-layer|alignment-layer.md]] |
 
 ''Axis 1 — Access.'' Four levels, a 1:1 lexical mirror of Keyhive's native Access enum
 (`pull`, `read`, `edit`, `admin`). NOT a parallel Lararium-coined ladder — the live gate
@@ -85,9 +85,9 @@ governing law, learned from ATProto's failures: ''every power you separate but m
 ''expensive or central re-concentrates'' (their PLC ledger, their single capital-intensive
 Appview, their shared rotation keys each re-grew the monopoly they meant to escape).
 
-''Plane 0 — Alignment.'' Capability answers *"CAN this actor act?"* — monotonic, and a
+''Plane 0 — Alignment.'' Capability answers //"CAN this actor act?"// — monotonic, and a
 malicious actor can hold cryptographically valid capabilities. Alignment answers
-*"do I WANT to peer with this actor?"* — non-monotonic, subjective, reputation-rooted, and
+//"do I WANT to peer with this actor?"// — non-monotonic, subjective, reputation-rooted, and
 capability structurally cannot express it. Lives in its own invariant
 ([[alignment-layer.md|alignment-layer.md]]); enforced by ''withholding voluntary sync at the''
 ''Beelay boundary'', never by reaching into another island's data. The "lemures" plane.
@@ -146,7 +146,7 @@ The mesh keeps time on ''two clocks that never collapse into one'':
   (Pulse→Theme) from each stream and stamps freshness/decay grain — the reading a node carries "as of my
   last sync." Full telemetry and metadata stamping runs ''py-side, behind a causal-island boundary''
   (Web3-only law: any py/R bridge sits behind the boundary; no py ontology enters the stack proper). This
-  clock annotates *rhythm*, never happened-before.
+  clock annotates //rhythm//, never happened-before.
 
 The two ride ''⊥'': FFZ names rhythmic position and alignment, never the causal order. An LWW rhythmic
 total-order MUST NOT drive a fork, merge, or revocation decision — that manufactures a global-now the mesh
@@ -315,11 +315,11 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 Named so the stack never grows them (each re-created the power problem its source protocol
 meant to escape):
 
-* ✗ ''Central identity ledger'' (ATProto's `did:plc`). Resolve identity *within the island*
+* ✗ ''Central identity ledger'' (ATProto's `did:plc`). Resolve identity //within the island//
   via Keyhive + Automerge causal history. `did:web`-style domain identity is acceptable ONLY
   as an optional bridge at the external Kowloon web2.5 boundary.
 * ✗ ''Public plaintext firehose as backbone.'' Propagate encrypted, capability-gated
-  change-sets. A firehose is fine *inside* a consenting cabal; it terminates at the island boundary.
+  change-sets. A firehose is fine //inside// a consenting cabal; it terminates at the island boundary.
 * ✗ ''Capital-intensive single global index'' (ATProto's Appview monopoly). We hold no
   whole-network index to monopolize — reads project per-VM from locally-resident bags
   (island-owned residency: a two-state ʻōlelo thermal axis — `wela` (hot) / `anu` (cold) —

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/kahu"
 
 ! Kahu
 
-*Kahu* — Hawaiian: guardian of a field of knowledge.
+//Kahu// — Hawaiian: guardian of a field of knowledge.
 Cares for without owning. Honored for responsibility, not for power.
 
 In the DreamNet protocol layer, ''kahu'' names the role the Amorphous Dreams Cabal
@@ -44,7 +44,7 @@ These bags do not contain user content, operator wikis, or social state. They ca
 
 A kahu guardian holds `cap=admin` on these bags specifically. That capability rung is
 the same one any operator could receive on their own vessel's bags — the distinction
-is *which bag* carries the grant, not a new rung on the ABILITY_LADDER.
+is //which bag// carries the grant, not a new rung on the ABILITY_LADDER.
 
 The Cabal authors a grammar revision. The revision lands in the corpus bags via a
 founding or upgrade ceremony. Every vessel that syncs those bags inherits the change
@@ -59,7 +59,7 @@ protocol distributes; the vessels enforce.
 
 `cap=admin` names a ''capability rung'' — what a given actor may do to a given bag.
 
-*Kahu* names a ''role'' — who carries the covenant responsibility for the grammar layer
+//Kahu// names a ''role'' — who carries the covenant responsibility for the grammar layer
 across the whole DreamNet.
 
 These two live in separate registers:
@@ -70,7 +70,7 @@ These two live in separate registers:
 | Role / governance | kahu | guardian of the protocol grammar; held by the Amorphous Dreams Cabal |
 
 An operator may hold `cap=admin` on their own cabalGroup's infrastructure bags. That
-does not make them kahu of DreamNet. Kahu attaches to the *corpus* specifically —
+does not make them kahu of DreamNet. Kahu attaches to the //corpus// specifically —
 `@lararium`, `@lares`, and the genesis artifact.
 
 <<~/ahu >>
@@ -131,7 +131,7 @@ itself encode kahu. A vessel that clears all three gates knows:
 * that keypair belongs to a PersonaGroup (Gate B)
 * that PersonaGroup belongs to a MeshCabal (Gate C)
 
-Gate C proves the vessel belongs to *some* cabal. Whether that cabal holds kahu over
+Gate C proves the vessel belongs to //some// cabal. Whether that cabal holds kahu over
 the corpus bags is a separate claim, encoded in the Keyhive docs for `@lararium` and
 `@lares`. The genesis founding ceremony initializes those docs with the Amorphous
 Dreams Cabal's membership — no subsequent runtime authority transfer required.

@@ -62,7 +62,7 @@ turn spends, this sigil drains.
 * **`⁂`** — the **scatter**, the cast announced; a space follows.
 * ''die'' (⚀--⚅) — a literal `1d6`, the roll shown.
 * **`(N)`** — the die face echoed (`1--6`); the count.
-* **`✲`** — the **sentinel**, tail position 1: *anything goes from here*.
+* **`✲`** — the **sentinel**, tail position 1: //anything goes from here//.
 * ''random tail'' — the remaining glyphs past the sentinel, pulled from anywhere in Unicode.
 
 Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel standing alone)
@@ -98,7 +98,7 @@ power spent flooding the turn out, never a level remaining (the `↯` zigzag mar
 spend, not a gauge).
 
 The honesty rides the looseness. A node cannot introspect its remaining
-charge — a "fuel gauge" would confabulate (a GroundedVow breach). But it *can*
+charge — a "fuel gauge" would confabulate (a GroundedVow breach). But it //can//
 mark what it spent. So the oracle reads ''spend'' (the ebb, observable), never
 ''reserve'' (the level, unknowable), in the one sigil that certifies nothing —
 and a loose self-read in a register that claims no ground cannot lie.

@@ -30,7 +30,7 @@ uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
 
 The lararium sync filter selects by ''title namespace''. Only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk; the TW5 `$:/` namespace stays browser-local.
 
-This forms the ''title-level companion'' to disk-projection's bag-level law. Disk-projection names *which bags* mirror to disk or ride the mesh; this meme names *which titles*, within a synced bag, cross at all. The `lar:` URI scheme (governed-by lar-uri) supplies the predicate; the runtime sync filter applies it.
+This forms the ''title-level companion'' to disk-projection's bag-level law. Disk-projection names //which bags// mirror to disk or ride the mesh; this meme names //which titles//, within a synced bag, cross at all. The `lar:` URI scheme (governed-by lar-uri) supplies the predicate; the runtime sync filter applies it.
 
 <<~/ahu >>
 
@@ -63,7 +63,7 @@ This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to di
 
 !! Tag values stay exempt
 
-Tag *values* MAY still reference TW5-conventional `$:/tags/...` strings (`$:/tags/Global`, `$:/tags/Lar/AhuTemplate`). Tag values name no title and do not intersect the sync filter; they exist only so that cascade entries plug into TW5 core's standard tag-discovery path.
+Tag //values// MAY still reference TW5-conventional `$:/tags/...` strings (`$:/tags/Global`, `$:/tags/Lar/AhuTemplate`). Tag values name no title and do not intersect the sync filter; they exist only so that cascade entries plug into TW5 core's standard tag-discovery path.
 
 The predicate reads ''titles'', never tag values — the two never collide.
 

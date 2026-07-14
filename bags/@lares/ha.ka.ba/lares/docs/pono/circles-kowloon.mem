@@ -104,11 +104,11 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 > ''Coherence note (2026-06-29).'' The refined identity model resolves a Lararium group
 > as an ''edge-closure'' — the reciprocal-edge fan over signed, typed, `lar:`-named
-> member edges, *evaluated* as a query — never a central `CirclesDoc` object a single
+> member edges, //evaluated// as a query — never a central `CirclesDoc` object a single
 > node owns as a roster
 > (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>). So the mapping rows
 > below that read a circle as one owner-held doc carry ''retire-residue'' framing: keep
-> them as the faithful Kowloon prior-art trace they document, but for *our* design read
+> them as the faithful Kowloon prior-art trace they document, but for //our// design read
 > `CirclesDoc`/`actorId`-ownership as the closure each member's own edge composes, and
 > read eviction as a kāpae on the membership stack
 > (<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#membership-sense >>). The Kowloon

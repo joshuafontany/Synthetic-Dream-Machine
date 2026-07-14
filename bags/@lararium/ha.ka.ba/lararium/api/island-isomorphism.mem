@@ -28,7 +28,7 @@ written   = "2026-06-12"
 
 ''Islands differ by grant, never by hull.''
 
-Every wiki island — `@lares`-as-wiki, any content wiki, and **`@daemon` itself** — MUST comprise the same isomorphic stack: the keel's manifest handshake, capability grants, CRDT sync ports, the `ea` breath declaration, the same worker lifecycle, the same protocol surface. Like the turn-exchange chiasmus, one frame carries every exchange; what a turn *may do* rides its content, never a different frame.
+Every wiki island — `@lares`-as-wiki, any content wiki, and **`@daemon` itself** — MUST comprise the same isomorphic stack: the keel's manifest handshake, capability grants, CRDT sync ports, the `ea` breath declaration, the same worker lifecycle, the same protocol surface. Like the turn-exchange chiasmus, one frame carries every exchange; what a turn //may do// rides its content, never a different frame.
 
 `@daemon` differs ONLY by its endowment: additional capability grants for managing the island mesh internally (mount/evict/residency policy) and mesh connections externally (relay, federation edges). The ocap powerbox names this shape: a normal object holding extraordinary grants. Authority = designation + permission, never architecture.
 
@@ -44,7 +44,7 @@ The field went to full uniformity and came back (kubeadm self-hosting deprecated
 
 ''Isomorphism of form, interface, and grants; asymmetry of life support.''
 
-The thing that boots and restarts the admin island MUST NOT depend on the admin island living. The judge of admin's health sits *below* the substrate, reading evidence admin cannot fabricate or withhold — readiness reads local, one layer down.
+The thing that boots and restarts the admin island MUST NOT depend on the admin island living. The judge of admin's health sits //below// the substrate, reading evidence admin cannot fabricate or withhold — readiness reads local, one layer down.
 
 ''The genesis exception, named and bounded'' (every mature system keeps exactly this set: k8s static pods, Erlang `init`, the seL4 root task):
 

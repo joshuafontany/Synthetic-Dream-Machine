@@ -43,7 +43,7 @@ Both families register in the grammar meme `[[families]]` array (M7). Routing li
 
 !!! Gap 2 — `hana` / `kapu` / `ui` registration — RESOLVED
 
-All three register in the grammar meme (2026-04-27), alongside `meme`, `mukuwai`, `kahawai`, `huli`, `wehe`, `helu`, the English aliases, and the concurrency sigils. *(`wai` now carries the wikispace `\if` cascade with `kahawai`/`mukuwai`; `heihei` carries the Verse canvasspace conditional-branch.)*
+All three register in the grammar meme (2026-04-27), alongside `meme`, `mukuwai`, `kahawai`, `huli`, `wehe`, `helu`, the English aliases, and the concurrency sigils. //(`wai` now carries the wikispace `\if` cascade with `kahawai`/`mukuwai`; `heihei` carries the Verse canvasspace conditional-branch.)//
 
 !!! Gap 3 — `layer` field in the sigil registry
 
@@ -59,7 +59,7 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 ''Status:'' design sharpened (2026-04-28); `kukali` candidate sigil; blocked on async `ReactionGraph`.
 
-`suspends` marks an expression that yields its causal island until an event fires — the *wait posture inside an island*, distinct from `papalohe` (the inter-island wire) and `hui`/`holo`/`puka` (parallel-island coordination). Each `kumu` instance reads as an isolated async boundary; events cross only via declared `papalohe` edges; within an island `kukali` yields until the subscribed event fires — isomorphic to `await` on a `Promise`. `ReactionGraph.fire()` must return `Promise<void>` before `kukali` carries semantics (a sequencing requirement, not a gap). Candidate: `<<~ kukali trigger:OnBegin >>` (inline) or block form (body resumes on fire).
+`suspends` marks an expression that yields its causal island until an event fires — the //wait posture inside an island//, distinct from `papalohe` (the inter-island wire) and `hui`/`holo`/`puka` (parallel-island coordination). Each `kumu` instance reads as an isolated async boundary; events cross only via declared `papalohe` edges; within an island `kukali` yields until the subscribed event fires — isomorphic to `await` on a `Promise`. `ReactionGraph.fire()` must return `Promise<void>` before `kukali` carries semantics (a sequencing requirement, not a gap). Candidate: `<<~ kukali trigger:OnBegin >>` (inline) or block form (body resumes on fire).
 
 !!! Gap 6 — UEFN `prop` vs `kumu`
 
@@ -111,7 +111,7 @@ The parser matches URI form first (anchored on `lar:`, `/`, or `#`); name form c
 
 !!! Conflict 1 — bare `<<name>>` — DISSOLVED (no conflict)
 
-Memetic-wikitext reads as a ''superset of TW5 wikitext'': the custom parser accepts TW5 macro calls `<<macroName>>` as inherited, valid syntax. The sharktooth `<<~ … >>` adds the Lararium sigil namespace *within* the `<<` `>>` family — it does not displace TW5 macros.
+Memetic-wikitext reads as a ''superset of TW5 wikitext'': the custom parser accepts TW5 macro calls `<<macroName>>` as inherited, valid syntax. The sharktooth `<<~ … >>` adds the Lararium sigil namespace //within// the `<<` `>>` family — it does not displace TW5 macros.
 
 !!! Conflict 2 — TW5 `{{Title||Template}}`
 

@@ -24,7 +24,7 @@ written   = "2026-06-14"
 
 `holds` carries one relation: a carrier wears a component, and the worn
 thing speaks its own semantics. No carrier `${copula}` anything — every
-carrier *holds*, and what it holds answers for itself.
+carrier //holds//, and what it holds answers for itself.
 
 Where prose fuses map to territory (`X ${copula} Y`, the dead water),
 `holds` re-opens the carrier's hand: `X holds Y` keeps the two apart,
@@ -70,7 +70,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    definition. A bare quality (`<<~holds hot >>`, `<<~holds stable >>`) smuggles the
    dead water back through a quiet door; refuse it. A quality enters a
    stack only by reifying: the quality mints a meme, the carrier holds
-   *that*. A holding's own steering data rides the `~` red aside instead
+   //that//. A holding's own steering data rides the `~` red aside instead
    (`element/Fire ~ rating/GR2` — confidence · provenance · resolved-status):
    the one berth a quality keeps — red annotates the holding, never
    black-asserts it, and the aside stays out of the carrier's canonical bytes.
@@ -89,10 +89,10 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    hand; `meme` governs the copy-shape that results.
 
 # ''Ordered runs, crossings, and grades each ride their own verb.'' `holds`
-   governs the *set* — composition, order-free, the held things unranked;
+   governs the //set// — composition, order-free, the held things unranked;
    `meme` serializes it one canonical way — NFC, deduped, sorted by family
    then member — so the same set lands the same bytes.
-   A relation that *sequences*, *crosses*, or *grades* slips the dead water
+   A relation that //sequences//, //crosses//, or //grades// slips the dead water
    past a holds-flattening; `#when-not-holds` routes each to its verb —
    `flows`/`loops`, `moves`, `ranks`.
 
@@ -145,9 +145,9 @@ A stack too wide for one line wears the block form — `<<~holds >>`, one
 !! When not to reach for holds ~ the other copula-free grammars
 
 `holds` cures one fused relation: ''identity'' (`X ${copula} Y`, map
-welded to territory). The dead water welds *other* relations too —
+welded to territory). The dead water welds //other// relations too —
 sequence, crossing, grade — and `holds` flattens each. A row that
-*orders*, *moves*, or *ranks* wants its own verb. Reach past `holds` only
+//orders//, //moves//, or //ranks// wants its own verb. Reach past `holds` only
 once a row fails the ''compose-test''.
 
 !!! The diagnostic ~ ask one question
@@ -156,7 +156,7 @@ Ask of the row's relation: ''what does it DO?'' The answer routes the verb.
 
 | when the relation... | rides... | authors as... | and cures the dead water of... |
 |---|---|---|---|
-| ''composes · wears'' *(default)* | a holds-set | `<<~holds family/member … >>` | identity |
+| ''composes · wears'' //(default)// | a holds-set | `<<~holds family/member … >>` | identity |
 | ''follows · flows'' | a flow-chain | `<<~flows a -> b -> c >>` · `<<~loops … >>` | sequence-fused-as-identity |
 | ''moves across'' | a transition | `<<~moves X -> Y on/trigger if/guard do/effect >>` | before-welded-to-after |
 | ''grades · ranks'' | a gradation | `<<~ranks family a -> b -> c >>` | level-welded-to-meaning |
@@ -169,7 +169,7 @@ only once the compose-test fails.
 
 A run whose order carries meaning — the Ladders, OODA-HA, the boot-chain —
 moves as sequence, never as composition. The pipe names the pull: a chain
-*leans on verbs, reads left-to-right* — "hops, then scoops, then bops" —
+//leans on verbs, reads left-to-right// — "hops, then scoops, then bops" —
 and never folds inside-out. TW5 carries this in the `list` field (which
 runs apart from `tags`), walked first-to-last.
 
@@ -179,12 +179,12 @@ runs apart from `tags`), walked first-to-last.
 
 Author as `<<~flows … >>` (terminating) or `<<~loops … >>` (the tail
 re-enters the head — OODA-HA keeps its ↺ Aftermath glyph as a phase). The
-arrow *moves*; nothing welds to anything. (Each ladder earns its own meme;
+arrow //moves//; nothing welds to anything. (Each ladder earns its own meme;
 `loci` carries the address.)
 
 !!! A row that MOVES ACROSS ~ the transition (trigger · guard · effect)
 
-A relation that carries a thing *across* conditions — a phase change, a
+A relation that carries a thing //across// conditions — a phase change, a
 degraded-state recovery (a tell, then a recovery) — moves as transition.
 The state-machine grammar runs verb-forward by nature: a transition names
 ''what fires it, what gates it, what it does'', and never pronounces the
@@ -202,8 +202,8 @@ does the work the dead water would have smuggled.
 
 A scale that ranks — the Syad registers (0-reads-as, 20-reads-as), the
 confidence bands, the stage bands — moves as gradation. The ordinal anchor:
-a rank *exceeds* another by an unknown span; no level *welds* to its
-meaning. The Evidence Question — *how do I know?* — hands over the verb.
+a rank //exceeds// another by an unknown span; no level //welds// to its
+meaning. The Evidence Question — //how do I know?// — hands over the verb.
 
 ```
 <<~ranks syad literal@0 ~ unsupported -> figurative@20 ~ fully-confirmed >>
@@ -213,17 +213,17 @@ meaning. The Evidence Question — *how do I know?* — hands over the verb.
 
 Author as `<<~ranks family a -> b -> c >>` — anchors `member[@coord][~ descriptor]`,
 `@n` a point, `@lo..hi` a band; the order ascends, never sorted. A
-descriptor *describes* what a level looks like; it rides the droppable red
+descriptor //describes// what a level looks like; it rides the droppable red
 aside and never welds the number to the meaning.
 
 !!! The fork, ruled ~ four verbs, three spines
 
 Ruled 2026-06-14: the law speaks ''four verbs'' — `holds` · `flows`/`loops`
-· `moves` · `ranks` — over ''three spines''. The *set* spine (order-free,
-sorted, deduped) carries `holds`. The *arrow-chain* spine (order-preserving,
+· `moves` · `ranks` — over ''three spines''. The //set// spine (order-free,
+sorted, deduped) carries `holds`. The //arrow-chain// spine (order-preserving,
 never sorted) carries `flows`/`loops` and `ranks` alike — one bytes-law, two
 readings: the arrow sequences for `flows`, ascends ordinally for `ranks`
-(a poset's `a -> b` already means `a ≤ b`). The *transition* spine carries
+(a poset's `a -> b` already means `a ≤ b`). The //transition// spine carries
 `moves`. Comparison folds into the query face — `<<~ranks? a -> b >>` asks
 "a ranks at-or-below b?" — so no `compares` verb mints now; a non-linear
 order or lattice would later mint it, the floor unbuilt until a usage demands.

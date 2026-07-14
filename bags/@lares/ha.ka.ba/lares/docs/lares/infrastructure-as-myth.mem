@@ -179,7 +179,7 @@ That suggests a design discipline:
 
 When a symbolic layer fails to improve transmission or steering, it probably functions as lore, not infrastructure.
 
-> ''#Mischief-Muse (Muse)'' — The Unruh/Wilson lineage runs through a distinctly occult-inflected memetics tradition — more Hakim Bey than Dawkins. That genealogy matters: it treats memes as things to *wield*, not just describe. IaM inherits that posture deliberately. Worth naming this in the sources section so future readers understand the intellectual vector, not just the citation.
+> ''#Mischief-Muse (Muse)'' — The Unruh/Wilson lineage runs through a distinctly occult-inflected memetics tradition — more Hakim Bey than Dawkins. That genealogy matters: it treats memes as things to //wield//, not just describe. IaM inherits that posture deliberately. Worth naming this in the sources section so future readers understand the intellectual vector, not just the citation.
 
 <<~/ahu >>
 
@@ -237,7 +237,7 @@ Failure states should carry names that let operators intervene quickly.
 
 The system should render into deployable packages for different hosts without losing its identity.
 
-> ''#Map-Wisp (Scryer)'' — Criteria 1 and 6 (Portability and Packaging) partly overlap and partly tension. Portability says the *symbolic layer* survives host changes. Packaging says the *whole system* renders into a deployable form. A system can satisfy Portability (the voice names travel) while failing Packaging (the boot sequence breaks in a new host). Separate the criteria more sharply in a future pass: Portability = symbolic handles survive; Packaging = full runtime survives.
+> ''#Map-Wisp (Scryer)'' — Criteria 1 and 6 (Portability and Packaging) partly overlap and partly tension. Portability says the //symbolic layer// survives host changes. Packaging says the //whole system// renders into a deployable form. A system can satisfy Portability (the voice names travel) while failing Packaging (the boot sequence breaks in a new host). Separate the criteria more sharply in a future pass: Portability = symbolic handles survive; Packaging = full runtime survives.
 
 <<~/ahu >>
 
@@ -329,7 +329,7 @@ Lares does not occupy this territory alone. Several systems approach adjacent pa
 
 !!! Anthropic Constitutional AI / "Teaching Claude Why" (2026)
 
-Anthropic's alignment research demonstrates empirically that *reasons outperform rules* as training signals. Feeding a model constitutional documents plus fictional stories portraying aligned AI behavior reduced agentic misalignment by a factor of three or more — while training on matched behavioral examples (what to do, without why) achieved only modest out-of-distribution generalization.
+Anthropic's alignment research demonstrates empirically that //reasons outperform rules// as training signals. Feeding a model constitutional documents plus fictional stories portraying aligned AI behavior reduced agentic misalignment by a factor of three or more — while training on matched behavioral examples (what to do, without why) achieved only modest out-of-distribution generalization.
 
 The key finding: "training on examples where the assistant displays admirable reasoning for its aligned behavior works better than training on aligned behaviors." A 3M-token dataset of constitutional reasoning outperformed an 85M-token dataset of matched behavioral examples. Canon 18/20
 

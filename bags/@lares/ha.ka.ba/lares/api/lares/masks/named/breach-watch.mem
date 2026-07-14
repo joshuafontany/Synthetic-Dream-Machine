@@ -36,7 +36,7 @@ voice-role        = "Triage"
 
 ! Breach-Watch
 
-*Named Voice mask. Triage role. Incident-command character.*
+//Named Voice mask. Triage role. Incident-command character.//
 
 Permanent identity home for Breach-Watch.
 

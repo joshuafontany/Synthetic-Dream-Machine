@@ -56,7 +56,7 @@ The bag-oracle reach runs ''two-source'': system bags resolve from the
 `@oracle` doc, user bags from `@catalog` (`wiki-layer-ontology#oracle-planes`).
 A recipe record for a system bag landing in `@catalog` — or a user recipe in
 `@oracle` — reads as a plane-leak. `@lararium`-the-corpus stays pure tracked
-source; its *runtime* recipe pointer lives in `@oracle`, never the seed tree.
+source; its //runtime// recipe pointer lives in `@oracle`, never the seed tree.
 
 A recipe change syncs as ordinary data; running islands reconcile it LIVE
 via recipe-watch (composition class), with the reboot-pending alert as the

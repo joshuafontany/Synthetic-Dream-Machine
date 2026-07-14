@@ -98,7 +98,7 @@ Boot reads its engine from `@oracle`'s own blobs and only ''WARNS'' on a
 waiting newer engine (EW-1) — it does NOT fold genesis in. Adopting a newer
 engine into the living `@oracle` doc is the deliberate ''RECONCILE'' act
 (preview → conflict-surface → confirm → idempotent → effect-record;
-residency-model #conflict-resolution). *Behavior change:* the prior boot path
+residency-model #conflict-resolution). //Behavior change:// the prior boot path
 auto-merged genesis on CID divergence (`reconcileIslandFromGenesis` inside
 `loadGenesis`); that auto-fold relocates to the rite, leaving boot to warn
 only. The running engine still swaps only on reboot (EW-2).

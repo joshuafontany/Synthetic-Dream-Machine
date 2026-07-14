@@ -16,8 +16,8 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 ''Settled terminology (2026-05-06):''
 * ''DreamNet'' — the entire distributed network of nexus-meshes: allied, neutral, and oppositional. Opposition is designed in. A Nexus may be hostile, degraded, or incompatible. "Not a single machine, nor merely a choir of helpful ghosts, but a living mesh of thresholds." (Elyncia_02)
-* ''Lararium'' — one operator's infrastructure: a `lararium-node` process + browser peers + devices. The household shrine. Smallest unit. Has two layers: *stable mesh* (lares/ carriers, genesis → `ha` content tiga) and *transitory flow* (operators, agents, sessions → social tiga).
-* ''Nexus'' — a *confederation of lararia* sharing a stable internal ley-line mesh. Named by community + place (e.g. "Floating Library of Mu, PNW Branch"). Resources may extend geographically beyond the name. Cross-Nexus connections = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. "Each node a city of spirits, not a solitary saint — but a city can be besieged." The Nexus keypair serves as the confederation keypair — Keyhive-group-rooted when available.
+* ''Lararium'' — one operator's infrastructure: a `lararium-node` process + browser peers + devices. The household shrine. Smallest unit. Has two layers: //stable mesh// (lares/ carriers, genesis → `ha` content tiga) and //transitory flow// (operators, agents, sessions → social tiga).
+* ''Nexus'' — a //confederation of lararia// sharing a stable internal ley-line mesh. Named by community + place (e.g. "Floating Library of Mu, PNW Branch"). Resources may extend geographically beyond the name. Cross-Nexus connections = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. "Each node a city of spirits, not a solitary saint — but a city can be besieged." The Nexus keypair serves as the confederation keypair — Keyhive-group-rooted when available.
 * ''DreamDeck'' — the first personal browser app for accessing DreamNet. One UX surface among possible others. Package: `@dreamdeck/app`.
 * **`@lararium/*`** — DreamNet protocol/infra (core, tw5, node, browser, mcp)
 * **`@dreamdeck/*`** — DreamDeck app stack (tldraw, app)
@@ -620,7 +620,7 @@ Full research: `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESEAR
 !!! What a ReactionEngine IS in this system
 
 A `MemeProjection` that sits alongside each hot-tier TW5Engine and routes CRDT change
-events through a `ReactionGraph`. It makes a wiki *reactive* — changing a sensor tiddler
+events through a `ReactionGraph`. It makes a wiki //reactive// — changing a sensor tiddler
 fires `OnValueChanged`, which calls `Enable` on a wired target device.
 
 This is the Lararium's Verse-compatible scripting layer. Verse 5.6+ (UEFN) is the

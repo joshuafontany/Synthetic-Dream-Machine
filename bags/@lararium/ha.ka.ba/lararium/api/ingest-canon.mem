@@ -24,7 +24,7 @@ written   = "2026-06-27"
 
 ! The Ingest Canon ~ one path, born-annotated, single-write
 
-The golden path for getting *any* chat session + its telemetry into the palace, locked by research
+The golden path for getting //any// chat session + its telemetry into the palace, locked by research
 (field + code) on 2026-06-27 under the operator's full manaoio. The un-pono shape it retires:
 ''write-bare-then-enrich-in-a-second-pass'' (ELT load-then-transform — a race window, an
 "eventually annotated" drawer). The cure: ''annotate at the source, write once.''

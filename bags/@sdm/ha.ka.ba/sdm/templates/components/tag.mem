@@ -50,7 +50,7 @@ title   = "lar:///ha.ka.ba/sdm/components/function/ecm-scan"
 caption = "ecm-scan"
 ```
 
-# ''The short tag pointer'' — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A *virtual* tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
+# ''The short tag pointer'' — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A //virtual// tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
 
 ```
 title: @sdm/tags/function/ecm-scan

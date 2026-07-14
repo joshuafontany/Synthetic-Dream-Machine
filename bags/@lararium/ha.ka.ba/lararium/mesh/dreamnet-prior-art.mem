@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ! DreamNet/Lares: Prior Art Research Synthesis
 
-*Research date: 2026-05-28. Sources fetched and synthesized from primary specifications, essays, and technical documentation.*
+//Research date: 2026-05-28. Sources fetched and synthesized from primary specifications, essays, and technical documentation.//
 
 ---
 
@@ -81,7 +81,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 * ''automerge-repo'': Higher-level layer providing storage adapters (IndexedDB, filesystem) and network adapters (BroadcastChannel, WebSocket, WebRTC).
 
 ''Contrast with DreamNet:''
-* Automerge lacks built-in access control. It merges everything from any writer with document access. DreamNet adds the capability layer (ABILITY_LADDER) *on top of* CRDT merge — a principled separation that Automerge explicitly endorses.
+* Automerge lacks built-in access control. It merges everything from any writer with document access. DreamNet adds the capability layer (ABILITY_LADDER) //on top of// CRDT merge — a principled separation that Automerge explicitly endorses.
 
 ''Named Patterns:''
 * RGA (Replicated Growable Array) — underlying sequence CRDT for text
@@ -144,7 +144,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Core Golden Principles:''
 
-# ''State synchronization as a first-class HTTP primitive'': Braid extends HTTP to be a state *synchronization* protocol, with versioning, subscriptions, patches, and merge types.
+# ''State synchronization as a first-class HTTP primitive'': Braid extends HTTP to be a state //synchronization// protocol, with versioning, subscriptions, patches, and merge types.
 # ''Interoperability across merge algorithms'': Different CRDTs and OT implementations speak the same Braid message format. No single algorithm gets mandated.
 # ''P2P semantics levels'': Level 0 = today's HTTP. Level 1 = subscriptions. Level 2 = patches/versions/merges. Levels 3–4 = P2P semantics.
 
@@ -320,7 +320,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 !! 2. Layer Mapping: Prior Art → DreamNet
 
-> ''Frame note (post-split residue).'' This 2026-05-28 mapping reads the prior art onto the then-current ''single five-layer stack''. The architecture later ''split that stack into two orthogonal axes'' — INFRA (FLOW · carriage, relay-floor → lararium → nexusGroup → DreamNet) ⊥ WHO (read · membership, vessel-key → personaGroup → cabalGroup), crossing at the vessel. The component rows below still hold one-for-one; only the *ladder* they sit in dissolved into a 2D coordinate. §4 #divergences carries the correction; the live model stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>.
+> ''Frame note (post-split residue).'' This 2026-05-28 mapping reads the prior art onto the then-current ''single five-layer stack''. The architecture later ''split that stack into two orthogonal axes'' — INFRA (FLOW · carriage, relay-floor → lararium → nexusGroup → DreamNet) ⊥ WHO (read · membership, vessel-key → personaGroup → cabalGroup), crossing at the vessel. The component rows below still hold one-for-one; only the //ladder// they sit in dissolved into a 2D coordinate. §4 #divergences carries the correction; the live model stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>.
 
 !!! Layer 1: device-vessel
 
@@ -361,7 +361,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 | Infrastructure bag ownership (cap=admin) | UCAN `admin` delegation | Pattern well-known |
 | Intra-cabal CRDT sync | Automerge-repo multi-peer | Production |
 
-''Assessment'': cabalGroup carries clear design intent but fewer direct precedents as a *combined* construct. Individual pieces exist in prior art but no source assembles them in the exact DreamNet configuration.
+''Assessment'': cabalGroup carries clear design intent but fewer direct precedents as a //combined// construct. Individual pieces exist in prior art but no source assembles them in the exact DreamNet configuration.
 
 ---
 
@@ -389,7 +389,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 | No outer layer commands inner | E language vat authority model | Research |
 | SharktoothSigil / mana vocabulary | No direct prior art | Novel |
 
-''Assessment'': The outermost DreamNet layer stands as the most novel. No existing system defines a cross-federation shared grammar that survives protocol forks and network partitions as a *first-class design goal*. ActivityPub comes closest but lacks the sovereignty properties and CRDT-backed state.
+''Assessment'': The outermost DreamNet layer stands as the most novel. No existing system defines a cross-federation shared grammar that survives protocol forks and network partitions as a //first-class design goal//. ActivityPub comes closest but lacks the sovereignty properties and CRDT-backed state.
 
 ---
 
@@ -530,7 +530,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ''Source'': UCAN §Attenuation, E language capability theory
 
-''Description'': The ABILITY_LADDER gets described, but the *attenuation rules* still lack formal specification:
+''Description'': The ABILITY_LADDER gets described, but the //attenuation rules// still lack formal specification:
 * Can a `write` holder delegate `read`? (Yes, by attenuation — should be explicit)
 * Can an `admin` delegate `revoke` to a vessel that only holds `write`? (Likely no — needs specification)
 * What does attenuation look like at the nexusGroup layer where inner vessels may not be visible?

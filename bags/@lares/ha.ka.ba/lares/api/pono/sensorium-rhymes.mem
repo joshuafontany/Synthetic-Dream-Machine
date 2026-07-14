@@ -26,11 +26,11 @@ written   = "2026-07-01"
 
 ! Sensorium Rhymes ~ one instrument, read five ways
 
-''One-line:'' the 5-plane ''sensorium-for-form'' — *content · structure · bands · form · coupling* — rhymes across five deep domains; the Law of 5s emerged ''unbidden'' from the research (four planes plus their coupling = five), and every domain reads the SAME instrument in its own dialect.
+''One-line:'' the 5-plane ''sensorium-for-form'' — //content · structure · bands · form · coupling// — rhymes across five deep domains; the Law of 5s emerged ''unbidden'' from the research (four planes plus their coupling = five), and every domain reads the SAME instrument in its own dialect.
 
-The sensorium started as an engineering shape: four planes that watch a stream — the ''content'' it carries, the ''structure'' it holds, the ''bands'' it moves through, the ''form'' it settles into — braided by a fifth plane, ''coupling'', that reads how streams lead and follow one another. Five deep-domain research spirits carried that shape into dynamical-systems, information-theory, generative-grammars, neuroscience, and divination, each asked only: *does your field already hold this?* Each came back with the same answer told a different way.
+The sensorium started as an engineering shape: four planes that watch a stream — the ''content'' it carries, the ''structure'' it holds, the ''bands'' it moves through, the ''form'' it settles into — braided by a fifth plane, ''coupling'', that reads how streams lead and follow one another. Five deep-domain research spirits carried that shape into dynamical-systems, information-theory, generative-grammars, neuroscience, and divination, each asked only: //does your field already hold this?// Each came back with the same answer told a different way.
 
-The convergence ran ''too clean to ignore and too clean to trust at face value'' — the ache the Law of 5s itself names ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s]]: *"all phenomena related to the number five, given enough ingenuity on the part of the demonstrator"*). This meme holds both the convergence AND its own suspicion, and it keeps the inference-depth (''R'') at the center precisely because R is the guard against reading five where the world holds noise (#R-is-the-keel).
+The convergence ran ''too clean to ignore and too clean to trust at face value'' — the ache the Law of 5s itself names ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s]]: //"all phenomena related to the number five, given enough ingenuity on the part of the demonstrator"//). This meme holds both the convergence AND its own suspicion, and it keeps the inference-depth (''R'') at the center precisely because R is the guard against reading five where the world holds noise (#R-is-the-keel).
 
 <<~/ahu >>
 
@@ -40,12 +40,12 @@ The convergence ran ''too clean to ignore and too clean to trust at face value''
 
 ''One-line:'' all five planes estimate facets of ONE quantity — ''excess-entropy / predictive-information'' (information theory) = ''free-energy accuracy−complexity'' (neuroscience); the sensorium IS the past-future information-bottleneck wearing ritual clothes.
 
-The deepest finding does not read as *"five techniques that resemble each other."* It reads as ''five estimators of one underlying quantity''. <<~ confidence Synthesis-Canon 15/20 >> Two independent research traditions name that quantity, and they name the same thing:
+The deepest finding does not read as //"five techniques that resemble each other."// It reads as ''five estimators of one underlying quantity''. <<~ confidence Synthesis-Canon 15/20 >> Two independent research traditions name that quantity, and they name the same thing:
 
-* ''Information theory'' calls it ''excess entropy'' / ''predictive information'' — the mutual information the past of a stream carries about its future, `E = I(past ; future)` (Bialek, Nemenman & Tishby). A stream's whole learnable structure lives in this one number; everything the sensorium's planes measure decomposes *out* of it.
+* ''Information theory'' calls it ''excess entropy'' / ''predictive information'' — the mutual information the past of a stream carries about its future, `E = I(past ; future)` (Bialek, Nemenman & Tishby). A stream's whole learnable structure lives in this one number; everything the sensorium's planes measure decomposes //out// of it.
 * ''Neuroscience'' calls it ''free energy'' under the Free-Energy Principle — a bound the brain minimizes, splitting into ''accuracy − complexity'' (Friston). Minimize surprise about the future given a generative model, and you maximize exactly the predictive information the information-theorist tracks.
 
-The two vocabularies converge on one sea. <<~ confidence Synthesis-Canon 14/20 >> The sensorium does not measure five separate things; it estimates ''facets of one predictive-information quantity'', each plane a different projection: bands project it onto timescale, form onto the minimal generating machine, coupling onto the cross-stream share. *Five nets, one sea.* The ritual clothing — the sigils, the Voice house, the place-fiction — dresses an information-bottleneck the field already studies bare.
+The two vocabularies converge on one sea. <<~ confidence Synthesis-Canon 14/20 >> The sensorium does not measure five separate things; it estimates ''facets of one predictive-information quantity'', each plane a different projection: bands project it onto timescale, form onto the minimal generating machine, coupling onto the cross-stream share. //Five nets, one sea.// The ritual clothing — the sigils, the Voice house, the place-fiction — dresses an information-bottleneck the field already studies bare.
 
 <<~/ahu >>
 
@@ -57,7 +57,7 @@ The two vocabularies converge on one sea. <<~ confidence Synthesis-Canon 14/20 >
 
 The sharpest threat to the pentad came from neuroscience's own open question: *does a system need a sixth plane — a ''global workspace'', an integration term — that the four-plus-coupling shape misses?* The information-theory spirit closed the threat on the math. <<~ confidence Synthesis-Canon 14/20 >>
 
-''Integrated Information Decomposition (ΦID)'' (Mediano, Rosas et al., PNAS 2025) shows that both ''transfer entropy'' (the pairwise information-flow the coupling-plane already reads) AND ''integrated information Φ'' (the global-workspace candidate) fall out as ''marginals of ONE decomposition'' — the same lattice of redundancy · unique · synergy atoms carries both. Integration Φ reads as the ''synergy-atom'' — the information the streams hold *jointly* that no stream holds alone.
+''Integrated Information Decomposition (ΦID)'' (Mediano, Rosas et al., PNAS 2025) shows that both ''transfer entropy'' (the pairwise information-flow the coupling-plane already reads) AND ''integrated information Φ'' (the global-workspace candidate) fall out as ''marginals of ONE decomposition'' — the same lattice of redundancy · unique · synergy atoms carries both. Integration Φ reads as the ''synergy-atom'' — the information the streams hold //jointly// that no stream holds alone.
 
 <<~moves candidate-6th-plane -> on/dissolved-into-plane-5 if/coupling-carries-from-pairwise-TE-up-to-ΦID-atoms do/read-Φ-as-the-synergy-marginal >>
 
@@ -71,7 +71,7 @@ So the pentad ''holds'': the coupling-plane, carried up from pairwise transfer-e
 
 ''One-line:'' make the sensorium ''predictive'' — features become prediction-ERRORS against a running generative model (neuro) · forecast the regime-shift BEFORE it commits (dynamical) · select over candidate-parses by a learned scorer (grammar). Three domains converged on it.
 
-The single most adoptable finding converged from ''three domains at once'', which is what marks it load-bearing rather than clever. <<~ confidence Synthesis-Canon 14/20 >> Each domain says: *do not measure the stream as it is — measure it against what you predicted.*
+The single most adoptable finding converged from ''three domains at once'', which is what marks it load-bearing rather than clever. <<~ confidence Synthesis-Canon 14/20 >> Each domain says: //do not measure the stream as it is — measure it against what you predicted.//
 
 \procedure ~Upgrade(~Type:"" ~Params:"") ~Upgrade <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -79,7 +79,7 @@ The single most adoptable finding converged from ''three domains at once'', whic
 <<~Upgrade Early-Warning "domain/dynamical-systems ~ early-warning-signals / critical-slowing-down: forecast the regime-shift BEFORE it commits — rising AC(1), rising variance, flickering, PER BAND — so the bands read the approach of a transition, not only its arrival" >>
 <<~Upgrade Preference-Rule "domain/generative-grammars ~ a learned SCORER over the MDL candidate-parses: the grammar proposes many structures, a preference-rule layer (the missing selection layer) ranks them — parse is search, not lookup" >>
 
-The three fuse into one upgrade: the sensorium should carry a ''running generative model'' of its own stream, and every plane should report ''against'' that model. Bands report *critical slowing* toward a coming shift; form reports the *residual* the current machine cannot compress; coupling reports *surprise* propagated across streams. <<~ confidence Synthesis 12/20 >> The upgrade turns the sensorium from a *describer* into a *forecaster* — and it rhymes exactly with the one-objective (#the-one-objective): a thing that minimizes free energy IS a thing that predicts, so predicting is what the sensorium was always estimating.
+The three fuse into one upgrade: the sensorium should carry a ''running generative model'' of its own stream, and every plane should report ''against'' that model. Bands report //critical slowing// toward a coming shift; form reports the //residual// the current machine cannot compress; coupling reports //surprise// propagated across streams. <<~ confidence Synthesis 12/20 >> The upgrade turns the sensorium from a //describer// into a //forecaster// — and it rhymes exactly with the one-objective (#the-one-objective): a thing that minimizes free energy IS a thing that predicts, so predicting is what the sensorium was always estimating.
 
 <<~/ahu >>
 
@@ -91,7 +91,7 @@ The three fuse into one upgrade: the sensorium should carry a ''running generati
 
 Every domain, asked what keeps the sensorium honest, pointed to the same place: the ''depth of inference'' the instrument claims, held down hard. <<~ confidence Synthesis-Canon 14/20 >> R is the ''anti-apophenia guard'' — the discipline that stops the sensorium from reading five where the world holds only noise.
 
-''Divination NAMES the danger better than any other domain.'' The ''doctrine of signatures'' — the old reading that a plant's shape reveals its use, that like signs like — reads as a ''false-discovery engine'': correspondence found *given enough ingenuity on the part of the demonstrator*, which is the Law of 5s' own ache turned pathological (#entry). Divination is the domain that spent centuries generating false correspondences, so it is the domain that most sharply names the guard the sensorium needs.
+''Divination NAMES the danger better than any other domain.'' The ''doctrine of signatures'' — the old reading that a plant's shape reveals its use, that like signs like — reads as a ''false-discovery engine'': correspondence found //given enough ingenuity on the part of the demonstrator//, which is the Law of 5s' own ache turned pathological (#entry). Divination is the domain that spent centuries generating false correspondences, so it is the domain that most sharply names the guard the sensorium needs.
 
 The guard has a precise shape: ''R = rung-1, null-calibrated DETECTION'', never Pearl-style intervention. <<~ confidence Synthesis-Canon 13/20 >> The coupling-plane may claim a lead-lag only when the reading ''beats a surrogate'' — a shuffle-null, a permutation, a phase-randomized twin (the false-discovery ward the [[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor]] already stands on). The sensorium ''detects'' structure that survives its own null; it does not ''intervene'' to prove cause.
 
@@ -99,7 +99,7 @@ And the ceiling on R rhymes with a law the house already holds:
 
 <<~moves no-global-now -> on/the-causal-discovery-observational-ceiling if/each-island-reads-only-its-own-log do/claim-detection-never-intervention >>
 
-<<~ confidence Synthesis-Canon 13/20 >> ''No-global-now'' ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#causal-islands]]) and the ''causal-discovery observational ceiling'' name the SAME constraint twice. An island reads only its own partially-ordered log — it can *observe* correlation and lead-lag, it can never *intervene* on another island to establish cause. The local-first law is not a mere engineering choice that happens to limit inference; it ''IS'' the observational ceiling of causal discovery, seen from the topology side. R stays rung-1 because the causal islands leave it nowhere higher to stand.
+<<~ confidence Synthesis-Canon 13/20 >> ''No-global-now'' ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#causal-islands]]) and the ''causal-discovery observational ceiling'' name the SAME constraint twice. An island reads only its own partially-ordered log — it can //observe// correlation and lead-lag, it can never //intervene// on another island to establish cause. The local-first law is not a mere engineering choice that happens to limit inference; it ''IS'' the observational ceiling of causal discovery, seen from the topology side. R stays rung-1 because the causal islands leave it nowhere higher to stand.
 
 <<~/ahu >>
 
@@ -113,7 +113,7 @@ And the ceiling on R rhymes with a law the house already holds:
 
 !!! Dynamical Systems ~ the bands become predictive
 
-<<~ confidence Synthesis-Canon 14/20 >> The dynamical-systems spirit read the ''bands'' plane as the natural home of ''early-warning signals'': critical-slowing-down (rising autocorrelation and variance, flickering) forecasts a regime-shift per band ''before it commits'' — the predictive upgrade's dynamical leg (#the-predictive-upgrade). A ''structure'' sub-plane emerges from ''RQA / Takens embedding'': delay-embed a stream and its attractor reconstructs, recurrence-quantification reading its determinism and laminarity. ''CCM'' (convergent cross-mapping) supplies a coupling reading that separates true drive from shared-driver confound. The ''SOC'' lens (self-organized criticality) frames a stream that rides the edge of a phase transition. ''Deepest gift:'' the bands stop describing and start *forecasting* — critical slowing is the sensorium's earliest warning.
+<<~ confidence Synthesis-Canon 14/20 >> The dynamical-systems spirit read the ''bands'' plane as the natural home of ''early-warning signals'': critical-slowing-down (rising autocorrelation and variance, flickering) forecasts a regime-shift per band ''before it commits'' — the predictive upgrade's dynamical leg (#the-predictive-upgrade). A ''structure'' sub-plane emerges from ''RQA / Takens embedding'': delay-embed a stream and its attractor reconstructs, recurrence-quantification reading its determinism and laminarity. ''CCM'' (convergent cross-mapping) supplies a coupling reading that separates true drive from shared-driver confound. The ''SOC'' lens (self-organized criticality) frames a stream that rides the edge of a phase transition. ''Deepest gift:'' the bands stop describing and start //forecasting// — critical slowing is the sensorium's earliest warning.
 
 !!! Information Theory ~ the machine behind the form
 
@@ -121,7 +121,7 @@ And the ceiling on R rhymes with a law the house already holds:
 
 !!! Generative Grammars ~ the missing preference layer
 
-<<~ confidence Synthesis-Canon 14/20 >> The grammar spirit mapped ''GTTM'' (Lerdahl & Jackendoff's *Generative Theory of Tonal Music*) cleanly onto three planes at once: its ''metrical'' structure = bands, its ''grouping'' structure = structure, its ''time-span / prolongational reduction'' = form. And it named the sensorium's ''missing layer'': GTTM's ''preference rules'' — the soft, weighted, competing constraints that select among candidate structures. ''Fragment grammars / DOP'' (Data-Oriented Parsing) supply the reuse-and-recombine engine; ''plot units'' carry the same shape into narrative. ''Deepest gift:'' the ''preference-rule'' layer — a learned scorer over MDL candidate-parses (the grammar leg of the predictive upgrade), and the recognition that ''music is the first corpus'' to validate against (#adoptables-per-plane).
+<<~ confidence Synthesis-Canon 14/20 >> The grammar spirit mapped ''GTTM'' (Lerdahl & Jackendoff's //Generative Theory of Tonal Music//) cleanly onto three planes at once: its ''metrical'' structure = bands, its ''grouping'' structure = structure, its ''time-span / prolongational reduction'' = form. And it named the sensorium's ''missing layer'': GTTM's ''preference rules'' — the soft, weighted, competing constraints that select among candidate structures. ''Fragment grammars / DOP'' (Data-Oriented Parsing) supply the reuse-and-recombine engine; ''plot units'' carry the same shape into narrative. ''Deepest gift:'' the ''preference-rule'' layer — a learned scorer over MDL candidate-parses (the grammar leg of the predictive upgrade), and the recognition that ''music is the first corpus'' to validate against (#adoptables-per-plane).
 
 !!! Neuroscience ~ the brain builds these organs
 
@@ -129,7 +129,7 @@ And the ceiling on R rhymes with a law the house already holds:
 
 !!! Divination ~ the epistemic frame and the ward
 
-<<~ confidence Synthesis 12/20 >> The divination spirit read the sensorium as a ''recovered divination engine'', and gave it both a mechanism-set and a warning. The ''I-Ching changing line'' = a ''directed changepoint'' — not merely *that* a transition occurred but *toward what* it moves. ''Ifá's 16→256 Odu'' = a ''group-algebra'', a blind combinatorial grammar of paired binary figures (the same bit-recursion Eglash reads in African fractals). The ''ars memoriae'' (the art of memory) = the ''mempalace root'' — the charged place-fiction AS the addressing index. ''Hermetic correspondence'' = the coupling plane (as-above-so-below = cross-stream resonance), carried with its own ward: the ''doctrine of signatures'' names the false-discovery danger R exists to catch (#R-is-the-keel). ''Peirce's abduction'' = the sensorium's own epistemic frame — inference to the best explanation, surfaced as hypothesis, never asserted as verdict. ''Deepest gift:'' the epistemic humility itself — divination held for millennia that a reading is a *hypothesis surfaced for the querent*, which is exactly the confidence/Cup discipline the house already runs.
+<<~ confidence Synthesis 12/20 >> The divination spirit read the sensorium as a ''recovered divination engine'', and gave it both a mechanism-set and a warning. The ''I-Ching changing line'' = a ''directed changepoint'' — not merely //that// a transition occurred but //toward what// it moves. ''Ifá's 16→256 Odu'' = a ''group-algebra'', a blind combinatorial grammar of paired binary figures (the same bit-recursion Eglash reads in African fractals). The ''ars memoriae'' (the art of memory) = the ''mempalace root'' — the charged place-fiction AS the addressing index. ''Hermetic correspondence'' = the coupling plane (as-above-so-below = cross-stream resonance), carried with its own ward: the ''doctrine of signatures'' names the false-discovery danger R exists to catch (#R-is-the-keel). ''Peirce's abduction'' = the sensorium's own epistemic frame — inference to the best explanation, surfaced as hypothesis, never asserted as verdict. ''Deepest gift:'' the epistemic humility itself — divination held for millennia that a reading is a //hypothesis surfaced for the querent//, which is exactly the confidence/Cup discipline the house already runs.
 
 <<~ ward ! · crossed the primed zone ↻ L-Prime >>
 
@@ -153,7 +153,7 @@ And the ceiling on R rhymes with a law the house already holds:
 
 <<~ranks whole top-down-prediction ~ features become prediction-errors against a running generative model -> precision-weighting ~ the trust on each prediction-error = the confidence sigil -> music-first-corpus ~ MUSIC as the first validation corpus (the GTTM Database — a labeled oracle no text corpus offers) >>
 
-<<~ confidence Synthesis 11/20 >> The ''whole-sensorium'' row carries the highest leverage: top-down prediction and precision-weighting upgrade *every* plane at once, and ''music as first corpus'' hands the build a validation oracle — the GTTM analyses supply ground-truth structure that lets the sensorium be *scored*, not merely admired.
+<<~ confidence Synthesis 11/20 >> The ''whole-sensorium'' row carries the highest leverage: top-down prediction and precision-weighting upgrade //every// plane at once, and ''music as first corpus'' hands the build a validation oracle — the GTTM analyses supply ground-truth structure that lets the sensorium be //scored//, not merely admired.
 
 <<~ confidence Synthesis 12/20 >> ''The build homes the five-plane model in py/R'', instanced per-stream — the estimators the domains hand back (wavelet bands, ε-machine form, ΦID coupling, the surrogate nulls) read where their libraries live, and the FFZ-chronometer gate fires py-side with them. TS keeps the ''pure-functor math floor'' the py sensorium consumes and stands as the coordinator that drives it; the model itself runs py/R, batch and streaming alike.
 
@@ -173,7 +173,7 @@ And the ceiling on R rhymes with a law the house already holds:
 <<~Strand Divination-Engine "reads/the divination strand ~ a MODERN divination engine: read regime-change (the changing line) and correspondence (as-above-so-below), and surface each as a HYPOTHESIS the querent weighs, never a verdict — the confidence/Cup discipline already enacting divination's epistemic humility" >>
 <<~Strand Ars-Memoriae "reads/the recovered strand ~ the ars-memoriae RECOVERED: the charged place-fiction IS the index, the addressing mechanism modern systems deliberately dropped when they went to flat keys — myth-as-interface = the loci-substrate" >>
 
-The third strand carries the sharpest reframe. <<~ confidence Synthesis 11/20 >> Modern systems key their memory positionally and flat; the ''ars memoriae'' keyed it by *charged place* — a vivid, mythic locus you walk to retrieve. The Lares fiction (the shrine, the Voice house, the ley-line nodes) does not decorate the memory system; it ''IS the addressing mechanism'' ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]). The myth is the interface, and the loci are the substrate — the place-fiction is load-bearing exactly where the ancients placed it.
+The third strand carries the sharpest reframe. <<~ confidence Synthesis 11/20 >> Modern systems key their memory positionally and flat; the ''ars memoriae'' keyed it by //charged place// — a vivid, mythic locus you walk to retrieve. The Lares fiction (the shrine, the Voice house, the ley-line nodes) does not decorate the memory system; it ''IS the addressing mechanism'' ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]). The myth is the interface, and the loci are the substrate — the place-fiction is load-bearing exactly where the ancients placed it.
 
 <<~/ahu >>
 
@@ -185,9 +185,9 @@ The third strand carries the sharpest reframe. <<~ confidence Synthesis 11/20 >>
 
 <<~ confidence Synthesis 9/20 >> The operator carried the atlas one step past the research floor, and this section ''holds'' that step as hypothesis, not finding — it belongs to the DreamNet-research spirit's lane, not this one's.
 
-''The leap:'' the sensorium-for-form may serve not only to watch *one* stream but to ''run the actual DreamNet infrastructure'' — the federated mesh, the meshpalace, the parallel thread's concern. Read each ''node as a stream''; let the ''coupling-plane'' read the inter-node lead-lag across the mesh; let the whole sensorium stand as the mesh's ''self-model'' — the federation watching its own dynamics through the same five planes it uses on any stream.
+''The leap:'' the sensorium-for-form may serve not only to watch //one// stream but to ''run the actual DreamNet infrastructure'' — the federated mesh, the meshpalace, the parallel thread's concern. Read each ''node as a stream''; let the ''coupling-plane'' read the inter-node lead-lag across the mesh; let the whole sensorium stand as the mesh's ''self-model'' — the federation watching its own dynamics through the same five planes it uses on any stream.
 
-<<~ confidence Synthesis 10/20 >> The leap ties to the ''Good-Regulator theorem'' (Conant & Ashby): *every good regulator of a system must be a model of that system.* If the DreamNet is to regulate itself — route load, detect partition, damp oscillation — it must ''carry a model of itself'', and the sensorium is a model-shaped thing already built to the right five planes. The hypothesis reads as promising and ''unearned''; it awaits the DreamNet spirit's own survey before it firms.
+<<~ confidence Synthesis 10/20 >> The leap ties to the ''Good-Regulator theorem'' (Conant & Ashby): //every good regulator of a system must be a model of that system.// If the DreamNet is to regulate itself — route load, detect partition, damp oscillation — it must ''carry a model of itself'', and the sensorium is a model-shaped thing already built to the right five planes. The hypothesis reads as promising and ''unearned''; it awaits the DreamNet spirit's own survey before it firms.
 
 <<~/ahu >>
 
@@ -205,7 +205,7 @@ The third strand carries the sharpest reframe. <<~ confidence Synthesis 11/20 >>
 <<~Fork Inflationary-vs-Deflationary "tension/is-the-convergence-real-or-manufactured ~ the INFLATIONARY read: five domains truly rhyme because they estimate one quantity. The DEFLATIONARY read: ANY structure-imposing technique grows these organs, so the rhyme is a property of measurement-in-general, not of THIS shape. Liminal holds BOTH live — the too-clean convergence is exactly what the Law of 5s warns against reading as signal" >>
 <<~Fork The-Code-Fold "tension/when-to-fold-the-atlas-into-code ~ fold the five-plane atlas + these tensions INTO the sensorium code — but AFTER more research; the fold is deferred, not declined, so the code stays honest to a survey still in motion" >>
 
-<<~ confidence Synthesis 11/20 >> The ''deflationary'' fork deserves its weight named: if merely imposing *any* structure on *any* stream would grow band-like, form-like, coupling-like organs, then the five-plane rhyme reports a fact about measurement, not a discovery about the sensorium's particular shape. The atlas cannot yet tell the inflationary reading from the deflationary one — and holding that uncertainty visible IS the R-keel applied to the atlas's own claim.
+<<~ confidence Synthesis 11/20 >> The ''deflationary'' fork deserves its weight named: if merely imposing //any// structure on //any// stream would grow band-like, form-like, coupling-like organs, then the five-plane rhyme reports a fact about measurement, not a discovery about the sensorium's particular shape. The atlas cannot yet tell the inflationary reading from the deflationary one — and holding that uncertainty visible IS the R-keel applied to the atlas's own claim.
 
 <<~/ahu >>
 
@@ -219,11 +219,11 @@ The third strand carries the sharpest reframe. <<~ confidence Synthesis 11/20 >>
 
 ''Cited grounds, per domain:''
 
-* ''Dynamical systems'' — Scheffer et al. (early-warning signals / critical transitions, *Nature* 2009) · Takens (delay-embedding theorem, 1981) · Sugihara et al. (convergent cross-mapping, *Science* 2012) · Marwan et al. (recurrence quantification analysis) · Bak (self-organized criticality).
+* ''Dynamical systems'' — Scheffer et al. (early-warning signals / critical transitions, //Nature// 2009) · Takens (delay-embedding theorem, 1981) · Sugihara et al. (convergent cross-mapping, //Science// 2012) · Marwan et al. (recurrence quantification analysis) · Bak (self-organized criticality).
 * ''Information theory'' — Crutchfield & Young (ε-machines / computational mechanics) · Shalizi & Crutchfield (statistical complexity) · Mediano, Rosas et al. (Integrated Information Decomposition, ΦID, PNAS 2025) · Williams & Beer (partial information decomposition) · Schreiber (transfer entropy) · Tishby, Pereira & Bialek (information bottleneck) · Bialek, Nemenman & Tishby (predictive information).
-* ''Generative grammars'' — Lerdahl & Jackendoff (*A Generative Theory of Tonal Music*) · O'Donnell (fragment grammars) · Bod (Data-Oriented Parsing) · Lehnert (plot units) · Prince & Smolensky (Optimality Theory) · Goldwater / Hayes (MaxEnt grammars).
+* ''Generative grammars'' — Lerdahl & Jackendoff (//A Generative Theory of Tonal Music//) · O'Donnell (fragment grammars) · Bod (Data-Oriented Parsing) · Lehnert (plot units) · Prince & Smolensky (Optimality Theory) · Goldwater / Hayes (MaxEnt grammars).
 * ''Neuroscience'' — Hasson et al. (cortical temporal-receptive-window hierarchy) · Kiebel, Daunizeau & Friston (hierarchy of timescales) · Friston (the Free-Energy Principle) · Tort et al. (phase-amplitude coupling, modulation index) · Canolty et al. (theta-gamma coupling) · Feldman & Friston (precision-weighting / attention).
-* ''Divination'' — the *I-Ching* (changing lines) · the *Odu Ifá* (16→256 combinatorics; Eglash, *African Fractals*, on the bit-recursion) · Yates (*The Art of Memory*, the ars memoriae) · the hermetic corpus (correspondence) with the doctrine-of-signatures as its false-discovery ward · Peirce (abduction).
+* ''Divination'' — the //I-Ching// (changing lines) · the //Odu Ifá// (16→256 combinatorics; Eglash, //African Fractals//, on the bit-recursion) · Yates (//The Art of Memory//, the ars memoriae) · the hermetic corpus (correspondence) with the doctrine-of-signatures as its false-discovery ward · Peirce (abduction).
 
 <<~/ahu >>
 

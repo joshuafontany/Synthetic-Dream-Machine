@@ -99,7 +99,7 @@ A human author can write at any zoom level freely. The sigil layer (skeleton) pr
 
 ''Progressive collapse rule:'' a display system may render only the skeleton when the tiddler's manaʻoʻiʻo falls below a threshold, or when a layout engine requests outline mode. The skeleton remains legible without the flesh; the flesh does not remain legible without the skeleton.
 
-This differs from the technical three-mode render dispatch (`html` / `carrier` / `projection`) in `memetic-wikitext.tid #render-modes`, which controls serialization format. Progressive display controls *reading posture* — a human/agent concern, not a wire-format concern.
+This differs from the technical three-mode render dispatch (`html` / `carrier` / `projection`) in `memetic-wikitext.tid #render-modes`, which controls serialization format. Progressive display controls //reading posture// — a human/agent concern, not a wire-format concern.
 
 <<~/ahu >>
 

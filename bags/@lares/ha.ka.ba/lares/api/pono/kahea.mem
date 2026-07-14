@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahea"
 
 ! Kahea
 
-*kāhea* — Hawaiian: to call out, to summon, to invoke; a call, a cry.
+//kāhea// — Hawaiian: to call out, to summon, to invoke; a call, a cry.
 
 A transclusion-family edge sugar with dual form. The URI form creates a live transclusion edge —
 a live embed of the target's content at the source, kept fresh by subscription (push-forward).

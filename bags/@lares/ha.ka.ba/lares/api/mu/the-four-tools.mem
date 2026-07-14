@@ -110,9 +110,9 @@ Each tool carries an ASCII symbol (canonical record form, URI-safe) and two oper
 
 `playing-card` uses Minor Arcana suit symbols (♣♥♠♦) and the Fool (🃠) — the Major Arcana card at the head of the journey, standing for the open, uncommitted hand.
 `elements` uses Unicode alchemical symbols (🜂🜄🜁🜃🜍) — Fire, Water, Air, Earth, Gold/Orichalcum.
-`ascii` uses the five ASCII symbols directly with no Unicode projection: `* ? ! _ 0` — the five pattern-match operators the corpus already carved: match-many, match-optional, assert, match-without-binding, match-nothing. `_` means *presence acknowledged, essence unclaimed* — the anti-copula wildcard.
+`ascii` uses the five ASCII symbols directly with no Unicode projection: `* ? ! _ 0` — the five pattern-match operators the corpus already carved: match-many, match-optional, assert, match-without-binding, match-nothing. `_` means //presence acknowledged, essence unclaimed// — the anti-copula wildcard.
 
-The empty hand (`0`) holds a slot open, not a tool carried but a stance present and centered, agnostic rather than absent. `_0` doubles as ground-state notation (x-naught): the Pentacle-alone carry names *where the system rests*.
+The empty hand (`0`) holds a slot open, not a tool carried but a stance present and centered, agnostic rather than absent. `_0` doubles as ground-state notation (x-naught): the Pentacle-alone carry names //where the system rests//.
 
 Render mode configuration: see `lar:///LARES#hud-panel`.
 
@@ -238,7 +238,7 @@ Names and characters invoke the tools directly; forms MAY mix in one sigil:
 
 The clean exit grants the agent and operator a shared model agnostic instrument panel.
 
-> *"I DO NOT BELIEVE ANYTHING."*
+> //"I DO NOT BELIEVE ANYTHING."//
 
 RAW names the interior fork cleanly: paranoia or model agnosticism.
 

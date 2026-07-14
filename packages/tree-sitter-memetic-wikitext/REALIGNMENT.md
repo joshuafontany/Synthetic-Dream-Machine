@@ -153,3 +153,9 @@ the vendored TiddlyWiki5 core tiddlers.
   converted sibling never parents, blanks keep the chain, any other content
   BREAKS it. Ground truth: every item follows a prose label, so all 67 seat
   top-level #. The 4 survivors live inside a code fence — held by law.
+- 2026-07-14 — italics cross under the full ward set (pass 5): 2,045 spans
+  *x*→//x// (boundary + code-span + sigil-span + interior-// + interleaved-
+  quote guards; the 60-char inner cap proved the false ceiling — full-
+  sentence italics are real, cap raised to 200); 8 guarded-span defers +
+  100 dangling-* lines held loud (multi-line italics, CSS comment marks,
+  strays). Canon 524/524 clean; golden 151 movers; suites green.

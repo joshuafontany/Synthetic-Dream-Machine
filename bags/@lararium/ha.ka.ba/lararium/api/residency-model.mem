@@ -30,7 +30,7 @@ uri-path      = "ha.ka.ba/lararium/api/residency-model"
 
 ! Residency Model — Coordinate Space + Query Plan
 
-A recipe/bag + CRDT system MUST hold as a ''coordinate space'', not a ''timeline''. A bag forms one coordinate axis. The recipe forms a query plan over `(tiddler-title × bag)`. CRDT merge stays associative-commutative *within* one coordinate; cross-coordinate composition uses set-union with priority resolution, never a rebase.
+A recipe/bag + CRDT system MUST hold as a ''coordinate space'', not a ''timeline''. A bag forms one coordinate axis. The recipe forms a query plan over `(tiddler-title × bag)`. CRDT merge stays associative-commutative //within// one coordinate; cross-coordinate composition uses set-union with priority resolution, never a rebase.
 
 A single tiddler-title MAY have residency in N bags simultaneously, each bag carrying its own CRDT history of that tiddler. The recipe's slot order resolves which bag's version surfaces in the live wiki view.
 
@@ -44,7 +44,7 @@ A single tiddler-title MAY have residency in N bags simultaneously, each bag car
 
 A prior design pivot proposed retiring the single-canonical `promote` ceremony in favor of a git-style ''stage / commit / push'' triple. Research across eight spirits (four per round, two rounds) returned a deeper finding:
 
-> The git-style triple treats bags as branches — *parallel timelines that need merging*. Bags act as scopes — *coordinates in a product space*. The verb family must come from set algebra and graph theory, not from version control.
+> The git-style triple treats bags as branches — //parallel timelines that need merging//. Bags act as scopes — //coordinates in a product space//. The verb family must come from set algebra and graph theory, not from version control.
 
 Two adjacent traditions hold the right primitives. Neither surfaced through the git framing:
 
@@ -158,7 +158,7 @@ Every ACTION writes an ''indelible effect record'' tiddler in each affected bag,
 
 Effect records live within each bag at `lar:///<bag>/ledger/residency/<event-id>` — the bag's indelible residency ledger (the web2 word "log" left the surface 2026-06-07). Records stay append-only and persist in perpetuity, even when a later ACTION deaccessions the underlying tiddler. ''The artifact may leave; the record of its prior presence here, and of its leaving, never does.''
 
-This dual-surface design — ACTION verbs for the *gesture*, archival verbs for the *audit* — resonates structurally with web3 causal-islands models. The archival profession solved the identity-across-custody problem before software did; we adopt the discipline along with the vocabulary. The ''Floating Librarians of Mu register'' applies — Mu's stewards of memory cooperate with archivists, not with version-control engineers.
+This dual-surface design — ACTION verbs for the //gesture//, archival verbs for the //audit// — resonates structurally with web3 causal-islands models. The archival profession solved the identity-across-custody problem before software did; we adopt the discipline along with the vocabulary. The ''Floating Librarians of Mu register'' applies — Mu's stewards of memory cooperate with archivists, not with version-control engineers.
 
 <<~/ahu >>
 
@@ -172,7 +172,7 @@ Any implementation of this model MUST hold all five:
 # ''Work-identity preserved across residencies.'' FRBR/LRM levels: tiddler-title = Work; per-bag CRDT doc = Manifestation; independent histories by design.
 # ''Operator-visible coordinate surface.'' Every read MUST surface origin-bag the way SPARQL exposes `GRAPH ?g`. TW5's `getShadowSource` carries the prior-art pattern. Without this surface, the architecture degrades to shadow-tiddler confusion at CRDT scale.
 # ''Audit-trail discipline.'' Every residency change writes an indelible effect record. Silent unlink violates the model.
-# ''Verb vocabulary from set-algebra + cataloging.'' The *residency* ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that *folds* state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#conflict-resolution), or it reads as a banned merge verb.
+# ''Verb vocabulary from set-algebra + cataloging.'' The //residency// ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that //folds// state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#conflict-resolution), or it reads as a banned merge verb.
 
 <<~/ahu >>
 
@@ -194,7 +194,7 @@ The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/D
 
 !!! EPOCH — cut history behind (DEFERRED, named here for the pair)
 
-RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-handlers). They stay **two verbs, sequenced `reconcile → epoch`, never auto-coupled** — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a *content* epoch (peers offline across a content cut cannot merge).
+RECONCILE folds //forward//; **EPOCH** cuts //behind// (bounds the op-log; epoch-handlers). They stay **two verbs, sequenced `reconcile → epoch`, never auto-coupled** — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a //content// epoch (peers offline across a content cut cannot merge).
 
 <<~/ahu >>
 

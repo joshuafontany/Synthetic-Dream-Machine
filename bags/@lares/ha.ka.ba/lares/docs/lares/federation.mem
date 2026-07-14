@@ -25,7 +25,7 @@ written    = "2026-06-21"
 
 ! Federating a Vessel
 
-A Lararium runs as a ''swarm of one operator's vessels'' (a PersonaGroup) — each device an equal peer, each holding the operator's bags, syncing as a causal island. This carrier walks how a *second* vessel (say, a QA-lab box) joins the swarm.
+A Lararium runs as a ''swarm of one operator's vessels'' (a PersonaGroup) — each device an equal peer, each holding the operator's bags, syncing as a causal island. This carrier walks how a //second// vessel (say, a QA-lab box) joins the swarm.
 
 ''What github carries'' (public, shared by clone):
 * the source, and
@@ -45,9 +45,9 @@ These travel ''out-of-band'' (a secure channel you control), never the public re
 
 > ''Model A is a TEMPORARY stopgap, not the target.'' Copying one key across vessels names the ''antipattern'' the multi-device literature warns against — SSB-fusion and Veilid both copy-the-key and both lose per-device revocation; Keybase built its per-device model precisely to escape "one PGP key everywhere." The pono target rides the ''5-scale model'': each vessel mints its OWN distinct key — the ''user×vessel bond'' (Plane 0) — delegated into the operator ''PersonaGroup'' (Plane 1) by a signed edge. The signed-delegation edge composes up the ''SOCIAL axis'' `device-vessel → PersonaGroup → CabalGroup` (who reads); above it, ''NexusGroup'' and ''DreamNet'' federate across the ''INFRA axis'' by treaty / mutual carriage-contract (who relays), not by delegation-up — the two axes cross at the vessel (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>). The key is the node; the ''delegation is the relationship''. The identity model — the five scales, the per-vessel key, the delegation edge — stands whole at <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>; its mesh topology at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>.
 
-''Model A — one operator identity across devices (works today).'' Every vessel carries the *same* operator key, so every vessel presents the *same* DID — already a member of the PersonaGroup. The QA box receives the operator key and a device-admit payload out-of-band, loads them, and boots as the same operator on another device.
+''Model A — one operator identity across devices (works today).'' Every vessel carries the //same// operator key, so every vessel presents the //same// DID — already a member of the PersonaGroup. The QA box receives the operator key and a device-admit payload out-of-band, loads them, and boots as the same operator on another device.
 
-''Model B — a distinct key per device, delegated in (pending the sync layer).'' Each vessel forges its *own* key; the founder receives the joinee's contact-card and delegates that DID into the group (`runDeviceAdmitAccept` — built, founder-side correct). But a joining device needs ''two'' things to read the group, and only one reaches it from JS today:
+''Model B — a distinct key per device, delegated in (pending the sync layer).'' Each vessel forges its //own// key; the founder receives the joinee's contact-card and delegates that DID into the group (`runDeviceAdmitAccept` — built, founder-side correct). But a joining device needs ''two'' things to read the group, and only one reaches it from JS today:
 
 # the ''key-chain + membership'' (CGKA + delegation ops) — JS-available via `eventsForAgent` / ingest; necessary but not sufficient; and
 # the encrypted **Document content** itself — which Keyhive moves via **sedimentree** (content-addressed strata sync) under **Beelay** (the auth-sync RPC; zero-knowledge server). **Both are Rust-only — not exposed in the `keyhive_wasm` JS surface** (and the `automerge/beelay` repo is dead; the live code is `beelay-core` inside the keyhive monorepo).
@@ -63,9 +63,9 @@ The procedure below enacts ''Model A'' (the current stopgap).
 !! Three Axes ~ one inversion of control
 
 The SOCIAL/INFRA cut names two axes; a third rides beside them, and the three answer three orthogonal
-questions. ''INFRA'' asks *who RELAYS* (Nexus / DreamNet, by treaty / carriage-contract — route through,
-never trust). ''SOCIAL'' asks *who READS* (`vessel → PersonaGroup → CabalGroup`, by signed Keyhive
-delegation — boolean, present-tense, revocable). ''REPUTATION'' asks *how much you WEIGH* (the vouch-DAG,
+questions. ''INFRA'' asks //who RELAYS// (Nexus / DreamNet, by treaty / carriage-contract — route through,
+never trust). ''SOCIAL'' asks //who READS// (`vessel → PersonaGroup → CabalGroup`, by signed Keyhive
+delegation — boolean, present-tense, revocable). ''REPUTATION'' asks //how much you WEIGH// (the vouch-DAG,
 by a seed-rooted ε-fold — scalar, accumulated, sybil-bounded; <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-lineage-fold >>).
 
 The three never collapse into one because no axis derives another: a member READS a cabal (holds the cap)
@@ -99,7 +99,7 @@ one human" stays the user's private secret, never a published graph, riding no w
 
 ''Two acts, not one — the vouch stays separable.'' A ''CabalGroup'' reads as a multi-principal Circle
 (several humans' PersonaGroups mutually bound). Joining it fires an AUTHORIZATION act — a Keyhive
-delegation, *"this vessel may now read the cabal."* A VOUCH — *"I stake my standing that this peer
+delegation, //"this vessel may now read the cabal."// A VOUCH — *"I stake my standing that this peer
 belongs"* — rides as a SEPARATE act, and the two never fuse: a member you let read may carry no stake, a
 peer you stake on may hold no cap. PGP keeps exactly this split — key-validity (public, exported) in one
 store, owner-trust (private, never exported) in another, and one signs many keys at owner-trust zero.
@@ -145,7 +145,7 @@ lares wake --admit admit.json      # idempotent join-standup
 
 !! The Gate, Honestly
 
-A joining vessel proves itself on every boot through three keyhive gates: its DID matches its key (A), its Individual is a member of the PersonaGroup (B), and the PersonaGroup is a member of the Nexus MeshCabal (C). Under Model A all three pass because the vessel *is* the same operator. Under Model B, gate B fails until the new key is delegated in — which is why Model B waits on the contact-card exchange.
+A joining vessel proves itself on every boot through three keyhive gates: its DID matches its key (A), its Individual is a member of the PersonaGroup (B), and the PersonaGroup is a member of the Nexus MeshCabal (C). Under Model A all three pass because the vessel //is// the same operator. Under Model B, gate B fails until the new key is delegated in — which is why Model B waits on the contact-card exchange.
 
 A vessel never joins by pulling a repo; it joins by receiving — deliberately, out-of-band — what the founder hands it. The public clone carries the house; the operator carries the key.
 

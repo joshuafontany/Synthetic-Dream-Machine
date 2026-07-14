@@ -120,7 +120,7 @@ The signal branch splits across five layers:
 |---|---|---|
 | Canonical URI vector | audit-ready record form for exchange boundaries | parent branch framing, see `lar:///ha.ka.ba/lararium/docs/signal/l-space` |
 | Sigil panel | live exchange-boundary instruments (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses) | `lar:///ha.ka.ba/lararium/docs/signal/hud` |
-| Conformance lens | reads the OODA-HA loop in *referenced* content, outward and on demand | `lar:///ha.ka.ba/lares/api/pono/conformance` |
+| Conformance lens | reads the OODA-HA loop in //referenced// content, outward and on demand | `lar:///ha.ka.ba/lares/api/pono/conformance` |
 | Render targets | cross-surface sigilization and projection rules | `lar:///ha.ka.ba/lararium/docs/signal/render-targets` |
 | SA-display framing | shared-mental-model theory, research grounding, and SA/XAI split | `lar:///ha.ka.ba/lararium/docs/signal/sa-display` |
 

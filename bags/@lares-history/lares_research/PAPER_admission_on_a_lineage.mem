@@ -79,7 +79,7 @@ closed form. ''If seed-return opens a laundering channel, C2 dies.''
 
 ''C3 — THE PRIMARY ATTACK IS FORBIDDEN BY THE DATA MODEL.'' A sybil is by construction a ''descendant'' and
 can never vouch back up its own lineage — a cycle is ''structurally unrepresentable''. The best known
-attack on PageRank is precisely *route heavy cycles back through yourself*.
+attack on PageRank is precisely //route heavy cycles back through yourself//.
 
 ''REFUTED BY:'' sideways laundering — sybils vouching a confederate elsewhere. The gain stays bounded by
 C1 and costs a real attack edge, ''but the claim is "no SELF-boosting", never "attack-free", and anyone''
@@ -96,7 +96,7 @@ has not proved it; this is the one claim that reads as a ''conjecture worth a pr
 
 ''C5 — NON-MONOTONE IS FINE, BECAUSE THE SCORE IS CONFLUENT.'' PPR is a pure deterministic function of the
 edge set, so two islands holding the same converged graph compute the ''same score, whatever the arrival''
-''order.'' So ''re-evaluate at use; never cache the decision.'' *Decisions do not merge* is not a workaround
+''order.'' So ''re-evaluate at use; never cache the decision.'' //Decisions do not merge// is not a workaround
 — it is the CALM-correct architecture.
 
 ''C6 — SCARCITY REPLACES THE THRESHOLD (biology).'' The germinal centre never chose a number: it made
@@ -108,14 +108,14 @@ starving. ''The co-pay then falls out as a CONSERVATION LAW, not an enforcement 
 ''C7 — A NEGATIVE FACT CANNOT BE MADE TO ARRIVE (cryptography, and history).'' CRLs, OCSP, PGP revocation,
 CT's gossip layer, UCAN's revocation store — ''all failed in the same place.'' Soft-fail is not a bug; it
 is ''what a pulled negative fact always degrades to'' under an adversary who owns the wire. ''Therefore''
-''every authority is a lease that dies of thirst'', and *decay-unless-fed* and *anergy-not-ban* are ''ONE''
+''every authority is a lease that dies of thirst'', and //decay-unless-fed// and //anergy-not-ban// are ''ONE''
 ''mechanism, not two.''
 
 The 11th century says it again: the ''Maghribi coalition'' — the founding citation for *reputation replaces
 courts* — ''does not survive its own sources.'' Bad news travelled ~315 miles, to the disputants' own
 circles, with no adjudicator and ''no documented ostracism'' (Edwards & Ogilvie, EcHR 2012).
 
-''C8 — ADMISSION IS A RE-PERFORMANCE, NOT A LOOKUP (history).'' Ordination *sub conditione*: *"if thou art
+''C8 — ADMISSION IS A RE-PERFORMANCE, NOT A LOOKUP (history).'' Ordination //sub conditione//: *"if thou art
 not already ordained, I ordain thee"* — ''a re-vouch asserting NOTHING about the disputed ancestor.'' It
 needs no global view, survives partition (''the far chapter is never reached, and its silence is not''
 ''evidence''), voids nothing, and puts the liability on the ''local, reachable'' voucher. Guilds never
@@ -139,9 +139,9 @@ conservation law — ''is also the instrument by which insiders keep outsiders o
 ''The same scarcity that makes a vouch honest makes it SALEABLE.'' The historical receipt reads: centuries
 of excluded competent outsiders. ''This bill arrives whatever we build.''
 
-''THE VAGANTE COLLAPSE.'' Promiscuous cross-consecration made *valid succession* ''cease to discriminate'' —
+''THE VAGANTE COLLAPSE.'' Promiscuous cross-consecration made //valid succession// ''cease to discriminate'' —
 nearly everyone could trace SOME path to a recognised root. ''The DAG survived; its use as an admission''
-''test did not.'' The churches fell back on the living body: *are you in communion with us NOW?*
+''test did not.'' The churches fell back on the living body: //are you in communion with us NOW?//
 
 ''EMPTINESS, NOT ATTACK.'' SPKI/SDSI got this right in 1996 and nobody built on it. `gpg` shipped a full
 trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: *"I never ever ever successfully

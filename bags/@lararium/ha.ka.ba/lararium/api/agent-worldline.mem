@@ -29,7 +29,7 @@ written   = "2026-06-25"
 
 ''The keystone the edge and the clock both ride.'' A spawned spirit (sub-agent)
 carries no binding to a CRDT replica — and architecturally it holds none: the
-''daemon stands as the sole Automerge actor''; spirits mine *into* that one replica,
+''daemon stands as the sole Automerge actor''; spirits mine //into// that one replica,
 never write it as peers. So a per-agent identity rides a ''logical handle'' — not a
 replica, and not (inside the daemon) a key.
 
@@ -63,20 +63,20 @@ The three faces, each its own organ, none collapsing into another:
 <<~Part Self "resolves/by RULE against the spawn-context (the indexical 'I' = the agent of THIS context), never a stored referent; the handle carries identity, the pet-name labels only [Deixis: character vs content · Cipher: petname split]" >>
 <<~Part Two >>
 
-''The fork resolves on different organs'' (Deixis): the *handle* baptizes ''FIXED''
+''The fork resolves on different organs'' (Deixis): the //handle// baptizes ''FIXED''
 at spawn (a Kripke rigid designator — an immutable lineage path); the
-*parent-reference* resolves ''ON READ'' (an anaphora bound variable — "the actor that
+//parent-reference// resolves ''ON READ'' (an anaphora bound variable — "the actor that
 spawned me"), so re-parenting never dangles a stale pointer. And naming stays distinct
-from attribution: ''naming rides the lineage-path'' (descent = address, *who*);
-''attribution rides the reference-edge'' (act → principal, *whose-act*). One handle,
+from attribution: ''naming rides the lineage-path'' (descent = address, //who//);
+''attribution rides the reference-edge'' (act → principal, //whose-act//). One handle,
 two offices.
 
 <<~ confidence Synthesis-Canon 17/20 >> Six independent domains rhyme to the
 no-registry derived handle — the convergence, not any single source, seats it.
 
-''The ʻŌlelo name — *hoʻoili*.'' This worldline functor (Turn → Trajectory) carries
-the house name ''hoʻoili'' — to transmit, bequeath, inherit (from *ili*, inheritance) —
-the ''descent specialization'' of *mālama pili*, the functor discipline's core keeper-name
+''The ʻŌlelo name — //hoʻoili//.'' This worldline functor (Turn → Trajectory) carries
+the house name ''hoʻoili'' — to transmit, bequeath, inherit (from //ili//, inheritance) —
+the ''descent specialization'' of //mālama pili//, the functor discipline's core keeper-name
 ([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline#glosses]]). It reads from
 the verb the same way the handle does: descent IS the address, so the worldline functor
 ''inherits'' — passing the parent's name down the lineage-path.
@@ -88,7 +88,7 @@ the verb the same way the handle does: descent IS the address, so the worldline 
 !! Face II ~ Attribution ~ the reified DAG (and the worldline's happened-before)
 
 ''Make who-drove-whom legible.'' The capture keeps each spirit's journey distinct in
-its own wing; this face names the *edges between them* — the coordination graph the
+its own wing; this face names the //edges between them// — the coordination graph the
 frameworks throw away and the memory must keep. It stacks ''three layers'':
 
 \procedure ~Layer(~Type:"" ~Params:"") ~Layer <<~Type>> <<~holds `[<~Params>]`>>
@@ -130,8 +130,8 @@ whole spawn-tree.
 
 !!! The same DAG IS the worldline's happened-before
 
-''One structure, two readings.'' The reified edge-DAG answers *whose-act* (attribution)
-AND *what-preceded-what* (causal order): a `spawned` edge means ''parent''
+''One structure, two readings.'' The reified edge-DAG answers //whose-act// (attribution)
+AND //what-preceded-what// (causal order): a `spawned` edge means ''parent''
 ''happened-before child''; two children of one parent with ''no edge between them'' read
 ''concurrent'' (the Lightcone "elsewhere"); the ''handback'' edge closes the
 valid-interval — the twin-reunion, the worldline's one sync point. So the worldline's
@@ -140,9 +140,9 @@ partial causal order needs no separate structure: it ''projects from the provena
 
 ''The rhizome widens the reading'' (2026-06-29): the spawn (`prov:Delegation`) edge is
 not the only happened-before — a mid-flight ''injection'' (`prov:Communication` — operator
-OR parent reaching a *running* spirit) lands a happened-before edge ''mid-execution'', a
-merge-point that is *not* a handback. So 'the worldline's one sync point' generalizes to
-*merge-where-messages-land*; handback becomes one merge among many (the kupono models, #time).
+OR parent reaching a //running// spirit) lands a happened-before edge ''mid-execution'', a
+merge-point that is //not// a handback. So 'the worldline's one sync point' generalizes to
+//merge-where-messages-land//; handback becomes one merge among many (the kupono models, #time).
 
 !!! The correlation-id ~ the only token that crosses wings
 
@@ -157,7 +157,7 @@ Wings stay isolated; one shared token lets the harvester draw the inter-wing edg
 <<~ confidence Synthesis-Canon 16/20 >> Causality over timing: a propagated id
 records happened-before ''at the point the edge is created'' — a fact, not an
 inference. Heuristic cwd+time correlation breaks on concurrency, clock-skew (no global
-now), retries, and fan-out. The id travels *with* the work.
+now), retries, and fan-out. The id travels //with// the work.
 
 <<~/ahu >>
 
@@ -183,13 +183,13 @@ carry it.
 <<~ranks domain inside-automerge ~ docs · wiki-CRDTs (the proximal/internal order): Automerge logical time owns causal order — `<counter,actorId>` · `getHeads` · the `drifted` frontier. FfzClock NEVER carries causal order here, and an `ffzCompare` LWW total-order MUST NOT drive a fork/revocation verdict inside the CRDT (that manufactures a global-now the mesh cannot hold) -> the-worldline ~ the agent worldline (NO Automerge actor — spirits mine into the daemon's sole replica): its causal PARTIAL order rides the ''reified edge-DAG'' (#attribution) — a `spawned` edge = happened-before, no-edge-between-siblings = concurrent, handback closes the interval (the twin-reunion). FfzClock keyed on the HANDLE carries the worldline's RHYTHMIC POSITION only (where-in-the-cadence, a membership coordinate — NOT a freshness/decay scalar; manaoio serves the memes, never this clock), never the causal verdict — by code its `ffzCompare` is a total-order LWW and `ffzMerge` a max-join (no concurrency, no merge-ancestry), so causal CANNOT ride it. ''Code divergence (2026-06-25 read):'' `FfzClock.actorId` still keys on the Automerge actor — re-key to the handle when the worldline clock is wired (the actorId slip, live in code). A separate `LarTickCounter` already carries a monotonic cross-source join key -> other-domains ~ all other non-Automerge domains (external streams: game · Mudlet · video · DAW · market feed; capability-leases): FfzClock carries the rhythmic grain per FFZ_PROFILE, pulled across the causal-island boundary inward. The domain-general primitive lives at lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 
 ''The retired over-claim stays retired'' (across both domains): FfzClock measures
-*tempo/grain*, never *who-acted-first* as a CRDT verdict. Inside Automerge, Automerge
+//tempo/grain//, never //who-acted-first// as a CRDT verdict. Inside Automerge, Automerge
 rules; on the worldline, the merge-topology rules and FfzClock's LWW only paces the
 grain. The Fuller-Fontany-Zelenka Chronometer earns its name as the ''rhythm'' of the
 house, not its causality court.
 
 <<~ confidence Synthesis-Canon 16/20 >> The boundary holds because it follows the
-actor-boundary. Open at the mechanism (#open): `ffzCompare` must return *concurrent*
+actor-boundary. Open at the mechanism (#open): `ffzCompare` must return //concurrent//
 (not an LWW tiebreak) when two clocks share no merge-ancestry — confirm the API
 separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
@@ -211,7 +211,7 @@ kept dissents live at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/livin
 ''The worldline names what COULD-HAVE-influenced, never what physically CAUSED.'' Borrill
 2026 ("The Category Mistake in Logical Clocks," arXiv 2602.21730) draws the cut the
 happened-before DAG already honors: a `spawned` edge records an ''epistemic'' bound —
-*this act could have informed that one, as of the island's last sync* — never an
+//this act could have informed that one, as of the island's last sync// — never an
 ''ontic'' claim about a physical causal chain. The mistake the paper names: reading a
 logical clock's order as actual causation. Our edge-DAG sidesteps it by construction —
 it records the influence-possibility at the point the edge is created (#attribution),
@@ -236,7 +236,7 @@ remembers the road not taken). Four traditions converge — Datomic retraction �
 `wasInvalidatedBy` · git reflog (dangling, not deleted) · bitemporal valid-close — and the
 base enacts it already: ''mempalace `kg_invalidate` closes a triple's `valid_to`''
 ''append-only'' (history preserved, never dropped), and the L7 tunnel/hallway dynamics decay
-salience to a floor but ''never to zero''. *Gap held:* `as_of` filters ''valid-time only'';
+salience to a floor but ''never to zero''. //Gap held:// `as_of` filters ''valid-time only'';
 a true belief-rewind (transaction-time — "what did the palace believe at T") is net-new
 atop `extracted_at`.
 
@@ -250,7 +250,7 @@ keyed per `palace_key = sha256(path)` — each fork its own queue/token/KG/tunne
 shared `run` handle.
 
 **Injection = the rhizome — the `prov:Communication` leg, lit at last.** Because
-`SendMessage` lets *both* operator and node redirect any running spirit — even a grandchild
+`SendMessage` lets //both// operator and node redirect any running spirit — even a grandchild
 the parent never spawned — the worldline is a ''rhizome, not a tree''. A mid-flight
 injection lands a happened-before edge ''mid-execution'': a merge-point that is ''not'' a
 handback. So '''merge-only-at-handback' generalizes to 'merge-where-messages-land''' — the
@@ -262,7 +262,7 @@ rode the clock, so the rhizome adds no burden to it. ''The forks, now operator-c
 
 <<~ranks rhizome-cut C-turn-DAG ~ handoffs key to the TURN-DAG node (survives rewind/fork) — operator-cut -> D-full-ticks ~ EVERY injection ticks+merges (full vector-clock fidelity); we cannot yet reliably detect a bearing/vector-change, so full ticks beat a lossy bearing-test — operator-cut -> E-operator-root ~ injected siblings share their injector as a COMMON CAUSE, and the OPERATOR is the root (the operator initiates every flow today; chron / other triggers MAY add non-operator roots later — held open) — operator-cut >>
 
-*Mechanism (the build path):* the worldline's merge-where-messages-land rides the ''edge-DAG''
+//Mechanism (the build path):// the worldline's merge-where-messages-land rides the ''edge-DAG''
 ''stamped into the mempalace'' — the ''chat-session store''. ''Automerge does NOT hold''
 ''chat-session data''; it serves only the DreamNet mesh + the operator's wiki-bags (which
 project to disk as markdown memes), so it never touches this plane (the two-domain cut,
@@ -278,7 +278,7 @@ only a fresh one.
 
 So the canon's earlier 'twin-reunion, the worldline's one sync point' widens: ''handback is''
 ''one merge among many; the rhizome merges wherever a message lands.'' The donation boundary
-holds — these models ride *our* @daemon atop the base's bi-temporal KG (`kg_invalidate`) +
+holds — these models ride //our// @daemon atop the base's bi-temporal KG (`kg_invalidate`) +
 content-addressed tunnels; MemPalace's trunk (entity-first real-name registry, single-node
 "local-first") stays a different ontology — faithful upstream gets only backend/adapters/fixes.
 
@@ -305,7 +305,7 @@ already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ti
 we do NOT gate existing capture by a session toggle or a derived #has (not
 deterministically enforceable across handoffs). Instead, ''`lares ephemeral <task>`''
 ''LAUNCHES the task into an ephemeral swarm born in a blind temp dir — outside every''
-''harvested path''. The run is ephemeral *by construction*: its verbatim never enters
+''harvested path''. The run is ephemeral //by construction//: its verbatim never enters
 `~/.claude/projects` or any mined wing. The dir persists for inspection by default;
 `--cleanup` disposes (off by default). The lived reason: the operator drives
 ''thousands of blind multi-model Q&A panels'' through `gh copilot` — pure noise;
@@ -337,7 +337,7 @@ prompts vs untrusted generated code (sets the tier floor: T0 vs T1+).
 
 ''NONE inside the daemon'' — the single replica grants ocap-grade unforgeability for
 free. A signature (did:key / UCAN / AIP) earns its cost ONLY where an act crosses into
-a peer's trust-domain the daemon can't vouch for — the *founding/incorporation*
+a peer's trust-domain the daemon can't vouch for — the //founding/incorporation//
 crossing, where the agent handle meets the operator's keyhive vessel-identity
 (→ keyhive, the founding boundary). Derive lineage into the id; attribute by reference
 edge, not a signed chain; sign only at the hostile boundary.

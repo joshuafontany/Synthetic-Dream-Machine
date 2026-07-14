@@ -23,7 +23,7 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 <<~ ahu #card >>
 
 !! Read Magic
-*First Key, Archive Handshake*
+//First Key, Archive Handshake//
 
 ''P:'' 2 · ''R:'' self · ''T:'' one magical inscription · ''D:'' 10 minutes
 

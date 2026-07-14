@@ -158,7 +158,7 @@ The three pieces already exist:
 # ''Exit-124 timeout'' + the semantic codes + `pollInterval` in `status`.
 
 ''Caveat (Beacon, Cup):'' the research did not read the repo — confirm whether the
-daemon-job/durable-result interfaces already emit *intermediate* progress (vs only
+daemon-job/durable-result interfaces already emit //intermediate// progress (vs only
 terminal status) before binding the verbs. The event shape above is the target to
 write toward, not a description of current emission.
 

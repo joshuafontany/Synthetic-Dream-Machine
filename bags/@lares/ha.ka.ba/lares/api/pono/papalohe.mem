@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/papalohe"
 
 ! Papalohe
 
-*pāpālohe* — Lua martial art: body-listening reflex, heightened reflexive awareness.
+//pāpālohe// — Lua martial art: body-listening reflex, heightened reflexive awareness.
 
 A reaction-family edge sugar. The wire fires only when the named source event activates it.
 UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.

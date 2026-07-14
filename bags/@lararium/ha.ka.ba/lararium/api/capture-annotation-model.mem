@@ -27,7 +27,7 @@ written   = "2026-06-25"
 
 ! Capture & Annotation ~ the holistic model
 
-''The implement-from keel.'' mempalace captures *verbatim single-agent sessions*
+''The implement-from keel.'' mempalace captures //verbatim single-agent sessions//
 faithfully — that is its gift. But the lararium runs many agents across many
 surfaces, scores every turn on a 0–20 gradient, and spawns throwaway swarms — and
 mempalace's native model has ''holes'' at exactly those seams. This meme states the
@@ -191,7 +191,7 @@ disk now shows `workspace.yaml` — a live capture gap to confirm*).
 <<~ranks membrane verbatim ~ the drawer body · VM-free · ALWAYS lands (mempalace mine) -> gradient ~ the lar_* readings · @daemon-owned · EVENTUAL (lar-telemetry, the lar_hv sweep re-enriches) >>
 
 ''INVERTED (2026-06-25, #forward-facing-nalu):'' the two membranes above describe the
-retired *race-behind* (mempalace mines, then `lar-telemetry` sweeps). They collapse into
+retired //race-behind// (mempalace mines, then `lar-telemetry` sweeps). They collapse into
 ONE forward pass — verbatim AND gradient born together in a producer's `DrawerRecord`,
 enqueued to the unified capture-nalu, flushed on the local tick through the RFC-002
 source-adapter. mempalace files, never mines; the `lar_hv` re-enrich sweep stays only as
@@ -253,7 +253,7 @@ multi-agent spec.
 
 ''Capture is ON by default; ephemeral work is LAUNCHED isolated, never gated.''
 `lares ephemeral <task>` births a swarm (one-or-more tasked spirits) in a ''blind''
-''temp dir outside every harvested path'' — ephemeral *by construction*: never mined,
+''temp dir outside every harvested path'' — ephemeral //by construction//: never mined,
 nothing to exclude. The reason: the operator's thousands of blind judge-panel Q&A
 flows must leave no trace.
 

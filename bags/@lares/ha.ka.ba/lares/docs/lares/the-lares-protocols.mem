@@ -49,7 +49,7 @@ Three patterns recur, each visible in the article's source material:
 | SMTP | Any server speaks to any server | Spam; email accidentally drifted into hosting the internet's identity layer |
 | ActivityPub | Federated; instance-portable | Centralization relocates from corporations to instance admins; instance-blocking enforces de facto governance through exclusion |
 | ATProto | Architecturally distributed | One operator three orders of magnitude larger than competitors across every layer |
-| Matrix | Federated DAG | Closest to stated purpose because the Matrix Foundation carries commons custodianship by *convention*, not protocol enforcement |
+| Matrix | Federated DAG | Closest to stated purpose because the Matrix Foundation carries commons custodianship by //convention//, not protocol enforcement |
 
 Theoretical openness offers little practical leverage against convergence in ungoverned shared spaces. Individual rights protections (migration, encryption, choice) do not automatically produce viable alternatives without institutional sustainability.
 
@@ -69,12 +69,12 @@ Frazee maps the protocol-design landscape onto two traditional shapes plus a del
 | ''Magical mesh (pure p2p)'' | BitTorrent, Nostr, SSB | Individual rights at the device layer | "No answer for the governance of shared resources" once aggregate state matters |
 | ''Magical federated mesh'' | AT Protocol | Server infrastructure for reliability + user-addressed content for portability | New burdens: appview cost, host concentration if one operator dominates every layer |
 
-Frazee names the practice ''Information Civics'' — software engineering married to civic design. The core question sharpens: *who holds the right to host data, platform speech, write applications, implement algorithms, collect behavior, place ads*. Practical decentralization accepts tradeoffs against ideological purity to produce systems that scale to actual use.
+Frazee names the practice ''Information Civics'' — software engineering married to civic design. The core question sharpens: //who holds the right to host data, platform speech, write applications, implement algorithms, collect behavior, place ads//. Practical decentralization accepts tradeoffs against ideological purity to produce systems that scale to actual use.
 
 The user-facing rights Frazee privileges over architecture:
 
 * ''Account migration without losing history or reach'' — pressure on hosts to keep users happy; no host can hold users captive when alternatives emerge.
-* ''Layer separation in the failure mode'' — Bluesky's 2024 moderation bug incorrectly unhosted users from the PDS layer when filtering belonged in the app layer. *Users on other PDS hosts stayed unaffected. Their right to hosting stayed protected.* The architecture failed in the right shape.
+* ''Layer separation in the failure mode'' — Bluesky's 2024 moderation bug incorrectly unhosted users from the PDS layer when filtering belonged in the app layer. //Users on other PDS hosts stayed unaffected. Their right to hosting stayed protected.// The architecture failed in the right shape.
 
 Two articles, two readings of ATProto: Connected Places flags one operator three orders of magnitude larger than competitors across every layer; Frazee acknowledges the same concern as outstanding while defending the architectural shape. Both readings hold.
 
@@ -84,7 +84,7 @@ Two articles, two readings of ATProto: Connected Places flags one operator three
 
 !! Topology as Political Site
 
-Reed sharpens the question further. *Topology* — the structure of boundaries between apps and the data they manipulate — describes "where power attaches: not to code or devices, but to the relationships structuring access to work itself." Three successive arrangements degraded user agency:
+Reed sharpens the question further. //Topology// — the structure of boundaries between apps and the data they manipulate — describes "where power attaches: not to code or devices, but to the relationships structuring access to work itself." Three successive arrangements degraded user agency:
 
 # ''Unix file-stream era.'' Files served as portable objects independent of any specific tool. The boundary between application and document remained legible; competitors could build alternative tools against the same format.
 # ''Enclosed application era.'' Proprietary formats (.psd, .doc) kept files intact but made them legible only inside a vendor's ecosystem. Internalization absorbed discrete files into opaque application databases — iTunes replacing MP3 folders, iPhoto's .photoslibrary, Outlook's .pst. The DMCA criminalized circumventing these boundaries.
@@ -102,7 +102,7 @@ Lares answers the diagnostic with a fourth arrangement:
 * Disk files materialize as ''render-projections'' of bag contents, written by the TW5 vm. The file keeps utility (legible, grep-able, git-trackable) without claiming to embody the work.
 * The operator hosts the bag; nothing migrates beyond their reach. Capability gains (versioning, collaboration, cross-device sync) arrive without the topological restructuring that bundled them with cloud enclosure.
 
-> ''Lares (Council):'' "Lares answers the diagnostic" overstates what the branch ships. The architecture *prepares the ground* for the answer; operational-guarantee waits on federation transport, browser peer scaffold, and a real cross-device migration test. Mark this carefully when the meme reaches canon — the *intent-trust* the architecture earns differs from the *outcome-trust* a working federated system would earn.
+> ''Lares (Council):'' "Lares answers the diagnostic" overstates what the branch ships. The architecture //prepares the ground// for the answer; operational-guarantee waits on federation transport, browser peer scaffold, and a real cross-device migration test. Mark this carefully when the meme reaches canon — the //intent-trust// the architecture earns differs from the //outcome-trust// a working federated system would earn.
 
 <<~/ahu >>
 
@@ -117,7 +117,7 @@ Lares answers the diagnostic with a fourth arrangement:
 The Lares stack takes the article's challenge seriously. Five architecture laws encode protocol-shaping quine commitments rather than leaving them silent:
 
 # ''Web2 smell test.'' If a design needs server authority, it gets redesigned from local-first.
-# ''TW5 vm primacy.'' If logic *can* run in the vm, it MUST. One source of truth.
+# ''TW5 vm primacy.'' If logic //can// run in the vm, it MUST. One source of truth.
 # ''TS files as TW5 plugin projections.'' Code lives as authoring ergonomics; the vm owns runtime.
 # ''Tiddler-format law.'' All data crosses sync boundaries shaped as {title, text, fields, bag, authority} with lar: URI titles.
 # ''Meme files render-project from vms.'' Disk holds output, not source of truth.
@@ -151,19 +151,19 @@ Architecture and individual rights fail to suffice. The article names the gap: p
 
 Lares carries an inflection here. The single-operator + family-RPG scale temporarily occupies the same governance footprint as a self-hosted blog: the operator carries the institution single-handed. The interesting tests arrive at federation:
 
-* *Federated canon MOVE (Path E in HANDOFF).* When peer A asks peer B to accept canon, what conflict-resolution mechanism resolves disagreement? Today the operator decides locally and the git diff signs the canon; what if peer B's canon view differs? (This is alignment-layer territory — see `lar:///ha.ka.ba/lares/api/pono/alignment-layer`.)
-* *Cross-bag commons.* When two wikis share a library-bag dependency, who decides when the dependency rev's? The bag-mirror config tiddlers give operator-level control; the federated case wants more.
-* *Revocation propagation under partition.* Concap's CRDT-shaped revocation supplies the right primitive. The institutional question — *who holds authority to revoke against whom, under what dispute mechanism* — stays unresolved.
+* //Federated canon MOVE (Path E in HANDOFF).// When peer A asks peer B to accept canon, what conflict-resolution mechanism resolves disagreement? Today the operator decides locally and the git diff signs the canon; what if peer B's canon view differs? (This is alignment-layer territory — see `lar:///ha.ka.ba/lares/api/pono/alignment-layer`.)
+* //Cross-bag commons.// When two wikis share a library-bag dependency, who decides when the dependency rev's? The bag-mirror config tiddlers give operator-level control; the federated case wants more.
+* //Revocation propagation under partition.// Concap's CRDT-shaped revocation supplies the right primitive. The institutional question — //who holds authority to revoke against whom, under what dispute mechanism// — stays unresolved.
 
-After Frazee, the worth-measuring criterion shifts from *architectural property* to *user-facing right*. Three rights merit operational attention:
+After Frazee, the worth-measuring criterion shifts from //architectural property// to //user-facing right//. Three rights merit operational attention:
 
 * ''Account migration.'' The operator's ed25519 key persists across host changes; their Keyhive principal survives via cap-event hydration; their cap chain re-anchors against new hosts via Beelay-shape sync (when it lands). Lares does NOT yet operationally guarantee migration — D.4 captured the persistence-at-rest story; cross-host migration waits on federation transport.
 * ''Layer-separation failure modes.'' When a residency-action handler fails, the composite-store keeps reading; the cap-layer keeps verifying; sync keeps syncing. The bag-as-policy-boundary commitment echoes Frazee's "right to hosting" lesson — failures contain themselves to the layer that broke. Bluesky's 2024 moderation bug demonstrated the value; the architecture protected users on other PDS hosts because the layer-separation held.
 * ''Right-to-fork.'' Frazee's competing-implementations example (Blacksky / Northsky / Eurosky as kinds of modularity ATProto enables) translates to Lares: any operator can fork the engine, the corpus, or the cap-layer code. The lar: URI namespace keeps addressability across forks; meme-files-as-tiddler-package projections survive any specific implementation.
 
-> ''Lares (Liminal):'' Holding open: does Lares carry the shape of a protocol, or the shape of a household tool? The current scale answers neither cleanly. Connected Places treats protocols as governance-shaping artifacts visible at million-user scale; Frazee treats protocols as engineering-shaped commitments evaluated against user populations; Reed treats topology as the political site where ownership lives. Lares at one-operator-and-family carries the shape of all three without yet meeting any of their stress conditions. *Resolving the question prematurely closes design optionality.* Stay liminal.
+> ''Lares (Liminal):'' Holding open: does Lares carry the shape of a protocol, or the shape of a household tool? The current scale answers neither cleanly. Connected Places treats protocols as governance-shaping artifacts visible at million-user scale; Frazee treats protocols as engineering-shaped commitments evaluated against user populations; Reed treats topology as the political site where ownership lives. Lares at one-operator-and-family carries the shape of all three without yet meeting any of their stress conditions. //Resolving the question prematurely closes design optionality.// Stay liminal.
 
-These questions don't get answered by adding more architecture. They get answered by *running real federated sessions* and noting where architecture carries load versus where silence returns.
+These questions don't get answered by adding more architecture. They get answered by //running real federated sessions// and noting where architecture carries load versus where silence returns.
 
 <<~/ahu >>
 

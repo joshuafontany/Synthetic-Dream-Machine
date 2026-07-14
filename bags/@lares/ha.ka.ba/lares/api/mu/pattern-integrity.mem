@@ -24,7 +24,7 @@ uri-path    = "ha.ka.ba/lares/api/mu/pattern-integrity"
 
 ! Pattern Integrity
 
-Buckminster Fuller's *Synergetics* supplies five structural principles that map directly
+Buckminster Fuller's //Synergetics// supplies five structural principles that map directly
 onto Lararium's architecture. These function as operational invariants, not metaphors.
 Violating them produces identifiable failure modes in the codebase.
 

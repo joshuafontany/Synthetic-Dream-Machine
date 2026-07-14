@@ -22,8 +22,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/huli"
 
 ! Huli
 
-*huli* — Hawaiian: to turn, to reverse, to curl over. Primarily a directional motion —
-the body turns to face something. *Huli-huli* (the chicken dish) means repeatedly turned.
+//huli// — Hawaiian: to turn, to reverse, to curl over. Primarily a directional motion —
+the body turns to face something. //Huli-huli// (the chicken dish) means repeatedly turned.
 The search meaning is secondary: one turns to face each item in the set in succession.
 
 A block-container sigil with iteration semantics. Runs a TW5 filter to produce a result set;

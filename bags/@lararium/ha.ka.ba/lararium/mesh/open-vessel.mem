@@ -50,8 +50,8 @@ on node today — founding/init, PersonaGroup ceremonies, genesis authoring, cor
 loading, residency — SHALL become composable in the browser. The design therefore
 treats no capability as structurally node-bound: each rides as a piece any vessel MAY
 compose once it holds the capability, never an `isNode`/`isBrowser` fork and never a
-permanently-absent slot. A capability absent today reads as *not-yet-held*, never
-*cannot-hold*. The seam for every such piece stays open on both substrates.
+permanently-absent slot. A capability absent today reads as //not-yet-held//, never
+//cannot-hold//. The seam for every such piece stays open on both substrates.
 
 <<~/ahu >>
 

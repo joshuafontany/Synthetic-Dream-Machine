@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loci"
 
 ! Loci
 
-The ''mandatory component'' — the one intrinsic every placed carrier holds, after the manner of the Scene Graph's default transform: *where this entity stands*. A carrier holds loci ''by title'' — the `lar:` address itself — never by tag; everything else composes through the has-stack.
+The ''mandatory component'' — the one intrinsic every placed carrier holds, after the manner of the Scene Graph's default transform: //where this entity stands//. A carrier holds loci ''by title'' — the `lar:` address itself — never by tag; everything else composes through the has-stack.
 
 Routing convention and stable-address law for `lar:` URI carriers.
 A carrier holds `loci` when its `lar:` URI root segment matches `\w.\w.\w` and satisfies this law's convention surfaces. An entity without loci reads as not-yet-placed; the rating ladder prices that honestly.

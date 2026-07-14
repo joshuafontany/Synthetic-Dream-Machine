@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/nalu"
 
 ! Nalu — The Changeset Wave
 
-*nalu* — Hawaiian: wave, surf; the wave-form that carries energy across distance.
+//nalu// — Hawaiian: wave, surf; the wave-form that carries energy across distance.
 A nalu does not carry one molecule of water — it carries the entire shaped movement
 of the sea. The wave arrives as one coherent thing, composed of many.
 
@@ -67,7 +67,7 @@ one shared queue and drains the lot in ONE `wiki.transact()` per frame. Prior ar
 batching, S.js tick, the DREAM glitch-freedom paper) all converge on this shape: one
 boundary per tick across heterogeneous sources beats N boundaries with the cascade-refresh
 + FRP-glitch anti-pattern. Our widget filter is O(1) hash-lookup, so the cost scales with
-*changed* hashes, not bag count — no fan-out objection applies.
+//changed// hashes, not bag count — no fan-out objection applies.
 
 ''A second nalu instance — local capture'' (2026-06-25): the same collect-then-flush
 shape drives forward-facing capture, in a SEPARATE local ''non-federated'' worker-VM.
@@ -102,7 +102,7 @@ The wave shape holds identically across the TS/py membrane — collect-then-flus
 substrate the water, the nalu the pattern.
 
 ''The invariant:'' The nalu is not one tiddler change. It is the atomic delivery
-of a *batch* of changes to all observers simultaneously. Every observer — every
+of a //batch// of changes to all observers simultaneously. Every observer — every
 widget, every reaction handler — receives the same `changedTiddlers` set in the
 same synchronous execution context. No observer sees a partial state.
 
@@ -126,8 +126,8 @@ Nalu layer (below grammar):
   [no sigil; no operator action; the engine acts]
 ```
 
-The sigils in the grammar layer express *what should happen* — relationships,
-concurrency shapes, reactions. The nalu is *when consistent state arrives* — the
+The sigils in the grammar layer express //what should happen// — relationships,
+concurrency shapes, reactions. The nalu is //when consistent state arrives// — the
 moment all of those relationships become observable.
 
 **The `\tick` sigil (when it lands)** will live at the grammar layer — it will be

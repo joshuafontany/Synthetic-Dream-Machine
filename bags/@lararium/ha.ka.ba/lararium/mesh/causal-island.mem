@@ -95,7 +95,7 @@ contention rules around NodeFS storage land.
 Keyhive capability, not a platform (`[[feedback_isomorphism_by_composition]]`). One
 ''relay'' (the heavy peer) carries the canonical replica + the disk; ''leaf'' peers
 (CLI, AI agent) stay thin — they hold only the bags they reach, sync from the relay,
-own their keys. *Heavy peer = substrate, not authority.* So co-located peers share a
+own their keys. //Heavy peer = substrate, not authority.// So co-located peers share a
 relay (infrastructure), never a replica (sovereignty).
 
 <<~ confidence Synthesis-Canon 16/20 >> The principle reconciles local-first

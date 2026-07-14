@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kukali"
 
 ! Kukali
 
-*kūkali* — Hawaiian: to wait, patient, remaining in suspense.
+//kūkali// — Hawaiian: to wait, patient, remaining in suspense.
 
 A wait posture inside a causal island. Execution parks until the named papalohe trigger fires.
 Verse `suspends` analogue: the island parks without blocking; it resumes exactly once.

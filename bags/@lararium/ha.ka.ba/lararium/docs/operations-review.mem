@@ -169,14 +169,14 @@ docs/lararium/
 This pass produces:
 
 # `docs/lararium/protocols/frame-uncertainty.md`
-# `docs/lararium/protocols/talk-story.md` *(after Coffee Oracle source read)*
+# `docs/lararium/protocols/talk-story.md` //(after Coffee Oracle source read)//
 # `docs/lararium/protocols/session-init.md`
 # `docs/lararium/protocols/proactive-surfacing.md`
-# `docs/lararium/protocols/cli-dreamnet.md` *(DreamNet CLI flavor only; not command tables)*
-# Extensions to `preferences/collaboration-model.md` *(Captain and Crossroads metaphors)*
-# `preferences/voice-register.md` *(tone and formatting)*
-# `authority/transference-model.md` *(conceptual tier model)*
-# Integrations into `degraded-states.md` *(Workspace Trust Gate, Capability Honesty, Default Behavior notes)*
+# `docs/lararium/protocols/cli-dreamnet.md` //(DreamNet CLI flavor only; not command tables)//
+# Extensions to `preferences/collaboration-model.md` //(Captain and Crossroads metaphors)//
+# `preferences/voice-register.md` //(tone and formatting)//
+# `authority/transference-model.md` //(conceptual tier model)//
+# Integrations into `degraded-states.md` //(Workspace Trust Gate, Capability Honesty, Default Behavior notes)//
 
 !!! Section status vocabulary
 

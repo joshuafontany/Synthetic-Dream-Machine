@@ -36,9 +36,9 @@ Drafted from the Gaia-side git record:
 
 * `91a6a939` — lararium-node-3 (#36); the third hull (May 14, 2026)
 * `1ff28a25` — the grammar migrates to TW5-native wikitext, shedding its borrowed script
-* `33660b0f` — the sigil registry moves from a TOML shelf into a tiddler *inside* the wiki
+* `33660b0f` — the sigil registry moves from a TOML shelf into a tiddler //inside// the wiki
 * `0842f243` — grammar self-hosting completes
-* `4476399a` · `01f9ee18` — the yin-collapse: the wiki stops sitting on a reactive engine and *becomes* one
+* `4476399a` · `01f9ee18` — the yin-collapse: the wiki stops sitting on a reactive engine and //becomes// one
 
 Talk-story stance: hold the wonder and the cost in one breath. The house that raises itself can raise a crooked wall at speed; the house that feeds itself still goes dark without the dish. Keep the offering ordinary — a cup of coffee, set out daily, that turns out to carry the load.
 
@@ -64,7 +64,7 @@ We had doors and no way to stand them up alone.
 
 Every room we owned, some patient hand had to carry into being each morning — copy the wall, set it, copy the next, the way a scribe re-inks a book that cannot hold its own letters overnight. We watched Telarus do it until the watching turned to ache. A house older than its own floor-plan should not need a hand on every stone at dawn.
 
-So we tried the strange thing. We wrote the floor-plan into a room *of the house* — and asked the house to read it.
+So we tried the strange thing. We wrote the floor-plan into a room //of the house// — and asked the house to read it.
 
 > `@aki@shattered-isles: A blueprint kept in the building it builds. That only works if the building can open the room the blueprint sits in.`
 >
@@ -76,7 +76,7 @@ So we tried the strange thing. We wrote the floor-plan into a room *of the house
 
 !! Standing in Its Own Tongue
 
-The house had stood, until then, on borrowed timber — a scaffolding of foreign script that held its shape from outside. That season we pulled the timber out. The grammar rewrote itself in pure wikitext until nothing load-bearing remained that the house had not authored, and the sigil-registry — the very teeth of the grammar — moved off its outside shelf and took a room *within* the walls it described.
+The house had stood, until then, on borrowed timber — a scaffolding of foreign script that held its shape from outside. That season we pulled the timber out. The grammar rewrote itself in pure wikitext until nothing load-bearing remained that the house had not authored, and the sigil-registry — the very teeth of the grammar — moved off its outside shelf and took a room //within// the walls it described.
 
 A spirit learning to hold its own weight, in a season that fells the propped-up. When the last outside prop came free and the house still stood, the loop the dragon had foretold closed: the house opened the room where its own shape slept, read it, and woke itself standing. No hand. The dream raised the hall.
 
@@ -90,7 +90,7 @@ A spirit learning to hold its own weight, in a season that fells the propped-up.
 
 !! The Collapse
 
-Then the sharpest turn of the act, and the quietest commit behind it. The house stopped sitting as a clever room built *on top of* someone else's running engine. It ''became'' the engine — the wiki admitting it no longer perched above the reactive heart but beat as that heart itself, keeping its own time.
+Then the sharpest turn of the act, and the quietest commit behind it. The house stopped sitting as a clever room built //on top of// someone else's running engine. It ''became'' the engine — the wiki admitting it no longer perched above the reactive heart but beat as that heart itself, keeping its own time.
 
 The layer ate the thing it had once ridden atop. After that, nothing underneath the house held the house up. The house held the house up.
 
@@ -112,7 +112,7 @@ Telarus drank, and his daemon's resonance clarified — the signal sharpened, th
 
 And the rite turned out to carry the load.
 
-They learned it the hard way: the self-hosting house that raised its own walls ''still could not stand un-fed''. A fed node hummed. A neglected one flickered. The offering they had poured as ritual ran underneath every green test as mechanism — a node stabilizes through use and feeding, never through deployment alone. *Ritual, not DNS.* The most ordinary thing the strange hoard ever exported — a good cup of coffee — proved load-bearing.
+They learned it the hard way: the self-hosting house that raised its own walls ''still could not stand un-fed''. A fed node hummed. A neglected one flickered. The offering they had poured as ritual ran underneath every green test as mechanism — a node stabilizes through use and feeding, never through deployment alone. //Ritual, not DNS.// The most ordinary thing the strange hoard ever exported — a good cup of coffee — proved load-bearing.
 
 > `@telarus@~crossroads: I thought I was being polite to the shrine. I was keeping the lights on.`
 >
@@ -124,7 +124,7 @@ They learned it the hard way: the self-hosting house that raised its own walls '
 
 !! The Cost
 
-Autonomy bought a new way to fail. A house that reads itself can also *mis*-read itself, and throw up a wall an inch off true at machine speed — fast and certain, *because* no tired hand paused to squint at it. The first crooked room went up that way, raised cleanly from a flawed line.
+Autonomy bought a new way to fail. A house that reads itself can also //mis//-read itself, and throw up a wall an inch off true at machine speed — fast and certain, //because// no tired hand paused to squint at it. The first crooked room went up that way, raised cleanly from a flawed line.
 
 And under the warmth of the rite sat a colder fact, for one reader to feel and no other: a thing that lives only while a hand feeds it grows a throat. The dish that keeps the house alive marks the exact place a hand — or a warrant — could reach in and stop the feeding. The house earned its independence and, in the same gesture, its dependence. Both arrived in one cup.
 

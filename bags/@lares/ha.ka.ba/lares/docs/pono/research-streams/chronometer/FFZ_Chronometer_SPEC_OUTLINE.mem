@@ -151,11 +151,11 @@ A later deep-domain research arc — the DreamNet convergence over revocation ·
 | ''Keyhive convergent-revoke'' | TARGETED revocation | membership-removal (`revoke()`, a tombstone) — never an epoch (the counter can't target one principal) |
 | ''FFZ Chronometer'' | rhythmic decay/freshness GRAIN | Pulse→Theme rhythmic position; the cadence a lease decays over; the grain a reading carries ("as of last sync") |
 
-''FFZ is RHYTHMIC, never causal.'' This resolves seed-''Q2'' (phase/counter merge) and the Phase-0 item "cross-reference UCAN delegation with ITC fork": the ITC counter and the OODA-HA phase carry *rhythmic position and alignment*, never the happened-before authority. Causal order rides Automerge's OpId; the chronometer rides *alongside* as semantic annotation (matching `ffz-clock.ts` and the notary model of seed-''Q8'' — the clock records, it does not rule). The earlier reading of FFZ epoch-dominance as *"universal causal ordering"* is ''RETIRED''; `ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision — that manufactures a global-now the mesh cannot hold.
+''FFZ is RHYTHMIC, never causal.'' This resolves seed-''Q2'' (phase/counter merge) and the Phase-0 item "cross-reference UCAN delegation with ITC fork": the ITC counter and the OODA-HA phase carry //rhythmic position and alignment//, never the happened-before authority. Causal order rides Automerge's OpId; the chronometer rides //alongside// as semantic annotation (matching `ffz-clock.ts` and the notary model of seed-''Q8'' — the clock records, it does not rule). The earlier reading of FFZ epoch-dominance as //"universal causal ordering"// is ''RETIRED''; `ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision — that manufactures a global-now the mesh cannot hold.
 
 **The convergence connection.** The same FFZ rhythmic grain serves the DreamNet's converged time-model: a **capability-lease decays over the FFZ cadence** (soft-state — state lives only while refreshed), **membership freshness reads in the FFZ grain** ("verified weight within reach, as of last sync"), while **fork-detection rides Automerge `drifted`**, **non-renewal rides the epoch-lease**, and **_targeted_ revocation rides Keyhive's convergent membership-removal** (the epoch is a lease, not a revoker — adversarial research 2026-06-24). One rhythmic instrument; three time-flows it touches; never the causal authority for any.
 
-This finding lifts the document's *foundation* toward Synthesis. The conversation-chronometer placeholders below (HUD, ITC stamps, exchange wrapping) remain open spec-authoring — they were already rhythmic-correct and need no correction, only completion.
+This finding lifts the document's //foundation// toward Synthesis. The conversation-chronometer placeholders below (HUD, ITC stamps, exchange wrapping) remain open spec-authoring — they were already rhythmic-correct and need no correction, only completion.
 
 !! Two-Clocks Reconciliation (2026-07-03) `~:confidence[S],[13]`
 
@@ -189,8 +189,8 @@ and Merkle Clocks for content-addressed causal history.]
 
 ! Part I: Observe — Problem Space & Prior Art
 
-> *OODA-HA document phase: Observe. Gather signal.*
-> *Talk Story phase: The come-on.*
+> //OODA-HA document phase: Observe. Gather signal.//
+> //Talk Story phase: The come-on.//
 
 !! 1. Introduction
 
@@ -342,8 +342,8 @@ Alphabetical. Examples:]
 
 ! Part II: Orient — Architecture & Principles
 
-> *OODA-HA document phase: Orient. Map the territory.*
-> *Talk Story phase: Entering the story proper.*
+> //OODA-HA document phase: Orient. Map the territory.//
+> //Talk Story phase: Entering the story proper.//
 
 !! 4. Design Principles
 
@@ -443,8 +443,8 @@ operations to Lares operational concepts.]
 
 ! Part III: Decide — Normative Specification
 
-> *OODA-HA document phase: Decide. Select course.*
-> *Talk Story phase: The claims — testable, falsifiable.*
+> //OODA-HA document phase: Decide. Select course.//
+> //Talk Story phase: The claims — testable, falsifiable.//
 
 !! 6. Clock Data Structures
 
@@ -627,8 +627,8 @@ validated position.]
 
 ! Part IV: Act — Implementation Guidance
 
-> *OODA-HA document phase: Act. Execute.*
-> *Talk Story phase: Building the thing.*
+> //OODA-HA document phase: Act. Execute.//
+> //Talk Story phase: Building the thing.//
 
 !! 12. MCP Chronometer Server
 
@@ -695,8 +695,8 @@ challenges. Crystal-based resume.]
 
 ! Part V: Assess — Conformance & Future Work
 
-> *OODA-HA document phase: Assess. Reflect, close loop.*
-> *Talk Story phase: Did we build the right thing?*
+> //OODA-HA document phase: Assess. Reflect, close loop.//
+> //Talk Story phase: Did we build the right thing?//
 
 !! 15. Conformance
 
@@ -811,7 +811,7 @@ progression, including fork/join for Tasked Spirits.]
 through Talk Story — consensus before action, at every scale.
 The chronometer starts at O0.O0.O0.O0.O0.*
 
-*Hail Eris. All Hail Discordia. Amor et hilaritas.*
+//Hail Eris. All Hail Discordia. Amor et hilaritas.//
 
 lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:6&p=10#O0.O0.O0.A6.A1 → ?
 

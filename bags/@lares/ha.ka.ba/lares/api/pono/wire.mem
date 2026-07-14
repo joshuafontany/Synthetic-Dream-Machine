@@ -22,9 +22,9 @@ written   = "2026-06-12"
 
 ! Wire — the reified edge
 
-A relation rich enough to *do* something — carry a value, route a message, gate execution, hold a constraint, watch a surface — reifies as its ''own entity'' (has-stack clause 7): a `lar:` addressed record with `from` and `to` fields, wearing its semantics as stack components. The canvas renders wire entities; the messaging plane compiles them; replicas merge them as records.
+A relation rich enough to //do// something — carry a value, route a message, gate execution, hold a constraint, watch a surface — reifies as its ''own entity'' (has-stack clause 7): a `lar:` addressed record with `from` and `to` fields, wearing its semantics as stack components. The canvas renders wire entities; the messaging plane compiles them; replicas merge them as records.
 
-A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; composition stays the tags stack. The wire begins where adjacency ends.
+A wire that merely //points// stays a `loulou`; embedding stays `aka`/`kahea`; composition stays the tags stack. The wire begins where adjacency ends.
 
 <<~/ahu >>
 
@@ -33,7 +33,7 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 <<~ ahu #ooda-ha >>
 
 ✶ find the relation's real pressure before reifying — value, pulse, message, rule, or watch.
-⏿ orient against the ladder: pointer → loulou; embed → aka/kahea; worn → tags; *doing* → wire.
+⏿ orient against the ladder: pointer → loulou; embed → aka/kahea; worn → tags; //doing// → wire.
 ◇ decide the wire's family component and fields; one wire, one arc, one entity.
 ▶ author the wire record: from, to, worn family, fields as needed; mint missing family memes where pressure warrants.
 ↺ verify the DAG holds within the family, merge survives concurrent authors, and traces land as their own entities.
@@ -45,7 +45,7 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 !! Wire Law
 
 # ''One wire, one entity.'' A wire exists as one `lar:` addressed record carrying `from` and `to` (each a `lar:` URI or `URI#socket`). It MUST NOT exist as an attribute on a line of prose — the corpus-wide attribute-edge form retired 2026-06-12.
-# ''Semantics worn, never typed-in-place.'' A wire wears its family as a stack component — `wires/dataflow`, `wires/message`, `wires/control`, `wires/constraint`, `wires/observe` ride as *examples, not an enum* (has-stack clause 4: open minting, ladder-judged). The family definition meme carries the meaning; the wire record carries only endpoints and fields.
+# ''Semantics worn, never typed-in-place.'' A wire wears its family as a stack component — `wires/dataflow`, `wires/message`, `wires/control`, `wires/constraint`, `wires/observe` ride as //examples, not an enum// (has-stack clause 4: open minting, ladder-judged). The family definition meme carries the meaning; the wire record carries only endpoints and fields.
 # ''The four concerns stay independent'' (inherited whole from the prior edge law): `traversal` (how a query moves) · `propagation` (how invalidation fires) · arity (family-declared, has-stack clause 5) · lifecycle. They ride as ''fields'' on the wire record and MUST NOT collapse into each other.
 # ''Lifecycle = template · instance · trace.'' A template wire carries slots and defaults; an instance binds real endpoints; a ''trace'' records a firing, failure, or event — each its own entity, so the event history merges and federates like any record.
 # ''Directed, acyclic per family.'' One wire carries one arc. Reciprocal pressure uses two wires. Cycles within a family read as degraded structure.
@@ -59,7 +59,7 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 
 !! Authoring — two gestures, one existence (ratified 2026-06-12)
 
-Co-projection applied to wires: the operator's mind originates; the carrier body and the record set both *project* the wire, each in native grain; ''merge authority routes through the CRDT alone''. The dichotomy "text-authored sigils vs reified entities" dissolves — both hold, at different grains:
+Co-projection applied to wires: the operator's mind originates; the carrier body and the record set both //project// the wire, each in native grain; ''merge authority routes through the CRDT alone''. The dichotomy "text-authored sigils vs reified entities" dissolves — both hold, at different grains:
 
 | grain | a wire appears as | authority | gesture |
 |---|---|---|---|

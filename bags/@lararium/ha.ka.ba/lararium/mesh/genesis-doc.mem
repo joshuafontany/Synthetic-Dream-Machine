@@ -46,7 +46,7 @@ The genesis is **not** an Automerge binary carrying bytes. It is a **thin `@orac
 
 !! The `@oracle` ~ the public crossroads bulletin board
 
-The `@oracle` is a ''served, signed POINTER doc'' — the public crossroads where a vessel announces, and discovers, other public CRDT docs/bags. Base-floor of the epoch layer, ''soft-coupled'' to the CID plane: it *names* CIDs, it does not *carry* bytes. (Proven on the DreamNet mesh: containers found their own in-vessel identity and serve `@oracle` — `curl` returns its signed pointer — across the Hermai relay.)
+The `@oracle` is a ''served, signed POINTER doc'' — the public crossroads where a vessel announces, and discovers, other public CRDT docs/bags. Base-floor of the epoch layer, ''soft-coupled'' to the CID plane: it //names// CIDs, it does not //carry// bytes. (Proven on the DreamNet mesh: containers found their own in-vessel identity and serve `@oracle` — `curl` returns its signed pointer — across the Hermai relay.)
 
 <<~moves advance-CID -> on/oracle-pointer-update do/mesh-announce >>
 
@@ -65,12 +65,12 @@ The `@oracle` docId derives from the FOUNDING vessel's `@daemon` identity-root (
 <<~ranks coupling origin@keep -> governance@disperse -> liveness@pluralize >>
 
 * ''Origin (docId derivation) — KEEP.'' Born from the home `@daemon` identity yet names no host; once minted it outlives the home node (a DID, not an ActivityPub URL). Record the derivation publicly so anyone re-verifies genesis without the founder.
-* ''Governance (write authority) — DISPERSE.'' A sole home-root retains the UCAN reach-back revocation veto — *that* is the central authority. Keeper-phase ladder: founder (n=1, genesis) -> founder-multisig (a 2nd keeper contracts in → write delegates to a GROUP; the group, not the original key, becomes root) -> k-of-n quorum (admission/eviction by quorum). After phase 2 the home key can vanish and keepers still govern — no reach-back, no single revoker. A DECLARED sunset, not implicit trust.
+* ''Governance (write authority) — DISPERSE.'' A sole home-root retains the UCAN reach-back revocation veto — //that// is the central authority. Keeper-phase ladder: founder (n=1, genesis) -> founder-multisig (a 2nd keeper contracts in → write delegates to a GROUP; the group, not the original key, becomes root) -> k-of-n quorum (admission/eviction by quorum). After phase 2 the home key can vanish and keepers still govern — no reach-back, no single revoker. A DECLARED sunset, not implicit trust.
 * ''Liveness (discovery) — PLURALIZE.'' "Learn the board from the home node" is the libp2p-hardcoded-bootstrap / ActivityPub-source-must-be-online trap. The content-addressed docId means ANY peer syncing the board can serve it; newcomers learn by petname/TOFU introduction along the trust edge; a plural swappable bootstrap set (home listed, never required).
 
-''Backstop — exit/fork.'' `@oracle` is a synced CRDT with a host-independent docId → the net can fork it and continue at zero loss. A founder who CAN be forked cannot rule — a property, not a promise. The rhizome forbids a *filiation*, not a *seed*; a seed that becomes one alliance-point among many is fully rhizomatic.
+''Backstop — exit/fork.'' `@oracle` is a synced CRDT with a host-independent docId → the net can fork it and continue at zero loss. A founder who CAN be forked cannot rule — a property, not a promise. The rhizome forbids a //filiation//, not a //seed//; a seed that becomes one alliance-point among many is fully rhizomatic.
 
-''The governance face.'' This doc ''seeds'' the board (the docId derivation, the three couplings); who ''signs'' the steward source, why the board lives ''per-nexus'' (ownership + scale, never a no-global-now prohibition — a shared docId names a rendezvous each peer materializes as its own causal island), and how the fork guards it — that face stands worked at <<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>. The three couplings here (origin · governance · liveness) carry forward there as *founder seeds · circle governs · fork guards*.
+''The governance face.'' This doc ''seeds'' the board (the docId derivation, the three couplings); who ''signs'' the steward source, why the board lives ''per-nexus'' (ownership + scale, never a no-global-now prohibition — a shared docId names a rendezvous each peer materializes as its own causal island), and how the fork guards it — that face stands worked at <<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>. The three couplings here (origin · governance · liveness) carry forward there as //founder seeds · circle governs · fork guards//.
 
 <<~ confidence Synthesis-Canon 15/20 >> architecture correct + stack-aligned; UNVERIFIED + load-bearing (code-scouts for the build): does alpha Keyhive express group-as-root-subject + quorum admission TODAY · does the Hermai invite path carry an `@oracle` introduction along the trust edge. Rhymes: genesis-block (founder-not-dictator) · UCAN (delegate-out; the revocation-veto is the trap) · ATProto (host-independent identity) · Stellar k-of-n + founder-multisig · petname/TOFU introduction · the rhizome (alliance not filiation).
 
@@ -120,11 +120,11 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 ''GD-5 — Determinism via actorSeed.'' `actorSeed = sha256hex(sorted content hashes of all inputs)`; identical source → identical `island.sha256` + manifest. (Note: the TW5 core itself must render deterministically — a non-deterministic vendor build skews the engine CID; slice 1 made that irrelevant to BOOT by resolving the engine via CAS, but a reproducible core is the clean target.)
 
-''GD-6 — System recipes are substrate, user recipes are not.'' *(#what-genesis-seeds.)*
+''GD-6 — System recipes are substrate, user recipes are not.'' //(#what-genesis-seeds.)//
 
-''GD-7 — bytes on the CID plane, never in the CRDT.'' *(#two-planes.)*
+''GD-7 — bytes on the CID plane, never in the CRDT.'' //(#two-planes.)//
 
-''GD-8 — soft, not hard: advance-CID → pointer-update, never re-genesis for churn.'' *(#the-oracle-pointer.)*
+''GD-8 — soft, not hard: advance-CID → pointer-update, never re-genesis for churn.'' //(#the-oracle-pointer.)//
 
 <<~/ahu >>
 
@@ -148,7 +148,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 * ''9c90b390 — CID plane:'' kernel resolves engine/plugins CAS-only by CID; the byte-blob left the `@oracle` CRDT (where the merge-into-stale had made it an unresolved actor conflict — the boot-skew root).
 * ''940a023e — slice 1:'' blob bytes leave the genesis doc entirely → `genesis/cas/` + `island.manifest.json`; `island.bin` 547 KB → 4 KB. Merge-conflict-on-bytes class gone structurally. Isomorphic (node fs · browser OPFS).
-* ''Proven on the mesh'' (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, **serve `@oracle` — `curl` returns the signed pointer** — across a 3-hop Hermai relay (INFRA × WHO). *(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)*
+* ''Proven on the mesh'' (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, **serve `@oracle` — `curl` returns the signed pointer** — across a 3-hop Hermai relay (INFRA × WHO). //(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)//
 * ''Open (slice 2, far-future):'' retire the genesis-merge entirely — materialize the `@oracle` fresh from the manifest at init, ratchet by peer-sync. Gated on a ''deterministic shared docId'' (so the public board stays one board, not per-node forks). Fires only at the epoch boundary, not for churn.
 
 <<~/ahu >>

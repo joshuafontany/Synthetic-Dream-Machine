@@ -17,9 +17,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/hana"
 
 ! Hana
 
-*hana* — Hawaiian: work, deed, action, task; to do, make, create; labor; a happening.
+//hana// — Hawaiian: work, deed, action, task; to do, make, create; labor; a happening.
 Hana names not just the product but the doing — the active, bounded effort that takes a thing
-from potential to actual. *Hana hou* (do again, encore) carries the sense of repeatable work.
+from potential to actual. //Hana hou// (do again, encore) carries the sense of repeatable work.
 
 A bounded guest-grammar block. A `hana` block carries a grammar-key that selects the
 interpreter for its body — the body content carries a foreign grammar

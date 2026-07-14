@@ -41,7 +41,7 @@ Both engines consume the same `text/x-memetic-wikitext` surface. The isomorphic 
 
 !! Render Axes — Stage, Surface, and Mode held apart
 
-Render work runs along orthogonal axes; naming them apart lets each vary without dragging the others. (The two engines above name a separate, independent axis — *which engine consumes* the surface — neither a surface nor a stage.)
+Render work runs along orthogonal axes; naming them apart lets each vary without dragging the others. (The two engines above name a separate, independent axis — //which engine consumes// the surface — neither a surface nor a stage.)
 
 !!! Stage axis — the pipeline (parse → widget → DOM)
 
@@ -49,7 +49,7 @@ One surface passes through three trees:
 
 # ''parse tree'' — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
 # ''widget tree'' — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here (the middle layer named at `memetic-wikitext#gaps-tensions-conflicts`, Gap 8).
-# ''DOM tree'' — the widget tree renders into a document. In this stack that document reads as a *fakeDom*, not the browser's live one.
+# ''DOM tree'' — the widget tree renders into a document. In this stack that document reads as a //fakeDom//, not the browser's live one.
 
 !!! Surface axis — the cameras (which document the stage renders into)
 
@@ -62,9 +62,9 @@ The stage pipeline runs once per camera over the shared graph; only the DOM-tree
 
 !!! Mode axis — render posture (`lar-render-mode`)
 
-Orthogonal to surface: `""` (live), `carrier` (disk export), `projection` (frozen snapshot). A mode picks the output *form*, never the camera. Detailed at `#three-render-modes`.
+Orthogonal to surface: `""` (live), `carrier` (disk export), `projection` (frozen snapshot). A mode picks the output //form//, never the camera. Detailed at `#three-render-modes`.
 
-''Composition:'' a *stage* renders the shared graph onto a *surface* (camera) under a *mode*, driven by an *engine*. Four axes, freely combined — none collapses into another.
+''Composition:'' a //stage// renders the shared graph onto a //surface// (camera) under a //mode//, driven by an //engine//. Four axes, freely combined — none collapses into another.
 
 <<~/ahu >>
 

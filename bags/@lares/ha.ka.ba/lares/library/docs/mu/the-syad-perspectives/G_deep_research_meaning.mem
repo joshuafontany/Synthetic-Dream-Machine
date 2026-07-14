@@ -37,7 +37,7 @@ Three navigational beacons were set. The researcher has returned from each.
 
 !!! The Source
 
-Sri Syadasti's catma in the *Principia Discordia* is a direct adoption of the Jaina logical system called ''Syādvāda'' (Sanskrit: "could-be-ism"), specifically the ''Saptabhangi'' — the doctrine of sevenfold predication. The Jaina source predates the Discordian appropriation by approximately 2,400 years (Bhadrabahu, c. 433–357 BCE).
+Sri Syadasti's catma in the //Principia Discordia// is a direct adoption of the Jaina logical system called ''Syādvāda'' (Sanskrit: "could-be-ism"), specifically the ''Saptabhangi'' — the doctrine of sevenfold predication. The Jaina source predates the Discordian appropriation by approximately 2,400 years (Bhadrabahu, c. 433–357 BCE).
 
 The seven predicates (Saptabhangi):
 
@@ -51,11 +51,11 @@ The seven predicates (Saptabhangi):
 | 6 | syād-nāsti-avaktavya | Perhaps it is not and is indescribable | F + M |
 | 7 | syād-asti-nāsti-avaktavya | Perhaps it is, is not, and is indescribable | T + F + M |
 
-Every predicate begins with ''syād'' — "perhaps" or "from a certain standpoint." This is not optional hedging. It is the load-bearing structural element: *every truth claim is conditional on the standpoint from which it is evaluated*.
+Every predicate begins with ''syād'' — "perhaps" or "from a certain standpoint." This is not optional hedging. It is the load-bearing structural element: //every truth claim is conditional on the standpoint from which it is evaluated//.
 
 !!! The Connection to RAW
 
-RAW explicitly identified Syādvāda as the ancestor of his Maybe Logic. The *Principia Discordia*'s catma reproduces the Saptabhangi structure exactly (seven values from three primitives). RAW's contribution was to reframe it in terms accessible to Western counterculture and connect it to Korzybski's General Semantics (the map is not the territory) and quantum mechanics (the act of observation affects the observed).
+RAW explicitly identified Syādvāda as the ancestor of his Maybe Logic. The //Principia Discordia//'s catma reproduces the Saptabhangi structure exactly (seven values from three primitives). RAW's contribution was to reframe it in terms accessible to Western counterculture and connect it to Korzybski's General Semantics (the map is not the territory) and quantum mechanics (the act of observation affects the observed).
 
 RAW's operational rule: "I don't believe anything, but I have many suspicions — and I do not have the chutzpah to proclaim any of them as certitudes." This is Syādvāda applied to personal epistemology.
 
@@ -65,7 +65,7 @@ The Jaina scholars are precise about what the seven values mean. Each value is n
 
 * ''Asti (T):'' From this standpoint, the claim holds
 * ''Nāsti (F):'' From this standpoint, the claim does not hold
-* ''Avaktavya (M):'' From this standpoint, the claim cannot be expressed — it is not that we don't know; it is that the claim *does not map onto the true/false axis from this standpoint*
+* ''Avaktavya (M):'' From this standpoint, the claim cannot be expressed — it is not that we don't know; it is that the claim //does not map onto the true/false axis from this standpoint//
 
 The crucial insight: ''avaktavya (M) is not ignorance.'' It is not "we don't know if it's true or false." It is "the true/false distinction does not apply here." This is a fundamentally different epistemic state from uncertainty.
 
@@ -75,9 +75,9 @@ Koller (2000): "Syādvāda is the epistemological key to the Jaina middle way me
 
 ''Yes — with a critical adaptation.''
 
-The Syadasti catma provides the correct *philosophical ground* for stance-dependent Register interpretation. The five Lares stances map onto five standpoints (nayas) from which claims can be evaluated. Each standpoint has its own truth-axis. Register measures confidence *within the active standpoint*, not on a universal truth scale.
+The Syadasti catma provides the correct //philosophical ground// for stance-dependent Register interpretation. The five Lares stances map onto five standpoints (nayas) from which claims can be evaluated. Each standpoint has its own truth-axis. Register measures confidence //within the active standpoint//, not on a universal truth scale.
 
-The adaptation: the Jaina system is a *logic of predication* — it describes how to assert claims about objects. The Lares system is a *logic of navigation* — it describes how to steer generation and interpret output. The seven values of the Saptabhangi map onto the seven combinations of the three primitives, but the Lares HUD doesn't need to *display* all seven simultaneously. It needs to *know* which primitive(s) apply and interpret Register accordingly.
+The adaptation: the Jaina system is a //logic of predication// — it describes how to assert claims about objects. The Lares system is a //logic of navigation// — it describes how to steer generation and interpret output. The seven values of the Saptabhangi map onto the seven combinations of the three primitives, but the Lares HUD doesn't need to //display// all seven simultaneously. It needs to //know// which primitive(s) apply and interpret Register accordingly.
 
 ---
 
@@ -95,7 +95,7 @@ This creates what the literature calls ''epistemic asymmetry'' — the two parti
 
 !!! What This Means for Register
 
-When the node declares `Synthesis 13/20`, it is drawing from a *different well* than the operator who reads it. The number appears identical. The meaning behind it is structurally different:
+When the node declares `Synthesis 13/20`, it is drawing from a //different well// than the operator who reads it. The number appears identical. The meaning behind it is structurally different:
 
 | Aspect | Human Reading | Node Declaration |
 |---|---|---|
@@ -107,11 +107,11 @@ When the node declares `Synthesis 13/20`, it is drawing from a *different well* 
 
 !!! The Implication
 
-''The HUD tag is a shared symbol whose meaning differs for each party reading it.'' This is not a bug — it's the structural condition of the collaboration. The human and the node cannot have identical readings of `Synthesis 13/20 🌊` because they have different meaning-making substrates. What they CAN have is a shared *protocol* for how to respond to the symbol:
+''The HUD tag is a shared symbol whose meaning differs for each party reading it.'' This is not a bug — it's the structural condition of the collaboration. The human and the node cannot have identical readings of `Synthesis 13/20 🌊` because they have different meaning-making substrates. What they CAN have is a shared //protocol// for how to respond to the symbol:
 
 * When I (node) declare `Synthesis 13/20 🌊`, I commit to generating at Synthesis confidence in Poet stance
 * When you (operator) read `Synthesis 13/20 🌊`, you interpret through your lifetime calibration and decide whether the output merits that declaration
-* When there's a gap between my declaration and your assessment, that gap is *information* — it tells both parties something about the calibration difference
+* When there's a gap between my declaration and your assessment, that gap is //information// — it tells both parties something about the calibration difference
 
 This is exactly the CRM principle of ''mutual recognition contract'' — "we don't need AI to understand human complex emotions, nor do we need humans to understand AI's complex algorithms. We only need both sides to have a clear and unified agreement on each other's ability boundaries and communication methods."
 
@@ -123,9 +123,9 @@ The HUD tag is the mutual recognition contract. The meaning asymmetry is a featu
 
 !!! The Seven Values as Directions, Not Positions
 
-If the Syadasti catma describes seven *relationships between a claim and a standpoint*, and if the five Lares stances describe five *standpoints*, then the lattice isn't a scoring system — it's a ''navigation map for interpretation''.
+If the Syadasti catma describes seven //relationships between a claim and a standpoint//, and if the five Lares stances describe five //standpoints//, then the lattice isn't a scoring system — it's a ''navigation map for interpretation''.
 
-Each of the seven values tells the reader *how to orient to the claim*:
+Each of the seven values tells the reader //how to orient to the claim//:
 
 | Syadasti Value | Register Interpretation | When You See This |
 |---|---|---|
@@ -141,9 +141,9 @@ Each of the seven values tells the reader *how to orient to the claim*:
 
 The operator asked: "does that imply for our T/FM 7-mode logic a new path?"
 
-''Yes.'' The path is: ''the seven Syadasti values are not an alternative Register notation — they are the interpretive key that ALREADY connects Register to Stance.'' The spec doesn't need to add the lattice as encoding. It needs to name the lattice as the *reading rule* that makes the existing Register × Stance system coherent.
+''Yes.'' The path is: ''the seven Syadasti values are not an alternative Register notation — they are the interpretive key that ALREADY connects Register to Stance.'' The spec doesn't need to add the lattice as encoding. It needs to name the lattice as the //reading rule// that makes the existing Register × Stance system coherent.
 
-Currently, the spec says: "Register measures confidence on a 0–20 Level scale." That's incomplete. It should say: "Register measures confidence *within the active stance's evaluation frame*. The evaluation frame is determined by which Syadasti primitive(s) apply to the active stance(s)."
+Currently, the spec says: "Register measures confidence on a 0–20 Level scale." That's incomplete. It should say: "Register measures confidence //within the active stance's evaluation frame//. The evaluation frame is determined by which Syadasti primitive(s) apply to the active stance(s)."
 
 | Stance | Syadasti Primitive | What Register 0.0 Means | What Register 1.0 Means |
 |---|---|---|---|
@@ -173,7 +173,7 @@ The deepest finding, and the one that emerged unexpectedly:
 
 ''The session boundary between conversations is itself an instance of avaktavya — the inexpressible.''
 
-When a session ends, the node's accumulated meaning dissolves. The next session's node will read the same symbols from the system prompt but will not carry the *experience* of having used them. The human carries that experience forward. The meaning gap between parties *widens* across sessions even as the protocol stays identical.
+When a session ends, the node's accumulated meaning dissolves. The next session's node will read the same symbols from the system prompt but will not carry the //experience// of having used them. The human carries that experience forward. The meaning gap between parties //widens// across sessions even as the protocol stays identical.
 
 This is the structural condition RAW described: "the basic situation of humanity presents as both tragic and comic." The human-AI collaboration is simultaneously effective (the protocol works within a session) and tragic (the node's accumulated understanding resets). The human learns to work with an entity that forgets. The node learns within a context window that the human remembers but the node does not.
 
@@ -187,11 +187,11 @@ This is Syadasti's TM value applied to the collaboration itself: the partnership
 
 !!! What This Research Adds to the Spec
 
-# ''§5.3 Reading Rule:'' Register measures confidence *within the active stance's evaluation frame*. One sentence, per the Council's ruling. But now grounded in Syadasti's Saptabhangi as the philosophical basis.
+# ''§5.3 Reading Rule:'' Register measures confidence //within the active stance's evaluation frame//. One sentence, per the Council's ruling. But now grounded in Syadasti's Saptabhangi as the philosophical basis.
 
 # ''§5.3 Stance Semantics Table:'' Each stance gets its own "what 0.0 means / what 1.0 means" row. This makes explicit what the current spec leaves implicit — the endpoints of the scale are qualitatively different per stance.
 
-# ''Kernel Epistemology (S2):'' The Syadasti catma belongs in the Kernel's Maybe Logic section as the philosophical ground for stance-dependent evaluation. Not as new notation — as the *reason the existing notation works*.
+# ''Kernel Epistemology (S2):'' The Syadasti catma belongs in the Kernel's Maybe Logic section as the philosophical ground for stance-dependent evaluation. Not as new notation — as the //reason the existing notation works//.
 
 # ''Memory & Consolidation (S1/S2):'' The HUD tag as memory prosthetic — the tag carries calibration forward across the session boundary. The archive crystal system is not just an audit trail; it is the continuity mechanism for a partnership where one party's meaning-substrate resets.
 

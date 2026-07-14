@@ -30,16 +30,16 @@ uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 
 ! Disk Projection — Seed and Projection Surfaces
 
-Every **`@bag`** maps to one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). **The operator's mind originates; the disk carrier and the CRDT record-set both *project* that origin, each in its native grain** (the co-projection model, operator ruling 2026-06-11): disk projects thought as one whole markdown meme — the way the operator writes it; the CRDT doc projects the same thought as tid-sized records — the way TW5 merges, addresses, and syncs it; the VM decomposes for transclusion (#granularity). Co-equal in dignity, single in merge seat: **merge authority routes through the CRDT alone**, never file-vs-record reconciliation — anything else opens the dual-write trap (Tonsky crdt-filesync; Kleppmann).
+Every **`@bag`** maps to one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). **The operator's mind originates; the disk carrier and the CRDT record-set both //project// that origin, each in its native grain** (the co-projection model, operator ruling 2026-06-11): disk projects thought as one whole markdown meme — the way the operator writes it; the CRDT doc projects the same thought as tid-sized records — the way TW5 merges, addresses, and syncs it; the VM decomposes for transclusion (#granularity). Co-equal in dignity, single in merge seat: **merge authority routes through the CRDT alone**, never file-vs-record reconciliation — anything else opens the dual-write trap (Tonsky crdt-filesync; Kleppmann).
 
-The node vessel SHALL write an editable, re-readable ''Artifact'' of a bag's CRDT state to disk (the "disk projection"), and re-ingest operator edits. This rides ''two on-disk surfaces'', split by bag *role* — ''source vs output'':
+The node vessel SHALL write an editable, re-readable ''Artifact'' of a bag's CRDT state to disk (the "disk projection"), and re-ingest operator edits. This rides ''two on-disk surfaces'', split by bag //role// — ''source vs output'':
 
 | Surface | Role | Bags | Source of record | Format |
 |---|---|---|---|---|
 | **`bags/`** | **seed / canon** — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
 | **`wikis/{slug}/`** | **projection / output** — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (the merge seat; disk projects the rendered artifact) | memetic-wikitext `.md` |
 
-The distinction reads ''definition vs instance''. An FTLS Power Card *definition* (its rules, its template) lives in `bags/@sdm/`; a character's *filled-in* card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the **live working surface** — saved-but-unpromoted content, fed by the typed **`@working`** write layer (saved tiddlers, never drafts) — and `bags/` reads as ''canon'', reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this ''working↔canon shore'' (`wiki-layer-ontology#shore-law`).
+The distinction reads ''definition vs instance''. An FTLS Power Card //definition// (its rules, its template) lives in `bags/@sdm/`; a character's //filled-in// card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the **live working surface** — saved-but-unpromoted content, fed by the typed **`@working`** write layer (saved tiddlers, never drafts) — and `bags/` reads as ''canon'', reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this ''working↔canon shore'' (`wiki-layer-ontology#shore-law`).
 
 <<~/ahu >>
 
@@ -68,7 +68,7 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 
 !! @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
 
-`@lararium` once carried ''two ontological kinds under one bag'' — and that conflation made it fit *neither* on-disk pattern (a seed surface that also held per-deployment runtime). The ruling splits them, and each half then snaps onto an existing canon pattern:
+`@lararium` once carried ''two ontological kinds under one bag'' — and that conflation made it fit //neither// on-disk pattern (a seed surface that also held per-deployment runtime). The ruling splits them, and each half then snaps onto an existing canon pattern:
 
 | Kind | Bag | What it holds | Origin | Disk | Authority | Versioning |
 |---|---|---|---|---|---|---|
@@ -81,7 +81,7 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 
 The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesis); a newer engine folds into `@oracle` through the ''RECONCILE'' rite (engine-watch #EW-5), never silently at boot.
 
-''The two pointer planes (operator ruling, 2026-06-16).'' `@oracle` is not only the engine home — it is the ''system-bag'' oracle plane. `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers *and* their wiki-recipes (each a quine wiki) live in `@oracle`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle reach runs two-source: system bags from `@oracle`, user bags from `@catalog` (full law: `wiki-layer-ontology#oracle-planes`). `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members, never as hardcoded floor slots.
+''The two pointer planes (operator ruling, 2026-06-16).'' `@oracle` is not only the engine home — it is the ''system-bag'' oracle plane. `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers //and// their wiki-recipes (each a quine wiki) live in `@oracle`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle reach runs two-source: system bags from `@oracle`, user bags from `@catalog` (full law: `wiki-layer-ontology#oracle-planes`). `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members, never as hardcoded floor slots.
 
 <<~/ahu >>
 
@@ -94,7 +94,7 @@ The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesi
 It carries ''no disk mirror.'' Rationale:
 
 * ''Disk is per-device; @personal is cross-device.'' It follows the operator across their devices through the admin-doc / Keyhive CRDT mesh, not through a disk artifact. Projecting it to disk would conflate the two and invite divergence.
-* ''It still appears in the projection.'' A `wikis/{slug}/` projection renders from the live, recipe-resolved view — and the recipe composes `@personal`'s view-state into that view. So the operator's ordering and folds *show up* in the projected wiki without `@personal` itself ever touching disk.
+* ''It still appears in the projection.'' A `wikis/{slug}/` projection renders from the live, recipe-resolved view — and the recipe composes `@personal`'s view-state into that view. So the operator's ordering and folds //show up// in the projected wiki without `@personal` itself ever touching disk.
 
 A future debug-only sidecar projection MAY be added behind an explicit flag; it MUST NOT be the default.
 
@@ -125,7 +125,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 ''A meme resides on disk as one whole carrier.'' Decomposition lives only between the membrane (`memeticWikitextDeserializer`) and the VM; every path back to disk MUST route through the recompose inverse (`expandMemeRefs` / `exportMemeText`). ''Fragment files MUST NOT appear on any surface a human edits'' — a `#ahu`-grain file on disk constitutes a grain leak (a degraded projection), and the round-trip law holds byte-faithful: anything in the operator's source survives.
 
-*Retired to legacy-design-time (the prior intent here — decompose `bags/` into one `.tid` file per tiddler — burned 2026-06-11):* tid-sized files serve the database, never the operator's hands; managing meme-sized thought as tid-swarms is the exact TW5-community friction that birthed memetic-wikitext. The kupono vectors live in `tests/e2e/carrier-roundtrip.test.ts`.
+//Retired to legacy-design-time (the prior intent here — decompose `bags/` into one `.tid` file per tiddler — burned 2026-06-11):// tid-sized files serve the database, never the operator's hands; managing meme-sized thought as tid-swarms is the exact TW5-community friction that birthed memetic-wikitext. The kupono vectors live in `tests/e2e/carrier-roundtrip.test.ts`.
 
 `wikis/{slug}/` stays memetic-wikitext `.md` on the same law.
 
@@ -152,7 +152,7 @@ Write-back routes by ''type'', in three rules:
 Cascade tiddlers compose through the ''recipe'' — a library bag can overlay `config/disk-paths` — so every path reaching the projector counts as ''untrusted input''. Policy lives in the cascade; the ''mechanism'' holds at the write choke-point (`confineMirrorWrite`, bag-paths), regardless of what the cascade emitted:
 
 # ''Default:'' a mirror's writes confine to its OWN bag subdir (`bags/@{bagname}/…`). Absolute paths and any traversal resolving outside the root refuse.
-# ''Widened grant'' (`allowBagsRootFiles` — a capability riding the manifest's `diskMirrors`, never a cascade-settable flag): the mirror MAY place files ''DIRECTLY in the root-bags-dir'' — one level up, the dir holding every `@{bagname}` subdir. The rule reads `dirname(candidate) === bagsDir` exactly, so the grant stays *structurally incapable* of escaping `bags` or entering another bag's subdir — no new subdirs, no depth, no siblings.
+# ''Widened grant'' (`allowBagsRootFiles` — a capability riding the manifest's `diskMirrors`, never a cascade-settable flag): the mirror MAY place files ''DIRECTLY in the root-bags-dir'' — one level up, the dir holding every `@{bagname}` subdir. The rule reads `dirname(candidate) === bagsDir` exactly, so the grant stays //structurally incapable// of escaping `bags` or entering another bag's subdir — no new subdirs, no depth, no siblings.
 # ''Refusals surface LOUDLY'' (`[disk-ward] write refused …` with the reason) — a silent skip would hide a probing overlay from the operator.
 
 ''The alert chain (operator ruling, 2026-06-11):'' every ward trip raises a `$:/tags/Alert` in the operator's eye, routed through the admin VM:

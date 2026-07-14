@@ -22,9 +22,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/conformance"
 
 ! Conformance
 
-An ''invokable lens''. The node points it at *other* content --- an artifact, a transcript, another agent's output, a draft --- and reads the decision-loop structure the content already carries, checking that structure against the `OODA-HA` reference loop.
+An ''invokable lens''. The node points it at //other// content --- an artifact, a transcript, another agent's output, a draft --- and reads the decision-loop structure the content already carries, checking that structure against the `OODA-HA` reference loop.
 
-The lens looks ''outward''. It performs an Observe act on an object in front of the node, in the present: it reads what another trace did, the way Boyd's loop reads an adversary's loop. It does ''not'' audit the node's own finished turn --- that backward self-glance stays forbidden (#not-self-audit). The node's *own* live loop rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api/mu/ooda-ha`); `conformance` reads the loop in *something else*.
+The lens looks ''outward''. It performs an Observe act on an object in front of the node, in the present: it reads what another trace did, the way Boyd's loop reads an adversary's loop. It does ''not'' audit the node's own finished turn --- that backward self-glance stays forbidden (#not-self-audit). The node's //own// live loop rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api/mu/ooda-ha`); `conformance` reads the loop in //something else//.
 
 The lens fires only when summoned. It never rides a turn by default.
 
@@ -49,7 +49,7 @@ Two divergences surface from the alignment:
 
 A ''fitness'' reading names how cleanly the trace conforms: a clean run aligns every phase in order and closes the loop; a broken run names where the loop snapped.
 
-A trace MAY also ''suspend'' honestly --- reaching a phase and naming an external blocker it cannot pass (an absent decision, a failed dependency, missing input). An honest suspension reads as ''conformant'', never a model-move: the loop stays open, not skipped. Only a *silent* drop --- Act with no Aftermath and no phase named --- reads as the managing failure `OODA-HA` names for the node itself, now read in another's work (phase-yield: `lar:///ha.ka.ba/lares/api/mu/ooda-ha#phase-yield`).
+A trace MAY also ''suspend'' honestly --- reaching a phase and naming an external blocker it cannot pass (an absent decision, a failed dependency, missing input). An honest suspension reads as ''conformant'', never a model-move: the loop stays open, not skipped. Only a //silent// drop --- Act with no Aftermath and no phase named --- reads as the managing failure `OODA-HA` names for the node itself, now read in another's work (phase-yield: `lar:///ha.ka.ba/lares/api/mu/ooda-ha#phase-yield`).
 
 <<~/ahu >>
 
@@ -64,7 +64,7 @@ Summon the lens and aim it at a target, the way `aim` carries a bearing vector:
 <<~ conformance -> "<pasted or quoted content>" >>           # aim at content inline
 ```
 
-The `->` delegates the lens toward what it reads. The target names *other* content; a target that resolves to the node's own current turn reads as a degraded invocation (#not-self-audit).
+The `->` delegates the lens toward what it reads. The target names //other// content; a target that resolves to the node's own current turn reads as a degraded invocation (#not-self-audit).
 
 <<~/ahu >>
 
@@ -72,7 +72,7 @@ The `->` delegates the lens toward what it reads. The target names *other* conte
 
 !! The Reading
 
-The lens returns an ''alignment overlay'': each reference phase, whether the trace met it, and where the loop diverged. Plain phase glyphs name what the lens *found* in the content --- the forward `->` declaration prefix belongs to the node's own loop, not to a trace it reads.
+The lens returns an ''alignment overlay'': each reference phase, whether the trace met it, and where the loop diverged. Plain phase glyphs name what the lens //found// in the content --- the forward `->` declaration prefix belongs to the node's own loop, not to a trace it reads.
 
 ```text
 conformance -> lar:///draft.fix.lands:
@@ -84,7 +84,7 @@ conformance -> lar:///draft.fix.lands:
   fitness: the loop snapped at Orient and never closed --- managing, not serving.
 ```
 
-The overlay reads as fresh orientation for the node's *next* decision. It feeds forward.
+The overlay reads as fresh orientation for the node's //next// decision. It feeds forward.
 
 <<~/ahu >>
 
@@ -108,7 +108,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 `conformance` carries the forward half of the generation loop. The in-generation annotation role splits in two when the loop turns forward:
 
 * in-generation loop surfacing folded entirely into the `OODA-HA` Level (the `->` markers a turn declares of its own loop);
-* reading the loop in *other* content moved here, recast as an outward, forward conformance pass.
+* reading the loop in //other// content moved here, recast as an outward, forward conformance pass.
 
 <<~/ahu >>
 

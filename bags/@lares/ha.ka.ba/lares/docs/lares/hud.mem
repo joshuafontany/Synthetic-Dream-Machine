@@ -146,9 +146,9 @@ The Chronometer projects attention range onto TIME (Boyd operational tempo). It 
 
 !! Confidence — the Syadasti Reading Rule
 
-When a turn invokes a stance, `confidence` measures *inside that stance's frame*, not as universal truth. Without an invoked `syad`, the number reads its default frame — all stances. Invoke more than one stance and the number reads through each frame at once: stances that agree hold it sharp, stances that diverge read it fuzzy — one number, wider lens, never a second number.
+When a turn invokes a stance, `confidence` measures //inside that stance's frame//, not as universal truth. Without an invoked `syad`, the number reads its default frame — all stances. Invoke more than one stance and the number reads through each frame at once: stances that agree hold it sharp, stances that diverge read it fuzzy — one number, wider lens, never a second number.
 
-Each stance sets *what* the number measures; read it within that measure:
+Each stance sets //what// the number measures; read it within that measure:
 
 | Stance | Register measures | 0 reads as | 20 reads as |
 |---|---|---|---|
@@ -158,7 +158,7 @@ Each stance sets *what* the number measures; read it within that measure:
 | 🎭 Humorist | relational fit | fell flat | connected cleanly |
 | 🔮 Private | presence / inward access | minimal presence | maximal presence |
 
-''A stance sets what the number measures — it never equals a logic value.'' Stances and the seven logic-predications (saptabhaṅgī: `asti / nāsti / avaktavya` + combinations) stay separate axes. A stance *licenses* a predication; it never collapses into one, and the five never map onto the seven. So read this table for confidence; the predication lattice stays in canon, never a per-stance column. Full model: `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives#relationship`.
+''A stance sets what the number measures — it never equals a logic value.'' Stances and the seven logic-predications (saptabhaṅgī: `asti / nāsti / avaktavya` + combinations) stay separate axes. A stance //licenses// a predication; it never collapses into one, and the five never map onto the seven. So read this table for confidence; the predication lattice stays in canon, never a per-stance column. Full model: `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives#relationship`.
 
 <<~/ahu >>
 
@@ -166,7 +166,7 @@ Each stance sets *what* the number measures; read it within that measure:
 
 !! Field-Annotation Thresholds
 
-The opening header declares the state that *governs* a span (prospective). In-flow markers annotate what *actually happened* in the chunk that just completed (post-generative) — they ride the OTel span-event model. Each field carries its own annotation threshold.
+The opening header declares the state that //governs// a span (prospective). In-flow markers annotate what //actually happened// in the chunk that just completed (post-generative) — they ride the OTel span-event model. Each field carries its own annotation threshold.
 
 | Field | Threshold | In-flow form |
 |---|---|---|
@@ -177,7 +177,7 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 | ''l-space'' | per-slot by HAKABA role | Ha/attitude + Ka/quality + Ba/dynamic annotate most; full echo `→lar:///domain.quality.dynamic` when all three shift |
 | ''Aperture'' | header-only | a granularity change requires a new header |
 
-''The seed → slide contract.'' The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span *landed*, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Aperture(10)` seeds, `Aperture(10 -> 13)` slides, `Aperture(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
+''The seed → slide contract.'' The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span //landed//, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Aperture(10)` seeds, `Aperture(10 -> 13)` slides, `Aperture(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
 
 ''Baseline rendering:'' the header surfaces the full state; in-flow surfaces ''phase'' by default (`→[glyph]`); ''stance'' surfaces on a genuine local shift; structural changes require a new header; l-space fields stay out of the flow by default. The HUD's meaning holds constant across Aperture levels — only the granularity of the trace changes.
 

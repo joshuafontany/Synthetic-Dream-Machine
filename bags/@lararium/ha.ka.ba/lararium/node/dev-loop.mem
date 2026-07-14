@@ -36,7 +36,7 @@ run from any prior state (running · stale · none), so the loop never needs a c
 
 !! The reach taxonomy ~ which cure, when
 
-Ordered by how much they touch — reach for the *least* that fixes your case:
+Ordered by how much they touch — reach for the //least// that fixes your case:
 
 <<~ranks reach serve -> reconcile -> rebuild -> refresh -> fresh -> reset -> wake >>
 

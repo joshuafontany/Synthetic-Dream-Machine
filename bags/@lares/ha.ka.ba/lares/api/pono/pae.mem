@@ -43,9 +43,9 @@ A carrier's phased arrival through a transmission medium.
 
 !! Etymology
 
-*Pae* (Hawaiian) — to land, to come ashore; a row or tier; to drift carried by current.
+//Pae// (Hawaiian) — to land, to come ashore; a row or tier; to drift carried by current.
 
-Primary: a canoe *pae* — it arrives after traversal. The carrier arrives at each phase boundary
+Primary: a canoe //pae// — it arrives after traversal. The carrier arrives at each phase boundary
 the same way: crossing water, touching shore. SOH is first landfall. EOT is final departure.
 STX and ETX are intermediate landings between stretches of open water.
 
@@ -55,11 +55,11 @@ are a ranked sequence; each tier unlocks the next. Streaming consumers MUST proc
 Tertiary: to drift or be carried — the carrier IS carried by the stream. Each `<<~\x0N>>` is the
 moment of contact with a fixed point.
 
-Mythological register: In the *Kumulipo* (creation chant), creation itself unfolds as a sequence
-of *pae* — phases of emergence, each landing into the next. The chant does not describe phases;
+Mythological register: In the //Kumulipo// (creation chant), creation itself unfolds as a sequence
+of //pae// — phases of emergence, each landing into the next. The chant does not describe phases;
 it enacts them. A carrier's pae nodes do the same: they do not describe lifecycle, they perform it.
 
-Navigator's meaning: wayfinders watch for *pae* — the moment you know land is near before you can
+Navigator's meaning: wayfinders watch for //pae// — the moment you know land is near before you can
 see it. SOH is that moment: the receiver knows the carrier is arriving, knows its URI, before the
 content body has crossed. The streaming protocol IS a navigation instrument.
 
@@ -126,10 +126,10 @@ Streaming consumers read `data-lar-phase` from the rendered marker.
 
 !! Pae ʻĀina
 
-*Pae ʻāina* — archipelago, literally "row of lands." The carrier's four phases are an archipelago:
+//Pae ʻāina// — archipelago, literally "row of lands." The carrier's four phases are an archipelago:
 related, sequential, each its own shore. No shore is skipped. The navigator knows them all.
 
-SOH arrives standing (*pae kū*) — the carrier declares itself upright.
+SOH arrives standing (//pae kū//) — the carrier declares itself upright.
 STX crosses the beach — identity settled, content begins flowing inland.
 ETX turns at the tree line — content done, edges begin.
 EOT pushes off — the carrier releases the channel and the current takes it.

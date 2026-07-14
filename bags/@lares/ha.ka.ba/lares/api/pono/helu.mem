@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/helu"
 
 ! Helu
 
-*helu* — Hawaiian: to count, enumerate, calculate, reckon; a number; to list in order.
+//helu// — Hawaiian: to count, enumerate, calculate, reckon; a number; to list in order.
 The act of moving through a set and giving each element its reckoning — counting implies
 both identification and order. A helu function enumerates over its input and returns a
 computed result set.
@@ -27,7 +27,7 @@ filter expression that accepts parameters and yields a result list. TW5 5.3+ equ
 `\function` — also the English alias.
 
 Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body that
-*computes* — the function yields a filter result set, not rendered wikitext.
+//computes// — the function yields a filter result set, not rendered wikitext.
 
 <<~/ahu >>
 
