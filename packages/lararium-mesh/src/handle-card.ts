@@ -90,7 +90,10 @@ export type CardRejection =
   | "wrong-domain"      // not a handle-card
   | "malformed"         // a field is the wrong shape (nym/sig not hex, etc.)
   | "bad-signature"     // the card was not signed by the key it names — it certifies nothing
-  | "expired";          // the lease lapsed against the local clock (only checked when `now` is given)
+  | "expired"           // the lease lapsed against the local clock (only checked when `now` is given)
+  | "wrong-nym"         // the card names a DIFFERENT handle than the one a recogniser tracks — not an update
+  | "rollback"          // the card's version sits below one the recogniser already accepted — a replay
+  | "lineage-break";    // the card's `prev` fails to link the last card held — an equivocation/fork
 
 export interface CardVerdict {
   readonly ok:      boolean;
@@ -147,4 +150,45 @@ export async function recognizeHandle(
 ): Promise<boolean> {
   const v = await verifyHandleCard(card, now);
   return v.ok && v.nym === expectedNym;
+}
+
+/**
+ * The ANNOUNCE reader rule — accept a fresh card for a Handle already tracked, refuse a rollback or a fork.
+ *
+ * `verifyHandleCard` certifies ONE card in isolation (self-signed, unexpired). Recognising a handle OVER TIME
+ * needs more: an announced Handle republishes its card as it renews the lease, bumps the glamour, or links a
+ * new standing thread, and a recogniser must accept the NEWER face while refusing a stale copy that tries to
+ * roll the Handle back or a forked lineage that equivocates. This rule carries the SAME discipline
+ * `oracle-substrate` proves for its pointer (anti-rollback by `version`, anti-equivocation by `prev`), applied
+ * to the card's own monotone fields — so a Handle rides the read-open plane under the identical guarantees.
+ *
+ * Pass what the recogniser remembers of this Handle:
+ *   - `expectedNym`: the key the recogniser's petname points at — a card naming a different key is a stranger,
+ *     never an update, however well it certifies itself (the hijack guard).
+ *   - `highWaterVersion`: the highest card version already accepted; a lower one reads as a replay/rollback.
+ *   - `lastCardId`: the id (content hash) of the last card held; a `prev` that fails to link it flags a fork.
+ *   - `now`: the recogniser's LOCAL clock — past `expiry` reads as stale (no global now).
+ *
+ * First recognition (no card held yet) passes `highWaterVersion`/`lastCardId` undefined; the rule then reduces
+ * to self-certification + the nym match. Never throws — an announce arrives from the open network untrusted.
+ */
+export async function acceptHandleUpdate(
+  card: HandleCard,
+  opts: {
+    readonly expectedNym:       string;
+    readonly highWaterVersion?: number;
+    readonly lastCardId?:       string;
+    readonly now?:              number;
+  },
+): Promise<CardVerdict> {
+  const self = await verifyHandleCard(card, opts.now);
+  if (!self.ok) return self;
+  if (card.nym !== opts.expectedNym) return { ok: false, reject: "wrong-nym" };
+  if (opts.highWaterVersion !== undefined && card.version < opts.highWaterVersion) {
+    return { ok: false, reject: "rollback" };
+  }
+  if (opts.lastCardId !== undefined && card.prev !== opts.lastCardId) {
+    return { ok: false, reject: "lineage-break" };
+  }
+  return { ok: true, nym: card.nym };
 }

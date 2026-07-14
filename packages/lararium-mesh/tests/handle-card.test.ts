@@ -8,7 +8,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
-  signHandleCard, verifyHandleCard, recognizeHandle, handleCardId,
+  signHandleCard, verifyHandleCard, recognizeHandle, acceptHandleUpdate, handleCardId,
   HANDLE_CARD_DOMAIN, type HandleCard,
 } from "../src/handle-card.js";
 import { hex } from "../src/crypto.js";
@@ -99,6 +99,44 @@ describe("the lease + lineage — monotone, self-staling, followable", () => {
     const v2 = await publish(FASTJACK_SEED, "FastJack the Healer", { version: 2, prev: v1id });
     expect(v2.prev).toBe(v1id);
     expect((await verifyHandleCard(v2)).ok).toBe(true);
+  });
+});
+
+describe("the ANNOUNCE reader rule — accept the newer face, refuse a rollback or a fork", () => {
+  test("first recognition: with nothing held, the rule reduces to self-cert + the nym match", async () => {
+    const nym = await pubOf(FASTJACK_SEED);
+    const v1  = await publish(FASTJACK_SEED, "FastJack", { version: 1 });
+    expect((await acceptHandleUpdate(v1, { expectedNym: nym })).ok).toBe(true);
+    // a card naming a DIFFERENT key is a stranger, never an update — however well it certifies itself
+    const stranger = await publish(DODGER_SEED, "FastJack");
+    expect((await acceptHandleUpdate(stranger, { expectedNym: nym })).reject).toBe("wrong-nym");
+  });
+
+  test("a fresh version supersedes; a stale one is refused as a rollback", async () => {
+    const nym = await pubOf(FASTJACK_SEED);
+    const v1  = await publish(FASTJACK_SEED, "FastJack", { version: 1 });
+    const v1id = await handleCardId(v1);
+    const v2  = await publish(FASTJACK_SEED, "FastJack the Healer", { version: 2, prev: v1id });
+    // holding v1 (high-water 1), v2 links it and bumps the counter — accepted
+    expect((await acceptHandleUpdate(v2, { expectedNym: nym, highWaterVersion: 1, lastCardId: v1id })).ok).toBe(true);
+    // a copy of v1 re-arriving after v2 tries to roll the Handle back — refused
+    expect((await acceptHandleUpdate(v1, { expectedNym: nym, highWaterVersion: 2, lastCardId: v1id })).reject).toBe("rollback");
+  });
+
+  test("a card whose prev fails to link the last held card is a fork — refused as a lineage break", async () => {
+    const nym = await pubOf(FASTJACK_SEED);
+    const v1  = await publish(FASTJACK_SEED, "FastJack", { version: 1 });
+    const v1id = await handleCardId(v1);
+    // an equivocating v2 that bumps the version but points prev at a DIFFERENT ancestor
+    const forkV2 = await publish(FASTJACK_SEED, "FastJack forked", { version: 2, prev: "0".repeat(64) });
+    expect((await acceptHandleUpdate(forkV2, { expectedNym: nym, highWaterVersion: 1, lastCardId: v1id })).reject).toBe("lineage-break");
+  });
+
+  test("the reader rule still honours the local-clock lease — a stale update is refused before its lineage", async () => {
+    const NOW = 1_000_000;
+    const nym = await pubOf(FASTJACK_SEED);
+    const stale = await publish(FASTJACK_SEED, "FastJack", { version: 5, expiry: NOW - 1 });
+    expect((await acceptHandleUpdate(stale, { expectedNym: nym, now: NOW })).reject).toBe("expired");
   });
 });
 
