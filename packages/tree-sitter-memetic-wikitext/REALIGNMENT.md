@@ -203,3 +203,12 @@ the vendored TiddlyWiki5 core tiddlers.
   RESIDUE.md DELETED per its own law. Sole remainder: the boot-seed italic
   quote (noosphere-boot.mem:144) — folded into the standing boot-seed
   dialect fork @operator. The corpus migration closes WHOLE.
+
+## CLOSED — 2026-07-14
+
+**RULED (operator): .mem = FULL memetic-wikitext · .md stays md until the
+lares daemon seeds context at session start.** The boot seed .mem converts
+its last italic (the Law-of-5s Canon quote); noosphere-boot.md holds md by
+design, not debt. FINAL witness: 524/524 memes · 0 errors · 4,370 headings ·
+7,291 list nodes as structure · golden 1 mover (the boot seed) · host-py 15 ·
+sectioner 12 · roundtrip 2/2 · ruff clean. The realignment arc rests.
