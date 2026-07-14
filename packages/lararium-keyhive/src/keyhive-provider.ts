@@ -1,6 +1,6 @@
 /**
  * KeyhiveProvider — CapabilityProvider implementation atop @keyhive/keyhive
- * pre-alpha (0.0.0-alpha.56c).
+ * (0.1.0-alpha.6).
  *
  * Mapping:
  *   - Lararium bag URL ↔ Keyhive Document, 1:1
@@ -85,6 +85,13 @@ function hexToBytes(hex: string): Uint8Array {
 async function changeIdForBag(bagUrl: string): Promise<KH.ChangeId> {
   const bytes = new TextEncoder().encode(bagUrl);
   const hashBuf = await crypto.subtle.digest("SHA-256", bytes);
+  return new KH.ChangeId(new Uint8Array(hashBuf));
+}
+
+/** Content-addressed ChangeId — names one encrypted chunk by its own bytes. A real Automerge integration
+ *  passes the change's actual hash; absent one, the content hash keeps the ref stable and unique per chunk. */
+async function changeIdForContent(content: Uint8Array): Promise<KH.ChangeId> {
+  const hashBuf = await crypto.subtle.digest("SHA-256", content.slice());
   return new KH.ChangeId(new Uint8Array(hashBuf));
 }
 
@@ -175,6 +182,16 @@ export class KeyhiveProvider implements CapabilityProvider {
     return { docId: docIdHex };
   }
 
+  /**
+   * Adopt a bag's document minted by a PEER — the joinee records the founder's `docId` for a shared bag URL
+   * instead of generating its own (`registerBag` mints a NEW doc, which would never match). The founder ships
+   * the docId; after the joinee ingests the membership events, `requireDoc` resolves it and content decrypts.
+   */
+  adoptBag(bagUrl: string, docIdHex: string): void {
+    this.bagToDocId.set(bagUrl, docIdHex);
+    this.docIdToBag.set(docIdHex, bagUrl);
+  }
+
   async delegate(args: DelegateArgs): Promise<DelegateResult> {
     const docIdHex = this.bagToDocId.get(args.bagUrl);
     if (!docIdHex) throw new Error(`bag not registered: ${args.bagUrl} (call registerBag first)`);
@@ -207,6 +224,64 @@ export class KeyhiveProvider implements CapabilityProvider {
     this.delegationAudience.set(delegationId, args.audience);
     this.delegationBag.set(delegationId, args.bagUrl);
     return { delegationId, bytes: sigBytes };
+  }
+
+  /** Resolve a registered bag to its live Keyhive Document, or throw with the bag named. */
+  private async requireDoc(bagUrl: string): Promise<KH.Document> {
+    const docIdHex = this.bagToDocId.get(bagUrl);
+    if (!docIdHex) throw new Error(`bag not registered: ${bagUrl} (call registerBag first)`);
+    const doc = await this.requireKh().getDocument(new KH.DocumentId(hexToBytes(docIdHex)));
+    if (!doc) throw new Error(`document not in scope (lost from local state?): ${bagUrl}`);
+    return doc;
+  }
+
+  /**
+   * Encrypt content INTO a bag's document — the CGKA keys it to every current member's leaf.
+   *
+   * ORDER IS LOAD-BEARING: keyhive read runs FORWARD-ONLY, so a member reads only content encrypted AT OR
+   * AFTER its own `delegate()`/add. Call `registerBag` then `delegate` (add every reader vessel) BEFORE this,
+   * or the fresh reader will hit `Key not found` on `decryptContent`. Granting a member PRE-EXISTING content
+   * means re-encrypting each chunk here after the add (the same public-ops path, no secret leaves).
+   *
+   * `contentRef` names the chunk (a real Automerge integration passes the change hash); absent, the content
+   * hashes to its own ref. The returned bytes are the ciphertext blob to ship — E2E, safe on any relay.
+   */
+  async encryptContent(bagUrl: string, content: Uint8Array, opts?: {
+    readonly contentRef?: Uint8Array; readonly predRefs?: readonly Uint8Array[];
+  }): Promise<Uint8Array> {
+    const doc = await this.requireDoc(bagUrl);
+    const cid = opts?.contentRef ? new KH.ChangeId(opts.contentRef) : await changeIdForContent(content);
+    const preds = (opts?.predRefs ?? []).map((r) => new KH.ChangeId(r));
+    const result = await this.requireKh().tryEncrypt(doc, cid, preds, content);
+    return result.encrypted_content().serialize();
+  }
+
+  /**
+   * Decrypt a ciphertext blob a peer shipped for a bag's document. Succeeds only when this vessel already
+   * holds membership reaching the chunk's CGKA epoch (it decrypts with its OWN prekey secret — nothing
+   * secret ever crossed the wire). A member added AFTER the chunk was encrypted reads `Key not found`.
+   */
+  async decryptContent(bagUrl: string, encryptedBytes: Uint8Array): Promise<Uint8Array> {
+    const doc = await this.requireDoc(bagUrl);
+    return this.requireKh().tryDecrypt(doc, KH.Encrypted.fromBytes(encryptedBytes));
+  }
+
+  /**
+   * The PUBLIC events keyhive routes to a specific peer — the membership + CGKA ops a joinee ingests to
+   * reach the group key. Capture this AFTER `encryptContent`, so it carries the PCS update op that keyed the
+   * content to the joinee's leaf. Every element is public (encrypted-to-prekey CGKA path ciphertext); no
+   * prekey secret, no archive, no application key rides here — the joinee holds only its own prekey secret.
+   */
+  async eventsForPeer(peerAgentIdHex: string): Promise<Uint8Array[]> {
+    const agent = await this.requireKh().getAgent(new KH.Identifier(hexToBytes(peerAgentIdHex)));
+    if (!agent) throw new Error(`peer not known to this provider — exchange contact cards first: ${peerAgentIdHex.slice(0, 16)}…`);
+    const map = await this.requireKh().eventsForAgent(agent);
+    return [...(map as Map<unknown, unknown>).values()] as Uint8Array[];
+  }
+
+  /** Ingest the public events a peer shipped (from their `eventsForPeer`) — establishes membership/CGKA state. */
+  async ingestPeerEvents(events: readonly Uint8Array[]): Promise<void> {
+    await this.requireKh().ingestEventsBytes(events as Uint8Array[]);
   }
 
   /**
