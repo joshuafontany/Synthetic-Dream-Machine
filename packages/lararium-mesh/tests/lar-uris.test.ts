@@ -29,6 +29,10 @@ import {
   nexusRegistryUri,
   nexusHandlesUri,
   NEXUS_DOC_URI,
+  CROSSROADS_DOC_URI,
+  CATALOG_DOC_URI,
+  ORACLE_DOC_URI,
+  BAG_IDS,
   legacyIdentityUri,
   identitySlug,
 } from "../src/lar-uris.js";
@@ -170,5 +174,21 @@ describe("@nexus — the confederation plane, scoped per causal island", () => {
     expect(nexusHandlesUri("nexusA")).not.toBe(nexusHandlesUri("nexusB"));
     // the reach lives in the doc URI (per nexus); the identity KIND lives in the tiddler key (portable)
     expect(nexusHandlesUri("nexusA")).toContain("nexusA");
+  });
+});
+
+describe("@crossroads — the public oracle plane (three-plane model)", () => {
+  test("the three oracle planes are distinct bags — system, private, public never collapse", () => {
+    expect(CROSSROADS_DOC_URI).toBe(bagUri("crossroads"));
+    // @oracle (system-island) ⊥ @catalog (private OCAP) ⊥ @crossroads (public)
+    expect(new Set([ORACLE_DOC_URI, CATALOG_DOC_URI, CROSSROADS_DOC_URI]).size).toBe(3);
+    expect(BAG_IDS.crossroads).toBe(CROSSROADS_DOC_URI);
+  });
+
+  test("the WHO face's oracle-key rides a DISTINCT plane from its own doc URI (pointer ⊥ target)", () => {
+    // the per-nexus WHO doc lives under @nexus; its oracle-pointer lives under @crossroads — two planes,
+    // one names the doc, the other publishes where to find it to a stranger.
+    expect(nexusHandlesUri("nx").startsWith(NEXUS_DOC_URI)).toBe(true);
+    expect(nexusHandlesUri("nx").startsWith(CROSSROADS_DOC_URI)).toBe(false);
   });
 });

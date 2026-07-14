@@ -133,6 +133,14 @@ export const ORACLE_DOC_URI    = bagUri("oracle");
 export const LARARIUM_DOC_URI  = bagUri("lararium");
 export const CATALOG_DOC_URI   = bagUri("catalog");
 export const LARES_DOC_URI     = bagUri("lares");
+// @crossroads = the PUBLIC oracle plane (third leg of the three-plane model,
+// canon: lararium/docs/crossroads). Where @oracle carries system-bag pointers
+// and @catalog carries the operator's PRIVATE bag oracles (OCAP grants),
+// @crossroads carries oracles to PUBLIC + infrastructure bags — the layers a
+// stranger may mount without standing in any operator's grant graph. "Public"
+// names a generous grant to an anonymous principal, never an absence of the gate
+// (pull ≠ read). The per-Nexus WHO face rides here (its oracle-key = nexusHandlesUri).
+export const CROSSROADS_DOC_URI = bagUri("crossroads");
 // The memetic-wikitext engine plugin — a named blob CARRIED IN @oracle's blobs. Its
 // title lives in the @lararium MEME NAMESPACE (not the bag doc): a meme/module address
 // the disk projector discards-from-bag, keyed on by plugin.info + the TW5 pack pipeline.
@@ -289,6 +297,10 @@ export function nexusRegistryUri(nexusPubkey: string): string {
  * sibling to it under the same nexus-pubkey. Handle-cards ride it as tiddlers keyed by their own nym (the
  * portable identity KIND), while this doc URI carries the island-scoped REACH — so the same card re-announces
  * onto another Nexus's handles-face under a stable key. Federates read-open within the island; never global.
+ *
+ * This URI doubles as the WHO face's ORACLE-KEY on the PUBLIC plane: a @crossroads tiddler at this key holds
+ * the face doc's automerge: URL (resolveOracleDoc), so a stranger resolves the per-Nexus WHO board through
+ * @crossroads without standing in any operator's grant graph (canon: lararium/docs/crossroads).
  */
 export function nexusHandlesUri(nexusPubkey: string): string {
   return `${NEXUS_DOC_URI}/${nexusPubkey}/handles`;
@@ -369,6 +381,7 @@ export const BAG_IDS = {
   lararium:   LARARIUM_DOC_URI,
   catalog:    CATALOG_DOC_URI,
   lares:      LARES_DOC_URI,
+  crossroads: CROSSROADS_DOC_URI,
   identities: IDENTITIES_DOC_URI,
   groups:     CIRCLES_DOC_URI,
   sessions:   SESSIONS_DOC_URI,
