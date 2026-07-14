@@ -19,6 +19,10 @@
  * The probe NEVER ships leafSecrets to the device. If the decrypt needs them, it fails HONESTLY — which is
  * the finding, not a bug.
  *
+ * SELF-ASSERTING: exits 0 only when the joinee decrypts from public bytes alone; exits 1 on any failure. So
+ * `tsx …/cross-peer-decrypt.ts` runs as the crossing's acceptance gate — a keyhive bump or a code change
+ * that breaks the seal-to-prekey property trips a non-zero exit.
+ *
  * Usage: pnpm exec tsx packages/lararium-keyhive/probes/cross-peer-decrypt.ts
  * Findings land in packages/lararium-keyhive/probes/FINDINGS.md.
  */
@@ -102,7 +106,7 @@ async function main(): Promise<void> {
   if (!deviceDoc) {
     console.log(`[probe] ★ device holds ${(reach as unknown[]).length} reachable docs but cannot resolve THIS doc from the public events alone.`);
     console.log(`[probe] VERDICT: distinct-identity join needs MORE than the public events shipped — sealed transport likely REQUIRED. See leafSecrets reading above.`);
-    return;
+    process.exit(1);
   }
 
   try {
@@ -110,12 +114,16 @@ async function main(): Promise<void> {
     const text = new TextDecoder().decode(recovered);
     const ok = text === new TextDecoder().decode(PLAINTEXT);
     console.log(`[probe] ★★ device.tryDecrypt ${ok ? "SUCCEEDED" : "returned WRONG bytes"}: "${text.slice(0, 40)}…"`);
-    console.log(ok
-      ? `[probe] VERDICT: SEALED-BOX REDUNDANT for Model B — the joinee decrypted from PUBLIC bytes + its own prekey secret alone.`
-      : `[probe] VERDICT: decrypt returned wrong plaintext — investigate content_ref / doc association.`);
+    if (ok) {
+      console.log(`[probe] VERDICT: SEALED-BOX REDUNDANT for Model B — the joinee decrypted from PUBLIC bytes + its own prekey secret alone.`);
+      process.exit(0);
+    }
+    console.log(`[probe] VERDICT: decrypt returned wrong plaintext — investigate content_ref / doc association.`);
+    process.exit(1);
   } catch (e) {
     console.log(`[probe] ★★ device.tryDecrypt FAILED: ${e instanceof Error ? e.message : e}`);
     console.log(`[probe] VERDICT: without leafSecrets the joinee cannot decrypt — a SECRET must travel → sealed channel REQUIRED (H refuted for our config).`);
+    process.exit(1);
   }
 }
 

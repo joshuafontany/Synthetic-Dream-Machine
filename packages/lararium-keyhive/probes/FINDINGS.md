@@ -228,3 +228,16 @@ the joinee decrypts. The design note's "envelope key-handoff (sealed-box)" was p
 API grains the probe pinned: `Encrypted.serialize()` (not `toBytes()`) pairs with `Encrypted.fromBytes`;
 `DocumentId` must be rebuilt from bytes on the joinee (WASM objects do not cross instances);
 `ingestEventsBytes` returns a result array (not an applied-count — read `reachableDocs()` for truth).
+
+### CAVEAT — this verdict is alpha.3; the join API was reworked at alpha.4–6
+
+A tarball `.d.ts` diff (alpha.2→.6) shows the crossing mechanism changed AFTER alpha.3:
+- alpha.4 DROPPED the `Keyhive.init(..., forward_secrecy)` parameter.
+- alpha.5 changed `addMember` return `AddMemberUpdate → SignedDelegation` and DELETED `AddMemberUpdate.leafSecrets`
+  — so the "withhold leafSecrets" posture is not expressible on alpha.5/.6.
+- alpha.6 ADDED `tryEncryptKeyed`/`tryDecryptKeyed`, `Encrypted.decryptWithKey(key)`, `symmetricEncrypt/Decrypt`.
+- Unchanged: `eventsForAgent`, `ingestEventsBytes`, `tryEncrypt/tryDecrypt`, `Encrypted.serialize/fromBytes`, `Archive`, `CiphertextStore`.
+No Beelay / JS doc-sync exposed in any alpha (still Rust-only `beelay-core`) → the transport stays ours to build.
+
+BEFORE shipping transport: bump to alpha.6, migrate the init/addMember API, and RE-RUN this probe adapted to the
+new `SignedDelegation` + `*Keyed` surface to re-establish the read-scope guarantee. Do not assume alpha.3's result holds.
