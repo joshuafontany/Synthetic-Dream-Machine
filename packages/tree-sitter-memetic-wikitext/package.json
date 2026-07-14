@@ -1,7 +1,33 @@
 {
   "name": "tree-sitter-memetic-wikitext",
   "version": "0.0.1",
-  "description": "The CARRIER grammar of memetic-wikitext — sigil forms, fences, headings — parsed generically; the sigil VOCABULARY is live wiki data, never grammar",
+  "description": "The CARRIER grammar of memetic-wikitext — sigil forms, fences, headings, TW5 lists — parsed generically; the sigil VOCABULARY is live wiki data, never grammar",
   "main": "bindings/node",
-  "tree-sitter": [{ "scope": "source.memetic-wikitext", "file-types": ["mem"] }]
+  "tree-sitter": [
+    {
+      "scope": "source.memetic-wikitext",
+      "file-types": [
+        "mem"
+      ]
+    }
+  ],
+  "artifact": {
+    "grammarAbi": 15,
+    "treeSitterCli": "0.26.11",
+    "webTreeSitter": "0.26.11",
+    "toolchain": "tree-sitter-cli >=0.26.1 builds wasm via auto-downloaded wasi-sdk; no emscripten pin. The CLI that generates and the runtime that loads never drift a minor apart (the pin-pair law).",
+    "corpusManifest": "0.0.1"
+  },
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "gate:generate-parity": "tree-sitter generate && git diff --exit-code -- src/",
+    "gate:fold": "cd host-py && python -m pytest -q",
+    "gates": "pnpm run gate:generate-parity && pnpm run gate:fold",
+    "build:wasm": "tree-sitter build --wasm -o tree-sitter-memetic_wikitext.wasm",
+    "release:bundle": "pnpm run gates && pnpm run build:wasm && node tools/bundle-release.mjs"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "0.26.11",
+    "web-tree-sitter": "0.26.11"
+  }
 }

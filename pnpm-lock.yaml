@@ -284,7 +284,14 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@26.1.1)(@vitest/browser-playwright@4.1.10)(vite@8.1.4(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.0))
 
-  packages/tree-sitter-memetic-wikitext: {}
+  packages/tree-sitter-memetic-wikitext:
+    devDependencies:
+      tree-sitter-cli:
+        specifier: 0.26.11
+        version: 0.26.11
+      web-tree-sitter:
+        specifier: 0.26.11
+        version: 0.26.11
 
   sdm: {}
 
@@ -1585,6 +1592,11 @@ packages:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
 
+  tree-sitter-cli@0.26.11:
+    resolution: {integrity: sha512-/hRCA0Ehkgk6B5WTYSiENk1R2Zv3LJcfvL3wjofzx+EYaKySZDu0agGRQcccay9Lg7wxJWsDa9cTRS92wsM5gQ==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+
   tslib@2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
 
@@ -1715,6 +1727,9 @@ packages:
         optional: true
       jsdom:
         optional: true
+
+  web-tree-sitter@0.26.11:
+    resolution: {integrity: sha512-Q5Dm3YTIXSXuH6FxX6RuzX2Qwpc4DPGiYMU87Wg5Z8OIStiQFiUex4zMDc0vBTw78EphaYJacncJghCHzbZptg==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -2883,6 +2898,8 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
+  tree-sitter-cli@0.26.11: {}
+
   tslib@2.3.0: {}
 
   tslib@2.8.1: {}
@@ -2984,6 +3001,8 @@ snapshots:
       '@vitest/browser-playwright': 4.1.10(playwright@1.61.1)(vite@8.1.4(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.0))(vitest@4.1.10)
     transitivePeerDependencies:
       - msw
+
+  web-tree-sitter@0.26.11: {}
 
   which@2.0.2:
     dependencies:

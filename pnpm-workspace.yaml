@@ -13,3 +13,4 @@ packages:
 allowBuilds:
   cbor-extract: true
   esbuild: true
+  tree-sitter-cli: true
