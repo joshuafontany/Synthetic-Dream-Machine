@@ -33,7 +33,7 @@ uri-path                               = "ha.ka.ba/elyncia/characters/primary-ch
 
 <<~ ahu #head >>
 
-# Lady Aki — Character Sheet
+! Lady Aki — Character Sheet
 
 *FTLS / SDM+ alpha playtest. OGA-era table sheet. Powers remain deferred.*
 
@@ -47,7 +47,7 @@ Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her
 
 <<~ ahu #quick-card >>
 
-## Quick Card
+!! Quick Card
 
 | Field | Value |
 |---|---|
@@ -67,19 +67,19 @@ Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her
 
 <<~ ahu #visual-registers >>
 
-## Visual Registers
+!! Visual Registers
 
-### 1. True Body — Spider Folk
+!!! 1. True Body — Spider Folk
 
 Iridescent fae chitin. Extra arms. Soft alien face. Chitin plates. Web-silk organs. Sacred, fae, and strange rather than monstrous.
 
-### 2. Public Glamour — Traveling Miko
+!!! 2. Public Glamour — Traveling Miko
 
 Red and white shrine workwear. Silksteel ritual robe layers. Wide-brimmed **ichimegasa** with **uchikatsugi-style veil**. Shrine bells, ofuda, spinneret tools, and soft faerie glamour.
 
 The glamour softens Aki's chitinous body for social passage. It does not erase her true form. Treat it as visual and social positioning until a Power, item, or roll grants stronger mechanics.
 
-### 3. Threshold Reveal — Glamour Thins
+!!! 3. Threshold Reveal — Glamour Thins
 
 The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward papers, bells, and shrine geometry mark the room. Ichi may step in as armor or shield.
 
@@ -87,7 +87,7 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 
 <<~ ahu #stats >>
 
-## Ability Scores
+!! Ability Scores
 
 | STR | AGI | END | THT | CHA | AUR |
 |---:|---:|---:|---:|---:|---:|
@@ -99,33 +99,33 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 
 <<~ ahu #heritage >>
 
-## Heritage — Spider Folk
+!! Heritage — Spider Folk
 
 **Rank:** Skilled (+3)  
 **Effects:** Affinity — Silk & Web; Alternate Movement — Climb; Armoured Body
 
-### Affinity — Silk & Web
+!!! Affinity — Silk & Web
 
 Tags: `[illusion] [silk] [web]`
 
 Aki spins lines, sheets, snares, glamour scaffolds, ward webs, belay systems, ritual knots, and silk-field diagrams from web-silk.
 
 Use this for:
-- silk and web craft,
-- vibration reading,
-- shrine-thread omens,
-- ambush geometry,
-- fae-spider etiquette,
-- illusion staging,
-- alchemical binding.
+* silk and web craft,
+* vibration reading,
+* shrine-thread omens,
+* ambush geometry,
+* fae-spider etiquette,
+* illusion staging,
+* alchemical binding.
 
-### Alternate Movement — Climb
+!!! Alternate Movement — Climb
 
 Aki climbs at normal Speed.
 
 After 30 minutes of continuous climbing, mark Heritage and make a Wear and Tear attrition save. While marked, make another attrition save every 10 minutes of continued alternate movement.
 
-### Armoured Body
+!!! Armoured Body
 
 Aki's true chitin grants **+1 Armor** and **+1 Ward**. This comes from her body, not worn gear.
 
@@ -135,7 +135,7 @@ This stacks with Ichi when worn, because Heritage Armoured Body comes from the o
 
 <<~ ahu #traits >>
 
-## Traits
+!! Traits
 
 | Trait | Rank | Use |
 |---|---:|---|
@@ -146,25 +146,25 @@ This stacks with Ichi when worn, because Heritage Armoured Body comes from the o
 
 **Open Trait Slots:** 6
 
-### Trait Direction
+!!! Trait Direction
 
 Next trait picks should support Aki's table loop without stealing other company niches.
 
 Good directions:
-- shrine-worker / ritual logistics,
-- illusion and threshold control,
-- support casting,
-- companion coordination,
-- survival through retreat,
-- mycelial or silk-field problem solving.
+* shrine-worker / ritual logistics,
+* illusion and threshold control,
+* support casting,
+* companion coordination,
+* survival through retreat,
+* mycelial or silk-field problem solving.
 
 <<~/ahu >>
 
 <<~ ahu #defenses >>
 
-## Defenses
+!! Defenses
 
-### Base
+!!! Base
 
 | Defense | Formula | Result |
 |---|---|---:|
@@ -173,7 +173,7 @@ Good directions:
 | Social | 7 + CHA 2 | 9 |
 | Mental vs Wizard-domain threats | 7 + THT 3 + Wizard 3 + Ward 1 | 14 |
 
-### Wearing Ichi
+!!! Wearing Ichi
 
 | Defense | Formula | Result |
 |---|---|---:|
@@ -183,7 +183,7 @@ Good directions:
 | Social | 7 + CHA 2 | 9 |
 | Mental vs Wizard-domain threats | 7 + THT 3 + Wizard 3 + Ward 2 | 15 |
 
-### Domain Notes
+!!! Domain Notes
 
 **Wizard** may apply against hostile Powers, glamours, illusion warfare, DreamNet intrusion, magical signal attacks, hostile noospheric pressure, and magical analysis contests.
 
@@ -195,7 +195,7 @@ Good directions:
 
 <<~ ahu #gear-on-body >>
 
-## Gear — On Body
+!! Gear — On Body
 
 | Gear | Canon Basis | Rules / Effect |
 |---|---|---|
@@ -207,7 +207,7 @@ Good directions:
 | Silkthorn Thawnette x2 | Thawnette | thrown entangling nets; 1d4; 1 stone each |
 | Safety Netsuke | Safety Scarab | Ward +1 trinket |
 
-### Hat
+!!! Hat
 
 The hat uses a wide-brimmed traveling shrine silhouette, not a tall ritual hat. It gives dust, sun, insect, modesty, anonymity, and threshold-focus fiction.
 
@@ -215,55 +215,55 @@ The hat uses a wide-brimmed traveling shrine silhouette, not a tall ritual hat. 
 
 <<~ ahu #gear-free-kit >>
 
-## Free Starting Gear
+!! Free Starting Gear
 
-### Clothing
+!!! Clothing
 
-- shrine-maiden work robes
-- travel cloak / weather mantle
-- underlayers suitable for Ichi symbiosis
+* shrine-maiden work robes
+* travel cloak / weather mantle
+* underlayers suitable for Ichi symbiosis
 
-### Alchemist Priestess Expedition Satchel
+!!! Alchemist Priestess Expedition Satchel
 
 One bag with 10 stones of quantum gear.
 
 Likely contents:
-- chalk
-- charcoal ink
-- ritual cord
-- spare wraps
-- wax packets
-- lamp oil
-- thread
-- writing slips
-- field utensils
-- wrapping cloth
-- tea and cooking basics
-- mortar and pestle
-- incense
-- candles
-- herb packets
-- fungal salves
-- spore culture jars
-- hand broom
-- small bells
+* chalk
+* charcoal ink
+* ritual cord
+* spare wraps
+* wax packets
+* lamp oil
+* thread
+* writing slips
+* field utensils
+* wrapping cloth
+* tea and cooking basics
+* mortar and pestle
+* incense
+* candles
+* herb packets
+* fungal salves
+* spore culture jars
+* hand broom
+* small bells
 
-### Strange Item — DreamNet Prayer Relay Ofuda
+!!! Strange Item — DreamNet Prayer Relay Ofuda
 
 Five ceramic-paper prayer slips with faint orichalcum traces. Reusable; alchemy clears the last charm script. Fire and acid resistant, DT 5.
 
 Functions:
-- temporary ward anchors,
-- shrine route markers,
-- ley disturbance indicators,
-- veil or illusion procedure anchors,
-- ritual relay geometry.
+* temporary ward anchors,
+* shrine route markers,
+* ley disturbance indicators,
+* veil or illusion procedure anchors,
+* ritual relay geometry.
 
 <<~/ahu >>
 
 <<~ ahu #gear-in-shrine >>
 
-## Gear — In Shrine
+!! Gear — In Shrine
 
 | Gear | Canon Basis | Use |
 |---|---|---|
@@ -280,7 +280,7 @@ Functions:
 
 <<~ ahu #resources >>
 
-## Budget and Reserves
+!! Budget and Reserves
 
 | Reserve | Cash | Guild Credit |
 |---|---:|---:|
@@ -289,32 +289,32 @@ Functions:
 
 **Uncommitted value:** Cash 228.50; Guild Credit 164.00; Total 392.50.
 
-### Reskin Doctrine
+!!! Reskin Doctrine
 
 Aki's renamed gear keeps the canonical SDM+ basis, price, rules, bulk, and mechanical effect unless an FTLS alpha ruling says otherwise.
 
 Discounts track supply channel and cultural fit:
-- Adventurer's Guild: 15%
-- Spider Folk heritage: 50%
-- stacked SF+AG: 42.5% of list price
+* Adventurer's Guild: 15%
+* Spider Folk heritage: 50%
+* stacked SF+AG: 42.5% of list price
 
 <<~/ahu >>
 
 <<~ ahu #powers >>
 
-## Powers
+!! Powers
 
 **Status:** deferred.
 
 Aki holds cash and Guild credit for Powers.
 
 Power choices should support:
-- glamour and illusion,
-- silk/web control,
-- biomancy / mycelium / purification,
-- DreamNet / shrine signal work,
-- extraction and retreat,
-- ritual support for the company.
+* glamour and illusion,
+* silk/web control,
+* biomancy / mycelium / purification,
+* DreamNet / shrine signal work,
+* extraction and retreat,
+* ritual support for the company.
 
 **Kapu:** Do not treat Aki's visual glamour as a free active Power. It provides social and visual positioning until a selected Power or roll activates stronger mechanics.
 
@@ -322,22 +322,22 @@ Power choices should support:
 
 <<~ ahu #ichi >>
 
-## Hallmark Companion — Ichi
+!! Hallmark Companion — Ichi
 
 **Type:** Powered Symbiote Hallmark companion  
 **Level:** 2  
 **Role:** bodyguard, living powered armor, autonomous fighter, DreamNet interface
 
-### Visual Canon
+!!! Visual Canon
 
 Ichi appears as compact humanoid ashigaru armor:
-- chitin kikko plates,
-- mycelium-silk backing,
-- orange daemon-spore eye-orbs,
-- damaged old-soldier silhouette,
-- no spider legs.
+* chitin kikko plates,
+* mycelium-silk backing,
+* orange daemon-spore eye-orbs,
+* damaged old-soldier silhouette,
+* no spider legs.
 
-### Modes
+!!! Modes
 
 | Mode | Table Handling |
 |---|---|
@@ -345,30 +345,30 @@ Ichi appears as compact humanoid ashigaru armor:
 | Symbiosis | Aki wears Ichi; Aki acts, Ichi perceives and communicates |
 | Emergency / Unpowered | powered features offline; physical armor may still protect |
 
-### Symbiosis Rules
+!!! Symbiosis Rules
 
 Entering or exiting symbiosis requires an action from both Aki and Ichi. Both lose actions for that round, but movement and free actions remain possible.
 
 When worn:
-- Ichi's armor/ward replaces worn armor,
-- Aki's Spider Folk Armoured Body stacks,
-- Aki gains Ichi's powered features and Burn talents,
-- Ichi cannot act independently,
-- Ichi grants DT 2.
+* Ichi's armor/ward replaces worn armor,
+* Aki's Spider Folk Armoured Body stacks,
+* Aki gains Ichi's powered features and Burn talents,
+* Ichi cannot act independently,
+* Ichi grants DT 2.
 
-### Burn / Recharging
+!!! Burn / Recharging
 
 Ichi has `re 4`.
 
 Roll d20 when Burn activates:
-- 5+ -> Burn activates; battery holds.
-- 1-4 -> Burn activates; Ichi takes -1 effective Level.
-- Level 0 -> Unpowered/Emergency Mode.
-- below 0 -> Ichi rolls Defeat.
+* 5+ -> Burn activates; battery holds.
+* 1-4 -> Burn activates; Ichi takes -1 effective Level.
+* Level 0 -> Unpowered/Emergency Mode.
+* below 0 -> Ichi rolls Defeat.
 
 Recharge requires a spare power source, recharging cradle/prayer altar, ley-line node, or active lararium. Each negative Level recovered requires one full recharge cycle.
 
-### Ejection
+!!! Ejection
 
 On a Defeat trigger while worn, Aki may eject instead of rolling personal Defeat. Ichi takes -1 Level. Aki and Ichi separate prone. Aki survives at current Life, unarmored.
 
@@ -376,31 +376,31 @@ On a Defeat trigger while worn, Aki may eject instead of rolling personal Defeat
 
 <<~ ahu #shrine >>
 
-## Sentient Infrastructure — Faerie-Ring Strandbeest-Shrine
+!! Sentient Infrastructure — Faerie-Ring Strandbeest-Shrine
 
 **Type:** Generic Synthesized Creature / Living Automaton  
 **Level:** 2 Calibrated item  
 **Role:** mobile household lararium, expedition transport, field logistics, Ichi recharging platform, tasked-spirit spawner
 
-### Visual Canon
+!!! Visual Canon
 
 A compact roadside shrine / hokora rides on six to eight articulated strandbeest legs. Silk-and-mycelium sails unfurl from the roof. A Mother Spore fairy ring glows at the base. A towed armored wagon carries cargo.
 
-### Table Role
+!!! Table Role
 
 The shrine functions as sentient gear, not a full PC.
 
 It:
-- carries supplies,
-- tows the wagon,
-- hosts camp rites,
-- stabilizes local ritual work,
-- recharges Ichi,
-- spawns Ephyra,
-- reads soil and fungal networks,
-- provides mobile cover when threatened.
+* carries supplies,
+* tows the wagon,
+* hosts camp rites,
+* stabilizes local ritual work,
+* recharges Ichi,
+* spawns Ephyra,
+* reads soil and fungal networks,
+* provides mobile cover when threatened.
 
-### Lararium Feeding
+!!! Lararium Feeding
 
 Feeding the shrine with food, drink, incense, mana-rich offerings, or proper shrine gifts grants one compact benefit for the session:
 
@@ -410,7 +410,7 @@ Feeding the shrine with food, drink, incense, mana-rich offerings, or proper shr
 
 Node affinities: `[spore] [biomancy] [dream]`
 
-### Visibility
+!!! Visibility
 
 A walking mushroom shrine with glowing sails does not sneak well. The sails can fold and the glow can dim, but the silhouette still invites attention, fear, worship, theft, or negotiation.
 
@@ -418,19 +418,19 @@ A walking mushroom shrine with glowing sails does not sneak well. The sails can 
 
 <<~ ahu #ephyra >>
 
-## Tasked Spirits — Ephyra
+!! Tasked Spirits — Ephyra
 
 Ephyra appear as floating blue spore-jelly spirits spawned from the Mother Spore.
 
 Typical duties:
-- scout,
-- carry messages,
-- sense contamination,
-- bear ward slips,
-- transport small offerings,
-- lure or distract,
-- mark a route,
-- watch camp.
+* scout,
+* carry messages,
+* sense contamination,
+* bear ward slips,
+* transport small offerings,
+* lure or distract,
+* mark a route,
+* watch camp.
 
 **Kapu:** Ephyra need narrow tasks. They do not replace player scouting, social choices, or delve risk.
 
@@ -438,15 +438,15 @@ Typical duties:
 
 <<~ ahu #company-context >>
 
-## Company Context
+!! Company Context
 
 Aki belongs to Freyja's player-side cluster.
 
 Freyja controls:
-- Aki,
-- Ichi when player-side action applies,
-- the shrine when spotlighted or commanded,
-- Ephyra or mushroom homunculi as narrow-task helpers.
+* Aki,
+* Ichi when player-side action applies,
+* the shrine when spotlighted or commanded,
+* Ephyra or mushroom homunculi as narrow-task helpers.
 
 Other player-side clusters cover long-range scouting, infiltration, ship command, morale, crew coordination, and company cargo. Aki supports the company without replacing those niches.
 
@@ -454,7 +454,7 @@ Other player-side clusters cover long-range scouting, infiltration, ship command
 
 <<~ ahu #play-loop >>
 
-## Aki's Field Loop
+!! Aki's Field Loop
 
 Use this at the table before opening deeper rules.
 
@@ -470,7 +470,7 @@ Use this at the table before opening deeper rules.
 
 <<~ ahu #costs-and-boundaries >>
 
-## Costs and Boundaries
+!! Costs and Boundaries
 
 Aki's support stays powerful because it asks for cost.
 
@@ -489,17 +489,17 @@ Aki's support stays powerful because it asks for cost.
 
 <<~ ahu #meme-pattern >>
 
-## Meme Pattern
+!! Meme Pattern
 
 This character sheet models one complete playable meme:
 
-- doctype and opener name the memetic-wikitext surface,
-- `iam` records address, type, confidence, register, and role,
-- `ahu` blocks hold local worksite sections,
-- `kapu` callouts mark boundaries,
-- `? ->` edges hold unresolved pressure,
-- `loulou` edges expose adjacency,
-- table-facing rules stay close to play.
+* doctype and opener name the memetic-wikitext surface,
+* `iam` records address, type, confidence, register, and role,
+* `ahu` blocks hold local worksite sections,
+* `kapu` callouts mark boundaries,
+* `? ->` edges hold unresolved pressure,
+* `loulou` edges expose adjacency,
+* table-facing rules stay close to play.
 
 Companion sheets should preserve this rhythm: identity, quick card, modes, stats or ratings, rules, costs, open questions, and edges.
 
@@ -507,7 +507,7 @@ Companion sheets should preserve this rhythm: identity, quick card, modes, stats
 
 <<~ ahu #open-questions >>
 
-## Open Questions
+!! Open Questions
 
 <<~ ? -> lar:///elyncia.neo-thracia.opens/characters/lady-aki#powers >>
 Final Powers remain deferred.
@@ -528,7 +528,7 @@ Exact Ephyra task-spirit mechanics need final table handling.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///elyncia.neo-thracia.opens/characters/ichi >>
 <<~ loulou lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine >>
@@ -541,14 +541,14 @@ Exact Ephyra task-spirit mechanics need final table handling.
 
 <<~ ahu #residue >>
 
-## Residue
+!! Residue
 
 Keep silhouettes distinct:
-- Aki: primary PC and threshold worker.
-- Ichi: humanoid powered symbiote and personhood question.
-- Shrine: walking lararium and expedition infrastructure.
-- Ephyra: narrow-task spirits.
-- Company: broader player-side expedition ecology.
+* Aki: primary PC and threshold worker.
+* Ichi: humanoid powered symbiote and personhood question.
+* Shrine: walking lararium and expedition infrastructure.
+* Ephyra: narrow-task spirits.
+* Company: broader player-side expedition ecology.
 
 Do not collapse these roles.
 

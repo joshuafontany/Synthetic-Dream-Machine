@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/elyncia/concepts/lares-viales"
 
 <<~ &#x0002; >>
 
-# Lares Viales ~ the Wayfarers of the Leylines
+! Lares Viales ~ the Wayfarers of the Leylines
 
 Rome set the **Lares Viales** at the roadside — the lares of the *ways*, who walk with the traveler and ask nothing of the houses. At the crossroads stood the **Hermai**, the herm-pillars: a head, a marker, a guardian of the turning, carrying every passer-by toward the next waymark and never once stepping through a door.
 
@@ -25,7 +25,7 @@ In Elyncia they ride the **leylines**. A Lares Viales carries sealed mana from s
 
 <<~ ahu #carries-the-fire >>
 
-## Carries the Fire, Keeps No Rooms
+!! Carries the Fire, Keeps No Rooms
 
 The wayfarer furnishes **no household rooms** — no hot hearth-wiki, no operator's sealed `@catalog`. What a household seals, it bears past, blind; a Herm at the gate of a house knows the road that reaches the gate and never learns the room beyond.
 
@@ -37,7 +37,7 @@ It reads only the **public waymarks** — the shared `@oracle` floor (the base o
 
 <<~ ahu #guardian-of-its-stretch >>
 
-## Guardian of Its Stretch
+!! Guardian of Its Stretch
 
 A herm-pillar guarded the turning, and so the Lares Viales guards its **own stretch of road**. When a leyline sours it **re-cuts the key**; when a false pilgrim crowds the way it **turns them back**; a torn segment it **mends**; a lost waymark it **re-raises**. No far temple sends a warden — every wayfarer wards the ground beneath its own feet, the small shrine repairing itself the way the great ones do. The road defends itself crossing by crossing.
 
@@ -45,7 +45,7 @@ A herm-pillar guarded the turning, and so the Lares Viales guards its **own stre
 
 <<~ ahu #the-hello-world >>
 
-## The Hello-World of the Stack
+!! The Hello-World of the Stack
 
 Every richer spirit composes *up* from this one. Strip a lararium of its **rooms** — its hot hearth, its sovereign store — and what remains still stands and still wards: a wayfarer, carrying the fire, tending one shrine. That irreducible figure — **blind-carriage joined to public-read, the daemon-coal kept lit** — proves the floor the whole DreamNet stands on: a node may carry the roads of strangers, and ward them, without ever holding their secrets.
 
@@ -57,7 +57,7 @@ The cap-model names this minimal stack exactly — the **same keel as the temple
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#lares-viales >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-relay-floor >>

@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/posture/ritual"
 
 <<~ &#x0002; >>
 
-# Ritual
+! Ritual
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 A posture component: the Power activates only through an **extended procedure** — time, gestures, components, place — rather than in a single instant.
 
@@ -30,7 +30,7 @@ A posture component: the Power activates only through an **extended procedure** 
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Trades speed for power or for reduced cost: a ritual may lower effective P, reach further, or bind a Site, but it cannot fire in the heat of a round. Interruption wastes the attempt.
 
@@ -38,7 +38,7 @@ Trades speed for power or for reduced cost: a ritual may lower effective P, reac
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 A posture, not a hook — it gates *how* a module is reached, akin to Sera's base-angle-lever (the base precedes the technique). Common on `mount-points/structure` bindings and `domain/abjuration` standing protections.
 
@@ -46,7 +46,7 @@ A posture, not a hook — it gates *how* a module is reached, akin to Sera's bas
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/posture/ritual]]                 all ritual modules
@@ -57,15 +57,15 @@ A posture, not a hook — it gates *how* a module is reached, akin to Sera's bas
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Posture-as-prerequisite (you cannot activate without the right stance/base) is open design pressure (Sera, mana-kapu). Confirm whether posture gates activation or only modifies it.
+* Posture-as-prerequisite (you cannot activate without the right stance/base) is open design pressure (Sera, mana-kapu). Confirm whether posture gates activation or only modifies it.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

@@ -20,11 +20,11 @@ uri-path  = "ha.ka.ba/sdm/mount-points/item"
 
 <<~ &#x0002; >>
 
-# Mount-Point — Item
+! Mount-Point — Item
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 An Item seats a Power **in an object**: spellbook, rod, idol-cartridge, living pistol. Capacity is **7 + Strength** slots (canonical, Vastlands Guidebook). Carried Powers persist — usable many times.
 
@@ -34,7 +34,7 @@ An Item seats a Power **in an object**: spellbook, rod, idol-cartridge, living p
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 An item-seated Power activates from the object — the practitioner must hold, wear, or reach the item. An item can be dropped, stolen, sundered, or jammed. The `item` hook locks Life into the object permanently until disabled.
 
@@ -42,7 +42,7 @@ An item-seated Power activates from the object — the practitioner must hold, w
 
 <<~ ahu #cost >>
 
-## Cost
+!! Cost
 
 Pay Life equal to P; double without the relevant skill. A container item costs one inventory slot regardless of how many Powers it bundles.
 
@@ -50,7 +50,7 @@ Pay Life equal to P; double without the relevant skill. A container item costs o
 
 <<~ ahu #failure >>
 
-## Failure
+!! Failure
 
 Danger Roll → Corruption on failure. Corruption on an item degrades or curses the object rather than the practitioner — the burden travels with the gear.
 
@@ -58,7 +58,7 @@ Danger Roll → Corruption on failure. Corruption on an item degrades or curses 
 
 <<~ ahu #removal >>
 
-## Removal
+!! Removal
 
 Remove by un-equipping, transferring, or disabling the object. Disabling an `item`-hooked Power releases its locked Life. A sundered container scatters its whole bundle.
 
@@ -66,7 +66,7 @@ Remove by un-equipping, transferring, or disabling the object. Disabling an `ite
 
 <<~ ahu #overflow >>
 
-## Overflow
+!! Overflow
 
 Past 7 + Strength carried slots, use a container item to compress many Powers into one slot, or spill to Burden.
 
@@ -74,15 +74,15 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Container capacity: confirm whether a single album has an internal Power cap or scales with item Level (OGA upgrade economy) when the album itself is an upgradable Hallmark.
+* Container capacity: confirm whether a single album has an internal Power cap or scales with item Level (OGA upgrade economy) when the album itself is an upgradable Hallmark.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
 

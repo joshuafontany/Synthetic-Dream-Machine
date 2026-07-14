@@ -20,11 +20,11 @@ uri-path  = "ha.ka.ba/sdm/mount-points/structure"
 
 <<~ &#x0002; >>
 
-# Mount-Point — Structure (Site)
+! Mount-Point — Structure (Site)
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 A Structure seats a Power **in a Site**: shrine, ship-daemon, archive service, town ward, vehicle, domicile. **Location merges here (D1)** — a forest and an airship are the same Site. **Fixed-vs-mobile is not a mount-point distinction**; a Site is mobile when it `#has` a propulsion/mobility component. The Power-binding system reads `Site.mount-points` once, regardless of mobility.
 
@@ -36,7 +36,7 @@ A Structure seats a Power **in a Site**: shrine, ship-daemon, archive service, t
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 A site-seated Power activates from the place. Reach, standing, or a maintained relationship may gate it — the shrine checks standing, not inventory (open pressure from mana-kapu). A mobile Site carries its seated Powers as it moves.
 
@@ -44,7 +44,7 @@ A site-seated Power activates from the place. Reach, standing, or a maintained r
 
 <<~ ahu #cost >>
 
-## Cost
+!! Cost
 
 Seating and upgrading a Site spends XP + resources against the OGA upgrade tables (per-attribute, doubling cost `n+1 = 2(n)`). Activation Life cost follows the seated Power's P as normal.
 
@@ -52,7 +52,7 @@ Seating and upgrading a Site spends XP + resources against the OGA upgrade table
 
 <<~ ahu #failure >>
 
-## Failure
+!! Failure
 
 Danger Roll → Corruption binds to the Site. A derelict or breached Site can drop its Powers (cf. Earthdawn airships: lose the crew/propulsion, the place falls). Destroying the propulsion component grounds a mobile Site into a fixed one.
 
@@ -60,7 +60,7 @@ Danger Roll → Corruption binds to the Site. A derelict or breached Site can dr
 
 <<~ ahu #removal >>
 
-## Removal
+!! Removal
 
 Strip a seated Power by dismantling the mount, revoking standing, or destroying the Site. Capacity bought with XP is sunk into the Site, not the practitioner.
 
@@ -68,7 +68,7 @@ Strip a seated Power by dismantling the mount, revoking standing, or destroying 
 
 <<~ ahu #overflow >>
 
-## Overflow
+!! Overflow
 
 A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy more capacity (XP + resources) or seat the Power elsewhere.
 
@@ -76,18 +76,18 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Name the mobility component slug (`hook/propulsion`? `posture/mobile`?). Sprint 4.
-- Role slots (Helm, Gunnery, Damage-Control; FTLS Ch08) suggest a future Site "role slot" distinct from Power mount-points. Sprint 3/4.
-- Dual-view (stat-view / interior-map-view, cf. Spelljammer) is a projection concern, not a mount-point concern.
-- Estate/domicile zoom (room → estate → zone → settlement; OGA) may want a nesting rule.
+* Name the mobility component slug (`hook/propulsion`? `posture/mobile`?). Sprint 4.
+* Role slots (Helm, Gunnery, Damage-Control; FTLS Ch08) suggest a future Site "role slot" distinct from Power mount-points. Sprint 3/4.
+* Dual-view (stat-view / interior-map-view, cf. Spelljammer) is a projection concern, not a mount-point concern.
+* Estate/domicile zoom (room → estate → zone → settlement; OGA) may want a nesting rule.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
 

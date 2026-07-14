@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/hook/dangerous"
 
 <<~ &#x0002; >>
 
-# Dangerous
+! Dangerous
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 A canonical risk hook: the Power forces a **Danger Roll** on activation regardless of skill or Level — d20 + ability + skill vs P, natural 1 always fails, failure runs the Corruption procedure.
 
@@ -30,7 +30,7 @@ A canonical risk hook: the Power forces a **Danger Roll** on activation regardle
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 **Modifies the activation protocol itself**, not the effect — it sits structurally above capability components. Where most components answer "what does it do," `dangerous` answers "what does pulling it risk."
 
@@ -38,7 +38,7 @@ A canonical risk hook: the Power forces a **Danger Roll** on activation regardle
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Composes with any domain or function. **Vertical-vs-flat pressure lives here:** the flat `#has` model treats `dangerous` as a peer of `ecm-scan`, but it modifies the crossing event, not the capability. Held flat on purpose (Principle); Sprint 4 tests whether flatness loses signal.
 
@@ -46,7 +46,7 @@ Composes with any domain or function. **Vertical-vs-flat pressure lives here:** 
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/hook/dangerous]]                 all dangerous modules — the vertical cross-section
@@ -57,15 +57,15 @@ Composes with any domain or function. **Vertical-vs-flat pressure lives here:** 
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- The Kabbalist/vertical pressure anchors here. If Sprint 4 shows flat loses signal, this is the first candidate for a level marker.
+* The Kabbalist/vertical pressure anchors here. If Sprint 4 shows flat loses signal, this is the first candidate for a level marker.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/hook/sustained"
 
 <<~ &#x0002; >>
 
-# Sustained
+! Sustained
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 A canonical duration hook (the `focus` family): the Power persists only while the practitioner sustains concentration. Distraction, damage, or competing action deactivates it.
 
@@ -30,7 +30,7 @@ A canonical duration hook (the `focus` family): the Power persists only while th
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Modifies duration, not effect. The Power runs as long as attention holds; a save or interruption can drop it. Only so many sustained Powers run at once.
 
@@ -38,7 +38,7 @@ Modifies duration, not effect. The Power runs as long as attention holds; a save
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stuckforce`. Trades against `hook/imbued` (which holds via locked Life rather than attention).
 
@@ -46,7 +46,7 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/hook/sustained]]                 all sustained modules
@@ -57,15 +57,15 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm the cap on simultaneous sustained Powers (attribute-linked?) against the SDM Quickstart.
+* Confirm the cap on simultaneous sustained Powers (attribute-linked?) against the SDM Quickstart.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

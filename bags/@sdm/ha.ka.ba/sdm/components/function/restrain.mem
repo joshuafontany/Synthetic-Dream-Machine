@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/restrain"
 
 <<~ &#x0002; >>
 
-# Restrain
+! Restrain
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 The function of **seizing and holding** — grapple, constrict, pin, immobilise. Where `function/cargo` carries willing mass and `function/barrier` blocks a line, `restrain` closes on an unwilling target and refuses to let go.
 
@@ -30,7 +30,7 @@ The function of **seizing and holding** — grapple, constrict, pin, immobilise.
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Orients a module toward **taking and keeping hold of a creature or object against its will**. It resolves the grip; the target resists to break free. Almost always paired with `hook/attack` — a restrain lands against Defense, not a save.
 
@@ -38,7 +38,7 @@ Orients a module toward **taking and keeping hold of a creature or object agains
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/stuckforce` for a force-grip with no limb (the Neural Whip, a stuckforce snare), or with a creature's own anatomy (tentacle, coil, jaw). A sustained restrain also draws `hook/sustained` while the hold persists.
 
@@ -46,7 +46,7 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/restrain]]                       all restraining modules
@@ -57,16 +57,16 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Escape mechanics (contested test, fixed DC, or damage-to-break) belong in each module's `#default`, not here — `restrain` names the function, not the break-free rule.
-- If grapple-vs-pin-vs-swallow proves to need distinct addresses under query pressure, split then (Principle 6); do not pre-split.
+* Escape mechanics (contested test, fixed DC, or damage-to-break) belong in each module's `#default`, not here — `restrain` names the function, not the break-free rule.
+* If grapple-vs-pin-vs-swallow proves to need distinct addresses under query pressure, split then (Principle 6); do not pre-split.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

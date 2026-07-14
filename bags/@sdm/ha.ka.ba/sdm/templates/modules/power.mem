@@ -19,11 +19,11 @@ uri-path  = "ha.ka.ba/sdm/templates/modules/power"
 
 <<~ &#x0002; >>
 
-# Template — Power Module
+! Template — Power Module
 
 <<~ ahu #intent >>
 
-## Intent
+!! Intent
 
 A Power module meme carries the playable default for one Power and addresses its facets with flat `#has` edges. It loads during play without dragging projection, witness, or design chatter into the hot path.
 
@@ -33,7 +33,7 @@ The canonical SDM Power card (P/R/T/D/Ox + tags) **is** the `#default` block. Th
 
 <<~ ahu #required-shape >>
 
-## Required Shape
+!! Required Shape
 
 ```text
 #has         flat Pranala edges to components (components/{facet}/{slug}) and one mount-point
@@ -53,11 +53,11 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~ ahu #has-law >>
 
-## `#has` Law
+!! `#has` Law
 
-- `#has` is **flat**: no `family`, no `role`. The target path prefix carries semantics.
-- A module `#has` one mount-point and zero-or-more components.
-- Do NOT use the retired `implements` edge, and do NOT link an `interfaces/` meme. That inheritance spine retired with v0.0; v0.1 composes with flat `has`.
+* `#has` is **flat**: no `family`, no `role`. The target path prefix carries semantics.
+* A module `#has` one mount-point and zero-or-more components.
+* Do NOT use the retired `implements` edge, and do NOT link an `interfaces/` meme. That inheritance spine retired with v0.0; v0.1 composes with flat `has`.
 
 ```text
 <<~ pranala #has ? -> lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
@@ -68,20 +68,20 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~ ahu #writing-law >>
 
-## Writing Law
+!! Writing Law
 
-- **Heading-naming law.** A visible heading carries content, not the structural ahu id. The H1 is the Power name. `#has` renders as `## Composition`; `#default` carries **no** heading — the statline leads directly under the H1. Never surface `## Has` or `## Default` to a reader.
-- **Render-fence law.** Anything meant to render — transclusions, widgets, procedure calls — stays live wikitext, never in a code fence. Fence only what is shown *as text* (TOML data, literal quotes).
-- Prefer table-action language over design chat. Name cost, range, target, duration, counterplay directly.
-- Keep `#default` reading like a Power entry, not a code block.
-- Card wording lives in the projection meme; source archaeology in the witness meme.
-- Durable consequences and unsettled calls go in `#aftermath`.
+* **Heading-naming law.** A visible heading carries content, not the structural ahu id. The H1 is the Power name. `#has` renders as `## Composition`; `#default` carries **no** heading — the statline leads directly under the H1. Never surface `## Has` or `## Default` to a reader.
+* **Render-fence law.** Anything meant to render — transclusions, widgets, procedure calls — stays live wikitext, never in a code fence. Fence only what is shown *as text* (TOML data, literal quotes).
+* Prefer table-action language over design chat. Name cost, range, target, duration, counterplay directly.
+* Keep `#default` reading like a Power entry, not a code block.
+* Card wording lives in the projection meme; source archaeology in the witness meme.
+* Durable consequences and unsettled calls go in `#aftermath`.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
 <<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>

@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/ward"
 
 <<~ &#x0002; >>
 
-# Ward
+! Ward
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 A selective protection against a named category — turning aside a kind of harm, entity, or crossing rather than blocking all passage.
 
@@ -30,7 +30,7 @@ A selective protection against a named category — turning aside a kind of harm
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Sets a condition the warded thing enforces against its named target. Stronger or broader categories cost more P. Unlike a barrier, a ward discriminates.
 
@@ -38,7 +38,7 @@ Sets a condition the warded thing enforces against its named target. Stronger or
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep standing. A Heritage Affinity may reduce its P when the warded category matches an affinity tag.
 
@@ -46,7 +46,7 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/ward]]                             all ward modules
@@ -57,15 +57,15 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- The "named category" begs a taxonomy of warded targets; defer until a query needs it.
+* The "named category" begs a taxonomy of warded targets; defer until a query needs it.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

@@ -17,11 +17,11 @@ uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc"
 
 <<~ &#x0002; >>
 
-# OSR Witness — Floating Disc
+! OSR Witness — Floating Disc
 
 <<~ ahu #basic >>
 
-## Basic
+!! Basic
 
 ```toml witness
 name = "Floating Disc"
@@ -38,7 +38,7 @@ An invisible horizontal platform the size of a small round shield, created at th
 
 <<~ ahu #expert >>
 
-## Expert
+!! Expert
 
 ```toml witness
 name = "Floating Disc"
@@ -53,7 +53,7 @@ The Expert Set lists MU1 only; the Basic description governs.
 
 <<~ ahu #cyclopedia >>
 
-## Rules Cyclopedia
+!! Rules Cyclopedia
 
 ```toml witness
 name = "Floating Disc"
@@ -70,19 +70,19 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 <<~ ahu #analysis >>
 
-## Conversion Analysis
+!! Conversion Analysis
 
-- OSR `Range: 0` (self-following, within 6 ft) → SDM/UVG **R: 30m, point**, a freer force-platform that vanishes past range. The SDM surface widens the leash deliberately.
-- `6 turns` → **D: 1 hour** — a long exploration utility, distinct from Read Magic's 10 minutes.
-- 5000 cn cargo cap and "never a weapon" anchor it as logistics, not attack — no `attack` hook.
-- The RC veer-away / no-save note → soft-collision behaviour (the disc avoids impact). Carries `function/barrier` only when deliberately tilted.
-- Occupied-space restriction → cannot conjure inside a creature or packed obstacle.
+* OSR `Range: 0` (self-following, within 6 ft) → SDM/UVG **R: 30m, point**, a freer force-platform that vanishes past range. The SDM surface widens the leash deliberately.
+* `6 turns` → **D: 1 hour** — a long exploration utility, distinct from Read Magic's 10 minutes.
+* 5000 cn cargo cap and "never a weapon" anchor it as logistics, not attack — no `attack` hook.
+* The RC veer-away / no-save note → soft-collision behaviour (the disc avoids impact). Carries `function/barrier` only when deliberately tilted.
+* Occupied-space restriction → cannot conjure inside a creature or packed obstacle.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>

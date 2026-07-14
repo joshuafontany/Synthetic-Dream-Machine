@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/archive"
 
 <<~ &#x0002; >>
 
-# Archive
+! Archive
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 Storing to and retrieving from a noospheric record — the handshake that asks an archive for what it holds, or commits something to it.
 
@@ -30,7 +30,7 @@ Storing to and retrieving from a noospheric record — the handshake that asks a
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Opens a channel to a stored corpus: query it, deposit into it, or authenticate against it. Standing and permissions may gate the read (relay-law: pull does not imply read).
 
@@ -38,7 +38,7 @@ Opens a channel to a stored corpus: query it, deposit into it, or authenticate a
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divination`. A hostile archive may read the reader — surfacing an owner-trace.
 
@@ -46,7 +46,7 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/archive]]               all archive modules
@@ -57,15 +57,15 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Archive permissions map onto the ability ladder (`pull → read → write`). Confirm whether that belongs here or in a capability component.
+* Archive permissions map onto the ability ladder (`pull → read → write`). Confirm whether that belongs here or in a capability component.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

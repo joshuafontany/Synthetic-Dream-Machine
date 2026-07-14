@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/domain/divination"
 
 <<~ &#x0002; >>
 
-# Divination
+! Divination
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 The domain of perceiving the hidden — reading inscriptions, scrying distance, sensing patterns, presences, and intent.
 
@@ -30,7 +30,7 @@ The domain of perceiving the hidden — reading inscriptions, scrying distance, 
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Orients a module toward **knowing rather than changing**. It targets information, not matter — what is there, what it means, who left it. Rarely resolves as an attack.
 
@@ -38,7 +38,7 @@ Orients a module toward **knowing rather than changing**. It targets information
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`. A `veil`/`spoof` effect degrades it; a `hook/dangerous` reading risks Corruption when it pierces something defended.
 
@@ -46,7 +46,7 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/domain/divination]]              all divination modules
@@ -58,15 +58,15 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm whether scrying-at-range and inscription-reading want separate sub-functions or stay one domain.
+* Confirm whether scrying-at-range and inscription-reading want separate sub-functions or stay one domain.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

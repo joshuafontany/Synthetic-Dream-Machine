@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/barrier"
 
 <<~ &#x0002; >>
 
-# Barrier
+! Barrier
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 Raising a physical or force wall — a held surface that blocks passage, line, or blow.
 
@@ -30,7 +30,7 @@ Raising a physical or force wall — a held surface that blocks passage, line, o
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Manifests a span of barrier sized to P. It occupies space and must be sustained or anchored to persist past the instant.
 
@@ -38,7 +38,7 @@ Manifests a span of barrier sized to P. It occupies space and must be sustained 
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wall of force). Runs `hook/sustained` to hold, or `hook/imbued` to lock it up. A cargo floor is a barrier turned flat.
 
@@ -46,7 +46,7 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/barrier]]                          all barrier modules
@@ -57,15 +57,15 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Distinguish a momentary barrier (one blow) from a standing wall via hook, not a separate function.
+* Distinguish a momentary barrier (one blow) from a standing wall via hook, not a separate function.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

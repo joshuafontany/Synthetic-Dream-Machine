@@ -17,11 +17,11 @@ uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/read-magic"
 
 <<~ &#x0002; >>
 
-# OSR Witness — Read Magic
+! OSR Witness — Read Magic
 
 <<~ ahu #basic >>
 
-## Basic
+!! Basic
 
 ```toml witness
 name = "Read Magic"
@@ -38,7 +38,7 @@ The magic-user may read — not speak — magical words or runes, such as those 
 
 <<~ ahu #expert >>
 
-## Expert
+!! Expert
 
 ```toml witness
 name = "Read Magic"
@@ -53,7 +53,7 @@ The Expert Set reproduces the MU1 spell list only; it carries no standalone desc
 
 <<~ ahu #cyclopedia >>
 
-## Rules Cyclopedia
+!! Rules Cyclopedia
 
 ```toml witness
 name = "Read Magic"
@@ -70,20 +70,20 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<~ ahu #analysis >>
 
-## Conversion Analysis
+!! Conversion Analysis
 
-- `Range: 0`, self-only → **R: self**.
-- `1 turn` → **D: 10 minutes** in FTLS exploration language.
-- The durable "read it later without the spell" rule → the SDM **recognized** mark.
-- Spell-book owner access → owner-lock, attunement, or archive permission (relay-law: pull ≠ read).
-- The source defines magical literacy and archive access, not combat output — Read Magic carries no `attack` hook.
-- Expert list continuity confirms first-tier (P:2) and adds no new rule burden.
+* `Range: 0`, self-only → **R: self**.
+* `1 turn` → **D: 10 minutes** in FTLS exploration language.
+* The durable "read it later without the spell" rule → the SDM **recognized** mark.
+* Spell-book owner access → owner-lock, attunement, or archive permission (relay-law: pull ≠ read).
+* The source defines magical literacy and archive access, not combat output — Read Magic carries no `attack` hook.
+* Expert list continuity confirms first-tier (P:2) and adds no new rule burden.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/powers/read-magic >>

@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble"
 
 <<~ &#x0002; >>
 
-# Porter's Pebble — FTLS Card
+! Porter's Pebble — FTLS Card
 
 <<~ ahu #card >>
 
-## Porter's Pebble
+!! Porter's Pebble
 *Stuckforce Relic, the Patient Mule*
 
 **Item · 1 slot · recharges in sunlight**
@@ -33,7 +33,7 @@ A warm, palm-sized pebble of Long Ago make. Press it and it unfolds the **Floati
 
 <<~ ahu #holds >>
 
-## Holds
+!! Holds
 
 This item carries one Power. The card shows it as a doorway — tap through to the live module:
 
@@ -45,7 +45,7 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~ ahu #components >>
 
-## Components
+!! Components
 
 <<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
 
@@ -53,7 +53,7 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>

@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/domain/abjuration"
 
 <<~ &#x0002; >>
 
-# Abjuration
+! Abjuration
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 The domain of protection and negation — barriers, wards, dispelling, raising thresholds against a crossing.
 
@@ -30,7 +30,7 @@ The domain of protection and negation — barriers, wards, dispelling, raising t
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Orients a module toward **defense**: it blocks, deflects, or unmakes rather than creates. Often runs `hook/sustained` or `hook/imbued` to hold a protection up over time.
 
@@ -38,7 +38,7 @@ Orients a module toward **defense**: it blocks, deflects, or unmakes rather than
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Pairs with `function/barrier` and `function/ward`. Counters offensive crossings; meets the `ecm` negate/suppress modes as the defensive side of the same exchange.
 
@@ -46,7 +46,7 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/domain/abjuration]]                       all abjuration modules
@@ -57,15 +57,15 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm whether "dispel/negate" wants its own function component distinct from `barrier`/`ward`.
+* Confirm whether "dispel/negate" wants its own function component distinct from `barrier`/`ward`.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

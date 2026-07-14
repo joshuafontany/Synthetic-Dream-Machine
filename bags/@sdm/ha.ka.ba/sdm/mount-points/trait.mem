@@ -20,11 +20,11 @@ uri-path  = "ha.ka.ba/sdm/mount-points/trait"
 
 <<~ &#x0002; >>
 
-# Mount-Point — Trait
+! Mount-Point — Trait
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 A Trait seats a Power **in the practitioner**: engraved as memetic code, sung into implanted crystal, branded on the aura. Capacity is **7 + Thought** slots (canonical, Vastlands Guidebook). One Power per slot unless a feature says otherwise.
 
@@ -32,7 +32,7 @@ A Trait seats a Power **in the practitioner**: engraved as memetic code, sung in
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 A trait-seated Power activates from the self — range and target measured from the practitioner. No object to draw, lose, or have stolen.
 
@@ -40,7 +40,7 @@ A trait-seated Power activates from the self — range and target measured from 
 
 <<~ ahu #cost >>
 
-## Cost
+!! Cost
 
 Pay Life equal to P (Ability Points at 1:1 parity). Double without the relevant skill. The `imbued` hook locks the Life until the Power deactivates.
 
@@ -48,7 +48,7 @@ Pay Life equal to P (Ability Points at 1:1 parity). Double without the relevant 
 
 <<~ ahu #failure >>
 
-## Failure
+!! Failure
 
 A failed activation runs the Danger Roll → Corruption procedure. Corruption on a trait writes back onto the practitioner's body/mind/aura — the host carries the scar.
 
@@ -56,7 +56,7 @@ A failed activation runs the Danger Roll → Corruption procedure. Corruption on
 
 <<~ ahu #removal >>
 
-## Removal
+!! Removal
 
 Traits resist casual removal. Re-engraving, corruption treatment, or a Path feature changes a trait. Overflow past 7 + Thought spills to Burden.
 
@@ -64,7 +64,7 @@ Traits resist casual removal. Re-engraving, corruption treatment, or a Path feat
 
 <<~ ahu #overflow >>
 
-## Overflow
+!! Overflow
 
 Past capacity, additional patterns become Burdens (−1 to all rolls each) or wait for an Item/Site seat.
 
@@ -72,15 +72,15 @@ Past capacity, additional patterns become Burdens (−1 to all rolls each) or wa
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Thought is a living attribute; capacity moves with it. Confirm whether mid-session Thought loss can orphan a seated trait.
+* Thought is a living attribute; capacity moves with it. Confirm whether mid-session Thought loss can orphan a seated trait.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
 

@@ -19,11 +19,11 @@ uri-path  = "ha.ka.ba/sdm/templates/mount-points/storage-class"
 
 <<~ &#x0002; >>
 
-# Template — Mount-Point (Storage Class)
+! Template — Mount-Point (Storage Class)
 
 <<~ ahu #intent >>
 
-## Intent
+!! Intent
 
 A mount-point meme names **where a module seats on an entity** and the contract that seating implies. The same module behaves differently depending on which mount-point holds it. Contracts come from the canonical Vastlands Guidebook / SDM rules; this meme addresses them, it does not invent new rules.
 
@@ -31,7 +31,7 @@ A mount-point meme names **where a module seats on an entity** and the contract 
 
 <<~ ahu #required-shape >>
 
-## Required Shape
+!! Required Shape
 
 ```text
 #contract    what this mount-point is; capacity rule; what it accepts
@@ -47,17 +47,17 @@ A mount-point meme names **where a module seats on an entity** and the contract 
 
 <<~ ahu #writing-law >>
 
-## Writing Law
+!! Writing Law
 
-- State the capacity rule plainly. Where it is canonical (Trait 7+Thought, Item 7+Strength, Burden 20/−1), cite the book and hold a confident register. Where it is design-space (the Site capacity economy), say so and boot at a low register.
-- Do not duplicate component or module text. A mount-point describes the *seat*, not the *thing seated*.
-- Name counterplay: how an opponent disables, dispels, or strips a seated module.
+* State the capacity rule plainly. Where it is canonical (Trait 7+Thought, Item 7+Strength, Burden 20/−1), cite the book and hold a confident register. Where it is design-space (the Site capacity economy), say so and boot at a low register.
+* Do not duplicate component or module text. A mount-point describes the *seat*, not the *thing seated*.
+* Name counterplay: how an opponent disables, dispels, or strips a seated module.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
 

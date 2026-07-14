@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/magic-decode"
 
 <<~ &#x0002; >>
 
-# Magic Decode
+! Magic Decode
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 Decoding a magical inscription or interface layer into active, readable meaning — the core function of Read Magic.
 
@@ -30,7 +30,7 @@ Decoding a magical inscription or interface layer into active, readable meaning 
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Turns opaque marks into usable instruction: one inscription per activation at base P. Overcharge reads through veils or decodes more at once.
 
@@ -38,7 +38,7 @@ Turns opaque marks into usable instruction: one inscription per activation at ba
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Depends on `domain/divination`; pairs with `function/archive` for the handshake that fetches an inscription's stored meaning. A `veil` or `spoof` raises its effective P or feeds it false meaning.
 
@@ -46,7 +46,7 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/magic-decode]]                          all decode modules
@@ -57,15 +57,15 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm whether "decode" and "translate mundane script" stay one function or split.
+* Confirm whether "decode" and "translate mundane script" stay one function or split.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

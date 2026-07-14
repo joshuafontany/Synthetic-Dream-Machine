@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/cargo"
 
 <<~ &#x0002; >>
 
-# Cargo
+! Cargo
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 Carrying, hauling, or bearing a load — the function of Floating Disc and kin.
 
@@ -30,7 +30,7 @@ Carrying, hauling, or bearing a load — the function of Floating Disc and kin.
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Establishes a bearing surface or grip that holds weight up to a capacity tied to P. Overcharge raises capacity or distance.
 
@@ -38,7 +38,7 @@ Establishes a bearing surface or grip that holds weight up to a capacity tied to
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained` (the load must keep riding). A `barrier` can double as a cargo floor.
 
@@ -46,7 +46,7 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/cargo]]                          all cargo modules
@@ -57,15 +57,15 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Capacity-vs-P curve is a table-tuning question; leave numeric in the module, not here.
+* Capacity-vs-P curve is a table-tuning question; leave numeric in the module, not here.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

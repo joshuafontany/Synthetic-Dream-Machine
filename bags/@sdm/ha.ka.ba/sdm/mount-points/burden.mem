@@ -20,11 +20,11 @@ uri-path  = "ha.ka.ba/sdm/mount-points/burden"
 
 <<~ &#x0002; >>
 
-# Mount-Point — Burden
+! Mount-Point — Burden
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 A Burden seats a Power **against the practitioner**: a curse, compulsion, affliction, or the overflow from a full Trait/Item. Capacity is **20 slots** (canonical, Vastlands Guidebook). Each occupied Burden slot imposes **−1 to all rolls**.
 
@@ -32,7 +32,7 @@ A Burden seats a Power **against the practitioner**: a curse, compulsion, afflic
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 A Burden often activates involuntarily — on a trigger, a condition, or the referee's call — rather than at the practitioner's choosing. The malign knowledge weighs whether or not it is used.
 
@@ -40,7 +40,7 @@ A Burden often activates involuntarily — on a trigger, a condition, or the ref
 
 <<~ ahu #cost >>
 
-## Cost
+!! Cost
 
 The standing −1 per slot is the cost, paid continuously. Some Burdens also demand Life or a sacrifice when they fire.
 
@@ -48,7 +48,7 @@ The standing −1 per slot is the cost, paid continuously. Some Burdens also dem
 
 <<~ ahu #failure >>
 
-## Failure
+!! Failure
 
 A Burden rarely "fails" — it afflicts. Botching its resistance deepens it: another slot, a worse trigger, or a Corruption tick.
 
@@ -56,7 +56,7 @@ A Burden rarely "fails" — it afflicts. Botching its resistance deepens it: ano
 
 <<~ ahu #removal >>
 
-## Removal
+!! Removal
 
 Remove by treatment, quest, atonement, or breaking the compulsion's condition. Until removed, the −1 stands.
 
@@ -64,7 +64,7 @@ Remove by treatment, quest, atonement, or breaking the compulsion's condition. U
 
 <<~ ahu #overflow >>
 
-## Overflow
+!! Overflow
 
 Burden is itself the overflow sink for Trait and Item. Past 20, the character is functionally crushed — referee adjudicates collapse.
 
@@ -72,15 +72,15 @@ Burden is itself the overflow sink for Trait and Item. Past 20, the character is
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm whether involuntary curses count against the same 20 as voluntary overflow, or run a separate track.
+* Confirm whether involuntary curses count against the same 20 as voluntary overflow, or run a separate track.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
 

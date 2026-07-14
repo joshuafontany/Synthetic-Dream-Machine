@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward"
 
 <<~ &#x0002; >>
 
-# Shield Ward — FTLS Card
+! Shield Ward — FTLS Card
 
 <<~ ahu #card >>
 
-## Shield Ward
+!! Shield Ward
 *Skin-Close Barrier, Missile Filter*
 
 **P:** 2 · **R:** self · **T:** operator · **D:** 20 minutes
@@ -33,16 +33,16 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~ ahu #overcharge >>
 
-## Overcharge
+!! Overcharge
 
-- **x2 (P:4)** — extend to one adjacent ally, or harden one named channel.
-- **x4 (P:8)** — hold through one breach, then flicker (mishap check to maintain).
+* **x2 (P:4)** — extend to one adjacent ally, or harden one named channel.
+* **x4 (P:8)** — hold through one breach, then flicker (mishap check to maintain).
 
 <<~/ahu >>
 
 <<~ ahu #components >>
 
-## Components
+!! Components
 
 <<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
 
@@ -50,7 +50,7 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/powers/shield-ward >>

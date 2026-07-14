@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 
 <<~ &#x0002; >>
 
-# Read Magic — FTLS Card
+! Read Magic — FTLS Card
 
 <<~ ahu #card >>
 
-## Read Magic
+!! Read Magic
 *First Key, Archive Handshake*
 
 **P:** 2 · **R:** self · **T:** one magical inscription · **D:** 10 minutes
@@ -33,17 +33,17 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~ ahu #overcharge >>
 
-## Overcharge
+!! Overcharge
 
-- **x2 (P:4)** — read through one weak veil or damaged mark.
-- **x4 (P:8)** — read a linked inscription set; ask one structural question.
-- **x8 (P:16, dangerous)** — force a sealed/hostile archive; learn one hidden fact. On failure it reads back.
+* **x2 (P:4)** — read through one weak veil or damaged mark.
+* **x4 (P:8)** — read a linked inscription set; ask one structural question.
+* **x8 (P:16, dangerous)** — force a sealed/hostile archive; learn one hidden fact. On failure it reads back.
 
 <<~/ahu >>
 
 <<~ ahu #components >>
 
-## Components
+!! Components
 
 <<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
 
@@ -51,7 +51,7 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/powers/read-magic >>

@@ -21,11 +21,11 @@ uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 
 <<~ &#x0002; >>
 
-# Porter's Pebble
+! Porter's Pebble
 
 <<~ ahu #has >>
 
-## Composition
+!! Composition
 
 An item is **an entity with mount-points**, not a new kind of module. It `#has` the Power it carries and `#has` the `item` mount-point that says *how* that Power is seated in an object. The carried Power keeps its own composition unchanged — this module does **not** re-list Floating Disc's components. That is the whole nesting rule: entity `#has` module; reserve `#composes` for module-to-module wiring.
 
@@ -49,7 +49,7 @@ Per the `item` mount-point: the relic occupies **one inventory slot**, locks its
 
 The carried Floating Disc behaves exactly as its module specifies — same range, duration, overcharge, and mishaps. The pebble changes *who sources the Power and how it is held*, nothing about the Power itself.
 
-### Failure
+!!! Failure
 
 A botched activation or a sundered pebble follows the `item` mount-point's failure rule: Corruption degrades or curses **the object**, not the bearer — a cracked pebble may drop loads, drift, or lock its disc in place.
 
@@ -57,17 +57,17 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~ ahu #variants >>
 
-## Variants
+!! Variants
 
-- **Porter's Pebble** — the base relic: one Floating Disc, recharges in sunlight.
-- **Caravan Cairn** — a heavier relic seating Floating Disc at its `x2` overcharge by default (5m disc, voice-commanded).
-- **Codex-Pebble (container)** — per the `item` container sub-rule, a relic bundling Floating Disc with one or two sibling stuckforce Powers in a single slot.
+* **Porter's Pebble** — the base relic: one Floating Disc, recharges in sunlight.
+* **Caravan Cairn** — a heavier relic seating Floating Disc at its `x2` overcharge by default (5m disc, voice-commanded).
+* **Codex-Pebble (container)** — per the `item` container sub-rule, a relic bundling Floating Disc with one or two sibling stuckforce Powers in a single slot.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
@@ -79,11 +79,11 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- **Nesting decided (Sprint 3).** Item is an entity; it `#has` a Power through the `item` mount-point. No second module type, no `#composes` for entity→module. `#composes` stays reserved for module→module (a Power that triggers or riders another Power).
-- **`holds` edge vs `#has`.** This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records *which* Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
-- **Container sub-rule** (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
+* **Nesting decided (Sprint 3).** Item is an entity; it `#has` a Power through the `item` mount-point. No second module type, no `#composes` for entity→module. `#composes` stays reserved for module→module (a Power that triggers or riders another Power).
+* **`holds` edge vs `#has`.** This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records *which* Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
+* **Container sub-rule** (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 
 <<~/ahu >>
 

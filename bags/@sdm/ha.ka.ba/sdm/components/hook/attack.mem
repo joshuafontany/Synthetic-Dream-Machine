@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/hook/attack"
 
 <<~ &#x0002; >>
 
-# Attack
+! Attack
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 A canonical resolution hook: the Power resolves **against the target's Defense**, like a weapon, rather than calling for a save against its effect.
 
@@ -30,7 +30,7 @@ A canonical resolution hook: the Power resolves **against the target's Defense**
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Modifies how the effect lands: roll to hit Defense. Overcharge typically scales damage-per-die or reach rather than the save DC.
 
@@ -38,7 +38,7 @@ Modifies how the effect lands: roll to hit Defense. Overcharge typically scales 
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Composes with offensive functions and any domain. Rarely sits on `domain/divination`. Distinct from save-based effects; a single module SHOULD NOT carry both an attack roll and a save on the same hit.
 
@@ -46,7 +46,7 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/hook/attack]]                    all attack modules
@@ -57,15 +57,15 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm the Defense math and crit rule against the FTLS combat chapter for module authors.
+* Confirm the Defense math and crit rule against the FTLS combat chapter for module authors.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

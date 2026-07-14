@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/hook/imbued"
 
 <<~ &#x0002; >>
 
-# Imbued
+! Imbued
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 A canonical cost hook: the Life paid to activate stays **locked** until the Power deactivates. The practitioner runs at reduced Life for the duration.
 
@@ -30,7 +30,7 @@ A canonical cost hook: the Life paid to activate stays **locked** until the Powe
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Modifies the cost protocol, not the effect. While imbued, the locked Life is unavailable; releasing the Power returns it. Stacking imbued Powers stacks the lock.
 
@@ -38,7 +38,7 @@ Modifies the cost protocol, not the effect. While imbued, the locked Life is una
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Common on `domain/abjuration` wards and standing barriers. Distinct from `item` (which locks Life into an object). Pairs naturally with `hook/sustained`.
 
@@ -46,7 +46,7 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/hook/imbued]]                    all imbued modules
@@ -57,15 +57,15 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- Confirm the interaction of imbued lock with temporary Life from ticket dice (OGA).
+* Confirm the interaction of imbued lock with temporary Life from ticket dice (OGA).
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 

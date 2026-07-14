@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 
 <<~ &#x0002; >>
 
-# Epic — Powers Composition Rewrite
+! Epic — Powers Composition Rewrite
 
 > **⏸ DEFERRED (2026-06-01).** All further Power-sprint work (Sprint 4 — Hard
 > Cases, Sprint 5 — Polish + Gate, and the bulk conversion behind it) is **on
@@ -29,7 +29,7 @@ uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 
 <<~ ahu #vision >>
 
-## Vision
+!! Vision
 
 The SDM/VLG/UVG corpus already runs a composition system. Every Power carries
 P/R/T/D/Ox. Every Power carries tags: `[anchored]`, `[attack]`, `[imbued]`,
@@ -58,7 +58,7 @@ Instance (TW5 data, mutable): what Lady Aki currently holds, how it mutated.
 
 <<~ ahu #base >>
 
-## The Base (Ha) — What Cannot Change
+!! The Base (Ha) — What Cannot Change
 
 These come from Luka's SDM/VLG/UVG corpus. They publish as-is or with
 light editing passes only.
@@ -85,25 +85,25 @@ light editing passes only.
 | `[item]` | Life locks into an object permanently until disabled |
 
 **Cost protocol** (canonical):
-- Pay Life = P level
-- Pay with Ability Points at 1:1 parity
-- Double cost without relevant skill
-- `[imbued]` / `[item]` lock Life until condition ends
+* Pay Life = P level
+* Pay with Ability Points at 1:1 parity
+* Double cost without relevant skill
+* `[imbued]` / `[item]` lock Life until condition ends
 
 **Danger protocol** (canonical):
-- Danger Roll when: no suitable skill, Level < P cost, or `[dangerous]` tag
-- Roll d20 + ability + skill vs P cost target
-- Natural 1 always fails
-- Failure → Corruption procedure
+* Danger Roll when: no suitable skill, Level < P cost, or `[dangerous]` tag
+* Roll d20 + ability + skill vs P cost target
+* Natural 1 always fails
+* Failure → Corruption procedure
 
 **Storage** (canonical from Vastlands Guidebook + SDM template):
-- **Trait**: 7 + Thought slots. Power engraved in body/mind/aura.
-- **Item**: 7 + Strength slots. Power stored in object. Albums/grimoires
+* **Trait**: 7 + Thought slots. Power engraved in body/mind/aura.
+* **Item**: 7 + Strength slots. Power stored in object. Albums/grimoires
   hold multiple powers per slot (container mechanism).
-- **Burden**: 20 slots. Each imposes -1 to all rolls. Overflow from Trait/Item.
+* **Burden**: 20 slots. Each imposes -1 to all rolls. Overflow from Trait/Item.
   Curses, compulsions, afflictions.
-- **Structure**: Power bound to a place — shrine, ship-daemon, archive service.
-- **Location**: Power bound to a geographic site. (SDM template lists separately
+* **Structure**: Power bound to a place — shrine, ship-daemon, archive service.
+* **Location**: Power bound to a geographic site. (SDM template lists separately
   from Structure; decision pending on whether these merge or stay distinct.)
 
 **Affinity interaction** (canonical from FTLS Ch03):
@@ -113,7 +113,7 @@ This proves tags-as-components at the table level — the composition model
 addresses an interaction that already runs in the published rules.
 
 **Conversion formula** (canonical):
-- P2 ≈ 1st level spell, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th
+* P2 ≈ 1st level spell, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th
 
 **Tag catalog** (canonical from Appendix Null):
 200+ tags organized by facet: Core mechanical (~40), Elements & Energies,
@@ -138,7 +138,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 <<~ ahu #lineage >>
 
-## Design Lineage — Prior Art That Carries Load
+!! Design Lineage — Prior Art That Carries Load
 
 | Source | Design lesson for this architecture |
 |---|---|
@@ -156,7 +156,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 <<~ ahu #principles >>
 
-## Principles
+!! Principles
 
 1. **Name what exists.** The canonical SDM rules already run composition.
    This epic gives each piece an address and connects them. Do not invent
@@ -217,7 +217,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 <<~ ahu #architecture >>
 
-## Bag Topology
+!! Bag Topology
 
 ```text
 bags/@sdm/
@@ -250,7 +250,7 @@ bags/@sdm/
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 | Edge | Meaning |
 |---|---|
@@ -276,11 +276,11 @@ Pranala form:
 
 <<~ ahu #tw5-tags >>
 
-## TW5 Tag Syntax — Component Representation
+!! TW5 Tag Syntax — Component Representation
 
 **Canon: every meme's TW5 title is its full `lar:///` URI** (= `lar:///` + `uri-path`). A component is addressed by **two tiddlers** — a full meme and a short virtual tag pointer.
 
-### Two Tiddlers per Component
+!!! Two Tiddlers per Component
 
 ```text
 Full meme   (.md, in recipe)    title:   lar:///ha.ka.ba/sdm/components/function/ecm-scan
@@ -294,7 +294,7 @@ Tag pointer (.tid, virtual)     title:   @sdm/tags/function/ecm-scan
 
 The **full meme** holds content; its title is the lar URI. The **tag pointer** is the lightweight thing tags actually reference. Its short title `@sdm/tags/{facet}/{slug}` mirrors `$:/tags/…` and reconstructs its own lar identity (`lar:///ha.ka.ba/sdm/tags/{facet}/{slug}`, matching its file path); its `meme` field forwards to the full meme. Pointers are **virtual** — not stacked into the recipe unless the operator edits a membership — and live as `.tid` to differentiate from `.md` memes. Mounts follow the same split (`@sdm/tags/mount/{slug}` → `…/mount-points/{slug}`).
 
-### Wikitext Forms
+!!! Wikitext Forms
 
 | Context | Syntax | Renders as |
 |---|---|---|
@@ -304,7 +304,7 @@ The **full meme** holds content; its title is the lar URI. The **tag pointer** i
 | Filter: facet | `[tag[]prefix[@sdm/tags/function/]]` | all function-facet tags |
 | Filter: all SDM tags | `[tag[]prefix[@sdm/tags/]]` | all SDM tag pointers |
 
-### TOML Tags in Module & Card Memes
+!!! TOML Tags in Module & Card Memes
 
 ```toml
 tags = [
@@ -319,17 +319,17 @@ tags = [
 
 The TOML `tags` field mirrors the Pranala `#has` edges. `#has` edges carry graph truth and address the **full meme** (lar URI); `tags` reference the **short tag pointer**, which forwards to that same meme. Both reach the one component.
 
-### Rendering: `tag-pill` + `components`
+!!! Rendering: `tag-pill` + `components`
 
-- `<<tag-pill "TAG">>` reads the pointer's `caption` for the label and follows its `meme` field — `<$link to={{{ [<target>get[meme]else<target>] }}}>` — to open the full meme.
-- A card declares composition **once** as `@sdm/tags/…` tags; the single call `<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>` lists every `@`-prefixed tag on the tiddler and renders each as a pill.
-- Both live as runtime `.tid` tagged `$:/tags/Global`: `lar:///ha.ka.ba/sdm/procedures/tag-pill` and `lar:///ha.ka.ba/lararium/lists/components`.
+* `<<tag-pill "TAG">>` reads the pointer's `caption` for the label and follows its `meme` field — `<$link to={{{ [<target>get[meme]else<target>] }}}>` — to open the full meme.
+* A card declares composition **once** as `@sdm/tags/…` tags; the single call `<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>` lists every `@`-prefixed tag on the tiddler and renders each as a pill.
+* Both live as runtime `.tid` tagged `$:/tags/Global`: `lar:///ha.ka.ba/sdm/procedures/tag-pill` and `lar:///ha.ka.ba/lararium/lists/components`.
 
 <<~/ahu >>
 
 <<~ ahu #progressive-display >>
 
-## Progressive Display — Cards as Mnemonic Doorways
+!! Progressive Display — Cards as Mnemonic Doorways
 
 Power cards serve two functions simultaneously:
 
@@ -351,7 +351,7 @@ Printed cards carry the mnemonic function only. Digital cards carry both.
 The architecture must serve both contexts — which means the tag pills must
 read as meaningful flavor on paper and as functional links on screen.
 
-### Card Rendering Example
+!!! Card Rendering Example
 
 ```text
 ┌──────────────────────────────────────┐
@@ -385,7 +385,7 @@ each pill reads as a keyword the player learns over time.
 
 <<~ ahu #shapes >>
 
-## Meme Shapes
+!! Meme Shapes
 
 **Module** (mirrors canonical Power card + addressed edges):
 
@@ -432,7 +432,7 @@ traits:
 
 <<~ ahu #decisions-resolved >>
 
-## Decisions Resolved — Session Zero (2026-05-31)
+!! Decisions Resolved — Session Zero (2026-05-31)
 
 Design decisions closed by operator approval after corpus + design-lead
 research (D1–D4 Session Zero; D5 at the two-tiddler amendment; D6 at Sprint 3).
@@ -484,8 +484,8 @@ composition once as tags and calls one `<<~ kahea … >>`.
 **D5 — Naming canon: lar: URI titles + two-tiddler tags (2026-05-31, amends D4 & `#tw5-tags`).**
 Every meme's TW5 title is its full `lar:///` URI (= `lar:///` + `uri-path`). A
 component/mount is addressed by **two tiddlers**:
-- the **full meme** (`.md`, in recipe) — lar URI title, `caption`, all content;
-- a **short tag pointer** (`.tid`, *virtual* — not stacked unless an operator edits
+* the **full meme** (`.md`, in recipe) — lar URI title, `caption`, all content;
+* a **short tag pointer** (`.tid`, *virtual* — not stacked unless an operator edits
   a membership) titled `@sdm/tags/{facet}/{slug}` (mirrors `$:/tags/…`, reconstructs
   its own lar URI), carrying `caption` + a `meme` field that forwards to the full meme.
 
@@ -510,19 +510,19 @@ reuse the same power template — `modules/abilities/` (creature/monster abiliti
 Same template, same `#has`/`#default` shape; the directory names the source-kind.
 
 **Open residue from this research (not blocking Sprint 0):**
-- Name the mobility component slug (`@sdm/hook/propulsion`? `@sdm/posture/mobile`?).
-- Ship role-slots (Helm/Gunnery/Damage-Control, FTLS Ch08) hint at a future
+* Name the mobility component slug (`@sdm/hook/propulsion`? `@sdm/posture/mobile`?).
+* Ship role-slots (Helm/Gunnery/Damage-Control, FTLS Ch08) hint at a future
   "role slot" concept on Sites, distinct from Power mount-points. Note for Sprint 3/4.
-- Site as dual-view (stat-view / interior-map-view, per Spelljammer) — a
+* Site as dual-view (stat-view / interior-map-view, per Spelljammer) — a
   projection concern, not a mount-point concern. Note for projections work.
 
 <<~/ahu >>
 
 <<~ ahu #sprints >>
 
-## Sprints — Instructions for the Enacting Lares
+!! Sprints — Instructions for the Enacting Lares
 
-### Sprint 0 — Ground
+!!! Sprint 0 — Ground
 
 **What you do:** Mark the old tree. Build the new foundation. No Powers yet.
 
@@ -550,13 +550,13 @@ The Burden mount-point's `-1 per slot` rule, the Trait slot count (7+Thought),
 the Item slot count (7+Strength) — these are canonical facts that get addressed.
 
 **RESOLVED (see `#decisions-resolved`):**
-- `location` **merges into** `structure`. One Site mount-point. Fixed-vs-mobile
+* `location` **merges into** `structure`. One Site mount-point. Fixed-vs-mobile
   is a flat `#has` component on the Site (propulsion/mobility), not a separate
   mount-point or a type fork.
-- The **Item** mount-point is **one** mount-point with a container sub-rule
+* The **Item** mount-point is **one** mount-point with a container sub-rule
   (albums/grimoires/technocodices hold multiple Powers per slot), not separate
   types. Character Item capacity stays fixed at **7+Strength**.
-- The **structure (Site)** mount-point does NOT carry a fixed slot count. A Site
+* The **structure (Site)** mount-point does NOT carry a fixed slot count. A Site
   (Hallmark, vehicle, domicile, fixed place) holds **base attributes like a
   character**; capacity is a **purchasable upgrade** (XP + referee resources,
   tracked per-attribute, decoupled from Level) per OGA "Golden Age Item
@@ -590,7 +590,7 @@ because Sprint 1 card projections depend on it.
 
 **S0.5 — Write projection and witness templates.** Fresh for v0.1.
 
-### Sprint 1 — Read Magic (Prove the Chain)
+!!! Sprint 1 — Read Magic (Prove the Chain)
 
 **What you do:** Write the first complete module-set. Prove the full chain.
 
@@ -614,39 +614,39 @@ Basic/Expert/RC witnesses. Written fresh from source material.
 Record what v0.0 contained and why it retired.
 
 **Acceptance test:**
-- Module loads for play without pulling cold memes
-- Card reads clean with visible tag pills
-- All `#has` edges resolve to Sprint 0 memes
-- No `#implements` anywhere in v0.1
-- No family/role on any `#has` edge
-- No edges into v0.0
-- Each addressed component meme served at least one filter query (if not, demote)
+* Module loads for play without pulling cold memes
+* Card reads clean with visible tag pills
+* All `#has` edges resolve to Sprint 0 memes
+* No `#implements` anywhere in v0.1
+* No family/role on any `#has` edge
+* No edges into v0.0
+* Each addressed component meme served at least one filter query (if not, demote)
 
-### Sprint 2 — Floating Disc + Shield Ward (Validate)
+!!! Sprint 2 — Floating Disc + Shield Ward (Validate)
 
 Same process as Sprint 1 for two more Powers with different component profiles.
 Write any new component memes needed. After all three exist: pattern review.
 Compare side by side. Confirm the template generalizes. Surface anything that
 wants `#composes` or `#modifies`.
 
-### Sprint 3 — Beyond Spells (Extend) ✅ CORE COMPLETE (2026-06-01)
+!!! Sprint 3 — Beyond Spells (Extend) ✅ CORE COMPLETE (2026-06-01)
 
 One monster ability module. One magic item module. Test whether the same
 template covers non-spell affordances. Decide module nesting: when an item
 `#has` a Power, does it use the same module shape or a different one?
 
 **Landed:**
-- **`modules/abilities/neural-whip`** — the Cave Octopus's stuckforce tentacle-lash
+* **`modules/abilities/neural-whip`** — the Cave Octopus's stuckforce tentacle-lash
   (UVG, L16 biomancer). First exerciser of **`hook/attack`** (resolves vs Defense,
   no save). Surfaced the first offensive **`function/restrain`** component (+ tag
   pointer) — prior functions all served the wielder; an attack demanded the address
   (Principle 6). Reuses `domain/stuckforce` + `mount/trait`. Proves the Power
   template covers a monster's innate ability **unchanged**.
-- **`modules/items/porters-pebble`** — a Stuckforce Relic that `#has`
+* **`modules/items/porters-pebble`** — a Stuckforce Relic that `#has`
   `modules/powers/floating-disc` + `#has` `mount-points/item`. The **nesting proof**:
   an item is an entity, carries a Power by `#has` through the `item` mount-point, and
   reuses the Floating Disc module unchanged (no component re-listing). → **D6**.
-- Each carries its FTLS card (`projections/abilities|items/ftls-card/…`) and a
+* Each carries its FTLS card (`projections/abilities|items/ftls-card/…`) and a
   provenance witness (`witness/abilities/uvg-bestiary/…`, `witness/items/uvg/…`).
 
 **Decided:** module nesting → **D6** (entity `#has`, not `#composes`). `#composes`
@@ -656,14 +656,14 @@ stays reserved for module→module.
 attack Power to demand it); `domain/noosphere` promotion (waits for a mind-jolt
 neural Power); the `#holds` relation edge may demote if flat `#has` proves enough.
 
-### Sprint 4 — Hard Cases (Stress)
+!!! Sprint 4 — Hard Cases (Stress)
 
 One artifact. One curse (burden-class, involuntary). One shrine service
 (structure-class, offering-based). Layer interaction doctrine: write the
 `#modifies` edge semantics. Start the counterpoint doctrine: what happens
 when two active modules interact on the same entity.
 
-### Sprint 5 — Polish + Gate
+!!! Sprint 5 — Polish + Gate
 
 Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 `#implements` web-wide retirement scope (separate epic).
@@ -672,25 +672,25 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 
 <<~ ahu #acceptance >>
 
-## Epic Acceptance
+!! Epic Acceptance
 
-- [ ] v0.0 renamed, internally consistent
-- [ ] No `interfaces/`, no `#implements`, no family/role on `#has`
-- [ ] Three proof Powers as v0.1 modules with flat `#has`
-- [ ] One each: monster, item, artifact, curse, shrine module
-- [ ] Mount-point contracts for Trait, Item, Structure, Burden (+ Location decision)
-- [ ] 20+ component memes (addressed from Appendix Null)
-- [ ] Composition model doc with instance-data examples
-- [ ] Layer interaction / counterpoint doctrine (even at `Provisional 4/20`)
-- [ ] Cards declare composition as `@sdm/tags/…` tags and render pills via one `components` kahea call
-- [ ] Every meme's title is its lar: URI; each component/mount has a short `.tid` tag pointer (caption + `meme`)
-- [ ] `tag-pill` procedure renders caption-as-pill and follows the pointer's `meme` field to the full meme
+* [ ] v0.0 renamed, internally consistent
+* [ ] No `interfaces/`, no `#implements`, no family/role on `#has`
+* [ ] Three proof Powers as v0.1 modules with flat `#has`
+* [ ] One each: monster, item, artifact, curse, shrine module
+* [ ] Mount-point contracts for Trait, Item, Structure, Burden (+ Location decision)
+* [ ] 20+ component memes (addressed from Appendix Null)
+* [ ] Composition model doc with instance-data examples
+* [ ] Layer interaction / counterpoint doctrine (even at `Provisional 4/20`)
+* [ ] Cards declare composition as `@sdm/tags/…` tags and render pills via one `components` kahea call
+* [ ] Every meme's title is its lar: URI; each component/mount has a short `.tid` tag pointer (caption + `meme`)
+* [ ] `tag-pill` procedure renders caption-as-pill and follows the pointer's `meme` field to the full meme
 
 <<~/ahu >>
 
 <<~ ahu #open-pressures >>
 
-## Open Design Pressures
+!! Open Design Pressures
 
 These surfaced during session research and remain deliberately unresolved.
 Each names a force the architecture should accommodate without prematurely
@@ -734,38 +734,38 @@ relationship to the mounted pattern. This remains speculative.
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- **Filter ergonomics.** Test target-URI-prefix filtering in Sprint 1.
-- **Module nesting.** ✅ RESOLVED (Sprint 3) → entity `#has` a Power through its
+* **Filter ergonomics.** Test target-URI-prefix filtering in Sprint 1.
+* **Module nesting.** ✅ RESOLVED (Sprint 3) → entity `#has` a Power through its
   mount-point; `#composes` reserved for module→module. See `#decisions-resolved` D6.
-- **Counterpoint doctrine.** Co-active module interaction rules. Sprint 4.
+* **Counterpoint doctrine.** Co-active module interaction rules. Sprint 4.
   Start from the existing FTLS ECM vocabulary (`[scan]` `[veil]` `[jam]`
   `[negate]` `[suppress]` `[redirect]` `[capture]` `[hijack]`) — these
   already name the layer-interaction modes the `#modifies` edge reaches for.
-- **Location vs Structure.** ✅ RESOLVED → merged into one Site mount-point;
+* **Location vs Structure.** ✅ RESOLVED → merged into one Site mount-point;
   mobility is a flat `#has` component. See `#decisions-resolved`.
-- **Power containers.** ✅ RESOLVED → one Item mount-point + container sub-rule;
+* **Power containers.** ✅ RESOLVED → one Item mount-point + container sub-rule;
   character Item capacity fixed at 7+Strength. See `#decisions-resolved`.
-- **Site capacity economy.** Structure/Site slots scale by XP + resource spend
+* **Site capacity economy.** Structure/Site slots scale by XP + resource spend
   (OGA "Golden Age Item Upgrading"), not a fixed count. Wire the Site
   `#cost`/`#overflow` blocks to that economy in Sprint 0.3 / test in Sprint 4.
-- **Locked Powers as instance data.** Lock-state (which attributes remain
+* **Locked Powers as instance data.** Lock-state (which attributes remain
   locked/encrypted/damaged) and unlock-progress belong in the instance-layer
   YAML alongside variant and mutations.
-- **Rank tags as vertical component.** `[skilled]`/`[expert]`/`[master]`
+* **Rank tags as vertical component.** `[skilled]`/`[expert]`/`[master]`
   represent vertical gating within the flat `#has` space. The Kabbalist
   pressure finds an anchor here — not all tag-relationships run horizontal.
   Decide whether rank tags get component memes or stay as TOML-only markers.
-- **Practice ladder.** Overcharge-as-depth gradient may want named components.
-- **`#implements` web-wide.** Separate epic.
-- **Bulk conversion.** ~100+ Powers behind Sprint 5 gate.
+* **Practice ladder.** Overcharge-as-depth gradient may want named components.
+* **`#implements` web-wide.** Separate epic.
+* **Bulk conversion.** ~100+ Powers behind Sprint 5 gate.
 
 <<~/ahu >>
 
 <<~ ahu #meme-edges >>
 
-## Edges
+!! Edges
 
 **`@sdm/v0.0` deleted 2026-06-01** — the prototype archive was completely
 superseded by v0.1 (three proof Powers migrated; the inheritance/`#implements`

@@ -17,11 +17,11 @@ uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward"
 
 <<~ &#x0002; >>
 
-# OSR Witness — Shield Ward
+! OSR Witness — Shield Ward
 
 <<~ ahu #alias >>
 
-## Alias Note
+!! Alias Note
 
 ```toml witness
 source-name = "Shield"
@@ -33,7 +33,7 @@ reason = "SDM+ reserves bare `Shield` for gear, item, and general defense ontolo
 
 <<~ ahu #basic >>
 
-## Basic
+!! Basic
 
 ```toml witness
 name = "Shield"
@@ -50,7 +50,7 @@ A magical barrier all around the magic-user, less than an inch away, moving with
 
 <<~ ahu #expert >>
 
-## Expert
+!! Expert
 
 ```toml witness
 name = "Shield"
@@ -65,7 +65,7 @@ The Expert Set lists MU1 only; the Basic description governs.
 
 <<~ ahu #cyclopedia >>
 
-## Rules Cyclopedia
+!! Rules Cyclopedia
 
 ```toml witness
 name = "Shield"
@@ -82,19 +82,19 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~ ahu #analysis >>
 
-## Conversion Analysis
+!! Conversion Analysis
 
-- Source name `Shield` → SDM+ Power slot `Shield Ward` (the alias protects bare `Shield` for gear/effect ontology).
-- `Range: 0`, self-only, inch-close, body-following → a skin-close force shell, not carried gear. Carries `function/ward` (selective) over `function/barrier` (the shell itself).
-- Distinct AC vs missiles / other → typed defensive filtering; surfaces as the `ward`'s "named channel" overcharge.
-- The Magic-Missile save → a special anti-spell-projectile interaction, not general immunity. Candidate for a `negate`/`#modifies` rule at counterpoint (Sprint 4).
-- `2 turns` → **D: 20 minutes**. The paid Life reads as `imbued` (locked while the ward holds).
+* Source name `Shield` → SDM+ Power slot `Shield Ward` (the alias protects bare `Shield` for gear/effect ontology).
+* `Range: 0`, self-only, inch-close, body-following → a skin-close force shell, not carried gear. Carries `function/ward` (selective) over `function/barrier` (the shell itself).
+* Distinct AC vs missiles / other → typed defensive filtering; surfaces as the `ward`'s "named channel" overcharge.
+* The Magic-Missile save → a special anti-spell-projectile interaction, not general immunity. Candidate for a `negate`/`#modifies` rule at counterpoint (Sprint 4).
+* `2 turns` → **D: 20 minutes**. The paid Life reads as `imbued` (locked while the ward holds).
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
 <<~ loulou lar:///ha.ka.ba/sdm/modules/powers/shield-ward >>

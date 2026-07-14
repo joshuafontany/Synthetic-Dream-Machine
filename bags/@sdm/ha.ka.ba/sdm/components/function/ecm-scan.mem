@@ -18,11 +18,11 @@ uri-path  = "ha.ka.ba/sdm/components/function/ecm-scan"
 
 <<~ &#x0002; >>
 
-# ECM Scan
+! ECM Scan
 
 <<~ ahu #definition >>
 
-## Definition
+!! Definition
 
 Sensing and analyzing active Powers, activations, and noospheric signatures — the electronic-countermeasure scan of the substrate.
 
@@ -30,7 +30,7 @@ Sensing and analyzing active Powers, activations, and noospheric signatures — 
 
 <<~ ahu #activation >>
 
-## Activation
+!! Activation
 
 Reveals **what runs on the noosphere**: strength, type, and owner-trace of active effects in range. A passive read at base P; deeper analysis on overcharge.
 
@@ -38,7 +38,7 @@ Reveals **what runs on the noosphere**: strength, type, and owner-trace of activ
 
 <<~ ahu #interaction >>
 
-## Interaction
+!! Interaction
 
 Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — `veil`, `jam`, `spoof`, `negate`, `suppress` — degrades or blinds it. This is the first vocabulary for module-on-module interaction (counterpoint; Sprint 4).
 
@@ -46,7 +46,7 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~ ahu #filters >>
 
-## Filters
+!! Filters
 
 ```text
 [tag[lar:///ha.ka.ba/sdm/components/function/ecm-scan]]              all ecm-scan modules
@@ -57,15 +57,15 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
-- The full ECM mode-set (`veil` `jam` `spoof` `negate` `suppress` `redirect` `capture` `absorb` `hijack`) wants component memes when counterpoint lands. Promote on first query (Principle 6).
+* The full ECM mode-set (`veil` `jam` `spoof` `negate` `suppress` `redirect` `capture` `absorb` `hijack`) wants component memes when counterpoint lands. Promote on first query (Principle 6).
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
 
