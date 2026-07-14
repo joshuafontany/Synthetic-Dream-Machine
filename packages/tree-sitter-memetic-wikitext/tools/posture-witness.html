@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><title>posture-D witness</title>
+<h1>posture-D witness — sync wasm init under file://</h1>
+<p>Open directly from disk (file://). PASS = both sync compiles under 50ms.
+If fetch refuses (Chrome file://), use the embedded page:
+<code>node tools/posture-witness-embed.mjs > /tmp/pw.html</code> and open that.</p>
+<pre id="out">loading…</pre>
+<script type="module">
+const out = document.getElementById("out");
+const log = (s) => out.textContent += "\n" + s;
+out.textContent = "";
+try {
+  const grab = async (n) => new Uint8Array(await (await fetch(n)).arrayBuffer());
+  const runtime = await grab("../node_modules/web-tree-sitter/web-tree-sitter.wasm");
+  const grammar = await grab("../tree-sitter-memetic_wikitext.wasm");
+  let t = performance.now();
+  new WebAssembly.Module(runtime);
+  log(`sync compile runtime (${(runtime.length/1024)|0}KB): ${(performance.now()-t).toFixed(1)}ms`);
+  t = performance.now();
+  new WebAssembly.Module(grammar);
+  log(`sync compile grammar (${(grammar.length/1024)|0}KB): ${(performance.now()-t).toFixed(1)}ms`);
+  log("PASS if both < 50ms — posture D rules.");
+} catch (e) { log("fetch refused or failed (" + e + ") — use the embedded page route above."); }
+</script>
