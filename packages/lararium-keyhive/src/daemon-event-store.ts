@@ -28,6 +28,7 @@ import {
 } from "@lararium/mesh";
 import { type ChangeOrigin, type LarTiddlerRecord, toLarTiddlerRecord } from "@lararium/mesh";
 import type { EventStore, EventRecord } from "./event-store.js";
+import { bytesToBase64, base64ToBytes } from "./bytes-base64.js";
 
 /** Map a Keyhive event variant to its lar sub-tag URI. */
 function subTagFor(variant: string): string | null {
@@ -46,19 +47,6 @@ export function capEventTitle(hash: string): string {
 }
 
 /** Base64-encode bytes for tiddler `text` storage (tiddler.text is string). */
-function bytesToBase64(bytes: Uint8Array): string {
-  let bin = "";
-  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!);
-  return btoa(bin);
-}
-
-function base64ToBytes(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const out = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
-  return out;
-}
-
 /** Compute a stable hash for an event payload. SHA-256, hex-encoded. */
 async function hashBytes(bytes: Uint8Array): Promise<string> {
   // .slice() copies into a fresh ArrayBuffer-backed Uint8Array — avoids the

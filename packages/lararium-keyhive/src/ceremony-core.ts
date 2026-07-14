@@ -50,18 +50,7 @@ import {
 // founding edge well clear of the wall while the lease does the real work.
 const EDGE_BACKSTOP_MS = 100 * 365 * 24 * 60 * 60 * 1000;
 
-function bytesToBase64(bytes: Uint8Array): string {
-  let bin = "";
-  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!);
-  return btoa(bin);
-}
-
-function base64ToBytes(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const out = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
-  return out;
-}
+import { bytesToBase64, base64ToBytes } from "./bytes-base64.js";
 import { buildCeremonyTiddlers } from "@lararium/mesh";
 import { KeyhiveProvider } from "./keyhive-provider.js";
 import { InMemoryEventStore } from "./event-store.js";
