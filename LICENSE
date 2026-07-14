@@ -5,7 +5,7 @@ published: true
 ---
 # FTLS Fan Content & Remix License
 
-**Version 1.0 — April 2026**
+**Version 1.1 — July 2026**
 *Flying Triremes and Laser Swords · Elyncia · Lares*
 *© Amorphous Dreams Cabal (Joshua Fontany & Freyja Fontany, Founders)*
 
@@ -27,7 +27,7 @@ Make it weird, wonderful, and wild.
 
 **"Licensor"** — **Amorphous Dreams Cabal**, a development studio, acting through its Founders Joshua Fontany and Freyja Fontany.
 
-**"Licensed Material"** — all original content authored by the Licensor and contained in this repository, including rules text, setting text, procedures, agent instructions and prompts, and supporting materials. It does not include Third-Party Content (see Section X).
+**"Licensed Material"** — all original content authored by the Licensor and contained in this repository, including software source code, rules text, setting text, procedures, memetic-wikitext memes, agent instructions and prompts, and supporting materials. It does not include Third-Party Content (see Section X).
 
 **"Open Content"** — all Licensed Material not designated as Product Identity. Open Content may be used, shared, adapted, and built upon under the terms of this license.
 
@@ -55,10 +55,13 @@ Make it weird, wonderful, and wild.
 
 This license applies to all Licensed Material in this repository. This includes but is not limited to:
 
+- All software source code the Licensor authors in this repository — the workspace packages (`packages/`), tools, scripts, and tests — including the `tree-sitter-memetic-wikitext` grammar artifact, its query files, and its host implementations
+- The memetic-wikitext memes (`bags/`), including the noosphere boot seed, the `api/pono` canon, and all house-authored meme content
 - The *Flying Triremes and Laser Swords* game text (`ftls/`)
 - The Elyncia setting material (`elyncia/`)
-- Original conversion and design work in pipeline directories (`_todo/`)
-- Agent Instructions: root `AGENTS.md`, all files in `builds/agents/`, and all agent prompt files in other repository directories
+- The Synthetic Dream Machine RPG conversion, witness, and design content (`bags/@sdm`, `sdm/`) — dual-covered with the SDM 3rd Party License where it adapts SDM rules mechanics; see Section IX
+- Original conversion and design work in pipeline directories
+- Agent Instructions: `noosphere-boot.md`, the root `CLAUDE.md`/`AGENTS.md` adapters, skill files, and all agent prompt files in other repository directories
 
 Where Licensed Material overlaps with content also covered by the SDM 3rd Party License (such as SDM rules mechanics), that content is subject to **both** licenses. See Section IX for how dual-coverage resolves.
 
@@ -139,8 +142,8 @@ The following are Open Content and may be freely used, adapted, and built upon u
 - The role-function names of the Lares voice architecture (Gatekeeper, Lorekeeper, Scryer, Council, Muse, Artificer, Advocate, Diplomat, Pedagogue, Hierophant, Triage, Stranger, Liminal)
 - The Agent Instructions architecture itself: operating models, register/mode frameworks, Worker persona methodology, CLI interaction patterns, escalation protocols, degraded-node vocabulary
 - Root `AGENTS.md` (including all content under the Lares system prompt and the CLI Agent Context section)
-- All files in the `builds/agents/` directory
 - All other Agent Instructions files in other repository directories
+- The memetic-wikitext carrier format itself: the sharktooth sigil form (`<<~ … >>`), ahu pairing, the fence and iam conventions, the carrier grammar, and the MemeAst canonical form with its query vocabulary — build parsers, editors, and tools for the format freely
 
 When in doubt about whether something is Product Identity or Open Content, the intent is: **use the ideas freely; don't wear the names as a claim to be us**.
 
@@ -275,7 +278,10 @@ Third-Party Content includes but is not limited to:
 
 - Magitecnica content © Luka Rejec / WTF Studio
 - There, A Red Door content © Luka Rejec
+- SDM/UVG/SEACAT-ecosystem material © Luka Rejec, where reproduced or closely adapted (including bestiary, item, and spell texts referenced in `bags/@sdm` witness files) — governed by the SDM 3rd Party License
 - Ars Magica content (held on external sources, referenced but not reproduced here)
+- Library source-texts held for research and practice in `bags/` library directories — including the Kumulipo in Martha Warren Beckwith's translation, works by Robert Anton Wilson, and works by Camden Benares — each quoted under its own rights and never relicensed by this document
+- Vendored software under its own upstream licenses: the TiddlyWiki5 core (`TiddlyWiki5/`, BSD-3-Clause © Jeremy Ruston and contributors), the mempalace engine submodule (`mempalace/`), and all package-manager dependencies
 - Any other content bearing a copyright notice from a party other than Joshua Fontany or Freyja Fontany
 
 For use of Third-Party Content, consult the relevant copyright holder and their published license terms. For SDM-ecosystem content by Luka Rejec, see the SDM 3rd Party License in this repository.
