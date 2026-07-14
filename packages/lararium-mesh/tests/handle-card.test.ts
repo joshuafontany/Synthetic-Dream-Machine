@@ -123,6 +123,20 @@ describe("the ANNOUNCE reader rule — accept the newer face, refuse a rollback 
     expect((await acceptHandleUpdate(v1, { expectedNym: nym, highWaterVersion: 2, lastCardId: v1id })).reject).toBe("rollback");
   });
 
+  test("re-delivering the CURRENT card is idempotent (gossip/merge replays it) — accepted, not a fork", async () => {
+    const nym = await pubOf(FASTJACK_SEED);
+    const v1  = await publish(FASTJACK_SEED, "FastJack", { version: 1 });
+    const v1id = await handleCardId(v1);
+    const v2  = await publish(FASTJACK_SEED, "FastJack v2", { version: 2, prev: v1id });
+    const v2id = await handleCardId(v2);
+    // holding v2 (high-water 2, last id = v2id), the SAME v2 arrives again — idempotent, accepted
+    expect((await acceptHandleUpdate(v2, { expectedNym: nym, highWaterVersion: 2, lastCardId: v2id })).ok).toBe(true);
+    // a DIFFERENT card at the same version (equivocation) is still a lineage break
+    const twin = await publish(FASTJACK_SEED, "FastJack twin", { version: 2, prev: v1id });
+    // (twin differs from v2 only by glamour → different id → same-version equivocation)
+    expect((await acceptHandleUpdate(twin, { expectedNym: nym, highWaterVersion: 2, lastCardId: v2id })).reject).toBe("lineage-break");
+  });
+
   test("a card whose prev fails to link the last held card is a fork — refused as a lineage break", async () => {
     const nym = await pubOf(FASTJACK_SEED);
     const v1  = await publish(FASTJACK_SEED, "FastJack", { version: 1 });

@@ -184,11 +184,23 @@ export async function acceptHandleUpdate(
   const self = await verifyHandleCard(card, opts.now);
   if (!self.ok) return self;
   if (card.nym !== opts.expectedNym) return { ok: false, reject: "wrong-nym" };
-  if (opts.highWaterVersion !== undefined && card.version < opts.highWaterVersion) {
-    return { ok: false, reject: "rollback" };
-  }
-  if (opts.lastCardId !== undefined && card.prev !== opts.lastCardId) {
-    return { ok: false, reject: "lineage-break" };
+
+  // The version axis, read against what the recogniser holds. Idempotent replay of the CURRENT card is the
+  // norm under gossip/merge, so it must pass — only a card that PURPORTS TO ADVANCE (version above the
+  // high-water) is held to the lineage link; a card AT the high-water passes iff it IS the held card.
+  if (opts.highWaterVersion !== undefined) {
+    if (card.version < opts.highWaterVersion) return { ok: false, reject: "rollback" };
+    if (card.version === opts.highWaterVersion) {
+      // A different card at the SAME version equivocates; the same card (or an unremembered one) replays clean.
+      if (opts.lastCardId !== undefined && (await handleCardId(card)) !== opts.lastCardId) {
+        return { ok: false, reject: "lineage-break" };
+      }
+      return { ok: true, nym: card.nym };
+    }
+    // version > high-water: an advance MUST link the held card (anti-equivocation).
+    if (opts.lastCardId !== undefined && card.prev !== opts.lastCardId) {
+      return { ok: false, reject: "lineage-break" };
+    }
   }
   return { ok: true, nym: card.nym };
 }
