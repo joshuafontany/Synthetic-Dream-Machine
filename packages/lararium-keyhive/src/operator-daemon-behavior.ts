@@ -164,6 +164,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       //     Identifier hex (the same relationship bootDaemonKeyhive Gate A relies on:
       //     did.endsWith(verifyingKey)).
       let proofVerified = false;
+      let proofReason: string | undefined;   // the SPECIFIC cause — never swallowed into a generic verdict
       if (proof) {
         const peerPubKey = id.slice(-64); // raw 32-byte ed25519 verifying key (hex)
         const r = await verifyAuthProof({
@@ -176,6 +177,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           now:        Date.now(),
         });
         proofVerified = r.ok;
+        proofReason   = r.reason;
       }
 
       // ENFORCEMENT FLIP (V3 step D): admission requires BOTH a satisfied
@@ -187,7 +189,11 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // for browser-safety (no `process` there; the browser holds no inbound peer).
       const enforce = !(typeof process !== "undefined" && process.env?.["LAR_V3_ALLOW_UNPROVEN"] === "1");
       if (enforce && !proofVerified) {
-        return { ok: false, identifier: id, proofVerified, reason: proof ? "V3 proof verification failed" : "V3 proof required" };
+        // Carry the SPECIFIC cause. "V3 proof verification failed" alone cannot tell a bad signature from a
+        // stale timestamp from a malformed field, and a gate that hides which one refused makes every
+        // handshake regression a guess. The narrow reason (bad-sig · expired · not-32-byte-hex) rides out.
+        const why = proof ? `V3 proof rejected: ${proofReason ?? "unverified"}` : "V3 proof required";
+        return { ok: false, identifier: id, proofVerified, reason: why };
       }
 
       // ADMIN-CAP PATH (unchanged): a satisfied capability admits directly. Under `enforce`
