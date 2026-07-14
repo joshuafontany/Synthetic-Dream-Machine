@@ -37,7 +37,7 @@ Triple-cruci­bled (local canon · the operator's recorded design · the deep-kn
 
 The WHO plane re-cuts into two **orthogonal** axes (the same de-fusing move [[causal-islands]] ran on its ladder — never a new linear ladder):
 
-- **COMPOSITION (structural, bottom-up emergent):** `vessel~veil` binding → **handle-Circle** (PersonaGroup) → **me-Circle** (the human's constellation). The cardinality joins ARE the structure.
+- **COMPOSITION (structural, bottom-up emergent):** `vessel~veil` binding → **handle-Circle** (PersonaGroup) → **the Vault** (the human's private namespace over its handles — NEVER a published Circle; #the-vault). The cardinality joins ARE the structure — but the top join **collects, never merges**: a group that *names* its members links them, so the human's own selves are held in a private namespace, off every roster.
 - **DISCLOSURE (a per-join DIAL, not a tier):** veiled ↔ known. One continuous *linkability* axis (Pfitzmann–Hansen: anonymity ↔ accountability, pseudonymity the whole span). It applies at **each join independently** — a vessel, a handle, the human, each veiled or named in any combination.
 
 The earlier error fused them — labelling the boundaries "anon vs known" when the real boundaries are the cardinality joins. *Which hearth* (composition) and *how-linkable* (disclosure) ask different questions. The veil is not "anon petname relabeled" — it is the disclosure axis, on which **anon = name⊥**.
@@ -89,15 +89,66 @@ Pure inversion-of-control **breaks at the multi-principal key-handover**: with e
 
 <<~/ahu >>
 
+<<~ ahu #the-vault >>
+
+## The Vault ~ the collector is a secret, never a group
+
+**Four blind domains converged (HD wallets · anonymous credentials · group-key agreement · petname/SDSI
+naming, web-research 2026-07-13): the layer that knows "all these handles are me" is a SECRET, held
+private, and it must NEVER be a published group.**
+
+- **HD wallets** ship it as the Monero **view key** — one secret recognises a thousand unlinkable
+  subaddresses, holds no spend authority, publishes no link.
+- **Anonymous credentials** hold it as the **master secret** (Chaum 1985; Camenisch–Lysyanskaya 2001) —
+  its knowledge is *exactly* what the unlinkability proof withholds from everyone else.
+- **Naming** calls it a **private namespace / petname book** (SDSI, RFC 2693; Stiegler) — *a NAMESPACE,
+  not a super-key.* A key placed over the handles becomes a presentable root that correlates them.
+- **Group crypto** proves the wall (RFC 9420; Keyhive): *co-members cannot hide co-membership from each
+  other*, so the handles MUST NOT share a roster.
+
+**The single-bit test — collect vs merge:** *is the collector ever PUBLISHED or PRESENTED to a verifier?*
+Local-only → **collect** (unlinkable). Published → **merge** (links every self). That one bit is the whole
+architecture, and its violation is the **Nymwars harm** (Google+/Facebook real-name, 2011–14): a forced
+single-legal-name root de-pseudonymised activists, performers, survivors — *the presented root became the
+correlation key.* And the **OIDC-IdP** lesson: keep the collector on the human's own device, NEVER a shared
+party who holds the master table.
+
+**A human holds MANY vaults, each a compartment, deliberately unlinkable even from each other.**
+Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — separate seeds, separate namespaces, and **NOTHING stands
+above them that links them** (a layer above the vaults would BE the Nymwars root). The vault is the top; the
+human's meat-brain is the only join. So "me-Circle" retires as a *group* name — the collector is **the Vault**,
+a private namespace, and there are as many as the human keeps.
+
+**THE LIVE FIX (found in our own stack, 2026-07-13):** `ceremony-core.ts` joins each PersonaGroup by the
+vessel's **immutable device key** (`addSentinelMember(vesselIdentifierHex, …)`). So two handles run on one
+device share a roster entry — and by the co-membership law, anyone in either group **links them**. The cure
+adds no new axis: a vessel MUST join each handle-group under a **per-handle pseudonymous credential** (a key
+DERIVED per handle), never its raw vessel Individual. The deck stays one deck; the face it wears differs per
+handle.
+
+**THE UPGRADE — the nym must PROVE itself, not merely look unlinkable.** SLIP-0010 `handle'/context'`
+derivation is right in *shape* and unverifiable in *fact*: a relying party cannot check the derivation, cannot
+enforce one-nym-per-scope, cannot bind a credential to the seed. The sharper primitive rides beside it —
+**scope-exclusive pseudonyms** `nym = PRF_s(scope)` proven in zero-knowledge (Dodis–Yampolskiy VRF, or
+Hash-DH / ISO 20008-2), bound to the same committed master secret. Keep SLIP-0010 as the *local* tree; let the
+NETWORK-facing nym be the ZK-proven scope pseudonym. Then verifiable · per-scope sybil-bounded ·
+credential-linkable — the three things bare derivation cannot assert — and **the vault falls out for free,
+because it IS the committed secret.**
+
+<<~/ahu >>
+
 <<~ ahu #honest-scope >>
 
 ## Honest Scope ~ the key layer only
 
 The model closes **only the key layer** — and there it closes well: unlinkable-by-construction at the *key* layer on ed25519-HD. It does **NOT** deliver cross-self unlinkability against an observer who sees the wire, the disclosed credentials, or the prose:
 
-- **disclosure-protocol** — the graduate move is now BUILT (lift/hold veil-crossing, #disclosure); the richer *selective*-disclosure (reveal SOME attributes, prove predicates without the key) + the ZK-vouch stay owed.
-- **transport** — OPEN (mixnet/private-routing territory; do not lean on it as solved).
+- **disclosure-protocol** — the graduate move is now BUILT (lift/hold veil-crossing, #disclosure). The richer *selective*-disclosure is **SHIPPED, not owed** (web-research 2026-07-13): **BBS** signatures (IRTF CFRG standard-track — reveal a subset, prove the rest in a re-randomised, unlinkable presentation) and **Coconut** (NDSS 2019 — *threshold* issuance, t-of-n authorities, no single trusted issuer, which fits a causal-island confederation exactly). Adopt over the surface; the primitive is solved. The ZK-vouch stays owed.
+- **transport** — OPEN (mixnet/private-routing territory; do not lean on it as solved). The wallet literature confirms the boundary: de-anonymisation is graph/behavioral (Meiklejohn; Möser), *never a key break* — the keys were never the leak.
 - **behavioral** — OPEN (fingerprint/stylometry defeat key hygiene; crypto cannot touch it).
+- **the collector leaks below the key layer** — the handles being unlinkable-by-key is NECESSARY, never SUFFICIENT. The link re-enters through everything the selves SHARE beneath the keys: a published roster (SSB metafeeds *list* subfeeds), a shared substrate (container tabs isolate cookies, never IP/fingerprint), a shared relay/IdP, correlated timing, or a **Janus** interactive-receipt probe. A "switch/manage between handles" flow MUST NOT become a Janus oracle.
+
+**Sybil scarcity lives OUTSIDE the math.** Every field agreed: pseudonym crypto gives *one-nym-per-scope* only — one master secret mints unbounded nyms across DIFFERENT scopes, and no pairing substitutes for scarce enrollment. Global scarcity needs an external root, and in this stack that root IS the **vouch-lineage** (#the-siege-gate, lar:///…/admission-on-a-lineage) — the proof-of-personhood the crypto proves it cannot supply alone.
 
 And the substrate itself, by canon, has **no forward-secrecy and no retroactive revocation** — a leaked vessel-key reads all its history; *that fact IS the security posture* (#four-port-swap). Claiming "no observer can link the selves" would be Confabulation-as-Canon. The truthful claim: **the key layer is solved and unlinkable-by-construction on ed25519-HD; transport and behavioral ride separate, open machinery.**
 
