@@ -30,7 +30,7 @@ Takes a `Repo` and a seed; returns unforgeable membership proofs stored as Autom
 
 Three ceremony functions. All three run in any vessel context (node, browser, worker).
 
-**`runFoundingCeremony(repo: Repo, operatorSeed: Uint8Array): FoundingResult`**
+''`runFoundingCeremony(repo: Repo, operatorSeed: Uint8Array): FoundingResult`''
 
 Produces the three-doc identity lattice:
 * `Individual` — Ed25519 device keypair derived from seed; the Keyhive identity for this vessel.
@@ -40,14 +40,14 @@ Produces the three-doc identity lattice:
 Gate B and Gate C tiddlers write into the admin doc. Gate A verifies the Keyhive DID
 matches the local verifying key; throws on mismatch — no silent drift.
 
-**`runDeviceAdmitCore(repo: Repo, operatorSeed: Uint8Array): AdmitPayload`**
+''`runDeviceAdmitCore(repo: Repo, operatorSeed: Uint8Array): AdmitPayload`''
 
 Produces an out-of-band admission payload (`admit.json`) for a second vessel.
 The payload carries the MeshCabal and PersonaGroup doc URLs, the founding Keyhive
 Individual's public keys, and a signed delegation token.
 Vessels transfer this payload out-of-band: QR code, file, direct message.
 
-**`runApplyAdmitPayload(repo: Repo, receivingSeed: Uint8Array, payload: AdmitPayload): void`**
+''`runApplyAdmitPayload(repo: Repo, receivingSeed: Uint8Array, payload: AdmitPayload): void`''
 
 Applies the payload to the receiving vessel's Repo. Writes oracle tiddlers for
 Gate B and Gate C into the admin doc. The receiving vessel can verify its own

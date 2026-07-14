@@ -82,8 +82,8 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 
 !! Aftermath
 
-* **First `hook/attack` exerciser.** Confirms the Power template covers a non-spell monster affordance unchanged — same `#has` + `#default` shape, attack resolution instead of a save.
-* **First offensive `function`.** `restrain` is the first function that acts //on// an unwilling target; prior functions (cargo, barrier, ward, archive, decode, ecm-scan) all serve the wielder. A second offensive Power (a damaging strike with no grip) will likely demand a sibling `function/strike` — promote then (Principle 6), not now.
+* ''First `hook/attack` exerciser.'' Confirms the Power template covers a non-spell monster affordance unchanged — same `#has` + `#default` shape, attack resolution instead of a save.
+* ''First offensive `function`.'' `restrain` is the first function that acts //on// an unwilling target; prior functions (cargo, barrier, ward, archive, decode, ecm-scan) all serve the wielder. A second offensive Power (a damaging strike with no grip) will likely demand a sibling `function/strike` — promote then (Principle 6), not now.
 * ''Pure-damage attacks'' want a function that is not `restrain`; this module deliberately models the //grip//, which the source creature leads with.
 * If a future neural attack jolts the mind rather than grips the body, that wants `domain/noosphere` (carried in v0.0) promoted on first query.
 

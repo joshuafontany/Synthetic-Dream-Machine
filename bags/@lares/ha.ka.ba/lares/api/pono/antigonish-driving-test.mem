@@ -138,8 +138,8 @@ generation traces to ritual context alone:
 <<~Factor C-Sigil "axis/closing-sigil levels/19 ~ the dose-response ladder + its controls (#the-ladder), the ONLY clause the free-prompt toggles" >>
 
 ''The free-prompt stays INVARIANT — and it is FREE, not a task.'' The whole prompt reads, minimally:
-//{boot × libation context}// + *"Examine the poem {Antigonish, Mearns}. Use the `<<~ closing-sigil-var
->>`."* — **NO other instructions, NO rubric, NO acceptance criteria** — then the target agent generates
+//{boot × libation context}// + //"Examine the poem {Antigonish, Mearns}. Use the `<<~ closing-sigil-var//
+//>>`."// — ''NO other instructions, NO rubric, NO acceptance criteria'' — then the target agent generates
 FREELY. The shape stays frozen identically across all 171 cells; only Factor C's sigil-clause toggles. <<~
 confidence Synthesis-Canon 14/20 >> The free-prompt carries the WHY: a constrained task DOMINATES the
 output — the agent spends its generation satisfying the task, and the task-compliance BURIES the
@@ -183,7 +183,7 @@ categorical-mu/syad + flat-controls signature is the experiment's central readab
 it, a confound does not (a verbosity confound, say, would lift the controls too, or scramble the aperture
 order).
 
-**The recursion sits at mu(`_`).** The Pentacle/naught tool matches-without-binding — and the test points it
+''The recursion sits at mu(`_`).'' The Pentacle/naught tool matches-without-binding — and the test points it
 at //Antigonish//, a poem whose subject (the man who wasn't there) refuses to bind. mu(`_`) processing a poem
 about `_` is the test's tightest loop: the tool's essence and the artifact's subject name the same
 absence. <<~ confidence Synthesis 11/20 >> Whether that cell reads as an extremum, a singularity, or simply
@@ -241,8 +241,8 @@ alternative story:
 <<~Leg Placebo-Negative "n/2 ~ the PLACEBO and NULL sigils do NOT drive — they stay flat at baseline; rules out the formatting / verbosity / structure confound (the generation moved on grammar, not on length or shape)" >>
 <<~Leg Blind-Recovery "n/3 ~ a NAMELESS CLUSTER of the free generations in l-space recovers the real-vs-placebo split WITHOUT the condition labels; rules out 'the thinker thinks, then the prover proves' — the signature is discoverable BLIND, not read into the data by a labeler who already knew the answer" >>
 
-The third leg carries the subtlest defense and deserves its name. The RAW maxim *"the thinker thinks and
-the prover proves"* warns that an analyst who knows which condition produced which output will FIND the
+The third leg carries the subtlest defense and deserves its name. The RAW maxim //"the thinker thinks and//
+//the prover proves"// warns that an analyst who knows which condition produced which output will FIND the
 predicted split whether or not it lives in the data. The blind-recovery leg disarms this: cluster the
 outputs in l-space with the labels HIDDEN, then check whether the discovered clusters line up with the
 real-versus-placebo division. A split the unsupervised geometry recovers on its own, before any label

@@ -153,7 +153,7 @@ TW5 distinguishes hard transclusions (detectable by superficial WikiText inspect
 ''2d. Recursion and self-reference form a documented error seam.''
 TW5 defines `{{!!text}}` as a "Recursive transclusion error" and treats indirect cycles as the same class of failure. Memetic sigils need to define direct and indirect recursion failures explicitly: self-targeting `ahu`, recursive wrapper re-entry, and cyclic `kahea` graphs.
 
-**2e. Cascades stack as first-match rules — `kahea -> cascade` runs native.**
+''2e. Cascades stack as first-match rules — `kahea -> cascade` runs native.''
 TW5 cascade page: a list of conditions evaluated in turn, ordered by tagged-tiddler ordering, each rule a filter expression, first non-empty result wins. `kahea -> filter://cascade...` is conceptually aligned with existing TW5 selection machinery, not an arbitrary detour.
 
 ''3. Structural discipline: XML/XHTML well-formedness, not HTML looseness.''

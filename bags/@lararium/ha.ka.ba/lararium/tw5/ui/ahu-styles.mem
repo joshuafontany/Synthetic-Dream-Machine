@@ -18,8 +18,8 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/ahu-styles"
 <<~ &#x0002; >>
 
 \rules only filteredtranscludeinline transcludeinline
-/* Depends on: a palette tiddler loaded before this stylesheet — <<colour X>> resolves
-   at TW5 stylesheet injection time. Palette preloaded via lares-preloads.ts. */
+/// Depends on: a palette tiddler loaded before this stylesheet — <<colour X>> resolves//
+//   at TW5 stylesheet injection time. Palette preloaded via lares-preloads.ts. ///
 
 /* ── ahu section layout ─────────────────────────────────────────────────── */
 

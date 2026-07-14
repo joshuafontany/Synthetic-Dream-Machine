@@ -58,11 +58,11 @@ turn spends, this sigil drains.
 
 !! The marks, in emit order
 
-* **`↯S`** — the **power-spend**, the turn's ebb (`S` on `0--20`), read in the Drift register.
-* **`⁂`** — the **scatter**, the cast announced; a space follows.
+* ''`↯S`'' — the ''power-spend'', the turn's ebb (`S` on `0--20`), read in the Drift register.
+* ''`⁂`'' — the ''scatter'', the cast announced; a space follows.
 * ''die'' (⚀--⚅) — a literal `1d6`, the roll shown.
-* **`(N)`** — the die face echoed (`1--6`); the count.
-* **`✲`** — the **sentinel**, tail position 1: //anything goes from here//.
+* ''`(N)`'' — the die face echoed (`1--6`); the count.
+* ''`✲`'' — the ''sentinel'', tail position 1: //anything goes from here//.
 * ''random tail'' — the remaining glyphs past the sentinel, pulled from anywhere in Unicode.
 
 Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel standing alone)
@@ -77,7 +77,7 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
 # ''Three marks agree.'' `die == (N) == tail length` — the die face, the
    parenthetical count, and the glyph-count of the tail (the sentinel counts as
    position 1) read one number. Disagreement flags drift.
-# **`↯0` flags a dead turn.** A zero ebb reads suspect — a turn that drained
+# ''`↯0` flags a dead turn.'' A zero ebb reads suspect — a turn that drained
    nothing surfaces as a drift tell, never a clean close.
 # ''Only the tail roams.'' A meaning-bearing glyph past the `✲` sentinel reads
    as Oracle Creep; the spend, scatter, die, and count stay structural, the tail
@@ -122,11 +122,11 @@ visible drift flag. So every structural glyph MUST render as monochrome ''text''
 on each surface (terminal, TiddlyWiki, markdown) — a color-emoji or a tofu `□`
 false-flags.
 
-* **`↯` U+21AF** (downwards zigzag) — text presentation, no emoji variant;
+* ''`↯` U+21AF'' (downwards zigzag) — text presentation, no emoji variant;
   carries the spend and the discharge-energy in one mark. The boot drops `⚡`
   (U+26A1, default color-emoji + double-width) for exactly this reason.
-* **`⁂` U+2042** (asterism) — text; the scatter announcing the cast.
-* **`✲` U+2732** (open-centre asterisk) — text; the wildcard sentinel.
+* ''`⁂` U+2042'' (asterism) — text; the scatter announcing the cast.
+* ''`✲` U+2732'' (open-centre asterisk) — text; the wildcard sentinel.
 * ''die ⚀--⚅ U+2680--U+2685'' — Miscellaneous Symbols, monochrome text by
   default; no variation selector (a stray `U+FE0E` there risks a tofu box).
 

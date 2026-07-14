@@ -24,11 +24,11 @@ uri-path    = "ha.ka.ba/lararium/mesh/genesis-doc"
 
 ! Genesis & the Two Planes
 
-The vessel stands on **two orthogonal planes, soft-coupled at the `@oracle`** — tuber and rhizome, moving independently:
+The vessel stands on ''two orthogonal planes, soft-coupled at the `@oracle`'' — tuber and rhizome, moving independently:
 
 <<~ranks plane cid@immutable-FLOW-rhizome -> crdt@epoch-ratchet-STATE-tuber >>
 
-The genesis is **not** an Automerge binary carrying bytes. It is a **thin `@oracle` pointer-doc** (~4 KB, metadata + pointers, NO blob bytes), a **CID manifest** (`island.manifest.json`), and the ''CAS blobs'' (`genesis/cas/<cid>`). `buildGenesisDoc()` constructs the deterministic doc + the manifest + the cas entries; the caller writes each to its sink.
+The genesis is ''not'' an Automerge binary carrying bytes. It is a ''thin `@oracle` pointer-doc'' (~4 KB, metadata + pointers, NO blob bytes), a ''CID manifest'' (`island.manifest.json`), and the ''CAS blobs'' (`genesis/cas/<cid>`). `buildGenesisDoc()` constructs the deterministic doc + the manifest + the cas entries; the caller writes each to its sink.
 
 <<~ ahu #two-planes >>
 
@@ -36,7 +36,7 @@ The genesis is **not** an Automerge binary carrying bytes. It is a **thin `@orac
 
 ''Plane 0 — the CID layer (rhizome / FLOW).'' Content-addressed, immutable, IPFS-like. Holds every large blob — the TW5 engine core, the plugins, future binary streams (hypercore live someday). Each artifact IS its sha256; a new version is a new CID. This plane ''churns continuously'' — the engine updates almost without pause, plugins and blobs come and go. No mutation, no merge: content only, fetched ''by CID'' from the CAS (`node-cas.ts` fs · browser OPFS). The kernel resolves engine + plugins CAS-only by CID — never from the CRDT doc.
 
-**Plane 1 — the CRDT epoch layer (tuber / STATE).** Mutable, versioned, ratcheting in epochs, standing ATOP the CID layer. Its base-floor is the **`@oracle`**.
+''Plane 1 — the CRDT epoch layer (tuber / STATE).'' Mutable, versioned, ratcheting in epochs, standing ATOP the CID layer. Its base-floor is the ''`@oracle`''.
 
 ''GD-7 — bytes live on the CID plane, never in the CRDT.'' A content-addressed byte-blob has no merge semantics; embedding it in an Automerge doc + `merge()`-ing genesis into a stale persisted doc makes it an unresolved actor conflict (the historical "TW5 core integrity gate failed" boot-skew). `LarBlobEntry.blob` is therefore OPTIONAL — genesis entries carry the ''descriptor'' (`{id, version, sha256}`), the bytes ride the CID plane.
 
@@ -50,7 +50,7 @@ The `@oracle` is a ''served, signed POINTER doc'' — the public crossroads wher
 
 <<~moves advance-CID -> on/oracle-pointer-update do/mesh-announce >>
 
-**GD-8 — soft, not hard: advance the CID, update the pointer, never re-genesis for churn.** To ship a new engine/plugin/blob: bake it to the CID plane (a new CID) and **update the `@oracle` pointer** (a light CRDT write). Peers sync (or `curl`) the signed pointer, see the new CID, fetch the content from the CID plane. Tuber and rhizome move independently — daily content churn touches the pointer, never the boot.
+''GD-8 — soft, not hard: advance the CID, update the pointer, never re-genesis for churn.'' To ship a new engine/plugin/blob: bake it to the CID plane (a new CID) and ''update the `@oracle` pointer'' (a light CRDT write). Peers sync (or `curl`) the signed pointer, see the new CID, fetch the content from the CID plane. Tuber and rhizome move independently — daily content churn touches the pointer, never the boot.
 
 ''The epoch ratchet'' — the deep `@oracle` CRDT-version boundary — fires only at a rare structural shift, WAAAY down the road; it is the one place the genesis-merge belongs. <<~ confidence Canon 18/20 >> the hard merge-into-stale is the anti-pattern that broke boot; it belongs ONLY to the epoch boundary, never to churn.
 
@@ -80,13 +80,13 @@ The `@oracle` docId derives from the FOUNDING vessel's `@daemon` identity-root (
 
 !! What genesis seeds (the `@oracle` system plane)
 
-The genesis doc seeds the **`@oracle` runtime system island** — the protocol substrate, never user composition:
+The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol substrate, never user composition:
 
 | Seeded | Held as |
 |---|---|
 | engine + plugin descriptors | `{id, version, sha256}` in `.blobs` (NO bytes); the bytes ride `genesis/cas/<cid>` + `island.manifest.json` |
 | system bag descriptors | `ROOT_BAGS`: `@oracle`, `@lararium`, `@catalog`, `@lares`, `@identities`, `@circles`, `@sessions` |
-| system wiki-recipes | the **`@lares` wiki** (`@oracle`+`@lararium`+`@lares`) and the **`@lararium` wiki** — DreamNet system bags as quine wikis |
+| system wiki-recipes | the ''`@lares` wiki'' (`@oracle`+`@lararium`+`@lares`) and the ''`@lararium` wiki'' — DreamNet system bags as quine wikis |
 | genesis-cid | `lar:///ha.ka.ba/bags/@oracle/genesis-cid` (two-pass CID witness, GD-4) |
 
 ''GD-6 — system recipes are substrate; user recipes are not (operator ruling 2026-06-16).'' Genesis seeds the ''system'' wiki-recipes (`@lares`, `@lararium`); user recipes mint into `@catalog` by init-wiki. A user recipe in genesis, or a system recipe in `@catalog`, reads as a plane-leak.
@@ -100,7 +100,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 | Type | Role |
 |---|---|
 | `GenesisInputs` | Caller-assembled bag: `actorSeed` (hex), `coreBlob`, `coreVersion`, optional `coreSha256`, `plugins`, `systemTitles`. |
-| `GenesisArtifact` | Output: the thin-doc `bytes`, `sha256`, `cid`, `preSha256`, **+ `casManifest` + `casEntries`** (the CID plane's manifest + the blob entries to write to `genesis/cas/`). |
+| `GenesisArtifact` | Output: the thin-doc `bytes`, `sha256`, `cid`, `preSha256`, ''+ `casManifest` + `casEntries`'' (the CID plane's manifest + the blob entries to write to `genesis/cas/`). |
 | `GenesisCasManifest` | `lararium-genesis-cas/v1`: `engineCid` + `pluginsCid` + entries (id → cid), sorted, deterministic. The boot index. |
 | `GenesisPluginEntry` | One plugin descriptor + optional `PluginBuildAttestation` (`lararium-tw5-plugin-build/v1`). |
 
@@ -148,7 +148,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 * ''9c90b390 — CID plane:'' kernel resolves engine/plugins CAS-only by CID; the byte-blob left the `@oracle` CRDT (where the merge-into-stale had made it an unresolved actor conflict — the boot-skew root).
 * ''940a023e — slice 1:'' blob bytes leave the genesis doc entirely → `genesis/cas/` + `island.manifest.json`; `island.bin` 547 KB → 4 KB. Merge-conflict-on-bytes class gone structurally. Isomorphic (node fs · browser OPFS).
-* ''Proven on the mesh'' (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, **serve `@oracle` — `curl` returns the signed pointer** — across a 3-hop Hermai relay (INFRA × WHO). //(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)//
+* ''Proven on the mesh'' (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, ''serve `@oracle` — `curl` returns the signed pointer'' — across a 3-hop Hermai relay (INFRA × WHO). //(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)//
 * ''Open (slice 2, far-future):'' retire the genesis-merge entirely — materialize the `@oracle` fresh from the manifest at init, ratchet by peer-sync. Gated on a ''deterministic shared docId'' (so the public board stays one board, not per-node forks). Fires only at the epoch boundary, not for churn.
 
 <<~/ahu >>

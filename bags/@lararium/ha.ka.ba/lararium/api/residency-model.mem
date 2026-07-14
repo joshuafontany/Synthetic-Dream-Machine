@@ -184,7 +184,7 @@ The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/D
 
 !!! RECONCILE — fold a newer engine forward (operator ruling, 2026-06-15)
 
-`lares act RECONCILE` adopts a newer engine genesis into the living **`@oracle`** runtime island (disk-projection #oracle-split) — the deliberate rite that replaces the old silent boot-time fold (engine-watch EW-6).
+`lares act RECONCILE` adopts a newer engine genesis into the living ''`@oracle`'' runtime island (disk-projection #oracle-split) — the deliberate rite that replaces the old silent boot-time fold (engine-watch EW-6).
 
 * ''Authority:'' cap-verify an ''operator(admin)'' grant on `@oracle` (engine-watch EW-5; the mint-gate pattern — node genesis office). Peers federate `@oracle` read-only; they never RECONCILE.
 * ''Mechanism (additive, never arbitrating):'' fold the genesis doc forward into `@oracle` (Automerge merge, additive — operator content survives). Because automerge LWW resolves by ''op-id, not wall-clock'', the verb MUST ''enforce the fold direction'' (the newer engine intended-wins) and ''SURFACE every operator field it would shadow'' (#conflict-resolution: detect + record, never silently pick) — it never auto-resolves a contended field.
@@ -194,7 +194,7 @@ The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/D
 
 !!! EPOCH — cut history behind (DEFERRED, named here for the pair)
 
-RECONCILE folds //forward//; **EPOCH** cuts //behind// (bounds the op-log; epoch-handlers). They stay **two verbs, sequenced `reconcile → epoch`, never auto-coupled** — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a //content// epoch (peers offline across a content cut cannot merge).
+RECONCILE folds //forward//; ''EPOCH'' cuts //behind// (bounds the op-log; epoch-handlers). They stay ''two verbs, sequenced `reconcile → epoch`, never auto-coupled'' — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a //content// epoch (peers offline across a content cut cannot merge).
 
 <<~/ahu >>
 
@@ -283,7 +283,7 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 * ''Ink & Switch Upwelling'' — closest CRDT analog with layered drafts. [[inkandswitch.com/upwelling|https://www.inkandswitch.com/upwelling/]].
 * ''Ink & Switch Cambria'' — schema lenses at read time. [[inkandswitch.com/cambria|https://www.inkandswitch.com/cambria/]].
 * ''CSS Cascade + DevTools Computed panel'' — the operator-visible coordinate surface gold standard.
-* **Plan 9 `bind`** — the explicit/shallow/lexically-visible discipline that makes overlay work (Pike et al. 1992).
+* ''Plan 9 `bind`'' — the explicit/shallow/lexically-visible discipline that makes overlay work (Pike et al. 1992).
 
 <<~/ahu >>
 

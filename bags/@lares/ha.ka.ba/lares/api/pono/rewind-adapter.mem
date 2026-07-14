@@ -56,7 +56,7 @@ Every source app sorts into one of two families by ''what its rewind does to the
 
 ''Family A — APPEND-ONLY / FORK.'' A rewind writes a ''new fork'' — a new file, a new branch, a re-parented sibling — and ''nothing vanishes''. The source is its own witness: the road-not-taken stays re-harvestable from the store. <<~ confidence Synthesis-Canon 16/20 >> Members: ''Claude Code · Codex · Aider · Gemini (snapshots) · Copilot-CLI · Copilot-Chat''.
 
-''Copilot-Chat crosses into Family A — byte-proven.'' <<~ confidence Synthesis-Canon 15/20 >> The verify-gate the first cut left open (#grounds) ''closed on the bytes'': the `.jsonl` reads as a ''JSON-patch op-log'' — the `kind:0` base op appears **only at line 0, never compacted**; a real edit stacks **three coexisting ops** recoverable by replay-to-offset; **120 of 269** surveyed files leave their superseded ops in the append log. The docs' "truncate the tail" names the **logical `requests[]` state**, never the physical file. So Copilot-Chat **appends and keeps** — it joins the fork-family. Identity rides `requestId`; the live branch reconstructs by ''replay''.
+''Copilot-Chat crosses into Family A — byte-proven.'' <<~ confidence Synthesis-Canon 15/20 >> The verify-gate the first cut left open (#grounds) ''closed on the bytes'': the `.jsonl` reads as a ''JSON-patch op-log'' — the `kind:0` base op appears ''only at line 0, never compacted''; a real edit stacks ''three coexisting ops'' recoverable by replay-to-offset; ''120 of 269'' surveyed files leave their superseded ops in the append log. The docs' "truncate the tail" names the ''logical `requests[]` state'', never the physical file. So Copilot-Chat ''appends and keeps'' — it joins the fork-family. Identity rides `requestId`; the live branch reconstructs by ''replay''.
 
 ''Family B — MUTABLE-TRUNCATE.'' A rewind ''overwrites'' — it truncates the tail in place and the old turns leave the store. Here ''we become the last keeper'': our tombstone holds the only surviving trace of the road they discard.
 * ''Cursor'' — <<~ confidence Synthesis-Canon 15/20 >> ''CONFIRMED'' hard-delete, and now ''standing alone'': with Copilot-Chat crossed over, Cursor is the ''field's only confirmed byte-level hard-delete'' — the whole surveyed noosphere speaks kāpae, one exception. A restore/edit overwrites the tail in `state.vscdb` (SQLite `cursorDiskKV`); staff-confirmed ''unrecoverable'' on the community forum.
@@ -74,8 +74,8 @@ A research spirit over-claimed that the detector should ''"never tombstone the f
 <<~ confidence Synthesis-Canon 15/20 >> ''Kāpae = down-weight-the-road-not-taken AND KEEP, never erasure'' ([[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] — a raised marker that //shadows// the layers beneath, distinct from //absent//). A tombstone that keeps is exactly what both families need. So ''kāpae applies to BOTH families.'' The fork-family gets a kāpae too — the down-weight marks the road-not-taken as an eidetic keep (recall weights it low, never zero), the same gesture we hand the truncate-family.
 
 The `appendOnly` flag does ''not'' gate //whether// we kāpae — it records ''who else keeps the trace'':
-* **`appendOnly: true`** (Family A) — the **source corroborates**: the branch survives in the app's own store, so our kāpae rides alongside a re-harvestable original.
-* **`appendOnly: false`** (Family B) — **we are the last keeper**: the app discarded the road; our tombstone is the //only// surviving trace. Our model runs strictly **kinder** than the app — we keep the eidetic road-not-taken the app throws away.
+* ''`appendOnly: true`'' (Family A) — the ''source corroborates'': the branch survives in the app's own store, so our kāpae rides alongside a re-harvestable original.
+* ''`appendOnly: false`'' (Family B) — ''we are the last keeper'': the app discarded the road; our tombstone is the //only// surviving trace. Our model runs strictly ''kinder'' than the app — we keep the eidetic road-not-taken the app throws away.
 
 Either way the road stays kept. The flag steers re-harvest and provenance, never the decision to shadow-and-keep.
 
@@ -124,10 +124,10 @@ The ladder degrades by degree, never hard-faults — the graceful-parsing discip
 
 The classifier reads ''the shape of what went missing'' from the diff, then confirms it against a ''per-app signal''. Four shapes:
 
-* **whole-file / whole-session gone → `DELETE`** — tombstone all its turns.
-* **contiguous TAIL gone → `TAIL_TRUNCATE` (REWIND / EDIT / REGEN)** — tombstone the tail **only if the app hard-deletes** (Family B). A **fresh turn at N+1** reads as an **EDIT** → re-harvest the new branch. In Family A the "gone" tail still sits in the bytes on a fork — do not tombstone; re-harvest.
-* **interior HOLE → `INTERIOR_DELETE`** — a **true delete** of that one turn. Tombstone the turn.
-* **new sibling sharing a parent prefix → `FORK`** — harvest the new branch, **tombstone nothing** (both roads stay live).
+* ''whole-file / whole-session gone → `DELETE`'' — tombstone all its turns.
+* ''contiguous TAIL gone → `TAIL_TRUNCATE` (REWIND / EDIT / REGEN)'' — tombstone the tail ''only if the app hard-deletes'' (Family B). A ''fresh turn at N+1'' reads as an ''EDIT'' → re-harvest the new branch. In Family A the "gone" tail still sits in the bytes on a fork — do not tombstone; re-harvest.
+* ''interior HOLE → `INTERIOR_DELETE`'' — a ''true delete'' of that one turn. Tombstone the turn.
+* ''new sibling sharing a parent prefix → `FORK`'' — harvest the new branch, ''tombstone nothing'' (both roads stay live).
 
 ''Per-app signal'' (what confirms the shape):
 
@@ -208,7 +208,7 @@ Same primitive as the worldline's ratified `fork ≡ sibling-spawn`; the adapter
 * it assumes transcripts ''immutable'' (`check_mtime=False`) — so it never re-reads a changed store;
 * it carries ''no gone-turn trigger'' at all.
 
-Our contribution back: **uuid-keying** (the C-cut — turn-keyed identity), **current-branch reconstruction** (the leaf-chain walk), and the **`appendOnly`-gated universal kāpae** (down-weight-and-keep across both families). Together they give the base the reconciler it lacks — and give the field its first cross-app rewind reader.
+Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''current-branch reconstruction'' (the leaf-chain walk), and the ''`appendOnly`-gated universal kāpae'' (down-weight-and-keep across both families). Together they give the base the reconciler it lacks — and give the field its first cross-app rewind reader.
 
 ''PR scope — reconciler PR-ready.'' <<~ confidence Synthesis-Canon 14/20 >> The ''4-adapter reconciler'' (Claude Code · Codex · Copilot-Chat · Copilot-CLI, #adapters-built) stands green on a ''feature branch, no PR yet''. Faithful-upstream boundary ([[web3-only-lares|lar:///ha.ka.ba/lares/api/lares/corpus]]): the adapters ride as a ''storage-adjacent chat-adapter layer'' (behind the base's `backends/base.py` capability seam) + the gone-turn trigger + tests — the kupono models (nameless cap-stacks, no-global-now) stay in our trunk.
 
@@ -228,7 +228,7 @@ Our contribution back: **uuid-keying** (the C-cut — turn-keyed identity), **cu
 
 ''Cited grounds:'' Claude Code sessions + checkpointing docs · Codex fork / rollout (DeepWiki) · Copilot-CLI chronicle · VS Code chat-checkpoints docs · Cursor `restore = overwrite` (staff forum) · Gemini session-management docs · Aider commands reference · the ''cass 22-agent'' survey.
 
-''Verify-gate CLOSED — Copilot-Chat.'' <<~ confidence Synthesis-Canon 15/20 >> The open gate (was: does replay-to-offset reconstruct the pre-restore tail?) ''closed on the bytes'': `kind:0` base op present **only at line 0, never compacted** · a real edit stacked **three coexisting ops** all recoverable by replay · **120 of 269** files leave their superseded ops in the append log. Verdict: Copilot-Chat **appends and keeps** → **Family A, `appendOnly: true`** (#two-families). No `.jsonl` truncation ships; the "truncate" idiom lives in the logical `requests[]` view alone.
+''Verify-gate CLOSED — Copilot-Chat.'' <<~ confidence Synthesis-Canon 15/20 >> The open gate (was: does replay-to-offset reconstruct the pre-restore tail?) ''closed on the bytes'': `kind:0` base op present ''only at line 0, never compacted'' · a real edit stacked ''three coexisting ops'' all recoverable by replay · ''120 of 269'' files leave their superseded ops in the append log. Verdict: Copilot-Chat ''appends and keeps'' → ''Family A, `appendOnly: true`'' (#two-families). No `.jsonl` truncation ships; the "truncate" idiom lives in the logical `requests[]` view alone.
 
 ''Open verification (before donating):'' <<~ confidence Synthesis 8/20 >> the ''Copilot-CLI'' adapter stands ''schema-verified, not fully bytes-verified'' — this box's lone session was empty. Its `appendOnly: true` + the `editedTurnIndices` re-emit logic read clean from the `UNIQUE(session_id, turn_index)` schema, but a ''real Copilot-CLI session'' must exercise them before the reconciler donates.
 

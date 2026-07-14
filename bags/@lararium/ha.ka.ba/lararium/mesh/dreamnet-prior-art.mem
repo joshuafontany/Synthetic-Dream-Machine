@@ -242,7 +242,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 # ''CID profiles for reproducibility'': CID profiles document canonical parameter sets for interoperability.
 
 ''Design Decisions:''
-* **`dag-cbor` as canonical encoding**: UCAN mandates DAG-CBOR for signing; IPLD's DAG-CBOR provides the natural bridge.
+* ''`dag-cbor` as canonical encoding'': UCAN mandates DAG-CBOR for signing; IPLD's DAG-CBOR provides the natural bridge.
 * ''Multiformats'': Self-describing binary formats that can evolve without breaking existing CIDs.
 
 ''Note'': DreamNet uses CIDs as stable identifiers but may retrieve content over any transport. Does not require IPFS infrastructure.

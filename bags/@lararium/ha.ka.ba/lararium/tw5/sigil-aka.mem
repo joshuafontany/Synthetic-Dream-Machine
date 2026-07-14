@@ -76,7 +76,7 @@ Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 
 The `aka-template-html.tid` shows a preview image when available:
 
-# **`thumbnail` field** on the target tiddler — displayed as `<img class="lar-aka-thumb">`.
+# ''`thumbnail` field'' on the target tiddler — displayed as `<img class="lar-aka-thumb">`.
    Any resolver that fetches metadata writes this field.
 # ''Domain favicon fallback'' — for HTTP/HTTPS URIs with no `thumbnail` field, the template
    renders `<img src="https://icons.duckduckgo.com/ip3/{domain}.ico">` with `onerror` hide.

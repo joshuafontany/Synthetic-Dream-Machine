@@ -182,7 +182,7 @@ status notifications accelerate but never become load-bearing.)
 A short-lived leaf (a one-shot CLI run, a single agent turn) carries only its
 Ed25519 keypair — its `did:key` — plus a ''cached, pre-minted ContactCard JSON'' on
 disk. With these it presents a self-certifying identity offline and signs the V3
-proof-of-possession with **bare `@noble/ed25519`** over its seed — zero keyhive on
+proof-of-possession with ''bare `@noble/ed25519`'' over its seed — zero keyhive on
 the leaf, honoring no-VM-on-main without a per-invocation Worker boot. The full
 keyhive engine boots ONCE, on the always-on ''relay'', which amortizes the cost and
 verifies leaf proofs in its keyholder worker. The ContactCard carries no expiry or

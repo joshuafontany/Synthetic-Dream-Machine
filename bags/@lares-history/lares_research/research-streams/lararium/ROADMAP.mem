@@ -134,11 +134,11 @@ Session continued from M13. The `PranalaEdge` → `PranalaEdge` family rename wa
 
 # ''Wiring is declarative, resolved at device-graph load time.'' UEFN: editor connects event pin to function pin, stored as the device graph. Lararium: `papalohe` pranala edges on the instance meme (not hardcoded in the type meme).
 
-# **Single-shot async = `Await(event)<suspends>`.** A `suspends` coroutine awaits one event then continues linearly. No callback nesting. Lararium: `ReactionGraph.subscribeOnce()` — already implemented. Same semantic.
+# ''Single-shot async = `Await(event)<suspends>`.'' A `suspends` coroutine awaits one event then continues linearly. No callback nesting. Lararium: `ReactionGraph.subscribeOnce()` — already implemented. Same semantic.
 
 # ''Game-loop actor tick = synchronous declaration order.'' At 60fps, all wired handlers for a changeset fire in one synchronous tick. No async interleaving within a tick. Lararium: `ReactionEngine.onChangeset()` → `fireSync()` per URI per unique trigger.
 
-# **`@editable` attributes = designer-visible props = ahu slots.** Properties exposed to the level designer in the UEFN editor. Lararium: `ahu` socket URIs on the type meme (`KumuDeviceSpec.slots`).
+# ''`@editable` attributes = designer-visible props = ahu slots.'' Properties exposed to the level designer in the UEFN editor. Lararium: `ahu` socket URIs on the type meme (`KumuDeviceSpec.slots`).
 
 ⏿ ''Orient:''
 
@@ -151,7 +151,7 @@ Session continued from M13. The `PranalaEdge` → `PranalaEdge` family rename wa
   ''Shift 6 — Pranala role vocabulary locked for device spec derivation.''
   `reaction:listenable` = event declaration (OUTPUT). `reaction:subscribable` = handler declaration (INPUT). `reaction:subscription` and bare edges are NOT type-level declarations — they are instance-level wiring annotations. `kumuDeviceSpecFromEdges` maps strictly on role.
 
-  **Shift 7 — `_fireForUri` deduplication invariant.**
+  ''Shift 7 — `_fireForUri` deduplication invariant.''
   `ReactionEngine._fireForUri` MUST collect unique listenable names before calling `fireSync`. Calling `fireSync(uri, listenable)` fans out to ALL subscribers for that `(uri, listenable)` pair. Iterating bindings naively = fires each subscriber once per matching binding = N×M dispatch bug at game-loop rates.
 
 ◇ ''Decide:''
@@ -1208,11 +1208,11 @@ Parity baselines frozen (post DAG-rewire):
 
 Three Docker environments. Each has a distinct purpose and a distinct level of lares/ mutability.
 
-**`dev`** — volume-mounted lares/, tsx watch mode, no build step. Used for local authoring, carrier editing, and pranala debugging. The MCP server here restarts on file change. VSCode connects directly. No ports exposed to the network beyond localhost.
+''`dev`'' — volume-mounted lares/, tsx watch mode, no build step. Used for local authoring, carrier editing, and pranala debugging. The MCP server here restarts on file change. VSCode connects directly. No ports exposed to the network beyond localhost.
 
-**`qa`** — built image, ports exposed for integration testing and live VSCode work sessions. This is the primary surface for MCP integration tests, stdio smoke, and any tooling that needs a stable running server to query. It is also the environment for live carrier authoring sessions where a running server is useful — think of it as the always-on local lab. Tests run against it rather than spawning their own server.
+''`qa`'' — built image, ports exposed for integration testing and live VSCode work sessions. This is the primary surface for MCP integration tests, stdio smoke, and any tooling that needs a stable running server to query. It is also the environment for live carrier authoring sessions where a running server is useful — think of it as the always-on local lab. Tests run against it rather than spawning their own server.
 
-**`prod`** — built image, deployment target only. Serves Claude Desktop, DreamNet cloud backends (elyncia.app and family, cloud-hosted containers, DNS-named services), and any other MCP consumer that needs a stable versioned server. `lares/` is mounted read-only in prod. Write-back is blocked at the runtime level. The prod container speaks only stdio or (later) Streamable HTTP behind auth. No dev tooling, no watch mode.
+''`prod`'' — built image, deployment target only. Serves Claude Desktop, DreamNet cloud backends (elyncia.app and family, cloud-hosted containers, DNS-named services), and any other MCP consumer that needs a stable versioned server. `lares/` is mounted read-only in prod. Write-back is blocked at the runtime level. The prod container speaks only stdio or (later) Streamable HTTP behind auth. No dev tooling, no watch mode.
 
 !!! Client Surface Model
 
@@ -1243,7 +1243,7 @@ No Python in the GitHub Actions pipeline. Python served as a sketch; the golden 
 
 !!! Workflows
 
-**`ci.yml`** — runs on every push and PR:
+''`ci.yml`'' — runs on every push and PR:
 
 # Install Node 22+, install pnpm, install workspace deps.
 # Typecheck all packages (`pnpm -r typecheck`).
@@ -1251,11 +1251,11 @@ No Python in the GitHub Actions pipeline. Python served as a sketch; the golden 
 # Run parity tests (`pnpm --filter @lararium/node test`).
 # Run MCP stdio smoke: spawn `node packages/lararium-mcp/dist/stdio.js` as a child process, send `initialize` + `resources/list` + `tools/list` + `prompts/list` over stdin, assert response shape and meme count against the frozen fixture. This is a real protocol smoke — not a unit call — because stdout purity and JSON-RPC framing are the things most likely to silently regress.
 
-**`parity-drift.yml`** — scheduled weekly:
+''`parity-drift.yml`'' — scheduled weekly:
 
 Regenerates golden fixtures from the Node runtime (not Python — Python is archived). Diffs against `fixtures.golden.json`. Fails if meme counts change without a deliberate fixture update commit. This catches carrier graph drift before it accumulates.
 
-**`docker-qa.yml`** — runs on push to `main` and on release tags:
+''`docker-qa.yml`'' — runs on push to `main` and on release tags:
 
 Builds the `qa` image. Runs the MCP stdio smoke against the container rather than the local build. This is the integration surface — verifies the container behaves identically to the local build.
 
@@ -1300,7 +1300,7 @@ All target outcomes delivered:
 * ✓ `ClosureEntry` frozen at compiler boundary (no external mutation)
 * ✓ Hostful `lar://alias:grant@host/path` URI parsing: `parseHostfulLarUri()`, `isHostfulLarUri()` in `lararium-mesh`; hostful records always virtual, never resolve to lares/ files; `resolveLarUri()` explicitly rejects hostful form
 * ✓ 22 property tests for nested `ahu` `? ->` resolution in `lararium-mesh`
-* ✓ **Grammar fix: `fromSlot` separated from `fromSocket`** — the critical invariant:
+* ✓ ''Grammar fix: `fromSlot` separated from `fromSocket`'' — the critical invariant:
 ** `fromSocket` = the enclosing ahu worksite (always set from the ahu stack)
 ** `fromSlot` = the named outgoing slot on that ahu (set only when pranala carries an explicit `#fragment`)
 ** Before: `#hydrate-hud` on a pranala overrode `#core-hydration` as fromSocket. Now: `fromSocket=#core-hydration`, `fromSlot=#hydrate-hud`
@@ -1685,9 +1685,9 @@ Research foundation: `lares/lararium-node/MEME-STORE-FOUNDATIONS.md`
 Three converging pressures from TW5 tiddler contract, UE5 World Partition schema enforcement, and AST self-hosting grammar define the substrate that must hold before canon MOVE, UCAN, or multi-user presence can land safely.
 
 Three laws:
-* **`meme-immutability`** — a confirmed meme is never mutated; edits produce new URIs; re-seeding replaces the full room snapshot (not individual shapes)
-* **`pranala-schema-binding`** — each pranala family declares an invariant property contract; validation runs at parse time; schema definitions live as memes in `lares/grammars/`
-* **`grammar-as-memes`** — all grammar rules and template definitions live as carrier memes; the TypeScript parser is a thin interpreter; grammar changes take effect after re-seed without a TypeScript rebuild
+* ''`meme-immutability`'' — a confirmed meme is never mutated; edits produce new URIs; re-seeding replaces the full room snapshot (not individual shapes)
+* ''`pranala-schema-binding`'' — each pranala family declares an invariant property contract; validation runs at parse time; schema definitions live as memes in `lares/grammars/`
+* ''`grammar-as-memes`'' — all grammar rules and template definitions live as carrier memes; the TypeScript parser is a thin interpreter; grammar changes take effect after re-seed without a TypeScript rebuild
 
 !!! Priority 8: `/admin/reseed` endpoint ✓ (shipped in Milestone 5)
 
@@ -1733,7 +1733,7 @@ After M7 closed, a full grammar session substantially completed Phase 2 of the g
 
 !!! What was completed
 
-**Grammar meme (`lares/grammars/memetic-wikitext.md`) — sigil registry expanded from 7 → 40 entries:**
+''Grammar meme (`lares/grammars/memetic-wikitext.md`) — sigil registry expanded from 7 → 40 entries:''
 
 * Core 7 preserved and description-updated (`ahu`, `pranala`, `loulou`, `aka`, `kahea`, `iam`, `pranala-header`)
 * Conditional `[C]`: `wai` (if), `mukuwai` (else), `kahawai` (elif)
@@ -1746,7 +1746,7 @@ After M7 closed, a full grammar session substantially completed Phase 2 of the g
 * English aliases (18): `\procedure`, `\function`, `\define`, `\link`, `\shadow`, `\if`, `\else`, `\elif`, `\for`, `\sync`, `\race`, `\rush`, `\branch`, `\tiddler`, `\transclude`, `\guard`, `\task`, `\query`
 * Guest grammar registry: `x-tiddlywiki-filter` (legacy/import), `wikitext-filter` (active native dialect)
 
-**`wikitext-filter` dialect (`lares/grammars/wikitext-filter.md`) — new carrier:**
+''`wikitext-filter` dialect (`lares/grammars/wikitext-filter.md`) — new carrier:''
 
 Forked from `x-tiddlywiki-filter`. Key departures:
 * `[toml:key[value]]` replaces `!!field` (queries `#iam` TOML metadata by type)
@@ -1755,7 +1755,7 @@ Forked from `x-tiddlywiki-filter`. Key departures:
 * `[ahu:id[fragment]]` — queries by ahu fragment anchor
 * Explicit lexical scope model: no ambient dynamic variable; `meme` sigil provides context binding
 
-**`memetic-wikitext-spec.md` — holistic spec complete:**
+''`memetic-wikitext-spec.md` — holistic spec complete:''
 
 * TW5 + Verse/UEFN AST parity map (full operator and sigil coverage)
 * English alias namespace: `\` prefix erased to canonical Hawaiian at parse time; 18 aliases registered
@@ -1766,7 +1766,7 @@ Forked from `x-tiddlywiki-filter`. Key departures:
 * Register system: `[C]` (operator canon), `[SC]` (Synthetic Canon), `[S]` (synthesis/proposal), `[SP]` (speculative/unproven), `[P]` (provisional — session-local candidate, dissolves rapidly)
 * `[CS]` → `[SC]` rename throughout all grammar files
 
-**Research carrier (`packages/lares-core/memes/docs/pono/sigil-grammar-research.md`) — new carrier:**
+''Research carrier (`packages/lares-core/memes/docs/pono/sigil-grammar-research.md`) — new carrier:''
 
 Hawaiian vocabulary grounding, operator rulings log, precedent alignment (TW5/Liquid/MCP/SwiftUI/Flutter/Elm/Verse), full sigil vocabulary table with register, source notes with confidence levels.
 
@@ -1800,7 +1800,7 @@ After the Phase 2 session documented above, a further grammar extension session 
 
 `\const`, `\let`, `\var` → `kau` | `\widget`, `\type`, `\typos` → `kumu` | `\import` → `kahea` | `\constraint` → `pono`
 
-**7th pranala family — `reaction`:**
+''7th pranala family — `reaction`:''
 
 "When source fires event, target awakens." UEFN device graph event subscriptions. `papalohe` is the sugar sigil. Wired in `KNOWN_FAMILIES`, `FAMILY_CONTRACTS`, event loop, `ActiveRegexes`. `trigger` property stored in `payload["trigger"]`.
 
@@ -1808,11 +1808,11 @@ After the Phase 2 session documented above, a further grammar extension session 
 
 `packages/lararium-mesh/src/ast.ts` — `MemeAstNode` union compressed to ''8 node kinds''. 15 typed interfaces collapsed into `SigilNode { sigilName, attrs, body }`. `MetadataNode` removed — `toml`/`iam` are now `SigilNode`. `DynamicNode` added as grammar-meme escape hatch. `#ast-node-types` spec section updated to reflect compressed model.
 
-**Phase 3 parser (`parseMemeCarrier`):**
+''Phase 3 parser (`parseMemeCarrier`):''
 
 New primary API: `parseMemeCarrier(uri, text, grammar?) → MemeAstNode[]`. SAX-internally (`collectEvents`), tree output (`buildAst`), edge projection (`edgesFromAst`). Inline alias erasure via `SigilScan.canonicalName` — no separate `eraseAliases` phase. `parsePranalaEdges` retained as stable edge-only API (avoids circular dep). BOOTSTRAP_SCANS drive the parser before grammar rules load.
 
-**`wikitext-filter.md`:** Added `[edge:family[reaction]trigger[X]]` operators section.
+''`wikitext-filter.md`:'' Added `[edge:family[reaction]trigger[X]]` operators section.
 
 ''Test count:'' 64 → 84 (20 new tests in `grammar-phase2x.test.ts` + `parser-phase3.test.ts` covering `papalohe`, reaction family contracts, Phase 3 tree structure, parity with `parsePranalaEdges`, alias erasure, `DynamicNode`, kau scope).
 
@@ -1953,7 +1953,7 @@ Parse-time `kau` shorthands `carrier` (→ `personal`) and `block` (→ `collect
 
 Device types map to `kumu` (element type definition). UEFN `@editable` properties serialize as `kau` bindings within the kumu body.
 
-**`spatial` family** — locked as 8th pranala family (after `reaction`). Infinite canvas + portals requires spatial containment edges that are navigable, not just organizational. Roles: `contains`, `portal`, `adjacent`, `layer`. Direction: `area -> area` or `area -> portal -> area`. Load-bearing for RPG battlemap / multi-level / interlinked areas milestone.
+''`spatial` family'' — locked as 8th pranala family (after `reaction`). Infinite canvas + portals requires spatial containment edges that are navigable, not just organizational. Roles: `contains`, `portal`, `adjacent`, `layer`. Direction: `area -> area` or `area -> portal -> area`. Load-bearing for RPG battlemap / multi-level / interlinked areas milestone.
 
 <<~/ahu >>
 
@@ -1980,7 +1980,7 @@ These axes run in ''opposite directions'': `act` is the finest-grain phase (Acti
 | watch    | collective  | world          | Space    | persistent  | observe    | Bureaucracy|
 | week     | universal   | cosmos         | Universe | permanent   | aftermath  | Aftermath  |
 
-**`SCOPE_TO_LADDER`**: a `Record<Scope5, Ladder5>` projection lives in `ast.ts`. Scope narrows the ladder to the state-ownership read.
+''`SCOPE_TO_LADDER`'': a `Record<Scope5, Ladder5>` projection lives in `ast.ts`. Scope narrows the ladder to the state-ownership read.
 
 ''TW5 ↔ Verse resolution via OODA-HA pipeline phases:''
 
@@ -2270,7 +2270,7 @@ This is the //why// behind decoupling Chronometer from grammar invariants: `LADD
 
 !!! `kumu` as the widget-tree node type
 
-**The user question: `kumu` as widget? OR parseTree→widgetTree→renderTree?**
+''The user question: `kumu` as widget? OR parseTree→widgetTree→renderTree?''
 
 Answer: Both. `kumu` IS the widget-tree node type definition — and the three-tree pipeline is the correct execution model.
 
@@ -2293,7 +2293,7 @@ The //missing middle layer// is the widget tree. `parseMemeCarrier` produces `Me
 * Widget-tree resolution walks the parse tree, matches each `SigilNode` against the registered `kumu` types, and emits a `WidgetNode { type: KumuDef, resolved: true, props: { title:"Welcome" } }`
 * The render pass walks `WidgetNode[]`, not raw `MemeAstNode[]`
 
-**UEFN device type = `kumu` causal island definition.** A UEFN `creative_device` is:
+''UEFN device type = `kumu` causal island definition.'' A UEFN `creative_device` is:
 * A named type (`kumu`)
 * With `@editable` properties (`kau` bindings in the kumu body)
 * With event ports (`papalohe` edges on the device graph)
@@ -2345,7 +2345,7 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 * ''TOML fence stripping'' — leading ` ```toml ``` ` fence in child ahu body is parsed into fields AND stripped from display `text` in `splitCarrierToTiddlers`; metadata parsed into tiddler fields (type, mime-type, etc.), not shown in body
 
-* **`serializeCarrier` round-trip fix** — now prefers `carrier-text` field (raw on-disk carrier format) over `parent.text` (which is now mixed wikitext with `<$transclude>` blocks). Guard: `if (!parent.text.includes("<$transclude"))` as secondary fallback
+* ''`serializeCarrier` round-trip fix'' — now prefers `carrier-text` field (raw on-disk carrier format) over `parent.text` (which is now mixed wikitext with `<$transclude>` blocks). Guard: `if (!parent.text.includes("<$transclude"))` as secondary fallback
 
 * ''ROADMAP'' — this file; created as a carrier meme at `lar:///lararium-node/ROADMAP`; journey-log format
 
@@ -2362,10 +2362,10 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 * ''M11 P0 — browser manual QA'' — never done; all development unit-test-gated only. First live browser run is the gate
 * ''CSS colour resolution'' — `ahu-styles.md` uses `<<colour primary>>`; needs TW5 palette at boot or hard-coded fallback
-* **`templates/meme.md`** — preloaded but superseded by `generateParentText` for interleaved prose; repurpose or mark vestigial
-* **Non-SOH `.md` files in templates/** — meme-action.md, meme-combat.md, etc. produce console warnings in `build:ui`; add exclusion list
+* ''`templates/meme.md`'' — preloaded but superseded by `generateParentText` for interleaved prose; repurpose or mark vestigial
+* ''Non-SOH `.md` files in templates/'' — meme-action.md, meme-combat.md, etc. produce console warnings in `build:ui`; add exclusion list
 * ''New slot creation UI'' — no UX for adding ahu slots inline (Streams-style Tab/Enter)
-* **`carrier-text` staleness** — when child edited inline, parent tiddler's `carrier-text` in TW5 is stale until next Automerge resync; disk write-back correct (reads from disk via `_writeSlot`), but TW5 VM holds stale copy
+* ''`carrier-text` staleness'' — when child edited inline, parent tiddler's `carrier-text` in TW5 is stale until next Automerge resync; disk write-back correct (reads from disk via `_writeSlot`), but TW5 VM holds stale copy
 
 ---
 
@@ -2466,7 +2466,7 @@ Boot flow was LarariumDoc-first but the catalog oracle tiddler was keyed `CATALO
 
 ⏿ ''Orient:''
 
-  **Named-doc `@`-prefix pattern (crystallised):**
+  ''Named-doc `@`-prefix pattern (crystallised):''
 
   Every named doc IS its own `lar:` URI — the constant is both the slot key and the identity. There is no semantic difference between the doc's address slot and the doc's identity URI.
 
@@ -2511,20 +2511,20 @@ pnpm --filter @lararium/app  build     # ✓ clean
 
 ↺ ''Aftermath / open work (Sprint backlog, updated):''
 
-**Sprint 2 — `@catalog` URI + CatalogDoc tiddlers: ✓ COMPLETE this session**
+''Sprint 2 — `@catalog` URI + CatalogDoc tiddlers: ✓ COMPLETE this session''
 * All six files updated, build clean.
 
-**Sprint 3 — `readBootstrap()` browser peer bootstrap: ✓ COMPLETE (prior session)**
+''Sprint 3 — `readBootstrap()` browser peer bootstrap: ✓ COMPLETE (prior session)''
 * `readCatalogUrl()` → `readBootstrap()`; fragment treated as LarariumDoc URL; `CATALOG_DOC_URI` tiddler read from LarariumDoc to locate CatalogDoc; legacy CatalogDoc-URL fragment kept as backward-compat path; `bootstrap-wanted/bootstrap-here` BC gossip.
 
-**Sprint 4 — Room keys as `lar:` URIs: ✓ COMPLETE**
+''Sprint 4 — Room keys as `lar:` URIs: ✓ COMPLETE''
 * `roomLarUri(slug)` helper added to `lararium-doc.ts` and exported from `@lararium/mesh` barrel
 * `CatalogDoc.rooms` docblock updated: key IS the full `lar:` URI, `id` field retains the slug
 * `lararium-island.ts` seed loop uses `roomKey = roomLarUri(roomId)`
 * Both node peer and browser peer use `roomLarUri(roomId)` for room key construction and lookup
 * Resolver: `@lararium/rooms/{slug}` prefix already covered by `@lararium` virtual route; no extra rule needed
 
-**Sprint 5 — Kill `make reseed` dead target + drop-data: ✓ COMPLETE**
+''Sprint 5 — Kill `make reseed` dead target + drop-data: ✓ COMPLETE''
 * `reseed:` Makefile target removed
 * `drop-data:` target added (`rm -rf .lararium-data`) — explicit local reset with no dead HTTP call
 * `identity-slot.ts` comment corrected to `lar:///ha.ka.ba/bags/@catalog`

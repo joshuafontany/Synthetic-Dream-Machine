@@ -70,12 +70,12 @@ The master cut rides ABOVE the gluing: ''AUTHORITY(safety) ⊥ FLOW(liveness)'' 
 
 The master cut sorts a second pair beneath it: the mesh keeps time on ''two orthogonal clocks'', never one.
 
-* **The CRDT-causal clock** (TS, structural) carries the happened-before poset — Automerge `<counter,
+* ''The CRDT-causal clock'' (TS, structural) carries the happened-before poset — Automerge `<counter,
   actorId>` OpId, `getHeads`/`drifted`, ITC fork/join, the authority-first sync order below. It alone rules
   fork-detection, merge, and revocation ordering; AUTHORITY/safety cannot glue from local sections alone,
   so this clock stays TS-native and web3-local-first.
-* ''The FFZ-recovered rhythm clock'' (py/R, per-stream, no-global-now) rides alongside as *rhythmic
-  annotation* — a cadence recovered from each stream, freshness/decay grain stamped py-side behind the
+* ''The FFZ-recovered rhythm clock'' (py/R, per-stream, no-global-now) rides alongside as //rhythmic//
+//  annotation// — a cadence recovered from each stream, freshness/decay grain stamped py-side behind the
   causal-island boundary. FFZ reads RHYTHMIC, never causal: its LWW total-order MUST NOT drive an authority
   decision.
 

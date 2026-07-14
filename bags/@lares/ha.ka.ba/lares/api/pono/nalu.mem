@@ -130,7 +130,7 @@ The sigils in the grammar layer express //what should happen// — relationships
 concurrency shapes, reactions. The nalu is //when consistent state arrives// — the
 moment all of those relationships become observable.
 
-**The `\tick` sigil (when it lands)** will live at the grammar layer — it will be
+''The `\tick` sigil (when it lands)'' will live at the grammar layer — it will be
 a device lifecycle declaration that says "run this procedure every nalu." The nalu
 itself has no sigil; the `\tick` sigil hooks into the nalu.
 
@@ -162,7 +162,7 @@ The TS layer is the minimal membrane around it — only what TW5 cannot do from 
 └─────────────────────────────────────────────────────┘
 ```
 
-**Inside the wiki (`module-type: startup`):**
+''Inside the wiki (`module-type: startup`):''
 * `nalu-engine` — unified `LarTiddlerChange[]` queue across all bags + frame-aligned drain
   + one `wiki.transact()` per frame + apply-time echo guard (`$tw.lares.isApplyingNalu`)
 * `reaction-router` — `wiki.addEventListener("change")` listener that fires `tm-verse-event`

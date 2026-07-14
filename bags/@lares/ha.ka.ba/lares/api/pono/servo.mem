@@ -123,8 +123,8 @@ for the measured cost, rate, and holding policy.
   its cadence (the derivation IS the update); the servo tracks load between re-anchors.
 
 This is exactly a transport controller's shape — ''derive ≈ slow-start / BDP estimate, servo ≈''
-''AIMD around it''. Both run FLOW(liveness)-side, never AUTHORITY (a governor paces *how much · how
-often*; it never decides //who may//).
+''AIMD around it''. Both run FLOW(liveness)-side, never AUTHORITY (a governor paces //how much · how//
+//often//; it never decides //who may//).
 
 <<~/ahu >>
 
@@ -151,14 +151,14 @@ often*; it never decides //who may//).
 
 WITNESSED across two packages:
 
-* **`mesh/gate-tuning.ts`** — `deriveGate` (the slow loop, EBQ `depth = √(2λS/H)`) · `adaptGate`
+* ''`mesh/gate-tuning.ts`'' — `deriveGate` (the slow loop, EBQ `depth = √(2λS/H)`) · `adaptGate`
   (the lossless flush-depth servo, SHRINK-under-load) · `adaptWindow` (the lossy coalesce-window
-  servo, GROW-under-load, AIMD + deadband + clamp). Composed in **`mesh/capture-engine.ts`** as the
+  servo, GROW-under-load, AIMD + deadband + clamp). Composed in ''`mesh/capture-engine.ts`'' as the
   accumulate cell's own two loops (`COST_EWMA_ALPHA = 0.2`); `H` stays vessel-set policy. The
   `WindowServo` config rides opt-in on `KeyedCoalesceGate` (`mesh/projection-nalu.ts`), self-clocking
   on the prior flush's completion (Nagle/triple-buffer — never reconcile a key while its prior
   reconcile drains).
-* **`mempalace/mine-timeout.ts`** — `adaptiveTimeoutMs` / `recordMineDuration`, the INVERTED polarity:
+* ''`mempalace/mine-timeout.ts`'' — `adaptiveTimeoutMs` / `recordMineDuration`, the INVERTED polarity:
   a kill-timeout that GROWS headroom under load and SHRINKS when mines run fast, `α = 0.2` mirroring
   `capture-engine`'s `COST_EWMA_ALPHA`, clamped `[15 s, 300 s]`, cold-start default until
   `minSamples = 3`. Only completions teach; a killed mine never poisons the EWMA toward the ceiling.

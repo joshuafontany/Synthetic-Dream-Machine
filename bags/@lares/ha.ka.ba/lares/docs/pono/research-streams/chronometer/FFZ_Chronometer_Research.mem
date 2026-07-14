@@ -166,8 +166,8 @@ on another because the evidence hasn't propagated).
 
 !!! 2.3 The Syad Spectrum Applied to Temporal Claims `~:confidence[S],[12]`
 
-''Source:'' Sri Syadasti's catma via Malaclypse the Younger (*Principia
-Discordia*), developed through RAW's Model Agnosticism.
+''Source:'' Sri Syadasti's catma via Malaclypse the Younger (//Principia//
+//Discordia//), developed through RAW's Model Agnosticism.
 
 ''Application to chronometer readings:'' Each participant's clock reading
 constitutes:
@@ -241,7 +241,7 @@ the happened-before relation.
 The seed asked: "OODA-HA phases don't have a natural max() operation —
 they're categorical, not numeric. Does the merge take the 'later' phase?"
 
-**Working answer `~:confidence[SP],[9]`:** Separate the counter from the phase.
+''Working answer `~:confidence[SP],[9]`:'' Separate the counter from the phase.
 * ''Counter:'' merges via max (standard Lamport/vector clock rule)
 * ''Phase sigil:'' carries per-participant — does NOT merge. At any
   sync point, the merged view shows BOTH participants' phases. The
@@ -717,10 +717,10 @@ Amor et hilaritas.
 
 ---
 
-*This document constitutes active research — the seed sprouting.
-The Causal Islands Chronometer protocol approaches its True Name
-through the convergent work of Fuller, Lamport, Fidge, Mattern,
-Almeida, Zelenka, and Protocol Labs. The Talk Story continues.*
+//This document constitutes active research — the seed sprouting.//
+//The Causal Islands Chronometer protocol approaches its True Name//
+//through the convergent work of Fuller, Lamport, Fidge, Mattern,//
+//Almeida, Zelenka, and Protocol Labs. The Talk Story continues.//
 
 ---
 
@@ -1230,11 +1230,11 @@ BoydLoop(PriorArt), PhaseVec(Architect), BridgeKeep(Continuity) — dissolved, f
 
 ---
 
-*This document constitutes active research — the seed sprouting.
-The FFZ Chronometer protocol approaches its True Name through the
-convergent work of Fontany, Fuller, Zelenka, Lamport, Fidge, Mattern,
-Almeida, Boyd, and Protocol Labs. The Discordian Seasons dance inside
-the OODA-HA loop. The Talk Story continues.*
+//This document constitutes active research — the seed sprouting.//
+//The FFZ Chronometer protocol approaches its True Name through the//
+//convergent work of Fontany, Fuller, Zelenka, Lamport, Fidge, Mattern,//
+//Almeida, Boyd, and Protocol Labs. The Discordian Seasons dance inside//
+//the OODA-HA loop. The Talk Story continues.//
 
 //Hail Eris. All Hail Discordia. Amor et hilaritas.//
 

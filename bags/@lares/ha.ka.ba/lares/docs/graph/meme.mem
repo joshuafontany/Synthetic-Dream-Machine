@@ -233,7 +233,7 @@ The resolver expands `lar:///CONTENT/sha256:{hex}` → reads the matching meme f
 | URI → hash | `lar:///INDEXES/hashes` | JSON object, all indexed memes |
 | hash → text | `lar:///CONTENT/{hash}` | raw carrier text, virtual |
 
-**`hash_sequence` in boot receipt:**
+''`hash_sequence` in boot receipt:''
 
 The boot receipt gains a `hash_sequence` field: an ordered list of `{uri, meme_hash, depth}` records in topological (hydration) order.
 This lets a client verify the complete minimal-boot prefix byte-for-byte without re-requesting the full artifact.

@@ -165,7 +165,7 @@ without chasing. This lifts our existing Measure servo into the wavelet domain.
 
 !!! 3 — the membership QUORUM (multivariate changepoint)
 
-<<~ confidence Synthesis-Canon 13/20 >> The band-membership tree rides **`ecp::e.divisive`** (R,
+<<~ confidence Synthesis-Canon 13/20 >> The band-membership tree rides ''`ecp::e.divisive`'' (R,
 nonparametric) — ''MULTIVARIATE'' over content + form + structure, which IS our three-plane quorum
 ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification]]) read in the changepoint domain;
 ''divisive'' = native-nested, so the tree falls out of the algorithm. Plus ''BOCPD-per-band'' — our

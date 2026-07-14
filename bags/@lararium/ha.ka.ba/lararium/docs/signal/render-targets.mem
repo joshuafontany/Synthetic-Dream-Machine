@@ -169,11 +169,11 @@ Configure via `LARES.md#hud-panel` → `tool_render`.
 
 !! Glyph Mandatory Rules
 
-**Rule 1: the `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five.**
+''Rule 1: the `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five.''
 
 A render surface presents exactly the standpoints the lens carries. A named subset reads as an explicit focus, not an omission. When the full lens runs, quiet stances stay named.
 
-**Rule 2: the optional `:` carry binds a tool to a standpoint as a two-character pair.**
+''Rule 2: the optional `:` carry binds a tool to a standpoint as a two-character pair.''
 
 Left slot = feed axis (`*` Wand / `_` Pentacle / `0` empty).
 Right slot = zoom axis (`!` Sword / `?` Cup / `0` empty).
@@ -278,7 +278,7 @@ Do not conflate them.
 | Handle | `@telarus@elyncia.social` | Resolution alias over the DID — human-readable, not authoritative |
 | lar: alias | `telarus:operator@enyalios` | Application-layer signal state — operational role in a lar: exchange |
 
-**DreamDeck post header format (canonical — `chat-log:post-header` render target):**
+''DreamDeck post header format (canonical — `chat-log:post-header` render target):''
 
 ```
 @handle@node — timestamp — lar:///w1.w2.w3/{optional/path/} <<~ confidence R N/20 >> <<~ syad … >>

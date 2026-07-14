@@ -53,7 +53,7 @@ a coordinate stays exactly as fresh whenever it gets read, because it counts not
 
 !! The spine ~ a membership TREE, never a tick-count (the keystone, 2026-06-30)
 
-**A grain names NESTED MEMBERSHIP — a containment PATH, never a count.** `Theme ⊃ Arc ⊃ Measure
+''A grain names NESTED MEMBERSHIP — a containment PATH, never a count.'' `Theme ⊃ Arc ⊃ Measure
 ⊃ Beat ⊃ Pulse`: each band declares //which// container a moment sits inside, never //how many//
 ticks have elapsed. <<~ confidence Synthesis-Canon 16/20 >> The moment a band hardens into a
 count that scales palace-wide, it manufactures a global now — the un-pono failure
@@ -389,12 +389,12 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
   field doc); for a worldline clock it must re-key on the handle (lar:///ha.ka.ba/lararium/api/agent-worldline#open).
   `ffzCompare` stays a rhythmic total-order — causal never rides it (it rides Automerge
   inside a CRDT, or the edge-DAG on a worldline), so no concurrency verdict is owed here.
-* **`ExchangeState` FSM** — a held exchange (`agent-responded`, awaiting grounding) carries
+* ''`ExchangeState` FSM'' — a held exchange (`agent-responded`, awaiting grounding) carries
   the same clock tuple as an unadvanced one; the FSM field lives on `PresenceSlot`, not in
   the clock. Grounded in Clark-Brennan · Ginzburg DGB · MCP SEP-1686 · A2A `input-required`.
-* **`tool-context` profile-selector placement** — `SessionTiddler` vs a new
+* ''`tool-context` profile-selector placement'' — `SessionTiddler` vs a new
   `ToolConnectionTiddler` (depends on whether one session spans multiple tool-connections).
-* **`lar_ffz` capture-path wiring** — the address SERIALIZER + Claude-agent profile stand
+* ''`lar_ffz` capture-path wiring'' — the address SERIALIZER + Claude-agent profile stand
   built/tested (worldline-clock.ts); the live STAMP needs a stateful transcript pass mapping
   each drawer back to its `(turn, segment)` position (mempalace chunks ≠ transcript segments),
   threaded to the writeback the way the handle rode the staged filename. The grain is RESOLVED

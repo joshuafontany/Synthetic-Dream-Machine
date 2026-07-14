@@ -52,9 +52,9 @@ The product earns a clean word: a ''reading'' --- a lensed interpretation of a r
 
 Prism supplies the ''target slot'' the self-applied lenses lack, and reuses the `-> target` aim that `conformance` already carries:
 
-* **`conformance`** --- reads the OODA-HA decision-loop band: where the content's loop ran, skipped, or never closed. (`lar:///ha.ka.ba/lares/api/pono/conformance`)
-* **`syad`** --- refracts the content into standpoint bands: the five perspectives read the same content, each measuring within its own frame. (`lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`)
-* **`mu`** --- reads the content through the four tools as cognitive facets. (`lar:///ha.ka.ba/lares/api/mu/the-four-tools`)
+* ''`conformance`'' --- reads the OODA-HA decision-loop band: where the content's loop ran, skipped, or never closed. (`lar:///ha.ka.ba/lares/api/pono/conformance`)
+* ''`syad`'' --- refracts the content into standpoint bands: the five perspectives read the same content, each measuring within its own frame. (`lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`)
+* ''`mu`'' --- reads the content through the four tools as cognitive facets. (`lar:///ha.ka.ba/lares/api/mu/the-four-tools`)
 
 A lens reads its tool-bind through the `syad` `:` grammar (`syad:🏛️:*!`); each lens also runs alone.
 

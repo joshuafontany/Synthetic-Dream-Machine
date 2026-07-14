@@ -42,8 +42,8 @@ across S7, CAPABILITY-LAYER, dreamnet-architecture, and federation.
 ''public true-name'' — the content-address of its grammar (`sha256(engine + memes + plugins)`,
 the genesis CID) — ''shared DreamNet-wide, ratcheting by engine-epoch, checked into git''; it
 holds no secret. The place's ''secret root'' stays ''minted per-founding'' (device CSPRNG,
-gitignored), never derived from the public content. The public true-name names *which
-grammar/lineage a place speaks*; the private root names //who holds it//. Fusing them — rooting
+gitignored), never derived from the public content. The public true-name names //which//
+//grammar/lineage a place speaks//; the private root names //who holds it//. Fusing them — rooting
 a secret in the public content-seed — would hand every git-cloner the same root (collapse).
 Two ratchets ride these faces, never conflated: a ''public grammar ratchet'' (engine-epochs,
 shared, everyone upgrades) and a ''private key ratchet'' (forward-secrecy, per-place).
@@ -72,7 +72,7 @@ stands ''PROPOSED'' until that settles.
 <<~Scale DreamNet "holds/the super-mesh — the widest principal; no central authority, trust by treaty" >>
 
 ''Nameless principals, not numbered planes'' (operator ruling 2026-06-24). Each scale stands
-as a **nameless entity carrying a `#has`-stack of capabilities** (`has-stack-ontology`) that
+as a ''nameless entity carrying a `#has`-stack of capabilities'' (`has-stack-ontology`) that
 ''contains the scale beneath it'': a principal ''#has'' a stack of the principals below — a
 person #has a stack of vessels; a cabal #has a stack of persons. The scales nest ''recursively''
 and scope ''by reach, relatively'' — never by an absolute global plane-index. Prior art rules the
@@ -143,8 +143,8 @@ secret. The canon already shapes it — the `DeviceDelegationTiddler` (S7.1 ~ th
 device-delegation | {operatorDid} | {deviceDid} | {deviceVerifyingKey} | {issuedAt}
 ```
 
-The operator root ''signs'' this edge; any peer ''verifies'' *"Device D speaks as
-Operator O"* with zero network calls (`verifyDeviceDelegation`). The edge wears the
+The operator root ''signs'' this edge; any peer ''verifies'' //"Device D speaks as//
+//Operator O"// with zero network calls (`verifyDeviceDelegation`). The edge wears the
 ocap golden rules (`orichalcum-capabilities`): ''attenuation only'' (each hop narrows,
 never broadens), ''nested time bounds'', ''verified UP to a locally-anchored root at''
 ''invocation'' — never at delegation time. ''Designation carries authority''; an unsigned
@@ -213,14 +213,14 @@ for stable and unstable petnames both.
 
 A petname (#capability-and-petnames) wears a second office: a ''veil'' — a handle/glamour a vessel
 holds //over// its true key. The key stays veiled; the ''veil carries the reputation''. Shadowrun's
-pre-SIN Shadowtalk runs the pattern bare — a handle ("Fastjack") earns cred because *the board
-remembers it*, never because a registry vouches it; Mage's Digital Web names the same move, an
+pre-SIN Shadowtalk runs the pattern bare — a handle ("Fastjack") earns cred because //the board//
+//remembers it//, never because a registry vouches it; Mage's Digital Web names the same move, an
 ''Icon worn over the Avatar''. So ''anon stands a first-class veiled room, never a momentary''
 ''scaffold'': a vessel MAY live under a veil — federate, accrue standing — without ever unveiling its
 core.
 
-''Reputation rides an annotated thread, never a score.'' A veil's standing grows as *other veils
-annotate it* — signed vouches and call-outs threaded inline (the Shadowtalk reply), local and
+''Reputation rides an annotated thread, never a score.'' A veil's standing grows as //other veils//
+//annotate it// — signed vouches and call-outs threaded inline (the Shadowtalk reply), local and
 read-as-of-last-sync — never a global number a registry keeps. A score centralizes and games; the
 thread stays local, plural, contestable (`#has`-stack, no-global-now). ''No SIN ever grows'' —
 identity never collapses to a universal index; the veil + the capability stay local.
@@ -236,8 +236,8 @@ identity never collapses to a universal index; the veil + the capability stay lo
 ''The boundary rule'' (four blind domains converged — crypto key-rotation · persona-unlinkability ·
 immune/fungal commitment · institutional ceremony, 2026-06-25): a crossing earns a ''HOLD/refound''
 only when severance must run ''irreversible AND jointly-witnessed AND costly AND unlinkable''; every
-other crossing ''LIFTs'' — one key climbs over time. The test reads as one question: *does the
-crossing need to destroy the way home, or merely grant a wider room?*
+other crossing ''LIFTs'' — one key climbs over time. The test reads as one question: //does the//
+//crossing need to destroy the way home, or merely grant a wider room?//
 
 <<~ranks crossing anon→known-user ~ LIFT — a first signed interaction mints a petname, trust climbs from zero -> known-user→operator ~ the WITNESSED ceremony — the signed edge ENACTS it, never an auto-grant -> ongoing-standing ~ the LEASE governs (#the-lease), soft-state even after the crossing >>
 
@@ -295,7 +295,7 @@ too dear for an honest newcomer — wrong axis. The gate sets a ''slope'': near-
 ruinous for the faker (the handicap principle; Spence's differential cost). The system never charges
 an entry fee; it makes //cheating// expensive.
 
-**`rb > c` — the voucher supplies the `r`.** Admission gates on relational-weight × benefit clearing
+''`rb > c` — the voucher supplies the `r`.'' Admission gates on relational-weight × benefit clearing
 the solo cost (Hamilton's rule and immune two-signal costimulation, one tongue). A capability alone
 (signal-1) reads cheap and forgeable; the ''vouch'' (signal-2) rides gatekept by an already-licensed
 member. ''Absent a voucher, the applicant ANERGIZES'' — it draws no ban; it ''stays at the floor''
@@ -394,8 +394,8 @@ BBS per-verifier + Semaphore · Merton + Francis for the warning.
 The DreamNet public plane (@oracle — the genesis grammar, public memes, the catalog schema) reads
 OPEN to all, anon included, and writes ONLY to the ''kahu-cabal''. The resolution ''splits the semantics''
 rather than gate a mutable CRDT for public read (operator insight + scout-grounded, 2026-06-25):
-automerge-repo's `sharePolicy` gates the OFFER alone — *"the share policy will not stop a document
-being requested by another peer by its DocumentId"* — it never inspects an incoming change, so a
+automerge-repo's `sharePolicy` gates the OFFER alone — //"the share policy will not stop a document//
+//being requested by another peer by its DocumentId"// — it never inspects an incoming change, so a
 shared mutable @oracle CRDT ''cannot'' gate writes without Beelay.
 
 ''Operators and the kahu-cabal part as two groups'' (operator ruling 2026-06-25): every ''operator''
@@ -450,8 +450,8 @@ discipline (#the-oracle-plane). Publishing a face reveals ''nothing'' of the vau
 recogniser verifies the signature against the embedded key and consults ''no registry.'' This is Mazières'
 Self-certifying File System (1999) — `HostID = hash(pubkey)`, so the name carries the key and needs no PKI —
 restated with Ed25519; did:key and a Nostr `npub` are the same core. ''Zooko's triangle resolves:'' the
-identifier is secure-and-decentralised //because it IS the key//, memorable *because each recogniser keeps a
-LOCAL petname*. No SIN, no directory to capture.
+identifier is secure-and-decentralised //because it IS the key//, memorable //because each recogniser keeps a//
+//LOCAL petname//. No SIN, no directory to capture.
 
 ''Two steps, never conflated:'' a card certifies ITSELF (a valid signature by the key it names), THEN the
 petname check asks whether that key is the one you know. A valid card can still be a stranger; only the local
@@ -466,8 +466,8 @@ which doubles as a weak sybil filter). Nostr runs the same shape — kind-0 sign
 ''relay-broadcast, closes Nostr's central failure: relay centralisation.''
 
 ''THE REGISTRY-BACK-DOOR LAW'' (the survey's hardest lesson): keep human-readable naming ''STRICTLY LOCAL''
-(petnames) or ''strictly optional and replaceable'' — *the moment a global name→key lookup becomes mandatory,
-you have rebuilt the registry.* Every system that made first-contact convenient re-added a directory:
+(petnames) or ''strictly optional and replaceable'' — //the moment a global name→key lookup becomes mandatory,//
+//you have rebuilt the registry.// Every system that made first-contact convenient re-added a directory:
 NIP-05 → DNS, AT-proto handle → DNS/PLC, ENS → ledger. ''A convenience layer may exist; it may NEVER be''
 ''load-bearing.'' The vouch-lineage (#the-siege-gate) carries standing; a name never carries authority.
 

@@ -50,7 +50,7 @@ These travel ''out-of-band'' (a secure channel you control), never the public re
 ''Model B — a distinct key per device, delegated in (pending the sync layer).'' Each vessel forges its //own// key; the founder receives the joinee's contact-card and delegates that DID into the group (`runDeviceAdmitAccept` — built, founder-side correct). But a joining device needs ''two'' things to read the group, and only one reaches it from JS today:
 
 # the ''key-chain + membership'' (CGKA + delegation ops) — JS-available via `eventsForAgent` / ingest; necessary but not sufficient; and
-# the encrypted **Document content** itself — which Keyhive moves via **sedimentree** (content-addressed strata sync) under **Beelay** (the auth-sync RPC; zero-knowledge server). **Both are Rust-only — not exposed in the `keyhive_wasm` JS surface** (and the `automerge/beelay` repo is dead; the live code is `beelay-core` inside the keyhive monorepo).
+# the encrypted ''Document content'' itself — which Keyhive moves via ''sedimentree'' (content-addressed strata sync) under ''Beelay'' (the auth-sync RPC; zero-knowledge server). ''Both are Rust-only — not exposed in the `keyhive_wasm` JS surface'' (and the `automerge/beelay` repo is dead; the live code is `beelay-core` inside the keyhive monorepo).
 
 So a fresh-key join still fails the boot membership gate because the Document never arrives. Closing it from JS means transporting the document ourselves — ship an `Archive` (`Archive.toBytes` → `ingestArchive`) or the ciphertext blobs over our own transport — or binding Beelay to WASM. The cross-peer admit + offline-device work is ''actively in-flight'' in the keyhive repo (PRs #205 prekey-archives / offline-admit, #116 doc-sync listener, #110 reachable-docs). The grain (operator ruling 2026-06-23): ''roll our OWN temporary Model B'' rather than wait on the pre-alpha Rust branch. A distinct per-vessel key, admitted by a signed delegation edge, with an ''envelope key-handoff'' (libsodium sealed-box) so the joinee decrypts WITHOUT Beelay — behind the four-port swap surface so Keyhive / BeeKEM / Beelay slot in later with low churn. That keying-and-swap model stands stated whole at <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#four-port-swap >> (and #encrypt-from-start); here it carries only the federation consequence. <<~ confidence Provisional-Synthesis 7/20 >> Model A holds only until Model B lands. Track under <<~ loulou lar:///ha.ka.ba/lares/docs/lares/mesh-governance >>.
 
@@ -99,8 +99,8 @@ one human" stays the user's private secret, never a published graph, riding no w
 
 ''Two acts, not one — the vouch stays separable.'' A ''CabalGroup'' reads as a multi-principal Circle
 (several humans' PersonaGroups mutually bound). Joining it fires an AUTHORIZATION act — a Keyhive
-delegation, //"this vessel may now read the cabal."// A VOUCH — *"I stake my standing that this peer
-belongs"* — rides as a SEPARATE act, and the two never fuse: a member you let read may carry no stake, a
+delegation, //"this vessel may now read the cabal."// A VOUCH — //"I stake my standing that this peer//
+//belongs"// — rides as a SEPARATE act, and the two never fuse: a member you let read may carry no stake, a
 peer you stake on may hold no cap. PGP keeps exactly this split — key-validity (public, exported) in one
 store, owner-trust (private, never exported) in another, and one signs many keys at owner-trust zero.
 Folding "I delegated to you" into "I vouch for you" names the confused-deputy bug (Miller, ocap), never a
@@ -157,11 +157,11 @@ A vessel never joins by pulling a repo; it joins by receiving — deliberately, 
 
 A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the same `lares wake --install` / `--admit`, with these surface notes:
 
-* **`lares` global** — `--install`/`--admit` writes a `lares.cmd` shim beside the bin (on Unix it symlinks into `~/.local/bin`). Add that directory to PATH so `lares` runs bare. The link step is self-contained — it does not depend on `pnpm setup`/`PNPM_HOME`.
+* ''`lares` global'' — `--install`/`--admit` writes a `lares.cmd` shim beside the bin (on Unix it symlinks into `~/.local/bin`). Add that directory to PATH so `lares` runs bare. The link step is self-contained — it does not depend on `pnpm setup`/`PNPM_HOME`.
 * ''Python'' — the integration check resolves `python3` → `python` → `py`, so Windows' `python`/`py` is found.
 * ''The wake hook is portable'' — it runs node exec-form (`node lares-wake-hook.mjs`), no shell, identical on Windows and Unix.
 * ''mempalace's keep-hooks are bash'' (`Stop` / `PreCompact`) — on native Windows they need ''Git for Windows'' (which Claude Code already requires for its bash tool). With Git Bash present, `lares wake --claude` wires them as `bash "<path>"`; without it, the verbatim keep-leg stays dark until Git for Windows is installed.
-* **`lares reconcile`** (the dev restart) uses `lsof`/`ss` — Unix-only; it does not run during a normal wake, but the restart loop awaits a Windows (netstat/taskkill) path.
+* ''`lares reconcile`'' (the dev restart) uses `lsof`/`ss` — Unix-only; it does not run during a normal wake, but the restart loop awaits a Windows (netstat/taskkill) path.
 
 <<~/ahu >>
 

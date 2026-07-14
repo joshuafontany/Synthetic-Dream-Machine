@@ -46,10 +46,10 @@ island mounts from.
 Recipes split by bag tier, each plane its own home:
 
 * ''System wiki-recipes'' (`@lares` wiki, `@lararium` wiki) live in the
-  **`@oracle`** runtime-system-island plane — protocol substrate, seeded at
+  ''`@oracle`'' runtime-system-island plane — protocol substrate, seeded at
   genesis beside the system bag→doc oracle. `@lares`/`@lararium` are DreamNet
   ''system bags''; their recipes are substrate, not user composition.
-* **User wiki-recipes** live in the user's **`@catalog`** (registry), minted
+* ''User wiki-recipes'' live in the user's ''`@catalog`'' (registry), minted
   per-wiki by init-wiki and read+written via the catalog accessor (access≠load).
 
 The bag-oracle reach runs ''two-source'': system bags resolve from the
@@ -63,9 +63,9 @@ via recipe-watch (composition class), with the reboot-pending alert as the
 fallback for islands that sleep through it — see engine-watch for the epoch
 class, where the alert stays the permanent mechanism.
 
-*(Pointer-plane split + system-recipe seeding: ruled; code-enactment tracked
-at the live handoff torch. Source-file `recipe.ts` carries the schema today;
-the plane routing lands in `genesis-doc` / `base-doc` / `catalog-accessor`.)*
+//(Pointer-plane split + system-recipe seeding: ruled; code-enactment tracked//
+//at the live handoff torch. Source-file `recipe.ts` carries the schema today;//
+//the plane routing lands in `genesis-doc` / `base-doc` / `catalog-accessor`.)//
 
 <<~/ahu >>
 

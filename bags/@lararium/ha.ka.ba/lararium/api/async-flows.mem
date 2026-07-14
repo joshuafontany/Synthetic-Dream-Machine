@@ -68,7 +68,7 @@ Precedent: `gh run watch --exit-status`, `kubectl wait --for=condition --timeout
 ''Terminal-once:'' once a job reaches completed/failed/cancelled it never moves
 again. ''Poll is authoritative'' (not pushed notifications, which drop) — non-terminal
 = keep working, terminal = stop + fetch the result. `status` emits a server-side
-**`pollInterval`** (ms) so an agent polls without overloading (the MCP async-task
+''`pollInterval`'' (ms) so an agent polls without overloading (the MCP async-task
 shape). The result is fetched after terminal, by id.
 
 <<~/ahu >>
@@ -83,7 +83,7 @@ One progress event stream; the existing renderer splits it:
 
 * ''TTY (human):'' a redrawing bar / spinner / elapsed-heartbeat on ''stderr''
   (`\r` rewrite, animation only when isatty) — stdout stays clean.
-* **off-TTY / `--json` (agent):** **NDJSON progress lines** (Terraform `apply_progress`
+* ''off-TTY / `--json` (agent):'' ''NDJSON progress lines'' (Terraform `apply_progress`
   + BuildKit `rawjson` shape), result alone on stdout:
 
 ```text
@@ -138,7 +138,7 @@ One progress event stream; the existing renderer splits it:
   and polls; it never holds a blocking call across its context.
 * `wait --timeout` returns ''"PROCESSING: job <id> still running (original ask: …)"''
   — carrying the context so the agent needn't hold it.
-* **`--yes` / `--force`** (an agent cannot type `y`; a prompt-hang kills its workflow).
+* ''`--yes` / `--force`'' (an agent cannot type `y`; a prompt-hang kills its workflow).
 * ''Parseable error CODES, not prose'' (`not-found`, not "Error occurred").
 
 <<~/ahu >>
@@ -153,7 +153,7 @@ The three pieces already exist:
 
 ''Implementation order'' (write-toward; confirm interfaces first — see caveat):
 # Make long ops ''return the request-id fast'' (+ `--detach`); default TTY attaches to `watch`.
-# Add **`lares status|watch|wait|cancel <id>`** over the durable-result + daemon-job stores.
+# Add ''`lares status|watch|wait|cancel <id>`'' over the durable-result + daemon-job stores.
 # Emit the ''progress event stream'' (job → NDJSON on stderr / bar on TTY; result on stdout); route mempalace `--daemon --background` for the heavy mines + surface its `daemon jobs/wait`.
 # ''Exit-124 timeout'' + the semantic codes + `pollInterval` in `status`.
 

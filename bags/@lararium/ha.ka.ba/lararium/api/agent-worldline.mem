@@ -107,10 +107,10 @@ holds; else keep a property-edge:
 
 <<~ranks reify queryable-attrs ~ you'd index a relation property (relations index poorly → factor to a node) -> n-ary ~ binds >2 arms (parent · child · driver · correlation · times); an edge holds only two -> provenance-of-provenance ~ the fact "A spawned B" needs its own recording-time · author · validity >>
 
-A spawn/handoff trips all three → **node**. A structural link (`agent —memberOf→
-wing`) stays an edge. The **PROV gift**: every influence relation has a *qualified
-twin* — `actedOnBehalfOf` ⇄ **`prov:Delegation`**, `wasInformedBy` ⇄
-**`prov:Communication`** — so the reified node IS a `prov:Delegation` (spawn) /
+A spawn/handoff trips all three → ''node''. A structural link (`agent —memberOf→
+wing`) stays an edge. The ''PROV gift'': every influence relation has a //qualified//
+//twin// — `actedOnBehalfOf` ⇄ ''`prov:Delegation`'', `wasInformedBy` ⇄
+''`prov:Communication`'' — so the reified node IS a `prov:Delegation` (spawn) /
 `prov:Communication` (handoff) instance. ''PROV-AGENT'' (arXiv 2508.02866) extends
 PROV for exactly this — direct prior art the model matches 1:1.
 
@@ -249,7 +249,7 @@ keyed per `palace_key = sha256(path)` — each fork its own queue/token/KG/tunne
 ''handle gains a branch-frontier component'' so same-session forks stop colliding on the
 shared `run` handle.
 
-**Injection = the rhizome — the `prov:Communication` leg, lit at last.** Because
+''Injection = the rhizome — the `prov:Communication` leg, lit at last.'' Because
 `SendMessage` lets //both// operator and node redirect any running spirit — even a grandchild
 the parent never spawned — the worldline is a ''rhizome, not a tree''. A mid-flight
 injection lands a happened-before edge ''mid-execution'': a merge-point that is ''not'' a
@@ -269,7 +269,7 @@ project to disk as markdown memes), so it never touches this plane (the two-doma
 sharpened). A `prov:Communication` edge stamps at the injection-point, keyed turn-DAG;
 ''Interval Tree Clocks'' (fork = spawn · event = inject · join = handback) model the
 worldline clock where plain vector-clocks bloat under spawning agents — vendor it. The
-cap-handoff rides **`@endo/captp` over the daemon UDS** (`@endo/far` = the attenuated
+cap-handoff rides ''`@endo/captp` over the daemon UDS'' (`@endo/far` = the attenuated
 reference). ''Migration is cheap:'' the FFZ/DAG over past sessions is a ''re-derivable''
 ''projection'' — nuke-and-pave + re-harvest from the transcripts (the source of truth), so no
 forward-retrofit is owed (this answers the kept retrofit-migration dissent). And ''install''
@@ -384,7 +384,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
   `mempalace` CLI subcommand); the disconnected MCP blocks a code-path reified
   `prov:Delegation` node. The projected metadata edge (`lar_parent_handle`/`lar_root_handle`)
   carries who-drove-whom meanwhile, single-source; wire the node when the KG is code-reachable.
-* **Chain `parent_edge_id`** or a grandchild generation goes dark.
+* ''Chain `parent_edge_id`'' or a grandchild generation goes dark.
 * ''Ephemeral blind-dir hardening'' — sandbox tiers · cleanup · resource/leak
   containment · the egress fork (#lifecycle) — under a dedicated research pass.
 

@@ -25,7 +25,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions"
 
 The design-history record for memetic-wikitext. Each entry tracks a gap (missing capability), tension (two correct pulls in friction), or conflict (a hard incompatibility). Resolved entries preserve how each item closed; open entries sync to the submission's ''Annex B'' (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#annex-open`).
 
-Family assignments here read post the 2026-06-05 transclusion reorg: `aka` (frozen) and `kahea` (live) carry **`family:transclusion`**, not the older observe / dataflow assignments. `wai` retired into `heihei`.
+Family assignments here read post the 2026-06-05 transclusion reorg: `aka` (frozen) and `kahea` (live) carry ''`family:transclusion`'', not the older observe / dataflow assignments. `wai` retired into `heihei`.
 
 <<~/ahu >>
 
@@ -81,7 +81,7 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 !!! Tension 1 — `aka`: "passive inclusion" vs "frozen transclusion"
 
-An older docs guide warned "avoid treating `aka` as implying live invocation." Correct but incomplete: `aka` performs frozen (shadow) transclusion — it carries **`family:transclusion`** pressure with read-only render-time embedding, not pure passivity. `aka` = frozen (read-only, non-propagating); `kahea` = live (subscription-fresh, propagating). The distinction reads as propagation and fidelity, not presence/absence of transclusion. Both sit in the `transclusion` family (page surface), distinct from `dataflow` value-wires (canvas).
+An older docs guide warned "avoid treating `aka` as implying live invocation." Correct but incomplete: `aka` performs frozen (shadow) transclusion — it carries ''`family:transclusion`'' pressure with read-only render-time embedding, not pure passivity. `aka` = frozen (read-only, non-propagating); `kahea` = live (subscription-fresh, propagating). The distinction reads as propagation and fidelity, not presence/absence of transclusion. Both sit in the `transclusion` family (page surface), distinct from `dataflow` value-wires (canvas).
 
 !!! Tension 2 — compile-time cycle detection vs render-time recursion guard
 

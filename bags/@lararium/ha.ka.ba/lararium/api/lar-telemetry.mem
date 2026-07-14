@@ -151,7 +151,7 @@ summons/outcome rail slice-1 `recall` proved).
 # ''Read'' — the @daemon VM wikifies the turn through the instrument `\procedures`;
    `$wikify output="parsetree"` (or `wiki.renderTiddler("text/html")` + read the
    `data-*` attributes) yields the structured gradient readings.
-# **Hold** — @daemon **`enqueueNalu`**s the readings: they sit on the shared queue,
+# ''Hold'' — @daemon ''`enqueueNalu`''s the readings: they sit on the shared queue,
    scheduled, undelivered. //The swell builds.// (`nalu` = the changeset wave;
    `lar:///ha.ka.ba/lares/api/pono/nalu`.)
 # ''Flush on the next nalu'' — the frame-aligned drain delivers the readings
@@ -160,8 +160,8 @@ summons/outcome rail slice-1 `recall` proved).
 
 <<~ confidence Synthesis-Canon 15/20 >> The hold is load-bearing: it sequences the
 reading ''after'' the verbatim drawer that the mine leg lands, so the `lar_*`
-annotation finds its drawer present. *The nalu is the pulse that makes "eventual"
-concrete* — "hold" ≡ `enqueueNalu`, "flush" ≡ the wave.
+annotation finds its drawer present. //The nalu is the pulse that makes "eventual"//
+//concrete// — "hold" ≡ `enqueueNalu`, "flush" ≡ the wave.
 
 ''The nalu delivers in-wiki; the drawer lives across the shore.'' The wave makes
 the readings consistent inside @daemon's wiki; the cross-shore drawer write rides a

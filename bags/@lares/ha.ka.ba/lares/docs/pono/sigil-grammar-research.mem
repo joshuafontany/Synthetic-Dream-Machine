@@ -42,8 +42,8 @@ explicit avoidance of direct natural-language overwrite.
 
 !!! Operator rulings confirmed
 
-# `[C]` **`wai`** is the conditional opener. Meaning: water / liquid / the elemental source flow.
-# `[C]` **`mukuwai`** is the fallback/else branch. Meaning: mouth of the water / where flow terminates.
+# `[C]` ''`wai`'' is the conditional opener. Meaning: water / liquid / the elemental source flow.
+# `[C]` ''`mukuwai`'' is the fallback/else branch. Meaning: mouth of the water / where flow terminates.
 # The choice deliberately moves away from English-calque pressure (rejecting `inā` = "if").
 # ''Chaining model confirmed:'' `<<~ kahea [another-grammar-command] ...>>` is valid. Sigils compose.
    Sugar forms (`kahea`, `loulou`, etc.) may be re-used in compound positions; they do not lock out
@@ -369,7 +369,7 @@ When editing grammar meme or parser:
 *** `puka` → `rush`: first wins, rest cancelled (emerge/break through)
 *** `lele` → `branch`: fire and forget (leap/fly off); only one that produces compile-time graph artifact (pranala family:message)
 
-# **`message`/`constraint` sugar sigils** — families exist; no sigil sugar yet.
+# ''`message`/`constraint` sugar sigils'' — families exist; no sigil sugar yet.
    Candidates: `hau` (gift/reciprocal) for message, `pono` (rightness/rule) for constraint.
    Requires invariant loci before registration.
 
@@ -379,7 +379,7 @@ When editing grammar meme or parser:
 # ''Heritage community consultation'' — no canonical public vocabulary located. Hold all `[SC]`
    sigils subject to revision if UH Hilo / Pūnana Leo community guidance emerges.
 
-# **Bare `<<`** — reserved; TW5 macro-call compat deferred. Do not allocate.
+# ''Bare `<<`'' — reserved; TW5 macro-call compat deferred. Do not allocate.
 
 # ''Chained command composition'' — `<<~ kahea [other-command] ...>>` valid intent confirmed;
    parser rule for nested command words not yet written.

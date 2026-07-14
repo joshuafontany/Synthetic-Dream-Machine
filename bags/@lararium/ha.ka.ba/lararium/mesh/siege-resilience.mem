@@ -46,7 +46,7 @@ A static defence loses a 500-year siege by arithmetic: given enough time, a cree
 
 <<~moves static-threshold-defence/eventually-falls -> proactive-refresh/expires-every-theft on/g(0)=0-re-randomization if/refresh-faster-than-creep do/reset-the-window-not-win-the-fight >>
 
-**Disambiguation — this re-key/re-share `epoch` = the liveness LEASE.** The refresh window's
+''Disambiguation — this re-key/re-share `epoch` = the liveness LEASE.'' The refresh window's
 `epoch` (the AUTHORITY clock, #two-clocks — re-key / re-share, max-register, coordinator-free)
 names the liveness ''lease'' (it bounds //who may still act//), DISTINCT from the CRDT-history
 ''compaction''-epoch (the snapshot-restart that bounds //state-history growth//) at
@@ -66,7 +66,7 @@ The refresh fires on a ''scheduled FLOOR plus event-triggers'', never on a globa
 
 The refresh itself runs ''CHURP-style'' — cheap dynamic-committee handoff, so the committee may change shape between rounds without a costly full re-deal. The schedule floor stays ''LOCAL per committee'' — no global tick, FFZ-aligned (no global now; each committee keeps its own clock and event-triggers, see [[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]]).
 
-**Tuning the window `T`.** Set the floor against measured detect-and-evict time, never a guessed constant: `T ≤ (t − margin) / λ / k`, where `λ` measures the adversary's per-node creep-rate, `k ≈ 4` carries a safety factor, and `margin` reserves headroom below the threshold `t`. Shorten `T` as measured `λ` rises.
+''Tuning the window `T`.'' Set the floor against measured detect-and-evict time, never a guessed constant: `T ≤ (t − margin) / λ / k`, where `λ` measures the adversary's per-node creep-rate, `k ≈ 4` carries a safety factor, and `margin` reserves headroom below the threshold `t`. Shorten `T` as measured `λ` rises.
 
 ''The bigger risk than cadence: CORRELATED compromise.'' A short window protects nothing if one exploit falls every node at once — a shared config makes `λ` a single shared event, not `n` independent ones. <<~ confidence Synthesis-Canon 13/20 >> So the load-bearing defence diversifies node configurations to keep `λ` ''per-node-independent''; the refresh cadence only buys time //given// that independence holds. Monoculture defeats the clock-reset before it starts.
 

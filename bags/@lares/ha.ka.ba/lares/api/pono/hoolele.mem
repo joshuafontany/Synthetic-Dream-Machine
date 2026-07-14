@@ -35,7 +35,7 @@ operators (`sync`, `race`, `rush`, `branch`) create children within the current
 task tree. `spawn` exits the tree entirely, creating a new root. It hides the
 `<suspends>` effect from its caller — the formal mechanism of escape.
 
-**Use `lele` (`\branch`) for side work that can be lost if the parent cancels.**
+''Use `lele` (`\branch`) for side work that can be lost if the parent cancels.''
 ''Use `hoolele` (`\spawn`) only when the work MUST complete regardless of what''
 ''cancels around it.''
 
@@ -82,7 +82,7 @@ a remote peer.
 Work that runs indefinitely and should never be cancelled by normal flow.
 Example: the CRDT sync loop, the WebSocket keep-alive, the Keyhive heartbeat.
 
-**All other cases use `lele` (`\branch`).** The tree stays clean; cancellation
+''All other cases use `lele` (`\branch`).'' The tree stays clean; cancellation
 remains predictable; resource leaks are prevented.
 
 <<~/ahu >>
@@ -131,9 +131,9 @@ In the Lararium stack, the irreducible TS infrastructure layer (CRDT, network,
 Keyhive) represents work that MUST complete regardless of wiki VM lifecycle.
 These are the natural `hoolele` boundaries:
 
-* **`LarTiddlerStore` CRDT flush** — must complete even if the `MemeSyncAdaptor`
+* ''`LarTiddlerStore` CRDT flush'' — must complete even if the `MemeSyncAdaptor`
   is disposed; spawn the flush, hold the task handle in the store.
-* **`VmPool` cross-VM coordination** — work that spans wiki VM instances has no
+* ''`VmPool` cross-VM coordination'' — work that spans wiki VM instances has no
   single containing scope; spawn the coordination task at pool level.
 * ''Keyhive capability delegation'' — async crypto; survives the UI context that
   initiated it.

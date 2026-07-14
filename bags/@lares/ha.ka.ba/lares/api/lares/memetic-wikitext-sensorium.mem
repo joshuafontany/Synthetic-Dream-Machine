@@ -59,8 +59,8 @@ corpus scale. It ''recurs'' — the same pattern holds at a finer scale, inside 
 
 ''So ONE structure serves both.'' The reader written for the stratum scale — split a text into
 co-located channels, window each into a signal, couple them — ''is the same shape'' composed at the
-corpus scale, where the two channels become two whole texts. *The reader you write for the stratum is the
-shape you compose for the corpus.* The concrete instance builds this once (a `coupleAligned` atom over an
+corpus scale, where the two channels become two whole texts. //The reader you write for the stratum is the//
+//shape you compose for the corpus.// The concrete instance builds this once (a `coupleAligned` atom over an
 FFZ-aligned tick stream) and calls it at both scales.
 
 > ''The black speaks; the red steers'' — and the same coupling that reads red↔black inside one meme reads
@@ -148,8 +148,8 @@ tree-sitter.
 <<~ranks part reader ~ `packages/lararium-node/src/memetic-wikitext-sensorium.ts` — `stratify()` (island-scan → standoff strata + skeletal tier + typed association graph), `sigilInjectionQuery()` (the tree-sitter injection config), the two-axes span×channel read -> compose ~ `buildMemeticWikitextSensorium()` — the top nameless entity `#has {formal, informal}` via `buildSensoriumManifest`, `coupling.children=[formal, informal]`, neither top -> couple ~ `coupleAligned()` — the fractal atom; feeds an ALIGNED-TICK stream to the keel's `windowed-coupling` RUNTIME ([[windowed-coupling|lar:///ha.ka.ba/lararium/mesh/flow]] — L-window · floor-warming · change-point reset · hop) then screens with `linearityGate`. `readKiStratum` walks Pulse-grain ticks (red↔black); `readKiCorpus` JOINS FFZ-addressed cells (formal↔informal). A THIN call, never a rebuild >>
 
 ''The FFZ alignment IS the runtime's contract — not optional polish.'' <<~ confidence Synthesis-Canon 15/20 >>
-The `windowed-coupling` runtime demands ALIGNED TICKS *"at a shared grain — the worldline aligns
-upstream… the FFZ rhythmic address."* So the FFZ clock ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock]])
+The `windowed-coupling` runtime demands ALIGNED TICKS //"at a shared grain — the worldline aligns//
+//upstream… the FFZ rhythmic address."// So the FFZ clock ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock]])
 is the CALLER'S obligation before the runtime reads, never downstream nicety. The reader honors it two ways:
 the STRATUM scale walks one text at the finest FFZ ''Pulse'' grain (the shared axis IS the reading order);
 the CORPUS scale JOINS the two peers on a ''shared FFZ address'' (`ffzAlignTicks`) — the ONLY sound

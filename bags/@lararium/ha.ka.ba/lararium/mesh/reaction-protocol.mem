@@ -93,7 +93,7 @@ Live wiring map + handler registry.
 
 | Method | Verse analogue | `verseKind` constraint |
 |---|---|---|
-| `subscribe(fromUri, listenable, handler) → cancel` | `sourceDevice.OutputEvent.Subscribe(handler)` | **`listenable` only** — user `event(T)` fields lack `subscribable`; use `subscribeOnce` instead |
+| `subscribe(fromUri, listenable, handler) → cancel` | `sourceDevice.OutputEvent.Subscribe(handler)` | ''`listenable` only'' — user `event(T)` fields lack `subscribable`; use `subscribeOnce` instead |
 | `subscribeByFn(fnName, handler) → cancel` | `@subscribes Enable()` — fires for all bindings routing to `fnName`; `"*"` = wildcard | `listenable` only |
 | `subscribeOnce(fromUri, listenable) → Promise` | `Await(event)<suspends>` — kukali primitive | ''both'' `listenable` and `event` |
 | `onFireSync(observer) → cancel` | Monitoring hook — fires before handler dispatch | both |

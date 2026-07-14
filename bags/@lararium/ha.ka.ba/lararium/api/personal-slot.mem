@@ -50,7 +50,7 @@ Two federation scopes only — ''device-local'' (`wikis/@{slug}/temp`) and
 TW5 carries a category of state that lives between those two scopes — the
 operator's cross-device viewing state. TW5's own default `$:/config/SyncFilter`
 demonstrates the distinction: it excludes `$:/state/*` and `$:/HistoryList`
-from sync but **leaves `$:/StoryList` syncable** because the open story
+from sync but ''leaves `$:/StoryList` syncable'' because the open story
 river represents operator intent worth carrying to their other devices.
 
 The missing scope: ''the operator's authorised device vessel mesh'' — what
@@ -114,7 +114,7 @@ recipe-fingerprints match.
 !! Scoping mechanism — the resolver binds, the URI doesn't
 
 The slot URI is per-wiki and fixed for a wiki: `lar:///ha.ka.ba/wikis/@{slug}/personal`.
-The recipe-fingerprint binding lives in the **`BagResolver` map** carried in the island
+The recipe-fingerprint binding lives in the ''`BagResolver` map'' carried in the island
 manifest, not in the URI — so the SAME slot URI resolves to DIFFERENT docs as the wiki's
 below-canon recipe (its libraryBags) changes the fingerprint.
 
@@ -259,7 +259,7 @@ Three convergent justifications:
 
 !!! Primary-wiki path (the only live path today)
 
-**Post-S11.5 the primary wiki mounts via the unified `vmManager.mountWiki(activeWikiId, ctx, { pinned: true })` call (`open-node-vessel.ts:782`)** — `mountPrimaryWorker` aliases through it (`vessel-island-pool.ts:208`). The same boot reorder moved `await adminVm.workerEa` (`open-node-vessel.ts:770`) to run **before** that mount, so the admin VM is already live when bindings resolve. Sprint 7 wires binding-resolution for the **primary wiki only**, host-inline, **between `:770` and `:782`**, mirroring the existing draft-mint site (`:696`):
+''Post-S11.5 the primary wiki mounts via the unified `vmManager.mountWiki(activeWikiId, ctx, { pinned: true })` call (`open-node-vessel.ts:782`)'' — `mountPrimaryWorker` aliases through it (`vessel-island-pool.ts:208`). The same boot reorder moved `await adminVm.workerEa` (`open-node-vessel.ts:770`) to run ''before'' that mount, so the admin VM is already live when bindings resolve. Sprint 7 wires binding-resolution for the ''primary wiki only'', host-inline, ''between `:770` and `:782`'', mirroring the existing draft-mint site (`:696`):
 
 ```typescript
 // open-node-vessel.ts — host composition layer, AFTER `await adminVm.workerEa` (:770),

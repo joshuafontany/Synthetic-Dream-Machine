@@ -43,14 +43,14 @@ prior-arts converge on this shape; this meme stands them whole and maps them ont
 
 !! A Group Names a Closure, Not an Object
 
-Each member **declares their own signed, typed, `lar:`-named edge** — *"I place X in
-cabal-C with role R"* — and signs it down their own key. No edge speaks for another
+Each member ''declares their own signed, typed, `lar:`-named edge'' — //"I place X in//
+//cabal-C with role R"// — and signs it down their own key. No edge speaks for another
 member; no doc holds a roster a single key may rewrite. The group ''resolves'' as the
 reciprocal-edge closure: the set of edges that mutually name each other, gathered by a
 query a vessel runs over the edges it has synced.
 
-<<~ confidence Synthesis 13/20 >> SPKI/SDSI carries this whole — *no group object exists;
-groups stand as relational constructs built from distributed name bindings*, and
+<<~ confidence Synthesis 13/20 >> SPKI/SDSI carries this whole — //no group object exists;//
+//groups stand as relational constructs built from distributed name bindings//, and
 linked-local-names grant ''global reach without a global namespace''. The group reads off
 the edges, never out of a register.
 
@@ -61,8 +61,8 @@ and two vessels may hold different views without either lying. The edges glue (o
 glue) as a presheaf; the membership query reads the local section. No coordinator
 materializes a canonical roster, because no canonical roster exists to materialize.
 
-''The edge carries the verb.'' An edge names what a member //does// — *places · vouches ·
-delegates · scopes* — never an essence a member //holds-as-identity//. A membership reads
+''The edge carries the verb.'' An edge names what a member //does// — //places · vouches ·//
+//delegates · scopes// — never an essence a member //holds-as-identity//. A membership reads
 as a live, signed, decaying gesture, not a row in a table.
 
 <<~/ahu >>
@@ -134,7 +134,7 @@ The closure model carries directly onto the existing identity architecture
   enacts Plurality Pono at the credential layer: the operator's multitudes each sign their
   own chain, and a threshold across them carries a decision the way the Voice house carries
   a multi-Voice turn — disagreement stays visible.
-* **Rides `#has`-stack composition.** A group composes by **added edges**, never by
+* ''Rides `#has`-stack composition.'' A group composes by ''added edges'', never by
   subclassing — the nameless-entity + signed-edge ontology, no group //type//, only the
   closure over what each member `#has` declared
   (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#social-axis >>).
@@ -150,11 +150,11 @@ The closure model carries directly onto the existing identity architecture
 
 !! Prior Art — Four Converging Roots
 
-<<~ confidence Synthesis 14/20 >> four independent traditions arrive at *group = relation,
-not object*:
+<<~ confidence Synthesis 14/20 >> four independent traditions arrive at //group = relation,//
+//not object//:
 
-* ''SPKI/SDSI'' (Ellison, Rivest, Lampson) — *no group object exists; groups stand as
-  relational constructs from distributed name bindings*; `(k-of-n …)` threshold subjects;
+* ''SPKI/SDSI'' (Ellison, Rivest, Lampson) — //no group object exists; groups stand as//
+//  relational constructs from distributed name bindings//; `(k-of-n …)` threshold subjects;
   linked local names reach globally without a global namespace.
 * ''Diaspora aspects'' — each user sorts their own contacts into private, asymmetric
   //aspects//; no shared group object, the audience resolves per-author at share time — a

@@ -68,7 +68,7 @@ The Lararium browser vessel owns its root/frame contract.
 Any surviving reference to these tiddlers must live inside the plugin membrane
 or behind the named adapter boundary in `tw5-browser-surface.ts`.
 
-**BV-9 — Sovereign Worker boot requires `Content-Security-Policy: worker-src 'self'`.**
+''BV-9 — Sovereign Worker boot requires `Content-Security-Policy: worker-src 'self'`.''
 The Worker URL passed via `adminWorkerUrl` / `workerScriptUrl` creates an XSS injection sink
 (MDN classification). Pono sovereign deployment MUST emit a `Content-Security-Policy`
 response header containing `worker-src 'self'` from the serving layer (Caddy, nginx, or

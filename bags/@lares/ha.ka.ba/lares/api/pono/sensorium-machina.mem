@@ -44,8 +44,8 @@ that FACTOR a stream into independent coordinates. It never did, and it cannot. 
 inconsistent from the first line. What the machina actually runs — what it ran all along, unnamed — reads
 as a ''COMPRESSION''. The canon had already said so and nobody heard it
 ([[sensorium-rhymes|lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-one-objective]], line 15 of its own
-role-field): *"all five planes estimate facets of ONE quantity … the sensorium IS the past-future
-information-bottleneck in ritual clothes."*
+role-field): //"all five planes estimate facets of ONE quantity … the sensorium IS the past-future//
+//information-bottleneck in ritual clothes."//
 
 <<~/ahu >>
 
@@ -91,14 +91,14 @@ coarsening, contravariant, `global → local`. Restriction defines li; storage d
 
 <<~ranks coarsening π_content ~ the verbatim words — the FINEST partition, one cell per record -> π_struct ~ the canonical AST + structural hash — a COARSENING: records sharing a pattern fall into one cell -> π_form ~ the induced constructicon — a coarsening of THAT: patterns sharing a template fall into one cell >>
 
-**`Content ↠ Structure ↠ Form`. A CHAIN, never a product.** Each plane maps a record to a label; a map
+''`Content ↠ Structure ↠ Form`. A CHAIN, never a product.'' Each plane maps a record to a label; a map
 into labels ''partitions'' the record set into its fibers; partitions under refinement form a ''LATTICE''
 (the information lattice sits isomorphic to it, arXiv 2404.03131). So the planes compose as a chain in
 that lattice, and the entropies order themselves ''by construction'':
 
     H(form)  <=  H(structure)  <=  H(content)          and     I(target ; plane)  <=  H(plane)
 
-<<~ confidence Canon 17/20 >> **`H(plane)` names the plane's HEIGHT in the lattice**, and `plane_capacity`
+<<~ confidence Canon 17/20 >> ''`H(plane)` names the plane's HEIGHT in the lattice'', and `plane_capacity`
 measures it exactly — a count off the partition, ''no estimator, no bias correction, no threshold'', an
 upper bound that can only ''under-claim''. Measured on the extracted bed: ''structure carries 5.630 of the''
 ''record's 5.755 bits — 97.8%.'' A near-deterministic ''quotient'', not a complementary factor. A factor
@@ -198,8 +198,8 @@ it needs) or rides beside it (standing).
 
 ''STANDING already knew it was ki.'' `persistence-keel.ts` says so in its own header, verbatim:
 
-> *"Standing is a KI (cosheaf) quantity — it depends on edges OUTSIDE the trace (distinct signers EXTEND
-> it, local→global), never a li-restriction of the trace itself."*
+> //"Standing is a KI (cosheaf) quantity — it depends on edges OUTSIDE the trace (distinct signers EXTEND//
+//> it, local→global), never a li-restriction of the trace itself."//
 
 !!! The coupling ward ~ R stays the keel
 
@@ -223,7 +223,7 @@ cause. The sensorium ''detects''; it never intervenes.
 
 <<~ranks retired bands-as-frequency ~ a BANDPASS reports where ENERGY AT ITS SCALE concentrates; a CHANGE-POINT reports where the GENERATING REGIME turns over. We asked a periodicity instrument a change-point question — a CATEGORY ERROR, never a tuning failure (`kumulipo_boundary.py`: the two-stage MODWT found the chant's BEAT at band C7, ~10,240 ticks against a measured wā gap of ~9,400 — and its crest placement scored ''recall 0.06'') -> the-PLL ~ retired with the ladder it locked -> the-subharmonic-band-ladder ~ a band defined by HOW MANY ticks of a fundamental it spans ''IS A COUNT'' — the Hox anti-pattern, where position IS the content and a prefix cannot be lopped ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) -> the-wavelet-SPINE-and-SERVO ~ `bands_sidecar`'s MODWT-MRA D1..D5 mapping and its EWT/ssqueezepy boundary-nudge retire with the ladder they served; a wavelet fed a LOCAL ABRUPT CHANGE answers with SPURIOUS LOW-FREQUENCY POWER — a period the signal never held (Hochman, Alpert et al., *J. Appl. Meteor. Climatol.* 58(9), 2019, doi 10.1175/JAMC-D-18-0331.1) -> li=STORED / ki=COMPUTED ~ the storage cut (#the-re-cut) >>
 
-**What SURVIVES of `bands_sidecar`:** its **TREE** layer (the `ecp::e.divisive` nested changepoint
+''What SURVIVES of `bands_sidecar`:'' its ''TREE'' layer (the `ecp::e.divisive` nested changepoint
 hierarchy — coarse cuts parenting fine, which IS the membership tree, handed over for free) and its
 ''GATE'' layer (the bootstrap/jackknife ''reproduction grade'' — an un-witnessed boundary NEVER reads
 reproduced). The SIGNAL layer survives re-pointed: the per-chunk ''cosine-drift'' over content embeddings
@@ -251,7 +251,7 @@ Each R sidecar rides the `drawer_io` NDJSON contract — one request on stdin, o
 against it, and ''it never moves again''; every number rides beside its ''chance floor'', and a result that
 fails to clear the floor reads as //the tolerance doing the work//).
 
-<<~ confidence Canon 17/20 >> **`boundary_score` carries the anti-manufacture law in code.** A detector
+<<~ confidence Canon 17/20 >> ''`boundary_score` carries the anti-manufacture law in code.'' A detector
 placing *n* boundaries ''uniformly at random'' still scores, and scores HIGH once the tolerance opens
 (`expected recall ≈ 1 − (1 − (2w+1)/N)^n`). ''Tune the tolerance after seeing a result and the scorer''
 ''becomes the last place the imposed prior hides.'' The harness lands first; the instrument second.
@@ -273,9 +273,9 @@ placing *n* boundaries ''uniformly at random'' still scores, and scores HIGH onc
 <<~ confidence Canon 17/20 >> ''Zero names no threshold anyone chose.'' It marks the ''tie between two code''
 ''lengths'', and //take the shorter code// IS the MDL rule. The gate holds no dial.
 
-* **`p1`** — a **von Mises-Fisher** fitted to the store. Its log-density runs **linear in the cosine**, and
+* ''`p1`'' — a ''von Mises-Fisher'' fitted to the store. Its log-density runs ''linear in the cosine'', and
   its sufficient statistic reads as the ''sum of unit vectors'' — so the fit costs one pass and no search.
-* **`p0`** — **uniform on the sphere. ZERO parameters. True ignorance.** Not a tuned null, not a learned
+* ''`p0`'' — ''uniform on the sphere. ZERO parameters. True ignorance.'' Not a tuned null, not a learned
   baseline; the absence of a model.
 
 ''So the decision cosine FALLS OUT of the store's own concentration — nobody types it:''
@@ -318,7 +318,7 @@ the original bytes always stand there to be compressed against. ''The immutabili
 
 !! The Grain ~ a membership tree, a prefix code, two moods
 
-**`Theme . Arc . Measure . Beat . Segment`** — a **containment PATH**, never a count. A band answers
+''`Theme . Arc . Measure . Beat . Segment`'' — a ''containment PATH'', never a count. A band answers
 ''WHICH'' (which theme, which session, which topic, which turn) and ''never HOW MANY''
 ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]; `ffz_address.py`).
 
@@ -369,7 +369,7 @@ counter manufactures a global now.
 
 !!! The register-switch problem ~ the corpus runs as a PIDGIN
 
-<<~ confidence Synthesis-Canon 15/20 >> **`role == "user"` names TOOL OUTPUT 89.1% of the time** (measured
+<<~ confidence Synthesis-Canon 15/20 >> ''`role == "user"` names TOOL OUTPUT 89.1% of the time'' (measured
 this session on the live transcript bed). The transcript's `user` role does not name the operator; it names
 ''the channel the harness returns on''. So the corpus braids ''at least four grammars'' — operator prose,
 model prose, tool invocation, tool return — and it braids them ''inside a single role label''.
@@ -377,9 +377,9 @@ model prose, tool invocation, tool return — and it braids them ''inside a sing
 ''And a single-grammar instrument dies on it.'' The bed proved this before any detector ran
 (`pidgin_bed.py`, verbatim):
 
-> *"A WORD-IDENTITY DOTPLOT PRESUPPOSES ONE LEXICON. Mix grammars and the diagonal dilutes — not because
-> structure left, but because the instrument sees recurrence only WITHIN ONE GRAMMAR. ''The imposed prior''
-''> hides IN THE TOKEN TYPE.''"*
+> //"A WORD-IDENTITY DOTPLOT PRESUPPOSES ONE LEXICON. Mix grammars and the diagonal dilutes — not because//
+//> structure left, but because the instrument sees recurrence only WITHIN ONE GRAMMAR. ''The imposed prior''//
+//''> hides IN THE TOKEN TYPE.''"//
 
 Foote novelty over an exact-match ''word'' dotplot places the wā on the pure-Hawaiian bed (lift positive at
 every rung, `p = 0.0005`) and ''COLLAPSES'' on the Beckwith bed, where the same chant runs braided through
@@ -454,7 +454,7 @@ comparison instrument that does not yet exist.
 
 !!! THE ONE NOBODY HAS ASKED ~ //what compresses the GRAMMAR?//
 
-<<~ confidence Synthesis-Canon 14/20 >> **The loop emits a NEW grammar each pass: `G₁, G₂, G₃`.** The
+<<~ confidence Synthesis-Canon 14/20 >> ''The loop emits a NEW grammar each pass: `G₁, G₂, G₃`.'' The
 exogenous anchor tests ''each pass against the original bytes'' (#the-arrow), and that is a real guard — it
 catches a pass that hallucinates.
 
@@ -464,8 +464,8 @@ catches a pass that hallucinates.
 
 ''If every pass locally shortens the code while the grammars keep drifting, every gate we own PASSES and''
 ''the loop still collapses.'' Model collapse ''in the second derivative'': not //"the output got worse"// — the
-output got //better//, pass by pass, by the only measure the machina holds — but *"the sequence of grammars
-never settles."* ''Nothing in the canon names this. No instrument measures it.''
+output got //better//, pass by pass, by the only measure the machina holds — but //"the sequence of grammars//
+//never settles."// ''Nothing in the canon names this. No instrument measures it.''
 
 <<~ confidence Synthesis 11/20 >> ''And the shape of the cure is already visible in the shape of the hole.''
 Price the grammars themselves: `l(G_{n+1} | G_n)` — ''the description length of the NEXT grammar GIVEN the''

@@ -38,13 +38,13 @@ read this mechanism as ''compaction''.
 Two reactors, both running worker-ward over the catalog accessor
 (access≠load), both ending in a reboot-pending alert to affected live wikis:
 
-* **`epoch-bag <bag-url>`** (`makeEpochBagReactor`) — snapshot-restart:
+* ''`epoch-bag <bag-url>`'' (`makeEpochBagReactor`) — snapshot-restart:
   open the old doc, materialize all tiddlers into a freshly minted doc (no
   history), point the `@catalog` oracle at the new doc URL, register the new
   doc cold with the residency manager, alert every wiki whose recipe stack
   includes the bag. Lossy by design — pre-epoch peers that never synced
   through cannot rebuild the change graph from the new doc alone.
-* **`rotate-recipe <slug>`** (`makeRotateRecipeReactor`) — fresh canonical:
+* ''`rotate-recipe <slug>`'' (`makeRotateRecipeReactor`) — fresh canonical:
   mint an empty doc as the wiki's new canonical bag; the old canonical drops
   to a previous-canon underlay in the recipe stack (content stays readable,
   new writes land in the fresh doc).

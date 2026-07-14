@@ -34,9 +34,9 @@ A house that can stand itself learns to part a working layer from a sealed canon
 
 Drafted from the Gaia-side work of early June, the git vectors named as prose, not hashes:
 
-* the **`@working` live layer** parts from canon — saved edits land in a wiki's own working layer and project to the live surface, never straight into the sealed record
+* the ''`@working` live layer'' parts from canon — saved edits land in a wiki's own working layer and project to the live surface, never straight into the sealed record
 * the ''disk-projection'' settles its direction: the authored seed under `bags/` feeds the projected output under `wikis/`, never the reverse in the dark
-* canon-promotion runs as a **residency `MOVE`**, cap-gated and audited — not a copy
+* canon-promotion runs as a ''residency `MOVE`'', cap-gated and audited — not a copy
 * the ''layer-role vocabulary'' lands: a wiki adds a canon layer and read-only library layers, each role distinct
 * the ''Lararium Shore Law'' names the general principle: every boundary a lararium holds reads as a //causal-island shore//
 
@@ -112,7 +112,7 @@ So promotion never carries a thing from one bank to another. It ''moves the mark
 
 Get that retraction wrong and the shore breaks. Should the working layer leave a ''tombstone'' instead of truly retracting — a held //null// — that null would shadow the canon below and hide the very thing just promoted. And that null-hold carries its own honest office, the exact inverse of promotion: to ''remove'' a mark without erasing the canon beneath, the house //holds the null// in the upper layer — a tombstone that shadows the lower record so the cascade reads absent while canon stays preserved against resurrection. Promotion must retract clean, to ''reveal''; deletion must hold the null, to ''suppress''. The two crossings move alike and mean opposites — the house dares not confuse them.
 
-And the rite speaks the right tongue. The crossing runs as an **audited residency `MOVE`** — cap-gated, carrying the mark's own change-identity, landing an **effect-record** that names what moved, by whose hand, when. That record stands as the witness: the house reads its crossings back by the ledger of MOVEs, never by a guess from a diff. No version-control verb names the rite — no //commit//, no //fork//, no //diff signs it//. The shore crosses by a deliberate, recorded MOVE, or it does not cross.
+And the rite speaks the right tongue. The crossing runs as an ''audited residency `MOVE`'' — cap-gated, carrying the mark's own change-identity, landing an ''effect-record'' that names what moved, by whose hand, when. That record stands as the witness: the house reads its crossings back by the ledger of MOVEs, never by a guess from a diff. No version-control verb names the rite — no //commit//, no //fork//, no //diff signs it//. The shore crosses by a deliberate, recorded MOVE, or it does not cross.
 
 > `@telarus@~crossroads: TW5 folk: it's recipe shadowing. The working bag rides highest in the recipe, so its tiddler overrides the canon bag's copy of the same title — the reader gets the topmost. Promotion writes the tiddler down into the canon bag and *removes* the working override, a real delete that falls through to reveal it. A tombstone would be the wrong tool there — that's the one you reach for to hide a lower record, not to surface it.`
 >

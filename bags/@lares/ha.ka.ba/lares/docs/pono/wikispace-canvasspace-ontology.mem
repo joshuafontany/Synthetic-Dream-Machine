@@ -55,7 +55,7 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 !! The Model/View Boundary — Both Sides Addressed
 
-The boundary runs not between "graph" and "not-graph" — **both sides carry `lar:` URIs**. It runs between //which entity holds what//:
+The boundary runs not between "graph" and "not-graph" — ''both sides carry `lar:` URIs''. It runs between //which entity holds what//:
 
 * ''Model'' — a meme, its has-stack, and its wire entities: identity (`lar:` URI), the worn components, wire records (`from`/`to` / `lifecycle` / `traversal` / `propagation`), `confidence`, the `#iam` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
 * ''View'' — stored as ''its own lar-URI-addressed entities'', separate from any meme's `#iam`: canvas shape position / extent / z-order, camera pan+zoom, Story-River order, level-of-detail, render-template selection.
@@ -84,7 +84,7 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 !! Transclusion — Surface-Split
 
-The ''core holds surface-invariant'': content-identity (Nelson — "the same thing knowably in two places", //not// a copy), `aka` (frozen/shadow) vs `kahea` (live/subscription-fresh), acyclicity, and the firm line **transclusion carries content-identity; `dataflow` carries a computed value** — these never blur, even where both render as arrows on canvas.
+The ''core holds surface-invariant'': content-identity (Nelson — "the same thing knowably in two places", //not// a copy), `aka` (frozen/shadow) vs `kahea` (live/subscription-fresh), acyclicity, and the firm line ''transclusion carries content-identity; `dataflow` carries a computed value'' — these never blur, even where both render as arrows on canvas.
 
 What ''splits is the content-position'':
 
@@ -99,7 +99,7 @@ What ''splits is the content-position'':
 
 `dataflow` / `reaction` (papalohe) / `message` / `spatial` / `control` map cleanly onto the universal node-graph wire kinds. Two settled points:
 
-* ''No naked execution wire — by Verse alignment.'' Verse sequences through fibers / suspension / `spawn`, not visual "do-this-then-that" arrows. So **`reaction:papalohe` (listenable→subscribable) //is// the Verse-native execution wire** — same "this causes that to run", carried as a named, event-conditional arc. Fine-grained `A(); B(); C()` stays //inside// node bodies as Verse code; only coarse event-causation becomes a wire.
+* ''No naked execution wire — by Verse alignment.'' Verse sequences through fibers / suspension / `spawn`, not visual "do-this-then-that" arrows. So ''`reaction:papalohe` (listenable→subscribable) //is// the Verse-native execution wire'' — same "this causes that to run", carried as a named, event-conditional arc. Fine-grained `A(); B(); C()` stays //inside// node bodies as Verse code; only coarse event-causation becomes a wire.
 * ''Pin //types// live on the node, not the edge.'' A `dataflow` edge names the role (reads/writes/streams/buffers/pipes); the data ''type'' (float / vector / geometry) declares on the `kumu` node-type's pin. The edge inherits the type by endpoint; the canvas colors the wire from the pin type (the Blender pattern). The edge schema stays clean.
 
 When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-event fires → the node updates).
@@ -112,10 +112,10 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 `spatial` (`contains` / `portal` / `adjacent` / `layer`) names ''graph-layer claims the canvas renders'' — they hold whether or not the canvas currently shows them. Guard the surface-meaning splits:
 
-* **Bare proximity ≠ `spatial:adjacent`** — graph-primacy: edges drive proximity rendering, not the reverse.
-* **A tldraw Frame ≠ `spatial:contains`** — dropping a shape in a frame is a view act; the containment edge declares explicitly. (Frames render `contains`; Groups carry no graph claim.)
-* **Z-order ≠ `spatial:layer`** — render-on-top within a viewport differs from ontological stratum membership.
-* **`spatial:portal` crosses the surface** — uniquely it carries a //camera-navigation// payload (click → the viewport moves to the target); it reads as more than a connector.
+* ''Bare proximity ≠ `spatial:adjacent`'' — graph-primacy: edges drive proximity rendering, not the reverse.
+* ''A tldraw Frame ≠ `spatial:contains`'' — dropping a shape in a frame is a view act; the containment edge declares explicitly. (Frames render `contains`; Groups carry no graph claim.)
+* ''Z-order ≠ `spatial:layer`'' — render-on-top within a viewport differs from ontological stratum membership.
+* ''`spatial:portal` crosses the surface'' — uniquely it carries a //camera-navigation// payload (click → the viewport moves to the target); it reads as more than a connector.
 * ''Zoom level-of-detail'' stays ''view-intrinsic'' — no graph analog; the camera owns which detail a meme reveals at which zoom.
 
 <<~/ahu >>
@@ -124,10 +124,10 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 !! Forks — Resolved (operator 2026-06-06)
 
-* **Canvas-position storage + `lar:` URI as shape-id — APPROVED, unified.** A node //is// a lar-URI entity; its view-state (position, camera, z-order, LoD) lives in //separate// lar-URI-addressed view-state entities (the `$:/StoryList` pattern). Both addressed; coordinates never in the meme `#iam`.
-* **`transclusion` on canvas — APPROVED** as one family with a content-window render template (not a `spatial:portal` split); the model-meaning stays unified.
-* **`dataflow` / `reaction` in Story-River — APPROVED:** they carry prose render templates where useful; an omitted wire reads as a view choice, not a model loss.
-* **`spatial:portal` navigation payload — APPROVED.**
+* ''Canvas-position storage + `lar:` URI as shape-id — APPROVED, unified.'' A node //is// a lar-URI entity; its view-state (position, camera, z-order, LoD) lives in //separate// lar-URI-addressed view-state entities (the `$:/StoryList` pattern). Both addressed; coordinates never in the meme `#iam`.
+* ''`transclusion` on canvas — APPROVED'' as one family with a content-window render template (not a `spatial:portal` split); the model-meaning stays unified.
+* ''`dataflow` / `reaction` in Story-River — APPROVED:'' they carry prose render templates where useful; an omitted wire reads as a view choice, not a model loss.
+* ''`spatial:portal` navigation payload — APPROVED.''
 * ''Zoom-LoD — APPROVED'' as view-intrinsic render-logic (revisit if a graph-level mode parameter proves needed).
 * ''Transclude-into-an-edge — DEFERRED (provisional)'', per #transclusion.
 

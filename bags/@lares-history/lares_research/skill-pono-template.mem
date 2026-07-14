@@ -82,7 +82,7 @@ allowed-tools: Read, Grep, Glob, Bash
 
 ''Progressive disclosure:'' the YAML `name` and `description` load at agent startup. The full body (~5000 token recommended maximum) loads only on activation. Write the `description` so an agent can decide whether to activate without reading the body.
 
-**`allowed-tools`:** Verification skills in this system typically need `Read` (load target meme), `Grep` (search for invariant elements), and `Glob` (find related files). Add `Bash` if the skill runs a pre-MCP subprocess check. Add `Edit` or `Write` only for repair skills, not pure verification skills.
+''`allowed-tools`:'' Verification skills in this system typically need `Read` (load target meme), `Grep` (search for invariant elements), and `Glob` (find related files). Add `Bash` if the skill runs a pre-MCP subprocess check. Add `Edit` or `Write` only for repair skills, not pure verification skills.
 
 !!! TOML `#iam` Block (memetic-wikitext inner surface)
 

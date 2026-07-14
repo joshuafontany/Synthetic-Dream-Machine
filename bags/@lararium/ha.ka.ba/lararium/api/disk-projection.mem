@@ -30,16 +30,16 @@ uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 
 ! Disk Projection — Seed and Projection Surfaces
 
-Every **`@bag`** maps to one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). **The operator's mind originates; the disk carrier and the CRDT record-set both //project// that origin, each in its native grain** (the co-projection model, operator ruling 2026-06-11): disk projects thought as one whole markdown meme — the way the operator writes it; the CRDT doc projects the same thought as tid-sized records — the way TW5 merges, addresses, and syncs it; the VM decomposes for transclusion (#granularity). Co-equal in dignity, single in merge seat: **merge authority routes through the CRDT alone**, never file-vs-record reconciliation — anything else opens the dual-write trap (Tonsky crdt-filesync; Kleppmann).
+Every ''`@bag`'' maps to one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). ''The operator's mind originates; the disk carrier and the CRDT record-set both //project// that origin, each in its native grain'' (the co-projection model, operator ruling 2026-06-11): disk projects thought as one whole markdown meme — the way the operator writes it; the CRDT doc projects the same thought as tid-sized records — the way TW5 merges, addresses, and syncs it; the VM decomposes for transclusion (#granularity). Co-equal in dignity, single in merge seat: ''merge authority routes through the CRDT alone'', never file-vs-record reconciliation — anything else opens the dual-write trap (Tonsky crdt-filesync; Kleppmann).
 
 The node vessel SHALL write an editable, re-readable ''Artifact'' of a bag's CRDT state to disk (the "disk projection"), and re-ingest operator edits. This rides ''two on-disk surfaces'', split by bag //role// — ''source vs output'':
 
 | Surface | Role | Bags | Source of record | Format |
 |---|---|---|---|---|
-| **`bags/`** | **seed / canon** — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
-| **`wikis/{slug}/`** | **projection / output** — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (the merge seat; disk projects the rendered artifact) | memetic-wikitext `.md` |
+| ''`bags/`'' | ''seed / canon'' — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
+| ''`wikis/{slug}/`'' | ''projection / output'' — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (the merge seat; disk projects the rendered artifact) | memetic-wikitext `.md` |
 
-The distinction reads ''definition vs instance''. An FTLS Power Card //definition// (its rules, its template) lives in `bags/@sdm/`; a character's //filled-in// card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the **live working surface** — saved-but-unpromoted content, fed by the typed **`@working`** write layer (saved tiddlers, never drafts) — and `bags/` reads as ''canon'', reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this ''working↔canon shore'' (`wiki-layer-ontology#shore-law`).
+The distinction reads ''definition vs instance''. An FTLS Power Card //definition// (its rules, its template) lives in `bags/@sdm/`; a character's //filled-in// card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the ''live working surface'' — saved-but-unpromoted content, fed by the typed ''`@working`'' write layer (saved tiddlers, never drafts) — and `bags/` reads as ''canon'', reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this ''working↔canon shore'' (`wiki-layer-ontology#shore-law`).
 
 <<~/ahu >>
 
@@ -72,12 +72,12 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 
 | Kind | Bag | What it holds | Origin | Disk | Authority | Versioning |
 |---|---|---|---|---|---|---|
-| **memetic corpus** | **`@lararium`** | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | **`bags/` seed (tracked)** | kahu / Cabal (#kahu) | git |
-| **runtime system island** | **`@oracle`** | engine BLOBs · the **system** bag→doc **oracle** pointers (`@oracle`/`@lararium`/`@lares`) · the ''system wiki-recipes'' · `genesis-cid` · descriptors | built (deterministic genesis) | ''none — rides the mesh'' (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
+| ''memetic corpus'' | ''`@lararium`'' | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | ''`bags/` seed (tracked)'' | kahu / Cabal (#kahu) | git |
+| ''runtime system island'' | ''`@oracle`'' | engine BLOBs · the ''system'' bag→doc ''oracle'' pointers (`@oracle`/`@lararium`/`@lares`) · the ''system wiki-recipes'' · `genesis-cid` · descriptors | built (deterministic genesis) | ''none — rides the mesh'' (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
 
-**Why `@oracle` carries no disk mirror.** Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-cas-substrate >>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
+''Why `@oracle` carries no disk mirror.'' Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-cas-substrate >>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
 
-**Why `@lararium` stays a seed bag.** The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
+''Why `@lararium` stays a seed bag.'' The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
 
 The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesis); a newer engine folds into `@oracle` through the ''RECONCILE'' rite (engine-watch #EW-5), never silently at boot.
 
@@ -137,7 +137,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 Write-back routes by ''type'', in three rules:
 
-# ''Group rule.'' `type: text/x-memetic-wikitext` records form a **tiddler-group** keyed by the carrier parent (a fragment URI belongs to its parent's group). A group MUST write back as **ONE markdown-meme `.md`** — the whole carrier (#granularity). A child's change re-flushes its group, never its own file.
+# ''Group rule.'' `type: text/x-memetic-wikitext` records form a ''tiddler-group'' keyed by the carrier parent (a fragment URI belongs to its parent's group). A group MUST write back as ''ONE markdown-meme `.md`'' — the whole carrier (#granularity). A child's change re-flushes its group, never its own file.
 # ''Default rule.'' Every other tiddler follows the ''standard TW5 path'' — `$tw.utils.generateTiddlerFileInfo` semantics, run inside the island's own TW5 VM: `.tid` for tw5-wikitext, content-file + `.meta` sidecar for foreign types, `.json` for unsafe fields. One tiddler, one file, TW5's own format law.
 # ''Cascade rule.'' Siting and format overrides ride ''composable cascade tiddlers inside the wiki'' — `lar:///ha.ka.ba/lararium/config/disk-paths` and `…/config/disk-extensions`, first non-empty filter result wins, per-wiki overlays compose through the recipe (the proven `config/bag-paths` pattern; the lar-native mirror of TW5's `$:/config/FileSystemPaths` / `FileSystemExtensions`).
 

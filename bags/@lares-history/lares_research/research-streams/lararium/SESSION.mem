@@ -365,7 +365,7 @@ All 62 unit tests green after removal.
 * ''Peer-correct disk projector'' — `LarDiskProjector` subscribes to Automerge store directly; `writing` Set exposes echo-loop guard to file watcher
 * ''WorksiteWidget anchor'' — no `renderChildren`; template owns all slot content; double-render eliminated
 * ''Slot overlay UI'' — `meme-view-children`, `meme-edit-children`, `ahu-breadcrumb`, `ahu-styles` preloaded
-* **`serializeCarrier` round-trip fix** — reads `carrier-text` field first (not `parent.text` which is mixed wikitext)
+* ''`serializeCarrier` round-trip fix'' — reads `carrier-text` field first (not `parent.text` which is mixed wikitext)
 * ''ROADMAP'' — created at `lares/lararium-node/ROADMAP.md` / `lar:///lararium-node/ROADMAP`
 
 !!! Open pressures
@@ -374,7 +374,7 @@ All 62 unit tests green after removal.
 * ''Track C'' — `lararium-tw5.ts` ~895 lines; split deferred
 * ''tw-filter.test.ts'' — 1 pre-existing failure: `[tag[lar:///...invariant]]` returns 0
 * ''Per-room Automerge docs'' — all clients share one doc; M12
-* **`chapel-perilous-opens/` draft workflow** — architecture defined; M13
+* ''`chapel-perilous-opens/` draft workflow'' — architecture defined; M13
 * ''CSS variable resolution'' — `ahu-styles.md` uses `<<colour primary>>`; needs palette at boot or hard-coded fallback
 
 !!! Invariants held

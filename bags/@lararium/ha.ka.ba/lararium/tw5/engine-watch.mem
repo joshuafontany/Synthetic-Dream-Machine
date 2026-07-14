@@ -47,7 +47,7 @@ bytes it eval's (never trusting the blob entry's self-claim), faults on a
 manifest `coreHash` mismatch, and lifts `{ sha256, version }` into
 `IslandContext.engine`.
 
-`startEngineWatch(ctx)` then subscribes to the island's own **`@oracle`**
+`startEngineWatch(ctx)` then subscribes to the island's own ''`@oracle`''
 handle (the runtime system island — engine BLOBs + bag-oracle + genesis-cid;
 disk-projection #oracle-split). When a newer engine enters that live doc —
 through the operator's ''RECONCILE'' rite, or CRDT propagation from a peer
@@ -83,7 +83,7 @@ events for the same waiting sha write once.
 ''EW-5 — Authority seated (operator ruling, 2026-06-15).'' Only an
 ''operator(admin)'' grant MAY update the engine genesis — the `@oracle`
 runtime-island doc (engine BLOBs + bag-oracle + genesis-cid). Peers
-**federate `@oracle` read-only** (the kahu doctrine: the protocol distributes
+''federate `@oracle` read-only'' (the kahu doctrine: the protocol distributes
 by CRDT propagation, never command), so an old peer in the wild never
 reconciles the engine itself — it adopts what it receives, and a missed
 update is no loss. The operator's engine-fold rides the ''RECONCILE'' rite

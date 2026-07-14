@@ -60,13 +60,13 @@ TW5's string-typed store (`Record<string,string>`) and Verse's strong types reso
 | ▶ Act | Verse execute / render / canvas | typed, transactional, committed | Round |
 | ↺ Aftermath | `validatePranalaEdge`, blame calculus | contract violations surface; loop closes | Action |
 
-**`attrs: Record<string,string>`** — the honest Observe-phase representation. Siek's `?` type at the parse boundary fits the phase. King's "parse, don't validate" fires at Decide: consume the string bag once, emit typed values, carry them forward; Act then runs as strict as Verse demands.
+''`attrs: Record<string,string>`'' — the honest Observe-phase representation. Siek's `?` type at the parse boundary fits the phase. King's "parse, don't validate" fires at Decide: consume the string bag once, emit typed values, carry them forward; Act then runs as strict as Verse demands.
 
 ''Blame calculus (Wadler & Findler):'' when a `scope:ephemeral` value escapes its Action-scale container, blame falls on the boundary that failed to enforce the scope type — Aftermath surfaces it via `validatePranalaEdge`.
 
 ''Elm's no-nested-signals rule:'' scope widens only (`ephemeral → personal` valid), never silently leaks (`universal → ephemeral` reads as a contract violation). Enforced at the Decide→Act boundary.
 
-**`papalohe` and `kukali`:** `papalohe` declares the reaction wire at Orient — a named shape in the graph; Verse `suspends`/`kukali` operates at Act — execution waits until the loop advances. The wire and the wait posture belong to different phases. See `lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions` Gap 5.
+''`papalohe` and `kukali`:'' `papalohe` declares the reaction wire at Orient — a named shape in the graph; Verse `suspends`/`kukali` operates at Act — execution waits until the loop advances. The wire and the wait posture belong to different phases. See `lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions` Gap 5.
 
 <<~/ahu >>
 

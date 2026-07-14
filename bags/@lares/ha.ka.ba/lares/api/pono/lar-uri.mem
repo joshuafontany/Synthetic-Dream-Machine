@@ -158,9 +158,9 @@ The `lar:` scheme serves as the lararium ''sync-filter predicate'': only `lar:`-
 
 The `@`-tag names a ''CRDT surface'' — a resolvable mutable doc (today an Automerge doc). It appears ONLY behind a ''kind-plane'' at `child[1]`, with the `@`-slug at `child[2]`. A meme ''namespace'' is a bare word at `child[1]` and carries no `@`. The two never collide: the `@` marks the surface, the bare word marks the namespace.
 
-* **`bags/@{slug}`** — a bag: a mutable content surface (a composable recipe piece).
-* **`wikis/@{slug}`** — a wiki: a `#has` bag-stack IDENTITY, distinct from its CANON (`bags/@{slug}`). Its per-wiki live layers extend the identity as `wikis/@{slug}/{temp,draft,working,personal}`.
-* **`cid/{hash}`** — an immutable content-addressed artifact; the name IS the content hash.
+* ''`bags/@{slug}`'' — a bag: a mutable content surface (a composable recipe piece).
+* ''`wikis/@{slug}`'' — a wiki: a `#has` bag-stack IDENTITY, distinct from its CANON (`bags/@{slug}`). Its per-wiki live layers extend the identity as `wikis/@{slug}/{temp,draft,working,personal}`.
+* ''`cid/{hash}`'' — an immutable content-addressed artifact; the name IS the content hash.
 
 ```
 lar:///ha.ka.ba/lares/api/pono/lar-uri          ← a meme (bare namespace at child[1])

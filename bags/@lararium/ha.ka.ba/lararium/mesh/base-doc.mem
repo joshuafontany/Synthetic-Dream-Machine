@@ -24,17 +24,17 @@ uri-path    = "ha.ka.ba/lararium/mesh/base-doc"
 `base-doc.ts` owns the shapes every plane shares and the one primitive that
 turns a bag-URI into a live doc handle:
 
-* **`LarDoc` / `LarTiddlerRecord` / `LarBlobEntry`** — the Automerge document
+* ''`LarDoc` / `LarTiddlerRecord` / `LarBlobEntry`'' — the Automerge document
   shape (`tiddlers` map + `blobs` map) and its record/blob entries.
-* **`mutableLarRecord(title, fields, provenance)`** — the record builder every
+* ''`mutableLarRecord(title, fields, provenance)`'' — the record builder every
   writer routes through, stamping `meta.authority`.
-* **`ENGINE_CORE_ID`** (`"tiddlywikicore"`) — the primary `.blobs` key for the
+* ''`ENGINE_CORE_ID`'' (`"tiddlywikicore"`) — the primary `.blobs` key for the
   TW5 boot kernel.
-* **`blobDescriptorUri(blobId)`** → `lar:///ha.ka.ba/bags/@oracle/blobs/<safe>`.
-  Blobs live in the **`@oracle`** runtime system island beside the engine
+* ''`blobDescriptorUri(blobId)`'' → `lar:///ha.ka.ba/bags/@oracle/blobs/<safe>`.
+  Blobs live in the ''`@oracle`'' runtime system island beside the engine
   bytes — never in the `@lararium` corpus seed (the 2026-06-16 carve; see
   `disk-projection#oracle-split`).
-* **`resolveOracleDoc(registryHandle, oracleKey, resolve, provenance)`** — the
+* ''`resolveOracleDoc(registryHandle, oracleKey, resolve, provenance)`'' — the
   read → resolve → write-back-on-first-mint shape for a bag→doc pointer.
   Reads the pointer (`text` field) from the registry doc; hands the URL (or
   null) to the platform `resolve` strategy; writes the oracle tiddler back
@@ -51,13 +51,13 @@ turns a bag-URI into a live doc handle:
 primitive serves both pointer planes (`wiki-layer-ontology#oracle-planes`):
 
 * ''system bags'' (`@oracle`, `@lararium`, `@lares`) resolve and write their
-  pointer in the **`@oracle`** system-island doc the vessel already holds.
-* **user bags** resolve and write in **`@catalog`**.
+  pointer in the ''`@oracle`'' system-island doc the vessel already holds.
+* ''user bags'' resolve and write in ''`@catalog`''.
 
 The caller (`open-vessel-core`) picks the plane per bag tier; `base-doc` stays
-plane-blind — it writes wherever the handed registry handle points. *(Caller
-plane-routing: ruled, enactment tracked at the live handoff torch; today the
-callers hand `@catalog` for every bag.)*
+plane-blind — it writes wherever the handed registry handle points. //(Caller//
+//plane-routing: ruled, enactment tracked at the live handoff torch; today the//
+//callers hand `@catalog` for every bag.)//
 
 <<~/ahu >>
 

@@ -22,9 +22,9 @@ uri-path    = "ha.ka.ba/lararium/mesh/verb-tiddler"
 
 Three lar: URIs carry one request through its life, request and result held apart:
 
-* **`lararium.local.vm/verbs/<requestId>`** — the VOLATILE invocation tiddler. A local caller writes it to the admin wiki; the dispatcher picks it up on the next change. Vessel-local scratch, never shared truth.
-* **`@daemon/summons/<requestId>`** — the edge TRANSPORT. An external vessel writes a summons to the Automerge doc; the dispatcher relays it into a volatile invocation, then tombstones the summons. Edge transport, not durable coordination. ("signal" names a different layer — the Agent↔Operator HUD frame.)
-* **`@daemon/outcomes/<requestId>`** — the DURABLE outcome tiddler (the result). Syncs to all vessels via CRDT. Durable shared meaning begins at the outcome, never at the summons.
+* ''`lararium.local.vm/verbs/<requestId>`'' — the VOLATILE invocation tiddler. A local caller writes it to the admin wiki; the dispatcher picks it up on the next change. Vessel-local scratch, never shared truth.
+* ''`@daemon/summons/<requestId>`'' — the edge TRANSPORT. An external vessel writes a summons to the Automerge doc; the dispatcher relays it into a volatile invocation, then tombstones the summons. Edge transport, not durable coordination. ("signal" names a different layer — the Agent↔Operator HUD frame.)
+* ''`@daemon/outcomes/<requestId>`'' — the DURABLE outcome tiddler (the result). Syncs to all vessels via CRDT. Durable shared meaning begins at the outcome, never at the summons.
 
 <<~/ahu >>
 

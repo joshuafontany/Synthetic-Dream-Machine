@@ -117,7 +117,7 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 !! Pitfalls
 
-* **Socket perms `0600`/owner** + post-boot re-verify (some envs reset ownership).
+* ''Socket perms `0600`/owner'' + post-boot re-verify (some envs reset ownership).
 * ''Stale-socket cleanup'' on daemon restart (bind fails on a leftover path).
 * ''The daemon's own WS relay keeps the Ed25519 gate'' — peer-cred doesn't cross
   machines; never an unauthenticated TCP bind (the `tcp://0.0.0.0:2375` anti-pattern).
@@ -137,8 +137,8 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
    that decodes a capability-bearing invocation, runs it through the ''existing''
    VerbDispatcher, and returns the durable outcome. Alongside the WS — not replacing
    it. //(Touches the node boot/ingress — coordinate with the identity/boot work.)//
-# **Thin CLI local-invoker** (lares-cli `local-connector`): `invokeLocal(verb, args,
-   did)` — UDS connect · write invocation · read receipt. **The CLI's only transport**
+# ''Thin CLI local-invoker'' (lares-cli `local-connector`): `invokeLocal(verb, args,
+   did)` — UDS connect · write invocation · read receipt. ''The CLI's only transport''
    (`verb-call.runVerb`); an absent socket raises `DaemonUnreachable`, never a replica.
 # ''Auth:'' SO_PEERCRED + socket perms gate the channel; the per-call Ed25519/
    capability stays the authority verified by the daemon.

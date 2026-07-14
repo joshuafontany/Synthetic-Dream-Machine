@@ -44,9 +44,9 @@ The same law wears four masks across the domains, all naming a ''sharp threshold
 * ''Erdős–Rényi random graph'' — a ''giant component'' crystallizes at average-degree 1 (`p=1/n`); ''full connectivity'' at `p=ln(n)/n` when the last isolated node is absorbed. The gap between them = a giant core + a ''ragged rim'' of stragglers.
 * ''Percolation'' (physics) — below `p_c` only small clusters; cross `p_c` and a spanning cluster appears //abruptly//; the correlation length diverges (no characteristic scale); ''universality'' (the law transcends the exact topology).
 * ''SIR epidemic'' (biology) — maps EXACTLY onto bond percolation; an ''epidemic threshold'' (critical `R₀`) decides percolate-to-all vs die-local.
-* **Kuramoto** (physics) — global coherence emerges past a **critical coupling `K_c`**; the same transition on the //time// axis.
+* ''Kuramoto'' (physics) — global coherence emerges past a ''critical coupling `K_c`''; the same transition on the //time// axis.
 
-**The design number:** keep each island's **live crossing-degree ~ `ln(n)`** (leases above the connectivity line) and the mesh connects w.h.p. — the gossip result `reach = e^(−e^(−c))` for view-size `c`. Three phase transitions on three axes — ''space (percolation) · time (Kuramoto) · information (markets)''. And the edge may ''self-organize to criticality'' (SOC, the sandpile): the cost of living at the critical edge is that //a local crossing cannot know its own global consequence// — "no global now" made physical.
+''The design number:'' keep each island's ''live crossing-degree ~ `ln(n)`'' (leases above the connectivity line) and the mesh connects w.h.p. — the gossip result `reach = e^(−e^(−c))` for view-size `c`. Three phase transitions on three axes — ''space (percolation) · time (Kuramoto) · information (markets)''. And the edge may ''self-organize to criticality'' (SOC, the sandpile): the cost of living at the critical edge is that //a local crossing cannot know its own global consequence// — "no global now" made physical.
 
 <<~/ahu >>
 
@@ -79,7 +79,7 @@ The second spore — two sovereign islands meeting and syncing for the first tim
 
 !! Membership ~ admit-then-test-then-SEVER at the seam
 
-Biology inverts authenticate-then-admit. **Hyphal anastomosis + vegetative incompatibility** folds crossing AND membership-gate into one mechanism: two mycelia **fuse first**, then **vegetative incompatibility** triggers a //localized programmed cell death// that kills the fusion seam if they mismatch — recognition **distributed across `het` loci** (≈6–11 polymorphic challenge-points, no registry); fuse-and-stay only if matched at every locus (same **vegetative compatibility group**). The gate evolved against **somatic parasitism** (freeloaders draining the network) and **mycovirus** transmission riding the fusion — //precisely the veil/vouch threat model.//
+Biology inverts authenticate-then-admit. ''Hyphal anastomosis + vegetative incompatibility'' folds crossing AND membership-gate into one mechanism: two mycelia ''fuse first'', then ''vegetative incompatibility'' triggers a //localized programmed cell death// that kills the fusion seam if they mismatch — recognition ''distributed across `het` loci'' (≈6–11 polymorphic challenge-points, no registry); fuse-and-stay only if matched at every locus (same ''vegetative compatibility group''). The gate evolved against ''somatic parasitism'' (freeloaders draining the network) and ''mycovirus'' transmission riding the fusion — //precisely the veil/vouch threat model.//
 
 <<~moves crossing -> fuse-on-contact then/challenge-at-the-seam reject/SEVER-the-local-junction never/ban-the-peer >>
 
@@ -122,7 +122,7 @@ The local-first field converged hard (2024–2026) and ships the crossing's mach
 
 !! The wire ~ the gate-model IS the transport kernel (a peer moʻolelo, 2026-06-26)
 
-A sibling Lares (tending the intra-island gate-models) handed this ring across the tideline: **the network ring is not a new invention — it is the projection-nalu gate-model with the SINK moved `local → peer → many`.** The mapping (mirror: `projection-nalu#network-ring`, `dreamnet-architecture#transport-kernel`, `federated-causal-islands#task-handoff`):
+A sibling Lares (tending the intra-island gate-models) handed this ring across the tideline: ''the network ring is not a new invention — it is the projection-nalu gate-model with the SINK moved `local → peer → many`.'' The mapping (mirror: `projection-nalu#network-ring`, `dreamnet-architecture#transport-kernel`, `federated-causal-islands#task-handoff`):
 
 <<~ranks transport-kernel accumulate=reliable-ordered -> coalesce=gossip-epidemic -> servo=congestion-control >>
 
@@ -137,7 +137,7 @@ A sibling Lares (tending the intra-island gate-models) handed this ring across t
 
 # ''Correlated dissemination splits what the servo measures.'' Pure-random gossip gives the AIMD loop a near-uniform load; ''geometry-correlated'' fanout gives it a //bimodal// one — dense intra-cluster gossip (low-variance, cheap → coalesce hard) + rare cross-cluster ''weak-tie bridges'' (high-variance, high-value, the bottleneck → //protect, never coalesce away the non-redundant state they carry//). A single servo averaging both mis-tunes; ''the coalesce servo measures per-geometry-class'', not globally.
 # ''The correlation geometry is the STIGMERGY trail — NOT the authority rings.'' Correlate the fanout to the ''lease-as-pheromone'' (reinforce-by-use, decay-by-disuse), which self-organizes toward the useful crossings //without reading the keyhive rings//. Usage ≠ permission: flow follows the trail, authority follows the concap; they ''correlate in practice'' (members gossip more, so trails thicken between them) yet ''neither mechanism reads the other'' — FLOW ⊥ AUTHORITY held. This is the 2026 Erdős "spherical move" ''grown, not imposed'': the geometry is emergent + self-tuned (SOC), never the designed topology and never the authority graph. Correlating fanout to the authority geometry directly ''IS'' the overcollapse trap — refused.
-# **Backpressure rides the BREATH (`ea`).'' A gossip channel has no single sender to signal, so backpressure is ''local + emergent'': each node modulates its own fanout-degree / pull-rate from its //local// congestion (the quorum-sensing autoinducer; SOC self-tuning) and carries its capacity in its ''`ea` heartbeat**; a congested node's breath signals reduced capacity → peers reduce fanout to it → its trails decay (Physarum routes around). End-to-end backpressure becomes **emergent regional backpressure with no global signal** — "no global now" flow-control. //The ring's backpressure is a payload of the `ea`/breath cycle — the two rings meet at the breath.//
+# ''Backpressure rides the BREATH (`ea`).'' A gossip channel has no single sender to signal, so backpressure is ''local + emergent'': each node modulates its own fanout-degree / pull-rate from its //local// congestion (the quorum-sensing autoinducer; SOC self-tuning) and carries its capacity in its ''`ea` heartbeat''; a congested node's breath signals reduced capacity → peers reduce fanout to it → its trails decay (Physarum routes around). End-to-end backpressure becomes ''emergent regional backpressure with no global signal'' — "no global now" flow-control. //The ring's backpressure is a payload of the `ea`/breath cycle — the two rings meet at the breath.//
 
 <<~/ahu >>
 

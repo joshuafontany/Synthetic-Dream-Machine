@@ -82,7 +82,7 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 !! Aftermath
 
 * ''Nesting decided (Sprint 3).'' Item is an entity; it `#has` a Power through the `item` mount-point. No second module type, no `#composes` for entity→module. `#composes` stays reserved for module→module (a Power that triggers or riders another Power).
-* **`holds` edge vs `#has`.** This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records //which// Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
+* ''`holds` edge vs `#has`.'' This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records //which// Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
 * ''Container sub-rule'' (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 
 <<~/ahu >>

@@ -45,7 +45,7 @@ No arrows go upstream. No package adds a dep that reaches into a downstream pack
 
 !! Spine Law
 
-**`@lararium/mesh` anchors the isomorphic spine for all concerns outside TW5 VMs.**
+''`@lararium/mesh` anchors the isomorphic spine for all concerns outside TW5 VMs.''
 
 What this means in practice:
 
@@ -65,7 +65,7 @@ Vessel law, pool law, worker lease contracts, tiddler store interfaces, causal i
 types, and projection contracts all live in `@lararium/mesh`. If a type needs to cross
 the node↔browser boundary, it belongs in mesh, not in either vessel package.
 
-**AL-4 — TW5 VM concerns live in `@lararium/tw5`, not in mesh.**
+''AL-4 — TW5 VM concerns live in `@lararium/tw5`, not in mesh.''
 The TW5 engine, MemeRecipeVm, TW5WorkerProxy, plugin build pipeline, and all
 TW5-specific types live in `@lararium/tw5`. Mesh holds the `MemeRecipeVm` interface
 and `VmPool` because those provide vessel-level coordination types; the implementations

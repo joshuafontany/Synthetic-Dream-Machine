@@ -101,16 +101,16 @@ Pure inversion-of-control ''breaks at the multi-principal key-handover'': with e
   subaddresses, holds no spend authority, publishes no link.
 * ''Anonymous credentials'' hold it as the ''master secret'' (Chaum 1985; Camenisch–Lysyanskaya 2001) —
   its knowledge is //exactly// what the unlinkability proof withholds from everyone else.
-* ''Naming'' calls it a ''private namespace / petname book'' (SDSI, RFC 2693; Stiegler) — *a NAMESPACE,
-  not a super-key.* A key placed over the handles becomes a presentable root that correlates them.
-* ''Group crypto'' proves the wall (RFC 9420; Keyhive): *co-members cannot hide co-membership from each
-  other*, so the handles MUST NOT share a roster.
+* ''Naming'' calls it a ''private namespace / petname book'' (SDSI, RFC 2693; Stiegler) — //a NAMESPACE,//
+//  not a super-key.// A key placed over the handles becomes a presentable root that correlates them.
+* ''Group crypto'' proves the wall (RFC 9420; Keyhive): //co-members cannot hide co-membership from each//
+//  other//, so the handles MUST NOT share a roster.
 
 ''The single-bit test — collect vs merge:'' //is the collector ever PUBLISHED or PRESENTED to a verifier?//
 Local-only → ''collect'' (unlinkable). Published → ''merge'' (links every self). That one bit is the whole
 architecture, and its violation is the ''Nymwars harm'' (Google+/Facebook real-name, 2011–14): a forced
-single-legal-name root de-pseudonymised activists, performers, survivors — *the presented root became the
-correlation key.* And the ''OIDC-IdP'' lesson: keep the collector on the human's own device, NEVER a shared
+single-legal-name root de-pseudonymised activists, performers, survivors — //the presented root became the//
+//correlation key.// And the ''OIDC-IdP'' lesson: keep the collector on the human's own device, NEVER a shared
 party who holds the master table.
 
 ''A Vault IS a me-Circle, seen from the key layer.'' The me-Circle (#composition) names the collector as a

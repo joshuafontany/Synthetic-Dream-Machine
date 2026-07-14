@@ -244,7 +244,7 @@ body-sha256   = "sha256:..."  # hash of the TypeScript source at time of meme ca
 | 3 | Boot-time gate checks `mana`, `confidence`, `body-sha256`; meme preferred if all pass |
 | 4 | Meme is authoritative; TypeScript is fallback only |
 
-**`heleuma = "ba"`**: "ba" (Hawaiian: to carry, to bear) — the meme is now the carrier
+''`heleuma = "ba"`'': "ba" (Hawaiian: to carry, to bear) — the meme is now the carrier
 of the pattern. The TypeScript file is the material instantiation; the meme is the wave.
 
 <<~/ahu >>

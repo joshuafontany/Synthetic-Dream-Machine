@@ -30,12 +30,12 @@ written   = "2026-06-29"
 > live; the per-nexus board, the threshold-steward source, and the three couplings ride
 > ahead of code.
 
-The `@oracle` carries a public read substrate — *what this neighborhood holds out for
-all to see*. This meme answers ''who governs it, at what scale, and how it stays''
+The `@oracle` carries a public read substrate — //what this neighborhood holds out for//
+//all to see//. This meme answers ''who governs it, at what scale, and how it stays''
 ''un-capturable''. The short of it: ''the founder seeds, the circle governs, the fork''
 ''guards.''
 
-**One `@oracle`, two faces — never a second board.** This governance board reads as the
+''One `@oracle`, two faces — never a second board.'' This governance board reads as the
 ''read face'' over the //same// `@oracle` substrate the registry/recipe plane already holds.
 The ''content/registry face'' mints the recipe + engine-blob CIDs + protocol invariants
 (<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology#oracle-planes >>); the
@@ -60,8 +60,8 @@ board for all of DreamNet. The grounds run ''OWNERSHIP and SCALE'', never no-glo
 ''Correct the no-global-now framing (MUST).'' A //global// `@oracle` does NOT violate
 no-global-now. A shared `docId` names a ''rendezvous'' — an address, not a shared present.
 Each peer that dials it ''materializes its own converging causal island'' over that
-address; the address coordinates, the state stays local-first. *That IS no-global-now
-enacted, not breached* (<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>).
+address; the address coordinates, the state stays local-first. //That IS no-global-now//
+//enacted, not breached// (<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>).
 So per-nexus rests on ownership and scale, never on a no-global-now prohibition the shared
 address would not trigger anyway.
 
@@ -73,8 +73,8 @@ address would not trigger anyway.
 
 The board carries ''one well-known per-nexus ROOT/INDEX `docId`'' — the ''global''
 ''address'' — fanning by ''transitive reachability'' to a fan of ''per-topic causal''
-''islands''. This reads the Beelay pattern straight: *a stable global address, local
-converging causal state behind it.*
+''islands''. This reads the Beelay pattern straight: //a stable global address, local//
+//converging causal state behind it.//
 
 ```text
   @oracle ROOT/INDEX docId   ← the well-known global ADDRESS (one per nexus)
@@ -89,7 +89,7 @@ The root names //where to begin//; each topic island converges on its own. A rea
 the reachability fan from the root and materializes only the topics it cares to read —
 no peer holds the whole board //at once//, and none needs to.
 
-**Coheres with the established `@oracle` (no new invention).** The corpus already names
+''Coheres with the established `@oracle` (no new invention).'' The corpus already names
 `@oracle` the ''public crossroads bulletin board'' — a host-independent-docId CRDT the
 net may ''fork'' (a founder who CAN be forked cannot rule), riding atop the system
 pointer/recipe plane
@@ -123,8 +123,8 @@ authority at all
 ''projection AND run their own topic boards'' off the well-known root — the board hands out
 sight, never a write-throne.
 
-<<~ confidence Synthesis 13/20 >> moving the cap-tier from the //doc// to the *signing
-quorum* keeps FLOW ⊥ WHO at the governance layer the same way the relay floor keeps it at
+<<~ confidence Synthesis 13/20 >> moving the cap-tier from the //doc// to the //signing//
+//quorum// keeps FLOW ⊥ WHO at the governance layer the same way the relay floor keeps it at
 the carriage layer: the public can carry and read the projection without holding any
 authority over it.
 

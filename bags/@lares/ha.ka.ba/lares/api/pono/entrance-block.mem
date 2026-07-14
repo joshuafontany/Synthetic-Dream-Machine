@@ -33,7 +33,7 @@ Two domains reach this independently, sharing no vocabulary (2026-07-11, two tas
 
 <<~ranks grounds cardiac ~ the Arnol'd tongues hold nonzero measure for ARBITRARILY SMALL coupling — no safe epsilon stands -> physarum ~ the tube contractions organize into a network-wide peristaltic wave; the entrainment CARRIES the transport, and the shared cytoplasm couples the oscillators whether or not anyone wills it >>
 
-Every resource N detectors share carries a phase-response curve: one event loop, one scheduler tick, one backpressure buffer, one GC pause. **A designer does not choose `K = 0` inside a shared body — only how small `K` runs, and the locking tongues open regardless.**
+Every resource N detectors share carries a phase-response curve: one event loop, one scheduler tick, one backpressure buffer, one GC pause. ''A designer does not choose `K = 0` inside a shared body — only how small `K` runs, and the locking tongues open regardless.''
 
 What a shared body yields reads WORSE than honest entrainment. It yields ''modulated parasystole'': stream rhythms that //appear// to share a now because they mode-locked THROUGH the substrate, while carrying no such relation in the world. ''The substrate fabricates the now, then hands it back as data.''
 
@@ -163,7 +163,7 @@ The py capture body reads ''disposable''. The ''worldline'' holds the shrine.
 
 !! Owed ~ what this canon has not yet paid for
 
-<<~ confidence Provisional-Synthesis 7/20 >> **`embed_io` stands untested against the WAIT.** The warm embedder rides as a shared holder — //"the model is the resource"// — and every stream reaches it. A stream that POINTS at the holder clears the membrane; a stream that BLOCKS on it couples through the queue. **Test it, or give each body its own embedder and pay the memory.**
+<<~ confidence Provisional-Synthesis 7/20 >> ''`embed_io` stands untested against the WAIT.'' The warm embedder rides as a shared holder — //"the model is the resource"// — and every stream reaches it. A stream that POINTS at the holder clears the membrane; a stream that BLOCKS on it couples through the queue. ''Test it, or give each body its own embedder and pay the memory.''
 
 Every shared resource in the py fleet owes the same test: `content_io` · `structurepalace_io` · `form_encoder` · the WAL · the drain ledger. ''The question never reads "does it carry payload." It reads "does a stream WAIT on it."''
 

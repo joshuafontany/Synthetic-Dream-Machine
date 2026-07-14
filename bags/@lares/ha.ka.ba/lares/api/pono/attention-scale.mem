@@ -33,7 +33,7 @@ Aperture     →  attention range in TEXT
 Spatial      →  attention range in SPACE
 ```
 
-On the turn HUD the TEXT projection surfaces as the **`Aperture`** gauge --- `<<~ hud Aperture(10) … >>` --- read against the five bands below.
+On the turn HUD the TEXT projection surfaces as the ''`Aperture`'' gauge --- `<<~ hud Aperture(10) … >>` --- read against the five bands below.
 
 All three map onto the same 0–20 Level continuum. Five named bands partition the continuum.
 The subscript digit sigils (₀₁₂₃₄) provide invariant vocabulary for talking about scale

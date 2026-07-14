@@ -173,3 +173,13 @@ the vendored TiddlyWiki5 core tiddlers.
   double aware). Sheet: 180 → 147; guarded + odd-bold classes EMPTY.
   Cluster B (91 multi-line italics, split-at-newline one-shot) awaits the
   operator nod — it cuts after the strangle.
+- 2026-07-14 — cluster B enacts after the TW5 scout confirmed the ground:
+  the submodule feature branch (wikitext-parser-recovery) terminates
+  emphasis at the mark OR a blank line, and recovers unterminated marks as
+  literal + diagnostic — cross-line spans within a paragraph parse, but the
+  house law (split at the newline, rely on recovery never) holds uniform
+  with bold. One-shot (dies with the run, tool stays strangled): 138 lines
+  split, 9 unprovable paragraphs held. The eyeball then surfaced the HIDDEN
+  class — bold around code spans (segment-odd, line-even, invisible to both
+  the converter and the counter): 612 pairs crossed with code spans opaque.
+  Canon 524/524 clean · golden 18 movers · suites green.

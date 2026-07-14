@@ -138,7 +138,7 @@ bits (or more). Six families:
 * `<transacts>` — default: heap reads + writes + allocation
 * `<reads>` — read-only heap access
 
-**Key rule:** Functions **without `<writes>`** can be safely executed in parallel
+''Key rule:'' Functions ''without `<writes>`'' can be safely executed in parallel
 without locks. This is the Verse-native condition for safe concurrent edges.
 
 !!! Propagation and hiding
@@ -147,13 +147,13 @@ Effects propagate ''upward'': calling a `<suspends>` function from a non-suspend
 function requires marking the caller `<suspends>`. The effect bit flows up the call
 chain.
 
-**Exception — `spawn` hides `<suspends>`:** The `spawn` expression absorbs the
+''Exception — `spawn` hides `<suspends>`:'' The `spawn` expression absorbs the
 `<suspends>` effect of the spawned function. The calling context does NOT need to be
 marked `<suspends>`. This is the formal mechanism that allows spawn to create a new
 task root independent of the calling scope. See `verse-task-tree` for the tree-topology
 consequence.
 
-**`if` hides `<decides>`:** The `if` expression absorbs the failure effect of its
+''`if` hides `<decides>`:'' The `if` expression absorbs the failure effect of its
 condition. The calling context does NOT need to handle failure — `if` converts a
 failable expression into a conditional branch.
 

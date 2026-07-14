@@ -141,7 +141,7 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 ''Spine invariant.'' Every carrier carries the full frame in order: ''SOH · STX · ETX · EOT'' (`0x01` · `0x02` · `0x03` · `0x04`). All four, always, in sequence. STX and ETX are bare pragmas — a lone mark each.
 
-**The iam slot — the toml heading.** The identity block is the **toml iam slot**: a bare `` ```toml iam `` fence directly after the SOH opener. The slot stays addressable as `#iam` and dissolves into parent fields; its surface is the toml fence.
+''The iam slot — the toml heading.'' The identity block is the ''toml iam slot'': a bare `` ```toml iam `` fence directly after the SOH opener. The slot stays addressable as `#iam` and dissolves into parent fields; its surface is the toml fence.
 
 ''STX position — fixed by the frame.'' SOH opens the heading; STX opens the text. The heading holds the iam slot (and any carrier-level `aka` binding — e.g. the RFC-2119 reference); the text holds the body. So STX follows the heading and opens the body — the `#head` title and every worksite live after STX.
 

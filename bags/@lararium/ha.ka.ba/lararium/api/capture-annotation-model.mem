@@ -102,8 +102,8 @@ user-root daemon hosts it BESIDE @daemon: @daemon crests CRDT waves to the widge
 instances — honoring no-VM-on-main (a worker_thread/Web-Worker), work-memory-is-local
 (non-federated), share-substrate-not-sovereignty (one daemon, two VMs).
 
-**Two instruments, never conflated:** the **`LarTickCounter`** (the physical local tick —
-20 Hz on the daemon, where the capture flush lives) sets the FLUSH cadence — the wave crests on it; the **`FfzClock`** (felt
+''Two instruments, never conflated:'' the ''`LarTickCounter`'' (the physical local tick —
+20 Hz on the daemon, where the capture flush lives) sets the FLUSH cadence — the wave crests on it; the ''`FfzClock`'' (felt
 segment·turn·session) sets the STAMP — each record's `lar_ffz` address. Physical cadence
 flushes; felt cadence addresses (lar:///ha.ka.ba/lararium/mesh/ffz-clock).
 
@@ -154,8 +154,8 @@ Hering-Breuer safety valve).
 
 ''The telemetry-VM runs in EVERY vessel — the same pure worker, specialized by injected''
 ''seams.'' `makeCaptureEngine` (lararium-mesh, pure: zero substrate imports) composes the
-capture core from three seams a vessel supplies: **`CaptureFlush`** (ONE verb — drain a
-batch → count filed), **`CaptureReserve`'' (the durable WAL twin), ''`CaptureAnnotate`**
+capture core from three seams a vessel supplies: ''`CaptureFlush`'' (ONE verb — drain a
+batch → count filed), ''`CaptureReserve`'' (the durable WAL twin), ''`CaptureAnnotate`''
 (turn → lar_*). What stays invariant is CAPTURE; what varies is the memory-HOME, shaped by
 CAPABILITY not platform (role = capability ≠ platform):
 
@@ -183,8 +183,8 @@ reserve · local/relay flush · the pure `buildPatch` twin).
 
 ''Surfaces.'' Every harness mines into a per-project wing, tagged `lar_surface`:
 Claude (`~/.claude/projects`, ''+ subagents/''), Codex (`~/.codex/sessions`),
-Copilot (`~/.copilot` — *verify format drift: the harvester keys on `events.jsonl`;
-disk now shows `workspace.yaml` — a live capture gap to confirm*).
+Copilot (`~/.copilot` — //verify format drift: the harvester keys on `events.jsonl`;//
+//disk now shows `workspace.yaml` — a live capture gap to confirm//).
 
 ''The two membranes'' (Option D, mempalace through the @daemon seat):
 
@@ -231,7 +231,7 @@ Three sub-layers, two nesting kinds, one correlation key. Depth: `agent-worldlin
 
 <<~ranks nesting in-process ~ Claude tasked-spirits: correlation IN-BAND (agentId · parentUuid · the subagents/ dir · the handoff); edge stamps at mine time -> cross-surface ~ claude coordinator → gh-copilot/codex: correlation via a W3C trace-id propagated in env TRACEPARENT (mint → inject → both record → join); needs a launcher SHIM >>
 
-**The handoff record** (the edge, as data): `{ correlation_id, edge_id,
+''The handoff record'' (the edge, as data): `{ correlation_id, edge_id,
 parent_edge_id, from_agent, to_agent, task, result_ref, status, t_spawned,
 t_returned }` → KG triples `(parent)—spawned→(child)`, `(child)—actedOnBehalfOf→
 (parent)`, `(output)—wasGeneratedBy→(task)`, each `[t_spawned,t_returned)`.
@@ -307,7 +307,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 ''SPECIFIED, not built'' (this model + the sibling memes):
 * The engine-grammar decomposer: chat-sigil `SharktoothSigil` .tids + gradient `\procedure` render; retire `turn-harvest` regex into the engine (`lar-telemetry`).
 * The ''forward-facing capture-nalu engine'' (#forward-facing-nalu): a SEPARATE local non-federated worker-VM; producers enqueue born-annotated records; the daemon's server tick (20 Hz) crests; the backpressure-gated flush drains via the source-adapter. Retires the race-behind hook.
-* The **`mempalace-source-lares` adapter** (sibling package on `BaseSourceAdapter`): yields `lar_*`-annotated, byte-preserving (`declared_transformations=frozenset()`) `DrawerRecord`s; plugs into the fork's `--source` seam via the `mempalace.sources` entry-point.
+* The ''`mempalace-source-lares` adapter'' (sibling package on `BaseSourceAdapter`): yields `lar_*`-annotated, byte-preserving (`declared_transformations=frozenset()`) `DrawerRecord`s; plugs into the fork's `--source` seam via the `mempalace.sources` entry-point.
 * The ''flush-gate config tiddler'' (lar-URI-tagged; pono default depth ≥ 32 OR ≥ 2000 ms).
 * The relationship spawn-edge: stamp the in-process edge (free, agentId/parentUuid) as a bi-temporal KG predicate; the cross-surface trace-id launcher shim.
 * `#has`/`lar_capability` best-effort enrichment (optional; recall already rides semantic search).

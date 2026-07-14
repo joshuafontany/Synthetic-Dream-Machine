@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/vessel-caps"
 
 ! Vessel Caps ~ a vessel is its composed cap-stack
 
-A vessel does not have a **type**. A vessel **carries a composed `#has`-stack of capabilities**, and its role //emerges// from which caps it holds and lights. Enumerating vessel-kinds (node-lararium, node-relay, browser-lararium) re-grows the subclass-explosion the `#has`-ontology already retired (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>). This meme replaces that enumeration with ''composition'' — so a full node, a bare relay, a browser, a Mudlet instance, an Unreal Engine instance, and the next vessel nobody has built yet all mesh by the ''same move: declaring the caps they carry.''
+A vessel does not have a ''type''. A vessel ''carries a composed `#has`-stack of capabilities'', and its role //emerges// from which caps it holds and lights. Enumerating vessel-kinds (node-lararium, node-relay, browser-lararium) re-grows the subclass-explosion the `#has`-ontology already retired (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>). This meme replaces that enumeration with ''composition'' — so a full node, a bare relay, a browser, a Mudlet instance, an Unreal Engine instance, and the next vessel nobody has built yet all mesh by the ''same move: declaring the caps they carry.''
 
 <<~ ahu #the-five-caps >>
 
@@ -32,14 +32,14 @@ The mesh untangles into ''five distinct capabilities in two families'' — the m
 | ''CARRIAGE'' | ''rhizome'' | connect / spread | persistent lateral backbone; forwards sealed bytes | the ''relay / leyline'' |
 | | ''stolon'' | propagate-at-distance | runs out, drops a clone, then withers | the ''device-admit / invite'' ceremony |
 | ''VESSEL'' | ''tuber'' | store + seed | sovereign state store + genesis-buds | the ''lararium'' |
-| | **bulb** | seed-inside | a snapshot carrying its own next generation | the **`cacheable` boot-seed / genesis** |
+| | ''bulb'' | seed-inside | a snapshot carrying its own next generation | the ''`cacheable` boot-seed / genesis'' |
 | | ''corm'' | renew-by-self-replacement | spent each cycle, a fresh one forms on the husk | the ''epoch-as-lease'' |
 
 The two families cross the ''AUTHORITY ⊥ FLOW'' master cut: VESSEL caps carry sovereignty and state (a //severable-but-viable// node), CARRIAGE caps carry connection and flow (the line between nodes). Biology witnesses both in one organism — a clonal plant's ramets stay severable-yet-viable while resource flows source→sink along the rhizome.
 
 ''Do not over-purify.'' The rhizome //itself// caches en-route; a carriage cap holding some replicated state breaks no law (botanically, the connector stores too). The cut names the ''primary verb'', never an absolute exclusion.
 
-**`read` is a SCOPED cap, never a switch.** A vessel reads //which bags// — the capability-layer names the bag a cap applies to, so read runs per-bag, never all-or-nothing. The relay floor's `#has-NOT read` therefore means ''no read on SOVEREIGN content'' — a local operator's `@catalog`, the sealed territory — while the ''public floor stays legible'': `@oracle` (base-ontology, engine-blob CIDs) and a vessel's own mesh-palace (the public FLOW-map). Blind to the territory, sighted on the map.
+''`read` is a SCOPED cap, never a switch.'' A vessel reads //which bags// — the capability-layer names the bag a cap applies to, so read runs per-bag, never all-or-nothing. The relay floor's `#has-NOT read` therefore means ''no read on SOVEREIGN content'' — a local operator's `@catalog`, the sealed territory — while the ''public floor stays legible'': `@oracle` (base-ontology, engine-blob CIDs) and a vessel's own mesh-palace (the public FLOW-map). Blind to the territory, sighted on the map.
 
 <<~/ahu >>
 
@@ -105,12 +105,12 @@ The carriage-demand stimulus reads off `r` — the carriage-standing coordinate 
 
 !! Lares Viales ~ the minimal wayfarer
 
-The smallest composition that still meshes — ''the Hermai'', the crossroads-markers. A Herm runs the ''same code keel as a full Lararium'' — the core ''@daemon wiki-worker'' plus its ''own mesh-palace'' — and thins only its `#has`-stack: it furnishes none of the operator-content wikis (no hot/cold user store, no sovereign `@catalog`). **One codebase, two `#has`-stacks.** The Herm differs from a fat node by **composition over the shared keel**, never by a separate minimal codepath — so a Herm reads as a named point in cap-composition space (#the-vessel-is-its-caps), not a stripped-down process. Its stack:
+The smallest composition that still meshes — ''the Hermai'', the crossroads-markers. A Herm runs the ''same code keel as a full Lararium'' — the core ''@daemon wiki-worker'' plus its ''own mesh-palace'' — and thins only its `#has`-stack: it furnishes none of the operator-content wikis (no hot/cold user store, no sovereign `@catalog`). ''One codebase, two `#has`-stacks.'' The Herm differs from a fat node by ''composition over the shared keel'', never by a separate minimal codepath — so a Herm reads as a named point in cap-composition space (#the-vessel-is-its-caps), not a stripped-down process. Its stack:
 
 * `#has {rhizome}` — it carries sealed mana along the leylines (CARRIAGE).
 * `#has {tuber}` scoped to the ''immune core'' — its own `@daemon` (the autonomy organ) and mesh-palace (the FLOW-map it routes on), carrying the ''bulb'' (the engine-blob / boot-seed) so it can seed a cold hearth.
 * `#has {read}` scoped to the ''public floor'' — `@oracle` (base-ontology, engine-blob CIDs) and its own mesh-palace.
-* `#has-NOT` the ''operator-content wikis'' — no hot/cold user store; `#has-NOT {read}` on another operator's sovereign **`@catalog`**, the sealed hearth stays a closed door.
+* `#has-NOT` the ''operator-content wikis'' — no hot/cold user store; `#has-NOT {read}` on another operator's sovereign ''`@catalog`'', the sealed hearth stays a closed door.
 
 !!! Immune teeth ~ why the keel, not a pipe
 

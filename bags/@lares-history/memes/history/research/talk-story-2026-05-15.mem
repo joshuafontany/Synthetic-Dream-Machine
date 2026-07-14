@@ -116,7 +116,7 @@ Full spec in `verse-event-lattice.md #unreleased-event-types`.
 
 !!! Primary Engine Law
 
-**TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.**
+''TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.''
 The ReactionGraph TS layer is a provisional bridge, not the target architecture.
 
 The target collapses the routing layer into the TW5 wiki:
@@ -193,7 +193,7 @@ Verse equivalent: `OnSimulate(StagedUpdates)<suspends>` entry point.
 Hawaiian proper name: ''DEFERRED'' pending Visual Verse tick node shape confirmation (UE6 ~2027).
 Grammar stub registered: `sigil-tick.tid`.
 
-**The operator authors `\tick` blocks. The engine delivers the nalu. These are not the same thing.**
+''The operator authors `\tick` blocks. The engine delivers the nalu. These are not the same thing.''
 
 <<~/ahu >>
 

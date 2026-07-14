@@ -90,7 +90,7 @@ Before generating, Lares sets the role it adopts. The `~` prefix marks it execut
 lar://lares:agent@enyalios/~schema.flow.documented/
 ```
 
-**Step 3 — Open the turn with the `aim` vector.**
+''Step 3 — Open the turn with the `aim` vector.''
 
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
@@ -168,12 +168,12 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the
 |---|---|---|---|---|
 | 1 | ''scheme'' | Protocol identifier | `lar:` — non-dereferenceable | `lar:` |
 | 2 | ''userinfo'' | Requesting party identity | `alias:grant` | `telarus:operator` |
-| 3 | **`@`** | Identity → machine delimiter | Standard | `@` |
+| 3 | ''`@`'' | Identity → machine delimiter | Standard | `@` |
 | 4 | ''host'' | Machine identity | `machine_id` from crystal system | `enyalios` |
 | 5 | ''path'' | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/lares/` | `/threshold.uncertain.opens` |
-| 6 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
+| 6 | ''`#fragment`'' | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
 
-> **Layout validation `Canon 18/20`:** The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. //Source: `_todo/E-deep-research-report.md` §4.2//
+> ''Layout validation `Canon 18/20`:'' The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. //Source: `_todo/E-deep-research-report.md` §4.2//
 
 <<~/ahu >>
 

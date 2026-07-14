@@ -84,8 +84,8 @@ payloadType? — Verse type string (e.g. "agent", "int"); absent = void
 ```
 
 `verseKind` distinguishes:
-* **`listenable`** — engine-vended; supports `Subscribe()` (persistent multi-consumer). The common case for built-in UEFN device events.
-* **`event`** — user-instantiated (`event(T){}`); supports `Await()` + `Signal()` only. No `Subscribe()`. Fire-once semantics.
+* ''`listenable`'' — engine-vended; supports `Subscribe()` (persistent multi-consumer). The common case for built-in UEFN device events.
+* ''`event`'' — user-instantiated (`event(T){}`); supports `Await()` + `Signal()` only. No `Subscribe()`. Fire-once semantics.
 
 When absent: treat as `"listenable"`.
 
@@ -102,7 +102,7 @@ payloadType? — Verse parameter type matching the connected listenable's payloa
 effects?     — Verse effect specifiers as string array (e.g. ["suspends"], ["decides", "transacts"])
 ```
 
-**`effects` field:** Space-separated Verse specifiers stored as metadata. Not interpreted in TS — available for canvas authoring tools and code generation. Verse semantics:
+''`effects` field:'' Space-separated Verse specifiers stored as metadata. Not interpreted in TS — available for canvas authoring tools and code generation. Verse semantics:
 * `suspends` — function may yield the calling fiber; analogous to TypeScript `async`
 * `decides` — function participates in branch/race/rush resolution
 * `transacts` — function participates in atomic transaction grouping
@@ -128,9 +128,9 @@ componentTypes   — worn component URIs (control:has edges; Verse class(...) co
 
 # ''Ahu-slot tree'' (document structure) — `fragment-parent` + `slot` tiddler fields. One `.md` decomposes into root + N slot fragment tiddlers. NOT a pranala edge.
 
-# **`control:extends`** (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
+# ''`control:extends`'' (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
 
-# **`control:has`** (N edges) — Verse class(...) composition as worn components. Maps to `componentTypes`. N edges allowed.
+# ''`control:has`'' (N edges) — Verse class(...) composition as worn components. Maps to `componentTypes`. N edges allowed.
 
 ---
 

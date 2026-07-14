@@ -53,7 +53,7 @@ This document holds ''submission-draft'' maturity. The lexical structure, dual-l
 
 ''Two faces of one meme.'' This carrier holds the ''specification face'' of `memetic-wikitext`; the runtime ''kernel'' face (`…/memetic-wikitext/kernel`) holds the live grammar kernel, sigil registry, parse rules, and boot grammar that a node loads. The tiddler-format law keeps them distinct — this `.mem` documents the language; the kernel `.tid` runs it.
 
-**Relation to the `lar:` URI specification.** Memetic-wikitext addresses content by `lar:` URIs. The `lar:` scheme — its anatomy, path arity, and resolution discipline — forms a ''separate, sibling submission'': `lar:///ha.ka.ba/lares/api/pono/lar-uri` (Normative Reference [LAR-URI]). This document treats a `lar:` URI as an opaque content identity (see `URI-ref`, #grammar) and defers its internal structure to [LAR-URI].
+''Relation to the `lar:` URI specification.'' Memetic-wikitext addresses content by `lar:` URIs. The `lar:` scheme — its anatomy, path arity, and resolution discipline — forms a ''separate, sibling submission'': `lar:///ha.ka.ba/lares/api/pono/lar-uri` (Normative Reference [LAR-URI]). This document treats a `lar:` URI as an opaque content identity (see `URI-ref`, #grammar) and defers its internal structure to [LAR-URI].
 
 ''Audience.'' Implementers of parsers and renderers; authors migrating TiddlyWiki5 or Verse content; registry maintainers.
 
@@ -214,7 +214,7 @@ A pranala edge MUST declare a ''family'' from the canonical set. Families carry 
 | `constraint` | `pono` | graph | a rule that MUST hold; no execution pulse |
 | `relation` | `loulou` | page | a navigable link, no auto-embed |
 | `observe` | //(monitoring)// | page | inspection / measurement / attention; confidence-bounded |
-| **`transclusion`** | `aka`, `kahea` | ''page'' | a ''content identity'' embedded into the source — `aka` frozen, `kahea` live (subscription-fresh); confidence-bounded |
+| ''`transclusion`'' | `aka`, `kahea` | ''page'' | a ''content identity'' embedded into the source — `aka` frozen, `kahea` live (subscription-fresh); confidence-bounded |
 | `dataflow` | //(value-wire)// | canvas | a typed ''value'' between node pins (reads/writes/streams) |
 | `reaction` | `papalohe` | canvas | an event wire — fires when the source event activates |
 | `message` | `lele` | canvas | fire-and-forget async dispatch |
@@ -409,8 +409,8 @@ A canvas reaction wire (flow surface):
 !! Annex B — Open Items (Informative)
 
 * ''Conditional + concurrency naming (settled).'' `wai` = wikispace conditional (`\if`, with `kahawai`/`mukuwai`); `heihei` = canvasspace conditional-branch (Verse `if`/`case`); `holo` = race (`\race`); `puka` = rush; `hui` = sync; `lele` = branch — settled across the per-sigil memes and `verse-task-tree`.
-* **`spatial` sugar.** Family registered; a directional sugar sigil and English alias remain pending.
-* **`kukali` (reactive wait).** Awaits an async `ReactionGraph`; the wait posture has no semantics without an async execution context.
+* ''`spatial` sugar.'' Family registered; a directional sugar sigil and English alias remain pending.
+* ''`kukali` (reactive wait).'' Awaits an async `ReactionGraph`; the wait posture has no semantics without an async execution context.
 * ''Widget-tree pass.'' `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.
 * ''Transclusion family name.'' English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
 

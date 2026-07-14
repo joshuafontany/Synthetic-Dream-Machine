@@ -193,7 +193,7 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 !! Iam Block
 
-The **toml iam slot** (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `carrier-sigils#carrier-spine`).
+The ''toml iam slot'' (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `carrier-sigils#carrier-spine`).
 
 Canonical form:
 ````text

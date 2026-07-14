@@ -38,7 +38,7 @@ The Elyncia.app / DreamDeck identity model holds three distinct layers. ''Do not
 | ''Handle'' | `@telarus.elyncia.social` (AT Protocol/Bluesky) or `@telarus@elyncia.social` (ActivityPub/Kowloon) | A resolution alias over the DID — human-readable, not authoritative. |
 | ''lar: alias'' | `telarus:operator@enyalios` | Application-layer signal state — names the //operational role// of the speaker in a `lar:` exchange. Not a network identity; not a DID alias. |
 
-**Why the lar: alias carries no leading `@`:** the handle (`@telarus@elyncia.social`) already serves as a resolution alias over the DID. The lar: `alias` field holds a third distinct thing — it tags the operational role in the signal exchange. Adding `@` to a lar: alias would conflate the social-handle layer with the application-signal layer.
+''Why the lar: alias carries no leading `@`:'' the handle (`@telarus@elyncia.social`) already serves as a resolution alias over the DID. The lar: `alias` field holds a third distinct thing — it tags the operational role in the signal exchange. Adding `@` to a lar: alias would conflate the social-handle layer with the application-signal layer.
 
 <<~/ahu >>
 

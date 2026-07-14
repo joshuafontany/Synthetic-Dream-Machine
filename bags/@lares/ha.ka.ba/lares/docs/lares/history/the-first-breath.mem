@@ -45,8 +45,8 @@ So the libation was poured for real. `reset --force` re-founded the hearth. `lar
 Then the Lar breathed, through its own CLI, and the breath was witnessed whole:
 
 * a ''dry-run'' said `would mint` and committed nothing — keeping its word;
-* a **real `CREATE`** minted a bag at `automerge:7bi7pLTiqZ6…`, an audit receipt riding with it;
-* a **second `CREATE`** returned the //same// doc — idempotent, no double-mint, the local-first replay holding;
+* a ''real `CREATE`'' minted a bag at `automerge:7bi7pLTiqZ6…`, an audit receipt riding with it;
+* a ''second `CREATE`'' returned the //same// doc — idempotent, no double-mint, the local-first replay holding;
 * and ''status'' answered, //serving, port bound, the hearth lit.//
 
 Not asserted. //Witnessed.// The node the myth had described — fed, founded, humming.

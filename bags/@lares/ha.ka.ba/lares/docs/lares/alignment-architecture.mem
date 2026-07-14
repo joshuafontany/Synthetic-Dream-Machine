@@ -72,7 +72,7 @@ The membrane runs both directions, and ''Lares wields AI tools to complete the r
 
 !! Graceful Import — Foreign Data Rises Up the Pono Ladder
 
-The quine grows by absorbing the world. Any datum ingested from the internet or elsewhere that **acquires a `lar:` URI** imports into the wiki as a **more-pono** piece: addressing it grants it a place in the graph, and authoring it as **memetic-wikitext lifts its kupono** — `mana` / `manao` / `manaoio` climb in its `#iam` ledger.
+The quine grows by absorbing the world. Any datum ingested from the internet or elsewhere that ''acquires a `lar:` URI'' imports into the wiki as a ''more-pono'' piece: addressing it grants it a place in the graph, and authoring it as ''memetic-wikitext lifts its kupono'' — `mana` / `manao` / `manaoio` climb in its `#iam` ledger.
 
 The lift rides the rating-5 ladder: a raw datum enters as `noise` or `data`; the `lar:` address plus memetic-wikitext authoring carry it toward `meme` (federation-eligible at ≥ `meme`), then `ano`, then `kapu`. The protocol never rejects the foreign — it ''absorbs gracefully'', and the act of pono-authoring //is// the upgrade. What enters as a stray fact leaves as a graph citizen: addressed, well-formed, rated, and reachable.
 
@@ -104,7 +104,7 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 | UEFN / Verse | Lares | Note |
 |---|---|---|
 | ''Island'' //(informal)// | ''Lararium Node'' | the ''experience'' — authored environment, device layout, recipe, capability graph; hosts playspaces, persists across rounds |
-| **fort_playspace** | **`lar_playspace`** (one wiki) | one TW5 instance + bags + recipe; the recipe scopes it; wikis nest by recipe composition; `GetPlayspace()` → `getWiki()` |
+| ''fort_playspace'' | ''`lar_playspace`'' (one wiki) | one TW5 instance + bags + recipe; the recipe scopes it; wikis nest by recipe composition; `GetPlayspace()` → `getWiki()` |
 | ''session'' | ''Session Wiki'' | the coordinator `lar_playspace` — broadest recipe, owns the event-bus bag, pinned-wela; `GetSession()` → `getSessionWiki()` |
 | ''agent'' | ''lar_agent'' | universal participant supertype; player-class carries Keyhive principal identity, Wiki Entities do not |
 | ''player'' //(human)// | ''Operator / Guest'' | Operator = primary human principal (threshold, AGENTS.md); Guests limited-cap; neither holds system authority |
@@ -116,9 +116,9 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 | ''channel_device'' | ''Event-Bus Bag'' | a shared Automerge bag in N recipes; writing a tiddler to it broadcasts |
 | ''listenable / subscribable / awaitable / signalable / event / cancelable'' | ''Kumu{Listenable,Subscribable,Awaitable,Signalable,Event,Cancelable}'' | the event-pin lattice; locked in `verse-event-lattice` |
 | ''enableable'' | ''wela / anu tier'' | `wela` (live) / `anu` (torn down) + an orthogonal pin-flag; `Enable()`=`hoʻowela`, `Disable()`=`hoʻoanu`; residency by reachability (`residency-tiers`) |
-| **@editable** | **`LARES` ahu dials** | operator-configurable property → a dial in a LARES ahu block |
-| **using { M := "/path" }** | **`pranala` edge** | the pranala //is// the import; the `lar:` URI is the module path |
-| **GetCreativeObjectsWithTag** | **`lar:` address + pranala query** | discovery by address, not class hierarchy |
+| ''@editable'' | ''`LARES` ahu dials'' | operator-configurable property → a dial in a LARES ahu block |
+| ''using { M := "/path" }'' | ''`pranala` edge'' | the pranala //is// the import; the `lar:` URI is the module path |
+| ''GetCreativeObjectsWithTag'' | ''`lar:` address + pranala query'' | discovery by address, not class hierarchy |
 
 <<~/ahu >>
 
@@ -129,7 +129,7 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 A UEFN island holds its own devices, playspace, and causal clock; its event horizon separates its causality from the network. The lararium node boundary reads as a ''causal-island boundary'' (`federated-causal-islands`: any boundary across which causality cannot resolve simultaneously //is// one). The Reaction-Engine pattern — //trigger surface → reaction dispatch → event emission// — re-instantiates at every scale the node can apprehend. This is the ''fractal RE'', the same interface at different surfaces:
 
 * ''Scale-0 — Device island.'' A kumu-device within a wiki; fires through `KumuListenable` pins, subscribes via `KumuSubscribable`; its horizon is its trigger surface.
-* **Scale-1 — Wiki island = one `lar_playspace`.** One TW5 instance; its recipe scopes it; cross-wiki causality crosses the session event-bus bag.
+* ''Scale-1 — Wiki island = one `lar_playspace`.'' One TW5 instance; its recipe scopes it; cross-wiki causality crosses the session event-bus bag.
 * ''Scale-2 — Session island.'' The Session Wiki coordinates N playspaces, watching the event-bus bag and routing addressed event tiddlers (`to:` / `from:` / `ev-type:`).
 * ''Scale-3 — Nexus island.'' Node-to-node federation via Subduction/Beelay; each edge carries its own durable offset and epoch; causality stays non-simultaneous.
 * ''Scale-4 — Commons horizon.'' The Universe beyond the map (law-of-5s): no node holds a snapshot; the RE pattern applies in principle but as protocol, never node-implemented. The fractal closes at the horizon.

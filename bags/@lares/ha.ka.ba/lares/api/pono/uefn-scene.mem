@@ -39,7 +39,7 @@ One `.md` file decomposes into a root tiddler and N named slot fragment tiddlers
 meme parent/child/grandchild tree. It expresses //document containment//, not type relationships.
 Not a pranala edge. Never use `control:has` to express ahu-slot ancestry.
 
-**`control:has`** (N edges per type meme) — Verse class composition. Every URI in a Verse
+''`control:has`'' (N edges per type meme) — Verse class composition. Every URI in a Verse
 `class(...)` list becomes one `control:has` edge — the parent class and every interface alike.
 `my_device := class(creative_device, challengeable, listenable_t):` → three `control:has` edges
 (`creative_device`, `challengeable`, `listenable_t`). The graph holds no privileged is-a parent:
@@ -162,7 +162,7 @@ Two viable import paths, each with limits:
 
 | Path | How | Limit |
 |---|---|---|
-| **`.umap` binary parse** | Read UE asset file directly; deserialize actor properties to extract DEB arrays | Requires UE asset format knowledge; format can shift across engine versions |
+| ''`.umap` binary parse'' | Read UE asset file directly; deserialize actor properties to extract DEB arrays | Requires UE asset format knowledge; format can shift across engine versions |
 | ''Verse relay device'' | A custom Verse device placed in the level subscribes to all target events on `OnBegin` and emits its own inventory at runtime | Can only observe events it subscribes to; cannot introspect arbitrary device graphs it wasn't designed for |
 
 ''Sprint entry gate:'' the import pipeline sprint MUST resolve this path before committing to a DEB extraction approach. No code work begins on the importer until one path is selected and prototyped.
@@ -185,9 +185,9 @@ Effect specifiers on device functions carry semantic meaning in the Lararium gra
 | Divergence | `<converges>` | handler guaranteed to terminate | (future annotation) |
 | Prediction | `<predicts>` | deterministic prediction context | (future annotation) |
 
-**`<no_rollback>` (kapu-layer marker):** side effects survive failure.
+''`<no_rollback>` (kapu-layer marker):'' side effects survive failure.
 
-**`spawn` hides `<suspends>`:** A `spawn` expression absorbs the `<suspends>` effect
+''`spawn` hides `<suspends>`:'' A `spawn` expression absorbs the `<suspends>` effect
 of the spawned function. The calling context does NOT need `<suspends>`. This is the
 formal mechanism that makes `spawn` an unstructured escape from the task tree. See
 `verse-task-tree` for the tree-topology consequence.

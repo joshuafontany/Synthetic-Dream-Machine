@@ -72,7 +72,7 @@ The planes stay ''soft-bridged at the vessel, never fused'' — every crossing e
 
 !! The Relay Floor
 
-**Every lararium `#has {relay}` — always.** A lararium relays whether or not anyone else ever connects. The relay capability sits at the **floor** of the lararium stack, not beside it.
+''Every lararium `#has {relay}` — always.'' A lararium relays whether or not anyone else ever connects. The relay capability sits at the ''floor'' of the lararium stack, not beside it.
 
 But //holding// the cap and //expressing// it part ways: every lararium ''holds'' the rhizome (relay) cap intrinsically, yet ''expresses'' it — actually carries others' traffic — only when ''self-elected by capacity'' (reachability · spare bandwidth · uptime), demotable, never forced on all. The relay floor is //"every node may, and self-elects by load,"// never //"every node must carry."// The full model — the relay cap as one of five (`rhizome · stolon · tuber · bulb · corm`), hold-vs-express, the cap-handshake, self-election — stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>.
 
@@ -230,8 +230,8 @@ Two tiers cross the read/sealed cut:
 
 The mesh carries a sealed stream across many leylines with ''no global map'' — greedy geometric routing on an embedded chart. The chart reads as a ''map, not the territory'': public, coarse, provisional, lagging the live graph. Two coordinates per lararium, ''both FLOW-plane, both blind-computable'' (a relay needs neither to read content):
 
-* **`r` — carriage-standing (radial).** Set by relay **carriage-degree** (Krioukov `r = R − 2·ln(κ/κ₀)`): high-carriage nodes seat near center, leaves near the rim. A blind relay computes it from the leylines it carries, never from content. The social rating ladder (`noise → kapu`) stays on the social plane — ''off the routing radial'' (FLOW ⊥ WHO).
-* **`θ` — declared kinship (angular).** A deliberately-coarse coordinate each node **publishes in its dial-record** (FLOW-plane) — //which neighborhood of l-space it sits in//. The relay routes by the published map, blind to the sealed territory; the coarseness leaks no meaning by design. A bounded, cyclic S¹.
+* ''`r` — carriage-standing (radial).'' Set by relay ''carriage-degree'' (Krioukov `r = R − 2·ln(κ/κ₀)`): high-carriage nodes seat near center, leaves near the rim. A blind relay computes it from the leylines it carries, never from content. The social rating ladder (`noise → kapu`) stays on the social plane — ''off the routing radial'' (FLOW ⊥ WHO).
+* ''`θ` — declared kinship (angular).'' A deliberately-coarse coordinate each node ''publishes in its dial-record'' (FLOW-plane) — //which neighborhood of l-space it sits in//. The relay routes by the published map, blind to the sealed territory; the coarseness leaks no meaning by design. A bounded, cyclic S¹.
 
 ''Grown, not fitted.'' Each node ''relaxes'' its `(r, θ)` locally (Vivaldi-style) from a few known crossings and re-relaxes under churn — never a one-shot global fit (a global-now move). A Kleinberg ''spanning-tree embedding'' rides underneath as a ''deliverability floor'': when greedy stalls, fall to the tree (guaranteed reach, longer path). The chart ''lags the territory'' — a freshly-grown region carries provisional coordinates until it relaxes (the Ha-slow drift).
 

@@ -26,11 +26,11 @@ uri-path    = "ha.ka.ba/lararium/tw5/recipe-watch"
 recipe record (field `bag-stack`), and applies the diff to the island's own
 composite. The recipe + bag-oracle reach run ''two-source'' (operator ruling,
 2026-06-16, `wiki-layer-ontology#oracle-planes`): a ''system'' wiki
-(`@lares`/`@lararium`) reads its recipe from the **`@oracle`** doc
+(`@lares`/`@lararium`) reads its recipe from the ''`@oracle`'' doc
 (`recipeUri("@oracle", slug)`) and resolves system bags from `@oracle`; a
 ''user'' wiki reads `recipeUri("@catalog", slug)` and resolves user bags from
-`@catalog`. *(Code reads single-source `@catalog` today; the plane split is
-ruled, enactment tracked at the live handoff torch.)*
+`@catalog`. //(Code reads single-source `@catalog` today; the plane split is//
+//ruled, enactment tracked at the live handoff torch.)//
 
 * ''bag added'' → resolve via the owning plane's oracle, insert the layer above
   `@lares` (library position, below the wiki bag), replay its content into

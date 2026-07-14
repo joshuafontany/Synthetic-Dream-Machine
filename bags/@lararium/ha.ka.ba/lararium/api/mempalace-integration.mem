@@ -34,7 +34,7 @@ mempalace serves as a ''library-kind member of the bag stack'', accessed-not-loa
 
 !! The Tensegrity ~ compression members + tension
 
-The verbatim **drawers** stand as compression members — hard, isolated, local-only, ground-truth-of-//what-was-said//. Our **`lar_*` metadata** rides as the continuous tension spanning them — the bearing, the Voices, the confidence marks, the function-hall, the surface — ground-truth-of-//what-it-means//. Neither bears the load alone; each multiplies the other.
+The verbatim ''drawers'' stand as compression members — hard, isolated, local-only, ground-truth-of-//what-was-said//. Our ''`lar_*` metadata'' rides as the continuous tension spanning them — the bearing, the Voices, the confidence marks, the function-hall, the surface — ground-truth-of-//what-it-means//. Neither bears the load alone; each multiplies the other.
 
 The founder's own thesis names the shape: //remember the way I remember — not the conclusions alone, but the journey.// The drawer keeps the journey; the `lar_` net makes it walkable; the lararium graph names where it leads.
 
@@ -44,7 +44,7 @@ The founder's own thesis names the shape: //remember the way I remember — not 
 
 !! The @daemon Memory-Shore ~ the verb flow
 
-The `@daemon` wiki-island serves as the **causal-island shore** between the chat session and the mempalace metadata. One pure **`enrich()`** (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one ''idempotent upsert'' writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: ''the mode lives in the //feeder// only, never in the transform.''
+The `@daemon` wiki-island serves as the ''causal-island shore'' between the chat session and the mempalace metadata. One pure ''`enrich()`'' (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one ''idempotent upsert'' writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: ''the mode lives in the //feeder// only, never in the transform.''
 
 * ''Live'' ~ a thin Stop/SessionEnd hook calls the shore per turn; new drawers carry `lar_*` from birth.
 * ''Backfill'' ~ the same pair sweeps the corpus (`lares harvest --all`).

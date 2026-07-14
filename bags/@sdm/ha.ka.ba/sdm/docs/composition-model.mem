@@ -40,7 +40,7 @@ The published SDM/VLG/UVG rules already run a composition system: every Power ca
 | ''Component'' | A facet a module carries: domain, function, hook, posture. | `components/{facet}/{slug}` |
 | ''Mount-point'' | Where a module seats on an entity, and the contract that seating implies. | `mount-points/{trait,item,structure,burden}` |
 
-One verb joins them: **`#has`**. Flat. No `family`, no `role`. The target URI path prefix carries the semantics — `components/` vs `mount-points/` — so the edge needs no metadata. A module `#has` components and `#has` a mount-point; an entity `#has` modules.
+One verb joins them: ''`#has`''. Flat. No `family`, no `role`. The target URI path prefix carries the semantics — `components/` vs `mount-points/` — so the edge needs no metadata. A module `#has` components and `#has` a mount-point; an entity `#has` modules.
 
 <<~/ahu >>
 
@@ -85,7 +85,7 @@ Four mount-points. Each changes how a seated module activates, costs, fails, and
 | ''Burden'' | 20 slots, −1 to all rolls each | curses, afflictions, overflow |
 | ''Structure (Site)'' | ''no fixed count'' — base attributes + purchasable capacity (OGA upgrade economy) | shrine, ship, domicile, town ward, vehicle |
 
-**Location merges into Structure.** A forest and an airship are the same Site. **Fixed-vs-mobile is a flat `#has` component** (propulsion/mobility), not a mount-point or a type. A Site gains capacity by spending XP + referee resources per attribute, decoupled from Level (OGA "Golden Age Item Upgrading"). See `lar:///ha.ka.ba/sdm/mount-points/structure`.
+''Location merges into Structure.'' A forest and an airship are the same Site. ''Fixed-vs-mobile is a flat `#has` component'' (propulsion/mobility), not a mount-point or a type. A Site gains capacity by spending XP + referee resources per attribute, decoupled from Level (OGA "Golden Age Item Upgrading"). See `lar:///ha.ka.ba/sdm/mount-points/structure`.
 
 <<~/ahu >>
 

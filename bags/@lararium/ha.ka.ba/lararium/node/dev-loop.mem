@@ -50,7 +50,7 @@ Ordered by how much they touch — reach for the //least// that fixes your case:
 <<~Cure reset "after/re-pave does/wipe vessel storage + bootstrap → re-bake genesis → init ~ identity PRESERVED; --force required" >>
 <<~Cure wake "after/standup does/idempotent entry: attach if healthy else start detached + hydrate; --init founds, --claude/--codex/--copilot/--vscode wire the harness MCP+hooks" >>
 
-**The gap `refresh` closes:** every other dev-loop verb assumes the dist is current — none run
+''The gap `refresh` closes:'' every other dev-loop verb assumes the dist is current — none run
 `pnpm -r build`. The island workers spawn from compiled `.js` siblings (a tsx-source run = a
 half-dead vessel: port bound, worker `ERR_MODULE_NOT_FOUND`). So after a TS edit, `serve`/`fresh`/
 `reconcile` boot a STALE vessel. `refresh` = build first, then re-pave + serve — the complete cure.
@@ -73,8 +73,8 @@ bound-operator's vessel-only worker belongs to the operator, not a checkout.
 (uds-channel) always agree on the ''UDS socket'' path. The palace stays `~/.mempalace`
 (mempalace's own home; `MEMPALACE_PALACE_PATH` overrides).
 
-**`LAR_ROOT`** overrides the home root for ISOLATED instances (the test harness / staged pairs) —
-both storage AND genesis fall under it. **Only an EXPLICIT `--root` (or the env) sets it** — never a
+''`LAR_ROOT`'' overrides the home root for ISOLATED instances (the test harness / staged pairs) —
+both storage AND genesis fall under it. ''Only an EXPLICIT `--root` (or the env) sets it'' — never a
 default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat the split.
 
 <<~/ahu >>
@@ -90,7 +90,7 @@ default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat 
   exist first. `reset` order is delete → ''rebuild genesis'' → init (the reverse fails "engine CID absent").
 * ''identity survives reset'' — `~/.lares/.lararium-identity` is a sibling of the wipe-zone; `reset`
   preserves the operator's keypair/DID. A true re-found (new DID) needs an explicit identity wipe.
-* **only explicit `--root` sets `LAR_ROOT`** — never thread a `REPO_ROOT` default through reset/init
+* ''only explicit `--root` sets `LAR_ROOT`'' — never thread a `REPO_ROOT` default through reset/init
   (it silently relocates the vessel into the repo).
 * ''deterministic genesis'' — a re-bake with unchanged code is byte-identical (no churn); a diff means
   the engine/plugin blob genuinely changed.

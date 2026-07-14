@@ -73,7 +73,7 @@ tree-construction) all disqualified for the base. parse5 is a PURE PARSING SUBST
 network/accounts/ontology) — same class as Automerge/keyhive → PONO, sits inside the stack, no
 causal-island boundary.
 
-**Integration — parse5 at the FLOOR, NOT a wholesale `html`-rule replacement.** Load-bearing reason
+''Integration — parse5 at the FLOOR, NOT a wholesale `html`-rule replacement.'' Load-bearing reason
 (from the code): TW5's `html` wikirule is WIKITEXT-AWARE — it parses an element's children as wikitext
 (`html.js:59` `parseBlocks`, `:62` `parseInlineRun`), so `<div>''bold'' and a <$widget/></div>`
 interleaves HTML + wikitext + widgets. A whole-subtree parse5 pass would swallow that interior as opaque
@@ -126,7 +126,7 @@ through control-char obfuscation, `on*` dropped) — defense-in-depth layered ov
 ''LIVE WIRING — designed, GATED on a VM integration test (NOT yet activated).'' The `html`-rule shadow
 ''RETRACTED in shape (2026-06-27):'' the originally-planned `html`-shadow that routed real-HTML tags
 through `parseHtml5OpenTag` is unsafe — it flattens TW5's extended attributes (above). The live-rule
-path is now: **AUGMENT TW5's own `parseTag`/`parseAttribute` with resilient-recursive-descent recovery**
+path is now: ''AUGMENT TW5's own `parseTag`/`parseAttribute` with resilient-recursive-descent recovery''
 (an Error/missing node + recovery-sets + the ≥1-char progress invariant), preserving the `{{}}`/`<<>>`/
 filter extensions verbatim — a TW5-native augmentation, not a parse5 swap. (Exact shape under research:
 spirit a871269a; the floor `lar-html5-tag.ts` is unaffected — it stays the pure-HTML floor.)
@@ -147,7 +147,7 @@ is BLIND to `$`-widgets, `$` not a legal HTML name-start · CANNOT even find tag
 unquoted `<<macro>>` value's `>` ends the tag early per the HTML5 unquoted-attr-value state → the
 hybrid (B) is unsound, not just lossy). The three driver changes (`core/.../rules/html.js`):
 # `parseTag` contract `node|null` → ''always-a-tree + diagnostics''. Missing-`>` (`html.js:146`): no
-   longer null — synthesize a zero-width **MISSING `>`**, set `openTagEnd = pos`, keep the attrs
+   longer null — synthesize a zero-width ''MISSING `>`'', set `openTagEnd = pos`, keep the attrs
    already parsed, emit a diagnostic. Recovery-set = next `>` | newline | `<`.
 # Bad/unterminated tag-name (`:114`,`:123`): emit an ''Error node'' wrapping the `<…` span VERBATIM
    (`recoveredAs:"water"`, raw confidence), advance ''≥1 char'' (progress invariant).
@@ -190,7 +190,7 @@ gradient + the gradient-render-symmetry foundation + the click-to-edit foundatio
 that throws won't crash the wiki). Next: the same boundary in `refreshChildren` (`widget.js:780`, the
 click-to-edit live-update path).
 
-**ERROR-SURFACING — TWO channels (operator: TW5 messages the user via `$:/alert` + system tags):**
+''ERROR-SURFACING — TWO channels (operator: TW5 messages the user via `$:/alert` + system tags):''
 (1) IN-PLACE — the inline `tc-error` span at the failure site (the gradient, in-render); (2) USER-
 NOTIFICATION — a `$:/tags/Alert` tiddler so the user //knows// a degradation occurred (TW5's native
 dismissible alert, same channel as the reboot-alert seam). CAVEAT: NEVER raise `$:/alert` from inside
@@ -212,8 +212,8 @@ five invariants — independent of hand-written vs table-generated:
 <<~Inv 4-untyped-typed "a homogeneous untyped tree underneath (every node a kind tag) + typed views on top — so error nodes live ANYWHERE without special-casing every rule" >>
 <<~Inv 5-bounded-recovery "bounded recovery: recovery-SETS (tokens that signal 'parent resumes here') + the ≥1-char PROGRESS INVARIANT (a skip-loop MUST consume ≥1 char) — kills both hard-fail AND the infinite-loop failure mode" >>
 
-''The theory name (it already exists):'' ISLAND GRAMMARS + Water/Lake (Moonen, *Generating Robust
-Parsers Using Island Grammars*, WCRE 2001 — "Water" = the non-terminal that swallows non-islands;
+''The theory name (it already exists):'' ISLAND GRAMMARS + Water/Lake (Moonen, //Generating Robust//
+//Parsers Using Island Grammars//, WCRE 2001 — "Water" = the non-terminal that swallows non-islands;
 arXiv 2010.16306 adds "Lakes" = tolerant regions inside islands). Our `meme-ast` regex-islands +
 Text-gap parser IS an island grammar already. Add a per-node parse-CONFIDENCE gradient (0–20, our
 `aperture` ladder) + an explicit ErrorNode (à la tree-sitter/Lezer/Roslyn). Diagnostics ride
@@ -226,8 +226,8 @@ OUT-OF-BAND, span-keyed (rust-analyzer's model) — exactly our gradient-annotat
 !! Engine verdict ~ steal the model, don't swap the engine
 
 TW5's parser is HAND-WRITTEN rule recursion — so the generated-GLR families are the wrong SHAPE to
-copy; the gold pattern is RESILIENT RECURSIVE DESCENT (Roslyn / rust-analyzer / matklad's *Resilient
-LL Parsing Tutorial*, the canonical modern reference).
+copy; the gold pattern is RESILIENT RECURSIVE DESCENT (Roslyn / rust-analyzer / matklad's //Resilient//
+//LL Parsing Tutorial//, the canonical modern reference).
 
 * ''Tree-sitter'' — STEAL its `ERROR`/`MISSING`/`error-cost` node model (the cleanest gradient
   formalization, maps 1:1 onto our ladder). REJECT the engine: no TW5-wikitext grammar exists (author
@@ -257,17 +257,17 @@ non-iso dep fights the node/browser/cli/worker quad our island layer runs in) + 
 already-island-shaped parser.
 
 ''AUGMENT'' our `meme-ast/` island layer (it's ALREADY an island grammar — purely additive):
-# add an **`Error` node kind** to `MemeAstKind` `{reason, recoveredAs, pos, raw}` — emitted at the
+# add an ''`Error` node kind'' to `MemeAstKind` `{reason, recoveredAs, pos, raw}` — emitted at the
    three silent-loss sites (orphan close `builder.ts:258`, EOF force-close `builder.ts:277-281`,
    dropped near-miss sigils `scanner.ts`).
-# add **`confidence: number`** to `MemeAstBase` (0–20 aperture ladder; reuse the existing edge-
+# add ''`confidence: number`'' to `MemeAstBase` (0–20 aperture ladder; reuse the existing edge-
    confidence convention `types.ts:34`) — 20 = clean, lower for force-closed/recovered/Dynamic-unknown.
 # ''phrase-level recovery'' in `findCloseEnd` (`lar-sigil-shared.ts:202`) + the builder EOF sweep —
    bound a force-closed frame at the next blank line / next opener instead of swallowing to EOF.
 
 ''WRAP'' for full TW5 core wikitext — ''NO FORK NEEDED, plugin-override-preload (VERIFIED).'' TW5
 builds its parser registry at `wiki.js:1030` via `forEachModuleOfType("parser", … $tw.Wiki.parsers[f]
-= module[f])` — **LAST-REGISTERED WINS** on a duplicate content-type, and plugin modules load AFTER
+= module[f])` — ''LAST-REGISTERED WINS'' on a duplicate content-type, and plugin modules load AFTER
 core. So a plugin `module-type: parser` that does `exports["text/vnd.tiddlywiki"] = TolerantWikiParser`
 (subclass the core `WikiParser` — `wikiparser.js:494` — and run `parse()` inside a tolerant guard that
 catches throws + downgrades the malformed span to a graded `Error`/Text node) ''OVERRIDES core for ALL''
@@ -280,7 +280,7 @@ rule name shadows it. The operator's submodule-fork grant is a held SAFETY-NET, 
 ''THE REUSABLE MODULE (the operator's "lift complexity into another module"):'' extract a tolerant-
 parse substrate — `meme-ast/recover.ts` (or `@lararium/parse-substrate`) — exporting: Water/Island/Lake
 segmentation · `ErrorNode` + `confidence` constructors · recovery policies (`syncToNextOpener`,
-`boundAtBlankLine`, `forceCloseGraded`) · a **`withRecovery(parseFn)`** guard wrapping any throwing
+`boundAtBlankLine`, `forceCloseGraded`) · a ''`withRecovery(parseFn)`'' guard wrapping any throwing
 parser into a graded result. `builder.ts` · `scanner.ts` · the `MemeticParser` wrap all consume this
 ONE module. The rule classes NEVER learn recovery — the substrate owns it (matklad: recovery lives in
 the driver, not the grammar). Clean upstream-plugin boundary.
@@ -292,15 +292,15 @@ the driver, not the grammar). Clean upstream-plugin boundary.
 !! TW5's actual break-badly modes (grounded, file:line)
 
 Two layers, failing differently:
-* **Layer A — `meme-ast/` (island, regex + Text water):** never throws but SILENTLY LOSSY — orphan
+* ''Layer A — `meme-ast/` (island, regex + Text water):'' never throws but SILENTLY LOSSY — orphan
   close discarded (`builder.ts:255-265`), unclosed frame SWALLOWS the rest of the doc then force-closes
   (`builder.ts:277-281` — a //confidently incorrect// tree, the worst break-badly), mis-nesting silent
   re-parent (`builder.ts:256-259`), near-miss sigils vanish with no signal (`scanner.ts:165-191`),
   `safeRegex` swallows bad patterns (`scanner.ts:138`). The one good seed: unknown sigil →
   `Dynamic/unknown` (`builder.ts:123,215`) — already a graded-degrade, just unnamed.
-* **Layer B — the wikirule (`lar-sigil.ts`):** unterminated block → bare opener, body lost
+* ''Layer B — the wikirule (`lar-sigil.ts`):'' unterminated block → bare opener, body lost
   (`:104-118`); generic `<<~` → `__literal__` water (`:125-146`) — panic-mode, the saving grace.
-* **The TRUE break-badly = the standard `$:/core` WikiParser** (`memetic-parser.ts:82-104` only filters
+* ''The TRUE break-badly = the standard `$:/core` WikiParser'' (`memetic-parser.ts:82-104` only filters
   rule arrays; the engine is unchanged): a regex-rule pump, NO error nodes, NO confidence — every parse
   "succeeds" by consuming all input, so an unterminated construct consumes-to-EOF or mis-structures
   silently, failure DEFERRED to a downstream widget-render throw.
@@ -356,7 +356,7 @@ degrades, via the EXISTING `#has` cap-stack. Two prior-art realms + our ground c
   cap-stack (DATA); ONE dispatcher walks it as a nearest-handler CASCADE; ORDER = the gradient; each
   lower rung an ATTENUATION (strictly weaker); a mandatory inert "water" rung at the floor; resilience4j
   SHIPS this exact shape.
-* OUR GROUND: **`#has` is ALREADY an ordered cap-stack** — `has-stack.md` (the Seven Clauses, ratified
+* OUR GROUND: ''`#has` is ALREADY an ordered cap-stack'' — `has-stack.md` (the Seven Clauses, ratified
   2026-06-12) + `island-caps.ts` (`composeIsland`: onSignal first-wins, ORDER = precedence, teardown
   LIFO). island-caps' first-wins-by-order IS the nearest-handler cascade the effect-handler prior art
   names. We EXTEND the substrate to grammar entities; we do NOT invent it.

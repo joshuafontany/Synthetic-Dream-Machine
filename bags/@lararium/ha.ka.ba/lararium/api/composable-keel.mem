@@ -41,7 +41,7 @@ A vessel ''declares'' what it carries; a separate move ''wires'' that declaratio
 
 !! Declare ~ the cap-stack as ECS inventory
 
-The `#has-cap-stack` reads **entity-component-system** (ECS) and stays purely declarative: a **nameless vessel** carries a **flat set of `#has`-cap tags** — //what is present//, nothing more. It carries **no edges** (the retired-typed-edge ruling holds, <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>): the stack never says //how// caps connect, only //which// a vessel holds.
+The `#has-cap-stack` reads ''entity-component-system'' (ECS) and stays purely declarative: a ''nameless vessel'' carries a ''flat set of `#has`-cap tags'' — //what is present//, nothing more. It carries ''no edges'' (the retired-typed-edge ruling holds, <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>): the stack never says //how// caps connect, only //which// a vessel holds.
 
 ```text
 #has-cap-stack = (VesselId, Set<CapModule>)   — flat, edgeless, dependency-blind
@@ -57,7 +57,7 @@ This declaration answers //what a vessel IS// — a full node holds `{lararium-c
 
 The ''composition-root'' (`composeVessel`) reads the flat stack and ''topologically builds'' the live components. The cap-stack carries no edges, so each ''cap-MODULE'' declares the deps ''it'' needs (its cardinality), and the root wires the graph from those declarations:
 
-* **each module declares `requires` (1..1) and `optional` (0..1)** — the module names its own deps, the way OSGi Declarative Services names component cardinality.
+* ''each module declares `requires` (1..1) and `optional` (0..1)'' — the module names its own deps, the way OSGi Declarative Services names component cardinality.
 * ''the root builds in dependency order'' — a topological walk over (requires + present-optional) edges, so a mandatory dep stands built before its consumer.
 * ''the root hands each module a least-authority resolver'' — `resolve(id)` reaches ''only that module's declared deps''; resolving an undeclared id throws. POLA by construction: a module reaches exactly what it routed, never the ambient graph (Genode's default-deny `init`; Granovetter's //"only connectivity begets connectivity"//).
 * ''a missing mandatory dep, a cycle, or a duplicate cap = the vessel REFUSES TO BOOT, loud'' — an error at compose time, never a runtime flag, never a silent fall-through to ambient authority.
@@ -114,7 +114,7 @@ The keel runs; the parts below carry their grounds:
 The keel invents nothing structural; four well-worn patterns each carry a face of it:
 
 * ''ZLayer'' (Scala / ZIO) — //provide the dependency graph//: layers declare their inputs/outputs, the runtime wires them ''topologically'' and ''fails the build'' on a missing or cyclic layer. The declare ⊥ wire seam, library-grade.
-* **Genode `init`** — //capability-routing, default-deny//: a component reaches only the services explicitly **routed** to it; an unrouted service grants no authority. Our POLA resolver + absence-is-structural read.
+* ''Genode `init`'' — //capability-routing, default-deny//: a component reaches only the services explicitly ''routed'' to it; an unrouted service grants no authority. Our POLA resolver + absence-is-structural read.
 * ''OSGi Declarative Services'' — //declared cardinality//: a component declares mandatory (1..1) and optional (0..1) references; the runtime satisfies them or holds the component unsatisfied. Our per-module `requires` / `optional`.
 * ''the ocap powerbox / Granovetter'' — //transient broad authority, then POLA//: a one-shot broad grant distributes narrow caps and steps away; //"only connectivity begets connectivity."// Our transient composer (#transient-composer).
 

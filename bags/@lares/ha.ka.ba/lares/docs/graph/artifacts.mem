@@ -174,11 +174,11 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 }
 ```
 
-**`pranala_edges` now non-empty.** The current stub always returns `[]`. The redesigned compiler populates it from Tier 1 + Tier 2 traversal.
+''`pranala_edges` now non-empty.'' The current stub always returns `[]`. The redesigned compiler populates it from Tier 1 + Tier 2 traversal.
 
-**`interface_index`** maps interface URIs to the carrier URIs that declare them in their `implements` bundle.
+''`interface_index`'' maps interface URIs to the carrier URIs that declare them in their `implements` bundle.
 
-**`invariant_index`** maps invariant URIs to carriers that implement invariant interfaces.
+''`invariant_index`'' maps invariant URIs to carriers that implement invariant interfaces.
 
 <<~/ahu >>
 
@@ -217,11 +217,11 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 }
 ```
 
-**`hash_sequence`** — ordered list of `{uri, sha256, depth}` records in topological (hydration) order.
+''`hash_sequence`'' — ordered list of `{uri, sha256, depth}` records in topological (hydration) order.
 Each entry mirrors the `content_hash` of the corresponding minimal-boot closure entry.
 A client that caches this sequence can verify its Anthropic context prefix is still byte-identical by polling `lar:///INDEXES/hashes` and comparing — without requesting the full artifact.
 
-**`sha256` now uses `closure_hash`** (content-addressed, Tier 0 + carrier bytes)
+''`sha256` now uses `closure_hash`'' (content-addressed, Tier 0 + carrier bytes)
 rather than `SHA256(json.dumps(full_artifact))` (the current implementation).
 The new hash stays stable across recompilations of identical source files.
 
@@ -241,10 +241,10 @@ Two virtual MCP resources extend the content-address surface beyond the boot art
 | Hash index | `lar:///INDEXES/hashes` | JSON object: every indexed carrier URI → its `carrier_hash` |
 | Content by hash | `lar:///CONTENT/{hash}` | raw carrier text, looked up by reverse hash map |
 
-**`lar:///INDEXES/hashes`** lets a client poll for drift without re-fetching any carrier text.
+''`lar:///INDEXES/hashes`'' lets a client poll for drift without re-fetching any carrier text.
 If every hash in the client's cached `hash_sequence` matches, the Anthropic prompt cache prefix remains valid.
 
-**`lar:///CONTENT/{hash}`** allows a client to fetch a single carrier by content address alone.
+''`lar:///CONTENT/{hash}`'' allows a client to fetch a single carrier by content address alone.
 This supports cache miss fills and cross-session identity verification without requiring the client to know the carrier's URI path.
 
 ''Cache-validity workflow:''

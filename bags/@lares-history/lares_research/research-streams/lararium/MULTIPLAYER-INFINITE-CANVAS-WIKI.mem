@@ -189,7 +189,7 @@ The old "confirmed SQLite vs pending tldraw" model is no longer the content auth
 * Full Orichalcum/UCAN capability gate replaces localhost guard.
 * Git/file backend commit metadata records operator identity.
 
-**Policy invariant (`canPromoteToCanon`) — current active origins:**
+''Policy invariant (`canPromoteToCanon`) — current active origins:''
 
 | Origin kind | Result |
 |-------------|--------|
@@ -263,7 +263,7 @@ Shape IDs are URI-stable (`memeFrameId(uri)` — no per-page prefix scoping). Th
 
 Every meme frame owns its ahu sub-frames, and every ahu owns its socket port shapes. This ownership is a queryable graph fact independent of tldraw's `parentId` hierarchy.
 
-**The problem `parentId` alone does not solve:** At low zoom, meme frames shrink to 60×28px. Ahu frames at `y=108+` are outside the parent bounds. tldraw's `parentId` keeps them structurally children, but their visual escape creates drag-reparenting risk and arrow binding instability.
+''The problem `parentId` alone does not solve:'' At low zoom, meme frames shrink to 60×28px. Ahu frames at `y=108+` are outside the parent bounds. tldraw's `parentId` keeps them structurally children, but their visual escape creates drag-reparenting risk and arrow binding instability.
 
 ''The skeleton model:'' Each meme→ahu and meme→socket relationship is also encoded as a `control:owns` arrow in the projection snapshot — the "ownership skeleton." These arrows are:
 * `isOwnership: true` — distinguished from pranala semantic arrows
@@ -547,7 +547,7 @@ Kinopio's `<Header>` is `position: fixed; pointer-events: none` with interaction
 
 ''This model is now the Lararium implementation.'' `LarariumShell` wraps `LarariumCanvas` via React portal: all chrome (`LarariumHeader`, `LarariumFooter`, `LarariumCommandPalette`) is `position:fixed`, rendered into `document.body` outside the tldraw DOM tree. The canvas fills 100vw × 100vh. `PageMenu`, `NavigationPanel`, `MainMenu`, `ZoomMenu`, `QuickActions`, `HelperButtons`, `MenuPanel` are all suppressed in wiki mode via `TLComponents = null`.
 
-**Canvas mode toggle (`` ` `` key):** Dims Lararium chrome (`opacity: 0.35, pointer-events: none`) and restores tldraw's full toolbar/style panel for freeform drawing. Toggle pill always visible at bottom-left. This is the Lararium answer to Kinopio's mode distinction — not a separate tool, just a chrome visibility gate.
+''Canvas mode toggle (`` ` `` key):'' Dims Lararium chrome (`opacity: 0.35, pointer-events: none`) and restores tldraw's full toolbar/style panel for freeform drawing. Toggle pill always visible at bottom-left. This is the Lararium answer to Kinopio's mode distinction — not a separate tool, just a chrome visibility gate.
 
 On iOS, Kinopio dynamically repositions its header via `updatePositionInVisualViewport()` every 60 frames to track the visual viewport during pinch-zoom. Android Chrome does NOT have this problem — `position:fixed` works correctly. Lararium targets Windows 11 + Android; no iOS visual viewport compensation needed.
 
@@ -611,7 +611,7 @@ Transclusion implementation: when seeding a user room, the boot closure memes ar
 
 !!! Portal Shapes
 
-Portals are **`geo` shapes with custom `meta`** (`meta.larPortal = true`, `meta.targetRoomId`, `meta.label`) — not a custom `ShapeUtil`. Visual: built-in tldraw hexagon. Double-click fires `GO_TO_ROOM` dispatch via `doubleClickShape` handler in `LarariumCanvas`. Portal shapes are canvas-local state — moveable by operators without canonical write-back.
+Portals are ''`geo` shapes with custom `meta`'' (`meta.larPortal = true`, `meta.targetRoomId`, `meta.label`) — not a custom `ShapeUtil`. Visual: built-in tldraw hexagon. Double-click fires `GO_TO_ROOM` dispatch via `doubleClickShape` handler in `LarariumCanvas`. Portal shapes are canvas-local state — moveable by operators without canonical write-back.
 
 `LarPortalShapeUtil` is removed. Portal detection reads `shape.meta.larPortal` — no schema registration required, no tldraw upgrade risk.
 
@@ -671,7 +671,7 @@ The altar fire canvas seeds with portal shapes for all registered rooms at initi
 | Ahu socket sub-frame | `frame` nested in parent `frame` | Same type, different scale |
 | Pranala edge | `arrow` (built-in) | Has binding to source/target, family stored in `meta.family` |
 | Carrier text snippet | `note` (built-in) | Sticky-note look, auto-wrap text |
-| Portal shape | **`geo` with custom `meta`** | Built-in rect/rounded-rect + click handler via `onDoubleClickShape` |
+| Portal shape | ''`geo` with custom `meta`'' | Built-in rect/rounded-rect + click handler via `onDoubleClickShape` |
 | Commit-tier indicator | `geo` dot shape | Small colored indicator overlaid on frame |
 
 ''Custom shape utils required (genuinely novel):''
@@ -734,7 +734,7 @@ These fields are projected into shape metadata or read from TW5 tiddler fields. 
 
 `FilterEngineFn` is the canonical async filter engine type, defined in `@lararium/mesh/tw-filter` and re-exported from `@lararium/mesh/cascade`. Signature: `(expr: string, closure: readonly ClosureEntry[], edges?: readonly EdgeRecord[]) => Promise<ClosureEntry[]>`. Package.json `browser` conditional + Vite alias ensure bundlers resolve to the correct runtime.
 
-**`@lararium/mesh/cascade` — generic cascade engine (shipped 2026-04-28):**
+''`@lararium/mesh/cascade` — generic cascade engine (shipped 2026-04-28):''
 
 `CascadeEntry<TOverride>`, `TemplateCascade<TOverride>`, `compileCascade`, `matchesEntry` are now core primitives — no tldraw coupling. Render-target adapters specialise `TOverride`:
 * tldraw: `CascadeEntry extends CoreCascadeEntry<MemeTemplateProps>` (adds `levels?`)
@@ -742,7 +742,7 @@ These fields are projected into shape metadata or read from TW5 tiddler fields. 
 
 `compileCascade(cascade, closure, filterEngine, edges?)` parallelises filter evaluation via `Promise.all`. `matchesEntry` is exported so all apply passes share one match implementation.
 
-**`edge:` operator — pranala edge pre-loading (shipped 2026-04-28):**
+''`edge:` operator — pranala edge pre-loading (shipped 2026-04-28):''
 
 `BootArtifact.pranalaEdges` (typed `EdgeRecord[]`) flows through `compileCascade` → `filterEngine` → `filterMemesWikitext`. `buildEdgeFieldMap()` builds per-entry tiddler fields (`edge-out-FAMILY`, `edge-out-FAMILY-ROLE`). `toCanonicalWikitext()` translates `edge:FAMILY[ROLE]` → `has[edge-out-FAMILY-ROLE]` before TW5 sees the expression.
 
@@ -855,17 +855,17 @@ The UX shell is the React layer that wraps the tldraw canvas. It owns:
 
 !!! Slot Contents
 
-**`LarariumTopPanel`** (top-center):
+''`LarariumTopPanel`'' (top-center):
 ```
 [⬡ Lararium]  [room-name]  [breadcrumb ›  focus-uri]  ···  [← Back]  [⬡ Graph]
 ```
 
-**`LarariumSharePanel`** (top-right):
+''`LarariumSharePanel`'' (top-right):
 ```
 [⌘K]  [theme-toggle]
 ```
 
-**`LarariumHelperButtons`** (bottom-right):
+''`LarariumHelperButtons`'' (bottom-right):
 ```
 [` Wiki/Canvas]  [zoom-glyph]
 ```
@@ -879,7 +879,7 @@ The UX shell is the React layer that wraps the tldraw canvas. It owns:
 * ''Logo + room name:'' click room name → room switcher
 * ''Breadcrumb:'' `the-altar-fire > user:did > my-space` for nested navigation
 * ''Presence avatars:'' small circles, labeled on hover, positioned at their canvas location if visible
-* **`⌘K`:** opens command palette
+* ''`⌘K`:'' opens command palette
 
 !!! Canvas Interaction Wiring (tldraw overrides)
 
@@ -1013,15 +1013,15 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 * ✓ the-altar-fire invariant meme: authored at `packages/lares-core/memes/api/pono/the-altar-fire.md`
 * ✓ Double-click frame → ZOOM_IN dispatch: wired via `doubleClickShape` + `meta.uri`
 * ✓ ''UX shell refactor:'' `LarariumShell` + `LarariumCtx` provider pattern. Slot components are stable module-level refs; all state via context. `SidePanel` removed. Footer merged into `MenuPanel` badge.
-* ✓ **Command palette (`⌘K`):** Spaces + Memes sections, unified arrow-key nav, `` ` `` key toggles canvas mode.
+* ✓ ''Command palette (`⌘K`):'' Spaces + Memes sections, unified arrow-key nav, `` ` `` key toggles canvas mode.
 * ✓ ''Portal shapes:'' `geo` + `meta.larPortal` pattern ships — no custom ShapeUtil. Double-click fires `GO_TO_ROOM`.
-* ✓ **Canvas mode toggle:** `` ` `` key + `HelperButtons` pill. Same chrome landmarks in both modes; tldraw drawing chrome (Toolbar, StylePanel) added in canvas mode alongside Lararium slots.
+* ✓ ''Canvas mode toggle:'' `` ` `` key + `HelperButtons` pill. Same chrome landmarks in both modes; tldraw drawing chrome (Toolbar, StylePanel) added in canvas mode alongside Lararium slots.
 
 ''Open:''
 
 # ✓/⚠ ''Zoom-gated rendering shipped; template source pivoted (2026-04-29 correction):'' `applyZoomTemplate()` batch-updates frame/socket/body-node props on zoom threshold crossings. Active layout truth is TW5 `lar:///kumu/meme-*` tiddlers read via `getZoomLayout(level)`, with fallback defaults. Older `KumuRegistry` / `shape.meta.templateProps` stamping is historical. URI-stable shape IDs remain. See `#views` and `#tldraw-template-model`.
 
-1a. **Async `ReactionGraph`:** `fire()` must return `Promise<void>` before `hui`/`heihei`/`puka`/`kukali` have execution semantics. Zero structural changes required — this is a method signature change in `live-protocol.ts`. Fanout modes (`Promise.all`, `Promise.race`, `Promise.any` + cancel) follow immediately after. See `#causal-islands`.
+1a. ''Async `ReactionGraph`:'' `fire()` must return `Promise<void>` before `hui`/`heihei`/`puka`/`kukali` have execution semantics. Zero structural changes required — this is a method signature change in `live-protocol.ts`. Fanout modes (`Promise.all`, `Promise.race`, `Promise.any` + cancel) follow immediately after. See `#causal-islands`.
 
 1b. ''Wehe executor:'' bind `SigilNode { sigilName:"kahea", attrs:{name,args} }` name-form calls against registered `wehe` definitions at render time. Closes TW5 template transclusion + Verse procedure call simultaneously. Depends on the TW5/kumu registry path, not the retired shape-meta template cache.
 
@@ -1035,9 +1035,9 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 # ''LarPortalShapeUtil (future):'' Only needed if `geo` + meta proves insufficient for portal UX (click area, label rendering). Current `geo`+meta is MVP-sufficient.
 
-# **User home rooms (`user:${did}`) with altar-fire transclusion:** Seed logic for per-user rooms. Altar-fire memes projected as locked cluster in corner of user room canvas. Depends on UCAN/identity.
+# ''User home rooms (`user:${did}`) with altar-fire transclusion:'' Seed logic for per-user rooms. Altar-fire memes projected as locked cluster in corner of user room canvas. Depends on UCAN/identity.
 
-# ⚠ **Room reseeding (`/admin/reseed`) — superseded semantics.** The endpoint still evicts the legacy tldraw SQLite room and recomputes receipt/snapshot state, but normal grammar/carrier hot reload now flows disk → Automerge → TW5. Use `/admin/reseed` for legacy layout reset or receipt refresh, not as the primary content update path.
+# ⚠ ''Room reseeding (`/admin/reseed`) — superseded semantics.'' The endpoint still evicts the legacy tldraw SQLite room and recomputes receipt/snapshot state, but normal grammar/carrier hot reload now flows disk → Automerge → TW5. Use `/admin/reseed` for legacy layout reset or receipt refresh, not as the primary content update path.
 
 # ''Content-addressed room keys:'' `boot-${receipt.sha.slice(0,16)}` for boot/full rooms. Named rooms use stable slugs. Transition path from `"boot"` needs client redirect.
 
@@ -1045,7 +1045,7 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 # ''Wiki-recipe carriers (M10):'' `lares/recipes/` schema. RPG rooms (`ftls`, `wtf`) depend on this. Seeding path: `PUT /admin/promote` plumbing exists; recipe schema and per-room seed loop are the remaining deliverable.
 
-# ✓ **Write-back gate (`PUT /admin/promote`) — shipped M10 (local-operator).** `writeFileSync` + lares/ watcher reseed. Full `LarStorageBackend` (file backend + git) deferred until Orichalcum ceremony lands.
+# ✓ ''Write-back gate (`PUT /admin/promote`) — shipped M10 (local-operator).'' `writeFileSync` + lares/ watcher reseed. Full `LarStorageBackend` (file backend + git) deferred until Orichalcum ceremony lands.
 
 # ''Orichalcum capability implementation:'' Principal identity (Ed25519 device key), Orichalcum capability type + caveat validator, UCAN-compatible wire proof. Server principal stable keypair. Room join gate. See `lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities`.
 
@@ -1057,7 +1057,7 @@ State lives in `localStorage` (`lararium.theme`). Applied on mount before first 
 
 !! Causal Islands — Async-First Execution Model
 
-**Status: design locked (2026-04-28). Implementation follows async `ReactionGraph` pivot.**
+''Status: design locked (2026-04-28). Implementation follows async `ReactionGraph` pivot.''
 
 !!! The model
 
@@ -1156,7 +1156,7 @@ UE5 analogy: "actor fails to instantiate if schema is violated" = "pranala emits
 
 All sigil registry entries, parse rules, and template definitions SHALL live as carrier memes in `lares/grammars/`. The TypeScript parser is a thin rule-interpreter that reads grammar from the boot closure. Adding a new sigil requires authoring a meme, not modifying TypeScript source.
 
-Phase progression: 1 (hard-coded TypeScript, complete) → 2 (grammar carrier + boot closure reader, complete) → 2.5 (GrammarRules threaded through parsePranalaEdges, complete 2026-04-27) → **2.x (grammar meme expanded to 40 sigils: TW5+Verse parity, English alias namespace, concurrency sigils `hui`/`heihei`/`puka`/`lele`, `wikitext-filter` dialect carrier, `kapu`/`pono` constraint distinction, complete 2026-04-27)** → 3 (self-hosting: parser is a meme, canvas can edit its own renderer, planned M8).
+Phase progression: 1 (hard-coded TypeScript, complete) → 2 (grammar carrier + boot closure reader, complete) → 2.5 (GrammarRules threaded through parsePranalaEdges, complete 2026-04-27) → ''2.x (grammar meme expanded to 40 sigils: TW5+Verse parity, English alias namespace, concurrency sigils `hui`/`heihei`/`puka`/`lele`, `wikitext-filter` dialect carrier, `kapu`/`pono` constraint distinction, complete 2026-04-27)'' → 3 (self-hosting: parser is a meme, canvas can edit its own renderer, planned M8).
 
 Grammar meme (`lares/grammars/memetic-wikitext.md`) now covers:
 * All TW5 filter operators (via `wikitext-filter` dialect — forked, modernized, pranala+TOML aligned)

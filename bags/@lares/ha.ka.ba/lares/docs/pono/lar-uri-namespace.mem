@@ -54,8 +54,8 @@ paths overlap.
 
 !! Quine Sync Rule
 
-**All `lar:` URI tiddlers (hostless and hostful) are heleuma sync candidates.**  
-**`$:/` tiddlers are NOT sync candidates — reserved strictly for TW5 core + TW5 plugins.**
+''All `lar:` URI tiddlers (hostless and hostful) are heleuma sync candidates.''  
+''`$:/` tiddlers are NOT sync candidates — reserved strictly for TW5 core + TW5 plugins.''
 
 A tiddler is a heleuma candidate if and only if its title matches `lar://*`.
 The `MemeSyncAdaptor` filter: `[all[tiddlers]regexp[^lar://]]`

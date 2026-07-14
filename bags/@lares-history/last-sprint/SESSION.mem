@@ -79,7 +79,7 @@ Full end-to-end verification: `wikis/scratch/memes/docs/lares/the-lares-protocol
 | `projection-kinds.ts` | `DiskKindDeps` gains `tw5: TW5Engine`; `projector.start(deps.tw5)` replaces the old `peer.store` subscription path. |
 | `meme-sync-adaptor.ts` | `_applyLiveRecord` and `onChangeset` bulk path both stamp `bag` field on TW5 tiddlers — disk projector reads bag provenance without touching Automerge. |
 | `bag-mirror.ts` | `wikiShadowPathStrategy` extended with bare `lar:///ha.ka.ba/{rest}` URI fallback (no @-scope) → `memes/{rest}.md`. Fragment URIs → `memes/{path}/{fragment}.md`. Fixes the zero-projection bug for wiki-bag tiddlers. |
-| `deserializer.ts` + plugin bundle | `splitRecursive` extended: `parentSourceFile` param threads to child `file-path` generation. Children receive full effective iam via `regenerateIamToml(effectiveIam, {})` with child-specific `uri-path` + `file-path` override. Child `file-path` strips the leading `#` from `block.slot`. **Build law: changes to `deserializer.ts` require `tsx scripts/build-plugin-tiddler.ts` — `tsc` alone is NOT sufficient (deserializer runs inside TW5 plugin bundle).** |
+| `deserializer.ts` + plugin bundle | `splitRecursive` extended: `parentSourceFile` param threads to child `file-path` generation. Children receive full effective iam via `regenerateIamToml(effectiveIam, {})` with child-specific `uri-path` + `file-path` override. Child `file-path` strips the leading `#` from `block.slot`. ''Build law: changes to `deserializer.ts` require `tsx scripts/build-plugin-tiddler.ts` — `tsc` alone is NOT sufficient (deserializer runs inside TW5 plugin bundle).'' |
 | `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), iam block (from `iam-source`), STX (`<<~&#x0002; >>`), `{{!!text}}`, ETX (`<<~&#x0003; >>`), EOT (`<<~&#x0004; -> ? >>`). Prologue emitted only when explicitly present (not inherited from parent). |
 
 ''Five-layer child file structure confirmed:''
@@ -480,15 +480,15 @@ Next code work: D.3 (operator-key bridge: tie `operator-key.ts` ed25519 to Keyhi
 
 Five-step sub-arc closed (A.1 → A.5):
 
-**A.1 `9461d7ca`** — `seedAdminDoc()` in `genesis-island.ts`; `reconcileWellKnownTiddlers` extended with optional `adminUrl`. AdminDoc reuses `MemeStoreDoc` shape — semantic distinction lives in URI/bag identity (`lar:///ha.ka.ba/lararium/@admin`).
+''A.1 `9461d7ca`'' — `seedAdminDoc()` in `genesis-island.ts`; `reconcileWellKnownTiddlers` extended with optional `adminUrl`. AdminDoc reuses `MemeStoreDoc` shape — semantic distinction lives in URI/bag identity (`lar:///ha.ka.ba/lararium/@admin`).
 
-**A.2 `23047176`** — `init-lararium.ts` seeds admin doc alongside identities/circles/sessions; admin oracle lands in `genesis/social-bootstrap.json`.
+''A.2 `23047176`'' — `init-lararium.ts` seeds admin doc alongside identities/circles/sessions; admin oracle lands in `genesis/social-bootstrap.json`.
 
-**A.3 `aac30c23`** — Standalone `open-admin-vm.ts` module: own TW5Engine, own CompositeStore with admin doc as writable layer, own MemeSyncAdaptor targeting `ADMIN_BAG_ID`. `waitHandleLocal` extracted to `repo-helpers.ts` for sharing with the room VM.
+''A.3 `aac30c23`'' — Standalone `open-admin-vm.ts` module: own TW5Engine, own CompositeStore with admin doc as writable layer, own MemeSyncAdaptor targeting `ADMIN_BAG_ID`. `waitHandleLocal` extracted to `repo-helpers.ts` for sharing with the room VM.
 
-**A.4 `6a7372e3`** — `openNodeLarPeer` mounts admin VM in parallel with the room VM; admin URL flows through `reconcileWellKnownTiddlers`; `NodeLarPeerResult.admin` exposes the admin VM. `init-lararium.ts` calls `repo.flush()` before exit (caught a flush race during smoke test).
+''A.4 `6a7372e3`'' — `openNodeLarPeer` mounts admin VM in parallel with the room VM; admin URL flows through `reconcileWellKnownTiddlers`; `NodeLarPeerResult.admin` exposes the admin VM. `init-lararium.ts` calls `repo.flush()` before exit (caught a flush race during smoke test).
 
-**A.5 `5b4a379d`** — `main.ts` reads bag-mirror configs from admin-room tiddlers tagged `$:/tags/LarariumBagMirror`, falling back to programmatic defaults. Operators can edit mirror configs from inside the wiki.
+''A.5 `5b4a379d`'' — `main.ts` reads bag-mirror configs from admin-room tiddlers tagged `$:/tags/LarariumBagMirror`, falling back to programmatic defaults. Operators can edit mirror configs from inside the wiki.
 
 ''Smoke test result'': `rm -rf .lararium && lararium:init && main.ts` reaches `live` phase. Both VMs boot, admin URL displayed, falls back to 3 programmatic mirrors when admin doc lacks bag-mirror tiddlers.
 
@@ -545,7 +545,7 @@ Initial audit: 50 missing across core/tw5/node, 8 orphans in tw5 (memes pointing
 
 !!! Architecture clarifications
 
-* **`packages/ha-ka-ba/` doesn't exist as a directory**, by design. `ha.ka.ba` names a URI namespace (engine = ha, catalog = ka, lares = ba); each package owns the memes describing itself, the engine corpus is their //virtual union// materialized in `genesis/island.bin`.
+* ''`packages/ha-ka-ba/` doesn't exist as a directory'', by design. `ha.ka.ba` names a URI namespace (engine = ha, catalog = ka, lares = ba); each package owns the memes describing itself, the engine corpus is their //virtual union// materialized in `genesis/island.bin`.
 * ''Per-bag mirror, not per-package mirror'': disk layout reflects bag boundaries (lares → `packages/lares-core/memes/`, engine → per-package `memes/`, room → `rooms/{slug}/`); operator-private bags (identities/groups/sessions/admin) never reach disk.
 
 ---
@@ -558,7 +558,7 @@ Refactored hard-coded `LarDiskProjector.start()` in `main.ts` into a `LarProject
 
 Browser peers reuse the same registry shape; only the registered kinds differ.
 
-**New in `@lararium/mesh`:**
+''New in `@lararium/mesh`:''
 * `LarProjectionConfig`, `LarProjectionKind`, `LarProjectionRegistry`
 * `LARARIUM_PROJECTION_TAG = "$:/tags/LarariumProjection"` (TW5 camelCase)
 * `ADMIN_ROOM_SLUG`, `ADMIN_ROOM_URI`, `ADMIN_BAG_ID` constants
@@ -569,7 +569,7 @@ Browser peers reuse the same registry shape; only the registered kinds differ.
 
 The two-URI split mirrors the bag-as-doc invariant: each Automerge doc gets its own sync boundary. Admin federation is device-scoped, not room-scoped — operator's other devices reach admin via `cap=infrastructure` device delegations (S7.1) gated at the ingress trust check (S7.4). Room peers can never prove the cap, so admin state stays operator-private without special plumbing.
 
-**New in `@lararium/node`:**
+''New in `@lararium/node`:''
 * `makeDiskProjectionKind({ defaultLaresRoot, renderFn, ... })` — TW5-engine-bound disk kind builder
 
 ''Deferred:'' Reaction kind registration (pre-existing missing `ReactionEngine` export from `@lararium/mesh` — implementation task, not a refactor concern).
@@ -623,13 +623,13 @@ Init time    scripts/init-lararium.ts (NEW S5.5)  social Tiga + identity ceremon
 Runtime      openNodeLarPeer (simplified S5.5)    find + wire; never seed
 ```
 
-**What moves OUT of `openNodeLarPeer`:**
+''What moves OUT of `openNodeLarPeer`:''
 * `socialPlaneIsNew` flag + entire seeding branch
 * `seedIdentitiesDoc`, `seedCirclesDoc`, `seedSessionsDoc`, `seedLaresDoc` calls
 * `buildCeremonyTiddlers` call
 * `operatorIdentity` option on `NodeLarPeerOptions`
 
-**What `init-lararium.ts` does:**
+''What `init-lararium.ts` does:''
 Creates social Tiga docs, runs ceremony, writes `genesis/social-bootstrap.json` as a
 ''TW5 tiddler bundle'' — a JSON array of tiddler objects mirroring the oracle tiddler shape
 (`title` / `text` / `fields` / `bag` / `authority`). Each entry carries an AutomergeUrl in
@@ -707,17 +707,17 @@ S7.4 (hostile mesh circuit breakers)
 
 !!! S6 Type Contracts Complete
 
-**`social-doc.ts`:**
+''`social-doc.ts`:''
 * `SessionTiddler` gains `eventLogUrl?: string` (AutomergeUrl of child log doc) and `eventLogHeads?: string` (space-separated hex heads; replay cursor)
 * `SessionEvent` gains `tickCounter: LarTickCounter` alongside `clock: FfzClock`
 * Standard `kind` values documented: `exchange:operator-sent`, `exchange:grounded`, `tiddler:change`, `tool:run`, `world:clock-advanced`, etc.
 * `SessionEventLog extends LarDoc` — events keyed by event ID in `events: Record<string, SessionEvent>`; satisfies LarDoc invariant (tiddlers carries self-ref + log tiddler)
 * `sessionEventLogUri(sessionId)` URI helper added
 
-**`genesis-island.ts` (`@lararium/node`):**
+''`genesis-island.ts` (`@lararium/node`):''
 * `seedSessionEventLog(repo, sessionId, sessionsHandle)` — creates child doc, writes self-ref tiddler, writes `eventLogUrl` back into session tiddler
 
-**`lar-event-bus-impl.ts` (`@lararium/node`) — new:**
+''`lar-event-bus-impl.ts` (`@lararium/node`) — new:''
 * `LarEventBusImpl` class implementing `LarEventBus` interface
 * `start()` / `stop()` lifecycle; configurable `tickRateHz` (default 20)
 * `subscribe`, `listenOnce`, `race`, `branch`, `nextTick`, `emit`, `registerRing` all implemented
@@ -726,7 +726,7 @@ S7.4 (hostile mesh circuit breakers)
 * `DEFAULT_RINGS` export: `session-ring` (p1), `crdt-ring` (p2), `vm-ring` (p3), `tool-ring` (p4)
 * Both exported from `@lararium/node` index
 
-**`attention-scale.md`:**
+''`attention-scale.md`:''
 * `#clock-profiles` section gains `WorldClockTiddler Integration` block: Rhine rule, owned-vs-observed boundary, `ObservedClockTiddler` hwm pattern, `WorldTimeAdvancedEvent` bi-temporal anchor
 
 ''All type-checks clean'' (`pnpm tsc --noEmit` zero new errors in both core and node).
@@ -743,21 +743,21 @@ S7.4 (hostile mesh circuit breakers)
 
 All work in `@lararium/mesh`. Type-check clean (`pnpm tsc --noEmit` zero errors).
 
-**`ffz-clock.ts` additions:**
+''`ffz-clock.ts` additions:''
 * `FFZ_REGISTER_NAMES`: canonical 5-tuple `["Pulse","Beat","Measure","Arc","Theme"]` (L0→L4)
 * `FFZ_LEVEL_NAMES`: legacy `["sub-action","action","session","day","epoch"]` — kept for backward compat
 * `FfzClockProfile` interface: named bound set with `l1Grain` annotation (what ONE Beat means in this domain)
 * `FFZ_PROFILES` map with three built-in profiles: `"session"`, `"diegetic"`, `"world-time"`
 * `LarTickCounter` branded number type — monotonic sequence number, NOT a FfzClock; serves as causal join key across event sources
 
-**`social-doc.ts` changes:**
+''`social-doc.ts` changes:''
 * `PresenceSlot.clock: FfzClock` → `clocks: Record<string, FfzClock>` + `worldClockRef?: string` (lar: URI pointer to WorldClockTiddler)
 * `exchangeState?: ExchangeState` added to `PresenceSlot`
 * New `WorldClockTiddler` interface — lives at `lar:///ha.ka.ba/bags/@world/{worldId}/clock`; has `writePolicy` (Keyhive capability string) + `tickPolicy: "autonomous"|"freeze"|"manual"` + `lastTickedAt`
 * New `ObservedClockTiddler` interface — LWW-Register cluster for external system clocks (Valheim, Minecraft, etc.); includes `externalClockHwm` (Flink watermark — never decreases) + `externalClockStale` + `externalClockReceived` (ffzSerialize at observation moment = bi-temporal anchor)
 * New `WorldTimeAdvancedEvent` interface — bi-temporal event (Verraes 2022 pattern); carries both `atSessionClock: FfzClock` and `atTickCounter: LarTickCounter`
 
-**`lar-event-bus.ts` (new):**
+''`lar-event-bus.ts` (new):''
 * `Cancelable` interface
 * `LarEventStream<T>` interface (async iterable + eventType label)
 * `IngressRingDescriptor` interface (name, priority, depth)
@@ -777,7 +777,7 @@ All work in `@lararium/mesh`. Type-check clean (`pnpm tsc --noEmit` zero errors)
 * `packages/lares-core/lararium-research/LARARIUM-TICK-CLOCK.md` — two time bases, three-layer architecture (ingress rings → unified tick loop → observers), LarTickCounter, owned vs observed clock table, Verse event interface analysis
 * `packages/lares-core/memes/api/pono/attention-scale.md` — canonical attention-scale meme with Pulse/Beat/Measure/Arc/Theme registers, three clock profiles, World-Time aliases (Week/Month/Season/Year/Era), FTLS diegetic aliases
 
-**Runtime implementations deferred to `@lararium/node`:**
+''Runtime implementations deferred to `@lararium/node`:''
 * `LarEventBusImpl` — concrete ingress ring + configurable tick loop
 * `WorldClockTickService` — implements `tickPolicy` dispatch (autonomous/freeze/manual)
 
@@ -817,7 +817,7 @@ Full findings in `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESE
 ''Presence routing — three-layer:''
 `@lararium/mesh` (PresenceSlot + FfzClock types) → `@lararium/tw5` (`$:/temp/presence/{peerId}` tiddlers, already blocked from sync) → `@lararium/browser` or `@lararium/node` (`DocHandle.broadcast()` wiring) → UX layer. `meme-sync-adaptor.ts:49` already guards `$:/temp/*`.
 
-**FFZ Chronometer — `FfzClock` type to land in `@lararium/mesh` before S6 closes:**
+''FFZ Chronometer — `FfzClock` type to land in `@lararium/mesh` before S6 closes:''
 5-level bounded hierarchical logical clock. L0–L3 bounded (looping/musical time); L4 epoch unbounded (anti-aliasing). `SessionEvent.clock` and `PresenceSlot.clock` both use `FfzClock`, not `number`.
 Attention-scale register names now canonical: ''Pulse'' (L0) / ''Beat'' (L1) / ''Measure'' (L2, default band) / ''Arc'' (L3) / ''Theme'' (L4). These sit above domain aliases (sub-action/action/session/day/epoch for Lares; Action/Round/Turn/Watch/Week for FTLS/TTRPG). Canonical meme: `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
 
@@ -840,7 +840,7 @@ Attention-scale register names now canonical: ''Pulse'' (L0) / ''Beat'' (L1) / '
 * Beelay uses DAG + wall-clock replay guard only. No conflict. No need to wait on Beelay.
 * FfzClock rides alongside Automerge OpId as application-layer annotation on tiddlers/changes
 
-**PENTADIC invariants added to `system-invariants.md`:**
+''PENTADIC invariants added to `system-invariants.md`:''
 * `PENTA_1_BOUNDED_SCALE` — Law of Fives as structural invariant
 * `PENTA_2_CLOCK_ALIGNMENT` — FfzClock L0–L4 maps onto OODA_HA_5
 * `PENTA_3_PATTERN_INTEGRITY` — Fuller's FPIs and SYSTEM laws are same invariant in two registers

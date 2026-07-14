@@ -19,8 +19,8 @@ Social graph control inverts: circles are owned by their center, not the platfor
 * ''Lararium'' — one operator's infrastructure: a `lararium-node` process + browser peers + devices. The household shrine. Smallest unit. Has two layers: //stable mesh// (lares/ carriers, genesis → `ha` content tiga) and //transitory flow// (operators, agents, sessions → social tiga).
 * ''Nexus'' — a //confederation of lararia// sharing a stable internal ley-line mesh. Named by community + place (e.g. "Floating Library of Mu, PNW Branch"). Resources may extend geographically beyond the name. Cross-Nexus connections = wild-magic-zone hops: explicitly brokered, potentially unreliable. NOT a single server. NOT a single lararium. "Each node a city of spirits, not a solitary saint — but a city can be besieged." The Nexus keypair serves as the confederation keypair — Keyhive-group-rooted when available.
 * ''DreamDeck'' — the first personal browser app for accessing DreamNet. One UX surface among possible others. Package: `@dreamdeck/app`.
-* **`@lararium/*`** — DreamNet protocol/infra (core, tw5, node, browser, mcp)
-* **`@dreamdeck/*`** — DreamDeck app stack (tldraw, app)
+* ''`@lararium/*`'' — DreamNet protocol/infra (core, tw5, node, browser, mcp)
+* ''`@dreamdeck/*`'' — DreamDeck app stack (tldraw, app)
 
 ---
 
@@ -384,8 +384,8 @@ Full design: `packages/lares-core/lararium-research/S7-CIRCLES-IDENTITIES-REDESI
 
 ''Option B wins:'' separate bridge docs, social tiga stays clean. The `ha/ka/ba` tiga remains entirely local-first authoritative. The publish step is a deliberate authority handoff (user keypair → server key for ActivityPub signing) — not undermining, intentional boundary.
 
-* **`KowloonOutbox`** — Automerge doc (tiddler-first) storing unpublished drafts as a mutation queue. On publish: POST to Kowloon API, mark `status: "published"` with `remoteRef`. Replicache outbox pattern.
-* **`KowloonInbox`** — Automerge doc caching feed items for display. Refreshed from `/.well-known/kowloon/pull`. Server wins on refresh (not a CRDT peer). Electric SQL shape pattern.
+* ''`KowloonOutbox`'' — Automerge doc (tiddler-first) storing unpublished drafts as a mutation queue. On publish: POST to Kowloon API, mark `status: "published"` with `remoteRef`. Replicache outbox pattern.
+* ''`KowloonInbox`'' — Automerge doc caching feed items for display. Refreshed from `/.well-known/kowloon/pull`. Server wins on refresh (not a CRDT peer). Electric SQL shape pattern.
 * Local `CirclesDoc` drives `to`/`canReply`/`canReact` addressing — translated to Kowloon user IDs by the adapter. Circle membership never sent to server.
 
 !!! Tasks
@@ -416,7 +416,7 @@ Init time    scripts/init-lararium.ts (NEW)     social Tiga + identity → socia
 Runtime      openNodeLarPeer (simplified)        finds docs; errors if uninitialised; no seeding
 ```
 
-**The init script (`scripts/init-lararium.ts`):**
+''The init script (`scripts/init-lararium.ts`):''
 * Creates IdentitiesDoc, CirclesDoc, SessionsDoc
 * Runs `buildCeremonyTiddlers` (operator identity + system circles)
 * Creates `DeviceDelegationTiddler` with `cap: "infrastructure"` for the node device (S7.1)
@@ -435,7 +435,7 @@ Runtime      openNodeLarPeer (simplified)        finds docs; errors if uninitial
   TW5 VM queries it directly: `[field[kind]exact[social-bootstrap]]`. No special loader needed.
 * Optionally: `lararium:pack` produces a nexus connect bundle (genesis CID + catalog URL + invite token) for browser peer cold-boot
 
-**The simplified `openNodeLarPeer`:**
+''The simplified `openNodeLarPeer`:''
 * Reads `genesis/social-bootstrap.json` (tiddler bundle) — writes oracle tiddlers into island doc via `islandHandle.change()` on first boot; CRDT already holds them on resume
 * Extracts AutomergeUrls from bundle tiddler `text` fields; `waitHandleLocal` for each doc
 * `waitHandleLocal` for each doc — they already exist
@@ -596,8 +596,8 @@ Full research: `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESEAR
 * ''lar:// URI'' — three families, no grammar change. Nexus identity uses new `@nexus` scope: `lar:///ha.ka.ba/bags/@nexus/<pubkey>`. Resolver gets `"nexus-doc"` kind. Triple-slash hostless form retained for all system/content memes.
 * ''Presence routing'' — `@lararium/mesh` types → `@lararium/tw5` tiddler representation → peer packages wire broadcast → UX layer consumes.
 * ''FFZ Chronometer'' — `FfzClock` type lands in `@lararium/mesh` before S6 closes. `PresenceSlot.clock` and `SessionEvent.clock` are `FfzClock`, not `number`. L4 (epoch) unbounded; L0–L3 bounded + looping.
-* **`capabilityFlags` forms a monotonic set** — never negotiate down. Protocol downgrade attack is mitigated structurally.
-* **`keyHistory` designed in from day one** — key rotation proofs required; cannot be retrofitted.
+* ''`capabilityFlags` forms a monotonic set'' — never negotiate down. Protocol downgrade attack is mitigated structurally.
+* ''`keyHistory` designed in from day one'' — key rotation proofs required; cannot be retrofitted.
 
 !!! Open Protocol Questions (research pending)
 
@@ -673,7 +673,7 @@ Worker Thread spawns
 !!! P.3 decision (decided 2026-05-11)
 
 NOT piscina for hot-tier wikis. Piscina is load-balanced stateless — wrong shape for
-stateful per-wiki VMs. **One dedicated `worker_threads.Worker` per hot-tier wiki slot.**
+stateful per-wiki VMs. ''One dedicated `worker_threads.Worker` per hot-tier wiki slot.''
 
 P.3-narrow (Path R.1): piscina IS right for stateless `deserializeCarrier` / `parseMeme`
 calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.

@@ -108,7 +108,7 @@ but does NOT return a handle — the branch is managed by the enclosing scope.
 
 !!! Methods
 
-**`task.Await()<suspends> : t`** — Suspends the caller until the task settles.
+''`task.Await()<suspends> : t`'' — Suspends the caller until the task settles.
 
 * ''Sticky:'' If the task already completed, Await() returns immediately with the cached
   result. Multiple callers on the same task always receive the same result.
@@ -116,7 +116,7 @@ but does NOT return a handle — the branch is managed by the enclosing scope.
   the cancellation to the caller.
 * Can be called multiple times from multiple callers.
 
-**`task.Cancel() : void`** — Requests cooperative cancellation.
+''`task.Cancel() : void`'' — Requests cooperative cancellation.
 
 * Cancellation is cooperative, not forced. The task does not stop immediately; it
   receives a cancellation signal checked at the ''next suspension point''.
@@ -201,7 +201,7 @@ Effects in Verse propagate upward through call chains. The `<suspends>` effect
 propagates: any function calling a `<suspends>` function must itself be marked
 `<suspends>`.
 
-**`spawn` is the exception:** `spawn` ''hides'' the `<suspends>` effect from its
+''`spawn` is the exception:'' `spawn` ''hides'' the `<suspends>` effect from its
 caller. The calling context sees no suspension; it does not need to be `<suspends>`
 itself. The spawned function carries its own `<suspends>` effect independently.
 
