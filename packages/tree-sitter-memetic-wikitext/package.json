@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-memetic-wikitext",
   "version": "0.0.1",
-  "description": "The CARRIER grammar of memetic-wikitext — sigil forms, fences, headings, TW5 lists — parsed generically; the sigil VOCABULARY is live wiki data, never grammar",
+  "description": "The CARRIER grammar of memetic-wikitext \u2014 sigil forms, fences, headings, TW5 lists \u2014 parsed generically; the sigil VOCABULARY is live wiki data, never grammar",
   "main": "bindings/node",
   "tree-sitter": [
     {
@@ -22,9 +22,10 @@
     "generate": "tree-sitter generate",
     "gate:generate-parity": "tree-sitter generate && git diff --exit-code -- src/",
     "gate:fold": "cd host-py && python -m pytest -q",
-    "gates": "pnpm run gate:generate-parity && pnpm run gate:fold",
+    "gates": "pnpm run gate:generate-parity && pnpm run gate:fold && pnpm run gate:fold-ts",
     "build:wasm": "tree-sitter build --wasm -o tree-sitter-memetic_wikitext.wasm",
-    "release:bundle": "pnpm run gates && pnpm run build:wasm && node tools/bundle-release.mjs"
+    "release:bundle": "pnpm run gates && pnpm run build:wasm && node tools/bundle-release.mjs",
+    "gate:fold-ts": "node --test host-ts/fold.test.mjs && node host-ts/parity.mjs"
   },
   "devDependencies": {
     "tree-sitter-cli": "0.26.11",
