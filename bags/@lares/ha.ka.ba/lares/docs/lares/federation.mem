@@ -74,6 +74,20 @@ forgery-resistant (a delegation never forges); reputation runs sybil-resistant (
 because minting keys splits mass — the bottleneck property). Different threat models, different math,
 different temporal grain.
 
+**SOCIAL splits again — self ⊥ org — and each admission runs its own flow.** The who-reads chain
+`vessel → PersonaGroup → CabalGroup` folds TWO concerns the gate keeps apart. **SOCIAL/self** — a vessel
+joining its own human's PersonaGroup — runs SINGLE-principal: you admit your own device, so no vouch, no
+price, only a delegation and the sealed document handoff (the crossing). **ORG** — a member joining a
+shared CabalGroup — runs MULTI-principal and carries MULTIPLICITY: one member joins many cabals, each its
+own Circle with its own founders, its own invite policy, its own vouch-lineage, so your weight in cabal A
+never transfers to cabal B. Three admission flows fall out, and they stay distinct: **(1) vessel →
+PersonaGroup** (self, no vouch — the envelope handoff); **(2) user → DreamNet** (the outer gate,
+invite-only-at-first, vouch-seeded at the mesh root); **(3) member → cabal(s)** (per-cabal, multiplicity).
+Flows 2 and 3 ride the SAME instruments (`cabal-invite` + `admission-price` + `vouch-dag`) and differ ONLY
+by SCOPE — the `placeDocId` and the lineage `seed` — so the machinery composes across scales without the
+flows collapsing into one. Flow 1 stands apart: a distinct mechanism (delegation + envelope), never the
+vouch machinery.
+
 **The through-line — one move made three times: control inverts to the edge, never a root.** A Circle "holds
 what mutual bindings declare" (the Kowloon / group-as-closure model, <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#composition >>):
 no root grants membership (the SOCIAL graph stands up bottom-up from the vessels' own signed edges), no
