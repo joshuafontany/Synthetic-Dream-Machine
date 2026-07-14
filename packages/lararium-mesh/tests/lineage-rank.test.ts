@@ -199,6 +199,22 @@ describe("THE PRICE — distortion, MEASURED, and it is not what I predicted", (
     expect(leaf).toBeLessThan(chainDepth5 / 1000);
   });
 
+  test("THE BOTTLENECK PROPERTY — a voucher cannot raise its OWN score by issuing more vouches", () => {
+    // Appleseed's bottleneck theorem (Ziegler-Lausen) and Levien's Advogato min-cut both assert it, and the
+    // one-pass fold makes it structural: score(v) reads only v's PARENTS and their out-degrees, never v's own
+    // out-degree. So a node adding downstream edges re-divides the mass it already holds among more children —
+    // its own rank does not move. Written to kill the claim: if issuing sybils lifted the attacker's score,
+    // the whole "price, don't manufacture" register would be dead.
+    const before = rankLineage("founder", HONEST, { epsilon: EPS });
+    const aBefore = before.score.get("a")!;
+
+    // 'a' mints 50 downstream sybils. Its OWN score must not move; its existing children a1/a2 must LOSE mass
+    // (the same pool now splits 52 ways instead of 2) — the gaming vector closes on the issuer, not the seed.
+    const gamed = rankLineage("founder", [...HONEST, ...sybils("a", 50)], { epsilon: EPS });
+    expect(gamed.score.get("a")!).toBeCloseTo(aBefore, 12);              // the attacker gains nothing for itself
+    expect(gamed.score.get("a1")!).toBeLessThan(before.score.get("a1")!); // it only dilutes its own downstream
+  });
+
   test("so the DIAL is b·t, exactly as a branching process says — not conductance", () => {
     // A tree has no useful conductance, but it has an EXACT critical quantity: branching number × per-hop
     // retention. Retention per hop = (1−ε)/outdeg. With b·(1−ε)/b = (1−ε), a lineage that branches by b and

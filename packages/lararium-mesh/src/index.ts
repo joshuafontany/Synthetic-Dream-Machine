@@ -107,6 +107,7 @@ export * from "./cabal-place.js";
 export * from "./cabal-invite.js";
 export * from "./lineage-rank.js";
 export * from "./admission-price.js";
+export * from "./vouch-dag.js";
 export * from "./dreamnet-admission.js";
 export * from "./handle-card.js";
 export * from "./cabal-place-charter.js";

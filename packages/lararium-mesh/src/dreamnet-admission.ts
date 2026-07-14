@@ -30,6 +30,7 @@ import {
   decideCabalJoin, type CabalInvite, type CabalJoinPolicy, type JoinRefusal,
 } from "./cabal-invite.js";
 import { priceAdmission, type AdmissionDials, type AdmissionPrice } from "./admission-price.js";
+import { canonicalIdentity } from "./vouch-dag.js";
 import type { VouchEdge } from "./lineage-rank.js";
 
 /** Why a crossing did not clear — the invite gate's own refusals, plus the one the price wall raises. */
@@ -89,12 +90,14 @@ export async function admitToDreamnet(args: {
 
   // The invite's voucher IS the cluster the convex wall reads. Under `open` there may be no voucher; then the
   // cluster is empty, which reads as dispersed (concentration 0), never as captured — absence is not evidence.
+  // The voucher rides raw from the invite and the applicant from the caller; both must read in the SAME
+  // canonical space as the feeder's edges, or the price walks a graph they never touch (vouch-dag).
   const voucher = structural.voucherDid;   // present under invite-only, absent under `open`
-  const cluster = voucher ? [voucher] : [];
+  const cluster = voucher ? [canonicalIdentity(voucher)] : [];
   const price = priceAdmission({
     seed:      args.seed,
     edges:     args.edges,
-    applicant: args.applicant,
+    applicant: canonicalIdentity(args.applicant),
     cluster,
     dials:     args.dials,
   });
