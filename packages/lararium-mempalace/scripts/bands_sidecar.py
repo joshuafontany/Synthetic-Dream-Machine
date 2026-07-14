@@ -1,37 +1,31 @@
 #!/usr/bin/env python3
-"""bands_sidecar — the multi-scale FFZ bands cap for the lares-corpus (corpus.md #the-bands).
+"""bands_sidecar — cohesion-signal analysis over a corpus worldline.
 
-Turns a corpus's per-chunk COHESION signal into the aperture ladder (Pulse · Beat ·
-Measure · Arc · Theme) via a wavelet decomposition + adaptive changepoints. This is the
-MULTI-SCALE lift of the single-signal Measure servo (mesh/ffz-project.ts measureStep /
-quorumStep + BOCPD+MDL+EWMA): where that servo emits ONE Measure label per member, this
-sidecar emits a FULL five-band membership address per chunk, over the whole corpus at once.
+Turns a corpus's per-chunk COHESION signal (cosine-drift over the content
+embeddings, + form/structure planes when present) into worldline readings.
+The live members:
 
-The stack rides four layers plus a gate (corpus.md #the-bands):
+  cohesion_signal   — the per-chunk drift matrix (the shared flow the other
+                      members focus; every reading below names one aperture
+                      held to this stream)
+  changepoint_tree  — the BOUNDARY aperture: `ecp::e.divisive` (bands_ecp.R —
+                      nonparametric, multivariate, divisive → a nested cut
+                      tree, coarse cuts parenting fine). Python fallback:
+                      `ruptures` Binseg / variance-split when R sits absent.
+  couple_streams    — one COUPLING aperture: pairwise effective transfer
+                      entropy, source-permutation surrogate-gated (coupling.R)
+                      — directed predictive dependence, never causation.
+  EWS / criticality — early-warning and slaving legs over the same signal.
+  stability gate    — the reproduction grade (a hardened-math WITNESS, never
+                      the confidence register): resampling-consensus marks a
+                      cut REPRODUCED or FRAGILE; an un-witnessed boundary
+                      never reads reproduced.
 
-  SIGNAL   — the per-chunk cosine-drift over the content embeddings along the sequence
-             (+ form / structure planes when present) → a multivariate drift matrix.
-  SPINE    — MODWT-MRA 5-level (PyWavelets `pywt.mra(..., transform='swt')`), detail
-             levels D1..D5 mapped ONE-TO-ONE onto the aperture bands. No downsampling
-             (one coefficient per chunk) → shift-invariant, never chases a transient.
-  SERVO    — EWT (`ewtpy`) spectral-boundary detection + `ssqueezepy` scalogram ridges,
-             nudging the band boundaries via EWMA-hysteresis (a boundary only MOVES when
-             spectral evidence exceeds the damped threshold — tracks without chasing).
-  TREE     — the membership cells: `ecp::e.divisive` (the R sidecar bands_ecp.R —
-             nonparametric, MULTIVARIATE, divisive → a nested changepoint tree, coarse
-             cuts parent fine cuts). Python fallback: `ruptures` Binseg / KernelCPD-rbf
-             when R is unavailable (the incremental-Binseg order IS a divisive hierarchy).
-  AUTO-TUNE— scale-count by EWT/ridge vote + a wavelet-variance elbow; penalty by MDL;
-             BOCPD-per-band (`bocd`) with a scale-specific hazard from the band's variance.
-  GATE     — the reproduction grade (a hardened-math WITNESS, NOT the confidence register):
-             bootstrap/jackknife resampling-consensus marks a band/cut REPRODUCED only where
-             a resample reproduces it, else FRAGILE. Per-band wavelet-thresholding sets
-             the noise floor.
-
-NOVEL GROUND (corpus.md flag): no prior art runs a wavelet over an embedding-COHESION
-signal (wavelets over price/audio/EEG, yes; over a semantic-cohesion time-series, none).
-The resampling gate is LOAD-BEARING — an un-witnessed band boundary NEVER reads reproduced
-(the wiki's data→meme/lore→canon promotion is a SEPARATE CRDT-layer act consuming this witness).
+Aperture bands as frequency decomposition ride NO live surface here: the FFZ
+membership-tree address (`ffz_address.py`) carries the band ladder as a
+prefix code on the li side. The wavelet/EWT/scalogram functions below
+(modwt_mra · ewt_servo · ridges) stand as an UNSEATED shelf — callable,
+tested, canon-retired; a future aperture may re-summon them by name.
 
 drawer_io-style NDJSON over stdio (the established sidecar contract). Faces:
   * the library: cohesion_signal · modwt_mra · ewt_servo · changepoint_tree ·

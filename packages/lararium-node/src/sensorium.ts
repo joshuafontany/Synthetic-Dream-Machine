@@ -7,10 +7,12 @@
  *
  *   FIBER caps  — content · structure · form. Each STORES bytes (a chroma leaf-DIR). They ride
  *                 `has.*`: a THIN edge `{dir, engine}` naming WHICH cap + WHERE its bytes live.
- *   BASE caps   — bands · coupling. NO persistent bytes. `bands` = the interval-grain metadata for
- *                 the wavelet decomposition computed ON READ; `coupling` = the dumb child-edges that
- *                 glue sub-sensoriums (transfer-entropy read on demand elsewhere). They live IN the
- *                 manifest STRUCTURE, never as leaf-dirs.
+ *   BASE caps   — bands · coupling. NO persistent bytes. `bands` = the interval-grain metadata the
+ *                 FFZ membership-tree address carries (a prefix code computed from the worldline's
+ *                 own path — ffz_address); `coupling` = the dumb child-edges that glue
+ *                 sub-sensoriums (the coupling APERTURES — surrogate-gated ETE, Gaussian cTE,
+ *                 salience fusion — read on demand elsewhere, each naming its focus). They live IN
+ *                 the manifest STRUCTURE, never as leaf-dirs.
  *
  * THIN / dumb edges (has-stack clause 7): `has.*` declares which caps + where the bytes, and nothing
  * richer — the semantics stay in each cap's own meme, never in this edge. We do NOT enrich `has.*`
