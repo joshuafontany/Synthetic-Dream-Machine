@@ -22,14 +22,14 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
 
 <<~ ahu #contract >>
 
-## cold-boot-ceremony — Contract
+!! cold-boot-ceremony — Contract
 
 Void-start identity builder. Runs on first boot when `IdentitiesDoc` has no principals.
 
 Given a hex-encoded 32-byte Ed25519 verifying key, derives `did:key` (multicodec `0xed01` + base58btc, UCAN/Keyhive aligned) and returns two tiddler records:
 
-- `IdentityTiddler` at `lar:///ha.ka.ba/bags/@identities/{did}` — operator principal, `kind = "operator"`, `verifyingKey` populated for Keyhive upgrade
-- `CircleTiddler` at `lar:///ha.ka.ba/bags/@circles/operators` — sole-member operators group, `capabilityPolicy = "group:operators"`
+* `IdentityTiddler` at `lar:///ha.ka.ba/bags/@identities/{did}` — operator principal, `kind = "operator"`, `verifyingKey` populated for Keyhive upgrade
+* `CircleTiddler` at `lar:///ha.ka.ba/bags/@circles/operators` — sole-member operators group, `capabilityPolicy = "group:operators"`
 
 The device Ed25519 keypair is the identity root. GitHub / BlueSky auth enriches `displayName` only.
 
@@ -39,7 +39,7 @@ Caller MUST check the identity tiddler does not already exist before writing (id
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 /**

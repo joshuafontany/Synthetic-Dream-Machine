@@ -25,7 +25,7 @@ written   = "2026-06-24"
 
 <<~ ahu #entry >>
 
-# lar-telemetry ~ the turn reports its instruments
+! lar-telemetry ~ the turn reports its instruments
 
 **A turn carries instruments; lar-telemetry reads them.** The HUD sigils gauge
 the turn — `hud` the aperture/loop dials, `confidence` the certainty vow, `ward`
@@ -56,17 +56,17 @@ lar:///ha.ka.ba/lararium/api/capture-annotation-model#forward-facing-nalu.
 
 <<~ ahu #one-instrument-reader >>
 
-## One Reader ~ the regex retires into the engine
+!! One Reader ~ the regex retires into the engine
 
 Two readers parse the exchange today; one survives.
 
-- **The engine reader** — `memetic-parser` stands a `WikiParser` subclass for
+* **The engine reader** — `memetic-parser` stands a `WikiParser` subclass for
   `text/x-memetic-wikitext`: TiddlyWiki wikitext as a **superset**, with `<<~ … >>`
   claimed by the `lar-sigil` wikirule, native `<<macro>>` still firing. The
   grammar runs **self-hosted**: a tiddler tagged the `SharktoothSigil` grammar tag
   *teaches the parser a new word* (`grammar-cache` reads its `lar-*` fields into a
   `SigilRule`). Adding an instrument adds a tiddler, never code.
-- **The regex harvester** — `turn-harvest` reads the whole gradient on the `0..20`
+* **The regex harvester** — `turn-harvest` reads the whole gradient on the `0..20`
   band, island-grammar, never dropping source. It earned the gradient discipline;
   it also **duplicates the engine's grammar in regex** — the second reader the
   `ONE-parser` law forbids.
@@ -77,7 +77,7 @@ Two readers parse the exchange today; one survives.
 engine, it DOES.** `turn-harvest`'s regex retires into the engine grammar. One
 grammar SOURCE (the instrument `.tids`), one runtime (the @daemon VM).
 
-### Leaf and block
+!!! Leaf and block
 
 The `lar-sigil` wikirule carries `types {block, inline}`. A **block** sigil holds
 a `closePattern` and captures a body (`<<~ ahu #slot >>…<<~/ahu >>`); a **leaf**
@@ -90,7 +90,7 @@ instrument's reading procedure.
 
 <<~ ahu #the-instruments >>
 
-## The Instruments ~ each a SharktoothSigil .tid
+!! The Instruments ~ each a SharktoothSigil .tid
 
 Each turn sigil rides as a tiddler tagged `SharktoothSigil`, carrying three
 offices: the **word** (teaches the parser), the **field-read** (the structured
@@ -116,7 +116,7 @@ matching pattern, not a sigil island.
 
 <<~ ahu #readings-never-verdicts >>
 
-## Readings, Never Verdicts ~ the render law
+!! Readings, Never Verdicts ~ the render law
 
 The render carries `register-dressed-never-gated` into render code: **every
 instrument renders its reading on its `0..20` band, dressed by register — never a
@@ -124,11 +124,11 @@ instrument renders its reading on its `0..20` band, dressed by register — neve
 
 <<~ranks reading provisional@1..4 ~ cool, the play register -> synthesis@9..12 ~ working -> canon@17..20 ~ warm, weight-bearing >>
 
-- `confidence` renders a **band-colored dial** at its value, not a checkmark.
-- `ward` renders its **breach count as drift-marks on a gradient** — a Sword close
+* `confidence` renders a **band-colored dial** at its value, not a checkmark.
+* `ward` renders its **breach count as drift-marks on a gradient** — a Sword close
   with two breaches reads *"Sword drawn · 2 drift-marks,"* never `FAIL`. The ward
   meters dead-water depth; it carries no verdict (the Sword-leads law).
-- `hud` renders the Aperture band + the OODA-HA phase/tally; `oracle` its drift-spend.
+* `hud` renders the Aperture band + the OODA-HA phase/tally; `oracle` its drift-spend.
 
 The `\procedure` form carries this (params bound as `<<param>>`, parsed once —
 modern, robust over `\define` substitution). A low band reads **fertile**, not
@@ -139,7 +139,7 @@ never gating whether it surfaces.
 
 <<~ ahu #the-telemetry-flow >>
 
-## The Telemetry Flow ~ same hook, hold, flush on nalu
+!! The Telemetry Flow ~ same hook, hold, flush on nalu
 
 lar-telemetry fires at the **same hook timing as mempalace** (Stop / SessionEnd /
 PreCompact). The hook adds a leg beside the verbatim mine: it hands the turn to
@@ -173,19 +173,19 @@ only durable home. A queryable `<<~ ui >>` filter layer reads the drawers later.
 
 <<~ ahu #verbatim-then-telemetry >>
 
-## Verbatim Always, Telemetry Eventual ~ the robust seam
+!! Verbatim Always, Telemetry Eventual ~ the robust seam
 
 "One runtime in @daemon" pressing against "capture must never lose a turn" resolves
 on one seam:
 
 <<~ranks capture verbatim ~ VM-free · the drawer body · ALWAYS lands -> telemetry ~ @daemon-owned · the lar_* readings · EVENTUAL >>
 
-- **Verbatim capture** (the mine leg) stays VM-free and lands every turn — the
+* **Verbatim capture** (the mine leg) stays VM-free and lands every turn — the
   journey is never lost, @daemon up or down.
-- **lar-telemetry** runs **@daemon-owned and eventual** — held, flushed on the wave;
+* **lar-telemetry** runs **@daemon-owned and eventual** — held, flushed on the wave;
   if @daemon sleeps, the readings wait for its next breath and the `lar_hv` sweep
   re-enriches stale drawers (the backstop).
-- **Flush resilience** — a flush that finds the drawer not-yet-present (the mine
+* **Flush resilience** — a flush that finds the drawer not-yet-present (the mine
   leg still running) **re-holds to a later nalu**; the sweep is the final net. No
   reading lost, no failed write.
 
@@ -193,7 +193,7 @@ on one seam:
 
 <<~ ahu #ownership >>
 
-## @daemon Owns It All
+!! @daemon Owns It All
 
 lar-telemetry runs in the **@daemon VM** — the always-resident admin lane, the
 operator's authority home — never in a hot content wiki island. @daemon owns
@@ -205,7 +205,7 @@ vendored web2 sibling reached through the seat, never a citizen of the stack
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-memory >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>

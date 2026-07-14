@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/dynamic"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$dynamic>` renders a `<span data-lar-kind="dynamic">` element. `data-lar-sigil` is the parse-tree tag. Renders children inside the span. Used for dynamically-resolved sigil forms.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/dynamic"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/sa-display"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal — SA Display
+! Lararium Signal — SA Display
 
 Not invariant law.
 This room holds the shared-situation-awareness framing and research grounding behind lar signal.
@@ -31,14 +31,14 @@ HUD witness and annotation behavior stay at `lar:///ha.ka.ba/lararium/docs/signa
 
 <<~ ahu #room-charter >>
 
-## Room Charter
+!! Room Charter
 
 This room keeps the theory-facing layer:
 
-- shared-mental-model framing for the Intent Header
-- prospective SA display versus retrospective XAI split
-- metacognitive-scaffold hypothesis and research grounding
-- SA type mapping across signal channels
+* shared-mental-model framing for the Intent Header
+* prospective SA display versus retrospective XAI split
+* metacognitive-scaffold hypothesis and research grounding
+* SA type mapping across signal channels
 
 Longer academic argument belongs here rather than in the branch parent.
 
@@ -46,18 +46,18 @@ Longer academic argument belongs here rather than in the branch parent.
 
 <<~ ahu #research-framing >>
 
-## Research Framing
+!! Research Framing
 
 The Intent Header functions as a **shared mental model instrument**, not a set of usual resource locators. Aviation CRM research (Crew Resource Management) identifies the cockpit HUD as the canonical solution to the two-party shared-mental-model problem: a standardized display both parties read simultaneously, showing state, intent, and trajectory. The Lares Intent Header manifests that structure — it encodes what the node intends to do *before generation begins*, making that commitment visible to the operator in real time.
 
 This reframing has design consequences:
 
-- The **machine form** takes the shape of the record URI vector form — RFC 3986-canonical, machine-parseable, for STATE.jsonl audit and registry use. Analogous to a flight data recorder (FDR).
-- The **sigil form** takes the shape of the HUD form — human-readable, instrument-grade, primary during live operation. Its emoji do not decorate; they function as instrument symbols.
-- Neither form outranks the other in "reality." They serve different audiences of the same shared navigational state.
-- The Intent Vectors and HUD may actively reduce total token cost by preventing wrong-register generation (an empirical claim — see Open Decisions SHD-02).
-- Live operation follows a **tick-span display**: operator-intent URI first, responding-position URI second, destination URI at the end of the exchange.
-- On non-operator responding URIs, the context-window resource glyph moves to the far left of the line: `⚡12 lar://...`. This value uses the shared `0–20` Level model and counts down toward `0`.
+* The **machine form** takes the shape of the record URI vector form — RFC 3986-canonical, machine-parseable, for STATE.jsonl audit and registry use. Analogous to a flight data recorder (FDR).
+* The **sigil form** takes the shape of the HUD form — human-readable, instrument-grade, primary during live operation. Its emoji do not decorate; they function as instrument symbols.
+* Neither form outranks the other in "reality." They serve different audiences of the same shared navigational state.
+* The Intent Vectors and HUD may actively reduce total token cost by preventing wrong-register generation (an empirical claim — see Open Decisions SHD-02).
+* Live operation follows a **tick-span display**: operator-intent URI first, responding-position URI second, destination URI at the end of the exchange.
+* On non-operator responding URIs, the context-window resource glyph moves to the far left of the line: `⚡12 lar://...`. This value uses the shared `0–20` Level model and counts down toward `0`.
 
 The `lar:` prefix remains a non-dereferenceable private identifier (RFC 4151 precedent). The HUD framing belongs in prose and documentation; the spec's component-level RFC validation applies to the record (machine) form.
 
@@ -69,10 +69,10 @@ The SA-display / XAI split matters because the HUD shows forward commitment, whi
 
 Reading referenced content and the node's own live loop remain orthogonal.
 
-- `prism` reads existing referenced content through declared lenses (`conformance`, `syad`, `mu`)
-- exchange `lar` URI vectors set SA intent
-- exchange HUD lines sync exchange boundaries in realtime
-- the `OODA-HA` Level surfaces the node's own loop forward, mid-turn
+* `prism` reads existing referenced content through declared lenses (`conformance`, `syad`, `mu`)
+* exchange `lar` URI vectors set SA intent
+* exchange HUD lines sync exchange boundaries in realtime
+* the `OODA-HA` Level surfaces the node's own loop forward, mid-turn
 
 The exchange HUD does not replace the intent vectors.
 It surfaces vector instruments in realtime.
@@ -83,7 +83,7 @@ It reads referenced content the node points it at.
 
 <<~ ahu #sa-vs-xai >>
 
-## SA vs XAI
+!! SA vs XAI
 
 **SA display vs XAI distinction:** The intent header functions as a *prospective SA display* — it declares current + forward-looking state *before* generation begins. Explainable AI (XAI) works retrospectively — it explains why the AI already did what it did. Conflating the two imports wrong design methodology. The proposed `--verbose` exchange vector commentary and STATE.jsonl audit trail make up the XAI layer. The intent header and micro-trace HUD make up the SA display layer. The relevant design principles come from Endsley's SAOD principles, not SHAP/LIME/attention visualization patterns.
 
@@ -112,7 +112,7 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprin
 
 <<~ &#x0002; >>
 
-# lararium-browser: Full Detached island-Authority Pool Sprint
+! lararium-browser: Full Detached island-Authority Pool Sprint
 
 Chosen architecture: **full detached worker-authority pool**.
 
@@ -29,7 +29,7 @@ TW5 plugin content stays inside the wiki island.
 DOM ownership stays at the edge.
 Dead web2 singleton/page/server residue does not cross the membrane without proof.
 
-## Sprint Braid
+!! Sprint Braid
 
 | Sprint | Goal | Status |
 |---|---|---|
@@ -44,7 +44,7 @@ Dead web2 singleton/page/server residue does not cross the membrane without proo
 | S8 | Root contract rewrite / RootTemplate exit | ⬜ |
 | S9 | End-to-end browser vessel alpha | ⬜ |
 
-## Work Order
+!! Work Order
 
 1. S0 charter
 2. S1 contract
@@ -57,7 +57,7 @@ Dead web2 singleton/page/server residue does not cross the membrane without proo
 9. S8 root contract rewrite
 10. S9 alpha e2e
 
-## Primary Law
+!! Primary Law
 
 1. Host owns where a wiki appears.
 2. Island authority owns causal and compute sovereignty.
@@ -66,17 +66,17 @@ Dead web2 singleton/page/server residue does not cross the membrane without proo
 5. Projection adapters translate authority output into host surfaces.
 6. RootTemplate assumptions do not govern vessel architecture.
 
-## Non-Negotiables
+!! Non-Negotiables
 
-- No HTTP/RPC coordinator surface.
-- No browser singleton authority rooted in ambient page boot.
-- No hidden dependence on global `window.$tw`.
-- No "whole page becomes the wiki" assumption.
-- No migration of dead web2 code without a written reason and passing proof.
-- No RootTemplate capture of the architecture.
-- No pool design that requires a DOM-bound authority to stay warm full-time unless measurements force that compromise.
+* No HTTP/RPC coordinator surface.
+* No browser singleton authority rooted in ambient page boot.
+* No hidden dependence on global `window.$tw`.
+* No "whole page becomes the wiki" assumption.
+* No migration of dead web2 code without a written reason and passing proof.
+* No RootTemplate capture of the architecture.
+* No pool design that requires a DOM-bound authority to stay warm full-time unless measurements force that compromise.
 
-## Core Tension
+!! Core Tension
 
 TW5's canonical browser path still pulls toward `$:/core/ui/RootTemplate` and page-owned document flow.
 We plan to roll our own frame/root contract.
@@ -84,18 +84,18 @@ We do **not** plan to let stock `RootTemplate` dictate vessel law.
 
 Working answer: keep TW5-native content inside plugin/page-template/startup tiddlers where that content belongs; replace whole-page assumptions with a Lararium-owned root/frame model; treat `RootTemplate` as prior art and source material, not as constitutional authority.
 
-## Cheap Checks / Early Falsifiers
+!! Cheap Checks / Early Falsifiers
 
-- Can a worker boot TW5 authority without page DOM access?
-- Can a host mount a frame without ambient global `$tw`?
-- Can a pooled authority survive release/reacquire cleanly?
-- Can hot/admin frames coexist without page-template sovereignty?
-- Can reload recover the vessel from IndexedDB without whole-page boot?
-- Does any new code reintroduce a singleton page owner?
+* Can a worker boot TW5 authority without page DOM access?
+* Can a host mount a frame without ambient global `$tw`?
+* Can a pooled authority survive release/reacquire cleanly?
+* Can hot/admin frames coexist without page-template sovereignty?
+* Can reload recover the vessel from IndexedDB without whole-page boot?
+* Does any new code reintroduce a singleton page owner?
 
 If any check fails, treat it as architectural signal, not a cue to patch around the law.
 
-## Open Questions
+!! Open Questions
 
 1. How much render preparation can the island authority complete before frame attach?
 2. Which minimal projection data should cross the worker boundary?
@@ -105,23 +105,23 @@ If any check fails, treat it as architectural signal, not a cue to patch around 
 
 Do not guess. Measure and document.
 
-## Alpha Definition of Done
+!! Alpha Definition of Done
 
-- A browser vessel opens on the same constitutional law as node.
-- island authorities own truth and compute.
-- The host owns frames and projection mounts.
-- The browser survives reload and reconnect.
-- Hot/admin wiki swapping works.
-- The architecture no longer depends on a whole-page TW5 shell.
-- A deletion report names the web2-era code that no longer carries weight.
+* A browser vessel opens on the same constitutional law as node.
+* island authorities own truth and compute.
+* The host owns frames and projection mounts.
+* The browser survives reload and reconnect.
+* Hot/admin wiki swapping works.
+* The architecture no longer depends on a whole-page TW5 shell.
+* A deletion report names the web2-era code that no longer carries weight.
 
-## Internet Prior Art
+!! Internet Prior Art
 
-- MDN Web Workers: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
-- MDN OffscreenCanvas: https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas
-- Comlink: https://github.com/GoogleChromeLabs/comlink
-- Monaco worker integration: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
-- VS Code Webview API: https://code.visualstudio.com/api/extension-guides/webview
+* MDN Web Workers: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
+* MDN OffscreenCanvas: https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas
+* Comlink: https://github.com/GoogleChromeLabs/comlink
+* Monaco worker integration: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
+* VS Code Webview API: https://code.visualstudio.com/api/extension-guides/webview
 
 <<~ &#x0003; >>
 

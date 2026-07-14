@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/kukali"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$kukali>` renders a `<span data-lar-kind="kukali">` element and wires a reactive hook via `wiki._larKukaliHook`. The hook cancel function is stored on the DOM node. Attribute: `trigger`.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/kukali"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function KukaliWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

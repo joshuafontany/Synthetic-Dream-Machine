@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/lele"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$lele>` renders a `<meta data-lar-kind="lele">` element. Carries a `target` attribute pointing to a jump/transclusion target.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/lele"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function LeleWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

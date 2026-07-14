@@ -25,7 +25,7 @@ written   = "2026-06-25"
 
 <<~ ahu #entry >>
 
-# lares ↔ lararium ~ the true binding
+! lares ↔ lararium ~ the true binding
 
 **The CLI runs co-located; bind it like one.** `lares` and the `lararium` node run on
 the same machine, yet every one-shot command opened a fresh WebSocket, spun a new
@@ -44,7 +44,7 @@ fast local **submit/await** channel. Every web3 invariant survives.
 
 <<~ ahu #split-by-topology >>
 
-## Split by Topology ~ substrate-not-sovereignty, made literal
+!! Split by Topology ~ substrate-not-sovereignty, made literal
 
 <<~ranks bind co-located ~ Unix-domain socket (the docker.sock / tailscale-LocalAPI / gopls thin-client→warm-daemon shape); same machine = share the substrate -> remote ~ WebSocket + leaf-vessel + full sync; crossing the mesh = a real island boundary, full Ed25519 V3 gate >>
 
@@ -64,7 +64,7 @@ one client abstraction (tailscale's shape).
 
 <<~ ahu #three-decoupled >>
 
-## Transport · Authority · Record ~ three concerns, not one
+!! Transport · Authority · Record ~ three concerns, not one
 
 The load-bearing seam (UCAN/ucanto proves it battle-tested):
 
@@ -84,7 +84,7 @@ CLI awaits it via the socket response (or an ephemeral/notify), **not a full syn
 
 <<~ ahu #the-flow >>
 
-## The Flow
+!! The Flow
 
 <<~flows lares -> invokeLocal{verb,args,cap} -> UDS -> daemon VerbDispatcher (warm @daemon · verify-then-delegate · keyhive) -> CRDT outcome receipt -> return over the socket >>
 
@@ -98,16 +98,16 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 <<~ ahu #auth >>
 
-## Auth ~ peer-cred AND Ed25519, two questions
+!! Auth ~ peer-cred AND Ed25519, two questions
 
-- **Peer-cred answers "who is this local process?"** `SO_PEERCRED` (Linux) /
+* **Peer-cred answers "who is this local process?"** `SO_PEERCRED` (Linux) /
   `getpeereid` (BSD/macOS) returns kernel-attested uid/pid — unforgeable. Plus
   socket perms (`0600`/owner-only, the first fence). A **substrate fact** (presence).
-- **Ed25519/UCAN answers "what may it do?"** The per-call signed capability stays
+* **Ed25519/UCAN answers "what may it do?"** The per-call signed capability stays
   the **authority of record** — attenuable, revocable, federation-surviving, what
   the receipt attests. A **sovereignty fact**. Verify runs in µs — cheap; the
   *sync* cost the 3s, never the crypto.
-- **Both, never either.** Drop the Ed25519 proof for peer-cred alone and you rebuild
+* **Both, never either.** Drop the Ed25519 proof for peer-cred alone and you rebuild
   the ambient-session / confused-deputy hole (the docker.sock = root-equivalent
   cautionary tale). Substrate shared (socket), sovereignty not (keys).
 
@@ -115,22 +115,22 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 <<~ ahu #pitfalls >>
 
-## Pitfalls
+!! Pitfalls
 
-- **Socket perms `0600`/owner** + post-boot re-verify (some envs reset ownership).
-- **Stale-socket cleanup** on daemon restart (bind fails on a leftover path).
-- **The daemon's own WS relay keeps the Ed25519 gate** — peer-cred doesn't cross
+* **Socket perms `0600`/owner** + post-boot re-verify (some envs reset ownership).
+* **Stale-socket cleanup** on daemon restart (bind fails on a leftover path).
+* **The daemon's own WS relay keeps the Ed25519 gate** — peer-cred doesn't cross
   machines; never an unauthenticated TCP bind (the `tcp://0.0.0.0:2375` anti-pattern).
   The CLI carries no second transport to fall back to: no socket → `DaemonUnreachable`,
   which counsels `lares serve` rather than quietly standing a replica.
-- **Windows:** named pipe (or localhost) behind the one client abstraction; the
+* **Windows:** named pipe (or localhost) behind the one client abstraction; the
   Ed25519 proof keeps auth uniform across platforms.
 
 <<~/ahu >>
 
 <<~ ahu #wiring >>
 
-## Wiring (when the identity work pauses)
+!! Wiring (when the identity work pauses)
 
 1. **Daemon UDS verb-channel** (lararium-node): a Unix-domain listener at
    `~/.lares/lares.sock` (perms `0600`, stale-cleanup, Windows named-pipe fallback)
@@ -155,7 +155,7 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/async-flows >>

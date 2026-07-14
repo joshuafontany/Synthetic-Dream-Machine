@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal-review"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal Branch Review Memo
+! Lararium Signal Branch Review Memo
 
 Not invariant law.
 This memo reviews the current signal branch, marks pressure points, and proposes next moves for rewrite and settlement work.
@@ -29,24 +29,24 @@ This memo reviews the current signal branch, marks pressure points, and proposes
 
 <<~ ahu #scope >>
 
-## Scope
+!! Scope
 
 Primary review target:
 
-- `lar:///ha.ka.ba/lararium/docs/signal`
+* `lar:///ha.ka.ba/lararium/docs/signal`
 
 Child rooms under review:
 
-- `lar:///ha.ka.ba/lararium/docs/signal/l-space`
-- `lar:///ha.ka.ba/lararium/docs/signal/hud`
-- `lar:///ha.ka.ba/lararium/docs/signal/render-targets`
-- `lar:///ha.ka.ba/lararium/docs/signal/sa-display`
+* `lar:///ha.ka.ba/lararium/docs/signal/l-space`
+* `lar:///ha.ka.ba/lararium/docs/signal/hud`
+* `lar:///ha.ka.ba/lararium/docs/signal/render-targets`
+* `lar:///ha.ka.ba/lararium/docs/signal/sa-display`
 
 Research cluster consumed for dependency pressure:
 
-- `packages/lares-core/memes/docs/lararium/signal/chronometer/Vector_Chronometer_Research_Seed.md`
-- `packages/lares-core/memes/docs/lararium/signal/chronometer/FFZ_Chronometer_Research.md`
-- `packages/lares-core/memes/docs/lararium/signal/chronometer/FFZ_Chronometer_SPEC_OUTLINE.md`
+* `packages/lares-core/memes/docs/lararium/signal/chronometer/Vector_Chronometer_Research_Seed.md`
+* `packages/lares-core/memes/docs/lararium/signal/chronometer/FFZ_Chronometer_Research.md`
+* `packages/lares-core/memes/docs/lararium/signal/chronometer/FFZ_Chronometer_SPEC_OUTLINE.md`
 
 This memo targets branch boundaries, settlement level, and rewrite order.
 This memo does not attempt chronometer closure.
@@ -57,9 +57,9 @@ This memo does not attempt chronometer closure.
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
-### File Inventory
+!!! File Inventory
 
 | File | Current reading | Pressure level |
 |---|---|---|
@@ -70,28 +70,28 @@ This memo does not attempt chronometer closure.
 | `signal/hud.md` | overloaded witness and residue room | high |
 | `signal/chronometer/*` | active research cluster, not settled branch law | high |
 
-### Strong readings from the current corpus
+!!! Strong readings from the current corpus
 
-- `signal.md` already routes well and stays relatively lean.
-- `l-space.md` keeps a clear definitional job.
-- `sa-display.md` keeps theory pressure mostly contained.
-- `render-targets.md` owns per-surface rules, though a few target definitions still wait for later closure.
-- `hud.md` carries too many burdens at once: witness, migration residue, open decisions, field rules, symbol tables, and snapshot archaeology.
-- `chronometer/` still behaves like research support, not a stable child room.
+* `signal.md` already routes well and stays relatively lean.
+* `l-space.md` keeps a clear definitional job.
+* `sa-display.md` keeps theory pressure mostly contained.
+* `render-targets.md` owns per-surface rules, though a few target definitions still wait for later closure.
+* `hud.md` carries too many burdens at once: witness, migration residue, open decisions, field rules, symbol tables, and snapshot archaeology.
+* `chronometer/` still behaves like research support, not a stable child room.
 
-### Immediate risk markers
+!!! Immediate risk markers
 
-- duplication pressure across `signal.md`, `hud.md`, `render-targets.md`, and `sa-display.md`
-- settlement blur between stable docs language and research/session language
-- unresolved FFZ design pressure leaking upward into branch docs
+* duplication pressure across `signal.md`, `hud.md`, `render-targets.md`, and `sa-display.md`
+* settlement blur between stable docs language and research/session language
+* unresolved FFZ design pressure leaking upward into branch docs
 
 <<~/ahu >>
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
-### Branch shape
+!!! Branch shape
 
 The branch already suggests a clean five-room split:
 
@@ -103,7 +103,7 @@ The branch already suggests a clean five-room split:
 | `signal/render-targets.md` | surface registry, glyph projection, fallback behavior, per-surface rules |
 | `signal/sa-display.md` | theory, research framing, SA-vs-XAI distinction |
 
-### Main tensions
+!!! Main tensions
 
 1. **HUD overload**
    - `hud.md` carries the highest rewrite pressure.
@@ -122,7 +122,7 @@ The branch already suggests a clean five-room split:
    - Nearby paragraphs read as working notebook.
    - A later reader could misread temporary argument as branch law.
 
-### Working interpretation
+!!! Working interpretation
 
 The branch does not need a full redesign.
 The branch needs a boundary pass, a settlement pass, and a reduction pass focused on `hud.md`.
@@ -131,9 +131,9 @@ The branch needs a boundary pass, a settlement pass, and a reduction pass focuse
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
-### Review goals
+!!! Review goals
 
 This review pass should produce:
 
@@ -142,7 +142,7 @@ This review pass should produce:
 3. one concrete reduction plan for `signal/hud.md`
 4. one dependency note marking which claims wait on FFZ
 
-### Review order
+!!! Review order
 
 Read and decide in this order:
 
@@ -153,7 +153,7 @@ Read and decide in this order:
 5. `signal/hud.md`
 6. `signal/chronometer/*`
 
-### Section status vocabulary
+!!! Section status vocabulary
 
 Use the following labels during the review:
 
@@ -169,26 +169,26 @@ Use the following labels during the review:
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
-### Concrete TODO List
+!!! Concrete TODO List
 
-- [ ] build a section-by-section review matrix for `signal.md` and each child room
-- [ ] mark every major section with one status label: `keep`, `tighten`, `move`, `archive`, or `blocked-on-ffz`
-- [ ] extract a duplication map for concepts that currently appear in more than one room
-- [ ] identify every `hud.md` section that still changes live design decisions
-- [ ] identify every `hud.md` section that now functions only as witness or migration residue
-- [ ] separate settled HUD contract text from snapshot and archaeology text
-- [ ] mark every branch claim that depends on unresolved FFZ format or lifecycle work
-- [ ] keep `signal.md` lean; move surplus explanation downward rather than upward
-- [ ] keep `l-space.md` definitional; avoid drift into transport, parsing, or chronometer detail
-- [ ] keep `sa-display.md` theory-facing; avoid operational duplication with `hud.md`
-- [ ] tighten `render-targets.md` around current surfaces; mark future targets clearly as future-facing
-- [ ] draft a reduced target outline for `hud.md` before any rewrite begins
-- [ ] write a short FFZ dependency note after the room-by-room review completes
-- [ ] only after the review matrix lands, begin edits in rewrite order
+* [ ] build a section-by-section review matrix for `signal.md` and each child room
+* [ ] mark every major section with one status label: `keep`, `tighten`, `move`, `archive`, or `blocked-on-ffz`
+* [ ] extract a duplication map for concepts that currently appear in more than one room
+* [ ] identify every `hud.md` section that still changes live design decisions
+* [ ] identify every `hud.md` section that now functions only as witness or migration residue
+* [ ] separate settled HUD contract text from snapshot and archaeology text
+* [ ] mark every branch claim that depends on unresolved FFZ format or lifecycle work
+* [ ] keep `signal.md` lean; move surplus explanation downward rather than upward
+* [ ] keep `l-space.md` definitional; avoid drift into transport, parsing, or chronometer detail
+* [ ] keep `sa-display.md` theory-facing; avoid operational duplication with `hud.md`
+* [ ] tighten `render-targets.md` around current surfaces; mark future targets clearly as future-facing
+* [ ] draft a reduced target outline for `hud.md` before any rewrite begins
+* [ ] write a short FFZ dependency note after the room-by-room review completes
+* [ ] only after the review matrix lands, begin edits in rewrite order
 
-### Suggested rewrite order
+!!! Suggested rewrite order
 
 1. tighten `signal.md`
 2. tighten `signal/l-space.md`
@@ -197,7 +197,7 @@ Use the following labels during the review:
 5. reduce and restructure `signal/hud.md`
 6. leave `signal/chronometer/*` for separate research/spec work
 
-### Working matrix template
+!!! Working matrix template
 
 | File | Section | Status | Action | Notes |
 |---|---|---|---|---|
@@ -209,30 +209,30 @@ Use the following labels during the review:
 
 <<~ ahu #assess >>
 
-## ↺ Assess
+!! ↺ Assess
 
-### Exit criteria for the review pass
+!!! Exit criteria for the review pass
 
 The review pass can close when all of the following land:
 
-- every major section across the branch carries a status label
-- every duplicated concept points to one canonical home
-- `hud.md` carries a reduction outline
-- FFZ-dependent claims sit in a short dependency note
-- rewrite order no longer depends on guesswork
+* every major section across the branch carries a status label
+* every duplicated concept points to one canonical home
+* `hud.md` carries a reduction outline
+* FFZ-dependent claims sit in a short dependency note
+* rewrite order no longer depends on guesswork
 
-### Expected outcomes
+!!! Expected outcomes
 
 After this pass:
 
-- `signal.md` should remain short and directional
-- `l-space.md` should remain compact
-- `sa-display.md` should carry theory pressure cleanly
-- `render-targets.md` should carry surface rules cleanly
-- `hud.md` should shrink toward a more legible live room
-- `chronometer/` should remain research-side until later settlement
+* `signal.md` should remain short and directional
+* `l-space.md` should remain compact
+* `sa-display.md` should carry theory pressure cleanly
+* `render-targets.md` should carry surface rules cleanly
+* `hud.md` should shrink toward a more legible live room
+* `chronometer/` should remain research-side until later settlement
 
-### Closure note
+!!! Closure note
 
 This memo recommends a review memo first, edits second.
 That order should reduce churn and keep the branch from freezing unresolved FFZ decisions into docs law too early.
@@ -241,7 +241,7 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>

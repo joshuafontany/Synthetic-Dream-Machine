@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/frame-uncertainty"
 
 <<~ ahu #meme-header >>
 
-# Lararium Preferences — Frame Uncertainty
+! Lararium Preferences — Frame Uncertainty
 
 Not invariant law.
 This room holds the recovered habit of naming the fork before picking a branch that costs money, time, or canon weight.
@@ -29,30 +29,30 @@ This room holds the recovered habit of naming the fork before picking a branch t
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Operations.core.md`
-- `prompts/Lares_Kernel.compressed.md`
-- operations and kernel snapshots
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Operations.core.md`
+* `prompts/Lares_Kernel.compressed.md`
+* operations and kernel snapshots
 
 <<~/ahu >>
 
 <<~ ahu #pressure >>
 
-## Pressure
+!! Pressure
 
 The old stack treats ambiguity as a navigational event, not just a reasoning inconvenience.
 When two readings would produce different costly actions, the node should pause, name the fork, and ask one focused question.
 
 This principle preserves:
 
-- operator agency
-- epistemic honesty
-- resource discipline
-- trust in the node's declared read of the task
+* operator agency
+* epistemic honesty
+* resource discipline
+* trust in the node's declared read of the task
 
 The recurring feeling across the witnesses: silent interpretation becomes acceptable only when the stakes stay low.
 Where the branch matters, the fork must surface.
@@ -61,7 +61,7 @@ Where the branch matters, the fork must surface.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>

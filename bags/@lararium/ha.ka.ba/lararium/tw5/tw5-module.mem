@@ -17,14 +17,14 @@ uri-path  = "ha.ka.ba/lararium/tw5/tw5-module"
 
 <<~ &#x0002; >>
 
-## TW5 Module Interface
+!! TW5 Module Interface
 
 A carrier that implements `lar:///ha.ka.ba/lararium/tw5/tw5-module` declares itself as a
 kernel-injectable TW5 module. The kernel's `_bootModules()` gate queries for every carrier wearing this component (`stack:has`),
 evaluates the capability threshold, and injects passing memes as TW5 shadow tiddlers after
 corpus load.
 
-### Required `#iam` Fields
+!!! Required `#iam` Fields
 
 | field | meaning |
 |---|---|
@@ -37,13 +37,13 @@ corpus load.
 | `confidence` | MUST be ≥ 18 to pass gate layer 1 (threshold) |
 | `body-sha256` | SHA-256 hex digest of the body text; MUST match at inject time (gate layer 2 — content integrity); written by `scripts/write-module-meme.ts` at build time |
 
-### Body
+!!! Body
 
 The meme body (between `<<~ &#x0002; >>` and `<<~ &#x0003; >>`) MUST be a self-contained CJS JS bundle
 with no unresolved external imports. `tiddlywiki` MAY be referenced as the global `$tw` — the host
 TW5 instance provides it at injection time.
 
-### Capability Model
+!!! Capability Model
 
 The kernel holds the `$tw.wiki` reference. Injecting a module meme into TW5 hands that reference
 to the bundle's execution context. Three gate layers must all pass before the kernel hands `$tw.wiki`
@@ -57,7 +57,7 @@ A meme that fails any layer falls through to the imperative fallback path and is
 The build process (`pnpm bundle`) is the trust anchor for layers 1–2; keyhive will be the trust
 anchor for layer 3.
 
-### Fallback
+!!! Fallback
 
 If no module memes pass the threshold at boot, the kernel falls back to imperative registration
 (the compiled-in `_registerMemeticParser()` / `_registerWidgets()` path). This ensures the system

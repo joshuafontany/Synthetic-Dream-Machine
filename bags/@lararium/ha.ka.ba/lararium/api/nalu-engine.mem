@@ -20,9 +20,9 @@ uri-path       = "ha.ka.ba/lararium/api/nalu-engine"
 
 <<~ &#x0002; >>
 
-# nalu-engine — Invariant
+! nalu-engine — Invariant
 
-## Identity
+!! Identity
 
 `nalu-engine` is a TW5 `module-type: startup` module written in TS, compiled into the
 plugin bundle, and evaluated inside the wiki at boot. It installs the `$tw.lares.*` API
@@ -31,7 +31,7 @@ that the TS-side `IslandAdaptor` calls across the membrane.
 The wiki IS the reactive engine (yin-collapse law, lar:///ha.ka.ba/lares/api/pono/nalu).
 This module is the in-wiki embodiment of the nalu wave.
 
-## $tw.lares.* surface
+!! $tw.lares.* surface
 
 | Method | Caller | Role |
 |---|---|---|
@@ -40,7 +40,7 @@ This module is the in-wiki embodiment of the nalu wave.
 | `isApplyingNalu()` | IslandAdaptor (outbound `saveTiddler` / `deleteTiddler`) | True while the engine holds the apply-time mutex; outbound guards skip |
 | `naluPending()` | tests, observability | Current queue depth |
 
-## Position in the stack
+!! Position in the stack
 
 ```
 TS membrane (irreducible — Automerge, network, crypto, storage)
@@ -55,7 +55,7 @@ TW5 startup module (this spec)
   _applying flag                          ← read by IslandAdaptor outbound guards
 ```
 
-## Invariants
+!! Invariants
 
 **N-1 One queue, all bags.**
 The engine holds exactly one `LarTiddlerChange[]` queue. Changes from every CRDT bag,
@@ -95,7 +95,7 @@ frame; the queue drains in bounded steps.
 `startup()` reads `$tw.lares ?? {}`, installs the four functions, writes back. Safe to
 run more than once in tests; subsequent invocations overwrite with identical refs.
 
-## Initial replay path
+!! Initial replay path
 
 The recipe drives initial state through this same engine. After the IslandAdaptor
 registers as a projection, the recipe calls `AutomergeDocStore.emitInitialReplay()` per
@@ -110,7 +110,7 @@ queue handles both.
 
 <<~ ahu #gate-families-seam >>
 
-## The gate-families seam ~ runtime ≠ physics
+!! The gate-families seam ~ runtime ≠ physics
 
 A scout (the Substrate-Diver) flagged an apparent collision: **N-1** holds ONE queue
 across all bags, *per-bag accumulators do not exist* — yet `projection-nalu`
@@ -120,14 +120,14 @@ carrier-root** and **per bag**. Both stand; they sit at OPPOSITE ENDS of the one
 
 <<~ranks seam UPSTREAM:membrane-coalesce-per-key -> DOWNSTREAM:engine-unified-queue-per-frame >>
 
-- **UPSTREAM — the membrane gates (physics).** `MemeProvider` (the TS-side, before the
+* **UPSTREAM — the membrane gates (physics).** `MemeProvider` (the TS-side, before the
   membrane crossing) draws the coalesce gates: a per-URI debounce window collapses the
   8–50 replay patches a fresh vessel-connect fires for one URI down to ONE latest-state
   change, and the 5th-shore `_changesetGate` (`meme-provider.ts:64`) coalesces a storm of
   large Automerge transactions to ONE `onChangeset(union)` per bag. This is the
   **coalesce** family — intermediates lawfully DROP, newest-per-key wins. The drop happens
   HERE, before a change ever reaches `enqueueNalu`.
-- **DOWNSTREAM — the engine queue (runtime).** Each surviving change crosses the membrane
+* **DOWNSTREAM — the engine queue (runtime).** Each surviving change crosses the membrane
   via `IslandAdaptor.onUriChanged → enqueueNalu` and joins the ONE unified queue in arrival
   order (N-1), delivered as ONE `wiki.transact()` per frame (N-2). The engine drops
   NOTHING further — every survivor lands — and batches them by the FRAME clock. This is the
@@ -148,7 +148,7 @@ transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the membra
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>

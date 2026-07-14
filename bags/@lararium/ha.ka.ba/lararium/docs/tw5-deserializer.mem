@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lararium/docs/tw5-deserializer"
 
 <<~ ahu #overview >>
 
-## Overview
+!! Overview
 
 TW5 parses tiddler content by content-type. The deserializer for `text/x-memetic-wikitext` is registered in the `TW5.Wiki.tiddlerDeserializerModules` map at boot time. When TW5 encounters a tiddler with this type, it calls the deserializer to split the raw carrier text into one parent tiddler and N ahu child slot tiddlers — the same structural split performed on the Node side by the disk projector.
 
@@ -28,7 +28,7 @@ The canonical source is at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer`.
 
 <<~ ahu #split-model >>
 
-## Split Model
+!! Split Model
 
 The deserializer delegates to `splitCarrierToTiddlers(uri, text)` (from `@lararium/tw5`). The parent tiddler receives all `#iam` TOML fields merged into its TW5 fields. Each `<<~ ahu #slot >>` block becomes a child tiddler with `ahu-slot` and `ahu-parent` fields set.
 
@@ -38,7 +38,7 @@ Parse warnings are surfaced as `$:/lararium/parse-warning/<slug>` tiddlers so th
 
 <<~ ahu #why-stuck >>
 
-## Why This Cannot Be a Meme
+!! Why This Cannot Be a Meme
 
 The deserializer is a closure over the compiled `splitCarrierToTiddlers` TypeScript function. It is registered as a property assignment on the live `tw.Wiki` class — a reference that only exists after TW5 boot. There is no TW5 hook to load a deserializer from a tiddler; registration must be imperative.
 

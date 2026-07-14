@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/sigil-procedure"
 
 <<~ ahu #head >>
 
-# ~\procedure Sigil Design
+! ~\procedure Sigil Design
 
 `<<~ \procedure name(params) >>body<<~/ \procedure >>` — English-form procedure declaration.
 
@@ -30,12 +30,12 @@ Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary)
 
 <<~ ahu #semantics >>
 
-## Semantics
+!! Semantics
 
 `\procedure` and `wehe` share executor semantics:
-- Both declare a named callable body.
-- `\procedure` = English alias; reads naturally to non-Hawaiian operators.
-- `wehe` = Hawaiian form; carries cultural weight of "outside/exit boundary" — the procedure defines a crossing point from declaration-space into execution-space.
+* Both declare a named callable body.
+* `\procedure` = English alias; reads naturally to non-Hawaiian operators.
+* `wehe` = Hawaiian form; carries cultural weight of "outside/exit boundary" — the procedure defines a crossing point from declaration-space into execution-space.
 
 `lar-kind: pragma-alias` — the sigil IS the declaration mechanism; it produces no render output.
 
@@ -45,7 +45,7 @@ Cross-ref: `lar-see-also: wehe`. When `sigil-wehe.tid` ships (Path G.SharktoothS
 
 <<~ ahu #dispatch >>
 
-## Dispatch Form
+!! Dispatch Form
 
 ```
 <<~ \procedure greet(name:"world") >>Hello <<name>>!<<~/ \procedure >>
@@ -65,7 +65,7 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~ ahu #source-shelf >>
 
-## Source Shelf
+!! Source Shelf
 
 <<~/pranala >>
 

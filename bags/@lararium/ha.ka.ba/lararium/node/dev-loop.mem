@@ -21,7 +21,7 @@ written   = "2026-06-27"
 
 <<~ ahu #head >>
 
-# The Dev Loop ~ idempotent cures after a code change
+! The Dev Loop ~ idempotent cures after a code change
 
 A Lararium vessel boots from **compiled dist**, founds from a **baked genesis seed**, and runs from
 **vessel state in the operator's home**. After editing code, three things can be stale — the dist,
@@ -34,7 +34,7 @@ run from any prior state (running · stale · none), so the loop never needs a c
 
 <<~ ahu #commands >>
 
-## The reach taxonomy ~ which cure, when
+!! The reach taxonomy ~ which cure, when
 
 Ordered by how much they touch — reach for the *least* that fixes your case:
 
@@ -59,7 +59,7 @@ half-dead vessel: port bound, worker `ERR_MODULE_NOT_FOUND`). So after a TS edit
 
 <<~ ahu #vessel-paths >>
 
-## Where state lives ~ vessel-home vs corpus (the ~/.lares split)
+!! Where state lives ~ vessel-home vs corpus (the ~/.lares split)
 
 The CORPUS + code live in the **repo** (versioned); the vessel's RUNTIME STATE lives in the
 operator's **home** (`~/.lares`). This is the `@daemon` ontology made filesystem — the
@@ -81,25 +81,25 @@ default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat 
 
 <<~ ahu #laws >>
 
-## The invariants the loop rests on
+!! The invariants the loop rests on
 
 <<~ranks law dist-not-tsx -> genesis-before-init -> identity-survives-reset -> only-explicit-LAR_ROOT -> deterministic-genesis >>
 
-- **dist, not tsx** — island workers spawn compiled; a stale dist is a half-dead vessel. `refresh` rebuilds.
-- **genesis before init** — init founds the hearth FROM the engine CID, so the baked artifact must
+* **dist, not tsx** — island workers spawn compiled; a stale dist is a half-dead vessel. `refresh` rebuilds.
+* **genesis before init** — init founds the hearth FROM the engine CID, so the baked artifact must
   exist first. `reset` order is delete → **rebuild genesis** → init (the reverse fails "engine CID absent").
-- **identity survives reset** — `~/.lares/.lararium-identity` is a sibling of the wipe-zone; `reset`
+* **identity survives reset** — `~/.lares/.lararium-identity` is a sibling of the wipe-zone; `reset`
   preserves the operator's keypair/DID. A true re-found (new DID) needs an explicit identity wipe.
-- **only explicit `--root` sets `LAR_ROOT`** — never thread a `REPO_ROOT` default through reset/init
+* **only explicit `--root` sets `LAR_ROOT`** — never thread a `REPO_ROOT` default through reset/init
   (it silently relocates the vessel into the repo).
-- **deterministic genesis** — a re-bake with unchanged code is byte-identical (no churn); a diff means
+* **deterministic genesis** — a re-bake with unchanged code is byte-identical (no churn); a diff means
   the engine/plugin blob genuinely changed.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/node/open-node-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/node/node-vessel-identity >>

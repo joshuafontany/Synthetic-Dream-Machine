@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/docs/mcp-tool-registry"
 
 <<~ ahu #head >>
 
-# MCP Tool Registry
+! MCP Tool Registry
 
 Ten registered tools and two prompts expose the Lararium graph API to MCP clients.
 Tools map onto OODA-HA phases: Observe → Orient → Decide → Act → Aftermath.
@@ -31,21 +31,21 @@ Two env guards gate write access and canvas connectivity.
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 `LARARIUM_HTTP_URL` — required for canvas-connected tools (lararium-canvas, lararium-fire).
 `LARARIUM_WRITE_MODE=enabled` — required for lararium-write with `dry_run: false`.
 
 All tools pending Automerge-native MCP redesign return errors except:
-- lararium-canvas — live HTTP pass-through to `/api/rooms`
-- lararium-fire — live HTTP POST to `/api/fire`
-- lararium-write — dry_run preview (always) or guarded write
+* lararium-canvas — live HTTP pass-through to `/api/rooms`
+* lararium-fire — live HTTP POST to `/api/fire`
+* lararium-write — dry_run preview (always) or guarded write
 
 <<~/ahu >>
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 server-name = "lararium"

@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/genesis-doc"
 
 <<~ &#x0002; >>
 
-# Genesis & the Two Planes
+! Genesis & the Two Planes
 
 The vessel stands on **two orthogonal planes, soft-coupled at the `@oracle`** — tuber and rhizome, moving independently:
 
@@ -32,7 +32,7 @@ The genesis is **not** an Automerge binary carrying bytes. It is a **thin `@orac
 
 <<~ ahu #two-planes >>
 
-## The two planes
+!! The two planes
 
 **Plane 0 — the CID layer (rhizome / FLOW).** Content-addressed, immutable, IPFS-like. Holds every large blob — the TW5 engine core, the plugins, future binary streams (hypercore live someday). Each artifact IS its sha256; a new version is a new CID. This plane **churns continuously** — the engine updates almost without pause, plugins and blobs come and go. No mutation, no merge: content only, fetched **by CID** from the CAS (`node-cas.ts` fs · browser OPFS). The kernel resolves engine + plugins CAS-only by CID — never from the CRDT doc.
 
@@ -44,7 +44,7 @@ The genesis is **not** an Automerge binary carrying bytes. It is a **thin `@orac
 
 <<~ ahu #the-oracle-pointer >>
 
-## The `@oracle` ~ the public crossroads bulletin board
+!! The `@oracle` ~ the public crossroads bulletin board
 
 The `@oracle` is a **served, signed POINTER doc** — the public crossroads where a vessel announces, and discovers, other public CRDT docs/bags. Base-floor of the epoch layer, **soft-coupled** to the CID plane: it *names* CIDs, it does not *carry* bytes. (Proven on the DreamNet mesh: containers found their own in-vessel identity and serve `@oracle` — `curl` returns its signed pointer — across the Hermai relay.)
 
@@ -58,15 +58,15 @@ The `@oracle` is a **served, signed POINTER doc** — the public crossroads wher
 
 <<~ ahu #seed-without-ruling >>
 
-## Seed without ruling ~ the home node names, never governs
+!! Seed without ruling ~ the home node names, never governs
 
 The `@oracle` docId derives from the FOUNDING vessel's `@daemon` identity-root (the home node) — safe **genesis**, not authority, PROVIDED three couplings stay apart (seed-authority research, 2026-06-28):
 
 <<~ranks coupling origin@keep -> governance@disperse -> liveness@pluralize >>
 
-- **Origin (docId derivation) — KEEP.** Born from the home `@daemon` identity yet names no host; once minted it outlives the home node (a DID, not an ActivityPub URL). Record the derivation publicly so anyone re-verifies genesis without the founder.
-- **Governance (write authority) — DISPERSE.** A sole home-root retains the UCAN reach-back revocation veto — *that* is the central authority. Keeper-phase ladder: founder (n=1, genesis) -> founder-multisig (a 2nd keeper contracts in → write delegates to a GROUP; the group, not the original key, becomes root) -> k-of-n quorum (admission/eviction by quorum). After phase 2 the home key can vanish and keepers still govern — no reach-back, no single revoker. A DECLARED sunset, not implicit trust.
-- **Liveness (discovery) — PLURALIZE.** "Learn the board from the home node" is the libp2p-hardcoded-bootstrap / ActivityPub-source-must-be-online trap. The content-addressed docId means ANY peer syncing the board can serve it; newcomers learn by petname/TOFU introduction along the trust edge; a plural swappable bootstrap set (home listed, never required).
+* **Origin (docId derivation) — KEEP.** Born from the home `@daemon` identity yet names no host; once minted it outlives the home node (a DID, not an ActivityPub URL). Record the derivation publicly so anyone re-verifies genesis without the founder.
+* **Governance (write authority) — DISPERSE.** A sole home-root retains the UCAN reach-back revocation veto — *that* is the central authority. Keeper-phase ladder: founder (n=1, genesis) -> founder-multisig (a 2nd keeper contracts in → write delegates to a GROUP; the group, not the original key, becomes root) -> k-of-n quorum (admission/eviction by quorum). After phase 2 the home key can vanish and keepers still govern — no reach-back, no single revoker. A DECLARED sunset, not implicit trust.
+* **Liveness (discovery) — PLURALIZE.** "Learn the board from the home node" is the libp2p-hardcoded-bootstrap / ActivityPub-source-must-be-online trap. The content-addressed docId means ANY peer syncing the board can serve it; newcomers learn by petname/TOFU introduction along the trust edge; a plural swappable bootstrap set (home listed, never required).
 
 **Backstop — exit/fork.** `@oracle` is a synced CRDT with a host-independent docId → the net can fork it and continue at zero loss. A founder who CAN be forked cannot rule — a property, not a promise. The rhizome forbids a *filiation*, not a *seed*; a seed that becomes one alliance-point among many is fully rhizomatic.
 
@@ -78,7 +78,7 @@ The `@oracle` docId derives from the FOUNDING vessel's `@daemon` identity-root (
 
 <<~ ahu #what-genesis-seeds >>
 
-## What genesis seeds (the `@oracle` system plane)
+!! What genesis seeds (the `@oracle` system plane)
 
 The genesis doc seeds the **`@oracle` runtime system island** — the protocol substrate, never user composition:
 
@@ -95,7 +95,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 <<~ ahu #types >>
 
-## Types
+!! Types
 
 | Type | Role |
 |---|---|
@@ -108,7 +108,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 <<~ ahu #invariants >>
 
-## Invariants
+!! Invariants
 
 **GD-1 — No platform dependencies.** `buildGenesisDoc()` imports only `@automerge/automerge` + mesh-internal. Zero `fs`/`path`/`worker_threads`/DOM/`@lararium/tw5`.
 
@@ -130,7 +130,7 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 <<~ ahu #layer-split >>
 
-## Layer Split (where genesis code lives)
+!! Layer Split (where genesis code lives)
 
 | Layer | Concern | Lives in |
 |---|---|---|
@@ -142,14 +142,14 @@ The genesis doc seeds the **`@oracle` runtime system island** — the protocol s
 
 <<~ ahu #grounds >>
 
-## Grounds (the realized flow)
+!! Grounds (the realized flow)
 
 <<~ranks commit cid-plane@9c90b390 -> slice-1-blob-strip@940a023e -> structurepalace-instance@991bfbe7 -> daemon-lifecycle@7fb1c3bb >>
 
-- **9c90b390 — CID plane:** kernel resolves engine/plugins CAS-only by CID; the byte-blob left the `@oracle` CRDT (where the merge-into-stale had made it an unresolved actor conflict — the boot-skew root).
-- **940a023e — slice 1:** blob bytes leave the genesis doc entirely → `genesis/cas/` + `island.manifest.json`; `island.bin` 547 KB → 4 KB. Merge-conflict-on-bytes class gone structurally. Isomorphic (node fs · browser OPFS).
-- **Proven on the mesh** (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, **serve `@oracle` — `curl` returns the signed pointer** — across a 3-hop Hermai relay (INFRA × WHO). *(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)*
-- **Open (slice 2, far-future):** retire the genesis-merge entirely — materialize the `@oracle` fresh from the manifest at init, ratchet by peer-sync. Gated on a **deterministic shared docId** (so the public board stays one board, not per-node forks). Fires only at the epoch boundary, not for churn.
+* **9c90b390 — CID plane:** kernel resolves engine/plugins CAS-only by CID; the byte-blob left the `@oracle` CRDT (where the merge-into-stale had made it an unresolved actor conflict — the boot-skew root).
+* **940a023e — slice 1:** blob bytes leave the genesis doc entirely → `genesis/cas/` + `island.manifest.json`; `island.bin` 547 KB → 4 KB. Merge-conflict-on-bytes class gone structurally. Isomorphic (node fs · browser OPFS).
+* **Proven on the mesh** (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, **serve `@oracle` — `curl` returns the signed pointer** — across a 3-hop Hermai relay (INFRA × WHO). *(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)*
+* **Open (slice 2, far-future):** retire the genesis-merge entirely — materialize the `@oracle` fresh from the manifest at init, ratchet by peer-sync. Gated on a **deterministic shared docId** (so the public board stays one board, not per-node forks). Fires only at the epoch boundary, not for churn.
 
 <<~/ahu >>
 

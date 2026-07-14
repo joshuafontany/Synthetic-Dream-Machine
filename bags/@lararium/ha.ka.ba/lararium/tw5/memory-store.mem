@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/memory-store"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `MemoryTiddlerStore` implements `LarTiddlerStore` with in-memory state and no I/O.
 The class itself is unaware of bag identity; it accepts an optional `bagId` only
@@ -40,7 +40,7 @@ Two callers exist:
 
 <<~ ahu #temp-scope >>
 
-## What belongs in @temp
+!! What belongs in @temp
 
 The @temp slot holds **device-vessel-local state that never leaves the island**.
 The in-wiki bag-paths cascade (`lar:///ha.ka.ba/lararium/config/bag-paths`)
@@ -67,7 +67,7 @@ for ceremony-level routing (drag-and-drop plugin install passes an explicit
 
 <<~ ahu #not-temp >>
 
-## What does NOT belong in @temp (the tension)
+!! What does NOT belong in @temp (the tension)
 
 TW5's default `$:/config/SyncFilter` (`core/wiki/config/SyncFilter.tid`) treats
 some `$:/*` patterns as **operator intent worth carrying across devices** —
@@ -106,7 +106,7 @@ cabal per `(PersonaGroup × recipe-fingerprint)`.
 
 <<~ ahu #invariants >>
 
-## Invariants
+!! Invariants
 
 **M-1 — No I/O.** No disk writes, no network calls, no IndexedDB. The store
 exists entirely within the worker's heap.
@@ -130,7 +130,7 @@ same change record any AutomergeDocStore would emit.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe >>
 <<~ loulou lar:///ha.ka.ba/lararium/config/bag-paths >>

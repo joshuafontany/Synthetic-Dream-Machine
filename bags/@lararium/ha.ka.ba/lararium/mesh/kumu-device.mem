@@ -23,7 +23,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/kumu-device"
 
 <<~ ahu #head >>
 
-# Kumu Device Spec
+! Kumu Device Spec
 
 Type-level device contract for kumu devices. Derives from pranala edges.
 **Spec layer only — no runtime dispatch overhead.** Runtime derives bindings from the same
@@ -39,7 +39,7 @@ pranala tiddler edges via `extractReactionBindings`.
 
 <<~ ahu #verse-model >>
 
-## Verse 5.6+ Device Model
+!! Verse 5.6+ Device Model
 
 UEFN Verse 5.6+ uses single-inheritance class composition:
 
@@ -72,9 +72,9 @@ Lararium maps this directly:
 
 <<~ ahu #exports >>
 
-## Exports
+!! Exports
 
-### `KumuListenable` — OUTPUT event pin
+!!! `KumuListenable` — OUTPUT event pin
 
 ```
 name         — event name (e.g. "OnActivated", "OnDamaged", "OnReset")
@@ -84,8 +84,8 @@ payloadType? — Verse type string (e.g. "agent", "int"); absent = void
 ```
 
 `verseKind` distinguishes:
-- **`listenable`** — engine-vended; supports `Subscribe()` (persistent multi-consumer). The common case for built-in UEFN device events.
-- **`event`** — user-instantiated (`event(T){}`); supports `Await()` + `Signal()` only. No `Subscribe()`. Fire-once semantics.
+* **`listenable`** — engine-vended; supports `Subscribe()` (persistent multi-consumer). The common case for built-in UEFN device events.
+* **`event`** — user-instantiated (`event(T){}`); supports `Await()` + `Signal()` only. No `Subscribe()`. Fire-once semantics.
 
 When absent: treat as `"listenable"`.
 
@@ -93,7 +93,7 @@ Declared via `reaction:listenable` pranala edges on the kumu type meme.
 
 ---
 
-### `KumuSubscribable` — INPUT function pin
+!!! `KumuSubscribable` — INPUT function pin
 
 ```
 name         — handler name (e.g. "Enable", "Disable", "SetDamage")
@@ -103,15 +103,15 @@ effects?     — Verse effect specifiers as string array (e.g. ["suspends"], ["d
 ```
 
 **`effects` field:** Space-separated Verse specifiers stored as metadata. Not interpreted in TS — available for canvas authoring tools and code generation. Verse semantics:
-- `suspends` — function may yield the calling fiber; analogous to TypeScript `async`
-- `decides` — function participates in branch/race/rush resolution
-- `transacts` — function participates in atomic transaction grouping
+* `suspends` — function may yield the calling fiber; analogous to TypeScript `async`
+* `decides` — function participates in branch/race/rush resolution
+* `transacts` — function participates in atomic transaction grouping
 
 Declared via `reaction:subscribable` pranala edges on the kumu type meme.
 
 ---
 
-### `KumuDeviceSpec` — type-level device description
+!!! `KumuDeviceSpec` — type-level device description
 
 Derives from the type meme's pranala edge list, not from a TS class hierarchy.
 
@@ -134,7 +134,7 @@ componentTypes   — worn component URIs (control:has edges; Verse class(...) co
 
 ---
 
-### `KumuInstanceRef` — runtime instance address
+!!! `KumuInstanceRef` — runtime instance address
 
 ```
 typeUri       — type meme URI
@@ -148,34 +148,34 @@ lar:///type-path#nameFragment   — human-readable wiki-local label
 lar:///type-path#uuidFragment   — stable UUID address for papalohe wiring
 ```
 
-### `kumuInstanceUris(ref) → { named, uuid }`
+!!! `kumuInstanceUris(ref) → { named, uuid }`
 
 Derives both tiddler URIs from a `KumuInstanceRef`.
 
 ---
 
-### `kumuDeviceSpecFromEdges(typeUri, edges, slots?) → KumuDeviceSpec`
+!!! `kumuDeviceSpecFromEdges(typeUri, edges, slots?) → KumuDeviceSpec`
 
 Derives a `KumuDeviceSpec` from a flat edge list (pass `parseMemeEdges(typeUri, text)` directly).
 
 Selection rules:
-- `reaction:listenable` edges with `fromUri === typeUri` → `listenables`
-- `reaction:subscribable` edges with `fromUri === typeUri` → `subscribables`
-- `control:extends` edge → `extendsType`
-- `control:implements` edges → `implementsTypes`
-- Roles `observes`, `throttles`, `debounces` — not reflected in spec (future: modifier semantics)
+* `reaction:listenable` edges with `fromUri === typeUri` → `listenables`
+* `reaction:subscribable` edges with `fromUri === typeUri` → `subscribables`
+* `control:extends` edge → `extendsType`
+* `control:implements` edges → `implementsTypes`
+* Roles `observes`, `throttles`, `debounces` — not reflected in spec (future: modifier semantics)
 
 <<!/ahu >>
 
 <<~ ahu #reaction-engine-removal >>
 
-## ReactionEngine Removal
+!! ReactionEngine Removal
 
 `ReactionEngine` (TS class, inline dispatch) was removed in the yin-collapse sprint (2026-05-15).
 
 The dispatch surface it owned collapsed into:
-- `reaction-router.ts` TW5 startup module — nalu-driven dispatch (production path)
-- `ReactionGraph` in `reaction-graph.ts` — routing table and test dispatch surface
+* `reaction-router.ts` TW5 startup module — nalu-driven dispatch (production path)
+* `ReactionGraph` in `reaction-graph.ts` — routing table and test dispatch surface
 
 No TS overlay engine runs beside TW5. The wiki IS the engine. The nalu IS the tick.
 See: `lar:///ha.ka.ba/lares/api/pono/nalu#yin-collapse-law`
@@ -184,7 +184,7 @@ See: `lar:///ha.ka.ba/lares/api/pono/nalu#yin-collapse-law`
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-graph >>

@@ -19,37 +19,37 @@ uri-path    = "ha.ka.ba/lararium/mesh/recipe"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `recipe.ts` owns the **stored** shape of composition — the tiddler records
 that describe a wiki as an ordered bag stack — distinct from `wiki-recipe.ts`,
 which owns the **runtime** slot model (`WikiRecipe` / `expandRecipe`) an
 island mounts from.
 
-- `RecipeTiddler` — `{ title, label, bagStack, writableBag?, plugins?,
+* `RecipeTiddler` — `{ title, label, bagStack, writableBag?, plugins?,
   updatedAt, authority, bag }`. `bagStack` orders lowest priority →
   highest (TW5 convention). `plugins` opt vendored TW5 plugin blobs into
   this recipe's VM — never forced into all VMs.
-- `BagTiddler` — the per-bag descriptor (label, read/write policy,
+* `BagTiddler` — the per-bag descriptor (label, read/write policy,
   authority, owning bag).
-- `recipeUri(bag, name)` / `bagDescriptorUri(bagId)` — stable addresses
+* `recipeUri(bag, name)` / `bagDescriptorUri(bagId)` — stable addresses
   (re-exported from `lar-uris`).
-- `parseBagStack(raw)` / `parsePlugins(raw)` — isomorphic field parsing:
+* `parseBagStack(raw)` / `parsePlugins(raw)` — isomorphic field parsing:
   TW5 space-separated list string or JS/JSON array; `[]` for anything else.
 
 <<~/ahu >>
 
 <<~ ahu #where-recipes-live >>
 
-## Where recipes live — two planes (operator ruling, 2026-06-16)
+!! Where recipes live — two planes (operator ruling, 2026-06-16)
 
 Recipes split by bag tier, each plane its own home:
 
-- **System wiki-recipes** (`@lares` wiki, `@lararium` wiki) live in the
+* **System wiki-recipes** (`@lares` wiki, `@lararium` wiki) live in the
   **`@oracle`** runtime-system-island plane — protocol substrate, seeded at
   genesis beside the system bag→doc oracle. `@lares`/`@lararium` are DreamNet
   **system bags**; their recipes are substrate, not user composition.
-- **User wiki-recipes** live in the user's **`@catalog`** (registry), minted
+* **User wiki-recipes** live in the user's **`@catalog`** (registry), minted
   per-wiki by init-wiki and read+written via the catalog accessor (access≠load).
 
 The bag-oracle reach runs **two-source**: system bags resolve from the
@@ -71,7 +71,7 @@ the plane routing lands in `genesis-doc` / `base-doc` / `catalog-accessor`.)*
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >>

@@ -28,9 +28,9 @@ uri-shape   = "lar:///ha.ka.ba/wikis/@{slug}/personal"
 
 <<~ ahu #problem >>
 
-# The @personal slot — slot grammar + binding storage (approved canon)
+! The @personal slot — slot grammar + binding storage (approved canon)
 
-## The tension that asked for the slot
+!! The tension that asked for the slot
 
 The WikiRecipe holds a per-wiki live stack over a shared canon floor:
 
@@ -60,7 +60,7 @@ Keyhive already names a `PersonaGroup`.
 
 <<~ ahu #slot >>
 
-## The slot
+!! The slot
 
 `personal` is a fixed per-wiki live slot, sitting between `draft` and `working`:
 
@@ -83,7 +83,7 @@ DOC per `(PersonaGroup × recipe-fingerprint)`; the URI carries the address.
 
 <<~ ahu #yang-yin-chao >>
 
-## Yang / Yin / Chao — the design symmetry
+!! Yang / Yin / Chao — the design symmetry
 
 The recipe carries a Tai Chi symmetry around the wiki's canon (`bags/@{slug}`):
 
@@ -111,7 +111,7 @@ recipe-fingerprints match.
 
 <<~ ahu #scoping-mechanism >>
 
-## Scoping mechanism — the resolver binds, the URI doesn't
+!! Scoping mechanism — the resolver binds, the URI doesn't
 
 The slot URI is per-wiki and fixed for a wiki: `lar:///ha.ka.ba/wikis/@{slug}/personal`.
 The recipe-fingerprint binding lives in the **`BagResolver` map** carried in the island
@@ -149,7 +149,7 @@ resolves to a fresh MemoryTiddlerStore at boot).
 
 <<~ ahu #cascade-rules >>
 
-## Cascade rules that route to the personal layer
+!! Cascade rules that route to the personal layer
 
 The default `lar:///ha.ka.ba/lararium/config/bag-paths` cascade routes by prefix to
 per-wiki config values (`current-wiki-*`), which the island seeds to the mounted wiki's
@@ -179,7 +179,7 @@ model these entries hold as **first-write defaults**, not authoritative routing 
 
 <<~ ahu #core-claim >>
 
-## Binding storage — admin-doc-stored
+!! Binding storage — admin-doc-stored
 
 The `(personGroupHex × recipe-fingerprint) → @personal-docUrl` mapping (and the parallel mapping for `@draft`) MUST live as tiddlers inside the operator's **admin doc** (`lar:///ha.ka.ba/bags/@daemon`), under a deterministic prefix. The admin doc already carries Keyhive PersonaGroup membership gating and already replicates across the operator's own devices through the founding/admit ceremonies. Storing the bindings there gives cross-device convergence for free and avoids inventing a parallel storage layer.
 
@@ -199,7 +199,7 @@ lar:///ha.ka.ba/bags/@daemon/draft-bindings/${fingerprintHex}
 
 <<~ ahu #why-admin-doc >>
 
-## Why admin-doc-as-storage
+!! Why admin-doc-as-storage
 
 Five forces converge here. Each one rules out a parallel storage option.
 
@@ -217,9 +217,9 @@ Five forces converge here. Each one rules out a parallel storage option.
 
 <<~ ahu #data-model >>
 
-## Data model
+!! Data model
 
-### Binding tiddler shape
+!!! Binding tiddler shape
 
 ```toml
 title:        lar:///ha.ka.ba/bags/@daemon/personal-bindings/${fingerprintHex}
@@ -233,11 +233,11 @@ minted-by:    "<vesselIndividualHex>"
 
 The text field carries the authoritative docUrl. The `kind` field tags the tiddler for filter queries (`[kind[personal-binding]]` returns all). The `fingerprint` field duplicates the title suffix for filter convenience. The `recipe-trace` field stores the inputs that produced the fingerprint — operator-facing diagnostic when a binding's recipe context needs inspection. The `minted-on` + `minted-by` fields support audit of which device first instantiated the binding.
 
-### Per-fingerprint pair, not per-bag
+!!! Per-fingerprint pair, not per-bag
 
 One fingerprint produces TWO bindings (one for `@personal`, one for `@draft`) under parallel prefixes. They share lifecycle: mint together, delegate together, never independently retire.
 
-### Tiddler vs Automerge document
+!!! Tiddler vs Automerge document
 
 The bindings TIDDLERS live inside the admin doc. The `@personal` and `@draft` AUTOMERGE DOCUMENTS the bindings point to live as separate Automerge docs in the same Repo. The admin doc carries names; the named docs carry the actual operator view state.
 
@@ -245,19 +245,19 @@ The bindings TIDDLERS live inside the admin doc. The `@personal` and `@draft` AU
 
 <<~ ahu #vessel-boot-flow >>
 
-## Vessel boot flow
+!! Vessel boot flow
 
 **Layering law (corrected 2026-06-01 after three research spirits converged on (A)).** Binding-resolution — compute fingerprint → look up → mint-on-absent → Keyhive-delegate → write binding tiddler — MUST run at the **host / composition layer** (`open-node-vessel.ts`), NOT inside `VesselIslandPool`. The pool stays envelope-only per its design law (vessel-island-pool.ts header); it holds no `repo`/`composite`/`keyhive`/admin-doc references and MUST NOT gain them. The host resolves the `@personal`/`@draft` doc URLs and passes them **through** `WikiBootContext` into the pool, which merely adds them to the manifest `resolver` map.
 
 Three convergent justifications:
 
-- **Composition Root** (Seemann) — side-effectful object-graph wiring belongs at the entry point that already holds the deps; pushing it into a leaf inverts the pattern.
-- **Service-Locator anti-pattern** — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
-- **Object-capability "only a holder may delegate"** (Miller, *Capability Myths Demolished*) + **POLA** + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonaGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
+* **Composition Root** (Seemann) — side-effectful object-graph wiring belongs at the entry point that already holds the deps; pushing it into a leaf inverts the pattern.
+* **Service-Locator anti-pattern** — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
+* **Object-capability "only a holder may delegate"** (Miller, *Capability Myths Demolished*) + **POLA** + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonaGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
 
 **Established repo grain (codebase spirit):** draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:696`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`); the boot's own `registerBag` sweep (`:586-594`) is the precedent for minting a Keyhive Document before delegating. The new helper follows that grain exactly.
 
-### Primary-wiki path (the only live path today)
+!!! Primary-wiki path (the only live path today)
 
 **Post-S11.5 the primary wiki mounts via the unified `vmManager.mountWiki(activeWikiId, ctx, { pinned: true })` call (`open-node-vessel.ts:782`)** — `mountPrimaryWorker` aliases through it (`vessel-island-pool.ts:208`). The same boot reorder moved `await adminVm.workerEa` (`open-node-vessel.ts:770`) to run **before** that mount, so the admin VM is already live when bindings resolve. Sprint 7 wires binding-resolution for the **primary wiki only**, host-inline, **between `:770` and `:782`**, mirroring the existing draft-mint site (`:696`):
 
@@ -339,16 +339,16 @@ const resolver: Record<string, string | null> = {
 
 `expandRecipe` lays the per-wiki live slots (`wikis/@{slug}/{temp,draft,personal,working}`) above the wiki's `bags/@{slug}` canon, so the personal slot walks at the right priority the moment the resolver carries its URL; absent the URL it resolves to nothing and the recipe skips it cleanly.
 
-### Audience and grain — golden principles (research-verified 2026-06-03)
+!!! Audience and grain — golden principles (research-verified 2026-06-03)
 
 Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKEM lineage) converged on the delegation shape:
 
-- **Document-as-group is the *intended* Keyhive shape, not a workaround smell.** A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph **orthogonal to BeeKEM key rotation**. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: **bind to the stable agent-id** (never rotating key material), and **keep that id stable for the group's whole lifetime** (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
-- **Group-as-audience is object-capability-idiomatic.** Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
-- **Access cascades transitively and retroactively** through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
-- **Grain debt (POLA).** `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds **up** to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [causal-islands](../pono/causal-islands.md).
+* **Document-as-group is the *intended* Keyhive shape, not a workaround smell.** A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph **orthogonal to BeeKEM key rotation**. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: **bind to the stable agent-id** (never rotating key material), and **keep that id stable for the group's whole lifetime** (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
+* **Group-as-audience is object-capability-idiomatic.** Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
+* **Access cascades transitively and retroactively** through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
+* **Grain debt (POLA).** `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds **up** to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [causal-islands](../pono/causal-islands.md).
 
-### Session-wiki path (deferred — additional hot-tier mounts)
+!!! Session-wiki path (deferred — additional hot-tier mounts)
 
 `mountWiki` is now the **one** mount path: the primary rides it pinned (`{ pinned: true }`), future session wikis ride it unpinned. An earlier draft claimed the primary path *could not* use the admin-VM delegate-verb seam because the mount ran before `workerEa` — **S11.5 reversed that.** `await adminVm.workerEa` (`:770`) now precedes the mount (`:782`), so the admin VM is live for every mount. The primary path therefore resolves **host-inline** (composition-root, per the ocap ruling above). A future multiplexed session-mount path MAY instead route resolution through the **admin-VM delegate-verb** seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`) if it needs to resolve off the host thread. `resolveOrMintBinding` stays callable from both.
 
@@ -358,7 +358,7 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 <<~ ahu #lifecycle >>
 
-## Lifecycle
+!! Lifecycle
 
 **Mint-on-absent.** First device to boot a vessel into a recipe-fingerprint mints fresh `@personal` and `@draft` Automerge docs, delegates each to the operator's PersonaGroup, writes the bindings.
 
@@ -378,7 +378,7 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 <<~ ahu #persongroup-liveness >>
 
-## PersonaGroup liveness — pre-delegate to an always-on device (design space)
+!! PersonaGroup liveness — pre-delegate to an always-on device (design space)
 
 > Status: DESIGN SPACE — not yet built. Depends on @personal cross-device (S7.7)
 > + multi-device keyhive delegation. Grounded in web research (memory
@@ -411,7 +411,7 @@ authority graph from *viewing state* to *task-execution authority*.
 
 <<~ ahu #browser-deferral >>
 
-## Browser-side deferral
+!! Browser-side deferral
 
 The handoff names "S9 / lararium-browser S4 real boot" as still in flight (IndexedDB + WebCrypto + Keyhive founding ceremony in the browser vessel). The node-side enactment lands cleanly today; the browser-side mirror waits until S9-S4 settles so the wire-in builds on a settled foundation rather than shifting ground. The data model and lifecycle stay platform-agnostic — when the browser vessel reaches real-boot, the same host-layer `resolveOrMintBinding` + `WikiBootContext` pass-through applies via the equivalent composition path in `browser-sovereign-island-model.ts`. The browser pool stays envelope-only too.
 
@@ -419,13 +419,13 @@ The handoff names "S9 / lararium-browser S4 real boot" as still in flight (Index
 
 <<~ ahu #residency-reconciliation >>
 
-## Reconciliation with the Residency Model
+!! Reconciliation with the Residency Model
 
 The approved [residency-model](residency-model.md) coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above the `bags/@{slug}` canon all survive the residency model intact. Three layers compose, one operator gesture:
 
-- The cascade tiddler (`lar:///ha.ka.ba/lararium/config/bag-paths`) routes `$:/StoryList` writes to the personal layer (via `current-wiki-personal`) as a **first-write default**, not authoritative routing. Under the residency model a title MAY have residency in `wikis/@{slug}/personal` AND `bags/@{slug}` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
-- The binding tiddler in the admin doc names which Automerge document THIS device, in THIS recipe, mounts at the `wikis/@{slug}/personal` URI.
-- The residency model surfaces `$:/StoryList` as the topmost manifestation in the resolver-defined priority order.
+* The cascade tiddler (`lar:///ha.ka.ba/lararium/config/bag-paths`) routes `$:/StoryList` writes to the personal layer (via `current-wiki-personal`) as a **first-write default**, not authoritative routing. Under the residency model a title MAY have residency in `wikis/@{slug}/personal` AND `bags/@{slug}` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
+* The binding tiddler in the admin doc names which Automerge document THIS device, in THIS recipe, mounts at the `wikis/@{slug}/personal` URI.
+* The residency model surfaces `$:/StoryList` as the topmost manifestation in the resolver-defined priority order.
 
 Open the wiki; the StoryList syncs to your other devices because each layer holds its piece. Implementation coordinates with Sprint 7 of `packages/EPIC-RESIDENCY-MODEL.md` rather than landing as an independent migration.
 
@@ -433,7 +433,7 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 <<~ ahu #migration >>
 
-## Migration sketch
+!! Migration sketch
 
 1. `wiki-recipe.ts` mints the per-wiki personal slot via `wikiSlotUri(slug, "personal")` (`lar:///ha.ka.ba/wikis/@{slug}/personal`).
 2. `expandRecipe()` lays `personal` among the per-wiki live slots above the wiki's `bags/@{slug}` canon.
@@ -456,7 +456,7 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 <<~ ahu #questions >>
 
-## Questions — one ledger (collisions removed 2026-06-04)
+!! Questions — one ledger (collisions removed 2026-06-04)
 
 This unified ledger renumbers once; every in-body cross-reference resolves here.
 
@@ -489,7 +489,7 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
 <<~ loulou lar:///ha.ka.ba/lares/api/keyhive/persona-group >>

@@ -40,7 +40,7 @@ source-text NEVER changes · anything hand-review-shaped defers.
 | bags/@elyncia | 2 | ~51 lines | none (gate covers @lares only) | ✅ 2026-07-14 (51 headings · 95 lists) |
 | bags/@sdm | 42 | ~295 files·lines | none | ✅ 2026-07-14 (294 headings · 188 lists) |
 | bags/@lares-history | 20 | ~656 lines | none | ✅ 2026-07-14 (656 headings · 1,527 lists · 134 indented-ul deferred) |
-| bags/@lararium | 210 | ~1,022 | none | |
+| bags/@lararium | 210 | ~1,022 | none | ✅ 2026-07-14 (968 headings · 938 lists · 65 indented-ul deferred) |
 | bags/@lares (api/, docs/, cli/) | ~249 | ~2,597 | RE-BAKE golden-corpus.json same commit | |
 | bags/@lares library/ + source-text | — | — | re-bake + sectioner lockstep (`kumulipo_sections.py` keys `^##`) | DEFERRED |
 | the boot seed (`noosphere-boot.mem` + repo `noosphere-boot.md` + `~/.claude` copy) | 1×3 | ~40 | cache-stable attractor — operator co-edits | DEFERRED @operator |
@@ -71,3 +71,6 @@ corpus-scoped against the vendored TiddlyWiki5 core tiddlers.
   fold witness 44/44 ERROR-free; 801 fence lines + 0 source-text lines held).
 - 2026-07-14 — @lares-history crosses (20 memes, 656 headings, 1,527 lists;
   fold 20/20 ERROR-free; 1,255 fence lines held; 134 indented-ul deferred).
+- 2026-07-14 — @lararium crosses (152 of 210 memes change, 968 headings,
+  938 lists; fold 210/210 ERROR-free; 4,497 fence lines held; 65 indented-ul
+  deferred; zero dirty files — the parallel session held nothing here).

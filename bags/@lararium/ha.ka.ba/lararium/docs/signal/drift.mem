@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/drift"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal — Drift
+! Lararium Signal — Drift
 
 Not invariant law.
 This room holds mismatch-recovery pressure where declared signal diverges from actual output.
@@ -29,7 +29,7 @@ This room holds mismatch-recovery pressure where declared signal diverges from a
 
 <<~ ahu #room-charter >>
 
-## Room Charter
+!! Room Charter
 
 This room keeps the recovery-pressure shelf for governing-field drift.
 
@@ -40,7 +40,7 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 <<~ ahu #drift-correction-pressure >>
 
-## Drift Correction Pressure
+!! Drift Correction Pressure
 
 **Prospective commitment / automation surprise**: The intent header is declared *before* generation begins, creating a forward-commitment contract. When the declared header diverges from the actual output (register, stance, or scope mismatch), this constitutes automation surprise — the CRM/aviation failure mode where the copilot's declared intent diverges from actual behavior. The current non-drift rule detects mismatch but defines no recovery protocol. **CRY-07 must specify a mismatch recovery protocol, not just a mismatch detection assertion.** Minimum viable contract: on mismatch, the node flags the delta inline, emits a corrected end-of-span tag, and STATE.jsonl records the correction as the authoritative result (actual output overrides declared plan).
 
@@ -52,7 +52,7 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>

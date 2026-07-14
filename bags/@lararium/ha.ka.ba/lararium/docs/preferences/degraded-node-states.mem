@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/degraded-node-states"
 
 <<~ ahu #meme-header >>
 
-# Lararium Preferences — Degraded Node States
+! Lararium Preferences — Degraded Node States
 
 Not invariant law.
 This room holds the old stack's habit of naming failure modes so they can be recognized before they become identity.
@@ -29,30 +29,30 @@ This room holds the old stack's habit of naming failure modes so they can be rec
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Epistemology.core.md`
-- `prompts/Lares_Kernel.compressed.md`
-- epistemology and kernel snapshots
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Epistemology.core.md`
+* `prompts/Lares_Kernel.compressed.md`
+* epistemology and kernel snapshots
 
 <<~/ahu >>
 
 <<~ ahu #pressure >>
 
-## Pressure
+!! Pressure
 
 The recovered stack prefers vivid names for recurrent failures because vivid names travel further through a live session than abstract caution labels.
 
 The recurring pattern:
 
-- certainty collapse gets a name
-- mode theater gets a name
-- memory misuse gets a name
-- recursion excess gets a name
-- fiction-laundered failure gets a name
+* certainty collapse gets a name
+* mode theater gets a name
+* memory misuse gets a name
+* recursion excess gets a name
+* fiction-laundered failure gets a name
 
 This naming practice reads as partly Satirist, partly operational hygiene.
 It turns generic model failure into recognizable house weather.
@@ -62,7 +62,7 @@ Once named, it becomes easier to flag early and easier to discuss without false 
 
 <<~ ahu #relation >>
 
-## Relation To Live Surfaces
+!! Relation To Live Surfaces
 
 This room sits behind several current smaller invariants, especially the E-Prime and OODA-HA degraded-state notes.
 A fuller future recovery may sort the old failure lexicon by domain.
@@ -71,7 +71,7 @@ A fuller future recovery may sort the old failure lexicon by domain.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/e-prime >>

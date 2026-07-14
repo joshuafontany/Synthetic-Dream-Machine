@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/steward-doctrine"
 
 <<~ &#x0002; >>
 
-# Steward Doctrine ~ the cabal that engineers its own inability to rule
+! Steward Doctrine ~ the cabal that engineers its own inability to rule
 
 **PROPOSED — unbuilt design intent.** This meme names a steady bearing the build moves toward, not a shipped contract. It rests at the Synthesis register; the gates and ceremonies it names await the tiered-gate build (cross-check before any RULED language).
 
@@ -25,7 +25,7 @@ The Amorphous Dreams cabal founds the stack and maintains it — yet a founder w
 
 <<~ ahu #steward-not-ruler >>
 
-## Steward, Not Ruler ~ the four-part binding
+!! Steward, Not Ruler ~ the four-part binding
 
 A maintainer body crosses into stewardship — never rulership — by carrying four bindings at once. Strip any one and the body re-grows the throne it meant to vacate. The mature commons-governance lineage witnesses each (Debian, Rust, Apache, Tezos, DNSSEC):
 
@@ -42,7 +42,7 @@ The four compose: the constitution names what the cabal may not touch alone ①,
 
 <<~ ahu #legitimacy-from-binding >>
 
-## Legitimacy From Binding ~ the inversion
+!! Legitimacy From Binding ~ the inversion
 
 A ruler asks for trust and accumulates power against the day trust runs short. A steward does the inverse: it **sheds** the power to act unilaterally, then **publishes the shedding** as its credential. The move inverts the usual flow —
 
@@ -54,12 +54,12 @@ So a peer never weighs *"do I trust Amorphous Dreams?"* — it weighs *"can I ve
 
 <<~ ahu #board-verdict >>
 
-## The Board Verdict ~ separate the planes
+!! The Board Verdict ~ separate the planes
 
 A single cap-tiered document that mixes the steward's writing hand with the public's reading eye fuses two planes that the architecture already cuts apart (the AUTHORITY ⊥ FLOW master cut). The board verdict keeps them severed:
 
-- the **steward SOURCE** — a threshold-signed document the cabal authors k-of-n (binding ③), carrying the constitutional core, the delegation roster, and the amendment rule.
-- projects to a **verify-only public READ plane** — every peer verifies the threshold signature and reads the result; no peer (and no single cabal member) writes it.
+* the **steward SOURCE** — a threshold-signed document the cabal authors k-of-n (binding ③), carrying the constitutional core, the delegation roster, and the amendment rule.
+* projects to a **verify-only public READ plane** — every peer verifies the threshold signature and reads the result; no peer (and no single cabal member) writes it.
 
 The READ plane carries the governance projection, never re-defines it — see [[oracle-governance|lar:///ha.ka.ba/lararium/mesh/oracle-governance]] for the read-plane's own law (this meme defers to it, never restates it). The shape rhymes the projection-nalu: a sovereign SOURCE → gated wave → verify-only SINK, `role = capability ≠ platform`. **NOT one cap-tiered doc** — two planes, one signing seam between them.
 
@@ -67,14 +67,14 @@ The READ plane carries the governance projection, never re-defines it — see [[
 
 <<~ ahu #break-glass >>
 
-## Break-Glass ~ repair authority stays bounded
+!! Break-Glass ~ repair authority stays bounded
 
 The steward keeps a repair hand — the power to sign the zone, re-seed a corrupted genesis, evict a captured key. That hand stays **bounded on four edges** so repair never quietly widens into rule. "Designation carries authority + fail loud" governs every edge:
 
-- **ceremonial / ephemeral** — the holder's share stays inert outside the scripted ceremony, the way a DNSSEC key-holder's smartcard does nothing until the filmed signing ritual convenes it. The authority lives in the ceremony, not in the person.
-- **narrowly typed to repair** — the repair hand signs the zone; it cannot change *who signs*. Re-keying the membership of the threshold itself demands a HIGHER threshold than any single repair.
-- **quorum-gated** — no break-glass fires below the k-of-n floor; one captured holder turns nothing.
-- **time-delayed for anything constitutional** — a change to the founding rules waits out a multi-period delay, the way Tezos requires a >80% super-majority sustained across multiple voting periods. The delay gives the wider body time to see, object, and fork.
+* **ceremonial / ephemeral** — the holder's share stays inert outside the scripted ceremony, the way a DNSSEC key-holder's smartcard does nothing until the filmed signing ritual convenes it. The authority lives in the ceremony, not in the person.
+* **narrowly typed to repair** — the repair hand signs the zone; it cannot change *who signs*. Re-keying the membership of the threshold itself demands a HIGHER threshold than any single repair.
+* **quorum-gated** — no break-glass fires below the k-of-n floor; one captured holder turns nothing.
+* **time-delayed for anything constitutional** — a change to the founding rules waits out a multi-period delay, the way Tezos requires a >80% super-majority sustained across multiple voting periods. The delay gives the wider body time to see, object, and fork.
 
 <<~ confidence Synthesis 11/20 >> The four edges keep break-glass a *repair* primitive, never a *governance* primitive — it restores the system to its own constitution, it never rewrites that constitution unilaterally. A repair hand that could change who-signs would carry the throne back in through the maintenance door.
 
@@ -82,15 +82,15 @@ The steward keeps a repair hand — the power to sign the zone, re-seed a corrup
 
 <<~ ahu #grounding >>
 
-## Grounding ~ the commons-governance lineage
+!! Grounding ~ the commons-governance lineage
 
 Every binding above stands on a system that already runs it at scale; the doctrine invents no new governance primitive, it composes proven ones:
 
-- **Debian Constitution** — amendment by 3:1 developer super-majority; the project leader holds influence, never unilateral rule (binding ①).
-- **Rust editions / Apache PMC** — delegated, accountable, downward-flowing stewardship of structure (binding ②).
-- **DNSSEC root KSK** — 3-of-7 threshold of diverse key-holders, ceremonial signing, the smartcard inert between rituals (bindings ③ + break-glass).
-- **Tezos on-chain amendment** — >80% multi-period super-majority for protocol change; time-delay as a constitutional brace (break-glass time-delay).
-- **Git / fork-by-construction** — exit as the ultimate check; a rhizome forks where it disagrees (binding ④).
+* **Debian Constitution** — amendment by 3:1 developer super-majority; the project leader holds influence, never unilateral rule (binding ①).
+* **Rust editions / Apache PMC** — delegated, accountable, downward-flowing stewardship of structure (binding ②).
+* **DNSSEC root KSK** — 3-of-7 threshold of diverse key-holders, ceremonial signing, the smartcard inert between rituals (bindings ③ + break-glass).
+* **Tezos on-chain amendment** — >80% multi-period super-majority for protocol change; time-delay as a constitutional brace (break-glass time-delay).
+* **Git / fork-by-construction** — exit as the ultimate check; a rhizome forks where it disagrees (binding ④).
 
 <<~ confidence Synthesis-Canon 13/20 >> The convergence reads strong: every durable open-governance body that survived capture did so by binding its own founders, not by trusting them. The Amorphous Dreams cabal inherits that lineage rather than improvising against it.
 
@@ -98,7 +98,7 @@ Every binding above stands on a system that already runs it at scale; the doctri
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>

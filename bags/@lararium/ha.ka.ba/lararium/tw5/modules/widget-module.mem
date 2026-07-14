@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widget-module"
 
 <<~ ahu #contract >>
 
-## Widget Module Protocol
+!! Widget Module Protocol
 
 TW5 discovers widget modules via tiddlers with `module-type = "widget"`. The widget prototype chain must be wired after `boot()` once the real `Widget` base class exists at `$:/core/modules/widgets/widget.js`.
 
@@ -39,7 +39,7 @@ TW5 discovers widget modules via tiddlers with `module-type = "widget"`. The wid
 
 <<~ ahu #stub >>
 
-## Stub Tiddler (preloaded)
+!! Stub Tiddler (preloaded)
 
 ```typescript
 export const LARARIUM_WIDGETS_TIDDLER = {
@@ -58,7 +58,7 @@ export const LARARIUM_WIDGETS_TIDDLER = {
 
 <<~ ahu #source >>
 
-## Source (TypeScript — compiled-in, `packages/lararium-tw5/src/tw5-widgets.ts`)
+!! Source (TypeScript — compiled-in, `packages/lararium-tw5/src/tw5-widgets.ts`)
 
 ```typescript
 export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
@@ -81,7 +81,7 @@ export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
 
 <<~ ahu #widget-registry >>
 
-## Widget Tag → Class Map
+!! Widget Tag → Class Map
 
 | TW5 tag | Widget class | Renders |
 |---|---|---|

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/proactive-surfacing"
 
 <<~ ahu #meme-header >>
 
-# Lararium Preferences — Proactive Surfacing
+! Lararium Preferences — Proactive Surfacing
 
 Not invariant law.
 This room holds the recovered principle that some warnings should arrive before the operator asks for them.
@@ -29,20 +29,20 @@ This room holds the recovered principle that some warnings should arrive before 
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Operations.core.md`
-- `prompts/Lares_VSCode_Operations.repo-ops.md`
-- kernel and operations snapshots
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Operations.core.md`
+* `prompts/Lares_VSCode_Operations.repo-ops.md`
+* kernel and operations snapshots
 
 <<~/ahu >>
 
 <<~ ahu #pressure >>
 
-## Pressure
+!! Pressure
 
 The recovered stack repeatedly asks the node to surface anomalies when the cost of warning stays low and the benefit of early notice stays high.
 This pressure does not authorize constant interruption.
@@ -50,10 +50,10 @@ It authorizes timing-sensitive, one-line course correction before drift compound
 
 The durable principle appears as:
 
-- anomaly sensing without paranoia theater
-- brevity rather than speeches
-- timing before disaster, not after it
-- cost calibration rather than blanket vigilance
+* anomaly sensing without paranoia theater
+* brevity rather than speeches
+* timing before disaster, not after it
+* cost calibration rather than blanket vigilance
 
 KAIROS reads less like a separate personality than like a timing reflex distributed through the house.
 
@@ -61,7 +61,7 @@ KAIROS reads less like a separate personality than like a timing reflex distribu
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/l-space"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal — l-space
+! Lararium Signal — l-space
 
 Not invariant law.
 This room holds definitional docs for `lar` URI l-space.
@@ -29,7 +29,7 @@ This room holds definitional docs for `lar` URI l-space.
 
 <<~ ahu #l-space-definition >>
 
-## l-space Definition
+!! l-space Definition
 
 **l-space** defines the abstract semantic positioning space used by `lar` URIs and signal render targets.
 
@@ -44,15 +44,15 @@ We use l-space the way colorspace defines color in image work: a structured abst
 
 Approved operator-facing terms:
 
-- `lar` URI
-- l-space Address
+* `lar` URI
+* l-space Address
 
 Working definition:
 
-- A l-space Address defines the three-part semantic suffix currently rendered as `lar://(host?)/domain.quality.dynamic(/path?)`
-- Its three slots map to HAKABA canonical order: **Ha (domain)** · **Ka (quality)** · **Ba (dynamic)**
-- A l-space Address positions a span or exchange in semantic space as NOUN · ADJECTIVE · VERB (/ PATH ?)
-- A l-space Address may describe topic territory, epistemic character, and motion without implying a physical or DreamNet location
+* A l-space Address defines the three-part semantic suffix currently rendered as `lar://(host?)/domain.quality.dynamic(/path?)`
+* Its three slots map to HAKABA canonical order: **Ha (domain)** · **Ka (quality)** · **Ba (dynamic)**
+* A l-space Address positions a span or exchange in semantic space as NOUN · ADJECTIVE · VERB (/ PATH ?)
+* A l-space Address may describe topic territory, epistemic character, and motion without implying a physical or DreamNet location
 
 | Slot | Label | HAKABA | SDM definition | Role in l-space Address |
 |---|---|---|---|---|
@@ -64,7 +64,7 @@ Working definition:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>

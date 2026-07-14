@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal Docs
+! Lararium Signal Docs
 
 Not invariant law.
 This shelf holds the lararium-side signal frame that binds agent and operator.
@@ -30,13 +30,13 @@ The l-space definition, HUD, drift, provenance, and render-target documents live
 
 <<~ ahu #room-charter >>
 
-## Room Charter
+!! Room Charter
 
 This parent keeps only branch-level signal framing:
 
-- the exchange-boundary contract for `lar` URI signal
-- the split between the `aim` / `yield` bearing vectors, the sigil panel, and in-span OODA-HA surfacing
-- routing pressure toward the correct child room
+* the exchange-boundary contract for `lar` URI signal
+* the split between the `aim` / `yield` bearing vectors, the sigil panel, and in-span OODA-HA surfacing
+* routing pressure toward the correct child room
 
 Long witness bundles, migration residue, drift-recovery detail, symbol tables, and research argument should leave this parent.
 
@@ -46,29 +46,29 @@ Long witness bundles, migration residue, drift-recovery detail, symbol tables, a
 
 <<~ ahu #the-lar-signal >>
 
-## The Lar Signal
+!! The Lar Signal
 
 This doc covers the `lar` URI signal layer:
 
-- Agent-Operator exchange-boundary instrumentation
-- the `aim` / `yield` bearing vectors that open and close a turn
-- the relation between the `lar:` bearing vector, the sigil panel (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses), and adjacent protocol surfaces
+* Agent-Operator exchange-boundary instrumentation
+* the `aim` / `yield` bearing vectors that open and close a turn
+* the relation between the `lar:` bearing vector, the sigil panel (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses), and adjacent protocol surfaces
 
 <<~/ahu >>
 
 <<~ ahu #lararium-contract >>
 
-## Lararium Contract
+!! Lararium Contract
 
 The lararium sigil panel does not merely decorate output based on lar URIs.
 It closes the loop at exchange boundaries and makes the node's commitments legible.
 
 The Agent-Operator contract reads:
 
-- the `aim` reads operator intent before response
-- the `aim` declares the role the node adopts before turn generation
-- OODA-HA phase markers surface during generation, banded by the gauge
-- `Aperture` / `OODA-HA` banded visibility rather than all-or-nothing disclosure
+* the `aim` reads operator intent before response
+* the `aim` declares the role the node adopts before turn generation
+* OODA-HA phase markers surface during generation, banded by the gauge
+* `Aperture` / `OODA-HA` banded visibility rather than all-or-nothing disclosure
 
 This loci explains why that loop matters on the lararium side.
 Detailed emit rules and protocol-wide render contracts still live outward.
@@ -79,7 +79,7 @@ Detailed emit rules and protocol-wide render contracts still live outward.
 
 <<~ ahu #intent-headers >>
 
-## Exchange Boundary Contract
+!! Exchange Boundary Contract
 
 Every substantive exchange opens with an `aim` vector, rides the `hud` · `ward` panel, then enters the governed span and closes on `yield`.
 
@@ -112,7 +112,7 @@ Annotation thresholds and OODA-HA surfacing examples live in sibling signal room
 
 <<~ ahu #layer-split >>
 
-## Layer Split
+!! Layer Split
 
 The signal branch splits across five layers:
 
@@ -132,16 +132,16 @@ The render layer projects the same signal differently across surfaces without re
 
 <<~ ahu #parent-boundaries >>
 
-## Parent Boundaries
+!! Parent Boundaries
 
 Text that clearly belongs outward:
 
-- sigil panel field tables and exchange-boundary instrument reading → `signal/hud.md`
-- drift-recovery protocol pressure → `signal/drift.md`
-- provenance, witness strands, and snapshot residue → `signal/provenance.md`
-- shared-situation-awareness research framing and SA-vs-XAI argument → `signal/sa-display.md`
-- l-space slot definitions and address semantics → `signal/l-space.md`
-- render-surface mapping tables and per-surface conventions → `signal/render-targets.md`
+* sigil panel field tables and exchange-boundary instrument reading → `signal/hud.md`
+* drift-recovery protocol pressure → `signal/drift.md`
+* provenance, witness strands, and snapshot residue → `signal/provenance.md`
+* shared-situation-awareness research framing and SA-vs-XAI argument → `signal/sa-display.md`
+* l-space slot definitions and address semantics → `signal/l-space.md`
+* render-surface mapping tables and per-surface conventions → `signal/render-targets.md`
 
 The current chronometer material still reads as a research cluster under `signal/chronometer/`, not a settled room.
 
@@ -149,7 +149,7 @@ The current chronometer material still reads as a research cluster under `signal
 
 <<~ ahu #rooms >>
 
-## Rooms
+!! Rooms
 
 Settled child rooms in this branch:
 
@@ -164,7 +164,7 @@ Settled child rooms in this branch:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/hud >>

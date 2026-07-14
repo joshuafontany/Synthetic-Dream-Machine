@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/kumu"
 
 <<~ ahu #head >>
 
-# kumu
+! kumu
 
 TW5 widget from `@lararium/tw5`.
 

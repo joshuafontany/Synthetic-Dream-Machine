@@ -24,7 +24,7 @@ written   = "2026-06-12"
 
 <<~ ahu #law >>
 
-# The One-Hull Law — Island Isomorphism
+! The One-Hull Law — Island Isomorphism
 
 **Islands differ by grant, never by hull.**
 
@@ -38,7 +38,7 @@ Every wiki island — `@lares`-as-wiki, any content wiki, and **`@daemon` itself
 
 <<~ ahu #life-support-asymmetry >>
 
-## The Life-Support Asymmetry
+!! The Life-Support Asymmetry
 
 The field went to full uniformity and came back (kubeadm self-hosting deprecated and removed — a self-hosted control plane could not survive a reboot; bootkube retired; Talos's public reversal). The stable attractor, adopted here as law:
 
@@ -59,7 +59,7 @@ Everything else in the bespoke admin stack — handshake, sync ports, `ea`, the 
 
 <<~ ahu #migration >>
 
-## Migration — the pivot playbook (no flag day)
+!! Migration — the pivot playbook (no flag day)
 
 Incremental, witness-pointed, per the kubeadm-pivot and Chromium-servicification precedents:
 
@@ -74,7 +74,7 @@ A mirror-pod gesture MAY bridge observability early: the statically-loaded admin
 
 <<~ ahu #hoike-life-support >>
 
-## Hoike — the kept dispute
+!! Hoike — the kept dispute
 
 <<~ hoike #full-uniformity held:"isomorphism of form, interface, and grants; asymmetry of life support — the genesis layer stays below the substrate (house, on three-system field evidence; operator to ratify)" >>
 q: does the one-hull law extend to admin's LIFE SUPPORT — the pool managing admin's own boot and restart?
@@ -89,7 +89,7 @@ re-entry: the kue key; or the migration's step 4 boundary, where the residue get
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>

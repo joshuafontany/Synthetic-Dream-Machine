@@ -26,7 +26,7 @@ uri-path    = "ha.ka.ba/lararium/api/action-handler"
 
 <<~ ahu #head >>
 
-# ACTION Verb Handler Family
+! ACTION Verb Handler Family
 
 The operator-facing residency gesture surface. Six ACTION verbs dispatch through one handler family, each wrapped in
 `withEffectRecord` so no bag mutation lands without an indelible audit trace.
@@ -40,7 +40,7 @@ operated from the CLI by `lares act`.
 
 <<~ ahu #verbs >>
 
-## The verb family
+!! The verb family
 
 Six residency verbs (SPARQL set-algebra) + a **non-residency tier** (INGEST, RECONCILE) that rides the same rail.
 
@@ -61,7 +61,7 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, **neve
 
 <<~ ahu #law >>
 
-## Handler Law
+!! Handler Law
 
 1. **No mutation without audit.** `executeAction(action, composite)` runs inside
    `withEffectRecord(action, composite, …)` — mutate-then-log order, so a failed
@@ -88,7 +88,7 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, **neve
 
 <<~ ahu #dispatch >>
 
-## Dispatch Seam
+!! Dispatch Seam
 
 ```
 lares act <VERB> …            ← @lares/cli/src/commands/act.ts (operator surface)

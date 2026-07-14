@@ -18,13 +18,13 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 <<~ &#x0002; >>
 
-# DreamNet/Lares: Prior Art Research Synthesis
+! DreamNet/Lares: Prior Art Research Synthesis
 
 *Research date: 2026-05-28. Sources fetched and synthesized from primary specifications, essays, and technical documentation.*
 
 ---
 
-## Table of Contents
+!! Table of Contents
 
 1. [Source Syntheses](#source-syntheses)
 2. [Layer Mapping: Prior Art → DreamNet](#layer-mapping)
@@ -34,9 +34,9 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ---
 
-## 1. Source Syntheses
+!! 1. Source Syntheses
 
-### 1.1 Ink & Switch — Local-First Software (2019)
+!!! 1.1 Ink & Switch — Local-First Software (2019)
 
 **Core Golden Principles:**
 
@@ -58,13 +58,13 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 | User ownership | Operator keypair on device-vessel; no outer layer holds signing keys |
 
 **Specific Prior Art Patterns:**
-- Triplicate — Ink & Switch's own local-first CMS prototype (demonstrates TW5-like wiki pattern)
-- Automerge (developed at Ink & Switch) — the CRDT library DreamNet uses directly
-- Pushpin — real-time collaborative tool with no server required
+* Triplicate — Ink & Switch's own local-first CMS prototype (demonstrates TW5-like wiki pattern)
+* Automerge (developed at Ink & Switch) — the CRDT library DreamNet uses directly
+* Pushpin — real-time collaborative tool with no server required
 
 ---
 
-### 1.2 Automerge
+!!! 1.2 Automerge
 
 **Core Golden Principles:**
 
@@ -75,22 +75,22 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 5. **Operation history**: Full change log. Branch, diff, merge workflows become possible as a first-class feature.
 
 **Design Decisions:**
-- **Causal ordering via vector clocks** (Lamport counters embedded in actor IDs): No wall clock trust required.
-- **Conflict representation, not resolution**: Automerge retains both concurrent values as a conflict object. Application chooses which to display; the CRDT never silently drops writes.
-- **Actor IDs**: Each Automerge peer carries a unique actor ID. This forms the primitive from which DreamNet's operator keypairs can be derived.
-- **automerge-repo**: Higher-level layer providing storage adapters (IndexedDB, filesystem) and network adapters (BroadcastChannel, WebSocket, WebRTC).
+* **Causal ordering via vector clocks** (Lamport counters embedded in actor IDs): No wall clock trust required.
+* **Conflict representation, not resolution**: Automerge retains both concurrent values as a conflict object. Application chooses which to display; the CRDT never silently drops writes.
+* **Actor IDs**: Each Automerge peer carries a unique actor ID. This forms the primitive from which DreamNet's operator keypairs can be derived.
+* **automerge-repo**: Higher-level layer providing storage adapters (IndexedDB, filesystem) and network adapters (BroadcastChannel, WebSocket, WebRTC).
 
 **Contrast with DreamNet:**
-- Automerge lacks built-in access control. It merges everything from any writer with document access. DreamNet adds the capability layer (ABILITY_LADDER) *on top of* CRDT merge — a principled separation that Automerge explicitly endorses.
+* Automerge lacks built-in access control. It merges everything from any writer with document access. DreamNet adds the capability layer (ABILITY_LADDER) *on top of* CRDT merge — a principled separation that Automerge explicitly endorses.
 
 **Named Patterns:**
-- RGA (Replicated Growable Array) — underlying sequence CRDT for text
-- Columnar encoding (Kleppmann 2020) — reduces document overhead to ~1.5x size vs raw content
-- automerge-repo StorageAdapter / NetworkAdapter interfaces — the extension points DreamNet device-vessels should implement
+* RGA (Replicated Growable Array) — underlying sequence CRDT for text
+* Columnar encoding (Kleppmann 2020) — reduces document overhead to ~1.5x size vs raw content
+* automerge-repo StorageAdapter / NetworkAdapter interfaces — the extension points DreamNet device-vessels should implement
 
 ---
 
-### 1.3 UCAN — User Controlled Authorization Networks
+!!! 1.3 UCAN — User Controlled Authorization Networks
 
 **Core Golden Principles:**
 
@@ -103,25 +103,25 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 7. **DID-based principals**: All actors use `did:key` (or equivalent), not email or username.
 
 **Design Decisions:**
-- **Delegation chain as provenance log**: The UCAN chain provides an inherent audit trail. Every grant stays traceable to its root.
-- **Attenuation flows additive downward**: Capabilities can only narrow going down the chain.
-- **UCAN + CRDT**: In a pull model, an agent can hold a local CRDT replica and a UCAN invocation log, and gossiping both gives transparent provenance of authority in eventually consistent systems. **This directly matches DreamNet's architecture.**
-- **Revocation**: Irreversible but possible. Once a CID gets revoked, all downstream delegations in the chain must fail. This directly grounds Lares' `revoke` tier.
+* **Delegation chain as provenance log**: The UCAN chain provides an inherent audit trail. Every grant stays traceable to its root.
+* **Attenuation flows additive downward**: Capabilities can only narrow going down the chain.
+* **UCAN + CRDT**: In a pull model, an agent can hold a local CRDT replica and a UCAN invocation log, and gossiping both gives transparent provenance of authority in eventually consistent systems. **This directly matches DreamNet's architecture.**
+* **Revocation**: Irreversible but possible. Once a CID gets revoked, all downstream delegations in the chain must fail. This directly grounds Lares' `revoke` tier.
 
 **Contrast with DreamNet:**
-- UCAN does not define group membership or shared contexts. Keyhive fills this gap. UCAN provides the per-token primitive; Keyhive provides the group management layer.
-- UCAN's confinement problem (you cannot know all sub-delegations) surfaces a real risk in DreamNet's `move` / `admin` tiers.
+* UCAN does not define group membership or shared contexts. Keyhive fills this gap. UCAN provides the per-token primitive; Keyhive provides the group management layer.
+* UCAN's confinement problem (you cannot know all sub-delegations) surfaces a real risk in DreamNet's `move` / `admin` tiers.
 
 **Named Patterns:**
-- SPKI/SDSI — the 1990s predecessor; UCAN advances SPKI into web-native form
-- ZCAP-LD (W3C CCG) — closely related W3C approach using JSON-LD
-- Macaroon — MAC-based capability system; faster but weaker (rooted in server, not user)
-- Biscuit — Datalog-based capabilities; allows richer policy expression
-- CACAO — cross-chain capability; similar delegation model
+* SPKI/SDSI — the 1990s predecessor; UCAN advances SPKI into web-native form
+* ZCAP-LD (W3C CCG) — closely related W3C approach using JSON-LD
+* Macaroon — MAC-based capability system; faster but weaker (rooted in server, not user)
+* Biscuit — Datalog-based capabilities; allows richer policy expression
+* CACAO — cross-chain capability; similar delegation model
 
 ---
 
-### 1.4 Keyhive (Fission)
+!!! 1.4 Keyhive (Fission)
 
 **Core Golden Principles (reconstructed from secondary references):**
 
@@ -131,16 +131,16 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 4. **Capability delegation through the group hierarchy**: A Keyhive PersonaGroup grants capabilities that can be delegated to devices. A MeshCabal grants capabilities to PersonaGroups.
 
 **Design Decisions:**
-- **Local-first membership**: Group state replicates via the same CRDT mechanism as application data. No separate membership server.
-- **Cap-admin owns infrastructure bags**: The Keyhive pattern grounds DreamNet's cabalGroup ownership of "local infrastructure bags" with `cap=admin`.
+* **Local-first membership**: Group state replicates via the same CRDT mechanism as application data. No separate membership server.
+* **Cap-admin owns infrastructure bags**: The Keyhive pattern grounds DreamNet's cabalGroup ownership of "local infrastructure bags" with `cap=admin`.
 
 **Named Patterns:**
-- Local-First Auth (Herb Caudill) — non-certificate-based; uses CRDT to build group membership list. Very close to Keyhive's approach.
-- Seitan token exchange — Keybase's device-admission ceremony; readable, out-of-band, no server needed.
+* Local-First Auth (Herb Caudill) — non-certificate-based; uses CRDT to build group membership list. Very close to Keyhive's approach.
+* Seitan token exchange — Keybase's device-admission ceremony; readable, out-of-band, no server needed.
 
 ---
 
-### 1.5 Braid / HTTP State Synchronization
+!!! 1.5 Braid / HTTP State Synchronization
 
 **Core Golden Principles:**
 
@@ -149,20 +149,20 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 3. **P2P semantics levels**: Level 0 = today's HTTP. Level 1 = subscriptions. Level 2 = patches/versions/merges. Levels 3–4 = P2P semantics.
 
 **Design Decisions:**
-- **Merge-type negotiation**: Client and server declare which CRDT/OT algorithm they support. Interoperability requires shared merge-type.
-- **History-pruning CRDTs**: Antimatter (from Braid group) marks the first CRDT that can garbage-collect history without losing merge ability.
+* **Merge-type negotiation**: Client and server declare which CRDT/OT algorithm they support. Interoperability requires shared merge-type.
+* **History-pruning CRDTs**: Antimatter (from Braid group) marks the first CRDT that can garbage-collect history without losing merge ability.
 
 **Contrast with DreamNet:**
-- Braid-HTTP stays a candidate for the nexusGroup ↔ nexusGroup layer. DreamNet's `shared grammar` concept aligns with Braid's merge-type negotiation.
+* Braid-HTTP stays a candidate for the nexusGroup ↔ nexusGroup layer. DreamNet's `shared grammar` concept aligns with Braid's merge-type negotiation.
 
 **Named Patterns:**
-- Antimatter — history-pruning CRDT, solves unbounded growth
-- Diamond Types (josephg) — fastest known text CRDT, O(log n) operations
-- Sync9 / SyncX — JSON+text CRDT with OT compatibility bridge
+* Antimatter — history-pruning CRDT, solves unbounded growth
+* Diamond Types (josephg) — fastest known text CRDT, O(log n) operations
+* Sync9 / SyncX — JSON+text CRDT with OT compatibility bridge
 
 ---
 
-### 1.6 Matrix Protocol
+!!! 1.6 Matrix Protocol
 
 **Core Golden Principles:**
 
@@ -174,22 +174,22 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 6. **Power levels, not capabilities**: Matrix uses a numeric power level (0–100) to gate actions.
 
 **Design Decisions:**
-- **State resolution algorithm enforces deterministic, server-independent output**: Given the same event graph, any server must compute the same resolved state. Key to federation without coordination.
-- **Olm/Megolm E2E encryption**: Per-device keys; forward secrecy via double ratchet. Sessions run per-device (analogous to DreamNet device-vessels).
+* **State resolution algorithm enforces deterministic, server-independent output**: Given the same event graph, any server must compute the same resolved state. Key to federation without coordination.
+* **Olm/Megolm E2E encryption**: Per-device keys; forward secrecy via double ratchet. Sessions run per-device (analogous to DreamNet device-vessels).
 
 **Contrast with DreamNet:**
-- Matrix lacks local-first mode. Homeservers run as always-on servers. DreamNet device-vessels can run as browser tabs — a fundamental architectural difference.
-- Matrix's power level system appears coarser than DreamNet's ABILITY_LADDER but simpler.
-- Matrix federation follows a symmetric pattern (server ↔ server). DreamNet's nexusGroup layer follows an explicitly asymmetric sovereignty model.
+* Matrix lacks local-first mode. Homeservers run as always-on servers. DreamNet device-vessels can run as browser tabs — a fundamental architectural difference.
+* Matrix's power level system appears coarser than DreamNet's ABILITY_LADDER but simpler.
+* Matrix federation follows a symmetric pattern (server ↔ server). DreamNet's nexusGroup layer follows an explicitly asymmetric sovereignty model.
 
 **Named Patterns:**
-- Room Version state resolution algorithm — deterministic, commutative state merge across federated servers
-- Olm (Double Ratchet) / Megolm (group ratchet) — per-device encryption session management
-- MXC URI scheme — Matrix's content-addressed URI for attachments (analogous to `lar:///`)
+* Room Version state resolution algorithm — deterministic, commutative state merge across federated servers
+* Olm (Double Ratchet) / Megolm (group ratchet) — per-device encryption session management
+* MXC URI scheme — Matrix's content-addressed URI for attachments (analogous to `lar:///`)
 
 ---
 
-### 1.7 Gordon Brander / Subconscious / Noosphere
+!!! 1.7 Gordon Brander / Subconscious / Noosphere
 
 **Core Golden Principles (reconstructed from secondary references):**
 
@@ -200,12 +200,12 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 5. **The Sphere**: User's unit of sovereignty — a CID-rooted DAG of notes owned by a keypair.
 
 **Named Patterns:**
-- Noosphere protocol — content-addressed, DID-keyed note graph
-- Sphere — user-sovereign data container with CID root
+* Noosphere protocol — content-addressed, DID-keyed note graph
+* Sphere — user-sovereign data container with CID root
 
 ---
 
-### 1.8 Spritely Institute / OCapN
+!!! 1.8 Spritely Institute / OCapN
 
 **Core Golden Principles:**
 
@@ -216,22 +216,22 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 5. **CRDTs + capabilities compose cleanly** (Nov 2025 Spritely blog): "Composing capability security and conflict-free replicated data types" — direct prior art for DreamNet's combination of Automerge + ABILITY_LADDER.
 
 **Design Decisions:**
-- **Netlayers as transport abstraction**: OCapN runs over Tor, libp2p, TCP+TLS, IBC. Transport-independent.
-- **Confinement via reference discipline**: Capabilities cannot be forged.
+* **Netlayers as transport abstraction**: OCapN runs over Tor, libp2p, TCP+TLS, IBC. Transport-independent.
+* **Confinement via reference discipline**: Capabilities cannot be forged.
 
 **Contrast with DreamNet:**
-- OCapN provides live object capabilities (call semantics). DreamNet uses certificate capabilities (UCAN-style bearer tokens). Different points in the capability design space:
+* OCapN provides live object capabilities (call semantics). DreamNet uses certificate capabilities (UCAN-style bearer tokens). Different points in the capability design space:
   - OCapN: fine-grained, live, requires connectivity
   - UCAN/DreamNet: coarse-grained, offline-verifiable, partition-tolerant
 
 **Named Patterns:**
-- CapTP (Capability Transport Protocol) — the heart of OCapN
-- Petnames — human-readable mappings over cryptographic identifiers
-- Magenc — content-encrypted store; capability-protected immutable blobs
+* CapTP (Capability Transport Protocol) — the heart of OCapN
+* Petnames — human-readable mappings over cryptographic identifiers
+* Magenc — content-encrypted store; capability-protected immutable blobs
 
 ---
 
-### 1.9 IPFS Content Addressing
+!!! 1.9 IPFS Content Addressing
 
 **Core Golden Principles:**
 
@@ -242,19 +242,19 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 5. **CID profiles for reproducibility**: CID profiles document canonical parameter sets for interoperability.
 
 **Design Decisions:**
-- **`dag-cbor` as canonical encoding**: UCAN mandates DAG-CBOR for signing; IPLD's DAG-CBOR provides the natural bridge.
-- **Multiformats**: Self-describing binary formats that can evolve without breaking existing CIDs.
+* **`dag-cbor` as canonical encoding**: UCAN mandates DAG-CBOR for signing; IPLD's DAG-CBOR provides the natural bridge.
+* **Multiformats**: Self-describing binary formats that can evolve without breaking existing CIDs.
 
 **Note**: DreamNet uses CIDs as stable identifiers but may retrieve content over any transport. Does not require IPFS infrastructure.
 
 **Named Patterns:**
-- IPLD (InterPlanetary Linked Data) — universal data model for content-addressed DAGs
-- Merkle DAG — the underlying data structure
-- Multibase / Multihash / Multicodec — self-describing primitives enabling codec-agnostic CIDs
+* IPLD (InterPlanetary Linked Data) — universal data model for content-addressed DAGs
+* Merkle DAG — the underlying data structure
+* Multibase / Multihash / Multicodec — self-describing primitives enabling codec-agnostic CIDs
 
 ---
 
-### 1.10 CRDTs in Production
+!!! 1.10 CRDTs in Production
 
 **Core Golden Principles:**
 
@@ -265,13 +265,13 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 5. **Performance no longer blocks adoption**: Modern CRDTs handle 100KB documents efficiently. 6 million text edits/second in Rust (Diamond Types).
 
 **Named Patterns:**
-- HLC (Hybrid Logical Clock) — combines wall clock with Lamport counter for causal correctness
-- RGA / LSEQ / YATA — sequence CRDT algorithms for ordered text
-- Delta-CRDTs — send only the delta (diff) between states; critical for efficient sync
+* HLC (Hybrid Logical Clock) — combines wall clock with Lamport counter for causal correctness
+* RGA / LSEQ / YATA — sequence CRDT algorithms for ordered text
+* Delta-CRDTs — send only the delta (diff) between states; critical for efficient sync
 
 ---
 
-### 1.11 Capability-Based Security (E Language / Mark Miller / OCapN)
+!!! 1.11 Capability-Based Security (E Language / Mark Miller / OCapN)
 
 **Core Golden Principles:**
 
@@ -283,14 +283,14 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 6. **The Structure of Authority (Miller et al.)**: Treating security as a separate concern failed repeatedly. Security requires integration with knowledge of what constitutes least authority.
 
 **Named Patterns:**
-- E language (Mark Miller) — the original object capability programming language
-- Vat model — each process runs as a "vat"; objects communicate via capabilities over async message passing; precursor to DreamNet's vessel model
-- SPKI/SDSI — Simple Public Key Infrastructure; DreamNet's keypair model aligns with SPKI
-- Confused deputy problem — capability systems eliminate this by making authority explicit in references
+* E language (Mark Miller) — the original object capability programming language
+* Vat model — each process runs as a "vat"; objects communicate via capabilities over async message passing; precursor to DreamNet's vessel model
+* SPKI/SDSI — Simple Public Key Infrastructure; DreamNet's keypair model aligns with SPKI
+* Confused deputy problem — capability systems eliminate this by making authority explicit in references
 
 ---
 
-### 1.12 Hypercore Protocol (Holepunch/Pears)
+!!! 1.12 Hypercore Protocol (Holepunch/Pears)
 
 **Core Golden Principles:**
 
@@ -301,28 +301,28 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 5. **Hyperswarm = topic-based peer discovery**: No central server required.
 
 **Design Decisions:**
-- **Single-writer append-only log**: Each vessel writes to its own log; Autobase handles multi-writer merge. Maps cleanly to DreamNet's device-vessel.
-- **Discovery key ≠ read key**: Separation of discovery (Hyperswarm topic) from read authorization (`core.key`) — a security design decision DreamNet should mirror.
-- **Corestore**: Manages multiple Hypercores under a single namespace.
+* **Single-writer append-only log**: Each vessel writes to its own log; Autobase handles multi-writer merge. Maps cleanly to DreamNet's device-vessel.
+* **Discovery key ≠ read key**: Separation of discovery (Hyperswarm topic) from read authorization (`core.key`) — a security design decision DreamNet should mirror.
+* **Corestore**: Manages multiple Hypercores under a single namespace.
 
 **Contrast with DreamNet:**
-- DreamNet uses Automerge (any-writer CRDT) rather than Hypercore (single-writer append-only log).
-- Hypercore's single-writer model makes it easier to reason about who wrote what — important for ABILITY_LADDER enforcement.
+* DreamNet uses Automerge (any-writer CRDT) rather than Hypercore (single-writer append-only log).
+* Hypercore's single-writer model makes it easier to reason about who wrote what — important for ABILITY_LADDER enforcement.
 
 **Named Patterns:**
-- Hypercore — secure, distributed append-only log
-- Autobase — multi-writer view over many Hypercores
-- Hyperswarm + HyperDHT — topic-based P2P discovery without a tracker server
-- Hyperbee — append-only B-tree over a Hypercore
-- Hyperdrive — full filesystem over Hypercore
+* Hypercore — secure, distributed append-only log
+* Autobase — multi-writer view over many Hypercores
+* Hyperswarm + HyperDHT — topic-based P2P discovery without a tracker server
+* Hyperbee — append-only B-tree over a Hypercore
+* Hyperdrive — full filesystem over Hypercore
 
 ---
 
-## 2. Layer Mapping: Prior Art → DreamNet
+!! 2. Layer Mapping: Prior Art → DreamNet
 
 > **Frame note (post-split residue).** This 2026-05-28 mapping reads the prior art onto the then-current **single five-layer stack**. The architecture later **split that stack into two orthogonal axes** — INFRA (FLOW · carriage, relay-floor → lararium → nexusGroup → DreamNet) ⊥ WHO (read · membership, vessel-key → personaGroup → cabalGroup), crossing at the vessel. The component rows below still hold one-for-one; only the *ladder* they sit in dissolved into a 2D coordinate. §4 #divergences carries the correction; the live model stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>.
 
-### Layer 1: device-vessel
+!!! Layer 1: device-vessel
 
 | Feature | Prior Art | Maturity |
 |---|---|---|
@@ -337,7 +337,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ---
 
-### Layer 2: personGroup
+!!! Layer 2: personGroup
 
 | Feature | Prior Art | Maturity |
 |---|---|---|
@@ -351,7 +351,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ---
 
-### Layer 3: cabalGroup
+!!! Layer 3: cabalGroup
 
 | Feature | Prior Art | Maturity |
 |---|---|---|
@@ -365,7 +365,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ---
 
-### Layer 4: nexusGroup
+!!! Layer 4: nexusGroup
 
 | Feature | Prior Art | Maturity |
 |---|---|---|
@@ -379,7 +379,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ---
 
-### Layer 5: DreamNet
+!!! Layer 5: DreamNet
 
 | Feature | Prior Art | Maturity |
 |---|---|---|
@@ -393,9 +393,9 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ---
 
-## 3. Where DreamNet Aligns with Best Practices
+!! 3. Where DreamNet Aligns with Best Practices
 
-### Strong Alignments
+!!! Strong Alignments
 
 **1. Local-first data primacy**
 DreamNet's "every write originates in a sovereign vessel" expresses a direct instantiation of the Ink & Switch local-first ideal. All major local-first systems agree on this.
@@ -420,9 +420,9 @@ QR/file/DM ceremony maps exactly to the Seitan token exchange pattern (Keybase, 
 
 ---
 
-## 4. Where DreamNet Diverges and Why
+!! 4. Where DreamNet Diverges and Why
 
-### Principled Divergences
+!!! Principled Divergences
 
 **1. Browser-tab as a sovereign vessel**
 Most prior art (Matrix, Hypercore) assumes always-on servers as the fundamental unit. DreamNet's browser tab as first-class sovereign vessel appears more aggressive than any production system. The risks (ephemeral IndexedDB, no stable network address, short lifetime) sit at engineering level, not architectural level.
@@ -439,7 +439,7 @@ No other distributed system uses TW5 as a knowledge store. Strength: TW5's matur
 **5. mana/manao/manaoio trust-weight lattice**
 The three-tier trust weight system lacks direct prior art in the literature reviewed. Novel ontological primitives require careful formal specification to avoid semantic drift across implementations.
 
-### Potentially Risky Divergences
+!!! Potentially Risky Divergences
 
 **1. No explicit revocation mechanism at the CRDT layer**
 UCAN explicitly specifies revocation (by CID). DreamNet's `revoke` tier implies intent but the mechanism for propagating revocation in an eventually-consistent CRDT system lacks explicit specification. In AP systems, revocation ranks as the hardest problem.
@@ -452,35 +452,35 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ---
 
-## 5. Identified Gaps
+!! 5. Identified Gaps
 
-### Gap 1: Explicit Revocation Propagation Protocol
+!!! Gap 1: Explicit Revocation Propagation Protocol
 
 **Source**: UCAN spec §Lifecycle, Hypercore, Matrix
 
 **Description**: DreamNet carries a `revoke` tier but no specified mechanism for propagating revocations to all vessels that might cache capabilities. The architecture should specify:
-- How revocations get represented in the CRDT (as CRDT operations, so they merge)
-- What maximum acceptable propagation delay the protocol permits
-- How a vessel should behave when it holds a capability without verified un-revoked status
+* How revocations get represented in the CRDT (as CRDT operations, so they merge)
+* What maximum acceptable propagation delay the protocol permits
+* How a vessel should behave when it holds a capability without verified un-revoked status
 
 **Prior art**: UCAN Revocation sub-spec; Keyhive revocation via group-CRDT; Local-First Auth revocation event
 
 ---
 
-### Gap 2: Document Growth / CRDT Compaction Strategy
+!!! Gap 2: Document Growth / CRDT Compaction Strategy
 
 **Source**: josephg article on CRDT futures, Braid Antimatter, vlcn.io
 
 **Description**: Automerge's op log grows unboundedly with edits. A long-lived device-vessel with years of edit history will accumulate significant storage overhead. No provision for:
-- Snapshotting / compacting the Automerge log
-- Garbage-collecting tombstoned (deleted) content
-- Differentiating "protocol history that must be retained" from "edit history that can be compacted"
+* Snapshotting / compacting the Automerge log
+* Garbage-collecting tombstoned (deleted) content
+* Differentiating "protocol history that must be retained" from "edit history that can be compacted"
 
 **Prior art**: Antimatter (Braid group) — first history-pruning text CRDT; Automerge's own compaction research; Git's `gc` and pack files
 
 ---
 
-### Gap 3: Petnames / Human-Readable Layer Over Cryptographic IDs
+!!! Gap 3: Petnames / Human-Readable Layer Over Cryptographic IDs
 
 **Source**: Spritely Institute "Petnames" paper, Subconscious Noosphere
 
@@ -490,33 +490,33 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ---
 
-### Gap 4: Synchronization Protocol Specification for nexusGroup Layer
+!!! Gap 4: Synchronization Protocol Specification for nexusGroup Layer
 
 **Source**: Braid, Matrix Server-Server API
 
 **Description**: DreamNet specifies CRDT semantics for intra-vessel and intra-cabal sync, but not the wire protocol for nexusGroup ↔ nexusGroup communication. Needs:
-- A specified transport envelope for inter-cabal sync (Braid-HTTP stays a candidate)
-- A merge-type negotiation mechanism for cross-cabal interoperability
-- An explicit anti-entropy protocol (how do nexusGroups discover what they're missing?)
+* A specified transport envelope for inter-cabal sync (Braid-HTTP stays a candidate)
+* A merge-type negotiation mechanism for cross-cabal interoperability
+* An explicit anti-entropy protocol (how do nexusGroups discover what they're missing?)
 
 **Prior art**: Braid-HTTP (IETF draft); Matrix Server-Server API; Hyperswarm (topic-based peer discovery); Set reconciliation
 
 ---
 
-### Gap 5: Hybrid Logical Clocks (HLC) for Event Ordering
+!!! Gap 5: Hybrid Logical Clocks (HLC) for Event Ordering
 
 **Source**: vlcn.io CRDT guide, distributed systems literature
 
 **Description**: The architecture does not specify event timestamping within a device-vessel. Using system time stays explicitly unsafe. Automerge uses Lamport counters internally, but:
-- No specified mapping between Automerge's internal causal ordering and human-visible timestamps
-- The mana/manao/manaoio lattice may need causal ordering to determine which trust-weight values count as "more recent"
-- Cross-vessel event ordering for nexusGroup and DreamNet layers lacks specification
+* No specified mapping between Automerge's internal causal ordering and human-visible timestamps
+* The mana/manao/manaoio lattice may need causal ordering to determine which trust-weight values count as "more recent"
+* Cross-vessel event ordering for nexusGroup and DreamNet layers lacks specification
 
 **Prior art**: Hybrid Logical Clocks (HLC) — combines wall clock for human readability with Lamport counter for causal correctness. Used in CockroachDB, vlcn.io's cr-sqlite.
 
 ---
 
-### Gap 6: Discovery Key / Read Key Separation
+!!! Gap 6: Discovery Key / Read Key Separation
 
 **Source**: Hypercore protocol
 
@@ -526,33 +526,33 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ---
 
-### Gap 7: Formal Specification of ABILITY_LADDER Attenuation Rules
+!!! Gap 7: Formal Specification of ABILITY_LADDER Attenuation Rules
 
 **Source**: UCAN §Attenuation, E language capability theory
 
 **Description**: The ABILITY_LADDER gets described, but the *attenuation rules* still lack formal specification:
-- Can a `write` holder delegate `read`? (Yes, by attenuation — should be explicit)
-- Can an `admin` delegate `revoke` to a vessel that only holds `write`? (Likely no — needs specification)
-- What does attenuation look like at the nexusGroup layer where inner vessels may not be visible?
+* Can a `write` holder delegate `read`? (Yes, by attenuation — should be explicit)
+* Can an `admin` delegate `revoke` to a vessel that only holds `write`? (Likely no — needs specification)
+* What does attenuation look like at the nexusGroup layer where inner vessels may not be visible?
 
 **Prior art**: UCAN §Attenuation + §Authority + §Command hierarchy; E language `Facet` pattern; OCapN attenuated forwarders
 
 ---
 
-### Gap 8: Absent Network: Long-Partition Behavior
+!!! Gap 8: Absent Network: Long-Partition Behavior
 
 **Source**: Ink & Switch local-first essay, Braid AP-vs-CP analysis, Matrix CAP-AP tradeoff
 
 **Description**: The architecture specifies eventual consistency but not behavior during extended partitions:
-- If a device-vessel spends years offline, then returns online, how does its CRDT state merge without re-fetching all history?
-- If a cabalGroup forks (two sub-groups lose contact and both continue operating), does a mechanism exist for later reconciliation?
-- The DreamNet layer gets described as surviving "protocol forks" — but no fork reconciliation protocol appears.
+* If a device-vessel spends years offline, then returns online, how does its CRDT state merge without re-fetching all history?
+* If a cabalGroup forks (two sub-groups lose contact and both continue operating), does a mechanism exist for later reconciliation?
+* The DreamNet layer gets described as surviving "protocol forks" — but no fork reconciliation protocol appears.
 
 **Prior art**: Matrix state resolution algorithm (deterministic fork merge); Braid fork semantics; Automerge's built-in merge-on-reconnect
 
 ---
 
-## Summary Table
+!! Summary Table
 
 | Category | Finding |
 |---|---|

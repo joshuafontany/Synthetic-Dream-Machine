@@ -22,18 +22,18 @@ uri-path      = "ha.ka.ba/lararium/docs/meme-ast"
 
 <<~ ahu #contract >>
 
-## meme-ast — Contract
+!! meme-ast — Contract
 
 Isomorphic memetic-wikitext AST parsing library.
 Runs in Node, Deno, browser, and TW5-era JS environments.
 No `fs`, `path`, or DOM imports.
 
 Composable source files in `packages/lararium-mesh/src/meme-ast/`:
-- `types.ts`   — `MemeAstNode` union types + `MemeNode` root
-- `scanner.ts` — `SigilScan` patterns + `collectEvents()`
-- `builder.ts` — `buildMemeAst()`: `ParseEvent[]` → `MemeAstNode[]`
-- `edges.ts`   — `edgesFromMemeAst()`: `MemeAstNode[]` → `PranalaEdge[]`
-- `parse.ts`   — `parseMemeText()` top-level entry (all three tiers)
+* `types.ts`   — `MemeAstNode` union types + `MemeNode` root
+* `scanner.ts` — `SigilScan` patterns + `collectEvents()`
+* `builder.ts` — `buildMemeAst()`: `ParseEvent[]` → `MemeAstNode[]`
+* `edges.ts`   — `edgesFromMemeAst()`: `MemeAstNode[]` → `PranalaEdge[]`
+* `parse.ts`   — `parseMemeText()` top-level entry (all three tiers)
 
 Public API sub-export: `@lararium/mesh/meme-ast`
 

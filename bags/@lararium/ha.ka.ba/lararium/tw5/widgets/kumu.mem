@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/kumu"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$kumu>` resolves a named kumu device by `[all[tiddlers]tag[$:/tags/LarariumKumu]field:kumu-name[name]]`, transcluding it with props. Renders a `<div data-lar-kind="kumu">` container; unresolved devices show a `<span data-lar-kind="hole">`. Attributes: `name`, `props`.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/kumu"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function KumuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

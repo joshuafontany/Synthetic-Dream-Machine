@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/pae"
 
 <<~ ahu #head >>
 
-# pae
+! pae
 
 TW5 widget from `@lararium/tw5`.
 

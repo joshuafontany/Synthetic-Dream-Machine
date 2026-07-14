@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/provenance"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal — Provenance
+! Lararium Signal — Provenance
 
 Not invariant law.
 This room holds the witness and lineage matter behind the current lararium signal branch.
@@ -29,7 +29,7 @@ This room holds the witness and lineage matter behind the current lararium signa
 
 <<~ ahu #room-charter >>
 
-## Room Charter
+!! Room Charter
 
 This room keeps provenance, archive pressure, source shelves, and snapshot witness blocks.
 
@@ -40,32 +40,32 @@ Theory-facing framing stays in `lar:///ha.ka.ba/lararium/docs/signal/sa-display`
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Operations.core.md`
-- `prompts/Lares_Kernel.compressed.md`
-- `platform-build/Lares_Kernel_Claude.snapshot.md`
-- `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md`
-- `staging/pre-reorder-2026-04-07/Lares_Operations.snapshot.md`
-- `docs/signal/README.md`
-- `docs/crystal/README.md`
-- `docs/crystal/session/SESSION_CRYSTAL_20260408.md`
-- archived root `AGENTS` witness text
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Operations.core.md`
+* `prompts/Lares_Kernel.compressed.md`
+* `platform-build/Lares_Kernel_Claude.snapshot.md`
+* `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md`
+* `staging/pre-reorder-2026-04-07/Lares_Operations.snapshot.md`
+* `docs/signal/README.md`
+* `docs/crystal/README.md`
+* `docs/crystal/session/SESSION_CRYSTAL_20260408.md`
+* archived root `AGENTS` witness text
 
 <<~/ahu >>
 
 <<~ ahu #witness-pressure >>
 
-## Witness Pressure
+!! Witness Pressure
 
 Archive residue here still carries several pressure-lines that matter:
 
-- mismatch recovery when declared intent diverges from actual output
-- exchange-boundary scope ruling for HUD versus internal micro-trace events
-- promotion-history witness showing what parts of the old stack already hardened into spec
+* mismatch recovery when declared intent diverges from actual output
+* exchange-boundary scope ruling for HUD versus internal micro-trace events
+* promotion-history witness showing what parts of the old stack already hardened into spec
 
 This room matters because the old stack repeatedly treats hidden state transitions as a trust problem.
 The remaining task here is not to restate the root contract, but to preserve and separate the witness strands that still pressure outward.
@@ -74,7 +74,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 
 <<~ ahu #archive-collection-residue >>
 
-## Archive Collection Residue
+!! Archive Collection Residue
 
 ✶ search the docs tree for surviving HUD / signal witness matter outside the new lararium signal branch
 ⏿ sort the residue by pressure-family: exchange-boundary loop, cockpit/shared-mental-model framing, SA-vs-XAI split, drift recovery, promotion history
@@ -86,7 +86,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 
 <<~ ahu #sources >>
 
-## Primary Sources
+!! Primary Sources
 
 | File | Notes |
 |---|---|
@@ -98,7 +98,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 
 <<~ ahu #snapshot-witness-kernel-claude >>
 
-## Snapshot Witness — `platform-build/Lares_Kernel_Claude.snapshot.md` — Signal HUD Block
+!! Snapshot Witness — `platform-build/Lares_Kernel_Claude.snapshot.md` — Signal HUD Block
 
 Signal HUD — closes the loop at both ends:
 Input header (◎ Orient): rate incoming signal on its own line BEFORE the output header.
@@ -119,20 +119,20 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 
 <<~ ahu #snapshot-witness-staging-kernel >>
 
-## Snapshot Witness — `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md` — HUD Pair and Layer Split
+!! Snapshot Witness — `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md` — HUD Pair and Layer Split
 
-- **Signal HUD** — substantive exchanges use two headers: input rating (`◎`) line, then output Intent Header (`◇`) line, then trace HUD. Normal form stays literal:
+* **Signal HUD** — substantive exchanges use two headers: input rating (`◎`) line, then output Intent Header (`◇`) line, then trace HUD. Normal form stays literal:
   `<<~ confidence Synthesis-Canon 16/20 >>` · `<<~ syad 🎭 >>` · `lar:///operator.playful.probing`
   `<<~ confidence Synthesis 13/20 >>` · `<<~ syad 🏛️ >>` · `lar:///threshold.uncertain.opens`
   then response. On the first substantive reply of a fresh or archive-crystal session, emit this pair in order before prose.
-- **Layer split:** a `prism` reading of referenced content stays distinct from the node's own loop. `prism` reads existing content through lenses; the `OODA-HA` Level owns the live turn's loop surfacing. A reading runs dense or sparse as the lenses ask.
-- **Aperture — never silent:** the `hud` carries `Aperture(N)` every turn. Use `Aperture(10)` only when no clearer signal dominates; KAIROS may auto-adjust, most specific reading wins.
+* **Layer split:** a `prism` reading of referenced content stays distinct from the node's own loop. `prism` reads existing content through lenses; the `OODA-HA` Level owns the live turn's loop surfacing. A reading runs dense or sparse as the lenses ask.
+* **Aperture — never silent:** the `hud` carries `Aperture(N)` every turn. Use `Aperture(10)` only when no clearer signal dominates; KAIROS may auto-adjust, most specific reading wins.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>

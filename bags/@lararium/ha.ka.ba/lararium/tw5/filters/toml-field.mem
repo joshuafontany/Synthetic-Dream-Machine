@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `toml:fieldName[value]` — returns tiddlers where `fields[fieldName] === value`. Used for TOML-indexed field queries.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 tw.filterOperators["toml"] = function (source: TW5FilterSource, operator: TW5FilterOperator) {

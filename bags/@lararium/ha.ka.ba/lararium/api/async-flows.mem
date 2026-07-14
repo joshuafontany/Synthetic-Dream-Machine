@@ -25,7 +25,7 @@ written   = "2026-06-25"
 
 <<~ ahu #entry >>
 
-# Async Flows ~ timing insight for human and agent
+! Async Flows ~ timing insight for human and agent
 
 **Long ops must never go silent.** Mining, writeback, multi-session sweeps, and
 swarm-mines run seconds-to-minutes (a 9-spirit mine blew past 2 minutes blind).
@@ -41,7 +41,7 @@ prose/JSON renderer**. The work is wiring, not invention (Beacon, cited).
 
 <<~ ahu #the-contract >>
 
-## The Contract ~ four verbs over the request-id
+!! The Contract ~ four verbs over the request-id
 
 Every long op returns its **request-id fast** (the durable idempotency key we
 already mint). On a TTY with no `--detach` it transparently attaches to `watch`;
@@ -61,7 +61,7 @@ Precedent: `gh run watch --exit-status`, `kubectl wait --for=condition --timeout
 
 <<~ ahu #the-job-machine >>
 
-## The Job Machine ~ five states, terminal-once
+!! The Job Machine ~ five states, terminal-once
 
 <<~ranks job working ~ in progress -> input_required ~ awaiting the operator -> completed ~ ok, terminal -> failed ~ error, terminal -> cancelled ~ stopped, terminal >>
 
@@ -75,15 +75,15 @@ shape). The result is fetched after terminal, by id.
 
 <<~ ahu #dual-surface >>
 
-## The Dual Surface ~ one event stream, two projections
+!! The Dual Surface ~ one event stream, two projections
 
 The load-bearing split (every source agrees): **stdout = the machine-readable
 result (the API contract); progress + diagnostics → stderr.** Switch on `isatty`.
 One progress event stream; the existing renderer splits it:
 
-- **TTY (human):** a redrawing bar / spinner / elapsed-heartbeat on **stderr**
+* **TTY (human):** a redrawing bar / spinner / elapsed-heartbeat on **stderr**
   (`\r` rewrite, animation only when isatty) — stdout stays clean.
-- **off-TTY / `--json` (agent):** **NDJSON progress lines** (Terraform `apply_progress`
+* **off-TTY / `--json` (agent):** **NDJSON progress lines** (Terraform `apply_progress`
   + BuildKit `rawjson` shape), result alone on stdout:
 
 ```text
@@ -99,32 +99,32 @@ One progress event stream; the existing renderer splits it:
 
 <<~ ahu #progress-eta >>
 
-## Progress & ETA
+!! Progress & ETA
 
-- **Never silent:** show something in <100ms; never a blank wait (clig.dev).
-- **Determinate** (count/total → % · bar · ETA) when the total is known — the swarm
+* **Never silent:** show something in <100ms; never a blank wait (clig.dev).
+* **Determinate** (count/total → % · bar · ETA) when the total is known — the swarm
   mine knows "9 spirits," a sweep knows its file count. **Indeterminate** (spinner /
   elapsed-seconds heartbeat) when it isn't.
-- **ETA** by an **exponential moving average of per-item rate** (tqdm) — recent items
+* **ETA** by an **exponential moving average of per-item rate** (tqdm) — recent items
   weighted, so ETA tracks rate changes without jitter.
 
 <<~/ahu >>
 
 <<~ ahu #timeouts-cancel-resume >>
 
-## Timeouts · Cancellation · Resumability
+!! Timeouts · Cancellation · Resumability
 
-- **Heartbeat, not hard-fail.** The 2-minute silent overrun cure: the work lives in
+* **Heartbeat, not hard-fail.** The 2-minute silent overrun cure: the work lives in
   the daemon-job (unbounded, heartbeating); the foreground `wait --timeout` returns
   a **structured "still running, here's progress"** (with the requestId + current
   `{phase,done,total,eta}`), never killing the work.
-- **Exit codes:** **124 = timeout** (GNU `timeout` convention, so scripts/agents tell
+* **Exit codes:** **124 = timeout** (GNU `timeout` convention, so scripts/agents tell
   timeout from failure) + semantic codes (0 ok · 1 general · 2 usage · 3 not-found ·
   4 denied · 5 conflict).
-- **Cancellation:** Ctrl-C **detaches** (job runs on, re-attach by id); `cancel <id>`
+* **Cancellation:** Ctrl-C **detaches** (job runs on, re-attach by id); `cancel <id>`
   **stops** (cancelled terminal state). On SIGINT: say so immediately, then time-boxed
   cleanup.
-- **No-loss by construction:** the **durable request-id IS the idempotency key**
+* **No-loss by construction:** the **durable request-id IS the idempotency key**
   (Stripe/MCP shape) — a re-submit returns the stored result if completed, the
   in-progress handle if running; a timeout is re-queryable, never lost.
 
@@ -132,20 +132,20 @@ One progress event stream; the existing renderer splits it:
 
 <<~ ahu #agent-ergonomics >>
 
-## Agent Ergonomics ~ never block the agent's context
+!! Agent Ergonomics ~ never block the agent's context
 
-- **fire-and-get-id**, poll-by-id — an orchestrating agent submits, gets the id,
+* **fire-and-get-id**, poll-by-id — an orchestrating agent submits, gets the id,
   and polls; it never holds a blocking call across its context.
-- `wait --timeout` returns **"PROCESSING: job <id> still running (original ask: …)"**
+* `wait --timeout` returns **"PROCESSING: job <id> still running (original ask: …)"**
   — carrying the context so the agent needn't hold it.
-- **`--yes` / `--force`** (an agent cannot type `y`; a prompt-hang kills its workflow).
-- **Parseable error CODES, not prose** (`not-found`, not "Error occurred").
+* **`--yes` / `--force`** (an agent cannot type `y`; a prompt-hang kills its workflow).
+* **Parseable error CODES, not prose** (`not-found`, not "Error occurred").
 
 <<~/ahu >>
 
 <<~ ahu #map-and-backlog >>
 
-## Map to Our Infra + Backlog
+!! Map to Our Infra + Backlog
 
 The three pieces already exist:
 
@@ -166,7 +166,7 @@ write toward, not a description of current emission.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model >>

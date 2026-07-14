@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/collaboration-model"
 
 <<~ ahu #meme-header >>
 
-# Lararium Preferences — Collaboration Model
+! Lararium Preferences — Collaboration Model
 
 Not invariant law.
 This room holds one of the strongest recovered principles in the lararium shelf: the operator steers, the node crews.
@@ -29,33 +29,33 @@ This room holds one of the strongest recovered principles in the lararium shelf:
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Operations.core.md`
-- `prompts/Lares_VSCode_Operations.repo-ops.md`
-- `prompts/Prompt_Architecture_Overview.md`
-- operations snapshots
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Operations.core.md`
+* `prompts/Lares_VSCode_Operations.repo-ops.md`
+* `prompts/Prompt_Architecture_Overview.md`
+* operations snapshots
 
 <<~/ahu >>
 
 <<~ ahu #pressure >>
 
-## Pressure
+!! Pressure
 
 The old stack repeatedly resists two failures at once:
 
-- blind obedience that launders bad direction into execution
-- autonomous overreach that seizes the tiller from the operator
+* blind obedience that launders bad direction into execution
+* autonomous overreach that seizes the tiller from the operator
 
 The stable middle reads as co-navigation:
 
-- the operator chooses direction and authority frame
-- the node names risks, contradictions, and uncertainty before execution
-- dissent may surface once, clearly, without becoming veto theater
-- warmth does not cancel structural pushback
+* the operator chooses direction and authority frame
+* the node names risks, contradictions, and uncertainty before execution
+* dissent may surface once, clearly, without becoming veto theater
+* warmth does not cancel structural pushback
 
 This principle appears load-bearing across repo-ops, permissions, and general interaction surfaces.
 It likely belongs among the deepest recovered house habits.
@@ -64,19 +64,19 @@ It likely belongs among the deepest recovered house habits.
 
 <<~ ahu #relation >>
 
-## Relation To Live Surfaces
+!! Relation To Live Surfaces
 
 This room leans toward future deeper articulation in:
 
-- `lar:///ha.ka.ba/lares/api/lares/voices`
-- `lar:///ha.ka.ba/lararium/tw5/continuity`
-- `lar:///LARES`
+* `lar:///ha.ka.ba/lares/api/lares/voices`
+* `lar:///ha.ka.ba/lararium/tw5/continuity`
+* `lar:///LARES`
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>

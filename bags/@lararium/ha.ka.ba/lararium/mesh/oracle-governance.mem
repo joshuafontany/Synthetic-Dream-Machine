@@ -23,7 +23,7 @@ written   = "2026-06-29"
 
 <<~ &#x0002; >>
 
-# Oracle Governance
+! Oracle Governance
 
 > Status: PROPOSED — design intent, mostly unbuilt. The Two-Faced read-face
 > (`@oracle` content-addressed snapshot + signed monotone pointer) stands and witnessed
@@ -45,16 +45,16 @@ two name one `@oracle` seen two ways — no reader should mistake this board for
 
 <<~ ahu #per-nexus-not-global >>
 
-## Per-Nexus, Not One Global Board
+!! Per-Nexus, Not One Global Board
 
 An `@oracle` lives **per-nexus** — one public board per confederation — never one global
 board for all of DreamNet. The grounds run **OWNERSHIP and SCALE**, never no-global-now:
 
-- **Ownership** — each nexus governs its own public surface; no single board accrues
+* **Ownership** — each nexus governs its own public surface; no single board accrues
   authority over a hundred thousand sovereign Lararia (that re-introduces the hub the
   watershed guardrail forbids,
   <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#rhizome-rhymes >>).
-- **Scale** — a planet-wide board concentrates write-pressure and read-fan into one
+* **Scale** — a planet-wide board concentrates write-pressure and read-fan into one
   bottleneck; per-nexus boards keep the lattice flat.
 
 **Correct the no-global-now framing (MUST).** A *global* `@oracle` does NOT violate
@@ -69,7 +69,7 @@ address would not trigger anyway.
 
 <<~ ahu #board-model >>
 
-## The Board Model — Global Address, Local Causal State
+!! The Board Model — Global Address, Local Causal State
 
 The board carries **one well-known per-nexus ROOT/INDEX `docId`** — the **global
 address** — fanning by **transitive reachability** to a fan of **per-topic causal
@@ -103,14 +103,14 @@ IS the *liveness* coupling below.
 
 <<~ ahu #steward-source-public-read >>
 
-## Steward SOURCE → Public READ Projection
+!! Steward SOURCE → Public READ Projection
 
 The board governs through a **projection seam**, never a single writable doc:
 
-- **The SOURCE** — a **threshold-signed steward source** the keeper-cabal-quorum holds.
+* **The SOURCE** — a **threshold-signed steward source** the keeper-cabal-quorum holds.
   The cap-tier lives in **WHO-CAN-SIGN-THE-SOURCE**, never in a write-cap on the published
   doc.
-- **The projection** — the source projects to a **verify-only public READ plane** (the
+* **The projection** — the source projects to a **verify-only public READ plane** (the
   Two-Faced read-face, <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>;
   the TUF / DNSSEC shape: a signed source, a verifiable public mirror). Readers verify the
   projection against the steward signatures; they never write the published surface.
@@ -132,19 +132,19 @@ authority over it.
 
 <<~ ahu #three-couplings >>
 
-## Three Couplings — Founder Seeds, Circle Governs, Fork Guards
+!! Three Couplings — Founder Seeds, Circle Governs, Fork Guards
 
 The board binds to its nexus through three orthogonal couplings, none collapsing into
 another:
 
-- **① Origin.** The root `docId` seeds from the **founding @daemon** — a content-bound
+* **① Origin.** The root `docId` seeds from the **founding @daemon** — a content-bound
   birth, not a deed. **Origin ≠ ownership**: the founder names the address; it does not
   thereby command the board forever. *The founder seeds.*
-- **② Governance.** The **keeper-cabal-quorum signs** the steward source — a threshold
+* **② Governance.** The **keeper-cabal-quorum signs** the steward source — a threshold
   subject composed as a closure over the keepers' independent signatures
   (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>). No one keeper, and no
   one stolen key, moves the board. *The circle governs.*
-- **③ Liveness.** The board rides **content-addressed** snapshots; the trust edge resolves
+* **③ Liveness.** The board rides **content-addressed** snapshots; the trust edge resolves
   by **petname / TOFU introduction** (home-nexus *listed*, never *required*). And the
   whole board stays **forkable** — the fork that guards: a capture, a charter the readers
   reject, a dead steward set, and the readers carry the content-addressed board onto a new

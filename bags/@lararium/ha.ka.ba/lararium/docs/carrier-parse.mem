@@ -31,7 +31,7 @@ uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `parseCarrier(uri, text)` serves as the entry gate for all carrier ingress. Isomorphic — no `fs`, no `path`, no `window`. The host passes text; parseCarrier returns a typed record.
 
@@ -43,7 +43,7 @@ Promotion path: when the carrier spine stabilises and a corpus-loadable module b
 
 <<~ ahu #source >>
 
-## Source (TypeScript — compiled-in)
+!! Source (TypeScript — compiled-in)
 
 ```typescript
 export function parseCarrier(uri: string, text: string): CarrierRecord {

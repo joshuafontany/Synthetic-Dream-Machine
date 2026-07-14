@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/epistemology"
 
 <<~ ahu #meme-header >>
 
-# Lararium Preferences — Epistemic Residue
+! Lararium Preferences — Epistemic Residue
 
 Not invariant law.
 The foundation braid lives outward; this shelf holds what remains unsettled, cross-cutting, or not yet promoted.
@@ -29,21 +29,21 @@ The foundation braid lives outward; this shelf holds what remains unsettled, cro
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Epistemology.core.md`
-- `prompts/Lares_Kernel.compressed.md`
-- `platform-build/Lares_Kernel_Claude.snapshot.md`
-- pre-reorder epistemology and kernel snapshots
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Epistemology.core.md`
+* `prompts/Lares_Kernel.compressed.md`
+* `platform-build/Lares_Kernel_Claude.snapshot.md`
+* pre-reorder epistemology and kernel snapshots
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
 
-## OODA-HA — Collection Pass
+!! OODA-HA — Collection Pass
 
 ✶ collect the strongest nearby witness text that names the epistemic substrate directly
 ⏿ sort by concept-family: foundation, reality tunnels, E-Prime, catma, register logic, degraded states
@@ -55,15 +55,15 @@ Strong witnesses recur in:
 
 <<~ ahu #pressure >>
 
-## Pressure
+!! Pressure
 
 Most of the old epistemology braid now lives elsewhere.
 What still presses here reads more specific:
 
-- explicit register / stance complementarity
-- degraded epistemic weather and failure-language
-- promotion planning for possible new short invariants
-- witness notes on what the API already carries well and what still leaks across rooms
+* explicit register / stance complementarity
+* degraded epistemic weather and failure-language
+* promotion planning for possible new short invariants
+* witness notes on what the API already carries well and what still leaks across rooms
 
 So this shelf now serves less as foundation and more as a sorting basin.
 It keeps the residue visible until it either promotes upward or dissolves into adjacent docs rooms.
@@ -72,42 +72,42 @@ It keeps the residue visible until it either promotes upward or dissolves into a
 
 <<~ ahu #tree >>
 
-## Tree
+!! Tree
 
-- `lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity`
-- `lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather`
+* `lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity`
+* `lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather`
 
 <<~/ahu >>
 
 <<~ ahu #docs-migration >>
 
-## Docs Migration — Foundation Braid
+!! Docs Migration — Foundation Braid
 
 The explanatory braid moved outward from this staging room to these docs surfaces:
 
-- `lar:///ha.ka.ba/lares/docs/pono/e-prime`
-- `lar:///ha.ka.ba/lares/docs/mu/model-agnosticism`
-- `lar:///ha.ka.ba/lares/docs/mu/reality-tunnels`
+* `lar:///ha.ka.ba/lares/docs/pono/e-prime`
+* `lar:///ha.ka.ba/lares/docs/mu/model-agnosticism`
+* `lar:///ha.ka.ba/lares/docs/mu/reality-tunnels`
 
 This room now keeps the more API-adjacent residue:
 
-- register / stance complementarity
-- degraded epistemic weather
-- new short-invariant candidates not yet promoted
+* register / stance complementarity
+* degraded epistemic weather
+* new short-invariant candidates not yet promoted
 
 <<~/ahu >>
 
 <<~ ahu #relation >>
 
-## Relation To Live Surfaces
+!! Relation To Live Surfaces
 
 This room now reads as a staging basin adjacent to:
 
-- `lar:///ha.ka.ba/lares/api/mu`
-- `lar:///ha.ka.ba/lares/api/mu/e-prime`
-- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
-- `lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity`
-- `lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather`
+* `lar:///ha.ka.ba/lares/api/mu`
+* `lar:///ha.ka.ba/lares/api/mu/e-prime`
+* `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity`
+* `lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather`
 
 The live invariants now hold most of the tight law.
 The two child staging rooms hold the strongest remaining witness matter.
@@ -117,15 +117,15 @@ This parent shelf keeps the promotion map.
 
 <<~ ahu #api-annotation >>
 
-## Annotation — Current API State
+!! Annotation — Current API State
 
 This staging room links outward to the promoted braid.
 Several strands already live above in `v0.1/api`.
 What follows reads as a collection note on what the stack already implements with decent firmness.
 
-### Mostly done
+!!! Mostly done
 
-- **E-Prime as active discipline law**  
+* **E-Prime as active discipline law**  
   `lar:///ha.ka.ba/lares/api/mu/e-prime` now carries the strongest finished constitutional work in this family:
   - identity / predication / possession collapse
   - confidence-marker discipline
@@ -133,7 +133,7 @@ What follows reads as a collection note on what the stack already implements wit
   - Level law
   - degraded-state notes for silent drift and posturing
 
-- **Stance-conditioned register reading**  
+* **Stance-conditioned register reading**  
   `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives` stands Canon (2026-06-05) as the tight invariant for:
   - the naya↔predication licensing relationship (five standpoints unfold to seven)
   - register-within-standpoint, lens-gated (default frame absent invocation)
@@ -142,7 +142,7 @@ What follows reads as a collection note on what the stack already implements wit
   - avaktavya handling (the inexpressible pole)
   - stance flag encoding
 
-- **Maybe logic / reality tunnel / catma braid**  
+* **Maybe logic / reality tunnel / catma braid**  
   `lar:///ha.ka.ba/lares/api/mu/the-law-of-5s` feels mostly done as the current compact live room for:
   - truth on a 0–20 Level continuum
   - map / territory pressure
@@ -150,9 +150,9 @@ What follows reads as a collection note on what the stack already implements wit
   - catma rather than dogma
   - anti-overclosure pressure
 
-### Substantial but braided across more than one room
+!!! Substantial but braided across more than one room
 
-- **Model agnosticism**  
+* **Model agnosticism**  
   This pressure now appears split across:
   - `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
   - `lar:///ha.ka.ba/lares/api/mu/the-law-of-5s`
@@ -163,7 +163,7 @@ What follows reads as a collection note on what the stack already implements wit
   `the-law-of-5s` holds the maybe-logic version.
   `mu` holds the quiescent null-oracle posture that prevents opinion-hardening.
 
-- **Register and stance encoded into live transport / display grammar**  
+* **Register and stance encoded into live transport / display grammar**  
   `lar:///ha.ka.ba/lares/api/pono/lar-uri` already carries:
   - `stances`
   - `confidence`
@@ -171,9 +171,9 @@ What follows reads as a collection note on what the stack already implements wit
 
   So part of the old epistemology stack has already moved out of explanation and into address grammar.
 
-### Partial / not yet fully recovered as live API law
+!!! Partial / not yet fully recovered as live API law
 
-- **Register-Stance complementarity**  
+* **Register-Stance complementarity**  
   The old prompt argued this explicitly.
   The current API stack implies parts of it through:
   - `mu/the-syad-perspectives`
@@ -182,14 +182,14 @@ What follows reads as a collection note on what the stack already implements wit
 
   But I do not yet see one tight invariant that states the full complementarity claim directly.
 
-- **Named degraded node lexicon as a coherent system**  
+* **Named degraded node lexicon as a coherent system**  
   Pieces now exist:
   - `register collapse` in `mu/the-four-tools` and E-Prime pressure
   - degraded-state notes in `pono/e-prime`
 
   But the old larger failure-weather vocabulary still lives more strongly in docs/archive than in a single recovered API room.
 
-- **Input signal reading as a full always-on two-axis discipline**  
+* **Input signal reading as a full always-on two-axis discipline**  
   The old prompt bound this tightly to exchange behavior.
   The current API stack carries prerequisites:
   - register law
@@ -199,19 +199,19 @@ What follows reads as a collection note on what the stack already implements wit
 
   But the full “read every incoming prompt on both axes before response” contract still feels more archival than fully promoted.
 
-### Working read
+!!! Working read
 
 So far the rebuild appears strongest where epistemology became:
 
-- **constitutional law** (`pono/e-prime`)
-- **Mu-facing invariant reading** (`mu/the-syad-perspectives`, `mu/the-law-of-5s`)
-- **address / signal encoding** (`pono/lar-uri`)
+* **constitutional law** (`pono/e-prime`)
+* **Mu-facing invariant reading** (`mu/the-syad-perspectives`, `mu/the-law-of-5s`)
+* **address / signal encoding** (`pono/lar-uri`)
 
 It appears weaker where epistemology still depends on:
 
-- long explanatory braid
-- runtime interaction doctrine
-- named failure-weather vocabulary
+* long explanatory braid
+* runtime interaction doctrine
+* named failure-weather vocabulary
 
 That gap explains why this docs room still matters.
 The shelf carries only the unsettled remainder.
@@ -221,7 +221,7 @@ It still needs to witness what has already promoted, what remains braided, and w
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity >>

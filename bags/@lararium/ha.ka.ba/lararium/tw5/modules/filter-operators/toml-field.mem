@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/toml-field"
 
 <<~ ahu #head >>
 
-# toml-field
+! toml-field
 
 TW5 filter operator from `@lararium/tw5`.
 

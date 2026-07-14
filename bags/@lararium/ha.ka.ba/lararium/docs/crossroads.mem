@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/docs/crossroads"
 
 <<~ ahu #attractor >>
 
-# @crossroads — the Public Oracle Plane
+! @crossroads — the Public Oracle Plane
 
 **UNBUILT.** This meme holds the attractor so the basin forms before the water arrives.
 
@@ -33,18 +33,18 @@ The name carries the load deliberately: the Lares Compitales kept the **crossroa
 
 <<~ ahu #constraints >>
 
-## Constraints the build inherits (already canon)
+!! Constraints the build inherits (already canon)
 
-- **Ring-1 anonymous access** — read for the public group; the federation gate holds: only `meme`-rated and above federates (`noise`/`data` stay node-local).
-- **Orichalcum gates apply unchanged** — a public bag still answers the five capability questions; "public" names a generous grant to an anonymous principal, never an absence of the gate. `pull` does not imply `read`.
-- **One home per oracle** — a bag's oracle lives in exactly one plane. Promotion from @catalog to @crossroads constitutes a crossing rite (residency canon: ACTION verbs + effect records + the destination registry's accession), never a copy that leaves two authorities standing.
-- **Access ≠ load** — islands watch @crossroads the way they watch @catalog: an ACCESS capability, never a mounted layer.
+* **Ring-1 anonymous access** — read for the public group; the federation gate holds: only `meme`-rated and above federates (`noise`/`data` stay node-local).
+* **Orichalcum gates apply unchanged** — a public bag still answers the five capability questions; "public" names a generous grant to an anonymous principal, never an absence of the gate. `pull` does not imply `read`.
+* **One home per oracle** — a bag's oracle lives in exactly one plane. Promotion from @catalog to @crossroads constitutes a crossing rite (residency canon: ACTION verbs + effect records + the destination registry's accession), never a copy that leaves two authorities standing.
+* **Access ≠ load** — islands watch @crossroads the way they watch @catalog: an ACCESS capability, never a mounted layer.
 
 <<~/ahu >>
 
 <<~ ahu #open >>
 
-## Open (deliberately)
+!! Open (deliberately)
 
 Who writes @crossroads (community authority shape), how Nexus-level federation discovers it, and whether it shards per-Nexus or rides DreamNet-wide — all undecided, and this meme MUST NOT pre-narrate them. The mechanism above constrains; the outcomes emerge from use.
 
@@ -52,7 +52,7 @@ Who writes @crossroads (community authority shape), how Nexus-level federation d
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>

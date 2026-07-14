@@ -23,15 +23,15 @@ uri-path    = "ha.ka.ba/lararium/mesh/reaction-protocol"
 
 <<~ ahu #head >>
 
-# Reaction Graph
+! Reaction Graph
 
 Within-island reaction dispatch substrate.
 Isomorphic: no Node/browser APIs. Runs in vessel, island, and browser.
 
 **Scope boundary:** `ReactionGraph` routes within one TW5 wiki instance.
 It never addresses another island, another vessel, or the network.
-- Cross-island routing: `IslandMsg_Event` (island-protocol.ts)
-- Cross-vessel routing: CRDT convergence — write outcome tiddler, observe convergence
+* Cross-island routing: `IslandMsg_Event` (island-protocol.ts)
+* Cross-vessel routing: CRDT convergence — write outcome tiddler, observe convergence
 
 The production dispatch path runs through `reaction-router.ts` (nalu-driven).
 `ReactionGraph` is the routing table that `reaction-router.ts` populates and queries.
@@ -41,9 +41,9 @@ The production dispatch path runs through `reaction-router.ts` (nalu-driven).
 
 <<~ ahu #exports >>
 
-## Exports
+!! Exports
 
-### `ReactionBinding`
+!!! `ReactionBinding`
 
 One papalohe instance-level wire: when `fromUri` emits `listenable`, call `toUri.subscribable`.
 
@@ -60,7 +60,7 @@ source       — "wired" (from wiki AST) | "subscribed" (runtime Subscribe())
 
 ---
 
-### `ReactionHandler`
+!!! `ReactionHandler`
 
 ```typescript
 type ReactionHandler = (payload: unknown) => void
@@ -70,13 +70,13 @@ Called when a bound reaction fires. Payload carries the event context (GP-2 comp
 
 ---
 
-### `EdgeLike`
+!!! `EdgeLike`
 
 Minimal edge shape accepted by `extractReactionBindings`. Matches `PranalaEdge` from `@lararium/mesh/ast`.
 
 ---
 
-### `ReactionGraph`
+!!! `ReactionGraph`
 
 Live wiring map + handler registry.
 
@@ -111,7 +111,7 @@ Dispatch order:
 
 ---
 
-### `extractReactionBindings(edges) → ReactionBinding[]`
+!!! `extractReactionBindings(edges) → ReactionBinding[]`
 
 Derives `ReactionBinding` records from a flat edge list.
 
@@ -123,7 +123,7 @@ All extracted bindings carry `source: "wired"`.
 
 <<~ ahu #update-invariant >>
 
-## Update Invariant
+!! Update Invariant
 
 `load()` and `updateUri()` preserve occupied handler slots across binding rebuilds.
 
@@ -137,7 +137,7 @@ This preserves in-flight kukali suspensions across TW5 wiki-change events (nalu 
 
 <<~ ahu #production-dispatch-path >>
 
-## Production Dispatch Path
+!! Production Dispatch Path
 
 `reaction-router.ts` owns production dispatch. The path:
 
@@ -160,7 +160,7 @@ appears in production paths.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali >>

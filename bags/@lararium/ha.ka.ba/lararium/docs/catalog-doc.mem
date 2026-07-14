@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/docs/catalog-doc"
 
 <<~ ahu #head >>
 
-# Catalog Doc
+! Catalog Doc
 
 The catalog island doc — the hallway. Corpus docs are libraries. Room docs are shrines.
 
@@ -44,7 +44,7 @@ A peer that has not completed auth MUST NOT receive catalog content.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 schema-version = "0.1"
@@ -107,7 +107,7 @@ fields = [
 
 <<~ ahu #law >>
 
-## Catalog Law
+!! Catalog Law
 
 * Catalog URL arrives via `<meta name="lararium-catalog">` injected by the server after auth.
 * Catalog URL MUST NOT be guessed from localStorage without a prior server-confirmed value.

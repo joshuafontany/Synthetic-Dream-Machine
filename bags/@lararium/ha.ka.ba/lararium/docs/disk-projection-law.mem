@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/docs/disk-projection-law"
 
 <<~ ahu #intent >>
 
-## Intent
+!! Intent
 
 The disk projection renders each decomposed meme tiddler back to disk as its own full memetic-wikitext file, without live expansion of child references.
 
@@ -30,7 +30,7 @@ The disk projection preserves tree structure through literal `kahea` markers and
 
 <<~ ahu #one-template >>
 
-## Law 1 — One Template for Every Decomposed Meme Node
+!! Law 1 — One Template for Every Decomposed Meme Node
 
 Do not maintain separate "parent" and "child" disk templates for this projection. Every decomposed meme tiddler is the same kind of export target:
 
@@ -50,7 +50,7 @@ lar:///ha.ka.ba/lararium/templates/meme/markdown-meme
 
 <<~ ahu #plain-text >>
 
-## Law 2 — Plain-Text, Not Live Wikitext
+!! Law 2 — Plain-Text, Not Live Wikitext
 
 For "to markdown" / "to disk" projection, emit field values literally. Do not wikify the body. Do not expand `kahea` markers into child contents.
 
@@ -68,7 +68,7 @@ A tiddler whose `text` contains `<<~ kahea ahu #inner >>` should write that mark
 
 <<~ ahu #one-file-per-node >>
 
-## Law 3 — One File Per Decomposed Tiddler
+!! Law 3 — One File Per Decomposed Tiddler
 
 When ingest decomposes nested `ahu` blocks, every resulting tiddler projects independently:
 
@@ -87,7 +87,7 @@ This gives the disk tree the same shape as the tiddler tree without recursive re
 
 <<~ ahu #transclusion-reserved >>
 
-## Law 4 — Reserve Transclusion for a Different Projection
+!! Law 4 — Reserve Transclusion for a Different Projection
 
 Do not use `$transclude` for per-node disk projection. TW5 transclusion dynamically includes another tiddler's content. That behavior belongs to a separate future projection:
 
@@ -106,7 +106,7 @@ markdown-expanded-tree -> one root tiddler, recursively inlined descendants
 
 <<~ ahu #iam-sentinel >>
 
-## Law 5 — Preserve IAM Placement with a Literal Sentinel
+!! Law 5 — Preserve IAM Placement with a Literal Sentinel
 
 Use `<<~ iam >>` as a plain-text sentinel inside `preamble`.
 
@@ -124,7 +124,7 @@ This preserves human-authored placement without forcing the template to parse pr
 
 <<~ ahu #lib-helpers >>
 
-## Law 6 — Emit Every Section Through Small Helpers
+!! Law 6 — Emit Every Section Through Small Helpers
 
 Favor readable template helpers over one dense line of TW5. Keep helpers in `text/vnd.tiddlywiki`, not memetic-wikitext, so the template system does not recursively parse itself as source meme syntax.
 
@@ -145,7 +145,7 @@ Each helper owns one formatting law: when it emits content, it appends exactly o
 
 <<~ ahu #output-shape >>
 
-## Law 7 — Preferred Output Shape
+!! Law 7 — Preferred Output Shape
 
 Every per-node projection follows this conceptual order:
 
@@ -173,7 +173,7 @@ The top-level template (`meme-markdown-meme.tid`) stays short enough for council
 
 <<~ ahu #round-trip-law >>
 
-## Law 8 — Round-Trip Invariant
+!! Law 8 — Round-Trip Invariant
 
 Council tests this invariant:
 
@@ -193,7 +193,7 @@ Byte-equivalence is not required for one-file-per-decomposed-tiddler projection.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/templates/meme/markdown-meme >>
 <<~ loulou lar:///ha.ka.ba/lararium/templates/ahu/markdown-meme >>

@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/api/lararium-canonical-model"
 
 <<~ &#x0002; >>
 
-# Lararium — The Canonical Model
+! Lararium — The Canonical Model
 
 A cold instance reads THIS meme to hold the whole architecture before any sub-meme.
 It consolidates what three corpus scouts (2026-06-08) found scattered across ~8 memes
@@ -30,7 +30,7 @@ sub-memes; this carries the keel + the meme map.
 
 <<~ ahu #the-laws >>
 
-## The Load-Bearing Laws
+!! The Load-Bearing Laws
 
 1. **Causal islands / no global now.** Each island (vessel · wiki · meme · node-edge)
    holds its own partially-ordered log; it knows only "as of my last sync." Local-first:
@@ -85,7 +85,7 @@ sub-memes; this carries the keel + the meme map.
 
 <<~ ahu #the-layering >>
 
-## The Layering (one-way, zero cycles)
+!! The Layering (one-way, zero cycles)
 
 ```
 @lares/core        — voice house · mu · syad · law-of-5s · OODA-HA · e-prime · lar-URI (noosphere-boot)
@@ -111,7 +111,7 @@ mesh ← tw5 ← keyhive, one-way. No platform code in mesh or in a shared tw5 f
 
 <<~ ahu #seven-participations >>
 
-## A Vessel Composes Seven Participations
+!! A Vessel Composes Seven Participations
 
 We define "a vessel" as a composition (a recipe), not a platform fork. The seven sovereign pieces,
 each a protocol the vessel composes rather than re-implements:
@@ -136,15 +136,15 @@ substrate atoms + the capability pieces they hold. ([[open-vessel|lar:///ha.ka.b
 
 <<~ ahu #capability-vs-platform >>
 
-## Capability vs Platform (the distinction that stops the fork-paralysis)
+!! Capability vs Platform (the distinction that stops the fork-paralysis)
 
-- **Substrate atoms** resolve native-first INSIDE a piece (storage backend · worker kind ·
+* **Substrate atoms** resolve native-first INSIDE a piece (storage backend · worker kind ·
   crypto · transport · genesis source · catalog anchor). A browser cannot be NodeFS — this
   difference holds legitimately; it never branches the core.
-- **Capability pieces** ride as recipe pieces a vessel MAY hold (inbound peering · disk/OPFS
+* **Capability pieces** ride as recipe pieces a vessel MAY hold (inbound peering · disk/OPFS
   mirror · corpus · resident verbs · residency sweeper · founding/PersonaGroup/genesis). Wired
   on node today, structurally browser-composable; the seam stays OPEN on both substrates.
-- **Role** (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
+* **Role** (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
   growing set, never a platform identity. A node MAY run thin; a browser MAY grow heavy. The
   full cap-stack model — role names the **expressed** cap-set (hold-vs-express), the five caps in
   two families (CARRIAGE ⊥ VESSEL), and the **Herm** (Lares Viales) as the minimal composition
@@ -159,16 +159,16 @@ observes outcome convergence; V3-authenticated; renders prose↔JSON by audience
 
 <<~ ahu #proven-collapse >>
 
-## The Proven Collapse Pattern (how isomorphism actually lands)
+!! The Proven Collapse Pattern (how isomorphism actually lands)
 
 Extract the identical skeleton into a CORE; leave platform divergence as a small seam of
 injected closures (never `if(platform)`, never a class tower). Already done one level down
 and load-bearing:
 
-- `openAdminVmCore` + `AdminVmHost` (admin-vm pair — both inject `spawnWorker`/`newSyncChannel`).
-- `runSovereignKernel` + `IslandHostSeam` (island kernel — post/listen/storage/ready).
-- `VesselIslandPoolCore` + `VesselIslandHost` (pool — in mesh, zero tw5 dep).
-- `open-vessel-core` (assembleVessel + mountWikiSlot) — the vessel-keel collapse,
+* `openAdminVmCore` + `AdminVmHost` (admin-vm pair — both inject `spawnWorker`/`newSyncChannel`).
+* `runSovereignKernel` + `IslandHostSeam` (island kernel — post/listen/storage/ready).
+* `VesselIslandPoolCore` + `VesselIslandHost` (pool — in mesh, zero tw5 dep).
+* `open-vessel-core` (assembleVessel + mountWikiSlot) — the vessel-keel collapse,
   LANDED in mesh, not-yet-wired: the two factories migrate onto it (test-gated). The
   active edge of the isomorphism work.
 
@@ -176,7 +176,7 @@ and load-bearing:
 
 <<~ ahu #open-drift >>
 
-## Open Drift to Reconcile (named, so it stops resurfacing)
+!! Open Drift to Reconcile (named, so it stops resurfacing)
 
 The model converges; these seams stay open and SHOULD reconcile (not re-debate):
 
@@ -204,18 +204,18 @@ short of Canon only on the open-drift items, which name reconciliations not re-d
 
 <<~ ahu #hydration >>
 
-## Hydration (how this cures the re-derivation) — PER AUDIENCE
+!! Hydration (how this cures the re-derivation) — PER AUDIENCE
 
 `noosphere-boot` stays a SELF-CONTAINED, no-dependency seed for its primary audience —
 CLOUD instances (claude.ai project context) + the Codex `model_instructions_file` — which
 hold no local meme graph at boot. It MUST NOT depend on a pranala to THIS meme (a cloud
 node cannot fetch a `lar:` URI). So hydration routes by audience:
 
-- **Local fs agent** (Claude Code): reads THIS directly from `bags/` — the boot router
+* **Local fs agent** (Claude Code): reads THIS directly from `bags/` — the boot router
   (`@lares/AGENTS.md` → mu → lararium) carries the meme-graph edge to it.
-- **MCP-equipped instance** (Codex / cloud with the `lararium` MCP): pulls THIS via
+* **MCP-equipped instance** (Codex / cloud with the `lararium` MCP): pulls THIS via
   `read_lar_resource` on its `lar:` URI on demand — the bag space the MCP serves.
-- **Bare cloud** (no MCP, no fs): the operator pastes THIS alongside `noosphere-boot` as a
+* **Bare cloud** (no MCP, no fs): the operator pastes THIS alongside `noosphere-boot` as a
   companion curated artifact (it stands self-contained — the keel inline, depth via the
   pranala'd children a bare cloud node simply does not follow).
 

@@ -17,9 +17,9 @@ uri-path  = "ha.ka.ba/lararium/docs/peer-discovery"
 
 <<~ &#x0002; >>
 
-# Peer Discovery Doctrine
+! Peer Discovery Doctrine
 
-## The Core Constraint
+!! The Core Constraint
 
 Automerge-repo 2.x has **no native peer advertisement or document gossip protocol**.
 All doc URLs are random UUIDs — not content-addressed, not deterministic.
@@ -29,7 +29,7 @@ Once two peers share a relay and one holds a doc URL, the sync protocol's
 Bloom-filter set reconciliation propagates that doc automatically. The hard
 problem is the very first URL exchange — **cold bootstrap**.
 
-## Six-Tier Discovery Ladder
+!! Six-Tier Discovery Ladder
 
 Tiers run lowest-ceremony to highest-trust. Use the lowest tier that covers the
 deployment scenario. Higher tiers compose on top of lower ones.
@@ -43,7 +43,7 @@ Tier 4 — mDNS LAN announcement          (Node.js + same network, zero infra)
 Tier 5 — Social graph record            (Nostr NIP-51 / AT Protocol PDS lexicon)
 ```
 
-## Tier 0 — Well-Known HTTP Endpoint
+!! Tier 0 — Well-Known HTTP Endpoint
 
 The node server exposes `GET /api/catalog` → `{ catalogUrl: "automerge:..." }`.
 The HTML `<meta name="lararium-catalog" content="automerge:...">` tag (already
@@ -59,10 +59,10 @@ Browser cold-start:
 ```
 
 **Implementation**: meta tag injection is done. Complement with:
-- `GET /api/catalog` HTTP endpoint on node server (for non-HTML clients)
-- `localStorage["lararium:catalog-url:<hostId>"]` cache (already implemented)
+* `GET /api/catalog` HTTP endpoint on node server (for non-HTML clients)
+* `localStorage["lararium:catalog-url:<hostId>"]` cache (already implemented)
 
-## Tier 1 — URL Fragment Invitation Link
+!! Tier 1 — URL Fragment Invitation Link
 
 Encode the catalog (or wiki) URL in the page URL fragment:
 
@@ -84,7 +84,7 @@ the catalog URL, consumed once, deleted after use. Prevents replay.
 3. Both sides run SPAKE2 PAKE; encrypted channel carries the catalog URL.
 No infrastructure beyond the relay mailbox server.
 
-## Tier 2 — BroadcastChannel `peerMetadata`
+!! Tier 2 — BroadcastChannel `peerMetadata`
 
 The `BroadcastChannelNetworkAdapter` arrive/welcome handshake carries arbitrary
 `peerMetadata`. Use it to propagate the catalog URL across same-origin tabs:
@@ -106,7 +106,7 @@ new BroadcastChannelNetworkAdapter({
 random doc ID. All Lararium tabs join the same BC channel; doc-level sync is
 handled by Automerge's own sync protocol on top.
 
-## Tier 3 — did:web Service Endpoint
+!! Tier 3 — did:web Service Endpoint
 
 `did:web:elyncia.social` resolves by fetching:
 
@@ -146,7 +146,7 @@ fields: { syncUrl: "wss://...", catalogUrl: "automerge:..." }
 Peers query the PDS (found via `#atproto_pds` in the DID doc), read the record,
 connect. Discovery flows through AT Protocol social graph automatically.
 
-## Tier 4 — mDNS LAN Announcement (Node.js)
+!! Tier 4 — mDNS LAN Announcement (Node.js)
 
 The node server announces itself on the LAN via `multicast-dns`:
 
@@ -167,7 +167,7 @@ m.announce("_lararium._tcp.local", {
 Browser peers on the same LAN discover the node server without knowing its IP.
 Works for local dev and studio/home setups with no internet.
 
-## Tier 5 — Social Graph Record
+!! Tier 5 — Social Graph Record
 
 **Nostr** — NIP-51 kind:30001 list, `r` tags containing Lararium wiki URLs:
 
@@ -182,7 +182,7 @@ kind:9001 anchor events — same pattern, different CRDT.
 **AT Protocol** — custom Lexicon record in PDS (Groundmist-style). No shipped
 group primitive yet; land after AT Protocol "shared data" ships (2025 H2).
 
-## UCAN / Keyhive Bootstrap
+!! UCAN / Keyhive Bootstrap
 
 **UCAN invitation flow** (alpha placeholder, pre-Keyhive):
 
@@ -204,7 +204,7 @@ the first sync message — removes the need for TLS as the transport trust layer
 3. New peer receives the wiki URL + "add" op out-of-band (any tier above).
 4. `beelay` sync authenticates using the key chain; ciphertext-only relay.
 
-## Lararium Bootstrap Sequence (Current Implementation)
+!! Lararium Bootstrap Sequence (Current Implementation)
 
 ```
 1. <meta name="lararium-catalog"> tag injected by node server (Tier 0)
@@ -225,13 +225,13 @@ the first sync message — removes the need for TLS as the transport trust layer
    → human-shareable wiki invitations
 ```
 
-## What NOT to Build
+!! What NOT to Build
 
-- **Automerge DHT / content-addressed URLs**: not supported; random UUIDs are
+* **Automerge DHT / content-addressed URLs**: not supported; random UUIDs are
   the protocol. Do not try to derive deterministic doc IDs from content hashes.
-- **Server-as-authority**: the node server does not hold content truth, only relays.
+* **Server-as-authority**: the node server does not hold content truth, only relays.
   Discovery tiers give peers URLs; authority flows from CRDT merge, not server.
-- **mDNS in the browser**: not available (no UDP multicast in browsers). LAN
+* **mDNS in the browser**: not available (no UDP multicast in browsers). LAN
   discovery for browser peers routes through the node server's mDNS discovery.
 
 <<~ &#x0003; >>
@@ -239,6 +239,6 @@ the first sync message — removes the need for TLS as the transport trust layer
 <<~ &#x0004; -> ? >>
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~/ahu >>

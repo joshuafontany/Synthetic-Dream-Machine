@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/reaction-engine"
 
 <<~ ahu #head >>
 
-# Reaction Engine — Canonical Pipeline
+! Reaction Engine — Canonical Pipeline
 
 Five layers. One reactive engine per island. CRDT = the sea. Nalu = the wave. TW5 = the shore.
 
@@ -29,16 +29,16 @@ No overlay engine. No ReactionEngine class. The TW5 wiki IS the reactive engine;
 only the irreducible (CRDT, network, crypto, multi-wiki coordination). Everything else lives in the nalu.
 
 **Prior art:**
-- *LoRe* (2024, arxiv:2304.07133) — "Declarative Dataflow Pipeline": changeset → merge → snapshot → derived state → effects
-- *vlcn.io "March to Reactivity"* (2024) — live-query invariant: when a changeset touches a query's dependencies, re-execute incrementally
-- *Goblins/OCapN Promise Pipelining* (FOSDEM 2025) — one-way fire law: islands send without waiting for ACK
-- *Ink & Switch Local-First* (2019) — CRDT convergence = distributed promise; the sea carries the answer home
+* *LoRe* (2024, arxiv:2304.07133) — "Declarative Dataflow Pipeline": changeset → merge → snapshot → derived state → effects
+* *vlcn.io "March to Reactivity"* (2024) — live-query invariant: when a changeset touches a query's dependencies, re-execute incrementally
+* *Goblins/OCapN Promise Pipelining* (FOSDEM 2025) — one-way fire law: islands send without waiting for ACK
+* *Ink & Switch Local-First* (2019) — CRDT convergence = distributed promise; the sea carries the answer home
 
 <<~/ahu >>
 
 <<~ ahu #pipeline >>
 
-## The Five-Layer Pipeline
+!! The Five-Layer Pipeline
 
 ```
 Layer 1 — CRDT (the sea)
@@ -80,7 +80,7 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 <<~ ahu #laws >>
 
-## Pipeline Laws
+!! Pipeline Laws
 
 1. **One reactive engine per island.** The TW5 wiki ($tw.wiki) is the reactive engine for its island. No overlay dispatch layer runs beside it.
 
@@ -100,7 +100,7 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 <<~ ahu #boundary-map >>
 
-## Boundary Map
+!! Boundary Map
 
 ```
 Within-island dispatch (ReactionGraph):
@@ -128,7 +128,7 @@ Cross-vessel boundary (CRDT convergence):
 
 <<~ ahu #verse-alignment >>
 
-## UEFN Verse Alignment
+!! UEFN Verse Alignment
 
 The five-layer pipeline maps onto the Verse simulation model:
 
@@ -148,17 +148,17 @@ One wave. All observers. Same synchronous context.
 
 <<~ ahu #non-goals >>
 
-## Non-Goals (alpha)
+!! Non-Goals (alpha)
 
-- Cross-cabal routing — the vessel-to-vessel CRDT path is sufficient for alpha. Cabal-layer settlement (which vessel takes ownership of a given task when multiple vessels hold equal capability) remains unspecified. Path M wires the plumbing; cabal-layer logic fills the routing decision later.
-- Revocation propagation — capability gate lives at `AdminAuthGate`; propagation protocol deferred (see dreamnet-prior-art.md Gap 1).
-- Live query registration API — the live-query invariant describes behavior; a named API for registering queries from outside `reaction-router.ts` is a future surface.
+* Cross-cabal routing — the vessel-to-vessel CRDT path is sufficient for alpha. Cabal-layer settlement (which vessel takes ownership of a given task when multiple vessels hold equal capability) remains unspecified. Path M wires the plumbing; cabal-layer logic fills the routing decision later.
+* Revocation propagation — capability gate lives at `AdminAuthGate`; propagation protocol deferred (see dreamnet-prior-art.md Gap 1).
+* Live query registration API — the live-query invariant describes behavior; a named API for registering queries from outside `reaction-router.ts` is a future surface.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>

@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/papalohe"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$papalohe>` renders a `<meta data-lar-kind="papalohe">` element. Encodes a trigger-fn-slot binding for reactive pipeline hooks. Attributes: `from`, `to`, `trigger`, `fn`, `slot`.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/papalohe"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function PapaloheWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

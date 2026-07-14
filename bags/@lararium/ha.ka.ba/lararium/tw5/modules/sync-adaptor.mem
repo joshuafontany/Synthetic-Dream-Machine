@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 
 <<~ ahu #contract >>
 
-## Sync Adaptor — Contract
+!! Sync Adaptor — Contract
 
 `LarariumCrdtSyncAdaptor` implements two protocols simultaneously:
 
@@ -31,15 +31,15 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 : When TW5 fires `saveTiddler` or `deleteTiddler`, the adaptor resolves a `SaveStrategy` by reading the corpus-driven save-cascade meme (`lar:///ha.ka.ba/lararium/tw5/sync/save-cascade`) and routes accordingly. Carrier-aware: ahu child tiddler writes trigger parent carrier reconstruction.
 
 Echo-loop guard rule:
-- Applying a CRDT change sets `_applying = change.origin`
-- Any `saveTiddler` call while `_applying !== null` returns immediately with revision "0"
-- This prevents the TW5 wiki change event from re-writing the change back to the store
+* Applying a CRDT change sets `_applying = change.origin`
+* Any `saveTiddler` call while `_applying !== null` returns immediately with revision "0"
+* This prevents the TW5 wiki change event from re-writing the change back to the store
 
 <<~/ahu >>
 
 <<~ ahu #source >>
 
-## Source — `_applyChange` (TypeScript — compiled-in)
+!! Source — `_applyChange` (TypeScript — compiled-in)
 
 ```typescript
 private _applyChange(change: LarTiddlerChange): void {

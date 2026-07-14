@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/boot-gate"
 
 <<~ ahu #contract >>
 
-## Boot Gate
+!! Boot Gate
 
 Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. Queries all tiddlers that WEAR the tw5-module component (`[stack:has[lar:///ha.ka.ba/lararium/tw5/tw5-module]]` — the has-stack model) and applies three layers of trust before injecting them as live JS modules.
 
@@ -30,7 +30,7 @@ Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. 
 
 <<~ ahu #source >>
 
-## Source (TypeScript — compiled-in)
+!! Source (TypeScript — compiled-in)
 
 ```typescript
 private async _bootModules(): Promise<void> {
@@ -115,7 +115,7 @@ private async _bootModules(): Promise<void> {
 
 <<~ ahu #thresholds >>
 
-## Gate Constants
+!! Gate Constants
 
 | Field | Constant | Floor |
 |---|---|---|

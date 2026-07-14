@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/parser"
 
 <<~ ahu #contract >>
 
-## parseMemeCarrier
+!! parseMemeCarrier
 
 ```typescript
 parseMemeCarrier(uri: string, text: string, grammar?: GrammarRules): CarrierNode
@@ -29,11 +29,11 @@ Stages:
 3. Returns `CarrierNode` — root wrapper with `uri`, `children[]`, `metadata`
 
 Invariants:
-- Pure function — no I/O, no side effects
-- Runs inside TW5 VM (compiles into `memetic-parser` CJS module)
-- No AST trees cross the VM boundary — caller extracts edges via `edgesFromAst`, discards tree
+* Pure function — no I/O, no side effects
+* Runs inside TW5 VM (compiles into `memetic-parser` CJS module)
+* No AST trees cross the VM boundary — caller extracts edges via `edgesFromAst`, discards tree
 
-## edgesFromAst
+!! edgesFromAst
 
 ```typescript
 edgesFromAst(ast: CarrierNode, carrierUri: string): PranalaEdge[]

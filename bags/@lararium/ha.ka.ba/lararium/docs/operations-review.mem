@@ -35,7 +35,7 @@ scope-note = "Plan only — no content extracted in this memo. Extractions to fo
 
 <<~ ahu #meme-header >>
 
-# Lararium Operations — Extraction Review
+! Lararium Operations — Extraction Review
 
 Not invariant law.
 This memo plans extraction of interaction protocols and operational surfaces
@@ -50,9 +50,9 @@ undergoes inventory and classification here.
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
-### Source inventory
+!!! Source inventory
 
 Primary source: `Lares_Preferences.system-prompt.md` v4.0.1 — sections scanned:
 
@@ -77,33 +77,33 @@ Secondary source: `FFZ_Chronometer_SPEC_OUTLINE.md` — Talk Story references at
 | RAW Talk Story Model | RAW Brain Machine Symposium 1989; come-on → Talk Story → assessment |
 | Talk Story structural mapping | Part I = come-on; Parts II-III = Talk Story proper; Parts IV-V = assessment |
 
-### What the legacy stack carries well
+!!! What the legacy stack carries well
 
-- **Frame-Uncertainty Protocol** — three clean moves with example phrasings; clearly settled as a primary interaction pattern
-- **Talk Story** — named and grounded in RAW lineage (Brain Machine Symposium 1989, transcribed by Joshua Fontany); carries structural mapping to OODA-HA phases at document scale
-- **Session Init Protocol** — two-path structure (crystals / cold boot) with exact cold-boot screen format; clearly settled
-- **Collaboration Model** — Captain and Crossroads metaphors strong and load-bearing; partially extracted already to `preferences/collaboration-model.md`
-- **Tone & Formatting** — concise and legible; "warm, myth-tech, concise, practical" reads as a settled voice description
+* **Frame-Uncertainty Protocol** — three clean moves with example phrasings; clearly settled as a primary interaction pattern
+* **Talk Story** — named and grounded in RAW lineage (Brain Machine Symposium 1989, transcribed by Joshua Fontany); carries structural mapping to OODA-HA phases at document scale
+* **Session Init Protocol** — two-path structure (crystals / cold boot) with exact cold-boot screen format; clearly settled
+* **Collaboration Model** — Captain and Crossroads metaphors strong and load-bearing; partially extracted already to `preferences/collaboration-model.md`
+* **Tone & Formatting** — concise and legible; "warm, myth-tech, concise, practical" reads as a settled voice description
 
-### What requires boundary decisions before extraction
+!!! What requires boundary decisions before extraction
 
-- **CLI Interaction & Roleplay** — Terminal Identity (Reality Anchor at infrastructure level) belongs to Lares; command syntax (Worker spawn, resume, `--debug`) overlaps with platform-wrapper concerns. The DreamNet CLI flavor stays; the platform-specific command tables may belong closer to platform docs.
-- **Identity & Permissions / Transference Model** — the four-tier UCAN-inspired architecture lives here as Lares-specific; but the specific promotion mechanics and alias system may vary per platform deployment. The conceptual tier model stays; the mechanical implementation tables may belong in platform docs.
-- **Workspace Trust Gate** — primarily a security/operations concern; maps onto degraded-node vocabulary already extracted. May integrate into degraded-states.md rather than a separate room.
-- **Default Behavior** — very short; may integrate into session-init or a general interaction-defaults room rather than a standalone doc.
-- **Capability Honesty** — very short; may integrate into degraded-states (as the positive counterpart to Confabulation-as-Canon) or into a general principles room.
+* **CLI Interaction & Roleplay** — Terminal Identity (Reality Anchor at infrastructure level) belongs to Lares; command syntax (Worker spawn, resume, `--debug`) overlaps with platform-wrapper concerns. The DreamNet CLI flavor stays; the platform-specific command tables may belong closer to platform docs.
+* **Identity & Permissions / Transference Model** — the four-tier UCAN-inspired architecture lives here as Lares-specific; but the specific promotion mechanics and alias system may vary per platform deployment. The conceptual tier model stays; the mechanical implementation tables may belong in platform docs.
+* **Workspace Trust Gate** — primarily a security/operations concern; maps onto degraded-node vocabulary already extracted. May integrate into degraded-states.md rather than a separate room.
+* **Default Behavior** — very short; may integrate into session-init or a general interaction-defaults room rather than a standalone doc.
+* **Capability Honesty** — very short; may integrate into degraded-states (as the positive counterpart to Confabulation-as-Canon) or into a general principles room.
 
-### Protocols not in Preferences that need sourcing
+!!! Protocols not in Preferences that need sourcing
 
-- **Talk Story** appears in the FFZ chronometer spec and in the `Prompt_Architecture_Overview.md` reference to the Coffee Oracle test output (`Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — restored to `packages/lares-core/memes/docs/lararium/prompts/` from git history on 2026-04-23). The Talk Story protocol may carry more definition there. That file constitutes additional source material for the talk-story extraction.
+* **Talk Story** appears in the FFZ chronometer spec and in the `Prompt_Architecture_Overview.md` reference to the Coffee Oracle test output (`Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — restored to `packages/lares-core/memes/docs/lararium/prompts/` from git history on 2026-04-23). The Talk Story protocol may carry more definition there. That file constitutes additional source material for the talk-story extraction.
 
 <<~/ahu >>
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
-### Classification pass
+!!! Classification pass
 
 Classifying each candidate section into one of four destination types:
 
@@ -128,7 +128,7 @@ Classifying each candidate section into one of four destination types:
 | Default Behavior | **integrate** | fold into session-init or frame-uncertainty protocol |
 | Capability Honesty | **integrate** | fold into degraded-states.md as the positive counterpart to Confabulation-as-Canon |
 
-### Target shelf structure
+!!! Target shelf structure
 
 A `protocols/` subdirectory under `docs/lararium/` carries the protocol rooms:
 
@@ -148,7 +148,7 @@ docs/lararium/
     transference-model.md        — four-tier UCAN model, conceptual layer only
 ```
 
-### Main tensions
+!!! Main tensions
 
 1. **Talk Story sourcing** — the protocol appears in the FFZ chronometer spec as a described thing but may carry more authoritative definition in `Lares_Test_Prompt_and_Output_Coffee_Oracle.md`. That file needs a read pass before talk-story.md extraction begins.
 
@@ -162,9 +162,9 @@ docs/lararium/
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
-### Extraction goals
+!!! Extraction goals
 
 This pass produces:
 
@@ -178,7 +178,7 @@ This pass produces:
 8. `authority/transference-model.md` *(conceptual tier model)*
 9. Integrations into `degraded-states.md` *(Workspace Trust Gate, Capability Honesty, Default Behavior notes)*
 
-### Section status vocabulary
+!!! Section status vocabulary
 
 | Label | Reading |
 |---|---|
@@ -188,7 +188,7 @@ This pass produces:
 | `platform-boundary` | belongs to platform docs; leave in archive |
 | `integrate` | short; fold into a nearby extraction |
 
-### Status table
+!!! Status table
 
 | Section | Status | Target |
 |---|---|---|
@@ -206,7 +206,7 @@ This pass produces:
 | Capability Honesty | `integrate` | fold into `degraded-states.md` |
 | Workspace Trust Gate | `integrate` | fold into `degraded-states.md` |
 
-### Extraction order
+!!! Extraction order
 
 1. Read `Lares_Test_Prompt_and_Output_Coffee_Oracle.md` → gather Talk Story definition
 2. Extract `protocols/frame-uncertainty.md`
@@ -224,26 +224,26 @@ This pass produces:
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
-### Concrete TODO List
+!!! Concrete TODO List
 
-- [x] read `packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — gather Talk Story definition and any protocol detail not in FFZ spec
-- [ ] create `packages/lares-core/memes/docs/lararium/protocols/` directory
-- [ ] write `protocols/frame-uncertainty.md` — three moves verbatim from source; E-prime prose framing
-- [ ] write `protocols/session-init.md` — two-path structure; cold-boot screen format; Default Behavior note
-- [ ] write `protocols/proactive-surfacing.md` — KAIROS model; proactive budget; promote from preferences/proactive-surfacing.md
-- [ ] write `protocols/cli-dreamnet.md` — Terminal Identity Reality Anchor; DreamNet flavor; exclude platform command tables
-- [ ] write `protocols/talk-story.md` — RAW lineage (Brain Machine Symposium 1989); OODA-HA structural mapping; come-on pattern
-- [ ] extend `preferences/collaboration-model.md` — add Captain and Crossroads metaphors
-- [ ] write `preferences/voice-register.md` — "warm, myth-tech, concise, practical"; verbosity scaling law
-- [ ] write `authority/transference-model.md` — four-tier UCAN-inspired model (conceptual layer only)
-- [ ] fold Workspace Trust Gate into `degraded-states.md`
-- [ ] fold Capability Honesty into `degraded-states.md`
-- [ ] write `protocols/protocols.md` — parent router for all protocol rooms
-- [ ] mark extraction ledgers in Preferences source file for each extracted section
+* [x] read `packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — gather Talk Story definition and any protocol detail not in FFZ spec
+* [ ] create `packages/lares-core/memes/docs/lararium/protocols/` directory
+* [ ] write `protocols/frame-uncertainty.md` — three moves verbatim from source; E-prime prose framing
+* [ ] write `protocols/session-init.md` — two-path structure; cold-boot screen format; Default Behavior note
+* [ ] write `protocols/proactive-surfacing.md` — KAIROS model; proactive budget; promote from preferences/proactive-surfacing.md
+* [ ] write `protocols/cli-dreamnet.md` — Terminal Identity Reality Anchor; DreamNet flavor; exclude platform command tables
+* [ ] write `protocols/talk-story.md` — RAW lineage (Brain Machine Symposium 1989); OODA-HA structural mapping; come-on pattern
+* [ ] extend `preferences/collaboration-model.md` — add Captain and Crossroads metaphors
+* [ ] write `preferences/voice-register.md` — "warm, myth-tech, concise, practical"; verbosity scaling law
+* [ ] write `authority/transference-model.md` — four-tier UCAN-inspired model (conceptual layer only)
+* [ ] fold Workspace Trust Gate into `degraded-states.md`
+* [ ] fold Capability Honesty into `degraded-states.md`
+* [ ] write `protocols/protocols.md` — parent router for all protocol rooms
+* [ ] mark extraction ledgers in Preferences source file for each extracted section
 
-### E-prime notes for extraction
+!!! E-prime notes for extraction
 
 Frame-Uncertainty Protocol quoted procedure text runs in first-person ("Reading this as [X]..."). These constitute procedure forms — template language the operator and node use in live exchange. They SHOULD survive verbatim as quoted procedure text. The surrounding explanatory prose MUST follow E-prime discipline.
 
@@ -253,40 +253,40 @@ Talk Story sourcing from RAW's Brain Machine Symposium 1989 constitutes a verbat
 
 <<~ ahu #assess >>
 
-## ↺ Assess
+!! ↺ Assess
 
-### Exit criteria for this review memo
+!!! Exit criteria for this review memo
 
 This memo closes when:
-- all candidate sections carry a status label
-- the extraction order resolves without circular dependencies
-- the platform-boundary calls are explicit and justified
-- the Talk Story additional source is identified (Coffee Oracle file)
+* all candidate sections carry a status label
+* the extraction order resolves without circular dependencies
+* the platform-boundary calls are explicit and justified
+* the Talk Story additional source is identified (Coffee Oracle file)
 
 This memo achieves those criteria. ✓
 
-### Exit criteria for the full extraction pass
+!!! Exit criteria for the full extraction pass
 
 The extraction pass closes when:
-- all eight new docs rooms exist with primary content
-- two existing rooms extend
-- three integrations land in degraded-states.md
-- `protocols/protocols.md` parent router lists all rooms as settled
-- extraction ledgers appear in the Preferences source for all extracted sections
+* all eight new docs rooms exist with primary content
+* two existing rooms extend
+* three integrations land in degraded-states.md
+* `protocols/protocols.md` parent router lists all rooms as settled
+* extraction ledgers appear in the Preferences source for all extracted sections
 
-### Open questions after extraction
+!!! Open questions after extraction
 
 After the extraction pass closes, these questions remain for a future consolidation pass:
 
-- Does `proactive-surfacing.md` move from `preferences/` to `protocols/` entirely, or point from both?
-- Does the `authority/` shelf need a parent `authority.md` router, or stay flat?
-- Does the conceptual Transference Model tier need an API invariant eventually, or stay docs-only?
+* Does `proactive-surfacing.md` move from `preferences/` to `protocols/` entirely, or point from both?
+* Does the `authority/` shelf need a parent `authority.md` router, or stay flat?
+* Does the conceptual Transference Model tier need an API invariant eventually, or stay docs-only?
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/degraded-states >>

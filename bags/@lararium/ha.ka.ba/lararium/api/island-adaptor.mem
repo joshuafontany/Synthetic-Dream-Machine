@@ -19,9 +19,9 @@ uri-path  = "ha.ka.ba/lararium/api/island-adaptor"
 
 <<~ &#x0002; >>
 
-# IslandAdaptor — Invariant
+! IslandAdaptor — Invariant
 
-## Identity
+!! Identity
 
 `IslandAdaptor` provides the narrow TS membrane between `CompositeStore` and the wiki.
 It implements `MemeProjection` (inbound) and exposes `saveTiddler` / `deleteTiddler` (outbound).
@@ -33,7 +33,7 @@ do from inside itself: subscribing to the CompositeStore projection bus, filteri
 echoes, resolving cross-bag tombstones across recipe layers, and routing outbound TW5
 edits to `store.put` / `store.tombstone`.
 
-## Responsibility Split
+!! Responsibility Split
 
 | Concern | Owner |
 |---|---|
@@ -46,7 +46,7 @@ edits to `store.put` / `store.tombstone`.
 | Outbound `deleteTiddler` → `store.tombstone` | IslandAdaptor |
 | Echo guard for outbound during drain | `$tw.lares.isApplyingNalu()` |
 
-## Wiring — One Projection, Not Two
+!! Wiring — One Projection, Not Two
 
 ```typescript
 const adaptor = new IslandAdaptor(tw5, store, instanceId, targetBag);
@@ -55,7 +55,7 @@ store.addProjection(adaptor);
 
 No accumulator. No `flushAll`. The wiki's nalu engine owns the queue and the drain.
 
-## Invariants
+!! Invariants
 
 **I-1 Echo filter at the membrane.**
 `onUriChanged` returns immediately when `change.origin.kind === "tw-local"` and
@@ -93,7 +93,7 @@ For bulk patches (URIs ≥ `MemeProvider.CHANGESET_THRESHOLD`), the adaptor reso
 each URI via `store.get()` and emits one `enqueueNalu` per URI. The nalu engine
 still drains them in one `wiki.transact()` at the next frame.
 
-## Initial replay
+!! Initial replay
 
 The recipe (`buildIslandRecipe`) drives `AutomergeDocStore.emitInitialReplay()` per bag
 after `addProjection(adaptor)` registers. Each existing tiddler flows through
@@ -103,7 +103,7 @@ its seed state synchronously before `behavior.onEa` runs.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/nalu-engine >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>

@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/docs/node-host"
 
 <<~ ahu #head >>
 
-# Node Host
+! Node Host
 
 The Lararium node host walks `lares/` at startup, indexes all carrier files
 into a `MemeGraph`, and bootstraps the corpus for MCP and Automerge sync.
@@ -33,7 +33,7 @@ they gate corpus validation and filter evaluation.
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 `LARES_ROOT` resolves relative to the compiled `dist/` directory:
 `dist/` → `../../../lares/` = monorepo root `lares/`.
@@ -46,7 +46,7 @@ they define the structural classification vocabulary the index depends on.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 # Phase 1 interface URIs — loaded before index construction
@@ -69,7 +69,7 @@ lares-root-from-dist = "../../../lares"
 
 <<~ ahu #http-transport >>
 
-## HTTP Transport
+!! HTTP Transport
 
 ```toml
 # Source: packages/lararium-mcp/src/http.ts
@@ -94,7 +94,7 @@ write-mode-value-required = "enabled"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 `packages/lararium-node/src/node-host.ts` — not packageable as CJS (Node-only path resolution, `@lares/core` import).
 

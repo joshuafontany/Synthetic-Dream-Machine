@@ -21,9 +21,9 @@ uri-path      = "ha.ka.ba/lararium/docs/lararium-doc-stack"
 
 > **Supersession note (2026-06-10).** This meme records the research-era six-layer model. The current composition law lives at `lar:///ha.ka.ba/lararium/mesh/recipe` (stored composition shape), `lar:///ha.ka.ba/lararium/mesh/island-protocol` (IslandGrants — typed ocap manifest; library layers resolve island-side from @catalog, boot = first reconcile), and `lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology` (the layer stack and its laws). Read what follows as lineage, not law.
 
-# LarariumDoc Stack
+! LarariumDoc Stack
 
-## The Six-Layer Model
+!! The Six-Layer Model
 
 Every peer boots the same doc stack in this order. Each layer forms a separate
 Automerge DocHandle. Layers compose into a `CompositeStore`; TW5 recipe law
@@ -65,7 +65,7 @@ Automerge DocHandle. Layers compose into a `CompositeStore`; TW5 recipe law
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Boot Sequence
+!! Boot Sequence
 
 Altar lights turn on one by one. Each step runs async; TW5 renders
 whatever is available at each phase:
@@ -97,7 +97,7 @@ not at step 4 — reactions on system + corpus tiddlers fire first.
 The boot scan on an empty wiki doc passes as valid (optimistic-empty);
 incremental `onUriChanged` updates the graph as wiki tiddlers arrive.
 
-## Creator-Namespaced Wikis
+!! Creator-Namespaced Wikis
 
 Wiki doc URLs belong to their creator's DID:
 
@@ -110,7 +110,7 @@ The wiki URL serves as the capability root (Keyhive: doc URL = public key).
 Other peers receive a delegation token granting read/write; the URL
 does not change when new members join.
 
-## Bag Promotion
+!! Bag Promotion
 
 Content moves up the priority stack via promotion:
 
@@ -125,7 +125,7 @@ corpus → island   "Invariant" action: island author only;
 Promotion uses `{ movedTo: newDocUrl }` tombstones on the source to
 survive concurrent promotion races (CRDT-safe move pattern).
 
-## Tiddler Export Round-Trip
+!! Tiddler Export Round-Trip
 
 TW5's built-in export pipeline (json / tid / html) serves as the round-trip
 anchor. For the `.md` carrier format:
@@ -153,7 +153,7 @@ infrastructure rather than rolling a separate exporter.
 <<~ &#x0004; -> ? >>
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/composite-store >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/lar-uri-namespace >>

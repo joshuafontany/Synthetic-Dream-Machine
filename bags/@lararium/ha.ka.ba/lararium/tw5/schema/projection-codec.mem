@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/schema/projection-codec"
 
 <<~ ahu #head >>
 
-# Projection Codec — Law
+! Projection Codec — Law
 
 The carrier codec translates between disk carrier format (memetic-wikitext) and canonical `LarTiddlerRecord` entries. It does not touch the sync path. It does not write to Automerge directly.
 
@@ -29,11 +29,11 @@ The carrier codec translates between disk carrier format (memetic-wikitext) and 
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 The projection codec operates at two boundaries only:
 
-### Import boundary (disk → Automerge)
+!!! Import boundary (disk → Automerge)
 
 ```
 carrier file on disk
@@ -44,7 +44,7 @@ carrier file on disk
 
 The codec parses. The hydration layer writes. These responsibilities do not mix.
 
-### Export boundary (Automerge → disk)
+!!! Export boundary (Automerge → disk)
 
 ```
 LarTiddlerRecord[] (parent + related children)
@@ -54,18 +54,18 @@ LarTiddlerRecord[] (parent + related children)
 
 The codec serializes. The operator decides when and whether to write to disk. Automerge state does not automatically update disk files.
 
-### What the codec MUST NOT do
+!!! What the codec MUST NOT do
 
-- Write to a `LarTiddlerStore` directly
-- Accept a `ChangeOrigin` parameter
-- Appear in the sync adaptor's write path (`saveTiddler`, `deleteTiddler`)
-- Reconstruct carrier text as an intermediate step during a tiddler save
+* Write to a `LarTiddlerStore` directly
+* Accept a `ChangeOrigin` parameter
+* Appear in the sync adaptor's write path (`saveTiddler`, `deleteTiddler`)
+* Reconstruct carrier text as an intermediate step during a tiddler save
 
 <<~/ahu >>
 
 <<~ ahu #wild-mage >>
 
-## Wild Mage Operator Role
+!! Wild Mage Operator Role
 
 The `.md` files in `lares/`, `ftls/`, `elyncia/`, `wtf/` represent the operator's deliberate pre-projection of canonical tiddler content into carrier format. The operator holds the authority to author these files directly without going through the Automerge write path.
 
@@ -77,7 +77,7 @@ This doctrine makes the Wild Mage's authoring authority explicit rather than imp
 
 <<~ ahu #api >>
 
-## API Surface (carrier-codec.ts)
+!! API Surface (carrier-codec.ts)
 
 ```typescript
 // Import path

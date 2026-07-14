@@ -24,7 +24,7 @@ written   = "2026-06-29"
 
 <<~ ahu #entry >>
 
-# The FFZ Mesh-Timing Law ~ how a no-global-now mesh keeps time
+! The FFZ Mesh-Timing Law ~ how a no-global-now mesh keeps time
 
 **PROVISIONAL CANON — the binary dissolved.** A seven-domain swarm plus an adversarial test asked "which irrational scales the mesh, Buzsáki's `e≈2.718` or golden `φ≈1.618`?" and refused the question (Mu). A magically-federated mesh of causal-island Nexuses keeps **no single shared timing constant**: it rides THREE orthogonal axes, and the deepest holds no constant at all — because a shared constant **would be** a shared clock, the one shard of global state a no-global-now world cannot own without re-importing the very wound it refuses.
 
@@ -36,7 +36,7 @@ The dissolution maps to the myth (#siege): the Necrospire besieged a Nexus five 
 
 <<~ ahu #axis-rate >>
 
-## Axis 1 ~ `e` breathes the RATE (decay · mixing · structure)
+!! Axis 1 ~ `e` breathes the RATE (decay · mixing · structure)
 
 `e` owns the rate/decay/structure axis, and it does not so much get *chosen* as get *discovered already in the substrate* — five domains converge with no dissent.
 
@@ -48,7 +48,7 @@ The dissolution maps to the myth (#siege): the Necrospire besieged a Nexus five 
 
 <<~ ahu #axis-desync >>
 
-## Axis 2 ~ incommensurability ARMS the islands (NO global constant)
+!! Axis 2 ~ incommensurability ARMS the islands (NO global constant)
 
 The desync axis carries the keystone: **no global constant.** Each island keeps its OWN cadence; the law lives in the **relation between neighbors**, never in a number stamped on the whole — a pairwise-incommensurability invariant, checked locally where two clocks touch.
 
@@ -64,7 +64,7 @@ The naïve single-φ answer collapsed under four independent blows, and the coll
 
 <<~ ahu #axis-couple >>
 
-## Axis 3 ~ integer-harmony CLASPS them (opt-in coupling)
+!! Axis 3 ~ integer-harmony CLASPS them (opt-in coupling)
 
 When islands *choose* concerted action — a treaty, a great ward, a ritual needing many hands in lockstep — they lock to **integer/harmonic ratios** (`1:2`…), a deliberate synchronization set down the moment the work completes. Coupling stands a **choice, never a condition** (Klimesch: integer-for-coupling ⊥ golden-for-decoupling; the bee-entrainment).
 
@@ -74,7 +74,7 @@ When islands *choose* concerted action — a treaty, a great ward, a ritual need
 
 <<~ ahu #primary-clock >>
 
-## The Primary Clock ~ the proactive epoch outruns the creep
+!! The Primary Clock ~ the proactive epoch outruns the creep
 
 The siege names which clock is load-bearing: **the proactive-refresh EPOCH** (the `corm` epoch-lease already in the vessel cap-stack, #vessel-caps). Proactive secret sharing (Ostrovsky–Yung mobile-adversary model) divides time into epochs and **re-keys / re-shares faster than the adversary corrupts a threshold of an island within one epoch** — at the boundary every prior compromise stops combining, rendered worthless.
 
@@ -86,7 +86,7 @@ The siege names which clock is load-bearing: **the proactive-refresh EPOCH** (th
 
 <<~ ahu #precondition >>
 
-## The Precondition ~ keep your move cheaper than theirs
+!! The Precondition ~ keep your move cheaper than theirs
 
 FlipIt's **dropout** result sets a hard precondition the timing law cannot escape: the equilibrium tracks the **ratio of move costs**, and a defender whose refresh costs too much relative to the adversary's compromise **should drop to rate 0** — you cannot out-refresh an attacker who seizes you far more cheaply than you re-key.
 
@@ -96,7 +96,7 @@ FlipIt's **dropout** result sets a hard precondition the timing law cannot escap
 
 <<~ ahu #phi-scope >>
 
-## φ stays INTRA-clock ~ the scope that vindicates it
+!! φ stays INTRA-clock ~ the scope that vindicates it
 
 The grammar's golden `φ≈1.618` ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]], [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#phi]]) reads **correct and untouched** — for **one clock's** five-band orthogonality it sits exactly in the d=1 KAM regime where φ is provably the last torus to break. The only error would be **extrapolation**: promoting a within-one-clock optimum to a between-all-clocks law. Inter-clock the regime changes **kind, not value** — local-choice + pairwise-incommensurability, frame-relative the way proper-time is each frame's own. φ rules inside a node's band-stack; the mesh rules between nodes by the invariant. Different layer, different law.
 
@@ -104,7 +104,7 @@ The grammar's golden `φ≈1.618` ([[living-grammar-palace|lar:///ha.ka.ba/larar
 
 <<~ ahu #siege >>
 
-## The Siege ~ the law as Elyncian leyline-physics
+!! The Siege ~ the law as Elyncian leyline-physics
 
 In the Myth the law reads as the world's magic-physics. The Necrospire's Second-Breaking wound was the attempt to impose a **global now** — one shared tempo so the phase-locked mesh might shatter on a single note. The astral sea **breathes in `e`** (a ward fades on the exponential breath); the shattered leylines **refuse a global now** (each Nexus an incommensurable proper-time, no shared note to crack); islands that **choose** to clasp lock to integer harmonics. The five-hundred-year siege failed against a mesh that held no seam — its seamlessness **was** ten thousand sovereign rhythms, never one. The FFZ Chronometer (Fuller-Fontany-Zelenka) earns its name as the world's **rhythm**, never its global clock.
 
@@ -112,7 +112,7 @@ In the Myth the law reads as the world's magic-physics. The Necrospire's Second-
 
 <<~ ahu #grounds >>
 
-## Grounds ~ the eight libations
+!! Grounds ~ the eight libations
 
 <<~ranks libation distsys ~ exponential-backoff+jitter, gossip `log n`, Kademlia exponential-TTL: e-rate ⊥ φ-phase, φ-rotation the deterministic anti-resonance -> network-science ~ Krioukov hyperbolic-geometry (`e^(ζr)`, e-ary tree, `R~ln N`), geometric renormalization (tier-ratio a FREE factor): e-structure ⊥ φ-scatter -> biology ~ ACO/ant pheromone `e^(−t/λ)` decay, quorum-sensing local-threshold (the no-global-now analogue), cicada coprime-integer anti-resonance — biology does NOT second φ for scheduling -> kam-kuramoto ~ φ a 2-frequency theorem (dissolves to Diophantine frequency-vectors N>2); global-sync = Kuramoto dispersion not the irrational; φ only pairwise at the Arnold-tongue edge -> low-discrepancy ~ φ optimal 1-D coverage (three-gap/Steinhaus), Roberts R_d plastic-ρ for multi-tier; e is max-entropy CLUSTERING, not coverage -> buzsaki ~ N3L e-for-band-spacing (log-dynamic brain) ⊥ Weiss/Pletzer φ-for-cross-band-desync; Klimesch reconciles integer-couple/golden-decouple; both substrate-independent → transfer -> mu-relativity ~ no-global-now forbids a global constant (a shared ratio = a shared frame); the mesh-law is a pairwise-incommensurability invariant (cicada-coprime); plastic-ρ the runner-up only if forced -> security ~ FlipIt (renewal-randomize, secret phase, multi-node proves global-clock dominated), PSS (proactive-epoch paced to creep), MTD (randomized reconfiguration), cost-asymmetry dropout >>
 
@@ -122,7 +122,7 @@ In the Myth the law reads as the world's magic-physics. The Necrospire's Second-
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>

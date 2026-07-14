@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/recipe-watch"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `startRecipeWatch(ctx)` subscribes the island to its registry plane
 (access≠load — watched, never rendered as a layer), reads the island's own
@@ -32,12 +32,12 @@ composite. The recipe + bag-oracle reach run **two-source** (operator ruling,
 `@catalog`. *(Code reads single-source `@catalog` today; the plane split is
 ruled, enactment tracked at the live handoff torch.)*
 
-- **bag added** → resolve via the owning plane's oracle, insert the layer above
+* **bag added** → resolve via the owning plane's oracle, insert the layer above
   `@lares` (library position, below the wiki bag), replay its content into
   the running wiki.
-- **bag removed** → `CompositeStore.removeLayerLive`: departed titles
+* **bag removed** → `CompositeStore.removeLayerLive`: departed titles
   tombstone to projections, records the bag shadowed resurface.
-- **oracle URL moved** (bag epoch / rotate-recipe) → swap the layer's store
+* **oracle URL moved** (bag epoch / rotate-recipe) → swap the layer's store
   in place at the same cascade position, replay from the new doc.
 
 Reconciles serialize (one at a time; a change mid-run queues one rerun). The
@@ -47,7 +47,7 @@ wiki behavior starts it at `onEa`, stops it at demote.
 
 <<~ ahu #invariants >>
 
-## Invariants
+!! Invariants
 
 **RW-1 — The island reconciles itself.** The admin writes the catalog and
 posts the alert verb; it never mounts or unmounts a live composite. The watch
@@ -79,7 +79,7 @@ CRDT slot the oracles point at.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/recipe >>

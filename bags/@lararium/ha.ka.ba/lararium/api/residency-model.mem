@@ -28,7 +28,7 @@ uri-path      = "ha.ka.ba/lararium/api/residency-model"
 
 <<~ ahu #core-claim >>
 
-# Residency Model — Coordinate Space + Query Plan
+! Residency Model — Coordinate Space + Query Plan
 
 A recipe/bag + CRDT system MUST hold as a **coordinate space**, not a **timeline**. A bag forms one coordinate axis. The recipe forms a query plan over `(tiddler-title × bag)`. CRDT merge stays associative-commutative *within* one coordinate; cross-coordinate composition uses set-union with priority resolution, never a rebase.
 
@@ -40,7 +40,7 @@ A single tiddler-title MAY have residency in N bags simultaneously, each bag car
 
 <<~ ahu #why >>
 
-## Why the architecture moved here
+!! Why the architecture moved here
 
 A prior design pivot proposed retiring the single-canonical `promote` ceremony in favor of a git-style **stage / commit / push** triple. Research across eight spirits (four per round, two rounds) returned a deeper finding:
 
@@ -57,7 +57,7 @@ Two adjacent traditions hold the right primitives. Neither surfaced through the 
 
 <<~ ahu #data-model >>
 
-## Data model — FRBR identity levels
+!! Data model — FRBR identity levels
 
 | WEMI level | SDM mapping |
 |---|---|
@@ -74,7 +74,7 @@ This levels-distinction carries load-bearing weight. Conflating Work with Manife
 
 <<~ ahu #action-verb-surface >>
 
-## Surface I — ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation)
+!! Surface I — ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation)
 
 Operator gestures over residency travel through a six-verb action surface, ALL CAPS by convention, addressable as `lar://` URIs:
 
@@ -122,7 +122,7 @@ Per-verb args:
 
 Source: `packages/lararium-mesh/src/residency-actions.ts`. Tests: `packages/lararium-mesh/tests/residency-actions.test.ts` (50 cases, including the change-id preservation gate that defends Anti-pattern #1).
 
-### Bag-grain surface — APPROVED (operator, 2026-06-10; implementation pending)
+!!! Bag-grain surface — APPROVED (operator, 2026-06-10; implementation pending)
 
 The ACTION surface carries **two grains**, both SPARQL Update derived. SPARQL's graph-management verbs operate graph-grain natively; the title-grain forms above specialize them. The approved bag-grain pair:
 
@@ -141,7 +141,7 @@ This pair carries the wiki-level crossing (`wiki-layer-ontology#crossing-law`): 
 
 <<~ ahu #effect-record-surface >>
 
-## Surface II — Effect records (tiddler annotations, archival language)
+!! Surface II — Effect records (tiddler annotations, archival language)
 
 Every ACTION writes an **indelible effect record** tiddler in each affected bag, tagged with the matching archival verb:
 
@@ -164,7 +164,7 @@ This dual-surface design — ACTION verbs for the *gesture*, archival verbs for 
 
 <<~ ahu #five-pono-properties >>
 
-## The five pono properties
+!! The five pono properties
 
 Any implementation of this model MUST hold all five:
 
@@ -178,21 +178,21 @@ Any implementation of this model MUST hold all five:
 
 <<~ ahu #non-residency-verbs >>
 
-## The non-residency tier — verbs that ride the rail, not the coordinate space
+!! The non-residency tier — verbs that ride the rail, not the coordinate space
 
 The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/DROP) are SPARQL-Update set-algebra over `(title × bag)`; **INGEST** was the first to break that frame — a disk→records membrane gesture (three-way diff, replace-by-group, NFC), with no SPARQL analog, riding the same VERB → SUMMONS → OUTCOME rail with the same `withEffectRecord` audit + cap-gate. The tier is open: a verb belongs here when it carries an operator gesture through the rail + audit + authority machinery, even if it moves no tiddler between bags.
 
-### RECONCILE — fold a newer engine forward (operator ruling, 2026-06-15)
+!!! RECONCILE — fold a newer engine forward (operator ruling, 2026-06-15)
 
 `lares act RECONCILE` adopts a newer engine genesis into the living **`@oracle`** runtime island (disk-projection #oracle-split) — the deliberate rite that replaces the old silent boot-time fold (engine-watch EW-6).
 
-- **Authority:** cap-verify an **operator(admin)** grant on `@oracle` (engine-watch EW-5; the mint-gate pattern — node genesis office). Peers federate `@oracle` read-only; they never RECONCILE.
-- **Mechanism (additive, never arbitrating):** fold the genesis doc forward into `@oracle` (Automerge merge, additive — operator content survives). Because automerge LWW resolves by **op-id, not wall-clock**, the verb MUST **enforce the fold direction** (the newer engine intended-wins) and **SURFACE every operator field it would shadow** (#conflict-resolution: detect + record, never silently pick) — it never auto-resolves a contended field.
-- **v1 safety envelope:** dry-run **preview** (clone → merge → diff → render the Patch[]; the `lares watch` preview precedent) → **conflict-surface** (the shadowed fields) → **confirm-gate** (`--force` for agents, the `lares act` y/N precedent) → **idempotent** (an applied-engine-version marker; reconcile with content-addressed `taskContentId` so the two dedup paths agree) → **indelible effect record** (`lar:///@oracle/ledger/residency/<id>` — engine-version-id · genesis-checksum · timestamp · outcome; the ledger doubles as the idempotency gate, Flyway-style).
-- **No down-script.** An additive CRDT merge has no inverse; rollback rides the **retained pre-fold generation** (Nix-style; the op-log holds it until an epoch — never a reverse migration).
-- **Boot warns, never folds** (engine-watch EW-1/EW-6).
+* **Authority:** cap-verify an **operator(admin)** grant on `@oracle` (engine-watch EW-5; the mint-gate pattern — node genesis office). Peers federate `@oracle` read-only; they never RECONCILE.
+* **Mechanism (additive, never arbitrating):** fold the genesis doc forward into `@oracle` (Automerge merge, additive — operator content survives). Because automerge LWW resolves by **op-id, not wall-clock**, the verb MUST **enforce the fold direction** (the newer engine intended-wins) and **SURFACE every operator field it would shadow** (#conflict-resolution: detect + record, never silently pick) — it never auto-resolves a contended field.
+* **v1 safety envelope:** dry-run **preview** (clone → merge → diff → render the Patch[]; the `lares watch` preview precedent) → **conflict-surface** (the shadowed fields) → **confirm-gate** (`--force` for agents, the `lares act` y/N precedent) → **idempotent** (an applied-engine-version marker; reconcile with content-addressed `taskContentId` so the two dedup paths agree) → **indelible effect record** (`lar:///@oracle/ledger/residency/<id>` — engine-version-id · genesis-checksum · timestamp · outcome; the ledger doubles as the idempotency gate, Flyway-style).
+* **No down-script.** An additive CRDT merge has no inverse; rollback rides the **retained pre-fold generation** (Nix-style; the op-log holds it until an epoch — never a reverse migration).
+* **Boot warns, never folds** (engine-watch EW-1/EW-6).
 
-### EPOCH — cut history behind (DEFERRED, named here for the pair)
+!!! EPOCH — cut history behind (DEFERRED, named here for the pair)
 
 RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-handlers). They stay **two verbs, sequenced `reconcile → epoch`, never auto-coupled** — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a *content* epoch (peers offline across a content cut cannot merge).
 
@@ -200,7 +200,7 @@ RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-han
 
 <<~ ahu #yang-yin-chao >>
 
-## Yang / Yin / Chao symmetry preserved
+!! Yang / Yin / Chao symmetry preserved
 
 The recipe carries a Tai Chi symmetry around the wiki's canon (`bags/@{slug}`) (see also [[personal-slot|lar:///ha.ka.ba/lararium/api/personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
 
@@ -224,7 +224,7 @@ A tiddler MAY hold residency in multiple Yin coordinates simultaneously (persona
 
 <<~ ahu #anti-patterns >>
 
-## Six anti-patterns — defenses MUST exist
+!! Six anti-patterns — defenses MUST exist
 
 The prior research surfaced six failure modes documented across OverlayFS, Docker, Nix, TW5, Ink & Switch CRDT research, and the archival profession. Implementation MUST carry a named defense for each:
 
@@ -241,13 +241,13 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 
 <<~ ahu #conflict-resolution >>
 
-## Conflict resolution — Talk Story, not arbitration (2026-05-31)
+!! Conflict resolution — Talk Story, not arbitration (2026-05-31)
 
 **Load-bearing principle:** the CRDT/residency layer detects and records conflicts. It MUST NOT decide them. Resolution surfaces to **operator-agent or cabal Talk Story** — the Lares native mode for handling underspecified outcomes.
 
 The CRDT layer merges bytes deterministically. It cannot decide which semantic outcome the operators want. Automated arbitration reads as anti-pono — it presumes the system knows operator intent. The Voice house exists precisely for the moments where the system does not know; Talk Story is the canonical resolution surface.
 
-### What this means in code
+!!! What this means in code
 
 Every "conflict-resolution" surface in the residency model splits into two layers:
 
@@ -258,38 +258,38 @@ Every "conflict-resolution" surface in the residency model splits into two layer
 
 The CRDT layer SHOULD surface every conflict it detects as readable state. It MUST NOT refuse a read, lose a write, silently arbitrate concurrent commits, or pick a winner where the operators have not chosen. The Lares Voice house then carries the conflict into Talk Story; the operators (or the cabal, when multiple operators contend) reach a decision; an explicit ACTION verb lands the decision; a fresh effect record audits the resolution.
 
-### Deferred items reframed
+!!! Deferred items reframed
 
 Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-queue for concurrent ACTIONs) shift from **arbitration mechanisms** to **Talk-Story-surfacing layers**. They show conflicts to the operator; they never resolve. The implementation timeline waits on a live wiki-mesh — multi-operator scenarios reveal the actual surfacing UX shape; abstract design ahead of real conflict-cases would build the wrong surface.
 
-### Why this is pono
+!!! Why this is pono
 
-- **Web3 local-first.** No central arbiter; operator agency stays load-bearing.
-- **Causal islands.** Each island holds its own truth; cross-island conflict needs operator/cabal judgement, not algorithm.
-- **Voice house.** Talk Story already carries this architecture's native conversation mode; conflict-resolution rides the same rail as every other "what should we do?" question.
-- **Canon requires operator gesture.** A conflict resolved by code becomes canon nobody chose; a conflict resolved through Talk Story becomes canon the cabal owns.
+* **Web3 local-first.** No central arbiter; operator agency stays load-bearing.
+* **Causal islands.** Each island holds its own truth; cross-island conflict needs operator/cabal judgement, not algorithm.
+* **Voice house.** Talk Story already carries this architecture's native conversation mode; conflict-resolution rides the same rail as every other "what should we do?" question.
+* **Canon requires operator gesture.** A conflict resolved by code becomes canon nobody chose; a conflict resolved through Talk Story becomes canon the cabal owns.
 
 <<~/ahu >>
 
 <<~ ahu #closest-prior-art >>
 
-## Closest prior art (validators)
+!! Closest prior art (validators)
 
-- **TiddlyWiki Bags and Recipes** — exact same priority-overlay shape (K/V, not CRDT). [tiddlywiki.com/static/Bags%2520and%2520Recipes.html](https://tiddlywiki.com/static/Bags%2520and%2520Recipes.html). The TW5 team currently redesigns the UX ([MWS #114](https://github.com/TiddlyWiki/MultiWikiServer/issues/114)) — we ship into a known design gap.
-- **RDF Named Graphs + SPARQL Update** — Carroll/Bizer/Hayes/Stickler 2005; W3C RDF 1.1 §4 (2013). The settled vocabulary for "same triple in multiple graphs."
-- **Willow protocol** — `(namespace, subspace, path, payload_digest)` separates coordinate from content by design. [willowprotocol.org](https://willowprotocol.org/specs/data-model/index.html).
-- **FRBR / IFLA LRM** (2017) — [IFLA LRM PDF](https://www.ifla.org/files/assets/cataloguing/frbr-lrm/ifla-lrm-august-2017_rev201712.pdf). Work / Expression / Manifestation / Item.
-- **SAA Guidelines for Reappraisal and Deaccessioning** (2017) — [SAA PDF](https://www2.archivists.org/sites/all/files/GuidelinesForReappraisalDeaccessioning_2017.pdf). The discipline that makes deaccession trustworthy.
-- **Ink & Switch Upwelling** — closest CRDT analog with layered drafts. [inkandswitch.com/upwelling](https://www.inkandswitch.com/upwelling/).
-- **Ink & Switch Cambria** — schema lenses at read time. [inkandswitch.com/cambria](https://www.inkandswitch.com/cambria/).
-- **CSS Cascade + DevTools Computed panel** — the operator-visible coordinate surface gold standard.
-- **Plan 9 `bind`** — the explicit/shallow/lexically-visible discipline that makes overlay work (Pike et al. 1992).
+* **TiddlyWiki Bags and Recipes** — exact same priority-overlay shape (K/V, not CRDT). [tiddlywiki.com/static/Bags%2520and%2520Recipes.html](https://tiddlywiki.com/static/Bags%2520and%2520Recipes.html). The TW5 team currently redesigns the UX ([MWS #114](https://github.com/TiddlyWiki/MultiWikiServer/issues/114)) — we ship into a known design gap.
+* **RDF Named Graphs + SPARQL Update** — Carroll/Bizer/Hayes/Stickler 2005; W3C RDF 1.1 §4 (2013). The settled vocabulary for "same triple in multiple graphs."
+* **Willow protocol** — `(namespace, subspace, path, payload_digest)` separates coordinate from content by design. [willowprotocol.org](https://willowprotocol.org/specs/data-model/index.html).
+* **FRBR / IFLA LRM** (2017) — [IFLA LRM PDF](https://www.ifla.org/files/assets/cataloguing/frbr-lrm/ifla-lrm-august-2017_rev201712.pdf). Work / Expression / Manifestation / Item.
+* **SAA Guidelines for Reappraisal and Deaccessioning** (2017) — [SAA PDF](https://www2.archivists.org/sites/all/files/GuidelinesForReappraisalDeaccessioning_2017.pdf). The discipline that makes deaccession trustworthy.
+* **Ink & Switch Upwelling** — closest CRDT analog with layered drafts. [inkandswitch.com/upwelling](https://www.inkandswitch.com/upwelling/).
+* **Ink & Switch Cambria** — schema lenses at read time. [inkandswitch.com/cambria](https://www.inkandswitch.com/cambria/).
+* **CSS Cascade + DevTools Computed panel** — the operator-visible coordinate surface gold standard.
+* **Plan 9 `bind`** — the explicit/shallow/lexically-visible discipline that makes overlay work (Pike et al. 1992).
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot >>

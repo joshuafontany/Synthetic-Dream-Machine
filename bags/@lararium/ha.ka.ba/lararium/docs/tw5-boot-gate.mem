@@ -17,7 +17,7 @@ uri-path    = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 
 <<~ ahu #contract >>
 
-## TW5 Boot Gate — Contract
+!! TW5 Boot Gate — Contract
 
 `LarariumTW5._bootModules()` runs after `instance.boot.boot()` resolves. It attempts to register TW5 parser and widget modules from the **live corpus** (tiddlers already in the wiki from `preloadTiddlers` + early `loadFromStore`). If no corpus meme passes the gate, it falls through to the **imperative fallback** (compiled-in TypeScript classes).
 
@@ -48,7 +48,7 @@ _bootModules()
 
 <<~ ahu #thresholds >>
 
-## Gate Thresholds
+!! Gate Thresholds
 
 All four signal fields must meet or exceed these floor values for a meme to be injected as a live JS module. These constants live in `packages/lararium-tw5/src/tw5-module-gate.ts` as `MODULE_*_THRESHOLD` constants.
 
@@ -65,7 +65,7 @@ Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encode
 
 <<~ ahu #stuck-in-ts >>
 
-## Why This Cannot Be a Meme
+!! Why This Cannot Be a Meme
 
 `_bootModules()` requires a live `$tw` reference to call `wiki.filterTiddlers()`, `wiki.addTiddler()`, and `tw.modules.define()`. These are runtime calls against the TW5 instance created by `boot()`. The gate logic itself cannot be expressed in wikitext or loaded as a tiddler — it is the mechanism that decides which memes become executable.
 

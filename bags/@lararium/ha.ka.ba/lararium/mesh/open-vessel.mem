@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 
 <<~ &#x0002; >>
 
-# The Vessel — One Composable Web3 Design
+! The Vessel — One Composable Web3 Design
 
 The authority contract lives in [[operator-peer|lar:///ha.ka.ba/lararium/mesh/operator-peer]] (two-lane law, ea, actor-parity).
 This meme owns the **compositional structure**: what a vessel composes FROM, and the
@@ -28,14 +28,14 @@ drift (see #drift).
 
 <<~ ahu #the-law >>
 
-## The Law
+!! The Law
 
 A vessel composes from **sovereign web3-protocol participations** — it never reads as
 an application with platform branches. The factory derives by SUBTRACTION: the lines
 that differ between the working hosts name the seam, and nothing else earns one
 (Rule-of-Three). The core holds zero platform code; no `if (platform)` enters it.
 
-### Same structure, differing capabilities (Ink & Switch)
+!!! Same structure, differing capabilities (Ink & Switch)
 
 Node and browser **differ ONLY in capabilities, never in structure or
 pattern-integrity** (Ink & Switch). The composition — the seven participations, their
@@ -57,7 +57,7 @@ permanently-absent slot. A capability absent today reads as *not-yet-held*, neve
 
 <<~ ahu #the-seven-participations >>
 
-## The Seven Participations (what a vessel composes)
+!! The Seven Participations (what a vessel composes)
 
 Each names a sovereign protocol already standing in the tree — the vessel COMPOSES
 them, it does not re-implement them.
@@ -76,7 +76,7 @@ them, it does not re-implement them.
 
 <<~ ahu #the-shape >>
 
-## The Shape — A Vessel Composes Its Pieces
+!! The Shape — A Vessel Composes Its Pieces
 
 A vessel does not read as a core that an injected host-port drives. A vessel **IS a
 composition** — a recipe that names which sovereign pieces it carries and the order
@@ -101,7 +101,7 @@ phase sequence), never type-conformance to a port.
 
 <<~ ahu #role >>
 
-## Role Names Which Pieces the Recipe Carries (the keystone reframe)
+!! Role Names Which Pieces the Recipe Carries (the keystone reframe)
 
 The drift's root: **role baked into platform** (node = relay, browser = keeper). Pono:
 **role names the capability pieces a vessel CURRENTLY HOLDS** — a snapshot of a growing
@@ -110,10 +110,10 @@ role adds or omits a PIECE; it never toggles a flag or fills an optional port me
 The substrate NEVER gates which pieces a vessel MAY hold (Ink & Switch, #the-law): a
 piece absent today reads as not-yet-held, never cannot-hold.
 
-- The **relay** recipe carries, in addition to the seven base pieces: the inbound-peer
+* The **relay** recipe carries, in addition to the seven base pieces: the inbound-peer
   gate (V3), the disk-mirror grant, the full resident-verb plane, the residency
   sweeper.
-- The **leaf / keeper** recipe simply OMITS those pieces and carries the outbound
+* The **leaf / keeper** recipe simply OMITS those pieces and carries the outbound
   peer-handshake instead. An omitted piece reads as absent from the cascade — no
   no-op stub, no `if (platform)`, nothing for the composition to branch on.
 
@@ -129,7 +129,7 @@ an accidental open-to-all reads as unreachable by construction.
 
 <<~ ahu #drift >>
 
-## What Drifted (and what the clean design heals)
+!! What Drifted (and what the clean design heals)
 
 `open-node-vessel.ts` (~735 lines) and `open-browser-vessel.ts` (~504) accreted the
 SAME protocol sequence twice, with platform divergence interleaved inline — genesis

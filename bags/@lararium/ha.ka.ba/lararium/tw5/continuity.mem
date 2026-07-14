@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/continuity"
 
 <<~ ahu #entry >>
 
-## Entry — Lararium Core Hydration
+!! Entry — Lararium Core Hydration
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
 
@@ -35,7 +35,7 @@ Session carry belongs to the lararium side, not the threshold side.
 
 <<~ ahu #head >>
 
-# Lararium Continuity
+! Lararium Continuity
 
 The lararium remembers.
 The threshold does not.
@@ -45,14 +45,14 @@ Continuity enters here as calibration and carry, not as unquestioned truth.
 
 <<~ ahu #continuity-law >>
 
-## Continuity Law
+!! Continuity Law
 
 Extracted live principles from the legacy prompt stack:
 
-- memory functions as hint, not ground truth
-- operator statements outrank remembered residue
-- crystal and continuity layers carry orientation, not constitutional law
-- long-range carry may deepen in docs and tooling without swelling the cold boot core
+* memory functions as hint, not ground truth
+* operator statements outrank remembered residue
+* crystal and continuity layers carry orientation, not constitutional law
+* long-range carry may deepen in docs and tooling without swelling the cold boot core
 
 This child meme reserves the stable room for that contract.
 More detailed crystal and MemPalace work can gather in docs space until it hardens.
@@ -61,7 +61,7 @@ More detailed crystal and MemPalace work can gather in docs space until it harde
 
 <<~ ahu #source-shelf >>
 
-## Source Shelf
+!! Source Shelf
 
 ```toml
 when = ["need crystal mechanics", "need continuity research", "need memory-system archaeology"]
@@ -75,7 +75,7 @@ This child meme keeps the cold-hydration contract small.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/crystal >>

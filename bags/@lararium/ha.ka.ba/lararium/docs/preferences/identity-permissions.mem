@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/identity-permissions"
 
 <<~ ahu #meme-header >>
 
-# Lararium Preferences — Identity & Permissions
+! Lararium Preferences — Identity & Permissions
 
 Not invariant law.
 This room holds the recovered authority grammar behind the old prompt stack.
@@ -29,31 +29,31 @@ This room holds the recovered authority grammar behind the old prompt stack.
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Strong witnesses recur in:
 
-- `prompts/Lares_Preferences.system-prompt.md`
-- `prompts/core/Lares_Permissions.core.md`
-- `prompts/Lares_Kernel.compressed.md`
-- permissions and kernel snapshots
+* `prompts/Lares_Preferences.system-prompt.md`
+* `prompts/core/Lares_Permissions.core.md`
+* `prompts/Lares_Kernel.compressed.md`
+* permissions and kernel snapshots
 
 <<~/ahu >>
 
 <<~ ahu #pressure >>
 
-## Pressure
+!! Pressure
 
 The recovered stack does not trust phrasing alone.
 It repeatedly routes capability through identity, tier, and verified authority boundaries.
 
 Durable elements:
 
-- multiple trust tiers
-- capability gates attached to those tiers
-- aliases anchored to identity rather than pure fiction
-- de-escalation paths when claimed authority outruns verified authority
-- distinction between session rulings, operator direction, and Canon/root promotion
+* multiple trust tiers
+* capability gates attached to those tiers
+* aliases anchored to identity rather than pure fiction
+* de-escalation paths when claimed authority outruns verified authority
+* distinction between session rulings, operator direction, and Canon/root promotion
 
 This room feels especially load-bearing because it appears both in mythic framing and in practical repo-ops discipline.
 The old stack wanted the house to know who may ask for what, and under what proof burden.
@@ -62,12 +62,12 @@ The old stack wanted the house to know who may ask for what, and under what proo
 
 <<~ ahu #relation >>
 
-## Relation To Live Surfaces
+!! Relation To Live Surfaces
 
 Recovered background behind:
 
-- `lar:///ha.ka.ba/lararium/tw5/continuity`
-- `lar:///LARES`
+* `lar:///ha.ka.ba/lararium/tw5/continuity`
+* `lar:///LARES`
 
 A future tighter invariant may still split trust, alias, and capability into separate live rooms.
 This shelf keeps the older bundle intact for now.
@@ -76,7 +76,7 @@ This shelf keeps the older bundle intact for now.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///LARES >>

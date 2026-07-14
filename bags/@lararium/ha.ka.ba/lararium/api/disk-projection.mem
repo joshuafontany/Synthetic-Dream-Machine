@@ -28,7 +28,7 @@ uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 
 <<~ ahu #core-claim >>
 
-# Disk Projection — Seed and Projection Surfaces
+! Disk Projection — Seed and Projection Surfaces
 
 Every **`@bag`** maps to one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). **The operator's mind originates; the disk carrier and the CRDT record-set both *project* that origin, each in its native grain** (the co-projection model, operator ruling 2026-06-11): disk projects thought as one whole markdown meme — the way the operator writes it; the CRDT doc projects the same thought as tid-sized records — the way TW5 merges, addresses, and syncs it; the VM decomposes for transclusion (#granularity). Co-equal in dignity, single in merge seat: **merge authority routes through the CRDT alone**, never file-vs-record reconciliation — anything else opens the dual-write trap (Tonsky crdt-filesync; Kleppmann).
 
@@ -45,7 +45,7 @@ The distinction reads **definition vs instance**. An FTLS Power Card *definition
 
 <<~ ahu #bag-roles >>
 
-## Bag roles — which bags project, which ride the mesh
+!! Bag roles — which bags project, which ride the mesh
 
 Disk projection is for **content** bags (definitions + instances). **State / view / runtime** bags carry no `BagMirrorConfig` and so never write to disk — they ride the CRDT sync mesh.
 
@@ -66,7 +66,7 @@ The projector enforces this structurally: **a bag absent from the mirror list ne
 
 <<~ ahu #oracle-split >>
 
-## @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
+!! @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
 
 `@lararium` once carried **two ontological kinds under one bag** — and that conflation made it fit *neither* on-disk pattern (a seed surface that also held per-deployment runtime). The ruling splits them, and each half then snaps onto an existing canon pattern:
 
@@ -87,14 +87,14 @@ The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesi
 
 <<~ ahu #personal >>
 
-## @personal — wiki-instance-bound, off-disk
+!! @personal — wiki-instance-bound, off-disk
 
 `@personal` holds the operator's view-state for a specific wiki-instance (`$:/StoryList`, `$:/state/folded/*`, `$:/palette`), keyed per **(PersonaGroup × recipe-fingerprint)** (see personal-slot). It is NOT canon (not a `bags/` seed) and NOT wiki content (not a `wikis/` instance projection) — it is a **per-operator overlay**.
 
 It carries **no disk mirror.** Rationale:
 
-- **Disk is per-device; @personal is cross-device.** It follows the operator across their devices through the admin-doc / Keyhive CRDT mesh, not through a disk artifact. Projecting it to disk would conflate the two and invite divergence.
-- **It still appears in the projection.** A `wikis/{slug}/` projection renders from the live, recipe-resolved view — and the recipe composes `@personal`'s view-state into that view. So the operator's ordering and folds *show up* in the projected wiki without `@personal` itself ever touching disk.
+* **Disk is per-device; @personal is cross-device.** It follows the operator across their devices through the admin-doc / Keyhive CRDT mesh, not through a disk artifact. Projecting it to disk would conflate the two and invite divergence.
+* **It still appears in the projection.** A `wikis/{slug}/` projection renders from the live, recipe-resolved view — and the recipe composes `@personal`'s view-state into that view. So the operator's ordering and folds *show up* in the projected wiki without `@personal` itself ever touching disk.
 
 A future debug-only sidecar projection MAY be added behind an explicit flag; it MUST NOT be the default.
 
@@ -102,7 +102,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 <<~ ahu #projection-law >>
 
-## Projection law
+!! Projection law
 
 1. **RENDER, not copy** (Fontany-Fuller-Zelenka). Disk projection recomposes the whole carrier from normalized tiddler records via the membrane's recompose inverse (`expandMemeRefs`, registered on `$tw.lares`, running inside the island VM). It never copies stored bytes raw — byte-fidelity comes from the proven parse∘render fixed point, not retention.
 2. **Store → disk is one direction; ingest is another.** The projector is unidirectional (store → disk). Re-reading operator edits (disk → store) is a **separate file-watcher / ingest path**. The `writing` guard set prevents the projector's own writes from echoing back through ingest.
@@ -113,7 +113,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 <<~ ahu #granularity >>
 
-## Granularity — carrier-whole at rest (operator ruling, 2026-06-11)
+!! Granularity — carrier-whole at rest (operator ruling, 2026-06-11)
 
 **Each stratum carries its own natural grain; grain MUST NOT leak between strata:**
 
@@ -133,7 +133,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 <<~ ahu #projection-routing >>
 
-## Projection routing — tiddler-groups + the standard TW5 path (operator ruling, 2026-06-11)
+!! Projection routing — tiddler-groups + the standard TW5 path (operator ruling, 2026-06-11)
 
 Write-back routes by **type**, in three rules:
 
@@ -147,7 +147,7 @@ Write-back routes by **type**, in three rules:
 
 <<~ ahu #write-ward >>
 
-## The disk ward — sovereign-island write confinement (operator ruling, 2026-06-11)
+!! The disk ward — sovereign-island write confinement (operator ruling, 2026-06-11)
 
 Cascade tiddlers compose through the **recipe** — a library bag can overlay `config/disk-paths` — so every path reaching the projector counts as **untrusted input**. Policy lives in the cascade; the **mechanism** holds at the write choke-point (`confineMirrorWrite`, bag-paths), regardless of what the cascade emitted:
 
@@ -178,7 +178,7 @@ Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (13 — tr
 
 <<~ ahu #cli >>
 
-## CLI capability
+!! CLI capability
 
 The disk-projection Artifact is operator-driven through the `@lares/cli` surface (alongside `lares wiki` / `lares bag` / `lares act`). The live projector runs inside the vessel (TW5 change → debounce → render → write); the CLI exposes the deliberate snapshot/inspect verbs. A bag mirror is configured by `namedBagMirror(bagId, scope, mirrorRoot)`; the island reconstructs it from the serializable `diskMirrors` manifest field.
 
@@ -186,7 +186,7 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers >>

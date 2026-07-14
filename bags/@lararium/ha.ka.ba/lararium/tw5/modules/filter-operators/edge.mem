@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/edge"
 
 <<~ ahu #head >>
 
-# edge
+! edge
 
 TW5 filter operator from `@lararium/tw5`.
 

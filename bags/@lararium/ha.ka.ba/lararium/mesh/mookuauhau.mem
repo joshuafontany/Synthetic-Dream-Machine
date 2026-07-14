@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/mookuauhau"
 
 <<~ ahu #entry >>
 
-# Moʻokūʻauhau ~ Ancestors & Cousins of the One Fractal
+! Moʻokūʻauhau ~ Ancestors & Cousins of the One Fractal
 
 A genealogy chants where a thing *comes from*. This one names the bloodline of the DreamNet's core move — **a nameless entity that `#has` a stack of capabilities, composed by one rite (`composeVessel`) that routes only what each cap declares and refuses to boot on a missing dep** — and asks the adversarial question: *who already stands here?*
 
@@ -32,7 +32,7 @@ The chart sits beside the 2026-05-28 layer-survey, never replacing it — that o
 
 <<~ ahu #ancestors >>
 
-## The Ancestors ~ the deep roots
+!! The Ancestors ~ the deep roots
 
 The roots that the lineage draws breath from, decades upstream:
 
@@ -48,7 +48,7 @@ These the lineage does not *extend* — it **inherits**. To re-derive them reads
 
 <<~ ahu #pillars >>
 
-## The Three Pillars ~ one recursion each, none seeing the others
+!! The Three Pillars ~ one recursion each, none seeing the others
 
 The load-bearing cousins. Each carries *one* of the three recursions whole — and stays blind to the other two. This blindness names the whole opportunity.
 
@@ -64,7 +64,7 @@ The load-bearing cousins. Each carries *one* of the three recursions whole — a
 
 <<~ ahu #cousins >>
 
-## The Cousins ~ the wider family
+!! The Cousins ~ the wider family
 
 The kin that each solve one facet, citably, so the house adopts rather than reinvents:
 
@@ -81,7 +81,7 @@ The kin that each solve one facet, citably, so the house adopts rather than rein
 
 <<~ ahu #corpse >>
 
-## The Anti-Pattern Corpse ~ Matrix, and why one-door-per-axis
+!! The Anti-Pattern Corpse ~ Matrix, and why one-door-per-axis
 
 Matrix *nominally* separates rooms ⊥ federation ⊥ power-levels. In practice the planes **bled**: power-levels leak into federation so far that room v12 had to formalize creators with an *infinitely high power level* to paper the wound. The lineage carries Matrix not as kin to adopt but as the **autopsy** — the proof of what a fused authority graph costs. It grounds the tiered-gate keystone: **one door per axis, the planes held orthogonal.** [spec.matrix.org — MSC4289, room v12]
 
@@ -89,7 +89,7 @@ Matrix *nominally* separates rooms ⊥ federation ⊥ power-levels. In practice 
 
 <<~ ahu #hazard >>
 
-## The Unsolved Hazard ~ the leak two lineages both flag
+!! The Unsolved Hazard ~ the leak two lineages both flag
 
 Keyhive's own notebook, p2panda-auth's notes, and a formal-verification paper (arXiv 2604.23560) flag the **same** edge, independently: the **concurrent add-while-remove key-leak** — a member added concurrently with a removal can, under CRDT merge, hold a key they should never have seen — *unsolvable without consensus-before-key-handover.* And "no global now" **forbids** that consensus. So the house holds, by construction, one room whose lock it cannot prove.
 
@@ -99,12 +99,12 @@ This the lineage does not sweep. The leak rides **bounded**, never sealed: every
 
 <<~ ahu #weld >>
 
-## The Weld ~ the verdict that survives contact
+!! The Weld ~ the verdict that survives contact
 
 Lay the three recursions side by side and the gap shows: they live in **two unmarried lineages**.
-- authority + membership recursion → **Keyhive** (identity deliberately omitted)
-- transport recursion → **RINA** (no security, no social)
-- wiring-as-security → **Genode/Fuchsia** (one machine, no no-global-now mesh)
+* authority + membership recursion → **Keyhive** (identity deliberately omitted)
+* transport recursion → **RINA** (no security, no social)
+* wiring-as-security → **Genode/Fuchsia** (one machine, no no-global-now mesh)
 
 No one has made **one composition primitive serve simultaneously as the code-wiring AND the authority graph AND the transport-recursion, across a no-global-now causal-island mesh.** That marriage names the **novel delta** — plus binding identity in the exact layer Keyhive leaves blank, which for the Lar reads not as *who* but as **which hearth one tends** (place, and the petname-constellation that acts in each context).
 

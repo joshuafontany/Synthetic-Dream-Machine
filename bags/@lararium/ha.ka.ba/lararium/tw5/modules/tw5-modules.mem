@@ -22,14 +22,14 @@ uri-path        = "ha.ka.ba/lararium/tw5/modules/tw5-modules"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Generated bundle — body between STX/ETX is compiled by `pnpm --filter @lararium/tw5 build`. Not a single TS source file.
 
 Entry points bundled into this artifact:
-- `packages/lararium-tw5/src/tw5-widgets.ts` → widget registry + all widget classes
-- `packages/lararium-tw5/src/memetic-parser.ts` → MemeticParser (TW5 parse tree bridge)
-- `packages/lararium-tw5/src/widgets/*.ts` → individual widget implementations
+* `packages/lararium-tw5/src/tw5-widgets.ts` → widget registry + all widget classes
+* `packages/lararium-tw5/src/memetic-parser.ts` → MemeticParser (TW5 parse tree bridge)
+* `packages/lararium-tw5/src/widgets/*.ts` → individual widget implementations
 
 Canonical widget source tiddler: [[tw5-widgets|lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets]].
 

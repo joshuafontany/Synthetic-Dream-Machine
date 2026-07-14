@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/lib-smol-toml"
 
 <<~ ahu #head >>
 
-# smol-toml Library Tiddler
+! smol-toml Library Tiddler
 
 `lar:///ha.ka.ba/lararium/tw5/lib/smol-toml` — smol-toml packaged as a TW5 `module-type: library`.
 
@@ -37,24 +37,24 @@ the import to this `require()` call via `rollupOptions.output.paths`.
 
 <<~ ahu #consumers >>
 
-## Consumers
+!! Consumers
 
-- `toml-ast.ts` — `parseTaploFields` for `#iam` field extraction (deserialize-time)
-- future `toml` data-fence widget — named TOML blocks at render-time
-- operator-authored module tiddlers that declare TOML-structured data
+* `toml-ast.ts` — `parseTaploFields` for `#iam` field extraction (deserialize-time)
+* future `toml` data-fence widget — named TOML blocks at render-time
+* operator-authored module tiddlers that declare TOML-structured data
 
 <<~/ahu >>
 
 <<~ ahu #design-notes >>
 
-## Design Notes
+!! Design Notes
 
 smol-toml selected over alternatives:
 
-- Pure JS — no WASM init step; runs sync; isomorphic Node + browser
-- Spec-compliant — full TOML 1.0 including inline comments, multi-line strings, typed values
-- Small — ~26 kB; largest single dependency in the plugin bundle
-- `@taplo/lib` remains the write/format surface (WASM, lazy-loaded) — comment-preserving patch
+* Pure JS — no WASM init step; runs sync; isomorphic Node + browser
+* Spec-compliant — full TOML 1.0 including inline comments, multi-line strings, typed values
+* Small — ~26 kB; largest single dependency in the plugin bundle
+* `@taplo/lib` remains the write/format surface (WASM, lazy-loaded) — comment-preserving patch
 
 Named TOML blocks (profile name present, profile != `iam`) surface as data accessible to the
 widget layer. The UEFN device / Verse work drives this: TOML blocks describe device placement,
@@ -64,7 +64,7 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/toml-ast >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-toml >>

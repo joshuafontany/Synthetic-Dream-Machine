@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/verb-summons"
 
 <<~ ahu #contract >>
 
-## The summons relay
+!! The summons relay
 
 `heedSummons` carries the **edge transport** of the verb/summons/outcome surface. An external vessel writes a **summons** tiddler at `@daemon/summons/<id>` to the shared Automerge doc; the admin island's CompositeStore subscriber translates it into a volatile local invocation (`lararium.local.vm/verbs/<id>`) the VerbDispatcher watches, then tombstones the summons. Edge transport — fire-and-forget, never durable coordination.
 

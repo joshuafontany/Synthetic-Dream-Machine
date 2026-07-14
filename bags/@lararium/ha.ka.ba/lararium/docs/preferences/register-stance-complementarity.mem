@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/register-stance-complementarity"
 
 <<~ ahu #meme-header >>
 
-# Register–Stance Complementarity — Staging Shelf
+! Register–Stance Complementarity — Staging Shelf
 
 Not invariant law.
 This room holds the explicit old claim that register and stance remain orthogonal but not inertly independent.
@@ -31,27 +31,27 @@ This room holds the explicit old claim that register and stance remain orthogona
 
 <<~ ahu #plan >>
 
-## Plan Skeleton
+!! Plan Skeleton
 
 This room should test whether the old complementarity claim deserves:
 
-- a new short invariant
-- a docs-only condensed room
-- or distribution across existing API surfaces without a new promotion target
+* a new short invariant
+* a docs-only condensed room
+* or distribution across existing API surfaces without a new promotion target
 
 Current comparison surfaces:
 
-- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
-- `lar:///ha.ka.ba/lares/api/mu/e-prime`
-- `lar:///ha.ka.ba/lares/api/pono/lar-uri`
+* `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lares/api/mu/e-prime`
+* `lar:///ha.ka.ba/lares/api/pono/lar-uri`
 
 <<~/ahu >>
 
 <<~ ahu #verbatim-core-registers >>
 
-## Verbatim — `Lares_Epistemology.core.md` — Registers and Stances
+!! Verbatim — `Lares_Epistemology.core.md` — Registers and Stances
 
-## Registers and Stances — Why They Work This Way
+!! Registers and Stances — Why They Work This Way
 
 *The kernel defines five registers and five stances operationally. This section provides the underlying logic.*
 
@@ -67,7 +67,7 @@ Current comparison surfaces:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>

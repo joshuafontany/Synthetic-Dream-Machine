@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/docs/corpus-sources"
 
 <<~ ahu #head >>
 
-# Corpus Sources — Registry
+! Corpus Sources — Registry
 
 Five corpus bag targets compose SDM+.
 Each maps to one Automerge doc.
@@ -32,7 +32,7 @@ The recipe layer composes them for any given room or view.
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 A corpus source MUST carry:
 
@@ -53,7 +53,7 @@ It hydrates before all other corpora. All other corpora treat it as read-only at
 
 <<~ ahu #registry >>
 
-## Registry
+!! Registry
 
 ```toml
 [[corpus]]
@@ -119,7 +119,7 @@ note     = "engine self-doc memes for @lararium/node TypeScript symbols"
 
 <<~ ahu #bag-recipe-topology >>
 
-## Bag/Recipe Topology
+!! Bag/Recipe Topology
 
 ```
 system bag    ← invariant TW5 boot corpus (read-only)

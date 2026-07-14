@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/ahu"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$ahu>` renders a `<section data-lar-kind="ahu">` slot container, or in `carrier` render-mode, projects the slot body as raw wikitext. Supports reactive refresh on slot-fragment tiddler changes. Attribute: `slot`.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/ahu"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 function AhuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

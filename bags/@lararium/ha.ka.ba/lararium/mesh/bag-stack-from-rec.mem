@@ -19,13 +19,13 @@ uri-path  = "ha.ka.ba/lararium/mesh/bag-stack-from-rec"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `bagStackFromRec(rec: LarTiddlerRecord): string[]`
 
 Reads `rec.tiddler["bag-stack"]`, coerces to string or undefined, delegates to `parseBagStack`. Returns an empty array when absent or unparseable.
 
-## Why here
+!! Why here
 
 `wiki-handlers.ts` and `epoch-handlers.ts` repeated the same 53-character inline guard four times each:
 ```ts

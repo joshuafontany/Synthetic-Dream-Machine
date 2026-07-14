@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/sigil"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$sigil>` renders a `<span data-lar-kind="sigil">` element. `data-lar-sigil` is the parse-tree tag. Renders children inside the span.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/sigil"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function SigilWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

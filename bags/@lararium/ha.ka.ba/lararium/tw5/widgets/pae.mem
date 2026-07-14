@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/pae"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<$pae>` is a phase-marker widget. Carries no visible output — phase metadata lives in the AST.
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/pae"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 ```typescript
 export function PaeWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {

@@ -22,7 +22,7 @@ written   = "2026-06-27"
 
 <<~ ahu #head >>
 
-# The Ingest Canon ~ one path, born-annotated, single-write
+! The Ingest Canon ~ one path, born-annotated, single-write
 
 The golden path for getting *any* chat session + its telemetry into the palace, locked by research
 (field + code) on 2026-06-27 under the operator's full manaoio. The un-pono shape it retires:
@@ -35,7 +35,7 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 
 <<~ ahu #the-nine-locks >>
 
-## The nine locks (decisions, not options)
+!! The nine locks (decisions, not options)
 
 \procedure ~Lock(~Type:"" ~Params:"") ~Lock <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -56,7 +56,7 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 
 <<~ ahu #migration >>
 
-## Migration (the circle-back work, after FFZ)
+!! Migration (the circle-back work, after FFZ)
 
 **BUILD (ordered):** (1) **register the turn sigils** as gradient-valued SharktoothSigil tids —
 `lares aim/yield · confidence · hud · ward · oracle · syad` (word + gradient-reading + render) so the
@@ -85,7 +85,7 @@ no flat-index duplication survives. (`CaptureRecord` type · `ndjson.py` adapter
 
 <<~ ahu #the-meme >>
 
-## The canon, in eight lines
+!! The canon, in eight lines
 
 > ONE PATH (Kappa): every chat+telemetry source ingests through the capture-nalu — live and
 > historical alike; history is REPLAY through the same producer, never a second code path.
@@ -100,7 +100,7 @@ no flat-index duplication survives. (`CaptureRecord` type · `ndjson.py` adapter
 
 <<~ ahu #gradient-build >>
 
-## The gradient build ~ examined gaps + grade-on-a-gradient (2026-06-27)
+!! The gradient build ~ examined gaps + grade-on-a-gradient (2026-06-27)
 
 The grammar is self-hosted: a tiddler tagged `lar:///ha.ka.ba/tags/SharktoothSigil` teaches the
 parser a word (grammar-cache.ts reads `lar-*` fields → SigilRule; 62 sigils / 8 families today). The
@@ -115,12 +115,12 @@ SharktoothSigil tids (the Explore est. ~30 lines), each carrying the recalled tr
 **render**. Then the VM is the one turn-decomposer; the gradient module walks the AST.
 
 **GRADE ON A GRADIENT — the builder is binary where it should grade** (the creative-grammar cure):
-- `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a **MalformedSigil /
+* `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a **MalformedSigil /
   PartialNode** with a parse-confidence (`<<~ confidence ( <4` = opener+intent, broken close → ~0.4;
   `<<~`-far-from-close → ~0.2; no opener → prose 0). "Likely-a-sigil-but-drifted," not silent water.
-- per-sigil **form-confidence**: full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
+* per-sigil **form-confidence**: full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
   numeric-fail = low. The node is GRADIENT-VALUED, never pass/fail (the harvester's law, in the VM).
-- degraded VOICE ladder (full+mask > full > bare-known > looks-like-voice) · edge-strictness · ahu
+* degraded VOICE ladder (full+mask > full > bare-known > looks-like-voice) · edge-strictness · ahu
   nesting-depth — all binary today, all gradient candidates.
 
 **SECONDARY GAPS:** the `\sigil` pragma parser is a STUB (lar-sigil-pragma.ts:11-13, "full body parse
@@ -132,7 +132,7 @@ the regex shadow knows the turn/gradient sigils · the 6 turn sigils are the unb
 
 <<~ ahu #integration >>
 
-## Full integration ~ TW5-community-grounded (2026-06-27, research-locked)
+!! Full integration ~ TW5-community-grounded (2026-06-27, research-locked)
 
 Plugin, NOT a fork — squarely the welcomed path (the official Markdown plugin is the precedent: an
 alternate syntax shipped as a plugin). Five findings, all sourced (talk.tiddlywiki, Jermolene/TW5,
@@ -178,7 +178,7 @@ linonetwo's tw-react + TidGi):
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>

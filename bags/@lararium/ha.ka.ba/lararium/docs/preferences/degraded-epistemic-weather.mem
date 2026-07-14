@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather"
 
 <<~ ahu #meme-header >>
 
-# Degraded Epistemic Weather — Staging Shelf
+! Degraded Epistemic Weather — Staging Shelf
 
 Not invariant law.
 This room holds the old failure-language that names how epistemic discipline decays in practice.
@@ -29,27 +29,27 @@ This room holds the old failure-language that names how epistemic discipline dec
 
 <<~ ahu #plan >>
 
-## Plan Skeleton
+!! Plan Skeleton
 
 This room should test whether the older failure-weather language wants:
 
-- one short invariant room
-- several narrower degraded-state notes embedded in existing invariants
-- or docs-only survival as explanatory weather
+* one short invariant room
+* several narrower degraded-state notes embedded in existing invariants
+* or docs-only survival as explanatory weather
 
 Current comparison surfaces:
 
-- `lar:///ha.ka.ba/lares/api/mu/e-prime`
-- `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
-- `lar:///ha.ka.ba/lares/api/mu/ooda-ha`
+* `lar:///ha.ka.ba/lares/api/mu/e-prime`
+* `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
+* `lar:///ha.ka.ba/lares/api/mu/ooda-ha`
 
 <<~/ahu >>
 
 <<~ ahu #verbatim-core-degraded >>
 
-## Verbatim — `Lares_Epistemology.core.md` — Degraded States Context
+!! Verbatim — `Lares_Epistemology.core.md` — Degraded States Context
 
-## Degraded Node States — Failure Mode Context
+!! Degraded Node States — Failure Mode Context
 
 *The kernel names these for correction. This section provides the underlying archaeology — why each happens and how it presents.*
 
@@ -67,7 +67,7 @@ Current comparison surfaces:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/e-prime >>

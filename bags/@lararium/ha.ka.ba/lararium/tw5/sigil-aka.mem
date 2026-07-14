@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/sigil-aka"
 
 <<~ ahu #head >>
 
-# ~aka Sigil Design
+! ~aka Sigil Design
 
 `<<~ aka lar:///target >>` — shadow transclusion.
 
@@ -31,14 +31,14 @@ This meme records design decisions and deferred work.
 
 <<~ ahu #semantics >>
 
-## Semantics
+!! Semantics
 
 `aka` carries `rdfs:seeAlso` / `skos:closeMatch` weight — not identity (`owl:sameAs`), not full summons (`kahea`).
 
 Two states:
 
-- **local aka** — target tiddler exists in this wiki: `<details>` quoteblock, expandable to target content
-- **shadow aka** — target is off-wiki (peer node or external canonical): `<details>` with URI link, empty body
+* **local aka** — target tiddler exists in this wiki: `<details>` quoteblock, expandable to target content
+* **shadow aka** — target is off-wiki (peer node or external canonical): `<details>` with URI link, empty body
 
 The summary header always shows the target URI as a link, so the projection always points home.
 
@@ -50,7 +50,7 @@ Call-site template override: `<<~ aka lar:///target lar:///my-template >>` (p2 b
 
 <<~ ahu #mechanism >>
 
-## Render Mechanism
+!! Render Mechanism
 
 Both `aka` and `kahea` use TW5's `<$tiddler> + <$transclude>` pattern:
 
@@ -70,9 +70,9 @@ Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 
 <<~ ahu #preview-image >>
 
-## Preview Image — Tier 1 (live) / Tier 2 (deferred)
+!! Preview Image — Tier 1 (live) / Tier 2 (deferred)
 
-### Tier 1 — Template (shipped)
+!!! Tier 1 — Template (shipped)
 
 The `aka-template-html.tid` shows a preview image when available:
 
@@ -83,7 +83,7 @@ The `aka-template-html.tid` shows a preview image when available:
    DuckDuckGo favicon endpoint: privacy-respecting, no tracking, silently fails offline.
    `lar:///` URIs skip this path (no domain to extract).
 
-### Tier 2 — Node-side OG metadata fetch (deferred)
+!!! Tier 2 — Node-side OG metadata fetch (deferred)
 
 When the Lararium node resolves an external `aka` URI (HTTP/HTTPS), it should:
 
@@ -100,7 +100,7 @@ The template renders whatever fields are present — no template changes needed 
 
 <<~/pranala >>
 
-### Off-wiki `lar:///` URIs
+!!! Off-wiki `lar:///` URIs
 
 `lar:///` URIs are Lares-native — no external service can fetch them.
 Preview for peer-node URIs must come from the peer itself (a future peer-announce protocol
@@ -110,7 +110,7 @@ could include thumbnail + og-title in the handshake). Hold open.
 
 <<~ ahu #source-shelf >>
 
-## Source Shelf
+!! Source Shelf
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module >>
 <<~/pranala >>

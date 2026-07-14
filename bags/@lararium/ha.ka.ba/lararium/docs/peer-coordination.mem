@@ -17,9 +17,9 @@ uri-path  = "ha.ka.ba/lararium/docs/peer-coordination"
 
 <<~ &#x0002; >>
 
-# Peer Coordination — Automerge Rendezvous Doctrine
+! Peer Coordination — Automerge Rendezvous Doctrine
 
-## The Yjs / Automerge Difference
+!! The Yjs / Automerge Difference
 
 In Yjs, room name = doc identity. Two peers calling `new Y.Doc()` with the same
 provider room string rendezvous automatically — the provider maps name → CRDT state.
@@ -35,7 +35,7 @@ without sharing a URL produces two hermetic worlds that never merge.
 Patching this at the ReactionEngine layer treats a coordination failure as an
 application concern — wrong layer.
 
-## The UEFN Lesson: Author-Time Identity
+!! The UEFN Lesson: Author-Time Identity
 
 UEFN/Verse handles island-level shared state through **device identity assigned
 at author-time (edit-time), not at boot-time**. Devices are placed in the island
@@ -47,7 +47,7 @@ device"; it calls "find device at this author-assigned ID."
 Wiki docUrl assignment must move from boot-time (`repo.create()`) to author-time
 (committed island definition). Peers never create predefined wikis; they join them.
 
-## Canonical Architecture
+!! Canonical Architecture
 
 ```
 lararium-island.ts  ←  committed deployment artifact (the island file)
@@ -67,7 +67,7 @@ AutomergeDocStore  ←  one CRDT truth per wiki
 The island file is the deployment's rendezvous. It lives in git. It is committed
 once by the island author and never regenerated at runtime.
 
-## Dynamic Wiki Bootstrap Protocol
+!! Dynamic Wiki Bootstrap Protocol
 
 For wikis NOT in the island file (user-created at runtime), the catalog-doc
 pattern handles coordination:
@@ -99,25 +99,25 @@ Automerge's LWW map resolves concurrent `wikis[wikiId]` writes deterministically
 by actor-ID + Lamport timestamp. The losing peer migrates via `Automerge.merge()`
 (valid because both docs share intended content), then discards its orphan URL.
 
-## Keyhive Path (Sprint-future)
+!! Keyhive Path (Sprint-future)
 
 Keyhive (Ink & Switch — Zelenka, Mumm, Good) builds Automerge-native access
 control. Correction from prior notes:
 
-- **Doc IDs are NOT Ed25519 public keys.** Automerge doc URLs remain random UUIDs
+* **Doc IDs are NOT Ed25519 public keys.** Automerge doc URLs remain random UUIDs
   (`automerge:<base58-uuid>`). Keyhive adds an access-control layer ON TOP — it does
   not change the URL scheme.
-- **Individuals** have stable Ed25519 keypairs → DIDs. **Documents** have their own
+* **Individuals** have stable Ed25519 keypairs → DIDs. **Documents** have their own
   Keyhive group structure (separate from the individual's key).
-- **"Add member"** is a signed operation committed to the doc's Keyhive ACL log,
+* **"Add member"** is a signed operation committed to the doc's Keyhive ACL log,
   referencing the new peer's Ed25519 public key. No separate invite token — the
   signed "add" entry IS the invitation artifact, delivered out-of-band then
   applied when the peer connects.
-- **Convergent Capabilities** replace UCAN JWTs with CRDT-compatible capability
+* **Convergent Capabilities** replace UCAN JWTs with CRDT-compatible capability
   tokens. Concurrent delegation and revocation resolve without coordination.
-- **Group Management CRDT** handles wiki membership (who can write) as Automerge
+* **Group Management CRDT** handles wiki membership (who can write) as Automerge
   ops — self-certifying, no server vote required.
-- **Beelay** (automerge/beelay) is the companion sync protocol. It operates over
+* **Beelay** (automerge/beelay) is the companion sync protocol. It operates over
   ciphertext only (servers never see plaintext). Peers authenticate the connection
   and advertise which docs they hold capability for — the catalog problem dissolves
   into capability propagation.
@@ -132,7 +132,7 @@ Until Keyhive stabilizes (currently experimental/Rust-only): `sharePolicy` remai
 open, the island file provides static rendezvous, and the catalog protocol handles
 dynamic wikis.
 
-## ReactionEngine Write-Back Invariants
+!! ReactionEngine Write-Back Invariants
 
 `ReactionEngine` runs per-peer. Some reactions write back to the shared CRDT store.
 Five invariants must hold for write-back to be safe:
@@ -170,7 +170,7 @@ ReactionEngine writes as "the system," that actor must have a persistent identit
 derived from the node's keypair — not regenerated per boot. Unstable actor IDs
 cause spurious conflicts and make LWW resolution non-deterministic across restarts.
 
-## Automerge-Repo: What the Official Docs Say
+!! Automerge-Repo: What the Official Docs Say
 
 The Automerge team's canonical pattern for multi-peer root docs
 (`automerge.org/docs/tutorial/persist-root-doc/`):
@@ -198,7 +198,7 @@ island definition bundle to new nodes.
 <<~ &#x0004; -> ? >>
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/island >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/reaction-engine >>

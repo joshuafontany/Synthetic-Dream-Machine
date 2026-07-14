@@ -17,9 +17,9 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/lar-hud"
 
 <<~ &#x0002; >>
 
-# LarHUD — Dockable TW5 Wiki Frame
+! LarHUD — Dockable TW5 Wiki Frame
 
-## Doctrine
+!! Doctrine
 
 LarHUD positions TW5 as a **flex sibling** of the TLDraw canvas, not a portal overlay.
 The canvas container gets `flex:1` and shrinks when the HUD opens.
@@ -29,7 +29,7 @@ never overlaps the HUD because both live in the same flex row.
 This implements the Excalidraw/Figma/VSCode canonical push model:
 panel opens → canvas shrinks → panel closes → canvas expands.
 
-## Three-State Machine
+!! Three-State Machine
 
 ```
 collapsed (44px icon strip)
@@ -47,7 +47,7 @@ TW5 shadow root fills remaining height.
 
 **Expanded**: Full wiki chrome at 640px. Shrink button (◂) returns to sidebar.
 
-## TW5 Mount Contract
+!! TW5 Mount Contract
 
 `tw5.mountPanel(hostDiv)` attaches a shadow root to the host element,
 injects TW5 styles via a `<style id="lar-tw5-styles">` element,
@@ -64,14 +64,14 @@ and injects it into the shadow root as a real `<style>` element. TW5's raw
 `addEventListener` calls inside the shadow root bypass React's synthetic event
 retargeting problem entirely.
 
-## CSS Isolation
+!! CSS Isolation
 
 TLDraw CSS custom properties (`--tl-color-*`, `--tl-font-*`) **do** cross the
 shadow root boundary by inheritance. This is intentional — TW5 inside the HUD
 inherits the current tldraw theme (gruvbox-dark/light). To override, declare
 `:host { --tl-color-background: <value>; }` inside the shadow stylesheet.
 
-## Z-Index Map (flex sibling model)
+!! Z-Index Map (flex sibling model)
 
 | Layer | Z-Index | Who owns it |
 |---|---|---|
@@ -83,7 +83,7 @@ inherits the current tldraw theme (gruvbox-dark/light). To override, declare
 The flex sibling model means LarHUD has **no z-index requirement** —
 it sits in the document flow, not above the canvas.
 
-## Keyboard Shortcuts
+!! Keyboard Shortcuts
 
 | Key | Effect |
 |---|---|
@@ -95,13 +95,13 @@ it sits in the document flow, not above the canvas.
 ⌘K uses `capture: true` with `stopImmediatePropagation` to override
 LarariumShell's own ⌘K toggle handler.
 
-## TLDraw HUD Compatibility
+!! TLDraw HUD Compatibility
 
 All existing tldraw slot components render **inside the canvas container** (`canvasWrap`):
 
-- `LarariumMenuPanel` → `components.MenuPanel` — top-left of canvas, never touches LarHUD
-- `LarariumSharePanel` → `components.SharePanel` — top-right of canvas, inside canvasWrap
-- `LarariumHelperButtons` → `components.HelperButtons` — top-left of canvas, inside canvasWrap
+* `LarariumMenuPanel` → `components.MenuPanel` — top-left of canvas, never touches LarHUD
+* `LarariumSharePanel` → `components.SharePanel` — top-right of canvas, inside canvasWrap
+* `LarariumHelperButtons` → `components.HelperButtons` — top-left of canvas, inside canvasWrap
 
 When LarHUD is open at 340px, tldraw's SharePanel anchors to the right edge of
 `canvasWrap` (width = viewport − 340px), not to the screen edge. No overlap.
@@ -109,20 +109,20 @@ When LarHUD is open at 340px, tldraw's SharePanel anchors to the right edge of
 Drawing mode (`drawingMode = true`) shows full tldraw chrome — LarHUD coexists
 as a flex sibling unaffected by tldraw's internal layout changes.
 
-## Future: Bottom Dock + Overlay Mode
+!! Future: Bottom Dock + Overlay Mode
 
-- **Bottom dock**: swap flex-direction to column; LarHUD height-based transitions
-- **Mobile overlay**: below `PUSH_BREAKPOINT_PX` (≈640px container width),
+* **Bottom dock**: swap flex-direction to column; LarHUD height-based transitions
+* **Mobile overlay**: below `PUSH_BREAKPOINT_PX` (≈640px container width),
   LarHUD switches to `position:fixed; right:0` and does not shrink the canvas
-- **Resize handle**: drag the left edge of sidebar to adjust width between MIN_W and MAX_W
-- **Per-tiddler navigation**: HUD tab bar gains a breadcrumb trail for open tiddlers
+* **Resize handle**: drag the left edge of sidebar to adjust width between MIN_W and MAX_W
+* **Per-tiddler navigation**: HUD tab bar gains a breadcrumb trail for open tiddlers
 
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/canvas >>

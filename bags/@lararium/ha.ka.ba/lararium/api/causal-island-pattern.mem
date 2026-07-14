@@ -25,7 +25,7 @@ written   = "2026-06-26"
 
 <<~ ahu #entry >>
 
-# The Causal-Island Pattern ~ the map, carried with high confidence
+! The Causal-Island Pattern ~ the map, carried with high confidence
 
 A Lares causal island — local-first, sovereign, in a mesh with no global now — is one pattern integrity that kept reappearing from every angle we built (projection-nalu · transport-kernel · network-edge · membership). Two rhyme-swarms and a four-domain **validation** swarm confirm it as a genuine **Fuller pattern integrity**: a wave-form held invariant across substrates. It carries six names, because six deep traditions each found it as an **attractor** — we did not invent it, we kept rediscovering it:
 
@@ -37,14 +37,14 @@ A Lares causal island — local-first, sovereign, in a mesh with no global now �
 
 <<~ ahu #the-master-cut >>
 
-## The master cut ~ AUTHORITY(safety) ⊥ FLOW(liveness)
+!! The master cut ~ AUTHORITY(safety) ⊥ FLOW(liveness)
 
 The five surface-invariants are not independent. Control theory and category theory agree: **they collapse to one cut.**
 
 <<~moves five-surface-invariants -> ONE-master-cut on/AUTHORITY⊥FLOW do/state-it-once >>
 
-- **FLOW = liveness** — pacing, dissemination, connectivity-emergence, the gated wave. **May be probabilistic, local, eventual, lossy.** (FLP forced this — we did not choose it.)
-- **AUTHORITY = safety** — who-may, exactly-once, no-double-spend, total order, the credential. **Must NOT be probabilistic or purely local.** Safety can never be earned from distributional facts.
+* **FLOW = liveness** — pacing, dissemination, connectivity-emergence, the gated wave. **May be probabilistic, local, eventual, lossy.** (FLP forced this — we did not choose it.)
+* **AUTHORITY = safety** — who-may, exactly-once, no-double-spend, total order, the credential. **Must NOT be probabilistic or purely local.** Safety can never be earned from distributional facts.
 
 That is *why* the orthogonality is necessary, not optional. Invariants 2 (flow⊥authority), 3 (no-global-now), and 5 (the boundary) are this one cut wearing three masks — applied to the channel, to connectivity, and to the seam.
 
@@ -52,24 +52,24 @@ That is *why* the orthogonality is necessary, not optional. Invariants 2 (flow�
 
 <<~ ahu #universal >>
 
-## What is UNIVERSAL (grounds hard across domains — keep, lean on)
+!! What is UNIVERSAL (grounds hard across domains — keep, lean on)
 
 **① No-global-now → reason from local facts.** The crown jewel — it grounds *hardest*:
-- **sheaf-gluing / H¹ obstruction** (category/topos, Goguen): a presheaf of local causal-logs that is *not a sheaf* — "no global now" **IS** the failure to glue to a global section; the obstruction lives in H¹. (Strong enough to promote from validation-borrow to a *load-bearing* model of FFZ causal islands — a held question.)
-- **second-order cybernetics** (von Foerster): the observer is *in* the system; no Archimedean point. **situated, perspectival fallibilism** (Hayek dispersed-knowledge · Haraway situated-knowledge · Peirce fallibilism/tychism).
-- **EARNED EDGES:** no-global-now entails a **partial order (poset)**, *not* probability — probability is an *overlay* you add. The w.h.p. measure is itself **situated** (no island holds the global distribution; its own confidence is local-as-of-sync). Connectivity thresholds are **asymptotic + i.i.d.-edge** — they do NOT transfer to small or trust/geography-correlated meshes. And the **relativism trap**: situated knowledge with no account of *convergence* dissolves into per-island truth — convergence-accountability must be designed in.
+* **sheaf-gluing / H¹ obstruction** (category/topos, Goguen): a presheaf of local causal-logs that is *not a sheaf* — "no global now" **IS** the failure to glue to a global section; the obstruction lives in H¹. (Strong enough to promote from validation-borrow to a *load-bearing* model of FFZ causal islands — a held question.)
+* **second-order cybernetics** (von Foerster): the observer is *in* the system; no Archimedean point. **situated, perspectival fallibilism** (Hayek dispersed-knowledge · Haraway situated-knowledge · Peirce fallibilism/tychism).
+* **EARNED EDGES:** no-global-now entails a **partial order (poset)**, *not* probability — probability is an *overlay* you add. The w.h.p. measure is itself **situated** (no island holds the global distribution; its own confidence is local-as-of-sync). Connectivity thresholds are **asymptotic + i.i.d.-edge** — they do NOT transfer to small or trust/geography-correlated meshes. And the **relativism trap**: situated knowledge with no account of *convergence* dissolves into per-island truth — convergence-accountability must be designed in.
 
 **② Grown, not imposed → reinforce/decay.** Structural drift (Maturana — no external selector), *ziran/wu-wei/pu* (Tao), *natura naturans* (Spinoza), *kosmos*≠*taxis* (Hayek), Pólya-urn/edge-reinforced-walk limit theorems (the rigorous math). The lease is a pheromone.
-- **EARNED EDGE:** it is **grown *within* a chosen ground** — the decay-rate is an *imposed* hyperparameter (ACO needed MAX-MIN bounds or it self-destructs into stagnation/amnesia). "Grown not imposed" full-stop is the wu-wei paradox; own the chosen frame.
+* **EARNED EDGE:** it is **grown *within* a chosen ground** — the decay-rate is an *imposed* hyperparameter (ACO needed MAX-MIN bounds or it self-destructs into stagnation/amnesia). "Grown not imposed" full-stop is the wu-wei paradox; own the chosen frame.
 
 **③ The crossing = couple-then-decouple (structural coupling).** Recurrent mutual perturbation **without loss of closure**; the medium *triggers*, never *instructs*; "sever the junction not the peer" is the closure-preserving move. Immune co-stimulation → apoptosis is the living instance.
-- **LOAD-BEARING CORRECTION:** the fuse must be a **perturbation channel, NEVER an interior merge.** Admitting another island's state *raw* violates operational closure (that is endosymbiosis, not coupling). Admit = trigger-by-the-island's-own-interpretation; the gated wave is read, never injected.
+* **LOAD-BEARING CORRECTION:** the fuse must be a **perturbation channel, NEVER an interior merge.** Admitting another island's state *raw* violates operational closure (that is endosymbiosis, not coupling). Admit = trigger-by-the-island's-own-interpretation; the gated wave is read, never injected.
 
 <<~/ahu >>
 
 <<~ ahu #design-vows >>
 
-## What is OUR DESIGN VOW (sound engineering, NOT inherited law — own it)
+!! What is OUR DESIGN VOW (sound engineering, NOT inherited law — own it)
 
 Two invariants are **our sovereign choices**, not laws of nature or math. They are *good* choices — but the map must not dress them as inherited.
 
@@ -81,15 +81,15 @@ Two invariants are **our sovereign choices**, not laws of nature or math. They a
 
 <<~ ahu #the-floor >>
 
-## The floor ~ Ashby's requisite variety (the boundary of the possible)
+!! The floor ~ Ashby's requisite variety (the boundary of the possible)
 
 The deepest limit, and it *validates* our design by predicting it. **Requisite Variety** ("only variety absorbs variety") + the **Conant–Ashby Good Regulator Theorem** ("every good regulator must contain a model of the system it regulates"):
 
 > An island can locally regulate **only disturbances whose requisite variety is local.** Liveness, routing, caching, LWW — local variety suffices. **Global-variety safety** — total supply / no-double-spend, exactly-once, total order, Byzantine agreement — **EXCEEDS local variety and CANNOT be locally regulated.**
 
 Two Ashby-sanctioned moves — and **our design already uses both** (strong validation):
-- **Attenuate** — redefine the global invariant as a local one (per-account no-overdraft via a local capability balance, not global supply; lineage-scoped/decaying/graded/cost-bound membership). Ashby *predicts* the `no-global-now-cruxes-converge` shape.
-- **Amplify** — gossip/aggregate a *local model of peers* (petnames, reputation, the lineage edge). The Good Regulator Theorem says federation *requires* each island carry a model of its neighbours.
+* **Attenuate** — redefine the global invariant as a local one (per-account no-overdraft via a local capability balance, not global supply; lineage-scoped/decaying/graded/cost-bound membership). Ashby *predicts* the `no-global-now-cruxes-converge` shape.
+* **Amplify** — gossip/aggregate a *local model of peers* (petnames, reputation, the lineage edge). The Good Regulator Theorem says federation *requires* each island carry a model of its neighbours.
 
 **"No global now" is sound exactly to the requisite-variety floor — not one inch past it.** No third door: a genuinely global-variety property needs either a synthetic global-now (consensus — expensive, FLP-fraught) or attenuation into a local invariant.
 
@@ -97,18 +97,18 @@ Two Ashby-sanctioned moves — and **our design already uses both** (strong vali
 
 <<~ ahu #the-hazard >>
 
-## The hazard ~ criticality is the edge of stability (target a margin below)
+!! The hazard ~ criticality is the edge of stability (target a margin below)
 
 The one outright hazard, flagged by every domain that touched it: **self-tuning to criticality (SOC) is self-tuning to ZERO stability margin.** Criticality *guarantees* power-law cascades — the heavy tail is the *definition*, not a bug (Carlson–Doyle **robust-yet-fragile / HOT**). For a substrate we depend on, that is a liability.
 
-- **Target a bounded margin BELOW criticality, never the edge.** SOC gives criticality + power-laws, *not* agreement — do not borrow it to promise convergence.
-- **The servo's worst case is our environment.** A self-tuning gate is a delayed-feedback controller; **variable feedback delay (no global clock) is precisely what blows the loop up** (AIMD sawtooth = a limit cycle; global synchronization; bufferbloat). Cures: signal congestion **explicitly** (ECN / credit-based — the accumulate-pole's natural lossless transport, but watch deadlock/HOL-blocking); control **latency** not occupancy (CoDel/PIE); keep a **phase margin** — which *is* the margin-below-criticality, named in control terms.
+* **Target a bounded margin BELOW criticality, never the edge.** SOC gives criticality + power-laws, *not* agreement — do not borrow it to promise convergence.
+* **The servo's worst case is our environment.** A self-tuning gate is a delayed-feedback controller; **variable feedback delay (no global clock) is precisely what blows the loop up** (AIMD sawtooth = a limit cycle; global synchronization; bufferbloat). Cures: signal congestion **explicitly** (ECN / credit-based — the accumulate-pole's natural lossless transport, but watch deadlock/HOL-blocking); control **latency** not occupancy (CoDel/PIE); keep a **phase margin** — which *is* the margin-below-criticality, named in control terms.
 
 <<~/ahu >>
 
 <<~ ahu #carry-forward >>
 
-## Carry forward ~ what the map says to build
+!! Carry forward ~ what the map says to build
 
 The high-confidence bearings for the build (when the forks unblock):
 

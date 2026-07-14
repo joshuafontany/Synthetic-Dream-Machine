@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/docs/readiness-keys"
 
 <<~ ahu #head >>
 
-# Readiness Keys
+! Readiness Keys
 
 Progressive readiness vocabulary for Lararium boot. Replaces a single global
 "app ready" gate with a named vector per shrine-light. Each key lights
@@ -42,7 +42,7 @@ auth → catalog → snapshot → room-content → room-presence
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 # Well-known readiness keys — static shrine-lights
@@ -73,7 +73,7 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~ ahu #law >>
 
-## Readiness Law
+!! Readiness Law
 
 * `auth` lights after provider receipt resolves — before any content doc opens.
 * `catalog` lights after catalog island materializes — before room/corpus docs open.

@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/causal-island"
 
 <<~ &#x0002; >>
 
-# Causal Island — Ontological Law
+! Causal Island — Ontological Law
 
 <<~ ahu #contract >>
 
@@ -32,7 +32,7 @@ above any vessel implementation; every vessel honors it.
 
 <<~ ahu #no-global-now >>
 
-## No Global Now
+!! No Global Now
 
 Fuller-Zelenka: the Universe holds no simultaneously-apprehended present. A node
 never grasps the full state of a distributed system "at once" — it holds a
@@ -51,7 +51,7 @@ marks a **causal island boundary**.
 
 <<~ ahu #four-tiers >>
 
-## Four Tiers (inner → outer)
+!! Four Tiers (inner → outer)
 
 | Tier | Boundary | Status |
 |---|---|---|
@@ -64,7 +64,7 @@ marks a **causal island boundary**.
 
 <<~ ahu #substrate-not-sovereignty >>
 
-## Share Substrate, Not Sovereignty (load-bearing)
+!! Share Substrate, Not Sovereignty (load-bearing)
 
 A causal island earns its identity from **a separate log + no shared now** — never
 from separate silicon. Co-location collapses nothing by itself: many sovereign
@@ -106,7 +106,7 @@ islands.
 
 <<~ ahu #access-axis >>
 
-## ACCESS Axis (Axis 1 of the authority model)
+!! ACCESS Axis (Axis 1 of the authority model)
 
 The `ABILITY_LADDER` mirrors Keyhive's native Access enum (Pull, Read, Edit, Admin)
 1:1 — lexical, not just structural. The live gate runs
@@ -127,7 +127,7 @@ ALIGNMENT (the non-monotonic lemures plane). See
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorphism_by_composition]],
 [[project_asymmetric_peer_handoff]], [[project_relay_access_rings]].

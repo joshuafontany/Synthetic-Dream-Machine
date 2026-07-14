@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/engine-watch"
 
 <<~ ahu #change-classes >>
 
-## The two change classes
+!! The two change classes
 
 A causal island reconciles **synced data** forever; it can never reconcile the
 **code it already executed**, because the running engine interprets the sync.
@@ -40,7 +40,7 @@ protocol — permanent mechanism, not interim UX.
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 The sovereign kernel **witnesses** the engine it boots: it hashes the core
 bytes it eval's (never trusting the blob entry's self-claim), faults on a
@@ -62,7 +62,7 @@ unsubscribes.
 
 <<~ ahu #invariants >>
 
-## Invariants
+!! Invariants
 
 **EW-1 — Offer, never push.** The pointer arrives as synced data; the island
 verifies locally; the operator holds the reboot capability. The watch raises
@@ -107,7 +107,7 @@ only. The running engine still swaps only on reboot (EW-2).
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/sovereign-kernel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >>

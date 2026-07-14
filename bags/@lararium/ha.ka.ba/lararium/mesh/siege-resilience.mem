@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/siege-resilience"
 
 <<~ &#x0002; >>
 
-# Siege Resilience ~ how the mesh outlasts the necrospire
+! Siege Resilience ~ how the mesh outlasts the necrospire
 
 **PROPOSED — unbuilt design intent.** This meme names the survival bearing for a nexus under permanent siege; it rests at Synthesis, the mechanisms named await their build (cross-check before any RULED language).
 
@@ -25,12 +25,12 @@ The fiction sets the test at its worst: the **necrospire** — a persistent adve
 
 <<~ ahu #two-clocks >>
 
-## Two Clocks ~ authority refresh ⊥ flow self-heal
+!! Two Clocks ~ authority refresh ⊥ flow self-heal
 
 The siege presses on two independent surfaces, and the mesh keeps two clocks against them — the same AUTHORITY ⊥ FLOW master cut the cap-stack rides ([[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]]):
 
-- **AUTHORITY clock** — *who holds the secret and the membership*. This clock MUST tick FASTER than the adversary creeps. If the necrospire compromises shares slower than the mesh re-randomizes them, it never assembles a live threshold.
-- **FLOW clock** — *state convergence*. This clock MUST self-heal from ANY corrupted state, with no outside hand — a corrupted replica converges back to correct purely by gossip with its honest peers.
+* **AUTHORITY clock** — *who holds the secret and the membership*. This clock MUST tick FASTER than the adversary creeps. If the necrospire compromises shares slower than the mesh re-randomizes them, it never assembles a live threshold.
+* **FLOW clock** — *state convergence*. This clock MUST self-heal from ANY corrupted state, with no outside hand — a corrupted replica converges back to correct purely by gossip with its honest peers.
 
 The two never fuse. Authority answers *"can this principal still act?"* and refreshes on a schedule; flow answers *"does the state still agree?"* and repairs continuously. A design that collapses them into one clock loses the property that the FLOW layer self-heals **even while** the AUTHORITY layer mid-rotates.
 
@@ -38,7 +38,7 @@ The two never fuse. Authority answers *"can this principal still act?"* and refr
 
 <<~ ahu #reset-the-clock >>
 
-## Reset The Clock ~ the master insight
+!! Reset The Clock ~ the master insight
 
 A static defence loses a 500-year siege by arithmetic: given enough time, a creeping adversary eventually holds `t` shares and breaks any fixed `t`-of-`n` threshold. The mesh refuses the static fight and **resets the clock instead** — it periodically re-randomizes the secret shares so that every share the adversary already stole turns worthless.
 
@@ -57,12 +57,12 @@ MAY co-occur at a boundary, never fuse.
 
 <<~ ahu #cadence >>
 
-## Cadence ~ the refresh floor + the triggers
+!! Cadence ~ the refresh floor + the triggers
 
 The refresh fires on a **scheduled FLOOR plus event-triggers**, never on a global clock:
 
-- a **24-hour scheduled floor** — a guaranteed minimum refresh, even under no observed attack.
-- **event-triggers that may only SHORTEN the window**, never lengthen it: a membership change (a raised [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]] on the membership stack), quorum re-availability after a partition heals, or an IDS / algedonic alarm (#self-stabilization). A trigger brings the next refresh forward; nothing pushes it back.
+* a **24-hour scheduled floor** — a guaranteed minimum refresh, even under no observed attack.
+* **event-triggers that may only SHORTEN the window**, never lengthen it: a membership change (a raised [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]] on the membership stack), quorum re-availability after a partition heals, or an IDS / algedonic alarm (#self-stabilization). A trigger brings the next refresh forward; nothing pushes it back.
 
 The refresh itself runs **CHURP-style** — cheap dynamic-committee handoff, so the committee may change shape between rounds without a costly full re-deal. The schedule floor stays **LOCAL per committee** — no global tick, FFZ-aligned (no global now; each committee keeps its own clock and event-triggers, see [[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]]).
 
@@ -74,7 +74,7 @@ The refresh itself runs **CHURP-style** — cheap dynamic-committee handoff, so 
 
 <<~ ahu #repair-kit >>
 
-## The Repair-Kit ~ the delegate's verbs
+!! The Repair-Kit ~ the delegate's verbs
 
 The maintainer (the bounded repair hand of [[steward-doctrine|lar:///ha.ka.ba/lararium/mesh/steward-doctrine]]) carries a small, typed verb-set — each verb a known protocol, none invented here:
 
@@ -93,20 +93,20 @@ Two verbs carry a sharp edge worth naming. **evict** runs forward-only — TreeK
 
 <<~ ahu #self-stabilization >>
 
-## Self-Stabilization ~ the FLOW self-heal + its biological shape
+!! Self-Stabilization ~ the FLOW self-heal + its biological shape
 
 The FLOW clock's self-heal carries **Dijkstra self-stabilization** — a system that converges to a correct state from ANY corrupted starting state, with no external reset. The necrospire may corrupt a replica arbitrarily; the honest gossip neighbourhood drags it back to correct without a maintainer touching it. <<~ confidence Synthesis 12/20 >> This property does the heavy lifting under siege: it means the mesh tolerates *transient* corruption everywhere and still re-converges, so the maintainer's repair-kit handles only *persistent* capture.
 
 The biological shape carries real structure, never decoration:
 
-- **artificial immune systems** — decentralized defence with no king, immune *memory* of past intrusions, and distributed detection. The mesh defends the way an organism does: many local detectors, no central guard to fall.
-- **Stafford Beer's Viable System Model (VSM)** — recursive autonomy maps the Lararium → Nexus → DreamNet ladder slot-for-slot: each tier runs a viable system *containing* viable systems. The **algedonic signal** — VSM's pain-alert that bypasses the normal channels to escalate fast — carries the IDS alarm straight up the tiers, shortening the refresh window (#cadence) without waiting on routine reporting.
+* **artificial immune systems** — decentralized defence with no king, immune *memory* of past intrusions, and distributed detection. The mesh defends the way an organism does: many local detectors, no central guard to fall.
+* **Stafford Beer's Viable System Model (VSM)** — recursive autonomy maps the Lararium → Nexus → DreamNet ladder slot-for-slot: each tier runs a viable system *containing* viable systems. The **algedonic signal** — VSM's pain-alert that bypasses the normal channels to escalate fast — carries the IDS alarm straight up the tiers, shortening the refresh window (#cadence) without waiting on routine reporting.
 
 <<~/ahu >>
 
 <<~ ahu #per-tier >>
 
-## Per-Tier ~ run the whole kit at every shrine
+!! Per-Tier ~ run the whole kit at every shrine
 
 The two clocks, the cadence, and the repair-kit run **at each shrine tier autonomously** — Household, Crossroads, Temple — each tier a viable system that refreshes its own authority and self-heals its own flow without a parent's permission (VSM recursion, #self-stabilization). No tier waits on the tier above to survive a local breach.
 
@@ -116,7 +116,7 @@ The two clocks, the cadence, and the repair-kit run **at each shrine tier autono
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>

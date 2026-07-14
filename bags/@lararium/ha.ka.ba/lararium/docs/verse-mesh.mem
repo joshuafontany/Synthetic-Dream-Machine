@@ -18,9 +18,9 @@ uri-path  = "ha.ka.ba/lararium/docs/verse-mesh"
 
 <<~ &#x0002; >>
 
-# Verse Mesh — Design Narrative
+! Verse Mesh — Design Narrative
 
-## What a Peer Owns
+!! What a Peer Owns
 
 A lararium peer owns **bags** (Automerge documents), not wikis.
 A wiki is a **recipe** — an ordered composition of bags.
@@ -30,7 +30,7 @@ and different application surfaces.
 
 The invariant: bags persist, wikis compose.
 
-## N Local Clocks — Polychronous CRDT Mesh
+!! N Local Clocks — Polychronous CRDT Mesh
 
 The Verse mesh runs **N local clocks**, one per TW5 VM instance.
 Each VM constitutes one clock domain (Signal/INRIA polychronous model, Berry 1991).
@@ -44,7 +44,7 @@ Each peer runs at its own rAF cadence (browser) or setInterval cadence (Node/mob
 The CRDT carries state across the water in causal order.
 The accumulator releases it to TW5 one frame at a time.
 
-## VM Pool — Recipe Slots
+!! VM Pool — Recipe Slots
 
 Each peer holds a `VmPool<TW5RecipeVm>` with named slots:
 
@@ -83,11 +83,11 @@ All slots stay warm.
 The node peer renders on demand by promoting a warm slot briefly (SSR path),
 capturing the render output, then returning to warm.
 
-## Camera Model — Story River Is the First Camera
+!! Camera Model — Story River Is the First Camera
 
 A **camera** = one view frustum over the TW5 wiki world-state.
 
-### Three-Tree Chain — Per Camera
+!!! Three-Tree Chain — Per Camera
 
 Each camera runs its own three-tree chain, the same chain TW5 already runs for
 the Story River:
@@ -112,18 +112,18 @@ A `mountCamera({ rootTiddler, document, container })` call wires the parse→wid
 chain for one camera.  A paired `CameraRegistration` in `startRenderLoop` drives its
 drain→transact→change→refresh cycle.
 These two concerns stay separate:
-- `mountCamera` — static structure (parse + widget + fake DOM)
-- `CameraRegistration` / `startRenderLoop` — dynamic drain timing
+* `mountCamera` — static structure (parse + widget + fake DOM)
+* `CameraRegistration` / `startRenderLoop` — dynamic drain timing
 
-### Camera Surface Contract
+!!! Camera Surface Contract
 
 Each camera holds:
-- its own `IslandAccumulator` — drains at its own tick rate
-- its own **widget tree** — TW5 widget graph rooted at a filter or transclusion tiddler
-- its own **fake DOM** — render target (`window.document`, `$tw.fakeDocument`, `OffscreenCanvas`, etc.)
-- its own input/output surface — user events in, wiki writes out
+* its own `IslandAccumulator` — drains at its own tick rate
+* its own **widget tree** — TW5 widget graph rooted at a filter or transclusion tiddler
+* its own **fake DOM** — render target (`window.document`, `$tw.fakeDocument`, `OffscreenCanvas`, etc.)
+* its own input/output surface — user events in, wiki writes out
 
-### Shared World Graph — Inverted Control
+!!! Shared World Graph — Inverted Control
 
 All cameras in one VM slot **share one TW5 wiki** (world graph).
 The wiki fires a `change` event after each `wiki.transact()`.
@@ -134,7 +134,7 @@ return `refresh()` in O(1) without repaint.
 The **view frustum** lives in the widget tree's root filter tiddler, not in the accumulator.
 The accumulator carries no camera identity — **inverted control**.
 
-### Input Path — No New Machinery
+!!! Input Path — No New Machinery
 
 Cameras that accept user input (typing in the Story River, drawing on a TLDraw canvas)
 dispatch events through the widget tree's standard TW5 event bus.
@@ -153,18 +153,18 @@ That canvas renders a different projection of the same bag state —
 spatial, relational, or visual-graph views of the same Automerge documents.
 
 Further camera slots remain open for:
-- Mobile native views (React Native / Capacitor)
-- Background warm portal-spaces, comms links, nexus leyline feeds, remote signal feeds
-- Household / community / civil / interplanetary lararium implementations
-- Headless render targets (PDF export, MCP tool surface, LLM context projection)
-- Spectator/witness views with different read authority
+* Mobile native views (React Native / Capacitor)
+* Background warm portal-spaces, comms links, nexus leyline feeds, remote signal feeds
+* Household / community / civil / interplanetary lararium implementations
+* Headless render targets (PDF export, MCP tool surface, LLM context projection)
+* Spectator/witness views with different read authority
 
 **Causal islands, fractal:** causal islands exist inside the lararium (bag boundaries),
 outside the lararium (peer-to-peer CRDT sync), inside the TW5 VM (per-camera tick
 domains), and outside the TW5 VM (warm slots accumulating but not painting).
 As above, so below.
 
-### Multi-Camera Example
+!!! Multi-Camera Example
 
 ```
 VM Slot (one TW5 wiki)
@@ -194,7 +194,7 @@ Cameras that accept user input (typing, drawing) register outbound handlers
 Input from any camera writes back through `IslandAdaptor.saveTiddler` →
 `store.put()` — the same outbound path used by the Story River today.
 
-## Visibility Gate — The Scale Boundary
+!! Visibility Gate — The Scale Boundary
 
 The IslandAccumulator drains patches for all queued tiddlers by default.
 At document scale (5 000+ tiddlers), a full drain per frame blows the 16ms budget.
@@ -207,7 +207,7 @@ and flush on the next explicit navigation event.
 This gate does not apply in early alpha.
 It names the correct scale boundary before the project reaches it.
 
-## Wiring Law — One IslandAccumulator per Camera per VM Slot
+!! Wiring Law — One IslandAccumulator per Camera per VM Slot
 
 ```typescript
 store.addProjection(adaptor);        // IslandAdaptor: pre-sync buffer + non-CRDT
@@ -236,7 +236,7 @@ The wiki fires `change` once per transact.
 All registered widget trees see the event; only those with dependencies on changed
 tiddlers repaint. Others return from `refresh()` in O(1).
 
-## Tick Sources by Platform
+!! Tick Sources by Platform
 
 | Platform        | Tick source              | Live slots | Warm slots |
 |-----------------|--------------------------|------------|------------|
@@ -250,7 +250,7 @@ The tick source changes; the drain contract does not.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/camera-mount >>

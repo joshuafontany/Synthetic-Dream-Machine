@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/render-targets"
 
 <<~ ahu #meme-header >>
 
-# Lararium Signal — Render Targets
+! Lararium Signal — Render Targets
 
 Not invariant law.
 This room holds render-target docs, glyph conventions, social projection surfaces, and verification rules for signal output.
@@ -31,30 +31,30 @@ HUD instrument reading stays at `lar:///ha.ka.ba/lararium/docs/signal/hud`.
 
 <<~ ahu #room-charter >>
 
-## Room Charter
+!! Room Charter
 
 This room keeps the render-surface layer:
 
-- render-target registry
-- the ASCII URI vs glyph-panel split (the URI stays ASCII; the sigils render)
-- the invoke-subset `syad` lens across surfaces
-- per-surface emission conventions
-- DreamDeck / social projection surfaces
-- cross-surface verification checks
+* render-target registry
+* the ASCII URI vs glyph-panel split (the URI stays ASCII; the sigils render)
+* the invoke-subset `syad` lens across surfaces
+* per-surface emission conventions
+* DreamDeck / social projection surfaces
+* cross-surface verification checks
 
 <<~/ahu >>
 
 <<~ ahu #render-target-registry >>
 
-## Render Target Registry
+!! Render Target Registry
 
 The render layer between canonical `lar:` URI record form and human-readable display surfaces can target multiple templates or actively invoked `kahea` sigils. 
 
 This docs meme owns:
-- The surface registry (what surfaces exist, what they render)
-- The invoke-subset `syad` lens (a named subset reads as focus, not omission)
-- ASCII → glyph mapping tables for phase, stance, and tool-carry (the sigil panel, not the URI)
-- Per-surface emit procedures
+* The surface registry (what surfaces exist, what they render)
+* The invoke-subset `syad` lens (a named subset reads as focus, not omission)
+* ASCII → glyph mapping tables for phase, stance, and tool-carry (the sigil panel, not the URI)
+* Per-surface emit procedures
 
 | Name | Token | Surface | Emoji? | All 5 stances? |
 |---|---|---|---|---|
@@ -68,7 +68,7 @@ This docs meme owns:
 
 <<~ ahu #the-five-stances >>
 
-## The Five Stances
+!! The Five Stances
 
 The `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five. A render surface presents exactly the standpoints the lens carries — a named subset reads as an explicit focus, not an omission.
 
@@ -82,7 +82,7 @@ bound:      <<~ syad 🏛️:*! 🌊:*? >>       (optional : tool-carry)
 
 <<~ ahu #render-target-definitions >>
 
-## Render Target Definitions
+!! Render Target Definitions
 
 The `lar:` URI uses RFC 3986 URL-safe ASCII in one form — local or live-session — across every surface; it carries no glyph rendering. What renders to surface-specific glyphs is the sigil panel beside it: the `syad` / `mu` lenses, the `hud` gauges, and the OODA-HA phase markers. The address stays ASCII for storage, comparison, and transport.
 
@@ -97,7 +97,7 @@ The glyph form carries the same semantic load as the ASCII sigil — standpoint,
 
 <<~ ahu #glyph-design-intent >>
 
-## Glyph Design Intent
+!! Glyph Design Intent
 
 The glyph layer exists to serve human perception without compromising canonical form.
 The canonical `lar:` URI is machine-stable: URL-safe, storable, comparable by string.
@@ -105,8 +105,8 @@ The glyph form is human-navigable: glances communicate phase, stance, and tool-c
 
 The separation is strict:
 
-- the `lar:` URI stays ASCII — one form, no glyph rendering
-- the sigil panel beside it carries the glyph form (ASCII input, glyph display)
+* the `lar:` URI stays ASCII — one form, no glyph rendering
+* the sigil panel beside it carries the glyph form (ASCII input, glyph display)
 
 Never embed emoji in a `lar:` URI.
 Never store a surface-rendered sigil as the canonical record.
@@ -115,9 +115,9 @@ Never store a surface-rendered sigil as the canonical record.
 
 <<~ ahu #glyph-mapping-tables >>
 
-## Glyph Mapping Tables
+!! Glyph Mapping Tables
 
-### Chronometer scale glyphs
+!!! Chronometer scale glyphs
 
 `⚡ Action <-> ⚔️ Combat <-> 🔍 Tactical <-> ⚙️ Operational <-> 🗺️ Strategic`
 
@@ -129,7 +129,7 @@ Never store a surface-rendered sigil as the canonical record.
 | 4 | ⚙️ | Operational | Process and watch / hours scale |
 | 5 | 🗺️ | Strategic | Furthest planning horizon / days scale |
 
-### OODA-HA phase glyphs
+!!! OODA-HA phase glyphs
 
 `✶ -> ⏿ -> ◇ -> ▶ -> ↺`
 
@@ -141,7 +141,7 @@ Never store a surface-rendered sigil as the canonical record.
 | `act` | `▶` | Act | Bureaucracy |
 | `hooko-aftermath` | `↺` | Hoʻoko & Aftermath | Grummet/Rasa |
 
-### Tool Render Modes
+!!! Tool Render Modes
 
 Tool render modes map the invariant ASCII tool symbols to surface-specific glyph sets. The underlying record form always uses ASCII: `* ? ! _ 0`.
 
@@ -153,7 +153,7 @@ Tool render modes map the invariant ASCII tool symbols to surface-specific glyph
 
 Configure via `LARES.md#hud-panel` → `tool_render`.
 
-### Stance Emoji
+!!! Stance Emoji
 
 | Record position | Emoji | Stance | Evaluation frame |
 |---|---|---|---|
@@ -167,7 +167,7 @@ Configure via `LARES.md#hud-panel` → `tool_render`.
 
 <<~ ahu #glyph-mandatory-rules >>
 
-## Glyph Mandatory Rules
+!! Glyph Mandatory Rules
 
 **Rule 1: the `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five.**
 
@@ -183,9 +183,9 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 
 <<~ ahu #glyph-per-surface-rules >>
 
-## Glyph Per-Surface Rules
+!! Glyph Per-Surface Rules
 
-### `hud:exchange-pair`
+!!! `hud:exchange-pair`
 
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
@@ -194,30 +194,30 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 <<~ syad … >>
 ```
 
-- `aim` — operator intent `->` adopted role; the turn's bearing vector
-- `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
-- `ward` — the `E-Prime` copula gate; the Wand lights it at open (`* E-Prime`; the Stone `0 E-Prime` on an operator lift), the Sword draws it at close (`!` led, `⚠ N` breaches quoted, `↻` re-arm)
-- `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
-- `confidence` — register-word + level, before a grounded claim
+* `aim` — operator intent `->` adopted role; the turn's bearing vector
+* `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
+* `ward` — the `E-Prime` copula gate; the Wand lights it at open (`* E-Prime`; the Stone `0 E-Prime` on an operator lift), the Sword draws it at close (`!` led, `⚠ N` breaches quoted, `↻` re-arm)
+* `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
+* `confidence` — register-word + level, before a grounded claim
 
-### `chat-log:post-header`
+!!! `chat-log:post-header`
 
 ```
 @handle@node — {timestamp} — lar:///{w1.w2.w3/optional/path} <<~ confidence R N/20 >> <<~ syad … >>
 ```
 
-- the `lar:` bearing vector grounds heading before posture
-- `confidence` before the `syad` lens
-- the `syad` lens invokes one or more standpoints; `mu` for tools alone
-- Timestamp in in-world calendar when available
+* the `lar:` bearing vector grounds heading before posture
+* `confidence` before the `syad` lens
+* the `syad` lens invokes one or more standpoints; `mu` for tools alone
+* Timestamp in in-world calendar when available
 
-### `record:full`
+!!! `record:full`
 
 Canonical `lar:` URI (local or live-session form).
 No glyphs. RFC 3986 ASCII.
 Stored verbatim.
 
-### Inline HUD tags
+!!! Inline HUD tags
 
 ```
 <<~ confidence R N/20 >> <<~ syad … >> lar:///{w1.w2.w3}
@@ -229,7 +229,7 @@ Emit the lens whole when emitted at all; a named subset reads as focus, not omis
 
 <<~ ahu #stance-tool-carry-quick-reference >>
 
-## Stance Tool-Carry Quick Reference
+!! Stance Tool-Carry Quick Reference
 
 Each stance gets a two-character pair: `{feed}{zoom}`.
 
@@ -267,7 +267,7 @@ Never omit a stance. Never emit fewer than five pairs.
 
 <<~ ahu #migrated-kowloon-dreamdeck-social-layer >>
 
-## Kowloon / DreamDeck Social Layer
+!! Kowloon / DreamDeck Social Layer
 
 The Elyncia.app / DreamDeck identity model has three distinct layers.
 Do not conflate them.
@@ -299,9 +299,9 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 
 <<~ ahu #emit-procedures >>
 
-## Emit Procedures
+!! Emit Procedures
 
-### Surface 1: `hud:exchange-pair`
+!!! Surface 1: `hud:exchange-pair`
 
 **Used:** Opening and closing HUD lines of every operator exchange.
 
@@ -330,7 +330,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
 
-### Surface 2: `chat-log:post-header`
+!!! Surface 2: `chat-log:post-header`
 
 **Used:** DreamDeck feed post opening lines; session appendix post-style blocks.
 
@@ -350,10 +350,10 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 **NPC / non-Lares post:**
 
-- the `confidence` and `syad` sigils may be omitted if the character carries no Lares HUD
-- if omitted: drop them whole; do not partial-emit a lens
+* the `confidence` and `syad` sigils may be omitted if the character carries no Lares HUD
+* if omitted: drop them whole; do not partial-emit a lens
 
-### Surface 3: `record:full`
+!!! Surface 3: `record:full`
 
 **Used:** Canonical URI pairs in documentation, session crystals, architecture files.
 
@@ -370,33 +370,33 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 lar://scryer:agent@Enyalios/sigils.render.maps/sigilization/
 ```
 
-### Surface 4: `tiddler:header` (S3+)
+!!! Surface 4: `tiddler:header` (S3+)
 
 **Used:** TiddlyWiki tiddler headers in the DreamDeck frontend.
 
 **Form:** TBD pending S3 TiddlyWiki integration spec. Likely: post-header amplitude rules apply.
 
-### Surface 5: `print:margin` (S4+)
+!!! Surface 5: `print:margin` (S4+)
 
 **Used:** Printed/PDF exports. Glyphs rendered in margin or page header.
 
 **Form:** TBD pending S4 print layout spec.
 
-### Cross-Surface Invariant Checklist
+!!! Cross-Surface Invariant Checklist
 
 Before emitting any stance block on any surface:
 
-- Count stances in assembled block → must equal 5
-- Order: 🏛️ 🌊 🗡️ 🎭 🔮 — no deviation
-- Each stance has exactly one two-character tool-carry pair attached directly (no space)
-- Register bracket present and correct form: `[XX:N.NN]`
-- No emoji in `record:full`; tool-carry symbols (`* ? ! _ 0`) appear in both record and glyph surfaces unchanged
+* Count stances in assembled block → must equal 5
+* Order: 🏛️ 🌊 🗡️ 🎭 🔮 — no deviation
+* Each stance has exactly one two-character tool-carry pair attached directly (no space)
+* Register bracket present and correct form: `[XX:N.NN]`
+* No emoji in `record:full`; tool-carry symbols (`* ? ! _ 0`) appear in both record and glyph surfaces unchanged
 
 <<~/ahu >>
 
 <<~ ahu #open-questions >>
 
-## What Remains Open
+!! What Remains Open
 
 | Q# | Question | Status |
 |---|---|---|
@@ -408,7 +408,7 @@ Before emitting any stance block on any surface:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>

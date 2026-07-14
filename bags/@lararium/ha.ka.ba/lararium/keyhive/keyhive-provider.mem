@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lararium/keyhive/keyhive-provider"
 
 <<~ &#x0002; >>
 
-# Keyhive Provider
+! Keyhive Provider
 
 The isomorphic ceremony surface for the Lararium identity lattice.
 Lives in `@lararium/keyhive` — no TW5, no Node I/O, no DOM.
@@ -26,16 +26,16 @@ Takes a `Repo` and a seed; returns unforgeable membership proofs stored as Autom
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 Three ceremony functions. All three run in any vessel context (node, browser, worker).
 
 **`runFoundingCeremony(repo: Repo, operatorSeed: Uint8Array): FoundingResult`**
 
 Produces the three-doc identity lattice:
-- `Individual` — Ed25519 device keypair derived from seed; the Keyhive identity for this vessel.
-- `PersonaGroup` — sentinel Automerge doc proving "this device belongs to this operator."
-- `MeshCabal` — sentinel Automerge doc proving "this PersonaGroup belongs to this mesh."
+* `Individual` — Ed25519 device keypair derived from seed; the Keyhive identity for this vessel.
+* `PersonaGroup` — sentinel Automerge doc proving "this device belongs to this operator."
+* `MeshCabal` — sentinel Automerge doc proving "this PersonaGroup belongs to this mesh."
 
 Gate B and Gate C tiddlers write into the admin doc. Gate A verifies the Keyhive DID
 matches the local verifying key; throws on mismatch — no silent drift.
@@ -57,7 +57,7 @@ lattice membership from cold — no network request, no authority server.
 
 <<~ ahu #three-gate-lattice >>
 
-## Three-Gate Lattice
+!! Three-Gate Lattice
 
 ```text
 Vessel Individual (Ed25519 device keypair, local storage only)
@@ -81,13 +81,13 @@ to any remote vessel.
 
 <<~ ahu #isomorphic-law >>
 
-## Isomorphic Law
+!! Isomorphic Law
 
 These functions accept `Repo` and `Uint8Array` only. They carry no:
-- filesystem imports (`fs`, `path`)
-- DOM imports (`window`, `indexedDB`, `crypto`)
-- Node worker imports (`worker_threads`)
-- TW5 imports
+* filesystem imports (`fs`, `path`)
+* DOM imports (`window`, `indexedDB`, `crypto`)
+* Node worker imports (`worker_threads`)
+* TW5 imports
 
 The calling vessel supplies: a `Repo` (constructed with a vessel-appropriate adapter)
 and the operator seed (read from disk at 0o600 for node, derived from WebCrypto for browser).
@@ -100,7 +100,7 @@ It does not depend on `@lararium/tw5`, `@lararium/node`, or `@lararium/browser`.
 
 <<~ ahu #ea-notes >>
 
-## Ea Notes
+!! Ea Notes
 
 The founding ceremony produces an unforgeable membership proof that any vessel holding
 the operator seed can verify from cold. No server participates in this verification.
@@ -115,7 +115,7 @@ enters the PersonaGroup doc. The private scalar never leaves the memory of the f
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/lararium/keyhive/capability-provider >>

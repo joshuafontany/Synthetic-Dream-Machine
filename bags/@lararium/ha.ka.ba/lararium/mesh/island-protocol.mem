@@ -20,13 +20,13 @@ uri-path      = "ha.ka.ba/lararium/mesh/island-protocol"
 
 <<~ ahu #contract >>
 
-## Island Protocol
+!! Island Protocol
 
 Discriminated union for all messages crossing the vessel / causal-island boundary.
 Every message MUST carry `schema_version: 1`. Platform-neutral — no Node or browser imports.
 Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes only.
 
-### Island Sovereignty Law — nine clauses (isomorphic across all vessel types)
+!!! Island Sovereignty Law — nine clauses (isomorphic across all vessel types)
 
 1. Every island boots a Repo-in-island via a transferred `syncPort` (MessagePort).
 2. The island derives tiddler state from its own CRDT doc — never from vessel oracle deltas.
@@ -38,7 +38,7 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 8. Federation seam — when a grant carries a non-empty AutomergeUrl, two obligations activate. Vessel: wire `MessageChannelNetworkAdapter(mainPort)` on the vessel Repo before delivering `manifest`. Island: call `repo.find(docUrl).whenReady()` and await readiness before seeding TW5 and declaring `ea`; failure on either side moves the slot to disposed within `HANDSHAKE_TIMEOUT_MS`. Gate proof: `federation-seam.test.ts` (node) + `browser-repo-in-island.test.ts` test 2 (browser). When this law holds, two vessels sharing a bag converge without any explicit sync call.
 9. TW5 SHALL NOT instantiate on the main thread. Every `TW5Engine` lives inside a sovereign Worker; the main thread holds `DocHandle` references and `CompositeStore` layers only. Any `bootTw5()` outside a Worker constitutes a sovereignty violation.
 
-### IslandGrants — typed ocap manifest capabilities
+!!! IslandGrants — typed ocap manifest capabilities
 
 The keel cut (2026-06-09) retired the `resolver` dictionary (slot URI → AutomergeUrl map, a main-owned lookup). The manifest now HANDS the island typed structural capabilities — each field arrives as a grant (ocap), never gets looked up from a vessel-owned table:
 
@@ -53,7 +53,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 
 **Library layers never ride the manifest.** The island resolves them itself from its registry plane (recipe-watch reconcile — system bags from `@oracle`, user bags from `@catalog`) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
 
-### Guarantee grades
+!!! Guarantee grades
 
 | Grade | Invariant |
 |---|---|
@@ -61,7 +61,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 | GP-2 | All payloads ride as plain objects — no class instances, no functions, no DOM. |
 | GP-4 | CryptoKey NOT on this surface; key material stays in-thread. |
 
-### Message types — Vessel → island
+!!! Message types — Vessel → island
 
 | Type | Purpose |
 |---|---|
@@ -75,7 +75,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 | `admin:evict-result` / `admin:residency-op-result` | Outcomes for admin-commanded eviction / residency ops. |
 | `wiki:place-verb` | Place a wiki-scope job in a wiki island's TW5 wiki. |
 
-### Message types — Island → vessel
+!!! Message types — Island → vessel
 
 | Type | Purpose |
 |---|---|
@@ -92,7 +92,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 | `admin:wiki-alert` | Admin computes "affected by content"; main delivers a `system-alert` verb to the affected LIVE island (fire-and-forget; unmounted wikis skipped). |
 | `wiki:verb-result` | Wiki island result for a job the vessel awaits. |
 
-### Factories
+!!! Factories
 
 `mkManifest` · `mkEa` · `mkBreath` · `mkReady` · `mkTeardown` · `mkTeardownAck` · `mkFault` ·
 `mkAdminPlaceVerb` · `mkAdminDelegateVerb` · `mkAdminVerbResult` ·
@@ -105,7 +105,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/ea >>
 <<~ loulou lar:///ha.ka.ba/lararium/browser/browser-vessel-island-pool >>

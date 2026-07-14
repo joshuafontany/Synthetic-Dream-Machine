@@ -26,7 +26,7 @@ uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
 
 <<~ ahu #core-claim >>
 
-# Sync Namespace — The Title Predicate That Crosses the Boundary
+! Sync Namespace — The Title Predicate That Crosses the Boundary
 
 The lararium sync filter selects by **title namespace**. Only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk; the TW5 `$:/` namespace stays browser-local.
 
@@ -36,7 +36,7 @@ This forms the **title-level companion** to disk-projection's bag-level law. Dis
 
 <<~ ahu #tw5-boundary >>
 
-## The TW5 `$:/` boundary, mirrored
+!! The TW5 `$:/` boundary, mirrored
 
 TW5 reserves the `$:/` URI prefix for system tiddlers that stay browser-local — shadow tiddlers, palette state, draft markers, plugin internals. The lararium sync filter **mirrors this distinction**: only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk. A `$:/`-titled tiddler never reaches the store through the filter.
 
@@ -44,7 +44,7 @@ TW5 reserves the `$:/` URI prefix for system tiddlers that stay browser-local �
 
 <<~ ahu #system-tiddlers >>
 
-## System tiddlers carry `lar:///` titles
+!! System tiddlers carry `lar:///` titles
 
 Lares system tiddlers — cascade configs, render templates, global mounts, plugin envelopes — MUST carry `lar:///` titles, typically under:
 
@@ -61,7 +61,7 @@ This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to di
 
 <<~ ahu #tag-values >>
 
-## Tag values stay exempt
+!! Tag values stay exempt
 
 Tag *values* MAY still reference TW5-conventional `$:/tags/...` strings (`$:/tags/Global`, `$:/tags/Lar/AhuTemplate`). Tag values name no title and do not intersect the sync filter; they exist only so that cascade entries plug into TW5 core's standard tag-discovery path.
 
@@ -71,7 +71,7 @@ The predicate reads **titles**, never tag values — the two never collide.
 
 <<~ ahu #browser-local >>
 
-## Browser-local by design
+!! Browser-local by design
 
 Drafts, ephemeral UX state, and per-operator working surface remain in the `$:/` namespace by design. Those tiddlers stay browser-local until the operator's **explicit promotion act** — the same operator-agency gate that governs canon promotion across the stack. Nothing in `$:/` federates on its own.
 
@@ -79,7 +79,7 @@ Drafts, ephemeral UX state, and per-operator working surface remain in the `$:/`
 
 <<~ ahu #dual-distribution >>
 
-## Dual distribution — a packaging convention
+!! Dual distribution — a packaging convention
 
 For drag-and-drop distribution to the broader TW5 community, lar-namespaced plugin envelopes MAY re-emit under `$:/plugins/...` titles. The plugin module code stays identical; only the envelope title differs.
 
@@ -89,7 +89,7 @@ This dual-distribution shape names a **packaging convention, not a namespace exc
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/save-path >>

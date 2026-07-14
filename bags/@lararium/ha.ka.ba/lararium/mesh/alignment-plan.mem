@@ -17,14 +17,14 @@ uri-path  = "ha.ka.ba/lararium/mesh/alignment-plan"
 
 <<~ &#x0002; >>
 
-# Package Alignment Plan
+! Package Alignment Plan
 
 Governs the package dependency graph and the placement of shared concerns in the monorepo.
 This meme belongs in `@lararium/mesh` because mesh anchors the spine this plan describes.
 
 <<~ ahu #dep-graph >>
 
-## Canonical Dependency Graph
+!! Canonical Dependency Graph
 
 ```
 @lares/core             (no deps)
@@ -43,7 +43,7 @@ No arrows go upstream. No package adds a dep that reaches into a downstream pack
 
 <<~ ahu #spine-law >>
 
-## Spine Law
+!! Spine Law
 
 **`@lararium/mesh` anchors the isomorphic spine for all concerns outside TW5 VMs.**
 
@@ -88,7 +88,7 @@ mesh, (C) byte emission. See `genesis-doc.ts` and `bags/@lararium/mesh/genesis-d
 
 <<~ ahu #consistency-rules >>
 
-## Consistency Rules
+!! Consistency Rules
 
 These rules apply to every new file and every dep addition in the monorepo.
 
@@ -106,7 +106,7 @@ These rules apply to every new file and every dep addition in the monorepo.
 
 <<~ ahu #open-alignment-items >>
 
-## Open Alignment Items
+!! Open Alignment Items
 
 These items name known inconsistencies in the current tree. Each carries a resolution path.
 
@@ -121,7 +121,7 @@ These items name known inconsistencies in the current tree. Each carries a resol
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter >>

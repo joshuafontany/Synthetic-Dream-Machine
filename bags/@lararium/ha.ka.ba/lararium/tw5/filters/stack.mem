@@ -17,7 +17,7 @@ written    = "2026-06-12"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `stack[]` — emits each input carrier's qualified has-stack URIs, deduped: relative tags qualify against the carrier's OWN bag scope (`root/@bag/version` from its title); `lar:` tags pass through; system and free-form tags ride outside the stack.
 
@@ -27,7 +27,7 @@ written    = "2026-06-12"
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.ts`); operator shell: `packages/lararium-tw5/src/filters/stack.ts` (packed into the lares plugin).
 

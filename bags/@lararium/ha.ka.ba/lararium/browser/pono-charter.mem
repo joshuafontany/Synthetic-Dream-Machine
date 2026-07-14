@@ -17,14 +17,14 @@ uri-path  = "ha.ka.ba/lararium/browser/pono-charter"
 
 <<~ &#x0002; >>
 
-# lararium-browser Pono Charter
+! lararium-browser Pono Charter
 
 Constitutional doc. Governs what code enters the package, how it survives, and what gets deleted.
 Code movement requires a matching entry in the **migration allowlist** (`deletion-map.md`).
 
 <<~ ahu #vessel-law >>
 
-## Vessel Law
+!! Vessel Law
 
 The browser vessel lives on the same constitutional law as the node vessel.
 
@@ -77,8 +77,8 @@ would bypass Island Sovereignty Law §1 (each island owns its own Repo and keypa
 
 The `@lararium/browser` package itself does not set headers — it operates inside the
 browser security model. The obligation sits at the serving edge:
-- In the `Caddyfile`: `header Content-Security-Policy "worker-src 'self'; …"`
-- In Docker / deployment manifests: verified before any operator vessel goes live.
+* In the `Caddyfile`: `header Content-Security-Policy "worker-src 'self'; …"`
+* In Docker / deployment manifests: verified before any operator vessel goes live.
 
 During local development, the Vite dev server's same-origin constraint provides equivalent
 protection; no explicit CSP gets required in that context.
@@ -87,7 +87,7 @@ protection; no explicit CSP gets required in that context.
 
 <<~ ahu #package-law >>
 
-## Package Law
+!! Package Law
 
 Three packages carry the browser vessel. Responsibility divides cleanly.
 
@@ -103,7 +103,7 @@ The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki
 
 <<~ ahu #migration-allowlist >>
 
-## Migration Allowlist
+!! Migration Allowlist
 
 Code moves into `@lararium/browser` only when it satisfies **all three** tests:
 
@@ -117,7 +117,7 @@ Code that passes all three gets a migration entry in `deletion-map.md#migration-
 
 <<~ ahu #open-questions >>
 
-## Open Questions
+!! Open Questions
 
 These questions do not block charter adoption. They require measurement before resolution.
 
@@ -131,7 +131,7 @@ These questions do not block charter adoption. They require measurement before r
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
 <<~ loulou lar:///ha.ka.ba/lararium/browser/deletion-map >>

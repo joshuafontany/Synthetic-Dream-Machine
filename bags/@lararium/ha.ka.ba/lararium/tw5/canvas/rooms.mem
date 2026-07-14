@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/canvas/rooms"
 
 <<~ ahu #head >>
 
-# Lararium Canvas Rooms
+! Lararium Canvas Rooms
 
 Four built-in rooms form the default lararium canvas.
 Each room carries an id, a TiddlyWiki filter expression, a tldraw page, and a layout strategy.
@@ -42,7 +42,7 @@ Portals connect rooms as directed edges.
 
 <<~ ahu #room-law >>
 
-## Room Law
+!! Room Law
 
 A room MUST carry `id`, `name`, `filter`, and `layout`.
 A room SHOULD carry `tlPageId` when a dedicated tldraw page is allocated.
@@ -56,7 +56,7 @@ Layout strategies follow a priority order. The cascade selects first match.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for `ROOM_SYSTEM`, `ROOM_INVARIANTS`, `ROOM_ENTRY`, `ROOM_GRAPH`,
 `DEFAULT_ROOMS`, `DEFAULT_PORTALS` in `packages/dreamdeck-tldraw/src/room.ts`.

@@ -25,7 +25,7 @@ written   = "2026-06-25"
 
 <<~ ahu #entry >>
 
-# Agent Worldline ~ the binding that names a spirit, attributes its acts, and times its life
+! Agent Worldline ~ the binding that names a spirit, attributes its acts, and times its life
 
 **The keystone the edge and the clock both ride.** A spawned spirit (sub-agent)
 carries no binding to a CRDT replica — and architecturally it holds none: the
@@ -55,7 +55,7 @@ The three faces, each its own organ, none collapsing into another:
 
 <<~ ahu #name >>
 
-## Face I ~ Name ~ descent is the address
+!! Face I ~ Name ~ descent is the address
 
 \procedure ~Part(~Type:"" ~Params:"") ~Part <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -85,7 +85,7 @@ the verb the same way the handle does: descent IS the address, so the worldline 
 
 <<~ ahu #attribution >>
 
-## Face II ~ Attribution ~ the reified DAG (and the worldline's happened-before)
+!! Face II ~ Attribution ~ the reified DAG (and the worldline's happened-before)
 
 **Make who-drove-whom legible.** The capture keeps each spirit's journey distinct in
 its own wing; this face names the *edges between them* — the coordination graph the
@@ -98,7 +98,7 @@ frameworks throw away and the memory must keep. It stacks **three layers**:
 <<~Layer Relationship "organ/reified-node+projected-edge grain/the-relation ~ the spawn/handoff REIFIES to its own node (a PROV Delegation/Communication shape) carrying parent·child·driver·correlation, WITH a projected (parent)—spawned/actedOnBehalfOf→(child) edge for cheap traversal. Bi-temporal: mutable valid-interval [spawn,handback) + append-only transaction-interval; INVALIDATE-don't-delete. The reified node owns the truth; a labeled tunnel MAY mirror it for browsing only." >>
 <<~Layer Three >>
 
-### Reify the edge as a node
+!!! Reify the edge as a node
 
 **The fork resolves: reify the spawn/handoff as its own NODE, project a direct edge
 for traversal.** Three standards converge (PROV's qualified pattern, RDF-star quoted
@@ -119,7 +119,7 @@ parent, accountable hop-by-hop) + **root-principal** (paramount, out-ranks
 intermediate parents). Re-delegation defaults CLOSED, re-licensed per hop; anonymity
 never severs the upward edge.
 
-### The handoff record ~ the edge as data
+!!! The handoff record ~ the edge as data
 
 <<~ranks handoff correlation_id ~ groups the spawn-tree (trace-id / session) -> edge_id ~ this handoff (span-id) -> parent_edge_id ~ chains the tree (CHAIN it or grandchildren go dark) -> from_agent ~ delegator -> to_agent ~ delegate -> task ~ the prompt handed down -> result_ref ~ pointer to the child's output, never inlined -> status ~ spawned·running·handed-back·failed -> t_spawned · t_returned ~ the edge's valid-interval >>
 
@@ -128,7 +128,7 @@ The record becomes KG triples: `(parent) —spawned→ (child)`, `(child)
 `[t_spawned, t_returned)`. Querying `actedOnBehalfOf` transitively reconstructs the
 whole spawn-tree.
 
-### The same DAG IS the worldline's happened-before
+!!! The same DAG IS the worldline's happened-before
 
 **One structure, two readings.** The reified edge-DAG answers *whose-act* (attribution)
 AND *what-preceded-what* (causal order): a `spawned` edge means **parent
@@ -144,7 +144,7 @@ OR parent reaching a *running* spirit) lands a happened-before edge **mid-execut
 merge-point that is *not* a handback. So 'the worldline's one sync point' generalizes to
 *merge-where-messages-land*; handback becomes one merge among many (the kupono models, #time).
 
-### The correlation-id ~ the only token that crosses wings
+!!! The correlation-id ~ the only token that crosses wings
 
 Wings stay isolated; one shared token lets the harvester draw the inter-wing edge:
 
@@ -163,7 +163,7 @@ now), retries, and fan-out. The id travels *with* the work.
 
 <<~ ahu #time >>
 
-## Face III ~ Time ~ the two-domain boundary (the operator's cut, 2026-06-25)
+!! Face III ~ Time ~ the two-domain boundary (the operator's cut, 2026-06-25)
 
 **Locality first — the worldline is LOCAL work-memory** (operator ruling, 2026-06-25):
 an agent/subagent's memories-of-work — handles · edges · clocks · captured drawers —
@@ -193,7 +193,7 @@ actor-boundary. Open at the mechanism (#open): `ffzCompare` must return *concurr
 (not an LWW tiebreak) when two clocks share no merge-ancestry — confirm the API
 separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
-### The FfzClock as a cached projection ~ the facet a palace reads (2026-06-29)
+!!! The FfzClock as a cached projection ~ the facet a palace reads (2026-06-29)
 
 **A form-palace drawer's worldline-temporal facet PROJECTS off this DAG; it never
 rules.** When the living-grammar palace stamps a drawer's `lar_ffz` and reads the
@@ -206,7 +206,7 @@ re-project from the DAG; the cache MUST NOT out-rank the structure it derives fr
 binding ratified narrowed (12-Voice mufakat, operator-ratified 2026-06-29), with five
 kept dissents live at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#kept-hoike]].
 
-### The epistemic/ontic cut ~ what the worldline names (Borrill 2026)
+!!! The epistemic/ontic cut ~ what the worldline names (Borrill 2026)
 
 **The worldline names what COULD-HAVE-influenced, never what physically CAUSED.** Borrill
 2026 ("The Category Mistake in Logical Clocks," arXiv 2602.21730) draws the cut the
@@ -223,7 +223,7 @@ what it can hold. <<~ confidence Synthesis-Canon 16/20 >> The cut grounds the
 facet-as-projection ruling above: the cache reads an epistemic position ("as of last
 sync"), never an ontic verdict.
 
-### Rewind, fork & the rhizome ~ the kupono models (operator-ratified 2026-06-29)
+!!! Rewind, fork & the rhizome ~ the kupono models (operator-ratified 2026-06-29)
 
 A four-spirit swarm + a mempalace recall of the prior floor's own moʻolelo read the
 worldline against a **mutable, branching, injectable** source. Three operations the
@@ -290,7 +290,7 @@ already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ti
 
 <<~ ahu #lifecycle >>
 
-## Lifecycle ~ ephemeral by default, a few promoted to memory
+!! Lifecycle ~ ephemeral by default, a few promoted to memory
 
 \procedure ~Stage(~Type:"" ~Params:"") ~Stage <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -298,7 +298,7 @@ already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ti
 <<~Stage Span "runs/EPHEMERAL by default (effectors culled after task), a few promoted to MEMORY (persistent named wings); spawn-rate governed by backpressure; a parent normally holds MANY merged lineages (chimerism = health, not corruption) [Meristem: clonal effector/memory · CLV-WUS feedback]" >>
 <<~Stage Two >>
 
-### Ephemeral execution ~ the blind dir
+!!! Ephemeral execution ~ the blind dir
 
 **Capture is ON by default; ephemeral work is LAUNCHED isolated, never gated**
 (operator ruling, 2026-06-24). Main session AND all subagents harvest by default — and
@@ -333,7 +333,7 @@ prompts vs untrusted generated code (sets the tier floor: T0 vs T1+).
 
 <<~ ahu #crypto >>
 
-## Crypto ~ deferred to the founding boundary
+!! Crypto ~ deferred to the founding boundary
 
 **NONE inside the daemon** — the single replica grants ocap-grade unforgeability for
 free. A signature (did:key / UCAN / AIP) earns its cost ONLY where an act crosses into
@@ -346,7 +346,7 @@ edge, not a signed chain; sign only at the hostile boundary.
 
 <<~ ahu #the-six-rhymes >>
 
-## The Six Rhymes ~ pattern integrities, one per domain
+!! The Six Rhymes ~ pattern integrities, one per domain
 
 <<~ranks rhyme physics ~ Lightcone: each worldline carries its own proper time; happened-before orders only cone-neighbors; 'elsewhere' = concurrency (REFUSE to order siblings); the twin REUNITES at handback; keep the order a union of local cones, never a global DAG -> law ~ Fiduciary: the act binds the principal (qui-facit), keyed to the act, stopping at scope; re-delegation defaults CLOSED; mandate carries scope+TTL+revocability; conduit-not-person until a deliberate founding; anonymity never severs the upward edge -> biology ~ Meristem: the division path IS the name (no registry); work attributed to the LINE; apoptosis packages teardown (merge sealed, never spilled); coordinate on locally-sensed thresholds (no global clock) -> linguistics ~ Deixis: identity = a character (rule) resolving content per context; the 'I' shifts at the spawn boundary; the parent resolves as a bound variable up the tree; name by relation (teknonymy) -> cs-web3 ~ Cipher: a logical handle holds identity unforgeably INSIDE one trust-domain (ocap-grade); derive lineage into the id; attribute by reference edge not signed chain; crypto only at the hostile boundary -> repo ~ Archivist: local-first, run-local-stable (not crypto), capability-not-platform, nameless-subagents-ok, no-global-wall-clock; the KG triple (temporal validity + provenance fields) stands ready to extend with agent_handle >>
 
@@ -354,7 +354,7 @@ edge, not a signed chain; sign only at the hostile boundary.
 
 <<~ ahu #build-sequence >>
 
-## What Stands vs What Builds
+!! What Stands vs What Builds
 
 **The homes already stand**: the KG triple carries temporal validity + provenance
 fields (extend with `agent_handle`); diary/drawer metadata extends
@@ -369,42 +369,42 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 
 <<~ ahu #open >>
 
-## Open ~ held, not papered over
+!! Open ~ held, not papered over
 
-- **The actorId slip — live in code** (`ffz-clock.ts` read 2026-06-25): `FfzClock.actorId`
+* **The actorId slip — live in code** (`ffz-clock.ts` read 2026-06-25): `FfzClock.actorId`
   keys on the Automerge actor (header + field doc both say so); the worldline clock MUST
   re-key on the HANDLE. The concrete first fix when the rhythm road is wired. No
   `ffzCompare` change needed — causal rides the edge-DAG, FfzClock stays a rhythmic
   total-order. The existing `LarTickCounter` already carries a monotonic cross-source
   join key; reconcile whether the worldline reuses it or the edge-DAG alone.
-- **The cross-surface launcher shim** — `gh copilot` ignores `TRACEPARENT`; build the
+* **The cross-surface launcher shim** — `gh copilot` ignores `TRACEPARENT`; build the
   `lares`-driven wrapper that mints + injects the trace-id and writes both sides, or
   only half the tunnel exists.
-- **The reified node is substrate-gated** — tunnels + KG triples live MCP-only (no
+* **The reified node is substrate-gated** — tunnels + KG triples live MCP-only (no
   `mempalace` CLI subcommand); the disconnected MCP blocks a code-path reified
   `prov:Delegation` node. The projected metadata edge (`lar_parent_handle`/`lar_root_handle`)
   carries who-drove-whom meanwhile, single-source; wire the node when the KG is code-reachable.
-- **Chain `parent_edge_id`** or a grandchild generation goes dark.
-- **Ephemeral blind-dir hardening** — sandbox tiers · cleanup · resource/leak
+* **Chain `parent_edge_id`** or a grandchild generation goes dark.
+* **Ephemeral blind-dir hardening** — sandbox tiers · cleanup · resource/leak
   containment · the egress fork (#lifecycle) — under a dedicated research pass.
 
 <<~/ahu >>
 
 <<~ ahu #standards-anchor >>
 
-## Standards Anchor ~ stand on the ratified
+!! Standards Anchor ~ stand on the ratified
 
-- **W3C Trace Context** — `traceparent`; trace-id constant across the chain, parent-id
+* **W3C Trace Context** — `traceparent`; trace-id constant across the chain, parent-id
   up. The correlation carrier. Stable.
-- **W3C PROV** (PROV-DM/O) — Entity · Activity · Agent + `wasGeneratedBy` ·
+* **W3C PROV** (PROV-DM/O) — Entity · Activity · Agent + `wasGeneratedBy` ·
   `wasAttributedTo` · `actedOnBehalfOf`. The edge vocabulary; provenance forms a DAG.
-- **PROV-AGENT** (arXiv 2508.02866) — W3C PROV extended for agentic systems; matches
+* **PROV-AGENT** (arXiv 2508.02866) — W3C PROV extended for agentic systems; matches
   the model 1:1.
-- **Borrill 2026, "The Category Mistake in Logical Clocks"** (arXiv 2602.21730) — the
+* **Borrill 2026, "The Category Mistake in Logical Clocks"** (arXiv 2602.21730) — the
   epistemic/ontic cut; certifies no-global-now (a per-island local DAG of
   could-have-influenced edges) as more-correct than vanilla Lamport's overclaimed total
   order. Grounds the worldline's partial order as epistemic, never causal-physical (#time).
-- **OTel GenAI** — `gen_ai.agent.id/name`, `gen_ai.operation.name=invoke_agent`. Node
+* **OTel GenAI** — `gen_ai.agent.id/name`, `gen_ai.operation.name=invoke_agent`. Node
   identity; a span is a NODE, parent-child a by-reference edge — confirming the dual
   node+edge treatment. **Do NOT wait** on the unratified multi-agent handoff spec
   (issue #2664); rest the edge on stable trace-context + PROV.
@@ -413,7 +413,7 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>

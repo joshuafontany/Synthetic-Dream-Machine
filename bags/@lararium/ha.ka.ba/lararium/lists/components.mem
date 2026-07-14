@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `<<components>>` reads the rendering context's current tiddler, resolves its has-stack through the `stack` filter operator (relative tags qualify against the carrier's own bag scope; `lar:` tags pass through; system tags stay outside), and renders each component as a clickable pill via the `tag-pill` procedure. It takes no argument — composition lives once in the tiddler's tags; this macro renders the stack.
 

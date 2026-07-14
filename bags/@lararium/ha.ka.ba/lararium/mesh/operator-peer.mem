@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/operator-peer"
 
 <<~ &#x0002; >>
 
-# Operator-Vessel Contract
+! Operator-Vessel Contract
 
 The shared law that governs every operator vessel — node, browser, and any future vessel type.
 Runtime affordances may differ; the authority shape does not.
@@ -30,7 +30,7 @@ sit above any single vessel implementation.
 
 <<~ ahu #vocabulary >>
 
-## Vocabulary
+!! Vocabulary
 
 | Term | Meaning |
 |---|---|
@@ -48,7 +48,7 @@ sit above any single vessel implementation.
 
 <<~ ahu #two-lane-law >>
 
-## Two-Lane Law
+!! Two-Lane Law
 
 Every operator vessel carries one admin VM lane and zero or more active wiki VM lanes.
 
@@ -81,7 +81,7 @@ handles only resource-local side effects.
 
 <<~ ahu #ea-law >>
 
-## Ea Law — Vessel Sovereignty
+!! Ea Law — Vessel Sovereignty
 
 **OP-E1 — Local keys, local truth.**
 The operator keypair lives on the vessel's local storage (disk at 0o600 for node,
@@ -108,7 +108,7 @@ before any doc change applies.
 
 <<~ ahu #command-receipt-surface >>
 
-## Command / Receipt Surface
+!! Command / Receipt Surface
 
 CLI, browser UX, and future operator surfaces all author the same command tiddler
 records and consume the same receipt tiddler records. The surface type does not
@@ -146,7 +146,7 @@ the same core — see #actor-parity.)
 
 <<~ ahu #actor-parity >>
 
-## Actor Parity — Human and AI Agent
+!! Actor Parity — Human and AI Agent
 
 An operator surface serves two kinds of actor over **one** command/receipt surface:
 a **human** at an interactive terminal and an **AI agent** acting programmatically.
@@ -213,7 +213,7 @@ seed+card; then V3 C (peer transport) and the writable MCP surface compose over 
 
 <<~ ahu #vessel-parity >>
 
-## Vessel Parity
+!! Vessel Parity
 
 Browser vessel and node vessel share this contract fully. Runtime differences are
 budget choices, not architectural forks.
@@ -237,7 +237,7 @@ identical ea rights.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>

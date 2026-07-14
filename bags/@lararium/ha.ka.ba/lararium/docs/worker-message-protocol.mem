@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lararium/docs/worker-message-protocol"
 
 <<~ ahu #head >>
 
-# Worker Message Protocol — the StructuredClone Boundary
+! Worker Message Protocol — the StructuredClone Boundary
 
 The lararium runtime crosses one mandatory trust boundary: **main thread ↔ Worker**. Every crossing uses `postMessage()`, which internally applies the **structured clone algorithm** (WHATWG HTML spec). The gap between "any JS object" and "a structured-clone-safe object" carries non-trivial constraints that shape the whole P.3 message protocol.
 
@@ -32,7 +32,7 @@ This meme lifts that protocol out of the alignment-architecture doctrine so oper
 
 <<~ ahu #boundary >>
 
-## What the Boundary Drops and Preserves
+!! What the Boundary Drops and Preserves
 
 | Dropped by structured clone | Consequence |
 |---|---|
@@ -57,7 +57,7 @@ This meme lifts that protocol out of the alignment-architecture doctrine so oper
 
 <<~ ahu #envelope >>
 
-## Golden Principles — the P.3 Message Envelope
+!! Golden Principles — the P.3 Message Envelope
 
 **GP-1 — Schema-versioned envelope.** Every message MUST carry:
 ```json
@@ -79,18 +79,18 @@ No naked payloads. The version field enables forward-compatible evolution; lock 
 
 <<~ ahu #prior-art >>
 
-## Prior Art
+!! Prior Art
 
-- **Comlink** (Google) — type-safe RPC over `postMessage`: Proxy wrapping + explicit transfer lists + schema-versioned call objects. The envelope convention.
-- **Redux DevTools bridge** — actions MUST be plain-object serializable: if `JSON.stringify(action)` throws, it does not cross. The same constraint as tiddler fields.
-- **Electron IPC** (`ipcMain`/`ipcRenderer`) — version the message shape; never send class instances; a `type` discriminant on every message. The direct antecedent of GP-1.
-- **React Native bridge → JSI** — the old bridge required JSON-serializable payloads; the New Architecture (JSI) replaced it with direct calls. The Lares analogue of JSI: the in-Worker synchronous TW5 read (no boundary at all; engine + TW5 co-located).
+* **Comlink** (Google) — type-safe RPC over `postMessage`: Proxy wrapping + explicit transfer lists + schema-versioned call objects. The envelope convention.
+* **Redux DevTools bridge** — actions MUST be plain-object serializable: if `JSON.stringify(action)` throws, it does not cross. The same constraint as tiddler fields.
+* **Electron IPC** (`ipcMain`/`ipcRenderer`) — version the message shape; never send class instances; a `type` discriminant on every message. The direct antecedent of GP-1.
+* **React Native bridge → JSI** — the old bridge required JSON-serializable payloads; the New Architecture (JSI) replaced it with direct calls. The Lares analogue of JSI: the in-Worker synchronous TW5 read (no boundary at all; engine + TW5 co-located).
 
 <<~/ahu >>
 
 <<~ ahu #co-location >>
 
-## The Co-Location Insight
+!! The Co-Location Insight
 
 TW5 and the reaction engine occupy the **same** Worker thread (co-located, synchronous reads) precisely to keep the StructuredClone boundary off the hot path. The engine reads tiddlers via `filterTiddlers()` — a synchronous in-memory call, no `postMessage`, no clone. The boundary applies only to three bounded message types:
 
@@ -107,7 +107,7 @@ These three types cover the full P.3 boundary surface. Lock them before shipping
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/alignment-architecture >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers >>

@@ -19,13 +19,13 @@ uri-path  = "ha.ka.ba/lararium/mesh/tiddler-text"
 
 <<~ ahu #contract >>
 
-## Contract
+!! Contract
 
 `tiddlerText(record)` — accepts any `{ tiddler: { text?: unknown } } | null | undefined`, returns `string | null`.
 
 Oracle tiddlers (lararium, catalog, lares, wiki, corpus) carry their payload Automerge URL in `tiddler.text`. This helper centralises the `typeof text === "string"` guard so call sites stay one token.
 
-## Why here
+!! Why here
 
 `open-node-lar-peer.ts` defined a local `recordText()`. `wiki-handlers.ts` defined an identical copy. Fifteen-plus inline `typeof rec?.tiddler.text === "string"` guards remain scattered across the node package. This file collapses them.
 

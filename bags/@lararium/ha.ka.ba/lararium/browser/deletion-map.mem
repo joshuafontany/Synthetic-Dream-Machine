@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/browser/deletion-map"
 
 <<~ &#x0002; >>
 
-# lararium-browser Deletion Map
+! lararium-browser Deletion Map
 
 Live inventory of every known sovereignty seam, web2 smell, and page-singleton residue
 touching the browser vessel surface. Four classifications:
@@ -31,9 +31,9 @@ touching the browser vessel surface. Four classifications:
 
 <<~ ahu #seam-inventory >>
 
-## Seam Inventory
+!! Seam Inventory
 
-### packages/lararium-tw5/src/tw5-browser-surface.ts
+!!! packages/lararium-tw5/src/tw5-browser-surface.ts
 
 | Seam | Line | Class | Note |
 |---|---|---|---|
@@ -46,7 +46,7 @@ touching the browser vessel surface. Four classifications:
 | `setPalette(engine, paletteName)` | 104 | Constitutional | Writes a tiddler into the wiki. No DOM dependency. Migrate as-is to `@lararium/browser` projection helpers. |
 | `setBootSplash(engine, active)` | 115 | Constitutional | Writes/deletes a state tiddler. No DOM dependency. Migrate as-is. |
 
-### packages/lararium-tw5/src/index.ts
+!!! packages/lararium-tw5/src/index.ts
 
 | Export | Class | Note |
 |---|---|---|
@@ -55,7 +55,7 @@ touching the browser vessel surface. Four classifications:
 | `setBootSplash` | Constitutional | Same as `setPalette`. |
 | `mountCamera`, `CameraMount` | Constitutional | Isomorphic. No DOM dependency. Central to the projection contract. |
 
-### packages/lararium-tw5/src/tw5-vm.ts
+!!! packages/lararium-tw5/src/tw5-vm.ts
 
 | Seam | Class | Note |
 |---|---|---|
@@ -64,13 +64,13 @@ touching the browser vessel surface. Four classifications:
 | `TW5Engine.rootWidget` | Constitutional | Isomorphic TW5 widget root. No `HTMLElement` dependency. |
 | `mountPanel → tw5-browser-surface.ts` (comment) | Constitutional | The split already happened. The comment correctly names the boundary. |
 
-### packages/lararium-mesh/src/vm-pool.ts
+!!! packages/lararium-mesh/src/vm-pool.ts
 
 | Seam | Class | Note |
 |---|---|---|
 | `VmPool<T>` | Constitutional | Isomorphic. Already generic. The `BrowserAuthorityPool` in `@lararium/browser` extends or wraps this — does not replace it. |
 
-### packages/lararium-tw5/src/tw5-worker-proxy.ts
+!!! packages/lararium-tw5/src/tw5-worker-proxy.ts
 
 | Seam | Class | Note |
 |---|---|---|
@@ -78,7 +78,7 @@ touching the browser vessel surface. Four classifications:
 | `TW5WorkerProxy` | Constitutional | Already designed for browser use. Core of S2 worker boot. Migrates to `@lararium/browser` as the browser worker runtime; `@lararium/tw5` keeps it as the shared proxy class. |
 | `WorkerFactory` type | Constitutional | Caller supplies the island constructor. Browser factory goes in `@lararium/browser`; node factory stays in `@lararium/node`. |
 
-### No source files yet in packages/lararium-browser/
+!!! No source files yet in packages/lararium-browser/
 
 The package directory exists and is empty. All new source files start here; no legacy code carries into it.
 
@@ -86,7 +86,7 @@ The package directory exists and is empty. All new source files start here; no l
 
 <<~ ahu #adapter-boundary >>
 
-## Named Adapter Boundary
+!! Named Adapter Boundary
 
 All surviving DOM/page references collect in one named file: `tw5-browser-surface.ts` (in `@lararium/tw5`).
 
@@ -100,7 +100,7 @@ Future HUD surfaces (canvas, UE, Mudlet) bypass this file entirely — they use 
 
 <<~ ahu #migration-log >>
 
-## Migration Log
+!! Migration Log
 
 Entries here record what moved, when, and which cheap-check it satisfied.
 Empty until S1 lands.
@@ -113,7 +113,7 @@ Empty until S1 lands.
 
 <<~ ahu #deletion-targets >>
 
-## Deletion Targets
+!! Deletion Targets
 
 Delete or quarantine these patterns. Each deletion happens after the replacement proves itself clean.
 
@@ -129,7 +129,7 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter >>
 <<~ loulou lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>

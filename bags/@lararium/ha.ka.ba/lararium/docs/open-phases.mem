@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/docs/open-phases"
 
 <<~ ahu #head >>
 
-# Open Phases
+! Open Phases
 
 The open-phase sequence tracks boot progress from host open through TW5 hydration
 to live delta stream. An authority envelope wraps every live session — currently
@@ -31,7 +31,7 @@ to live delta stream. An authority envelope wraps every live session — current
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 # LarariumOpenPhase — discriminated union, ordered boot sequence
