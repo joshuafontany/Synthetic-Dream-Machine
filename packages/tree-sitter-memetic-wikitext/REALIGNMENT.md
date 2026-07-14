@@ -212,3 +212,9 @@ its last italic (the Law-of-5s Canon quote); noosphere-boot.md holds md by
 design, not debt. FINAL witness: 524/524 memes · 0 errors · 4,370 headings ·
 7,291 list nodes as structure · golden 1 mover (the boot seed) · host-py 15 ·
 sectioner 12 · roundtrip 2/2 · ruff clean. The realignment arc rests.
+- 2026-07-15 — THE GRAMMAR PHASE CROSSES (38f235f9): artifact 0.1.0 seats the
+  TW5 rich-form inventory (transclusions · macrocalls · tables · pragmas
+  paired-by-form · quote/style/typed/hardbreak fences · html lines · .tid
+  top-anchored fields · full list-marker class · rules). .tid coverage
+  81.4% → 38.3% text_line at zero ERROR; canon census exact (sigil 7807 ·
+  ahu 3255). Inline forms stay below the carrier by design.
