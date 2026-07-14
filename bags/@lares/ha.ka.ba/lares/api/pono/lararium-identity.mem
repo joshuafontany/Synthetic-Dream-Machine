@@ -325,10 +325,56 @@ holds the old↔new link; the kahu's signs-but-commands-not posture fits the ora
 reputation** — consume the credential, the fresh veil inherits a *decayed* standing; this blocks
 sever-and-refound farming.
 
-<<~ confidence Synthesis 11/20 >> The dial's SHAPE seats on a four-domain convergence, but the
-mechanism stands **unbuilt and contact-deferred** — it serves absent parties until a second crossing
-fruits. The exact numbers — what fraction of a voucher's standing stakes, how fast it decays, one kahu
-or a threshold — wait on the local instrument (the swarm constrains the shape, never sets the dial).
+<<~ confidence Synthesis 11/20 >> The dial's SHAPE seats on a four-domain convergence. The **sybil
+plane stands built** (#the-lineage-fold); the **ZK-vouch / privacy plane defers** — it serves absent
+parties until a second crossing fruits. The exact numbers — what fraction of a voucher's standing
+stakes, how fast it decays, one kahu or a threshold — wait on the local instrument (the swarm
+constrains the shape, never sets the dial).
+
+<<~/ahu >>
+
+<<~ ahu #the-lineage-fold >>
+
+!! The Lineage Fold ~ the sybil plane, built
+
+The siege-gate prices a crossing against a **vouch DAG** — the graph every accepted invite feeds, one
+edge per crossing (voucher → joiner). A seed-rooted ε-PageRank fold scores each vertex in one
+topological pass, and the score discounts the price (#the-siege-gate). Four blind fields — trust-metric
+graphs, capability-delegation chains, pseudonymous credentials, cross-domain branching math — converge
+on four laws the fold obeys:
+
+- **Canonicalise at the boundary.** A principal rides two forms — a DID `0x<key>` and a raw `<key>` —
+  and the transitive fold weds its join-vertex to its later vouch-vertex ONLY when both read as one key
+  (UCAN's `aud`=`iss` over self-describing keys). One canonicaliser sweeps every endpoint before it
+  touches the graph; connectivity resolves to byte-equality. Skip it and the lineage severs — the
+  subtree detaches from the seed, the score collapses to the ε-floor.
+- **The dial rides branching, never conductance.** The adversary ISSUES vouches (mints out-edges), so
+  its power reads as a Galton-Watson reproductive number `b·t`, never a graph cut. `b·t < 1` names an
+  extinction threshold on the attack lineage, and it coincides with the Leontief convergence condition
+  (spectral radius < 1) — one ε seats both a well-defined fold and a sub-critical attacker. A
+  mixing/conductance bound (SybilLimit) reads the wrong lever: it measures geometry the issuer reshapes.
+- **The bottleneck property closes the gaming vector.** A vertex's score reads only its parents and
+  their out-degrees, never its own out-degree — so a voucher CANNOT lift its own standing by minting
+  more vouches; it only dilutes its own downstream (Appleseed's bottleneck theorem; Advogato's min-cut).
+  Out-degree normalisation, not attenuation alone, seats this; a per-voucher out-degree cap bounds the
+  mass any one hand injects (the attack EDGE, never the sybil count, reads as the choke).
+- **Key separation buys PRIVACY, never sybil resistance.** The sybil bound holds at the JOIN GATE
+  (proof-of-unique-human); a derived vouch-key never mints a second human. So the fold splits two
+  orthogonal planes: a **sybil plane** (the vouch DAG over canonical identifiers — built: `vouch-dag`,
+  `lineage-rank`, `admission-price`) and a **privacy plane** (scope-exclusive pseudonyms `H(scope)·s`
+  over one committed secret, wed by a common-origin proof, never a published A↔B edge — deferred, its
+  `s`-anchor a threshold seat, #the-veil).
+
+**The warning every domain names: the founder eats the evidence.** A seed-rooted fold amplifies whoever
+the seed reached first — cumulative advantage (Merton's Matthew effect), original antigenic sin (a
+lineage trapped by its first response). The germinal-center antidote — help LIMITING, so selection
+ranks against siblings — rides in the price's mass-conservation, yet the pull persists; the same bias
+reads in the node's own recall.
+
+<<~ confidence Synthesis-Canon 14/20 >> grounded across the fields: Cheng-Friedman (the ε-throttle
+bound; and no symmetric reputation runs sybilproof) · Ziegler-Lausen Appleseed · Levien Advogato ·
+Felsenstein pruning as sum-product · the Leontief inverse · Galton-Watson branching · UCAN / SPKI ·
+BBS per-verifier + Semaphore · Merton + Francis for the warning.
 
 <<~/ahu >>
 
