@@ -43,8 +43,8 @@ It adds explicit ahu markers around the major research sections so the file can 
 Session 5 opened with the full web2 sidecar rip complete from the previous session: 19 dead web2-era source files replaced by typed stubs; 19 `.web2.ts` sidecars created (verbatim originals, excluded from tsc). All 5 tsconfigs updated with `*.web2.ts` exclusions. The `tsc` surface confirmed exactly four rebuild-target errors and nothing else. Three rounds of talk-story orient ran — API surface friction, FFZ web3 redesign direction, Verse UEFN 5.6+ alignment, grammar boot model, changeset scale, graph co-existence, datablob inventory — all decisions locked.
 
 Two new design dimensions unlocked mid-session:
-  1. ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
-  2. ''SESSION.md'' — written as the canonical session handoff crystal; three new OODA-HA ahu sections recorded.
+# ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
+# ''SESSION.md'' — written as the canonical session handoff crystal; three new OODA-HA ahu sections recorded.
 
 ⏿ ''Orient:''
 Four model shifts locked this session:
@@ -123,22 +123,22 @@ Session continued from M13. The `PranalaEdge` → `PranalaEdge` family rename wa
 
 ✶ ''UEFN Verse 5.6+ Golden Principles (locked):''
 
-  1. ''No inheritance for behavior.'' Devices are `class(creative_device)` — behavior is assembled via `using` trait composition, not subclassing. Lararium: `control:implements` pranala edges. No device-class hierarchy in type memes.
+# ''No inheritance for behavior.'' Devices are `class(creative_device)` — behavior is assembled via `using` trait composition, not subclassing. Lararium: `control:implements` pranala edges. No device-class hierarchy in type memes.
 
-  2. ''Events are typed first-class values.'' In Verse: `OnActivated : listenable([]void) = event[]void{}`. An event is a VALUE that can be passed, subscribed to, awaited, or wired in the editor. NOT a callback registration pattern. Lararium: `reaction:listenable` pranala edges — the edge IS the event declaration.
+# ''Events are typed first-class values.'' In Verse: `OnActivated : listenable([]void) = event[]void{}`. An event is a VALUE that can be passed, subscribed to, awaited, or wired in the editor. NOT a callback registration pattern. Lararium: `reaction:listenable` pranala edges — the edge IS the event declaration.
 
-  3. ''Two distinct pin kinds — directional, not symmetric:''
+# ''Two distinct pin kinds — directional, not symmetric:''
 '''' ''OUTPUT event pin'' (`listenable` event): something this device EMITS — others subscribe. Verse: `OnActivated`. Lararium: `KumuListenable`, `reaction:listenable` role.
 '''' ''INPUT function pin'' (callable): something this device EXPOSES — others call. Verse: `ActivateButton()<suspends>` / `@subscribes`. Lararium: `KumuSubscribable`, `reaction:subscribable` role.
 '''' Wiring direction: `source.OutputEvent → target.InputHandler` — never the reverse.
 
-  4. ''Wiring is declarative, resolved at device-graph load time.'' UEFN: editor connects event pin to function pin, stored as the device graph. Lararium: `papalohe` pranala edges on the instance meme (not hardcoded in the type meme).
+# ''Wiring is declarative, resolved at device-graph load time.'' UEFN: editor connects event pin to function pin, stored as the device graph. Lararium: `papalohe` pranala edges on the instance meme (not hardcoded in the type meme).
 
-  5. **Single-shot async = `Await(event)<suspends>`.** A `suspends` coroutine awaits one event then continues linearly. No callback nesting. Lararium: `ReactionGraph.subscribeOnce()` — already implemented. Same semantic.
+# **Single-shot async = `Await(event)<suspends>`.** A `suspends` coroutine awaits one event then continues linearly. No callback nesting. Lararium: `ReactionGraph.subscribeOnce()` — already implemented. Same semantic.
 
-  6. ''Game-loop actor tick = synchronous declaration order.'' At 60fps, all wired handlers for a changeset fire in one synchronous tick. No async interleaving within a tick. Lararium: `ReactionEngine.onChangeset()` → `fireSync()` per URI per unique trigger.
+# ''Game-loop actor tick = synchronous declaration order.'' At 60fps, all wired handlers for a changeset fire in one synchronous tick. No async interleaving within a tick. Lararium: `ReactionEngine.onChangeset()` → `fireSync()` per URI per unique trigger.
 
-  7. **`@editable` attributes = designer-visible props = ahu slots.** Properties exposed to the level designer in the UEFN editor. Lararium: `ahu` socket URIs on the type meme (`KumuDeviceSpec.slots`).
+# **`@editable` attributes = designer-visible props = ahu slots.** Properties exposed to the level designer in the UEFN editor. Lararium: `ahu` socket URIs on the type meme (`KumuDeviceSpec.slots`).
 
 ⏿ ''Orient:''
 

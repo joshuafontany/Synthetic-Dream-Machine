@@ -146,3 +146,10 @@ the vendored TiddlyWiki5 core tiddlers.
   (uncommitted damage, reverted whole); the heading transform now stands
   RETIRED in the tool with the lesson inline. Canon 524/524 clean · golden
   23 movers · host-py 15 · roundtrip 2/2 · ruff clean.
+- 2026-07-14 — the 67 indented ordered-lists cross (two @lares-history
+  files): THREE passes to get the parent rule honest — v1 deepened siblings
+  (each converted line fed back as parent), v2 inherited STALE parents from
+  long-gone lists (the scout itself had the same staleness), v3 lands: a
+  converted sibling never parents, blanks keep the chain, any other content
+  BREAKS it. Ground truth: every item follows a prose label, so all 67 seat
+  top-level #. The 4 survivors live inside a code fence — held by law.
