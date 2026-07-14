@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-memetic-wikitext",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "The CARRIER grammar of memetic-wikitext — sigil forms, fences, headings — parsed generically; the sigil VOCABULARY is live wiki data, never grammar",
   "main": "bindings/node",
   "tree-sitter": [{ "scope": "source.memetic-wikitext", "file-types": ["mem"] }]

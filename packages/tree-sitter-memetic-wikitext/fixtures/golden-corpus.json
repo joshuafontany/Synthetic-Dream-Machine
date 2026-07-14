@@ -669,8 +669,8 @@
    "hash": "5384731245957165815c27e2f20d37926a09b921080720b088a9847d585e8b4c"
   },
   "ha.ka.ba/lares/docs/lares/federation.mem": {
-   "bytes": 8659,
-   "hash": "74c452509c03bf540e002675c1d270c38e7b52c06f08c1b1e8814a3f7e035410"
+   "bytes": 11830,
+   "hash": "320107d388e4c0969736f82d10d8b511e4c10a9591fd7e2d71f845a55f9a128d"
   },
   "ha.ka.ba/lares/docs/lares/handoff.mem": {
    "bytes": 38886,
@@ -1001,6 +1001,6 @@
    "hash": "f5db488d841dbe0cee21e0ea1f3328711af6a360eeea5a0cf90a3b36fd78c429"
   }
  },
- "grammar_version": "0.0.2",
+ "grammar_version": "0.0.1",
  "memeast_schema_version": 1
 }

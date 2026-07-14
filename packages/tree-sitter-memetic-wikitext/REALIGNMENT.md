@@ -62,10 +62,10 @@ source-text NEVER changes · anything hand-review-shaped defers.
 
 ## The grammar phase
 
-**v0.0.2 SEATED (2026-07-14):** `!{1,6}` headings beside `#` (the dual
+**THE CLEAN CARRIER SEATED (2026-07-14, ships as 0.0.1 — unpublished, the clean version starts the line):** `!{1,6}` headings beside `#` (the dual
 window holds while library/ speaks md) + the stricter `^\*+[ \t]` list rule;
 `meme.list` joins the MemeAst; the LSP strips both heading marks. STILL
-AHEAD: v0.1 drops `#`-heading + seats `#`-ordered-list in ONE breath with
+AHEAD: the next minor drops `#`-heading + seats `#`-ordered-list in ONE breath with
 the corpus `1. `→`# ` pass (after the library rung); then the TW5 form
 inventory grows in (transcludes, macrocall blocks, quoteblocks, styleblocks,
 typedblocks, pragmas — the Form-Surveyor inventory), corpus-scoped against
@@ -96,8 +96,8 @@ the vendored TiddlyWiki5 core tiddlers.
   524 memes through parseMemeText — 0 throws, 30 Error nodes + 1,447 recovery
   diagnostics ALL pre-existing (differential vs pre-ladder worktree: the one
   +1 = the sibling's committed canon growth, 3c23ca3a, not the realignment).
-- 2026-07-14 — GRAMMAR v0.0.2 SEATS: dual-window headings (`!`+`#`) + the
+- 2026-07-14 — THE CLEAN CARRIER SEATS (version RESET to 0.0.1 on operator word — unpublished, the clean version starts the line): dual-window headings (`!`+`#`) + the
   strict `*`-list rule; meme.list enters memeast.scm/highlights.scm/fold;
   LSP strips both marks; canon witness 524/524 at 0.0000% ERROR coverage,
   4,438 heading + 5,427 list nodes now read as STRUCTURE; golden re-baked
-  at grammar_version 0.0.2 (240 movers, INTENDED); 15 tests green.
+  (240 movers, INTENDED); 15 tests green.
