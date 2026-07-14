@@ -1,36 +1,34 @@
 #!/usr/bin/env python3
-"""worldline_ffz — the PER-WORLDLINE FFZ gate: each braid recovers its OWN local rhythm clock.
+"""worldline_ffz — the PER-WORLDLINE FFZ leg: membership stamps + per-braid rhythm testimony.
 
-The demux (worldline_io) partitions the captured turns into braids; this step gives each braid its
-own FFZ clock — the rhythm the nalu-gate RECOVERS from that braid's content-drift — and stamps every
-drawer with `lar_ffz`, the rhythmic POSITION (a membership coordinate, WHERE-in-the-cadence), never a
-decay scalar (manaoio serves decay; this clock serves position — agent-worldline Face-III).
-
-The four legs compose the ALREADY-BUILT pieces (this module reinvents none of the physics):
+The demux (worldline_io) partitions the captured turns into braids; this leg walks each braid and
+serves the MEMBERSHIP-TREE address model (`ffz_address` — a band answers WHICH, never HOW MANY; the
+sequence rides the edge-DAG, never the address):
 
   1. THE EVENT-SIGNAL. Per worldline, order its content turns (down the spawn-tree, parents before
      children — worldline_io.branch_keys), then read each turn's vector and compute the per-turn
-     CONTENT-DRIFT `1 - cos(turn_vector, running_centroid)` — the ffz-orchestrator's Measure-band
-     signal. Event-INDEXED (the turn ordinal indexes it), NEVER host-time (Face-III, clock-purity).
+     CONTENT-DRIFT `1 - cos(turn_vector, running_centroid)`. Event-INDEXED (the turn ordinal
+     indexes it), NEVER host-time (Face-III, clock-purity).
 
-  2. THE CLOCK. `ffz_clock.recover_clock(drift_signal)` infers the braid's beat + nested subharmonic
-     bands, or HOLDS OVER when the braid reads too sparse/flat to lock (the static-corpus-null: a
-     braid with no rhythm recovers no beat, it never fabricates one from read-order).
+  2. THE STAMP — membership enrichment. The capture path (mesh build-patch → ffzMembershipAddress)
+     already mints `lar_ffz` as a membership address (`profile/theme.arc.measure.beat.pulse`, `_`
+     naming an absent cell). This leg ENRICHES: it fills the absent BEAT cell with the turn's own
+     identity (the grounding-ratchet label — same-turn drawers share a beat cell, so the ultrametric
+     reads them adjacent), minting a fresh `worldline/` address only where no membership stamp
+     stands. A cell LABELS; nothing tallies. Any legacy numeric-grid stamp reads as retired form
+     and re-mints.
 
-  3. THE DESYNC-PHASE. Each worldline draws a `desync.roberts_phase` off its `roots()` index —
-     mutually NON-RESONANT across braids (the plastic-ρ low-discrepancy phase, coordination-free), so
-     no two braids' cadences lock into a manufactured global-now. The phase shifts the braid's grid
-     ORIGIN, so two braids sharing a beat still land in different cells.
+  3. THE RHYTHM TESTIMONY. `ffz_clock.recover_clock(drift_signal)` still runs per braid — as
+     REPORT-ONLY testimony (beat period, lock quality, holdover) for the operator's read. The
+     recovered period never enters an address: a count that entered the address would harden into
+     the global-now anti-pattern the membership tree exists to refuse.
 
-  4. THE STAMP. `content_io.patch_metadata` writes `lar_ffz` onto every drawer of the braid's turns —
-     the vector-safe metadata update (no re-embed, no vector clobber). The address serializes
-     COARSE→FINE and nests dyadically, so it stays prefix-truncatable exactly like
-     bands_sidecar.ffz_cells / mesh ffzMembershipAddress (a coarser read drops trailing fine bands).
+  4. THE DESYNC WITNESS. Each braid draws a `desync.roberts_phase` off a stable per-root hash;
+     `phase_spread` witnesses the braids' mutual incommensurability. Report-only.
 
-CLOCK-PURITY (the sighting ward, no-global-now): the recover + stamp path imports NO host clock. The
-turn ORDINAL indexes the signal; the recovered beat rides in ordinal units; the address encodes a
-position, not a time. A re-run over the same drift recovers the same clock → the same address → an
-idempotent stamp. The worldline stays LOCAL — it never federates.
+CLOCK-PURITY (the sighting ward, no-global-now): the stamp path imports NO host clock. A re-run
+over the same braids mints the same addresses → an idempotent stamp. The worldline stays LOCAL —
+it never federates.
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/worldline-ffz
 """
@@ -44,18 +42,22 @@ import numpy as np
 from desync import min_pairwise_gap, roberts_phase
 from ffz_clock import recover_clock
 
-# The metadata slot the whole stack already reads for the rhythmic address (drawer_io projects it,
-# bands_sidecar mints the corpus form). This per-worldline leg mints the SAME shape under the SAME key.
+# The metadata slot the whole stack reads for the membership address (drawer_io projects it, the
+# mesh capture path mints it). This per-worldline leg ENRICHES the same shape under the same key.
 FFZ_META = "lar_ffz"
 
-# The address family this leg mints (bands_sidecar rides "corpus"; a braid rides "worldline"). The
-# braid IDENTITY lives in the drawer's worldline binding (lar_turn_key → worldline_of), so the address
-# stays PURELY positional — it names where-in-the-cadence, not which braid.
+# The profile this leg mints where NO membership stamp stands (a capture-time stamp keeps its own
+# profile — "session" — through enrichment; only a stamp-less or legacy drawer takes this one).
 FFZ_PROFILE = "worldline"
 
-# A braid too sparse/flat to lock holds over — it carries no cadence, so the address names the
-# free-run position honestly (never a fabricated numeric grid). Prefix-truncates to the profile.
-FFZ_HOLDOVER = "holdover"
+#: The membership tree's absent-cell sentinel (mesh FFZ_ABSENT / ffz_address NULL_BAND).
+ABSENT = "_"
+
+#: The five bands, coarse→fine — the address tuple's fixed arity (mesh FFZ_ADDRESS_ORDER).
+N_BANDS = 5
+
+#: The beat band's index in the coarse→fine tuple (theme.arc.measure.BEAT.pulse).
+BEAT_INDEX = 3
 
 
 # ---------------------------------------------------------------------------
@@ -167,29 +169,43 @@ def worldline_phases(worldline_store, as_of=None) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# 4. the stamp — the rhythmic POSITION address (COARSE→FINE, prefix-truncatable)
+# 4. the stamp — membership enrichment (the beat cell fills; nothing tallies)
 # ---------------------------------------------------------------------------
 
 
-def ffz_address(ordinal: int, beat: int, phase: float = 0.0, *, n_bands: int = 5,
-                nest_ratio: int = 2, profile: str = FFZ_PROFILE) -> str:
-    """The turn's membership address on the recovered grid — WHERE the ordinal sits in each nested
-    band, COARSE→FINE. The phase shifts the grid ORIGIN by `phase * beat` (up to one beat), so two
-    braids sharing a beat but drawing different phases land in different cells (the desync leg folds in
-    here). Dyadic nesting makes each finer digit `g_k mod nest_ratio ∈ [0, nest_ratio)`, so dropping a
-    trailing digit reads the coarser membership (the ultrametric holds — bands_sidecar's invariant).
+def _label(text: str) -> str:
+    """A stable 8-hex LABEL off a string identity — names WHICH cell, never how many."""
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:8]
 
-    A held-over braid (beat 0) carries no grid → the free-run position `<profile>/holdover`, never a
-    fabricated numeric address."""
-    if beat <= 0:
-        return f"{profile}/{FFZ_HOLDOVER}"
-    t = ordinal + phase * beat
-    # Periods COARSE→FINE — the recovered beat's nested subharmonics (theme = coarsest, pulse = beat).
-    periods = [beat * (nest_ratio ** level) for level in range(n_bands - 1, -1, -1)]
-    cycles = [int(t // p) for p in periods]  # the global cycle-index in each band
-    # The coarsest digit grows unbounded (the epoch-like count); each finer digit nests mod the ratio.
-    digits = [cycles[0]] + [c % nest_ratio for c in cycles[1:]]
-    return f"{profile}/" + ".".join(str(d) for d in digits)
+
+def _legacy_grid(address: str) -> bool:
+    """True for the retired numeric-grid form (`worldline/<digits>...` / `worldline/holdover`) —
+    a count-shaped address re-mints as membership; a membership address never matches."""
+    _, _, tail = address.partition("/")
+    if tail == "holdover":
+        return True
+    segs = tail.split(".")
+    return bool(segs) and all(s.isdigit() for s in segs)
+
+
+def membership_stamp(turn_key: str, root: str, existing: "str | None" = None) -> str:
+    """The drawer's membership address, ENRICHED: the beat cell takes the turn's own identity label
+    (the grounding-ratchet — same-turn drawers share the cell), every other cell keeps whatever the
+    capture path minted. Where no membership stamp stands (or a legacy grid form does), a fresh
+    `worldline/_.<arc>._.<beat>` mints with arc = the braid root's label. Idempotent: enriching an
+    already-enriched address returns it unchanged."""
+    beat = _label(turn_key)
+    if existing and "/" in existing and not _legacy_grid(existing):
+        profile, _, tail = existing.partition("/")
+        segs = tail.split(".") if tail else []
+        segs += [ABSENT] * (N_BANDS - len(segs))
+        if segs[BEAT_INDEX] == ABSENT:
+            segs[BEAT_INDEX] = beat
+        while segs and segs[-1] == ABSENT:
+            segs.pop()
+        return f"{profile}/" + ".".join(segs)
+    segs = [ABSENT, _label(root), ABSENT, beat]
+    return f"{FFZ_PROFILE}/" + ".".join(segs)
 
 
 # ---------------------------------------------------------------------------
@@ -199,34 +215,35 @@ def ffz_address(ordinal: int, beat: int, phase: float = 0.0, *, n_bands: int = 5
 
 @dataclass
 class WorldlineClock:
-    """One braid's recovered rhythm + the stamp tally — the per-worldline report."""
+    """One braid's report: the stamp tally + the rhythm TESTIMONY (report-only — the recovered
+    period never enters an address)."""
 
     root: str
-    #: The recovered fundamental beat in turn-ordinal units (0 on holdover).
+    #: TESTIMONY: the recovered fundamental period in turn-ordinal units (0 on holdover).
     beat: int
     lock_quality: float
     locked: bool
     holdover: bool
-    #: The braid's mutually-non-resonant desync phase-offset ∈ [0, 1).
+    #: The braid's mutually-non-resonant desync phase-offset ∈ [0, 1). Witness-only.
     phase: float
     #: The count of content turns the signal read.
     turns: int
-    #: The count of drawers stamped with lar_ffz.
+    #: The count of drawers whose lar_ffz stamp landed or enriched.
     stamped: int
-    #: The recovered band names (empty on holdover).
+    #: TESTIMONY: the recovered band names (empty on holdover).
     bands: tuple = field(default_factory=tuple)
 
 
 def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
-                         lock_threshold: float = 0.3, n_bands: int = 5,
-                         nest_ratio: int = 2, profile: str = FFZ_PROFILE) -> dict:
-    """Recover a local FFZ clock per braid and stamp `lar_ffz` on every drawer of the braid's turns.
+                         lock_threshold: float = 0.3) -> dict:
+    """Enrich `lar_ffz` membership stamps across every braid, and testify each braid's rhythm.
 
-    Per root: order the content turns, read their vectors, compute the drift-signal, recover the clock,
-    draw the desync phase, and stamp each turn's drawers with its COARSE→FINE membership address (a
-    held-over braid stamps the free-run position — no fabricated beat). LOCAL only; the stamp rides
-    content_io.patch_metadata (vector-safe). Returns `{root: WorldlineClock}` — deterministic and
-    idempotent (same drift → same clock → same address → the same merge-write)."""
+    Per root: order the content turns, read their vectors, and ENRICH each turn's drawers — the beat
+    cell takes the turn's identity label; capture-minted cells stand untouched; stamp-less or
+    legacy-grid drawers mint fresh. The drift-signal still feeds `recover_clock`, whose reading rides
+    the report as TESTIMONY only. LOCAL only; the stamp rides content_io.patch_metadata
+    (vector-safe). Returns `{root: WorldlineClock}` — deterministic and idempotent (the same braid
+    enriches to the same address; an unchanged address still merge-writes the same value)."""
     # Order every braid's turns FIRST, then pull vectors SCOPED to exactly those turn-keys — never a
     # whole-corpus scan (a store may hold far more drawers than the braids being stamped).
     roots = worldline_store.roots(as_of)
@@ -238,19 +255,19 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
 
     for root in roots:
         ordered_keys = ordered_by_root[root]
-        # Keep only the turns that carry content (the events the clock can read), in braid order.
+        # Keep only the turns that carry content (the events the signal can read), in braid order.
         content_keys = [k for k in ordered_keys if k in vecmap]
         vectors = [vecmap[k] for k in content_keys]
         signal = drift_signal(vectors)
-        rec = recover_clock(signal, n_bands=n_bands, nest_ratio=nest_ratio, lock_threshold=lock_threshold)
+        rec = recover_clock(signal, lock_threshold=lock_threshold)
         phase = phases.get(root, 0.0)
 
         stamped = 0
-        for ordinal, tk in enumerate(content_keys):
-            addr = ffz_address(ordinal, rec.beat, phase, n_bands=n_bands,
-                               nest_ratio=nest_ratio, profile=profile)
+        for tk in content_keys:
             for store in content_stores:
                 for cid in store.cids_for_turn(tk):
+                    current = (store.get(cid) or {}).get("metadata", {}).get(FFZ_META)
+                    addr = membership_stamp(tk, root, current)
                     res = store.patch_metadata(cid, {FFZ_META: addr})
                     if res.get("ok"):
                         stamped += 1

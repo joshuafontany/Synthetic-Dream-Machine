@@ -101,39 +101,51 @@ def test_desync_phase_is_stable_under_a_new_earlier_sorting_root(tmp_path):
     assert after["a-root"] != after["z-root"]              # still mutually non-resonant
 
 
-def test_lar_ffz_stamped_as_a_position_and_idempotent(tmp_path):
+def test_lar_ffz_stamps_membership_and_idempotent(tmp_path):
     wstore, content = _build(tmp_path)
     report = wf.assign_worldline_ffz(wstore, [content])
 
-    # the rhythmic braid stamped every content drawer with a NUMERIC position address.
+    # every content drawer takes a MEMBERSHIP address (labels, never counts).
     assert report["rA"].stamped == 48
-    locked_addr = content.get("cA20")["metadata"]["lar_ffz"]
-    assert locked_addr.startswith(wf.FFZ_PROFILE + "/")
-    assert wf.FFZ_HOLDOVER not in locked_addr
-    # COARSE→FINE, prefix-truncatable: five dot-joined band digits after the profile.
-    segs = locked_addr.split("/", 1)[1].split(".")
-    assert len(segs) == 5 and all(s.lstrip("-").isdigit() for s in segs)
+    addr = content.get("cA20")["metadata"]["lar_ffz"]
+    assert addr.startswith(wf.FFZ_PROFILE + "/")
+    segs = addr.split("/", 1)[1].split(".")
+    # fresh mint: _.<arc>._.<beat> — the arc names the braid, the beat names the turn.
+    assert segs[0] == wf.ABSENT and segs[2] == wf.ABSENT
+    assert segs[1] == wf._label("rA")
+    assert segs[wf.BEAT_INDEX] == wf._label("A20")
 
-    # the held-over braid stamps the FREE-RUN position (no fabricated numeric grid).
-    holdover_addr = content.get("cB0")["metadata"]["lar_ffz"]
-    assert holdover_addr == f"{wf.FFZ_PROFILE}/{wf.FFZ_HOLDOVER}"
+    # a SPARSE braid stamps the same membership shape — no rhythm ever enters an address.
+    b_addr = content.get("cB0")["metadata"]["lar_ffz"]
+    assert b_addr.split("/", 1)[1].split(".")[1] == wf._label("rB")
 
-    # idempotent: a re-run recovers the same clock → the same address → an unchanged stamp.
+    # two braids' drawers differ in the ARC cell; two turns of one braid differ in the BEAT cell.
+    assert addr.split(".")[1] != b_addr.split(".")[1]
+    assert content.get("cA20")["metadata"]["lar_ffz"] != content.get("cA21")["metadata"]["lar_ffz"]
+
+    # idempotent: a re-run enriches to the same address.
     wf.assign_worldline_ffz(wstore, [content])
-    assert content.get("cA20")["metadata"]["lar_ffz"] == locked_addr
-    assert content.get("cB0")["metadata"]["lar_ffz"] == holdover_addr
+    assert content.get("cA20")["metadata"]["lar_ffz"] == addr
+    assert content.get("cB0")["metadata"]["lar_ffz"] == b_addr
 
 
-def test_ffz_address_is_prefix_truncatable():
-    # the ultrametric: a coarser read drops trailing fine digits (the nesting invariant).
-    full = wf.ffz_address(37, beat=4, phase=0.0)
-    assert full.startswith("worldline/")
-    digits = full.split("/", 1)[1].split(".")
-    # each finer digit nests mod the ratio (dyadic → {0, 1}); the coarsest may grow unbounded.
-    for d in digits[1:]:
-        assert d in ("0", "1")
-    # holdover (beat 0) never fabricates a grid.
-    assert wf.ffz_address(5, beat=0) == "worldline/holdover"
+def test_membership_enrichment_fills_beat_and_keeps_capture_cells():
+    # a capture-minted stamp keeps profile/theme/arc/pulse; only the ABSENT beat fills.
+    existing = "session/_.claude__abc123._._.73e961d7"
+    got = wf.membership_stamp("T7", "rX", existing)
+    assert got == f"session/_.claude__abc123._.{wf._label('T7')}.73e961d7"
+    # already-enriched → unchanged (idempotent on the enriched form).
+    assert wf.membership_stamp("T7", "rX", got) == got
+    # a filled beat never overwrites.
+    held = "session/_.arc.m.beatlabel.p"
+    assert wf.membership_stamp("T7", "rX", held) == held
+
+
+def test_legacy_grid_stamps_remint_as_membership():
+    # the retired numeric-grid forms re-mint; trailing-absent cells drop (prefix-truncatable).
+    for legacy in ("worldline/3.1.0.1.0", "worldline/holdover"):
+        got = wf.membership_stamp("A5", "rA", legacy)
+        assert got == f"worldline/_.{wf._label('rA')}._.{wf._label('A5')}"
 
 
 def test_no_host_wall_time_on_the_recover_or_stamp_path():
