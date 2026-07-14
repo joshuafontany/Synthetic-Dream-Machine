@@ -58,6 +58,47 @@ The procedure below enacts ''Model A'' (the current stopgap).
 
 <<~/ahu >>
 
+<<~ ahu #three-axes >>
+
+!! Three Axes ~ one inversion of control
+
+The SOCIAL/INFRA cut names two axes; a third rides beside them, and the three answer three orthogonal
+questions. **INFRA** asks *who RELAYS* (Nexus / DreamNet, by treaty / carriage-contract — route through,
+never trust). **SOCIAL** asks *who READS* (`vessel → PersonaGroup → CabalGroup`, by signed Keyhive
+delegation — boolean, present-tense, revocable). **REPUTATION** asks *how much you WEIGH* (the vouch-DAG,
+by a seed-rooted ε-fold — scalar, accumulated, sybil-bounded; <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-lineage-fold >>).
+
+The three never collapse into one because no axis derives another: a member READS a cabal (holds the cap)
+yet WEIGHS little (a shallow lineage), or weighs heavily yet sits revoked. Authorization runs
+forgery-resistant (a delegation never forges); reputation runs sybil-resistant (standing never forges,
+because minting keys splits mass — the bottleneck property). Different threat models, different math,
+different temporal grain.
+
+**The through-line — one move made three times: control inverts to the edge, never a root.** A Circle "holds
+what mutual bindings declare" (the Kowloon / group-as-closure model, <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#composition >>):
+no root grants membership (the SOCIAL graph stands up bottom-up from the vessels' own signed edges), no
+authority assigns standing (the REPUTATION graph folds from the vouches the peers themselves signed), no
+relay owns you (the INFRA graph rides mutual carriage-treaty). ''The key is the node; the delegation is the
+relationship.'' The ''Vault'' seals the inversion at the top — the collector that knows "these handles are
+one human" stays the user's private secret, never a published graph, riding no wire
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#the-vault >>).
+
+**One signed act, two folds — the li/ki collapse.** A ''CabalGroup'' reads as a multi-principal Circle
+(several humans' PersonaGroups mutually bound). Joining one fires a single signed act — the invite/vouch —
+and that one edge feeds BOTH reads: the SOCIAL fold (Keyhive) admits it as *"this vessel may now read the
+cabal"*, the REPUTATION fold (`lineage-rank`) folds it as *"this identity's standing now enters the cabal's
+lineage."* So the two graphs stay two projections (`ki`) over ONE stored substrate of signed acts (`li`) —
+never a separate invite ledger beside the delegation log. Both invert to the user, because both only ever
+fold edges the users themselves signed; neither stands as a registry.
+
+<<~ confidence Synthesis-Canon 14/20 >> The inversion runs pure but for ONE seam: the multi-principal
+key-handover inside a CabalGroup. A single-principal me-Circle (your own devices) needs no tie-break — you
+hold the one ordering authority. A CabalGroup of several humans constitutes the smallest ordering seat for
+itself (an elected kahu, or accept-and-heal) — the one place a Circle stands up a thin constitutional core,
+and it stays the operator's seat (<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#composition >>).
+
+<<~/ahu >>
+
 <<~ ahu #procedure >>
 
 !! The Procedure (Model A, witnessed 2026-06-21)
