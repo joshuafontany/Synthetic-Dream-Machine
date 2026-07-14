@@ -66,7 +66,7 @@ This adds a *new* cut beside the existing per-vessel Ed25519-sign ⊥ X25519-KEM
 The joins above the atom are **emergent Circles — the closure of MUTUAL bindings, constituted bottom-up, never granted by a root** (the operator's Josh-Ellis "Circles" / Kowloon inversion-of-control; canon's `group-as-closure`). A Circle is not a thing *instead of* bindings — **a Circle IS what mutual bindings declare** when they hold each other back.
 
 - **handle-Circle (PersonaGroup)** — the closure of vessels mutually holding one **handle ↔ DID** (the AT-Proto/Nostr pattern: a *mutable* handle over a *stable* DID, bound by **bidirectional proof**, the human-readable form never on the wire). A "Known Handle with multiple vessels."
-- **me-Circle (the human)** — the self-held, **single-principal**, private constellation of handles. Disclosed edge-by-edge, never wholesale: **no global self.** RULED (operator, myth-as-spec, witnessed load-bearing): a me-Circle composes as **a place in l-space where the Personas OVERLAP** — *a single-principal cabal-place.* The **same place machinery** (found · contract · the capture-clock), with the multi-principal complexity **degenerate to trivial** (one ordering authority: you → no tie-break engages · capture-immune, you cannot capture your own me · no legitimacy contest). **One Persona takes the blame at a time** (the Voice-house pattern: one face surfaces, named; switching is free, single-principal). The embodied human **carries the place through space-time** (body + environment = the carriage). Composition (*who is me*, the Circle) ⊥ the optional shared substrate (*what me maintains*, the place); a me with no shared docs stays pure Circle, a me that syncs state founds the cardinality-1 place. Witnessed: `me-circle.ts` (8/8) + the real-Keyhive `me-circle-lifecycle` probe (the clock shows spread=30, the me reads capture-immune).
+- **me-Circle (a compartment of the human)** — the self-held, **single-principal**, private constellation of the handles in ONE compartment (= a Vault, #the-vault). Disclosed edge-by-edge, never wholesale: **no global self.** A human keeps **MANY** me-Circles, mutually unlinkable (Senior-Engineer ⊥ Guru ⊥ Telarus-KSC); a single me-Circle over *all* a human's handles would be the Nymwars root, so the "me" is the compartment, never the whole person. RULED (operator, myth-as-spec, witnessed load-bearing): a me-Circle composes as **a place in l-space where the Personas OVERLAP** — *a single-principal cabal-place.* The **same place machinery** (found · contract · the capture-clock), with the multi-principal complexity **degenerate to trivial** (one ordering authority: you → no tie-break engages · capture-immune, you cannot capture your own me · no legitimacy contest). **One Persona takes the blame at a time** (the Voice-house pattern: one face surfaces, named; switching is free, single-principal). The embodied human **carries the place through space-time** (body + environment = the carriage). Composition (*who is me*, the Circle) ⊥ the optional shared substrate (*what me maintains*, the place); a me with no shared docs stays pure Circle, a me that syncs state founds the cardinality-1 place. Witnessed: `me-circle.ts` (8/8) + the real-Keyhive `me-circle-lifecycle` probe (the clock shows spread=30, the me reads capture-immune).
 
 Convergence across a Circle runs **only on mutual contract** — the handshake IS the key-agreement ([[contract-as-key-agreement]], `convergent-mesh`).
 
@@ -113,11 +113,18 @@ single-legal-name root de-pseudonymised activists, performers, survivors — *th
 correlation key.* And the **OIDC-IdP** lesson: keep the collector on the human's own device, NEVER a shared
 party who holds the master table.
 
-**A human holds MANY vaults, each a compartment, deliberately unlinkable even from each other.**
-Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — separate seeds, separate namespaces, and **NOTHING stands
-above them that links them** (a layer above the vaults would BE the Nymwars root). The vault is the top; the
-human's meat-brain is the only join. So "me-Circle" retires as a *group* name — the collector is **the Vault**,
-a private namespace, and there are as many as the human keeps.
+**A Vault IS a me-Circle, seen from the key layer.** The me-Circle (#composition) names the collector as a
+*place in l-space where a human's chosen Personas overlap*; the Vault names the *same* collector as the
+private secret that derives them. Both hold the load-bearing property — **single-principal, never
+wholesale-disclosed, no global self.** The place-framing and the key-framing agree.
+
+**But a human holds MANY vaults / me-Circles, each a compartment, deliberately unlinkable even from each
+other.** Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — **separate seeds, separate namespaces**, and
+**NOTHING stands above them that links them** (a layer above the vaults would BE the Nymwars root). A single
+me-Circle that held *all* a human's handles would be exactly that root — so the correction to the earlier
+"the human = one me-Circle" reading is **plural**: a me-Circle collects the handles of ONE compartment, and
+the human keeps as many compartments as their life demands. The vault is the top; the meat-brain is the only
+join between compartments, and it is never on any wire.
 
 **THE LIVE FIX (found in our own stack, 2026-07-13):** `ceremony-core.ts` joins each PersonaGroup by the
 vessel's **immutable device key** (`addSentinelMember(vesselIdentifierHex, …)`). So two handles run on one
