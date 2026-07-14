@@ -216,3 +216,54 @@ at matched size in the harness's history).
   finding; the real coarsening rides shape ↠ idiom.
 - Register stake: this bed stands as the FORMAL-register baseline for the
   register-separation trial (design below, when filed).
+
+## Bed predictions — pidgin-sessions (vowed at manifest time; bed UNPOURED)
+
+<a id="bed-pidgin-sessions"></a>
+**bed-pidgin-sessions** — the AI session transcripts as the CASUAL/pidgin
+register: records = turns carrying their ordinals, worldline = turn-sequence
+REAL. The ground fork (WAL vs drawer store) stands HELD at the operator in
+the manifest; the pour engine's turn-unit seam stands named-unbuilt. The
+bed pours only after both resolve.
+
+- Template character: pidgin templates skew OPERATIONAL — tool-call JSON
+  scaffolds, HUD frame anatomy, role-turn boilerplate — visibly unlike the
+  liturgical bed's sigil anatomy. Vowed at Provisional 4/20.
+- Register overlap: fewer than half the pidgin bed's kept templates appear
+  in the liturgical bed's kept set at matched size. Vowed at Provisional
+  4/20 — the register hypothesis's first half.
+
+## Bed predictions — tw5-docs · tw5-full (vowed at manifest time; UNPOURED)
+
+<a id="bed-tw5-docs"></a><a id="bed-tw5-full"></a>
+**bed-tw5-docs** (the .tid documentation corpus — the grammar-growth shelf)
+and **bed-tw5-full** (the whole submodule minus counted exclusions — the C5
+scale bed, a foreign fifteen-year corpus). The tiddler/module record-unit
+seams stand named-unbuilt; the spatial-vs-git-worldline fork rides each
+manifest HELD at the operator.
+
+- tw5-docs: kept templates skew TW5-wikitext forms (heading runs, list
+  nesting, transclusion braces, macro calls) — the native grammar the
+  carrier's growth arc wants. Vowed at Provisional-Synthesis 6/20.
+- tw5-full: the corpus-scale collision re-measure finally gains a
+  population where short templated files (module stubs, plugin infos)
+  GENUINELY collide — vow: collision rate > 0 at scale, the shape reading
+  recovering a real coarsening role exactly where dedup matters. Vowed at
+  Provisional-Synthesis 7/20.
+
+## The register-separation trial (designed; runs when both register beds stand)
+
+<a id="register-separation-trial"></a>
+The harness's first native experiment, dodging the size confound by
+construction: pour liturgical-canon and pidgin-sessions at MATCHED token
+size, induce constructicons separately, then:
+
+- (a) template-set overlap (Jaccard over canonical template keys) reads LOW
+  — the two registers keep different grammars;
+- (b) on a MIXED bed, per-record active-template vectors classify each
+  record's register above a shuffled-label null (nearest-centroid floor,
+  no tuned classifier — the templates either carry register or they don't).
+
+Vowed at Provisional-Synthesis 6/20: both legs pass, and the
+living-grammar-palace's register axis (defined · formal · casual) earns its
+first measurement. A failed leg files as fast as a passed one.

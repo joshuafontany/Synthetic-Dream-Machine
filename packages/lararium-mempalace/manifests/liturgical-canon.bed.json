@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "bed": "liturgical-canon",
+  "root": "~/.lares/testbeds/liturgical-canon",
+  "wing": "wing_testbed",
+  "room": "corpus",
+  "min_support": 2,
+  "max_forms": 64,
+  "flow": {
+    "sources": ["bags/@lares", "bags/@lararium", "bags/@sdm", "bags/@elyncia", "bags/@lares-history"],
+    "exclusions": [],
+    "record_unit": {".mem": "file"}
+  },
+  "worldline": {
+    "real": ["in-file", "containment"],
+    "arbitrary": ["walk-order"]
+  },
+  "twins": {
+    "grain": "in-file-token",
+    "size_matched": true,
+    "seed": 191
+  },
+  "apertures": [
+    {"name": "path-address", "provenance": "given"},
+    {"name": "declared-fields", "extractor": "iam", "provenance": "given"},
+    {"name": "planes", "provenance": "induced"}
+  ],
+  "predictions": {
+    "sheet": "packages/lararium-mempalace/docs/EMERGENCE-PREREG.md",
+    "anchor": "bed-liturgical-canon"
+  }
+}

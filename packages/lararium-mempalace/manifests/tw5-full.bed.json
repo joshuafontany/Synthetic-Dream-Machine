@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "bed": "tw5-full",
+  "root": "~/.lares/testbeds/tw5-full",
+  "wing": "wing_testbed",
+  "room": "corpus",
+  "min_support": 2,
+  "max_forms": 96,
+  "flow": {
+    "sources": ["TiddlyWiki5"],
+    "exclusions": [
+      "TiddlyWiki5/boot/*.js",
+      "**/tiddlywikicore-*.js",
+      "**/*.min.js",
+      "**/node_modules/**",
+      "**/*.png", "**/*.jpg", "**/*.gif", "**/*.ico", "**/*.svg",
+      "**/*.pdf", "**/*.woff", "**/*.otf", "**/*.ttf", "**/*.zip"
+    ],
+    "record_unit": {".tid": "tiddler", ".js": "module", ".mem": "file"}
+  },
+  "worldline": {
+    "real": ["in-file", "containment"],
+    "arbitrary": ["walk-order"]
+  },
+  "twins": {
+    "grain": "in-file-token",
+    "size_matched": true,
+    "seed": 54
+  },
+  "apertures": [
+    {"name": "path-address", "provenance": "given"},
+    {"name": "declared-fields", "extractor": "tid-header-fields+js-module-headers", "provenance": "given"},
+    {"name": "planes", "provenance": "induced"}
+  ],
+  "predictions": {
+    "sheet": "packages/lararium-mempalace/docs/EMERGENCE-PREREG.md",
+    "anchor": "bed-tw5-full"
+  },
+  "held_forks": {
+    "worldline": {
+      "held": "spatial (dir-tree containment)",
+      "alternative": "git-history worldline (own bed candidate)",
+      "at": "operator"
+    }
+  }
+}

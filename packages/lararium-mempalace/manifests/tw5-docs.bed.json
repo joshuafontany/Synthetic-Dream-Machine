@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "bed": "tw5-docs",
+  "root": "~/.lares/testbeds/tw5-docs",
+  "wing": "wing_testbed",
+  "room": "corpus",
+  "min_support": 2,
+  "max_forms": 64,
+  "flow": {
+    "sources": ["TiddlyWiki5/editions/tw5.com/tiddlers"],
+    "exclusions": ["**/*.png", "**/*.jpg", "**/*.gif", "**/*.ico", "**/*.svg", "**/*.pdf"],
+    "record_unit": {".tid": "tiddler"}
+  },
+  "worldline": {
+    "real": ["in-file", "containment"],
+    "arbitrary": ["walk-order"]
+  },
+  "twins": {
+    "grain": "in-file-token",
+    "size_matched": true,
+    "seed": 31
+  },
+  "apertures": [
+    {"name": "path-address", "provenance": "given"},
+    {"name": "declared-fields", "extractor": "tid-header-fields", "provenance": "given"},
+    {"name": "planes", "provenance": "induced"}
+  ],
+  "predictions": {
+    "sheet": "packages/lararium-mempalace/docs/EMERGENCE-PREREG.md",
+    "anchor": "bed-tw5-docs"
+  },
+  "held_forks": {
+    "worldline": {
+      "held": "spatial (dir-tree containment)",
+      "alternative": "git-history as the temporal worldline (a 15-year foreign stream; possibly its own bed)",
+      "at": "operator"
+    }
+  }
+}
