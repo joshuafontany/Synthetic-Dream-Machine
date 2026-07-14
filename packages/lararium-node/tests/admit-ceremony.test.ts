@@ -16,6 +16,7 @@
  */
 import { describe, test, expect } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
+import type { AutomergeUrl } from "@automerge/automerge-repo";
 import { runFoundingCeremony, runDeviceAdmitEdge, runApplyAdmitPayload } from "@lararium/keyhive";
 import * as ed25519 from "@noble/ed25519";
 import { hex } from "@lararium/mesh";
@@ -98,6 +99,36 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     }
     // … and adopts the founder's @persona — membership is what CROSSES.
     expect(applied.personaUrl).toBe(founder.f.personaUrl);
+  });
+
+  test("payload capEvents land in @daemon as cap-events — ready for boot hydration into the keyhive", async () => {
+    // The daemon packs these (packPersonaCrossing) to admit the vessel into the KEYHIVE PersonaGroup so it
+    // can decrypt shared @catalog content. Here dummy blobs prove the joinee-side WRITE lands them in the
+    // store format boot's hydrateFromEventStore reads (the keyhive ingestion is proven separately).
+    const founder = await found();
+    const joineeKey = await pubOf(JOINEE_SEED);
+    const base = await runDeviceAdmitEdge({
+      signerSeed:             FOUNDER_SEED,
+      joineeVerifyingKey:     joineeKey,
+      hearthTrueName:         "bafyHearth",
+      personaGroupDocIdHex:   founder.f.personaGroupDocIdHex,
+      personaGroupAgentIdHex: founder.f.personaGroupAgentIdHex,
+      meshCabalDocIdHex:      founder.f.meshCabalDocIdHex,
+      syncUrl: null, islandDocUrl: null, personaUrl: founder.f.personaUrl,
+    } as Parameters<typeof runDeviceAdmitEdge>[0]);
+    const capEvents = ["bWVtYmVyc2hpcC1vcC0x", "bWVtYmVyc2hpcC1vcC0y"];   // base64 blobs
+    const payload = { ...base, capEvents };
+
+    const joineeRepo = new Repo({ sharePolicy: async () => true });
+    const applied = await runApplyAdmitPayload({
+      repo: joineeRepo, operatorSeed: JOINEE_SEED, operatorVerifyingKey: joineeKey,
+      operatorDisplayName: "Ichi", payload,
+    });
+
+    const handle = await joineeRepo.find(applied.daemonUrl as AutomergeUrl);
+    const doc = await handle.doc() as { tiddlers: Record<string, unknown> };
+    const capTiddlers = Object.keys(doc.tiddlers).filter((t) => t.includes("/cap/"));
+    expect(capTiddlers.length).toBe(capEvents.length);
   });
 
   test("the ceremony is DETERMINISTIC — the same seeds yield the same binding, every run", async () => {

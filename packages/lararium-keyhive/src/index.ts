@@ -82,6 +82,13 @@ export interface DeviceAdmitPayload {
    */
   readonly personaUrl?:            string | null;
   /**
+   * OPTIONAL keyhive membership cap-events (base64 StaticEvent bytes) — the founder's PersonaGroup ops that
+   * admit this vessel into the KEYHIVE group so it can DECRYPT shared @catalog content (packPersonaCrossing).
+   * runApplyAdmitPayload writes them to @daemon; boot's hydrateFromEventStore ingests them into the vessel's
+   * live keyhive. Absent → the vessel joins by the Ed25519 edge alone (plaintext-sync membership, no E2E).
+   */
+  readonly capEvents?:             readonly string[];
+  /**
    * Automerge URL of the genesis island doc on the issuing vessel's Repo.
    * Browser vessels call repo.find(islandDocUrl) over the WebSocket to sync
    * the genesis island (TW5 core blob + sigil tiddlers) without a separate

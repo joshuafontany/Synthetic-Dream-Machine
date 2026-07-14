@@ -407,6 +407,26 @@ export async function runApplyAdmitPayload(
     };
   });
 
+  // Keyhive membership cap-events (packPersonaCrossing), when the founder packed them: write each into this
+  // vessel's @daemon in DaemonEventStore format, so boot's hydrateFromEventStore ingests them into the live
+  // keyhive — admitting this vessel into the PersonaGroup so it can decrypt shared @catalog content. Absent
+  // → the vessel joins by the Ed25519 edge alone. The `variant` field only needs to be PRESENT for the store
+  // to read the record back; the crypto rides the bytes.
+  for (const capEventB64 of payload.capEvents ?? []) {
+    const bytes   = base64ToBytes(capEventB64);
+    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.slice());
+    const hash    = Array.from(new Uint8Array(hashBuf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    const title   = capEventTitle(hash);
+    daemonHandle.change((doc) => {
+      if (!doc.tiddlers[title]) {
+        doc.tiddlers[title] = {
+          tiddler: { title, text: capEventB64, tags: CAP_EVENT_TAG, variant: "cap-membership", hash, "bytes-len": String(bytes.length) },
+          meta: { authority: "lares-init-admit" },
+        };
+      }
+    });
+  }
+
   // THE VESSEL'S OWN CARD. The admit supplies the BINDING (whose group this vessel joins); the vessel
   // supplies the SELF (who it is). A self-certifying ContactCard is the latter, and it is minted from the
   // vessel's OWN seed — never the founder's, who is not present and whose seed never crossed.
