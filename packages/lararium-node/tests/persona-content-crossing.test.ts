@@ -133,6 +133,40 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     await expect(device.decryptContent(BAG, after)).rejects.toThrow();
   });
 
+  test("the anon FLOOR persists a Handle burn — the vessel keeps its OWN content, loses only the shared", async () => {
+    // The base model (the-veil-ladder #the-base-model): burning a Handle severs the OVERLAY, never the FLOOR.
+    // The vessel's own content rides its own key; the Handle's shared content rides the group key — so a
+    // revoke touches only the overlay. This proves the floor stays readable after the burn.
+    const vessel = await makeVessel(8);    // the human's vessel — holds its OWN floor content
+    const handle = await makeVessel(107);  // a Handle founder that invites the vessel to share
+
+    // FLOOR: the vessel owns a bag and encrypts its own content there (anon floor, its own key).
+    const FLOOR = "lar:///ha.ka.ba/bags/@catalog/my-own-note";
+    await vessel.registerBag(FLOOR);
+    const floorCt = await vessel.encryptContent(FLOOR, new TextEncoder().encode("my own floor content"));
+    expect(new TextDecoder().decode(await vessel.decryptContent(FLOOR, floorCt))).toContain("floor");
+
+    // OVERLAY: the Handle invites the vessel into a shared bag and shares content.
+    const { id: vesselAgentId } = await handle.receiveContactCard(await vessel.contactCard());
+    await vessel.receiveContactCard(await handle.contactCard());
+    const { docId: sharedDoc } = await handle.registerBag(BAG);
+    const { delegationId } = await handle.delegate({ bagUrl: BAG, audience: vesselAgentId, access: "read" });
+    const sharedCt = await handle.encryptContent(BAG, new TextEncoder().encode("shared overlay content"));
+    vessel.adoptBag(BAG, sharedDoc);
+    await vessel.ingestPeerEvents(await handle.eventsForPeer(vesselAgentId));
+    expect(new TextDecoder().decode(await vessel.decryptContent(BAG, sharedCt))).toContain("shared");
+
+    // BURN the Handle overlay, then it shares new content.
+    await handle.revoke(delegationId);
+    const postBurn = await handle.encryptContent(BAG, new TextEncoder().encode("post-burn shared"));
+    await vessel.ingestPeerEvents(await handle.eventsForPeer(vesselAgentId));
+
+    // FLOOR PERSISTS: the vessel still reads its OWN content...
+    expect(new TextDecoder().decode(await vessel.decryptContent(FLOOR, floorCt))).toContain("floor");
+    // ...but loses the burned overlay's NEW content.
+    await expect(vessel.decryptContent(BAG, postBurn)).rejects.toThrow();
+  });
+
   test("forward-only boundary: content encrypted BEFORE the add stays unreadable (route A owes a re-encrypt)", async () => {
     const founder = await makeVessel(2);
     const device  = await makeVessel(101);
