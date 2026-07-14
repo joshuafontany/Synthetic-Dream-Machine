@@ -1,10 +1,10 @@
 /**
  * host-ts fold — the starved fold, TS-side: carrier CST → canonical MemeAst.
  *
- * MIRRORS host-py/memeast_fold.py exactly — same capture-name branching
- * (the starvation rule: grammar opinions live in grammar/query, never here),
- * same containment algorithm, same canonical JSON, same sha256 currency.
- * The parity manifest holds both hosts to one hash.
+ * Every host runs this same fold — capture-name branching only (the
+ * starvation rule: grammar opinions live in grammar/query, never here),
+ * containment by span, canonical JSON, sha256 currency. The parity
+ * manifest holds all hosts to one hash per meme.
  *
  * THE CURRENCY CONVERSION, this host's first duty: web-tree-sitter indexes
  * count UTF-16 code units (JS strings); the canonical MemeAst speaks BYTE
@@ -20,12 +20,12 @@
  */
 import { createHash } from "node:crypto";
 
-/** captures that never nest anything (leaves of the MemeAst) — mirror of py */
+/** captures that never nest anything (leaves of the MemeAst) */
 const LEAF_KINDS = new Set([
   "meme.sigil.body", "meme.sigil.close.body", "meme.fence.info",
   "meme.heading", "meme.list", "meme.comment", "meme.text", "meme.blank",
 ]);
-/** captures that ride as fields of their parent — mirror of py */
+/** captures that ride as fields of their parent */
 const FIELD_OF = new Map([
   ["meme.sigil.body", "body"], ["meme.sigil.close.body", "body"],
   ["meme.fence.info", "info"], ["meme.ahu.open", "open"], ["meme.ahu.close", "close"],

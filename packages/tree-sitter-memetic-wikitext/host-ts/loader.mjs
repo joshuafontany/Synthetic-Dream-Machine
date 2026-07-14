@@ -2,9 +2,9 @@
  * host-ts loader — the artifact loads from RAW BYTES, refuse-loud on the quad.
  *
  * The byte path (Parser.init({wasmBinary}) + Language.load(Uint8Array)) is
- * the SAME no-fetch shape the TW5 plugin's boot-preload law demands and the
- * gate-two witness proved — so this one loader serves Node, the VM, and the
- * browser tiers; only WHERE the bytes come from differs per host.
+ * the no-fetch shape the boot-preload-blob law demands — one loader core
+ * serves Node, the VM, and the browser tiers; only WHERE the bytes come
+ * from differs per host.
  *
  * Refuse-loud (the quad law): a runtime that cannot honor the artifact's
  * declared grammar ABI stops, naming both sides — never a silent half-load.
