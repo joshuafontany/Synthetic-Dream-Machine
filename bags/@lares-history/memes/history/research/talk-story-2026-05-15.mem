@@ -20,7 +20,7 @@ status-date = "2026-05-15"
 
 <<~ ahu #head >>
 
-# Talk Story — 2026-05-15
+! Talk Story — 2026-05-15
 
 Multi-voice architectural alignment session. The 13 Voices convened to align:
 
@@ -39,18 +39,18 @@ UEFN SceneGraph Beta (June 2025); Visual Verse survey materials.
 
 <<~ ahu #verse-ontology-research >>
 
-## Verse Ontology Research Findings
+!! Verse Ontology Research Findings
 
-### Task Tree Topology (confirmed, ch. 14)
+!!! Task Tree Topology (confirmed, ch. 14)
 
 Verse execution forms a **forest of parent-child task trees**.
 
-- Every async operator (branch/sync/race/rush) creates a **child node** in the current tree.
-- Cancellation propagates **downward only** — a parent cancelling kills all its children.
-- `spawn` creates a **new root** — a separate tree with no parent; cancellation does not propagate in.
-- The only way to exit the current task tree: `spawn` (hides `<suspends>` from the caller).
+* Every async operator (branch/sync/race/rush) creates a **child node** in the current tree.
+* Cancellation propagates **downward only** — a parent cancelling kills all its children.
+* `spawn` creates a **new root** — a separate tree with no parent; cancellation does not propagate in.
+* The only way to exit the current task tree: `spawn` (hides `<suspends>` from the caller).
 
-### Six Async Operators (confirmed stable)
+!!! Six Async Operators (confirmed stable)
 
 | Verse | Pono | Graph op | Cancellation |
 |---|---|---|---|
@@ -63,21 +63,21 @@ Verse execution forms a **forest of parent-child task trees**.
 The Lararium concurrency ontology previously mapped `lele` to `spawn` semantics — corrected
 to `branch` semantics. `hoolele` (hoʻolele — "to cause to fly") fills the 6th slot.
 
-### Critical `rush` Distinction
+!!! Critical `rush` Distinction
 
 `rush` / `puka`: losers receive `AbortSignal` and continue running until the **enclosing scope** exits.
 `race` / `holo`: losers are cancelled **immediately** (recursive subtree prune).
 These two had prior confusion in the Lararium pono specs. Both corrected.
 
-### Effects Bit-Vector (6 families)
+!!! Effects Bit-Vector (6 families)
 
 `<suspends>` `<decides>` `<transacts>` `<computes>` `<converges>` `<predicts>`
 
-- `spawn` hides `<suspends>` from its caller — formal mechanism for creating a new task root.
-- `if` hides `<decides>` from its caller.
-- Functions without `<writes>` = safe to parallelize.
+* `spawn` hides `<suspends>` from its caller — formal mechanism for creating a new task root.
+* `if` hides `<decides>` from its caller.
+* Functions without `<writes>` = safe to parallelize.
 
-### Type Lattice
+!!! Type Lattice
 
 ```
 any (universal supertype) → comparable → all primitives/classes
@@ -86,20 +86,20 @@ void (discard type, return-position only)
 persistable = closed constraint universe (excludes: any, comparable, type, rational, function types, interface types)
 ```
 
-### Verse Calculus Distinction
+!!! Verse Calculus Distinction
 
 VC (ICFP 2023, Peyton Jones et al.) = untyped, no concurrency, research artifact.
 VC `choice` expression = formal ancestor of `race`/`rush`.
 UEFN Verse adds: type system, `<suspends>` effect, full task tree model.
 **Do not cite VC as evidence for UEFN Verse semantics.**
 
-### Visual Verse / UE6
+!!! Visual Verse / UE6
 
 Pre-release, survey phase. Node-graph vs. block-based evaluation ongoing.
 Target: represent Verse task tree semantics, NOT Blueprint ontology.
 UE6 timeline: ~2027-2028. No feature-complete specification available.
 
-### Unreleased Event Types
+!!! Unreleased Event Types
 
 `sticky_event(t)` — retains last signal; late awaiters receive cached value.
 `subscribable_event(t)` — observer pattern; one signal → all subscribers; returns `cancelable`.
@@ -110,11 +110,11 @@ Full spec in `verse-event-lattice.md #unreleased-event-types`.
 
 <<~ ahu #yin-collapse-ruling >>
 
-## Yin-Collapse Architectural Ruling
+!! Yin-Collapse Architectural Ruling
 
 **The 13 Voices reached consensus. Ruling recorded as law.**
 
-### Primary Engine Law
+!!! Primary Engine Law
 
 **TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.**
 The ReactionGraph TS layer is a provisional bridge, not the target architecture.
@@ -134,7 +134,7 @@ Reaction tiddlers (`family:reaction` pranala edges) already exist.
 The startup module replaces: `ReactionGraph` + `TW5Engine` + `ProjectionBusConsumer`.
 What remains in TS: `MemeSyncAdaptor` + `LarTiddlerStore` + `VmPool` + `Keyhive`.
 
-### One Graph, Not Two
+!!! One Graph, Not Two
 
 **Bags = CRDT federation units. Recipe stack = logical unification.**
 **TW5 wiki IS the unified logical graph. MemeSyncAdaptor per bag generates the nalu.**
@@ -149,42 +149,42 @@ CRDT (the sea)
 
 NOT two parallel reactive engines. CRDT = distributed persistent store. TW5 = live reactive view.
 
-### `fireSync` Gap (documented)
+!!! `fireSync` Gap (documented)
 
 Current `fireSync` fires **inline** (before the nalu), not within `wiki.addEventListener("change")`.
 This violates the UEFN fidelity claim ("synchronous tick dispatch").
 Target: fire within `wiki.addEventListener("change")` callback (after the nalu).
 See `reaction-graph.md #yin-collapse-target` for full migration spec.
 
-### Prior Art Validating the Collapse
+!!! Prior Art Validating the Collapse
 
-- **Elm Architecture** — one `Model`, one `update` loop; TW5 wiki IS the model
-- **Solid.js fine-grained** — synchronous reactive graph; no separate routing layer
-- **MobX transaction** — `transaction()` IS the batch boundary; TW5 nalu = MobX close event
-- **Synchronous instantaneous reaction** (Esterel/Lustre lineage) — academic name for this pattern
+* **Elm Architecture** — one `Model`, one `update` loop; TW5 wiki IS the model
+* **Solid.js fine-grained** — synchronous reactive graph; no separate routing layer
+* **MobX transaction** — `transaction()` IS the batch boundary; TW5 nalu = MobX close event
+* **Synchronous instantaneous reaction** (Esterel/Lustre lineage) — academic name for this pattern
 
 <<~/ahu >>
 
 <<~ ahu #nalu-tick-split >>
 
-## Nalu / \Tick Semantic Split
+!! Nalu / \Tick Semantic Split
 
 Two concepts, often confused. The ruling separates them:
 
-### nalu (infrastructure, below grammar)
+!!! nalu (infrastructure, below grammar)
 
 The **changeset delivery wave** — the pulse when scattered writes become one consistent
 observed state delivered atomically to all observers. Not a sigil. Not operator-visible.
 The engine delivers it. Operators write tiddlers; the nalu fires.
 
-- TW5 face: `refresh(changedTiddlers)`
-- Verse face: `OnSimulate(StagedUpdates)<suspends>`
-- Lararium face: MemeSyncAdaptor flush → `wiki.nextTick()` → `refresh(changedTiddlers)`
+* TW5 face: `refresh(changedTiddlers)`
+* Verse face: `OnSimulate(StagedUpdates)<suspends>`
+* Lararium face: MemeSyncAdaptor flush → `wiki.nextTick()` → `refresh(changedTiddlers)`
 
 Default TW5 browser refresh throttle: ~400ms. Tunable to ~16ms for real-time game canvas.
 Full spec: `nalu.md`.
 
-### \tick (grammar layer, above nalu)
+!!! \tick (grammar layer, above nalu)
 
 A device lifecycle hook that says "run this procedure once per nalu."
 Lives AT the grammar layer — it hooks INTO the nalu, but the nalu has no sigil.
@@ -199,7 +199,7 @@ Grammar stub registered: `sigil-tick.tid`.
 
 <<~ ahu #voice-notes >>
 
-## Voice Notes (abbreviated)
+!! Voice Notes (abbreviated)
 
 **Gatekeeper:** Concurrency ontology correction landed clean. Six operators confirmed.
 No contradiction with existing pono law once lele/hoolele semantics separated.
@@ -232,7 +232,7 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ pranala #to-nalu ? -> lar:///ha.ka.ba/lares/api/pono/nalu family:control role:authors >>
 <<~ pranala #to-hoolele ? -> lar:///ha.ka.ba/lares/api/pono/hoolele family:control role:authors >>

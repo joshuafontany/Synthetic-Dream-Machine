@@ -37,7 +37,7 @@ pranala = [
 ```
 <<~/ahu >>
 
-# DreamNet MemeWiki
+! DreamNet MemeWiki
 
 A self-describing research consolidation and staging memo for DreamNet MemeWiki.
 
@@ -51,7 +51,7 @@ DreamNet MemeWiki opens the active research-consolidation stream here.
 
 <<~ ahu #phase-map >>
 
-## Phase Map
+!! Phase Map
 
 `✶ Observe -> ⏿ Orient -> ◇ Decide -> ▶ Act -> ⤴ Hoʻoko -> ↺ Aftermath`
 
@@ -71,11 +71,11 @@ phase = "observe"
 glyph = "✶"
 ```
 
-## Observe
+!! Observe
 
 Observe gathers the current research field before architecture hardens.
 
-### Gathered Research Constellation
+!!! Gathered Research Constellation
 
 * TiddlyWiki5 remains the strongest reference shape for a deterministic MemeWiki pipeline: shared boot kernel, canonical in-memory store, parser IR, renderable tree, server render plus browser resume, and a sync adaptor split
 * The project should be greenfield, not a fork-and-rename of TiddlyWiki; copy the architectural lessons, not the legacy syntax or widget internals
@@ -85,7 +85,7 @@ Observe gathers the current research field before architecture hardens.
 * Kowloon integration should honor the existing app contract: React frontend, `useClient()` for reads, `client.activities` for writes, and service or component-level embedding rather than bolt-on side channels
 * MemPalace integration, refresh semantics, attribute or value modeling, migration from prior HTML or widget-era content, and exact sync contract design remain open research rather than decided implementation
 
-### Source Clusters Now Consolidated
+!!! Source Clusters Now Consolidated
 
 The four absorbed notes contributed distinct signal:
 
@@ -94,7 +94,7 @@ The four absorbed notes contributed distinct signal:
 * `_todo/DreamNet_MemeWiki_TLDraw_Kowloon.md` established the React-first collaboration and server-bridge posture
 * `_todo/DreamNet_MemeWiki_ResearchSprint.md` supplied the workstream and milestone skeleton
 
-### Observe Tensions
+!!! Observe Tensions
 
 Observe also keeps the absences visible:
 
@@ -107,7 +107,7 @@ Observe also keeps the absences visible:
 
 <<~ ahu #observe-ha >>
 
-#### Observe / ha
+!!!! Observe / ha
 
 Observe-ha holds source identity and research boundaries.
 
@@ -117,7 +117,7 @@ The DreamNet MemeWiki research field is not one idea. It is a bundle of kernel q
 
 <<~ ahu #observe-ka >>
 
-#### Observe / ka
+!!!! Observe / ka
 
 Observe-ka governs how intake should be read.
 
@@ -127,7 +127,7 @@ Read the current field in four lanes: deterministic kernel shape, authoring and 
 
 <<~ ahu #observe-ba >>
 
-#### Observe / ba
+!!!! Observe / ba
 
 Observe-ba governs posture under planning pressure.
 
@@ -147,11 +147,11 @@ phase = "orient"
 glyph = "⏿"
 ```
 
-## Orient
+!! Orient
 
 Orient maps the gathered findings into an implementable architecture.
 
-### Architectural Spine
+!!! Architectural Spine
 
 The current best reading of the research is a five-layer spine:
 
@@ -161,7 +161,7 @@ The current best reading of the research is a five-layer spine:
 4. `collaboration` - TLDraw sync, presence, and canvas embedding for shared visual work, ideally without inventing a second incompatible state model
 5. `semantic or graph bridge` - a later MemPalace adaptor for graph query, semantic persistence, and related sync surfaces
 
-### Dependency Order
+!!! Dependency Order
 
 Not every integration should advance at once.
 
@@ -170,7 +170,7 @@ Not every integration should advance at once.
 * Kowloon and TLDraw should integrate against a kernel that already knows how to load, render, and roundtrip one memetic document
 * MemPalace should remain downstream until the kernel and sync vocabulary stop moving every week
 
-### Integration Topology
+!!! Integration Topology
 
 The current topology should look like this:
 
@@ -180,7 +180,7 @@ The current topology should look like this:
 * Kowloon owns app shell, routes, session and activity flow, and the existing client access contract
 * MemPalace, once integrated, should act as a bridge or adjunct store rather than the first place where boot semantics are decided
 
-### Live Tensions
+!!! Live Tensions
 
 Orient should keep the following tensions explicit:
 
@@ -191,7 +191,7 @@ Orient should keep the following tensions explicit:
 
 <<~ ahu #orient-ha >>
 
-#### Orient / ha
+!!!! Orient / ha
 
 Orient-ha holds architectural identity.
 
@@ -201,7 +201,7 @@ DreamNet MemeWiki is currently best understood as a kernel-centered system with 
 
 <<~ ahu #orient-ka >>
 
-#### Orient / ka
+!!!! Orient / ka
 
 Orient-ka governs relation mapping.
 
@@ -211,7 +211,7 @@ Map each subsystem by ownership, not by enthusiasm. TLDraw should not own the co
 
 <<~ ahu #orient-ba >>
 
-#### Orient / ba
+!!!! Orient / ba
 
 Orient-ba governs movement from research toward design.
 
@@ -231,11 +231,11 @@ phase = "decide"
 glyph = "◇"
 ```
 
-## Decide
+!! Decide
 
 Decide turns the current research into working direction.
 
-### Active Decisions
+!!! Active Decisions
 
 The current implementation posture should be:
 
@@ -247,7 +247,7 @@ The current implementation posture should be:
 * Integrate Kowloon through service boundaries and React components that respect existing frontend conventions.
 * Defer MemPalace to a later bridge once the kernel's core semantics and sync vocabulary stabilize.
 
-### Test Gates
+!!! Test Gates
 
 The next implementation should count as real only if it clears these gates:
 
@@ -258,7 +258,7 @@ The next implementation should count as real only if it clears these gates:
 * one Kowloon-facing bridge path that can read and write through the existing client model
 * one TLDraw embedding and sync proof that does not fracture document ownership
 
-### Explicit Deferrals
+!!! Explicit Deferrals
 
 Decide should keep these items deferred rather than pretending they are solved:
 
@@ -270,7 +270,7 @@ Decide should keep these items deferred rather than pretending they are solved:
 
 <<~ ahu #decide-ha >>
 
-#### Decide / ha
+!!!! Decide / ha
 
 Decide-ha holds what counts as settled enough for motion.
 
@@ -280,7 +280,7 @@ The key settled claim is simple: build the kernel first, keep it greenfield, and
 
 <<~ ahu #decide-ka >>
 
-#### Decide / ka
+!!!! Decide / ka
 
 Decide-ka governs decision sharpness.
 
@@ -290,7 +290,7 @@ Every active decision above changes implementation order immediately. Every expl
 
 <<~ ahu #decide-ba >>
 
-#### Decide / ba
+!!!! Decide / ba
 
 Decide-ba governs commitment posture.
 
@@ -310,11 +310,11 @@ phase = "act"
 glyph = "▶"
 ```
 
-## Act
+!! Act
 
 Act stages the next implementation sequence.
 
-### Workstream 1: Bootable Kernel
+!!! Workstream 1: Bootable Kernel
 
 * define the minimum meme store contract
 * define the first memetic grammar subset
@@ -322,14 +322,14 @@ Act stages the next implementation sequence.
 * render one document deterministically to HTML or text
 * prove Node-first boot and roundtrip
 
-### Workstream 2: Lezer and CodeMirror Path
+!!! Workstream 2: Lezer and CodeMirror Path
 
 * prototype a Lezer grammar for the first memetic subset
 * wire CodeMirror 6 into a React surface
 * add syntax highlighting, tree inspection, and validation hooks
 * test that editor-time structure aligns with kernel-time parsing rather than drifting from it
 
-### Workstream 3: Kowloon Bridge
+!!! Workstream 3: Kowloon Bridge
 
 * survey the server and session surfaces that matter
 * expose the kernel through a service or adapter layer
@@ -337,21 +337,21 @@ Act stages the next implementation sequence.
 * route writes through `client.activities`
 * test one end-to-end read and write flow
 
-### Workstream 4: TLDraw Collaboration Bridge
+!!! Workstream 4: TLDraw Collaboration Bridge
 
 * embed TLDraw as a React-native component
 * prove a minimal shared canvas around MemeWiki context
 * map ownership boundaries between document state and canvas state
 * validate sync and presence without giving the canvas hidden authority over the memetic core
 
-### Workstream 5: MemPalace and CRDT Research Pass
+!!! Workstream 5: MemPalace and CRDT Research Pass
 
 * map the MemPalace data and query contract
 * evaluate whether TLDraw sync remains sufficient or whether a second CRDT layer becomes necessary
 * define merge and conflict test vectors
 * stage only the bridge points that remain valid after the kernel tests land
 
-### Milestones
+!!! Milestones
 
 * [ ] consolidated research memo complete
 * [ ] minimum viable kernel boots and roundtrips
@@ -362,7 +362,7 @@ Act stages the next implementation sequence.
 
 <<~ ahu #act-ha >>
 
-#### Act / ha
+!!!! Act / ha
 
 Act-ha holds workstream identity.
 
@@ -372,7 +372,7 @@ The workstreams are ordered so each later proof depends on earlier semantic stab
 
 <<~ ahu #act-ka >>
 
-#### Act / ka
+!!!! Act / ka
 
 Act-ka governs sequencing.
 
@@ -382,7 +382,7 @@ If work begins on TLDraw or MemPalace before the kernel can parse and render det
 
 <<~ ahu #act-ba >>
 
-#### Act / ba
+!!!! Act / ba
 
 Act-ba governs execution posture.
 
@@ -402,11 +402,11 @@ phase = "aftermath"
 glyph = "↺"
 ```
 
-## Aftermath
+!! Aftermath
 
 Aftermath judges what this consolidation now does and does not resolve.
 
-### Immediate Yields
+!!! Immediate Yields
 
 This memo now provides:
 
@@ -415,7 +415,7 @@ This memo now provides:
 * one ordered implementation sequence
 * one named list of test gates and deferrals
 
-### Residue Still Open
+!!! Residue Still Open
 
 This memo does not yet resolve:
 
@@ -426,7 +426,7 @@ This memo does not yet resolve:
 * MemPalace bridge law
 * migration rules for earlier content forms
 
-### Promotion Condition
+!!! Promotion Condition
 
 This `todo` locus should later split forward into stronger artifacts:
 
@@ -439,7 +439,7 @@ The point of this file is not permanence. The point is orderly pressure toward t
 
 <<~ ahu #aftermath-ha >>
 
-#### Aftermath / ha
+!!!! Aftermath / ha
 
 Aftermath-ha holds yield and residue identity.
 
@@ -449,7 +449,7 @@ What is clear now: the research no longer lives in four disconnected scraps. Wha
 
 <<~ ahu #aftermath-ka >>
 
-#### Aftermath / ka
+!!!! Aftermath / ka
 
 Aftermath-ka governs judgment detail.
 
@@ -459,7 +459,7 @@ A successful next pass should convert at least one residue item into a tested ar
 
 <<~ ahu #aftermath-ba >>
 
-#### Aftermath / ba
+!!!! Aftermath / ba
 
 Aftermath-ba governs how the work lands.
 

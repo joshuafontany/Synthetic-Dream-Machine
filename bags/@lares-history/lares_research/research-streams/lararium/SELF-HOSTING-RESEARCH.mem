@@ -18,7 +18,7 @@ retain       = true
 
 <<~ ahu #question >>
 
-## Scouting Question
+!! Scouting Question
 
 How do canonical "everything including the system IS an editable object IN the system" architectures actually accomplish this? What mechanisms, invariants, bootstrap tricks, and failure modes do they rely on?
 
@@ -28,7 +28,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~ ahu #tw5-deep >>
 
-## TW5 — Shadow Tiddler Read-Through
+!! TW5 — Shadow Tiddler Read-Through
 
 **Mechanism:** Core modules (`$:/core/modules/parser`, `$:/core/ui/ViewTemplate`, etc.) live as *shadow tiddlers* — read-only system objects embedded as JSON in the boot HTML. User tiddlers with the same name overlay the shadow; the shadow provides the safe canonical fallback. Shadow tiddlers always exist even if user data is corrupted.
 
@@ -44,7 +44,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~ ahu #smalltalk-image >>
 
-## Smalltalk / Pharo — Method Dictionary Mutation
+!! Smalltalk / Pharo — Method Dictionary Mutation
 
 **Mechanism:** Every class carries a *method dictionary* — a hash table from selector symbol to compiled method object. `defun` equivalent = overwriting a method dictionary entry. The method lookup algorithm walks the dictionary chain upward through superclasses. Because method lookup is an algorithm (C kernel), not a table entry, it cannot be overwritten by user code.
 
@@ -60,7 +60,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~ ahu #emacs-lisp >>
 
-## Emacs — C Kernel / Lisp Surface Boundary
+!! Emacs — C Kernel / Lisp Surface Boundary
 
 **Mechanism:** C kernel owns: buffer model, event loop, character I/O, symbol table. Lisp surface owns: all user-visible behavior — keybindings, modes, commands, display logic. `defun` adds or replaces a symbol's function definition. At call time, the symbol is resolved from the symbol table to its current definition — late binding means any `defun` immediately affects future calls.
 
@@ -76,7 +76,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~ ahu #oberon-self-vm >>
 
-## Oberon / Self VM — Module Versioning and Live Reload
+!! Oberon / Self VM — Module Versioning and Live Reload
 
 **Oberon mechanism:** Modules compile to descriptors containing entry points and dependency pointers. Loading a new module version patches the descriptor in-place; callers holding references to the old descriptor continue working until GC reclaims them. Module interfaces (exported types and functions) are versioned — incompatible interface changes are detected at load time and rejected.
 
@@ -90,7 +90,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~ ahu #synthesis >>
 
-## Synthesis — The Four Laws for Lararium Self-Hosting
+!! Synthesis — The Four Laws for Lararium Self-Hosting
 
 From the five systems, four mechanisms converge:
 
@@ -108,9 +108,9 @@ Every system uses a two-phase boot:
 2. Phase 2 (surface): uses Phase 1 output to load the surface layer
 
 Lararium maps exactly:
-- Phase 1: TypeScript hard-coded parser reads `lares/` files — builds the boot closure
-- Phase 2: Boot closure contains `lares/grammars/memetic-wikitext.md` — `GrammarRules` object passed to parser for subsequent parses in the SAME boot
-- Phase 3 (future): Parser module itself lives in `lares/`; Phase 1 only runs during cold bootstrap
+* Phase 1: TypeScript hard-coded parser reads `lares/` files — builds the boot closure
+* Phase 2: Boot closure contains `lares/grammars/memetic-wikitext.md` — `GrammarRules` object passed to parser for subsequent parses in the SAME boot
+* Phase 3 (future): Parser module itself lives in `lares/`; Phase 1 only runs during cold bootstrap
 
 **The invariant that must hold at all phases:**
 
@@ -120,7 +120,7 @@ Lararium maps exactly:
 
 <<~ ahu #phase-2-5-implication >>
 
-## Direct Implication for Phase 2.5
+!! Direct Implication for Phase 2.5
 
 Phase 2.5 wires `GrammarRules` into `parsePranalaEdges`. The correct form from the research:
 

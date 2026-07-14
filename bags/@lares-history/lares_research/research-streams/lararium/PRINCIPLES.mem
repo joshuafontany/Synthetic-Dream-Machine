@@ -19,7 +19,7 @@ retain = true
 <<~&#x0002; >>
 
 <<~ ahu #meme-header >>
-# Lararium Node — Quine-Wiki-Agentic-HUD Principles
+! Lararium Node — Quine-Wiki-Agentic-HUD Principles
 
 This locus locks basic law for a self-describing, self-editing, self-projecting wiki-agent HUD.
 
@@ -35,7 +35,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #authority-law >>
-## Authority Law
+!! Authority Law
 
 1. **Carrier canon first.** Hostless `lar:///` carriers under `lares/` carry canon.
 2. **Projection never promotes itself.** TW5, tldraw, HUD, MCP, DreamDeck, and future Kowloon surfaces render and draft; they do not silently promote.
@@ -45,7 +45,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #round-trip-law >>
-## Round-Trip Law
+!! Round-Trip Law
 
 1. **Round-trip or refuse.** Any carrier → tiddler/widget/shape → carrier path must preserve law-bearing structure or emit explicit loss residue.
 2. **Small semantic chunks keep stable addresses.** Ahu slots, anchors, fields, and edges need durable identity.
@@ -55,7 +55,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #local-first-law >>
-## Local-First Law
+!! Local-First Law
 
 1. The operator can boot, inspect, edit, and recover locally.
 2. Network sync serves local agency; it does not define truth by itself.
@@ -65,7 +65,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #receipt-law >>
-## Receipt Law
+!! Receipt Law
 
 1. Boot, promote, reseed, sync epoch, and projection batches should carry receipt lineage.
 2. Debug HUD state should agree with server authority state.
@@ -75,7 +75,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #package-boundaries >>
-## Package Boundaries
+!! Package Boundaries
 
 ```text
 @lararium/mesh      no fs, no DOM, no TW5, no tldraw
@@ -100,15 +100,15 @@ carrier canon
 <<~/ahu >>
 
 <<~ ahu #red-flags >>
-## Red Flags
+!! Red Flags
 
-- Projection cache starts to look canonical.
-- Child tiddler edits lose carrier metadata.
-- Debounce drops sibling ahu edits.
-- Agent writes without origin or receipt.
-- Browser debug state disagrees with server receipt.
-- Parser accepts malformed law silently.
-- Convenient direct write bypasses ceremony.
+* Projection cache starts to look canonical.
+* Child tiddler edits lose carrier metadata.
+* Debounce drops sibling ahu edits.
+* Agent writes without origin or receipt.
+* Browser debug state disagrees with server receipt.
+* Parser accepts malformed law silently.
+* Convenient direct write bypasses ceremony.
 
 <<~/ahu >>
 

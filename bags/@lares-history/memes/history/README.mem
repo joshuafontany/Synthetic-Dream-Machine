@@ -20,7 +20,7 @@ retain    = false
 
 <<~ ahu #head >>
 
-# History — Provenance Records
+! History — Provenance Records
 
 Development arc records: origin conversations, early drafts, reasoning that produced current design doctrine.
 These memes show *how* the design arrived, not *what* it contains.
@@ -30,7 +30,7 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 <<~ ahu #index >>
 
-## Index
+!! Index
 
 | Record | Source (deleted) | What it preserves |
 |---|---|---|
@@ -44,13 +44,13 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 <<~ ahu #pono-alignment >>
 
-## Pono-Alignment Note (2026-06-20)
+!! Pono-Alignment Note (2026-06-20)
 
 The history curation aligned the **lossless instrument field** to current pono and **deliberately preserves** the period-forms below as testimony — the HUD reads as it read when the carrier was authored. Each carrier's HUD modernizes when it **lifts into canon** (as the Lindwyrm arc did), not before; the genesis-arc index carries the same constraint (*don't read current pono back onto the early forms*).
 
 Aligned corpus-wide:
 
-- `iam` `register` CODE → band-word (`CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis · `S` → Synthesis · `P` → Provisional · `C` → Canon)
+* `iam` `register` CODE → band-word (`CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis · `S` → Synthesis · `P` → Provisional · `C` → Canon)
 
 Preserved as period-form — **not** updated; carries the early HUD as testimony:
 

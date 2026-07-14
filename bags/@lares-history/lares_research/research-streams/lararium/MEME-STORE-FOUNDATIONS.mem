@@ -18,7 +18,7 @@ retain       = true
 
 <<~ ahu #research-pressure >>
 
-## Three Converging Pressures
+!! Three Converging Pressures
 
 Three architectural forces pull on the Lararium stack simultaneously. This carrier holds the research synthesis and names the design law for each.
 
@@ -32,7 +32,7 @@ These are not separate priorities. They converge at one point: **a meme is the a
 
 <<~ ahu #tw5-tiddler-contract >>
 
-## 1. TW5 Tiddler Replacement Contract → Meme Immutability Law
+!! 1. TW5 Tiddler Replacement Contract → Meme Immutability Law
 
 TiddlyWiki 5 never mutates a tiddler in place. When content changes, the entire tiddler object is replaced in the store. This fires a widget refresh cascade: `ViewTemplate` walks a priority-ordered list of type-specific templates, picks the first match, and re-renders the affected widget subtree. The reactive cascade is triggered by identity change, not diff.
 
@@ -49,7 +49,7 @@ A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boun
 
 <<~ ahu #ue5-schema-enforcement >>
 
-## 2. UE5 World Partition / UEFN Scene Graph → Pranala Schema Enforcement
+!! 2. UE5 World Partition / UEFN Scene Graph → Pranala Schema Enforcement
 
 Unreal Engine 5.6 World Partition enforces actor schemas at the data layer: each actor has a type-bound property schema; violation blocks instantiation. UEFN's Verse language extends this to runtime — static types prevent assignment of values that break the schema. Schema enforcement is not an afterthought on top of the data; it is the first gate before data enters the scene.
 
@@ -76,7 +76,7 @@ Pranala edges carry fixed properties: `family` (`control | relation | observe | 
 
 <<~ ahu #ast-self-hosting >>
 
-## 3. AST-Driven Self-Hosting Grammar
+!! 3. AST-Driven Self-Hosting Grammar
 
 TW5's parser is modular and recursive. Parsing rules live as tiddlers tagged `$:/tags/Macro` — the parser is itself a wiki citizen, extensible without touching core code. The widget tree renders AST nodes; the template cascade picks the first matching template for each node type.
 
@@ -93,9 +93,9 @@ Lararium's memetic-wikitext kernel uses `<<~ ahu ... >>` (worksites), `<<~ prana
 **Phase 2 architecture:**
 
 A `lares/grammars/memetic-wikitext.md` carrier declares:
-- Sigil registry (ahu, pranala, loulou, ...) as a TOML table
-- Per-sigil parse rules as embedded code blocks (regex patterns + capture groups)
-- Default template per sigil kind
+* Sigil registry (ahu, pranala, loulou, ...) as a TOML table
+* Per-sigil parse rules as embedded code blocks (regex patterns + capture groups)
+* Default template per sigil kind
 
 The boot compiler reads this carrier during compilation. The TypeScript parser becomes a thin runtime that interprets grammar rules from the closure — not a hard-coded recogniser.
 
@@ -121,7 +121,7 @@ The tldraw projection layer (`lararium-tldraw`) already operates on a `LarProjec
 
 <<~ ahu #synthesis >>
 
-## 4. Synthesis — The Unified Foundation
+!! 4. Synthesis — The Unified Foundation
 
 The three laws converge:
 
@@ -133,9 +133,9 @@ grammar-as-memes       →  all system components live as memes
 
 These are not features. They are the substrate. Once all three hold:
 
-- **Re-seeding** is safe: replace the full room snapshot, not individual shapes. No shape-level mutation outside CRDT. The room reload is a tiddler replacement — triggers full projection cascade.
-- **Schema enforcement** is self-describing: pranala families are defined in lares/, readable by agents and humans. Operators extend the schema by writing memes, not TypeScript.
-- **Self-hosting** becomes tractable: the parser reads its own grammar from the boot closure. Editing `lares/grammars/memetic-wikitext.md` should propagate through disk → Automerge → TW5; parser-rule hot-reload may still require explicit rebuild/restart until the grammar interpreter is fully live.
+* **Re-seeding** is safe: replace the full room snapshot, not individual shapes. No shape-level mutation outside CRDT. The room reload is a tiddler replacement — triggers full projection cascade.
+* **Schema enforcement** is self-describing: pranala families are defined in lares/, readable by agents and humans. Operators extend the schema by writing memes, not TypeScript.
+* **Self-hosting** becomes tractable: the parser reads its own grammar from the boot closure. Editing `lares/grammars/memetic-wikitext.md` should propagate through disk → Automerge → TW5; parser-rule hot-reload may still require explicit rebuild/restart until the grammar interpreter is fully live.
 
 **Convergence point:** `lares/` IS the operating system. The TypeScript packages are its kernel — thin, stable, fast. The memes are the userland — editable, extensible, self-describing. The tldraw canvas is the shell — the UI over the OS.
 
@@ -145,7 +145,7 @@ This is the Lararium architecture thesis. Everything else is implementation deta
 
 <<~ ahu #build-order >>
 
-## 5. Build Order (next three pulls)
+!! 5. Build Order (next three pulls)
 
 | Pull | Work | Unlocks |
 |---|---|---|
@@ -159,11 +159,11 @@ P8 is the shortest path to the live edit loop. P9 hardens the graph. P10 begins 
 
 <<~ ahu #local-first-pivot-2026-04-29 >>
 
-## 6. Local-First Pivot — Automerge Meme Store (2026-04-29)
+!! 6. Local-First Pivot — Automerge Meme Store (2026-04-29)
 
 The three laws above held before the pivot. The pivot completes their implementation without contradicting them.
 
-### What changed
+!!! What changed
 
 | Old model | New model |
 |---|---|
@@ -172,7 +172,7 @@ The three laws above held before the pivot. The pivot completes their implementa
 | `MemoryTiddlerStore` as the live store | `AutomergeMemeStore` — CRDT-backed, local-first, IDB-persisted |
 | TW5 boots when WS `session.synced` fires | TW5 boots after `await handle.whenReady()` — no race, no event to miss |
 
-### Boot sequence (new)
+!!! Boot sequence (new)
 
 ```
 getOrCreateBrowserIdentity()   ← Ed25519 keypair + did:key:z... (IDB-persisted)
@@ -191,15 +191,15 @@ sharePolicy(peerId)                ← isAuthorized(peerId) || true (local-opera
 <meta name="lararium-operator-did" content="did:key:z...">  ← injected into HTML
 ```
 
-### Brooklyn Zelenka / Keyhive readiness
+!!! Brooklyn Zelenka / Keyhive readiness
 
 The identity and UCAN layer is now in place:
-- `did:key` with Ed25519 — same principal model as Keyhive
-- UCAN v0.10 JWT — spec-compliant, no alpha-library dependency
-- `UcanPeerRegistry` + `sharePolicy` hook — Keyhive membership check plugs in here
-- `LarariumAuthorityEnvelope["keyhive"]` arm — type socket, not instantiated until WASM lands
+* `did:key` with Ed25519 — same principal model as Keyhive
+* UCAN v0.10 JWT — spec-compliant, no alpha-library dependency
+* `UcanPeerRegistry` + `sharePolicy` hook — Keyhive membership check plugs in here
+* `LarariumAuthorityEnvelope["keyhive"]` arm — type socket, not instantiated until WASM lands
 
-### Law addition: `local-first-store`
+!!! Law addition: `local-first-store`
 
 > The Automerge meme store (`AutomergeMemeStore`) is the live source of truth for carrier text content. The tldraw canvas carries URI identity, projection records, and optional layout overlays. Canvas shapes MUST NOT embed `carrierText` in `shape.meta`. Content sync flows through `/meme-sync`; `/rooms/:id` is a legacy/shared-layout channel, not the active meme-content path. Two stores may coexist, but Automerge/TW5 owns content.
 

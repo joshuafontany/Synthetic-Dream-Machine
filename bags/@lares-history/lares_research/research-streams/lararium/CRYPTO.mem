@@ -21,7 +21,7 @@ retain       = true
 
 <<~ ahu #doctrine-header >>
 
-## Web Crypto Provider Doctrine
+!! Web Crypto Provider Doctrine
 
 Lararium may define cryptographic needs.
 Lararium must not implement cryptographic primitives.
@@ -34,7 +34,7 @@ No hand-rolled hash functions. No djb2. No custom PRNG. No homegrown auth.
 
 <<~ ahu #provider-interface >>
 
-## Provider Interface
+!! Provider Interface
 
 ```ts
 export type DigestAlgorithm = "SHA-256" | "SHA-384" | "SHA-512"
@@ -58,7 +58,7 @@ All digest operations return `Promise<Uint8Array>`. Callers must be async.
 
 <<~ ahu #web-crypto-implementation >>
 
-## Platform Implementation
+!! Platform Implementation
 
 ```ts
 export async function webDigest(
@@ -91,7 +91,7 @@ Browser: standard `window.crypto.subtle`.
 
 <<~ ahu #canonical-bytes >>
 
-## Canonical Bytes Policy
+!! Canonical Bytes Policy
 
 Do not hash arbitrary JavaScript objects.
 Convert semantic records into canonical bytes first.
@@ -118,28 +118,28 @@ export async function sha256Hex(
 ```
 
 Rules:
-- Text → UTF-8 via `TextEncoder`. Not `Buffer.from(str)`. Not `str.split('')`.
-- JSON key order must be stable (sort keys before stringify).
-- Arrays preserve insertion order.
-- `undefined`, functions, symbols, BigInt, Date, NaN, Infinity, class instances:
+* Text → UTF-8 via `TextEncoder`. Not `Buffer.from(str)`. Not `str.split('')`.
+* JSON key order must be stable (sort keys before stringify).
+* Arrays preserve insertion order.
+* `undefined`, functions, symbols, BigInt, Date, NaN, Infinity, class instances:
   must be explicitly rejected or explicitly normalized before hashing.
-- Newline policy must be explicit for text-file receipts (normalize to LF or document the choice).
-- `SubtleCrypto.digest()` is non-streaming. For inputs > 50 MB, document the buffering policy.
+* Newline policy must be explicit for text-file receipts (normalize to LF or document the choice).
+* `SubtleCrypto.digest()` is non-streaming. For inputs > 50 MB, document the buffering policy.
 
 <<~/ahu >>
 
 <<~ ahu #digest-policy >>
 
-## Digest Policy
+!! Digest Policy
 
-- `SubtleCrypto.digest()` is async. All callers must be async.
-- `SubtleCrypto.digest()` is not streaming. Full input must be in memory.
-- Large-input policy: document maximum expected input size at each call site.
+* `SubtleCrypto.digest()` is async. All callers must be async.
+* `SubtleCrypto.digest()` is not streaming. Full input must be in memory.
+* Large-input policy: document maximum expected input size at each call site.
   Current call sites (boot receipt, carrier hash) are < 1 MB — acceptable.
   Future call sites over 50 MB require explicit buffering or chunked approach.
-- SHA-256 for all current Lararium uses.
-- SHA-384 / SHA-512 reserved for future ATProto data-auth where required.
-- Do not use MD5 or SHA-1 for any new work.
+* SHA-256 for all current Lararium uses.
+* SHA-384 / SHA-512 reserved for future ATProto data-auth where required.
+* Do not use MD5 or SHA-1 for any new work.
 
 Known test vector:
 ```
@@ -150,37 +150,37 @@ SHA-256("abc") = ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015a
 
 <<~ ahu #randomness-policy >>
 
-## Randomness Policy
+!! Randomness Policy
 
 Use:
-- `crypto.getRandomValues()` for random bytes
-- `crypto.randomUUID()` for UUIDs
+* `crypto.getRandomValues()` for random bytes
+* `crypto.randomUUID()` for UUIDs
 
 Do not use:
-- `Math.random()` for IDs, nonces, tokens, receipts, session identifiers,
+* `Math.random()` for IDs, nonces, tokens, receipts, session identifiers,
   capability IDs, auth state, or any security-sensitive randomness
 
 Notes:
-- `getRandomValues()` mutates the provided typed array in place and returns it.
-- Keep requests at or below 65,536 bytes per call (platform limit on some runtimes).
-- For key generation, prefer SDK-managed key generation or `subtle.generateKey()`
+* `getRandomValues()` mutates the provided typed array in place and returns it.
+* Keep requests at or below 65,536 bytes per call (platform limit on some runtimes).
+* For key generation, prefer SDK-managed key generation or `subtle.generateKey()`
   at a reviewed boundary — do not roll key material from random bytes by hand.
 
 <<~/ahu >>
 
 <<~ ahu #prohibited >>
 
-## Prohibited Crypto Work
+!! Prohibited Crypto Work
 
 Do not use Lararium code to implement:
-- Homegrown authentication or session management
-- Homegrown OAuth, PKCE, PAR, DPoP
-- Homegrown JWT signing or verification
-- Homegrown token/session storage
-- Homegrown object hashing without canonical bytes
-- Custom hash functions (djb2, FNV, murmur, etc.) for security purposes
-- `Math.random()` anywhere security matters
-- `node:crypto.createHash()` in `lararium-mesh` or `lararium-web`
+* Homegrown authentication or session management
+* Homegrown OAuth, PKCE, PAR, DPoP
+* Homegrown JWT signing or verification
+* Homegrown token/session storage
+* Homegrown object hashing without canonical bytes
+* Custom hash functions (djb2, FNV, murmur, etc.) for security purposes
+* `Math.random()` anywhere security matters
+* `node:crypto.createHash()` in `lararium-mesh` or `lararium-web`
 
 The `packages/lararium-web/src/crypto-shim.ts` djb2 implementation is
 **deprecated** and must be replaced with `webDigest()` calls once
@@ -190,12 +190,12 @@ The `packages/lararium-web/src/crypto-shim.ts` djb2 implementation is
 
 <<~ ahu #migration-path >>
 
-## Migration: crypto-shim.ts → webDigest()
+!! Migration: crypto-shim.ts → webDigest()
 
 Current state (Milestone 3):
-- `packages/lararium-web/src/crypto-shim.ts` uses djb2 mixing, not SHA-256
-- `lararium-mesh/compiler.ts` uses `import { createHash } from 'crypto'` (Node-only)
-- `vite.config.ts` aliases `crypto → crypto-shim.ts` as a workaround
+* `packages/lararium-web/src/crypto-shim.ts` uses djb2 mixing, not SHA-256
+* `lararium-mesh/compiler.ts` uses `import { createHash } from 'crypto'` (Node-only)
+* `vite.config.ts` aliases `crypto → crypto-shim.ts` as a workaround
 
 Target state (Milestone 4):
 1. Add `CryptoProvider` interface + `webDigest()` to `lararium-mesh/src/crypto.ts`
@@ -210,7 +210,7 @@ Target state (Milestone 4):
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:relation role:documents >>
 <<~ pranala #to-auth ? -> lar:///LARARIUM-NODE/AUTH-ATPROTO family:relation role:sibling >>

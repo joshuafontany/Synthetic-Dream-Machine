@@ -23,7 +23,7 @@ revised-on    = "2026-07-13"
 
 <<~ ahu #the-refusal >>
 
-# Admission on a Lineage ~ an OUTLINE, and what would refute it
+! Admission on a Lineage ~ an OUTLINE, and what would refute it
 
 **This meme claims nothing.** No experiment has run. No code exists. The bound rides a citation the author
 has not re-derived, the algorithm rides a derivation nobody has reviewed, and the synthesis rides four
@@ -40,7 +40,7 @@ each one names the experiment that would sink it.
 
 <<~ ahu #the-problem >>
 
-## The Problem
+!! The Problem
 
 A mesh grows by **invite**: a member signs a vouch for a newcomer. Everyone descends from a founder by a
 chain of vouches — **a directed acyclic lineage, not an undirected social graph.** No central authority.
@@ -54,7 +54,7 @@ whose conductance is terrible by construction, and **nobody has done our graph.*
 
 <<~ ahu #the-claim >>
 
-## The Claim ~ four braids, one knot
+!! The Claim ~ four braids, one knot
 
 **C1 — THE BOUND SURVIVES, AND NEVER NEEDED CONDUCTANCE.** Trust-PPR carries an ε-spam-resistance bound
 proved **on all graph classes** — no mixing, no conductance, no undirectedness (Farach-Colton et al., EC
@@ -126,7 +126,7 @@ and made a local party post the bond.**
 
 <<~ ahu #the-shadow >>
 
-## The Shadow ~ what this design will do to itself
+!! The Shadow ~ what this design will do to itself
 
 **ORIGINAL ANTIGENIC SIN.** A lineage-rooted system with memory **does not converge on late-arriving truth.
 It converges on whatever arrived first** — by **active suppression**, not inertia: the incumbent lineage
@@ -155,7 +155,7 @@ STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in
 
 <<~ ahu #what-would-prove-it >>
 
-## What Would Prove It ~ the experiments, none of them run
+!! What Would Prove It ~ the experiments, none of them run
 
 1. **Re-derive Lemma 3 under an append-only signed vouch DAG** (the attacker cannot rewrite an acquired
    node's out-edges). Does the bound tighten, hold, or vanish? **Until this runs, C1 stands on someone

@@ -20,7 +20,7 @@ retain    = false
 
 <<~ ahu #head >>
 
-# Consume-Archive — Memes
+! Consume-Archive — Memes
 
 Research artifacts from `wikis/@lares-history/lares_research/` that passed the pono consume pass.
 Each meme here records: what the research contributed, where it landed, and what residue (if any) remains open.
@@ -32,7 +32,7 @@ Files NOT yet marked web2 still need a consume pass or active meme.
 
 <<~ ahu #history >>
 
-## Historical Provenance Records
+!! Historical Provenance Records
 
 See [history/](history/README.md) for origin-story records — development arc, genesis conversations, early drafts.
 These records show *how* design doctrine emerged, not what it contains.
@@ -47,7 +47,7 @@ These records show *how* design doctrine emerged, not what it contains.
 
 <<~ ahu #index >>
 
-## Consume Archive Index
+!! Consume Archive Index
 
 Research consumed into live docs/packages. Source files deleted 2026-05-16.
 

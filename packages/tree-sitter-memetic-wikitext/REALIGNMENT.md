@@ -39,7 +39,7 @@ source-text NEVER changes · anything hand-review-shaped defers.
 |---|---|---|---|---|
 | bags/@elyncia | 2 | ~51 lines | none (gate covers @lares only) | ✅ 2026-07-14 (51 headings · 95 lists) |
 | bags/@sdm | 42 | ~295 files·lines | none | ✅ 2026-07-14 (294 headings · 188 lists) |
-| bags/@lares-history | ~12 | ~400 | none | |
+| bags/@lares-history | 20 | ~656 lines | none | ✅ 2026-07-14 (656 headings · 1,527 lists · 134 indented-ul deferred) |
 | bags/@lararium | 210 | ~1,022 | none | |
 | bags/@lares (api/, docs/, cli/) | ~249 | ~2,597 | RE-BAKE golden-corpus.json same commit | |
 | bags/@lares library/ + source-text | — | — | re-bake + sectioner lockstep (`kumulipo_sections.py` keys `^##`) | DEFERRED |
@@ -69,3 +69,5 @@ corpus-scoped against the vendored TiddlyWiki5 core tiddlers.
 - 2026-07-14 — plan raised; script lands beside it (`tools/realign_md_tw5.py`).
 - 2026-07-14 — @elyncia + @sdm cross (44 memes, 345 headings, 283 lists;
   fold witness 44/44 ERROR-free; 801 fence lines + 0 source-text lines held).
+- 2026-07-14 — @lares-history crosses (20 memes, 656 headings, 1,527 lists;
+  fold 20/20 ERROR-free; 1,255 fence lines held; 134 indented-ul deferred).
