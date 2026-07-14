@@ -115,8 +115,12 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     if (payload.kind !== "device-admit/v1") {
       throw new Error(`[lares init --admit] unexpected payload kind: ${payload.kind}`);
     }
-    const { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl } = await runApplyAdmitPayload({
+    // The joinee's OWN seed — the admit supplies the BINDING; the vessel supplies the SELF. The ceremony
+    // mints this vessel's self-certifying ContactCard from it, and a cardless vessel cannot speak at a gate.
+    const admitSeed = await loadVesselSigningSeed(storageDir);
+    const { contactCardJson, identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl } = await runApplyAdmitPayload({
       repo,
+      operatorSeed: admitSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  operatorIdentity.displayName ?? "operator",
       payload,

@@ -231,7 +231,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   const bootKeys = await readBootKeys(idbName);
   const bootKeyWrites: BootKeyWrites = {};
   let bootstrap = bootKeys.bootstrap;
-  if (!bootstrap && admit) {
+  // AN ADMIT SUPERSEDES AN ANON BOOTSTRAP. A vessel MUST boot anon first — it needs a key before anyone
+  // can admit that key — so the admit ALWAYS arrives at a vessel that already founded its own group. The
+  // anon founding is not a competing state; it is the FLOOR the admit lifts the vessel from. Gating the
+  // admit behind `!bootstrap` therefore ignores every admit that will ever arrive.
+  if (admit) {
     // JOIN. The founder's root already signed this vessel's edge, so the ceremony here ADOPTS a binding
     // rather than minting one: `runApplyAdmitPayload` seeds this vessel's OWN sovereign social docs and
     // takes the founder's @persona (membership crosses; @daemon stays sovereign-per-vessel), then writes
@@ -242,6 +246,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     // It fails closed on a missing binding field: a half-bound daemon doc is the confused-deputy hole.
     const a = await runApplyAdmitPayload({
       repo,
+      operatorSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  displayName ?? "Browser Operator",
       payload:              admit,
@@ -256,6 +261,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // leaf presents a binding it could not have written for itself, and that is the whole difference
       // between joining a group and declaring one.
       signerDid: admit.signerDid, deviceEdge: admit.deviceEdge,
+      contactCard: a.contactCardJson,
     };
     bootKeyWrites.bootstrap = bootstrap;
   } else if (!bootstrap) {

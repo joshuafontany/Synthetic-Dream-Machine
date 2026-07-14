@@ -321,12 +321,19 @@ export async function runDeviceAdmitEdge(
 
 export interface ApplyAdmitInput {
   repo:                 Repo;
+  /** The joinee's OWN 32-byte seed. An admitted vessel still needs its own self-certifying ContactCard —
+   *  the founding path mints one and the admit path did not, so an admitted vessel came up with no card
+   *  and could never present itself at a gate. The card is the vessel's OWN identity, never the founder's;
+   *  the admit supplies the BINDING, and the vessel supplies the SELF. */
+  operatorSeed:         Uint8Array;
   operatorVerifyingKey: string;
   operatorDisplayName:  string;
   payload:              DeviceAdmitPayload;
 }
 
 export interface ApplyAdmitResult {
+  /** The joinee's own self-certifying ContactCard JSON — the leaf identity it presents at the V3 gate. */
+  contactCardJson: string;
   identitiesUrl: string;
   circlesUrl:    string;
   sessionsUrl:   string;
@@ -344,7 +351,7 @@ export interface ApplyAdmitResult {
 export async function runApplyAdmitPayload(
   input: ApplyAdmitInput,
 ): Promise<ApplyAdmitResult> {
-  const { repo, operatorVerifyingKey, operatorDisplayName, payload } = input;
+  const { repo, operatorSeed, operatorVerifyingKey, operatorDisplayName, payload } = input;
 
   // Fail-closed: the binding is the joinee's whole authority — a missing field MUST halt,
   // never write a half-bound daemon doc (the confused-deputy / mycelium-PCD hole).
@@ -411,7 +418,20 @@ export async function runApplyAdmitPayload(
     };
   });
 
+  // THE VESSEL'S OWN CARD. The admit supplies the BINDING (whose group this vessel joins); the vessel
+  // supplies the SELF (who it is). A self-certifying ContactCard is the latter, and it is minted from the
+  // vessel's OWN seed — never the founder's, who is not present and whose seed never crossed.
+  //
+  // Without it, an admitted vessel comes up bound and MUTE: the V3 handshake presents card + proof, so a
+  // cardless vessel cannot speak at a gate at all. The founding path minted one and this path did not,
+  // which is why an admitted vessel could be perfectly bound and still never dial.
+  const keyhive = new KeyhiveProvider();
+  await keyhive.init({ seed: operatorSeed, eventStore: new InMemoryEventStore() });
+  const contactCardJson = new TextDecoder().decode(await keyhive.contactCard());
+  await keyhive.dispose();
+
   return {
+    contactCardJson,
     identitiesUrl: identitiesHandle.url as string,
     circlesUrl:    circlesHandle.url    as string,
     sessionsUrl:   sessionsHandle.url   as string,
