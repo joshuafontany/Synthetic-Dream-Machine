@@ -83,13 +83,18 @@ relationship.'' The ''Vault'' seals the inversion at the top — the collector t
 one human" stays the user's private secret, never a published graph, riding no wire
 (<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#the-vault >>).
 
-**One signed act, two folds — the li/ki collapse.** A ''CabalGroup'' reads as a multi-principal Circle
-(several humans' PersonaGroups mutually bound). Joining one fires a single signed act — the invite/vouch —
-and that one edge feeds BOTH reads: the SOCIAL fold (Keyhive) admits it as *"this vessel may now read the
-cabal"*, the REPUTATION fold (`lineage-rank`) folds it as *"this identity's standing now enters the cabal's
-lineage."* So the two graphs stay two projections (`ki`) over ONE stored substrate of signed acts (`li`) —
-never a separate invite ledger beside the delegation log. Both invert to the user, because both only ever
-fold edges the users themselves signed; neither stands as a registry.
+**Two acts, not one — the vouch stays separable.** A ''CabalGroup'' reads as a multi-principal Circle
+(several humans' PersonaGroups mutually bound). Joining it fires an AUTHORIZATION act — a Keyhive
+delegation, *"this vessel may now read the cabal."* A VOUCH — *"I stake my standing that this peer
+belongs"* — rides as a SEPARATE act, and the two never fuse: a member you let read may carry no stake, a
+peer you stake on may hold no cap. PGP keeps exactly this split — key-validity (public, exported) in one
+store, owner-trust (private, never exported) in another, and one signs many keys at owner-trust zero.
+Folding "I delegated to you" into "I vouch for you" names the confused-deputy bug (Miller, ocap), never a
+feature. So the REPUTATION fold (`lineage-rank`) never derives its edges from the delegation log — it folds
+the EXPLICIT vouches (the `CabalInvite` stake) alone. Storage MAY still share: a vouch MAY ride a delegation
+record as an optional stake weight, but only as a separable dimension defaulting OFF, so access stands at
+vouch=0 and the reputation read never shadows every grant. Both still invert to the user — the peers sign
+their own edges, and no registry holds them.
 
 <<~ confidence Synthesis-Canon 14/20 >> The inversion runs pure but for ONE seam: the multi-principal
 key-handover inside a CabalGroup. A single-principal me-Circle (your own devices) needs no tie-break — you
