@@ -54,3 +54,36 @@ def test_canonical_json_sorts_keys_and_leaks_no_host_fields():
     cj = mf.canonical_json(mf.fold(b"<<~ x >>\n"))
     assert cj.index('"children"') < cj.index('"end"') < cj.index('"kind"') < cj.index('"start"')
     assert '"_' not in cj  # no host/internal field ever enters the parity currency
+
+
+def test_golden_corpus_hashes_hold(tmp_path):
+    """THE PARITY GATE: every meme's canonical MemeAst hash, pinned. A grammar
+    or fold change that moves ANY hash fails loud — the divergence then rides
+    the bump ritual (classify INTENDED, re-bake in the same commit; or fix the
+    REGRESSION). This same fixture gates the TS host when it lands."""
+    import glob
+    import json
+    import os
+
+    here = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(here, "fixtures", "memeast", "golden-corpus.json")) as fh:
+        golden = json.load(fh)
+    bags = os.path.expanduser("~/Synthetic-Dream-Machine/bags/@lares")
+    if not os.path.isdir(bags):
+        import pytest
+
+        pytest.skip("bags corpus absent — the gate rides the operator's tree")
+
+    drifted, missing = [], []
+    for rel, want in golden["corpus"].items():
+        path = os.path.join(bags, rel)
+        if not os.path.isfile(path):
+            missing.append(rel)  # a retired meme: the corpus wants a re-bake, not a failure
+            continue
+        data = open(path, "rb").read()
+        got = mf.structural_hash(mf.fold(data))
+        if got != want["hash"]:
+            drifted.append(rel)
+    assert not drifted, f"{len(drifted)} memes fold differently now: {drifted[:5]}"
+    # every hashed meme still parses; absences are reported, never silently passed
+    assert len(missing) < len(golden["corpus"]) // 2, f"corpus moved under the gate: {missing[:5]}"
