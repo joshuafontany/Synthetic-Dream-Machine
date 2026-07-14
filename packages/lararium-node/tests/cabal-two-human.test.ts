@@ -109,4 +109,57 @@ describe("two humans, one cabal, no shared metal", () => {
     expect(addA).toBe("ok");
     expect(addB).toBe("ok");
   });
+
+  test("AUTHORITY blocks the leak upward: a member cannot revoke its own delegator (the founder)", async () => {
+    // FINDING: keyhive refuses an unauthorized revoke. Freyja, whom Josh delegated in, has NO authority to
+    // revoke Josh — "Proof missing to authorize revocation." The delegation graph prevents revoking UP the
+    // chain, which forecloses one whole class of add-while-remove leak at the authority layer, not the crypto.
+    const josh   = await makeHuman(24);
+    const freyja = await makeHuman(124);
+    const { id: freyjaAgentId } = await josh.receiveContactCard(await freyja.contactCard());
+    const { id: joshAgentId }   = await freyja.receiveContactCard(await josh.contactCard());
+
+    const cabal = await josh.createSentinelDoc("lar:///ha.ka.ba/sentinel/amorphous-dreams-auth");
+    await josh.addSentinelMember(freyjaAgentId, cabal.docIdHex);
+    await freyja.ingestPeerEvents(await josh.eventsForPeer(freyjaAgentId));
+
+    const freyjaRevokesJosh = await freyja.revokeSentinelMember(joshAgentId, cabal.docIdHex).then(() => "ok").catch((e) => `THREW: ${e instanceof Error ? e.message : e}`);
+    expect(freyjaRevokesJosh).toMatch(/THREW|Proof missing|authorize/);
+  });
+
+  test("ADD-WHILE-REMOVE (authorized): Josh revokes Freyja while she adds a guest — does removed Freyja read?", async () => {
+    // The real leak window: the AUTHORIZED revoker (Josh, the founder) revokes Freyja concurrently with
+    // Freyja adding a guest. Can removed Freyja read content encrypted AFTER her removal? A clean revoke
+    // throws; a leak reads the new content. This REVEALS BeeKEM's accept-and-heal behavior for the canon seat.
+    const josh   = await makeHuman(25);
+    const freyja = await makeHuman(125);
+    const guest  = await makeHuman(225);
+
+    const { id: freyjaAgentId }  = await josh.receiveContactCard(await freyja.contactCard());
+    const { id: joshAgentId }    = await freyja.receiveContactCard(await josh.contactCard());
+    const { id: guestForFreyja } = await freyja.receiveContactCard(await guest.contactCard());
+    await guest.receiveContactCard(await freyja.contactCard());
+
+    const cabal = await josh.createSentinelDoc("lar:///ha.ka.ba/sentinel/amorphous-dreams-5");
+    await josh.addSentinelMember(freyjaAgentId, cabal.docIdHex);
+    const { docId } = await josh.registerBag(BAG);
+    await josh.delegate({ bagUrl: BAG, audience: cabal.agentIdHex, access: "read" });
+    freyja.adoptBag(BAG, docId);
+    await freyja.ingestPeerEvents(await josh.eventsForPeer(freyjaAgentId));
+
+    // CONCURRENT: Josh (authorized) REVOKES Freyja; Freyja ADDS a guest — neither has seen the other's op.
+    const revoke = await josh.revokeSentinelMember(freyjaAgentId, cabal.docIdHex).then(() => "ok").catch((e) => `THREW: ${e instanceof Error ? e.message : e}`);
+    const add    = await freyja.addSentinelMember(guestForFreyja, cabal.docIdHex).then(() => "ok").catch((e) => `THREW: ${e instanceof Error ? e.message : e}`);
+
+    await josh.ingestPeerEvents(await freyja.eventsForPeer(joshAgentId));
+    await freyja.ingestPeerEvents(await josh.eventsForPeer(freyjaAgentId));
+
+    // Josh (the surviving admin) posts AFTER revoking Freyja.
+    const postRevoke = await josh.encryptContent(BAG, new TextEncoder().encode("after Freyja was removed"));
+    const removedFreyjaRead = await freyja.decryptContent(BAG, postRevoke).then((b) => new TextDecoder().decode(b)).catch((e) => `THREW: ${e instanceof Error ? e.message : e}`);
+
+    expect(revoke).toBe("ok");   // Josh HAS authority to revoke Freyja
+    // Assert the CLEAN outcome: removed Freyja cannot read post-revoke content. A failure prints the leak.
+    expect(removedFreyjaRead, `removed Freyja read: ${removedFreyjaRead}`).toMatch(/THREW/);
+  });
 });
