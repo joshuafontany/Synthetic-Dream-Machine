@@ -15,8 +15,7 @@ sequence rides the edge-DAG, never the address):
      naming an absent cell). This leg ENRICHES: it fills the absent BEAT cell with the turn's own
      identity (the grounding-ratchet label — same-turn drawers share a beat cell, so the ultrametric
      reads them adjacent), minting a fresh `worldline/` address only where no membership stamp
-     stands. A cell LABELS; nothing tallies. Any legacy numeric-grid stamp reads as retired form
-     and re-mints.
+     stands. A cell LABELS; nothing tallies.
 
   3. THE RHYTHM TESTIMONY. `ffz_clock.recover_clock(drift_signal)` still runs per braid — as
      REPORT-ONLY testimony (beat period, lock quality, holdover) for the operator's read. The
@@ -47,7 +46,7 @@ from ffz_clock import recover_clock
 FFZ_META = "lar_ffz"
 
 # The profile this leg mints where NO membership stamp stands (a capture-time stamp keeps its own
-# profile — "session" — through enrichment; only a stamp-less or legacy drawer takes this one).
+# profile — "session" — through enrichment; only a stamp-less drawer takes this one).
 FFZ_PROFILE = "worldline"
 
 #: The membership tree's absent-cell sentinel (mesh FFZ_ABSENT / ffz_address NULL_BAND).
@@ -178,24 +177,14 @@ def _label(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:8]
 
 
-def _legacy_grid(address: str) -> bool:
-    """True for the retired numeric-grid form (`worldline/<digits>...` / `worldline/holdover`) —
-    a count-shaped address re-mints as membership; a membership address never matches."""
-    _, _, tail = address.partition("/")
-    if tail == "holdover":
-        return True
-    segs = tail.split(".")
-    return bool(segs) and all(s.isdigit() for s in segs)
-
-
 def membership_stamp(turn_key: str, root: str, existing: "str | None" = None) -> str:
     """The drawer's membership address, ENRICHED: the beat cell takes the turn's own identity label
     (the grounding-ratchet — same-turn drawers share the cell), every other cell keeps whatever the
-    capture path minted. Where no membership stamp stands (or a legacy grid form does), a fresh
-    `worldline/_.<arc>._.<beat>` mints with arc = the braid root's label. Idempotent: enriching an
-    already-enriched address returns it unchanged."""
+    capture path minted. Where no membership stamp stands, a fresh `worldline/_.<arc>._.<beat>`
+    mints with arc = the braid root's label. Idempotent: enriching an already-enriched address
+    returns it unchanged."""
     beat = _label(turn_key)
-    if existing and "/" in existing and not _legacy_grid(existing):
+    if existing and "/" in existing:
         profile, _, tail = existing.partition("/")
         segs = tail.split(".") if tail else []
         segs += [ABSENT] * (N_BANDS - len(segs))
@@ -239,8 +228,8 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
     """Enrich `lar_ffz` membership stamps across every braid, and testify each braid's rhythm.
 
     Per root: order the content turns, read their vectors, and ENRICH each turn's drawers — the beat
-    cell takes the turn's identity label; capture-minted cells stand untouched; stamp-less or
-    legacy-grid drawers mint fresh. The drift-signal still feeds `recover_clock`, whose reading rides
+    cell takes the turn's identity label; capture-minted cells stand untouched; a stamp-less
+    drawer mints fresh. The drift-signal feeds `recover_clock`, whose reading rides
     the report as TESTIMONY only. LOCAL only; the stamp rides content_io.patch_metadata
     (vector-safe). Returns `{root: WorldlineClock}` — deterministic and idempotent (the same braid
     enriches to the same address; an unchanged address still merge-writes the same value)."""

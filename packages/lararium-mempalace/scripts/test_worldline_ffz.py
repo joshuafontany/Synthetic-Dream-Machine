@@ -141,11 +141,11 @@ def test_membership_enrichment_fills_beat_and_keeps_capture_cells():
     assert wf.membership_stamp("T7", "rX", held) == held
 
 
-def test_legacy_grid_stamps_remint_as_membership():
-    # the retired numeric-grid forms re-mint; trailing-absent cells drop (prefix-truncatable).
-    for legacy in ("worldline/3.1.0.1.0", "worldline/holdover"):
-        got = wf.membership_stamp("A5", "rA", legacy)
-        assert got == f"worldline/_.{wf._label('rA')}._.{wf._label('A5')}"
+def test_stampless_drawer_mints_fresh():
+    # no membership stamp → a fresh mint: arc names the braid, beat names the turn,
+    # trailing-absent cells drop (prefix-truncatable).
+    got = wf.membership_stamp("A5", "rA", None)
+    assert got == f"worldline/_.{wf._label('rA')}._.{wf._label('A5')}"
 
 
 def test_no_host_wall_time_on_the_recover_or_stamp_path():
