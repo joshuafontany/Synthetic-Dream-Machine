@@ -51,6 +51,30 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
   });
 
+  test("transitive: a vessel in the PersonaGroup reads a bag the PersonaGroup holds (production topology)", async () => {
+    // Production admits vessels into the PersonaGroup and delegates BAGS to the PersonaGroup — not each
+    // vessel to each bag. This proves a member of the group-that-holds-the-bag decrypts the bag's content.
+    const founder = await makeVessel(4);
+    const device  = await makeVessel(103);
+    const deviceAgentId = await introduce(founder, device);
+
+    // The PersonaGroup as a sentinel Document; add the device vessel to it BEFORE any encrypt (forward-only).
+    const pg = await founder.createSentinelDoc("lar:///ha.ka.ba/sentinel/persona-group-x");
+    await founder.addSentinelMember(deviceAgentId, pg.docIdHex);
+
+    // The bag delegates to the PersonaGroup AGENT — the production topology (bag member = the group).
+    const { docId } = await founder.registerBag(BAG);
+    await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
+
+    const PLAINTEXT = new TextEncoder().encode("read via PersonaGroup membership, transitively");
+    const ciphertext = await founder.encryptContent(BAG, PLAINTEXT);
+
+    device.adoptBag(BAG, docId);
+    await device.ingestPeerEvents(await founder.eventsForPeer(deviceAgentId));
+    const recovered = await device.decryptContent(BAG, ciphertext);
+    expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
+  });
+
   test("burning a handle forfeits access to NEW shared docs — ShadowTalk, made cryptographic", async () => {
     // The-veil-ladder #the-price: "a burn forfeits the multi-vessel caps + the published standing." keyhive
     // enforces it: revoke the handle, re-key, and the burned handle reads nothing encrypted after the burn.
