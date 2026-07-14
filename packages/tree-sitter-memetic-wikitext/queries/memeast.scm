@@ -20,6 +20,34 @@
 (fenced_block) @meme.fence
 (fenced_block info: (fence_open) @meme.fence.info)
 
+(quote_block) @meme.quote
+(quote_block info: (quote_open) @meme.quote.info)
+
+(style_block) @meme.style
+(style_block info: (style_open) @meme.style.info)
+
+(typed_block) @meme.typed
+(typed_block info: (typed_open) @meme.typed.info)
+
+(hard_break_block) @meme.hardbreaks
+
+(pragma_block) @meme.pragma.block
+(pragma_block open: (pragma_open) @meme.pragma.block.open)
+(pragma_block close: (pragma_end) @meme.pragma.block.close)
+(pragma_open) @meme.pragma
+(pragma_end) @meme.pragma
+(pragma_line) @meme.pragma
+
+(table) @meme.table
+(table_row) @meme.table.row
+
+(transclude_block) @meme.transclude
+(filtered_transclude_block) @meme.transclude.filtered
+(macrocall_block) @meme.macrocall
+(horizontal_rule) @meme.hr
+(html_line) @meme.html
+(field_line) @meme.field
+
 (heading) @meme.heading
 (list_item) @meme.list
 (comment) @meme.comment

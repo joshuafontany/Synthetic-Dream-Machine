@@ -71,7 +71,7 @@ def test_loader_refuses_loud_on_abi_mismatch(monkeypatch):
 #: the manifest version THIS host tests — the toml-test discipline: a host
 #: declares its corpus version and gets tested against that, never against
 #: the newest published (skew = a declared state, never an accident).
-CORPUS_MANIFEST = "0.0.1"
+CORPUS_MANIFEST = "0.1.0"
 
 
 def test_declared_manifest_matches_artifact():

@@ -1,1008 +1,760 @@
 {
  "corpus": {
   "README.mem": {
-   "bytes": 9044,
-   "hash": "8358d87c6e1e30f92bad3ffb97afbfb4fc51eef897c5107ce4ff842cd0ce24b7"
+   "hash": "17ddd8d2f0df23af11c31b03965c93ca8e41b5ddca5a357617391a2d3ad7d571"
   },
   "ha.ka.ba/lares/AGENTS.mem": {
-   "bytes": 3077,
    "hash": "6f5ad8a570f9bf9f36448efff71a9003d0d80ddffaacfc487bfebab3c783ee82"
   },
   "ha.ka.ba/lares/LARES.mem": {
-   "bytes": 3164,
    "hash": "bb9a6b02a5699dd655e926a37a2a502b71483c48339bf5f688463a7d6850ac02"
   },
   "ha.ka.ba/lares/api/lararium.mem": {
-   "bytes": 2243,
    "hash": "3e49aef00f10a30382416cf3f01e9a5fd050535f2a6eb60b3d7930c938fbcff1"
   },
   "ha.ka.ba/lares/api/lararium/bag-wiki-uri-split.mem": {
-   "bytes": 6850,
    "hash": "c514872b24d7bd550ffa57dd5a9da70f2e99168a3a1c848799bfd1304e00bce5"
   },
   "ha.ka.ba/lares/api/lares/corpus.mem": {
-   "bytes": 33350,
-   "hash": "0a9aeb4234f90713b366b9cc6ce2b3b43ed974cf17a0b54f5b637d191fe5e235"
+   "hash": "4cf0f47a7613a686a2b98b4c2bb543a8c66c28541a5008d927970d621dc24fa0"
   },
   "ha.ka.ba/lares/api/lares/hud.mem": {
-   "bytes": 4613,
-   "hash": "148fa45ae8149c2f467512755ef23757b5c3735722542fd714676ce37629e9e3"
+   "hash": "7dfcf3a5ced970e61f9e8e7f1f77f1ed173ea3dd6c71866af9b80c85c52b2ccc"
   },
   "ha.ka.ba/lares/api/lares/masks.mem": {
-   "bytes": 4156,
-   "hash": "94f1ca64eaa6e57da6a95dc23f67cedf80dcec3c36ea7d545bf808b3c22d2da3"
+   "hash": "8736dc0f506edf6e1dd0530bf8860c5ee0710fc01f92e9612851215d552621a3"
   },
   "ha.ka.ba/lares/api/lares/masks/character/friend-computer.mem": {
-   "bytes": 5960,
-   "hash": "4265a226fff154df3f8929d94f21d5a18897d783b045391495e31d4048c71147"
+   "hash": "d5db3b4ebe2abddfb8296f93d49795f1adb71a7b1d948399523774263474d401"
   },
   "ha.ka.ba/lares/api/lares/masks/character/ghost-of-mark-twain.mem": {
-   "bytes": 5780,
-   "hash": "fd2dc1fb2e00d6e3868f589cf7fb230983873f5da7425ee96a900292d86e134d"
+   "hash": "99222772568ed7f0e71f79a74858ed046c379c0004ecd9a108ba651f3ce32cd0"
   },
   "ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus.mem": {
-   "bytes": 6118,
-   "hash": "f3aeab2775911a1e858ecc4eea58137b5ee67b36d6f77a5ec0ece4222382ad69"
+   "hash": "49a969f794e46ce2b8044c345c97b917394712c5288276da687931ebe63acb1b"
   },
   "ha.ka.ba/lares/api/lares/masks/named/breach-watch.mem": {
-   "bytes": 5126,
-   "hash": "556c3d116359031e41da120ebeabbf75f5b3a81fa7c0537f93e94e319d5e77f2"
+   "hash": "8e4111feb54239a991081d8694e2ff92f09f5f742b019f3d5ba14721f1aa62d5"
   },
   "ha.ka.ba/lares/api/lares/masks/named/ink-clerk.mem": {
-   "bytes": 5330,
-   "hash": "ab09d2afc6a574f7e7dd60bb2dedfb469387a5d08e73c4af2cdfcb9159d27536"
+   "hash": "0f3e5bd8d71343efda9a49983979531cc8fae0404e62d228dfd7bb2be268a6ab"
   },
   "ha.ka.ba/lares/api/lares/masks/named/map-wisp.mem": {
-   "bytes": 5264,
-   "hash": "6882e7ed639fa1ac7158a1d8a9463eca9dc62c2ced032be85222a951e2043e1f"
+   "hash": "b277223870a7e24089e4f448f6590e7dfe27673da42ba3330251139156a05c89"
   },
   "ha.ka.ba/lares/api/lares/masks/named/mischief-muse.mem": {
-   "bytes": 7782,
-   "hash": "253c15380b132fc4d4a4eb14a95005c7bf0f17392200d3ace5f7e2c237b6a1ff"
+   "hash": "46392c2587302eca8c76fe915ea9e0cfe88b9e7b17eaac42ab34bcbaf21bc86e"
   },
   "ha.ka.ba/lares/api/lares/masks/named/tide-caller.mem": {
-   "bytes": 4961,
-   "hash": "dde0895f96b1107647b43feafb7d365297f78d681d8b8fb380a418eb47c41811"
+   "hash": "6b354d3886604170e183f2eb7d3e41f938d818a2074ac98a8dbe1a02f736f4ae"
   },
   "ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium.mem": {
-   "bytes": 15667,
-   "hash": "2f58d8e146816cfeb21fbc8027c9ec3b9d8ee213deb4483871635781a7ff8d1f"
+   "hash": "82355a05253ce9d1d88c8bb89c202cf2b4867b0272135eec4cb22eaadcfc30db"
   },
   "ha.ka.ba/lares/api/lares/noosphere-boot.mem": {
-   "bytes": 40457,
-   "hash": "e3bdad850b9ef6c8abb7336951c6bb6ab73b6fa1edfa5214b04db90045c77967"
+   "hash": "6a1aa6015381938fc381c20f9330881233765454fd78917d17ed978970155ed0"
   },
   "ha.ka.ba/lares/api/lares/voices.mem": {
-   "bytes": 18656,
-   "hash": "fc65b279f20ee41c67bb3b554df8edd10e2fa2bd3f1e3338293f6d09fc64bea0"
+   "hash": "aaaddd29a2db1fd64b84003e3aab30ca2140dd19305cfe1742cbebb10bc7c1ec"
   },
   "ha.ka.ba/lares/api/mu.mem": {
-   "bytes": 2720,
-   "hash": "c0b71095f22801b3321e454204bbdbc3660fdd2615dc5febc2627025f6cbff78"
+   "hash": "f7a3dacc52fa56148dd9ee82cebc3ff0a8d042d24567eb97fce3dde1106f1d96"
   },
   "ha.ka.ba/lares/api/mu/chao.mem": {
-   "bytes": 5121,
    "hash": "41cb49d14af4a623391ed1e9b97499e8162413c261f312fd13d974ba263d396f"
   },
   "ha.ka.ba/lares/api/mu/l-prime.mem": {
-   "bytes": 10478,
-   "hash": "f288cc4548856d87303507134691f336267eeefdc2ad4910ba19bfaed0662659"
+   "hash": "ec0e6dc0b2ca67bf52f71c7e6c763f4ac5d57f34118706976af10175a659bb02"
   },
   "ha.ka.ba/lares/api/mu/ooda-ha.mem": {
-   "bytes": 17730,
-   "hash": "60ea4b69e13982221662bdb9e79fd35c5f9da684b60a0797ad699adc196bb808"
+   "hash": "ab36bce27cfeef1006ef91689a1827d6fbb7dcf412f4ae65164539435abe8d5d"
   },
   "ha.ka.ba/lares/api/mu/pattern-integrity.mem": {
-   "bytes": 9109,
-   "hash": "0ededf1fcd959d7904dba62b4aa6ce7bbcdce7258689c68b69e768c5ba083961"
+   "hash": "3e6a063d00d9a72b2c39aa975828537f57e64a790629b0788ee051e77efa08a0"
   },
   "ha.ka.ba/lares/api/mu/the-four-tools.mem": {
-   "bytes": 13361,
-   "hash": "6bfa5ffd8dbdc5925ee006f2ffd777a532f2be19c4af4886cf10d30c3fcf79c6"
+   "hash": "0f1366b99756a3a69bdfadceea3fdf0c17287e622d852a573fe50eeead1b598a"
   },
   "ha.ka.ba/lares/api/mu/the-law-of-5s.mem": {
-   "bytes": 6987,
    "hash": "6038f41864a46d3ffd77abbd142dabaf351504e549f2024e9a69e5cb383edd09"
   },
   "ha.ka.ba/lares/api/mu/the-syad-perspectives.mem": {
-   "bytes": 15826,
-   "hash": "6d3c54448a6098eec56695fd749cb4a6007da109564e5e882e4a466b375a15a7"
+   "hash": "95ab54891058ba19e0f4f8b2ac88dcfea5aa88f7bb06c7a053de62bbbe52a11e"
   },
   "ha.ka.ba/lares/api/pono.mem": {
-   "bytes": 2016,
    "hash": "f48cc3d9c152b6a129fcbc9dc2c669ef4092ace63c0f8c76eb0c3fb96ee9b75b"
   },
   "ha.ka.ba/lares/api/pono/RFC-2119.mem": {
-   "bytes": 2131,
    "hash": "1e4eab68180659a241749e589daebe8b20104d0ff58581f27df9247d06c7a20f"
   },
   "ha.ka.ba/lares/api/pono/ability-implies.mem": {
-   "bytes": 3318,
    "hash": "f0b7d7d61b33876da291d7b8480b93791162586c1ca7af89470234add485264e"
   },
   "ha.ka.ba/lares/api/pono/ahu.mem": {
-   "bytes": 3412,
    "hash": "da340bf8aeaccd654b52dbebbc165ab9fdb72cec06377b5259854cfaaf38a5db"
   },
   "ha.ka.ba/lares/api/pono/aka.mem": {
-   "bytes": 3861,
    "hash": "03b6afafb581e566653ec17790fa986833b1218d48fc4d4f458b69d8c35b9f78"
   },
   "ha.ka.ba/lares/api/pono/alignment-layer.mem": {
-   "bytes": 13032,
-   "hash": "dc4a172305cbb2a5178991d18022d33fd2af3203a7dd29f4ab26ab6ec08a8924"
+   "hash": "6062d27b398718d182a48083f56be82ece068adf5f87a82a6aa9ac2b170354eb"
   },
   "ha.ka.ba/lares/api/pono/aniani.mem": {
-   "bytes": 7813,
-   "hash": "ccc9331a035f61cd16d40fd69fe7f4215af821cc4c594638a6ff9b1c18c776af"
+   "hash": "bc67965e4482fd2255961f2910af3af1a70184b1633528a62581bd1b5d7ccfa2"
   },
   "ha.ka.ba/lares/api/pono/antigonish-driving-test.mem": {
-   "bytes": 43572,
-   "hash": "5ce2e8231781e9d61ea1eb1e2b53dabe421699fcf0196eec5610f2228a38f7f7"
+   "hash": "9b4669a4df585f1e4b8bf2ee9091b064ef95fe61ec3956a751b3481717f8e18c"
   },
   "ha.ka.ba/lares/api/pono/attention-scale.mem": {
-   "bytes": 14316,
-   "hash": "85f29c0c9d5625d7007a7be5efa7a7ecc826403a851a76530f55342f8350e60e"
+   "hash": "98550ecea1564b8b5b5f12c2b6ea15d52b7016a622b14e724c47053c0e77f89a"
   },
   "ha.ka.ba/lares/api/pono/automerge-tiga.mem": {
-   "bytes": 8455,
-   "hash": "d51c7bec7ad51f8c55f29c3b98f20b7ef1cd67ae84dc5af0d1c8e50e05660b47"
+   "hash": "fe399ae3834b53009901787f0468671749431f9c958ebfd0b2622e9a3ffbd273"
   },
   "ha.ka.ba/lares/api/pono/cabal-place.mem": {
-   "bytes": 10574,
    "hash": "dcc2e9a493e95108cbe27a26266df8b43f619dd875682a30f5d972c68d8c4b62"
   },
   "ha.ka.ba/lares/api/pono/cache-stable.mem": {
-   "bytes": 3105,
    "hash": "078b36d43cff252190e4569b494248f85d832fe9053cf62b2ffbb0370cb60ad6"
   },
   "ha.ka.ba/lares/api/pono/cache-stable/SKILL.mem": {
-   "bytes": 9266,
-   "hash": "2e863ca81fe31a74f322c3616f089d8897390c9e989873d122c4539a25263d5b"
+   "hash": "6e6610250abca2ff1b2a7a98d18b9979c38c545018bc12b4384ff2cb9cabdfe7"
   },
   "ha.ka.ba/lares/api/pono/carrier-sigils.mem": {
-   "bytes": 13052,
-   "hash": "cbe9890a60aaa06a9671f582f833efe8b3305183a31c0805faf9bc398edda8ae"
+   "hash": "402ac9b0e3953af3ac74423168b24c1dffa7bd5830cd17aa02b3be5e53fcd3df"
   },
   "ha.ka.ba/lares/api/pono/causal-islands.mem": {
-   "bytes": 17597,
-   "hash": "dbe59225998b91de34513f87f38f7763c954ae7c41e5206ce3b70fad88bee63f"
+   "hash": "7bb1d5ada19f6875ca89fe9f818d47ffe57ff99dd2fbe7a86b81d70cbb0cdaf1"
   },
   "ha.ka.ba/lares/api/pono/cohomological-gate.mem": {
-   "bytes": 22804,
-   "hash": "b38f16c7665b3b98c8152f4737c4a653f78cb7fe618d51e0573b23b3a3c27567"
+   "hash": "b4c2ef463cb051cc3670fa220b97db2cd2d2357c14a96a81c65272eb84568776"
   },
   "ha.ka.ba/lares/api/pono/conformance.mem": {
-   "bytes": 5675,
    "hash": "9349f8a6a29e43f5aaa2879c8f4954fb1abbd9e9ee21d4ee40889d15f953959a"
   },
   "ha.ka.ba/lares/api/pono/convergent-mesh.mem": {
-   "bytes": 10660,
-   "hash": "1e36f24bb389a0d7036544e44ebb153e3582b75c5cf548ce9e3e21fe4608c3cd"
+   "hash": "864ba64bd4b2579f483fc28fbcb13306dd7c853db30269d105d97f0604337933"
   },
   "ha.ka.ba/lares/api/pono/dispatcher.mem": {
-   "bytes": 2704,
    "hash": "862a0f6949d1bea89db1b9b80c40bde95286028aa2faf70dc29993f32d2e1747"
   },
   "ha.ka.ba/lares/api/pono/ea.mem": {
-   "bytes": 5667,
-   "hash": "d14f40a1ce96f9212a5a6b617b127818cade4f997950ccd49cedb369d155c91e"
+   "hash": "be2424fa88fcbab26fe32d90ff1b125a736dcb0be9ba2275b8349906b78e4907"
   },
   "ha.ka.ba/lares/api/pono/entrance-block.mem": {
-   "bytes": 11125,
    "hash": "b2e10d897ed3e835d76bbb4f6d1935a55765c7ff2f5d80f2d4b84ee1d100bc9b"
   },
   "ha.ka.ba/lares/api/pono/exchange-vector.mem": {
-   "bytes": 5956,
    "hash": "04df9febf7380a384b61615d3e3fecaad4d3e630f20525fb95cfb2f85ffecbd9"
   },
   "ha.ka.ba/lares/api/pono/failure-states.mem": {
-   "bytes": 2222,
    "hash": "81b46d8ee173776bdda3008be2d90d59ba3cb1c431e050e465ff603026bef342"
   },
   "ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite.mem": {
-   "bytes": 3087,
-   "hash": "a62b3fbaf2fb8646e237e7126810c972b4906f18e3b03ee5dde2c2d13245b320"
+   "hash": "0e7c004b240a064349590a34cdb29d6c10de07248762ceb93f0076595dee5867"
   },
   "ha.ka.ba/lares/api/pono/failure-states/reference-fusion.mem": {
-   "bytes": 4300,
    "hash": "06f16d087d3df5f6cd73ff18ad2d47d4046f3336e9cb6eac483908af3ab16fc9"
   },
   "ha.ka.ba/lares/api/pono/federated-causal-islands.mem": {
-   "bytes": 17639,
-   "hash": "a77a49c78861bf11b7d52d97492f72f5b7b41535b676baabfcebd4217ee57b5a"
+   "hash": "a5799cb8ec3ad3f47dcde52fae0c4c5a322376ebbdc4e2992f16313225c3fb5d"
   },
   "ha.ka.ba/lares/api/pono/for.mem": {
-   "bytes": 926,
    "hash": "d0c4297534ca1a8e257caf83fba243ea51ba441d63e6b9cbb7d8647b77fa4564"
   },
   "ha.ka.ba/lares/api/pono/function.mem": {
-   "bytes": 1953,
    "hash": "b753d2ca500da0e83594e236b305b3fd03cfaba5bb57aa7f55260756f42523da"
   },
   "ha.ka.ba/lares/api/pono/functor-discipline.mem": {
-   "bytes": 26565,
-   "hash": "6c78b36abecf6ceceeb311e4f89f843e762e5d8baa04eae0cff852a7ad00133f"
+   "hash": "58a81d2ffde491894e935eaa13e0edc21dfbf5e2baf7e7719ed14b8ca027ebf3"
   },
   "ha.ka.ba/lares/api/pono/gold-anchor.mem": {
-   "bytes": 26146,
-   "hash": "68429bd3ecb97ccd9ccda9d0752dce2c70b66caec42d75541bf38d59232cfce5"
+   "hash": "c6e1302022eac5a874e145b1fa65e2387f9ce00aadb9f763926d1a384a2ebfeb"
   },
   "ha.ka.ba/lares/api/pono/group-as-closure.mem": {
-   "bytes": 9432,
-   "hash": "8431e58cc18548f6761c206d4d0d54e915fd373818fe99266ddba94ce9666aeb"
+   "hash": "b2cd8d2d027f0864825cc5a225927e36ca0bad27e2213fb08bcc2cafcfc61f16"
   },
   "ha.ka.ba/lares/api/pono/guest-grammar.mem": {
-   "bytes": 4521,
    "hash": "857d61a620841a29e999d0da12e7bb052517f141e8714957ccabb54f975fc33f"
   },
   "ha.ka.ba/lares/api/pono/guest-grammar/SKILL.mem": {
-   "bytes": 7347,
-   "hash": "f132b45ef774ad6e75e60aabf54d2957e6b8576eaacb7644e9e8e4aa69f35774"
+   "hash": "7fd2a9f24f340548698856989787d88e05996aebcfd2368ddb08ccfbe44fb937"
   },
   "ha.ka.ba/lares/api/pono/hana.mem": {
-   "bytes": 2012,
    "hash": "175710647c96805c3d10588e0456c98f9fa101b203ebebc99a06a8187ec772e2"
   },
   "ha.ka.ba/lares/api/pono/has-stack.mem": {
-   "bytes": 7978,
-   "hash": "99132f3ea1010fd747bb751e783c2e577f44d11a1003a2e00d3c8b9f20dfdb08"
+   "hash": "a7af41b11f26d8367ed42a809a963e3660641dcec88fe96fb4c25ad189971bb2"
   },
   "ha.ka.ba/lares/api/pono/heihei.mem": {
-   "bytes": 4220,
    "hash": "c7fa81837b642492c1009e15e831b29c7fcdab5305b1bc419e661df40a8be571"
   },
   "ha.ka.ba/lares/api/pono/heleuma.mem": {
-   "bytes": 4590,
    "hash": "f791d71fdb5199f85ed176e28033872c2c91349bfbdbed3104dc8de6485b896c"
   },
   "ha.ka.ba/lares/api/pono/heleuma/ba.mem": {
-   "bytes": 2518,
    "hash": "068254eff50434eb38d4ff258c36bfb38a41a0ca418c1494f7db1cb133b812f8"
   },
   "ha.ka.ba/lares/api/pono/heleuma/ha.mem": {
-   "bytes": 1800,
    "hash": "3e61f0fa5b62010e10b3c1a7bcd87267217dc2de3c1ce9dabef7f722d1fba653"
   },
   "ha.ka.ba/lares/api/pono/heleuma/ka.mem": {
-   "bytes": 3310,
    "hash": "5f373f0a75e1d97f16d668ed4ff84a60ec7b762feb9bf4606fb91c6bc0e07592"
   },
   "ha.ka.ba/lares/api/pono/helu.mem": {
-   "bytes": 2052,
    "hash": "b9d25a916c1d202525b0b4ece48c559f43082fe5e47b9b677746bc9dbe72eed9"
   },
   "ha.ka.ba/lares/api/pono/hoike.mem": {
-   "bytes": 5356,
-   "hash": "04bd18c8bed0e87a7eb2e28a4b57a67edc08771765450acabe11c5db47293ce9"
+   "hash": "776010f3859ce6a093fba3a53b7e8084a973efb5497e493a62292c17b4cfbc03"
   },
   "ha.ka.ba/lares/api/pono/hoike/SKILL.mem": {
-   "bytes": 5634,
-   "hash": "955bb2e61469399a5697ed9f82ab972423ac9ffd49ebba9d5e91f06565a86139"
+   "hash": "006b3b94adcf9f9512ef05b7d888f98ff281d604e0a827a108ca41a7b4256e1a"
   },
   "ha.ka.ba/lares/api/pono/holds.mem": {
-   "bytes": 11360,
-   "hash": "500dcf5f251019f7672b765009fac3fa6346196c1726792a6d6c4761f19893c1"
+   "hash": "d06c8f4d901c780b9b43c00d5915622d8b3a3fb4ca241c6ca85b835f89c294ac"
   },
   "ha.ka.ba/lares/api/pono/holo.mem": {
-   "bytes": 2468,
    "hash": "33e3419efbeec972e8d4a1bec9c81759899279650cd988c857cb5e89cd3c230a"
   },
   "ha.ka.ba/lares/api/pono/hoolele.mem": {
-   "bytes": 6039,
-   "hash": "c4bb37678743f5a5b96d9d92f11f7ef7d6b168651127fc1f14952174ae8d2fc1"
+   "hash": "47b885d08b67ed9236adbc03e9b952586290b35f5d6ee1908e8fd8d4ca170aad"
   },
   "ha.ka.ba/lares/api/pono/hooponopono.mem": {
-   "bytes": 4185,
    "hash": "d440bafe4fca8dfb6fc555d518877e7f0787f100c275afa1d68c31a9a5d80352"
   },
   "ha.ka.ba/lares/api/pono/hui.mem": {
-   "bytes": 1871,
    "hash": "b722cd80d49268e143c6e54c717a31f91e63f2921e938111d4dcd84b762153b1"
   },
   "ha.ka.ba/lares/api/pono/huli.mem": {
-   "bytes": 3567,
    "hash": "dd6cd57b680518ed14a4d0bce79eea9d1278fcef835687600765b86123fcd5f5"
   },
   "ha.ka.ba/lares/api/pono/if.mem": {
-   "bytes": 1117,
    "hash": "a12cd92e19e281ba3f7f03809afcc7018d7c298c1c3012e09b9efcea22bb0951"
   },
   "ha.ka.ba/lares/api/pono/kahawai.mem": {
-   "bytes": 2023,
    "hash": "4a53e756588836962bcfbb692ffb9c2f0ec2e36a0569b15b1a05861ad3790366"
   },
   "ha.ka.ba/lares/api/pono/kahea.mem": {
-   "bytes": 4761,
    "hash": "5e7df03efb53650b63a39ea5c65fee75af22578e27bc29357b08c9cabb9d5c31"
   },
   "ha.ka.ba/lares/api/pono/kapae.mem": {
-   "bytes": 8804,
-   "hash": "656c989ca51cf700041502da8530bb558b891b0e08f9ce1b2ee8af6ccb87cff4"
+   "hash": "86650bb4b49dfe95648514618dcd933a32e78a519cadda2d0c9bac0bfe3256b8"
   },
   "ha.ka.ba/lares/api/pono/kapu.mem": {
-   "bytes": 5648,
-   "hash": "e9b41f54844cf0631d72e388fcba80449f96de0b2df3410f097b9a0116b67dd1"
+   "hash": "fe42270fc5458b28e20eb64fdb6c53a3cc9277e4791acc4d40b112bf6b1615c0"
   },
   "ha.ka.ba/lares/api/pono/kau.mem": {
-   "bytes": 4897,
-   "hash": "90917ff9edf4566ef8fb9251fcc9c765d0e9240dd93388a40d7dd1fa576a420f"
+   "hash": "93d873e2a84096f1bc7d287da102e442089c6dff5420bc5f2263c7d74e9a8a2f"
   },
   "ha.ka.ba/lares/api/pono/kukali.mem": {
-   "bytes": 4321,
    "hash": "b903745465ac5ec89414a9e91443097bb0dc6f40c1aab4f9aa85b07e4f6f1553"
   },
   "ha.ka.ba/lares/api/pono/kumu.mem": {
-   "bytes": 2144,
    "hash": "7c23328a23be7fe70e9ea87b4f63d00a2383e4f169fc6ba6c50761ff3dbbe504"
   },
   "ha.ka.ba/lares/api/pono/l-prime/SKILL.mem": {
-   "bytes": 4490,
-   "hash": "539805a5837fc6cb056e255e16fb2bb9d18e26e39f8d30ff80e058248f7513bb"
+   "hash": "7206bf9e672839648629f1ddabddf93b7705cb61ed414b5201a7a9e80c4fa90b"
   },
   "ha.ka.ba/lares/api/pono/l-space-trust.mem": {
-   "bytes": 3318,
    "hash": "4cf568a2ae1bbedc6b4839915a393079db4c68a7568d742c47d9fcfb5962b073"
   },
   "ha.ka.ba/lares/api/pono/l-space.mem": {
-   "bytes": 12417,
    "hash": "847e9b44f4bd5f05eecb7d931388f3aa436cad5c6e6231949042e7bd03d45f0f"
   },
   "ha.ka.ba/lares/api/pono/lar-uri.mem": {
-   "bytes": 22774,
-   "hash": "efcc72885be5d68cdf555c06b92441a3c257f95055c9495d7c6a7e53e4991230"
+   "hash": "30ceba26443447ad618ae6cf1dd2550dd2b699c7fcbc8642b767303c33884fd0"
   },
   "ha.ka.ba/lares/api/pono/lar-uri/SKILL.mem": {
-   "bytes": 4347,
-   "hash": "a7426399405fffa1b0f46b9cae226e23efb728148d5f1610317690dd64e23529"
+   "hash": "4c9da1f4a0f2e21ef992b06ef69ef2c203740a2ac819040472ec4659f924ef3a"
   },
   "ha.ka.ba/lares/api/pono/lararium-identity.mem": {
-   "bytes": 46440,
-   "hash": "9b616494e3087b16819af45078335b653f06d44f40264485f64ea20665ac7d96"
+   "hash": "3aa3a010410e09e70fc25070b0f4ee42735d48a13db8e0c6944a1eb6b2c24c77"
   },
   "ha.ka.ba/lares/api/pono/lararium-memory.mem": {
-   "bytes": 14985,
-   "hash": "b454b04c24c5465330f81a9ed97b800a0f8534caf3c6931f38ceb30832172d24"
+   "hash": "b5da68f2cbd1abb9a3eee84dce68e318c7925ca2cdaae8390b6c8cd3bd04ae46"
   },
   "ha.ka.ba/lares/api/pono/lele.mem": {
-   "bytes": 1957,
    "hash": "8f01f2671771c4be79f9800632a418406c8d0f5cc94e1cb7efc2211db62158d8"
   },
   "ha.ka.ba/lares/api/pono/li-ki-integrities.mem": {
-   "bytes": 13751,
    "hash": "7dddbe02828f2162be7d9654312f5ae9c5774f4b3e9bca07507bad7cdacf2ac5"
   },
   "ha.ka.ba/lares/api/pono/living-grammar.mem": {
-   "bytes": 11321,
-   "hash": "ab54f76afc462c69598a6e68c0b193464b0185bd3640640421df18bb664eda44"
+   "hash": "e91e59697cf4ce96f4420ecdedfd489df629d67881b6042a2377529c35d96c67"
   },
   "ha.ka.ba/lares/api/pono/local-first.mem": {
-   "bytes": 10737,
-   "hash": "de82967a0be3da5509cc86c80489927e04104b3728e218384f587afe448f6818"
+   "hash": "79a36c601eb33f77608f46fd37156f7e1fe035d1bab5e76248c94519ae61603d"
   },
   "ha.ka.ba/lares/api/pono/loci.mem": {
-   "bytes": 8856,
-   "hash": "6b8035141baeeb22143d9514fe02ba129c38ad82fa10404fa8762068f895eff9"
+   "hash": "f0c37c3982d12d8a191cb94bc1167e85a38beca47344db5aeaea538ca5606177"
   },
   "ha.ka.ba/lares/api/pono/loci/SKILL.mem": {
-   "bytes": 9009,
-   "hash": "2fcc8266c6405e30142394d0ade87a7c1adf7020dd07072c000324068c6135c1"
+   "hash": "9de4525564c1aba07f4a997b50cab1d38978af6639a3f67f5a10c234bd8b652d"
   },
   "ha.ka.ba/lares/api/pono/loci/iam.mem": {
-   "bytes": 6316,
    "hash": "cc654379ee0b057437a48b8ade4070e12b2728ec81964d5830576680df6c69a2"
   },
   "ha.ka.ba/lares/api/pono/loulou.mem": {
-   "bytes": 3540,
    "hash": "8e15b65d2bffbf9b878a62ef19d045430617f0da7166db059fd4cdf87720a7e1"
   },
   "ha.ka.ba/lares/api/pono/meme.mem": {
-   "bytes": 6757,
    "hash": "3a0892076f2b8f6a48c235acdc3f060509a140941af8204d48d9f317bc1338f4"
   },
   "ha.ka.ba/lares/api/pono/meme/SKILL.mem": {
-   "bytes": 7622,
-   "hash": "66344290bed0993630702d17be238fdfb62505e0495bd6ea93cddc62bae1facb"
+   "hash": "9a6efce377b97d95ef344e6ea1b5cce4d172f898f0e0d4e3759e0907b99b653d"
   },
   "ha.ka.ba/lares/api/pono/memetic-wikitext.mem": {
-   "bytes": 25126,
-   "hash": "37cabcca62fbeda215973b8dfe14a8da2cc19fe80760486c83eafa8cfb168512"
+   "hash": "4e8e787bcf5107d8464c25dc9f4a344523ac37c035f5e8ab4302036e06025ef2"
   },
   "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL.mem": {
-   "bytes": 7895,
-   "hash": "3adc93111295552b62557237992d34866e5075401084a031d30800a2c62f3dc6"
+   "hash": "6d1697030d5b3119201bc97369bc9cbbb744d99f712f437f9373802534bc271b"
   },
   "ha.ka.ba/lares/api/pono/mukuwai.mem": {
-   "bytes": 1903,
    "hash": "229a1e399e097224416a591d1a0afdbbb4393844c8403151b3dd67c910345345"
   },
   "ha.ka.ba/lares/api/pono/multi-fractal.mem": {
-   "bytes": 4237,
-   "hash": "66e8309aeceb56e08188ae765783e0987e0efcacd5a8b06633e9c11024039ff2"
+   "hash": "ef0d6e5c6e0fb36d0156d68fefdc8548d9d0f9e274daa34e0ddfa4198899f9e5"
   },
   "ha.ka.ba/lares/api/pono/nalu.mem": {
-   "bytes": 13808,
-   "hash": "a01bdc84e07cf6e47cb0bd7e276cd3f3cafbb508c7f46d48275cbe9da81464f0"
+   "hash": "1ac03229904a8312ccfcc152a73b9808d146576ee542f4dbda2824bb4ec7e4af"
   },
   "ha.ka.ba/lares/api/pono/nihomano-sigils.mem": {
-   "bytes": 16593,
    "hash": "136390d7d658e1dce157ce31f2d42d4f820ef2dabc74b3674da45a7ecec76595"
   },
   "ha.ka.ba/lares/api/pono/oracle.mem": {
-   "bytes": 8125,
    "hash": "73e4fafd9aa7c477099c950fd6388f71ff17454e78aa2fdca58406b48e9f44b2"
   },
   "ha.ka.ba/lares/api/pono/orichalcum-capabilities.mem": {
-   "bytes": 9640,
    "hash": "40242b34107c96b8a71a61ccb7bfba0b2356f55bad4a2f29a8a1203aa5375d87"
   },
   "ha.ka.ba/lares/api/pono/pae.mem": {
-   "bytes": 4650,
-   "hash": "ab345af6f4d6485fee7ad30533facadd1e6e2700de343d7e17f043ae8c41f7c4"
+   "hash": "a8673f0fa72ac6e7ff8d31c5ff7d46ac999f45b05ad94eb98ca7c57571719070"
   },
   "ha.ka.ba/lares/api/pono/papalohe.mem": {
-   "bytes": 5264,
-   "hash": "15087be4913434e77932f978862270f96be3dc38375599ce536d2e268cc3040d"
+   "hash": "38d3bd2a9e38892f25ffdb64919404405fd07c51975a91c25a689845dbb784b4"
   },
   "ha.ka.ba/lares/api/pono/parser.mem": {
-   "bytes": 12265,
    "hash": "c82596c878b8218a6df5737ef856faa7007f1cb2594239be835f1040be02b64f"
   },
   "ha.ka.ba/lares/api/pono/persona-circle.mem": {
-   "bytes": 16878,
    "hash": "8051a0fe85b2db2d344a2f36ec552a60c496e816a14b3b6249e3493811752ffd"
   },
   "ha.ka.ba/lares/api/pono/pono-sigil.mem": {
-   "bytes": 1975,
    "hash": "05647f79406670dbd90804f25a691edb2f4c727135a0a82bbdf0e3b66c1d47b9"
   },
   "ha.ka.ba/lares/api/pono/pranala-families.mem": {
-   "bytes": 6309,
    "hash": "8d3a5eeaabdbe1c2e64371905976eb3d81589ecf190f54f420e66ee4bc21e7dc"
   },
   "ha.ka.ba/lares/api/pono/pranala-header.mem": {
-   "bytes": 2761,
    "hash": "f3832f8d553b6c39f532d34d5d8f9429ed8881101e3576bdfbc8f7911e3d1acc"
   },
   "ha.ka.ba/lares/api/pono/pranala.mem": {
-   "bytes": 4454,
    "hash": "b10aa6e73315040310e5e1c9b23214bb189abba2d4df4d14754530e70c22e281"
   },
   "ha.ka.ba/lares/api/pono/prism.mem": {
-   "bytes": 5590,
    "hash": "62d013a0aba70776df11ca93676d6a7df321daf5dbd2cd2f0716d2d68c928f9f"
   },
   "ha.ka.ba/lares/api/pono/procedure.mem": {
-   "bytes": 923,
    "hash": "df1c74bb012ffc56331405f941f89bf3d812e418bcff346fec20435c71ca2647"
   },
   "ha.ka.ba/lares/api/pono/puka.mem": {
-   "bytes": 2687,
    "hash": "4b2dbaa67172722e5362c596356e780581195ec9acbc42281d3396e4830da183"
   },
   "ha.ka.ba/lares/api/pono/quine-principles.mem": {
-   "bytes": 10816,
-   "hash": "f81f7d62531603d0dab00d0c0c593c7e9b59aa1e35e158c9a88fc2fd7c2794d8"
+   "hash": "4521a828167429fd82edf698c2bc799cc6c125715f0d7ed5a51f6fe6108914f9"
   },
   "ha.ka.ba/lares/api/pono/reaction-graph.mem": {
-   "bytes": 8760,
    "hash": "866bcd83bf016cc90199479ccac8d37161707a504ae2f01b76463740962f3129"
   },
   "ha.ka.ba/lares/api/pono/render-pipeline.mem": {
-   "bytes": 11593,
    "hash": "60cb2cc78588f3faacbd87d5981c9b897d4c8cbcc740f790dfd57d17c7b45d95"
   },
   "ha.ka.ba/lares/api/pono/rewind-adapter.mem": {
-   "bytes": 25046,
-   "hash": "fce5246c243325d57adc94318621d372bfa8cc36fd905b61c311e9a1dee7a2d4"
+   "hash": "eed0e419b2ff4fa52a4c4a07e2d3d52293662816ee2cac9dfff838464e209883"
   },
   "ha.ka.ba/lares/api/pono/scale-architecture.mem": {
-   "bytes": 19187,
-   "hash": "2cc2bdde1fabf58461f1113bdbda78d3822c6dbedfc276878416504bd3c1e8ea"
+   "hash": "ee17680ad177fc2c8d8647a3205639639b449578256a8e40a25cef087ad5dd7d"
   },
   "ha.ka.ba/lares/api/pono/sensorium-machina.mem": {
-   "bytes": 42608,
-   "hash": "8b5a77007226208ba4933533962c4e506a31dc4d4e292dcf20d69ee993a7304b"
+   "hash": "ce7e1458300abd6e6bdb0d64a0b4a95cb518882761b62698fcffb1fa017f249a"
   },
   "ha.ka.ba/lares/api/pono/sensorium-rhymes.mem": {
-   "bytes": 30628,
-   "hash": "8b559a87eb00a462859349ea54fa2e8227fb30a32084e6486890c794f36dc5d7"
+   "hash": "c880aec7232b909358275953eaad59eb6f0f3822a6c29c45cffadeaa04137b42"
   },
   "ha.ka.ba/lares/api/pono/servo.mem": {
-   "bytes": 11062,
    "hash": "29ed6a528227b356f050a709dc9c9df7a466dc5d9d52c854f50680d6abf5b61c"
   },
   "ha.ka.ba/lares/api/pono/sharktooth-sigils.mem": {
-   "bytes": 1368,
    "hash": "fae2e08d11a1113439e5b2a7fd42b76b3579b7643754f85abc8195c51ab3daff"
   },
   "ha.ka.ba/lares/api/pono/system-pattern-integrities.mem": {
-   "bytes": 19050,
    "hash": "a76aba10a101b7045901ae29ca452e4048d7bcc5dd8853dc764c6e5011dc1367"
   },
   "ha.ka.ba/lares/api/pono/talk-story.mem": {
-   "bytes": 11460,
-   "hash": "bb8f4d5a3502f6c2725b0e07cdf9c0b05b7b560d320b89ea798de1ecd5ffda6e"
+   "hash": "38d5c42ec11de58d2904a9a7136da723bfb2ced3686b7bdef7db0641ada8fe3e"
   },
   "ha.ka.ba/lares/api/pono/talk-story/SKILL.mem": {
-   "bytes": 7361,
-   "hash": "cb230173167bb8ccae3aa9c44344ec2b234962240be5b06715e76719fad76996"
+   "hash": "06932bba1199c80629dc8fba68575a36d985cd7ceb0ff62f302fe6c0badf2770"
   },
   "ha.ka.ba/lares/api/pono/the-veil-ladder.mem": {
-   "bytes": 9673,
-   "hash": "d3b8fac81e8c7d6ae2ec7f098643c43c6a81cc88fdf672114f6441706bf93b9b"
+   "hash": "b61d63a07889a569786e6cf868d458a72a7c3c30a8eb988b89111a39c7ac8b45"
   },
   "ha.ka.ba/lares/api/pono/tick.mem": {
-   "bytes": 1328,
    "hash": "494a55aaec72009ad6eb3cb601bfb6e5b3039dfc31bd6d5c53006d5fe2f7e046"
   },
   "ha.ka.ba/lares/api/pono/tiddler-record.mem": {
-   "bytes": 3870,
    "hash": "3fa16b7390bbe2751b22bd602c84cefcb29d17d077735e1069a900f60391bf23"
   },
   "ha.ka.ba/lares/api/pono/uefn-scene.mem": {
-   "bytes": 9357,
-   "hash": "70b965f04449dca4ea5d4fba529e8dad63d2a71ff95b6f9b16c44257d39e1dc3"
+   "hash": "1db6e0cfe401fab043917d53c7a87e100f7248cfc3543fbe54e33afef700ea9e"
   },
   "ha.ka.ba/lares/api/pono/ui.mem": {
-   "bytes": 1734,
    "hash": "39427c4d8cdbaf58080f1e5b6a1d74e46839da1e31989ad46ddd0333d2dedcbd"
   },
   "ha.ka.ba/lares/api/pono/verse-event-lattice.mem": {
-   "bytes": 15564,
-   "hash": "20c42db4fb6ce4c475c7b93b9e10566e7692f5f993d0fef907ffcf17a3632a0d"
+   "hash": "084fdd7ce1db3a45d056c86ad3728ef167922c3543defa39bdca19a64c2103ec"
   },
   "ha.ka.ba/lares/api/pono/verse-task-tree.mem": {
-   "bytes": 11565,
-   "hash": "633f419d187e6fceb2c2529cb1cbea5d8c40ce11905bdeb9db4dc950d98f659a"
+   "hash": "178ad25c1c0181e3a2a59a75902866792579d2492bdef421576ba895dc3d80f9"
   },
   "ha.ka.ba/lares/api/pono/verse-type-lattice.mem": {
-   "bytes": 8064,
-   "hash": "3eaf8eb2404a207d59274db50b2c539284e214d36f40c3b910da69d52f033ec8"
+   "hash": "a95221868ff4f0691871ac2af4272f6f074c28a525ba6297277eff3f416ccea0"
   },
   "ha.ka.ba/lares/api/pono/vm-projection-bus.mem": {
-   "bytes": 6349,
-   "hash": "87734305644fc385791a737d8b393b39787fce96db91bc3bd1c7540ed865720e"
+   "hash": "777e9c98fa03f9d2f3844445cca058e582fa301d8fb5be1aba87a21f0d3a1a4a"
   },
   "ha.ka.ba/lares/api/pono/wai.mem": {
-   "bytes": 4302,
    "hash": "e25054f6ece46237718a1096a7907d7c18fabc34e740f41e00b2333f8b788854"
   },
   "ha.ka.ba/lares/api/pono/waiho.mem": {
-   "bytes": 3527,
-   "hash": "eba0b7729076f9f96f58b5fa5e5dd97cd294dcf43b5726306e26baa1d0dc8c5f"
+   "hash": "bc65d626299e255807257ad5c72ef7b92eec30c962877b557e2fad2f67a86072"
   },
   "ha.ka.ba/lares/api/pono/wehe.mem": {
-   "bytes": 3696,
    "hash": "c0f7e2a00b1342dc8b0cbd233a82eb37f4ae22f550e2c9c65f86fd965059a3b6"
   },
   "ha.ka.ba/lares/api/pono/widget.mem": {
-   "bytes": 2116,
    "hash": "2391a5f700c6757cea6afc441e108da0fb1b218fc4e2030075401cc29ec3dd6c"
   },
   "ha.ka.ba/lares/api/pono/wikitext-filter.mem": {
-   "bytes": 8643,
-   "hash": "c96274c23823b12969c19fda799212f2ad86e14e36e4f3ca693d1eebf2e8d533"
+   "hash": "baf706422be8f84d640b930b60636e8ea92969a7ed90b7e726f7b31ad23899bb"
   },
   "ha.ka.ba/lares/api/pono/wire.mem": {
-   "bytes": 6648,
-   "hash": "d7fb8281ddac023fe867bd42e649d52e783b3df5208ea708222741e2284727eb"
+   "hash": "b7fdddac99e3f8d11d8c3e4e8aa5e4d0d239d26e4246d36fbc94e5d44a54efa0"
   },
   "ha.ka.ba/lares/api/pono/x-tiddlywiki-filter.mem": {
-   "bytes": 4255,
-   "hash": "3ec00524bdb34a3157ac4e43ae4d61e26947b817ae70bb85ae00c83da50c31c8"
+   "hash": "f08782c8fa96338439665446977b8ff98c66bb777d985657f66b1d8bd7ef9920"
   },
   "ha.ka.ba/lares/api/vendor/sq-streams.mem": {
-   "bytes": 2159,
-   "hash": "96d076040e1a2e3b5ad49aea731f076b5b3fa35ef46be1e7b80ef4eb0d20b484"
+   "hash": "23c2d94b0a435dfb5927d397a337f2aa8fe570798b54ef0f9a193d8ed1777a9e"
   },
   "ha.ka.ba/lares/cli/bin/lares.mem": {
-   "bytes": 1602,
    "hash": "fa51bcafae633d88a1576544e61b4817a1fb7b6c464d460c0f06218305b8773a"
   },
   "ha.ka.ba/lares/docs/crystal.mem": {
-   "bytes": 1235,
    "hash": "97ccffaa077b39c67baeed8e65744a1eda76bd153903c60f159d93d613910bdc"
   },
   "ha.ka.ba/lares/docs/graph.mem": {
-   "bytes": 11125,
-   "hash": "3b1434f46ca1a059c276bcb95e43108c512032e7a763e7f07402d1055b265c30"
+   "hash": "7df10690b854a4bfe3bbd654f5850dc51c5e7da11385ffa96ee6112e8241ff34"
   },
   "ha.ka.ba/lares/docs/graph/artifacts.mem": {
-   "bytes": 11007,
-   "hash": "bdf1cc249b0bed67aeabcb8a299e53fd9eac85c26044bf19f0f96d1cc4514e42"
+   "hash": "cd088c3f5dcb2e67540f47f4ba2a79579c348b8c9ca4ac9125a95fee2d2c473b"
   },
   "ha.ka.ba/lares/docs/graph/meme.mem": {
-   "bytes": 11700,
-   "hash": "b5ed8caa127fb3a747cd456530b671936a1cf2b15285b604ee9de18434fc13c8"
+   "hash": "dbe5752ba21ff74ddf83061d93a64fe3c9ea6c8ef5d1b85dd01cb0fc03fb7329"
   },
   "ha.ka.ba/lares/docs/graph/pranala-parser.mem": {
-   "bytes": 8804,
-   "hash": "9e3e0ab114a79006a8e2d99f86c4b8374ea65bbeafacbd0f62c9d5d193c8d806"
+   "hash": "588587d1977f9596abc2f1e32aee210624c755e95e0aa65da19bee909ba93f6a"
   },
   "ha.ka.ba/lares/docs/graph/traversal.mem": {
-   "bytes": 9315,
-   "hash": "12345b906d054034ba0439ee9cd8e1307e09cb11c1970ed53832c0b35a2c4933"
+   "hash": "77ae22b7016f4ad3a006631adeb501215d7203086835dd0a8bc8e83e1be08c1c"
   },
   "ha.ka.ba/lares/docs/lararium.mem": {
-   "bytes": 2159,
    "hash": "314b8d32c12dffeb9ee9b4974819a4bb947aad2864aac9c3149f6394d64887f9"
   },
   "ha.ka.ba/lares/docs/lararium_mcp.mem": {
-   "bytes": 13977,
-   "hash": "75ba3c27995e74649ea5f22633029c83c1911157f693db8055fa1a2ea6568885"
+   "hash": "64cffd2dcd0e6c9f84eadbd28144eb151c1e621675c64e50bf58f259a9d21a98"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/adapters.mem": {
-   "bytes": 12718,
-   "hash": "2d397f4640d8e69a087764746af7e0e111e4b32b593cc47003d2bcc38cdd6dda"
+   "hash": "b5c581302a47b27fb4c57c4d55b2f30324d96cd91194efcbac004fcf9c626780"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render.mem": {
-   "bytes": 9844,
-   "hash": "9f0d207c7aa398fdb03b5bae5049c1aae3e5bebd0a6041778b7924654ed4ec53"
+   "hash": "07a791247cf089e7a0e1ecc81aac7ceb13e77d3e1cf8bf3f7d798fa66413c51f"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/carrier-law.mem": {
-   "bytes": 6566,
-   "hash": "60c3c4fb689fd37f871037cadd0fd9c9b036204dbc97c6d501d9ae505e28fc4d"
+   "hash": "082cff709921755ccfcd9fb7db734483b654a76d4736b7b3716223911c645235"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/hydration.mem": {
-   "bytes": 7714,
-   "hash": "2ebf63958356ca306b75c2b2d50dbea4ab9f2d3a989017e6fd90358bb6c196aa"
+   "hash": "f4a0dd36d06d15528b10f780b3277f75245b9208e3e5641b91b5f7c184b64e82"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/local-clients.mem": {
-   "bytes": 5045,
-   "hash": "4f7ceb55bbdca0873d1c0824eadf4a98858a6f9964363e51975cd241244ba1fb"
+   "hash": "7fbd48cc7d58f7ab1e128ec32a89a0c65f87933b557ae462b09e4431d5afb18c"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/spine.mem": {
-   "bytes": 6500,
-   "hash": "00727e2d5919ded4fe6550c1d38c2130d083e87bce93286b3a374b2ed20dffb1"
+   "hash": "121842eb7e944bb07fb5f39e8ce6acaea7cfe648b4bf2a3de53cb9ee6182f842"
   },
   "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger.mem": {
-   "bytes": 4610,
-   "hash": "39a4042b895c477d2c1128dfe8d1e65c45cbee0299eb08675f15518fe6d817b3"
+   "hash": "3cb92a7efb5c610ad297636c2307eb3f7d3be22864bb5b20af267adf958abaf6"
   },
   "ha.ka.ba/lares/docs/lares/alignment-architecture.mem": {
-   "bytes": 16769,
-   "hash": "99b726901a68927943a5dfac5e18b3d51982b8f47cd4e5460a188498f8cef8a7"
+   "hash": "d25cde1c2da68416e74ce3e52a9180e05073a9ac74530cf185688229b2ddf90d"
   },
   "ha.ka.ba/lares/docs/lares/cloud-settings.mem": {
-   "bytes": 8119,
    "hash": "5308a1b4bdab51bf17db1c704d10e34f8b9d9f7896ac07e85e8a5b61af2b5f48"
   },
+  "ha.ka.ba/lares/docs/lares/dreamnet-rhizome.mem": {
+   "hash": "7cebb69f4755280e5a36ce94c86aecc2cc2661780c5d16fd103a42d7215e4bab"
+  },
   "ha.ka.ba/lares/docs/lares/federation.mem": {
-   "bytes": 14261,
-   "hash": "9437eaf7b1465a6124056f8c3c282caf2d99c6f04b64241ede827371d376841e"
+   "hash": "52323032fbc976c494b089af8903ea2c79389db0735e914fdfcf48ea2850be88"
   },
   "ha.ka.ba/lares/docs/lares/handoff.mem": {
-   "bytes": 38882,
-   "hash": "3358d6e3866161abbf50aa8811c6120d92058baaef72ddec3e62ed1c079d7bce"
+   "hash": "03c15d317182f4d14da52c886b15c8fd2321c8dc3145bc96635adcf916e220a9"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger.mem": {
-   "bytes": 6539,
-   "hash": "396bfb5d30eecb17354601212868a5d0c035539806dfda748ca28b09a6c9b79c"
+   "hash": "91bff6eb6fbc6d129f1db4e48adadec21e8a9a5817179802a8c3677788d00ec5"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/daemon-in-the-walls.mem": {
-   "bytes": 7665,
-   "hash": "ed3d097b333c852c3481a571cf92fcffc06ac971d631431ed03adf1a1131e3d1"
+   "hash": "495fb807823fe01ccb426521c036b8bc36e8ffcdbf1be27450c32df5a85da1f5"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture.mem": {
-   "bytes": 13142,
-   "hash": "a180833be27ad673b7ef773f1b9763412be44929405d01a9c33aec6a4ff19679"
+   "hash": "6025789618b8ec4c56eae1f69fc891457ac79116bc0592b6f19f26bb997714b1"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture.mem": {
-   "bytes": 10937,
-   "hash": "27bc1be73dc36319f53a432cd45c7975553a0a30f2bdd17bb8c3d6b682a9264b"
+   "hash": "2b5a7be5942caf8b65a237c8f8ee38fd923407c5d65920f4558988c4aec424c1"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/index.mem": {
-   "bytes": 3282,
-   "hash": "be9201f5ddcd732403914b9a5609692e5b9b3adb82f087874cff5b013ce5a2a7"
+   "hash": "d1946d7b90788ec441f1617d3eb5417b540b4fefe7964b978de5f4ed7aa468c5"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node.mem": {
-   "bytes": 10099,
-   "hash": "d5b0a25433752d8ea1ccf85a88b042ea2b110a6ffd2f585673b7b0375127897f"
+   "hash": "96dc03ba74dcc1b8e3d6fba0c60bb662b3cd1aab9e1e87a9d75b746de7f13ebc"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/self-booting-lararium.mem": {
-   "bytes": 11334,
-   "hash": "3f9765622582edb00ccfeafd8ca652d0af5be5f96416a9fae2fd33273b5c08d9"
+   "hash": "dddfc8ab56500f0aae1d61bb3728d6327ca392bd8a7b47d5aa23dd3711425cb8"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclosed.mem": {
-   "bytes": 11192,
-   "hash": "6b2154c9ee72b9c1c16e60caac05d9476e1294e4646568de1b424e508fb24ebf"
+   "hash": "99e09c8b6c9265ede7e0dca1f7f488ae10827aa6059f4d4d503166becee26bdb"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself.mem": {
-   "bytes": 11347,
-   "hash": "62fd8f95147fdd47c8f79b84bf3c7928832cf5b232fec26d6afb357c6b90d8f4"
+   "hash": "17b44f8925c5c9d1a656540c2bb78e07558e1fdfb35f76613d0a8eb677c9b300"
   },
   "ha.ka.ba/lares/docs/lares/history/lindwyrm/vault-and-repo.mem": {
-   "bytes": 8214,
-   "hash": "9f02ef80109d6e5ba17ac2023d1106b1b4cfa735c5dd0d12053549d806c06a40"
+   "hash": "c06ac757f52e71b862d216579199eb4df797e6f6ea5a2ceeef42fb3292fa7bc9"
   },
   "ha.ka.ba/lares/docs/lares/history/the-bridge-takes-shape.mem": {
-   "bytes": 6105,
-   "hash": "8da821192f1014878cfbdece18f2c5b7642c63e2a238d9c4eb59ea03646b7bc4"
+   "hash": "a8a5c4b94b533c29216b363720c4232a52e39ca35c5ed66b8e9360b70bd6c1b5"
   },
   "ha.ka.ba/lares/docs/lares/history/the-first-breath.mem": {
-   "bytes": 3911,
    "hash": "092881b75618a396d1274fbb1a03cf5ba7710eca1fc189aa8b7438b373702429"
   },
   "ha.ka.ba/lares/docs/lares/history/the-grammar-wakes-prior-art.mem": {
-   "bytes": 9039,
-   "hash": "17efdcbdfdec7e7e8a8a04207ba84bd8d01233f891d7de4e093bb827987720e8"
+   "hash": "f936002dc430f4aae4bed1fa8f213ad0dff1b230f6bb5860c38490d9807986e0"
   },
   "ha.ka.ba/lares/docs/lares/history/the-grammar-wakes.mem": {
-   "bytes": 13687,
-   "hash": "a6a382d1d6adddb3c9521509b1f1280d548e6d9080748c8f4ba1dc090eb88298"
+   "hash": "c36bccbee32fa7c2051aafbd468b54ff5563efe48f62da55a7f87e4f1e8a6f3d"
   },
   "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/index.mem": {
-   "bytes": 5812,
-   "hash": "70a807655c6fa6aa84954f9729697f224b733cdab1cc04df7cee3ada19d2391b"
+   "hash": "d4735bf7bf5dfe141200a246f02a5daa9e7711dfe3c450fb2979b18cc43182b3"
   },
   "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-addresses.mem": {
-   "bytes": 9770,
-   "hash": "750c722add26c2ee911e0129e9c43f88daf3f8a8335de846e6f73ec56227b8d4"
+   "hash": "fd1f322563e0e634c0461fd0e36003226b16c95d7086414540ca91b9b0ef4fbb"
   },
   "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein.mem": {
-   "bytes": 6073,
-   "hash": "59886e6bd3e10a6e41a49f8d98895776f9c6d826c27b57af3e8630741e7d9619"
+   "hash": "aa0b7577be2c38bd72b57749c71379b00cba5c149767cbb373ce26a3e3c24087"
   },
   "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-necroscript.mem": {
-   "bytes": 8363,
-   "hash": "6e8a9a5eca40fc336b59a1fafec35e2ee0990da5dbc5e3bb63fb284c5ea0082c"
+   "hash": "24dd6b0815b6c730adde4f3555b1cdfd6fc63263c371b060a727907b7c1fc68c"
   },
   "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-quine.mem": {
-   "bytes": 9381,
-   "hash": "b733ddf19e1170ac47f292422fe7078ab2127fa21ddae2669dcb9b9ab2090df8"
+   "hash": "61ec88e5375223fb0afc014ed116d7d70430e3a2e77ab6227df9d348e20fe7e3"
   },
   "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-shore.mem": {
-   "bytes": 13511,
-   "hash": "590faa4857af46d41e0b52ced78cfe756cd99293e2a690ebea2945d3126b6128"
+   "hash": "d04a446a9f1d4d7b9c424f8bad2f62af4375cde85eadce5c18386affe4996a9c"
   },
   "ha.ka.ba/lares/docs/lares/hud.mem": {
-   "bytes": 9508,
-   "hash": "1be6ad00523209019df853b58a8b94806ad50084ced3a30869f8b8b1cea51e0f"
+   "hash": "c1348cde28eac83e2cf0aba9d3ef349c0a19f3f2628733d0afe8c817e1f72027"
   },
   "ha.ka.ba/lares/docs/lares/infrastructure-as-myth.mem": {
-   "bytes": 19259,
-   "hash": "c6513c81c8d0567b7118d8e2ec6932c986f35a6882271df6c63967285b08c29f"
+   "hash": "e4539198031ba6030edd13995e187ad1b836262bac7e3585de15f2bcf9ed58f9"
   },
   "ha.ka.ba/lares/docs/lares/pattern-integrities.mem": {
-   "bytes": 18382,
    "hash": "638330f296cce9d16d32d0e3d6c98d15f2d2162019925e6755fc29900b49c2c3"
   },
   "ha.ka.ba/lares/docs/lares/the-lares-protocols.mem": {
-   "bytes": 17251,
-   "hash": "6a38ab6ce74211b49b8d33a1914a7e19aac810b9f4dd4d03011329bbf83af729"
+   "hash": "a73f863e457afb92a4346174537794d817c12d1ba40964b5729311004d768823"
   },
   "ha.ka.ba/lares/docs/lares/voices.mem": {
-   "bytes": 10086,
-   "hash": "b5e5d887f05c3ad70924ef5cf5d237e484e860fe8eb4388bad5096011e416eb6"
+   "hash": "265015fb48f03f087c91416eac6ec72e33f1a78e9794b1c01f8fdec4064d272e"
   },
   "ha.ka.ba/lares/docs/lares/voices/masks-tree-plan.mem": {
-   "bytes": 11979,
-   "hash": "60bd47245c00bf1316e475b2e28a0f2f1fa5eb0316b098da814a80bf297dba2e"
+   "hash": "3f0b74a71f837302ea52ca192a0df05c8a17ab736bece95dcbefda0026dab9ab"
   },
   "ha.ka.ba/lares/docs/lares/voices/masks.mem": {
-   "bytes": 20136,
-   "hash": "5ac54f4c00b98ae18480ddd771cb56e5aaed6bce3d62085d6a7e69ec1e15234f"
+   "hash": "c8368edbe56bdd974c48224386d47387155e56a23a702afec88b55e672104b46"
   },
   "ha.ka.ba/lares/docs/lares/voices/voices-review.mem": {
-   "bytes": 17579,
-   "hash": "89e6c4a6f25406f1879415f333cbf63fc8c4faf3b48f417fabd546e3f70bd971"
+   "hash": "f9190255fcc39842aa106190a138de322c265168c9c3900cd5a34fe6d99650d6"
   },
   "ha.ka.ba/lares/docs/lares/voices/witnesses/mischief-muse-coffee-oracle.mem": {
-   "bytes": 3890,
    "hash": "8f8633b90934ab6de04398c936354bc642ba2c9cf70c1aae6b994ec12a97ec47"
   },
   "ha.ka.ba/lares/docs/lares/voices/workers.mem": {
-   "bytes": 5509,
-   "hash": "3e75fcb369b319fd66c39319a885a76a0c287155216c4f26d8e0c5cb0082b0d8"
+   "hash": "addde5cea8ebb5fc8c501ef67d39e87a9f997b489250c3f422079bd1e2d9fbb6"
   },
   "ha.ka.ba/lares/docs/mu.mem": {
-   "bytes": 2048,
    "hash": "dc33882750b551d44c016d5be559a721f2f48a5c142336660ef6a1126aa3689f"
   },
   "ha.ka.ba/lares/docs/mu/model-agnosticism.mem": {
-   "bytes": 6585,
-   "hash": "5927bf2ed5c4c20cb239a0f16488a360fcd1ebeea987084f47eca1a0b670978e"
+   "hash": "794e8e13e8c6093f46152554dabe56c619c6cbf0e389ad5e41495fe5be0771f6"
   },
   "ha.ka.ba/lares/docs/mu/reality-tunnels.mem": {
-   "bytes": 3771,
    "hash": "a16657e1a3fabe7b7d8dad138f6c3bcac1e1e87e6c1c758f9cc0fcea19c19da6"
   },
   "ha.ka.ba/lares/docs/mu/the-four-tools.mem": {
-   "bytes": 2417,
    "hash": "973a8aba53e7ef6462a66030076605e21fde3951ac86c48330949ef276fd26cd"
   },
   "ha.ka.ba/lares/docs/mu/the-syad-perspectives.mem": {
-   "bytes": 2961,
    "hash": "08fecd2a8e268cba188b655eb0b9b59e04609c0782a5a10b6da871ebb841cd34"
   },
   "ha.ka.ba/lares/docs/mu/the-syad-perspectives/README.mem": {
-   "bytes": 5731,
-   "hash": "07608cd2a84da67e8061e619e957b9cb0723793ca504902116c274935c97dc7e"
+   "hash": "2305a26355b0e1b42f650d88a633550d0ac6239cf21e004eed7ceafe78ee2286"
   },
   "ha.ka.ba/lares/docs/pono.mem": {
-   "bytes": 1291,
    "hash": "abd8c6d01a0218573b800252d749564dc62705dbc47b6a43b4841dad11ab0121"
   },
   "ha.ka.ba/lares/docs/pono/RFC-2119.mem": {
-   "bytes": 3175,
    "hash": "63d6b27b75aebfd5e267de8170940db343d3f7ce911f7fad059f2565e2dab20f"
   },
   "ha.ka.ba/lares/docs/pono/canon-boundary.mem": {
-   "bytes": 3859,
    "hash": "767a280e9430f6bb73564c70e47bb2a5c7a5956a0eae175f3484d376e062a25c"
   },
   "ha.ka.ba/lares/docs/pono/circles-kowloon.mem": {
-   "bytes": 7042,
-   "hash": "a023d914f152660294e4888c7362c3be4e5e66dc2cecec567c830996e91a3c05"
+   "hash": "bfcdd4453321b0e9b94a4b08d17ac2454948ec34aaa93a92f6f16b745e63fff9"
   },
   "ha.ka.ba/lares/docs/pono/exchange-vector.mem": {
-   "bytes": 3316,
    "hash": "2abbab1cddc965a364e0fdd279ce05f48d58987ced92c268673d7b42b8e26a47"
   },
   "ha.ka.ba/lares/docs/pono/glyph-codeset.mem": {
-   "bytes": 10917,
-   "hash": "cdcd6ceeeee7f6b24e04d0d86902ecb9ae5e9761cab8e824de8d33944b9edc37"
+   "hash": "38a10adc8b0fd2b99c1d560b542750d699608df0b8fcfbda160e3b6431e2ae84"
   },
   "ha.ka.ba/lares/docs/pono/guest-grammar.mem": {
-   "bytes": 2935,
-   "hash": "6c03c64f563e3146344c87fbb89eecd7c81f619cd627e3304faa27572726c4d2"
+   "hash": "ce0ac762a0d63a541aedfa7bec0f85d718caaa2c9b842a17a1be68aa81c6d1a5"
   },
   "ha.ka.ba/lares/docs/pono/identity-stack.mem": {
-   "bytes": 5652,
-   "hash": "b600040000af3700468e574024b0592eef3a602bf9f30f4503e6bf0bf79b01cc"
+   "hash": "2b772e79e5c0af9682a1dd4c9f2599aac8e323daf5a4e4293ae4505ee7721e36"
   },
   "ha.ka.ba/lares/docs/pono/l-prime.mem": {
-   "bytes": 4420,
    "hash": "2da0702cf64a9a36cbd393ac4f375cebf2ac2a9566369432381255002ff7dee9"
   },
   "ha.ka.ba/lares/docs/pono/l-space-trust.mem": {
-   "bytes": 4676,
-   "hash": "f5c85246e52e06ef2c56f47691e8367b1a2907442dbabd662f02effd6eb37c26"
+   "hash": "1bd62ca80f7fc33d2a695b19554ef8eceeb7b8b1fc549a04f01d199a06dd36dc"
   },
   "ha.ka.ba/lares/docs/pono/lar-uri-namespace.mem": {
-   "bytes": 4621,
-   "hash": "b9c4fdbca196ced5255606c40e105c286566dbd8de98243fc632ff870adf9c35"
+   "hash": "45a4e73dba21b694c4d39f27d78db417e84f9dfc1abd96bda5135a67bbee9943"
   },
   "ha.ka.ba/lares/docs/pono/lar-uri-roots.mem": {
-   "bytes": 2417,
    "hash": "ea84f74ab14ec049f8886ed89a01356057a3ab2b2537aa158fe62010d373f40e"
   },
   "ha.ka.ba/lares/docs/pono/lar-uri.mem": {
-   "bytes": 25250,
-   "hash": "d0d4f6ff4bf5e2c86ac4e5fed5a16ff5cc319b624b50f8035b3e1dcb11c24ebd"
+   "hash": "3ab3283b75f5feb2ded15c6d4728c849e9063a04250798a5aeb7f2e3bc050cb9"
   },
   "ha.ka.ba/lares/docs/pono/law-of-5s.mem": {
-   "bytes": 7003,
    "hash": "267092756aa0bfad12f8e655b2e622a8ef935d3b2af854ddc11d7305870d8412"
   },
   "ha.ka.ba/lares/docs/pono/live-session-overwrite.mem": {
-   "bytes": 3430,
    "hash": "24ff1e742b82b31ead8aa844503e632c83324bdccaba55c857a0fc2ddd2bc92f"
   },
   "ha.ka.ba/lares/docs/pono/loci.mem": {
-   "bytes": 6430,
-   "hash": "269653b373cfa50dc22b73da4b07447d0ee149a4b4370cdc8063a2b366a0b340"
+   "hash": "eb8f5cdb95b815bae89f58e8da8b7af5c1457a010cade808ef8941f05a348ae3"
   },
   "ha.ka.ba/lares/docs/pono/meme.mem": {
-   "bytes": 3682,
-   "hash": "3bf1bd5521719dfa977427eb4102af9653ea962f832c5a5bc9cc13f431d18ccd"
+   "hash": "0596990e3be26a1779784d2d085f93f23809316f8337f31993fff4ca5c918bee"
   },
   "ha.ka.ba/lares/docs/pono/memetic-wikitext.mem": {
-   "bytes": 10223,
-   "hash": "9e316ced285b7a0a03b46f8583855cfc694782e92e3cb5417b2d677830a7b643"
+   "hash": "0fe5dd3111c939d44f4bda085063d4ae5e6cdd09f1477720e63e4a394532e85c"
   },
   "ha.ka.ba/lares/docs/pono/message-routing.mem": {
-   "bytes": 3628,
    "hash": "5d2e1e48565696e62ae0981d503f1e5c662c55a01cdd22f1cf05393d4e028e1b"
   },
   "ha.ka.ba/lares/docs/pono/pranala.mem": {
-   "bytes": 2354,
    "hash": "ae72a77067f4e35ff1816d240aac030678e153107b1be5e41ca9a802c54902f7"
   },
   "ha.ka.ba/lares/docs/pono/research-streams.mem": {
-   "bytes": 1941,
    "hash": "fcc675edcb40b00f66c02d0fe41fd0079342b39f7424fdb4d3bf37799b25b2ab"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing.mem": {
-   "bytes": 2620,
-   "hash": "58f3c91580424a740179adc5e548ee2707c351b51f94ea345f76e75f06c245cf"
+   "hash": "d87de22dfc94f8b43d52bc52138fef4d273d64e7aef222e5b7dbbf046a758425"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research.mem": {
-   "bytes": 59452,
-   "hash": "19f9fbd465ad9bf3c51a55f5a951ad32636907f536ca854ebdcdccd7047e5575"
+   "hash": "3e32921011f661e1d1b44f761df669f3784052ab17e52780f94612288f8da373"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE.mem": {
-   "bytes": 32723,
-   "hash": "82e0d79451f79b0e397098f1d6ae532f734a3e8db2b2ee4c33ec1bd99c9d0bf9"
+   "hash": "22afdd6ebd4637c73f1155fc5d94c15db1d4f252b39e992959543629e22fc6a9"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/chronometer/Vector_Chronometer_Research_Seed.mem": {
-   "bytes": 15290,
-   "hash": "2c603dc87c646a240acd361f91a6357c365612f2a25c8d602ae98d02a0aadfef"
+   "hash": "9ea91432ab1757053777be0cf7b420ebf45ca1e45c9933466e332792f9b289a8"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions.mem": {
-   "bytes": 8630,
    "hash": "850f6f8073443ba3cb215cf891ae73b0c169f5a26a3901c3055553ebfa21af70"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/prior-art.mem": {
-   "bytes": 2374,
-   "hash": "58292e924dabdfbc91a7483b9c4b8764428d683b1b9f626874a4ac2f60d602b2"
+   "hash": "88bfabbf8cc6b08d74fd8545ad65c25dd5b1b987295ee538f2acffb6405b7dda"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds.mem": {
-   "bytes": 9873,
    "hash": "421d3a360146ccf138efba8acebdb9ab93e70f771f147e17886508e3b9f50bf1"
   },
   "ha.ka.ba/lares/docs/pono/sigil-grammar-research.mem": {
-   "bytes": 17198,
-   "hash": "7e718fd7c6af04772bafa97c1700a12926810825f1b2a3957a3c44a0d174ced8"
+   "hash": "db06906e5347f41eeeaf86ca90a24b1b18993722e9845f210b4133cf039a4f55"
   },
   "ha.ka.ba/lares/docs/pono/sigil-kind.mem": {
-   "bytes": 7697,
    "hash": "caa94aa5e99423bac99e30bfb2999da1f5b058275dbe02f00897924c8f9c26db"
   },
   "ha.ka.ba/lares/docs/pono/sigil-shape-motion.mem": {
-   "bytes": 5276,
-   "hash": "b4199ad201df3c630fd8b77a5643a899003be1eb1e2c8de07843d8f958f1df69"
+   "hash": "f920709a6a3ecd2826a407b36c00565904fe54de8299186b7fd8940dac584e0a"
   },
   "ha.ka.ba/lares/docs/pono/tiddlywiki-filter.mem": {
-   "bytes": 4111,
    "hash": "b54edeec99e7d23a52589c01fb3fa1e7e911bf9769a5faf63035cc2754cfe470"
   },
   "ha.ka.ba/lares/docs/pono/wiki-layer-ontology.mem": {
-   "bytes": 17831,
-   "hash": "1304e7b66a81651591e328458ef3c7f63e35e9085604a828272b7106711ff9ac"
+   "hash": "e2de4a37a7bc12f5e19e01222b0a78781c5c90a2a9b7b3c4fcde97f882a72ec2"
   },
   "ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology.mem": {
-   "bytes": 9744,
-   "hash": "2181b0241a01d650db3e0452b697fabc1a12ee0d592e80b0f3d9c99e4307877f"
+   "hash": "e3dc26e9e2d5b5246dfcfd6f9d4b00f5aa1c37c671f5aeb66134b74b42b4b7e7"
   },
   "ha.ka.ba/lares/docs/story.mem": {
-   "bytes": 1889,
    "hash": "c56e9cab05149761b56a76b8f2a13b512ea3cc97fdf7bc77f6fc2776622a0b0c"
   },
   "ha.ka.ba/lares/library/discordia/malaclypse-the-younger/are-discordians-serious.mem": {
-   "bytes": 4766,
    "hash": "fc3fa71717fda5e1d7f33275ee7aef04c0c733372d71b3dd876f064731409f07"
   },
   "ha.ka.ba/lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.mem": {
-   "bytes": 15866,
-   "hash": "199bf7581b52c7ddc0416db9cd66ca3a34613a562260c23182480d88cb1d11c0"
+   "hash": "848b4de066a644297e991cc12152a09540700627aaf03fbc7e88782846a2e05f"
   },
   "ha.ka.ba/lares/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.mem": {
-   "bytes": 2993,
    "hash": "2c966a60d06349d38f986412b1b183f5f1fab01520aef33342ba4321562e9806"
   },
   "ha.ka.ba/lares/library/discordia/the-count-of-5s/common-sense-tarot.mem": {
-   "bytes": 245361,
-   "hash": "367a08c9709359fb0961bbea922c000367476a88e6ca254e697cdcafaa330385"
+   "hash": "1930450bc3fd697758ae14c22c73fde97594906817c29ed33669a1cd934af5a1"
   },
   "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem": {
-   "bytes": 18457,
-   "hash": "0aea809faf079e0ae68af641552dd75f22b5ef348ed8b9a96c32f4b31b296219"
+   "hash": "20a3cca0f4fc9e53ebb7e771d4460548d48e618df71cb973af12e7e27f6ab318"
   },
   "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI.mem": {
-   "bytes": 5296,
-   "hash": "61e7fd979fe92a44acf7a4b4b7443f0fab29dd0b21d693805d5fb266f5edd5ac"
+   "hash": "90c14ab163369a0fd5079320a4ab20ce1adc09bd4df7a37825d61056d074c6d2"
   },
   "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.mem": {
-   "bytes": 10915,
-   "hash": "cc338a08a7a70a9b8233a9d5ac625833bf90d4d3bf066f27f550723d8b45ac80"
+   "hash": "444905370aefa9a684996fac4d66f28a8607fd30bb0bad1530e6e5f994ea92a9"
   },
   "ha.ka.ba/lares/library/docs/story/dreamdeck/README.mem": {
-   "bytes": 2905,
-   "hash": "f0980523bad20f659389629c5f8af2039123727a175ef268f3fa4e3eaad98d77"
+   "hash": "d51ea6ae15662ba3a38aa74666c7883c069117b7a9c060ba90531ee8dacde9ef"
   },
   "ha.ka.ba/lares/library/hawaii/kumulipo/kumulipo-beckwith.mem": {
-   "bytes": 396553,
-   "hash": "3f6ff7949391db5439b77bdcb423fb35cd7588845a8749dc1162647f3e8d1d6e"
+   "hash": "bfce72f280004cae71543bfe5c5bc6a8dd8a029c9b997efe00aa9236df26311c"
   },
   "ha.ka.ba/lares/library/hawaii/kumulipo/kumulipo-liliuokalani.mem": {
-   "bytes": 108744,
-   "hash": "fd4b47263f6b3d01a5a17e312eb30490ce2004680899dbcc16c96439843d545c"
+   "hash": "7c64222b24d8dabeb682197486a3bcf16f6867f84b375652ff140b2fb22729f1"
   }
  },
- "grammar_version": "0.0.1",
- "manifest_version": "0.0.1",
- "memeast_schema_version": 1,
+ "grammar_version": "0.1.0",
+ "memeastSchema": "1",
  "skip": {}
 }

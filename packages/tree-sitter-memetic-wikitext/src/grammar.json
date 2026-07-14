@@ -3,11 +3,23 @@
   "name": "memetic_wikitext",
   "rules": {
     "document": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_block"
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "field_line"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_block"
+          }
+        }
+      ]
     },
     "_block": {
       "type": "CHOICE",
@@ -26,11 +38,67 @@
         },
         {
           "type": "SYMBOL",
+          "name": "quote_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "style_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typed_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hard_break_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pragma_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pragma_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pragma_end"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pragma_line"
+        },
+        {
+          "type": "SYMBOL",
           "name": "heading"
         },
         {
           "type": "SYMBOL",
           "name": "list_item"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "table"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "transclude_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "filtered_transclude_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "macrocall_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "horizontal_rule"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "html_line"
         },
         {
           "type": "SYMBOL",
@@ -199,6 +267,255 @@
         }
       ]
     },
+    "quote_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "info",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "<<<[^\\n]*\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "quote_open"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "(<{0,2}([^<\\n][^\\n]*)?)?\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "quote_line"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "<<<[^\\n]*\\r?\\n?"
+            }
+          },
+          "named": true,
+          "value": "quote_close"
+        }
+      ]
+    },
+    "style_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "info",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "@@[^@\\n]*\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "style_open"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "(@?[^@\\n][^\\n]*|@)?\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "style_line"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "@@[ \\t]*\\r?\\n?"
+            }
+          },
+          "named": true,
+          "value": "style_close"
+        }
+      ]
+    },
+    "typed_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "info",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\$\\$\\$[^\\n]*\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "typed_open"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "(\\${0,2}([^$\\n][^\\n]*)?)?\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "typed_line"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "\\$\\$\\$[ \\t]*\\r?\\n?"
+            }
+          },
+          "named": true,
+          "value": "typed_close"
+        }
+      ]
+    },
+    "hard_break_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "\"\"\"[ \\t]*\\r?\\n"
+            }
+          },
+          "named": true,
+          "value": "hard_break_open"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "(\"{0,2}([^\"\\n][^\\n]*)?)?\\r?\\n"
+              }
+            },
+            "named": true,
+            "value": "hard_break_line"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "\"\"\"[ \\t]*\\r?\\n?"
+            }
+          },
+          "named": true,
+          "value": "hard_break_close"
+        }
+      ]
+    },
+    "pragma_block": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "open",
+            "content": {
+              "type": "SYMBOL",
+              "name": "pragma_open"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_block"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "close",
+            "content": {
+              "type": "SYMBOL",
+              "name": "pragma_end"
+            }
+          }
+        ]
+      }
+    },
+    "pragma_open": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\\\(define|procedure|function|widget)[ \\t]+[^(\\r\\n]+\\([^)\\r\\n]*\\)[ \\t]*\\r?\\n"
+        }
+      }
+    },
+    "pragma_end": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\\\end[^\\n]*\\r?\\n?"
+        }
+      }
+    },
+    "pragma_line": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\\\[a-zA-Z][^\\n]*\\r?\\n?"
+      }
+    },
     "heading": {
       "type": "TOKEN",
       "content": {
@@ -210,7 +527,71 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[*#]+[ \\t][^\\n]*\\n?"
+        "value": "[*#;:>]+[ \\t][^\\n]*\\n?"
+      }
+    },
+    "table": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "SYMBOL",
+          "name": "table_row"
+        }
+      }
+    },
+    "table_row": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\|[^\\n]*\\|[kfch]?[ \\t]*\\r?\\n?"
+      }
+    },
+    "filtered_transclude_block": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\{\\{\\{[^\\n]*\\}\\}\\}[^\\n]*\\r?\\n?"
+        }
+      }
+    },
+    "transclude_block": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\{\\{[^\\n]*\\}\\}[ \\t]*\\r?\\n?"
+      }
+    },
+    "macrocall_block": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "<<[^<~\\s][^\\n]*>>[ \\t]*\\r?\\n?"
+      }
+    },
+    "horizontal_rule": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "-{3,}[ \\t]*\\r?\\n?"
+      }
+    },
+    "html_line": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "<[a-zA-Z$\\/][^\\n]*\\r?\\n?"
+      }
+    },
+    "field_line": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z][\\w.\\-]*:[^\\n]*\\r?\\n"
       }
     },
     "comment": {
@@ -244,6 +625,10 @@
     [
       "_block",
       "ahu_block"
+    ],
+    [
+      "_block",
+      "pragma_block"
     ]
   ],
   "precedences": [],

@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-memetic-wikitext",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The CARRIER grammar of memetic-wikitext \u2014 sigil forms, fences, headings, TW5 lists \u2014 parsed generically; the sigil VOCABULARY is live wiki data, never grammar",
   "main": "bindings/node",
   "tree-sitter": [
@@ -16,7 +16,7 @@
     "treeSitterCli": "0.26.11",
     "webTreeSitter": "0.26.11",
     "toolchain": "tree-sitter-cli >=0.26.1 builds wasm via auto-downloaded wasi-sdk; no emscripten pin. The CLI that generates and the runtime that loads never drift a minor apart (the pin-pair law).",
-    "corpusManifest": "0.0.1"
+    "corpusManifest": "0.1.0"
   },
   "scripts": {
     "generate": "tree-sitter generate",

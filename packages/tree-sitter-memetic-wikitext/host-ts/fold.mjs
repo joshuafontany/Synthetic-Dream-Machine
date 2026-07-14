@@ -24,11 +24,15 @@ import { createHash } from "node:crypto";
 const LEAF_KINDS = new Set([
   "meme.sigil.body", "meme.sigil.close.body", "meme.fence.info",
   "meme.heading", "meme.list", "meme.comment", "meme.text", "meme.blank",
+  "meme.table.row", "meme.transclude", "meme.transclude.filtered",
+  "meme.macrocall", "meme.hr", "meme.html", "meme.field", "meme.pragma",
 ]);
 /** captures that ride as fields of their parent */
 const FIELD_OF = new Map([
   ["meme.sigil.body", "body"], ["meme.sigil.close.body", "body"],
   ["meme.fence.info", "info"], ["meme.ahu.open", "open"], ["meme.ahu.close", "close"],
+  ["meme.quote.info", "info"], ["meme.style.info", "info"], ["meme.typed.info", "info"],
+  ["meme.pragma.block.open", "open"], ["meme.pragma.block.close", "close"],
 ]);
 
 /**

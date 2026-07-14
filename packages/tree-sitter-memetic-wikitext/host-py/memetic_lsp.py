@@ -41,6 +41,11 @@ _CAPTURE_TO_TYPE = {
     "markup.raw": "string",
     "markup.heading": "keyword",
     "markup.list": "operator",
+    "markup.link": "string",
+    "markup.quote": "string",
+    "keyword": "keyword",
+    "tag": "macro",
+    "property": "keyword",
     "comment": "comment",
 }
 
@@ -162,12 +167,31 @@ def _symbol_name(data: bytes, node: dict) -> str:
         info = node.get("info")
         text = (_slice(data, info) if info else "```").lstrip("`").strip()
         return text or "fence"
+    if kind in ("meme.pragma.block", "meme.pragma"):
+        opener = node.get("open") if kind == "meme.pragma.block" else node
+        # `\define name(params) …` → "define name"
+        words = _slice(data, opener).lstrip("\\").split()
+        return " ".join(words[:2]) if words else "pragma"
     body = node.get("body")
     return _slice(data, body) if body else _slice(data, node)
 
 
 #: MemeAst kind → LSP SymbolKind number (Namespace=3, String=15, Object=19)
-_SYMBOL_KINDS = {"meme.ahu": 3, "meme.heading": 15, "meme.fence": 19}
+#: MemeAst kind → LSP SymbolKind (Namespace=3 · Function=12 · String=15 · Object=19)
+_SYMBOL_KINDS = {"meme.ahu": 3, "meme.heading": 15, "meme.fence": 19,
+                 "meme.pragma.block": 12}
+
+#: one-line definitions outline too — the vocabulary declaring itself
+_DEF_LINE_RE = None  # compiled lazily below
+
+
+def _pragma_defines(data: bytes, node: dict) -> bool:
+    """A pragma leaf outlines iff it opens a definition-family word."""
+    import re
+    global _DEF_LINE_RE
+    if _DEF_LINE_RE is None:
+        _DEF_LINE_RE = re.compile(r"\\(define|procedure|function|widget)\b")
+    return bool(_DEF_LINE_RE.match(_slice(data, node)))
 
 
 def document_symbols(data: bytes) -> list[dict]:
@@ -183,10 +207,11 @@ def document_symbols(data: bytes) -> list[dict]:
     def _walk(node: dict) -> list[dict]:
         out = []
         for child in node.get("children", []):
-            if child["kind"] in _SYMBOL_KINDS:
+            if child["kind"] in _SYMBOL_KINDS or (
+                    child["kind"] == "meme.pragma" and _pragma_defines(data, child)):
                 out.append({
                     "name": _symbol_name(data, child),
-                    "kind": _SYMBOL_KINDS[child["kind"]],
+                    "kind": _SYMBOL_KINDS.get(child["kind"], 12),
                     "range": _range(child),
                     "selectionRange": _range(child.get("open", child)),
                     "children": _walk(child),
