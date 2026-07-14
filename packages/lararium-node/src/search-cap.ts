@@ -40,7 +40,21 @@ export interface SearchResult {
 
 export interface SearchCap {
   /** Hybrid search over the owned content palace: query text → BM25+vector re-ranked hits. */
-  search(query: string, opts?: { k?: number; wing?: string; room?: string; sourceFile?: string; maxDistance?: number }): Promise<SearchResult>;
+  /**
+   * Recall over this palace.
+   *
+   * `notRoot` names the caller's OWN worldline root; `selfWeight` ∈ [0,1] scales what its drawers are worth
+   * — 1 restores them whole, 0 cuts them out, and between the two they are DISCOUNTED so an older
+   * same-session memory can still outrank a weak foreign one.
+   *
+   * A live session's recent turns are already the caller's context, and the capture engine files them as
+   * they happen — so on any question about what was just discussed they outrank every older memory and crowd
+   * out the thing actually reached for. But a long session COMPACTS: its early turns leave the window and
+   * become genuinely absent, which is exactly what recall exists to fetch. So this DISCOUNTS rather than
+   * cuts. The honest axis is distance in the worldline, not session identity — see the sidecar, which names
+   * the missing turn-ordinal that blocks it.
+   */
+  search(query: string, opts?: { k?: number; wing?: string; room?: string; sourceFile?: string; maxDistance?: number; notRoot?: string; selfWeight?: number }): Promise<SearchResult>;
   /** Release this reference; the holder process dies when the last reference closes. */
   close(): Promise<void>;
 }
@@ -68,6 +82,8 @@ export function makeSearchCap(dir: string, opts: SearchCapOptions = {}): SearchC
         ...(opts2.wing !== undefined ? { wing: opts2.wing } : {}),
         ...(opts2.room !== undefined ? { room: opts2.room } : {}),
         ...(opts2.sourceFile !== undefined ? { source_file: opts2.sourceFile } : {}),
+        ...(opts2.notRoot !== undefined ? { not_root: opts2.notRoot } : {}),
+        ...(opts2.selfWeight !== undefined ? { self_weight: opts2.selfWeight } : {}),
         ...(opts2.maxDistance !== undefined ? { max_distance: opts2.maxDistance } : {}),
       })) as Partial<SearchResult> | null;
       return { query: r?.query ?? query, results: r?.results ?? [], ...(r?.total_before_filter !== undefined ? { total_before_filter: r.total_before_filter } : {}), ...(r?.filters !== undefined ? { filters: r.filters } : {}) };

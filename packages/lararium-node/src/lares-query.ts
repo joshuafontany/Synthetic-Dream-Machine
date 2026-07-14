@@ -22,7 +22,7 @@ export type Lens = string;
 
 export interface LaresQuery {
   /** Recall over a lens (hybrid search): the verb, the palace as a parameter. */
-  search(lens: Lens, query: string, opts?: { k?: number; wing?: string; room?: string }): Promise<SearchResult>;
+  search(lens: Lens, query: string, opts?: { k?: number; wing?: string; room?: string; notRoot?: string; selfWeight?: number }): Promise<SearchResult>;
   /** Relate an entity over a lens (the bitemporal KG for that palace). */
   relate(lens: Lens, entity: string, opts?: { asOf?: string; direction?: "incoming" | "outgoing" }): Promise<unknown>;
   /** The structure/graph of a lens (entity-pair hallways for a wing). */

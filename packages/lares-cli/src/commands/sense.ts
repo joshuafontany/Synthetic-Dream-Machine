@@ -59,14 +59,30 @@ export async function cmdSense(args: ParsedArgs): Promise<number> {
     const k = Number(args.options["k"] ?? 5);
     let data: unknown;
     switch (verb as Verb) {
-      case "search":
+      case "search": {
         if (!arg) throw new Error("search wants a query");
+        // --not-root <handle> DROPS the caller's OWN session from recall (env LARES_SESSION_ROOT sets it
+        // once, for a hook). Recall exists to fetch what the caller does NOT already hold, and a live
+        // session's turns ARE its context: the capture engine files them as they happen, so on any question
+        // about what was just discussed they outrank every older memory and crowd out the thing actually
+        // reached for. Measured on this store, one session held 34% of the corpus and answered every query
+        // in its own voice — which comes back FAST and CONFIDENT, and reads as health.
+        const notRoot = args.options["not-root"] ?? process.env["LARES_SESSION_ROOT"];
+        // --self-weight <0..1> DISCOUNTS the caller's own stream rather than cutting it. Default 0.25: a
+        // same-session memory must be four times as relevant as a foreign one to outrank it — enough to
+        // stop the live stream crowding recall out, and not so much that a COMPACTED early turn, which has
+        // genuinely left the caller's window, gets thrown away with it.
+        const selfWeight = args.options["self-weight"] !== undefined
+          ? Number(args.options["self-weight"])
+          : 0.25;
         data = await q.search(lens, arg, {
           k,
           ...(args.options["wing"] ? { wing: args.options["wing"] } : {}),
           ...(args.options["room"] ? { room: args.options["room"] } : {}),
+          ...(notRoot ? { notRoot, selfWeight } : {}),
         });
         break;
+      }
       case "relate":
         if (!arg) throw new Error("relate wants an entity");
         data = await q.relate(lens, arg, {

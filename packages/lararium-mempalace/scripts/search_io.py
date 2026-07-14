@@ -39,16 +39,67 @@ class Searcher:
     def __init__(self, palace_path: str) -> None:
         self._palace = palace_path
 
-    def search(self, query: str, k: int = 8, wing=None, room=None, source_file=None, max_distance: float = 0.0) -> dict:
-        return search_memories(
+    def search(self, query: str, k: int = 8, wing=None, room=None, source_file=None,
+               max_distance: float = 0.0, not_root: "str | None" = None,
+               self_weight: float = 0.0) -> dict:
+        """Recall, with the caller's OWN stream discounted rather than cut.
+
+        WHY THE LIVE STREAM CROWDS RECALL OUT. The capture engine files a session's turns as they happen, so
+        the most semantically similar thing to a question about what was just discussed IS what was just
+        discussed. Measured on this store: one session held 1024 of 3000 sampled drawers — 34% of the corpus,
+        answering every query in its own voice. That is ORIGINAL ANTIGENIC SIN, and its symptom is a recall
+        that comes back FAST and CONFIDENT, which reads as health. The incumbent eats the evidence.
+
+        WHY A GRADIENT AND NOT A CUT. A long session COMPACTS: its early turns leave the caller's window and
+        become genuinely absent — exactly the memory recall exists to fetch. Excluding a whole session throws
+        those away with the recent ones. What is worthless is only the stream STILL IN THE WINDOW.
+
+        `self_weight` ∈ [0,1] scales the similarity of same-root drawers: 1.0 restores them whole, 0.0 drops
+        them entirely (the blunt cut), and anything between DISCOUNTS them so that an older same-session
+        memory can still outrank a weak foreign one. The operator turns it; nothing here picks it.
+
+        THE GRADIENT IS NOT YET THE RIGHT ONE, and this says so rather than pretending. The honest axis is
+        DISTANCE IN THE WORLDLINE — how far back a turn sits from now — because that, not session identity,
+        is what decides whether the caller already holds it. The drawers carry `lar_root_handle` (WHICH
+        session) and NO monotone position WITHIN it: no turn ordinal, no tick, no index. So this discounts by
+        SESSION where it should discount by DISTANCE, and it will keep doing so until capture writes an
+        ordinal. That gap is named here so nobody mistakes this for the finished instrument.
+        """
+        over = k * 4 if (not_root and self_weight < 1.0) else k
+        res = search_memories(
             query,
             self._palace,
             wing=wing,
             room=room,
             source_file=source_file,
-            n_results=k,
+            n_results=over,
             max_distance=max_distance,
         )
+        if not not_root or self_weight >= 1.0:
+            return res
+
+        hits = res.get("results") or []
+        discounted, dropped = [], 0
+        for h in hits:
+            root = str((h.get("metadata") or {}).get("lar_root_handle") or h.get("lar_root_handle") or "")
+            if root and root.startswith(not_root):
+                if self_weight <= 0.0:
+                    dropped += 1
+                    continue
+                h = dict(h)
+                h["similarity"] = float(h.get("similarity") or 0.0) * self_weight
+                h["self_discounted"] = True      # a discounted hit says so; a silent thumb on the scale lies
+                discounted.append(h)
+            else:
+                discounted.append(h)
+
+        # Re-rank AFTER the discount — a penalty applied without re-sorting changes a number and not an order,
+        # which is the shape of an instrument that reports a fix it did not perform.
+        discounted.sort(key=lambda x: float(x.get("similarity") or 0.0), reverse=True)
+        res["results"] = discounted[:k]
+        res["dropped_self"] = dropped
+        res["self_weight"] = self_weight
+        return res
 
 
 def _build_ops(s: Searcher) -> dict:
@@ -58,6 +109,8 @@ def _build_ops(s: Searcher) -> dict:
             req["query"], int(req.get("k", 8)),
             req.get("wing"), req.get("room"), req.get("source_file"),
             float(req.get("max_distance", 0.0)),
+            req.get("not_root"),
+            float(req.get("self_weight", 0.0)),
         ),
     }
 
