@@ -159,3 +159,8 @@ the vendored TiddlyWiki5 core tiddlers.
   sentence italics are real, cap raised to 200); 8 guarded-span defers +
   100 dangling-* lines held loud (multi-line italics, CSS comment marks,
   strays). Canon 524/524 clean; golden 151 movers; suites green.
+- 2026-07-14 — THE STRANGLE: the migration tool retires (build-new-then-
+  retire; its last living version rides git history at a18d3a34). The
+  corpus now speaks TW5 whole — every mechanical class crossed; the
+  hand-review tail (180 lines, four classes) lives in REVIEW-RESIDUE.md
+  beside this ledger. This document stands as the arc record.
