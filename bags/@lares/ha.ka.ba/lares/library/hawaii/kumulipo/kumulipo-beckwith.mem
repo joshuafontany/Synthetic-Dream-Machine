@@ -41,6 +41,10 @@ Retrieved 2026-06-21 via the Internet Archive Wayback Machine (snapshot `web.arc
 <<~/ahu >>
 
 <<~ ahu #source-text >>
+```toml iam
+role = "source-text interior — transcribed as received, md-era rendering"
+type = "text/markdown"
+```
 
 ## Title Page
 

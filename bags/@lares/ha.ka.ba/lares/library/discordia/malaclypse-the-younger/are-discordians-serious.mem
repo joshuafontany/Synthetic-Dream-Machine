@@ -37,6 +37,10 @@ Dated in the witness text: September 24, 1964 / Bureaucracy 48, YOLD 3130 / Full
 <<~/ahu >>
 
 <<~ ahu #source-text >>
+```toml iam
+role = "source-text interior — transcribed as received, md-era rendering"
+type = "text/markdown"
+```
 
 Via Pope Tree (listen to the Trees):
 

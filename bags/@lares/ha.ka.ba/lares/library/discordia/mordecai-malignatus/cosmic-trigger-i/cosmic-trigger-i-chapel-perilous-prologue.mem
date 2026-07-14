@@ -28,6 +28,10 @@ Current lar address follows the file path now on disk.
 <<~/ahu >>
 
 <<~ ahu #source-text >>
+```toml iam
+role = "source-text interior — transcribed as received, md-era rendering"
+type = "text/markdown"
+```
 
 # Robert Anton Wilson — Chapel Perilous (Primary Source)
 

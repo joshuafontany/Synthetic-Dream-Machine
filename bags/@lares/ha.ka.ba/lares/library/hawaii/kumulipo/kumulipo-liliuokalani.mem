@@ -43,6 +43,10 @@ The attribution notice from the original scan is retained inline in the Title Pa
 <<~/ahu >>
 
 <<~ ahu #source-text >>
+```toml iam
+role = "source-text interior — transcribed as received, md-era rendering"
+type = "text/markdown"
+```
 
 ## Title Page
 

@@ -107,3 +107,12 @@ the vendored TiddlyWiki5 core tiddlers.
   never moved — kumulipo_sections stays untouched, its 11 tests green; fold
   10/10 clean; golden re-baked (5 movers ≤ 10 walked); script gains
   --walk-library (explicit, loud; source-text exemption holds regardless).
+- 2026-07-14 — the source-text dialect DECLARES ITSELF IN-BAND (operator
+  ruling): all six source-text ahus gain a slot-level `toml iam` fence
+  (`type = "text/markdown"`) — TW5's deserializer already reads slot iam, so
+  every reader parses the interior under its true dialect regardless of the
+  carrier's line grammar; extract_source_text SHEDS the leading iam fence
+  (metadata never pollutes the beds; test added, sectioner 12 green);
+  roundtrip lens-law suite 2/2 green; golden re-baked (6 movers = 6 declared).
+  THE v0.1 BREATH UNBLOCKS: #-heading may now drop without a quoted-ground
+  misread — the interiors carry their own dialect.

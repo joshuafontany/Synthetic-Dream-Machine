@@ -961,20 +961,20 @@
    "hash": "c56e9cab05149761b56a76b8f2a13b512ea3cc97fdf7bc77f6fc2776622a0b0c"
   },
   "ha.ka.ba/lares/library/discordia/malaclypse-the-younger/are-discordians-serious.mem": {
-   "bytes": 4651,
-   "hash": "a41555769d5209304a0e87eaecf5c79306a0b1715f7d356521bf4b11b81e4580"
+   "bytes": 4766,
+   "hash": "f0301f985e0ab17be443bc0b829d51a37092db96ecddf3ae18837309c04dfb91"
   },
   "ha.ka.ba/lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.mem": {
-   "bytes": 15751,
-   "hash": "cbf19c6f6887ade9b4ae14c9b5247462e98aa2082e21a9eaa10d727181e3b914"
+   "bytes": 15866,
+   "hash": "b084200c9905c93a949cd02690bc06e560a86348a9dfd270a7592aefab5f56f3"
   },
   "ha.ka.ba/lares/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.mem": {
-   "bytes": 2878,
-   "hash": "7f1b0dd6076d13f69ab7293a05d86264277a4821849520d326518cce0085afcb"
+   "bytes": 2993,
+   "hash": "1fa411a2a856c939a4967e252bfb4e9e838802be6b692ad5a3dcf840671ac65d"
   },
   "ha.ka.ba/lares/library/discordia/the-count-of-5s/common-sense-tarot.mem": {
-   "bytes": 245283,
-   "hash": "4d6c2cb33ce612f24b5e07e9ca06e39cba9e00ca855a9492ae66221fa6b05301"
+   "bytes": 245398,
+   "hash": "be06d982a072141886759a737fab0af088cd04cbe2bdcc708d67f273d7555e13"
   },
   "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem": {
    "bytes": 18415,
@@ -993,12 +993,12 @@
    "hash": "33c56600688f377f5cb66423235abb20087b6129716ed9ce5651ef6b26894144"
   },
   "ha.ka.ba/lares/library/hawaii/kumulipo/kumulipo-beckwith.mem": {
-   "bytes": 396434,
-   "hash": "cf447402d037f2496589b2ac41534c4785055971fe6f735d20bc2fd8326eaa54"
+   "bytes": 396549,
+   "hash": "b6176618db02162579daab01b95d645799a16bbb1c4d7ce43ea1a8a016565509"
   },
   "ha.ka.ba/lares/library/hawaii/kumulipo/kumulipo-liliuokalani.mem": {
-   "bytes": 108627,
-   "hash": "f5db488d841dbe0cee21e0ea1f3328711af6a360eeea5a0cf90a3b36fd78c429"
+   "bytes": 108742,
+   "hash": "03607de9116dfdb441827aaac07ef69cf6ede1fc207b96f12249984332d34052"
   }
  },
  "grammar_version": "0.0.1",

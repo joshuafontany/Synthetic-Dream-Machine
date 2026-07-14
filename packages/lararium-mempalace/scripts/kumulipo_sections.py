@@ -65,12 +65,23 @@ def source_text_span(lines: list) -> "tuple | None":
 def extract_source_text(text: str) -> str:
     """Pull the bare source text out of a wrapped meme: the `#source-text` ahu interior
     when one stands, else the whole text unchanged (a bare file carries no wrapping to
-    shed). The general extraction rule the sectioned corpus cap falls back on."""
+    shed). A leading slot-level `toml iam` fence inside the block (the interior's
+    dialect declaration — e.g. `type = "text/markdown"`) reads as envelope and sheds;
+    the extraction hands back SOURCE alone. The general extraction rule the sectioned
+    corpus cap falls back on."""
     lines = text.split("\n")
     span = source_text_span(lines)
     if span is None:
         return text
-    return "\n".join(lines[span[0]:span[1]])
+    start, stop = span
+    while start < stop and not lines[start].strip():
+        start += 1
+    if start < stop and lines[start].startswith("```toml iam"):
+        for j in range(start + 1, stop):
+            if lines[j].startswith("```"):
+                start = j + 1
+                break
+    return "\n".join(lines[start:stop])
 
 
 # ── the native wa markers, one grammar per rendering ────────────────────────────────────
