@@ -192,3 +192,27 @@ Provisional-Synthesis until one of those speaks. Noted in passing: the
 placebo-extracted bed COARSENS (H 5.59 < 5.75) where real text stays
 injective — collision rate itself may serve as a texture aperture (held
 as a maybe, undesigned).
+
+## Bed predictions — liturgical-canon (vowed before first pour, 2026-07-15)
+
+<a id="bed-liturgical-canon"></a>
+**bed-liturgical-canon** — the WHOLE bags canon (~525 .mem memes, every bag),
+native format (the sigil layer IS the liturgy — no wrapping question), one
+file one record, poured from a declared manifest with its in-file-token
+twin SIZE-MATCHED BY CONSTRUCTION (the first clean real-vs-null comparison
+at matched size in the harness's history).
+
+- C1 vs the matched twin: the real canon strictly out-saves its twin, and
+  because the twin matches size and vocabulary exactly, the margin now
+  reads as arrangement alone. Vowed at Synthesis 12/20.
+- Template character: the kept templates skew LITURGICAL — sigil anatomy
+  (sharktooth open/close, ahu pairing, iam fence scaffolds, ranks/loulou
+  rows) and TW5 heading/list forms; vow: at least half the kept templates
+  carry sigil tokens. Vowed at Provisional-Synthesis 8/20.
+- Injectivity: the shape plane stays near-injective at 525 records
+  (collision rate ≈ 0; tiny api stubs MAY collide — reported either way).
+  Vowed at Synthesis 10/20.
+- Chain: holds non-vacuously; H(structure) ≈ H(content) per the injectivity
+  finding; the real coarsening rides shape ↠ idiom.
+- Register stake: this bed stands as the FORMAL-register baseline for the
+  register-separation trial (design below, when filed).
