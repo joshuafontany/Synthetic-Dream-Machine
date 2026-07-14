@@ -529,8 +529,8 @@
    "hash": "cb230173167bb8ccae3aa9c44344ec2b234962240be5b06715e76719fad76996"
   },
   "ha.ka.ba/lares/api/pono/the-veil-ladder.mem": {
-   "bytes": 8733,
-   "hash": "3dfb477299f045ce065932d84f9e25084eb8d358ca1476cdcf6d287e79ef460f"
+   "bytes": 9673,
+   "hash": "3201820d320bc6ffe3cfa715154329f66ffac8ea8aafa26c4c82dcf279f7649e"
   },
   "ha.ka.ba/lares/api/pono/tick.mem": {
    "bytes": 1328,
@@ -1002,5 +1002,7 @@
   }
  },
  "grammar_version": "0.0.1",
- "memeast_schema_version": 1
+ "manifest_version": "0.0.1",
+ "memeast_schema_version": 1,
+ "skip": {}
 }

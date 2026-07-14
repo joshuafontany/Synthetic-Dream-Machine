@@ -67,12 +67,52 @@ def _shared_object() -> str:
     return so
 
 
+def artifact_quad() -> dict:
+    """The artifact's declared version quad (grammar-ABI · CLI · runtime ·
+    toolchain), read from the bundle's own manifest — the sole sovereign
+    every host subscribes to."""
+    with open(os.path.join(_GRAMMAR_DIR, "package.json"), encoding="utf-8") as fh:
+        pkg = json.load(fh)
+    quad = pkg.get("artifact")
+    if not isinstance(quad, dict) or "grammarAbi" not in quad:
+        raise SystemExit(
+            "memeast_fold: the artifact declares no version quad "
+            "(package.json 'artifact') — a quad-less bundle cannot be honored."
+        )
+    return quad
+
+
+def _refuse_loud_on_mismatch(lang) -> None:
+    """The subscriber law: a host that cannot honor the artifact's quad
+    refuses LOUD, naming both sides — never a silent half-broken load."""
+    import tree_sitter as ts
+
+    declared = artifact_quad()["grammarAbi"]
+    compiled = lang.abi_version
+    if compiled != declared:
+        raise SystemExit(
+            f"memeast_fold: grammar-ABI mismatch — the compiled grammar speaks "
+            f"ABI {compiled} but the artifact declares {declared}; regenerate "
+            f"with the pinned tree-sitter-cli or re-declare the quad."
+        )
+    low, high = ts.MIN_COMPATIBLE_LANGUAGE_VERSION, ts.LANGUAGE_VERSION
+    if not (low <= compiled <= high):
+        raise SystemExit(
+            f"memeast_fold: runtime cannot honor the artifact — grammar ABI "
+            f"{compiled} sits outside this tree_sitter runtime's window "
+            f"[{low}, {high}] (py tree_sitter {ts.__version__}); align the "
+            f"pin-pair before loading."
+        )
+
+
 def _language():
     from tree_sitter import Language
 
     lib = ctypes.CDLL(_shared_object())
     lib.tree_sitter_memetic_wikitext.restype = ctypes.c_void_p
-    return Language(lib.tree_sitter_memetic_wikitext())
+    lang = Language(lib.tree_sitter_memetic_wikitext())
+    _refuse_loud_on_mismatch(lang)
+    return lang
 
 
 def _query_source() -> str:
