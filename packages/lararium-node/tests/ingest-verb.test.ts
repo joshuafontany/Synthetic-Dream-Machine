@@ -42,7 +42,7 @@ const canonical = renderOf(source, URI);
 // The entry H1 heading, read FROM the live meme — so a heading rename (Boot→Hearth→…)
 // never re-stales this fixture. The edit tests below mutate THIS heading to prove INGEST
 // lands a changed heading; hardcoding the literal is what drifted them red.
-const ENTRY_H1 = source.match(/^# Entry\b.*$/m)?.[0];
+const ENTRY_H1 = source.match(/^! Entry\b.*$/m)?.[0];
 if (!ENTRY_H1) throw new Error("ingest-verb test: entry H1 heading not found in boot meme");
 
 function makeComposite(): CompositeStore {

@@ -44,11 +44,13 @@ export type Variance = "sheaf" | "cosheaf";
 export const SHEAF_PLANES = ["content", "structure", "form"] as const;
 
 /**
- * The canonical KI (cosheaf) planes — bands/coupling EXTEND (covariant, local→global). They ride the
- * manifest's own `bands`/`coupling` BASE-cap fields, never `has.*` (they store no leaf-dir bytes), so
- * their cosheaf posture stays structural.
+ * The canonical KI (cosheaf) planes — coupling EXTENDS (covariant, local→global: no coarsening of one
+ * stream reaches a fact about two). It rides the manifest's own `coupling` BASE-cap field, never
+ * `has.*` (no leaf-dir bytes), so its cosheaf posture stays structural. The `bands` base-cap carries
+ * the FFZ membership-address grain — li-side stamp metadata, never a gluing plane — so it sits in
+ * NEITHER list and `planeVariance` reads it null (not a consistency plane at all).
  */
-export const COSHEAF_PLANES = ["bands", "coupling"] as const;
+export const COSHEAF_PLANES = ["coupling"] as const;
 
 // ── per-plane NATIVE pseudometrics (the stalk metrics) ─────────────────────────────────────────────
 //

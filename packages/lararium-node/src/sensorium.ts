@@ -110,7 +110,7 @@ export interface SensoriumManifest {
   readonly lar: string;
   /** FIBER caps — open record, THIN `{dir, engine, variance}` edges (clause 4 + 7); li-sheaves by default. */
   readonly has: Readonly<Record<string, CapDecl>>;
-  /** BASE cap — interval-grain for the on-read wavelet bands. No bytes. KI cosheaf (see {@link planeVariance}). */
+  /** BASE cap — the FFZ membership-address grain (li-side stamp metadata; not a consistency plane). No bytes. */
   readonly bands: SensoriumBands;
   /** BASE cap — the dumb child-edges gluing sub-sensoriums. No bytes. KI cosheaf (see {@link planeVariance}). */
   readonly coupling: SensoriumCoupling;
