@@ -135,3 +135,32 @@ jobs:
               process.exit(1);
             }
           '
+
+  # ─── grammar artifact (ship step 0: the quad-pinned carrier stays truth) ───
+  grammar-artifact:
+    name: Grammar artifact gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pnpm install --frozen-lockfile
+      - name: Install py host deps
+        run: pip install tree-sitter pytest pygls
+      - name: generate-parity — the committed parser.c stays the truth
+        working-directory: packages/tree-sitter-memetic-wikitext
+        run: pnpm run gate:generate-parity
+      - name: fold + golden manifest gates (py host)
+        working-directory: packages/tree-sitter-memetic-wikitext
+        run: pnpm run gate:fold
+      - name: wasm builds under the pinned CLI
+        working-directory: packages/tree-sitter-memetic-wikitext
+        run: pnpm run build:wasm
