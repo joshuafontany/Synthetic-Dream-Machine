@@ -82,6 +82,8 @@ LAR_SCHEMA = AdapterSchema(
                                        description="projected attribution edge: the appointed-by parent handle (immediate parent; flat subagents = the run)"),
         "lar_root_handle": FieldSpec(type="string", required=False, indexed=True,
                                      description="projected attribution edge: the root-principal handle (paramount; flat subagents = the run)"),
+        "lar_turn_ordinal": FieldSpec(type="int", required=False, indexed=True,
+                                      description="the turn's POSITION in its source stream (producer-given index; the hash-derived dedup pseudo-chunk never stamps) — recall's self-discount grades same-root hits by this distance against the caller's horizon"),
         "lar_ffz": FieldSpec(type="string", required=False, indexed=True,
                              description="rhythmic ADDRESS — the worldline clock's phase frozen at this turn's grounding boundary: Theme.Arc.Measure.Beat.Segment[.block], prefix-truncatable (segment ticks, block offsets; ffz-clock#rhythmic-address)"),
         # ── kapae down-weight (strand C) — the rewind salience the FFZ Measure servo reads ──────────

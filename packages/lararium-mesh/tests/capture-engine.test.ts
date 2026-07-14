@@ -230,3 +230,25 @@ describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
     expect(lands).toEqual(["uuid-1"]);
   });
 });
+
+test("a producer-given index stamps lar_turn_ordinal; the hash pseudo-chunk never does", async () => {
+  // The drawer learns WHERE in its worldline it sits — recall's self-discount grades
+  // same-root hits by this distance. A hash worn as an ordinal would poison that axis,
+  // so only a real chunkIndex stamps; absence stays honestly porous.
+  const flushed: CaptureRecord[][] = [];
+  const engine = makeCaptureEngine({
+    reserve: stubReserve().reserve,
+    flush: async (batch) => { flushed.push([...batch]); return batch.length; },
+    annotate: () => ({}),
+    gate: { depth: 1, intervalMs: 60_000, ceiling: 8, backoffMs: 1 },
+  });
+  await engine.enqueue("turn with a position", "wing_t/s.jsonl", undefined, undefined, 7);
+  await engine.enqueue("turn without a position", "wing_t/s.jsonl");
+  await engine.tick(0);
+  engine.dispose();
+  const all = flushed.flat();
+  const withPos = all.find((r) => r.content.includes("with a position"));
+  const withoutPos = all.find((r) => r.content.includes("without a position"));
+  expect(withPos?.metadata?.["lar_turn_ordinal"]).toBe(7);
+  expect(withoutPos?.metadata?.["lar_turn_ordinal"]).toBeUndefined();
+});

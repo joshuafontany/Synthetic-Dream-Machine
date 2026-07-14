@@ -326,6 +326,13 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
         // is the producer's identity for this turn). The node AST split lifts it into the .structurepalace
         // and strips it from the drawer; absent ⇒ byte-identical to before.
         if (turnKey) metadata["lar_turn_key"] = turnKey;
+        // The turn's POSITION in its stream rides too — the drawer learns WHERE in the
+        // worldline it sits, never just which session holds it. Recall's self-discount
+        // grades by this distance (a hit behind the caller's horizon reads genuinely
+        // absent and keeps full weight). ONLY a producer-given index stamps: the hash
+        // fallback above manufactures a pseudo-chunk for dedup, and a hash worn as an
+        // ordinal would poison the distance axis — absence stays honestly porous.
+        if (chunkIndex != null) metadata["lar_turn_ordinal"] = chunkIndex;
         const record: CaptureRecord = {
           content: turnText,
           source_file: sourceFile,

@@ -41,7 +41,7 @@ class Searcher:
 
     def search(self, query: str, k: int = 8, wing=None, room=None, source_file=None,
                max_distance: float = 0.0, not_root: "str | None" = None,
-               self_weight: float = 0.0) -> dict:
+               self_weight: float = 0.0, self_horizon: "int | None" = None) -> dict:
         """Recall, with the caller's OWN stream discounted rather than cut.
 
         WHY THE LIVE STREAM CROWDS RECALL OUT. The capture engine files a session's turns as they happen, so
@@ -58,12 +58,15 @@ class Searcher:
         them entirely (the blunt cut), and anything between DISCOUNTS them so that an older same-session
         memory can still outrank a weak foreign one. The operator turns it; nothing here picks it.
 
-        THE GRADIENT IS NOT YET THE RIGHT ONE, and this says so rather than pretending. The honest axis is
-        DISTANCE IN THE WORLDLINE — how far back a turn sits from now — because that, not session identity,
-        is what decides whether the caller already holds it. The drawers carry `lar_root_handle` (WHICH
-        session) and NO monotone position WITHIN it: no turn ordinal, no tick, no index. So this discounts by
-        SESSION where it should discount by DISTANCE, and it will keep doing so until capture writes an
-        ordinal. That gap is named here so nobody mistakes this for the finished instrument.
+        THE HORIZON — distance, spoken as a fact the caller holds. The honest axis is DISTANCE IN THE
+        WORLDLINE: what decides whether the caller already holds a turn is how far back it sits, never mere
+        session identity. Capture now stamps `lar_turn_ordinal` (the producer-given position; the dedup
+        pseudo-chunk never stamps), and the CALLER names its own window edge: `self_horizon` = "I still hold
+        everything at or after this ordinal." A same-root hit AT/AFTER the horizon rides the discount (in-
+        window waste); a same-root hit BEFORE it reads GENUINELY ABSENT and keeps FULL weight — those turns
+        are exactly what recall exists to fetch. No decay curve, no tuned window: the horizon is a fact, not
+        a knob. A same-root hit carrying no ordinal (pre-stamp drawers, forked pseudo-chunks) degrades
+        honestly to the blanket discount rather than guessing a distance.
         """
         over = k * 4 if (not_root and self_weight < 1.0) else k
         res = search_memories(
@@ -81,8 +84,15 @@ class Searcher:
         hits = res.get("results") or []
         discounted, dropped = [], 0
         for h in hits:
-            root = str((h.get("metadata") or {}).get("lar_root_handle") or h.get("lar_root_handle") or "")
+            meta = h.get("metadata") or {}
+            root = str(meta.get("lar_root_handle") or h.get("lar_root_handle") or "")
             if root and root.startswith(not_root):
+                ordinal = meta.get("lar_turn_ordinal")
+                if self_horizon is not None and isinstance(ordinal, (int, float)) and ordinal < self_horizon:
+                    # behind the caller's horizon: compacted out of the window, genuinely
+                    # absent — full weight; this is the memory recall exists to fetch.
+                    discounted.append(h)
+                    continue
                 if self_weight <= 0.0:
                     dropped += 1
                     continue
@@ -111,6 +121,7 @@ def _build_ops(s: Searcher) -> dict:
             float(req.get("max_distance", 0.0)),
             req.get("not_root"),
             float(req.get("self_weight", 0.0)),
+            int(req["self_horizon"]) if req.get("self_horizon") is not None else None,
         ),
     }
 

@@ -52,3 +52,35 @@ def test_search_empty_palace_is_empty(tmp_path):
     content_io.ContentStore(palace)   # create the (empty) collection
     res = search_io.Searcher(palace).search("anything", k=3)
     assert res.get("results", []) == []
+
+
+def test_self_discount_and_horizon_grade_by_distance(tmp_path):
+    """The gradient's two axes together: a same-root hit in the caller's window rides
+    the discount; a same-root hit BEHIND the horizon reads genuinely absent and keeps
+    full weight; an ordinal-less same-root hit degrades honestly to the discount."""
+    palace = str(tmp_path / "palace")
+    store = content_io.ContentStore(palace)
+    e = embed_io.Embedder()
+    rows = [
+        ("old", "the tide pulled the canoe past the reef at dusk",
+         {"lar_root_handle": "run-a", "lar_turn_ordinal": 3}),      # behind the horizon
+        ("new", "the tide pulled the canoe over the reef at dawn",
+         {"lar_root_handle": "run-a", "lar_turn_ordinal": 90}),     # in the window
+        ("noord", "the tide carried the canoe along the reef",
+         {"lar_root_handle": "run-a"}),                              # same root, no ordinal
+        ("foreign", "the tide moved a canoe near a reef",
+         {"lar_root_handle": "run-b", "lar_turn_ordinal": 2}),      # other root — untouched
+    ]
+    for cid, text, meta in rows:
+        store.put(cid, text, e.embed([text])["vectors"][0], meta)
+
+    s = search_io.Searcher(palace)
+    res = s.search("canoe past the reef", k=4, not_root="run-a",
+                   self_weight=0.25, self_horizon=50)
+    by = { (h.get("metadata") or {}).get("lar_turn_ordinal", "none")
+           if (h.get("metadata") or {}).get("lar_root_handle") == "run-a"
+           else "foreign": h for h in res["results"] }
+    assert not by[3].get("self_discounted")          # behind the horizon: full weight
+    assert by[90].get("self_discounted") is True     # in the window: discounted, and says so
+    assert by["none"].get("self_discounted") is True # no ordinal: honest blanket discount
+    assert not by["foreign"].get("self_discounted")  # other roots never touched
