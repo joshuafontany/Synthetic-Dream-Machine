@@ -39,7 +39,7 @@ _GRAMMAR_DIR = os.path.normpath(
 #: captures that never nest anything (leaves of the MemeAst)
 _LEAF_KINDS = frozenset({
     "meme.sigil.body", "meme.sigil.close.body", "meme.fence.info",
-    "meme.heading", "meme.comment", "meme.text", "meme.blank",
+    "meme.heading", "meme.list", "meme.comment", "meme.text", "meme.blank",
 })
 #: captures that ride as fields of their parent rather than as children
 _FIELD_KINDS = frozenset({

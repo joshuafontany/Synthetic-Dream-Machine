@@ -21,6 +21,7 @@
 (fenced_block info: (fence_open) @meme.fence.info)
 
 (heading) @meme.heading
+(list_item) @meme.list
 (comment) @meme.comment
 (text_line) @meme.text
 (blank_line) @meme.blank

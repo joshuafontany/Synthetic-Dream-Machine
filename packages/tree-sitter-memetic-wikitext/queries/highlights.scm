@@ -17,4 +17,5 @@
 (fenced_block (fence_close) @punctuation.special)
 
 (heading) @markup.heading
+(list_item) @markup.list
 (comment) @comment

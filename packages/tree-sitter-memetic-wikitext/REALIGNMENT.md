@@ -60,13 +60,16 @@ source-text NEVER changes · anything hand-review-shaped defers.
 4. eyeball one migrated file end-to-end
 5. single-breath scoped commit, `lar:///` subject
 
-## After the corpus (the grammar phase, NOT YET)
+## The grammar phase
 
-Carrier v0.0.2 seats `!{1,6}` headings + `^\*+[ \t]` lists; `#`-as-heading
-drops; `#`-as-ordered-list seats; LSP `_symbol_name` strips `!`; goldens
-re-bake. Then the TW5 form inventory grows in (transcludes, macrocall blocks,
-quoteblocks, styleblocks, typedblocks, pragmas — the Form-Surveyor inventory),
-corpus-scoped against the vendored TiddlyWiki5 core tiddlers.
+**v0.0.2 SEATED (2026-07-14):** `!{1,6}` headings beside `#` (the dual
+window holds while library/ speaks md) + the stricter `^\*+[ \t]` list rule;
+`meme.list` joins the MemeAst; the LSP strips both heading marks. STILL
+AHEAD: v0.1 drops `#`-heading + seats `#`-ordered-list in ONE breath with
+the corpus `1. `→`# ` pass (after the library rung); then the TW5 form
+inventory grows in (transcludes, macrocall blocks, quoteblocks, styleblocks,
+typedblocks, pragmas — the Form-Surveyor inventory), corpus-scoped against
+the vendored TiddlyWiki5 core tiddlers.
 
 ## Ledger
 
@@ -89,3 +92,12 @@ corpus-scoped against the vendored TiddlyWiki5 core tiddlers.
   holds `…` interiors verbatim; 1,605 odd-bold segments + 16 odd-backtick
   lines deferred loud; fold 524/524 ERROR-free; golden re-baked (28 movers =
   the span-shifting links/lists); 14 tests green; unit-sanity 8/8 pre-corpus.
+- 2026-07-14 — LIVE-PARSER WITNESS: roundtrip lens-law suite 2/2 green; all
+  524 memes through parseMemeText — 0 throws, 30 Error nodes + 1,447 recovery
+  diagnostics ALL pre-existing (differential vs pre-ladder worktree: the one
+  +1 = the sibling's committed canon growth, 3c23ca3a, not the realignment).
+- 2026-07-14 — GRAMMAR v0.0.2 SEATS: dual-window headings (`!`+`#`) + the
+  strict `*`-list rule; meme.list enters memeast.scm/highlights.scm/fold;
+  LSP strips both marks; canon witness 524/524 at 0.0000% ERROR coverage,
+  4,438 heading + 5,427 list nodes now read as STRUCTURE; golden re-baked
+  at grammar_version 0.0.2 (240 movers, INTENDED); 15 tests green.

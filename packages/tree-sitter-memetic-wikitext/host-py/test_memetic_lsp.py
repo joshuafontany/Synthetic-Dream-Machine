@@ -59,6 +59,29 @@ def test_document_symbols_nest_by_containment():
     assert "The Hearth" in inner and "toml iam" in inner
 
 
+def test_tw5_forms_parse_as_structure():
+    # the realignment's target forms: ! headings fold as headings (both marks
+    # stripped in the symbol name); * list lines fold as meme.list, and a
+    # line OPENING with bold stays prose (the stricter-than-TW5 list rule)
+    doc = ("<<~ ahu #tw5 >>\n"
+           "!! Kilo\n"
+           "* one\n"
+           "** two nested\n"
+           "''bold'' opener stays prose\n"
+           "<<~/ahu >>\n").encode("utf-8")
+    import memeast_fold as mf
+    kinds = {}
+    def _walk(n):
+        kinds[n["kind"]] = kinds.get(n["kind"], 0) + 1
+        for c in n.get("children", []):
+            _walk(c)
+    _walk(mf.fold(doc))
+    assert kinds.get("meme.list") == 2
+    assert kinds.get("meme.heading") == 1
+    syms = ml.document_symbols(doc)
+    assert [c["name"] for c in syms[0]["children"]] == ["Kilo"]
+
+
 def test_diagnostics_stay_silent_on_clean_ground():
     found, coverage = ml.diagnostics(_DOC)
     assert found == [] and coverage == 0.0

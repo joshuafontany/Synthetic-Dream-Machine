@@ -49,6 +49,10 @@
           "named": true
         },
         {
+          "type": "list_item",
+          "named": true
+        },
+        {
           "type": "sigil",
           "named": true
         },
@@ -86,6 +90,10 @@
         },
         {
           "type": "heading",
+          "named": true
+        },
+        {
+          "type": "list_item",
           "named": true
         },
         {
@@ -201,6 +209,10 @@
   },
   {
     "type": "heading",
+    "named": true
+  },
+  {
+    "type": "list_item",
     "named": true
   },
   {

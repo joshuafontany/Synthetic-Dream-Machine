@@ -25,6 +25,7 @@ module.exports = grammar({
       $.sigil,
       $.fenced_block,
       $.heading,
+      $.list_item,
       $.comment,
       $.blank_line,
       $.text_line,
@@ -63,7 +64,14 @@ module.exports = grammar({
       alias(token(/```[ \t]*\n?/), $.fence_close),
     ),
 
-    heading: _ => token(/#+[ \t][^\n]*\n?/),
+    // TW5 `!` headings; `#` rides through the realignment window (library/
+    // still speaks md until its rung crosses — REALIGNMENT.md; `#` then
+    // retires here and `#`-as-ordered-list seats in its place).
+    heading: _ => token(/(!{1,6}|#{1,6})[ \t][^\n]*\n?/),
+
+    // TW5 unordered-list line — STRICTER than core TW5: the marker run must
+    // carry a following space, so a line opening `**bold**` stays prose.
+    list_item: _ => token(/\*+[ \t][^\n]*\n?/),
 
     comment: _ => token(/<!--([^-]|-[^-]|--[^>])*-->\n?/),
 

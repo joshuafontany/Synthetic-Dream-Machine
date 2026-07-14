@@ -40,6 +40,7 @@ _CAPTURE_TO_TYPE = {
     "punctuation.special": "operator",
     "markup.raw": "string",
     "markup.heading": "keyword",
+    "markup.list": "operator",
     "comment": "comment",
 }
 
@@ -156,7 +157,7 @@ def _symbol_name(data: bytes, node: dict) -> str:
         text = _slice(data, opener)
         return text.removeprefix("<<~").removesuffix(">>").strip() or "ahu"
     if kind == "meme.heading":
-        return _slice(data, node).lstrip("#").strip() or "#"
+        return _slice(data, node).lstrip("#!").strip() or "!"
     if kind == "meme.fence":
         info = node.get("info")
         text = (_slice(data, info) if info else "```").lstrip("`").strip()
