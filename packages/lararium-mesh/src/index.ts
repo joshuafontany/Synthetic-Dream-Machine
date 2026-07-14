@@ -110,6 +110,7 @@ export * from "./admission-price.js";
 export * from "./vouch-dag.js";
 export * from "./dreamnet-admission.js";
 export * from "./handle-card.js";
+export * from "./handle-book.js";
 export * from "./cabal-place-charter.js";
 export * from "./cabal-place-clock.js";
 export * from "./me-circle.js";
