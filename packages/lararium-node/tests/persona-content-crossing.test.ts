@@ -8,7 +8,7 @@
  * keyhive read is FORWARD-ONLY, so the founder MUST add the reader before encrypting.
  */
 import { describe, test, expect } from "vitest";
-import { KeyhiveProvider } from "@lararium/keyhive";
+import { KeyhiveProvider, InMemoryEventStore } from "@lararium/keyhive";
 
 const noopStore = { put: async () => {}, list: async () => [] };
 const seedOf = (n: number): Uint8Array => new Uint8Array(32).fill(n);
@@ -49,6 +49,39 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     const recovered = await device.decryptContent(BAG, ciphertext);
 
     expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
+  });
+
+  test("@daemon+hydrate routing: the joinee becomes a member via the event STORE, not a direct array", async () => {
+    // The production transport writes the founder's membership events into the joinee's @daemon and
+    // `hydrateFromEventStore` ingests them at boot. This proves that store-routed path establishes membership
+    // exactly as the peer-to-peer shortcut did — closing the last blast-radius unknown before wiring.
+    const founder = await makeVessel(5);
+    const joineeStore = new InMemoryEventStore();
+    const joinee = new KeyhiveProvider();
+    await joinee.init({ seed: seedOf(104), eventStore: joineeStore });
+
+    // Founder learns the joinee (needs its keyhive card to add it to the PersonaGroup).
+    const { id: joineeAgentId } = await founder.receiveContactCard(await joinee.contactCard());
+    await joinee.receiveContactCard(await founder.contactCard());
+
+    const pg = await founder.createSentinelDoc("lar:///ha.ka.ba/sentinel/pg-hydrate");
+    await founder.addSentinelMember(joineeAgentId, pg.docIdHex);
+    const { docId } = await founder.registerBag(BAG);
+    await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
+    const ciphertext = await founder.encryptContent(BAG, new TextEncoder().encode("read via hydrate from the @daemon store"));
+
+    // Transport: the founder's membership events land in the joinee's event STORE (the @daemon path).
+    const memberEvents = await founder.eventsForPeer(joineeAgentId);
+    let i = 0;
+    for (const bytes of memberEvents) await joineeStore.put({ hash: `evt-${i++}`, variant: "cap", bytes });
+
+    // The joinee hydrates from the store — the production boot path, NOT a direct ingestPeerEvents.
+    joinee.adoptBag(BAG, docId);
+    // The store also holds the joinee's OWN init events, so it ingests at least the membership ones.
+    const { ingested } = await joinee.hydrateFromEventStore();
+    expect(ingested).toBeGreaterThanOrEqual(memberEvents.length);
+    const recovered = await joinee.decryptContent(BAG, ciphertext);
+    expect(new TextDecoder().decode(recovered)).toContain("hydrate");
   });
 
   test("transitive: a vessel in the PersonaGroup reads a bag the PersonaGroup holds (production topology)", async () => {
