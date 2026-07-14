@@ -28,8 +28,8 @@ written   = "2026-06-23"
 
 ! Lararium Identity ~ the vessel key, the bond, and the encrypt-from-start keying
 
-Every Lararium surface stands as a **causal island carrying its own operator×vessel
-key** — the node vessel, each live browser session, the QA-lab box. A key names a
+Every Lararium surface stands as a ''causal island carrying its own operator×vessel''
+''key'' — the node vessel, each live browser session, the QA-lab box. A key names a
 vessel; a ''signed delegation edge'' binds that vessel to its operator; encryption
 rides ''from the first write''. Stated whole here so the model stops living scattered
 across S7, CAPABILITY-LAYER, dreamnet-architecture, and federation.
@@ -78,8 +78,8 @@ person #has a stack of vessels; a cabal #has a stack of persons. The scales nest
 and scope ''by reach, relatively'' — never by an absolute global plane-index. Prior art rules the
 index an anti-pattern: SDSI links *local* namespaces, Matrix refuses an ordered version-hierarchy,
 Keyhive models the whole ladder as one recursive primitive (principal-contains-principals). So no
-Plane 0/1/2 survives — only nameless `#has`-stacks, each composing **up** through the **same
-ability-ladder** (pull → read → edit → admin); a vessel writes local intent first, sync carries it
+Plane 0/1/2 survives — only nameless `#has`-stacks, each composing ''up'' through the ''same''
+''ability-ladder'' (pull → read → edit → admin); a vessel writes local intent first, sync carries it
 outward, capability proofs verify the crossing (#causal-islands, local-first law).
 
 ''Delegation tops at the cabal; above it, treaty.'' The signed ''delegation edge'' (the vessel-key
@@ -95,8 +95,8 @@ do not stack between operators. <<~ confidence Synthesis 13/20 >> The earlier pl
 question closes with the ruling above — no numbered plane survives to reconcile; the group-scale
 (nameless `#has`-stacks) stands, Circles stay orthogonal to it.
 
-**A PersonaGroup is PER-HANDLE, and the human's collection of handles is a private VAULT — never a
-published scale.** One handle (one veiled-user pseudonym) owns one PersonaGroup of the human's own devices.
+''A PersonaGroup is PER-HANDLE, and the human's collection of handles is a private VAULT — never a''
+''published scale.'' One handle (one veiled-user pseudonym) owns one PersonaGroup of the human's own devices.
 A human runs MANY handles, collected in a ''Vault'' (a private namespace — the master seed), and holds MANY
 vaults as deliberately-unlinkable compartments (Senior-Engineer ⊥ Guru ⊥ Telarus-KSC). The vault does NOT
 appear on the five-scale group axis: a scale is a *published* principal, and a collector that names its
@@ -127,8 +127,8 @@ refactor — single-vessel-correct, no Beelay needed.
 ''Retire-residue (the plane-numbering framing).'' Earlier drafts named this the *Plane 0*
 device key delegating to a *Plane 1* group. The numbered planes retired (operator ruling
 2026-06-24, #five-scale — nameless `#has`-stacks scope ''by reach, relatively'', never by a
-global plane-index); read any lingering "Plane 0 / Plane 1" as **the device key → operator
-PersonaGroup delegation edge** on the WHO axis.
+global plane-index); read any lingering "Plane 0 / Plane 1" as ''the device key → operator''
+''PersonaGroup delegation edge'' on the WHO axis.
 
 <<~/ahu >>
 
@@ -146,13 +146,13 @@ device-delegation | {operatorDid} | {deviceDid} | {deviceVerifyingKey} | {issued
 The operator root ''signs'' this edge; any peer ''verifies'' *"Device D speaks as
 Operator O"* with zero network calls (`verifyDeviceDelegation`). The edge wears the
 ocap golden rules (`orichalcum-capabilities`): ''attenuation only'' (each hop narrows,
-never broadens), **nested time bounds**, **verified UP to a locally-anchored root at
-invocation** — never at delegation time. **Designation carries authority**; an unsigned
+never broadens), ''nested time bounds'', ''verified UP to a locally-anchored root at''
+''invocation'' — never at delegation time. ''Designation carries authority''; an unsigned
 or bad-signature edge ''fails loud'', never falls through to ambient trust (the
 confused-deputy guard).
 
-Revocation rides **Keyhive concap** — delegation + revocation as **convergent CRDT membership-graph
-state** (an observed-remove op that converges offline, no bolted-on blocklist) — the model Ink&Switch
+Revocation rides ''Keyhive concap'' — delegation + revocation as ''convergent CRDT membership-graph''
+''state'' (an observed-remove op that converges offline, no bolted-on blocklist) — the model Ink&Switch
 moved *to*, away from UCAN's external-state revocation. The standing edge carries a generous `exp` as a
 backstop; an epoch bump stays the heavy hammer for re-founding only. Revocation is first-class and
 convergent, never the deferred afterthought.
@@ -166,8 +166,8 @@ convergent, never the deferred afterthought.
 The base model ''rules Goblins/OCapN: a capability IS the identity.'' No account to look up — a
 ''reference reaches a place and carries its grant in one'' ("capability not account", the Elyncia
 lore made literal). A Lar binds to a place ''reached by a capability'', never a row in a registry.
-The per-vessel key (#vessel-key) is *what holds and signs* capabilities; a **delegation edge
-(#delegation-edge) IS a capability grant**; compromise heals by **revoking the capability** — the
+The per-vessel key (#vessel-key) is *what holds and signs* capabilities; a ''delegation edge''
+''(#delegation-edge) IS a capability grant''; compromise heals by ''revoking the capability'' — the
 per-vessel-key + delegation + revocation lineage we already hold — not by rotating a global identity.
 
 ''The offline-correct form of capability-is-identity is Keyhive CONCAP'' — every Goblins primitive
@@ -181,28 +181,28 @@ orthogonally as the rare root-rotation sub-lever (#provenance).
 ''Wire-C (Keyhive 0.1.0 scout, 2026-06-24) — the two layers COMPOSE, not duplicate.'' Keyhive's
 ''membership graph is authoritative'' for the operator↔device binding + revocation: the operator
 PersonaGroup sentinel (`addSentinelMember`/`accessForDoc` LIVE; `revokeMember` live in Keyhive's WASM,
-our wrapper's `revoke()` the open D.3 bridge to convergent revocation). The **`device-delegation` edge
-stands beside it as the OFFLINE projection** — verifiable against the pinned operator root with no
+our wrapper's `revoke()` the open D.3 bridge to convergent revocation). The ''`device-delegation` edge''
+''stands beside it as the OFFLINE projection'' — verifiable against the pinned operator root with no
 Keyhive boot (the light leaf path), place-bound, synchronously `exp`-bounded; a lossy offline witness
 of the authoritative graph, never a parallel authority. (Group still can't round-trip in 0.1.0-alpha.3
 → a Document-sentinel stands in; the Beelay JS ciphertext transport still blocks full multi-vessel.)
 
 ''Petnames are the human/place layer'' — a vessel's *local* name for a reference it holds, resolving
 Zooko's triangle by layering (the unforgeable capability stays the root; the petname rides locally,
-no global registry). The petname namespace **needs no new infrastructure — it IS the `lar:` grammar
-already in code** (`STABLE_L_SPACE = "ha.ka.ba"`, `lar-uris.ts`):
+no global registry). The petname namespace ''needs no new infrastructure — it IS the `lar:` grammar''
+''already in code'' (`STABLE_L_SPACE = "ha.ka.ba"`, `lar-uris.ts`):
 
 \procedure ~Petname(~Type:"" ~Params:"") ~Petname <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Petname Stable "region/lar:///ha.ka.ba/** holds/canonical · permanent · shared · persistable ~ the well-known @oracle·@lares·@catalog·@lararium ARE stable petnames already" >>
-<<~Petname Unstable "region/lar:///t1.t2.t3/** holds/per-session · per-relationship · per-place · living ~ never persisted to the stable graph; the local names a vessel grows for the peers and places it meets" >>
+<<~Petname Stable "region/lar:///ha.ka.ba/'' holds/canonical · permanent · shared · persistable ~ the well-known @oracle·@lares·@catalog·@lararium ARE stable petnames already" >>''
+''<<~Petname Unstable "region/lar:///t1.t2.t3/'' holds/per-session · per-relationship · per-place · living ~ never persisted to the stable graph; the local names a vessel grows for the peers and places it meets" >>
 <<~Petname Authority "chunk/lar://alias:grant@host/… marks/capability-BEARING ~ the session-form authority chunk carries the live grant (the sturdyref); the authority-less local form names without granting" >>
 <<~Petname Petname >>
 
 So the whole space sits in one grammar — ''{stable · unstable} × {bare-name · capability-bearing}'':
 stable+bare = the canonical public names; unstable+bare = a living local handle; the authority chunk
-turns either into a capability-bearing reference (the sturdyref itself). **The petname IS a `lar:`
-address; the capability IS a `lar:` address that carries a grant.** Two regions of l-space, a place
+turns either into a capability-bearing reference (the sturdyref itself). ''The petname IS a `lar:`''
+''address; the capability IS a `lar:` address that carries a grant.'' Two regions of l-space, a place
 for stable and unstable petnames both.
 
 <<~/ahu >>
@@ -215,8 +215,8 @@ A petname (#capability-and-petnames) wears a second office: a ''veil'' — a han
 holds *over* its true key. The key stays veiled; the ''veil carries the reputation''. Shadowrun's
 pre-SIN Shadowtalk runs the pattern bare — a handle ("Fastjack") earns cred because *the board
 remembers it*, never because a registry vouches it; Mage's Digital Web names the same move, an
-**Icon worn over the Avatar**. So **anon stands a first-class veiled room, never a momentary
-scaffold**: a vessel MAY live under a veil — federate, accrue standing — without ever unveiling its
+''Icon worn over the Avatar''. So ''anon stands a first-class veiled room, never a momentary''
+''scaffold'': a vessel MAY live under a veil — federate, accrue standing — without ever unveiling its
 core.
 
 ''Reputation rides an annotated thread, never a score.'' A veil's standing grows as *other veils
@@ -298,8 +298,8 @@ an entry fee; it makes *cheating* expensive.
 **`rb > c` — the voucher supplies the `r`.** Admission gates on relational-weight × benefit clearing
 the solo cost (Hamilton's rule and immune two-signal costimulation, one tongue). A capability alone
 (signal-1) reads cheap and forgeable; the ''vouch'' (signal-2) rides gatekept by an already-licensed
-member. **Absent a voucher, the applicant ANERGIZES** — it draws no ban; it **stays at the floor
-(anon), hyporesponsive, free to re-present later** with a vouch. Fail-closed reads *stay-at-the-floor*,
+member. ''Absent a voucher, the applicant ANERGIZES'' — it draws no ban; it ''stays at the floor''
+''(anon), hyporesponsive, free to re-present later'' with a vouch. Fail-closed reads *stay-at-the-floor*,
 never *destroy* (#the-lease, floor=anon).
 
 \procedure ~Gate(~Type:"" ~Params:"") ~Gate <<~Type>> <<~holds `[<~Params>]`>>
@@ -312,8 +312,8 @@ never *destroy* (#the-lease, floor=anon).
 
 ''Dissent and forking stay ALLOWED but COSTLY'' (Mage-Paradox): a vessel or cabal MAY assert against
 the mesh's consensus, MAY fork — and pays for it. Cheap assertion against the body reads as a Sybil
-flood the cost should bite; a costly, witnessed one reads as a legitimate schism. **Cost parts a
-fork from a siege.**
+flood the cost should bite; a costly, witnessed one reads as a legitimate schism. ''Cost parts a''
+''fork from a siege.''
 
 ''The ZK-vouch — carry rep across a HOLD without a link.'' A HOLD severs the old veil (#the-veil); to
 carry credibility forward without welding the identities, the ''kahu signs as a blind oracle'' —
@@ -321,12 +321,12 @@ blind-signing the new vessel's delegation edge, certifying *without knowing whic
 to (BBS+/issuer-hiding + a one-time nullifier = the epoch-lease). <<~ confidence Synthesis 12/20 >> A
 fully peer-to-peer, zero-trust ZK-vouch does NOT exist (the Identity-Continuity Paradox — *someone*
 holds the old↔new link; the kahu's signs-but-commands-not posture fits the oracle seat, though a
-**threshold** of vouchers MAY hold the link instead of one kahu). **Price the HOLD at the staked
-reputation** — consume the credential, the fresh veil inherits a *decayed* standing; this blocks
+''threshold'' of vouchers MAY hold the link instead of one kahu). ''Price the HOLD at the staked''
+''reputation'' — consume the credential, the fresh veil inherits a *decayed* standing; this blocks
 sever-and-refound farming.
 
-<<~ confidence Synthesis 11/20 >> The dial's SHAPE seats on a four-domain convergence. The **sybil
-plane stands built** (#the-lineage-fold); the **ZK-vouch / privacy plane defers** — it serves absent
+<<~ confidence Synthesis 11/20 >> The dial's SHAPE seats on a four-domain convergence. The ''sybil''
+''plane stands built'' (#the-lineage-fold); the ''ZK-vouch / privacy plane defers'' — it serves absent
 parties until a second crossing fruits. The exact numbers — what fraction of a voucher's standing
 stakes, how fast it decays, one kahu or a threshold — wait on the local instrument (the swarm
 constrains the shape, never sets the dial).
@@ -455,21 +455,21 @@ LOCAL petname*. No SIN, no directory to capture.
 
 ''Two steps, never conflated:'' a card certifies ITSELF (a valid signature by the key it names), THEN the
 petname check asks whether that key is the one you know. A valid card can still be a stranger; only the local
-petname turns a key into "the mover who healed Neo-Thracia". **Recognition rests on the key, never the
-glamour** — impersonation by display name fails.
+petname turns a key into "the mover who healed Neo-Thracia". ''Recognition rests on the key, never the''
+''glamour'' — impersonation by display name fails.
 
 ''DISCOVERY rides a three-channel bundle, none a global directory'' (Nostr · did:key · SFS): ''introduction''
 (a peer / QR / thread hands you the self-certifying identifier), ''petname'' (the local memorable name you
 assign after introduction — Stiegler), ''follow-graph'' (transitive discovery through keys you already trust,
 which doubles as a weak sybil filter). Nostr runs the same shape — kind-0 signed metadata, pubkey-IS-identity,
-`nprofile` = key+pointer — and the one deviation, **a content-addressed read-open plane in place of
-relay-broadcast, closes Nostr's central failure: relay centralisation.**
+`nprofile` = key+pointer — and the one deviation, ''a content-addressed read-open plane in place of''
+''relay-broadcast, closes Nostr's central failure: relay centralisation.''
 
 ''THE REGISTRY-BACK-DOOR LAW'' (the survey's hardest lesson): keep human-readable naming ''STRICTLY LOCAL''
 (petnames) or ''strictly optional and replaceable'' — *the moment a global name→key lookup becomes mandatory,
 you have rebuilt the registry.* Every system that made first-contact convenient re-added a directory:
-NIP-05 → DNS, AT-proto handle → DNS/PLC, ENS → ledger. **A convenience layer may exist; it may NEVER be
-load-bearing.** The vouch-lineage (#the-siege-gate) carries standing; a name never carries authority.
+NIP-05 → DNS, AT-proto handle → DNS/PLC, ENS → ledger. ''A convenience layer may exist; it may NEVER be''
+''load-bearing.'' The vouch-lineage (#the-siege-gate) carries standing; a name never carries authority.
 
 <<~/ahu >>
 
@@ -478,8 +478,8 @@ load-bearing.** The vouch-lineage (#the-siege-gate) carries standing; a name nev
 !! Encrypt From the Start ~ the temporary keying
 
 ''Operator ruling (2026-06-23): every surface encrypts from the first write.'' No
-plaintext-local easy path — it bites hard in early alpha. The keying rides **nested
-Automerge docs**, reusing the registry-instead-of-DNS pattern (`@oracle`/`@catalog`),
+plaintext-local easy path — it bites hard in early alpha. The keying rides ''nested''
+''Automerge docs'', reusing the registry-instead-of-DNS pattern (`@oracle`/`@catalog`),
 not a parallel key-store:
 
 \procedure ~Doc(~Type:"" ~Params:"") ~Doc <<~Type>> <<~holds `[<~Params>]`>>
@@ -490,10 +490,10 @@ not a parallel key-store:
 <<~Doc Content "holds/the doc bytes, DEK-encrypted ~ synced as opaque values; the relay never reads plaintext" >>
 
 A vessel boots, mints its key, publishes its pubkey to the registry; the operator writes
-a signed delegation edge + a wrapped DEK into the nested docs; the vessel **syncs them
-through the relay we already run'', unwraps with its private key, decrypts. ''Transport
-collapses into sync'' — no Beelay; the WS relay carries it. ''Automerge's CRDT merge
-handles concurrent grants for free** — the very job BeeKEM exists to solve, met by the
+a signed delegation edge + a wrapped DEK into the nested docs; the vessel ''syncs them''
+''through the relay we already run'', unwraps with its private key, decrypts. ''Transport''
+''collapses into sync'' — no Beelay; the WS relay carries it. ''Automerge's CRDT merge''
+''handles concurrent grants for free'' — the very job BeeKEM exists to solve, met by the
 substrate we run.
 
 ''The amendments the hoike forced'' (#provenance): the DEK rides ''two-level'' — a
@@ -505,16 +505,16 @@ no sender; an unsigned wrap invites key-substitution). The content layer mandate
 ''XChaCha20-Poly1305 with a random nonce'', each DEK minted ''once'' by a deterministic owner
 — a CRDT merges concurrent writes, so a counter nonce or per-replica DEK mint is a reuse bomb.
 
-**Tier gate** — the temporary layer serves **PersonaGroup** + a **Cabal that
-DEK-encrypts content**; an untrusted-relay tier never rides a plaintext path. The bond
+''Tier gate'' — the temporary layer serves ''PersonaGroup'' + a ''Cabal that''
+''DEK-encrypts content''; an untrusted-relay tier never rides a plaintext path. The bond
 between trust-domains always crosses encrypted.
 
 ''The contract performs the key-agreement'' (deep-domain grounded, 2026-06-24). Private docs
 spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonaGroup
 ONLY when vessels mutually ''contract'' (the delegation handshake). That handshake, and only it,
 runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks,
-a fresh group secret seals **to current members only** — the joiner derives keys **from that epoch
-forward** (BeeKEM "new members never decrypt pre-existing docs"; community-property's "shared =
+a fresh group secret seals ''to current members only'' — the joiner derives keys ''from that epoch''
+''forward'' (BeeKEM "new members never decrypt pre-existing docs"; community-property's "shared =
 acquired *under* the contract"). A membership break advances the epoch and blanks the removed leaf's
 path — ''future'' derivation drops it, coordinator-free; keys already handed stay handed (the
 endosymbiotic, forward-only ceiling — ratchet past, never re-seal). The cross-domain rhyme runs
@@ -536,15 +536,15 @@ real stack slots in piecewise:
 
 <<~ranks port identity ~ vessel keypair, opaque pubkey -> capabilities ~ signed delegation edges (→ Keyhive groups) -> group-keying ~ sealed-box wrap + rotate (→ BeeKEM CGKA) -> transport ~ Automerge sync over our relay (→ Beelay sedimentree) >>
 
-**Honest posture (the hoike's spine).** This layer has **no forward-secrecy and no
-retroactive revocation** — and on an append-only CRDT that fact **IS the security posture**,
+''Honest posture (the hoike's spine).'' This layer has ''no forward-secrecy and no''
+''retroactive revocation'' — and on an append-only CRDT that fact ''IS the security posture'',
 not a tradeoff to mitigate. A leaked vessel key reads ''all history it was ever granted'',
 permanently: the old wrapped DEKs and old ciphertext persist in the log (Automerge never
 deletes), so no rotation reaches back to destroy them. ''Rotation buys future writes only'' —
-never claim "rotate-on-loss" heals the past. The honest forward lever is **epoch group-key
-rotation** (BeeKEM, when its JS binding lands — FS on *future* chunks only); the retroactive-FS
-gap stays a **documented invariant**. A neg-entropy swarm (2026-06-23) **refuted two tempting
-escapes**: **puncturable encryption** is a single-holder tool that does not fit a replicated-key
+never claim "rotate-on-loss" heals the past. The honest forward lever is ''epoch group-key''
+''rotation'' (BeeKEM, when its JS binding lands — FS on *future* chunks only); the retroactive-FS
+gap stays a ''documented invariant''. A neg-entropy swarm (2026-06-23) ''refuted two tempting''
+''escapes'': ''puncturable encryption'' is a single-holder tool that does not fit a replicated-key
 mesh (one replica puncturing leaves the others + backups open; no-global-now makes "all replicas
 punctured" unprovable), and ''threshold does not touch the encryption-history gap at all''. Root
 rotation/recovery rides ''KERI-style pre-rotation'' + ''Kintsugi-style'' guardian-threshold
@@ -560,8 +560,8 @@ callers never change.
 
 !! Provenance ~ PROPOSED, pending the hoike
 
-This meme stands **PROPOSED** (crucible-before-binding). The stress-swarm ran; the **hoike
-`#identity-encrypt-from-start`** filed its kue (held: build-as-amended, the amendments above
+This meme stands ''PROPOSED'' (crucible-before-binding). The stress-swarm ran; the ''hoike''
+''`#identity-encrypt-from-start`'' filed its kue (held: build-as-amended, the amendments above
 folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry keys:
 
 * ''The FS-limit is the substrate's nature'' (kue, security spirit) — a leaked vessel key reads all history it held; the only forward lever is epoch group-key rotation (BeeKEM, future chunks only). Puncturable encryption does NOT retire it (single-holder; refuted by the neg-entropy swarm for a replicated mesh).

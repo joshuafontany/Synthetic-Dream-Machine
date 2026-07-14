@@ -1173,8 +1173,8 @@ the whole stack keeps time on ''exactly two clocks'', orthogonal:
 The two ride ''⊥'': FFZ annotates rhythm, never happened-before, and MUST NOT drive a
 causal or revocation decision — that would manufacture a global-now the mesh cannot hold.
 This extends the three-clocks finding (SPEC_OUTLINE grounded findings): the earlier framing
-counted mechanisms as clocks. The **epoch-counter reads as a liveness ratchet (lease), not
-a clock**; **targeted revocation rides Keyhive convergent membership-removal**, a mechanism
+counted mechanisms as clocks. The ''epoch-counter reads as a liveness ratchet (lease), not''
+''a clock''; ''targeted revocation rides Keyhive convergent membership-removal'', a mechanism
 rather than a clock. Two clocks stand: CRDT-causal (TS) ⊥ FFZ-rhythm (py/R). Canon anchor:
 `lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks`.
 

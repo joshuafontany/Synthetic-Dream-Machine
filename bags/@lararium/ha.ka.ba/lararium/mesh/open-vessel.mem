@@ -37,8 +37,8 @@ that differ between the working hosts name the seam, and nothing else earns one
 
 !!! Same structure, differing capabilities (Ink & Switch)
 
-Node and browser **differ ONLY in capabilities, never in structure or
-pattern-integrity** (Ink & Switch). The composition — the seven participations, their
+Node and browser ''differ ONLY in capabilities, never in structure or''
+''pattern-integrity'' (Ink & Switch). The composition — the seven participations, their
 order, the protocol sequence — stands IDENTICAL on every substrate. What differs reads
 as which ''capability pieces a vessel currently holds'', plus the few genuinely
 substrate-bound resolutions inside each piece (storage backend, worker kind, crypto
@@ -78,8 +78,8 @@ them, it does not re-implement them.
 
 !! The Shape — A Vessel Composes Its Pieces
 
-A vessel does not read as a core that an injected host-port drives. A vessel **IS a
-composition** — a recipe that names which sovereign pieces it carries and the order
+A vessel does not read as a core that an injected host-port drives. A vessel ''IS a''
+''composition'' — a recipe that names which sovereign pieces it carries and the order
 they assemble. The open phases (`boot → repo-open → catalog-ready → island-ready →
 wiki-ready → vessel-ready → corpus-ready → tw5-booted → live`) mark the composition
 milestones, gating on the admin island's `ea` before any wiki mounts (S11.5
@@ -118,8 +118,8 @@ piece absent today reads as not-yet-held, never cannot-hold.
   no-op stub, no `if (platform)`, nothing for the composition to branch on.
 
 A node MAY compose a thin leaf recipe; a future heavy browser MAY compose relay
-pieces — because role lives in the recipe, not the substrate. **The access piece is
-always present, never a default**: the relay recipe carries the V3 gate piece; the
+pieces — because role lives in the recipe, not the substrate. ''The access piece is''
+''always present, never a default'': the relay recipe carries the V3 gate piece; the
 browser recipe carries the `admit same-origin / in-process` piece (its only peers ride
 the MessageChannel to its own island + the same-origin BroadcastChannel — trusted by
 origin, a LEGITIMATE asymmetry, not an open hole). No recipe omits the access piece, so

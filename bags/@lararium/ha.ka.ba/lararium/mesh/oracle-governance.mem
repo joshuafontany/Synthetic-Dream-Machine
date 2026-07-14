@@ -31,9 +31,9 @@ written   = "2026-06-29"
 > ahead of code.
 
 The `@oracle` carries a public read substrate — *what this neighborhood holds out for
-all to see*. This meme answers **who governs it, at what scale, and how it stays
-un-capturable''. The short of it: ''the founder seeds, the circle governs, the fork
-guards.**
+all to see*. This meme answers ''who governs it, at what scale, and how it stays''
+''un-capturable''. The short of it: ''the founder seeds, the circle governs, the fork''
+''guards.''
 
 **One `@oracle`, two faces — never a second board.** This governance board reads as the
 ''read face'' over the *same* `@oracle` substrate the registry/recipe plane already holds.
@@ -71,9 +71,9 @@ address would not trigger anyway.
 
 !! The Board Model — Global Address, Local Causal State
 
-The board carries **one well-known per-nexus ROOT/INDEX `docId`'' — the ''global
-address'' — fanning by ''transitive reachability'' to a fan of ''per-topic causal
-islands**. This reads the Beelay pattern straight: *a stable global address, local
+The board carries ''one well-known per-nexus ROOT/INDEX `docId`'' — the ''global''
+''address'' — fanning by ''transitive reachability'' to a fan of ''per-topic causal''
+''islands''. This reads the Beelay pattern straight: *a stable global address, local
 converging causal state behind it.*
 
 ```text
@@ -115,12 +115,12 @@ The board governs through a ''projection seam'', never a single writable doc:
   the TUF / DNSSEC shape: a signed source, a verifiable public mirror). Readers verify the
   projection against the steward signatures; they never write the published surface.
 
-**NOT one cap-tiered doc (MUST-NOT).** A single doc with a write-cap names a **single
-point of capture** — steal the cap, own the board. The projection-nalu seam dissolves
+''NOT one cap-tiered doc (MUST-NOT).'' A single doc with a write-cap names a ''single''
+''point of capture'' — steal the cap, own the board. The projection-nalu seam dissolves
 that: a sovereign SOURCE → gated wave → public SINK, the read plane carrying no write
 authority at all
-(<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>). **Users read the
-projection AND run their own topic boards** off the well-known root — the board hands out
+(<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>). ''Users read the''
+''projection AND run their own topic boards'' off the well-known root — the board hands out
 sight, never a write-throne.
 
 <<~ confidence Synthesis 13/20 >> moving the cap-tier from the *doc* to the *signing

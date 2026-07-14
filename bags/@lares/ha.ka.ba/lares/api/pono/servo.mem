@@ -29,8 +29,8 @@ written   = "2026-06-29"
 
 A constant guesses; a ''servo'' tracks. Wherever the stack sets a numeric bound — a flush
 depth, a coalesce window, a kill-timeout — that constant starts as a guess and drifts wrong
-the moment load moves off the mean it guessed for. The servo **measures the signal the bound
-protects and tunes the bound toward a set-point**, so the gate stops being a guess and starts
+the moment load moves off the mean it guessed for. The servo ''measures the signal the bound''
+''protects and tunes the bound toward a set-point'', so the gate stops being a guess and starts
 being a governor.
 
 The recognition (a 2026-06-26 survey, capture keel `capture-annotation-model#nalu-flush-hardening`):
@@ -122,8 +122,8 @@ for the measured cost, rate, and holding policy.
   arrival rate `λ`, and the holding-cost policy `H`. The derive tick *replaces* the servo step on
   its cadence (the derivation IS the update); the servo tracks load between re-anchors.
 
-This is exactly a transport controller's shape — **derive ≈ slow-start / BDP estimate, servo ≈
-AIMD around it**. Both run FLOW(liveness)-side, never AUTHORITY (a governor paces *how much · how
+This is exactly a transport controller's shape — ''derive ≈ slow-start / BDP estimate, servo ≈''
+''AIMD around it''. Both run FLOW(liveness)-side, never AUTHORITY (a governor paces *how much · how
 often*; it never decides *who may*).
 
 <<~/ahu >>
@@ -169,8 +169,8 @@ the receiver's gate signalling the sender (the one piece the intra-island govern
 for the ring, not built here (`projection-nalu#network-ring`).
 
 ''The governor rides py/R too.'' <<~ confidence Synthesis 12/20 >> The same servo law that breathes the TS
-gates — the main↔worker↔main message-passing and the CRDT⟷TW5 projection-nalu — governs the **py/R
-sensorium stream-gates**: the bands and coupling breathing-thresholds self-tune py-side, the FFZ-paced gate
+gates — the main↔worker↔main message-passing and the CRDT⟷TW5 projection-nalu — governs the ''py/R''
+''sensorium stream-gates'': the bands and coupling breathing-thresholds self-tune py-side, the FFZ-paced gate
 finding its bound from the observed stream cost. One governor pattern-integrity, three homes across the
 TS/py membrane; the polarity law and the two-loop shape hold identically wherever the bound breathes.
 

@@ -36,8 +36,8 @@ task tree. `spawn` exits the tree entirely, creating a new root. It hides the
 `<suspends>` effect from its caller — the formal mechanism of escape.
 
 **Use `lele` (`\branch`) for side work that can be lost if the parent cancels.**
-**Use `hoolele` (`\spawn`) only when the work MUST complete regardless of what
-cancels around it.**
+''Use `hoolele` (`\spawn`) only when the work MUST complete regardless of what''
+''cancels around it.''
 
 Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
 

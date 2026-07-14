@@ -66,8 +66,8 @@ homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal 
 [[personal-slot|../lararium/personal-slot.md]].
 
 ''Axis 2 — Scale.'' Membership nests as Keyhive groups-within-groups on the ''SOCIAL axis'':
-`Individual ⊂ PersonaGroup ⊂ Cabal`. Each social ring forms a causal island with a **cryptographic
-membrane** — the Keyhive delegation chain carries the join-rule. **Delegation tops at the Cabal**
+`Individual ⊂ PersonaGroup ⊂ Cabal`. Each social ring forms a causal island with a ''cryptographic''
+''membrane'' — the Keyhive delegation chain carries the join-rule. ''Delegation tops at the Cabal''
 (2026-06-29 cohere); above it the mesh scales on the orthogonal ''INFRA axis'' — `Nexus` and
 `DreamNet` join by ''treaty / mutual-carriage contract'' (who relays whose sealed bytes), never by
 delegation-up, a relay carrying without reading
@@ -78,19 +78,19 @@ under everyone's local stances. Read the earlier single rope
 two-axis treaty split supersedes — neighborhood/city now ride the INFRA shrine-tiers, not a WHO ring.
 
 ''Axis 3 — Powers.'' The faculties of infrastructure are separable and each devolvable to
-a distinct provider: `host · relay · aggregate · address · moderate`. **Host-independent
-`lar:///` addressing is the lever** that makes them separable (a `lar:///` URI names content
+a distinct provider: `host · relay · aggregate · address · moderate`. ''Host-independent''
+''`lar:///` addressing is the lever'' that makes them separable (a `lar:///` URI names content
 by identity, the resolver binds it to a doc at boot — no host appears in the address). The
-governing law, learned from ATProto's failures: **every power you separate but make
-expensive or central re-concentrates** (their PLC ledger, their single capital-intensive
+governing law, learned from ATProto's failures: ''every power you separate but make''
+''expensive or central re-concentrates'' (their PLC ledger, their single capital-intensive
 Appview, their shared rotation keys each re-grew the monopoly they meant to escape).
 
 ''Plane 0 — Alignment.'' Capability answers *"CAN this actor act?"* — monotonic, and a
 malicious actor can hold cryptographically valid capabilities. Alignment answers
 *"do I WANT to peer with this actor?"* — non-monotonic, subjective, reputation-rooted, and
 capability structurally cannot express it. Lives in its own invariant
-([[alignment-layer.md|alignment-layer.md]]); enforced by **withholding voluntary sync at the
-Beelay boundary**, never by reaching into another island's data. The "lemures" plane.
+([[alignment-layer.md|alignment-layer.md]]); enforced by ''withholding voluntary sync at the''
+''Beelay boundary'', never by reaching into another island's data. The "lemures" plane.
 
 <<~/ahu >>
 

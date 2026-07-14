@@ -137,3 +137,12 @@ the vendored TiddlyWiki5 core tiddlers.
   golden re-baked (79 movers, INTENDED); host-py 15 + sectioner 12 +
   roundtrip 2/2 green. The carrier now speaks TW5 line forms with NO md
   window; remaining md in the corpus = the hand-review tail only.
+- 2026-07-14 — multi-line bold SPLITS at the newline (operator: cross-line
+  '' spans = the exact bug class just cured in the TW5 submodule feature
+  branch — never re-introduce it): pass 4 rewrites each wrapped `**` span
+  into balanced single-line `''` spans, paragraph-buffered, unprovable
+  paragraphs held loud (11). 471 lines split. THE RE-RUN BUG CAUGHT AT THE
+  EYEBALL: the retired md-heading rule re-fired on TW5 `# ` ordered lists
+  (uncommitted damage, reverted whole); the heading transform now stands
+  RETIRED in the tool with the lesson inline. Canon 524/524 clean · golden
+  23 movers · host-py 15 · roundtrip 2/2 · ruff clean.

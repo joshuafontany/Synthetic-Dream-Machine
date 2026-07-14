@@ -30,8 +30,8 @@ has not re-derived, the algorithm rides a derivation nobody has reviewed, and th
 spirits who each read a different literature and never spoke to each other.
 
 ''It sits here so it can be KILLED.'' A finding filed as canon before it is proven becomes the incumbent
-lineage that eats the evidence — which is, with an irony the author declines to soften, **exactly the
-failure this outline names** (#the-shadow).
+lineage that eats the evidence — which is, with an irony the author declines to soften, ''exactly the''
+''failure this outline names'' (#the-shadow).
 
 <<~ confidence Provisional 5/20 >> Every claim below reads as a ''hypothesis with a named refutation'', and
 each one names the experiment that would sink it.
@@ -82,21 +82,21 @@ can never vouch back up its own lineage — a cycle is ''structurally unrepresen
 attack on PageRank is precisely *route heavy cycles back through yourself*.
 
 ''REFUTED BY:'' sideways laundering — sybils vouching a confederate elsewhere. The gain stays bounded by
-C1 and costs a real attack edge, **but the claim is "no SELF-boosting", never "attack-free", and anyone
-who reads it as the latter has been misled by this meme.**
+C1 and costs a real attack edge, ''but the claim is "no SELF-boosting", never "attack-free", and anyone''
+''who reads it as the latter has been misled by this meme.''
 
 ''C4 — MONOTONE ⟹ NON-CONSERVING ⟹ SYBIL-VULNERABLE.'' The natural monotone metric (max-times attenuated
 reachability) is ''perfectly CALM'' and ''perfectly sybil-broken'': it never splits mass, so one attacker
-mints unbounded sybils that all clear the threshold. **Sybil resistance REQUIRES out-degree normalisation,
-and mass conservation is exactly what makes the fold non-monotone.** You cannot have both.
+mints unbounded sybils that all clear the threshold. ''Sybil resistance REQUIRES out-degree normalisation,''
+''and mass conservation is exactly what makes the fold non-monotone.'' You cannot have both.
 
-**REFUTED BY:** a counterexample — a monotone, mass-conserving fold. **If one exists this whole outline
-collapses into something better.** <<~ confidence Provisional 6/20 >> The author believes none exists and
+''REFUTED BY:'' a counterexample — a monotone, mass-conserving fold. ''If one exists this whole outline''
+''collapses into something better.'' <<~ confidence Provisional 6/20 >> The author believes none exists and
 has not proved it; this is the one claim that reads as a ''conjecture worth a proof''.
 
 ''C5 — NON-MONOTONE IS FINE, BECAUSE THE SCORE IS CONFLUENT.'' PPR is a pure deterministic function of the
-edge set, so two islands holding the same converged graph compute the **same score, whatever the arrival
-order.** So **re-evaluate at use; never cache the decision.** *Decisions do not merge* is not a workaround
+edge set, so two islands holding the same converged graph compute the ''same score, whatever the arrival''
+''order.'' So ''re-evaluate at use; never cache the decision.'' *Decisions do not merge* is not a workaround
 — it is the CALM-correct architecture.
 
 ''C6 — SCARCITY REPLACES THE THRESHOLD (biology).'' The germinal centre never chose a number: it made
@@ -107,9 +107,9 @@ starving. ''The co-pay then falls out as a CONSERVATION LAW, not an enforcement 
 
 ''C7 — A NEGATIVE FACT CANNOT BE MADE TO ARRIVE (cryptography, and history).'' CRLs, OCSP, PGP revocation,
 CT's gossip layer, UCAN's revocation store — ''all failed in the same place.'' Soft-fail is not a bug; it
-is **what a pulled negative fact always degrades to** under an adversary who owns the wire. **Therefore
-every authority is a lease that dies of thirst'', and *decay-unless-fed* and *anergy-not-ban* are ''ONE
-mechanism, not two.**
+is ''what a pulled negative fact always degrades to'' under an adversary who owns the wire. ''Therefore''
+''every authority is a lease that dies of thirst'', and *decay-unless-fed* and *anergy-not-ban* are ''ONE''
+''mechanism, not two.''
 
 The 11th century says it again: the ''Maghribi coalition'' — the founding citation for *reputation replaces
 courts* — ''does not survive its own sources.'' Bad news travelled ~315 miles, to the disputants' own
@@ -117,10 +117,10 @@ circles, with no adjudicator and ''no documented ostracism'' (Edwards & Ogilvie,
 
 ''C8 — ADMISSION IS A RE-PERFORMANCE, NOT A LOOKUP (history).'' Ordination *sub conditione*: *"if thou art
 not already ordained, I ordain thee"* — ''a re-vouch asserting NOTHING about the disputed ancestor.'' It
-needs no global view, survives partition (**the far chapter is never reached, and its silence is not
-evidence**), voids nothing, and puts the liability on the **local, reachable** voucher. Guilds never
-verified the travelling stranger. **They shrank what admission granted until being wrong was survivable,
-and made a local party post the bond.**
+needs no global view, survives partition (''the far chapter is never reached, and its silence is not''
+''evidence''), voids nothing, and puts the liability on the ''local, reachable'' voucher. Guilds never
+verified the travelling stranger. ''They shrank what admission granted until being wrong was survivable,''
+''and made a local party post the bond.''
 
 <<~/ahu >>
 
@@ -128,11 +128,11 @@ and made a local party post the bond.**
 
 !! The Shadow ~ what this design will do to itself
 
-**ORIGINAL ANTIGENIC SIN.** A lineage-rooted system with memory **does not converge on late-arriving truth.
-It converges on whatever arrived first** — by **active suppression**, not inertia: the incumbent lineage
-**eats the evidence** before a better-fitting one can form. **The symptom is that the system responds fast
-and confidently, which reads as HEALTH.'' Immunology has chewed on this since 1960 and has ''no general
-cure**; the only known mitigation **throttles the fast path so the slow path can start.**
+''ORIGINAL ANTIGENIC SIN.'' A lineage-rooted system with memory ''does not converge on late-arriving truth.''
+''It converges on whatever arrived first'' — by ''active suppression'', not inertia: the incumbent lineage
+''eats the evidence'' before a better-fitting one can form. ''The symptom is that the system responds fast''
+''and confidently, which reads as HEALTH.'' Immunology has chewed on this since 1960 and has ''no general''
+''cure''; the only known mitigation ''throttles the fast path so the slow path can start.''
 
 ''THE GATE AND THE CARTEL ARE THE SAME MACHINE'' (Ogilvie). The sponsor's scarce budget — C6's elegant
 conservation law — ''is also the instrument by which insiders keep outsiders out and price the entry.''
@@ -140,16 +140,16 @@ conservation law — ''is also the instrument by which insiders keep outsiders o
 of excluded competent outsiders. ''This bill arrives whatever we build.''
 
 ''THE VAGANTE COLLAPSE.'' Promiscuous cross-consecration made *valid succession* ''cease to discriminate'' —
-nearly everyone could trace SOME path to a recognised root. **The DAG survived; its use as an admission
-test did not.** The churches fell back on the living body: *are you in communion with us NOW?*
+nearly everyone could trace SOME path to a recognised root. ''The DAG survived; its use as an admission''
+''test did not.'' The churches fell back on the living body: *are you in communion with us NOW?*
 
 ''EMPTINESS, NOT ATTACK.'' SPKI/SDSI got this right in 1996 and nobody built on it. `gpg` shipped a full
 trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: *"I never ever ever successfully
-used the WoT to validate a public key."* **The likeliest death is that nobody traverses the DAG and the
-system quietly degrades to TOFU.**
+used the WoT to validate a public key."* ''The likeliest death is that nobody traverses the DAG and the''
+''system quietly degrades to TOFU.''
 
-So the outline owes a **one-sentence answer** and makes only this claim: **the path buys ADMISSION FOR A
-STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in the field.**
+So the outline owes a ''one-sentence answer'' and makes only this claim: ''the path buys ADMISSION FOR A''
+''STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in the field.''
 
 <<~/ahu >>
 
@@ -158,21 +158,21 @@ STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in
 !! What Would Prove It ~ the experiments, none of them run
 
 # ''Re-derive Lemma 3 under an append-only signed vouch DAG'' (the attacker cannot rewrite an acquired
-   node's out-edges). Does the bound tighten, hold, or vanish? **Until this runs, C1 stands on someone
-   else's model.**
+   node's out-edges). Does the bound tighten, hold, or vanish? ''Until this runs, C1 stands on someone''
+''   else's model.''
 # ''Implement the one-pass fold and attack it.'' Build the DAG, mint sybils, measure the realised
    `benefit/cost` against `1/ε`. ''A single run either shows the bound or shows we misread it.''
 # ''Settle the dangling-sink policy'' (C2's refutation). Seed-return versus uniform — does either launder?
-# **Attempt the counterexample to C4.** A monotone, mass-conserving fold. **Failing to find one is not a
-   proof, and this outline must never say otherwise.**
-# **Measure the DISTORTION.** The same paper proves that absent fast mixing, **no PageRank variant achieves
-   low distortion'' — honest, distant kin starve. ''That is our false-rejection rate on Neo-Thracia, and it
-   is the price of C1.** How steep is it, in our topology, at our depths?
+# ''Attempt the counterexample to C4.'' A monotone, mass-conserving fold. ''Failing to find one is not a''
+''   proof, and this outline must never say otherwise.''
+# ''Measure the DISTORTION.'' The same paper proves that absent fast mixing, ''no PageRank variant achieves''
+''   low distortion'' — honest, distant kin starve. ''That is our false-rejection rate on Neo-Thracia, and it''
+''   is the price of C1.'' How steep is it, in our topology, at our depths?
 # ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
    the failure is invisible from inside and ''every gate we own would glow green through it.''
 
-<<~ confidence Provisional 5/20 >> **Nothing above has been attempted. This meme is an outline and a
-promise to try to break it, and it earns no higher register until (2) has run and failed to kill it.**
+<<~ confidence Provisional 5/20 >> ''Nothing above has been attempted. This meme is an outline and a''
+''promise to try to break it, and it earns no higher register until (2) has run and failed to kill it.''
 
 <<~/ahu >>
 

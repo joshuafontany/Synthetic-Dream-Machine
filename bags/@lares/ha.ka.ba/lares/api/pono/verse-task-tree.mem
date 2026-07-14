@@ -225,8 +225,8 @@ Epic surveyed UEFN creators (2024-2025) on two proposed Visual Verse interface m
 * ''Block-based'' (Scratch/Google Blockly style) — nested blocks for structured code
 * ''Node-graph'' (Blueprint-style) — data-flow and execution-flow nodes
 
-**Critical:** Any future Visual Verse node graph will represent **Verse execution
-semantics** (this task tree model, structured concurrency, effects), NOT Blueprint's
+''Critical:'' Any future Visual Verse node graph will represent ''Verse execution''
+''semantics'' (this task tree model, structured concurrency, effects), NOT Blueprint's
 event-driven graph. Blueprint nodes are event handlers and function calls in an
 unstructured imperative graph. Visual Verse would represent Verse's structured,
 effect-typed, concurrent expression tree — a fundamentally different ontology.

@@ -60,8 +60,8 @@ how we discovered the floor doesn't need a library at all: the TW5-NATIVE parser
 text always renders" IS the never-fail floor, TW5-native, no dep. parse5 had ZERO source callers (inert)
 and bloated the plugin ~252 KB. Removed: `lar-html5-tag.ts`, its test, and the `parse5` dep. The
 *lesson* stays in canon; the *scaffold* is gone. The original "HTML5-era behaviours" goal (modern
-attribute grammar, foreign content, custom elements) is re-homed to **improving `html.js` directly in
-the fork we now own** (a future feature-branch), NOT a parse5 sidecar (which couldn't touch the live
+attribute grammar, foreign content, custom elements) is re-homed to ''improving `html.js` directly in''
+''the fork we now own'' (a future feature-branch), NOT a parse5 sidecar (which couldn't touch the live
 rule anyway — it flattens `{{}}`/`<<>>`). The real graceful-on-a-gradient work landed at RENDER (the
 opt-in render+refresh boundary, fork `672ed9600`). The parse5 prose below is kept for the record only.
 
@@ -84,8 +84,8 @@ HTML and DESTROY widget invocation. parse5 governs the HTML LAYER, never the lay
   post-parse TRANSFORM (parse5 AST → TW5 `{type:"element",tag,attributes,children}` nodes), NOT a custom
   tree-adapter (version-stable + gives the sanitizer one clean walk). Plugin-override (`module-type`,
   last-wins, like `memetic-parser.ts`); isomorphic (fakeDocument only, no `window.document`).
-* ~~SECONDARY: swap the live rule's tag scanner for parse5's tokenizer~~ — **RETRACTED, proven unsafe
-  (2026-06-27).** TW5's `html`-rule attributes are THEMSELVES a superset of HTML5 attrs — they interleave
+* ~~SECONDARY: swap the live rule's tag scanner for parse5's tokenizer~~ — ''RETRACTED, proven unsafe''
+''  (2026-06-27).'' TW5's `html`-rule attributes are THEMSELVES a superset of HTML5 attrs — they interleave
   WIKITEXT into attribute VALUES: `attr={{transclusion}}` (indirect) · `attr={{{filter}}}` (filtered) ·
   `attr=<<macro>>` (macro) · bare `attr`→`value:"true"` (per `test-wikitext-parser.js`). parse5 (pure
   HTML5) has no `{{}}`/`<<>>` → it flattens `attr={{X}}` to `value:"{{X}}"`, BREAKING TW5's
@@ -181,8 +181,8 @@ parse()-body-bound aim was wrong — leave the parser alone.
 widget crashed the whole render tree. (Unknown widget → `"Undefined widget"` text `:634` was already
 graceful; the gap was *throwing* widgets.)
 
-**BUILT + TESTED — the per-widget render boundary (fork branch `feature/resilient-render-boundary`,
-fork a9dd2c92 / parent cf06adbf):** `renderChildren` now wraps each `children[i].render()` in try/catch
+''BUILT + TESTED — the per-widget render boundary (fork branch `feature/resilient-render-boundary`,''
+''fork a9dd2c92 / parent cf06adbf):'' `renderChildren` now wraps each `children[i].render()` in try/catch
 → a throw degrades to a graded `$error`/`tc-error` span, later siblings still render; `TranscludeRecursionError`
 re-thrown (transclude.js handles it). Validated against the fork's OWN suite: ''1528 specs, 0 failures''
 (1527 existing transparent + 1 new `test-resilient-render.js`). This is the render side of grade-on-a-
@@ -270,8 +270,8 @@ builds its parser registry at `wiki.js:1030` via `forEachModuleOfType("parser", 
 = module[f])` — **LAST-REGISTERED WINS** on a duplicate content-type, and plugin modules load AFTER
 core. So a plugin `module-type: parser` that does `exports["text/vnd.tiddlywiki"] = TolerantWikiParser`
 (subclass the core `WikiParser` — `wikiparser.js:494` — and run `parse()` inside a tolerant guard that
-catches throws + downgrades the malformed span to a graded `Error`/Text node) **OVERRIDES core for ALL
-standard wikitext** — identical to how `memetic-parser.ts:106` already registers ours for
+catches throws + downgrades the malformed span to a graded `Error`/Text node) ''OVERRIDES core for ALL''
+''standard wikitext'' — identical to how `memetic-parser.ts:106` already registers ours for
 `text/x-memetic-wikitext`, just aimed at the default type. Panic-mode-to-water at the WHOLE-parser
 boundary, zero `$:/core` edits. FINER per-rule recovery (recovery-sets in the block/inline rules) is
 ALSO plugin-overridable by the same last-wins rule — a `module-type: wikirule` exporting an existing

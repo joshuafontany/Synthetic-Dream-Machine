@@ -194,8 +194,8 @@ engine piece; the leaf has not-yet-held it). Symmetric structure, asymmetric cap
 (Ink & Switch) — the one reconciled stance.
 
 ''OP-AP6 — An agent holds its OWN did:key under a delegated, attenuated grant.''
-An AI agent mints its own keypair (a distinct DID) and receives a **scoped,
-short-lived capability** the operator delegates to it (device-admit-shaped: the
+An AI agent mints its own keypair (a distinct DID) and receives a ''scoped,''
+''short-lived capability'' the operator delegates to it (device-admit-shaped: the
 operator adds the agent as a member with attenuated access). The agent signs
 invocations with its own key; authority chains back to the operator and stays
 revocable. The agent never holds the operator's key and never impersonates — effective

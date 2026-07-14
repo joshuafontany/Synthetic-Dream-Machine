@@ -63,8 +63,8 @@ holds the line.
 
 ''SETUP wires ALL FIVE organs through ONE shared registry.'' The teardown command already resolves its
 targets explicitly, never ambient ([[palace-teardown|lar:///ha.ka.ba/lares/cli/commands/palace-teardown]] —
-`resolveTargets()`). Lift that enumerator into ONE shared `palaceOrgans()` — **one enumerator, two
-consumers**: `setup` and `teardown` read the SAME organ list, so the wire-up and the sweep can never
+`resolveTargets()`). Lift that enumerator into ONE shared `palaceOrgans()` — ''one enumerator, two''
+''consumers'': `setup` and `teardown` read the SAME organ list, so the wire-up and the sweep can never
 drift. The organ ladder wires dependency-ordered:
 
 <<~ranks organ mempalace ~ FIRST — the worldline-KG lives INSIDE it; everything keys to the verbatim drawer -> structurepalace ~ structure plane; any order after mempalace -> formpalace ~ form plane; any order after mempalace -> corpus-scratch ~ the ephemeral 4th instance home (~/.lares/.corpus/); any order -> meshpalace ~ LAST — federation rides over the local planes once they stand >>
@@ -85,8 +85,8 @@ ONE canon, and the audit trips when they drift.
 
 !! `lares corpus` ~ the ephemeral noun-verb tree
 
-<<~ confidence Synthesis-Canon 14/20 >> The lifecycle models three battle-proven idioms: **`docker run
---rm`** (run-then-reap), **nix-shell** ephemeral environments (a derived env that exists for the duration),
+<<~ confidence Synthesis-Canon 14/20 >> The lifecycle models three battle-proven idioms: ''`docker run''
+''--rm`'' (run-then-reap), ''nix-shell'' ephemeral environments (a derived env that exists for the duration),
 and ''mktemp + trap EXIT'' (the scratch dir guaranteed-swept on success OR error). The noun-verb tree:
 
 \procedure ~Verb(~Type:"" ~Params:"") ~Verb <<~Type>> <<~holds `[<~Params>]`>>
@@ -101,8 +101,8 @@ and ''mktemp + trap EXIT'' (the scratch dir guaranteed-swept on success OR error
 
 !!! The lifecycle law
 
-<<~ confidence Synthesis-Canon 14/20 >> Each ephemeral palace stands as a **scratch instance under
-`~/.lares/.corpus/<id>/`** — a **4th mempalace instance** beside the structurepalace (2nd) and formpalace (3rd)
+<<~ confidence Synthesis-Canon 14/20 >> Each ephemeral palace stands as a ''scratch instance under''
+''`~/.lares/.corpus/<id>/`'' — a ''4th mempalace instance'' beside the structurepalace (2nd) and formpalace (3rd)
 the teardown already names ([[palace-teardown|lar:///ha.ka.ba/lares/cli/commands/palace-teardown]]).
 Resolved-never-ambient, sweepable. Three holds bind it:
 
@@ -142,8 +142,8 @@ sensorium.
 
 !! The Bands ~ the aperture ladder IS a wavelet decomposition
 
-<<~ confidence Synthesis-Canon 13/20 >> **The aperture ladder reads as a wavelet multi-resolution
-analysis.** The five bands ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s]] — Pulse ·
+<<~ confidence Synthesis-Canon 13/20 >> ''The aperture ladder reads as a wavelet multi-resolution''
+''analysis.'' The five bands ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s]] — Pulse ·
 Beat · Measure · Arc · Theme) map ONE-FOR-ONE onto a 5-level decomposition. The bands cap rides three
 layers plus a gate:
 
@@ -234,8 +234,8 @@ keystone names ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-gram
 <<~ confidence Synthesis-Canon 13/20 >> The ''full sensorium model runs py/R'', instanced per-stream. The
 heavy numerics AND the live stream-processing both ride ''sidecars'' in the drawer_io NDJSON style
 (line-delimited JSON over stdio, the established sidecar contract); the FFZ-chronometer gate and the full
-telemetry/metadata stamping fire **py-side**, where the model reads. TS keeps the **pure-functor math
-floor** — the mesh numerics — consumed BY the py sensorium, and stands as the **coordinator** that drives
+telemetry/metadata stamping fire ''py-side'', where the model reads. TS keeps the ''pure-functor math''
+''floor'' — the mesh numerics — consumed BY the py sensorium, and stands as the ''coordinator'' that drives
 the py-side instance and offloads to it. The batch bands sensorium already runs py/R; the streaming layer
 ''twins it py-side'', never re-homed into TS.
 
@@ -372,8 +372,8 @@ claim MUST honor it:
 
 <<~ranks scorability crisp ~ code (PCFG) + Unicode (deterministic) — a single hard truth -> clean ~ meter + rhyme — published gold, narrow disagreement -> soft ~ RST + parallelism — theory-laden, moderate IAA, NO single truth >>
 
-<<~ confidence Synthesis-Canon 13/20 >> **Weight the headline on crisp + clean; read soft as confirmation,
-never proof.** The gold-anchor's anti-self-grace discipline
+<<~ confidence Synthesis-Canon 13/20 >> ''Weight the headline on crisp + clean; read soft as confirmation,''
+''never proof.'' The gold-anchor's anti-self-grace discipline
 ([[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor]]) bites HARDEST on the soft modes — a theory-laden
 gold the framework partly authored cannot witness the framework's own grace, so RST / parallelism recovery
 stands as corroboration only, the crisp golds carrying the load.
@@ -396,9 +396,9 @@ verdict.
 !! The Scale ~ tractable from the start (the machina scales, quality a dial)
 
 <<~ confidence Synthesis-Canon 13/20 >> The machina holds at corpus scale by a discipline recorded in full at
-[[scale-architecture|lar:///ha.ka.ba/lares/api/pono/scale-architecture]]: **never densify the whole corpus, never
-solve exactly what a Lipschitz-faithful proxy indexes, never eigensolve what a polynomial matrix-vector loop
-approximates.** Four carries hold it, and quality is a continuous DIAL (K · ε · L · nSurr), never a wall:
+[[scale-architecture|lar:///ha.ka.ba/lares/api/pono/scale-architecture]]: ''never densify the whole corpus, never''
+''solve exactly what a Lipschitz-faithful proxy indexes, never eigensolve what a polynomial matrix-vector loop''
+''approximates.'' Four carries hold it, and quality is a continuous DIAL (K · ε · L · nSurr), never a wall:
 
 <<~ranks scale structure-descent ~ exact tree-edit-distance is O(N²·n³) and NEVER needed — descend to DECKARD embeddings + pq-gram profiles; the Lipschitz bound (pq-gram sandwiches edit-distance) preserves the neighbor structure the DEM basins read -> fusion-escape ~ the consistency-radius (H⁰ check) is O(edges), CHEAP; the sheaf-Laplacian eigensolve is the threat; CHEBYSHEV is the escape — the heat-flow diffusion runs matrix-free, O(L·edges), never the eigendecomposition -> the-catma ~ a merge-and-reduce coreset tree keeps a bounded streaming summary, memory O(coreset) not O(corpus²) — scalable from the START, not retrofitted -> numerical-path ~ the signal-fraction confidence + closed-form π* + complementary-form guard, ENACTED in the sensorium settlePrecision (commit f50a35b8) >>
 

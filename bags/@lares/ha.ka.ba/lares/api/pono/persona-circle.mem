@@ -93,9 +93,9 @@ Pure inversion-of-control ''breaks at the multi-principal key-handover'': with e
 
 !! The Vault ~ the collector is a secret, never a group
 
-**Four blind domains converge (HD wallets · anonymous credentials · group-key agreement · petname/SDSI
-naming): the layer that knows "all these handles are me" is a SECRET, held private, and it must NEVER be a
-published group.**
+''Four blind domains converge (HD wallets · anonymous credentials · group-key agreement · petname/SDSI''
+''naming): the layer that knows "all these handles are me" is a SECRET, held private, and it must NEVER be a''
+''published group.''
 
 * ''HD wallets'' ship it as the Monero ''view key'' — one secret recognises a thousand unlinkable
   subaddresses, holds no spend authority, publishes no link.
@@ -115,12 +115,12 @@ party who holds the master table.
 
 ''A Vault IS a me-Circle, seen from the key layer.'' The me-Circle (#composition) names the collector as a
 *place in l-space where a human's chosen Personas overlap*; the Vault names the *same* collector as the
-private secret that derives them. Both hold the load-bearing property — **single-principal, never
-wholesale-disclosed, no global self.** The place-framing and the key-framing agree.
+private secret that derives them. Both hold the load-bearing property — ''single-principal, never''
+''wholesale-disclosed, no global self.'' The place-framing and the key-framing agree.
 
 ''A human holds MANY vaults / me-Circles, each a compartment, deliberately unlinkable even from each other.''
-Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — **separate seeds, separate namespaces**, and **NOTHING
-stands above them that links them** (a layer above the vaults would BE the Nymwars root). A single me-Circle
+Senior-Engineer-Josh ⊥ Guru-Josh ⊥ Telarus-KSC — ''separate seeds, separate namespaces'', and ''NOTHING''
+''stands above them that links them'' (a layer above the vaults would BE the Nymwars root). A single me-Circle
 over *all* a human's handles IS that root — so a me-Circle collects the handles of ONE compartment, and the
 human keeps as many compartments as their life demands. The vault stands at the top; the meat-brain holds the
 only join between compartments, and it never rides any wire.
@@ -137,8 +137,8 @@ enforce one-nym-per-scope, cannot bind a credential to the seed. The sharper pri
 ''scope-exclusive pseudonyms'' `nym = PRF_s(scope)` proven in zero-knowledge (Dodis–Yampolskiy VRF, or
 Hash-DH / ISO 20008-2), bound to the same committed master secret. Keep SLIP-0010 as the *local* tree; let the
 NETWORK-facing nym be the ZK-proven scope pseudonym. Then verifiable · per-scope sybil-bounded ·
-credential-linkable — the three things bare derivation cannot assert — and **the vault falls out for free,
-because it IS the committed secret.**
+credential-linkable — the three things bare derivation cannot assert — and ''the vault falls out for free,''
+''because it IS the committed secret.''
 
 <<~/ahu >>
 

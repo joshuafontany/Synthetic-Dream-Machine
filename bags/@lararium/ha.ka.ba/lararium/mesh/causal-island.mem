@@ -80,8 +80,8 @@ share ''mutable state'' or merely a ''substrate''.
 
 ''Two boundaries, both MUST hold.'' ''Vessel ↔ vessel'' reconciles via CRDT over
 a transport — each vessel its own replica; the loopback WS between two local
-processes counts as a real Tier-3 boundary (the V3 auth gate guards it). **Island
-↔ island within one vessel** passes structured-clone messages over a MessagePort —
+processes counts as a real Tier-3 boundary (the V3 auth gate guards it). ''Island''
+''↔ island within one vessel'' passes structured-clone messages over a MessagePort —
 Worker threads never share a heap (the no-VM-on-main law,
 [[project_no_vm_on_main_thread]]).
 

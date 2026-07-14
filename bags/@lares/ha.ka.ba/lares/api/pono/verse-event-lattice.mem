@@ -25,8 +25,8 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-event-lattice"
 ! Verse Event Lattice
 
 UEFN Verse 5.6 defines a four-type event lattice that maps directly onto the
-Lararium device model. The core asymmetry — **user code fires events; the engine
-vends listens** — is the design invariant that separates kukali (widget dispatch)
+Lararium device model. The core asymmetry — ''user code fires events; the engine''
+''vends listens'' — is the design invariant that separates kukali (widget dispatch)
 from the projection bus (ReactionEngine subscription).
 
 ''Source authority:'' Verse Language Reference (Epic Games, 2024–2025); local-first.fm

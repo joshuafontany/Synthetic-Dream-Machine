@@ -36,9 +36,9 @@ without re-derivation. The focused depth lives in the sibling memes
 (`lar-telemetry`, `agent-worldline`, `lararium-memory`); this is the keel that
 holds them together.
 
-> **Capture keeps the journey; annotation dresses it in gradient; the multi-agent
-> layer keeps the spawn-graph legible; the ephemeral launcher keeps the noise out
-> — and the verbatim drawer is the one durable home for all of it.**
+> ''Capture keeps the journey; annotation dresses it in gradient; the multi-agent''
+''> layer keeps the spawn-graph legible; the ephemeral launcher keeps the noise out''
+''> — and the verbatim drawer is the one durable home for all of it.''
 
 <<~/ahu >>
 
@@ -73,8 +73,8 @@ behind the causal-island shore).
 The one home for all four: the ''mempalace drawer'' (verbatim body + `lar_*`
 tension). No parallel tiddler store; a `<<~ ui >>` query layer reads the drawers
 later. This sits in the memory topology as the ''PLACE register'' (verbatim,
-hearth-bound, never federates); the distilled bearings cross to the **ley-line
-quine** only as they earn `meme` (`lararium-memory`).
+hearth-bound, never federates); the distilled bearings cross to the ''ley-line''
+''quine'' only as they earn `meme` (`lararium-memory`).
 
 <<~/ahu >>
 
@@ -110,8 +110,8 @@ flushes; felt cadence addresses (lar:///ha.ka.ba/lararium/mesh/ffz-clock).
 ''The flush gate ~ backpressure, configurable.'' The local tick is the CHECK; the gate
 decides whether to drain. A ''lar-URI-tagged system config tiddler'' (TW5-wikitext-style,
 the operator-config plane — a cascade is the upgrade path if multi-condition gating ever
-arises) holds it. Pono defaults for our scale: flush when **queue-depth ≥ 32 OR ≥ 2000 ms
-since the last flush** (whichever crests first) — batches up to 32 records, bounds
+arises) holds it. Pono defaults for our scale: flush when ''queue-depth ≥ 32 OR ≥ 2000 ms''
+''since the last flush'' (whichever crests first) — batches up to 32 records, bounds
 recall-latency to ≤ 2 s. mempalace = the FILER (RFC-002 `mempalace-source-lares`
 adapter), never the miner.
 
@@ -136,8 +136,8 @@ the next wave). ALL FOUR domains named ONE missing joint, plus four refinements:
 ceiling (`maxDepth` + spill-to-reserve), exponential full-jitter backoff + retry-cap →
 dead-letter, the writer-liveness flush timeout, and the two-tier RRP←reserve refill.
 Surfaced counters (spilled · dead-lettered) — never silent. Reserve + quarantine durability
-= the daemon's injected WAL, **resolving the held queue-durability dial: bounded memory +
-disk reserve, not one or the other.** **In scope + enacted (2026-06-26):** `deriveGate`
+= the daemon's injected WAL, ''resolving the held queue-durability dial: bounded memory +''
+''disk reserve, not one or the other.'' ''In scope + enacted (2026-06-26):'' `deriveGate`
 (EBQ + Little's-Law — depth = √(2λS/H), maxWaitMs = the recall-latency SLO, maxDepth =
 surge headroom) and `adaptGate` (the homeostatic servo step toward a latency set-point)
 land in `lararium-mesh/src/gate-tuning.ts` — the daemon measures S/H/λ + observed latency
@@ -152,8 +152,8 @@ Hering-Breuer safety valve).
 
 !! The Isomorphic Telemetry-VM ~ one worker, capability-shaped seams (2026-06-26)
 
-**The telemetry-VM runs in EVERY vessel — the same pure worker, specialized by injected
-seams.** `makeCaptureEngine` (lararium-mesh, pure: zero substrate imports) composes the
+''The telemetry-VM runs in EVERY vessel — the same pure worker, specialized by injected''
+''seams.'' `makeCaptureEngine` (lararium-mesh, pure: zero substrate imports) composes the
 capture core from three seams a vessel supplies: **`CaptureFlush`** (ONE verb — drain a
 batch → count filed), **`CaptureReserve`'' (the durable WAL twin), ''`CaptureAnnotate`**
 (turn → lar_*). What stays invariant is CAPTURE; what varies is the memory-HOME, shaped by
@@ -236,8 +236,8 @@ parent_edge_id, from_agent, to_agent, task, result_ref, status, t_spawned,
 t_returned }` → KG triples `(parent)—spawned→(child)`, `(child)—actedOnBehalfOf→
 (parent)`, `(output)—wasGeneratedBy→(task)`, each `[t_spawned,t_returned)`.
 
-**Identity, reframed (operator ruling):** ephemeral spirits are **nameless #has-
-stack entities with pet-names** — recall rides **semantic search over the verbatim**
+''Identity, reframed (operator ruling):'' ephemeral spirits are ''nameless #has-''
+''stack entities with pet-names'' — recall rides ''semantic search over the verbatim''
 (capabilities live in the content), so a `#has` tag is optional enrichment, never a
 deterministic gate. Persistent named actors keep proper-name wings.
 
@@ -252,8 +252,8 @@ multi-agent spec.
 !! Layer 4 ~ Ephemeral (what to never keep)
 
 ''Capture is ON by default; ephemeral work is LAUNCHED isolated, never gated.''
-`lares ephemeral <task>` births a swarm (one-or-more tasked spirits) in a **blind
-temp dir outside every harvested path** — ephemeral *by construction*: never mined,
+`lares ephemeral <task>` births a swarm (one-or-more tasked spirits) in a ''blind''
+''temp dir outside every harvested path'' — ephemeral *by construction*: never mined,
 nothing to exclude. The reason: the operator's thousands of blind judge-panel Q&A
 flows must leave no trace.
 

@@ -100,8 +100,8 @@ mid-paragraph — has a ''fine'' span-band (Pulse: its own bytes are few) yet ''
 skeletal anchor (the paragraph, Measure or Arc). Read by the outer band alone, it would be forced UP to the
 paragraph's band and its fineness lost. The two-axes model refuses that: the stratum keeps its own
 span-band (Pulse) on the span axis AND its channel (red) on the channel axis, and the association edge
-records that it **crosses** bands. A fine control-signal on a coarse anchor reads as a **cross-band
-signal**, never flattened to the outer band.
+records that it ''crosses'' bands. A fine control-signal on a coarse anchor reads as a ''cross-band''
+''signal'', never flattened to the outer band.
 
 <<~/ahu >>
 

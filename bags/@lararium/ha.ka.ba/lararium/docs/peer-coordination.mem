@@ -37,8 +37,8 @@ application concern — wrong layer.
 
 !! The UEFN Lesson: Author-Time Identity
 
-UEFN/Verse handles island-level shared state through **device identity assigned
-at author-time (edit-time), not at boot-time**. Devices are placed in the island
+UEFN/Verse handles island-level shared state through ''device identity assigned''
+''at author-time (edit-time), not at boot-time''. Devices are placed in the island
 editor, receive stable UUIDs from the editor, and those IDs are checked into the
 project. The island file IS the rendezvous — runtime code never calls "create new
 device"; it calls "find device at this author-assigned ID."
@@ -122,10 +122,10 @@ control. Correction from prior notes:
   and advertise which docs they hold capability for — the catalog problem dissolves
   into capability propagation.
 
-In a Keyhive-integrated system: **only the island author creates wiki docs; all
-others receive a "add member" signed op referencing their Ed25519 key, then join
-via `repo.find(url)` where url was exchanged out-of-band (invitation link, DID
-service endpoint, or social graph record)**. The `sharePolicy` stub
+In a Keyhive-integrated system: ''only the island author creates wiki docs; all''
+''others receive a "add member" signed op referencing their Ed25519 key, then join''
+''via `repo.find(url)` where url was exchanged out-of-band (invitation link, DID''
+''service endpoint, or social graph record)''. The `sharePolicy` stub
 (`async () => true`) is replaced by a Keyhive capability check.
 
 Until Keyhive stabilizes (currently experimental/Rust-only): `sharePolicy` remains
@@ -184,8 +184,8 @@ if (!rootDocUrl) {
 const root = repo.find(rootDocUrl)
 ```
 
-`repo.import(binary, docId)` can merge orphan docs but **only if they share
-history** — the docs explicitly warn against assigning the same ID to documents
+`repo.import(binary, docId)` can merge orphan docs but ''only if they share''
+''history'' — the docs explicitly warn against assigning the same ID to documents
 that never shared any history. This confirms no native content-addressed
 rendezvous exists; the island file approach is the correct solution.
 

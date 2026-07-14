@@ -133,8 +133,8 @@ as one string — an absent slot just stays unwritten). It hands `~Params` to th
 The Wand-row wears all five; the Arcana-row rides the constructor's default and
 needs no params — the open world reads each unwritten slot absent. Every `<<~`
 sigil binds its first param tight — `<<~Mu`, `<<~holds`, no space — the sigil
-redirecting to its first word. The rule, spoken once for all thirteen: **one
-constructor per family sets the verb; each row invokes the named family sigil.**
+redirecting to its first word. The rule, spoken once for all thirteen: ''one''
+''constructor per family sets the verb; each row invokes the named family sigil.''
 A stack too wide for one line wears the block form — `<<~holds >>`, one
 `family/member` per line, `<<~/holds >>` — the same set, the same canonical bytes.
 

@@ -32,13 +32,13 @@ the same machine, yet every one-shot command opened a fresh WebSocket, spun a ne
 Automerge leaf replica, ran the V3 auth gate, did a full CRDT ''sync-on-connect'',
 then disconnected — a ''measured ~0.4–0.5s'' connect+sync tax per command (the
 oft-cited "3s" named the connect TIMEOUT ceiling, not the cost — corrected on first
-live measurement). The diagnosis (Conduit, cited): **the tax
-never came from transport — it came from replica-spin + sync-on-connect misplaced
-onto a co-located thin client.** Move sync to the daemon's *peer* boundary; give the CLI a
+live measurement). The diagnosis (Conduit, cited): ''the tax''
+''never came from transport — it came from replica-spin + sync-on-connect misplaced''
+''onto a co-located thin client.'' Move sync to the daemon's *peer* boundary; give the CLI a
 fast local ''submit/await'' channel. Every web3 invariant survives.
 
-> **The daemon holds the warm replica and syncs the mesh; the CLI just hands it a
-> capability and awaits a receipt — over a socket, not a sync.**
+> ''The daemon holds the warm replica and syncs the mesh; the CLI just hands it a''
+''> capability and awaits a receipt — over a socket, not a sync.''
 
 <<~/ahu >>
 
@@ -48,15 +48,15 @@ fast local ''submit/await'' channel. Every web3 invariant survives.
 
 <<~ranks bind co-located ~ Unix-domain socket (the docker.sock / tailscale-LocalAPI / gopls thin-client→warm-daemon shape); same machine = share the substrate -> remote ~ WebSocket + leaf-vessel + full sync; crossing the mesh = a real island boundary, full Ed25519 V3 gate >>
 
-**The CLI holds ONE end of that ladder.** A remote peer speaks WS to the **daemon's own
-relay** — the browser vessel does exactly this. The CLI carries no WS and no Automerge:
+''The CLI holds ONE end of that ladder.'' A remote peer speaks WS to the ''daemon's own''
+''relay'' — the browser vessel does exactly this. The CLI carries no WS and no Automerge:
 a leaf `Repo` on loopback would pay a sync handshake to learn what the daemon, holding
 the canonical replica one socket away, already knows. `lares` speaks the sock or it
 speaks nothing.
 
 The thin-client→warm-daemon pattern marks the field's convergence (docker CLI→dockerd,
-tailscale CLI→tailscaled HTTP-over-UDS, gopls daemon). The CLI carries **no
-networking/state/replica** — it forwards a command and reads a result. UDS connect
+tailscale CLI→tailscaled HTTP-over-UDS, gopls daemon). The CLI carries ''no''
+''networking/state/replica'' — it forwards a command and reads a result. UDS connect
 performs a kernel-local copy (µs), not a TCP/TLS/WS upgrade. Windows: named pipe behind
 one client abstraction (tailscale's shape).
 
@@ -75,8 +75,8 @@ The load-bearing seam (UCAN/ucanto proves it battle-tested):
 <<~Layer Record "the CRDT outcome ~ the persisted RECEIPT; idempotent · re-queryable · exactly-once; spec leaves receipt persistence to the impl — our outcome tiddler IS that home" >>
 <<~Layer Three >>
 
-Transport speed and record durability stop fighting because **they never shared one
-concern.** UDS carries the invocation; the outcome lands as a CRDT change in
+Transport speed and record durability stop fighting because ''they never shared one''
+''concern.'' UDS carries the invocation; the outcome lands as a CRDT change in
 the daemon's warm replica (then syncs to mesh on the daemon's own schedule); the
 CLI awaits it via the socket response (or an ephemeral/notify), ''not a full sync''.
 

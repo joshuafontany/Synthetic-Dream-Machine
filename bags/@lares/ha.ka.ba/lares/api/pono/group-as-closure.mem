@@ -72,8 +72,8 @@ as a live, signed, decaying gesture, not a row in a table.
 !! Quorum — a Composed Threshold Subject
 
 A quorum names no primitive. A quorum ''composes'' as a threshold subject — SPKI's
-`(k-of-n s1 s2 … sn)` — where each of K members **signs independently down their own
-chain**, and the verifier counts K satisfied chains. The threshold subject stands as one
+`(k-of-n s1 s2 … sn)` — where each of K members ''signs independently down their own''
+''chain'', and the verifier counts K satisfied chains. The threshold subject stands as one
 more principal in the closure, addressable like any member.
 
 Three properties ride this composition load-bearing:

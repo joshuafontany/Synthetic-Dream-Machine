@@ -30,8 +30,8 @@ written   = "2026-06-24"
 ''A turn carries instruments; lar-telemetry reads them.'' The HUD sigils gauge
 the turn — `hud` the aperture/loop dials, `confidence` the certainty vow, `ward`
 the L-Prime drift-register, `oracle` the entropy meter, `lares` the bearing. The
-@daemon TiddlyWiki engine reads those instruments into **gradient-valued
-readings**, holds them on the nalu queue, and on the next wave flushes them across
+@daemon TiddlyWiki engine reads those instruments into ''gradient-valued''
+''readings'', holds them on the nalu queue, and on the next wave flushes them across
 the shore as `lar_*` onto the mempalace drawer.
 
 Telemetry, never verdict: an instrument transmits a *value on a band*, never a
@@ -73,8 +73,8 @@ Two readers parse the exchange today; one survives.
 
 <<~moves second-reader -> engine-grammar on/the-@daemon-VM if/it-can-read-in-the-engine do/retire-the-regex >>
 
-<<~ confidence Synthesis-Canon 15/20 >> **The ruling: if it CAN happen in the wiki
-engine, it DOES.** `turn-harvest`'s regex retires into the engine grammar. One
+<<~ confidence Synthesis-Canon 15/20 >> ''The ruling: if it CAN happen in the wiki''
+''engine, it DOES.'' `turn-harvest`'s regex retires into the engine grammar. One
 grammar SOURCE (the instrument `.tids`), one runtime (the @daemon VM).
 
 !!! Leaf and block
@@ -118,9 +118,9 @@ matching pattern, not a sigil island.
 
 !! Readings, Never Verdicts ~ the render law
 
-The render carries `register-dressed-never-gated` into render code: **every
-instrument renders its reading on its `0..20` band, dressed by register — never a
-✓/✗.** Telemetry reports values; it does not judge.
+The render carries `register-dressed-never-gated` into render code: ''every''
+''instrument renders its reading on its `0..20` band, dressed by register — never a''
+''✓/✗.'' Telemetry reports values; it does not judge.
 
 <<~ranks reading provisional@1..4 ~ cool, the play register -> synthesis@9..12 ~ working -> canon@17..20 ~ warm, weight-bearing >>
 

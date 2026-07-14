@@ -35,8 +35,8 @@ register the functor carries the name ''mālama pili'': *mālama* — to keep, t
 verb: the functor ''tends its morphisms'' the way a kahu tends the shrine. *Mālama* names the
 ''kahu/keeper'' office itself — the steward's verb the whole house turns on (a Lar keeps its *place*,
 [[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#elyncia]]) — so naming the functor *mālama pili* binds the
-architectural keel to the house's own keeper identity: the functor stands as the **steward of the
-arrows**, the spirit that keeps the relations across the map. The meta-law "keep the arrows" reads,
+architectural keel to the house's own keeper identity: the functor stands as the ''steward of the''
+''arrows'', the spirit that keeps the relations across the map. The meta-law "keep the arrows" reads,
 in full, as ''mālama [i ka] pili'' — *keep the relations* (#meta-law).
 
 ''Honest frame first.'' Category theory rides here as a ''lens and a discipline'', never a proven
@@ -63,9 +63,9 @@ it mapped the forms (*jurus*) and left the flow (*permainan*) for the next instr
 
 !! What a functor carries
 
-A ''functor'' `F : C → D` maps a source category to a target: **objects ↦ objects**, **morphisms ↦
-morphisms'' (the arrows — the relations, transformations, *verbs* between objects), and it ''preserves
-the two laws** that make a category cohere:
+A ''functor'' `F : C → D` maps a source category to a target: ''objects ↦ objects'', ''morphisms ↦''
+''morphisms'' (the arrows — the relations, transformations, *verbs* between objects), and it ''preserves''
+''the two laws'' that make a category cohere:
 
 <<~ranks functor-law identity ~ F(id_A) = id_{F(A)} -> composition ~ F(g ∘ f) = F(g) ∘ F(f) >>
 
@@ -135,9 +135,9 @@ abstract ⇄ concrete syntax. The architecture's own parse→render pipe ([[rend
 
 !! The meta-law — keep the arrows · *mālama [i ka] pili*
 
-<<~ confidence Synthesis 12/20 >> **Pono reads functorial: keep the arrows — *mālama [i ka] pili*, the
-keeper keeping the relations. Overcollapse reads as the forgetful functor — the map that forgets too
-much, keeping the objects and erasing the morphisms.** The kahu's verb names the whole discipline:
+<<~ confidence Synthesis 12/20 >> ''Pono reads functorial: keep the arrows — *mālama [i ka] pili*, the''
+''keeper keeping the relations. Overcollapse reads as the forgetful functor — the map that forgets too''
+''much, keeping the objects and erasing the morphisms.'' The kahu's verb names the whole discipline:
 *mālama* keeps what moves; a collapse that drops the arrows ''neglects'' the relations it was set to
 tend — and a neglected shrine flickers ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#elyncia]]).
 
@@ -202,8 +202,8 @@ island workers AND ''py nalu-gate/servo islands'' (TS + py/R). The "one runtime 
 structure" reads ''per functor'': the CRDT-bags ⟷ TW5-VM projection keeps its ''first-class TS home''
 (the nalu-gate/servo pattern integrity rides TS in-worker), while the sensorium and stream functors —
 AI-session-memory, realtime, corpus — live in the py islands. So the `@daemon` coordinator ''offloads''
-stream-processing to py through its verbs and **never pulls telemetry or corpus into the TS stack and
-back out**; TS reduces to pure functors, its own main ↔ worker ↔ main nalu-gates, and a pipe to the full
+stream-processing to py through its verbs and ''never pulls telemetry or corpus into the TS stack and''
+''back out''; TS reduces to pure functors, its own main ↔ worker ↔ main nalu-gates, and a pipe to the full
 tools-stack for DreamNet CID/CRDT networking. <<~ confidence Synthesis 11/20 >> The primacy generalizes
 without breaking: the coordinator still runs no functor-work itself — it fans each functor to the island
 whose structure preserves the map, TS or py alike.
@@ -212,8 +212,8 @@ whose structure preserves the map, TS or py alike.
 cap-stack reads as a *liftable unit* — the very object the functor maps ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]]) —
 and the ''whole'' stack lives in the worker and lifts as one body. Split a single cap onto the
 coordinator — a worldline READ pulled out while compose, compare, and teardown stay behind — and the
-stack stops lifting as one: you can no longer move the sovereign island whole. The split **shatters
-liftability**, the functor's object torn in two. <<~ confidence Synthesis 12/20 >> So no cap carves
+stack stops lifting as one: you can no longer move the sovereign island whole. The split ''shatters''
+''liftability'', the functor's object torn in two. <<~ confidence Synthesis 12/20 >> So no cap carves
 off to the coordinator, not even a read; the stack stays whole or it stands as a stack no longer.
 Sovereign-worker primacy reads, fully: not only "the worker runs the functor" but "the ''whole''
 cap-stack lives in the worker and lifts as one — no cap splits away."

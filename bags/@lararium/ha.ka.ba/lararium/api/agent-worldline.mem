@@ -100,8 +100,8 @@ frameworks throw away and the memory must keep. It stacks ''three layers'':
 
 !!! Reify the edge as a node
 
-**The fork resolves: reify the spawn/handoff as its own NODE, project a direct edge
-for traversal.** Three standards converge (PROV's qualified pattern, RDF-star quoted
+''The fork resolves: reify the spawn/handoff as its own NODE, project a direct edge''
+''for traversal.'' Three standards converge (PROV's qualified pattern, RDF-star quoted
 triples, Neo4j's intermediate-node guidance). Promote a relation to a node when ANY
 holds; else keep a property-edge:
 
@@ -131,12 +131,12 @@ whole spawn-tree.
 !!! The same DAG IS the worldline's happened-before
 
 ''One structure, two readings.'' The reified edge-DAG answers *whose-act* (attribution)
-AND *what-preceded-what* (causal order): a `spawned` edge means **parent
-happened-before child**; two children of one parent with **no edge between them** read
+AND *what-preceded-what* (causal order): a `spawned` edge means ''parent''
+''happened-before child''; two children of one parent with ''no edge between them'' read
 ''concurrent'' (the Lightcone "elsewhere"); the ''handback'' edge closes the
 valid-interval — the twin-reunion, the worldline's one sync point. So the worldline's
-partial causal order needs no separate structure: it **projects from the provenance
-DAG** — the edge-DAG IS the worldline's happened-before (FfzClock carries only its rhythmic grain: #time).
+partial causal order needs no separate structure: it ''projects from the provenance''
+''DAG'' — the edge-DAG IS the worldline's happened-before (FfzClock carries only its rhythmic grain: #time).
 
 ''The rhizome widens the reading'' (2026-06-29): the spawn (`prov:Delegation`) edge is
 not the only happened-before — a mid-flight ''injection'' (`prov:Communication` — operator
@@ -195,8 +195,8 @@ separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
 !!! The FfzClock as a cached projection ~ the facet a palace reads (2026-06-29)
 
-**A form-palace drawer's worldline-temporal facet PROJECTS off this DAG; it never
-rules.** When the living-grammar palace stamps a drawer's `lar_ffz` and reads the
+''A form-palace drawer's worldline-temporal facet PROJECTS off this DAG; it never''
+''rules.'' When the living-grammar palace stamps a drawer's `lar_ffz` and reads the
 worldline position across its collection ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#ffz-binding]]), that
 facet stands as a ''CACHED PROJECTION'' of the per-handle FfzClock (the grain) over the
 reified edge-DAG (the order) — a materialized view, re-derivable from the worldline,
@@ -234,16 +234,16 @@ base already carries.
 it stands ''tombstoned and kept'', stamped so recall weights it down (the eidetic palace
 remembers the road not taken). Four traditions converge — Datomic retraction · PROV
 `wasInvalidatedBy` · git reflog (dangling, not deleted) · bitemporal valid-close — and the
-base enacts it already: **mempalace `kg_invalidate` closes a triple's `valid_to`
-append-only** (history preserved, never dropped), and the L7 tunnel/hallway dynamics decay
+base enacts it already: ''mempalace `kg_invalidate` closes a triple's `valid_to`''
+''append-only'' (history preserved, never dropped), and the L7 tunnel/hallway dynamics decay
 salience to a floor but ''never to zero''. *Gap held:* `as_of` filters ''valid-time only'';
 a true belief-rewind (transaction-time — "what did the palace believe at T") is net-new
 atop `extracted_at`.
 
 ''Fork = concurrency the DAG already holds.'' A session-fork is topologically a
 sibling-spawn — common ancestor, two concurrent frontiers, no edge between — so it needs
-**no new graph structure**. Derived palace data separates two ways: **content-address the
-drawer by change-hash** (shared-prefix dedups, divergent turns mint distinct CIDs — the
+''no new graph structure''. Derived palace data separates two ways: ''content-address the''
+''drawer by change-hash'' (shared-prefix dedups, divergent turns mint distinct CIDs — the
 form-palace already keys by `verbatim_sha`), or ''fork-by-palace-path'' (the daemon is
 keyed per `palace_key = sha256(path)` — each fork its own queue/token/KG/tunnels). And the
 ''handle gains a branch-frontier component'' so same-session forks stop colliding on the
@@ -256,28 +256,28 @@ injection lands a happened-before edge ''mid-execution'': a merge-point that is 
 handback. So '''merge-only-at-handback' generalizes to 'merge-where-messages-land''' — the
 vector-clock law (a causal clock merges on every message-receive, not only at a join); the
 sealed-delegation rule was the special case where the only messages were spawn + return.
-The **edge-DAG absorbs this** (causal stays on the structure); the **FfzClock stays purely
-rhythmic** — the PATH-B cut already in this meme, now confirmed not overturned: causal never
+The ''edge-DAG absorbs this'' (causal stays on the structure); the ''FfzClock stays purely''
+''rhythmic'' — the PATH-B cut already in this meme, now confirmed not overturned: causal never
 rode the clock, so the rhizome adds no burden to it. ''The forks, now operator-cut (2026-06-29):''
 
 <<~ranks rhizome-cut C-turn-DAG ~ handoffs key to the TURN-DAG node (survives rewind/fork) — operator-cut -> D-full-ticks ~ EVERY injection ticks+merges (full vector-clock fidelity); we cannot yet reliably detect a bearing/vector-change, so full ticks beat a lossy bearing-test — operator-cut -> E-operator-root ~ injected siblings share their injector as a COMMON CAUSE, and the OPERATOR is the root (the operator initiates every flow today; chron / other triggers MAY add non-operator roots later — held open) — operator-cut >>
 
-*Mechanism (the build path):* the worldline's merge-where-messages-land rides the **edge-DAG
-stamped into the mempalace'' — the ''chat-session store''. ''Automerge does NOT hold
-chat-session data**; it serves only the DreamNet mesh + the operator's wiki-bags (which
+*Mechanism (the build path):* the worldline's merge-where-messages-land rides the ''edge-DAG''
+''stamped into the mempalace'' — the ''chat-session store''. ''Automerge does NOT hold''
+''chat-session data''; it serves only the DreamNet mesh + the operator's wiki-bags (which
 project to disk as markdown memes), so it never touches this plane (the two-domain cut,
 sharpened). A `prov:Communication` edge stamps at the injection-point, keyed turn-DAG;
 ''Interval Tree Clocks'' (fork = spawn · event = inject · join = handback) model the
 worldline clock where plain vector-clocks bloat under spawning agents — vendor it. The
 cap-handoff rides **`@endo/captp` over the daemon UDS** (`@endo/far` = the attenuated
-reference). **Migration is cheap:** the FFZ/DAG over past sessions is a **re-derivable
-projection** — nuke-and-pave + re-harvest from the transcripts (the source of truth), so no
-forward-retrofit is owed (this answers the kept retrofit-migration dissent). And **install
-must ingest a complex pre-existing chat-store** (e.g. MemPalace's own populated palace), not
+reference). ''Migration is cheap:'' the FFZ/DAG over past sessions is a ''re-derivable''
+''projection'' — nuke-and-pave + re-harvest from the transcripts (the source of truth), so no
+forward-retrofit is owed (this answers the kept retrofit-migration dissent). And ''install''
+''must ingest a complex pre-existing chat-store'' (e.g. MemPalace's own populated palace), not
 only a fresh one.
 
-So the canon's earlier 'twin-reunion, the worldline's one sync point' widens: **handback is
-one merge among many; the rhizome merges wherever a message lands.** The donation boundary
+So the canon's earlier 'twin-reunion, the worldline's one sync point' widens: ''handback is''
+''one merge among many; the rhizome merges wherever a message lands.'' The donation boundary
 holds — these models ride *our* @daemon atop the base's bi-temporal KG (`kg_invalidate`) +
 content-addressed tunnels; MemPalace's trunk (entity-first real-name registry, single-node
 "local-first") stays a different ontology — faithful upstream gets only backend/adapters/fixes.
@@ -303,9 +303,9 @@ already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ti
 ''Capture is ON by default; ephemeral work is LAUNCHED isolated, never gated''
 (operator ruling, 2026-06-24). Main session AND all subagents harvest by default — and
 we do NOT gate existing capture by a session toggle or a derived #has (not
-deterministically enforceable across handoffs). Instead, **`lares ephemeral <task>`
-LAUNCHES the task into an ephemeral swarm born in a blind temp dir — outside every
-harvested path**. The run is ephemeral *by construction*: its verbatim never enters
+deterministically enforceable across handoffs). Instead, ''`lares ephemeral <task>`''
+''LAUNCHES the task into an ephemeral swarm born in a blind temp dir — outside every''
+''harvested path''. The run is ephemeral *by construction*: its verbatim never enters
 `~/.claude/projects` or any mined wing. The dir persists for inspection by default;
 `--cleanup` disposes (off by default). The lived reason: the operator drives
 ''thousands of blind multi-model Q&A panels'' through `gh copilot` — pure noise;
@@ -358,8 +358,8 @@ edge, not a signed chain; sign only at the hostile boundary.
 
 ''The homes already stand'': the KG triple carries temporal validity + provenance
 fields (extend with `agent_handle`); diary/drawer metadata extends
-backward-compatibly; the v3 content-addressed id-recipe holds; the **FfzClock library
-ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere yet.
+backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock library''
+''ships complete'' (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere yet.
 
 ''Build sequence — the handle first; the edge and the rhythm both ride it:''
 

@@ -114,8 +114,8 @@ queue handles both.
 
 A scout (the Substrate-Diver) flagged an apparent collision: ''N-1'' holds ONE queue
 across all bags, *per-bag accumulators do not exist* — yet `projection-nalu`
-(`lar:///ha.ka.ba/lararium/api/projection-nalu`) stands a `KeyedCoalesceGate` **per
-carrier-root** and **per bag**. Both stand; they sit at OPPOSITE ENDS of the one shape
+(`lar:///ha.ka.ba/lararium/api/projection-nalu`) stands a `KeyedCoalesceGate` ''per''
+''carrier-root'' and ''per bag''. Both stand; they sit at OPPOSITE ENDS of the one shape
 `SOURCE → gate → SINK`, never the same layer.
 
 <<~ranks seam UPSTREAM:membrane-coalesce-per-key -> DOWNSTREAM:engine-unified-queue-per-frame >>
@@ -137,8 +137,8 @@ carrier-root** and **per bag**. Both stand; they sit at OPPOSITE ENDS of the one
 So N-1's "no per-bag accumulators" governs the DELIVERY runtime — the engine refuses to
 re-shard its queue per bag; it stays one queue, one transact. The per-key coalesce gates
 do not contradict it, because they live UPSTREAM in the membrane, shaping the stream BEFORE
-it reaches the queue. **The engine carries the runtime; the gate-families carry the
-physics it enacts** (`role = capability ≠ platform` — the queue is the fixed frame-aligned
+it reaches the queue. ''The engine carries the runtime; the gate-families carry the''
+''physics it enacts'' (`role = capability ≠ platform` — the queue is the fixed frame-aligned
 SINK-side batcher, the membrane gates the injected per-source dedup). The two compose
 end-to-end: coalesce-per-key (drop intermediates) → unified queue (preserve order) → one
 transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the membrane gates

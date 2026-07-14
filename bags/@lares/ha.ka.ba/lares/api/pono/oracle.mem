@@ -130,8 +130,8 @@ false-flags.
 * ''die ⚀--⚅ U+2680--U+2685'' — Miscellaneous Symbols, monochrome text by
   default; no variation selector (a stray `U+FE0E` there risks a tofu box).
 
-No glyph in the structural set carries emoji presentation, so **no `U+FE0E`
-text-selector rides anywhere** in the sigil. Only the **random tail** roams free:
+No glyph in the structural set carries emoji presentation, so ''no `U+FE0E`''
+''text-selector rides anywhere'' in the sigil. Only the ''random tail'' roams free:
 a tofu in the tail reads as more entropy, never a false flag, since the count
 still holds. "Any Unicode" lives in the tail alone.
 

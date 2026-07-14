@@ -79,8 +79,8 @@ reclaiming its storage stays an operator act (OS-level or a future GC sprint).
 !! Deferred design — EPOCH as an operator rite (proposed 2026-06-15)
 
 EPOCH is the *cut behind*, paired with RECONCILE's *fold forward* (residency-model
-#non-residency-verbs): **two verbs, sequenced `reconcile → epoch`, never
-auto-coupled** — the fold stays op-log-recoverable; the cut destroys recovery.
+#non-residency-verbs): ''two verbs, sequenced `reconcile → epoch`, never''
+''auto-coupled'' — the fold stays op-log-recoverable; the cut destroys recovery.
 The implemented reactors above (`epoch-bag`, `rotate-recipe`) carry the
 mechanism; promoting it to a deliberate operator verb adds:
 

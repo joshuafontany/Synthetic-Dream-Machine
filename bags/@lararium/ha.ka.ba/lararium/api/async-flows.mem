@@ -31,11 +31,11 @@ written   = "2026-06-25"
 swarm-mines run seconds-to-minutes (a 9-spirit mine blew past 2 minutes blind).
 The whole field has converged on one shape — ''submit → request-id → poll/wait'' —
 and `lares` already owns all three pieces: a ''daemon-job model'' (submit→id→poll),
-**durable results by request-id** (re-queryable after disconnect), and a **dual
-prose/JSON renderer**. The work is wiring, not invention (Beacon, cited).
+''durable results by request-id'' (re-queryable after disconnect), and a ''dual''
+''prose/JSON renderer''. The work is wiring, not invention (Beacon, cited).
 
-> **stdout is the API contract; progress and diagnostics ride stderr — and a
-> timeout is never a loss, because the result is durable by id.**
+> ''stdout is the API contract; progress and diagnostics ride stderr — and a''
+''> timeout is never a loss, because the result is durable by id.''
 
 <<~/ahu >>
 
@@ -77,8 +77,8 @@ shape). The result is fetched after terminal, by id.
 
 !! The Dual Surface ~ one event stream, two projections
 
-The load-bearing split (every source agrees): **stdout = the machine-readable
-result (the API contract); progress + diagnostics → stderr.** Switch on `isatty`.
+The load-bearing split (every source agrees): ''stdout = the machine-readable''
+''result (the API contract); progress + diagnostics → stderr.'' Switch on `isatty`.
 One progress event stream; the existing renderer splits it:
 
 * ''TTY (human):'' a redrawing bar / spinner / elapsed-heartbeat on ''stderr''

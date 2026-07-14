@@ -115,8 +115,8 @@ SharktoothSigil tids (the Explore est. ~30 lines), each carrying the recalled tr
 ''render''. Then the VM is the one turn-decomposer; the gradient module walks the AST.
 
 ''GRADE ON A GRADIENT — the builder is binary where it should grade'' (the creative-grammar cure):
-* `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a **MalformedSigil /
-  PartialNode** with a parse-confidence (`<<~ confidence ( <4` = opener+intent, broken close → ~0.4;
+* `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a ''MalformedSigil /''
+''  PartialNode'' with a parse-confidence (`<<~ confidence ( <4` = opener+intent, broken close → ~0.4;
   `<<~`-far-from-close → ~0.2; no opener → prose 0). "Likely-a-sigil-but-drifted," not silent water.
 * per-sigil ''form-confidence'': full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
   numeric-fail = low. The node is GRADIENT-VALUED, never pass/fail (the harvester's law, in the VM).

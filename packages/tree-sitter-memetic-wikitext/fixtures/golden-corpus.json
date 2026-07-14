@@ -21,8 +21,8 @@
    "hash": "c514872b24d7bd550ffa57dd5a9da70f2e99168a3a1c848799bfd1304e00bce5"
   },
   "ha.ka.ba/lares/api/lares/corpus.mem": {
-   "bytes": 33316,
-   "hash": "f92f57cdb870ce7b38db86e35148886e35d101c6fe7f9247b46e9aa50b4b2693"
+   "bytes": 33348,
+   "hash": "d44adb73825c69bbd9405285488604be4c0d1580318f804fe329d5a9cfcedfbc"
   },
   "ha.ka.ba/lares/api/lares/hud.mem": {
    "bytes": 4613,
@@ -65,8 +65,8 @@
    "hash": "a99bbab339548d7ad277360431197f6415c43bc55fd5cc97f0375c9b4a8756d5"
   },
   "ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium.mem": {
-   "bytes": 15643,
-   "hash": "421cc72c6fe6d9d7ff0f6f51360f9bc6e346218b055abbe3ba690df558e1b9bf"
+   "bytes": 15647,
+   "hash": "c7af652aadfdc413f5d2010a8552052035a89ef0905283e74c5465c4e66c3501"
   },
   "ha.ka.ba/lares/api/lares/noosphere-boot.mem": {
    "bytes": 40393,
@@ -129,16 +129,16 @@
    "hash": "0a8c93d2a9a94cb6c7db229ea0288084f010a320b63a36656682d1686b9c814b"
   },
   "ha.ka.ba/lares/api/pono/alignment-layer.mem": {
-   "bytes": 12982,
-   "hash": "bf9541edb28012039ddc1dd31c6c390989141e88eaeefaaa7021916656d5b71b"
+   "bytes": 12998,
+   "hash": "1468aca5f3bc9fdb244a75bbcda214e3256a54b79b716858376dcff8b14799ef"
   },
   "ha.ka.ba/lares/api/pono/aniani.mem": {
    "bytes": 7793,
    "hash": "b835757dff529737c5bc8d70a7ef758d712fb35cfcf387849ab429d2cbba53c8"
   },
   "ha.ka.ba/lares/api/pono/antigonish-driving-test.mem": {
-   "bytes": 43512,
-   "hash": "9f520d50bd1a89ec6160d4d86972dc3542bf45ce5cdf9ca0db0bab6ed2dc7b1f"
+   "bytes": 43536,
+   "hash": "4370aa4cfd5cd26e537a7b633336b3ba0b639e238baa56037b3bcfa15828ba13"
   },
   "ha.ka.ba/lares/api/pono/attention-scale.mem": {
    "bytes": 14316,
@@ -165,8 +165,8 @@
    "hash": "92bafeb115e570ade2aef0e149f692be780536c55e753e0ea380a8319fc07621"
   },
   "ha.ka.ba/lares/api/pono/causal-islands.mem": {
-   "bytes": 17567,
-   "hash": "9b2a07ec6cec97777a5a912978f4602ab25e9259977207cdd32740a109128926"
+   "bytes": 17583,
+   "hash": "579d1a917dc700ca58c1e03133b653aedeeede8ef8ebe6a8d1c5e8f2570a285a"
   },
   "ha.ka.ba/lares/api/pono/cohomological-gate.mem": {
    "bytes": 22750,
@@ -221,16 +221,16 @@
    "hash": "b753d2ca500da0e83594e236b305b3fd03cfaba5bb57aa7f55260756f42523da"
   },
   "ha.ka.ba/lares/api/pono/functor-discipline.mem": {
-   "bytes": 26417,
-   "hash": "2656f542091c231e885718366f8dd3cdc596d49f88c4f9235f725d93f0cdb7bc"
+   "bytes": 26445,
+   "hash": "8e86d8ef7306dabc17fec611ceaf0af3df29813848b86a6a936a255649bf0de3"
   },
   "ha.ka.ba/lares/api/pono/gold-anchor.mem": {
-   "bytes": 26120,
-   "hash": "871828318fe65877b407c3db8ad8a10e484aa6a83a639525b08cda5759d02082"
+   "bytes": 26136,
+   "hash": "8b031fec9ad72890f2fae7817c1384914658d6fb6939d1b2ec2572323699744d"
   },
   "ha.ka.ba/lares/api/pono/group-as-closure.mem": {
-   "bytes": 9380,
-   "hash": "fd9837f75f5c2a0a46052cd235c474d2fb964fa2c63b2d1272a466ab85b1125b"
+   "bytes": 9384,
+   "hash": "f16619de011211871d6a2ea0d85d0f761c7b2e65b5b0f7f0247dbae8f3c3d5d2"
   },
   "ha.ka.ba/lares/api/pono/guest-grammar.mem": {
    "bytes": 4521,
@@ -281,16 +281,16 @@
    "hash": "08d16302f4257144bd6bb631fb1a3e38b7d78908817ad80d737b198f3330a68b"
   },
   "ha.ka.ba/lares/api/pono/holds.mem": {
-   "bytes": 11314,
-   "hash": "377406a117847f2907e2704c528c186c1f8420c7a69376c99a5ede0affc02107"
+   "bytes": 11318,
+   "hash": "1dfbe341c2d83187e21b55dd07c34fb962026223eab80c263ea546ae43a5f65e"
   },
   "ha.ka.ba/lares/api/pono/holo.mem": {
    "bytes": 2458,
    "hash": "84dc9d41718aa75a14b32c2d78d695593d3c3725c61558ebb91076c69dfa35de"
   },
   "ha.ka.ba/lares/api/pono/hoolele.mem": {
-   "bytes": 6027,
-   "hash": "6bc7fa44845b889627d1f635d52f1d40333551eb8ce91ce6e6c04171a02eaece"
+   "bytes": 6031,
+   "hash": "4873206a276869dd3235bc0c7542a6d6705ea7f36963ee84cde4e04e6064c37e"
   },
   "ha.ka.ba/lares/api/pono/hooponopono.mem": {
    "bytes": 4185,
@@ -357,12 +357,12 @@
    "hash": "a7426399405fffa1b0f46b9cae226e23efb728148d5f1610317690dd64e23529"
   },
   "ha.ka.ba/lares/api/pono/lararium-identity.mem": {
-   "bytes": 46216,
-   "hash": "3afe4406f7b30dac893c23b047114567f446a5bd3df615014aaee71bbcadc37f"
+   "bytes": 46332,
+   "hash": "3bb13907194a4233a71a38be38f6d95e802591dd68bbea1c0d249ec8875e47e4"
   },
   "ha.ka.ba/lares/api/pono/lararium-memory.mem": {
-   "bytes": 14903,
-   "hash": "d029199732b70faf7a5df3dcf0e39730737e0fa10bb0831b8fd1dbac3f6d876d"
+   "bytes": 14947,
+   "hash": "2e7f9d9af8afe12b5ce00d91bb87acc10c2a4cc8c98422e0456f849a7e8168b8"
   },
   "ha.ka.ba/lares/api/pono/lele.mem": {
    "bytes": 1953,
@@ -373,8 +373,8 @@
    "hash": "187a4e781b4ad4703f5b687dfffe46807c2a5a70f8c2da07e748132a404266a1"
   },
   "ha.ka.ba/lares/api/pono/living-grammar.mem": {
-   "bytes": 11317,
-   "hash": "d48dc13545db28991403c9b5bfc5e9d5592c993b219b7594ba25ee2d74374d0b"
+   "bytes": 11321,
+   "hash": "ab54f76afc462c69598a6e68c0b193464b0185bd3640640421df18bb664eda44"
   },
   "ha.ka.ba/lares/api/pono/local-first.mem": {
    "bytes": 10727,
@@ -429,8 +429,8 @@
    "hash": "21c16f8d5a16b6e568ec6ac463ac19b2a1f2f6d40d437afcf362fb2c93678403"
   },
   "ha.ka.ba/lares/api/pono/oracle.mem": {
-   "bytes": 8117,
-   "hash": "8253d73a42970cff060de607da2fd33dbd8ede1cb821e0bb4be3a2f7d7a3b1df"
+   "bytes": 8121,
+   "hash": "feceff4762df92a7d543407a0bd721128cd4f150b7af8756340f167faf8d59c9"
   },
   "ha.ka.ba/lares/api/pono/orichalcum-capabilities.mem": {
    "bytes": 9640,
@@ -449,8 +449,8 @@
    "hash": "c82596c878b8218a6df5737ef856faa7007f1cb2594239be835f1040be02b64f"
   },
   "ha.ka.ba/lares/api/pono/persona-circle.mem": {
-   "bytes": 16772,
-   "hash": "9dc4258993559e56cc7179b06d3312ba258ed898e1061c749fc43406da814ce0"
+   "bytes": 16792,
+   "hash": "84277ed670274b896bb79606c4fe797be62a7707b317a1bfb05936a7876024fb"
   },
   "ha.ka.ba/lares/api/pono/pono-sigil.mem": {
    "bytes": 1973,
@@ -501,16 +501,16 @@
    "hash": "dabf7b0c39e59d38482381ec20c4358c4f102b6b13cffc4ffdaf3b2a22deabc8"
   },
   "ha.ka.ba/lares/api/pono/sensorium-machina.mem": {
-   "bytes": 42428,
-   "hash": "96a4680dd39f3702ec1ce18d12576425a2cfe9b6b39cbc255942c2fb121c1153"
+   "bytes": 42544,
+   "hash": "88d852d23902953310ef73b488a8d6f9c529e4f28775c6af29e73a07b0b8ad4b"
   },
   "ha.ka.ba/lares/api/pono/sensorium-rhymes.mem": {
    "bytes": 30556,
    "hash": "32bb696f3083587fe03018c430c682914ab54badb00c42a48503144051c1857d"
   },
   "ha.ka.ba/lares/api/pono/servo.mem": {
-   "bytes": 11032,
-   "hash": "3b39f321f2e0aa4b114f5e198e04ff141c9654b7daa300007c8c87ad7ba48d2e"
+   "bytes": 11044,
+   "hash": "2af1996a003a5e815e0e0b55c294368da4c73ea771feb053697313633ac39f9e"
   },
   "ha.ka.ba/lares/api/pono/sharktooth-sigils.mem": {
    "bytes": 1368,
@@ -549,12 +549,12 @@
    "hash": "dca1a7429dd17bb795ec3f7a3f8da708470d108c7ef98c42b5ebd23869c9e9ed"
   },
   "ha.ka.ba/lares/api/pono/verse-event-lattice.mem": {
-   "bytes": 15550,
-   "hash": "c19b52f9f3aedb040426c888d26bb6c39a2de94e3e82966819bfdcd82c6f2d4c"
+   "bytes": 15554,
+   "hash": "4bde051780dee24ef978cb17e31a971f4256ffdb8b0b450b796a0aea4543caa1"
   },
   "ha.ka.ba/lares/api/pono/verse-task-tree.mem": {
-   "bytes": 11561,
-   "hash": "1e6fadba983836413e72656f28ebe382839c65c79cfb4d590f629c197fc8caf5"
+   "bytes": 11565,
+   "hash": "633f419d187e6fceb2c2529cb1cbea5d8c40ce11905bdeb9db4dc950d98f659a"
   },
   "ha.ka.ba/lares/api/pono/verse-type-lattice.mem": {
    "bytes": 8064,
@@ -669,8 +669,8 @@
    "hash": "5384731245957165815c27e2f20d37926a09b921080720b088a9847d585e8b4c"
   },
   "ha.ka.ba/lares/docs/lares/federation.mem": {
-   "bytes": 11828,
-   "hash": "2ba92e71de1822b3ca3c305758c9302f8a6e34f2f7aeaced489781efc0a6ba98"
+   "bytes": 13610,
+   "hash": "ba290e1d4ca63d16a3e0f579ce3ef9507833e1e89721fa694cb2238c42c6be61"
   },
   "ha.ka.ba/lares/docs/lares/handoff.mem": {
    "bytes": 38874,
@@ -849,8 +849,8 @@
    "hash": "6c03c64f563e3146344c87fbb89eecd7c81f619cd627e3304faa27572726c4d2"
   },
   "ha.ka.ba/lares/docs/pono/identity-stack.mem": {
-   "bytes": 5644,
-   "hash": "85478ddde92cfdcca41bf14a4d770ba06f89ec040775a95ee7dc90b0064fb98c"
+   "bytes": 5648,
+   "hash": "8204adaa01ed236e62eb638e4bf1c9970e11d78e738c82026e9090731da1301b"
   },
   "ha.ka.ba/lares/docs/pono/l-prime.mem": {
    "bytes": 4420,
@@ -909,16 +909,16 @@
    "hash": "58f3c91580424a740179adc5e548ee2707c351b51f94ea345f76e75f06c245cf"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research.mem": {
-   "bytes": 59372,
-   "hash": "227d2eb4b8c36b848f28c98b872df205403bf369a729a542e5a3693798f6218d"
+   "bytes": 59376,
+   "hash": "d48088898d77c74d4918b0acf83d79f96171f82399f247f742f0cef94babf1f6"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE.mem": {
    "bytes": 32683,
    "hash": "863387a65bd628e75a25a5d7144c0fce1d086cd7c89d057624b2c9bc056a050e"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/chronometer/Vector_Chronometer_Research_Seed.mem": {
-   "bytes": 15262,
-   "hash": "b6299e1fd3f6634911d16c95785791537ff360728681047b29b2bff3b5c332e9"
+   "bytes": 15270,
+   "hash": "dcd9425581cbe84ad751885c9872091c031fb070a35cc153b277b1c703625352"
   },
   "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions.mem": {
    "bytes": 8624,

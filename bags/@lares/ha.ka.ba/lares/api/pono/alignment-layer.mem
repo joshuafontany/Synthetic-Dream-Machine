@@ -51,12 +51,12 @@ ABOVE capability. This meme defines it. It sits beside Beelay sync and above Key
 | ''Authorization'' | who CAN act | yes (grant until revoked) | cryptography | Keyhive |
 | ''Alignment'' (this meme) | who I WANT to act with | no (opinion, revocable) | local social judgment | this layer |
 
-The prior art is unanimous on three points: the second plane **cannot be reduced to the
-first**; any attempt to make alignment *globally objective* either fails outright (PGP
+The prior art is unanimous on three points: the second plane ''cannot be reduced to the''
+''first''; any attempt to make alignment *globally objective* either fails outright (PGP
 web-of-trust collapsed) or recreates the central authority it meant to escape (a single
 canonical blocklist becomes a contested chokepoint — Mastodon's unified Oliphant list was
-retired); and the winning pattern everywhere is **subjective, subscribable, devolved trust as
-a market of choices**, never an authority.
+retired); and the winning pattern everywhere is ''subjective, subscribable, devolved trust as''
+''a market of choices'', never an authority.
 
 Email proves the split at the oldest scale: SPF/DKIM/DMARC (authentication) do NOT establish
 trust — spammers pass DMARC. Authenticity passes as necessary but insufficient; reputation
@@ -82,8 +82,8 @@ bags like any other content, evaluated locally against a per-island trust root.
 # **`label`** — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
    `off-island`, `talk-story-flagged`, …). Adopts the ATProto-labeler + FIRES model:
    ''advisories, not mandates'' — carries `neg`/expiry; the consumer applies them under its own
-   policy. A labeler functions as a principal that publishes labels; any peer/cabal **chooses which
-   labelers to subscribe to**. Subscription = trust delegation, and it is the subscriber's
+   policy. A labeler functions as a principal that publishes labels; any peer/cabal ''chooses which''
+''   labelers to subscribe to''. Subscription = trust delegation, and it is the subscriber's
    unilateral choice. This is the transport for the existing Talk-Story conflict-surfacing
    principle: labels inform; the reading edge decides; automated arbitration stays anti-pono.
 
@@ -131,8 +131,8 @@ make them ''socially reachable only through accountable edges''.
 !! Enforcement — at the Beelay boundary, by withholding
 
 The alignment layer NEVER grants or denies cryptographic access, never decrypts, never reaches
-into another island. It acts on the only lever that is causal-islands-legal: **withholding
-voluntary service**. Before syncing/relaying with a peer, a node consults its local verdict
+into another island. It acts on the only lever that is causal-islands-legal: ''withholding''
+''voluntary service''. Before syncing/relaying with a peer, a node consults its local verdict
 (area-scoped, hop-capped, from its own root). A valid-capability-holding lemure the local root
 has blocked simply ''does not get sync service'' — capability intact, alignment denied. That
 gap, closed at the sync boundary, is precisely what capability structurally cannot provide.

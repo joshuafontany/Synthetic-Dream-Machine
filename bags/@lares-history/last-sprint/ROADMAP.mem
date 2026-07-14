@@ -686,8 +686,8 @@ calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.
   WASM (Node.js + browser). Uses ''Sedimentree'' (hash-linked hierarchical storage) for
   metadata-only diffing: peers sync by comparing hashes without decrypting content.
   Pluggable transports: WebSocket, HTTP long-poll, Iroh/QUIC. `subduction_keyhive` crate
-  integrates Keyhive authorization. **This is the Ink & Switch answer to E2EE federated
-  CRDT sync.** Watch for when it exits pre-alpha.
+  integrates Keyhive authorization. ''This is the Ink & Switch answer to E2EE federated''
+''  CRDT sync.'' Watch for when it exits pre-alpha.
 * ''Keyhive + Subduction = the federation stack.'' Already adopted Keyhive at S7.1. When
   lararium↔lararium federation firms up (post-S9), Subduction is the protocol to evaluate
   before building bespoke sync.

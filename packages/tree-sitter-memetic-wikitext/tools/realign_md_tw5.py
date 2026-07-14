@@ -80,6 +80,110 @@ def _pass2_inline(line: str, counts: dict) -> str:
     return "".join(out)
 
 
+_LIST_MARKER = re.compile(r"^[*#]+[ \t]")
+
+
+def _split_multiline_bold(text: str, counts: dict) -> str:
+    """Pass 4: a `**` span that wraps across a newline SPLITS into balanced
+    single-line `''` spans — cross-line bold is the TW5 bug class and never
+    ships. Paragraph-buffered: a paragraph whose spans cannot be PROVEN to
+    close inside it stays untouched, counted loud. Fence and source-text
+    guards ride the same walk as every pass."""
+    out = []
+    para: list[str] = []
+    in_fence = False
+    source_depth = 0
+
+    def _odd(line: str) -> int:
+        return _CODE_SPAN.sub("", _LIST_MARKER.sub("", line)).count("**") % 2
+
+    def _convert(line: str, opened: bool) -> tuple[str, bool]:
+        # transform OUTSIDE code spans; the dangling mark closes at EOL and
+        # reopens after the next line's marker — never a cross-line span
+        segs, pos = [], 0
+        for m in _CODE_SPAN.finditer(line):
+            segs.append((line[pos:m.start()], True))
+            segs.append((m.group(0), False))
+            pos = m.end()
+        segs.append((line[pos:], True))
+        rebuilt, open_now = [], opened
+        for seg, live in segs:
+            if not live:
+                rebuilt.append(seg)
+                continue
+            parts = seg.split("**")
+            acc = parts[0]
+            for part in parts[1:]:
+                acc += "''"
+                open_now = not open_now
+                acc += part
+            rebuilt.append(acc)
+        new = "".join(rebuilt)
+        if open_now:
+            body = new.rstrip("\n")
+            tail = new[len(body):]
+            new = body.rstrip() + "''" + (" " if body != body.rstrip() else "") + tail
+        return new, open_now
+
+    def _flush():
+        nonlocal para
+        if not para:
+            return
+        state = 0
+        for line in para:
+            state ^= _odd(line)
+        has_wrap = any(_odd(ln) for ln in para)
+        if not has_wrap or state != 0:
+            if has_wrap and state != 0:
+                counts["skip_unprovable_bold_para"] += 1
+            out.extend(para)
+            para = []
+            return
+        opened = False
+        for line in para:
+            if not opened and _odd(line) == 0:
+                out.append(line)
+                continue
+            new, still = _convert(line, opened)
+            if opened:
+                m = _LIST_MARKER.match(new)
+                cut = m.end() if m else 0
+                new = new[:cut] + "''" + new[cut:]
+            counts["bold_split"] += 1
+            out.append(new)
+            opened = still
+        para = []
+
+    for line in text.splitlines(keepends=True):
+        if _FENCE.match(line):
+            _flush()
+            in_fence = not in_fence
+            out.append(line)
+            continue
+        if in_fence:
+            out.append(line)
+            continue
+        if source_depth > 0:
+            if _AHU_OPEN.match(line):
+                source_depth += 1
+            elif _AHU_CLOSE.match(line):
+                source_depth -= 1
+            out.append(line)
+            continue
+        if _SOURCE_TEXT_OPEN.match(line):
+            _flush()
+            source_depth = 1
+            out.append(line)
+            continue
+        if not line.strip():
+            _flush()
+            out.append(line)
+            continue
+        para.append(line)
+    _flush()
+    return "".join(out)
+
+
 def realign_text(text: str, counts: dict, pass2: bool = False, pass3: bool = False) -> str:
     """One file's walk. Fence state toggles on ``` lines; a source-text ahu
     suspends transforms until its close (nesting depth tracked so an inner
@@ -110,12 +214,9 @@ def realign_text(text: str, counts: dict, pass2: bool = False, pass3: bool = Fal
             source_depth = 1
             out_lines.append(line)
             continue
-        m = _HEADING.match(line)
-        if m:
-            counts["heading"] += 1
-            line = "!" * len(m.group(1)) + " " + line[m.end():]
-            out_lines.append(_pass2_inline(line, counts) if pass2 else line)
-            continue
+        # NOTE: the md-heading transform (#→!) RETIRED with the v0.1 window
+        # close — `# ` at line start now marks a TW5 ordered list, and the
+        # rule re-firing on those lines corrupts them (caught 2026-07-14).
         if _TOP_UL.match(line):
             counts["ul"] += 1
             line = "* " + line[2:]
@@ -156,6 +257,8 @@ def main() -> int:
                     help="add indented lists, balanced bold, and md links")
     ap.add_argument("--pass3", action="store_true",
                     help="ordered lists 1. → # (rides the grammar breath that drops #-heading)")
+    ap.add_argument("--pass4", action="store_true",
+                    help="multi-line bold: SPLIT at the newline into balanced single-line spans (cross-line '' spans = the TW5 bug class; never emit one)")
     ap.add_argument("--walk-library", action="store_true",
                     help="walk library/ FRAMING prose (source-text interiors stay exempt regardless)")
     args = ap.parse_args()
@@ -169,7 +272,7 @@ def main() -> int:
     ).stdout.strip()
 
     total = {"heading": 0, "ul": 0, "ol": 0, "indented_ul": 0, "bold": 0, "link": 0,
-             "skip_indented_ol": 0,
+             "bold_split": 0, "skip_unprovable_bold_para": 0, "skip_indented_ol": 0,
              "skip_fence": 0, "skip_source_text": 0, "skip_indented_ul": 0,
              "skip_unbalanced_bold": 0, "skip_unbalanced_backtick": 0,
              "skip_library": 0, "skip_dirty": 0, "skip_excluded": 0}
@@ -194,6 +297,8 @@ def main() -> int:
                 text = fh.read()
             counts = {k: 0 for k in total}
             new = realign_text(text, counts, pass2=args.pass2, pass3=args.pass3)
+            if args.pass4:
+                new = _split_multiline_bold(new, counts)
             for k, v in counts.items():
                 total[k] += v
             if new != text:
@@ -214,6 +319,8 @@ def main() -> int:
         print(f"  links []()→[[]]: {total['link']}")
     if args.pass3:
         print(f"  ol 1.→#       : {total['ol']} (indented deferred: {total['skip_indented_ol']})")
+    if args.pass4:
+        print(f"  bold split    : {total['bold_split']} lines (unprovable paras deferred: {total['skip_unprovable_bold_para']})")
     print(f"  skipped       : fence-lines={total['skip_fence']} "
           f"source-text-lines={total['skip_source_text']} "
           f"indented-ul={total['skip_indented_ul']} "

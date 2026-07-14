@@ -22,8 +22,8 @@ uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 ! Epic — Powers Composition Rewrite
 
 > ''⏸ DEFERRED (2026-06-01).'' All further Power-sprint work (Sprint 4 — Hard
-> Cases, Sprint 5 — Polish + Gate, and the bulk conversion behind it) is **on
-> hold** while the lararium does a YIN / cleanup pass on the OODA-HA + HUD layer.
+> Cases, Sprint 5 — Polish + Gate, and the bulk conversion behind it) is ''on''
+''> hold'' while the lararium does a YIN / cleanup pass on the OODA-HA + HUD layer.
 > Sprints 0–3 stand complete and committed; the composition model and the
 > module-nesting doctrine (D6) hold. Resume here once the OODA-HA cleanup lands.
 
@@ -445,8 +445,8 @@ one entity-with-mount-points: Earthdawn (kaer/citadel/flying Kila are one warded
 place), Starfinder (frame + typed mounts + bays + role slots), Spelljammer (ship =
 stat-view + map-view of one entity; per-vehicle stat forks were walked back),
 Blades (lair sheet with slots; a mobile asset is just a slot occupant).
-→ **Fixed-vs-mobile is NOT a mount-point or type distinction. It is a flat `#has`
-component** (propulsion/mobility) on the Site. A forest and an airship are the
+→ ''Fixed-vs-mobile is NOT a mount-point or type distinction. It is a flat `#has`''
+''component'' (propulsion/mobility) on the Site. A forest and an airship are the
 same Site; one has a mobility component filled. Keeps mobility flat (relevant to
 the vertical-vs-flat pressure).
 
@@ -459,8 +459,8 @@ count stays fixed at ''7+Strength''.
 
 ''D3 — Site (structure) capacity = XP+resource upgrade economy, not a fixed count.''
 Per OGA "Golden Age Item Upgrading" ([[Our_Golden_Age.md:1079-1111|Our_Golden_Age.md]]):
-a Hallmark / vehicle / domicile / Site carries **base attributes like a
-character** and upgrades each attribute **independently** (XP + referee resources,
+a Hallmark / vehicle / domicile / Site carries ''base attributes like a''
+''character'' and upgrades each attribute ''independently'' (XP + referee resources,
 doubling cost `n+1 = 2(n)`), ''decoupled from a single Level'' (the legacy UVG
 "Traditional Item Levelling" tied all to Level; the Golden Age model does not).
 Capacity itself is a purchasable "Trait" upgrade ("capacity increases" is listed).
@@ -493,10 +493,10 @@ Modules and cards tag with the ''short'' form; `#has` edges address the ''full m
 This supersedes the earlier "version-free bag-scoped single title" wording in `#tw5-tags`.
 
 **D6 — Module nesting: an entity `#has` a Power; `#composes` stays module→module (2026-06-01, Sprint 3).**
-When an item, artifact, site, or creature carries a Power, it is **an entity with
-mount-points** — it `#has` the Power through the relevant mount-point (`item`,
-`structure`, `trait`, `burden`), exactly as a character does. There is **no second
-module type** for "things that hold Powers." `#composes` is reserved strictly for
+When an item, artifact, site, or creature carries a Power, it is ''an entity with''
+''mount-points'' — it `#has` the Power through the relevant mount-point (`item`,
+`structure`, `trait`, `burden`), exactly as a character does. There is ''no second''
+''module type'' for "things that hold Powers." `#composes` is reserved strictly for
 ''module→module'' wiring — a Power that triggers or riders another Power (e.g. a
 leash/trigger linking two modules; see Floating Disc Aftermath). The carried Power's
 own composition is ''not re-listed'' on the host; the host edge points at the Power
@@ -557,8 +557,8 @@ the Item slot count (7+Strength) — these are canonical facts that get addresse
   (albums/grimoires/technocodices hold multiple Powers per slot), not separate
   types. Character Item capacity stays fixed at ''7+Strength''.
 * The ''structure (Site)'' mount-point does NOT carry a fixed slot count. A Site
-  (Hallmark, vehicle, domicile, fixed place) holds **base attributes like a
-  character**; capacity is a **purchasable upgrade** (XP + referee resources,
+  (Hallmark, vehicle, domicile, fixed place) holds ''base attributes like a''
+''  character''; capacity is a ''purchasable upgrade'' (XP + referee resources,
   tracked per-attribute, decoupled from Level) per OGA "Golden Age Item
   Upgrading." Its `#cost`/`#overflow` blocks reference that economy, not a count.
 

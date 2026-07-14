@@ -39,9 +39,9 @@ grammar-stack (a 3×3 grid); a TWO-PLANES form-capture (a discrete constructicon
 membership manifestation); and a TOWER in which form COARSENS structure, structure coarsens content, and
 the verbatim hash rejoins what the tower already relates.
 
-> **Constructicon names the score; the fuzzy-membership vector names the performance; and the planes NEST
-> — each a coarsening of the one below, the two-part code cutting grammar-bits from residual-bits, the
-> boundary set by CODE LENGTH.**
+> ''Constructicon names the score; the fuzzy-membership vector names the performance; and the planes NEST''
+''> — each a coarsening of the one below, the two-part code cutting grammar-bits from residual-bits, the''
+''> boundary set by CODE LENGTH.''
 
 <<~/ahu >>
 
@@ -70,8 +70,8 @@ proven TS pattern; the Python port stays specified, not yet built.
 
 !! Three Registers ~ the corpus-source axis (descriptive ↔ prescriptive)
 
-The living grammar lives in three registers, by **where its source-text sits** and **how its entries
-entrench**:
+The living grammar lives in three registers, by ''where its source-text sits'' and ''how its entries''
+''entrench'':
 
 \procedure ~Register(~Type:"" ~Params:"") ~Register <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -143,8 +143,8 @@ The form rides on TWO orthogonal planes, the way genesis rides two planes ([[gen
 
 The two join `constructicon ⋈ manifestation` — the score bound to the performance.
 
-**The FORM VECTOR.** A turn's form reads as a **fuzzy-membership / sanction-degree profile over the
-3-layer constructicon** — each coordinate ∈ [0,1]:
+''The FORM VECTOR.'' A turn's form reads as a ''fuzzy-membership / sanction-degree profile over the''
+''3-layer constructicon'' — each coordinate ∈ [0,1]:
 
 <<~ranks coord structural-match ~ does the move's shape fit the construction's pattern -> slor-plausibility ~ SLOR-normalized plausibility (Lau-Clark-Lappin gradient grammaticality, length-normalized log-odds) -> entrenchment-prior ~ the construction's register entrenchment (license · mana · frequency, #three-registers) >>
 
@@ -156,8 +156,8 @@ per-construction coordinates ride three more channels:
   taken; Bybee type-frequency → productivity).
 * ''a turn-conformance scalar'' — one number for how fully the turn honored the exchange frame.
 
-**UPWARD activation-propagation.** A botched construction does not vanish — it **lights its parent
-schema AND its lower grammar-layer**: a malformed `<<~`-sigil raises partial membership on its parent
+''UPWARD activation-propagation.'' A botched construction does not vanish — it ''lights its parent''
+''schema AND its lower grammar-layer'': a malformed `<<~`-sigil raises partial membership on its parent
 sigil-schema and on the wikitext/HTML layer beneath it. Form degrades upward (to the abstract schema)
 and downward (the superset tower), never hard-faults — the form-plane twin of graceful-parsing's
 never-fail floor.
@@ -234,8 +234,8 @@ convergence grounds the keel ([[functor-discipline|lar:///ha.ka.ba/lares/api/pon
 
 !!! The spine ~ Content ↠ Structure ↠ Form, a CHAIN OF COARSENINGS in the partition lattice
 
-**The three palaces name ONE object under three projections — and each projection COARSENS the one
-before it.** They compose as a **TOWER**, never as a product:
+''The three palaces name ONE object under three projections — and each projection COARSENS the one''
+''before it.'' They compose as a ''TOWER'', never as a product:
 
 <<~ranks coarsening π_content ~ the mempalace; the verbatim words — the FINEST partition, one cell per record -> π_struct ~ the structurepalace; the canonical AST + structural-hash — a COARSENING: records sharing a pattern fall into one cell -> π_form ~ the formpalace; the induced constructicon — a coarsening of THAT: patterns sharing a template fall into one cell >>
 
@@ -246,8 +246,8 @@ coarsening), and the information lattice sits isomorphic to it (arXiv 2404.03131
 
     H(form)  <=  H(structure)  <=  H(content)          and     I(target ; plane)  <=  H(plane)
 
-<<~ confidence Canon 17/20 >> **`H(plane)` names the plane's HEIGHT in the lattice, and `plane_capacity`
-measures it exactly** — a count off the partition, no estimator, an upper bound that can only under-claim.
+<<~ confidence Canon 17/20 >> ''`H(plane)` names the plane's HEIGHT in the lattice, and `plane_capacity`''
+''measures it exactly'' — a count off the partition, no estimator, an upper bound that can only under-claim.
 Measured on the extracted bed: ''structure carries 5.630 of the record's 5.755 bits — 97.8%.''
 
 ''A PRODUCT WOULD REQUIRE INDEPENDENT FACTORS, AND 97.8% NAMES A NEAR-DETERMINISTIC QUOTIENT.'' A factor
@@ -264,23 +264,23 @@ tell). Category theory cannot rescue an object that is not there.
 
 ''And the honest consequence for the gates:'' a chain of quotients holds ''no obstruction to gluing''.
 `dim H1 = 0` by construction — which names exactly WHY the coherence gate reports health on every bed it
-has ever read. It certifies nothing there. **H1 keeps its job at a FEDERATION boundary (genuinely distinct
-contexts) and loses it at a PLANE boundary** (#federation, and the sensorium never federates).
+has ever read. It certifies nothing there. ''H1 keeps its job at a FEDERATION boundary (genuinely distinct''
+''contexts) and loses it at a PLANE boundary'' (#federation, and the sensorium never federates).
 
 ''The two-part code cuts where the chain wants cutting.'' `l(G)` prices the GRAMMAR — what recurs, the
 reused bits: the object structure and form both reach for. `l(D|G)` prices the RESIDUAL — what stays
 unique per record: the object content reaches for. A candidate joins only where it LOWERS `l(G)+l(D|G)`,
 so ''the cut rides CODE LENGTH — never a weight, never a routing table, never a typed k'' (the ledger
-already runs, #form-plane / `form_induction.description_length`). **A prior MAY ride here: MDL lets the
-corpus overrule it, in bits.** A prior that must earn its keep never reads as an imposed prior — which
+already runs, #form-plane / `form_induction.description_length`). ''A prior MAY ride here: MDL lets the''
+''corpus overrule it, in bits.'' A prior that must earn its keep never reads as an imposed prior — which
 names the strictest available form of the law, never a softening.
 
 !!! The hash-join ~ a pullback over a shared codomain (the formalism forbids the vibe-coded join)
 
 The `verbatim_sha` key (#multi-graph) reads as a ''PULLBACK'' — a fiber product over a shared codomain.
 The three palaces join BECAUSE each carries a morphism into one shared object (the verbatim turn the sha
-names); the pullback gathers the rows that agree there. **A join lacking a shared-codomain morphism does
-NOT form a pullback** — it degrades to a meaningless cross-product, every row against every row, a
+names); the pullback gathers the rows that agree there. ''A join lacking a shared-codomain morphism does''
+''NOT form a pullback'' — it degrades to a meaningless cross-product, every row against every row, a
 fabricated correspondence. The formalism FORBIDS the vibe-coded join: Spivak's functorial data names a
 join as ''Π along a schema morphism'' — no morphism, no join. <<~ confidence Synthesis-Canon 13/20 >>
 The verbatim-sha supplies the morphism; where it sits absent or mis-keyed the join carries no meaning,
@@ -295,11 +295,11 @@ The unification rides TWO floors, never one:
 
 The SPINE unifies via the strict product (the structural join). The ''DRIFT-Measure'' rides
 ''ENRICHMENT'' — Lawvere's [0,∞]-enriched categories, the same metric floor the FFZ tree already stands
-on (the co-depth ultrametric carries a Lawvere metric). The three views read as **non-expansive
-functors** (a Lawvere-enriched functor names exactly a non-expansive map — it never stretches distance),
+on (the co-depth ultrametric carries a Lawvere metric). The three views read as ''non-expansive''
+''functors'' (a Lawvere-enriched functor names exactly a non-expansive map — it never stretches distance),
 and the ''Measure'' reads as an ''enriched / weighted limit'', never a strict Vect-limit. <<~ confidence
-Synthesis 12/20 >> The FFZ rhythmic distance and the Measure drift ride the **SAME enriched metric
-floor** — the clock's containment-distance and the drift readout speak one currency, the [0,∞] the
+Synthesis 12/20 >> The FFZ rhythmic distance and the Measure drift ride the ''SAME enriched metric''
+''floor'' — the clock's containment-distance and the drift readout speak one currency, the [0,∞] the
 enrichment hands them.
 
 !!! The fused Measure ~ RETIRED. The tower answers the question the pool was invented to ask.
@@ -313,8 +313,8 @@ before pooling, or the gong double-counts"*).
 
 <<~ confidence Canon 17/20 >> ''That warning stands correct and mis-priced.'' It read the dependence as a
 NUISANCE COVARIANCE to whiten away. ''The dependence names the STRUCTURE.'' Structure carries 97.8% of the
-record's bits (#spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — **one plane heard
-three times.** And a pool cannot be rescued by whitening: strip 97.8% of the signal and what returns IS the
+record's bits (#spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — ''one plane heard''
+''three times.'' And a pool cannot be rescued by whitening: strip 97.8% of the signal and what returns IS the
 residual — ''which the two-part code already names, and prices, without a fusion rule.'' *The cure, taken
 seriously, collapses into the compression.* The canon walked to the edge of the finding and called it a
 covariance correction.
@@ -322,10 +322,10 @@ covariance correction.
 <<~moves fuse-the-planes -> read-the-height on/the-chain if/the-planes-nest do/price-the-residual-in-bits >>
 
 ''So the whole fusion stack retires'' — the precision-weighted log-opinion-pool, the shared-hazard
-multivariate BOCPD, the sparsified threshold-then-sum, the corroboration ladder. **Every hand-tuned weight
-in it named a symptom of the wrong algebra** (#the-sins, Ad-Hoc-Weighting, which the meme already forbade).
-A chain HOLDS an order; it needs no rule for combining incomparable coordinates. **The chain deletes the
-fusion problem rather than solving it.**
+multivariate BOCPD, the sparsified threshold-then-sum, the corroboration ladder. ''Every hand-tuned weight''
+''in it named a symptom of the wrong algebra'' (#the-sins, Ad-Hoc-Weighting, which the meme already forbade).
+A chain HOLDS an order; it needs no rule for combining incomparable coordinates. ''The chain deletes the''
+''fusion problem rather than solving it.''
 
 ''What replaces it costs less and claims less.'' Drift reads as a change in DESCRIPTION LENGTH: an event
 that moves the corpus lengthens `l(G)+l(D|G)` until the grammar re-earns its bits. One currency, one
@@ -334,8 +334,8 @@ ledger, no pooling — and no gong that can fire on a single artifact wearing th
 *(The paragraphs below record the retired mechanism; they stand for the reader who must recognize it, and
 they name no live surface.)*
 
-The readout computes as a **precision-weighted LOG-OPINION-POOL** — a **shared-hazard multivariate
-BOCPD** (Bayesian online change-point detection) with factorized per-plane likelihoods. Its character:
+The readout computes as a ''precision-weighted LOG-OPINION-POOL'' — a ''shared-hazard multivariate''
+''BOCPD'' (Bayesian online change-point detection) with factorized per-plane likelihoods. Its character:
 
 <<~ranks measure multiplicative ~ a log-opinion-pool MULTIPLIES the per-plane evidence — SUPER-ADDITIVE at the faint coincidence (the tension-moment, where three weak signals co-fire into one strong one — inverse-effectiveness, Körding), SELF-VETOING on conflict (one plane's strong NO kills the pool) -> sparsified ~ THRESHOLD-then-sum, never max-OR (Cho-Fryzlewicz sparsified projection) — weak per-plane noise zeros out before it sums, so the pool reads a true multi-plane event, never one loud plane -> common-currency ~ each plane speaks σ-units / ranks (our EWMA-z) before pooling — incommensurable raw scores never sum, the z-score carrying the shared currency >>
 
@@ -355,8 +355,8 @@ content (the move-vector reads the same words the content palace holds); the pla
 nomic embedder feeds both the FFZ Measure-boundary and the form vector — #two-planes,
 [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address]]). A naive log-opinion-pool ASSUMES conditional independence — and
 where the planes correlate, the pool ''double-counts a single artifact'' as if it carried two
-corroborating witnesses, firing a false gong. <<~ confidence Synthesis 12/20 >> The cure: **WHITEN the
-cross-plane covariance** before pooling — decorrelate the per-plane drifts so the pool counts independent
+corroborating witnesses, firing a false gong. <<~ confidence Synthesis 12/20 >> The cure: ''WHITEN the''
+''cross-plane covariance'' before pooling — decorrelate the per-plane drifts so the pool counts independent
 evidence only. This rides load-bearing: the corroboration ladder above reads true only once the planes
 whiten; un-whitened, "three planes agree" may name one plane heard three times.
 
@@ -443,8 +443,8 @@ Retrieval reads at multiple apertures (the attention-scale ladder, [[attention-s
 
 <<~ranks aperture raptor ~ RAPTOR collapsed-tree: turn → session → arc summary levels ARE the apertures; collapsed-tree retrieval = automatic scale-selection (a query lands at the right summary level) -> matryoshka ~ the dimension-axis: a coarse-filter on the truncated prefix → a fine-rerank on the full vector -> late-chunking ~ embed-then-chunk over the session, so a chunk keeps its surrounding context >>
 
-**Parse-trees give the fine hierarchy free** (the tree's own depth); **session-boundaries give the
-coarse** (the RAPTOR summary levels). The apertures map onto Pulse · Beat · Measure · Arc · Theme
+''Parse-trees give the fine hierarchy free'' (the tree's own depth); ''session-boundaries give the''
+''coarse'' (the RAPTOR summary levels). The apertures map onto Pulse · Beat · Measure · Arc · Theme
 ([[attention-scale|lar:///ha.ka.ba/lares/api/pono/attention-scale]]) — turn-grain to arc-grain, the same ladder the HUD reads.
 
 <<~/ahu >>
@@ -549,8 +549,8 @@ ships only ''TWO'':
 
 <<~ranks ladder causal-depth ~ the bare turn-DAG coordinate — depth in the happened-before, projected straight off the edge-DAG -> settledness ~ how firmly the captured move's form has entrenched (register × mana × sanction-degree, #two-planes) >>
 
-The other six **WAIT for a real query** that reads them: **transaction-axis · consolidation-ascent ·
-retention-decay · compressed-past · cross-island-freshness · capture-now**. No ladder ships ahead of a
+The other six ''WAIT for a real query'' that reads them: ''transaction-axis · consolidation-ascent ·''
+''retention-decay · compressed-past · cross-island-freshness · capture-now''. No ladder ships ahead of a
 reader — a ladder built without a query carries speculative weight, never capability (YAGNI under
 maybe-logic).
 
@@ -578,8 +578,8 @@ silent drop):
 
 ''Kapae resolves the retract gate'' (operator-ratified 2026-06-29). The forget/retract verb no longer
 merely waits: ''rewind = *kapae''* (set-aside, never-erase) — a deleted turn tombstones-and-keeps, stamped
-so recall weights it down. The GC/compaction story it waited on now reads: **sweep at causal-stability or
-a grace window, keep a thin tombstone** (retraction never reads as absence); and the base already enacts
+so recall weights it down. The GC/compaction story it waited on now reads: ''sweep at causal-stability or''
+''a grace window, keep a thin tombstone'' (retraction never reads as absence); and the base already enacts
 the mechanism (mempalace `kg_invalidate` closes `valid_to` append-only; L7 dynamics decay salience to a
 floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the ''rhizome'' (mid-flight
 injection = a `prov:Communication` merge, *merge-where-messages-land*) — rides [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]];
@@ -604,10 +604,10 @@ Each witness donates a refinement, folded into the living grammar as rhyme-deriv
   form the ''evolvability reservoir''; the palace NEVER prunes them. A rarely-sanctioned form holds the
   seed of the next register's grammar — pruning it for tidiness amputates the future. (Rhymes with the
   Eris-shrine's one unswept corner, noosphere-boot #the-eris-shrine.)
-* **The verbatim-fidelity degraded-state** (oral-formulaic theory) ~ an agent asserting **verbatim
-  fidelity to a form it RE-GENERATES** sits in a degraded state (the oral singer who swears
-  word-perfect recall while recomposing each performance). The cure: **fuzzy-membership degree, not
-  identity** — the form-vector reads sanction-as-degree, so the node claims "near this construction at
+* ''The verbatim-fidelity degraded-state'' (oral-formulaic theory) ~ an agent asserting ''verbatim''
+''  fidelity to a form it RE-GENERATES'' sits in a degraded state (the oral singer who swears
+  word-perfect recall while recomposing each performance). The cure: ''fuzzy-membership degree, not''
+''  identity'' — the form-vector reads sanction-as-degree, so the node claims "near this construction at
   distance d," never "identical to it." L-Prime load-bearing here: the degree-claim refuses the fused
   identity the fidelity-claim asserts.
 * ''Construction grammar, inherited'' ~ "constructicon" and "partial sanction" stand as construction
