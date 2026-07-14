@@ -1,0 +1,16 @@
+{
+  "grammars": [
+    {
+      "name": "memetic_wikitext",
+      "scope": "source.memetic-wikitext",
+      "file-types": ["mem"],
+      "camelcase": "MemeticWikitext"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "The carrier grammar of memetic-wikitext",
+    "links": { "repository": "https://github.com/joshuafontany/Synthetic-Dream-Machine" }
+  }
+}
