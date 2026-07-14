@@ -43,6 +43,10 @@ export interface BootDaemonKeyhiveInput {
   readonly signerDid: string;
   /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
   readonly deviceEdge: DeviceDelegationTiddler;
+  /** OPTIONAL prior-identity Archive (a previous `exportArchive()`), persisted encrypted-at-rest. A joinee
+   *  admitted into a PersonaGroup restores from it so its prekeys match the card the founder minted-to —
+   *  without it, a fresh boot regenerates prekeys and the shared content reads "Key not found". */
+  readonly archiveBytes?: Uint8Array;
 }
 
 export interface BootDaemonKeyhiveResult {
@@ -62,7 +66,10 @@ export interface BootDaemonKeyhiveResult {
  */
 export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<BootDaemonKeyhiveResult> {
   const keyhive = new KeyhiveProvider();
-  await keyhive.init({ seed: input.seed, eventStore: input.eventStore });
+  await keyhive.init({
+    seed: input.seed, eventStore: input.eventStore,
+    ...(input.archiveBytes ? { archiveBytes: input.archiveBytes } : {}),
+  });
 
   // Re-ingest cap events the founding ceremony (or a prior boot) persisted to
   // the daemon doc — reconstructs the PersonaGroup / MeshCabal sentinels + edges.
