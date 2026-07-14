@@ -80,6 +80,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     const joineeRepo = new Repo({ sharePolicy: async () => true });
     const applied = await runApplyAdmitPayload({
       repo:                 joineeRepo,
+      operatorSeed:         JOINEE_SEED,
       operatorVerifyingKey: joineeKey,
       operatorDisplayName:  "Ichi",
       payload:              carried,
@@ -142,6 +143,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     // vessel that believes it holds a delegation nobody signed.
     await expect(runApplyAdmitPayload({
       repo,
+      operatorSeed:         JOINEE_SEED,
       operatorVerifyingKey: joineeKey,
       operatorDisplayName:  "Ichi",
       payload: {
