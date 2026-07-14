@@ -369,8 +369,8 @@
    "hash": "8f01f2671771c4be79f9800632a418406c8d0f5cc94e1cb7efc2211db62158d8"
   },
   "ha.ka.ba/lares/api/pono/li-ki-integrities.mem": {
-   "bytes": 13747,
-   "hash": "ef0d142e3a7e8948a1c4213bc40953569aa458fea83e78b7c8844347e913951a"
+   "bytes": 13751,
+   "hash": "0731d8e3b0e3eed002fbe9b752bfaa387f777cd5c51fd7c211978e4c0625a8db"
   },
   "ha.ka.ba/lares/api/pono/living-grammar.mem": {
    "bytes": 11321,
@@ -505,8 +505,8 @@
    "hash": "7c4cb14f58b34513840fb71b1c26ca17c4b03842a0f8d2f6a527ff8f9da81e11"
   },
   "ha.ka.ba/lares/api/pono/sensorium-rhymes.mem": {
-   "bytes": 30626,
-   "hash": "33f9876631b234ba554980747ba1883253ae79b96a3a4748612eb384d5a7e088"
+   "bytes": 30628,
+   "hash": "8b559a87eb00a462859349ea54fa2e8227fb30a32084e6486890c794f36dc5d7"
   },
   "ha.ka.ba/lares/api/pono/servo.mem": {
    "bytes": 11056,
@@ -605,8 +605,8 @@
    "hash": "97ccffaa077b39c67baeed8e65744a1eda76bd153903c60f159d93d613910bdc"
   },
   "ha.ka.ba/lares/docs/graph.mem": {
-   "bytes": 11125,
-   "hash": "8c04313d3b724e5a8545bc1a2eede09b76b339a78cc40c7345c29b2d7d39ce96"
+   "bytes": 11123,
+   "hash": "3e378719ebf29ac67c0124dfbeed3e99cd7642509c2ae0a06bb783c74aec50ca"
   },
   "ha.ka.ba/lares/docs/graph/artifacts.mem": {
    "bytes": 11007,

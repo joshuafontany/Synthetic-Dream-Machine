@@ -230,7 +230,7 @@ worldline against a ''mutable, branching, injectable'' source. Three operations 
 append-only-LINEAR reading never held — each resolved, each grounded in a mechanism the
 base already carries.
 
-''Rewind = *kapae''* (to set aside, never erase). A deleted transcript turn is no hole —
+''Rewind = //kapae//'' (to set aside, never erase). A deleted transcript turn is no hole —
 it stands ''tombstoned and kept'', stamped so recall weights it down (the eidetic palace
 remembers the road not taken). Four traditions converge — Datomic retraction · PROV
 `wasInvalidatedBy` · git reflog (dangling, not deleted) · bitemporal valid-close — and the

@@ -1,23 +1,13 @@
 # REVIEW-RESIDUE — the hand-review tail of the md→TW5 realignment
 
-Every line the migration tool held back, with its reason — the residue
-wants EYES, never a regex. Strike lines as they resolve; delete the file
-when it empties. (Generated at the tool's strangling, 2026-07-14.)
+Regenerated 2026-07-14 after clusters A (quine fenced) and C (nine
+hand-fixes) struck, with the tick-inside-double-aware counter (cluster D).
+Strike lines as they resolve; delete the file when it empties.
 
-## Unpaired bold marks (attributions, true strays) — 10
+## Unpaired bold marks — 0
 
-- `bags/@lares/ha.ka.ba/lares/docs/graph.mem:50` — ''* ''`control:has`** (N edges) — Verse class composition: every URI in `class(Parent, Iface1, Iface
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:21` — /**
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:52` — /**
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:58` — /**
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:76` — /**
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:89` — /** Returns the current full document state. Called at debounce-fire time, not patch time. */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:97` — /** Register a projection. Returns an unsubscribe function. */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:107` — /**
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:121` — /**
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:137` — /**
 
-## Dangling italic stars (multi-line italics, CSS marks, strays) — 100
+## Dangling italic stars (multi-line italics, strays) — 91
 
 - `bags/@lares/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.mem:150` — *This document is a reality anchor. The Syadasti reading rule was discovered in conversation, not de
 - `bags/@lares/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem:222` — *Hail Eris. All Hail Discordia. The teachings of this report are true in some sense, false in some s
@@ -79,15 +69,6 @@ when it empties. (Generated at the tool's strangling, 2026-07-14.)
 - `bags/@lararium/ha.ka.ba/lararium/tw5/ui/ahu-styles.mem:93` — /* ── breadcrumb ─────────────────────────────────────────────────────────── */
 - `bags/@lararium/ha.ka.ba/lararium/tw5/ui/ahu-styles.mem:120` — /* ── edit template ──────────────────────────────────────────────────────── */
 - `bags/@lararium/ha.ka.ba/lararium/tw5/ui/ahu-styles.mem:152` — /* ── worksite data anchors (invisible structural markers) ───────────────── */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:43` — */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:55` — */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:62` — */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:81` — */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:89` — /** Returns the current full document state. Called at debounce-fire time, not patch time. */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:97` — /** Register a projection. Returns an unsubscribe function. */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:111` — */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:125` — */
-- `bags/@lararium/ha.ka.ba/lararium/docs/meme-provider.mem:142` — */
 - `bags/@lararium/ha.ka.ba/lararium/docs/degraded-states.mem:103` — *Mitigation: operator asks a stance-specific question — "what does the Poet-stance reading express t
 - `bags/@lararium/ha.ka.ba/lararium/api/graceful-parsing.mem:215` — ''The theory name (it already exists):'' ISLAND GRAMMARS + Water/Lake (Moonen, *Generating Robust
 - `bags/@lararium/ha.ka.ba/lararium/api/graceful-parsing.mem:229` — copy; the gold pattern is RESILIENT RECURSIVE DESCENT (Roslyn / rust-analyzer / matklad's *Resilient
@@ -120,17 +101,10 @@ when it empties. (Generated at the tool's strangling, 2026-07-14.)
 - `bags/@lares-history/lares_research/PAPER_admission_on_a_lineage.mem:118` — ''C8 — ADMISSION IS A RE-PERFORMANCE, NOT A LOOKUP (history).'' Ordination //sub conditione//: *"if 
 - `bags/@lares-history/lares_research/PAPER_admission_on_a_lineage.mem:147` — trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: *"I never ever ever succe
 
-## Italic spans interleaved with // or '' (each wants a human read) — 7
+## Italic spans interleaved with // or '' — 0
 
-- `bags/@lares/ha.ka.ba/lares/api/pono/li-ki-integrities.mem:30` — ''The generalization the memetic-wikitext instance harvests.'' A sensorium senses ''pattern-integrit
-- `bags/@lares/ha.ka.ba/lares/api/pono/li-ki-integrities.mem:30` — ''The generalization the memetic-wikitext instance harvests.'' A sensorium senses ''pattern-integrit
-- `bags/@lares/ha.ka.ba/lares/api/pono/sensorium-rhymes.mem:58` — The sharpest threat to the pentad came from neuroscience's own open question: *does a system need a 
-- `bags/@lararium/ha.ka.ba/lararium/api/agent-worldline.mem:233` — ''Rewind = *kapae''* (to set aside, never erase). A deleted transcript turn is no hole —
-- `bags/@lararium/ha.ka.ba/lararium/api/living-grammar-palace.mem:580` — merely waits: ''rewind = *kapae''* (set-aside, never-erase) — a deleted turn tombstones-and-keeps, s
-- `bags/@sdm/ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip.mem:35` — > *"It is huge and many-colored, with ''neural whip tentacles'' and severe photophobia."*
-- `bags/@lares-history/lares_research/PAPER_infrastructure_as_myth.mem:180` — This reframing carries a precise cross-domain rhyme that is a structural claim, not an ornament: ''t
 
-## Odd backtick counts (broken inline code) — 63
+## Broken inline code (tick-aware) — 56
 
 - `bags/@lares/ha.ka.ba/lares/api/lares/corpus.mem:88` — <<~ confidence Synthesis-Canon 14/20 >> The lifecycle models three battle-proven idioms: ''`docker r
 - `bags/@lares/ha.ka.ba/lares/api/lares/corpus.mem:89` — ''--rm`'' (run-then-reap), ''nix-shell'' ephemeral environments (a derived env that exists for the d
@@ -170,9 +144,6 @@ when it empties. (Generated at the tool's strangling, 2026-07-14.)
 - `bags/@lararium/ha.ka.ba/lararium/mesh/ffz-clock.mem:30` — levels, bounds, actorId }` carries `ffzTick` · `ffzCompare` · `ffzMerge` · `ffzZero`
 - `bags/@lararium/ha.ka.ba/lararium/mesh/ffz-clock.mem:56` — **A grain names NESTED MEMBERSHIP — a containment PATH, never a count.** `Theme ⊃ Arc ⊃ Measure
 - `bags/@lararium/ha.ka.ba/lararium/mesh/ffz-clock.mem:57` — ⊃ Beat ⊃ Pulse`: each band declares //which// container a moment sits inside, never //how many//
-- `bags/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.mem:550` — **Canvas mode toggle (`` ` `` key):** Dims Lararium chrome (`opacity: 0.35, pointer-events: none`) a
-- `bags/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.mem:1016` — * ✓ **Command palette (`⌘K`):** Spaces + Memes sections, unified arrow-key nav, `` ` `` key toggles 
-- `bags/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.mem:1018` — * ✓ **Canvas mode toggle:** `` ` `` key + `HelperButtons` pill. Same chrome landmarks in both modes;
 - `bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem:494` — ```
 - `bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem:496` — ```
 - `bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem:500` — ```
@@ -189,9 +160,5 @@ when it empties. (Generated at the tool's strangling, 2026-07-14.)
 - `bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem:572` — ```
 - `bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem:575` — ```typescript
 - `bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem:581` — ```
-- `bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem:1513` — * ✓ `LarariumShell` — Kinopio-style chrome: `position:fixed; pointer-events:none` header; canvas fil
-- `bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem:1538` — * ✓ Canvas mode toggle (`` ` `` key): dims Lararium chrome, restores tldraw toolbar; toggle pill bot
-- `bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem:1563` — * Canvas mode toggle (`` ` ``): Lararium chrome dims, tldraw toolbar appears
-- `bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem:1881` — * Canvas mode toggle (`` ` ``): Lararium chrome dims, tldraw toolbar appears
 - `bags/@lares-history/last-sprint/ROADMAP.mem:425` — ```json
 - `bags/@lares-history/last-sprint/ROADMAP.mem:434` — ```

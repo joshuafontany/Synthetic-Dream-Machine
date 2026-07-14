@@ -164,3 +164,12 @@ the vendored TiddlyWiki5 core tiddlers.
   corpus now speaks TW5 whole — every mechanical class crossed; the
   hand-review tail (180 lines, four classes) lives in REVIEW-RESIDUE.md
   beside this ledger. This document stands as the arc record.
+- 2026-07-14 — the residue floor resolves three of four clusters: A = the
+  meme-provider QUINE (operator: the quine-all-code intent lives; cleaned
+  to pono — the whole TS body fenced as code, ~15 lines strike) · C = nine
+  hand-fixes (two kapae bold-in-italic inversions, one mangled list line,
+  six nested-legal conversions the guard over-held — TW5 nests bold inside
+  italic legally) · D = the honest tick counter (double-tick + tick-inside-
+  double aware). Sheet: 180 → 147; guarded + odd-bold classes EMPTY.
+  Cluster B (91 multi-line italics, split-at-newline one-shot) awaits the
+  operator nod — it cuts after the strangle.
