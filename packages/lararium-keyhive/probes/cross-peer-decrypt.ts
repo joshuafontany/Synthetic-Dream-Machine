@@ -40,7 +40,7 @@ function seed(fill: number): Uint8Array {
 async function makePeer(label: string, fill: number): Promise<KH.Keyhive> {
   const signer = KH.Signer.memorySignerFromBytes(seed(fill));
   const store  = KH.CiphertextStore.newInMemory();
-  const kh = await KH.Keyhive.init(signer, store, () => {}, /* forward_secrecy */ false);
+  const kh = await KH.Keyhive.init(signer, store, () => {});   // alpha.6: no forward_secrecy param
   console.log(`[probe] ${label} up; whoami=${kh.idString}`);
   return kh;
 }
@@ -83,14 +83,14 @@ async function main(): Promise<void> {
   const access = KH.Access.tryFromString("read") ?? KH.Access.tryFromString("admin");
   const deviceAgent = await founder.getAgent(deviceIndividual.id);
   if (!access || !deviceAgent) { console.log(`[probe] FAIL setup: access=${!!access} agent=${!!deviceAgent}`); return; }
-  const update = await founder.addMember(deviceAgent, doc.toMembered(), access, []);
-
-  // ── DECISIVE READING #1: does a DISTINCT-identity add produce leafSecrets (a secret to ship)? ──
-  const leaf = update.leafSecrets;
-  console.log(`[probe] ★ addMember.leafSecrets = ${leaf === undefined ? "undefined (NO secret produced)" : `${leaf.length}B SECRET`}`);
+  // alpha.6: addMember returns a SignedDelegation directly — the AddMemberUpdate/leafSecrets pair was
+  // removed, so there is no per-add secret to withhold or ship at all. The read-scope question is now purely
+  // "does the joinee decrypt from public ops + its own prekey secret?" — which the decrypt below settles.
+  const signedDelegation = await founder.addMember(deviceAgent, doc.toMembered(), access, []);
+  console.log(`[probe] ★ addMember → SignedDelegation (sig ${signedDelegation.signature.length}B); no leafSecrets surface in alpha.6`);
 
   // Ship ONLY PUBLIC bytes to the device: the events keyhive routes to it, plus the Encrypted blob.
-  // Deliberately NOT shipping update.leafSecrets, no exportPrekeySecrets, no archive.
+  // No exportPrekeySecrets, no archive — the device holds only its OWN prekey secret.
   const publicEvents = await publicEventsFor(founder, deviceAgent);
   const ingested = await device.ingestEventsBytes(publicEvents as unknown[]);
   // ingestEventsBytes returns a result array (errors/output), NOT an "applied" count — reachableDocs is truth.
@@ -122,7 +122,10 @@ async function main(): Promise<void> {
     process.exit(1);
   } catch (e) {
     console.log(`[probe] ★★ device.tryDecrypt FAILED: ${e instanceof Error ? e.message : e}`);
-    console.log(`[probe] VERDICT: without leafSecrets the joinee cannot decrypt — a SECRET must travel → sealed channel REQUIRED (H refuted for our config).`);
+    console.log(`[probe] VERDICT: on alpha.6 the alpha.3 transport approach yields "Key not found" — the read-scope`);
+    console.log(`[probe]          was reworked (no leafSecrets, forward-chunk secrecy). The cross-peer content pattern`);
+    console.log(`[probe]          (ship the tryEncrypt update_op? use tryEncryptKeyed/decryptWithKey? forward-only?) is`);
+    console.log(`[probe]          UNRESOLVED — see FINDINGS.md. Not "sealed channel required"; a MISSING-OP, most likely.`);
     process.exit(1);
   }
 }

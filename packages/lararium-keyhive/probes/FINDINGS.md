@@ -241,3 +241,13 @@ No Beelay / JS doc-sync exposed in any alpha (still Rust-only `beelay-core`) →
 
 BEFORE shipping transport: bump to alpha.6, migrate the init/addMember API, and RE-RUN this probe adapted to the
 new `SignedDelegation` + `*Keyed` surface to re-establish the read-scope guarantee. Do not assume alpha.3's result holds.
+
+### alpha.6 RE-VERIFY — the alpha.3 crossing does NOT hold as-is; read-scope reworked
+
+Bumped to alpha.6, migrated the provider (init drops forward_secrecy; addMember→SignedDelegation), re-ran
+the probe. Result: `tryDecrypt` → **"Key not found"**. The distinct-identity joinee, shipped the same public
+events that worked on alpha.3, cannot decrypt. The rework (no leafSecrets, "secrecy of concurrent and future
+chunks") changed what a newly-admitted member can read. Migration is SOUND (keyhive typecheck clean; node
+boot-daemon-keyhive + admit-ceremony 6/6). The OPEN question is the alpha.6 cross-peer content pattern:
+ship the `tryEncrypt` `update_op`? use `tryEncryptKeyed` + `Encrypted.decryptWithKey(key)`? is read now
+forward-only (a new member reads future chunks, not pre-join content)? — UNRESOLVED, spirit dispatched.

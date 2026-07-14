@@ -129,12 +129,11 @@ export class KeyhiveProvider implements CapabilityProvider {
       }
     };
 
-    // forward_secrecy: false — documents carry the CGKA predecessor key chain, so a
-    // LATER-admitted device derives the doc key by replaying events (the multi-vessel
-    // admit path / Model-B). `true` would rotate keys forward and lock new readers out
-    // of prior state, requiring explicit rekey delivery. For one operator's own device
-    // swarm, replayable access is the right default (threat model = the operator's devices).
-    this.kh = await KH.Keyhive.init(signer, store, handler, false);
+    // Documents carry the CGKA predecessor key chain, so a LATER-admitted device derives the doc key by
+    // replaying events (the multi-vessel admit path / Model-B) — replayable access, the right default for
+    // one operator's own device swarm (threat model = the operator's devices). keyhive fixes this behavior;
+    // it retains secrecy of concurrent and future chunks without a per-init forward-secrecy toggle.
+    this.kh = await KH.Keyhive.init(signer, store, handler);
   }
 
   private requireKh(): KH.Keyhive {
@@ -192,8 +191,8 @@ export class KeyhiveProvider implements CapabilityProvider {
     const doc = await this.requireKh().getDocument(docId);
     if (!doc) throw new Error(`document not in scope (lost from local state?): ${args.bagUrl}`);
 
-    // 0.1.0: addMember returns AddMemberUpdate { delegation: SignedDelegation, leafSecrets }.
-    const update = await this.requireKh().addMember(
+    // addMember returns the SignedDelegation directly (the group re-keys to the new reader's own prekey).
+    const signedDelegation = await this.requireKh().addMember(
       audienceAgent, doc.toMembered(), access, [],
     );
 
@@ -201,7 +200,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     // its hex as a stable delegationId for revocation. The transport bytes for the
     // audience peer flow through the event_handler (DELEGATED + the CGKA ops addMember
     // also fires) into the EventStore; callers ship those to admit a peer.
-    const sigBytes = update.delegation.signature;
+    const sigBytes = signedDelegation.signature;
     const delegationId = bytesToHex(sigBytes);
     this.delegations.set(delegationId, sigBytes);
     // Track audience+bag+access for revoke().

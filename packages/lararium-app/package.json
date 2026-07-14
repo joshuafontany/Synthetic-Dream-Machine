@@ -18,7 +18,7 @@
     "idiomorph": "^0.7.3"
   },
   "devDependencies": {
-    "@keyhive/keyhive": "0.1.0-alpha.3",
+    "@keyhive/keyhive": "0.1.0-alpha.6",
     "@lararium/keyhive": "workspace:*",
     "vite": "^8.1.4",
     "vite-plugin-arraybuffer": "^0.1.0",
