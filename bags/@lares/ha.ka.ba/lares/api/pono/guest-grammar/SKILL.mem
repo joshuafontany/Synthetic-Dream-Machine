@@ -23,23 +23,23 @@ type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/lares/api/pono/guest-grammar/SKILL"
 ```
 
-# Guest-Grammar Skill
+! Guest-Grammar Skill
 
 [guest-grammar.md](../guest-grammar.md) holds the law.
 This skill carries the working procedure.
 
 <<~ ahu #load-contract >>
 
-## Load Contract
+!! Load Contract
 
 Keep these points active when the skill loads:
 
-- the parent invariant binds explicit guest admission
-- `hana` stays the canonical guest-work block when the work concerns data or code processing
-- host primitives stay distinct from guest families
-- local priming payload stays distinct from canonical meme identity payload
-- graceful local degradation beats flattering collapse or silent fabrication
-- the smallest lawful intervention beats a grand rewrite
+* the parent invariant binds explicit guest admission
+* `hana` stays the canonical guest-work block when the work concerns data or code processing
+* host primitives stay distinct from guest families
+* local priming payload stays distinct from canonical meme identity payload
+* graceful local degradation beats flattering collapse or silent fabrication
+* the smallest lawful intervention beats a grand rewrite
 
 <<~/ahu >>
 
@@ -47,7 +47,7 @@ Keep these points active when the skill loads:
 
 <<~ ahu #workflow-contract >>
 
-## Workflow Contract
+!! Workflow Contract
 
 Use this skill to:
 
@@ -67,31 +67,31 @@ Working order:
 
 Do not:
 
-- treat ambient punctuation as lawful guest admission
-- let a root primitive quietly stand in for a guest family
-- move canonical identity payload into `hana`
-- hide malformed guest work behind a fake success path
-- burden the parent with full parser or render implementation detail
+* treat ambient punctuation as lawful guest admission
+* let a root primitive quietly stand in for a guest family
+* move canonical identity payload into `hana`
+* hide malformed guest work behind a fake success path
+* burden the parent with full parser or render implementation detail
 
 <<~/ahu >>
 
 <<~ ahu #trigger >>
 
-## Trigger
+!! Trigger
 
 Use this skill when the request asks to:
 
-- create or revise guest-grammar law
-- audit a `hana` worksite
-- protect root primitives from guest overload
-- separate admission law from parser or render detail
-- define graceful degradation for guest work
+* create or revise guest-grammar law
+* audit a `hana` worksite
+* protect root primitives from guest overload
+* separate admission law from parser or render detail
+* define graceful degradation for guest work
 
 Prefer another surface when the work concerns only:
 
-- root authoring semantics under `memetic-wikitext`
-- pure parser legality with no admission-law change
-- pure render lowering with no host-guest boundary change
+* root authoring semantics under `memetic-wikitext`
+* pure parser legality with no admission-law change
+* pure render lowering with no host-guest boundary change
 
 <<~/ahu >>
 
@@ -107,20 +107,20 @@ Prefer another surface when the work concerns only:
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
 Read the host surface before changing it.
 
 Look for:
 
-- explicit guest entry
-- `hana` opener and closer
-- optional priming payload
-- guest body continuity
-- host primitive drift
-- parser legality detail
-- render lowering detail
-- fixture or conformance backlog
+* explicit guest entry
+* `hana` opener and closer
+* optional priming payload
+* guest body continuity
+* host primitive drift
+* parser legality detail
+* render lowering detail
+* fixture or conformance backlog
 
 Preserve the difference between admitted, malformed, unsupported, and absent guest regions.
 
@@ -128,42 +128,42 @@ Preserve the difference between admitted, malformed, unsupported, and absent gue
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
 Sort findings into these buckets:
 
-- `admission-law`
-- `hana-shape`
-- `ownership-boundary`
-- `degradation`
-- `parser-or-lowering-detail`
-- `fixtures-or-docs-residue`
+* `admission-law`
+* `hana-shape`
+* `ownership-boundary`
+* `degradation`
+* `parser-or-lowering-detail`
+* `fixtures-or-docs-residue`
 
 Orientation rule:
 
-- `admission-law`, `hana-shape`, and `ownership-boundary` stay nearest the parent
-- `degradation` stays only at the level of invariant fallback pressure
-- `parser-or-lowering-detail` moves outward first
-- `fixtures-or-docs-residue` belongs in docs or later subtype surfaces
+* `admission-law`, `hana-shape`, and `ownership-boundary` stay nearest the parent
+* `degradation` stays only at the level of invariant fallback pressure
+* `parser-or-lowering-detail` moves outward first
+* `fixtures-or-docs-residue` belongs in docs or later subtype surfaces
 
 <<~/ahu >>
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
 Choose the smallest lawful shape:
 
-- parent only, when admission law already reads clearly
-- parent + `SKILL.md`, when audit or shaping procedure needs room
-- parent + docs, when examples and boundary notes crowd the root
-- parent + `SKILL.md` + docs, when law, procedure, and explanation all need different rooms
+* parent only, when admission law already reads clearly
+* parent + `SKILL.md`, when audit or shaping procedure needs room
+* parent + docs, when examples and boundary notes crowd the root
+* parent + `SKILL.md` + docs, when law, procedure, and explanation all need different rooms
 
 Then choose one honest posture for the target region:
 
-- not admitted
-- admitted but degraded
-- admitted and bounded
+* not admitted
+* admitted but degraded
+* admitted and bounded
 
 Do not round up from aspiration to law.
 
@@ -171,18 +171,18 @@ Do not round up from aspiration to law.
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
 When writing or revising:
 
-- keep the parent compact
-- keep guest admission explicit
-- keep `hana` block structure crisp
-- move full canonical forms and fixtures into sidecars
-- keep ownership lines short and load-bearing
-- link the split surfaces with `loulou`
+* keep the parent compact
+* keep guest admission explicit
+* keep `hana` block structure crisp
+* move full canonical forms and fixtures into sidecars
+* keep ownership lines short and load-bearing
+* link the split surfaces with `loulou`
 
-### Canonical Hana Shape
+!!! Canonical Hana Shape
 
 ````text
 <<~ hana #work >>
@@ -202,33 +202,33 @@ result-shape = "set"
 
 <<~ ahu #aftermath >>
 
-## ↺ Aftermath
+!! ↺ Aftermath
 
 Verify the guest stayed bounded, then name what the region became.
 
 Hoʻoko — before closing, check:
 
-- opener and `file-path` agree with the carrier
-- the parent invariant remains small enough to reload easily
-- `hana` keeps opener, payload, and body distinct
-- docs state non-law posture near the top
-- no host primitive got reassigned to guest-family work
-- parser and lowering detail live here, off the parent
-- outward links name real adjacency or real backlog
+* opener and `file-path` agree with the carrier
+* the parent invariant remains small enough to reload easily
+* `hana` keeps opener, payload, and body distinct
+* docs state non-law posture near the top
+* no host primitive got reassigned to guest-family work
+* parser and lowering detail live here, off the parent
+* outward links name real adjacency or real backlog
 
 Aftermath — close by naming:
 
-- what stayed in the parent
-- what left for the sidecars
-- whether the target region now counts as not admitted, admitted but degraded, or admitted and bounded
-- which next change would improve the region honestly
-- what still lacks a lawful downstream home
+* what stayed in the parent
+* what left for the sidecars
+* whether the target region now counts as not admitted, admitted but degraded, or admitted and bounded
+* which next change would improve the region honestly
+* what still lacks a lawful downstream home
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/guest-grammar >>

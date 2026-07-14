@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/dispatcher"
 
 <<~ ahu #head >>
 
-# ~ Dispatcher
+! ~ Dispatcher
 
 The root dispatch sigil. `<<~ name p1 p2 … >>` routes to the `\widget ~name` or
 `\procedure ~name` body registered in the current tiddler scope.
@@ -48,7 +48,7 @@ grammar: new sigils need only a tiddler — no code change required.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 The dispatcher MUST route via `\widget ~` — not direct JS widget lookup.
 The dispatcher MUST accept `name` and `p1`–`p5` positional arguments only.
@@ -60,7 +60,7 @@ Undefined names resolve to empty output (TW5 missing-variable behavior) — MUST
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ name >>
@@ -79,7 +79,7 @@ TW5 wikitext body:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~/ahu >>
 

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/procedure"
 
 <<~ ahu #head >>
 
-# \procedure
+! \procedure
 
 English alias for `wehe`. See canonical spec:
 

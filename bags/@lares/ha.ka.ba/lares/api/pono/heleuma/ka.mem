@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ka"
 
 <<~ ahu #head >>
 
-# Heleuma-Ka (Soul / Fire)
+! Heleuma-Ka (Soul / Fire)
 
 **Ka**: soul, fire, drive, energy, thrust, movement. The animating charge. In motion toward state-change.
 
@@ -40,7 +40,7 @@ A heleuma-ka anchor exists outside the corpus **by current necessity, not by nat
 
 <<~ ahu #required-fields >>
 
-## Required Fields (SHALL)
+!! Required Fields (SHALL)
 
 A meme that carries `heleuma-ka` SHALL declare in `#iam` TOML:
 
@@ -67,13 +67,13 @@ Signal fields (`mana`, `manao`, `manaoio`, `confidence`) SHALL approach 16 / 16 
 
 <<~ ahu #promotion-path >>
 
-## Promotion Path
+!! Promotion Path
 
 When `body-sha256` is present and all signal thresholds are met, `_bootModules()` loads this meme as a live JS module, replacing the compiled-in fallback. (When keyhive lands, a capability proof will also be required — gate layer 3.) At that point:
 
-- `heleuma = "ka"` SHALL be removed
-- The meme pair becomes a standard corpus meme pair
-- The doc meme `source` field MAY be retained as provenance
+* `heleuma = "ka"` SHALL be removed
+* The meme pair becomes a standard corpus meme pair
+* The doc meme `source` field MAY be retained as provenance
 
 <<~/ahu >>
 

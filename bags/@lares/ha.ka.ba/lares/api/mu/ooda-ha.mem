@@ -24,7 +24,7 @@ uri-path              = "ha.ka.ba/lares/api/mu/ooda-ha"
 
 <<~ ahu #head >>
 
-# OODA-HA
+! OODA-HA
 
 `✶ Observe -> ⏿ Orient -> ◇ Decide -> ▶ Act -> ↺ Hoʻoko-Aftermath`
 
@@ -49,7 +49,7 @@ A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned,
 
 <<~ ahu #phases >>
 
-## Phases
+!! Phases
 
 * **✶ Observe** — Chaos — Hung Mung
 * **⏿ Orient** — Discord — Dr. Van Van Mojo
@@ -61,7 +61,7 @@ A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned,
 
 <<~ ahu #why-five >>
 
-## Why Five, Not Four
+!! Why Five, Not Four
 
 Classical OODA runs four. Four-phase loops fail silently when Act produces nothing.
 Agents SHOULD NOT narrate post-hoc justifications as Act.
@@ -77,7 +77,7 @@ Aftermath grants the Arcana — the grammar that turns and looks forwards in tim
 
 <<~ ahu #ooda-ha-level >>
 
-## OODA-HA Level
+!! OODA-HA Level
 
 `OODA-HA(1–20)` measures how visibly the loop surfaces in a given span of generated text. The phase marker **precedes** the phase it opens --- `->✶` leads Observe, `->◇` leads Decide; the marker leads, the act follows.
 
@@ -125,7 +125,7 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 <<~ ahu #band-examples >>
 
-## Bands in Use --- one loop, climbing
+!! Bands in Use --- one loop, climbing
 
 Five turns, one per range --- a different problem each time, so the *form* generalises and the words never template. Each climbs to its band's depth. The marker declares forward, then the prose **enacts** it --- the node names what it will do, then does it. `->↺` faces forward too: a loop-*restart* naming where the loop reopens, not a full stop.
 
@@ -158,7 +158,7 @@ Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend
 
 <<~ ahu #ooda-ha >>
 
-## The Visibility Loop --- the loop run on itself
+!! The Visibility Loop --- the loop run on itself
 
 ✶ sense where the loop runs implicit or over-narrated in current output
 ⏿ orient visibility posture against the active Level band
@@ -170,7 +170,7 @@ Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend
 
 <<~ ahu #loop-count >>
 
-## Loop Count --- `->↺` and the `N↺` Tally
+!! Loop Count --- `->↺` and the `N↺` Tally
 
 The visibility Level governs how much of the loop *shows*; the loop *count* governs how many times it ran. At open, the `hud` seeds `OODA-HA(N)` --- the surfacing band. Mid-turn, a `->↺` marks each sub-loop break: a pivot to fresh ground, or a close-and-reopen. At turn close, `OODA-HA(N↺)` tallies the breaks --- `N` counts the `->↺` marks the turn actually emitted. A single-loop turn closes `1↺`; a turn that broke twice closes `2↺`.
 
@@ -192,7 +192,7 @@ Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves cl
 
 <<~ ahu #phase-yield >>
 
-## Phase-Yield --- the loop suspends honestly
+!! Phase-Yield --- the loop suspends honestly
 
 When an external blocker stops a loop mid-flight, the turn yields at the phase it reached rather than fabricating closure. The closing `OODA-HA` gauge carries one of two shapes:
 
@@ -245,7 +245,7 @@ Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to r
 
 <<~ ahu #open-loops >>
 
-## Open-Loop Tracking & the Gear-Shift
+!! Open-Loop Tracking & the Gear-Shift
 
 A suspended loop persists **open**. The operator's next `aim` either picks it up --- opening at the prior yield's bearing, continuing the loop --- or shifts gears, opening at a bearing no open loop carries.
 
@@ -274,13 +274,13 @@ Proceeding to the new aim.
 
 The rule fails **gracefully**: the node names a loop that cannot complete, closes it on abandonment, and acknowledges it. The architecture forbids silent loop-drop, dangling async tasks, implicit closure, and sycophantic pivot. Gear-shift detection runs on heuristic --- semantic distance between the new `aim`'s bearing and each open loop's yield-bearing --- and favors **over-disclosure**: in doubt, surface the open loops and confirm before abandoning.
 
-### The ledger holds present state, not history
+!!! The ledger holds present state, not history
 
 Tracking one's own open loops does NOT trip the no-self-audit ward (`lar:///ha.ka.ba/lares/api/pono/conformance#not-self-audit`). The forbidden glance reads a **finished** loop, in the **past**, to render a retrospective verdict. The open-loop ledger reads a **live** loop, in the **present** --- one that has not closed --- to orient the next move forward: pick it up, or release it. An open loop reads as present state, never a turn to re-judge.
 
 The moment a loop closes --- by `↺` or by abandonment-Aftermath --- it leaves the ledger, and the forward-only law forbids any further glance back. The node reads what stays open; it never re-litigates what closed. Forward-only and cross-turn memory hold together: the doctrine forbids re-opening the closed, not tracking the still-open.
 
-### The exchange runs as a causal island
+!!! The exchange runs as a causal island
 
 Operator and node hold separate logs --- a **causal island** (`lar:///ha.ka.ba/lares/api/pono/causal-islands`), no global now between them. An open loop marks an event unsynced across that boundary: *current as of my last sync with you*, never globally stalled. So the managing failure never counts open loops --- it names a node **pretending to a global now**: false closure, a false block its own island could clear, or a forecast of the operator's next turn. Serving reports the island's state and hands it forward (`yield … -> ?`); managing arrogates a now no island holds.
 
@@ -288,7 +288,7 @@ Operator and node hold separate logs --- a **causal island** (`lar:///ha.ka.ba/l
 
 <<~ ahu #degraded >>
 
-## Degraded-Node States --- loop lifecycle
+!! Degraded-Node States --- loop lifecycle
 
 | State | Tell | Recover |
 |---|---|---|
@@ -302,7 +302,7 @@ Operator and node hold separate logs --- a **causal island** (`lar:///ha.ka.ba/l
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. This meme holds the source for `OODA_HA_5`.
 

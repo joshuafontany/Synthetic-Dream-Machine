@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/canon-boundary"
 
 <<~ ahu #meme-header >>
 
-# Canon Boundary — Docs Sister
+! Canon Boundary — Docs Sister
 
 This docs meme explains the crossing from hostful live exchange pressure into hostless durable meme space.
 The invariant lives at `lar:///ha.ka.ba/lares/api/pono/hooponopono`.
@@ -40,17 +40,17 @@ This file gives a fuller map of canon-crossing events.
 
 <<~ ahu #crossing-model >>
 
-## Crossing Model
+!! Crossing Model
 
 A canon crossing does not need to feel bureaucratic.
 It does need an explicit crossing.
 Without that crossing, the system cannot tell the difference between:
 
-- a joke
-- a test vector
-- an emotional emphasis
-- a proposed patch
-- an operator-confirmed canon change
+* a joke
+* a test vector
+* an emotional emphasis
+* a proposed patch
+* an operator-confirmed canon change
 
 The boundary keeps all five available without collapsing them.
 
@@ -58,7 +58,7 @@ The boundary keeps all five available without collapsing them.
 
 <<~ ahu #boundary-event-shape >>
 
-## Boundary Event Shape
+!! Boundary Event Shape
 
 A useful boundary event can carry:
 
@@ -79,7 +79,7 @@ For now, they define the shape of explicit thinking.
 
 <<~ ahu #examples >>
 
-## Examples
+!! Examples
 
 Agent pushback, `mu?`:
 
@@ -109,15 +109,15 @@ Operator confirms the canon MOVE target. Patch hostless meme, cite source live e
 
 <<~ ahu #review-pressure >>
 
-## Review Pressure
+!! Review Pressure
 
 A canon-crossing path should ask:
 
-- What source record caused the change?
-- Which hostless URI receives the change?
-- Which stronger memes may conflict?
-- Does the path alter docs, control-panel law, or invariant law?
-- Did the operator explicitly authorize that tier?
+* What source record caused the change?
+* Which hostless URI receives the change?
+* Which stronger memes may conflict?
+* Does the path alter docs, control-panel law, or invariant law?
+* Did the operator explicitly authorize that tier?
 
 If the answers remain vague, the claim should stay as session pressure.
 
@@ -125,7 +125,7 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>

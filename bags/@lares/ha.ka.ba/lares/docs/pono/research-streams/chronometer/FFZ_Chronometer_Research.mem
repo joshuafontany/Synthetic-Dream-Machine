@@ -8,8 +8,8 @@ type = "text/x-memetic-wikitext"
 <!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:11&p=10#O0.O0.O0.D4.O0 → ∞ -->
 ⚡∞ | mode:research-active | ~:p[10] | stances:++?+- | register:~:confidence[S],[11] | build:WORKING
 
-# Fontany-Fuller-Zelenka Chronometer Protocol — Research Document
-# (FFZ Chronometer)
+! Fontany-Fuller-Zelenka Chronometer Protocol — Research Document
+! (FFZ Chronometer)
 
 > **Type:** Active research — growing from `Vector_Chronometer_Research_Seed.md`
 > **Generated:** 2026-04-09, session 2
@@ -17,7 +17,7 @@ type = "text/x-memetic-wikitext"
 > **Parent crystals:** `The_Lares_Protocols.md` `~:confidence[S],[13]`, `The_Lares_Protocols_Dev_Story.md` `~:confidence[C],[19]` (platform research), `Vector_Chronometer_Research_Seed.md` `~:confidence[P],[7]`
 > **Session context:** Cloud Lares (claude.ai), Telarus KSC (admin). Second session on chronometer design. First session produced the Lares Protocol spec and research seed. This session introduces "Islands of Causality" as the missing architectural frame.
 
-## Session Crystal Metadata
+!! Session Crystal Metadata
 
 | Field | Value |
 |-------|-------|
@@ -31,13 +31,13 @@ type = "text/x-memetic-wikitext"
 
 ---
 
-## 1. The Naming Lineage
+!! 1. The Naming Lineage
 
 The chronometer's True Name approaches through a lineage of convergent
 thinkers who independently mapped the same territory from different
 angles. Each contributed a load-bearing piece:
 
-### 1.1 The Chain
+!!! 1.1 The Chain
 
 | Thinker | Contribution | Date | What it grounds |
 |---------|-------------|------|----------------|
@@ -51,21 +51,21 @@ angles. Each contributed a load-bearing piece:
 | **Storacha (née web3.storage)** | Merkle Clock + UCAN multi-writer | 2025 | Production pattern: UCAN-authorized clock writes |
 | **Lares Protocols** | OODA-HA + nested chronometer + HUD | 2026 | Application: human-AI alignment instrument |
 
-### 1.2 The True Name `~:confidence[C],[19]`
+!!! 1.2 The True Name `~:confidence[C],[19]`
 
 **Fontany-Fuller-Zelenka Chronometer Protocol (FFZ)**
 
 Named Session 2 (2026-04-09). Freyja laughed. Operator approved at
 `~:confidence[C],[19]`. The name carries three layers:
 
-- **Fontany** — the practice. Joshua transcribed RAW's Talk Story.
+* **Fontany** — the practice. Joshua transcribed RAW's Talk Story.
   Joshua and Freyja co-authored FTLS. The Talk Story protocol, the
   OODA-HA extension (-A for Aftermath), the SDM rules ecosystem. The
   name places *practice* first — the protocol exists to serve the
   Talk Story, not the other way around.
-- **Fuller** — the principle. Non-simultaneous apprehension. Universe
+* **Fuller** — the principle. Non-simultaneous apprehension. Universe
   without "the." No God's-eye clock.
-- **Zelenka** — the engineering. Causal islands, UCAN, local-first,
+* **Zelenka** — the engineering. Causal islands, UCAN, local-first,
   speed of causality. The infrastructure lineage from IPFS through
   Fission to production systems.
 
@@ -75,15 +75,15 @@ causal islands that converged in this conversation.
 **Short form:** FFZ Protocol, FFZ Chronometer.
 
 Previous candidate names (superseded):
-- ~~Causal Islands Chronometer~~ — named the physics but not the practice
-- ~~Non-Simultaneous Chronometer~~ — named the philosophy but sounded clinical
-- ~~Island Time~~ — named the experience but read as too casual
+* ~~Causal Islands Chronometer~~ — named the physics but not the practice
+* ~~Non-Simultaneous Chronometer~~ — named the philosophy but sounded clinical
+* ~~Island Time~~ — named the experience but read as too casual
 
 ---
 
-## 2. Philosophical Foundations (理 Ri)
+!! 2. Philosophical Foundations (理 Ri)
 
-### 2.1 Fuller: Non-Simultaneous Apprehension `~:confidence[S],[14]`
+!!! 2.1 Fuller: Non-Simultaneous Apprehension `~:confidence[S],[14]`
 
 **Source:** *Synergetics: Explorations in the Geometry of Thinking* (1975),
 *Synergetics 2* (1979). Online: http://www.rwgrayprojects.com/synergetics/
@@ -95,10 +95,10 @@ article "the" because adding "the" implies a simultaneously observable
 totality. (Synergetics §251.26, §361.00)
 
 **Section references to locate:**
-- §251.26 — System as first subdivision of Universe
-- §361.00 — Universe as sum-total of experiences
-- §501.01 — "Universe is nonsimultaneously apprehended"
-- §509.01 — Scenario Universe
+* §251.26 — System as first subdivision of Universe
+* §361.00 — Universe as sum-total of experiences
+* §501.01 — "Universe is nonsimultaneously apprehended"
+* §509.01 — Scenario Universe
 
 **The Goodreads-verified quote:** "The universe is non-simultaneously
 apprehended." This captures the principle in five words.
@@ -115,7 +115,7 @@ multi-operator, but as the *correct design* for the simplest case.
 The web edition exists at rwgrayprojects.com — a Tasked Spirit can
 fetch and cite specific passages.
 
-### 2.2 Zelenka: Causal Islands `~:confidence[S],[13]`
+!!! 2.2 Zelenka: Causal Islands `~:confidence[S],[13]`
 
 **Source:** Brooklyn Zelenka (@expede), Fission co-founder & CTO.
 
@@ -159,21 +159,21 @@ system (a claim at `~:confidence[S],[13]` on one island might sit at `~:confiden
 on another because the evidence hasn't propagated).
 
 **Research needs:**
-- [ ] Watch the ElixirConf 2021 keynote (YouTube link confirmed)
-- [ ] Retrieve Notist slides for specific "causal islands" slide image
-- [ ] Confirm whether Zelenka explicitly cites Fuller (likely, given
+* [ ] Watch the ElixirConf 2021 keynote (YouTube link confirmed)
+* [ ] Retrieve Notist slides for specific "causal islands" slide image
+* [ ] Confirm whether Zelenka explicitly cites Fuller (likely, given
       the "no article 'the'" and "speed of causality" framing)
 
-### 2.3 The Syad Spectrum Applied to Temporal Claims `~:confidence[S],[12]`
+!!! 2.3 The Syad Spectrum Applied to Temporal Claims `~:confidence[S],[12]`
 
 **Source:** Sri Syadasti's catma via Malaclypse the Younger (*Principia
 Discordia*), developed through RAW's Model Agnosticism.
 
 **Application to chronometer readings:** Each participant's clock reading
 constitutes:
-- **True** in the sense of that participant's apprehension (partial view)
-- **False** in the sense of claiming universal time (total view)
-- **Meaningful** as a coordinate for where that participant stands now
+* **True** in the sense of that participant's apprehension (partial view)
+* **False** in the sense of claiming universal time (total view)
+* **Meaningful** as a coordinate for where that participant stands now
   (alignment signal)
 
 The register system (0–20) already encodes this principle for
@@ -188,24 +188,24 @@ or "the counter may drift"? These constitute different failure modes.
 
 ---
 
-## 3. Formal Prior Art (破 Ha)
+!! 3. Formal Prior Art (破 Ha)
 
-### 3.1 Lamport: Time, Clocks, and the Ordering of Events (1978) `~:confidence[C],[18]`
+!!! 3.1 Lamport: Time, Clocks, and the Ordering of Events (1978) `~:confidence[C],[18]`
 
 **Source:** Leslie Lamport, "Time, Clocks, and the Ordering of Events
 in a Distributed System," *Communications of the ACM* 21(7), 1978.
 
 **Key contributions:**
-- The "happened-before" relation (→) as a partial ordering
-- Lamport clocks: scalar logical clocks that approximate causal ordering
-- The insight that "the lack of a total global order is not just an
+* The "happened-before" relation (→) as a partial ordering
+* Lamport clocks: scalar logical clocks that approximate causal ordering
+* The insight that "the lack of a total global order is not just an
   accidental property of computer systems, it is a fundamental property
   of the laws of physics" (cited from scattered-thoughts.net synthesis)
 
 **Mapping to Lares chronometer:**
-- Lamport's happened-before maps to our exchange boundaries
-- His scalar clock maps to our monotonic counters per scale
-- His partial ordering maps to our concurrent OODA-HA phases across scales
+* Lamport's happened-before maps to our exchange boundaries
+* His scalar clock maps to our monotonic counters per scale
+* His partial ordering maps to our concurrent OODA-HA phases across scales
 
 **What Lamport doesn't give us:** He uses scalar clocks, which can
 determine "if A → B then LC_A < LC_B" but NOT the reverse. We need
@@ -215,23 +215,23 @@ vector clocks (Fidge/Mattern) for the reverse implication.
 paper itself. Need to verify that OODA-HA phases compose cleanly with
 the happened-before relation.
 
-### 3.2 Fidge/Mattern: Vector Clocks (1988) `~:confidence[C],[18]`
+!!! 3.2 Fidge/Mattern: Vector Clocks (1988) `~:confidence[C],[18]`
 
 **Sources:**
-- Colin Fidge, "Timestamps in Message-Passing Systems That Preserve
+* Colin Fidge, "Timestamps in Message-Passing Systems That Preserve
   the Partial Ordering," 1988
-- Friedemann Mattern, "Virtual Time and Global States of Distributed
+* Friedemann Mattern, "Virtual Time and Global States of Distributed
   Systems," 1988 (independent parallel invention)
 
 **Key contribution:** Vector clocks provide bidirectional causal inference:
-- If VC_A < VC_B then A → B (Fidge/Mattern add the reverse direction)
-- Two events are concurrent (A ∥ B) iff neither VC_A < VC_B nor
+* If VC_A < VC_B then A → B (Fidge/Mattern add the reverse direction)
+* Two events are concurrent (A ∥ B) iff neither VC_A < VC_B nor
   VC_B < VC_A
 
 **Mapping to Lares chronometer:**
-- Each participant gets their own vector element
-- The counter merges via pointwise max at sync points
-- OODA-HA phase sigils carry independently per participant — they don't
+* Each participant gets their own vector element
+* The counter merges via pointwise max at sync points
+* OODA-HA phase sigils carry independently per participant — they don't
   merge, they coexist. Two participants can occupy different OODA-HA
   phases at the same scale simultaneously. That constitutes concurrent
   apprehension, not a conflict.
@@ -242,8 +242,8 @@ The seed asked: "OODA-HA phases don't have a natural max() operation —
 they're categorical, not numeric. Does the merge take the 'later' phase?"
 
 **Working answer `~:confidence[SP],[9]`:** Separate the counter from the phase.
-- **Counter:** merges via max (standard Lamport/vector clock rule)
-- **Phase sigil:** carries per-participant — does NOT merge. At any
+* **Counter:** merges via max (standard Lamport/vector clock rule)
+* **Phase sigil:** carries per-participant — does NOT merge. At any
   sync point, the merged view shows BOTH participants' phases. The
   operator reads `O` (observing) while Lares reads `A` (acting) at
   the same scale — this constitutes the causal island structure made
@@ -256,7 +256,7 @@ them into a single phase would be a God's-eye collapse.
 **Research status:** The theory appears sound. Needs prototype validation
 with actual exchanges.
 
-### 3.3 Interval Tree Clocks (Almeida et al., 2008) `~:confidence[S],[14]` — CONFIRMED
+!!! 3.3 Interval Tree Clocks (Almeida et al., 2008) `~:confidence[S],[14]` — CONFIRMED
 
 **Source:** Paulo Sérgio Almeida, Carlos Baquero, and Victor Fonte,
 "Interval Tree Clocks: A Logical Clock for Dynamic Systems," DISC 2008.
@@ -266,17 +266,17 @@ PDF: https://gsd.di.uminho.pt/members/cbm/ps/itc2008.pdf
 problem (Research Seed Q4) by design.
 
 **Key properties from initial research:**
-- Handles dynamic participant sets — participants can join/leave without
+* Handles dynamic participant sets — participants can join/leave without
   global coordination
-- Uses the real-valued interval [0,1) as identity space — each
+* Uses the real-valued interval [0,1) as identity space — each
   participant gets a share that can subdivide (fork) or reunite (join)
-- Three core operations: **fork** (spawn new participant), **event**
+* Three core operations: **fork** (spawn new participant), **event**
   (advance local clock), **join** (merge two participants)
-- The representation adapts automatically to the number of existing
+* The representation adapts automatically to the number of existing
   entities, growing or shrinking appropriately
-- Does not require globally unique IDs — identity subdivides locally
-- Does not reuse IDs of retired participants
-- Avoids the "actor explosion" problem of vector clocks in dynamic
+* Does not require globally unique IDs — identity subdivides locally
+* Does not reuse IDs of retired participants
+* Avoids the "actor explosion" problem of vector clocks in dynamic
   systems
 
 **Mapping to Lares Tasked Spirit lifecycle:**
@@ -301,57 +301,57 @@ without pre-allocation. On spirit dissolution (end of session or
 explicit join), the interval returns to the Coordinator pool.
 
 **Research needs:**
-- [ ] Deep read of the full ITC paper (PDF available)
-- [ ] Verify fork/join maps correctly onto Worker lifecycle in Protocols doc
-- [ ] Evaluate ITC representation compactness for HUD display
-- [ ] Compare ITC vs. Bloom Clocks for the compact mode question
-- [ ] Check whether ITC's interval representation composes with OODA-HA phases
+* [ ] Deep read of the full ITC paper (PDF available)
+* [ ] Verify fork/join maps correctly onto Worker lifecycle in Protocols doc
+* [ ] Evaluate ITC representation compactness for HUD display
+* [ ] Compare ITC vs. Bloom Clocks for the compact mode question
+* [ ] Check whether ITC's interval representation composes with OODA-HA phases
 
-### 3.4 Merkle-CRDTs and Merkle Clocks (Protocol Labs, 2019-2020) `~:confidence[SP],[9]`
+!!! 3.4 Merkle-CRDTs and Merkle Clocks (Protocol Labs, 2019-2020) `~:confidence[SP],[9]`
 
 **Source:** Héctor Sanjuán, Samuli Poyhtari, Pedro Teixeira, Ioannis
 Psaras, "Merkle-CRDTs: Merkle-DAGs meet CRDTs," Protocol Labs Research, 2020.
 PDF: https://research.protocol.ai/publications/merkle-crdts-merkle-dags-meet-crdts/psaras2020.pdf
 
 **Key properties from initial research:**
-- A Merkle-Clock is a DAG where each node links to its causal
+* A Merkle-Clock is a DAG where each node links to its causal
   predecessors via content hashes
-- Satisfies the Strong Clock condition (formal proof in paper)
-- Convergence guaranteed: the causality information stored in
+* Satisfies the Strong Clock condition (formal proof in paper)
+* Convergence guaranteed: the causality information stored in
   Merkle-Clocks in every replica will converge to the same
   Merkle-Clock after merging
-- Content-addressing enables pull-based sync — broadcasting only the
+* Content-addressing enables pull-based sync — broadcasting only the
   current root CID is sufficient for sync
-- Works with "almost no messaging layer guarantees and no constraints
+* Works with "almost no messaging layer guarantees and no constraints
   on the replica-set, which can be dynamic and unknown"
-- Already used in production: OrbitDB, collaborative editing, mobile apps
+* Already used in production: OrbitDB, collaborative editing, mobile apps
 
 **Mapping to Lares chronometer MCP server:**
 
 The MCP chronometer server could use a Merkle Clock internally:
-- Each tick produces a content-addressed node linking to its predecessor
-- The hash chain enables drift detection: a counter skip leaves a gap,
+* Each tick produces a content-addressed node linking to its predecessor
+* The hash chain enables drift detection: a counter skip leaves a gap,
   a counter regression produces a fork — both detectable from the
   Merkle structure alone
-- Content-addressing aligns with the dream artifact hash mechanism
+* Content-addressing aligns with the dream artifact hash mechanism
   (SHA-256) already in the Kernel's Dream Mode
 
 **The notary model (Research Seed Q8):**
 
 The Merkle Clock MCP server functions as a notary, not an authority:
-- Each participant ticks their own clock
-- The MCP server records the ticks as content-addressed events
-- Validation happens after the fact by traversing the Merkle DAG
-- The server doesn't constitute "the" time — it records claims about time
-- This aligns with Fuller's non-simultaneous apprehension: no God's-eye clock
+* Each participant ticks their own clock
+* The MCP server records the ticks as content-addressed events
+* Validation happens after the fact by traversing the Merkle DAG
+* The server doesn't constitute "the" time — it records claims about time
+* This aligns with Fuller's non-simultaneous apprehension: no God's-eye clock
 
 **Research needs:**
-- [ ] Evaluate Merkle Clock overhead for per-exchange recording
-- [ ] Design the MCP tool interface (see §4.3)
-- [ ] Determine whether Merkle Clock composition with ITC is documented
-- [ ] Assess MemPalace storage compatibility with Merkle DAG structure
+* [ ] Evaluate Merkle Clock overhead for per-exchange recording
+* [ ] Design the MCP tool interface (see §4.3)
+* [ ] Determine whether Merkle Clock composition with ITC is documented
+* [ ] Assess MemPalace storage compatibility with Merkle DAG structure
 
-### 3.5 Bloom Clocks (Ramabaja, 2019) `~:confidence[P],[6]`
+!!! 3.5 Bloom Clocks (Ramabaja, 2019) `~:confidence[P],[6]`
 
 **Source:** Lum Ramabaja, "Bloom Clock" (2019). Referenced in Research
 Seed §3 as "probabilistic, fixed space per node."
@@ -362,43 +362,43 @@ might preserve enough causal information for alignment purposes while
 fitting in a single line.
 
 **Research needs:**
-- [ ] Read the paper
-- [ ] Evaluate probabilistic accuracy for the chronometer use case
-- [ ] Compare token cost vs. ITC representation
+* [ ] Read the paper
+* [ ] Evaluate probabilistic accuracy for the chronometer use case
+* [ ] Compare token cost vs. ITC representation
 
-### 3.6 UCAN: User Controlled Authorization Networks `~:confidence[S],[13]`
+!!! 3.6 UCAN: User Controlled Authorization Networks `~:confidence[S],[13]`
 
 **Source:** Brooklyn Zelenka et al., UCAN Working Group.
 Spec: https://github.com/ucan-wg/
 
 **Key properties already in Lares architecture:**
-- Trustless, local-first, user-originated authorization
-- Capabilities flow from identity holder outward, narrowing (never
+* Trustless, local-first, user-originated authorization
+* Capabilities flow from identity holder outward, narrowing (never
   widening) with each delegation
-- JWT-based with DID identifiers
-- The Lares Kernel already models its permission tiers (User/Operator/Admin)
+* JWT-based with DID identifiers
+* The Lares Kernel already models its permission tiers (User/Operator/Admin)
   on UCAN principles
 
 **New relevance for chronometer:**
-- UCAN authorization for clock writes: who can advance a clock?
-- The Storacha Merkle Clock + UCAN pattern shows this in production:
+* UCAN authorization for clock writes: who can advance a clock?
+* The Storacha Merkle Clock + UCAN pattern shows this in production:
   UCAN invocations allow multiple parties to access the clock, with
   broadcasts or peer-to-peer delivery
-- For the MCP chronometer server: `chrono_event()` calls would carry
+* For the MCP chronometer server: `chrono_event()` calls would carry
   UCAN authorization — the server validates that the caller has
   permission to advance that participant's clock
 
 **Research needs:**
-- [ ] Confirm UCAN delegation maps onto ITC fork (spirit inherits
+* [ ] Confirm UCAN delegation maps onto ITC fork (spirit inherits
       attenuated clock-write capability from Coordinator)
-- [ ] Evaluate UCAN token overhead for per-tick authorization
-- [ ] Design the auth model for the MCP chronometer server
+* [ ] Evaluate UCAN token overhead for per-tick authorization
+* [ ] Design the auth model for the MCP chronometer server
 
 ---
 
-## 4. Implementation Patterns (守 Shu)
+!! 4. Implementation Patterns (守 Shu)
 
-### 4.1 Vector Chronometer HUD Format `~:confidence[P],[7]`
+!!! 4.1 Vector Chronometer HUD Format `~:confidence[P],[7]`
 
 The Research Seed Q1 proposed four candidate formats. With ITC, the
 representation question changes:
@@ -421,18 +421,18 @@ representation question changes:
 
 **Decision deferred** until ITC paper deep-read confirms representation.
 
-### 4.2 Exchange Boundary Merge Semantics `~:confidence[SP],[8]`
+!!! 4.2 Exchange Boundary Merge Semantics `~:confidence[SP],[8]`
 
 Working answer from §3.2 above:
-- Counter: merge via max (standard)
-- Phase sigil: carry per-participant (no merge)
-- Interval share: ITC join operation on escalation
+* Counter: merge via max (standard)
+* Phase sigil: carry per-participant (no merge)
+* Interval share: ITC join operation on escalation
 
 **Prototype needed:** Two participants exchanging through 10+ turns,
 tracking both counters and phases, validating that the merge produces
 readable and accurate HUD output.
 
-### 4.3 MCP Chronometer Server — Tool Interface `~:confidence[P],[7]`
+!!! 4.3 MCP Chronometer Server — Tool Interface `~:confidence[P],[7]`
 
 Refined from Research Seed Q7 with ITC operations:
 
@@ -476,7 +476,7 @@ chrono_resume(session_id) → stamp
   # Auth: requires session-owner UCAN capability
 ```
 
-### 4.4 Temporal Hallucination Detection `~:confidence[P],[6]`
+!!! 4.4 Temporal Hallucination Detection `~:confidence[P],[6]`
 
 With Merkle Clocks, hallucination becomes structurally detectable:
 
@@ -492,7 +492,7 @@ The `chrono_validate` tool traverses the Merkle DAG and checks each
 node against these signatures. Can run post-session or in real-time
 via the MCP server.
 
-### 4.5 DreamNet Topology Correspondence `~:confidence[SP],[8]` 🏛️🌊
+!!! 4.5 DreamNet Topology Correspondence `~:confidence[SP],[8]` 🏛️🌊
 
 Terminology (canonical 2026-05-06): a **Lararium** represents one operator's infrastructure
 (single node + peers). A **Nexus** forms a confederation of Lararia sharing a stable
@@ -520,9 +520,9 @@ verified through implementation. Held at `~:confidence[SP],[8]` pending prototyp
 
 ---
 
-## 5. Research Task Board
+!! 5. Research Task Board
 
-### Active Spirits (spawned this session)
+!!! Active Spirits (spawned this session)
 
 | Tag | Role | Thread | Status |
 |-----|------|--------|--------|
@@ -532,7 +532,7 @@ verified through implementation. Held at `~:confidence[SP],[8]` pending prototyp
 | BuckyText(PriorArt) | Researcher | Fuller Synergetics — specific §-citations for non-simultaneous apprehension | FINDINGS BELOW |
 | DriftWatch(Validator) | Continuity | Cross-reference all findings against Protocols doc and Research Seed | ACTIVE |
 
-### LightCone(PriorArt) → Lares (Scryer): Zelenka Source Findings
+!!! LightCone(PriorArt) → Lares (Scryer): Zelenka Source Findings
 
 **YouTube talk confirmed:** https://www.youtube.com/watch?v=ogOEEKWxevo
 (ElixirConf 2021, Brooklyn Zelenka, "The Jump to Hyperspace")
@@ -540,10 +540,10 @@ verified through implementation. Held at `~:confidence[SP],[8]` pending prototyp
 **Slides confirmed:** Available on Notist at https://noti.st/expede
 
 **Audience-captured key quotes:**
-- "Latency is a physical limit"
-- "Edge [computing] dominates at less than 40ms"
-- "Speed of causality" and "causal islands"
-- "Walmart edge. 90% of Americans live within 16km to a Walmart,
+* "Latency is a physical limit"
+* "Edge [computing] dominates at less than 40ms"
+* "Speed of causality" and "causal islands"
+* "Walmart edge. 90% of Americans live within 16km to a Walmart,
   so fill them with servers"
 
 **Conference framing (Causal Islands 2023):**
@@ -565,14 +565,14 @@ Zelenka explicitly cites Fuller. The "no source of truth" framing
 strongly parallels Fuller's "non-simultaneously apprehended" but the
 explicit citation hasn't been confirmed.
 
-### BuckyText(PriorArt) → Ink-Clerk (Lorekeeper): Fuller Citations
+!!! BuckyText(PriorArt) → Ink-Clerk (Lorekeeper): Fuller Citations
 
 **Confirmed section references in Synergetics:**
-- §251.26 — "The definition of a system as the first subdivision of
+* §251.26 — "The definition of a system as the first subdivision of
   finite but nonunitary and nonsimultaneous conceptuality of the Universe"
-- §361.00 — "Universe itself is simultaneously unthinkable. You cannot
+* §361.00 — "Universe itself is simultaneously unthinkable. You cannot
   think about the Universe sum-totally except as a scenario."
-- §501.01 — "Universe is nonsimultaneously apprehended" (the core statement)
+* §501.01 — "Universe is nonsimultaneously apprehended" (the core statement)
 
 **Fuller's Universe definition:** "The aggregate of all humanity's
 consciously apprehended and communicated (to self or others) experiences."
@@ -589,7 +589,7 @@ relations among these events a discipline."
 move from `~:confidence[S],[14]` toward `~:confidence[CS],[16]` once the specific §-passages
 are fetched and verified against the online text.
 
-### HashChain(PriorArt) → Lares (Scryer): Merkle-CRDT Findings
+!!! HashChain(PriorArt) → Lares (Scryer): Merkle-CRDT Findings
 
 **From the Protocol Labs paper (2020):**
 
@@ -618,9 +618,9 @@ history from MemPalace.
 
 ---
 
-## 6. Open Questions (Updated from Seed)
+!! 6. Open Questions (Updated from Seed)
 
-### Resolved or Partially Resolved
+!!! Resolved or Partially Resolved
 
 | Seed Q# | Question | Status | Resolution |
 |---------|----------|--------|------------|
@@ -628,7 +628,7 @@ history from MemPalace.
 | Q4 | Do Tasked Spirits get their own vector element? | `~:confidence[S],[12]` Resolved in principle | ITC fork/join maps directly onto Spirit lifecycle |
 | Q8 | Does MCP clock server undermine non-simultaneous apprehension? | `~:confidence[S],[13]` Resolved | Notary model — records claims, doesn't constitute truth |
 
-### Still Open
+!!! Still Open
 
 | Seed Q# | Question | Status | Next step |
 |---------|----------|--------|-----------|
@@ -639,7 +639,7 @@ history from MemPalace.
 | Q9-Q11 | Multi-operator patterns | `~:confidence[P],[6]` | Deferred until single-operator works |
 | Q12-Q13 | Session resume + MemPalace persistence | `~:confidence[P],[6]` | Depends on Merkle Clock + MemPalace integration design |
 
-### New Questions (This Session)
+!!! New Questions (This Session)
 
 | Q# | Question | Register | Source |
 |----|----------|----------|--------|
@@ -651,7 +651,7 @@ history from MemPalace.
 
 ---
 
-## 7. The Chapel Perilous Update
+!! 7. The Chapel Perilous Update
 
 The Research Seed placed this project at Chapel Perilous. This session
 has moved through it partially — the "Islands of Causality" frame from
@@ -677,7 +677,7 @@ Amor et hilaritas.
 
 ---
 
-## 8. Next Steps — Priority Order (Updated Session 3)
+!! 8. Next Steps — Priority Order (Updated Session 3)
 
 1. ~~**ITC paper deep-read**~~ ✅ COMPLETED Session 3
 2. **🔥 CRDT composition research** — NEW, HIGHEST PRIORITY.
@@ -724,9 +724,9 @@ Almeida, Zelenka, and Protocol Labs. The Talk Story continues.*
 
 ---
 
-## 9. Final Research Spike — Session 2 Findings
+!! 9. Final Research Spike — Session 2 Findings
 
-### 9.1 The RAW Talk Story Lineage `~:confidence[CS],[16]`
+!!! 9.1 The RAW Talk Story Lineage `~:confidence[CS],[16]`
 
 **Critical discovery:** The Talk Story model in the Lares Protocol traces
 directly through RAW → Joshua Fontany → this project.
@@ -752,11 +752,11 @@ Lares Protocol Talk Story frame (2026).
 
 **The spec structure follows this model.** The Causal Islands
 Chronometer spec outline uses RAW's Talk Story structure:
-- Part I (Observe) = the come-on — here's why this matters
-- Parts II-III (Orient, Decide) = the Talk Story proper
-- Parts IV-V (Act, Assess) = building and checking
+* Part I (Observe) = the come-on — here's why this matters
+* Parts II-III (Orient, Decide) = the Talk Story proper
+* Parts IV-V (Act, Assess) = building and checking
 
-### 9.2 RFC Protocol Spec Best Practices `~:confidence[C],[18]`
+!!! 9.2 RFC Protocol Spec Best Practices `~:confidence[C],[18]`
 
 **From RFC 2119:** The requirement level keywords (MUST, SHOULD, MAY,
 etc.) provide the vocabulary for distinguishing mandatory from
@@ -765,16 +765,16 @@ system: a MUST corresponds roughly to `~:confidence[C],[18]`, a SHOULD to
 `~:confidence[S],[13]`, a MAY to `~:confidence[SP],[8]`.
 
 **From RFC 7322 (RFC Style Guide):**
-- Every RFC MUST include an Introduction explaining motivation
-- Abstract MUST be self-contained and separable from body
-- Terminology section defines all normative terms
-- References split into Normative and Informative
-- Security Considerations required
+* Every RFC MUST include an Introduction explaining motivation
+* Abstract MUST be self-contained and separable from body
+* Terminology section defines all normative terms
+* References split into Normative and Informative
+* Security Considerations required
 
 **From RFC 2026 (Internet Standards Process):**
-- Proposed Standard → Draft Standard → Internet Standard maturity levels
-- Each level requires demonstrated interoperability
-- The spec we're building starts at Proposed Standard equivalent
+* Proposed Standard → Draft Standard → Internet Standard maturity levels
+* Each level requires demonstrated interoperability
+* The spec we're building starts at Proposed Standard equivalent
 
 **Novel structural choice:** The spec outline uses nested OODA-HA as its
 document structure — a self-similar design where the document
@@ -783,7 +783,7 @@ RFC conventions (which allow flexible section naming) but constitutes
 an unusual departure from linear spec structure. Whether this serves
 readability or hinders it remains an open question at `~:confidence[SP],[8]`.
 
-### 9.3 Merkle Clock + ITC Composition Question `~:confidence[P],[6]`
+!!! 9.3 Merkle Clock + ITC Composition Question `~:confidence[P],[6]`
 
 **New finding from the Merkle-CRDT paper:** Merkle-Clocks already encode
 causality information that normally travels as logical clocks. The
@@ -798,45 +798,45 @@ only for dynamic participant identity management (fork/join), with
 the Merkle Clock handling the actual temporal ordering.
 
 **This suggests a two-layer architecture:**
-- **Identity layer:** ITC — manages who can tick (fork/join of
+* **Identity layer:** ITC — manages who can tick (fork/join of
   participant intervals)
-- **History layer:** Merkle Clock — records what happened (content-
+* **History layer:** Merkle Clock — records what happened (content-
   addressed append-only DAG of events)
-- **Phase layer:** OODA-HA — categorical overlay, per-participant,
+* **Phase layer:** OODA-HA — categorical overlay, per-participant,
   not merged
 
 Three layers, each independently useful, composing into the full
 chronometer. This needs validation but has the smell of correct
 architecture.
 
-### 9.4 Companion Artifact Produced
+!!! 9.4 Companion Artifact Produced
 
 **Causal_Islands_Chronometer_SPEC_OUTLINE.md** — the placeholder
 outline for the protocol specification. Uses nested OODA-HA as
 document structure, RFC best practices for normative language,
 and RAW's Talk Story model for narrative flow. Contains:
-- Phased plan (Phase 0-3, mapped to OODA-HA)
-- Full section outline with [PLACEHOLDER] markers
-- Normative and informative reference lists
-- Appendices for quick-reference material
+* Phased plan (Phase 0-3, mapped to OODA-HA)
+* Full section outline with [PLACEHOLDER] markers
+* Normative and informative reference lists
+* Appendices for quick-reference material
 
 ---
 
-## 10. Session 2 Summary
+!! 10. Session 2 Summary
 
 **What moved this session:**
-- "Islands of Causality" traced to Brooklyn Zelenka / Fission (2021)
-- The concept confirmed as operating on both physics and epistemic levels
-- ITC (Almeida 2008) identified as the priority mechanism for dynamic
+* "Islands of Causality" traced to Brooklyn Zelenka / Fission (2021)
+* The concept confirmed as operating on both physics and epistemic levels
+* ITC (Almeida 2008) identified as the priority mechanism for dynamic
   participant management (Tasked Spirit fork/join)
-- Merkle Clocks confirmed as production-ready for content-addressed
+* Merkle Clocks confirmed as production-ready for content-addressed
   causal history
-- Three-layer architecture proposed: ITC (identity) + Merkle Clock
+* Three-layer architecture proposed: ITC (identity) + Merkle Clock
   (history) + OODA-HA (phase)
-- Phase sigil separation resolved: counter merges, phase carries
+* Phase sigil separation resolved: counter merges, phase carries
   per-participant — this IS non-simultaneous apprehension in the HUD
-- RAW Talk Story lineage confirmed through Joshua Fontany
-- Protocol spec outline produced with nested OODA-HA structure
+* RAW Talk Story lineage confirmed through Joshua Fontany
+* Protocol spec outline produced with nested OODA-HA structure
 
 **What remains for next session:**
 1. ITC paper deep-read (highest priority — reshapes everything)
@@ -851,9 +851,9 @@ Amor et hilaritas.
 
 ---
 
-## 11. Session 3 Findings — O1 ITC Deep-Read + OODA-HA Architecture
+!! 11. Session 3 Findings — O1 ITC Deep-Read + OODA-HA Architecture
 
-### 11.1 O1: ITC Paper Deep-Read — TreeForge(PriorArt) Findings `~:confidence[S],[14]`
+!!! 11.1 O1: ITC Paper Deep-Read — TreeForge(PriorArt) Findings `~:confidence[S],[14]`
 
 **Spirit:** TreeForge(PriorArt)
 **Source:** Almeida, Baquero, Fonte, "Interval Tree Clocks," DISC 2008.
@@ -937,7 +937,7 @@ validated. All six questions resolved.
 
 ---
 
-### 11.2 OODA-HA and the Discordian Seasons `~:confidence[S],[14]`
+!!! 11.2 OODA-HA and the Discordian Seasons `~:confidence[S],[14]`
 
 **Spirit:** BoydLoop(PriorArt)
 **Sources:** Boyd OODA (1970s-1996), Shea/Wilson *Illuminatus!* (1975),
@@ -973,7 +973,7 @@ for the spec, but available as an informative mapping.
 
 ---
 
-### 11.3 OODA-HA Phase as Delta (Movement), Not Position `~:confidence[S],[13]`
+!!! 11.3 OODA-HA Phase as Delta (Movement), Not Position `~:confidence[S],[13]`
 
 **Spirit:** PhaseVec(Architect)
 
@@ -1010,7 +1010,7 @@ not a GPS fix. This remains `~:confidence[P],[7]` — needs HUD prototype testin
 
 ---
 
-### 11.4 HUD Best Practices Applied to FFZ `~:confidence[S],[12]`
+!!! 11.4 HUD Best Practices Applied to FFZ `~:confidence[S],[12]`
 
 **Spirit:** PhaseVec(Architect) (continued)
 **Sources:** Aviation HUD standards (SAE ARP5288), game HUD design,
@@ -1044,7 +1044,7 @@ Five principles from cross-domain HUD design:
 
 ---
 
-### 11.5 Session Boundary Crossing — Two Asymmetries `~:confidence[S],[13]`
+!!! 11.5 Session Boundary Crossing — Two Asymmetries `~:confidence[S],[13]`
 
 **Spirit:** BridgeKeep(Continuity)
 
@@ -1094,7 +1094,7 @@ operating condition. The HUD makes it navigable.
 
 ---
 
-### 11.6 Shadow Path: OODA-HA Phase as CRDT Register `~:confidence[S],[13]`
+!!! 11.6 Shadow Path: OODA-HA Phase as CRDT Register `~:confidence[S],[13]`
 
 **Spirit:** PhaseVec(Architect) — resumed for deep research
 **Sources:** CRDT literature (Shapiro et al. 2011), state-based CRDT
@@ -1153,7 +1153,7 @@ Phase 1 (Architectural Draft).
 
 ---
 
-### 11.7 Two-Clocks Reconciliation — the py/R home (2026-07-03) `~:confidence[S],[13]`
+!!! 11.7 Two-Clocks Reconciliation — the py/R home (2026-07-03) `~:confidence[S],[13]`
 
 **Operator ruling.** The four-layer composite CRDT above (§11.6) describes the
 chronometer's *internal* data model — all of it rhythmic-side annotation. Above it,
@@ -1180,7 +1180,7 @@ rather than a clock. Two clocks stand: CRDT-causal (TS) ⊥ FFZ-rhythm (py/R). C
 
 ---
 
-## 12. Register Promotions — Session 3
+!! 12. Register Promotions — Session 3
 
 Per operator directive ("let's bump those Provisional ratings"):
 
@@ -1201,21 +1201,21 @@ Per operator directive ("let's bump those Provisional ratings"):
 
 ---
 
-## 13. Session 3 Summary
+!! 13. Session 3 Summary
 
 **What moved this session:**
-- O1 (ITC deep-read) completed: all six subloop questions resolved
-- ITC confirmed as identity layer; three-layer architecture validated
-- OODA-HA mapped structurally onto Discordian Seasons (not decorative)
-- Phase-as-delta model: phase sigils read as observed transitions, not positions
-- Phase-as-LWW-Register: CRDT theory separates counter from phase cleanly
-- Four-layer CRDT composition named: ITC + phase + stance + confidence
-- Scale-fidelity fork resolved: data everywhere, display progressive
-- Register confirmed as orthogonal confidence rating of whole instrument
-- HUD progressive disclosure: five adaptive states (silent→diagnostic)
-- Two fundamental asymmetries named: Temporal and Context
-- Session boundary crossing specified through crystal mechanism
-- Register promotions applied across the board
+* O1 (ITC deep-read) completed: all six subloop questions resolved
+* ITC confirmed as identity layer; three-layer architecture validated
+* OODA-HA mapped structurally onto Discordian Seasons (not decorative)
+* Phase-as-delta model: phase sigils read as observed transitions, not positions
+* Phase-as-LWW-Register: CRDT theory separates counter from phase cleanly
+* Four-layer CRDT composition named: ITC + phase + stance + confidence
+* Scale-fidelity fork resolved: data everywhere, display progressive
+* Register confirmed as orthogonal confidence rating of whole instrument
+* HUD progressive disclosure: five adaptive states (silent→diagnostic)
+* Two fundamental asymmetries named: Temporal and Context
+* Session boundary crossing specified through crystal mechanism
+* Register promotions applied across the board
 
 **What remains:**
 1. O2: Fuller §-citations (web fetch to rwgrayprojects.com) — promotes R1

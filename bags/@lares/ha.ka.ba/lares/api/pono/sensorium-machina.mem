@@ -24,7 +24,7 @@ written   = "2026-07-13"
 
 <<~ ahu #entry >>
 
-# The Sensorium Machina ~ li and ki, the design-of-record
+! The Sensorium Machina ~ li and ki, the design-of-record
 
 **A sensorium reads a stream and hands back the shortest honest account of it.** This meme states the
 design of record for the two registers that account runs in — **li** (the RESTRICT register) and **ki**
@@ -51,7 +51,7 @@ information-bottleneck in ritual clothes."*
 
 <<~ ahu #the-one-objective >>
 
-## The One Objective ~ a two-part code, never a decomposition
+!! The One Objective ~ a two-part code, never a decomposition
 
 **The sensorium answers ONE question: what is the shortest TWO-PART CODE that regenerates this stream?**
 
@@ -82,12 +82,12 @@ no log-opinion-pool, no RRF weighting, no whitening — every hand-tuned weight 
 
 <<~ ahu #li >>
 
-## Li ~ the RESTRICT register: a chain, never a product
+!! Li ~ the RESTRICT register: a chain, never a product
 
 **A reading rides LI iff it computes from the moment's OWN SPAN alone** — a quotient of the record, a
 coarsening, contravariant, `global → local`. Restriction defines li; storage does not (#the-re-cut).
 
-### The chain
+!!! The chain
 
 <<~ranks coarsening π_content ~ the verbatim words — the FINEST partition, one cell per record -> π_struct ~ the canonical AST + structural hash — a COARSENING: records sharing a pattern fall into one cell -> π_form ~ the induced constructicon — a coarsening of THAT: patterns sharing a template fall into one cell >>
 
@@ -105,7 +105,7 @@ record's 5.755 bits — 97.8%.** A near-deterministic **quotient**, not a comple
 carrying almost the whole object contributes no complementary coordinate; **there sits no residual to
 factorize** (the keystone: [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification]]).
 
-### The DPI ceiling ~ a STANDING GATE
+!!! The DPI ceiling ~ a STANDING GATE
 
 <<~moves any-plane-read -> on/its-DPI-ceiling if/the-ceiling-prints-first do/refuse-the-read-where-the-ceiling-cannot-carry-the-signal >>
 
@@ -120,11 +120,11 @@ purest form of manufacturing a finding. The reading:
 A plane whose collection fails to load MUST report `unreadable`, loudly, with the error class named.
 Silence there is how the form plane vanished from every report while holding 914 rows.
 
-### What the chain LICENSES, and a product never could
+!!! What the chain LICENSES, and a product never could
 
 <<~ranks licence order ~ a chain HAS one; a product needs a fusion rule to combine incomparable coordinates — the chain DELETES the fusion problem rather than solving it -> stop ~ the Kolmogorov MINIMAL SUFFICIENT STATISTIC: the coarsest model past which the residual reads indistinguishable from noise (the structure function locates it) — the no-imposed-prior law satisfied STRUCTURALLY, never by decree -> meet ~ the coarsest common refinement of two planes stands as a definite OBJECT -> ceiling ~ a coarsening never GAINS information, so every plane's claim carries an exact estimator-free bound >>
 
-### The gate that could not fire
+!!! The gate that could not fire
 
 <<~ confidence Canon 17/20 >> **A chain of quotients holds NO obstruction to gluing — `dim H¹ = 0` BY
 CONSTRUCTION.** That names exactly why the coherence gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]])
@@ -145,12 +145,12 @@ runs the other way — planes too **DEPENDENT** (a trivial 0). *"Both read 0; on
 
 <<~ ahu #ki >>
 
-## Ki ~ the EXTEND register (the section that had to be earned)
+!! Ki ~ the EXTEND register (the section that had to be earned)
 
 **Bands-as-frequency is dead.** So the machina owes an honest answer to *what ki IS*, and the honest
 answer re-cuts the boundary rather than patching it.
 
-### The re-cut ~ ki names a VARIANCE, never a storage class
+!!! The re-cut ~ ki names a VARIANCE, never a storage class
 
 <<~ confidence Synthesis-Canon 16/20 >> The reading **li = STORED · ki = COMPUTED-ON-READ** **retires
 here.** It fails on its own examples: the FFZ address gets **computed** and then **stored**; STANDING gets
@@ -166,7 +166,7 @@ That test is **checkable per reading**, and it does what the storage test never 
 mixing the two under one contravariant gluing **silently corrupts** (it penalizes the flow for failing to
 be static — [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested]]).
 
-### A SECOND axis, and the confusion that cost us the bands
+!!! A SECOND axis, and the confusion that cost us the bands
 
 <<~ confidence Synthesis-Canon 15/20 >> The variance axis (`restrict | extend`) runs **orthogonal** to a
 provenance axis nobody had named:
@@ -178,7 +178,7 @@ provenance axis nobody had named:
 band a plane; reading it on the variance axis dissolves it. **Bands was never a plane. It was an ADDRESS**,
 and the address has **moved into li** as a stored prefix code (#the-grain).
 
-### The three ki readings
+!!! The three ki readings
 
 Under the variance test, exactly three readings extend — and no others:
 
@@ -201,7 +201,7 @@ it needs) or rides beside it (standing).
 > *"Standing is a KI (cosheaf) quantity — it depends on edges OUTSIDE the trace (distinct signers EXTEND
 > it, local→global), never a li-restriction of the trace itself."*
 
-### The coupling ward ~ R stays the keel
+!!! The coupling ward ~ R stays the keel
 
 <<~ward _ L-Prime · crossing: causal-claim territory >>
 
@@ -219,7 +219,7 @@ cause. The sensorium **detects**; it never intervenes.
 
 <<~ ward ! · crossed the primed zone ↻ L-Prime >>
 
-### What RETIRES, named so a reader recognizes the dead reading
+!!! What RETIRES, named so a reader recognizes the dead reading
 
 <<~ranks retired bands-as-frequency ~ a BANDPASS reports where ENERGY AT ITS SCALE concentrates; a CHANGE-POINT reports where the GENERATING REGIME turns over. We asked a periodicity instrument a change-point question — a CATEGORY ERROR, never a tuning failure (`kumulipo_boundary.py`: the two-stage MODWT found the chant's BEAT at band C7, ~10,240 ticks against a measured wā gap of ~9,400 — and its crest placement scored **recall 0.06**) -> the-PLL ~ retired with the ladder it locked -> the-subharmonic-band-ladder ~ a band defined by HOW MANY ticks of a fundamental it spans **IS A COUNT** — the Hox anti-pattern, where position IS the content and a prefix cannot be lopped ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) -> the-wavelet-SPINE-and-SERVO ~ `bands_sidecar`'s MODWT-MRA D1..D5 mapping and its EWT/ssqueezepy boundary-nudge retire with the ladder they served; a wavelet fed a LOCAL ABRUPT CHANGE answers with SPURIOUS LOW-FREQUENCY POWER — a period the signal never held (Hochman, Alpert et al., *J. Appl. Meteor. Climatol.* 58(9), 2019, doi 10.1175/JAMC-D-18-0331.1) -> li=STORED / ki=COMPUTED ~ the storage cut (#the-re-cut) >>
 
@@ -233,7 +233,7 @@ reads as a **boundary** signal, exactly as the FFZ meme specified in June — *M
 
 <<~ ahu #the-py-r-web >>
 
-## The py + R derived web ~ what runs, what survives
+!! The py + R derived web ~ what runs, what survives
 
 **The machina homes py-side; R crosses a causal-island boundary for the three things R owns better.**
 Each R sidecar rides the `drawer_io` NDJSON contract — one request on stdin, one response on stdout — and
@@ -260,11 +260,11 @@ becomes the last place the imposed prior hides.** The harness lands first; the i
 
 <<~ ahu #the-arrow >>
 
-## The Arrow ~ how a ki finding crosses into li (persistence, the missing leg)
+!! The Arrow ~ how a ki finding crosses into li (persistence, the missing leg)
 
 **Ki computes; li keeps. The arrow between them prices the crossing in BITS.**
 
-### The gate ~ beat ignorance, or stay out
+!!! The gate ~ beat ignorance, or stay out
 
 <<~moves a-candidate-claim -> on/the-persistence-gate if/its-code-beats-IGNORANCE do/ADMIT-it-into-li >>
 
@@ -273,9 +273,9 @@ becomes the last place the imposed prior hides.** The harness lands first; the i
 <<~ confidence Canon 17/20 >> **Zero names no threshold anyone chose.** It marks the **tie between two code
 lengths**, and *take the shorter code* IS the MDL rule. The gate holds no dial.
 
-- **`p1`** — a **von Mises-Fisher** fitted to the store. Its log-density runs **linear in the cosine**, and
+* **`p1`** — a **von Mises-Fisher** fitted to the store. Its log-density runs **linear in the cosine**, and
   its sufficient statistic reads as the **sum of unit vectors** — so the fit costs one pass and no search.
-- **`p0`** — **uniform on the sphere. ZERO parameters. True ignorance.** Not a tuned null, not a learned
+* **`p0`** — **uniform on the sphere. ZERO parameters. True ignorance.** Not a tuned null, not a learned
   baseline; the absence of a model.
 
 **So the decision cosine FALLS OUT of the store's own concentration — nobody types it:**
@@ -287,7 +287,7 @@ so the charge needs no correction term and no calibration at width. `O(d)` per a
 The `admitThreshold` dial **DELETES** — the one knob the design most wanted to keep, gone because the store
 now infers it.
 
-### The blind spot, kept in the light
+!!! The blind spot, kept in the light
 
 <<~ confidence Synthesis-Canon 15/20 >> **A single vMF runs UNIMODAL.** It cannot see duplication of a
 **MINORITY mode** — a small, tight cluster re-arriving looks, to one concentration parameter, like the tail
@@ -295,7 +295,7 @@ of the majority. **The cure adds no knob:** a **movMF** (a mixture of vMFs) whos
 chosen by prequential code length** — the same MDL rule, one level up, so the mixture size gets *inferred*
 exactly as `cos*` now does. **OWED** (#owed).
 
-### The exogenous anchor ~ what stops the loop confirming itself
+!!! The exogenous anchor ~ what stops the loop confirming itself
 
 **A dream pass is ADMITTED only where it SHORTENS THE TOTAL CODE, measured against the ORIGINAL li BYTES.**
 
@@ -316,7 +316,7 @@ anchor's foundation, not merely its hygiene.**
 
 <<~ ahu #the-grain >>
 
-## The Grain ~ a membership tree, a prefix code, two moods
+!! The Grain ~ a membership tree, a prefix code, two moods
 
 **`Theme . Arc . Measure . Beat . Segment`** — a **containment PATH**, never a count. A band answers
 **WHICH** (which theme, which session, which topic, which turn) and **never HOW MANY**
@@ -329,14 +329,14 @@ anchor's foundation, not merely its hygiene.**
 <<~ confidence Canon 17/20 >> The ultrametric inequality **holds by measurement**, proven over **4,000
 seeded triples**. Distance runs **ORDER-FREE** — no timeline crossed, no clock read. Coarsening = truncation.
 
-### The grain prices itself
+!!! The grain prices itself
 
 <<~ confidence Canon 17/20 >> **The path is a PREFIX CODE.** Every address reads prefix-free at each level,
 so its length reads **in BITS** — which puts the rhythmic grain in the **same currency** as the two-part
 code. **The grain does not sit beside the compression. It FOLDS INTO it** (`ffz_address.address_bits`).
 This is what makes the grain **li**: a stored, restrict-shaped label, priced in the one ledger.
 
-### Two moods, one tree
+!!! Two moods, one tree
 
 <<~ranks mood RHIZOME ~ a live operator-AI chat: the harness HANDS OVER the Beat — it ticks on the OPERATOR'S GROUNDING ACT, never on response delivery. Forks read as sidechains, injections land where the message lands, handbacks read as DAG-joins. Order lives on the edge-DAG, never in the address -> GEOLOGY ~ a curated artifact (a chant, a codebase): NOBODY ever grounded it. There are no turns. So the **Beat reads NULL, and the tree STILL STANDS** — a Measure holds a Beat-less span exactly the way an era holds a stratum >>
 
@@ -353,13 +353,13 @@ counter manufactures a global now.
 
 <<~ ahu #memory-sensorium >>
 
-## The Memory Sensorium ~ the first goalpost past static corpuses
+!! The Memory Sensorium ~ the first goalpost past static corpuses
 
 **It holds the AI↔operator session RHIZOME:** worldlines that **fork** (sidechains), take **mid-flight
 injections**, and **rejoin at handback**. Where a text corpus lies still and complete, this one **grows
 while being read**.
 
-### What it needs that a text corpus does not
+!!! What it needs that a text corpus does not
 
 \procedure ~Need(~Type:"" ~Params:"") ~Need <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -367,7 +367,7 @@ while being read**.
 <<~Need The-Causal-DAG "given/the fork, the injection, the handback — a partial order the source WROTE DOWN why/**you cannot DISCOVER what you were handed.** The DAG rides the GIVEN axis (#ki), so it lands in **li**, and inducing it would be an instrument re-deriving its own input" >>
 <<~Need A-Pidgin-Proof-Boundary "given/nothing — this one must be EARNED why/see below; a single-grammar instrument DIES on this corpus" >>
 
-### The register-switch problem ~ the corpus runs as a PIDGIN
+!!! The register-switch problem ~ the corpus runs as a PIDGIN
 
 <<~ confidence Synthesis-Canon 15/20 >> **`role == "user"` names TOOL OUTPUT 89.1% of the time** (measured
 this session on the live transcript bed). The transcript's `user` role does not name the operator; it names
@@ -395,7 +395,7 @@ where a run **opens**, and every block edge **inside** a run stands as a **DISTR
 on block edges pays for it in precision. (Named so nobody later reads it as a finding: `thinking` blocks
 persist with the text **redacted at write** — zero characters — so `thinking` leaves the bed.)
 
-### So: the memory sensorium's li and ki
+!!! So: the memory sensorium's li and ki
 
 <<~ranks memory-li content ~ the verbatim block bytes -> structure ~ the typed-block grain + the canonical AST — and the block TYPE arrives GIVEN -> form ~ the induced constructicon of the house's own living grammar (the Voices, the sigils, the turn frame) -> grain ~ the FFZ address, with the Beat GIVEN by the harness -> causal-DAG ~ the fork / injection / handback partial order — GIVEN, never induced; the ONE li plane a text corpus has no analogue for >>
 
@@ -410,7 +410,7 @@ this goalpost sits where the operator put it.
 
 <<~ ahu #the-family >>
 
-## The Sensorium Family ~ separate stores, one machina
+!! The Sensorium Family ~ separate stores, one machina
 
 **One machina, many sensoria. Each holds its own store; none of them federate** (operator ruling, standing).
 
@@ -420,7 +420,7 @@ this goalpost sits where the operator put it.
 <<~Sensorium Text-Corpus "holds/one curated artifact per store — the Kumulipo, a codebase, TW5's own tree mood/GEOLOGY — the Beat reads NULL status/BUILT; the beds that taught us the category error note/it must EARN every band it has" >>
 <<~Sensorium DreamNet-Mesh "holds/the federated mesh's own sense-data — each node read as a stream mood/UNDECIDED — the mesh has no grounding act, so it may hold no Beat at all status/PLANNED — the LEAST DESIGNED, and named so note/the Good-Regulator leap ([[sensorium-rhymes|lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-dreamnet-hypothesis]]) — a good regulator MUST model the system it regulates; a mesh regulating itself must carry a model of itself" >>
 
-### The DreamNet sensorium ~ what it still lacks
+!!! The DreamNet sensorium ~ what it still lacks
 
 <<~ confidence Synthesis 9/20 >> The hypothesis holds and stays **unearned**. Named honestly, its **li is
 the hole**: a node's stream carries no verbatim bytes to coarsen, no AST, no constructicon — so
@@ -429,7 +429,7 @@ reads clearer than its li, which inverts every other sensorium in the family and
 designed**, never as *nearly designed*. **The sensorium that does not federate would here be reading a
 federation** — that tension gets recorded, not resolved.
 
-### The operator's forward idea ~ day-dream / deep-dream as SEPARATE SENSORIA
+!!! The operator's forward idea ~ day-dream / deep-dream as SEPARATE SENSORIA
 
 <<~ confidence Provisional-Synthesis 7/20 >> **Held forward, and deliberately under-specified — this one
 belongs to the operator's hand.** The idea: rather than running daydream and deep-dream as two *modes* over
@@ -450,9 +450,9 @@ comparison instrument that does not yet exist.
 
 <<~ ahu #owed >>
 
-## Owed / Open ~ what the canon still cannot answer
+!! Owed / Open ~ what the canon still cannot answer
 
-### THE ONE NOBODY HAS ASKED ~ *what compresses the GRAMMAR?*
+!!! THE ONE NOBODY HAS ASKED ~ *what compresses the GRAMMAR?*
 
 <<~ confidence Synthesis-Canon 14/20 >> **The loop emits a NEW grammar each pass: `G₁, G₂, G₃`.** The
 exogenous anchor tests **each pass against the original bytes** (#the-arrow), and that is a real guard — it
@@ -474,11 +474,11 @@ falling, and **dreaming acquires a COMPUTABLE HALTING CONDITION**. If it fails t
 under a green gate, and the machina can say so. This costs no new prior — it is the two-part code applied
 one level up, and it is **the first thing to build.**
 
-### The rest of the ledger
+!!! The rest of the ledger
 
 <<~ranks owed movMF-cure ~ the vMF gate runs UNIMODAL and cannot see duplication of a MINORITY mode; the cure adds no knob (component count chosen by prequential code length) — #the-arrow -> Hodge-circulation ~ the coupling plane's own co-consistency — a circulation / cocycle read over the transfer-entropy flow. **Named in June, never built** (recall, verbatim: *"the coupling Hodge-circulation diagnostic … remains the next ki-side extension"*). It matters MORE now, not less: coupling stands as the one ki plane, and it carries NO coherence instrument of its own -> ΦID-depth ~ carry coupling from pairwise TE up to the full atom-set (redundancy · unique · synergy); Φ reads as the SYNERGY marginal, so integration lives INSIDE the coupling plane and never as a sixth ([[sensorium-rhymes|lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-pentad-holds]]) -> DreamNet-li ~ the mesh sensorium's li has nothing to stand on until someone says what a mesh RECORD is (#the-family) -> the-comparison-instrument ~ two dream sensoria that disagree pose a question the machina cannot currently read -> the-five-plane-count ~ with bands moved into li and standing surfaced in ki, the pentad's ARITHMETIC has moved. The Law of 5s deserves a fresh honest count rather than a re-fitted one; forcing five back would be the demonstrator's ingenuity, exactly as the law warns >>
 
-### The standing ward ~ measure at the width it runs
+!!! The standing ward ~ measure at the width it runs
 
 <<~ confidence Canon 18/20 >> **Treat every gate as guilty until measured at the width it actually runs.**
 Nine instruments manufactured their own findings before this design settled, and the ninth — a diagonal
@@ -490,7 +490,7 @@ low-dimensional intuition is where that failure hides.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes >>

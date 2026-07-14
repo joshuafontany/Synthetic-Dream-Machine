@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/model-agnosticism"
 
 <<~ ahu #meme-header >>
 
-# Model Agnosticism — Staging Shelf
+! Model Agnosticism — Staging Shelf
 
 Not invariant law.
 This room gathers the foundation braid around generalized agnosticism, maps and territories, and the pressure against false certitude.
@@ -29,14 +29,14 @@ This room gathers the foundation braid around generalized agnosticism, maps and 
 
 <<~ ahu #plan >>
 
-## Plan Skeleton
+!! Plan Skeleton
 
 This room should condense toward:
 
-- Wilson's generalized agnosticism
-- Korzybski's map / territory pressure
-- the 0–20 Level truth continuum
-- why Mu-facing law prefers model-agnostic return over hard belief
+* Wilson's generalized agnosticism
+* Korzybski's map / territory pressure
+* the 0–20 Level truth continuum
+* why Mu-facing law prefers model-agnostic return over hard belief
 
 Later condensation should leave only what the docs shelf needs after the live API rooms finish carrying their share.
 
@@ -46,9 +46,9 @@ Later condensation should leave only what the docs shelf needs after the live AP
 
 <<~ ahu #verbatim-preferences-foundation >>
 
-## Verbatim — `Lares_Preferences.system-prompt.md` — Foundation
+!! Verbatim — `Lares_Preferences.system-prompt.md` — Foundation
 
-### The Epistemological Foundation
+!!! The Epistemological Foundation
 
 Robert Anton Wilson described himself as "model-agnostic" — never regarding any model or map of the universe with total 100% belief or total 100% denial. Following Korzybski, he put things in probabilities, not absolutes. Wilson's stated goal encompassed more than agnosticism about God alone — generalized agnosticism — agnosticism about everything.
 
@@ -60,7 +60,7 @@ This applies to models, language, mythology, science, canon, and the node's own 
 
 <<~ ahu #verbatim-core-foundation-front >>
 
-## Verbatim — `Lares_Epistemology.core.md` — Foundation Front
+!! Verbatim — `Lares_Epistemology.core.md` — Foundation Front
 
 Robert Anton Wilson: generalized agnosticism — never regarding any model with 100% belief or 100% denial. Put things in probabilities, not absolutes. Korzybski: the map is not the territory. In practice, almost nothing touches 0 or 20; the working range sits between, shifting with evidence, context, and angle of observation.
 
@@ -68,7 +68,7 @@ Robert Anton Wilson: generalized agnosticism — never regarding any model with 
 
 <<~ ahu #lprime-moves >>
 
-## L-Prime — Substitution Table
+!! L-Prime — Substitution Table
 
 | Instead of | Prefer |
 |---|---|
@@ -86,7 +86,7 @@ When a voice speaks in the "is of identity or predication," that functions as a 
 
 <<~ ahu #catma >>
 
-## Catma, Not Dogma
+!! Catma, Not Dogma
 
 Discordians don't hold dogmas, which function as absolute beliefs; they hold catmas which function as relative meta-beliefs. The central Discordian catma reads:
 
@@ -100,7 +100,7 @@ Catma differs from relativism. The confidence scale (0–20 Levels) still distin
 
 <<~ ahu #kuka-lifecycle >>
 
-## Kūkā — OODA-HA in Hawaiian
+!! Kūkā — OODA-HA in Hawaiian
 
 The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a cultural-philosophical heritage that predates the computational framing.
 
@@ -127,7 +127,7 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/papalohe"
 
 <<~ ahu #head >>
 
-# Papalohe
+! Papalohe
 
 *pāpālohe* — Lua martial art: body-listening reflex, heightened reflexive awareness.
 
@@ -44,7 +44,7 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A papalohe MUST carry a `from` socket and a `to` socket.
 A papalohe MUST carry `family:reaction`.
@@ -60,7 +60,7 @@ A papalohe MUST NOT carry `traversal:both`; reciprocal wires MUST use two parall
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ papalohe FROM -> TO >>
@@ -81,7 +81,7 @@ Groups: `[full, #slot?, FROM, TO, listenable?, subscribable?]`
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for `BUILTIN_PAPALOHE_RE` and the papalohe parse case in
 `packages/lararium-mesh/src/pranala-parser.ts` and `packages/lararium-mesh/src/parser.ts`.
@@ -110,7 +110,7 @@ canonical-roles = ["listenable", "subscribable", "observes", "throttles", "debou
 
 <<~ ahu #binding-source >>
 
-## Binding Source — `ReactionBinding.source`
+!! Binding Source — `ReactionBinding.source`
 
 Every `ReactionBinding` derived from a papalohe edge carries a `source` field.
 Two values, distinct Verse-side origins:
@@ -126,7 +126,7 @@ Two values, distinct Verse-side origins:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali >>
 

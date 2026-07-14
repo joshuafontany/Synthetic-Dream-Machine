@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/ea"
 
 <<~ ahu #head >>
 
-# Ea — Sovereignty, Breath, Life
+! Ea — Sovereignty, Breath, Life
 
 Hawaiian: *ea* — sovereignty, breath, life.
 
@@ -38,7 +38,7 @@ On the DreamNet, any entity that holds its own CRDT state, owns its own timing, 
 
 <<~ ahu #doctrine >>
 
-## Doctrine
+!! Doctrine
 
 **Ea** names the moment a causal island establishes itself. It does not name a boot event granted by an external authority. The island declares its own sovereignty; the main thread (local vessel) or any connected mesh node records the declaration.
 
@@ -54,7 +54,7 @@ When all three hold, the island may emit `ea` — the sovereignty declaration th
 
 <<~ ahu #protocol >>
 
-## Protocol Pattern
+!! Protocol Pattern
 
 Any vessel that implements the manifest/ea handshake follows this shape:
 
@@ -80,7 +80,7 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 
 <<~ ahu #scope >>
 
-## Scope — What Can Declare Ea
+!! Scope — What Can Declare Ea
 
 `ea` applies wherever a node or island on the DreamNet satisfies the three conditions. Current known sites:
 
@@ -97,17 +97,17 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 
 <<~ ahu #contrast >>
 
-## Contrast — What Ea Does Not Mean
+!! Contrast — What Ea Does Not Mean
 
-- **Not a permission grant.** The courier does not grant `ea`; the island earns it by satisfying the three conditions.
-- **Not a heartbeat.** A heartbeat polls. `ea` fires once at establishment. Liveness after `ea` flows through normal CRDT sync and frame-completion signals (`frame:ack`).
-- **Not a MOVE.** `MOVE` (and its residency ACTION siblings) in the lararium ontology means moving data between bags, gated by the capability ladder. `ea` names the island's birth, not a data migration.
+* **Not a permission grant.** The courier does not grant `ea`; the island earns it by satisfying the three conditions.
+* **Not a heartbeat.** A heartbeat polls. `ea` fires once at establishment. Liveness after `ea` flows through normal CRDT sync and frame-completion signals (`frame:ack`).
+* **Not a MOVE.** `MOVE` (and its residency ACTION siblings) in the lararium ontology means moving data between bags, gated by the capability ladder. `ea` names the island's birth, not a data migration.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>

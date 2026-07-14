@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahawai"
 
 <<~ ahu #head >>
 
-# Kahawai
+! Kahawai
 
 *kahawai* — Hawaiian: stream, river; a flowing body of water. The stream carries the flow of
 conditions forward — when the first path closed, kahawai opens a new channel.
@@ -33,7 +33,7 @@ water cascade.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A kahawai block MUST carry a filter expression as its first argument.
 A kahawai block MUST appear after a wai or kahawai block in the same scope.
@@ -44,7 +44,7 @@ and no preceding condition in the chain has already rendered.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ wai [first-filter] >>
@@ -66,7 +66,7 @@ English alias forms:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/mukuwai >>

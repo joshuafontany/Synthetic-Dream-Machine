@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/prism"
 
 <<~ ahu #head >>
 
-# Prism
+! Prism
 
 The **lens-harness**. The node points it at a piece of *existing* content --- an artifact, a transcript, another agent's output, a selection --- and refracts that content through one or more declared lenses, returning a composed **reading**.
 
@@ -34,7 +34,7 @@ The node summons it. It never rides a turn by default.
 
 <<~ ahu #operation >>
 
-## The Operation
+!! The Operation
 
 Three moves, in order:
 
@@ -48,7 +48,7 @@ The product earns a clean word: a **reading** --- a lensed interpretation of a r
 
 <<~ ahu #the-lenses >>
 
-## The Lenses It Refracts Through
+!! The Lenses It Refracts Through
 
 Prism supplies the **target slot** the self-applied lenses lack, and reuses the `-> target` aim that `conformance` already carries:
 
@@ -62,7 +62,7 @@ A lens reads its tool-bind through the `syad` `:` grammar (`syad:🏛️:*!`); e
 
 <<~ ahu #invocation >>
 
-## Invocation
+!! Invocation
 
 Declare the lenses, then delegate `->` to the target:
 
@@ -78,7 +78,7 @@ The lens list rides left of the `->`; the referenced target rides right. A targe
 
 <<~ ahu #reading >>
 
-## The Reading
+!! The Reading
 
 Prism returns the composed overlay: each declared band, what it found, anchored to the same fixed content. Plain glyphs name what the lenses *found* --- the forward `->` declaration prefix stays reserved for the node's own loop.
 
@@ -96,7 +96,7 @@ Each band carries complementary signal; the reading composes them into a fuller 
 
 <<~ ahu #lineage >>
 
-## Lineage
+!! Lineage
 
 Prism supersedes the old `--parse` language --- a content-decomposition tool that split input text into `lar:` coordinates by Aperture grain and "never answered content." That tool ran a true **parse**: one input, one canonical decomposition against one grammar.
 

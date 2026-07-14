@@ -22,16 +22,16 @@ uri-path    = "ha.ka.ba/lares/api/pono/local-first"
 
 <<~ ahu #head >>
 
-# Local-First Software
+! Local-First Software
 
 The seven ideals from Kleppmann et al. (Ink & Switch, 2019) define the design target.
 Keyhive (convergent capabilities + BeeKEM) and Beelay (RIBLT sync + sedimentree) are
 the current prior-art stack closest to satisfying all seven simultaneously.
 
 **Scale ladder (canonical 2026-05-06):**
-- **Lararium** — one operator's infrastructure: a `lararium-node` process + browser peers + devices.
-- **Nexus** — a confederation of Lararia sharing a stable internal mesh. Named by community + place.
-- **DreamNet** — the super-mesh of all Nexuses (allied + oppositional). Within-Nexus = reliable CRDT sync. Cross-Nexus = explicitly brokered, degraded-state-tolerant.
+* **Lararium** — one operator's infrastructure: a `lararium-node` process + browser peers + devices.
+* **Nexus** — a confederation of Lararia sharing a stable internal mesh. Named by community + place.
+* **DreamNet** — the super-mesh of all Nexuses (allied + oppositional). Within-Nexus = reliable CRDT sync. Cross-Nexus = explicitly brokered, degraded-state-tolerant.
 
 **Core law:** a `lararium-node` operates as a peer, not an authority — it functions as one Lararium in a Nexus confederation. The server holds no privilege over the content it relays. "The sync server is just another member in the system." (Brooklyn Zelenka, localfirst.fm ep. 19)
 
@@ -39,9 +39,9 @@ the current prior-art stack closest to satisfying all seven simultaneously.
 
 <<~ ahu #seven-ideals >>
 
-## The Seven Ideals
+!! The Seven Ideals
 
-### Ideal 1 — Fast
+!!! Ideal 1 — Fast
 
 No server round-trips for reading or writing. Local state is always available.
 UX MUST stay off the network-latency critical path.
@@ -54,7 +54,7 @@ this ideal. Cache locally; sync asynchronously.
 
 ---
 
-### Ideal 2 — Multi-Device
+!!! Ideal 2 — Multi-Device
 
 Data lives on all devices, not just in a cloud. Sync is automatic and bidirectional.
 A device holds first-class standing; the cloud serves as an optional relay.
@@ -69,7 +69,7 @@ central coordinator.
 
 ---
 
-### Ideal 3 — Offline
+!!! Ideal 3 — Offline
 
 Full read/write capability without a network connection. The system treats offline as the normal mode,
 not a degraded fallback.
@@ -82,7 +82,7 @@ any server present. The server functions as a sync accelerator, not a boot requi
 
 ---
 
-### Ideal 4 — Collaboration
+!!! Ideal 4 — Collaboration
 
 Real-time and asynchronous collaboration with conflict-free concurrent edits.
 CRDTs provide the enabling mechanism — not operational transforms, not last-write-wins.
@@ -95,7 +95,7 @@ state on both peers without manual conflict resolution. CRDTs enforce this mecha
 
 ---
 
-### Ideal 5 — Longevity
+!!! Ideal 5 — Longevity
 
 Software created today remains accessible without the vendor. Data in open formats,
 readable independently of the application.
@@ -110,7 +110,7 @@ UTF-8 string. Blobs (`LarariumDoc.blobs`) are reserved for truly binary assets
 
 ---
 
-### Ideal 6 — Privacy
+!!! Ideal 6 — Privacy
 
 The service provider cannot read user data. End-to-end encryption by default.
 Servers hold only encrypted bytes; they see membership info but not document content.
@@ -139,7 +139,7 @@ stabilizes. Browser agent: `SubtleCrypto` non-exportable keys. Node agent: files
 
 ---
 
-### Ideal 7 — User Control
+!!! Ideal 7 — User Control
 
 Users can move, copy, inspect, and modify their data. No lock-in. The application is
 a tool, not a custodian.
@@ -155,18 +155,18 @@ Keyhive provides the cryptographic enforcement.
 
 <<~ ahu #server-as-peer >>
 
-## Server-as-Peer Law
+!! Server-as-Peer Law
 
 A lararium-node operates as a peer with extra capabilities:
-- Acts as multiple peers simultaneously (one per open wiki island)
-- Disk access (LarDiskProjector)
-- CORS-hop web calls
-- Persistent relay (stays online when browser peers sleep)
+* Acts as multiple peers simultaneously (one per open wiki island)
+* Disk access (LarDiskProjector)
+* CORS-hop web calls
+* Persistent relay (stays online when browser peers sleep)
 
 It does NOT have:
-- Special authority over content truth
-- Ability to decrypt content it relays (Ideal 6 target)
-- Override capability for user-controlled data
+* Special authority over content truth
+* Ability to decrypt content it relays (Ideal 6 target)
+* Override capability for user-controlled data
 
 **Law:** A lararium-node MUST keep its decisions within its peer role.
 Routing, relay, and projection are peer capabilities; adjudication is not.
@@ -188,7 +188,7 @@ one per wiki island, one per connected realm. Same model, different capability s
 
 <<~ ahu #fuller-universe >>
 
-## Fuller's Non-Simultaneous Universe = Causal Island Doctrine
+!! Fuller's Non-Simultaneous Universe = Causal Island Doctrine
 
 Fuller (Synergetics §301): *"the aggregate of all humanity's consciously apprehended
 and communicated nonsimultaneous and only partially overlapping experiences."*
@@ -197,9 +197,9 @@ and communicated nonsimultaneous and only partially overlapping experiences."*
 no single simultaneous snapshot of the whole is coherent or necessary.
 
 This is the theoretical grounding for causal island doctrine:
-- The lararium mesh has no global clock, no global state.
-- Each island has a causal history (partially-ordered event log).
-- Islands overlap "only partially" — they share some events (via sync), not all.
+* The lararium mesh has no global clock, no global state.
+* Each island has a causal history (partially-ordered event log).
+* Islands overlap "only partially" — they share some events (via sync), not all.
 
 **Operational consequence:**
 Sync protocols requiring total order (a single source of truth for "current state")
@@ -215,7 +215,7 @@ not "current globally." A lararium-node MUST present its view as local — curre
 
 <<~ ahu #beelay-sedimentree >>
 
-## Beelay Sync Model
+!! Beelay Sync Model
 
 Beelay provides the sync protocol for Automerge repos. Key mechanisms:
 
@@ -237,7 +237,7 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~ ahu #alignment-matrix >>
 
-## Alignment Matrix (current)
+!! Alignment Matrix (current)
 
 | Ideal | State | Blocker |
 |---|---|---|
@@ -253,7 +253,7 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity >>

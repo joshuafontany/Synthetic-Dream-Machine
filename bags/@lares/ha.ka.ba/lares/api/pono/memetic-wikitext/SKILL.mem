@@ -23,23 +23,23 @@ type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 ```
 
-# Memetic-Wikitext Skill
+! Memetic-Wikitext Skill
 
 [memetic-wikitext.md](../memetic-wikitext.md) holds the root law.
 This skill carries the working procedure.
 
 <<~ ahu #load-contract >>
 
-## Load Contract
+!! Load Contract
 
 Keep these points active when the skill loads:
 
-- the parent invariant defines semantic root law
-- the root stays responsible for primitive meaning and minimum boot grammar only
-- `loulou` serves as named `pranala` sugar for outward relation; `aka` and `kahea` do the same for their own relation families where lawful
-- `kapu` qualifies a current act; `?` preserves unresolved pressure without false closure
-- examples, profiles, legality tables, parser detail, and render detail move outward before the parent swells
-- the smallest lawful intervention beats a grand rewrite
+* the parent invariant defines semantic root law
+* the root stays responsible for primitive meaning and minimum boot grammar only
+* `loulou` serves as named `pranala` sugar for outward relation; `aka` and `kahea` do the same for their own relation families where lawful
+* `kapu` qualifies a current act; `?` preserves unresolved pressure without false closure
+* examples, profiles, legality tables, parser detail, and render detail move outward before the parent swells
+* the smallest lawful intervention beats a grand rewrite
 
 <<~/ahu >>
 
@@ -47,7 +47,7 @@ Keep these points active when the skill loads:
 
 <<~ ahu #workflow-contract >>
 
-## Workflow Contract
+!! Workflow Contract
 
 Use this skill for four common jobs:
 
@@ -67,33 +67,33 @@ Working order:
 
 Do not:
 
-- turn the root into parser law
-- turn the root into render-pipeline law
-- let `aka` and `kahea` blur together
-- let `loulou` silently behave like transclusion
-- treat `?` as decoration
-- bury kapu posture in implication when explicit qualification belongs on the page
-- add legacy rename notes when present context already binds the live sugar term
+* turn the root into parser law
+* turn the root into render-pipeline law
+* let `aka` and `kahea` blur together
+* let `loulou` silently behave like transclusion
+* treat `?` as decoration
+* bury kapu posture in implication when explicit qualification belongs on the page
+* add legacy rename notes when present context already binds the live sugar term
 
 <<~/ahu >>
 
 <<~ ahu #trigger >>
 
-## Trigger
+!! Trigger
 
 Use this skill when the request asks to:
 
-- write or repair memetic-wikitext law surfaces
-- tighten primitive semantics or boot grammar
-- separate root law from parser or render detail
-- clean up examples, profile guidance, or bridge prose that crowd the parent
-- audit a surface for uncertainty, kapu, or composition drift
+* write or repair memetic-wikitext law surfaces
+* tighten primitive semantics or boot grammar
+* separate root law from parser or render detail
+* clean up examples, profile guidance, or bridge prose that crowd the parent
+* audit a surface for uncertainty, kapu, or composition drift
 
 Prefer another surface when the work concerns:
 
-- deep parse recognition or normalization only
-- target-specific render behavior only
-- a docs-only rewrite with no memetic-wikitext law pressure
+* deep parse recognition or normalization only
+* target-specific render behavior only
+* a docs-only rewrite with no memetic-wikitext law pressure
 
 <<~/ahu >>
 
@@ -109,21 +109,21 @@ Prefer another surface when the work concerns:
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
 Read the target surface before changing it.
 
 Look for:
 
-- missing or weak opener and `#iam` identity
-- primitive list drift
-- `loulou` versus `aka` versus `kahea` confusion
-- named `pranala` sugar described as separate law instead of bounded surface sugar
-- `kapu` that replaces an act instead of qualifying it
-- `?` that behaves like ornament rather than bounded openness
-- grammar detail that belongs to parser
-- projection detail that belongs to render-pipeline
-- examples or archive notes that crowd the parent
+* missing or weak opener and `#iam` identity
+* primitive list drift
+* `loulou` versus `aka` versus `kahea` confusion
+* named `pranala` sugar described as separate law instead of bounded surface sugar
+* `kapu` that replaces an act instead of qualifying it
+* `?` that behaves like ornament rather than bounded openness
+* grammar detail that belongs to parser
+* projection detail that belongs to render-pipeline
+* examples or archive notes that crowd the parent
 
 Name the actual overload before you cut.
 
@@ -131,37 +131,37 @@ Name the actual overload before you cut.
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
 Sort material into these buckets:
 
-- `root-law`
-- `primitive-distinction`
-- `boot-grammar`
-- `parse-detail`
-- `render-detail`
-- `example-or-profile`
-- `archive-residue`
+* `root-law`
+* `primitive-distinction`
+* `boot-grammar`
+* `parse-detail`
+* `render-detail`
+* `example-or-profile`
+* `archive-residue`
 
 Orientation rule:
 
-- `root-law`, `primitive-distinction`, and minimal `boot-grammar` stay near the parent
-- `parse-detail` and `render-detail` leave first
-- `example-or-profile` usually leaves for docs
-- `archive-residue` leaves unless it still binds the current surface
+* `root-law`, `primitive-distinction`, and minimal `boot-grammar` stay near the parent
+* `parse-detail` and `render-detail` leave first
+* `example-or-profile` usually leaves for docs
+* `archive-residue` leaves unless it still binds the current surface
 
 <<~/ahu >>
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
 Choose the smallest lawful shape:
 
-- parent only, when the surface already stays sharp
-- parent + `SKILL.md`, when operator procedure needs room
-- parent + docs, when explanation and examples crowd the root
-- parent + `SKILL.md` + docs, when law, procedure, and teaching all need distinct rooms
+* parent only, when the surface already stays sharp
+* parent + `SKILL.md`, when operator procedure needs room
+* parent + docs, when explanation and examples crowd the root
+* parent + `SKILL.md` + docs, when law, procedure, and teaching all need distinct rooms
 
 Default toward splitting, not accreting.
 Do not create a child just to rename clutter.
@@ -170,16 +170,16 @@ Do not create a child just to rename clutter.
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
 When writing or revising:
 
-- keep the parent's six glyph lines compressed
-- keep one-line primitive roles crisp
-- treat `loulou`, `aka`, and `kahea` as quick chant sugar around `pranala` where their own loci bind that role
-- turn long example ladders into docs tables or fenced examples
-- move checklist and workflow prose into this skill
-- add `loulou` links so the new surfaces actually connect
+* keep the parent's six glyph lines compressed
+* keep one-line primitive roles crisp
+* treat `loulou`, `aka`, and `kahea` as quick chant sugar around `pranala` where their own loci bind that role
+* turn long example ladders into docs tables or fenced examples
+* move checklist and workflow prose into this skill
+* add `loulou` links so the new surfaces actually connect
 
 Aim for a parent that a reader can reload quickly.
 
@@ -187,26 +187,26 @@ Aim for a parent that a reader can reload quickly.
 
 <<~ ahu #aftermath >>
 
-## ↺ Aftermath
+!! ↺ Aftermath
 
 Verify the surface still teaches cleanly, then name what moved and what remains.
 
 Hoʻoko — before closing, check:
 
-- opener matches `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`
-- the parent's `#has` edges reach `meme`, `loci`, and `invariant` when the root still functions as all three
-- `constraints` appears in this skill, not `invariants`
-- docs surface states non-law posture near the top
-- named `pranala` sugar reads as surface sugar, not as a rival edge system
-- examples and long bridge notes live here, off the parent
-- unresolved references remain named rather than hidden
+* opener matches `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`
+* the parent's `#has` edges reach `meme`, `loci`, and `invariant` when the root still functions as all three
+* `constraints` appears in this skill, not `invariants`
+* docs surface states non-law posture near the top
+* named `pranala` sugar reads as surface sugar, not as a rival edge system
+* examples and long bridge notes live here, off the parent
+* unresolved references remain named rather than hidden
 
 Aftermath — close by naming:
 
-- what stayed in the parent
-- what moved to the child
-- what moved to docs
-- what still lacks a lawful downstream home
+* what stayed in the parent
+* what moved to the child
+* what moved to docs
+* what still lacks a lawful downstream home
 
 If parser or render-pipeline law still lacks its own stable carrier, leave the boundary explicit and the residue honest.
 
@@ -214,7 +214,7 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>

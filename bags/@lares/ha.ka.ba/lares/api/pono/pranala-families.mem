@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/pranala-families"
 
 <<~ ahu #head >>
 
-# Pranala Families
+! Pranala Families
 
 Nine edge families form the relational grammar of the meme graph.
 Each family names a category of causal or semantic relationship.
@@ -33,7 +33,7 @@ Families carry role vocabularies and contract flags governing validation.
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 Every pranala edge MUST declare a family from `KNOWN_FAMILIES`.
 Edges with unknown families fail validation at the `error` severity level.
@@ -48,7 +48,7 @@ the edge confidence must not exceed the source node's confidence.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for pranala family contracts.
 
@@ -107,14 +107,14 @@ confidence-bounded  = false
 
 <<~ ahu #family-notes >>
 
-## Family Notes
+!! Family Notes
 
 **control** — structural authority edges (owns, has, configures, delegates).
 The primary composition grammar. Most meme graphs lead with control edges.
 
 Role semantics (each distinct):
-- `has`        — composition / possession: a source holds the target as a component (N per meme). A verb — Verse-core `∃` — never the `is-a` copula.
-- `owns`       — structural ownership / containment at the type level (not spatial instance placement)
+* `has`        — composition / possession: a source holds the target as a component (N per meme). A verb — Verse-core `∃` — never the `is-a` copula.
+* `owns`       — structural ownership / containment at the type level (not spatial instance placement)
 
 These are all distinct from the ahu-slot tree (`fragment-parent` tiddler field),
 which expresses document-level parent/child containment and is not a pranala edge.
@@ -145,7 +145,7 @@ Unlocks portal-as-graph-edge and multi-level room navigation.
 
 <<~ ahu #canvas-colors >>
 
-## Canvas Color Map
+!! Canvas Color Map
 
 Canonical tldraw color per family.
 Source of truth for `FAMILY_COLORS` in `packages/lararium-tldraw/src/tldraw-shapes.ts`.

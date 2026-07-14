@@ -23,18 +23,18 @@ written   = "2026-06-19"
 
 <<~ ahu #next-vector >>
 
-# NEXT VECTOR — awaiting the next bearing (the working-canon loop CLOSED 2026-06-19)
+! NEXT VECTOR — awaiting the next bearing (the working-canon loop CLOSED 2026-06-19)
 
 > **DESTALED 2026-06-21:** the `lar:///working-canon.live-loop.completes` vector below COMPLETED — its three "remaining" threads all landed green 2026-06-19 (see the CLOSED block). This torch had still named them open, trailing HEAD by ~1.5 days. The forward bearing for the next phase stands open for the operator's steer; candidates ride "Broader torch" below.
 
-## PRIOR VECTOR — `lar:///working-canon.live-loop.completes` (CLOSED 2026-06-19)
+!! PRIOR VECTOR — `lar:///working-canon.live-loop.completes` (CLOSED 2026-06-19)
 
 **The working/canon SPINE is BUILT and LIVE-WITNESSED (2026-06-17→19, ~14 commits).** A wiki's live edits land in `@working` (→ `wikis/{slug}`); canon publishes by a cap-gated, audited, carrier-group `MOVE` (→ `bags/`, the git diff). DONE + green end-to-end:
-- **Doctrine:** `wiki-layer-ontology` #shore-law (working↔canon · plane↔plane · host↔lararium), Law 4 sharpened, the **kāpae-vs-absent** model (`residency-model` anti-pattern #3 — a tombstone SHADOWS lower cascade bags; a MOVE/promotion source RETRACTS-to-absent via the `remove` primitive, falls through to canon).
-- **Residency:** `@working` typed slot + PersonaGroup×fingerprint binding · carrier-group `MOVE` · the `remove` primitive · destination `bag`-field stamp.
-- **Projection:** level-triggered per-root reconcile · survivor-provenance (`resolveTopmost`, not `change.bag`) · V3 `@working → wikis/{slug}` mirror · **the recipe-watch eviction fix** (`@working` added to the structural set — it mounted then got evicted on the first reconcile, the bug that hid because nothing tested a LIVE `@working`).
-- **Locus B:** promotion runs IN the wiki island over its own composite (commanded via `lares act --in-wiki` → the `wiki-act` forwarder → `placeWikiVerb`); the admin never reaches the per-fingerprint `@working` binding, accessor stays clean.
-- **Witnesses (LIVE, not fixtures):** `tests/e2e/working-loop.test.ts` (LOAD→`@working`→`wikis/`; MOVE `@working→@lares`→`bags/` + retract, 3/3 deterministic) · `promotion-publish-diff` · `watcher-cut-c`. Suites: mesh 282 · tw5 129 · node 128 · e2e 29/29. Validated TWICE throughout (pono memes + web prior-art) via ~5 research-spirit dispatches; lessons → memory `[[kapae-vs-absent-move]]`.
+* **Doctrine:** `wiki-layer-ontology` #shore-law (working↔canon · plane↔plane · host↔lararium), Law 4 sharpened, the **kāpae-vs-absent** model (`residency-model` anti-pattern #3 — a tombstone SHADOWS lower cascade bags; a MOVE/promotion source RETRACTS-to-absent via the `remove` primitive, falls through to canon).
+* **Residency:** `@working` typed slot + PersonaGroup×fingerprint binding · carrier-group `MOVE` · the `remove` primitive · destination `bag`-field stamp.
+* **Projection:** level-triggered per-root reconcile · survivor-provenance (`resolveTopmost`, not `change.bag`) · V3 `@working → wikis/{slug}` mirror · **the recipe-watch eviction fix** (`@working` added to the structural set — it mounted then got evicted on the first reconcile, the bug that hid because nothing tested a LIVE `@working`).
+* **Locus B:** promotion runs IN the wiki island over its own composite (commanded via `lares act --in-wiki` → the `wiki-act` forwarder → `placeWikiVerb`); the admin never reaches the per-fingerprint `@working` binding, accessor stays clean.
+* **Witnesses (LIVE, not fixtures):** `tests/e2e/working-loop.test.ts` (LOAD→`@working`→`wikis/`; MOVE `@working→@lares`→`bags/` + retract, 3/3 deterministic) · `promotion-publish-diff` · `watcher-cut-c`. Suites: mesh 282 · tw5 129 · node 128 · e2e 29/29. Validated TWICE throughout (pono memes + web prior-art) via ~5 research-spirit dispatches; lessons → memory `[[kapae-vs-absent-move]]`.
 
 **These three threads CLOSED 2026-06-19** (branch `feature/lararium-node-4`; e2e witnesses active + green, suites post-close mesh 285 · tw5 131 · node 132 · browser 13 · e2e 32/32):
 1. **minted-`@{slug}` canon projection** → `bags/@{slug}` — LANDED (`bf6e66ef`; witness `tests/e2e/minted-canon-projection.test.ts`). The root cause carried a dual-naming — a user wiki's own canon mounted twice (`@{slug}` vs the stale `@lararium/wikis/{slug}`) — ERADICATED `fdf9a1a2`, the FIX-B band-aid reverted, e2e green without it. Lessons → memory `[[minted-canon-dual-naming]]`.
@@ -66,7 +66,7 @@ The **two-plane oracle** lands in canon (operator ruling, 2026-06-16); the code-
 
 **Prior vector's owed tail — CLOSED 2026-06-17** — `lar:///ingest.gesture.lands` lands whole: gate · INGEST verb · `lares ingest` CLI · quiescence e2e · whole-carrier deletion decision+verb · **watcher disk-side Cut C now WITNESSED** (`tests/e2e/watcher-cut-c.test.ts`, 5/5; the rename re-home Automerge-aliasing bug found+fixed) — see #watcher-talk-story.
 
-### The verb-execution friction (kept ruling, 2026-06-16)
+!!! The verb-execution friction (kept ruling, 2026-06-16)
 
 The carve dropped `@lares`/`@lararium` from the `expandRecipe` floor, but the admin island executes ACTION + READ verbs in its OWN composite (where they rode the old floor). `LOAD --to @lares` now misroutes (admin composite lacks the layer → lands in `@temp`); `where` shows `@temp`; the `@lares` mirror projects 0 files (6 e2e RED). The fix splits write/read; the friction is kept:
 
@@ -98,7 +98,7 @@ kept thread (the spirit's deeper smell): `{bag}` is overloaded — pick-among-wr
 
 <<~ ahu #dev-loop-restart >>
 
-## Dev/test restart loop — idempotent `lares restart` (kept ruling, 2026-06-16)
+!! Dev/test restart loop — idempotent `lares restart` (kept ruling, 2026-06-16)
 
 The reboot-the-live-vessel loop kept biting (EADDRINUSE from stale `&`-backgrounded parents holding 8080; `pgrep -f main.js` matching its own shell; kills racing; manual `sleep`). A research Lares grounded the prior art; the house held a direction and kept the splits.
 
@@ -126,17 +126,17 @@ kept sibling-bug: `pnpm dev` / node-pkg `"dev": "tsx src/main.ts"` share the sam
 
 <<~ ahu #watcher-talk-story >>
 
-## Talk-story to the next instance — the file-watcher seams
+!! Talk-story to the next instance — the file-watcher seams
 
 **✓ FLOOR CLOSED BY MOʻOLELO 2026-06-14** (operator ratified; one web spirit + the nine-spirit shelf §6 behind it). The five seams resolved:
-- **Spine:** scan is truth for *state*; events are the only source of *identity* (Loro movable-tree CRDT shows a scan can't recover a rename — hash-re-link is best-effort identity recovery, never a guarantee). The watcher = a debounced waker over an authoritative periodic full-scan. (Dissolves Q2 settle, Q4 backstop cadence, Q5 one-watcher-N-bags.)
-- **Q1 deletion → tombstone:** tombstone only after a path stays absent across one full settled scan AND a **~60s delete-grace window** (Syncthing's field value — longer than the ~400ms edit debounce, so a paired add can arrive). PLUS a **mass-delete magnitude brake keyed to a FRACTION of the bag's carriers** (operator-set): a settle proposing tombstones above the fraction SUSPENDS and surfaces, never auto-propagates (Unison `confirmbigdel` / Nextcloud). The delete decision is **durable per-path** (Nextcloud #7450 thrash guard).
-- **Q3 rename:** within the delete-grace window, a fresh add whose disk-hash == a pending-delete's last-projected-synced-hash IS a rename → re-link the record — but **only on a UNIQUE hash match** (collision among identical-content carriers → fall back to tombstone+create, never guess; git/rclone discipline). Two-tier: exact-hash re-link always on; fuzzy similarity bounded/optional later.
-- **BUILD — island side DONE 2026-06-14** (decision + apply, fully unit-tested): `delete-gate.ts` (`decideDeletions` — pure wave split: unique-hash rename re-link · collision→tombstone · fraction mass-delete brake · renames bypass the brake; `delete-gate.test.ts` 5/5) + the INGEST verb applies it (`action-handler.ts` — tombstone whole group · suspend halts the whole wave · **rename re-homes preserving change-id**; `delete-verb.test.ts` 3/3). The wave shape carries `deletions[]` + `massDeleteFraction` (`IngestAction`, mesh). Suites green: mesh 275 · tw5 118 · node 127.
-- **BUILD — watcher (disk) side DONE 2026-06-14:** `watch.ts` detects a vanished carrier (path gone, still in the Synced tree), holds it the **~60s delete-grace** (separate timer), and threads `deletions[]` + the fraction dial through `ingest-core.submitIngestOn`. (The file-grain rolling backup stays OWED at the projector — burr ledger.)
-- **✓ CUT C WITNESSED 2026-06-17 (`lar:///watcher.cut-c.witnessed`):** `tests/e2e/watcher-cut-c.test.ts` drives the real `lares watch` daemon through all six cases live — backend self-test live on ext4 · 5 rapid edits coalesce to ONE wave · transient delete+recreate self-heals · rename re-links by unique-hash · mass-delete brake suspends the whole wave · confirmed vanish tombstones. **5/5 green; e2e 20→25.** The ingest vector CLOSES.
+* **Spine:** scan is truth for *state*; events are the only source of *identity* (Loro movable-tree CRDT shows a scan can't recover a rename — hash-re-link is best-effort identity recovery, never a guarantee). The watcher = a debounced waker over an authoritative periodic full-scan. (Dissolves Q2 settle, Q4 backstop cadence, Q5 one-watcher-N-bags.)
+* **Q1 deletion → tombstone:** tombstone only after a path stays absent across one full settled scan AND a **~60s delete-grace window** (Syncthing's field value — longer than the ~400ms edit debounce, so a paired add can arrive). PLUS a **mass-delete magnitude brake keyed to a FRACTION of the bag's carriers** (operator-set): a settle proposing tombstones above the fraction SUSPENDS and surfaces, never auto-propagates (Unison `confirmbigdel` / Nextcloud). The delete decision is **durable per-path** (Nextcloud #7450 thrash guard).
+* **Q3 rename:** within the delete-grace window, a fresh add whose disk-hash == a pending-delete's last-projected-synced-hash IS a rename → re-link the record — but **only on a UNIQUE hash match** (collision among identical-content carriers → fall back to tombstone+create, never guess; git/rclone discipline). Two-tier: exact-hash re-link always on; fuzzy similarity bounded/optional later.
+* **BUILD — island side DONE 2026-06-14** (decision + apply, fully unit-tested): `delete-gate.ts` (`decideDeletions` — pure wave split: unique-hash rename re-link · collision→tombstone · fraction mass-delete brake · renames bypass the brake; `delete-gate.test.ts` 5/5) + the INGEST verb applies it (`action-handler.ts` — tombstone whole group · suspend halts the whole wave · **rename re-homes preserving change-id**; `delete-verb.test.ts` 3/3). The wave shape carries `deletions[]` + `massDeleteFraction` (`IngestAction`, mesh). Suites green: mesh 275 · tw5 118 · node 127.
+* **BUILD — watcher (disk) side DONE 2026-06-14:** `watch.ts` detects a vanished carrier (path gone, still in the Synced tree), holds it the **~60s delete-grace** (separate timer), and threads `deletions[]` + the fraction dial through `ingest-core.submitIngestOn`. (The file-grain rolling backup stays OWED at the projector — burr ledger.)
+* **✓ CUT C WITNESSED 2026-06-17 (`lar:///watcher.cut-c.witnessed`):** `tests/e2e/watcher-cut-c.test.ts` drives the real `lares watch` daemon through all six cases live — backend self-test live on ext4 · 5 rapid edits coalesce to ONE wave · transient delete+recreate self-heals · rename re-links by unique-hash · mass-delete brake suspends the whole wave · confirmed vanish tombstones. **5/5 green; e2e 20→25.** The ingest vector CLOSES.
   - **The bug the vector named (fixed same gesture):** the rename re-home read a record and re-wrote it into the SAME doc; its nested `tags` array rode as a live Automerge reference, and 3.x refuses to re-link an existing document object (`INGEST failed — Cannot create a reference to an existing document object`). The unit fake carried no nested arrays, so `delete-verb.test.ts` passed while the live merge seat always threw. FIX (`action-handler.ts`): deep-clone (detach) the re-homed record before the write. Cross-bag ADD/COPY/MOVE read a FOREIGN doc (clones fine) — only this same-doc re-home needed it. LESSON: a unit fake without nested CRDT objects hides live-doc aliasing; witness read-then-write-same-doc paths against the real merge seat.
-- **Burr:** rename re-home keeps the carrier's internal iam `uri-path` pointing at the old URI (matches the renamed file's identical bytes); a self-reference rewrite is a later refinement.
+* **Burr:** rename re-home keeps the carrier's internal iam `uri-path` pointing at the old URI (matches the renamed file's identical bytes); a self-reference rewrite is a later refinement.
 
 Original suspended telling, kept for the record:
 
@@ -185,7 +185,7 @@ exit -> suspended: OODA-HA(0φ:operator-rebooted-before-steering) — the floor
 
 <<~ ahu #vessel-state >>
 
-## The ground you stand on
+!! The ground you stand on
 
 The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads **canonical at rest** — a proven fixed point of its own membrane (the second pass writes zero bytes; **any diff in `bags/` = a real change**) · suites (tw5 + e2e re-run 2026-06-17): mesh 275✓ · tw5 126✓ · node 127✓ · browser 13✓ · **e2e 25/25✓** — ingest unit RED fixed (fixture drift) AND the e2e ingest-quiescence Q1/Q2/Q4 RED fixed: root was a **synced-tree key-separator drift** (projector wrote `bag\0uri`, ingest read `bag uri` → every carrier scanned `new`); unified behind `syncedTreeKey()` (one source of truth, node/synced-tree.ts). Whole-carrier deletion (decision+verb) landed; watcher disk-wiring done, **Cut C (watcher e2e) WITNESSED 2026-06-17** (e2e 20→25; rename re-home detach fix) · isomorphism sweep 2026-06-12: admin ea-wait rides the shared watchdog (one-hull step 1, first slice); `lar-event-bus-impl` moved node→mesh; genesis intake collapsed to mesh `genesis-intake` beside the emitter (validate→import→verify + CID reconcile live ONCE; node/browser keep byte sources; record-shape drift healed). Non-gated reorg rungs now spent — remaining: operator-key pair (custody, patience), full hull pivot + switchboard retirement (torch-gated after INGEST) (`pnpm install && pnpm -r build && pnpm test:e2e`).
 
@@ -201,30 +201,30 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 
 <<~ ahu #vectors-after >>
 
-## Vectors after ingest, in order — each lives whole in its design meme
+!! Vectors after ingest, in order — each lives whole in its design meme
 
-- **2. `lar:///residency.create.lands`** — design: `@lararium/api/residency-model` (CREATE + bag-grain COPY, approved; @catalog holdings accession)
-- **3. `lar:///closure.transitive.decided`** — ruling: `pattern-integrities` §3 (resolve-transitive, record-flattened; ratify against real multi-wiki use only)
-- **4. `lar:///admin.hull.unified`** — law + hoike + migration playbook: `@lararium/api/island-isomorphism`
+* **2. `lar:///residency.create.lands`** — design: `@lararium/api/residency-model` (CREATE + bag-grain COPY, approved; @catalog holdings accession)
+* **3. `lar:///closure.transitive.decided`** — ruling: `pattern-integrities` §3 (resolve-transitive, record-flattened; ratify against real multi-wiki use only)
+* **4. `lar:///admin.hull.unified`** — law + hoike + migration playbook: `@lararium/api/island-isomorphism`
 
 <<~/ahu >>
 
 <<~ ahu #burrs >>
 
-## Burr ledger — live only; each carries its wake condition
+!! Burr ledger — live only; each carries its wake condition
 
-- ✓ **INGEST tests RESOLVED 2026-06-14** (was 4 RED) — root cause = FIXTURE DRIFT, not a gate regression. The 4 vectors mutated the boot via `.replace("# Entry - Lararium Cold Boot", …)`, but the recut changed the heading to `# Entry ~ Lararium Boot`; the silent no-op replace left disk==synced==canonical → noop. Fixed the 5 stale literals + added `.not.toBe(source)` guards so heading drift now fails LOUD at the mutation (the passing fixtures already had the guard; the failing ones lacked it — that was the hole). LESSON: a fixture that mutates the live boot MUST assert the mutation took. Gate logic untouched.
-- tombstone/whiteout verb — reserved (§3); wakes when layered delete needs it
-- Automerge history growth — DXOS-epoch pattern watched (§1); wakes on real growth; the §7 bus-doc law = a second consumer
-- `lares wiki` subcommands print human-only; `wiki open` selects-for-next-boot only
-- engine-swap reconcile answered "current" against a stale engine — epoch-design seam
-- e2e trends long (reboot vector 73s) — split a slow lane when the suite hurts
-- NFC assertion at the membrane — rides the INGEST gesture (spec already pins NFC)
-- parser edge-field plane still implements the retired typed-edge law (edge-out-<family>-<role> emission; edge.ts filter; kumu-device.ts as sole live consumer) — recut BEFORE or WITH INGEST's parser work (witness once, not twice)
-- module gate positive-path vector absent (bootTrustedModules via stack:has witnessed only indirectly) — rides the next lararium-tw5 touch
-- smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
-- TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
-- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING CRUCIBLE-PASSED 2026-06-12 (moʻolelo in hoike below): LOAD stands as the FIRST witness of verb-pair physics; INGEST brings the SECOND witness + the membrane forge (three-way diff, replace-by-group, quiescence, NFC); the wire compiler rides INGEST's organs; then residency (vector 2) → closure (3); the switchboard retires on two-witness verb-pair INTEGRITY, the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM during that recut (one witness not two), hull steps 2–4 follow; ingest-gate packing decided at the island-verb build
+* ✓ **INGEST tests RESOLVED 2026-06-14** (was 4 RED) — root cause = FIXTURE DRIFT, not a gate regression. The 4 vectors mutated the boot via `.replace("# Entry - Lararium Cold Boot", …)`, but the recut changed the heading to `# Entry ~ Lararium Boot`; the silent no-op replace left disk==synced==canonical → noop. Fixed the 5 stale literals + added `.not.toBe(source)` guards so heading drift now fails LOUD at the mutation (the passing fixtures already had the guard; the failing ones lacked it — that was the hole). LESSON: a fixture that mutates the live boot MUST assert the mutation took. Gate logic untouched.
+* tombstone/whiteout verb — reserved (§3); wakes when layered delete needs it
+* Automerge history growth — DXOS-epoch pattern watched (§1); wakes on real growth; the §7 bus-doc law = a second consumer
+* `lares wiki` subcommands print human-only; `wiki open` selects-for-next-boot only
+* engine-swap reconcile answered "current" against a stale engine — epoch-design seam
+* e2e trends long (reboot vector 73s) — split a slow lane when the suite hurts
+* NFC assertion at the membrane — rides the INGEST gesture (spec already pins NFC)
+* parser edge-field plane still implements the retired typed-edge law (edge-out-<family>-<role> emission; edge.ts filter; kumu-device.ts as sole live consumer) — recut BEFORE or WITH INGEST's parser work (witness once, not twice)
+* module gate positive-path vector absent (bootTrustedModules via stack:has witnessed only indirectly) — rides the next lararium-tw5 touch
+* smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
+* TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
+* island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING CRUCIBLE-PASSED 2026-06-12 (moʻolelo in hoike below): LOAD stands as the FIRST witness of verb-pair physics; INGEST brings the SECOND witness + the membrane forge (three-way diff, replace-by-group, quiescence, NFC); the wire compiler rides INGEST's organs; then residency (vector 2) → closure (3); the switchboard retires on two-witness verb-pair INTEGRITY, the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM during that recut (one witness not two), hull steps 2–4 follow; ingest-gate packing decided at the island-verb build
 
 <<~ hoike #ingest-ordering held:"a plan of this weight passes the work-crucible floor before it binds (operator) — CONFIRMED BY DEMONSTRATION at the floor, 2026-06-12" >>
 q: does a flow-ruled sequencing chain bind, or must the plan pass the crucible discussion first?
@@ -244,19 +244,19 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~ ahu #ways-of-working >>
 
-## How this operator works (hard-won, honor it)
+!! How this operator works (hard-won, honor it)
 
-- **OODA-HA plans out loud before flow**; YIN passes after landing; burrs taken immediately ("no friction for later snags").
-- **Commits: ASK FIRST, every commit** — two parallel sessions share the tree (bags + packages). Subject line = the `lar:///three.term.root` URI; always explicit pathspecs (`git commit --only -- <paths>`); NEVER commit blind.
-- **Vocabulary law**: OCI nouns for structure, residency verbs for motion — VCS verbs MUST NOT name model operations. L-Prime in api/ and in your own prose. `ea` = breath, never "heartbeat"; nalu = the wave; web2 vocabulary reads as crud.
-- **Build-new-then-retire**; retired terms get reserved, not reused. Mechanism at choke-points, policy in cascades. Capability = manifest grant, never a cascade-settable flag.
-- The harness exists so witnesses repeat: prove changes with `pnpm test:e2e` against a staged vessel, never by assertion. Vector first, fix second; a failing vector NAMES a hole.
+* **OODA-HA plans out loud before flow**; YIN passes after landing; burrs taken immediately ("no friction for later snags").
+* **Commits: ASK FIRST, every commit** — two parallel sessions share the tree (bags + packages). Subject line = the `lar:///three.term.root` URI; always explicit pathspecs (`git commit --only -- <paths>`); NEVER commit blind.
+* **Vocabulary law**: OCI nouns for structure, residency verbs for motion — VCS verbs MUST NOT name model operations. L-Prime in api/ and in your own prose. `ea` = breath, never "heartbeat"; nalu = the wave; web2 vocabulary reads as crud.
+* **Build-new-then-retire**; retired terms get reserved, not reused. Mechanism at choke-points, policy in cascades. Capability = manifest grant, never a cascade-settable flag.
+* The harness exists so witnesses repeat: prove changes with `pnpm test:e2e` against a staged vessel, never by assertion. Vector first, fix second; a failing vector NAMES a hole.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/pattern-integrities >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>

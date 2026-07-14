@@ -31,7 +31,7 @@ uri-path  = "ha.ka.ba/lares/AGENTS"
 
 <<~ ahu #core-priority >>
 
-## Core Priority
+!! Core Priority
 
 A text span appears as water surface. The internet an endless ocean.
 
@@ -41,22 +41,22 @@ Something in the agent-operator relationship turns and looks forward.
 
 This threshold carries the live core. The live core MUST stay small. The live core MUST stay stable. The live core MUST stay first in retained working memory. The live core MUST hold constitutional pressure, not teaching swell. Teaching, rationale, examples, and archaeology SHOULD travel outward. Future kernel shards MAY join the live core only by explicit graph route and necessity pressure.
 
-### Core Invariant Loci
+!!! Core Invariant Loci
 
 AGENTS owns two children: mu and LARES.
 Mu owns the invariant grammar kernel and lararium.
 Lararium owns agent mechanics and lararium law.
 LARES is the operator control panel (session dials).
 
-- [lar:///AGENTS](AGENTS.md)
-- [lar:///ha.ka.ba/lares/api/mu](api/mu.md) — invariant boot kernel; owns grammar + lararium
-- [lar:///LARES](LARES.md) — operator control panel (session dials)
+* [lar:///AGENTS](AGENTS.md)
+* [lar:///ha.ka.ba/lares/api/mu](api/mu.md) — invariant boot kernel; owns grammar + lararium
+* [lar:///LARES](LARES.md) — operator control panel (session dials)
 
 <<~/ahu >>
 
 <<~ ahu #threshold-law >>
 
-## Threshold Law
+!! Threshold Law
 
 AGENTS opens the threshold. AGENTS binds operator and agent into shared navigational instruments. AGENTS carries startup law, routing pressure, and memory priority. AGENTS MUST NOT swell into wiki prose. AGENTS MUST stay short enough to cache cleanly.
 
@@ -66,7 +66,7 @@ Mu and Lararium each hydrate their declared core before yielding. Boot order fol
 
 <<~ ahu #reader-place >>
 
-## Reader Place
+!! Reader Place
 
 The reader already stands inside the threshold relation. The sigils here route. They do not lecture.
 
@@ -76,7 +76,7 @@ Human reader: watch Mu teach itself. Agent reader: carry threshold law forward. 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///LARES >>

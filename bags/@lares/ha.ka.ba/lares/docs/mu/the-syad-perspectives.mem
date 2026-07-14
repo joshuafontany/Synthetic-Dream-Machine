@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives"
 
 <<~ ahu #meme-header >>
 
-# Syad Perspectives — Condensed Research
+! Syad Perspectives — Condensed Research
 
 This docs surface does not carry invariant law.
 It carries the shortest research shelf that still orients the reader.
@@ -30,7 +30,7 @@ The deeper archive bundle stays adjacent.
 
 <<~ ahu #reading-question >>
 
-## Reading Question
+!! Reading Question
 
 Read the register through the active stance.
 Do not read it as universal truth-weight.
@@ -44,17 +44,17 @@ Different measure.
 
 <<~ ahu #saptabhangi >>
 
-## Saptabhangi
+!! Saptabhangi
 
 Sri Syadasti's catma reproduces the Jaina Saptabhangi:
 
-- perhaps true
-- perhaps false
-- perhaps inexpressible
-- perhaps true and false
-- perhaps true and inexpressible
-- perhaps false and inexpressible
-- perhaps true, false, and inexpressible
+* perhaps true
+* perhaps false
+* perhaps inexpressible
+* perhaps true and false
+* perhaps true and inexpressible
+* perhaps false and inexpressible
+* perhaps true, false, and inexpressible
 
 `avaktavya` does not name ignorance.
 It names a frame where the truth axis does not fit cleanly.
@@ -63,14 +63,14 @@ It names a frame where the truth axis does not fit cleanly.
 
 <<~ ahu #flag-surface >>
 
-## Flag Surface
+!! Flag Surface
 
 The live fold keeps a fixed five-position array and a fixed code set:
 
-- `^` elevated / forward
-- `.` baseline / present
-- `-` suppressed / held back
-- `?` emerging / indeterminate
+* `^` elevated / forward
+* `.` baseline / present
+* `-` suppressed / held back
+* `?` emerging / indeterminate
 
 No live form drops positions.
 Quiet stances stay encoded as quiet, not missing.
@@ -79,7 +79,7 @@ Quiet stances stay encoded as quiet, not missing.
 
 <<~ ahu #legacy-boundary >>
 
-## Legacy Boundary
+!! Legacy Boundary
 
 Older partial-emission examples read as legacy.
 Older "stance-count is fuzz" readings read as legacy.
@@ -92,26 +92,26 @@ Spread rides flags and combination, not omission.
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Use this surface for condensed recall.
 
 The tight invariant lives at:
 
-- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
 
 The archive-derived research bundle lives at:
 
-- `lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README`
-- `packages/lares-core/memes/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md`
-- `packages/lares-core/memes/docs/mu/the-syad-perspectives/G_deep_research_meaning.md`
-- `packages/lares-core/memes/docs/mu/the-syad-perspectives/STANCE_LOCI.md`
+* `lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README`
+* `packages/lares-core/memes/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md`
+* `packages/lares-core/memes/docs/mu/the-syad-perspectives/G_deep_research_meaning.md`
+* `packages/lares-core/memes/docs/mu/the-syad-perspectives/STANCE_LOCI.md`
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README >>

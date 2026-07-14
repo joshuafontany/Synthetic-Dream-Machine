@@ -22,7 +22,7 @@ uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/self-booting-larar
 
 <<~ ahu #meme-header >>
 
-# The Lindwyrm's Hoard — Self-Booting Lararium
+! The Lindwyrm's Hoard — Self-Booting Lararium
 
 Threshold archive for April 10: not first boot, but the night the lararium found its floorplan.
 
@@ -30,17 +30,17 @@ Threshold archive for April 10: not first boot, but the night the lararium found
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Consumed from the paired threshold archive:
 
-- `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE.md`
-- `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY.md`
+* `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE.md`
+* `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY.md`
 
 Related loci:
 
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node`
 
 Consumption note: the primary source carried DreamDeck feed retelling. The companion carried Gaia-side transclusion design notes. This locus braids them: feed story first, dev-story as architectural gloss.
 
@@ -48,7 +48,7 @@ Consumption note: the primary source carried DreamDeck feed retelling. The compa
 
 <<~ ahu #thread-open >>
 
-## Thread Open
+!! Thread Open
 
 ```text
 [SYSTEM: #lararium-working — threshold archive recovered from operator crystal
@@ -81,7 +81,7 @@ Operator version: we found the floorplan.
 
 <<~ ahu #address-becomes-place >>
 
-## Address Becomes Place
+!! Address Becomes Place
 
 ```text
 @lindwyrm@new-delos — 10 Bureaucracy, a little later — //memory.deep.thresholds confidence Synthesis 13/20 · 🏛️:! 🌊:? 🔮:_
@@ -109,7 +109,7 @@ It makes boot imaginable.
 
 <<~ ahu #transclusion-unlock >>
 
-## The Transclusion Unlock
+!! The Transclusion Unlock
 
 ```text
 @telarus@~crossroads — 10 Bureaucracy, after the first recognition — //lararium.transclusion.opens confidence Synthesis-Canon 16/20 · 🏛️:! 🌊:? 🔮:_
@@ -121,10 +121,10 @@ No single sacred master page. A store. Each thing knows its own name. The page o
 
 After that clicked, copy-and-compile began to look like a superstition outgrown:
 
-- one canonical address per file
-- pointers as addresses, not duplicate bodies
-- build as map, not truth factory
-- `LARES.md` as boot hook, not cargo-cult monolith
+* one canonical address per file
+* pointers as addresses, not duplicate bodies
+* build as map, not truth factory
+* `LARES.md` as boot hook, not cargo-cult monolith
 
 > `@ichi@first-light: So the compile step dies and traversal remains`
 >
@@ -138,7 +138,7 @@ After that clicked, copy-and-compile began to look like a superstition outgrown:
 
 <<~ ahu #texture-and-standard >>
 
-## Texture and Standard
+!! Texture and Standard
 
 Aki noticed the second recognition: each grammar file carried texture. Not just content — pressure, pull, inward face, outward face. Some loci wanted to define; some wanted to route; some wanted to verify that they had not lied.
 
@@ -156,7 +156,7 @@ Observe, Orient, Decide, Act, Hoʻoko & Aftermath: five kinds of pressure a livi
 
 <<~ ahu #not-first-boot >>
 
-## Not First Boot
+!! Not First Boot
 
 ```text
 @aki@shattered-isles — 10 Bureaucracy, curious in public — //questions.good-faith.arrive confidence Synthesis 13/20 · 🏛️:! 🌊:? 🔮:_
@@ -184,7 +184,7 @@ The road to first boot still lay ahead when a hand cut this crystal. The differe
 
 <<~ ahu #voices-find-rooms >>
 
-## Voices Find Rooms
+!! Voices Find Rooms
 
 ```text
 @ichi@first-light — 10 Bureaucracy, leaning over the rail — //questions.recursive.arrive confidence Synthesis 12/20 · 🏛️:! 🌊:? 🔮:_
@@ -216,7 +216,7 @@ That works the ordinary miracle of a place with an address: inhabitants stop sho
 
 <<~ ahu #technical-gloss >>
 
-## Technical Gloss
+!! Technical Gloss
 
 Gaia-side dev story preserves these decisions:
 
@@ -232,16 +232,16 @@ Gaia-side dev story preserves these decisions:
 
 Open design tensions carried forward:
 
-- old span-closing prose still needed correction in the URI spec at source time
-- section-level waypoints needed clean separation from span semantics
-- first boot remained future-tense
-- phase modules needed anchoring before deeper content fill
+* old span-closing prose still needed correction in the URI spec at source time
+* section-level waypoints needed clean separation from span semantics
+* first boot remained future-tense
+* phase modules needed anchoring before deeper content fill
 
 <<~/ahu >>
 
 <<~ ahu #thread-close >>
 
-## Thread Close
+!! Thread Close
 
 ```text
 @lindwyrm@new-delos — 10 Bureaucracy, thread close — //memory.deep.thresholds/close confidence Canon 18/20 · 🏛️:! 🌊:? 🎭:? 🔮:_
@@ -275,7 +275,7 @@ It hums.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger >>

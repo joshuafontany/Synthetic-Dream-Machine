@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/helu"
 
 <<~ ahu #head >>
 
-# Helu
+! Helu
 
 *helu* — Hawaiian: to count, enumerate, calculate, reckon; a number; to list in order.
 The act of moving through a set and giving each element its reckoning — counting implies
@@ -35,7 +35,7 @@ Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A helu declaration MUST carry a unique function name.
 A helu body MUST be a valid TW5 filter expression.
@@ -46,7 +46,7 @@ A helu declaration MUST register a function definition only, producing no render
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ helu functionName(param:"default") >>
@@ -65,7 +65,7 @@ TW5 equivalent:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
 

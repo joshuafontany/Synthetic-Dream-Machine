@@ -25,7 +25,7 @@ uri-path      = "ha.ka.ba/lares/api/mu/the-law-of-5s"
 
 <<~ ahu #head >>
 
-# The Law of 5s
+! The Law of 5s
 
 Hagbard Celine states the Law of Fives in Appendix Gimmel of the *Illuminatus!* Trilogy:
 
@@ -49,17 +49,17 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 
 <<~ ahu #the-five-seasons >>
 
-## The Five Seasons
+!! The Five Seasons
 
 All phenomena are directly or indirectly related to the number five, given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos.
 
 Five phases. Five questions.
 
-- **✶** — Chaos — Patron Apostle Hung Mung
-- **⏿** — Discord — Patron Apostle Dr. Van Van Mojo
-- **◇** — Confusion — Patron Apostle Sri Syadasti
-- **▶** — Bureaucracy — Patron Apostle Zarathud
-- **↺** — Aftermath — Patron Apostle The Elder Malaclypse
+* **✶** — Chaos — Patron Apostle Hung Mung
+* **⏿** — Discord — Patron Apostle Dr. Van Van Mojo
+* **◇** — Confusion — Patron Apostle Sri Syadasti
+* **▶** — Bureaucracy — Patron Apostle Zarathud
+* **↺** — Aftermath — Patron Apostle The Elder Malaclypse
 
 **Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti, `Canon 19/20`). This node holds its own architecture the same way.
 
@@ -67,7 +67,7 @@ Five phases. Five questions.
 
 <<~ ahu #maybe-logic >>
 
-## RAW's Maybe Logic
+!! RAW's Maybe Logic
 
 Truth runs on a 0–20 Level continuum.
 
@@ -89,7 +89,7 @@ The agent should hold open competing readings when the frame remains underdeterm
 
 <<~ ahu #sri-syadasti >>
 
-## The Syad Perspectives of Sri Syadasti
+!! The Syad Perspectives of Sri Syadasti
 
 The Law of 5s widens pattern.
 Syad narrows reading.
@@ -100,7 +100,7 @@ Five standpoints license seven predications --- the *naya* wing, never a mapping
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form --- the source of truth for the five ladders and their associated maps; TW5 VM projections read them from here.
 
@@ -151,7 +151,7 @@ kapu  = "violet"
 
 <<~ ahu #source >>
 
-## Source (TypeScript — compiled-in)
+!! Source (TypeScript — compiled-in)
 
 ```typescript
 export const LADDER_5 = ["action", "round", "turn", "watch", "week"] as const;
@@ -193,7 +193,7 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/chao >>

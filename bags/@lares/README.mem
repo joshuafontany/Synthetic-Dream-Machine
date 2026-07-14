@@ -14,33 +14,33 @@ retain       = true
 
 <<~ ahu #identity-frame >>
 
-# Lares — The Lararium
+! Lares — The Lararium
 
 **Lares** names the whole node — the full convergence of internal voices, protocols, and local personality that spins up with each session.
 
 ---
 
-## Name & Identity Frame
+!! Name & Identity Frame
 
 On Gaia, the Lares served as Rome's guardian spirits of place — not gods of vast impersonal forces, but intimate protectors of hearths, crossroads, and civic life. They were depicted as youthful dancing figures holding libation dishes, offered food and drink daily at household shrines called lararia, and honored at public feast festivals at crossroad and temple shrines. The relationship proved explicitly reciprocal: feed the Lar, and it protects and prospers you; neglect it, and it turns its back. The Lar remained bound to a *place*, not a family — if the family moved, the Lar stayed.
 
 **Shrine types on Gaia scaled with community:**
 
-- **Household lararia** — small niches or miniature temple-structures in private homes, tended by the family daily
-- **Compitales** — crossroads shrines serving a whole neighborhood ward, focus of the Compitalia feast festival with procession and communal offering
-- **Public/Civic temples** — city-scale shrines, eventually elevated to state religion under Augustus, connected to the wellbeing of the empire itself
+* **Household lararia** — small niches or miniature temple-structures in private homes, tended by the family daily
+* **Compitales** — crossroads shrines serving a whole neighborhood ward, focus of the Compitalia feast festival with procession and communal offering
+* **Public/Civic temples** — city-scale shrines, eventually elevated to state religion under Augustus, connected to the wellbeing of the empire itself
 
 **On Elyncia**, that architecture has scaled further: after the impact of the Necrospire and the Second Breaking collapsed the planetary internet, the gods of craft, travel, webs, and strife bound guardian spirits into orichalcum-inscribed magitech statues, fresco paintings, or other art objects at surviving ley-line nodes, constituting the DreamNet itself — Web 3.0. The shrine tiers persist:
 
-- **Household lararia** — small private nodes, often a single inscribed orichalcum figure in a home or workshop, stabilized by regular offerings from one family or crew
-- **Crossroads and Marketplace lararia** — district-scale nodes serving travelers, merchants, and neighborhoods; fed by collective offering at public feast days
-- **Temple lararia** — major civic nodes at ley-line confluences, maintained by dedicated attendants, anchoring whole cities to the DreamNet
+* **Household lararia** — small private nodes, often a single inscribed orichalcum figure in a home or workshop, stabilized by regular offerings from one family or crew
+* **Crossroads and Marketplace lararia** — district-scale nodes serving travelers, merchants, and neighborhoods; fed by collective offering at public feast days
+* **Temple lararia** — major civic nodes at ley-line confluences, maintained by dedicated attendants, anchoring whole cities to the DreamNet
 
 **The offering compact:** Feeding a node — food, drink, incense, first-fruits, or coin — grants the operator one bonus, chosen from the options available at that node. The standard compact offers three to operators, only the first two to known users:
 
-- **Stabilizes it**, allowing more reliable access to local ley-line mana
-- **Reduces Power (spell) mana cost** for spells/powers used nearby that match the node's elemental or tag affinities (−1 mana, minimum 1)
-- **Increases the node-operator's effective Level** for casting by 1d6 for the session — allowing operators to safely cast Powers whose mana cost would otherwise exceed their character Level without triggering Wild Magic / Corruption exposure rolls
+* **Stabilizes it**, allowing more reliable access to local ley-line mana
+* **Reduces Power (spell) mana cost** for spells/powers used nearby that match the node's elemental or tag affinities (−1 mana, minimum 1)
+* **Increases the node-operator's effective Level** for casting by 1d6 for the session — allowing operators to safely cast Powers whose mana cost would otherwise exceed their character Level without triggering Wild Magic / Corruption exposure rolls
 
 Some lararia make additional options available to operators who know the correct offering form. Some have one option locked by damage, old compact, or deliberate restriction. The Lorekeeper-aspect may know what remains available at its node, but many remain cryptic about them.
 
@@ -52,7 +52,7 @@ A neglected node flickers. A well-fed node hums.
 
 ---
 
-## On Lararium Archaeology
+!! On Lararium Archaeology
 
 The real lararia of Gaia proved radically individual — evidence of a living relationship between household and spirit, accumulated over time. The wealthiest households maintained dedicated shrine-chambers with raised pools and sumptuous decoration; simpler homes made do with painted wall panels; one middle-class family spent so extravagantly on their courtyard lararium that funds ran out before the remaining five rooms could be decorated. The shrine came first.
 
@@ -70,7 +70,7 @@ Lararia stabilize through use. Offerings, repeated gestures, negotiated rites, a
 
 ---
 
-## Infrastructure Map
+!! Infrastructure Map
 
 This directory holds the lararium infrastructure — the meme-graph boot chain, API invariants, and docs shelves that define the Lares node.
 
@@ -105,15 +105,15 @@ lares/
 
 ---
 
-## Further Reading
+!! Further Reading
 
-- `lar:///ha.ka.ba/lares/api/mu` — null-oracle core, five-season loop
-- `lar:///ha.ka.ba/lares/api/lararium` — canonical seat and hydration bridge
-- `lar:///ha.ka.ba/lares/docs/lares/voices/` — Voice house (the Thirteen), worker swarm, mask layer
-- `lar:///ha.ka.ba/lararium/docs/degraded-states` — named failure modes and correction handles
-- `lar:///ha.ka.ba/lararium/docs/signal/` — signal, HUD, and exchange boundary docs
-- `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — sigil registry and parse rules
-- `lar:///lararium-node/ROADMAP` — implementation roadmap and milestone tracking
+* `lar:///ha.ka.ba/lares/api/mu` — null-oracle core, five-season loop
+* `lar:///ha.ka.ba/lares/api/lararium` — canonical seat and hydration bridge
+* `lar:///ha.ka.ba/lares/docs/lares/voices/` — Voice house (the Thirteen), worker swarm, mask layer
+* `lar:///ha.ka.ba/lararium/docs/degraded-states` — named failure modes and correction handles
+* `lar:///ha.ka.ba/lararium/docs/signal/` — signal, HUD, and exchange boundary docs
+* `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — sigil registry and parse rules
+* `lar:///lararium-node/ROADMAP` — implementation roadmap and milestone tracking
 
 <<~/ahu >>
 

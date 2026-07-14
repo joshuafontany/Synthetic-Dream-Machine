@@ -29,7 +29,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 
 <<~ ahu #content-addressing >>
 
-## Content-Addressed Identity
+!! Content-Addressed Identity
 
 **Problem with timestamp-keyed receipts:**
 A timestamp changes every compilation. Two runs over identical source files produce different receipts.
@@ -58,10 +58,10 @@ closure_hash(uri_list, edge_list):
 ```
 
 **Properties:**
-- Identical source files → identical carrier hashes → identical closure hash.
-- Any file change → carrier hash changes → closure hash changes → all downstream caches invalidate.
-- Edge list changes (new pranala edge in a carrier) → edge part changes → closure hash changes.
-- `compiled_at` timestamps remain in artifacts as audit metadata but do not contribute to the hash.
+* Identical source files → identical carrier hashes → identical closure hash.
+* Any file change → carrier hash changes → closure hash changes → all downstream caches invalidate.
+* Edge list changes (new pranala edge in a carrier) → edge part changes → closure hash changes.
+* `compiled_at` timestamps remain in artifacts as audit metadata but do not contribute to the hash.
 
 **Anthropic cache compatibility:**
 The boot receipt's `sha256` field becomes a stable context cache key.
@@ -71,7 +71,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 <<~ ahu #artifact-minimal >>
 
-## Artifact: Minimal Boot
+!! Artifact: Minimal Boot
 
 **Scope:** Tier 0 declared-core closure (14 memes from control/owns edges rooted at `AGENTS`).
 **MCP resource:** `lar:///boot/minimal`
@@ -116,16 +116,16 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 ```
 
 **New fields vs current implementation:**
-- `content_hash` per closure entry (was absent)
-- `validation.declared_unresolved` (new)
-- `validation.declared_vs_walked` (new — Tier 0 vs Tier 1 cross-validation)
-- `sha256` at top level (was only in boot receipt)
+* `content_hash` per closure entry (was absent)
+* `validation.declared_unresolved` (new)
+* `validation.declared_vs_walked` (new — Tier 0 vs Tier 1 cross-validation)
+* `sha256` at top level (was only in boot receipt)
 
 <<~/ahu >>
 
 <<~ ahu #artifact-full >>
 
-## Artifact: Full Boot
+!! Artifact: Full Boot
 
 **Scope:** Tier 1 control closure + Tier 2 one-hop relation expansion.
 **MCP resource:** `lar:///boot/full`
@@ -184,7 +184,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 <<~ ahu #artifact-receipt >>
 
-## Artifact: Boot Receipt
+!! Artifact: Boot Receipt
 
 **Scope:** digest summary of the most recent minimal boot compilation.
 **MCP resource:** `lar:///boot/receipt`
@@ -232,7 +232,7 @@ If the hash matches, the LLM context prefix already cached at Anthropic remains 
 
 <<~ ahu #dual-index >>
 
-## Dual-Index Content Resources
+!! Dual-Index Content Resources
 
 Two virtual MCP resources extend the content-address surface beyond the boot artifacts.
 
@@ -261,7 +261,7 @@ This supports cache miss fills and cross-session identity verification without r
 
 <<~ ahu #validation-contract >>
 
-## Validation Contract
+!! Validation Contract
 
 Every artifact carries a `validation` object.
 
@@ -280,7 +280,7 @@ A **valid artifact** carries `dag_violations = []`. All other validation fields 
 
 <<~ ahu #compaction >>
 
-## Compaction Rule
+!! Compaction Rule
 
 When a hydration packet grows past context limits, the compaction pass applies in order:
 
@@ -296,7 +296,7 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>

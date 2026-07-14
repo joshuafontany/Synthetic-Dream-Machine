@@ -20,7 +20,7 @@ uri-path       = "ha.ka.ba/lares/api/pono/meme"
 
 <<~ ahu #head >>
 
-# Meme Law (Kānāwai)
+! Meme Law (Kānāwai)
 
 A meme reads as a **nameless entity**: essence lives nowhere; identity rides the `lar:` address; meaning rides what the carrier *wears* (its has-stack) and what its body *says*. No meme *is-a* anything — it carries the minimum lawful surface for identity, body, phase pressure, and aftermath, and composes everything else.
 This root governs that copy-shape; composition law lives at `has-stack`.
@@ -53,7 +53,7 @@ through a social network.
 
 <<~ ahu #copy-shape >>
 
-## Copy-Shape Law
+!! Copy-Shape Law
 
 A boot-legal meme should carry these surfaces:
 
@@ -68,12 +68,12 @@ A boot-legal meme should carry these surfaces:
 
 Optional depth may add:
 
-- full phase sections
-- ha/ka/ba subloops
-- examples
-- research notes
-- runtime or normalization notes
-- child callouts through named `pranala` sugar such as `loulou`
+* full phase sections
+* ha/ka/ba subloops
+* examples
+* research notes
+* runtime or normalization notes
+* child callouts through named `pranala` sugar such as `loulou`
 
 Required structure makes the carrier a meme — the copy-shape acts as the **boot prefab**: the template every carrier stamps from, with sparse per-carrier overrides.
 Optional depth raises yield; it does not replace the minimum shape.
@@ -82,15 +82,15 @@ Optional depth raises yield; it does not replace the minimum shape.
 
 <<~ ahu #rating-posture >>
 
-## Rating Posture
+!! Rating Posture
 
 Five structural buckets — law-of-5s. Rating derives from schema compliance, not from promotion.
 
-- **Noise** — raw signal, not yet machine-usable
-- **Data** — structure appears, but meme law still does not bind the carrier fully
-- **Meme** — the memetic-shape now holds and the carrier holds the lawful meme shape
-- **Ano** — the carrier wears one or more **defined** has-stack components (Hawaiian: kind, type, nature)
-- **Kapu** — above base namespace; wears the kapu **grant** (operator-minted, membrane-gated); kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
+* **Noise** — raw signal, not yet machine-usable
+* **Data** — structure appears, but meme law still does not bind the carrier fully
+* **Meme** — the memetic-shape now holds and the carrier holds the lawful meme shape
+* **Ano** — the carrier wears one or more **defined** has-stack components (Hawaiian: kind, type, nature)
+* **Kapu** — above base namespace; wears the kapu **grant** (operator-minted, membrane-gated); kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
 
 Rating runs as a **predicate**: a bucket names a query that succeeds or fails on the carrier — typing = running the query, never consulting a class.
 `confidence` gives the operator-facing band.
@@ -103,14 +103,14 @@ Subtype predicates belong in the component definitions themselves.
 
 <<~ ahu #depth-and-resolution >>
 
-## Depth and Resolution
+!! Depth and Resolution
 
 A meme may declare deeper children or adjacent law through named `pranala` sugar.
 When it does, keep three states distinct:
 
-- **resolved** — the declared target yields lawful content
-- **declared-unresolved** — the address stands, but the child does not yet yield
-- **absent** — no outward claim appears
+* **resolved** — the declared target yields lawful content
+* **declared-unresolved** — the address stands, but the child does not yet yield
+* **absent** — no outward claim appears
 
 Hold declared-unresolved distinct from absent.
 Treat a link as depth only when it carries real pressure, backlog, or adjacency.
@@ -122,7 +122,7 @@ Use outward callouts only when they carry real pressure, real backlog, or real a
 
 <<~ ahu #handoff-boundary >>
 
-## Handoff Boundary
+!! Handoff Boundary
 
 This root governs meme shape.
 `memetic-wikitext` governs the authoring surface.
@@ -140,7 +140,7 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/meme >>

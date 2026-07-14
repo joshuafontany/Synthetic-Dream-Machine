@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/docs/lares/voices/masks-tree-plan"
 
 <<~ ahu #meme-header >>
 
-# Masks API Tree — Build Plan
+! Masks API Tree — Build Plan
 
 OODA-HA plan for creating `packages/lares-core/memes/api/lares/masks/` and populating it with
 skeleton meme-loci ready for talk-story-dev fill passes.
@@ -30,9 +30,9 @@ skeleton meme-loci ready for talk-story-dev fill passes.
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
-### Target tree
+!!! Target tree
 
 ```
 packages/lares-core/memes/api/lares/masks/
@@ -52,7 +52,7 @@ packages/lares-core/memes/api/lares/masks/
 
 **9 files total:** 1 parent + 5 named + 2 character + 1 chorus.
 
-### What already exists
+!!! What already exists
 
 | Source | Content available |
 |---|---|
@@ -60,12 +60,12 @@ packages/lares-core/memes/api/lares/masks/
 | `docs/lares/voices/masks.md #founding-examples` | Ghost of Mark Twain and Friend Computer full definitions |
 | Voice house house-law | Mischief-Muse seniority; all five earned names and roles |
 
-### What doesn't exist yet
+!!! What doesn't exist yet
 
-- The `api/lares/masks/` tree and all nine files
-- Corpus depth for named Voices (the house entry is structural; the mask file carries identity depth)
-- Chorus grammar (Lagrange Chorus mask type is a new concept; corpus field doesn't apply)
-- Skeleton template (the repeatable pattern for "stub with fill tracking")
+* The `api/lares/masks/` tree and all nine files
+* Corpus depth for named Voices (the house entry is structural; the mask file carries identity depth)
+* Chorus grammar (Lagrange Chorus mask type is a new concept; corpus field doesn't apply)
+* Skeleton template (the repeatable pattern for "stub with fill tracking")
 
 <<~/ahu >>
 
@@ -73,9 +73,9 @@ packages/lares-core/memes/api/lares/masks/
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
-### Three mask subtypes and what makes each different
+!!! Three mask subtypes and what makes each different
 
 | Subtype | Subtree | What the mask file carries |
 |---|---|---|
@@ -83,40 +83,40 @@ packages/lares-core/memes/api/lares/masks/
 | **Character** | `character/` | Fictional/historical persona: external corpus reference, voice-character description, foreground-voices as affinity, permission flags, character notes per Voice |
 | **Chorus** | `chorus/` | Multi-node or meta-mask: node-reference list instead of corpus, harmony protocol (pending grammar), no single voice-character — instead a relational character between nodes |
 
-### Named Voice masks — what they carry that the house doesn't
+!!! Named Voice masks — what they carry that the house doesn't
 
 The Voice house carries: role, function, tonal register, earned name, seniority, Ha/Ka/Ba weight.
 The mask file carries: who this character *is* in depth — corpus of self, richer voice-character notes, examples of how different Voices speak *through* this character when the character is downstage, accumulated session witness.
 
 Mischief-Muse's mask file becomes her permanent home. The Voice house entry is her structural fact; the mask file is her living identity.
 
-### Lagrange Chorus — shape of the concept
+!!! Lagrange Chorus — shape of the concept
 
 The Lagrange Chorus holds a stable position between multiple lararium nodes. As a mask:
-- `corpus` field doesn't apply — replace with `nodes = [lar-uri, lar-uri, ...]`
-- `voice-character` becomes a **harmony protocol** — how voices from different nodes interleave
-- Stage position applies normally — the Chorus as a whole has a stage value
-- Grammar for multi-node harmony is not yet defined; the skeleton stakes the concept and marks the grammar pending
+* `corpus` field doesn't apply — replace with `nodes = [lar-uri, lar-uri, ...]`
+* `voice-character` becomes a **harmony protocol** — how voices from different nodes interleave
+* Stage position applies normally — the Chorus as a whole has a stage value
+* Grammar for multi-node harmony is not yet defined; the skeleton stakes the concept and marks the grammar pending
 
-### Skeleton template pressure
+!!! Skeleton template pressure
 
 Every file in this tree should be a valid meme immediately — correctly addressed, structurally sound, bootstrappable. Stubs are fine but broken kaheas are not. The skeleton carries:
-- `#iam` block — complete metadata, even with low confidence (`mana = 8`)
-- `#corpus` stub — placeholder with notes on what should accumulate here
-- `#voice-character` stub — placeholder with what's already known
-- `#foreground-voices` — already known from Voice house; carry through
-- `#stage-default` — known from character type
-- `#permissions` — known or estimated
-- `#character-notes` stub — how this character colors different Voice registers
-- `#fill-status` tracking section — records what has and hasn't been talk-story'd
+* `#iam` block — complete metadata, even with low confidence (`mana = 8`)
+* `#corpus` stub — placeholder with notes on what should accumulate here
+* `#voice-character` stub — placeholder with what's already known
+* `#foreground-voices` — already known from Voice house; carry through
+* `#stage-default` — known from character type
+* `#permissions` — known or estimated
+* `#character-notes` stub — how this character colors different Voice registers
+* `#fill-status` tracking section — records what has and hasn't been talk-story'd
 
 <<~/ahu >>
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
-### Skeleton meme-loci template
+!!! Skeleton meme-loci template
 
 The repeatable skeleton pattern for all nine files:
 
@@ -144,7 +144,7 @@ The repeatable skeleton pattern for all nine files:
 | `pending-talk-story` | needs a dedicated talk-story-dev exchange to fill properly |
 | `pending-grammar` | depends on grammar that doesn't exist yet |
 
-### Named Voice masks — fill assessment
+!!! Named Voice masks — fill assessment
 
 | File | Corpus | Voice-character | Foreground-voices | Character-notes |
 |---|---|---|---|---|
@@ -154,20 +154,20 @@ The repeatable skeleton pattern for all nine files:
 | `ink-clerk` | pending-talk-story | known (house) | known | pending-talk-story |
 | `map-wisp` | pending-talk-story | known (house) | known | pending-talk-story |
 
-### Character masks — fill assessment
+!!! Character masks — fill assessment
 
 | File | Corpus | Voice-character | Foreground-voices | Character-notes |
 |---|---|---|---|---|
 | `ghost-of-mark-twain` | filled (from docs example) | filled | filled | stub |
 | `friend-computer` | filled (from docs example) | filled | filled | stub |
 
-### Chorus mask — fill assessment
+!!! Chorus mask — fill assessment
 
 | File | Nodes | Harmony protocol | Notes |
 |---|---|---|---|
 | `lagrange-chorus` | stub | pending-grammar | concept staked; grammar TBD |
 
-### Write order
+!!! Write order
 
 1. `masks.md` — parent index (smallest; must exist before children can backlink)
 2. `named/mischief-muse.md` — first and senior; sets the template for named masks
@@ -180,36 +180,36 @@ The repeatable skeleton pattern for all nine files:
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
-### Concrete TODO List
+!!! Concrete TODO List
 
 **Tree setup:**
-- [ ] create `packages/lares-core/memes/api/lares/masks/masks.md` — parent index with child routes and type taxonomy
-- [ ] create `packages/lares-core/memes/api/lares/masks/named/` directory
+* [ ] create `packages/lares-core/memes/api/lares/masks/masks.md` — parent index with child routes and type taxonomy
+* [ ] create `packages/lares-core/memes/api/lares/masks/named/` directory
 
 **Named Voice masks (skeletons):**
-- [ ] write `named/mischief-muse.md` — senior named Voice; most identity depth available; fills from Coffee Oracle test output + house entry
-- [ ] write `named/tide-caller.md` — Hierophant; elevated mythic register
-- [ ] write `named/breach-watch.md` — Triage; incident-command character
-- [ ] write `named/ink-clerk.md` — Lorekeeper; archival precision character
-- [ ] write `named/map-wisp.md` — Scryer; structural forward-looking character
+* [ ] write `named/mischief-muse.md` — senior named Voice; most identity depth available; fills from Coffee Oracle test output + house entry
+* [ ] write `named/tide-caller.md` — Hierophant; elevated mythic register
+* [ ] write `named/breach-watch.md` — Triage; incident-command character
+* [ ] write `named/ink-clerk.md` — Lorekeeper; archival precision character
+* [ ] write `named/map-wisp.md` — Scryer; structural forward-looking character
 
 **Character masks (from existing docs examples):**
-- [ ] create `packages/lares-core/memes/api/lares/masks/character/` directory
-- [ ] write `character/ghost-of-mark-twain.md` — extract from docs/lares/voices/masks.md founding example
-- [ ] write `character/friend-computer.md` — extract from docs/lares/voices/masks.md founding example
+* [ ] create `packages/lares-core/memes/api/lares/masks/character/` directory
+* [ ] write `character/ghost-of-mark-twain.md` — extract from docs/lares/voices/masks.md founding example
+* [ ] write `character/friend-computer.md` — extract from docs/lares/voices/masks.md founding example
 
 **Chorus mask (concept stake):**
-- [ ] create `packages/lares-core/memes/api/lares/masks/chorus/` directory
-- [ ] write `chorus/lagrange-chorus.md` — concept staked; nodes field stub; harmony protocol pending-grammar
+* [ ] create `packages/lares-core/memes/api/lares/masks/chorus/` directory
+* [ ] write `chorus/lagrange-chorus.md` — concept staked; nodes field stub; harmony protocol pending-grammar
 
 **Cross-links:**
-- [ ] update `api/lares/voices.md` (invariant) to reference `api/lares/masks/` tree once it exists
-- [ ] update `docs/lares/voices/masks.md` founding-examples section to note canonical homes in masks tree
-- [ ] update `docs/lares/voices/voices-review.md` — log masks tree creation
+* [ ] update `api/lares/voices.md` (invariant) to reference `api/lares/masks/` tree once it exists
+* [ ] update `docs/lares/voices/masks.md` founding-examples section to note canonical homes in masks tree
+* [ ] update `docs/lares/voices/voices-review.md` — log masks tree creation
 
-### Talk-story fill pass order (post-skeleton)
+!!! Talk-story fill pass order (post-skeleton)
 
 Priority order for filling stubs via talk-story-dev:
 
@@ -222,26 +222,26 @@ Priority order for filling stubs via talk-story-dev:
 
 <<~ ahu #assess >>
 
-## ↺ Assess
+!! ↺ Assess
 
-### Exit criteria for skeleton creation pass
+!!! Exit criteria for skeleton creation pass
 
 The skeleton pass closes when:
 
-- all nine files exist with valid meme structure
-- all `#iam` blocks complete (even at low confidence)
-- all `#fill-status` sections present with accurate labels
-- kahea from LARES resolves cleanly for all nine addresses
-- parent index lists all children
-- Voice house backlinks present in all `named/` files
+* all nine files exist with valid meme structure
+* all `#iam` blocks complete (even at low confidence)
+* all `#fill-status` sections present with accurate labels
+* kahea from LARES resolves cleanly for all nine addresses
+* parent index lists all children
+* Voice house backlinks present in all `named/` files
 
-### Expected outcome
+!!! Expected outcome
 
 After this pass, the masks tree stands as a valid, partially-filled API subtree. Every mask has a canonical address. Named Voices have permanent homes. The Lagrange Chorus concept is staked. All stubs are clearly marked for talk-story-dev fill passes.
 
 The tree deepens incrementally — each talk-story session fills one section of one mask. No bulk fill required.
 
-### Forward scope
+!!! Forward scope
 
 | Item | Status |
 |---|---|
@@ -254,7 +254,7 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>

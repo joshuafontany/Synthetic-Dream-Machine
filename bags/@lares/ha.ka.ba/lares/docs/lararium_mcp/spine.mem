@@ -30,7 +30,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/spine"
 
 <<~ ahu #core-proposition >>
 
-## Core Proposition
+!! Core Proposition
 
 Lararium MCP exposes `lar:///` source truth to local and future remote clients through a dependency-light, read-only server.
 The server roots in lawful carriers, explicit `lar:` routing, and inspectable posture — not generic markdown files.
@@ -48,32 +48,32 @@ The v1 spine carries four promises:
 
 <<~ ahu #crucible-boundary >>
 
-## Crucible Boundary
+!! Crucible Boundary
 
-### In scope for the closed slice
+!!! In scope for the closed slice
 
-- `lar:///AGENTS` and `lar:///LARES` root resources
-- `lar:///ha.ka.ba/lares/**` file-backed resources under the stable tuple root
-- virtual index resources under `lar:///INDEXES/**`
-- boot artifacts under `lar:///boot/**`
-- read-only tools for resolve/read/list/inspect/compile
-- hydration prompts for minimal, full, receipt, URI, carrier, and comparison reads
-- local client wiring for VS Code, Claude Code, and Codex
+* `lar:///AGENTS` and `lar:///LARES` root resources
+* `lar:///ha.ka.ba/lares/**` file-backed resources under the stable tuple root
+* virtual index resources under `lar:///INDEXES/**`
+* boot artifacts under `lar:///boot/**`
+* read-only tools for resolve/read/list/inspect/compile
+* hydration prompts for minimal, full, receipt, URI, carrier, and comparison reads
+* local client wiring for VS Code, Claude Code, and Codex
 
-### Out of v1 or still active
+!!! Out of v1 or still active
 
-- mutating tools
-- remote HTTP/SSE exposure
-- auth, scope, approvals, and capability grants
-- live submodule writes
-- full pranala-edge traversal in the compiler
-- executable guest-grammar filter runtime
+* mutating tools
+* remote HTTP/SSE exposure
+* auth, scope, approvals, and capability grants
+* live submodule writes
+* full pranala-edge traversal in the compiler
+* executable guest-grammar filter runtime
 
 <<~/ahu >>
 
 <<~ ahu #stack >>
 
-## Proposed Stack
+!! Proposed Stack
 
 | Layer | Canonical responsibility | Child locus |
 |---|---|---|
@@ -89,7 +89,7 @@ The v1 spine carries four promises:
 
 <<~ ahu #namespace-posture >>
 
-## Namespace Posture
+!! Namespace Posture
 
 | Namespace | Resolution posture |
 |---|---|
@@ -104,7 +104,7 @@ The v1 spine carries four promises:
 
 <<~ ahu #resource-prompt-tool-model >>
 
-## Resource, Prompt, and Tool Model
+!! Resource, Prompt, and Tool Model
 
 Resources expose source carriers and virtual compiler products.
 Prompts package hydration artifacts as user-turn messages for client bootstrapping.
@@ -117,7 +117,7 @@ Remote transport should wrap the same read-only façade only after scope and aut
 
 <<~ ahu #submodule-contribution-model >>
 
-## Submodule Contribution Model
+!! Submodule Contribution Model
 
 Submodules contribute through adapters, not direct imports into the carrier compiler.
 An adapter may add resources, tools, prompts, AST transforms, render projections, or eval fixtures, but it must keep its own URI namespace and declare contribution lanes.
@@ -128,17 +128,17 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~ ahu #residue >>
 
-## Residue
+!! Residue
 
-- Sprint-03 remote transport, auth, and drift evals remain live work.
-- `ROADMAP.md`, `BACKLOG.md`, `WORK_TRACKING.md`, and active Sprint-03 docs remain non-consumed planning surfaces.
-- Root `lararium_mcp.md` should keep a concise index role and link these child loci.
+* Sprint-03 remote transport, auth, and drift evals remain live work.
+* `ROADMAP.md`, `BACKLOG.md`, `WORK_TRACKING.md`, and active Sprint-03 docs remain non-consumed planning surfaces.
+* Root `lararium_mcp.md` should keep a concise index role and link these child loci.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>

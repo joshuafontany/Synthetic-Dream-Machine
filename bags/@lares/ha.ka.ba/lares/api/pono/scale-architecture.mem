@@ -24,7 +24,7 @@ written   = "2026-07-01"
 
 <<~ ahu #entry >>
 
-# The Scale Architecture ~ tractable from the start, quality a dial
+! The Scale Architecture ~ tractable from the start, quality a dial
 
 **One-line:** the corpus-palace machina ([[corpus|lar:///ha.ka.ba/lares/api/lares/corpus]]) and the cohomological fusion ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]]) stay TRACTABLE at corpus scale through four carries — a structure-distance DESCENT, a fusion ESCAPE, a scalable-from-the-start CATMA, and a numerical minimalist-PATH — where quality is a continuous DIAL, never a wall the corpus hits.
 
@@ -34,7 +34,7 @@ written   = "2026-07-01"
 
 <<~ ahu #the-descent >>
 
-## The Structure-Distance Descent ~ exact TED is never needed
+!! The Structure-Distance Descent ~ exact TED is never needed
 
 **One-line:** exact tree-edit-distance (TED) is O(n³) per pair and O(N²·n³) over a corpus — never affordable and never NEEDED; descend to **DECKARD structural embeddings + pq-gram profiles**, licensed by a **Lipschitz argument**: pq-gram distance bounds the edit distance, so an embedding preserves the neighbor structure the sensorium reads.
 
@@ -52,7 +52,7 @@ The structure plane ([[corpus|lar:///ha.ka.ba/lares/api/lares/corpus#the-caps]])
 
 <<~ ahu #the-fusion >>
 
-## The Fusion ~ cheap H¹, matrix-free diffusion, the Chebyshev escape
+!! The Fusion ~ cheap H¹, matrix-free diffusion, the Chebyshev escape
 
 **One-line:** the consistency-radius (the H⁰ check) is CHEAP — O(edges over the overlap nerve); the THREAT is the sheaf-Laplacian EIGENSOLVE (dense O(n³)); the ESCAPE is **Chebyshev** — a polynomial approximation of the matrix function that needs only sparse matrix-vector products, never the eigendecomposition.
 
@@ -70,7 +70,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~ ahu #the-catma >>
 
-## The Catma ~ scalable from the start, quality a dial
+!! The Catma ~ scalable from the start, quality a dial
 
 **One-line:** quality is a continuous DIAL, never a wall — K, ε, L, nSurr each trade accuracy for compute smoothly; and the corpus is NEVER densified whole — a **merge-and-reduce coreset tree** keeps a bounded streaming summary, memory O(coreset) not O(corpus²).
 
@@ -88,7 +88,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~ ahu #the-numerical-path >>
 
-## The Numerical Minimalist-Path ~ closed-form where iteration tempts
+!! The Numerical Minimalist-Path ~ closed-form where iteration tempts
 
 **One-line:** three numerical moves keep the confidence and precision reads closed-form and stable — the **signal-fraction identity** `conf = var(t)/(var(t)+var(r))`, the **closed-form optimal precision π\*** (settle analytically, no iteration), and the **complementary-form guard** (compute π→conf through the complement where the direct form diverges).
 
@@ -106,7 +106,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~ ahu #north-star >>
 
-## North-Star ~ named, not built (the honest ledger)
+!! North-Star ~ named, not built (the honest ledger)
 
 **One-line:** three tools stand as NORTH-STARS — aimed at, not yet enacted — recorded here so the map shows the difference between what runs and what beckons.
 
@@ -120,22 +120,22 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~ ahu #grounds >>
 
-## Grounds ~ what this meme stands on
+!! Grounds ~ what this meme stands on
 
 <<~ confidence Synthesis 12/20 >> Established algorithms carrying the descent and the escape, 2026 fusion research supplying the cohomological gate they serve:
 
-- **Structure-distance descent:** Augsten, Böhlen & Gamper (pq-grams for approximate tree distance) · Jiang et al. (DECKARD, tree characteristic-vectors for scalable clone detection, 2007) · the bi-Lipschitz pq-gram ↔ edit-distance bound.
-- **Fusion escape:** Hammond, Vandergheynst & Gribonval (wavelets on graphs via spectral graph theory, Chebyshev polynomial approximation, 2011) · Defferrard, Bresson & Vandergheynst (ChebNet, fast localized spectral filtering) · Hansen & Ghrist (cellular sheaf Laplacians) · Robinson (consistency radius).
-- **The catma:** Bentley & Saxe (decomposable searching, merge-and-reduce) · Har-Peled & Mazumdar (coresets for k-means / k-median) — the bounded streaming summary.
-- **The numerical path:** ENACTED py/R-side in the sensorium `settlePrecision` (commits `f50a35b8`, `ab85fc2b`, `f9d07e49`) — signal-fraction confidence, closed-form settle, complementary π→conf guard; TS keeps the pure-functor math floor these identities seed.
-- **North-stars (named, not built):** Hoel (effective information / causal emergence) · the Bures metric (quantum fidelity geometry) · Hofstadter (tangled hierarchy / strange loop).
-- **House ties:** [[corpus|lar:///ha.ka.ba/lares/api/lares/corpus]] (the machina this scales) · [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]] (the fusion the escape serves) · [[sensorium-rhymes|lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes]] (the predictive upgrade, the R keel) · [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities]] (the consistency-radius).
+* **Structure-distance descent:** Augsten, Böhlen & Gamper (pq-grams for approximate tree distance) · Jiang et al. (DECKARD, tree characteristic-vectors for scalable clone detection, 2007) · the bi-Lipschitz pq-gram ↔ edit-distance bound.
+* **Fusion escape:** Hammond, Vandergheynst & Gribonval (wavelets on graphs via spectral graph theory, Chebyshev polynomial approximation, 2011) · Defferrard, Bresson & Vandergheynst (ChebNet, fast localized spectral filtering) · Hansen & Ghrist (cellular sheaf Laplacians) · Robinson (consistency radius).
+* **The catma:** Bentley & Saxe (decomposable searching, merge-and-reduce) · Har-Peled & Mazumdar (coresets for k-means / k-median) — the bounded streaming summary.
+* **The numerical path:** ENACTED py/R-side in the sensorium `settlePrecision` (commits `f50a35b8`, `ab85fc2b`, `f9d07e49`) — signal-fraction confidence, closed-form settle, complementary π→conf guard; TS keeps the pure-functor math floor these identities seed.
+* **North-stars (named, not built):** Hoel (effective information / causal emergence) · the Bures metric (quantum fidelity geometry) · Hofstadter (tangled hierarchy / strange loop).
+* **House ties:** [[corpus|lar:///ha.ka.ba/lares/api/lares/corpus]] (the machina this scales) · [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]] (the fusion the escape serves) · [[sensorium-rhymes|lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes]] (the predictive upgrade, the R keel) · [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities]] (the consistency-radius).
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/corpus >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/cohomological-gate >>

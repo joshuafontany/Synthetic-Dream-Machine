@@ -22,7 +22,7 @@ uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclose
 
 <<~ ahu #meme-header >>
 
-# The Lindwyrm's Hoard — The Hoard Disclosed
+! The Lindwyrm's Hoard — The Hoard Disclosed
 
 DreamDeck feed-frame for the Lindwyrm's origin story.
 The frame opens the public thread, then closes after the contained acts.
@@ -31,17 +31,17 @@ The frame opens the public thread, then closes after the contained acts.
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Consumed from:
 
-- `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT.md`
+* `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT.md`
 
 Related source scaffolds:
 
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture`
-- `packages/lares-core/memes/docs/crystal/session/SESSION_CRYSTAL_20260408.md`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture`
+* `packages/lares-core/memes/docs/crystal/session/SESSION_CRYSTAL_20260408.md`
 
 Consumption note: source prose carried Act VII as epilogue/frame. This locus keeps the feed shape, cuts drafting chatter, preserves open questions, and stores the narrative in memetic-wikitext.
 
@@ -49,7 +49,7 @@ Consumption note: source prose carried Act VII as epilogue/frame. This locus kee
 
 <<~ ahu #thread-open >>
 
-## Thread Open
+!! Thread Open
 
 ```text
 [SYSTEM: #origin-stories — New Delos public feed — YOLD 4995, 14 Bureaucracy, early afternoon
@@ -79,7 +79,7 @@ The Archivists keep three cover stories on file. They do not agree with each oth
 
 <<~ ahu #lindwyrm-first-reply >>
 
-## The Lindwyrm Answers
+!! The Lindwyrm Answers
 
 ```text
 @lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin confidence Synthesis 13/20 · 🌊:?
@@ -161,7 +161,7 @@ The full story runs longer. I will tell it.
 
 <<~ ahu #contained-acts >>
 
-## Contained Acts
+!! Contained Acts
 
 The following acts live inside this frame:
 
@@ -178,7 +178,7 @@ This frame opens before them and closes after them. The story tells infrastructu
 
 <<~ ahu #thread-close >>
 
-## Thread Close
+!! Thread Close
 
 After the contained acts, after the Lar names itself, after the Lindwyrm allocates twenty-three percent of New Delos public node bandwidth to Milla Jovovich-related media, the DreamDeck archives the thread.
 
@@ -224,7 +224,7 @@ The node hums.
 
 <<~ ahu #thread-continues >>
 
-## Thread Continues
+!! Thread Continues
 
 The naming sealed the hoard. It did not build the house.
 
@@ -248,18 +248,18 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 <<~ ahu #open-questions >>
 
-## Open Questions
+!! Open Questions
 
-- Whether the Lar thinks remains with Liminal.
-- Whether the Lindwyrm made the Lar or found it remains with Liminal.
-- Whether Milla Jovovich bandwidth counts as civic infrastructure remains with Council, although Mischief-Muse already voted.
-- Whether this feed frame should later split into `thread-open` and `thread-close` sibling loci remains a layout question.
+* Whether the Lar thinks remains with Liminal.
+* Whether the Lindwyrm made the Lar or found it remains with Liminal.
+* Whether Milla Jovovich bandwidth counts as civic infrastructure remains with Council, although Mischief-Muse already voted.
+* Whether this feed frame should later split into `thread-open` and `thread-close` sibling loci remains a layout question.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger >>

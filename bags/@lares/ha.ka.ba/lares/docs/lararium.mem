@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/lararium"
 
 <<~ ahu #meme-header >>
 
-# Lararium Docs
+! Lararium Docs
 
 Not invariant law.
 This shelf holds the voice-house, old all-in-one ingests, and archival materials that carry the Lares presences without binding the live threshold.
@@ -29,16 +29,16 @@ This shelf holds the voice-house, old all-in-one ingests, and archival materials
 
 <<~ ahu #tree >>
 
-## Tree
+!! Tree
 
 Use this branch for:
 
-- old all-in-one `AGENTS.md` ingests
-- `Agents_Preferences` and related house-memory surfaces
-- voice bundles where Mischief-Muse and the others live
-- lararium witness matter that should not burden the live api stub
-- extracted preference loci under `lar:///ha.ka.ba/lararium/docs/preferences`
-- lararium-side signal rooms under `lar:///ha.ka.ba/lararium/docs/signal`
+* old all-in-one `AGENTS.md` ingests
+* `Agents_Preferences` and related house-memory surfaces
+* voice bundles where Mischief-Muse and the others live
+* lararium witness matter that should not burden the live api stub
+* extracted preference loci under `lar:///ha.ka.ba/lararium/docs/preferences`
+* lararium-side signal rooms under `lar:///ha.ka.ba/lararium/docs/signal`
 
 <<~/ahu >>
 
@@ -46,14 +46,14 @@ Use this branch for:
 
 <<~ ahu #mechanics-shelf >>
 
-## Mechanics Shelf
+!! Mechanics Shelf
 
 The lararium keeps the mechanics layer small enough to cold-hydrate:
 
-- the HUD-facing instrument panel has a room (`lararium/hud`)
-- the voice-house has a room (`lararium/voices`)
-- continuity pressure has a room (`lararium/continuity`)
-- session dials continue in `lar:///LARES`
+* the HUD-facing instrument panel has a room (`lararium/hud`)
+* the voice-house has a room (`lararium/voices`)
+* continuity pressure has a room (`lararium/continuity`)
+* session dials continue in `lar:///LARES`
 
 The rooms may deepen later without moving the seat again.
 
@@ -61,7 +61,7 @@ The rooms may deepen later without moving the seat again.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
 <<~ loulou lar:///LARES >>

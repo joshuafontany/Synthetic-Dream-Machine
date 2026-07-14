@@ -1,5 +1,5 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
-## Terminology Note
+!! Terminology Note
 
 *A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.*
 
@@ -33,7 +33,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 
 <<~ ahu #surface-forms >>
 
-## Surface Forms
+!! Surface Forms
 
 The pranala law (source: `lar:///ha.ka.ba/lares/api/pono/pranala`) names four surface forms
 that the parser must handle.
@@ -52,7 +52,7 @@ All five forms produce `PranalaEdge` records.
 
 <<~ ahu #block-form >>
 
-## Block Form Parsing
+!! Block Form Parsing
 
 Block pranala spans multiple lines. The parser extracts blocks with:
 
@@ -87,7 +87,7 @@ Same regex the carrier ingress already uses. The result gets parsed with `tomlli
 
 <<~ ahu #inline-form >>
 
-## Inline Form Parsing
+!! Inline Form Parsing
 
 Inline pranala fits on one line. The parser uses:
 
@@ -108,7 +108,7 @@ Inline pranala does not carry a `payload`; `payload` defaults to `{}`.
 
 <<~ ahu #sugar-forms >>
 
-## Sugar Form Expansion
+!! Sugar Form Expansion
 
 The three sugar sigils expand into `PranalaEdge` records without a TOML body.
 
@@ -131,7 +131,7 @@ For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragm
 
 <<~ ahu #question-mark-resolution >>
 
-## `? ->` Socket Resolution — Closed (Option A)
+!! `? ->` Socket Resolution — Closed (Option A)
 
 **Authority:** canonical pranala kānāwai (`lar:///ha.ka.ba/lares/api/pono/pranala`):
 > "A named `#fragment` SHOULD win socket resolution before the enclosing meme URI."
@@ -152,8 +152,8 @@ When it exits `<<~/ahu >>`, it pops the stack.
 ```
 
 Resolves to:
-- `from_uri = "lar:///AGENTS"`
-- `from_socket = "lar:///AGENTS#edges"`
+* `from_uri = "lar:///AGENTS"`
+* `from_socket = "lar:///AGENTS#edges"`
 
 **Parser requirement:** handle nested `ahu` blocks with a stack; the innermost named fragment wins.
 When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root fallback).
@@ -162,7 +162,7 @@ When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root
 
 <<~ ahu #field-normalization >>
 
-## Field Normalization Table
+!! Field Normalization Table
 
 The source carrier TOML vocabulary and the compiler's `PranalaEdge` vocabulary diverge in two places.
 This table records every mapping.
@@ -193,7 +193,7 @@ Unknown fields not in this table get stored in `payload` under their original ke
 
 <<~ ahu #uri-resolution >>
 
-## TO Expression URI Resolution
+!! TO Expression URI Resolution
 
 The TO expression in both block and inline forms takes three shapes:
 
@@ -211,7 +211,7 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>

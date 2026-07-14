@@ -23,7 +23,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/parser"
 
 <<~ ahu #head >>
 
-# Parser Law
+! Parser Law
 
 Parser law names the parsing contract for `text/x-memetic-wikitext`.
 
@@ -38,7 +38,7 @@ Both share the same sigil grammar. Their outputs differ in shape and consumer.
 
 <<~ ahu #memetic-parser >>
 
-## MemeticParser — TW5 WikiParser Subclass
+!! MemeticParser — TW5 WikiParser Subclass
 
 `MemeticParser` extends TW5's standard WikiParser, registered for `text/x-memetic-wikitext`.
 
@@ -53,7 +53,7 @@ On construction it filters the inherited rule arrays (`pragmaRules`, `blockRules
 
 <<~ ahu #lar-sigil-dispatch >>
 
-## lar-sigil Dispatch Model
+!! lar-sigil Dispatch Model
 
 `lar-sigil` runs as a unified block+inline wikirule (`module-type: wikirule`).
 
@@ -73,7 +73,7 @@ Dispatch output: `macrocall` nodes with `$variable = "~"` and `name = SIGIL` for
 
 <<~ ahu #grammar-self-hosting >>
 
-## Grammar Self-Hosting
+!! Grammar Self-Hosting
 
 The sigil grammar loads fully from the live wiki. No code change needed to add a sigil.
 
@@ -81,10 +81,10 @@ Implementation: `packages/lararium-tw5/src/grammar-cache.ts`
 Module-type: `startup`. Runs after TW5 startup, before first parse.
 
 **Loading path:**
-- Filter `[tag[lar:///ha.ka.ba/tags/SharktoothSigil]]` collects all sigil tiddlers
-- Each tiddler's `lar-*` fields produce one `SigilRule` or `FamilyRule`
-- `GrammarRules = { sigils: SigilRule[], families: FamilyRule[] }`
-- Cache invalidates on any change to a SharktoothSigil-tagged tiddler
+* Filter `[tag[lar:///ha.ka.ba/tags/SharktoothSigil]]` collects all sigil tiddlers
+* Each tiddler's `lar-*` fields produce one `SigilRule` or `FamilyRule`
+* `GrammarRules = { sigils: SigilRule[], families: FamilyRule[] }`
+* Cache invalidates on any change to a SharktoothSigil-tagged tiddler
 
 **Boot-critical static closers (pre-grammar):**
 ```
@@ -101,7 +101,7 @@ These apply before grammar tiddlers finish loading. Grammar TOML `close_pattern`
 
 <<~ ahu #context-pointer >>
 
-## Context Pointer — `currentTiddler`
+!! Context Pointer — `currentTiddler`
 
 `currentTiddler` serves as the canonical context pointer inside the TW5 VM.
 
@@ -113,7 +113,7 @@ Filter expressions inside `<<~ ui FILTER >>` and guest-grammar blocks operate ag
 
 <<~ ahu #normalization-open >>
 
-## Normalization — Open Question
+!! Normalization — Open Question
 
 No normalization pass exists in the live parser. Malformed sigils either fall through to generic/literal or fail silently without trace.
 
@@ -125,7 +125,7 @@ Open question: should the live system adopt explicit normalization with warning 
 
 <<~ ahu #sigil-kinds >>
 
-## Sigil Kinds
+!! Sigil Kinds
 
 Every SharktoothSigil tiddler declares a `lar-kind` field. Kind governs how `grammar-cache.ts` classifies the rule and how `lar-sigil.ts` dispatches it.
 
@@ -151,16 +151,16 @@ family        sigil-family-*          FamilyRule only; no dispatch; governs edge
 
 <<~ ahu #control-sigils >>
 
-## C0 Control Sigil Roles
+!! C0 Control Sigil Roles
 
 The four C0 control characters (`&#x0001;`–`&#x0004;`) are the **carrier spine** — SOH · STX · ETX · EOT. Their roles, byte values, kapu aliases, and the REQUIRED-in-order law live in their one home: `carrier-sigils#carrier-spine` (#edges). This section owns only how the parser **checks** them — it does not redefine the marks.
 
 `&#x0005;` (ENQ) and `&#x0006;` (ACK) appeared in earlier research as query/response throat operators. They did not land in the live system. Live query surface uses `<<~ ui FILTER >>` (kind: `query`) instead.
 
 Parser SHOULD check:
-- `&#x0001;` appears near the document top with a valid target URI
-- `&#x0002;` and `&#x0003;` appear as matched pair in the active body region
-- `&#x0004;` appears at document close carrying `-> ?`
+* `&#x0001;` appears near the document top with a valid target URI
+* `&#x0002;` and `&#x0003;` appear as matched pair in the active body region
+* `&#x0004;` appears at document close carrying `-> ?`
 
 Missing or out-of-order control sigils SHOULD emit structural warnings rather than silent failure.
 
@@ -168,7 +168,7 @@ Missing or out-of-order control sigils SHOULD emit structural warnings rather th
 
 <<~ ahu #closure-law >>
 
-## Closure Law
+!! Closure Law
 
 Block forms open with a named opener and close with a named typed closer.
 
@@ -191,7 +191,7 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 <<~ ahu #iam-block >>
 
-## Iam Block
+!! Iam Block
 
 The **toml iam slot** (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `carrier-sigils#carrier-spine`).
 
@@ -218,7 +218,7 @@ Additional ahu control slots that dissolve rather than project as children: `#ex
 
 <<~ ahu #meme-ast >>
 
-## Meme AST — Non-TW5 Path
+!! Meme AST — Non-TW5 Path
 
 `@lararium/mesh/meme-ast` provides a separate AST representation for non-TW5 consumers.
 
@@ -243,7 +243,7 @@ Consumers: island adaptor (`island-adaptor.ts`), deserializer (`deserializer.ts`
 
 <<~ ahu #stream-events >>
 
-## MemeStreamEvent — Streaming Parse Events
+!! MemeStreamEvent — Streaming Parse Events
 
 The streaming parse surface emits one event per carrier-frame boundary; `collectEvents(text)` (#meme-ast) drives the stream. The frame boundaries are the carrier spine (`carrier-sigils`).
 
@@ -275,7 +275,7 @@ trigger = "end of stream"
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/carrier-sigils >>

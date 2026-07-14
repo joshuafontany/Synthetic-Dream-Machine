@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/circles-kowloon"
 
 <<~ ahu #core-inversion >>
 
-# Circles — Kowloon Reference Model
+! Circles — Kowloon Reference Model
 
 > Source: github.com/jzellis/kowloon (Josh Ellis / jzellis)
 > Seeded: 2026-05-05 — authoritative design reference for CirclesDoc
@@ -38,7 +38,7 @@ This is social graph inversion: on centralized platforms, following creates a pu
 
 <<~ ahu #circle-data-model >>
 
-## Circle Data Model (Kowloon schema)
+!! Circle Data Model (Kowloon schema)
 
 From `schema/Circle.js`:
 
@@ -62,17 +62,17 @@ Key: members are **embedded snapshots** (full actor profile + `lastFetchedAt`), 
 
 <<~ ahu #circle-types >>
 
-## Circle Types
+!! Circle Types
 
 **System Circles** (auto-created per user on registration):
-- `Following` — people the user actively reads
-- `All Following` — superset: followed servers + circles
-- `Circles` — tracks circle memberships (members are circle objects, not users)
-- `Blocked`
-- `Muted`
+* `Following` — people the user actively reads
+* `All Following` — superset: followed servers + circles
+* `Circles` — tracks circle memberships (members are circle objects, not users)
+* `Blocked`
+* `Muted`
 
 **Group System Circles** (auto-created per group):
-- `Admins`, `Moderators`, `Members`, `Blocked`, `Pending`
+* `Admins`, `Moderators`, `Members`, `Blocked`, `Pending`
 
 **User Circles**: operator-created personal lists (e.g. "Close Friends", "Work").
 
@@ -80,7 +80,7 @@ Key: members are **embedded snapshots** (full actor profile + `lastFetchedAt`), 
 
 <<~ ahu #addressing-hierarchy >>
 
-## Addressing Hierarchy
+!! Addressing Hierarchy
 
 Every content object carries `to`, `canReply`, `canReact`. When set to a circle ID:
 
@@ -100,7 +100,7 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 <<~ ahu #lararium-mapping >>
 
-## Lararium Mapping
+!! Lararium Mapping
 
 > **Coherence note (2026-06-29).** The refined identity model resolves a Lararium group
 > as an **edge-closure** — the reciprocal-edge fan over signed, typed, `lar:`-named
@@ -131,7 +131,7 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 <<~ ahu #system-circles >>
 
-## System Circles to Auto-Seed
+!! System Circles to Auto-Seed
 
 At `seedCirclesDoc()` time, write these system circle tiddlers:
 
@@ -155,18 +155,18 @@ Nexus authorization circles (seeded by nexus admin at nexus boot):
 
 <<~ ahu #not-adopted >>
 
-## What Lararium Does NOT Adopt from Kowloon
+!! What Lararium Does NOT Adopt from Kowloon
 
-- MongoDB schema — we use Automerge CRDTs + tiddler fields
-- ActivityPub fan-out — we use automerge-repo sync + oracle tiddlers
-- RSA signature on circle state → replaced by Keyhive convergent capabilities (S7)
-- `Members` as embedded subdocuments → member identity data lives in IdentitiesDoc; CirclesDoc holds only DIDs
+* MongoDB schema — we use Automerge CRDTs + tiddler fields
+* ActivityPub fan-out — we use automerge-repo sync + oracle tiddlers
+* RSA signature on circle state → replaced by Keyhive convergent capabilities (S7)
+* `Members` as embedded subdocuments → member identity data lives in IdentitiesDoc; CirclesDoc holds only DIDs
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>

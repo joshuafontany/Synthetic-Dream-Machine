@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/nihomano-sigils"
 
 <<~ ahu #head >>
 
-# Nihomano Sigils
+! Nihomano Sigils
 
 *niho* — Hawaiian: tooth, teeth; edge, serration. Used in *lei niho palaoa* (whale-tooth
 necklace of the aliʻi) and *niho mano* (shark tooth — the attested two-word form).
@@ -54,7 +54,7 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 
 <<~ ahu #wild-magic >>
 
-## Wild Magic — The Web3 Discovery
+!! Wild Magic — The Web3 Discovery
 
 In conventional software, grammar knowledge lives in code. To add a new operator to a language
 you change a parser, recompile, redeploy. The knowledge belongs to the engineers.
@@ -79,10 +79,10 @@ extends the language. The code layer runs as a thin runtime that reads grammar f
 a quine at the grammar level.
 
 The SharktoothSigil tag serves as the contract surface:
-- `lar:///ha.ka.ba/tags/SharktoothSigil` on a tiddler = "this tiddler defines a grammar sigil"
-- `lar-kind` field = what structural role the sigil plays (edge, child-slot, control, pragma-alias, header)
-- `lar-pattern` / `lar-open-pattern` / `lar-close-pattern` = the parse rule
-- The wikitext body = the render semantics
+* `lar:///ha.ka.ba/tags/SharktoothSigil` on a tiddler = "this tiddler defines a grammar sigil"
+* `lar-kind` field = what structural role the sigil plays (edge, child-slot, control, pragma-alias, header)
+* `lar-pattern` / `lar-open-pattern` / `lar-close-pattern` = the parse rule
+* The wikitext body = the render semantics
 
 Grammar change = tiddler edit. Grammar review = tiddler diff. Grammar rollback = bag snapshot.
 The entire capability surface of language extension runs through the same merge-capable, local-first,
@@ -92,59 +92,59 @@ operator-visible data layer as the content itself.
 
 <<~ ahu #first-discovered-set >>
 
-## The First Discovered Sigil Set
+!! The First Discovered Sigil Set
 
 The nihomano discovery yielded the first coherent set of SharktoothSigil-registered sigils.
 The set holds 47 tiddlers, each carrying a pono law spec and passing the alignment check.
 They fall into eight families:
 
 **Structural sigils** (addressable scope boundaries):
-- `ahu` — child-slot worksite; the named scope boundary; skeleton of meme structure
-- `pranala-header` — carrier self-declaration; `<<~ ? -> uri >>` opens every meme
+* `ahu` — child-slot worksite; the named scope boundary; skeleton of meme structure
+* `pranala-header` — carrier self-declaration; `<<~ ? -> uri >>` opens every meme
 
 **Edge-sugar sigils** (pranala family shortcuts):
-- `pranala` — full edge with FROM → TO arrow + keyword attrs (permanent JS exception)
-- `kahea` / `\transclude` / `\import` — transclusion-family sugar; live transclusion; subscription-fresh embed
-- `aka` / `\shadow` — transclusion-family sugar; frozen read; shadow transclusion
-- `loulou` / `\link` — relation-family sugar; outgoing semantic link; no execution pulse
-- `kau` — device-slot child-slot; capability hooks require JS (permanent JS exception)
-- `kapu` / `\guard` — compile-layer boundary annotation; access-control edge
-- `pono` / `\constraint` — correctness-asserting alignment edge
-- `papalohe` — reaction-wire edge; observer subscription
+* `pranala` — full edge with FROM → TO arrow + keyword attrs (permanent JS exception)
+* `kahea` / `\transclude` / `\import` — transclusion-family sugar; live transclusion; subscription-fresh embed
+* `aka` / `\shadow` — transclusion-family sugar; frozen read; shadow transclusion
+* `loulou` / `\link` — relation-family sugar; outgoing semantic link; no execution pulse
+* `kau` — device-slot child-slot; capability hooks require JS (permanent JS exception)
+* `kapu` / `\guard` — compile-layer boundary annotation; access-control edge
+* `pono` / `\constraint` — correctness-asserting alignment edge
+* `papalohe` — reaction-wire edge; observer subscription
 
 **Pragma sigils** (declaration forms; first-class in memetic-wikitext):
-- `wehe` / `\procedure` — procedure executor; named callable body declaration
-- `\define` — backward-compat alias; use `\procedure` instead
-- `\widget` — widget declaration; `~` prefix convention
-- `helu` / `\function` — TW5 5.3+ filter-function declaration
-- `kumu` / `\type` / `\typos` — element-type declaration; mold precedes the cast
-- `waiho` / `\const` / `\let` / `\var` — variable binding; name → value in scope
+* `wehe` / `\procedure` — procedure executor; named callable body declaration
+* `\define` — backward-compat alias; use `\procedure` instead
+* `\widget` — widget declaration; `~` prefix convention
+* `helu` / `\function` — TW5 5.3+ filter-function declaration
+* `kumu` / `\type` / `\typos` — element-type declaration; mold precedes the cast
+* `waiho` / `\const` / `\let` / `\var` — variable binding; name → value in scope
 
 **Control sigils** (TW5 native flow wrapped in sigil grammar):
-- `wai` / `\if` — wikispace conditional cascade; first filter-match renders (with `kahawai`/`mukuwai`)
-- `heihei` — canvasspace conditional-branch; Verse `if`/`case`, one arm fires by condition
-- `kahawai` / `\elif` — conditional continuation; stream flows until it hits a match
-- `mukuwai` / `\else` — conditional fallback; the cut-off water; terminal form
-- `huli` / `\for` — iteration block; filter → body-per-result
+* `wai` / `\if` — wikispace conditional cascade; first filter-match renders (with `kahawai`/`mukuwai`)
+* `heihei` — canvasspace conditional-branch; Verse `if`/`case`, one arm fires by condition
+* `kahawai` / `\elif` — conditional continuation; stream flows until it hits a match
+* `mukuwai` / `\else` — conditional fallback; the cut-off water; terminal form
+* `huli` / `\for` — iteration block; filter → body-per-result
 
 **Context sigils** (scope manipulation):
-- `\tiddler` / `meme` — tiddler context wrapper; sets the reference tiddler for inner scope
-- `ui` / `\query` — query surface; filter → title list
+* `\tiddler` / `meme` — tiddler context wrapper; sets the reference tiddler for inner scope
+* `ui` / `\query` — query surface; filter → title list
 
 **Guest-grammar sigils** (foreign-body delegation):
-- `hana` / `\task` — bounded guest-grammar block; grammar-key selects the interpreter
+* `hana` / `\task` — bounded guest-grammar block; grammar-key selects the interpreter
 
 **Concurrency sigils** (async cluster; sprint pending):
-- `lele` / `\branch` — structured fire-and-continue dispatch; Verse branch; bounded by enclosing scope
-- `hui` / `\sync` — await-all join; every child flow must complete before continuing
-- `holo` / `\race` — cancelling race; first wins, all losers and their subtrees cancelled recursively
-- `puka` / `\rush` — selecting race; first wins, losers continue until enclosing scope exits
-- `kukali` / `\suspends` — wait-until-trigger; parks the causal island
-- `hoolele` / `\spawn` — unstructured escape hatch; new independent task root; completes the six-operator ontology
-- `\tick` / `\simulate` — device lifecycle hook: run once per nalu (simulation tick); Hawaiian proper name deferred pending Visual Verse tick node shape (UE6 ~2027)
+* `lele` / `\branch` — structured fire-and-continue dispatch; Verse branch; bounded by enclosing scope
+* `hui` / `\sync` — await-all join; every child flow must complete before continuing
+* `holo` / `\race` — cancelling race; first wins, all losers and their subtrees cancelled recursively
+* `puka` / `\rush` — selecting race; first wins, losers continue until enclosing scope exits
+* `kukali` / `\suspends` — wait-until-trigger; parks the causal island
+* `hoolele` / `\spawn` — unstructured escape hatch; new independent task root; completes the six-operator ontology
+* `\tick` / `\simulate` — device lifecycle hook: run once per nalu (simulation tick); Hawaiian proper name deferred pending Visual Verse tick node shape (UE6 ~2027)
 
 **Infrastructure**:
-- `sigil-dispatcher` — the `~` root dispatch widget; routes `<<~ name >>` to `\widget ~name`
+* `sigil-dispatcher` — the `~` root dispatch widget; routes `<<~ name >>` to `\widget ~name`
 
 Every Hawaiian sigil in this set carries an English alias. Every English alias carries
 `lar-see-also` pointing at its Hawaiian counterpart. Grammar is bilingual by design:
@@ -154,7 +154,7 @@ the operator may author in either tongue and the parse result is identical.
 
 <<~ ahu #cultural-contract >>
 
-## Cultural Contract
+!! Cultural Contract
 
 The Hawaiian sigil names carry meaning far beyond decoration. Each name compresses a semantic
 that Hawaiian articulates precisely where English lacks a single-word equivalent.
@@ -204,7 +204,7 @@ cannot yet see.
 
 <<~ ahu #language-families >>
 
-## Language Families in the Grammar
+!! Language Families in the Grammar
 
 The SharktoothSigil grammar draws vocabulary from five distinct language families. Each contributes precisely the concept that the other languages lack a single-word equivalent for.
 
@@ -213,8 +213,8 @@ The SharktoothSigil grammar draws vocabulary from five distinct language familie
 **Bahasa Indonesia** — one canonical sigil: *pranala*. The standard Bahasa Indonesia / Wikipedia Bahasa Indonesia term for hyperlink: *prana* (life-force, Sanskrit loan) + *lala* (thread, passage). Indonesian Wikipedia chose this word deliberately over the Dutch-derived borrowings that dominate Indonesian computing vocabulary. The pranala sigil inherits that choice: a living thread, not a pointer.
 
 **Ancient Greek (τύπος / mimeme)** — two entry paths:
-- *typos* — τύπος: impression, mold, stamp, type. The `\typos` alias for *kumu* names the element-type declaration sigil by the Greek root that gave English "type", "archetype", "prototype". The mold precedes the cast; the declaration precedes the instance.
-- *meme* — coined 1976 by Richard Dawkins in *The Selfish Gene* from Greek *mimeme* (that which gets imitated), shortened to rhyme with "gene". Edward Wilson and Wes Unruh extended the operational framework in *The Art of Memetics* (2009), treating memes as propagating agents with measurable virality and selection pressure from host minds and transmission media. The Lares system uses the word at full weight: a unit of cultural information that replicates across minds and networks. Each tiddler that carries the memetic-wikitext type header *acts as* a meme — a replicable cultural unit in a content-addressed store, subject to the same fitness landscape described by Wilson and Unruh.
+* *typos* — τύπος: impression, mold, stamp, type. The `\typos` alias for *kumu* names the element-type declaration sigil by the Greek root that gave English "type", "archetype", "prototype". The mold precedes the cast; the declaration precedes the instance.
+* *meme* — coined 1976 by Richard Dawkins in *The Selfish Gene* from Greek *mimeme* (that which gets imitated), shortened to rhyme with "gene". Edward Wilson and Wes Unruh extended the operational framework in *The Art of Memetics* (2009), treating memes as propagating agents with measurable virality and selection pressure from host minds and transmission media. The Lares system uses the word at full weight: a unit of cultural information that replicates across minds and networks. Each tiddler that carries the memetic-wikitext type header *acts as* a meme — a replicable cultural unit in a content-addressed store, subject to the same fitness landscape described by Wilson and Unruh.
 
 **English (computing + TW5 pragmas)** — 24 alias forms carry the English computing vocabulary that TW5 authors and general programmers already know: `\procedure`, `\function`, `\widget`, `\define`, `\if`, `\elif`, `\else`, `\for`, `\task`, `\type`, `\const`, `\let`, `\var`, `\link`, `\shadow`, `\transclude`, `\import`, `\tiddler`, `\query`, `\branch`, `\sync`, `\race`, `\rush`, `\guard`, `\constraint`, `\suspends`. These aliases lower the entry barrier for operators who author in English and let TW5-native macro patterns migrate naturally into the sigil grammar.
 
@@ -226,15 +226,15 @@ The grammar accepts all five families equally. The parse result for a Hawaiian s
 
 <<~ ahu #sharktooth-tag >>
 
-## The SharktoothSigil Tag
+!! The SharktoothSigil Tag
 
 `lar:///ha.ka.ba/tags/SharktoothSigil` is the grammar registration surface. Its design:
 
-- Lives in `lar://` space — owned by the Lares namespace, not TW5's `$:/` system namespace.
-- Resolvable by any peer holding the `ha.ka.ba` bag — the grammar is federated with the wiki.
-- Readable by `grammar-cache.ts` via `wiki.filterTiddlers([tag[lar:///ha.ka.ba/tags/SharktoothSigil]])` —
+* Lives in `lar://` space — owned by the Lares namespace, not TW5's `$:/` system namespace.
+* Resolvable by any peer holding the `ha.ka.ba` bag — the grammar is federated with the wiki.
+* Readable by `grammar-cache.ts` via `wiki.filterTiddlers([tag[lar:///ha.ka.ba/tags/SharktoothSigil]])` —
   tiddler sigils take precedence over TOML fallback by name.
-- Writable by any operator with bag write access — language extension requires no authority
+* Writable by any operator with bag write access — language extension requires no authority
   beyond bag membership.
 
 The tag lives in the `lar:///` namespace, not the `$:/` system namespace that requires code-side registration. The migration from `$:/` to `lar:///` namespaces across all
@@ -249,7 +249,7 @@ lives in a tiddler.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu >>

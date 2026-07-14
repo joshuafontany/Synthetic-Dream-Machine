@@ -33,15 +33,15 @@ uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 
 <<~ ahu #running >>
 
-## Running the Server
+!! Running the Server
 
-### Prerequisites
+!!! Prerequisites
 
-- Python 3.11+ (uses `tomllib`, `match` statement)
-- Repo root on `PYTHONPATH` (satisfied automatically by `-m` invocation)
-- No external dependencies beyond the standard library
+* Python 3.11+ (uses `tomllib`, `match` statement)
+* Repo root on `PYTHONPATH` (satisfied automatically by `-m` invocation)
+* No external dependencies beyond the standard library
 
-### Start (stdio transport)
+!!! Start (stdio transport)
 
 ```bash
 python3 -m lares.lararium_mcp
@@ -50,21 +50,21 @@ python3 -m lares.lararium_mcp
 The server reads newline-delimited JSON-RPC from stdin and writes responses to stdout.
 It runs until stdin closes.
 
-### VS Code workspace
+!!! VS Code workspace
 
 `.vscode/mcp.json` wires the server as a workspace-scoped MCP server named `lararium`.
 VS Code 1.99+ loads it automatically on workspace open.
 
-### Claude Code
+!!! Claude Code
 
 `.mcp.json` at repo root wires the server as project-scoped `lararium`.
 Claude Code loads it on session start.
 
-### Codex
+!!! Codex
 
 `.codex/config.toml` wires the server via `[[mcp_servers]]`.
 
-### Smoke test
+!!! Smoke test
 
 ```bash
 echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"smoke","version":"0"}}}' \
@@ -73,7 +73,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":
 
 Expected: `{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-11-25","capabilities":{"resources":{},"tools":{},"prompts":{}},...}}`
 
-### Run test suite
+!!! Run test suite
 
 ```bash
 python3 -m unittest discover -s lares/lararium_mcp/tests -v
@@ -84,9 +84,9 @@ python3 -m unittest discover -s lares/lararium_mcp/tests -v
 
 <<~ ahu #capabilities >>
 
-## Implemented Capabilities
+!! Implemented Capabilities
 
-### MCP methods
+!!! MCP methods
 
 | Method | Status | Notes |
 |---|---|---|
@@ -100,7 +100,7 @@ python3 -m unittest discover -s lares/lararium_mcp/tests -v
 | `prompts/list` | ✓ implemented | 6 hydration prompts |
 | `prompts/get` | ✓ implemented | returns structured user-turn messages |
 
-### Tools
+!!! Tools
 
 | Tool name | What it does |
 |---|---|
@@ -114,7 +114,7 @@ python3 -m unittest discover -s lares/lararium_mcp/tests -v
 
 All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`.
 
-### Resources
+!!! Resources
 
 | URI | Type | Content |
 |---|---|---|
@@ -128,7 +128,7 @@ All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint:
 | `lar:///boot/full` | virtual JSON | full boot artifact |
 | `lar:///boot/receipt` | virtual JSON | boot receipt (sha256) |
 
-### Prompts
+!!! Prompts
 
 | Prompt name | Arguments | What it embeds |
 |---|---|---|
@@ -143,7 +143,7 @@ All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint:
 
 <<~ ahu #module-map >>
 
-## Module Map
+!! Module Map
 
 ```
 lares/lararium_mcp/
@@ -172,7 +172,7 @@ lares/lararium_mcp/
 
 <<~ ahu #canonical-child-loci >>
 
-## Canonical Child Loci
+!! Canonical Child Loci
 
 The durable MCP design now lives under `packages/lares-core/memes/docs/lararium_mcp/**` as memetic-wikitext loci:
 
@@ -205,7 +205,7 @@ Active Sprint-03, roadmap, backlog, and todo work-tracking files remain live pla
 
 <<~ ahu #contract-docs >>
 
-## Legacy Contract Documents
+!! Legacy Contract Documents
 
 Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act as consumed source/reference stubs:
 
@@ -230,7 +230,7 @@ Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act 
 
 <<~ ahu #known-gaps >>
 
-## Known Gaps (Stubs and Residue)
+!! Known Gaps (Stubs and Residue)
 
 | Gap | Status | Lane |
 |---|---|---|
@@ -251,9 +251,9 @@ Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act 
 
 <<~ ahu #templates >>
 
-## Templates — Fill in Before Shipping
+!! Templates — Fill in Before Shipping
 
-### Adding a new tool
+!!! Adding a new tool
 
 ```python
 # in tools.py
@@ -274,7 +274,7 @@ def my_tool(arg: str) -> dict[str, object]:
 },
 ```
 
-### Adding a new resource
+!!! Adding a new resource
 
 ```python
 # in resources.py
@@ -288,7 +288,7 @@ if uri == MY_RESOURCE_URI:
     return json.dumps(build_my_resource(), indent=2, sort_keys=True)
 ```
 
-### Adding a new prompt
+!!! Adding a new prompt
 
 ```python
 # in prompts.py PROMPT_CATALOG
@@ -303,7 +303,7 @@ case "lararium-my_prompt":
     return _get_my_prompt(arguments.get("uri", ""))
 ```
 
-### Adding a submodule adapter
+!!! Adding a submodule adapter
 
 ```python
 # in new file lares/lararium_mcp/adapters/my_adapter.py
@@ -325,7 +325,7 @@ class MyAdapter:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/spine >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>

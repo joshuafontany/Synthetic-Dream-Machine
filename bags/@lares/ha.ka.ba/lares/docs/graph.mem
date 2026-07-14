@@ -30,7 +30,7 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 
 <<~ ahu #core-proposition >>
 
-## Core Proposition
+!! Core Proposition
 
 The pranala-edge DAG replaces static enumeration as the source of truth for boot closure.
 
@@ -55,7 +55,7 @@ Three structural claims drive the redesign:
 
 <<~ ahu #decisions >>
 
-## Committed Design Decisions
+!! Committed Design Decisions
 
 The following decisions closed during the OODA-HA planning session on 2026-04-24.
 They do not require further operator input.
@@ -73,7 +73,7 @@ They do not require further operator input.
 
 <<~ ahu #open-question >>
 
-## `? ->` Socket Resolution — Closed
+!! `? ->` Socket Resolution — Closed
 
 The canonical pranala law (`lar:///ha.ka.ba/lares/api/pono/pranala`) settles this:
 
@@ -90,7 +90,7 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 
 <<~ ahu #child-loci >>
 
-## Child Loci
+!! Child Loci
 
 | Meme | Role |
 |---|---|
@@ -103,7 +103,7 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 
 <<~ ahu #terminology-alignment >>
 
-## Deferred — Terminology Alignment
+!! Deferred — Terminology Alignment
 
 The canonical loci law (`lar:///ha.ka.ba/lares/api/pono/loci`) uses **locus / loci** for a carrier in the graph.
 The server code and current graph docs use `node` / `CarrierNode` / `CarrierGraph`.
@@ -126,7 +126,7 @@ The rename in the server awaits Phase 1 implementation. Until then, current code
 
 <<~ ahu #implementation-phases >>
 
-## Implementation Phases
+!! Implementation Phases
 
 | Phase | New file | Key deliverable |
 |---|---|---|
@@ -145,7 +145,7 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~ ahu #validation-markers >>
 
-## Validation Markers
+!! Validation Markers
 
 | Marker | Test or check |
 |---|---|
@@ -162,7 +162,7 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>

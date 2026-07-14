@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/mukuwai"
 
 <<~ ahu #head >>
 
-# Mukuwai
+! Mukuwai
 
 *mukuwai* — composed from *muku* (cut short, severed, abrupt end) and *wai* (water, liquid,
 fluid). The water that reaches a cut-off point — the flow that arrives when all other channels
@@ -33,7 +33,7 @@ question itself has exhausted all candidates. The stream reaches the cut-off; th
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A mukuwai block MUST NOT carry a filter expression.
 A mukuwai block MUST appear as the final branch in a wai/kahawai chain.
@@ -44,7 +44,7 @@ A wai chain MUST NOT contain more than one mukuwai block.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ wai [filter] >>
@@ -62,7 +62,7 @@ English alias form:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kahawai >>

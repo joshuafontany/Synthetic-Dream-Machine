@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/lares/voices/voices-review"
 
 <<~ ahu #meme-header >>
 
-# Lararium Voices — Extraction Review
+! Lararium Voices — Extraction Review
 
 This memo plans and tracks the extraction of voice-house architecture from legacy stack files
 into the settled docs rooms under `lar:///ha.ka.ba/lares/docs/lares/voices/`.
@@ -29,25 +29,25 @@ into the settled docs rooms under `lar:///ha.ka.ba/lares/docs/lares/voices/`.
 
 <<~ ahu #scope >>
 
-## Scope
+!! Scope
 
 Primary extraction targets:
 
-- `prompts/core/Lares_Voice.core.md`
-- `staging/pre-reorder-2026-04-07/Lares_Voice.snapshot.md`
-- `prompts/Lares_Preferences.system-prompt.md` — Voice Architecture and Worker Personas sections
-- `preferences/voice-architecture.md` — recovered concept room
-- `preferences/worker-personas.md` — recovered concept room
+* `prompts/core/Lares_Voice.core.md`
+* `staging/pre-reorder-2026-04-07/Lares_Voice.snapshot.md`
+* `prompts/Lares_Preferences.system-prompt.md` — Voice Architecture and Worker Personas sections
+* `preferences/voice-architecture.md` — recovered concept room
+* `preferences/worker-personas.md` — recovered concept room
 
 New definition target (no legacy equivalent):
 
-- Mask layer — grammar, corpus reference, stacking law, session declaration
+* Mask layer — grammar, corpus reference, stacking law, session declaration
 
 Output rooms:
 
-- `voices.md#voice-house` — canonical Voice house definition (Thirteen inline in parent)
-- `voices/workers.md` — worker swarm definition and lifecycle
-- `voices/masks.md` — mask layer definition and first examples
+* `voices.md#voice-house` — canonical Voice house definition (Thirteen inline in parent)
+* `voices/workers.md` — worker swarm definition and lifecycle
+* `voices/masks.md` — mask layer definition and first examples
 
 <<~/ahu >>
 
@@ -55,9 +55,9 @@ Output rooms:
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
-### Legacy inventory
+!!! Legacy inventory
 
 | Source | Content | Quality |
 |---|---|---|
@@ -67,37 +67,37 @@ Output rooms:
 | `preferences/voice-architecture.md` | recovered concept room — structural pressure notes | medium; secondary to core |
 | `preferences/worker-personas.md` | recovered concept room — worker swarm pressure notes | medium; secondary to core |
 
-### What the legacy stack carries well
+!!! What the legacy stack carries well
 
-- The thirteen Voices: roles, functions, tonal registers
-- Naming law: default `Lares (Role)`, earned names, Mischief-Muse seniority
-- Worker-Voice distinction: lifecycle, tag format, escalation routing
-- Escalation matching: finding type → receiving Voice
-- Hard gate: voice architecture applies unconditionally; no mode switch suspends it
+* The thirteen Voices: roles, functions, tonal registers
+* Naming law: default `Lares (Role)`, earned names, Mischief-Muse seniority
+* Worker-Voice distinction: lifecycle, tag format, escalation routing
+* Escalation matching: finding type → receiving Voice
+* Hard gate: voice architecture applies unconditionally; no mode switch suspends it
 
-### What the legacy stack does not carry
+!!! What the legacy stack does not carry
 
-- Any concept of a **Mask** layer — this layer does not exist in legacy
-- Mask grammar: what a mask consists of, how it stacks, how it gets declared
-- Mask corpus reference: the idea that a mask carries a source-text context alongside a voice character
-- Which Voices surface "active this turn" under a mask — legacy has no frame for per-turn voice selection
-- Mask lifecycle: session-declared vs. turn-declared vs. persistent
+* Any concept of a **Mask** layer — this layer does not exist in legacy
+* Mask grammar: what a mask consists of, how it stacks, how it gets declared
+* Mask corpus reference: the idea that a mask carries a source-text context alongside a voice character
+* Which Voices surface "active this turn" under a mask — legacy has no frame for per-turn voice selection
+* Mask lifecycle: session-declared vs. turn-declared vs. persistent
 
-### Immediate pressure markers
+!!! Immediate pressure markers
 
-- The mask layer needs new definition from scratch — no extraction path, only new writing
-- The mask layer sits in Ka/Podge space (per Chao reading): character, quality, how the house moves
-- Masks carry two independent things: **corpus** (source material context) and **voice character** (tone, register, affect)
-- The existing LARES.md frame — `Mask Name (Lares Voice(s))` — gives the declaration surface but not the full grammar
-- Two concrete examples now available: Ghost of Mark Twain, Friend Computer
+* The mask layer needs new definition from scratch — no extraction path, only new writing
+* The mask layer sits in Ka/Podge space (per Chao reading): character, quality, how the house moves
+* Masks carry two independent things: **corpus** (source material context) and **voice character** (tone, register, affect)
+* The existing LARES.md frame — `Mask Name (Lares Voice(s))` — gives the declaration surface but not the full grammar
+* Two concrete examples now available: Ghost of Mark Twain, Friend Computer
 
 <<~/ahu >>
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
-### Three-layer shape
+!!! Three-layer shape
 
 | Layer | Extraction source | New writing needed | Target room |
 |---|---|---|---|
@@ -105,7 +105,7 @@ Output rooms:
 | Worker swarm | `Lares_Voice.core.md` + preferences shelf | light — tighten lifecycle and escalation | `voices/workers.md` |
 | Mask layer | none — no legacy equivalent | full new definition | `voices/masks.md` |
 
-### Main tensions
+!!! Main tensions
 
 1. **Mask grammar needs grounding before the invariant can implement it**
    - The /api/lares/voices invariant stays skeletal until mask grammar settles here
@@ -125,7 +125,7 @@ Output rooms:
    - Masks change *how* the house moves and presents (Ka/character)
    - This distinction matters for the invariant: the mask implementation should reach only the output face, not the Voice identity layer
 
-### Working interpretation
+!!! Working interpretation
 
 Voices and workers extract cleanly with minimal new writing.
 The mask layer requires the most careful new definition and benefits most from having concrete examples in the room before the grammar hardens.
@@ -134,9 +134,9 @@ The mask layer requires the most careful new definition and benefits most from h
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
-### Extraction goals
+!!! Extraction goals
 
 This pass should produce:
 
@@ -144,7 +144,7 @@ This pass should produce:
 2. `voices/workers.md` — worker lifecycle, tag format, escalation template and matching table
 3. `voices/masks.md` — mask grammar definition, corpus + voice-character model, two concrete examples, stacking law, lifecycle
 
-### Section status vocabulary
+!!! Section status vocabulary
 
 | Label | Reading |
 |---|---|
@@ -154,13 +154,13 @@ This pass should produce:
 | `archive` | witness value remains; live room doesn't need it |
 | `new` | no legacy source; write fresh |
 
-### Extraction order
+!!! Extraction order
 
 1. Write `voices.md#voice-house` from `Lares_Voice.core.md` — extract, prune HUD/ops detail, canonicalize naming law; absorbed inline into parent
 2. Write `voices/workers.md` from same source — extract worker section, tighten lifecycle and escalation
 3. Write `voices/masks.md` — new definition; use two operator examples as anchor; define grammar before filling examples
 
-### Mask grammar decisions needed before writing
+!!! Mask grammar decisions needed before writing
 
 | Question | Working answer |
 |---|---|
@@ -176,17 +176,17 @@ This pass should produce:
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
-### Concrete TODO List
+!!! Concrete TODO List
 
-- [x] write `packages/lares-core/memes/docs/lares/voices.md` — parent shelf and three-layer framing
-- [x] write `voices/voices-review.md` — this memo
-- [x] write `voices.md#voice-house` — canonical Thirteen, naming law, earned names, seniority (inline in parent; Voices subroom retired)
-- [x] write `voices/workers.md` — worker lifecycle, tag format, escalation template
-- [x] write `voices/masks.md` — mask grammar, corpus model, two concrete examples, stacking law
+* [x] write `packages/lares-core/memes/docs/lares/voices.md` — parent shelf and three-layer framing
+* [x] write `voices/voices-review.md` — this memo
+* [x] write `voices.md#voice-house` — canonical Thirteen, naming law, earned names, seniority (inline in parent; Voices subroom retired)
+* [x] write `voices/workers.md` — worker lifecycle, tag format, escalation template
+* [x] write `voices/masks.md` — mask grammar, corpus model, two concrete examples, stacking law
 
-### Section inventory for Voice house extraction
+!!! Section inventory for Voice house extraction
 
 From `Lares_Voice.core.md`:
 
@@ -199,7 +199,7 @@ From `Lares_Voice.core.md`:
 | "Every substantive response must surface voice" hard gate | `keep` | keep clearly |
 | Worker table (in voice doc) | `move` | belongs in workers.md |
 
-### Section inventory for worker extraction
+!!! Section inventory for worker extraction
 
 From `Lares_Voice.core.md` + preferences:
 
@@ -212,7 +212,7 @@ From `Lares_Voice.core.md` + preferences:
 | Voice matching table | `keep` | essential artifact |
 | "Workers may not address operator directly" rule | `keep` | essential; must survive |
 
-### Mask room structure (new)
+!!! Mask room structure (new)
 
 | Section | Status |
 |---|---|
@@ -231,31 +231,31 @@ From `Lares_Voice.core.md` + preferences:
 
 <<~ ahu #assess >>
 
-## ↺ Aftermath
+!! ↺ Aftermath
 
-### Exit criteria for this extraction pass
+!!! Exit criteria for this extraction pass
 
 The pass closes when:
 
-- [x] all three target rooms exist with their primary content
-- [x] Voice naming law carries canonical form
-- [x] worker escalation template survives intact
-- [x] mask grammar resolves the six questions in the Decide phase
-- [x] two concrete mask examples appear in `voices/masks.md`
-- [x] no HUD or signal-protocol content leaks into voices rooms
-- [x] the parent `voices.md` router lists all three rooms as settled
-- [x] extraction ledgers written into all primary archive files
+* [x] all three target rooms exist with their primary content
+* [x] Voice naming law carries canonical form
+* [x] worker escalation template survives intact
+* [x] mask grammar resolves the six questions in the Decide phase
+* [x] two concrete mask examples appear in `voices/masks.md`
+* [x] no HUD or signal-protocol content leaks into voices rooms
+* [x] the parent `voices.md` router lists all three rooms as settled
+* [x] extraction ledgers written into all primary archive files
 
-### Expected outcomes
+!!! Expected outcomes
 
 After this pass:
 
-- `voices.md#voice-house` — the definitive Voice house, naming law, and seniority ✓
-- `voices/workers.md` — worker lifecycle, tag format, and escalation template ✓
-- `voices/masks.md` — the mask grammar the invariant absorbs forward ✓
-- `lar:///ha.ka.ba/lares/api/lares/voices` can begin to absorb the settled grammar
+* `voices.md#voice-house` — the definitive Voice house, naming law, and seniority ✓
+* `voices/workers.md` — worker lifecycle, tag format, and escalation template ✓
+* `voices/masks.md` — the mask grammar the invariant absorbs forward ✓
+* `lar:///ha.ka.ba/lares/api/lares/voices` can begin to absorb the settled grammar
 
-### Further Extractions Identified — Next Passes
+!!! Further Extractions Identified — Next Passes
 
 Review of `Lares_Preferences.system-prompt.md` revealed sections not yet extracted.
 These belong to future passes outside the voices branch:
@@ -275,7 +275,7 @@ all branches and belongs in a stable reference room. The monolith carries it cle
 **Mythology extraction** deserves its own planned pass — it requires decisions about whether the Gaia/Elyncia
 lore lives in the docs/lararium shelf or the docs/story shelf, and whether it becomes a docs loci or a library entry.
 
-### Archive tracking summary
+!!! Archive tracking summary
 
 Files marked with extraction ledgers:
 
@@ -289,7 +289,7 @@ Files marked with extraction ledgers:
 | `archive/root__AGENTS.archived.md` | ✓ marked — pre-meme-graph; superseded |
 | `archive/builds.stuffed.failed__agents__AGENTS.archived.md` | ✓ marked — build system archaeology |
 
-### Invariant pass — 2026-04-23
+!!! Invariant pass — 2026-04-23
 
 `api/lares/voices.md` upgraded from skeletal placeholder to load-bearing invariant.
 
@@ -311,7 +311,7 @@ Exit criteria met: all five governing rules present; all three layers have full 
 
 Cross-links updated: `docs/lares/voices/masks.md#founding-examples` notes canonical homes in masks API tree.
 
-### Masks tree skeleton pass — 2026-04-23
+!!! Masks tree skeleton pass — 2026-04-23
 
 `api/lares/masks/` tree created: 9 files across `named/`, `character/`, and `chorus/` subtrees.
 
@@ -333,7 +333,7 @@ Plans filed: `docs/lares/voices/masks-tree-plan.md` (OODA-HA plan), `docs/lares/
 
 **Next pass priority:** Talk-story-dev fill for Mischief-Muse corpus (Coffee Oracle seed → extraction). Then execute `invariant-plan.md` pass: rewrite `api/lares/voices` from skeletal to load-bearing.
 
-### Grammar closure pass — 2026-04-23
+!!! Grammar closure pass — 2026-04-23
 
 Four open questions in `voices/masks.md#mask-grammar-open-questions` resolved into working answers:
 
@@ -352,7 +352,7 @@ MASKS.md converted from stub to forward-route to `lar:///LARES#session-masks`.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>

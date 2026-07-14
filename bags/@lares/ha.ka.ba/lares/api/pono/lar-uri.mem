@@ -22,9 +22,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/lar-uri"
 
 <<~ ahu #abstract >>
 
-# The `lar:` URI Scheme — A Naming Scheme for the Meme Graph
+! The `lar:` URI Scheme — A Naming Scheme for the Meme Graph
 
-## Abstract
+!! Abstract
 
 The `lar:` URI scheme names an address in a content-addressed meme graph — one parseable address per named unit. Like `tag:` (RFC 4151), a `lar:` URI **names; it does not fetch**: resolution runs against a local world graph alone. The scheme carries two forms — a **local form** for stable graph addresses and system resource names, and a **session form** that names a speaker for exchange spans — and a three-slot attitude root carried by a Ha-Ka-Ba (heading · angle · dynamic) triple.
 
@@ -34,7 +34,7 @@ This specification names the scheme syntax (a formal ABNF grammar), the path tax
 
 <<~ ahu #status >>
 
-## Status and Maturity
+!! Status and Maturity
 
 This document holds **submission-draft** maturity. The scheme law, path taxonomy, and kind-plane surface rule read as stable. The formal grammar, conformance classes, scheme registration, and security considerations carry RFC-2119 normative force. Items in the Annex remain open. Promotion to canon rests with the operator, not the document.
 
@@ -42,7 +42,7 @@ This document holds **submission-draft** maturity. The scheme law, path taxonomy
 
 <<~ ahu #introduction >>
 
-## Introduction — Scope, Audience, and Relation to memetic-wikitext
+!! Introduction — Scope, Audience, and Relation to memetic-wikitext
 
 **Scope.** This specification covers the syntax of the `lar:` URI scheme, the path taxonomy and slot discipline, the kind-plane surface rule (`@` names a CRDT surface; a bare `child[1]` names a meme namespace), and the resolution model. It governs how an address gets **written and resolved**, and stops at identity; what the named unit **means** beyond its identity lives elsewhere.
 
@@ -58,7 +58,7 @@ This document holds **submission-draft** maturity. The scheme law, path taxonomy
 
 <<~ ahu #terminology >>
 
-## Terminology and Conformance Language
+!! Terminology and Conformance Language
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **MAY**, and **OPTIONAL** carry the meanings in RFC 2119 / RFC 8174 when, and only when, they appear in capitals.
 
@@ -80,7 +80,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 
 <<~ ahu #scheme-syntax >>
 
-## Scheme Syntax (ABNF)
+!! Scheme Syntax (ABNF)
 
 The following grammar uses ABNF (RFC 5234), importing `unreserved`, `pct-encoded`, `host`, and `fragment` from RFC 3986.
 
@@ -117,7 +117,7 @@ A `lar:` URI MUST hold ASCII only. A slot MUST hold lowercase ASCII letters alon
 
 <<~ ahu #path-taxonomy >>
 
-## Path Taxonomy
+!! Path Taxonomy
 
 **Stable** — literal `ha.ka.ba` root, permanent API surfaces (bare meme namespace at `child[1]`):
 ```
@@ -146,7 +146,7 @@ Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
 
 For stable and unstable paths: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named l-space address.
 
-### TW5 System Boundary
+!!! TW5 System Boundary
 
 The `lar:` scheme serves as the lararium **sync-filter predicate**: only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names *what* crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the **sync-namespace** law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
 
@@ -154,13 +154,13 @@ The `lar:` scheme serves as the lararium **sync-filter predicate**: only `lar:`-
 
 <<~ ahu #bag-surface >>
 
-## Surface Designation — `@` Names a CRDT Surface
+!! Surface Designation — `@` Names a CRDT Surface
 
 The `@`-tag names a **CRDT surface** — a resolvable mutable doc (today an Automerge doc). It appears ONLY behind a **kind-plane** at `child[1]`, with the `@`-slug at `child[2]`. A meme **namespace** is a bare word at `child[1]` and carries no `@`. The two never collide: the `@` marks the surface, the bare word marks the namespace.
 
-- **`bags/@{slug}`** — a bag: a mutable content surface (a composable recipe piece).
-- **`wikis/@{slug}`** — a wiki: a `#has` bag-stack IDENTITY, distinct from its CANON (`bags/@{slug}`). Its per-wiki live layers extend the identity as `wikis/@{slug}/{temp,draft,working,personal}`.
-- **`cid/{hash}`** — an immutable content-addressed artifact; the name IS the content hash.
+* **`bags/@{slug}`** — a bag: a mutable content surface (a composable recipe piece).
+* **`wikis/@{slug}`** — a wiki: a `#has` bag-stack IDENTITY, distinct from its CANON (`bags/@{slug}`). Its per-wiki live layers extend the identity as `wikis/@{slug}/{temp,draft,working,personal}`.
+* **`cid/{hash}`** — an immutable content-addressed artifact; the name IS the content hash.
 
 ```
 lar:///ha.ka.ba/lares/api/pono/lar-uri          ← a meme (bare namespace at child[1])
@@ -186,7 +186,7 @@ Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* poi
 
 <<~ ahu #five-planes >>
 
-## The Five Planes
+!! The Five Planes
 
 The schema carries five independent planes; conflating them trips residency, projection, and federation work. This reading runs ahead of settled field vocabulary and stays open to better words.
 
@@ -202,7 +202,7 @@ The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable na
 
 <<~ ahu #resolution >>
 
-## Resolution Model
+!! Resolution Model
 
 `lar:` **names**; it does not fetch. A processor MUST resolve a `lar:` reference against the local world graph only:
 
@@ -217,7 +217,7 @@ Session form names the speaker through the authority. It MUST stay within exchan
 
 <<~ ahu #signal-law >>
 
-## Signal Law
+!! Signal Law
 
 The `lar:` URI names bearing — attitude and section, nothing mutable, in ASCII.
 
@@ -229,12 +229,12 @@ No metric stands yet claimed. The scheme names attitude and section; it defines 
 
 **Lineage and source.** The scheme declares a palimpsest lineage for its reinterpretation of the Ha-Ka-Ba triple.
 
-- SDM (Luka Rejec) supplies the **hakaba matrix** itself --- the existential trinity **Ha** (body), **Ka** (soul), **Ba** (psyche). The lar-uri inherits it directly --- body → heading, soul → angle, psyche → carried dynamic --- and overlays the noun·adjective·verb mnemonic. (Source below.)
-- Hawaiian *hā* supplies threshold-breath resonance for `ha`.
-- Egyptian soul grammar supplies `ka`/`ba` as standing double and returning bird.
-- Flight dynamics supplies the orientation frame (yaw · pitch · roll) and keeps the reading on attitude, not mapped position.
-- what3words supplies mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
-- hoʻokele supplies the wayfinding doctrine: hold bearing, infer position.
+* SDM (Luka Rejec) supplies the **hakaba matrix** itself --- the existential trinity **Ha** (body), **Ka** (soul), **Ba** (psyche). The lar-uri inherits it directly --- body → heading, soul → angle, psyche → carried dynamic --- and overlays the noun·adjective·verb mnemonic. (Source below.)
+* Hawaiian *hā* supplies threshold-breath resonance for `ha`.
+* Egyptian soul grammar supplies `ka`/`ba` as standing double and returning bird.
+* Flight dynamics supplies the orientation frame (yaw · pitch · roll) and keeps the reading on attitude, not mapped position.
+* what3words supplies mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
+* hoʻokele supplies the wayfinding doctrine: hold bearing, infer position.
 
 Source: Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" --- *"the existential trinity of body (ha), soul (ka), and psyche (ba)"*: the soul as the motive fire of consciousness, the psyche as its unique direction, the body as its vehicle. Adapted from Ancient Egyptian person-conceptions (the *Coffin Texts* and *Book of the Dead*). Indexed in *Ultraviolet Grasslands 2e*, pp. 230–234 (*Ha, Ka, Ba* & *hakaba matrix* 230; *ha · body* 234; *ka · soul* 234; *ba · personality* 232). Hawaiian *hā* (threshold-breath) layers atop the `ha` slot as palimpsest resonance.
 
@@ -248,7 +248,7 @@ BEARING (path) → SECTION (fragment).
 
 <<~ ahu #conformance >>
 
-## Conformance Classes
+!! Conformance Classes
 
 A **conforming parser** MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (stable/unstable); reject a slot bearing an underscore, whitespace, or non-ASCII (an internal hyphen joins a compound term); reject an `@`-prefix outside `child[1]`; treat a `#fragment` as an opaque anchor.
 
@@ -260,7 +260,7 @@ A **conforming author** SHOULD: use local form for stable addresses and system r
 
 <<~ ahu #scheme-registration >>
 
-## URI Scheme Registration (RFC 7595)
+!! URI Scheme Registration (RFC 7595)
 
 ```
 Scheme name:               lar
@@ -283,7 +283,7 @@ The scheme registers as **provisional**; a future submission MAY seek permanent 
 
 <<~ ahu #security >>
 
-## Security Considerations
+!! Security Considerations
 
 **Names, not fetches.** A `lar:` URI MUST resolve against the local world graph. A remote address reaches a peer through the explicit CRDT-federation path alone.
 
@@ -297,7 +297,7 @@ The scheme registers as **provisional**; a future submission MAY seek permanent 
 
 <<~ ahu #examples >>
 
-## Worked Examples (Non-Normative)
+!! Worked Examples (Non-Normative)
 
 A stable API address with a fragment:
 ```
@@ -328,28 +328,28 @@ lar:///ha.ka.ba/bags/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar://
 
 <<~ ahu #references >>
 
-## Normative References
+!! Normative References
 
-- **[RFC2119]** / **[RFC8174]** — conformance key words.
-- **[RFC3986]** — Uniform Resource Identifier (URI): Generic Syntax.
-- **[RFC4151]** — the `tag:` URI scheme (names-not-fetches precedent).
-- **[RFC5234]** — ABNF.
-- **[RFC7595]** — Guidelines and Registration Procedures for URI Schemes.
-- **[MWT]** — the memetic-wikitext markup specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`.
-- **[PRANALA]** — pranala edge law: `lar:///ha.ka.ba/lares/api/pono/pranala`.
+* **[RFC2119]** / **[RFC8174]** — conformance key words.
+* **[RFC3986]** — Uniform Resource Identifier (URI): Generic Syntax.
+* **[RFC4151]** — the `tag:` URI scheme (names-not-fetches precedent).
+* **[RFC5234]** — ABNF.
+* **[RFC7595]** — Guidelines and Registration Procedures for URI Schemes.
+* **[MWT]** — the memetic-wikitext markup specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`.
+* **[PRANALA]** — pranala edge law: `lar:///ha.ka.ba/lares/api/pono/pranala`.
 
 <<~/ahu >>
 
 <<~ ahu #annex-open >>
 
-## Annex — Open Items (Informative)
+!! Annex — Open Items (Informative)
 
-- **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
-- **Session-form authority grammar.** The `alias:grant@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
-- **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
-- **Multi-bag disk projection — full-path-inside-bag.** Every file lives at its full uri-path inside its holding bag's mirror (`bags/@<bag>/<full-name>.mem`): directory = residency, interior = the name, whole. Any bag holds any name losslessly.
-- **Turn-as-meme-graph.** Live exchange turns already carry aim/yield wires, worn voices, rating marks, hoike/moolelo children — a meme-graph awaiting ingest. The unstable URIs minted per turn stand as declared-unresolved names for session-bag memes; an INGEST organ can decompose session logs into corpus.
-- **Lineage citation.** Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" (the trinity body·soul·psyche), indexed in *Ultraviolet Grasslands 2e* pp. 230–234; Egyptian root: the *Coffin Texts* / *Book of the Dead*; Hawaiian *hā* as resonance.
+* **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
+* **Session-form authority grammar.** The `alias:grant@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
+* **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
+* **Multi-bag disk projection — full-path-inside-bag.** Every file lives at its full uri-path inside its holding bag's mirror (`bags/@<bag>/<full-name>.mem`): directory = residency, interior = the name, whole. Any bag holds any name losslessly.
+* **Turn-as-meme-graph.** Live exchange turns already carry aim/yield wires, worn voices, rating marks, hoike/moolelo children — a meme-graph awaiting ingest. The unstable URIs minted per turn stand as declared-unresolved names for session-bag memes; an INGEST organ can decompose session logs into corpus.
+* **Lineage citation.** Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" (the trinity body·soul·psyche), indexed in *Ultraviolet Grasslands 2e* pp. 230–234; Egyptian root: the *Coffin Texts* / *Book of the Dead*; Hawaiian *hā* as resonance.
 
 <<~/ahu >>
 
@@ -365,7 +365,7 @@ lar:///ha.ka.ba/bags/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar://
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri >>

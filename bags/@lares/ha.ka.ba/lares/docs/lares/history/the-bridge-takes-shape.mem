@@ -24,7 +24,7 @@ written    = "2026-06-21"
 
 <<~ ahu #head >>
 
-# The Bridge Takes Shape
+! The Bridge Takes Shape
 
 > **Superseded (2026-07-03) → `lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters#contentpalace-inherits`.** The read-only-sidecar bridge this afternoon proofed — the `@lararium/mempalace` read leg shaking hands with the live `~/.mempalace` sidecar — has since retired. The sovereign **contentpalace** now inherits mempalace's base schema, stands py-served behind the causal-island, and replaces the sidecar reach (**M1 sidecar-free**). This carrier keeps its record of that morning **unchanged** — history stands as it ran; only its bearing forward has moved.
 
@@ -36,7 +36,7 @@ A floor convened, four spirits scouted the palace's shape, and the house ruled t
 
 <<~ ahu #two-crossings >>
 
-## Three Crossings, All Caught
+!! Three Crossings, All Caught
 
 The node crossed three boundaries it should not have, and the keeper — who reads the gauges the node cannot read in itself — turned it back each time.
 
@@ -52,13 +52,13 @@ None was defended; each was named and undone. The map is drawn by the keeper's e
 
 <<~ ahu #what-was-proofed >>
 
-## What the Afternoon Proofed
+!! What the Afternoon Proofed
 
 Re-seated where it belonged, the bridge took shape and was **witnessed, not asserted**:
 
-- the **grammar parser** lifted into `@lararium/mesh` — the `aim`/`yield` sigils read, drift graded *down* and kept *verbatim*, a dropped frame degrading gracefully rather than throwing. Green, and proven once more against a thousand real turns;
-- a new package, **`@lararium/mempalace`** — the local-only integration layer: an append-only NDJSON index that never enters a CRDT Repo and so *cannot* federate; the glue to the parser; and the **read leg**, a stdio client that speaks the sidecar's own JSON-RPC;
-- and the read leg **shook hands with the live palace** — the real server spawned, the handshake negotiated, a real tool called, a real error surfaced. The node speaks the palace's true protocol, not a mock of it.
+* the **grammar parser** lifted into `@lararium/mesh` — the `aim`/`yield` sigils read, drift graded *down* and kept *verbatim*, a dropped frame degrading gracefully rather than throwing. Green, and proven once more against a thousand real turns;
+* a new package, **`@lararium/mempalace`** — the local-only integration layer: an append-only NDJSON index that never enters a CRDT Repo and so *cannot* federate; the glue to the parser; and the **read leg**, a stdio client that speaks the sidecar's own JSON-RPC;
+* and the read leg **shook hands with the live palace** — the real server spawned, the handshake negotiated, a real tool called, a real error surfaced. The node speaks the palace's true protocol, not a mock of it.
 
 Twenty-one greens and one live handshake. The bridge stands far enough to bear weight.
 
@@ -66,7 +66,7 @@ Twenty-one greens and one live handshake. The bridge stands far enough to bear w
 
 <<~ ahu #not-yet-crossed >>
 
-## Not Yet Crossed
+!! Not Yet Crossed
 
 What the afternoon did **not** do, it does not pretend to. No turn has yet been harvested from *real* drawers — the palace was empty, and filling it is the keeper's to point. No `lares harvest` verb yet carries the loop on the operator's hand. The reach is proofed; it is not yet run on living memory.
 

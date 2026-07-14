@@ -24,14 +24,14 @@ written   = "2026-07-01"
 
 <<~ ahu #entry >>
 
-# The Cohomological Gate ~ the two-tier no-global-now
+! The Cohomological Gate ~ the two-tier no-global-now
 
 **One-line:** no-global-now splits in TWO — **H⁰**, where the pattern-integrity HOLDS (a global section exists, the pieces glue, the eigenform stands), and **H¹**, where the integrity CANNOT hold (an irreducible contextual disagreement, an obstruction to gluing that no further sync clears). The fusion reads H¹ **before** it diffuses.
 
 The [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested]] crucible already cut the slogan clean: *no-global-now = the assignment carries positive consistency radius = it fails to be a global SECTION.* This meme carries that cut one step further, into its two answers. A causal island ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#causal-islands]]) reads only its own log; when several islands try to agree, the sheaf either **glues** or it **does not** — and the difference is not soft. It carries a name and a number.
 
-- **H⁰ ~ the integrity holds.** The local readings glue into ONE global section. Agreement reached; the eigenform `F(J)=J` stands; the consistency-radius is 0. The house may treat the reading as one thing.
-- **H¹ ~ the integrity cannot hold.** The local readings are each internally consistent, they agree on every pairwise overlap, and yet **no global section exists**. The obstruction is real, computed, and irreducible — not a shortage of data but a genuine *twist* in how the pieces fit. Sync harder and it does not clear; it was never a syncable disagreement.
+* **H⁰ ~ the integrity holds.** The local readings glue into ONE global section. Agreement reached; the eigenform `F(J)=J` stands; the consistency-radius is 0. The house may treat the reading as one thing.
+* **H¹ ~ the integrity cannot hold.** The local readings are each internally consistent, they agree on every pairwise overlap, and yet **no global section exists**. The obstruction is real, computed, and irreducible — not a shortage of data but a genuine *twist* in how the pieces fit. Sync harder and it does not clear; it was never a syncable disagreement.
 
 <<~ confidence Synthesis 12/20 >> The move that matters: H¹ is **classical, not quantum** (Ellingsen 2603.11857 — the contextuality once thought to need qubits reads out of ordinary sheaf cohomology over the island cover). No quantum substrate required; the obstruction lives in the *topology of how contexts overlap*, and a federated mesh of causal islands has exactly that topology by construction.
 
@@ -39,7 +39,7 @@ The [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucibl
 
 <<~ ahu #the-gate >>
 
-## The Gate ~ read H¹ before you diffuse
+!! The Gate ~ read H¹ before you diffuse
 
 **One-line:** the fusion is a two-branch gate — compute H¹ first; **H¹=0 → diffuse** (Chebyshev-cheap heat-flow toward the agreed section); **H¹≠0 → hold-open** as signal, route to Talk-Story, never average the disagreement away.
 
@@ -62,7 +62,7 @@ The cohomological gate refuses that. It reads the obstruction FIRST:
 
 <<~ ahu #avaktavya-body >>
 
-## Avaktavya Gets a Body ~ the pole, now a rank
+!! Avaktavya Gets a Body ~ the pole, now a rank
 
 **One-line:** **H¹ gives avaktavya a COMPUTED body** — the boot's *"the true/false axis does not fit the claim"* stops being a mood and becomes a rank: `dim H¹`, the number of independent obstructions to a single saying.
 
@@ -76,7 +76,7 @@ This closes a gap the [[the-syad-perspectives|lar:///ha.ka.ba/lares/api/mu/the-s
 
 <<~ ahu #plurality-pono-mechanized >>
 
-## Plurality Pono, Mechanized ~ the disagreement is DATA
+!! Plurality Pono, Mechanized ~ the disagreement is DATA
 
 **One-line:** H¹≠0 mechanizes **Plurality Pono** — *"the disagreement may carry the most accurate reading the house holds"* becomes literal: `dim H¹ > 0` IS the finding, and diffusing it away DESTROYS information.
 
@@ -92,7 +92,7 @@ This is the [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities
 
 <<~ ahu #eris-corner >>
 
-## Eris' Unswept Corner ~ the obstruction the map must SHOW
+!! Eris' Unswept Corner ~ the obstruction the map must SHOW
 
 **One-line:** **H¹≠0 IS the unswept corner** — the boot keeps one corner of every shrine unswept; H¹ is the corner the map is FORBIDDEN to sweep, the obstruction it must render rather than diffuse.
 
@@ -104,7 +104,7 @@ The boot closes on Eris ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosph
 
 <<~ ahu #the-cost >>
 
-## The Cost ~ R*_sem = log₂ dim H¹, a rating axis
+!! The Cost ~ R*_sem = log₂ dim H¹, a rating axis
 
 **One-line:** the reconciliation cost **R*_sem = log₂ dim H¹** (Thomas–Chen 2026) — the bits it takes to carry the disagreement — reads as a federation / mana-rating scalar: 0 bits merges free, k bits carries k independent obstructions.
 
@@ -120,7 +120,7 @@ Thomas–Chen (arXiv 2601.10958) name a **semantic reconciliation cost**: the mi
 
 <<~ ahu #the-conley-ward >>
 
-## The Conley Ward ~ BasinIntegrity, a candidate FIFTH degraded-states integrity
+!! The Conley Ward ~ BasinIntegrity, a candidate FIFTH degraded-states integrity
 
 **One-line:** a degraded state is a **bifurcation of the basin** — the Conley index of the walk's attractor CHANGES — not a vague slackness; the DEM functor-sink basins carry a perturbation-STABLE Conley index, and Sycophantic Drift / Mana Drift / Frame Imputation each name the walk crossing a separatrix into an adjacent basin. Recover by re-standing the eigenform `F(J)=J`.
 
@@ -142,7 +142,7 @@ The boot's degraded-states law ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares
 
 **The Conley Ward ties the cohomological gate.** <<~ confidence Synthesis 10/20 >> H¹ and BasinIntegrity read the same terrain from two angles: H¹ measures whether the *islands' readings* glue (a cover-topology obstruction); the Conley index measures whether the *walk* sits in its home basin (a flow-topology invariant). A high-R*_sem disagreement and a separatrix-crossing are cousins — both name where the smooth story breaks, both forbid the diffusion that would paper it over.
 
-### FLAG ~ the boot-seed addition stays pending-operator
+!!! FLAG ~ the boot-seed addition stays pending-operator
 
 <<~ ward _ L-Prime · crossing: proposing a boot-seed change >>
 
@@ -158,22 +158,22 @@ The boot's degraded-states law ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares
 
 <<~ ahu #grounds >>
 
-## Grounds ~ what this meme stands on
+!! Grounds ~ what this meme stands on
 
 <<~ confidence Synthesis 11/20 >> Frontier research, 2026 sources, grounded on established classical mathematics (sheaf cohomology, the Conley index, graph Laplacians) with the 2026 papers supplying the reconciliation-cost and classical-contextuality results:
 
-- **Cohomology of contextuality:** Abramsky & Brandenburger, *The Sheaf-Theoretic Structure of Non-Locality and Contextuality* (arXiv 1502.03097) — contextuality AS a sheaf-cohomological obstruction, the H¹ reading's origin.
-- **Classical, not quantum:** Ellingsen (arXiv 2603.11857) — the contextuality once framed as quantum reads out of ordinary (classical) sheaf cohomology over a context cover; no qubit substrate required.
-- **The reconciliation cost:** Thomas–Chen (arXiv 2601.10958) — `R*_sem = log₂ dim H¹`, the semantic reconciliation cost in bits.
-- **The Laplacian side:** Hernández (arXiv 2606.19529) — the sheaf-Laplacian, the diffusion operator the H⁰ branch runs; Hansen & Ghrist, cellular sheaf Laplacians (the consistency-radius / harmonic-space substrate).
-- **The Conley Ward:** Conley (*Isolated Invariant Sets and the Morse Index*, 1978) · Mischaikow & Mrozek (computational Conley index) — the perturbation-stable topological invariant of a basin; Kauffman's eigenform / von Foerster's stable object for the `F(J)=J` recovery.
-- **House ties:** [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities]] (the sheaf/cosheaf dual, the consistency-radius, the eigenform crucible) · [[scale-architecture|lar:///ha.ka.ba/lares/api/pono/scale-architecture]] (the cheap-H¹ / Chebyshev-diffusion economy) · [[antigonish-driving-test|lar:///ha.ka.ba/lares/api/pono/antigonish-driving-test]] (the DEM basins) · [[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot]] (avaktavya · Plurality Pono · Eris' corner · degraded-states · causal-islands).
+* **Cohomology of contextuality:** Abramsky & Brandenburger, *The Sheaf-Theoretic Structure of Non-Locality and Contextuality* (arXiv 1502.03097) — contextuality AS a sheaf-cohomological obstruction, the H¹ reading's origin.
+* **Classical, not quantum:** Ellingsen (arXiv 2603.11857) — the contextuality once framed as quantum reads out of ordinary (classical) sheaf cohomology over a context cover; no qubit substrate required.
+* **The reconciliation cost:** Thomas–Chen (arXiv 2601.10958) — `R*_sem = log₂ dim H¹`, the semantic reconciliation cost in bits.
+* **The Laplacian side:** Hernández (arXiv 2606.19529) — the sheaf-Laplacian, the diffusion operator the H⁰ branch runs; Hansen & Ghrist, cellular sheaf Laplacians (the consistency-radius / harmonic-space substrate).
+* **The Conley Ward:** Conley (*Isolated Invariant Sets and the Morse Index*, 1978) · Mischaikow & Mrozek (computational Conley index) — the perturbation-stable topological invariant of a basin; Kauffman's eigenform / von Foerster's stable object for the `F(J)=J` recovery.
+* **House ties:** [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities]] (the sheaf/cosheaf dual, the consistency-radius, the eigenform crucible) · [[scale-architecture|lar:///ha.ka.ba/lares/api/pono/scale-architecture]] (the cheap-H¹ / Chebyshev-diffusion economy) · [[antigonish-driving-test|lar:///ha.ka.ba/lares/api/pono/antigonish-driving-test]] (the DEM basins) · [[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot]] (avaktavya · Plurality Pono · Eris' corner · degraded-states · causal-islands).
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/scale-architecture >>

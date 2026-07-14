@@ -21,7 +21,7 @@ uri-path        = "ha.ka.ba/lares/api/pono/pranala"
 
 <<~ ahu #head >>
 
-# Pranala
+! Pranala
 
 One anchored pointer from this carrier outward.
 
@@ -43,7 +43,7 @@ The has-stack ruling (2026-06-12) split the old typed-edge law in three: **compo
 
 <<~ ahu #law >>
 
-## Pranala Law (Kānāwai)
+!! Pranala Law (Kānāwai)
 
 1. A pranala carries one **anchored pointer**: `<<~ pranala #anchor ? -> TARGET >>` — the `#anchor` names the pointer's office in this carrier; `?` resolves to the nearest enclosing socket or `#fragment-id`; `TARGET` names a `lar:` URI (optionally `#fragment`) or a repo file path.
 2. **Retired-reserved (2026-06-12):** the `role:` vocabulary (implements, owns, governed-by, and the rest of the feral taxonomy) and `family:` as an inline edge type. The corpus-wide burn converted them to tags, loulou, and (where relations *do* something) the wire plane. Retired terms stay reserved, never reused.
@@ -56,7 +56,7 @@ The has-stack ruling (2026-06-12) split the old typed-edge law in three: **compo
 
 <<~ ahu #handoff-boundary >>
 
-## Handoff Boundary
+!! Handoff Boundary
 
 `has-stack` governs composition (the tags field).
 `wire` governs reified edges — the canvas and verse-messaging substrate (families, traversal, propagation, lifecycle template/instance/trace, the DAG rule — all moved there whole).

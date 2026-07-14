@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/docs/pono/identity-stack"
 
 <<~ ahu #identity-stack >>
 
-# Identity Stack — DID / Handle / lar: Alias
+! Identity Stack — DID / Handle / lar: Alias
 
 > **PRE-KEYHIVE MODEL — superseded, rewrite deferred (operator, 2026-06-24).** This stack predates the
 > ruled identity model. The live model is **capability-is-identity + Keyhive concap** (the capability IS
@@ -44,7 +44,7 @@ The Elyncia.app / DreamDeck identity model holds three distinct layers. **Do not
 
 <<~ ahu #handle-form >>
 
-## Handle Form
+!! Handle Form
 
 Within the DreamDeck / Kowloon ActivityPub layer, identities use the canonical ActivityPub two-part handle structure:
 
@@ -64,7 +64,7 @@ The `~crossroads` tilde prefix denotes a nomadic/crossroads node — no fixed ho
 
 <<~ ahu #post-header-render >>
 
-## DreamDeck Post-Header Render Target
+!! DreamDeck Post-Header Render Target
 
 The `chat-log:post-header` render target carries the in-chat-log, timestamped projection for post headers.
 
@@ -87,7 +87,7 @@ The `record:full` and `hud:exchange-pair` render targets live in the lar-uri sch
 
 <<~ ahu #stance-carry >>
 
-## Stance Tool-Carry in Render Targets
+!! Stance Tool-Carry in Render Targets
 
 In HUD render targets, stance tool-carry modifiers attach directly to the preceding stance emoji as a two-character pair (no space) — `🏛️:*!`. The tool grammar itself (Wand · Cup · Sword · Pentacle · Stone) lives in the four-tools law; this surface only fixes the *attachment* convention for render targets. The `syad` lens carries the invoked standpoints; the optional `:` binds a tool to a standpoint.
 
@@ -97,7 +97,7 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon >>

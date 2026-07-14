@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/tiddler-record"
 
 <<~ ahu #head >>
 
-# Tiddler Record — Canonical Schema Law
+! Tiddler Record — Canonical Schema Law
 
 One tiddler record maps to one Automerge storage unit, always.
 Carrier text functions as a projection artifact — not as an Automerge storage unit.
@@ -32,7 +32,7 @@ Carrier text functions as a projection artifact — not as an Automerge storage 
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 Every piece of content stored in an Automerge doc (bag) MUST conform to `LarTiddlerRecord`:
 
@@ -47,20 +47,20 @@ interface LarTiddlerRecord {
 }
 ```
 
-### One record per tiddler. No exceptions.
+!!! One record per tiddler. No exceptions.
 
 A parent carrier tiddler and each of its ahu slot children each occupy their own independent record in the Automerge doc. The `ahu-parent` and `ahu-slot` fields describe the graph relationship between tiddlers as TW5 metadata. They do not govern storage granularity.
 
-### Carrier text does not travel to Automerge
+!!! Carrier text does not travel to Automerge
 
 Carrier text (memetic-wikitext format) appears only at the projection boundary:
 
-- **Import path (disk → Automerge):** the projection codec parses carrier text into individual `LarTiddlerRecord` entries, then writes each record independently.
-- **Export path (Automerge → disk):** the projection codec serializes a set of related records back into carrier text for operator authoring or archival.
+* **Import path (disk → Automerge):** the projection codec parses carrier text into individual `LarTiddlerRecord` entries, then writes each record independently.
+* **Export path (Automerge → disk):** the projection codec serializes a set of related records back into carrier text for operator authoring or archival.
 
 The sync adaptor MUST NOT reconstruct carrier text in the write path. The sync adaptor writes `LarTiddlerRecord` entries only.
 
-### Wild Mage operator doctrine
+!!! Wild Mage operator doctrine
 
 Files on disk that use carrier format (`.md` files in `lares/`, `ftls/`, `elyncia/`, `wtf/`) represent the operator's pre-projection of canonical content. The operator holds the authority to write these directly. The system imports them as individual tiddler records at hydration time. The carrier file on disk does not update automatically when Automerge state changes — that export remains a deliberate operator action.
 
@@ -68,7 +68,7 @@ Files on disk that use carrier format (`.md` files in `lares/`, `ftls/`, `elynci
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 # Canonical LarTiddlerRecord field names and types

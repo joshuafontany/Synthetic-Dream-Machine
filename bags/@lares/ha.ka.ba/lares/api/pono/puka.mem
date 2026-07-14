@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/puka"
 
 <<~ ahu #head >>
 
-# Puka
+! Puka
 
 *puka* — Hawaiian: hole, opening, gap; doorway, exit. A puka marks where passage happens — the
 first thing through the opening wins. The others keep moving; they simply no longer determine
@@ -40,7 +40,7 @@ Grammar only --- the selecting-race execution runtime awaits the async-first spr
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A puka block MUST spawn all child flows before any result lands.
 A puka block MUST propagate the first completing flow's result as the block's output.
@@ -53,7 +53,7 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ puka >>
@@ -71,7 +71,7 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-rush >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/holo >>

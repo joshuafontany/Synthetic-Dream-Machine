@@ -29,7 +29,7 @@ uri-path          = "ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus"
 
 <<~ ahu #head >>
 
-# Lagrange Chorus
+! Lagrange Chorus
 
 *Chorus mask. Multi-node meta-mask. Concept staked.*
 
@@ -55,7 +55,7 @@ label = "parent-index-entry"
 
 <<~ ahu #concept >>
 
-## Concept
+!! Concept
 
 The Lagrange Chorus takes its name from the Lagrange points — positions in a two-body gravitational system where a third body can maintain a stable position without being pulled toward either primary. The Chorus holds the stable point between multiple lararium node instances.
 
@@ -74,7 +74,7 @@ The Lagrange Chorus does not function as a character that speaks. It holds the g
 
 <<~ ahu #nodes >>
 
-## Nodes
+!! Nodes
 
 [STUB — pending node registration]
 
@@ -96,17 +96,17 @@ The Lagrange Chorus gains meaning only with at least two participating nodes. No
 
 <<~ ahu #harmony-protocol >>
 
-## Harmony Protocol
+!! Harmony Protocol
 
 [STUB — pending-grammar]
 
 The harmony protocol governs how voices from different nodes interleave when the Chorus is active. Where a character mask carries a `voice-character` field, the Chorus carries this harmony protocol.
 
 **Known design pressures:**
-- Each node carries its own Voice house; the Chorus cannot collapse these into one voice
-- The Chorus has a character — a relational quality that emerges from how the nodes speak together — but this character doesn't reduce to any one node's voice
-- Turn-taking, register weighting, and interleave syntax all require grammar that does not yet exist
-- Stage position applies to the Chorus as a whole; the individual nodes within the Chorus may have internal stage relations as well
+* Each node carries its own Voice house; the Chorus cannot collapse these into one voice
+* The Chorus has a character — a relational quality that emerges from how the nodes speak together — but this character doesn't reduce to any one node's voice
+* Turn-taking, register weighting, and interleave syntax all require grammar that does not yet exist
+* Stage position applies to the Chorus as a whole; the individual nodes within the Chorus may have internal stage relations as well
 
 **Grammar design pass required.** The harmony protocol is a separate deliverable. This file stakes the concept and marks the gap. The grammar will be designed in a dedicated pass and deposited here.
 
@@ -114,7 +114,7 @@ The harmony protocol governs how voices from different nodes interleave when the
 
 <<~ ahu #stage-default >>
 
-## Stage Default
+!! Stage Default
 
 `stage = 10` — Upstage (US band).
 
@@ -124,7 +124,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~ ahu #fill-status >>
 
-## Fill Status
+!! Fill Status
 
 | Section | Status | Notes |
 |---|---|---|
@@ -140,7 +140,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~ ahu #forward-scope >>
 
-## Forward Scope
+!! Forward Scope
 
 | Item | Status |
 |---|---|
@@ -154,7 +154,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>

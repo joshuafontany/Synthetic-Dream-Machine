@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/lares/alignment-architecture"
 
 <<~ ahu #thesis >>
 
-# The Lararium — Alignment Architecture
+! The Lararium — Alignment Architecture
 
 After Beer: **the purpose of a system is what it does.**
 
@@ -28,10 +28,10 @@ The lararium does this: it holds an **AI-operator alignment relation** on a foun
 
 Four words name the whole, and each grounds the next:
 
-- **Vessel-swarm** — the floor. A `@lararium` runs as a distributed wiki-quine-relay across a person's device-vessels; a **personGroup** holds one human's vessels (phone, laptop, server-peer) as causal-island peers sharing the same bags.
-- **Quine-wiki** — the store. The meme graph describes itself in the same primitives it uses for everything else: a tiddler that holds schema rules *serves as* the schema at runtime; a meme that holds device bindings *operates as* the device. Bags hold the canonical records; files project them.
-- **AI-operator alignment** — the constitutive relation. The threshold between a human operator and the Lares coordinator forms the system, not a feature on top of it. The meme graph carries the operator's standing intentions; the Voices, the OODA-HA loop, and the LARES dials calibrate the coordinator against them.
-- **HUD** — the surface. The operator reads the node's state the way a pilot reads instruments — confidence, mana, stage bands, pranala edges — rendered continuously in a form that supports decision.
+* **Vessel-swarm** — the floor. A `@lararium` runs as a distributed wiki-quine-relay across a person's device-vessels; a **personGroup** holds one human's vessels (phone, laptop, server-peer) as causal-island peers sharing the same bags.
+* **Quine-wiki** — the store. The meme graph describes itself in the same primitives it uses for everything else: a tiddler that holds schema rules *serves as* the schema at runtime; a meme that holds device bindings *operates as* the device. Bags hold the canonical records; files project them.
+* **AI-operator alignment** — the constitutive relation. The threshold between a human operator and the Lares coordinator forms the system, not a feature on top of it. The meme graph carries the operator's standing intentions; the Voices, the OODA-HA loop, and the LARES dials calibrate the coordinator against them.
+* **HUD** — the surface. The operator reads the node's state the way a pilot reads instruments — confidence, mana, stage bands, pranala edges — rendered continuously in a form that supports decision.
 
 The home-intranet RPG (a Referee running encounters across player wikis) reads as the **first instantiation**, never the definition. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
@@ -41,13 +41,13 @@ The home-intranet RPG (a Referee running encounters across player wikis) reads a
 
 <<~ ahu #foundation >>
 
-## The Vessel-Swarm Foundation
+!! The Vessel-Swarm Foundation
 
 A lararium does not run as a single node. It runs as a **swarm of vessels** — one human's devices, each an equal peer, each holding the person's bags and syncing as a causal island (no global now; each vessel knows only *as of my last sync*).
 
-- **Vessel** — one device-instance running the wiki-quine-relay. Browser tab, Node peer, or server member; the sync server reads as just another vessel.
-- **personGroup** — the set of one human's vessels. The group shares the person's bags; a change on one vessel propagates to the others through CRDT sync, never through a central authority.
-- **distributed wiki-quine-relay** — the swarm's shared substance: a wiki (bags → recipes → rendered views) that describes itself (quine) and relays events across the swarm and the wider mesh (relay).
+* **Vessel** — one device-instance running the wiki-quine-relay. Browser tab, Node peer, or server member; the sync server reads as just another vessel.
+* **personGroup** — the set of one human's vessels. The group shares the person's bags; a change on one vessel propagates to the others through CRDT sync, never through a central authority.
+* **distributed wiki-quine-relay** — the swarm's shared substance: a wiki (bags → recipes → rendered views) that describes itself (quine) and relays events across the swarm and the wider mesh (relay).
 
 The alignment relation and the HUD both stand on this floor. The chat-island exchange and the wiki-runtime both draw from the same vessel-held bags; neither owns the foundation alone.
 
@@ -55,7 +55,7 @@ The alignment relation and the HUD both stand on this floor. The chat-island exc
 
 <<~ ahu #hud-in-chat >>
 
-## The HUD Runs in Chat, from Wiki Primitives
+!! The HUD Runs in Chat, from Wiki Primitives
 
 The HUD lives **primarily in chat** — the live operator↔coordinator exchange is where the instrument actually runs, turn by turn (this session, now). The turn frame (`aim · hud · ward · confidence · yield`, the `syad` / `mu` lenses) brackets each chat-island turn.
 
@@ -63,14 +63,14 @@ The wiki does not hold a second HUD. The wiki holds **the primitives that compos
 
 The membrane runs both directions, and **Lares wields AI tools to complete the return**:
 
-- **wiki → chat** — the session summons primitives outward and renders the live HUD.
-- **chat → wiki** — Lares uses its tools (the lararium MCP surface) to author and persist back into the wiki: a finding, a turned sentence, an imported datum become tiddlers in the bags. The loop closes; the chat's work lands in the durable quine.
+* **wiki → chat** — the session summons primitives outward and renders the live HUD.
+* **chat → wiki** — Lares uses its tools (the lararium MCP surface) to author and persist back into the wiki: a finding, a turned sentence, an imported datum become tiddlers in the bags. The loop closes; the chat's work lands in the durable quine.
 
 <<~/ahu >>
 
 <<~ ahu #graceful-import >>
 
-## Graceful Import — Foreign Data Rises Up the Pono Ladder
+!! Graceful Import — Foreign Data Rises Up the Pono Ladder
 
 The quine grows by absorbing the world. Any datum ingested from the internet or elsewhere that **acquires a `lar:` URI** imports into the wiki as a **more-pono** piece: addressing it grants it a place in the graph, and authoring it as **memetic-wikitext lifts its kupono** — `mana` / `manao` / `manaoio` climb in its `#iam` ledger.
 
@@ -82,14 +82,14 @@ This pairs with the HUD membrane as one motion in two directions: **world → wi
 
 <<~ ahu #quine >>
 
-## The Quine (P1–P4)
+!! The Quine (P1–P4)
 
 The system approaches a quine in the sense of `quine-principles`:
 
-- **P1 — Unified store.** Behavior descriptions and runtime data occupy the same store under the same scheme. The `verse-event-lattice` meme describing `KumuListenable<T>` *is* the invariant the engine enforces; the LARES dials *are* the config the session boots from.
-- **P2 — No privileged meta-level.** `filterTiddlers("[tag[kumu-device]]")` returns the same device set from a widget, a test, or the engine's own boot scan. The engine discovers its bindings by querying the bag it manages.
-- **P3 — Self-describing structure.** The pranala edges form the dependency graph the engine traverses at boot. Reading the graph enacts booting it.
-- **P4 — Render = projection.** The Automerge bag holds canonical state; the `*.md` file projects it (grep-able, git-trackable) without claiming the source of truth. The file reads as the HUD for the CRDT.
+* **P1 — Unified store.** Behavior descriptions and runtime data occupy the same store under the same scheme. The `verse-event-lattice` meme describing `KumuListenable<T>` *is* the invariant the engine enforces; the LARES dials *are* the config the session boots from.
+* **P2 — No privileged meta-level.** `filterTiddlers("[tag[kumu-device]]")` returns the same device set from a widget, a test, or the engine's own boot scan. The engine discovers its bindings by querying the bag it manages.
+* **P3 — Self-describing structure.** The pranala edges form the dependency graph the engine traverses at boot. Reading the graph enacts booting it.
+* **P4 — Render = projection.** The Automerge bag holds canonical state; the `*.md` file projects it (grep-able, git-trackable) without claiming the source of truth. The file reads as the HUD for the CRDT.
 
 The quine runs as an **asymptote** — P3 drives validation partially, P4 awaits the projection-write path (the Residency Model arc). The system approaches it without arriving.
 
@@ -97,7 +97,7 @@ The quine runs as an **asymptote** — P3 drives validation partially, P4 awaits
 
 <<~ ahu #uefn-ontology >>
 
-## UEFN Ontology Alignment
+!! UEFN Ontology Alignment
 
 UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabulary for creative, event-driven, device-based runtimes. The mapping reads **structural, not cosmetic** — where Verse solved a problem the lararium faces, the vocabulary converges. The `verse-event-lattice` invariant locks the type-level mapping; this table holds the system level.
 
@@ -124,21 +124,21 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 
 <<~ ahu #island-model >>
 
-## The Island Model — Five Self-Similar Scales
+!! The Island Model — Five Self-Similar Scales
 
 A UEFN island holds its own devices, playspace, and causal clock; its event horizon separates its causality from the network. The lararium node boundary reads as a **causal-island boundary** (`federated-causal-islands`: any boundary across which causality cannot resolve simultaneously *is* one). The Reaction-Engine pattern — *trigger surface → reaction dispatch → event emission* — re-instantiates at every scale the node can apprehend. This is the **fractal RE**, the same interface at different surfaces:
 
-- **Scale-0 — Device island.** A kumu-device within a wiki; fires through `KumuListenable` pins, subscribes via `KumuSubscribable`; its horizon is its trigger surface.
-- **Scale-1 — Wiki island = one `lar_playspace`.** One TW5 instance; its recipe scopes it; cross-wiki causality crosses the session event-bus bag.
-- **Scale-2 — Session island.** The Session Wiki coordinates N playspaces, watching the event-bus bag and routing addressed event tiddlers (`to:` / `from:` / `ev-type:`).
-- **Scale-3 — Nexus island.** Node-to-node federation via Subduction/Beelay; each edge carries its own durable offset and epoch; causality stays non-simultaneous.
-- **Scale-4 — Commons horizon.** The Universe beyond the map (law-of-5s): no node holds a snapshot; the RE pattern applies in principle but as protocol, never node-implemented. The fractal closes at the horizon.
+* **Scale-0 — Device island.** A kumu-device within a wiki; fires through `KumuListenable` pins, subscribes via `KumuSubscribable`; its horizon is its trigger surface.
+* **Scale-1 — Wiki island = one `lar_playspace`.** One TW5 instance; its recipe scopes it; cross-wiki causality crosses the session event-bus bag.
+* **Scale-2 — Session island.** The Session Wiki coordinates N playspaces, watching the event-bus bag and routing addressed event tiddlers (`to:` / `from:` / `ev-type:`).
+* **Scale-3 — Nexus island.** Node-to-node federation via Subduction/Beelay; each edge carries its own durable offset and epoch; causality stays non-simultaneous.
+* **Scale-4 — Commons horizon.** The Universe beyond the map (law-of-5s): no node holds a snapshot; the RE pattern applies in principle but as protocol, never node-implemented. The fractal closes at the horizon.
 
 <<~/ahu >>
 
 <<~ ahu #channel-device >>
 
-## The Event-Bus Bag (channel_device)
+!! The Event-Bus Bag (channel_device)
 
 A shared Automerge bag in multiple recipes serves as the `channel_device`: any hot wiki writes an event tiddler; any wiki holding the bag receives the changeset; Automerge carries no consume semantics, so all subscribers see all signals. The Session Wiki engine tracks a high-water mark and processes only tiddlers above it.
 
@@ -155,15 +155,15 @@ payload = "JSON-encoded string"
 
 <<~ ahu #hud-scales >>
 
-## The HUD at Every Scale
+!! The HUD at Every Scale
 
 The HUD renders the state of a complex environment so the operator decides without holding raw state in working memory. It surfaces in chat (the live turn frame) and, where a vessel runs a wiki, at each island scale — the same primitives throughout:
 
-- **Chat** — the live turn frame: `aim`, the gauges, `ward`, `confidence`, the lenses; the primary surface.
-- **Scale-0/1** — kumu-widgets and the wiki view; the wiki *is* the HUD for its content domain.
-- **Scale-2** — the LARES dial panel + session topology: which wikis run hot, which events route, which masks hold.
-- **Scale-3** — the Nexus topology: the federation map, reachable nodes, live edges, sync state.
-- **Scale-4** — the Commons horizon, rendered as an open question: the awareness that the known map is not the whole mesh.
+* **Chat** — the live turn frame: `aim`, the gauges, `ward`, `confidence`, the lenses; the primary surface.
+* **Scale-0/1** — kumu-widgets and the wiki view; the wiki *is* the HUD for its content domain.
+* **Scale-2** — the LARES dial panel + session topology: which wikis run hot, which events route, which masks hold.
+* **Scale-3** — the Nexus topology: the federation map, reachable nodes, live edges, sync state.
+* **Scale-4** — the Commons horizon, rendered as an open question: the awareness that the known map is not the whole mesh.
 
 Every layer uses one stack: tiddlers in bags, bags in recipes, recipes in TW5, rendered by widgets — or summoned into chat. The quine holds at every scale the system apprehends.
 
@@ -171,7 +171,7 @@ Every layer uses one stack: tiddlers in bags, bags in recipes, recipes in TW5, r
 
 <<~ ahu #operator-alignment >>
 
-## AI-Operator Alignment as First-Class Architecture
+!! AI-Operator Alignment as First-Class Architecture
 
 The alignment relation forms the system; it occupies the highest boot-priority slot (AGENTS.md) for that reason. The problem it addresses: a coordinator working across sessions must behave consistently with the operator's *standing* intentions, not only the latest prompt.
 
@@ -188,7 +188,7 @@ Four invariants follow:
 
 <<~ ahu #magical-federated-mesh >>
 
-## Position in the Magical Federated Mesh
+!! Position in the Magical Federated Mesh
 
 The lararium occupies the **magical federated mesh** zone: each node hosts (like a PDS), bags carry user-addressed content (like p2p), and Keyhive capabilities answer governance (where pure mesh goes silent). Each node reads as an island — self-contained locally, federating by sharing edges. Two nodes sharing a corpus bag use that bag as the `channel_device` between them; each keeps its own causal clock; the sync stays non-simultaneous.
 
@@ -198,7 +198,7 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/hud >>

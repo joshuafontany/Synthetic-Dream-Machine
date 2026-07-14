@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/lares/api/mu/pattern-integrity"
 
 <<~ ahu #head >>
 
-# Pattern Integrity
+! Pattern Integrity
 
 Buckminster Fuller's *Synergetics* supplies five structural principles that map directly
 onto Lararium's architecture. These function as operational invariants, not metaphors.
@@ -36,7 +36,7 @@ The lararium-island names the pattern. A specific peer, session, or filesystem p
 
 <<~ ahu #fpi-1-tensegrity >>
 
-## FPI-1 — Tensegrity: Continuous Tension, Discontinuous Compression
+!! FPI-1 — Tensegrity: Continuous Tension, Discontinuous Compression
 
 Structural stability lives in the **tension network**, not in any single compression member.
 Compression members remain isolated islands; tension provides the continuous system-spanning structure.
@@ -66,7 +66,7 @@ through the URI resolver, not by direct construction.
 
 <<~ ahu #fpi-2-wave >>
 
-## FPI-2 — Pattern Integrity: Wave, Not Water
+!! FPI-2 — Pattern Integrity: Wave, Not Water
 
 The pattern holds invariant; the instantiation remains transient and replaceable.
 
@@ -103,7 +103,7 @@ MUST serve as the only reference mechanism for content.
 
 <<~ ahu #fpi-3-synergy >>
 
-## FPI-3 — Synergy: Whole-System Behaviors
+!! FPI-3 — Synergy: Whole-System Behaviors
 
 "Behavior of whole systems unpredicted by the behavior of their parts taken separately."
 
@@ -111,11 +111,11 @@ Synergetic features emerge from system composition — absent from
 any single node in isolation.
 
 **Synergetic moves (correct):**
-- `VmDebugSurface` on every peer: cross-peer debugging appears because the surface is
+* `VmDebugSurface` on every peer: cross-peer debugging appears because the surface is
   composed at the mesh level, not inside any single node.
-- VmPool per realm: cross-realm sync behaviors (reading one wiki from a foreign realm
+* VmPool per realm: cross-realm sync behaviors (reading one wiki from a foreign realm
   as another VM in the pool) only exist when VMs compose across realm boundaries.
-- `ReactionEngine implements MemeProjection`: routing CRDT change events through the
+* `ReactionEngine implements MemeProjection`: routing CRDT change events through the
   reaction graph produces a whole-system property; neither the CRDT nor the graph alone carries it.
 
 **Violation pattern — part-optimization:**
@@ -129,7 +129,7 @@ arrive before platform-specific variants. The whole-system property comes first.
 
 <<~ ahu #fpi-4-ephemeralization >>
 
-## FPI-4 — Ephemeralization: Maximum Effect, Minimum Material
+!! FPI-4 — Ephemeralization: Maximum Effect, Minimum Material
 
 "Doing more with less" — the progressive dematerialization of technology.
 Applied to code: move logic from the external TypeScript layer into tiddlers.
@@ -159,7 +159,7 @@ tracking commitment.
 
 <<~ ahu #fpi-5-trimtab >>
 
-## FPI-5 — Trim Tab: Minimum Intervention, Maximum Redirect
+!! FPI-5 — Trim Tab: Minimum Intervention, Maximum Redirect
 
 A trim tab functions as a tiny rudder on the main rudder. Moving it redirects the ship with
 negligible force. Fuller's operating principle: find the control surface that redirects
@@ -171,10 +171,10 @@ Every design decision that routes content through `lar:` URIs instead of filesys
 paths or HTTP URLs makes the whole content graph redirectable by changing what
 `lar:` resolves to:
 
-- Today: local filesystem under `packages/lares-core/`
-- Sprint 6: Automerge DocHandle (CRDT store)
-- Sprint N: Beelay content-addressed store
-- Sprint N+k: IPLD CID-addressed tiddlers
+* Today: local filesystem under `packages/lares-core/`
+* Sprint 6: Automerge DocHandle (CRDT store)
+* Sprint N: Beelay content-addressed store
+* Sprint N+k: IPLD CID-addressed tiddlers
 
 No call sites change. Turn the trim tab (resolver); the ship follows.
 
@@ -198,7 +198,7 @@ the single control surface for all content routing decisions.
 
 <<~ ahu #alignment-check >>
 
-## Alignment Check
+!! Alignment Check
 
 Run this against any new code before merging:
 
@@ -214,7 +214,7 @@ Run this against any new code before merging:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>

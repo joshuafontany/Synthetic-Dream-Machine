@@ -23,23 +23,23 @@ type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/lares/api/pono/lar-uri/SKILL"
 ```
 
-# lar: URI Skill
+! lar: URI Skill
 
 [lar-uri.md](../lar-uri.md) holds the scheme law.
 This skill carries the working procedure.
 
 <<~ ahu #load-contract >>
 
-## Load Contract
+!! Load Contract
 
 Keep these points active when the skill loads:
 
-- the parent invariant defines scheme-law root
-- a slot holds one lowercase ASCII word — no hyphen, underscore, space, or non-ASCII
-- a stable/unstable path carries a full three-slot root; fewer than three slots fail
-- one `@`-bag at `child[1]` names a CRDT surface; deeper segments name tiddlers, never sub-bags
-- a `#fragment` names a section / `ahu` / pranala anchor only
-- the smallest lawful intervention beats a grand rewrite
+* the parent invariant defines scheme-law root
+* a slot holds one lowercase ASCII word — no hyphen, underscore, space, or non-ASCII
+* a stable/unstable path carries a full three-slot root; fewer than three slots fail
+* one `@`-bag at `child[1]` names a CRDT surface; deeper segments name tiddlers, never sub-bags
+* a `#fragment` names a section / `ahu` / pranala anchor only
+* the smallest lawful intervention beats a grand rewrite
 
 <<~/ahu >>
 
@@ -47,7 +47,7 @@ Keep these points active when the skill loads:
 
 <<~ ahu #workflow-contract >>
 
-## Workflow Contract
+!! Workflow Contract
 
 Use this skill for three common jobs:
 
@@ -65,27 +65,27 @@ Working order:
 
 Do not:
 
-- blur stable / unstable / adjacent path classes
-- place an `@`-bag outside `child[1]`
-- treat a `lar:` reference as a network-fetch instruction
-- let a session-form URI escape its exchange span into stable storage
+* blur stable / unstable / adjacent path classes
+* place an `@`-bag outside `child[1]`
+* treat a `lar:` reference as a network-fetch instruction
+* let a session-form URI escape its exchange span into stable storage
 
 <<~/ahu >>
 
 <<~ ahu #trigger >>
 
-## Trigger
+!! Trigger
 
 Use this skill when the request asks to:
 
-- write or repair a `lar:` address
-- validate addresses across a surface
-- audit path-class discipline, `@`-bag placement, or session-form scope
+* write or repair a `lar:` address
+* validate addresses across a surface
+* audit path-class discipline, `@`-bag placement, or session-form scope
 
 Prefer another surface when the work concerns:
 
-- the markup carried at the address (see the `memetic-wikitext` skill)
-- bag resolution wiring or runtime federation only
+* the markup carried at the address (see the `memetic-wikitext` skill)
+* bag resolution wiring or runtime federation only
 
 <<~/ahu >>
 
@@ -101,7 +101,7 @@ Prefer another surface when the work concerns:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri >>

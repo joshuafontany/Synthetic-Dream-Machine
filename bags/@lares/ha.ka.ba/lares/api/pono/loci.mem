@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loci"
 
 <<~ ahu #head >>
 
-# Loci
+! Loci
 
 The **mandatory component** — the one intrinsic every placed carrier holds, after the manner of the Scene Graph's default transform: *where this entity stands*. A carrier holds loci **by title** — the `lar:` address itself — never by tag; everything else composes through the has-stack.
 
@@ -28,8 +28,8 @@ A carrier holds `loci` when its `lar:` URI root segment matches `\w.\w.\w` and s
 
 Two l-space postures:
 
-- `lar:///ha.ka.ba/...` — stable origin; carriers sited on disk under `bags/`
-- all other `\w.\w.\w` roots — unstable session bearing; no disk siting (declared-unresolved until adopted into a bag)
+* `lar:///ha.ka.ba/...` — stable origin; carriers sited on disk under `bags/`
+* all other `\w.\w.\w` roots — unstable session bearing; no disk siting (declared-unresolved until adopted into a bag)
 
 Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
@@ -51,7 +51,7 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
 <<~ ahu #promotion-path >>
 
-## Promotion Path
+!! Promotion Path
 
 Five buckets mark the structural rating of a carrier (law-of-5s):
 
@@ -70,7 +70,7 @@ Promotion to lares/ canon (live session → branch commit → hostless URI) foll
 
 <<~ ahu #derivation-algorithm >>
 
-## Derivation Algorithm — siting
+!! Derivation Algorithm — siting
 
 Converts a (holding-bag, `lar:` URI) pair to its filepath — **the full-path-inside-bag ruling (2026-06-12, operator)**: directory = residency, interior path = the name, whole (`lar-uri #five-planes`). Any bag holds any name losslessly; the multi-bag crack closes. One root law: the repo IS the vessel; mirrors live under `bags/`.
 
@@ -109,7 +109,7 @@ Child items resolve under the sibling directory named for the parent's terminal 
 
 <<~ ahu #relative-names >>
 
-## Relative-Name Qualification — the second office
+!! Relative-Name Qualification — the second office
 
 The has-stack law (clause 2) delegates short-name resolution here: within a carrier whose title carries a `root/@bag/version` scope, a path-shaped tag qualifies by derivation — never by pointer or shim tiddler.
 
@@ -131,7 +131,7 @@ Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter ope
 
 <<~ ahu #file-path-convention >>
 
-## Stable File-Path Convention
+!! Stable File-Path Convention
 
 | carrier form | rule | example |
 |---|---|---|
@@ -141,7 +141,7 @@ Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter ope
 Any carrier outside this rule reads as repair pressure, not a second lawful siting convention.
 MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`bags/<sub-path>.md`); the operator's load→write wave migrates it — the projector now writes only the ruled form. The iam `file-path` field = a named dual-write of this derivable fact; it retires at the migration wave.
 
-### Live Examples
+!!! Live Examples
 
 | lar: URI | derived candidate | outcome |
 |---|---|---|
@@ -153,7 +153,7 @@ MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`b
 
 <<~ ahu #address-stability >>
 
-## Address Stability
+!! Address Stability
 
 A `lar:` URI counts as stable when:
 
@@ -172,7 +172,7 @@ A lawful meme MUST discharge residual uncertainty outward through its footer `..
 
 <<~ ahu #explicit-convention >>
 
-## Explicit Convention
+!! Explicit Convention
 
 Routing convention reads as explicit when an agent can point to the surfaces justifying current resolution and rating posture.
 
@@ -185,15 +185,15 @@ Convention surfaces:
 
 Convention fails when:
 
-- opener claims confirmed canon while address-stability conditions do not yet hold
-- meme presents high readiness while resolution depends on hidden heuristics
-- file-path evidence contradicts declared address, derived filepath, or promotion posture
+* opener claims confirmed canon while address-stability conditions do not yet hold
+* meme presents high readiness while resolution depends on hidden heuristics
+* file-path evidence contradicts declared address, derived filepath, or promotion posture
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>

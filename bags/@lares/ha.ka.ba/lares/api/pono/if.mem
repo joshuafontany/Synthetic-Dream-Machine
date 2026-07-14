@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/if"
 
 <<~ ahu #head >>
 
-# \if
+! \if
 
 English alias for `wai`, the wikispace conditional. See the canonical spec:
 

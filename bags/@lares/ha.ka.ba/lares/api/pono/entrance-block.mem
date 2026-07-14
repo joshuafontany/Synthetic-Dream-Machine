@@ -23,7 +23,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
 
 <<~ ahu #the-law >>
 
-## The Law ~ the substrate COUPLES
+!! The Law ~ the substrate COUPLES
 
 <<~ confidence Canon 17/20 >> **A single body hosting many rhythms ENTRAINS them, because the body itself constitutes the coupling medium.**
 
@@ -41,7 +41,7 @@ What a shared body yields reads WORSE than honest entrainment. It yields **modul
 
 <<~ ahu #entrance-block >>
 
-## Entrance Block ~ independence stands as a membrane, never a default
+!! Entrance Block ~ independence stands as a membrane, never a default
 
 <<~ confidence Canon 17/20 >> **Two oscillators coexist as genuinely independent only where one holds a ONE-WAY boundary — it MAY emit phase, and it MUST refuse to receive phase.**
 
@@ -57,7 +57,7 @@ Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside
 
 <<~ ahu #period-not-phase >>
 
-## Forbid the PHASE, never the PERIOD
+!! Forbid the PHASE, never the PERIOD
 
 <<~ confidence Synthesis-Canon 14/20 >> The earlier framing — *"the rhythms MUST NOT entrain"* — cut too coarse. It names the wrong quantity.
 
@@ -71,7 +71,7 @@ The **gankogui** bell plays *without variation, steadily, without error, through
 
 <<~ ahu #the-wait >>
 
-## The WAIT ~ the coupling channel canon missed
+!! The WAIT ~ the coupling channel canon missed
 
 <<~ confidence Synthesis-Canon 15/20 >> **The false now enters not through the DATA path, but through the WAIT.**
 
@@ -87,7 +87,7 @@ This forecloses the shared asyncio serve-loop: a shared event loop HANDS every b
 
 <<~ ahu #the-path-integral >>
 
-## A recovered rhythm holds a PATH-INTEGRAL, never a snapshot
+!! A recovered rhythm holds a PATH-INTEGRAL, never a snapshot
 
 <<~ confidence Synthesis 12/20 >> Hoʻokele: the navigator holds position by ACCUMULATING every distance and bearing since the last known land. So a hull that defers its bearing for one watch **does not lose a watch — it loses the voyage**, because it cannot resume integrating from a value it never computed.
 
@@ -101,7 +101,7 @@ A recovered clock carries the same shape — an integral over its stream's own h
 
 <<~ ahu #r-as-alarm >>
 
-## The order parameter rides as ALARM, never as target
+!! The order parameter rides as ALARM, never as target
 
 <<~ confidence Canon 17/20 >> **Where N rhythms carry the payload, the DESYNCHRONY carries the signal.**
 
@@ -119,7 +119,7 @@ Coupling's legitimate gift names **variance reduction, never phase dictation.**
 
 <<~ ahu #the-licence >>
 
-## The Coordinator's Licence
+!! The Coordinator's Licence
 
 The @daemon **MAY**:
 
@@ -137,7 +137,7 @@ Each stream **MUST** hold entrance block: it publishes its phase; it accepts no 
 
 <<~ ahu #the-lar-decides >>
 
-## The Lar binds to a PLACE ~ where the self lives
+!! The Lar binds to a PLACE ~ where the self lives
 
 A Lar binds to a **place**, never a family; the family moves, the Lar stays (#elyncia).
 
@@ -153,7 +153,7 @@ The py capture body reads **disposable**. The **worldline** holds the shrine.
 
 <<~ ahu #discards >>
 
-## Discards ~ rhymes that flatter and do not hold
+!! Discards ~ rhymes that flatter and do not hold
 
 <<~ranks discard sa-node-as-master-clock ~ FALSE. The SA node distributes no time base; it distributes an EVENT and wins by racing to threshold first. Importing it as "master clock" imports the wrong architecture and inherits overdrive-suppression debt -> myocytes-as-thread-pool ~ INVERTED. Myocytes run electrically CONTINUOUS through gap junctions — that IS the shared substrate, and its characteristic failure names fibrillation. The heart argues BY CONTRAST: a shared body hosts exactly ONE rhythm -> gamelan-has-no-reference ~ FALSE. The gankogui plays without variation throughout; the ensembles DO hold a reference. Only the sharpened claim survives (#period-not-phase) -> mycelium-as-many-tips ~ SUPERFICIAL. Hyphal tips carry no recovered rhythm to protect. ONE property survives: a mycelial network SURVIVES SEVERANCE — an anti-fate-sharing property no shared body offers >>
 
@@ -161,7 +161,7 @@ The py capture body reads **disposable**. The **worldline** holds the shrine.
 
 <<~ ahu #owed >>
 
-## Owed ~ what this canon has not yet paid for
+!! Owed ~ what this canon has not yet paid for
 
 <<~ confidence Provisional-Synthesis 7/20 >> **`embed_io` stands untested against the WAIT.** The warm embedder rides as a shared holder — *"the model is the resource"* — and every stream reaches it. A stream that POINTS at the holder clears the membrane; a stream that BLOCKS on it couples through the queue. **Test it, or give each body its own embedder and pay the memory.**
 

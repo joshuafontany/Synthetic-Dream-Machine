@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kukali"
 
 <<~ ahu #head >>
 
-# Kukali
+! Kukali
 
 *kūkali* — Hawaiian: to wait, patient, remaining in suspense.
 
@@ -44,7 +44,7 @@ Paired with papalohe — papalohe declares the wire; kukali declares the wait at
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A kukali MUST suspend execution of the enclosing causal island until the trigger fires.
 A kukali MUST resume exactly once when the named trigger activates (`subscribeOnce` semantics).
@@ -59,7 +59,7 @@ A kukali that cancels MUST reject its suspension Promise cleanly without leaking
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ kukali >>
@@ -76,7 +76,7 @@ Regex (canonical):
 /<<~\s*\\suspends(?:\s+trigger:([\w.-]+))?\s*>>/
 ```
 
-### Paired usage with papalohe
+!!! Paired usage with papalohe
 
 ```text
 <<~ papalohe #on-score DeviceA -> ScoreDisplay trigger:OnEliminated fn:Show >>
@@ -92,7 +92,7 @@ Regex (canonical):
 
 <<~ ahu #verse-analogy >>
 
-## Verse Analogy
+!! Verse Analogy
 
 Verse `suspends` coroutine:
 
@@ -103,15 +103,15 @@ OnEliminated<override>()<suspends> : void =
 ```
 
 Kukali maps this into memetic-wikitext:
-- `<suspends>` annotation → `<<~ kukali trigger:slot-name >>`
-- Coroutine yield point → kukali sigil position in the carrier body
-- Resume on event → papalohe trigger fires; ReactionGraph resolves the subscribeOnce Promise
+* `<suspends>` annotation → `<<~ kukali trigger:slot-name >>`
+* Coroutine yield point → kukali sigil position in the carrier body
+* Resume on event → papalohe trigger fires; ReactionGraph resolves the subscribeOnce Promise
 
 <<~/ahu >>
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for the kukali case in
 `packages/lararium-mesh/src/parser.ts` and `packages/lararium-tw5/src/tw5-widgets.ts`.
@@ -137,7 +137,7 @@ sigilName = "kukali"
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>

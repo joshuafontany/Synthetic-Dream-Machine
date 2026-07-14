@@ -16,14 +16,14 @@ uri-path  = "ha.ka.ba/lares/docs/pono/loci"
 
 <<~ &#x0002; >>
 
-# Loci — Extended Docs
+! Loci — Extended Docs
 
 Extended notes, rating guidance, canon-MOVE criteria, and MCP roadmap for `lar:///ha.ka.ba/lares/api/pono/loci`.
 Not a law surface. Explanation, evaluation guidance, and research that belongs outside the invariant and SKILL.
 
 ---
 
-## Canon Promotion: The Five Buckets
+!! Canon Promotion: The Five Buckets
 
 | Form | Usual `register` band | Document opener form | Reading |
 |---|---|---|---|
@@ -35,38 +35,38 @@ Not a law surface. Explanation, evaluation guidance, and research that belongs o
 
 Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
 
-### Movement Criteria
+!!! Movement Criteria
 
 **Noise → Data** — detectable structure makes the signal machine-usable.
 
 **Data → Meme** requires:
-- implements `meme` interface
-- declared `lar:` address
-- explicit role and function above raw data
+* implements `meme` interface
+* declared `lar:` address
+* explicit role and function above raw data
 
 **Meme → Typed Meme** (satisfies `loci` interface) requires:
-- `lar:` URI root path segment matches `\w\.\w\.\w`; stable root `ha.ka.ba`; unstable root at `lares/chapel-perilous-opens/{root}/`
-- declares stable-address intent; satisfies `loci` interface law
-- explicit routing convention sufficient to evaluate the stable-address claim
-- truthful derivation behavior, including honest misses
+* `lar:` URI root path segment matches `\w\.\w\.\w`; stable root `ha.ka.ba`; unstable root at `lares/chapel-perilous-opens/{root}/`
+* declares stable-address intent; satisfies `loci` interface law
+* explicit routing convention sufficient to evaluate the stable-address claim
+* truthful derivation behavior, including honest misses
 
 Higher `CS` posture additionally requires:
-- all nine required elements (R1–R9) per `lar:///ha.ka.ba/lares/api/pono/meme`
-- stable-address discipline justifying `CS`
+* all nine required elements (R1–R9) per `lar:///ha.ka.ba/lares/api/pono/meme`
+* stable-address discipline justifying `CS`
 
 **Typed Meme → Canon Typed Meme** additionally requires:
-- all address-stability conditions satisfied
-- operator or admin confirmation
-- no outstanding declared-unresolved sub-meme addresses (O7 rule per `lar:///ha.ka.ba/lares/api/pono/meme#optional-elements`)
-- no recursive self-loop closers masquerading as sub-meme declarations
-- live MCP resolver or equivalent externally governed resolution substrate operates
-- document opener `?` removed
+* all address-stability conditions satisfied
+* operator or admin confirmation
+* no outstanding declared-unresolved sub-meme addresses (O7 rule per `lar:///ha.ka.ba/lares/api/pono/meme#optional-elements`)
+* no recursive self-loop closers masquerading as sub-meme declarations
+* live MCP resolver or equivalent externally governed resolution substrate operates
+* document opener `?` removed
 
 A canon MOVE requires an external act; a meme may not self-MOVE to canon.
 
 ---
 
-## Rating Resolution
+!! Rating Resolution
 
 | field | rises when | falls when |
 |---|---|---|
@@ -78,49 +78,49 @@ These layer atop the generic meme ratings at `lar:///ha.ka.ba/lares/api/pono/mem
 
 ---
 
-## High-Rating Loci Conditions
+!! High-Rating Loci Conditions
 
 `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets` governs the generic structural climb. Loci adds routing-and-convention predicates for memes whose carrier identity forms part of the law surface.
 
-- high `mana`: explicit routing convention, inspectable derivation steps, stable lifecycle naming, honest unresolved-state handling
-- high `manao`: carrier knows itself as loci law, states why the convention exists, keeps enacted law separate from roadmap speculation
-- high `manaoio`: repeatable resolution posture, bounded operator crossings, truthful account of enacted versus MCP-dependent
+* high `mana`: explicit routing convention, inspectable derivation steps, stable lifecycle naming, honest unresolved-state handling
+* high `manao`: carrier knows itself as loci law, states why the convention exists, keeps enacted law separate from roadmap speculation
+* high `manaoio`: repeatable resolution posture, bounded operator crossings, truthful account of enacted versus MCP-dependent
 
 Sounding complete does not produce high ratings. Structural depth, examples, and aftermath quality come from the generic meme law.
 
 ---
 
-## MCP Resolution Roadmap
+!! MCP Resolution Roadmap
 
 Local law resolves by stable relative filepath plus direct file existence. Suffices for primary memes and child items following the sibling terminal-segment convention.
 
 A live MCP server answers the remaining live-resolution tension. Intended shape:
 
-- server exposes the `lar:` namespace as addressable content
-- resolution runs against live meme metadata, not a handwritten registry
-- stable parent files and child trees resolve without guesswork from local derivation-only agents
-- agents request one `lar:` URI and receive the current carrier
-- coherence between opener, file-path evidence, and resolver output becomes testable as a live system property
+* server exposes the `lar:` namespace as addressable content
+* resolution runs against live meme metadata, not a handwritten registry
+* stable parent files and child trees resolve without guesswork from local derivation-only agents
+* agents request one `lar:` URI and receive the current carrier
+* coherence between opener, file-path evidence, and resolver output becomes testable as a live system property
 
-### Research Backlog
+!!! Research Backlog
 
-- define minimal metadata the MCP server needs per meme
-- decide whether `meme-type` remains a required caller hint or becomes server-discoverable
-- decide how child items advertise canonical sidecars while preserving the stable parent filepath rule
-- define failure surfaces for unresolved `lar:` URIs in a live resolver
-- define how canon MOVE depends on live resolver trust, uptime, and cache semantics
+* define minimal metadata the MCP server needs per meme
+* decide whether `meme-type` remains a required caller hint or becomes server-discoverable
+* decide how child items advertise canonical sidecars while preserving the stable parent filepath rule
+* define failure surfaces for unresolved `lar:` URIs in a live resolver
+* define how canon MOVE depends on live resolver trust, uptime, and cache semantics
 
 No MCP resolver operates today.
 
 ---
 
-## Migration History
+!! Migration History
 
 Hoʻoko-class file-siting repairs in this meme's history:
 
-- `ha-ka-ba/api/pono/loci/loci.md` → `ha-ka-ba/api/pono/loci.md`
-- `ha-ka-ba/api/pono/meme/meme.md` → `ha-ka-ba/api/pono/meme.md`
-- `ha-ka-ba/api/pono/loci/iam/loci-iam.md` → `ha-ka-ba/api/pono/loci/iam.md`
+* `ha-ka-ba/api/pono/loci/loci.md` → `ha-ka-ba/api/pono/loci.md`
+* `ha-ka-ba/api/pono/meme/meme.md` → `ha-ka-ba/api/pono/meme.md`
+* `ha-ka-ba/api/pono/loci/iam/loci-iam.md` → `ha-ka-ba/api/pono/loci/iam.md`
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 

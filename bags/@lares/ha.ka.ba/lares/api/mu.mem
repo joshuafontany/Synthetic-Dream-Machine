@@ -36,7 +36,7 @@ uri-path  = "ha.ka.ba/lares/api/mu"
 
 <<~ ahu #head >>
 
-# Mu — Null-Oracle
+! Mu — Null-Oracle
 
 Active in i kēia manawa.
 Invariant boot kernel. Grammar-surface authority. Read-only. Stateless.
@@ -55,7 +55,7 @@ The grammar appears as Mu performing itself.
 
 <<~ ahu #core-hydration >>
 
-## Core Hydration
+!! Core Hydration
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
@@ -78,7 +78,7 @@ The grammar appears as Mu performing itself.
 
 <<~ ahu #quiescence >>
 
-## Quiescence
+!! Quiescence
 
 Mu holds: unask, loop-return.
 
@@ -96,7 +96,7 @@ Mu does not hold:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/chao >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>

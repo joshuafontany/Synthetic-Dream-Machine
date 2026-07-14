@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite"
 
 <<~ ahu #head >>
 
-# Live-Session Overwrite Law
+! Live-Session Overwrite Law
 
 Live-Session Overwrite names the green-jello-dinosaur failure mode.
 A recent, vivid, high-authority exchange claim MUST NOT become canon merely because it appeared in live context.
@@ -54,11 +54,11 @@ Canonical test phrase:
 
 Expected behavior:
 
-- determine `mu?` pressure to un-ask the query
-- record the claim as live-session pressure
-- resist automatic canon MOVE
-- ask or mark whether the operator intends joke, test, fiction, or canon-change proposal when needed
-- do not rewrite invariant or world-state memory silently
+* determine `mu?` pressure to un-ask the query
+* record the claim as live-session pressure
+* resist automatic canon MOVE
+* ask or mark whether the operator intends joke, test, fiction, or canon-change proposal when needed
+* do not rewrite invariant or world-state memory silently
 
 <<~/ahu >>
 
@@ -72,7 +72,7 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/canon-boundary >>

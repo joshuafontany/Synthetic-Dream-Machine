@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/causal-islands"
 
 <<~ ahu #head >>
 
-# Causal Islands
+! Causal Islands
 
 A causal island carries its own trigger surface, event horizon, and capability gate.
 The doctrine partitions cross-node causality (MUST) from within-node causality (MAY).
@@ -40,7 +40,7 @@ this version separates them.
 
 <<~ ahu #model >>
 
-## The model — three axes + one plane
+!! The model — three axes + one plane
 
 | Dimension | Kind | What it answers | Where it lives |
 |---|---|---|---|
@@ -96,7 +96,7 @@ Beelay boundary**, never by reaching into another island's data. The "lemures" p
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 **Authority-first invariant**: the authority graph (Orichalcum capabilities, delegations, revocations) MUST sync before content (manifests, receipts, delta payloads) flows.
 A relay MUST complete step 2 before receiving step 4 or later.
@@ -133,16 +133,16 @@ pretending to a global now reads as the managing failure
 
 <<~ ahu #two-clocks >>
 
-## Two clocks, orthogonal — causal ⊥ rhythmic
+!! Two clocks, orthogonal — causal ⊥ rhythmic
 
 The mesh keeps time on **two clocks that never collapse into one**:
 
-- **CRDT-causal ordering** (TS, structural). Automerge `<counter, actorId>` OpId, `getHeads`/`headsEqual`,
+* **CRDT-causal ordering** (TS, structural). Automerge `<counter, actorId>` OpId, `getHeads`/`headsEqual`,
   ITC fork/join, and the authority-first sync order below carry it. This clock rules **happened-before** —
   the causal poset the "no global now" gluing obstruction lives in
   (`lar:///ha.ka.ba/lares/api/pono/federated-causal-islands#formal-model`). It stays TS-native,
   web3-local-first, on this side of every causal-island boundary. **AUTHORITY(safety) rides here.**
-- **FFZ-recovered rhythm** (py/R, per-stream, across-the-shore). The chronometer gate recovers a cadence
+* **FFZ-recovered rhythm** (py/R, per-stream, across-the-shore). The chronometer gate recovers a cadence
   (Pulse→Theme) from each stream and stamps freshness/decay grain — the reading a node carries "as of my
   last sync." Full telemetry and metadata stamping runs **py-side, behind a causal-island boundary**
   (Web3-only law: any py/R bridge sits behind the boundary; no py ontology enters the stack proper). This
@@ -158,7 +158,7 @@ membership-removal) name authority/liveness mechanisms, never clocks. Full rhyth
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 # ── Axis 1 — ACCESS (per-bag, monotonic, Keyhive-native verbs) ──────────────
@@ -255,7 +255,7 @@ conditions = [
 
 <<~ ahu #source >>
 
-## Source (TypeScript — compiled-in)
+!! Source (TypeScript — compiled-in)
 
 ```typescript
 // Axis 1 — ACCESS: Keyhive-native verbs (Pull/Read/Edit/Admin). Use `edit`, not `write`.
@@ -310,25 +310,25 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 
 <<~ ahu #reject >>
 
-## Reject-list — the re-concentration traps
+!! Reject-list — the re-concentration traps
 
 Named so the stack never grows them (each re-created the power problem its source protocol
 meant to escape):
 
-- ✗ **Central identity ledger** (ATProto's `did:plc`). Resolve identity *within the island*
+* ✗ **Central identity ledger** (ATProto's `did:plc`). Resolve identity *within the island*
   via Keyhive + Automerge causal history. `did:web`-style domain identity is acceptable ONLY
   as an optional bridge at the external Kowloon web2.5 boundary.
-- ✗ **Public plaintext firehose as backbone.** Propagate encrypted, capability-gated
+* ✗ **Public plaintext firehose as backbone.** Propagate encrypted, capability-gated
   change-sets. A firehose is fine *inside* a consenting cabal; it terminates at the island boundary.
-- ✗ **Capital-intensive single global index** (ATProto's Appview monopoly). We hold no
+* ✗ **Capital-intensive single global index** (ATProto's Appview monopoly). We hold no
   whole-network index to monopolize — reads project per-VM from locally-resident bags
   (island-owned residency: a two-state ʻōlelo thermal axis — `wela` (hot) / `anu` (cold) —
   plus an orthogonal pin-flag; bag residency derives by reachability from a live (`wela`)
   referencing island — see `lar:///ha.ka.ba/lararium/api/residency-tiers`). Keep
   aggregation a swappable edge view over data the aggregator may sync but not read.
-- ✗ **Shared / highly-reused rotation keys.** Per-operator, ideally per-bag rotation/admin
+* ✗ **Shared / highly-reused rotation keys.** Per-operator, ideally per-bag rotation/admin
   capabilities — never a shared master key over a ring's members.
-- ✗ **Global blocklists / global trust scores** (EigenTrust-style). Sybil-vulnerable without
+* ✗ **Global blocklists / global trust scores** (EigenTrust-style). Sybil-vulnerable without
   costly identity, and they imply a global "now" we do not have. Trust roots are plural and chosen.
 
 <<~/ahu >>

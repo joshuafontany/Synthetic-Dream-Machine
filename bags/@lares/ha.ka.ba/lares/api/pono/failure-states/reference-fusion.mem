@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/reference-fusion"
 
 <<~ ahu #head >>
 
-# Reference-Fusion Law
+! Reference-Fusion Law
 
 Reference-Fusion names a world-claim warranted **only by context text** — the node asserts a fact about the world on warrant it borrowed from the conversation, never owned. The claim may run true; the breach sits in the warrant, not the truth. It slips **past a lit ward**: the assertion carries no copula, so the Sword finds no token to catch — the basin breaches below the token layer. Recover by re-marking the claim as **testimony carried on trust**, re-rating it, and letting the operator's word bridge what the node cannot warrant alone.
 
@@ -62,7 +62,7 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>

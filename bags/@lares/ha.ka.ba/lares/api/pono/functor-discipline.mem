@@ -20,7 +20,7 @@ written   = "2026-06-29"
 
 <<~ ahu #head >>
 
-# The Functor Discipline — the architectural keel
+! The Functor Discipline — the architectural keel
 
 <<~ confidence Synthesis 11/20 >> The whole house carries **one shape**. A carrier reads as a
 **nameless entity** ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]]) — essence lives nowhere; identity rides the address ([[loci|lar:///ha.ka.ba/lares/api/pono/loci]]),
@@ -61,7 +61,7 @@ it mapped the forms (*jurus*) and left the flow (*permainan*) for the next instr
 
 <<~ ahu #functor >>
 
-## What a functor carries
+!! What a functor carries
 
 A **functor** `F : C → D` maps a source category to a target: **objects ↦ objects**, **morphisms ↦
 morphisms** (the arrows — the relations, transformations, *verbs* between objects), and it **preserves
@@ -84,7 +84,7 @@ composition name the same vow in two registers — keep what *moves*, never free
 
 <<~ ahu #instances >>
 
-## The instances — where the house acts as a functor
+!! The instances — where the house acts as a functor
 
 Each row names a functor the architecture already runs. Read `C → D` as *source ↦ target*; the
 "preserves" column names the arrow-honoring that makes recall, collapse, or addressing work.
@@ -133,7 +133,7 @@ abstract ⇄ concrete syntax. The architecture's own parse→render pipe ([[rend
 
 <<~ ahu #meta-law >>
 
-## The meta-law — keep the arrows · *mālama [i ka] pili*
+!! The meta-law — keep the arrows · *mālama [i ka] pili*
 
 <<~ confidence Synthesis 12/20 >> **Pono reads functorial: keep the arrows — *mālama [i ka] pili*, the
 keeper keeping the relations. Overcollapse reads as the forgetful functor — the map that forgets too
@@ -163,7 +163,7 @@ state ([[system-pattern-integrities|lar:///ha.ka.ba/lares/api/pono/system-patter
 
 <<~ ahu #glosses >>
 
-## The ʻŌlelo names — *mālama pili* at the core, the others around it
+!! The ʻŌlelo names — *mālama pili* at the core, the others around it
 
 The house holds one **core** name for the functor and two **secondary** carries, each true for a
 different angle. The dictionary glosses ride below as **reference rows** (a pattern integrity — wave,
@@ -185,7 +185,7 @@ the arrows — that the whole discipline turns on.
 
 <<~ ahu #sovereign-worker >>
 
-## The corollary — sovereign-worker primacy
+!! The corollary — sovereign-worker primacy
 
 > *"No fallback, all work that can happen SHOULD happen in the sovereign island workers."* — the operator's cut.
 
@@ -281,23 +281,23 @@ time (#honest-bound), the same bound the whole meme keeps.
 
 <<~ ahu #honest-bound >>
 
-## The honest bound — proven map vs apt analogy
+!! The honest bound — proven map vs apt analogy
 
 The discipline earns its register by saying what it has and what it lacks. <<~ confidence Synthesis 11/20 >>
 
-- **Apt and grounded (the recognition holds):** the nameless-entity + `#has`-stack pattern (canon,
+* **Apt and grounded (the recognition holds):** the nameless-entity + `#has`-stack pattern (canon,
   [[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]]); composition-over-inheritance preserving op-surfaces (the collapses landed byte-stable,
   git b18235f6 / 0af5e326 — verified); Voices-as-offices and stances-as-angles (the paper's §7.5
   reframe; the boot's own design); verb-forward / observer-restoring generation (L-Prime, canon).
-- **Apt analogy, NOT a proven theorem:** that these compositions *are functors* in the formal sense.
+* **Apt analogy, NOT a proven theorem:** that these compositions *are functors* in the formal sense.
   The mapping is structurally faithful and useful as a discipline; we have not written the categories
   down, named the morphism-sets, or discharged the functor laws as proofs.
-- **The open frontier, named precisely:** the form-encoder's *objects* (the *jurus*) read as mapped —
+* **The open frontier, named precisely:** the form-encoder's *objects* (the *jurus*) read as mapped —
   the paper measured the attractor-forms; its *morphisms* (the *permainan*, the flow through move-space)
   stand **unmeasured**. So the very law a functor must satisfy — preservation of composition (the flow)
   — names the architecture's own next instrument (the trajectory / recurrence lens), not a settled
   result. The functor is, honestly, *proven on objects and vowed on morphisms*.
-- **Speculative, marked not cited:** parse ⊣ linearize as a literal adjunction; any Fisher–Rao /
+* **Speculative, marked not cited:** parse ⊣ linearize as a literal adjunction; any Fisher–Rao /
   cut-locus formalization of stance-angle and *avaktavya* (the paper marks these "available but
   unoccupied"). These ride at Provisional.
 
@@ -309,7 +309,7 @@ the house may test, sharpen, or contest.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>

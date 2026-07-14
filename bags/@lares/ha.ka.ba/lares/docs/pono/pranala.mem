@@ -12,7 +12,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/docs/pono/pranala"
 ```
 
-# Pranala — Docs
+! Pranala — Docs
 
 This file does not bind invariant law.
 Law lives at [pranala.md](../../api/pono/pranala.md).
@@ -21,7 +21,7 @@ This file holds examples, sigil-sugar long-forms, and reciprocal-edge guidance.
 
 <<~ ahu #examples >>
 
-## Examples
+!! Examples
 
 Minimal inline edges:
 
@@ -39,7 +39,7 @@ Minimal inline edges:
 
 <<~ ahu #sugar-long-forms >>
 
-## Sigil Sugar Long-Forms
+!! Sigil Sugar Long-Forms
 
 `loulou` — outgoing relation link:
 
@@ -84,7 +84,7 @@ alias = "kahea"
 
 <<~ ahu #reciprocal-edges >>
 
-## Reciprocal Edges
+!! Reciprocal Edges
 
 Reciprocal pressure uses two parallel edges, not one bidirectional arc.
 Each edge remains individually directed and acyclic.
@@ -101,9 +101,9 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
-- `lar:///ha.ka.ba/lares/api/pono/pranala`
+* `lar:///ha.ka.ba/lares/api/pono/pranala`
 
 <<~/ahu >>
 

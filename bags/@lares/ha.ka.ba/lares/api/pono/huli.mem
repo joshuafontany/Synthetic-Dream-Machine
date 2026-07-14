@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/huli"
 
 <<~ ahu #head >>
 
-# Huli
+! Huli
 
 *huli* — Hawaiian: to turn, to reverse, to curl over. Primarily a directional motion —
 the body turns to face something. *Huli-huli* (the chicken dish) means repeatedly turned.
@@ -49,7 +49,7 @@ directed attention moving through the set.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A huli block MUST carry a TW5 filter expression as its first argument.
 A huli block MUST close with `<<~/ huli >>` (or `<<~/ \for >>`).
@@ -58,15 +58,15 @@ A huli block MUST NOT carry mode= — control flow has no projection posture.
 A huli block with an empty filter result MUST produce no output.
 
 Common filter forms:
-- `[all[tiddlers]tag[MyTag]]` — iterate all tiddlers with a tag
-- `[range[1,10]]` — iterate numbers 1 through 10
-- `[{!!items}splitTiddlerList[]]` — iterate a stored tiddler list field
+* `[all[tiddlers]tag[MyTag]]` — iterate all tiddlers with a tag
+* `[range[1,10]]` — iterate numbers 1 through 10
+* `[{!!items}splitTiddlerList[]]` — iterate a stored tiddler list field
 
 <<~/ahu >>
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 Hawaiian form:
 ```text
@@ -93,7 +93,7 @@ body template
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 sigil          = "huli"
@@ -112,7 +112,7 @@ close-pattern = '<<~\/huli\s*>>'
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>

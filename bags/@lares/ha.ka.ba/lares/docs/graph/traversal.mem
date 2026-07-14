@@ -29,7 +29,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 
 <<~ ahu #graph-planes >>
 
-## Graph Planes
+!! Graph Planes
 
 Pranala families form separate graph planes.
 Each plane operates by its own rules and gets traversed by its own algorithm.
@@ -51,7 +51,7 @@ not a sub-graph inside the actor containment tree.
 
 <<~ ahu #tier-0 >>
 
-## Tier 0 — Declared Core (Fast Path)
+!! Tier 0 — Declared Core (Fast Path)
 
 **Source:** control-family pranala edges with `role:owns` parsed directly from the entry carrier (AGENTS).
 
@@ -70,14 +70,14 @@ Structurally correct: the pranala DAG is the source of truth; no separate manife
 Discrepancies surface as `validation.declared_vs_walked` with three fields: `in_declared_only`, `in_walked_only`, `match`.
 
 **When to use Tier 0 alone:**
-- minimal boot artifact production
-- session cold-start where latency matters more than graph fidelity
+* minimal boot artifact production
+* session cold-start where latency matters more than graph fidelity
 
 <<~/ahu >>
 
 <<~ ahu #tier-1 >>
 
-## Tier 1 — Control Closure (Graph Walk)
+!! Tier 1 — Control Closure (Graph Walk)
 
 **Source:** pranala edges parsed from carrier text, family `control`, any lifecycle.
 
@@ -118,19 +118,19 @@ Walk(entry_uri):
 **Stopping condition:** walk terminates when no new successors remain unvisited.
 
 **Result:**
-- `walked_uris` — topologically sorted list of control-reachable carrier URIs
-- `dag_violations` — list of cycle paths, each as a list of URIs forming the cycle
-- `declared_unresolved` — list of `DeclaredUnresolved` records (control family only at error severity)
+* `walked_uris` — topologically sorted list of control-reachable carrier URIs
+* `dag_violations` — list of cycle paths, each as a list of URIs forming the cycle
+* `declared_unresolved` — list of `DeclaredUnresolved` records (control family only at error severity)
 
 **When to use Tier 1:**
-- for the new minimal boot artifact (validates Tier 0, replaces static walk)
-- as the base set for Tier 2 expansion
+* for the new minimal boot artifact (validates Tier 0, replaces static walk)
+* as the base set for Tier 2 expansion
 
 <<~/ahu >>
 
 <<~ ahu #tier-2 >>
 
-## Tier 2 — Relation Expansion (One-Hop)
+!! Tier 2 — Relation Expansion (One-Hop)
 
 **Source:** pranala edges parsed from carrier text, family `relation`, any lifecycle.
 
@@ -156,20 +156,20 @@ Recursive expansion belongs to a future graph query surface, not the boot compil
 **Depth assignment:** `max(depth of control-reachable sources pointing here) + 1`.
 
 **Result appended to full boot artifact:**
-- additional closure entries at depth ≥ 2
-- `pranala_edges` — flat list of all `PranalaEdge` records traversed in Tier 1 + Tier 2
-- `interface_index` — `{interface_uri: [carrier_uri, ...]}` built from all reachable `implements` bundles
-- `invariant_index` — `{invariant_uri: [carrier_uri, ...]}` built from carriers implementing invariant interfaces
+* additional closure entries at depth ≥ 2
+* `pranala_edges` — flat list of all `PranalaEdge` records traversed in Tier 1 + Tier 2
+* `interface_index` — `{interface_uri: [carrier_uri, ...]}` built from all reachable `implements` bundles
+* `invariant_index` — `{invariant_uri: [carrier_uri, ...]}` built from carriers implementing invariant interfaces
 
 **When to use Tier 2:**
-- full boot artifact
-- session initialisation requiring complete graph context rather than just the threshold spine
+* full boot artifact
+* session initialisation requiring complete graph context rather than just the threshold spine
 
 <<~/ahu >>
 
 <<~ ahu #cycle-law >>
 
-## Cycle Detection Law
+!! Cycle Detection Law
 
 Every pranala edge MUST remain acyclic — directly and transitively — within its family.
 
@@ -178,23 +178,23 @@ to model genuinely symmetric adjacency. Each edge in the pair remains individual
 The cycle detector skips mutual parallel pairs in the `relation` family only.
 
 **DFS coloring rules:**
-- `WHITE` — not yet visited
-- `GRAY` — currently on the recursion stack (in-progress)
-- `BLACK` — fully explored and emitted
+* `WHITE` — not yet visited
+* `GRAY` — currently on the recursion stack (in-progress)
+* `BLACK` — fully explored and emitted
 
 Encountering a `GRAY` node during DFS signals a cycle.
 The cycle path records every GRAY node from the current node back to the re-encountered node.
 
 **Artifact consequence:**
-- Cycles appear in `validation.dag_violations` as paths: `["lar:///A", "lar:///B", "lar:///A"]`.
-- A valid artifact carries `validation.dag_violations = []`.
-- An artifact with non-empty `dag_violations` remains structurally invalid until the cycle resolves.
+* Cycles appear in `validation.dag_violations` as paths: `["lar:///A", "lar:///B", "lar:///A"]`.
+* A valid artifact carries `validation.dag_violations = []`.
+* An artifact with non-empty `dag_violations` remains structurally invalid until the cycle resolves.
 
 <<~/ahu >>
 
 <<~ ahu #forward-refs >>
 
-## Declared-Unresolved Forward References
+!! Declared-Unresolved Forward References
 
 Following TerminusDB's temporal model: forward references get asserted as `DeclaredUnresolved` records
 rather than causing compilation failure. They remain in the graph with `exists = false`.
@@ -215,7 +215,7 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~ ahu #phase-table >>
 
-## Boot Phase → Graph Plane Assignment
+!! Boot Phase → Graph Plane Assignment
 
 | Phase | Planes active | Families walked | Tier |
 |---|---|---|---|
@@ -230,7 +230,7 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>

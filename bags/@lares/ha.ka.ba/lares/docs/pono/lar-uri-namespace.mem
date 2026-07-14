@@ -17,9 +17,9 @@ uri-path  = "ha.ka.ba/lares/docs/pono/lar-uri-namespace"
 
 <<~ &#x0002; >>
 
-# lar: URI Namespace Doctrine
+! lar: URI Namespace Doctrine
 
-## Authority Forms
+!! Authority Forms
 
 ```
 lar:///<path>          hostless  (three slashes, no authority component)
@@ -39,7 +39,7 @@ paths overlap.
 `lar://amorphousdream.com/ha.ka.ba/foo` are two different tiddlers even though
 `ha.ka.ba` appears in both. The authority prefix resolves the collision.
 
-## Deployment Domain Map
+!! Deployment Domain Map
 
 | Authority | Form | Use |
 |-----------|------|-----|
@@ -52,7 +52,7 @@ paths overlap.
 | `lar://amorphousdream.com/chapel.perilous.opens/...` | hostful | Cabal corpus: `chapel.perilous.opens` path — private shared namespace |
 | `lar://amorphousdream.net/...` | hostful | Cabal namespace alias |
 
-## Quine Sync Rule
+!! Quine Sync Rule
 
 **All `lar:` URI tiddlers (hostless and hostful) are heleuma sync candidates.**  
 **`$:/` tiddlers are NOT sync candidates — reserved strictly for TW5 core + TW5 plugins.**
@@ -71,7 +71,7 @@ The bag a tiddler lives in determines which Automerge doc it syncs through:
 | `draft` | wiki MemeStoreDoc (local) | any authority (draft-of-wiki tiddler) |
 | `projection` | in-memory only | derived, not persisted |
 
-## Agent-Qualified URIs (future)
+!! Agent-Qualified URIs (future)
 
 The `@agent` sigil is reserved for agent-scoped tiddlers:
 
@@ -85,7 +85,7 @@ domain's authority scope. Hostless agent-qualified URIs (`lar:///ha.ka.ba/lares/
 are the existing doctrine corpus pattern. Hostful agent-qualified URIs are for
 user-owned content within a domain.
 
-## URI Resolution Order
+!! URI Resolution Order
 
 ```
 1. Exact title match in CompositeStore (bag priority: room > corpus:* > system)
@@ -101,7 +101,7 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 <<~ &#x0004; -> ? >>
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/peer-coordination >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/identity-slot >>

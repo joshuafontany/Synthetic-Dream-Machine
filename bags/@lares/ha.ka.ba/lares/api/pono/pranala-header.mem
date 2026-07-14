@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 
 <<~ ahu #head >>
 
-# Pranala-Header
+! Pranala-Header
 
 The carrier self-declaration sigil. `<<~ ? -> uri >>` appears at the top of a meme file and
 declares the canonical URI that this carrier holds. The `?` token means "this carrier itself" —
@@ -45,7 +45,7 @@ Permanent JS exception: the `?` token and its `->` arrow require dedicated parse
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A pranala-header MUST appear exactly once per meme, adjacent to the iam TOML block.
 A pranala-header MUST carry a `lar:///` URI.
@@ -57,7 +57,7 @@ A pranala-header's `?` token is reserved — MUST NOT be used as a sigil name el
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ ? -> lar:///ha.ka.ba/path/to/this-meme >>
@@ -73,7 +73,7 @@ Groups: `[full, canonical-uri]`
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 sigil          = "pranala-header"
@@ -91,7 +91,7 @@ uri = 1
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~/ahu >>
 

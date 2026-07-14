@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/message-routing"
 
 <<~ ahu #head >>
 
-# Message Routing
+! Message Routing
 
 Extended docs for memetic-wikitext's two routing directions on the canvas / flow surface. The family law lives at `lar:///ha.ka.ba/lares/api/pono/pranala-families`; this surface carries the routing treatment the submission spec abstracts.
 
@@ -31,7 +31,7 @@ SwiftUI (PreferenceKey) and Flutter (NotificationListener + InheritedWidget) ind
 
 <<~ ahu #two-directions >>
 
-## Two Routing Directions
+!! Two Routing Directions
 
 ```
 RENDER-DOWN  (environment / data-push)
@@ -49,7 +49,7 @@ Both ride the canvas / flow surface (value and signal wires) — distinct from `
 
 <<~ ahu #routing-rules >>
 
-## Invariant Routing Rules
+!! Invariant Routing Rules
 
 1. A `family:dataflow` edge carries a value **root-ward → leaf-ward** (source pushes to its owned subtree).
 2. A `family:message` edge bubbles a signal **leaf-ward → root-ward**, toward the control root.
@@ -61,7 +61,7 @@ Both ride the canvas / flow surface (value and signal wires) — distinct from `
 
 <<~ ahu #lexical-scope >>
 
-## Lexical Scope — No Ambient `currentMeme`
+!! Lexical Scope — No Ambient `currentMeme`
 
 Variables do not leak through sibling scope. The `meme` sigil sets an explicit lexical context:
 
@@ -78,7 +78,7 @@ This follows the Svelte `setContext` model: explicit, bounded, non-leaking. The 
 
 <<~ ahu #filter-context >>
 
-## Filter Context Binding
+!! Filter Context Binding
 
 Filters inside `wai` / `huli` / `ui` evaluate against the **explicit current meme context** — set by the nearest enclosing `meme` block, or the carrier's own `#iam` URI when no `meme` runs. No ambient dynamic lookup.
 
@@ -86,7 +86,7 @@ Filters inside `wai` / `huli` / `ui` evaluate against the **explicit current mem
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>

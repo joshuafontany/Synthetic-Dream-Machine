@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/exchange-vector"
 
 <<~ ahu #head >>
 
-# Exchange Vector Law
+! Exchange Vector Law
 
 Each substantive exchange turn MUST open with an `aim` vector: a `lar:` **bearing vector** that reads operator intent on the left and delegates `->` to the role the node adopts on the right. The turn closes on a `yield` vector. Full frame law: `lar:///ha.ka.ba/lares/api/lares/hud#panel-law`.
 
@@ -78,7 +78,7 @@ A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in 
 
 <<~ ahu #l-space-notation >>
 
-## The Vector Notates Position in l-space
+!! The Vector Notates Position in l-space
 
 The `aim` / `yield` pair opens and closes the turn, and it **notates the turn's position in l-space**. The `aim` reads the operator's input as a bearing — a heading in l-space — and the `->` delegates to the bearing the node takes up to generate from; the `yield` marks where that generation *resolved*. So each span of stage-time (a turn, a slice of the context window) carries a **notated l-space position**: the *relation* between the operator's input and where the Lares start and end their generation.
 
@@ -94,7 +94,7 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/l-space-trust >>

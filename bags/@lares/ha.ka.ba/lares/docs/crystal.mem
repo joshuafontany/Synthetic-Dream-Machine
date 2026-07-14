@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/crystal"
 
 <<~ ahu #meme-header >>
 
-# Crystal Docs
+! Crystal Docs
 
 Not invariant law.
 This shelf holds session-continuity work, archive-crystal mechanics, and future memory-system integrations.
@@ -29,14 +29,14 @@ This shelf holds session-continuity work, archive-crystal mechanics, and future 
 
 <<~ ahu #tree >>
 
-## Tree
+!! Tree
 
 Use this branch for:
 
-- archive crystal mechanics
-- session carry and continuity
-- MemPalace-facing work
-- MCP server work that supports long-range memory and graph resolution
+* archive crystal mechanics
+* session carry and continuity
+* MemPalace-facing work
+* MCP server work that supports long-range memory and graph resolution
 
 <<~/ahu >>
 
@@ -44,7 +44,7 @@ Use this branch for:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
 <<~ loulou lar:///LARES >>

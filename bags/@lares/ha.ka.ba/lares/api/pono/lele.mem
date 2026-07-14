@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/lele"
 
 <<~ ahu #head >>
 
-# Lele
+! Lele
 
 *lele* — Hawaiian: to fly, jump, leap; to move quickly; to pass over. Used in *lele kawa* (cliff
 diving). The motion commits to the leap, starts a side flow, and continues forward without waiting.
@@ -35,7 +35,7 @@ Grammar only --- the fire-and-continue execution runtime awaits the async-first 
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A lele edge MUST carry a target URI as its first argument.
 A lele edge MUST emit a message-family pranala and continue without blocking.
@@ -47,7 +47,7 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ lele lar:///target/uri >>
@@ -58,7 +58,7 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-branch >>
 

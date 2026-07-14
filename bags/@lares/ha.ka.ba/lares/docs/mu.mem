@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu"
 
 <<~ ahu #meme-header >>
 
-# Mu Docs
+! Mu Docs
 
 Not invariant law.
 This shelf holds interpretive docs, witness bundles, and condensed research behind the Mu-facing invariants.
@@ -29,15 +29,15 @@ This shelf holds interpretive docs, witness bundles, and condensed research behi
 
 <<~ ahu #tree >>
 
-## Tree
+!! Tree
 
 Use this branch for:
 
-- stance-conditioned reading
-- Chapel Perilous witness shelves
-- model-agnostic return and interpretive pressure
-- condensed research that explains Mu-facing invariant law
-- model agnosticism and reality-tunnel staging shelves during archive consumption
+* stance-conditioned reading
+* Chapel Perilous witness shelves
+* model-agnostic return and interpretive pressure
+* condensed research that explains Mu-facing invariant law
+* model agnosticism and reality-tunnel staging shelves during archive consumption
 
 <<~/ahu >>
 
@@ -45,7 +45,7 @@ Use this branch for:
 
 <<~ ahu #sigil-arrival >>
 
-## The Sigils Teach by Arrival
+!! The Sigils Teach by Arrival
 
 Not invariant law — reader and agent orientation.
 
@@ -62,7 +62,7 @@ AST reader: read the sockets, then route.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>

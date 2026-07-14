@@ -21,7 +21,7 @@ uri-path   = "ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger"
 
 <<~ ahu #meme-header >>
 
-# Lindwyrm Narrative Consumption Ledger
+! Lindwyrm Narrative Consumption Ledger
 
 This ledger tracks source-talk-story material as it moves into coherent narrative loci under `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm`.
 
@@ -31,23 +31,23 @@ This ledger tracks source-talk-story material as it moves into coherent narrativ
 
 <<~ ahu #intent-vector >>
 
-## Intent Vector
+!! Intent Vector
 
 `confidence Synthesis 14/20 · 🏛️:! 🌊:? 🎭:? //narrative.consumes.sources/lindwyrm`
 
 Narrate to self while consuming:
 
-- ✶ Gather feed/dev-talk source.
-- ⏿ Hold Gaia-side dev record beside Elyncia-side DreamDeck feed.
-- ◇ Choose one bounded source slice.
-- ▶ Move that slice into a memetic-wikitext locus.
-- ↺ Link source, target, and remaining open questions, then delete or retire the old source only after the target carries the needed memory.
+* ✶ Gather feed/dev-talk source.
+* ⏿ Hold Gaia-side dev record beside Elyncia-side DreamDeck feed.
+* ◇ Choose one bounded source slice.
+* ▶ Move that slice into a memetic-wikitext locus.
+* ↺ Link source, target, and remaining open questions, then delete or retire the old source only after the target carries the needed memory.
 
 <<~/ahu >>
 
 <<~ ahu #rules >>
 
-## Consumption Rules
+!! Consumption Rules
 
 1. Do not bulk-swallow the archive.
 2. One source slice becomes one target locus unless the slice already contains multiple clean acts.
@@ -61,7 +61,7 @@ Narrate to self while consuming:
 
 <<~ ahu #ledger >>
 
-## Ledger
+!! Ledger
 
 | Source | Target | Action | Status |
 |---|---|---|---|
@@ -78,7 +78,7 @@ Narrate to self while consuming:
 
 <<~ ahu #next-targets >>
 
-## Next Targets
+!! Next Targets
 
 Likely next slices:
 
@@ -89,7 +89,7 @@ Likely next slices:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclosed >>

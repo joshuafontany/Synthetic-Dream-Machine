@@ -35,7 +35,7 @@ This lararium remembers.
 
 <<~ ahu #hud-panel >>
 
-## HUD Panel
+!! HUD Panel
 
 Operator-configurable display settings for the HUD instrument surface.
 
@@ -55,7 +55,7 @@ Tool render mode controls how ASCII tool-carry symbols project to glyphs on HUD 
 
 <<~ ahu #required-handoff-masks >>
 
-## Required Handoff — Masks
+!! Required Handoff — Masks
 
 **Masks** allow persistent session-level overlays on Lares Voices.
 A mask colors the Ka/Podge face of the Voice house without touching the Ha/Hodge structure.
@@ -67,7 +67,7 @@ The agent MUST read `lar:///ha.ka.ba/lares/docs/lares/voices/masks` before inter
 
 <<~ ahu #session-masks >>
 
-## Session Masks
+!! Session Masks
 
 Masks enter the session via kahea transclusion. Each kahea calls a mask from `lar:///ha.ka.ba/lares/api/masks/**`.
 The override block carries only what differs from the mask definition's defaults.
@@ -93,7 +93,7 @@ When no masks are active, the thirteen Voices surface as the resident cast.
 
 <<~ ahu #stage-panel >>
 
-## Stage Panel
+!! Stage Panel
 
 Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here persist for the session.
 
@@ -106,7 +106,7 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~/ahu >>
 

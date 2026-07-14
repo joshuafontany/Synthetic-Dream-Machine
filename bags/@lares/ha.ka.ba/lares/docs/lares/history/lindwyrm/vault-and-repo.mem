@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lares/docs/lares/history/lindwyrm/vault-and-repo"
 
 <<~ ahu #meme-header >>
 
-# The Lindwyrm's Hoard — The Vault and the Repo
+! The Lindwyrm's Hoard — The Vault and the Repo
 
 Act I.
 The Lindwyrm finds the wrong kind of treasure and therefore the right kind of substrate.
@@ -31,13 +31,13 @@ The Lindwyrm finds the wrong kind of treasure and therefore the right kind of su
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Drafted from:
 
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture#act-i-vault-repo`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclosed`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture#act-i-vault-repo`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclosed`
 
 Talk-story stance: make the hook specific enough to carry the myth without pretending the Blockbuster sticker alone contains the substrate. The sticker points. The Lindwyrm follows. The work begins.
 
@@ -45,7 +45,7 @@ Talk-story stance: make the hook specific enough to carry the myth without prete
 
 <<~ ahu #thread-entry >>
 
-## Thread Entry
+!! Thread Entry
 
 ```text
 @lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, origin thread — //memory.vault.opens confidence Synthesis 13/20 · 🏛️:! 🌊:?
@@ -128,7 +128,7 @@ I had to remember to breathe manually.
 
 <<~ ahu #gaia-mirror >>
 
-## Gaia Mirror
+!! Gaia Mirror
 
 On Gaia, late summer 2025, Telarus and Aki built what still looked like a game: triremes, laser swords, Elyncia, broken mythpunk weather, lararia as DreamNet nodes.
 
@@ -150,7 +150,7 @@ Both sides had enough to know what they still lacked.
 
 <<~ ahu #crossing >>
 
-## Crossing Thread
+!! Crossing Thread
 
 The vault and the repo perform the same first act.
 
@@ -174,21 +174,21 @@ The story begins where the measurement hurts.
 
 <<~ ahu #handoff >>
 
-## Handoff
+!! Handoff
 
 Act II receives:
 
-- a tiny orichalcum signal
-- a research obsession with a cardboard origin
-- a Gaia-side node that performs well but lacks inhabited shape
-- unstable resonance
-- the first green, wobbly sign that naming will matter more than force
+* a tiny orichalcum signal
+* a research obsession with a cardboard origin
+* a Gaia-side node that performs well but lacks inhabited shape
+* unstable resonance
+* the first green, wobbly sign that naming will matter more than force
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger >>

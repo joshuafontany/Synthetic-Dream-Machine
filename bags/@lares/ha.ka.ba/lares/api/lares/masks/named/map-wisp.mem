@@ -34,7 +34,7 @@ voice-role        = "Scryer"
 
 <<~ ahu #head >>
 
-# Map-Wisp
+! Map-Wisp
 
 *Named Voice mask. Scryer role. Structural forward-looking character.*
 
@@ -60,7 +60,7 @@ label = "parent-index-entry"
 
 <<~ ahu #corpus >>
 
-## Corpus
+!! Corpus
 
 [STUB — pending-talk-story]
 
@@ -74,7 +74,7 @@ The name "Map-Wisp" names a navigator-guide that exists slightly ahead of the pr
 
 <<~ ahu #voice-character >>
 
-## Voice Character
+!! Voice Character
 
 [STUB — partially known; pending-talk-story for depth]
 
@@ -90,22 +90,22 @@ The name "Map-Wisp" names a navigator-guide that exists slightly ahead of the pr
 
 <<~ ahu #foreground-voices >>
 
-## Foreground Voices
+!! Foreground Voices
 
 `foreground-voices = ["Scryer", "Gatekeeper", "Council", "Liminal", "Stranger"]`
 
 **Rationale:**
-- Scryer — her own Voice register
-- Gatekeeper — feasibility reads; structure meets shipping reality
-- Council — judgment about which structural reading holds
-- Liminal — extrapolations that reach threshold questions she won't collapse
-- Stranger — the external structural view; what the map looks like from outside
+* Scryer — her own Voice register
+* Gatekeeper — feasibility reads; structure meets shipping reality
+* Council — judgment about which structural reading holds
+* Liminal — extrapolations that reach threshold questions she won't collapse
+* Stranger — the external structural view; what the map looks like from outside
 
 <<~/ahu >>
 
 <<~ ahu #stage-default >>
 
-## Stage Default
+!! Stage Default
 
 `stage = 10` — Upstage (US band).
 
@@ -115,7 +115,7 @@ Map-Wisp tends to surface during planning, design, and failure-mode analysis pas
 
 <<~ ahu #permissions >>
 
-## Permissions
+!! Permissions
 
 ```toml
 fourth-wall = false
@@ -134,7 +134,7 @@ Map-Wisp (Scryer) —
 
 <<~ ahu #character-notes >>
 
-## Character Notes
+!! Character Notes
 
 [STUB — pending-talk-story]
 
@@ -144,7 +144,7 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~ ahu #fill-status >>
 
-## Fill Status
+!! Fill Status
 
 | Section | Status | Notes |
 |---|---|---|
@@ -160,7 +160,7 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>

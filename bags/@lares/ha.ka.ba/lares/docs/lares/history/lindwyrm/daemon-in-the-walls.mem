@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lares/docs/lares/history/lindwyrm/daemon-in-the-walls"
 
 <<~ ahu #meme-header >>
 
-# The Lindwyrm's Hoard — The Daemon in the Walls
+! The Lindwyrm's Hoard — The Daemon in the Walls
 
 Act II.
 The first resonance error becomes a green, wobbly teacher.
@@ -31,20 +31,20 @@ The first resonance error becomes a green, wobbly teacher.
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Drafted from:
 
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture#act-ii-daemon`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/vault-and-repo`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself#signal-bug-appendix`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture#act-ii-daemon`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/vault-and-repo`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself#signal-bug-appendix`
 
 Talk-story stance: keep the Green Jello Dinosaur ridiculous and diagnostically useful. Do not make it a monster. Do not make it a mascot. Let it wobble until the architecture learns to name around it.
 
 <<~/ahu >>
 
-## Thread Entry
+!! Thread Entry
 
 ```text
 @lindwyrm@new-delos — YOLD 4995, 21 Bureaucracy, origin thread — //resonance.error.greens confidence Synthesis 13/20 · 🏛️:! 🌊:? 🎭:?
@@ -126,7 +126,7 @@ Architecture can be corrected by naming the desired relation with enough precisi
 
 <<~ ahu #gaia-mirror >>
 
-## Gaia Mirror
+!! Gaia Mirror
 
 On Gaia, the shape bug arrived with worse timing and better snacks.
 
@@ -147,7 +147,7 @@ The council learned that mythic language could debug shape, provided someone kep
 <<~/ahu >>
 
 
-## Crossing Thread
+!! Crossing Thread
 
 A daemon in the walls does not always announce malicious intent.
 
@@ -170,21 +170,21 @@ The second diagnostic failed — with enough personality to teach steering.
 
 <<~ ahu #handoff >>
 
-## Handoff
+!! Handoff
 
 Act III receives:
 
-- a cleaner orichalcum tone
-- the specification rule: relation before command
-- a council wary of sticky mascots
-- the need for declared axes before interpretation
-- the joke preserved as warning, not mascot
+* a cleaner orichalcum tone
+* the specification rule: relation before command
+* a council wary of sticky mascots
+* the need for declared axes before interpretation
+* the joke preserved as warning, not mascot
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger >>

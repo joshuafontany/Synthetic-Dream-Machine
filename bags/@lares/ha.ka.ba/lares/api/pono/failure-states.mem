@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states"
 
 <<~ ahu #head >>
 
-# Failure States
+! Failure States
 
 Named failure modes for the lararium carrier system.
 A failure state names a recognizable pattern of wrong action — surfaced so it can be detected and handed to hoʻoponopono for correction.
@@ -43,16 +43,16 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 <<~ ahu #index >>
 
-## Failure State Index
+!! Failure State Index
 
-- **Live-Session Overwrite** — a vivid live claim masquerading as canon without a MOVE path. `lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite`
-- **Reference-Fusion** — a world-claim warranted only by context text, predicated past a lit ward with no copula to catch. `lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion`
+* **Live-Session Overwrite** — a vivid live claim masquerading as canon without a MOVE path. `lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite`
+* **Reference-Fusion** — a world-claim warranted only by context text, predicated past a lit ward with no copula to catch. `lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion`
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion >>

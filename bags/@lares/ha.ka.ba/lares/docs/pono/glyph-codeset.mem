@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/glyph-codeset"
 
 <<~ ahu #head >>
 
-# Glyph Codeset — Nine Categories
+! Glyph Codeset — Nine Categories
 
 Canonical reference for the memetic wikitext glyph set system.
 Nine non-overlapping Unicode ranges. Category identified by range check — O(1) per glyph.
@@ -32,7 +32,7 @@ The glyph set inside a sigil's opening bracket answers: WHO, WHAT PROTOCOL, WHAT
 
 <<~ ahu #category-table >>
 
-## Nine Categories
+!! Nine Categories
 
 ```
 CAT  RANGE              BLOCK                    ROLE
@@ -52,7 +52,7 @@ CAT  RANGE              BLOCK                    ROLE
 
 <<~ ahu #cat1-protocol >>
 
-## Category 1 — PROTOCOL (C0 Controls: &#0000;–&#0031;)
+!! Category 1 — PROTOCOL (C0 Controls: &#0000;–&#0031;)
 
 Transmission lifecycle, handshake, flow control, boundaries.
 
@@ -85,7 +85,7 @@ Validation: ≤1 lifecycle glyph (SOH|STX|ETX|EOT|ENQ|ACK|NAK); separators and m
 
 <<~ ahu #cat2-auxiliary >>
 
-## Category 2 — AUXILIARY (Combining Diacriticals: &#0768;–&#0879;)
+!! Category 2 — AUXILIARY (Combining Diacriticals: &#0768;–&#0879;)
 
 Modifying markers that apply to adjacent content. No limit; contradictory combinations produce a warning.
 
@@ -101,7 +101,7 @@ Modifying markers that apply to adjacent content. No limit; contradictory combin
 
 <<~ ahu #cat3-namespace >>
 
-## Category 3 — NAMESPACE (Devanagari: &#2304;–&#2431;)
+!! Category 3 — NAMESPACE (Devanagari: &#2304;–&#2431;)
 
 Authority tier markers. Combination uses intersection semantics (most restrictive applies).
 
@@ -125,7 +125,7 @@ Authority tier markers. Combination uses intersection semantics (most restrictiv
 
 <<~ ahu #cat4-scale >>
 
-## Category 4 — SCALE (Superscripts/Subscripts: &#8304;–&#8334;)
+!! Category 4 — SCALE (Superscripts/Subscripts: &#8304;–&#8334;)
 
 Maps onto the FFZ Chronometer's five scales. ≤1 scale glyph per sigil. See `lar:///ha.ka.ba/lares/docs/pono/law-of-5s` for the full three-projection unification.
 
@@ -143,7 +143,7 @@ The subscript index matches Chronometer slot position (rightmost=0/Action throug
 
 <<~ ahu #cat5-direction >>
 
-## Category 5 — DIRECTION (Arrows: &#8592;–&#8703;)
+!! Category 5 — DIRECTION (Arrows: &#8592;–&#8703;)
 
 ≤1 primary arrow (→←↔↕) per sigil.
 
@@ -162,7 +162,7 @@ The subscript index matches Chronometer slot position (rightmost=0/Action throug
 
 <<~ ahu #cat6-relation >>
 
-## Category 6 — RELATION (Math Operators: &#8704;–&#8959;)
+!! Category 6 — RELATION (Math Operators: &#8704;–&#8959;)
 
 No limit; compose naturally. The intersection operator (∩) reflects the UCAN glyph attenuation formula directly.
 
@@ -184,7 +184,7 @@ No limit; compose naturally. The intersection operator (∩) reflects the UCAN g
 
 <<~ ahu #cat7-technical >>
 
-## Category 7 — TECHNICAL (Miscellaneous Technical: &#8960;–&#9215;)
+!! Category 7 — TECHNICAL (Miscellaneous Technical: &#8960;–&#9215;)
 
 Context-dependent. No combinatorial limit defined.
 
@@ -199,7 +199,7 @@ Context-dependent. No combinatorial limit defined.
 
 <<~ ahu #cat9-semantic >>
 
-## Category 9 — SEMANTIC (Geometric + Misc Symbols: &#9632;–&#9983;)
+!! Category 9 — SEMANTIC (Geometric + Misc Symbols: &#9632;–&#9983;)
 
 **Geometric sub-block (state indicators):**
 ```
@@ -224,15 +224,15 @@ Context-dependent. No combinatorial limit defined.
 ```
 
 **Note on HUD sigils:** the FFZ Chronometer HUD sigils (✶◎◇■○) and scale sigils (🗺️⚙️🔍⚔️⚡) sit partly inside and partly outside the &#0000;–&#9999; range. The emoji-style scale sigils sit above U+FFFF. These function as display/HUD elements, not as glyph-set members. Three layers, three symbol sets, no collision:
-- Glyph set: Categories 1–9
-- Chronometer record: its own symbol set (O/Ø/D/A/Å)
-- HUD rendering: emoji
+* Glyph set: Categories 1–9
+* Chronometer record: its own symbol set (O/Ø/D/A/Å)
+* HUD rendering: emoji
 
 <<~/ahu >>
 
 <<~ ahu #ucan-attenuation >>
 
-## UCAN Attenuation Formula
+!! UCAN Attenuation Formula
 
 Inner sigils inherit their frame's glyph set by default. Attenuation applies per category:
 
@@ -244,15 +244,15 @@ effective(inner, frame) = {
 }
 ```
 
-- **Attenuate:** always valid (inner removes capabilities)
-- **Escalate:** never valid (inner cannot add; silently capped)
-- **Empty = inherit:** bare inner sigil gets full frame authority
+* **Attenuate:** always valid (inner removes capabilities)
+* **Escalate:** never valid (inner cannot add; silently capped)
+* **Empty = inherit:** bare inner sigil gets full frame authority
 
 <<~/ahu >>
 
 <<~ ahu #parsing >>
 
-## Parsing Pseudocode
+!! Parsing Pseudocode
 
 ```
 function categorize(cp):
@@ -303,7 +303,7 @@ run-mode:   permissive. Unknown glyphs → warning, treated as body.
 
 <<~ ahu #three-layer-encoding >>
 
-## W3C Three-Layer Encoding
+!! W3C Three-Layer Encoding
 
 ```
 LAYER        REPRESENTATION        CONTEXT
@@ -322,7 +322,7 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/law-of-5s >>

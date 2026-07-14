@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/orichalcum-capabilities"
 
 <<~ ahu #head >>
 
-# Orichalcum Capabilities
+! Orichalcum Capabilities
 
 UCAN-compatible capability proof with Lararium-native semantic caveats.
 Authority gate for wiki islands, edge islands, and canon MOVE.
@@ -40,7 +40,7 @@ Authority gate for wiki islands, edge islands, and canon MOVE.
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 An Orichalcum capability answers five questions:
 
@@ -58,7 +58,7 @@ Authority travels with the graph. Authority MUST hold in the graph, beyond crypt
 
 <<~ ahu #principal >>
 
-## Principal Shapes
+!! Principal Shapes
 
 ```toml
 [[principal_kinds]]
@@ -83,7 +83,7 @@ These are not the same object. Keep device identity below operator identity.
 
 <<~ ahu #ability-ladder >>
 
-## Ability Ladder
+!! Ability Ladder
 
 The ladder maps onto the **ACCESS axis** (Axis 1) of the [causal-islands](causal-islands.md)
 model — a 1:1 lexical mirror of Keyhive's native Access verbs.
@@ -125,13 +125,13 @@ federable-ratings = ["meme", "ano", "kapu"]
 
 <<~ ahu #caveats >>
 
-## Lararium Caveats
+!! Lararium Caveats
 
 Caveats are Lararium-native predicates evaluated at gate time.
 A capability with no caveats is a maximally permissive grant within its ability scope.
 Rating band names are Law-of-Fives structural buckets. Stage band carries a UX/rendering annotation only — it does NOT act as a capability gate condition.
 
-### Rating Caveat (structural quality — Law of Fives)
+!!! Rating Caveat (structural quality — Law of Fives)
 
 ```toml
 [[caveats]]
@@ -150,7 +150,7 @@ note    = """
 A carrier MUST reach `Meme` rating to federate.
 Noise and Data are node-local only.
 
-### Manaoio Caveat (believability weight)
+!!! Manaoio Caveat (believability weight)
 
 ```toml
 [[caveats]]
@@ -163,7 +163,7 @@ note    = """
 """
 ```
 
-### Scope and Boundary Caveats
+!!! Scope and Boundary Caveats
 
 ```toml
 [[caveats]]
@@ -191,7 +191,7 @@ type    = "epoch string"
 note    = "capability invalid after this epoch string; rolls with revocation"
 ```
 
-### Federation Defaults (operator-configurable per wiki recipe)
+!!! Federation Defaults (operator-configurable per wiki recipe)
 
 ```toml
 [federation_defaults]
@@ -212,7 +212,7 @@ min_manaoio_move     = 16
 
 <<~ ahu #gate-points >>
 
-## Capability Gate Points
+!! Capability Gate Points
 
 A capability MUST be evaluated at these transitions — not deferred:
 
@@ -233,7 +233,7 @@ Gate failures at steps 5–6 reject the operation and emit a refusal receipt.
 
 <<~ ahu #documents-as-groups >>
 
-## Documents as Groups
+!! Documents as Groups
 
 A wiki island, meme, recipe, or edge island
 MAY act as an authority-bearing group with its own access graph.
@@ -265,7 +265,7 @@ No global ACL owns these. Authority travels with the graph. Each object owns its
 
 <<~ ahu #ucan-posture >>
 
-## UCAN Posture
+!! UCAN Posture
 
 ```
 UCAN principles:        consume now

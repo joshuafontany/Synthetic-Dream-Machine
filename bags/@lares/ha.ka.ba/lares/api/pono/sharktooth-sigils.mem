@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/sharktooth-sigils"
 
 <<~ ahu #head >>
 
-# Sharktooth Sigils
+! Sharktooth Sigils
 
 English alias for `nihomano-sigils`. See canonical meme:
 
@@ -38,7 +38,7 @@ discovered sigil set.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>

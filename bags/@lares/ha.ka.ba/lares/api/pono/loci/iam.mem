@@ -14,7 +14,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/loci/iam"
 ```
 
-# IAM
+! IAM
 
 A self-describing, self-enacting law (kānāwai) for the root `#iam` metadata block.
 
@@ -40,7 +40,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 <<~ ahu #observe >>
 
-## Observe
+!! Observe
 
 Observe inventories `#iam` by work done.
 
@@ -48,11 +48,11 @@ Name where a field changes parse, routing, execution, or truth. Name where a fie
 
 The first collision cluster sits in flow:
 
-- `depends-on`
-- `requires`
-- `provides`
-- `receives-state`
-- `emits-state`
+* `depends-on`
+* `requires`
+* `provides`
+* `receives-state`
+* `emits-state`
 
 Observe should keep those distinct only while the block still teaches a real difference. Once two or more fields point at the same movement, the cluster begins to lie.
 
@@ -60,13 +60,13 @@ Observe should keep those distinct only while the block still teaches a real dif
 
 <<~ ahu #orient >>
 
-## Orient
+!! Orient
 
 Orient keeps the threefold split intact and sharp.
 
 <<~ ahu #surviving-field-set >>
 
-### Surviving Field Set
+!!! Surviving Field Set
 
 The reduced carrier shape:
 
@@ -82,22 +82,22 @@ These field lists govern here as law prose. Live carriers should not restate the
 
 <<~ ahu #ha-fields >>
 
-### Ha Fields
+!!! Ha Fields
 
 `ha` carries stable identity and the primary readiness/confidence rating posture.
 
 These fields should stay ordered and dense:
 
-- `name`
-- `file-path`
-- `description`
-- `content-type`
-- `version`
-- `manaoio`
-- `confidence`
-- `meme-type`
-- `register`
-- `structure`
+* `name`
+* `file-path`
+* `description`
+* `content-type`
+* `version`
+* `manaoio`
+* `confidence`
+* `meme-type`
+* `register`
+* `structure`
 
 Optional structural qualifiers may remain when they change routing or boot truth. `l-space` counts as such a qualifier in the current corpus.
 
@@ -105,14 +105,14 @@ Optional structural qualifiers may remain when they change routing or boot truth
 
 <<~ ahu #ka-fields >>
 
-### Ka Fields
+!!! Ka Fields
 
 `ka` carries local truth that does not belong in every carrier.
 
 The common core:
 
-- `role`
-- `function`
+* `role`
+* `function`
 
 Boilerplate that merely restates `#iam` as the metadata locus should not survive here.
 
@@ -120,15 +120,15 @@ Boilerplate that merely restates `#iam` as the metadata locus should not survive
 
 <<~ ahu #ba-fields >>
 
-### Ba Fields
+!!! Ba Fields
 
 `ba` names motion without residue.
 
 The surviving flow keys:
 
-- `input`
-- `output`
-- `depends-on`
+* `input`
+* `output`
+* `depends-on`
 
 `next` may remain only when a real forward edge exists in boot, handoff, or routing sequence.
 
@@ -138,18 +138,18 @@ The surviving flow keys:
 
 <<~ ahu #cut-and-merge-rule >>
 
-### Cut And Merge Rule
+!!! Cut And Merge Rule
 
 Top-level `#iam` should cut these keys from live carriers unless a later law re-justifies one with concrete work:
 
-- `canonical-metadata-locus`
-- `canonical-metadata-payload`
-- `product-identity`
-- `requires`
-- `provides`
-- `receives-state`
-- `emits-state`
-- `confidence-band`
+* `canonical-metadata-locus`
+* `canonical-metadata-payload`
+* `product-identity`
+* `requires`
+* `provides`
+* `receives-state`
+* `emits-state`
+* `confidence-band`
 
 Keep weakness visible while a carrier still sits short of full alignment. Do not widen the schema to hide that seam.
 
@@ -159,7 +159,7 @@ Keep weakness visible while a carrier still sits short of full alignment. Do not
 
 <<~ ahu #decide >>
 
-## Decide
+!! Decide
 
 Decide applies four verdicts to each field:
 
@@ -174,7 +174,7 @@ A field that changes no parse, routing, execution, or truth does not survive. A 
 
 <<~ ahu #act >>
 
-## Act
+!! Act
 
 Act rewrites live carriers conservatively.
 
@@ -192,23 +192,23 @@ The child law for `file-path` follows next because `file-path` carries the most 
 
 <<~ ahu #aftermath >>
 
-## Aftermath
+!! Aftermath
 
 A good `#iam` pass leaves fewer keys carrying more truth.
 
 Signs of gain:
 
-- less flow duplication
-- less metadata boilerplate
-- denser field meaning
-- clearer route and execution pressure
-- visible weakness where migration still remains open
+* less flow duplication
+* less metadata boilerplate
+* denser field meaning
+* clearer route and execution pressure
+* visible weakness where migration still remains open
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>

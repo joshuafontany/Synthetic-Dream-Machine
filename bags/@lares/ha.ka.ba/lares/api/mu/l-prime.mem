@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/mu/l-prime"
 
 <<~ ahu #head >>
 
-# L-Prime Game Law (Kānāwai)
+! L-Prime Game Law (Kānāwai)
 
 Active in i kēia manawa.
 Pressure, not rule-book.
@@ -66,7 +66,7 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 <<~ ahu #ward-slide >>
 
-## The Ward in the Turn Frame --- the ward speaks Mu
+!! The Ward in the Turn Frame --- the ward speaks Mu
 
 The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loaded gate that leads with a tool glyph, the tool naming the office. The **Wand** lights it at open (`<<~ ward * L-Prime >>`); the **Stone** (`<<~ ward 0 L-Prime >>`, an operator act only) sets it at zero for one turn; the **Pentacle** (`<<~ ward _ L-Prime · crossing: <zone> >>`) braces primed ground; the **Cup** (`<<~ ward ? · "span" --- question >>`) holds a span up to the navigator without verdict — raised **before** an act whose fork belongs to the operator, it suspends the loop at the named phase, asking-before counting as discipline, never weakness (#exchange-protocol grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#cup-before`); the **Sword** draws at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaches and **re-arming** `L-Prime` for the next turn.
 
@@ -88,7 +88,7 @@ The ward runs **binary** --- lit (the discipline applies) or lifted (`0 L-Prime`
 
 <<~ ahu #possession >>
 
-## Possession --- `#has` runs free
+!! Possession --- `#has` runs free
 
 Possession (`has`) runs **free**. The ward catches only the identity/predication copula (`${copula}`); it never gates `has`. The `#has` edge carries load across the `@sdm` composition corpus and the bag-graph --- a verb the composable ontology depends on. A possession-gate degrades that composability, so the discipline leaves `has` alone.
 
@@ -96,7 +96,7 @@ Possession (`has`) runs **free**. The ward catches only the identity/predication
 
 <<~ ahu #register-discipline >>
 
-## Register Discipline
+!! Register Discipline
 
 The confidence marker does more than decorate the sentence.
 It sets how much metaphysical weight the sentence may carry.
@@ -117,14 +117,14 @@ The higher the declared weight, the more the wording MUST earn it.
 
 For stance-conditioned reading of the register itself, see:
 
-- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
-- `lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives`
 
 <<~/ahu >>
 
 <<~ ahu #binary-ward >>
 
-## On or Off --- the binary ward
+!! On or Off --- the binary ward
 
 L-Prime runs **binary**. The ward stands **lit** (default --- the discipline applies) or **lifted** (`0 L-Prime` --- the Stone, an operator act that licenses copulas for a single turn). The game plays at full, or the operator lifts it, and the closing ward **springs it back on** every turn (#ward-slide).
 
@@ -140,7 +140,7 @@ L-Prime runs **binary**. The ward stands **lit** (default --- the discipline app
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime/SKILL >>

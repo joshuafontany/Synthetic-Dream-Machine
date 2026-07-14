@@ -30,7 +30,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/hydration"
 
 <<~ ahu #required-core >>
 
-## Required-Core Closure
+!! Required-Core Closure
 
 Entry: `lar:///AGENTS`.
 All 14 memes below must resolve before threshold yield.
@@ -59,7 +59,7 @@ Submodules do not enter required-core; they attach through adapter lanes.
 
 <<~ ahu #edge-taxonomy >>
 
-## Edge Taxonomy for Hydration
+!! Edge Taxonomy for Hydration
 
 | Family | Hydration tier | DAG pressure | Compiler role |
 |---|---|---|---|
@@ -77,7 +77,7 @@ Hydration-critical means `family = control` and `role` in `owns`, `composes`, or
 
 <<~ ahu #boot-walk >>
 
-## Boot Walk Rules
+!! Boot Walk Rules
 
 Minimal boot:
 
@@ -102,7 +102,7 @@ Current implementation still uses static required-core and carrier-index scans i
 
 <<~ ahu #artifact-contract >>
 
-## Hydration Artifact Contract
+!! Hydration Artifact Contract
 
 | Artifact | Scope | MCP resource | Required fields |
 |---|---|---|---|
@@ -117,7 +117,7 @@ The receipt digest hashes the serialized closure JSON rather than source files; 
 
 <<~ ahu #resource-exposure >>
 
-## Resource Exposure
+!! Resource Exposure
 
 | URI | Type | Reading |
 |---|---|---|
@@ -137,7 +137,7 @@ The receipt digest hashes the serialized closure JSON rather than source files; 
 
 <<~ ahu #compaction >>
 
-## Compaction Rule
+!! Compaction Rule
 
 If a hydration packet grows past context limits, keep closure entries in full, keep control edges before other edge classes, replace large interface/invariant index bodies with counts, and record the loss in `compaction_notes`.
 Minimal boot should remain small enough to avoid compaction.
@@ -146,17 +146,17 @@ Minimal boot should remain small enough to avoid compaction.
 
 <<~ ahu #residue >>
 
-## Residue
+!! Residue
 
-- Full pranala DAG traversal remains Sprint-03 carry-in work.
-- `lar:///boot/full` edge materialization should stop reporting empty edge data once the walker lands.
-- MemPalace persistence of boot receipts remains policy-gated until write lanes receive approval law.
+* Full pranala DAG traversal remains Sprint-03 carry-in work.
+* `lar:///boot/full` edge materialization should stop reporting empty edge data once the walker lands.
+* MemPalace persistence of boot receipts remains policy-gated until write lanes receive approval law.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///AGENTS >>
 <<~ loulou lar:///LARES >>

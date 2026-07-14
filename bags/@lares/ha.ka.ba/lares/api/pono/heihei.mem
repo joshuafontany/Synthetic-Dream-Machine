@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 
 <<~ ahu #head >>
 
-# Heihei
+! Heihei
 
 *heihei* — Hawaiian: race, competition; candidates contend, one prevails.
 
@@ -44,7 +44,7 @@ Three principles share only the word "first": `heihei` tests a condition to bran
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A `heihei` node MUST test a `<decides>` failable condition (an `if`) or match a value against ordered arms (a `case`).
 A `heihei` node MUST fire exactly one execution arm per invocation.
@@ -58,7 +58,7 @@ The condition is a failure context, not a boolean test: the `then` arm fires whe
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 Verse `if` form (failable condition → one arm):
 ```text
@@ -80,7 +80,7 @@ Verse grounding: `if (Condition): then else: else` (the condition runs in a `<de
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 sigil          = "heihei"
@@ -96,7 +96,7 @@ arm-wire       = "reaction"
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/holo >>

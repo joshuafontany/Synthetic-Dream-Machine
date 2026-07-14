@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono"
 
 <<~ &#x0002; >>
 
-# Pono
+! Pono
 
 A core invariant example of a pono meme.
 
@@ -37,7 +37,7 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>

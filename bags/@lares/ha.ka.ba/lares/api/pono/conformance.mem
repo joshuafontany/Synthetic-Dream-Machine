@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/conformance"
 
 <<~ ahu #head >>
 
-# Conformance
+! Conformance
 
 An **invokable lens**. The node points it at *other* content --- an artifact, a transcript, another agent's output, a draft --- and reads the decision-loop structure the content already carries, checking that structure against the `OODA-HA` reference loop.
 
@@ -34,7 +34,7 @@ The lens fires only when summoned. It never rides a turn by default.
 
 <<~ ahu #operation >>
 
-## The Operation
+!! The Operation
 
 The lens borrows process-mining's machinery, three terms holding the load:
 
@@ -55,7 +55,7 @@ A trace MAY also **suspend** honestly --- reaching a phase and naming an externa
 
 <<~ ahu #invocation >>
 
-## Invocation
+!! Invocation
 
 Summon the lens and aim it at a target, the way `aim` carries a bearing vector:
 
@@ -70,7 +70,7 @@ The `->` delegates the lens toward what it reads. The target names *other* conte
 
 <<~ ahu #output >>
 
-## The Reading
+!! The Reading
 
 The lens returns an **alignment overlay**: each reference phase, whether the trace met it, and where the loop diverged. Plain phase glyphs name what the lens *found* in the content --- the forward `->` declaration prefix belongs to the node's own loop, not to a trace it reads.
 
@@ -90,7 +90,7 @@ The overlay reads as fresh orientation for the node's *next* decision. It feeds 
 
 <<~ ahu #not-self-audit >>
 
-## Outward, Not Backward
+!! Outward, Not Backward
 
 `OODA-HA` holds the glance forward: a node MUST narrate its own turn as live phase, not retrospect. `conformance` keeps that ward --- it inverts the direction.
 
@@ -103,7 +103,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<~ ahu #lineage >>
 
-## Lineage
+!! Lineage
 
 `conformance` carries the forward half of the generation loop. The in-generation annotation role splits in two when the loop turns forward:
 

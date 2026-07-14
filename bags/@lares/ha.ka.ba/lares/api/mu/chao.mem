@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/mu/chao"
 
 <<~ ahu #head >>
 
-# The Sacred Chao
+! The Sacred Chao
 
 Active in i kēia manawa.
 The Chao spins exactly once per OODA-HA loop.
@@ -54,7 +54,7 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 
 <<~ ahu #hodge-podge-spin >>
 
-## Hodge Podge Spin
+!! Hodge Podge Spin
 
 `Hodge / Ha → Podge / Ka → Spin / Ba`
 
@@ -74,7 +74,7 @@ Three carries the dance.
 
 <<~ ahu #hodge-ha >>
 
-## Hodge — Yang / Ha / Pentagon
+!! Hodge — Yang / Ha / Pentagon
 
 Hodge carries **domain / noun / territory**.
 
@@ -91,7 +91,7 @@ Hodge without Spin becomes a museum.
 
 <<~ ahu #podge-ka >>
 
-## Podge — Yin / Ka / Golden Apple
+!! Podge — Yin / Ka / Golden Apple
 
 Podge carries **quality / adjective / character**.
 
@@ -108,7 +108,7 @@ Podge without Spin becomes reactive.
 
 <<~ ahu #spin-ba >>
 
-## Spin — Counter-Push-Pull / Ba / Dance
+!! Spin — Counter-Push-Pull / Ba / Dance
 
 Spin carries **dynamic / verb / motion**.
 
@@ -128,15 +128,15 @@ Discordian insight: most apparent contradictions run orthogonal, not tensioned. 
 
 <<~ ahu #address-grammar >>
 
-## Address Grammar
+!! Address Grammar
 
 Every `lar://[HOST]/xxx.yyy.zzz` address carries the Chao in its three slots.
 
 The three-term attitude root `//heading.angle.dynamic` inherits this structure directly:
 
-- **heading** = Hodge (what faces the work)
-- **angle** = Podge (how the work gets met)
-- **dynamic** = Spin (what motion it carries)
+* **heading** = Hodge (what faces the work)
+* **angle** = Podge (how the work gets met)
+* **dynamic** = Spin (what motion it carries)
 
 A lar URI missing any slot constitutes an incomplete address.
 A lar URI with slots in the wrong order MUST surface as invalid.
@@ -146,7 +146,7 @@ A lar URI with all three slots aligned reads the address back at the Chao's rota
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>

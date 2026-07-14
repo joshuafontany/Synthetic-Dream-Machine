@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono"
 
 <<~ ahu #meme-header >>
 
-# Pono Docs
+! Pono Docs
 
 Not invariant law.
 This shelf holds explanatory protocol docs, migration notes, and operator-facing reference surfaces behind the pono invariants.
@@ -29,14 +29,14 @@ This shelf holds explanatory protocol docs, migration notes, and operator-facing
 
 <<~ ahu #tree >>
 
-## Tree
+!! Tree
 
 Use this branch for:
 
-- protocol explanation
-- schema and grammar notes
-- migration history
-- operator-facing reference material that should not burden invariant cores
+* protocol explanation
+* schema and grammar notes
+* migration history
+* operator-facing reference material that should not burden invariant cores
 
 <<~/ahu >>
 
@@ -44,7 +44,7 @@ Use this branch for:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/loci >>

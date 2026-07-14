@@ -20,7 +20,7 @@ written   = "2026-06-12"
 
 <<~ ahu #head >>
 
-# Wire — the reified edge
+! Wire — the reified edge
 
 A relation rich enough to *do* something — carry a value, route a message, gate execution, hold a constraint, watch a surface — reifies as its **own entity** (has-stack clause 7): a `lar:` addressed record with `from` and `to` fields, wearing its semantics as stack components. The canvas renders wire entities; the messaging plane compiles them; replicas merge them as records.
 
@@ -42,7 +42,7 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 
 <<~ ahu #law >>
 
-## Wire Law
+!! Wire Law
 
 1. **One wire, one entity.** A wire exists as one `lar:` addressed record carrying `from` and `to` (each a `lar:` URI or `URI#socket`). It MUST NOT exist as an attribute on a line of prose — the corpus-wide attribute-edge form retired 2026-06-12.
 2. **Semantics worn, never typed-in-place.** A wire wears its family as a stack component — `wires/dataflow`, `wires/message`, `wires/control`, `wires/constraint`, `wires/observe` ride as *examples, not an enum* (has-stack clause 4: open minting, ladder-judged). The family definition meme carries the meaning; the wire record carries only endpoints and fields.
@@ -57,7 +57,7 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 
 <<~ ahu #authoring >>
 
-## Authoring — two gestures, one existence (ratified 2026-06-12)
+!! Authoring — two gestures, one existence (ratified 2026-06-12)
 
 Co-projection applied to wires: the operator's mind originates; the carrier body and the record set both *project* the wire, each in native grain; **merge authority routes through the CRDT alone**. The dichotomy "text-authored sigils vs reified entities" dissolves — both hold, at different grains:
 
@@ -78,7 +78,7 @@ Co-projection applied to wires: the operator's mind originates; the carrier body
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>

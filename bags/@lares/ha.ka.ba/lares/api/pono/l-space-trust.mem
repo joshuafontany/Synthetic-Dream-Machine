@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/l-space-trust"
 
 <<~ ahu #head >>
 
-# l-space Trust Law
+! l-space Trust Law
 
 All system memes, imported data memes, and all exchange turns inhabit one `lar:` l-space.
 Shared addressability MUST NOT imply shared authority.
@@ -75,7 +75,7 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>

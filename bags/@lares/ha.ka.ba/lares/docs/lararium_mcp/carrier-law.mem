@@ -30,7 +30,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 
 <<~ ahu #five-lanes >>
 
-## Five Compiler Input Lanes
+!! Five Compiler Input Lanes
 
 | Lane | Source law | Compiler use | MCP-facing use |
 |---|---|---|---|
@@ -47,7 +47,7 @@ It should not begin from markdown files plus links.
 
 <<~ ahu #meme-shape >>
 
-## Meme Copy-Shape Contract
+!! Meme Copy-Shape Contract
 
 | Surface | Compiler check | Artifact consequence |
 |---|---|---|
@@ -67,23 +67,23 @@ Depth states remain distinct: resolved, declared-unresolved, absent.
 
 <<~ ahu #invariant-pressure >>
 
-## Invariant Pressure Contract
+!! Invariant Pressure Contract
 
 Invariant carriers stay short, exact, stable, cacheable, and sidecar-aware.
 The compiler should check compressed OODA-HA presence, active operational voice, visible worksite anchors, absence of template placeholders outside template roots, and separation between core law and explanatory swell.
 
 Compiler yield:
 
-- boot-priority selection
-- cache policy
-- sidecar split diagnostics
-- template-vs-filled invariant distinction
+* boot-priority selection
+* cache policy
+* sidecar split diagnostics
+* template-vs-filled invariant distinction
 
 <<~/ahu >>
 
 <<~ ahu #memetic-wikitext-primitives >>
 
-## Memetic-Wikitext Primitive Contract
+!! Memetic-Wikitext Primitive Contract
 
 | Primitive | Lawful job | First lowering target |
 |---|---|---|
@@ -103,7 +103,7 @@ Parser legality and render machinery stay separate.
 
 <<~ ahu #loci-routing >>
 
-## Loci Routing Contract
+!! Loci Routing Contract
 
 | Concern | Compiler use | MCP use |
 |---|---|---|
@@ -119,7 +119,7 @@ Parser legality and render machinery stay separate.
 
 <<~ ahu #interface-bundles >>
 
-## Implements as Composable Interface Bundles
+!! Implements as Composable Interface Bundles
 
 `implements` must name real outward type law.
 Bundle composition stays additive; a carrier may satisfy `meme`, `loci`, `invariant`, and specific interfaces at once.
@@ -137,7 +137,7 @@ Common patterns:
 
 <<~ ahu #compiler-order >>
 
-## Recommended Compiler Order
+!! Recommended Compiler Order
 
 1. validate `meme` copy-shape
 2. validate `invariant` pressure/cacheability when declared
@@ -153,7 +153,7 @@ Carrier truth stays ahead of syntax swell.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>

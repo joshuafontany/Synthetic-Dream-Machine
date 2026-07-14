@@ -24,7 +24,7 @@ written   = "2026-07-01"
 
 <<~ ahu #entry >>
 
-# The Memetic-Wikitext Sensorium ~ neither-top, co-located peers, made concrete
+! The Memetic-Wikitext Sensorium ~ neither-top, co-located peers, made concrete
 
 **One-line:** the house holds two texts of itself — the **liturgy** it inscribes on disk (memes) and
 the **pidgin** it speaks in chat (sessions). This meme states how the two stand as **co-located peers**,
@@ -50,7 +50,7 @@ is assumed; `coupleMesh` reads which one carries, and how much.
 
 <<~ ahu #the-fractal >>
 
-## The Fractal Co-Location ~ one structure, two scales
+!! The Fractal Co-Location ~ one structure, two scales
 
 **The load-bearing insight:** the *neither-top, co-located peers* pattern is not a one-off shape at the
 corpus scale. It **recurs** — the same pattern holds at a finer scale, inside a single text.
@@ -70,7 +70,7 @@ FFZ-aligned tick stream) and calls it at both scales.
 
 <<~ ahu #the-reader >>
 
-## The Reader ~ island-scan + injection + standoff strata (no new parser)
+!! The Reader ~ island-scan + injection + standoff strata (no new parser)
 
 **Crucible verdict: do NOT build a new parser.** The reader composes three instruments already fit to the
 disjoint partition the sigil register makes.
@@ -89,7 +89,7 @@ skeletal slot without *being* that slot's position. A sigil does not merely sit 
 
 <<~ ahu #two-axes >>
 
-## Two Axes ~ span × channel
+!! Two Axes ~ span × channel
 
 **A stratum reads on two independent axes; collapsing them loses the signal.**
 
@@ -107,7 +107,7 @@ signal**, never flattened to the outer band.
 
 <<~ ahu #li-ki >>
 
-## The Li / Ki Split ~ 理 pattern ⊥ 氣 flow
+!! The Li / Ki Split ~ 理 pattern ⊥ 氣 flow
 
 **The reader senses two orthogonal things, and the sensorium's cap-kinds already name them.**
 
@@ -122,7 +122,7 @@ stratification (pattern); `readKi` returns the coupling (flow). The reader holds
 
 <<~ ahu #autosegmental >>
 
-## The Association Graph ~ autosegmental grounding (Goldsmith · Bird & Ellison)
+!! The Association Graph ~ autosegmental grounding (Goldsmith · Bird & Ellison)
 
 **The skeletal-tier ⋈ strata model is autosegmental phonology, read straight** (Goldsmith 1976; Bird &
 Ellison 1994). That grounding hands the reader six properties — the first three enacted now, the rest
@@ -143,7 +143,7 @@ tree-sitter.
 
 <<~ ahu #enactment >>
 
-## Enactment ~ the concrete instance
+!! Enactment ~ the concrete instance
 
 <<~ranks part reader ~ `packages/lararium-node/src/memetic-wikitext-sensorium.ts` — `stratify()` (island-scan → standoff strata + skeletal tier + typed association graph), `sigilInjectionQuery()` (the tree-sitter injection config), the two-axes span×channel read -> compose ~ `buildMemeticWikitextSensorium()` — the top nameless entity `#has {formal, informal}` via `buildSensoriumManifest`, `coupling.children=[formal, informal]`, neither top -> couple ~ `coupleAligned()` — the fractal atom; feeds an ALIGNED-TICK stream to the keel's `windowed-coupling` RUNTIME ([[windowed-coupling|lar:///ha.ka.ba/lararium/mesh/flow]] — L-window · floor-warming · change-point reset · hop) then screens with `linearityGate`. `readKiStratum` walks Pulse-grain ticks (red↔black); `readKiCorpus` JOINS FFZ-addressed cells (formal↔informal). A THIN call, never a rebuild >>
 

@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pae"
 
 <<~ ahu #head >>
 
-# Pae
+! Pae
 
 A carrier's phased arrival through a transmission medium.
 
@@ -41,7 +41,7 @@ A carrier's phased arrival through a transmission medium.
 
 <<~ ahu #etymology >>
 
-## Etymology
+!! Etymology
 
 *Pae* (Hawaiian) — to land, to come ashore; a row or tier; to drift carried by current.
 
@@ -67,7 +67,7 @@ content body has crossed. The streaming protocol IS a navigation instrument.
 
 <<~ ahu #law >>
 
-## Pae Law (Kānāwai)
+!! Pae Law (Kānāwai)
 
 A carrier MUST emit exactly four pae nodes in sequence: soh → stx → etx → eot.
 A pae node MUST stay content-free. Between soh and stx, the iam heading sits alone; prose, edges, and sigils ride the body after stx.
@@ -91,7 +91,7 @@ Phase semantics:
 
 <<~ ahu #ast >>
 
-## AST
+!! AST
 
 ```ts
 export type PaePhase = "soh" | "stx" | "etx" | "eot";
@@ -108,7 +108,7 @@ export interface PaeNode extends AstBase {
 
 <<~ ahu #widget >>
 
-## Widget
+!! Widget
 
 `<$pae>` — no visible output. Phase metadata lives in the AST.
 Streaming consumers read `data-lar-phase` from the rendered marker.
@@ -124,7 +124,7 @@ Streaming consumers read `data-lar-phase` from the rendered marker.
 
 <<~ ahu #pae-aina >>
 
-## Pae ʻĀina
+!! Pae ʻĀina
 
 *Pae ʻāina* — archipelago, literally "row of lands." The carrier's four phases are an archipelago:
 related, sequential, each its own shore. No shore is skipped. The navigator knows them all.

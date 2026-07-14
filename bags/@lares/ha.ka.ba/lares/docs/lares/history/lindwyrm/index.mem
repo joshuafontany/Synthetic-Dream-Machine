@@ -20,7 +20,7 @@ uri-path   = "ha.ka.ba/lares/docs/lares/history/lindwyrm/index"
 
 <<~ ahu #head >>
 
-# Lindwyrm — Story Arc Index
+! Lindwyrm — Story Arc Index
 
 Mythologized dev narrative. The Lindwyrm arc covers the period when the Lararium first learned to name itself — from early genesis artifact experiments through the quine round-trip closure.
 
@@ -30,7 +30,7 @@ The arc seals at Act VII, the hoard disclosed. The work that follows — the Lar
 
 <<~ ahu #architecture >>
 
-## Architecture & Structure
+!! Architecture & Structure
 
 | File | Role |
 |---|---|
@@ -42,7 +42,7 @@ The arc seals at Act VII, the hoard disclosed. The work that follows — the Lar
 
 <<~ ahu #acts >>
 
-## Narrative Loci (Act Order)
+!! Narrative Loci (Act Order)
 
 Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle (Acts III–V) lives within the seven-act braid of [hoard-origin-architecture](hoard-origin-architecture.md) and the standalone threshold loci below — never split into separate carriers. The original `@lares-history` source bag has since been curated and retired; git holds it.
 
@@ -57,7 +57,7 @@ Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle 
 
 <<~ ahu #standalone >>
 
-## Standalone Loci
+!! Standalone Loci
 
 | File | Beat |
 |---|---|

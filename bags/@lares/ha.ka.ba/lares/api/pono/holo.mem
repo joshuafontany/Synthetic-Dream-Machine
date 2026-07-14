@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/holo"
 
 <<~ ahu #head >>
 
-# Holo
+! Holo
 
 *holo* — Hawaiian: to run, sail, glide, flow rapidly; to race at full speed. Used in *holo
 i mua* (press forward), *holo wa'a* (canoe racing). The motion commits fully — speed leaves
@@ -38,7 +38,7 @@ Grammar only --- the cancelling-race execution runtime awaits the async-first sp
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A holo block MUST spawn all child flows before any result lands.
 A holo block MUST cancel all remaining child flows when the first one completes.
@@ -50,7 +50,7 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ holo >>
@@ -68,7 +68,7 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-race >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/puka >>

@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/docs/story"
 
 <<~ ahu #meme-header >>
 
-# Story Docs
+! Story Docs
 
 Not invariant law.
 This shelf holds mythic, narrative, and world-shaping docs that can inform the graph without governing protocol.
@@ -31,14 +31,14 @@ This shelf holds mythic, narrative, and world-shaping docs that can inform the g
 
 <<~ ahu #tree >>
 
-## Tree
+!! Tree
 
 Use this branch for:
 
-- Lindwyrm origin and aftermath
-- Elyncia and DreamNet narrative scaffolds
-- dev-story bridges that stay useful but non-governing
-- consumed narrative loci under `story/lindwyrm/`
+* Lindwyrm origin and aftermath
+* Elyncia and DreamNet narrative scaffolds
+* dev-story bridges that stay useful but non-governing
+* consumed narrative loci under `story/lindwyrm/`
 
 <<~/ahu >>
 

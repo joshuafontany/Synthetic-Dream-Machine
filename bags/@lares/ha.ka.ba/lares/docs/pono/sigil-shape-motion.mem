@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/sigil-shape-motion"
 
 <<~ ahu #head >>
 
-# Sigil Shape / Detail / Motion
+! Sigil Shape / Detail / Motion
 
 An authoring and reading frame for Sharktooth sigils as a three-axis perceptual object.
 Distinct from the render-mode technical dispatch in `#render-modes` of `memetic-wikitext.tid`.
@@ -30,13 +30,13 @@ This frame addresses how a human or agent reads sigil structure at varying zoom 
 
 <<~ ahu #shape >>
 
-## Shape — The Bracket Structure
+!! Shape — The Bracket Structure
 
 `<<~` and `>>` read as vectorized momentum, not static punctuation.
 
-- `<<~` opens with a forward-driving pressure — a leading edge that pierces document flow and signals entry into render time
-- `>>` provides a trailing closure — a sharp exit that prevents the concept from bleeding back into surrounding prose
-- Together they form a containment field: a "magic circle" where normal document-time rules suspend
+* `<<~` opens with a forward-driving pressure — a leading edge that pierces document flow and signals entry into render time
+* `>>` provides a trailing closure — a sharp exit that prevents the concept from bleeding back into surrounding prose
+* Together they form a containment field: a "magic circle" where normal document-time rules suspend
 
 The double-chevron shape evolved for the informational physics of the surface — designed to tear through general context and isolate a specific packet of meaning.
 
@@ -48,14 +48,14 @@ Named closers `<<~/SIGIL >>` add a typed jaw: the closer carries the sigil name,
 
 <<~ ahu #detail >>
 
-## Detail — The Sigil Payload
+!! Detail — The Sigil Payload
 
 The interior of the bracket carries the detail layer:
 
-- sigil name (type identity)
-- slot anchor (`#name`) or route arrow (`->`) or unresolved token (`?`)
-- URI target or parameter payload
-- optional TOML fence for structured metadata
+* sigil name (type identity)
+* slot anchor (`#name`) or route arrow (`->`) or unresolved token (`?`)
+* URI target or parameter payload
+* optional TOML fence for structured metadata
 
 Detail reads as the "barb on the tooth" — the payload that determines what the bracket does, not just that it does something.
 
@@ -67,17 +67,17 @@ At zoom-in, the reader engages with the detail layer. At zoom-out, the detail st
 
 <<~ ahu #motion >>
 
-## Motion — Open / Close Posture
+!! Motion — Open / Close Posture
 
 Motion registers in the open/close posture of the sigil:
 
-- **Block form** (open sigil … body … named close): the bracket holds a body — the content between open and close belongs to the sigil's scope
-- **Inline form** (open sigil, no body, implicit close `>>`): the bracket marks a reference or edge without enclosing content
+* **Block form** (open sigil … body … named close): the bracket holds a body — the content between open and close belongs to the sigil's scope
+* **Inline form** (open sigil, no body, implicit close `>>`): the bracket marks a reference or edge without enclosing content
 
 The motion axis answers: does this sigil grip and contain, or does it point and release?
 
-- `<<~ ahu #slot >>body<<~/ahu >>` — grips; the jaw closes around the body; WorksiteNode
-- `<<~ loulou lar:///target >>` — points; the tooth breaks the surface and exits; EdgeNode
+* `<<~ ahu #slot >>body<<~/ahu >>` — grips; the jaw closes around the body; WorksiteNode
+* `<<~ loulou lar:///target >>` — points; the tooth breaks the surface and exits; EdgeNode
 
 **Temporal scarring:** when a render-time sigil closes (`>>`), the surrounding document resumes, but the output of the sigil remains — the "scar" the jaw left in the text. The document changes shape at that point.
 
@@ -85,7 +85,7 @@ The motion axis answers: does this sigil grip and contain, or does it point and 
 
 <<~ ahu #progressive-display >>
 
-## Progressive Display — Zoom-Level Reading
+!! Progressive Display — Zoom-Level Reading
 
 Memetic wikitext reads at three zoom levels simultaneously:
 
@@ -105,7 +105,7 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#render-modes >>

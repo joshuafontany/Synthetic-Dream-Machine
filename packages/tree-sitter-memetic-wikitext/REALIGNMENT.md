@@ -41,7 +41,7 @@ source-text NEVER changes · anything hand-review-shaped defers.
 | bags/@sdm | 42 | ~295 files·lines | none | ✅ 2026-07-14 (294 headings · 188 lists) |
 | bags/@lares-history | 20 | ~656 lines | none | ✅ 2026-07-14 (656 headings · 1,527 lists · 134 indented-ul deferred) |
 | bags/@lararium | 210 | ~1,022 | none | ✅ 2026-07-14 (968 headings · 938 lists · 65 indented-ul deferred) |
-| bags/@lares (api/, docs/, cli/) | ~249 | ~2,597 | RE-BAKE golden-corpus.json same commit | |
+| bags/@lares (api/, docs/, cli/ — library/ excluded) | 239 of 249 | ~2,181 | RE-BAKE golden-corpus.json same commit | ✅ 2026-07-14 (2,181 headings · 2,265 lists · 239 hashes re-baked = files touched · 14 tests green) |
 | bags/@lares library/ + source-text | — | — | re-bake + sectioner lockstep (`kumulipo_sections.py` keys `^##`) | DEFERRED |
 | the boot seed (`noosphere-boot.mem` + repo `noosphere-boot.md` + `~/.claude` copy) | 1×3 | ~40 | cache-stable attractor — operator co-edits | DEFERRED @operator |
 
@@ -74,3 +74,8 @@ corpus-scoped against the vendored TiddlyWiki5 core tiddlers.
 - 2026-07-14 — @lararium crosses (152 of 210 memes change, 968 headings,
   938 lists; fold 210/210 ERROR-free; 4,497 fence lines held; 65 indented-ul
   deferred; zero dirty files — the parallel session held nothing here).
+- 2026-07-14 — @lares crosses, library/ held out (239 files, 2,181 headings,
+  2,265 lists; 6,265 fence lines + 10 library files held; boot seed .mem
+  migrated per operator word — repo-root noosphere-boot.md UNTOUCHED; golden
+  re-baked: 239 hashes move = exactly the files walked; 14 tests green).
+  Script gains --exclude (loud-skip by path substring).

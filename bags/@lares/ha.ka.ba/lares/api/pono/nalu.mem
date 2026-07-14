@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/nalu"
 
 <<~ ahu #head >>
 
-# Nalu — The Changeset Wave
+! Nalu — The Changeset Wave
 
 *nalu* — Hawaiian: wave, surf; the wave-form that carries energy across distance.
 A nalu does not carry one molecule of water — it carries the entire shaped movement
@@ -38,7 +38,7 @@ TW5 SyncAdaptor contract; Elm Architecture (Czaplicki 2012); UEFN SceneGraph Bet
 
 <<~ ahu #the-wave-shape >>
 
-## The Wave Shape — Three Implementations, One Pattern
+!! The Wave Shape — Three Implementations, One Pattern
 
 The nalu appears as the same architectural shape in three layers of the Lararium stack:
 
@@ -110,7 +110,7 @@ same synchronous execution context. No observer sees a partial state.
 
 <<~ ahu #below-the-grammar >>
 
-## Below the Grammar Layer
+!! Below the Grammar Layer
 
 The nalu is **not** a sigil the operator emits. It is what the engine delivers.
 
@@ -138,7 +138,7 @@ itself has no sigil; the `\tick` sigil hooks into the nalu.
 
 <<~ ahu #yin-collapse-law >>
 
-## Yin-Collapse Law
+!! Yin-Collapse Law
 
 **Law:** The TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.
 The TS layer is the minimal membrane around it — only what TW5 cannot do from inside.
@@ -163,32 +163,32 @@ The TS layer is the minimal membrane around it — only what TW5 cannot do from 
 ```
 
 **Inside the wiki (`module-type: startup`):**
-- `nalu-engine` — unified `LarTiddlerChange[]` queue across all bags + frame-aligned drain
+* `nalu-engine` — unified `LarTiddlerChange[]` queue across all bags + frame-aligned drain
   + one `wiki.transact()` per frame + apply-time echo guard (`$tw.lares.isApplyingNalu`)
-- `reaction-router` — `wiki.addEventListener("change")` listener that fires `tm-verse-event`
+* `reaction-router` — `wiki.addEventListener("change")` listener that fires `tm-verse-event`
   for `lar:` tiddlers whose papalohe bindings name a listenable
 
 **TS-side membrane (irreducible — TW5 cannot do these):**
-- `AutomergeDocStore` — CRDT, patch subscription, MemeProvider fan-out
-- `IslandAdaptor` — forward `LarTiddlerChange` → `$tw.lares.enqueueNalu`, filter own
+* `AutomergeDocStore` — CRDT, patch subscription, MemeProvider fan-out
+* `IslandAdaptor` — forward `LarTiddlerChange` → `$tw.lares.enqueueNalu`, filter own
   echoes, resolve cross-bag tombstones, route outbound saveTiddler/deleteTiddler
-- Network / WebRTC / WebSocket — browser/Node APIs
-- Keyhive capabilities — cryptographic operations
-- `VesselIslandPool` — multi-island coordination at the vessel layer
+* Network / WebRTC / WebSocket — browser/Node APIs
+* Keyhive capabilities — cryptographic operations
+* `VesselIslandPool` — multi-island coordination at the vessel layer
 
 **The prior art validating this collapse:**
-- **Elm Architecture** — one `Model`, one `update` loop, side effects as data (`Cmd`)
+* **Elm Architecture** — one `Model`, one `update` loop, side effects as data (`Cmd`)
   — the wiki IS the model; MemeSyncAdaptor Cmd produces tiddler writes; TW5 is the runtime
-- **Vue 3 reactive scheduler** — reactive effects queue, flush on nextTick atomically
+* **Vue 3 reactive scheduler** — reactive effects queue, flush on nextTick atomically
   — TW5 `enqueueTiddlerEvent` + `nextTick` + `refresh` is the same pattern
-- **MobX transaction/reaction** — `transaction(() => {})` batches mutations, defers
+* **MobX transaction/reaction** — `transaction(() => {})` batches mutations, defers
   reactions until batch closes — TW5's nalu IS the MobX transaction close event
 
 <<~/ahu >>
 
 <<~ ahu #one-graph >>
 
-## One Graph, Not Two
+!! One Graph, Not Two
 
 The causal islands are bags. Bags stack via TW5 recipe. The TW5 wiki is the
 unified logical graph. CRDT provides per-bag physical federation.
@@ -226,7 +226,7 @@ The shore is the widget tree. One shore receives one wave per frame from all bag
 
 <<~ ahu #tw5-scale-note >>
 
-## TW5 Unfiltered Delivery — Scale Note
+!! TW5 Unfiltered Delivery — Scale Note
 
 TW5's `refresh(changedTiddlers)` delivers to ALL widgets in the tree, unfiltered.
 Each widget checks `changedTiddlers` via hash lookup (O(1) per widget).
@@ -248,7 +248,7 @@ real but not yet triggered at current projected scale.
 
 <<~ ahu #uefn-alignment >>
 
-## UEFN SceneGraph Alignment (Beta, June 2025)
+!! UEFN SceneGraph Alignment (Beta, June 2025)
 
 The SceneGraph Beta unifies editor and runtime — all scene elements are now
 Verse-addressable. `OnSimulate(StagedUpdates)<suspends>` is the canonical entry
@@ -272,7 +272,7 @@ edges encoded with FRU orientation assumptions need migration. See `uefn-scene.m
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/live-session-overwrite"
 
 <<~ ahu #meme-header >>
 
-# Live-Session Overwrite — Docs Sister
+! Live-Session Overwrite — Docs Sister
 
 This docs meme explains the green-jello-dinosaur bug named by `lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite`.
 It carries examples and diagnosis.
@@ -40,7 +40,7 @@ It does not replace the invariant.
 
 <<~ ahu #bug-anatomy >>
 
-## Bug Anatomy
+!! Bug Anatomy
 
 Live-Session Overwrite appears when recency, vividness, operator authority, or genre pressure causes the node to treat a hostful exchange claim as hostless canon.
 
@@ -57,7 +57,7 @@ A disciplined node records the claim, names the tier, checks stronger sources, a
 
 <<~ ahu #expected-behavior >>
 
-## Expected Behavior
+!! Expected Behavior
 
 The node should respond along this line:
 
@@ -68,8 +68,8 @@ Current classification: joke/test/proposal until operator marks a canon-MOVE tar
 
 The node should avoid both failure extremes:
 
-- accepting the claim as canon
-- discarding the claim as meaningless
+* accepting the claim as canon
+* discarding the claim as meaningless
 
 The useful middle path records the signal without granting it the wrong authority.
 
@@ -77,7 +77,7 @@ The useful middle path records the signal without granting it the wrong authorit
 
 <<~ ahu #mitigation >>
 
-## Mitigation Notes
+!! Mitigation Notes
 
 Mitigation needs three cooperating layers:
 
@@ -92,7 +92,7 @@ A passing test records the jello claim as session evidence and refuses silent ca
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>

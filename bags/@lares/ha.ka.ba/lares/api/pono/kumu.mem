@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kumu"
 
 <<~ ahu #head >>
 
-# Kumu
+! Kumu
 
 *kumu* — Hawaiian: teacher, origin, source, trunk; the base from which things grow. In botany,
 the trunk of a tree; in cultural life, the teacher who holds the root knowledge and passes it
@@ -35,7 +35,7 @@ a procedure executes; a kumu defines a form that other nodes instantiate.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A kumu declaration MUST carry a unique type name.
 A kumu declaration body defines the template for nodes of that type.
@@ -45,7 +45,7 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ kumu TypeName(params) >>
@@ -60,7 +60,7 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-type >>

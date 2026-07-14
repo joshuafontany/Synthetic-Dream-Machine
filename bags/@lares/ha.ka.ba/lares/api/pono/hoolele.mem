@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/hoolele"
 
 <<~ ahu #head >>
 
-# Hoolele
+! Hoolele
 
 *hoʻolele* — Hawaiian: to cause to fly, to launch, to send aloft; causative of
 *lele* (to fly, leap). Where *lele* leaps and knows which tree it came from,
@@ -47,7 +47,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A hoolele call MUST target a single function with `<suspends>` effect.
 A hoolele call MUST target a non-failable function (no `<decides>` effect).
@@ -64,7 +64,7 @@ A hoolele edge MUST carry a target URI as its first argument.
 
 <<~ ahu #when-to-use >>
 
-## When to Use
+!! When to Use
 
 `hoolele` is the escape hatch. Use it only for work that fits one of these cases:
 
@@ -89,7 +89,7 @@ remains predictable; resource leaks are prevented.
 
 <<~ ahu #six-operator-table >>
 
-## Six-Operator Concurrency Table
+!! Six-Operator Concurrency Table
 
 `hoolele` completes the Lararium concurrency ontology. All six Verse concurrency
 operators now have pono counterparts:
@@ -111,7 +111,7 @@ the formal mechanism that allows it to create a new root with no parent scope.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ hoolele lar:///target/uri >>
@@ -125,17 +125,17 @@ Returns a `task(t)` handle. The caller MUST retain it for later `Cancel()` or
 
 <<~ ahu #lararium-use-cases >>
 
-## Lararium-Specific Use Cases
+!! Lararium-Specific Use Cases
 
 In the Lararium stack, the irreducible TS infrastructure layer (CRDT, network,
 Keyhive) represents work that MUST complete regardless of wiki VM lifecycle.
 These are the natural `hoolele` boundaries:
 
-- **`LarTiddlerStore` CRDT flush** — must complete even if the `MemeSyncAdaptor`
+* **`LarTiddlerStore` CRDT flush** — must complete even if the `MemeSyncAdaptor`
   is disposed; spawn the flush, hold the task handle in the store.
-- **`VmPool` cross-VM coordination** — work that spans wiki VM instances has no
+* **`VmPool` cross-VM coordination** — work that spans wiki VM instances has no
   single containing scope; spawn the coordination task at pool level.
-- **Keyhive capability delegation** — async crypto; survives the UI context that
+* **Keyhive capability delegation** — async crypto; survives the UI context that
   initiated it.
 
 The `MemeSyncAdaptor` boundary IS the `hoolele` boundary in the Lararium stack:
@@ -146,7 +146,7 @@ work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lele >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>

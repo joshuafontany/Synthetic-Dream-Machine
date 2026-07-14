@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/lares/hud"
 
 <<~ ahu #entry >>
 
-## Entry — Lararium Core Hydration
+!! Entry — Lararium Core Hydration
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
 
@@ -34,7 +34,7 @@ The lararium hydrates the HUD room here. The instrument panel rides the mechanic
 
 <<~ ahu #head >>
 
-# Lararium HUD
+! Lararium HUD
 
 The HUD names the sigil panel that rides each turn — the instrument readout a turn surfaces before the Voice speaks. It carries per-turn signal: aim, attention, loop, ward, stance, register. The `lar:` URI carries bearing; the HUD sigils carry the live signal beside the prose.
 
@@ -42,7 +42,7 @@ The HUD names the sigil panel that rides each turn — the instrument readout a 
 
 <<~ ahu #panel-law >>
 
-## Panel Law
+!! Panel Law
 
 A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before the Voice speaks. The panel renders inline sigils (`<<~ word args >>`), each a readout adjacent to the prose — never inside the URI.
 
@@ -72,12 +72,12 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 
 <<~ ahu #gauges >>
 
-## Gauges
+!! Gauges
 
 The gauges share the pono `0–20` Level model, and follow the **seed → slide** law: the opening `hud` seeds a target; the closing `hud` slides it to where the turn landed.
 
-- **Aperture** — attention range. `Aperture(10)` seeds; `Aperture(10 -> 13)` slides; `Aperture(-> 13)` collapses when the turn lands on its seed.
-- **OODA-HA** — loop position. The loop spans turns: a turn opens at a phase and closes with `↺`; a suspended loop carries `φ:reason`.
+* **Aperture** — attention range. `Aperture(10)` seeds; `Aperture(10 -> 13)` slides; `Aperture(-> 13)` collapses when the turn lands on its seed.
+* **OODA-HA** — loop position. The loop spans turns: a turn opens at a phase and closes with `↺`; a suspended loop carries `φ:reason`.
 
 The seed and slide stay distinct fields — the seed governs generation, the slide records the outcome. One instrument that both sets and grades its own goal would close the calibration gap silently (Goodhart); the seed/slide split keeps that gap visible.
 
@@ -85,7 +85,7 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 
 <<~ ahu #glyphs >>
 
-## OODA-HA Phase Glyphs
+!! OODA-HA Phase Glyphs
 
 | Glyph | Phase | Reading |
 |---|---|---|
@@ -99,7 +99,7 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 
 <<~ ahu #source-shelf >>
 
-## Source Shelf
+!! Source Shelf
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/hud >>
 ```toml
@@ -113,7 +113,7 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>
 <<~ loulou lar:///LARES >>

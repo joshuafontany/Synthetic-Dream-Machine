@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/wai"
 
 <<~ ahu #head >>
 
-# Wai
+! Wai
 
 *wai* — Hawaiian: fresh water, the source; the spring from which streams run.
 
@@ -44,7 +44,7 @@ Water chooses its channel. `wai` selects *which content renders* in the document
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A `wai` block MUST carry a TW5 filter expression as its first argument.
 A `wai` block MUST close with `<<~/ wai >>` (or `<<~/ \if >>`).
@@ -59,7 +59,7 @@ TW5 filter semantics: `[<variable>match[value]]` for equality, `[has[field]]` fo
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 Hawaiian form:
 ```text
@@ -86,7 +86,7 @@ TW5 shortcut expansion: `<%if filter%>body<%endif%>`.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 sigil          = "wai"
@@ -106,7 +106,7 @@ close-pattern = '<<~\/wai\s*>>'
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kahawai >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/mukuwai >>

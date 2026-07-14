@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/wehe"
 
 <<~ ahu #head >>
 
-# Wehe
+! Wehe
 
 *wehe* — Hawaiian: to open, to untie, to uncover, to unfasten; to solve, to cleanse.
 *Wehewehe* (reduplication): to explain, expound, reveal what is mysterious — to make
@@ -47,7 +47,7 @@ Sugar for the TW5 `\procedure` pragma, first-class in memetic-wikitext as a bloc
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A wehe block MUST declare a name and optional parameter signature.
 A wehe block MUST close with `<<~/ wehe >>` (or `<<~/ \procedure >>`).
@@ -61,7 +61,7 @@ English alias `\procedure` is semantically identical. Either form MAY appear in 
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 Hawaiian form:
 ```text
@@ -88,7 +88,7 @@ procedure body
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 sigil          = "wehe"
@@ -108,7 +108,7 @@ close-pattern = '<<~\/wehe\s*>>'
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>

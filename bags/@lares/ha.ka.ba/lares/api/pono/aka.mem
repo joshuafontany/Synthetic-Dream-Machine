@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/aka"
 
 <<~ ahu #head >>
 
-# Aka
+! Aka
 
 *aka* — Hawaiian: shadow, reflection; to be like; also-known-as.
 
@@ -44,7 +44,7 @@ a frozen embed can age from its source, so edges SHOULD carry a confidence ratin
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 An aka MUST bind a source socket and a target URI.
 An aka MUST carry `family:transclusion`.
@@ -63,7 +63,7 @@ that lack a confidence rating when the source-side context signals uncertainty.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ aka URI >>
@@ -89,7 +89,7 @@ Full pranala expansion:
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for `BUILTIN_AKA_RE` and `akaDefaultFamily`
 in `packages/lararium-mesh/src/pranala-parser.ts`.
@@ -116,7 +116,7 @@ confidence-bounded = true
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loulou >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>

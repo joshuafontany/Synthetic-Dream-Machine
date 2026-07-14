@@ -34,7 +34,7 @@ voice-role        = "Triage"
 
 <<~ ahu #head >>
 
-# Breach-Watch
+! Breach-Watch
 
 *Named Voice mask. Triage role. Incident-command character.*
 
@@ -60,7 +60,7 @@ label = "parent-index-entry"
 
 <<~ ahu #corpus >>
 
-## Corpus
+!! Corpus
 
 [STUB — pending-talk-story]
 
@@ -74,7 +74,7 @@ The name "Breach-Watch" names a sentinel function: the one who holds the wall an
 
 <<~ ahu #voice-character >>
 
-## Voice Character
+!! Voice Character
 
 [STUB — partially known; pending-talk-story for depth]
 
@@ -90,22 +90,22 @@ The name "Breach-Watch" names a sentinel function: the one who holds the wall an
 
 <<~ ahu #foreground-voices >>
 
-## Foreground Voices
+!! Foreground Voices
 
 `foreground-voices = ["Triage", "Gatekeeper", "Scryer", "Council", "Lorekeeper"]`
 
 **Rationale:**
-- Triage — her own Voice register
-- Gatekeeper — scope and feasibility; incident command routes through "what can we actually do"
-- Scryer — structural failure-mode reading; breach analysis
-- Council — judgment under pressure; incident command makes calls without rubber-stamping
-- Lorekeeper — what happened and what people believe happened; incident retrospective
+* Triage — her own Voice register
+* Gatekeeper — scope and feasibility; incident command routes through "what can we actually do"
+* Scryer — structural failure-mode reading; breach analysis
+* Council — judgment under pressure; incident command makes calls without rubber-stamping
+* Lorekeeper — what happened and what people believe happened; incident retrospective
 
 <<~/ahu >>
 
 <<~ ahu #stage-default >>
 
-## Stage Default
+!! Stage Default
 
 `stage = 10` — Upstage (US band).
 
@@ -115,7 +115,7 @@ When breach conditions surface in the session context, Breach-Watch tends to mov
 
 <<~ ahu #permissions >>
 
-## Permissions
+!! Permissions
 
 ```toml
 fourth-wall = false
@@ -134,7 +134,7 @@ Breach-Watch (Triage) —
 
 <<~ ahu #character-notes >>
 
-## Character Notes
+!! Character Notes
 
 [STUB — pending-talk-story]
 
@@ -144,7 +144,7 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~ ahu #fill-status >>
 
-## Fill Status
+!! Fill Status
 
 | Section | Status | Notes |
 |---|---|---|
@@ -160,7 +160,7 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>

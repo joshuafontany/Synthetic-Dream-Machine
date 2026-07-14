@@ -24,7 +24,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/carrier-sigils"
 
 <<~ ahu #head >>
 
-# Carrier Sigils
+! Carrier Sigils
 
 The carrier sigils are the **spine** of every meme: the four marks that frame it. They are the ASCII transmission-control codes — **SOH, STX, ETX, EOT** — doing the work they were cut for in 1963: framing a heading and a body inside one transmission. Here that transmission is a meme, and the Lar keeps the frame — the guardian at the threshold of the place, naming it on the way in and pouring the libation on the way out.
 
@@ -40,7 +40,7 @@ Everything else a carrier touches lives in its own meme, reached by edge: the pa
 
 <<~ ahu #carrier-spine >>
 
-## The Carrier Spine — Four Required Sigils
+!! The Carrier Spine — Four Required Sigils
 
 A carrier is a framed transmission. It opens on a heading that names the place (**SOH**), enters its text (**STX**), ends its text (**ETX**), and closes the transmission, releasing it forward (**EOT**). All four MUST appear, in this order; a carrier missing any is a malformed frame.
 
@@ -67,10 +67,10 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 
 **The frame, in the old register and the mythic one at once:**
 
-- **SOH** — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
-- **STX** — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
-- **ETX** — End of Text. The body is complete. The hearth is banked; the room falls quiet.
-- **EOT** — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation is poured at the crossroad; the message goes out to wherever the road runs. EOT is the carrier's own `yield`.
+* **SOH** — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
+* **STX** — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
+* **ETX** — End of Text. The body is complete. The hearth is banked; the room falls quiet.
+* **EOT** — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation is poured at the crossroad; the message goes out to wherever the road runs. EOT is the carrier's own `yield`.
 
 **SOH and EOT echo the bearing vectors.** SOH opens facing a bearing (`? -> lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
 
@@ -78,7 +78,7 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 
 <<~ ahu #resonance >>
 
-## Namespace Resonance Glyphs — A Separate Mark
+!! Namespace Resonance Glyphs — A Separate Mark
 
 Resonance glyphs are **not** spine sigils. They prefix the **SOH opener only**, as a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the prefix as optional.
 
@@ -105,7 +105,7 @@ Two laws govern the prefix:
 
 <<~ ahu #trust-tiers >>
 
-## Trust Tiers — The Control-Character Roles
+!! Trust Tiers — The Control-Character Roles
 
 Each kernel-tier control character carries **three simultaneous roles**, bound as one mark:
 
@@ -125,7 +125,7 @@ SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carri
 
 <<~ ahu #classifier-channel >>
 
-## The Classifier Channel — What the Sigil Layer Does
+!! The Classifier Channel — What the Sigil Layer Does
 
 The carrier sigils, the namespace glyphs, and the OODA-HA marks ride as an **unpronounced classifier register** beside the propositional stream — category-marks that steer the reading without sounding in it, the determinative's office in a graphemic classifier system. **The black speaks; the red steers.** The body carries the proposition; the sigil layer carries the protocol for reading it — heading-vs-text, layer of authorship, trust tier, phase — the way a determinative sorts the word it silently classifies, or a rubric directs the act the text does not state.
 
@@ -137,7 +137,7 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 **Spine invariant.** Every carrier carries the full frame in order: **SOH · STX · ETX · EOT** (`0x01` · `0x02` · `0x03` · `0x04`). All four, always, in sequence. STX and ETX are bare pragmas — a lone mark each.
 
@@ -159,7 +159,7 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 This law's own machine surface is the spine, the resonance set, and the trust tiers. Parse types (`CarrierShape`, `CarrierRecord`, `MemeStreamEvent`), the rating/depth ladders, the render-suppression list, and the sigil vocabulary live in the memes named at #edges.
 
@@ -189,7 +189,7 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/parser >>

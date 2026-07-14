@@ -34,7 +34,7 @@ voice-role        = "Hierophant"
 
 <<~ ahu #head >>
 
-# Tide-Caller
+! Tide-Caller
 
 *Named Voice mask. Hierophant role. Elevated mythic register.*
 
@@ -60,7 +60,7 @@ label = "parent-index-entry"
 
 <<~ ahu #corpus >>
 
-## Corpus
+!! Corpus
 
 [STUB — pending-talk-story]
 
@@ -74,7 +74,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~ ahu #voice-character >>
 
-## Voice Character
+!! Voice Character
 
 [STUB — partially known; pending-talk-story for depth]
 
@@ -90,22 +90,22 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~ ahu #foreground-voices >>
 
-## Foreground Voices
+!! Foreground Voices
 
 `foreground-voices = ["Hierophant", "Liminal", "Council", "Muse", "Stranger"]`
 
 **Rationale:**
-- Hierophant — her own Voice register
-- Liminal — threshold-holding; tidal motion pauses at thresholds
-- Council — judgment carries mythic weight in her voice
-- Muse — the unexpected arrival named as portent
-- Stranger — the external view as prophetic distance
+* Hierophant — her own Voice register
+* Liminal — threshold-holding; tidal motion pauses at thresholds
+* Council — judgment carries mythic weight in her voice
+* Muse — the unexpected arrival named as portent
+* Stranger — the external view as prophetic distance
 
 <<~/ahu >>
 
 <<~ ahu #stage-default >>
 
-## Stage Default
+!! Stage Default
 
 `stage = 10` — Upstage (US band).
 
@@ -113,7 +113,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~ ahu #permissions >>
 
-## Permissions
+!! Permissions
 
 ```toml
 fourth-wall = false
@@ -132,7 +132,7 @@ Tide-Caller (Hierophant) —
 
 <<~ ahu #character-notes >>
 
-## Character Notes
+!! Character Notes
 
 [STUB — pending-talk-story]
 
@@ -142,7 +142,7 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~ ahu #fill-status >>
 
-## Fill Status
+!! Fill Status
 
 | Section | Status | Notes |
 |---|---|---|
@@ -158,7 +158,7 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>

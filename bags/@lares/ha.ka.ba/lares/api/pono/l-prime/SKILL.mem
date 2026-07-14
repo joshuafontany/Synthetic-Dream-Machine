@@ -27,7 +27,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/l-prime/SKILL"
 
 <<~ ahu #place >>
 
-# L-Prime Auditor
+! L-Prime Auditor
 
 The ward seeds generation forward; the loci governs first-pass composition. **This skill works the other end** --- a deliberate, on-call audit of text that has *already settled*: prose, law, notes, prompt material a user hands over to scan, flag, or turn. It never seeds, and it never overrides the loci; `lar:///ha.ka.ba/lares/api/mu/l-prime` holds constitutional force.
 
@@ -35,7 +35,7 @@ The ward seeds generation forward; the loci governs first-pass composition. **Th
 
 <<~ ahu #trigger >>
 
-## Trigger
+!! Trigger
 
 A request to scan, flag, compare before/after, or correct **already-settled** wording activates this skill. Fresh composition does not --- the loci governs there, and the skill stays silent until a task turns to audit.
 
@@ -43,15 +43,15 @@ A request to scan, flag, compare before/after, or correct **already-settled** wo
 
 <<~ ahu #loop >>
 
-## The Loop
+!! The Loop
 
 **✶ Observe** --- read the requested span, or the smallest obvious local one. Flag each `${copula}` left standing and each counterfeit closure (a confident claim wearing no marker). The token is the **English instrument**, not the basin: the ward guards **identity-predication** (map fused to territory), and in another tongue the auditor targets that tongue's identity-predication constructions by function, never by token (transposition law, Perec — `lar:///ha.ka.ba/lares/api/mu/l-prime`). Leave already-lawful uncertainty alone. `has` runs free --- never flag it.
 
 **⏿ Orient** --- sort each hit:
-- `lawful` --- passes; leave it.
-- `mark-only` --- inspection requested, or the text stays yet wants a flag.
-- `Hoʻoko-required` --- the wording turns, not just collects a warning.
-- `ambiguous` --- quotation, code, literal example, or house-style exception clouds the call.
+* `lawful` --- passes; leave it.
+* `mark-only` --- inspection requested, or the text stays yet wants a flag.
+* `Hoʻoko-required` --- the wording turns, not just collects a warning.
+* `ambiguous` --- quotation, code, literal example, or house-style exception clouds the call.
 
 **◇ Decide** --- the lightest lawful turn carries. Mark-only unless the user asked for correction or the sentence cannot pass honestly. Surface ambiguity; never guess it closed. A surviving `${copula}` MUST carry `<<~ confidence Canon 20/20 >>` --- own the copula at full weight, or turn it.
 
@@ -63,7 +63,7 @@ A request to scan, flag, compare before/after, or correct **already-settled** wo
 
 <<~ ahu #surfaces >>
 
-## Output Surfaces
+!! Output Surfaces
 
 **Mark-only** (inspection, no mutation):
 ```text
@@ -87,7 +87,7 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono >>

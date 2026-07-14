@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-task-tree"
 
 <<~ ahu #head >>
 
-# Verse Task Tree
+! Verse Task Tree
 
 The Verse async execution model is a **forest of parent-child trees**, not an arbitrary
 DAG. Each node in the tree is an async execution context (a suspended or running task).
@@ -39,7 +39,7 @@ Unreal Fest 2023 "Verse Concurrency—Time Flow" PDF (Epic Games).
 
 <<~ ahu #tree-topology >>
 
-## Tree Topology
+!! Tree Topology
 
 ```
 root async context              ← any <suspends> function call is a tree node
@@ -59,7 +59,7 @@ Structured expressions never add roots — they only add children.
 
 <<~ ahu #operators-as-graph-ops >>
 
-## Concurrency Operators as Graph Operations
+!! Concurrency Operators as Graph Operations
 
 | Pono | Verse | Graph operation | Cancellation rule |
 |---|---|---|---|
@@ -69,13 +69,13 @@ Structured expressions never add roots — they only add children.
 | `lele` / `\branch` | `branch` | **child node** — parent continues immediately; child runs in background | auto-cancelled when execution leaves enclosing **function scope** (normal, fail, or upstream cancel) |
 | TBD / `\spawn` | `spawn` | **new root** — exits current tree; no parent; outlives creating scope | NEVER auto-cancelled; requires explicit `task.Cancel()` or timeout pattern |
 
-### `holo / race` — recursive subtree cancellation
+!!! `holo / race` — recursive subtree cancellation
 
 When the first arm completes, the `race` expression sends cancellation signals to each
 losing arm, and those signals cascade recursively to any tasks those losers created.
 The entire subtree below each losing arm is pruned, not just the direct children.
 
-### `puka / rush` — enclosing scope, not rush winner
+!!! `puka / rush` — enclosing scope, not rush winner
 
 When the first arm completes, `rush` does NOT cancel the other arms. They continue
 consuming resources until: (a) they complete naturally, or (b) the enclosing scope
@@ -91,13 +91,13 @@ tasks with no clear cancellation boundary.
 
 <<~ ahu #task-type >>
 
-## task(t) — Runtime Object
+!! task(t) — Runtime Object
 
 `task(t)` is a runtime object representing a currently-executing or suspended async
 function. It is the handle returned by `spawn`. `branch` creates a task implicitly
 but does NOT return a handle — the branch is managed by the enclosing scope.
 
-### States
+!!! States
 
 | State | Meaning |
 |---|---|
@@ -106,26 +106,26 @@ but does NOT return a handle — the branch is managed by the enclosing scope.
 | **Canceled** (Interrupted) | Cancelled before completion; terminal |
 | **Settled** | Either Completed or Canceled; terminal |
 
-### Methods
+!!! Methods
 
 **`task.Await()<suspends> : t`** — Suspends the caller until the task settles.
 
-- **Sticky:** If the task already completed, Await() returns immediately with the cached
+* **Sticky:** If the task already completed, Await() returns immediately with the cached
   result. Multiple callers on the same task always receive the same result.
-- **Cancellation propagation:** If the awaited task was cancelled, Await() propagates
+* **Cancellation propagation:** If the awaited task was cancelled, Await() propagates
   the cancellation to the caller.
-- Can be called multiple times from multiple callers.
+* Can be called multiple times from multiple callers.
 
 **`task.Cancel() : void`** — Requests cooperative cancellation.
 
-- Cancellation is cooperative, not forced. The task does not stop immediately; it
+* Cancellation is cooperative, not forced. The task does not stop immediately; it
   receives a cancellation signal checked at the **next suspension point**.
-- Code between suspension points runs to completion before cancellation is observed.
-- Safe to call multiple times or on an already-settled task (no effect).
-- Responsive cancellation pattern: insert `Sleep(0.0)` in tight loops to yield and
+* Code between suspension points runs to completion before cancellation is observed.
+* Safe to call multiple times or on an already-settled task (no effect).
+* Responsive cancellation pattern: insert `Sleep(0.0)` in tight loops to yield and
   check cancellation each iteration.
 
-### `cancelable` interface
+!!! `cancelable` interface
 
 ```verse
 cancelable := interface:
@@ -140,16 +140,16 @@ not task handles. Same interface, different semantic role.
 
 <<~ ahu #suspension-points >>
 
-## Suspension Points
+!! Suspension Points
 
 Suspension points are the only locations where: (a) async tasks can pause and yield
 control, and (b) cancellation signals are checked and processed.
 
 Suspension points include:
-- Timing operations: `Sleep(duration)`, `NextTick()`
-- Any `<suspends>` function call
-- Structured concurrency expressions: `sync`, `race`, `rush`, `branch`
-- `task.Await()`
+* Timing operations: `Sleep(duration)`, `NextTick()`
+* Any `<suspends>` function call
+* Structured concurrency expressions: `sync`, `race`, `rush`, `branch`
+* `task.Await()`
 
 Code between suspension points is **atomic** — it runs to completion without
 interruption or context switching.
@@ -161,15 +161,15 @@ per-transaction). All calls within one atomic block share the same timestamp.
 
 <<~ ahu #return-escape >>
 
-## `return` Escape Semantics
+!! `return` Escape Semantics
 
 A `return` statement inside a `sync`, `race`, or `rush` arm causes the enclosing
 **function** to return — not just the arm. The entire concurrency expression is
 abandoned:
 
-- Arms already started execute their `defer` blocks during unwinding
-- Unstarted arms are skipped entirely
-- The enclosing function exits with the return value
+* Arms already started execute their `defer` blocks during unwinding
+* Unstarted arms are skipped entirely
+* The enclosing function exits with the return value
 
 This is a cross-cutting edge in the task tree: `return` pierces upward through
 nested concurrency nodes and exits the containing function scope.
@@ -178,7 +178,7 @@ nested concurrency nodes and exits the containing function scope.
 
 <<~ ahu #defer-constraints >>
 
-## `defer` Constraints in Concurrency
+!! `defer` Constraints in Concurrency
 
 `defer` blocks execute during scope unwinding — whether from normal completion,
 failure, or cancellation. They provide cleanup guarantees.
@@ -195,7 +195,7 @@ has already exited.
 
 <<~ ahu #spawn-hides-suspends >>
 
-## Why `spawn` Escapes the Tree — Formal Reason
+!! Why `spawn` Escapes the Tree — Formal Reason
 
 Effects in Verse propagate upward through call chains. The `<suspends>` effect
 propagates: any function calling a `<suspends>` function must itself be marked
@@ -219,11 +219,11 @@ function that handles failure internally.
 
 <<~ ahu #visual-verse-status >>
 
-## Visual Verse / UE6 (unreleased, architecture unconfirmed)
+!! Visual Verse / UE6 (unreleased, architecture unconfirmed)
 
 Epic surveyed UEFN creators (2024-2025) on two proposed Visual Verse interface models:
-- **Block-based** (Scratch/Google Blockly style) — nested blocks for structured code
-- **Node-graph** (Blueprint-style) — data-flow and execution-flow nodes
+* **Block-based** (Scratch/Google Blockly style) — nested blocks for structured code
+* **Node-graph** (Blueprint-style) — data-flow and execution-flow nodes
 
 **Critical:** Any future Visual Verse node graph will represent **Verse execution
 semantics** (this task tree model, structured concurrency, effects), NOT Blueprint's
@@ -239,7 +239,7 @@ the sigil-to-Verse mapping in this document provides the canonical alignment sur
 
 <<~ ahu #verse-calculus-distinction >>
 
-## Verse Calculus vs. UEFN Verse
+!! Verse Calculus vs. UEFN Verse
 
 The Verse Calculus (VC) is a formal core calculus published at ICFP 2023 (Peyton Jones,
 Sweeney et al.). It is a research artifact, not the game language.
@@ -261,7 +261,7 @@ async-aware, deterministic semantics with the concurrency operators.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lele >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/holo >>

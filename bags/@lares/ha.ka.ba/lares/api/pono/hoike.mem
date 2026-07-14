@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike"
 
 <<~ ahu #entry >>
 
-# Hoike — Keeping the Losers
+! Hoike — Keeping the Losers
 
 A hoike keeps a contested ruling whole: the held position, every dissent with its holder's name and full reasoning, and the key that re-opens the question. The decision channel and the memory channel run decoupled — the node acts on the held position while the record preserves the rest. A future court may depend on a kept dissent to reverse; preservation without a re-entry rule decays into sediment, so every kue carries its key.
 
@@ -30,7 +30,7 @@ A hoike keeps a contested ruling whole: the held position, every dissent with it
 
 <<~ ahu #sigils >>
 
-## The Three Sigils
+!! The Three Sigils
 
 | canonical | alias | act |
 |-|-|-|
@@ -61,7 +61,7 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 <<~ ahu #laws >>
 
-## Laws
+!! Laws
 
 1. **Attribution.** Every kue names its holder (Voice or operator). An anonymous dissent evaporates and MUST NOT file.
 2. **Reasons travel; votes don't.** A kue carries reasoning to the travel-floor: a stranger could reconstruct and re-open the argument from the block alone.
@@ -78,7 +78,7 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 <<~ ahu #degraded >>
 
-## Degraded States
+!! Degraded States
 
 | state | tell | recover |
 |-|-|-|
@@ -91,7 +91,7 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 <<~ ahu #lineage >>
 
-## Lineage
+!! Lineage
 
 The layer carries the Eduyot pattern: minority opinions kept with attribution so a later court may depend on them (Mishnah Eduyot 1:4–6); the winning school taught the losing words first (Eruvin 13b); the written dissent appeals to the intelligence of a future day (Hughes 1928); consent decoupled from consensus, objections harvested as information (sociocratic practice); the minute records the Friend standing aside (Quaker practice). The ancestor-word *edut* (testimony) rests here. Field survey: Research Wave 12, 2026-06-10.
 
@@ -99,7 +99,7 @@ The layer carries the Eduyot pattern: minority opinions kept with attribution so
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>

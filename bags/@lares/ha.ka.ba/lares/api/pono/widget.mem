@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/widget"
 
 <<~ ahu #head >>
 
-# \widget
+! \widget
 
 English-form widget declaration pragma. `<<~ \widget ~name(params) >>body<<~/ \widget >>` declares
 a named widget body callable as `<<~ name args >>` via the `~` dispatcher.
@@ -36,7 +36,7 @@ No direct Hawaiian equivalent. The `~` prefix carries the Lares convention for c
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A `\widget` declaration MUST use the `~` prefix on the widget name.
 A `\widget` declaration MUST close with `<<~/ \widget >>`.
@@ -49,7 +49,7 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ \widget ~mysigil(uri:"" p1:"") >>
@@ -63,7 +63,7 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/dispatcher >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>

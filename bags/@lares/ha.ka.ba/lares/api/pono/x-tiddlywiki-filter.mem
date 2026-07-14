@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/x-tiddlywiki-filter"
 
 <<~ ahu #head >>
 
-# x-tiddlywiki-filter
+! x-tiddlywiki-filter
 
 The `x-tiddlywiki-filter` grammar key gives the Lararium system access to
 the full TiddlyWiki 5 filter expression language — every operator, step form,
@@ -37,7 +37,7 @@ pranala data model. This meme is the pointer; that meme is the law.
 
 <<~ ahu #what-is-implemented >>
 
-## What Is Implemented
+!! What Is Implemented
 
 `wikitext-filter` implements every standard TiddlyWiki 5 filter operator. The
 full operator reference lives in the TW5 documentation:
@@ -47,7 +47,7 @@ full operator reference lives in the TW5 documentation:
 All standard operators work in Lararium as they do in TW5. The noun substitutions
 below are the only required adjustments — the filter syntax itself is identical.
 
-### Noun substitutions
+!!! Noun substitutions
 
 TW5 uses "tiddler" as its data unit. Lararium uses "meme" (a URI-addressed
 tiddler). Filters work the same way; the labels change.
@@ -63,7 +63,7 @@ tiddler). Filters work the same way; the labels change.
 
 <<~ ahu #extensions >>
 
-## Extensions in wikitext-filter
+!! Extensions in wikitext-filter
 
 On top of the full TW5 surface, `wikitext-filter` adds operators native to the
 Lararium pranala data model. These have no TW5 equivalent.
@@ -85,7 +85,7 @@ See the full spec: `lar:///ha.ka.ba/lares/api/pono/wikitext-filter`
 
 <<~ ahu #invocation >>
 
-## Invocation
+!! Invocation
 
 Two ways to use this grammar in a carrier:
 
@@ -121,7 +121,7 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wikitext-filter >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar >>

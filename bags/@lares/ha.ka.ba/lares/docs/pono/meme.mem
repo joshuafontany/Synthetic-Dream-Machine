@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/meme"
 
 <<~ ahu #meme-header >>
 
-# Meme — Extended Docs
+! Meme — Extended Docs
 
 This file does not bind invariant law.
 Law lives in `lar:///ha.ka.ba/lares/api/pono/meme`.
@@ -30,7 +30,7 @@ This surface carries examples, tables, and split residue.
 
 <<~ ahu #required-shape-reference >>
 
-## Required Shape Reference
+!! Required Shape Reference
 
 | surface | why it matters |
 |---|---|
@@ -50,7 +50,7 @@ It does not replace these surfaces.
 
 <<~ ahu #lifecycle-table >>
 
-## Lifecycle Table
+!! Lifecycle Table
 
 | posture | reading |
 |---|---|
@@ -67,7 +67,7 @@ It does not replace these surfaces.
 
 <<~ ahu #resolution-notes >>
 
-## Resolution Notes
+!! Resolution Notes
 
 When a meme declares depth through named `pranala` sugar such as `loulou`, keep these states distinct:
 
@@ -84,7 +84,7 @@ Do not treat decorative motion as structural depth.
 
 <<~ ahu #example-skeleton >>
 
-## Example Skeleton Reading
+!! Example Skeleton Reading
 
 The copy-ready skeleton now lives in `lar:///ha.ka.ba/lares/api/pono/meme/SKILL` because it functions as working procedure, not invariant law.
 Use that skeleton when you need a fresh lawful parent.
@@ -94,15 +94,15 @@ Then tighten its role, edges, and phase map for the actual carrier you are draft
 
 <<~ ahu #migration-note >>
 
-## Migration Note
+!! Migration Note
 
 This docs companion formed during the 2026-04-21 yin split/refine/clean pass.
 The old parent mixed invariant law, phase-by-phase procedure, skeleton blocks, resolution detail, and research backlog.
 The current shape keeps:
 
-- parent invariant at `lar:///ha.ka.ba/lares/api/pono/meme`
-- operational procedure at `lar:///ha.ka.ba/lares/api/pono/meme/SKILL`
-- extended guidance here
+* parent invariant at `lar:///ha.ka.ba/lares/api/pono/meme`
+* operational procedure at `lar:///ha.ka.ba/lares/api/pono/meme/SKILL`
+* extended guidance here
 
 Research backlog and subtype-specific detail should deepen into their own outward loci rather than re-swelling the parent.
 
@@ -110,7 +110,7 @@ Research backlog and subtype-specific detail should deepen into their own outwar
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>

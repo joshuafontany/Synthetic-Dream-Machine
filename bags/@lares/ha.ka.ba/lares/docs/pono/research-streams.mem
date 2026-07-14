@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lares/docs/pono/research-streams"
 
 <<~ ahu #head >>
 
-# Research Streams - Docs Hub
+! Research Streams - Docs Hub
 
 This hub carries outward-facing research evidence.
 Invariant law remains in API loci; quote witnesses remain here.
@@ -29,7 +29,7 @@ Invariant law remains in API loci; quote witnesses remain here.
 
 <<~ ahu #streams >>
 
-## Stream Memes
+!! Stream Memes
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/prior-art >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing >>
@@ -39,7 +39,7 @@ Invariant law remains in API loci; quote witnesses remain here.
 
 <<~ ahu #tension >>
 
-## Texture and Tension
+!! Texture and Tension
 
 1. Prior-art can justify architecture and still leave breakage pathways untested.
 2. Adversarial posture can find faults and still drift without doctrine-level meaning.

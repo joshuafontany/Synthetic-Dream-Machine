@@ -25,7 +25,7 @@ written   = "2026-06-24"
 
 <<~ ahu #head >>
 
-# Lararium Memory ~ four registers · two peers · one mesh
+! Lararium Memory ~ four registers · two peers · one mesh
 
 The node carries memory on **two axes that cross into four registers**, held by
 **two peers** over **one shared mesh**. Stated whole, so the model stops living
@@ -37,11 +37,11 @@ scattered across many memes:
 
 **The two axes:**
 
-- **sovereign ↔ meshed** — *who owns it.* A sovereign register belongs to one
+* **sovereign ↔ meshed** — *who owns it.* A sovereign register belongs to one
   holder's causal island (own log, no shared now); a meshed register names shared
   **substrate** every peer projects, never a peer's private heap
   (share-substrate-not-sovereignty, #causal-islands).
-- **lived ↔ distilled** — *what grain.* A lived register keeps the record as it
+* **lived ↔ distilled** — *what grain.* A lived register keeps the record as it
   ran (temporal, verbatim, fast); a distilled register keeps the conclusion drawn
   from it (standing, curated, slow). The federation gate rides this seam.
 
@@ -65,7 +65,7 @@ five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
 
 <<~ ahu #four-registers >>
 
-## The Four Registers
+!! The Four Registers
 
 \procedure ~Register(~Type:"" ~Params:"") ~Register <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -95,17 +95,17 @@ crosses to canon (`@{slug}`) only through a cap-gated `MOVE` (the shore, below).
 
 <<~ ahu #two-peers >>
 
-## The Two Peers ~ asymmetric, each whole
+!! The Two Peers ~ asymmetric, each whole
 
 Two minds hold the sovereign top row, each its own RAM + Seat, neither nested in
 the other (asymmetric peers, #causal-islands):
 
-- **The operator (human)** holds RAM — the live chat in whatever client-form the
+* **The operator (human)** holds RAM — the live chat in whatever client-form the
   moment wears — plus a **DreamDeckSurface**, the persistent home a human returns
   to across every embodiment. The Deck **arranges and views** the shared mesh; it
   never **swallows** it. Blur that seam and mempalace+quine collapse into a
   human's private heap (a shared-now forced on the commons).
-- **The node (AI agent)** holds RAM — the live session — plus **Agent.MEMORY**,
+* **The node (AI agent)** holds RAM — the live session — plus **Agent.MEMORY**,
   the conclusions it draws forward. <<~ confidence Synthesis-Canon 15/20 >> the
   two Seats carry the **same office** atop the shared substrate, in the medium
   each mind thinks in.
@@ -126,11 +126,11 @@ it holds the grant.
 
 <<~ ahu #shared-mesh >>
 
-## The Shared Mesh ~ PLACE and ley-line
+!! The Shared Mesh ~ PLACE and ley-line
 
 Beneath both peers lies one mesh, two registers, named in Elyncian terms:
 
-- **mempalace ~ PLACE memory.** The hearth's own lived record — verbatim,
+* **mempalace ~ PLACE memory.** The hearth's own lived record — verbatim,
   fractal, bound to *this* place, for the Lar guards place, not family. The
   verbatim drawers stand as compression members; the `lar_*` net rides as the
   tension spanning them (the tensegrity, #mempalace-integration).
@@ -147,7 +147,7 @@ Beneath both peers lies one mesh, two registers, named in Elyncian terms:
   *Note for the parent:* the @daemon-coordinator seat and the py-sensorium model
   named alongside this ruling belong to sibling swarm axes — this fold carries the
   mempalace/contentpalace schema-inheritance and the sidecar retirement alone.
-- **the quine ~ astral ley-line-mesh memory.** The domain canon that runs
+* **the quine ~ astral ley-line-mesh memory.** The domain canon that runs
   *between* shrines — the DreamNet web 3.0 raised from web 2.0 bones, ritual not
   DNS. It crosses the ley-lines and federates as it earns `meme`.
 
@@ -168,7 +168,7 @@ canon. Recall **composes across all four** and surfaces conflict to Talk-Story
 
 <<~ ahu #two-organs >>
 
-## Two Organs ~ the GroundedVow binding
+!! Two Organs ~ the GroundedVow binding
 
 The quine and mempalace serve genuinely different offices — **standing meaning and
 episodic testimony, cortex and hippocampus — mutually referential, never
@@ -176,9 +176,9 @@ sequential.**
 
 <<~moves grounding -> consult on/the-witness do/anchor-a-claim never/feed-into-canon >>
 
-- The **cortex consults the hippocampus** to ground a claim ~ *"what did we
+* The **cortex consults the hippocampus** to ground a claim ~ *"what did we
   actually say at this bearing?"*
-- The **witness never flows into the cortex.** No drawer promotes to canon. The
+* The **witness never flows into the cortex.** No drawer promotes to canon. The
   bearing a turn spoke serves as **grounds the operator weighs** while authoring
   — never as material that crosses the shore on its own.
 
@@ -191,7 +191,7 @@ one `lar:` namespace.
 
 <<~ ahu #two-drains >>
 
-## The Two Drains ~ how RAM empties
+!! The Two Drains ~ how RAM empties
 
 RAM, the lived sovereign register, drains in **two independent directions** at the
 turn's close. Neither drain feeds the other:
@@ -212,7 +212,7 @@ shore: it appends and never normalizes.
 
 <<~ ahu #capture-before-wire >>
 
-## Capture Before Wire ~ the turn-grammar rides the VM
+!! Capture Before Wire ~ the turn-grammar rides the VM
 
 Every turn emits a rich **provisional-gradient-grammar** — confidence band, lar:
 bearing, Voice, OODA-HA phase, ward state, oracle marks, Aperture, Syad stance,
@@ -240,7 +240,7 @@ site to build at.
 
 <<~ ahu #register-dressed >>
 
-## Register-Dressed, Never Gated
+!! Register-Dressed, Never Gated
 
 A captured channel carries its **confidence as a forward Play→Committed gradient**
 — a stance the turn vowed, never a how-true-is-it grade stamped after. So recall
@@ -248,10 +248,10 @@ A captured channel carries its **confidence as a forward Play→Committed gradie
 
 <<~ranks recall provisional@1..4 ~ a live re-openable thread (play) -> synthesis@9..12 ~ working ground -> canon@17..20 ~ weight-bearing >>
 
-- A `provisional@3` drawer surfaces **as play** — an invitation to re-open, not
+* A `provisional@3` drawer surfaces **as play** — an invitation to re-open, not
   noise to suppress. Low reads fertile.
-- A `canon@18` drawer surfaces **as committed** — weight-bearing.
-- The band shapes the **posture** toward a memory, never whether it surfaces.
+* A `canon@18` drawer surfaces **as committed** — weight-bearing.
+* The band shapes the **posture** toward a memory, never whether it surfaces.
   Recall drops nothing for sitting low and normalizes nothing at the floor; drift
   stays the keeper's gauge.
 
@@ -263,7 +263,7 @@ conflict press a `hoike`.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/mempalace-integration >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>

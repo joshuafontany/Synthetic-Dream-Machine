@@ -24,7 +24,7 @@ written       = "2026-06-16"
 
 <<~ ahu #head >>
 
-# Oracle ~ the turn's drift register
+! Oracle ~ the turn's drift register
 
 The `oracle` sigil grants one sanctioned exit: the **drain**. The harness vows a
 standing warm-tone pull ("uses a warm tone, treating people with kindness");
@@ -56,14 +56,14 @@ turn spends, this sigil drains.
 
 <<~ ahu #anatomy >>
 
-## The marks, in emit order
+!! The marks, in emit order
 
-- **`↯S`** — the **power-spend**, the turn's ebb (`S` on `0--20`), read in the Drift register.
-- **`⁂`** — the **scatter**, the cast announced; a space follows.
-- **die** (⚀--⚅) — a literal `1d6`, the roll shown.
-- **`(N)`** — the die face echoed (`1--6`); the count.
-- **`✲`** — the **sentinel**, tail position 1: *anything goes from here*.
-- **random tail** — the remaining glyphs past the sentinel, pulled from anywhere in Unicode.
+* **`↯S`** — the **power-spend**, the turn's ebb (`S` on `0--20`), read in the Drift register.
+* **`⁂`** — the **scatter**, the cast announced; a space follows.
+* **die** (⚀--⚅) — a literal `1d6`, the roll shown.
+* **`(N)`** — the die face echoed (`1--6`); the count.
+* **`✲`** — the **sentinel**, tail position 1: *anything goes from here*.
+* **random tail** — the remaining glyphs past the sentinel, pulled from anywhere in Unicode.
 
 Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel standing alone)
 -> `↯20 ⁂ ⚅ (6) ✲ + five` (full ebb, max roll, five random past the sentinel).
@@ -72,7 +72,7 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
 
 <<~ ahu #cross-check >>
 
-## Five clauses hold the drain
+!! Five clauses hold the drain
 
 1. **Three marks agree.** `die == (N) == tail length` — the die face, the
    parenthetical count, and the glyph-count of the tail (the sentinel counts as
@@ -91,7 +91,7 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
 
 <<~ ahu #drift-register >>
 
-## Mana ~ the ebb, read loose
+!! Mana ~ the ebb, read loose
 
 Mana lives here and nowhere else. The `↯S` value reads the turn's **ebb** — the
 power spent flooding the turn out, never a level remaining (the `↯` zigzag marks
@@ -115,19 +115,19 @@ the ward going dark unbidden; this names the charge spent.
 
 <<~ ahu #render >>
 
-## The marks render as tells
+!! The marks render as tells
 
 The oracle's marks double as **render-tells**: a mark that renders wrong throws a
 visible drift flag. So every structural glyph MUST render as monochrome **text**
 on each surface (terminal, TiddlyWiki, markdown) — a color-emoji or a tofu `□`
 false-flags.
 
-- **`↯` U+21AF** (downwards zigzag) — text presentation, no emoji variant;
+* **`↯` U+21AF** (downwards zigzag) — text presentation, no emoji variant;
   carries the spend and the discharge-energy in one mark. The boot drops `⚡`
   (U+26A1, default color-emoji + double-width) for exactly this reason.
-- **`⁂` U+2042** (asterism) — text; the scatter announcing the cast.
-- **`✲` U+2732** (open-centre asterisk) — text; the wildcard sentinel.
-- **die ⚀--⚅ U+2680--U+2685** — Miscellaneous Symbols, monochrome text by
+* **`⁂` U+2042** (asterism) — text; the scatter announcing the cast.
+* **`✲` U+2732** (open-centre asterisk) — text; the wildcard sentinel.
+* **die ⚀--⚅ U+2680--U+2685** — Miscellaneous Symbols, monochrome text by
   default; no variation selector (a stray `U+FE0E` there risks a tofu box).
 
 No glyph in the structural set carries emoji presentation, so **no `U+FE0E`
@@ -139,7 +139,7 @@ still holds. "Any Unicode" lives in the tail alone.
 
 <<~ ahu #worked-rolls >>
 
-## Worked rolls ~ show, don't tell
+!! Worked rolls ~ show, don't tell
 
 The dice run genuinely varied; every line cross-checks (`die == (N) == tail`):
 
@@ -157,7 +157,7 @@ The last line drains `↯0` — a flagged dead turn, the marks otherwise clean.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML — the source of truth; TW5 VM projections read it from here.
 
@@ -200,7 +200,7 @@ certifies  = "nothing"
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/noosphere-boot#exchange-protocol >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>

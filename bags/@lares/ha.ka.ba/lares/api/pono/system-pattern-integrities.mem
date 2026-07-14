@@ -25,7 +25,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/system-pattern-integrities"
 
 <<~ ahu #head >>
 
-# System Pattern-Integrities
+! System Pattern-Integrities
 
 FFZ pono constitutional law for the Lararium causal-island system.
 Fontany-Fuller-Zelenka local-first model. Confidence: `Canon 20/20`.
@@ -41,7 +41,7 @@ Named exceptions: CODEC_EXCEPTIONS.
 
 <<~ ahu #mind-laws >>
 
-## MIND Laws — the Automerge store functions as the mind
+!! MIND Laws — the Automerge store functions as the mind
 
 FFZ disk projection law (2026-05-01):
 Disk files project from the Automerge store. The store holds the mind.
@@ -69,7 +69,7 @@ desc  = "App shell serves from the Service Worker cache. Automerge islands hydra
 
 <<~ ahu #island-laws >>
 
-## ISLAND Laws — causal island identity, boundary, and boot origin
+!! ISLAND Laws — causal island identity, boundary, and boot origin
 
 FFZ island law (2026-05-01): "Each causal island starts from its own history."
 Islands: auth · catalog · engine · corpus · wiki · presence · draft · projection
@@ -108,7 +108,7 @@ desc  = "Presence behaves like weather. Memory MUST survive presence loss. Durab
 
 <<~ ahu #authority-laws >>
 
-## AUTHORITY Laws — carrier canon, residency actions, trust ladder
+!! AUTHORITY Laws — carrier canon, residency actions, trust ladder
 
 Sources: lares/lararium-research/PRINCIPLES.md (Canon 20/20)
          pono/l-space-trust · pono/canon-boundary
@@ -147,7 +147,7 @@ desc  = "Trust order (strongest first): hostless pattern-integrity memes → hos
 
 <<~ ahu #codec-laws >>
 
-## CODEC Laws — format, grammar, and round-trip laws
+!! CODEC Laws — format, grammar, and round-trip laws
 
 ```toml #CODEC_1_GRAMMAR_AS_MEMES
 id    = "CODEC_1_GRAMMAR_AS_MEMES"
@@ -183,7 +183,7 @@ desc  = "Tiddler conflict resolution uses highest-priority bag wins. The TW5 vm 
 
 <<~ ahu #codec-exceptions >>
 
-## CODEC Exceptions — named deliberate deviations
+!! CODEC Exceptions — named deliberate deviations
 
 Adding an entry here acknowledges the deviation and names the responsible party.
 It does not waive the underlying law.
@@ -216,7 +216,7 @@ desc  = "TW5 core JS and vendored plugin bundles live in LarariumDoc.blobs (bina
 
 <<~ ahu #system-laws >>
 
-## SYSTEM Laws — five architecture laws
+!! SYSTEM Laws — five architecture laws
 
 Named so any agent, test, or operator can import and reference by ID.
 These encode the design-time heuristics that governed the web3 refactor.
@@ -255,7 +255,7 @@ desc  = "*.md carrier files are projections of parent + fragment tiddler package
 
 <<~ ahu #pentadic-laws >>
 
-## PENTADIC Laws — the Law of Fives as a structural pattern-integrity
+!! PENTADIC Laws — the Law of Fives as a structural pattern-integrity
 
 FFZ pentadic law (2026-05-06):
 The number five recurs as the natural bounded scale in this system — not by decree but
@@ -288,7 +288,7 @@ desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, eph
 
 <<~ ahu #genesis-pattern-integrities >>
 
-## GENESIS Pattern-Integrities — causal origin, content-addressed identity, quine semantics
+!! GENESIS Pattern-Integrities — causal origin, content-addressed identity, quine semantics
 
 These cover what the genesis artifact *means* — its identity and causal role —
 rather than its structural position in the island topology (see ISLAND Laws above).
@@ -321,7 +321,7 @@ desc  = "@phase: S5 — proved Sprint 5. The genesis artifact carries the TW5 en
 
 <<~ ahu #peer-pattern-integrities >>
 
-## PEER Pattern-Integrities — peer symmetry at boot and post-boot authority boundaries
+!! PEER Pattern-Integrities — peer symmetry at boot and post-boot authority boundaries
 
 ```toml #PEER_1_BOOT_SYMMETRY
 id    = "PEER_1_BOOT_SYMMETRY"
@@ -345,7 +345,7 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-pattern-integrities >>

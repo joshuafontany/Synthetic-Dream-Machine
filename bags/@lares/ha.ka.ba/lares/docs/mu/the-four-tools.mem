@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-four-tools"
 
 <<~ ahu #meme-header >>
 
-# The Four Tools Witness Shelf
+! The Four Tools Witness Shelf
 
 Source matter moved here.
 Invariant reduced elsewhere.
@@ -30,11 +30,11 @@ The braid remains recoverable here.
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 The tight invariant now lives at:
 
-- `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
+* `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
 
 This shelf retains the local witness braid behind that compact surface.
 
@@ -44,16 +44,16 @@ This shelf retains the local witness braid behind that compact surface.
 
 <<~ ahu #witness-texts >>
 
-## Witness Texts
+!! Witness Texts
 
-- **Robert Anton Wilson** — Chapel Perilous / *Cosmic Trigger* witness. Local witness: `packages/lares-core/memes/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md`
-- **Camden Benares, Count of the 5s** — *Common Sense Tarot* witness retained by the Floating Librarians of Mu. Local witness: `packages/lares-core/memes/library/discordia/the-count-of-5s/common-sense-tarot.md`
+* **Robert Anton Wilson** — Chapel Perilous / *Cosmic Trigger* witness. Local witness: `packages/lares-core/memes/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md`
+* **Camden Benares, Count of the 5s** — *Common Sense Tarot* witness retained by the Floating Librarians of Mu. Local witness: `packages/lares-core/memes/library/discordia/the-count-of-5s/common-sense-tarot.md`
 
 <<~/ahu >>
 
 <<~ ahu #source-braid >>
 
-## Source Braid
+!! Source Braid
 
 RAW supplies the peril:
 wand of intuition,
@@ -78,7 +78,7 @@ one clean preference for model agnosticism over paranoia.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>

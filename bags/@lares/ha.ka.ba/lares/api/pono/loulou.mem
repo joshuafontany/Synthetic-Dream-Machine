@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 
 <<~ ahu #head >>
 
-# Loulou
+! Loulou
 
 *loulou* — Hawaiian: to tie, bind, fasten; to link together.
 
@@ -43,7 +43,7 @@ Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A loulou MUST bind a source socket and a target URI.
 A loulou MUST carry `family:relation`.
@@ -59,7 +59,7 @@ propagation is none. The edge says what holds between the sockets, not what runs
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ loulou URI >>
@@ -85,7 +85,7 @@ Full pranala expansion:
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for `BUILTIN_LOULOU_RE` and `loulouDefaultFamily`
 in `packages/lararium-mesh/src/pranala-parser.ts`.
@@ -112,7 +112,7 @@ confidence-bounded = false
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/aka >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>

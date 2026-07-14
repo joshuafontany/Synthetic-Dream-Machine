@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/tick"
 
 <<~ ahu #head >>
 
-# \tick (Deferred)
+! \tick (Deferred)
 
 Device lifecycle hook: run this block once per *nalu* (simulation tick / refresh wave).
 Verse equivalent: `OnSimulate(StagedUpdates)<suspends>` entry point.
@@ -32,7 +32,7 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
 

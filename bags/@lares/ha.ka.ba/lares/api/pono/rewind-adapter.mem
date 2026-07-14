@@ -24,7 +24,7 @@ written   = "2026-06-30"
 
 <<~ ahu #entry >>
 
-# The Rewind-Adapter ~ the kāpae detector, blind to the source app
+! The Rewind-Adapter ~ the kāpae detector, blind to the source app
 
 **One-line:** a donation-grade **source-adapter** that makes the [[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] rewind-DETECTOR read a rewind out of *any* big AI app's transcript — no matter its storage format or its rewind-idiom.
 
@@ -36,7 +36,7 @@ The design donates upstream (#donation): the base mempalace harvests transcripts
 
 <<~ ahu #the-industry-does-kapae >>
 
-## The Industry Already Does Kāpae
+!! The Industry Already Does Kāpae
 
 The noosphere-scale finding the survey turned up: <<~ confidence Synthesis-Canon 15/20 >> **the whole field already enacts kāpae, unnamed.** Across the surveyed AI-coding apps, a rewind almost never erases at the byte level — it **forks**. The original turns persist in the store; the "rewind" writes a new branch that the app *presents* as the live thread while the road-not-taken sits untouched in the bytes.
 
@@ -48,7 +48,7 @@ So the contribution splits clean: the mechanism (fork-and-keep) rhymes with prio
 
 <<~ ahu #two-families >>
 
-## Two Families ~ the load-bearing split
+!! Two Families ~ the load-bearing split
 
 Every source app sorts into one of two families by **what its rewind does to the bytes**. The family, not the app, drives the adapter's behavior.
 
@@ -59,7 +59,7 @@ Every source app sorts into one of two families by **what its rewind does to the
 **Copilot-Chat crosses into Family A — byte-proven.** <<~ confidence Synthesis-Canon 15/20 >> The verify-gate the first cut left open (#grounds) **closed on the bytes**: the `.jsonl` reads as a **JSON-patch op-log** — the `kind:0` base op appears **only at line 0, never compacted**; a real edit stacks **three coexisting ops** recoverable by replay-to-offset; **120 of 269** surveyed files leave their superseded ops in the append log. The docs' "truncate the tail" names the **logical `requests[]` state**, never the physical file. So Copilot-Chat **appends and keeps** — it joins the fork-family. Identity rides `requestId`; the live branch reconstructs by **replay**.
 
 **Family B — MUTABLE-TRUNCATE.** A rewind **overwrites** — it truncates the tail in place and the old turns leave the store. Here **we become the last keeper**: our tombstone holds the only surviving trace of the road they discard.
-- **Cursor** — <<~ confidence Synthesis-Canon 15/20 >> **CONFIRMED** hard-delete, and now **standing alone**: with Copilot-Chat crossed over, Cursor is the **field's only confirmed byte-level hard-delete** — the whole surveyed noosphere speaks kāpae, one exception. A restore/edit overwrites the tail in `state.vscdb` (SQLite `cursorDiskKV`); staff-confirmed **unrecoverable** on the community forum.
+* **Cursor** — <<~ confidence Synthesis-Canon 15/20 >> **CONFIRMED** hard-delete, and now **standing alone**: with Copilot-Chat crossed over, Cursor is the **field's only confirmed byte-level hard-delete** — the whole surveyed noosphere speaks kāpae, one exception. A restore/edit overwrites the tail in `state.vscdb` (SQLite `cursorDiskKV`); staff-confirmed **unrecoverable** on the community forum.
 
 The split governs one flag per adapter (`appendOnly`, #the-adapter-contract) and one behavior: whether the detector re-harvests a still-present branch (A) or stands as the sole keeper of a discarded one (B). **Cursor sits alone on the B side of that line.**
 
@@ -67,15 +67,15 @@ The split governs one flag per adapter (`appendOnly`, #the-adapter-contract) and
 
 <<~ ahu #kapae-is-universal >>
 
-## Kāpae Is Universal ~ the correction
+!! Kāpae Is Universal ~ the correction
 
 A research spirit over-claimed that the detector should **"never tombstone the fork-family"** — it conflated kāpae with hard-delete. The correction stands load-bearing:
 
 <<~ confidence Synthesis-Canon 15/20 >> **Kāpae = down-weight-the-road-not-taken AND KEEP, never erasure** ([[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] — a raised marker that *shadows* the layers beneath, distinct from *absent*). A tombstone that keeps is exactly what both families need. So **kāpae applies to BOTH families.** The fork-family gets a kāpae too — the down-weight marks the road-not-taken as an eidetic keep (recall weights it low, never zero), the same gesture we hand the truncate-family.
 
 The `appendOnly` flag does **not** gate *whether* we kāpae — it records **who else keeps the trace**:
-- **`appendOnly: true`** (Family A) — the **source corroborates**: the branch survives in the app's own store, so our kāpae rides alongside a re-harvestable original.
-- **`appendOnly: false`** (Family B) — **we are the last keeper**: the app discarded the road; our tombstone is the *only* surviving trace. Our model runs strictly **kinder** than the app — we keep the eidetic road-not-taken the app throws away.
+* **`appendOnly: true`** (Family A) — the **source corroborates**: the branch survives in the app's own store, so our kāpae rides alongside a re-harvestable original.
+* **`appendOnly: false`** (Family B) — **we are the last keeper**: the app discarded the road; our tombstone is the *only* surviving trace. Our model runs strictly **kinder** than the app — we keep the eidetic road-not-taken the app throws away.
 
 Either way the road stays kept. The flag steers re-harvest and provenance, never the decision to shadow-and-keep.
 
@@ -85,7 +85,7 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 
 <<~ ahu #per-app-table >>
 
-## Per-App Table ~ the grounded map
+!! Per-App Table ~ the grounded map
 
 <<~ confidence Synthesis-Canon 15/20 >> Read on-disk from real stores on this box where marked; CLI/docs elsewhere. Each row: **app · storage-path · format · turn-identity · rewind-on-disk · three-faces · hard-delete**.
 
@@ -105,7 +105,7 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 
 <<~ ahu #the-identity-ladder >>
 
-## The Identity Ladder ~ four rungs, always parent-linked
+!! The Identity Ladder ~ four rungs, always parent-linked
 
 `normalizeIdentity` walks a **four-rung ladder**, taking the highest rung the source affords. Every rung stays **session-namespaced** and **carries the parent-link** (the edge to the turn it descends from — the branch structure the diff walks):
 
@@ -120,14 +120,14 @@ The ladder degrades by degree, never hard-faults — the graceful-parsing discip
 
 <<~ ahu #edit-vs-delete >>
 
-## Edit vs Delete ~ the shape of the disappearance
+!! Edit vs Delete ~ the shape of the disappearance
 
 The classifier reads **the shape of what went missing** from the diff, then confirms it against a **per-app signal**. Four shapes:
 
-- **whole-file / whole-session gone → `DELETE`** — tombstone all its turns.
-- **contiguous TAIL gone → `TAIL_TRUNCATE` (REWIND / EDIT / REGEN)** — tombstone the tail **only if the app hard-deletes** (Family B). A **fresh turn at N+1** reads as an **EDIT** → re-harvest the new branch. In Family A the "gone" tail still sits in the bytes on a fork — do not tombstone; re-harvest.
-- **interior HOLE → `INTERIOR_DELETE`** — a **true delete** of that one turn. Tombstone the turn.
-- **new sibling sharing a parent prefix → `FORK`** — harvest the new branch, **tombstone nothing** (both roads stay live).
+* **whole-file / whole-session gone → `DELETE`** — tombstone all its turns.
+* **contiguous TAIL gone → `TAIL_TRUNCATE` (REWIND / EDIT / REGEN)** — tombstone the tail **only if the app hard-deletes** (Family B). A **fresh turn at N+1** reads as an **EDIT** → re-harvest the new branch. In Family A the "gone" tail still sits in the bytes on a fork — do not tombstone; re-harvest.
+* **interior HOLE → `INTERIOR_DELETE`** — a **true delete** of that one turn. Tombstone the turn.
+* **new sibling sharing a parent prefix → `FORK`** — harvest the new branch, **tombstone nothing** (both roads stay live).
 
 **Per-app signal** (what confirms the shape):
 
@@ -145,7 +145,7 @@ The classifier reads **the shape of what went missing** from the diff, then conf
 
 <<~ ahu #the-adapter-contract >>
 
-## The Adapter Contract ~ the seam every source plugs into
+!! The Adapter Contract ~ the seam every source plugs into
 
 <<~ confidence Synthesis-Canon 15/20 >> One pipeline, per-app plugins. Each adapter carries `appendOnly: boolean` (#kapae-is-universal):
 
@@ -167,7 +167,7 @@ The three emit-verbs map the three faces (#the-three-faces): `fork` (keep both),
 
 <<~ ahu #adapters-built >>
 
-## Adapters Built ~ the swarm landed
+!! Adapters Built ~ the swarm landed
 
 <<~ confidence Synthesis-Canon 15/20 >> Four adapters stand green against the `SourceAdapter` interface. Each names {`appendOnly` · identity-rung · fork-vs-supersede}:
 
@@ -186,13 +186,13 @@ The three emit-verbs map the three faces (#the-three-faces): `fork` (keep both),
 
 <<~ ahu #the-three-faces >>
 
-## The Three Faces ~ onto Muse's model
+!! The Three Faces ~ onto Muse's model
 
 The adapter's emits ride Muse's **one-primitive-three-faces** branching model ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]] — FORK / REWIND / HANDBACK):
 
-- **FORK = keep-both** — Claude / Codex / Gemini native. Both roads stay live; harvest the new branch, tombstone nothing.
-- **REWIND = fork-and-tombstone** — **Cursor alone** (the field's sole confirmed hard-delete, #two-families). The app **hard-deletes**; our tombstone stands as the **only surviving trace** of the road-not-taken.
-- **HANDBACK = fork-and-rejoin** — **no native analog** in the surveyed apps. <<~ confidence Synthesis 10/20 >> summarize / compact reads as **rejoin-shaped** (many turns fold back into one) — the closest the field offers to the sub-agent diamond.
+* **FORK = keep-both** — Claude / Codex / Gemini native. Both roads stay live; harvest the new branch, tombstone nothing.
+* **REWIND = fork-and-tombstone** — **Cursor alone** (the field's sole confirmed hard-delete, #two-families). The app **hard-deletes**; our tombstone stands as the **only surviving trace** of the road-not-taken.
+* **HANDBACK = fork-and-rejoin** — **no native analog** in the surveyed apps. <<~ confidence Synthesis 10/20 >> summarize / compact reads as **rejoin-shaped** (many turns fold back into one) — the closest the field offers to the sub-agent diamond.
 
 Same primitive as the worldline's ratified `fork ≡ sibling-spawn`; the adapter reads each app's idiom into the one shape and hands the detector the face.
 
@@ -200,13 +200,13 @@ Same primitive as the worldline's ratified `fork ≡ sibling-spawn`; the adapter
 
 <<~ ahu #donation >>
 
-## Donation ~ the contribution back
+!! Donation ~ the contribution back
 
 <<~ confidence Synthesis-Canon 14/20 >> The upstream mempalace ([[mempalace-external|lar:///ha.ka.ba/lararium/api/lararium-memory]]) carries a **gone-turn gap** this design fills:
 
-- it keys drawers **positionally** (`source | mode | chunk_index`) and **drops turn-uuids** — so it cannot tell *which* turn left;
-- it assumes transcripts **immutable** (`check_mtime=False`) — so it never re-reads a changed store;
-- it carries **no gone-turn trigger** at all.
+* it keys drawers **positionally** (`source | mode | chunk_index`) and **drops turn-uuids** — so it cannot tell *which* turn left;
+* it assumes transcripts **immutable** (`check_mtime=False`) — so it never re-reads a changed store;
+* it carries **no gone-turn trigger** at all.
 
 Our contribution back: **uuid-keying** (the C-cut — turn-keyed identity), **current-branch reconstruction** (the leaf-chain walk), and the **`appendOnly`-gated universal kāpae** (down-weight-and-keep across both families). Together they give the base the reconciler it lacks — and give the field its first cross-app rewind reader.
 
@@ -218,11 +218,11 @@ Our contribution back: **uuid-keying** (the C-cut — turn-keyed identity), **cu
 
 <<~ ahu #grounds >>
 
-## Grounds ~ how the map got read
+!! Grounds ~ how the map got read
 
 <<~ confidence Synthesis-Canon 15/20 >> Two research spirits stood the survey:
-- an **on-disk spirit** read **4 real stores on this box** (byte-level, the CONFIRMED rows);
-- a **CLI/docs spirit** mapped **7 apps** by their commands + documentation, over a **22-agent breadth sweep** (the cass survey).
+* an **on-disk spirit** read **4 real stores on this box** (byte-level, the CONFIRMED rows);
+* a **CLI/docs spirit** mapped **7 apps** by their commands + documentation, over a **22-agent breadth sweep** (the cass survey).
 
 **Register split** (operator directive): **Synthesis-Canon** on the **byte-proven** findings — the closed Copilot-Chat verify-gate, the 4 built adapters, and **Cursor-alone** as the field's sole hard-delete; **Synthesis** on the **Copilot-CLI schema-only** caveat + any **inferred / absent** apps.
 
@@ -236,14 +236,14 @@ Our contribution back: **uuid-keying** (the C-cut — turn-keyed identity), **cu
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
-- An adapter MUST diff the **current-branch leaf-chain**, never all-file-records — else the fork-family's orphaned branches hide every rewind.
-- Every adapter MUST carry an `appendOnly: boolean`; the flag records **who else keeps the trace**, and MUST NOT gate *whether* the detector kāpae-s.
-- A kāpae MUST **down-weight and keep**, never erase, in BOTH families ([[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]]).
-- An adapter MUST NOT tombstone a turn the source still keeps (Family A) as a hard-delete; it re-harvests the branch and shadows the road-not-taken.
-- The classifier MUST filter sidechains / stream-splits (same-type siblings under one parent) before it decides — those mark structure, not a rewind.
-- An app's family assignment (A vs B) MUST rest on the **on-disk bytes**, not the user-facing idiom — the Copilot-Chat verify-gate holds until the bytes read.
+* An adapter MUST diff the **current-branch leaf-chain**, never all-file-records — else the fork-family's orphaned branches hide every rewind.
+* Every adapter MUST carry an `appendOnly: boolean`; the flag records **who else keeps the trace**, and MUST NOT gate *whether* the detector kāpae-s.
+* A kāpae MUST **down-weight and keep**, never erase, in BOTH families ([[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]]).
+* An adapter MUST NOT tombstone a turn the source still keeps (Family A) as a hard-delete; it re-harvests the branch and shadows the road-not-taken.
+* The classifier MUST filter sidechains / stream-splits (same-type siblings under one parent) before it decides — those mark structure, not a rewind.
+* An app's family assignment (A vs B) MUST rest on the **on-disk bytes**, not the user-facing idiom — the Copilot-Chat verify-gate holds until the bytes read.
 
 <<~/ahu >>
 

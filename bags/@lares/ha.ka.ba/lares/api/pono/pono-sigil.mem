@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 
 <<~ ahu #head >>
 
-# Pono (Sigil)
+! Pono (Sigil)
 
 *pono* — Hawaiian: rightness, correctness, balance, moral alignment; proper, fit, just.
 
@@ -35,7 +35,7 @@ the same word because a `pono` edge asserts alignment — the naming runs intent
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A pono edge MUST carry a FROM node and a TO node.
 A pono edge MUST express a correctness or constraint relationship.
@@ -46,7 +46,7 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ pono #slot FROM -> TO role:constrains >>
@@ -57,7 +57,7 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-constraint >>

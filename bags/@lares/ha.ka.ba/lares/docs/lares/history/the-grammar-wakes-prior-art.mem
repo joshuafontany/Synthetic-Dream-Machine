@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/docs/lares/history/the-grammar-wakes-prior-art"
 
 <<~ ahu #head >>
 
-# Prior Art Comparison Battery — Genesis Side-Car
+! Prior Art Comparison Battery — Genesis Side-Car
 
 The design-research that sits beside [the genesis arc](the-grammar-wakes.md): a formal prior-art review that produced the W3C lineage verdicts now in `lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#w3c-lineage-verdicts`.
 
@@ -31,7 +31,7 @@ Where *The Grammar Wakes* tells how the teeth found the page, this side-car hold
 
 <<~ ahu #comparison-axes >>
 
-## Comparison Axes
+!! Comparison Axes
 
 Seven axes guided each system comparison:
 
@@ -47,7 +47,7 @@ Seven axes guided each system comparison:
 
 <<~ ahu #per-system >>
 
-## Per-System Findings
+!! Per-System Findings
 
 **TiddlyWiki** — nearest live ancestor; strongest precedent for transclusion, templates, cascades, callable `<< >>` objects, and parser-driven lowering. Direct transclusion and transclusion-through-template stay distinct. Filters form a pipeline algebra. Parser modes and rule modules define the language operationally. Recursion errors land as first-class.
 → *Design pressure:* `kahea` bare form maps to TW5 direct transclusion; `kahea -> procedure/cascade` maps to template masking and callable object flow.
@@ -77,7 +77,7 @@ Seven axes guided each system comparison:
 
 <<~ ahu #highest-value-table >>
 
-## Highest-Value Prior Art by Spec Seam
+!! Highest-Value Prior Art by Spec Seam
 
 | Seam | Best prior art |
 |---|---|
@@ -94,7 +94,7 @@ Seven axes guided each system comparison:
 
 <<~ ahu #design-tests >>
 
-## Open Design Tests for v5 Spec
+!! Open Design Tests for v5 Spec
 
 The prior-art review produced seven design tests. These stood unresolved at the time of review and drive the v5 spec rebuild:
 
@@ -112,7 +112,7 @@ The W3C research additionally surfaced: the grammar still lacks its own canonica
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/the-grammar-wakes >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#w3c-lineage-verdicts >>

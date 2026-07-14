@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/ui"
 
 <<~ ahu #head >>
 
-# Ui
+! Ui
 
 *ui* — Hawaiian: to inquire, question, ask; to seek; to look into. *Ui* as a verb carries the
 motion of the questioner turning toward a subject — a directed inquiry, not a passive reception.
@@ -32,7 +32,7 @@ and renders whatever answers.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A ui sigil MUST carry a TW5 filter expression as its first argument.
 A ui sigil MUST render each result in the filter's result set.
@@ -42,7 +42,7 @@ A ui sigil MUST evaluate the filter in the current tiddler context.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ ui [filter-expression] >>
@@ -58,7 +58,7 @@ TW5 filter expansion:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-query >>
 

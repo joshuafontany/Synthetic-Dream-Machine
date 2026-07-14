@@ -22,7 +22,7 @@ uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-arc
 
 <<~ ahu #meme-header >>
 
-# The Lindwyrm's Hoard — DreamDeck Feed Architecture
+! The Lindwyrm's Hoard — DreamDeck Feed Architecture
 
 Container, cast, format conventions, and tone laws for the Lindwyrm hoard story.
 
@@ -30,35 +30,35 @@ Container, cast, format conventions, and tone laws for the Lindwyrm hoard story.
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Consumed duplicate story-shape files:
 
-- `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE.md`
-- `packages/lares-core/memes/docs/story/lindwyrm/LINDWYRM_STORY_SHAPE.md`
+* `packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE.md`
+* `packages/lares-core/memes/docs/story/lindwyrm/LINDWYRM_STORY_SHAPE.md`
 
 The two files matched at consumption time. This locus becomes the canonical shape room.
 
 Related loci:
 
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture`
-- `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclosed`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture`
+* `lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-hoard-disclosed`
 
 <<~/ahu >>
 
 <<~ ahu #format >>
 
-## Format
+!! Format
 
 The Lindwyrm tells her origin story as a DreamDeck feed thread: a JackPoint / Shadowtalk-style archive where a primary narrator posts and named handles annotate inline.
 
 This solves a real narrative problem. The reader receives information and social context at once:
 
-- who trusts the claim
-- who challenges the claim
-- who jokes because the joke reveals status
-- who corrects memory
-- who changes the thread by arriving
+* who trusts the claim
+* who challenges the claim
+* who jokes because the joke reveals status
+* who corrects memory
+* who changes the thread by arriving
 
 The Lindwyrm tells the story herself, on feed, in response to Telarus.
 
@@ -66,15 +66,15 @@ The Lindwyrm tells the story herself, on feed, in response to Telarus.
 
 <<~ ahu #technical-stack >>
 
-## Technical Stack Target
+!! Technical Stack Target
 
 The DreamDeck target stack:
 
-- Kowloon / ActivityPub thread for live social view
-- TiddlyWiki tiddler for static archive
-- tldraw canvas for session and story map
-- Bluesky / AT Protocol identity for public handles
-- flat markdown crystal for portability
+* Kowloon / ActivityPub thread for live social view
+* TiddlyWiki tiddler for static archive
+* tldraw canvas for session and story map
+* Bluesky / AT Protocol identity for public handles
+* flat markdown crystal for portability
 
 Render targets:
 
@@ -89,7 +89,7 @@ Render targets:
 
 <<~ ahu #post-header-law >>
 
-## Post Header Law
+!! Post Header Law
 
 Post header shape:
 
@@ -99,11 +99,11 @@ Post header shape:
 
 Rules:
 
-- territory triple precedes the confidence + stance bundle
-- confidence renders as `<Register> <N>/20` — register word on the 0–20 scale
-- the stance bundle invokes the ENGAGED stances only; each binds one or more Mu tools via `:` (the lens carries what it uses, a disengaged stance drops)
-- a stance's tool names HOW it works the post — 🏛️ grounds, 🌊 resonates, 🗡️ cuts, 🎭 plays, 🔮 holds inward
-- non-Lares posts may omit HUD tags when appropriate
+* territory triple precedes the confidence + stance bundle
+* confidence renders as `<Register> <N>/20` — register word on the 0–20 scale
+* the stance bundle invokes the ENGAGED stances only; each binds one or more Mu tools via `:` (the lens carries what it uses, a disengaged stance drops)
+* a stance's tool names HOW it works the post — 🏛️ grounds, 🌊 resonates, 🗡️ cuts, 🎭 plays, 🔮 holds inward
+* non-Lares posts may omit HUD tags when appropriate
 
 Mu tools (the bind after `:`):
 
@@ -137,7 +137,7 @@ System message:
 
 <<~ ahu #cast >>
 
-## Cast
+!! Cast
 
 **`@lindwyrm@new-delos` — The Lindwyrm of New Delos**  
 Great Dragon outsider, hoarder of strange Gaian substrate, reluctant infrastructure matriarch. Vast, old, technically precise, warm when caught off guard, flustered when the archive touches private attachments. She did not set out to become necessary.
@@ -170,7 +170,7 @@ Peanut gallery, awe-to-skepticism spectrum, useful proxies for reader confusion.
 
 <<~ ahu #lindwyrm-position >>
 
-## The Lindwyrm Among Great Dragons
+!! The Lindwyrm Among Great Dragons
 
 The Lindwyrm differs from conventional Great Dragons:
 
@@ -189,7 +189,7 @@ Hermes, Hephaestus, Eris-Enyo, and Aracne-Jorogumo (Grandmother Spider) worked w
 
 <<~ ahu #wyrmfile >>
 
-## WyrmFile — A Reader's Dossier
+!! WyrmFile — A Reader's Dossier
 
 A worked example of the feed format, doubling as the central character's grounding profile.
 
@@ -222,7 +222,7 @@ Then the Necrospire fell, Web 2.0 went dark, and every power that had smirked at
 
 <<~ ahu #thread-beats >>
 
-## Thread Beats
+!! Thread Beats
 
 Frame:
 
@@ -247,16 +247,16 @@ Beat sequence:
 
 <<~ ahu #tone-laws >>
 
-## Tone Laws
+!! Tone Laws
 
 The story should read:
 
-- warm
-- precise
-- mid-debug
-- never heroic
-- funny because the details land exact
-- mythic because the infrastructure behaves like ritual
+* warm
+* precise
+* mid-debug
+* never heroic
+* funny because the details land exact
+* mythic because the infrastructure behaves like ritual
 
 The Lindwyrm did not build the DreamNet from destiny. She wanted to watch *The Fifth Element* repeatedly and noticed something in the developer commentary. The hoard that matters usually wore no value anyone else could see.
 
@@ -264,7 +264,7 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch *The F
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger >>

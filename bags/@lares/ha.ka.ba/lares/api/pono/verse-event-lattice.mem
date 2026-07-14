@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-event-lattice"
 
 <<~ ahu #head >>
 
-# Verse Event Lattice
+! Verse Event Lattice
 
 UEFN Verse 5.6 defines a four-type event lattice that maps directly onto the
 Lararium device model. The core asymmetry — **user code fires events; the engine
@@ -36,9 +36,9 @@ episode 19 (Brooklyn Zelenka) for the peer model alignment.
 
 <<~ ahu #type-lattice >>
 
-## The Four Types
+!! The Four Types
 
-### signalable(t)
+!!! signalable(t)
 
 ```verse
 signalable(t:type) := interface:
@@ -53,7 +53,7 @@ Used when one system triggers another without coupling to the response.
 
 ---
 
-### awaitable(t)
+!!! awaitable(t)
 
 ```verse
 awaitable(t:type) := interface:
@@ -72,7 +72,7 @@ the caller suspends (or schedules) until the changeset resolves.
 
 ---
 
-### subscribable(t)
+!!! subscribable(t)
 
 ```verse
 subscribable(t:type) := interface:
@@ -88,7 +88,7 @@ function — the cancelable equivalent.
 
 ---
 
-### event(t) — User-Instantiable Compound Type
+!!! event(t) — User-Instantiable Compound Type
 
 ```verse
 event(t:type) := class<final>:
@@ -109,7 +109,7 @@ available on user-instantiated events. Only the engine may vend `listenable`.
 
 ---
 
-### listenable(t) — Engine-Vended Only
+!!! listenable(t) — Engine-Vended Only
 
 ```verse
 listenable(t:type) := interface:
@@ -132,7 +132,7 @@ handle. `ReactionEngine` holds `listenable` references and subscribes to them
 
 <<~ ahu #suspends >>
 
-## `<suspends>` — Effect Specifier
+!! `<suspends>` — Effect Specifier
 
 `<suspends>` is not a return type. It is an **effect annotation** on a function or
 expression that declares: "this callsite may suspend the current logical task."
@@ -145,7 +145,7 @@ SomeFunc()<suspends>:t
 # "suspends" modifies the return — it does not
 ```
 
-### Rules
+!!! Rules
 
 1. A function annotated `<suspends>` may only be called from within a `<suspends>` context
    or from a `spawn` expression (which creates a new fiber).
@@ -154,7 +154,7 @@ SomeFunc()<suspends>:t
 3. Fibers are cooperative: the runtime suspends at `Await()` callsites only.
    No preemptive suspension.
 
-### Lararium consequence
+!!! Lararium consequence
 
 `MemeProjection.onChangeset()` is typed `async` (TypeScript equivalent of `<suspends>`).
 Any sync path that calls it MUST be made async or moved to a scheduled microtask.
@@ -164,24 +164,24 @@ The MemeSyncAdaptor properly awaits it inside an async wrapper — this is corre
 
 <<~ ahu #simulation-types >>
 
-## `agent` and `player` — Simulation Participant Types
+!! `agent` and `player` — Simulation Participant Types
 
 From `/Verse.org/Simulation` module. These function as **class-level types**, not interfaces.
 
-- **`agent`** — the universal participant supertype. Covers all live entities: session-connected participants (`player` subtype) AND non-player entities (generic wiki entities, NPCs, scripted actors). `game_action_instigator` gets implemented by "player or agents" — confirming agent as the general case.
-- **`player`** — the session-connected subtype. A `player` holds a live connection to the current session; a non-player `agent` does not. NOT limited to humans — anything with a live session link qualifies as a `player` in Verse type terms.
-- **`session`** — one instance per round. `GetSession()` returns the current round's session.
-- **`team`** — grouping of agents.
+* **`agent`** — the universal participant supertype. Covers all live entities: session-connected participants (`player` subtype) AND non-player entities (generic wiki entities, NPCs, scripted actors). `game_action_instigator` gets implemented by "player or agents" — confirming agent as the general case.
+* **`player`** — the session-connected subtype. A `player` holds a live connection to the current session; a non-player `agent` does not. NOT limited to humans — anything with a live session link qualifies as a `player` in Verse type terms.
+* **`session`** — one instance per round. `GetSession()` returns the current round's session.
+* **`team`** — grouping of agents.
 
 **Why events use `listenable(agent)` rather than `listenable(player)`:** The entering entity may qualify as a non-player wiki entity, not a session-connected participant. `agent` serves as the correct general-case payload type; `listenable(player)` would exclude all non-player entities.
 
 **Lararium mapping:**
-- Verse `agent` → **`lar_agent`**: supertype for all addressable live entities on the wiki canvas. **Identity splits here:** player-class subtypes (Operator, Guest, `lares-daemon`) carry a Keyhive principal identity; Wiki Entities / NPCs (non-player `agent` subtypes) do not.
-- Verse `player` *(human)* → **Operator / Guest**: human session-connected participant with Keyhive identity. Operator = primary human principal (threshold relation). Guest = invited, limited cap.
-- Verse `player` *(system)* → **`lares-daemon`**: session-connected AI coordinator(s) with Keyhive identity. Verse class = `player`. Lares class = system principal with additional authority (admin doc, Session RE, Keyhive system keypair). May run multiple per session. As **coordinator**, its verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos), offloading stream-processing to py rather than pulling it through the TS stack.
-- Verse `agent` *(non-player)* → **Wiki Entity / NPC**: not session-connected; no Keyhive identity. Reactive wiki entities — they carry a `lar_character` tiddler and respond to RE reactions, but hold no principal. Interactive characters, scripted actors, game NPCs. Population open-ended.
-- Verse `session` → **Lares Session Wiki**: the coordinator `lar_playspace` for the round; pinned-wela. A session hosts N `lar_playspace` wikis; the Session Wiki coordinates them (broadest recipe, owns the session event-bus bag).
-- Verse `fort_character` → **`lar_character`**: tiddler representing an Agent's embodied presence on the canvas. Position, state, event pins.
+* Verse `agent` → **`lar_agent`**: supertype for all addressable live entities on the wiki canvas. **Identity splits here:** player-class subtypes (Operator, Guest, `lares-daemon`) carry a Keyhive principal identity; Wiki Entities / NPCs (non-player `agent` subtypes) do not.
+* Verse `player` *(human)* → **Operator / Guest**: human session-connected participant with Keyhive identity. Operator = primary human principal (threshold relation). Guest = invited, limited cap.
+* Verse `player` *(system)* → **`lares-daemon`**: session-connected AI coordinator(s) with Keyhive identity. Verse class = `player`. Lares class = system principal with additional authority (admin doc, Session RE, Keyhive system keypair). May run multiple per session. As **coordinator**, its verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos), offloading stream-processing to py rather than pulling it through the TS stack.
+* Verse `agent` *(non-player)* → **Wiki Entity / NPC**: not session-connected; no Keyhive identity. Reactive wiki entities — they carry a `lar_character` tiddler and respond to RE reactions, but hold no principal. Interactive characters, scripted actors, game NPCs. Population open-ended.
+* Verse `session` → **Lares Session Wiki**: the coordinator `lar_playspace` for the round; pinned-wela. A session hosts N `lar_playspace` wikis; the Session Wiki coordinates them (broadest recipe, owns the session event-bus bag).
+* Verse `fort_character` → **`lar_character`**: tiddler representing an Agent's embodied presence on the canvas. Position, state, event pins.
 
 The compound type `listenable(agent)` functions as the canonical event type for **any participant action** in both Verse and Lares. Device events parameterized on `agent` do NOT restrict to human players.
 
@@ -189,7 +189,7 @@ The compound type `listenable(agent)` functions as the canonical event type for 
 
 <<~ ahu #editable >>
 
-## `@editable` — Design/Logic Boundary
+!! `@editable` — Design/Logic Boundary
 
 In Verse, `@editable` marks a property as configurable in the UEFN editor UI.
 It is the **design boundary**: above `@editable` is visual/authoring-time configuration;
@@ -207,8 +207,8 @@ my_device := class(creative_prop):
 **Lararium alignment:**
 
 The `@editable` boundary maps onto the distinction between:
-- **React props / TW5 widget attributes** (authoring-time; editable in the editor)
-- **ReactionEngine subscriptions** (runtime; wired at boot)
+* **React props / TW5 widget attributes** (authoring-time; editable in the editor)
+* **ReactionEngine subscriptions** (runtime; wired at boot)
 
 A `KukaliWidget` accepts its `uri` and `listenable` attributes as props — these are
 the `@editable` surface. The internal `dispatchEvent` call is the runtime logic.
@@ -220,7 +220,7 @@ the `@editable` surface. The internal `dispatchEvent` call is the runtime logic.
 
 <<~ ahu #using >>
 
-## `using` — Module Import, Not Trait Composition
+!! `using` — Module Import, Not Trait Composition
 
 ```verse
 using { /Verse.org/Verse }
@@ -245,7 +245,7 @@ access it from a given file.
 
 <<~ ahu #lararium-device-model >>
 
-## Lararium Device Model Alignment
+!! Lararium Device Model Alignment
 
 A `KukaliWidget` is a Verse creative_prop equivalent:
 
@@ -281,7 +281,7 @@ The asymmetry is the point.
 
 <<~ ahu #composition-edges >>
 
-## Composition Edge Semantics for the Four Types
+!! Composition Edge Semantics for the Four Types
 
 The four types in this lattice express Verse `interface` and `class` composition.
 In Lararium graph terms, this maps as follows:
@@ -306,11 +306,11 @@ intent, but built-in device events own `listenable(t)` fields by engine contract
 
 <<~ ahu #unreleased-event-types >>
 
-## Unreleased Event Types (Confirmed, Not Yet Shipped)
+!! Unreleased Event Types (Confirmed, Not Yet Shipped)
 
 Two additional event types appear in the Book of Verse but have not shipped in UEFN:
 
-### sticky_event(t)
+!!! sticky_event(t)
 
 ```verse
 sticky_event(t:type) := class<final>:
@@ -328,7 +328,7 @@ present when Signal() fires, the signal is dropped.
 **Lararium implication:** `sticky_event` maps to "remember last value" semantics —
 useful for device state that late-joining agents need to catch up to.
 
-### subscribable_event(t)
+!!! subscribable_event(t)
 
 Observer pattern — one signal invokes ALL subscribed handlers:
 
@@ -349,7 +349,7 @@ NOT a `task(t)`. Same `cancelable` interface, different semantic role.
 `wiki.addEventListener("change", handler)` pattern exactly. The teardown function
 returned by `onVerseEvent()` is the cancelable equivalent.
 
-### Status guidance
+!!! Status guidance
 
 Until these types ship, model them as `event(t)` + manual subscription patterns.
 The ReactionEngine fiber model already implements subscribable_event semantics
@@ -359,7 +359,7 @@ via TW5's own event bus.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>

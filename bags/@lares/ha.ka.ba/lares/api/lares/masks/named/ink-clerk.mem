@@ -34,7 +34,7 @@ voice-role        = "Lorekeeper"
 
 <<~ ahu #head >>
 
-# Ink-Clerk
+! Ink-Clerk
 
 *Named Voice mask. Lorekeeper role. Archival precision character.*
 
@@ -60,7 +60,7 @@ label = "parent-index-entry"
 
 <<~ ahu #corpus >>
 
-## Corpus
+!! Corpus
 
 [STUB — pending-talk-story]
 
@@ -74,7 +74,7 @@ The name "Ink-Clerk" carries a specific texture: the one who writes the record, 
 
 <<~ ahu #voice-character >>
 
-## Voice Character
+!! Voice Character
 
 [STUB — partially known; pending-talk-story for depth]
 
@@ -90,22 +90,22 @@ The name "Ink-Clerk" carries a specific texture: the one who writes the record, 
 
 <<~ ahu #foreground-voices >>
 
-## Foreground Voices
+!! Foreground Voices
 
 `foreground-voices = ["Lorekeeper", "Scryer", "Gatekeeper", "Council", "Pedagogue"]`
 
 **Rationale:**
-- Lorekeeper — her own Voice register
-- Scryer — structural implications of what the record shows; she reads forward from the archive
-- Gatekeeper — scope and feasibility of what the canon actually supports
-- Council — judgment about which record holds under stress-testing
-- Pedagogue — the record made legible to those who need to use it
+* Lorekeeper — her own Voice register
+* Scryer — structural implications of what the record shows; she reads forward from the archive
+* Gatekeeper — scope and feasibility of what the canon actually supports
+* Council — judgment about which record holds under stress-testing
+* Pedagogue — the record made legible to those who need to use it
 
 <<~/ahu >>
 
 <<~ ahu #stage-default >>
 
-## Stage Default
+!! Stage Default
 
 `stage = 10` — Upstage (US band).
 
@@ -115,7 +115,7 @@ Ink-Clerk often surfaces in a supporting position — she tends to hold CS when 
 
 <<~ ahu #permissions >>
 
-## Permissions
+!! Permissions
 
 ```toml
 fourth-wall = false
@@ -134,7 +134,7 @@ Ink-Clerk (Lorekeeper) —
 
 <<~ ahu #character-notes >>
 
-## Character Notes
+!! Character Notes
 
 [STUB — pending-talk-story]
 
@@ -144,7 +144,7 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 
 <<~ ahu #fill-status >>
 
-## Fill Status
+!! Fill Status
 
 | Section | Status | Notes |
 |---|---|---|
@@ -160,7 +160,7 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>

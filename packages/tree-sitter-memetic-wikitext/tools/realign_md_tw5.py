@@ -87,6 +87,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("root", help="corpus sub-tree to walk (e.g. bags/@sdm)")
     ap.add_argument("--apply", action="store_true", help="write changes (default: dry-run)")
+    ap.add_argument("--exclude", action="append", default=[],
+                    help="path substring to skip, reported loud (e.g. the boot seed)")
     args = ap.parse_args()
 
     root = os.path.abspath(args.root)
@@ -98,7 +100,8 @@ def main() -> int:
     ).stdout.strip()
 
     total = {"heading": 0, "ul": 0, "skip_fence": 0, "skip_source_text": 0,
-             "skip_indented_ul": 0, "skip_library": 0, "skip_dirty": 0}
+             "skip_indented_ul": 0, "skip_library": 0, "skip_dirty": 0,
+             "skip_excluded": 0}
     touched = []
     for dirpath, _dirs, files in os.walk(root):
         if f"{os.sep}library" in dirpath + os.sep or dirpath.endswith("library"):
@@ -108,6 +111,10 @@ def main() -> int:
             if not name.endswith(".mem"):
                 continue
             path = os.path.join(dirpath, name)
+            if any(pat in path for pat in args.exclude):
+                total["skip_excluded"] += 1
+                print(f"  SKIP excluded: {os.path.relpath(path, repo_root)}")
+                continue
             if _git_dirty(repo_root, path):
                 total["skip_dirty"] += 1
                 print(f"  SKIP dirty-in-git: {os.path.relpath(path, repo_root)}")
@@ -133,7 +140,8 @@ def main() -> int:
     print(f"  skipped       : fence-lines={total['skip_fence']} "
           f"source-text-lines={total['skip_source_text']} "
           f"indented-ul={total['skip_indented_ul']} "
-          f"library-files={total['skip_library']} dirty-files={total['skip_dirty']}")
+          f"library-files={total['skip_library']} dirty-files={total['skip_dirty']} "
+          f"excluded-files={total['skip_excluded']}")
     for rel, h, u in touched[:20]:
         print(f"    {rel}  (+{h} headings, +{u} lists)")
     if len(touched) > 20:

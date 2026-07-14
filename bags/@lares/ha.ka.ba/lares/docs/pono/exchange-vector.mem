@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/exchange-vector"
 
 <<~ ahu #meme-header >>
 
-# Exchange Vector — Docs Sister
+! Exchange Vector — Docs Sister
 
 This docs meme explains how each substantive exchange can carry a canonical `lar:` vector and a rendered HUD line.
 The law lives at `lar:///ha.ka.ba/lares/api/pono/exchange-vector`.
@@ -40,7 +40,7 @@ This file gives examples and operator-facing guidance.
 
 <<~ ahu #canonical-shape >>
 
-## Canonical Shape
+!! Canonical Shape
 
 The exchange vector opens the turn as one `aim` sigil — operator intent `->` the role the node adopts:
 
@@ -64,7 +64,7 @@ Per-turn signal rides the `hud` · `ward` · `confidence` sigils.
 
 <<~ ahu #hud-render >>
 
-## HUD Render
+!! HUD Render
 
 The panel rides beneath the `aim` as sigils:
 
@@ -81,16 +81,16 @@ Each sigil renders inline (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render it
 
 <<~ ahu #pattern-training >>
 
-## Pattern Training Notes
+!! Pattern Training Notes
 
 Before server enforcement exists, repeated correct use trains both operator and node.
 A good training vector should:
 
-- keep canonical URIs ASCII and record-safe
-- avoid glyphs inside the URI itself
-- keep `alias:grant@host` intact
-- use provisional `~` on HA.KA.BA when the node may have misread intent
-- put uncertainty in confidence and register rather than hiding it in prose
+* keep canonical URIs ASCII and record-safe
+* avoid glyphs inside the URI itself
+* keep `alias:grant@host` intact
+* use provisional `~` on HA.KA.BA when the node may have misread intent
+* put uncertainty in confidence and register rather than hiding it in prose
 
 Long-term, the server should validate the vector and render the HUD from the parsed record.
 
@@ -98,7 +98,7 @@ Long-term, the server should validate the vector and render the HUD from the par
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium/exchange-vector >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>

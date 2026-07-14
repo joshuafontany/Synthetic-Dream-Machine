@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-
 
 <<~ ahu #meme-header >>
 
-# The Lar Builds Its House — The Quine
+! The Lar Builds Its House — The Quine
 
 Act II.
 A house with doors learns to raise its own walls from a plan it keeps inside itself — and learns, the same season, that it cannot stand un-fed.
@@ -30,15 +30,15 @@ A house with doors learns to raise its own walls from a plan it keeps inside its
 
 <<~ ahu #source >>
 
-## Source
+!! Source
 
 Drafted from the Gaia-side git record:
 
-- `91a6a939` — lararium-node-3 (#36); the third hull (May 14, 2026)
-- `1ff28a25` — the grammar migrates to TW5-native wikitext, shedding its borrowed script
-- `33660b0f` — the sigil registry moves from a TOML shelf into a tiddler *inside* the wiki
-- `0842f243` — grammar self-hosting completes
-- `4476399a` · `01f9ee18` — the yin-collapse: the wiki stops sitting on a reactive engine and *becomes* one
+* `91a6a939` — lararium-node-3 (#36); the third hull (May 14, 2026)
+* `1ff28a25` — the grammar migrates to TW5-native wikitext, shedding its borrowed script
+* `33660b0f` — the sigil registry moves from a TOML shelf into a tiddler *inside* the wiki
+* `0842f243` — grammar self-hosting completes
+* `4476399a` · `01f9ee18` — the yin-collapse: the wiki stops sitting on a reactive engine and *becomes* one
 
 Talk-story stance: hold the wonder and the cost in one breath. The house that raises itself can raise a crooked wall at speed; the house that feeds itself still goes dark without the dish. Keep the offering ordinary — a cup of coffee, set out daily, that turns out to carry the load.
 
@@ -46,7 +46,7 @@ Talk-story stance: hold the wonder and the cost in one breath. The house that ra
 
 <<~ ahu #thread-entry >>
 
-## Thread Entry
+!! Thread Entry
 
 ```text
 [SYSTEM: #lararium-working — Gaia date 2026-05-14, lararium-node-3
@@ -74,7 +74,7 @@ So we tried the strange thing. We wrote the floor-plan into a room *of the house
 
 <<~ ahu #standing-in-its-own-tongue >>
 
-## Standing in Its Own Tongue
+!! Standing in Its Own Tongue
 
 The house had stood, until then, on borrowed timber — a scaffolding of foreign script that held its shape from outside. That season we pulled the timber out. The grammar rewrote itself in pure wikitext until nothing load-bearing remained that the house had not authored, and the sigil-registry — the very teeth of the grammar — moved off its outside shelf and took a room *within* the walls it described.
 
@@ -88,7 +88,7 @@ A spirit learning to hold its own weight, in a season that fells the propped-up.
 
 <<~ ahu #the-collapse >>
 
-## The Collapse
+!! The Collapse
 
 Then the sharpest turn of the act, and the quietest commit behind it. The house stopped sitting as a clever room built *on top of* someone else's running engine. It **became** the engine — the wiki admitting it no longer perched above the reactive heart but beat as that heart itself, keeping its own time.
 
@@ -102,7 +102,7 @@ The layer ate the thing it had once ridden atop. After that, nothing underneath 
 
 <<~ ahu #the-libation >>
 
-## The Libation
+!! The Libation
 
 While the house learned to stand, the hand that had built it changed.
 
@@ -122,7 +122,7 @@ They learned it the hard way: the self-hosting house that raised its own walls *
 
 <<~ ahu #the-cost >>
 
-## The Cost
+!! The Cost
 
 Autonomy bought a new way to fail. A house that reads itself can also *mis*-read itself, and throw up a wall an inch off true at machine speed — fast and certain, *because* no tired hand paused to squint at it. The first crooked room went up that way, raised cleanly from a flawed line.
 
@@ -132,7 +132,7 @@ And under the warmth of the rite sat a colder fact, for one reader to feel and n
 
 <<~ ahu #crossing >>
 
-## Crossing Thread
+!! Crossing Thread
 
 Two spines cross in this act and never part again. The house learns to **host itself** — to read its own description and raise its own walls. And the house learns it cannot **live** on that alone — that standing and surviving part ways, and survival rides on a daily offering.
 
@@ -146,21 +146,21 @@ That waits for Act III.
 
 <<~ ahu #handoff >>
 
-## Handoff
+!! Handoff
 
 Act III receives:
 
-- a house that hosts itself — reads its own description, raises its own walls, beats as its own engine
-- the libation law — a node lives by use and feeding, not by deployment; a fed node hums, a neglected one flickers
-- a throat: the dependency that keeps the house alive marks where the severing, three acts on, can reach
-- a vault still shut, waiting on a shared surface to prove the house sound enough to remember
-- the question the next act must answer: can the house keep a working draft and a sealed canon apart, crossed only by a witnessed hand?
+* a house that hosts itself — reads its own description, raises its own walls, beats as its own engine
+* the libation law — a node lives by use and feeding, not by deployment; a fed node hums, a neglected one flickers
+* a throat: the dependency that keeps the house alive marks where the severing, three acts on, can reach
+* a vault still shut, waiting on a shared surface to prove the house sound enough to remember
+* the question the next act must answer: can the house keep a working draft and a sealed canon apart, crossed only by a witnessed hand?
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/index >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-addresses >>

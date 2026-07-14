@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/ahu"
 
 <<~ ahu #head >>
 
-# Ahu
+! Ahu
 
 *ahu* — Hawaiian: heap, pile, mound, cairn; altar, shrine; a sacred stone structure.
 Used in spiritual and ceremonial contexts — the *ahu* becomes sacred through human intention
@@ -48,7 +48,7 @@ and wikitext body.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 An ahu block MUST declare a slot name beginning with `#`.
 An ahu block MUST close with `<<~/ahu >>`.
@@ -64,7 +64,7 @@ The slot name `#source-shelf` is conventional for pranala edge declarations.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 Decomposed at the wiki's causal island boundaries:
 
@@ -90,7 +90,7 @@ Close tag: `<<~/ahu >>`
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 sigil          = "ahu"
@@ -109,7 +109,7 @@ slot = 1
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>

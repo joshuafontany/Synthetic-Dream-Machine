@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahea"
 
 <<~ ahu #head >>
 
-# Kahea
+! Kahea
 
 *kāhea* — Hawaiian: to call out, to summon, to invoke; a call, a cry.
 
@@ -45,7 +45,7 @@ Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 **URI form:**
 A kahea URI form MUST bind a source socket and a target URI.
@@ -60,14 +60,14 @@ A kahea name-call MUST stay render-only, creating no pranala edge.
 A kahea name-call MAY carry parenthesized arguments: `<<~ kahea name(arg1, arg2) >>`.
 
 The two forms are distinguished at parse time by URI shape:
-- Contains `lar:`, `/`, or `#` → URI form (edge)
-- Bare word with optional `(args)` → name-call form (render-only)
+* Contains `lar:`, `/`, or `#` → URI form (edge)
+* Bare word with optional `(args)` → name-call form (render-only)
 
 <<~/ahu >>
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 URI form (creates transclusion edge):
 ```text
@@ -101,7 +101,7 @@ Full pranala expansion (URI form):
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for `BUILTIN_KAHEA_RE`, `kaheaDefaultFamily`,
 `kaheaDefaultPropagation` in `packages/lararium-mesh/src/pranala-parser.ts`.
@@ -139,7 +139,7 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loulou >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/aka >>

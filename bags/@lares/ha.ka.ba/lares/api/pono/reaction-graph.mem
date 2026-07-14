@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/reaction-graph"
 
 <<~ ahu #head >>
 
-# Reaction Graph
+! Reaction Graph
 
 Isomorphic in-memory reaction dispatch layer — runs on server and client.
 Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subscribed; UEFN dispatch semantics.
@@ -41,7 +41,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
 The ReactionGraph anchors the live reaction dispatch layer.
 It uses an isomorphic surface (no Node or browser APIs) and runs on both server and client.
@@ -56,7 +56,7 @@ The graph defines the Tier 0 dispatch surface — all kumu event crossings route
 
 <<~ ahu #binding-shape >>
 
-## Binding Shape
+!! Binding Shape
 
 ```toml
 fromUri      = "lar:/// source meme URI"
@@ -74,7 +74,7 @@ source       = "wired | subscribed"
 
 <<~ ahu #dispatch-modes >>
 
-## Dispatch Modes
+!! Dispatch Modes
 
 Four fire semantics — all run per (fromUri, trigger):
 
@@ -93,7 +93,7 @@ fireRush         — puka: first to resolve wins; others receive AbortSignal
 
 <<~ ahu #subscription-api >>
 
-## Subscription API
+!! Subscription API
 
 ```
 load(bindings)                        — replace full binding set; preserve handler slots
@@ -115,7 +115,7 @@ The returned Promise resolves when the listenable fires once; `cancel()` rejects
 
 <<~ ahu #update-invariant >>
 
-## Update Invariant
+!! Update Invariant
 
 `load()` and `updateUri()` preserve occupied handler slots across binding rebuilds.
 A handler registered via `subscribe()` or `subscribeOnce()` survives graph reloads
@@ -128,7 +128,7 @@ This preserves in-flight kukali suspensions across TW5 wiki-change events.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 ```toml
 # Render modes — canonical values for PranalaEdge.renderMode
@@ -143,13 +143,13 @@ reaction-roles = ["listenable", "subscribable", "observes", "throttles", "deboun
 
 <<~ ahu #yin-collapse-target >>
 
-## Yin-Collapse — Completed (2026-05-15)
+!! Yin-Collapse — Completed (2026-05-15)
 
 `ReactionEngine` (TS inline dispatch class) removed. The TW5 wiki IS the reactive engine.
 The yin-collapse is not provisional — it landed and shipped. `reaction-router.ts` is
 the target architecture, not a bridge to it.
 
-### What shipped
+!!! What shipped
 
 ```
 packages/lararium-tw5/src/modules/reaction-router.ts
@@ -171,33 +171,33 @@ packages/lararium-tw5/src/modules/reaction-router.ts
 
 TS irreducible layer carries only: `MemeSyncAdaptor` + `LarTiddlerStore` + `VesselIslandPool` + Keyhive.
 
-### Cross-island boundary (Path M)
+!!! Cross-island boundary (Path M)
 
 `reaction-router.ts` fires `IslandMsg_Event` when a nalu-triggered reaction dispatches.
 Vessel receives `IslandMsg_Event` → routes to `VerbDispatcher` via `placeVerb()`.
 Outcome tiddler written to shared admin CRDT. CRDT convergence = distributed promise.
 Promise-pipelining law: islands fire without waiting for vessel ACK.
 
-### `fireSync` — test surface only
+!!! `fireSync` — test surface only
 
 `fireSync` on `ReactionGraph` ships for unit tests and in-memory fixtures.
 Production code MUST NOT call `fireSync` directly. The production path runs
 exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
 
-### Prior art grounding
+!!! Prior art grounding
 
-- **Elm Architecture** — one update function IS the engine; Cmd/Sub = side effects outside
-- **Solid.js fine-grained reactive** — synchronous reactive graph, no overlay layer
-- **MobX transaction** — `transaction()` IS the batch boundary; reactions defer until close
-- **vlcn.io live-query reactivity** (2024) — incremental per-dependency dispatch; not full-scan
-- **Goblins/OCapN promise pipelining** (FOSDEM 2025) — fire without ACK; CRDT resolves
-- **LoRe declarative dataflow** (arxiv:2304.07133, 2024) — changeset → derived state pipeline
+* **Elm Architecture** — one update function IS the engine; Cmd/Sub = side effects outside
+* **Solid.js fine-grained reactive** — synchronous reactive graph, no overlay layer
+* **MobX transaction** — `transaction()` IS the batch boundary; reactions defer until close
+* **vlcn.io live-query reactivity** (2024) — incremental per-dependency dispatch; not full-scan
+* **Goblins/OCapN promise pipelining** (FOSDEM 2025) — fire without ACK; CRDT resolves
+* **LoRe declarative dataflow** (arxiv:2304.07133, 2024) — changeset → derived state pipeline
 
 <<~/ahu >>
 
 <<~ ahu #scope-1-networking >>
 
-## Scope 1 ~ the CRDT-wave surface [surgical 2026-07-03]
+!! Scope 1 ~ the CRDT-wave surface [surgical 2026-07-03]
 
 The reaction dispatch layer runs as a **Scope-1** CRDT-wave surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs (the cross-island `IslandMsg_Event` → `placeVerb()` path, #yin-collapse-target). Its **CRDT-causal clock runs in TS** (structural causality — CRDT convergence as the distributed promise, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of **Scope 2** (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling seats the reaction-wave on the TS structural clock.
 

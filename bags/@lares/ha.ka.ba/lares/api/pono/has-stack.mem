@@ -20,7 +20,7 @@ written   = "2026-06-12"
 
 <<~ ahu #head >>
 
-# Has-Stack — the composition law
+! Has-Stack — the composition law
 
 A carrier reads as a **nameless entity**: essence lives nowhere; identity rides the address; meaning rides what the entity *wears* (its stack) and what its body *says*. Interfaces-and-implements ontology stands REJECTED whole cloth — no carrier *${copula}-a* anything; every carrier *has* things, and the carried things speak for themselves.
 
@@ -42,7 +42,7 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 
 <<~ ahu #law >>
 
-## The Seven Clauses
+!! The Seven Clauses
 
 1. **One component, one entity.** A component exists as exactly one carrier: its definition meme at its `lar:` address — self-describing, self-enacting memetic-wikitext. Shim or pointer tiddlers MUST NOT exist in the corpus at rest; any tag-tiddler a live wiki needs gets derived as `$:/temp` runtime shadow, never synced, never sited.
 2. **Short names read as relative addresses.** Within a carrier scoped `root/@bag/version`, a path-shaped tag qualifies to `lar:///<scope>/<tag>` by derivation (the `loci` office), never by pointer. `lar:` tags pass through qualified; system (`$:/`) and free-form tags ride outside the stack. The iam `tags` field stands as the **single source** of the stack; body `#has` edges read as derived residue and burn at normalization.
@@ -61,7 +61,7 @@ Runtime: `qualifyStackTag` / `stackOf` and the `stack` filter operator (`[stack[
 
 <<~ ahu #verse-binding >>
 
-## The Verse Marriage — witnessed bindings
+!! The Verse Marriage — witnessed bindings
 
 Field-grounded against Epic's UEFN+/Scene Graph direction (2026-06-12, two research spirits):
 
@@ -85,7 +85,7 @@ Field-grounded against Epic's UEFN+/Scene Graph direction (2026-06-12, two resea
 
 <<~ ahu #runtime-twin >>
 
-## The runtime twin ~ a causal island is a nameless cap stack
+!! The runtime twin ~ a causal island is a nameless cap stack
 
 The has-stack law has a **runtime mirror**. Where a DATA entity is a nameless carrier whose `tags` are a stack of component memes, a RUNTIME entity — a sovereign **causal island** worker — is a nameless behavior whose **cap stack** is its identity. No carrier *${copula}-a* "wiki worker" or "telemetry worker"; an island *has* caps, and the caps speak for themselves. `composeIsland([...caps])` (`tw5/island-caps.ts`) folds a `#has` cap stack into the one `IslandBehavior` the sovereign kernel drives.
 
@@ -97,7 +97,7 @@ The same grammar runs both planes: stack order is precedence (a cap claims a sig
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>

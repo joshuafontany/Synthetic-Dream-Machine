@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ba"
 
 <<~ ahu #head >>
 
-# Heleuma-Ba (Psyche / Path)
+! Heleuma-Ba (Psyche / Path)
 
 **Ba**: psyche, personality, change, path, choice. The direction enacted. The trace of motion.
 
@@ -40,7 +40,7 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 
 <<~ ahu #required-fields >>
 
-## Required Fields (SHALL)
+!! Required Fields (SHALL)
 
 A meme that carries `heleuma-ba` SHALL declare in `#iam` TOML:
 

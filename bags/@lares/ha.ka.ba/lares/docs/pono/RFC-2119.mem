@@ -12,7 +12,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/docs/pono/RFC-2119"
 ```
 
-# RFC-2119 — Docs
+! RFC-2119 — Docs
 
 This file does not bind invariant law.
 Law lives at [RFC-2119.md](../../api/pono/RFC-2119.md).
@@ -21,17 +21,17 @@ This file holds online references, full IETF verb definitions, and provenance no
 
 <<~ ahu #online-references >>
 
-## Online References
+!! Online References
 
 The canonical IETF source:
 
-- [RFC 2119 — Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119.html)
-- [RFC 2119 on IETF Datatracker](https://datatracker.ietf.org/doc/html/rfc2119)
-- [BCP 14 (RFC 2119 + RFC 8174 together)](https://www.rfc-editor.org/bcp/bcp14.txt)
+* [RFC 2119 — Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119.html)
+* [RFC 2119 on IETF Datatracker](https://datatracker.ietf.org/doc/html/rfc2119)
+* [BCP 14 (RFC 2119 + RFC 8174 together)](https://www.rfc-editor.org/bcp/bcp14.txt)
 
 RFC 8174 (2017) clarifies that the normative force applies only when the terms appear in ALL CAPS:
 
-- [RFC 8174 — Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words](https://www.rfc-editor.org/rfc/rfc8174.html)
+* [RFC 8174 — Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words](https://www.rfc-editor.org/rfc/rfc8174.html)
 
 This stack uses ALL CAPS consistently for normative terms. The RFC 8174 clarification applies.
 
@@ -41,7 +41,7 @@ This stack uses ALL CAPS consistently for normative terms. The RFC 8174 clarific
 
 <<~ ahu #ietf-definitions >>
 
-## IETF Definitions (RFC 2119 verbatim)
+!! IETF Definitions (RFC 2119 verbatim)
 
 **MUST** — This word, or the terms "REQUIRED" or "SHALL", mean that the definition is an absolute requirement of the specification.
 
@@ -60,7 +60,7 @@ It does not use REQUIRED, SHALL, SHALL NOT, RECOMMENDED, NOT RECOMMENDED, or OPT
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 RFC 2119 was authored by S. Bradner and published by IETF in March 1997.
 It defines the normative vocabulary used across thousands of IETF specifications.
@@ -72,7 +72,7 @@ The stack does not import the full IETF RFC format — only the modal-force voca
 
 <<~ ahu #edges >>
 
-- `lar:///ha.ka.ba/lares/api/pono/RFC-2119`
+* `lar:///ha.ka.ba/lares/api/pono/RFC-2119`
 
 <<~/ahu >>
 

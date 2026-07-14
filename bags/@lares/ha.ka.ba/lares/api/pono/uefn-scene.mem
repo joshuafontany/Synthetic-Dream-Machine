@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/uefn-scene"
 
 <<~ ahu #head >>
 
-# UEFN Scene Decomposition
+! UEFN Scene Decomposition
 
 A UEFN game scene file decomposes into a Lararium wiki graph. The graph lives in a
 content-addressed Automerge bag. TW5 filters render views of that graph. No Blueprint
@@ -30,7 +30,7 @@ holding the bag can render any filtered view of the scene graph without a runnin
 
 <<~ ahu #semantic-separation >>
 
-## Semantic Separation — Three Distinct Layers
+!! Semantic Separation — Three Distinct Layers
 
 These three relationships look similar but operate at different levels. Keep them distinct:
 
@@ -49,7 +49,7 @@ a type *has* its components. Composition only — the `extends` / is-a framing s
 
 <<~ ahu #decomposition-law >>
 
-## Decomposition Law
+!! Decomposition Law
 
 Every UEFN scene element maps to exactly one of three tiddler kinds:
 
@@ -74,7 +74,7 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 
 <<~ ahu #edge-vocabulary >>
 
-## Edge Vocabulary for Scene Graphs
+!! Edge Vocabulary for Scene Graphs
 
 ```text
 control:has          — Verse class composition: one edge per URI in class(...), parent and
@@ -100,7 +100,7 @@ document-level containment.
 
 <<~ ahu #tiddler-filter-views >>
 
-## TW5 Filter Views
+!! TW5 Filter Views
 
 Once the scene decomposes into a bag, TW5 filters render arbitrary views:
 
@@ -134,7 +134,7 @@ no UEFN process, no Epic servers, no network round-trip.
 
 <<~ ahu #import-pipeline >>
 
-## Import Pipeline (Declared Unresolved)
+!! Import Pipeline (Declared Unresolved)
 
 The import pipeline converts a UEFN project into a Lararium bag. Sprint pending.
 
@@ -151,7 +151,7 @@ Output: one Automerge bag per scene. Bag URI: `lar:///project-slug/scene-slug`.
 The importer does not need to run inside UEFN — it reads source files. The output bag
 works in any Lararium peer: browser, Node server, TW5 wiki.
 
-### Blocking Constraint — DEB Has No Public Export API
+!!! Blocking Constraint — DEB Has No Public Export API
 
 **DEB (Direct Event Binding) wires have no standalone export format.**
 Epic stores DEB bindings inside each device actor's property blob within the `.umap`
@@ -171,7 +171,7 @@ Two viable import paths, each with limits:
 
 <<~ ahu #verse-effect-specifiers >>
 
-## Verse Effect Specifiers in the Graph
+!! Verse Effect Specifiers in the Graph
 
 Verse effects are a **bit-vector** (6 families) propagated upward through call chains.
 Effect specifiers on device functions carry semantic meaning in the Lararium graph:
@@ -203,7 +203,7 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/lares/hud"
 
 <<~ ahu #head >>
 
-# Lararium HUD — Reading the Panel
+! Lararium HUD — Reading the Panel
 
 Teaching companion to the HUD law (`lar:///ha.ka.ba/lares/api/lares/hud`). The law names the panel and gauges; this room shows how to compose and read the line at glance-speed — glyph tables, stance/tool grammar, the confidence reading rule, and field-annotation thresholds.
 
@@ -28,7 +28,7 @@ Teaching companion to the HUD law (`lar:///ha.ka.ba/lares/api/lares/hud`). The l
 
 <<~ ahu #line-composition >>
 
-## HUD Line Composition
+!! HUD Line Composition
 
 The HUD rides beneath the `aim` vector that opens the turn, and surfaces before the Voice speaks.
 
@@ -68,7 +68,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 <<~ ahu #phase-glyphs >>
 
-## Phase Glyphs — the OODA-HA axis
+!! Phase Glyphs — the OODA-HA axis
 
 | Glyph | Record | Phase | Reading |
 |---|---|---|---|
@@ -82,7 +82,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 <<~ ahu #stance-glyphs >>
 
-## Stance Glyphs — the `syad` axis
+!! Stance Glyphs — the `syad` axis
 
 | Glyph | Record | Stance | Reading |
 |---|---|---|---|
@@ -96,7 +96,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 <<~ ahu #tool-carry >>
 
-## Tool-Carry — the `mu` axis
+!! Tool-Carry — the `mu` axis
 
 A stance carries zero, one, or two tools. The two-character carry attaches directly to the stance emoji, no space. Unicode columns render per the `tool_render` setting in `LARES.md#hud-panel` (default `elements`).
 
@@ -126,7 +126,7 @@ Bind a tool to a stance with the optional `:` carry: `🏛️:*!` (Philosopher h
 
 <<~ ahu #scale-glyphs >>
 
-## Scale Glyphs — the attention axis
+!! Scale Glyphs — the attention axis
 
 The Chronometer projects attention range onto TIME (Boyd operational tempo). It rides its own gauge, independent of the `syad` and `mu` lenses. Full scale model — and the `Aperture` TEXT projection — live in `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
 
@@ -144,7 +144,7 @@ The Chronometer projects attention range onto TIME (Boyd operational tempo). It 
 
 <<~ ahu #confidence-syadasti >>
 
-## Confidence — the Syadasti Reading Rule
+!! Confidence — the Syadasti Reading Rule
 
 When a turn invokes a stance, `confidence` measures *inside that stance's frame*, not as universal truth. Without an invoked `syad`, the number reads its default frame — all stances. Invoke more than one stance and the number reads through each frame at once: stances that agree hold it sharp, stances that diverge read it fuzzy — one number, wider lens, never a second number.
 
@@ -164,7 +164,7 @@ Each stance sets *what* the number measures; read it within that measure:
 
 <<~ ahu #field-annotation >>
 
-## Field-Annotation Thresholds
+!! Field-Annotation Thresholds
 
 The opening header declares the state that *governs* a span (prospective). In-flow markers annotate what *actually happened* in the chunk that just completed (post-generative) — they ride the OTel span-event model. Each field carries its own annotation threshold.
 
@@ -185,7 +185,7 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>

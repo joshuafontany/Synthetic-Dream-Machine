@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/memetic-wikitext"
 
 <<~ ahu #meme-header >>
 
-# Memetic Wikitext — Extended Docs
+! Memetic Wikitext — Extended Docs
 
 Law lives in `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`.
 This surface carries guidance, examples, and split residue.
@@ -29,7 +29,7 @@ This surface carries guidance, examples, and split residue.
 
 <<~ ahu #primitive-reading-guide >>
 
-## Primitive Reading Guide
+!! Primitive Reading Guide
 
 | Primitive | Root job | Common drift to avoid |
 |---|---|---|
@@ -49,7 +49,7 @@ Other quick chant terms may also serve as named `pranala` sugar where their own 
 
 <<~ ahu #authoring-profiles >>
 
-## Recommended Authoring Profiles
+!! Recommended Authoring Profiles
 
 | profile | when to use it | what to keep visible |
 |---|---|---|
@@ -64,9 +64,9 @@ Profiles tune posture, not primitive meaning.
 
 <<~ ahu #minimum-boot-examples >>
 
-## Minimum Boot Example Set
+!! Minimum Boot Example Set
 
-### Minimum document
+!!! Minimum document
 
 ````markdown
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/example >>
@@ -79,7 +79,7 @@ Profiles tune posture, not primitive meaning.
 <<~ &#x0004; -> ? >>
 ````
 
-### Minimum relation, inclusion, invocation
+!!! Minimum relation, inclusion, invocation
 
 ```text
 <<~ loulou lar:///ha.ka.ba/lares/api/target >>
@@ -87,7 +87,7 @@ Profiles tune posture, not primitive meaning.
 <<~ kahea lar:///ha.ka.ba/lares/api/source >>
 ```
 
-### Minimum governed and uncertain work
+!!! Minimum governed and uncertain work
 
 ```text
 <<~ kapu invocation -> bounded|? >>
@@ -100,15 +100,15 @@ Work begins before full binding settles.
 
 <<~ ahu #boundary-notes >>
 
-## Boundary Notes
+!! Boundary Notes
 
 The api parent now carries the submission-grade specification (abstract, conformance, ABNF, processing model, media-type, security). These concerns live in their own carriers, never the parent:
 
-- long example ladders → here (extended docs)
-- authoring profile guidance → here
-- the render pipeline → `lar:///ha.ka.ba/lares/api/pono/render-pipeline`
-- per-sigil semantics → each sigil's own `api/pono/<sigil>` meme (and the runtime kernel, `…/memetic-wikitext/kernel`)
-- archive-grade explanation and repetition → retired
+* long example ladders → here (extended docs)
+* authoring profile guidance → here
+* the render pipeline → `lar:///ha.ka.ba/lares/api/pono/render-pipeline`
+* per-sigil semantics → each sigil's own `api/pono/<sigil>` meme (and the runtime kernel, `…/memetic-wikitext/kernel`)
+* archive-grade explanation and repetition → retired
 
 Deepen each contract in its own carrier; do not re-expand the parent submission.
 
@@ -116,20 +116,20 @@ Deepen each contract in its own carrier; do not re-expand the parent submission.
 
 <<~ ahu #migration-note >>
 
-## Migration Note
+!! Migration Note
 
 This docs companion formed during the 2026-04-21 yin split/refine/clean pass.
 The current shape keeps:
 
-- the submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` (morphed to submission grade 2026-06-05)
-- operational procedure at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL`
-- extended guidance here
+* the submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` (morphed to submission grade 2026-06-05)
+* operational procedure at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL`
+* extended guidance here
 
 <<~/ahu >>
 
 <<~ ahu #w3c-lineage-verdicts >>
 
-## W3C + Prior Art Lineage Verdicts
+!! W3C + Prior Art Lineage Verdicts
 
 The following verdicts emerged from a formal prior-art review against W3C, IETF, TiddlyWiki, and adjacent specifications. They constrain how memetic wikitext claims its own identity and how future spec work should frame compliance.
 
@@ -171,12 +171,12 @@ JSON Schema and OpenAPI show the correct authority split. Prose spec text remain
 **7. Runtime rigor: packet shapes, capability boundaries, refusal behavior.**
 JSON-RPC and MCP show how to specify runtime packets and capability negotiation without leaving behavior to folklore. The `kahea` processing stage (parser-level? post-parse? runtime transclusion?), context inheritance, and unresolved-target behavior remain the open design tests for the v5 spec:
 
-- What processing stage does bare `kahea` inhabit?
-- Does arrowed `kahea` receive caller context explicitly or by ambient inheritance?
-- Can `kahea` target partial body ranges, or only whole memes and `ahu` worksites?
-- What is the exact behavior for: unresolved source, unresolved target, recursion cycle, permission attenuation failure?
-- Do we need a one-time substitution mode separate from live transclusion?
-- Do remote or cross-system calls require explicit opt-in?
+* What processing stage does bare `kahea` inhabit?
+* Does arrowed `kahea` receive caller context explicitly or by ambient inheritance?
+* Can `kahea` target partial body ranges, or only whole memes and `ahu` worksites?
+* What is the exact behavior for: unresolved source, unresolved target, recursion cycle, permission attenuation failure?
+* Do we need a one-time substitution mode separate from live transclusion?
+* Do remote or cross-system calls require explicit opt-in?
 
 These design tests emerge from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki, and shaped the v5 spec rebuild.
 
@@ -186,7 +186,7 @@ The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wi
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>

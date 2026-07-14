@@ -30,7 +30,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 
 <<~ ahu #closed-sprints >>
 
-## Closed Sprint Outcomes
+!! Closed Sprint Outcomes
 
 Sprint IDs mark ordered work slices, not wall-clock promises.
 
@@ -44,7 +44,7 @@ Sprint IDs mark ordered work slices, not wall-clock promises.
 
 <<~ ahu #consumption-map >>
 
-## Consumed Source Map
+!! Consumed Source Map
 
 | Source | Canonical locus |
 |---|---|
@@ -74,7 +74,7 @@ Active or not-yet-consumed sources: `SPRINT-03_REMOTE_SURFACES.md`, `SPRINT-04_H
 
 <<~ ahu #done-story-index >>
 
-## Done Story Index
+!! Done Story Index
 
 These done stories have their durable content represented by the canonical loci above or by the implemented code they point at:
 
@@ -93,17 +93,17 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~ ahu #residue >>
 
-## Residue
+!! Residue
 
-- Sprint-03 carries remote transport, auth/scope policy, evals, and pranala DAG walking.
-- Sprint-04 carries hardening and operations.
-- When a future sprint closes, add one row here and mark its source file consumed.
+* Sprint-03 carries remote transport, auth/scope policy, evals, and pranala DAG walking.
+* Sprint-04 carries hardening and operations.
+* When a future sprint closes, add one row here and mark its source file consumed.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/spine >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients >>

@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-type-lattice"
 
 <<~ ahu #head >>
 
-# Verse Type Lattice
+! Verse Type Lattice
 
 Verse's type system is a **lattice**, not a simple tree. At the top sits `any`
 (universal supertype); at the bottom lies `false` (uninhabited bottom type).
@@ -33,7 +33,7 @@ ch. 13 (effects), ch. 17 (persistable); Epic Games developer documentation.
 
 <<~ ahu #lattice >>
 
-## The Type Lattice
+!! The Type Lattice
 
 ```
 any                        ← universal supertype; ALL types descend from it
@@ -61,7 +61,7 @@ false                      ← bottom type; SUBTYPE of ALL types; uninhabited.
                              unconditional failure, etc.).
 ```
 
-### Subtyping rule
+!!! Subtyping rule
 
 > "When type A is a subtype of type B, every value of type A can be used wherever
 > a value of type B is expected." — Book of Verse ch. 11
@@ -74,7 +74,7 @@ Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 
 <<~ ahu #class-modifiers >>
 
-## Class Modifiers That Affect the Lattice
+!! Class Modifiers That Affect the Lattice
 
 | Modifier | Effect on subtyping |
 |---|---|
@@ -87,29 +87,29 @@ Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 
 <<~ ahu #persistable-constraint >>
 
-## Persistable — A Closed Constraint Universe
+!! Persistable — A Closed Constraint Universe
 
 `<persistable>` is NOT a node in the type lattice. It is a constraint on type
 composition: a type is persistable if it stores ONLY persistable-compatible values.
 
 **Built-in persistable types:**
-- Primitives: `logic`, `int`, `float`, `string`, `char`, `char32`
-- Containers: `array`, `map`, `option`, `tuple` — when element types are persistable
+* Primitives: `logic`, `int`, `float`, `string`, `char`, `char32`
+* Containers: `array`, `map`, `option`, `tuple` — when element types are persistable
 
 **Types that CANNOT appear in persistable class/struct fields:**
-- `any` — erases type info; not persistable-safe
-- `comparable` — constraint type; not persistable-safe
-- `type` — meta-type; not persistable-safe
-- `rational` — arbitrary-precision; not persistable-safe
-- Function types — not persistable-safe
-- `weak_map` — not persistable-safe
-- Interface types — not persistable-safe
-- Non-persistable user types
+* `any` — erases type info; not persistable-safe
+* `comparable` — constraint type; not persistable-safe
+* `type` — meta-type; not persistable-safe
+* `rational` — arbitrary-precision; not persistable-safe
+* Function types — not persistable-safe
+* `weak_map` — not persistable-safe
+* Interface types — not persistable-safe
+* Non-persistable user types
 
 **Structural rules for persistable classes:**
-- Must be marked `<final>` (no subclasses)
-- Must be marked `<persistable>` on the class declaration
-- All fields must themselves be of persistable type
+* Must be marked `<final>` (no subclasses)
+* Must be marked `<persistable>` on the class declaration
+* All fields must themselves be of persistable type
 
 Persistable data is stored via `weak_map(player, t)` declarations and persists across
 game sessions. This is Verse's equivalent of cross-session player storage.
@@ -118,7 +118,7 @@ game sessions. This is Verse's equivalent of cross-session player storage.
 
 <<~ ahu #effects-as-edge-labels >>
 
-## Effects System — Six Families
+!! Effects System — Six Families
 
 Verse effects are a **bit-vector** propagated upward through call chains. Each
 function declares which effect bits it sets; callers must declare at least the same
@@ -134,14 +134,14 @@ bits (or more). Six families:
 | Purity | `<computes>` | No side effects (composite of read-only) | edge is safe to parallelize |
 
 **Composition specifiers:**
-- `<computes>` — pure: no heap writes, no suspension, no failure, no divergence
-- `<transacts>` — default: heap reads + writes + allocation
-- `<reads>` — read-only heap access
+* `<computes>` — pure: no heap writes, no suspension, no failure, no divergence
+* `<transacts>` — default: heap reads + writes + allocation
+* `<reads>` — read-only heap access
 
 **Key rule:** Functions **without `<writes>`** can be safely executed in parallel
 without locks. This is the Verse-native condition for safe concurrent edges.
 
-### Propagation and hiding
+!!! Propagation and hiding
 
 Effects propagate **upward**: calling a `<suspends>` function from a non-suspends
 function requires marking the caller `<suspends>`. The effect bit flows up the call
@@ -161,7 +161,7 @@ failable expression into a conditional branch.
 
 <<~ ahu #pranala-edge-labels >>
 
-## Effects as Pranala Edge Labels
+!! Effects as Pranala Edge Labels
 
 When Lararium models Verse function types in the graph, effects annotate the edge:
 
@@ -180,7 +180,7 @@ See `uefn-scene` for the `reaction:subscribable` edge format and `KumuSubscribab
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>

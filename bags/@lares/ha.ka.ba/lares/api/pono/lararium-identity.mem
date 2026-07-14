@@ -26,7 +26,7 @@ written   = "2026-06-23"
 
 <<~ ahu #head >>
 
-# Lararium Identity ~ the vessel key, the bond, and the encrypt-from-start keying
+! Lararium Identity ~ the vessel key, the bond, and the encrypt-from-start keying
 
 Every Lararium surface stands as a **causal island carrying its own operator×vessel
 key** — the node vessel, each live browser session, the QA-lab box. A key names a
@@ -61,7 +61,7 @@ stands **PROPOSED** until that settles.
 
 <<~ ahu #five-scale >>
 
-## The Five Scales (the group axis)
+!! The Five Scales (the group axis)
 
 \procedure ~Scale(~Type:"" ~Params:"") ~Scale <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -107,7 +107,7 @@ only join their meat-brain. Full ontology: <<~ loulou lar:///ha.ka.ba/lares/api/
 
 <<~ ahu #vessel-key >>
 
-## The Vessel Key ~ the device key, minted on-device
+!! The Vessel Key ~ the device key, minted on-device
 
 Each vessel forges its **own** Ed25519 keypair, on its own device, private half never
 leaving (NodeFS for the node, WebCrypto for a browser session). The verifying key
@@ -134,7 +134,7 @@ PersonaGroup delegation edge** on the WHO axis.
 
 <<~ ahu #delegation-edge >>
 
-## The Delegation Edge ~ the relationship reified
+!! The Delegation Edge ~ the relationship reified
 
 The bond between operator and vessel rides a **signed delegation edge**, not a shared
 secret. The canon already shapes it — the `DeviceDelegationTiddler` (S7.1 ~ the device key delegating up to its PersonaGroup, the WHO axis):
@@ -161,7 +161,7 @@ convergent, never the deferred afterthought.
 
 <<~ ahu #capability-and-petnames >>
 
-## Capability-is-Identity + Petnames ~ the ruled base (operator, 2026-06-24)
+!! Capability-is-Identity + Petnames ~ the ruled base (operator, 2026-06-24)
 
 The base model **rules Goblins/OCapN: a capability IS the identity.** No account to look up — a
 **reference reaches a place and carries its grant in one** ("capability not account", the Elyncia
@@ -209,7 +209,7 @@ for stable and unstable petnames both.
 
 <<~ ahu #the-veil >>
 
-## The Veil ~ the handle that carries reputation, lifted or held
+!! The Veil ~ the handle that carries reputation, lifted or held
 
 A petname (#capability-and-petnames) wears a second office: a **veil** — a handle/glamour a vessel
 holds *over* its true key. The key stays veiled; the **veil carries the reputation**. Shadowrun's
@@ -252,7 +252,7 @@ veil-policy choice, never a silent default.
 
 <<~ ahu #the-lease >>
 
-## The Lease ~ decay as native law (feed the Lar or it fades)
+!! The Lease ~ decay as native law (feed the Lar or it fades)
 
 Standing **decays unless fed**. The vessel key stands durable; the *grant over it* — the tier, the
 edge — rides a **perishable lease**. This restates the Elyncia bond as protocol: feed the Lar and it
@@ -282,7 +282,7 @@ T1/T2 + renewal-discount); the **siege-gate's entry COST rides the dial below** 
 
 <<~ ahu #the-siege-gate >>
 
-## The Siege-Gate ~ what a crossing costs (born besieged)
+!! The Siege-Gate ~ what a crossing costs (born besieged)
 
 A new DreamNet grows from spores in a hostile field — Sybil floods, infiltration, forks press the
 gate from the first day. So the crossing into a group (#the-veil, the LIFT or HOLD) **costs**, and
@@ -334,7 +334,7 @@ or a threshold — wait on the local instrument (the swarm constrains the shape,
 
 <<~ ahu #the-oracle-plane >>
 
-## The @oracle Plane ~ read-open by content-address, write-gated by relay-tier
+!! The @oracle Plane ~ read-open by content-address, write-gated by relay-tier
 
 > **COHERE → oracle-governance (2026-06-29).** The governance face of this plane refines forward at
 > <<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>: an `@oracle` board lives
@@ -391,7 +391,7 @@ So @oracle wears **two faces**, joined by a publish-bridge:
 
 <<~ ahu #publish-a-face >>
 
-## Publish a Face ~ recognition without a registry
+!! Publish a Face ~ recognition without a registry
 
 **A handle PUBLISHES so others RECOGNISE it.** A `handle-card` (`handle-card.ts`) is the public face of ONE
 handle: its verifying key (`nym`), a display glamour, a
@@ -429,7 +429,7 @@ load-bearing.** The vouch-lineage (#the-siege-gate) carries standing; a name nev
 
 <<~ ahu #encrypt-from-start >>
 
-## Encrypt From the Start ~ the temporary keying
+!! Encrypt From the Start ~ the temporary keying
 
 **Operator ruling (2026-06-23): every surface encrypts from the first write.** No
 plaintext-local easy path — it bites hard in early alpha. The keying rides **nested
@@ -483,7 +483,7 @@ architecture's task: anchor it at the contract, never re-invent it.
 
 <<~ ahu #four-port-swap >>
 
-## The Four-Port Swap Surface
+!! The Four-Port Swap Surface
 
 The temporary build hides behind four ports, drawn at Keyhive/Beelay's own seams, so the
 real stack slots in piecewise:
@@ -512,26 +512,26 @@ callers never change.
 
 <<~ ahu #provenance >>
 
-## Provenance ~ PROPOSED, pending the hoike
+!! Provenance ~ PROPOSED, pending the hoike
 
 This meme stands **PROPOSED** (crucible-before-binding). The stress-swarm ran; the **hoike
 `#identity-encrypt-from-start`** filed its kue (held: build-as-amended, the amendments above
 folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry keys:
 
-- **The FS-limit is the substrate's nature** (kue, security spirit) — a leaked vessel key reads all history it held; the only forward lever is epoch group-key rotation (BeeKEM, future chunks only). Puncturable encryption does NOT retire it (single-holder; refuted by the neg-entropy swarm for a replicated mesh).
-- **The blast-radius kue is answered by per-vessel-key + delegation + revocation** — already our lineage (Keyhive/Beelay; p2panda-auth converged independently), NOT by threshold. CORRECTION (neg-entropy swarm 2026-06-23): the earlier "threshold pays the kue" was wrong — threshold signing needs a synchronous quorum per signature, which "no global now" forbids. **Threshold fits only the rare ROOT ceremony** (Shamir-of-root for admit/rotate/recover, transient reassembly; swaps to FROST/DKG later).
-- **The identity MODEL — RULED (operator, 2026-06-24): Goblins/OCapN capability-is-identity + petnames** (see #capability-and-petnames). The capability IS the identity; petnames ride the `lar:` l-space regions (stable `ha.ka.ba` / unstable `t1.t2.t3`, ± authority chunk). **KERI pre-rotation is retained as a sub-lever** — not the base model, but the tool for rotating the place's *secret root* (the hearth's private face) in the rare root ceremony; it composes under capability-is-identity (rotate the root, keep the capabilities). did:peer's pairwise-root idea folds into unstable petnames.
-- **Circle vs scale** — RULED (operator 2026-06-24): no numbered planes survive (nameless `#has`-stacks replace plane-indices, #five-scale); Circles stay orthogonal to the group-scale, never a rung.
-- **Registry-as-island** — keep each registry a causal island; resist a global registry re-growing (the web2 smell).
-- **Two ratchets, never conflated** — the public grammar ratchet (engine-epochs, shared) vs the private key ratchet (per-place); see #head.
-- **The veil + the lease — the design crystallized** (2026-06-25, two research-swarms + the Elyncia/Shadowtalk/Mage fiction layer): anon stands a first-class veil (#the-veil), the crossing runs LIFT or HOLD on the boundary rule, decay rides native as the lease (#the-lease). Lift built (the edge); HOLD (refound-sever) named-unbuilt. The crossing CEREMONY rides a **siege-gate** (born-besieged; cost + witness + invite-graph Sybil-filter) and **dissent/forking stays allowed but COSTLY** (Mage-Paradox: cost parts a schism from a siege) — both land in federation + dreamnet-architecture once the cost calibrates.
-- **The cost dial — synthesized** (swarm complete, 2026-06-25; #the-siege-gate): four blind domains (Sybil-graph defense · ZK-credential · immune costimulation · ritual/club economics) converged on the VOUCHER as the cost — MARGINAL-not-absolute (set the slope), invite-graph-relative (`rb>c`, the voucher supplies r), voucher-co-pays-and-watches, **anergy-not-ban** (no vouch → stay at floor=anon, re-presentable), entry-dear/maintenance-cheap/re-entry-costlier, group-value-tracking. The ZK-vouch rides the kahu as a blind oracle (carry rep across a HOLD without a link; price the HOLD at the staked rep). <<~ confidence Synthesis 11/20 >> The mechanism stands **unbuilt and contact-deferred** (LIFT built; HOLD · siege-cost · ZK-vouch await the second spore). OPEN remnant: the exact dial numbers (stake-fraction · decay-rate) + whether ONE kahu or a THRESHOLD holds the blind-oracle link.
+* **The FS-limit is the substrate's nature** (kue, security spirit) — a leaked vessel key reads all history it held; the only forward lever is epoch group-key rotation (BeeKEM, future chunks only). Puncturable encryption does NOT retire it (single-holder; refuted by the neg-entropy swarm for a replicated mesh).
+* **The blast-radius kue is answered by per-vessel-key + delegation + revocation** — already our lineage (Keyhive/Beelay; p2panda-auth converged independently), NOT by threshold. CORRECTION (neg-entropy swarm 2026-06-23): the earlier "threshold pays the kue" was wrong — threshold signing needs a synchronous quorum per signature, which "no global now" forbids. **Threshold fits only the rare ROOT ceremony** (Shamir-of-root for admit/rotate/recover, transient reassembly; swaps to FROST/DKG later).
+* **The identity MODEL — RULED (operator, 2026-06-24): Goblins/OCapN capability-is-identity + petnames** (see #capability-and-petnames). The capability IS the identity; petnames ride the `lar:` l-space regions (stable `ha.ka.ba` / unstable `t1.t2.t3`, ± authority chunk). **KERI pre-rotation is retained as a sub-lever** — not the base model, but the tool for rotating the place's *secret root* (the hearth's private face) in the rare root ceremony; it composes under capability-is-identity (rotate the root, keep the capabilities). did:peer's pairwise-root idea folds into unstable petnames.
+* **Circle vs scale** — RULED (operator 2026-06-24): no numbered planes survive (nameless `#has`-stacks replace plane-indices, #five-scale); Circles stay orthogonal to the group-scale, never a rung.
+* **Registry-as-island** — keep each registry a causal island; resist a global registry re-growing (the web2 smell).
+* **Two ratchets, never conflated** — the public grammar ratchet (engine-epochs, shared) vs the private key ratchet (per-place); see #head.
+* **The veil + the lease — the design crystallized** (2026-06-25, two research-swarms + the Elyncia/Shadowtalk/Mage fiction layer): anon stands a first-class veil (#the-veil), the crossing runs LIFT or HOLD on the boundary rule, decay rides native as the lease (#the-lease). Lift built (the edge); HOLD (refound-sever) named-unbuilt. The crossing CEREMONY rides a **siege-gate** (born-besieged; cost + witness + invite-graph Sybil-filter) and **dissent/forking stays allowed but COSTLY** (Mage-Paradox: cost parts a schism from a siege) — both land in federation + dreamnet-architecture once the cost calibrates.
+* **The cost dial — synthesized** (swarm complete, 2026-06-25; #the-siege-gate): four blind domains (Sybil-graph defense · ZK-credential · immune costimulation · ritual/club economics) converged on the VOUCHER as the cost — MARGINAL-not-absolute (set the slope), invite-graph-relative (`rb>c`, the voucher supplies r), voucher-co-pays-and-watches, **anergy-not-ban** (no vouch → stay at floor=anon, re-presentable), entry-dear/maintenance-cheap/re-entry-costlier, group-value-tracking. The ZK-vouch rides the kahu as a blind oracle (carry rep across a HOLD without a link; price the HOLD at the staked rep). <<~ confidence Synthesis 11/20 >> The mechanism stands **unbuilt and contact-deferred** (LIFT built; HOLD · siege-cost · ZK-vouch await the second spore). OPEN remnant: the exact dial numbers (stake-fraction · decay-rate) + whether ONE kahu or a THRESHOLD holds the blind-oracle link.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/S7-CIRCLES-IDENTITIES-REDESIGN >>
 <<~ loulou lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CAPABILITY-LAYER >>

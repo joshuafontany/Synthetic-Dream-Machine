@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/function"
 
 <<~ ahu #head >>
 
-# \function
+! \function
 
 English-form filter-function declaration pragma (TW5 5.3+).
 `<<~ \function name(params) >>filter-expression<<~/ \function >>` declares a named filter function
@@ -33,7 +33,7 @@ the current vocabulary. `lar-kind: pragma-alias` — the sigil serves as the dec
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A `\function` declaration MUST carry a valid TW5 filter expression as its body.
 A `\function` declaration is leaf-only in practice — filter bodies are inline expressions.
@@ -47,7 +47,7 @@ return wikitext. Do not use interchangeably.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ \function myFilter(param:"") >>[<param>match[value]]<<~/ \function >>
@@ -64,7 +64,7 @@ TW5 native equivalent:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
 

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/federated-causal-islands"
 
 <<~ ahu #head >>
 
-# Federated Causal Islands
+! Federated Causal Islands
 
 Fuller-Zelenka non-simultaneous apprehension as ontological basis.
 Named causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay law.
@@ -40,7 +40,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 <<~ ahu #law >>
 
-## Ontological Basis (Fuller-Zelenka)
+!! Ontological Basis (Fuller-Zelenka)
 
 No observer apprehends events in Universe simultaneously.
 A node never holds the full state of a distributed system "at once."
@@ -49,15 +49,15 @@ This names no limitation. This describes topology.
 
 Simultaneously apprehended: your local Automerge doc snapshot, right now.
 Non-simultaneously apprehended: everything else —
-- other peers syncing the same doc (you see their state at last sync)
-- other Automerge Realms reachable from this one on the network
-- tiddlers not yet hydrated in the local TW5 instance
-- kumu/active-meme instances with trigger surfaces as their own event horizons
+* other peers syncing the same doc (you see their state at last sync)
+* other Automerge Realms reachable from this one on the network
+* tiddlers not yet hydrated in the local TW5 instance
+* kumu/active-meme instances with trigger surfaces as their own event horizons
 
 Any boundary across which causality cannot be guaranteed simultaneously marks a causal island boundary.
 The tier map below names these boundaries from innermost to outermost.
 
-### The formal model ~ sheaf-gluing / H¹ obstruction (load-bearing, 2026-06-26)
+!!! The formal model ~ sheaf-gluing / H¹ obstruction (load-bearing, 2026-06-26)
 
 A four-domain validation (`lar:///ha.ka.ba/lararium/api/causal-island-pattern`) carries the exact mathematics of "no global now," promoted here from intuition to law. The federation reads as a **presheaf** of local causal-logs that is **not a sheaf**: the local sections (each island's state) need not glue to a global section, and *that failure carries the content* — "no global now" **IS** the gluing obstruction, and it lives in **H¹** (sheaf cohomology; Goguen, sheaf-semantics of concurrent interacting objects). Two consequences ride load-bearing:
 
@@ -66,15 +66,15 @@ A four-domain validation (`lar:///ha.ka.ba/lararium/api/causal-island-pattern`) 
 
 The master cut rides ABOVE the gluing: **AUTHORITY(safety) ⊥ FLOW(liveness)** — flow may glue probabilistically and eventually; authority never (safety cannot be earned from local sections alone; Ashby's requisite-variety floor — a global-variety invariant must be *attenuated* to a local one or *amplified* by modelling peers, never locally faked).
 
-### The two clocks ~ causal ⊥ rhythmic (2026-07-03)
+!!! The two clocks ~ causal ⊥ rhythmic (2026-07-03)
 
 The master cut sorts a second pair beneath it: the mesh keeps time on **two orthogonal clocks**, never one.
 
-- **The CRDT-causal clock** (TS, structural) carries the happened-before poset — Automerge `<counter,
+* **The CRDT-causal clock** (TS, structural) carries the happened-before poset — Automerge `<counter,
   actorId>` OpId, `getHeads`/`drifted`, ITC fork/join, the authority-first sync order below. It alone rules
   fork-detection, merge, and revocation ordering; AUTHORITY/safety cannot glue from local sections alone,
   so this clock stays TS-native and web3-local-first.
-- **The FFZ-recovered rhythm clock** (py/R, per-stream, no-global-now) rides alongside as *rhythmic
+* **The FFZ-recovered rhythm clock** (py/R, per-stream, no-global-now) rides alongside as *rhythmic
   annotation* — a cadence recovered from each stream, freshness/decay grain stamped py-side behind the
   causal-island boundary. FFZ reads RHYTHMIC, never causal: its LWW total-order MUST NOT drive an authority
   decision.
@@ -83,7 +83,7 @@ Liveness (the epoch-lease, non-renewal) and targeted revocation (Keyhive converg
 name authority/liveness mechanisms, not clocks. Full model:
 `lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research`.
 
-## Law
+!! Law
 
 A node-to-node pranala connection marks a causal island.
 
@@ -101,7 +101,7 @@ regardless of first encounter point on the network.
 
 <<~ ahu #edge-island-shape >>
 
-## Edge Island Shape
+!! Edge Island Shape
 
 Every edge island MUST carry:
 
@@ -114,7 +114,7 @@ visibility-gate   = "canFederate(meme, wiki, edge, subject) — see gate law bel
 receipt           = "issued after each meaningful transition; hash-stable for prompt cache"
 ```
 
-### Visibility Gate Law
+!!! Visibility Gate Law
 
 A meme passes the federation gate when ALL of the following hold:
 
@@ -141,7 +141,7 @@ resumes from its last known offset — it never re-syncs from the beginning.
 
 <<~ ahu #sync-order >>
 
-## Authority-First Sync Order
+!! Authority-First Sync Order
 
 Authority MUST precede content. This invariant holds without exception.
 
@@ -166,29 +166,29 @@ A peer MUST complete step 3 before requesting individual meme deltas.
 
 <<~ ahu #lifecycle >>
 
-## Edge Island Lifecycle
+!! Edge Island Lifecycle
 
 ```
 stable sediment | current boot receipt | live delta tail
 ```
 
-- **Join:** receive boot receipt first — the shape of the visible world at join time.
+* **Join:** receive boot receipt first — the shape of the visible world at join time.
   This does not provide a full CRDT sync. It provides a snapshot of what this peer currently
   authorized to see.
-- **After join:** request missing deltas from the last known offset.
-- **Revocation:** epoch rolls. The revoked principal receives no future live tail.
+* **After join:** request missing deltas from the last known offset.
+* **Revocation:** epoch rolls. The revoked principal receives no future live tail.
   Past sediment encrypted at prior epoch keys stays readable by those who held
   those keys. Revocation runs forward-only.
-- **Receipt:** emitted after join, after each epoch change, after each
+* **Receipt:** emitted after join, after each epoch change, after each
   canon residency action (MOVE into a lower-priority bag). Receipts keep hash stability and prompt-cache usability.
-- **Re-seeding:** boot receipt re-issued; sediment layers may compact;
+* **Re-seeding:** boot receipt re-issued; sediment layers may compact;
   live tail resets from new offset zero.
 
 <<~/ahu >>
 
 <<~ ahu #relay-law >>
 
-## Relay Law
+!! Relay Law
 
 A trust-minimized relay holds `pull`, not `read`.
 
@@ -207,7 +207,7 @@ The altar does not require the relay to comprehend the offering to carry it.
 
 <<~ ahu #task-handoff >>
 
-## Cross-Peer Task Handoff (design space)
+!! Cross-Peer Task Handoff (design space)
 
 > Status: DESIGN SPACE — not yet built. The IN-PROCESS handoff (the worker→main
 > channel as the capability) stands today (`project_verification_placement`); this
@@ -229,21 +229,21 @@ flow gate never absorbs the authority check, the way the two gate-families stay 
 separate at the ring.
 
 **The shape (the pono model).**
-- A **task** travels as a *signed capability-invocation written as a CRDT fact*,
+* A **task** travels as a *signed capability-invocation written as a CRDT fact*,
   never an RPC — the existing verb-tiddler, extended to name an executor peer.
   Intent. It survives the requester going offline the instant after it asks.
-- An **outcome** travels back as a *signed receipt written as a CRDT fact* — the
+* An **outcome** travels back as a *signed receipt written as a CRDT fact* — the
   existing outcome-tiddler. The "executor crashed before replying" failure
   dissolves: nothing exists to lose; the outcome converges or it does not, and
   its absence reads plainly.
-- **Authority rides WITH the task** (a UCAN invocation shape over the keyhive
+* **Authority rides WITH the task** (a UCAN invocation shape over the keyhive
   grant): the invocation carries its proof-chain back to the owner, attenuated;
   the executor verifies the chain + the attenuation predicates against the args,
   then acts STRICTLY within that envelope, never on its own ambient authority —
   defeating the confused deputy by construction (no designation without authority).
-- **Attenuation only narrows** down the chain; expiry/TTL carries the only
+* **Attenuation only narrows** down the chain; expiry/TTL carries the only
   fully-decentralized revocation (no global now).
-- **Selection ≠ authority.** Liveness + reputation pick WHICH capable peer
+* **Selection ≠ authority.** Liveness + reputation pick WHICH capable peer
   receives the task (a soft hint); the capability bounds the damage if the pick
   goes wrong. No coordinator/super-peer accrues trust-authority.
 
@@ -264,7 +264,7 @@ distributed-locking "fencing token"; see `project_next_vectors`.)
 
 <<~ ahu #tier-map >>
 
-## Tier Map
+!! Tier Map
 
 ```
 Tier 0 — active programming memes (kumu instances, UEFN device analogues, kahea invocations)
@@ -307,23 +307,23 @@ Tier 4 — Commons / Universe horizon Canon 18/20 (after law-of-5s)
 
 <<~ ahu #causal-island-doctrine >>
 
-## Causal Island Doctrine
+!! Causal Island Doctrine
 
-### MAY promote to causal islands
+!!! MAY promote to causal islands
 
-- wikis, memes, sigils
-- kumu instances, kahea invocations (Tier 0 prime candidates)
-- local wiki projections, long-lived runtime actors
-- automerge-realm, peer-sync-state (non-simultaneous by topology)
+* wikis, memes, sigils
+* kumu instances, kahea invocations (Tier 0 prime candidates)
+* local wiki projections, long-lived runtime actors
+* automerge-realm, peer-sync-state (non-simultaneous by topology)
 
-### MUST promote to causal islands
+!!! MUST promote to causal islands
 
-- node-to-node federation edges
-- cross-node pranala connections
-- cross-node residency actions (MOVE/COPY into canon bags)
-- revocation epoch changes
-- encrypted sync membership changes
-- alignment-stance federation (a peer-stance/vouch crossing an edge island)
+* node-to-node federation edges
+* cross-node pranala connections
+* cross-node residency actions (MOVE/COPY into canon bags)
+* revocation epoch changes
+* encrypted sync membership changes
+* alignment-stance federation (a peer-stance/vouch crossing an edge island)
 
 Local causality errors can be corrected inside a node.
 Cross-node causality errors produce federation corruption.
@@ -332,7 +332,7 @@ Cross-node causality errors produce federation corruption.
 
 <<~ ahu #schema >>
 
-## Schema (machine-readable)
+!! Schema (machine-readable)
 
 Canonical TOML form. Source of truth for `AUTHORITY_FIRST_ORDER`, `CAUSAL_ISLAND_MUST`, `CAUSAL_ISLAND_MAY`
 in `packages/lararium-mesh/src/causal-island.ts`.

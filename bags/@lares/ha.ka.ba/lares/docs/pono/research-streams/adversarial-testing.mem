@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing"
 
 <<~ ahu #head >>
 
-# Research Stream - Adversarial Testing
+! Research Stream - Adversarial Testing
 
 Literal quote witnesses for test-all-the-things posture.
 
@@ -28,7 +28,7 @@ Literal quote witnesses for test-all-the-things posture.
 
 <<~ ahu #distributed-failure >>
 
-## Distributed Failure and Generative Testing
+!! Distributed Failure and Generative Testing
 
 > "Testing under distributed systems failure modes: faulty networks, unsynchronized clocks, and partial failure."
 
@@ -42,7 +42,7 @@ Source: https://jepsen.io/analyses
 
 <<~ ahu #security-automation >>
 
-## Security Testing and Authorization Automation
+!! Security Testing and Authorization Automation
 
 > "To deal with this problem, we recommend that developers automate the evaluation of the authorizations and perform a test when a new release is created."
 
@@ -60,7 +60,7 @@ Source: https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_
 
 <<~ ahu #formal-verification >>
 
-## Formal Verification Corpus
+!! Formal Verification Corpus
 
 > "This is a repository of TLA+ specifications and models covering applications in a variety of fields."
 

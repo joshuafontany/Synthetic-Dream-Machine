@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kau"
 
 <<~ ahu #head >>
 
-# Kau
+! Kau
 
 A device placed with intention. The instance takes its own address.
 
@@ -30,7 +30,7 @@ A device placed with intention. The instance takes its own address.
 
 <<~ ahu #etymology >>
 
-## Etymology and Mythology
+!! Etymology and Mythology
 
 **kau** (Hawaiian): "to place upon, to set down with intention, to perch upon, to hang from above."
 
@@ -46,21 +46,21 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
-- Kau MUST produce exactly one instance URI: `carrierUri#fragment`.
-- The #fragment MUST be explicit in the sigil OR auto-generated as a UUID on first commit (write-back stub).
-- The instance URI MUST become the `currentTiddler` variable for the kumu body during render.
-- Kau MUST NOT produce a graph edge by itself (device wiring uses papalohe edges).
-- Each kau placement MUST create a distinct causal island: events exit the island only via papalohe.
-- Implementations MUST fire the `KauCapabilityHook` with the instance URI when a Keyhive authority provider registers (stub: no-op until WASM).
-- Implementations MUST fire the `KauWriteBackHook` when a UUID fragment auto-generates (stub: no-op until write-back layer wires in).
+* Kau MUST produce exactly one instance URI: `carrierUri#fragment`.
+* The #fragment MUST be explicit in the sigil OR auto-generated as a UUID on first commit (write-back stub).
+* The instance URI MUST become the `currentTiddler` variable for the kumu body during render.
+* Kau MUST NOT produce a graph edge by itself (device wiring uses papalohe edges).
+* Each kau placement MUST create a distinct causal island: events exit the island only via papalohe.
+* Implementations MUST fire the `KauCapabilityHook` with the instance URI when a Keyhive authority provider registers (stub: no-op until WASM).
+* Implementations MUST fire the `KauWriteBackHook` when a UUID fragment auto-generates (stub: no-op until write-back layer wires in).
 
 <<~/ahu >>
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```
 <<~ kau DeviceName >>                       placement, auto-generated fragment
@@ -70,13 +70,13 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 
 The DeviceName resolves via `[all[tiddlers]tag[$:/tags/LarariumKumu]field:kumu-name[DeviceName]]`.
 
-### Instance URI
+!!! Instance URI
 
 The instance URI forms as: `carrierUri + "#" + fragment`
 
 On first commit with auto-generated fragment, the write-back hook patches the source carrier with the assigned UUID so the address stabilizes on subsequent edits.
 
-### Keyhive stubs (integration boundary)
+!!! Keyhive stubs (integration boundary)
 
 ```typescript
 registerKauCapabilityHook(hook: (instanceUri: string) => unknown)
@@ -89,7 +89,7 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 
 <<~ ahu #uefn-mapping >>
 
-## UEFN Device Model Mapping
+!! UEFN Device Model Mapping
 
 | memetic-wikitext | UEFN concept              |
 |-----------------|---------------------------|
@@ -104,7 +104,7 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 
 <<~ ahu #causal-island >>
 
-## Causal Island
+!! Causal Island
 
 Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable:Event subscribable:Handler >>`.
 

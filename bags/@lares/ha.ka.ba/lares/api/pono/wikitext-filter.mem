@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/wikitext-filter"
 
 <<~ ahu #purpose >>
 
-# Lararium Filter Grammar
+! Lararium Filter Grammar
 
 `wikitext-filter` functions as the native filter dialect for memetic-wikitext.
 
@@ -49,9 +49,9 @@ for new authoring.
 
 <<~ ahu #new-operators >>
 
-## New Operators
+!! New Operators
 
-### `toml:key[value]` — TOML metadata query
+!!! `toml:key[value]` — TOML metadata query
 
 Queries the `#iam` TOML block of each meme in the current result set.
 
@@ -65,7 +65,7 @@ Queries the `#iam` TOML block of each meme in the current result set.
 Replaces TW5 `!!field`. TOML keys are typed (string, float, bool, array) — the query
 engine coerces to string for comparison unless the key type permits numeric range queries.
 
-### `stack:has[X]` — worn-component query (the has-stack law)
+!!! `stack:has[X]` — worn-component query (the has-stack law)
 
 Queries the carrier's worn components: relative names qualify against each carrier's own bag scope. The retired `edge:` operator's successor (typed-edge attributes died 2026-06-12; relations that DO something ride wire entities — `api/pono/wire`).
 
@@ -77,7 +77,7 @@ Queries the carrier's worn components: relative names qualify against each carri
 
 Replaces TW5 `##index`. Wire queries (over reified wire records) arrive with the canvas editor.
 
-### `self[]` — current meme URI
+!!! `self[]` — current meme URI
 
 Returns the URI of the current rendering context meme (the nearest enclosing `meme` block,
 or the carrier's own `#iam.uri-path` if no `meme` is active).
@@ -87,7 +87,7 @@ or the carrier's own `#iam.uri-path` if no `meme` is active).
 [self[]stack[]]               current meme's worn components
 ```
 
-### `ahu:id[fragment-id]` — fragment anchor query
+!!! `ahu:id[fragment-id]` — fragment anchor query
 
 Queries for memes that contain an ahu block with the given fragment id.
 
@@ -96,7 +96,7 @@ Queries for memes that contain an ahu block with the given fragment id.
 [ahu:id[iam]]                 all indexed carriers (all have #iam)
 ```
 
-### `edge:family[reaction]` — reaction subscription query
+!!! `edge:family[reaction]` — reaction subscription query
 
 Queries memes by reaction-family (papalohe) edges. Useful for finding UEFN device graph event wires.
 
@@ -113,7 +113,7 @@ The `trigger` property carries the event name from the `papalohe` sugar form (`<
 
 <<~ ahu #preserved-operators >>
 
-## Preserved Operators (TW5 Compat)
+!! Preserved Operators (TW5 Compat)
 
 These operators carry over unchanged from `x-tiddlywiki-filter`.
 Noun substitution applies: "tiddler" → "meme", "tiddler title" → "meme URI".
@@ -155,7 +155,7 @@ each[key]       — one representative per unique TOML key value
 
 <<~ ahu #scope-and-context >>
 
-## Scope and Context Model
+!! Scope and Context Model
 
 Filters evaluate against an **explicit context**, not an ambient dynamic variable.
 
@@ -173,7 +173,7 @@ A filter expression that needs "the current meme" uses `[self[]]`.
 
 <<~ ahu #invocation >>
 
-## Invocation
+!! Invocation
 
 `wikitext-filter` runs as a guest grammar inside `hana` blocks, and inline in `wai`/`huli`/`ui` sigils.
 
@@ -203,7 +203,7 @@ The key `"x-tiddlywiki-filter"` serves import and migration.
 
 <<~ ahu #migration-from-tw5 >>
 
-## Migration from x-tiddlywiki-filter
+!! Migration from x-tiddlywiki-filter
 
 Systematic find-replace for authors migrating TW5 content:
 
@@ -222,7 +222,7 @@ Systematic find-replace for authors migrating TW5 content:
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>

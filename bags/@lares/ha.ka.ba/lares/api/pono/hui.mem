@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hui"
 
 <<~ ahu #head >>
 
-# Hui
+! Hui
 
 *hui* — Hawaiian: group, club, association, organization; to gather together, to meet. A hui
 brings separate parties into one meeting and holds them until the gathering completes. No member
@@ -35,7 +35,7 @@ Grammar only --- the await-all join runtime awaits the async-first sprint.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A hui block MUST spawn all child flows before any awaiting begins.
 A hui block MUST NOT resume the containing flow until every child flow completes.
@@ -45,7 +45,7 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ hui >>
@@ -63,7 +63,7 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-sync >>
 

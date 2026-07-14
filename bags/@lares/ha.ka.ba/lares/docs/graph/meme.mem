@@ -21,7 +21,7 @@ uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 
 <<~ ahu #terminology-note >>
 
-## Terminology Note
+!! Terminology Note
 
 *A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.*
 
@@ -41,7 +41,7 @@ uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 
 <<~ ahu #prana-edge >>
 
-## PranalaEdge
+!! PranalaEdge
 
 One typed, directed, acyclic edge between two sockets.
 Produced by the pranala parser from carrier source text.
@@ -77,10 +77,10 @@ Stored as a frozen dataclass so that edge records remain hashable and sortable.
 **Polarity values:** `affirming`, `negating`, `contrasting`, `neutral`, or `None`
 
 **Status values (instance lifecycle):** `declared`, `bound`, `observed`, `stale`
-- `declared` — edge appears in authored form
-- `bound` — all required fields for its family are present
-- `observed` — a runtime or tool pass witnessed the edge firing (does not replace `trace` lifecycle)
-- `stale` — edge no longer matches the current carrier context
+* `declared` — edge appears in authored form
+* `bound` — all required fields for its family are present
+* `observed` — a runtime or tool pass witnessed the edge firing (does not replace `trace` lifecycle)
+* `stale` — edge no longer matches the current carrier context
 
 **Independence law (from canonical pranala kānāwai):**
 `family`, `role`, `traversal`, and `propagation` are four independent concerns and MUST NOT collapse into each other.
@@ -91,15 +91,15 @@ An edge gates hydration order when `family == "control"`.
 `role` carries ownership semantics independently; the boot walk does not require `role` to determine traversal order.
 
 **Sugar-form origins:**
-- `<<~ loulou URI >>` → `family="relation"`, `lifecycle="instance"`, `role=None`
-- `<<~ aka URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
-- `<<~ kahea URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
+* `<<~ loulou URI >>` → `family="relation"`, `lifecycle="instance"`, `role=None`
+* `<<~ aka URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
+* `<<~ kahea URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
 
 <<~/ahu >>
 
 <<~ ahu #locus >>
 
-## Meme
+!! Meme
 
 One resolved carrier in the graph. Class name `Meme` preferred; `CarrierMeme` is a fallback if module namespace collision requires disambiguation. Decision deferred to Phase 1.
 Built from a `CarrierRecord` (ingress result from `carrier.py`) plus content hash.
@@ -138,7 +138,7 @@ The URI prefix prevents hash collisions between memes with identical content.
 
 <<~ ahu #declared-unresolved >>
 
-## DeclaredUnresolved
+!! DeclaredUnresolved
 
 A pranala edge pointing to a URI that the resolver cannot locate on disk.
 The compiler records it rather than failing, following the temporal KG pattern
@@ -158,7 +158,7 @@ Neither causes the compilation to abort; the artifact remains valid with a `Fals
 
 <<~ ahu #meme-graph >>
 
-## MemeGraph
+!! MemeGraph
 
 Adjacency structure over all reachable memes.
 Built incrementally as the compiler reads carriers and parses their pranala edges.
@@ -188,9 +188,9 @@ adjacency: dict[str, dict[str, list[PranalaEdge]]]
 
 **Depset traversal orders supported:**
 
-- `postorder` — leaves before roots (dependency resolution order)
-- `preorder` — roots before leaves (hydration loading order)
-- `topological` — defers shared memes until all parents visited (Bazel default)
+* `postorder` — leaves before roots (dependency resolution order)
+* `preorder` — roots before leaves (hydration loading order)
+* `topological` — defers shared memes until all parents visited (Bazel default)
 
 The boot compiler uses `topological` for artifact production.
 
@@ -198,11 +198,11 @@ The boot compiler uses `topological` for artifact production.
 
 <<~ ahu #content-store >>
 
-## Content Store — Dual-Index Design
+!! Content Store — Dual-Index Design
 
 Two virtual MCP resources form the content-address lookup surface.
 
-### `lar:///INDEXES/hashes`
+!!! `lar:///INDEXES/hashes`
 
 A JSON object mapping every indexed meme URI to its current `meme_hash`.
 
@@ -217,7 +217,7 @@ A JSON object mapping every indexed meme URI to its current `meme_hash`.
 Clients poll this resource to check whether any meme has changed since their last hydration.
 If all hashes match the client's cached receipt `hash_sequence`, the Anthropic context prefix stays valid — no resend required.
 
-### `lar:///CONTENT/{hash}`
+!!! `lar:///CONTENT/{hash}`
 
 A virtual resource that maps a `meme_hash` value back to the raw carrier text.
 `{hash}` is the full hex digest (e.g., `sha256:abc123...`).
@@ -242,7 +242,7 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>

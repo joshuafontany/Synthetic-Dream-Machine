@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hana"
 
 <<~ ahu #head >>
 
-# Hana
+! Hana
 
 *hana* — Hawaiian: work, deed, action, task; to do, make, create; labor; a happening.
 Hana names not just the product but the doing — the active, bounded effort that takes a thing
@@ -35,7 +35,7 @@ grammar interpreter consumes the body, it closes.
 
 <<~ ahu #law >>
 
-## Law (Kānāwai)
+!! Law (Kānāwai)
 
 A hana block MUST carry a grammar-key as its first argument.
 The grammar-key MUST identify a registered guest interpreter.
@@ -46,7 +46,7 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```text
 <<~ hana grammar-key >>
@@ -60,7 +60,7 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-task >>
 

@@ -22,7 +22,7 @@ type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 ```
 
-# Meme Skill
+! Meme Skill
 
 [meme.md](../meme.md) holds the law.
 This skill carries the working procedure.
@@ -30,16 +30,16 @@ This skill carries the working procedure.
 
 <<~ ahu #load-contract >>
 
-## Load Contract
+!! Load Contract
 
 Keep these points active when the skill loads:
 
-- the parent invariant binds the copy-shape
-- memetic-wikitext, loci, invariant, and subtype laws stay distinct
-- `#iam` should appear early and carry the canonical rating cluster
-- the six-glyph phase map stays visible even when deeper phase sections stay absent
-- `loulou` and other named `pranala` sugar should signal real outward pressure, not decorative motion
-- the smallest lawful intervention beats a grand rewrite
+* the parent invariant binds the copy-shape
+* memetic-wikitext, loci, invariant, and subtype laws stay distinct
+* `#iam` should appear early and carry the canonical rating cluster
+* the six-glyph phase map stays visible even when deeper phase sections stay absent
+* `loulou` and other named `pranala` sugar should signal real outward pressure, not decorative motion
+* the smallest lawful intervention beats a grand rewrite
 
 <<~/ahu >>
 
@@ -47,7 +47,7 @@ Keep these points active when the skill loads:
 
 <<~ ahu #workflow-contract >>
 
-## Workflow Contract
+!! Workflow Contract
 
 Use this skill to:
 
@@ -67,31 +67,31 @@ Working order:
 
 Do not:
 
-- widen the parent with archive commentary
-- hide missing required structure behind pretty prose
-- treat a phase stub as filled content
-- award canon posture because the file sounds confident
-- spray outward links that carry no actual pressure
+* widen the parent with archive commentary
+* hide missing required structure behind pretty prose
+* treat a phase stub as filled content
+* award canon posture because the file sounds confident
+* spray outward links that carry no actual pressure
 
 <<~/ahu >>
 
 <<~ ahu #trigger >>
 
-## Trigger
+!! Trigger
 
 Use this skill when the request asks to:
 
-- create or revise a meme-law surface
-- audit required versus optional structure
-- build a copy-ready meme skeleton
-- judge structural rating from noise through kapu
-- separate meme law from subtype law or docs residue
+* create or revise a meme-law surface
+* audit required versus optional structure
+* build a copy-ready meme skeleton
+* judge structural rating from noise through kapu
+* separate meme law from subtype law or docs residue
 
 Prefer another surface when the work concerns only:
 
-- stable-address coherence under `loci`
-- authoring-surface semantics under `memetic-wikitext`
-- one subtype law with no meme-shape pressure
+* stable-address coherence under `loci`
+* authoring-surface semantics under `memetic-wikitext`
+* one subtype law with no meme-shape pressure
 
 <<~/ahu >>
 
@@ -107,21 +107,21 @@ Prefer another surface when the work concerns only:
 
 <<~ ahu #observe >>
 
-## ✶ Observe
+!! ✶ Observe
 
 Read the carrier before changing it.
 
 Look for:
 
-- doctype and opener
-- `#iam` payload and rating cluster
-- title and opening scope sentence
-- body thresholds
-- six-glyph phase map
-- edges block
-- return throat
-- full phase sections, subloops, examples, or research notes
-- outward composition claims in the `#has` edges
+* doctype and opener
+* `#iam` payload and rating cluster
+* title and opening scope sentence
+* body thresholds
+* six-glyph phase map
+* edges block
+* return throat
+* full phase sections, subloops, examples, or research notes
+* outward composition claims in the `#has` edges
 
 Preserve the difference between absent, stubbed, and filled surfaces.
 
@@ -129,44 +129,44 @@ Preserve the difference between absent, stubbed, and filled surfaces.
 
 <<~ ahu #orient >>
 
-## ⏿ Orient
+!! ⏿ Orient
 
 Sort findings into these buckets:
 
-- `required-shape`
-- `optional-depth`
-- `subtype-law`
-- `procedure-or-skeleton`
-- `research-or-docs-residue`
+* `required-shape`
+* `optional-depth`
+* `subtype-law`
+* `procedure-or-skeleton`
+* `research-or-docs-residue`
 
 Orientation rule:
 
-- `required-shape` stays nearest the parent
-- `optional-depth` stays only if it sharpens the invariant
-- `subtype-law` usually moves to the relevant outward law
-- `procedure-or-skeleton` belongs in this skill
-- `research-or-docs-residue` belongs in docs
+* `required-shape` stays nearest the parent
+* `optional-depth` stays only if it sharpens the invariant
+* `subtype-law` usually moves to the relevant outward law
+* `procedure-or-skeleton` belongs in this skill
+* `research-or-docs-residue` belongs in docs
 
 <<~/ahu >>
 
 <<~ ahu #decide >>
 
-## ◇ Decide
+!! ◇ Decide
 
 Choose the smallest lawful shape:
 
-- parent only, when copy-shape pressure already reads clearly
-- parent + `SKILL.md`, when drafting or audit workflow needs room
-- parent + docs, when examples, tables, or research crowd the root
-- parent + `SKILL.md` + docs, when law, procedure, and explanation all need different rooms
+* parent only, when copy-shape pressure already reads clearly
+* parent + `SKILL.md`, when drafting or audit workflow needs room
+* parent + docs, when examples, tables, or research crowd the root
+* parent + `SKILL.md` + docs, when law, procedure, and explanation all need different rooms
 
 Then choose one honest structural rating:
 
-- noise
-- data
-- meme
-- ano
-- kapu
+* noise
+* data
+* meme
+* ano
+* kapu
 
 Do not round up.
 
@@ -174,19 +174,19 @@ Do not round up.
 
 <<~ ahu #act >>
 
-## ▶ Act
+!! ▶ Act
 
 When writing or revising:
 
-- keep the parent compact
-- keep required structure visible early
-- keep one-line law statements crisp
-- move skeleton blocks into this skill or docs
-- move large rating tables and research outward
-- keep the `#has` edges truthful to the carrier actually on the page
-- add `loulou` links so the split surfaces form one system
+* keep the parent compact
+* keep required structure visible early
+* keep one-line law statements crisp
+* move skeleton blocks into this skill or docs
+* move large rating tables and research outward
+* keep the `#has` edges truthful to the carrier actually on the page
+* add `loulou` links so the split surfaces form one system
 
-### Copy-Ready Skeleton
+!!! Copy-Ready Skeleton
 
 ````markdown
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
@@ -224,33 +224,33 @@ When writing or revising:
 
 <<~ ahu #aftermath >>
 
-## ↺ Aftermath
+!! ↺ Aftermath
 
 Verify the carrier holds its lawful shape, then name what the pass settled.
 
 Hoʻoko — before closing, check:
 
-- opener and `file-path` agree with the carrier
-- `#iam` carries the rating cluster in a stable order
-- the parent invariant remains small enough to reload easily
-- docs state non-law posture near the top
-- skeleton and checklist matter live here, off the parent
-- outward links name real adjacency or real backlog
-- subtype claims stay truthful
+* opener and `file-path` agree with the carrier
+* `#iam` carries the rating cluster in a stable order
+* the parent invariant remains small enough to reload easily
+* docs state non-law posture near the top
+* skeleton and checklist matter live here, off the parent
+* outward links name real adjacency or real backlog
+* subtype claims stay truthful
 
 Aftermath — close by naming:
 
-- what required shape stayed in the parent
-- what optional depth left the parent
-- which lifecycle posture the carrier currently earns
-- which next change would raise the posture honestly
-- what still lacks a lawful downstream home
+* what required shape stayed in the parent
+* what optional depth left the parent
+* which lifecycle posture the carrier currently earns
+* which next change would raise the posture honestly
+* what still lacks a lawful downstream home
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/meme >>

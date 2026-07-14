@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives/README"
 
 <<~ ahu #meme-header >>
 
-# Syad Perspectives Shelf
+! Syad Perspectives Shelf
 
 Archive text moved here.
 Invariant reduced elsewhere.
@@ -30,27 +30,27 @@ Derivation remains recoverable here.
 
 <<~ ahu #provenance >>
 
-## Provenance
+!! Provenance
 
 Consumed from archive files and now shelved in this bundle:
 
-- `packages/lares-core/memes/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md`
-- `packages/lares-core/memes/docs/mu/the-syad-perspectives/G_deep_research_meaning.md`
-- `packages/lares-core/memes/docs/mu/the-syad-perspectives/STANCE_LOCI.md`
-- `build.lares.failed/S0_Boot_Handoff.md`
-- `build.lares.failed/The_Lares_Protocols.md`
-- `build.lares.failed/The_Lares_Protocols_Dev_Story.md`
-- `build.lares.failed/vocabulary/protocols/README.md`
-- `build.lares.failed/vocabulary/modules/sigilization/orient/ARCHITECTURE.md`
-- `build.lares.failed/vocabulary/modules/sigilization/decide/CONVENTIONS.md`
-- `packages/lares-core/memes/docs/story/lindwyrm/hoard-origin-architecture.md`
-- `packages/lares-core/memes/docs/lararium/archive/root__AGENTS.archived.md`
-- `build.lares.failed/scrum/sprints/00000/S0_REFINEMENT_PLAN.md`
-- `build.lares.failed/vocabulary/protocols/The_Lares_Protocols_Dev_Story.md`
+* `packages/lares-core/memes/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md`
+* `packages/lares-core/memes/docs/mu/the-syad-perspectives/G_deep_research_meaning.md`
+* `packages/lares-core/memes/docs/mu/the-syad-perspectives/STANCE_LOCI.md`
+* `build.lares.failed/S0_Boot_Handoff.md`
+* `build.lares.failed/The_Lares_Protocols.md`
+* `build.lares.failed/The_Lares_Protocols_Dev_Story.md`
+* `build.lares.failed/vocabulary/protocols/README.md`
+* `build.lares.failed/vocabulary/modules/sigilization/orient/ARCHITECTURE.md`
+* `build.lares.failed/vocabulary/modules/sigilization/decide/CONVENTIONS.md`
+* `packages/lares-core/memes/docs/story/lindwyrm/hoard-origin-architecture.md`
+* `packages/lares-core/memes/docs/lararium/archive/root__AGENTS.archived.md`
+* `build.lares.failed/scrum/sprints/00000/S0_REFINEMENT_PLAN.md`
+* `build.lares.failed/vocabulary/protocols/The_Lares_Protocols_Dev_Story.md`
 
 The tight invariant now lives at:
 
-- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
 
 <<~/ahu >>
 
@@ -58,7 +58,7 @@ The tight invariant now lives at:
 
 <<~ ahu #rule >>
 
-## Extracted Rule
+!! Extracted Rule
 
 Under an invoked stance, register measures confidence within that standpoint's evaluation frame; register does not measure universal truth-weight. The coupling rides the lens --- absent an invoked `syad` lens, a confidence number reads through all five stances at once (the full field, quiet stances named --- the default equals a parameterless `<<~ syad >>`); invoking specific stances narrows the measure to those named.
 
@@ -68,7 +68,7 @@ The active stance names the `syād` --- the standpoint from which the number rea
 
 <<~ ahu #stance-array >>
 
-## Stance Array Extraction
+!! Stance Array Extraction
 
 The canon transition closed on one point:
 all five stances surface at all times.
@@ -90,7 +90,7 @@ Combination reads through simultaneous flags, not omission.
 
 <<~ ahu #reading-question >>
 
-## Reading Question
+!! Reading Question
 
 When you read a register value,
 ask one question first:
@@ -103,7 +103,7 @@ The number does not.
 
 <<~ ahu #spectrum-drift >>
 
-## Spectrum Drift
+!! Spectrum Drift
 
 Some archive bridges described Sri Syadasti as one truth-value spectrum.
 That wording helped the transition,
@@ -117,7 +117,7 @@ and it keeps `avaktavya` from collapsing into mere uncertainty.
 
 <<~ ahu #saptabhangi >>
 
-## Saptabhangi Extraction
+!! Saptabhangi Extraction
 
 Sri Syadasti's catma reproduces the Jaina Saptabhangi:
 seven predicates generated from three primitives.
@@ -139,7 +139,7 @@ It names a frame where the true/false axis does not apply cleanly.
 
 <<~ ahu #multi-stance-boundary >>
 
-## Multi-Stance Boundary
+!! Multi-Stance Boundary
 
 Some archive readings described multi-stance register as a center or gesture toward center.
 That bridge does not govern the live fold.
@@ -153,7 +153,7 @@ not through a collapsed average.
 
 <<~ ahu #canon-transition >>
 
-## Canon Transition
+!! Canon Transition
 
 The archive records one explicit correction event:
 a compact surface that showed only selected stances got named as a bug.
@@ -166,14 +166,14 @@ The correction closed omission-based live examples.
 
 <<~ ahu #legacy-notes >>
 
-## Legacy Notes
+!! Legacy Notes
 
 These readings stay archive-only now:
 
-- partial-emission stance strings
-- "stance-count is fuzz"
-- compact stance codepaths
-- open-ended modifier vocabularies without a fixed array
+* partial-emission stance strings
+* "stance-count is fuzz"
+* compact stance codepaths
+* open-ended modifier vocabularies without a fixed array
 
 They remain useful as lineage.
 They do not govern the live fold.
@@ -182,10 +182,10 @@ They do not govern the live fold.
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
-- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
-- `lar:///ha.ka.ba/lares/api/mu/l-prime`
+* `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+* `lar:///ha.ka.ba/lares/api/mu/l-prime`
 
 <<~/ahu >>
 

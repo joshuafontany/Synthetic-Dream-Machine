@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/waiho"
 
 <<~ ahu #head >>
 
-# Waiho
+! Waiho
 
 An ephemeral name deposit. Nothing persists past scope boundary.
 
@@ -30,7 +30,7 @@ An ephemeral name deposit. Nothing persists past scope boundary.
 
 <<~ ahu #etymology >>
 
-## Etymology and Mythology
+!! Etymology and Mythology
 
 **waiho** (Hawaiian): "to leave in place, to deposit for later retrieval, to set aside temporarily."
 
@@ -44,20 +44,20 @@ In the Kumulipo creation chant, *waiho* appears in the context of primal materia
 
 <<~ ahu #law >>
 
-## Law
+!! Law
 
-- Waiho MUST carry exactly one name and one value per pragma/block.
-- Carrier-scoped (`<<~! waiho name = val >>`) MUST hoist to the top of the carrier execution context before any render pass.
-- Block-scoped (`<<~ waiho name = val >>...<<~/waiho >>`) MUST bind name for the duration of the block only.
-- Waiho MUST NOT produce a graph node, URI, or edge in the pranala graph.
-- Waiho MUST NOT persist across carrier boundaries.
-- Implementations MUST treat `\const`, `\let`, `\var` as aliases that map to waiho before evaluation.
+* Waiho MUST carry exactly one name and one value per pragma/block.
+* Carrier-scoped (`<<~! waiho name = val >>`) MUST hoist to the top of the carrier execution context before any render pass.
+* Block-scoped (`<<~ waiho name = val >>...<<~/waiho >>`) MUST bind name for the duration of the block only.
+* Waiho MUST NOT produce a graph node, URI, or edge in the pranala graph.
+* Waiho MUST NOT persist across carrier boundaries.
+* Implementations MUST treat `\const`, `\let`, `\var` as aliases that map to waiho before evaluation.
 
 <<~/ahu >>
 
 <<~ ahu #syntax >>
 
-## Syntax
+!! Syntax
 
 ```
 <<~! waiho name = value >>                  carrier-scoped (hoisted, immutable by convention)
@@ -71,7 +71,7 @@ In the Kumulipo creation chant, *waiho* appears in the context of primal materia
 
 <<~ ahu #contrast >>
 
-## Waiho vs Kau vs Aka
+!! Waiho vs Kau vs Aka
 
 | sigil  | creates         | URI?  | graph edge? | scope       | lifetime        |
 |--------|-----------------|-------|-------------|-------------|-----------------|

@@ -20,7 +20,7 @@ written   = "2026-06-14"
 
 <<~ ahu #head >>
 
-# Holds ~ one verb, fuses nothing
+! Holds ~ one verb, fuses nothing
 
 `holds` carries one relation: a carrier wears a component, and the worn
 thing speaks its own semantics. No carrier `${copula}` anything — every
@@ -57,7 +57,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 <<~ ahu #law >>
 
-## Five clauses hold the law
+!! Five clauses hold the law
 
 1. **Holds carries composition, refuses essence.** `<<~holds … x … >>` places x
    into a carrier's stack; the carrier wears x, the carrier never turns
@@ -111,7 +111,7 @@ that composes (`[all[tiddlers]holds[element/Fire]sort[title]]`).
 
 <<~ ahu #rewrite-rule >>
 
-## Tables fall to holds ~ a worked lift
+!! Tables fall to holds ~ a worked lift
 
 The Mu table, before — the header vows, the cells honor by position:
 
@@ -142,7 +142,7 @@ A stack too wide for one line wears the block form — `<<~holds >>`, one
 
 <<~ ahu #when-not-holds >>
 
-## When not to reach for holds ~ the other copula-free grammars
+!! When not to reach for holds ~ the other copula-free grammars
 
 `holds` cures one fused relation: **identity** (`X ${copula} Y`, map
 welded to territory). The dead water welds *other* relations too —
@@ -150,7 +150,7 @@ sequence, crossing, grade — and `holds` flattens each. A row that
 *orders*, *moves*, or *ranks* wants its own verb. Reach past `holds` only
 once a row fails the **compose-test**.
 
-### The diagnostic ~ ask one question
+!!! The diagnostic ~ ask one question
 
 Ask of the row's relation: **what does it DO?** The answer routes the verb.
 
@@ -165,7 +165,7 @@ Ask of the row's relation: **what does it DO?** The answer routes the verb.
 ordered loops, the graded registers. Default to `holds`; reach past it
 only once the compose-test fails.
 
-### A row that FOLLOWS ~ the flow-chain (sequence rides content)
+!!! A row that FOLLOWS ~ the flow-chain (sequence rides content)
 
 A run whose order carries meaning — the Ladders, OODA-HA, the boot-chain —
 moves as sequence, never as composition. The pipe names the pull: a chain
@@ -182,7 +182,7 @@ re-enters the head — OODA-HA keeps its ↺ Aftermath glyph as a phase). The
 arrow *moves*; nothing welds to anything. (Each ladder earns its own meme;
 `loci` carries the address.)
 
-### A row that MOVES ACROSS ~ the transition (trigger · guard · effect)
+!!! A row that MOVES ACROSS ~ the transition (trigger · guard · effect)
 
 A relation that carries a thing *across* conditions — a phase change, a
 degraded-state recovery (a tell, then a recovery) — moves as transition.
@@ -198,7 +198,7 @@ Author as `<<~moves X -> Y on/trigger if/guard do/effect >>` — `on/` fires,
 `if/` gates, `do/` acts. The before and the after stay apart; the trigger
 does the work the dead water would have smuggled.
 
-### A row that GRADES ~ the gradation verb (asymmetric relation)
+!!! A row that GRADES ~ the gradation verb (asymmetric relation)
 
 A scale that ranks — the Syad registers (0-reads-as, 20-reads-as), the
 confidence bands, the stage bands — moves as gradation. The ordinal anchor:
@@ -216,7 +216,7 @@ Author as `<<~ranks family a -> b -> c >>` — anchors `member[@coord][~ descrip
 descriptor *describes* what a level looks like; it rides the droppable red
 aside and never welds the number to the meaning.
 
-### The fork, ruled ~ four verbs, three spines
+!!! The fork, ruled ~ four verbs, three spines
 
 Ruled 2026-06-14: the law speaks **four verbs** — `holds` · `flows`/`loops`
 · `moves` · `ranks` — over **three spines**. The *set* spine (order-free,
@@ -232,7 +232,7 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~ ahu #edges >>
 
-## Edges reach out
+!! Edges reach out
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>

@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/lararium"
 
 <<~ ahu #head >>
 
-# Lararium
+! Lararium
 
 Active in i kēia manawa.
 Canonical seat.
@@ -47,7 +47,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~ ahu #core-hydration >>
 
-## Core Hydration
+!! Core Hydration
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
@@ -59,7 +59,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~ ahu #edges >>
 
-## Edges
+!! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/lares/hud >>
