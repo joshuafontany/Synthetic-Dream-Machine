@@ -188,6 +188,12 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
         expected = {"sensorium": name, "lar": lar,
                     "order": {"projector": order.projector, "basis": order.basis}}
         drift = [key for key, value in expected.items() if existing.get(key) not in (None, value)]
+        declared = {
+            "ephemeral": ephemeral,
+            **({"apertures": apertures} if apertures is not None else {}),
+            **({"worldline": worldline} if worldline is not None else {}),
+        }
+        drift.extend(key for key, value in declared.items() if existing.get(key) not in (None, value))
         if drift:
             raise ValueError(f"stream manifest at {path!r} conflicts on {', '.join(drift)}")
     created = existing.get("created") if isinstance(existing, dict) else None

@@ -79,6 +79,22 @@ def test_stream_manifest_preserves_an_unowned_cap_and_declaration_fields(tmp_pat
     assert manifest["created"] == "2026-01-01T00:00:00.000Z"
 
 
+@pytest.mark.parametrize(("first", "second", "field"), [
+    ({"apertures": {"measure": "boundary-changepoint"}},
+     {"apertures": {"beat": "worldline-dag"}}, "apertures"),
+    ({"worldline": {"real": ["in-file"], "arbitrary": []}},
+     {"worldline": {"real": ["containment"], "arbitrary": []}}, "worldline"),
+    ({"ephemeral": True}, {"ephemeral": False}, "ephemeral"),
+])
+def test_stream_manifest_refuses_a_declared_ground_revision(tmp_path, first, second, field):
+    from sensorium import OrderCap, write_stream_manifest
+    write_stream_manifest(str(tmp_path), name="stream", lar="lar:///x",
+                          order=OrderCap("stream", "observed:connection-sequence"), **first)
+    with pytest.raises(ValueError, match=field):
+        write_stream_manifest(str(tmp_path), name="stream", lar="lar:///x",
+                              order=OrderCap("stream", "observed:connection-sequence"), **second)
+
+
 def test_event_stream_composes_the_generic_rooted_cap_stack(tmp_path):
     pointer = tmp_path / "events.ndjson"
     pointer.write_text("\n".join(json.dumps(event) for event in [
