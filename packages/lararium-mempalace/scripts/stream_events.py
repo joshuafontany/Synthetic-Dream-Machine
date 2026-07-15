@@ -29,8 +29,9 @@ def read_events(pointer: str) -> list[dict]:
                 raise ValueError(f"stream event {line_no}: missing string envelope field")
             if isinstance(raw["sequence"], bool) or not isinstance(raw["sequence"], int) or raw["sequence"] < 0:
                 raise ValueError(f"stream event {line_no}: sequence must be a non-negative integer")
-            if "observed_at" in raw and (not isinstance(raw["observed_at"], str) or not raw["observed_at"]):
-                raise ValueError(f"stream event {line_no}: observed_at must carry a non-empty provenance string")
+            if "unreliably_observed_at" in raw and (not isinstance(raw["unreliably_observed_at"], str)
+                                                    or not raw["unreliably_observed_at"]):
+                raise ValueError(f"stream event {line_no}: unreliably_observed_at must carry a non-empty provenance string")
             island = (raw["vessel"], raw["island"])
             key = (*island, raw["event_id"])
             if key in seen or raw["sequence"] <= last.get(island, -1):
@@ -59,8 +60,9 @@ def stream_event_source(*, wing: str, room: str = "stream"):
                 "lar_chain": chain}
             if isinstance(event.get("payload_ref"), str) and event["payload_ref"]:
                 metadata["lar_payload_ref"] = event["payload_ref"]
-            if "observed_at" in event:
-                metadata["lar_observed_at"] = event["observed_at"]
+            # An island may report its own clock reading; it never carries a global-now claim.
+            if "unreliably_observed_at" in event:
+                metadata["lar_unreliably_observed_at"] = event["unreliably_observed_at"]
             yield {"seq": seq, "cid": _cid(event), "text": event["payload"], "metadata": metadata}
     return source
 

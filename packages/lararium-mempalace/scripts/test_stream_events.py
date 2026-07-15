@@ -33,13 +33,13 @@ def test_events_refuse_boolean_sequence(tmp_path):
         read_events(str(p))
 
 
-def test_events_keep_optional_observation_provenance(tmp_path):
+def test_events_keep_optional_unreliable_clock_provenance(tmp_path):
     p = tmp_path / "observed.ndjson"
     p.write_text(json.dumps({"vessel": "mudlet", "island": "conn-a", "event_id": "1",
                              "sequence": 0, "direction": "in", "kind": "line", "payload": "look",
-                             "observed_at": "vessel-clock:42"}), encoding="utf-8")
+                             "unreliably_observed_at": "vessel-clock:42"}), encoding="utf-8")
     row = next(iter(stream_event_source(wing="wing_mudlet")(str(p))))
-    assert row["metadata"]["lar_observed_at"] == "vessel-clock:42"
+    assert row["metadata"]["lar_unreliably_observed_at"] == "vessel-clock:42"
 
 
 def test_event_parse_fault_names_the_source_line(tmp_path):
