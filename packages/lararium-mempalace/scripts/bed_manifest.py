@@ -49,6 +49,12 @@ _ORDERINGS = {"in-file", "containment", "git-history", "turn-sequence", "walk-or
 #: twin scramble grains the builder speaks today
 _TWIN_GRAINS = {"in-file-token"}
 
+#: roots whose content belongs to the CRDT-Wiki — the separation law: data
+#: crosses into a sensorium ONLY by an explicit operator act, so a manifest
+#: sourcing these REFUSES without an `operatorAct` attribution (act-or-refuse,
+#: the predictions gate's sibling).
+_WIKI_CONTENT_ROOTS = ("bags", "wikis", "genesis")
+
 _REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 
@@ -97,6 +103,17 @@ def load_manifest(path: str) -> dict:
     pred = m.get("predictions", {})
     if not (pred.get("sheet") and pred.get("anchor")):
         problems.append("predictions must carry {sheet, anchor}")
+    act = m.get("operatorAct")
+    if act is not None and not (act.get("who") and act.get("date") and act.get("ruling")):
+        problems.append("operatorAct must carry {who, date, ruling}")
+    sources_wiki = any(
+        (os.path.relpath(s, _REPO_ROOT) if os.path.isabs(s) else s).split(os.sep, 1)[0].split("/", 1)[0]
+        in _WIKI_CONTENT_ROOTS
+        for s in m.get("flow", {}).get("sources", []))
+    if sources_wiki and act is None:
+        problems.append(
+            "flow sources CRDT-Wiki content — the separation law crosses data only by an "
+            "explicit operator act; carry operatorAct {who, date, ruling} or the bed refuses")
     if problems:
         raise SystemExit("bed_manifest: REFUSED —\n  " + "\n  ".join(problems))
     return m

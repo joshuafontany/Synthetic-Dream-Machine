@@ -101,3 +101,19 @@ def test_twin_corpus_size_matches_by_construction(tmp_path):
     a = sorted(open(os.path.join(out, f)).read() for f in os.listdir(out))
     b = sorted(open(os.path.join(out2, f)).read() for f in os.listdir(out2))
     assert a == b
+
+
+def test_wiki_sources_refuse_without_operator_act(tmp_path):
+    # the separation law: CRDT-Wiki content crosses only by an explicit act
+    path, _ = _manifest(tmp_path, flow={
+        "sources": ["bags/@lares"], "exclusions": [], "record_unit": {".mem": "file"}})
+    with pytest.raises(SystemExit, match="operator act"):
+        bm.load_manifest(path)
+
+
+def test_operator_act_admits_wiki_sources(tmp_path):
+    path, _ = _manifest(tmp_path, flow={
+        "sources": ["bags/@lares"], "exclusions": [], "record_unit": {".mem": "file"}},
+        operatorAct={"who": "operator", "date": "2026-07-15", "ruling": "Pono. Enact."})
+    m = bm.load_manifest(path)
+    assert m["operatorAct"]["who"] == "operator"

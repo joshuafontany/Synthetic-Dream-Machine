@@ -7,20 +7,39 @@
   "min_support": 2,
   "max_forms": 96,
   "flow": {
-    "sources": ["TiddlyWiki5"],
+    "sources": [
+      "TiddlyWiki5"
+    ],
     "exclusions": [
       "TiddlyWiki5/boot/*.js",
       "**/tiddlywikicore-*.js",
       "**/*.min.js",
       "**/node_modules/**",
-      "**/*.png", "**/*.jpg", "**/*.gif", "**/*.ico", "**/*.svg",
-      "**/*.pdf", "**/*.woff", "**/*.otf", "**/*.ttf", "**/*.zip"
+      "**/*.png",
+      "**/*.jpg",
+      "**/*.gif",
+      "**/*.ico",
+      "**/*.svg",
+      "**/*.pdf",
+      "**/*.woff",
+      "**/*.otf",
+      "**/*.ttf",
+      "**/*.zip"
     ],
-    "record_unit": {".tid": "tiddler", ".js": "module", ".mem": "file"}
+    "record_unit": {
+      ".tid": "tiddler",
+      ".js": "module",
+      ".mem": "file"
+    }
   },
   "worldline": {
-    "real": ["in-file", "containment"],
-    "arbitrary": ["walk-order"]
+    "real": [
+      "in-file",
+      "containment"
+    ],
+    "arbitrary": [
+      "walk-order"
+    ]
   },
   "twins": {
     "grain": "in-file-token",
@@ -28,9 +47,19 @@
     "seed": 54
   },
   "apertures": [
-    {"name": "path-address", "provenance": "given"},
-    {"name": "declared-fields", "extractor": "tid-header-fields+js-module-headers", "provenance": "given"},
-    {"name": "planes", "provenance": "induced"}
+    {
+      "name": "path-address",
+      "provenance": "given"
+    },
+    {
+      "name": "declared-fields",
+      "extractor": "tid-header-fields+js-module-headers",
+      "provenance": "given"
+    },
+    {
+      "name": "planes",
+      "provenance": "induced"
+    }
   ],
   "predictions": {
     "sheet": "packages/lararium-mempalace/docs/EMERGENCE-PREREG.md",
@@ -42,5 +71,10 @@
       "alternative": "git-history worldline (own bed candidate)",
       "at": "operator"
     }
+  },
+  "operatorAct": {
+    "who": "operator (Joshua Fontany)",
+    "date": "2026-07-15",
+    "ruling": "IaC for the Sensorium Palace \u2014 'Pono. Enact.' Wiki content crosses into sensorium work only by this explicit act (the separation law)."
   }
 }
