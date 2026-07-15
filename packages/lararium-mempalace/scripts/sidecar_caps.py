@@ -23,7 +23,7 @@ Path:      canonical_path                        — realpath∘expanduser (∘n
 NDJSON:    read_ndjson_records                    — parse an NDJSON file/stdin → dicts
            make_dispatch                          — ops-registry → an NDJSON request handler
 Serve:     serve_lock_path / acquire_serve_lock /
-           release_serve_lock                     — the per-palace flock singleton
+           acquire_root_lock / release_serve_lock  — singleton and short rooted flock holds
            idle_ttl_seconds                       — env-read idle-reap TTL
            serve_loop                             — the raw-fd NDJSON loop + idle-reap
            run_sidecar                            — the serve composition root
@@ -275,6 +275,24 @@ def acquire_serve_lock(palace_path: str, prefix: str):
         except OSError:
             pass
         return None
+    return fh
+
+
+def acquire_root_lock(root: str, prefix: str):
+    """Acquire one blocking exclusive flock for a bounded rooted transaction.
+
+    Unlike ``acquire_serve_lock``, this lock releases at the end of a short
+    read-check-write transaction.  It shares the same canonical path and
+    ``locks/`` home, so aliases of one rooted sensorium contend on one slot.
+    """
+    lock_path = serve_lock_path(root, prefix)
+    fh = open(lock_path, "w")
+    try:
+        os.chmod(lock_path, 0o600)
+    except OSError:
+        pass
+    if _fcntl is not None:
+        _fcntl.flock(fh.fileno(), _fcntl.LOCK_EX)
     return fh
 
 

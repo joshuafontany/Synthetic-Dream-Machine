@@ -20,6 +20,7 @@ import tempfile
 
 import content_io as cio
 from capture_stream import ContentStoreLandCap, Pipeline
+from sidecar_caps import acquire_root_lock, release_serve_lock
 
 
 @dataclass(frozen=True)
@@ -173,6 +174,20 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
         raise ValueError("stream manifest needs a non-empty order projector and basis")
     paths = sensorium_paths(root)
     os.makedirs(paths.root, exist_ok=True)
+    lock = acquire_root_lock(paths.root, "sensorium_manifest")
+    try:
+        return _write_stream_manifest_unlocked(
+            paths, name=name, lar=lar, order=order, apertures=apertures,
+            worldline=worldline, ephemeral=ephemeral,
+        )
+    finally:
+        release_serve_lock(lock)
+
+
+def _write_stream_manifest_unlocked(paths: SensoriumPaths, *, name: str, lar: str, order: OrderCap,
+                                    apertures: "dict[str, str] | None", worldline: "dict | None",
+                                    ephemeral: bool) -> str:
+    """Read, refuse drift, and replace one manifest while its rooted lock stays held."""
     path = os.path.join(paths.root, "manifest.json")
     existing = None
     try:

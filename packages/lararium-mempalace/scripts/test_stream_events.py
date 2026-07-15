@@ -58,6 +58,14 @@ def test_stream_manifest_refuses_root_identity_drift(tmp_path):
                               order=OrderCap("corpus", "declared:in-file"))
 
 
+def test_stream_manifest_uses_the_rooted_transaction_lock(tmp_path):
+    from sensorium import OrderCap, write_stream_manifest
+    write_stream_manifest(str(tmp_path), name="stream", lar="lar:///x",
+                          order=OrderCap("stream", "observed:connection-sequence"))
+    locks = list((tmp_path / "locks").glob("sensorium_manifest_*.lock"))
+    assert len(locks) == 1
+
+
 def test_stream_manifest_preserves_an_unowned_cap_and_declaration_fields(tmp_path):
     from sensorium import OrderCap, write_stream_manifest
     (tmp_path / "manifest.json").write_text(json.dumps({
