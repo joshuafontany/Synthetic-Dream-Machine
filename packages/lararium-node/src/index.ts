@@ -93,6 +93,9 @@ export { LarDiskProjector } from "./disk-projector.js";
 export { DaemonAuthGate } from "./daemon-auth-gate.js";
 export { openNodeVessel } from "./open-node-vessel.js";
 export { openDaemonVm } from "./open-daemon-vm.js";
+export { runDoctor, formatDoctorReport, enumerateStoreDocs } from "./doctor.js";
+export { probeDocLoad, makeChildProcessDocLoadProbe, quarantineDoc } from "./doc-load-probe.js";
+export { precheckDocStore, docStorePath } from "./store-integrity.js";
 export type { DaemonVmOptions } from "./open-daemon-vm.js";
 export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-node-vessel.js";
 
