@@ -575,11 +575,11 @@ def test_serve_lock_is_singleton_per_palace(tmp_path, monkeypatch):
     assert fe._acquire_serve_lock(palace_a) is None  # same palace, held → refused
     fh_b = fe._acquire_serve_lock(palace_b)
     assert fh_b is not None  # different palace → independent singleton
-    fe._release_serve_lock(fh1)
+    fe._release_lock(fh1)
     fh2 = fe._acquire_serve_lock(palace_a)
     assert fh2 is not None  # released → claimable again
-    fe._release_serve_lock(fh2)
-    fe._release_serve_lock(fh_b)
+    fe._release_lock(fh2)
+    fe._release_lock(fh_b)
 
 
 @pytest.mark.skipif(fe._select is None, reason="idle-reap needs select")

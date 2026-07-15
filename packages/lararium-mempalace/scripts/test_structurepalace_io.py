@@ -57,13 +57,13 @@ def test_serve_lock_is_singleton_per_palace(tmp_path, monkeypatch):
     fh_b = ap._acquire_serve_lock(palace_b)
     assert fh_b is not None
 
-    ap._release_serve_lock(fh1)
+    ap._release_lock(fh1)
     # After release the palace can be claimed again.
     fh2 = ap._acquire_serve_lock(palace_a)
     assert fh2 is not None
 
-    ap._release_serve_lock(fh2)
-    ap._release_serve_lock(fh_b)
+    ap._release_lock(fh2)
+    ap._release_lock(fh_b)
 
 
 @_posix_flock
@@ -80,7 +80,7 @@ def test_serve_lock_collapses_path_variants(tmp_path, monkeypatch):
     try:
         assert ap._acquire_serve_lock(variant) is None
     finally:
-        ap._release_serve_lock(fh)
+        ap._release_lock(fh)
 
 
 @_posix_flock
@@ -100,7 +100,7 @@ def test_serve_refuses_second_holder_without_opening_collection(tmp_path, monkey
     try:
         ap._serve(palace)  # must take the singleton-refused branch
     finally:
-        ap._release_serve_lock(held)
+        ap._release_lock(held)
     assert built == [], "_serve constructed a store despite the lock being held"
 
 

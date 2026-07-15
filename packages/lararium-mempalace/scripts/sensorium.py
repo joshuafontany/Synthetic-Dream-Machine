@@ -20,7 +20,7 @@ import tempfile
 
 import content_io as cio
 from capture_stream import ContentStoreLandCap, Pipeline
-from sidecar_caps import acquire_root_lock, release_serve_lock
+from sidecar_caps import acquire_root_lock, release_lock
 
 
 @dataclass(frozen=True)
@@ -181,7 +181,7 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
             worldline=worldline, ephemeral=ephemeral,
         )
     finally:
-        release_serve_lock(lock)
+        release_lock(lock)
 
 
 def _write_stream_manifest_unlocked(paths: SensoriumPaths, *, name: str, lar: str, order: OrderCap,

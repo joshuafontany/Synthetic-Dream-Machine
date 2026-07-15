@@ -161,11 +161,11 @@ def test_singleton_holds_per_palace(tmp_path, monkeypatch):
     assert sc.acquire_serve_lock(pa, "demo") is None  # same palace+prefix, held → refused
     fhb = sc.acquire_serve_lock(pb, "demo")
     assert fhb is not None  # different palace → independent
-    sc.release_serve_lock(fh1)
+    sc.release_lock(fh1)
     fh2 = sc.acquire_serve_lock(pa, "demo")
     assert fh2 is not None  # released → reclaimable
-    sc.release_serve_lock(fh2)
-    sc.release_serve_lock(fhb)
+    sc.release_lock(fh2)
+    sc.release_lock(fhb)
 
 
 def test_serve_lock_belongs_to_its_palace_not_the_guest_comparator(tmp_path):
@@ -188,8 +188,8 @@ def test_singleton_independent_per_prefix(tmp_path, monkeypatch):
     try:
         assert fh_ast is not None and fh_form is not None
     finally:
-        sc.release_serve_lock(fh_ast)
-        sc.release_serve_lock(fh_form)
+        sc.release_lock(fh_ast)
+        sc.release_lock(fh_form)
 
 
 # ---------------------------------------------------------------------------
@@ -278,7 +278,7 @@ def test_run_sidecar_refuses_second_holder_without_building(tmp_path, monkeypatc
             singleton_msg="refused\n",
         )
     finally:
-        sc.release_serve_lock(held)
+        sc.release_lock(held)
     assert built == [], "run_sidecar built the dispatch despite the singleton being held"
 
 

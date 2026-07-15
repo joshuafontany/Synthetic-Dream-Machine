@@ -23,7 +23,7 @@ Path:      canonical_path                        — realpath∘expanduser (∘n
 NDJSON:    read_ndjson_records                    — parse an NDJSON file/stdin → dicts
            make_dispatch                          — ops-registry → an NDJSON request handler
 Serve:     serve_lock_path / acquire_serve_lock /
-           acquire_root_lock / release_serve_lock  — singleton and short rooted flock holds
+           acquire_root_lock / release_lock        — singleton and short rooted flock holds
            idle_ttl_seconds                       — env-read idle-reap TTL
            serve_loop                             — the raw-fd NDJSON loop + idle-reap
            run_sidecar                            — the serve composition root
@@ -296,7 +296,7 @@ def acquire_root_lock(root: str, prefix: str):
     return fh
 
 
-def release_serve_lock(fh) -> None:
+def release_lock(fh) -> None:
     if fh is None:
         return
     try:
@@ -411,4 +411,4 @@ def run_sidecar(
             idle_ttl=idle_ttl,
         )
     finally:
-        release_serve_lock(lock)
+        release_lock(lock)

@@ -110,7 +110,7 @@ from sidecar_caps import (
     idle_ttl_seconds,
     make_dispatch,
     mine_busy_retry,
-    release_serve_lock,
+    release_lock,
     run_sidecar,
     serve_lock_path,
     serve_loop,
@@ -887,8 +887,8 @@ def _acquire_serve_lock(palace_path: str):
     return acquire_serve_lock(palace_path, _LOCK_PREFIX)
 
 
-def _release_serve_lock(fh) -> None:
-    release_serve_lock(fh)
+def _release_lock(fh) -> None:
+    release_lock(fh)
 
 
 def _idle_ttl_seconds() -> float:
