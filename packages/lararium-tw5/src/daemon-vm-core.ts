@@ -42,6 +42,8 @@ import {
   mkTeardown,
   isIslandToVesselMsg,
   CROSSROADS_DOC_URI,
+  mkWikiDomEvent,
+  type IslandMsg_Event,
   type VesselWorkerHandle,
   type Repo,
   type DocHandle,
@@ -68,6 +70,7 @@ import {
   type IslandMsg_TeardownAck,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
+import { PROJECTION_FRAME } from "./tw5-projection.js";
 import type { VerbTable } from "./verb-dispatcher.js";
 import type { MoveSkeleton, ConstructiconAxis } from "./form-layer/index.js";
 
@@ -253,6 +256,21 @@ export interface DaemonVmCore {
    * the pool exists. Fire-and-forget; absent → alerts silently dropped.
    */
   onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string, kind?: string) => void) => void;
+  /**
+   * Projection surfacing — the @daemon inherits the wiki render cap (hasProjection); once a worker entry wires
+   * onBoot (mountProjection), the @daemon emits PROJECTION_FRAME like any wiki island. This forwards those
+   * frames to the boot's SHARED onProjection sink (the identical #projection surface a pinned wiki paints, so
+   * idiomorph caret-safety applies), keyed on the transport id — so a summoned @daemon surfaces uniformly.
+   * Set after the boot sink exists; absent → frames silently dropped (the @daemon renders dormant, unshown).
+   */
+  onProjection: (fn: (frame: { html: string; css: string; rev: number }) => void) => void;
+  /**
+   * The projection RETURN-leg — a main-thread DOM event posted into the daemon worker by boundary-stable
+   * render-id (never coordinates; the worker re-resolves render-id → widget and dispatches via the inherited
+   * hasProjection cap into TW5's native handler). Fire-and-forget: this channel serves click-to-navigate
+   * interactivity, never synchronous default-action arbitration (the async law the causal-island house runs).
+   */
+  sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
 }
 
 export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions): DaemonVmCore {
@@ -267,6 +285,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   let _residencyHandler: ((op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) | null = null;
   // Wiki-alert delivery — set via onWikiAlert() after the pool exists.
   let _wikiAlertHandler: ((wikiSlug: string, message: string, cause?: string, kind?: string) => void) | null = null;
+  // Projection-frame forwarding — set via onProjection() after the boot sink exists.
+  let _projectionHandler: ((frame: { html: string; css: string; rev: number }) => void) | null = null;
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
@@ -331,6 +351,21 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // carries only the live daemon surfaces.
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
+
+    // Projection frames — the @daemon inherits the render cap (the KA·BA braid): forward its PROJECTION_FRAME
+    // to the boot's SHARED onProjection sink so a summoned @daemon paints the same #projection surface pool
+    // wikis do. The active-surface gate keys on the transport id downstream, never a payload claim.
+    if (raw.type === "event") {
+      const ev = raw as IslandMsg_Event;
+      if (ev.listenable === PROJECTION_FRAME) {
+        _projectionHandler?.({
+          html: String(ev.payload["html"] ?? ""),
+          css:  String(ev.payload["css"]  ?? ""),
+          rev:  Number(ev.payload["rev"]  ?? 0),
+        });
+      }
+      return;
+    }
 
     // Surface island FAULTS on the main console (the worker's own console doesn't bubble). The
     // Awake signal (ea) rides workerEa → the vessel's "live" phase, and breath rides the
@@ -552,6 +587,11 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string) => void) => {
       _wikiAlertHandler = fn;
     },
+    onProjection: (fn: (frame: { html: string; css: string; rev: number }) => void) => {
+      _projectionHandler = fn;
+    },
+    sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) =>
+      worker.post(mkWikiDomEvent({ renderId, eventType, fields })),
     shutdown: async (budgetMs = 10_000): Promise<void> => {
       // Post teardown, await the island's teardown:ack (it flushes its docs +
       // capture state before acking). On timeout (jammed worker) terminate anyway.

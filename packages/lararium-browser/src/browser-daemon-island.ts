@@ -15,5 +15,11 @@
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
 import { makeOperatorDaemonBehavior } from "@lararium/keyhive/operator-daemon-behavior";
+import { mountProjection } from "@lararium/tw5";
 
-runBrowserSovereignWorker(makeOperatorDaemonBehavior);
+// The @daemon INHERITS the wiki render cap (hasProjection). Mount its projection DORMANT at island-boot —
+// exactly as a pool wiki mounts its camera — so summoning the @daemon is a pure active-surface gate flip,
+// never a worker re-manifest (the HA·BA braid: mount-then-flip, fully live, uniform across surfaces). The
+// frames ride onProjection to the boot; the boot's active-surface gate decides whether they paint #projection.
+runBrowserSovereignWorker((manifest) =>
+  makeOperatorDaemonBehavior(manifest, { onBoot: (ctx) => mountProjection(ctx) }));
