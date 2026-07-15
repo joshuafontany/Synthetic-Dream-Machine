@@ -30,7 +30,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, write
 import { homedir } from "node:os";
 import { basename, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/mempalace";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
@@ -674,13 +674,26 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   }
 
   results.sort((a, b) => b.transcripts - a.transcripts);
+  // POST-HARVEST ENRICHMENT — the worldline membership pass: the absent BEAT cell in each
+  // drawer's lar_ffz takes its turn's identity label (same-turn drawers share a beat cell).
+  // Idempotent (only `_` cells fill; re-runs no-op), so it rides EVERY --all close. Best-effort:
+  // an absent fork-DAG or substrate refuses inside runFfzEnrich and the harvest still lands —
+  // the miss is REPORTED, never silent.
+  let ffzEnrich: FfzEnrichReport | { skipped: string } | null = null;
+  if (!dryRun) {
+    try {
+      ffzEnrich = runFfzEnrich();
+    } catch (err) {
+      ffzEnrich = { skipped: err instanceof Error ? err.message : String(err) };
+    }
+  }
   // No guest HNSW-repair tail here: all telemetry flows through the @daemon to the SOVEREIGN sensorium
   // (verbatim → contentpalace via caller-vector, AST → .structurepalace, form → .formpalace); the guest
   // ~/.mempalace stays untouched, so there is nothing of ours to repair in it. (The sovereign content
   // store's index health rides content_io's own chroma upsert — a follow-up if divergence ever shows.)
   emit(args, {
     ok: true,
-    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(pacer.trajectory().length ? { flowControl: pacer.trajectory() } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}) },
+    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(ffzEnrich ? { ffzEnrich } : {}), ...(pacer.trajectory().length ? { flowControl: pacer.trajectory() } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}) },
     human: () => {
       console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
       if (organSteps) {
@@ -690,6 +703,10 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       for (const r of results)
         console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
       console.log(`  routed through the @daemon nalu — verbatim → contentpalace (sovereign) · AST → .structurepalace · form → .formpalace · hash-bound`);
+      if (ffzEnrich) {
+        if ("skipped" in ffzEnrich) console.log(`  ffz enrich:    skipped — ${ffzEnrich.skipped}`);
+        else console.log(`  ffz enrich:    ${ffzEnrich.stamped} stamp(s) across ${ffzEnrich.braids} braid(s) — beat cells filled (idempotent)`);
+      }
       const flow = pacer.trajectory();
       if (flow.length) {
         // The servo's window trajectory — the live-light witness line (cuts 1/3/4).

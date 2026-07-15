@@ -17,6 +17,12 @@
  *                                       pure READ refinement (rows spawned after <ts>
  *                                       drop; an interval still open at <ts> reads OPEN).
  *                                       Mirrors the MCP `worldline(as_of)` arg.
+ *   lares worldline enrich              fill the absent BEAT cell across every braid's
+ *                                       lar_ffz membership stamps (same-turn drawers then
+ *                                       share a beat cell — ultrametrically adjacent).
+ *                                       Idempotent; reversible × trusted on the verb-grid.
+ *                                       Runs the ONE shared core (@lararium/mempalace
+ *                                       runFfzEnrich) the post-harvest pass also calls.
  *   lares worldline kapae <branch>      SEATED STUB — mute a worldline branch. The write
  *   lares worldline un-kapae <branch>   SEATED STUB — restore it. Both refuse honestly:
  *                                       the write-home rides the DEFERRED @daemon-cap-wire
@@ -48,7 +54,7 @@ import { DatabaseSync } from "node:sqlite";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { PRED_DELEGATION, PRED_COMMUNICATION } from "@lararium/mesh";
-import { resolvePalacePath } from "@lararium/mempalace";
+import { resolvePalacePath, runFfzEnrich, FfzEnrichUnavailable } from "@lararium/mempalace";
 import { larHarvestDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -331,12 +337,40 @@ function kapaeStub(args: ParsedArgs, verb: "kapae" | "un-kapae", branch: string)
 
 export async function cmdWorldline(args: ParsedArgs): Promise<number> {
   const pos = [...args.positional];
-  const SUBVERBS = new Set(["tree", "diff", "kapae", "un-kapae"]);
+  const SUBVERBS = new Set(["tree", "diff", "kapae", "un-kapae", "enrich"]);
   const sub = pos[0] !== undefined && SUBVERBS.has(pos[0]) ? (pos.shift() as string) : "tree";
 
   // kapae / un-kapae — SEATED STUBS; the write-home rides the deferred @daemon-cap-wire.
   if (sub === "kapae" || sub === "un-kapae") {
     return kapaeStub(args, sub, (pos[0] ?? "").trim());
+  }
+
+  // enrich — fill the absent BEAT cell across every braid's lar_ffz membership stamps
+  // (same-turn drawers then share a beat cell, ultrametrically adjacent). Idempotent:
+  // reversible × trusted on the verb-grid — only `_` cells fill, a re-run no-ops.
+  if (sub === "enrich") {
+    try {
+      const report = runFfzEnrich(args.options["palace"]);
+      emit(args, {
+        ok: true,
+        data: { mode: "enrich", ...report },
+        human: () => {
+          console.log("lares worldline enrich");
+          console.log(`  braids: ${report.braids}  turns: ${report.turns}  stamps: ${report.stamped}`);
+          console.log(`  rhythm testimony: locked ${report.locked} · holdover ${report.holdover} · phase-spread ${report.phase_spread.toFixed(4)}`);
+        },
+      });
+      return 0;
+    } catch (err) {
+      const message = err instanceof FfzEnrichUnavailable ? err.message
+        : `enrich failed: ${err instanceof Error ? err.message : String(err)}`;
+      emit(args, {
+        ok: false,
+        error: { code: "verb-error", message, hint: "capture builds the fork-DAG the enrichment walks — feed transcripts first." },
+        human: () => console.error(`lares worldline enrich: ${message}`),
+      });
+      return exitFor("verb-error");
+    }
   }
 
   if (sub === "diff") {
@@ -350,7 +384,7 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
 
   const target = (pos[0] ?? "").trim();
   if (!target) {
-    console.error("usage: lares worldline <handle|session-id[-prefix]> [--palace <dir>] [--as-of <ts>] | lares worldline kapae <branch> | lares worldline diff <A> <B>");
+    console.error("usage: lares worldline <handle|session-id[-prefix]> [--palace <dir>] [--as-of <ts>] | lares worldline enrich [--palace <content-dir>] | lares worldline kapae <branch> | lares worldline diff <A> <B>");
     return 2;
   }
   // A worldline handle (`<run>.<agentId>`) walks its whole run; a run/session id walks itself.

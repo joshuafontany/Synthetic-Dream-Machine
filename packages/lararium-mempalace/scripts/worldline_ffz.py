@@ -273,3 +273,52 @@ def phase_spread(worldline_store, as_of=None) -> float:
     """The incommensurability WITNESS — the min circular gap between the braids' drawn phases (>0 when
     the cadences stay apart; 0 when two braids' grids coincide, the lock this leg averts)."""
     return min_pairwise_gap(list(worldline_phases(worldline_store, as_of).values()))
+
+
+# ---------------------------------------------------------------------------
+# the CLI face — `enrich`: fill absent beat cells across every braid
+# ---------------------------------------------------------------------------
+
+
+def main() -> None:
+    """`worldline_ffz.py enrich --palace <content-dir> [--worldline <dir>]` — run the
+    membership enrichment over a standing palace + its worldline store, and print the
+    per-run JSON report (braids · turns · stamps · rhythm testimony tallies). Idempotent:
+    a re-run enriches to the same addresses and reports the same stamp count."""
+    import argparse
+    import json
+    import os
+    import sys
+
+    import content_io as cio
+    import worldline_io as wl
+
+    ap = argparse.ArgumentParser(
+        description="worldline_ffz — enrich lar_ffz membership stamps (the beat cell fills; nothing tallies).")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    e = sub.add_parser("enrich", help="fill absent beat cells across every braid (idempotent)")
+    e.add_argument("--palace", required=True, help="the content palace dir (the chroma plane)")
+    e.add_argument("--worldline", default=None,
+                   help="the worldline dir (default: the `.worldline` beside the palace's parent)")
+    args = ap.parse_args()
+
+    palace = os.path.abspath(args.palace)
+    wdir = args.worldline or os.path.join(os.path.dirname(palace), ".worldline")
+    if not os.path.isdir(wdir):
+        sys.stderr.write(f"worldline_ffz: no worldline store at {wdir!r} — nothing to enrich\n")
+        raise SystemExit(3)
+
+    report = assign_worldline_ffz(wl.WorldlineStore(wdir), [cio.ContentStore(palace)])
+    out = {
+        "braids": len(report),
+        "turns": sum(c.turns for c in report.values()),
+        "stamped": sum(c.stamped for c in report.values()),
+        "locked": sum(1 for c in report.values() if c.locked),
+        "holdover": sum(1 for c in report.values() if c.holdover),
+        "phase_spread": phase_spread(wl.WorldlineStore(wdir)),
+    }
+    sys.stdout.write(json.dumps(out, ensure_ascii=False) + "\n")
+
+
+if __name__ == "__main__":
+    main()
