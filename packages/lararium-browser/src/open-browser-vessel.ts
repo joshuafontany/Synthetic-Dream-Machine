@@ -188,12 +188,21 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   };
 }
 
+/** The surface id the @daemon owns in the uniform pin-selector — distinct from any pool wiki slug. Pass it to
+ *  `setActiveSurface` to summon the @daemon; pass a wiki slug to surface that wiki. It's all the same VM. */
+export const DAEMON_SURFACE_ID = "@daemon";
+
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
 export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, DaemonVmCore> {
   /** True when a genesis update was detected + merged on this boot (browser substrate). */
   engineUpdated: boolean;
-  /** Relay a main-thread DOM event to the active wiki island (interactivity RETURN leg). */
+  /** Relay a main-thread DOM event to the ACTIVE surface (interactivity RETURN leg) — routes to the @daemon or
+   *  the pinned wiki by the live active-surface pointer. */
   sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
+  /** The uniform pin-selector: flip which VM owns the singleton #projection sink. DAEMON_SURFACE_ID summons the
+   *  @daemon; a wiki slug surfaces that wiki. LIVE (synchronous gate flip); the durable @daemon/active-wiki
+   *  marker persists fire-and-forget, consulted only at next cold boot ("live process state is the boundary"). */
+  setActiveSurface: (surfaceId: string) => void;
 }
 
 async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHandle<T>): Promise<DocHandle<T>> {
@@ -325,6 +334,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   }
   emit("catalog-ready");
 
+  // The uniform pin-selector's ONE live pointer (BA·HA braid): which VM surface owns the singleton #projection
+  // sink right now. Defaults to the pinned wiki at boot; setActiveSurface flips it live (a pure gate flip, no
+  // reboot). Pin ⊥ active — the frame gate admits only this surface's frames, keyed on the transport id.
+  let activeSurfaceId = "";
+
   // ── Residency MECHANISM (parity with node — a tab has finite memory too) ────
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
   let daemon!:     DaemonVmCore;      // set in openDaemon
@@ -433,6 +447,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     wikiSlot: (_assembly: VesselCoreAssembly): VesselWikiSlot => {
       const sel = selectActiveWikiSlug(wikiId, undefined);
       slotActiveWikiId = sel.slug;
+      activeSurfaceId  = sel.slug;   // the pinned wiki owns #projection at boot; summon flips it live
       const facets = recipeHostFacets(slugFromUri(sel.slug), operatorDid);
       return {
         activeWikiId: sel.slug, wikiSlug: facets.wikiSlug,
@@ -529,8 +544,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         mainRepo: repo,
         ...(pluginCids.length ? { pluginCids } : {}),
         onWorkerEvent: (_id, msg) => {
-          // Projection-nalu frames route to the display, not the verb plane.
+          // Projection-nalu frames route to the display, not the verb plane — but ONLY from the ACTIVE surface.
+          // The frame gate keys on the transport id (never a payload claim), so a summon that flips
+          // activeSurfaceId auto-supersedes the previous surface's frames with no explicit teardown (the
+          // wlroots seat / tmux active-pane rhyme: one sink, N emitters, one gate).
           if (msg.listenable === PROJECTION_FRAME) {
+            if (_id !== activeSurfaceId) return;   // not the active surface → drop
             onProjection?.({
               html: String(msg.payload["html"] ?? ""),
               css:  String(msg.payload["css"]  ?? ""),
@@ -586,6 +605,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
         }).catch(() => { /* not mounted — best-effort */ });
       });
+      // The @daemon inherits the render cap (dormant-mounted at boot). Forward its frames into the SAME
+      // #projection sink the pool wikis use — gated on the active-surface pointer, so a summoned @daemon paints
+      // and otherwise its frames drop. One sink, the @daemon a peer surface among the wikis (KA·BA braid).
+      daemon.onProjection((frame) => {
+        if (activeSurfaceId === DAEMON_SURFACE_ID) onProjection?.(frame);
+      });
       return vmManager;
     },
 
@@ -608,7 +633,22 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase:            "live",
     engineUpdated,
+    // The return-leg routes to whichever surface is LIVE-active (read the pointer, never a captured value —
+    // the seat routes the next event to whatever holds focus). @daemon → its own worker; else the pinned wiki.
     sendDomEvent: (renderId, eventType, fields) =>
-      vmManager.placeWikiEvent(slotActiveWikiId, { renderId, eventType, fields }),
+      activeSurfaceId === DAEMON_SURFACE_ID
+        ? daemon.sendDomEvent(renderId, eventType, fields)
+        : vmManager.placeWikiEvent(slotActiveWikiId, { renderId, eventType, fields }),
+    // The uniform pin-selector: flip the live gate synchronously (mount-then-flip — @daemon + the pinned wiki
+    // are already mounted), then persist the choice fire-and-forget to @daemon/active-wiki (read only at next
+    // cold boot). No reboot — an active-surface change is a projection-gate flip, not a manifest rebuild.
+    setActiveSurface: (surfaceId: string) => {
+      activeSurfaceId = surfaceId;
+      void daemon.placeVerb({
+        verb: "open-wiki",
+        args: { slug: surfaceId === DAEMON_SURFACE_ID ? "daemon" : surfaceId },
+        requestedBy: "summon",
+      });
+    },
   };
 }
