@@ -38,6 +38,44 @@ from plane_fanout import compose_corpus_planes
 from sensorium import compose_sensorium
 
 
+def write_bed_manifest(root: str, *, name: str = "corpus-testbed") -> str:
+    """Stand the bed's sensorium manifest — the has-stack IaC record, schema-true to the TS
+    SensoriumManifest reader. A test bed runs the GEOLOGY mood: nobody grounded it, so the beat
+    cell stays NULL by law; the MEASURE cell is earnable through discovered strata (the boundary
+    changepoint aperture — declared here, provider seated when its arc builds). Idempotent: the
+    mint time survives a re-stand so an unchanged manifest stays byte-identical."""
+    path = os.path.join(root, "manifest.json")
+    created = None
+    if os.path.isfile(path):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                created = json.load(fh).get("created")
+        except Exception:
+            created = None
+    if created is None:
+        from datetime import datetime, timezone
+        created = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+    manifest = {
+        "schema": 1,
+        "sensorium": name,
+        "lar": "lar:///ha.ka.ba/lares/api/lares/corpus#astral-multipalace",
+        "has": {
+            "content":   {"dir": "content", "engine": "content", "variance": "sheaf"},
+            "structure": {"dir": "structure", "engine": "structurepalace", "variance": "sheaf"},
+            "form":      {"dir": "form", "engine": "formpalace", "variance": "sheaf"},
+        },
+        "bands": {"grain": "membership", "computed": "sidecar"},
+        "coupling": {"children": []},
+        "apertures": {"measure": "boundary-changepoint"},
+        "ephemeral": True,
+        "created": created,
+    }
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(manifest, fh, indent=2)
+        fh.write("\n")
+    return path
+
+
 def _refuse_comparator(root: str) -> None:
     """The comparator ward: ~/.mempalace holds the clean dev-baseline — the RUN never writes it.
     Designation carries authority; a root that reaches into the comparator fails LOUD."""
@@ -59,6 +97,8 @@ def compose_testbed(root: str, *, wing: str, room: str = "corpus",
     "wrapped" / "extracted" ride the SECTIONED cap (one record per wa/section,
     capture_sources.corpus_sectioned_source) — the dual-run ablation's two modes."""
     _refuse_comparator(root)
+    os.makedirs(root, exist_ok=True)
+    write_bed_manifest(root)
     if sections not in (None, "wrapped", "extracted"):
         raise SystemExit(f"corpus_testbed: unknown --sections mode {sections!r} "
                          "(the cap speaks wrapped | extracted)")
