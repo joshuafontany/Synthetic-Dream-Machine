@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
 import os
+import tempfile
 
 import content_io as cio
 from capture_stream import ContentStoreLandCap, Pipeline
@@ -76,6 +77,24 @@ class OrderCap:
 _INACTIVE_PERSISTENCE = PersistenceCap(path=None, half_life=None)
 
 
+def _atomic_json_write(path: str, value: dict) -> None:
+    """Replace one declaration atomically after its complete JSON body reaches disk."""
+    fd, temporary = tempfile.mkstemp(prefix=".manifest-", suffix=".json", dir=os.path.dirname(path))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            json.dump(value, fh, indent=2)
+            fh.write("\n")
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(temporary, path)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
 def compose_persistence_cap(root: str, *, half_life: "float | None" = None,
                             active: bool = False) -> PersistenceCap:
     """Declare rooted persistence without materializing testimony state.
@@ -119,31 +138,38 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
         if drift:
             raise ValueError(f"stream manifest at {path!r} conflicts on {', '.join(drift)}")
     created = existing.get("created") if isinstance(existing, dict) else None
-    manifest = {
+    manifest = dict(existing or {})
+    declared_has = manifest.get("has", {})
+    if not isinstance(declared_has, dict):
+        raise ValueError(f"stream manifest at {path!r} must hold an object at has")
+    owned_has = {
+        "content": {"dir": "content", "engine": "content", "variance": "sheaf"},
+        "structure": {"dir": "structure", "engine": "structurepalace", "variance": "sheaf"},
+        "form": {"dir": "form", "engine": "formpalace", "variance": "sheaf"},
+        "persistence": {"dir": "persistence", "engine": "persistence", "variance": "cosheaf"},
+    }
+    cap_drift = [cap for cap, declaration in owned_has.items()
+                 if cap in declared_has and declared_has[cap] != declaration]
+    if cap_drift:
+        raise ValueError(f"stream manifest at {path!r} conflicts on has.{', has.'.join(cap_drift)}")
+    manifest.update({
         "schema": 1,
         "sensorium": name,
         "lar": lar,
-        "has": {
-            "content": {"dir": "content", "engine": "content", "variance": "sheaf"},
-            "structure": {"dir": "structure", "engine": "structurepalace", "variance": "sheaf"},
-            "form": {"dir": "form", "engine": "formpalace", "variance": "sheaf"},
-            "persistence": {"dir": "persistence", "engine": "persistence", "variance": "cosheaf"},
-        },
+        "has": {**declared_has, **owned_has},
         "order": {"projector": order.projector, "basis": order.basis},
-        "persistencePolicy": {"halfLife": None},
-        "bands": {"grain": "membership", "computed": "sidecar"},
-        "coupling": {"children": []},
+        "persistencePolicy": manifest.get("persistencePolicy", {"halfLife": None}),
+        "bands": manifest.get("bands", {"grain": "membership", "computed": "sidecar"}),
+        "coupling": manifest.get("coupling", {"children": []}),
         "ephemeral": ephemeral,
         "created": created or datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
-    }
+    })
     if apertures:
         manifest["apertures"] = apertures
     if worldline is not None:
         manifest["has"]["worldline"] = {"dir": "worldline", "engine": "worldline", "variance": "sheaf"}
         manifest["worldline"] = worldline
-    with open(path, "w", encoding="utf-8") as fh:
-        json.dump(manifest, fh, indent=2)
-        fh.write("\n")
+    _atomic_json_write(path, manifest)
     return path
 
 

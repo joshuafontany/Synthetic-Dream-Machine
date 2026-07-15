@@ -122,6 +122,17 @@ describe("composePalace — the DIRECT numeric door (the next adapter's shape)",
     expect(out.bands).toBe(4);
     expect(out.coupling).toBe(4); // 2 columns → a directional lead-lag matrix
   });
+
+  test("refuses a duplicate, reversal, or mixed local sequence before plane routing", () => {
+    const malformed = (seq: readonly (number | string)[]): StreamAdapter<readonly (number | string)[]> => ({
+      modality: "telemetry",
+      mode: "live",
+      ingest: (input) => input.map((value) => ({ seq: value, signal: [1] })),
+    });
+    expect(() => composePalace(malformed([0, 0]), [0, 0], recordingSink())).toThrow("rise strictly");
+    expect(() => composePalace(malformed([2, 1]), [2, 1], recordingSink())).toThrow("rise strictly");
+    expect(() => composePalace(malformed([0, "a"]), [0, "a"], recordingSink())).toThrow("mix sequence");
+  });
 });
 
 // A compile-time proof that the adapter surface is EXACTLY modality/mode/ingest (composition-thin):

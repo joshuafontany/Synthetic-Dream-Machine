@@ -58,6 +58,27 @@ def test_stream_manifest_refuses_root_identity_drift(tmp_path):
                               order=OrderCap("corpus", "declared:in-file"))
 
 
+def test_stream_manifest_preserves_an_unowned_cap_and_declaration_fields(tmp_path):
+    from sensorium import OrderCap, write_stream_manifest
+    (tmp_path / "manifest.json").write_text(json.dumps({
+        "schema": 1, "sensorium": "stream", "lar": "lar:///x",
+        "has": {"telemetry": {"dir": "telemetry", "engine": "mudlet", "variance": "sheaf"}},
+        "persistencePolicy": {"halfLife": 12},
+        "bands": {"grain": "native"}, "coupling": {"children": [{"sensorium": "other", "dir": "other"}]},
+        "created": "2026-01-01T00:00:00.000Z",
+    }), encoding="utf-8")
+
+    write_stream_manifest(str(tmp_path), name="stream", lar="lar:///x",
+                          order=OrderCap("stream", "observed:connection-sequence"))
+
+    manifest = json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["has"]["telemetry"]["engine"] == "mudlet"
+    assert manifest["persistencePolicy"] == {"halfLife": 12}
+    assert manifest["bands"] == {"grain": "native"}
+    assert manifest["coupling"]["children"][0]["sensorium"] == "other"
+    assert manifest["created"] == "2026-01-01T00:00:00.000Z"
+
+
 def test_event_stream_composes_the_generic_rooted_cap_stack(tmp_path):
     pointer = tmp_path / "events.ndjson"
     pointer.write_text("\n".join(json.dumps(event) for event in [

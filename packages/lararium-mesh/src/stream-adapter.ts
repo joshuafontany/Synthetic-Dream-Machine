@@ -151,6 +151,36 @@ const hasContent = (f: StreamFrame): boolean => f.content != null && f.content.l
 const hasStructure = (f: StreamFrame): boolean => f.structure != null;
 const hasSignal = (f: StreamFrame): boolean => f.signal.length > 0;
 
+/**
+ * Refuse an ambiguous local sequence before any plane reads it. An adapter
+ * carries one stream, so this compares only its own frames; it never invents
+ * an order across causal islands. Numeric and string source ordinals each
+ * remain lawful, but one stream cannot mix their order domains.
+ */
+export function requireOrderedFrames(frames: readonly StreamFrame[]): void {
+  let prior: number | string | undefined;
+  let kind: "number" | "string" | undefined;
+  for (const [index, frame] of frames.entries()) {
+    const seq = frame.seq;
+    const nextKind = typeof seq;
+    if (nextKind !== "number" && nextKind !== "string") {
+      throw new Error(`stream frames: frame ${index} needs a numeric or string sequence`);
+    }
+    if ((typeof seq === "number" && !Number.isFinite(seq)) ||
+        (typeof seq === "string" && seq.length === 0)) {
+      throw new Error(`stream frames: frame ${index} carries an invalid sequence`);
+    }
+    if (kind !== undefined && nextKind !== kind) {
+      throw new Error("stream frames: one stream cannot mix sequence domains");
+    }
+    if (prior !== undefined && !(seq > prior)) {
+      throw new Error("stream frames: sequence must rise strictly within one stream");
+    }
+    prior = seq;
+    kind = nextKind;
+  }
+}
+
 /** The widest `signal` vector across the frames — coupling needs ≥2 columns for a lead-lag matrix. */
 function signalWidth(frames: readonly StreamFrame[]): number {
   let w = 0;
@@ -180,6 +210,7 @@ export function composePalace<Raw>(
   sink: PlaneSink,
 ): PalaceComposition {
   const frames = adapter.ingest(raw);
+  requireOrderedFrames(frames);
   const contentFrames = frames.filter(hasContent);
   const structureFrames = frames.filter(hasStructure);
   const signalFrames = frames.filter(hasSignal);
