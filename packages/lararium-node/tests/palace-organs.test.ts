@@ -7,12 +7,13 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync, rmSync, mkdirSync, writeFileSync, existsSync, readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { palaceOrgans, setupPalaceOrgans, organHealthy, guestMempalaceOrgan } from "../src/palace-organs.js";
+import { palaceOrgans, setupPalaceOrgans, organHealthy, guestMempalaceOrgan, materializeMemorySensorium } from "../src/palace-organs.js";
 import { readManifest, resolveCapDir } from "../src/sensorium.js";
 import {
   larMempalaceDir, larContentDir, larStructurePalaceDir, larFormPalaceDir, larMeshPalaceDir,
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
   memeticWikitextSensoriumDir, memeticWikitextFormalDir, memeticWikitextInformalDir,
+  memorySensoriumDir,
 } from "../src/vessel-paths.js";
 
 let home: string;
@@ -84,6 +85,36 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
 });
 
 describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => {
+  test("leaves Python's richer Memory declaration under its capture authority", () => {
+    mkdirSync(memorySensoriumDir(), { recursive: true });
+    const pythonManifest = {
+      schema: 1,
+      sensorium: "memory",
+      lar: "lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance",
+      has: {
+        content: { dir: "content", engine: "content", variance: "sheaf" },
+        structure: { dir: "structure", engine: "structurepalace", variance: "sheaf" },
+        form: { dir: "form", engine: "formpalace", variance: "sheaf" },
+        persistence: { dir: "persistence", engine: "persistence", variance: "cosheaf" },
+        worldline: { dir: "worldline", engine: "worldline", variance: "sheaf" },
+      },
+      order: { projector: "worldline", basis: "observed:turn-dag" },
+      apertures: { beat: "worldline-dag" },
+      worldline: { real: ["turn-dag"], arbitrary: ["source-sequence"] },
+      persistencePolicy: { halfLife: null },
+      bands: { grain: "membership", computed: "capture" },
+      coupling: { children: [] },
+      ephemeral: false,
+      created: "2026-01-01T00:00:00.000Z",
+    };
+    const path = join(memorySensoriumDir(), "manifest.json");
+    const body = JSON.stringify(pythonManifest, null, 2) + "\n";
+    writeFileSync(path, body);
+
+    expect(materializeMemorySensorium()).toMatchObject({ ran: false, ok: true });
+    expect(readFileSync(path, "utf8")).toBe(body);
+  });
+
   test("first run STANDS UP every absent organ; a re-run reads all 'present'", () => {
     // NOTE: no mempalace config is pre-created. The boot must not need one, and must not make one.
     const first = setupPalaceOrgans();

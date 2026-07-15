@@ -103,6 +103,6 @@ def compose_event_stream_sensorium(root: str, *, wing: str, room: str = "stream"
         source_factory=lambda **_route: source,
         planes_factory=lambda **_route: compose_text_planes(paths.root),
         persistence=compose_persistence_cap(paths.root),
-        order=order,
+        order=order, mutation_root=paths.root,
     )
     return stream, store, paths

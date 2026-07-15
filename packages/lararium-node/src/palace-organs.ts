@@ -249,6 +249,28 @@ function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensori
 }
 
 /**
+ * Seed a capture-bearing sensorium only while it lacks a declaration.
+ *
+ * Python owns the durable capture contract: its source drivers declare ordering,
+ * worldline evidence, and cap-owned metadata beside the landed content.  Node
+ * still stands an absent Memory root for a fresh vessel, but it never rewrites a
+ * declaration that Python has enriched.  Re-validating the present marker keeps
+ * malformed state loud without creating a second manifest authority.
+ */
+function seedCaptureSensorium(step: string, dir: string, opts: Omit<BuildSensoriumOptions, "created">): PalaceSetupStep {
+  try {
+    mkdirSync(dir, { recursive: true });
+    if (readManifest(dir)) {
+      return { step, ran: false, ok: true, detail: "capture sensorium manifest present" };
+    }
+    writeManifest(dir, buildSensoriumManifest(dir, opts));
+    return { step, ran: true, ok: true, detail: `capture sensorium manifest seeded (${dir})` };
+  } catch (e) {
+    return { step, ran: true, ok: false, detail: errText(e).slice(0, 160) };
+  }
+}
+
+/**
  * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges, ALL
  * inside the tree. The old MIXED layout (content ABSOLUTE at the guest `~/.mempalace`, structure/form
  * relative) died with the content-cap-home ruling: the lararium OWNS its content plane at
@@ -257,7 +279,7 @@ function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensori
  * (NO dir), and coupling stays empty (memory glues no sub-sensoriums).
  */
 export function materializeMemorySensorium(): PalaceSetupStep {
-  return materializeSensorium("memory:manifest", memorySensoriumDir(), {
+  return seedCaptureSensorium("memory:manifest", memorySensoriumDir(), {
     sensorium: "memory",
     lar: "lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance",
     caps: {

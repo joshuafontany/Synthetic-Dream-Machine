@@ -38,7 +38,7 @@ import shutil
 import sys
 
 
-def rederive_bands(root: str) -> dict:
+def _rederive_bands(root: str) -> dict:
     """Rebuild bands from stored vectors under the manifest's declared order evidence."""
     from sensorium import sensorium_paths
 
@@ -75,6 +75,14 @@ def rederive_bands(root: str) -> dict:
                 "braids": len([k for k in report if not k.startswith("__")]),
                 "vector_fault": report.get("__vector_fault__")}
     raise SystemExit("rederive bands: manifest declares no supported order projector")
+
+
+def rederive_bands(root: str) -> dict:
+    """Rebuild band output under the exclusive rooted mutation lease."""
+    from sidecar_caps import root_mutation
+
+    with root_mutation(root, exclusive=True):
+        return _rederive_bands(root)
 
 
 def _ground_records(root: str) -> "list[dict]":
@@ -140,36 +148,48 @@ def _refuse_fused_stream_rederive(root: str, records: "list[dict]") -> None:
         )
 
 
-def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
-             max_candidates: "int | None" = 96, planes: bool = True,
-             bands: bool = False) -> dict:
-    """Wipe the derived planes and walk the ground back through the pour's own caps."""
+def _rederive_planes(root: str, *, min_support: int, max_forms: int,
+                     max_candidates: "int | None") -> dict:
+    """Clear and rebuild derived planes while the caller holds the exclusive lease."""
     from sensorium import sensorium_paths
 
     paths = sensorium_paths(root)
     root = paths.root
+    from plane_fanout import compose_text_planes
+
+    records = _ground_records(root)
+    if not records:
+        raise SystemExit(
+            f"rederive: the ground under {root!r} holds no records — nothing stands "
+            "to derive from. Pour the bed before rederiving it."
+        )
+    _refuse_fused_stream_rederive(root, records)
+    for d in (paths.structure, paths.form):
+        if os.path.isdir(d):
+            shutil.rmtree(d)
+    caps = compose_text_planes(root, min_support=min_support, max_forms=max_forms,
+                               max_candidates=max_candidates)
+    for rec in records:
+        for cap in caps:
+            cap.land(rec)
+    return {"records": len(records), "planes": {cap.name: cap.finish() for cap in caps}}
+
+
+def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
+             max_candidates: "int | None" = 96, planes: bool = True,
+             bands: bool = False) -> dict:
+    """Rebuild selected derived planes without overlapping a capture pass."""
+    from sensorium import sensorium_paths
+    from sidecar_caps import root_mutation
+
+    root = sensorium_paths(root).root
     if not planes and not bands:
         raise ValueError("rederive needs planes, bands, or both")
     out = {"root": root}
     if planes:
-        from plane_fanout import compose_text_planes
-
-        records = _ground_records(root)
-        if not records:
-            raise SystemExit(
-                f"rederive: the ground under {root!r} holds no records — nothing stands "
-                "to derive from. Pour the bed before rederiving it."
-            )
-        _refuse_fused_stream_rederive(root, records)
-        for d in (paths.structure, paths.form):
-            if os.path.isdir(d):
-                shutil.rmtree(d)
-        caps = compose_text_planes(root, min_support=min_support, max_forms=max_forms,
-                                     max_candidates=max_candidates)
-        for rec in records:
-            for cap in caps:
-                cap.land(rec)
-        out.update({"records": len(records), "planes": {cap.name: cap.finish() for cap in caps}})
+        with root_mutation(root, exclusive=True):
+            out.update(_rederive_planes(root, min_support=min_support, max_forms=max_forms,
+                                        max_candidates=max_candidates))
     if bands:
         out["bands"] = rederive_bands(root)
     return out

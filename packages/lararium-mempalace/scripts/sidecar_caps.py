@@ -40,6 +40,7 @@ import os
 import sqlite3
 import sys
 import time
+from contextlib import contextmanager
 
 try:
     import fcntl as _fcntl  # POSIX only; absent on Windows
@@ -294,6 +295,38 @@ def acquire_root_lock(root: str, prefix: str):
     if _fcntl is not None:
         _fcntl.flock(fh.fileno(), _fcntl.LOCK_EX)
     return fh
+
+
+def acquire_root_mutation_lock(root: str, *, exclusive: bool):
+    """Hold one root-wide mutation lease for capture or re-derivation.
+
+    Capture takes a shared lease, so independent source passes may advance the
+    append-only ground. Re-derive takes an exclusive lease before it clears and
+    rebuilds derived planes. Both modes name one rooted lock, so a rebuild never
+    overlaps a live hook or harvest over structure/form state.
+    """
+    lock_path = serve_lock_path(root, "sensorium_mutation")
+    fh = open(lock_path, "w")
+    try:
+        os.chmod(lock_path, 0o600)
+    except OSError:
+        pass
+    if _fcntl is not None:
+        _fcntl.flock(fh.fileno(), _fcntl.LOCK_EX if exclusive else _fcntl.LOCK_SH)
+    return fh
+
+
+@contextmanager
+def root_mutation(root: "str | None", *, exclusive: bool):
+    """Bracket one rooted data-plane mutation; an unrooted composition stays inert."""
+    if root is None:
+        yield
+        return
+    lock = acquire_root_mutation_lock(root, exclusive=exclusive)
+    try:
+        yield
+    finally:
+        release_lock(lock)
 
 
 def release_lock(fh) -> None:

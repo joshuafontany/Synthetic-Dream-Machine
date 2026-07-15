@@ -115,7 +115,7 @@ def compose_memory_stream_sensorium(sensorium_root: str, *, embed_factory: "Call
                                       source_factory=source_factory, planes_factory=fresh_planes,
                                       observer=observe, worldline=paths.worldline,
                                       persistence=compose_persistence_cap(paths.root, half_life=None),
-                                      order=order)
+                                      order=order, mutation_root=paths.root)
     return stream, model, dim, paths
 
 

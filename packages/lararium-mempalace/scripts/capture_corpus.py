@@ -59,12 +59,30 @@ def compose_corpus_stream_sensorium(root: str, *, wing: str, room: str = "corpus
     source = stamp_embedder(source, model)
     store = cio.ContentStore(paths.content, required_keys={"wing", "room"}, expected_dim=dim,
                              expected_model=model, append_only=True)
+
+    def finish_capture(_pointer, summary, **_route):
+        """Derive corpus-only readings while the capture pass still holds its lease."""
+        bands = {"cells": 0, "note": "bands-skipped: no new content"}
+        if summary.get("landed", 0) > 0:
+            from bands import analyze_sensorium
+            try:
+                cells, bands = analyze_sensorium(paths.root)
+                if cells:
+                    with open(os.path.join(paths.root, "bands-cells.ndjson"), "w", encoding="utf-8") as fh:
+                        for cell in cells:
+                            fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
+            except Exception as exc:  # noqa: BLE001 — a derived aperture cannot revoke content landing
+                bands = {"cells": 0, "note": f"bands-skipped: analyzer fault ({type(exc).__name__})"}
+        from corpus_worldline import backfill
+        return {"bands_report": bands, "worldline": backfill(paths.root)}
+
     stream = compose_stream_sensorium(kind="corpus", land=ContentStoreLandCap(store), embed=embed_one,
         source_factory=lambda **_route: source,
         planes_factory=lambda **_route: compose_text_planes(paths.root, min_support=min_support,
             max_forms=max_forms, max_candidates=max_candidates),
         worldline=paths.worldline, persistence=compose_persistence_cap(paths.root),
-        order=OrderCap("corpus", "declared:in-file"))
+        order=OrderCap("corpus", "declared:in-file"), after_capture=finish_capture,
+        mutation_root=paths.root)
     return stream, store, paths
 
 
@@ -78,18 +96,7 @@ def capture(pointer: str, sensorium: str, *, wing: str, room: str = "corpus", mi
     planes = summary.get("planes") or {}
     structure = planes.get("structure") or {}
     form = planes.get("form") or {}
-    bands = {"cells": 0, "note": "bands-skipped: no new content"}
-    if summary.get("landed", 0) > 0:
-        from bands import analyze_sensorium
-        try:
-            cells, bands = analyze_sensorium(paths.root)
-            if cells:
-                with open(os.path.join(paths.root, "bands-cells.ndjson"), "w", encoding="utf-8") as fh:
-                    for cell in cells:
-                        fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
-        except Exception as exc:  # noqa: BLE001 — a derived aperture cannot revoke content landing
-            bands = {"cells": 0, "note": f"bands-skipped: analyzer fault ({type(exc).__name__})"}
-    from corpus_worldline import backfill
+    bands = summary.get("bands_report") or {"cells": 0, "note": "bands-skipped: no report"}
     drawers = int(summary.get("landed", 0))
     structures = int(structure.get("landed", 0))
     forms = int(form.get("forms", 0))
@@ -101,7 +108,7 @@ def capture(pointer: str, sensorium: str, *, wing: str, room: str = "corpus", mi
     ))
     return {"sensorium": paths.root, "pointer": pointer, "wing": wing, "room": room,
             "drawers": drawers, "structures": structures, "bands": int(bands.get("cells", 0)),
-            "forms": forms, "note": note, "worldline": backfill(paths.root), **summary}
+            "forms": forms, "note": note, **summary}
 
 
 def main() -> None:

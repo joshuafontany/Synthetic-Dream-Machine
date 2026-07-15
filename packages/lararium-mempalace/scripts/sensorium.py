@@ -20,7 +20,7 @@ import tempfile
 
 import content_io as cio
 from capture_stream import ContentStoreLandCap, Pipeline
-from sidecar_caps import acquire_root_lock, release_lock
+from sidecar_caps import acquire_root_lock, release_lock, root_mutation
 
 
 @dataclass(frozen=True)
@@ -273,7 +273,8 @@ class Sensorium:
 
     def __init__(self, *, kind: str, pipeline: "Pipeline | None" = None, land,
                  worldline=None, persistence: "PersistenceCap | None" = None,
-                 order: "OrderCap | None" = None, pipeline_factory=None, observer=None) -> None:
+                 order: "OrderCap | None" = None, pipeline_factory=None, observer=None,
+                 after_capture=None, mutation_root: "str | None" = None) -> None:
         if (pipeline is None) == (pipeline_factory is None):
             raise ValueError("Sensorium requires exactly one of pipeline or pipeline_factory")
         self.kind = kind
@@ -287,6 +288,8 @@ class Sensorium:
         self._persistence = persistence if persistence is not None else _INACTIVE_PERSISTENCE
         self._order = order
         self._observer = observer
+        self._after_capture = after_capture
+        self._mutation_root = mutation_root
 
     def capture(self, pointer, **route) -> dict:
         """Run one capture pass (idempotent re-derivation) over this entity's cap-stack.
@@ -295,11 +298,14 @@ class Sensorium:
         per pass: source and plane caps may carry pass-local state, while land and
         embed capabilities remain warm on the sensorium itself.
         """
-        pipeline = self._pipeline_factory(pointer, **route) if self._pipeline_factory else self._pipeline
-        summary = pipeline.run_pass(pointer)
-        if self._observer is not None:
-            summary = {**summary, **self._observer(pointer, **route)}
-        return summary
+        with root_mutation(self._mutation_root, exclusive=False):
+            pipeline = self._pipeline_factory(pointer, **route) if self._pipeline_factory else self._pipeline
+            summary = pipeline.run_pass(pointer)
+            if self._observer is not None:
+                summary = {**summary, **self._observer(pointer, **route)}
+            if self._after_capture is not None:
+                summary = {**summary, **self._after_capture(pointer, summary, **route)}
+            return summary
 
     def recall(self, embedding: list, k: int = 8, where: "dict | None" = None) -> dict:
         """The read-face (the MCP Resource): nearest-neighbor recall over the sensorium's store."""
@@ -321,7 +327,8 @@ def compose_sensorium(*, kind: str, source, land, embed=None, worldline=None, pe
 
 def compose_stream_sensorium(*, kind: str, land, source_factory, embed=None,
                              planes_factory=None, observer=None, worldline=None,
-                             persistence=None, order=None) -> Sensorium:
+                             persistence=None, order=None, after_capture=None,
+                             mutation_root: "str | None" = None) -> Sensorium:
     """Compose a rooted or ephemeral text/input-stream sensorium from capabilities.
 
     `land` and `embed` are warm capabilities. `source_factory` and
@@ -344,4 +351,5 @@ def compose_stream_sensorium(*, kind: str, land, source_factory, embed=None,
         return Pipeline(source=source, land=land, embed=embed, planes=planes)
 
     return Sensorium(kind=kind, pipeline_factory=make_pipeline, land=land,
-                     worldline=worldline, persistence=persistence, order=order, observer=observer)
+                     worldline=worldline, persistence=persistence, order=order, observer=observer,
+                     after_capture=after_capture, mutation_root=mutation_root)

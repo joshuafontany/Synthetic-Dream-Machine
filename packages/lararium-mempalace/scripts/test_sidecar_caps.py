@@ -168,6 +168,27 @@ def test_singleton_holds_per_palace(tmp_path, monkeypatch):
     sc.release_lock(fhb)
 
 
+def test_root_mutation_selects_shared_or_exclusive_flock(tmp_path, monkeypatch):
+    class Flock:
+        LOCK_EX = 2
+        LOCK_SH = 1
+        LOCK_UN = 8
+
+        def __init__(self):
+            self.calls = []
+
+        def flock(self, _fd, mode):
+            self.calls.append(mode)
+
+    flock = Flock()
+    monkeypatch.setattr(sc, "_fcntl", flock)
+    shared = sc.acquire_root_mutation_lock(str(tmp_path), exclusive=False)
+    exclusive = sc.acquire_root_mutation_lock(str(tmp_path), exclusive=True)
+    sc.release_lock(shared)
+    sc.release_lock(exclusive)
+    assert flock.calls == [flock.LOCK_SH, flock.LOCK_EX, flock.LOCK_UN, flock.LOCK_UN]
+
+
 def test_serve_lock_belongs_to_its_palace_not_the_guest_comparator(tmp_path):
     palace = tmp_path / "sovereign" / "content"
     lock = sc.serve_lock_path(str(palace), "content_serve")
