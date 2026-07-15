@@ -24,7 +24,7 @@ Loud by law: an unnamed root refuses; a bed whose ground holds no records refuse
 (nothing stands to derive from — a silent empty rederive would read as a finding).
 
 Usage (THE venv):
-  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 rederive.py --root <bed> \
+  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 rederive.py --sensorium <place> \
       [--min-support N] [--max-forms N] [--max-candidates N]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/rederive
@@ -42,8 +42,9 @@ def _ground_records(root: str) -> "list[dict]":
     """Every record off the bed's contentpalace, in total order (source_file,
     chunk_index, cid) — the deterministic walk the caps re-read."""
     from content_io import ContentStore
+    from sensorium import sensorium_paths
 
-    store = ContentStore(os.path.join(root, "content"))
+    store = ContentStore(sensorium_paths(root).content)
     out: "list[dict]" = []
     offset = 0
     while True:
@@ -78,7 +79,10 @@ def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
     """Wipe the derived planes and walk the ground back through the pour's own caps."""
     from plane_fanout import compose_corpus_planes
 
-    root = os.path.expanduser(root)
+    from sensorium import sensorium_paths
+
+    paths = sensorium_paths(root)
+    root = paths.root
     records = _ground_records(root)
     if not records:
         raise SystemExit(
@@ -87,8 +91,7 @@ def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
         )
 
     # the derived planes wipe; the ground never gets touched
-    for plane in ("structure", "form"):
-        d = os.path.join(root, plane)
+    for d in (paths.structure, paths.form):
         if os.path.isdir(d):
             shutil.rmtree(d)
 
@@ -104,17 +107,17 @@ def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
 
 def main(argv: "list[str] | None" = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--root", action="append", default=[], help="a bed root (repeatable)")
+    ap.add_argument("--sensorium", action="append", default=[], help="a sensorium root (repeatable)")
     ap.add_argument("--min-support", type=int, default=2, dest="min_support")
     ap.add_argument("--max-forms", type=int, default=64, dest="max_forms")
     ap.add_argument("--max-candidates", type=int, default=96, dest="max_candidates")
     args = ap.parse_args(argv)
-    if not args.root:
+    if not args.sensorium:
         raise SystemExit(
-            "rederive: no bed named — pass `--root <dir>`. An unnamed rederive would "
+            "rederive: no sensorium named — pass `--sensorium <dir>`. An unnamed rederive would "
             "wipe whichever derived planes sit at a default; name the bed, or stop."
         )
-    for root in sorted(dict.fromkeys(args.root)):
+    for root in sorted(dict.fromkeys(args.sensorium)):
         rep = rederive(
             root,
             min_support=args.min_support,

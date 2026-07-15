@@ -15,7 +15,7 @@ Proves, over REAL content_io palaces + the two PINNED sensoria (Memory=immutable
 
 import content_io as cio
 import worldline_io as wl
-from sensorium import compose_dream_sensorium, compose_memory_sensorium
+from sensorium import compose_content_land, compose_sensorium
 
 
 def _embed(_text):
@@ -35,7 +35,7 @@ def _build_rhizome(store):
 def test_graph_walks_ride_the_frm_to_indexes(tmp_path):
     # C5 scale: the down-walk (_children) and up-walk (_up_parent) push frm/to WHERE to sqlite, so the
     # ix_edges_frm / ix_edges_to indexes (dead weight before) now carry the walk — never a full-table scan.
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     store.linear("a", "b", tick=1)
     down = store._conn.execute(
         "EXPLAIN QUERY PLAN SELECT to_node FROM worldline_edges WHERE frm=? AND relation IN (?,?)",
@@ -54,7 +54,7 @@ def test_graph_walks_ride_the_frm_to_indexes(tmp_path):
 def test_bogus_branch_kapae_reads_resolved_false(tmp_path):
     # C4: a bogus/typo branch (no rhizome node, no bound content) reads resolved:false — a legible miss,
     # never a silent no-op — and logs NO phantom mute. A real branch resolves true.
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     content = cio.ContentStore(str(tmp_path / ".mem"))
     store.linear("a", "b", tick=1)                       # a -> b (a real branch)
 
@@ -73,7 +73,7 @@ def test_add_edge_rejects_a_cycle_creating_spawn_edge(tmp_path):
     # C3: a spawn-tree edge that would close a cycle is REJECTED (never added), so no pure-cycle
     # component silent-drops its turns from the demux (roots()/worldline_of climb the spawn-tree). The
     # reject reads legible; the would-be-looped node roots itself instead of vanishing.
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     store.linear("a", "b", tick=1)
     store.linear("b", "c", tick=2)                        # chain a -> b -> c
 
@@ -94,7 +94,7 @@ def test_add_edge_refuses_a_second_distinct_open_fork_parent(tmp_path):
     # clears the cycle-guard (a leaf child reaches nothing) yet would leave _up_parent picking a spawner
     # arbitrarily → non-deterministic worldline membership. The second distinct parent is REFUSED legibly;
     # the SAME fork-parent stays idempotent; the child's spawner stays the first (deterministic).
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     first = store.fork("p1", "child", tick=1)
     assert first["added"] is True
 
@@ -116,7 +116,7 @@ def test_add_edge_refuses_a_second_distinct_open_fork_parent(tmp_path):
 
 
 def test_fork_dag_spawn_handback_concurrent_replays(tmp_path):
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     _build_rhizome(store)
 
     edges = store.dag()["edges"]
@@ -149,8 +149,14 @@ def test_fork_dag_spawn_handback_concurrent_replays(tmp_path):
 
 
 def _two_sensoria(tmp_path):
-    mem = compose_memory_sensorium(str(tmp_path / ".mem"), source=lambda r: r, embed=_embed, expected_dim=2)
-    dream = compose_dream_sensorium(str(tmp_path / ".dream"), source=lambda r: r, embed=_embed)
+    mem = compose_sensorium(
+        kind="memory", source=lambda records: records, embed=_embed,
+        land=compose_content_land(str(tmp_path / ".mem"), required_keys={"wing", "room"}, expected_dim=2),
+    )
+    dream = compose_sensorium(
+        kind="dream", source=lambda records: records, embed=_embed,
+        land=compose_content_land(str(tmp_path / ".dream"), append_only=False),
+    )
     mst, dst = mem._land.store, dream._land.store
     # Memory (immutable ground) carries wing/room; both stores tag each row with its worldline turn.
     mst.put("m-A", "mem A", [1.0, 0.0], {"wing": "w", "room": "r", "lar_turn_key": "t-A"})
@@ -162,7 +168,7 @@ def _two_sensoria(tmp_path):
 
 
 def test_kapae_branch_excludes_then_unkapae_restores_across_both_sensoria(tmp_path):
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     _build_rhizome(store)
     mem, dream, mst, dst = _two_sensoria(tmp_path)
 
@@ -205,7 +211,7 @@ def test_worldline_of_climbs_to_the_braid_root(tmp_path):
 
 
 def test_move_not_delete_history_preserved(tmp_path):
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     _build_rhizome(store)
     mem, dream, mst, dst = _two_sensoria(tmp_path)
     edge_count = len(store.dag()["edges"])
@@ -228,7 +234,8 @@ def test_move_not_delete_history_preserved(tmp_path):
 
 
 def test_kapae_survives_a_restart(tmp_path):
-    wpath, mpath, dpath = str(tmp_path / ".worldline"), str(tmp_path / ".mem"), str(tmp_path / ".dream")
+    wpath = str(tmp_path / "worldline")
+    mpath, dpath = str(tmp_path / ".mem" / "content"), str(tmp_path / ".dream" / "content")
     store = wl.WorldlineStore(wpath)
     _build_rhizome(store)
     _, _, mst, dst = _two_sensoria(tmp_path)

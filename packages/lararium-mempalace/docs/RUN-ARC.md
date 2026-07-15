@@ -145,7 +145,8 @@ cid-correspondence null · a triple-overlap/nesting drift-detector fixture that 
 ```
 4. **The memory-sensorium driver — RAN (first time).** `memory_sensorium.py` composes the goal sensorium
    over the AI-operator worldlines and sweeps a surface's transcripts onto all three planes. The gap it
-   closed on the way: `compose_memory_sensorium` accepted `planes=`, and `drive_capture` never passed one
+   closed on the way: the rooted stream factory owns fresh plane caps for every pass, so live capture and
+   harvest cannot diverge into content-only versus three-plane paths
    — so the GOAL sensorium had been landing **content only** while the test-bed carried three planes. Both
    sides green; no test asked whether the two composition sites agreed (C1: an invariant with no
    drift-detector already drifts).

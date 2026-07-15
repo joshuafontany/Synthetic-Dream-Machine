@@ -48,8 +48,8 @@ The *what* of a memory, factored into three orthogonal stores: **content** (the 
 The *coupling* between planes and across worldlines. **A Ki binding *is* a coupling-read**: when two traces (or two worldlines' rhythms) cohere, `coupleMesh`/`self-coupling` report P(common-cause) — reversible, χ²-gated, phantom-guarded — **never an entrainment**. The nameless entities the machina hunts surface *here*, as cross-plane resonances, not as pre-stamped labels. **[BUILT: mesh coupling primitives. DESIGNED: the Ki-as-standing-readout wiring.]**
 
 ### 3.3 · The two pinned sensoria (CLS two-store)
-- **Memory** — the immutable ground: append-only, verbatim, eidetic. `halfLife = null`. An edit rides kapae, never an overwrite; an idempotent same-text re-put passes (the crash-cure). **[BUILT: `compose_memory_sensorium`, append-only guard, {model,dim}+palace-history identity floors.]**
-- **Dream** — the mutable schema: consolidation, reflection, the standing-regeneration. `halfLife` finite, active-flux. **[BUILT: `compose_dream_sensorium` stub. DESIGNED: the consolidation verbs.]**
+- **Memory** — the immutable ground: append-only, verbatim, eidetic. `halfLife = null`. An edit rides kapae, never an overwrite; an idempotent same-text re-put passes (the crash-cure). **[BUILT: `compose_content_land(..., append_only=true)`, schema/model identity floors.]**
+- **Dream** — the mutable schema: consolidation, reflection, the standing-regeneration. `halfLife` finite, active-flux. **[BUILT: `compose_content_land(..., append_only=false)`. DESIGNED: the consolidation verbs.]**
 
 ### 3.4 · Persistence — the standing AXIS (not a plane, not the Dream slot)
 Ruled 2026-07-05 (`persistence-standing-axis`). **Three orthogonal axes on one trace**: durability/standing ⊥ retrieval/accessibility ⊥ consolidation (the Dream move). Persistence rides axis 1 as a **cap both pins compose** — its *setting* makes Memory (halfLife=null) ≠ Dream (halfLife finite). The dial is the ergonomic interface; **its value regenerates** each consolidation beat from cross-plane coupling + access-history (the basin, not the point — `regenerator-attractor`), never a stored scalar. `persistence_io` keeps the **policy + witness**, not the effective standing. Decay rides **recall + the consolidation beat** (event-indexed), never a wall-clock. **[BUILT: `persistence_io` (policy+witness). DESIGNED: the regenerated-standing readout.]**
@@ -70,7 +70,9 @@ Crash-safe **by re-derivation, not a WAL**: the CC/Codex/Copilot transcript IS t
 - **Single cid gate** — `derive_cid = sha256(source_file)_<chunk>` full-hex; the turn-key rides metadata, never the cid (no clobber).
 - **Multi-surface source-caps** — `capture_sources` (claude/codex/copilot; Copilot on the SQLite store, not the dead `events.jsonl`); bulk + live, main + sub-agent, idempotent.
 - **Warm embed-in-engine** — `embed_cap` (minilm/384, process-cached), store-compatible with the mine-path.
-- **The driver** — `capture_session.drive_capture` lit the dark engine: real-capture landed==turn-count (the ~37× flush-leak dissolved).
+- **The rooted stream** — `capture_session.compose_memory_stream_sensorium` lights the engine: one nameless
+  `#has {root · land · embed · source-per-pass · planes-per-pass · observer}` entity carries live and harvest
+  capture alike; real-capture landed==turn-count (the ~37× flush-leak dissolved).
 - **Worldline + FULL kapae** — `worldline_io` (bitemporal fork-DAG) + branch-mute cascade across the pins (recall excludes muted; un-kapae restores; move-not-delete; survives kill-9).
 
 **Physics-critical stamps kept** (turn_key · chunk_index · source_file · surface · sidechain + wing/room + embedder-id). **Enrichment stamps deferred** (voices/band/agent-handle/drift) — they *emerge* from the Li/Ki detection when the sensorium breathes; stamping at capture would freeze a guess. `lar_ffz` left for the streaming gate to mint.

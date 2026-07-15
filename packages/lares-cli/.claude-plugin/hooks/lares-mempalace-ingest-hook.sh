@@ -114,6 +114,22 @@ for path in files[:1] + [sys.argv[1]]:
             if c: print(c); sys.exit(0)
 ' "$transcript" 2>/dev/null)"
 fi
+# Copilot CLI's authoritative project cwd lives beside the selected session in
+# the native SQLite store.  Do not let an event hook's ambient cwd rename a
+# session's wing.
+if [ -z "$project_cwd" ] && [ "${transcript##*/}" = "session-store.db" ] && [ -n "${sid:-}" ]; then
+project_cwd="$(python3 - "$transcript" "$sid" <<'PY' 2>/dev/null
+import sqlite3, sys
+try:
+    con = sqlite3.connect(f"file:{sys.argv[1]}?mode=ro", uri=True)
+    row = con.execute("SELECT cwd FROM sessions WHERE id=?", (sys.argv[2],)).fetchone()
+    if row and isinstance(row[0], str): print(row[0])
+finally:
+    try: con.close()
+    except Exception: pass
+PY
+)"
+fi
 base="$(basename "${project_cwd:-${cwd:-$PWD}}")"
 slug="$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | tr ' -' '__' | sed 's/[^a-z0-9_]//g')"
 [ -n "$slug" ] || slug="unsorted"
@@ -121,54 +137,50 @@ wing="wing_${slug}"
 fi
 
 # Stage just this transcript so sibling scratch / memory / json never get swept.
-# Claude .jsonl + Codex rollout are mined as-is (mempalace parses both); Copilot
-# events.jsonl has no mempalace parser → normalize it to a Claude-shaped jsonl first.
-# STABLE per-wing staging path — never mktemp: mempalace's file-level dedup keys on
-# the staged path, so an ephemeral dir re-mints every drawer on each daemon-down
-# fallback mine (the 2026-07-01 duplicate-drawer bite). Same session → same path.
-stage="$_lares_state/capture-stage/$wing"
-mkdir -p "$stage" 2>/dev/null || exit 0
-# Surface the drawer's origin (staged name prefixed `<surface>__…` → lar_surface).
+# Claude .jsonl + Codex rollout stage as-is. Copilot CLI remains a native SQLite pointer;
+# Copilot VS Code JSONL still takes its declared adapter path during bulk comparison.
+# A live hook owns a source-scoped directory under the ONE harvest-stage root, separate from
+# bulk's `bulk/...` and the vanilla comparator's `comparator/...` lanes. The original filename stays intact; the directory
+# names ingress only, never memory identity.
+# Surface comes from the native path, not a staging filename prefix.
 case "$transcript" in
   */.codex/sessions/*)      surface=codex ;;
+  */GitHub.copilot-chat/transcripts/*) surface=copilot-vscode ;;
   */.copilot/session-store.db) surface=copilot-cli ;;
   *)                        surface=claude ;;
 esac
+direct_sqlite=0
+if [ "$surface" != "copilot-cli" ]; then
+  source_key="$(printf '%s' "$transcript" | sha256sum 2>/dev/null | cut -c1-16)"
+  [ -n "$source_key" ] || exit 0
+  stage="$_lares_state/harvest-stage/live/$wing/$surface/$source_key"
+  mkdir -p "$stage" 2>/dev/null || exit 0
+else
+  direct_sqlite=1
+fi
 case "$transcript" in
   */.copilot/session-store.db)
-    # session-store.db holds EVERY session; the normalizer exports one jsonl per
-    # session into a dir + a stdout manifest. Stage just THIS session's file (by sid).
-    # The stage dir is SHARED per wing (stable path law) — clean only our own files,
-    # never the dir: a concurrent session of the same wing may be mid-mine.
-    HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"
-    NORM="$HOOK_DIR/../../../../packages/lararium-mempalace/scripts/copilot_sqlite_normalize.py"
+    # The database itself is the durable native source. Pass its session selector to Python;
+    # no Claude-shaped export and no staging spelling sits between the two.
     [ -n "${sid:-}" ] || exit 0
-    raw="$stage/raw-$$"; mkdir -p "$raw"
-    dst="$stage/${surface}__$sid.jsonl"
-    python3 "$NORM" "$transcript" "$raw" >/dev/null 2>&1 || { rm -rf "$raw"; exit 0; }
-    [ -f "$raw/$sid.jsonl" ] || { rm -rf "$raw"; exit 0; }
-    mv "$raw/$sid.jsonl" "$dst" 2>/dev/null || { rm -rf "$raw"; exit 0; }
-    rm -rf "$raw"
     ;;
   *)
-    dst="$stage/${surface}__$(basename "$transcript")"
+    dst="$stage/$(basename "$transcript")"
     ln -f "$transcript" "$dst" 2>/dev/null || cp -f "$transcript" "$dst" 2>/dev/null || exit 0
     ;;
 esac
 
-# Detached: drawer mine (leg 1, verbatim — VM-free, ALWAYS lands) THEN lar-telemetry
-# (leg 2, the gradient readings) THROUGH the @admin seat, then clean up.
-#   lar-telemetry routes the lar_* projection through the running @admin daemon
-#   (mempalace through the seat, Option D). Daemon down → telemetry no-ops; the
-#   verbatim drawer already landed and the `lares harvest --all` lar_hv sweep
-#   re-enriches it later (verbatim-always / telemetry-eventual,
-#   lar:///ha.ka.ba/lararium/api/lar-telemetry).
+# Detached: submit one native source pointer to the serialized Python holder.
+# The source cap derives its CID ledger and idempotently lands the fresh tail;
+# telemetry remains a separate, best-effort projection.
 (
-  # DRAWER leg — route THROUGH the @daemon nalu (the {chat}→@daemon-nalu→mempalace path): each new
-  # turn → `capture` verb → capture cap → WAL → flush `mine --source ndjson`. `lares capture` falls
-  # back to a direct `mempalace mine --extract exchange` when the daemon is down (verbatim-always),
-  # so the drawer never gets lost. Idempotent (per-wing capture watermark).
-  "$LARES" capture "$stage" --wing "$wing" >/dev/null 2>&1
+  # The CLI sends a descriptor only. SQLite remains SQLite all the way to the
+  # source cap; file-backed surfaces use their stable live pointer directory.
+  if [ "$direct_sqlite" = 1 ]; then
+    "$LARES" capture "$transcript" --wing "$wing" --session-id "$sid" >/dev/null 2>&1
+  else
+    "$LARES" capture "$stage" --wing "$wing" >/dev/null 2>&1
+  fi
   # Tasked-spirit (sub-agent) verbatim, DISTINCT from the main agent — mines
   # <session>/subagents/agent-*.jsonl into wing_<w>__spirits, named from each
   # handoff (Mask → Pet-Name-by-role), both sides. Reads the ORIGINAL transcript
@@ -177,9 +189,9 @@ esac
   # Gradient readings (lar-telemetry through @admin) on both wings — parent + spirits.
   "$LARES" telemetry --wing "$wing" >/dev/null 2>&1
   "$LARES" telemetry --wing "${wing}__spirits" >/dev/null 2>&1
-  # Remove only OUR staged file — the wing stage dir is shared (stable path law);
-  # a concurrent same-wing session's file must survive our cleanup.
-  rm -f "$dst"
+  # Keep live pointers stable. Removing a shared pointer after one Stop races a
+  # simultaneous Stop for the same session; it also creates a growing trail of
+  # per-run stage names. One source-scoped directory is the durable live lane.
 ) >/dev/null 2>&1 &
 
 exit 0

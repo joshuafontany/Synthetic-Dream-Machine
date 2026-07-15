@@ -65,8 +65,8 @@ def test_report_repeats_byte_identical():
     assert a == b
 
 
-def test_cli_refuses_loud_when_no_bed_named():
-    with pytest.raises(SystemExit, match="no bed named"):
+def test_cli_refuses_loud_when_no_sensorium_named():
+    with pytest.raises(SystemExit, match="no sensorium named"):
         ci.main([])
 
 

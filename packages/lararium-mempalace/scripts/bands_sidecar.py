@@ -32,7 +32,7 @@ drawer_io-style NDJSON over stdio (the established sidecar contract). Faces:
     stability_gate · ffz_cells (pure, chroma-free — the VERIFY surface)
   * `decompose --signal <file|-> [--planes N]`  → the full stack over a raw signal
         matrix → one JSON summary (bands · boundaries · cuts · repro_grade) on stdout
-  * `analyze  --palace <dir> [--signal <file>]` → read the corpus content(+form)
+  * `analyze  --sensorium <dir> [--signal <file>]` → read the corpus content(+form)
         embeddings back out of the scratch palace, build the cohesion signal, run the
         stack → NDJSON lar_ffz cells + a final JSON summary. GRACEFUL: no chroma /
         mempalace / no vectors ⇒ `{"note":"bands-skipped: …","cells":0}`, the content /
@@ -41,7 +41,7 @@ drawer_io-style NDJSON over stdio (the established sidecar contract). Faces:
 Run under the mempalace venv (PYTHONPATH=<repo>/mempalace only for `analyze`'s chroma
 readback; `decompose` needs neither):
   ~/.venv/bin/python3 bands_sidecar.py decompose --signal fixture.ndjson
-  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 bands_sidecar.py analyze --palace <dir>
+  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 bands_sidecar.py analyze --sensorium <dir>
 
 Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-bands
 """
@@ -1365,9 +1365,9 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
 # ── the palace readback — the content(+form) embeddings feed (chroma) ─────────────────────
 
 
-def _read_palace_planes(palace_dir: str) -> tuple[list[np.ndarray], list[str], str]:
-    """Read the corpus content (+ form/structure when present) embeddings back out of the
-    scratch mempalace at `palace_dir`, IN corpus sequence order. Returns (planes, ids, note).
+def _read_sensorium_planes(sensorium: str) -> tuple[list[np.ndarray], list[str], str]:
+    """Read corpus content embeddings from a rooted sensorium, IN corpus sequence order.
+    Returns (planes, ids, note).
     NEVER re-embeds — reads the STORED nomic vectors (the readback discipline of drawer_io's
     cmd_embeddings). Graceful: no chroma / mempalace / no vectors ⇒ ([], [], note)."""
     try:
@@ -1375,7 +1375,7 @@ def _read_palace_planes(palace_dir: str) -> tuple[list[np.ndarray], list[str], s
     except Exception as exc:  # noqa: BLE001 — no mempalace/chroma → bands-skipped
         return [], [], f"bands-skipped: no mempalace ({type(exc).__name__})"
     try:
-        col = get_collection(palace_dir, _skip_identity_check=True)
+        col = get_collection(os.path.join(sensorium, "content"), _skip_identity_check=True)
     except Exception as exc:  # noqa: BLE001
         return [], [], f"bands-skipped: no content store ({type(exc).__name__})"
     try:
@@ -1443,15 +1443,46 @@ def cmd_decompose(args) -> None:
     sys.stdout.write(json.dumps(summary) + "\n")
 
 
+def analyze_sensorium(sensorium: str, *, boot: int = 40, gate: str = "bootstrap") -> tuple[list[dict], dict]:
+    """Read one sensorium's stored vectors and return its FFZ cells plus summary.
+
+    The function holds the production seam; the CLI merely serializes its result.  It never
+    embeds or mutates content, so capture can call it after a successful durable landing.
+    """
+    planes, ids, note = _read_sensorium_planes(sensorium)
+    if not planes or planes[0].shape[0] < 2:
+        return [], {"note": note, "cells": 0, "bands": 0}
+    m = min(p.shape[0] for p in planes)
+    tree_matrix = np.hstack([p[:m] for p in planes])
+    cohesion = cohesion_signal(planes)
+    spine_signal = cohesion.mean(axis=1) if cohesion.size else None
+    if tree_matrix.shape[0] < 2:
+        return [], {"note": f"bands-skipped: flat signal ({note})", "cells": 0, "bands": 0}
+    out = run_stack(tree_matrix, spine_signal=spine_signal, n_boot=boot, gate_method=gate)
+    cells = []
+    for row in out["cells"]:
+        rec = {"lar_ffz": row["lar_ffz"], "repro_grade": row["repro_grade"], "cells": row["cells"]}
+        if row["index"] < len(ids):
+            rec["id"] = ids[row["index"]]
+        cells.append(rec)
+    return cells, {
+        "note": f"bands: {out['tree']['n_cuts']} cuts · {out['gate']['reproduced_cuts']} reproduced / {out['gate']['fragile_cuts']} fragile · engine {out['tree']['engine']} · {note}",
+        "cells": len(cells), "bands": out["spine"]["levels"], "consensus": out["gate"]["consensus"],
+        "engine": out["tree"]["engine"], "r_available": out["r_available"],
+    }
+
+
 def cmd_analyze(args) -> None:
-    """Read the corpus embeddings from the scratch palace (or --signal), run the stack, and
-    emit NDJSON lar_ffz cells + a final JSON summary. GRACEFUL: no chroma / no vectors ⇒ a
-    single `{"note":"bands-skipped: …","cells":0}` summary (the content plane stands)."""
+    """Read corpus embeddings from a sensorium (or --signal), then emit FFZ NDJSON."""
     if args.signal:
         planes, ids, note = [_load_signal(args.signal)], None, "signal-file"
         planes = [p for p in planes if p.size]
     else:
-        planes, ids, note = _read_palace_planes(args.palace)
+        cells, summary = analyze_sensorium(args.sensorium, boot=args.boot, gate=args.gate)
+        for cell in cells:
+            sys.stdout.write(json.dumps(cell) + "\n")
+        sys.stdout.write(json.dumps(summary) + "\n")
+        return
     if not planes or planes[0].shape[0] < 2:
         sys.stdout.write(json.dumps({"note": note, "cells": 0, "bands": 0}) + "\n")
         return
@@ -1595,8 +1626,8 @@ def main() -> None:
     d.add_argument("--gate", default="bootstrap", choices=["bootstrap", "jackknife"])
     d.set_defaults(fn=cmd_decompose)
 
-    a = sub.add_parser("analyze", help="corpus palace (or --signal) → NDJSON lar_ffz cells + summary")
-    a.add_argument("--palace", default="", help="the corpus scratch palace dir (content readback)")
+    a = sub.add_parser("analyze", help="corpus sensorium (or --signal) → NDJSON lar_ffz cells + summary")
+    a.add_argument("--sensorium", default="", help="the corpus sensorium root (content readback)")
     a.add_argument("--signal", default="", help="bypass chroma: read the signal from this NDJSON file")
     a.add_argument("--boot", type=int, default=40)
     a.add_argument("--gate", default="bootstrap", choices=["bootstrap", "jackknife"])

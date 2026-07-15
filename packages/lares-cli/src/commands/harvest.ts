@@ -26,17 +26,16 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync, rmSync, unlinkSync } from "node:fs";
 import { homedir } from "node:os";
-import { basename, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/mempalace";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
-import { larRoot, larDataDir, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
+import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
 import { wingFromDir, readCwdFromTranscript } from "../wing-law.js";
 import { partitionEphemeral } from "../ephemeral.js";
-import { makeHarvestPacer, type PacerStep } from "../harvest-pacer.js";
 import { atomicWriteFileSync, palaceOrgans, setupPalaceOrgans, organHealthy, type PalaceSetupStep } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor, type LaresError } from "../render.js";
@@ -326,19 +325,18 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
 // to repair. (The sovereign store's index health rides content_io's own chroma upsert.)
 
 
-const COPILOT_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_normalize.py");
-// New copilot format: the conversation moved from per-session events.jsonl (gone in
-// CLI 1.0.6x) to a global SQLite store ~/.copilot/session-store.db. This exporter
-// reads it → per-session Claude-shaped jsonl (Scrivener, 2026-06-25).
 const COPILOT_SQLITE_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_sqlite_normalize.py");
 
-/** One discovered transcript: where it is, which wing it routes to, and whether it needs normalizing. */
+/** One discovered source stream and its explicit routing identity. */
 export interface HarvestEntry {
   readonly file: string;
   readonly wing: string;
-  readonly normalize: boolean; // true → copilot events.jsonl → run copilot_normalize.py
-  readonly stageName: string;  // stable filename in the per-wing stage dir
+  readonly stageName: string;  // display/export name; staging preserves the native basename
   readonly source: string;     // claude | codex | copilot-vscode | copilot-cli
+  /** Native Copilot SQLite session selector; absent for file-backed surfaces. */
+  readonly sessionId?: string;
+  /** Spirit files ride the dedicated `cmdSubagents` route in the sovereign lane. */
+  readonly subagent: boolean;
 }
 
 /** Recursively collect `.jsonl` files under a root whose basename passes `match`. */
@@ -400,7 +398,7 @@ export function discoverClaude(): HarvestEntry[] {
     if (first === undefined) continue;
     const cwd = readCwdFromTranscript(first);
     const wing = cwd ? wingFromDir(cwd) : `wing_${ent.name.replace(/^-+/, "").replace(/[^a-zA-Z0-9]+/g, "_").toLowerCase() || "unsorted"}`;
-    for (const j of jsonls) out.push({ file: j, wing, normalize: false, stageName: basename(j), source: "claude" });
+    for (const j of jsonls) out.push({ file: j, wing, stageName: basename(j), source: "claude", subagent: false });
 
     // The tasked spirits. Each session keeps its sub-agent transcripts one level DOWN, at
     // `<session-id>/subagents/agent-<id>.jsonl`, so a flat read of the project dir sees none of them.
@@ -413,9 +411,9 @@ export function discoverClaude(): HarvestEntry[] {
         out.push({
           file: join(spiritDir, f),
           wing: `${wing}__spirits`,
-          normalize: false,
           stageName: `${basename(j, ".jsonl")}__${f}`,   // the parent session keys the spirit's provenance
           source: "claude",
+          subagent: true,
         });
       }
     }
@@ -429,7 +427,7 @@ export function discoverCodex(): HarvestEntry[] {
   const out: HarvestEntry[] = [];
   for (const f of walkJsonl(join(homedir(), ".codex", "sessions"), (n) => n.startsWith("rollout-"))) {
     const cwd = readCodexCwd(f);
-    out.push({ file: f, wing: cwd ? wingFromDir(cwd) : "wing_codex_unsorted", normalize: false, stageName: basename(f), source: "codex" });
+    out.push({ file: f, wing: cwd ? wingFromDir(cwd) : "wing_codex_unsorted", stageName: basename(f), source: "codex", subagent: false });
   }
   return out;
 }
@@ -454,7 +452,7 @@ export function discoverCopilotVscode(): HarvestEntry[] {
       if (!existsSync(tdir)) continue;
       for (const n of readdirSync(tdir).filter((f) => f.endsWith(".jsonl"))) {
         const f = join(tdir, n);
-        out.push({ file: f, wing: scrapeWing(f) ?? "wing_copilot_unsorted", normalize: true, stageName: n, source: "copilot-vscode" });
+        out.push({ file: f, wing: scrapeWing(f) ?? "wing_copilot_unsorted", stageName: n, source: "copilot-vscode", subagent: false });
       }
     }
   }
@@ -463,21 +461,17 @@ export function discoverCopilotVscode(): HarvestEntry[] {
 
 export function discoverCopilotCli(): HarvestEntry[] {
   const out: HarvestEntry[] = [];
-  // The Copilot CLI keeps its conversations in ONE global SQLite store. Python owns the sqlite read and
-  // exports each session to a Claude-shaped jsonl, so these entries carry `normalize:false` — the miner
-  // eats them directly, with no second pass. Wing routing reads `sessions.cwd`, which the row states
-  // outright; nothing scrapes a path for it.
+  // The Copilot CLI keeps its conversations in ONE global SQLite store. List its native session rows;
+  // the Python capture cap reads this same database directly, narrowed by `sessionId` when supplied.
   const db = join(homedir(), ".copilot", "session-store.db");
   if (existsSync(db)) {
-    const exportDir = join(larHarvestStageDir(), ".copilot-export");
     try {
-      mkdirSync(exportDir, { recursive: true });
-      const manifest = execFileSync(PY, [COPILOT_SQLITE_NORM, db, exportDir], { maxBuffer: 1 << 30, encoding: "utf8" });
+      const manifest = execFileSync(PY, [COPILOT_SQLITE_NORM, "--list", db], { maxBuffer: 1 << 30, encoding: "utf8" });
       for (const line of manifest.split("\n").filter(Boolean)) {
-        let m: { id: string; cwd?: string; path: string };
-        try { m = JSON.parse(line) as { id: string; cwd?: string; path: string }; } catch { continue; }
-        if (!m.path) continue;
-        out.push({ file: m.path, wing: m.cwd ? wingFromDir(m.cwd) : "wing_copilot_unsorted", normalize: false, stageName: `${m.id}.jsonl`, source: "copilot-cli" });
+        let m: { id: string; cwd?: string };
+        try { m = JSON.parse(line) as { id: string; cwd?: string }; } catch { continue; }
+        if (!m.id) continue;
+        out.push({ file: db, wing: m.cwd ? wingFromDir(m.cwd) : "wing_copilot_unsorted", stageName: m.id, source: "copilot-cli", sessionId: m.id, subagent: false });
       }
     } catch { /* the export failed — report nothing rather than a partial wing */ }
   }
@@ -490,6 +484,8 @@ interface WingHarvest {
    *  next pass (the file simply is not there), so a count that folds in what it dropped reads as
    *  success over an empty stage. */
   readonly transcripts: number;
+  /** Native non-file streams submitted directly to Python (currently Copilot SQLite sessions). */
+  readonly nativeSources?: number;
   /** Transcripts that did NOT stage, and why. Surfaced, never swallowed. */
   readonly dropped?: number;
   readonly droppedFiles?: ReadonlyArray<{ file: string; why: string }>;
@@ -499,41 +495,36 @@ interface WingHarvest {
   readonly spiritSessions?: number;
   /** The last spirit-sweep failure, when one surfaced (the sweep runs per-session, best-effort). */
   readonly spiritSweep?: string;
-  /** The flow-control step this wing's completion cost fed the pacer (absent on the last wing). */
-  readonly pacing?: PacerStep;
 }
 
-// --- FLOW CONTROL: the bulk feeder pacer (harvest-pacer.ts) -----------------
-// The sink's own lived cost paces the source: each wing-batch's completion cost (inflated by
-// the capture WAL's live depth — sink pressure) servos the inter-batch delay; the FFZ
-// incommensurable floor keeps bulk from phase-locking with the live turn-Stop capture.
+/** A stable source scope preserves the native filename while preventing basename collisions. */
+export function stageSourceDir(root: string, entry: Pick<HarvestEntry, "file" | "source">): string {
+  const key = createHash("sha256").update(entry.file).digest("hex").slice(0, 16);
+  return join(root, entry.source, key);
+}
 
-/** Nominal WAL bytes-per-record for the cheap depth estimate. A real record (a full exchange as
- *  one JSON line) runs WELL over 1 KiB, so dividing by this UNDERSTATES record size and therefore
- *  OVER-reports depth — the conservative direction (over-reporting only widens the window). */
-const WAL_NOMINAL_RECORD_BYTES = 1024;
-
-/**
- * READ-ONLY depth estimate of the @daemon capture WAL (`<larDataDir>/capture-nalu/wal.ndjson`) —
- * write-ahead-logged records since the engine's last fully-drained compact. Reads ONE cheap
- * `statSync` (bytes ÷ nominal record size), never the whole file — the old line-count read pulled
- * a 43 MB WAL into memory on EVERY pacer step. HONEST BOUND twice over: the WAL is append-only
- * until `compactIfDrained` truncates it, and the nominal divisor over-counts records — both errors
- * point the conservative way (a wider feeder window). No engine edit: the file IS the engine's
- * own durable depth surface.
- */
-function readCaptureWalDepth(): number {
-  try {
-    const bytes = statSync(join(larDataDir(), "capture-nalu", "wal.ndjson")).size;
-    return Math.ceil(bytes / WAL_NOMINAL_RECORD_BYTES);
-  } catch {
-    return 0; // no WAL (daemon never captured / already compacted) — no pressure
+/** One bulk harvest owns the mutable `bulk/` lane. A dead owner is reclaimed; a live one refuses. */
+export function acquireHarvestAllLock(): () => void {
+  const lockDir = join(dirname(larHarvestStageDir()), "locks");
+  const lockPath = join(lockDir, "harvest-all.lock");
+  mkdirSync(lockDir, { recursive: true });
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      writeFileSync(lockPath, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }) + "\n", { flag: "wx", mode: 0o600 });
+      return () => { try { rmSync(lockPath, { force: true }); } catch { /* release is best-effort */ } };
+    } catch (err) {
+      if (!(err instanceof Error) || !(err as NodeJS.ErrnoException).code || (err as NodeJS.ErrnoException).code !== "EEXIST") throw err;
+      let pid = 0;
+      try { pid = Number((JSON.parse(readFileSync(lockPath, "utf8")) as { pid?: unknown }).pid) || 0; } catch { /* malformed lock is not proof of ownership */ }
+      let alive = pid > 0;
+      if (alive) {
+        try { process.kill(pid, 0); } catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== "ESRCH"; }
+      }
+      if (alive) throw new Error(`another \`lares harvest --all\` owns ${lockPath} (pid ${pid}); wait for it to finish`);
+      rmSync(lockPath, { force: true });
+    }
   }
-}
-
-/** Async hold between wing-batches (the pacer's delay — never a wall-clock config). */
-function holdMs(ms: number): Promise<void> {
-  return new Promise((res) => setTimeout(res, Math.max(0, Math.round(ms))));
+  throw new Error(`could not acquire harvest lock ${lockPath}`);
 }
 
 async function runHarvestAll(args: ParsedArgs): Promise<number> {
@@ -571,49 +562,57 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     return 3;
   }
 
-  const stageRoot = larHarvestStageDir();
+  let releaseHarvestLock: (() => void) | undefined;
+  try {
+    releaseHarvestLock = acquireHarvestAllLock();
+  } catch (err) {
+    const error: LaresError = { code: "conflict", message: err instanceof Error ? err.message : String(err), hint: "Let the active bulk harvest finish, then re-run." };
+    emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+    return 1;
+  }
+  try {
+  // One canonical stage root, three isolated lanes: live hooks use `live/`, this bulk pass uses
+  // `bulk/`, and guest Mempalace uses `mempalace/`. A lane boundary—not a filename or a
+  // per-run directory—prevents one actor from consuming another actor's batch.
+  const stageRoot = join(larHarvestStageDir(), "bulk");
+  // Clear only a previous interrupted BULK snapshot. Live and comparator lanes sit beside it and
+  // remain untouched; the command lease above prevents a concurrent bulk run from losing its stage.
+  if (!dryRun) rmSync(stageRoot, { recursive: true, force: true });
   const byWing = new Map<string, HarvestEntry[]>();
-  for (const e of entries) {
+  for (const e of entries.filter((entry) => !entry.subagent)) {
     const arr = byWing.get(e.wing);
     if (arr) arr.push(e); else byWing.set(e.wing, [e]);
   }
-
-  // The FLOW-CONTROL pacer: per-run seed (the secret phase — pid+time, never shared), WAL-depth
-  // pressure seam wired to the daemon's own durable log. Self-clocking — no wall-clock config.
-  const pacer = makeHarvestPacer({
-    seedHex: process.pid.toString(16) + Date.now().toString(16),
-    readDepth: readCaptureWalDepth,
-  });
-  let wingIndex = 0;
 
   const results: WingHarvest[] = [];
   for (const [wing, es] of byWing) {
     const sources = [...new Set(es.map((e) => e.source))].sort().join("+");
     if (dryRun) {
-      results.push({ wing, transcripts: es.length, sources, mined: "dry-run" });
+      const nativeSources = es.filter((entry) => entry.source === "copilot-cli").length;
+      results.push({ wing, transcripts: es.length - nativeSources, ...(nativeSources ? { nativeSources } : {}), sources, mined: "dry-run" });
       continue;
     }
-    const batchT0 = Date.now();
-    // stage into a stable per-wing dir (normalize copilot, hardlink the rest) so
-    // mempalace's source_file dedup keeps the mine idempotent across runs.
+    // Stage file-backed sources in a stable per-wing directory. Copilot SQLite
+    // sessions bypass staging and stay native until the Python source cap.
     const stage = join(stageRoot, wing);
     mkdirSync(stage, { recursive: true });
     // A transcript that fails to stage is REPORTED, never swallowed. A staging error is silent by
     // nature — the file simply is not there on the next pass — so a count that includes what it
     // dropped reads as success over an empty stage. `staged` counts what actually landed; `dropped`
     // names what did not, with the reason.
+    const stagedEntries = es.filter((entry) => entry.source !== "copilot-cli");
+    const sqliteEntries = es.filter((entry) => entry.source === "copilot-cli");
     const dropped: Array<{ file: string; why: string }> = [];
     let staged = 0;
-    for (const e of es) {
-      // surface-prefixed so the drawer's source_file → lar_surface in the writeback
-      const dst = join(stage, `${e.source}__${e.stageName}`);
-      if (existsSync(dst)) { staged += 1; continue; }
+    for (const e of stagedEntries) {
+      // The filename stays native. The parent source scope carries isolation, never memory
+      // identity; Python receives the original basename and derives the same CID as direct/live.
+      const scope = stageSourceDir(stage, e);
+      const dst = join(scope, basename(e.file));
       try {
-        if (e.normalize) {
-          writeFileSync(dst, execFileSync(PY, [COPILOT_NORM, e.file], { maxBuffer: 1 << 30, encoding: "utf8" }));
-        } else {
-          try { linkSync(e.file, dst); } catch { copyFileSync(e.file, dst); }
-        }
+        mkdirSync(scope, { recursive: true });
+        if (existsSync(dst)) unlinkSync(dst);
+        try { linkSync(e.file, dst); } catch { copyFileSync(e.file, dst); }
         staged += 1;
       } catch (err) {
         dropped.push({ file: e.file, why: err instanceof Error ? err.message.slice(0, 120) : String(err) });
@@ -626,23 +625,21 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     }
     let mined: number | string;
     try {
-      // CANON (the worker-routing now built): route the harvest THROUGH the @daemon — cmdCapture submits
-      // each turn via the capture verb → the @daemon's capture cap → in-VM annotate (lar_* + AST) →
-      // flush → mempalace verbatim + .structurepalace AST + the deterministic hash-bindings (lar_ast_hash ·
-      // lar_verbatim_sha). Born-annotated, single-write through the nalu gates. (cmdCapture self-falls-
-      // back to a DIRECT verbatim mine if the @daemon is down — the verbatim drawer is never lost.)
-      const rc = await cmdCapture({ command: "capture", positional: [stage], options: { wing }, flags: {} });
-      mined = rc === 0 ? "routed→@daemon" : `capture-rc-${rc}`;
+      // Submit source descriptors only. The serialized Python holder owns native parsing,
+      // CID derivation, embedding, and durable landing; no TypeScript turn path exists here.
+      const stagedRc = stagedEntries.length === 0 ? 0 : await cmdCapture({ command: "capture", positional: [stage], options: { wing }, flags: {} });
+      let sqliteRc = 0;
+      for (const entry of sqliteEntries) {
+        const rc = await cmdCapture({ command: "capture", positional: [entry.file], options: { wing, ...(entry.sessionId ? { "session-id": entry.sessionId } : {}) }, flags: {} });
+        if (rc !== 0) sqliteRc = rc;
+      }
+      mined = stagedRc === 0 && sqliteRc === 0 ? "routed→python" : `capture-rc-${stagedRc || sqliteRc}`;
     } catch (e) {
       mined = "capture-failed: " + String((e as Error).message ?? "").trim().slice(0, 160);
     }
-    // SPIRIT SWEEP (the --all spirits leg): every Claude session's tasked-spirit transcripts
-    // ride the SAME road the Stop hook takes — cmdSubagents routes each spirit turn through
-    // the @daemon capture verb (daemon-first; the direct ndjson mine only as the daemon-down
-    // verbatim-always fallback), into `<wing>__spirits` beside the project wing (the project-
-    // wing law flows through). Idempotent: the per-spirits-wing capture watermark skips turns
-    // already submitted, so re-runs cost one listSpiritFiles stat per session. The sweep reads
-    // the ORIGINAL transcript path (spirits live at `<session>/subagents/`, never staged).
+    // Spirit sweep: each Claude parent points its subagent files at the same Python
+    // source holder, landing in `<wing>__spirits`. The original parent path names
+    // the subagent directory; no staged copy invents source identity.
     let spiritSessions = 0;
     let spiritSweep: string | undefined;
     for (const e of es) {
@@ -655,25 +652,19 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
         spiritSweep = "subagents-failed: " + String((err as Error).message ?? "").trim().slice(0, 120);
       }
     }
-    // FLOW CONTROL (cuts 1/3/4): this batch's completion cost — inflated by the sink's live
-    // WAL depth — servos the delay held BEFORE the next wing; the FFZ incommensurable floor
-    // keeps the cadence from phase-locking with live capture. The last wing holds no delay.
-    wingIndex += 1;
-    let pacing: PacerStep | undefined;
-    if (wingIndex < byWing.size) {
-      pacing = pacer.next(Date.now() - batchT0);
-      await holdMs(pacing.delayMs);
-    }
     results.push({
       wing, transcripts: staged, sources, mined,
+      ...(sqliteEntries.length ? { nativeSources: sqliteEntries.length } : {}),
       ...(dropped.length ? { dropped: dropped.length, droppedFiles: dropped } : {}),
       ...(spiritSessions ? { spiritSessions } : {}),
       ...(spiritSweep ? { spiritSweep } : {}),
-      ...(pacing ? { pacing } : {}),
     });
   }
 
-  results.sort((a, b) => b.transcripts - a.transcripts);
+  results.sort((a, b) => (b.transcripts + (b.nativeSources ?? 0)) - (a.transcripts + (a.nativeSources ?? 0)));
+  // Bulk owns only its lane. The raw transcript remains the durable producer log; remove this
+  // replay-only snapshot after all Python passes return, including partial failures.
+  try { rmSync(stageRoot, { recursive: true, force: true }); } catch { /* scratch never blocks a report */ }
   // POST-HARVEST ENRICHMENT — the worldline membership pass: the absent BEAT cell in each
   // drawer's lar_ffz takes its turn's identity label (same-turn drawers share a beat cell).
   // Idempotent (only `_` cells fill; re-runs no-op), so it rides EVERY --all close. Best-effort:
@@ -691,31 +682,30 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   // (verbatim → contentpalace via caller-vector, AST → .structurepalace, form → .formpalace); the guest
   // ~/.mempalace stays untouched, so there is nothing of ours to repair in it. (The sovereign content
   // store's index health rides content_io's own chroma upsert — a follow-up if divergence ever shows.)
+  const complete = dryRun || results.every((r) => r.mined === "routed→python" && !r.dropped && !r.spiritSweep);
   emit(args, {
-    ok: true,
-    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon", ...(ffzEnrich ? { ffzEnrich } : {}), ...(pacer.trajectory().length ? { flowControl: pacer.trajectory() } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}) },
+    ok: complete,
+    ...(!complete ? { error: { code: "partial", message: "one or more source streams did not complete; inspect the per-wing results and re-run", hint: "The raw sources remain intact; re-running is safe after the named failure is fixed." } } : {}),
+    data: { wings: results, dryRun, mode: "all", routedThrough: "python-source-holder", ...(ffzEnrich ? { ffzEnrich } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}) },
     human: () => {
-      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
+      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} source stream(s) → Python`);
       if (organSteps) {
         const ran = organSteps.filter((s) => s.ran).length;
         console.log(`  organs front-run: stood ${ran} step(s) before mining (registry probe found absent organs)`);
       }
       for (const r of results)
-        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
-      console.log(`  routed through the @daemon nalu — verbatim → contentpalace (sovereign) · AST → .structurepalace · form → .formpalace · hash-bound`);
+        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} staged${r.nativeSources ? ` + ${r.nativeSources} native SQLite` : ""} [${r.sources}] · ${r.mined}${r.spiritSessions ? ` · spirits: ${r.spiritSessions} session(s) → __spirits` : ""}${r.spiritSweep ? ` · spirit-sweep: ${r.spiritSweep}` : ""}`);
+      console.log(`  routed as source pointers — Python reads native sources → contentpalace (sovereign) · hash-bound`);
       if (ffzEnrich) {
         if ("skipped" in ffzEnrich) console.log(`  ffz enrich:    skipped — ${ffzEnrich.skipped}`);
         else console.log(`  ffz enrich:    ${ffzEnrich.stamped} stamp(s) across ${ffzEnrich.braids} braid(s) — beat cells filled (idempotent)`);
       }
-      const flow = pacer.trajectory();
-      if (flow.length) {
-        // The servo's window trajectory — the live-light witness line (cuts 1/3/4).
-        const track = flow.map((s) => `${s.windowMs}→${s.delayMs}ms${s.depth ? `(wal ${s.depth})` : ""}`).join(" · ");
-        console.log(`  flow control:  servo window→delay per batch: ${track}`);
-      }
     },
   });
-  return 0;
+  return complete ? 0 : 1;
+  } finally {
+    releaseHarvestLock?.();
+  }
 }
 
 // The default room every harvest/capture drawer lands in (the "convos mine"). `--room` joins the
@@ -724,6 +714,35 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
 // `--room` refuses honestly (the override rides the DEFERRED @daemon-cap-wire); the default keeps
 // today's behavior byte-for-byte. Absent → default; equal-to-default → proceed unchanged.
 const DEFAULT_ROOM = "conversations";
+
+/**
+ * The one SOURCE identity for every capture ingress.
+ *
+ * A stage preserves the native filename. Its parent directory describes the
+ * ingress actor and source scope; it never becomes memory identity. The Python
+ * source-cap owns the final source key and CID derivation.
+ */
+const CAPTURE_SURFACES = ["claude", "codex", "copilot-cli", "copilot-vscode"] as const;
+type CaptureSurface = typeof CAPTURE_SURFACES[number];
+
+/** Derive the stable surface label from an existing staged name or its source path. */
+function captureSurface(file: string): CaptureSurface {
+  const staged = /(?:^|[/\\])(claude|codex|copilot-cli|copilot-vscode)(?:[/\\]|$)/.exec(file);
+  if (staged?.[1]) return staged[1] as CaptureSurface;
+  const normalized = file.replace(/\\/g, "/");
+  if (normalized.includes("/.codex/sessions/")) return "codex";
+  if (normalized.includes("/GitHub.copilot-chat/transcripts/")) return "copilot-vscode";
+  if (normalized.includes("/.copilot/")) return "copilot-cli";
+  return "claude";
+}
+
+/**
+ * Stable capture provenance, shared by live hook staging and every backfill.
+ * Exported for the ingress-law regression tests.
+ */
+export function captureSourceFile(wing: string, file: string): string {
+  return `${wing}/${captureSurface(file)}__${basename(file)}`;
+}
 
 /** Guard `--room`: null when the room stays the default (proceed); an exit code when a non-default
  *  room refuses honestly (the override awaits the @daemon-cap-wire). */
@@ -919,18 +938,12 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares capture <transcript|stageDir> --wing <wing>` — the FEED producer for the telemetry nalu.
+ * `lares capture <transcript|stageDir> --wing <wing>` — request Python source-stream capture.
  *
- * The DRAWER leg of the ingest, routed THROUGH the @daemon (the operator's `{chat}→@daemon-nalu→
- * mempalace` arrow): read NEW turns (readTurns, the same extractor the gradient harvest uses — no
- * divergence), submit each via the `capture` verb → the @daemon's capture cap → WAL → flush
- * `mine --source ndjson` → mempalace. Idempotent via a per-wing capture watermark (Stop fires per
- * response; only unseen turns submit).
- *
- * GRACEFUL FALLBACK (verbatim-always): the daemon down/unreachable → mine the target DIRECT (the
- * proven `mine --extract exchange` path), so the verbatim drawer never gets lost; mark the turns
- * captured so the nalu won't double on the next run. Distinct from `lares telemetry` (the lar_*
- * writeback leg), which already routes through the daemon with its own fallback.
+ * The CLI and daemon carry source identity only: `{ surface, pointer, wing, room, sessionId? }`.  Python reads
+ * the native transcript, derives stable CIDs, and upserts the sovereign content plane.  Re-running
+ * the same pointer re-derives its ledger and lands only the new tail; the TypeScript layer neither
+ * reads exchanges for capture nor holds a capture WAL.
  */
 export async function cmdCapture(args: ParsedArgs): Promise<number> {
   const roomGuard = guardRoom(args, "capture");
@@ -952,7 +965,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   try {
     const st = statSync(target);
     files = st.isDirectory()
-      ? readdirSync(target).filter((f) => f.endsWith(".jsonl")).map((f) => join(target, f))
+      ? walkJsonl(target, () => true)
       : [target];
   } catch { files = []; }
   if (!files.length) {
@@ -974,105 +987,28 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   }
 
   let did = "";
-  try { did = await operatorDid(); } catch { /* no key — the capture verb is un-gated; runVerb still reaches the daemon */ }
-
-  mkdirSync(HARVEST_DIR, { recursive: true });
-  const statePath = join(HARVEST_DIR, `${wing}.capture-state.json`);
-  const state = loadState(statePath);
-  const next: Record<string, string> = { ...state };
-
-  // Collect the CURRENT BATCH — every not-yet-captured exchange, each carrying its stable
-  // transcript ordinal (the ndjson chunk_index half of the deterministic drawer id,
-  // `sha256(source_file)_chunk`). BOTH legs below submit these same records under the same
-  // source_file + ordinal, so verb + fallback converge on ONE drawer per turn (the sink-side
-  // dedup + deterministic id make resubmission idempotent).
-  interface PendingTurn {
-    readonly key: string; readonly hash: string; readonly text: string;
-    readonly src: string; readonly chunk: number; readonly frontier?: readonly string[];
-  }
-  const pending: PendingTurn[] = [];
-  for (const file of files) {
-    // PREFIX the wing onto the source_file (`<wing>/<surface>__<run>.jsonl`): the @daemon capture path
-    // carries no `--wing`, so the node wing-stamp flush decodes this prefix into `metadata.wing` —
-    // otherwise every captured turn lands in the `?` wing. buildPatch reads the basename, so surface/
-    // handle derivation is unaffected.
-    const src = `${wing}/${basename(file)}`;
-    // The full turn-DAG of THIS transcript (every user/assistant message), for the branch-frontier:
-    // a same-session FORK (a turn with ≥2 children in the parentUuid DAG) makes both branches derive
-    // the same handle → the worldline collision. branchContextForTurn derives the per-turn frontier so
-    // the daemon's buildPatch keys distinct handles. A linear transcript carries no fork ⇒ no frontier.
-    const dagNodes: TurnNode[] = readTurns(file).map((t) => ({ uuid: t.uuid, parentUuid: t.parentUuid }));
-    let chunk = -1;
-    for (const turn of readExchanges(file)) {       // exchange-grain drawer (the ingest canon)
-      chunk += 1;                                    // the transcript ordinal — stable across runs
-      const key  = turnKeyOf(file, turn);
-      const hash = sha(turn.text);
-      if (state[key] === hash) continue;            // already captured (idempotent)
-      const branch = turn.uuid ? branchContextForTurn(dagNodes, turn.uuid) : undefined;
-      const frontier = branch?.frontier;
-      const frontierArr = frontier == null ? undefined : Array.isArray(frontier) ? frontier : [frontier];
-      pending.push({ key, hash, text: turn.text, src, chunk, ...(frontierArr && frontierArr.length ? { frontier: frontierArr } : {}) });
-    }
-  }
-
-  // SUBMIT under the SUSPEND LAW: a verb failure never infers "down" for the whole pipeline.
-  //   - a failure AFTER any success → SUSPEND the remainder (leave state unmarked; the next run
-  //     retries — safe, the sink dedups), never a bulk direct mine + mark-all.
-  //   - the daemon reads UNREACHABLE only when the whole run yields zero successes (the first
-  //     PROBE calls all fail, or every call fails) → the direct-mine fallback fires, for the
-  //     CURRENT batch only (verbatim-always).
-  const PROBE = 3;
-  let submitted = 0;
-  let failures = 0;
-  let halted = false;
-  for (const p of pending) {
-    if (halted) break;
+  try { did = await operatorDid(); } catch { /* the daemon still owns the routing boundary */ }
+  const sessionId = typeof args.options["session-id"] === "string" ? args.options["session-id"] : undefined;
+  const passes: Array<Record<string, unknown>> = [];
+  const failures: Array<{ pointer: string; error: string }> = [];
+  for (const pointer of files) {
+    const detected = captureSurface(pointer);
+    const surface = detected === "copilot-cli" ? "copilot" : detected;
     try {
-      const r = await runVerb(
-        "capture",
-        {
-          turnText: p.text, sourceFile: p.src,
-          // The USER turn's uuid — the .structurepalace provenance key (the kapae key). The SAME formula
-          // the rewind detector keys on (turn.uuid || sha(...)), so one gone uuid closes both stores.
-          turnKey: p.key,
-          // The stable transcript ordinal — the deterministic drawer-id chunk (converges both legs).
-          chunkIndex: p.chunk,
-          ...(p.frontier ? { frontier: [...p.frontier] } : {}),
-        },
-        did,
-        { timeoutMs: 5000 },
-      );
-      if (r.status !== "done") throw new Error(`capture status=${r.status}`);
-      next[p.key] = p.hash;
-      submitted += 1;
-    } catch {
-      failures += 1;
-      // One timeout amid successes = a wobble, not a down daemon: suspend, retry next run.
-      // Zero successes across PROBE consecutive failures = unreachable: stop probing, fall back.
-      if (submitted > 0 || failures >= PROBE) halted = true;
+      const r = await runVerb("capture", { surface, pointer, wing, room: DEFAULT_ROOM, ...(surface === "copilot" && sessionId ? { sessionId } : {}) }, did, { timeoutMs: 120_000 });
+      const output = ((r.results as { summary?: { output?: Record<string, unknown> } } | undefined)?.summary?.output) ?? {};
+      passes.push({ pointer, ...output });
+    } catch (err) {
+      failures.push({ pointer, error: err instanceof Error ? err.message : String(err) });
     }
   }
-  const daemonUnreachable = failures > 0 && submitted === 0;
-  const suspended = pending.length - submitted;
-
-  if (daemonUnreachable && pending.length > 0) {
-    // ALL telemetry flows through the @daemon nalu (the single-path invariant the nalu-gate work
-    // established) — there is NO direct-mine fallback. A direct mine would (a) bypass the gate and
-    // (b) write to the external guest ~/.mempalace. So an unreachable daemon SUSPENDS the batch:
-    // leave every turn unmarked and retry next run (the sink-side dedup makes the retry safe). Loud.
-    emit(args, {
-      ok: true,
-      data: { wing, submitted: 0, suspended, daemon: "unreachable", note: "all telemetry flows through the @daemon — no direct mine; turns suspended, next run retries" },
-      human: () => console.log(`[capture] @daemon unreachable → ${suspended} turn(s) SUSPENDED (all telemetry flows through the @daemon; start it, then re-run) (wing ${wing})`),
-    });
-    return 0;
-  }
-
-  try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+  const landed = passes.reduce((n, p) => n + (typeof p["landed"] === "number" ? p["landed"] : 0), 0);
+  const skipped = passes.reduce((n, p) => n + (typeof p["skipped"] === "number" ? p["skipped"] : 0), 0);
   emit(args, {
-    ok: true,
-    data: { wing, submitted, ...(ephemeralSkips.length ? { ephemeralSkipped: ephemeralSkips } : {}), ...(suspended > 0 ? { suspended, suspendedReason: "verb failure mid-run — turns left unmarked, next run retries (sink-side dedup guards)" } : {}) },
-    human: () => console.log(`[capture] ${submitted} turn(s) → @daemon nalu (wing ${wing})${suspended > 0 ? ` · ${suspended} turn(s) SUSPENDED (verb failure — next run retries)` : ""}`),
+    ok: failures.length === 0,
+    ...(failures.length ? { error: { code: "capture-failed", message: `${failures.length} source stream(s) failed`, hint: "The source remains durable; re-run after the daemon reports healthy." } } : {}),
+    data: { wing, sources: passes.length, landed, skipped, passes, failures, ...(ephemeralSkips.length ? { ephemeralSkipped: ephemeralSkips } : {}) },
+    human: () => console.log(`[capture] ${passes.length} Python source stream(s) → ${landed} landed · ${skipped} re-derived (wing ${wing})${failures.length ? ` · ${failures.length} failed` : ""}`),
   });
-  return 0;
+  return failures.length ? 1 : 0;
 }

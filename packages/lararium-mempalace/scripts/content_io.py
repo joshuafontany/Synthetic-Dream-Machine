@@ -203,6 +203,17 @@ class ContentStore:
 
     def put(self, cid: str, text: str, embedding: list, metadata: dict) -> dict:
         meta = metadata or {}
+        if not isinstance(meta, dict):
+            raise ValueError(f"content put {cid}: metadata must be one flat object")
+        # Chroma metadata has a scalar contract.  Enforce it at the sole durable write boundary
+        # rather than allowing a second `metadata`/`attributes` envelope (or a nested list) to
+        # become an alternative schema.  Every session source emits the canonical flat lar_* map.
+        nested = sorted(str(k) for k, value in meta.items() if isinstance(value, (dict, list, tuple, set)))
+        if nested:
+            raise ValueError(f"content put {cid}: nested metadata fields forbidden: {nested}")
+        envelopes = sorted(str(k) for k in meta if str(k).lower() in {"metadata", "attributes"})
+        if envelopes:
+            raise ValueError(f"content put {cid}: metadata envelope fields forbidden: {envelopes}")
         # Opt-in session-memory guards (NO-OP for generic corpora — both unset). A missing schema
         # key or a dim-mismatch RAISES, so the serve dispatch replies {ok:false,error} — fail LOUD,
         # never a silent off-schema or wrong-embedder write (the ack-after-proof law: a non-land

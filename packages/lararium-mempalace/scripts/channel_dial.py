@@ -56,10 +56,10 @@ projector's own stable record order (source_file, cid); no wall-clock anywhere; 
 comparator ward holds (~/.mempalace refused).
 
 Usage (the mempalace venv):
-  ~/.venv/bin/python3 channel_dial.py sweep --root ~/.lares/testbeds/kumulipo-wrapped \
-      [--extracted-root ~/.lares/testbeds/kumulipo-extracted] \
+  ~/.venv/bin/python3 channel_dial.py sweep --sensorium ~/.lares/testbeds/kumulipo-wrapped \
+      [--extracted-sensorium ~/.lares/testbeds/kumulipo-extracted] \
       [--lambdas 0,0.25,0.5,0.75,1.0] [--out <dir>]
-  ~/.venv/bin/python3 channel_dial.py compare --root-a <bed> --root-b <bed>
+  ~/.venv/bin/python3 channel_dial.py compare --sensorium-a <place> --sensorium-b <place>
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/channel-dial
 """
@@ -487,24 +487,24 @@ def main() -> None:
         description="channel_dial — the RED/BLACK channel dial over a wrapped bed's planes")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("sweep", help="walk the corpus-derived ladder; emit per-rung readings")
-    s.add_argument("--root", required=True, help="the wrapped bed root")
-    s.add_argument("--extracted-root", default=None, dest="extracted_root",
+    s.add_argument("--sensorium", required=True, help="the wrapped bed sensorium")
+    s.add_argument("--extracted-sensorium", default=None, dest="extracted_sensorium",
                    help="the extracted twin — the lowest rung compares against its assignment")
     s.add_argument("--lambdas", default=None,
                    help="comma-separated rungs in [0,1]; omitted, the bed's own crossing "
                         "spectrum sets the ladder")
-    s.add_argument("--out", default=None, help="rows land here (default <root>/channel-dial)")
+    s.add_argument("--out", default=None, help="rows land here (default <sensorium>/channel-dial)")
     x = sub.add_parser("spectrum", help="the analytic lambda* crossing spectrum of a bed")
-    x.add_argument("--root", required=True, help="the wrapped bed root")
+    x.add_argument("--sensorium", required=True, help="the wrapped bed sensorium")
     c = sub.add_parser("compare", help="per-plane tie-aware agreement between two beds")
-    c.add_argument("--root-a", required=True, dest="root_a")
-    c.add_argument("--root-b", required=True, dest="root_b")
+    c.add_argument("--sensorium-a", required=True, dest="sensorium_a")
+    c.add_argument("--sensorium-b", required=True, dest="sensorium_b")
     args = ap.parse_args()
     if args.cmd == "compare":
-        out = compare_beds(os.path.expanduser(args.root_a), os.path.expanduser(args.root_b))
+        out = compare_beds(os.path.expanduser(args.sensorium_a), os.path.expanduser(args.sensorium_b))
         sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
         return
-    root = os.path.expanduser(args.root)
+    root = os.path.expanduser(args.sensorium)
     if args.cmd == "spectrum":
         _refuse_comparator(root)
         planes = _read_planes(root)
@@ -523,8 +523,8 @@ def main() -> None:
             if not 0.0 <= lam <= 1.0:
                 raise SystemExit(f"channel_dial: lambda {lam} falls outside [0,1]")
     out = sweep_lambdas(root, lambdas=lambdas,
-                        extracted_root=os.path.expanduser(args.extracted_root)
-                        if args.extracted_root else None)
+                        extracted_root=os.path.expanduser(args.extracted_sensorium)
+                        if args.extracted_sensorium else None)
     out_dir = args.out or os.path.join(root, "channel-dial")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "dial-rows.json"), "w") as f:

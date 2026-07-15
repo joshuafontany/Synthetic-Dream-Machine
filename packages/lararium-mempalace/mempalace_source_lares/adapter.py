@@ -1,19 +1,14 @@
 """mempalace-source-lares — the DECLARATION half of the @admin memory-shore.
 
-RFC 002 (BaseSourceAdapter) ships as schema scaffolding: the ABC + registry +
-PalaceContext exist, but `mempalace mine --source` is unwired and live-per-turn
-is an explicit non-goal. So we keep our OWN runner (the TS gradient parser via
-`lares harvest`) and use this adapter for what it IS ready for today: the
-**declared schema contract**.
+RFC 002 (BaseSourceAdapter) supplies the schema and source contract. This
+adapter decodes the queue-shaped NDJSON records that the source boundary hands
+it; the live capture route remains Python-owned and pointer-driven.
 
-The maintainers' anti-pattern is not "writing chroma" — it is SMUGGLING
-undeclared writes past the schema/transform contract. This module closes that:
-every `lar_*` field our enrichment writes is declared here as a FieldSpec, and
+The maintainer anti-pattern smuggles undeclared writes past the schema/transform
+contract. Every `lar_*` field enrichment writes appears here as a FieldSpec, and
 `drawer_io.apply` validates each write against it and stamps the adapter
-identity. A declared write is sovereign enrichment; the same write undeclared is
-the anti-pattern. When upstream wires `--source`, `ingest()` gets fleshed out
-(via the NDJSON parser bridge) and our runner swaps for theirs with zero drawer
-re-shaping.
+identity. A declared write carries sovereign enrichment; an undeclared write
+refuses the boundary.
 
 Byte-preserving: we touch only metadata, never drawer content
 (`declared_transformations` stays empty).
@@ -105,9 +100,9 @@ def declared_field_names() -> frozenset[str]:
 class LaresAdapter(BaseSourceAdapter):
     """Declares the lar_* domain-metadata contract for Lares session harvest.
 
-    Today this serves describe_schema() (the live, load-bearing role). ingest()
-    is reserved for when upstream wires `mempalace mine --source`; until then the
-    sovereign runner is the TS gradient parser invoked via `lares harvest`.
+    `describe_schema()` declares the metadata contract. `ingest()` decodes the
+    NDJSON source shape without reinterpreting its content; routing remains a
+    producer declaration on each record.
     """
 
     name = ADAPTER_NAME

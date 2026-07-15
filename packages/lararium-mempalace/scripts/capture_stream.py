@@ -116,10 +116,11 @@ class Pipeline:
         # A land-cap that carries the rewind pair (stored_chain + reland) arms the guard; a minimal one
         # (is_landed/land only) rides the plain skip — the guard never crashes a generic pipeline.
         rewind_aware = hasattr(self._land, "stored_chain") and hasattr(self._land, "reland")
-        landed = skipped = relanded = retracted = 0
+        seen = landed = skipped = relanded = retracted = 0
         failed: list = []
         plane_failed: dict = {p.name: [] for p in self._planes}
         for rec in self._source(pointer):
+            seen += 1
             seq, cid = rec["seq"], rec["cid"]
             try:
                 drain.stage(seq, cid)
@@ -155,6 +156,7 @@ class Pipeline:
                 failed.append({"seq": seq, "cid": cid, "error": f"{type(exc).__name__}: {exc}"})
                 continue
         summary = {
+            "seen": seen,
             "landed": landed,
             "skipped": skipped,
             "relanded": relanded,

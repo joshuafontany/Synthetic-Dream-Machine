@@ -118,8 +118,8 @@ export interface SubagentEdgePair {
  *  EXTERNAL data the worker can't reach (transcript edges, form-vector bytes); all COMPUTE is the
  *  worker's. The impl proxies to the live `DaemonVmCore`. */
 export interface DaemonVerbProvider {
-  /** FEED one captured turn to the @daemon telemetry capture cap (the nalu). Fire-and-forget. */
-  placeTelemetry(turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string, chunkIndex?: number): void;
+  /** Send one source-stream pointer to the serialized Python capture holder. */
+  captureSource(input: { surface: "claude" | "codex" | "copilot" | "copilot-vscode"; pointer: string; wing: string; room?: string; sessionId?: string }): Promise<Record<string, unknown>>;
   /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeStructurepalaceKapae(turnKey: string, ended?: string): void;
@@ -315,8 +315,7 @@ export function telemetryVerbCap(): CapModule {
   };
 }
 
-/** capture — the FEED leg of the telemetry nalu (forward-capture of ONE turn). Requires the daemon-VM
- *  provider (the capture cap lives in the daemon island). */
+/** capture — submit ONE transcript source stream to the Python-owned capture holder. */
 export function captureVerbCap(): CapModule {
   return {
     id: VERB_GROUP.capture,
@@ -325,26 +324,16 @@ export function captureVerbCap(): CapModule {
       const daemon = resolve<DaemonVerbProvider>(VERB_PROVIDER.daemonVm);
       return (registry: VerbTable) => {
         registry.register("capture", async (args) => {
-          const turnText   = typeof args["turnText"]   === "string" ? (args["turnText"]   as string) : "";
-          const sourceFile = typeof args["sourceFile"] === "string" ? (args["sourceFile"] as string) : "";
-          if (!turnText || !sourceFile) throw new Error("capture: args.turnText + args.sourceFile (non-empty strings) required");
-          // Optional turn-DAG fork-frontier (head turn-uuids) the producer derived — threads so a
-          // same-session fork derives a distinct handle. Absent ⇒ byte-identical to before.
-          const rawFrontier = args["frontier"];
-          const frontier = Array.isArray(rawFrontier)
-            ? rawFrontier.filter((x): x is string => typeof x === "string" && x !== "")
-            : typeof rawFrontier === "string" && rawFrontier ? [rawFrontier] : undefined;
-          // Optional turn uuid — the .structurepalace provenance key (the kapae key); rides into the AST
-          // store via the capture record metadata, stripped from the content drawer.
-          const turnKey = typeof args["turnKey"] === "string" && args["turnKey"] ? (args["turnKey"] as string) : undefined;
-          // Optional producer ordinal — the ndjson chunk_index half of the deterministic drawer id
-          // (sha256(source_file)_chunk); keeps the verb leg convergent with the direct-mine fallback.
-          const rawChunk = args["chunkIndex"];
-          const chunkIndex = typeof rawChunk === "number" && Number.isFinite(rawChunk)
-            ? rawChunk
-            : typeof rawChunk === "string" && rawChunk !== "" && Number.isFinite(Number(rawChunk)) ? Number(rawChunk) : undefined;
-          daemon.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined, turnKey, chunkIndex);
-          return { ok: true, captured: true, bytes: turnText.length };
+          const surface = typeof args["surface"] === "string" ? args["surface"] : "";
+          const pointer = typeof args["pointer"] === "string" ? args["pointer"] : "";
+          const wing = typeof args["wing"] === "string" ? args["wing"] : "";
+          const room = typeof args["room"] === "string" ? args["room"] : undefined;
+          const sessionId = typeof args["sessionId"] === "string" && args["sessionId"] ? args["sessionId"] : undefined;
+          if (surface !== "claude" && surface !== "codex" && surface !== "copilot" && surface !== "copilot-vscode") {
+            throw new Error("capture: args.surface must be claude|codex|copilot|copilot-vscode");
+          }
+          if (!pointer || !wing) throw new Error("capture: args.pointer + args.wing (non-empty strings) required");
+          return await daemon.captureSource({ surface, pointer, wing, ...(room ? { room } : {}), ...(sessionId ? { sessionId } : {}) });
         });
         registry.register("structurepalace-kapae", async (args) => {
           // REWIND one turn's .structurepalace tally (+ salience down-weight) — the convergence twin of the

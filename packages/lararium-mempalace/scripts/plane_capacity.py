@@ -35,7 +35,7 @@ THE READING:
                                    metric, no weight, and no dial downstream will bring it back.
 
 Usage (THE venv):
-  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 plane_capacity.py --root <bed> [--root <bed> ...]
+  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 plane_capacity.py --sensorium <place> [--sensorium <place> ...]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/plane-capacity
 """
@@ -231,10 +231,10 @@ def render(rep: dict) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser(
         description="the exact channel ceiling of every plane — I(record; plane) <= H(plane|record base)")
-    ap.add_argument("--root", action="append", required=True, help="a bed root (repeatable)")
+    ap.add_argument("--sensorium", action="append", required=True, help="a sensorium root (repeatable)")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
-    out = [read_root(os.path.expanduser(r)) for r in a.root]
+    out = [read_root(os.path.expanduser(r)) for r in a.sensorium]
     if a.json:
         print(json.dumps(out, indent=1))
     else:

@@ -88,7 +88,7 @@ BATCH SEAM, surfaced honestly: MODWT-MRA here runs as a batch over the collected
 ticks; the media era needs that port — named here, not built.
 
 Usage (the mempalace venv, from this directory):
-  ~/.venv/bin/python3 ffz_continuous_pour.py pour --root <bed> [--root <bed> ...]
+  ~/.venv/bin/python3 ffz_continuous_pour.py pour --sensorium <place> [--sensorium <place> ...]
       [--seed 4241] [--surrogates 3]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/ffz-continuous-pour
@@ -902,8 +902,8 @@ def main() -> None:
                     "ladder of zonings, and keep only the scales that HOLD under re-zoning")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("pour", help="the per-bed continuous-pour reading")
-    p.add_argument("--root", action="append", required=True,
-                   help="a populated test-bed root (repeatable)")
+    p.add_argument("--sensorium", action="append", required=True,
+                   help="a populated test-bed sensorium (repeatable)")
     p.add_argument("--seed", type=int, default=4241)
     p.add_argument("--surrogates", type=int, default=3)
     s = sub.add_parser("split", help="the placebo split over two landed pour profiles")
@@ -923,7 +923,7 @@ def main() -> None:
         sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
         return
     summaries = []
-    for r in args.root:
+    for r in args.sensorium:
         root = os.path.expanduser(r)
         out = probe_root(root, n_surrogates=args.surrogates, seed=args.seed)
         os.makedirs(os.path.join(root, "probe"), exist_ok=True)

@@ -39,7 +39,7 @@ over real, genuinely-independent planes and emit sane rows. A LOAD-BEARING bifur
 claim awaits the bigger corpuses — a 12-doc sweep cannot seat one.
 
 Usage (the mempalace venv):
-  ~/.venv/bin/python3 run_projector.py run --root ~/.lares/testbeds/human-text-lares-memes \
+  ~/.venv/bin/python3 run_projector.py run --sensorium ~/.lares/testbeds/human-text-lares-memes \
       [--rungs 28] [--arl-hi 200] [--arl-lo 1.6] [--trials 60] [--alpha-sig 0.05] \
       [--seed 333073] [--out <dir>]
 
@@ -130,8 +130,10 @@ def _read_planes(root: str) -> dict:
     Record order sorts on (source_file, cid): a stable, content-free corpus order every series
     reads through."""
     from form_encoder import FormPalaceStore
+    from sensorium import sensorium_paths
 
-    store = cio.ContentStore(os.path.join(root, "content"))
+    paths = sensorium_paths(root)
+    store = cio.ContentStore(paths.content)
     records = []
     offset = 0
     while True:
@@ -144,7 +146,7 @@ def _read_planes(root: str) -> dict:
 
     registry = read_pattern_registry(root)   # the cosheaf, whole
 
-    form_store = FormPalaceStore(os.path.join(root, "form"))
+    form_store = FormPalaceStore(paths.form)
     fgot = form_store._col.get(include=["embeddings"])  # noqa: SLF001
     memberships: dict = {}
     fids = fgot.get("ids") or []
@@ -560,8 +562,8 @@ def main() -> None:
         description="run_projector — the py RUN surface over a populated 3-plane test-bed")
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run", help="sweep the ARL0 dial over the planes; emit rows + witness")
-    r.add_argument("--root", required=True,
-                   help="the populated test-bed root (never ~/.mempalace — the ward refuses)")
+    r.add_argument("--sensorium", required=True,
+                   help="the populated test-bed sensorium (never ~/.mempalace — the ward refuses)")
     r.add_argument("--rungs", type=int, default=28)
     r.add_argument("--arl-hi", type=float, default=200.0, dest="arl_hi")
     r.add_argument("--arl-lo", type=float, default=1.6, dest="arl_lo")
@@ -570,7 +572,7 @@ def main() -> None:
     r.add_argument("--seed", type=int, default=0x51611)
     r.add_argument("--out", default=None)
     args = ap.parse_args()
-    w = run(os.path.expanduser(args.root), rungs=args.rungs, arl_hi=args.arl_hi,
+    w = run(os.path.expanduser(args.sensorium), rungs=args.rungs, arl_hi=args.arl_hi,
             arl_lo=args.arl_lo, trials=args.trials, alpha_sig=args.alpha_sig,
             seed=args.seed, out_dir=args.out)
     sys.stdout.write(json.dumps(w, ensure_ascii=False, indent=2) + "\n")

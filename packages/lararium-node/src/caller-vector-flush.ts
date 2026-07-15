@@ -20,9 +20,18 @@ import type { EmbedCap } from "./embed-cap.js";
 import type { ContentPalace } from "./content-palace.js";
 import type { MetaCap } from "./meta-cap.js";
 
-/** The mempalace drawer-id: sha256(source_file)_chunk — deterministic, idempotent, mine-convergent. */
+/**
+ * The live Sensorium drawer id: sha256(source_file)_chunk.
+ *
+ * `capture_sources.py` owns the Python capture path and defines this full-digest
+ * identity. The generic NDJSON adapter has a separate legacy short-ID recipe;
+ * it must not set the contract for live capture.
+ */
 async function drawerCid(record: CaptureRecord): Promise<string> {
   const srcHash = await sha256Hex(utf8Bytes(record.source_file), defaultCryptoProvider);
+  // Match Python's live capture gate in capture_sources.py: full SHA-256
+  // source identity plus chunk index. Truncation turns this cross-runtime
+  // contract into a collision-prone fork.
   return `${srcHash}_${record.chunk_index ?? 0}`;
 }
 

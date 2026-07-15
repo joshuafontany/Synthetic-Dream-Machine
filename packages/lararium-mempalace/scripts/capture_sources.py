@@ -26,6 +26,7 @@ import os
 from typing import Callable, Iterable, Iterator
 
 from copilot_sqlite_normalize import read_sessions as _copilot_read_sessions
+from copilot_vscode_normalize import normalize as _normalize_copilot_vscode
 
 # A record the engine lands: the dense pass seq, the single-gate cid, the drawer text, the schema meta.
 Record = dict
@@ -70,6 +71,12 @@ def _source_key(surface: str, pointer: str) -> str:
     base = os.path.basename(pointer)
     if base.endswith(".jsonl"):
         base = base[: -len(".jsonl")]
+    # The daemon may hand a stable staged filename (`claude__<session>.jsonl`)
+    # while a direct source-stream pass sees `<session>.jsonl`. Staging belongs
+    # to ingress, never to identity: collapse the spelling before CID derivation.
+    prefix = f"{surface}__"
+    if base.startswith(prefix):
+        base = base[len(prefix):]
     if surface == "claude":
         agent_id = _claude_agent_id(pointer)
         if agent_id is not None:
@@ -329,17 +336,60 @@ def codex_source(*, wing: str, room: str = "conversations") -> SourceCap:
 # copilot_sqlite_normalize.read_sessions) — never the deleted events.jsonl (the green-in-disguise trap).
 
 
-def copilot_source(*, wing: "str | None" = None, room: str = "conversations") -> SourceCap:
+def copilot_source(*, wing: "str | None" = None, room: str = "conversations",
+                   session_id: "str | None" = None) -> SourceCap:
     """The Copilot source-cap. `pointer` names the SQLite store (`session-store.db`). One store holds
     MANY sessions — each rides its own `<session-id>.jsonl` source_file (distinct cids), all under ONE
     dense pass seq. Reads the SQLite ONLY (asserts nothing off events.jsonl)."""
     def source(pointer: str) -> Iterator[Record]:
         def all_drawers() -> Iterator[tuple]:
             for sid, cwd, turns in _copilot_read_sessions(pointer):
+                if session_id is not None and sid != session_id:
+                    continue
                 w = wing or "wing_copilot_unsorted"
                 yield from _drawers(f"copilot:{sid}", turns, wing=w, room=room,
                                     extra={"lar_surface": "copilot-cli"})
         yield from _seq_records(all_drawers())
+    return source
+
+
+def _parse_copilot_vscode(pointer: str) -> tuple[str, list]:
+    """Read one VS Code event stream natively, without a JSONL staging rewrite.
+
+    The event stream's session.start supplies the stable source identity.  A
+    malformed or truncated event is delegated to the established pure adapter
+    and skipped there; its prose rows retain their native event ids and times.
+    """
+    try:
+        with open(pointer, encoding="utf-8", errors="replace") as fh:
+            rows = list(_normalize_copilot_vscode(fh))
+    except OSError:
+        return "", []
+    session_id = next((str(row.get("sessionId")) for row in rows if row.get("sessionId")), "")
+    turns = [
+        {
+            "uuid": str(row.get("uuid") or ""),
+            "role": str(row.get("type") or ""),
+            "text": str((row.get("message") or {}).get("content") or ""),
+            "ts": str(row.get("timestamp") or ""),
+        }
+        for row in rows
+        if row.get("type") in ("user", "assistant")
+    ]
+    return session_id, turns
+
+
+def copilot_vscode_source(*, wing: str, room: str = "conversations") -> SourceCap:
+    """The VS Code Copilot source-cap. Its event stream remains native through Python.
+
+    The filename is only a last-resort identity when a damaged stream lacks its
+    session.start record; normal streams key on the authored session id.
+    """
+    def source(pointer: str) -> Iterator[Record]:
+        session_id, turns = _parse_copilot_vscode(pointer)
+        source_file = f"copilot-vscode:{session_id}" if session_id else _source_key("copilot-vscode", pointer)
+        yield from _seq_records(_drawers(source_file, turns, wing=wing, room=room,
+                                         extra={"lar_surface": "copilot-vscode"}))
     return source
 
 
@@ -552,18 +602,20 @@ _SURFACES: dict = {
     "claude": claude_source,
     "codex": codex_source,
     "copilot": copilot_source,
+    "copilot-vscode": copilot_vscode_source,
     "corpus": corpus_source,
 }
 
 
-def resolve_source(surface: str, *, wing: "str | None" = None, room: str = "conversations") -> SourceCap:
-    """Compose the source-cap for a named surface (claude · codex · copilot). Copilot derives its wing
-    per-session when none rides in; the file surfaces require an explicit wing (the schema floor)."""
+def resolve_source(surface: str, *, wing: "str | None" = None, room: str = "conversations",
+                   session_id: "str | None" = None) -> SourceCap:
+    """Compose a named source-cap. SQLite Copilot may derive its wing per session; every file surface
+    (including VS Code Copilot) requires the caller's explicit wing."""
     make = _SURFACES.get(surface)
     if make is None:
         raise ValueError(f"resolve_source: unknown surface {surface!r} (known: {sorted(_SURFACES)})")
     if surface == "copilot":
-        return copilot_source(wing=wing, room=room)
+        return copilot_source(wing=wing, room=room, session_id=session_id)
     if not wing:
         raise ValueError(f"resolve_source[{surface}]: a wing is required (the schema floor)")
     return make(wing=wing, room=room)

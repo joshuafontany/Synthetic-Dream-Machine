@@ -19,7 +19,7 @@ DETERMINISM: the shuffle seeds from the sheet's fixed seed (4241) + the stream
 index; a double run emits identical bytes. The runner REPORTS; the sheet judges.
 
 Usage (THE venv):
-  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 prereg_sweep.py --root <bed> [--root <bed> ...]
+  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 prereg_sweep.py --sensorium <place> [--sensorium <place> ...]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/prereg-sweep
 """
@@ -124,15 +124,15 @@ def sweep_bed(root: str, *, min_support: int = 2, max_candidates: int = 96) -> d
 
 def main(argv: "list[str] | None" = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--root", action="append", default=[], help="a bed root (repeatable)")
+    ap.add_argument("--sensorium", action="append", default=[], help="a sensorium root (repeatable)")
     ap.add_argument("--min-support", type=int, default=2, dest="min_support")
     args = ap.parse_args(argv)
-    if not args.root:
+    if not args.sensorium:
         raise SystemExit(
-            "prereg_sweep: no bed named — pass `--root <dir>`; the sheet reads "
+            "prereg_sweep: no sensorium named — pass `--sensorium <dir>`; the sheet reads "
             "specific beds, never whichever store sits at a default."
         )
-    for root in sorted(dict.fromkeys(args.root)):
+    for root in sorted(dict.fromkeys(args.sensorium)):
         rep = sweep_bed(root, min_support=args.min_support)
         sys.stdout.write(json.dumps(rep, sort_keys=True) + "\n")
     return 0

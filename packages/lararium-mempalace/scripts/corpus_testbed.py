@@ -13,12 +13,12 @@ THE S5 SENSORIUM LAW this driver enforces:
   · it REFUSES a root under ~/.mempalace (the comparator stays clean — a contaminated
     comparator loses its value).
 
-Layout under --root:  content/ (the Memory-pinned ContentStore) · structure/ (the
+Layout under --sensorium:  content/ (the Memory-pinned ContentStore) · structure/ (the
 structurepalace) · form/ (the form collection) · all three keyed by the record cid.
 
 Usage (the mempalace venv):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 corpus_testbed.py run \
-      --corpus <dir> [--corpus <dir> ...] --root ~/.lares/testbeds/human-text-<name> \
+      --corpus <dir> [--corpus <dir> ...] --sensorium ~/.lares/testbeds/human-text-<name> \
       [--wing wing_testbed] [--room corpus] [--min-support 2] [--max-forms 64]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/corpus-testbed
@@ -31,59 +31,18 @@ import os
 import sys
 
 import content_io as cio
-from capture_session import stamp_embedder
-from capture_sources import corpus_sectioned_source, corpus_source
-from capture_stream import ContentStoreLandCap
-from plane_fanout import compose_corpus_planes
-from sensorium import compose_sensorium
+from corpus_capture import (compose_corpus_stream_sensorium, refuse_comparator,
+                            write_corpus_manifest)
 
 
 def write_bed_manifest(root: str, *, name: str = "corpus-testbed") -> str:
-    """Stand the bed's sensorium manifest — the has-stack IaC record, schema-true to the TS
-    SensoriumManifest reader. A test bed runs the GEOLOGY mood: nobody grounded it, so the beat
-    cell stays NULL by law; the MEASURE cell is earnable through discovered strata (the boundary
-    changepoint aperture — declared here, provider seated when its arc builds). Idempotent: the
-    mint time survives a re-stand so an unchanged manifest stays byte-identical."""
-    path = os.path.join(root, "manifest.json")
-    created = None
-    if os.path.isfile(path):
-        try:
-            with open(path, encoding="utf-8") as fh:
-                created = json.load(fh).get("created")
-        except Exception:
-            created = None
-    if created is None:
-        from datetime import datetime, timezone
-        created = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
-    manifest = {
-        "schema": 1,
-        "sensorium": name,
-        "lar": "lar:///ha.ka.ba/lares/api/lares/corpus#astral-multipalace",
-        "has": {
-            "content":   {"dir": "content", "engine": "content", "variance": "sheaf"},
-            "structure": {"dir": "structure", "engine": "structurepalace", "variance": "sheaf"},
-            "form":      {"dir": "form", "engine": "formpalace", "variance": "sheaf"},
-        },
-        "bands": {"grain": "membership", "computed": "sidecar"},
-        "coupling": {"children": []},
-        "apertures": {"measure": "boundary-changepoint"},
-        "ephemeral": True,
-        "created": created,
-    }
-    with open(path, "w", encoding="utf-8") as fh:
-        json.dump(manifest, fh, indent=2)
-        fh.write("\n")
-    return path
+    return write_corpus_manifest(root, name=name, ephemeral=True)
 
 
 def _refuse_comparator(root: str) -> None:
     """The comparator ward: ~/.mempalace holds the clean dev-baseline — the RUN never writes it.
     Designation carries authority; a root that reaches into the comparator fails LOUD."""
-    comparator = os.path.realpath(os.path.expanduser("~/.mempalace"))
-    real = os.path.realpath(os.path.expanduser(root))
-    if real == comparator or real.startswith(comparator + os.sep):
-        raise SystemExit(f"corpus_testbed: REFUSED — {root!r} sits inside the comparator "
-                         "~/.mempalace (S5: comparator only, the RUN never writes it)")
+    refuse_comparator(root)
 
 
 def compose_testbed(root: str, *, wing: str, room: str = "corpus",
@@ -96,30 +55,11 @@ def compose_testbed(root: str, *, wing: str, room: str = "corpus",
     `sections` selects the capture grain: None keeps the whole-file corpus cap;
     "wrapped" / "extracted" ride the SECTIONED cap (one record per wa/section,
     capture_sources.corpus_sectioned_source) — the dual-run ablation's two modes."""
-    _refuse_comparator(root)
-    os.makedirs(root, exist_ok=True)
-    write_bed_manifest(root)
-    if sections not in (None, "wrapped", "extracted"):
-        raise SystemExit(f"corpus_testbed: unknown --sections mode {sections!r} "
-                         "(the cap speaks wrapped | extracted)")
-    if embed_factory is None:
-        from embed_cap import make_embed_cap
-        embed_factory = make_embed_cap
-    embed_one, model = embed_factory()
-    dim = len(embed_one("probe"))   # pin the width once off the warm cap (the dim floor)
-
-    if sections is None:
-        cap = corpus_source(wing=wing, room=room)
-    else:
-        cap = corpus_sectioned_source(wing=wing, room=room, extract=(sections == "extracted"))
-    source = stamp_embedder(cap, model)
-    store = cio.ContentStore(os.path.join(root, "content"), required_keys={"wing", "room"},
-                             expected_dim=dim, expected_model=model, append_only=True)
-    planes = compose_corpus_planes(root, min_support=min_support, max_forms=max_forms,
-                                   max_candidates=max_candidates)
-    sensorium = compose_sensorium(kind="testbed-human-text", source=source,
-                                  land=ContentStoreLandCap(store), embed=embed_one, planes=planes)
-    return sensorium, store, planes
+    stream, store, _paths = compose_corpus_stream_sensorium(
+        root, wing=wing, room=room, min_support=min_support, max_forms=max_forms,
+        max_candidates=max_candidates, embed_factory=embed_factory, sections=sections,
+        name="corpus-testbed", ephemeral=True)
+    return stream, store
 
 
 def _content_count(store: cio.ContentStore) -> int:
@@ -144,13 +84,15 @@ def _structure_entry_for(structure_store, cid: str) -> "dict | None":
     return None
 
 
-def witness(root: str, store: cio.ContentStore, planes: list, pass_summary: dict) -> dict:
+def witness(root: str, store: cio.ContentStore, pass_summary: dict) -> dict:
     """The 3-plane read-back witness: per-plane counts off the DURABLE stores + one sample
     record shown present in all three planes, its cid keying each. Reads back, never trusts
     the in-memory pass state (prove-by-witness)."""
-    structure_cap, form_cap = planes[0], planes[1]
-    structure_store = structure_cap._store  # noqa: SLF001 — the witness probe reaches the composed stores
-    form_store = form_cap._store            # noqa: SLF001
+    from form_encoder import FormPalaceStore
+    from structurepalace_io import StructurePalaceStore
+
+    structure_store = StructurePalaceStore(os.path.join(root, "structure"))
+    form_store = FormPalaceStore(os.path.join(root, "form"))
 
     counts = {
         "content": _content_count(store),
@@ -189,17 +131,17 @@ def run(corpus: str, root: str, *, wing: str, room: str, min_support: int, max_f
         max_candidates: int = 96, sections: "str | None" = None) -> dict:
     """The whole first-step arc: pass 1 (land all three planes) → read-back witness → pass 2
     over a FRESH composition (proves the idempotence lives in the stores, not process state)."""
-    sensorium, store, planes = compose_testbed(root, wing=wing, room=room, min_support=min_support,
-                                               max_forms=max_forms, max_candidates=max_candidates,
-                                               sections=sections)
+    sensorium, store = compose_testbed(root, wing=wing, room=room, min_support=min_support,
+                                       max_forms=max_forms, max_candidates=max_candidates,
+                                       sections=sections)
     pass1 = sensorium.capture(corpus)
-    w = witness(root, store, planes, pass1)
+    from corpus_worldline import backfill
+    w = witness(root, store, pass1)
+    w["worldline"] = backfill(root)
 
-    # Pass 2 — a FRESH cap-stack over the same durable root: every plane must land ZERO.
-    sensorium2, store2, planes2 = compose_testbed(root, wing=wing, room=room, min_support=min_support,
-                                                  max_forms=max_forms, max_candidates=max_candidates,
-                                                  sections=sections)
-    pass2 = sensorium2.capture(corpus)
+    # Pass 2 reuses the warm entity.  The stream factory still mints fresh
+    # source/plane caps, so zero landing proves idempotence lives durably.
+    pass2 = sensorium.capture(corpus)
     plane2 = pass2.get("planes", {})
     w["idempotency"] = {
         "content_landed": pass2.get("landed"),
@@ -218,8 +160,8 @@ def main() -> None:
     r = sub.add_parser("run", help="compose the test-bed, run the pass, witness all three planes + idempotency")
     r.add_argument("--corpus", action="append", required=True,
                    help="a corpus root (repeatable; dirs walk recursively for markdown/text)")
-    r.add_argument("--root", required=True,
-                   help="the EPHEMERAL test-bed root (e.g. ~/.lares/testbeds/human-text-x); never ~/.mempalace")
+    r.add_argument("--sensorium", required=True,
+                   help="the EPHEMERAL test-bed sensorium (e.g. ~/.lares/testbeds/human-text-x); never ~/.mempalace")
     r.add_argument("--wing", default="wing_testbed")
     r.add_argument("--room", default="corpus")
     r.add_argument("--min-support", type=int, default=2, dest="min_support")
@@ -232,7 +174,7 @@ def main() -> None:
                         "bare interior — the dual-run ablation's two modes")
     args = ap.parse_args()
     pointer = os.pathsep.join(args.corpus)
-    out = run(pointer, os.path.expanduser(args.root), wing=args.wing, room=args.room,
+    out = run(pointer, os.path.expanduser(args.sensorium), wing=args.wing, room=args.room,
               min_support=args.min_support, max_forms=args.max_forms,
               max_candidates=args.max_candidates, sections=args.sections)
     sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")

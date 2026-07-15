@@ -26,7 +26,7 @@ measures the same partitions every ceiling report reads. DETERMINISM: every
 grouping sorts; labels canonicalize; no RNG, no clock.
 
 Usage (THE venv):
-  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 chain_invariant.py --root <bed> [--root <bed> ...]
+  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 chain_invariant.py --sensorium <place> [--sensorium <place> ...]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/chain-invariant
 """
@@ -166,15 +166,15 @@ def read_bed(root: str) -> dict:
 
 def main(argv: "list[str] | None" = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--root", action="append", default=[], help="a bed root (repeatable)")
+    ap.add_argument("--sensorium", action="append", default=[], help="a sensorium root (repeatable)")
     args = ap.parse_args(argv)
-    if not args.root:
+    if not args.sensorium:
         raise SystemExit(
-            "chain_invariant: no bed named — pass `--root <dir>`. An unnamed check "
+            "chain_invariant: no sensorium named — pass `--sensorium <dir>`. An unnamed check "
             "would measure whichever store sits at a default; name the bed, or stop."
         )
     broken = 0
-    for root in sorted(dict.fromkeys(args.root)):
+    for root in sorted(dict.fromkeys(args.sensorium)):
         rep = read_bed(root)
         sys.stdout.write(json.dumps(rep, sort_keys=True) + "\n")
         if not rep["chain_holds"]:

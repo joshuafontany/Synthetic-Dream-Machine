@@ -177,6 +177,8 @@ export type { LaresQuery, Lens } from "./lares-query.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";
+export { makeSourceCapture } from "./source-capture.js";
+export type { SourceCapture, SourceCaptureRequest, SourceCaptureResult, SourceCaptureSpawn } from "./source-capture.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";

@@ -168,6 +168,15 @@ def test_singleton_holds_per_palace(tmp_path, monkeypatch):
     sc.release_serve_lock(fhb)
 
 
+def test_serve_lock_belongs_to_its_palace_not_the_guest_comparator(tmp_path):
+    palace = tmp_path / "sovereign" / "content"
+    lock = sc.serve_lock_path(str(palace), "content_serve")
+    assert lock.startswith(str(palace))
+    assert ".mempalace" not in lock
+    assert "/locks/" in lock
+    assert ".sidecar-locks" not in lock
+
+
 @_posix_flock
 def test_singleton_independent_per_prefix(tmp_path, monkeypatch):
     """Two DIFFERENT sidecars (prefixes) over the SAME palace dir each hold their own

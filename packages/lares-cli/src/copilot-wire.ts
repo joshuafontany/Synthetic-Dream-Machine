@@ -10,7 +10,7 @@
  * Its sessionEnd payload carries { sessionId, cwd } but NO transcript_path — the
  * conversation lives in the global SQLite store ~/.copilot/session-store.db
  * (events.jsonl is gone, CLI 1.0.6x), which the harness-aware ingest hook resolves
- * + normalizes via copilot_sqlite_normalize.py. (Bug github/copilot-cli#991:
+ * + sends the database plus sessionId straight to Python's SQLite source-cap. (Bug github/copilot-cli#991:
  * sessionEnd fires per-prompt in interactive mode → the ingest stays idempotent on lar_hv.)
  *
  * Idempotent deep-merge, backs up, preserves existing config — same discipline as

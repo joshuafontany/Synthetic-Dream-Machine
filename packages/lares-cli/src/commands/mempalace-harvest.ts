@@ -23,11 +23,12 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, writeFileSync, linkSync, copyFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync, linkSync, copyFileSync, realpathSync, statSync, utimesSync, rmSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { withMineLane, mineWithServo } from "@lararium/mempalace";
-import { resolveMempalaceExe, larStateHome } from "@lararium/node";
+import { resolveMempalaceExe, larHarvestStageDir } from "@lararium/node";
 import { resolvePython } from "../integration-check.js";
 import { larRoot } from "../env.js";
 import { emit } from "../render.js";
@@ -48,21 +49,24 @@ function guestPalace(): string {
   return join(homedir(), ".mempalace", "palace");
 }
 
-/** The comparator's own stage — never the RUN's (`larHarvestStageDir`); the two lanes share nothing. */
-function comparatorStage(): string {
-  return join(larStateHome(), "comparator-stage");
+/** The guest Mempalace lane beneath the one canonical stage root. */
+function mempalaceStage(): string {
+  return join(larHarvestStageDir(), "mempalace");
 }
 
 /**
  * Which sources carry a native-format reader, keyed by `HarvestEntry.source` → script name.
  *
- * A source that declares `normalize` and sits ABSENT from this table gets dropped BY NAME (the staging
- * loop below), so a missing reader reads as a missing reader rather than as a bare ENOENT.
+ * A source listed here is adapted only for the guest comparator. A missing adapter
+ * is a named staging failure, never an opaque spawn error.
  *
- * `copilot-cli` needs no entry — its sqlite export already lands Claude-shaped (`normalize:false`).
+ * `copilot-cli` names the comparator-only SQLite→JSONL adapter. The sovereign sensorium reads
+ * the database natively and never reaches this adapter.
  */
 const NORMALIZER_SCRIPTS: Readonly<Record<string, string>> = {
   "copilot-vscode": "copilot_vscode_normalize.py",
+  // Comparator-only adapter: the vanilla miner consumes JSONL, not Copilot's SQLite schema.
+  "copilot-cli": "copilot_sqlite_normalize.py",
 };
 
 /**
@@ -74,6 +78,25 @@ const NORMALIZER_SCRIPTS: Readonly<Record<string, string>> = {
 function normalizerFor(source: string): string | null {
   const script = NORMALIZER_SCRIPTS[source];
   return script ? join(larRoot(), "packages", "lararium-mempalace", "scripts", script) : null;
+}
+
+/**
+ * Stable, collision-resistant relative path inside the Mempalace stage.
+ *
+ * The old `<surface>__<basename>` key silently conflated different transcript
+ * roots that happened to share a filename (notably VS Code workspaces).  The
+ * canonical source path supplies a durable disambiguator while the readable
+ * suffix keeps a staged tree inspectable.  This stays comparator-local: no
+ * `lar_*` metadata crosses the boundary.
+ */
+export function mempalaceStageName(entry: Pick<HarvestEntry, "file" | "source" | "stageName" | "sessionId">): string {
+  let sourcePath = entry.file;
+  try { sourcePath = realpathSync(entry.file); } catch { /* missing source reports during staging */ }
+  const key = createHash("sha256").update(sourcePath).digest("hex").slice(0, 16);
+  const name = entry.source === "copilot-cli" && entry.sessionId
+    ? `${entry.sessionId}.jsonl`
+    : basename(entry.file);
+  return join(entry.source, key, name);
 }
 
 interface WingMine {
@@ -106,22 +129,22 @@ export async function cmdMempalaceHarvest(args: ParsedArgs): Promise<number> {
   }
 
   const results: WingMine[] = [];
-  const stageRoot = comparatorStage();
+  const stageRoot = mempalaceStage();
 
   for (const [wing, es] of [...byWing.entries()].sort()) {
     if (dryRun) {
-      // A dry-run stages nothing, so it cannot report a drop it would have HIT. It can report the drops
-      // it can PREDICT — every entry whose source declares `normalize` and carries no reader fails the
-      // same way every run. Reporting a flat `dropped: []` here answers "did anything drop?" with a zero
-      // the run never measured, and a preview that structurally cannot show a loss hides exactly the loss
-      // an operator previews for.
+      // A dry-run can predict a missing comparator adapter without staging anything.
       const willDrop = es
-        .filter((e) => e.normalize && !normalizerFor(e.source))
+        .filter((e) => (e.source === "copilot-vscode" || e.source === "copilot-cli") && !normalizerFor(e.source))
         .map((e) => ({ file: e.file, why: `no normalizer for source '${e.source}' — its native format has no reader yet` }));
       results.push({ wing, staged: es.length - willDrop.length, dropped: willDrop, filed: "dry-run" });
       continue;
     }
     const stage = join(stageRoot, wing);
+    // This comparator pass owns a complete snapshot of its wing. Rebuild its staging tree before
+    // copying, so vanished sources cannot remain as stale mine inputs. The relative source-hash path
+    // stays stable across runs, preserving vanilla miner idempotency without renaming a transcript.
+    rmSync(stage, { recursive: true, force: true });
     mkdirSync(stage, { recursive: true });
 
     // Stage each transcript. A file that fails to stage is NAMED — a staging error leaves no trace on
@@ -130,22 +153,29 @@ export async function cmdMempalaceHarvest(args: ParsedArgs): Promise<number> {
     const dropped: Array<{ file: string; why: string }> = [];
     let staged = 0;
     for (const e of es) {
-      const dst = join(stage, `${e.source}__${e.stageName}`);
-      if (existsSync(dst)) { staged += 1; continue; }
+      const dst = join(stage, mempalaceStageName(e));
       try {
-        if (e.normalize) {
-          // A source that declares `normalize` needs a reader that turns its native shape into the
-          // Claude-shaped jsonl the vanilla miner eats. A source with no reader gets DROPPED BY NAME:
-          // reaching for a script and letting the spawn fail reports a bare ENOENT naming an absent
-          // PATH, which reads as a broken install rather than as the unwritten format reader it is.
+        // Re-stage every pass so the comparator observes the producer's current bytes and mtime.
+        mkdirSync(dirname(dst), { recursive: true });
+        if (e.source === "copilot-vscode" || e.source === "copilot-cli") {
+          // Vanilla Mempalace reads JSONL, so comparator-only adapters translate
+          // the two Copilot formats at this boundary.
           const norm = normalizerFor(e.source);
           if (!norm || !existsSync(norm)) {
             throw new Error(`no normalizer for source '${e.source}' — its native format has no reader yet`);
           }
-          writeFileSync(dst, execFileSync(PY, [norm, e.file], { maxBuffer: 1 << 30, encoding: "utf8" }));
+          if (e.source === "copilot-cli") {
+            if (!e.sessionId) throw new Error("Copilot SQLite comparator entry lacks sessionId");
+            execFileSync(PY, [norm, "--session", e.sessionId, e.file, dirname(dst)], { maxBuffer: 1 << 30, encoding: "utf8" });
+            if (!existsSync(dst)) throw new Error(`Copilot SQLite session ${e.sessionId} did not export`);
+          } else {
+            writeFileSync(dst, execFileSync(PY, [norm, e.file], { maxBuffer: 1 << 30, encoding: "utf8" }));
+          }
         } else {
           try { linkSync(e.file, dst); } catch { copyFileSync(e.file, dst); }
         }
+        const sourceStat = statSync(e.file);
+        utimesSync(dst, sourceStat.atime, sourceStat.mtime);
         staged += 1;
       } catch (err) {
         dropped.push({ file: e.file, why: err instanceof Error ? err.message.slice(0, 140) : String(err) });

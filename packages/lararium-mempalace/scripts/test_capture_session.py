@@ -14,7 +14,7 @@ import os
 
 import pytest
 
-from capture_session import drive_capture
+from capture_session import CaptureSessionServer, capture_and_observe
 from capture_sources import derive_cid
 
 FIXTURES = os.path.join(os.path.dirname(__file__), "fixtures", "capture")
@@ -33,8 +33,14 @@ def _stub_embed_factory(dim=4, model="stub-minilm/4"):
     return factory
 
 
+@pytest.fixture(autouse=True)
+def _pin_worldline_salt(monkeypatch):
+    """Capture now always observes Claude through the rooted stream stack."""
+    monkeypatch.setenv("LAR_WORLDLINE_SALT", "capture-session-witness-salt")
+
+
 def test_w1_5a_real_capture_lands_the_whole_transcript(tmp_path):
-    res = drive_capture(str(tmp_path / ".mem"), "claude", CLAUDE, wing="wing_proj",
+    res = capture_and_observe(str(tmp_path / ".mem"), "claude", CLAUDE, wing="wing_proj",
                         embed_factory=_stub_embed_factory())
     assert res["landed"] == TURN_COUNT and res["skipped"] == 0     # the WHOLE transcript processes
     assert res["watermark"] == TURN_COUNT and res["audit"]["ok"]
@@ -43,10 +49,21 @@ def test_w1_5a_real_capture_lands_the_whole_transcript(tmp_path):
 
 def test_w1_5b_second_pass_is_idempotent(tmp_path):
     palace = str(tmp_path / ".mem")
-    drive_capture(palace, "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
-    res2 = drive_capture(palace, "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
+    capture_and_observe(palace, "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
+    res2 = capture_and_observe(palace, "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
     assert res2["landed"] == 0 and res2["skipped"] == TURN_COUNT   # +0 landed the second pass
     assert res2["audit"]["ok"]
+
+
+def test_serve_holder_keeps_capture_in_python_and_rederives_idempotently(tmp_path):
+    # This is the daemon-facing seam: it accepts a pointer descriptor, not a turn payload.  One
+    # warm Python holder parses and lands the source; a second request skips the same three CIDs.
+    server = CaptureSessionServer(str(tmp_path / ".mem"), embed_factory=_stub_embed_factory())
+    req = {"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"}
+    first = server.capture(req)
+    second = server.capture(req)
+    assert first["landed"] == TURN_COUNT and first["skipped"] == 0
+    assert second["landed"] == 0 and second["skipped"] == TURN_COUNT
 
 
 def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
@@ -62,28 +79,28 @@ def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
     # on ONE stable source: capture the partial, then the full, both keyed to the SAME basename.
     stable = tmp_path / "claude-main.jsonl"
     stable.write_text(partial.read_text(encoding="utf-8"), encoding="utf-8")
-    r1 = drive_capture(palace, "claude", str(stable), wing="wing_proj", embed_factory=_stub_embed_factory())
+    r1 = capture_and_observe(palace, "claude", str(stable), wing="wing_proj", embed_factory=_stub_embed_factory())
     assert r1["landed"] == 2                                       # the crash left only 2 durable
 
     stable.write_text(open(CLAUDE, encoding="utf-8").read(), encoding="utf-8")  # the full transcript returns
-    r2 = drive_capture(palace, "claude", str(stable), wing="wing_proj", embed_factory=_stub_embed_factory())
+    r2 = capture_and_observe(palace, "claude", str(stable), wing="wing_proj", embed_factory=_stub_embed_factory())
     assert r2["landed"] == 1 and r2["skipped"] == 2               # only the tail lands; the prefix skips
     assert r2["watermark"] == TURN_COUNT and r2["audit"]["ok"]
 
 
 def test_w1_5d_landed_store_carries_distinct_full_hex_cids(tmp_path):
     palace = str(tmp_path / ".mem")
-    drive_capture(palace, "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
+    capture_and_observe(palace, "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
     # reach the store through a fresh compose + assert each exchange's cid landed distinct + full-hex.
-    from sensorium import compose_memory_sensorium
-    s = compose_memory_sensorium(palace, source=lambda p: [], embed=None)
+    from sensorium import compose_content_land
+    s = compose_content_land(palace)
     for chunk in range(TURN_COUNT):
         cid = derive_cid("claude:claude-main",chunk)
-        got = s._land.store.get(cid)
+        got = s.store.get(cid)
         assert got is not None                                     # the single-gate cid round-trips
         assert len(cid.rsplit("_", 1)[0]) == 64                    # FULL hex, never [:24]
     # a re-derived cid matches the landed one (idempotent key)
-    assert s._land.store.get(derive_cid("claude:claude-main",0)) is not None
+    assert s.store.get(derive_cid("claude:claude-main",0)) is not None
 
 
 def test_embedder_model_floor_rejects_a_mismatched_stamp(tmp_path):
@@ -91,16 +108,18 @@ def test_embedder_model_floor_rejects_a_mismatched_stamp(tmp_path):
     # a record whose stamp DISAGREES with the store's pin fails LOUD (a same-dim different-model swap
     # corrupts recall silently otherwise). Witness the contract directly: pin model-A, land a model-B
     # stamp → ValueError.
-    from sensorium import compose_memory_sensorium
+    from sensorium import compose_content_land, compose_sensorium
 
     def mismatched_source(_pointer):
         yield {"seq": 1, "cid": derive_cid("x.jsonl", 0), "text": "t",
                "metadata": {"wing": "w", "room": "r", "lar_turn_key": "k",
                             "lar_embedder_model": "model-B/4"}}
 
-    s = compose_memory_sensorium(str(tmp_path / ".mem"), source=mismatched_source,
-                                 embed=lambda _t: [0.0, 0.0, 0.0, 0.0],
-                                 expected_dim=4, expected_model="model-A/4")
+    s = compose_sensorium(
+        kind="memory", source=mismatched_source, embed=lambda _t: [0.0, 0.0, 0.0, 0.0],
+        land=compose_content_land(str(tmp_path / ".mem"), required_keys={"wing", "room"},
+                                  expected_dim=4, expected_model="model-A/4"),
+    )
     with pytest.raises(ValueError):
         s.capture(None)
 
@@ -114,6 +133,6 @@ def test_real_warm_embed_wires_the_keystone(tmp_path, _):
         dim = len(embed_one("probe"))
     except Exception as e:  # noqa: BLE001 — model unavailable in this env
         pytest.skip(f"warm embed cap unavailable: {e}")
-    res = drive_capture(str(tmp_path / ".mem"), "claude", CLAUDE, wing="wing_proj")
+    res = capture_and_observe(str(tmp_path / ".mem"), "claude", CLAUDE, wing="wing_proj")
     assert res["landed"] == TURN_COUNT and res["audit"]["ok"]
     assert res["embedder_model"] == model and res["embedder_dim"] == dim

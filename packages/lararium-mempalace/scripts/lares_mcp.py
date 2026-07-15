@@ -21,6 +21,7 @@ import worldline_io as wl
 import lares_uds as uds
 from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
+from sensorium import sensorium_paths
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
@@ -133,23 +134,18 @@ class LaresCoordinator:
     worldline handle on ONE sensorium palace, and drives the capture engine. Naming each method for its
     CLI verb keeps the isomorphism honest; the surfaces stay thin skins."""
 
-    def __init__(self, palace_path: str, *, wing: str = "wing_default", embed_factory=None) -> None:
-        self._palace = palace_path
+    def __init__(self, sensorium_root: str, *, wing: str = "wing_default", embed_factory=None) -> None:
+        self._paths = sensorium_paths(sensorium_root)
+        self._palace = self._paths.root
         self._wing = wing
         embed_factory = embed_factory or make_embed_cap
         self._embed_one, self._model = embed_factory()
         self._dim = len(self._embed_one("probe"))           # pin the width off the warm cap
-        # LAYOUT: a 3-plane test-bed roots its content store at <palace>/content (beside structure/
-        # + form/ — corpus_testbed's layout); a capture palace roots it at <palace> itself. Resolve
-        # by which dir already CARRIES a chroma store, so opening a test-bed never plants a second
-        # empty store at its root.
-        content_dir = os.path.join(palace_path, "content")
-        content_path = content_dir if os.path.exists(os.path.join(content_dir, "chroma.sqlite3")) else palace_path
         self._plane_stores: dict = {}                        # lazy structure/form handles, opened on first read
-        self._content = cio.ContentStore(content_path, expected_dim=self._dim, expected_model=self._model)
-        # The fork-DAG rides the ONE canonical `.worldline` dir the capture wire builds into — the same
+        self._content = cio.ContentStore(self._paths.content, expected_dim=self._dim, expected_model=self._model)
+        # The fork-DAG rides the ONE canonical `worldline/` dir the capture wire builds into — the same
         # helper both sides call, so a harvest's braid IS the DAG this coordinator reads (no path split).
-        self._worldline = wl.WorldlineStore(worldline_path(palace_path))
+        self._worldline = wl.WorldlineStore(worldline_path(self._palace))
 
     def harvest(self, surface: str, pointer: str, *, all: bool = False, writeback: bool = False,
                 dry_run: bool = False, wing: "str | None" = None,
@@ -160,7 +156,7 @@ class LaresCoordinator:
         The isomorphism contract carries the CLI's rich args onto this one spine: `all` sweeps every
         surface, `writeback` re-enriches a wing's drawers, `dry_run` previews without landing. The
         per-pointer capture rides `capture_and_observe` here — it lands the content AND builds the
-        worldline fork-DAG into the shared `.worldline`, so `worldline()`/`kapae` read a REAL braid on
+        worldline fork-DAG into the shared `worldline/`, so `worldline()`/`kapae` read a REAL braid on
         the shipping path; the sweep/writeback/preview SHAPING rides the CLI skin + the deferred
         @daemon-cap-wire (this task holds SHAPE + SEATS, never the re-point), so the params stand in the
         signature and thread through as the wire lands them."""
@@ -458,7 +454,7 @@ def main() -> None:
     import argparse
 
     ap = argparse.ArgumentParser(description="lares_mcp — the isomorphic /mcp surface over the lares sensorium")
-    ap.add_argument("--palace", help="the sensorium palace dir (STANDALONE only — opens the stores directly; "
+    ap.add_argument("--sensorium", help="the sensorium dir (STANDALONE only — opens the stores directly; "
                                      "unsafe with more than one live session)")
     ap.add_argument("--wing", default="wing_default", help="the default wing for captures lacking one")
     ap.add_argument("--standalone", action="store_true",
@@ -469,15 +465,15 @@ def main() -> None:
     # process owns nothing. `--standalone` opens the single-session escape hatch (a test-bed, a dead
     # node), and names its cost rather than pretending the direct open comes free.
     if args.standalone:
-        if not args.palace:
-            ap.error("--standalone needs --palace")
-        coordinator = LaresCoordinator(args.palace, wing=args.wing)
+        if not args.sensorium:
+            ap.error("--standalone needs --sensorium")
+        coordinator = LaresCoordinator(args.sensorium, wing=args.wing)
     else:
         if not uds.available():
             raise SystemExit(
                 f"lares_mcp: no lares daemon at {uds.socket_path()} — start one with `lares serve`.\n"
                 "  This surface routes every verb through the @daemon so the palace keeps ONE owner.\n"
-                "  For a single-session direct open, pass --standalone --palace <dir>."
+                "  For a single-session direct open, pass --standalone --sensorium <dir>."
             )
         coordinator = DaemonCoordinator(wing=args.wing)
 

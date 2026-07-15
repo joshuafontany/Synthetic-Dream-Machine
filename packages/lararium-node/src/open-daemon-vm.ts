@@ -61,33 +61,12 @@ export interface DaemonVmOptions {
   daemonAuth?:        IslandMsg_Manifest["daemonAuth"];
   /** Optional storage dir for the daemon island's NodeFS Repo. */
   storageDir?:       string;
-  /**
-   * Optional telemetry SINK config. The @daemon ALWAYS carries the capture cap (idempotent);
-   * passing this rides it to the daemon island as workerData, wiring the cap LIVE (the node sink:
-   * `mine --source ndjson` + fs-WAL + the self-regulating two-loop). Absent → the cap stays inert.
-   */
-  telemetry?: {
-    readonly palacePath: string;
-    readonly spoolDir: string;
-    readonly walPath: string;
-    readonly quarantinePath: string;
-    /** The DURABLE .structurepalace dir (the memory-ast-unfolding bridge — local, never federates). */
-    readonly structurePalaceDir?: string;
-    /** The DURABLE .formpalace dir (the living-grammar FORM-vector store — local, never federates). */
-    readonly formPalaceDir?: string;
-    /** Caller-vector routing: verbatim content → the SOVEREIGN contentpalace (not the guest mine). */
-    readonly callerVector?: { readonly contentDir: string; readonly structured?: boolean };
-    readonly mempalaceBin?: string;
-    readonly tickMs?: number;
-    readonly targetLatencyMs?: number;
-    readonly holdingCostPerMs?: number;
-  };
   /** Override the daemon island script URL (tests). */
   workerScriptUrl?:  URL;
 }
 
 export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, personaUrl, coreHash, pluginCids, grants, libraryBags, daemonAuth, storageDir, telemetry, workerScriptUrl } = opts;
+  const { repo, daemonUrl, personaUrl, coreHash, pluginCids, grants, libraryBags, daemonAuth, storageDir, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (node strategy: merge-on-late-arrival) ────────────────
   const daemonHandle = await resolveBootDoc<LarDoc>(
@@ -114,9 +93,7 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
 
   const host: DaemonVmHost = {
     newSyncChannel: nodeNewSyncChannel,
-    // Inject the telemetry SINK as workerData via a closure — the daemon island reads it to wire
-    // its standing capture cap LIVE. openDaemonVmCore stays untouched (it calls spawnWorker(url)).
-    spawnWorker:    (url) => nodeSpawnWorker(url, telemetry ? { telemetry } : undefined),
+    spawnWorker:    (url) => nodeSpawnWorker(url),
   };
 
   // The wrapper IS the seam — host pieces + recipe/storage + merge-on-arrival daemonHandle;

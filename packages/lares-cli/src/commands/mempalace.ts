@@ -299,6 +299,8 @@ function printHelp(): void {
   console.log("  status              live topology: every daemon/sidecar/mine/hook-leg + its SPAWNER");
   console.log("  quiesce [--hold]    graceful stop-the-world: pause hooks → drain daemons → confirm zero");
   console.log("  resume              un-pause the hooks (the warm daemon re-spawns lazily on next use)");
+  console.log("\n  lane law: `mempalace harvest` writes ONLY the guest ~/.mempalace comparator;");
+  console.log("            `lares harvest` / `capture` write ONLY the sovereign sensorium.");
   console.log("\nThe status output teaches kill-the-spawner-not-the-children; quiesce is idempotent.");
 }
 

@@ -296,7 +296,7 @@ def phase_spread(worldline_store, as_of=None) -> float:
 
 
 def main() -> None:
-    """`worldline_ffz.py enrich --palace <content-dir> [--worldline <dir>]` — run the
+    """`worldline_ffz.py enrich --sensorium <root>` — run the
     membership enrichment over a standing palace + its worldline store, and print the
     per-run JSON report (braids · turns · stamps · rhythm testimony tallies). Idempotent:
     a re-run enriches to the same addresses and reports the same stamp count."""
@@ -307,18 +307,18 @@ def main() -> None:
 
     import content_io as cio
     import worldline_io as wl
+    from sensorium import sensorium_paths
 
     ap = argparse.ArgumentParser(
         description="worldline_ffz — enrich lar_ffz membership stamps (the beat cell fills; nothing tallies).")
     sub = ap.add_subparsers(dest="cmd", required=True)
     e = sub.add_parser("enrich", help="fill absent beat cells across every braid (idempotent)")
-    e.add_argument("--palace", required=True, help="the content palace dir (the chroma plane)")
-    e.add_argument("--worldline", default=None,
-                   help="the worldline dir (default: the `.worldline` beside the palace's parent)")
+    e.add_argument("--sensorium", required=True, help="the sensorium carrying content/ and worldline/")
     args = ap.parse_args()
 
-    palace = os.path.abspath(args.palace)
-    root = os.path.dirname(palace)
+    paths = sensorium_paths(args.sensorium)
+    root = paths.root
+    palace = paths.content
 
     # DECLARATION-CARRIES-AUTHORITY: the sensorium's manifest names which cells its mood can EARN
     # and the provider that earns each. The beat leg runs only where `apertures.beat` declares the
@@ -338,23 +338,27 @@ def main() -> None:
         raise SystemExit(3)
     unprovided = sorted(k for k in apertures if k != "beat")
 
-    wdir = args.worldline or os.path.join(root, ".worldline")
+    wdir = paths.worldline
     if not os.path.isdir(wdir):
         sys.stderr.write(f"worldline_ffz: no worldline store at {wdir!r} — nothing to enrich\n")
         raise SystemExit(3)
 
-    report = assign_worldline_ffz(wl.WorldlineStore(wdir), [cio.ContentStore(palace)])
-    vector_fault = report.pop("__vector_fault__", None)
-    out = {
-        "vector_fault": vector_fault,
-        "braids": len(report),
-        "turns": sum(c.turns for c in report.values()),
-        "stamped": sum(c.stamped for c in report.values()),
-        "locked": sum(1 for c in report.values() if c.locked),
-        "holdover": sum(1 for c in report.values() if c.holdover),
-        "phase_spread": phase_spread(wl.WorldlineStore(wdir)),
-        "unprovided_apertures": unprovided,
-    }
+    worldline = wl.WorldlineStore(wdir)
+    try:
+        report = assign_worldline_ffz(worldline, [cio.ContentStore(palace)])
+        vector_fault = report.pop("__vector_fault__", None)
+        out = {
+            "vector_fault": vector_fault,
+            "braids": len(report),
+            "turns": sum(c.turns for c in report.values()),
+            "stamped": sum(c.stamped for c in report.values()),
+            "locked": sum(1 for c in report.values() if c.locked),
+            "holdover": sum(1 for c in report.values() if c.holdover),
+            "phase_spread": phase_spread(worldline),
+            "unprovided_apertures": unprovided,
+        }
+    finally:
+        worldline.close()
     sys.stdout.write(json.dumps(out, ensure_ascii=False) + "\n")
 
 

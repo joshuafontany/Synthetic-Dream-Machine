@@ -78,6 +78,12 @@ describe("the hook's fallback ladder leads with the ONE resolver", () => {
   });
 });
 
+describe("the hook's capture surface law", () => {
+  test("names VS Code Copilot separately so live capture matches bulk harvest", () => {
+    expect(hookText).toMatch(/\*\/GitHub\.copilot-chat\/transcripts\/\*\) surface=copilot-vscode/);
+  });
+});
+
 describe("resolveTranscriptWing — the resolver the hook + `lares wing-of` share", () => {
   function scratchProject(): { dir: string; done: () => void } {
     const dir = mkdtempSync(join(tmpdir(), "wing-of-"));

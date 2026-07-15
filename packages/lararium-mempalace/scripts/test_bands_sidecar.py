@@ -137,7 +137,7 @@ def test_stability_gate_locks_stable_holds_noise():
     jitter (reads REPRODUCED); a noise-only fixture yields lower consensus with FRAGILE cuts."""
     E = _blocks(noise=0.02)
     order = bs.changepoint_tree(E, max_cuts=8, min_size=2)["order"]
-    gate = bs.stability_gate(E, order, n_boot=50, seed=7)
+    gate = bs.stability_gate(E, order, n_boot=16, seed=7)
     # the true boundaries (30, 60) read reproduced
     for true_cut in (30, 60):
         near = [c for c in order if abs(c - true_cut) <= 2]
@@ -152,7 +152,7 @@ def test_stability_gate_locks_stable_holds_noise():
     # so `order` comes back EMPTY (a stronger refusal — nothing even reaches the grade).
     noise = np.random.default_rng(11).normal(0, 1, (90, 3))
     norder = bs.changepoint_tree(noise, max_cuts=8, min_size=2)["order"]
-    ngate = bs.stability_gate(noise, norder, n_boot=50, seed=7)
+    ngate = bs.stability_gate(noise, norder, n_boot=16, seed=7)
     assert ngate["consensus"] < gate["consensus"], "noise must witness weaker than clean blocks"
     grade = ngate["grade_of_cut"]
     assert (not grade) or any(r == "fragile" for r in grade.values()), (

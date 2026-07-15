@@ -15,7 +15,9 @@ def test_bed_manifest_declares_geology(tmp_path):
     assert m["apertures"] == {"measure": "boundary-changepoint"}
     assert "beat" not in m["apertures"]  # nobody grounded a corpus — beat stays unearnable
     assert m["ephemeral"] is True
-    assert set(m["has"]) == {"content", "structure", "form"}
+    assert set(m["has"]) == {"content", "structure", "form", "worldline", "persistence"}
+    assert m["worldline"] == {"real": ["in-file"], "arbitrary": ["walk-order"]}
+    assert m["persistencePolicy"] == {"halfLife": None}
 
 
 def test_bed_manifest_re_stand_stays_byte_identical(tmp_path):
@@ -32,7 +34,7 @@ def test_geology_bed_refuses_the_beat_fill(tmp_path):
     os.makedirs(tmp_path / "content", exist_ok=True)
     r = subprocess.run(
         [sys.executable, os.path.join(_HERE, "worldline_ffz.py"),
-         "enrich", "--palace", str(tmp_path / "content")],
+         "enrich", "--sensorium", str(tmp_path)],
         capture_output=True, text=True)
     assert r.returncode == 3
     assert "earns measure, never beat" in r.stderr

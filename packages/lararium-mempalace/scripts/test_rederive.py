@@ -35,8 +35,8 @@ def test_rederive_refuses_an_empty_ground(tmp_path):
         rd.rederive(root)
 
 
-def test_rederive_refuses_loud_when_no_bed_named():
-    with pytest.raises(SystemExit, match="no bed named"):
+def test_rederive_refuses_loud_when_no_sensorium_named():
+    with pytest.raises(SystemExit, match="no sensorium named"):
         rd.main([])
 
 

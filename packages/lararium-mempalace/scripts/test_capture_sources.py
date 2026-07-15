@@ -9,8 +9,11 @@
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_capture_sources.py -q
 """
 import hashlib
+import json
 import os
 import sqlite3
+import subprocess
+import sys
 
 import pytest
 
@@ -20,6 +23,7 @@ from capture_sources import (
     claude_source,
     codex_source,
     copilot_source,
+    copilot_vscode_source,
     corpus_source,
     derive_cid,
     resolve_source,
@@ -45,6 +49,16 @@ def test_source_key_scopes_by_session_and_surface_no_cross_collision():
     assert _source_key("claude", "/x/sess-one.jsonl") == "claude:sess-one"
     assert _source_key("codex", "/y/sess-one.jsonl") == "codex:sess-one"
     assert _source_key("claude", "/x/sess-one.jsonl") != _source_key("codex", "/y/sess-one.jsonl")
+
+
+def test_staged_and_direct_pointer_share_one_source_identity_and_cids():
+    # The comparator/ingest stage may spell the same native stream `claude__<session>.jsonl`.
+    # Staging is ingress-only: a stage re-pass must converge with direct capture, never mint a
+    # second drawer family for the same exchanges.
+    direct = _source_key("claude", "/source/claude-main.jsonl")
+    staged = _source_key("claude", "/stage/claude__claude-main.jsonl")
+    assert direct == staged == "claude:claude-main"
+    assert derive_cid(direct, 2) == derive_cid(staged, 2)
 
 
 def test_turn_key_fallback_folds_chunk_no_collision():
@@ -176,6 +190,51 @@ def test_copilot_reads_sqlite_not_events_jsonl(tmp_path):
     assert recs[0]["cid"] == derive_cid("copilot:cop-sess-1", 0)
 
 
+def test_copilot_sqlite_source_can_select_one_native_session(tmp_path):
+    db = tmp_path / "session-store.db"
+    _build_copilot_db(str(db))
+    selected = list(copilot_source(wing="wing_proj", session_id="cop-sess-1")(str(db)))
+    missing = list(copilot_source(wing="wing_proj", session_id="absent")(str(db)))
+    assert len(selected) == 2 and not missing
+
+
+def test_copilot_sqlite_adapter_lists_and_exports_only_the_selected_session(tmp_path):
+    """The comparator adapter is explicit: sovereign capture never consumes this JSONL."""
+    db = tmp_path / "session-store.db"
+    _build_copilot_db(str(db))
+    script = os.path.join(os.path.dirname(__file__), "copilot_sqlite_normalize.py")
+
+    listed = subprocess.run(
+        [sys.executable, script, "--list", str(db)], check=True, capture_output=True, text=True,
+    )
+    assert [json.loads(line)["id"] for line in listed.stdout.splitlines()] == ["cop-sess-1"]
+
+    out = tmp_path / "comparator-stage"
+    subprocess.run(
+        [sys.executable, script, "--session", "cop-sess-1", str(db), str(out)], check=True,
+    )
+    exported = out / "cop-sess-1.jsonl"
+    assert exported.exists()
+    assert "read the sqlite store" in exported.read_text(encoding="utf-8")
+
+
+def test_copilot_vscode_reads_its_native_event_stream_not_a_staged_rewrite(tmp_path):
+    stream = tmp_path / "chat.jsonl"
+    stream.write_text(
+        "\n".join([
+            json.dumps({"type": "session.start", "data": {"sessionId": "vscode-7"}}),
+            json.dumps({"type": "user.message", "id": "u-7", "timestamp": "t1", "data": {"content": "native event stream"}}),
+            json.dumps({"type": "assistant.message", "id": "a-7", "timestamp": "t2", "data": {"content": "Python reads it directly"}}),
+        ]) + "\n",
+        encoding="utf-8",
+    )
+    recs = list(copilot_vscode_source(wing="wing_proj")(str(stream)))
+    assert len(recs) == 1
+    assert recs[0]["metadata"]["source_file"] == "copilot-vscode:vscode-7"
+    assert recs[0]["metadata"]["lar_surface"] == "copilot-vscode"
+    assert "Python reads it directly" in recs[0]["text"]
+
+
 def test_resolve_source_dispatch_and_wing_floor():
     assert resolve_source("codex", wing="w") is not None
     with pytest.raises(ValueError):
@@ -183,6 +242,7 @@ def test_resolve_source_dispatch_and_wing_floor():
     with pytest.raises(ValueError):
         resolve_source("nope", wing="w")              # unknown surface refuses
     assert resolve_source("copilot") is not None      # copilot defaults its wing per-session
+    assert resolve_source("copilot-vscode", wing="w") is not None
 
 
 # --- the curated human-text corpus cap (RUN-ARC #2 — the test-bed ground) ---------------------------

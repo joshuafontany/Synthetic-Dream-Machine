@@ -161,6 +161,18 @@ export function resolveContentPalaceSpawn(): ContentPalaceSpawn {
   return resolveSidecarSpawn("content_io.py");
 }
 
+/** `capture_session.py` — the Python-owned source-stream capture holder. */
+export type CaptureSessionSpawn = SidecarSpawn;
+export function resolveCaptureSessionSpawn(): CaptureSessionSpawn {
+  return resolveSidecarSpawn("capture_session.py");
+}
+
+/** `corpus_capture.py` — the Python-owned rooted static-corpus pointer pipe. */
+export type CorpusCaptureSpawn = SidecarSpawn;
+export function resolveCorpusCaptureSpawn(): CorpusCaptureSpawn {
+  return resolveSidecarSpawn("corpus_capture.py");
+}
+
 /** `embed_io.py` — the palace-less EMBED holder (text→vector), consuming the mempalace embedder. */
 export type EmbedSpawn = SidecarSpawn;
 export function resolveEmbedSpawn(): EmbedSpawn {

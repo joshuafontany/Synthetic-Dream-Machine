@@ -21,6 +21,14 @@ def test_generic_store_accepts_arbitrary_metadata(tmp_path):
     assert s.get("c-1")["metadata"]["whatever"] == "shape"
 
 
+def test_store_refuses_nested_or_enveloped_metadata_at_the_durable_boundary(tmp_path):
+    s = _store(tmp_path)
+    with pytest.raises(ValueError, match="nested metadata"):
+        s.put("nested", "t", [0.1, 0.2], {"lar_surface": "claude", "meta": {"wing": "w"}})
+    with pytest.raises(ValueError, match="envelope"):
+        s.put("envelope", "t", [0.1, 0.2], {"metadata": "{\"wing\":\"w\"}"})
+
+
 def test_search_over_fetch_bails_at_the_pool_ceiling_not_full_scan(tmp_path):
     # C5 scale: a kapae'd hot-region (all near-neighbors muted) must NOT widen the over-fetch to the whole
     # collection. The pool caps at k·C (=k*32); past it, recall bails with the live rows found — never a

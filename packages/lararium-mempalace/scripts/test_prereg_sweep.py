@@ -25,6 +25,6 @@ def test_c1_reads_real_above_twin_on_sequenced_text():
         assert out["meaning_ratio"] > 1.0
 
 
-def test_sweep_refuses_loud_when_no_bed_named():
-    with pytest.raises(SystemExit, match="no bed named"):
+def test_sweep_refuses_loud_when_no_sensorium_named():
+    with pytest.raises(SystemExit, match="no sensorium named"):
         ps.main([])

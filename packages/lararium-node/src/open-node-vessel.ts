@@ -63,8 +63,9 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
+import { makeSourceCapture, type SourceCapture } from "./source-capture.js";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { larRuntimeDir, larStructurePalaceDir, larFormPalaceDir, larContentDir }  from "./vessel-paths.js";
+import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
@@ -270,6 +271,9 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // worldline form pre-fetch (makeFormPalace ref-counts per canonical dir → one reference, never a
   // second process). Owned by the form provider impl below; closed implicitly at process exit / idle-reap.
   let recallFormPalace: FormPalace | null = null;
+  // One Python source-stream owner for the sovereign memory sensorium. It receives pointers only;
+  // parsing, CID identity, embedding and land all stay on the Python side of the boundary.
+  let sourceCapture: SourceCapture | null = null;
   // The composed verb plane (the four provider-heavy groups, NESTED-composed). composeVerbPlane is async
   // but wireVerbs runs SYNCHRONOUSLY (daemonCap.build calls it un-awaited); the plane composes at the END
   // of openDaemon (where daemonVm is ready, awaited BEFORE wireVerbs inside daemonCap) and wireVerbs
@@ -466,40 +470,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       },
       daemonAuth,
       storageDir,
-      // SINK for the @daemon's idempotent capture cap (the telemetry nalu): the palace + the
-      // vessel-home spool/WAL/quarantine. Wiring this makes the cap LIVE (it boots the engine +
-      // 20Hz tick + the self-regulating two-loop); it stays inert until a FEED sends
-      // telemetry:place-verb. role = capability ≠ platform — node supplies the mempalace sink.
-      telemetry: {
-        // The SOVEREIGN content plane — never `resolvePalacePath()`, which names the GUEST
-        // ~/.mempalace. Nothing in the caller-vector path reads this any more (the engine lands
-        // through content_io), so feeding it the guest only armed the subprocess-mine fallback: one
-        // config-flip from silently re-writing the comparator. That fallback now REFUSES
-        // (node-capture-engine), and this names the plane the turns actually land in, so the two
-        // agree even if the branch is ever re-opened. The RUN never writes the comparator.
-        palacePath:     larContentDir(),
-        // TRANSIENT flush batches → tmpfs (XDG_RUNTIME_DIR): write→mine→rm, never need to survive a
-        // reboot. The DURABLE layer (WAL + quarantine) stays on disk — that's the crash-replay seam.
-        spoolDir:       join(larRuntimeDir(), "capture-nalu"),
-        walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
-        quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
-        // The DURABLE .structurepalace — a SECOND mempalace instance (same ChromaDB engine, separate
-        // palace) at `~/.lares/.structurepalace`, PARALLEL to the verbatim palace + `.meshpalace`. It
-        // sits BESIDE the wipe-zone (not inside .lararium / tmpfs): the recurrence tally is durable
-        // bridge state that must survive reboots AND `reset`. LAR_ROOT-isolated for staged instances.
-        structurePalaceDir:   larStructurePalaceDir(),
-        // The DURABLE .formpalace — the living-grammar FORM-vector store (the two-planes form-capture's
-        // CONTINUOUS plane, encoded) at `~/.lares/.formpalace`, PARALLEL to `.structurepalace`. Keyed by
-        // verbatim_sha (the cross-graph join to the verbatim content drawer); durable bridge state,
-        // beside the wipe-zone, never federates. LAR_ROOT-isolated for staged instances.
-        formPalaceDir:  larFormPalaceDir(),
-        // CALLER-VECTOR routing (the sovereign capture path): verbatim content flows to the sovereign
-        // contentpalace (<memory>/content — embed cap → content-palace put), NOT the external guest
-        // mine. AST → .structurepalace + form → .formpalace already land sovereign; this closes the
-        // triple. The engine's embed/content/meta caps use their default sidecar spawns (only the dir
-        // crosses workerData). The whole memory sensorium now lives inside the lararium.
-        callerVector:   { contentDir: larContentDir() },
-      },
     });
 
     // ── NESTED verb-plane compose (composable-keel idiom) ─────────────────────────────────────────
@@ -546,7 +516,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       },
     };
     const daemonImpl: DaemonVerbProvider = {
-      placeTelemetry: (turnText, sourceFile, frontier, turnKey, chunkIndex) => daemonVm.placeTelemetry(turnText, sourceFile, frontier, turnKey, chunkIndex),
+      captureSource: async (input) => {
+        sourceCapture ??= makeSourceCapture(memorySensoriumDir());
+        return await sourceCapture.capture(input);
+      },
       placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),

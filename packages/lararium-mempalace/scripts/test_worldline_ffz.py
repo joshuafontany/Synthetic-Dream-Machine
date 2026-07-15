@@ -28,7 +28,7 @@ def _rhythmic_vec(i: int, period: int = 8, amp: float = 1.2) -> list:
 def _build(tmp_path):
     """Two braids in one worldline store + two content drawers-per-turn stores:
       rA — a RHYTHMIC braid of 48 turns (locks); rB — a SPARSE braid of 2 turns (holds over)."""
-    wstore = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    wstore = wl.WorldlineStore(str(tmp_path / "worldline"))
     content = cio.ContentStore(str(tmp_path / ".content"))
 
     tick = 0
@@ -90,7 +90,7 @@ def test_desync_phase_is_stable_under_a_new_earlier_sorting_root(tmp_path):
     # C5 idempotence: keying the phase off a STABLE per-root hash (not the sorted-enumeration index)
     # means adding a braid whose root SORTS EARLIER never shifts an existing braid's phase — so its
     # drawers never re-stamp under a new join (the idempotence break YANG's stress-lens named).
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     store.linear("z-root", "z1", tick=1)                  # one braid, root "z-root"
     before = wf.worldline_phases(store)["z-root"]
 

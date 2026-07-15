@@ -55,7 +55,7 @@ def _synth_session(tmp_path):
 
 def test_wire_builds_fork_chain_and_handback(tmp_path):
     main = _synth_session(tmp_path)
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     summary = observe_worldline(store, main, veil_secret=_SECRET)
 
     run = _run("sess-xyz")            # the VEILED root, never the bare session basename
@@ -81,7 +81,7 @@ def test_wire_builds_fork_chain_and_handback(tmp_path):
 
 def test_worldline_of_climbs_to_the_session_root(tmp_path):
     main = _synth_session(tmp_path)
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     observe_worldline(store, main, veil_secret=_SECRET)
     run = _run("sess-xyz")
 
@@ -96,7 +96,7 @@ def test_worldline_of_climbs_to_the_session_root(tmp_path):
 
 def test_re_run_mints_no_duplicate_edges(tmp_path):
     main = _synth_session(tmp_path)
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     observe_worldline(store, main, veil_secret=_SECRET)
     first = len(store.dag()["edges"])
     observe_worldline(store, main, veil_secret=_SECRET)  # a second pass over the same transcript
@@ -124,8 +124,8 @@ def test_capture_and_observe_lands_content_and_builds_the_worldline(tmp_path):
         return factory
 
     main = _synth_session(tmp_path)
-    res = capture_and_observe(str(tmp_path / ".mem"), "claude", main, wing="wing_proj",
-                              worldline_palace=str(tmp_path / ".worldline"),
+    root = str(tmp_path / ".mem")
+    res = capture_and_observe(root, "claude", main, wing="wing_proj",
                               embed_factory=_stub_embed_factory(), veil_secret=_SECRET)
     # content landed AND the worldline built in one pass
     assert res["landed"] == 2 and res["audit"]["ok"]           # two main exchanges (u1/a1, u2/a2)
@@ -134,13 +134,13 @@ def test_capture_and_observe_lands_content_and_builds_the_worldline(tmp_path):
     assert res["worldline"]["spirits"] == [derive_handle(run, "aaa")]
 
     # the LANDED content turn-keys (the user-turn uuids) climb to the VEILED run — demux partitions by root
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(os.path.join(root, "worldline"))
     assert store.worldline_of("u1") == run
     assert store.worldline_of("u2") == run
 
     # no vessel-key / did / raw signing material leaks into any landed drawer's metadata (the C1b witness)
     import content_io as cio
-    cstore = cio.ContentStore(str(tmp_path / ".mem"))
+    cstore = cio.ContentStore(os.path.join(root, "content"))
     metas = [r["metadata"] for r in cstore.scan(limit=256)["records"]]
     assert metas                                       # drawers actually landed
     leaky = ("verifyingKey", "signingKey", "did:", "vessel-key")
@@ -155,7 +155,7 @@ def test_veiled_root_is_opaque_and_owner_recomputable(tmp_path):
     # SAME root from the same secret + run (so a drawer still binds to its braid), while a DIFFERENT
     # secret yields a DIFFERENT root (an exfiltrator without the secret cannot recompute it).
     main = _synth_session(tmp_path)
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     summary = observe_worldline(store, main, veil_secret=_SECRET)
 
     root = summary["run"]
@@ -176,7 +176,7 @@ def test_resumed_transcript_roots_at_the_run_not_a_phantom(tmp_path):
         _main_line("r1", "PRIOR-SESSION-TURN", "user", "resume the thread", "2026-07-05T11:00:00Z"),
         _main_line("r2", "r1", "assistant", "carrying on", "2026-07-05T11:00:05Z"),
     ]) + "\n", encoding="utf-8")
-    store = wl.WorldlineStore(str(tmp_path / ".worldline"))
+    store = wl.WorldlineStore(str(tmp_path / "worldline"))
     observe_worldline(store, str(main), veil_secret=_SECRET)
 
     run = _run("sess-resumed")

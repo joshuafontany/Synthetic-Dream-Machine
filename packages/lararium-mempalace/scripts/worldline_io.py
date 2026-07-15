@@ -49,7 +49,7 @@ The CASCADE (branch-mute across the sensoria) rides the Python coordinator (`cas
 `cascade_un_kapae`) — it holds the rhizome AND the content stores, above any single palace.
 
 Run with the mempalace CLI's interpreter (it has the package):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 worldline_io.py serve --palace ~/.lares/.worldline
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 worldline_io.py serve --palace ~/.lares/worldline
 """
 from __future__ import annotations
 
@@ -69,6 +69,7 @@ from sidecar_caps import (
 REL_FORK = "fork"      # spawn: parent -> child
 REL_LINEAR = "linear"  # sequential: prev -> next
 REL_JOIN = "join"      # handback: child -> parent (the reunion; parent stands after child)
+REL_CONTAINS = "contains"  # declared static topology; never temporal or branch lineage
 
 # The spawn-tree relations — the DOWNWARD branch. kapae mutes a subtree over these; the ∥ verdict
 # reads incomparability over these. A `join` runs UPWARD (back to main) and rides NEITHER walk.
@@ -115,6 +116,7 @@ class WorldlineStore:
             "  frm TEXT NOT NULL,"           # cause endpoint
             "  to_node TEXT NOT NULL,"       # effect endpoint
             "  relation TEXT NOT NULL,"      # fork | linear | join
+            "  basis TEXT NOT NULL DEFAULT 'given',"  # source fact | declared corpus relation
             "  valid_from,"                  # caller logical tick (opens the interval)
             "  valid_to"                     # caller logical tick or NULL-open (closes at handback)
             ")"
@@ -131,6 +133,11 @@ class WorldlineStore:
         self._conn.execute("CREATE INDEX IF NOT EXISTS ix_edges_frm ON worldline_edges(frm)")
         self._conn.execute("CREATE INDEX IF NOT EXISTS ix_edges_to ON worldline_edges(to_node)")
         self._conn.execute("CREATE INDEX IF NOT EXISTS ix_kapae_turn ON worldline_kapae(turn_key)")
+        # Existing palaces predate edge-basis provenance.  The default preserves
+        # their observed session edges as given rather than guessing a derivation.
+        columns = {row[1] for row in self._conn.execute("PRAGMA table_info(worldline_edges)")}
+        if "basis" not in columns:
+            self._conn.execute("ALTER TABLE worldline_edges ADD COLUMN basis TEXT NOT NULL DEFAULT 'given'")
         # (isolation_level=None → each statement above autocommits; no explicit commit needed.)
 
     @contextmanager
@@ -170,7 +177,7 @@ class WorldlineStore:
             return False                       # to_node reaches nothing down the spawn-tree — no cycle
         return frm in self.descendants(to_node)
 
-    def add_edge(self, frm: str, to_node: str, relation: str, tick) -> dict:
+    def add_edge(self, frm: str, to_node: str, relation: str, tick, *, basis: str = "given") -> dict:
         """Add one CAUSE->EFFECT edge at `tick`. SINK-idempotent: an identical (frm,to,relation)
         opening at the SAME tick already stands (a re-observed spawn), so a re-run mints nothing.
 
@@ -188,8 +195,10 @@ class WorldlineStore:
         exact-match drop below). Only OPEN forks (valid_to NULL) count — a handed-back child re-forks free."""
         if not frm or not to_node:
             raise ValueError("add_edge: frm and to_node required")
-        if relation not in (REL_FORK, REL_LINEAR, REL_JOIN):
+        if relation not in (REL_FORK, REL_LINEAR, REL_JOIN, REL_CONTAINS):
             raise ValueError(f"add_edge: unknown relation {relation!r}")
+        if not basis.strip():
+            raise ValueError("add_edge: basis is required")
         # ATOMICITY: both guards READ the whole edge set, then we INSERT. Split across transactions
         # that is check-then-act, and two concurrent sessions each pass a guard the other is about to
         # invalidate. Inside ONE `BEGIN IMMEDIATE`, the guards read a file no one else can write —
@@ -214,18 +223,18 @@ class WorldlineStore:
             if existing:
                 return {"added": False, "frm": frm, "to": to_node, "relation": relation}
             self._conn.execute(
-                "INSERT INTO worldline_edges (frm, to_node, relation, valid_from, valid_to) VALUES (?,?,?,?,NULL)",
-                (frm, to_node, relation, tick),
+                "INSERT INTO worldline_edges (frm, to_node, relation, basis, valid_from, valid_to) VALUES (?,?,?,?,?,NULL)",
+                (frm, to_node, relation, basis, tick),
             )
-        return {"added": True, "frm": frm, "to": to_node, "relation": relation}
+        return {"added": True, "frm": frm, "to": to_node, "relation": relation, "basis": basis}
 
-    def fork(self, parent: str, child: str, tick) -> dict:
+    def fork(self, parent: str, child: str, tick, *, basis: str = "given") -> dict:
         """SPAWN — the parent forks the child (parent happened-before child)."""
-        return self.add_edge(parent, child, REL_FORK, tick)
+        return self.add_edge(parent, child, REL_FORK, tick, basis=basis)
 
-    def linear(self, prev: str, nxt: str, tick) -> dict:
+    def linear(self, prev: str, nxt: str, tick, *, basis: str = "given") -> dict:
         """A linear turn->turn step (prev happened-before next)."""
-        return self.add_edge(prev, nxt, REL_LINEAR, tick)
+        return self.add_edge(prev, nxt, REL_LINEAR, tick, basis=basis)
 
     def handback(self, parent: str, child: str, tick) -> dict:
         """HANDBACK — the twin-reunion: add the JOIN edge (child->parent, the parent stands after
@@ -251,18 +260,18 @@ class WorldlineStore:
         """Every edge (frm, to, relation, valid_from, valid_to), optionally AS-OF a tick — the
         bitemporal slice keeps only intervals open at `as_of` (valid_from<=as_of<valid_to)."""
         rows = self._conn.execute(
-            "SELECT frm, to_node, relation, valid_from, valid_to FROM worldline_edges ORDER BY id"
+            "SELECT frm, to_node, relation, basis, valid_from, valid_to FROM worldline_edges ORDER BY id"
         ).fetchall()
         if as_of is None:
-            return [{"frm": r[0], "to": r[1], "relation": r[2], "valid_from": r[3], "valid_to": r[4]} for r in rows]
+            return [{"frm": r[0], "to": r[1], "relation": r[2], "basis": r[3], "valid_from": r[4], "valid_to": r[5]} for r in rows]
         out = []
         for r in rows:
-            vf, vt = r[3], r[4]
+            vf, vt = r[4], r[5]
             if vf is not None and vf > as_of:
                 continue                       # not yet opened at as_of
             if vt is not None and vt <= as_of:
                 continue                       # already closed at as_of
-            out.append({"frm": r[0], "to": r[1], "relation": r[2], "valid_from": vf, "valid_to": vt})
+            out.append({"frm": r[0], "to": r[1], "relation": r[2], "basis": r[3], "valid_from": vf, "valid_to": vt})
         return out
 
     def dag(self, as_of=None) -> dict:

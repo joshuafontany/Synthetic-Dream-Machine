@@ -28,8 +28,8 @@ import os
 import sys
 
 import content_io as cio
-from capture_session import capture_and_observe
-from plane_fanout import compose_corpus_planes
+from capture_session import compose_memory_stream_sensorium
+from sensorium import sensorium_paths
 
 # The transcript globs each surface keeps its worldlines under. A pointer names ONE transcript;
 # the sweep walks these and captures each in turn (the source-caps are per-pointer by contract).
@@ -51,7 +51,7 @@ def content_dir_of(root: str) -> str:
     """The content plane sits at `<root>/content` — a sibling of the derived planes, never the root
     itself. The lares content store REPLACES the vendored mempalace as the memory sensorium's content
     plane; the manifest's `content.engine` names which one stands."""
-    return os.path.join(root, "content")
+    return sensorium_paths(root).content
 
 
 def _refuse_comparator(root: str) -> None:
@@ -105,13 +105,13 @@ def tri_plane_witness(root: str, *, sample_limit: int = 200) -> dict:
 
     root = os.path.expanduser(root)
     embed_one, model = make_embed_cap()
-    # The content plane roots at `<root>/content`; an older layout rooted it at `<root>` itself.
+    # Content derives from the sensorium root.  There is no root-as-content
+    # fallback: one address means one stable capability stack.
     content = content_dir_of(root)
-    if not os.path.exists(os.path.join(content, "chroma.sqlite3")):
-        content = root
     store = cio.ContentStore(content, expected_dim=len(embed_one("probe")), expected_model=model)
-    structure = StructurePalaceStore(os.path.join(root, "structure"))
-    form = FormPalaceStore(os.path.join(root, "form"))
+    paths = sensorium_paths(root)
+    structure = StructurePalaceStore(paths.structure)
+    form = FormPalaceStore(paths.form)
 
     # structure keys by STRUCTURAL HASH; its provenance names the content cids it covers.
     got = structure._col.get(include=["metadatas"])  # noqa: SLF001 — the witness probe reads the raw collection
@@ -179,14 +179,14 @@ def run(root: str, *, surface: str, wing: str, room: str, pointers: list,
     os.makedirs(os.path.expanduser(root), exist_ok=True)
     root = os.path.expanduser(root)
 
-    content = content_dir_of(root)
-    worldline = os.path.join(root, ".worldline")
+    stream, model, dim, _paths = compose_memory_stream_sensorium(
+        root, planes_factory=lambda **_route: _planes(root, min_support, max_forms, max_candidates),
+    )
     passes = []
     for p in pointers:
-        planes = compose_corpus_planes(root, min_support=min_support, max_forms=max_forms,
-                                       max_candidates=max_candidates)
-        summary = capture_and_observe(content, surface, p, wing=wing, room=room, planes=planes,
-                                      worldline_palace=worldline)
+        # The stream holds warm content/embed capabilities; its factory mints
+        # new source and plane capabilities for this pointer.
+        summary = stream.capture(p, surface=surface, wing=wing, room=room)
         plane = summary.get("planes", {})
         passes.append({
             "pointer": os.path.basename(p),
@@ -196,12 +196,21 @@ def run(root: str, *, surface: str, wing: str, room: str, pointers: list,
             "structure": (plane.get("structure") or {}).get("landed"),
             "form": (plane.get("form") or {}).get("landed"),
             "worldline": bool(summary.get("worldline")),
+            "embedder_model": model,
+            "embedder_dim": dim,
         })
 
     # Read the planes back off FRESH handles — the witness never trusts the writer's own count.
     return {"root": root, "surface": surface, "wing": wing,
             "pointers": len(pointers), "passes": passes,
             "witness": tri_plane_witness(root)}
+
+
+def _planes(root: str, min_support: int, max_forms: int, max_candidates: int):
+    """The Memory projection capability, constructed once per stream pass."""
+    from plane_fanout import compose_corpus_planes
+    return compose_corpus_planes(root, min_support=min_support, max_forms=max_forms,
+                                 max_candidates=max_candidates)
 
 
 def main() -> None:
@@ -213,11 +222,12 @@ def main() -> None:
     ls.add_argument("--project", default=None, help="narrow to one project dir (claude)")
 
     w = sub.add_parser("witness", help="read the three planes back off a standing palace (no capture)")
-    w.add_argument("--root", default=None)
+    w.add_argument("--sensorium", default=None,
+                   help="the Memory sensorium root (default: the canonical data sensorium)")
     w.add_argument("--sample-limit", type=int, default=200, dest="sample_limit")
 
     r = sub.add_parser("run", help="capture transcripts onto content + structure + form, then witness")
-    r.add_argument("--root", default=None,
+    r.add_argument("--sensorium", default=None,
                    help="the Memory sensorium root (default: the canonical <data>/lares/sensoriums/memory); never ~/.mempalace")
     r.add_argument("--surface", default="claude", choices=sorted(_SURFACE_ROOTS))
     r.add_argument("--wing", required=True, help="the per-project wing slug (`lares wing-of <transcript>`)")
@@ -238,20 +248,20 @@ def main() -> None:
         return
 
     if args.cmd == "witness":
-        args.root = args.root or memory_sensorium_dir()
-        _refuse_comparator(args.root)
-        out = tri_plane_witness(args.root, sample_limit=args.sample_limit)
+        args.sensorium = args.sensorium or memory_sensorium_dir()
+        _refuse_comparator(args.sensorium)
+        out = tri_plane_witness(args.sensorium, sample_limit=args.sample_limit)
         sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
         return
 
-    args.root = args.root or memory_sensorium_dir()
+    args.sensorium = args.sensorium or memory_sensorium_dir()
     pointers = args.pointer or transcripts(args.surface, project=args.project)
     if args.limit is not None:
         pointers = pointers[: args.limit]
     if not pointers:
         raise SystemExit(f"memory_sensorium: no {args.surface} transcripts found")
 
-    out = run(args.root, surface=args.surface, wing=args.wing, room=args.room, pointers=pointers,
+    out = run(args.sensorium, surface=args.surface, wing=args.wing, room=args.room, pointers=pointers,
               min_support=args.min_support, max_forms=args.max_forms, max_candidates=args.max_candidates)
     sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
 

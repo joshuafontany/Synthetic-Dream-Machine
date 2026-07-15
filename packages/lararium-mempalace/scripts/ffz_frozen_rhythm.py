@@ -29,9 +29,9 @@ Each logical source ALSO reads as its own segment, so a seam artifact at a work/
 stays visible rather than silently blended.
 
 Usage (the mempalace venv):
-  ~/.venv/bin/python3 ffz_frozen_rhythm.py probe --root <bed> [--root <bed> ...]
+  ~/.venv/bin/python3 ffz_frozen_rhythm.py probe --sensorium <place> [--sensorium <place> ...]
       [--window 128] [--stride 8]
-  ~/.venv/bin/python3 ffz_frozen_rhythm.py walk --root <bed>     # the wa-order deltaF re-walk
+  ~/.venv/bin/python3 ffz_frozen_rhythm.py walk --sensorium <place>     # the wa-order deltaF re-walk
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/ffz-frozen-rhythm
 """
@@ -211,20 +211,20 @@ def main() -> None:
         description="ffz_frozen_rhythm — stream chant-ordered corpuses through the FFZ lock")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("probe", help="the per-corpus lock readings (whole stream + segments)")
-    p.add_argument("--root", action="append", required=True,
-                   help="a populated test-bed root (repeatable — the readings land side by side)")
+    p.add_argument("--sensorium", action="append", required=True,
+                   help="a populated test-bed sensorium (repeatable — the readings land side by side)")
     p.add_argument("--window", type=int, default=128)
     p.add_argument("--stride", type=int, default=8)
     w = sub.add_parser("walk", help="the wa-order deltaF re-walk (chant order vs filing order)")
-    w.add_argument("--root", required=True)
+    w.add_argument("--sensorium", required=True)
     w.add_argument("--rungs", type=int, default=28)
     w.add_argument("--seed", type=int, default=0x51611)
     args = ap.parse_args()
     if args.cmd == "probe":
         out = [probe_root(os.path.expanduser(r), window=args.window, stride=args.stride)
-               for r in args.root]
+               for r in args.sensorium]
     else:
-        out = walk_delta_f(os.path.expanduser(args.root), rungs=args.rungs, seed=args.seed)
+        out = walk_delta_f(os.path.expanduser(args.sensorium), rungs=args.rungs, seed=args.seed)
     sys.stdout.write(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
 
 

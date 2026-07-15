@@ -235,12 +235,19 @@ def read_stored_embeddings(collection, key_map: dict, *, where=None) -> list:
 
 
 def serve_lock_path(palace_path: str, prefix: str) -> str:
-    """``~/.mempalace/locks/<prefix>_<key>.lock`` where key = sha256 of the
-    canonical palace path [:16]. ``prefix`` names the sidecar (its cap-stack
-    identity) so each sidecar holds its OWN per-palace singleton."""
-    lock_dir = os.path.join(os.path.expanduser("~"), ".mempalace", "locks")
+    """``<palace>/locks/<prefix>_<key>.lock`` for one palace resource.
+
+    The lock must live with the palace it protects, never under the guest
+    comparator (``~/.mempalace``).  A sovereign content holder otherwise
+    creates comparator state merely by opening, and a comparator cleanup can
+    break an unrelated sensorium holder.  ``prefix`` names the sidecar
+    cap-stack identity; the canonical-path digest makes aliases share one
+    flock slot.
+    """
+    canonical = canonical_path(palace_path, normcase=True)
+    lock_dir = os.path.join(canonical, "locks")
     os.makedirs(lock_dir, exist_ok=True)
-    key = hashlib.sha256(canonical_path(palace_path, normcase=True).encode("utf-8")).hexdigest()[:16]
+    key = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
     return os.path.join(lock_dir, f"{prefix}_{key}.lock")
 
 
