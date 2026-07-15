@@ -18,18 +18,12 @@ def test_python_contract_matches_the_shared_conformance_fixture():
 
 
 def test_python_composes_the_same_open_cap_fragments_as_mesh():
-    assert compose_sensorium_contract([
-        {"has": ["content", "recall"]},
-        {"has": ["telemetry"], "apertures": {"measure": "boundary-changepoint"}},
-    ]) == {
-        "has": ["content", "recall", "telemetry"],
-        "apertures": {"measure": "boundary-changepoint"},
-    }
+    fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    assert compose_sensorium_contract(fixture["composition"]["fragments"]) == fixture["composition"]["normalized"]
 
 
 def test_python_refuses_conflicting_cap_order_witnesses():
-    with pytest.raises(ValueError, match="conflicting order evidence"):
-        compose_sensorium_contract([
-            {"has": ["capture"], "order": {"projector": "stream", "basis": "observed:source-sequence"}},
-            {"has": ["worldline"], "order": {"projector": "stream", "basis": "declared:turn-sequence"}},
-        ])
+    fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    for conflict in fixture["composition"]["conflicts"]:
+        with pytest.raises(ValueError, match=conflict["error"]):
+            compose_sensorium_contract(conflict["fragments"])

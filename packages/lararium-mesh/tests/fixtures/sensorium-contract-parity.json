@@ -12,6 +12,25 @@
   "wiki": {
     "has": ["content", "structure", "form", "coupling"]
   },
+  "composition": {
+    "fragments": [
+      {"has": ["content", "recall"]},
+      {"has": ["telemetry"], "apertures": {"measure": "boundary-changepoint"}}
+    ],
+    "normalized": {
+      "has": ["content", "recall", "telemetry"],
+      "apertures": {"measure": "boundary-changepoint"}
+    },
+    "conflicts": [
+      {
+        "fragments": [
+          {"has": ["capture"], "order": {"projector": "stream", "basis": "observed:source-sequence"}},
+          {"has": ["worldline"], "order": {"projector": "stream", "basis": "declared:turn-sequence"}}
+        ],
+        "error": "conflicting order evidence"
+      }
+    ]
+  },
   "invalid": [
     {"contract": {"has": ["content", ""]}, "error": "capability"},
     {"contract": {"has": ["content"], "order": {"projector": "stream", "basis": ""}}, "error": "order"},

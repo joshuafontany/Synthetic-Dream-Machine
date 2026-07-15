@@ -10,6 +10,14 @@ const fixture = JSON.parse(readFileSync(
   valid: Parameters<typeof declareSensoriumContract>[0];
   normalized: ReturnType<typeof declareSensoriumContract>;
   invalid: readonly { contract: Parameters<typeof declareSensoriumContract>[0]; error: string }[];
+  composition: {
+    fragments: readonly Parameters<typeof declareSensoriumContract>[0][];
+    normalized: ReturnType<typeof declareSensoriumContract>;
+    conflicts: readonly {
+      fragments: readonly Parameters<typeof declareSensoriumContract>[0][];
+      error: string;
+    }[];
+  };
 };
 
 describe("sensorium-contract", () => {
@@ -41,19 +49,12 @@ describe("sensorium-contract", () => {
   });
 
   test("composes only the cap fragments an entity currently carries", () => {
-    expect(composeSensoriumContract([
-      { has: ["content", "recall"] },
-      { has: ["telemetry"], apertures: { measure: "boundary-changepoint" } },
-    ])).toEqual({
-      has: ["content", "recall", "telemetry"],
-      apertures: { measure: "boundary-changepoint" },
-    });
+    expect(composeSensoriumContract(fixture.composition.fragments)).toEqual(fixture.composition.normalized);
   });
 
   test("refuses contradictory ordering witnesses from composed caps", () => {
-    expect(() => composeSensoriumContract([
-      { has: ["capture"], order: { projector: "stream", basis: "observed:source-sequence" } },
-      { has: ["worldline"], order: { projector: "stream", basis: "declared:turn-sequence" } },
-    ])).toThrow("conflicting order evidence");
+    for (const conflict of fixture.composition.conflicts) {
+      expect(() => composeSensoriumContract(conflict.fragments)).toThrow(conflict.error);
+    }
   });
 });
