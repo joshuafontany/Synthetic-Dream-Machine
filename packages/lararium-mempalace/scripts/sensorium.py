@@ -239,6 +239,32 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
         release_lock(lock)
 
 
+def set_stream_ephemeral(root: str, ephemeral: bool) -> str:
+    """Change only the lifecycle dial of one declared stream under its root lock."""
+    if not isinstance(ephemeral, bool):
+        raise ValueError("stream lifecycle needs a boolean ephemeral value")
+    paths = sensorium_paths(root)
+    path = os.path.join(paths.root, "manifest.json")
+    if not os.path.isfile(path):
+        raise ValueError(f"stream manifest at {path!r} is absent")
+    lock = acquire_root_lock(paths.root, "sensorium_manifest")
+    try:
+        try:
+            with open(path, encoding="utf-8") as fh:
+                manifest = json.load(fh)
+        except FileNotFoundError:
+            raise ValueError(f"stream manifest at {path!r} is absent") from None
+        except (OSError, ValueError) as exc:
+            raise ValueError(f"stream manifest at {path!r} cannot carry a lifecycle transition: {exc}") from exc
+        if not isinstance(manifest, dict):
+            raise ValueError(f"stream manifest at {path!r} must hold an object")
+        manifest["ephemeral"] = ephemeral
+        _atomic_json_write(path, manifest)
+        return path
+    finally:
+        release_lock(lock)
+
+
 def _write_stream_manifest_unlocked(paths: SensoriumPaths, *, name: str, lar: str, order: OrderCap,
                                     apertures: "dict[str, str] | None", worldline: "dict | None",
                                     ephemeral: bool) -> str:

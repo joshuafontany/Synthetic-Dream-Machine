@@ -18,7 +18,8 @@ from capture_sources import corpus_sectioned_source, corpus_source
 from capture_stream import ContentStoreLandCap
 from plane_fanout import compose_text_planes
 from sensorium import (OrderCap, compose_persistence_cap, compose_stream_sensorium,
-                       sensorium_paths, write_ndjson_atomically, write_stream_manifest)
+                       sensorium_paths, set_stream_ephemeral, write_ndjson_atomically,
+                       write_stream_manifest)
 
 
 def refuse_comparator(root: str) -> None:
@@ -112,15 +113,26 @@ def capture(pointer: str, sensorium: str, *, wing: str, room: str = "corpus", mi
 def main() -> None:
     ap = argparse.ArgumentParser(description="capture a static corpus through a rooted stream sensorium")
     ap.add_argument("--sensorium", required=True)
-    ap.add_argument("--source", action="append", required=True)
-    ap.add_argument("--wing", required=True)
+    ap.add_argument("--source", action="append")
+    ap.add_argument("--wing")
     ap.add_argument("--room", default="corpus")
     ap.add_argument("--sections", choices=("wrapped", "extracted"))
     ap.add_argument("--min-support", type=int, default=2, dest="min_support")
     ap.add_argument("--max-forms", type=int, default=64, dest="max_forms")
     ap.add_argument("--max-candidates", type=int, default=96, dest="max_candidates")
     ap.add_argument("--ephemeral", action="store_true")
+    ap.add_argument("--set-ephemeral", choices=("true", "false"), dest="set_ephemeral",
+                    help="change only an existing stream declaration's lifecycle dial")
     args = ap.parse_args()
+    if args.set_ephemeral is not None:
+        if args.source:
+            ap.error("--set-ephemeral changes an existing declaration; omit --source")
+        path = set_stream_ephemeral(args.sensorium, args.set_ephemeral == "true")
+        print(json.dumps({"sensorium": sensorium_paths(args.sensorium).root,
+                          "ephemeral": args.set_ephemeral == "true", "manifest": path}, ensure_ascii=False))
+        return
+    if not args.source or not args.wing:
+        ap.error("capture requires --source and --wing")
     pointer = os.pathsep.join(args.source)
     print(json.dumps(capture(pointer, args.sensorium, wing=args.wing, room=args.room,
           min_support=args.min_support, max_forms=args.max_forms, max_candidates=args.max_candidates,

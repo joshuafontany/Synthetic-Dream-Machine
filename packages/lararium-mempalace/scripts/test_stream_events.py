@@ -92,6 +92,27 @@ def test_derived_ndjson_replaces_as_one_complete_projection(tmp_path):
     assert not list(tmp_path.glob(".projection-*.ndjson"))
 
 
+def test_stream_lifecycle_transition_preserves_capture_owned_evidence(tmp_path):
+    from sensorium import OrderCap, read_stream_manifest, set_stream_ephemeral, write_stream_manifest
+
+    write_stream_manifest(str(tmp_path), name="stream", lar="lar:///x",
+                          order=OrderCap("stream", "observed:connection-sequence"),
+                          worldline={"real": ["connection-sequence"], "arbitrary": []}, ephemeral=True)
+    set_stream_ephemeral(str(tmp_path), False)
+    manifest = read_stream_manifest(str(tmp_path))
+    assert manifest["ephemeral"] is False
+    assert manifest["order"] == {"projector": "stream", "basis": "observed:connection-sequence"}
+    assert manifest["worldline"] == {"real": ["connection-sequence"], "arbitrary": []}
+
+
+def test_stream_lifecycle_transition_refuses_an_absent_root_without_minting_lock_state(tmp_path):
+    from sensorium import set_stream_ephemeral
+
+    with pytest.raises(ValueError, match="is absent"):
+        set_stream_ephemeral(str(tmp_path / "absent"), False)
+    assert not (tmp_path / "absent").exists()
+
+
 def test_stream_manifest_preserves_an_unowned_cap_and_declaration_fields(tmp_path):
     from sensorium import OrderCap, write_stream_manifest
     (tmp_path / "manifest.json").write_text(json.dumps({

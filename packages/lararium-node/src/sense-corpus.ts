@@ -236,8 +236,19 @@ export async function queryCorpus(
 
 export interface KeepResult { readonly id: string; readonly kept: boolean; readonly existed: boolean; }
 
-/** Promote an ephemeral corpus to durable (ephemeral:false, pid dropped) and preserve the Python
- * sensorium declaration while changing its one lifecycle field. */
+/** Ask Python's rooted manifest cap to move one corpus from ephemeral to durable. */
+function setCorpusSensoriumEphemeral(dir: string, ephemeral: boolean): void {
+  const manifestPath = join(dir, "manifest.json");
+  if (!existsSync(manifestPath)) return;
+  const { python, script, submoduleRoot, scriptPresent } = resolveCorpusCaptureSpawn();
+  if (!python || !scriptPresent) return;
+  const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+  execFileSync(python, [script, "--sensorium", dir, "--set-ephemeral", String(ephemeral)], {
+    cwd: submoduleRoot, env, maxBuffer: 1 << 20, encoding: "utf8", timeout: 30_000,
+  });
+}
+
+/** Promote an ephemeral corpus to durable (ephemeral:false, pid dropped). */
 export function keepCorpus(id: string): KeepResult {
   const dir = corpusInstanceDir(id);
   const m = existsSync(dir) ? readCorpusRecord(dir) : null;
@@ -245,11 +256,7 @@ export function keepCorpus(id: string): KeepResult {
   const { pid: _pid, ...rest } = m;
   writeCorpusRecord(dir, { ...rest, ephemeral: false });
   try {
-    const manifestPath = join(dir, "manifest.json");
-    const sensorium = JSON.parse(readFileSync(manifestPath, "utf8")) as Record<string, unknown>;
-    if (sensorium["ephemeral"] === true) {
-      atomicWriteFileSync(manifestPath, JSON.stringify({ ...sensorium, ephemeral: false }, null, 2) + "\n");
-    }
+    setCorpusSensoriumEphemeral(dir, false);
   } catch { /* the lifecycle record still carries the promotion */ }
   return { id, kept: true, existed: true };
 }
