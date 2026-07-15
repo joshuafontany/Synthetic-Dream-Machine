@@ -81,6 +81,17 @@ def test_stream_manifest_reader_keeps_cap_owned_fields_without_relaxing_common_e
         read_stream_manifest(str(tmp_path))
 
 
+def test_derived_ndjson_replaces_as_one_complete_projection(tmp_path):
+    from sensorium import write_ndjson_atomically
+
+    target = tmp_path / "bands-cells.ndjson"
+    write_ndjson_atomically(str(target), [{"cid": "a"}, {"cid": "b"}])
+    assert [json.loads(line) for line in target.read_text(encoding="utf-8").splitlines()] == [
+        {"cid": "a"}, {"cid": "b"},
+    ]
+    assert not list(tmp_path.glob(".projection-*.ndjson"))
+
+
 def test_stream_manifest_preserves_an_unowned_cap_and_declaration_fields(tmp_path):
     from sensorium import OrderCap, write_stream_manifest
     (tmp_path / "manifest.json").write_text(json.dumps({

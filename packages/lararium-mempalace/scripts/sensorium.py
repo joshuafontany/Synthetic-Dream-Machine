@@ -149,6 +149,24 @@ def _atomic_json_write(path: str, value: dict) -> None:
         raise
 
 
+def write_ndjson_atomically(path: str, rows) -> None:
+    """Replace one derived NDJSON projection only after its complete body reaches disk."""
+    fd, temporary = tempfile.mkstemp(prefix=".projection-", suffix=".ndjson", dir=os.path.dirname(path))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            for row in rows:
+                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(temporary, path)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
 def read_stream_manifest(root: str, *, absent_ok: bool = False) -> "dict | None":
     """Read one rooted declaration without interpreting cap-owned extension fields.
 

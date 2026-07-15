@@ -40,7 +40,7 @@ import sys
 
 def _rederive_bands(root: str) -> dict:
     """Rebuild bands from stored vectors under the manifest's declared order evidence."""
-    from sensorium import read_stream_manifest, sensorium_paths
+    from sensorium import read_stream_manifest, sensorium_paths, write_ndjson_atomically
 
     paths = sensorium_paths(root)
     try:
@@ -55,9 +55,7 @@ def _rederive_bands(root: str) -> dict:
         cells, summary = analyze_sensorium(
             paths.root, require_one_source=(projector == "stream"))
         target = os.path.join(paths.root, "bands-cells.ndjson")
-        with open(target, "w", encoding="utf-8") as fh:
-            for cell in cells:
-                fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
+        write_ndjson_atomically(target, cells)
         return {"projector": f"{projector}-order", "basis": basis,
                 "cells": len(cells), "summary": summary}
     if (projector, basis) == ("worldline", "observed:turn-dag"):

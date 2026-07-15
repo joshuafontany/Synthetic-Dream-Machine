@@ -18,7 +18,7 @@ from capture_sources import corpus_sectioned_source, corpus_source
 from capture_stream import ContentStoreLandCap
 from plane_fanout import compose_text_planes
 from sensorium import (OrderCap, compose_persistence_cap, compose_stream_sensorium,
-                       sensorium_paths, write_stream_manifest)
+                       sensorium_paths, write_ndjson_atomically, write_stream_manifest)
 
 
 def refuse_comparator(root: str) -> None:
@@ -68,9 +68,7 @@ def compose_corpus_stream_sensorium(root: str, *, wing: str, room: str = "corpus
             try:
                 cells, bands = analyze_sensorium(paths.root)
                 if cells:
-                    with open(os.path.join(paths.root, "bands-cells.ndjson"), "w", encoding="utf-8") as fh:
-                        for cell in cells:
-                            fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
+                    write_ndjson_atomically(os.path.join(paths.root, "bands-cells.ndjson"), cells)
             except Exception as exc:  # noqa: BLE001 — a derived aperture cannot revoke content landing
                 bands = {"cells": 0, "note": f"bands-skipped: analyzer fault ({type(exc).__name__})"}
         from corpus_worldline import backfill
