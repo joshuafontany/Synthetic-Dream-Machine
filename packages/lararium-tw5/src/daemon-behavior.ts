@@ -40,7 +40,7 @@ import {
 } from "@lararium/mesh";
 import { placeVerb } from "./verb-vm.js";
 import { composeIsland } from "./island-caps.js";
-import { hasEngineWatch } from "./has-island-watches.js";
+import { hasEngineWatch, hasProjection } from "./has-island-watches.js";
 import { hasCapture } from "./has-capture.js";
 import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandCap } from "./island-caps.js";
@@ -49,6 +49,13 @@ import type { IslandContext, IslandBehavior } from "./island-context.js";
 export interface DaemonBehaviorOptions {
   /** A ready verifier (e.g. tests, or a host-provided one). */
   verifier?: CapabilityVerifier;
+  /**
+   * Projection mount seam — the @daemon INHERITS the wiki's render cap (hasProjection). When the worker
+   * entry supplies onBoot (mountProjection), the @daemon becomes a surfaceable wiki like any other: the user
+   * pins it to render, the same path any wiki takes (it's the same TW5 VM under the hood). Absent → the cap
+   * stays inert (the @daemon runs headless, its historical resting state). role = capability ≠ platform.
+   */
+  onBoot?: (ctx: IslandContext) => (() => void) | undefined;
   /**
    * Async verifier source resolved in `onEa` with the live IslandContext —
    * the isomorphic-vessel Stage-1 hook. Platform worker entries pass a factory
@@ -309,6 +316,9 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
   // carries the cap; whether it breathes depends on a wired sink + feed.
   return composeIsland([
     dispatchCap,
+    // Inherit the wiki's render cap — inert until a worker entry wires onBoot (mountProjection), at which
+    // point the @daemon surfaces like any pinned wiki (same VM, same path).
+    hasProjection(opts.onBoot),
     hasEngineWatch(),
     hasCapture({
       ...(opts.makeCaptureEngine ? { makeEngine: opts.makeCaptureEngine } : {}),

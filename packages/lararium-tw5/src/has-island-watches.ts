@@ -12,7 +12,10 @@
 
 import { startEngineWatch } from "./engine-watch.js";
 import { startRecipeWatch } from "./recipe-watch.js";
+import { dispatchProjectedEvent } from "./tw5-projection.js";
 import type { IslandCap } from "./island-caps.js";
+import type { IslandContext } from "./island-context.js";
+import type { WikiMsg_DomEvent } from "@lararium/mesh";
 
 /** `#has` engine-epoch drift watch — self-writes the engine-waiting alert when a new genesis
  *  merges into the live @lararium doc under this running island (alert-only; reboot adopts). */
@@ -23,4 +26,24 @@ export function hasEngineWatch(): IslandCap {
 /** `#has` recipe/composition watch — applies recipe membership + oracle moves live, no reboot. */
 export function hasRecipeWatch(): IslandCap {
   return { name: "recipe-watch", onEa: (ctx) => startRecipeWatch(ctx) };
+}
+
+/**
+ * `#has` wiki-projection — the OUT=coalesce render (the `onBoot` seam mounts it: node disk / browser DOM)
+ * plus the interactivity RETURN leg (a relayed main-thread DOM event → TW5's native handler). ANY TW5 VM
+ * island composes this to become surfaceable — the @daemon inherits the SAME cap the pinned wiki carries, so
+ * "pin the daemon" and "pin any wiki" ride one path (it's all the same VM under the hood). role = capability
+ * ≠ platform: the caller's onBoot supplies the disk or DOM mount; the cap stays the same.
+ */
+export function hasProjection(onBoot?: (ctx: IslandContext) => (() => void) | undefined): IslandCap {
+  return {
+    name: "wiki-projection",
+    onEa: (ctx) => onBoot?.(ctx),
+    onSignal(type: string, raw: unknown): boolean {
+      if (type !== "wiki:dom-event") return false;
+      const ev = raw as WikiMsg_DomEvent;
+      dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
+      return true;
+    },
+  };
 }

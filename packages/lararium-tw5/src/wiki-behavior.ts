@@ -17,15 +17,13 @@ import {
   wikiSlotUri,
   type BatchMode,
   type WikiMsg_PlaceVerb,
-  type WikiMsg_DomEvent,
   type Verb,
   type ChangeOrigin,
 } from "@lararium/mesh";
 import { registerActionReactors, makeTw5Deserializer } from "./action-handler.js";
-import { dispatchProjectedEvent } from "./tw5-projection.js";
 import { VerbTable } from "./verb-dispatcher.js";
 import { composeIsland } from "./island-caps.js";
-import { hasEngineWatch, hasRecipeWatch } from "./has-island-watches.js";
+import { hasEngineWatch, hasRecipeWatch, hasProjection } from "./has-island-watches.js";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandBehavior, IslandContext } from "./island-context.js";
 
@@ -138,24 +136,10 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
     },
   };
 
-  // #has wiki-projection — the OUT=coalesce render (node disk / browser DOM) composed via the
-  // onBoot seam, plus the interactivity RETURN leg (a relayed main-thread DOM event → TW5's
-  // native handler path). role = capability ≠ platform: node supplies the disk onBoot, browser
-  // the DOM onBoot, the cap stays the same.
-  const projectionCap: IslandCap = {
-    name: "wiki-projection",
-    onEa: (ctx: IslandContext) => opts.onBoot?.(ctx),
-    onSignal(type: string, raw: unknown): boolean {
-      if (type !== "wiki:dom-event") return false;
-      const ev = raw as WikiMsg_DomEvent;
-      dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
-      return true;
-    },
-  };
-
   // The nameless wiki island = a #has cap stack. Order = the original onEa order (dispatch ·
   // projection · engine-watch · recipe-watch); composeIsland's LIFO teardown reproduces the old
-  // onHooAnu order (recipe · engine · projection-cleanup · registry-null) exactly. Caller-supplied
-  // caps fold at the tail — added capability, never a re-ordering of the base channels.
-  return composeIsland([dispatchCap, projectionCap, hasEngineWatch(), hasRecipeWatch(), ...(opts.caps ?? [])]);
+  // onHooAnu order (recipe · engine · projection-cleanup · registry-null) exactly. hasProjection is
+  // the SHARED render cap the @daemon also inherits — one VM, one surface path. Caller-supplied caps
+  // fold at the tail — added capability, never a re-ordering of the base channels.
+  return composeIsland([dispatchCap, hasProjection(opts.onBoot), hasEngineWatch(), hasRecipeWatch(), ...(opts.caps ?? [])]);
 }

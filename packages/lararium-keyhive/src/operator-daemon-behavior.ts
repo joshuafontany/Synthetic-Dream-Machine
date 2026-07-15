@@ -25,10 +25,11 @@ import {
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
-/** Vessel-injected daemon seam the platform entry supplies (node folds the telemetry capture SINK
- *  here). Forwarded straight to makeDaemonBehavior — the @daemon always carries the cap; this makes
- *  it live. Absent → the cap stays inert (sink not wired). */
-type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs">;
+/** Vessel-injected daemon seam the platform entry supplies (node folds the telemetry capture SINK here; a
+ *  browser/node entry folds the projection `onBoot` mount so the @daemon inherits the wiki render cap).
+ *  Forwarded straight to makeDaemonBehavior — the @daemon always carries the caps; this makes them live.
+ *  Absent → the cap stays inert (sink not wired / no projection mount). */
+type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs" | "onBoot">;
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
