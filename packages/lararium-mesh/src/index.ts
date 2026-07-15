@@ -114,6 +114,7 @@ export * from "./handle-book.js";
 export * from "./handle-announce.js";
 export * from "./who-face.js";
 export * from "./who-face-cap.js";
+export * from "./deterministic-doc.js";
 export * from "./cabal-place-charter.js";
 export * from "./cabal-place-clock.js";
 export * from "./me-circle.js";

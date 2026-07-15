@@ -34,7 +34,7 @@ function substrateStub(composite: CompositeStore): CapModule {
 }
 
 describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
-  test("composing it resolves the board, self-announces the card, and layers the board writable", async () => {
+  test("composing it resolves the board, self-announces the card, and layers the board writable", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
     const composite = new CompositeStore();
@@ -58,7 +58,7 @@ describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
     await v.dispose();
   });
 
-  test("a second vessel on the SAME nexus resolves the SAME board — one shared island board", async () => {
+  test("a second vessel on the SAME nexus resolves the SAME board — one shared island board", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
     const cardA = await publish(FASTJACK_SEED, "FastJack");

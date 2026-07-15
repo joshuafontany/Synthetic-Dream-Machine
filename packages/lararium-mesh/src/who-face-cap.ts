@@ -18,10 +18,11 @@ import type { CapModule } from "./cap-compose.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { resolveWhoFace, announceToWhoFace } from "./who-face.js";
 import { ingestAnnounceDoc } from "./handle-announce.js";
+import { materializeSharedLarDoc, whoBoardDocUrl } from "./deterministic-doc.js";
 import type { HandleBook } from "./handle-book.js";
 import type { HandleCard, CardVerdict } from "./handle-card.js";
 import { nexusHandlesUri } from "./lar-uris.js";
-import { emptyLarDoc, type LarDoc } from "./base-doc.js";
+import { type LarDoc } from "./base-doc.js";
 import type { VesselCoreAssembly } from "./open-vessel-core.js";
 import type { BagResidencyManager } from "./bag-residency.js";
 
@@ -53,9 +54,13 @@ export function whoFaceCap(deps: {
     id: WHO_FACE_CAP, requires: [SUBSTRATE_CAP_ID],
     build: async (resolve) => {
       const assembly = resolve<VesselCoreAssembly>(SUBSTRATE_CAP_ID);
+      // The board rides a DETERMINISTIC per-Nexus id — so a null pointer materializes THE island board (never
+      // a random one), the pointer write-back is idempotent across vessels, and no two vessels mint two boards.
       const board = await resolveWhoFace(
         deps.crossroadsHandle, deps.nexusPubkey,
-        (url) => (url ? deps.repo.find<LarDoc>(url as AutomergeUrl) : deps.repo.create<LarDoc>(emptyLarDoc())),
+        (url) => (url
+          ? deps.repo.find<LarDoc>(url as AutomergeUrl)
+          : materializeSharedLarDoc(deps.repo, whoBoardDocUrl(deps.nexusPubkey), "who-board")),
         "who-face-self-announce",
       );
       announceToWhoFace(board, deps.card);   // the vessel announces its own Handle onto the board

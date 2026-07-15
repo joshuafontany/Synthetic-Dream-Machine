@@ -1,0 +1,65 @@
+/**
+ * deterministic-doc — per-Nexus doc addresses every island member computes ALIKE, so a shared board needs no
+ * advertisement and no mint-race.
+ *
+ * The @oracle plane already proves the shape (genesis-doc: oracleGenesisDocUrl derives an automerge: URL from
+ * a well-known seed, so every vessel materializes the SAME doc under one stable id). The WHO plane reuses it:
+ * a Nexus's @crossroads doc and its WHO board each derive a deterministic URL from the nexus-pubkey, so two
+ * browsers on one island resolve the identical board WITHOUT any node advertising its URL — and because the
+ * board's id is a pure function of the nexus, no two vessels ever mint two competing boards (the pointer
+ * write-back becomes idempotent: every vessel writes the same URL).
+ *
+ * Pure address derivation + a find-or-materialize helper. No key, no HTTP. The rare cross-version residual is
+ * the same one @oracle carries (genesis-doc): a peer SYNCS an existing board far more often than it
+ * re-materializes, and a blank board merges trivially.
+ */
+import type { Repo, DocHandle, DocumentId } from "@automerge/automerge-repo";
+import { interpretAsDocumentId, stringifyAutomergeUrl, type AutomergeUrl, type BinaryDocumentId } from "@automerge/automerge-repo";
+import { from as automergeFrom, save as automergeSave } from "@automerge/automerge";
+import { sha256BytesSync, utf8Bytes } from "./crypto.js";
+import { resolveBootDoc } from "./boot-resolver.js";
+import { CROSSROADS_DOC_URI, nexusHandlesUri } from "./lar-uris.js";
+import { emptyLarDoc, type LarDoc } from "./base-doc.js";
+
+/** A fixed actor so every vessel's blank materialization yields byte-identical bytes → they converge, never fork. */
+const SHARED_BLANK_ACTOR = "00000000000000000000000000000000" as const;
+
+/** Derive a deterministic automerge: URL from a seed string — the first 16 bytes of its sha256 as the doc-id. */
+export function deterministicDocUrl(seed: string): AutomergeUrl {
+  const binId = sha256BytesSync(utf8Bytes(seed)).slice(0, 16) as BinaryDocumentId;
+  return stringifyAutomergeUrl({ documentId: binId });
+}
+
+/** The Nexus's @crossroads doc URL — the public plane's per-island address (deterministic). */
+export function crossroadsDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${CROSSROADS_DOC_URI}#${nexusPubkey}`);
+}
+
+/** The Nexus's WHO board URL — deterministic, so every island member resolves the one board with no mint-race. */
+export function whoBoardDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusHandlesUri(nexusPubkey)}#board`);
+}
+
+/**
+ * Find the shared doc if it's already present (a prior boot or a synced peer), else materialize a blank one
+ * UNDER the deterministic id. Uses hearth-private patience (the @oracle materialize path's choice): a missing
+ * doc is the legitimate first boot — the anchor materializes rather than waiting a long mesh-delivery window.
+ * Two vessels racing to be first both import the SAME fixed-actor blank bytes, so they converge byte-identical
+ * and diverge only as each writes its own card (the benign blank-merge the @oracle path also accepts).
+ */
+export async function materializeSharedLarDoc(
+  repo: Repo,
+  url: AutomergeUrl,
+  label: string,
+): Promise<DocHandle<LarDoc>> {
+  try {
+    const existing = await resolveBootDoc<LarDoc>(repo, url, { tideline: "hearth-private", label });
+    return existing;   // present (persisted or synced) → use it
+  } catch {
+    // unavailable → this vessel is first: materialize a blank board under the deterministic id
+  }
+  const bytes  = automergeSave(automergeFrom(emptyLarDoc() as unknown as Record<string, unknown>, SHARED_BLANK_ACTOR));
+  const handle = repo.import<LarDoc>(bytes, { docId: interpretAsDocumentId(url) as DocumentId });
+  await handle.whenReady();
+  return handle;
+}
