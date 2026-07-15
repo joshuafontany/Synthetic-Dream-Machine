@@ -276,9 +276,6 @@ export interface ComposedHolder {
   close(): Promise<void>;
 }
 
-/** Back-compat alias — a palace's composed transport IS a composed holder. */
-export type ComposedPalace = ComposedHolder;
-
 /** ONE registry per label — module-global so a label's holders singleton across composes. */
 const holderRegistries = new Map<string, PalaceHolderRegistry>();
 
@@ -303,7 +300,7 @@ export function composeHolder(label: string, key: string, spawn: PalaceHolderSpa
 }
 
 /** A PALACE holder — composeHolder keyed by the canonical store DIR (one holder per dir per label). */
-export function composePalace(label: string, dir: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedPalace {
+export function composePalace(label: string, dir: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedHolder {
   return composeHolder(label, canonicalDirOf(dir), spawn, timeoutMs);
 }
 

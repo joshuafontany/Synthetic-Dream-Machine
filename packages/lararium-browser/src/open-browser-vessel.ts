@@ -1,7 +1,7 @@
 /**
  * openBrowserVessel — local-first browser vessel factory.
  *
- * A thin RECIPE over `openVesselCore` (the one keel, both substrates) — the BROWSER
+ * A thin RECIPE over the composable vessel keel — the BROWSER
  * carries the SAME capabilities as node; only the SUBSTRATE differs. The browser must NOT
  * drift thin via easy-path shortcuts (coreless boot, no residency manager, no corpus, a
  * LarVessel wrapper) — it holds the full keel. Genuine browser

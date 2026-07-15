@@ -186,7 +186,6 @@ export { makeResidencyStatsReactor } from "./residency-handlers.js";
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";
 export { makeCatalogAccessor } from "./catalog-accessor.js";
 export type { CatalogAccessor } from "./catalog-accessor.js";
-export { openVesselCore } from "./open-vessel.js";
 export {
   composeCoreVessel,
   substrateCap, daemonCap, wikiSlotCap, wikiCap, poolCap, mountCap,

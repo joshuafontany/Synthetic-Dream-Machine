@@ -114,9 +114,6 @@ export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-a
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";
-export { LarWSClientAdapter } from "./lar-ws-client-adapter.js";
-export type { LarWSClientOptions } from "./lar-ws-client-adapter.js";
-
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";
 export type { VerbReactor, VerbContext, VerbDispatcherOptions } from "@lararium/tw5";
 export { heedSummons } from "@lararium/tw5";

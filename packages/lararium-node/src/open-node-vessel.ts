@@ -180,7 +180,7 @@ interface NodeBootPrep {
   operatorSeed:     Uint8Array;
   residency:        BagResidencyManager;
   emit:             (p: NodeOpenPhase) => void;
-  /** The full-node orchestration (keel + every VM closure) the shared openVesselCore walks. */
+  /** The full-node orchestration (keel + every VM closure) the shared cap composer walks. */
   orchestration:    VesselOrchestration<VesselIslandPool>;
   /** The daemon/verb closures the granular herm caps consume (openDaemon takes the slot OPTIONAL). */
   openDaemon:       (a: { assembly: VesselCoreAssembly; slot?: VesselWikiSlot }) => Promise<VesselDaemonVm>;
@@ -720,7 +720,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
   const orchestration: VesselOrchestration<VesselIslandPool> = {
     keel, wikiSlot,
-    // openVesselCore always resolves the slot first → it calls openDaemon with slot PRESENT; the
+    // The shared cap composer resolves the slot first → it calls openDaemon with slot PRESENT; the
     // wrapper bridges the required-slot field to the optional-slot impl the herm caps share.
     openDaemon: ({ assembly, slot }) => openDaemon({ assembly, slot }),
     wireVerbs, afterDaemon, makePool, afterLive,

@@ -25,7 +25,7 @@ import {
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied, isLarAuthMsg,
 } from "@lararium/mesh";
 import type { PeerId } from "@automerge/automerge-repo";
-import { LarWSClientAdapter } from "../src/lar-ws-client-adapter.js";
+import { LarWSClientAdapter } from "@lararium/mesh";
 import type { LeafIdentity } from "../src/leaf-identity.js";
 
 const AUD = "lar:///ha.ka.ba/bags/@daemon";

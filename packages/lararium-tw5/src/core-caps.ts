@@ -2,7 +2,7 @@
  * core-caps — THE vessel keel as a GRANULAR #has-cap-stack (one keel, both substrates).
  *
  * Canon: lar:///ha.ka.ba/lararium/api/composable-keel + …/mesh/open-vessel +
- * …/api/lararium-canonical-model. The old monolithic `openVesselCore` linear sequence
+ * …/api/lararium-canonical-model. The former monolithic vessel sequence
  * decomposes here into SIX cap-modules a vessel HAS — substrate · wikislot · daemon · wiki ·
  * pool · mount — each declaring only the deps it routes (POLA), `composeVessel` topologically
  * WIRING them. The build order the topo-sort guarantees (substrate → wikislot → daemon → wiki →
