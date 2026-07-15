@@ -142,6 +142,84 @@ export interface SensoriumManifest {
   readonly created: string;
 }
 
+function objectValue(value: unknown, label: string): Record<string, unknown> {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(`sensorium manifest: ${label} needs an object`);
+  }
+  return value as Record<string, unknown>;
+}
+
+function nonEmptyString(value: unknown, label: string): string {
+  if (typeof value !== "string" || !value) {
+    throw new Error(`sensorium manifest: ${label} needs a non-empty string`);
+  }
+  return value;
+}
+
+/** Validate an incoming rooted declaration before any cap resolves its local bytes. */
+export function parseSensoriumManifest(value: unknown): SensoriumManifest {
+  const raw = objectValue(value, "root");
+  if (raw.schema !== SENSORIUM_SCHEMA) {
+    throw new Error(`sensorium manifest: schema needs ${SENSORIUM_SCHEMA}`);
+  }
+  const rawHas = objectValue(raw.has, "has");
+  const has: Record<string, CapDecl> = {};
+  for (const [name, rawCap] of Object.entries(rawHas)) {
+    const cap = objectValue(rawCap, `has.${name}`);
+    if (!name) throw new Error("sensorium manifest: every #has capability needs a non-empty name");
+    const variance = cap.variance;
+    if (variance !== "sheaf" && variance !== "cosheaf") {
+      throw new Error(`sensorium manifest: has.${name}.variance needs sheaf or cosheaf`);
+    }
+    has[name] = {
+      dir: nonEmptyString(cap.dir, `has.${name}.dir`),
+      engine: nonEmptyString(cap.engine, `has.${name}.engine`),
+      variance,
+    };
+  }
+  const contract = declareSensoriumContract({
+    has: Object.keys(has),
+    ...(raw.order === undefined ? {} : { order: raw.order as SensoriumOrderEvidence }),
+    ...(raw.apertures === undefined ? {} : { apertures: raw.apertures as Record<string, string> }),
+  });
+  const coupling = objectValue(raw.coupling, "coupling");
+  if (!Array.isArray(coupling.children)) {
+    throw new Error("sensorium manifest: coupling.children needs an array");
+  }
+  const children = coupling.children.map((value, index) => {
+    const child = objectValue(value, `coupling.children[${index}]`);
+    return {
+      sensorium: nonEmptyString(child.sensorium, `coupling.children[${index}].sensorium`),
+      dir: nonEmptyString(child.dir, `coupling.children[${index}].dir`),
+    };
+  });
+  const persistence = raw.persistencePolicy === undefined ? undefined : objectValue(raw.persistencePolicy, "persistencePolicy");
+  if (persistence && persistence.halfLife !== null &&
+      (typeof persistence.halfLife !== "number" || !Number.isFinite(persistence.halfLife) || persistence.halfLife <= 0)) {
+    throw new Error("sensorium manifest: persistencePolicy.halfLife needs a positive number or null");
+  }
+  const created = nonEmptyString(raw.created, "created");
+  if (!Number.isFinite(Date.parse(created))) {
+    throw new Error("sensorium manifest: created needs an ISO-8601 timestamp");
+  }
+  if (typeof raw.ephemeral !== "boolean") {
+    throw new Error("sensorium manifest: ephemeral needs a boolean");
+  }
+  return {
+    schema: SENSORIUM_SCHEMA,
+    sensorium: nonEmptyString(raw.sensorium, "sensorium"),
+    lar: nonEmptyString(raw.lar, "lar"),
+    has,
+    bands: objectValue(raw.bands, "bands"),
+    ...(contract.order ? { order: contract.order } : {}),
+    coupling: { children },
+    ...(persistence ? { persistencePolicy: { halfLife: persistence.halfLife as number | null } } : {}),
+    ...(contract.apertures ? { apertures: contract.apertures } : {}),
+    ephemeral: raw.ephemeral,
+    created,
+  };
+}
+
 /** Derive the platform-blind cap contract from this rooted Node manifest. */
 export function sensoriumContract(m: SensoriumManifest): SensoriumContract {
   return declareSensoriumContract({
@@ -261,10 +339,10 @@ export function buildSensoriumManifest(sensoriumDir: string, opts: BuildSensoriu
 export function readManifest(sensoriumDir: string): SensoriumManifest | null {
   const p = manifestPath(sensoriumDir);
   if (!existsSync(p)) return null;
-  return JSON.parse(readFileSync(p, "utf8")) as SensoriumManifest;
+  return parseSensoriumManifest(JSON.parse(readFileSync(p, "utf8")));
 }
 
 /** Write a sensorium manifest atomically (write-temp-then-rename) so a reader/crash never tears it. */
 export function writeManifest(sensoriumDir: string, m: SensoriumManifest): void {
-  atomicWriteFileSync(manifestPath(sensoriumDir), JSON.stringify(m, null, 2) + "\n");
+  atomicWriteFileSync(manifestPath(sensoriumDir), JSON.stringify(parseSensoriumManifest(m), null, 2) + "\n");
 }

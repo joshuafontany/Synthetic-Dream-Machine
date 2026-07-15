@@ -4,12 +4,12 @@
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   buildSensoriumManifest, readManifest, writeManifest, capDir, resolveCapDir, sensoriumContract, SENSORIUM_SCHEMA,
-  planeVariance, SHEAF_PLANES, COSHEAF_PLANES,
+  parseSensoriumManifest, planeVariance, SHEAF_PLANES, COSHEAF_PLANES,
 } from "../src/sensorium.js";
 
 let dir: string;
@@ -74,6 +74,33 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
 
   test("readManifest is null before a manifest exists (a bare dir is not yet a sensorium)", () => {
     expect(readManifest(dir)).toBeNull();
+  });
+
+  test("refuses malformed incoming cap declarations before resolving their bytes", () => {
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "memory", lar: "lar:///x",
+      caps: { content: { absDir: join(dir, "content"), engine: "content" } },
+    });
+    writeFileSync(join(dir, "manifest.json"), JSON.stringify({
+      ...m, has: { content: { ...m.has.content, variance: "untyped" } },
+    }));
+    expect(() => readManifest(dir)).toThrow("has.content.variance");
+  });
+
+  test("accepts a Python-rooted memory declaration while dropping unowned metadata", () => {
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "memory",
+      lar: "lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance",
+      caps: {
+        content: { absDir: join(dir, "content"), engine: "content" },
+        persistence: { absDir: join(dir, "persistence"), engine: "persistence", variance: "cosheaf" },
+      },
+      order: { projector: "worldline", basis: "observed:turn-dag" },
+      apertures: { beat: "worldline-dag" },
+      persistencePolicy: { halfLife: null },
+    });
+    expect(parseSensoriumManifest({ ...m, worldline: { real: ["turn-dag"], arbitrary: [] } }))
+      .toEqual(m);
   });
 
   test("carries the li/ki VARIANCE tag — fiber caps = sheaf (li), bands/coupling = cosheaf (ki)", () => {
