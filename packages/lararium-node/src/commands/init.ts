@@ -24,6 +24,7 @@ import {
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 import { larDataDir } from "../vessel-paths.js";
+import { persistIdentityAnchors } from "../identity-anchors.js";
 import {
   generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
   generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
@@ -131,6 +132,13 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
       payload.personaGroupDocIdHex, payload.meshCabalDocIdHex,
     );
     writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
+    // A joined vessel persists the SAME anchors from the admit payload — its identity home
+    // now backstops the veiled Handle exactly as the founder's does.
+    persistIdentityAnchors({
+      personaGroupDocIdHex:    payload.personaGroupDocIdHex,
+      meshCabalDocIdHex:       payload.meshCabalDocIdHex,
+      personaGroupAgentIdHex:  payload.personaGroupAgentIdHex,
+    });
     await repo.flush();
 
     console.log(`[lares init --admit] vessel ${operatorIdentity.verifyingKey.slice(0, 16)}… admitted`);
@@ -161,7 +169,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
 
   const {
     identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
-    personaGroupDocIdHex, meshCabalDocIdHex, contactCardJson,
+    personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex, contactCardJson,
     signerDid,
   } = await runFoundingCeremony({
     repo,
@@ -181,6 +189,9 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     personaGroupDocIdHex, meshCabalDocIdHex,
   );
   writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
+  // The veiled-Handle anchors ride the sovereign identity home, OUTSIDE the wiped substrate,
+  // so a rebirth reforges @daemon while re-reading the SAME PersonaGroup/MeshCabal ids + agentId.
+  persistIdentityAnchors({ personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex });
   await repo.flush();
 
   console.log(`[lares init] genesis/social-bootstrap.json written`);
