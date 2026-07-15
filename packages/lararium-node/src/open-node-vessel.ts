@@ -69,6 +69,7 @@ import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir }  from "./
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
+import { makeChildProcessDocLoadProbe, quarantineDoc } from "./doc-load-probe.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -362,6 +363,20 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     },
 
     tempStore: () => new MemoryTiddlerStore(),
+
+    // L1/L2 — the child_process load-probe + quarantine, closing over this vessel's
+    // storageDir. Each social-plane doc materializes in a disposable process before the
+    // live repo touches it; a condemned doc gets MOVED aside (never deleted) and its plane
+    // mounts read-only, so a torn doc downgrades the vessel to degraded instead of aborting
+    // the whole boot.
+    docLoadProbe: makeChildProcessDocLoadProbe(storageDir),
+    quarantineDoc: (verdict) => {
+      const moved = quarantineDoc(storageDir, verdict);
+      console.warn(
+        `[lararium] DEGRADED plane — quarantined ${verdict.documentId} (${verdict.status}: ${verdict.reason ?? "?"})` +
+        ` → ${moved ?? "already gone"}; the plane mounts read-only until \`lares repair\` rematerializes it`,
+      );
+    },
 
     // Corpus capability piece — one top-level bag per catalog corpus entry (shared loader).
     loadCorpora: (composite) => loadCatalogCorpora({

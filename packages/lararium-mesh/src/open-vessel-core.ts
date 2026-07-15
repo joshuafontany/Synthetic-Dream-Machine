@@ -26,6 +26,7 @@ import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarD
 import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import { wikiSlotUri } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
+import { isCondemned, type DocLoadProbe, type ProbeResult } from "./doc-load-probe-contract.js";
 
 /** The social-plane + daemon + persona doc URLs a vessel's bootstrap resolves (founding done). */
 export interface VesselBootstrap {
@@ -57,9 +58,32 @@ export interface VesselRecipe {
 
   // ── capability pieces (absent = not-yet-held; the seam stays open) ──
   loadCorpora?:  (composite: CompositeStore) => Promise<void>;
+  /** L1/L2: probe a social-plane doc's load in a disposable boundary AHEAD of the live
+   *  repo materializing it. Absent = skip the probe (the doc resolves straight through —
+   *  the pre-hardening path). The node injects a child_process probe; a browser a Worker. */
+  docLoadProbe?: DocLoadProbe;
+  /** L2: quarantine a condemned doc — the platform MOVES its bytes aside (nodefs rename /
+   *  IndexedDB key-drop). Fires only when the probe condemns. */
+  quarantineDoc?: (result: ProbeResult) => void;
 
   // ── opts ──
   onPhase?:      (p: LarOpenPhase) => void;
+}
+
+/** One social-plane doc's boot outcome — mounted live, or mounted degraded (read-only blank). */
+export interface MountEntry {
+  readonly bagId: string;
+  readonly documentId: string;
+  readonly status: "mounted" | "degraded";
+  /** names the condemnation when status=degraded. */
+  readonly reason?: string;
+}
+
+/** The degraded-boot manifest — what mounted live, what came up read-only after a condemn. */
+export interface MountManifest {
+  readonly entries: readonly MountEntry[];
+  /** true once any plane mounts degraded — a live-but-not-write-ready vessel. */
+  readonly degraded: boolean;
 }
 
 /** What the keel assembles before the recipe mounts daemon + wiki. */
@@ -76,6 +100,13 @@ export interface VesselCoreAssembly {
    *  @oracle system plane; null until federated/minted. */
   larariumHandle: DocHandle<LarDoc> | null;
   coreHash:      string;
+  /** L2: which social planes mounted live vs degraded (read-only after a condemn). */
+  mountManifest: MountManifest;
+}
+
+/** Strip the `automerge:` scheme, leaving the documentId the storage path shards on. */
+function documentIdFromUrl(url: string): string {
+  return url.startsWith("automerge:") ? url.slice("automerge:".length) : url;
 }
 
 const blankDoc = (repo: Repo): DocHandle<LarDoc> => repo.create<LarDoc>(emptyLarDoc());
@@ -156,20 +187,46 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   emit("island-ready");
 
   // ── social plane (resolveHandle encodes the seed policy) + daemon doc ──
+  // Route symmetry: the base-canon docs above resolve through the graceful tideline
+  // resolver; the social plane earns the same discipline here. A `docLoadProbe` (when the
+  // recipe holds one) materializes each doc in a disposable boundary FIRST — a condemned
+  // doc gets quarantined and mounts as a read-only blank (writable:false, so no write forks
+  // into the placeholder), and the manifest marks the vessel degraded. Absent a probe, the
+  // doc resolves straight through, as before.
   const resolve = (url: AutomergeUrl) => waitHandle<LarDoc>(url, () => blankDoc(repo));
-  composite.addLayer({ bagId: BAG_IDS.identities, store: new AutomergeDocStore(await resolve(bootstrap.identitiesUrl as AutomergeUrl), BAG_IDS.identities), writable: true });
-  composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(await resolve(bootstrap.circlesUrl    as AutomergeUrl), BAG_IDS.groups),     writable: true });
-  composite.addLayer({ bagId: BAG_IDS.sessions,   store: new AutomergeDocStore(await resolve(bootstrap.sessionsUrl   as AutomergeUrl), BAG_IDS.sessions),   writable: true });
-  composite.addLayer({ bagId: DAEMON_BAG_ID,       store: new AutomergeDocStore(await resolve(bootstrap.daemonUrl      as AutomergeUrl), DAEMON_BAG_ID),       writable: true });
+  const entries: MountEntry[] = [];
+  let degraded = false;
+  const mountSocial = async (bagId: string, url: string): Promise<void> => {
+    const documentId = documentIdFromUrl(url);
+    if (recipe.docLoadProbe) {
+      const verdict = await recipe.docLoadProbe.probe(documentId);
+      if (isCondemned(verdict)) {
+        recipe.quarantineDoc?.(verdict);
+        degraded = true;
+        entries.push({ bagId, documentId, status: "degraded", reason: `${verdict.status}: ${verdict.reason ?? ""}`.trim() });
+        // Read-only blank stands in — the plane reads empty until L4 rematerializes it,
+        // and no write forks a placeholder the real doc will later reconcile against.
+        composite.addLayer({ bagId, store: new AutomergeDocStore(blankDoc(repo), bagId), writable: false });
+        return;
+      }
+    }
+    composite.addLayer({ bagId, store: new AutomergeDocStore(await resolve(url as AutomergeUrl), bagId), writable: true });
+    entries.push({ bagId, documentId, status: "mounted" });
+  };
+  await mountSocial(BAG_IDS.identities, bootstrap.identitiesUrl);
+  await mountSocial(BAG_IDS.groups,     bootstrap.circlesUrl);
+  await mountSocial(BAG_IDS.sessions,   bootstrap.sessionsUrl);
+  await mountSocial(DAEMON_BAG_ID,      bootstrap.daemonUrl);
   // @persona — the operator's veiled-identity bag (PersonaGroup), founded alongside @daemon.
-  composite.addLayer({ bagId: PERSONA_BAG_ID,      store: new AutomergeDocStore(await resolve(bootstrap.personaUrl     as AutomergeUrl), PERSONA_BAG_ID),      writable: true });
+  await mountSocial(PERSONA_BAG_ID,     bootstrap.personaUrl);
+  const mountManifest: MountManifest = { entries, degraded };
 
   if (recipe.loadCorpora) {
     await recipe.loadCorpora(composite);
     emit("corpus-ready");
   }
 
-  return { repo, composite, catalogHandle, islandHandle, laresHandle, larariumHandle, coreHash };
+  return { repo, composite, catalogHandle, islandHandle, laresHandle, larariumHandle, coreHash, mountManifest };
 }
 
 /**
