@@ -97,11 +97,14 @@ def capture(pointer: str, sensorium: str, *, wing: str, room: str = "corpus", mi
     bands = {"cells": 0, "note": "bands-skipped: no new content"}
     if summary.get("landed", 0) > 0:
         from bands_sidecar import analyze_sensorium
-        cells, bands = analyze_sensorium(paths.root)
-        if cells:
-            with open(os.path.join(paths.root, "bands-cells.ndjson"), "w", encoding="utf-8") as fh:
-                for cell in cells:
-                    fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
+        try:
+            cells, bands = analyze_sensorium(paths.root)
+            if cells:
+                with open(os.path.join(paths.root, "bands-cells.ndjson"), "w", encoding="utf-8") as fh:
+                    for cell in cells:
+                        fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
+        except Exception as exc:  # noqa: BLE001 — a derived aperture cannot revoke content landing
+            bands = {"cells": 0, "note": f"bands-skipped: analyzer fault ({type(exc).__name__})"}
     from corpus_worldline import backfill
     drawers = int(summary.get("landed", 0))
     structures = int(structure.get("landed", 0))
