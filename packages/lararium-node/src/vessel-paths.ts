@@ -320,10 +320,15 @@ export function larDataDir(): string {
   return join(larDataHome(), "vessel");
 }
 
-/** Vessel identity dir — the keypair, PRESERVED across `reset`. EXCLUDED from the XDG move
- *  (vessel-identity is a separate concern); kept at its legacy spelling `~/.lares/.lararium-identity`. */
+/** Vessel identity dir — the sovereign keypair + the veiled-Handle anchors, at
+ *  `<state>/identity`. Sits in the XDG state home BESIDE (never inside) the wiped
+ *  `<data>/vessel`, so every substrate verb (`reset`/`regenesis`/`rebuild`) reforges the
+ *  CRDT store while the sovereign root survives untouched — the "share substrate, not
+ *  sovereignty" law made a filesystem boundary. `reset` removes only `<state>/projection`
+ *  under this same state home, so identity here stays out of the wipe zone. The ONE
+ *  identity resolver — node-vessel-identity migrates any legacy location onto it. */
 export function larIdentityDir(): string {
-  return join(larHome(), ".lararium-identity");
+  return join(larStateHome(), "identity");
 }
 
 // ── Durable watermarks (state) ────────────────────────────────────────────────────────────────────
