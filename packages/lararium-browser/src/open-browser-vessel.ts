@@ -25,6 +25,8 @@ import {
   BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
+  whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl,
+  type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
   type GenesisCasManifest, type GenesisSeed,
@@ -365,6 +367,23 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     ];
   })() : [];
 
+  // ── The WHO plane as a LEAF — announce this vessel's Handle on the per-Nexus @crossroads board ──
+  // Networked only: the board needs the relay to sync, and the confederation key (relayGatePubKey) scopes the
+  // causal island so a human's two vessels resolve the SAME board. The vessel mints its self-certifying
+  // handle-card (nym = its own key, glamour = display name) and composes whoFaceCap: resolve the island's WHO
+  // board through the deterministic @crossroads address, self-announce, layer it writable so the relay syncs.
+  // The identity sibling of the carriage leaf above (WHO ⊥ WHERE, the two-key atom). Absent a relay/gate → [].
+  const whoExtraCaps: CapModule[] = (relayUrl && relayGatePubKey) ? await (async () => {
+    const nexusPubkey = relayGatePubKey;
+    const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "@crossroads");
+    const card = await signHandleCard(
+      { nym: operatorDid, glamour: displayName ?? "Anon", version: 1, prev: null,
+        expiry: Date.now() + 30 * 24 * 3_600_000, standing: null },
+      ed25519SignerFromSeed(operatorSeed),
+    );
+    return [whoFaceCap({ repo, crossroadsHandle, nexusPubkey, card, residency })];
+  })() : [];
+
   const result = await composeBrowser<BrowserVesselIslandPool>({
     keel: {
       repo,
@@ -569,7 +588,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // Presence — ephemeral, does not travel via CRDT.
       wikiHandle.broadcast({ did: operatorDid, ts: Date.now() });
     },
-  }, meshExtraCaps);
+  }, [...meshExtraCaps, ...whoExtraCaps]);
 
   return {
     pool: result.pool,
