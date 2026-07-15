@@ -33,8 +33,8 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { isAbsolute, join, relative } from "node:path";
-import type { PersistencePolicy, Variance } from "@lararium/mesh";
-import { SHEAF_PLANES, COSHEAF_PLANES } from "@lararium/mesh";
+import type { PersistencePolicy, SensoriumContract, SensoriumOrderEvidence, Variance } from "@lararium/mesh";
+import { declareSensoriumContract, SHEAF_PLANES, COSHEAF_PLANES } from "@lararium/mesh";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /** The manifest schema version — bump only on a breaking shape change. */
@@ -102,10 +102,7 @@ export interface SensoriumCoupling {
 export type SensoriumBands = Readonly<Record<string, unknown>>;
 
 /** Evidence a projector may use to order durable vectors for a derived reading. */
-export interface SensoriumOrder {
-  readonly projector: string;
-  readonly basis: string;
-}
+export type SensoriumOrder = SensoriumOrderEvidence;
 
 /** A sensorium manifest — schema 1. The whole composition, declared thin. */
 export interface SensoriumManifest {
@@ -143,6 +140,15 @@ export interface SensoriumManifest {
   readonly ephemeral: boolean;
   /** ISO-8601 mint time. */
   readonly created: string;
+}
+
+/** Derive the platform-blind cap contract from this rooted Node manifest. */
+export function sensoriumContract(m: SensoriumManifest): SensoriumContract {
+  return declareSensoriumContract({
+    has: Object.keys(m.has),
+    ...(m.order ? { order: m.order } : {}),
+    ...(m.apertures ? { apertures: m.apertures } : {}),
+  });
 }
 
 /** The manifest path for a sensorium dir. */

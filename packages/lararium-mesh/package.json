@@ -44,6 +44,10 @@
       "import": "./dist/sensorium-fusion.js",
       "types": "./dist/sensorium-fusion.d.ts"
     },
+    "./sensorium-contract": {
+      "import": "./dist/sensorium-contract.js",
+      "types": "./dist/sensorium-contract.d.ts"
+    },
     "./crypto": {
       "import": "./dist/crypto.js",
       "types": "./dist/crypto.d.ts"

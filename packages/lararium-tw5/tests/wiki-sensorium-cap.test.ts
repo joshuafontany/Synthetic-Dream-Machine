@@ -19,11 +19,16 @@ import {
   hasWikiSensorium,
   letterFrequencyEmbedder,
   SENSORIUM_SIGNAL,
+  WIKI_SENSORIUM_CONTRACT,
 } from "../src/wiki-sensorium-cap.js";
 import { buildFixtureIsland, GLUE_SEEDS } from "../src/wiki-store-adapter.js";
 import type { IslandContext } from "../src/island-context.js";
 
 describe("hasWikiSensorium — node tier", () => {
+  test("carries the platform-blind #has contract", () => {
+    expect(WIKI_SENSORIUM_CONTRACT).toEqual({ has: ["content", "structure", "form", "coupling"] });
+  });
+
   test("cohere folds the keystone planes through BOTH organs — the radius flips, the gate classifies", async () => {
     const w = await runWikiSensoriumWitness();
     // GLUE: structure and form agree on every unit → a global section stands, non-vacuously.

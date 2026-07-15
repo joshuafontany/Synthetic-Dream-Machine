@@ -8,7 +8,7 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
-  buildSensoriumManifest, readManifest, writeManifest, capDir, resolveCapDir, SENSORIUM_SCHEMA,
+  buildSensoriumManifest, readManifest, writeManifest, capDir, resolveCapDir, sensoriumContract, SENSORIUM_SCHEMA,
   planeVariance, SHEAF_PLANES, COSHEAF_PLANES,
 } from "../src/sensorium.js";
 
@@ -65,6 +65,11 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
     });
     expect(m.order).toEqual({ projector: "stream", basis: "observed:connection-sequence" });
     expect(m.apertures).toEqual({ measure: "boundary-changepoint" });
+    expect(sensoriumContract(m)).toEqual({
+      has: [],
+      order: { projector: "stream", basis: "observed:connection-sequence" },
+      apertures: { measure: "boundary-changepoint" },
+    });
   });
 
   test("readManifest is null before a manifest exists (a bare dir is not yet a sensorium)", () => {

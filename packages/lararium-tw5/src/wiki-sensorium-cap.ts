@@ -32,7 +32,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
-import type { CompositeStore, SensoriumSignalType } from "@lararium/mesh";
+import type { CompositeStore, SensoriumContract, SensoriumSignalType } from "@lararium/mesh";
 import { cosineDistance } from "@lararium/mesh";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext } from "./island-context.js";
@@ -50,12 +50,16 @@ import {
   type WikiRecallHit,
 } from "./wiki-sense-fold.js";
 import { compositeCorpusReader, type WikiCorpusReader } from "./wiki-corpus-reader.js";
+import { WIKI_SENSORIUM_CONTRACT } from "./wiki-sensorium-contract.js";
 
 // the verdict/hit shapes live with the fold (every mouth speaks them); the cap re-exports the held names.
 export type { WikiCoherenceVerdict, WikiRecallHit } from "./wiki-sense-fold.js";
 export { RECALL_LIMIT } from "./wiki-sense-fold.js";
 export type { WikiCorpusReader } from "./wiki-corpus-reader.js";
 export { compositeCorpusReader } from "./wiki-corpus-reader.js";
+
+/** The same portable cap contract Node manifests and browser/TW5 workers carry. */
+export { WIKI_SENSORIUM_CONTRACT } from "./wiki-sensorium-contract.js";
 
 // ── the semantic SEAM (an interface, never a dependency) ────────────────────────────────────────────
 
@@ -111,6 +115,8 @@ export type WikiCouplingRead = WikiCouplingUnbuilt;
 
 /** The three-verb perceiver a wiki island composes — read-only over its OWN resolved surface. */
 export interface WikiSensorium {
+  /** Platform-blind cap declaration; holder and storage details stay outside the contract. */
+  readonly contract: SensoriumContract;
   cohere(): Promise<WikiCoherenceVerdict>;
   recall(query: WikiRecallQuery): Promise<WikiRecallResult>;
   couple(): WikiCouplingRead;
@@ -143,6 +149,7 @@ export function createWikiSensoriumOverReader(
     (cached ??= reader.docs().then((docs) => foldCorpus(docs, reader.stalkOf)));
 
   return {
+    contract: WIKI_SENSORIUM_CONTRACT,
     async cohere(): Promise<WikiCoherenceVerdict> {
       // both organs read the SAME assignment — the shared fold projects the structure⊥form planes.
       return cohereFold(await fold());

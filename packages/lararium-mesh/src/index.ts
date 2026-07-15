@@ -39,6 +39,7 @@ export * from "./recipe.js";
 export { bagStackFromRec } from "./bag-stack-from-rec.js";
 export * from "./composite-store.js";
 export * from "./sensorium-consistency.js";
+export * from "./sensorium-contract.js";
 export * from "./sensorium-fusion.js";
 export * from "./sensorium-efe.js";
 export * from "./itc.js";

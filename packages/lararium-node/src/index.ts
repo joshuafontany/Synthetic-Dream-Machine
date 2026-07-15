@@ -15,12 +15,12 @@ export { atomicWriteFileSync } from "./fs-atomic.js";
 // The SHEAF-TRUE sensorium primitive — a dir that `#has` fiber-caps (content/structure/form) with
 // bands + coupling as base-caps living IN the manifest. The filetree IS the composition.
 export {
-  SENSORIUM_SCHEMA, SENSORIUM_MANIFEST, manifestPath, capDecl, resolveCapDir, capDir, planeVariance,
+  SENSORIUM_SCHEMA, SENSORIUM_MANIFEST, manifestPath, capDecl, resolveCapDir, capDir, planeVariance, sensoriumContract,
   SHEAF_PLANES, COSHEAF_PLANES,
   buildSensoriumManifest, readManifest, writeManifest,
 } from "./sensorium.js";
 export type {
-  CapDecl, SensoriumChild, SensoriumCoupling, SensoriumBands, SensoriumManifest, BuildSensoriumOptions,
+  CapDecl, SensoriumChild, SensoriumCoupling, SensoriumBands, SensoriumManifest, SensoriumOrder, BuildSensoriumOptions,
   Variance,
 } from "./sensorium.js";
 
