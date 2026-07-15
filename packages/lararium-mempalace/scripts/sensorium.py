@@ -13,6 +13,8 @@ a source/land/embed cannot exist, rather than erroring later. Meme: lar:///ha.ka
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime, timezone
+import json
 import os
 
 import content_io as cio
@@ -84,6 +86,54 @@ def compose_persistence_cap(root: str, *, half_life: "float | None" = None,
     if half_life is not None and half_life <= 0:
         raise ValueError("persistence half_life must be positive or null (standing by witness)")
     return PersistenceCap(path=sensorium_paths(root).persistence, half_life=half_life, active=active)
+
+
+def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
+                          apertures: "dict[str, str] | None" = None,
+                          worldline: "dict | None" = None, ephemeral: bool = False) -> str:
+    """Write one rooted stream declaration while preserving its original mint time.
+
+    The declaration records cap locations and the evidence that orders derived
+    readings.  `apertures` remains separate: it names readings a projector may
+    earn, never the sequence evidence itself.
+    """
+    if not order.projector or not order.basis:
+        raise ValueError("stream manifest needs a non-empty order projector and basis")
+    paths = sensorium_paths(root)
+    os.makedirs(paths.root, exist_ok=True)
+    path = os.path.join(paths.root, "manifest.json")
+    created = None
+    try:
+        with open(path, encoding="utf-8") as fh:
+            created = json.load(fh).get("created")
+    except (OSError, ValueError):
+        pass
+    manifest = {
+        "schema": 1,
+        "sensorium": name,
+        "lar": lar,
+        "has": {
+            "content": {"dir": "content", "engine": "content", "variance": "sheaf"},
+            "structure": {"dir": "structure", "engine": "structurepalace", "variance": "sheaf"},
+            "form": {"dir": "form", "engine": "formpalace", "variance": "sheaf"},
+            "persistence": {"dir": "persistence", "engine": "persistence", "variance": "cosheaf"},
+        },
+        "order": {"projector": order.projector, "basis": order.basis},
+        "persistencePolicy": {"halfLife": None},
+        "bands": {"grain": "membership", "computed": "sidecar"},
+        "coupling": {"children": []},
+        "ephemeral": ephemeral,
+        "created": created or datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+    }
+    if apertures:
+        manifest["apertures"] = apertures
+    if worldline is not None:
+        manifest["has"]["worldline"] = {"dir": "worldline", "engine": "worldline", "variance": "sheaf"}
+        manifest["worldline"] = worldline
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(manifest, fh, indent=2)
+        fh.write("\n")
+    return path
 
 
 def compose_content_land(root: str, *, append_only: bool = True, required_keys=None,

@@ -8,8 +8,18 @@ import rederive as rd
 def test_rederive_bands_refuses_an_undeclared_projector(tmp_path):
     (tmp_path / "manifest.json").write_text("{}", encoding="utf-8")
     import pytest
-    with pytest.raises(SystemExit, match="no bands ordering projector"):
+    with pytest.raises(SystemExit, match="no supported order projector"):
         rd.rederive_bands(str(tmp_path))
+
+
+def test_rederive_bands_selects_order_not_earned_apertures(monkeypatch, tmp_path):
+    (tmp_path / "manifest.json").write_text(
+        '{"order":{"projector":"stream","basis":"observed:connection-sequence"},'
+        '"apertures":{"beat":"worldline-dag"}}', encoding="utf-8")
+    monkeypatch.setattr("bands.analyze_sensorium", lambda _root: ([{"cid": "a"}], {"note": "ok"}))
+    out = rd.rederive_bands(str(tmp_path))
+    assert out["projector"] == "stream-order"
+    assert out["basis"] == "observed:connection-sequence"
 
 
 def test_bands_only_never_walks_or_wipes_planes(monkeypatch, tmp_path):

@@ -5,8 +5,8 @@ import os
 import numpy as np
 
 
-def corpus_ordered_vectors(sensorium: str):
-    """Read corpus vectors in declared source/chunk order, never inventing cross-source history."""
+def source_ordered_vectors(sensorium: str):
+    """Read vectors in declared source/chunk order, never inventing cross-source history."""
     try:
         from mempalace.palace import get_collection
         col = get_collection(os.path.join(sensorium, "content"), _skip_identity_check=True)
@@ -23,4 +23,4 @@ def corpus_ordered_vectors(sensorium: str):
     if len(rows) < 2:
         return [], [], f"bands-skipped: too few vectors ({len(rows)})"
     rows.sort(key=lambda row: (row[0], row[1] if row[1] is not None else 1 << 30, row[2]))
-    return [row[2] for row in rows], np.vstack([row[3] for row in rows]), f"corpus-order: {len(rows)} vectors"
+    return [row[2] for row in rows], np.vstack([row[3] for row in rows]), f"source-order: {len(rows)} vectors"

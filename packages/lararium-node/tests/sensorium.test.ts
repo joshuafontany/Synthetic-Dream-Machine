@@ -57,6 +57,16 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
     expect(readManifest(dir)!.schema).toBe(SENSORIUM_SCHEMA);
   });
 
+  test("carries order evidence separately from apertures", () => {
+    const m = buildSensoriumManifest(dir, {
+      sensorium: "stream", lar: "lar:///x", caps: {},
+      order: { projector: "stream", basis: "observed:connection-sequence" },
+      apertures: { measure: "boundary-changepoint" },
+    });
+    expect(m.order).toEqual({ projector: "stream", basis: "observed:connection-sequence" });
+    expect(m.apertures).toEqual({ measure: "boundary-changepoint" });
+  });
+
   test("readManifest is null before a manifest exists (a bare dir is not yet a sensorium)", () => {
     expect(readManifest(dir)).toBeNull();
   });

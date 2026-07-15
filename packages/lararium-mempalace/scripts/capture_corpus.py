@@ -17,7 +17,8 @@ from capture_session import stamp_embedder
 from capture_sources import corpus_sectioned_source, corpus_source
 from capture_stream import ContentStoreLandCap
 from plane_fanout import compose_text_planes
-from sensorium import OrderCap, compose_persistence_cap, compose_stream_sensorium, sensorium_paths
+from sensorium import (OrderCap, compose_persistence_cap, compose_stream_sensorium,
+                       sensorium_paths, write_stream_manifest)
 
 
 def refuse_comparator(root: str) -> None:
@@ -28,35 +29,16 @@ def refuse_comparator(root: str) -> None:
 
 
 def write_corpus_manifest(root: str, *, name: str = "corpus", ephemeral: bool = False) -> str:
-    """Write the rooted cap declaration without materializing inactive persistence."""
-    paths = sensorium_paths(root)
-    os.makedirs(paths.root, exist_ok=True)
-    path = os.path.join(paths.root, "manifest.json")
-    created = None
-    try:
-        with open(path, encoding="utf-8") as fh:
-            created = json.load(fh).get("created")
-    except (OSError, ValueError):
-        pass
-    if created is None:
-        from datetime import datetime, timezone
-        created = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
-    manifest = {"schema": 1, "sensorium": name,
-                "lar": "lar:///ha.ka.ba/lares/api/lares/corpus#stream-capture",
-                "has": {"content": {"dir": "content", "engine": "content", "variance": "sheaf"},
-                        "structure": {"dir": "structure", "engine": "structurepalace", "variance": "sheaf"},
-                        "form": {"dir": "form", "engine": "formpalace", "variance": "sheaf"},
-                        "worldline": {"dir": "worldline", "engine": "worldline", "variance": "sheaf"},
-                        "persistence": {"dir": "persistence", "engine": "persistence", "variance": "cosheaf"}},
-                "worldline": {"real": ["in-file"], "arbitrary": ["walk-order"]},
-                "order": {"projector": "corpus", "basis": "declared:in-file"},
-                "persistencePolicy": {"halfLife": None}, "bands": {"grain": "membership", "computed": "sidecar"},
-                "coupling": {"children": []}, "apertures": {"measure": "boundary-changepoint"},
-                "ephemeral": ephemeral, "created": created}
-    with open(path, "w", encoding="utf-8") as fh:
-        json.dump(manifest, fh, indent=2)
-        fh.write("\n")
-    return path
+    """Declare a static corpus's cap stack and in-file ordering evidence."""
+    return write_stream_manifest(
+        root,
+        name=name,
+        lar="lar:///ha.ka.ba/lares/api/lares/corpus#stream-capture",
+        order=OrderCap("corpus", "declared:in-file"),
+        apertures={"measure": "boundary-changepoint"},
+        worldline={"real": ["in-file"], "arbitrary": ["walk-order"]},
+        ephemeral=ephemeral,
+    )
 
 
 def compose_corpus_stream_sensorium(root: str, *, wing: str, room: str = "corpus", min_support: int = 2,

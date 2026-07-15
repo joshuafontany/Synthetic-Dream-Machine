@@ -1366,12 +1366,12 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
 
 
 def _read_sensorium_planes(sensorium: str) -> tuple[list[np.ndarray], list[str], str]:
-    """Read corpus content embeddings from a rooted sensorium, IN corpus sequence order.
+    """Read content embeddings from a rooted sensorium in declared source order.
     Returns (planes, ids, note).
     NEVER re-embeds — reads the STORED nomic vectors (the readback discipline of drawer_io's
     cmd_embeddings). Graceful: no chroma / mempalace / no vectors ⇒ ([], [], note)."""
-    from order_vectors import corpus_ordered_vectors
-    ids_sorted, content, note = corpus_ordered_vectors(sensorium)
+    from order_vectors import source_ordered_vectors
+    ids_sorted, content, note = source_ordered_vectors(sensorium)
     if not ids_sorted:
         return [], [], note
     planes = [content]

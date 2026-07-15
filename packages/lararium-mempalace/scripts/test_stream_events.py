@@ -24,6 +24,15 @@ def test_events_refuse_reconnect_order_fusion(tmp_path):
         read_events(str(p))
 
 
+def test_events_refuse_boolean_sequence(tmp_path):
+    p = tmp_path / "bad-sequence.ndjson"
+    p.write_text(json.dumps({"vessel": "mudlet", "island": "conn-a", "event_id": "1",
+                             "sequence": True, "direction": "in", "kind": "line", "payload": "look"}),
+                 encoding="utf-8")
+    with pytest.raises(ValueError, match="non-negative integer"):
+        read_events(str(p))
+
+
 def test_event_stream_composes_the_generic_rooted_cap_stack(tmp_path):
     pointer = tmp_path / "events.ndjson"
     pointer.write_text("\n".join(json.dumps(event) for event in [
@@ -41,3 +50,5 @@ def test_event_stream_composes_the_generic_rooted_cap_stack(tmp_path):
     assert stream._order.projector == "stream"
     assert stream._order.basis == "observed:connection-sequence"
     assert paths.content == str(root / "content")
+    manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["order"] == {"projector": "stream", "basis": "observed:connection-sequence"}

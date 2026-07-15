@@ -101,6 +101,12 @@ export interface SensoriumCoupling {
  */
 export type SensoriumBands = Readonly<Record<string, unknown>>;
 
+/** Evidence a projector may use to order durable vectors for a derived reading. */
+export interface SensoriumOrder {
+  readonly projector: string;
+  readonly basis: string;
+}
+
 /** A sensorium manifest — schema 1. The whole composition, declared thin. */
 export interface SensoriumManifest {
   readonly schema: typeof SENSORIUM_SCHEMA;
@@ -112,6 +118,8 @@ export interface SensoriumManifest {
   readonly has: Readonly<Record<string, CapDecl>>;
   /** BASE cap — the FFZ membership-address grain (li-side stamp metadata; not a consistency plane). No bytes. */
   readonly bands: SensoriumBands;
+  /** BASE cap — declared ordering evidence. It does not grant an aperture by itself. */
+  readonly order?: SensoriumOrder;
   /** BASE cap — the dumb child-edges gluing sub-sensoriums. No bytes. KI cosheaf (see {@link planeVariance}). */
   readonly coupling: SensoriumCoupling;
   /**
@@ -199,6 +207,8 @@ export interface BuildSensoriumOptions {
     readonly absDir: string; readonly engine: string; readonly variance?: Variance;
   }>>;
   readonly bands?: SensoriumBands;
+  /** declared ordering evidence for a derived reading. */
+  readonly order?: SensoriumOrder;
   /** child sub-sensoriums — each { sensorium, absDir } becomes a dumb `coupling.children[]` edge. */
   readonly children?: ReadonlyArray<{ readonly sensorium: string; readonly absDir: string }>;
   /** the persistence dials (see {@link SensoriumManifest.persistencePolicy}); paired with a `has.persistence` cap. */
@@ -232,6 +242,7 @@ export function buildSensoriumManifest(sensoriumDir: string, opts: BuildSensoriu
     lar: opts.lar,
     has,
     bands: opts.bands ?? {},
+    ...(opts.order ? { order: opts.order } : {}),
     coupling: { children },
     ...(opts.persistencePolicy ? { persistencePolicy: opts.persistencePolicy } : {}),
     ...(opts.apertures ? { apertures: opts.apertures } : {}),

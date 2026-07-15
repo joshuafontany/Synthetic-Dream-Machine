@@ -24,7 +24,7 @@ def read_events(pointer: str) -> list[dict]:
             required = ("vessel", "island", "event_id", "sequence", "direction", "kind", "payload")
             if not isinstance(raw, dict) or any(not isinstance(raw.get(key), str) or not raw[key] for key in required if key != "sequence"):
                 raise ValueError(f"stream event {line_no}: missing string envelope field")
-            if not isinstance(raw["sequence"], int) or raw["sequence"] < 0:
+            if isinstance(raw["sequence"], bool) or not isinstance(raw["sequence"], int) or raw["sequence"] < 0:
                 raise ValueError(f"stream event {line_no}: sequence must be a non-negative integer")
             island = (raw["vessel"], raw["island"])
             key = (*island, raw["event_id"])
@@ -69,7 +69,8 @@ def compose_event_stream_sensorium(root: str, *, wing: str, room: str = "stream"
     from capture_session import stamp_embedder
     from capture_stream import ContentStoreLandCap
     from plane_fanout import compose_text_planes
-    from sensorium import OrderCap, compose_persistence_cap, compose_stream_sensorium, sensorium_paths
+    from sensorium import (OrderCap, compose_persistence_cap, compose_stream_sensorium,
+                           sensorium_paths, write_stream_manifest)
 
     if embed_factory is None:
         from embed_cap import make_embed_cap
@@ -77,6 +78,14 @@ def compose_event_stream_sensorium(root: str, *, wing: str, room: str = "stream"
     embed_one, model = embed_factory()
     dim = len(embed_one("probe"))
     paths = sensorium_paths(root)
+    order = OrderCap("stream", "observed:connection-sequence")
+    write_stream_manifest(
+        paths.root,
+        name="stream",
+        lar="lar:///ha.ka.ba/lares/api/lares/stream#event-capture",
+        order=order,
+        apertures={"measure": "boundary-changepoint"},
+    )
     source = stamp_embedder(stream_event_source(wing=wing, room=room), model)
     store = cio.ContentStore(paths.content, required_keys={"wing", "room"}, expected_dim=dim,
                              expected_model=model, append_only=True)
@@ -85,6 +94,6 @@ def compose_event_stream_sensorium(root: str, *, wing: str, room: str = "stream"
         source_factory=lambda **_route: source,
         planes_factory=lambda **_route: compose_text_planes(paths.root),
         persistence=compose_persistence_cap(paths.root),
-        order=OrderCap("stream", "observed:connection-sequence"),
+        order=order,
     )
     return stream, store, paths

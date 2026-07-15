@@ -49,16 +49,19 @@ def rederive_bands(root: str) -> dict:
             manifest = json.load(fh)
     except (OSError, ValueError) as exc:
         raise SystemExit(f"rederive bands: cannot read {manifest_path!r}: {exc}") from exc
-    apertures = manifest.get("apertures") or {}
-    if apertures.get("measure") == "boundary-changepoint":
+    order = manifest.get("order") or {}
+    projector, basis = order.get("projector"), order.get("basis")
+    if (projector, basis) in {("corpus", "declared:in-file"),
+                              ("stream", "observed:connection-sequence")}:
         from bands import analyze_sensorium
         cells, summary = analyze_sensorium(paths.root)
         target = os.path.join(paths.root, "bands-cells.ndjson")
         with open(target, "w", encoding="utf-8") as fh:
             for cell in cells:
                 fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
-        return {"projector": "corpus-order", "cells": len(cells), "summary": summary}
-    if apertures.get("beat") == "worldline-dag":
+        return {"projector": f"{projector}-order", "basis": basis,
+                "cells": len(cells), "summary": summary}
+    if (projector, basis) == ("worldline", "observed:turn-dag"):
         import content_io as cio
         from worldline_ffz import assign_worldline_ffz
         from worldline_io import WorldlineStore
@@ -67,9 +70,10 @@ def rederive_bands(root: str) -> dict:
             report = assign_worldline_ffz(store, [cio.ContentStore(paths.content)])
         finally:
             store.close()
-        return {"projector": "worldline-order", "braids": len([k for k in report if not k.startswith("__")]),
+        return {"projector": "worldline-order", "basis": basis,
+                "braids": len([k for k in report if not k.startswith("__")]),
                 "vector_fault": report.get("__vector_fault__")}
-    raise SystemExit("rederive bands: manifest declares no bands ordering projector")
+    raise SystemExit("rederive bands: manifest declares no supported order projector")
 
 
 def _ground_records(root: str) -> "list[dict]":
