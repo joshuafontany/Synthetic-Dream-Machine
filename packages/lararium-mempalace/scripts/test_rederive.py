@@ -5,6 +5,13 @@ import pytest
 import rederive as rd
 
 
+def test_rederive_bands_refuses_an_undeclared_projector(tmp_path):
+    (tmp_path / "manifest.json").write_text("{}", encoding="utf-8")
+    import pytest
+    with pytest.raises(SystemExit, match="no bands ordering projector"):
+        rd.rederive_bands(str(tmp_path))
+
+
 def _ground(tmp_path, rows):
     from content_io import ContentStore
 

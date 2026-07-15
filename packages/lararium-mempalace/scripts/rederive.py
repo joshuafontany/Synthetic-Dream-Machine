@@ -38,6 +38,40 @@ import shutil
 import sys
 
 
+def rederive_bands(root: str) -> dict:
+    """Rebuild bands from stored vectors under the manifest's declared order evidence."""
+    from sensorium import sensorium_paths
+
+    paths = sensorium_paths(root)
+    manifest_path = os.path.join(paths.root, "manifest.json")
+    try:
+        with open(manifest_path, encoding="utf-8") as fh:
+            manifest = json.load(fh)
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"rederive bands: cannot read {manifest_path!r}: {exc}") from exc
+    apertures = manifest.get("apertures") or {}
+    if apertures.get("measure") == "boundary-changepoint":
+        from bands_sidecar import analyze_sensorium
+        cells, summary = analyze_sensorium(paths.root)
+        target = os.path.join(paths.root, "bands-cells.ndjson")
+        with open(target, "w", encoding="utf-8") as fh:
+            for cell in cells:
+                fh.write(json.dumps(cell, ensure_ascii=False) + "\n")
+        return {"projector": "corpus-order", "cells": len(cells), "summary": summary}
+    if apertures.get("beat") == "worldline-dag":
+        import content_io as cio
+        from worldline_ffz import assign_worldline_ffz
+        from worldline_io import WorldlineStore
+        store = WorldlineStore(paths.worldline)
+        try:
+            report = assign_worldline_ffz(store, [cio.ContentStore(paths.content)])
+        finally:
+            store.close()
+        return {"projector": "worldline-order", "braids": len([k for k in report if not k.startswith("__")]),
+                "vector_fault": report.get("__vector_fault__")}
+    raise SystemExit("rederive bands: manifest declares no bands ordering projector")
+
+
 def _ground_records(root: str) -> "list[dict]":
     """Every record off the bed's contentpalace, in total order (source_file,
     chunk_index, cid) — the deterministic walk the caps re-read."""
@@ -75,7 +109,7 @@ def _ground_records(root: str) -> "list[dict]":
 
 
 def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
-             max_candidates: "int | None" = 96) -> dict:
+             max_candidates: "int | None" = 96, bands: bool = False) -> dict:
     """Wipe the derived planes and walk the ground back through the pour's own caps."""
     from plane_fanout import compose_corpus_planes
 
@@ -102,7 +136,8 @@ def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
         for cap in caps:
             cap.land(rec)
     report = {cap.name: cap.finish() for cap in caps}
-    return {"root": root, "records": len(records), "planes": report}
+    return {"root": root, "records": len(records), "planes": report,
+            **({"bands": rederive_bands(root)} if bands else {})}
 
 
 def main(argv: "list[str] | None" = None) -> int:
@@ -111,6 +146,7 @@ def main(argv: "list[str] | None" = None) -> int:
     ap.add_argument("--min-support", type=int, default=2, dest="min_support")
     ap.add_argument("--max-forms", type=int, default=64, dest="max_forms")
     ap.add_argument("--max-candidates", type=int, default=96, dest="max_candidates")
+    ap.add_argument("--bands", action="store_true", help="rederive bands through the manifest-selected projector")
     args = ap.parse_args(argv)
     if not args.sensorium:
         raise SystemExit(
@@ -123,6 +159,7 @@ def main(argv: "list[str] | None" = None) -> int:
             min_support=args.min_support,
             max_forms=args.max_forms,
             max_candidates=args.max_candidates,
+            bands=args.bands,
         )
         sys.stdout.write(json.dumps(rep, sort_keys=True, default=str) + "\n")
     return 0
