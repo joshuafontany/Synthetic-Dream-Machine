@@ -40,9 +40,9 @@
 import { generateKeyPairSync, createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, renameSync } from "node:fs";
-import { join, dirname } from "node:path";
-import { larIdentityDir, larHome } from "./vessel-paths.js";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "node:fs";
+import { join } from "node:path";
+import { larIdentityDir } from "./vessel-paths.js";
 import {
   generateOrLoadKeypair,
   signingSeedFromHex,
@@ -51,46 +51,15 @@ import {
 } from "@lararium/mesh";
 
 /**
- * The identity dir — the ONE resolver, `<state>/identity` (`larIdentityDir`), sitting in
- * the XDG state home OUTSIDE any substrate wipe. `reset`/`regenesis`/`rebuild` reforge the
+ * The identity dir — the ONE resolver, `<state>/identity` (`larIdentityDir`), in the XDG
+ * state home OUTSIDE any substrate wipe. `reset`/`regenesis`/`rebuild` reforge the
  * `<data>/vessel` store; the key + card + anchors survive here, unreachable by any storage
- * verb. Resolving triggers a one-time, idempotent migration off any legacy location, so an
- * install predating the state home keeps its sovereign key.
+ * verb. An empty home re-derives a fresh device key — no migration arm, no legacy spelling.
  */
-function identityDir(dataDir: string): string {
-  const home = larIdentityDir();
-  migrateLegacyIdentity(dataDir, home);
-  return home;
+function identityDir(_dataDir: string): string {
+  return larIdentityDir();
 }
 
-/**
- * Move a legacy identity dir onto the state home when the home lacks one. Best-effort +
- * idempotent — a present home short-circuits, a same-filesystem `rename` moves the whole
- * dir (keys + card + persona-group root together), and any failure falls through to a
- * fresh key (acceptable: the sovereign root re-derives device-local). Two legacy spellings:
- * the `<data>/.lararium-identity` sibling of the storage dir, and the older `~/.lares` home.
- */
-function migrateLegacyIdentity(dataDir: string, home: string): void {
-  if (existsSync(home)) return;
-  const legacies = [
-    join(dirname(dataDir), ".lararium-identity"),
-    join(larHome(), ".lararium-identity"),
-  ];
-  for (const legacy of legacies) {
-    if (legacy === home || !existsSync(legacy)) continue;
-    try {
-      mkdirSync(dirname(home), { recursive: true });
-      renameSync(legacy, home);
-      return;
-    } catch { /* cross-device or racing writer — leave it; a fresh key derives */ }
-  }
-}
-
-/**
- * One-time, best-effort migration of a legacy in-storage identity file into the
- * sibling identity dir: moves `<dataDir>/<file>` → `<identityDir>/<file>` when the
- * new location lacks it but the legacy one holds it. Idempotent — a no-op once moved.
- */
 
 // ── Local operator identity hint ──────────────────────────────────────────
 // Fully local-first: reads git config only. No network calls, no server tokens.

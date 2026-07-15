@@ -1,8 +1,8 @@
 /**
- * M1 — the identity home resolves under XDG state (reset-safe), and a legacy identity dir
- * migrates onto it so an install predating the state home keeps its sovereign key.
+ * M1 — the identity home resolves under XDG state (reset-safe), the ONE resolver. No
+ * migration arm, no legacy spelling: an empty home re-derives a fresh device key.
  */
-import { mkdtempSync, mkdirSync, writeFileSync, existsSync, readFileSync, rmSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, existsSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -34,35 +34,17 @@ describe("identity home (M1)", () => {
     expect(larIdentityDir()).toBe(join(root, "state", "lares", "identity"));
   });
 
-  test("a legacy <data>/.lararium-identity dir migrates onto the state home", async () => {
-    const dataDir = join(root, "data", "lares", "vessel");     // <data>/vessel
-    const legacy = join(root, "data", "lares", ".lararium-identity"); // its sibling
-    mkdirSync(legacy, { recursive: true });
-    writeFileSync(join(legacy, ".vessel-key.json"), JSON.stringify({ verifyingKey: "ab", signingKey: "cd" }));
-
-    // Any loader routes through identityDir(), which triggers the one-time migration.
-    // The read itself may reject (the key file name keys off git login) — the MOVE still fires.
-    try { await loadVesselVerifyingKey(dataDir); } catch { /* the move is the assertion */ }
-
-    const home = larIdentityDir();
-    expect(existsSync(home)).toBe(true);
-    expect(existsSync(join(home, ".vessel-key.json"))).toBe(true);
-    expect(existsSync(legacy)).toBe(false); // moved, not copied
-  });
-
-  test("migration is a no-op when the home already holds a key", async () => {
+  test("the resolver ignores any legacy dir — no migration, the home stands alone", async () => {
     const dataDir = join(root, "data", "lares", "vessel");
-    const legacy = join(root, "data", "lares", ".lararium-identity");
-    const home = larIdentityDir();
-    mkdirSync(home, { recursive: true });
-    writeFileSync(join(home, ".vessel-key.json"), JSON.stringify({ verifyingKey: "home", signingKey: "home" }));
+    const legacy = join(root, "data", "lares", ".lararium-identity"); // an old sibling location
     mkdirSync(legacy, { recursive: true });
-    writeFileSync(join(legacy, ".vessel-key.json"), JSON.stringify({ verifyingKey: "legacy", signingKey: "legacy" }));
+    writeFileSync(join(legacy, ".vessel-key.json"), JSON.stringify({ verifyingKey: "old", signingKey: "old" }));
 
-    try { await loadVesselVerifyingKey(dataDir); } catch { /* ignore read */ }
+    // A read routes through identityDir() → the state home only; the legacy dir never gets consulted
+    // or consumed (it just re-derives a fresh key when the home holds none).
+    try { await loadVesselVerifyingKey(dataDir); } catch { /* fresh-home read may reject; the point is no migration */ }
 
-    // The home key stays; the legacy dir is NOT consumed (home present → short-circuit).
-    expect(existsSync(legacy)).toBe(true);
-    expect(JSON.parse(String(readFileSync(join(home, ".vessel-key.json")))).verifyingKey).toBe("home");
+    expect(existsSync(legacy)).toBe(true);                    // left untouched — never moved
+    expect(existsSync(join(legacy, ".vessel-key.json"))).toBe(true);
   });
 });
