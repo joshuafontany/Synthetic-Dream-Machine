@@ -21,7 +21,7 @@ import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
-import { palaceOrgans, organHealthy, guestMempalaceOrgan, readMemeticWikitextCoupling } from "@lararium/node";
+import { palaceOrgans, organHealthy, guestMempalaceOrgan, readMemeticWikitextCoupling, runDoctor, formatDoctorReport } from "@lararium/node";
 import { readClaudeCleanupPeriod, CLEANUP_PERIOD_DAYS_FLOOR } from "../claude-wire.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -136,12 +136,38 @@ export async function cmdSensorium(args: ParsedArgs): Promise<number> {
   return 2;
 }
 
+/**
+ * `lares status vessel` — the DEEP health lens (the `git fsck` role, folded into status
+ * rather than a sibling verb): probes every Automerge doc in the vessel store through a
+ * disposable child-process boundary and charts MOUNTED vs CONDEMNED (a torn doc that would
+ * abort the WASM runtime on load). Read-only; a condemned doc points at `lares regenesis`.
+ * Exits non-zero on a tear, so a boot/CI gate reads health off the exit code.
+ */
+export async function cmdStatusVessel(args: ParsedArgs): Promise<number> {
+  const storageDir = larDataDir();
+  const report = await runDoctor(storageDir);
+  emit(args, {
+    ok: true,
+    data: {
+      storageDir,
+      total: report.total,
+      healthy: report.healthy,
+      condemned: report.condemned,
+      degraded: report.degraded,
+      entries: report.entries,
+    },
+    human: () => console.log(formatDoctorReport(report, storageDir)),
+  });
+  return report.degraded ? 1 : 0;
+}
+
 export async function cmdStatus(args: ParsedArgs): Promise<number> {
   // --palaces: the palace-organ health table (re-runnable; same registry as setup/teardown).
   if (args.flags["palaces"] === true) return cmdStatusPalaces(args);
-  // Namespaced spellings reached through the alias: `lares status sensorium` / `lares status node`.
+  // Namespaced lenses reached through the alias: sensorium taxonomy · node health · deep vessel probe.
   if (args.positional[0] === "sensorium") return cmdSensoriumStatus(args);
   if (args.positional[0] === "node") return cmdNodeStatus(args);
+  if (args.positional[0] === "vessel") return cmdStatusVessel(args);
   // Bare `lares status` = muscle-memory alias → node health.
   return cmdNodeStatus(args);
 }
