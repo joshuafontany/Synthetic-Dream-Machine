@@ -1,4 +1,4 @@
-/** The node coordinator's capture seam transports descriptors only, never a turn body. */
+/** This Python AI-session seam transports descriptors only, never a session turn body. */
 import { EventEmitter } from "node:events";
 
 import { afterEach, describe, expect, test } from "vitest";

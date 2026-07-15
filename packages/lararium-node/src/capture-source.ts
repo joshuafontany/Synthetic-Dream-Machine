@@ -1,7 +1,9 @@
 /**
  * capture-source — the daemon's pointer-only bridge to the Python session
- * capture holder. The bridge carries source descriptors, never session turns:
- * Python owns parsing, CID derivation, embedding, landing, and worldlines.
+ * capture holder. This AI-session bridge carries source descriptors, never
+ * session turns: Python owns parsing, CID derivation, embedding, landing, and
+ * worldlines. It states no daemon-wide payload rule. Node and browser TW5
+ * workers may compose other sensorium caps for their own admitted streams.
  */
 
 import { spawn } from "node:child_process";
@@ -26,9 +28,10 @@ const AI_SESSION_SURFACES = new Set<SourceCaptureRequest["surface"]>([
 ]);
 
 /**
- * The CHAO admission cut: Node may carry a source descriptor across this seam,
- * never transcript or telemetry payload.  Projecting instead of spreading also
- * protects the wire from untyped callers that attach extra fields at runtime.
+ * The AI-session admission cut: this Python bridge carries a source descriptor,
+ * never session text. Other daemon sensorium caps may carry their own admitted
+ * inputs, including non-session telemetry. Projecting instead of spreading
+ * protects this wire from untyped callers that attach extra fields at runtime.
  */
 export function sourceCaptureDescriptor(request: SourceCaptureRequest): SourceCaptureRequest {
   const { surface, pointer, wing, room, sessionId } = request;
