@@ -1,0 +1,20 @@
+{
+  "valid": {
+    "has": ["content", "form", "content", "telemetry"],
+    "order": {"projector": "stream", "basis": "observed:connection-sequence"},
+    "apertures": {"measure": "boundary-changepoint"}
+  },
+  "normalized": {
+    "has": ["content", "form", "telemetry"],
+    "order": {"projector": "stream", "basis": "observed:connection-sequence"},
+    "apertures": {"measure": "boundary-changepoint"}
+  },
+  "wiki": {
+    "has": ["content", "structure", "form", "coupling"]
+  },
+  "invalid": [
+    {"contract": {"has": ["content", ""]}, "error": "capability"},
+    {"contract": {"has": ["content"], "order": {"projector": "stream", "basis": ""}}, "error": "order"},
+    {"contract": {"has": ["content"], "apertures": {"": "boundary-changepoint"}}, "error": "apertures"}
+  ]
+}

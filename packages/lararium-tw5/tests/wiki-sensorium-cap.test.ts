@@ -11,6 +11,8 @@
  * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
  */
 
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { describe, test, expect } from "vitest";
 import type { ChangeOrigin } from "@lararium/mesh";
 import {
@@ -24,9 +26,13 @@ import {
 import { buildFixtureIsland, GLUE_SEEDS } from "../src/wiki-store-adapter.js";
 import type { IslandContext } from "../src/island-context.js";
 
+const contractFixture = JSON.parse(readFileSync(
+  fileURLToPath(new URL("../../lararium-mesh/tests/fixtures/sensorium-contract-parity.json", import.meta.url)), "utf8"),
+) as { wiki: { has: readonly string[] } };
+
 describe("hasWikiSensorium — node tier", () => {
   test("carries the platform-blind #has contract", () => {
-    expect(WIKI_SENSORIUM_CONTRACT).toEqual({ has: ["content", "structure", "form", "coupling"] });
+    expect(WIKI_SENSORIUM_CONTRACT).toEqual(contractFixture.wiki);
   });
 
   test("cohere folds the keystone planes through BOTH organs — the radius flips, the gate classifies", async () => {

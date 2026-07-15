@@ -77,6 +77,34 @@ class OrderCap:
 _INACTIVE_PERSISTENCE = PersistenceCap(path=None, half_life=None)
 
 
+def declare_sensorium_contract(*, has, order: "OrderCap | dict | None" = None,
+                               apertures: "dict[str, str] | None" = None) -> dict:
+    """Normalize the portable `#has` declaration and refuse malformed evidence."""
+    if not isinstance(has, (list, tuple)):
+        raise ValueError("sensorium contract: has needs a list of capabilities")
+    normalized_has = list(dict.fromkeys(has))
+    if any(not isinstance(cap, str) or not cap for cap in normalized_has):
+        raise ValueError("sensorium contract: every #has capability needs a non-empty name")
+    out = {"has": normalized_has}
+    if order is not None:
+        if isinstance(order, OrderCap):
+            projector, basis = order.projector, order.basis
+        elif isinstance(order, dict):
+            projector, basis = order.get("projector"), order.get("basis")
+        else:
+            projector = basis = None
+        if not isinstance(projector, str) or not projector or not isinstance(basis, str) or not basis:
+            raise ValueError("sensorium contract: order needs non-empty projector and basis")
+        out["order"] = {"projector": projector, "basis": basis}
+    if apertures is not None:
+        if (not isinstance(apertures, dict) or
+                any(not isinstance(cell, str) or not cell or not isinstance(provider, str) or not provider
+                    for cell, provider in apertures.items())):
+            raise ValueError("sensorium contract: apertures need non-empty cells and providers")
+        out["apertures"] = dict(apertures)
+    return out
+
+
 def _atomic_json_write(path: str, value: dict) -> None:
     """Replace one declaration atomically after its complete JSON body reaches disk."""
     fd, temporary = tempfile.mkstemp(prefix=".manifest-", suffix=".json", dir=os.path.dirname(path))
@@ -169,6 +197,11 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
     if worldline is not None:
         manifest["has"]["worldline"] = {"dir": "worldline", "engine": "worldline", "variance": "sheaf"}
         manifest["worldline"] = worldline
+    contract = declare_sensorium_contract(
+        has=list(manifest["has"]), order=order, apertures=manifest.get("apertures"))
+    manifest["order"] = contract["order"]
+    if "apertures" in contract:
+        manifest["apertures"] = contract["apertures"]
     _atomic_json_write(path, manifest)
     return path
 
