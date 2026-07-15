@@ -5,7 +5,7 @@ import os
 import numpy as np
 
 
-def source_ordered_vectors(sensorium: str):
+def source_ordered_vectors(sensorium: str, *, require_one_source: bool = False):
     """Read vectors in declared source/chunk order, never inventing cross-source history."""
     try:
         from mempalace.palace import get_collection
@@ -22,5 +22,9 @@ def source_ordered_vectors(sensorium: str):
                      np.asarray(embedding, dtype=float)))
     if len(rows) < 2:
         return [], [], f"bands-skipped: too few vectors ({len(rows)})"
+    sources = {row[0] for row in rows}
+    if require_one_source and len(sources) != 1:
+        return [], [], ("bands-skipped: observed sequence spans "
+                        f"{len(sources)} causal islands")
     rows.sort(key=lambda row: (row[0], row[1] if row[1] is not None else 1 << 30, row[2]))
     return [row[2] for row in rows], np.vstack([row[3] for row in rows]), f"source-order: {len(rows)} vectors"

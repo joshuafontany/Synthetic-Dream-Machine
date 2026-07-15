@@ -102,12 +102,23 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
     paths = sensorium_paths(root)
     os.makedirs(paths.root, exist_ok=True)
     path = os.path.join(paths.root, "manifest.json")
-    created = None
+    existing = None
     try:
         with open(path, encoding="utf-8") as fh:
-            created = json.load(fh).get("created")
-    except (OSError, ValueError):
+            existing = json.load(fh)
+    except FileNotFoundError:
         pass
+    except (OSError, ValueError) as exc:
+        raise ValueError(f"stream manifest at {path!r} cannot carry a safe rewrite: {exc}") from exc
+    if existing is not None:
+        if not isinstance(existing, dict):
+            raise ValueError(f"stream manifest at {path!r} must hold an object")
+        expected = {"sensorium": name, "lar": lar,
+                    "order": {"projector": order.projector, "basis": order.basis}}
+        drift = [key for key, value in expected.items() if existing.get(key) not in (None, value)]
+        if drift:
+            raise ValueError(f"stream manifest at {path!r} conflicts on {', '.join(drift)}")
+    created = existing.get("created") if isinstance(existing, dict) else None
     manifest = {
         "schema": 1,
         "sensorium": name,

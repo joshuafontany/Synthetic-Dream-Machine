@@ -1365,13 +1365,13 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
 # ── the palace readback — the content(+form) embeddings feed (chroma) ─────────────────────
 
 
-def _read_sensorium_planes(sensorium: str) -> tuple[list[np.ndarray], list[str], str]:
+def _read_sensorium_planes(sensorium: str, *, require_one_source: bool = False) -> tuple[list[np.ndarray], list[str], str]:
     """Read content embeddings from a rooted sensorium in declared source order.
     Returns (planes, ids, note).
     NEVER re-embeds — reads the STORED nomic vectors (the readback discipline of drawer_io's
     cmd_embeddings). Graceful: no chroma / mempalace / no vectors ⇒ ([], [], note)."""
     from order_vectors import source_ordered_vectors
-    ids_sorted, content, note = source_ordered_vectors(sensorium)
+    ids_sorted, content, note = source_ordered_vectors(sensorium, require_one_source=require_one_source)
     if not ids_sorted:
         return [], [], note
     planes = [content]
@@ -1449,9 +1449,14 @@ def analyze_ordered_vectors(ids: list[str], vectors, *, note: str, boot: int = 4
     }
 
 
-def analyze_sensorium(sensorium: str, *, boot: int = 40, gate: str = "bootstrap") -> tuple[list[dict], dict]:
-    """Adapt a corpus sensorium's declared content order into the neutral bands kernel."""
-    planes, ids, note = _read_sensorium_planes(sensorium)
+def analyze_sensorium(sensorium: str, *, boot: int = 40, gate: str = "bootstrap",
+                     require_one_source: bool = False) -> tuple[list[dict], dict]:
+    """Adapt declared source order into the neutral bands kernel.
+
+    A stream projector may require one source because a causal island does not
+    grant an order between independent connections.
+    """
+    planes, ids, note = _read_sensorium_planes(sensorium, require_one_source=require_one_source)
     vectors = planes[0] if planes else []
     return analyze_ordered_vectors(ids, vectors, note=note, boot=boot, gate=gate)
 

@@ -54,7 +54,8 @@ def rederive_bands(root: str) -> dict:
     if (projector, basis) in {("corpus", "declared:in-file"),
                               ("stream", "observed:connection-sequence")}:
         from bands import analyze_sensorium
-        cells, summary = analyze_sensorium(paths.root)
+        cells, summary = analyze_sensorium(
+            paths.root, require_one_source=(projector == "stream"))
         target = os.path.join(paths.root, "bands-cells.ndjson")
         with open(target, "w", encoding="utf-8") as fh:
             for cell in cells:
