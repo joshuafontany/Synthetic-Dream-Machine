@@ -9,7 +9,7 @@ import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
 import { larIdentityDir } from "../src/vessel-paths.js";
-import { persistIdentityAnchors, loadIdentityAnchors, type IdentityAnchors } from "../src/identity-anchors.js";
+import { persistIdentityAnchors, loadIdentityAnchors, persistIdentityArchive, loadIdentityArchive, type IdentityAnchors } from "../src/identity-anchors.js";
 
 const saved: Record<string, string | undefined> = {};
 function setEnv(k: string, v: string | undefined): void {
@@ -46,5 +46,13 @@ describe("identity anchors (M2)", () => {
     // Overwrite with a partial record.
     writeFileSync(join(larIdentityDir(), "anchors.json"), JSON.stringify({ personaGroupDocIdHex: "aa11" }));
     expect(loadIdentityAnchors()).toBeNull();
+  });
+
+  test("the keyhive archive round-trips through the identity home (M3)", () => {
+    expect(loadIdentityArchive()).toBeNull();
+    const bytes = Uint8Array.from([0x85, 0x6f, 0x4a, 0x83, 0x01, 0x02, 0x03]);
+    persistIdentityArchive(bytes);
+    expect(existsSync(join(larIdentityDir(), "keyhive-archive.bin"))).toBe(true);
+    expect(Array.from(loadIdentityArchive() ?? [])).toEqual(Array.from(bytes));
   });
 });

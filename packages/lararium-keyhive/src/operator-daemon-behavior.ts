@@ -28,8 +28,14 @@ import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from 
 /** Vessel-injected daemon seam the platform entry supplies (node folds the telemetry capture SINK here; a
  *  browser/node entry folds the projection `onBoot` mount so the @daemon inherits the wiki render cap).
  *  Forwarded straight to makeDaemonBehavior — the @daemon always carries the caps; this makes them live.
- *  Absent → the cap stays inert (sink not wired / no projection mount). */
-type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs" | "onBoot">;
+ *  Absent → the cap stays inert (sink not wired / no projection mount).
+ *
+ *  `persistArchive` — the Boundary-1 inversion: keyhive stays fs-blind, so NODE injects the writer that
+ *  lands `keyhive.exportArchive()` bytes in the sovereign identity home. Consumed HERE (never forwarded to
+ *  makeDaemonBehavior). Absent (a browser vessel with no fs) → the archive floor simply never persists. */
+type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs" | "onBoot"> & {
+  persistArchive?: (bytes: Uint8Array) => void | Promise<void>;
+};
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
@@ -42,14 +48,16 @@ import type { KeyhiveProvider } from "./keyhive-provider.js";
  * daemon manifests always carry daemonAuth, so that path guards tests.
  */
 export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: DaemonExtra = {}): IslandBehavior {
+  // persistArchive rides node-only; keep it OUT of the makeDaemonBehavior spread (not a DaemonBehaviorOption).
+  const { persistArchive, ...daemonExtra } = extra;
   const daemonAuth = manifest.daemonAuth;
-  if (!daemonAuth) return makeDaemonBehavior({ ...extra });
+  if (!daemonAuth) return makeDaemonBehavior({ ...daemonExtra });
 
   let kh: KeyhiveProvider | null = null;
   let mintedByHex = daemonAuth.operatorVerifyingKey;
 
   return makeDaemonBehavior({
-    ...extra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
+    ...daemonExtra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
     // Sovereign-worker data-plane: register the read-only reactors in-worker over the
     // IslandContext composite (verify-then-delegate gate inherited). The first slice
     // off the old main-thread jobRegistry; pool-touching residency reactors follow.
@@ -144,9 +152,17 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         registerBags:          daemonAuth.registerBags,
         signerDid:       daemonAuth.signerDid,
         deviceEdge:            daemonAuth.deviceEdge,
+        ...(daemonAuth.archiveBytes ? { archiveBytes: daemonAuth.archiveBytes } : {}),
       });
       kh = keyhive;
       mintedByHex = did;
+      // M3 — seed the on-disk archive FLOOR every boot: exportArchive() captures the founding +
+      // hydrated membership/capability DAG (+ prekey secrets) so a later torn @daemon restores from
+      // here instead of orphaning the veiled Handle. Best-effort — a failed export never blocks boot.
+      if (persistArchive) {
+        try { await persistArchive(await keyhive.exportArchive()); }
+        catch (err) { console.warn(`[daemon] keyhive archive export skipped: ${(err as Error)?.message ?? err}`); }
+      }
       return keyhive;
     },
 

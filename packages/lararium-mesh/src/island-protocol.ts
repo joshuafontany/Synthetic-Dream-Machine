@@ -198,6 +198,9 @@ export interface IslandMsg_Manifest {
     signerDid:             string;
     /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
     deviceEdge:            DeviceDelegationTiddler;
+    /** A prior keyhive Archive (from the identity home) — the restore FLOOR keyhive inits from before
+     *  replaying @daemon cap-events. Absent on a first boot / a vessel that never persisted one. */
+    archiveBytes?:         Uint8Array;
   };
 }
 

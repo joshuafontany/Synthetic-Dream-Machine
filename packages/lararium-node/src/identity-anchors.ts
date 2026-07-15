@@ -13,6 +13,7 @@
 import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { larIdentityDir } from "./vessel-paths.js";
+import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /** The sentinel anchors that bind a vessel to its veiled Handle. Hex doc-ids + agentId. */
 export interface IdentityAnchors {
@@ -32,6 +33,35 @@ export function persistIdentityAnchors(anchors: IdentityAnchors): void {
   const path = anchorsPath();
   writeFileSync(path, JSON.stringify(anchors, null, 2), "utf8");
   try { chmodSync(path, 0o600); } catch { /* best-effort — a non-POSIX fs still holds the bytes */ }
+}
+
+function archivePath(): string {
+  return join(larIdentityDir(), "keyhive-archive.bin");
+}
+
+/**
+ * Write the keyhive Archive (the membership/capability DAG + prekey secrets + contact card)
+ * into the identity home, crash-safe (temp→rename) so a torn write never strands a half
+ * archive. The restore path already lives in keyhive-provider (`new KH.Archive(bytes)`); this
+ * supplies the bytes a boot reads back. Concurrent exporters serialize through the sync write
+ * (last-write-wins — a newer full archive supersedes an older one).
+ *
+ * Secrets-at-rest: the bytes carry RAW prekey secret material. This lands 0o600 CLEARTEXT,
+ * strict parity with the signing seed already sitting cleartext 0o600 in this same home —
+ * no new exposure surface. An at-rest encryption wrapper stays OWED for post-alpha.
+ */
+export function persistIdentityArchive(bytes: Uint8Array): void {
+  mkdirSync(larIdentityDir(), { recursive: true });
+  const path = archivePath();
+  atomicWriteFileSync(path, bytes);
+  try { chmodSync(path, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
+}
+
+/** Read the persisted keyhive Archive back, or null when none has landed yet. */
+export function loadIdentityArchive(): Uint8Array | null {
+  const path = archivePath();
+  if (!existsSync(path)) return null;
+  try { return readFileSync(path); } catch { return null; }
 }
 
 /** Read the anchor set back, or null when a founding predates the anchor lift. */

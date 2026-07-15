@@ -70,6 +70,7 @@ import { makeFormPalace, type FormPalace }  from "./formpalace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc } from "./doc-load-probe.js";
+import { loadIdentityArchive } from "./identity-anchors.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -445,6 +446,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // relayGatePubKey — so node + its browser leaves resolve the identical @crossroads. The @daemon core
     // splices @crossroads into the recipe + registerBags for either vessel.
     await registerCrossroadsInOracle(repo, assembly.islandHandle, operatorIdentity.verifyingKey);
+    // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
+    // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the
+    // restore FLOOR, then replays @daemon cap-events on top — a torn @daemon restores instead of orphaning.
+    const archiveBytes = loadIdentityArchive();
     const daemonAuth = {
       seed:                 operatorSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
@@ -464,6 +469,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       ],
       signerDid,
       deviceEdge,
+      ...(archiveBytes ? { archiveBytes } : {}),
     };
     // The engine's plugin-tiddler CIDs — the daemon worker pulls them by CID from the fs CAS
     // (the breath path), never CRDT-syncing the bytes over the port. Same derivation the pool
