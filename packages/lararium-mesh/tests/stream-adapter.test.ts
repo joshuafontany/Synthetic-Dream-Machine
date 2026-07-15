@@ -1,6 +1,6 @@
 /**
  * stream-adapter — the per-modality intake abstraction + the TEXT reference adapter. Verifies the
- * text adapter reproduces the corpus-palace planes (content/structure/bands frames, per-stream order)
+ * text adapter reproduces the corpus-sensorium planes (content/structure/bands frames, per-stream order)
  * and that the driver routes the two doors (derived-from-content vs direct signal) + coupling.
  */
 import { describe, test, expect } from "vitest";

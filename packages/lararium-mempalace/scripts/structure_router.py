@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """structure_router — the STRUCTURE-plane parse ROUTER for the lares-corpus.
 
-The corpus-palace's structure cap (corpus.md #the-caps) names two halves:
+The corpus sensorium's structure cap (corpus.md #the-caps) names two halves:
   1. the EXISTING content-free structurepalace encoder (`structurepalace_io._structural_embed`),
      which already eats ANY nested-dict tree and yields a cosine-meaningful SHAPE
      vector; and

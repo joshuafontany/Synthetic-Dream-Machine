@@ -9,7 +9,7 @@
  *   (a) DERIVED — the session's own recorded cwd (its first-line `cwd`, the same row the wing
  *       law reads) sits under a recognized scratch root: the OS tmpdir / `/tmp` (Claude
  *       scratchpads + tmp sandboxes), a `LAR_ROOT` sandbox (the harness/staged-instance root),
- *       or the corpus-palace scratch (`<larHome>/.corpus`). Derive, don't declare — the
+ *       or the corpus-sensorium scratch (`<larHome>/.corpus`). Derive, don't declare — the
  *       designation rides the transcript's own content, never this process's ambience alone
  *       (`LAR_ROOT` names the one sandbox root the deriving process can vouch for).
  *   (b) DECLARED — an explicit marker the operator (or a spawning harness) sets: a

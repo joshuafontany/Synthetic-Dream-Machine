@@ -1,5 +1,5 @@
 """The production corpus pointer pipe shares the test-bed cap stack without test-bed ownership."""
-from corpus_capture import compose_corpus_stream_sensorium, write_corpus_manifest
+from capture_corpus import compose_corpus_stream_sensorium, write_corpus_manifest
 
 
 def _embed_factory():

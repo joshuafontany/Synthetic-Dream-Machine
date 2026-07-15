@@ -79,15 +79,15 @@ export {
   newCorpusId, listCorpora, openCorpus, queryCorpus, keepCorpus,
   dissolveCorpus, dissolveAll, listOrphans, reapOrphans, runCorpus,
   corpusTeardownDirs, defaultCorpusIngest, defaultCorpusSearch,
-} from "./corpus-palace.js";
+} from "./sense-corpus.js";
 export type {
-  CorpusManifest, CorpusIngest, CorpusSearch, OpenCorpusOptions, OpenCorpusResult,
+  CorpusLifecycle, CorpusIngest, CorpusSearch, OpenCorpusOptions, OpenCorpusResult,
   QueryCorpusResult, KeepResult, DissolveResult, RunCorpusOptions, RunCorpusResult,
-} from "./corpus-palace.js";
+} from "./sense-corpus.js";
 
 // The stream compose_palace seam — generalize the corpus lifecycle to ANY StreamAdapter's frames.
-export { composeStreamPalace, defaultStreamPlaneSink } from "./stream-palace.js";
-export type { ComposeStreamOptions } from "./stream-palace.js";
+export { composeStreamSensorium, defaultStreamPlaneSink } from "./sense-stream.js";
+export type { ComposeStreamOptions } from "./sense-stream.js";
 
 export { LarDiskProjector } from "./disk-projector.js";
 export { DaemonAuthGate } from "./daemon-auth-gate.js";
@@ -177,8 +177,8 @@ export type { LaresQuery, Lens } from "./lares-query.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeCallerVectorFlush } from "./caller-vector-flush.js";
-export { makeSourceCapture } from "./source-capture.js";
-export type { SourceCapture, SourceCaptureRequest, SourceCaptureResult, SourceCaptureSpawn } from "./source-capture.js";
+export { makeSourceCapture } from "./capture-source.js";
+export type { SourceCapture, SourceCaptureRequest, SourceCaptureResult, SourceCaptureSpawn } from "./capture-source.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";

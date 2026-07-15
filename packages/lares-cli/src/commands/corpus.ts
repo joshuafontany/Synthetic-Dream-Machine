@@ -6,7 +6,7 @@
  * (open → ingest → analyze → dissolve on exit, success OR error); the deep ingest (bands · structure
  * · form) is the documented S1–S3 seam, the lifecycle + store + commands are wired solid in S0.
  *
- * The lifecycle logic lives ONCE in @lararium/node (corpus-palace.ts); this command is a thin
+ * The lifecycle logic lives ONCE in @lararium/node (sense-corpus.ts); this command is a thin
  * dispatch + render shim. The examples-first help strings here are the SINGLE SOURCE the design meme
  * mirrors (the heleuma docs⇄help drift gate reads this anchor).
  *
@@ -90,7 +90,7 @@ async function queryVerb(args: ParsedArgs): Promise<number> {
   return res.found ? 0 : 3;
 }
 
-/** `corpus ls` — the live corpus-palaces. */
+/** `corpus ls` — the live corpus sensoria. */
 function lsVerb(args: ParsedArgs): number {
   const rows = listCorpora();
   const orphans = listOrphans();

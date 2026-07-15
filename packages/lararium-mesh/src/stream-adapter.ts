@@ -130,7 +130,7 @@ export interface PalaceComposition {
   readonly note: string;
   /**
    * The PREDICTIVE read (sensorium-rhymes.md #the-predictive-upgrade), attached over a numeric
-   * stream by the wiring (stream-palace) using the native {@link freeEnergy} / {@link forecastEws}
+   * stream by the sensing wire (sense-stream) using the native {@link freeEnergy} / {@link forecastEws}
    * core — absent when the modality carries no direct `signal` (a text corpus). The sensorium's
    * per-frame objective F = Σ π·ε² + complexity, exposed here at the composition level.
    */
@@ -171,7 +171,7 @@ function signalWidth(frames: readonly StreamFrame[]): number {
  *     content frames (text door — bands reads the content embeddings the content plane just filed)
  *   · coupling: only a MULTIVARIATE signal (≥2 columns) affords a directional lead-lag matrix
  *
- * Pure + synchronous (the plane sidecars run `execFileSync` behind the sink, matching corpus-palace);
+ * Pure + synchronous (the plane sidecars run `execFileSync` behind the sink, matching corpus sensing);
  * an absent sink leg skips its plane gracefully.
  */
 export function composePalace<Raw>(

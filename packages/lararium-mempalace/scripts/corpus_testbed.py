@@ -31,7 +31,7 @@ import os
 import sys
 
 import content_io as cio
-from corpus_capture import (compose_corpus_stream_sensorium, refuse_comparator,
+from capture_corpus import (compose_corpus_stream_sensorium, refuse_comparator,
                             write_corpus_manifest)
 
 

@@ -1,5 +1,5 @@
 /**
- * source-capture — the daemon's pointer-only bridge to the Python session
+ * capture-source — the daemon's pointer-only bridge to the Python session
  * capture holder. The bridge carries source descriptors, never session turns:
  * Python owns parsing, CID derivation, embedding, landing, and worldlines.
  */
@@ -10,7 +10,7 @@ import { resolveCaptureSessionSpawn, resolveComputeCapEnv } from "@lararium/memp
 
 import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./palace-holder.js";
 
-const LABEL = "source-capture";
+const LABEL = "capture-source";
 
 export interface SourceCaptureRequest {
   readonly surface: "claude" | "codex" | "copilot" | "copilot-vscode";

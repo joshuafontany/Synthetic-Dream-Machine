@@ -167,10 +167,10 @@ export function resolveCaptureSessionSpawn(): CaptureSessionSpawn {
   return resolveSidecarSpawn("capture_session.py");
 }
 
-/** `corpus_capture.py` — the Python-owned rooted static-corpus pointer pipe. */
+/** `capture_corpus.py` — the Python-owned rooted static-corpus pointer pipe. */
 export type CorpusCaptureSpawn = SidecarSpawn;
 export function resolveCorpusCaptureSpawn(): CorpusCaptureSpawn {
-  return resolveSidecarSpawn("corpus_capture.py");
+  return resolveSidecarSpawn("capture_corpus.py");
 }
 
 /** `embed_io.py` — the palace-less EMBED holder (text→vector), consuming the mempalace embedder. */

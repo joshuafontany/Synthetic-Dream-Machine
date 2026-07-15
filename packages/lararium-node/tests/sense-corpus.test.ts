@@ -1,5 +1,5 @@
 /**
- * corpus-palace — the ephemeral astral multipalace lifecycle: a `run` dissolves on exit (success OR
+ * sense-corpus — the ephemeral corpus-sensorium lifecycle: a `run` dissolves on exit (success OR
  * error), `dissolve` is idempotent, and `--orphans` reaps leaked scratch.
  */
 
@@ -9,9 +9,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   runCorpus, openCorpus, listCorpora, listOrphans, reapOrphans,
-  dissolveCorpus, keepCorpus, corpusStructureDir, corpusBandsCellsPath, corpusFormConstructiconPath,
+  dissolveCorpus, keepCorpus, corpusStructurePath, corpusBandsCellsPath, corpusFormConstructiconPath,
   type CorpusIngest, type CorpusSearch,
-} from "../src/corpus-palace.js";
+} from "../src/sense-corpus.js";
 import { larCorpusDir, corpusInstanceDir } from "../src/vessel-paths.js";
 
 let home: string;
@@ -139,17 +139,17 @@ describe("the S2 structure plane — the parse-router seam", () => {
   });
 
   test("the structure sub-palace lives UNDER the corpus dir (swept on dissolve)", () => {
-    // a seam that writes a marker into the structure dir, proving corpusStructureDir nests it.
-    const writingIngest: CorpusIngest = ({ palaceDir }) => {
-      const sdir = corpusStructureDir(palaceDir);
+    // a seam that writes a marker into the structure cap, proving it nests under the root.
+    const writingIngest: CorpusIngest = ({ sensoriumRoot }) => {
+      const sdir = corpusStructurePath(sensoriumRoot);
       mkdirSync(sdir, { recursive: true });
       writeFileSync(join(sdir, "chroma.sqlite3"), "x");
       return { drawers: 0, structures: 1, bands: 0, forms: 0, note: "structure: 1 vectors (0 skipped)" };
     };
     const { id, dir } = openCorpus({ sourcePath: src, ingest: writingIngest });
-    expect(existsSync(corpusStructureDir(dir))).toBe(true);
+    expect(existsSync(corpusStructurePath(dir))).toBe(true);
     dissolveCorpus(id);
-    expect(existsSync(corpusStructureDir(dir))).toBe(false); // swept with the instance dir
+    expect(existsSync(corpusStructurePath(dir))).toBe(false); // swept with the instance dir
   });
 
   // Opt-in end-to-end: the REAL defaultCorpusIngest over a code/markdown dir, exercised through the
@@ -160,7 +160,7 @@ describe("the S2 structure plane — the parse-router seam", () => {
     writeFileSync(join(src, "x.js"), "function f(n){ if(n>0){return n*2;} return 0; }\n");
     const out = openCorpus({ sourcePath: src }); // default ingest → real python structure router
     expect(out.manifest.structures ?? 0).toBeGreaterThan(0);
-    expect(existsSync(corpusStructureDir(out.dir))).toBe(true);
+    expect(existsSync(corpusStructurePath(out.dir))).toBe(true);
     dissolveCorpus(out.id);
   });
 });
@@ -178,8 +178,8 @@ describe("the S1 bands plane — the multi-scale FFZ seam", () => {
 
   test("the bands leg files adaptive lar_ffz cells the manifest + result thread through", () => {
     // a seam that writes the bands-cells NDJSON (proving the path nests under the corpus dir)
-    const bandsIngest: CorpusIngest = ({ palaceDir }) => {
-      writeFileSync(corpusBandsCellsPath(palaceDir), JSON.stringify({ lar_ffz: "corpus/0.0.0.0.0", register: "Canon" }) + "\n");
+    const bandsIngest: CorpusIngest = ({ sensoriumRoot }) => {
+      writeFileSync(corpusBandsCellsPath(sensoriumRoot), JSON.stringify({ lar_ffz: "corpus/0.0.0.0.0", register: "Canon" }) + "\n");
       return { drawers: 4, structures: 3, bands: 12, forms: 0, note: "bands: 2 cuts · 1 Canon / 1 Provisional" };
     };
     const { id, dir, manifest } = openCorpus({ sourcePath: src, ingest: bandsIngest });
@@ -204,8 +204,8 @@ describe("the S3 form plane — the blind-induction seam", () => {
 
   test("the form leg files the constructicon the manifest + result thread through", () => {
     // a seam that writes the constructicon NDJSON (proving the path nests under the corpus dir)
-    const formIngest: CorpusIngest = ({ palaceDir }) => {
-      writeFileSync(corpusFormConstructiconPath(palaceDir), JSON.stringify({ struct_hash: "abc", origin: "tree", seq: ["ahu_block", "sigil_name"], support: 5 }) + "\n");
+    const formIngest: CorpusIngest = ({ sensoriumRoot }) => {
+      writeFileSync(corpusFormConstructiconPath(sensoriumRoot), JSON.stringify({ struct_hash: "abc", origin: "tree", seq: ["ahu_block", "sigil_name"], support: 5 }) + "\n");
       return { drawers: 6, structures: 5, bands: 4, forms: 7, note: "form: 7 constructions from 5 structures" };
     };
     const { id, dir, manifest } = openCorpus({ sourcePath: src, ingest: formIngest });

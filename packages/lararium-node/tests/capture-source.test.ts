@@ -3,7 +3,7 @@ import { EventEmitter } from "node:events";
 
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makeSourceCapture, type SourceCapture } from "../src/source-capture.js";
+import { makeSourceCapture, type SourceCapture } from "../src/capture-source.js";
 import type { PalaceHolderProc, PalaceHolderSpawn } from "../src/palace-holder.js";
 
 function fakeSpawn(seen: Array<{ op: string; fields: Record<string, unknown> }>): PalaceHolderSpawn {
@@ -36,7 +36,7 @@ afterEach(async () => { await Promise.all(opened.splice(0).map((capture) => capt
 describe("makeSourceCapture", () => {
   test("ships only the Python source descriptor", async () => {
     const seen: Array<{ op: string; fields: Record<string, unknown> }> = [];
-    const capture = makeSourceCapture("/tmp/source-capture-root", { spawn: fakeSpawn(seen) });
+    const capture = makeSourceCapture("/tmp/capture-source-root", { spawn: fakeSpawn(seen) });
     opened.push(capture);
     await expect(capture.capture({ surface: "copilot-vscode", pointer: "/sessions/chat.jsonl", wing: "wing_proj", room: "conversations" })).resolves.toMatchObject({ landed: 3 });
     expect(seen).toEqual([
@@ -48,7 +48,7 @@ describe("makeSourceCapture", () => {
 
   test("preserves the Copilot SQLite session selector", async () => {
     const seen: Array<{ op: string; fields: Record<string, unknown> }> = [];
-    const capture = makeSourceCapture("/tmp/source-capture-root", { spawn: fakeSpawn(seen) });
+    const capture = makeSourceCapture("/tmp/capture-source-root", { spawn: fakeSpawn(seen) });
     opened.push(capture);
     await capture.capture({ surface: "copilot", pointer: "/sessions/session-store.db", wing: "wing_proj", sessionId: "cop-42" });
     expect(seen[1]).toEqual({ op: "capture", fields: { surface: "copilot", pointer: "/sessions/session-store.db", wing: "wing_proj", sessionId: "cop-42" } });

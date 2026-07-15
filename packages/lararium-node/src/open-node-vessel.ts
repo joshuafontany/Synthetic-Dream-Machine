@@ -63,7 +63,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
-import { makeSourceCapture, type SourceCapture } from "./source-capture.js";
+import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";

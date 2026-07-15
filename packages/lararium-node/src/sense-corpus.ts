@@ -1,5 +1,5 @@
 /**
- * corpus-palace — the ephemeral astral MULTIPALACE lifecycle (the `docker run --rm` of memory).
+ * sense-corpus — the ephemeral corpus-sensorium lifecycle (the `docker run --rm` of memory).
  *
  * Each `lares corpus run|open` mints a rooted scratch sensorium under `~/.lares/.corpus/<id>/`.
  * Python's corpus pointer pipe owns content, structure, form, worldline, and bands beneath that root. A `run`
@@ -32,8 +32,8 @@ import { larCorpusDir, corpusInstanceDir } from "./vessel-paths.js";
 /** The LIFECYCLE record stays apart from Python's sensorium declaration. */
 const CORPUS_RECORD = "corpus.json";
 
-/** One ephemeral corpus-palace instance's on-disk manifest — the leak-proofing + provenance record. */
-export interface CorpusManifest {
+/** One ephemeral corpus-sensorium instance's lifecycle record — leak-proofing + provenance. */
+export interface CorpusLifecycle {
   readonly id: string;
   /** operator-friendly label (defaults to the source basename). */
   readonly name: string;
@@ -75,16 +75,16 @@ function corpusRecordPath(dir: string): string {
   return join(dir, CORPUS_RECORD);
 }
 
-function readCorpusRecord(dir: string): CorpusManifest | null {
+function readCorpusRecord(dir: string): CorpusLifecycle | null {
   try {
-    const m = JSON.parse(readFileSync(corpusRecordPath(dir), "utf8")) as CorpusManifest;
+    const m = JSON.parse(readFileSync(corpusRecordPath(dir), "utf8")) as CorpusLifecycle;
     return typeof m?.id === "string" ? m : null;
   } catch {
     return null;
   }
 }
 
-function writeCorpusRecord(dir: string, m: CorpusManifest): void {
+function writeCorpusRecord(dir: string, m: CorpusLifecycle): void {
   atomicWriteFileSync(corpusRecordPath(dir), JSON.stringify(m, null, 2) + "\n");
 }
 
@@ -110,45 +110,45 @@ function instanceDirs(): string[] {
 }
 
 /** The live corpus instances (valid lifecycle record), newest first. */
-export function listCorpora(): CorpusManifest[] {
+export function listCorpora(): CorpusLifecycle[] {
   return instanceDirs()
     .map(readCorpusRecord)
-    .filter((m): m is CorpusManifest => m !== null)
+    .filter((m): m is CorpusLifecycle => m !== null)
     .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }
 
 // ── the ingest seam (THIN for S0; the deep bands/structure/form caps land S1–S3) ──────────────────
 
 /** The pluggable Python-owned pointer ingest leg. */
-export type CorpusIngest = (args: { sourcePath: string; palaceDir: string; ephemeral?: boolean }) => { drawers: number; structures: number; bands: number; forms: number; note: string };
+export type CorpusIngest = (args: { sourcePath: string; sensoriumRoot: string; ephemeral?: boolean }) => { drawers: number; structures: number; bands: number; forms: number; note: string };
 
 /** The structure plane lives in a chroma sub-palace under the corpus instance dir — so a
  *  `dissolve` (rmSync of the instance dir) sweeps it too; no separate teardown registration. */
-export function corpusStructureDir(palaceDir: string): string {
-  return join(palaceDir, "structure");
+export function corpusStructurePath(sensoriumRoot: string): string {
+  return join(sensoriumRoot, "structure");
 }
 
 /** The bands plane's adaptive lar_ffz cells NDJSON, written under the corpus instance dir (swept
  *  on dissolve with everything else). One line per content chunk: {id?, lar_ffz, repro_grade, cells}. */
-export function corpusBandsCellsPath(palaceDir: string): string {
-  return join(palaceDir, "bands-cells.ndjson");
+export function corpusBandsCellsPath(sensoriumRoot: string): string {
+  return join(sensoriumRoot, "bands-cells.ndjson");
 }
 
 /** The FORM plane's constructicon NDJSON — the corpus's OWN induced grammar, written under the
  *  corpus instance dir (swept on dissolve with everything else). One line per surfaced template:
  *  {struct_hash, origin, seq, support, ...} (form_induction.py #the-form-induction, S3). */
-export function corpusFormConstructiconPath(palaceDir: string): string {
-  return join(palaceDir, "form-constructicon.ndjson");
+export function corpusFormConstructiconPath(sensoriumRoot: string): string {
+  return join(sensoriumRoot, "form-constructicon.ndjson");
 }
 
 /** Invoke the rooted Python capture pipe and retain only its lifecycle summary. */
-export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, palaceDir, ephemeral = false }) => {
+export const defaultCorpusIngest: CorpusIngest = ({ sourcePath, sensoriumRoot, ephemeral = false }) => {
   const { python, script, submoduleRoot, scriptPresent } = resolveCorpusCaptureSpawn();
   if (!python || !scriptPresent) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: "ingest-skipped: no corpus capture pipe (lares wake --install)" };
   if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: `ingest-skipped: source absent (${sourcePath})` };
   try {
     const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
-    const out = execFileSync(python, [script, "--sensorium", palaceDir, "--source", sourcePath, "--wing", "wing_corpus", ...(ephemeral ? ["--ephemeral"] : [])], {
+    const out = execFileSync(python, [script, "--sensorium", sensoriumRoot, "--source", sourcePath, "--wing", "wing_corpus", ...(ephemeral ? ["--ephemeral"] : [])], {
       cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
     });
     const lines = out.trim().split(/\r?\n/).filter((value) => value.trim().startsWith("{"));
@@ -174,10 +174,10 @@ export interface OpenCorpusOptions {
 export interface OpenCorpusResult {
   readonly id: string;
   readonly dir: string;
-  readonly manifest: CorpusManifest;
+  readonly manifest: CorpusLifecycle;
 }
 
-/** Spin up a scratch corpus-palace, ingest the source, write the manifest, leave it LIVE. */
+/** Spin up a scratch corpus sensorium, ingest its pointer, write lifecycle state, leave it LIVE. */
 export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
   const id = newCorpusId();
   const dir = corpusInstanceDir(id);
@@ -187,8 +187,8 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
   const name = opts.name ?? (opts.sourcePath.replace(/[/\\]+$/, "").split(/[/\\]/).pop() || id);
   const ephemeral = opts.ephemeral ?? false;
   const ingest = opts.ingest ?? defaultCorpusIngest;
-  const { drawers, structures, bands, forms, note } = ingest({ sourcePath, palaceDir: dir, ephemeral });
-  const manifest: CorpusManifest = {
+  const { drawers, structures, bands, forms, note } = ingest({ sourcePath, sensoriumRoot: dir, ephemeral });
+  const manifest: CorpusLifecycle = {
     id, name, sourcePath, createdAt: new Date().toISOString(),
     ephemeral, ...(ephemeral ? { pid: process.pid } : {}), drawers, structures, bands, forms, note,
   };
@@ -199,12 +199,12 @@ export function openCorpus(opts: OpenCorpusOptions): OpenCorpusResult {
 // ── query (read leg) ──────────────────────────────────────────────────────────────────────────────
 
 /** The pluggable search leg — query a scratch palace dir (defaults to the read-only sidecar client). */
-export type CorpusSearch = (args: { palaceDir: string; query: string; limit: number }) => Promise<{ hits: Array<Record<string, unknown>>; note?: string }>;
+export type CorpusSearch = (args: { sensoriumRoot: string; query: string; limit: number }) => Promise<{ hits: Array<Record<string, unknown>>; note?: string }>;
 
-export const defaultCorpusSearch: CorpusSearch = async ({ palaceDir, query, limit }) => {
+export const defaultCorpusSearch: CorpusSearch = async ({ sensoriumRoot, query, limit }) => {
   const { python, submoduleRoot, sidecarPresent } = resolveMempalaceSpawn();
   if (!python || !sidecarPresent) return { hits: [], note: "query-skipped: no python sidecar" };
-  const client = new MempalaceClient({ submoduleRoot, palacePath: join(palaceDir, "content"), python });
+  const client = new MempalaceClient({ submoduleRoot, palacePath: join(sensoriumRoot, "content"), python });
   try {
     const res = await client.search({ query, limit });
     return { hits: (res.results ?? []) as Array<Record<string, unknown>> };
@@ -228,7 +228,7 @@ export async function queryCorpus(
 ): Promise<QueryCorpusResult> {
   const dir = corpusInstanceDir(id);
   if (!existsSync(dir) || readCorpusRecord(dir) === null) return { id, found: false, hits: [] };
-  const { hits, note } = await search({ palaceDir: dir, query: keywords, limit });
+  const { hits, note } = await search({ sensoriumRoot: dir, query: keywords, limit });
   return { id, found: true, hits, ...(note ? { note } : {}) };
 }
 

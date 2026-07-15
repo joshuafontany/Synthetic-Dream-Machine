@@ -37,7 +37,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "lares corpus run ./notes --keep                        # ... but land it durable",
       "lares corpus open ./src --name myproj                  # spin up + ingest, leave live",
       "lares corpus query c-abc123 capability model           # search a live corpus",
-      "lares corpus ls                                        # the live corpus-palaces",
+      "lares corpus ls                                        # the live corpus sensoria",
       "lares corpus keep c-abc123                             # promote ephemeral → durable",
       "lares corpus dissolve c-abc123                         # remove one (idempotent)",
       "lares corpus dissolve --orphans                        # reap leaked scratch",

@@ -1,11 +1,11 @@
 /**
- * stream-palace — the node WIRING of the stream compose_palace seam: run the sensorium planes over
+ * sense-stream — the node wiring for sensing stream frames through a rooted sensorium.
  * ANY {@link StreamAdapter}'s frames, backed by the real corpus sidecars.
  *
  * The pure abstraction (the {@link StreamAdapter} / {@link StreamFrame} contract + the
  * {@link composePalace} driver) lives VM-free in @lararium/mesh. THIS module supplies the impure
- * plane bank — the python sidecars behind the {@link PlaneSink} — and the `composeStreamPalace` entry
- * that generalizes the ephemeral corpus-palace lifecycle to consume frames from any adapter.
+ * plane bank — the Python sidecars behind the {@link PlaneSink} — and the `composeStreamSensorium` entry
+ * that generalizes the ephemeral corpus-sensorium lifecycle to consume frames from any adapter.
  *
  * Two paths, by the corpus.md role line ("compose_palace(caps) instantiated EPHEMERALLY over any
  * corpus"):
@@ -28,13 +28,13 @@ import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { resolveBandsSidecarSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
 import { composePalace, freeEnergy, forecastEws, type PalaceComposition, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
-import { defaultCorpusIngest, type CorpusIngest } from "./corpus-palace.js";
+import { defaultCorpusIngest, type CorpusIngest } from "./sense-corpus.js";
 
 // ── the frame-native signal door — bands + coupling over a raw numeric stream (NDJSON) ────────────
 
-/** Marshal frames' `signal` vectors to an NDJSON matrix (one JSON array per row) under palaceDir. */
-function writeSignalNdjson(frames: readonly StreamFrame[], palaceDir: string): string {
-  const path = join(palaceDir, `stream-signal-${randomBytes(3).toString("hex")}.ndjson`);
+/** Marshal frames' `signal` vectors to an NDJSON matrix under one sensorium root. */
+function writeSignalNdjson(frames: readonly StreamFrame[], sensoriumRoot: string): string {
+  const path = join(sensoriumRoot, `stream-signal-${randomBytes(3).toString("hex")}.ndjson`);
   const body = frames.map((f) => JSON.stringify(Array.from(f.signal))).join("\n") + "\n";
   writeFileSync(path, body);
   return path;
@@ -48,11 +48,11 @@ function writeSignalNdjson(frames: readonly StreamFrame[], palaceDir: string): s
 function runSignalSidecar(
   verb: "analyze" | "couple",
   frames: readonly StreamFrame[],
-  palaceDir: string,
+  sensoriumRoot: string,
 ): Record<string, unknown> | null {
   const { python, script, submoduleRoot, scriptPresent } = resolveBandsSidecarSpawn();
   if (!python || !scriptPresent || frames.length === 0) return null;
-  const ndjson = writeSignalNdjson(frames, palaceDir);
+  const ndjson = writeSignalNdjson(frames, sensoriumRoot);
   try {
     const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
     const out = execFileSync(python, [script, verb, "--signal", ndjson], {
@@ -78,15 +78,15 @@ function runSignalSidecar(
  * The bands leg's DERIVED door (text: signal from content embeddings) rides the batch corpus run, NOT
  * this frame sink — so a `derivedFromContent` call returns 0 here (the content path already banded it).
  */
-export function defaultStreamPlaneSink(palaceDir: string): PlaneSink {
+export function defaultStreamPlaneSink(sensoriumRoot: string): PlaneSink {
   return {
     bands(frames, { derivedFromContent }) {
       if (derivedFromContent) return 0; // the derived door is the path-based corpus run, not this sink
-      const summary = runSignalSidecar("analyze", frames, palaceDir);
+      const summary = runSignalSidecar("analyze", frames, sensoriumRoot);
       return summary ? Number(summary["cells"] ?? 0) : 0;
     },
     coupling(frames) {
-      const summary = runSignalSidecar("couple", frames, palaceDir);
+      const summary = runSignalSidecar("couple", frames, sensoriumRoot);
       return summary ? Number(summary["edges"] ?? 0) : 0;
     },
   };
@@ -106,7 +106,7 @@ export interface ComposeStreamOptions<Raw> {
   /** The raw source the adapter ingests. */
   readonly source: Raw;
   /** The scratch palace dir the planes fill (a corpus instance dir, or any writable scratch). */
-  readonly palaceDir: string;
+  readonly sensoriumRoot: string;
   /** Override the plane bank (tests inject a fake; default = the batch corpus run or the numeric door). */
   readonly sink?: PlaneSink;
   /** Override the batch corpus ingest leg (tests inject a no-python fake). */
@@ -119,15 +119,15 @@ export interface ComposeStreamOptions<Raw> {
  * path) rides the per-plane frame driver over {@link defaultStreamPlaneSink}. An explicit `sink` always
  * takes the frame-driver path (the test + custom-plane seam).
  */
-export function composeStreamPalace<Raw>(opts: ComposeStreamOptions<Raw>): PalaceComposition {
-  const { adapter, source, palaceDir } = opts;
+export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): PalaceComposition {
+  const { adapter, source, sensoriumRoot } = opts;
 
   // BATCH + a path source + no explicit sink ⇒ the existing corpus run IS the plane application.
   const path = pathOf(source);
   if (adapter.mode === "batch" && path && !opts.sink) {
     const frames = adapter.ingest(source); // the normalized VIEW — proves the abstraction + tallies grain
     const ingest = opts.ingest ?? defaultCorpusIngest;
-    const r = ingest({ sourcePath: path, palaceDir });
+    const r = ingest({ sourcePath: path, sensoriumRoot });
     return {
       modality: adapter.modality,
       mode: "batch",
@@ -143,7 +143,7 @@ export function composeStreamPalace<Raw>(opts: ComposeStreamOptions<Raw>): Palac
 
   // DIRECT-SIGNAL / LIVE / custom-sink ⇒ the per-plane frame driver (the numeric door + documented
   // live seam for content/structure).
-  const comp = composePalace(adapter, source, opts.sink ?? defaultStreamPlaneSink(palaceDir));
+  const comp = composePalace(adapter, source, opts.sink ?? defaultStreamPlaneSink(sensoriumRoot));
   return attachPredictiveRead(comp, adapter.ingest(source));
 }
 

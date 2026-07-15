@@ -1,5 +1,5 @@
 /**
- * stream-palace — the node wiring of the stream compose_palace seam. Verifies batch=corpus-run
+ * sense-stream — node wiring for generic stream sensing. Verifies batch=corpus-run
  * delegation (text-batch over a path) and the direct-signal frame-driver path (a custom sink), both
  * without touching python.
  */
@@ -8,29 +8,29 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { textStreamAdapter, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
-import { composeStreamPalace } from "../src/stream-palace.js";
-import type { CorpusIngest } from "../src/corpus-palace.js";
+import { composeStreamSensorium } from "../src/sense-stream.js";
+import type { CorpusIngest } from "../src/sense-corpus.js";
 
 let dir: string;
 let src: string;
 
 beforeEach(() => {
-  dir = mkdtempSync(join(tmpdir(), "lar-stream-palace-"));
+  dir = mkdtempSync(join(tmpdir(), "lar-sense-stream-"));
   src = join(dir, "corpus.md");
   writeFileSync(src, "First para.\n\nSecond para is longer here.\n\nThird para.\n");
 });
 afterEach(() => { try { rmSync(dir, { recursive: true, force: true }); } catch { /* ignore */ } });
 
-describe("composeStreamPalace — batch = the existing corpus run", () => {
+describe("composeStreamSensorium — batch = the existing corpus run", () => {
   test("a text-batch adapter over a path delegates to the corpus ingest", () => {
     const fakeIngest: CorpusIngest = ({ sourcePath }) => {
       expect(sourcePath).toBe(src); // the path source threaded through to the corpus run
       return { drawers: 3, structures: 2, bands: 5, forms: 4, note: "fake-corpus-run" };
     };
-    const out = composeStreamPalace({
+    const out = composeStreamSensorium({
       adapter: textStreamAdapter(),
       source: { text: "First para.\n\nSecond para is longer here.\n\nThird para.", path: src },
-      palaceDir: dir,
+      sensoriumRoot: dir,
       ingest: fakeIngest,
     });
     expect(out.modality).toBe("text");
@@ -45,7 +45,7 @@ describe("composeStreamPalace — batch = the existing corpus run", () => {
   });
 });
 
-describe("composeStreamPalace — the direct-signal / custom-sink frame driver", () => {
+describe("composeStreamSensorium — the direct-signal / custom-sink frame driver", () => {
   const numeric: StreamAdapter<number[][]> = {
     modality: "sensor",
     mode: "live",
@@ -57,7 +57,7 @@ describe("composeStreamPalace — the direct-signal / custom-sink frame driver",
       bands: (frames, { derivedFromContent }) => { expect(derivedFromContent).toBe(false); return frames.length; },
       coupling: (frames) => frames.length,
     };
-    const out = composeStreamPalace({ adapter: numeric, source: [[1, 5], [2, 4], [3, 3], [4, 2]], palaceDir: dir, sink });
+    const out = composeStreamSensorium({ adapter: numeric, source: [[1, 5], [2, 4], [3, 3], [4, 2]], sensoriumRoot: dir, sink });
     expect(out.modality).toBe("sensor");
     expect(out.mode).toBe("live");
     expect(out.content).toBe(0); // numeric stream carries no content
@@ -79,7 +79,7 @@ describe("composeStreamPalace — the direct-signal / custom-sink frame driver",
       ingest: (rs) => rs.map((r, i): StreamFrame => ({ seq: i, signal: r })),
     };
     const sink: PlaneSink = { bands: (f) => f.length };
-    const out = composeStreamPalace({ adapter: oneCol, source: rows, palaceDir: dir, sink });
+    const out = composeStreamSensorium({ adapter: oneCol, source: rows, sensoriumRoot: dir, sink });
     // F = Σ π·ε² + complexity, computed and EXPOSED on the composition
     expect(out.freeEnergy).toBeDefined();
     expect(out.freeEnergy!.F).toBeCloseTo(out.freeEnergy!.accuracy + out.freeEnergy!.complexity, 6);
@@ -92,10 +92,10 @@ describe("composeStreamPalace — the direct-signal / custom-sink frame driver",
 
   test("an explicit sink forces the frame driver even for a batch path adapter", () => {
     const sink: PlaneSink = { content: (f) => f.length };
-    const out = composeStreamPalace({
+    const out = composeStreamSensorium({
       adapter: textStreamAdapter(),
       source: { text: "a\n\nb\n\nc", path: src },
-      palaceDir: dir,
+      sensoriumRoot: dir,
       sink,
     });
     expect(out.content).toBe(3); // routed through the frame driver, not the corpus run
