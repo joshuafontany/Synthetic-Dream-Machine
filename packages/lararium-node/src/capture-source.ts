@@ -33,7 +33,7 @@ const AI_SESSION_SURFACES = new Set<SourceCaptureRequest["surface"]>([
  * inputs, including non-session telemetry. Projecting instead of spreading
  * protects this wire from untyped callers that attach extra fields at runtime.
  */
-export function sourceCaptureDescriptor(request: SourceCaptureRequest): SourceCaptureRequest {
+export function sourceCaptureDescriptor(request: SourceCaptureRequest): Record<string, unknown> {
   const { surface, pointer, wing, room, sessionId } = request;
   if (!AI_SESSION_SURFACES.has(surface)) throw new Error("capture-source: surface must name a supported AI session source");
   if (typeof pointer !== "string" || !pointer || typeof wing !== "string" || !wing) {
