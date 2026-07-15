@@ -112,6 +112,7 @@ export * from "./dreamnet-admission.js";
 export * from "./handle-card.js";
 export * from "./handle-book.js";
 export * from "./handle-announce.js";
+export * from "./who-face.js";
 export * from "./cabal-place-charter.js";
 export * from "./cabal-place-clock.js";
 export * from "./me-circle.js";
