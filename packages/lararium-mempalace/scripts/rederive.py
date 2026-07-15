@@ -113,6 +113,33 @@ def _ground_records(root: str) -> "list[dict]":
     return out
 
 
+def _refuse_fused_stream_rederive(root: str, records: "list[dict]") -> None:
+    """Keep a stream's derived planes inside one declared causal island.
+
+    Form induction reads a forest as one unit. A connection-local stream lacks
+    grounds for that forest to span independent sources, so this guard refuses
+    before any derived plane clears or receives a record.
+    """
+    manifest_path = os.path.join(root, "manifest.json")
+    try:
+        with open(manifest_path, encoding="utf-8") as fh:
+            manifest = json.load(fh)
+    except FileNotFoundError:
+        return
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"rederive: cannot read {manifest_path!r}: {exc}") from exc
+    order = manifest.get("order") if isinstance(manifest, dict) else None
+    if not isinstance(order, dict) or (order.get("projector"), order.get("basis")) != (
+            "stream", "observed:connection-sequence"):
+        return
+    sources = {str(record["metadata"].get("source_file", "")) for record in records}
+    if len(sources) > 1:
+        raise SystemExit(
+            "rederive: stream order spans independent causal islands; "
+            "rederive one source sensorium at a time"
+        )
+
+
 def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
              max_candidates: "int | None" = 96, planes: bool = True,
              bands: bool = False) -> dict:
@@ -133,6 +160,7 @@ def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
                 f"rederive: the ground under {root!r} holds no records — nothing stands "
                 "to derive from. Pour the bed before rederiving it."
             )
+        _refuse_fused_stream_rederive(root, records)
         for d in (paths.structure, paths.form):
             if os.path.isdir(d):
                 shutil.rmtree(d)

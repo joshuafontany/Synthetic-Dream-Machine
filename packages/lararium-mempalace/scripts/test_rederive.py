@@ -75,6 +75,19 @@ def test_observed_order_refuses_to_fuse_independent_sources(tmp_path):
     assert ids == [] and vectors == [] and "causal islands" in note
 
 
+def test_stream_plane_rederive_refuses_to_fuse_independent_sources(tmp_path, monkeypatch):
+    root = _ground(tmp_path, [
+        ("a", "one", {"source_file": "mudlet:conn-a", "chunk_index": 0}),
+        ("b", "two", {"source_file": "mudlet:conn-b", "chunk_index": 0}),
+    ])
+    (tmp_path / "bed" / "manifest.json").write_text(
+        '{"order":{"projector":"stream","basis":"observed:connection-sequence"}}', encoding="utf-8")
+    monkeypatch.setattr("plane_fanout.compose_text_planes", lambda *args, **kwargs: [])
+
+    with pytest.raises(SystemExit, match="independent causal islands"):
+        rd.rederive(root)
+
+
 def test_rederive_refuses_an_empty_ground(tmp_path):
     root = _ground(tmp_path, [])
     with pytest.raises(SystemExit, match="holds no records"):
