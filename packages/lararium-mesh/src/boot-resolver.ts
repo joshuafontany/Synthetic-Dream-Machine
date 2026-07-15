@@ -107,7 +107,7 @@ export async function resolveBootDoc<T>(
   if (opts.tideline === "hearth-private") {
     throw new Error(
       `[boot] hearth-private doc unavailable — local corruption (no peer carries it); ` +
-      `re-found via \`lares rebuild\`: ${opts.label} (${url})`,
+      `diagnose with \`lares status vessel\`, recover with \`lares regenesis\`: ${opts.label} (${url})`,
     );
   }
   // mesh-shared: never throw, never blank — surface the typed still-joining signal
