@@ -15,7 +15,7 @@
 import { describe, test, expect, afterEach } from "vitest";
 import { Worker, MessageChannel } from "worker_threads";
 import {
-  isVesselToIslandMsg,
+  isSensoriumSignalType, isVesselToIslandMsg,
   isIslandToVesselMsg,
   ISLAND_PROTOCOL_VERSION,
   mkTeardown,
@@ -173,6 +173,19 @@ describe("GP-1 — schema_version enforcement", () => {
 
   test("isVesselToIslandMsg rejects unknown type even with correct schema_version", () => {
     expect(isVesselToIslandMsg({ schema_version: ISLAND_PROTOCOL_VERSION, type: "unknown" })).toBe(false);
+  });
+
+  test("admits cap-owned sensorium verbs without extending a central union", () => {
+    const msg = { schema_version: ISLAND_PROTOCOL_VERSION, type: "sensorium:telemetry" };
+    expect(isSensoriumSignalType(msg.type)).toBe(true);
+    expect(isVesselToIslandMsg(msg)).toBe(true);
+  });
+
+  test("refuses malformed sensorium signal names", () => {
+    for (const type of ["sensorium:", "sensorium:Dream", "sensorium:two:parts", "sensorium/recall"]) {
+      expect(isSensoriumSignalType(type)).toBe(false);
+      expect(isVesselToIslandMsg({ schema_version: ISLAND_PROTOCOL_VERSION, type })).toBe(false);
+    }
   });
 
   test("isIslandToVesselMsg accepts valid teardown:ack", () => {

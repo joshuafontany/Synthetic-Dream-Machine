@@ -612,11 +612,11 @@ export interface DaemonMsg_WikiAlert {
 
 /**
  * Vessel → wiki island: one sensorium read-signal ridden over the worker wire. The message
- * TYPE carries the signal name itself (`sensorium:cohere` / `sensorium:recall` / `sensorium:couple`),
- * so the kernel's dispatch delivers it STRAIGHT to the island's `hasWikiSensorium` cap — the wire
- * admits the wiki-sensorium cap's signal surface, it never re-implements the verbs. The island answers on its
- * `sensorium:frame` event (IslandMsg_Event), correlated by `requestId`; the vessel routes that
- * frame back through onWorkerEvent. Read-only end to end — no field of this message writes.
+ * TYPE carries the cap-owned signal name (`sensorium:<cap-verb>`), so the kernel's dispatch delivers it
+ * STRAIGHT to the island cap that claims it. The wire admits the namespace without enumerating a vessel's
+ * possible sensory acts; each cap owns its own verbs. The island answers on its `sensorium:frame` event
+ * (IslandMsg_Event), correlated by `requestId`; the vessel routes that frame back through onWorkerEvent.
+ * Read-only end to end — no field of this message writes.
  */
 export interface WikiMsg_SensoriumSignal {
   schema_version: ProtocolVersion;
@@ -626,11 +626,13 @@ export interface WikiMsg_SensoriumSignal {
   args?: Record<string, unknown>;
 }
 
-/** The three verb-signal names the wire admits — ONE source; the tw5 cap types its claims against this.
- *  The generic `sensorium:*` prefix stands as an INTENTIONAL namespace claim — the wiki sensorium rides
- *  it first; future sensoria share the prefix (a rename fork stays the operator's). */
-export const SENSORIUM_SIGNAL_TYPES = ["sensorium:cohere", "sensorium:recall", "sensorium:couple"] as const;
-export type SensoriumSignalType = typeof SENSORIUM_SIGNAL_TYPES[number];
+/** One cap-owned sensorium signal. The open suffix prevents central protocol edits for new vessel caps. */
+export type SensoriumSignalType = `sensorium:${string}`;
+
+/** Accept one non-empty lower-kebab cap verb; the cap, not the wire, owns its semantics. */
+export function isSensoriumSignalType(value: unknown): value is SensoriumSignalType {
+  return typeof value === "string" && /^sensorium:[a-z][a-z0-9-]*$/.test(value);
+}
 
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
@@ -816,9 +818,8 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event", ...SENSORIUM_SIGNAL_TYPES] as const).includes(
-    v.type as VesselToIslandMsg["type"],
-  );
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const)
+    .includes(v.type as Exclude<VesselToIslandMsg["type"], SensoriumSignalType>) || isSensoriumSignalType(v.type);
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
@@ -1315,4 +1316,3 @@ export interface AuthVerifierSeam {
     edge?: DeviceDelegationTiddler,
   ): Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
 }
-
