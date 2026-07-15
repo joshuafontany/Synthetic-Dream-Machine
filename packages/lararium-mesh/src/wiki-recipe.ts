@@ -33,7 +33,7 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { Heads } from "@automerge/automerge";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
-import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, bagUri, wikiUri } from "./lar-uris.js";
+import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, CROSSROADS_DOC_URI, bagUri, wikiUri } from "./lar-uris.js";
 
 /** A slot URI in the lar:///ha.ka.ba/{bags,wikis}/@<name> namespace. */
 export type SlotUri = string;
@@ -64,6 +64,8 @@ export const LARES_BAG    = LARES_DOC_URI;
 export const LARARIUM_BAG = LARARIUM_DOC_URI;
 /** @oracle — the runtime system island; the universal floor of every recipe. */
 export const ORACLE_BAG   = ORACLE_DOC_URI;
+/** @crossroads — the public oracle plane; a recipe library bag whose pointer @oracle serves (public infra). */
+export const CROSSROADS_BAG = CROSSROADS_DOC_URI;
 
 /** Build a wiki's CANON BAG URI from a slug (`bags/@{slug}`) — the published,
  *  promotion-target content plane, read-only from the wiki. MUST agree with the

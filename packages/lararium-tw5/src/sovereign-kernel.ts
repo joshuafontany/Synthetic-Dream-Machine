@@ -46,6 +46,7 @@ import {
   LARES_BAG,
   LARARIUM_BAG,
   ORACLE_BAG,
+  CROSSROADS_BAG,
   tiddlerText,
   wikiBagUri,
   wikiSlotUri,
@@ -311,6 +312,9 @@ export function runSovereignKernel(
       // bags fall through to @catalog.
       if (slot === LARES_BAG)                    return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARES_BAG]) ?? null;
       if (slot === LARARIUM_BAG)                 return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARARIUM_BAG]) ?? null;
+      // @crossroads — the PUBLIC oracle plane; its pointer rides @oracle (public infra), resolved the same
+      // well-known-tiddler way as the system bags. Public bags in turn resolve FROM @crossroads.
+      if (slot === CROSSROADS_BAG)               return tiddlerText(laraiumHandle.doc()?.tiddlers?.[CROSSROADS_BAG]) ?? null;
       return catalog ? await catalog.urlOf(slot) : null;   // user library bags
     };
 

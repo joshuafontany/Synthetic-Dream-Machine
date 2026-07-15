@@ -25,7 +25,7 @@ import {
   BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
-  whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl,
+  whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
   type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -443,6 +443,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
     openDaemon: async ({ assembly, slot }) => {
       if (!daemonWorkerUrl) throw new Error("[openBrowserVessel] daemonWorkerUrl REQUIRED (genesis present → sovereign daemon island)");
+      // Register the per-Nexus @crossroads (public oracle plane) into @oracle so the @daemon recipe resolves
+      // it. Isomorphic: node + browser share registerCrossroadsInOracle, and the @daemon core splices
+      // @crossroads into the recipe + registerBags for either vessel — only the nexus key differs (here the
+      // relay's gate key, so a human's two vessels register the SAME @crossroads).
+      if (relayGatePubKey) await registerCrossroadsInOracle(repo, assembly.islandHandle, relayGatePubKey);
       const daemonAuth = {
         seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,

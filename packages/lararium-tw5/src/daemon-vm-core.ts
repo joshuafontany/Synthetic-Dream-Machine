@@ -41,6 +41,7 @@ import {
   mkDaemonResidencyOpResult,
   mkTeardown,
   isIslandToVesselMsg,
+  CROSSROADS_DOC_URI,
   type VesselWorkerHandle,
   type Repo,
   type DocHandle,
@@ -466,9 +467,21 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // DROPPED, and the kernel then waits forever (no breath, no fault). So wait for ready,
   // then post; node omits ready → a short timeout proceeds. Deferred (not awaited) so the
   // synchronous return holds — workerEa resolves once the worker boots off this manifest.
-  const manifestMsg = mkManifest(DAEMON_BAG_ID, syncPort, recipe, grants, coreHash, {
+  // ISOMORPHIC @crossroads: the @daemon renders the public oracle plane on ANY vessel (node or browser). One
+  // seam, both wrappers funnel through here — so splice @crossroads into the recipe (resolves via @oracle's
+  // pointer, or skips gracefully when a vessel hasn't registered it) + registerBags (so keyhive can access it).
+  // Writing the @oracle pointer rides the vessel boot (registerCrossroadsInOracle), keyed by the nexus the
+  // vessel belongs to — that value differs (a node's own key vs a browser's relay key), the @daemon code does not.
+  const daemonRecipe: WikiRecipe = {
+    ...recipe,
+    libraryBags: [...(recipe.libraryBags ?? []), CROSSROADS_DOC_URI],
+  };
+  const daemonAuthWithCrossroads = daemonAuth
+    ? { ...daemonAuth, registerBags: [...new Set([...daemonAuth.registerBags, CROSSROADS_DOC_URI])] }
+    : daemonAuth;
+  const manifestMsg = mkManifest(DAEMON_BAG_ID, syncPort, daemonRecipe, grants, coreHash, {
     ...(storage   ? { storage }   : {}),
-    ...(daemonAuth ? { daemonAuth } : {}),
+    ...(daemonAuthWithCrossroads ? { daemonAuth: daemonAuthWithCrossroads } : {}),
     ...(pluginCids?.length ? { pluginCids } : {}),
   });
   void new Promise<void>((resolve) => {

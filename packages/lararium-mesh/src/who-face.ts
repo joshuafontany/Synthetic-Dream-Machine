@@ -18,10 +18,11 @@
  *
  * Canon: lar:///ha.ka.ba/lararium/docs/crossroads (the public plane); persona-circle#the-vault (the WHO model).
  */
-import type { DocHandle } from "@automerge/automerge-repo";
-import { resolveOracleDoc, type LarDoc } from "./base-doc.js";
-import { nexusHandlesUri } from "./lar-uris.js";
+import type { Repo, DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
+import { resolveOracleDoc, mutableLarRecord, tiddlerText, type LarDoc } from "./base-doc.js";
+import { nexusHandlesUri, CROSSROADS_DOC_URI } from "./lar-uris.js";
 import { writeHandleAnnounce } from "./handle-announce.js";
+import { crossroadsDocUrl, materializeSharedLarDoc } from "./deterministic-doc.js";
 import type { HandleCard } from "./handle-card.js";
 
 /**
@@ -45,4 +46,27 @@ export function resolveWhoFace(
  */
 export function announceToWhoFace(whoFaceHandle: DocHandle<LarDoc>, card: HandleCard): void {
   whoFaceHandle.change((d) => writeHandleAnnounce(d, card));
+}
+
+/**
+ * Register the per-Nexus @crossroads (the public oracle plane) into @oracle — the public-infra pointer plane,
+ * alongside the @lares/@lararium system-bag pointers. ISOMORPHIC: node and browser boots both call this so a
+ * vessel's TW5 kernel resolves @crossroads the same well-known-tiddler way (sovereign-kernel). A RUNTIME write,
+ * not genesis-seeded like the static system bags — @crossroads is per-Nexus, so its address is known only once
+ * the vessel holds its confederation key (the node's own gate key; the browser's relayGatePubKey). Idempotent:
+ * every island member writes the same deterministic url, so re-registration never diverges. Returns the url.
+ */
+export async function registerCrossroadsInOracle(
+  repo: Repo,
+  oracleHandle: DocHandle<LarDoc>,
+  nexusPubkey: string,
+): Promise<AutomergeUrl> {
+  const url = crossroadsDocUrl(nexusPubkey);
+  await materializeSharedLarDoc(repo, url, "@crossroads");
+  if (tiddlerText(oracleHandle.doc()?.tiddlers?.[CROSSROADS_DOC_URI]) !== url) {
+    oracleHandle.change((doc) => {
+      doc.tiddlers[CROSSROADS_DOC_URI] = mutableLarRecord(CROSSROADS_DOC_URI, { text: url }, "vessel-boot");
+    });
+  }
+  return url;
 }

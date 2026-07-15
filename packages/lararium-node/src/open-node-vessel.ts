@@ -34,7 +34,7 @@ import {
   emptyLarDoc, mutableLarRecord, tiddlerText,
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
-  BAG_IDS, slugFromUri,
+  BAG_IDS, slugFromUri, registerCrossroadsInOracle,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
@@ -421,6 +421,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from daemon doc — run \`lares init\`.`);
     }
     const deviceEdge = edgeRecord.tiddler as unknown as DeviceDelegationTiddler;
+    // Register the per-Nexus @crossroads into @oracle (isomorphic with the browser). The node IS the
+    // confederation anchor, so its own gate key IS its Nexus key — the same key browsers pass as
+    // relayGatePubKey — so node + its browser leaves resolve the identical @crossroads. The @daemon core
+    // splices @crossroads into the recipe + registerBags for either vessel.
+    await registerCrossroadsInOracle(repo, assembly.islandHandle, operatorIdentity.verifyingKey);
     const daemonAuth = {
       seed:                 operatorSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
