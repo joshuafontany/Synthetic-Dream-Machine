@@ -303,7 +303,27 @@ def main() -> None:
     args = ap.parse_args()
 
     palace = os.path.abspath(args.palace)
-    wdir = args.worldline or os.path.join(os.path.dirname(palace), ".worldline")
+    root = os.path.dirname(palace)
+
+    # DECLARATION-CARRIES-AUTHORITY: the sensorium's manifest names which cells its mood can EARN
+    # and the provider that earns each. The beat leg runs only where `apertures.beat` declares the
+    # worldline-dag provider; an undeclared fill refuses loud. Declared-but-unprovided apertures
+    # (e.g. a corpus's `measure: boundary-changepoint`) get NAMED in the report, never silently
+    # skipped — a seat with no provider speaks.
+    manifest_path = os.path.join(root, "manifest.json")
+    apertures = {}
+    if os.path.isfile(manifest_path):
+        with open(manifest_path, encoding="utf-8") as fh:
+            apertures = (json.load(fh).get("apertures") or {})
+    if apertures.get("beat") != "worldline-dag":
+        sys.stderr.write(
+            "worldline_ffz: this sensorium declares no `apertures.beat: worldline-dag` — "
+            f"the beat cell stays unearnable here (manifest: {manifest_path}). "
+            "Geology earns measure, never beat; declare the aperture to license the fill.\n")
+        raise SystemExit(3)
+    unprovided = sorted(k for k in apertures if k != "beat")
+
+    wdir = args.worldline or os.path.join(root, ".worldline")
     if not os.path.isdir(wdir):
         sys.stderr.write(f"worldline_ffz: no worldline store at {wdir!r} — nothing to enrich\n")
         raise SystemExit(3)
@@ -316,6 +336,7 @@ def main() -> None:
         "locked": sum(1 for c in report.values() if c.locked),
         "holdover": sum(1 for c in report.values() if c.holdover),
         "phase_spread": phase_spread(wl.WorldlineStore(wdir)),
+        "unprovided_apertures": unprovided,
     }
     sys.stdout.write(json.dumps(out, ensure_ascii=False) + "\n")
 

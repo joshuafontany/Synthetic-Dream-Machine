@@ -253,8 +253,8 @@ function materializeSensorium(step: string, dir: string, opts: Omit<BuildSensori
  * inside the tree. The old MIXED layout (content ABSOLUTE at the guest `~/.mempalace`, structure/form
  * relative) died with the content-cap-home ruling: the lararium OWNS its content plane at
  * `<memory>/content`, and adopting a user's mempalace history runs as a deliberate import Act
- * (`guest-import.ts`), never a runtime binding. bands rides as the base-cap interval-grain (wavelet,
- * computed on read — NO dir), and coupling stays empty (memory glues no sub-sensoriums).
+ * (`guest-import.ts`), never a runtime binding. bands rides as the base-cap membership-address grain
+ * (NO dir), and coupling stays empty (memory glues no sub-sensoriums).
  */
 export function materializeMemorySensorium(): PalaceSetupStep {
   return materializeSensorium("memory:manifest", memorySensoriumDir(), {
@@ -270,8 +270,12 @@ export function materializeMemorySensorium(): PalaceSetupStep {
       // The 5th part — a COSHEAF fiber (standing depends on witness edges OUTSIDE the trace, ki not li).
       persistence: { absDir: larPersistencePalaceDir(), engine: "persistence", variance: "cosheaf" },
     },
-    // BASE cap — interval-grain metadata only; the wavelet bands compute on read, no bytes stored.
-    bands: { grain: "wavelet", computed: "on-read" },
+    // BASE cap — the FFZ membership-address grain (li-side stamp metadata). No bytes stored.
+    bands: { grain: "membership", computed: "capture" },
+    // APERTURE declarations — memory runs the RHIZOME mood: grounding acts exist, so the beat cell
+    // is EARNABLE, through the worldline fork-DAG. Declaration-carries-authority: the enricher
+    // fills only what stands declared here.
+    apertures: { beat: "worldline-dag" },
     // BASE cap — the persistence dials: authority/witness mode (halfLife null → the durable interoception
     // store never cools; only a defeater lowers standing). ORTHOGONAL to ephemeral (path-A un-fuse).
     persistencePolicy: { halfLife: null },

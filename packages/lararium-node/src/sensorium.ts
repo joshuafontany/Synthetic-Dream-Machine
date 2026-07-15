@@ -123,6 +123,14 @@ export interface SensoriumManifest {
    * process-exit; the maturation mode lives HERE in `halfLife`, never overloaded onto the bool).
    */
   readonly persistencePolicy?: PersistencePolicy;
+  /**
+   * BASE cap (optional) — the APERTURE declarations: which membership cells this sensorium's mood
+   * can EARN, and the provider that earns each (`{beat: "worldline-dag"}` for a rhizome — grounding
+   * acts exist; `{measure: "boundary-changepoint"}` for geology — discovered strata). An enricher
+   * fills ONLY declared cells through the named provider — declaration-carries-authority; an
+   * undeclared fill refuses loud. Absent = this sensorium earns nothing beyond capture-given cells.
+   */
+  readonly apertures?: Readonly<Record<string, string>>;
   /** does this sensorium's bytes live in ephemeral scratch (swept-on-exit), or durable store? */
   readonly ephemeral: boolean;
   /** ISO-8601 mint time. */
@@ -195,6 +203,14 @@ export interface BuildSensoriumOptions {
   readonly children?: ReadonlyArray<{ readonly sensorium: string; readonly absDir: string }>;
   /** the persistence dials (see {@link SensoriumManifest.persistencePolicy}); paired with a `has.persistence` cap. */
   readonly persistencePolicy?: PersistencePolicy;
+  /**
+   * BASE cap (optional) — the APERTURE declarations: which membership cells this sensorium's mood
+   * can EARN, and the provider that earns each (`{beat: "worldline-dag"}` for a rhizome — grounding
+   * acts exist; `{measure: "boundary-changepoint"}` for geology — discovered strata). An enricher
+   * fills ONLY declared cells through the named provider — declaration-carries-authority; an
+   * undeclared fill refuses loud. Absent = this sensorium earns nothing beyond capture-given cells.
+   */
+  readonly apertures?: Readonly<Record<string, string>>;
   readonly ephemeral?: boolean;
   /** override the mint time (tests); defaults to now. */
   readonly created?: string;
@@ -218,6 +234,7 @@ export function buildSensoriumManifest(sensoriumDir: string, opts: BuildSensoriu
     bands: opts.bands ?? {},
     coupling: { children },
     ...(opts.persistencePolicy ? { persistencePolicy: opts.persistencePolicy } : {}),
+    ...(opts.apertures ? { apertures: opts.apertures } : {}),
     ephemeral: opts.ephemeral ?? false,
     created: opts.created ?? new Date().toISOString(),
   };

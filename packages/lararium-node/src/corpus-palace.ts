@@ -111,7 +111,11 @@ function stampCorpusSensorium(dir: string, structures: number): void {
         content: { absDir: dir, engine: "mempalace" },
         ...(structures > 0 ? { structure: { absDir: corpusStructureDir(dir), engine: "structurepalace" } } : {}),
       },
-      bands: { grain: "aperture", computed: "sidecar" },
+      bands: { grain: "membership", computed: "sidecar" },
+      // APERTURE declarations — a corpus runs the GEOLOGY mood: nobody grounded it, so beat stays
+      // NULL by law; the MEASURE cell is earnable through discovered strata (the boundary
+      // changepoint aperture). Declared here; the enricher refuses any undeclared fill.
+      apertures: { measure: "boundary-changepoint" },
       ephemeral: true,
     }));
   } catch { /* best effort — the leak-record + planes already stand */ }
