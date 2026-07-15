@@ -44,7 +44,8 @@ def test_rederive_never_touches_the_ground_dir(tmp_path, monkeypatch):
     # the wipe must reach ONLY structure/ and form/ — a ground wipe is the one
     # unforgivable move this verb exists to prevent.
     root = _ground(tmp_path, [("c1", "text", {"source_file": "s", "chunk_index": 0})])
-    import os, shutil
+    import os
+    import shutil
 
     wiped = []
     real = shutil.rmtree

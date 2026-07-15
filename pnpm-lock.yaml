@@ -285,11 +285,12 @@ importers:
         version: 4.1.10(@types/node@26.1.1)(@vitest/browser-playwright@4.1.10)(vite@8.1.4(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.0))
 
   packages/tree-sitter-memetic-wikitext:
-    devDependencies:
-      tree-sitter-cli:
+    dependencies:
+      web-tree-sitter:
         specifier: 0.26.11
         version: 0.26.11
-      web-tree-sitter:
+    devDependencies:
+      tree-sitter-cli:
         specifier: 0.26.11
         version: 0.26.11
 

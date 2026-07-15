@@ -238,16 +238,29 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
     roots = worldline_store.roots(as_of)
     ordered_by_root = {root: worldline_turn_order(worldline_store, root, as_of) for root in roots}
     wanted = {tk for keys in ordered_by_root.values() for tk in keys}
-    vecmap = collect_turn_vectors(content_stores, wanted)
+    # CAPABILITY DEGRADATION: the beat fill needs turn IDENTITY only — vectors feed the rhythm
+    # TESTIMONY. An unreadable vector plane degrades the testimony (every braid reads holdover,
+    # the fault NAMED in the report) and the stamps still land; it never blocks the enrichment.
+    vector_fault: "str | None" = None
+    try:
+        vecmap = collect_turn_vectors(content_stores, wanted)
+    except Exception as exc:  # noqa: BLE001 — the fault rides the report, loud
+        vecmap = None
+        vector_fault = f"{type(exc).__name__}: {exc}"
     phases = worldline_phases(worldline_store, as_of)
     report: dict = {}
 
     for root in roots:
         ordered_keys = ordered_by_root[root]
-        # Keep only the turns that carry content (the events the signal can read), in braid order.
-        content_keys = [k for k in ordered_keys if k in vecmap]
-        vectors = [vecmap[k] for k in content_keys]
-        signal = drift_signal(vectors)
+        if vecmap is None:
+            # vectors unreadable → enrich every turn that landed drawers; testimony degrades.
+            content_keys = [k for k in ordered_keys
+                            if any(store.cids_for_turn(k) for store in content_stores)]
+            signal = []
+        else:
+            # Keep only the turns that carry content (the events the signal can read), in braid order.
+            content_keys = [k for k in ordered_keys if k in vecmap]
+            signal = drift_signal([vecmap[k] for k in content_keys])
         rec = recover_clock(signal, lock_threshold=lock_threshold)
         phase = phases.get(root, 0.0)
 
@@ -266,6 +279,8 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
             holdover=rec.holdover, phase=phase, turns=len(content_keys), stamped=stamped,
             bands=tuple(b.name for b in rec.bands),
         )
+    if vector_fault is not None:
+        report["__vector_fault__"] = vector_fault
     return report
 
 
@@ -329,7 +344,9 @@ def main() -> None:
         raise SystemExit(3)
 
     report = assign_worldline_ffz(wl.WorldlineStore(wdir), [cio.ContentStore(palace)])
+    vector_fault = report.pop("__vector_fault__", None)
     out = {
+        "vector_fault": vector_fault,
         "braids": len(report),
         "turns": sum(c.turns for c in report.values()),
         "stamped": sum(c.stamped for c in report.values()),
