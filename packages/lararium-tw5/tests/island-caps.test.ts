@@ -86,6 +86,20 @@ describe("composeIsland — the nameless causal island over a #has cap stack", (
     await island.onEa({ tw5: worker } as unknown as IslandContext);
     expect((worker.$tw as { lares?: Record<string, unknown> }).lares?.sensoriumContract)
       .toEqual({ has: ["telemetry", "content"] });
+    await island.onHooAnu({ tw5: worker } as unknown as IslandContext);
+    expect((worker.$tw as { lares?: Record<string, unknown> }).lares?.sensoriumContract).toBeUndefined();
+  });
+
+  test("withholds the declaration and cleans up when setup fails", async () => {
+    const worker = { ready: true, $tw: {} };
+    const cleaned: string[] = [];
+    const island = composeIsland([
+      { sensorium: { has: ["content"] }, onEa: () => () => void cleaned.push("content") },
+      { sensorium: { has: ["capture"] }, onEa: () => { throw new Error("capture unavailable"); } },
+    ]);
+    await expect(island.onEa({ tw5: worker } as unknown as IslandContext)).rejects.toThrow("capture unavailable");
+    expect(cleaned).toEqual(["content"]);
+    expect((worker.$tw as { lares?: Record<string, unknown> }).lares?.sensoriumContract).toBeUndefined();
   });
 
   test("adds an injected cap without assuming its source or sink", async () => {

@@ -51,17 +51,41 @@ export interface IslandCap {
 export function composeIsland(caps: readonly IslandCap[]): IslandBehavior {
   const teardowns: CapTeardown[] = [];
   const sensorium = composeSensoriumContract(caps.flatMap((cap) => cap.sensorium ? [cap.sensorium] : []));
+  const drainTeardowns = async () => {
+    while (teardowns.length) {
+      try {
+        await teardowns.pop()!();
+      } catch (err) {
+        // One failed cleanup cannot strand the earlier caps that already hold
+        // resources.  The primary setup or drain failure stays visible to its
+        // caller; this record carries the additional cleanup witness.
+        console.error("[island-caps] cap teardown failed", err);
+      }
+    }
+  };
+  const publish = (ctx: IslandContext) => {
+    if (!ctx.tw5?.ready) return;
+    const tw = ctx.tw5.$tw as { lares?: Record<string, unknown> };
+    tw.lares ??= {};
+    tw.lares.sensoriumContract = sensorium;
+  };
+  const withdraw = (ctx: IslandContext) => {
+    if (!ctx.tw5?.ready) return;
+    const tw = ctx.tw5.$tw as { lares?: Record<string, unknown> };
+    if (tw.lares?.sensoriumContract === sensorium) delete tw.lares.sensoriumContract;
+  };
   return {
     async onEa(ctx: IslandContext) {
-      if (ctx.tw5?.ready) {
-        const tw = ctx.tw5.$tw as { lares?: Record<string, unknown> };
-        tw.lares ??= {};
-        tw.lares.sensoriumContract = sensorium;
+      try {
+        for (const cap of caps) {
+          const t = await cap.onEa?.(ctx);
+          if (typeof t === "function") teardowns.push(t);
+        }
+      } catch (err) {
+        await drainTeardowns();
+        throw err;
       }
-      for (const cap of caps) {
-        const t = await cap.onEa?.(ctx);
-        if (typeof t === "function") teardowns.push(t);
-      }
+      publish(ctx);
     },
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
       for (const cap of caps) {
@@ -70,16 +94,12 @@ export function composeIsland(caps: readonly IslandCap[]): IslandBehavior {
       return false;
     },
     async onHooAnu(ctx: IslandContext) {
-      while (teardowns.length) {
-        try {
-          await teardowns.pop()!();
-        } catch (err) {
-          // teardown is best-effort — one cap's failure never blocks the rest — but SURFACE it
-          // (the original onHooAnu let throws propagate; never swallow a real dispose/flush failure).
-          console.error("[island-caps] cap teardown failed", err);
-        }
+      await drainTeardowns();
+      try {
+        for (const cap of caps) await cap.onHooAnu?.(ctx);
+      } finally {
+        withdraw(ctx);
       }
-      for (const cap of caps) await cap.onHooAnu?.(ctx);
     },
   };
 }
