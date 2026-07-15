@@ -31,7 +31,8 @@
  * so isolation holds and the UDS socket path always agrees. Both the CLI (local-connector) and the
  * node daemon (uds-channel) resolve through HERE.
  *
- * `larIdentityDir` (vessel-identity — a separate concern) stays at its `~/.lares` spelling.
+ * `larIdentityDir` (the sovereign root — a separate concern) resolves under the XDG state
+ *  home (`<state>/identity`), beside — never inside — the wiped substrate store.
  */
 
 import { existsSync, readdirSync } from "node:fs";

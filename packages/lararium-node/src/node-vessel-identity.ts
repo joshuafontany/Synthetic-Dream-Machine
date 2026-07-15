@@ -20,11 +20,11 @@
  * (Model A/B) and the #has-stack ontology (api/pono/has-stack-ontology).
  *
  * Storage law — identity lives OUTSIDE the wipe zone:
- *   callers pass the storage dir (`<root>/.lararium`); the keypair + card persist to
- *   a SIBLING `<root>/.lararium-identity/`, structurally unreachable by any `reset`/
- *   `rebuild` that rmSyncs `<root>/.lararium`. This realizes the law below (the key
- *   MUST NOT sit inside an Automerge doc storage path) and the keypair-wipe lesson:
- *   a destructive storage verb can no longer reach identity.
+ *   the keypair + card persist to `<state>/identity` (`larIdentityDir`), in the XDG state
+ *   home BESIDE — never inside — the wiped `<data>/vessel`. No `reset`/`regenesis`/`rebuild`
+ *   can reach it (they rmSync the substrate store, not the state home). This realizes the
+ *   law below (the key MUST NOT sit inside an Automerge doc storage path) and the
+ *   keypair-wipe lesson: a destructive storage verb can no longer reach identity.
  *
  * Key file naming (inside the identity dir):
  *   git email configured:  .vessel-key-{email-slug}.json
@@ -193,7 +193,7 @@ function fileKeypairStore(keyFile: string, login: string | null): KeypairStore {
 // `digestAlgo` field keeps the digest swappable to blake3-256 SAID at KERI-interop).
 //
 // CUSTODY CAVEAT: this minimal hook persists the next-root private seed on the SAME
-// disk (0o600, in .lararium-identity). Full pre-rotation (a thief of the CURRENT key
+// disk (0o600, in `<state>/identity`). Full pre-rotation (a thief of the CURRENT key
 // cannot rotate) needs the next seed in OFFLINE/cold custody — an operator-arranged
 // follow-on. The commitment (`n`) is load-bearing now; it upgrades when the seed
 // moves offline.
@@ -400,10 +400,10 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
 // public DID + a signed edge, NEVER the root seed (two roots = two operators, not one
 // PersonaGroup).
 //
-// Custody law (same as the vessel key): persists into the SIBLING
-// `.lararium-identity/` dir, mode 0o600, structurally outside any `reset`/`rebuild`
-// wipe. A root seed inside `.lararium/` would mean operator-identity loss on `lares
-// reset` — the same keypair-wipe lesson, now for the operator-root capability.
+// Custody law (same as the vessel key): persists into `<state>/identity`, mode 0o600,
+// structurally outside any `reset`/`rebuild` wipe. A root seed inside the `<data>/vessel`
+// store would mean operator-identity loss on `lares reset` — the same keypair-wipe
+// lesson, now for the operator-root capability.
 //
 // Pre-rotation for the root is a follow-on (same register as the vessel KERI hook
 // above): the root is the MORE pin-worthy identity, so its inception commitment +

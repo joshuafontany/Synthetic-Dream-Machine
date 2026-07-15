@@ -11,7 +11,7 @@
  *   1. stop the incumbent  — port-control, graceful → force
  *   2. reset --force       — CRDT store + genesis artifacts + projection watermark
  *                            wiped; genesis re-baked; init re-founds (identity
- *                            preserved, ~/.lares/.lararium-identity out of every wipe)
+ *                            preserved, `<state>/identity` out of every wipe)
  *   3. wake                — boot detached, vessel-ready attested from the log
  *   4. seed --apply        — plant every bags/@* holding back into the fresh docs;
  *                            the conductor OWNS the zero-new refusal here: right
@@ -24,7 +24,7 @@
  */
 
 import type { ParsedArgs } from "../parse-args.js";
-import { larPort, larRoot } from "../env.js";
+import { larPort, larRoot, larIdentityDir } from "../env.js";
 import { cmdReset } from "./scripted.js";
 import { cmdWake } from "./wake.js";
 import { seedRun, discoverHoldings } from "./seed.js";
@@ -42,7 +42,7 @@ export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
     for (let i = 0; i < STEPS.length; i++) console.log(`  ${step(i)}`);
     const holdings = discoverHoldings(larRoot());
     console.log(`  holdings to re-seed: ${holdings.map((h) => h.holding).join(" · ") || "(none found!)"}`);
-    console.log("  preserved: ~/.lares/.lararium-identity (keys) · bags/ (read-only source) · the mempalace (its own cadence — palace-teardown + harvest --all)");
+    console.log(`  preserved: ${larIdentityDir()} (keys) · bags/ (read-only source) · the mempalace (its own cadence — palace-teardown + harvest --all)`);
     return 0;
   }
 
