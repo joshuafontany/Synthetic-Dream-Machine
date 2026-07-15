@@ -105,6 +105,31 @@ def declare_sensorium_contract(*, has, order: "OrderCap | dict | None" = None,
     return out
 
 
+def compose_sensorium_contract(contributions) -> dict:
+    """Fold cap fragments into one current declaration.
+
+    A cap adds names and may witness order or apertures.  Two caps may repeat a
+    witness, but they may not disagree about one entity's order or one aperture
+    provider.  This mirrors the Mesh composition seam before a Python driver
+    persists its rooted manifest.
+    """
+    normalized = [declare_sensorium_contract(**contribution) for contribution in contributions]
+    orders = [contract["order"] for contract in normalized if "order" in contract]
+    if any(order != orders[0] for order in orders):
+        raise ValueError("sensorium contract: one entity cannot compose conflicting order evidence")
+    apertures = {}
+    for contract in normalized:
+        for cell, provider in contract.get("apertures", {}).items():
+            if cell in apertures and apertures[cell] != provider:
+                raise ValueError(f"sensorium contract: aperture {cell} has conflicting providers")
+            apertures[cell] = provider
+    return declare_sensorium_contract(
+        has=[cap for contract in normalized for cap in contract["has"]],
+        order=orders[0] if orders else None,
+        apertures=apertures or None,
+    )
+
+
 def _atomic_json_write(path: str, value: dict) -> None:
     """Replace one declaration atomically after its complete JSON body reaches disk."""
     fd, temporary = tempfile.mkstemp(prefix=".manifest-", suffix=".json", dir=os.path.dirname(path))
@@ -197,8 +222,10 @@ def write_stream_manifest(root: str, *, name: str, lar: str, order: OrderCap,
     if worldline is not None:
         manifest["has"]["worldline"] = {"dir": "worldline", "engine": "worldline", "variance": "sheaf"}
         manifest["worldline"] = worldline
-    contract = declare_sensorium_contract(
-        has=list(manifest["has"]), order=order, apertures=manifest.get("apertures"))
+    contract = compose_sensorium_contract([{
+        "has": list(manifest["has"]), "order": order,
+        "apertures": manifest.get("apertures"),
+    }])
     manifest["order"] = contract["order"]
     if "apertures" in contract:
         manifest["apertures"] = contract["apertures"]

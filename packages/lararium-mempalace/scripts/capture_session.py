@@ -38,7 +38,7 @@ from typing import Callable, Iterator
 
 from capture_sources import Record, SourceCap, resolve_source
 from sensorium import (compose_content_land, compose_persistence_cap,
-                       compose_stream_sensorium, sensorium_paths, OrderCap)
+                       compose_stream_sensorium, sensorium_paths, write_stream_manifest, OrderCap)
 from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
 
 
@@ -78,6 +78,15 @@ def compose_memory_stream_sensorium(sensorium_root: str, *, embed_factory: "Call
     embed_one, model = embed_factory()
     dim = len(embed_one("probe"))
     paths = sensorium_paths(sensorium_root)
+    order = OrderCap("worldline", "observed:turn-dag")
+    write_stream_manifest(
+        paths.root,
+        name="memory",
+        lar="lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance",
+        order=order,
+        apertures={"beat": "worldline-dag"},
+        worldline={"real": ["turn-dag"], "arbitrary": ["source-sequence"]},
+    )
 
     def source_factory(*, surface, wing, room="conversations", session_id=None, **_route):
         return stamp_embedder(resolve_source(surface, wing=wing, room=room, session_id=session_id), model)
@@ -106,7 +115,7 @@ def compose_memory_stream_sensorium(sensorium_root: str, *, embed_factory: "Call
                                       source_factory=source_factory, planes_factory=fresh_planes,
                                       observer=observe, worldline=paths.worldline,
                                       persistence=compose_persistence_cap(paths.root, half_life=None),
-                                      order=OrderCap("worldline", "observed:turn-dag"))
+                                      order=order)
     return stream, model, dim, paths
 
 

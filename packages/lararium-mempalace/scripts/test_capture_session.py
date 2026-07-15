@@ -10,6 +10,7 @@ an EPHEMERAL Memory palace (never the sovereign ~/.mempalace).
 
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_capture_session.py -q
 """
+import json
 import os
 
 import pytest
@@ -45,6 +46,16 @@ def test_w1_5a_real_capture_lands_the_whole_transcript(tmp_path):
     assert res["landed"] == TURN_COUNT and res["skipped"] == 0     # the WHOLE transcript processes
     assert res["watermark"] == TURN_COUNT and res["audit"]["ok"]
     assert res["embedder_model"] == "stub-minilm/4" and res["embedder_dim"] == 4
+
+
+def test_memory_capture_materializes_its_rooted_cap_declaration(tmp_path):
+    root = tmp_path / ".mem"
+    capture_and_observe(str(root), "claude", CLAUDE, wing="wing_proj", embed_factory=_stub_embed_factory())
+    manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["sensorium"] == "memory"
+    assert manifest["order"] == {"projector": "worldline", "basis": "observed:turn-dag"}
+    assert manifest["apertures"] == {"beat": "worldline-dag"}
+    assert set(manifest["has"]) == {"content", "structure", "form", "persistence", "worldline"}
 
 
 def test_w1_5b_second_pass_is_idempotent(tmp_path):
