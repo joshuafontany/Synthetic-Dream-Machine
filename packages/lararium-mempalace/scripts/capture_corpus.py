@@ -16,8 +16,8 @@ import content_io as cio
 from capture_session import stamp_embedder
 from capture_sources import corpus_sectioned_source, corpus_source
 from capture_stream import ContentStoreLandCap
-from plane_fanout import compose_corpus_planes
-from sensorium import compose_persistence_cap, compose_stream_sensorium, sensorium_paths
+from plane_fanout import compose_text_planes
+from sensorium import OrderCap, compose_persistence_cap, compose_stream_sensorium, sensorium_paths
 
 
 def refuse_comparator(root: str) -> None:
@@ -49,6 +49,7 @@ def write_corpus_manifest(root: str, *, name: str = "corpus", ephemeral: bool = 
                         "worldline": {"dir": "worldline", "engine": "worldline", "variance": "sheaf"},
                         "persistence": {"dir": "persistence", "engine": "persistence", "variance": "cosheaf"}},
                 "worldline": {"real": ["in-file"], "arbitrary": ["walk-order"]},
+                "order": {"projector": "corpus", "basis": "declared:in-file"},
                 "persistencePolicy": {"halfLife": None}, "bands": {"grain": "membership", "computed": "sidecar"},
                 "coupling": {"children": []}, "apertures": {"measure": "boundary-changepoint"},
                 "ephemeral": ephemeral, "created": created}
@@ -78,9 +79,10 @@ def compose_corpus_stream_sensorium(root: str, *, wing: str, room: str = "corpus
                              expected_model=model, append_only=True)
     stream = compose_stream_sensorium(kind="corpus", land=ContentStoreLandCap(store), embed=embed_one,
         source_factory=lambda **_route: source,
-        planes_factory=lambda **_route: compose_corpus_planes(paths.root, min_support=min_support,
+        planes_factory=lambda **_route: compose_text_planes(paths.root, min_support=min_support,
             max_forms=max_forms, max_candidates=max_candidates),
-        worldline=paths.worldline, persistence=compose_persistence_cap(paths.root))
+        worldline=paths.worldline, persistence=compose_persistence_cap(paths.root),
+        order=OrderCap("corpus", "declared:in-file"))
     return stream, store, paths
 
 
@@ -96,7 +98,7 @@ def capture(pointer: str, sensorium: str, *, wing: str, room: str = "corpus", mi
     form = planes.get("form") or {}
     bands = {"cells": 0, "note": "bands-skipped: no new content"}
     if summary.get("landed", 0) > 0:
-        from bands_sidecar import analyze_sensorium
+        from bands import analyze_sensorium
         try:
             cells, bands = analyze_sensorium(paths.root)
             if cells:

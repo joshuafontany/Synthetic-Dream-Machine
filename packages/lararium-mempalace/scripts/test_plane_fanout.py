@@ -11,7 +11,7 @@ import os
 
 import content_io as cio
 from capture_stream import ContentStoreLandCap, compose_pipeline
-from plane_fanout import compose_corpus_planes
+from plane_fanout import compose_text_planes
 from structure_router import structural_hash
 
 # Two alternating markdown skeletons — recurring shapes so the induction's MDL ledger
@@ -32,7 +32,7 @@ def _recs(n):
 
 
 def _pipeline(root):
-    planes = compose_corpus_planes(root)
+    planes = compose_text_planes(root)
     store = cio.ContentStore(os.path.join(root, "content"))
     pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store),
                             embed=_fake_embed, planes=planes)

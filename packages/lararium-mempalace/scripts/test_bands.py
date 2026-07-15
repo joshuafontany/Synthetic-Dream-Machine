@@ -1,4 +1,4 @@
-"""Tests for bands_sidecar — the multi-scale FFZ bands cap (corpus.md #the-bands).
+"""Tests for bands — the multi-scale FFZ sensorium capability (corpus.md #the-bands).
 
 Four faces proven, all chroma-free (pure signal in, bands verdict out):
   1. the SPINE — MODWT-MRA decomposes a synthetic fast+slow signal into the 5 bands that
@@ -23,7 +23,13 @@ import sys
 import numpy as np
 import pytest
 
-import bands_sidecar as bs
+import bands as bs
+
+
+def test_ordered_vector_kernel_keeps_projector_order():
+    cells, summary = bs.analyze_ordered_vectors(["b", "a"], [[1.0, 0.0], [0.0, 1.0]], note="declared:test", boot=2)
+    assert summary["cells"] == 2
+    assert [cell["id"] for cell in cells] == ["b", "a"]
 
 
 # ── SPINE ─────────────────────────────────────────────────────────────────────────────────
@@ -261,7 +267,7 @@ def test_couple_streams_graceful_on_single_signal():
 
 def _run_cli(args, stdin=None):
     return subprocess.run(
-        [sys.executable, "bands_sidecar.py", *args],
+        [sys.executable, "bands.py", *args],
         input=stdin, capture_output=True, text=True,
         cwd=__import__("os").path.dirname(__import__("os").path.abspath(__file__)),
     )

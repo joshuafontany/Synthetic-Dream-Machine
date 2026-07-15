@@ -210,9 +210,9 @@ export function resolveStructureRouterSpawn(): StructureRouterSpawn {
 }
 
 /** `bands_sidecar.py` — the corpus BANDS-plane multi-scale FFZ (batch, after content+structure). */
-export type BandsSidecarSpawn = SidecarSpawn;
-export function resolveBandsSidecarSpawn(): BandsSidecarSpawn {
-  return resolveSidecarSpawn("bands_sidecar.py");
+export type BandsSpawn = SidecarSpawn;
+export function resolveBandsSpawn(): BandsSpawn {
+  return resolveSidecarSpawn("bands.py");
 }
 
 /** `form_induction.py` — the corpus FORM-plane BLIND grammar induction (batch, after structure). */

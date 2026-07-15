@@ -32,7 +32,7 @@ def test_production_manifest_is_not_ephemeral(tmp_path):
 
 def test_bands_fault_keeps_the_durable_capture(monkeypatch, tmp_path):
     import capture_corpus
-    import bands_sidecar
+    import bands
     import corpus_worldline
 
     class Stream:
@@ -41,7 +41,7 @@ def test_bands_fault_keeps_the_durable_capture(monkeypatch, tmp_path):
 
     paths = type("Paths", (), {"root": str(tmp_path)})()
     monkeypatch.setattr(capture_corpus, "compose_corpus_stream_sensorium", lambda *_args, **_kwargs: (Stream(), None, paths))
-    monkeypatch.setattr(bands_sidecar, "analyze_sensorium", lambda _root: (_ for _ in ()).throw(RuntimeError("no aperture")))
+    monkeypatch.setattr(bands, "analyze_sensorium", lambda _root: (_ for _ in ()).throw(RuntimeError("no aperture")))
     monkeypatch.setattr(corpus_worldline, "backfill", lambda _root: {"edges": 0})
 
     out = capture_corpus.capture("pointer", str(tmp_path), wing="wing_corpus")

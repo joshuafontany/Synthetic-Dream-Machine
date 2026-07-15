@@ -26,7 +26,7 @@ import { existsSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { resolveBandsSidecarSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
+import { resolveBandsSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
 import { composePalace, freeEnergy, forecastEws, type PalaceComposition, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
 import { defaultCorpusIngest, type CorpusIngest } from "./sense-corpus.js";
 
@@ -50,7 +50,7 @@ function runSignalSidecar(
   frames: readonly StreamFrame[],
   sensoriumRoot: string,
 ): Record<string, unknown> | null {
-  const { python, script, submoduleRoot, scriptPresent } = resolveBandsSidecarSpawn();
+  const { python, script, submoduleRoot, scriptPresent } = resolveBandsSpawn();
   if (!python || !scriptPresent || frames.length === 0) return null;
   const ndjson = writeSignalNdjson(frames, sensoriumRoot);
   try {

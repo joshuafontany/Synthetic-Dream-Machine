@@ -12,6 +12,13 @@ def test_rederive_bands_refuses_an_undeclared_projector(tmp_path):
         rd.rederive_bands(str(tmp_path))
 
 
+def test_bands_only_never_walks_or_wipes_planes(monkeypatch, tmp_path):
+    monkeypatch.setattr(rd, "rederive_bands", lambda root: {"projector": "test", "root": root})
+    monkeypatch.setattr(rd, "_ground_records", lambda _root: (_ for _ in ()).throw(AssertionError("ground walk")))
+    out = rd.rederive(str(tmp_path), planes=False, bands=True)
+    assert out["bands"]["projector"] == "test" and "planes" not in out
+
+
 def _ground(tmp_path, rows):
     from content_io import ContentStore
 
@@ -60,7 +67,7 @@ def test_rederive_never_touches_the_ground_dir(tmp_path, monkeypatch):
     os.makedirs(os.path.join(root, "structure"), exist_ok=True)
     os.makedirs(os.path.join(root, "form"), exist_ok=True)
     monkeypatch.setattr(
-        "plane_fanout.compose_corpus_planes", lambda *a, **k: []
+        "plane_fanout.compose_text_planes", lambda *a, **k: []
     )
     rd.rederive(root)
     assert sorted(wiped) == ["form", "structure"]  # content never in the wipe set

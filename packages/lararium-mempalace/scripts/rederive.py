@@ -51,7 +51,7 @@ def rederive_bands(root: str) -> dict:
         raise SystemExit(f"rederive bands: cannot read {manifest_path!r}: {exc}") from exc
     apertures = manifest.get("apertures") or {}
     if apertures.get("measure") == "boundary-changepoint":
-        from bands_sidecar import analyze_sensorium
+        from bands import analyze_sensorium
         cells, summary = analyze_sensorium(paths.root)
         target = os.path.join(paths.root, "bands-cells.ndjson")
         with open(target, "w", encoding="utf-8") as fh:
@@ -109,35 +109,37 @@ def _ground_records(root: str) -> "list[dict]":
 
 
 def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
-             max_candidates: "int | None" = 96, bands: bool = False) -> dict:
+             max_candidates: "int | None" = 96, planes: bool = True,
+             bands: bool = False) -> dict:
     """Wipe the derived planes and walk the ground back through the pour's own caps."""
-    from plane_fanout import compose_corpus_planes
-
     from sensorium import sensorium_paths
 
     paths = sensorium_paths(root)
     root = paths.root
-    records = _ground_records(root)
-    if not records:
-        raise SystemExit(
-            f"rederive: the ground under {root!r} holds no records — nothing stands "
-            "to derive from. Pour the bed before rederiving it."
-        )
+    if not planes and not bands:
+        raise ValueError("rederive needs planes, bands, or both")
+    out = {"root": root}
+    if planes:
+        from plane_fanout import compose_text_planes
 
-    # the derived planes wipe; the ground never gets touched
-    for d in (paths.structure, paths.form):
-        if os.path.isdir(d):
-            shutil.rmtree(d)
-
-    caps = compose_corpus_planes(
-        root, min_support=min_support, max_forms=max_forms, max_candidates=max_candidates
-    )
-    for rec in records:
-        for cap in caps:
-            cap.land(rec)
-    report = {cap.name: cap.finish() for cap in caps}
-    return {"root": root, "records": len(records), "planes": report,
-            **({"bands": rederive_bands(root)} if bands else {})}
+        records = _ground_records(root)
+        if not records:
+            raise SystemExit(
+                f"rederive: the ground under {root!r} holds no records — nothing stands "
+                "to derive from. Pour the bed before rederiving it."
+            )
+        for d in (paths.structure, paths.form):
+            if os.path.isdir(d):
+                shutil.rmtree(d)
+        caps = compose_text_planes(root, min_support=min_support, max_forms=max_forms,
+                                     max_candidates=max_candidates)
+        for rec in records:
+            for cap in caps:
+                cap.land(rec)
+        out.update({"records": len(records), "planes": {cap.name: cap.finish() for cap in caps}})
+    if bands:
+        out["bands"] = rederive_bands(root)
+    return out
 
 
 def main(argv: "list[str] | None" = None) -> int:
@@ -146,7 +148,8 @@ def main(argv: "list[str] | None" = None) -> int:
     ap.add_argument("--min-support", type=int, default=2, dest="min_support")
     ap.add_argument("--max-forms", type=int, default=64, dest="max_forms")
     ap.add_argument("--max-candidates", type=int, default=96, dest="max_candidates")
-    ap.add_argument("--bands", action="store_true", help="rederive bands through the manifest-selected projector")
+    ap.add_argument("--bands", action="store_true", help="rederive bands only through the manifest-selected projector")
+    ap.add_argument("--all", action="store_true", help="rederive structure/form and bands together")
     args = ap.parse_args(argv)
     if not args.sensorium:
         raise SystemExit(
@@ -159,6 +162,7 @@ def main(argv: "list[str] | None" = None) -> int:
             min_support=args.min_support,
             max_forms=args.max_forms,
             max_candidates=args.max_candidates,
+            planes=not args.bands or args.all,
             bands=args.bands,
         )
         sys.stdout.write(json.dumps(rep, sort_keys=True, default=str) + "\n")

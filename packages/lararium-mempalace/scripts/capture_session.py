@@ -38,7 +38,7 @@ from typing import Callable, Iterator
 
 from capture_sources import Record, SourceCap, resolve_source
 from sensorium import (compose_content_land, compose_persistence_cap,
-                       compose_stream_sensorium, sensorium_paths)
+                       compose_stream_sensorium, sensorium_paths, OrderCap)
 from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
 
 
@@ -85,8 +85,8 @@ def compose_memory_stream_sensorium(sensorium_root: str, *, embed_factory: "Call
     def fresh_planes(**route):
         if planes_factory is not None:
             return planes_factory(**route)
-        from plane_fanout import compose_corpus_planes
-        return compose_corpus_planes(paths.root)
+        from plane_fanout import compose_text_planes
+        return compose_text_planes(paths.root)
 
     def observe(pointer, *, surface, veil_secret=None, veil_context="", identity_dir=None, **_route):
         if surface != "claude":
@@ -105,7 +105,8 @@ def compose_memory_stream_sensorium(sensorium_root: str, *, embed_factory: "Call
     stream = compose_stream_sensorium(kind="memory", land=land, embed=embed_one,
                                       source_factory=source_factory, planes_factory=fresh_planes,
                                       observer=observe, worldline=paths.worldline,
-                                      persistence=compose_persistence_cap(paths.root, half_life=None))
+                                      persistence=compose_persistence_cap(paths.root, half_life=None),
+                                      order=OrderCap("worldline", "observed:turn-dag"))
     return stream, model, dim, paths
 
 

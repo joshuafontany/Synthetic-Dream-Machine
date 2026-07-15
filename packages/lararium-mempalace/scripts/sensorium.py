@@ -63,6 +63,14 @@ class PersistenceCap:
     active: bool = False
 
 
+@dataclass(frozen=True)
+class OrderCap:
+    """Declared evidence that orders durable vectors for derived stream readings."""
+
+    projector: str
+    basis: str
+
+
 _INACTIVE_PERSISTENCE = PersistenceCap(path=None, half_life=None)
 
 
@@ -97,7 +105,7 @@ class Sensorium:
 
     def __init__(self, *, kind: str, pipeline: "Pipeline | None" = None, land,
                  worldline=None, persistence: "PersistenceCap | None" = None,
-                 pipeline_factory=None, observer=None) -> None:
+                 order: "OrderCap | None" = None, pipeline_factory=None, observer=None) -> None:
         if (pipeline is None) == (pipeline_factory is None):
             raise ValueError("Sensorium requires exactly one of pipeline or pipeline_factory")
         self.kind = kind
@@ -109,6 +117,7 @@ class Sensorium:
         # this with a path-bearing declaration, still inactive until a later
         # persistence lifecycle activates testimony handling.
         self._persistence = persistence if persistence is not None else _INACTIVE_PERSISTENCE
+        self._order = order
         self._observer = observer
 
     def capture(self, pointer, **route) -> dict:
@@ -129,7 +138,7 @@ class Sensorium:
         return self._land.store.search(embedding, k, where)
 
 
-def compose_sensorium(*, kind: str, source, land, embed=None, worldline=None, persistence=None,
+def compose_sensorium(*, kind: str, source, land, embed=None, worldline=None, persistence=None, order=None,
                       planes=None) -> Sensorium:
     """Compose a sensorium from its cap-stack. Blind-by-composition: a missing required cap REFUSES
     (a sensorium without source/land is unrepresentable), never a later error branch. Optional
@@ -139,12 +148,12 @@ def compose_sensorium(*, kind: str, source, land, embed=None, worldline=None, pe
         raise ValueError(f"compose_sensorium[{kind}]: missing required cap(s) {missing} — a sensorium's "
                          "identity IS its cap-stack; it cannot compose without them")
     return Sensorium(kind=kind, pipeline=Pipeline(source=source, land=land, embed=embed, planes=planes),
-                     land=land, worldline=worldline, persistence=persistence)
+                     land=land, worldline=worldline, persistence=persistence, order=order)
 
 
 def compose_stream_sensorium(*, kind: str, land, source_factory, embed=None,
                              planes_factory=None, observer=None, worldline=None,
-                             persistence=None) -> Sensorium:
+                             persistence=None, order=None) -> Sensorium:
     """Compose a rooted or ephemeral text/input-stream sensorium from capabilities.
 
     `land` and `embed` are warm capabilities. `source_factory` and
@@ -167,4 +176,4 @@ def compose_stream_sensorium(*, kind: str, land, source_factory, embed=None,
         return Pipeline(source=source, land=land, embed=embed, planes=planes)
 
     return Sensorium(kind=kind, pipeline_factory=make_pipeline, land=land,
-                     worldline=worldline, persistence=persistence, observer=observer)
+                     worldline=worldline, persistence=persistence, order=order, observer=observer)

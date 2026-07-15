@@ -208,8 +208,8 @@ def run(root: str, *, surface: str, wing: str, room: str, pointers: list,
 
 def _planes(root: str, min_support: int, max_forms: int, max_candidates: int):
     """The Memory projection capability, constructed once per stream pass."""
-    from plane_fanout import compose_corpus_planes
-    return compose_corpus_planes(root, min_support=min_support, max_forms=max_forms,
+    from plane_fanout import compose_text_planes
+    return compose_text_planes(root, min_support=min_support, max_forms=max_forms,
                                  max_candidates=max_candidates)
 
 

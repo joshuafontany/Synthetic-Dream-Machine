@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""bands_sidecar — cohesion-signal analysis over a corpus worldline.
+"""bands — shared multi-scale analysis over declared ordered sensorium vectors.
 
 Turns a corpus's per-chunk COHESION signal (cosine-drift over the content
 embeddings, + form/structure planes when present) into worldline readings.
@@ -40,8 +40,8 @@ drawer_io-style NDJSON over stdio (the established sidecar contract). Faces:
 
 Run under the mempalace venv (PYTHONPATH=<repo>/mempalace only for `analyze`'s chroma
 readback; `decompose` needs neither):
-  ~/.venv/bin/python3 bands_sidecar.py decompose --signal fixture.ndjson
-  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 bands_sidecar.py analyze --sensorium <dir>
+  ~/.venv/bin/python3 bands.py decompose --signal fixture.ndjson
+  PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 bands.py analyze --sensorium <dir>
 
 Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-bands
 """
@@ -1370,35 +1370,15 @@ def _read_sensorium_planes(sensorium: str) -> tuple[list[np.ndarray], list[str],
     Returns (planes, ids, note).
     NEVER re-embeds — reads the STORED nomic vectors (the readback discipline of drawer_io's
     cmd_embeddings). Graceful: no chroma / mempalace / no vectors ⇒ ([], [], note)."""
-    try:
-        from mempalace.palace import get_collection
-    except Exception as exc:  # noqa: BLE001 — no mempalace/chroma → bands-skipped
-        return [], [], f"bands-skipped: no mempalace ({type(exc).__name__})"
-    try:
-        col = get_collection(os.path.join(sensorium, "content"), _skip_identity_check=True)
-    except Exception as exc:  # noqa: BLE001
-        return [], [], f"bands-skipped: no content store ({type(exc).__name__})"
-    try:
-        got = col.get(include=["embeddings", "metadatas"])
-    except Exception as exc:  # noqa: BLE001
-        return [], [], f"bands-skipped: content readback fault ({type(exc).__name__})"
-    ids, embs, metas = got.get("ids", []), got.get("embeddings", []), got.get("metadatas", [])
-    rows = []
-    for i, e, m in zip(ids, embs, metas):
-        if e is None:
-            continue
-        m = m or {}
-        rows.append((m.get("source_file", ""), m.get("chunk_index", 1 << 30), i, np.asarray(e, dtype=float)))
-    if len(rows) < 2:
-        return [], [], f"bands-skipped: too few vectors ({len(rows)})"
-    rows.sort(key=lambda r: (r[0], r[1] if r[1] is not None else 1 << 30, r[2]))
-    content = np.vstack([r[3] for r in rows])
-    ids_sorted = [r[2] for r in rows]
+    from order_vectors import corpus_ordered_vectors
+    ids_sorted, content, note = corpus_ordered_vectors(sensorium)
+    if not ids_sorted:
+        return [], [], note
     planes = [content]
     # The structure plane (S2), keyed by verbatim_sha, when a structure sub-palace stands —
     # joined by order-position is unsound, so we feed CONTENT alone unless a form store aligns.
     # (Form/structure multivariate fusion rides the same run_stack; wired when the join lands.)
-    return planes, ids_sorted, f"content: {len(ids_sorted)} vectors"
+    return planes, ids_sorted, note
 
 
 # ── the CLI faces ─────────────────────────────────────────────────────────────────────────
@@ -1443,13 +1423,10 @@ def cmd_decompose(args) -> None:
     sys.stdout.write(json.dumps(summary) + "\n")
 
 
-def analyze_sensorium(sensorium: str, *, boot: int = 40, gate: str = "bootstrap") -> tuple[list[dict], dict]:
-    """Read one sensorium's stored vectors and return its FFZ cells plus summary.
-
-    The function holds the production seam; the CLI merely serializes its result.  It never
-    embeds or mutates content, so capture can call it after a successful durable landing.
-    """
-    planes, ids, note = _read_sensorium_planes(sensorium)
+def analyze_ordered_vectors(ids: list[str], vectors, *, note: str, boot: int = 40,
+                           gate: str = "bootstrap") -> tuple[list[dict], dict]:
+    """Derive FFZ cells from vectors already ordered by an evidence-preserving projector."""
+    planes = [np.asarray(vectors, dtype=float)]
     if not planes or planes[0].shape[0] < 2:
         return [], {"note": note, "cells": 0, "bands": 0}
     m = min(p.shape[0] for p in planes)
@@ -1470,6 +1447,13 @@ def analyze_sensorium(sensorium: str, *, boot: int = 40, gate: str = "bootstrap"
         "cells": len(cells), "bands": out["spine"]["levels"], "consensus": out["gate"]["consensus"],
         "engine": out["tree"]["engine"], "r_available": out["r_available"],
     }
+
+
+def analyze_sensorium(sensorium: str, *, boot: int = 40, gate: str = "bootstrap") -> tuple[list[dict], dict]:
+    """Adapt a corpus sensorium's declared content order into the neutral bands kernel."""
+    planes, ids, note = _read_sensorium_planes(sensorium)
+    vectors = planes[0] if planes else []
+    return analyze_ordered_vectors(ids, vectors, note=note, boot=boot, gate=gate)
 
 
 def cmd_analyze(args) -> None:
@@ -1616,7 +1600,7 @@ def cmd_selftest(args) -> None:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="bands_sidecar — the multi-scale FFZ bands cap")
+    ap = argparse.ArgumentParser(description="bands — the multi-scale FFZ sensorium capability")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     d = sub.add_parser("decompose", help="full stack over a raw signal matrix (NDJSON) → JSON summary")

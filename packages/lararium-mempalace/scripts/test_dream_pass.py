@@ -18,7 +18,7 @@ import pytest
 import content_io as cio
 import dream_pass
 from capture_stream import ContentStoreLandCap, compose_pipeline
-from plane_fanout import compose_corpus_planes
+from plane_fanout import compose_text_planes
 
 # Two alternating markdown skeletons — recurring shapes so the induction's MDL ledger
 # keeps templates that pay (the plane_fanout fixture idiom).
@@ -40,7 +40,7 @@ def _recs(n):
 def _stand_eidetic(root, n=6):
     """Stand a populated 3-plane eidetic bed: an append-only (immutable-ground) content
     store + the structure/form plane caps, one pass over n alternating records."""
-    planes = compose_corpus_planes(root)
+    planes = compose_text_planes(root)
     store = cio.ContentStore(os.path.join(root, "content"), append_only=True)
     pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store),
                             embed=_fake_embed, planes=planes)

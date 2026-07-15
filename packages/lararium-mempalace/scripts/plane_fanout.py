@@ -167,7 +167,7 @@ class FormPlaneCap:
                 "forms": dimension, "induction": res["summary"]}
 
 
-def compose_corpus_planes(root_dir: str, *, min_support: int = _DEFAULT_MIN_SUPPORT,
+def compose_text_planes(root_dir: str, *, min_support: int = _DEFAULT_MIN_SUPPORT,
                           max_forms: int = _DEFAULT_MAX_FORMS,
                           max_candidates: "int | None" = _DEFAULT_MAX_CANDIDATES) -> list:
     """Stand the structure + form plane caps over `<root>/structure` + `<root>/form`
