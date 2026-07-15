@@ -149,6 +149,14 @@ def resolve_flow(m: dict) -> tuple[list[str], dict]:
                 if exts and not fp.endswith(exts):
                     tally["_ext_filtered"] += 1
                     continue
+                try:
+                    over = os.path.getsize(fp) > 512_000
+                    empty = not over and not open(fp, encoding="utf-8", errors="replace").read().strip()
+                except OSError:
+                    over, empty = True, False
+                if over or empty:
+                    tally["_size_or_empty"] = tally.get("_size_or_empty", 0) + 1
+                    continue
                 kept.append(fp)
     if not kept:
         raise SystemExit(f"bed_manifest: REFUSED — flow.sources yielded zero records "

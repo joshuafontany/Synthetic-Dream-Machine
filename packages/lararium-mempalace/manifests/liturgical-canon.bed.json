@@ -16,7 +16,11 @@
     ],
     "exclusions": [],
     "record_unit": {
-      ".mem": "file"
+      ".mem": "file",
+      ".md": "file",
+      ".markdown": "file",
+      ".txt": "file",
+      ".text": "file"
     }
   },
   "worldline": {
