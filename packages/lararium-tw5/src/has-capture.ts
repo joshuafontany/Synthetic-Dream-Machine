@@ -19,12 +19,15 @@
  */
 
 import type { CaptureEngine, CapturePost } from "@lararium/mesh";
+import type { SensoriumContract } from "@lararium/mesh/sensorium-contract";
 
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext } from "./island-context.js";
 
 /** The OUT-frame listenable (the telemetry twin of PROJECTION_FRAME). */
 export const TELEMETRY_FRAME = "telemetry:frame";
+/** This cap declares capture without making any claim about its eventual sink or stream source. */
+const CAPTURE_SENSORIUM_CAP: SensoriumContract = { has: ["capture"] };
 /** Default signal type that carries a raw turn IN to a capture island. */
 const DEFAULT_ENQUEUE_SIGNAL = "telemetry:place-verb";
 /** Signal type that REWINDS (kapae) one turn's .structurepalace tally + salience down-weight. */
@@ -71,6 +74,7 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
 
   return {
     name: "capture",
+    sensorium: CAPTURE_SENSORIUM_CAP,
     async onEa(ctx: IslandContext) {
       if (!makeEngine) return; // INERT: the cap is carried, the sink is not wired (idempotent presence)
       const post: CapturePost = (frame) =>

@@ -21,7 +21,6 @@ import {
   hasWikiSensorium,
   letterFrequencyEmbedder,
   SENSORIUM_SIGNAL,
-  WIKI_SENSORIUM_CONTRACT,
 } from "../src/wiki-sensorium-cap.js";
 import { buildFixtureIsland, GLUE_SEEDS } from "../src/wiki-store-adapter.js";
 import type { IslandContext } from "../src/island-context.js";
@@ -31,8 +30,11 @@ const contractFixture = JSON.parse(readFileSync(
 ) as { wiki: { has: readonly string[] } };
 
 describe("hasWikiSensorium — node tier", () => {
-  test("carries the platform-blind #has contract", () => {
-    expect(WIKI_SENSORIUM_CONTRACT).toEqual(contractFixture.wiki);
+  test("contributes its own cap fragment without naming the vessel's full stack", async () => {
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-contract", GLUE_SEEDS);
+    const sense = createWikiSensorium(island);
+    expect(sense.contract).toEqual(contractFixture.wiki);
+    sense.dispose();
   });
 
   test("cohere folds the keystone planes through BOTH organs — the radius flips, the gate classifies", async () => {

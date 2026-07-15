@@ -22,6 +22,7 @@
  * Meme: lar:///ha.ka.ba/lararium/tw5/island-caps
  */
 
+import { composeSensoriumContract, type SensoriumContract } from "@lararium/mesh/sensorium-contract";
 import type { IslandBehavior, IslandContext } from "./island-context.js";
 
 /** A teardown returned from a cap's onEa — sync or async (e.g. a final flush). */
@@ -32,6 +33,8 @@ export type CapTeardown = () => void | Promise<void>;
 export interface IslandCap {
   /** Trace/debug label only — the island itself stays nameless (the stack is the identity). */
   readonly name?: string;
+  /** Open sensorium fragment this cap contributes when the island composes it. */
+  readonly sensorium?: SensoriumContract;
   /** Set up on ea. A returned function registers as a LIFO teardown run (awaited) on hooʻanu. */
   onEa?(ctx: IslandContext): void | CapTeardown | Promise<void | CapTeardown>;
   /** Claim a non-lifecycle message — return true if handled. First cap in stack order wins. */
@@ -47,8 +50,14 @@ export interface IslandCap {
  */
 export function composeIsland(caps: readonly IslandCap[]): IslandBehavior {
   const teardowns: CapTeardown[] = [];
+  const sensorium = composeSensoriumContract(caps.flatMap((cap) => cap.sensorium ? [cap.sensorium] : []));
   return {
     async onEa(ctx: IslandContext) {
+      if (ctx.tw5?.ready) {
+        const tw = ctx.tw5.$tw as { lares?: Record<string, unknown> };
+        tw.lares ??= {};
+        tw.lares.sensoriumContract = sensorium;
+      }
       for (const cap of caps) {
         const t = await cap.onEa?.(ctx);
         if (typeof t === "function") teardowns.push(t);

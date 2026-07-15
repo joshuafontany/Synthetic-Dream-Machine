@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, test } from "vitest";
 
-import { declareSensoriumContract, hasSensoriumCap } from "../src/sensorium-contract.js";
+import { composeSensoriumContract, declareSensoriumContract, hasSensoriumCap } from "../src/sensorium-contract.js";
 
 const fixture = JSON.parse(readFileSync(
   fileURLToPath(new URL("./fixtures/sensorium-contract-parity.json", import.meta.url)), "utf8"),
@@ -38,5 +38,22 @@ describe("sensorium-contract", () => {
     for (const invalid of fixture.invalid) {
       expect(() => declareSensoriumContract(invalid.contract)).toThrow(invalid.error);
     }
+  });
+
+  test("composes only the cap fragments an entity currently carries", () => {
+    expect(composeSensoriumContract([
+      { has: ["content", "recall"] },
+      { has: ["telemetry"], apertures: { measure: "boundary-changepoint" } },
+    ])).toEqual({
+      has: ["content", "recall", "telemetry"],
+      apertures: { measure: "boundary-changepoint" },
+    });
+  });
+
+  test("refuses contradictory ordering witnesses from composed caps", () => {
+    expect(() => composeSensoriumContract([
+      { has: ["capture"], order: { projector: "stream", basis: "observed:source-sequence" } },
+      { has: ["worldline"], order: { projector: "stream", basis: "declared:turn-sequence" } },
+    ])).toThrow("conflicting order evidence");
   });
 });

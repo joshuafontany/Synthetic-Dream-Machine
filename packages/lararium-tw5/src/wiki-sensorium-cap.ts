@@ -50,7 +50,6 @@ import {
   type WikiRecallHit,
 } from "./wiki-sense-fold.js";
 import { compositeCorpusReader, type WikiCorpusReader } from "./wiki-corpus-reader.js";
-import { WIKI_SENSORIUM_CONTRACT } from "./wiki-sensorium-contract.js";
 
 // the verdict/hit shapes live with the fold (every mouth speaks them); the cap re-exports the held names.
 export type { WikiCoherenceVerdict, WikiRecallHit } from "./wiki-sense-fold.js";
@@ -58,8 +57,10 @@ export { RECALL_LIMIT } from "./wiki-sense-fold.js";
 export type { WikiCorpusReader } from "./wiki-corpus-reader.js";
 export { compositeCorpusReader } from "./wiki-corpus-reader.js";
 
-/** The same portable cap contract Node manifests and browser/TW5 workers carry. */
-export { WIKI_SENSORIUM_CONTRACT } from "./wiki-sensorium-contract.js";
+/** This perceiver's contribution; surrounding vessels may compose further caps. */
+const WIKI_SENSORIUM_CAP: SensoriumContract = {
+  has: ["content", "structure", "form", "coupling"],
+};
 
 // ── the semantic SEAM (an interface, never a dependency) ────────────────────────────────────────────
 
@@ -149,7 +150,7 @@ export function createWikiSensoriumOverReader(
     (cached ??= reader.docs().then((docs) => foldCorpus(docs, reader.stalkOf)));
 
   return {
-    contract: WIKI_SENSORIUM_CONTRACT,
+    contract: WIKI_SENSORIUM_CAP,
     async cohere(): Promise<WikiCoherenceVerdict> {
       // both organs read the SAME assignment — the shared fold projects the structure⊥form planes.
       return cohereFold(await fold());
@@ -265,6 +266,7 @@ export function hasWikiSensorium(opts: WikiSensoriumOptions = {}): IslandCap {
 
   return {
     name: "wiki-sensorium",
+    sensorium: WIKI_SENSORIUM_CAP,
     onEa(ctx: IslandContext) {
       perceiver = createWikiSensorium(ctx.composite, opts);
       return () => { perceiver?.dispose(); perceiver = null; };

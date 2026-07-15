@@ -44,6 +44,30 @@ export function declareSensoriumContract(input: SensoriumContract): SensoriumCon
   };
 }
 
+/** Fold cap contributions into one current sensorium declaration. */
+export function composeSensoriumContract(
+  contributions: readonly SensoriumContract[],
+): SensoriumContract {
+  const orders = contributions.flatMap((contract) => contract.order ? [contract.order] : []);
+  if (orders.some((order) => order.projector !== orders[0]?.projector || order.basis !== orders[0]?.basis)) {
+    throw new Error("sensorium contract: one entity cannot compose conflicting order evidence");
+  }
+  const apertures: Record<string, string> = {};
+  for (const contract of contributions) {
+    for (const [cell, provider] of Object.entries(contract.apertures ?? {})) {
+      if (apertures[cell] !== undefined && apertures[cell] !== provider) {
+        throw new Error(`sensorium contract: aperture ${cell} has conflicting providers`);
+      }
+      apertures[cell] = provider;
+    }
+  }
+  return declareSensoriumContract({
+    has: contributions.flatMap((contract) => contract.has),
+    ...(orders[0] ? { order: orders[0] } : {}),
+    ...(Object.keys(apertures).length > 0 ? { apertures } : {}),
+  });
+}
+
 /** Whether a declared capability belongs to this open stack. */
 export function hasSensoriumCap(contract: SensoriumContract, cap: string): boolean {
   return contract.has.includes(cap);

@@ -63,9 +63,7 @@ export {
   SENSORIUM_FRAME,
   SENSORIUM_SIGNAL,
   RECALL_LIMIT,
-  WIKI_SENSORIUM_CONTRACT,
 } from "./wiki-sensorium-cap.js";
-export { installSensoriumContract } from "./sensorium-contract-vm.js";
 export type {
   TextEmbedder,
   WikiSensorium,

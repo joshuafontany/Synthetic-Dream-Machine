@@ -13,12 +13,9 @@
  */
 
 import { describe, test, expect } from "vitest";
-import { runWikiSensoriumWitness, WIKI_SENSORIUM_CONTRACT } from "@lararium/tw5";
+import { runWikiSensoriumWitness } from "@lararium/tw5";
 
 describe("hasWikiSensorium — browser tier", () => {
-  test("carries the same platform-blind #has contract", () => {
-    expect(WIKI_SENSORIUM_CONTRACT).toEqual({ has: ["content", "structure", "form", "coupling"] });
-  });
 
   test("cohere folds the keystone planes through BOTH organs — the radius flips, the gate classifies", async () => {
     const w = await runWikiSensoriumWitness();

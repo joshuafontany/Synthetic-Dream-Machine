@@ -7,6 +7,7 @@
 import { describe, expect, test } from "vitest";
 
 import { composeIsland } from "../src/island-caps.js";
+import { hasCapture } from "../src/has-capture.js";
 import type { IslandCap } from "../src/island-caps.js";
 import type { IslandContext } from "../src/island-context.js";
 
@@ -74,5 +75,24 @@ describe("composeIsland — the nameless causal island over a #has cap stack", (
     await island.onEa(ctx);
     expect(island.onSignal("anything", null, ctx)).toBe(false);
     await island.onHooAnu(ctx);
+  });
+
+  test("publishes only the fragments carried by this island", async () => {
+    const worker = { ready: true, $tw: {} };
+    const island = composeIsland([
+      { sensorium: { has: ["telemetry"] } },
+      { sensorium: { has: ["content"] } },
+    ]);
+    await island.onEa({ tw5: worker } as unknown as IslandContext);
+    expect((worker.$tw as { lares?: Record<string, unknown> }).lares?.sensoriumContract)
+      .toEqual({ has: ["telemetry", "content"] });
+  });
+
+  test("adds an injected cap without assuming its source or sink", async () => {
+    const worker = { ready: true, $tw: {} };
+    const island = composeIsland([hasCapture({})]);
+    await island.onEa({ tw5: worker } as unknown as IslandContext);
+    expect((worker.$tw as { lares?: Record<string, unknown> }).lares?.sensoriumContract)
+      .toEqual({ has: ["capture"] });
   });
 });
