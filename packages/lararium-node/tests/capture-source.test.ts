@@ -3,7 +3,7 @@ import { EventEmitter } from "node:events";
 
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makeSourceCapture, type SourceCapture } from "../src/capture-source.js";
+import { makeSourceCapture, type SourceCapture, type SourceCaptureRequest } from "../src/capture-source.js";
 import type { PalaceHolderProc, PalaceHolderSpawn } from "../src/palace-holder.js";
 
 function fakeSpawn(seen: Array<{ op: string; fields: Record<string, unknown> }>): PalaceHolderSpawn {
@@ -52,5 +52,36 @@ describe("makeSourceCapture", () => {
     opened.push(capture);
     await capture.capture({ surface: "copilot", pointer: "/sessions/session-store.db", wing: "wing_proj", sessionId: "cop-42" });
     expect(seen[1]).toEqual({ op: "capture", fields: { surface: "copilot", pointer: "/sessions/session-store.db", wing: "wing_proj", sessionId: "cop-42" } });
+  });
+
+  test("projects runtime input onto the source-descriptor admission boundary", async () => {
+    const seen: Array<{ op: string; fields: Record<string, unknown> }> = [];
+    const capture = makeSourceCapture("/tmp/capture-source-root", { spawn: fakeSpawn(seen) });
+    opened.push(capture);
+    await capture.capture({
+      surface: "claude", pointer: "/sessions/session.jsonl", wing: "wing_proj",
+      turnText: "this payload must not cross the descriptor seam",
+    } as SourceCaptureRequest);
+    expect(seen[1]).toEqual({
+      op: "capture",
+      fields: { surface: "claude", pointer: "/sessions/session.jsonl", wing: "wing_proj" },
+    });
+  });
+
+  test("refuses an empty source descriptor before it reaches Python", async () => {
+    const seen: Array<{ op: string; fields: Record<string, unknown> }> = [];
+    const capture = makeSourceCapture("/tmp/capture-source-root", { spawn: fakeSpawn(seen) });
+    opened.push(capture);
+    await expect(capture.capture({ surface: "claude", pointer: "", wing: "wing_proj" })).rejects.toThrow("pointer and wing");
+    expect(seen).toEqual([]);
+  });
+
+  test("refuses an unknown runtime surface before it reaches Python", async () => {
+    const seen: Array<{ op: string; fields: Record<string, unknown> }> = [];
+    const capture = makeSourceCapture("/tmp/capture-source-root", { spawn: fakeSpawn(seen) });
+    opened.push(capture);
+    await expect(capture.capture({ surface: "mudlet", pointer: "/events.ndjson", wing: "wing_mudlet" } as SourceCaptureRequest))
+      .rejects.toThrow("supported AI session source");
+    expect(seen).toEqual([]);
   });
 });

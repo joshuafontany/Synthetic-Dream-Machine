@@ -21,6 +21,36 @@ export interface SourceCaptureRequest {
   readonly sessionId?: string;
 }
 
+const AI_SESSION_SURFACES = new Set<SourceCaptureRequest["surface"]>([
+  "claude", "codex", "copilot", "copilot-vscode",
+]);
+
+/**
+ * The CHAO admission cut: Node may carry a source descriptor across this seam,
+ * never transcript or telemetry payload.  Projecting instead of spreading also
+ * protects the wire from untyped callers that attach extra fields at runtime.
+ */
+export function sourceCaptureDescriptor(request: SourceCaptureRequest): SourceCaptureRequest {
+  const { surface, pointer, wing, room, sessionId } = request;
+  if (!AI_SESSION_SURFACES.has(surface)) throw new Error("capture-source: surface must name a supported AI session source");
+  if (typeof pointer !== "string" || !pointer || typeof wing !== "string" || !wing) {
+    throw new Error("capture-source: pointer and wing must carry non-empty strings");
+  }
+  if (room !== undefined && (typeof room !== "string" || !room)) {
+    throw new Error("capture-source: room must carry a non-empty string when named");
+  }
+  if (sessionId !== undefined && (typeof sessionId !== "string" || !sessionId)) {
+    throw new Error("capture-source: sessionId must carry a non-empty string when named");
+  }
+  return {
+    surface,
+    pointer,
+    wing,
+    ...(room !== undefined ? { room } : {}),
+    ...(sessionId !== undefined ? { sessionId } : {}),
+  };
+}
+
 export interface SourceCaptureResult {
   readonly landed: number;
   readonly skipped: number;
@@ -60,7 +90,7 @@ export function makeSourceCapture(
 ): SourceCapture {
   const p = composePalace(LABEL, sensoriumRoot, opts.spawn ?? defaultSpawn(sensoriumRoot), opts.timeoutMs ?? 120_000);
   return {
-    capture: async (request) => await p.send("capture", { ...request }) as SourceCaptureResult,
+    capture: async (request) => await p.send("capture", sourceCaptureDescriptor(request)) as SourceCaptureResult,
     close: p.close,
   };
 }
