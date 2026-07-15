@@ -15,7 +15,7 @@ import hashlib
 import json
 import os
 
-from sensorium import sensorium_paths
+from sensorium import read_stream_manifest, sensorium_paths
 from worldline_io import WorldlineStore
 
 
@@ -23,12 +23,10 @@ _ADMISSIBLE = frozenset({"in-file", "containment"})
 
 
 def _manifest(root: str) -> dict:
-    path = os.path.join(root, "manifest.json")
     try:
-        with open(path, encoding="utf-8") as fh:
-            manifest = json.load(fh)
-    except (OSError, ValueError) as exc:
-        raise SystemExit(f"corpus_worldline: cannot read manifest at {path!r}: {exc}") from exc
+        manifest = read_stream_manifest(root)
+    except ValueError as exc:
+        raise SystemExit(f"corpus_worldline: {exc}") from exc
     spec = manifest.get("worldline")
     if not isinstance(spec, dict):
         raise SystemExit("corpus_worldline: manifest declares no worldline capability; refusing to invent order")

@@ -149,6 +149,43 @@ def _atomic_json_write(path: str, value: dict) -> None:
         raise
 
 
+def read_stream_manifest(root: str, *, absent_ok: bool = False) -> "dict | None":
+    """Read one rooted declaration without interpreting cap-owned extension fields.
+
+    Projectors share this file boundary instead of each carrying a private JSON
+    parse.  The reader validates common declaration evidence when present and
+    returns the original mapping intact, so a cap may own richer fields without
+    another projector flattening or discarding them.
+    """
+    path = os.path.join(sensorium_paths(root).root, "manifest.json")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            manifest = json.load(fh)
+    except FileNotFoundError:
+        if absent_ok:
+            return None
+        raise ValueError(f"stream manifest at {path!r} is absent") from None
+    except (OSError, ValueError) as exc:
+        raise ValueError(f"stream manifest at {path!r} cannot be read: {exc}") from exc
+    if not isinstance(manifest, dict):
+        raise ValueError(f"stream manifest at {path!r} must hold an object")
+    schema = manifest.get("schema")
+    if schema is not None and schema != 1:
+        raise ValueError(f"stream manifest at {path!r} carries unsupported schema {schema!r}")
+    order = manifest.get("order")
+    if order is not None:
+        if not isinstance(order, dict) or not isinstance(order.get("projector"), str) or not order["projector"] \
+                or not isinstance(order.get("basis"), str) or not order["basis"]:
+            raise ValueError(f"stream manifest at {path!r} carries malformed order evidence")
+    apertures = manifest.get("apertures")
+    if apertures is not None and (not isinstance(apertures, dict) or
+                                  any(not isinstance(cell, str) or not cell or
+                                      not isinstance(provider, str) or not provider
+                                      for cell, provider in apertures.items())):
+        raise ValueError(f"stream manifest at {path!r} carries malformed aperture evidence")
+    return manifest
+
+
 def compose_persistence_cap(root: str, *, half_life: "float | None" = None,
                             active: bool = False) -> PersistenceCap:
     """Declare rooted persistence without materializing testimony state.

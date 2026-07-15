@@ -40,15 +40,13 @@ import sys
 
 def _rederive_bands(root: str) -> dict:
     """Rebuild bands from stored vectors under the manifest's declared order evidence."""
-    from sensorium import sensorium_paths
+    from sensorium import read_stream_manifest, sensorium_paths
 
     paths = sensorium_paths(root)
-    manifest_path = os.path.join(paths.root, "manifest.json")
     try:
-        with open(manifest_path, encoding="utf-8") as fh:
-            manifest = json.load(fh)
-    except (OSError, ValueError) as exc:
-        raise SystemExit(f"rederive bands: cannot read {manifest_path!r}: {exc}") from exc
+        manifest = read_stream_manifest(paths.root)
+    except ValueError as exc:
+        raise SystemExit(f"rederive bands: {exc}") from exc
     order = manifest.get("order") or {}
     projector, basis = order.get("projector"), order.get("basis")
     if (projector, basis) in {("corpus", "declared:in-file"),
@@ -128,15 +126,15 @@ def _refuse_fused_stream_rederive(root: str, records: "list[dict]") -> None:
     grounds for that forest to span independent sources, so this guard refuses
     before any derived plane clears or receives a record.
     """
-    manifest_path = os.path.join(root, "manifest.json")
+    from sensorium import read_stream_manifest
+
     try:
-        with open(manifest_path, encoding="utf-8") as fh:
-            manifest = json.load(fh)
-    except FileNotFoundError:
+        manifest = read_stream_manifest(root, absent_ok=True)
+    except ValueError as exc:
+        raise SystemExit(f"rederive: {exc}") from exc
+    if manifest is None:
         return
-    except (OSError, ValueError) as exc:
-        raise SystemExit(f"rederive: cannot read {manifest_path!r}: {exc}") from exc
-    order = manifest.get("order") if isinstance(manifest, dict) else None
+    order = manifest.get("order")
     if not isinstance(order, dict) or (order.get("projector"), order.get("basis")) != (
             "stream", "observed:connection-sequence"):
         return

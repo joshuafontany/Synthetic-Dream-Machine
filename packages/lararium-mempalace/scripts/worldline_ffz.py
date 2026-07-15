@@ -307,7 +307,7 @@ def main() -> None:
 
     import content_io as cio
     import worldline_io as wl
-    from sensorium import sensorium_paths
+    from sensorium import read_stream_manifest, sensorium_paths
 
     ap = argparse.ArgumentParser(
         description="worldline_ffz — enrich lar_ffz membership stamps (the beat cell fills; nothing tallies).")
@@ -326,10 +326,11 @@ def main() -> None:
     # (e.g. a corpus's `measure: boundary-changepoint`) get NAMED in the report, never silently
     # skipped — a seat with no provider speaks.
     manifest_path = os.path.join(root, "manifest.json")
-    apertures = {}
-    if os.path.isfile(manifest_path):
-        with open(manifest_path, encoding="utf-8") as fh:
-            apertures = (json.load(fh).get("apertures") or {})
+    try:
+        manifest = read_stream_manifest(root, absent_ok=True)
+    except ValueError as exc:
+        raise SystemExit(f"worldline_ffz: {exc}") from exc
+    apertures = (manifest or {}).get("apertures") or {}
     if apertures.get("beat") != "worldline-dag":
         sys.stderr.write(
             "worldline_ffz: this sensorium declares no `apertures.beat: worldline-dag` — "

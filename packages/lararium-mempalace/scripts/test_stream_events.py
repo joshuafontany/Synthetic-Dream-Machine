@@ -66,6 +66,21 @@ def test_stream_manifest_uses_the_rooted_transaction_lock(tmp_path):
     assert len(locks) == 1
 
 
+def test_stream_manifest_reader_keeps_cap_owned_fields_without_relaxing_common_evidence(tmp_path):
+    from sensorium import OrderCap, read_stream_manifest, write_stream_manifest
+
+    write_stream_manifest(str(tmp_path), name="stream", lar="lar:///x",
+                          order=OrderCap("stream", "observed:connection-sequence"),
+                          worldline={"real": ["connection-sequence"], "arbitrary": []})
+    manifest = read_stream_manifest(str(tmp_path))
+    assert manifest["worldline"] == {"real": ["connection-sequence"], "arbitrary": []}
+
+    manifest["order"] = {"projector": "", "basis": "observed:connection-sequence"}
+    (tmp_path / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(ValueError, match="malformed order evidence"):
+        read_stream_manifest(str(tmp_path))
+
+
 def test_stream_manifest_preserves_an_unowned_cap_and_declaration_fields(tmp_path):
     from sensorium import OrderCap, write_stream_manifest
     (tmp_path / "manifest.json").write_text(json.dumps({
