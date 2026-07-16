@@ -14,6 +14,13 @@ export interface LaresNaluAPI {
   flushNalu(budget?: number): void;
   isApplyingNalu(): boolean;
   naluPending(): number;
+  /** Progressive-boot hydration checkpoint. The recipe calls beginHydration() ONCE right after
+   *  enqueuing the seed replay — instead of a synchronous unbounded flush — so the seed drains
+   *  frame-by-frame on the paced rail. whenSeedDrained() resolves the first time the queue empties
+   *  after hydration begins (or at once if none began): the catch-up checkpoint the island awaits
+   *  before arming live reactive behavior, so onEa still observes a fully-resident seed. */
+  beginHydration(): void;
+  whenSeedDrained(): Promise<void>;
   /** The recompose inverse on the VM surface — one carrier whole from its record group. */
   expandMemeRefs(memeUri: string): string | null;
   /** The IN-VM capture annotate (capture-annotate-vm startup): parse + harvest a turn IN-REALM with

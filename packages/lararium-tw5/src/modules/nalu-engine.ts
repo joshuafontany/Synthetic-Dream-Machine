@@ -70,6 +70,13 @@ let _scheduled                     = false;
 let _applying                      = false;
 let _wiki:      TW5Wiki | null     = null;
 
+// Progressive-boot hydration checkpoint — the seed drains on the SAME paced rail as live
+// edits (no synchronous unbounded flush); `_seedDrained` resolves the first frame the queue
+// empties after `beginHydration()`, the checkpoint the island awaits before arming behavior.
+let _hydrating                          = false;
+let _seedDrained:        Promise<void> | null = null;
+let _seedDrainedResolve: (() => void)  | null = null;
+
 // ---------------------------------------------------------------------------
 // Scheduler
 // ---------------------------------------------------------------------------
@@ -130,8 +137,9 @@ function _drain(budget: number): void {
     _applying = false;
   }
 
-  // Remainder carries to next frame.
+  // Remainder carries to next frame; an empty queue settles the hydration checkpoint.
   if (_queue.length > 0) _scheduleFrame();
+  else _settleHydration();
 }
 
 // ---------------------------------------------------------------------------
@@ -145,6 +153,38 @@ function enqueueNalu(change: LarTiddlerChange): void {
 
 function flushNalu(budget = DEFAULT_BUDGET): void {
   _drain(budget);
+}
+
+/**
+ * Begin the seed-hydration wave (progressive-boot contract). The recipe calls this ONCE right
+ * after enqueuing the seed replay, INSTEAD of a synchronous unbounded flush: the seed already
+ * sits on the paced queue, so this only arms the checkpoint and lets `_drain` empty it frame by
+ * frame — no event-loop block. Idempotent; a begin over an already-empty queue settles at once.
+ */
+function beginHydration(): void {
+  if (_seedDrained) return;
+  _seedDrained = new Promise<void>((resolve) => { _seedDrainedResolve = resolve; });
+  _hydrating = true;
+  if (_queue.length === 0) _settleHydration();
+  else _scheduleFrame();
+}
+
+function _settleHydration(): void {
+  if (!_hydrating) return;
+  _hydrating = false;
+  const resolve = _seedDrainedResolve;
+  _seedDrainedResolve = null;
+  resolve?.();
+}
+
+/**
+ * Resolves once the seed replay has fully drained into the wiki VM — the catch-up checkpoint
+ * the island awaits before arming live reactive behavior, so onEa still observes a fully-resident
+ * seed (the invariant preserved, the synchronous block removed). Resolves immediately when no
+ * hydration was begun (a wiki-less path).
+ */
+function whenSeedDrained(): Promise<void> {
+  return _seedDrained ?? Promise.resolve();
 }
 
 function isApplyingNalu(): boolean {
@@ -165,10 +205,12 @@ export function startup(): void {
   _wiki = wiki;
 
   const lares = ($tw!.lares ?? {}) as Record<string, unknown>;
-  lares["enqueueNalu"]    = enqueueNalu;
-  lares["flushNalu"]      = flushNalu;
-  lares["isApplyingNalu"] = isApplyingNalu;
-  lares["naluPending"]    = naluPending;
+  lares["enqueueNalu"]     = enqueueNalu;
+  lares["flushNalu"]       = flushNalu;
+  lares["isApplyingNalu"]  = isApplyingNalu;
+  lares["naluPending"]     = naluPending;
+  lares["beginHydration"]  = beginHydration;
+  lares["whenSeedDrained"] = whenSeedDrained;
   // The recompose inverse, first-class on the VM surface (island law: if it
   // CAN happen in the TW5 Wiki VM causal island, it MUST happen there).
   // Reads the VM's own wiki; one carrier whole, children spliced full-depth.

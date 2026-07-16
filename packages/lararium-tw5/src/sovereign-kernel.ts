@@ -388,10 +388,10 @@ export function runSovereignKernel(
 
     const tw5 = handler.tw5()!;
     // One recipe model — buildIslandRecipe walks expandRecipe(msg.recipe),
-    // wires @temp + every resolved CRDT slot, registers the adaptor, drains
-    // initial replay synchronously through the in-wiki nalu engine. The replay
-    // blocks this thread (no interval breath fires), so the stage mark lands
-    // first — the watchdog's window restarts right before the long stretch.
+    // wires @temp + every resolved CRDT slot, registers the adaptor, and ARMS
+    // the seed replay on the paced nalu rail (progressive-boot: no synchronous
+    // unbounded flush). The seed then drains frame-by-frame off the critical
+    // path, so this thread keeps breathing while the corpus streams in.
     tick("recipe");
     buildIslandRecipe({
       tw5,
@@ -399,6 +399,11 @@ export function runSovereignKernel(
       recipe: msg.recipe,
       ready,
     });
+    // Await the hydration checkpoint before arming behavior — onEa still observes a
+    // fully-resident seed (the invariant), but the drain paced the loop instead of
+    // blocking it. Resolves at once on a wiki-less path (no hydration begun).
+    await (tw5 as unknown as { lares?: { whenSeedDrained?: () => Promise<void> } })
+      .lares?.whenSeedDrained?.();
 
     // Isomorphic base: the @catalog grant rides into ctx (access entry, NOT a
     // load slot — @catalog is absent from expandRecipe). Worker behaviors build

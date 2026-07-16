@@ -118,9 +118,12 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
     }
   }
 
-  // Synchronously drain so the wiki carries its seed before behavior.onEa runs.
-  const lares = (tw5.$tw as { lares?: { flushNalu?: (budget?: number) => void } }).lares;
-  lares?.flushNalu?.(Number.MAX_SAFE_INTEGER);
+  // Progressive-boot: the seed is already enqueued on the paced nalu rail (emitInitialReplay
+  // above). Arm the hydration checkpoint instead of a synchronous unbounded flush — the seed
+  // drains frame-by-frame without blocking the loop, and the island awaits `whenSeedDrained()`
+  // before onEa, so behavior still fires against a fully-resident seed.
+  const lares = (tw5.$tw as { lares?: { beginHydration?: () => void } }).lares;
+  lares?.beginHydration?.();
 
   return { adaptor, stores };
 }
