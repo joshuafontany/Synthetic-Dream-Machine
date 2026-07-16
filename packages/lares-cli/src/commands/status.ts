@@ -1,13 +1,12 @@
 /**
  * `lares status` — the status surface, NAMESPACED into two referents (the name-collision cure):
  *
- *   lares node status        NODE HEALTH — bootstrap presence, storage size, port in use. The
- *                            historical `lares status` behavior; pure local inspection, no vm boot.
- *   lares sense status   SENSORIUM TAXONOMY — what the Memory sensorium holds. Mirrors the
- *                            isomorphic MCP `status` tool (py `content_io` taxonomy). SEATED STUB
- *                            today: the read rides the DEFERRED @daemon-cap-wire.
- *   lares status             muscle-memory ALIAS → `lares node status`.
- *   lares status sensorium   also reaches the sensorium taxonomy (the alias spelled long).
+ *   lares node status        NODE HEALTH — bootstrap presence, storage size, port in use. Pure local
+ *                            inspection, no vm boot.
+ *   lares sense status       SENSORIUM TAXONOMY — what the Memory sensorium holds; the real read rides
+ *                            the sense door over the @daemon's composed caps.
+ *   lares status             ALIAS → `lares node status`.
+ *   lares status sensorium   ALIAS → points at `lares sense status` (the sensorium door).
  *
  * The two carried one name before (CLI status = node-health · MCP status = taxonomy); they name
  * one referent each now, so the isomorphism table holds no name resolving to two things.
@@ -15,7 +14,8 @@
  * `lares status --palaces` keeps the palace-organ health table (a third, distinct local view).
  */
 
-import { larRoot, larDataDir } from "../env.js";
+import { larRoot, larDataDir, larPort } from "../env.js";
+import { stopIncumbent } from "../port-control.js";
 import { udsAvailable } from "../local-connector.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -100,22 +100,19 @@ export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Pr
   });
 }
 
-// The sensorium-taxonomy SEATED STUB. The verb shape stands now (isomorphic with the MCP `status`
-// tool = the sensorium taxonomy), but the read stays unwired: the taxonomy lives in the py
-// `content_io` backend, which CLI verbs reach only across the DEFERRED @daemon-cap-wire. Node health
-// (`lares node status`) reads local and answers today; the taxonomy waits for the wire.
-const SENSORIUM_STATUS_STUB =
-  "sensorium status routing deferred — rides the @daemon-cap-wire. The taxonomy (what the Memory " +
-  "sensorium holds) lives in the py content_io backend; CLI verbs reach it only once the cap-wire " +
-  "routes them there. For local organ health today, run `lares status --palaces`; for node health, " +
-  "`lares node status`.";
+// `lares status sensorium` — a legacy alias. The sensorium taxonomy reads through the sense door
+// (`lares sense status`, which routes to the @daemon's composed content cap); this alias points there
+// rather than opening a second path. Local organ health rides `lares status --palaces`.
+const SENSORIUM_STATUS_REDIRECT =
+  "the sensorium taxonomy reads at `lares sense status` (the sovereign door). For local organ health, " +
+  "run `lares status --palaces`; for node health, `lares node status`.";
 
-/** `lares sense status` — the taxonomy mirror of MCP `status`. SEATED STUB (read deferred). */
+/** `lares status sensorium` (legacy alias) — points at `lares sense status`, the sensorium taxonomy door. */
 function cmdSensoriumStatus(args: ParsedArgs): number {
   emit(args, {
     ok: false,
-    error: { code: "verb-error", message: SENSORIUM_STATUS_STUB, hint: "`lares status --palaces` shows local organ health; the taxonomy lands once the @daemon-cap-wire routes to py content_io." },
-    human: () => { console.error(`lares sense status: ${SENSORIUM_STATUS_STUB}`); },
+    error: { code: "verb-error", message: SENSORIUM_STATUS_REDIRECT, hint: "run `lares sense status` for the taxonomy; `lares status --palaces` for local organ health." },
+    human: () => { console.error(`lares status sensorium → ${SENSORIUM_STATUS_REDIRECT}`); },
   });
   return exitFor("verb-error");
 }

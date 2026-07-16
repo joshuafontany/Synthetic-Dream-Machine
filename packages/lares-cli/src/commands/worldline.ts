@@ -1,5 +1,5 @@
 /**
- * `lares worldline <handle|session>` — walk a session's SPIRIT TREE from the durable
+ * `lares sense worldline <handle|session>` — walk a session's SPIRIT TREE from the durable
  * worldline edge-DAG.
  *
  * Reads the mempalace knowledge graph READ-ONLY (`<palace>/knowledge_graph.sqlite3`,
@@ -10,24 +10,24 @@
  * per-turn HarvestRecord log) for turn counts + the aim/yield each agent carried.
  *
  * Sub-forms:
- *   lares worldline <run|handle>        the braid (tree, default) — spawn=fork ·
+ *   lares sense worldline <run|handle>        the braid (tree, default) — spawn=fork ·
  *                                       handback=join · concurrent siblings marked ∥
- *   lares worldline tree <run>          the same, spelled
- *   lares worldline <run> --as-of <ts>  the braid AS-OF a valid-time frontier — a
+ *   lares sense worldline tree <run>          the same, spelled
+ *   lares sense worldline <run> --as-of <ts>  the braid AS-OF a valid-time frontier — a
  *                                       pure READ refinement (rows spawned after <ts>
  *                                       drop; an interval still open at <ts> reads OPEN).
  *                                       Mirrors the MCP `worldline(as_of)` arg.
- *   lares worldline enrich              fill the absent BEAT cell across every braid's
+ *   lares sense worldline enrich              fill the absent BEAT cell across every braid's
  *                                       lar_ffz membership stamps (same-turn drawers then
  *                                       share a beat cell — ultrametrically adjacent).
  *                                       Idempotent; reversible × trusted on the verb-grid.
  *                                       Runs the ONE shared core (@lararium/mempalace
  *                                       runFfzEnrich) the post-harvest pass also calls.
- *   lares worldline kapae <branch>      SEATED STUB — mute a worldline branch. The write
- *   lares worldline un-kapae <branch>   SEATED STUB — restore it. Both refuse honestly:
- *                                       the write-home rides the DEFERRED @daemon-cap-wire
- *                                       (never this RO handle, never harvest's kapaeTurn).
- *   lares worldline diff <A> <B>        NOT AVAILABLE — an honest gap (below)
+ *   lares sense worldline kapae <branch>      mute a worldline branch (move-not-delete). The
+ *   lares sense worldline un-kapae <branch>   restore it. Both refuse honestly: the branch-mute is a
+ *                                       WRITE with no home in this read-only KG handle, and must not
+ *                                       ride harvest's kapaeTurn path.
+ *   lares sense worldline diff <A> <B>        NOT AVAILABLE — an honest gap (below)
  *
  * The ∥ mark rides the edge-DAG's OWN replay law (the same valid-time replay the mesh
  * projection `worldlineCausalFromEdges` enacts: events ordered by valid-time, spawn
@@ -296,7 +296,7 @@ export function renderWorldlineTree(t: WorldlineTree): string {
   const rootTurns = r.turns > 0 ? ` · turns ${r.turns}` : "";
   lines.push(`● ${r.handle}${rootTurns}${r.aim ? ` · aim ${r.aim}` : ""}${r.yield ? ` · yield ${r.yield}` : ""}`);
   r.children.forEach((c, i) => renderNode(c, "", i === r.children.length - 1, lines));
-  if (t.bearingTurns === 0) lines.push("(no bearing-index turns for this run — `lares harvest` fills the join)");
+  if (t.bearingTurns === 0) lines.push("(no bearing-index turns for this run — `lares sense pour` fills the join)");
   return lines.join("\n");
 }
 
@@ -309,28 +309,26 @@ const DIFF_GAP =
   "persisted ITC read-path (stamp serialization at capture). Refusing honestly rather than inventing " +
   "causality from timestamps.";
 
-// The kapae / un-kapae SEATED STUB. The verb shape + seat stand now (isomorphic with the MCP
-// `kapae`/`un_kapae` tools), but the WRITE stays unwired: kapae mutates (move-not-delete mute),
-// and this command reads the KG mode=ro — the write MUST NOT ride this read-only handle, nor
-// harvest's TS `kapaeTurn` path (that couples kapae to the leg the migration strangles). The
-// write-home rides the DEFERRED @daemon-cap-wire; the landing target (py `cascade_kapae` via
-// worldline_io, or a new writable TS KG handle) stays a cap-wire-era fork, surfaced not resolved.
-const KAPAE_STUB =
-  "kapae routing deferred — rides the @daemon-cap-wire. The verb is seated (reversible, trusted → " +
-  "HOTL) but its write stays unwired: this command reads mode=ro, so the mute cannot land here, and " +
-  "it must not ride harvest's kapaeTurn path (the strangled TS leg). Write-home fork (unresolved): " +
-  "py cascade_kapae via worldline_io, OR a new writable TS KG handle — a cap-wire-era decision.";
+// kapae / un-kapae refuse honestly. The verb mirrors the MCP `kapae`/`un_kapae` tools, but the mute
+// is a WRITE (move-not-delete) and this command reads the KG mode=ro — the write MUST NOT ride this
+// read-only handle, nor harvest's TS `kapaeTurn` path (which would couple kapae to a capture leg).
+// The landing target — py `cascade_kapae` via worldline_io, or a writable TS KG handle — stays an
+// open fork, surfaced not resolved.
+const KAPAE_REFUSAL =
+  "worldline kapae refuses honestly. The verb reads mode=ro, so the branch-mute (a write) cannot land " +
+  "here, and it must not ride harvest's kapaeTurn path. Write-home fork (open): py cascade_kapae via " +
+  "worldline_io, OR a writable TS KG handle.";
 
-/** Refuse a kapae / un-kapae call honestly: seated, but the write-home awaits the @daemon-cap-wire. */
+/** Refuse a kapae / un-kapae call honestly: a read-only KG handle cannot land the branch-mute write. */
 function kapaeStub(args: ParsedArgs, verb: "kapae" | "un-kapae", branch: string): number {
   if (!branch) {
-    console.error(`usage: lares worldline ${verb} <branch> [--tick <n>]  (SEATED STUB — write-home deferred)`);
+    console.error(`usage: lares sense worldline ${verb} <branch> [--tick <n>]  (refuses honestly — see below)`);
     return 2;
   }
   emit(args, {
     ok: false,
-    error: { code: "verb-error", message: `worldline ${verb}: ${KAPAE_STUB}`, hint: "The mute lands once the @daemon-cap-wire routes CLI verbs to the py sensorium backend." },
-    human: () => { console.error(`lares worldline ${verb} ${branch}: ${KAPAE_STUB}`); },
+    error: { code: "verb-error", message: `worldline ${verb}: ${KAPAE_REFUSAL}`, hint: "the mute needs a writable KG handle; this read-only path cannot land it." },
+    human: () => { console.error(`lares sense worldline ${verb} ${branch}: ${KAPAE_REFUSAL}`); },
   });
   return exitFor("verb-error");
 }
@@ -340,7 +338,7 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
   const SUBVERBS = new Set(["tree", "diff", "kapae", "un-kapae", "enrich"]);
   const sub = pos[0] !== undefined && SUBVERBS.has(pos[0]) ? (pos.shift() as string) : "tree";
 
-  // kapae / un-kapae — SEATED STUBS; the write-home rides the deferred @daemon-cap-wire.
+  // kapae / un-kapae refuse honestly — a read-only KG handle cannot land the branch-mute write.
   if (sub === "kapae" || sub === "un-kapae") {
     return kapaeStub(args, sub, (pos[0] ?? "").trim());
   }
@@ -355,7 +353,7 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
         ok: true,
         data: { mode: "enrich", ...report },
         human: () => {
-          console.log("lares worldline enrich");
+          console.log("lares sense worldline enrich");
           console.log(`  braids: ${report.braids}  turns: ${report.turns}  stamps: ${report.stamped}`);
           console.log(`  rhythm testimony: locked ${report.locked} · holdover ${report.holdover} · phase-spread ${report.phase_spread.toFixed(4)}`);
         },
@@ -367,7 +365,7 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
       emit(args, {
         ok: false,
         error: { code: "verb-error", message, hint: "capture builds the fork-DAG the enrichment walks — feed transcripts first." },
-        human: () => console.error(`lares worldline enrich: ${message}`),
+        human: () => console.error(`lares sense worldline enrich: ${message}`),
       });
       return exitFor("verb-error");
     }
@@ -376,15 +374,15 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
   if (sub === "diff") {
     emit(args, {
       ok: false,
-      error: { code: "verb-error", message: DIFF_GAP, hint: "Use `lares worldline <run>` — the tree re-projects the causal braid from the persisted edge-DAG." },
-      human: () => { console.error(`lares worldline diff: ${DIFF_GAP}`); },
+      error: { code: "verb-error", message: DIFF_GAP, hint: "Use `lares sense worldline <run>` — the tree re-projects the causal braid from the persisted edge-DAG." },
+      human: () => { console.error(`lares sense worldline diff: ${DIFF_GAP}`); },
     });
     return exitFor("verb-error");
   }
 
   const target = (pos[0] ?? "").trim();
   if (!target) {
-    console.error("usage: lares worldline <handle|session-id[-prefix]> [--palace <dir>] [--as-of <ts>] | lares worldline enrich [--palace <content-dir>] | lares worldline kapae <branch> | lares worldline diff <A> <B>");
+    console.error("usage: lares sense worldline <handle|session-id[-prefix]> [--palace <dir>] [--as-of <ts>] | lares sense worldline enrich [--palace <content-dir>] | lares sense worldline kapae <branch> | lares sense worldline diff <A> <B>");
     return 2;
   }
   // A worldline handle (`<run>.<agentId>`) walks its whole run; a run/session id walks itself.
@@ -396,8 +394,8 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
     const msg = `no knowledge graph at ${kgPath}`;
     emit(args, {
       ok: false,
-      error: { code: "not-found", message: msg, hint: "Worldline edges project at harvest — run `lares harvest` (or `lares subagents <transcript>`) first." },
-      human: () => { console.error(`lares worldline: ${msg}`); console.error("  Worldline edges project at harvest — run `lares harvest` first."); },
+      error: { code: "not-found", message: msg, hint: "Worldline edges project at harvest — run `lares sense pour` (or `lares sense subagents <transcript>`) first." },
+      human: () => { console.error(`lares sense worldline: ${msg}`); console.error("  Worldline edges project at harvest — run `lares sense pour` first."); },
     });
     return exitFor("not-found");
   }
@@ -411,7 +409,7 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
     emit(args, {
       ok: false,
       error: { code: "conflict", message: msg, hint: "The palace may be mid-repave — retry when the harvest settles." },
-      human: () => console.error(`lares worldline: ${msg}`),
+      human: () => console.error(`lares sense worldline: ${msg}`),
     });
     return exitFor("conflict");
   }
@@ -420,8 +418,8 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
     const msg = `no worldline edges match "${runArg}" (adapter lares-worldline)`;
     emit(args, {
       ok: false,
-      error: { code: "not-found", message: msg, hint: "Edges land when a session's spirits are observed — `lares harvest` / `lares subagents`." },
-      human: () => console.error(`lares worldline: ${msg}`),
+      error: { code: "not-found", message: msg, hint: "Edges land when a session's spirits are observed — `lares sense pour` / `lares sense subagents`." },
+      human: () => console.error(`lares sense worldline: ${msg}`),
     });
     return exitFor("not-found");
   }
@@ -430,7 +428,7 @@ export async function cmdWorldline(args: ParsedArgs): Promise<number> {
       ok: false,
       error: { code: "usage", message: `prefix "${runArg}" matches ${runs.length} runs`, hint: `Disambiguate: ${runs.slice(0, 6).join(" · ")}` },
       human: () => {
-        console.error(`lares worldline: prefix "${runArg}" matches ${runs.length} runs:`);
+        console.error(`lares sense worldline: prefix "${runArg}" matches ${runs.length} runs:`);
         for (const r of runs.slice(0, 12)) console.error(`  ${r}`);
       },
     });

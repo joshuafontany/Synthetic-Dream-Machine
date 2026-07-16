@@ -1,4 +1,4 @@
-/** `lares flow` — the truthful, read-only capture topology. */
+/** `lares sense flow` — the truthful, read-only capture topology. */
 
 import { larPort } from "../env.js";
 import { livePalaceProcs, type PalaceProc } from "../palace-procs.js";
@@ -34,7 +34,7 @@ export async function cmdFlow(args: ParsedArgs): Promise<number> {
       port,
     },
     human: () => {
-      console.log("lares flow — the capture topology (read-only)\n");
+      console.log("lares sense flow — the capture topology (read-only)\n");
       console.log("  capture:     source-pointer → Python holder (serialized, native-source read)");
       console.log(`  daemon:      sock ${daemonOpen ? "OPEN (route available)" : "closed (route unavailable)"}`);
       console.log(`  palace:      ${palaceLine}`);

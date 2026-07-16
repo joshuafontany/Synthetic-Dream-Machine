@@ -1,5 +1,5 @@
 /**
- * `lares recall` — read the verbatim PLACE memory (mempalace) THROUGH the @daemon
+ * `lares sense recall` — read the verbatim PLACE memory (mempalace) THROUGH the @daemon
  * seat (Option D, the read membrane).
  *
  * The CLI never touches mempalace directly: it submits a `recall` verb-summons to
@@ -8,11 +8,11 @@
  * same web3-only path every other `lares` verb rides (capability-bearing summons,
  * never a session).
  *
- *   lares recall <keywords...>          semantic search (default)
- *   lares recall <kw> --wing <w>        filter to one project wing
- *   lares recall <kw> --k <n>           cap results (default 5); --limit stays as a back-compat alias
- *   lares recall --drawer <id>          fetch one drawer verbatim
- *   lares recall --list [--wing <w>]    list drawers (no query)
+ *   lares sense recall <keywords...>          semantic search (default)
+ *   lares sense recall <kw> --wing <w>        filter to one project wing
+ *   lares sense recall <kw> --k <n>           cap results (default 5); --limit stays as a back-compat alias
+ *   lares sense recall --drawer <id>          fetch one drawer verbatim
+ *   lares sense recall --list [--wing <w>]    list drawers (no query)
  *
  * The `--k` name mirrors the isomorphic MCP tool arg (`recall(query, k)`); `--limit`
  * keeps working for muscle-memory (`--k` wins when the operator passes both).
@@ -54,13 +54,13 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   const limit   = args.options["k"] ?? args.options["limit"];
   const wantList = args.flags["list"];
   // The PHYSICS/STRUCTURAL filters (agent · surface) — a filter alone implies --list. The ENRICHMENT
-  // filters (voice/band/drift) left the surface, deferred until enrichment emerges from the breathing
-  // sensorium — keeping the CLI isomorphic with the /mcp recall tool (both carry only wing/agent/surface).
+  // filters (voice/band/drift) are not on this surface — the CLI stays isomorphic with the /mcp recall
+  // tool, both carrying only wing/agent/surface.
   const filterKeys = ["agent", "surface"] as const;
   const hasFilters = filterKeys.some((k) => args.options[k] !== undefined);
 
   if (!query && !drawer && !wantList && !hasFilters) {
-    console.error("usage: lares recall <keywords...> | --drawer <id> | --list [--wing <w>] [--k <n>]");
+    console.error("usage: lares sense recall <keywords...> | --drawer <id> | --list [--wing <w>] [--k <n>]");
     console.error("  filters: --agent <id> --surface <claude|codex|copilot-cli|copilot-vscode>");
     return 2;
   }
@@ -79,7 +79,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     did = await operatorDid();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares recall: ${msg}`) });
+    emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares sense recall: ${msg}`) });
     return exitFor("not-found");
   }
 
@@ -94,7 +94,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     emit(args, {
       ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." },
       human: () => {
-        console.error(`lares recall: ${msg}`);
+        console.error(`lares sense recall: ${msg}`);
         console.error("  Start the daemon with `lares serve` and try again.");
       },
     });
@@ -106,7 +106,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     const code = /^cap-denied/.test(msg) ? "cap-denied" : "verb-error";
     emit(args, {
       ok: false, requestId: result.requestId, error: { code, message: msg },
-      human: () => console.error(`lares recall failed: ${msg}`),
+      human: () => console.error(`lares sense recall failed: ${msg}`),
     });
     return exitFor(code);
   }
@@ -121,7 +121,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     emit(args, {
       ok: false, requestId: result.requestId,
       error: { code: "verb-error", message: msg, hint: "Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry." },
-      human: () => { console.error(`lares recall: ${msg}`); console.error("  Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry."); },
+      human: () => { console.error(`lares sense recall: ${msg}`); console.error("  Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry."); },
     });
     return exitFor("verb-error");
   }

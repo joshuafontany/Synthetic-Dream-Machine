@@ -1,5 +1,5 @@
 /**
- * `lares subagents` — send each tasked-spirit transcript to the Python source-stream
+ * `lares sense subagents` — send each tasked-spirit transcript to the Python source-stream
  * capture service.  The daemon coordinates the request, but never receives a turn body:
  * it carries only `{ surface, pointer, wing, room }` across the boundary.
  */
@@ -20,7 +20,7 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
   const transcript = args.positional[0];
   const wing = args.options["wing"];
   if (!transcript || !wing) {
-    console.error("usage: lares subagents <session-transcript.jsonl> --wing <wing>");
+    console.error("usage: lares sense subagents <session-transcript.jsonl> --wing <wing>");
     return 2;
   }
 
@@ -30,14 +30,14 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
     emit(args, {
       ok: true,
       data: { spirits: 0, wing: spiritWing, ephemeralSkipped: [{ file: transcript, reason: eph.reason }] },
-      human: () => console.log(`lares subagents → ${spiritWing}  EPHEMERAL session — transcripts untouched`),
+      human: () => console.log(`lares sense subagents → ${spiritWing}  EPHEMERAL session — transcripts untouched`),
     });
     return 0;
   }
 
   const files = listSpiritFiles(transcript);
   if (files.length === 0) {
-    emit(args, { ok: true, data: { spirits: 0, wing: spiritWing, passes: [] }, human: () => console.log(`lares subagents → ${spiritWing}  (0 spirits)`) });
+    emit(args, { ok: true, data: { spirits: 0, wing: spiritWing, passes: [] }, human: () => console.log(`lares sense subagents → ${spiritWing}  (0 spirits)`) });
     return 0;
   }
 
@@ -67,7 +67,7 @@ export async function cmdSubagents(args: ParsedArgs): Promise<number> {
     ok: failures.length === 0,
     ...(failures.length ? { error: { code: "capture-failed", message: `${failures.length} spirit source stream(s) failed`, hint: "The transcripts remain durable; re-run after the daemon is healthy." } } : {}),
     data: { spirits: files.length, wing: spiritWing, landed, skipped, passes, failures },
-    human: () => console.log(`lares subagents → ${spiritWing}  ${files.length} Python source stream(s) · ${landed} landed · ${skipped} re-derived${failures.length ? ` · ${failures.length} failed` : ""}`),
+    human: () => console.log(`lares sense subagents → ${spiritWing}  ${files.length} Python source stream(s) · ${landed} landed · ${skipped} re-derived${failures.length ? ` · ${failures.length} failed` : ""}`),
   });
   return failures.length ? 1 : 0;
 }

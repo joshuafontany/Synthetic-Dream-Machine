@@ -34,12 +34,13 @@ type Verb = (typeof VERBS)[number];
 
 /**
  * The SOVEREIGN sensorium's LIFECYCLE + verbatim verbs — the tend/write/read-verbatim half of the one
- * door, beside the four plane-READ verbs above. Each OWNS its handler outright (no top-level twin: the
- * radical collapse routes every sovereign operation through this one door, so `sense` tends the
- * sovereign lar_* planes and `mempalace` tends the guest comparator — one island per namespace).
- * `pour` = the sovereign harvest (content + planes + worldline in one pass), NOT the guest miner.
- * `recall` reads the verbatim drawers (the rich stamp-filter reader); its store-target rides the
- * @daemon recall verb (a behavior-vs-intent trace is owed — see the CLI notes).
+ * door, beside the four plane-READ verbs above. Each OWNS its handler outright — no top-level twin.
+ * `sense` tends the sovereign lar_* planes; `mempalace` tends the guest comparator: one island per
+ * namespace. `pour` = the sovereign harvest (content + planes + worldline in one pass), NOT the guest miner.
+ * `recall` reads the verbatim drawers (the rich stamp-filter reader) over the SOVEREIGN content plane —
+ * the SAME dir `sense search --lens content` opens (both derive memorySensoriumContentDir() through
+ * mempalace-pool; the @daemon recall verb NAMES it, never the guest). Guest-shaped recall output means a
+ * stale daemon dist or a dirty sovereign store, never a wrong-store read.
  */
 const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | number>> = {
   recall:    cmdRecall,

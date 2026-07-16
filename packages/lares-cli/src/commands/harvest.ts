@@ -1,5 +1,5 @@
 /**
- * `lares harvest` — idempotent, re-runnable session-history harvest.
+ * `lares sense pour` — idempotent, re-runnable session-history harvest.
  *
  * The save-hook firehose that mempalace shipped hardcoded one `--wing sessions`
  * mega-wing and re-chewed the whole transcript dir on every Stop. This replaces
@@ -281,7 +281,7 @@ function runWriteback(args: ParsedArgs, wing: string): number {
   const drawerIo = resolveDrawerIo();
   if (!existsSync(drawerIo)) {
     const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${drawerIo}` };
-    emit(args, { ok: false, error, human: () => console.error(`lares harvest: ${error.message}`) });
+    emit(args, { ok: false, error, human: () => console.error(`lares sense pour: ${error.message}`) });
     return 3;
   }
   const limit = args.options["limit"] ? Number(args.options["limit"]) : 0;
@@ -290,7 +290,7 @@ function runWriteback(args: ParsedArgs, wing: string): number {
     ok: true,
     data: { wing, ...r, mode: "writeback" },
     human: () => {
-      console.log(`lares harvest --writeback → ${wing}`);
+      console.log(`lares sense pour --writeback → ${wing}`);
       console.log(`  drawers harvested: ${r.drawers}  (${r.framed} framed)`);
       console.log(`  metadata written:  ${r.applied}`);
       console.log(`  bands:             canon ${r.bands["canon"]} · synthesis ${r.bands["synthesis"]} · provisional ${r.bands["provisional"]} · raw ${r.bands["raw"]}`);
@@ -299,7 +299,7 @@ function runWriteback(args: ParsedArgs, wing: string): number {
   return 0;
 }
 
-// --- `lares harvest --all` — the backfill feeder over EVERY project ---------
+// --- `lares sense pour --all` — the backfill feeder over EVERY project ---------
 // Discover every ~/.claude/projects/<proj>, derive its per-project wing (from a
 // transcript's own cwd, matching the live hook), then run BOTH legs idempotently:
 // drawer mine (mempalace convos) + lar_* declared writeback. Staged into a STABLE
@@ -520,7 +520,7 @@ export function acquireHarvestAllLock(): () => void {
       if (alive) {
         try { process.kill(pid, 0); } catch (probe) { alive = (probe as NodeJS.ErrnoException).code !== "ESRCH"; }
       }
-      if (alive) throw new Error(`another \`lares harvest --all\` owns ${lockPath} (pid ${pid}); wait for it to finish`);
+      if (alive) throw new Error(`another \`lares sense pour --all\` owns ${lockPath} (pid ${pid}); wait for it to finish`);
       rmSync(lockPath, { force: true });
     }
   }
@@ -531,7 +531,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   const dryRun = args.flags["dry-run"] === true;
   if (!existsSync(resolveDrawerIo())) {
     const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${resolveDrawerIo()}` };
-    emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+    emit(args, { ok: false, error, human: () => console.error(`lares sense pour --all: ${error.message}`) });
     return 3;
   }
   // Front-run the palace organs — mining into an ABSENT/stray palace lands a config-less
@@ -548,9 +548,9 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
       const error: LaresError = {
         code: "error",
         message: `palace organs failed to stand — refusing to mine into a config-less store${tail ? ` (${tail})` : ""}`,
-        hint: "run `lares wake --init` and inspect its ledger, then re-run `lares harvest --all`",
+        hint: "run `lares wake --init` and inspect its ledger, then re-run `lares sense pour --all`",
       };
-      emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+      emit(args, { ok: false, error, human: () => console.error(`lares sense pour --all: ${error.message}`) });
       return 1;
     }
   }
@@ -558,7 +558,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   const entries = [...discoverClaude(), ...discoverCodex(), ...discoverCopilotVscode(), ...discoverCopilotCli()];
   if (entries.length === 0) {
     const error: LaresError = { code: "not-found", message: "no transcripts found (claude/codex/copilot)" };
-    emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+    emit(args, { ok: false, error, human: () => console.error(`lares sense pour --all: ${error.message}`) });
     return 3;
   }
 
@@ -567,7 +567,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     releaseHarvestLock = acquireHarvestAllLock();
   } catch (err) {
     const error: LaresError = { code: "conflict", message: err instanceof Error ? err.message : String(err), hint: "Let the active bulk harvest finish, then re-run." };
-    emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+    emit(args, { ok: false, error, human: () => console.error(`lares sense pour --all: ${error.message}`) });
     return 1;
   }
   try {
@@ -688,7 +688,7 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     ...(!complete ? { error: { code: "partial", message: "one or more source streams did not complete; inspect the per-wing results and re-run", hint: "The raw sources remain intact; re-running is safe after the named failure is fixed." } } : {}),
     data: { wings: results, dryRun, mode: "all", routedThrough: "python-source-holder", ...(ffzEnrich ? { ffzEnrich } : {}), ...(organSteps ? { organsFrontRun: organSteps } : {}) },
     human: () => {
-      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} source stream(s) → Python`);
+      console.log(`lares sense pour --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} source stream(s) → Python`);
       if (organSteps) {
         const ran = organSteps.filter((s) => s.ran).length;
         console.log(`  organs front-run: stood ${ran} step(s) before mining (registry probe found absent organs)`);
@@ -711,8 +711,8 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
 // The default room every harvest/capture drawer lands in (the "convos mine"). `--room` joins the
 // arg-surface for isomorphism with the MCP `harvest(..., room)` tool, but a NON-default value would
 // change where a drawer lands — a byte-landing change this shape-pass never makes. So a non-default
-// `--room` refuses honestly (the override rides the DEFERRED @daemon-cap-wire); the default keeps
-// today's behavior byte-for-byte. Absent → default; equal-to-default → proceed unchanged.
+// `--room` refuses honestly; the default lands drawers byte-for-byte in the default room. Absent →
+// default; equal-to-default → proceed unchanged.
 const DEFAULT_ROOM = "conversations";
 
 /**
@@ -745,12 +745,11 @@ export function captureSourceFile(wing: string, file: string): string {
 }
 
 /** Guard `--room`: null when the room stays the default (proceed); an exit code when a non-default
- *  room refuses honestly (the override awaits the @daemon-cap-wire). */
+ *  room refuses honestly (the override is not landed). */
 function guardRoom(args: ParsedArgs, verb: string): number | null {
   const room = args.options["room"];
   if (room === undefined || room === DEFAULT_ROOM) return null;
-  const msg = `--room override ("${room}") rides the @daemon-cap-wire (routing deferred); ` +
-    `today ${verb} lands in the default room "${DEFAULT_ROOM}" only`;
+  const msg = `--room override ("${room}") is not landed; ${verb} lands in the default room "${DEFAULT_ROOM}" only`;
   emit(args, {
     ok: false,
     error: { code: "verb-error", message: msg, hint: `Drop --room (or pass --room ${DEFAULT_ROOM}) to harvest into the default room.` },
@@ -784,9 +783,9 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     const error: LaresError = {
       code: "not-found",
       message: `no .jsonl transcripts at ${target}`,
-      hint: "pass a transcript file or dir: lares harvest <path> --wing <wing>",
+      hint: "pass a transcript file or dir: lares sense pour <path> --wing <wing>",
     };
-    emit(args, { ok: false, error, human: () => console.error(`lares harvest: ${error.message}\n  ${error.hint}`) });
+    emit(args, { ok: false, error, human: () => console.error(`lares sense pour: ${error.message}\n  ${error.hint}`) });
     return 3;
   }
   // THE EPHEMERAL GATE (the readTurns leg): a session marked ephemeral — derived (its recorded
@@ -799,7 +798,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     emit(args, {
       ok: true,
       data: { wing, files: 0, ephemeralSkipped: ephemeralSkips, dryRun },
-      human: () => console.log(`lares harvest → ${wing}: all ${ephemeralSkips.length} transcript(s) EPHEMERAL — nothing ingested (transcripts untouched on disk)`),
+      human: () => console.log(`lares sense pour → ${wing}: all ${ephemeralSkips.length} transcript(s) EPHEMERAL — nothing ingested (transcripts untouched on disk)`),
     });
     return 0;
   }
@@ -925,7 +924,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     ok: true,
     data: { ...summary, dryRun, ...(ephemeralSkips.length ? { ephemeralSkipped: ephemeralSkips } : {}), ...(hnsw ? { hnswRepair: hnsw } : {}), ...(kapae ? { kapae } : {}) },
     human: () => {
-      console.log(`lares harvest → ${wing}${dryRun ? "  (dry run)" : ""}`);
+      console.log(`lares sense pour → ${wing}${dryRun ? "  (dry run)" : ""}`);
       console.log(`  transcripts:  ${summary.files}${ephemeralSkips.length ? `  (+${ephemeralSkips.length} EPHEMERAL, skipped)` : ""}`);
       console.log(`  turns seen:   ${summary.turns}  (${summary.skipped} already harvested, skipped)`);
       console.log(`  harvested:    ${summary.harvested}  (${summary.framed} framed · ${summary.raw} raw · ${summary.sidechain} sidechain)`);
@@ -938,7 +937,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares capture <transcript|stageDir> --wing <wing>` — request Python source-stream capture.
+ * `lares sense capture <transcript|stageDir> --wing <wing>` — request Python source-stream capture.
  *
  * The CLI and daemon carry source identity only: `{ surface, pointer, wing, room, sessionId? }`.  Python reads
  * the native transcript, derives stable CIDs, and upserts the sovereign content plane.  Re-running
@@ -954,8 +953,8 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   if (!target || !wing) {
     emit(args, {
       ok: false,
-      error: { code: "usage", message: "usage: lares capture <transcript|stageDir> --wing <wing>" },
-      human: () => console.error("usage: lares capture <transcript|stageDir> --wing <wing>"),
+      error: { code: "usage", message: "usage: lares sense capture <transcript|stageDir> --wing <wing>" },
+      human: () => console.error("usage: lares sense capture <transcript|stageDir> --wing <wing>"),
     });
     return 2;
   }

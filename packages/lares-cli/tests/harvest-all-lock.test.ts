@@ -18,7 +18,7 @@ describe("harvest --all lease", () => {
     process.env["LAR_ROOT"] = testRoot;
     const release = acquireHarvestAllLock();
     try {
-      expect(acquireHarvestAllLock).toThrow(/another `lares harvest --all` owns/);
+      expect(acquireHarvestAllLock).toThrow(/another `lares sense pour --all` owns/);
     } finally {
       release();
     }

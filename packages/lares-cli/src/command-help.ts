@@ -1,15 +1,13 @@
 /**
- * command-help — the per-command HELP REGISTRY. Closes the long-standing "TBD" gap where
- * `lares <command> --help` fell back to the one-line summary.
+ * command-help — the per-command HELP REGISTRY behind `lares <command> --help`.
  *
  * Each entry carries `{ synopsis, examples[], flags[] }` and renders EXAMPLES FIRST (clig.dev:
  * "show them first") — operators copy a working line faster than they read a flag table — then the
  * flags, then a `next:` nudge (the git-status idiom: suggest what to run after). A destructive verb
  * names its preview/confirm path in the synopsis so the safe gesture is the discoverable one.
  *
- * The registry is sparse on purpose: a command WITHOUT an entry renders its dispatch summary (passed
- * in by the caller) — the gap narrows command-by-command without a big-bang rewrite. The `corpus`
- * entry is the live source the design meme (lar:///ha.ka.ba/lares/api/lares/corpus) mirrors.
+ * The registry is sparse: a command WITHOUT an entry renders its dispatch summary (passed in by the
+ * caller). The `corpus` entry is the live source the design meme (lar:///ha.ka.ba/lares/api/lares/corpus) mirrors.
  */
 
 export interface CommandHelp {
@@ -29,9 +27,9 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "The ephemeral astral MULTIPALACE — scratch mempalace instances (the `docker run --rm` of memory). " +
       "`run` is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit (success OR error). `open` " +
       "leaves a corpus live to `query` / `keep` / `dissolve`. Every scratch is leak-proofed: " +
-      "`dissolve --orphans` reaps anything an interrupted run left behind. (S0 stands the content " +
-      "stub; S1 the multi-scale-FFZ bands; S2 the structure parse-router → content-free shape vectors; " +
-      "S3 the FORM induction → the corpus's OWN grammar, mined blind and MDL-stopped. Four planes stand.)",
+      "`dissolve --orphans` reaps anything an interrupted run left behind. Four planes stand over the " +
+      "scratch: content · multi-scale-FFZ bands · content-free structure vectors · the corpus's OWN " +
+      "grammar (FORM induction, mined blind and MDL-stopped).",
     examples: [
       "lares corpus run ./notes -- what decisions were made   # open, analyze, dissolve",
       "lares corpus run ./notes --keep                        # ... but land it durable",
@@ -51,43 +49,29 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     next: ["lares corpus ls", "lares sense teardown   # the full nuke, incl. .corpus/*"],
   },
 
-  "palace-teardown": {
-    synopsis:
-      "Tear down the local palace organs + harvest idempotency so a re-pave starts from ZERO — the cure " +
-      "for a partial/interrupted re-pave. Enumerates the SAME organ registry `lares wake --init` stands " +
-      "up (mempalace · structurepalace · formpalace · meshpalace), PLUS the harvest watermark/stage and every " +
-      "`.corpus/*` scratch. PREVIEW by default (touches no disk); `--confirm` removes; REFUSES under a " +
-      "live daemon/MCP/mine (naming each blocker + its SPAWNER) unless `--drain` (graceful quiesce-then-" +
-      "tear) or `--force`.",
-    examples: [
-      "lares sense teardown                    # preview what would be removed",
-      "lares sense teardown --confirm --drain  # quiesce live daemons, then remove (graceful)",
-      "lares sense teardown --confirm          # remove (REFUSES + names blockers if live)",
-      "lares sense teardown --confirm --force  # remove even under a live daemon",
-    ],
-    flags: [
-      "--confirm   actually remove (default is a no-disk preview)",
-      "--drain     gracefully quiesce live daemons (pause hooks + drain) BEFORE tearing",
-      "--force     remove even when a live palace process holds the store / mints daemons",
-    ],
-    next: ["lares mempalace status   # inspect the topology first", "lares sense pour --all   # re-pave after the nuke"],
-  },
-
   mempalace: {
     synopsis:
-      "Observe + gracefully drain the palace daemon/hook/capture topology (alias `lares palace`). The cure " +
-      "for the daemon-spawn whack-a-mole: warm write-daemons spawn ON-DEMAND and the capture/ingest hooks " +
-      "mint one on every dispatch, so killing the children never stops the SPAWNER. `status` surfaces the " +
-      "whole topology (each row: PID · serves-what · SPAWNER · uptime); `quiesce` pauses the hooks FIRST " +
-      "then SIGTERM-drains the daemons to zero (idempotent); `resume` un-pauses.",
+      "THE GUEST COMPARATOR'S DOOR (the sovereign sensorium lives at `lares sense`). The guest ~/.mempalace " +
+      "is the vendored vanilla nakama store — a clean comparator, a SEPARATE causal island the vessel never " +
+      "boots into. `setup` raises it (+ pins hooks.auto_save=false); `harvest` mines transcripts into it " +
+      "through the vendored miner's OWN vanilla path — no lar_* stamps, no sensorium planes; `repave` " +
+      "previews or rebuilds it (quiesce → verify → tear → stand → harvest, idempotent). `status` surfaces " +
+      "the live daemon/hook/capture topology (PID · serves · SPAWNER · uptime); `quiesce` pauses hooks then " +
+      "drains the daemons to zero; `resume` un-pauses.",
     examples: [
+      "lares mempalace setup               # raise the guest ~/.mempalace",
+      "lares mempalace harvest --all       # mine transcripts into the guest (vanilla, no lar_*)",
+      "lares mempalace repave --confirm    # tear + stand the guest clean",
       "lares mempalace status              # the live daemon/hook/capture topology + spawners",
       "lares mempalace quiesce             # pause hooks → drain daemons → confirm zero, then un-pause",
-      "lares mempalace quiesce --hold      # ... but leave the hooks paused (for a migration)",
       "lares mempalace resume              # un-pause the hooks (daemon re-spawns lazily)",
     ],
-    flags: ["--hold   (quiesce) leave the hooks paused after draining (run `resume` when done)"],
-    next: ["lares sense teardown --confirm --drain   # graceful tear", "lares hooks status"],
+    flags: [
+      "--all       (harvest) sweep every transcript source",
+      "--confirm   (repave) rebuild (default previews)",
+      "--hold      (quiesce) leave the hooks paused after draining (run `resume` when done)",
+    ],
+    next: ["lares sense teardown --confirm --drain   # tear the SOVEREIGN planes", "lares hooks status"],
   },
 
   hooks: {
@@ -138,57 +122,32 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     next: ["lares status --palaces", "lares sense pour --all"],
   },
 
-  recall: {
+  sense: {
     synopsis:
-      "Read the verbatim PLACE memory (mempalace) THROUGH the @daemon seat — semantic search, one-drawer " +
-      "fetch, or a drawer list. STAMP FILTERS compose with the search or the list and report honest " +
-      "counts (matched of scanned), never a silent drop: the list path matches the stamped lar_* drawer " +
-      "metadata exactly; the search path reads surface/agent exactly off the source name and re-runs the " +
-      "capture's own gradient reader for voice/band/drift (the search wire returns no drawer metadata).",
+      "THE SOVEREIGN SENSORIUM'S ONE DOOR (the guest comparator lives at `lares mempalace`). READ four " +
+      "verbs with the plane as a `--lens` parameter (search · relate · structure · status), so a new plane " +
+      "needs no new verb. TEND the planes with the lifecycle verbs (recall · capture · pour · teardown · " +
+      "worldline · telemetry · subagents · flow). `pour` is the sovereign harvest — content + planes + " +
+      "worldline in one pass — never the guest miner. Every verb rides the @daemon's composed caps (the " +
+      "single-owner law: nothing opens a store beside the vessel's holder).",
     examples: [
-      "lares sense recall keyhive convergent removal      # semantic search (default 5 hits)",
-      "lares sense recall gate --wing wing_myproj         # scope to one project wing",
-      "lares sense recall verdict --surface codex         # only codex-harness turns",
-      "lares sense recall fork --voice Council --band canon   # filters compose (AND)",
-      "lares sense recall --list --agent a1d5 --wing wing_x__spirits  # one spirit's drawers",
-      "lares sense recall --drift --wing wing_x           # drift-flagged drawers only",
-      "lares sense recall --drawer wing_x_a1b2c3          # one drawer verbatim",
+      "lares sense search \"entrance block\" --lens structure   # hybrid recall over a plane",
+      "lares sense status --lens content                       # wings · rooms · entities · total",
+      "lares sense recall keyhive convergent removal           # stamp-filtered verbatim drawers",
+      "lares sense recall fork --voice Council --band canon     # filters compose (AND)",
+      "lares sense pour --all                                  # the sovereign re-pave (all sources)",
+      "lares sense worldline 0425c035                          # walk a session's spirit tree",
+      "lares sense teardown --confirm --drain                  # tear the planes for a clean re-pave",
     ],
     flags: [
-      "--wing <w>      scope to one project wing (pass the narrowest wing you know)",
-      "--limit <n>     cap results (default 5 search / 20 filtered list)",
-      "--drawer <id>   fetch one drawer verbatim",
-      "--list          list drawers (a stamp filter alone implies it)",
-      "--voice <name>  keep turns a named Voice held (e.g. Council, Ink-Clerk)",
-      "--band <b>      canon | synthesis | provisional | raw (the register ladder)",
-      "--agent <a>     spirit id / worldline-handle prefix, or the exact pet-name",
-      "--surface <s>   claude | codex | copilot-cli | copilot-vscode",
-      "--drift         drift-flagged turns only",
-      "--port <n>      daemon port",
+      "--lens <plane>  content | structure | form | persistence (default content) — READ verbs",
+      "--wing <w>      scope to one project wing",
+      "--voice/--band/--agent/--surface/--drift   recall stamp filters (compose AND, honest counts)",
+      "--drawer <id>   (recall) fetch one drawer verbatim; --list lists drawers",
+      "--all           (pour) sweep every transcript source",
+      "--confirm/--drain/--force   (teardown) remove / quiesce-first / override live holders",
     ],
-    next: ["lares sense worldline <session>   # walk the session's spirit tree", "lares sense telemetry --wing <w>"],
-  },
-
-  worldline: {
-    synopsis:
-      "Walk a session's SPIRIT TREE from the durable worldline edge-DAG: the mempalace knowledge graph " +
-      "read READ-ONLY (prov:Delegation spawn→handback intervals + prov:Communication injects, adapter " +
-      "lares-worldline), joined with the bearing index (<state>/harvest/*.ndjson) for per-agent turn " +
-      "counts + aim/yield. The ∥ mark rides the edge-DAG's own valid-time replay law (the ordering the " +
-      "mesh causal projection is defined by — a sibling reads sequential only when the previous handback " +
-      "replays before its spawn). `diff <A> <B>` refuses honestly: ITC stamps are not queryably " +
-      "persisted (in-memory registry only); the gap needs a persisted ITC read-path.",
-    examples: [
-      "lares sense worldline 0425c035                # session-id prefix — the braid",
-      "lares sense worldline 0425c035-a698-4aeb-a988-1bbf5a19b567.a1d5606cd26b88c82   # a handle walks its run",
-      "lares sense worldline 0425c035 --json         # the structured braid (agents/pipes)",
-      "lares sense worldline tree 0425c035 --palace ~/.mempalace/palace   # explicit palace",
-    ],
-    flags: [
-      "--palace <dir>  palace dir holding knowledge_graph.sqlite3 (default: the resolved palace)",
-      "--json          deterministic JSON braid (nodes carry spawn/handback/turnKey/turns/aim/yield/∥)",
-    ],
-    next: ["lares sense recall --agent <id>   # a spirit's drawers", "lares sense pour   # project fresh edges + bearing turns"],
+    next: ["lares sense status --lens content", "lares mempalace status   # the guest comparator door"],
   },
 };
 
