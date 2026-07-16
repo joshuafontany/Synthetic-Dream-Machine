@@ -16,7 +16,7 @@
 
 import { spawn } from "node:child_process";
 import { mkdirSync, renameSync, writeFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   isCondemned,
@@ -40,13 +40,15 @@ interface ChildLine {
   heads?: string[];
   chunks?: number;
   reason?: string;
+  /** L3 --clean-tail: the torn tail files the child excluded from the clean prefix. */
+  tornTail?: string[];
 }
 
 /** Build a ProbeResult, omitting undefined optionals (exactOptionalPropertyTypes). */
 function result(
   documentId: string,
   status: ProbeStatus,
-  extra: { heads?: readonly string[]; chunks?: number; reason?: string; integrity?: StoreIntegrityReport },
+  extra: { heads?: readonly string[]; chunks?: number; reason?: string; integrity?: StoreIntegrityReport; cleanTail?: ProbeResult["cleanTail"] },
 ): ProbeResult {
   return {
     documentId,
@@ -55,6 +57,7 @@ function result(
     ...(extra.chunks !== undefined ? { chunks: extra.chunks } : {}),
     ...(extra.reason !== undefined ? { reason: extra.reason } : {}),
     ...(extra.integrity !== undefined ? { integrity: extra.integrity } : {}),
+    ...(extra.cleanTail !== undefined ? { cleanTail: extra.cleanTail } : {}),
   };
 }
 
@@ -133,6 +136,90 @@ export async function probeDocLoad(
 /** The node child_process boundary, packaged as the isomorphic `DocLoadProbe`. */
 export function makeChildProcessDocLoadProbe(storageDir: string): DocLoadProbe {
   return { probe: (documentId, o) => probeDocLoad(storageDir, documentId, o ?? {}) };
+}
+
+/**
+ * Spawn the disposable child in --clean-tail mode. Returns its parsed line, or null on any
+ * abort / timeout / non-parseable exit — recovery fails SAFE to null, and the caller
+ * quarantines the whole doc as before. The child loads only framing-clean records, so this
+ * spawn is abort-resistant; the child_process bulkhead still contains any residual poison.
+ */
+function runCleanTailChild(storageDir: string, documentId: string, timeoutMs: number): Promise<ChildLine | null> {
+  const childPath = fileURLToPath(CHILD_URL);
+  return new Promise<ChildLine | null>((resolve) => {
+    const child = spawn(process.execPath, [childPath, storageDir, documentId, "--clean-tail"], {
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let out = "";
+    let settled = false;
+    const finish = (r: ChildLine | null) => { if (!settled) { settled = true; resolve(r); } };
+    const timer = setTimeout(() => { child.kill("SIGKILL"); finish(null); }, timeoutMs);
+    timer.unref?.();
+    child.stdout.on("data", (d) => { out += d.toString(); });
+    child.on("error", () => { clearTimeout(timer); finish(null); });
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      if (settled || code !== 0) return finish(null);
+      const trimmed = out.trim();
+      if (!trimmed) return finish(null);
+      try { finish(JSON.parse(trimmed.split("\n").pop() ?? "{}") as ChildLine); } catch { finish(null); }
+    });
+  });
+}
+
+/**
+ * L3 — clean-tail recovery of a condemned doc. Verifies the doc's clean record-PREFIX loads
+ * in the disposable boundary (the child gates each record through the L5b framing check and
+ * loads only the clean ones), then MOVES the torn tail files aside — a rename into a dated
+ * `quarantine-torn-tail-<day>/` folder, never a delete, so the poisoned records stay for
+ * forensics. With the tail gone, the on-disk store equals the verified prefix and the plane
+ * mounts writable (PROMOTED). Returns a `status:"ok"` verdict carrying the cleanTail summary,
+ * or null when the base record is torn / the prefix rejects (unrecoverable → whole-doc
+ * quarantine). Isomorphic peer to `quarantineDoc` — the node atom behind the mesh recipe hook.
+ */
+export async function recoverCleanTail(
+  storageDir: string,
+  condemned: ProbeResult,
+  opts: ProbeOptions = {},
+): Promise<ProbeResult | null> {
+  const documentId = condemned.documentId;
+  const line = await runCleanTailChild(storageDir, documentId, opts.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+  if (!line || line.ok !== true || !Array.isArray(line.tornTail)) return null;
+
+  const moved = moveTornTailAside(storageDir, documentId, line.tornTail);
+  const kept = line.chunks ?? 0;
+  return result(documentId, "ok", {
+    heads: line.heads ?? [],
+    chunks: kept,
+    reason: `clean-tail: kept ${kept} record(s), moved ${moved.length} torn aside`,
+    cleanTail: { kept, movedAside: moved },
+  });
+}
+
+/**
+ * Relocate a doc's torn tail files into a dated `quarantine-torn-tail-<day>/` folder beside
+ * the store — a rename (never a delete), so the poisoned records survive for forensics while
+ * the store keeps only the verified clean prefix. Returns the destination paths actually
+ * moved. Idempotent-ish: a file already gone (moved by a prior pass) is skipped, and a name
+ * collision suffixes. Pure fs — the tail-move actuator, testable without the spawned child.
+ */
+export function moveTornTailAside(storageDir: string, documentId: string, tornPaths: readonly string[]): string[] {
+  const day = new Date().toISOString().slice(0, 10);
+  const qroot = join(storageDir, `quarantine-torn-tail-${day}`);
+  const moved: string[] = [];
+  for (const src of tornPaths) {
+    try {
+      if (!existsSync(src)) continue;
+      mkdirSync(qroot, { recursive: true });
+      const flat = documentId.slice(0, 2) + "__" + documentId.slice(2) + "__" + basename(src);
+      let dest = join(qroot, flat);
+      let n = 1;
+      while (existsSync(dest)) dest = join(qroot, `${flat}.${n++}`);
+      renameSync(src, dest);
+      moved.push(dest);
+    } catch { /* a tail file that vanished mid-recovery is already gone — fine */ }
+  }
+  return moved;
 }
 
 /**

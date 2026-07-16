@@ -65,17 +65,24 @@ export interface VesselRecipe {
   /** L2: quarantine a condemned doc — the platform MOVES its bytes aside (nodefs rename /
    *  IndexedDB key-drop). Fires only when the probe condemns. */
   quarantineDoc?: (result: ProbeResult) => void;
+  /** L3: attempt a clean-tail recovery of a condemned doc AHEAD of quarantine — the platform
+   *  verifies the doc's clean record-prefix loads in isolation, MOVES only the torn tail aside
+   *  (keeping the verified prefix), and returns the re-verified `status:"ok"` verdict. Returns
+   *  null when the base itself is torn (unrecoverable — the whole-doc quarantine still fires).
+   *  Absent = no recovery; every condemn falls straight to quarantine, as before. */
+  recoverCleanTail?: (result: ProbeResult) => Promise<ProbeResult | null>;
 
   // ── opts ──
   onPhase?:      (p: LarOpenPhase) => void;
 }
 
-/** One social-plane doc's boot outcome — mounted live, or mounted degraded (read-only blank). */
+/** One social-plane doc's boot outcome — mounted live, promoted from a clean-tail recovery,
+ *  or mounted degraded (read-only blank). */
 export interface MountEntry {
   readonly bagId: string;
   readonly documentId: string;
-  readonly status: "mounted" | "degraded";
-  /** names the condemnation when status=degraded. */
+  readonly status: "mounted" | "promoted" | "degraded";
+  /** names the condemnation when status=degraded, or the clean-tail cut when status=promoted. */
   readonly reason?: string;
 }
 
@@ -201,6 +208,17 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
     if (recipe.docLoadProbe) {
       const verdict = await recipe.docLoadProbe.probe(documentId);
       if (isCondemned(verdict)) {
+        // L3 — before condemning the whole doc, try a clean-tail recovery: verify the doc's
+        // clean record-prefix loads in isolation, then drop only the torn tail. A promoted
+        // doc mounts WRITABLE from its verified prefix (a suffix of edits lost, never a tear
+        // kept), and the vessel stays whole. Only a torn base (null) falls through.
+        const promoted = recipe.recoverCleanTail ? await recipe.recoverCleanTail(verdict) : null;
+        if (promoted && !isCondemned(promoted)) {
+          composite.addLayer({ bagId, store: new AutomergeDocStore(await resolve(url as AutomergeUrl), bagId), writable: true });
+          const cut = promoted.cleanTail;
+          entries.push({ bagId, documentId, status: "promoted", reason: cut ? `clean-tail: kept ${cut.kept}, moved ${cut.movedAside.length} aside` : "clean-tail recovery" });
+          return;
+        }
         recipe.quarantineDoc?.(verdict);
         degraded = true;
         entries.push({ bagId, documentId, status: "degraded", reason: `${verdict.status}: ${verdict.reason ?? ""}`.trim() });

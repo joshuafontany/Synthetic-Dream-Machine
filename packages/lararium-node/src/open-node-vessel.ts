@@ -69,7 +69,7 @@ import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir }  from "./
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
-import { makeChildProcessDocLoadProbe, quarantineDoc } from "./doc-load-probe.js";
+import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
 import { loadIdentityArchive } from "./identity-anchors.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -371,6 +371,19 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // mounts read-only, so a torn doc downgrades the vessel to degraded instead of aborting
     // the whole boot.
     docLoadProbe: makeChildProcessDocLoadProbe(storageDir),
+    // L3 — clean-tail recovery, tried AHEAD of quarantine: salvage the doc's verified clean
+    // record-prefix and drop only the torn tail, so a torn-tail doc promotes to a writable
+    // mount (a suffix of edits lost) instead of downgrading the vessel to degraded.
+    recoverCleanTail: async (verdict) => {
+      const promoted = await recoverCleanTail(storageDir, verdict);
+      if (promoted) {
+        console.warn(
+          `[lararium] PROMOTED plane — clean-tail recovered ${verdict.documentId} (${verdict.reason ?? "?"})` +
+          ` → ${promoted.reason ?? "recovered"}; the torn tail sits in quarantine-torn-tail-*`,
+        );
+      }
+      return promoted;
+    },
     quarantineDoc: (verdict) => {
       const moved = quarantineDoc(storageDir, verdict);
       console.warn(

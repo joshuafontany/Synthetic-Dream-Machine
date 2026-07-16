@@ -169,3 +169,23 @@ export function precheckBlobs(documentId: string, blobs: readonly BlobRef[]): St
 
   return { documentId, ok: torn.length === 0, snapshots, incrementals, torn };
 }
+
+/**
+ * L3 clean-tail partition — split ordered records at the FIRST tear. Everything ahead of the
+ * tear is the verified-loadable clean prefix; the torn record and EVERY record after it form
+ * the tail to move aside. A CUTOFF, not a filter: a tear signals the writer died mid-append,
+ * so nothing past it is trusted (a later "clean" record could depend on the lost one). A torn
+ * BASE (first record) yields an empty prefix → unrecoverable, the whole doc stays condemned.
+ * Pure over the supplied ordered blobs — the caller reads them in load order (snapshot(s)
+ * then incrementals), matching what the loader concatenates.
+ */
+export function partitionCleanTail(blobs: readonly BlobRef[]): { keep: BlobRef[]; tornTail: BlobRef[] } {
+  const keep: BlobRef[] = [];
+  const tornTail: BlobRef[] = [];
+  let cut = false;
+  for (const b of blobs) {
+    if (cut || !precheckChunkBytes(b.data).ok) { cut = true; tornTail.push(b); }
+    else keep.push(b);
+  }
+  return { keep, tornTail };
+}

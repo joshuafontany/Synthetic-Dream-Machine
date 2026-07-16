@@ -36,6 +36,10 @@ export interface ProbeResult {
   readonly reason?: string;
   /** the L5b framing report — rides along whenever the pre-check ran. */
   readonly integrity?: StoreIntegrityReport;
+  /** L3: present when a clean-tail recovery ran — the count of clean records kept and the
+   *  torn tail files moved aside. A `status:"ok"` result carrying this names a PROMOTION
+   *  (the doc reconstitutes from its verified clean prefix). */
+  readonly cleanTail?: { readonly kept: number; readonly movedAside: readonly string[] };
 }
 
 /** A doc counts as condemned when anything but a clean load comes back. */
