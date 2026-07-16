@@ -36,7 +36,7 @@ import {
   type TranscriptTurn,
 } from "@lararium/mesh";
 
-import { listSpiritFiles, agentIdOf, runIdOf } from "./subagent-mine.js";
+import { listSpiritFiles, agentIdOf, runIdOf } from "@lararium/mempalace";
 import {
   persistWorldlineEdges,
   closeWorldlineEdges,

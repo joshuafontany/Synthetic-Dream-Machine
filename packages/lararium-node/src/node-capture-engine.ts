@@ -11,7 +11,7 @@ import { makeCaptureEngine, canonicalJsonBytes, defaultCryptoProvider, harvestTu
 import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CaptureFlush, CapturePost, CaptureRecord, CaptureServo, FlushGate } from "@lararium/mesh";
 import type { MoveSkeleton } from "@lararium/tw5/form-layer";
 
-import { stampKapaeSalience } from "@lararium/mempalace";
+import { stampKapaeSalience } from "@lararium/sensorium";
 
 import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";

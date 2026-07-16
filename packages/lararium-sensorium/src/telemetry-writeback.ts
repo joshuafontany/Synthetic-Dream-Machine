@@ -26,11 +26,11 @@ import { harvestTurnGradient, buildPatch, LAR_HV, type TurnHarvest } from "@lara
 export { buildPatch, LAR_HV };
 import { repoRoot } from "@lararium/mesh/node";
 import { isoWholeSeconds } from "./worldline-kg.js";
-import { resolveMempalacePython } from "./spawn-resolve.js";
-import { memorySensoriumContentDir } from "./xdg-base.js";
-import { resolveComputeCapEnv } from "./compute-cap.js";
-import { mineWithServo } from "./mine-retry.js";
-import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
+import { resolveMempalacePython } from "@lararium/mempalace";
+import { memorySensoriumContentDir } from "@lararium/mempalace/xdg-base";
+import { resolveComputeCapEnv } from "@lararium/mempalace";
+import { mineWithServo } from "@lararium/mempalace";
+import { TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 
 
 export interface WritebackResult {

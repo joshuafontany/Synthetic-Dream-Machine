@@ -22,9 +22,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
 import { rewindThenFork, type WorldlineEdgeTriple, type WorldlineEdgeClose, type RewindThenForkResult } from "@lararium/mesh";
-import { resolveMempalacePython } from "./spawn-resolve.js";
-import { resolveComputeCapEnv } from "./compute-cap.js";
-import { memorySensoriumDir } from "./xdg-base.js";
+import { resolveMempalacePython } from "@lararium/mempalace";
+import { resolveComputeCapEnv } from "@lararium/mempalace";
+import { memorySensoriumDir } from "@lararium/mempalace/xdg-base";
 
 /** Raised when python / `kg_io.py` are absent — the caller renders a clean error. */
 export class KgUnavailable extends Error {}

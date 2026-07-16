@@ -4,9 +4,8 @@
  * it carries only `{ surface, pointer, wing, room }` across the boundary.
  */
 
-import {
-  listSpiritFiles, spiritsWing, observeSubagentWorldlines,
-} from "@lararium/mempalace";
+import { listSpiritFiles, spiritsWing } from "@lararium/mempalace";
+import { observeSubagentWorldlines } from "@lararium/sensorium";
 
 import { operatorDid } from "../env.js";
 import { runVerb } from "../verb-call.js";

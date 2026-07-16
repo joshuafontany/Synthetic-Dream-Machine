@@ -60,7 +60,8 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges, orderHandleTurnsToStubs } from "@lararium/mempalace";
+import { withMempalace, resolvePalacePath, orderHandleTurnsToStubs } from "@lararium/mempalace";
+import { writebackWing, TelemetryUnavailable, deriveSubagentEdges } from "@lararium/sensorium";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";

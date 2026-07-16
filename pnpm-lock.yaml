@@ -208,6 +208,9 @@ importers:
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
+      '@lararium/sensorium':
+        specifier: workspace:*
+        version: link:../lararium-sensorium
       '@lararium/tw5':
         specifier: workspace:*
         version: link:../lararium-tw5
@@ -227,6 +230,22 @@ importers:
       '@noble/ed25519':
         specifier: ^3.1.0
         version: 3.1.0
+      tsx:
+        specifier: ^4.23.0
+        version: 4.23.0
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@types/node@26.1.1)(@vitest/browser-playwright@4.1.10)(vite@8.1.4(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.0))
+
+  packages/lararium-sensorium:
+    dependencies:
+      '@lararium/mempalace':
+        specifier: workspace:*
+        version: link:../lararium-mempalace
+      '@lararium/mesh':
+        specifier: workspace:*
+        version: link:../lararium-mesh
+    devDependencies:
       tsx:
         specifier: ^4.23.0
         version: 4.23.0
@@ -273,6 +292,9 @@ importers:
       '@lararium/node':
         specifier: workspace:*
         version: link:../lararium-node
+      '@lararium/sensorium':
+        specifier: workspace:*
+        version: link:../lararium-sensorium
       '@lararium/tw5':
         specifier: workspace:*
         version: link:../lararium-tw5

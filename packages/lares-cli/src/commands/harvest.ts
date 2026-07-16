@@ -30,7 +30,8 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, write
 import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, listSpiritFiles, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/mempalace";
+import { listSpiritFiles } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/sensorium";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";

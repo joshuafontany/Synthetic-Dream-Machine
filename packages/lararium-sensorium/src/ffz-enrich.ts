@@ -15,9 +15,9 @@ import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
-import { resolveMempalacePython } from "./spawn-resolve.js";
-import { memorySensoriumDir } from "./xdg-base.js";
-import { resolveComputeCapEnv } from "./compute-cap.js";
+import { resolveMempalacePython } from "@lararium/mempalace";
+import { memorySensoriumDir } from "@lararium/mempalace/xdg-base";
+import { resolveComputeCapEnv } from "@lararium/mempalace";
 
 /** The per-run enrichment report the py leg prints (worldline_ffz.py enrich). */
 export interface FfzEnrichReport {

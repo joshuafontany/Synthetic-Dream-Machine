@@ -1,0 +1,29 @@
+{
+  "name": "@lararium/sensorium",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The sovereign sensorium — the perception machina (content/structure/form/persistence planes, capture, ffz enrichment, worldline, the lares MCP). Reads the pinned mempalace sidecar through @lararium/mempalace; never federates.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prebuild": "node ../../tools/clean-output.mjs dist",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.0",
+    "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "@lararium/mempalace": "workspace:*",
+    "@lararium/mesh": "workspace:*"
+  }
+}

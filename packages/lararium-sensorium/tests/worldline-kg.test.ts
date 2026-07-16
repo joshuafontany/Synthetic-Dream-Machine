@@ -20,7 +20,7 @@ import {
   kapaeThenFork,
   resolveKgIo,
 } from "../src/worldline-kg.js";
-import { resolveMempalacePython } from "../src/spawn-resolve.js";
+import { resolveMempalacePython } from "@lararium/mempalace";
 
 // ── 1. HERMETIC — fake exec ────────────────────────────────────────────────
 describe("worldline-kg arg/NDJSON building (fake exec)", () => {

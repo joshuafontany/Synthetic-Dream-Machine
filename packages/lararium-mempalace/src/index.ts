@@ -3,11 +3,7 @@ export * from "./mempalace-pool.js";
 export * from "./spawn-resolve.js";
 export * from "./compute-cap.js";
 export * from "./palace-path.js";
-export * from "./telemetry-writeback.js";
-export * from "./ffz-enrich.js";
-export * from "./ffz-orchestrator.js";
-export * from "./worldline-kg.js";
-export * from "./worldline-observe.js";
+// The sovereign sensorium TS surface (ffz · worldline · telemetry) LIFTED to @lararium/sensorium.
 export * from "./subagent-mine.js";
 export * from "./hnsw-repair.js";
 export * from "./mine-retry.js";

@@ -11,7 +11,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { deriveSubagentEdges, observeSubagentWorldlines } from "../src/worldline-observe.js";
 import { resolveKgIo } from "../src/worldline-kg.js";
-import { resolveMempalacePython } from "../src/spawn-resolve.js";
+import { resolveMempalacePython } from "@lararium/mempalace";
 
 /** Build a session transcript dir with one spirit transcript carrying two timestamped turns. */
 function fixture(): { dir: string; transcript: string; run: string; agentId: string; handle: string } {

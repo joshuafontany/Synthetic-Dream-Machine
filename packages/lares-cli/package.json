@@ -18,6 +18,7 @@
     "@lararium/mempalace": "workspace:*",
     "@lararium/mesh": "workspace:*",
     "@lararium/node": "workspace:*",
+    "@lararium/sensorium": "workspace:*",
     "@lararium/tw5": "workspace:*"
   },
   "devDependencies": {

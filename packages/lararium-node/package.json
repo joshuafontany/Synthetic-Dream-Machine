@@ -30,6 +30,7 @@
     "@lararium/keyhive": "workspace:*",
     "@lararium/mempalace": "workspace:*",
     "@lararium/mesh": "workspace:*",
+    "@lararium/sensorium": "workspace:*",
     "@lararium/tw5": "workspace:*",
     "@octokit/rest": "^22.0.1",
     "@types/ws": "^8.18.1",

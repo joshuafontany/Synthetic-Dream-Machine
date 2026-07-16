@@ -65,11 +65,11 @@ import {
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 
-import { resolveMempalacePython, resolveStructurePalaceSpawn } from "./spawn-resolve.js";
-import { memorySensoriumStructureDir, memorySensoriumContentDir } from "./xdg-base.js";
+import { resolveMempalacePython, resolveStructurePalaceSpawn } from "@lararium/mempalace";
+import { memorySensoriumStructureDir, memorySensoriumContentDir } from "@lararium/mempalace/xdg-base";
 import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
-import { mineWithServo } from "./mine-retry.js";
-import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
+import { mineWithServo } from "@lararium/mempalace";
+import { TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 
 // ───────────────────────────────────────────────────────────────────────────
 // Types — the seam shapes (the python I/O is INJECTED, so the run tests pure).
