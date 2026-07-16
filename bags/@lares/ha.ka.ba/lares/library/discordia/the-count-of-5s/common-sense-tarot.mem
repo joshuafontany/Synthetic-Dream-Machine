@@ -30,7 +30,6 @@ Current lar address follows the file path now on disk.
 <<~ ahu #source-text >>
 ```toml iam
 role = "source-text interior — a STRUCTURED PORT (ahu chapters wrap the book text); curated to pono TW5 forms 2026-07-14"
-type = "text/x-memetic-wikitext"
 ```
 
 ```yaml

@@ -46,8 +46,6 @@ export function KukaliWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTre
 
 <<~ ahu #edges >>
 
-
-
 <<~/ahu >>
 
 <<~ &#x0003; >>

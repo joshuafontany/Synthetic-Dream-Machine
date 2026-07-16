@@ -46,8 +46,6 @@ export function PapaloheWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseT
 
 <<~ ahu #edges >>
 
-
-
 <<~/ahu >>
 
 <<~ &#x0003; >>

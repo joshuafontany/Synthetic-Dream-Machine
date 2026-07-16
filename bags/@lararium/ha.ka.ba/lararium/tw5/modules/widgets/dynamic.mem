@@ -46,8 +46,6 @@ export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~ ahu #edges >>
 
-
-
 <<~/ahu >>
 
 <<~ &#x0003; >>

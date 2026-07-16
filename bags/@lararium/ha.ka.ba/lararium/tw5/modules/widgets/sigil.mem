@@ -46,8 +46,6 @@ export function SigilWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTree
 
 <<~ ahu #edges >>
 
-
-
 <<~/ahu >>
 
 <<~ &#x0003; >>

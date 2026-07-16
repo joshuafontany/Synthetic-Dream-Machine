@@ -5,6 +5,7 @@ l-space   = "lararium"
 mana      = 14
 manao     = 13
 manaoio   = 12
+namespace = "&#x0950; &#x0901;"
 register  = "Synthesis"
 retain    = true
 role      = "Sensorium bed manifests — the IaC pattern for Sensorium Palace pours (enacting the top-level Infrastructure-as-Myth pattern integrity): a bed rises from a declared, versioned manifest the way the genesis island rises from its seed; the manifest carries flow · worldline · twins · apertures · predictions, and the trial's three confounds die in the schema rather than in vigilance"

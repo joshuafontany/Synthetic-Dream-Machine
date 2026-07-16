@@ -62,6 +62,14 @@ describe("child iam inheritance (parent-diff)", () => {
     expect(out).toMatch(/```\n\ncontent below/);
   });
 
+  test("an empty child (no iam, no body) holds a SINGLE blank line, never balloons", () => {
+    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: "text/x-memetic-wikitext", text: "" };
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    // sigil · one blank · closer — no three-blank bloat.
+    expect(out).toMatch(/<<~ ahu #kid >>\n\n<<~\/ahu >>/);
+    expect(out).not.toMatch(/<<~ ahu #kid >>\n\n\n/);
+  });
+
   test("derived coordinates (uri-path, file-path) never re-emit on a child", () => {
     const kid: TiddlerFields = {
       title: `${ROOT}#kid`,

@@ -759,7 +759,9 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     } else if (iamBlock) {
       opened = `\n${iamBlock}${rest ? "\n\n" + rest : ""}`;
     } else {
-      opened = `\n\n${rest}`;
+      // An empty child carries no body — leave `opened` bare so the fixed closer supplies
+      // the single blank line; a filled one opens on the sigil-then-blank spacing.
+      opened = rest ? `\n\n${rest}` : "";
     }
     return `<<~ ahu ${slot} >>${opened}\n\n<<~/ahu >>`;
   });
