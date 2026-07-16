@@ -1,5 +1,5 @@
 /**
- * `lares palace-teardown` — completely tear down the local mempalace store and
+ * `lares sense teardown` — completely tear down the local mempalace store and
  * the harvest idempotency state, so a re-pave starts from true zero.
  *
  * This has bitten us: a partial / interrupted re-pave leaves a half-mined chroma
@@ -21,11 +21,11 @@
  * Safety: if live mempalace processes (MCP servers / a running mine) hold the
  * store open, the verb REFUSES (exit conflict) unless `--force` is also given —
  * stop them first, or override. Re-pave after with the full ceremony:
- * `lares wake --init` → `lares harvest --all` → `lares mempalace resume`.
+ * `lares wake --init` → `lares sense pour --all` → `lares mempalace resume`.
  *
- * Usage:  lares palace-teardown                    # preview what would be removed
- *         lares palace-teardown --confirm          # remove it
- *         lares palace-teardown --confirm --force  # remove even under live MCP
+ * Usage:  lares sense teardown                    # preview what would be removed
+ *         lares sense teardown --confirm          # remove it
+ *         lares sense teardown --confirm --force  # remove even under live MCP
  */
 
 import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
@@ -111,7 +111,7 @@ function humanBytes(n: number): string {
 /**
  * Live palace processes that BLOCK a clean teardown — not just the store-HOLDERS
  * (write-daemon / recall MCP / one-shot mine / chroma) but the SPAWNERS too (the
- * ingest hook + its `lares capture/subagents/telemetry` legs): a live spawner
+ * ingest hook + its `lares sense capture/subagents/telemetry` legs): a live spawner
  * re-mints a warm daemon mid-tear and the removed dir refills → ENOTEMPTY. So the
  * refusal broadened from "holders only" to "holders OR spawners", each carrying its
  * OWN spawner so the message can teach kill-the-parent. Best-effort + advisory: a
@@ -158,7 +158,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
         hint: "re-run with --confirm to remove",
       },
       human: () => {
-        console.log("lares palace-teardown — PREVIEW (nothing removed)\n");
+        console.log("lares sense teardown — PREVIEW (nothing removed)\n");
         console.log("  scope: the sovereign memory sensorium — the external guest ~/.mempalace is never touched\n");
         for (const t of targets) {
           const mark = t.exists ? "✗" : "·";
@@ -203,7 +203,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
       },
       data: { liveProcesses: procs.map((p) => ({ pid: p.pid, kind: p.kind, serves: p.serves, spawner: p.spawnerCmd })) },
       human: () => {
-        console.error("lares palace-teardown: REFUSED — live palace processes block a clean tear:");
+        console.error("lares sense teardown: REFUSED — live palace processes block a clean tear:");
         for (const p of procs) console.error(`  ${describeProc(p)}`);
         console.error("\nGraceful cure: `lares mempalace quiesce` (pauses hooks + drains daemons), then re-run.");
         console.error("Or re-run with --drain (quiesce-then-tear), or --confirm --force to override.");
@@ -241,7 +241,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
     },
     ...(ok ? {} : { error: { code: "error", message: `${failed.length} target(s) failed to remove`, ...(culprits.length ? { hint: "a live daemon refilled the dir — run `lares mempalace quiesce`, then re-tear" } : {}) } }),
     human: () => {
-      console.log("lares palace-teardown — TORN DOWN\n");
+      console.log("lares sense teardown — TORN DOWN\n");
       if (drainedInfo) console.log(`  drained: SIGTERM'd ${drainedInfo.drained.length}${drainedInfo.forced.length ? `, SIGKILL'd ${drainedInfo.forced.length}` : ""} holder(s) — ${drainedInfo.quiet ? "quiescent" : "some survived"}.\n`);
       if (!present.length) console.log("  (nothing to remove — already clean)");
       for (const r of removed) console.log(`  ✓ removed  ${r.path}  (${humanBytes(r.bytes)})`);
@@ -256,7 +256,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
       // config-less palace and hooks paused forever (--drain holds them paused).
       console.log("  re-pave ceremony:");
       console.log("    1. lares wake --init        (stand the organs: config.json + hooks.auto_save=false pin)");
-      console.log("    2. lares harvest --all      (the re-pave)");
+      console.log("    2. lares sense pour --all      (the re-pave)");
       console.log("    3. lares mempalace resume   (un-pause the hooks)");
     },
   });

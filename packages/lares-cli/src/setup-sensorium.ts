@@ -1,7 +1,7 @@
 /**
  * setup-sensorium — `lares wake --init`: stand up the SOVEREIGN sensorium organs. Idempotent. A thin
  * CLI wrapper: the logic lives ONCE in @lararium/node's palace-organ registry (`setupPalaceOrgans`),
- * the SAME enumerator `lares palace-teardown` reads — so setup and teardown can never drift over
+ * the SAME enumerator `lares sense teardown` reads — so setup and teardown can never drift over
  * which organs exist.
  *
  * SOVEREIGN ONLY. The guest `~/.mempalace` stands in its own lane (`lares mempalace setup`), raised
@@ -17,7 +17,7 @@
  *      the @meshpalace feed/federation logic lives in the mesh domain.
  *
  * Per-project mining + the lar_* harvest are NOT done here (kept fast + idempotent); they accumulate
- * live via the ingest hook, or run on demand via `lares harvest`.
+ * live via the ingest hook, or run on demand via `lares sense pour`.
  */
 
 export { setupPalaceOrgans as setupSensorium } from "@lararium/node";

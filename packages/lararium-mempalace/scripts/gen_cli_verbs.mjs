@@ -24,15 +24,16 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const CLI_DIST = resolve(HERE, "../../lares-cli/dist/src/bin/lares.js");
 const OUT = join(HERE, "fixtures", "cli-verbs.json");
 
-// The MCP lifecycle tool names (mirror YIN's py `LIFECYCLE_VERBS`) → their CLI spelling. The three
-// sensorium mirrors land on sub-verbs; harvest/recall/worldline mirror at the top level.
+// The MCP lifecycle tool names (mirror YIN's py `LIFECYCLE_VERBS`) → their CLI spelling. After the
+// radical two-door collapse EVERY sovereign lifecycle tool mirrors through the one `sense` door — one
+// host, no top-level twins. `harvest` mirrors the SOVEREIGN pour (`sense pour`), never the guest miner.
 const CLI_FORMS = {
-  harvest:   "harvest",
-  recall:    "recall",
-  status:    "sensorium status",
-  worldline: "worldline",
-  kapae:     "worldline kapae",
-  un_kapae:  "worldline un-kapae",
+  harvest:   "sense pour",
+  recall:    "sense recall",
+  status:    "sense status",
+  worldline: "sense worldline",
+  kapae:     "sense worldline kapae",
+  un_kapae:  "sense worldline un-kapae",
 };
 // The CLI TOP-LEVEL verbs that HOST a mirror — DERIVED from the cli_forms value-heads (single source,
 // never drifts): `sensorium status` → sensorium, `worldline kapae` → worldline, harvest → harvest. The

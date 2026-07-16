@@ -215,7 +215,7 @@ Watch these current weak spots:
 * **Generated files** in `@lararium/tw5/src/generated-*` come from `scripts/`; do not hand-edit unless you intend to replace the generator output.
 * **`pnpm-workspace.yaml` globs `packages/*`.** A directory added there without a `package.json` and source will surface install errors.
 * **Open IDE tabs** may name stale files; trust filesystem scans over editor ghosts.
-* **mempalace stays vendored.** Never edit the `mempalace/` submodule; it rides behind the causal-island boundary. Tune behavior through `~/.mempalace/config.json` (e.g. `hooks.auto_save=false`) and our `@lararium/mempalace` layer. Bumping the `lar_*` enrichment ⇒ bump `lar_hv` in lockstep (`harvest.ts buildPatch` ⟷ `drawer_io.py HARVEST_VERSION`). Run `lares harvest --all` only on a **fresh** palace — re-staging existing drawers under a new `source_file` duplicates them.
+* **mempalace stays vendored.** Never edit the `mempalace/` submodule; it rides behind the causal-island boundary. Tune behavior through `~/.mempalace/config.json` (e.g. `hooks.auto_save=false`) and our `@lararium/mempalace` layer. Bumping the `lar_*` enrichment ⇒ bump `lar_hv` in lockstep (`harvest.ts buildPatch` ⟷ `drawer_io.py HARVEST_VERSION`). Run `lares sense pour --all` only on a **fresh** palace — re-staging existing drawers under a new `source_file` duplicates them.
 
 <<~/ahu >>
 

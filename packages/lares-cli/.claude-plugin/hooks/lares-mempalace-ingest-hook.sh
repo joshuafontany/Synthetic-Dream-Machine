@@ -177,18 +177,18 @@ esac
   # The CLI sends a descriptor only. SQLite remains SQLite all the way to the
   # source cap; file-backed surfaces use their stable live pointer directory.
   if [ "$direct_sqlite" = 1 ]; then
-    "$LARES" capture "$transcript" --wing "$wing" --session-id "$sid" >/dev/null 2>&1
+    "$LARES" sense capture "$transcript" --wing "$wing" --session-id "$sid" >/dev/null 2>&1
   else
-    "$LARES" capture "$stage" --wing "$wing" >/dev/null 2>&1
+    "$LARES" sense capture "$stage" --wing "$wing" >/dev/null 2>&1
   fi
   # Tasked-spirit (sub-agent) verbatim, DISTINCT from the main agent — mines
   # <session>/subagents/agent-*.jsonl into wing_<w>__spirits, named from each
   # handoff (Mask → Pet-Name-by-role), both sides. Reads the ORIGINAL transcript
   # (not the staged copy) to find the subagents/ dir. Non-Claude → no-op.
-  "$LARES" subagents "$transcript" --wing "$wing" >/dev/null 2>&1
+  "$LARES" sense subagents "$transcript" --wing "$wing" >/dev/null 2>&1
   # Gradient readings (lar-telemetry through @admin) on both wings — parent + spirits.
-  "$LARES" telemetry --wing "$wing" >/dev/null 2>&1
-  "$LARES" telemetry --wing "${wing}__spirits" >/dev/null 2>&1
+  "$LARES" sense telemetry --wing "$wing" >/dev/null 2>&1
+  "$LARES" sense telemetry --wing "${wing}__spirits" >/dev/null 2>&1
   # Keep live pointers stable. Removing a shared pointer after one Stop races a
   # simultaneous Stop for the same session; it also creates a growing trail of
   # per-run stage names. One source-scoped directory is the durable live lane.

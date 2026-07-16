@@ -21,11 +21,45 @@
 import { openMemorySensorium, sensoriumLenses } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
+import { cmdHarvest, cmdCapture } from "./harvest.js";
+import { cmdWorldline } from "./worldline.js";
+import { cmdTelemetry } from "./telemetry.js";
+import { cmdSubagents } from "./subagents.js";
+import { cmdPalaceTeardown } from "./palace-teardown.js";
+import { cmdRecall } from "./recall.js";
+import { cmdFlow } from "./flow.js";
 
 const VERBS = ["search", "relate", "structure", "status"] as const;
 type Verb = (typeof VERBS)[number];
 
+/**
+ * The SOVEREIGN sensorium's LIFECYCLE + verbatim verbs — the tend/write/read-verbatim half of the one
+ * door, beside the four plane-READ verbs above. Each OWNS its handler outright (no top-level twin: the
+ * radical collapse routes every sovereign operation through this one door, so `sense` tends the
+ * sovereign lar_* planes and `mempalace` tends the guest comparator — one island per namespace).
+ * `pour` = the sovereign harvest (content + planes + worldline in one pass), NOT the guest miner.
+ * `recall` reads the verbatim drawers (the rich stamp-filter reader); its store-target rides the
+ * @daemon recall verb (a behavior-vs-intent trace is owed — see the CLI notes).
+ */
+const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | number>> = {
+  recall:    cmdRecall,
+  capture:   cmdCapture,
+  pour:      cmdHarvest,
+  teardown:  cmdPalaceTeardown,
+  worldline: cmdWorldline,
+  telemetry: cmdTelemetry,
+  subagents: cmdSubagents,
+  flow:      cmdFlow,
+};
+
 export async function cmdSense(args: ParsedArgs): Promise<number> {
+  // A lifecycle verb tends the plane; drop it from the positional and hand the rest to its owner.
+  const head = args.positional[0];
+  const lifecycle = head ? LIFECYCLE[head] : undefined;
+  if (lifecycle) {
+    return await lifecycle({ ...args, positional: args.positional.slice(1) });
+  }
+
   // `--key value` lands in `options`; `--key` alone lands in `flags`. The lens carries a VALUE.
   const [verb, ...rest] = args.positional;
   const lens = args.options["lens"] ?? "content";
@@ -34,11 +68,14 @@ export async function cmdSense(args: ParsedArgs): Promise<number> {
   if (!verb || !VERBS.includes(verb as Verb)) {
     emit(args, {
       ok: false,
-      error: { code: "usage", message: `name a verb: ${VERBS.join(" · ")}`,
+      error: { code: "usage", message: `name a verb: read (${VERBS.join(" · ")}) or lifecycle (${Object.keys(LIFECYCLE).join(" · ")})`,
                hint: `lares sense search "<query>" --lens <${known.join("|")}>` },
       human: () => {
-        console.error("lares sense — four verbs, the plane as a parameter\n");
-        for (const v of VERBS) console.error(`  lares sense ${v.padEnd(10)} --lens <plane>`);
+        console.error("lares sense — the SOVEREIGN sensorium's one door (the guest lives at `lares mempalace`)\n");
+        console.error("  read (plane as a parameter):");
+        for (const v of VERBS) console.error(`    lares sense ${v.padEnd(10)} --lens <plane>`);
+        console.error("\n  lifecycle (tend the planes):");
+        for (const v of Object.keys(LIFECYCLE)) console.error(`    lares sense ${v}`);
         console.error(`\n  planes: ${known.join(" · ")}`);
       },
     });

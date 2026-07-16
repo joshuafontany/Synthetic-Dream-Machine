@@ -3,7 +3,7 @@
  *
  *   lares node status        NODE HEALTH — bootstrap presence, storage size, port in use. The
  *                            historical `lares status` behavior; pure local inspection, no vm boot.
- *   lares sensorium status   SENSORIUM TAXONOMY — what the Memory sensorium holds. Mirrors the
+ *   lares sense status   SENSORIUM TAXONOMY — what the Memory sensorium holds. Mirrors the
  *                            isomorphic MCP `status` tool (py `content_io` taxonomy). SEATED STUB
  *                            today: the read rides the DEFERRED @daemon-cap-wire.
  *   lares status             muscle-memory ALIAS → `lares node status`.
@@ -30,7 +30,7 @@ const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is 
 
 /**
  * `lares status --palaces` — the palace-organ health table (re-runnable). Reads the SAME registry
- * `lares wake --init` stands up + `lares palace-teardown` removes, so the health view never drifts
+ * `lares wake --init` stands up + `lares sense teardown` removes, so the health view never drifts
  * from what setup/teardown act on. Pure inspection (each organ's cheap probe), no vm boot.
  */
 function cmdStatusPalaces(args: ParsedArgs): number {
@@ -110,12 +110,12 @@ const SENSORIUM_STATUS_STUB =
   "routes them there. For local organ health today, run `lares status --palaces`; for node health, " +
   "`lares node status`.";
 
-/** `lares sensorium status` — the taxonomy mirror of MCP `status`. SEATED STUB (read deferred). */
+/** `lares sense status` — the taxonomy mirror of MCP `status`. SEATED STUB (read deferred). */
 function cmdSensoriumStatus(args: ParsedArgs): number {
   emit(args, {
     ok: false,
     error: { code: "verb-error", message: SENSORIUM_STATUS_STUB, hint: "`lares status --palaces` shows local organ health; the taxonomy lands once the @daemon-cap-wire routes to py content_io." },
-    human: () => { console.error(`lares sensorium status: ${SENSORIUM_STATUS_STUB}`); },
+    human: () => { console.error(`lares sense status: ${SENSORIUM_STATUS_STUB}`); },
   });
   return exitFor("verb-error");
 }
@@ -128,11 +128,11 @@ export async function cmdNode(args: ParsedArgs): Promise<number> {
   return 2;
 }
 
-/** `lares sensorium <subverb>` — the sensorium command group; `status` mirrors the MCP `status` tool. */
+/** `lares sense <subverb>` — the sensorium command group; `status` mirrors the MCP `status` tool. */
 export async function cmdSensorium(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
   if (sub === undefined || sub === "status") return cmdSensoriumStatus(args);
-  console.error(`lares sensorium: unknown subverb "${sub}". Run \`lares sensorium status\`.`);
+  console.error(`lares sense: unknown subverb "${sub}". Run \`lares sense status\`.`);
   return 2;
 }
 

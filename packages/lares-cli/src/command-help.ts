@@ -48,7 +48,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "--all              (dissolve) remove every live corpus",
       "--orphans          (dissolve) reap leaked scratch (interrupted runs, dead owners)",
     ],
-    next: ["lares corpus ls", "lares palace-teardown   # the full nuke, incl. .corpus/*"],
+    next: ["lares corpus ls", "lares sense teardown   # the full nuke, incl. .corpus/*"],
   },
 
   "palace-teardown": {
@@ -60,17 +60,17 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "live daemon/MCP/mine (naming each blocker + its SPAWNER) unless `--drain` (graceful quiesce-then-" +
       "tear) or `--force`.",
     examples: [
-      "lares palace-teardown                    # preview what would be removed",
-      "lares palace-teardown --confirm --drain  # quiesce live daemons, then remove (graceful)",
-      "lares palace-teardown --confirm          # remove (REFUSES + names blockers if live)",
-      "lares palace-teardown --confirm --force  # remove even under a live daemon",
+      "lares sense teardown                    # preview what would be removed",
+      "lares sense teardown --confirm --drain  # quiesce live daemons, then remove (graceful)",
+      "lares sense teardown --confirm          # remove (REFUSES + names blockers if live)",
+      "lares sense teardown --confirm --force  # remove even under a live daemon",
     ],
     flags: [
       "--confirm   actually remove (default is a no-disk preview)",
       "--drain     gracefully quiesce live daemons (pause hooks + drain) BEFORE tearing",
       "--force     remove even when a live palace process holds the store / mints daemons",
     ],
-    next: ["lares mempalace status   # inspect the topology first", "lares harvest --all   # re-pave after the nuke"],
+    next: ["lares mempalace status   # inspect the topology first", "lares sense pour --all   # re-pave after the nuke"],
   },
 
   mempalace: {
@@ -87,14 +87,14 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "lares mempalace resume              # un-pause the hooks (daemon re-spawns lazily)",
     ],
     flags: ["--hold   (quiesce) leave the hooks paused after draining (run `resume` when done)"],
-    next: ["lares palace-teardown --confirm --drain   # graceful tear", "lares hooks status"],
+    next: ["lares sense teardown --confirm --drain   # graceful tear", "lares hooks status"],
   },
 
   hooks: {
     synopsis:
       "The hook-lever on its own: `pause` / `resume` / `status` the capture + ingest hooks by writing / " +
       "removing a marker file the hook scripts check and NO-OP on when present. Lets a migration or a " +
-      "`lares palace-teardown` run WITHOUT daemon-spawn contention. `lares mempalace quiesce` pauses AND " +
+      "`lares sense teardown` run WITHOUT daemon-spawn contention. `lares mempalace quiesce` pauses AND " +
       "drains in one gesture; this verb is the lever alone (suppress minting without touching live daemons).",
     examples: [
       "lares hooks status                 # is minting paused?",
@@ -135,7 +135,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "--admit <file>       join an existing operator PersonaGroup",
       "--claude/--codex/--copilot/--vscode   wire that harness's mempalace MCP + hook",
     ],
-    next: ["lares status --palaces", "lares harvest --all"],
+    next: ["lares status --palaces", "lares sense pour --all"],
   },
 
   recall: {
@@ -146,13 +146,13 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "metadata exactly; the search path reads surface/agent exactly off the source name and re-runs the " +
       "capture's own gradient reader for voice/band/drift (the search wire returns no drawer metadata).",
     examples: [
-      "lares recall keyhive convergent removal      # semantic search (default 5 hits)",
-      "lares recall gate --wing wing_myproj         # scope to one project wing",
-      "lares recall verdict --surface codex         # only codex-harness turns",
-      "lares recall fork --voice Council --band canon   # filters compose (AND)",
-      "lares recall --list --agent a1d5 --wing wing_x__spirits  # one spirit's drawers",
-      "lares recall --drift --wing wing_x           # drift-flagged drawers only",
-      "lares recall --drawer wing_x_a1b2c3          # one drawer verbatim",
+      "lares sense recall keyhive convergent removal      # semantic search (default 5 hits)",
+      "lares sense recall gate --wing wing_myproj         # scope to one project wing",
+      "lares sense recall verdict --surface codex         # only codex-harness turns",
+      "lares sense recall fork --voice Council --band canon   # filters compose (AND)",
+      "lares sense recall --list --agent a1d5 --wing wing_x__spirits  # one spirit's drawers",
+      "lares sense recall --drift --wing wing_x           # drift-flagged drawers only",
+      "lares sense recall --drawer wing_x_a1b2c3          # one drawer verbatim",
     ],
     flags: [
       "--wing <w>      scope to one project wing (pass the narrowest wing you know)",
@@ -166,7 +166,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "--drift         drift-flagged turns only",
       "--port <n>      daemon port",
     ],
-    next: ["lares worldline <session>   # walk the session's spirit tree", "lares telemetry --wing <w>"],
+    next: ["lares sense worldline <session>   # walk the session's spirit tree", "lares sense telemetry --wing <w>"],
   },
 
   worldline: {
@@ -179,16 +179,16 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "replays before its spawn). `diff <A> <B>` refuses honestly: ITC stamps are not queryably " +
       "persisted (in-memory registry only); the gap needs a persisted ITC read-path.",
     examples: [
-      "lares worldline 0425c035                # session-id prefix — the braid",
-      "lares worldline 0425c035-a698-4aeb-a988-1bbf5a19b567.a1d5606cd26b88c82   # a handle walks its run",
-      "lares worldline 0425c035 --json         # the structured braid (agents/pipes)",
-      "lares worldline tree 0425c035 --palace ~/.mempalace/palace   # explicit palace",
+      "lares sense worldline 0425c035                # session-id prefix — the braid",
+      "lares sense worldline 0425c035-a698-4aeb-a988-1bbf5a19b567.a1d5606cd26b88c82   # a handle walks its run",
+      "lares sense worldline 0425c035 --json         # the structured braid (agents/pipes)",
+      "lares sense worldline tree 0425c035 --palace ~/.mempalace/palace   # explicit palace",
     ],
     flags: [
       "--palace <dir>  palace dir holding knowledge_graph.sqlite3 (default: the resolved palace)",
       "--json          deterministic JSON braid (nodes carry spawn/handback/turnKey/turns/aim/yield/∥)",
     ],
-    next: ["lares recall --agent <id>   # a spirit's drawers", "lares harvest   # project fresh edges + bearing turns"],
+    next: ["lares sense recall --agent <id>   # a spirit's drawers", "lares sense pour   # project fresh edges + bearing turns"],
   },
 };
 

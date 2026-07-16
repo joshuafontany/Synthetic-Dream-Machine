@@ -3,8 +3,8 @@
  *
  * SCOPE: the CRDT/wiki-bags layers + the CID'd genesis
  * blobs ONLY. The mempalace nuke-and-pave runs at its own cadence as the Sensorium
- * implementations refine — reach for `lares palace-teardown --confirm` +
- * `lares harvest --all` when that tide comes; this verb never touches the palace.
+ * implementations refine — reach for `lares sense teardown --confirm` +
+ * `lares sense pour --all` when that tide comes; this verb never touches the palace.
  *
  * A thin composer over the standing entities, ordered (invents nothing structural):
  *

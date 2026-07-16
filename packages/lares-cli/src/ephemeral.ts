@@ -3,7 +3,7 @@
  *
  * Witness-spirits, LAR_ROOT sandbox runs, and scratch sessions pollute the rhizome when the
  * palace ingests them as memory. This module reads ONE verdict per session transcript, honored
- * at the three ingest gates (the hook · `lares capture`/`lares harvest` · `lares subagents`),
+ * at the three ingest gates (the hook · `lares sense capture`/`lares sense pour` · `lares sense subagents`),
  * in two grains:
  *
  *   (a) DERIVED — the session's own recorded cwd (its first-line `cwd`, the same row the wing
