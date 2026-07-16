@@ -77,7 +77,7 @@ const NORMALIZER_SCRIPTS: Readonly<Record<string, string>> = {
  */
 function normalizerFor(source: string): string | null {
   const script = NORMALIZER_SCRIPTS[source];
-  return script ? join(larRoot(), "packages", "lararium-mempalace", "scripts", script) : null;
+  return script ? join(larRoot(), "packages", "lararium-sensorium", "scripts", script) : null;
 }
 
 /**

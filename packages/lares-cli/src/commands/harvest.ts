@@ -326,7 +326,7 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
 // to repair. (The sovereign store's index health rides content_io's own chroma upsert.)
 
 
-const COPILOT_SQLITE_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_sqlite_normalize.py");
+const COPILOT_SQLITE_NORM = join(larRoot(), "packages", "lararium-sensorium", "scripts", "copilot_sqlite_normalize.py");
 
 /** One discovered source stream and its explicit routing identity. */
 export interface HarvestEntry {
