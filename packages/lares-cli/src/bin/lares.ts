@@ -25,7 +25,7 @@ import { realpathSync }  from "node:fs";
 import { parseArgs, type ParsedArgs } from "../parse-args.js";
 import { cmdInit }                    from "../commands/init.js";
 import { cmdWake }                    from "../commands/wake.js";
-import { cmdStatus, cmdNode } from "../commands/status.js";
+import { cmdStatus, cmdNode, cmdNodeStop } from "../commands/status.js";
 import { cmdDraft }                   from "../commands/draft.js";
 import { cmdNormalize }               from "../commands/normalize.js";
 import { cmdBag }                     from "../commands/bag.js";
@@ -59,6 +59,7 @@ interface Command {
 
 const COMMANDS: readonly Command[] = [
   { name: "wake",          summary: "Boot ENTRY POINT (idempotent, every awakening): ensure the node up (attach if healthy, start detached if down) + emit a live hydration frame. --install founds the whole stack from a cold pull; --admit FILE joins an existing operator PersonaGroup (own keypair, same group) from a device-admit payload; --init stands up the mempalace palace (init + auto_save=false gate); --claude / --codex / --copilot wire the mempalace MCP + session ingest hook into ~/.claude / ~/.codex / ~/.copilot in each harness's own format; --vscode registers the mempalace MCP (recall) into every present VS Code variant (stable + Insiders, remote + local). All composable + idempotent.", handler: cmdWake },
+  { name: "stop",          summary: "Halt the daemon on the port (graceful SIGTERM → force SIGKILL) — the missing pair to `lares wake`. Pure port-control: no vm boot, no wipe. A free port reads as already-stopped. Fills the gap `reconcile` (stop+serve) and `hooks pause` (capture only) leave open. Also `lares node stop`.", handler: cmdNodeStop },
   { name: "init",          summary: "Bootstrap a new Lararium node (seed identities/circles/sessions/daemon docs).", handler: cmdInit          },
   { name: "act",           summary: "Residency Model ACTION verb (ADD/COPY/MOVE/CLEAR/DROP/LOAD). Run `lares act` for usage.", handler: cmdAct          },
   { name: "ingest",        summary: "Disk→records through the §6 gate: scan + diff (preview) or --apply through the island's INGEST verb.", handler: cmdIngest       },

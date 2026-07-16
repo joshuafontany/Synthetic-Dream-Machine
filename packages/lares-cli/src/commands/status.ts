@@ -121,8 +121,30 @@ function cmdSensoriumStatus(args: ParsedArgs): number {
 export async function cmdNode(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
   if (sub === undefined || sub === "status") return cmdNodeStatus(args);
-  console.error(`lares node: unknown subverb "${sub}". Run \`lares node status\`.`);
+  if (sub === "stop") return cmdNodeStop(args);
+  console.error(`lares node: unknown subverb "${sub}". Run \`lares node status\` or \`lares node stop\`.`);
   return 2;
+}
+
+/**
+ * `lares node stop` — halt the daemon on the port (graceful → force), the missing pair to
+ * `lares wake`. Pure port-control (no vm boot, no wipe): SIGTERM the incumbent, escalate to
+ * SIGKILL if it lingers, and report which. A free port reads as already-stopped, not an error.
+ * Fills the lifecycle gap that `reconcile` (stop+serve) and `hooks pause` (capture only) leave open.
+ */
+export async function cmdNodeStop(args: ParsedArgs): Promise<number> {
+  const port = larPort();
+  const r = await stopIncumbent(port);
+  emit(args, {
+    ok: true,
+    data: { port, stopped: r.stopped, forced: r.forced },
+    human: () => console.log(
+      r.stopped
+        ? `[lares] stopped the daemon on :${port} (${r.forced ? "forced — SIGKILL" : "graceful — SIGTERM"})`
+        : `[lares] :${port} already free — no daemon to stop`,
+    ),
+  });
+  return 0;
 }
 
 /** `lares sense <subverb>` — the sensorium command group; `status` mirrors the MCP `status` tool. */
