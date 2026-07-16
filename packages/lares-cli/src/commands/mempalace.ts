@@ -336,7 +336,7 @@ function printHelp(): void {
   console.log("  resume              un-pause the hooks (the warm daemon re-spawns lazily on next use)");
   console.log("\n  superset: ANY other subverb passes through to the vendored CLI against the guest palace —");
   console.log("            `lares mempalace search <q>` · `compress` · `sweep` · `hallways` · `<verb> --help` · …");
-  console.log("            (run `lares mempalace --help-nakama` for the vendored command list).");
+  console.log("            (run `lares mempalace --help-mempalace` for the vendored command list).");
   console.log("\n  lane law: `lares mempalace *` touches ONLY the guest ~/.mempalace comparator;");
   console.log("            `lares sense *` touches ONLY the sovereign sensorium.");
   console.log("\nThe status output teaches kill-the-spawner-not-the-children; quiesce is idempotent.");
@@ -344,8 +344,8 @@ function printHelp(): void {
 
 export async function cmdMempalace(args: ParsedArgs): Promise<number> {
   const verb = args.positional[0];
-  // `--help-nakama` (or `help nakama`) surfaces the vendored CLI's OWN top-level help through our door.
-  if (args.flags["help-nakama"] === true || (verb === "help" && args.positional[1] === "nakama")) {
+  // `--help-mempalace` (or `help mempalace`) surfaces the vendored CLI's OWN top-level help through our door.
+  if (args.flags["help-mempalace"] === true || (verb === "help" && args.positional[1] === "mempalace")) {
     const mp = resolveMempalaceExe();
     try { execFileSync(mp, ["--palace", guestPalace(), "--help"], { stdio: "inherit" }); return 0; }
     catch (e) { const c = (e as { status?: number }).status; return typeof c === "number" ? c : 1; }
