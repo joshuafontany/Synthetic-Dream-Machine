@@ -66,7 +66,7 @@ import {
 import { repoRoot } from "@lararium/mesh/node";
 
 import { resolveMempalacePython, resolveStructurePalaceSpawn } from "./spawn-resolve.js";
-import { memorySensoriumStructureDir } from "./xdg-base.js";
+import { memorySensoriumStructureDir, memorySensoriumContentDir } from "./xdg-base.js";
 import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
@@ -529,6 +529,9 @@ interface PyContext {
   readonly DRAWER_IO: string;
   readonly submoduleRoot: string;
   readonly pyEnv: NodeJS.ProcessEnv;
+  /** The sovereign content plane every drawer_io read/write NAMES — drawer_io refuses an unnamed
+   *  palace (it would reach the guest, then no-op after a pave). One value, every FFZ leg. */
+  readonly contentPalace: string;
 }
 
 /** Resolve the python + drawer_io.py + PYTHONPATH (mirrors telemetry-writeback's setup). */
@@ -539,14 +542,14 @@ function pyContext(): PyContext {
   if (!existsSync(DRAWER_IO)) throw new TelemetryUnavailable(`drawer_io.py missing at ${DRAWER_IO}`);
   const submoduleRoot = join(repoRoot, "mempalace");
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
-  return { PY, DRAWER_IO, submoduleRoot, pyEnv };
+  return { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace: memorySensoriumContentDir() };
 }
 
 /** Default {@link EmbeddingsReader} — `drawer_io.py embeddings --wing W` (CONTENT plane). */
 export function pythonEmbeddingsReader(wing: string): DrawerVector[] {
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
+  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const out = mineWithServo("drawer-io-embeddings", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, "embeddings", ...(wing ? ["--wing", wing] : [])], {
+    execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "embeddings", ...(wing ? ["--wing", wing] : [])], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -593,9 +596,9 @@ function parseFrontier(handle: string | null | undefined): string | undefined {
  * not wing-scoped); the orchestrator joins per session on the content readback's verbatim_sha.
  */
 export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
+  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const out = mineWithServo("drawer-io-form-embeddings", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, "form-embeddings"], {
+    execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "form-embeddings"], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -641,9 +644,9 @@ export function pythonStructureEmbeddingsReader(_wing: string): Map<string, read
 
 /** Default {@link ClusterReader} — `drawer_io.py cluster --wing W` (Theme band). */
 export function pythonClusterReader(wing: string): ClusterReading | null {
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
+  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const out = mineWithServo("drawer-io-cluster", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, "cluster", ...(wing ? ["--wing", wing] : [])], {
+    execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "cluster", ...(wing ? ["--wing", wing] : [])], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -658,12 +661,12 @@ export function pythonPatchWriter(
   patches: ReadonlyArray<{ readonly id: string; readonly patch: Record<string, string | number> }>,
 ): number {
   if (patches.length === 0) return 0;
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv } = pyContext();
+  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const pf = join(tmpdir(), `ffz-orchestrator-patch-${process.pid}.ndjson`);
   writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
   try {
     const out = mineWithServo("drawer-io-apply", (timeoutMs) =>
-      execFileSync(PY, [DRAWER_IO, "apply", pf], {
+      execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "apply", pf], {
         cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
         timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
       }),
