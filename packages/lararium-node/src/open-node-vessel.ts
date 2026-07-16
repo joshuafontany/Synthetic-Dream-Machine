@@ -19,7 +19,7 @@ import { join }                         from "path";
 import type { Server }                  from "node:http";
 import type { DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import { Repo }                         from "@automerge/automerge-repo";
-import { NodeFSStorageAdapter }         from "@automerge/automerge-repo-storage-nodefs";
+import { DurableNodeFSStorageAdapter } from "./durable-storage-adapter.js";
 import { NodeWSServerAdapter }          from "@automerge/automerge-repo-network-websocket";
 import type { WebSocketServer }         from "isomorphic-ws";
 import type {
@@ -207,7 +207,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   emit("boot");
 
   // ── 1. Repo — NodeFS storage + WebSocket relay behind the DaemonAuthGate ─────
-  const storage = new NodeFSStorageAdapter(storageDir);
+  const storage = new DurableNodeFSStorageAdapter(storageDir);
   const authGate = new DaemonAuthGate(wss);
   const network  = new ListeningWSServerAdapter(authGate as unknown as typeof wss);
   const peerIdentifierMap = new Map<string, string>();

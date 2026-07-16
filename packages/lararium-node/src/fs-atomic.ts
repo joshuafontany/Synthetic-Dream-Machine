@@ -15,7 +15,38 @@
  */
 
 import { writeFileSync, renameSync, rmSync, openSync, fsyncSync, closeSync } from "node:fs";
+import { open, rename, rm } from "node:fs/promises";
 import { dirname } from "node:path";
+
+/**
+ * Async sibling of `atomicWriteFileSync` — the same temp → fsync → rename → fsync-dir
+ * discipline over `fs.promises`, so a hot write path (the CRDT storage adapter's per-chunk
+ * `save`) stays off the sync-blocking calls while still landing every byte durably. A
+ * `FileHandle.sync()` flushes the payload before the rename exposes it; the directory sync
+ * persists the rename's dirent. Same crash-atomicity guarantee, non-blocking shape.
+ */
+export async function atomicWriteFile(path: string, data: string | Uint8Array): Promise<void> {
+  const tmp = `${path}.${process.pid}.tmp`;
+  try {
+    const fh = await open(tmp, "w");
+    try {
+      await fh.writeFile(data);
+      await fh.sync();                 // flush the payload BEFORE the rename exposes it
+    } finally {
+      await fh.close();
+    }
+    await rename(tmp, path);           // atomic pointer swap
+    // fsync the DIRECTORY so the rename dirent survives a crash. Best-effort — rejects on
+    // some platforms (e.g. Windows), where the filesystem already lands the rename durably.
+    try {
+      const dfd = await open(dirname(path), "r");
+      try { await dfd.sync(); } finally { await dfd.close(); }
+    } catch { /* platform without dir-fsync — rename durability handled by the fs */ }
+  } catch (err) {
+    await rm(tmp, { force: true });    // never leave a stranded temp on failure
+    throw err;
+  }
+}
 
 /** Atomically + durably write `data` to `path` (temp → fsync → rename → fsync-dir). */
 export function atomicWriteFileSync(path: string, data: string | Uint8Array): void {

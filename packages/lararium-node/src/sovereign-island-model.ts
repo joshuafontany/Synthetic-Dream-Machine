@@ -4,7 +4,7 @@
  * The lifecycle itself lives in @lararium/tw5 `runSovereignKernel` — ONE flow
  * both vessels compose. This file supplies only the node platform pieces:
  *   - transport : worker_threads parentPort (.postMessage / .on("message"))
- *   - storage   : NodeFSStorageAdapter (driven by manifest IslandStorageConfig)
+ *   - storage   : DurableNodeFSStorageAdapter (crash-atomic; driven by manifest IslandStorageConfig)
  *                 or in-memory when no storage config is present
  *   - ready     : omitted — the node worker has no WASM-load handshake
  *
@@ -21,7 +21,7 @@
  */
 
 import { parentPort } from "worker_threads";
-import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
+import { DurableNodeFSStorageAdapter } from "./durable-storage-adapter.js";
 import {
   runSovereignKernel,
   type IslandHostSeam,
@@ -37,7 +37,7 @@ import { casDirFromIslandStorageDir, readCasBlobFromFs } from "./node-cas.js";
 
 function _buildStorage(cfg: IslandStorageConfig | undefined): StorageAdapterInterface | undefined {
   if (!cfg || cfg.type === "memory") return undefined;
-  if (cfg.type === "nodefs") return new NodeFSStorageAdapter(cfg.dir);
+  if (cfg.type === "nodefs") return new DurableNodeFSStorageAdapter(cfg.dir);
   return undefined;
 }
 
