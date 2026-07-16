@@ -688,11 +688,28 @@ function fmtNamespaceEntities(v: string): string {
  *  Machine telemetry (`lar_*` — parse grades, lar-telemetry projections) NEVER
  *  re-emits: sensor readings stay off the operator's TOML (map never fuses to
  *  territory). */
-function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
+/** Field-value equality across the string | string[] carrier shapes (undefined never matches). */
+function sameFieldValue(a: TiddlerFields[string] | undefined, b: TiddlerFields[string] | undefined): boolean {
+  if (a === undefined || b === undefined) return false;
+  if (Array.isArray(a) || Array.isArray(b)) {
+    const aa = Array.isArray(a) ? a : [a];
+    const bb = Array.isArray(b) ? b : [b];
+    return aa.length === bb.length && aa.every((x, i) => x === bb[i]);
+  }
+  return a === b;
+}
+
+// `parentFields`, when present, drives child INHERITANCE: a child writes a field ONLY when it
+// DIFFERS from the parent's (or the parent lacks it). A field that matches the parent floats down
+// silently — the author sees it once, at the level that set it, never re-stamped on every fragment.
+function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFields?: TiddlerFields): string {
   const keys = Object.keys(fields).sort().filter((k) => {
     if (deny.has(k) || k.charAt(0) === "$" || k.startsWith("lar_")) return false;
     const v = fields[k];
-    return !(v === undefined || v === null || v === "" || (Array.isArray(v) && v.length === 0));
+    if (v === undefined || v === null || v === "" || (Array.isArray(v) && v.length === 0)) return false;
+    // Inherited-and-matching → skip (write only what the child changes from its parent).
+    if (parentFields && sameFieldValue(v, parentFields[k])) return false;
+    return true;
   });
   if (keys.length === 0) return "";
   const pad = Math.max(...keys.map((k) => k.length));
@@ -712,15 +729,16 @@ const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+)\s*>>/g;
  * Quoted markers (fenced/inline-code) stay verbatim — the operator SHOWS
  * the grammar there, the recompose never expands inside the mask.
  */
-function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: string, text: string): string {
+function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: string, text: string, parentFields: TiddlerFields): string {
   const mask = fencedSpans(text);
   return text.replace(KAHEA_AHU_REF_RE, (marker, slot: string, offset: number) => {
     if (inMask(mask, offset)) return marker;
     const slotPath = composeSlotPath(fragmentPrefix, slot);
     const child = reader(rootUri + slotPath);
     if (!child) return marker;   // missing child: keep the marker — honest residue, never invented bytes
-    const iam   = emitIamToml(child, CHILD_IAM_DENY);
-    const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""));
+    // Diff the child against ITS parent; recurse with the child as the next level's parent.
+    const iam   = emitIamToml(child, CHILD_IAM_DENY, parentFields);
+    const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child);
     const pre   = typeof child["preamble"]  === "string" ? child["preamble"]  : "";
     const post  = typeof child["postamble"] === "string" ? child["postamble"] : "";
     const body  = stripEdgeNewlines(
@@ -749,9 +767,9 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += `<<~ ${str("namespace")}${sohCode} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
-  out += expandRefs(reader, memeUri, "", str("header-text"));
+  out += expandRefs(reader, memeUri, "", str("header-text"), f);
   out += "<<~ &#x0002; >>\n\n";
-  out += expandRefs(reader, memeUri, "", String(f.text ?? ""));
+  out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   out += "\n\n<<~ &#x0003; >>\n\n<<~ &#x0004; -> ? >>\n";
   // The EOT→postamble seam normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
