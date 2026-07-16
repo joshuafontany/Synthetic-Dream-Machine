@@ -10,12 +10,13 @@
  * and removes only on `--confirm`.
  *
  * Targets (resolved, never ambient) — the SOVEREIGN memory sensorium only; the external guest
- * ~/.mempalace (a separate causal island) is NEVER touched:
- *   - the contentpalace store     larContentDir (<memory>/content)   (the sovereign verbatim content store — caller-vector)
- *   - the structurepalace store   larStructurePalaceDir (~/.lares/.structurepalace)    (the memory-ast-unfolding — a second mempalace instance)
- *   - the formpalace store  larFormPalaceDir (~/.lares/.formpalace)  (the living-grammar FORM-vector store — a third mempalace instance; nuke-or-the-re-pave half-paves stale form-vectors keyed by verbatim_sha)
- *   - the harvest watermark ~/.lares/harvest                        (lar_hv idempotency state.json)
- *   - the harvest stage     ~/.lares/harvest-stage                  (normalized transcript copies)
+ * ~/.mempalace (a separate causal island) stands untouched. Every plane hangs off the one
+ * sensorium root (<memory> = memorySensoriumDir()), so the tear names sibling dirs, never scattered homes:
+ *   - the content plane      <memory>/content       (holds the verbatim drawers — the caller-vector store)
+ *   - the structure plane    <memory>/structure     (holds each turn's AST, keyed by structural hash)
+ *   - the form plane         <memory>/form          (holds the living-grammar move-vectors, keyed by verbatim_sha)
+ *   - the harvest watermark  <harvest>              (carries the lar_hv idempotency state.json)
+ *   - the harvest stage      <harvest-stage>        (carries the normalized transcript copies)
  *
  * Safety: if live mempalace processes (MCP servers / a running mine) hold the
  * store open, the verb REFUSES (exit conflict) unless `--force` is also given —
@@ -44,8 +45,8 @@ interface Target {
 
 const ORGAN_LABEL: Readonly<Record<string, string>> = {
   mempalace:  "palace store (chroma + config + entities + locks + worldline-KG sqlite)",
-  structurepalace:  "structurepalace (memory-ast-unfolding — a second mempalace instance)",
-  formpalace: "formpalace (living-grammar FORM-vector store — a third mempalace instance)",
+  structurepalace:  "structure plane (unfolds each turn's AST under the sensorium root)",
+  formpalace: "form plane (holds the living-grammar move-vectors under the sensorium root)",
   meshpalace: "mesh sensorium (the federation tree — #has who/authority/flow)",
   "mesh:who": "mesh/who sensorium (identity/presence)",
   "mesh:authority": "mesh/authority sensorium (caps/keyhive)",
