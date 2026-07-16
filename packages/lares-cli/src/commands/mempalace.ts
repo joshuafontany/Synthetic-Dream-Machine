@@ -28,7 +28,10 @@
  * system is a clean no-op) · pidfile-less (the live process table is the authority).
  */
 
-import { initGuestMempalace, guestMempalaceOrgan, organHealthy } from "@lararium/node";
+import { execFileSync } from "node:child_process";
+import { homedir } from "node:os";
+import { join } from "node:path";
+import { initGuestMempalace, guestMempalaceOrgan, organHealthy, resolveMempalaceExe } from "@lararium/node";
 import { livePalaceProcs, fmtUptime, type PalaceProc, type ProcKind } from "../palace-procs.js";
 import { hookPauseState, pauseHooks, resumeHooks } from "../hook-pause.js";
 import { portHolderPids } from "../port-control.js";
@@ -37,6 +40,38 @@ import { cmdMempalaceHarvest } from "./mempalace-harvest.js";
 import { cmdMempalaceRepave } from "./mempalace-repave.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
+
+/** The guest palace dir — env-redirect-free, the same value the harvest lane names. */
+function guestPalace(): string {
+  return join(homedir(), ".mempalace", "palace");
+}
+
+/** Re-serialize a parsed tail back to argv for the nakama CLI (positional, then --key value, then --flag). */
+function serializeTail(a: ParsedArgs): string[] {
+  const out: string[] = [...a.positional];
+  for (const [k, v] of Object.entries(a.options)) out.push(`--${k}`, v);
+  for (const [k, v] of Object.entries(a.flags)) out.push(v ? `--${k}` : `--no-${k}`);
+  return out;
+}
+
+/**
+ * The SUPERSET passthrough — any nakama subverb we do not wrap runs against the GUEST palace, so
+ * `lares mempalace <verb>` is a true superset of the vendored `mempalace <verb>` (search · compress ·
+ * sweep · sync · repair · hallways · wake-up · … and their `--help`). Streams the nakama's own stdio
+ * through (stdio: inherit); the exit code is the nakama's. This is why our surface can retire the
+ * nakama's live MCP — nothing the vendored CLI does is unreachable through this door.
+ */
+function passthroughGuest(verb: string, inner: ParsedArgs): number {
+  const mp = resolveMempalaceExe();
+  const argv = ["--palace", guestPalace(), verb, ...serializeTail(inner)];
+  try {
+    execFileSync(mp, argv, { stdio: "inherit" });
+    return 0;
+  } catch (e) {
+    const code = (e as { status?: number }).status;
+    return typeof code === "number" ? code : 1;
+  }
+}
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
@@ -299,13 +334,22 @@ function printHelp(): void {
   console.log("  status              live topology: every daemon/sidecar/mine/hook-leg + its SPAWNER");
   console.log("  quiesce [--hold]    graceful stop-the-world: pause hooks → drain daemons → confirm zero");
   console.log("  resume              un-pause the hooks (the warm daemon re-spawns lazily on next use)");
-  console.log("\n  lane law: `mempalace harvest` writes ONLY the guest ~/.mempalace comparator;");
-  console.log("            `lares harvest` / `capture` write ONLY the sovereign sensorium.");
+  console.log("\n  superset: ANY other subverb passes through to the vendored CLI against the guest palace —");
+  console.log("            `lares mempalace search <q>` · `compress` · `sweep` · `hallways` · `<verb> --help` · …");
+  console.log("            (run `lares mempalace --help-nakama` for the vendored command list).");
+  console.log("\n  lane law: `lares mempalace *` touches ONLY the guest ~/.mempalace comparator;");
+  console.log("            `lares sense *` touches ONLY the sovereign sensorium.");
   console.log("\nThe status output teaches kill-the-spawner-not-the-children; quiesce is idempotent.");
 }
 
 export async function cmdMempalace(args: ParsedArgs): Promise<number> {
   const verb = args.positional[0];
+  // `--help-nakama` (or `help nakama`) surfaces the vendored CLI's OWN top-level help through our door.
+  if (args.flags["help-nakama"] === true || (verb === "help" && args.positional[1] === "nakama")) {
+    const mp = resolveMempalaceExe();
+    try { execFileSync(mp, ["--palace", guestPalace(), "--help"], { stdio: "inherit" }); return 0; }
+    catch (e) { const c = (e as { status?: number }).status; return typeof c === "number" ? c : 1; }
+  }
   if (!verb || verb === "help" || (args.flags["help"] && !verb)) {
     printHelp();
     return verb ? 0 : 2;
@@ -321,7 +365,7 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
     case "quiesce": return await cmdQuiesce(inner);
     case "resume":  return cmdResume(inner);
     default:
-      console.error(`lares mempalace: unknown verb "${verb}". Run \`lares mempalace help\` for the list.`);
-      return 2;
+      // The superset: an unwrapped verb IS a nakama subverb — pass it through to the guest palace.
+      return passthroughGuest(verb, inner);
   }
 }
