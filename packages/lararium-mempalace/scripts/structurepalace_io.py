@@ -46,7 +46,7 @@ mirrors kg_io's raw-sqlite-beside-chroma idiom) keeps the turn_key → structura
 since chroma cannot where-filter inside a JSON provenance list.
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace ~/.lares/.structurepalace
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace <data>/sensoriums/memory/structure
 """
 from __future__ import annotations
 
@@ -539,11 +539,19 @@ def _serve(palace_path: str) -> None:
 # the same graceful path the absent form collection takes.
 
 def _default_structurepalace_dir() -> str:
-    """The canonical `.structurepalace` palace dir — `$LAR_ROOT/.structurepalace` (isolated instances)
-    or `~/.lares/.structurepalace`. Mirrors the TS `larStructurePalaceDir()` (vessel-paths.ts) so the
-    orchestrator and the holder agree on the dir without a cross-package import."""
-    root = os.environ.get("LAR_ROOT") or os.path.join(os.path.expanduser("~"), ".lares")
-    return os.path.join(root, ".structurepalace")
+    """The canonical structure plane — `<data>/sensoriums/memory/structure`, where `<data>` resolves the
+    SAME XDG rule the TS `larDataHome()` (xdg-base.ts) holds: `LAR_ROOT/data` for isolated instances,
+    else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`). The two views stay byte-identical by
+    convention, guarded by test_structure_default_mirrors_xdg. A caller still passes `--palace`
+    (designation carries the authority); this default only keeps an unpassed holder landing true, never
+    reaching the pre-XDG `~/.lares/.structurepalace` scatter it used to."""
+    lar_root = os.environ.get("LAR_ROOT")
+    if lar_root:
+        data_home = os.path.join(lar_root, "data")
+    else:
+        xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
+        data_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
+    return os.path.join(data_home, "sensoriums", "memory", "structure")
 
 
 def _structure_embeddings(palace_path: str, out) -> int:
@@ -595,7 +603,7 @@ def main() -> None:
         "structure-embeddings",
         help="batch readback of structure vectors keyed by verbatim_sha (the FFZ 3rd plane)",
     )
-    se.add_argument("--palace", default="", help="the .structurepalace dir (default: $LAR_ROOT/~ .lares/.structurepalace)")
+    se.add_argument("--palace", default="", help="the structure plane dir (default: <data>/sensoriums/memory/structure)")
     se.set_defaults(fn=cmd_structure_embeddings)
     args = ap.parse_args()
     args.fn(args)

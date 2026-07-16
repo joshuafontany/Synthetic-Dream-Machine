@@ -60,3 +60,22 @@ export function memorySensoriumContentDir(): string {
 export function memorySensoriumDir(): string {
   return join(larDataHome(), "sensoriums", "memory");
 }
+
+/**
+ * The sovereign li planes beside the content plane — `<memory>/{structure,form,persistence}` — and the
+ * worldline stores at `<memory>/worldline`. Every reader NAMES the plane it reads; an unpassed path
+ * reaches the wrong store silently (the same disease {@link memorySensoriumContentDir} names). The
+ * Python holders default to these SAME paths, so a caller that omits `--palace` still lands true — but
+ * the caller names it regardless, so designation carries the authority.
+ */
+export function memorySensoriumStructureDir(): string {
+  return join(memorySensoriumDir(), "structure");
+}
+
+export function memorySensoriumFormDir(): string {
+  return join(memorySensoriumDir(), "form");
+}
+
+export function memorySensoriumPersistenceDir(): string {
+  return join(memorySensoriumDir(), "persistence");
+}

@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from "vitest";
 import { mkdtempSync, rmSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { larDataHome, mempalaceContentParent } from "../src/xdg-base.js";
+import { larDataHome, mempalaceContentParent, memorySensoriumStructureDir, memorySensoriumFormDir, memorySensoriumPersistenceDir } from "../src/xdg-base.js";
 
 /**
  * xdg-base is the ONE cycle-free source both `@lararium/node`'s vessel-paths.ts (`larMempalaceDir`)
@@ -50,6 +50,29 @@ describe("xdg-base (the shared XDG resolver)", () => {
     set("HOME", "/home/tester");
     set("USERPROFILE", "/home/tester");
     expect(larDataHome()).toBe(join("/home/tester", ".local", "share", "lares"));
+  });
+
+  // The li planes must resolve the SAME string the Python holders' defaults do
+  // (structurepalace_io._default_structurepalace_dir + siblings) — capture writes and FFZ recall
+  // otherwise split across a stale pre-XDG dir (the structure-plane divergence healed 2026-07-15).
+  it("memorySensoriumStructureDir: <XDG>/lares/sensoriums/memory/structure — mirrors the py default", () => {
+    set("LAR_ROOT", undefined);
+    set("XDG_DATA_HOME", "/x/data");
+    expect(memorySensoriumStructureDir()).toBe(join("/x/data", "lares", "sensoriums", "memory", "structure"));
+  });
+
+  it("memorySensoriumFormDir / PersistenceDir: siblings under the one root", () => {
+    set("LAR_ROOT", undefined);
+    set("XDG_DATA_HOME", "/x/data");
+    const root = join("/x/data", "lares", "sensoriums", "memory");
+    expect(memorySensoriumFormDir()).toBe(join(root, "form"));
+    expect(memorySensoriumPersistenceDir()).toBe(join(root, "persistence"));
+  });
+
+  it("memorySensoriumStructureDir: isolated LAR_ROOT roots under <root>/data (the py branch)", () => {
+    set("LAR_ROOT", "/iso");
+    set("XDG_DATA_HOME", undefined);
+    expect(memorySensoriumStructureDir()).toBe(join("/iso", "data", "sensoriums", "memory", "structure"));
   });
 
   it("mempalaceContentParent: always the upstream-default ~/.mempalace (never the tree)", () => {

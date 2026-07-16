@@ -425,3 +425,37 @@ def test_put_edit_same_uuid_retracts_the_old_structure_tally(tmp_path):
     assert not store.get(H2).get("tombstoned")
     assert store.get(H1)["count"] == 0
     assert store.get(H1).get("tombstoned") == stamp
+
+
+# --- the XDG parity guard (structure-plane path divergence, healed 2026-07-15) -----------
+# The structure default MUST resolve the SAME XDG rule the TS `larDataHome()` (xdg-base.ts) holds,
+# or capture writes one dir while FFZ recall reads another (the write-only-store disease). The
+# identity-home move once broke this silently; this test pins the two views byte-identical by rule.
+
+def test_structure_default_mirrors_xdg(monkeypatch):
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.setenv("XDG_DATA_HOME", "/x/data")
+    assert ap._default_structurepalace_dir() == "/x/data/lares/sensoriums/memory/structure"
+
+
+def test_structure_default_honors_xdg_unset(monkeypatch):
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    expect = os.path.join(os.path.expanduser("~"), ".local", "share",
+                          "lares", "sensoriums", "memory", "structure")
+    assert ap._default_structurepalace_dir() == expect
+
+
+def test_structure_default_isolated_instance(monkeypatch):
+    # LAR_ROOT (test harness / staged pairs) roots under <root>/data — the SAME branch TS takes.
+    monkeypatch.setenv("LAR_ROOT", "/iso")
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    assert ap._default_structurepalace_dir() == "/iso/data/sensoriums/memory/structure"
+
+
+def test_structure_default_never_the_prexdg_scatter(monkeypatch):
+    # The bug it heals: the pre-XDG `~/.lares/.structurepalace` scatter must never reappear.
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    assert ".structurepalace" not in ap._default_structurepalace_dir()
+    assert "/.lares/" not in ap._default_structurepalace_dir()

@@ -66,6 +66,7 @@ import {
 import { repoRoot } from "@lararium/mesh/node";
 
 import { resolveMempalacePython, resolveStructurePalaceSpawn } from "./spawn-resolve.js";
+import { memorySensoriumStructureDir } from "./xdg-base.js";
 import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
 import { mineWithServo } from "./mine-retry.js";
 import { TIMEOUT_KILL_SIGNAL } from "./mine-timeout.js";
@@ -621,8 +622,10 @@ export function pythonStructureEmbeddingsReader(_wing: string): Map<string, read
   if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
   if (!scriptPresent) throw new TelemetryUnavailable(`structurepalace_io.py missing at ${STRUCTUREPALACE_IO}`);
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
+  // NAME the plane — an unpassed --palace reaches the pre-XDG scatter (empty after the home-move), and
+  // the structure plane reads silently empty. Designation carries the authority (the content-plane cure).
   const out = mineWithServo("structurepalace-io-structure-embeddings", (timeoutMs) =>
-    execFileSync(PY, [STRUCTUREPALACE_IO, "structure-embeddings"], {
+    execFileSync(PY, [STRUCTUREPALACE_IO, "structure-embeddings", "--palace", memorySensoriumStructureDir()], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
