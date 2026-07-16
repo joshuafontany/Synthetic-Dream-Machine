@@ -646,8 +646,12 @@ const IAM_DENY: ReadonlySet<string> = new Set([
 // Children additionally drop ingest-stamped coordinates: `uri-path` is
 // derived from the title, and `file-path` on a child is the burned
 // fragment-file leak (carrier-whole at rest — a fragment never owns a file).
+// Everything ELSE the author wrote re-emits verbatim (deny holds MACHINE
+// stamps only): `type` self-describes the child's dialect, `namespace`,
+// `created`, `source-file`, `tags` all round-trip = identity, exactly as on
+// the parent — a child that authored them keeps them.
 const CHILD_IAM_DENY: ReadonlySet<string> = new Set([
-  ...IAM_DENY, "uri-path", "file-path", "namespace", "type", "created", "source-file", "tags",
+  ...IAM_DENY, "uri-path", "file-path",
 ]);
 
 function fmtTomlValue(v: string | string[]): string {
