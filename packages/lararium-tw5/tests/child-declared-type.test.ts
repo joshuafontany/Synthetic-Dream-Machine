@@ -1,0 +1,47 @@
+/**
+ * Child declared type (regression guard) — a child slot that declares its OWN iam `type`
+ * (e.g. text/markdown) keeps it through deserialization; an undeclared child defaults to
+ * the memetic dialect. Guards the clobber where a hardcoded memetic `type` spread AFTER the
+ * parsed iam fields erased a child's declared type.
+ */
+import { describe, expect, test } from "vitest";
+
+import { splitBodyTiddler } from "../src/deserializer.js";
+import type { TiddlerFields } from "../src/deserializer.js";
+
+const ROOT = "lar:///ha.ka.ba/x/demo";
+const base: TiddlerFields = { type: "text/x-memetic-wikitext" };
+
+function childByTitleEnd(children: TiddlerFields[], suffix: string): TiddlerFields | undefined {
+  return children.find((c) => String(c.title).endsWith(suffix));
+}
+
+describe("child declared iam type (default-before-spread)", () => {
+  test("a child declaring type = text/markdown KEEPS it", () => {
+    const body = [
+      "<<~ ahu #source-text >>",
+      "",
+      "```toml iam",
+      'type = "text/markdown"',
+      'role = "source-text interior"',
+      "```",
+      "",
+      "plain prose, no sigils",
+      "",
+      "<<~/ahu >>",
+    ].join("\n");
+    const { children } = splitBodyTiddler(ROOT, body, base);
+    const kid = childByTitleEnd(children, "#source-text");
+    expect(kid).toBeDefined();
+    expect(kid!.type).toBe("text/markdown");   // declared, no longer clobbered
+    expect(kid!.role).toBe("source-text interior");
+  });
+
+  test("an undeclared child DEFAULTS to memetic-wikitext", () => {
+    const body = "<<~ ahu #plain >>\n\nplain body\n\n<<~/ahu >>";
+    const { children } = splitBodyTiddler(ROOT, body, base);
+    const kid = childByTitleEnd(children, "#plain");
+    expect(kid).toBeDefined();
+    expect(kid!.type).toBe("text/x-memetic-wikitext");
+  });
+});

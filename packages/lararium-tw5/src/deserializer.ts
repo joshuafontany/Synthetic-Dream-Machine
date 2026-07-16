@@ -390,9 +390,13 @@ function splitRecursive(
     // a fragment record never owns a disk file; its carrier root does.
 
     allChildren.push({
+      // Default dialect; a child slot's OWN declared iam `type` (e.g. text/markdown) rides in
+      // childStructure.fields and OVERRIDES this default via the spread — a typed child keeps its
+      // type instead of losing it to the memetic-wikitext hardcode. (The parent carrier stays
+      // memetic by construction — this deserializer runs because the carrier IS memetic.)
+      type:              "text/x-memetic-wikitext",
       ...childStructure.fields,
       title:             childUri,
-      type:              "text/x-memetic-wikitext",
       text:              childStructure.text,
       "uri-path":        childUriPath,
       "fragment-parent": enclosingUri,
