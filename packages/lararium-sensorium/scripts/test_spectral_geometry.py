@@ -2,7 +2,7 @@
 connected components (Hansen-Ghrist), and the naturality square (commutes for a structure-preserving
 quotient — a functor, not just a function). Plus the eff.dir refusal.
 
-    ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_spectral_geometry.py -q
+    ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_spectral_geometry.py -q
 """
 
 import numpy as np

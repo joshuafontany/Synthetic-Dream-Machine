@@ -8,7 +8,7 @@ an EPHEMERAL Memory palace (never the sovereign ~/.mempalace).
   + the embedder-identity floor: the driver stamps lar_embedder_model + pins dim/model.
   + a REAL warm-embed wire (skipped when minilm can't load) — the true M1 keystone.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_capture_session.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_capture_session.py -q
 """
 import json
 import os

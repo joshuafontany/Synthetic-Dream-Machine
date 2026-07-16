@@ -34,7 +34,7 @@ export class FfzEnrichUnavailable extends Error {}
 
 /** Locate `worldline_ffz.py` — CODE, so it lives at the repo root (never LAR_ROOT). */
 export function resolveWorldlineFfz(): string {
-  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "worldline_ffz.py");
+  return join(repoRoot, "packages", "lararium-sensorium", "scripts", "worldline_ffz.py");
 }
 
 /**

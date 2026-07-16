@@ -3,7 +3,7 @@ via content_io (embed_io vectors), then search_memories finds the semantically+l
 drawer — proving the consume works over a flat palace with no mempalace structure. Pinned to minilm.
 
     MEMPALACE_EMBEDDING_MODEL=minilm PYTHONPATH=<repo>/mempalace \
-      ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_search_io.py -q
+      ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_search_io.py -q
 """
 
 import os

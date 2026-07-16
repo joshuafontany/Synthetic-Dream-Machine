@@ -1,7 +1,7 @@
 """F4 — the SR/graph-Laplacian shared-eigenbasis keel. Symmetric arm MUST hold (crown jewel);
 the directed arm MUST show departure-from-normality (the QA-Breaker's strike #2, made visible).
 
-    ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_spectral_keel.py -q
+    ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_spectral_keel.py -q
 """
 
 import numpy as np

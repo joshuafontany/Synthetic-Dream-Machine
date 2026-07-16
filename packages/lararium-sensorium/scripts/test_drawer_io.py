@@ -7,7 +7,7 @@ dumps FLAT (native order, keyed by verbatim_sha). No ChromaDB — the collection
 fake, injected by monkeypatch. Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_drawer_io.py -q
+        packages/lararium-sensorium/scripts/test_drawer_io.py -q
 """
 
 import argparse

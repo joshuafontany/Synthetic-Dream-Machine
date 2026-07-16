@@ -2,7 +2,7 @@
 lifecycle verbs over a real ephemeral palace (harvest->recall->status, kapae->recall-excludes->un_kapae-
 restores), and the FastMCP tool-set MIRRORS the CLI lifecycle verbs exactly (the isomorphism contract).
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_lares_mcp.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_lares_mcp.py -q
 """
 import asyncio
 import json

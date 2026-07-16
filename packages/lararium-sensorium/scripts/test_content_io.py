@@ -2,7 +2,7 @@
 tmp palace dir (the venv has chroma). Non-memory targeted content, uniform with structurepalace_io.
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_content_io.py -q
+        packages/lararium-sensorium/scripts/test_content_io.py -q
 """
 
 import pytest

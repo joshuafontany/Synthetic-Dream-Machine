@@ -22,7 +22,7 @@ import { fileURLToPath } from "node:url";
 const here = dirname(fileURLToPath(import.meta.url));
 const srcDir = join(here, "..", "src");
 const repoRoot = join(here, "..", "..", "..");
-const pyScripts = join(repoRoot, "packages", "lararium-mempalace", "scripts");
+const pyScripts = join(repoRoot, "packages", "lararium-sensorium", "scripts");
 
 /** Where a TS↔py pair stands on the parity ladder. */
 type ParityStatus =
@@ -34,7 +34,7 @@ type ParityStatus =
 interface ParityEntry {
   /** the mesh src module (basename, .ts) this row censuses. */
   readonly ts: string;
-  /** the py twin (basename under lararium-mempalace/scripts), or null where none is planned. */
+  /** the py twin (basename under lararium-sensorium/scripts), or null where none is planned. */
   readonly py: string | null;
   readonly status: ParityStatus;
   /** fixture paths relative to THIS tests dir (witnessed rows) — each must exist + parse. */
@@ -51,7 +51,7 @@ const MANIFEST: readonly ParityEntry[] = [
   },
   {
     ts: "ffz-clock.ts", py: "ffz_clock.py", status: "witnessed",
-    fixtures: ["../../lararium-mempalace/scripts/fixtures/clock-recovery-parity.json"],
+    fixtures: ["../../lararium-sensorium/scripts/fixtures/clock-recovery-parity.json"],
     note: "the recovered-clock fixture flows TS → py (scripts/clock_recovery_fixture.ts generates; test_ffz_clock.py consumes).",
   },
   {
@@ -101,7 +101,7 @@ const MANIFEST: readonly ParityEntry[] = [
   },
   {
     ts: "capture-reading.ts", py: "capture_reading.py", status: "witnessed",
-    fixtures: ["../../lararium-mempalace/scripts/fixtures/capture-reading-parity.json"],
+    fixtures: ["../../lararium-sensorium/scripts/fixtures/capture-reading-parity.json"],
     note: "the WHO-plane capture posture (concentration + the 1Hive convex bar, verdict-free); TS generates (scripts/capture_reading_fixture.ts), py matches — Infinity rides as the string \"Infinity\".",
   },
   {
@@ -167,7 +167,7 @@ const MANIFEST: readonly ParityEntry[] = [
   },
   {
     ts: "temporal-rigidity.ts", py: "ffz_clock.py", status: "witnessed",
-    fixtures: ["../../lararium-mempalace/scripts/fixtures/clock-recovery-parity.json"],
+    fixtures: ["../../lararium-sensorium/scripts/fixtures/clock-recovery-parity.json"],
     note: "ffz_clock.py dominant_period ports temporal-rigidity.dominantPeriod; bound by the clock-recovery fixture (scripts/clock_recovery_fixture.ts imports dominantPeriod; test_ffz_clock.py consumes).",
   },
   {
@@ -177,7 +177,7 @@ const MANIFEST: readonly ParityEntry[] = [
   },
   {
     ts: "clock-recovery.ts", py: "ffz_clock.py", status: "witnessed",
-    fixtures: ["../../lararium-mempalace/scripts/fixtures/clock-recovery-parity.json"],
+    fixtures: ["../../lararium-sensorium/scripts/fixtures/clock-recovery-parity.json"],
     note: "ffz_clock.py ports src/clock-recovery.ts (recover_clock); bound by the same TS-generated fixture the ffz-clock row names (test_ffz_clock.py consumes).",
   },
   {
@@ -207,7 +207,7 @@ describe("the TS↔py parity manifest (the L4 gate)", () => {
     for (const e of MANIFEST) {
       expect(existsSync(join(srcDir, e.ts)), `${e.ts} missing from mesh/src`).toBe(true);
       if (e.py !== null) {
-        expect(existsSync(join(pyScripts, e.py)), `${e.py} missing from lararium-mempalace/scripts`).toBe(true);
+        expect(existsSync(join(pyScripts, e.py)), `${e.py} missing from lararium-sensorium/scripts`).toBe(true);
       }
     }
   });

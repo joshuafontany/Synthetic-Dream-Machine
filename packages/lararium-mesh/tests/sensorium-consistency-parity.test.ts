@@ -4,7 +4,7 @@
  * behind the causal island), recomputes the SAME cases through the TS `consistencyRadius` + the
  * native stalk pseudometrics, and asserts the two bodies agree. The crossing carries DATA, never a
  * live call (web3-only law). Regenerate with:
- *   ~/.venv/bin/python3 packages/lararium-mempalace/scripts/sensorium_consistency.py fixture
+ *   ~/.venv/bin/python3 packages/lararium-sensorium/scripts/sensorium_consistency.py fixture
  */
 import { describe, expect, test } from "vitest";
 import { readFileSync } from "node:fs";

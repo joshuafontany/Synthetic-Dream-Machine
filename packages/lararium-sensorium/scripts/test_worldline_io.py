@@ -10,7 +10,7 @@ Proves, over REAL content_io palaces + the two PINNED sensoria (Memory=immutable
                     rows persist while muted; no hard removal anywhere.
   · restart       — the mute survives reopening the rhizome sqlite + the chroma palaces.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_worldline_io.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_worldline_io.py -q
 """
 
 import content_io as cio

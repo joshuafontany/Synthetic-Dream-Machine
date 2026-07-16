@@ -3,7 +3,7 @@
  *
  * The canonical TS capture-reading (concentration + captureReading over the 1Hive convex
  * curve) runs a deterministic case table and EMITS a data fixture; the py port test
- * (packages/lararium-mempalace/scripts/test_capture_reading.py) reads it as plain data,
+ * (packages/lararium-sensorium/scripts/test_capture_reading.py) reads it as plain data,
  * runs its own reading, and asserts agreement — fixtures-as-data across the causal-island,
  * never a live cross-runtime call. The TS generates; the py matches.
  *
@@ -69,7 +69,7 @@ const cases = CASES.map(({ note, epochs }) => {
 });
 
 const here = dirname(fileURLToPath(import.meta.url));
-const out = join(here, "../../lararium-mempalace/scripts/fixtures/capture-reading-parity.json");
+const out = join(here, "../../lararium-sensorium/scripts/fixtures/capture-reading-parity.json");
 mkdirSync(dirname(out), { recursive: true });
 writeFileSync(out, JSON.stringify({ generator: "capture_reading_fixture.ts", cases }, null, 2) + "\n");
 console.log(`wrote ${cases.length} cases -> ${out}`);

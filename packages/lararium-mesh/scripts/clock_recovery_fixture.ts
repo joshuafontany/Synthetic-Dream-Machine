@@ -3,7 +3,7 @@
  *
  * The web3-only law keeps the two runtimes apart: this script runs the CANONICAL TS clock-recovery
  * (recoverClock + dominantPeriod, the source of truth) over a deterministic corpus and EMITS a data
- * fixture (as-of-its-last-sync). The py port test (packages/lararium-mempalace/scripts/
+ * fixture (as-of-its-last-sync). The py port test (packages/lararium-sensorium/scripts/
  * test_ffz_clock.py) reads that fixture as plain data, runs its own recover_clock, and asserts the
  * two agree — fixtures-as-data across the causal-island, never a live cross-runtime call. The TS
  * generates; the py matches (no dual-live-without-a-fixture).
@@ -108,7 +108,7 @@ function main(): void {
     cases: buildCases(),
   };
   const here = dirname(fileURLToPath(import.meta.url));
-  const path = join(here, "..", "..", "lararium-mempalace", "scripts", "fixtures", "clock-recovery-parity.json");
+  const path = join(here, "..", "..", "lararium-sensorium", "scripts", "fixtures", "clock-recovery-parity.json");
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, JSON.stringify(out, null, 2));
   // eslint-disable-next-line no-console

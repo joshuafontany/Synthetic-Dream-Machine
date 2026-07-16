@@ -2,7 +2,7 @@
 capture-drain.ts). Mirrors the TS drain tests: accept!=land, the contiguous-frontier watermark
 (a gap blocks), backlog, reclaimable, replay-set, and the exactly-once (Landauer) audit.
 
-    ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_capture_drain.py -q
+    ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_capture_drain.py -q
 """
 
 import pytest

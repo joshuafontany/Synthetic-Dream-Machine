@@ -2,7 +2,7 @@
 Pinned to `minilm` (local ONNX, no 300MB download, deterministic).
 
     MEMPALACE_EMBEDDING_MODEL=minilm PYTHONPATH=<repo>/mempalace \
-      ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_embed_io.py -q
+      ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_embed_io.py -q
 """
 
 import os

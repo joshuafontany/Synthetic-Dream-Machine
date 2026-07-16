@@ -4,7 +4,7 @@
  * recomputes the SAME cases through the TS `scoreEfe` / `efeSelect` / `efeGate`, and asserts the
  * two bodies agree on every term (pragmatic · epistemic · optionLoss · the derived reversibility ·
  * the argmin · the H¹-first gate fork). Regenerate with:
- *   ~/.venv/bin/python3 packages/lararium-mempalace/scripts/sensorium_efe.py fixture
+ *   ~/.venv/bin/python3 packages/lararium-sensorium/scripts/sensorium_efe.py fixture
  */
 import { describe, expect, test } from "vitest";
 import { readFileSync } from "node:fs";

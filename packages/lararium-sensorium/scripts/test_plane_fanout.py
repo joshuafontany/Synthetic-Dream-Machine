@@ -5,7 +5,7 @@ mechanism (embed / parse-router / induced grammar); a second pass lands ZERO on 
 plane (the idempotent re-derivation, held in the stores not process state); the record's
 cid keys all three planes.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_plane_fanout.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_plane_fanout.py -q
 """
 import os
 

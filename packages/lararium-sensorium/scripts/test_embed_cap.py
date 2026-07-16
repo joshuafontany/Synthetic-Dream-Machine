@@ -2,7 +2,7 @@
 model, minilm/384), deterministic + store-compatible; and a Memory sensorium composed with it lands a
 turn through the {model,dim} identity floors. Loads the real ONNX model (an integration witness).
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_embed_cap.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_embed_cap.py -q
 """
 
 import pytest

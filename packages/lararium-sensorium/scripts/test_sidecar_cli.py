@@ -13,7 +13,7 @@ launch) left every CLI surface intact:
 Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_sidecar_cli.py -q
+        packages/lararium-sensorium/scripts/test_sidecar_cli.py -q
 """
 
 import json

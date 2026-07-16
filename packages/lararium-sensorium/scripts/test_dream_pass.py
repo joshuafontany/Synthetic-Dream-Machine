@@ -7,7 +7,7 @@ identity plus byte identity of every non-sqlite plane file, checked independentl
 the pass's own instruments); and a RE-DREAM replaces the Dream's prior content whole
 (the mutable two-store law).
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_dream_pass.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_dream_pass.py -q
 """
 import hashlib
 import json

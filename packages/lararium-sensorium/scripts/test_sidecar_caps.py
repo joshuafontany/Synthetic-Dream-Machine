@@ -7,7 +7,7 @@ building the sidecar's dispatch (the reap-don't-pile invariant). Run under the
 mempalace venv (though these touch no ChromaDB):
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_sidecar_caps.py -q
+        packages/lararium-sensorium/scripts/test_sidecar_caps.py -q
 """
 
 import io

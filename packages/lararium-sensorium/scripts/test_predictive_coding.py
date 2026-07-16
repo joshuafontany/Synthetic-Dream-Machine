@@ -14,7 +14,7 @@ The load-bearing properties, all chroma-free (pure signal in, surprise/F out):
 
 Run under the mempalace venv:
     ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_predictive_coding.py -q
+        packages/lararium-sensorium/scripts/test_predictive_coding.py -q
 """
 import json
 import subprocess

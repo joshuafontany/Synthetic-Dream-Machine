@@ -3,7 +3,7 @@
 Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_form_encoder.py -q
+        packages/lararium-sensorium/scripts/test_form_encoder.py -q
 
 The encode-path tests use a deterministic fake/dead scorer (fast, no model load);
 two dedicated tests exercise the REAL SlorScorer to report live-vs-fallback. The

@@ -6,7 +6,7 @@
           a re-derived cid matches (idempotent); the hash rides FULL 64-hex, never the old [:24].
   · W5.2  Copilot real store:  the SQLite path parses; it does NOT read the (deleted) events.jsonl.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_capture_sources.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_capture_sources.py -q
 """
 import hashlib
 import json

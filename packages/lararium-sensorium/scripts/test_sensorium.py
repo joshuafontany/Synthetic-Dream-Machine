@@ -2,7 +2,7 @@
 + capture + recall; idempotent re-capture; blind-by-composition (a missing cap REFUSES); and the
 declared durability policy (append-only rejects an edit-overwrite; mutable allows it).
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_sensorium.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_sensorium.py -q
 """
 
 import pytest

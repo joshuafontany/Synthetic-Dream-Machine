@@ -5,7 +5,7 @@ These mirror the submodule daemon's singleton/idle-reap fix on OUR in-tree
 run fast under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_structurepalace_io.py -q
+        packages/lararium-sensorium/scripts/test_structurepalace_io.py -q
 """
 
 import io

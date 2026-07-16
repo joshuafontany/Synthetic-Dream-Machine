@@ -10,7 +10,7 @@ Parse-level tests need NO chroma; the encoder + ingest tests import structurepal
 and SKIP cleanly when it / the venv stack is absent. Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_structure_router.py -q
+        packages/lararium-sensorium/scripts/test_structure_router.py -q
 """
 import math
 import os

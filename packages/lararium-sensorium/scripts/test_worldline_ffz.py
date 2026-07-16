@@ -8,7 +8,7 @@ Over two REAL braids (a worldline_io fork-DAG + real-chroma content stores):
                  truncatable); a re-run is idempotent (same drift → same clock → same stamp).
   · CLOCK-PURITY — no host wall-time on the recover/stamp path (grep clean).
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_worldline_ffz.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_worldline_ffz.py -q
 """
 import math
 import os

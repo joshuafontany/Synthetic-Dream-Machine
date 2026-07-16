@@ -6,7 +6,7 @@ The durable projection of the agent worldline's happened-before (agent-worldline
 triple, handback → the spawn edge's valid-interval closed, kapae (rewind) → every
 edge of a retracted turn closed (valid_to set, never deleted — history kept).
 
-This is OUR script (packages/lararium-mempalace/scripts), NOT the vendored submodule:
+This is OUR script (packages/lararium-sensorium/scripts), NOT the vendored submodule:
 it CALLS the mempalace KnowledgeGraph public API (add_triple / invalidate) the same
 way drawer_io.py calls the collection. We never edit mempalace/.
 

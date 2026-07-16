@@ -2,7 +2,7 @@
   "name": "@lararium/mempalace",
   "version": "0.1.0",
   "private": true,
-  "description": "Local-only integration layer: consumes the pinned mempalace sidecar (read-only) and harvests a never-federated session-memory bearing index.",
+  "description": "The guest-comparator integration: consumes the pinned mempalace sidecar (read-only) — the client/pool, the mine lane, and the shared spawn/xdg resolvers @lararium/sensorium builds on. The sovereign perception planes live in @lararium/sensorium.",
   "type": "module",
   "exports": {
     ".": {

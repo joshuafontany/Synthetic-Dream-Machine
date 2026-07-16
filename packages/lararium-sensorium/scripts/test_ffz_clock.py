@@ -8,7 +8,7 @@ The load-bearing anti-fabrication guards (these GATE Phase 3):
   · TS↔py parity — the py recover_clock matches the committed fixture the canonical TS twin generated.
 
 Run:
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_ffz_clock.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_ffz_clock.py -q
 
 Regenerate the parity fixture from the canonical TS twin:
     packages/lararium-mesh/node_modules/.bin/tsx packages/lararium-mesh/scripts/clock_recovery_fixture.ts

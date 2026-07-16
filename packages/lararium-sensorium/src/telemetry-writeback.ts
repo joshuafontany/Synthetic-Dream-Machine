@@ -42,7 +42,7 @@ export interface WritebackResult {
 
 /** Locate `drawer_io.py` — CODE, so it lives at the repo root (never LAR_ROOT). */
 export function resolveDrawerIo(): string {
-  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "drawer_io.py");
+  return join(repoRoot, "packages", "lararium-sensorium", "scripts", "drawer_io.py");
 }
 
 /** Raised when python/`drawer_io.py` are absent — the caller renders a clean error. */

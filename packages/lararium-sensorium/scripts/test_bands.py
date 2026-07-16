@@ -13,7 +13,7 @@ Four faces proven, all chroma-free (pure signal in, bands verdict out):
 
 Run under the mempalace venv:
     ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_bands_sidecar.py -q
+        packages/lararium-sensorium/scripts/test_bands_sidecar.py -q
 """
 import json
 import shutil

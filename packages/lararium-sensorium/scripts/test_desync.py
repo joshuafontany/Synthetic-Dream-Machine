@@ -1,6 +1,6 @@
 """Witness the desync tool — the plastic-ρ inter-clock incommensurability primitive.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_desync.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_desync.py -q
 """
 import pytest
 

@@ -76,7 +76,7 @@ FIXTURES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # library path as a substring, so order carries correctness).
 _URI_SWAPS = (
     ("bags/@lares/ha.ka.ba/lares/library/hawaii/kumulipo/",
-     "packages/lararium-mempalace/scripts/fixtures/placebo-kumulipo/"),
+     "packages/lararium-sensorium/scripts/fixtures/placebo-kumulipo/"),
     ("ha.ka.ba/lares/library/hawaii/kumulipo/",
      "ha.ka.ba/lares/testbed/placebo/kumulipo/"),
 )

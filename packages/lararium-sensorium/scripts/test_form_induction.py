@@ -9,7 +9,7 @@ Proves the four movements corpus.md #the-form-induction names:
   4. seed-and-refine keeps a seed the corpus reproduces and DISCARDS one it does not.
 
 Pure-miner tests need NO chroma; the batch `induce` graceful-skip test needs neither. Run:
-    ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_form_induction.py -q
+    ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_form_induction.py -q
 """
 import io
 import json

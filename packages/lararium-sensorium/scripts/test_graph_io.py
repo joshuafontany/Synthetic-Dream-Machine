@@ -3,7 +3,7 @@ hallways from the `entities`/`wing` metadata the meta-model consume stamps. No L
 structure/graph meta-model engages on our store once drawers carry entities.
 
     MEMPALACE_EMBEDDING_MODEL=minilm PYTHONPATH=<repo>/mempalace \
-      ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_graph_io.py -q
+      ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_graph_io.py -q
 """
 
 import json

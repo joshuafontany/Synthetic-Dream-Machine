@@ -9,7 +9,7 @@ Proves, over a SYNTHETIC session (a main transcript chained by parentUuid + a `s
   · end-to-end       — capture_and_observe lands the content AND builds the worldline in one pass; the
                        landed content turn-keys (user uuids) climb to the run.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_worldline_observe.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_worldline_observe.py -q
 """
 import json
 import os

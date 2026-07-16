@@ -54,7 +54,7 @@ export function isoWholeSeconds(ts: string): string {
 
 /** Locate `kg_io.py` — CODE, so it lives at the repo root (never LAR_ROOT). */
 export function resolveKgIo(): string {
-  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "kg_io.py");
+  return join(repoRoot, "packages", "lararium-sensorium", "scripts", "kg_io.py");
 }
 
 interface Resolved {

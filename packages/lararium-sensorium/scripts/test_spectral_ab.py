@@ -1,7 +1,7 @@
 """spectral_ab — smoke tests for the pure harness functions (synthetic vectors; no chroma/corpus).
 The empirical witness is the live run against ~/.mempalace/palace; these guard the plumbing.
 
-    ~/.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_spectral_ab.py -q
+    ~/.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_spectral_ab.py -q
 """
 
 import numpy as np

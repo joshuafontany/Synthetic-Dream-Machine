@@ -5,7 +5,7 @@ behind HA's witnessed chroma journal=delete/synchronous=FULL — the ack-after-p
 crash-safety is a lie if it fails.
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_content_durability.py -q
+        packages/lararium-sensorium/scripts/test_content_durability.py -q
 """
 
 import json

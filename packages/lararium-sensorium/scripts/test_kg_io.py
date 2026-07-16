@@ -3,7 +3,7 @@ bitemporal triple, query it back, timeline + stats — all JSON-serializable (th
 No LLM (the graph STORE). The batch add/invalidate/kapae worldline cmds are unchanged.
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-      packages/lararium-mempalace/scripts/test_kg_io.py -q
+      packages/lararium-sensorium/scripts/test_kg_io.py -q
 """
 
 import json

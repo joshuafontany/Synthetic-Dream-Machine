@@ -4,7 +4,7 @@ put/get/witness-RMW/neighbors — the lifecycle LAW stays in the TS keel, so thi
 persistence + load + append + the neighbor read.
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-mempalace/scripts/test_persistence_io.py -q
+        packages/lararium-sensorium/scripts/test_persistence_io.py -q
 """
 
 import pytest

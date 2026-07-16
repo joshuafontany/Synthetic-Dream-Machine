@@ -2,7 +2,7 @@
 Proves the structuring extraction runs standalone (the entities field that unlocks the rich stack).
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-      packages/lararium-mempalace/scripts/test_meta_io.py -q
+      packages/lararium-sensorium/scripts/test_meta_io.py -q
 """
 
 import meta_io

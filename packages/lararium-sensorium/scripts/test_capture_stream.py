@@ -3,7 +3,7 @@ content_io ContentStore in a tmp palace (the operator's "run against a small cor
 sensorium first"). Proves: compose -> land; idempotent re-run (the crash-safe re-derivation, no wal.py);
 a partial->full crash-recovery pass lands the tail.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_capture_stream.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_capture_stream.py -q
 """
 
 import content_io as cio

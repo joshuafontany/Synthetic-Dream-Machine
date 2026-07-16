@@ -5,7 +5,7 @@
  * bodies agree on dim H¹ / dim H⁰ / R*_sem / the gate verdict / the H₀ consensus. The py fuse reads
  * the EXACT kernel projection; the TS Chebyshev diffusion converges to that same target, and its
  * `fused.consensus` carries the exact P_ker — so the consensus binds cleanly. Regenerate with:
- *   ~/.venv/bin/python3 packages/lararium-mempalace/scripts/sensorium_fusion.py fixture
+ *   ~/.venv/bin/python3 packages/lararium-sensorium/scripts/sensorium_fusion.py fixture
  */
 import { describe, expect, test } from "vitest";
 import { readFileSync } from "node:fs";

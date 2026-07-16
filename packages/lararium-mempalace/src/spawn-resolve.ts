@@ -98,11 +98,13 @@ export function resolveMempalaceSpawn(): MempalaceSpawn {
 }
 
 /**
- * The resolved inputs ANY mempalace sidecar spawn needs — the ONE shape every sidecar shares,
+ * The resolved inputs ANY sensorium sidecar spawn needs — the ONE shape every sidecar shares,
  * a `serve` holder (structurepalace · form_encoder) OR a batch sidecar (structure_router · bands_sidecar
- * · form_induction): the venv-aware python, the helper SCRIPT (CODE, so it lives at the repo root,
- * never LAR_ROOT), the mempalace `submoduleRoot` (spawn cwd + PYTHONPATH so `import mempalace`
- * resolves), and whether the script is present on disk. Structurally identical to
+ * · form_induction): the venv-aware python, the helper SCRIPT (CODE at the repo root under
+ * @lararium/sensorium's scripts, never LAR_ROOT), the mempalace `submoduleRoot` (spawn cwd + PYTHONPATH
+ * so `import mempalace` resolves the nakama), and whether the script is present on disk. This resolver
+ * stays here — @lararium/mempalace owns the python + nakama resolution the sensorium builds on.
+ * Structurally identical to
  * `@lararium/node`'s `ResolvedServeSpawn` — the callers destructure, never type-annotate.
  */
 export interface SidecarSpawn {
@@ -112,11 +114,11 @@ export interface SidecarSpawn {
   readonly scriptPresent: boolean;
 }
 
-/** Resolve a {@link SidecarSpawn} for a script under `packages/lararium-mempalace/scripts/`.
+/** Resolve a {@link SidecarSpawn} for a script under `packages/lararium-sensorium/scripts/`.
  *  ONE body; each named resolver below binds its own `scriptFile` — the only per-sidecar divergence. */
 function resolveSidecarSpawn(scriptFile: string): SidecarSpawn {
   const submoduleRoot = join(repoRoot, "mempalace");
-  const script = join(repoRoot, "packages", "lararium-mempalace", "scripts", scriptFile);
+  const script = join(repoRoot, "packages", "lararium-sensorium", "scripts", scriptFile);
   return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
 }
 

@@ -7,7 +7,7 @@ Proves the veil's contract:
                       NEVER `verifyingKey` (public would defeat the veil), NEVER a did.
   · FAILS LOUD      — no secret on disk raises, never silently falls back to a public/empty key.
 
-    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-mempalace/scripts/test_worldline_veil.py -q
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_worldline_veil.py -q
 """
 import json
 
