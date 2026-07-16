@@ -1,6 +1,6 @@
 {
   "format": "lararium-genesis-seed/v1",
-  "actorSeed": "4ddb0713e3c63e372f991db990dfb273b9fb0f923679082132f3afa709def32f",
+  "actorSeed": "cdc4fafc8c8398a6a00d2b854ca27378d71c90a84ee9105009533282fb7f4c5e",
   "schemaVersion": "0.1",
   "blobs": {
     "tiddlywikicore": {
@@ -22,7 +22,7 @@
     "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
       "id": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
       "version": "0.1.0",
-      "sha256": "79bfb23d553b9d64d363f666d114b950093a61f285bdf8df909304af8d51290c",
+      "sha256": "d6f66482dc6c25794ef662536781224979e16fc718e21f8fcd4de88302627cf4",
       "mimeType": "application/json",
       "license": "MIT",
       "author": "lares"
@@ -167,7 +167,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "text": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
-        "sha256": "79bfb23d553b9d64d363f666d114b950093a61f285bdf8df909304af8d51290c",
+        "sha256": "d6f66482dc6c25794ef662536781224979e16fc718e21f8fcd4de88302627cf4",
         "version": "0.1.0",
         "mimeType": "application/json",
         "author": "lares",
@@ -176,14 +176,14 @@
         "canonicalTitle": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "compatibilityTitle": "$:/plugins/lares/memetic-wikitext",
         "moduleManifestPath": "dist-plugin/module-manifest.json",
-        "moduleManifestSha256": "17de05c1ba643c6e823e63275a96df7e376cfe5a9cb695bea46371f7ecfc4619",
+        "moduleManifestSha256": "d34349a40d810c6d5253192e9028607fa944986bfcf540b7b6dd105af0c88f1c",
         "sourceManifestPath": "dist-plugin/plugin-source-manifest.json",
-        "sourceManifestSha256": "1e65bd56dbdd29f6457126960e47cdc218fe654d9953aab9ccf65484aaccff59",
+        "sourceManifestSha256": "31e4d608f8795592b7f4c1d51a65ea385db0aaa490f9bd3f69d62299a28c0c99",
         "packTranscriptPath": "dist-plugin/pack-transcript.json",
-        "packTranscriptSha256": "b9d465a92a093aafee80e22d0aa8704fa3d69f670692558f6b992f78d47d1725",
+        "packTranscriptSha256": "65819f33e88a7333f9c5bdab6007c5d1b13fa20b14c35d9cff059b9ed190de6e",
         "moduleCount": "23",
         "packedTiddlerCount": "115",
-        "pluginJsonSha256": "79bfb23d553b9d64d363f666d114b950093a61f285bdf8df909304af8d51290c",
+        "pluginJsonSha256": "d6f66482dc6c25794ef662536781224979e16fc718e21f8fcd4de88302627cf4",
         "tags": "blob-descriptor",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },
@@ -239,7 +239,7 @@
       "tiddler": {
         "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-plugins",
         "text": "",
-        "cid": "bafkreig5ur2xdi4svdyp24vctuexiyifncmf7rp4oteb65fsxchbophbta",
+        "cid": "bafkreiftzblofz5ubcanxgmbtz7ihe4ojsftog55bx75pqg7wpsfmr7c5e",
         "note": "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
         "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
       },

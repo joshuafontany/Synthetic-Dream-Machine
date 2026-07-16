@@ -750,8 +750,11 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     // (rare) keeps the older sigil-then-blank spacing since content precedes the iam there.
     const iamBlock = iam ? "```toml iam\n" + iam + "```" : "";
     const rest     = stripEdgeNewlines(inner + post);
+    // A whitespace-only preamble (`"\n\n"`) carries no content — treat it as none so the iam
+    // still hugs the sigil line. Only REAL preamble content routes to the sigil-then-blank form.
+    const hasPre   = pre.trim() !== "";
     let opened: string;
-    if (pre) {
+    if (hasPre) {
       opened = `\n\n${stripEdgeNewlines(pre + (iamBlock ? "\n\n" + iamBlock : "") + (rest ? "\n\n" + rest : ""))}`;
     } else if (iamBlock) {
       opened = `\n${iamBlock}${rest ? "\n\n" + rest : ""}`;
