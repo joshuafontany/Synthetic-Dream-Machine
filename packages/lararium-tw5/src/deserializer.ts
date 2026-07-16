@@ -745,10 +745,20 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child);
     const pre   = typeof child["preamble"]  === "string" ? child["preamble"]  : "";
     const post  = typeof child["postamble"] === "string" ? child["postamble"] : "";
-    const body  = stripEdgeNewlines(
-      pre + (iam ? "```toml iam\n" + iam + "```\n\n" : "") + inner + post
-    );
-    return `<<~ ahu ${slot} >>\n\n${body}\n\n<<~/ahu >>`;
+    // The iam block sits FLUSH against the ahu sigil line (mirroring the parent carrier's SOH+iam) —
+    // a single newline, no blank between. A blank line then separates any content below. A preamble
+    // (rare) keeps the older sigil-then-blank spacing since content precedes the iam there.
+    const iamBlock = iam ? "```toml iam\n" + iam + "```" : "";
+    const rest     = stripEdgeNewlines(inner + post);
+    let opened: string;
+    if (pre) {
+      opened = `\n\n${stripEdgeNewlines(pre + (iamBlock ? "\n\n" + iamBlock : "") + (rest ? "\n\n" + rest : ""))}`;
+    } else if (iamBlock) {
+      opened = `\n${iamBlock}${rest ? "\n\n" + rest : ""}`;
+    } else {
+      opened = `\n\n${rest}`;
+    }
+    return `<<~ ahu ${slot} >>${opened}\n\n<<~/ahu >>`;
   });
 }
 

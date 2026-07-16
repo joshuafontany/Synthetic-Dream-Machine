@@ -53,6 +53,15 @@ describe("child iam inheritance (parent-diff)", () => {
     expect(block).toMatch(/^role = /m);
   });
 
+  test("a child iam block sits FLUSH against the ahu sigil line (no blank between)", () => {
+    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: "text/plain", text: "content below" };
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    // sigil line, then IMMEDIATELY the fence — one newline, no blank line between.
+    expect(out).toMatch(/<<~ ahu #kid >>\n```toml iam\n/);
+    // a blank line then separates the content below the fence.
+    expect(out).toMatch(/```\n\ncontent below/);
+  });
+
   test("derived coordinates (uri-path, file-path) never re-emit on a child", () => {
     const kid: TiddlerFields = {
       title: `${ROOT}#kid`,
