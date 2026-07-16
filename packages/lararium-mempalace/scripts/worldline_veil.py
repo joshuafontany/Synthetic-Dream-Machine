@@ -7,7 +7,7 @@ data exfiltrate, that bare handle rides out with it. This module VEILS the root:
 
     root = "wl-" + HMAC(local-secret, DOMAIN ‖ run ‖ context)[:N]
 
-keyed by a LOCAL SECRET the owner holds in `~/.lares/.lararium-identity/` — a dedicated worldline-salt
+keyed by a LOCAL SECRET the owner holds in `<state>/identity/` — a dedicated worldline-salt
 (env) or, failing that, the persona-group-root SIGNING key (the private persona-side half). NEVER the
 vessel public key, NEVER a did (canon `persona-circle#the-atom`: the vessel key MUST NEVER co-surface;
 a did would re-expose the DreamNet identity the veil hides).
@@ -45,12 +45,21 @@ _PERSONA_ROOT_GLOB = ".persona-group-root-*.json"
 
 
 def _identity_dir(identity_dir: "str | None" = None) -> str:
-    """Resolve the on-disk identity dir — an explicit override, else `$LAR_ROOT/.lararium-identity`,
-    else `~/.lares/.lararium-identity` (mirrors `structurepalace_io`'s `$LAR_ROOT`/`~/.lares` idiom)."""
+    """Resolve the on-disk identity dir — an explicit override, else `<state>/identity`, mirroring the
+    TS `larIdentityDir()` (vessel-paths.ts): `LAR_ROOT/state/identity` for isolated instances, else
+    `$XDG_STATE_HOME/lares/identity` (unset → `~/.local/state/lares/identity`). The vessel WRITES the
+    persona-group-root here (the XDG state home the identity move carried it to), so an unpassed dir
+    still reads the real salt, never the pre-XDG `~/.lares/.lararium-identity` scatter (which held no
+    file after the move). Guarded by test_identity_dir_mirrors_xdg_state."""
     if identity_dir:
         return identity_dir
-    root = os.environ.get("LAR_ROOT") or os.path.join(os.path.expanduser("~"), ".lares")
-    return os.path.join(root, ".lararium-identity")
+    lar_root = os.environ.get("LAR_ROOT")
+    if lar_root:
+        state_home = os.path.join(lar_root, "state")
+    else:
+        xdg = (os.environ.get("XDG_STATE_HOME") or "").strip()
+        state_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "state"), "lares")
+    return os.path.join(state_home, "identity")
 
 
 def _persona_signing_secret(identity_dir: str) -> "bytes | None":
