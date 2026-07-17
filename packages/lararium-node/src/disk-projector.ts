@@ -20,9 +20,12 @@
  * between surfaces; the git diff IS the operator's signature on the change.
  *
  * Projection law (Fontany-Fuller-Zelenka):
- *   Disk projection is a RENDER operation, not a string copy.
- *   The renderFn recomposes the whole carrier from its normalized tiddler
- *   records inside the island VM (exportMemeText → expandMemeRefs).
+ *   Disk projection RENDERS, never string-copies. The ONE render seam
+ *   (`carrierFileFn`, the VM's `exportCarrierFile`) hands back the carrier's own
+ *   filetype: a memetic carrier recomposes to `.mem` (expandMemeRefs over its
+ *   group), any other TW5 filetype rides the file-info cascade to its native
+ *   file (+ a `.meta` sidecar where the type needs one). The VM registry decides
+ *   type + extension + bytes; the projector only sites at `<uri-path><ext>`.
  *
  * Group routing (carrier-whole at rest, disk-projection#projection-routing):
  *   memetic-wikitext records form a tiddler-group keyed by the carrier root.
@@ -49,18 +52,14 @@ import type { BagMirrorConfig } from "./bag-paths.js";
 export interface LarDiskProjectorOptions {
   /** Bag mirrors. Bags absent from this list never write to disk. */
   readonly mirrors: readonly BagMirrorConfig[];
-  /** Render a carrier-root URI to its canonical text. Null skips the write.
-   *  Memetic-only fallback: used when `carrierFileFn` is absent (tests, hosts
-   *  without a native file-info bridge). Sites the carrier as `.mem`. */
-  readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
   /**
-   * Render a carrier-root URI to ITS OWN filetype — the native-aware seam. A
+   * Render a carrier-root URI to ITS OWN filetype — the ONE render seam. A
    * memetic carrier recomposes to `.mem`; any other TW5 filetype rides the VM's
    * file-info cascade to its native file (+ a `.meta` sidecar where the type
-   * needs one). Present → the projector sites at `<uri-path><ext>` and writes
-   * the sidecar; absent → falls back to `renderFn` (`.mem` only). Null skips.
+   * needs one). The VM registry decides type + bytes for both; the projector
+   * only sites at `<uri-path><ext>` and writes the sidecar. Null skips the write.
    */
-  readonly carrierFileFn?: (tiddlerUri: string) => Promise<CarrierFile | null>;
+  readonly carrierFileFn: (tiddlerUri: string) => Promise<CarrierFile | null>;
   /**
    * Report every bag that currently HOLDS a carrier (`composite.listBagsHolding`).
    * Gates the cross-mirror stale-unlink: a carrier still living in a bag — a
@@ -140,8 +139,7 @@ export class LarDiskProjector {
   private _tw5: TW5Engine | null = null;
 
   private readonly mirrors: readonly BagMirrorConfig[];
-  private readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
-  private readonly carrierFileFn: ((tiddlerUri: string) => Promise<CarrierFile | null>) | undefined;
+  private readonly carrierFileFn: (tiddlerUri: string) => Promise<CarrierFile | null>;
   private readonly bagsHolding: ((tiddlerUri: string) => Promise<readonly string[]>) | undefined;
   private readonly debounceMs: number;
   private readonly onRefusal: ((info: { bagId: string; uri: string; reason: string }) => void) | undefined;
@@ -152,7 +150,6 @@ export class LarDiskProjector {
 
   constructor(opts: LarDiskProjectorOptions) {
     this.mirrors      = opts.mirrors;
-    this.renderFn     = opts.renderFn;
     this.carrierFileFn = opts.carrierFileFn;
     this.bagsHolding  = opts.bagsHolding;
     this.debounceMs   = opts.debounceMs ?? 1000;
@@ -264,26 +261,15 @@ export class LarDiskProjector {
    * an empty array means the name resolved but no file sits on disk.
    */
   private mirrorCarrierFiles(mirror: BagMirrorConfig, uri: string): string[] | null {
-    if (this.carrierFileFn) {
-      const base = carrierBaseRelPath(uri);
-      if (!base) return null;
-      const gate = confineMirrorWrite(mirror.mirrorRoot, base, mirror.allowBagsRootFiles);
-      if (!gate.ok) {
-        console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`);
-        this.onRefusal?.({ bagId: mirror.bagId, uri, reason: gate.reason });
-        return null;
-      }
-      return carrierDiskFiles(gate.path);
-    }
-    const relPath = mirror.toRelPath(uri);
-    if (!relPath) return null;
-    const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
+    const base = carrierBaseRelPath(uri);
+    if (!base) return null;
+    const gate = confineMirrorWrite(mirror.mirrorRoot, base, mirror.allowBagsRootFiles);
     if (!gate.ok) {
       console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`);
       this.onRefusal?.({ bagId: mirror.bagId, uri, reason: gate.reason });
       return null;
     }
-    return existsSync(gate.path) ? [gate.path] : [];
+    return carrierDiskFiles(gate.path);
   }
 
   /** Unlink by trying all mirrors whose path strategy resolves the URI — but a
@@ -328,29 +314,17 @@ export class LarDiskProjector {
     // text/x-memetic-wikitext — arrives with the migration wave.)
     if (isEffectRecordUri(tiddlerUri)) return;
 
-    // Site the carrier by its own filetype. The native-aware seam
-    // (`carrierFileFn`) hands back the VM's chosen extension + bytes + any
-    // `.meta` sidecar, so a `.tid`/`.json`/`.md` record projects back as its
-    // OWN file; the memetic fallback (`renderFn`) sites `.mem` alone. One
-    // authority decides the type — the VM registry — the projector only sites.
-    let relPath: string | null;
-    let output: string;
-    let metaBody: string | undefined;
-    if (this.carrierFileFn) {
-      const base = carrierBaseRelPath(tiddlerUri);
-      if (!base) return;
-      const file = await this.carrierFileFn(tiddlerUri);
-      if (file === null) return;
-      relPath  = base + file.ext;
-      output   = file.body;
-      metaBody = file.metaBody;
-    } else {
-      relPath = mirror.toRelPath(tiddlerUri);
-      if (!relPath) return;
-      const rendered = await this.renderFn(tiddlerUri);
-      if (rendered === null) return;
-      output = rendered;
-    }
+    // Site the carrier by its own filetype — ONE render seam. The VM registry
+    // hands back the chosen extension + bytes + any `.meta` sidecar, so a
+    // memetic carrier sites `.mem` and a `.tid`/`.json`/`.md` record projects
+    // back as its OWN file. The VM decides the type; the projector only sites.
+    const base = carrierBaseRelPath(tiddlerUri);
+    if (!base) return;
+    const file = await this.carrierFileFn(tiddlerUri);
+    if (file === null) return;
+    const relPath  = base + file.ext;
+    const output   = file.body;
+    const metaBody = file.metaBody;
 
     // The disk ward — sovereign-island write confinement (bag-paths). Cascade
     // output counts as untrusted; refusals surface LOUDLY, never silently.
@@ -407,18 +381,15 @@ export class LarDiskProjector {
     // NEW extension (`.md` → `.tid`), so the old-extension file (+ its `.meta`)
     // would orphan beside the fresh one. Remove any sibling of THIS carrier's
     // base that the current write did not produce — the extension moved, the
-    // name did not. (No-op for the memetic fallback: `.mem` never varies.)
-    if (this.carrierFileFn) {
-      const stragglers = this.mirrorCarrierFiles(mirror, tiddlerUri);
-      for (const f of stragglers ?? []) {
-        if (f === candidate || (metaPath !== null && f === metaPath)) continue;
-        try {
-          if (existsSync(f)) {
-            this.writing.add(tiddlerUri);
-            try { unlinkSync(f); } finally { this.writing.delete(tiddlerUri); }
-          }
-        } catch { /* best-effort */ }
-      }
+    // name did not.
+    for (const f of this.mirrorCarrierFiles(mirror, tiddlerUri) ?? []) {
+      if (f === candidate || (metaPath !== null && f === metaPath)) continue;
+      try {
+        if (existsSync(f)) {
+          this.writing.add(tiddlerUri);
+          try { unlinkSync(f); } finally { this.writing.delete(tiddlerUri); }
+        }
+      } catch { /* best-effort */ }
     }
 
     // After writing the current mirror, unlink stale files from OTHER mirrors —

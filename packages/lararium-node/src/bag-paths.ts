@@ -7,17 +7,13 @@
  */
 
 import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute, sep } from "path";
-import { MEME_EXT, stripMemeExt } from "@lararium/mesh";
-
-export type MirrorPathFn = (uri: string) => string | null;
+import { stripMemeExt } from "@lararium/mesh";
 
 export interface BagMirrorConfig {
   /** The bag whose changes this mirror reflects. */
   readonly bagId: string;
   /** Absolute filesystem path; all writes are constrained under this root. */
   readonly mirrorRoot: string;
-  /** URI → relative path under mirrorRoot. */
-  readonly toRelPath: MirrorPathFn;
   /**
    * Widened grant (capability, rides the manifest's diskMirrors): the mirror
    * MAY place files DIRECTLY in the root-bags-dir — the nearest ancestor of
@@ -86,47 +82,18 @@ function splitHash(s: string): [string, string | null] {
 }
 
 /**
- * Carrier-whole at rest (disk-projection#granularity): a fragment record
- * (`…#slot`) never owns a disk file — its carrier root does. A fragment URI
- * resolves to null here; the projector routes a child change to its group
- * root before any path lookup. A fragment must never map to `base/frag.mem` —
- * only its carrier root owns a file.
- */
-function toMemeRelPath(pathPart: string, frag: string | null): string | null {
-  if (frag) return null;
-  return `${stripMemeExt(pathPart)}${MEME_EXT}`;
-}
-
-/**
- * The siting function (lar-uri #five-planes): every file
- * on disk lives at its FULL uri-path inside its holding bag's mirror —
- * directory = residency, interior path = the name, whole. Any bag projects
- * any stable name losslessly; reverse derivation = strip root, read name.
- *
- *   lar:///ha.ka.ba/lares/api/pono/meme
- *     → ha.ka.ba/lares/api/pono/meme.mem   (relative to the bag mirror root)
- *
- * Fragments (#children) live inside their parent carrier file → null.
- * Unstable roots carry no siting → null (loci law).
- */
-export function fullPathBagPath(): MirrorPathFn {
-  return (uri) => {
-    if (!uri.startsWith("lar:///")) return null;
-    const bare = uri.slice("lar:///".length);
-    if (!/^\w+\.\w+\.\w+\//.test(bare)) return null;
-    const [pathPart, frag] = splitHash(bare);
-    return pathPart ? toMemeRelPath(pathPart, frag) : null;
-  };
-}
-
-/**
- * The extension-LESS carrier base path — the siting function up to (but not
- * including) the filetype extension. Memetic carriers append `.mem`; a native
- * TW5 filetype carrier (.tid/.json/.md/content-type) appends TW5's own chosen
- * extension here, so both filetypes site at the SAME `<uri-path>` and only the
- * extension differs. Fragments and unstable roots carry no siting → null.
+ * The siting function (lar-uri #five-planes) — the ONE URI → disk-path map: every
+ * carrier lives at its FULL uri-path inside its holding bag's mirror (directory =
+ * residency, interior path = the name, whole). This returns the path up to (but
+ * NOT including) the filetype extension — the render seam owns the extension
+ * (`.mem` for memetic, TW5's chosen extension for a native filetype), so both
+ * filetypes site at the SAME `<uri-path>` and only the extension differs.
  *
  *   lar:///ha.ka.ba/lares/api/pono/meme → ha.ka.ba/lares/api/pono/meme
+ *
+ * Carrier-whole at rest (disk-projection#granularity): a fragment record
+ * (`…#slot`) never owns a disk file — its carrier root does; a fragment URI (and
+ * an unstable root) resolves to null (loci law).
  */
 export function carrierBaseRelPath(uri: string): string | null {
   if (!uri.startsWith("lar:///")) return null;
@@ -139,12 +106,12 @@ export function carrierBaseRelPath(uri: string): string | null {
 
 /**
  * Construct a BagMirrorConfig for a named bag. `scope` rides as grant
- * metadata only — the siting function carries every stable name whole
- * (full-path-inside-bag ruling); the mirrorRoot = the bag's residency dir.
+ * metadata only — the siting function (`carrierBaseRelPath`) carries every
+ * stable name whole; the mirrorRoot = the bag's residency dir.
  */
 export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string): BagMirrorConfig {
   void scope;
-  return { bagId, mirrorRoot, toRelPath: fullPathBagPath() };
+  return { bagId, mirrorRoot };
 }
 
 // ── Loci reverse-derivation (the ingest gesture's scan leg) ─────────────────

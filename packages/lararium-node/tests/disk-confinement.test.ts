@@ -78,17 +78,20 @@ describe("disk ward — the widened grant (allowBagsRootFiles)", () => {
 });
 
 describe("disk ward — refusal signal (the alert chain's first link)", () => {
-  test("a refused flush fires onRefusal with bag, uri, and reason", async () => {
+  test("a flush whose URI derives a traversal path fires onRefusal", async () => {
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const refusals: Array<{ bagId: string; uri: string; reason: string }> = [];
     const projector = new LarDiskProjector({
-      mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares", toRelPath: () => "../@sdm/poison.md" }],
-      renderFn: async () => "never-rendered",
+      mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares" }],
+      // The ONE render seam — the ward still guards a malicious title: the path
+      // derives from the URI (`carrierBaseRelPath`), so a `../`-laden title
+      // escapes the root and the confinement ward refuses it.
+      carrierFileFn: async () => ({ ext: ".mem", body: "never-rendered" }),
       debounceMs: 1,
       onRefusal: (info) => refusals.push(info),
     });
     await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-      .flush("@lares", "lar:///ha.ka.ba/lares/x");
+      .flush("@lares", "lar:///ha.ka.ba/x/../../../../../../@sdm/poison");
     expect(refusals).toHaveLength(1);
     expect(refusals[0]?.bagId).toBe("@lares");
     expect(refusals[0]?.reason).toMatch(/escapes mirror root/);
@@ -100,21 +103,22 @@ describe("disk ward — cross-mirror stale-unlink guards on PATH, not bag", () =
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const root = mkdtempSync(join(tmpdir(), "lar-comirror-"));
     try {
-      // Two mirrors, DIFFERENT bagId, SAME mirrorRoot, SAME path strategy —
-      // so both resolve this URI to the identical file. Pre-fix, the second
-      // mirror's stale-unlink deleted the file the first mirror just rendered
-      // (the guard checked bagId, not path); post-fix the path guard skips it.
-      const rel = "ha.ka.ba/bags/@x/note.md";
+      // Two mirrors, DIFFERENT bagId, SAME mirrorRoot — so both resolve this URI
+      // to the identical file (the path derives from the URI alone now). The
+      // second mirror's stale-unlink must NOT delete the file the first just
+      // wrote — the path guard (stale === candidate) skips it.
+      const uri = "lar:///ha.ka.ba/bags/@x/note";
+      const rel = "ha.ka.ba/bags/@x/note.mem";
       const projector = new LarDiskProjector({
         mirrors: [
-          { bagId: "@a", mirrorRoot: root, toRelPath: () => rel },
-          { bagId: "@b", mirrorRoot: root, toRelPath: () => rel },
+          { bagId: "@a", mirrorRoot: root },
+          { bagId: "@b", mirrorRoot: root },
         ],
-        renderFn: async () => "the carrier body",
+        carrierFileFn: async () => ({ ext: ".mem", body: "the carrier body" }),
         debounceMs: 1,
       });
       await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-        .flush("@a", "lar:///ha.ka.ba/bags/@x/note");
+        .flush("@a", uri);
       expect(existsSync(join(root, rel))).toBe(true);
     } finally {
       rmSync(root, { recursive: true, force: true });
@@ -127,21 +131,25 @@ describe("disk ward — a working edit SHADOWS its canon copy, never deletes it"
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const root = mkdtempSync(join(tmpdir(), "lar-shadow-"));
     try {
-      const uri        = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
-      const canonRel   = "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
-      const workingRel = "wikis/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+      const uri     = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
+      // Post-collapse the PLANE lives in the mirrorRoot (bags/ vs wikis/); the
+      // relPath (the name) is identical under each root — exactly the production
+      // shape. The canon root and the working root are DIFFERENT dirs.
+      const canonRoot   = join(root, "bags", "@lares");
+      const workingRoot = join(root, "wikis", "@lares");
+      const rel         = "ha.ka.ba/lares/api/lares/noosphere-boot.mem";
       const CANON   = "lar:///ha.ka.ba/bags/@lares";
       const WORKING = "lar:///ha.ka.ba/wikis/@lares/working";
       // The canon file — the read-only boot-seed source — sits on disk.
-      mkdirSync(dirname(join(root, canonRel)), { recursive: true });
-      writeFileSync(join(root, canonRel), "the boot seed", "utf-8");
+      mkdirSync(dirname(join(canonRoot, rel)), { recursive: true });
+      writeFileSync(join(canonRoot, rel), "the boot seed", "utf-8");
 
       const projector = new LarDiskProjector({
         mirrors: [
-          { bagId: CANON,   mirrorRoot: root, toRelPath: (u) => (u === uri ? canonRel   : null) },
-          { bagId: WORKING, mirrorRoot: root, toRelPath: (u) => (u === uri ? workingRel : null) },
+          { bagId: CANON,   mirrorRoot: canonRoot },
+          { bagId: WORKING, mirrorRoot: workingRoot },
         ],
-        renderFn: async () => "the boot seed",
+        carrierFileFn: async () => ({ ext: ".mem", body: "the boot seed" }),
         // The carrier lives in BOTH bags — a working edit shadowing its canon copy.
         bagsHolding: async () => [WORKING, CANON],
         debounceMs: 1,
@@ -150,8 +158,8 @@ describe("disk ward — a working edit SHADOWS its canon copy, never deletes it"
       // LOAD into working → flush the working owner (as a --to working ingest does).
       await (projector as unknown as { flush: (b: string, u: string) => Promise<void> }).flush(WORKING, uri);
 
-      expect(existsSync(join(root, workingRel)), "working projection not written").toBe(true);
-      expect(existsSync(join(root, canonRel)), "canon file deleted by a working shadow-load").toBe(true);
+      expect(existsSync(join(workingRoot, rel)), "working projection not written").toBe(true);
+      expect(existsSync(join(canonRoot, rel)), "canon file deleted by a working shadow-load").toBe(true);
     } finally {
       rmSync(root, { recursive: true, force: true });
     }
