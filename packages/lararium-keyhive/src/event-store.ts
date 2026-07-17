@@ -24,8 +24,8 @@ export interface EventRecord {
   /** CIV-3 — the causal-island this event scopes to (a keyhive DocumentId hex; the island IS the
    *  ratchet boundary, so a per-island cut stays decryptability-safe). Absent = cross-cutting
    *  (PREKEY_ROTATED is per-principal, not per-document) — such events co-load with EVERY island's
-   *  slice. Populating this for CGKA/prekey needs the operating docId threaded through the
-   *  fire-and-forget handler; the attribution rides a later cut. */
+   *  slice. DELEGATED/REVOKED carry it off their own subject bytes; CGKA_OPERATION borrows the
+   *  active doc-op's island under the single-writer handler (`withActiveIsland`). */
   readonly island?: string;
 }
 
@@ -45,6 +45,16 @@ export interface EventStore {
  *  cross-cutting (unattributed) event that every island co-loads. `islandId` absent → all. */
 export function inIslandSlice(rec: EventRecord, islandId?: string): boolean {
   return islandId === undefined || rec.island === undefined || rec.island === islandId;
+}
+
+/** True when a stored event belongs to the EAGER boot slice (CIV-2 boot-flatness): a cross-cutting
+ *  (unattributed) event every island co-loads, OR one of the vessel's own self-islands. Generalizes
+ *  `inIslandSlice` from one island to the self SET. `selfIslandIds` absent → every event loads
+ *  eagerly (the N=1 daemon default, unchanged). Passing the self set draws the flatness cut: held /
+ *  foreign islands fall outside the eager slice and hydrate lazily on first access, so boot cost
+ *  tracks the SELF surface, never the held-principal count. */
+export function inSelfSlice(rec: EventRecord, selfIslandIds?: readonly string[]): boolean {
+  return selfIslandIds === undefined || rec.island === undefined || selfIslandIds.includes(rec.island);
 }
 
 /** In-memory event store for tests + the smoke test. Not durable. */

@@ -91,8 +91,11 @@ export interface CapabilityProvider extends CapabilityVerifier {
 
   /** Replay events from the event store back into Keyhive's in-memory state. Called once at
    *  boot. Torn-tolerant: `skipped` counts cap-events a corrupt record forced past (they
-   *  degrade a membership slice, never down the boot). */
-  hydrateFromEventStore(): Promise<{ ingested: number; skipped: number }>;
+   *  degrade a membership slice, never down the boot). CIV-2 boot-flatness: pass `selfIslands`
+   *  (the vessel's own sentinel doc-ids) to load only the self slice + cross-cutting events
+   *  eagerly; held/foreign islands defer (`deferred`) to lazy first-access. Absent → all eager
+   *  (the N=1 daemon default). */
+  hydrateFromEventStore(selfIslands?: readonly string[]): Promise<{ ingested: number; skipped: number; deferred: number }>;
 
   /** Tear down. Frees WASM resources. */
   dispose(): Promise<void>;

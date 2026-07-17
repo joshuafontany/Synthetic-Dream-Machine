@@ -12,7 +12,7 @@ export { KeyhiveProvider, ensureKeyhiveWasm, setKeyhiveWasmBytes } from "./keyhi
 export { packPersonaCrossing, applyPersonaCrossing } from "./persona-crossing.js";
 export type { PersonaCrossingBundle, CrossingContent, CrossingPlaintext } from "./persona-crossing.js";
 
-export { InMemoryEventStore } from "./event-store.js";
+export { InMemoryEventStore, inIslandSlice, inSelfSlice } from "./event-store.js";
 export type { EventStore, EventRecord } from "./event-store.js";
 
 export { DaemonEventStore, capEventTitle } from "./daemon-event-store.js";

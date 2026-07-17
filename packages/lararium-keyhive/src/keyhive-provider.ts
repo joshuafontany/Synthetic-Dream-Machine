@@ -27,6 +27,7 @@ import * as KH from "@keyhive/keyhive/slim";
 // (TS2306); the runtime export `wasmBase64` (a base64 string) resolves fine in node + vite.
 import { wasmBase64 } from "@keyhive/keyhive/keyhive_wasm.base64.js";
 import { ingestTolerant } from "@lararium/mesh";
+import { inSelfSlice } from "./event-store.js";
 import type {
   CapabilityProvider, CapabilityProviderInitOpts,
   DelegateArgs, DelegateResult, VerifyArgs, VerifyResult,
@@ -508,11 +509,24 @@ export class KeyhiveProvider implements CapabilityProvider {
     return bytesToHex(individual.id.toBytes());
   }
 
-  async hydrateFromEventStore(): Promise<{ ingested: number; skipped: number }> {
-    if (!this.eventStore) return { ingested: 0, skipped: 0 };
+  /**
+   * Replay persisted events back into Keyhive's in-memory state (boot). CIV-2 boot-flatness: pass
+   * `selfIslands` (the vessel's OWN sentinel doc-ids) to hydrate only the self slice eagerly — the
+   * self islands PLUS the cross-cutting events every island co-loads — so boot cost tracks the self
+   * surface, never the held-principal count. A held/foreign island's events fall outside the eager
+   * slice (`deferred`) and materialize lazily on first access (the island IS the ratchet boundary,
+   * so deferring it stays decryptability-safe for the self slice). Absent `selfIslands` → every
+   * event loads eagerly (the N=1 daemon default, byte-identical to before). `deferred` counts the
+   * held-island events left for lazy load (always 0 in the default path).
+   */
+  async hydrateFromEventStore(selfIslands?: readonly string[]): Promise<{ ingested: number; skipped: number; deferred: number }> {
+    if (!this.eventStore) return { ingested: 0, skipped: 0, deferred: 0 };
     const records = await this.eventStore.list();
+    const eager = selfIslands === undefined ? records : records.filter((r) => inSelfSlice(r, selfIslands));
+    const deferred = records.length - eager.length;
     const kh = this.requireKh();
-    return ingestTolerant(records.map((r) => r.bytes), (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
+    const { ingested, skipped } = await ingestTolerant(eager.map((r) => r.bytes), (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
+    return { ingested, skipped, deferred };
   }
 
   async dispose(): Promise<void> {
