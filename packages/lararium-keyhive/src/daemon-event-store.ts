@@ -28,6 +28,7 @@ import {
 } from "@lararium/mesh";
 import { type ChangeOrigin, type LarTiddlerRecord, toLarTiddlerRecord } from "@lararium/mesh";
 import type { EventStore, EventRecord } from "./event-store.js";
+import { inIslandSlice } from "./event-store.js";
 import { bytesToBase64, base64ToBytes } from "./bytes-base64.js";
 
 /** Map a Keyhive event variant to its lar sub-tag URI. */
@@ -85,6 +86,10 @@ export class DaemonEventStore implements EventStore {
         variant:    rec.variant,
         hash,
         "bytes-len": String(rec.bytes.length),
+        // CIV-3 — stamp the island scope (a keyhive DocumentId hex) so list(islandId) fetches one
+        // slice; absent leaves the event cross-cutting (co-loaded by every island). Stamping stays
+        // operator-private (the daemon bag), so it leaks no new metadata.
+        ...(rec.island !== undefined ? { island: rec.island } : {}),
       },
       { authority: "lares-keyhive" },
     );
@@ -92,7 +97,7 @@ export class DaemonEventStore implements EventStore {
     await this.opts.daemon.put(record, origin, { bag: DAEMON_BAG_ID });
   }
 
-  async list(): Promise<readonly EventRecord[]> {
+  async list(islandId?: string): Promise<readonly EventRecord[]> {
     const out: EventRecord[] = [];
     const titles = await this.opts.daemon.listVisible();
     for (const title of titles) {
@@ -104,8 +109,13 @@ export class DaemonEventStore implements EventStore {
       const hash    = fields["hash"];
       const text    = rec.tiddler.text;
       if (!variant || !hash || !text) continue;
+      const island = fields["island"];
+      const record: EventRecord = island !== undefined ? { hash, variant, bytes: new Uint8Array(), island } : { hash, variant, bytes: new Uint8Array() };
+      // CIV-3 — skip records outside the requested island slice BEFORE decoding the payload
+      // (island own-events + cross-cutting unattributed; islandId absent → all).
+      if (!inIslandSlice(record, islandId)) continue;
       try {
-        out.push({ hash, variant, bytes: base64ToBytes(text) });
+        out.push({ ...record, bytes: base64ToBytes(text) });
       } catch {
         // Malformed payload — skip; log via console for operator visibility.
         console.warn(`[daemon-event-store] skipped malformed cap event ${title}`);
