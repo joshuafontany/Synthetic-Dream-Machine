@@ -11,6 +11,8 @@
 #   membership (MA1)                  the admit swarm forms a roster across containers (roster 2/2).
 #   kahu       (S1 civic-custody)     a public-infra kahu HOLDS a citizen's ciphertext yet CANNOT read it —
 #                                     custody ⊥ materialization; Delivery-Service, never Auth-Root.
+#   kahu-recov (S3 civic-custody)     a kahu HOLDS a citizen's recovery escrow share yet CANNOT recover
+#                                     (become) them alone — the recovery quorum IS the impersonation quorum.
 #
 # Usage:  tools/civic-witness.sh
 # The 3-hop mesh + partition family rides its own longer witness: tools/herm-mesh-partition.mjs.
@@ -45,7 +47,8 @@ echo "════════════════════════�
 family "crossing matrix (X1-X5+anon)" crossing bash tools/crossing-witness.sh
 family "burn forward-cut (X6)"        burn     compose_scenario docker-compose.burn.yml     burn-device
 family "membership swarm (MA1)"       swarm    compose_scenario docker-compose.swarm-ws.yml founder
-family "kahu civic-custody (S1)"      kahu     compose_scenario docker-compose.kahu.yml     kahu-node
+family "kahu civic-custody (S1)"      kahu     compose_scenario docker-compose.kahu.yml          kahu-node
+family "kahu recovery-custody (S3)"   kaharec  compose_scenario docker-compose.kahu-recovery.yml kahu-rec-node
 
 echo "═══════════════════════════════════════════════════════════════"
 echo "  RESULT: ${PASS} families GREEN, ${FAIL} failed"

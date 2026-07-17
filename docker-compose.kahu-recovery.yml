@@ -1,0 +1,50 @@
+# docker-compose.kahu-recovery.yml — the civic-custody crown's RECOVERY half (S3): a KAHU node that
+# HOLDS a citizen's recovery escrow share cannot RECOVER (become) the citizen alone. The recovery quorum
+# IS the impersonation quorum (Camenisch-Lysyanskaya), made a container exit code. The recovery twin of
+# the kahu-custody (S1) family: S1 = can't read; S3 = can't recover. Delivery-Service, never Auth-Root.
+#
+#   kahu-rec-citizen  splits its root 2-of-3 {device, recorded-code, escrow-peer}, hands the KAHU only
+#                     the escrow share, and recovers from its OWN two custodians.
+#   kahu-rec-node     holds the ONE escrow share and CANNOT assemble a quorum (single custodian). Its exit
+#                     code IS the verdict (0 = the custodian cannot recover the citizen alone).
+#
+# One scenario:  docker compose -f docker-compose.kahu-recovery.yml up --abort-on-container-exit --exit-code-from kahu-rec-node
+# Or via the civic suite:  tools/civic-witness.sh
+# Down:  docker compose -f docker-compose.kahu-recovery.yml down -v
+
+name: dreamnet-kahu-recovery
+
+services:
+  kahu-rec-citizen:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "kahu-rec-run:/kahu"
+    networks: [kahurec]
+    restart: "no"
+    environment:
+      LAR_KAHU_ROLE:   "citizen"
+      LAR_KAHU_SHARED: "/kahu"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/kahu-recovery-node.ts"]
+
+  kahu-rec-node:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "kahu-rec-run:/kahu"
+    networks: [kahurec]
+    restart: "no"
+    environment:
+      LAR_KAHU_ROLE:   "kahu"
+      LAR_KAHU_SHARED: "/kahu"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/kahu-recovery-node.ts"]
+    depends_on: [kahu-rec-citizen]
+
+networks:
+  kahurec:
+    driver: bridge
+
+volumes:
+  kahu-rec-run:      # the split/escrow ceremony; wiped by `down -v`
