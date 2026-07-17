@@ -20,6 +20,7 @@
  */
 
 import { loadVesselVerifyingKey } from "@lararium/node";
+import { TIMEOUT_CEIL_MS } from "@lararium/mempalace";
 import { larDataDir } from "../env.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -52,11 +53,12 @@ export async function cmdRefresh(args: ParsedArgs): Promise<number> {
   if (k !== undefined) verbArgs["k"] = k;
   if (allStrata) verbArgs["allStrata"] = true;
 
-  // A projection re-pave over the whole content plane can run for many seconds (a large corpus longer),
-  // and it queues behind any in-flight capture pass on the holder — give it generous room.
+  // The caller's patience = the servo CEIL, so the CLI never cliffs before the daemon's adaptive
+  // (gradient) budget — a refresh queued behind a big in-flight capture pass still resolves; a real
+  // hang dies within CEIL. The daemon's per-verb servo is the real fail-on-a-gradient bound.
   let result;
   try {
-    result = await runVerb("refresh", verbArgs, did, { timeoutMs: 300_000 });
+    result = await runVerb("refresh", verbArgs, did, { timeoutMs: TIMEOUT_CEIL_MS });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {

@@ -27,6 +27,11 @@ import {
   DAEMON_BAG_ID, AutomergeDocStore, CompositeStore,
   summon, OUTCOME_URI_PREFIX, type LarDoc,
 } from "@lararium/mesh";
+// The adaptive-timeout SERVO (fail on a GRADIENT, never a cliff): a per-verb wait that GROWS with the
+// observed durations and clamps FLOOR..CEIL. The machine-code work stays Python; this is the
+// coordinator's PATIENCE, servo'd so a long-but-honest verb (a big-session capture, a refresh queued
+// behind a capture pass) is never false-killed the way a fixed 30s cliff killed them.
+import { adaptiveTimeoutMs, recordMineDuration } from "@lararium/mempalace";
 
 export interface UdsChannelOptions {
   /** The daemon's warm daemon doc handle (result.daemon.daemonHandle). */
@@ -98,11 +103,17 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
 
     return await new Promise<Record<string, unknown>>((resolve, reject) => {
       let settled = false;
+      const t0 = Date.now();
       const settle = (fn: () => void) => { if (!settled) { settled = true; cleanup(); fn(); } };
-      const check = () => { void readOutcome().then((r) => { if (r) settle(() => resolve(r)); }); };
+      // Only a COMPLETION teaches the servo (a timeout/hang never records → can't drag the EWMA to CEIL).
+      const check = () => { void readOutcome().then((r) => { if (r) settle(() => { recordMineDuration(inv.verb, Date.now() - t0); resolve(r); }); }); };
       const onChange = () => check();
       daemonHandle.on("change", onChange);
-      const timer = setTimeout(() => settle(() => reject(new Error(`verb "${inv.verb}" timed out after ${timeoutMs}ms`))), timeoutMs);
+      // Fail on a GRADIENT: the wait grows with this verb's learned durations (EWMA·K, clamped
+      // FLOOR..CEIL) — headroom for an honest long verb, while a real hang still dies within CEIL. The
+      // caller's own budget acts as a floor (never wait LESS than asked).
+      const budget = Math.max(timeoutMs, adaptiveTimeoutMs(inv.verb));
+      const timer = setTimeout(() => settle(() => reject(new Error(`verb "${inv.verb}" timed out after ${budget}ms (adaptive)`))), budget);
       const cleanup = () => { daemonHandle.off("change", onChange); clearTimeout(timer); };
       check(); // the outcome may already exist (idempotent re-submission)
     });

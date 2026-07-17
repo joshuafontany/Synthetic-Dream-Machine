@@ -30,7 +30,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, write
 import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
-import { listSpiritFiles } from "@lararium/mempalace";
+import { listSpiritFiles, TIMEOUT_CEIL_MS } from "@lararium/mempalace";
 import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/sensorium";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
@@ -995,7 +995,9 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     const detected = captureSurface(pointer);
     const surface = detected === "copilot-cli" ? "copilot" : detected;
     try {
-      const r = await runVerb("capture", { surface, pointer, wing, room: DEFAULT_ROOM, ...(surface === "copilot" && sessionId ? { sessionId } : {}) }, did, { timeoutMs: 120_000 });
+      // The CALLER'S patience = the servo CEIL, so the CLI never cliffs before the daemon's adaptive
+      // (gradient) budget resolves — a big session lands honestly; a real hang still dies within CEIL.
+      const r = await runVerb("capture", { surface, pointer, wing, room: DEFAULT_ROOM, ...(surface === "copilot" && sessionId ? { sessionId } : {}) }, did, { timeoutMs: TIMEOUT_CEIL_MS });
       const output = ((r.results as { summary?: { output?: Record<string, unknown> } } | undefined)?.summary?.output) ?? {};
       passes.push({ pointer, ...output });
     } catch (err) {
