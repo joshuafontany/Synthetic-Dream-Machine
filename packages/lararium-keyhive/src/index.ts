@@ -38,6 +38,7 @@ export type {
 export {
   runFoundingCeremony, runDeviceAdmitEdge, runApplyAdmitPayload,
 } from "./ceremony-core.js";
+export { runReadmitEdge, type ReadmitEdgeInput } from "./recovery-core.js";
 export type {
   FoundingCeremonyInput, FoundingCeremonyResult,
   DeviceAdmitEdgeInput,
