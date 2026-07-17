@@ -44,7 +44,7 @@ import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, readdir
 import { dirname, basename } from "path";
 import { confineMirrorWrite, carrierBaseRelPath } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
-import { isEffectRecordUri, KeyedCoalesceGate } from "@lararium/mesh";
+import { isEffectRecordUri, KeyedCoalesceGate, carrierHash } from "@lararium/mesh";
 import type { ReadinessMap, WindowServo } from "@lararium/mesh";
 import type { TW5Engine, CarrierFile } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -346,8 +346,10 @@ export class LarDiskProjector {
     // Projection-side hash gate (§6): bytes already on disk == would-write
     // bytes → skip the write entirely (no event for any watcher, no mtime
     // churn) — but still record the observation in the Synced tree. The gate
-    // reads the MAIN body; a `.meta` sidecar rides with it (write-through).
-    const outputHash = contentHash(output);
+    // reads the MAIN body per-file; the Synced-tree OBSERVATION folds the `.meta`
+    // in (the echo gate keys on the whole carrier, body + live metadata).
+    const outputHash = contentHash(output);                       // body-only, for the per-file skip
+    const obsHash    = carrierHash(output, metaBody);             // whole-carrier, for the Synced tree
     const metaPath   = metaBody !== undefined ? candidate + ".meta" : null;
     const metaInSync = metaPath === null || (existsSync(metaPath) && safeReadEquals(metaPath, metaBody!));
     try {
@@ -357,7 +359,7 @@ export class LarDiskProjector {
         ? readFileSync(candidate).equals(writeBytes as Buffer)
         : contentHash(readFileSync(candidate, "utf-8")) === outputHash);
       if (bodyInSync && metaInSync) {
-        this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
+        this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), obsHash);
         return;
       }
     } catch { /* unreadable existing file — fall through to the write */ }
@@ -372,7 +374,7 @@ export class LarDiskProjector {
       // it lands beside the body, atomic too, so a reader never pairs a fresh
       // body with a stale sidecar.
       if (metaPath !== null) this.atomicWrite(metaPath, metaBody!);
-      this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
+      this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), obsHash);
       if (this.debugJson && this._tw5) {
         const jsonStr = (this._tw5.$tw.wiki as { getTiddlerAsJson?: (t: string) => string })
           .getTiddlerAsJson?.(tiddlerUri);

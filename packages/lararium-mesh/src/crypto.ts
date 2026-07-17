@@ -178,6 +178,24 @@ export function sha256HexSync(text: string): string {
 }
 
 /**
+ * The carrier observation hash the §6 echo gate keys on — the SAME digest on
+ * every side of the disk membrane (the ingest gesture's `diskHash`, the
+ * projector's Synced-tree value, the in-VM gate's current/candidate render). It
+ * folds the `.meta` sidecar in, because `.meta` holds LIVE metadata for a
+ * bag/wiki entity: an edit to a carrier's FIELDS alone must read as CHANGED and
+ * re-ingest, which a body-only hash let slip past the echo gate. A carrier with
+ * The join reads TW5-native — it reconstructs the carrier's canonical `.tid`
+ * form (the field block, a blank line, then the text: exactly how TW5 serializes
+ * a tiddler to a single file). The first blank line is TW5's own field/text
+ * delimiter, so the boundary stays unambiguous with no out-of-band separator. A
+ * carrier with NO sidecar (every `.mem`/`.tid`) hashes body-only — byte-identical
+ * to the old `contentHash(body)`, so no stored observation migrates.
+ */
+export function carrierHash(body: string, meta?: string): string {
+  return meta === undefined ? sha256HexSync(body) : sha256HexSync(`${meta}\n\n${body}`);
+}
+
+/**
  * CID design note:
  * - Use CIDv1 raw SHA-256 for content identity where a stable address is needed.
  * - Avoid the full multiformats dependency by emitting only the raw SHA-256

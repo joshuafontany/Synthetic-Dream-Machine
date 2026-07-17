@@ -41,7 +41,7 @@ import type {
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
-  parseResidencyAction, withEffectRecord, sha256HexSync,
+  parseResidencyAction, withEffectRecord, sha256HexSync, carrierHash,
   emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
@@ -76,13 +76,13 @@ export interface Tw5Deserializer {
    *  the deserialize so a content carrier keeps its type/tags/custom fields
    *  across a body-only edit. */
   parseFields(metaText: string): Record<string, unknown>;
-  /** Render a native record to its carrier BODY bytes (the file-info body, the
-   *  same digest surface the projector + the ingest echo gate key on). The
-   *  INGEST gate hashes this to detect a native carrier's canonical-equivalence
-   *  (a cosmetic edit) and a conflict (both disk AND records moved) — so a native
-   *  filetype honors the same §6 law as a memetic carrier, never a silent
-   *  last-write-wins overwrite. */
-  renderCarrier(uri: string, fields: Record<string, unknown>): string;
+  /** Render a native record to its carrier BODY + `.meta` sidecar (the file-info
+   *  the projector + the ingest echo gate share). The INGEST gate hashes this via
+   *  `carrierHash` to detect a native carrier's canonical-equivalence (a cosmetic
+   *  edit) and a conflict (both disk AND records moved) — so a native filetype
+   *  honors the same §6 law as a memetic carrier, never a silent last-write-wins
+   *  overwrite. The `.meta` folds into the hash, so a FIELD-only edit surfaces too. */
+  renderCarrier(uri: string, fields: Record<string, unknown>): { body: string; metaBody?: string };
 }
 
 /**
@@ -99,7 +99,10 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
       const utils = engine.$tw.utils as { parseFields?: (t: string, f?: Record<string, unknown>) => Record<string, unknown> };
       return typeof utils.parseFields === "function" ? (utils.parseFields(metaText) ?? {}) : {};
     },
-    renderCarrier: (uri, fields) => makeTw5FileInfo(engine.$tw, uri, fields).body,
+    renderCarrier: (uri, fields) => {
+      const info = makeTw5FileInfo(engine.$tw, uri, fields);
+      return { body: info.body, ...(info.hasMetaFile && info.metaBody !== undefined ? { metaBody: info.metaBody } : {}) };
+    },
   };
 }
 
@@ -603,10 +606,13 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       const rootFresh = freshRecords.find((r) => r["title"] === uri) ?? freshRecords[0];
       const currentRec = await readFromBag(access, action.toBag, uri);
       if (rootFresh) {
-        const candidateHash = sha256HexSync(tw5!.renderCarrier(uri, rootFresh));
-        const currentHash   = currentRec
-          ? sha256HexSync(tw5!.renderCarrier(uri, currentRec.tiddler as unknown as Record<string, unknown>))
-          : null;
+        const cand = tw5!.renderCarrier(uri, rootFresh);
+        const candidateHash = carrierHash(cand.body, cand.metaBody);
+        let currentHash: string | null = null;
+        if (currentRec) {
+          const cur = tw5!.renderCarrier(uri, currentRec.tiddler as unknown as Record<string, unknown>);
+          currentHash = carrierHash(cur.body, cur.metaBody);
+        }
         // canonical-equivalent: the disk edit renders to what the records already hold.
         if (currentHash !== null && candidateHash === currentHash) {
           results.push({ uri, decision: "noop", reason: "canonical-equivalent" });

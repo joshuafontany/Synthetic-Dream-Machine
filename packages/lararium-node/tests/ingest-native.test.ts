@@ -12,6 +12,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { CompositeStore } from "@lararium/mesh";
+import { carrierHash } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord, VerbContext, Verb, CapabilityAccess, CapabilityVerifyResult } from "@lararium/mesh";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import { VerbTable } from "../../lararium-tw5/src/verb-dispatcher.js";
@@ -36,10 +37,10 @@ function ctx(composite: CompositeStore, args: Record<string, unknown>): VerbCont
   return { daemon: composite, invocation, cap: allowCap };
 }
 
-async function seedNative(composite: CompositeStore, text: string): Promise<void> {
+async function seedNative(composite: CompositeStore, text: string, extra?: Record<string, string>): Promise<void> {
   const origin: ChangeOrigin = { kind: "crdt-remote", edgeIsland: BAG };
   const record: LarTiddlerRecord = {
-    tiddler: { title: URI, type: "text/markdown", text } as LarTiddlerRecord["tiddler"],
+    tiddler: { title: URI, type: "text/markdown", text, ...extra } as LarTiddlerRecord["tiddler"],
     meta: { changeId: "seed-1" },
   };
   await composite.put(record, origin, { bag: BAG });
@@ -49,10 +50,12 @@ function makeComposite(): CompositeStore {
   c.addLayer({ bagId: BAG, store: new MemoryTiddlerStore(), writable: true });
   return c;
 }
-function args(text: string, syncedHash: string | null): Record<string, unknown> {
+function args(text: string, syncedHash: string | null, meta?: string): Record<string, unknown> {
+  // diskHash folds the `.meta` in exactly as the ingest gesture does (carrierHash);
+  // with no meta it equals sha(text), so the existing cases are unchanged.
   return {
     "source-uri": "file:///staged/note.md", "to-bag": BAG, "change-id": "chg-nat-1",
-    carriers: [{ uri: URI, text, diskHash: sha(text), syncedHash, ext: ".md" }],
+    carriers: [{ uri: URI, text, diskHash: carrierHash(text, meta), syncedHash, ext: ".md", ...(meta !== undefined ? { meta } : {}) }],
   };
 }
 async function runIngest(composite: CompositeStore, engine: TW5Engine, a: Record<string, unknown>) {
@@ -82,7 +85,9 @@ describe.skipIf(!corePresent)("INGEST — the native filetype §6 triangle", () 
 
   test("canonical-equivalent: disk renders to what the records already hold → noop", async () => {
     const composite = makeComposite();
-    await seedNative(composite, "identical body\n");
+    // a SETTLED record already holds the registry-canonical type (a prior ingest
+    // of a `.md` lands text/x-markdown); an identical disk re-renders byte-for-byte.
+    await seedNative(composite, "identical body\n", { type: "text/x-markdown" });
     const carrier = await runIngest(composite, engine, args("identical body\n", sha("an older projection")));
     expect(carrier["decision"]).toBe("noop");
     expect(carrier["reason"]).toBe("canonical-equivalent");
@@ -91,8 +96,11 @@ describe.skipIf(!corePresent)("INGEST — the native filetype §6 triangle", () 
   test("clean ingest: records unmoved since the merge base, disk moved → lands", async () => {
     const composite = makeComposite();
     await seedNative(composite, "base body\n");
-    // syncedHash == the CURRENT record's render → records unmoved; disk differs → ingest
-    const syncedHash = sha("base body\n");   // makeTw5FileInfo body of a .md is its text verbatim
+    // syncedHash == the CURRENT record's whole-carrier hash (body + .meta) → records
+    // unmoved; disk differs → ingest. Computed via the registry's own render so the
+    // fixture never drifts from makeTw5FileInfo's exact field-block bytes.
+    const cur = makeTw5Deserializer(engine).renderCarrier(URI, { title: URI, type: "text/markdown", text: "base body\n" });
+    const syncedHash = carrierHash(cur.body, cur.metaBody);
     const carrier = await runIngest(composite, engine, args("edited body\n", syncedHash));
     expect(carrier["decision"]).toBe("ingest");
     const rec = (await composite.resolveAll(URI)).find((e) => e.bagId === BAG)!.record;
@@ -106,5 +114,19 @@ describe.skipIf(!corePresent)("INGEST — the native filetype §6 triangle", () 
     const carrier = await runIngest(composite, engine, args(disk, sha(disk)));
     expect(carrier["decision"]).toBe("noop");
     expect(carrier["reason"]).toBe("disk-matches-synced");
+  });
+
+  test("a `.meta`-ONLY edit (same body, changed live metadata) re-ingests the new fields", async () => {
+    const composite = makeComposite();
+    // records unmoved: seed with custom-x=old; syncedHash = the current whole-carrier hash
+    await seedNative(composite, "the body\n", { "custom-x": "old" });
+    const cur = makeTw5Deserializer(engine).renderCarrier(URI, { title: URI, type: "text/markdown", text: "the body\n", "custom-x": "old" });
+    const syncedHash = carrierHash(cur.body, cur.metaBody);
+    // disk carries the SAME body, a CHANGED `.meta` (custom-x=new) — a field-only edit
+    const carrier = await runIngest(composite, engine, args("the body\n", syncedHash, "custom-x: new\ntitle: " + URI + "\ntype: text/markdown\n"));
+    expect(carrier["decision"]).toBe("ingest");
+    const rec = (await composite.resolveAll(URI)).find((e) => e.bagId === BAG)!.record;
+    expect(rec.tiddler["custom-x"]).toBe("new");     // the live metadata edit landed
+    expect(String(rec.tiddler["text"])).toContain("the body");
   });
 });

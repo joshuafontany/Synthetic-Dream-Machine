@@ -17,8 +17,8 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, resolve, sep, extname } from "node:path";
-import { newChangeId, taskContentId } from "@lararium/mesh";
-import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
+import { newChangeId, taskContentId, carrierHash } from "@lararium/mesh";
+import { SyncedTree, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
 
@@ -147,17 +147,19 @@ export function scanFiles(
       rows.push({ file, uri, text, diskHash: "", syncedHash: null, status: "non-nfc", ext });
       continue;
     }
-    const diskHash   = contentHash(text);
-    const syncedHash = tree.get(syncedTreeKey(toBag, uri));
-    const status: ScanStatus =
-      syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
-    // Pair a `.meta` sidecar sitting beside a content file — its fields ride
-    // WITH the carrier so a body-only edit never drops the sidecar's fields.
+    // Pair a `.meta` sidecar sitting beside a content file — its fields ride WITH
+    // the carrier, AND fold into the observation hash: `.meta` holds LIVE metadata
+    // for the entity, so an edit to it alone must read as CHANGED (a body-only
+    // hash let a field-only edit slip past the echo gate).
     let meta: string | undefined;
     try {
       const metaPath = file + ".meta";
       if (existsSync(metaPath)) meta = readFileSync(metaPath, "utf8");
     } catch { /* no readable sidecar — a self-contained filetype needs none */ }
+    const diskHash   = carrierHash(text, meta);
+    const syncedHash = tree.get(syncedTreeKey(toBag, uri));
+    const status: ScanStatus =
+      syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
     rows.push({ file, uri, text, diskHash, syncedHash, status, ext, ...(meta !== undefined ? { meta } : {}) });
   }
   return { rows, skipped };
