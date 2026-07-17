@@ -43,7 +43,7 @@ import { confineMirrorWrite, carrierBaseRelPath } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
 import { isEffectRecordUri, KeyedCoalesceGate, stripMemeExt } from "@lararium/mesh";
 import type { ReadinessMap, WindowServo } from "@lararium/mesh";
-import type { TW5Engine } from "@lararium/tw5";
+import type { TW5Engine, CarrierFile } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
 
 export interface LarDiskProjectorOptions {
@@ -60,7 +60,7 @@ export interface LarDiskProjectorOptions {
    * needs one). Present → the projector sites at `<uri-path><ext>` and writes
    * the sidecar; absent → falls back to `renderFn` (`.mem` only). Null skips.
    */
-  readonly carrierFileFn?: (tiddlerUri: string) => Promise<import("@lararium/tw5").CarrierFile | null>;
+  readonly carrierFileFn?: (tiddlerUri: string) => Promise<CarrierFile | null>;
   /**
    * Report every bag that currently HOLDS a carrier (`composite.listBagsHolding`).
    * Gates the cross-mirror stale-unlink: a carrier still living in a bag — a
@@ -118,7 +118,7 @@ export class LarDiskProjector {
 
   private readonly mirrors: readonly BagMirrorConfig[];
   private readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
-  private readonly carrierFileFn: ((tiddlerUri: string) => Promise<import("@lararium/tw5").CarrierFile | null>) | undefined;
+  private readonly carrierFileFn: ((tiddlerUri: string) => Promise<CarrierFile | null>) | undefined;
   private readonly bagsHolding: ((tiddlerUri: string) => Promise<readonly string[]>) | undefined;
   private readonly debounceMs: number;
   private readonly onRefusal: ((info: { bagId: string; uri: string; reason: string }) => void) | undefined;
