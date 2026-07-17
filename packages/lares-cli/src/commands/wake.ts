@@ -101,30 +101,32 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   }
   const integration = checkMempalaceIntegration();
 
-  // 1b. Wire the Claude harness home (~/.claude) on --claude — composable with
-  //     --install / --admit / bare. Idempotent; preserves existing settings.
+  // 1b. The AI-SURFACE SEATS — every harness reaches the memory sensorium through the same lares seat.
+  //     `--init` stands the WHOLE house, so it tends EVERY surface: each wire converges on the RESOLVED
+  //     spawn (aligned passes untouched · drifted re-aims · absent wires), which makes running them on
+  //     every init safe AND load-bearing — a package that re-homes its sidecar would otherwise leave
+  //     each seat aiming at a deleted file while the wire reported success (witnessed: the claude seat
+  //     sat shut from the sensorium package split until a re-aim). A single surface flag still targets
+  //     that one alone; every wire stays graceful when its tool isn't set up here.
+  const initAll = args.flags["init"] === true;
   let claude: ClaudeWireResult | undefined;
-  if (args.flags["claude"]) {
+  if (initAll || args.flags["claude"]) {
     try { claude = await wireClaudeHome(); }
     catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
-
-  // 1c. Other harnesses — same recall MCP + ingest hook, in each tool's own config
-  //     format. Composable, idempotent, graceful when the tool isn't set up here.
   let codex: CodexWireResult | undefined;
-  if (args.flags["codex"]) {
+  if (initAll || args.flags["codex"]) {
     try { codex = wireCodexHome(); }
     catch (e) { codex = { configPath: "", changed: false, steps: [{ item: "codex", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
   let copilot: CopilotWireResult | undefined;
-  if (args.flags["copilot"]) {
+  if (initAll || args.flags["copilot"]) {
     try { copilot = wireCopilotHome(); }
     catch (e) { copilot = { home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
-  // --vscode: register the mempalace MCP (recall) into every present VS Code variant
-  // (stable + Insiders, remote-server + local-profile). Idempotent.
+  // Every present VS Code variant (stable + Insiders, remote-server + local-profile).
   let vscode: VscodeWireResult | undefined;
-  if (args.flags["vscode"]) {
+  if (initAll || args.flags["vscode"]) {
     try { vscode = wireVscode(); }
     catch (e) { vscode = { changed: false, steps: [{ item: "vscode", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
