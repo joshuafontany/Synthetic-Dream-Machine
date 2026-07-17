@@ -171,6 +171,26 @@ class CaptureSessionServer:
             **summary,
         }
 
+    def refresh(self, req: dict) -> dict:
+        """Re-pave the in-tree mempalace projection over THIS holder's content store — the derived recall
+        surface rebuilt from the eidetic ground.
+
+        Rides the SAME serialized pipe as `capture`, so a refresh queues BETWEEN capture passes and never
+        races the writer: no second store connection, and the content read stays consistent. The op is
+        AWARE that open sessions may run alongside it — it paves the content as of now; a live session's
+        later turns land on the next `capture`, and a later `refresh` re-derives the view. A full
+        teardown/rebuild tears content first and re-captures every surface (the heavy path); this op only
+        re-derives the projection, so it stays cheap enough to ask for anytime while capture continues."""
+        import mempalace_pave_cli as pave_cli
+        mempalace_dir = os.path.join(self._paths.root, "mempalace")
+        query = req.get("query")
+        return pave_cli.run(
+            self._paths.content, mempalace_dir,
+            query=(str(query) if query else None),
+            k=int(req.get("k") or 5),
+            all_strata=bool(req.get("allStrata")),
+        )
+
 
 def _serve(sensorium_root: str) -> None:
     """Serve one serialized Python capture pipe over NDJSON stdio."""
@@ -181,6 +201,7 @@ def _serve(sensorium_root: str) -> None:
         build_dispatch=lambda: make_dispatch({
             "ping": lambda _req: {"ready": True},
             "capture": server.capture,
+            "refresh": server.refresh,   # re-pave the mempalace projection, serialized with capture
         }),
         idle_ttl=idle_ttl_seconds("LARES_CAPTURE_IDLE_TTL", 600.0),
         singleton_msg="capture_session: another holder already serves this palace; exiting (singleton)\n",

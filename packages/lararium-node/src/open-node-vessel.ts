@@ -555,6 +555,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         sourceCapture ??= makeSourceCapture(memorySensoriumDir());
         return await sourceCapture.capture(input);
       },
+      refreshMempalace: async (input) => {
+        // The SAME serialized capture holder owns the store; a refresh rides its pipe (queues between
+        // capture passes), so the projection re-paves without racing the live writer.
+        sourceCapture ??= makeSourceCapture(memorySensoriumDir());
+        return await sourceCapture.refresh(input);
+      },
       placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),

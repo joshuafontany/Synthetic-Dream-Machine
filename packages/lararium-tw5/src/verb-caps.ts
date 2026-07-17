@@ -120,6 +120,9 @@ export interface SubagentEdgePair {
 export interface DaemonVerbProvider {
   /** Send one source-stream pointer to the serialized Python capture holder. */
   captureSource(input: { surface: "claude" | "codex" | "copilot" | "copilot-vscode"; pointer: string; wing: string; room?: string; sessionId?: string }): Promise<Record<string, unknown>>;
+  /** Re-pave the in-tree mempalace projection over the content plane, THROUGH the same serialized Python
+   *  capture holder — so a refresh queues between capture passes and never races the live writer. */
+  refreshMempalace(input: { query?: string; k?: number; allStrata?: boolean }): Promise<Record<string, unknown>>;
   /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeStructurepalaceKapae(turnKey: string, ended?: string): void;
@@ -334,6 +337,18 @@ export function captureVerbCap(): CapModule {
           }
           if (!pointer || !wing) throw new Error("capture: args.pointer + args.wing (non-empty strings) required");
           return await daemon.captureSource({ surface, pointer, wing, ...(room ? { room } : {}), ...(sessionId ? { sessionId } : {}) });
+        });
+        registry.register("refresh", async (args) => {
+          // Re-pave the mempalace projection over the content plane, serialized on the capture holder's
+          // pipe (rides between capture passes — no race with the live writer).
+          const query = typeof args["query"] === "string" ? (args["query"] as string) : undefined;
+          const k = typeof args["k"] === "number" ? (args["k"] as number) : undefined;
+          const allStrata = args["allStrata"] === true;
+          return await daemon.refreshMempalace({
+            ...(query ? { query } : {}),
+            ...(k !== undefined ? { k } : {}),
+            ...(allStrata ? { allStrata } : {}),
+          });
         });
         registry.register("structurepalace-kapae", async (args) => {
           // REWIND one turn's .structurepalace tally (+ salience down-weight) — the convergence twin of the

@@ -65,6 +65,9 @@ export interface SourceCaptureResult {
 
 export interface SourceCapture {
   capture(request: SourceCaptureRequest): Promise<SourceCaptureResult>;
+  /** Re-pave the in-tree mempalace projection over the content plane, on the SAME serialized pipe — so a
+   *  refresh queues between capture passes and never races the writer (a second store connection would). */
+  refresh(request: { query?: string; k?: number; allStrata?: boolean }): Promise<Record<string, unknown>>;
   close(): Promise<void>;
 }
 
@@ -94,6 +97,9 @@ export function makeSourceCapture(
   const p = composePalace(LABEL, sensoriumRoot, opts.spawn ?? defaultSpawn(sensoriumRoot), opts.timeoutMs ?? 120_000);
   return {
     capture: async (request) => await p.send("capture", sourceCaptureDescriptor(request)) as SourceCaptureResult,
+    // A refresh carries no session text — only the projection knobs — so it needs no admission descriptor;
+    // the holder re-derives the view from the content it already owns.
+    refresh: async (request) => await p.send("refresh", { ...request }) as Record<string, unknown>,
     close: p.close,
   };
 }

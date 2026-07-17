@@ -27,6 +27,7 @@ import { cmdTelemetry } from "./telemetry.js";
 import { cmdSubagents } from "./subagents.js";
 import { cmdPalaceTeardown } from "./palace-teardown.js";
 import { cmdRecall } from "./recall.js";
+import { cmdRefresh } from "./refresh.js";
 import { cmdFlow } from "./flow.js";
 import { cmdMeta } from "./meta.js";
 
@@ -45,6 +46,7 @@ type Verb = (typeof VERBS)[number];
  */
 const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | number>> = {
   recall:    cmdRecall,
+  refresh:   cmdRefresh,
   capture:   cmdCapture,
   pour:      cmdHarvest,
   teardown:  cmdPalaceTeardown,
