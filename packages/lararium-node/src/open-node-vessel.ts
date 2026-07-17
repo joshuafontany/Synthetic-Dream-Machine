@@ -281,21 +281,29 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // mempalace client (that stays the `lares mempalace` sidecar lane) — the sovereign/guest separation.
   // Lazy: the read holders spawn on first recall, reused after (distinct lock-prefixes from the capture
   // holder, so a concurrent re-pour never blocks a read).
-  let recallHolder: RecallHolder | null = null;
+  // One recall holder PER sensorium root — ADDRESSED recall up the cap ladder (each sensorium's own
+  // coordinator; `memory` is the default). The same machinery serves ai-sessions, text, and encoded streams.
+  const recallHolders = new Map<string, RecallHolder>();
+  const recallFor = (root?: string): RecallHolder => {
+    const r = root && root.length > 0 ? root : memorySensoriumDir();
+    let h = recallHolders.get(r);
+    if (!h) { h = makeRecallHolder(r); recallHolders.set(r, h); }
+    return h;
+  };
   let recallContent: ContentPalace | null = null;
   const sovereignRecallClient: RecallClient = {
     // Combined-arms search rides the ONE Python coordinator (recall_session.py → LaresCoordinator): it
     // composes the sensorium's #has recall-surfaces (content-vector ⊕ mempalace lexical+entity), RRF-fuses,
-    // and resolves verbatim — the machine-code stays Python; this is a thin coordinator call. STREAM-
-    // AGNOSTIC: the same holder serves any sensorium up the cap ladder (ai-sessions → text → encoded).
+    // and resolves verbatim — machine-code stays Python; this is a thin coordinator call. STREAM-AGNOSTIC +
+    // ADDRESSED: `sensoriumRoot` picks any sensorium's holder up the ladder (ai-sessions → text → encoded).
     search: async (a) => {
-      recallHolder ??= makeRecallHolder(memorySensoriumDir());
+      const root = typeof a["sensoriumRoot"] === "string" ? a["sensoriumRoot"] : undefined;
       const query = typeof a["query"] === "string" ? a["query"] : "";
       const k = typeof a["limit"] === "number" ? a["limit"]
               : typeof a["nResults"] === "number" ? a["nResults"]
               : typeof a["k"] === "number" ? a["k"] : undefined;
       const wing = typeof a["wing"] === "string" ? a["wing"] : undefined;
-      return await recallHolder.recall({ query, ...(k !== undefined ? { limit: k } : {}), ...(wing ? { wing } : {}) });
+      return await recallFor(root).recall({ query, ...(k !== undefined ? { limit: k } : {}), ...(wing ? { wing } : {}) });
     },
     getDrawer: async (drawerId) => {
       recallContent ??= makeContentPalace(larContentDir());

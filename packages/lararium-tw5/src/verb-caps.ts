@@ -263,6 +263,9 @@ export function recallVerbCap(): CapModule {
           // silent drop) until the fuse learns them.
           const filters = readStampFilters(args);
           if (filters && dual) throw new Error("recall: stamp filters (--voice/--band/--agent/--surface/--drift) do not yet compose with --multi");
+          // The addressed sensorium (from `lares sense <sensorium> recall`) — picks that sensorium's recall
+          // holder up the cap ladder (absent → the memory default).
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           // Warm pooled sidecar (started once, reused, self-healing) — recall stays sub-second after the
           // first cold start; this makes recall-into-wake fast.
           return mp.withClient(async (client) => {
@@ -274,7 +277,7 @@ export function recallVerbCap(): CapModule {
               // degradation on fault) + the RRF fuse ride the form provider's multiRecall impl, verbatim;
               // the body keeps the arg-coercion and hands the content leg + the assembled args across.
               const res = await form.multiRecall(
-                { contentSearch: (a) => client.search(a) },
+                { contentSearch: (a) => client.search({ ...a, ...(sensoriumRoot ? { sensoriumRoot } : {}) }) },
                 {
                   query,
                   ...(wing          !== undefined ? { wing } : {}),
@@ -288,7 +291,7 @@ export function recallVerbCap(): CapModule {
               );
               return { mode: "multi", ...res };
             }
-            if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
+            if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) })) };
             return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
           });
         });

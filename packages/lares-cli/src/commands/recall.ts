@@ -72,6 +72,8 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   else if (query)        verbArgs["query"]  = query;
   if (wing  !== undefined) verbArgs["wing"]  = wing;
   if (limit !== undefined) verbArgs["limit"] = Number(limit);
+  // The addressed sensorium (from `lares sense <sensorium> recall`) — recall that sensorium up the ladder.
+  if (typeof args.options["sensorium-root"] === "string") verbArgs["sensoriumRoot"] = args.options["sensorium-root"];
   for (const k of filterKeys) if (args.options[k] !== undefined) verbArgs[k] = args.options[k];
 
 
