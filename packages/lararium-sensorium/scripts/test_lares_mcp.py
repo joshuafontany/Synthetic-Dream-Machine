@@ -333,3 +333,26 @@ def test_daemon_recall_plane_lens_owes_the_routing():
     dc = DaemonCoordinator()
     with pytest.raises(RuntimeError):
         dc.recall("q", 2, lens="structure")
+
+
+# ── the sensorium address resolver (name → root; mirrors TS sensoriumDir/sensoriumNames) ──────
+
+
+def test_sensorium_address_resolver_honors_lar_root(monkeypatch, tmp_path):
+    # the py resolver mirrors TS larDataHome/sensoriumDir: LAR_ROOT/data for an isolated instance, so the
+    # MCP `sensorium=` address and the CLI `lares sense <sensorium>` name ONE root byte-for-byte.
+    from sensorium import sensorium_dir, sensorium_names
+    monkeypatch.setenv("LAR_ROOT", str(tmp_path))
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "data", "sensoriums", "memory")
+    assert sensorium_names() == []                         # an absent dir rosters empty, never raises
+    os.makedirs(os.path.join(str(tmp_path), "data", "sensoriums", "ai-sessions"))
+    assert "ai-sessions" in sensorium_names()             # a stood sensorium shows in the roster
+
+
+def test_sensorium_address_resolver_falls_to_xdg(monkeypatch, tmp_path):
+    # LAR_ROOT unset → $XDG_DATA_HOME/lares/sensoriums/<name>, the same fall TS larDataHome takes.
+    from sensorium import sensorium_dir
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path))
+    assert sensorium_dir("mesh") == os.path.join(str(tmp_path), "lares", "sensoriums", "mesh")
