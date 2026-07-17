@@ -52,5 +52,9 @@ describe("ingest-core READ seam — filetype-native listing + ext carry", () => 
     expect(byExt.get(".md")!.uri).toBe("lar:///ha.ka.ba/lares/api/c");
     // never-projected → status "new"
     expect(byExt.get(".tid")!.status).toBe("new");
+    // the `.tid`'s paired `.meta` sidecar rides WITH the carrier row (fields kept
+    // across a body edit); a carrier with no sidecar carries none.
+    expect(byExt.get(".tid")!.meta).toContain("application/x-tiddler");
+    expect(byExt.get(".md")!.meta).toBeUndefined();
   });
 });

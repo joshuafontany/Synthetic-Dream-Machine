@@ -32,7 +32,7 @@
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { join, extname, resolve, relative, sep } from "node:path";
-import { statSync, readdirSync, readFileSync } from "node:fs";
+import { statSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId, OUTCOME_URI_PREFIX } from "@lararium/mesh";
@@ -148,11 +148,13 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     try {
       const st = statSync(sourceUri);
       const isDir = st.isDirectory();
-      const paths = isDir
+      const paths = (isDir
         ? (readdirSync(sourceUri, { recursive: true }) as string[])
             .map((f) => join(sourceUri, f))
             .filter((f) => { try { return statSync(f).isFile(); } catch { return false; } })
-        : [sourceUri];
+        : [sourceUri])
+        // A `.meta` sidecar rides WITH its content file, never as a carrier of its own.
+        .filter((f) => !f.endsWith(".meta"));
       // The feed lands BOTH memetic-wikitext memes AND every other legal TW5
       // filetype: each carrier rides its text + a loci title + its extension, and
       // the island routes by content (an SOH heading → the memetic membrane; else
@@ -170,7 +172,12 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
           }
           return true;
         })
-        .map(({ f, text }) => ({ text, title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f) }));
+        .map(({ f, text }) => {
+          // Pair a `.meta` sidecar so a content filetype keeps its fields at the membrane.
+          let meta: string | undefined;
+          try { if (existsSync(f + ".meta")) meta = readFileSync(f + ".meta", "utf8"); } catch { /* none */ }
+          return { text, title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f), ...(meta !== undefined ? { meta } : {}) };
+        });
       if (carriers.length > 0) {
         actionArgs["carriers"] = carriers;
         carrierCount = carriers.length;

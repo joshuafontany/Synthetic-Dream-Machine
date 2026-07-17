@@ -37,8 +37,8 @@
  * correctness rests on it.
  */
 
-import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameSync } from "fs";
-import { dirname } from "path";
+import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, readdirSync, renameSync } from "fs";
+import { dirname, basename } from "path";
 import { confineMirrorWrite, carrierBaseRelPath } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
 import { isEffectRecordUri, KeyedCoalesceGate, stripMemeExt } from "@lararium/mesh";
@@ -100,6 +100,29 @@ export interface LarDiskProjectorOptions {
 function safeReadEquals(path: string, body: string): boolean {
   try { return existsSync(path) && readFileSync(path, "utf-8") === body; }
   catch { return false; }
+}
+
+/** Escape a filename stem for a literal match inside a RegExp. */
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Resolve a carrier's ACTUAL on-disk files from its confined absolute base
+ * (extension-less). A carrier owns exactly one content file at `<stem><ext>`
+ * plus an optional `<stem><ext>.meta` sidecar — the extension varies by filetype
+ * (the ruling), so the deletion/unlink side cannot assume `.mem`. The match binds
+ * the WHOLE stem then a single extension segment (+ optional `.meta`), so a
+ * sibling carrier whose stem merely shares a prefix never gets swept. Returns
+ * absolute paths; a missing directory reads as no files.
+ */
+export function carrierDiskFiles(absBase: string): string[] {
+  const dir  = dirname(absBase);
+  const stem = basename(absBase);
+  const re   = new RegExp(`^${escapeRegExp(stem)}\\.[^.]+(?:\\.meta)?$`);
+  try {
+    return readdirSync(dir).filter((n) => re.test(n)).map((n) => `${dir}/${n}`);
+  } catch { return []; }
 }
 
 export class LarDiskProjector {
@@ -232,6 +255,37 @@ export class LarDiskProjector {
     await this.flush(bagId, rootUri);
   }
 
+  /**
+   * Resolve a carrier's confined on-disk file(s) within ONE mirror — the
+   * native-aware seam globs the actual `<stem><ext>` (+ `.meta`) so a
+   * `.tid`/`.md`/`.json` carrier resolves its real files (the ruling: the
+   * extension varies); the memetic fallback resolves the single `.mem` path.
+   * Returns null to SKIP (unresolvable name, or a ward refusal already surfaced);
+   * an empty array means the name resolved but no file sits on disk.
+   */
+  private mirrorCarrierFiles(mirror: BagMirrorConfig, uri: string): string[] | null {
+    if (this.carrierFileFn) {
+      const base = carrierBaseRelPath(uri);
+      if (!base) return null;
+      const gate = confineMirrorWrite(mirror.mirrorRoot, base, mirror.allowBagsRootFiles);
+      if (!gate.ok) {
+        console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`);
+        this.onRefusal?.({ bagId: mirror.bagId, uri, reason: gate.reason });
+        return null;
+      }
+      return carrierDiskFiles(gate.path);
+    }
+    const relPath = mirror.toRelPath(uri);
+    if (!relPath) return null;
+    const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
+    if (!gate.ok) {
+      console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`);
+      this.onRefusal?.({ bagId: mirror.bagId, uri, reason: gate.reason });
+      return null;
+    }
+    return existsSync(gate.path) ? [gate.path] : [];
+  }
+
   /** Unlink by trying all mirrors whose path strategy resolves the URI — but a
    *  mirror whose bag STILL HOLDS the carrier keeps its file (a carrier hidden
    *  from the resolved view by a shadowing tombstone still lives in its lower
@@ -240,21 +294,16 @@ export class LarDiskProjector {
     const holdingBags = this.bagsHolding ? new Set(await this.bagsHolding(title)) : null;
     for (const mirror of this.mirrors) {
       if (holdingBags?.has(mirror.bagId)) continue;
-      const relPath = mirror.toRelPath(title);
-      if (!relPath) continue;
-      const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
-      if (!gate.ok) {
-        console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`);
-        this.onRefusal?.({ bagId: mirror.bagId, uri: title, reason: gate.reason });
-        continue;
-      }
-      const candidate = gate.path;
+      const files = this.mirrorCarrierFiles(mirror, title);
+      if (files === null) continue;
       try {
-        if (existsSync(candidate)) {
-          this.writing.add(title);
-          try { unlinkSync(candidate); } finally { this.writing.delete(title); }
+        for (const f of files) {
+          if (existsSync(f)) {
+            this.writing.add(title);
+            try { unlinkSync(f); } finally { this.writing.delete(title); }
+          }
         }
-        this.syncedTree?.delete(syncedTreeKey(mirror.bagId, title));   // the observation leaves with the file
+        this.syncedTree?.delete(syncedTreeKey(mirror.bagId, title));   // the observation leaves with the file(s)
       } catch { /* best-effort — operator can clean up manually */ }
     }
   }
@@ -354,6 +403,24 @@ export class LarDiskProjector {
       this.writing.delete(tiddlerUri);
     }
 
+    // Same-mirror straggler sweep: a FILETYPE change re-sites the carrier at a
+    // NEW extension (`.md` → `.tid`), so the old-extension file (+ its `.meta`)
+    // would orphan beside the fresh one. Remove any sibling of THIS carrier's
+    // base that the current write did not produce — the extension moved, the
+    // name did not. (No-op for the memetic fallback: `.mem` never varies.)
+    if (this.carrierFileFn) {
+      const stragglers = this.mirrorCarrierFiles(mirror, tiddlerUri);
+      for (const f of stragglers ?? []) {
+        if (f === candidate || (metaPath !== null && f === metaPath)) continue;
+        try {
+          if (existsSync(f)) {
+            this.writing.add(tiddlerUri);
+            try { unlinkSync(f); } finally { this.writing.delete(tiddlerUri); }
+          }
+        } catch { /* best-effort */ }
+      }
+    }
+
     // After writing the current mirror, unlink stale files from OTHER mirrors —
     // but ONLY where the carrier has genuinely LEFT that bag (a true MOVE, e.g.
     // promotion wiki-bag → lares-bag, cleaning the old scratch file). A carrier
@@ -366,27 +433,23 @@ export class LarDiskProjector {
     for (const otherMirror of this.mirrors) {
       // The carrier still lives in this bag (shadowed, not moved) → keep its file.
       if (holdingBags?.has(otherMirror.bagId)) continue;
-      const staleRel = otherMirror.toRelPath(tiddlerUri);
-      if (!staleRel) continue;
-      const staleGate = confineMirrorWrite(otherMirror.mirrorRoot, staleRel, otherMirror.allowBagsRootFiles);
-      if (!staleGate.ok) {
-        console.error(`[disk-ward] stale-unlink refused (${otherMirror.bagId}): ${staleGate.reason}`);
-        this.onRefusal?.({ bagId: otherMirror.bagId, uri: tiddlerUri, reason: staleGate.reason });
-        continue;
+      const staleFiles = this.mirrorCarrierFiles(otherMirror, tiddlerUri);
+      if (staleFiles === null) continue;
+      for (const stale of staleFiles) {
+        // Never unlink what THIS flush just wrote. Path identity — not bag
+        // identity — marks the live file: the base derives from the URI alone,
+        // so the current bag, AND any mirror sharing this mirrorRoot, resolves to
+        // the SAME files. The path guard closes the co-rooted self-deletion
+        // structurally — no mirror config can trigger it (the `.meta` sidecar
+        // rides beside the body under the same guard).
+        if (stale === candidate || (metaPath !== null && stale === metaPath)) continue;
+        try {
+          if (existsSync(stale)) {
+            this.writing.add(tiddlerUri);
+            try { unlinkSync(stale); } finally { this.writing.delete(tiddlerUri); }
+          }
+        } catch { /* best-effort */ }
       }
-      // Never unlink the path we just rendered. Path identity — not bag
-      // identity — marks the live file: toRelPath derives from the URI alone,
-      // so the current bag, AND any mirror sharing this mirrorRoot, resolves to
-      // the SAME path. The old bagId guard let a co-rooted sibling unlink the
-      // file this flush just wrote; the path guard subsumes it and closes that
-      // self-deletion structurally — no mirror config can trigger it.
-      if (staleGate.path === candidate) continue;
-      try {
-        if (existsSync(staleGate.path)) {
-          this.writing.add(tiddlerUri);
-          try { unlinkSync(staleGate.path); } finally { this.writing.delete(tiddlerUri); }
-        }
-      } catch { /* best-effort */ }
     }
   }
 }

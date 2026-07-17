@@ -15,7 +15,7 @@
  * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
  */
 
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, resolve, sep, extname } from "node:path";
 import { newChangeId, taskContentId } from "@lararium/mesh";
 import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
@@ -41,6 +41,10 @@ export interface ScanRow {
   /** The file's extension (".mem" / ".tid" / ".json" / ".md" …); rides the
    *  INGEST carrier so the island routes by TW5's own filetype registry. */
   readonly ext:        string;
+  /** Raw `<file>.meta` sidecar text when one sits beside a content file — rides
+   *  the carrier so the island keeps the sidecar's fields across a body edit.
+   *  Absent for a self-contained filetype (`.mem`/`.tid`) or no sidecar. */
+  readonly meta?:      string;
 }
 
 export interface ScanResult {
@@ -130,7 +134,14 @@ export function scanFiles(
     const syncedHash = tree.get(syncedTreeKey(toBag, uri));
     const status: ScanStatus =
       syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
-    rows.push({ file, uri, text, diskHash, syncedHash, status, ext });
+    // Pair a `.meta` sidecar sitting beside a content file — its fields ride
+    // WITH the carrier so a body-only edit never drops the sidecar's fields.
+    let meta: string | undefined;
+    try {
+      const metaPath = file + ".meta";
+      if (existsSync(metaPath)) meta = readFileSync(metaPath, "utf8");
+    } catch { /* no readable sidecar — a self-contained filetype needs none */ }
+    rows.push({ file, uri, text, diskHash, syncedHash, status, ext, ...(meta !== undefined ? { meta } : {}) });
   }
   return { rows, skipped };
 }
@@ -196,6 +207,7 @@ export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult
     "change-id":  changeId,
     carriers: opts.candidates.map((r) => ({
       uri: r.uri, text: r.text, diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
+      ...(r.meta !== undefined ? { meta: r.meta } : {}),
     })),
     ...(deletions.length > 0 ? { deletions: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })) } : {}),
     ...(opts.massDeleteFraction !== undefined ? { massDeleteFraction: opts.massDeleteFraction } : {}),

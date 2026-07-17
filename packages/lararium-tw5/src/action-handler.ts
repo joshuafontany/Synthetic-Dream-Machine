@@ -70,6 +70,11 @@ export interface Tw5Deserializer {
    *  through its own fileExtensionInfo → contentTypeInfo chain, falling back to
    *  text/plain. Passing the raw extension defers wholly to TW5's registry. */
   deserialize(typeOrExt: string, text: string, baseFields: Record<string, unknown>): Array<Record<string, unknown>>;
+  /** Parse a raw `.meta` sidecar into a fields object using TW5's OWN field
+   *  parser — the reciprocal of the projection sidecar. The parsed fields seed
+   *  the deserialize so a content carrier keeps its type/tags/custom fields
+   *  across a body-only edit. */
+  parseFields(metaText: string): Record<string, unknown>;
 }
 
 /**
@@ -82,6 +87,10 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
   return {
     deserialize: (typeOrExt, text, fields) =>
       (engine.$tw.wiki.deserializeTiddlers(typeOrExt, text, fields) ?? []) as Array<Record<string, unknown>>,
+    parseFields: (metaText) => {
+      const utils = engine.$tw.utils as { parseFields?: (t: string, f?: Record<string, unknown>) => Record<string, unknown> };
+      return typeof utils.parseFields === "function" ? (utils.parseFields(metaText) ?? {}) : {};
+    },
   };
 }
 
@@ -421,9 +430,14 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
     if (!tw5 || CARRIER_SOH.test(carrier.text)) {
       fieldsList = memeticWikitextDeserializer(carrier.text, { title: carrier.title ?? "" });
     } else {
-      // Pass the extension straight to TW5's registry — it resolves the content-type
-      // and the right deserializer, or falls back to text/plain. No hardcoded map.
-      fieldsList = tw5.deserialize(carrier.ext || "text/plain", carrier.text, carrier.title ? { title: carrier.title } : {});
+      // The `.meta` sidecar seeds fields FIRST (TW5's own parser), so a content
+      // carrier keeps its type/tags/custom fields; the carrier title (when named)
+      // holds authority. Then the extension routes to TW5's registry — it resolves
+      // the content-type + the right deserializer, or falls back to text/plain.
+      const baseFields: Record<string, unknown> = {};
+      if (carrier.meta) Object.assign(baseFields, tw5.parseFields(carrier.meta));
+      if (carrier.title) baseFields["title"] = carrier.title;
+      fieldsList = tw5.deserialize(carrier.ext || "text/plain", carrier.text, baseFields);
     }
     for (const fields of fieldsList) {
       const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
@@ -559,9 +573,15 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         results.push({ uri, decision: "noop", reason: "disk-matches-synced" });
         continue;
       }
-      // Pass the extension straight to TW5's registry — it resolves the
-      // content-type + the right deserializer, or falls back to text/plain.
-      const fieldsList = tw5!.deserialize(carrier.ext || "text/plain", carrier.text, { title: uri });
+      // The `.meta` sidecar seeds the fields FIRST (TW5's own field parser), so a
+      // content carrier keeps its type/tags/custom fields across a body-only edit;
+      // the loci URI holds title authority over any stored title. Then the
+      // extension routes to TW5's registry — it resolves the content-type + the
+      // right deserializer, or falls back to text/plain.
+      const baseFields: Record<string, unknown> = { title: uri };
+      if (carrier.meta) Object.assign(baseFields, tw5!.parseFields(carrier.meta));
+      baseFields["title"] = uri;
+      const fieldsList = tw5!.deserialize(carrier.ext || "text/plain", carrier.text, baseFields);
       freshRecords = fieldsList.map((fields) => {
         const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
         return { ...fields, title: own || uri };

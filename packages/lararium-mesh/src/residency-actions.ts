@@ -134,6 +134,11 @@ export interface LoadCarrier {
    *  Absent → the island treats the text as a memetic-wikitext carrier. */
   readonly ext?:   string;
   readonly text:   string;
+  /** Raw `.meta` sidecar text for a content filetype (a `.md`/image/… carrier
+   *  keeps its fields beside the body). The island parses it (TW5's own field
+   *  parser) and seeds the deserialize, so an edit to the body never drops the
+   *  sidecar's type/tags/custom fields. Absent → no sidecar. */
+  readonly meta?:  string;
 }
 
 /** LOAD — bring external content from sourceUri into toBag. Mints fresh changeId.
@@ -166,6 +171,10 @@ export interface IngestCarrier {
    *  filetype rides TW5's OWN deserializer registry, keyed by this extension.
    *  Absent → the island treats the carrier as memetic (back-compat). */
   readonly ext?:       string;
+  /** Raw `.meta` sidecar text a content filetype keeps beside its body; the
+   *  island parses it and seeds the deserialize so a body-only edit never drops
+   *  the sidecar's fields. Absent → no sidecar (or a self-contained filetype). */
+  readonly meta?:      string;
 }
 
 /** One vanished carrier riding an INGEST wave — a path gone from disk that the
@@ -331,13 +340,14 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       for (const c of rawCarriers) {
         if (!c || typeof c !== "object") return null;
         const o = c as Record<string, unknown>;
-        const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"];
+        const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"]; const meta = o["meta"];
         if (typeof uri !== "string" || !uri) return null;
         if (typeof text !== "string" || !text) return null;
         if (typeof diskHash !== "string" || !diskHash) return null;
         if (syncedHash !== null && typeof syncedHash !== "string") return null;
         if (ext !== undefined && typeof ext !== "string") return null;
-        carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}) });
+        if (meta !== undefined && typeof meta !== "string") return null;
+        carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}), ...(typeof meta === "string" ? { meta } : {}) });
       }
     }
     const deletions: IngestDeletion[] = [];
@@ -392,12 +402,15 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       const text  = (c as Record<string, unknown>)["text"];
       const title = (c as Record<string, unknown>)["title"];
       const ext   = (c as Record<string, unknown>)["ext"];
+      const meta  = (c as Record<string, unknown>)["meta"];
       if (typeof text !== "string" || text.length === 0) return null;
       if (title !== undefined && typeof title !== "string") return null;
       if (ext !== undefined && typeof ext !== "string") return null;
+      if (meta !== undefined && typeof meta !== "string") return null;
       carriers.push({
         ...(typeof title === "string" && title ? { title } : {}),
         ...(typeof ext === "string" && ext ? { ext } : {}),
+        ...(typeof meta === "string" && meta ? { meta } : {}),
         text,
       });
     }
