@@ -7,7 +7,7 @@
  */
 
 import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute, sep } from "path";
-import { MEME_EXT, stripMemeExt, hasMemeExt } from "@lararium/mesh";
+import { MEME_EXT, stripMemeExt } from "@lararium/mesh";
 
 export type MirrorPathFn = (uri: string) => string | null;
 
@@ -120,6 +120,24 @@ export function fullPathBagPath(): MirrorPathFn {
 }
 
 /**
+ * The extension-LESS carrier base path — the siting function up to (but not
+ * including) the filetype extension. Memetic carriers append `.mem`; a native
+ * TW5 filetype carrier (.tid/.json/.md/content-type) appends TW5's own chosen
+ * extension here, so both filetypes site at the SAME `<uri-path>` and only the
+ * extension differs. Fragments and unstable roots carry no siting → null.
+ *
+ *   lar:///ha.ka.ba/lares/api/pono/meme → ha.ka.ba/lares/api/pono/meme
+ */
+export function carrierBaseRelPath(uri: string): string | null {
+  if (!uri.startsWith("lar:///")) return null;
+  const bare = uri.slice("lar:///".length);
+  if (!/^\w+\.\w+\.\w+\//.test(bare)) return null;
+  const [pathPart, frag] = splitHash(bare);
+  if (frag || !pathPart) return null;                    // a fragment never owns a file
+  return stripMemeExt(pathPart);
+}
+
+/**
  * Construct a BagMirrorConfig for a named bag. `scope` rides as grant
  * metadata only — the siting function carries every stable name whole
  * (full-path-inside-bag ruling); the mirrorRoot = the bag's residency dir.
@@ -137,9 +155,15 @@ export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string)
  *   `<root>/<rootDirName>/<holding-dir>/<full-uri-path>.mem` ⇄ `lar:///<full-uri-path>`
  * The first segment under the plane dir names the HOLDING SLOT (a residency
  * bag under bags/, a wiki slug under wikis/) and never enters the name; the
- * interior IS the name, whole. Returns null outside the plane dir, for non-.mem
- * files, or when the interior carries no w.w.w root — the gesture reports
- * those as skipped, never guesses.
+ * interior IS the name, whole. Returns null outside the plane dir, for a `.meta`
+ * sidecar (it rides with its content file, never a carrier root of its own), or
+ * when the interior carries no w.w.w root — the gesture reports those as
+ * skipped, never guesses.
+ *
+ * Any registered TW5 filetype extension strips the same way `.mem` does: the
+ * name is the interior MINUS its trailing filetype extension, so a `.tid`,
+ * `.json`, `.md`, or content-type carrier derives its lar: URI exactly as a
+ * `.mem` carrier does (filetype-agnostic mirror, one loci law).
  */
 function mirrorRootFileToUri(instanceRoot: string, filePath: string, rootDirName: string): string | null {
   const mirrorRoot = resolvePath(instanceRoot, rootDirName);
@@ -148,9 +172,12 @@ function mirrorRootFileToUri(instanceRoot: string, filePath: string, rootDirName
   const rel = abs.slice(mirrorRoot.length + 1).split(sep);
   if (rel.length < 2) return null;                       // needs holding dir + interior
   const interior = rel.slice(1).join("/");
-  if (!hasMemeExt(interior)) return null;                // read the meme extension
-  const namePath = stripMemeExt(interior);
-  if (!/^\w+\.\w+\.\w+\//.test(namePath)) return null;  // loci: stable names carry a w.w.w root
+  if (interior.endsWith(".meta")) return null;           // sidecar, not a carrier root
+  // Strip the trailing filetype extension from the last path segment only (the
+  // w.w.w root's own dots live in the FIRST segment and never match here).
+  const namePath = interior.replace(/\.[^/.]+$/, "");
+  if (namePath === interior) return null;                // no extension → not a projected carrier file
+  if (!/^\w+\.\w+\.\w+\//.test(namePath)) return null;   // loci: stable names carry a w.w.w root
   return `lar:///${namePath}`;
 }
 

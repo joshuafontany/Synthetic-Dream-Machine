@@ -333,7 +333,7 @@ async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: T
     case "CLEAR": return executeClear(action, access);
     case "DROP":  return executeDrop(action, access);
     case "LOAD":  return executeLoad(action, access, tw5);
-    case "INGEST": return executeIngest(action, access);
+    case "INGEST": return executeIngest(action, access, tw5);
     case "CREATE": throw new Error("action-handler: CREATE is handled in the reactor (plane-aware gate + mint), not executeAction");
   }
 }
@@ -450,7 +450,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
  * from the re-parsed carrier tombstone (LOAD never removes; INGEST must).
  * noop/refuse/conflict apply NOTHING — the decision rides the outcome.
  */
-async function executeIngest(action: IngestAction, access: BagAccess): Promise<Record<string, unknown>> {
+async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
   const o = origin(action);
   const deletions = action.deletions ?? [];
 
@@ -506,37 +506,71 @@ async function executeIngest(action: IngestAction, access: BagAccess): Promise<R
     // The carrier group: the root + its fragment children (FFZ decomposition
     // emits `uri#slot` titles) + any path children (`uri/wires/...` era).
     const groupTitles = all.filter((t) => t === uri || t.startsWith(`${uri}#`) || t.startsWith(`${uri}/`));
-    const current = new Map<string, Record<string, unknown>>();
-    for (const t of groupTitles) {
-      const rec = await readFromBag(access, action.toBag, t);
-      if (rec) current.set(t, rec.tiddler as unknown as Record<string, unknown>);
+
+    // Route by content, mirroring LOAD: a memetic carrier (SOH heading / no
+    // native bridge) decomposes at the membrane through the §6 gate; ANY other
+    // legal TW5 filetype rides TW5's OWN deserializer registry, keyed by its
+    // extension. The registry — not a CLI-side reimplementation — owns the
+    // filetype routing; the island hands the bytes to it.
+    const memetic = !tw5 || CARRIER_SOH.test(carrier.text);
+
+    // Records to land + the receipt this carrier rides. The memetic path grades
+    // the recover; the native path leans on the registry + the echo gate.
+    let freshRecords: Array<Record<string, unknown>>;
+    let receipt: Record<string, unknown>;
+    if (memetic) {
+      const current = new Map<string, Record<string, unknown>>();
+      for (const t of groupTitles) {
+        const rec = await readFromBag(access, action.toBag, t);
+        if (rec) current.set(t, rec.tiddler as unknown as Record<string, unknown>);
+      }
+      const currentText = expandMemeRefs((t) => current.get(t) as never, uri) ?? "";
+      const decision = decideIngest({
+        uri,
+        diskText:          carrier.text,
+        diskHash:          carrier.diskHash,
+        syncedHash:        carrier.syncedHash,
+        currentRenderHash: sha256HexSync(currentText),
+        hash:              sha256HexSync,
+      });
+      if (decision.kind === "noop") {
+        results.push({ uri, decision: "noop", reason: decision.reason });
+        continue;
+      }
+      // The gate grades what it recovered, so the operator hears about a carrier that landed degraded
+      // rather than only about one that got turned away.
+      const grade = gradeOf(decision.diagnostics);
+      if (decision.kind === "refuse") {
+        results.push({ uri, decision: "refuse", grade, warnings: [...decision.warnings] });
+        continue;
+      }
+      if (decision.kind === "conflict") {
+        results.push({ uri, decision: "conflict", grade });
+        continue;
+      }
+      freshRecords = decision.records as Array<Record<string, unknown>>;
+      receipt = { uri, decision: "ingest", grade };
+    } else {
+      // Native filetype: the echo gate (disk == last-projected) short-circuits
+      // an unchanged carrier; any other state deserializes through the registry
+      // and lands. The projector records the native body hash in the Synced
+      // tree, so a re-ingest of an unprojected-back carrier reads this echo.
+      if (carrier.syncedHash !== null && carrier.diskHash === carrier.syncedHash) {
+        results.push({ uri, decision: "noop", reason: "disk-matches-synced" });
+        continue;
+      }
+      // Pass the extension straight to TW5's registry — it resolves the
+      // content-type + the right deserializer, or falls back to text/plain.
+      const fieldsList = tw5!.deserialize(carrier.ext || "text/plain", carrier.text, { title: uri });
+      freshRecords = fieldsList.map((fields) => {
+        const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
+        return { ...fields, title: own || uri };
+      });
+      receipt = { uri, decision: "ingest", filetype: carrier.ext || "text/plain" };
     }
-    const currentText = expandMemeRefs((t) => current.get(t) as never, uri) ?? "";
-    const decision = decideIngest({
-      uri,
-      diskText:          carrier.text,
-      diskHash:          carrier.diskHash,
-      syncedHash:        carrier.syncedHash,
-      currentRenderHash: sha256HexSync(currentText),
-      hash:              sha256HexSync,
-    });
-    if (decision.kind === "noop") {
-      results.push({ uri, decision: "noop", reason: decision.reason });
-      continue;
-    }
-    // The gate grades what it recovered, so the operator hears about a carrier that landed degraded
-    // rather than only about one that got turned away.
-    const grade = gradeOf(decision.diagnostics);
-    if (decision.kind === "refuse") {
-      results.push({ uri, decision: "refuse", grade, warnings: [...decision.warnings] });
-      continue;
-    }
-    if (decision.kind === "conflict") {
-      results.push({ uri, decision: "conflict", grade });
-      continue;
-    }
+
     const freshTitles = new Set<string>();
-    for (const fields of decision.records) {
+    for (const fields of freshRecords) {
       const title = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
       if (!title) throw new Error(`INGEST: carrier ${uri} produced a record without a title`);
       const record: LarTiddlerRecord = { tiddler: fields as LarTiddlerRecord["tiddler"], meta: {} };
@@ -550,7 +584,7 @@ async function executeIngest(action: IngestAction, access: BagAccess): Promise<R
         tombstoned.push(t);
       }
     }
-    results.push({ uri, decision: "ingest", grade, landed: freshTitles.size, tombstoned });
+    results.push({ ...receipt, landed: freshTitles.size, tombstoned });
   }
 
   // ── apply the deletion wave ──────────────────────────────────────────────

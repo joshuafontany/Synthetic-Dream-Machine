@@ -29,6 +29,10 @@
 import { expandMemeRefs } from "./deserializer.js";
 import type { TiddlerFields } from "./deserializer.js";
 import type { TW5Engine } from "./tw5-vm.js";
+import { makeTw5FileInfo } from "./tw5-file-info.js";
+import type { TW5Instance } from "./types/tiddlywiki.js";
+
+const MEMETIC_TYPE = "text/x-memetic-wikitext";
 
 /**
  * Return the canonical memetic-wikitext for a meme URI — the whole carrier,
@@ -48,4 +52,47 @@ export function exportMemeText(tw5: TW5Engine, memeUri: string): string {
     if (carrier !== null) return carrier;
   } catch { /* fall through to raw text */ }
   return wiki.getTiddlerText?.(memeUri, "") ?? "";
+}
+
+/** One projected carrier file: the chosen extension, the main bytes, and (for a
+ *  content+`.meta` filetype) the sidecar bytes. The projector sites the file at
+ *  `<uri-path><ext>` and writes `metaBody` at `<uri-path><ext>.meta`. */
+export interface CarrierFile {
+  readonly ext:       string;
+  readonly body:      string;
+  readonly metaBody?: string;
+}
+
+/**
+ * Render a carrier root back to ITS OWN filetype — the projection reciprocal of
+ * the ingest membrane. A memetic-wikitext carrier recomposes through
+ * `expandMemeRefs` and sites as `.mem` (children spliced whole); ANY other TW5
+ * filetype rides TW5's own native file-info cascade (`makeTw5FileInfo`), so a
+ * `.tid`/`.json`/`.md`/content-type record projects back as its native file
+ * (plus a `.meta` sidecar where the type needs one). One authority — the VM's
+ * registry — decides the type, the extension, and the exact bytes for both
+ * directions; the Node projector only sites + writes them.
+ *
+ * Returns null when the root tiddler is absent (nothing to project).
+ */
+export function exportCarrierFile(tw5: TW5Engine, memeUri: string): CarrierFile | null {
+  const wiki = tw5.$tw.wiki;
+  const tiddler = wiki.getTiddler?.(memeUri) as { fields?: TiddlerFields } | undefined;
+  const fields = tiddler?.fields;
+  if (!fields) return null;
+  const type = typeof fields["type"] === "string" ? (fields["type"] as string) : "";
+  // Memetic carriers keep the membrane recompose + the `.mem` extension: their
+  // ahu children live as separate records and MUST splice back whole (a native
+  // file-info pass would emit only the parent's rewritten text). Absent/blank
+  // type on a memetic-decomposed carrier still routes here (the recompose
+  // returns null for a non-memetic record and we fall through).
+  if (type === MEMETIC_TYPE) {
+    return { ext: ".mem", body: exportMemeText(tw5, memeUri) };
+  }
+  const info = makeTw5FileInfo(tw5.$tw as unknown as TW5Instance, memeUri, fields as Record<string, unknown>);
+  return {
+    ext:  info.ext,
+    body: info.body,
+    ...(info.hasMetaFile && info.metaBody !== undefined ? { metaBody: info.metaBody } : {}),
+  };
 }

@@ -36,16 +36,22 @@ import { summaryOutput } from "../verb-result.js";
 import { udsAvailable, udsSocketPath } from "../local-connector.js";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngest, type PendingDeletion } from "../ingest-core.js";
-import { hasMemeExt } from "@lararium/mesh";
 
 const DEFAULT_DEBOUNCE_MS = 400;   // twillm's field-tested trailing window
 const COOKIE_TIMEOUT_MS   = 2_000; // a live backend echoes our own write well under this
 const DEFAULT_DELETE_GRACE_MS = 60_000;     // Syncthing's delete-pairing window
 const DEFAULT_MASS_DELETE_FRACTION = 0.25;  // tombstones above this fraction of the bag suspend
 
-/** Editor litter and our own projection sidecar never count as carrier events. */
+/**
+ * Editor litter, our own observation state, and the `.meta` field-sidecar never
+ * count as carrier events. The watcher fires on EVERY filetype the mirror holds
+ * (the ruling: bags/wikis hold all TW5 filetypes); the scan's loci derivation
+ * (`fileToUri`) skips anything that carries no stable name — no extension gate
+ * here decides the filetype. A `.meta` rides with its content file, so its own
+ * write never opens a fresh wave.
+ */
 function isNoise(rel: string): boolean {
-  if (!hasMemeExt(rel)) return true;
+  if (rel.endsWith(".meta")) return true;
   if (rel.includes(".lararium-projection")) return true;
   if (rel.includes("/.git/") || rel.startsWith(".git/")) return true;
   const base = rel.split("/").pop() ?? rel;

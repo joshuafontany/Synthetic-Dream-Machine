@@ -29,11 +29,23 @@ describe("wikisFileToUri — @working ingest-back reverse-derivation", () => {
       .toBe(bagsFileToUri(ROOT, `/srv/vessel/bags/@lares${name}.mem`));
   });
 
-  test("rootless interior, non-.mem, outside wikis/ → null (skipped, never guessed)", () => {
-    // pre-migration rootless interior
+  test("any registered filetype derives — the ruling: wikis/ holds ALL TW5 filetypes", () => {
+    // a .tid (or any registered filetype) strips its extension exactly as .mem does
+    expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/ha.ka.ba/lares/tags/x.tid"))
+      .toBe("lar:///ha.ka.ba/lares/tags/x");
+    expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/ha.ka.ba/lares/api/data.json"))
+      .toBe("lar:///ha.ka.ba/lares/api/data");
+    expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/ha.ka.ba/lares/api/note.md"))
+      .toBe("lar:///ha.ka.ba/lares/api/note");
+  });
+
+  test("rootless interior, .meta sidecar, no-extension, wrong plane → null (skipped, never guessed)", () => {
+    // pre-migration rootless interior (no w.w.w root)
     expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/api/pono/meme.mem")).toBeNull();
-    // non-.mem
-    expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/ha.ka.ba/lares/tags/x.tid")).toBeNull();
+    // a .meta sidecar rides with its content file, never a carrier root of its own
+    expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/ha.ka.ba/lares/api/data.json.meta")).toBeNull();
+    // an extension-less file is not a projected carrier file
+    expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/@lares/ha.ka.ba/lares/api/bare")).toBeNull();
     // a bags/ file does NOT resolve through the wikis plane
     expect(wikisFileToUri(ROOT, "/srv/vessel/bags/@lares/ha.ka.ba/lares/api/pono/meme.mem")).toBeNull();
     // bare slug dir, no interior

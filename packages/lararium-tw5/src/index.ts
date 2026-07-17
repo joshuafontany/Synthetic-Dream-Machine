@@ -129,7 +129,8 @@ export { startEngineWatch, ENGINE_WAITING_ALERT_TITLE } from "./engine-watch.js"
 export { startRecipeWatch } from "./recipe-watch.js";
 export type { ActionHandlerOptions } from "./action-handler.js";
 
-export { exportMemeText } from "./meme-write.js";
+export { exportMemeText, exportCarrierFile } from "./meme-write.js";
+export type { CarrierFile } from "./meme-write.js";
 
 export { tw5ElementToVdom, tw5ElementToHtml } from "./fake-dom.js";
 export type { VDomNode, TW5FakeElement, TW5FakeTextNode, TW5FakeNode } from "./fake-dom.js";
