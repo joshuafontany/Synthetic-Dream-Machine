@@ -39,7 +39,7 @@
 
 import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameSync } from "fs";
 import { dirname } from "path";
-import { confineMirrorWrite } from "./bag-paths.js";
+import { confineMirrorWrite, carrierBaseRelPath } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
 import { isEffectRecordUri, KeyedCoalesceGate, stripMemeExt } from "@lararium/mesh";
 import type { ReadinessMap, WindowServo } from "@lararium/mesh";
@@ -49,8 +49,18 @@ import type { BagMirrorConfig } from "./bag-paths.js";
 export interface LarDiskProjectorOptions {
   /** Bag mirrors. Bags absent from this list never write to disk. */
   readonly mirrors: readonly BagMirrorConfig[];
-  /** Render a carrier-root URI to its canonical text. Null skips the write. */
+  /** Render a carrier-root URI to its canonical text. Null skips the write.
+   *  Memetic-only fallback: used when `carrierFileFn` is absent (tests, hosts
+   *  without a native file-info bridge). Sites the carrier as `.mem`. */
   readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
+  /**
+   * Render a carrier-root URI to ITS OWN filetype — the native-aware seam. A
+   * memetic carrier recomposes to `.mem`; any other TW5 filetype rides the VM's
+   * file-info cascade to its native file (+ a `.meta` sidecar where the type
+   * needs one). Present → the projector sites at `<uri-path><ext>` and writes
+   * the sidecar; absent → falls back to `renderFn` (`.mem` only). Null skips.
+   */
+  readonly carrierFileFn?: (tiddlerUri: string) => Promise<import("@lararium/tw5").CarrierFile | null>;
   /**
    * Report every bag that currently HOLDS a carrier (`composite.listBagsHolding`).
    * Gates the cross-mirror stale-unlink: a carrier still living in a bag — a
@@ -85,6 +95,13 @@ export interface LarDiskProjectorOptions {
   readonly servo?: WindowServo;
 }
 
+/** Read a file and compare it byte-for-byte against `body`; a missing or
+ *  unreadable file reads as unequal (the caller then writes). */
+function safeReadEquals(path: string, body: string): boolean {
+  try { return existsSync(path) && readFileSync(path, "utf-8") === body; }
+  catch { return false; }
+}
+
 export class LarDiskProjector {
   /**
    * URIs currently being written to disk.
@@ -101,6 +118,7 @@ export class LarDiskProjector {
 
   private readonly mirrors: readonly BagMirrorConfig[];
   private readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
+  private readonly carrierFileFn: ((tiddlerUri: string) => Promise<import("@lararium/tw5").CarrierFile | null>) | undefined;
   private readonly bagsHolding: ((tiddlerUri: string) => Promise<readonly string[]>) | undefined;
   private readonly debounceMs: number;
   private readonly onRefusal: ((info: { bagId: string; uri: string; reason: string }) => void) | undefined;
@@ -112,6 +130,7 @@ export class LarDiskProjector {
   constructor(opts: LarDiskProjectorOptions) {
     this.mirrors      = opts.mirrors;
     this.renderFn     = opts.renderFn;
+    this.carrierFileFn = opts.carrierFileFn;
     this.bagsHolding  = opts.bagsHolding;
     this.debounceMs   = opts.debounceMs ?? 1000;
     this.onRefusal    = opts.onRefusal;
@@ -240,6 +259,15 @@ export class LarDiskProjector {
     }
   }
 
+  /** Write bytes atomically: a temp file in the SAME dir, then rename over the
+   *  target — a watcher or editor never observes a torn file, and a crash leaves
+   *  only a stray temp. */
+  private atomicWrite(candidate: string, body: string): void {
+    const tmp = `${candidate}.lar-tmp-${process.pid}`;
+    writeFileSync(tmp, body, "utf-8");
+    renameSync(tmp, candidate);
+  }
+
   private async flush(bagId: string, tiddlerUri: string): Promise<void> {
     const mirror = this.mirrors.find((m) => m.bagId === bagId);
     if (!mirror) return;
@@ -251,8 +279,29 @@ export class LarDiskProjector {
     // text/x-memetic-wikitext — arrives with the migration wave.)
     if (isEffectRecordUri(tiddlerUri)) return;
 
-    const relPath = mirror.toRelPath(tiddlerUri);
-    if (!relPath) return;
+    // Site the carrier by its own filetype. The native-aware seam
+    // (`carrierFileFn`) hands back the VM's chosen extension + bytes + any
+    // `.meta` sidecar, so a `.tid`/`.json`/`.md` record projects back as its
+    // OWN file; the memetic fallback (`renderFn`) sites `.mem` alone. One
+    // authority decides the type — the VM registry — the projector only sites.
+    let relPath: string | null;
+    let output: string;
+    let metaBody: string | undefined;
+    if (this.carrierFileFn) {
+      const base = carrierBaseRelPath(tiddlerUri);
+      if (!base) return;
+      const file = await this.carrierFileFn(tiddlerUri);
+      if (file === null) return;
+      relPath  = base + file.ext;
+      output   = file.body;
+      metaBody = file.metaBody;
+    } else {
+      relPath = mirror.toRelPath(tiddlerUri);
+      if (!relPath) return;
+      const rendered = await this.renderFn(tiddlerUri);
+      if (rendered === null) return;
+      output = rendered;
+    }
 
     // The disk ward — sovereign-island write confinement (bag-paths). Cascade
     // output counts as untrusted; refusals surface LOUDLY, never silently.
@@ -264,15 +313,15 @@ export class LarDiskProjector {
     }
     const candidate = gate.path;
 
-    const output = await this.renderFn(tiddlerUri);
-    if (output === null) return;
-
     // Projection-side hash gate (§6): bytes already on disk == would-write
     // bytes → skip the write entirely (no event for any watcher, no mtime
-    // churn) — but still record the observation in the Synced tree.
+    // churn) — but still record the observation in the Synced tree. The gate
+    // reads the MAIN body; a `.meta` sidecar rides with it (write-through).
     const outputHash = contentHash(output);
+    const metaPath   = metaBody !== undefined ? candidate + ".meta" : null;
+    const metaInSync = metaPath === null || (existsSync(metaPath) && safeReadEquals(metaPath, metaBody!));
     try {
-      if (existsSync(candidate) && contentHash(readFileSync(candidate, "utf-8")) === outputHash) {
+      if (existsSync(candidate) && contentHash(readFileSync(candidate, "utf-8")) === outputHash && metaInSync) {
         this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
         return;
       }
@@ -283,9 +332,11 @@ export class LarDiskProjector {
       mkdirSync(dirname(candidate), { recursive: true });
       // Atomic write (§2 law): temp in the SAME dir + rename — no watcher or
       // editor ever observes a torn carrier; a crash leaves only a temp file.
-      const tmp = `${candidate}.lar-tmp-${process.pid}`;
-      writeFileSync(tmp, output, "utf-8");
-      renameSync(tmp, candidate);
+      this.atomicWrite(candidate, output);
+      // The `.meta` sidecar carries the tiddler's fields for a content filetype;
+      // it lands beside the body, atomic too, so a reader never pairs a fresh
+      // body with a stale sidecar.
+      if (metaPath !== null) this.atomicWrite(metaPath, metaBody!);
       this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
       if (this.debugJson && this._tw5) {
         const jsonStr = (this._tw5.$tw.wiki as { getTiddlerAsJson?: (t: string) => string })

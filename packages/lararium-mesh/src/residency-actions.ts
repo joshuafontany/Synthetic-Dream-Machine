@@ -160,6 +160,12 @@ export interface IngestCarrier {
   readonly diskHash:   string;
   /** Last-projected hash from the Synced tree; null = never projected. */
   readonly syncedHash: string | null;
+  /** The carrier's file extension (".mem" / ".tid" / ".json" / ".md" …) as the
+   *  gesture read it from disk. The island routes by it: a memetic carrier (SOH
+   *  heading / `.mem`) decomposes at the memetic membrane; any other legal TW5
+   *  filetype rides TW5's OWN deserializer registry, keyed by this extension.
+   *  Absent → the island treats the carrier as memetic (back-compat). */
+  readonly ext?:       string;
 }
 
 /** One vanished carrier riding an INGEST wave — a path gone from disk that the
@@ -325,12 +331,13 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       for (const c of rawCarriers) {
         if (!c || typeof c !== "object") return null;
         const o = c as Record<string, unknown>;
-        const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"];
+        const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"];
         if (typeof uri !== "string" || !uri) return null;
         if (typeof text !== "string" || !text) return null;
         if (typeof diskHash !== "string" || !diskHash) return null;
         if (syncedHash !== null && typeof syncedHash !== "string") return null;
-        carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null });
+        if (ext !== undefined && typeof ext !== "string") return null;
+        carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}) });
       }
     }
     const deletions: IngestDeletion[] = [];

@@ -25,6 +25,7 @@
 
 import { deserializeCarrier, expandMemeRefs } from "./deserializer.js";
 import type { TiddlerFields } from "./deserializer.js";
+import { collectAhuSlots } from "./meme-ast/ahu-scan.js";
 import { parseMemeText } from "./meme-ast/parse.js";
 import { failuresToDiagnostics, gradeOf } from "./meme-ast/diagnostics.js";
 import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
@@ -84,9 +85,25 @@ export function decideIngest(input: IngestGateInput): IngestDecision {
   }
 
   // 3 — canonical-equivalence gate: the edit changed framing only.
+  // The NOOP rests on ONE trust — that render(parse(disk)) faithfully carries
+  // every byte the disk holds. A LOSSY membrane breaks that trust: a slot the
+  // disk declares that the render drops (the ahu-drop — a slash-path kahea ref
+  // the recompose once clipped) makes render(parse(disk)) collapse toward the
+  // stale current render, so an edit INSIDE the dropped slot reads as "framing
+  // only" and never lands. The fidelity guard forbids the NOOP whenever the
+  // round-trip loses a declared ahu slot; a genuinely cosmetic edit keeps its
+  // slot-set intact and still converges here.
   const candidateHash = hash(canonicalText);
   if (candidateHash === currentRenderHash) {
-    return { kind: "noop", reason: "canonical-equivalent" };
+    const declared = collectAhuSlots(diskText);
+    const rendered = collectAhuSlots(canonicalText);
+    const dropped = [...declared].filter((s) => !rendered.has(s));
+    if (dropped.length === 0) {
+      return { kind: "noop", reason: "canonical-equivalent" };
+    }
+    // A lossy round-trip surfaces, never swallows: the disk carries slots the
+    // render cannot reproduce, so the records have not caught up — treat it as
+    // a clean ingest (never-projected or records-unmoved) or a conflict below.
   }
 
   // 4 — clean ingest: the records stand where the last projection left them.

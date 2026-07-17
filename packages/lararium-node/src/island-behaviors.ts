@@ -11,7 +11,7 @@
  */
 
 import type { IslandMsg_Manifest } from "@lararium/mesh";
-import { exportMemeText, makeWikiBehavior, hasWikiSensorium } from "@lararium/tw5";
+import { exportMemeText, exportCarrierFile, makeWikiBehavior, hasWikiSensorium } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
@@ -40,6 +40,11 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       const projector = new LarDiskProjector({
         mirrors,
         renderFn: (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
+        // The native-aware seam: a carrier projects back to ITS OWN filetype
+        // (memetic → `.mem`; `.tid`/`.json`/`.md`/content-type → its native file
+        // + a `.meta` sidecar). The VM registry decides type + bytes; the
+        // projector only sites them.
+        carrierFileFn: (uri) => { try { return Promise.resolve(exportCarrierFile(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
         // Every bag holding a carrier — the shadow-aware stale-unlink gate. A
         // working edit shadowing its canon copy keeps BOTH files; the canon mirror
         // (bags/@slug) never loses its file just because the carrier surfaced in a

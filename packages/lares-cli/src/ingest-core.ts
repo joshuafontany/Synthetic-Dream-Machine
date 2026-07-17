@@ -16,8 +16,8 @@
  */
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join, resolve, sep } from "node:path";
-import { newChangeId, taskContentId, hasMemeExt } from "@lararium/mesh";
+import { join, resolve, sep, extname } from "node:path";
+import { newChangeId, taskContentId } from "@lararium/mesh";
 import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
@@ -38,6 +38,9 @@ export interface ScanRow {
   readonly diskHash:   string;
   readonly syncedHash: string | null;
   readonly status:     ScanStatus;
+  /** The file's extension (".mem" / ".tid" / ".json" / ".md" …); rides the
+   *  INGEST carrier so the island routes by TW5's own filetype registry. */
+  readonly ext:        string;
 }
 
 export interface ScanResult {
@@ -52,17 +55,23 @@ export function openSyncedTree(): SyncedTree {
 }
 
 /**
- * List the .md carriers under a source — a directory walks recursively, a
- * single file lists itself. Returns null when the source does not resolve.
- * Observations only, never a work queue (§6: scan is truth, events are hints).
+ * List the carriers under a source — a directory walks recursively for every
+ * REAL file (a `.meta` sidecar rides with its content file, never as a carrier
+ * of its own), a single file lists itself. Returns null when the source does
+ * not resolve. Filetype routing is the ISLAND's job (TW5's registry); the Node
+ * gesture only enumerates + carries the extension. Observations only, never a
+ * work queue (§6: scan is truth, events are hints).
  */
 export function listCarriers(source: string): string[] | null {
   let st;
   try { st = statSync(source); } catch { return null; }
   if (!st.isDirectory()) return [source];
   return (readdirSync(source, { recursive: true }) as string[])
-    .filter((f) => hasMemeExt(f))
-    .map((f) => join(source, f));
+    .map((f) => join(source, f))
+    .filter((f) => { try { return statSync(f).isFile(); } catch { return false; } })
+    // A `.meta` sidecar carries a content file's fields — it lands WITH that
+    // file at the membrane, never as a standalone carrier.
+    .filter((f) => !f.endsWith(".meta"));
 }
 
 /** Derive a file's carrier-root URI for one mirror plane (bags/ canon vs
@@ -100,27 +109,28 @@ export function scanFiles(
   for (const file of files) {
     const uri = fileToUri(root, file);
     if (!uri) { skipped.push(file); continue; }
+    const ext = extname(file);
     let text: string;
     try { text = readFileSync(file, "utf8"); } catch {
       // A path gone from disk that the Synced tree still projects = a deletion
       // candidate (the watcher feeds vanished paths; the grace window + the
       // island gate confirm before any tombstone). An unknown gone path skips.
       const goneSynced = tree.get(syncedTreeKey(toBag, uri));
-      if (goneSynced !== null) rows.push({ file, uri, text: "", diskHash: "", syncedHash: goneSynced, status: "deleted" });
+      if (goneSynced !== null) rows.push({ file, uri, text: "", diskHash: "", syncedHash: goneSynced, status: "deleted", ext });
       else skipped.push(file);
       continue;
     }
     // The NFC membrane assertion (spec: memetic-wikitext #carrier-bytes) —
     // foreign bytes first walk in HERE; non-NFC refuses loudly, never enters.
     if (text !== text.normalize("NFC")) {
-      rows.push({ file, uri, text, diskHash: "", syncedHash: null, status: "non-nfc" });
+      rows.push({ file, uri, text, diskHash: "", syncedHash: null, status: "non-nfc", ext });
       continue;
     }
     const diskHash   = contentHash(text);
     const syncedHash = tree.get(syncedTreeKey(toBag, uri));
     const status: ScanStatus =
       syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
-    rows.push({ file, uri, text, diskHash, syncedHash, status });
+    rows.push({ file, uri, text, diskHash, syncedHash, status, ext });
   }
   return { rows, skipped };
 }
@@ -185,7 +195,7 @@ export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult
     "to-bag":     opts.toBag,
     "change-id":  changeId,
     carriers: opts.candidates.map((r) => ({
-      uri: r.uri, text: r.text, diskHash: r.diskHash, syncedHash: r.syncedHash,
+      uri: r.uri, text: r.text, diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
     })),
     ...(deletions.length > 0 ? { deletions: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })) } : {}),
     ...(opts.massDeleteFraction !== undefined ? { massDeleteFraction: opts.massDeleteFraction } : {}),

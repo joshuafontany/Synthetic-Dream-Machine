@@ -488,7 +488,10 @@ function extractSlotStructure(
 
   // Find LAST kahea ref — trailing prose becomes postamble. Quoted refs
   // (fenced/inline-code) stay content, never structure (fence-mask law).
-  const refRe = /<<~\s*kahea\s+ahu\s+#[\w-]+\s*>>/g;
+  // The slot grammar mirrors AHU_OPEN_RE: a slash-path slot (`#a/b/c`)
+  // addresses a nested fragment and MUST round-trip whole — a `#[\w-]+`-only
+  // match clipped the path at the first `/`, orphaning the slot's body.
+  const refRe = /<<~\s*kahea\s+ahu\s+#[\w-]+(?:\/[\w-]+)*\s*>>/g;
   let lastEnd = -1;
   for (const m of maskedExecAll(remainder, refRe)) {
     lastEnd = m.index + m[0].length;
@@ -726,7 +729,11 @@ function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFie
   }).join("\n") + "\n";
 }
 
-const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+)\s*>>/g;
+// The captured slot mirrors AHU_OPEN_RE's grammar, slash-path included — a
+// `#a/b` slot addresses a nested fragment; a `#[\w-]+`-only capture stopped at
+// the first `/`, so the ref never matched its child and the whole slot body
+// dropped from the render (the ahu-drop). The path re-composes verbatim below.
+const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+(?:\/[\w-]+)*)\s*>>/g;
 
 /**
  * Splice child definition blocks back over their kahea markers, full depth.
