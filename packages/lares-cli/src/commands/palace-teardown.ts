@@ -35,7 +35,7 @@
 import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { larHarvestDir, larHarvestStageDir, larPort } from "../env.js";
-import { palaceOrgans, corpusTeardownDirs } from "@lararium/node";
+import { palaceOrgans, corpusTeardownDirs, memorySensoriumDir } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import { livePalaceProcs, type PalaceProc } from "../palace-procs.js";
 import { portHolderPids } from "../port-control.js";
@@ -95,14 +95,31 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
  * (the harvest watermark + stage) AND every ephemeral `.corpus/*` scratch instance, so an
  * interrupted `corpus run` can never leak state past a re-pave.
  */
+/** Is `dir` at or beneath `root`? — path-segment safe, never a bare string-prefix match. */
+function isUnder(dir: string, root: string): boolean {
+  return dir === root || dir.startsWith(root.endsWith("/") ? root : root + "/");
+}
+
 function resolveTargets(): Target[] {
   // The `mempalace` organ now resolves to the IN-TREE `<memory>/mempalace` curated projection (the
   // sovereign paved recall surface) — NOT the guest. The external `~/.mempalace` rides
   // guestMempalaceOrgan, enumerated SEPARATELY and NEVER present in palaceOrgans(), so every organ here
   // tears with its sensorium and the guest comparator stays untouched by construction.
-  const organs = palaceOrgans().map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
+  //
+  // TRUE-ZERO for memory (idempotent teardown): its planes are SUBDIRS of the sensorium root, and the
+  // root ALSO holds the worldline KG (knowledge_graph.sqlite3), the .worldline log, and the manifest —
+  // none of them organ dirs. A subdir-only tear left those strays behind, so a re-pave appended onto a
+  // stale KG. Tearing the ROOT reaps every plane AND every root stray in one cut (a NEW root artifact
+  // is caught with no code change). Other sensoriums' organ dirs ARE their own roots, so they already
+  // tear complete; fold only memory's sub-plane organs into the single root target (no path overlap, so
+  // totalBytes never double-counts).
+  const memRoot = memorySensoriumDir();
+  const organs = palaceOrgans()
+    .filter((o) => !isUnder(o.dir, memRoot))
+    .map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
   const corpus = corpusTeardownDirs().map((dir) => ({ label: `corpus scratch instance (${dir.split(/[/\\]/).pop()})`, path: dir }));
   const raw = [
+    { label: "memory sensorium (all planes + worldline KG + .worldline + manifest)", path: memRoot },
     ...organs,
     ...corpus,
     { label: "harvest watermark (lar_hv idempotency)",        path: larHarvestDir() },
