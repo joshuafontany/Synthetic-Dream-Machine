@@ -119,6 +119,12 @@ async function changeIdForContent(content: Uint8Array): Promise<KH.ChangeId> {
 export class KeyhiveProvider implements CapabilityProvider {
   private kh:         KH.Keyhive | null = null;
   private eventStore: CapabilityProviderInitOpts["eventStore"] | null = null;
+  /** CIV-3 — the island (target Document hex) a doc-scoped op is CURRENTLY re-keying. The
+   *  fire-and-forget handler reads it to attribute CGKA_OPERATION events, which carry no docId of
+   *  their own. Safe because keyhive fires the handler SYNCHRONOUSLY within the op (proven) and the
+   *  provider awaits each doc-op sequentially (single-writer law), so set-before / clear-after
+   *  never straddles two ops; a CGKA firing OUTSIDE any op reads undefined → cross-cutting. */
+  private _activeIsland: string | undefined;
   /** bagUrl → DocumentId bytes (hex). DocumentId class wraps bytes; we
    *  keep the hex form to use as a stable string key. */
   private readonly bagToDocId = new Map<string, string>();
@@ -151,9 +157,10 @@ export class KeyhiveProvider implements CapabilityProvider {
         // The in-memory store uses synthetic hashes here; a
         // tiddler-backed store will compute content hashes itself.
         const hash    = `${variant}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-        // CIV-3 — stamp the island (target Document) for the events that carry it (DELEGATED /
-        // REVOKED); CGKA / prekey stay unattributed → co-loaded across every island's slice.
-        const island  = eventIsland(e);
+        // CIV-3 — stamp the island (target Document): DELEGATED / REVOKED self-attribute off their
+        // own bytes; CGKA_OPERATION borrows the doc-op's `_activeIsland` (synchronous, single-writer
+        // safe); PREKEY_ROTATED stays unattributed (per-principal → co-loaded across every slice).
+        const island  = eventIsland(e) ?? (variant === "CGKA_OPERATION" ? this._activeIsland : undefined);
         void this.eventStore?.put({ hash, variant, bytes, ...(island !== undefined ? { island } : {}) });
       } catch (err) {
         console.error("[keyhive] event capture failed:", err);
@@ -190,6 +197,14 @@ export class KeyhiveProvider implements CapabilityProvider {
   private requireKh(): KH.Keyhive {
     if (!this.kh) throw new Error("KeyhiveProvider: not initialized — call init() first");
     return this.kh;
+  }
+
+  /** CIV-3 — run a doc-scoped keyhive op with `_activeIsland` set to its Document, so the CGKA
+   *  events it emits synchronously attribute to that island; the `finally` clears it so no later
+   *  out-of-op CGKA/prekey mis-reads a stale scope. */
+  private async withActiveIsland<T>(docIdHex: string, fn: () => Promise<T>): Promise<T> {
+    this._activeIsland = docIdHex;
+    try { return await fn(); } finally { this._activeIsland = undefined; }
   }
 
   async whoami(): Promise<PeerDID> {
@@ -253,9 +268,9 @@ export class KeyhiveProvider implements CapabilityProvider {
     if (!doc) throw new Error(`document not in scope (lost from local state?): ${args.bagUrl}`);
 
     // addMember returns the SignedDelegation directly (the group re-keys to the new reader's own prekey).
-    const signedDelegation = await this.requireKh().addMember(
+    const signedDelegation = await this.withActiveIsland(docIdHex, () => this.requireKh().addMember(
       audienceAgent, doc.toMembered(), access, [],
-    );
+    ));
 
     // SignedDelegation exposes .signature: Uint8Array (unique per delegation) — we use
     // its hex as a stable delegationId for revocation. The transport bytes for the
@@ -296,7 +311,8 @@ export class KeyhiveProvider implements CapabilityProvider {
     const doc = await this.requireDoc(bagUrl);
     const cid = opts?.contentRef ? new KH.ChangeId(opts.contentRef) : await changeIdForContent(content);
     const preds = (opts?.predRefs ?? []).map((r) => new KH.ChangeId(r));
-    const result = await this.requireKh().tryEncrypt(doc, cid, preds, content);
+    const docIdHex = this.bagToDocId.get(bagUrl)!; // requireDoc guaranteed it (throws when absent)
+    const result = await this.withActiveIsland(docIdHex, () => this.requireKh().tryEncrypt(doc, cid, preds, content));
     return result.encrypted_content().serialize();
   }
 
@@ -356,7 +372,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     const audienceAgent = await this.requireKh().getAgent(audienceId);
     if (!audienceAgent) throw new Error(`revoke(): audience agent not known: ${audience.slice(0, 16)}…`);
 
-    const revocations = await this.requireKh().revokeMember(audienceAgent, true, doc.toMembered());
+    const revocations = await this.withActiveIsland(docIdHex, () => this.requireKh().revokeMember(audienceAgent, true, doc.toMembered()));
     if (!revocations || revocations.length === 0) {
       throw new Error("revoke(): revokeMember produced no revocation events");
     }
@@ -430,7 +446,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     const access  = KH.Access.tryFromString("admin");
     if (!access) throw new Error("[keyhive] Access.tryFromString('admin') returned undefined");
 
-    await this.requireKh().addMember(agent, doc.toMembered(), access, []);
+    await this.withActiveIsland(sentinelDocIdHex, () => this.requireKh().addMember(agent, doc.toMembered(), access, []));
   }
 
   /**
@@ -458,7 +474,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     const agent   = await this.requireKh().getAgent(agentId);
     if (!agent) throw new Error(`[keyhive] agent not found for sentinel revoke: ${memberIdentifierHex.slice(0, 16)}…`);
 
-    const revocations = await this.requireKh().revokeMember(agent, true, doc.toMembered());
+    const revocations = await this.withActiveIsland(sentinelDocIdHex, () => this.requireKh().revokeMember(agent, true, doc.toMembered()));
     if (!revocations || revocations.length === 0) {
       throw new Error("[keyhive] revokeSentinelMember produced no revocation events");
     }
