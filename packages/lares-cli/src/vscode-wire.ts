@@ -86,7 +86,13 @@ export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
     // A harness holding its own palace sidecar reaches PAST the node into the store.
     if (servers["mempalace"] !== undefined) { delete servers["mempalace"]; dirty = true; }
 
-    if (servers["lares"] === undefined) {
+    // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
+    // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
+    // the door shut, the health line green. Re-aim whenever the registered command/args drift.
+    const seat = servers["lares"] as { command?: string; args?: readonly string[] } | undefined;
+    const aligned = seat !== undefined && seat.command === laresMcp.command
+      && JSON.stringify(seat.args ?? []) === JSON.stringify(laresMcp.args);
+    if (!aligned) {
       servers["lares"] = { type: "stdio", command: laresMcp.command, args: laresMcp.args, env: laresMcp.env };
       dirty = true;
     }

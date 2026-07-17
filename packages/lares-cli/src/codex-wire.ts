@@ -65,16 +65,26 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   const laresMcp = resolveLaresMcp();
   if (laresMcp === null) {
     steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
-  } else if (toml.includes(LARES_MCP_KEY)) {
-    steps.push({ item: "mcp:lares", action: "present", detail: "already in config.toml" });
   } else {
-    const env = Object.entries(laresMcp.env).map(([k, v]) => `${k} = ${JSON.stringify(v)}`).join(", ");
-    append.push(
-      `\n${LARES_MCP_KEY}\ncommand = ${JSON.stringify(laresMcp.command)}\n` +
-      `args = [${laresMcp.args.map((a) => JSON.stringify(a)).join(", ")}]\n` +
-      `env = { ${env} }\n`,
-    );
-    steps.push({ item: "mcp:lares", action: "wired", detail: `config.toml ${LARES_MCP_KEY} — the memory sensorium` });
+    // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
+    // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
+    // the door shut, the health line green. A drifted section strips, then re-aims below.
+    const seatStands = toml.includes(LARES_MCP_KEY);
+    const aligned = seatStands
+      && toml.includes(JSON.stringify(laresMcp.command))
+      && laresMcp.args.every((a) => toml.includes(JSON.stringify(a)));
+    if (aligned) {
+      steps.push({ item: "mcp:lares", action: "present", detail: `aimed at the resolved sensorium seat (${LARES_MCP_KEY})` });
+    } else {
+      if (seatStands) toml = stripTomlSection(toml, LARES_MCP_KEY);
+      const env = Object.entries(laresMcp.env).map(([k, v]) => `${k} = ${JSON.stringify(v)}`).join(", ");
+      append.push(
+        `\n${LARES_MCP_KEY}\ncommand = ${JSON.stringify(laresMcp.command)}\n` +
+        `args = [${laresMcp.args.map((a) => JSON.stringify(a)).join(", ")}]\n` +
+        `env = { ${env} }\n`,
+      );
+      steps.push({ item: "mcp:lares", action: "wired", detail: `${seatStands ? "re-aimed a drifted seat" : "config.toml"} ${LARES_MCP_KEY} — the memory sensorium` });
+    }
   }
 
   // 2. Stop ingest hook block

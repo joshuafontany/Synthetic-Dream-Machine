@@ -72,12 +72,21 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
   const laresMcp = resolveLaresMcp();
   if (laresMcp === null) {
     steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
-  } else if (servers["lares"] !== undefined) {
-    steps.push({ item: "mcp:lares", action: "present", detail: "already in mcp-config.json" });
   } else {
-    servers["lares"] = { type: "local", command: laresMcp.command, args: laresMcp.args, env: laresMcp.env, tools: ["*"] };
-    mcpDirty = true;
-    steps.push({ item: "mcp:lares", action: "wired", detail: "mcp-config.json — the memory sensorium" });
+    // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
+    // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
+    // the door shut, the health line green. Re-aim whenever the registered command/args drift.
+    const seat = servers["lares"] as { command?: string; args?: readonly string[] } | undefined;
+    const aligned = seat !== undefined && seat.command === laresMcp.command
+      && JSON.stringify(seat.args ?? []) === JSON.stringify(laresMcp.args);
+    if (aligned) {
+      steps.push({ item: "mcp:lares", action: "present", detail: "aimed at the resolved sensorium seat" });
+    } else {
+      const drifted = seat !== undefined;
+      servers["lares"] = { type: "local", command: laresMcp.command, args: laresMcp.args, env: laresMcp.env, tools: ["*"] };
+      mcpDirty = true;
+      steps.push({ item: "mcp:lares", action: "wired", detail: `${drifted ? "re-aimed a drifted seat" : "mcp-config.json"} — the memory sensorium` });
+    }
   }
 
   if (mcpDirty) {
