@@ -6,7 +6,7 @@ export {
   larMempalaceDir, larContentDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
   larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
-  memorySensoriumDir, memorySensoriumLenses, sensoriumLenses, sensoriumNames,
+  memorySensoriumDir, memorySensoriumLenses, sensoriumLenses, sensoriumNames, sensoriumDir,
   // The `mesh` sensorium dir + its WHO/AUTHORITY/FLOW child dirs (the consolidated federation tree).
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
 } from "./vessel-paths.js";

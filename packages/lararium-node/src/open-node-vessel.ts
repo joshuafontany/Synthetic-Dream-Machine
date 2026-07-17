@@ -276,7 +276,15 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   let recallFormPalace: FormPalace | null = null;
   // One Python source-stream owner for the sovereign memory sensorium. It receives pointers only;
   // parsing, CID identity, embedding and land all stay on the Python side of the boundary.
-  let sourceCapture: SourceCapture | null = null;
+  // One serialized capture holder PER sensorium root (each owns its own content-palace singleton flock).
+  // `memory` is the default; a `lares sense <sensorium> …` address threads its own root here.
+  const sourceCaptures = new Map<string, SourceCapture>();
+  const captureFor = (root?: string): SourceCapture => {
+    const r = root && root.length > 0 ? root : memorySensoriumDir();
+    let sc = sourceCaptures.get(r);
+    if (!sc) { sc = makeSourceCapture(r); sourceCaptures.set(r, sc); }
+    return sc;
+  };
   // The composed verb plane (the four provider-heavy groups, NESTED-composed). composeVerbPlane is async
   // but wireVerbs runs SYNCHRONOUSLY (daemonCap.build calls it un-awaited); the plane composes at the END
   // of openDaemon (where daemonVm is ready, awaited BEFORE wireVerbs inside daemonCap) and wireVerbs
@@ -552,14 +560,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     };
     const daemonImpl: DaemonVerbProvider = {
       captureSource: async (input) => {
-        sourceCapture ??= makeSourceCapture(memorySensoriumDir());
-        return await sourceCapture.capture(input);
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).capture(req);
       },
       refreshMempalace: async (input) => {
-        // The SAME serialized capture holder owns the store; a refresh rides its pipe (queues between
-        // capture passes), so the projection re-paves without racing the live writer.
-        sourceCapture ??= makeSourceCapture(memorySensoriumDir());
-        return await sourceCapture.refresh(input);
+        // The SAME serialized capture holder (for this sensorium root) owns the store; a refresh rides its
+        // pipe (queues between capture passes), so the projection re-paves without racing the live writer.
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).refresh(req);
       },
       placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),

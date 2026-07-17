@@ -18,7 +18,7 @@
  * the @daemon's composed caps, and nothing behind it opens a store.
  */
 
-import { openMemorySensorium, sensoriumLenses } from "@lararium/node";
+import { openMemorySensorium, sensoriumLenses, sensoriumNames, sensoriumDir } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 import { cmdHarvest, cmdCapture } from "./harvest.js";
@@ -58,15 +58,31 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
 };
 
 export async function cmdSense(args: ParsedArgs): Promise<number> {
+  // SENSORIUM ADDRESSING — `lares sense <sensorium> <verb>`: a leading KNOWN sensorium name (resolved
+  // against the on-disk registry/manifest) selects the TARGET; the rest is the verb. `lares sense <verb>`
+  // keeps the `memory` default. So `lares sense memory pour --all` addresses memory by manifest, and the
+  // SAME door opens any stream sensorium (the root threads to the capture/refresh holder). Verb names and
+  // sensorium names never collide, so a leading token resolves unambiguously.
+  let positional = args.positional;
+  let sensoriumRoot: string | undefined;
+  const first = positional[0];
+  if (first && LIFECYCLE[first] === undefined && !VERBS.includes(first as Verb) && sensoriumNames().includes(first)) {
+    sensoriumRoot = sensoriumDir(first);
+    positional = positional.slice(1);
+  }
+  // Thread the resolved root to the verb (absent → the verb keeps its memory default).
+  const withRoot = (a: ParsedArgs): ParsedArgs =>
+    sensoriumRoot ? { ...a, options: { ...a.options, "sensorium-root": sensoriumRoot } } : a;
+
   // A lifecycle verb tends the plane; drop it from the positional and hand the rest to its owner.
-  const head = args.positional[0];
+  const head = positional[0];
   const lifecycle = head ? LIFECYCLE[head] : undefined;
   if (lifecycle) {
-    return await lifecycle({ ...args, positional: args.positional.slice(1) });
+    return await lifecycle(withRoot({ ...args, positional: positional.slice(1) }));
   }
 
   // `--key value` lands in `options`; `--key` alone lands in `flags`. The lens carries a VALUE.
-  const [verb, ...rest] = args.positional;
+  const [verb, ...rest] = positional;
   const lens = args.options["lens"] ?? "content";
   const known = Object.keys(sensoriumLenses());
 

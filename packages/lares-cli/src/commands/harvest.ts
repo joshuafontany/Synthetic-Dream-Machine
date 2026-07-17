@@ -530,6 +530,9 @@ export function acquireHarvestAllLock(): () => void {
 
 async function runHarvestAll(args: ParsedArgs): Promise<number> {
   const dryRun = args.flags["dry-run"] === true;
+  // The addressed sensorium root (from `lares sense <sensorium> pour --all`), threaded to every capture leg.
+  const sensoriumRoot = typeof args.options["sensorium-root"] === "string" ? args.options["sensorium-root"] : undefined;
+  const rootOpt: Record<string, string> = sensoriumRoot ? { "sensorium-root": sensoriumRoot } : {};
   if (!existsSync(resolveDrawerIo())) {
     const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${resolveDrawerIo()}` };
     emit(args, { ok: false, error, human: () => console.error(`lares sense pour --all: ${error.message}`) });
@@ -628,10 +631,10 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
     try {
       // Submit source descriptors only. The serialized Python holder owns native parsing,
       // CID derivation, embedding, and durable landing; no TypeScript turn path exists here.
-      const stagedRc = stagedEntries.length === 0 ? 0 : await cmdCapture({ command: "capture", positional: [stage], options: { wing }, flags: {} });
+      const stagedRc = stagedEntries.length === 0 ? 0 : await cmdCapture({ command: "capture", positional: [stage], options: { wing, ...rootOpt }, flags: {} });
       let sqliteRc = 0;
       for (const entry of sqliteEntries) {
-        const rc = await cmdCapture({ command: "capture", positional: [entry.file], options: { wing, ...(entry.sessionId ? { "session-id": entry.sessionId } : {}) }, flags: {} });
+        const rc = await cmdCapture({ command: "capture", positional: [entry.file], options: { wing, ...(entry.sessionId ? { "session-id": entry.sessionId } : {}), ...rootOpt }, flags: {} });
         if (rc !== 0) sqliteRc = rc;
       }
       mined = stagedRc === 0 && sqliteRc === 0 ? "routed→python" : `capture-rc-${stagedRc || sqliteRc}`;
@@ -951,6 +954,8 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
 
   const target = args.positional[0] ?? "";
   const wing   = typeof args.options["wing"] === "string" ? args.options["wing"] : "";
+  // A `lares sense <sensorium> capture …` address threads the target sensorium root (absent → memory).
+  const sensoriumRoot = typeof args.options["sensorium-root"] === "string" ? args.options["sensorium-root"] : undefined;
   if (!target || !wing) {
     emit(args, {
       ok: false,
@@ -997,7 +1002,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     try {
       // The CALLER'S patience = the servo CEIL, so the CLI never cliffs before the daemon's adaptive
       // (gradient) budget resolves — a big session lands honestly; a real hang still dies within CEIL.
-      const r = await runVerb("capture", { surface, pointer, wing, room: DEFAULT_ROOM, ...(surface === "copilot" && sessionId ? { sessionId } : {}) }, did, { timeoutMs: TIMEOUT_CEIL_MS });
+      const r = await runVerb("capture", { surface, pointer, wing, room: DEFAULT_ROOM, ...(surface === "copilot" && sessionId ? { sessionId } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) }, did, { timeoutMs: TIMEOUT_CEIL_MS });
       const output = ((r.results as { summary?: { output?: Record<string, unknown> } } | undefined)?.summary?.output) ?? {};
       passes.push({ pointer, ...output });
     } catch (err) {

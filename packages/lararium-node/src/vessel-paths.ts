@@ -135,6 +135,13 @@ export function memorySensoriumLenses(): Record<string, string> {
   };
 }
 
+/** Resolve a sensorium NAME to its root dir — `<data>/sensoriums/<name>` (the manifest lives beneath it).
+ *  The one place a `lares sense <sensorium> <verb>` address turns a name into a target root; `memory`
+ *  resolves to {@link memorySensoriumDir} by construction (same join), so the default stays identical. */
+export function sensoriumDir(name: string): string {
+  return join(larDataHome(), "sensoriums", name);
+}
+
 /** Every sensorium standing under `<data>/sensoriums` — the ones a lens may name. */
 export function sensoriumNames(): string[] {
   const root = join(larDataHome(), "sensoriums");

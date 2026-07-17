@@ -48,10 +48,12 @@ export async function cmdRefresh(args: ParsedArgs): Promise<number> {
     return exitFor("not-found");
   }
 
+  const sensoriumRoot = typeof args.options["sensorium-root"] === "string" ? args.options["sensorium-root"] : undefined;
   const verbArgs: Record<string, unknown> = {};
   if (query) verbArgs["query"] = query;
   if (k !== undefined) verbArgs["k"] = k;
   if (allStrata) verbArgs["allStrata"] = true;
+  if (sensoriumRoot) verbArgs["sensoriumRoot"] = sensoriumRoot;  // address a specific sensorium (else memory)
 
   // The caller's patience = the servo CEIL, so the CLI never cliffs before the daemon's adaptive
   // (gradient) budget — a refresh queued behind a big in-flight capture pass still resolves; a real

@@ -118,11 +118,13 @@ export interface SubagentEdgePair {
  *  EXTERNAL data the worker can't reach (transcript edges, form-vector bytes); all COMPUTE is the
  *  worker's. The impl proxies to the live `DaemonVmCore`. */
 export interface DaemonVerbProvider {
-  /** Send one source-stream pointer to the serialized Python capture holder. */
-  captureSource(input: { surface: "claude" | "codex" | "copilot" | "copilot-vscode"; pointer: string; wing: string; room?: string; sessionId?: string }): Promise<Record<string, unknown>>;
+  /** Send one source-stream pointer to the serialized Python capture holder. `sensoriumRoot` addresses a
+   *  specific sensorium's holder (absent → the memory default). */
+  captureSource(input: { surface: "claude" | "codex" | "copilot" | "copilot-vscode"; pointer: string; wing: string; room?: string; sessionId?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** Re-pave the in-tree mempalace projection over the content plane, THROUGH the same serialized Python
-   *  capture holder — so a refresh queues between capture passes and never races the live writer. */
-  refreshMempalace(input: { query?: string; k?: number; allStrata?: boolean }): Promise<Record<string, unknown>>;
+   *  capture holder — so a refresh queues between capture passes and never races the live writer.
+   *  `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
+  refreshMempalace(input: { query?: string; k?: number; allStrata?: boolean; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeStructurepalaceKapae(turnKey: string, ended?: string): void;
@@ -336,7 +338,8 @@ export function captureVerbCap(): CapModule {
             throw new Error("capture: args.surface must be claude|codex|copilot|copilot-vscode");
           }
           if (!pointer || !wing) throw new Error("capture: args.pointer + args.wing (non-empty strings) required");
-          return await daemon.captureSource({ surface, pointer, wing, ...(room ? { room } : {}), ...(sessionId ? { sessionId } : {}) });
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.captureSource({ surface, pointer, wing, ...(room ? { room } : {}), ...(sessionId ? { sessionId } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // Re-pave the mempalace projection over the content plane, serialized on the capture holder's
@@ -344,10 +347,12 @@ export function captureVerbCap(): CapModule {
           const query = typeof args["query"] === "string" ? (args["query"] as string) : undefined;
           const k = typeof args["k"] === "number" ? (args["k"] as number) : undefined;
           const allStrata = args["allStrata"] === true;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.refreshMempalace({
             ...(query ? { query } : {}),
             ...(k !== undefined ? { k } : {}),
             ...(allStrata ? { allStrata } : {}),
+            ...(sensoriumRoot ? { sensoriumRoot } : {}),
           });
         });
         registry.register("structurepalace-kapae", async (args) => {
