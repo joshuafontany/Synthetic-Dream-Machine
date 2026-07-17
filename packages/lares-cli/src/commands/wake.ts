@@ -173,12 +173,21 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       const readAttestation = (): string => {
         try { return readFileSync(log, "utf8").slice(startOffset); } catch { return ""; }
       };
-      const deadline = Date.now() + 15_000;
+      // The sd_notify WATCHDOG idiom: a healthy boot that keeps WRITING to the log is making
+      // progress, however long the corpus/keyhive replay runs — so extend the window whenever
+      // the log grows, and fail only on a genuine STALL (no output for the idle span) or the
+      // absolute ceiling. This replaces the fixed 15s deadline that false-timed a slow-but-live
+      // boot. (The real CPU cost is paced/deferred separately; this stops the watcher lying.)
+      const IDLE_MS = 30_000; // headroom for a silent heavy stretch (Automerge corpus materialize)
+      const hardCap = Date.now() + 180_000;
+      let idleDeadline = Date.now() + IDLE_MS;
+      let seenLen = 0;
       let phase: "starting" | "ready" | "fault" = "starting";
-      while (Date.now() < deadline) {
+      while (Date.now() < idleDeadline && Date.now() < hardCap) {
         const tail = readAttestation();
         if (/fatal:/.test(tail)) { phase = "fault"; break; }
         if (tail.includes("vessel-ready")) { phase = "ready"; break; }
+        if (tail.length > seenLen) { seenLen = tail.length; idleDeadline = Date.now() + IDLE_MS; } // progress → extend
         await sleep(200);
       }
       // `vessel-ready` is attested BEFORE the daemon-keyhive gates settle, so a gate
@@ -207,7 +216,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
           ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
           : phase === "fault"
             ? `started then attested a boot fault — see ${log}`
-            : `starting detached (pid ${child.pid ?? "?"}); no vessel-ready attestation within 15s — see ${log}`;
+            : `starting detached (pid ${child.pid ?? "?"}); boot stalled (no log progress for 15s) before vessel-ready — see ${log}`;
     }
   }
 
