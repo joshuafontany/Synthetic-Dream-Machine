@@ -16,6 +16,9 @@
  * lineages). Duplicity — two signed inconsistent epochs at one sequence — IS algorithmically detectable.
  */
 
+import * as ed25519 from "@noble/ed25519";
+import { sha256HexSync, hexToBytes } from "./crypto.js";
+
 /** One epoch in the charter's pre-rotated, hash-linked lineage. Content-addressed by `epochCid`. */
 export interface CharterEpoch {
   readonly epoch:        number;         // monotonic sequence; genesis = 0
@@ -84,4 +87,48 @@ export function detectDuplicity(a: readonly CharterEpoch[], b: readonly CharterE
     if (other !== undefined && other !== e.epochCid) return e.epoch;
   }
   return null;
+}
+
+// ── The minter + the Ed25519 verify (the crypto floor the classifier's injected verifySig rides) ────
+
+/** The canonical bytes a wax-stamp signs — the artifact bound to its epoch + a bound-past (strict `|`). */
+export function waxStampProofBytes(artifactHash: string, epochCid: string, sealedAt: string): Uint8Array {
+  return new TextEncoder().encode(`lar-wax-stamp/v1|${artifactHash}|${epochCid}|${sealedAt}`);
+}
+
+/** A single-key key-set digest — the floor's keySetHash for an epoch with one authorized signer. A
+ *  k-of-n key-set is a Merkle/sorted-hash of the members (a later cut); the classifier is agnostic. */
+export function singleKeySetHash(signerKeyHex: string): string {
+  return sha256HexSync(signerKeyHex);
+}
+
+/** Mint a wax-stamp: sign the artifact under a key authorized by the cited epoch. `sign` yields a hex
+ *  Ed25519 signature over `waxStampProofBytes`; the caller supplies a key that hashes into keySetHash. */
+export async function mintWaxStamp(input: {
+  readonly artifactHash: string;
+  readonly epoch: CharterEpoch;
+  readonly sealedAt: string;
+  readonly sign: (bytes: Uint8Array) => Promise<string>;
+}): Promise<WaxStamp> {
+  const signature = await input.sign(waxStampProofBytes(input.artifactHash, input.epoch.epochCid, input.sealedAt));
+  return { artifactHash: input.artifactHash, epochCid: input.epoch.epochCid, sealedAt: input.sealedAt, signature };
+}
+
+/**
+ * Verify a wax-stamp's Ed25519 signature against a signer key that the cited epoch AUTHORIZES. Two gates:
+ * the signer must hash into the epoch's `keySetHash` (authorized by THIS epoch), AND the signature must
+ * verify over the canonical bytes. Compose this into `classifySeal`'s injected `verifySig` (pre-await it
+ * per stamp, since classifySeal is synchronous). A reader needs only the PUBLIC charter + the signer key
+ * carried on the stamp — never a roster.
+ */
+export async function verifyWaxStampSig(
+  stamp: WaxStamp,
+  epoch: CharterEpoch,
+  signerKeyHex: string,
+  keyInSet: (signerKeyHex: string, keySetHash: string) => boolean = (k, h) => singleKeySetHash(k) === h,
+): Promise<boolean> {
+  if (!keyInSet(signerKeyHex, epoch.keySetHash)) return false;      // the signer is not authorized by this epoch
+  const msg = waxStampProofBytes(stamp.artifactHash, stamp.epochCid, stamp.sealedAt);
+  try { return await ed25519.verifyAsync(hexToBytes(stamp.signature), msg, hexToBytes(signerKeyHex)); }
+  catch { return false; }
 }
