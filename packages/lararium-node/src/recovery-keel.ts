@@ -9,9 +9,9 @@
  * those two parties can recover alone (the escrow peer holds one share; the code is one share) — the
  * recovery quorum IS the impersonation quorum, and it needs both.
  *
- * This module is PURE composition (split/reconstruct from mesh + runReadmitEdge from keyhive). Disk
- * persistence of the device-share (sealed) + the escrow SRP transport + the `lares device-readmit` CLI
- * are the wiring that rides on top — this is the atom they compose.
+ * This is the recovery FLOWS module: the pure atoms (splitRootAtFounding, reconstructAndReadmit) plus
+ * the founding-provision that ties them to the identity home (provisionRecoveryAtFounding). The escrow
+ * SRP transport + the `lares device-readmit` CLI are the thin wiring that rides on top.
  */
 
 import type { RandomProvider } from "@lararium/mesh";
@@ -21,6 +21,8 @@ import {
 } from "@lararium/mesh";
 import { runReadmitEdge, type ReadmitEdgeInput } from "@lararium/keyhive";
 import type { DeviceAdmitPayload } from "@lararium/keyhive";
+import { loadPersonaGroupRootSeed } from "./node-vessel-identity.js";
+import { persistRecoveryDeviceShare } from "./recovery-share-store.js";
 
 /** The three shares a founding split produces. Any two DISTINCT custodians recover — so a lost device
  *  (its share gone) still recovers from {recorded-code, escrow-peer}. */
@@ -69,5 +71,30 @@ export async function reconstructAndReadmit(
     return await runReadmitEdge({ ...readmit, reconstructedRoot });
   } finally {
     reconstructedRoot.fill(0);   // close the reconstruction window immediately
+  }
+}
+
+/**
+ * Provision recovery at FOUNDING: split the freshly-minted PersonaGroup root, SEAL the device-share into
+ * the identity home, and return the two shares the citizen carries OFF the device — the recorded code
+ * (write it down) and the escrow carrier (hand to a peer). The floor's real work runs here, at
+ * onboarding: it forces one external factor to exist BEFORE the Handle carries standing, because no
+ * crypto recovers a secret from nothing. The root seed is zeroized the instant it is split.
+ *
+ * Additive — the mint (generateOrLoadPersonaGroupRoot) is untouched; the founding caller invokes this
+ * once the root exists, then SURFACES the recorded code to the citizen and relays the escrow carrier.
+ */
+export async function provisionRecoveryAtFounding(
+  dataDir: string,
+  rng: RandomProvider,
+  recoveryEpoch = 1,
+): Promise<{ recordedCode: string; escrowCarrier: string }> {
+  const rootSeed = await loadPersonaGroupRootSeed(dataDir);
+  try {
+    const shares = splitRootAtFounding(rootSeed, rng, recoveryEpoch);
+    persistRecoveryDeviceShare(shares.deviceShare);
+    return { recordedCode: shares.recordedCode, escrowCarrier: shares.escrowCarrier };
+  } finally {
+    rootSeed.fill(0);   // the root never lingers after the split
   }
 }

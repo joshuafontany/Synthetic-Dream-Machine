@@ -4,11 +4,16 @@
  * two custodians {recorded-code, escrow} to re-admit a fresh device — whose edge verifies against the
  * original pinned root. The device-share (dead with the device) is never the recovery path.
  */
-import { describe, test, expect } from "vitest";
+import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { generateKeyPairSync } from "node:crypto";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import * as ed25519 from "@noble/ed25519";
-import { assembleQuorum, decodeShareBytes, verifyDeviceDelegation } from "@lararium/mesh";
-import { splitRootAtFounding, reconstructAndReadmit } from "../src/recovery-keel.js";
+import { assembleQuorum, reconstructFromQuorum, decodeShareBytes, verifyDeviceDelegation, type RecoveryShare } from "@lararium/mesh";
+import { splitRootAtFounding, reconstructAndReadmit, provisionRecoveryAtFounding } from "../src/recovery-keel.js";
+import { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed } from "../src/node-vessel-identity.js";
+import { loadRecoveryDeviceShare } from "../src/recovery-share-store.js";
 
 const ROOT = Uint8Array.from(Array.from({ length: 32 }, (_, i) => (i * 61 + 13) & 0xff));
 const PLACE = "bafkreic7r3jrao44srh5bp47uryotaqp62bnmovzpqccbfy2kclf447bra";
@@ -69,5 +74,38 @@ describe("recovery-keel — found → device drowns → recover → re-admit", (
     const payload = await reconstructAndReadmit([founding.deviceShare, founding.escrowShare], readmitFields(freshDeviceKey()));
     const rootDid = `0x${Buffer.from(await ed25519.getPublicKeyAsync(ROOT)).toString("hex")}`;
     expect((await verifyDeviceDelegation(payload.deviceEdge, rootDid)).ok).toBe(true);
+  });
+});
+
+describe("recovery-keel — founding provision against the real identity store", () => {
+  const saved: Record<string, string | undefined> = {};
+  const setEnv = (k: string, v: string | undefined): void => { saved[k] = process.env[k]; if (v === undefined) delete process.env[k]; else process.env[k] = v; };
+  let root: string;
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "lares-recprov-"));
+    setEnv("LAR_ROOT", undefined);
+    setEnv("XDG_STATE_HOME", join(root, "state"));
+    setEnv("LARES_ARCHIVE_PASSPHRASE", undefined);
+  });
+  afterEach(() => {
+    for (const [k, v] of Object.entries(saved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  test("provision at founding: split the minted root, seal the device-share, recover from {code, escrow}", async () => {
+    const dataDir = root;   // identityDir ignores it — the store resolves under XDG state
+    await generateOrLoadPersonaGroupRoot(dataDir);                    // the founding mint
+    const { recordedCode, escrowCarrier } = await provisionRecoveryAtFounding(dataDir, seededRng(11));
+
+    // The device-share landed sealed in the identity home; the two off-device carriers came back.
+    expect(loadRecoveryDeviceShare()?.custodian).toBe("device");
+    expect(recordedCode.length).toBeGreaterThan(0);
+    expect(escrowCarrier.length).toBeGreaterThan(0);
+
+    // A drowned device recovers the REAL minted root from {recorded-code, escrow}.
+    const codeShare:   RecoveryShare = { bytes: decodeShareBytes(recordedCode),  custodian: "recorded-code", recoveryEpoch: 1 };
+    const escrowShare: RecoveryShare = { bytes: decodeShareBytes(escrowCarrier), custodian: "escrow-peer",   recoveryEpoch: 1 };
+    const recovered = reconstructFromQuorum(assembleQuorum([codeShare, escrowShare], 2));
+    expect([...recovered]).toEqual([...await loadPersonaGroupRootSeed(dataDir)]);
   });
 });
