@@ -71,6 +71,26 @@ function bytesToHex(bytes: Uint8Array): string {
   return s;
 }
 
+/**
+ * eventIsland (CIV-3) — self-attribute a cap-event's island (the target Document's id hex, the
+ * same key-space bagToDocId + list(islandId) route on) off the event's OWN bytes. DELEGATED reads
+ * `subjectId`; REVOKED reads `delegation.subject_id` (snake_case here — a real casing split from
+ * the delegation's camelCase `subjectId`, load-bearing). The subject is the Document the op acts
+ * ON (e.g. the MeshCabal a persona is added INTO), so the founding cross-island edges self-stamp
+ * for free. CGKA_OPERATION / PREKEY_ROTATED expose no docId at the JS boundary → undefined, and an
+ * unattributed event co-loads into every island's slice — exactly the reach a per-principal prekey
+ * needs for RESTORE-OR-FRESH replay. Zero timing dependency; the event carries its own scope.
+ */
+function eventIsland(e: KH.Event): string | undefined {
+  try {
+    const sd = e.tryIntoSignedDelegation();
+    if (sd) return bytesToHex(sd.subjectId.toBytes());
+    const sr = e.tryIntoSignedRevocation();
+    if (sr) return bytesToHex(sr.delegation.subject_id.toBytes());
+  } catch { /* a variant without a recoverable subject stays cross-cutting */ }
+  return undefined;
+}
+
 function hexToBytes(hex: string): Uint8Array {
   const clean = hex.startsWith("0x") ? hex.slice(2) : hex;
   if (clean.length % 2 !== 0) throw new Error(`bad hex length: ${hex}`);
@@ -131,7 +151,10 @@ export class KeyhiveProvider implements CapabilityProvider {
         // The in-memory store uses synthetic hashes here; a
         // tiddler-backed store will compute content hashes itself.
         const hash    = `${variant}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-        void this.eventStore?.put({ hash, variant, bytes });
+        // CIV-3 — stamp the island (target Document) for the events that carry it (DELEGATED /
+        // REVOKED); CGKA / prekey stay unattributed → co-loaded across every island's slice.
+        const island  = eventIsland(e);
+        void this.eventStore?.put({ hash, variant, bytes, ...(island !== undefined ? { island } : {}) });
       } catch (err) {
         console.error("[keyhive] event capture failed:", err);
       }
