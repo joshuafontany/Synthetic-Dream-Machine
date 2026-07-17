@@ -17,6 +17,10 @@
  *   LAR_CROSSING_PORT    ws listen port         (default 8080)
  *   LAR_CROSSING_SHARED  shared dir/volume      (required — the file handshake)
  *   LAR_CROSSING_GREET   the doc's seeded text   (default "the DreamNet breathes")
+ *   LAR_CROSSING_ADMIT   who the gate admits     (default from-file):
+ *                          from-file → admit the leaf pubkey the client publishes (X1 happy path)
+ *                          none      → admit NOBODY (X2 anon-denial — the gate turns the leaf away)
+ *                          <hex,…>   → admit exactly these keys
  *
  * Meme: lar:///ha.ka.ba/lararium/node/browser-crossing
  */
@@ -76,9 +80,14 @@ async function main(): Promise<void> {
   if (!SHARED) throw new Error("LAR_CROSSING_SHARED required");
   mkdirSync(SHARED, { recursive: true });
 
-  // The client publishes its leaf pubkey first; the daemon admits exactly that key.
-  const admittedPub = (await waitForFile(join(SHARED, "leaf-pub"), "client leaf pubkey")).trim();
-  console.log(`[crossing-daemon] admitting leaf ${admittedPub.slice(0, 12)}…`);
+  // The client publishes its leaf pubkey first (always — it syncs the handshake); WHO the gate admits
+  // rides the admit policy, so a denial scenario can turn that very leaf away.
+  const publishedPub = (await waitForFile(join(SHARED, "leaf-pub"), "client leaf pubkey")).trim();
+  const ADMIT = envOf("LAR_CROSSING_ADMIT", "from-file");
+  const admitted = ADMIT === "from-file" ? new Set([publishedPub])
+                 : ADMIT === "none"      ? new Set<string>()
+                 : new Set(ADMIT.split(",").map((s) => s.trim()).filter(Boolean));
+  console.log(`[crossing-daemon] admit policy=${ADMIT} → gate admits ${String(admitted.size)} key(s)`);
 
   // Generate the gate key (published to the client, bound into its proof — a data binding, not a signer).
   const { publicKey } = generateKeyPairSync("ed25519");
@@ -105,7 +114,7 @@ async function main(): Promise<void> {
     },
   });
 
-  gate.arm(makeCapabilitySeam(gatePubKey, new Set([admittedPub])), AUD, gatePubKey);
+  gate.arm(makeCapabilitySeam(gatePubKey, admitted), AUD, gatePubKey);
 
   const doc = repo.create<{ tiddlers: Record<string, { text: string }> }>({ tiddlers: {} });
   doc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@crossroads/greeting"] = { text: GREET }; });

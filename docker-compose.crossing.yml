@@ -10,8 +10,11 @@
 # Handshake rides the shared volume: client writes leaf-pub → daemon admits + publishes crossing.json
 # (gate key + doc url) → client crosses + syncs.
 #
-# Run:     rm -rf .crossing-run && docker compose -f docker-compose.crossing.yml up --abort-on-container-exit --exit-code-from crossing-client
-# Green:   crossing-client exits 0, logs "✓ CROSSING COMPLETE"; daemon logs "✓ observed … write-back"
+# The whole matrix (admitted / anon / impostor / wrong-bind):  tools/crossing-witness.sh
+# One scenario:  LAR_CROSS_ROLE=admitted docker compose -f docker-compose.crossing.yml up \
+#                  --abort-on-container-exit --exit-code-from crossing-client
+# Green:   crossing-client exits 0. The shared handshake rides a NAMED volume (crossing-run) that
+#          `down -v` wipes — no host bind-mount, so container-written files leave no root-owned litter.
 # Down:    docker compose -f docker-compose.crossing.yml down -v
 
 name: dreamnet-crossing
@@ -22,13 +25,14 @@ services:
     working_dir: /app
     volumes:
       - ".:/app"
-      - "./.crossing-run:/crossing"
+      - "crossing-run:/crossing"
     networks: [crossing]
     restart: "no"
     environment:
       LAR_CROSSING_PORT:   "8080"
       LAR_CROSSING_SHARED: "/crossing"
       LAR_CROSSING_GREET:  "the DreamNet breathes"
+      LAR_CROSSING_ADMIT:  "${LAR_CROSSING_ADMIT:-from-file}"   # from-file | none | <hex,…> — set per scenario
     command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/crossing-daemon.ts"]
 
   crossing-client:
@@ -36,16 +40,20 @@ services:
     working_dir: /app
     volumes:
       - ".:/app"
-      - "./.crossing-run:/crossing"
+      - "crossing-run:/crossing"
     networks: [crossing]
     restart: "no"
     environment:
       LAR_CROSSING_SHARED:      "/crossing"
       LAR_CROSSING_DAEMON_HOST: "crossing-daemon"
       LAR_CROSSING_GREET:       "the DreamNet breathes"
+      LAR_CROSS_ROLE:           "${LAR_CROSS_ROLE:-admitted}"   # admitted | anon | impostor | wrong-bind
     command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/crossing-client.ts"]
     depends_on: [crossing-daemon]
 
 networks:
   crossing:
     driver: bridge
+
+volumes:
+  crossing-run:      # the leaf-pub/coordinates handshake; wiped by `down -v` each scenario
