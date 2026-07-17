@@ -195,6 +195,12 @@ export function palaceOrgans(): PalaceOrgan[] {
     // The `persistence` cosheaf cap store (the 5th part) — a caller-vector instance holding Testimony
     // atoms; the `memory` sensorium composes it (authority mode). Lazy collection like ast/form: init = ensure dir.
     { name: "persistencepalace", dir: larPersistencePalaceDir(), init: ensureDirOrgan("persistencepalace", larPersistencePalaceDir()) },
+    // The memory sensorium's in-tree `mempalace` cap store (<memory>/mempalace) — the curated-memory
+    // plane {@link materializeMemorySensorium} declares. Stood like every other plane (ensureDirOrgan:
+    // mkdir; the chroma collection lands lazily on first put), the SAME way the memetic-wikitext peers
+    // stand their `engine:"mempalace"` content caps. This sovereign in-tree store supersedes the retiring
+    // external guest ~/.mempalace — one line here replaces the whole `initGuestMempalace` standing dance.
+    { name: "mempalace", dir: join(memorySensoriumDir(), "mempalace"), init: ensureDirOrgan("mempalace", join(memorySensoriumDir(), "mempalace")) },
     // The `mesh` sensorium TREE — the parent dir plus its three nested children (who/authority/flow),
     // each enumerated so setup stands + teardown reaps them. Structure only; the parallel fills the caps.
     { name: "meshpalace",     dir: larMeshPalaceDir(),  init: ensureDirOrgan("meshpalace",     larMeshPalaceDir())  },
