@@ -25,7 +25,8 @@ import { generateKeyPairSync } from "node:crypto";
 import { WebSocketServer } from "ws";
 import { verifyAuthProof, ed25519SignerFromSeed, LarWSClientAdapter } from "@lararium/mesh";
 import type { AuthVerifierSeam } from "@lararium/mesh";
-import type { PeerId } from "@automerge/automerge-repo";
+import { Repo, type PeerId } from "@automerge/automerge-repo";
+import { NodeWSServerAdapter } from "@automerge/automerge-repo-network-websocket";
 import { DaemonAuthGate } from "../src/daemon-auth-gate.js";
 import type { LeafIdentity } from "../src/leaf-identity.js";
 
@@ -163,4 +164,126 @@ describe("browser↔node crossing — real gate · real Ed25519 · real capabili
     expect(crossed).toBe(false);                // the forged proof failed verifyAuthProof
     expect(harness.gate.clients.size).toBe(0);
   });
+});
+
+/**
+ * Node-side Automerge readiness override (mirrors the production ListeningWSServerAdapter): upstream's
+ * NodeWSServerAdapter declares ready only on its FIRST client, un-pono for a local-first vessel whose
+ * readiness reads from local state. The 3-line override keeps the vessel ready from listen, not from a
+ * peer's arrival — the same shape open-node-vessel wires in production.
+ */
+class ReadyWSServerAdapter extends NodeWSServerAdapter {
+  override isReady(): boolean { return true; }
+  override whenReady(): Promise<void> { return Promise.resolve(); }
+}
+
+/**
+ * Stand a node-side Automerge Repo behind the armed DaemonAuthGate — the production shape from
+ * open-node-vessel: the gate forwards only authed sockets to the Repo's network, and the sharePolicy
+ * shares a doc ONLY with a WS peer whose socket carries an admitted identifier (the gate ring). The
+ * vessel's own in-process islands would share freely; here every peer arrives over the WS, so the ring
+ * is the whole gate.
+ */
+function standNodeRepo(opts: { gatePubKey: string; admitted: ReadonlySet<string> }): Promise<{
+  gate: DaemonAuthGate; repo: Repo; port: number; close: () => Promise<void>;
+}> {
+  return new Promise((resolve, reject) => {
+    const http: Server = createServer();
+    const wss  = new WebSocketServer({ server: http });
+    const gate = new DaemonAuthGate(wss);
+    const network = new ReadyWSServerAdapter(gate as unknown as WebSocketServer);
+    const peerIdentifierMap = new Map<string, string>();
+    network.on("peer-candidate", ({ peerId }: { peerId: string }) => {
+      queueMicrotask(() => {
+        const socket = (network.sockets as Record<string, unknown>)[peerId];
+        if (!socket) return;
+        const identHex = gate.getIdentifierForSocket(socket as Parameters<typeof gate.getIdentifierForSocket>[0]);
+        if (identHex) peerIdentifierMap.set(peerId, identHex);
+      });
+    });
+    const repo = new Repo({
+      network: [network],
+      // The gate ring: a WS peer shares only once its socket carries an admitted identifier.
+      sharePolicy: async (peerId) => {
+        const wsSocket = (network.sockets as Record<string, unknown> | undefined)?.[peerId];
+        return wsSocket ? peerIdentifierMap.has(peerId) : true;
+      },
+    });
+    gate.arm(makeCapabilitySeam({ gatePubKey: opts.gatePubKey, admitted: opts.admitted }), AUD, opts.gatePubKey);
+    http.listen(0, "127.0.0.1", () => {
+      const addr = http.address();
+      if (!addr || typeof addr === "string") { reject(new Error("bad address")); return; }
+      resolve({
+        gate, repo, port: addr.port,
+        close: async () => { await repo.shutdown(); await new Promise<void>((res) => wss.close(() => http.close(() => res()))); },
+      });
+    });
+  });
+}
+
+describe("browser↔node doc replication — the mesh breathes over the crossed socket", () => {
+  let node: Awaited<ReturnType<typeof standNodeRepo>> | null = null;
+  let clientRepo: Repo | null = null;
+  let clientAdapter: LarWSClientAdapter | null = null;
+
+  afterEach(async () => {
+    if (clientRepo) { await clientRepo.shutdown(); clientRepo = null; }
+    try { clientAdapter?.disconnect(); } catch { /* never connected */ }
+    clientAdapter = null;
+    await node?.close();
+    node = null;
+  });
+
+  test("a doc created on the NODE reaches an ADMITTED browser leaf via CRDT sync", async () => {
+    const gatePub = genKey().pub;
+    const { identity, pub } = makeLeaf();
+    node = await standNodeRepo({ gatePubKey: gatePub, admitted: new Set([pub]) });
+
+    // The node authors a doc — its AutomergeUrl is the capability token that crosses to the browser.
+    const nodeDoc = node.repo.create<{ tiddlers: Record<string, { text: string }> }>({ tiddlers: {} });
+    nodeDoc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@crossroads/greeting"] = { text: "the DreamNet breathes" }; });
+
+    // The browser-shaped leaf crosses the armed gate, then finds + syncs the doc.
+    clientAdapter = new LarWSClientAdapter({ url: `ws://127.0.0.1:${node.port}`, identity, aud: AUD, gatePubKey: gatePub });
+    clientRepo = new Repo({ network: [clientAdapter], sharePolicy: async () => true });
+
+    const found = await clientRepo.find<{ tiddlers: Record<string, { text: string }> }>(nodeDoc.url);
+    await new Promise<void>((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error("timeout: the browser leaf never synced the node's doc")), 5_000);
+      const check = () => {
+        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@crossroads/greeting"]) { clearTimeout(timer); resolve(); }
+      };
+      found.on("change", check);
+      check();
+    });
+
+    expect(found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@crossroads/greeting"]?.text).toBe("the DreamNet breathes");
+  }, 8_000);
+
+  test("the breath runs both ways — a browser-leaf change propagates back to the node", async () => {
+    const gatePub = genKey().pub;
+    const { identity, pub } = makeLeaf();
+    node = await standNodeRepo({ gatePubKey: gatePub, admitted: new Set([pub]) });
+
+    const nodeDoc = node.repo.create<{ tiddlers: Record<string, { text: string }> }>({ tiddlers: {} });
+
+    clientAdapter = new LarWSClientAdapter({ url: `ws://127.0.0.1:${node.port}`, identity, aud: AUD, gatePubKey: gatePub });
+    clientRepo = new Repo({ network: [clientAdapter], sharePolicy: async () => true });
+    const found = await clientRepo.find<{ tiddlers: Record<string, { text: string }> }>(nodeDoc.url);
+    await found.whenReady();
+
+    // The browser writes; the node observes the change over the same crossed socket.
+    found.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@personal/reply"] = { text: "a citizen answers" }; });
+
+    await new Promise<void>((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error("timeout: the node never saw the browser-leaf's change")), 5_000);
+      const check = () => {
+        if (nodeDoc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@personal/reply"]) { clearTimeout(timer); resolve(); }
+      };
+      nodeDoc.on("change", check);
+      check();
+    });
+
+    expect(nodeDoc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@personal/reply"]?.text).toBe("a citizen answers");
+  }, 8_000);
 });
