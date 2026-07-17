@@ -1,0 +1,51 @@
+# docker-compose.crossing.yml — the containerized browser↔node CROSSING (civic-protocol transport +
+# auth + sync gate, over a real network hop). The in-process browser-crossing.test proves the logic;
+# this proves it holds across a container boundary — the pre-browser gate.
+#
+#   crossing-daemon  the NODE half: WS server + real DaemonAuthGate (Ed25519 V3 proof + capability
+#                    barrier) + Automerge Repo + a seeded doc. Admits the client's published leaf key.
+#   crossing-client  the BROWSER half: a light Ed25519 leaf + LarWSClientAdapter crosses the armed gate
+#                    and syncs the doc. Its EXIT CODE is the test verdict (0 = the DreamNet breathes).
+#
+# Handshake rides the shared volume: client writes leaf-pub → daemon admits + publishes crossing.json
+# (gate key + doc url) → client crosses + syncs.
+#
+# Run:     rm -rf .crossing-run && docker compose -f docker-compose.crossing.yml up --abort-on-container-exit --exit-code-from crossing-client
+# Green:   crossing-client exits 0, logs "✓ CROSSING COMPLETE"; daemon logs "✓ observed … write-back"
+# Down:    docker compose -f docker-compose.crossing.yml down -v
+
+name: dreamnet-crossing
+
+services:
+  crossing-daemon:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "./.crossing-run:/crossing"
+    networks: [crossing]
+    restart: "no"
+    environment:
+      LAR_CROSSING_PORT:   "8080"
+      LAR_CROSSING_SHARED: "/crossing"
+      LAR_CROSSING_GREET:  "the DreamNet breathes"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/crossing-daemon.ts"]
+
+  crossing-client:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "./.crossing-run:/crossing"
+    networks: [crossing]
+    restart: "no"
+    environment:
+      LAR_CROSSING_SHARED:      "/crossing"
+      LAR_CROSSING_DAEMON_HOST: "crossing-daemon"
+      LAR_CROSSING_GREET:       "the DreamNet breathes"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/crossing-client.ts"]
+    depends_on: [crossing-daemon]
+
+networks:
+  crossing:
+    driver: bridge
