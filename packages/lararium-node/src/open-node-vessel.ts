@@ -66,8 +66,10 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir }  from "./vessel-paths.js";
+import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
+import { makeSearchCap, type SearchCap }    from "./search-cap.js";
+import { makeContentPalace, type ContentPalace } from "./content-palace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
@@ -274,6 +276,41 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // worldline form pre-fetch (makeFormPalace ref-counts per canonical dir → one reference, never a
   // second process). Owned by the form provider impl below; closed implicitly at process exit / idle-reap.
   let recallFormPalace: FormPalace | null = null;
+  // SOVEREIGN recall — the house-code content leg (`search_io.py` embeds+searches · `content_io.py`
+  // get/scan) over the MEMORY content plane. `lares sense recall` reads through THIS, never the guest
+  // mempalace client (that stays the `lares mempalace` sidecar lane) — the sovereign/guest separation.
+  // Lazy: the read holders spawn on first recall, reused after (distinct lock-prefixes from the capture
+  // holder, so a concurrent re-pour never blocks a read).
+  let recallSearch: SearchCap | null = null;
+  let recallContent: ContentPalace | null = null;
+  const sovereignRecallClient: RecallClient = {
+    search: async (a) => {
+      recallSearch ??= makeSearchCap(larContentDir());
+      const query = typeof a["query"] === "string" ? a["query"] : "";
+      const k = typeof a["limit"] === "number" ? a["limit"]
+              : typeof a["nResults"] === "number" ? a["nResults"]
+              : typeof a["k"] === "number" ? a["k"] : undefined;
+      const wing = typeof a["wing"] === "string" ? a["wing"] : undefined;
+      return await recallSearch.search(query, { ...(k !== undefined ? { k } : {}), ...(wing ? { wing } : {}) }) as unknown as Record<string, unknown>;
+    },
+    getDrawer: async (drawerId) => {
+      recallContent ??= makeContentPalace(larContentDir());
+      const e = await recallContent.get(drawerId);
+      return e ? { drawer_id: e.cid, content: e.document, ...e.metadata } : {};
+    },
+    listDrawers: async (a) => {
+      recallContent ??= makeContentPalace(larContentDir());
+      const limit = typeof a["limit"] === "number" ? a["limit"] : 50;
+      const wing = typeof a["wing"] === "string" ? a["wing"] : undefined;
+      const page = await recallContent.scan({ limit });
+      let recs = page.records as ReadonlyArray<{ cid: string; document?: string; metadata?: Record<string, unknown> }>;
+      if (wing) recs = recs.filter((r) => r.metadata?.["wing"] === wing);
+      return {
+        drawers: recs.map((r) => ({ drawer_id: r.cid, content: r.document ?? "", wing: r.metadata?.["wing"], room: r.metadata?.["room"] })),
+        total: page.total,
+      };
+    },
+  };
   // One Python source-stream owner for the sovereign memory sensorium. It receives pointers only;
   // parsing, CID identity, embedding and land all stay on the Python side of the boundary.
   // One serialized capture holder PER sensorium root (each owns its own content-palace singleton flock).
@@ -524,7 +561,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // Ordering: openDaemon runs (awaited) inside daemonCap.build BEFORE the un-awaited wireVerbs, and
     // daemonVm is set just above — so every injected impl is ready at this compose point.
     const mempalaceImpl: MempalaceProvider = {
-      withClient: (fn) => withMempalace((client) => fn(client as unknown as RecallClient)),
+      // SOVEREIGN recall: `lares sense recall` reads through the house-code content leg, never the guest
+      // mempalace client. (turnsForHandleStubs — the worldline verb's leg — still rides the guest; a
+      // separate follow-on leak to collapse into house code.)
+      withClient: (fn) => fn(sovereignRecallClient),
       turnsForHandleStubs: (handle, opts) =>
         withMempalace(async (client) => orderHandleTurnsToStubs(await client.turnsForHandle(handle, opts))),
     };
