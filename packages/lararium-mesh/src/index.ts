@@ -124,6 +124,8 @@ export * from "./veil-crossing.js";
 export * from "./veil-vouch.js";
 export * from "./veil-ladder.js";
 export * from "./immune-read.js";
+export * from "./shamir-gf256.js";
+export * from "./recovery-share.js";
 export * from "./conviction-dial.js";
 export * from "./capture-reading.js";
 export * from "./transfer-entropy.js";
