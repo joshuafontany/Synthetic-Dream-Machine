@@ -1,0 +1,48 @@
+# docker-compose.burn.yml — the CONTENT-layer civic scenario (X6): burning a Handle forfeits access to
+# NEW shared content, forward-only, while the anon FLOOR persists. keyhive revoke + re-key enforce it —
+# no watcher. ShadowTalk's "a blown SIN burned", made cryptographic (veil-ladder#the-price).
+#
+#   burn-founder  delegates a read, shares v1, then REVOKES + shares v2 to the re-keyed group.
+#   burn-device   reads v1 (before), must FAIL v2 (after), still re-reads v1 + its OWN floor. Its exit
+#                 code IS the verdict (0 = the cut ran forward only, the floor held).
+#
+# One scenario:  docker compose -f docker-compose.burn.yml up --abort-on-container-exit --exit-code-from burn-device
+# Or via the civic suite:  tools/civic-witness.sh
+# Down:  docker compose -f docker-compose.burn.yml down -v
+
+name: dreamnet-burn
+
+services:
+  burn-founder:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "burn-run:/burn"
+    networks: [burn]
+    restart: "no"
+    environment:
+      LAR_BURN_ROLE:   "founder"
+      LAR_BURN_SHARED: "/burn"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/burn-node.ts"]
+
+  burn-device:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "burn-run:/burn"
+    networks: [burn]
+    restart: "no"
+    environment:
+      LAR_BURN_ROLE:   "device"
+      LAR_BURN_SHARED: "/burn"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/burn-node.ts"]
+    depends_on: [burn-founder]
+
+networks:
+  burn:
+    driver: bridge
+
+volumes:
+  burn-run:          # the card/event/ciphertext ceremony; wiped by `down -v`
