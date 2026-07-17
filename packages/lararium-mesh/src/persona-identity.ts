@@ -35,6 +35,8 @@
  * Meme: lar:///ha.ka.ba/lararium/api/persona-identity
  */
 
+import { hmac } from "@noble/hashes/hmac.js";
+import { sha256 } from "@noble/hashes/sha2.js";
 import { derivePersonaKeypair } from "./persona-hd.js";
 
 /** The persona master-seed length in bytes (a fresh 32-byte ed25519-HD seed). */
@@ -126,6 +128,47 @@ export async function deriveVeiledUserKey(
   contextIndex: number,
 ): Promise<{ signingKey: string; verifyingKey: string }> {
   return derivePersonaKeypair(seed, personaPathIndices(handleIndex, contextIndex));
+}
+
+// ── Per-circle SCOPE-PSEUDONYM (the beyond-Ink&Switch unlinkability FLOOR) ──
+
+const CIRCLE_SCOPE_HMAC_KEY = new TextEncoder().encode("lares circle-scope v1");
+
+/**
+ * circleScopeIndex — the per-circle hardened index for the scope-pseudonym leaf.
+ *
+ * Maps a circle's sentinel docId to a DETERMINISTIC raw index (< 0x80000000) via
+ * domain-separated HMAC-SHA256(docId) → the first 4 bytes → uint32 masked to 31 bits.
+ * Same circle → same index → same leaf key (rejoin-stable); a different circle → a
+ * different leaf (cross-circle unlinkable). The 31-bit space bounds a human's own K
+ * circles far below any birthday concern; a collision would link only two of ONE human's
+ * own circles — a FLOOR-tier leak, never a security break (the CEILING BBS/AnonCred tier
+ * serves collusion-facing islands: voting, benefits, the DMV-face).
+ */
+export function circleScopeIndex(circleDocIdHex: string): number {
+  const mac = hmac(sha256, CIRCLE_SCOPE_HMAC_KEY, new TextEncoder().encode(circleDocIdHex));
+  const u32 = new DataView(mac.buffer, mac.byteOffset, 4).getUint32(0, false);
+  return u32 & 0x7fffffff; // mask to a raw (pre-hardening) index < 0x80000000
+}
+
+/**
+ * deriveCircleScopedKey — the per-circle SCOPE-PSEUDONYM (the beyond-Ink&Switch FLOOR).
+ *
+ * Extends the persona tree ONE level: `m / handle' / context' / circle-scope'`, where
+ * circle-scope' = circleScopeIndex(circleDocId). The SAME persona presents a DIFFERENT
+ * key/agentId to each circle it joins — cross-circle-unlinkable by construction — so a
+ * colluding host that sees the persona in two circles reads no shared key. This changes
+ * only WHICH key a persona-cloud delegates INTO a circle; it touches neither BeeKEM's
+ * ratchet tree nor keyhive's GroupId, and reuses persona-hd's proven all-hardened
+ * derivation. Rejoin-stable for the same (seed, handle, context, circle).
+ */
+export async function deriveCircleScopedKey(
+  seed: Uint8Array,
+  handleIndex: number,
+  contextIndex: number,
+  circleDocIdHex: string,
+): Promise<{ signingKey: string; verifyingKey: string }> {
+  return derivePersonaKeypair(seed, [handleIndex, contextIndex, circleScopeIndex(circleDocIdHex)]);
 }
 
 /**
