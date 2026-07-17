@@ -27,12 +27,14 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
 LIFECYCLE_VERBS = ("pour", "recall", "status", "worldline", "kapae", "un_kapae")
 
-# The per-plane QUERY DOOR verbs — read-only interrogation of a 3-plane test-bed sensorium
+# The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
-# THE PARITY SEAM: these ride the MCP surface AHEAD of their CLI spellings — the CLI forms + the
-# cli-verbs fixture grow with the projector arc, so the parity test carries them as a NAMED allowance
+# The per-plane READS (structure · form) fold onto `recall --lens <plane>` — the plane rides as a
+# parameter, so only the cross-plane WITNESS keeps its own verb here.
+# THE PARITY SEAM: this rides the MCP surface AHEAD of its CLI spelling — the CLI form + the cli-verbs
+# fixture grow with the projector arc, so the parity test carries it as a NAMED allowance
 # (mcp_tools − PLANE_VERBS mirrors the fixture) until the CLI catches up.
-PLANE_VERBS = ("recall_structure", "recall_form", "plane_record")
+PLANE_VERBS = ("plane_record",)
 
 # The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
 # HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
@@ -46,9 +48,7 @@ VERB_SEATS = {
     "worldline": (True, False),  # read — reversible, trusted
     "kapae": (True, False),      # move-not-delete mute — reversible, trusted
     "un_kapae": (True, False),   # restore — reversible, trusted
-    "recall_structure": (True, False),  # per-plane read — reversible, trusted
-    "recall_form": (True, False),       # per-plane read — reversible, trusted
-    "plane_record": (True, False),      # cross-plane read — reversible, trusted
+    "plane_record": (True, False),      # cross-plane read — reversible, trusted (structure/form fold onto recall --lens)
     # 6b control verbs — the SEAT stands now; execution rides in after the HITL talk-story locks.
     "purge": (False, False),     # HARD-delete — IRREVERSIBLE → HITL
     "attach": (True, True),      # admit a guest sensorium — TRUST-CROSSING → HITL
@@ -182,20 +182,31 @@ class LaresCoordinator:
                                    embed_factory=lambda: (self._embed_one, self._model))
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
-               list: bool = False, agent: "str | None" = None, surface: "str | None" = None) -> dict:
-        """Recall the nearest turns to a query (mirrors `lares recall`); kapae-muted turns stay excluded.
+               list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
+               lens: str = "content") -> dict:
+        """Recall the nearest turns to a query (mirrors `lares sense recall`); kapae-muted turns stay excluded.
 
-        COMBINED-ARMS: the recall FUSES every recall-surface this sensorium #has — the content-vector (the
-        eidetic ground, always) plus the mempalace projection (lexical + entity) when the #has stack declares
-        it and it is paved — by reciprocal rank fusion, resolving verbatim from content. Isomorphic: a bare
-        stream sensorium recalls by vector alone; a memory sensorium fuses lexical+entity+vector — the SAME
-        machinery reading whatever the stack composes (never a hardcoded surface list).
+        The `lens` folds the per-plane reads onto this one verb — the plane rides as a parameter, so the
+        surface stays one recall however many planes stand: `content` (default) rides the combined-arms
+        engine below; `structure` and `form` ride their plane doors (the SAME bespoke reads, one surface).
+
+        COMBINED-ARMS (content lens): the recall FUSES every recall-surface this sensorium #has — the
+        content-vector (the eidetic ground, always) plus the mempalace projection (lexical + entity) when the
+        #has stack declares it and it is paved — by reciprocal rank fusion, resolving verbatim from content.
+        Isomorphic: a bare stream sensorium recalls by vector alone; a memory sensorium fuses
+        lexical+entity+vector — the SAME machinery reading whatever the stack composes (never a hardcoded list).
 
         Read modes + PHYSICS/STRUCTURAL filters shed onto this spine: `drawer` fetches ONE verbatim entry by
         turn-key; `list` reports the taxonomy. A `wing`/`agent`/`surface` filter narrows the vector pool —
         and, because the lexical/entity projection carries no such filter yet, a FILTERED recall rides the
         content-vector ALONE (honest — never fuse in unfiltered hits); the unfiltered common case fuses the
         full combined-arms."""
+        if lens == "structure":
+            return self.recall_structure(query, k)
+        if lens == "form":
+            return self.recall_form(query, k)
+        if lens != "content":
+            raise ValueError(f"recall lens {lens!r} unknown — name one of: content · structure · form")
         if drawer:
             return self._content.get(drawer) or {}
         if list:
@@ -438,12 +449,13 @@ def build_mcp(coordinator: LaresCoordinator):
     @mcp.tool()
     def recall(query: str, k: int = 8, wing: "str | None" = None, drawer: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
-               sensorium: "str | None" = None) -> dict:
+               lens: str = "content", sensorium: "str | None" = None) -> dict:
         """Recall the nearest turns to a query from a sensorium (`sensorium` names it; absent → memory).
-        `drawer` fetches one verbatim; `list` reports the taxonomy; wing/agent/surface narrow. (Enrichment
-        filters deferred until the sensorium breathes — they left the surface to stay isomorphic with the CLI.)"""
+        `lens` names the plane: `content` (default, combined-arms) · `structure` (nearest shapes) · `form`
+        (induced-template membership, by cid). `drawer` fetches one verbatim; `list` reports the taxonomy;
+        wing/agent/surface narrow the content pool. (Enrichment filters deferred until the sensorium breathes.)"""
         return _call("recall", sensorium, query, k, wing=wing, drawer=drawer, list=list,
-                     agent=agent, surface=surface)
+                     agent=agent, surface=surface, lens=lens)
 
     @mcp.tool()
     def status(sensorium: "str | None" = None) -> dict:
@@ -466,20 +478,6 @@ def build_mcp(coordinator: LaresCoordinator):
     def un_kapae(branch: str, tick: int, sensorium: "str | None" = None) -> dict:
         """Restore a previously kapae-muted branch across a sensorium (`sensorium` names it; absent → memory)."""
         return _call("un_kapae", sensorium, branch, tick)
-
-    @mcp.tool()
-    def recall_structure(query_or_cid: str, k: int = 8, sensorium: "str | None" = None) -> dict:
-        """Query the STRUCTURE plane: a 64-hex cid resolves to its structural entry (provenance
-        join); any other text parses to a content-free tree and recalls the nearest SHAPES. `sensorium`
-        names the sensorium (absent → memory)."""
-        return _call("recall_structure", sensorium, query_or_cid, k)
-
-    @mcp.tool()
-    def recall_form(query_or_cid: str, k: int = 8, sensorium: "str | None" = None) -> dict:
-        """Query the FORM plane by cid: the record's induced-template membership + its
-        nearest-by-membership neighbors. Text queries answer an honest null. `sensorium` names the
-        sensorium (absent → memory)."""
-        return _call("recall_form", sensorium, query_or_cid, k)
 
     @mcp.tool()
     def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
@@ -521,7 +519,12 @@ class DaemonCoordinator:
         )
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None,
-               drawer: "str | None" = None, sensorium_root: "str | None" = None, **_) -> dict:
+               drawer: "str | None" = None, sensorium_root: "str | None" = None,
+               lens: str = "content", **_) -> dict:
+        # The plane lenses (structure/form) ride the py engine directly; the daemon read-holder threads
+        # the CONTENT lens today, so a plane lens over the routed wire OWES the routing generalization.
+        if lens != "content":
+            self._owed(f"recall --lens {lens}")
         args: dict = {"limit": k}
         if drawer:
             args["drawer"] = drawer
@@ -540,8 +543,6 @@ class DaemonCoordinator:
     def worldline(self, *a, **k):        return self._owed("worldline")
     def kapae(self, *a, **k):            return self._owed("kapae")
     def un_kapae(self, *a, **k):         return self._owed("un_kapae")
-    def recall_structure(self, *a, **k): return self._owed("recall_structure")
-    def recall_form(self, *a, **k):      return self._owed("recall_form")
     def plane_record(self, *a, **k):     return self._owed("plane_record")
 
 

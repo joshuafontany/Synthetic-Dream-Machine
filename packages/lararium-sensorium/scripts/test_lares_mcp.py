@@ -10,8 +10,8 @@ import os
 
 import pytest
 
-from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, VERB_SEATS, LaresCoordinator, build_mcp,
-                       guard_hitl, seat_of)
+from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, VERB_SEATS, DaemonCoordinator, LaresCoordinator,
+                       build_mcp, guard_hitl, seat_of)
 from worldline_veil import veiled_root
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -177,7 +177,7 @@ def test_parity_inventory_three_way(tmp_path):
     assert mirror_hosts.isdisjoint(not_yet)
 
 
-# ── the per-plane QUERY DOOR (recall_structure · recall_form · plane_record) ──────────────────
+# ── the plane reads: `recall --lens structure/form` (folded) + the plane_record cross-plane witness ──
 
 
 def _three_plane_bed(tmp_path):
@@ -304,3 +304,28 @@ def test_cid_gate_carries_the_chunk_suffixed_form():
 def test_plane_verbs_seat_hotl():
     for v in PLANE_VERBS:
         assert seat_of(v) == "HOTL"                       # every plane verb reads — reversible, trusted
+
+
+def test_recall_lens_folds_the_plane_reads(tmp_path):
+    # the per-plane reads fold onto `recall --lens <plane>`: structure/form dispatch to the SAME plane
+    # doors the direct methods drive — one surface, the bespoke reads unchanged.
+    coord, cids, _ = _bed_coord(tmp_path)
+    assert coord.recall("# Gamma\n\nthird body\n", 2, lens="structure") == \
+        coord.recall_structure("# Gamma\n\nthird body\n", 2)
+    assert coord.recall(cids["alpha.md"], 3, lens="form") == coord.recall_form(cids["alpha.md"], 3)
+    # the default lens keeps the combined-arms content read
+    assert "plane" not in coord.recall("body", 2)
+
+
+def test_recall_unknown_lens_refuses(tmp_path):
+    coord, _, _ = _bed_coord(tmp_path)
+    with pytest.raises(ValueError):
+        coord.recall("q", 2, lens="bogus")
+
+
+def test_daemon_recall_plane_lens_owes_the_routing():
+    # the routed read-holder threads the CONTENT lens today — a plane lens over the wire refuses,
+    # naming the routing generalization rather than silently reading content.
+    dc = DaemonCoordinator()
+    with pytest.raises(RuntimeError):
+        dc.recall("q", 2, lens="structure")
