@@ -18,15 +18,20 @@ import argparse
 import json
 import os
 
-from content_atoms import content_atoms, content_getter
+from content_atoms import authored_only, content_atoms, content_getter
 from content_io import ContentStore
 from entity_graph import nakama_entity_extractor
 from mempalace_pave import pave
 from mempalace_projection import MempalaceProjection
 
 
-def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int = 5, rebuild: bool = True) -> dict:
-    """Open content, pave the projection over its atoms, optionally witness a recall. Returns a report."""
+def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int = 5,
+        rebuild: bool = True, all_strata: bool = False) -> dict:
+    """Open content, pave the projection over its atoms, optionally witness a recall. Returns a report.
+
+    By default the pave reads the AUTHORED voice only (skips the low-volume harness/thinking murmur) —
+    the derived plane reading by volume. `all_strata=True` indexes every stratum (a generic corpus that
+    carries no lar_volume is unaffected either way)."""
     store = ContentStore(content_dir)                 # generic open, base collection
     os.makedirs(mempalace_dir, exist_ok=True)
     db = os.path.join(mempalace_dir, "mempalace")
@@ -35,10 +40,11 @@ def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int
     except Exception:                                 # the nakama import stays optional — lexical stands alone
         extract = None
     proj = MempalaceProjection(db_path=db, extract_entities=extract)
+    keep = None if all_strata else authored_only
     try:
-        n = pave(content_atoms(store), proj, rebuild=rebuild)
+        n = pave(content_atoms(store, keep=keep), proj, rebuild=rebuild)
         out: dict = {"content": content_dir, "mempalace": db, "paved": n, "rebuild": rebuild,
-                     "entities": extract is not None}
+                     "entities": extract is not None, "strata": "all" if all_strata else "authored"}
         if query:
             get_content = content_getter(store)
             hits = proj.search_lexical(query, get_content, k=k)
@@ -60,8 +66,10 @@ def main() -> None:
     ap.add_argument("--query", default=None, help="witness a recall after the pave")
     ap.add_argument("--k", type=int, default=5, help="hits to return for the witness query")
     ap.add_argument("--append", action="store_true", help="incremental append (default: full rebuild)")
+    ap.add_argument("--all-strata", action="store_true",
+                    help="index every stratum incl. low-volume harness/thinking (default: authored voice only)")
     a = ap.parse_args()
-    out = run(a.content, a.mempalace, query=a.query, k=a.k, rebuild=not a.append)
+    out = run(a.content, a.mempalace, query=a.query, k=a.k, rebuild=not a.append, all_strata=a.all_strata)
     print(json.dumps(out, indent=2))
 
 

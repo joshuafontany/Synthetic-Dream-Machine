@@ -11,10 +11,25 @@ content is the single writable arbiter; this index is a disposable projection ov
 """
 from __future__ import annotations
 
+import re
 import sqlite3
 from typing import Callable
 
 from span_layer import Span, chunk_spans
+
+# The stream does as the stream does — content holds the raw bytes untouched. But a lexical VIEW over a
+# terminal/session stream reads pono only after MINIMAL semantic cleaning: ANSI/VT display escapes (color
+# SGR + friends) and stray C0 control chars carry no searchable meaning, and left in they glue onto words
+# (`\x1b[1mOpus` tokenizes to `1mOpus`, so a search for "Opus" misses). Normalize them to a space in the
+# INDEXED TOKENS ONLY; the span table keeps RAW offsets, so a resolve returns the true stream verbatim.
+_ANSI_CSI = re.compile(r"\x1b\[[0-9;?]*[ -/]*[@-~]")
+_C0_CTRL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")  # C0 controls EXCEPT \t (09) \n (0a) \r (0d)
+
+
+def _normalize_for_index(text: str) -> str:
+    """Minimal semantic cleaning for the lexical VIEW — strip ANSI escapes + stray control chars to a
+    space so words stay findable. Never touches content; only the tokens this index holds at rest."""
+    return _C0_CTRL.sub(" ", _ANSI_CSI.sub(" ", text))
 
 
 class LexicalIndex:
@@ -44,8 +59,11 @@ class LexicalIndex:
                 "INSERT INTO spans(cid, start, end, layer) VALUES (?,?,?,?)",
                 (span.cid, span.start, span.end, span.layer),
             )
+            # The span keeps RAW offsets (above); the FTS holds the NORMALIZED tokens, so the view reads
+            # pono while a resolve still returns the true stream from content.
             self._db.execute(
-                "INSERT INTO chunks_fts(rowid, text) VALUES (?, ?)", (cur.lastrowid, text[span.start:span.end])
+                "INSERT INTO chunks_fts(rowid, text) VALUES (?, ?)",
+                (cur.lastrowid, _normalize_for_index(text[span.start:span.end])),
             )
             n += 1
         self._db.commit()

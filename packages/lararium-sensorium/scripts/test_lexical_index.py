@@ -45,6 +45,20 @@ def test_independent_chunk_segmentation_matches_across_a_turn_boundary():
     idx.close()
 
 
+def test_ansi_normalized_in_tokens_but_raw_in_resolve():
+    # The stream does as the stream does: content keeps the ANSI. The lexical VIEW normalizes it so the
+    # word stays findable, yet a resolve returns the TRUE stream verbatim (escape codes intact).
+    raw = "Set model to \x1b[1mOpus\x1b[22m 4.8 for the session"
+    src = {"cid-x": raw}
+    idx = LexicalIndex()
+    idx.index_atom("cid-x", raw, size=80, overlap=0)
+    hits = idx.search("Opus", lambda cid: src.get(cid))  # glued to \x1b[1m in content; findable via the view
+    assert hits, "ANSI-wrapped word must be findable after view normalization"
+    span, verbatim = hits[0]
+    assert "\x1b[1mOpus\x1b[22m" in verbatim  # the resolve returns the RAW stream, never the scrubbed token
+    idx.close()
+
+
 def test_clear_and_reindex_rebuilds_from_content():
     idx = LexicalIndex()
     idx.index_atom("cid-a", CONTENT["cid-a"], size=30, overlap=5)

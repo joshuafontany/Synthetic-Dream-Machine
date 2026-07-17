@@ -12,17 +12,28 @@ from __future__ import annotations
 from typing import Callable, Iterator, Tuple
 
 
-def content_atoms(store, page: int = 256) -> "Iterator[Tuple[str, str]]":
+def authored_only(meta: dict) -> bool:
+    """A `keep` policy — the authored voice, without the low-volume murmur. Content holds every stratum
+    (eidetic ground); a DERIVED plane reads by volume, so a harness/thinking drawer (lar_volume=low —
+    the <command-*>/<local-command-*>/caveat scaffolding) never enters the recall view. A record with no
+    lar_volume (a generic, non-session corpus) reads as `normal` → kept, so those streams are untouched."""
+    return (meta.get("lar_volume") or "normal") == "normal"
+
+
+def content_atoms(store, page: int = 256, keep: "Callable[[dict], bool] | None" = None) -> "Iterator[Tuple[str, str]]":
     """Drain the store's `scan` into `(cid, text)` atoms — content's own cids, verbatim documents.
 
     Pages `scan(offset, limit)` until it reports no `next`. A record carrying no document yields an
     empty text (the surfaces hold no verbatim regardless); its cid still rides, so a later resolve
-    fetches the bytes from content."""
+    fetches the bytes from content. `keep(meta)` filters records into the VIEW without touching content
+    — the stream stays whole; the projection reads only what it should (e.g. `authored_only`)."""
     offset = 0
     while True:
         page_rec = store.scan(offset, page)
         records = page_rec.get("records") or []
         for r in records:
+            if keep is not None and not keep(r.get("metadata") or {}):
+                continue
             yield r.get("cid"), (r.get("document") or "")
         nxt = page_rec.get("next")
         if nxt is None:
