@@ -26,7 +26,7 @@ import * as KH from "@keyhive/keyhive/slim";
 // @ts-expect-error — keyhive's base64 .d.ts is a `declare module` augmentation, not a module
 // (TS2306); the runtime export `wasmBase64` (a base64 string) resolves fine in node + vite.
 import { wasmBase64 } from "@keyhive/keyhive/keyhive_wasm.base64.js";
-import { ingestTolerant } from "@lararium/mesh";
+import { ingestTolerant, adaptGate, PONO_FLUSH_GATE } from "@lararium/mesh";
 import { inSelfSlice } from "./event-store.js";
 import type {
   CapabilityProvider, CapabilityProviderInitOpts,
@@ -519,10 +519,13 @@ export class KeyhiveProvider implements CapabilityProvider {
    * event loads eagerly (the N=1 daemon default, byte-identical to before). `deferred` counts the
    * held-island events left for lazy load (always 0 in the default path).
    *
-   * PACED (#13 — the boot-CPU spike): the replay ingests in CHUNKS with an event-loop yield between
-   * them, so a large N=1 keyhive replay no longer pegs the loop synchronously (243% → the vessel-ready
-   * → UDS signal breathes between chunks). Keyhive resolves causality internally — order across ingest
-   * calls does not matter — so chunking is byte-equivalent to one batch, only kinder to the loop.
+   * PACED by the homeostatic depth SERVO (#13 — the boot-CPU spike): the replay ingests in chunks whose
+   * depth SERVOS toward a per-chunk latency set-point (gate-tuning `adaptGate`, negative feedback) —
+   * smaller batches when a chunk runs slow, larger when there is headroom — with an event-loop yield
+   * between them. A large N=1 keyhive replay no longer pegs the loop synchronously (243% → the
+   * vessel-ready → UDS signal breathes between chunks), and the pace ADAPTS to the load instead of a
+   * fixed guess. Keyhive resolves causality internally — order across ingest calls does not matter —
+   * so chunking is byte-equivalent to one batch, only kinder to the loop.
    */
   async hydrateFromEventStore(selfIslands?: readonly string[]): Promise<{ ingested: number; skipped: number; deferred: number }> {
     if (!this.eventStore) return { ingested: 0, skipped: 0, deferred: 0 };
@@ -530,13 +533,17 @@ export class KeyhiveProvider implements CapabilityProvider {
     const eager = selfIslands === undefined ? records : records.filter((r) => inSelfSlice(r, selfIslands));
     const deferred = records.length - eager.length;
     const kh = this.requireKh();
-    const CHUNK = 64;   // events per ingest call — the loop yields between chunks
+    const TARGET_MS = 40;              // per-chunk ingest set-point; the loop breathes between chunks
+    let gate = PONO_FLUSH_GATE;        // depth 32, servoed by adaptGate against observed latency
     let ingested = 0, skipped = 0;
-    for (let i = 0; i < eager.length; i += CHUNK) {
-      const slice = eager.slice(i, i + CHUNK).map((r) => r.bytes);
+    for (let i = 0; i < eager.length; ) {
+      const slice = eager.slice(i, i + gate.depth).map((r) => r.bytes);
+      const t0 = Date.now();
       const r = await ingestTolerant(slice, (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
       ingested += r.ingested; skipped += r.skipped;
-      if (i + CHUNK < eager.length) await new Promise<void>((res) => setImmediate(res));   // let the loop breathe
+      i += slice.length;
+      gate = adaptGate(gate, Date.now() - t0, TARGET_MS);                       // servo the depth toward the set-point
+      if (i < eager.length) await new Promise<void>((res) => setImmediate(res));  // let the loop breathe
     }
     return { ingested, skipped, deferred };
   }
