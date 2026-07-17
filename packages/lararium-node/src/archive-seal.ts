@@ -106,10 +106,35 @@ export function resolveSealPolicy(env: NodeJS.ProcessEnv = process.env): SealPol
 }
 
 /**
- * Seal `plaintext` per the resolved policy, or return the bare bytes under the cleartext
- * policy. A caller writes whatever this returns; `openArchiveBytes` reads it back.
+ * SelfSovereignSecret — the Self-Only Secret Surface invariant, enforced by TYPE (civic Model 1).
+ *
+ * The node seals at rest ONLY its OWN sovereign identity's secret material — never a held
+ * principal's (a citizen's) signing secret. A civic host that generalizes its secret-store from
+ * 1 to N by omission IS the honeypot; this brand makes that omission impossible to write silently.
+ * The sealer below accepts only a `SelfSovereignSecret`, and `asSelfSovereignSecret` — the single
+ * brander — carries the vow in its name. A future per-principal path holding a citizen secret
+ * cannot reach the sealer without an explicit, review-visible brand call that reads, on its face,
+ * as wrong. Custody by TYPE, not by policy — a subpoenaed host breaks a policy promise, never a
+ * compiler. For every non-self principal the node holds ciphertext + public edges, never a secret.
  */
-export function sealArchiveBytes(plaintext: Uint8Array, policy: SealPolicy = resolveSealPolicy()): Uint8Array {
+export type SelfSovereignSecret = Uint8Array & { readonly __selfSovereign: unique symbol };
+
+/**
+ * Brand bytes as the daemon's OWN sovereign secret — the ONLY door into the at-rest sealer. CALL
+ * ONLY for the self identity's own secret material; NEVER for a held/citizen principal's secret
+ * (which never seals at rest — the Delivery-Service-not-Auth-Root line). A call to this from any
+ * per-principal path names the honeypot out loud, where review catches it.
+ */
+export function asSelfSovereignSecret(bytes: Uint8Array): SelfSovereignSecret {
+  return bytes as SelfSovereignSecret;
+}
+
+/**
+ * Seal the daemon's OWN sovereign secret per the resolved policy, or return the bare bytes under
+ * the cleartext policy. Accepts only a `SelfSovereignSecret` (self-only by type); a caller writes
+ * whatever this returns and `openArchiveBytes` reads it back.
+ */
+export function sealArchiveBytes(plaintext: SelfSovereignSecret, policy: SealPolicy = resolveSealPolicy()): Uint8Array {
   return policy.seal ? policy.seal(plaintext) : plaintext;
 }
 

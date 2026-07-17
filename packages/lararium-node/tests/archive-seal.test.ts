@@ -9,11 +9,14 @@ import { describe, expect, test } from "vitest";
 import { isSealedEnvelope, decodeEnvelope } from "@lararium/mesh";
 import {
   scryptKek, sealBytes, unsealBytes,
-  resolveSealPolicy, sealArchiveBytes, openArchiveBytes,
+  resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret,
   ARCHIVE_PASSPHRASE_ENV,
 } from "../src/archive-seal.js";
 
 const SECRET = Uint8Array.from([0x85, 0x6f, 0x4a, 0x83, 1, 2, 3, 4, 5, 6, 7, 8]);
+// Self-Only Secret Surface: the sealer accepts only branded self-secret. The test brands its own
+// fixture — the single door — proving that reaching the sealer is a conscious, named act.
+const SELF = asSelfSovereignSecret(SECRET);
 const PASS = "correct horse battery staple";
 
 describe("AES-256-GCM seal round-trip", () => {
@@ -53,7 +56,7 @@ describe("seal policy + archive open", () => {
   test("passphrase env → sealed envelope; open recovers plaintext", () => {
     const policy = resolveSealPolicy({ [ARCHIVE_PASSPHRASE_ENV]: PASS } as NodeJS.ProcessEnv);
     expect(policy.mode).toBe("passphrase");
-    const stored = sealArchiveBytes(SECRET, policy);
+    const stored = sealArchiveBytes(SELF, policy);
     expect(isSealedEnvelope(stored)).toBe(true);
     expect([...openArchiveBytes(stored, policy)]).toEqual([...SECRET]);
   });
@@ -61,7 +64,7 @@ describe("seal policy + archive open", () => {
   test("no passphrase → cleartext bare bytes (unchanged behaviour, pass-through)", () => {
     const policy = resolveSealPolicy({} as NodeJS.ProcessEnv);
     expect(policy.mode).toBe("cleartext");
-    const stored = sealArchiveBytes(SECRET, policy);
+    const stored = sealArchiveBytes(SELF, policy);
     expect(isSealedEnvelope(stored)).toBe(false);
     expect([...stored]).toEqual([...SECRET]);          // bare
     expect([...openArchiveBytes(stored, policy)]).toEqual([...SECRET]);
@@ -73,8 +76,26 @@ describe("seal policy + archive open", () => {
   });
 
   test("a sealed archive with NO key source throws loud (never silent-empty)", () => {
-    const sealed = sealArchiveBytes(SECRET, resolveSealPolicy({ [ARCHIVE_PASSPHRASE_ENV]: PASS } as NodeJS.ProcessEnv));
+    const sealed = sealArchiveBytes(SELF, resolveSealPolicy({ [ARCHIVE_PASSPHRASE_ENV]: PASS } as NodeJS.ProcessEnv));
     const cleartextPolicy = resolveSealPolicy({} as NodeJS.ProcessEnv);
     expect(() => openArchiveBytes(sealed, cleartextPolicy)).toThrow(new RegExp(ARCHIVE_PASSPHRASE_ENV));
+  });
+});
+
+describe("Self-Only Secret Surface (custody by type)", () => {
+  const passPolicy = () => resolveSealPolicy({ [ARCHIVE_PASSPHRASE_ENV]: PASS } as NodeJS.ProcessEnv);
+
+  test("asSelfSovereignSecret is a pure brand — same bytes, the single door to the sealer", () => {
+    const branded = asSelfSovereignSecret(SECRET);
+    expect(branded).toBe(SECRET);                                  // a brand, never a copy
+    expect([...openArchiveBytes(sealArchiveBytes(branded, passPolicy()), passPolicy())]).toEqual([...SECRET]);
+  });
+
+  test("a raw (unbranded) secret cannot reach the sealer — the honeypot can't be written by omission", () => {
+    // @ts-expect-error — sealArchiveBytes accepts only SelfSovereignSecret; a held/citizen
+    // principal's RAW secret is rejected at COMPILE time. If this line ever stops erroring, the
+    // Self-Only guard has been removed and an N-principal secret can seal at rest silently — the
+    // honeypot. This @ts-expect-error IS the guard's tripwire; do not delete it.
+    void (() => sealArchiveBytes(SECRET, passPolicy()));
   });
 });

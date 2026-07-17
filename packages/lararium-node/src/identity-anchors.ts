@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "n
 import { join } from "node:path";
 import { larIdentityDir } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
-import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
+import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret, ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 
 /** The sentinel anchors that bind a vessel to its veiled Handle. Hex doc-ids + agentId. */
 export interface IdentityAnchors {
@@ -61,7 +61,10 @@ export function persistIdentityArchive(bytes: Uint8Array): void {
   mkdirSync(larIdentityDir(), { recursive: true });
   const path = archivePath();
   const policy = resolveSealPolicy();
-  atomicWriteFileSync(path, sealArchiveBytes(bytes, policy));
+  // Self-Only Secret Surface: these bytes ARE the daemon's own sovereign identity — brand them
+  // self so the type-guarded sealer accepts them. A held/citizen principal's secret never reaches
+  // here (a civic node holds their ciphertext + public edges, never their secret).
+  atomicWriteFileSync(path, sealArchiveBytes(asSelfSovereignSecret(bytes), policy));
   try { chmodSync(path, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
   if (policy.mode === "cleartext" && !_warnedCleartext) {
     _warnedCleartext = true;
