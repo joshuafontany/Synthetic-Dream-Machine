@@ -49,6 +49,10 @@ VERB_SEATS = {
     "kapae": (True, False),      # move-not-delete mute — reversible, trusted
     "un_kapae": (True, False),   # restore — reversible, trusted
     "plane_record": (True, False),      # cross-plane read — reversible, trusted (structure/form fold onto recall --lens)
+    # teardown tears a whole sensorium store DOWN — IRREVERSIBLE → HITL. It rides the CLI today, gated
+    # by --confirm (the operator's hand at the door); the grid NAMES its HITL seat so a future MCP mirror
+    # inherits the gate rather than crossing the surface ungated.
+    "teardown": (False, False),
     # 6b control verbs — the SEAT stands now; execution rides in after the HITL talk-story locks.
     "purge": (False, False),     # HARD-delete — IRREVERSIBLE → HITL
     "attach": (True, True),      # admit a guest sensorium — TRUST-CROSSING → HITL

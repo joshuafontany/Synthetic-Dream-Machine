@@ -111,6 +111,7 @@ def test_pour_builds_the_worldline_and_kapae_cascades_the_subtree(tmp_path):
 def test_grid_seats_the_verbs_by_reversibility_and_trust():
     for v in LIFECYCLE_VERBS:
         assert seat_of(v) == "HOTL"       # every lifecycle verb runs reversible + trusted
+    assert seat_of("teardown") == "HITL"  # tears a sensorium store down — irreversible
     assert seat_of("purge") == "HITL"     # irreversible
     assert seat_of("attach") == "HITL"    # trust-crossing
     assert seat_of("release") == "HITL"   # irreversible — drops a guest handle for good
@@ -127,7 +128,10 @@ def test_hitl_gate_blocks_without_approval():
         guard_hitl("attach")              # HITL (trust-crossing) blocks without approval
     with pytest.raises(PermissionError):
         guard_hitl("release")             # HITL (irreversible) blocks without approval
+    with pytest.raises(PermissionError):
+        guard_hitl("teardown")            # HITL (irreversible store teardown) blocks without approval
     guard_hitl("purge", approval="operator-granted-cap")   # the @daemon-granted cap unblocks it
+    guard_hitl("teardown", approval="operator-granted-cap")  # the same cap unblocks the store teardown
 
 
 def _mcp_tool_names(tmp_path):
