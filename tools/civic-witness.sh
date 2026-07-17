@@ -9,6 +9,8 @@
 #                                     founds own island · impostor forged-sig denied · wrong-audience denied.
 #   burn       (X6)                   burning a Handle cuts NEW shared content forward-only; the floor persists.
 #   membership (MA1)                  the admit swarm forms a roster across containers (roster 2/2).
+#   kahu       (S1 civic-custody)     a public-infra kahu HOLDS a citizen's ciphertext yet CANNOT read it —
+#                                     custody ⊥ materialization; Delivery-Service, never Auth-Root.
 #
 # Usage:  tools/civic-witness.sh
 # The 3-hop mesh + partition family rides its own longer witness: tools/herm-mesh-partition.mjs.
@@ -43,6 +45,7 @@ echo "════════════════════════�
 family "crossing matrix (X1-X5+anon)" crossing bash tools/crossing-witness.sh
 family "burn forward-cut (X6)"        burn     compose_scenario docker-compose.burn.yml     burn-device
 family "membership swarm (MA1)"       swarm    compose_scenario docker-compose.swarm-ws.yml founder
+family "kahu civic-custody (S1)"      kahu     compose_scenario docker-compose.kahu.yml     kahu-node
 
 echo "═══════════════════════════════════════════════════════════════"
 echo "  RESULT: ${PASS} families GREEN, ${FAIL} failed"

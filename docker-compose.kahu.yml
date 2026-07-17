@@ -1,0 +1,49 @@
+# docker-compose.kahu.yml — the civic-custody CROWN (S1): a KAHU node running public infrastructure
+# HOLDS a citizen's sealed content, yet CANNOT read it. Custody ⊥ materialization; the node is an MLS
+# Delivery Service, never an Auth root. The whole civic vow — "runs the temple, cannot read the
+# confession" — made a container exit code (cabal-place#the-seal · civic_scale_capability_models).
+#
+#   kahu-citizen  seals private content into its OWN bag, reads it back, hands the KAHU the ciphertext.
+#   kahu-node     holds + relays the bytes (full store access) and MUST FAIL to decrypt — never a member.
+#                 Its exit code IS the verdict (0 = the custodian is cryptographically blind).
+#
+# One scenario:  docker compose -f docker-compose.kahu.yml up --abort-on-container-exit --exit-code-from kahu-node
+# Or via the civic suite:  tools/civic-witness.sh
+# Down:  docker compose -f docker-compose.kahu.yml down -v
+
+name: dreamnet-kahu
+
+services:
+  kahu-citizen:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "kahu-run:/kahu"
+    networks: [kahu]
+    restart: "no"
+    environment:
+      LAR_KAHU_ROLE:   "citizen"
+      LAR_KAHU_SHARED: "/kahu"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/kahu-blind-node.ts"]
+
+  kahu-node:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "kahu-run:/kahu"
+    networks: [kahu]
+    restart: "no"
+    environment:
+      LAR_KAHU_ROLE:   "kahu"
+      LAR_KAHU_SHARED: "/kahu"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/kahu-blind-node.ts"]
+    depends_on: [kahu-citizen]
+
+networks:
+  kahu:
+    driver: bridge
+
+volumes:
+  kahu-run:          # the seal/relay ceremony; wiped by `down -v`
