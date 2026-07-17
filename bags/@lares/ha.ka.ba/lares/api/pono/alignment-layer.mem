@@ -12,7 +12,7 @@ namespace   = "&#x2299;"
 proposed-on = "2026-06-01"
 register    = "Synthesis"
 retain      = true
-role        = "design invariant: the alignment plane (Plane 0) — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
+role        = "design invariant: the alignment plane — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
 status      = "proposed"
 tags        = ["api/pono/causal-islands"]
 type        = "text/x-memetic-wikitext"
@@ -25,7 +25,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 
 <<~ ahu #head >>
 
-! The Alignment Layer — Plane 0
+! The Alignment Layer
 
 Cryptographic capability answers //"CAN this principal act on this resource?"// — monotonic,
 grant-based, cryptographically decidable. Keyhive owns it well. But a malicious actor can
@@ -38,7 +38,7 @@ arises that capability STRUCTURALLY CANNOT answer:
 That question is ''non-monotonic'' (trust withdrawn revokes inherited stances), ''subjective''
 (rooted at the deciding peer, never globally true), and ''reputation-based''. It needs a plane
 ABOVE capability. This meme defines it. It sits beside Beelay sync and above Keyhive in the
-[[causal-islands|causal-islands.md]] model as ''Plane 0''.
+[[causal-islands|causal-islands.md]] model — a nameless `#has`-stack scoped ''by reach, relatively'', never a global plane-index.
 
 <<~/ahu >>
 
