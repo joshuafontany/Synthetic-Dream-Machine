@@ -5,12 +5,12 @@
  *
  * Fast path: ONE batch ingest (the clean-store case, unchanged). On throw, fall back to per-record
  * ingest, skipping the torn one — a corrupt cap-event degrades to a SKIPPED membership slice instead
- * of downing the whole boot (the "corrupt deflate stream" fault). Safe by keyhive's own verified
- * semantics: a torn record throws in the decode PRE-PASS before ANY event applies (the failed batch
- * left state untouched → re-drive is clean); events are content-addressed (re-ingest is an idempotent
- * no-op); and `ingest_unsorted_static_events` BUFFERS out-of-order deps rather than throwing (so
- * per-record order is fine). A good event depending on a skipped one stays gracefully pending, never
- * fatal — the boot survives degraded, not dead.
+ * of downing the whole boot (the "corrupt deflate stream" fault). Keyhive's own verified semantics
+ * keep this safe: a torn record throws in the decode PRE-PASS before ANY event applies (the failed
+ * batch leaves state untouched, so a re-drive starts clean); keyhive content-addresses events (a
+ * re-ingest replays as an idempotent no-op); and `ingest_unsorted_static_events` BUFFERS out-of-order
+ * deps rather than throwing (so per-record order carries no penalty). A good event that depends on a
+ * skipped one waits gracefully pending, never fatal — the boot survives degraded, not dead.
  */
 export async function ingestTolerant(
   events: readonly Uint8Array[],
