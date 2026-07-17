@@ -21,7 +21,7 @@ import worldline_io as wl
 import lares_uds as uds
 from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
-from sensorium import sensorium_paths
+from sensorium import sensorium_paths, read_stream_manifest
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
@@ -129,6 +129,18 @@ def _structure_entry_for_cid(store, cid: str) -> "dict | None":
     return None
 
 
+def _rrf_fuse(ranked_lists: "list[list[str]]", k: int, rrf_k: int = 60) -> "list[str]":
+    """Reciprocal Rank Fusion over several ordered cid lists → ONE ranked cid list. Rank-only, so surfaces
+    whose scores live on incomparable scales (cosine distance ⊥ lexical BM25 ⊥ entity co-occurrence) fuse
+    without a shared metric: `score(cid) = Σ 1/(rrf_k + rank_i)`. This is the merge the combined-arms recall
+    rides over whatever recall-surfaces the sensorium #has."""
+    scores: "dict[str, float]" = {}
+    for cids in ranked_lists:
+        for rank, cid in enumerate(cids):
+            scores[cid] = scores.get(cid, 0.0) + 1.0 / (rrf_k + rank)
+    return [cid for cid, _ in sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:k]]
+
+
 class LaresCoordinator:
     """The verb-router BOTH surfaces (CLI + MCP) call — it holds a warm embedder + a content-store and a
     worldline handle on ONE sensorium palace, and drives the capture engine. Naming each method for its
@@ -174,16 +186,65 @@ class LaresCoordinator:
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None) -> dict:
         """Recall the nearest turns to a query (mirrors `lares recall`); kapae-muted turns stay excluded.
 
-        Read modes + PHYSICS/STRUCTURAL filters shed onto this spine: `drawer` fetches ONE verbatim entry
-        by turn-key; `list` reports the taxonomy (the drawer-listing read-face); `wing`/`agent`/`surface`
-        build a chroma `where` that narrows the nearest-neighbor pool. The enrichment filters
-        (voice/band/drift) left the surface — deferred until enrichment emerges from the breathing sensorium."""
+        COMBINED-ARMS: the recall FUSES every recall-surface this sensorium #has — the content-vector (the
+        eidetic ground, always) plus the mempalace projection (lexical + entity) when the #has stack declares
+        it and it is paved — by reciprocal rank fusion, resolving verbatim from content. Isomorphic: a bare
+        stream sensorium recalls by vector alone; a memory sensorium fuses lexical+entity+vector — the SAME
+        machinery reading whatever the stack composes (never a hardcoded surface list).
+
+        Read modes + PHYSICS/STRUCTURAL filters shed onto this spine: `drawer` fetches ONE verbatim entry by
+        turn-key; `list` reports the taxonomy. A `wing`/`agent`/`surface` filter narrows the vector pool —
+        and, because the lexical/entity projection carries no such filter yet, a FILTERED recall rides the
+        content-vector ALONE (honest — never fuse in unfiltered hits); the unfiltered common case fuses the
+        full combined-arms."""
         if drawer:
             return self._content.get(drawer) or {}
-        where = _recall_where(wing=wing, agent=agent, surface=surface)
         if list:
             return self._content.taxonomy()
-        return self._content.search(self._embed_one(query), k, where)
+        where = _recall_where(wing=wing, agent=agent, surface=surface)
+        surfaces = self._recall_surfaces()
+        if where or len(surfaces) <= 1:
+            # a filtered read, or a bare single-surface sensorium → the content-vector path, unchanged.
+            return self._content.search(self._embed_one(query), k, where)
+        # FUSE the #has surfaces: each yields ordered cids; RRF merges them; content resolves the verbatim.
+        pool = max(k * 2, 16)
+        ranked = [fn(query, pool) for _name, fn in surfaces]
+        fused = _rrf_fuse(ranked, k)
+        matches = []
+        for cid in fused:
+            rec = self._content.get(cid)
+            if rec:
+                matches.append({"cid": cid, "distance": None,
+                                "document": rec.get("document", ""), "metadata": rec.get("metadata", {})})
+        return {"matches": matches, "scanned": pool, "matched": len(matches),
+                "surfaces": [name for name, _ in surfaces]}
+
+    def _recall_surfaces(self) -> list:
+        """The recall-surface caps this sensorium #has — each `(name, search(query, k) -> ordered cids)`.
+
+        Discovered from the manifest #has stack (the nameless-entity composition), never a hardcoded list:
+        the content-vector rides the eidetic ground always; the mempalace projection (lexical + entity) rides
+        when the stack declares a `mempalace` cap AND its projection is paved on disk. A future recall-capable
+        cap joins the fusion simply by standing in the stack — the recall composes what the sensorium has."""
+        def _vector(query: str, k: int) -> "list[str]":
+            res = self._content.search(self._embed_one(query), k)
+            return [m["cid"] for m in res.get("matches", [])]
+        surfaces: list = [("content-vector", _vector)]
+        manifest = read_stream_manifest(self._palace, absent_ok=True) or {}
+        mp = (manifest.get("has") or {}).get("mempalace")
+        if isinstance(mp, dict):
+            mp_db = os.path.join(self._palace, mp.get("dir") or "mempalace", "mempalace")
+            if os.path.exists(mp_db + ".lex"):                 # the projection is paved (realized on disk)
+                def _projection(query: str, k: int) -> "list[str]":
+                    from mempalace_projection import MempalaceProjection
+                    proj = MempalaceProjection(db_path=mp_db)   # read-only: hybrid_search reads the stored graph
+                    try:
+                        return proj.hybrid_search(
+                            query, lambda cid: (self._content.get(cid) or {}).get("document"), k)
+                    finally:
+                        proj.close()
+                surfaces.append(("mempalace", _projection))
+        return surfaces
 
     def status(self) -> dict:
         """What the sensorium holds — the taxonomy over the palace (mirrors `lares status`)."""
