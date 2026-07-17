@@ -3,14 +3,14 @@
  * operator's vessel stands), so setup (`lares wake --init`) and teardown (`lares palace-teardown`)
  * read the SAME list and can never drift.
  *
- * SOVEREIGN ONLY. Every organ here lives inside the lararium's own tree. The guest `~/.mempalace`
- * is NOT one of them: the swarm retired the content-cap-home ruling (`lararium-memory.mem:137-149`
- * — "the sovereign contentpalace inherits mempalace's exact base schema; the read-only sidecar
- * reach retires"), and the S5 comparator ruling forbids writing it at all (`RUN-ARC.md:14` —
- * "~/.mempalace/palace = comparator only. The RUN never writes it"). Standing the guest from
- * `wake --init` wrote the comparator it was meant to protect. That leg now lives in the guest lane
- * (`lares mempalace setup`, {@link initGuestMempalace}), where an operator raises it DELIBERATELY as
- * a standalone sidecar to compare against or to import FROM (`guest-import.ts` — the one-way Act).
+ * SOVEREIGN ORGANS ONLY. Every organ this registry stands lives inside the lararium's own tree. Each
+ * sensorium `#has` an IN-TREE `mempalace` cap (see {@link materializeMemorySensorium}) — a CURATED
+ * memory store the node writes into "from the inside" (an AI's authored memories about that stream,
+ * given a structured home). Adopting the in-tree mempalace RETIRES the external guest `~/.mempalace`
+ * install: with no external store there is nothing to bind to and nothing to silently fall back onto,
+ * so the content-cap-home / never-bound / confused-deputy hazards dissolve at the root. (The guest-lane
+ * machinery below — {@link initGuestMempalace}, {@link guestMempalaceOrgan} — retires in the follow-on
+ * subtraction; the in-tree mempalace supersedes it.)
  *
  * The memory sensorium's own planes (the astral palaces made filesystem):
  *   - contentpalace     <memory>/content    — the LARARIUM-OWNED verbatim content plane (li/sheaf).
@@ -271,12 +271,15 @@ function seedCaptureSensorium(step: string, dir: string, opts: Omit<BuildSensori
 }
 
 /**
- * Materialize the `memory` sensorium's manifest — content/structure/form as THIN fiber-cap edges, ALL
- * inside the tree. The old MIXED layout (content ABSOLUTE at the guest `~/.mempalace`, structure/form
- * relative) died with the content-cap-home ruling: the lararium OWNS its content plane at
- * `<memory>/content`, and adopting a user's mempalace history runs as a deliberate import Act
- * (`guest-import.ts`), never a runtime binding. bands rides as the base-cap membership-address grain
- * (NO dir), and coupling stays empty (memory glues no sub-sensoriums).
+ * Materialize the `memory` sensorium's manifest — content/structure/form/persistence THIN fiber-cap
+ * edges, plus an in-tree `mempalace` curated-memory cap. Content stays LARARIUM-OWNED at
+ * `<memory>/content` (the RUN reads its OWN content). The `mempalace` cap adds a per-sensorium curated
+ * memory store at `<memory>/mempalace` — the structured home for the memories an AI authors about this
+ * stream (the "flat-file memories," given entity-graph / hallways structure). Each sensorium composes
+ * its own (memory here; a future twain/kumulipo its own), which RETIRES the external guest `~/.mempalace`
+ * and supersedes the one-mempalace / never-bound ruling — an in-tree sovereign store binds to nothing
+ * external and can never silently fall back to a guest. bands rides as the base-cap membership-address
+ * grain (NO dir); coupling stays empty (memory glues no sub-sensoriums).
  */
 export function materializeMemorySensorium(): PalaceSetupStep {
   return seedCaptureSensorium("memory:manifest", memorySensoriumDir(), {
@@ -291,6 +294,13 @@ export function materializeMemorySensorium(): PalaceSetupStep {
       form:        { absDir: larFormPalaceDir(), engine: "formpalace" },
       // The 5th part — a COSHEAF fiber (standing depends on witness edges OUTSIDE the trace, ki not li).
       persistence: { absDir: larPersistencePalaceDir(), engine: "persistence", variance: "cosheaf" },
+      // The MEMPALACE arm — a per-sensorium CURATED memory store the node writes INTO "from the inside":
+      // the memories an AI authors about this stream (today scattered as flat files) given a structured
+      // home (entity-graph · hallways · KG). IN-TREE at <sensorium>/mempalace, sovereign-owned, one per
+      // sensorium — memory keeps its curated chat memories here; a twain/kumulipo sensorium keeps its own.
+      // Adopting this in-tree mempalace RETIRES the external guest ~/.mempalace install entirely (no
+      // external store → the content-cap-home / never-bound / confused-deputy hazards all dissolve).
+      mempalace:   { absDir: join(memorySensoriumDir(), "mempalace"), engine: "mempalace" },
     },
     // BASE cap — the FFZ membership-address grain (li-side stamp metadata). No bytes stored.
     bands: { grain: "membership", computed: "capture" },
