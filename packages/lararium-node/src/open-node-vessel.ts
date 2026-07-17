@@ -60,7 +60,7 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { withMempalace, resolvePalacePath, orderHandleTurnsToStubs } from "@lararium/mempalace";
+import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable, deriveSubagentEdges } from "@lararium/sensorium";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
@@ -68,7 +68,7 @@ import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace }  from "./formpalace.js";
-import { makeSearchCap, type SearchCap }    from "./search-cap.js";
+import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./content-palace.js";
 import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
@@ -281,17 +281,21 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // mempalace client (that stays the `lares mempalace` sidecar lane) — the sovereign/guest separation.
   // Lazy: the read holders spawn on first recall, reused after (distinct lock-prefixes from the capture
   // holder, so a concurrent re-pour never blocks a read).
-  let recallSearch: SearchCap | null = null;
+  let recallHolder: RecallHolder | null = null;
   let recallContent: ContentPalace | null = null;
   const sovereignRecallClient: RecallClient = {
+    // Combined-arms search rides the ONE Python coordinator (recall_session.py → LaresCoordinator): it
+    // composes the sensorium's #has recall-surfaces (content-vector ⊕ mempalace lexical+entity), RRF-fuses,
+    // and resolves verbatim — the machine-code stays Python; this is a thin coordinator call. STREAM-
+    // AGNOSTIC: the same holder serves any sensorium up the cap ladder (ai-sessions → text → encoded).
     search: async (a) => {
-      recallSearch ??= makeSearchCap(larContentDir());
+      recallHolder ??= makeRecallHolder(memorySensoriumDir());
       const query = typeof a["query"] === "string" ? a["query"] : "";
       const k = typeof a["limit"] === "number" ? a["limit"]
               : typeof a["nResults"] === "number" ? a["nResults"]
               : typeof a["k"] === "number" ? a["k"] : undefined;
       const wing = typeof a["wing"] === "string" ? a["wing"] : undefined;
-      return await recallSearch.search(query, { ...(k !== undefined ? { k } : {}), ...(wing ? { wing } : {}) }) as unknown as Record<string, unknown>;
+      return await recallHolder.recall({ query, ...(k !== undefined ? { limit: k } : {}), ...(wing ? { wing } : {}) });
     },
     getDrawer: async (drawerId) => {
       recallContent ??= makeContentPalace(larContentDir());
@@ -561,12 +565,37 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // Ordering: openDaemon runs (awaited) inside daemonCap.build BEFORE the un-awaited wireVerbs, and
     // daemonVm is set just above — so every injected impl is ready at this compose point.
     const mempalaceImpl: MempalaceProvider = {
-      // SOVEREIGN recall: `lares sense recall` reads through the house-code content leg, never the guest
-      // mempalace client. (turnsForHandleStubs — the worldline verb's leg — still rides the guest; a
-      // separate follow-on leak to collapse into house code.)
+      // SOVEREIGN recall + worldline: both read through house code, never the guest mempalace client —
+      // the sovereign⊥guest separation is now complete on the `lares sense` surface.
       withClient: (fn) => fn(sovereignRecallClient),
-      turnsForHandleStubs: (handle, opts) =>
-        withMempalace(async (client) => orderHandleTurnsToStubs(await client.turnsForHandle(handle, opts))),
+      turnsForHandleStubs: async (handle, opts) => {
+        // Page the content plane, keep drawers stamped with this agent-lineage handle, order by the shared
+        // functor. Zero guest code (mirrors the recall cutover) — the join keys (lar_agent_handle ·
+        // lar_verbatim_sha) ride sovereign-captured exchange drawers; an empty plane → an empty trajectory.
+        recallContent ??= makeContentPalace(larContentDir());
+        const turns: HandleTurn[] = [];
+        for (let offset = 0; ; ) {
+          const page = await recallContent.scan({ offset, limit: 512 });
+          for (const r of page.records) {
+            const m = (r.metadata ?? {}) as Record<string, unknown>;
+            if (m["lar_agent_handle"] !== handle) continue;
+            if (opts?.wing !== undefined && m["wing"] !== opts.wing) continue;
+            const sha = m["lar_verbatim_sha"];
+            if (typeof sha !== "string" || !sha) continue;
+            turns.push({
+              drawerId: r.cid,
+              verbatimSha: sha,
+              ...(typeof m["lar_ffz"] === "string" ? { ffz: m["lar_ffz"] } : {}),
+              ...(typeof m["chunk_index"] === "number" ? { chunkIndex: m["chunk_index"] } : {}),
+              ...(typeof m["filed_at"] === "string" ? { filedAt: m["filed_at"] } : {}),
+              ...(typeof m["source_file"] === "string" ? { sourceFile: m["source_file"] } : {}),
+            });
+          }
+          if (page.next === null) break;
+          offset = page.next;
+        }
+        return orderHandleTurnsToStubs(turns);
+      },
     };
     const formImpl: FormPalaceProvider = {
       // The worldline form pre-fetch: a miss/fault → null (the worker keeps the turn's TIME slot, form

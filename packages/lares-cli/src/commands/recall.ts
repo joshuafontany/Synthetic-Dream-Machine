@@ -29,6 +29,7 @@
  */
 
 import { loadVesselVerifyingKey } from "@lararium/node";
+import { TIMEOUT_CEIL_MS } from "@lararium/mempalace";
 import { larDataDir } from "../env.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -88,7 +89,9 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   // recall is read-only, so a generous budget costs nothing.
   let result;
   try {
-    result = await runVerb("recall", verbArgs, did, { timeoutMs: 30_000 });
+    // The caller's patience = the servo CEIL: the first recall cold-loads the Python coordinator holder
+    // (embedder + #has surfaces); the daemon's gradient servo is the real bound.
+    result = await runVerb("recall", verbArgs, did, { timeoutMs: TIMEOUT_CEIL_MS });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
