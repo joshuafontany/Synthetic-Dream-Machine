@@ -26,6 +26,7 @@ import * as KH from "@keyhive/keyhive/slim";
 // @ts-expect-error — keyhive's base64 .d.ts is a `declare module` augmentation, not a module
 // (TS2306); the runtime export `wasmBase64` (a base64 string) resolves fine in node + vite.
 import { wasmBase64 } from "@keyhive/keyhive/keyhive_wasm.base64.js";
+import { ingestTolerant } from "@lararium/mesh";
 import type {
   CapabilityProvider, CapabilityProviderInitOpts,
   DelegateArgs, DelegateResult, VerifyArgs, VerifyResult,
@@ -468,13 +469,11 @@ export class KeyhiveProvider implements CapabilityProvider {
     return bytesToHex(individual.id.toBytes());
   }
 
-  async hydrateFromEventStore(): Promise<{ ingested: number }> {
-    if (!this.eventStore) return { ingested: 0 };
+  async hydrateFromEventStore(): Promise<{ ingested: number; skipped: number }> {
+    if (!this.eventStore) return { ingested: 0, skipped: 0 };
     const records = await this.eventStore.list();
-    if (records.length === 0) return { ingested: 0 };
-    const eventsArray = records.map((r) => r.bytes);
-    await this.requireKh().ingestEventsBytes(eventsArray);
-    return { ingested: records.length };
+    const kh = this.requireKh();
+    return ingestTolerant(records.map((r) => r.bytes), (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
   }
 
   async dispose(): Promise<void> {

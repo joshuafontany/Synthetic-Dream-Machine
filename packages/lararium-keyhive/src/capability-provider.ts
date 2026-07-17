@@ -89,9 +89,10 @@ export interface CapabilityProvider extends CapabilityVerifier {
   revoke(delegationId: string): Promise<{ bytes: Uint8Array }>;
   verify(args: VerifyArgs): Promise<VerifyResult>;
 
-  /** Replay events from the event store back into Keyhive's in-memory
-   *  state. Called once at boot. */
-  hydrateFromEventStore(): Promise<{ ingested: number }>;
+  /** Replay events from the event store back into Keyhive's in-memory state. Called once at
+   *  boot. Torn-tolerant: `skipped` counts cap-events a corrupt record forced past (they
+   *  degrade a membership slice, never down the boot). */
+  hydrateFromEventStore(): Promise<{ ingested: number; skipped: number }>;
 
   /** Tear down. Frees WASM resources. */
   dispose(): Promise<void>;
