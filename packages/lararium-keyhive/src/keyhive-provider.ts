@@ -518,6 +518,11 @@ export class KeyhiveProvider implements CapabilityProvider {
    * so deferring it stays decryptability-safe for the self slice). Absent `selfIslands` → every
    * event loads eagerly (the N=1 daemon default, byte-identical to before). `deferred` counts the
    * held-island events left for lazy load (always 0 in the default path).
+   *
+   * PACED (#13 — the boot-CPU spike): the replay ingests in CHUNKS with an event-loop yield between
+   * them, so a large N=1 keyhive replay no longer pegs the loop synchronously (243% → the vessel-ready
+   * → UDS signal breathes between chunks). Keyhive resolves causality internally — order across ingest
+   * calls does not matter — so chunking is byte-equivalent to one batch, only kinder to the loop.
    */
   async hydrateFromEventStore(selfIslands?: readonly string[]): Promise<{ ingested: number; skipped: number; deferred: number }> {
     if (!this.eventStore) return { ingested: 0, skipped: 0, deferred: 0 };
@@ -525,7 +530,14 @@ export class KeyhiveProvider implements CapabilityProvider {
     const eager = selfIslands === undefined ? records : records.filter((r) => inSelfSlice(r, selfIslands));
     const deferred = records.length - eager.length;
     const kh = this.requireKh();
-    const { ingested, skipped } = await ingestTolerant(eager.map((r) => r.bytes), (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
+    const CHUNK = 64;   // events per ingest call — the loop yields between chunks
+    let ingested = 0, skipped = 0;
+    for (let i = 0; i < eager.length; i += CHUNK) {
+      const slice = eager.slice(i, i + CHUNK).map((r) => r.bytes);
+      const r = await ingestTolerant(slice, (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
+      ingested += r.ingested; skipped += r.skipped;
+      if (i + CHUNK < eager.length) await new Promise<void>((res) => setImmediate(res));   // let the loop breathe
+    }
     return { ingested, skipped, deferred };
   }
 
