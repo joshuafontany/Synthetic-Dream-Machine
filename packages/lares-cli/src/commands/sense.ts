@@ -28,6 +28,7 @@ import { cmdSubagents } from "./subagents.js";
 import { cmdPalaceTeardown } from "./palace-teardown.js";
 import { cmdRecall } from "./recall.js";
 import { cmdFlow } from "./flow.js";
+import { cmdMeta } from "./meta.js";
 
 const VERBS = ["search", "relate", "structure", "status"] as const;
 type Verb = (typeof VERBS)[number];
@@ -51,6 +52,7 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   telemetry: cmdTelemetry,
   subagents: cmdSubagents,
   flow:      cmdFlow,
+  meta:      cmdMeta,
 };
 
 export async function cmdSense(args: ParsedArgs): Promise<number> {

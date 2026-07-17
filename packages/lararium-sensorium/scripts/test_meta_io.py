@@ -6,7 +6,19 @@ stack; the room bucket that seeds the session-scoped topic axis).
       packages/lararium-sensorium/scripts/test_meta_io.py -q
 """
 
+import json
+
 import meta_io
+
+
+def _write_meta_config(tmp_path, monkeypatch, schema: dict) -> None:
+    """Point the house config at a tmp dir, write meta.json, force a cache reload."""
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
+    cfgdir = tmp_path / "lares"
+    cfgdir.mkdir(exist_ok=True)
+    (cfgdir / "meta.json").write_text(json.dumps(schema), encoding="utf-8")
+    meta_io._config_mtime = -1.0  # invalidate the mtime cache so the write lands now
 
 
 def test_annotate_returns_entities_hall_room_keys():
@@ -51,6 +63,36 @@ def test_annotators_env_selects_the_set(monkeypatch):
     monkeypatch.setenv("META_ANNOTATORS", "entities,room")
     r = meta_io.MetaModel().annotate("Joshua chose the git deploy approach after the bug.")
     assert set(r.keys()) == {"entities", "room"}
+
+
+def test_room_taxonomy_config_supersedes_the_seed(tmp_path, monkeypatch):
+    # The operator's tuned taxonomy (via `sense meta`) overrides the frozen convo seed the moment it lands.
+    _write_meta_config(tmp_path, monkeypatch, {
+        "room_taxonomy": {"liturgy": ["shrine", "incense", "libation"], "keel": ["spine", "worldline"]},
+    })
+    r = meta_io.MetaModel(["room"]).annotate("The shrine holds the incense and the libation dish.")
+    assert r["room"] == "liturgy"  # NOT a seed bucket — the tuned taxonomy won
+    meta_io._config_mtime = -1.0  # leave the cache clean for the next test
+
+
+def test_annotators_config_selects_when_no_arg_or_env(tmp_path, monkeypatch):
+    monkeypatch.delenv("META_ANNOTATORS", raising=False)
+    _write_meta_config(tmp_path, monkeypatch, {"annotators": ["hall"]})
+    r = meta_io.MetaModel().annotate("memory and recall and the archive palace.")
+    assert set(r.keys()) == {"hall"}  # the house config narrowed the set
+    meta_io._config_mtime = -1.0
+
+
+def test_corrupt_meta_config_degrades_to_the_seed(tmp_path, monkeypatch):
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
+    cfgdir = tmp_path / "lares"
+    cfgdir.mkdir(exist_ok=True)
+    (cfgdir / "meta.json").write_text("{ this is not json", encoding="utf-8")
+    meta_io._config_mtime = -1.0
+    r = meta_io.MetaModel(["room"]).annotate("The schema interface module layer architecture.")
+    assert r["room"] == "architecture"  # corrupt config → the proven seed still routes
+    meta_io._config_mtime = -1.0
 
 
 def test_annotate_empty_is_safe():

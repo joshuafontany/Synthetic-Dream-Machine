@@ -22,6 +22,7 @@ Run under the mempalace interpreter:
 from __future__ import annotations
 
 import argparse
+import json
 import os
 
 # CONSUME the vendored heuristic extractors (no LLM). Private `_extract_entities_for_metadata` is the
@@ -39,12 +40,72 @@ DEFAULT_IDLE_TTL_SECONDS = 600.0
 ANNOTATORS_ENV = "META_ANNOTATORS"
 
 
+def _meta_config_path() -> str:
+    """The house meta-schema file — `<config-home>/meta.json`. Mirrors the vessel's `larConfigHome`
+    (`LAR_ROOT/config`, else `$XDG_CONFIG_HOME/lares`, else `~/.config/lares`); the `lares sense meta`
+    verb writes it, this holder reads it. Kept in lockstep with vessel-paths.ts `larConfigHome`."""
+    root = os.environ.get("LAR_ROOT")
+    if root:
+        return os.path.join(root, "config", "meta.json")
+    base = os.environ.get("XDG_CONFIG_HOME", "").strip() or os.path.join(os.path.expanduser("~"), ".config")
+    return os.path.join(base, "lares", "meta.json")
+
+
+_config_cache: dict = {}
+_config_mtime: float = -1.0
+
+
+def _load_meta_config() -> dict:
+    """The house meta-schema (enabled annotators + room taxonomy), or {} when absent or unreadable.
+    mtime-gated so a `sense meta` edit lands on the next annotate without a holder restart (the
+    known-entities pattern). A corrupt file degrades to {} — it never sinks the capture."""
+    global _config_cache, _config_mtime
+    path = _meta_config_path()
+    try:
+        mtime = os.path.getmtime(path)
+    except OSError:
+        _config_cache, _config_mtime = {}, -1.0
+        return _config_cache
+    if mtime != _config_mtime:
+        try:
+            with open(path, encoding="utf-8") as fh:
+                loaded = json.load(fh)
+            _config_cache = loaded if isinstance(loaded, dict) else {}
+        except (OSError, ValueError):
+            _config_cache = {}
+        _config_mtime = mtime
+    return _config_cache
+
+
 def _safe(fn, text: str) -> str:
     """Run a heuristic extractor; degrade to "" rather than sink the capture."""
     try:
         return fn(text) or ""
     except Exception:  # noqa: BLE001 — structuring metadata rides best-effort, never fatal to a turn
         return ""
+
+
+def _score_taxonomy(text: str, taxonomy: dict) -> str:
+    """Route content to the highest-scoring room by keyword hits — the shape `detect_hall` and
+    `detect_convo_room` share, turned on the operator's own tuned taxonomy."""
+    lowered = text[:3000].lower()
+    scores = {}
+    for room, keywords in taxonomy.items():
+        if not isinstance(keywords, list):
+            continue
+        score = sum(1 for kw in keywords if isinstance(kw, str) and kw and kw.lower() in lowered)
+        if score > 0:
+            scores[room] = score
+    return max(scores, key=scores.get) if scores else "general"
+
+
+def _detect_room(text: str) -> str:
+    """The room bucket: the operator's CLI/wiki-tuned taxonomy when the house config carries one, else
+    the proven `detect_convo_room` seed. The tuned taxonomy supersedes the seed the moment it lands."""
+    taxonomy = _load_meta_config().get("room_taxonomy")
+    if isinstance(taxonomy, dict) and taxonomy:
+        return _score_taxonomy(text, taxonomy)
+    return detect_convo_room(text)
 
 
 # The named annotator capabilities — each maps content → one metadata value. A sensorium COMPOSES the
@@ -54,7 +115,7 @@ def _safe(fn, text: str) -> str:
 ANNOTATORS = {
     "entities": lambda text: _safe(_extract_entities_for_metadata, text),
     "hall": lambda text: _safe(detect_hall, text),
-    "room": lambda text: _safe(detect_convo_room, text),
+    "room": lambda text: _safe(_detect_room, text),
 }
 
 # The full capability set the memory sensorium composes; other sensoria restrict or extend it.
@@ -62,11 +123,16 @@ DEFAULT_ANNOTATORS = ("entities", "hall", "room")
 
 
 def _resolve_annotators(names=None) -> tuple:
-    """The enabled annotator names — an explicit list, else the `META_ANNOTATORS` env, else the full
-    set. Unknown names drop, so a sensorium never crashes on a stale capability name."""
+    """The enabled annotator names — an explicit list, else the `META_ANNOTATORS` env, else the house
+    config's set, else the full default. Unknown names drop, so a sensorium never crashes on a stale
+    capability name."""
     if names is None:
         env = os.environ.get(ANNOTATORS_ENV, "").strip()
-        names = [n.strip() for n in env.split(",") if n.strip()] if env else list(DEFAULT_ANNOTATORS)
+        if env:
+            names = [n.strip() for n in env.split(",") if n.strip()]
+        else:
+            cfg = _load_meta_config().get("annotators")
+            names = list(cfg) if isinstance(cfg, list) and cfg else list(DEFAULT_ANNOTATORS)
     return tuple(n for n in names if n in ANNOTATORS)
 
 
