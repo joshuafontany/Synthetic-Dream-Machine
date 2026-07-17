@@ -1,5 +1,5 @@
 """Phase-6a witness — lares_mcp: the isomorphic /mcp surface. The LaresCoordinator round-trips the
-lifecycle verbs over a real ephemeral palace (harvest->recall->status, kapae->recall-excludes->un_kapae-
+lifecycle verbs over a real ephemeral palace (pour->recall->status, kapae->recall-excludes->un_kapae-
 restores), and the FastMCP tool-set MIRRORS the CLI lifecycle verbs exactly (the isomorphism contract).
 
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_lares_mcp.py -q
@@ -18,8 +18,8 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 _FIXTURE = os.path.join(_HERE, "fixtures", "capture", "claude-main.jsonl")
 _CLI_VERBS = os.path.join(_HERE, "fixtures", "cli-verbs.json")
 
-# The coordinator harvest rides the shipping veil path (C1b) — pin a WITNESS salt for the whole module so
-# every harvest derives a DETERMINISTIC, portable worldline root (never the operator's on-disk persona key).
+# The coordinator pour rides the shipping veil path (C1b) — pin a WITNESS salt for the whole module so
+# every pour derives a DETERMINISTIC, portable worldline root (never the operator's on-disk persona key).
 _SALT = "witness-lares-mcp-salt"
 
 
@@ -37,9 +37,9 @@ def _coord(tmp_path):
     return LaresCoordinator(str(tmp_path / ".mem"), wing="w", embed_factory=_fake_embed)
 
 
-def test_coordinator_harvest_recall_status(tmp_path):
+def test_coordinator_pour_recall_status(tmp_path):
     coord = _coord(tmp_path)
-    res = coord.harvest("claude", _FIXTURE, wing="w")
+    res = coord.pour("claude", _FIXTURE, wing="w")
     assert res["landed"] >= 1                       # a real fixture captured through the driver
     hits = coord.recall("turn", 3)
     assert hits["matches"]                           # recall read-face returns turns
@@ -52,18 +52,18 @@ def _live_turn_keys(coord):
     return {m["metadata"].get("lar_turn_key") for m in coord.recall("turn", 20)["matches"]}
 
 
-def test_harvest_refuses_unwired_shaping_args(tmp_path):
+def test_pour_refuses_unwired_shaping_args(tmp_path):
     # B2 footgun: all/writeback/dry_run ride the deferred cap-wire — they must REFUSE, never silently
     # ignore (dry_run=True would otherwise LAND for real on the append-only ground).
     coord = _coord(tmp_path)
     for kwargs in ({"all": True}, {"writeback": True}, {"dry_run": True}):
         with pytest.raises(NotImplementedError):
-            coord.harvest("claude", _FIXTURE, **kwargs)
+            coord.pour("claude", _FIXTURE, **kwargs)
 
 
 def test_coordinator_kapae_cascade_round_trip(tmp_path):
     coord = _coord(tmp_path)
-    coord.harvest("claude", _FIXTURE, wing="w")
+    coord.pour("claude", _FIXTURE, wing="w")
     # bind the captured turns onto a worldline branch, then kapae it via the coordinator verb
     tks = sorted({m["metadata"].get("lar_turn_key") for m in coord.recall("turn", 8)["matches"]
                   if m["metadata"].get("lar_turn_key")})
@@ -78,15 +78,15 @@ def test_coordinator_kapae_cascade_round_trip(tmp_path):
     assert tks[1] in _live_turn_keys(coord)          # move-not-delete: un-kapae restores it to recall
 
 
-def test_harvest_builds_the_worldline_and_kapae_cascades_the_subtree(tmp_path):
-    # THE CROWN (step-1): harvest now rides capture_and_observe, so the fork-DAG BUILDS on the shipping
+def test_pour_builds_the_worldline_and_kapae_cascades_the_subtree(tmp_path):
+    # THE CROWN (step-1): pour now rides capture_and_observe, so the fork-DAG BUILDS on the shipping
     # path — coordinator.worldline() returns the REAL braid (not empty). And kapae over a fork-root mutes
     # the whole SUBTREE across the sensorium (not just the named turn).
     coord = _coord(tmp_path)
-    coord.harvest("claude", _FIXTURE, wing="w")
+    coord.pour("claude", _FIXTURE, wing="w")
 
     wl_dag = coord.worldline()
-    assert wl_dag["edges"], "harvest built no worldline — the observe leg never reached the entrypoint"
+    assert wl_dag["edges"], "pour built no worldline — the observe leg never reached the entrypoint"
     # the fixture's main chain roots at the VEILED run (C1b) — `wl-<hash>` of the session basename, never
     # the bare "claude-main" in the clear (owner-recomputable under the pinned salt).
     run = veiled_root("claude-main", secret=_SALT.encode())

@@ -5,7 +5,7 @@ verb-surface lives py; the TS @daemon supervises the fleet + keeps the surface-w
 mempalace mcp_server.py stays for the upstream nakama on their causal island — this serves the lares house.
 
 The isomorphism lives in `LaresCoordinator` (the verb-router both surfaces call); the CLI commands and the
-MCP tools stay thin skins over it, each verb named the same on both — harvest · recall · status · worldline
+MCP tools stay thin skins over it, each verb named the same on both — pour · recall · status · worldline
 · kapae · un_kapae (Phase-6a lifecycle floor; the extensions declare/attach/reconcile/release/daydream/
 deep-dream + the HITL/HOTL grid ride in at 6b).
 
@@ -25,7 +25,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("harvest", "recall", "status", "worldline", "kapae", "un_kapae")
+LIFECYCLE_VERBS = ("pour", "recall", "status", "worldline", "kapae", "un_kapae")
 
 # The per-plane QUERY DOOR verbs — read-only interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -40,7 +40,7 @@ PLANE_VERBS = ("recall_structure", "recall_form", "plane_record")
 # the LaresCoordinator cap in its wiki-island VM worker; it reads a verb's seat and grants the operator-
 # authorized approval capability an HITL verb needs (capability-based — the @daemon is the cap-holder).
 VERB_SEATS = {
-    "harvest": (True, False),    # append-only capture — reversible (an edit rides kapae), trusted
+    "pour": (True, False),       # append-only capture — reversible (an edit rides kapae), trusted
     "recall": (True, False),     # read — reversible, trusted
     "status": (True, False),     # read — reversible, trusted
     "worldline": (True, False),  # read — reversible, trusted
@@ -156,28 +156,27 @@ class LaresCoordinator:
         self._plane_stores: dict = {}                        # lazy structure/form handles, opened on first read
         self._content = cio.ContentStore(self._paths.content, expected_dim=self._dim, expected_model=self._model)
         # The fork-DAG rides the ONE canonical `worldline/` dir the capture wire builds into — the same
-        # helper both sides call, so a harvest's braid IS the DAG this coordinator reads (no path split).
+        # helper both sides call, so a pour's braid IS the DAG this coordinator reads (no path split).
         self._worldline = wl.WorldlineStore(worldline_path(self._palace))
 
-    def harvest(self, surface: str, pointer: str, *, all: bool = False, writeback: bool = False,
-                dry_run: bool = False, wing: "str | None" = None,
-                room: str = "conversations") -> dict:
-        """Capture a surface's transcript into the Memory sensorium (mirrors `lares harvest`). Idempotent
-        re-derivation — a re-run lands only the un-landed tail (the crash-cure).
+    def pour(self, surface: str, pointer: str, *, all: bool = False, writeback: bool = False,
+             dry_run: bool = False, wing: "str | None" = None,
+             room: str = "conversations") -> dict:
+        """Capture a surface's transcript into the Memory sensorium (mirrors `lares sense pour`).
+        Idempotent re-derivation — a re-run lands only the un-landed tail (the crash-cure).
 
         The isomorphism contract carries the CLI's rich args onto this one spine: `all` sweeps every
         surface, `writeback` re-enriches a wing's drawers, `dry_run` previews without landing. The
         per-pointer capture rides `capture_and_observe` here — it lands the content AND builds the
         worldline fork-DAG into the shared `worldline/`, so `worldline()`/`kapae` read a REAL braid on
         the shipping path; the sweep/writeback/preview SHAPING rides the CLI skin + the deferred
-        @daemon-cap-wire (this task holds SHAPE + SEATS, never the re-point), so the params stand in the
-        signature and thread through as the wire lands them."""
+        @daemon-cap-wire, so the params stand in the signature and thread through as the wire lands them."""
         if all or writeback or dry_run:
             # REFUSE HONESTLY, never silently ignore: dry_run especially would otherwise LAND on the
             # append-only ground (the tool advertises a preview it can't yet give). The sweep/writeback/
             # preview shaping rides the deferred @daemon-cap-wire — the same discipline as the kapae stub.
             raise NotImplementedError(
-                "harvest all/writeback/dry_run: the sweep/writeback/preview shaping rides the deferred "
+                "pour all/writeback/dry_run: the sweep/writeback/preview shaping rides the deferred "
                 "@daemon-cap-wire (not yet wired) — refusing rather than capturing for real")
         return capture_and_observe(self._palace, surface, pointer, wing=wing or self._wing, room=room,
                                    embed_factory=lambda: (self._embed_one, self._model))
@@ -428,12 +427,12 @@ def build_mcp(coordinator: LaresCoordinator):
         return method(*args, sensorium_root=root, **kwargs) if routed else method(*args, **kwargs)
 
     @mcp.tool()
-    def harvest(surface: str, pointer: str, all: bool = False, writeback: bool = False,
-                dry_run: bool = False, wing: "str | None" = None,
-                room: str = "conversations", sensorium: "str | None" = None) -> dict:
+    def pour(surface: str, pointer: str, all: bool = False, writeback: bool = False,
+             dry_run: bool = False, wing: "str | None" = None,
+             room: str = "conversations", sensorium: "str | None" = None) -> dict:
         """Capture a surface's transcript (claude/codex/copilot) into a sensorium (`sensorium` names it;
         absent → memory). `all` sweeps every surface, `writeback` re-enriches a wing, `dry_run` previews."""
-        return _call("harvest", sensorium, surface, pointer, all=all, writeback=writeback, dry_run=dry_run,
+        return _call("pour", sensorium, surface, pointer, all=all, writeback=writeback, dry_run=dry_run,
                      wing=wing, room=room)
 
     @mcp.tool()
@@ -536,7 +535,7 @@ class DaemonCoordinator:
             args["sensoriumRoot"] = sensorium_root
         return uds.output("recall", args)
 
-    def harvest(self, *a, **k):          return self._owed("harvest")
+    def pour(self, *a, **k):             return self._owed("pour")
     def status(self, *a, **k):           return self._owed("status")
     def worldline(self, *a, **k):        return self._owed("worldline")
     def kapae(self, *a, **k):            return self._owed("kapae")

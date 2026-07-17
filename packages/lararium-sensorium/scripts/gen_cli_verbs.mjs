@@ -8,8 +8,8 @@
  *
  * The isomorphism (operator ruling): `lares`-CLI ↔ `lares`-MCP across the WHOLE verb-set. The six
  * lifecycle tools mirror today; every other verb reads NOT-YET-MIRRORED (the MCP surface grows into
- * it), never permanently CLI-only. `cli_forms` maps each MCP tool name to its CLI spelling — the
- * three sensorium mirrors ride sub-verbs (`sensorium status`, `worldline kapae`, `worldline un-kapae`).
+ * it), never permanently CLI-only. `cli_forms` maps each MCP tool name to its CLI spelling — each
+ * mirror rides the one `sense` door (`sense pour`, `sense status`, `sense worldline kapae`).
  *
  * Usage:  node scripts/gen_cli_verbs.mjs        (writes fixtures/cli-verbs.json)
  *         node scripts/gen_cli_verbs.mjs --check (fails if the on-disk fixture drifts)
@@ -26,9 +26,9 @@ const OUT = join(HERE, "fixtures", "cli-verbs.json");
 
 // The MCP lifecycle tool names (mirror YIN's py `LIFECYCLE_VERBS`) → their CLI spelling. After the
 // radical two-door collapse EVERY sovereign lifecycle tool mirrors through the one `sense` door — one
-// host, no top-level twins. `harvest` mirrors the SOVEREIGN pour (`sense pour`), never the guest miner.
+// host, no top-level twins. `pour` names the SOVEREIGN capture on both surfaces, never the guest miner.
 const CLI_FORMS = {
-  harvest:   "sense pour",
+  pour:      "sense pour",
   recall:    "sense recall",
   status:    "sense status",
   worldline: "sense worldline",
