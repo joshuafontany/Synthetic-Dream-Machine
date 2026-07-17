@@ -9,23 +9,27 @@
  * watermark). This verb resolves every target explicitly, previews by default,
  * and removes only on `--confirm`.
  *
- * Targets (resolved, never ambient) — the SOVEREIGN memory sensorium only; the external guest
- * ~/.mempalace (a separate causal island) stands untouched. Every plane hangs off the one
- * sensorium root (<memory> = memorySensoriumDir()), so the tear names sibling dirs, never scattered homes:
- *   - the content plane      <memory>/content       (holds the verbatim drawers — the caller-vector store)
- *   - the structure plane    <memory>/structure     (holds each turn's AST, keyed by structural hash)
- *   - the form plane         <memory>/form          (holds the living-grammar move-vectors, keyed by verbatim_sha)
- *   - the harvest watermark  <harvest>              (carries the lar_hv idempotency state.json)
- *   - the harvest stage      <harvest-stage>        (carries the normalized transcript copies)
+ * Targets (resolved, never ambient) — the SOVEREIGN sensoriums only; the external guest
+ * ~/.mempalace (a separate causal island) stands untouched. The targets SEPARATE by sensorium GROUP,
+ * so the operator tears one sensorium and leaves the rest standing:
+ *   - memory            <memory>/{content,structure,form,persistence,mempalace} + the harvest watermark/stage
+ *   - mesh              <mesh>/{who,authority,flow} (the federation tree)
+ *   - memetic-wikitext  <memetic-wikitext>/{formal,informal} (the co-located peers)
+ *   - corpus            every ephemeral .corpus/* scratch instance
+ * The in-tree `<memory>/mempalace` (the paved recall projection) tears WITH `memory`; the guest
+ * `~/.mempalace` rides its own lane (guestMempalaceOrgan) and is never in this list.
  *
- * Safety: if live mempalace processes (MCP servers / a running mine) hold the
- * store open, the verb REFUSES (exit conflict) unless `--force` is also given —
- * stop them first, or override. Re-pave after with the full ceremony:
+ * Safety: if live mempalace processes (MCP servers / a running mine) hold a SELECTED store open, the
+ * verb REFUSES (exit conflict) unless `--force` is also given — a holder of an UN-selected sensorium
+ * never blocks. Re-pave after with the full ceremony:
  * `lares wake --init` → `lares sense pour --all` → `lares mempalace resume`.
  *
- * Usage:  lares sense teardown                    # preview what would be removed
- *         lares sense teardown --confirm          # remove it
- *         lares sense teardown --confirm --force  # remove even under live MCP
+ * Usage:  lares sense teardown                    # preview EVERY group
+ *         lares sense teardown memory             # preview ONE sensorium
+ *         lares sense teardown memory --confirm   # tear one, leave the rest standing
+ *         lares sense teardown --confirm          # remove every group
+ *         lares sense teardown --confirm --force  # remove even under live holders
+ *   groups: memory · mesh · memetic-wikitext · corpus   (no group = all)
  */
 
 import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
@@ -41,10 +45,38 @@ import type { ParsedArgs } from "../parse-args.js";
 interface Target {
   readonly label: string;
   readonly path:  string;
+  /** The teardown SELECTION unit — a sensorium name (`memory` · `mesh` · `memetic-wikitext`) or `corpus`. */
+  readonly group: string;
+}
+
+/**
+ * The group a target rides under — the sensorium segment beneath `sensoriums/` (`memory` · `mesh` ·
+ * `memetic-wikitext`); the AI-sessions pour idempotency (`harvest*`) rides with `memory`, so a memory
+ * re-pave clears the watermark that would otherwise SKIP re-poured turns; everything else falls to the
+ * `corpus` scratch bucket. Naming a group tears ONLY that group; naming none tears every group.
+ */
+function targetGroup(path: string): string {
+  const m = /[/\\]sensoriums[/\\]([^/\\]+)/.exec(path);
+  if (m && m[1]) return m[1];
+  if (/[/\\]harvest(-stage)?$/.test(path)) return "memory";
+  return "corpus";
+}
+
+/**
+ * Does a live holder BLOCK this selection? A spawner (mints daemons) re-mints the memory-content
+ * capture, so it blocks only a `memory` tear; a store-holder blocks only when it serves a path under
+ * one of the selected targets (a mesh-only tear is never blocked by a memory holder). A non-path serve
+ * (a bare "sessions" mine that could feed memory content) blocks a `memory` tear, errs toward refusal.
+ */
+function procBlocks(p: PalaceProc, selectedDirs: string[], memorySelected: boolean): boolean {
+  if (p.mintsDaemons) return memorySelected;
+  const s = p.serves;
+  if (!s || !s.startsWith("/")) return memorySelected;
+  return selectedDirs.some((dir) => s === dir || s.startsWith(dir.endsWith("/") ? dir : dir + "/"));
 }
 
 const ORGAN_LABEL: Readonly<Record<string, string>> = {
-  mempalace:  "palace store (chroma + config + entities + locks + worldline-KG sqlite)",
+  mempalace:  "in-tree mempalace cap (the curated-memory recall projection — lexical + entity surfaces)",
   structurepalace:  "structure plane (unfolds each turn's AST under the sensorium root)",
   formpalace: "form plane (holds the living-grammar move-vectors under the sensorium root)",
   meshpalace: "mesh sensorium (the federation tree — #has who/authority/flow)",
@@ -64,21 +96,19 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
  * interrupted `corpus run` can never leak state past a re-pave.
  */
 function resolveTargets(): Target[] {
-  // The `mempalace` organ resolves to the external GUEST (~/.mempalace) — a SEPARATE causal island
-  // OUTSIDE the lararium (the content-cap-home ruling keeps it external; it holds the verbatim convos
-  // mine + the worldline-KG, tended independently). The sovereign memory-sensorium teardown NEVER touches
-  // it. The sovereign sensorium proper = contentpalace(<memory>/content) + structure/form/persistence/
-  // mesh/memetic — the only entities this verb tears down.
-  const organs = palaceOrgans()
-    .filter((o) => o.name !== "mempalace")
-    .map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
+  // The `mempalace` organ now resolves to the IN-TREE `<memory>/mempalace` curated projection (the
+  // sovereign paved recall surface) — NOT the guest. The external `~/.mempalace` rides
+  // guestMempalaceOrgan, enumerated SEPARATELY and NEVER present in palaceOrgans(), so every organ here
+  // tears with its sensorium and the guest comparator stays untouched by construction.
+  const organs = palaceOrgans().map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
   const corpus = corpusTeardownDirs().map((dir) => ({ label: `corpus scratch instance (${dir.split(/[/\\]/).pop()})`, path: dir }));
-  return [
+  const raw = [
     ...organs,
     ...corpus,
     { label: "harvest watermark (lar_hv idempotency)",        path: larHarvestDir() },
     { label: "harvest stage (normalized transcript copies)",  path: larHarvestStageDir() },
   ];
+  return raw.map((t) => ({ ...t, group: targetGroup(t.path) }));
 }
 
 /** Best-effort recursive byte size; 0 when absent or unreadable. */
@@ -135,16 +165,39 @@ function describeProc(p: PalaceProc): string {
 }
 
 export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
-  const targets = resolveTargets().map((t) => {
-    const exists = existsSync(t.path);
-    return { ...t, exists, bytes: exists ? dirSize(t.path) : 0 };
-  });
+  const all       = resolveTargets();
+  const allGroups = [...new Set(all.map((t) => t.group))].sort();
+  // Group SELECTION — positional names tear ONLY those sensoriums; no name tears every group. An
+  // unknown group refuses loud (the confused-deputy cure: name the target, never a silent wildcard).
+  const requested = args.positional.map((s) => String(s).toLowerCase());
+  const unknown   = requested.filter((g) => !allGroups.includes(g));
+  if (unknown.length) {
+    emit(args, {
+      ok: false,
+      error: { code: "usage", message: `unknown sensorium group(s): ${unknown.join(", ")}`, hint: `groups: ${allGroups.join(" · ")} (no group = all)` },
+      human: () => {
+        console.error(`lares sense teardown: unknown group(s): ${unknown.join(", ")}`);
+        console.error(`  groups: ${allGroups.join(" · ")}   (name none to tear every group)`);
+      },
+    });
+    return exitFor("usage");
+  }
+  const selected = requested.length ? new Set(requested) : new Set(allGroups);
+  const targets  = all
+    .filter((t) => selected.has(t.group))
+    .map((t) => {
+      const exists = existsSync(t.path);
+      return { ...t, exists, bytes: exists ? dirSize(t.path) : 0 };
+    });
   const present    = targets.filter((t) => t.exists);
   const totalBytes = present.reduce((s, t) => s + t.bytes, 0);
   const confirm    = args.flags["confirm"] === true;
   const force      = args.flags["force"]   === true;
   const drain      = args.flags["drain"]   === true;
-  let procs        = liveMempalaceProcs();
+  // Blocking is SCOPED to the selection: a holder of an un-selected sensorium never blocks this tear.
+  const selectedDirs   = targets.map((t) => t.path);
+  const memorySelected = selected.has("memory");
+  let procs        = liveMempalaceProcs().filter((p) => procBlocks(p, selectedDirs, memorySelected));
 
   // PREVIEW (default) — name every target, touch no disk.
   if (!confirm) {
@@ -152,18 +205,26 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
       ok: true,
       data: {
         mode: "preview",
-        targets: targets.map((t) => ({ label: t.label, path: t.path, exists: t.exists, bytes: t.bytes })),
+        groups: allGroups,
+        selected: [...selected],
+        targets: targets.map((t) => ({ group: t.group, label: t.label, path: t.path, exists: t.exists, bytes: t.bytes })),
         totalBytes,
         liveProcesses: procs.map((p) => ({ pid: p.pid, kind: p.kind, serves: p.serves, spawner: p.spawnerCmd, holdsStore: p.holdsStore, mintsDaemons: p.mintsDaemons })),
         hint: "re-run with --confirm to remove",
       },
       human: () => {
         console.log("lares sense teardown — PREVIEW (nothing removed)\n");
-        console.log("  scope: the sovereign memory sensorium — the external guest ~/.mempalace is never touched\n");
-        for (const t of targets) {
-          const mark = t.exists ? "✗" : "·";
-          const size = t.exists ? `  (${humanBytes(t.bytes)})` : "  (absent)";
-          console.log(`  ${mark} ${t.path}\n      ${t.label}${size}`);
+        console.log(`  groups available: ${allGroups.join(" · ")}   (name none to tear all)`);
+        console.log(`  scope this run:   ${[...selected].join(" · ")}   — the external guest ~/.mempalace is never touched\n`);
+        // Group the listing by sensorium so the selection unit is legible at a glance.
+        for (const g of allGroups) {
+          if (!selected.has(g)) continue;
+          console.log(`  [${g}]`);
+          for (const t of targets.filter((x) => x.group === g)) {
+            const mark = t.exists ? "✗" : "·";
+            const size = t.exists ? `  (${humanBytes(t.bytes)})` : "  (absent)";
+            console.log(`    ${mark} ${t.path}\n        ${t.label}${size}`);
+          }
         }
         console.log(`\n  total to free: ${humanBytes(totalBytes)}`);
         if (procs.length) {
@@ -188,7 +249,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
   if (drain) {
     const q = await quiescePalace({ hold: true });
     drainedInfo = { drained: q.drained, forced: q.forced, quiet: q.quiet };
-    procs = liveMempalaceProcs(); // re-snapshot after the drain
+    procs = liveMempalaceProcs().filter((p) => procBlocks(p, selectedDirs, memorySelected)); // re-snapshot, still scoped
   }
 
   // Live-process safety: a positive find REFUSES unless --force overrides. The
