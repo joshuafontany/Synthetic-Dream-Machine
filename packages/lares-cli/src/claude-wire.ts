@@ -72,7 +72,8 @@ function reapMempalaceMcp(): ClaudeWireStep {
  * house (recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
  * kapae) rather than opening a palace of its own. One owner, one writer.
  *
- * Idempotent (skips when already registered); graceful when the `claude` CLI is absent.
+ * Idempotent by CONVERGENCE, never by presence: an aligned seat passes untouched, a drifted one re-aims
+ * at the resolved script. Graceful when the `claude` CLI is absent.
  */
 function registerLaresMcp(): ClaudeWireStep {
   const mcp = resolveLaresMcp();
@@ -83,8 +84,23 @@ function registerLaresMcp(): ClaudeWireStep {
   if (got.error !== undefined) {
     return { item: "mcp:lares", action: "missing-script", detail: "`claude` CLI not found — cannot register the lares seat" };
   }
+  // A registration STANDING never proves it points ANYWHERE real. Presence-idempotence let a moved
+  // script (a package that re-homed its sidecar) leave this seat aimed at a deleted file while the wire
+  // reported success — the harness's door shut silently and every `wake --init` after it skipped the
+  // cure. So converge on the RESOLVED spawn, never on mere presence: a seat whose command/script drifts
+  // from what resolves now gets RE-POINTED (remove → re-add), and an aligned seat passes untouched.
+  let repointed = false;
   if (got.status === 0) {
-    return { item: "mcp:lares", action: "present", detail: "already registered (claude mcp / ~/.claude.json)" };
+    const registered = String(got.stdout ?? "");
+    const aligned = registered.includes(mcp.command) && mcp.args.every((a) => registered.includes(a));
+    if (aligned) {
+      return { item: "mcp:lares", action: "present", detail: "registered + aimed at the resolved sensorium seat" };
+    }
+    const rm = spawnSync("claude", ["mcp", "remove", "-s", "user", "lares"], { encoding: "utf8", timeout: 10_000 });
+    if (rm.status !== 0) {
+      return { item: "mcp:lares", action: "missing-script", detail: `stale seat drifted; \`claude mcp remove\` failed: ${(rm.stderr ?? "").trim().slice(0, 80)}` };
+    }
+    repointed = true;   // the stale seat cleared — the add below re-aims it at the resolved script
   }
   // Arg order matters: the NAME must precede `-e`. `claude mcp add`'s env flag is VARIADIC, so a
   // trailing positional after it gets swallowed as another KEY=VAL and rejected ("Invalid environment
@@ -92,7 +108,7 @@ function registerLaresMcp(): ClaudeWireStep {
   const env = Object.entries(mcp.env).flatMap(([k, v]) => ["-e", `${k}=${v}`]);
   const r = spawnSync("claude", ["mcp", "add", "--scope", "user", "lares", ...env, "--", mcp.command, ...mcp.args], { encoding: "utf8", timeout: 15_000 });
   return r.status === 0
-    ? { item: "mcp:lares", action: "wired", detail: `claude mcp add — the memory sensorium via ${mcp.args[0] ?? "lares_mcp.py"}` }
+    ? { item: "mcp:lares", action: "wired", detail: `${repointed ? "re-aimed a drifted seat" : "claude mcp add"} — the memory sensorium via ${mcp.args[0] ?? "lares_mcp.py"}` }
     : { item: "mcp:lares", action: "missing-script", detail: `claude mcp add failed: ${(r.stderr ?? "").trim().slice(0, 80)}` };
 }
 
