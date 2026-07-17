@@ -30,9 +30,13 @@ export interface Tw5FileInfo {
   readonly ext: string;
   /** The FILE type (not the tiddler type): application/x-tiddler | application/json | a content-type. */
   readonly type: string;
+  /** The file type's byte encoding — "utf8" for text, "base64" for a binary type
+   *  (image/PDF). The projector decodes a "base64" body to raw bytes before it
+   *  writes, so an image lands as its real bytes, not its base64 text. */
+  readonly encoding: string;
   /** True when a companion `<relPath>.meta` sidecar carries the fields. */
   readonly hasMetaFile: boolean;
-  /** Bytes for the main file. */
+  /** Bytes for the main file (a "base64" encoding carries base64 text here). */
   readonly body: string;
   /** Bytes for the `.meta` sidecar, present only when hasMetaFile. */
   readonly metaBody?: string;
@@ -131,6 +135,9 @@ export function makeTw5FileInfo(
   const contentTypeInfo = $tw.config.contentTypeInfo[fileType] || { extension: "" };
   const extRaw = extOverride || contentTypeInfo.extension || "";
   const ext: string = Array.isArray(extRaw) ? (extRaw[0] ?? "") : extRaw;
+  // The FILE type's byte encoding — a binary type (image/PDF) reads "base64";
+  // the projector decodes the base64 body to raw bytes before it writes.
+  const encoding: string = (contentTypeInfo as { encoding?: string }).encoding === "base64" ? "base64" : "utf8";
 
   // ── Path (filesystem.js:317-381, PURE part) ─────────────────────────────
   let base = firstFilterResult($tw, title, opts.pathFilters);
@@ -165,5 +172,5 @@ export function makeTw5FileInfo(
     body = JSON.stringify([tiddler.getFieldStrings({ exclude: ["bag"] })], null, jsonSpaces);
   }
 
-  return { relPath, ext, type: fileType, hasMetaFile, body, ...(metaBody !== undefined ? { metaBody } : {}) };
+  return { relPath, ext, type: fileType, encoding, hasMetaFile, body, ...(metaBody !== undefined ? { metaBody } : {}) };
 }

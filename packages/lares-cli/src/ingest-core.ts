@@ -59,6 +59,21 @@ export function openSyncedTree(): SyncedTree {
 }
 
 /**
+ * Read a carrier's bytes as the string form the tiddler `text` field holds — utf8
+ * for a text filetype, base64 for a binary one (image/PDF). The detection needs no
+ * registry and no extension list: bytes that survive a utf8 round-trip ARE text;
+ * bytes that do not ARE binary, and ride as base64 (the island stores the base64
+ * as-is, the projector decodes it back to raw bytes). A base64 body carries no
+ * SOH heading, so it routes to the native filetype path exactly as it should.
+ */
+export function readCarrierText(file: string): { text: string; binary: boolean } {
+  const buf  = readFileSync(file);
+  const utf8 = buf.toString("utf8");
+  if (Buffer.from(utf8, "utf8").equals(buf)) return { text: utf8, binary: false };
+  return { text: buf.toString("base64"), binary: true };
+}
+
+/**
  * List the carriers under a source — a directory walks recursively for every
  * REAL file (a `.meta` sidecar rides with its content file, never as a carrier
  * of its own), a single file lists itself. Returns null when the source does
@@ -115,7 +130,8 @@ export function scanFiles(
     if (!uri) { skipped.push(file); continue; }
     const ext = extname(file);
     let text: string;
-    try { text = readFileSync(file, "utf8"); } catch {
+    let binary: boolean;
+    try { ({ text, binary } = readCarrierText(file)); } catch {
       // A path gone from disk that the Synced tree still projects = a deletion
       // candidate (the watcher feeds vanished paths; the grace window + the
       // island gate confirm before any tombstone). An unknown gone path skips.
@@ -124,9 +140,10 @@ export function scanFiles(
       else skipped.push(file);
       continue;
     }
-    // The NFC membrane assertion (spec: memetic-wikitext #carrier-bytes) —
-    // foreign bytes first walk in HERE; non-NFC refuses loudly, never enters.
-    if (text !== text.normalize("NFC")) {
+    // The NFC membrane assertion (spec: memetic-wikitext #carrier-bytes) — foreign
+    // TEXT bytes first walk in HERE; non-NFC refuses loudly, never enters. A binary
+    // carrier rides base64 (pure ASCII), so the NFC law does not touch it.
+    if (!binary && text !== text.normalize("NFC")) {
       rows.push({ file, uri, text, diskHash: "", syncedHash: null, status: "non-nfc", ext });
       continue;
     }

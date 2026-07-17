@@ -297,9 +297,10 @@ export class LarDiskProjector {
   /** Write bytes atomically: a temp file in the SAME dir, then rename over the
    *  target — a watcher or editor never observes a torn file, and a crash leaves
    *  only a stray temp. */
-  private atomicWrite(candidate: string, body: string): void {
+  private atomicWrite(candidate: string, body: string | Buffer): void {
     const tmp = `${candidate}.lar-tmp-${process.pid}`;
-    writeFileSync(tmp, body, "utf-8");
+    if (typeof body === "string") writeFileSync(tmp, body, "utf-8");
+    else writeFileSync(tmp, body);
     renameSync(tmp, candidate);
   }
 
@@ -325,6 +326,12 @@ export class LarDiskProjector {
     const relPath  = base + file.ext;
     const output   = file.body;
     const metaBody = file.metaBody;
+    // A binary filetype (image/PDF) carries base64 text in `body`; the raw bytes
+    // land on disk. The Synced-tree observation + the ingest gesture BOTH hash the
+    // base64 string form (the carrier text), so the echo gate compares like with
+    // like; only the physical file holds decoded bytes.
+    const isBinary  = file.encoding === "base64";
+    const writeBytes: string | Buffer = isBinary ? Buffer.from(output, "base64") : output;
 
     // The disk ward — sovereign-island write confinement (bag-paths). Cascade
     // output counts as untrusted; refusals surface LOUDLY, never silently.
@@ -344,7 +351,12 @@ export class LarDiskProjector {
     const metaPath   = metaBody !== undefined ? candidate + ".meta" : null;
     const metaInSync = metaPath === null || (existsSync(metaPath) && safeReadEquals(metaPath, metaBody!));
     try {
-      if (existsSync(candidate) && contentHash(readFileSync(candidate, "utf-8")) === outputHash && metaInSync) {
+      // The body-skip reads BYTES for a binary file (a utf8 read would mangle the
+      // raw bytes and never match), else hashes the utf8 text against the carrier.
+      const bodyInSync = existsSync(candidate) && (isBinary
+        ? readFileSync(candidate).equals(writeBytes as Buffer)
+        : contentHash(readFileSync(candidate, "utf-8")) === outputHash);
+      if (bodyInSync && metaInSync) {
         this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
         return;
       }
@@ -355,7 +367,7 @@ export class LarDiskProjector {
       mkdirSync(dirname(candidate), { recursive: true });
       // Atomic write (§2 law): temp in the SAME dir + rename — no watcher or
       // editor ever observes a torn carrier; a crash leaves only a temp file.
-      this.atomicWrite(candidate, output);
+      this.atomicWrite(candidate, writeBytes);
       // The `.meta` sidecar carries the tiddler's fields for a content filetype;
       // it lands beside the body, atomic too, so a reader never pairs a fresh
       // body with a stale sidecar.

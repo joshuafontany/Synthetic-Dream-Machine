@@ -61,6 +61,9 @@ export interface CarrierFile {
   readonly ext:       string;
   readonly body:      string;
   readonly metaBody?: string;
+  /** "base64" when the body is base64 text the projector must decode to raw
+   *  bytes (a binary filetype — image/PDF); "utf8"/absent for a text carrier. */
+  readonly encoding?: string;
 }
 
 /**
@@ -94,5 +97,6 @@ export function exportCarrierFile(tw5: TW5Engine, memeUri: string): CarrierFile 
     ext:  info.ext,
     body: info.body,
     ...(info.hasMetaFile && info.metaBody !== undefined ? { metaBody: info.metaBody } : {}),
+    ...(info.encoding === "base64" ? { encoding: "base64" } : {}),
   };
 }

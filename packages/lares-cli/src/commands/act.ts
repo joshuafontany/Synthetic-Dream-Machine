@@ -35,6 +35,7 @@ import { join, extname, resolve, relative, sep } from "node:path";
 import { statSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
+import { readCarrierText } from "../ingest-core.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId, OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -160,11 +161,11 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
       // the island routes by content (an SOH heading → the memetic membrane; else
       // TW5's own deserializer registry, keyed by extension). Only an empty /
       // whitespace-only file is skipped — it holds no carrier and would reject the
-      // whole batch (the validator forbids an empty-text carrier).
-      // TODO(binary): read per TW5's content-type encoding (base64 for images/PDF)
-      //   and carry an `encoding` field; today the feed reads utf8 (text filetypes).
+      // whole batch (the validator forbids an empty-text carrier). A binary
+      // filetype (image/PDF) rides base64 — the island stores it, the projector
+      // decodes it back to raw bytes; a text filetype rides utf8.
       const carriers = paths
-        .map((f) => ({ f, text: readFileSync(f, "utf8") }))
+        .map((f) => ({ f, text: readCarrierText(f).text }))
         .filter(({ f, text }) => {
           if (text.trim().length === 0) {
             console.error(`lares act LOAD: skipping empty file "${f}" — no content to land`);
