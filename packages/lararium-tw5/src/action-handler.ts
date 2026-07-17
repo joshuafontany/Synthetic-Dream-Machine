@@ -48,6 +48,7 @@ import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import type { TW5Instance } from "./types/tiddlywiki.js";
 import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
+import { makeTw5FileInfo } from "./tw5-file-info.js";
 import { decideIngest } from "./ingest-gate.js";
 import { gradeOf } from "./meme-ast/diagnostics.js";
 import { decideDeletions } from "./delete-gate.js";
@@ -75,6 +76,13 @@ export interface Tw5Deserializer {
    *  the deserialize so a content carrier keeps its type/tags/custom fields
    *  across a body-only edit. */
   parseFields(metaText: string): Record<string, unknown>;
+  /** Render a native record to its carrier BODY bytes (the file-info body, the
+   *  same digest surface the projector + the ingest echo gate key on). The
+   *  INGEST gate hashes this to detect a native carrier's canonical-equivalence
+   *  (a cosmetic edit) and a conflict (both disk AND records moved) — so a native
+   *  filetype honors the same §6 law as a memetic carrier, never a silent
+   *  last-write-wins overwrite. */
+  renderCarrier(uri: string, fields: Record<string, unknown>): string;
 }
 
 /**
@@ -91,6 +99,7 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
       const utils = engine.$tw.utils as { parseFields?: (t: string, f?: Record<string, unknown>) => Record<string, unknown> };
       return typeof utils.parseFields === "function" ? (utils.parseFields(metaText) ?? {}) : {};
     },
+    renderCarrier: (uri, fields) => makeTw5FileInfo(engine.$tw, uri, fields).body,
   };
 }
 
@@ -586,6 +595,30 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
         return { ...fields, title: own || uri };
       });
+
+      // §6 for a native carrier — the SAME triangle a memetic carrier runs, via
+      // the registry's own render (the file-info BODY, the digest surface the
+      // projector + echo gate share). Without it a native carrier read
+      // last-write-wins over a wiki-side edit (a silent §6 overwrite).
+      const rootFresh = freshRecords.find((r) => r["title"] === uri) ?? freshRecords[0];
+      const currentRec = await readFromBag(access, action.toBag, uri);
+      if (rootFresh) {
+        const candidateHash = sha256HexSync(tw5!.renderCarrier(uri, rootFresh));
+        const currentHash   = currentRec
+          ? sha256HexSync(tw5!.renderCarrier(uri, currentRec.tiddler as unknown as Record<string, unknown>))
+          : null;
+        // canonical-equivalent: the disk edit renders to what the records already hold.
+        if (currentHash !== null && candidateHash === currentHash) {
+          results.push({ uri, decision: "noop", reason: "canonical-equivalent" });
+          continue;
+        }
+        // both moved since the merge base (records shifted AND disk passed the echo
+        // gate) → surface, never overwrite (Unison's law).
+        if (currentHash !== null && carrier.syncedHash !== null && currentHash !== carrier.syncedHash) {
+          results.push({ uri, decision: "conflict", filetype: carrier.ext || "text/plain" });
+          continue;
+        }
+      }
       receipt = { uri, decision: "ingest", filetype: carrier.ext || "text/plain" };
     }
 

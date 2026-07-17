@@ -44,7 +44,7 @@ import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, readdir
 import { dirname, basename } from "path";
 import { confineMirrorWrite, carrierBaseRelPath } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
-import { isEffectRecordUri, KeyedCoalesceGate, stripMemeExt } from "@lararium/mesh";
+import { isEffectRecordUri, KeyedCoalesceGate } from "@lararium/mesh";
 import type { ReadinessMap, WindowServo } from "@lararium/mesh";
 import type { TW5Engine, CarrierFile } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -377,7 +377,11 @@ export class LarDiskProjector {
         const jsonStr = (this._tw5.$tw.wiki as { getTiddlerAsJson?: (t: string) => string })
           .getTiddlerAsJson?.(tiddlerUri);
         if (jsonStr) {
-          const jsonPath = stripMemeExt(candidate) + ".json";
+          // Ride as a `.json` AFTER the full filename (`base.mem.json`), not
+          // `base.json` — a bare-stem sibling would be a carrier of stem `base`,
+          // and the straggler sweep would delete it every flush. The double
+          // extension keeps it OUT of `carrierDiskFiles`' single-segment match.
+          const jsonPath = candidate + ".json";
           writeFileSync(jsonPath, jsonStr, "utf-8");
         }
       }
