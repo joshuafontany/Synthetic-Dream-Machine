@@ -53,6 +53,35 @@ def sensorium_paths(root: str) -> SensoriumPaths:
     )
 
 
+def _lar_data_home() -> str:
+    """Resolve the data home the SAME way TS `larDataHome` (xdg-base.ts) resolves it: `LAR_ROOT/data`
+    for an isolated instance, else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`). The two
+    views stay byte-identical by convention so a name a caller addresses lands on the one root both
+    surfaces name."""
+    lar_root = os.environ.get("LAR_ROOT")
+    if lar_root:
+        return os.path.join(lar_root, "data")
+    xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
+    return os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
+
+
+def sensorium_dir(name: str) -> str:
+    """Turn a sensorium NAME into its root — `<data>/sensoriums/<name>` — mirroring TS `sensoriumDir`
+    (vessel-paths.ts). The one seam a `lares sense <sensorium>` / MCP `sensorium=` address crosses to
+    reach a target root; `memory` resolves the same dir the memory default names."""
+    return os.path.join(_lar_data_home(), "sensoriums", name)
+
+
+def sensorium_names() -> "list[str]":
+    """Roster every sensorium standing under `<data>/sensoriums` — the names an address may reach.
+    Mirrors TS `sensoriumNames`; an absent dir reads as an empty roster rather than raising."""
+    root = os.path.join(_lar_data_home(), "sensoriums")
+    try:
+        return sorted(e.name for e in os.scandir(root) if e.is_dir())
+    except OSError:
+        return []
+
+
 @dataclass(frozen=True)
 class PersistenceCap:
     """A rooted testimony capability declaration.

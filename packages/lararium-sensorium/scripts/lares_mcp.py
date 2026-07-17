@@ -21,7 +21,7 @@ import worldline_io as wl
 import lares_uds as uds
 from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
-from sensorium import sensorium_paths, read_stream_manifest
+from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
@@ -403,60 +403,91 @@ def build_mcp(coordinator: LaresCoordinator):
 
     mcp = FastMCP("lares")
 
+    # The addressed-sensorium seam: an AI names a sensorium; the tool resolves the name to its root and
+    # threads it up the @daemon cap-ladder (the routed recall/capture/refresh verbs pick the holder by
+    # root). Absent → the memory default. A standalone coordinator binds ONE palace at construction, so a
+    # name resolving to a DIFFERENT root refuses rather than reading the wrong store; the routed router
+    # holds no palace, so it carries the root across to whichever holder owns it.
+    bound_root = getattr(coordinator, "_palace", None)   # standalone holds one root; the router holds none
+    routed = bound_root is None
+
+    def _address(sensorium: "str | None") -> "str | None":
+        if not sensorium:
+            return None
+        root = sensorium_dir(sensorium)
+        if bound_root is not None and os.path.realpath(root) != os.path.realpath(bound_root):
+            raise ValueError(f"--standalone opens ONE sensorium ({bound_root}); addressing {sensorium!r} "
+                             "rides the routed @daemon (drop --standalone, or name the bound sensorium)")
+        return root
+
+    def _call(verb: str, sensorium: "str | None", *args, **kwargs):
+        """Resolve the addressed sensorium and drive the shared coordinator: the router carries the root
+        across; the bound standalone already owns its one palace, so it needs no root threaded in."""
+        root = _address(sensorium)
+        method = getattr(coordinator, verb)
+        return method(*args, sensorium_root=root, **kwargs) if routed else method(*args, **kwargs)
+
     @mcp.tool()
     def harvest(surface: str, pointer: str, all: bool = False, writeback: bool = False,
                 dry_run: bool = False, wing: "str | None" = None,
-                room: str = "conversations") -> dict:
-        """Capture a surface's transcript (claude/codex/copilot) into the Memory sensorium. `all` sweeps
-        every surface, `writeback` re-enriches a wing, `dry_run` previews."""
-        return coordinator.harvest(surface, pointer, all=all, writeback=writeback, dry_run=dry_run,
-                                   wing=wing, room=room)
+                room: str = "conversations", sensorium: "str | None" = None) -> dict:
+        """Capture a surface's transcript (claude/codex/copilot) into a sensorium (`sensorium` names it;
+        absent → memory). `all` sweeps every surface, `writeback` re-enriches a wing, `dry_run` previews."""
+        return _call("harvest", sensorium, surface, pointer, all=all, writeback=writeback, dry_run=dry_run,
+                     wing=wing, room=room)
 
     @mcp.tool()
     def recall(query: str, k: int = 8, wing: "str | None" = None, drawer: "str | None" = None,
-               list: bool = False, agent: "str | None" = None, surface: "str | None" = None) -> dict:
-        """Recall the nearest turns to a query from the Memory sensorium. `drawer` fetches one verbatim;
-        `list` reports the taxonomy; wing/agent/surface narrow. (Enrichment filters deferred until the
-        sensorium breathes — they left the surface to stay isomorphic with the CLI.)"""
-        return coordinator.recall(query, k, wing=wing, drawer=drawer, list=list, agent=agent, surface=surface)
+               list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
+               sensorium: "str | None" = None) -> dict:
+        """Recall the nearest turns to a query from a sensorium (`sensorium` names it; absent → memory).
+        `drawer` fetches one verbatim; `list` reports the taxonomy; wing/agent/surface narrow. (Enrichment
+        filters deferred until the sensorium breathes — they left the surface to stay isomorphic with the CLI.)"""
+        return _call("recall", sensorium, query, k, wing=wing, drawer=drawer, list=list,
+                     agent=agent, surface=surface)
 
     @mcp.tool()
-    def status() -> dict:
-        """Report what the sensorium holds (the taxonomy)."""
-        return coordinator.status()
+    def status(sensorium: "str | None" = None) -> dict:
+        """Report what a sensorium holds (the taxonomy). `sensorium` names it; absent → memory."""
+        return _call("status", sensorium)
 
     @mcp.tool()
-    def worldline(selector: "str | None" = None) -> dict:
-        """Render the fork-DAG rhizome of turns. `selector` names which run/handle to walk."""
-        return coordinator.worldline(selector)
+    def worldline(selector: "str | None" = None, sensorium: "str | None" = None) -> dict:
+        """Render the fork-DAG rhizome of turns. `selector` names which run/handle to walk; `sensorium`
+        names the sensorium (absent → memory)."""
+        return _call("worldline", sensorium, selector)
 
     @mcp.tool()
-    def kapae(branch: str, tick: int) -> dict:
-        """Mute a worldline branch (a fork-path-dead-end) + cascade the mute across the sensorium."""
-        return coordinator.kapae(branch, tick)
+    def kapae(branch: str, tick: int, sensorium: "str | None" = None) -> dict:
+        """Mute a worldline branch (a fork-path-dead-end) + cascade the mute across a sensorium
+        (`sensorium` names it; absent → memory)."""
+        return _call("kapae", sensorium, branch, tick)
 
     @mcp.tool()
-    def un_kapae(branch: str, tick: int) -> dict:
-        """Restore a previously kapae-muted branch across the sensorium."""
-        return coordinator.un_kapae(branch, tick)
+    def un_kapae(branch: str, tick: int, sensorium: "str | None" = None) -> dict:
+        """Restore a previously kapae-muted branch across a sensorium (`sensorium` names it; absent → memory)."""
+        return _call("un_kapae", sensorium, branch, tick)
 
     @mcp.tool()
-    def recall_structure(query_or_cid: str, k: int = 8) -> dict:
+    def recall_structure(query_or_cid: str, k: int = 8, sensorium: "str | None" = None) -> dict:
         """Query the STRUCTURE plane: a 64-hex cid resolves to its structural entry (provenance
-        join); any other text parses to a content-free tree and recalls the nearest SHAPES."""
-        return coordinator.recall_structure(query_or_cid, k)
+        join); any other text parses to a content-free tree and recalls the nearest SHAPES. `sensorium`
+        names the sensorium (absent → memory)."""
+        return _call("recall_structure", sensorium, query_or_cid, k)
 
     @mcp.tool()
-    def recall_form(query_or_cid: str, k: int = 8) -> dict:
+    def recall_form(query_or_cid: str, k: int = 8, sensorium: "str | None" = None) -> dict:
         """Query the FORM plane by cid: the record's induced-template membership + its
-        nearest-by-membership neighbors. Text queries answer an honest null."""
-        return coordinator.recall_form(query_or_cid, k)
+        nearest-by-membership neighbors. Text queries answer an honest null. `sensorium` names the
+        sensorium (absent → memory)."""
+        return _call("recall_form", sensorium, query_or_cid, k)
 
     @mcp.tool()
-    def plane_record(cid: str) -> dict:
+    def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
         """The cross-plane witness: one cid -> presence + payload summary across content,
-        structure and form (honest nulls where a plane lacks it)."""
-        return coordinator.plane_record(cid)
+        structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
+        (absent → memory)."""
+        return _call("plane_record", sensorium, cid)
 
     return mcp
 
@@ -491,7 +522,7 @@ class DaemonCoordinator:
         )
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None,
-               drawer: "str | None" = None, **_) -> dict:
+               drawer: "str | None" = None, sensorium_root: "str | None" = None, **_) -> dict:
         args: dict = {"limit": k}
         if drawer:
             args["drawer"] = drawer
@@ -499,6 +530,10 @@ class DaemonCoordinator:
             args["query"] = query
         if wing or self._wing != "wing_default":
             args["wing"] = wing or self._wing
+        # The addressed sensorium (an AI names it; the tool resolved it to a root) — the @daemon recall
+        # verb picks the holder by root up the cap-ladder. Absent → the memory default the daemon holds.
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
         return uds.output("recall", args)
 
     def harvest(self, *a, **k):          return self._owed("harvest")
