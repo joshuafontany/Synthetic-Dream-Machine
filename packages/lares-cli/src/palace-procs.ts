@@ -43,6 +43,7 @@ export type ProcKind =
   | "chroma"         // chromadb / chroma run                          (the vector backend)
   | "node-vessel"    // the lararium node daemon holding the WS port
   | "ingest-hook"    // lares-mempalace-ingest-hook.sh                 (the Stop/SessionEnd SPAWNER)
+  | "capture-holder" // capture_session.py --serve                     (the sovereign serialized writer)
   | "capture-job"    // lares capture …                               (drawer leg — mints a daemon)
   | "subagents-job"  // lares subagents …                            (spirit leg — mints a daemon)
   | "telemetry-job"; // lares telemetry …                            (gradient leg — mints a daemon)
@@ -60,6 +61,7 @@ export const KIND_META: Readonly<Record<ProcKind, KindMeta>> = {
   "one-shot-mine": { holdsStore: true,  mintsDaemons: false, label: "one-shot mine" },
   "chroma":        { holdsStore: true,  mintsDaemons: false, label: "chroma backend" },
   "node-vessel":   { holdsStore: false, mintsDaemons: false, label: "lararium node (WS port)" },
+  "capture-holder":{ holdsStore: true,  mintsDaemons: false, label: "capture session holder (sovereign)" },
   "ingest-hook":   { holdsStore: false, mintsDaemons: true,  label: "ingest hook (SPAWNER)" },
   "capture-job":   { holdsStore: false, mintsDaemons: true,  label: "capture leg" },
   "subagents-job": { holdsStore: false, mintsDaemons: true,  label: "subagents leg" },
@@ -144,6 +146,8 @@ export function classifyKind(args: string): ProcKind | null {
   // mempalace python module invocations.
   if (/mempalace\.daemon\b.*\bserve\b|\bdaemon\.py\b.*\bserve\b/.test(args)) return "write-daemon";
   if (/mempalace[._-]mcp(_server)?|mempalace\.mcp_server|mempalace-mcp/.test(args)) return "read-sidecar";
+  // The sovereign serialized capture writer — capture_session.py --serve holds the content palace singleton.
+  if (/capture_session\.py.*--serve/.test(args)) return "capture-holder";
   // A `mempalace … mine …` (console script, `-m mempalace … mine`, or a direct mine).
   if (/\bmempalace\b.*\bmine\b/.test(args)) return "one-shot-mine";
   // The chroma vector backend (rare as a standalone proc, but possible).
@@ -158,6 +162,11 @@ export function classifyKind(args: string): ProcKind | null {
 /** Extract the `serves-what` cell for a classified proc. */
 function servesOf(kind: ProcKind, args: string, port?: number): string {
   if (kind === "node-vessel") return port ? `ws:${port}` : "WS port";
+  // The capture holder keys on its --sensorium root (the content palace lives beneath it).
+  if (kind === "capture-holder") {
+    const sens = args.match(/--sensorium(?:[=\s])(\S+)/);
+    return sens?.[1] ? `${sens[1]}/content` : KIND_META[kind].label;
+  }
   const palace = args.match(/--palace(?:[=\s])(\S+)/);
   const wing   = args.match(/--wing(?:[=\s])(\S+)/);
   // The `lares` hook legs are keyed by their WING (their domain); a stray `--palace`

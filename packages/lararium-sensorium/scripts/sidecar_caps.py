@@ -410,6 +410,25 @@ def serve_loop(dispatch, in_fd: int, out, *, idle_ttl: float) -> None:
 # ---------------------------------------------------------------------------
 
 
+def _arm_parent_death_signal() -> None:
+    """Linux: ask the kernel to SIGTERM this holder the moment its PARENT (the spawning daemon) dies.
+
+    serve_loop already exits on stdin-EOF — but only once it RETURNS to the read loop, so a holder deep
+    in a long dispatch (a big capture pass) never notices the daemon left and lingers as an ORPHAN holding
+    the per-palace singleton flock, blocking the next daemon's holder. The kernel death-signal reaps it
+    even mid-pass. A no-op off Linux / without libc (the stdin-EOF + idle-ttl lifetime still bounds it);
+    guards the race where the parent already died before we armed (getppid()==1 → exit now)."""
+    try:
+        import ctypes
+        import os
+        import signal
+        ctypes.CDLL("libc.so.6", use_errno=True).prctl(1, int(signal.SIGTERM))  # PR_SET_PDEATHSIG
+        if os.getppid() == 1:  # the parent reaped before we armed — don't linger orphaned
+            os._exit(0)
+    except Exception:
+        pass  # non-Linux / no libc — fall back to the stdin-EOF + idle-ttl lifetime
+
+
 def run_sidecar(
     *,
     palace,
@@ -429,6 +448,7 @@ def run_sidecar(
     after the lock is held, so a refused second holder never opens a store (the
     reap-don't-pile invariant). When ``palace is None`` (an encode-only holder) the
     lock is skipped and the loop runs lock-free."""
+    _arm_parent_death_signal()   # reap this holder when its spawning daemon dies (no mid-pass orphan)
     lock = None
     if require_lock and palace is not None:
         lock = acquire_serve_lock(palace, lock_prefix)

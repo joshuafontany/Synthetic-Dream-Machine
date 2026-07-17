@@ -89,6 +89,7 @@ const KIND_TAG: Readonly<Record<ProcKind, string>> = {
   "one-shot-mine": "MINE   ",
   "chroma":        "CHROMA ",
   "node-vessel":   "VESSEL ",
+  "capture-holder":"CAP-HOLD",
   "ingest-hook":   "HOOK   ",
   "capture-job":   "CAPTURE",
   "subagents-job": "SPIRITS",
