@@ -54,15 +54,17 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   // `--k` mirrors the MCP tool arg; `--limit` survives as a back-compat alias (--k wins).
   const limit   = args.options["k"] ?? args.options["limit"];
   const wantList = args.flags["list"];
-  // The PHYSICS/STRUCTURAL filters (agent · surface) — a filter alone implies --list. The ENRICHMENT
-  // filters (voice/band/drift) are not on this surface — the CLI stays isomorphic with the /mcp recall
-  // tool, both carrying only wing/agent/surface.
-  const filterKeys = ["agent", "surface"] as const;
+  // The provenance filters (agent · surface) + the block-taxonomy filters (speaker · channel · function)
+  // — a filter alone implies --list. speaker="operator" surfaces the operator's steering as its own
+  // stratum; channel="speech" the loud voices; function names one role. The CLI stays isomorphic with the
+  // /mcp recall tool, both carrying the same filter set. (Enrichment filters voice/band/drift not here.)
+  const filterKeys = ["agent", "surface", "speaker", "channel", "function"] as const;
   const hasFilters = filterKeys.some((k) => args.options[k] !== undefined);
 
   if (!query && !drawer && !wantList && !hasFilters) {
     console.error("usage: lares sense recall <keywords...> | --drawer <id> | --list [--wing <w>] [--k <n>]");
     console.error("  filters: --agent <id> --surface <claude|codex|copilot-cli|copilot-vscode>");
+    console.error("           --speaker <operator|agent|harness> --channel <speech|thought|tool> --function <steering|surface|scaffold|thinking|action|result>");
     return 2;
   }
 
