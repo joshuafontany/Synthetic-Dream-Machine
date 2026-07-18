@@ -10,6 +10,10 @@ classifies, never decides; it only moves bytes across the boundary.
 Tensegrity: the verbatim drawer is the compression member (untouched content);
 our `lar_*` metadata is the tension written onto it.
 
+Our side of the boundary speaks the loci/imago spatial schema (`loci.open_loci`): a placed drawer is an
+imago at a locus. The nakama keeps its drawer ontology inside its submodule — this seam wraps it, names
+our side, and delegates straight to the nakama palace API, so the store and flows stay the upstream's.
+
   export --wing W [--limit N]   -> NDJSON {id, content} on stdout, only drawers
                                     not yet at the current harvest version (idempotent)
   apply  PATCHFILE               <- NDJSON {id, patch} ; merges patch onto each
@@ -24,7 +28,8 @@ import json
 import os
 import sys
 
-from mempalace.palace import get_collection
+from loci import open_loci  # our loci/imago seam — the nakama drawer-store is its first schema
+from mempalace.palace import get_collection  # direct, for the FORM store (a plane, not a locus-schema)
 
 # This batch CLI's cap-stack is light: it #has the shared NDJSON record reader and
 # the store-readback cap (no serve loop / flock / idle-reap — those belong to the
@@ -94,7 +99,9 @@ def _palace() -> str:
 
 
 def _col():
-    return get_collection(_palace(), _skip_identity_check=True)
+    # Our side speaks loci/imago; the nakama drawer-store is the first concrete schema behind the seam.
+    # open_loci delegates straight to the nakama palace API, so the store + flows stay the upstream's.
+    return open_loci(_palace()).locus_store()
 
 
 def cmd_export(args):
