@@ -298,12 +298,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // ADDRESSED: `sensoriumRoot` picks any sensorium's holder up the ladder (ai-sessions → text → encoded).
     search: async (a) => {
       const root = typeof a["sensoriumRoot"] === "string" ? a["sensoriumRoot"] : undefined;
-      const query = typeof a["query"] === "string" ? a["query"] : "";
-      const k = typeof a["limit"] === "number" ? a["limit"]
-              : typeof a["nResults"] === "number" ? a["nResults"]
-              : typeof a["k"] === "number" ? a["k"] : undefined;
-      const wing = typeof a["wing"] === "string" ? a["wing"] : undefined;
-      return await recallFor(root).recall({ query, ...(k !== undefined ? { limit: k } : {}), ...(wing ? { wing } : {}) });
+      // Forward the CLI args VERBATIM to the one Python coordinator. The daemon holds NO filter knowledge:
+      // recall_session introspects LaresCoordinator.recall — the SINGLE source of truth for the filter set —
+      // and forwards whatever it accepts, dropping the rest. So a new recall filter needs zero change here
+      // (2 surfaces, 1 API — the collapse: the API signature is the capability, the surfaces just forward).
+      const { sensoriumRoot: _sensoriumRoot, ...req } = a;
+      return await recallFor(root).recall(req);
     },
     getDrawer: async (drawerId) => {
       recallContent ??= makeContentPalace(larContentDir());

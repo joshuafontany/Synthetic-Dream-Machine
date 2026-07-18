@@ -13,12 +13,20 @@ Meme: lar:///ha.ka.ba/lares/sensorium/recall-holder
 from __future__ import annotations
 
 import argparse
+import inspect
 
 from lares_mcp import LaresCoordinator
 from sensorium import sensorium_paths
 from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
 
 _LOCK_PREFIX = "recall_session_serve"
+
+# The recall filter-set is declared ONCE — on LaresCoordinator.recall. The holder forwards whatever the
+# API accepts and re-declares NOTHING: a new filter (a new stratum axis, a new mode) needs zero change
+# here. query/k ride positionally; every other recall param forwards by name when the request carries it
+# (a bool-typed param coerces from truthiness). This is the collapse — 2 surfaces, 1 API, one source.
+_RECALL_KWARGS = {name: p for name, p in inspect.signature(LaresCoordinator.recall).parameters.items()
+                  if name not in ("self", "query", "k")}
 
 
 class RecallServer:
@@ -37,22 +45,21 @@ class RecallServer:
 
         The daemon recall verb + CLI read the `{results:[{text,similarity,wing,room,cid}]}` shape, so the
         search face MAPS the coordinator's `matches` into it (drawer/list pass through unchanged). This is
-        the one adaptation the read-holder owns — the coordinator stays the pure engine."""
+        the one adaptation the read-holder owns — the coordinator stays the pure engine. The holder forwards
+        every recall arg the API accepts (below), re-declaring no filter of its own."""
         drawer = req.get("drawer") or None
         as_list = bool(req.get("list"))
-        out = self._coord.recall(
-            str(req.get("query") or ""),
-            int(req.get("k") or req.get("limit") or 8),
-            wing=(req.get("wing") or None),
-            drawer=drawer,
-            list=as_list,
-            agent=(req.get("agent") or None),
-            surface=(req.get("surface") or None),
-            speaker=(req.get("speaker") or None),
-            channel=(req.get("channel") or None),
-            function=(req.get("function") or None),
-            pair=bool(req.get("pair")),
-        )
+        # Forward every recall param the request carries — the API signature is the single source of truth.
+        kwargs = {}
+        for name, p in _RECALL_KWARGS.items():
+            if name not in req:
+                continue
+            if isinstance(p.default, bool):
+                kwargs[name] = bool(req[name])
+            elif req[name] not in (None, ""):
+                kwargs[name] = req[name]
+        out = self._coord.recall(str(req.get("query") or ""),
+                                 int(req.get("k") or req.get("limit") or 8), **kwargs)
         if drawer or as_list or "exchanges" in out:
             return out                                    # drawer entry / taxonomy / paired exchanges — pass through
         results = []
