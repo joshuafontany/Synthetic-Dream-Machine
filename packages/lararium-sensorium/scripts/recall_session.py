@@ -48,6 +48,9 @@ class RecallServer:
             list=as_list,
             agent=(req.get("agent") or None),
             surface=(req.get("surface") or None),
+            speaker=(req.get("speaker") or None),
+            channel=(req.get("channel") or None),
+            function=(req.get("function") or None),
         )
         if drawer or as_list:
             return out                                    # drawer entry / taxonomy — pass through

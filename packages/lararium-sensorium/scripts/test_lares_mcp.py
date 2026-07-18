@@ -46,6 +46,21 @@ def test_coordinator_pour_recall_status(tmp_path):
     assert coord.status()["total"] >= 1             # status reports what the sensorium holds
 
 
+def test_recall_filters_by_the_block_taxonomy(tmp_path):
+    # THE tension this whole ontology answers: the operator's steering recalls as its OWN stratum,
+    # no longer fused into the agent's stream. speaker/channel/function narrow to one taxonomy axis.
+    coord = _coord(tmp_path)
+    coord.pour("claude", _FIXTURE, wing="w")
+    op = coord.recall("engine", 20, speaker="operator")["matches"]
+    assert op and all(m["metadata"].get("lar_speaker") == "operator" for m in op)   # steering, alone
+    speech = coord.recall("engine", 20, channel="speech")["matches"]
+    assert speech and all(m["metadata"].get("lar_channel") == "speech" for m in speech)  # the loud voices
+    tool = coord.recall("Write", 20, channel="tool")["matches"]
+    assert all(m["metadata"].get("lar_channel") == "tool" for m in tool)             # the tool traffic, apart
+    everyone = {m["metadata"].get("lar_speaker") for m in coord.recall("the", 20)["matches"]}
+    assert "operator" in everyone and "agent" in everyone   # unfiltered spans all — steering no longer drowns
+
+
 def _live_turn_keys(coord):
     # the turn-keys RECALL surfaces (search excludes kapae-muted; taxonomy counts physical rows, so the
     # kapae contract reads through recall, not status).

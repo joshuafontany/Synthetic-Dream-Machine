@@ -87,14 +87,21 @@ _STAMP_KEYS = {
     "wing": "wing",
     "surface": "lar_surface",
     "agent": "lar_agent",
+    # the block taxonomy axes — recall the operator's steering as its own stratum (speaker="operator"),
+    # the loud voices (channel="speech"), or one communicative role (function="steering").
+    "speaker": "lar_speaker",
+    "channel": "lar_channel",
+    "function": "lar_function",
 }
 
 
-def _recall_where(*, wing=None, agent=None, surface=None):
-    """Build a chroma `where` from the PHYSICS/STRUCTURAL recall filters — one clause per provided filter,
-    keyed to the slot the capture stamps. Returns None when no filter narrows (the pool stays open). The
-    enrichment filters (voice/band/drift) left the surface — deferred until enrichment emerges."""
-    clauses = {"wing": wing, "agent": agent, "surface": surface}
+def _recall_where(*, wing=None, agent=None, surface=None, speaker=None, channel=None, function=None):
+    """Build a chroma `where` from the recall filters — one clause per provided filter, keyed to the slot
+    the capture stamps. The taxonomy axes (speaker/channel/function) let a recall surface ONE stratum: the
+    operator's steering (speaker="operator"), the loud voices (channel="speech"), a single role. Returns
+    None when no filter narrows (the pool stays open); a many-clause filter ANDs (chroma `$and`)."""
+    clauses = {"wing": wing, "agent": agent, "surface": surface,
+               "speaker": speaker, "channel": channel, "function": function}
     where = {_STAMP_KEYS[name]: val for name, val in clauses.items() if val is not None}
     return where or None
 
@@ -187,6 +194,7 @@ class LaresCoordinator:
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
+               speaker: "str | None" = None, channel: "str | None" = None, function: "str | None" = None,
                lens: str = "content") -> dict:
         """Recall the nearest turns to a query (mirrors `lares sense recall`); kapae-muted turns stay excluded.
 
@@ -200,9 +208,11 @@ class LaresCoordinator:
         Isomorphic: a bare stream sensorium recalls by vector alone; a memory sensorium fuses
         lexical+entity+vector — the SAME machinery reading whatever the stack composes (never a hardcoded list).
 
-        Read modes + PHYSICS/STRUCTURAL filters shed onto this spine: `drawer` fetches ONE verbatim entry by
-        turn-key; `list` reports the taxonomy. A `wing`/`agent`/`surface` filter narrows the vector pool —
-        and, because the lexical/entity projection carries no such filter yet, a FILTERED recall rides the
+        Read modes + filters shed onto this spine: `drawer` fetches ONE verbatim entry by turn-key; `list`
+        reports the taxonomy. A `wing`/`agent`/`surface` filter narrows by provenance; the TAXONOMY filters
+        `speaker`/`channel`/`function` narrow by the block's own axis — so a recall can surface the operator's
+        steering as its own stratum (speaker="operator"), the loud voices (channel="speech"), or one role.
+        Because the lexical/entity projection carries no such filter yet, a FILTERED recall rides the
         content-vector ALONE (honest — never fuse in unfiltered hits); the unfiltered common case fuses the
         full combined-arms."""
         if lens == "structure":
@@ -215,7 +225,8 @@ class LaresCoordinator:
             return self._content.get(drawer) or {}
         if list:
             return self._content.taxonomy()
-        where = _recall_where(wing=wing, agent=agent, surface=surface)
+        where = _recall_where(wing=wing, agent=agent, surface=surface,
+                              speaker=speaker, channel=channel, function=function)
         surfaces = self._recall_surfaces()
         if where or len(surfaces) <= 1:
             # a filtered read, or a bare single-surface sensorium → the content-vector path, unchanged.
