@@ -5,7 +5,7 @@ A Sensorium DERIVES its identity FROM its composed cap-stack; `kind` names its r
 another declared stream policy. Other streams/corpuses attach the same way; the TS @daemon supervises
 the fleet (spawns/points/drains, carries no payload). The pipeline
 (capture) + the recall read-face ride the built caps (capture_stream.Pipeline + content_io); the worldline
-cap (the fork-DAG + kapae) wires in at Phase 4.
+cap (the fork-DAG + kapae) wires in when a rooted composition declares it.
 
 Blind-by-composition (has-stack-ontology): compose REFUSES a missing required cap — a sensorium without
 a source/land/embed cannot exist, rather than erroring later. Meme: lar:///ha.ka.ba/lararium/sensorium/compose.
@@ -391,7 +391,7 @@ class Sensorium:
         self._pipeline = pipeline
         self._pipeline_factory = pipeline_factory
         self._land = land
-        self._worldline = worldline  # the fork-DAG + kapae cap (Phase 4); None until wired
+        self._worldline = worldline  # the fork-DAG + kapae cap; None until a rooted composition wires it
         # Every entity carries the dormant axis. Rooted compositions replace
         # this with a path-bearing declaration, still inactive until a later
         # persistence lifecycle activates testimony handling.

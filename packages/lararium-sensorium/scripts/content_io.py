@@ -44,7 +44,7 @@ IDLE_TTL_ENV = "CONTENT_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 _LOCK_PREFIX = "content_serve"
 
-# The kapae mute-leg (Phase 4) rides two metadata slots. `lar_turn_key` binds a content row to a
+# The kapae mute-leg rides two metadata slots. `lar_turn_key` binds a content row to a
 # worldline turn (the kapae cascade resolves cids by it); `lar_kapae` marks a row MUTED so recall
 # excludes it — a metadata FLAG the block (document+embedding) never sees, so mute stays move-not-
 # delete: the row persists, only the flag flips. A row without the slot reads live (unset = live).
