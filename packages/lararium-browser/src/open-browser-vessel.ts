@@ -22,7 +22,7 @@ import {
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets,
+  BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
@@ -54,6 +54,12 @@ import {
   openVesselIdb, idbGet, idbPut,
 }                                            from "./browser-vessel-identity.js";
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
+
+/** Browser advertises the MINIMAL grant (constrained vessel): a small live-wiki set
+ *  (@daemon always + a couple more on reference) and ONE rotatable pin besides @daemon.
+ *  The resolver honors this smaller grant — the same cap, a lower point on the spectrum. */
+const BROWSER_WIKI_ACTIVATION_CAP = 2;
+const BROWSER_WIKI_PIN_BUDGET     = 1;
 import {
   fetchGenesisCasToOpfs,
 }                                            from "./browser-genesis.js";
@@ -341,6 +347,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
   // ── Residency MECHANISM (parity with node — a tab has finite memory too) ────
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
+  let wikiActivation!: WikiActivationCap;     // set in makePool — activation-on-reference cap (minimal grant)
   let daemon!:     DaemonVmCore;      // set in openDaemon
   let wikiSense!:  WikiSenseSupervisor;   // set in wireVerbs (post-daemon)
   let slotActiveWikiId = "";
@@ -348,9 +355,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // materializes it fresh — never the old merge-into-stale reconcile. No engine
   // CID-diverge merge happens at boot, so this stays false (kept for API parity).
   const engineUpdated = false;
+  // The ONE residency collector — bags AND wiki islands, per-grain-type dials. Sole
+  // authority for reachability + eviction (the pool no longer self-evicts). Browser's
+  // small wiki cap rides the constrained grant; wiki grains heat by re-mounting.
   const residency = new BagResidencyManager({
-    hotCap: 32, idleMs: 300_000, sweepIntervalMs: 30_000,
-    onEvict: async (bagId) => { await vmManager.unmountWiki(bagId); },
+    hotCap: 32, typeCaps: { wiki: BROWSER_WIKI_ACTIVATION_CAP }, idleMs: 300_000, sweepIntervalMs: 30_000,
+    onHydrate: async (id, grainType) => { if (grainType === "wiki") await vmManager.ensureWiki(id); },
+    onEvict:   async (id, grainType) => { if (grainType === "wiki") await vmManager.unmountWiki(id); },
   });
 
   // ── The mesh carriage as a LEAF ───────────────────────────────
@@ -501,11 +512,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // Thin main verb plane (node parity). Every catalog/recipe/residency-mutating
       // daemon verb lives in the worker now (wireWorkerVerbs) — access≠load, write-then-sync.
       // Main keeps only sync-wiki (commands the pool's active wiki) + residency stats (a read).
-      registry.register("sync-wiki", async (args, ctx) =>
-        vmManager.placeWikiVerb(slotActiveWikiId, {
+      registry.register("sync-wiki", async (args, ctx) => {
+        await wikiActivation.ensureActive(slotActiveWikiId);   // reference wakes a cold grain (home wiki: no-op)
+        return vmManager.placeWikiVerb(slotActiveWikiId, {
           verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
-        }),
-      );
+        });
+      });
       registry.register("residency", makeResidencyStatsReactor({ residency }));
       // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
       // actually holds. The seams ARE the supervision grant: designation resolves through the pool
@@ -592,7 +604,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         },
         ...(workerScriptUrl ? { workerScriptUrl } : {}),
       });
-      daemon.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
+      // The activation-on-reference CAP the vessel HOLDS + the resolver READS —
+      // browser advertises the MINIMAL grant (small active set + @daemon; one rotatable pin).
+      wikiActivation = makeWikiActivationCap(residency, vmManager, {
+        activationCap: BROWSER_WIKI_ACTIVATION_CAP,
+        pinBudget:     BROWSER_WIKI_PIN_BUDGET,
+      });
+      // A daemon evict request routes THROUGH the ONE collector (cool → onEvict →
+      // unmountWiki) so the collector stays authoritative (never a desyncing direct unmount).
+      daemon.onEvictRequest(async (bagId) => { await residency.cool(bagId); });
       daemon.onResidencyOp(async (op, bagId, reason) => {
         if (op === "pin")        await residency.pin(bagId, reason);
         else if (op === "unpin") residency.unpin(bagId);
@@ -606,9 +626,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // mailbox (unlike node, which parks), so an unmounted target is a best-effort drop.
       daemon.onWikiAlert((wikiSlug, message, cause) => {
         const wikiId = wikiSlug;
-        void vmManager.placeWikiVerb(wikiId, {
-          verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
-        }).catch(() => { /* not mounted — no browser mailbox, best-effort drop */ });
+        // Resolver-as-activator: a reference ACTIVATES a cold known grain (ensureActive,
+        // single-flight) then delivers. Browser holds no durable mailbox, so a grain that
+        // cannot activate (never opened under retain-only / grant exhausted) is a best-effort
+        // drop — the constrained-vessel degradation (`resolveWikiSpec` is the follow-on).
+        void wikiActivation.ensureActive(wikiId)
+          .then((live) => { if (live) void vmManager.placeWikiVerb(wikiId, {
+            verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
+          }).catch(() => { /* raced cold — best-effort drop */ }); })
+          .catch(() => { /* not activatable — no browser mailbox, best-effort drop */ });
       });
       // The @daemon inherits the render cap (dormant-mounted at boot). Forward its frames into the SAME
       // #projection sink the pool wikis use — gated on the active-surface pointer, so a summoned @daemon paints
@@ -622,6 +648,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     afterLive: ({ wikiHandle }) => {
       // Presence — ephemeral, does not travel via CRDT.
       wikiHandle.broadcast({ did: operatorDid, ts: Date.now() });
+      // Boot DEMOTED to a pin (browser gradient): the @daemon surface stays always-live
+      // on its own; the home wiki registers in the ONE collector as a PINNED `wiki` grain
+      // (the single rotatable pin this constrained vessel grants besides @daemon).
+      // mountPrimaryWiki already mounted + spec-retained it → onHydrate no-ops.
+      void residency.pin(slotActiveWikiId, "boot:home-wiki", "wiki");
     },
   }, [...meshExtraCaps, ...whoExtraCaps]);
 

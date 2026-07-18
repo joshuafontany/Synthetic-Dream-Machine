@@ -112,8 +112,6 @@ export interface VesselIslandPoolCoreOptions {
   mainRepo?: Repo | null;
   /** Held disk-write capability — bag → mirror configs this pool MAY project. */
   diskMirrorGrant?: DiskMirrorGrant;
-  /** Max live unpinned slots before LRU eviction. Infinity = no eviction pressure. */
-  hotCap?: number;
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
   /** The engine's plugin-tiddler CIDs — every wiki island resolves them by CID from the local
@@ -159,7 +157,6 @@ export class VesselIslandPoolCore {
   private readonly _host:           VesselIslandHost;
   private readonly _mainRepo:       Repo | null;
   private readonly _diskMirrorGrant: DiskMirrorGrant;
-  private readonly _hotCap:         number;
   private readonly _onWorkerEvent:  ((wikiId: string, msg: IslandMsg_Event) => void) | null;
   private readonly _pluginCids:     readonly string[];
   private readonly _onEa:           ((wikiId: string) => void) | null;
@@ -178,7 +175,6 @@ export class VesselIslandPoolCore {
     this._host            = opts.host;
     this._mainRepo        = opts.mainRepo ?? null;
     this._diskMirrorGrant = opts.diskMirrorGrant ?? [];
-    this._hotCap          = opts.hotCap ?? Infinity;
     this._onWorkerEvent   = opts.onWorkerEvent ?? null;
     this._pluginCids      = opts.pluginCids ?? [];
     this._onEa            = opts.onEa ?? null;
@@ -267,7 +263,11 @@ export class VesselIslandPoolCore {
       );
     }
 
-    if (!pinned) await this._evictLruIfNeeded();
+    // No self-eviction here: the ONE residency collector (BagResidencyManager +
+    // per-grain-type dials) owns reachability + the wiki cap. It evicts the LRU wiki
+    // through onEvict → unmountWiki as it drives activation, so the pool stays a pure
+    // mount mechanism — one authority, no second collector. `pinned` still rides the
+    // slot below (the collector reads pin-exemption on its own side).
 
     const { mainPort, syncPort } = this._host.newSyncChannel();
     if (this._mainRepo) attachMessageChannelSync(this._mainRepo, mainPort);
@@ -465,16 +465,15 @@ export class VesselIslandPoolCore {
 
   get size(): number { return this._slots.size; }
 
-  // ── Private ───────────────────────────────────────────────────────────────────
-
-  private async _evictLruIfNeeded(): Promise<void> {
-    const hot = [...this._slots.values()].filter(
-      (s): s is IslandSlot => s.temperature === "wela" && !s.pinned,
-    );
-    if (hot.length < this._hotCap) return;
-    const lru = hot.sort((a, b) => a.lastUsedAt - b.lastUsedAt)[0]!;
-    await this.unmountWiki(lru.wikiId);
+  /** Whether a retained mount spec exists for this grain — true when the pool has
+   *  mounted it at least once (so `ensureWiki` can reactivate it). The activation
+   *  cap reads this to distinguish a reactivatable grain from a never-opened one
+   *  (which needs the caller's spec resolution — the `resolveWikiSpec` follow-on). */
+  knowsSpec(wikiId: string): boolean {
+    return this._mountSpecs.has(wikiId);
   }
+
+  // ── Private ───────────────────────────────────────────────────────────────────
 
   private _wireWorkerListeners(wikiId: string, worker: VesselWorkerHandle): void {
     worker.listen((raw: unknown) => {

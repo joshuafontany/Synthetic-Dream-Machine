@@ -20,7 +20,10 @@ import {
 } from "@lararium/mesh";
 import { nodeNewSyncChannel, nodeSpawnWorker } from "./worker-handle.js";
 
-const HOT_CAP = 4;
+/** Node's default live-wiki activation cap — the vessel advertises this as the
+ *  `wiki` typeCap on the ONE residency collector (the collector, not the pool, now
+ *  bounds live wikis). A resource-rich vessel; the browser advertises a smaller grant. */
+export const NODE_WIKI_ACTIVATION_CAP = 4;
 const DEFAULT_WORKER_URL = new URL("./node-wiki-island.js", import.meta.url);
 
 export interface VesselIslandPoolOptions {
@@ -62,7 +65,6 @@ export class VesselIslandPool extends VesselIslandPoolCore {
       },
       mainRepo: options.mainRepo ?? null,
       diskMirrorGrant: options.diskMirrorGrant ?? [],
-      hotCap: HOT_CAP,
       ...(options.pluginCids?.length ? { pluginCids: options.pluginCids } : {}),
       ...(options.onWorkerEvent ? { onWorkerEvent: options.onWorkerEvent } : {}),
       ...(options.onEa ? { onEa: options.onEa } : {}),
