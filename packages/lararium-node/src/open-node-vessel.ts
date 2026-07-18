@@ -796,9 +796,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       else                     residency.registerCold(bagId);
     });
     // Wiki-alert delivery: the worker named an affected wiki; place a system-alert verb
-    // into that wiki's live island (skip silently if not mounted). wikiId = host:slug.
+    // into that wiki's live island (parks durably if not mounted). The pool + the
+    // mailbox drain key a slot by its BARE SLUG (`slotActiveWikiId = sel.slug`;
+    // `placeWikiVerb(slotActiveWikiId, …)`; `onEa(wikiId) → mailbox.drain`), so this
+    // MUST key the bare slug too — keying `${hostId}:${wikiSlug}` here forked the
+    // keyspace: placeWikiVerb never matched a live slot (even the active wiki) and
+    // the parked verb never drained, so every wiki-alert was silently lost.
     daemonVm.onWikiAlert((wikiSlug, message, cause, kind) => {
-      const wikiId = `${hostId}:${wikiSlug}`;
+      const wikiId = wikiSlug;
       const verbOpts = { verb: "system-alert", args: { message, cause: cause ?? "", kind: kind ?? "" }, requestedBy: "daemon" };
       void vmManager.placeWikiVerb(wikiId, verbOpts)
         // Not live → the verb PARKS durably and delivers on next mount —
