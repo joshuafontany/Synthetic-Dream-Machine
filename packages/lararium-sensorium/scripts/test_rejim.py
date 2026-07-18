@@ -1,0 +1,94 @@
+"""test_rejim — DETECT the nameless flows before naming them.
+
+  · detection finds a real content-channel rejim in a refrain-bearing stream, emitted NAMELESS
+    (name=None) with its capability record — the detect-before-name floor.
+  · pure noise fabricates ZERO rejim — the anti-fabrication null (a flow must EARN detection).
+  · the cepat⊥lambat coupling pairs a fast flow nested in a slower one.
+
+    PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_rejim.py -q
+"""
+import numpy as np
+
+from rejim import CONTENT, _amplitude_modulation, couple_rejim, detect_rejim, strip_private
+
+
+def _refrain_text(n_reps: int = 140, seed: int = 11) -> str:
+    """A stream carrying ONE planted content refrain (its >12-char phrase recurs every ~240 ticks) amid
+    varied filler that never recurs — so only the refrain fires the recurrence channel."""
+    rng = np.random.default_rng(seed)
+    refrain = "and the wave returns to the shore once more "
+    out = []
+    for _ in range(n_reps):
+        out.append(refrain)
+        filler = ["".join("aeioukpnmhrstl"[int(c)] for c in rng.integers(0, 14, int(rng.integers(4, 9))))
+                  for _ in range(int(rng.integers(22, 30)))]
+        out.append(" ".join(filler) + " ")
+    return "".join(out)
+
+
+def _noise_text(n: int = 30000, seed: int = 7) -> str:
+    rng = np.random.default_rng(seed)
+    a = list("abcdefghijklmnop .\n,")
+    return "".join(a[i] for i in rng.integers(0, len(a), n))
+
+
+def test_detect_finds_a_nameless_rejim_in_a_refrain_stream():
+    r = detect_rejim(_refrain_text(), channel=CONTENT, n_surrogates=3)
+    assert r["n_ticks"] > 20000                       # a real, lock-scale stream (tens of thousands of ticks)
+    assert r["rejim"], "detection found no flow in a stream with a planted refrain"
+    for a in r["rejim"]:
+        assert a["name"] is None                      # NAMELESS — detect before name
+        assert a["scale"] >= 16                        # the smallest gateable scale
+        assert a["channel"] == CONTENT                 # content-only — no sigils entered detection
+        assert a["lock"].get("locked_frac", 0) > 0.5   # a real lock, not a flicker
+
+
+def test_noise_stream_fabricates_no_rejim():
+    # the anti-fabrication null: pour pure noise, detect NOTHING — a flow must earn detection over its
+    # own block-shuffle null, so noise cannot manufacture a nameless entity out of nothing.
+    r = detect_rejim(_noise_text(), channel=CONTENT, n_surrogates=3)
+    assert r["rejim"] == []
+
+
+def test_couple_nests_cepat_in_lambat():
+    # the cepat⊥lambat structural coupling over a detected rejim-set (unit — no pour): a fast flow pairs
+    # with every slower flow it nests in, ratio = how many fast periods sit in one slow, cepat-first.
+    reading = {"rejim": [
+        {"scale": 128, "channel": CONTENT, "name": None},
+        {"scale": 512, "channel": CONTENT, "name": None},
+        {"scale": 2048, "channel": CONTENT, "name": None},
+    ]}
+    couples = couple_rejim(reading)
+    assert couples, "no cepat⊥lambat couple formed from three nested flows"
+    assert all(c["lambat"] > c["cepat"] for c in couples)          # lambat is always the slower flow
+    fast = next(c for c in couples if c["cepat"] == 128 and c["lambat"] == 512)
+    assert fast["ratio"] == 4.0                                    # 512/128 — four fast periods per slow
+    assert fast["modulation"] is None                              # no band series retained → witness abstains
+
+
+def test_amplitude_modulation_reads_the_two_witness():
+    # THE realness witness: a fast carrier whose amplitude is MODULATED at a slow period (the cepat riding
+    # the lambat) scores high; a constant-amplitude carrier (two independent flows) scores ~0. Noise cannot
+    # counterfeit a fast envelope that carries the slow period — the cyclostratigraphy two-witness.
+    t = np.arange(4096)
+    p_fast, p_slow = 16, 512
+    carrier = np.sin(2 * np.pi * t / p_fast)
+    modulated = carrier * (1.0 + 0.9 * np.sin(2 * np.pi * t / p_slow))   # amplitude rides the slow flow
+    cepat_mod = {"scale": p_fast, "_series": modulated, "_stride": 1}
+    cepat_flat = {"scale": p_fast, "_series": carrier, "_stride": 1}
+    lambat = {"scale": p_slow}
+    mod = _amplitude_modulation(cepat_mod, lambat)
+    flat = _amplitude_modulation(cepat_flat, lambat)
+    assert mod is not None and flat is not None
+    assert mod > 0.3                                               # the fast envelope carries the slow period
+    assert mod > flat + 0.2                                        # genuine nesting stands well clear of flat
+
+
+def test_strip_private_drops_the_band_series():
+    # the persistable record holds NO band arrays — a landed rejim resolves back to the stream by scale +
+    # span, never a stored series (the derived-view discipline: hold no verbatim).
+    reading = {"rejim": [{"scale": 128, "channel": CONTENT, "name": None,
+                           "_series": np.zeros(4), "_stride": 1}]}
+    clean = strip_private(reading)
+    assert clean["rejim"][0].keys() == {"scale", "channel", "name"}
+    assert "_series" not in clean["rejim"][0] and "_stride" not in clean["rejim"][0]
