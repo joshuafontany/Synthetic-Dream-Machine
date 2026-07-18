@@ -95,13 +95,15 @@ def test_dfa_alpha_separates_longrange_from_white():
     assert a_brown > 1.2                                          # the walk is strongly long-range
 
 
-def test_stream_realness_gates_geology_from_markov():
-    # the cheap placebo gate: a stream with a real content refrain reads long-range; pure noise reads
-    # markov — so a rejim detected in a markov stream would be reading noise, and the gate says so.
+def test_stream_realness_gates_structure_from_noise():
+    # the cheap FIRST-LINE gate: a stream with real long-range structure reads 'long-range'; STRUCTURELESS
+    # noise reads 'noise'. NOT a placebo gate — the kumulipo smoke-test showed a structured Markov placebo
+    # still reads long-range (the shape component survives babble); real-vs-structured-placebo lives in the
+    # content-plane meaning-recurrence, not this cheap α.
     real = stream_realness(_refrain_text())
     noise = stream_realness(_noise_text())
     assert real["verdict"] == "long-range" and real["alpha"] > 0.55
-    assert noise["verdict"] == "markov" and (noise["alpha"] is None or noise["alpha"] < 0.55)
+    assert noise["verdict"] == "noise" and (noise["alpha"] is None or noise["alpha"] < 0.55)
 
 
 def test_strip_private_drops_the_band_series():

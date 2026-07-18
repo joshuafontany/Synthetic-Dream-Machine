@@ -126,9 +126,10 @@ def couple_rejim(reading: dict) -> "list[dict]":
 def dfa_alpha(x: np.ndarray, *, n_min: int = 16, n_max: "int | None" = None, n_scales: int = 14) -> "float | None":
     """Detrended Fluctuation Analysis exponent α — the long-memory meter (Peng; Pulse-Seeker's import).
     Integrate the series to a walk, fit local linear trends in windows of size n, measure the residual
-    fluctuation F(n) ∝ n^α. α≈0.5 = white / short-memory (a Markov stream flattens here by construction);
-    α>0.5 = persistent long-range correlation; a real geology stream sits α≈0.6–0.9. numpy-only. None when
-    the stream is too short to fit a scaling."""
+    fluctuation F(n) ∝ n^α. α≈0.5 = white / STRUCTURELESS; α>0.5 = persistent long-range structure; a
+    real geology stream sits α≈0.6–0.9. Gauges STRUCTURE vs NOISE — NOT real vs a structured placebo: a
+    Markov babble that preserves shape/line/lexicon still reads α>0.5 (the shape component survives — the
+    kumulipo smoke-test measured real 0.913 AND its placebo 0.826). numpy-only. None when too short."""
     x = np.asarray(x, dtype=float).ravel()
     N = x.size
     if N < 4 * n_min:
@@ -156,16 +157,18 @@ def dfa_alpha(x: np.ndarray, *, n_min: int = 16, n_max: "int | None" = None, n_s
 
 
 def stream_realness(text: str, *, channel: str = CONTENT) -> dict:
-    """Does the stream carry REAL long-range structure (geology worth reading) or short-memory noise? Pour
-    the channel and read its DFA α — the cheap placebo gate the research earned (a Markov-babble stream
-    flattens α to 0.5 by construction, so no rejim it yields could be trusted). Returns {alpha, verdict}:
-    'long-range' (α>0.55 — detection is meaningful) · 'markov' (α≈0.5 — a detected rejim would read noise)
-    · 'too-short' (no scaling to fit). A stream-level witness beside the per-rejim gate."""
+    """Does the stream carry long-range STRUCTURE, or is it STRUCTURELESS noise? Pour the channel and read
+    its DFA α. Returns {alpha, verdict}: 'long-range' (α>0.55) · 'noise' (α≈0.5 — no long-range structure;
+    a rejim detected here would read noise) · 'too-short'. A cheap FIRST-LINE gate: it rejects structureless
+    noise, but it is NOT a placebo gate — a structured Markov babble that preserves shape/line/lexicon still
+    reads 'long-range' (the shape component survives babble; the kumulipo smoke-test read real 0.913 AND its
+    placebo 0.826). Separating real from a STRUCTURED placebo lives in the content-plane meaning-recurrence
+    (graded ρ≈0.6, expensive — the full detect_rejim gate), never this cheap α."""
     poured = pour_ticks([{"stream": "rejim", "text": text}])
     a = dfa_alpha(poured["signals"][channel])
     if a is None:
         return {"alpha": None, "verdict": "too-short"}
-    return {"alpha": a, "verdict": "long-range" if a > 0.55 else "markov"}
+    return {"alpha": a, "verdict": "long-range" if a > 0.55 else "noise"}
 
 
 def strip_private(reading: dict) -> dict:
