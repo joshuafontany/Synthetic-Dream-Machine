@@ -115,17 +115,23 @@ def test_claude_parse_lands_atoms_across_the_taxonomy():
     recs = list(claude_source(wing="wing_proj", room="conversations")(CLAUDE))
     assert len(recs) == 9                             # one block per content-block, NO exchange merge
     assert [r["seq"] for r in recs] == list(range(1, 10))            # dense 1-based pass seq
-    pairs = [(r["metadata"]["lar_speaker"], r["metadata"]["lar_move"]) for r in recs]
+    pairs = [(r["metadata"]["lar_speaker"], r["metadata"]["lar_function"]) for r in recs]
     assert ("operator", "steering") in pairs          # the operator's hand, its own recallable block
     assert ("agent", "thinking") in pairs             # inner speech — its own low-volume block
     assert ("agent", "action") in pairs               # a tool-call now RIDES content (was dropped)
     assert ("harness", "result") in pairs             # a tool-return now rides content (harness speaker)
 
+    # the channel axis (derived from function): speech (voices) ⊥ thought (inner speech) ⊥ tool (traffic)
+    chan = {r["metadata"]["lar_function"]: r["metadata"]["lar_channel"] for r in recs}
+    assert chan["steering"] == "speech" and chan["surface"] == "speech"
+    assert chan["thinking"] == "thought"
+    assert chan["action"] == "tool" and chan["result"] == "tool"
+
     first = recs[0]
     assert first["text"] == "light the capture engine"              # verbatim, NO `>` quote prefix
     m = first["metadata"]
     assert m["wing"] == "wing_proj" and m["room"] == "conversations"
-    assert m["lar_speaker"] == "operator" and m["lar_move"] == "steering"
+    assert m["lar_speaker"] == "operator" and m["lar_function"] == "steering"
     assert m["lar_volume"] == "normal"                # the operator's steering rides at full volume
     assert m["lar_turn_key"] == "u-1"                 # an operator block HEADS its turn; the uuid binds it
     assert m["lar_surface"] == "claude"
@@ -136,9 +142,9 @@ def test_claude_parse_lands_atoms_across_the_taxonomy():
     by_key = [r["metadata"]["lar_turn_key"] for r in recs]
     assert by_key[:5] == ["u-1"] * 5                  # steering + thinking + surface + action + result
     # a tool-call renders name(input); a tool-result renders its return — both verbatim in content
-    action = next(r for r in recs if r["metadata"]["lar_move"] == "action")
+    action = next(r for r in recs if r["metadata"]["lar_function"] == "action")
     assert action["text"] == "Write({})" and action["metadata"]["lar_volume"] == "low"
-    result = next(r for r in recs if r["metadata"]["lar_move"] == "result")
+    result = next(r for r in recs if r["metadata"]["lar_function"] == "result")
     assert result["text"] == "ok" and result["metadata"]["lar_speaker"] == "harness"
 
 
@@ -161,7 +167,7 @@ def test_claude_subagent_file_marks_sidechain(tmp_path):
 def test_codex_parse_lands_atoms_across_the_taxonomy():
     recs = list(codex_source(wing="wing_proj")(CODEX))
     assert len(recs) == 8                             # message · reasoning · call · output all atomize
-    pairs = [(r["metadata"]["lar_speaker"], r["metadata"]["lar_move"]) for r in recs]
+    pairs = [(r["metadata"]["lar_speaker"], r["metadata"]["lar_function"]) for r in recs]
     assert ("harness", "scaffold") in pairs           # the developer preamble — kept, low-volume (eidetic)
     assert ("operator", "steering") in pairs
     assert ("agent", "thinking") in pairs             # a reasoning item — its own thinking block
@@ -169,7 +175,7 @@ def test_codex_parse_lands_atoms_across_the_taxonomy():
     assert ("harness", "result") in pairs             # a function_call_output — a harness result block
     texts = "\n".join(r["text"] for r in recs)
     assert "double-count trap" not in texts           # event_msg (not a response_item) still drops
-    op = next(r for r in recs if r["metadata"]["lar_move"] == "steering")
+    op = next(r for r in recs if r["metadata"]["lar_function"] == "steering")
     assert op["text"] == "parse the codex rollout"     # verbatim, NO `>` quote prefix
     assert recs[0]["metadata"]["lar_surface"] == "codex"
     # a codex block carries no native uuid → content-hash block-key (16 hex), never empty
@@ -177,7 +183,7 @@ def test_codex_parse_lands_atoms_across_the_taxonomy():
     # the loud voices sound at full volume; the murmur beneath (scaffold/thinking/action/result) stays low
     assert op["metadata"]["lar_volume"] == "normal"
     assert all(r["metadata"]["lar_volume"] == "low"
-               for r in recs if r["metadata"]["lar_move"] in ("scaffold", "thinking", "action", "result"))
+               for r in recs if r["metadata"]["lar_function"] in ("scaffold", "thinking", "action", "result"))
 
 
 # --- W5.2 — Copilot reads the SQLite store, NOT events.jsonl ----------------

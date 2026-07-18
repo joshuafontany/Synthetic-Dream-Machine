@@ -9,7 +9,8 @@ source, is_landed skips the already-durable prefix, only the fresh tail lands. M
 sessions ride the same cap (a sub-agent transcript reads through the same parser, marked by surface).
 
 THE BLOCK GRAIN. A source reads as a stream of typed BLOCKS, not merged exchanges: each content-block
-lands 1:1, carrying WHO authored the bytes (`lar_speaker`) × WHAT MOVE it carries (`lar_move`). The
+lands 1:1, carrying WHO authored the bytes (`lar_speaker`) × its communicative ROLE (`lar_function`) ×
+the REGISTER it sounds in (`lar_channel`). The
 operator's steering, the agent's surface/thinking/action, and the harness's result/scaffold each ride
 as their own block — so content keeps the operator/agent boundary the eidetic ground demands, and recall
 pairs blocks into exchanges as a derived VIEW. The three native encodings normalize into this one grain:
@@ -113,27 +114,29 @@ def _blocks(source_file: str, blocks: list, *, wing: str, room: str,
     exchanges as a derived VIEW (grouped by lar_turn_key), so the operator's steering stays its own
     recallable speaker instead of fusing into the agent's stream the way a merged drawer fused them.
 
-    Each block carries: `lar_speaker`/`lar_move` (the taxonomy axes — who authored the bytes, what move
-    they carry); `lar_block_key` (this block's identity, the dedup key across a re-carry); `lar_turn_key`
-    (the turn it HEADS — an operator block — or JOINS — the blocks that follow, until the next operator
-    block; the exchange-view groups on it, the kapae cascade mutes on it); `lar_parent` (the source DAG
-    link, e.g. Claude's parentUuid, the view may walk); `lar_chain` (the per-source content-hash chain —
-    an edited prefix keeps its content-INDEPENDENT cid but BREAKS the chain, so a re-capture detects the
-    rewind). An block carrying a bare `role` but no (speaker, move) — a surface with no block detail, e.g.
-    a Copilot column — gets classified here. The caller assigns the dense pass seq; `extra` folds in the
-    per-surface marks (lar_surface, lar_sidechain)."""
+    Each block carries the taxonomy axes: `lar_speaker` (who authored the bytes) × `lar_function` (its
+    communicative role) × `lar_channel` (the register it sounds in — speech/thought/tool, derived from
+    the function). Plus `lar_block_key` (this block's identity, the dedup key across a re-carry);
+    `lar_turn_key` (the turn it HEADS — an operator block — or JOINS — the blocks that follow, until the
+    next operator block; the exchange-view groups on it, the kapae cascade mutes on it); `lar_parent`
+    (the source DAG link, e.g. Claude's parentUuid, the view may walk); `lar_chain` (the per-source
+    content-hash chain — an edited prefix keeps its content-INDEPENDENT cid but BREAKS the chain, so a
+    re-capture detects the rewind). A block carrying a bare `role` but no (speaker, function) — a surface
+    with no block detail, e.g. a Copilot column — gets classified here. The caller assigns the dense pass
+    seq; `extra` folds in the per-surface marks (lar_surface, lar_sidechain)."""
     prev_chain = ""
     turn_key = ""
     for chunk, a in enumerate(blocks):
         text = a.get("text") or ""
-        speaker, move = a.get("speaker"), a.get("move")
-        if speaker is None or move is None:
-            speaker, move = _classify(str(a.get("role", "")), text)
-        atom_key = _block_key(source_file, a, chunk)
+        speaker, function = a.get("speaker"), a.get("function")
+        if speaker is None or function is None:
+            speaker, function = _classify(str(a.get("role", "")), text)
+        channel = _CHANNEL.get(function, "speech")
+        block_key = _block_key(source_file, a, chunk)
         # An operator block HEADS a new turn; the blocks after it inherit its turn-key. A session opening
         # on agent/harness blocks (no operator yet) lets the first block head, so nothing rides keyless.
         if speaker == "operator" or not turn_key:
-            turn_key = _turn_key(source_file, a, chunk) if speaker == "operator" else atom_key
+            turn_key = _turn_key(source_file, a, chunk) if speaker == "operator" else block_key
         chain = _sha16(text + prev_chain)   # each link binds its text + the predecessor's link
         prev_chain = chain
         meta = {
@@ -142,19 +145,20 @@ def _blocks(source_file: str, blocks: list, *, wing: str, room: str,
             "source_file": source_file,
             "chunk_index": chunk,
             "lar_turn_key": turn_key,
-            "lar_block_key": atom_key,
+            "lar_block_key": block_key,
             "lar_parent": a.get("parent") or "",
             "lar_chain": chain,
             # AI-operator chat IS native memetic-wikitext — a turn that invokes no sigil holds a
             # DEGRADED state of the same grammar, never a foreign one. One stamp lets the structure
             # plane parse it down the graceful gradient rather than skip it for want of an extension.
             "lar_kind": "memetic-wikitext",
-            # The taxonomy axes + the volume the move sounds at. Content holds every move (eidetic
+            # The taxonomy axes + the volume the function sounds at. Content holds every function (eidetic
             # ground); a derived plane reads the loud voices (steering + surface) without the murmur.
             "lar_speaker": speaker,
-            "lar_move": move,
-            "lar_stratum": _MOVE_STRATUM.get(move, "authored"),
-            "lar_volume": _MOVE_VOLUME.get(move, "normal"),
+            "lar_function": function,
+            "lar_channel": channel,
+            "lar_stratum": _FUNCTION_STRATUM.get(function, "authored"),
+            "lar_volume": _FUNCTION_VOLUME.get(function, "normal"),
         }
         if extra:
             meta.update(extra)
@@ -173,24 +177,35 @@ def _seq_records(drawers: Iterable[tuple]) -> Iterator[Record]:
 # Each line carries `type` (user/assistant), `uuid`, `timestamp`, `sessionId`, `message` (text blocks).
 
 
-# The block taxonomy — WHO authored the bytes × WHAT MOVE the block carries. A source reads as a stream
-# of typed blocks; content holds each 1:1 (eidetic ground), and recall pairs them into exchanges as a
-# derived VIEW, so the operator's steering rides as its own recallable speaker rather than fusing into
-# the agent's stream the way a merged drawer fused them.
-#   speaker: operator (the human hand) · agent (the Lares) · harness (the machinery — it injects
-#            tool-results, caveats, notifications on the `user` channel, but no human authored them)
-#   move:    steering (an operator directive) · surface (the agent's uttered text) · thinking (the
-#            agent's inner speech) · action (an agent tool-call) · result (a harness tool-return) ·
-#            scaffold (harness boilerplate — caveats, reminders, IDE marks)
-# Content keeps every move (nothing drops); VOLUME marks how loudly each sounds, so a derived plane
-# reads the loud voices (steering + surface) without the low murmur beneath.
-_MOVE_VOLUME = {
+# The block taxonomy — three axes. A source reads as a stream of typed blocks; content holds each 1:1
+# (eidetic ground), and recall pairs them into exchanges as a derived VIEW, so the operator's steering
+# rides as its own recallable speaker rather than fusing into the agent's stream the way a merged drawer
+# fused them.
+#   speaker  — WHO authored the bytes: operator (the human hand) · agent (the Lares) · harness (the
+#              machinery — it injects tool-results, caveats, notifications on the `user` channel, but no
+#              human authored them).
+#   function — the block's communicative ROLE (ISO 24617-2 dialogue-act lineage): steering (an operator
+#              directive) · surface (the agent's uttered text) · scaffold (harness framing — caveats,
+#              reminders, IDE marks) · thinking (the agent's inner speech) · action (an agent tool-call)
+#              · result (a harness tool-return).
+#   channel  — the REGISTER a function sounds in, derived from it: speech (the communicative voices) ·
+#              thought (inner speech, addressed to no partner) · tool (the non-linguistic tool traffic).
+# The move used to conflate function and channel; splitting them keeps the dialogue-act axis clean and
+# quarantines the LLM-only registers (thought/tool). Content keeps every function (nothing drops);
+# VOLUME marks how loudly each sounds, so a derived plane reads the loud voices (steering + surface)
+# without the low murmur beneath.
+_CHANNEL = {
+    "steering": "speech", "surface": "speech", "scaffold": "speech",
+    "thinking": "thought",
+    "action": "tool", "result": "tool",
+}
+_FUNCTION_VOLUME = {
     "steering": "normal", "surface": "normal",
     "thinking": "low", "action": "low", "result": "low", "scaffold": "low",
 }
-# The coarse stratum a move rolls up to — provenance only (the derived plane reads by VOLUME above,
+# The coarse stratum a function rolls up to — provenance only (the derived plane reads by VOLUME above,
 # never this). Kept so a reader of lar_stratum still resolves.
-_MOVE_STRATUM = {
+_FUNCTION_STRATUM = {
     "steering": "authored", "surface": "authored",
     "thinking": "thinking", "action": "action", "result": "harness", "scaffold": "harness",
 }
@@ -236,7 +251,7 @@ def _render_tool_result(b: dict) -> str:
 
 
 def _claude_blocks(rtype: str, message) -> Iterator[tuple]:
-    """Yield (speaker, move, text, bi) blocks from one Claude message, in document order — `bi` names the
+    """Yield (speaker, function, text, bi) blocks from one Claude message, in document order — `bi` names the
     block ordinal within the record (stable across a re-carry), so blocks sharing the record's uuid still
     get distinct block-keys. A user record's content is a bare string (operator steering, unless a harness
     opener) or a list mixing text (operator steering) and tool_result (harness result); an assistant
@@ -244,8 +259,8 @@ def _claude_blocks(rtype: str, message) -> Iterator[tuple]:
     action) blocks. Thinking precedes the utterance it thought toward, in its native block order."""
     content = message.get("content") if isinstance(message, dict) else message
     if isinstance(content, str):
-        speaker, move = _classify("user", content) if rtype == "user" else ("agent", "surface")
-        yield speaker, move, content, 0
+        speaker, function = _classify("user", content) if rtype == "user" else ("agent", "surface")
+        yield speaker, function, content, 0
         return
     if not isinstance(content, list):
         return
@@ -254,8 +269,8 @@ def _claude_blocks(rtype: str, message) -> Iterator[tuple]:
             continue
         t = b.get("type")
         if t == "text" and isinstance(b.get("text"), str):
-            speaker, move = _classify("user", b["text"]) if rtype == "user" else ("agent", "surface")
-            yield speaker, move, b["text"], bi
+            speaker, function = _classify("user", b["text"]) if rtype == "user" else ("agent", "surface")
+            yield speaker, function, b["text"], bi
         elif t == "thinking" and isinstance(b.get("thinking"), str):
             yield "agent", "thinking", b["thinking"], bi
         elif t == "tool_use":
@@ -265,7 +280,7 @@ def _claude_blocks(rtype: str, message) -> Iterator[tuple]:
 
 
 def _classify(role: str, text: str) -> tuple:
-    """The (speaker, move) of a bare role+text turn — SURFACE-AGNOSTIC, the fallback for a surface with
+    """The (speaker, function) of a bare role+text turn — SURFACE-AGNOSTIC, the fallback for a surface with
     no block-level detail (a Copilot user_message / assistant_response column). A `user`-channel turn
     opening with a harness marker carries machine text, never the operator's hand (the channel says
     `user`, the speaker says harness). The markers repeat identically across Claude · Codex · Copilot,
@@ -301,11 +316,11 @@ def _parse_claude(path: str) -> list:
             uuid = str(row.get("uuid") or "")
             parent = str(row.get("parentUuid") or "")
             ts = str(row.get("timestamp") or "")
-            for speaker, move, text, bi in _claude_blocks(rtype, row.get("message")):
+            for speaker, function, text, bi in _claude_blocks(rtype, row.get("message")):
                 if not text.strip():
                     continue
                 blocks.append({"uuid": uuid, "bi": bi, "parent": parent, "speaker": speaker,
-                              "move": move, "text": text, "ts": ts})
+                              "function": function, "text": text, "ts": ts})
     return blocks
 
 
@@ -405,27 +420,27 @@ def _parse_codex(path: str) -> list:
                 role = str(p.get("role", ""))
                 text = _codex_message_text(p.get("content"))
                 if role == "developer":
-                    speaker, move = "harness", "scaffold"
+                    speaker, function = "harness", "scaffold"
                 elif role == "user":
-                    speaker, move = _classify("user", text)
+                    speaker, function = _classify("user", text)
                 elif role == "assistant":
-                    speaker, move = "agent", "surface"
+                    speaker, function = "agent", "surface"
                 else:
                     continue
             elif pt == "reasoning":
-                text, (speaker, move) = _codex_reasoning_text(p), ("agent", "thinking")
+                text, (speaker, function) = _codex_reasoning_text(p), ("agent", "thinking")
             elif pt in ("function_call", "custom_tool_call", "web_search_call"):
-                text, (speaker, move) = _render_codex_call(p), ("agent", "action")
+                text, (speaker, function) = _render_codex_call(p), ("agent", "action")
             elif pt in ("function_call_output", "custom_tool_call_output"):
                 out = p.get("output")
                 text = out if isinstance(out, str) else ("" if out is None else json.dumps(out, ensure_ascii=False))
-                speaker, move = "harness", "result"
+                speaker, function = "harness", "result"
             else:
                 continue
             if not text.strip():
                 continue
             blocks.append({"uuid": iid, "bi": 0, "parent": "", "speaker": speaker,
-                          "move": move, "text": text, "ts": ts})
+                          "function": function, "text": text, "ts": ts})
     return blocks
 
 
