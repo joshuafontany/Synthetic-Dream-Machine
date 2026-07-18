@@ -291,18 +291,18 @@ export function recallVerbCap(): CapModule {
               );
               return { mode: "multi", ...res };
             }
-            // Forward the block-taxonomy filters (speaker/channel/function) + the exchange-view flag (pair)
-            // to the ONE coordinator — its _recall_where + pair + recall_session's introspective forward are
-            // the single filter home. Before this they died here and never reached the collapsed search.
-            if (query)    return { mode: "search", ...(await client.search({ query,
-              ...(wing !== undefined ? { wing } : {}),
-              ...(limit !== undefined ? { limit } : {}),
-              ...(sensoriumRoot ? { sensoriumRoot } : {}),
-              ...(typeof args["speaker"]  === "string" ? { speaker:  args["speaker"]  } : {}),
-              ...(typeof args["channel"]  === "string" ? { channel:  args["channel"]  } : {}),
-              ...(typeof args["function"] === "string" ? { function: args["function"] } : {}),
-              ...(args["pair"] === true || args["pair"] === "true" ? { pair: true } : {}),
-            })) };
+            // Forward the recall args VERBATIM to the ONE coordinator — its `recall` signature (read through
+            // recall_session's introspective `_RECALL_KWARGS` forward + `_recall_where`) is the SINGLE filter
+            // home, so a new physics filter (a new taxonomy axis, a new stratum) narrows here with ZERO edit:
+            // the API signature IS the capability. Strip only the MODE-ROUTING keys the branches above already
+            // consumed (imago/list/dual/multi SELECT the mode — never a py content-filter); the client
+            // extracts `sensoriumRoot` itself, and the coordinator drops any arg its signature refuses. The
+            // stamp filters (voice/band/agent/surface/drift) never reach here — a present one routes to
+            // filteredSearch above — so verbatim forwarding never double-applies them.
+            if (query) {
+              const { imago: _im, list: _ls, dual: _du, multi: _mu, ...forward } = args;
+              return { mode: "search", ...(await client.search(forward)) };
+            }
             return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
           });
         });
