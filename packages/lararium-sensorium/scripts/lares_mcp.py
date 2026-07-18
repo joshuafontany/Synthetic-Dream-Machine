@@ -13,7 +13,6 @@ Meme: lar:///ha.ka.ba/lararium/sensorium/lares-mcp (the isomorphic surface).
 """
 from __future__ import annotations
 
-import json
 import os
 
 import content_io as cio
@@ -21,6 +20,9 @@ import worldline_io as wl
 import lares_uds as uds
 from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
+from plane_query import (open_plane_store, plane_record_witness,
+                         reads_as_cid as _reads_as_cid,
+                         structure_entry_for_cid as _structure_entry_for_cid)
 from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
@@ -104,40 +106,6 @@ def _recall_where(*, wing=None, agent=None, surface=None, speaker=None, channel=
                "speaker": speaker, "channel": channel, "function": function}
     where = {_STAMP_KEYS[name]: val for name, val in clauses.items() if val is not None}
     return where or None
-
-
-_HEX_DIGITS = frozenset("0123456789abcdef")
-
-
-def _reads_as_cid(s: str) -> bool:
-    """A record cid reads as a full sha-256 hex, optionally chunk-suffixed (`<hex64>_<n>` — the
-    capture chunker keys each chunk; the live test-bed carries this form); anything else reads
-    as query TEXT."""
-    if not isinstance(s, str):
-        return False
-    head, sep, tail = s.partition("_")
-    return (len(head) == 64 and all(c in _HEX_DIGITS for c in head.lower())
-            and (not sep or tail.isdigit()))
-
-
-def _structure_entry_for_cid(store, cid: str) -> "dict | None":
-    """Resolve a record cid to its STRUCTURE entry through the provenance join — the structurepalace
-    keys by structural HASH, so the cid walks the provenance lines (the same read-back leg the
-    corpus_testbed witness rides). None when no entry binds the cid."""
-    got = store._col.get(include=["metadatas"])  # noqa: SLF001 — the read probe walks the raw collection
-    ids = got.get("ids") or []
-    metas = got.get("metadatas") or []
-    for i, h in enumerate(ids):
-        meta = metas[i] or {}
-        try:
-            provenance = json.loads(meta.get("lar_provenance") or "[]")
-        except (ValueError, TypeError):
-            provenance = []
-        if any(p.get("verbatim_sha") == cid for p in provenance):
-            return {"hash": h, "count": meta.get("count"),
-                    "provenance_cids": sorted({p.get("verbatim_sha") for p in provenance
-                                               if p.get("verbatim_sha")})}
-    return None
 
 
 def _rrf_fuse(ranked_lists: "list[list[str]]", k: int, rrf_k: int = 60) -> "list[str]":
@@ -332,16 +300,9 @@ class LaresCoordinator:
         cached = self._plane_stores.get(plane)
         if cached is not None:
             return cached
-        path = os.path.join(self._palace, plane)
-        if not os.path.exists(os.path.join(path, "chroma.sqlite3")):
-            return None
-        if plane == "structure":
-            from structurepalace_io import StructurePalaceStore
-            store = StructurePalaceStore(path)
-        else:
-            from form_encoder import FormPalaceStore
-            store = FormPalaceStore(path)
-        self._plane_stores[plane] = store
+        store = open_plane_store(self._palace, plane)
+        if store is not None:
+            self._plane_stores[plane] = store
         return store
 
     def recall_structure(self, query_or_cid: str, k: int = 8) -> dict:
@@ -412,39 +373,12 @@ class LaresCoordinator:
         """The cross-plane witness read: ONE cid → its presence + payload summary across content ·
         structure · form, honest nulls where a plane lacks the record. READ-only — it witnesses
         co-presence and scores nothing. THE COHERE SEAM: cross-plane AGREEMENT (cohere) lands its
-        organs with the projector arc; this verb stays the bare 3-plane witness until then."""
-        out: dict = {"cid": cid}
-        row = self._content.get(cid)
-        if row is None:
-            out["content"] = {"present": False}
-        else:
-            meta = row.get("metadata") or {}
-            out["content"] = {"present": True,
-                              "head": (row.get("document") or "")[:120].replace("\n", " "),
-                              "source_file": meta.get("source_file", ""),
-                              "wing": meta.get("wing", ""), "room": meta.get("room", "")}
-        s_store = self._plane_store("structure")
-        if s_store is None:
-            out["structure"] = {"present": False, "note": "no structure store"}
-        else:
-            entry = _structure_entry_for_cid(s_store, cid)
-            out["structure"] = {"present": entry is not None, **(entry or {})}
-        f_store = self._plane_store("form")
-        if f_store is None:
-            out["form"] = {"present": False, "note": "no form store"}
-        else:
-            f_row = f_store.get(cid)
-            if f_row is None:
-                out["form"] = {"present": False}
-            else:
-                got = f_store._col.get(ids=[cid], include=["embeddings"])  # noqa: SLF001 — the membership count reads the vector
-                embs = got.get("embeddings")
-                vec = [float(x) for x in embs[0]] if embs is not None and len(embs) else []
-                f_meta = f_row.get("metadata") or {}
-                out["form"] = {"present": True, "dimension": f_meta.get("dimension"),
-                               "count": f_meta.get("count"),
-                               "active_templates": sum(1 for v in vec if v > 0.0)}
-        return out
+        organs with the projector arc; this verb stays the bare 3-plane witness until then.
+
+        The witness itself lives in `plane_query` (neutral, no circular import) — this coordinator holds
+        the ONE content handle and passes it in; the capture holder's `plane_record` serve-op rides the
+        SAME implementation over the store it owns."""
+        return plane_record_witness(self._content, self._palace, cid)
 
 
 def build_mcp(coordinator: LaresCoordinator):
@@ -557,15 +491,14 @@ class DaemonCoordinator:
     puts a second writer on the palace, the one thing this wire stands to prevent.
     """
 
-    # The verbs the @daemon answers today over the UDS cap-wire (`registry.register(...)` on the TS side):
-    # `recall` (the read) and `capture` (the per-pointer pour). The REST stay OWED node-side — each wants a
-    # @daemon verb the wire does NOT yet carry: `status`/taxonomy, the worldline `dag` read, the worldline
-    # `cascade_kapae`/`cascade_un_kapae`, and the cross-plane `plane_record` all live in py holders the
-    # daemon owns (content_io, worldline_io, structurepalace_io, form_encoder) but carry NO registered wire
-    # verb to reach them. Routing them here would have to INVENT the daemon-side verb name + arg mapping
-    # (a protocol change, not a mirror) and would fail at the wire on an unknown verb — so they refuse
-    # honestly through `_owed` until the @daemon grows the verb (the wall this surface names, not hides).
-    ROUTED = {"recall", "pour"}
+    # The verbs the @daemon answers over the UDS cap-wire (`registry.register(...)` on the TS side): the
+    # read `recall`, the per-pointer `capture` (pour), plus the five lifecycle/plane verbs now wired onto
+    # the capture holder — `status`/taxonomy, the worldline `dag` read, the `cascade_kapae`/`cascade_un_kapae`
+    # branch-mute, and the cross-plane `plane_record`. Each routes to a serve-op on the ONE holder that owns
+    # the palace (content_io · worldline_io · structurepalace_io · form_encoder), serialized with capture so a
+    # mutation never races the live writer. A verb the wire does NOT yet carry refuses honestly through
+    # `_owed` rather than route to an unknown verb (the wall this surface names, not hides).
+    ROUTED = {"recall", "pour", "status", "worldline", "kapae", "un_kapae", "plane_record"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -623,11 +556,49 @@ class DaemonCoordinator:
             args["sensoriumRoot"] = sensorium_root
         return uds.output("capture", args)
 
-    def status(self, *a, **k):           return self._owed("status")
-    def worldline(self, *a, **k):        return self._owed("worldline")
-    def kapae(self, *a, **k):            return self._owed("kapae")
-    def un_kapae(self, *a, **k):         return self._owed("un_kapae")
-    def plane_record(self, *a, **k):     return self._owed("plane_record")
+    def status(self, *, sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the taxonomy read through the @daemon `status` verb — the daemon's capture holder owns the
+        # ONE content store and answers `content_store.taxonomy()`. Mirrors `recall`/`pour`: no store here.
+        args: dict = {}
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("status", args)
+
+    def worldline(self, selector: "str | None" = None, *, as_of=None,
+                  sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the fork-DAG read through the @daemon `worldline` verb. `selector` narrows on the CLI skin
+        # (the py `dag` renders the whole edge-DAG); `as_of` rides the bitemporal slice.
+        args: dict = {}
+        if selector:
+            args["selector"] = selector
+        if as_of is not None:
+            args["asOf"] = as_of
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("worldline", args)
+
+    def kapae(self, branch: str, tick, *, sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the branch-mute cascade through the @daemon `kapae` verb — the holder mutes across the ONE
+        # content store it owns, serialized with capture (never a second writer). Move-not-delete; un_kapae restores.
+        args: dict = {"branch": branch, "tick": tick}
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("kapae", args)
+
+    def un_kapae(self, branch: str, tick, *, sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the branch RESTORE cascade through the @daemon `un_kapae` verb — the reverse of `kapae`.
+        args: dict = {"branch": branch, "tick": tick}
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("un_kapae", args)
+
+    def plane_record(self, cid: str, *, sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the cross-plane witness through the @daemon `plane_record` verb — the holder reads its own
+        # content handle + fresh structure/form readers (one shared `plane_query` implementation).
+        args: dict = {"cid": cid}
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("plane_record", args)
 
 
 def main() -> None:

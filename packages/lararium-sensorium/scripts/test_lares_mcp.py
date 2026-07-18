@@ -421,22 +421,37 @@ def test_daemon_pour_refuses_shaping_args_over_the_wire(monkeypatch):
             dc.pour("claude", "/x", wing="w", **kwargs)
 
 
-def test_daemon_still_owes_the_unrouted_verbs():
-    # THE WALL SURFACED: status/worldline/kapae/un_kapae/plane_record carry NO @daemon wire verb yet
-    # (the UDS table holds recall + capture, never taxonomy/dag/cascade_kapae/plane_record). They refuse
-    # honestly through `_owed` rather than route to an unknown verb — the surface names the gap, never
-    # fakes a reading.
-    dc = DaemonCoordinator()
-    with pytest.raises(RuntimeError):
-        dc.status()
-    with pytest.raises(RuntimeError):
-        dc.worldline()
-    with pytest.raises(RuntimeError):
-        dc.kapae("branch", 1)
-    with pytest.raises(RuntimeError):
-        dc.un_kapae("branch", 1)
-    with pytest.raises(RuntimeError):
-        dc.plane_record("f" * 64)
+def test_daemon_routes_the_lifecycle_and_plane_verbs(monkeypatch):
+    # THE WALL CLEARED: status/worldline/kapae/un_kapae/plane_record now ride @daemon wire verbs — each
+    # routes to the serve-op on the capture holder (the ONE palace owner) instead of `_owed`-refusing.
+    # Record the wire call to prove the verb name + camelCase arg mapping without a live daemon.
+    calls = []
+    monkeypatch.setattr("lares_mcp.uds.output", lambda verb, args: (calls.append((verb, args)), {"ok": True})[1])
+    dc = DaemonCoordinator(wing="w")
+
+    assert dc.status() == {"ok": True}
+    assert calls[-1] == ("status", {})                               # the taxonomy read, routed
+    assert dc.worldline() == {"ok": True}
+    assert calls[-1] == ("worldline", {})                            # the fork-DAG read, routed
+    assert dc.kapae("branch", 1) == {"ok": True}
+    assert calls[-1] == ("kapae", {"branch": "branch", "tick": 1})   # the branch-mute cascade, routed
+    assert dc.un_kapae("branch", 2) == {"ok": True}
+    assert calls[-1] == ("un_kapae", {"branch": "branch", "tick": 2})  # the restore cascade, routed
+    assert dc.plane_record("f" * 64) == {"ok": True}
+    assert calls[-1] == ("plane_record", {"cid": "f" * 64})          # the cross-plane witness, routed
+
+    # the addressed sensorium threads as the daemon's `sensoriumRoot` on every routed verb (holder-by-root)
+    calls.clear()
+    dc.status(sensorium_root="/root/mesh")
+    dc.plane_record("a" * 64, sensorium_root="/root/mesh")
+    assert calls[0][1]["sensoriumRoot"] == "/root/mesh"
+    assert calls[1][1]["sensoriumRoot"] == "/root/mesh"
+
+
+def test_daemon_routed_set_names_the_wired_verbs():
+    # the ROUTED set carries the five newly-wired verbs beside recall + pour — the wall the surface once
+    # named is now the routing table it declares.
+    assert DaemonCoordinator.ROUTED == {"recall", "pour", "status", "worldline", "kapae", "un_kapae", "plane_record"}
 
 
 # ── the sensorium address resolver (name → root; mirrors TS sensoriumDir/sensoriumNames) ──────

@@ -118,6 +118,57 @@ def test_rejim_tick_holds_under_backpressure_then_fires_on_settled_ground(tmp_pa
     assert server.rejim_tick({"backlog": 0})["fired"] is False            # coalesced — no new ground, no repour
 
 
+def _captured_server(tmp_path):
+    # one warm holder over the small claude fixture — the base for the lifecycle/plane serve-op witnesses.
+    server = CaptureSessionServer(str(tmp_path / ".mem"), embed_factory=_stub_embed_factory())
+    server.capture({"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"})
+    return server
+
+
+def _turn_keys(server):
+    got = server._content_store()._col.get(include=["metadatas"])   # noqa: SLF001 — the test walks the raw rows
+    return sorted({(m or {}).get("lar_turn_key") for m in (got.get("metadatas") or []) if (m or {}).get("lar_turn_key")})
+
+
+def test_status_serve_op_reports_the_taxonomy_over_the_owned_store(tmp_path):
+    # the taxonomy over the ONE content handle the holder already owns (no second client opened).
+    server = _captured_server(tmp_path)
+    tax = server.status({})
+    assert tax["total"] == TURN_COUNT                                # the whole fixture landed, counted
+
+
+def test_worldline_serve_op_reads_the_forkdag(tmp_path):
+    # the claude surface builds the fork-DAG braid beside the palace; the serve-op reads it through a
+    # fresh WorldlineStore (opened + closed per-op), so the rhizome reads back over the pipe.
+    server = _captured_server(tmp_path)
+    dag = server.worldline({})
+    assert dag["edges"], "the observe leg built no worldline braid on capture"
+
+
+def test_kapae_serve_op_round_trips_mute_then_restore(tmp_path):
+    # the branch-mute cascade rides the holder's ONE content store, serialized with capture. A content-bound
+    # turn resolves (no fork needed); kapae mutes its entries, un_kapae restores them (move-not-delete).
+    server = _captured_server(tmp_path)
+    tks = _turn_keys(server)
+    assert tks
+    muted = server.kapae({"branch": tks[0], "tick": 1})
+    assert muted["resolved"] and muted["muted_entries"] >= 1         # the branch's entries muted across the store
+    restored = server.un_kapae({"branch": tks[0], "tick": 2})
+    assert restored["resolved"] and restored["restored_entries"] >= 1  # move-not-delete restores them
+
+
+def test_plane_record_serve_op_witnesses_the_content_leg(tmp_path):
+    # the cross-plane witness over the holder's own content store — a real captured cid reads present on the
+    # content leg (the SAME plane_query implementation the /mcp coordinator drives); an unknown cid reads null.
+    server = _captured_server(tmp_path)
+    cid = (server._content_store()._col.get().get("ids") or [None])[0]   # noqa: SLF001 — a real landed cid
+    assert cid is not None
+    rec = server.plane_record({"cid": cid})
+    assert rec["content"]["present"] is True                        # the captured cid witnesses on content
+    absent = server.plane_record({"cid": "f" * 64})
+    assert absent["content"]["present"] is False                    # an unknown cid reads an honest null
+
+
 def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
     # crash sim: land only a truncated prefix (a partial transcript = the "crash"), then re-run over the
     # FULL fixture — the re-derivation lands the tail (the blocks past the prefix), skips the durable prefix.

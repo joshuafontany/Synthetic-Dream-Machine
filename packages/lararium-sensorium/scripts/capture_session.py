@@ -165,6 +165,13 @@ class CaptureSessionServer:
         self._rejim_clock += 1
         return self._rejim_clock
 
+    def _content_store(self):
+        """The ONE persistent content handle this holder already owns (opened once at compose). Every
+        serve-op REUSES it — the read taxonomy, the plane_record content leg, and BOTH kapae cascades write
+        through this single client. Opening a second `ContentStore` on the same palace would put a second
+        writing chroma client on one index (the corruption this whole holder-owns-the-palace design prevents)."""
+        return self._stream._land.store  # noqa: SLF001 — the holder reaches its own land-cap's store
+
     def capture(self, req: dict) -> dict:
         surface = str(req.get("surface") or "")
         pointer = str(req.get("pointer") or "")
@@ -250,6 +257,60 @@ class CaptureSessionServer:
         return {"fired": True, "revision": rev, "stream_chars": landed.get("stream_chars"),
                 "rejim": landed.get("rejim", []), "couples": landed.get("couples", [])}
 
+    # ── the lifecycle + cross-plane serve-ops (the /mcp DaemonCoordinator routes to these) ─────────
+    # Each rides the SAME serialized pipe as capture (run_sidecar dispatch is serial), so a MUTATION never
+    # races the live writer — that serialization is WHY the capture holder owns these ops, not a bare store.
+
+    def status(self, req: dict) -> dict:
+        """What THIS holder's palace holds — the taxonomy over the ONE persistent content store the holder
+        already owns (reused, never a second client)."""
+        return self._content_store().taxonomy()
+
+    def worldline(self, req: dict) -> dict:
+        """The fork-DAG rhizome for THIS holder (bitemporal AS-OF `asOf`, else the whole history). Opens a
+        FRESH WorldlineStore per-op and CLOSES it in `finally` (mirrors `observe()` above), so no worldline
+        handle lingers on the holder. `selector` narrows on the CLI skin; the py `dag` renders the whole DAG."""
+        from worldline_io import WorldlineStore
+        store = WorldlineStore(self._paths.worldline)
+        try:
+            return store.dag(as_of=req.get("asOf"))
+        finally:
+            store.close()
+
+    def kapae(self, req: dict) -> dict:
+        """Mute a worldline branch + cascade the mute across THIS holder's content store (move-not-delete;
+        `un_kapae` restores). MUTATION — it rides the SAME serialized pipe as capture, so the mute never races
+        the live writer (the serialization is WHY this op homes on the capture holder). REUSES the holder's ONE
+        content handle (never a second writer); opens a fresh WorldlineStore, closes it in `finally`."""
+        import worldline_io
+        from worldline_io import WorldlineStore
+        store = WorldlineStore(self._paths.worldline)
+        try:
+            return worldline_io.cascade_kapae(store, [self._content_store()],
+                                              str(req.get("branch") or ""), req.get("tick"))
+        finally:
+            store.close()
+
+    def un_kapae(self, req: dict) -> dict:
+        """Restore a muted worldline branch across THIS holder's content store — the reverse of `kapae`.
+        MUTATION on the serialized pipe (never races the live writer); reuses the holder's ONE content handle;
+        opens a fresh WorldlineStore, closes it in `finally`."""
+        import worldline_io
+        from worldline_io import WorldlineStore
+        store = WorldlineStore(self._paths.worldline)
+        try:
+            return worldline_io.cascade_un_kapae(store, [self._content_store()],
+                                                 str(req.get("branch") or ""), req.get("tick"))
+        finally:
+            store.close()
+
+    def plane_record(self, req: dict) -> dict:
+        """The cross-plane witness: ONE cid → presence + payload summary across content · structure · form,
+        honest nulls where a plane lacks it. READ-only. Rides the ONE content handle the holder owns + fresh
+        read-only structure/form readers — the SAME `plane_query` implementation the /mcp coordinator drives."""
+        from plane_query import plane_record_witness
+        return plane_record_witness(self._content_store(), self._paths.root, str(req.get("cid") or ""))
+
 
 def _rejim_idle_beat(server: "CaptureSessionServer") -> None:
     """One idle beat of the backpressure-triggered rejim cadence: tick the scheduler; a DUE + settled beat
@@ -277,6 +338,11 @@ def _serve(sensorium_root: str) -> None:
             "repour_rejim": server.repour_rejim,   # re-derive the rejim geology plane, serialized with capture
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
             "rejim_tick": server.rejim_tick,       # drive the backpressure-triggered re-regime cadence
+            "status": server.status,               # the taxonomy over the holder's content store
+            "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
+            "kapae": server.kapae,                 # mute a branch across the content store (serialized mutation)
+            "un_kapae": server.un_kapae,           # restore a muted branch (serialized mutation)
+            "plane_record": server.plane_record,   # the cross-plane witness (content · structure · form)
         }),
         idle_ttl=idle_ttl_seconds("LARES_CAPTURE_IDLE_TTL", 600.0),
         singleton_msg="capture_session: another holder already serves this palace; exiting (singleton)\n",
