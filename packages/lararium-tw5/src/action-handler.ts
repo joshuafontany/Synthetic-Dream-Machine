@@ -613,12 +613,14 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         packInfo = { packPath, members: freshRecords.map((r) => String(r["title"])) };
       }
 
-      // §6 for a native carrier — the SAME triangle a memetic carrier runs, via
-      // the registry's own render (the file-info BODY, the digest surface the
+      // §6 for a SINGLE native carrier — the SAME triangle a memetic carrier runs,
+      // via the registry's own render (the file-info BODY, the digest surface the
       // projector + echo gate share). Without it a native carrier read
-      // last-write-wins over a wiki-side edit (a silent §6 overwrite).
-      const rootFresh = freshRecords.find((r) => r["title"] === uri) ?? freshRecords[0];
-      const currentRec = await readFromBag(access, action.toBag, uri);
+      // last-write-wins over a wiki-side edit (a silent §6 overwrite). A PACK skips
+      // this: it holds no single tiddler at the carrier URI — its change-detection
+      // rides the membership diff (dropped members tombstone) + a full re-land.
+      const rootFresh = packInfo ? undefined : (freshRecords.find((r) => r["title"] === uri) ?? freshRecords[0]);
+      const currentRec = rootFresh ? await readFromBag(access, action.toBag, uri) : null;
       if (rootFresh) {
         const cand = tw5!.renderCarrier(uri, rootFresh);
         const candidateHash = carrierHash(cand.body, cand.metaBody);
