@@ -111,14 +111,39 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
     },
     serializeBundle: (records, ext) => {
       const $tw = engine.$tw as unknown as { Tiddler: new (f: Record<string, unknown>) => { getFieldStrings(o?: { exclude?: string[] }): Record<string, string> }; config: { preferences?: { jsonSpaces?: number } } };
+      // Every member as its properly-formatted field STRINGS (tags in TW5's
+      // `[[a]] [[b]]` form, dates as strings), the runtime `bag` stamp excluded —
+      // the members re-emit byte-clean for an upstream PR diff.
+      const strung = records.map((f) => new $tw.Tiddler(f).getFieldStrings({ exclude: ["bag"] }));
       if (ext === ".json") {
-        const spaces = $tw.config.preferences?.jsonSpaces ?? 4;
-        // getFieldStrings excludes the runtime `bag` stamp — the members re-emit
-        // byte-clean, exactly as TW5's own getTiddlersAsJson shapes the array.
-        const data = records.map((f) => new $tw.Tiddler(f).getFieldStrings({ exclude: ["bag"] }));
-        return JSON.stringify(data, null, spaces);
+        // application/json — the tiddler-array form (byte-shaped like getTiddlersAsJson).
+        return JSON.stringify(strung, null, $tw.config.preferences?.jsonSpaces ?? 4);
       }
-      throw new Error(`REPACK: no serializer for "${ext}" yet — only .json (a .multids / recursive-.tid serializer follows)`);
+      if (ext === ".multids") {
+        // application/x-tiddlers — a shared-fields block, a blank line, then
+        // `title: text` lines (boot.js:1706). Faithful ONLY when every member's
+        // non-title/text fields are SHARED (same value across all) and its text is
+        // single-line; a member that breaks that can't ride .multids and surfaces
+        // loudly (never a silent lossy write — repack it as .json).
+        const fieldNames = new Set<string>();
+        for (const t of strung) for (const k of Object.keys(t)) if (k !== "title" && k !== "text") fieldNames.add(k);
+        const shared: Record<string, string> = {};
+        for (const name of fieldNames) {
+          const vals = strung.map((t) => t[name]);
+          if (vals.every((v) => v !== undefined && v === vals[0])) shared[name] = vals[0]!;
+        }
+        for (const t of strung) {
+          for (const k of Object.keys(t)) {
+            if (k === "title" || k === "text") continue;
+            if (!(k in shared)) throw new Error(`REPACK .multids: member "${t["title"]}" carries a per-member field "${k}" that .multids cannot hold — repack as .json`);
+          }
+          if ((t["text"] ?? "").includes("\n")) throw new Error(`REPACK .multids: member "${t["title"]}" has multi-line text — .multids holds single-line values only; repack as .json`);
+        }
+        const sharedBlock = Object.keys(shared).sort().map((k) => `${k}: ${shared[k]}`).join("\n");
+        const memberLines = strung.map((t) => `${t["title"]}: ${t["text"] ?? ""}`).join("\n");
+        return `${sharedBlock}\n\n${memberLines}`;
+      }
+      throw new Error(`REPACK: no serializer for "${ext}" — native bundle types are .json and .multids`);
     },
   };
 }
@@ -645,13 +670,14 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         continue;
       }
       // The `.meta` sidecar seeds the fields FIRST (TW5's own field parser), so a
-      // content carrier keeps its type/tags/custom fields across a body-only edit;
-      // the loci URI holds title authority over any stored title. Then the
-      // extension routes to TW5's registry — it resolves the content-type + the
-      // right deserializer, or falls back to text/plain.
-      const baseFields: Record<string, unknown> = { title: uri };
+      // content carrier keeps its type/tags/custom fields across a body-only edit.
+      // A base `title` is NEVER passed to the deserialize: a DICTIONARY bundle
+      // (`.multids`) takes the base title as a member-title PREFIX (boot.js:1719),
+      // which would corrupt every member. Titles come from the content; a
+      // title-less SINGLE carrier falls back to the loci URI below.
+      const baseFields: Record<string, unknown> = {};
       if (carrier.meta) Object.assign(baseFields, tw5!.parseFields(carrier.meta));
-      baseFields["title"] = uri;
+      delete baseFields["title"];
       const fieldsList = tw5!.deserialize(carrier.ext || "text/plain", carrier.text, baseFields);
       freshRecords = fieldsList.map((fields) => {
         const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";

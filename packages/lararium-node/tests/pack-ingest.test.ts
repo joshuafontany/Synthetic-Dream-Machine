@@ -99,6 +99,33 @@ describe.skipIf(!corePresent)("pack ingest — a .json bundle lands members + re
     expect(membersOfPack(await provenance(composite), PACK)).toEqual(["Alpha"]);
   });
 
+  test("REPACK a .multids bundle round-trips the dictionary format", async () => {
+    const composite = makeComposite();
+    const MULTIDS_URI = "lar:///ha.ka.ba/lares/api/native/langs";
+    const MULTIDS_PACK = "ha.ka.ba/lares/api/native/langs.multids";
+    const text = "tags: i18n\ntype: text/vnd.tiddlywiki\n\nHello: hello world\nGoodbye: goodbye world";
+    const args = {
+      "source-uri": "file:///staged/langs.multids", "to-bag": BAG, "change-id": "chg-md-1",
+      carriers: [{ uri: MULTIDS_URI, text, diskHash: sha(text), syncedHash: null, ext: ".multids" }],
+    };
+    await runIngest(composite, engine, args);
+
+    const table = new VerbTable();
+    registerActionReactors(table, { composite, tw5: makeTw5Deserializer(engine) });
+    const rargs = { bag: BAG, "pack-path": MULTIDS_PACK };
+    const result = await table.get("REPACK")!(rargs, ctx(composite, rargs)) as Record<string, unknown>;
+    expect(result["count"]).toBe(2);
+    const out = String(result["text"]);
+    // the re-rendered .multids carries the shared block + the `title: text` lines
+    expect(out).toContain("tags: i18n");
+    expect(out).toContain("Hello: hello world");
+    expect(out).toContain("Goodbye: goodbye world");
+    // and it deserializes BACK to the same two members
+    const reparsed = makeTw5Deserializer(engine).deserialize(".multids", out, {});
+    const titles = reparsed.map((t) => String(t["title"])).sort();
+    expect(titles).toEqual(["Goodbye", "Hello"]);
+  });
+
   test("REPACK collects the members via provenance + re-renders the bundle (round-trip)", async () => {
     const composite = makeComposite();
     await runIngest(composite, engine, jsonArgs([

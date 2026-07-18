@@ -23,15 +23,17 @@ import { fileToUriForSource } from "../ingest-core.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 function printUsage(): void {
-  console.log("usage: lares repack --source <bundle-file> --to <bagUri> [--out <file>]");
-  console.log("  re-renders a multi-tiddler bundle (.json) from its recorded pack members —");
-  console.log("  the collect-the-residency export for an upstream TW5 PR. Writes --out (default --source).");
+  console.log("usage: lares repack --source <bundle-file> --from <bagUri> [--in-wiki] [--out <file>]");
+  console.log("  re-renders a multi-tiddler bundle (.json / .multids) from its recorded pack members —");
+  console.log("  the collect-the-residency export for an upstream TW5 PR. Reads members FROM the bag,");
+  console.log("  writes the bundle to --out (default --source). Flags align the family:");
+  console.log("  --source = the disk bundle file (ingest/watch), --from = the source bag (act), --in-wiki = context.");
 }
 
 export async function cmdRepack(args: ParsedArgs): Promise<number> {
-  const source = args.options["source"];
-  const toBag  = args.options["to"];
-  if (!source || !toBag) { printUsage(); return 2; }
+  const source  = args.options["source"];
+  const fromBag = args.options["from"];
+  if (!source || !fromBag) { printUsage(); return 2; }
   const out = args.options["out"] ?? source;
 
   const root = larRoot();
@@ -51,9 +53,18 @@ export async function cmdRepack(args: ParsedArgs): Promise<number> {
     return exitFor("not-found");
   }
 
+  // --in-wiki: run REPACK IN the active wiki island, so the members render
+  // through THAT wiki's composite layer stack — the SAME bundle of titles renders
+  // distinctly per wiki (shadowing edits above the canon), on purpose. The default
+  // path resolves daemon-side (canon bags, no working-layer shadow).
+  const inWiki     = Boolean(args.flags["in-wiki"]);
+  const repackArgs = { bag: fromBag, "pack-path": packPath };
+  const submitName = inWiki ? "wiki-act" : "REPACK";
+  const submitArgs = inWiki ? { verb: "REPACK", args: repackArgs } : repackArgs;
+
   let result;
   try {
-    result = await runVerb("REPACK", { bag: toBag, "pack-path": packPath }, did);
+    result = await runVerb(submitName, submitArgs, did);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." }, human: () => { console.error(`lares repack: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
