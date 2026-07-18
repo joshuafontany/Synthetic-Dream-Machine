@@ -291,7 +291,18 @@ export function recallVerbCap(): CapModule {
               );
               return { mode: "multi", ...res };
             }
-            if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) })) };
+            // Forward the block-taxonomy filters (speaker/channel/function) + the exchange-view flag (pair)
+            // to the ONE coordinator — its _recall_where + pair + recall_session's introspective forward are
+            // the single filter home. Before this they died here and never reached the collapsed search.
+            if (query)    return { mode: "search", ...(await client.search({ query,
+              ...(wing !== undefined ? { wing } : {}),
+              ...(limit !== undefined ? { limit } : {}),
+              ...(sensoriumRoot ? { sensoriumRoot } : {}),
+              ...(typeof args["speaker"]  === "string" ? { speaker:  args["speaker"]  } : {}),
+              ...(typeof args["channel"]  === "string" ? { channel:  args["channel"]  } : {}),
+              ...(typeof args["function"] === "string" ? { function: args["function"] } : {}),
+              ...(args["pair"] === true || args["pair"] === "true" ? { pair: true } : {}),
+            })) };
             return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
           });
         });
