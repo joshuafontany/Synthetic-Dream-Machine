@@ -177,6 +177,46 @@ describe("BagResidencyManager — enforceCap (bounds unpinned wela)", () => {
   });
 });
 
+describe("BagResidencyManager — per-grain-type caps (F2 one-collector dials)", () => {
+  const W1 = "lar:///wiki/one", W2 = "lar:///wiki/two", W3 = "lar:///wiki/three";
+
+  test("a wiki flood evicts wikis at the wiki cap, never a live bag", async () => {
+    const evicted: Array<{ url: string; type: string }> = [];
+    // ONE collector: bag cap 2, wiki cap 1. The two dials bound independently.
+    const m = new BagResidencyManager({
+      hotCap: 2, typeCaps: { wiki: 1 },
+      onEvict: async (u, t) => { evicted.push({ url: u, type: t }); },
+    });
+    await m.touch(A);                          // bag: 1/2
+    await m.touch(B);                          // bag: 2/2 — at cap, no evict
+    await m.touch(W1, "wiki");                 // wiki: 1/1 — at cap
+    await m.touch(W2, "wiki");                 // wiki: 2 > 1 → evict oldest wiki (W1)
+    expect(evicted).toEqual([{ url: W1, type: "wiki" }]);
+    expect(m.tier(A)).toBe("wela");            // bags untouched by the wiki flood
+    expect(m.tier(B)).toBe("wela");
+    expect(m.tier(W1)).toBe("anu");
+    expect(m.tier(W2)).toBe("wela");
+
+    await m.touch(W3, "wiki");                 // wiki: 2 > 1 → evict oldest live wiki (W2)
+    expect(evicted).toEqual([{ url: W1, type: "wiki" }, { url: W2, type: "wiki" }]);
+    expect(m.tier(A)).toBe("wela");            // still no bag evicted
+    expect(m.tier(W3)).toBe("wela");
+  });
+
+  test("bags overflow their own cap without touching wikis", async () => {
+    const evicted: Array<{ url: string; type: string }> = [];
+    const m = new BagResidencyManager({
+      hotCap: 1, typeCaps: { wiki: 4 },
+      onEvict: async (u, t) => { evicted.push({ url: u, type: t }); },
+    });
+    await m.touch(W1, "wiki");
+    await m.touch(A);                          // bag: 1/1
+    await m.touch(B);                          // bag: 2 > 1 → evict oldest bag (A)
+    expect(evicted).toEqual([{ url: A, type: "bag" }]);
+    expect(m.tier(W1)).toBe("wela");           // the wiki grain rides untouched
+  });
+});
+
 describe("BagResidencyManager — sweepOnce single-stage idle cooling", () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());

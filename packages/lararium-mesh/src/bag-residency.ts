@@ -73,28 +73,43 @@ export interface BagResidencyStats {
   readonly hotCap:   number;                         // cap on unpinned-wela residents
 }
 
+/** The default grain type — a bag (an Automerge doc). A wiki-island grain rides
+ *  the SAME collector under `grainType: "wiki"`, so one directory + one policy
+ *  bounds both, with per-type caps (the F2 collapse: fewer parts, one collector). */
+export const DEFAULT_GRAIN_TYPE = "bag";
+
 export interface BagResidencyManagerOptions {
-  /** Soft cap on unpinned-wela (live) bag count. Default 32. Pinned bags are
-   *  exempt and do not count against the cap. */
+  /** Soft cap on unpinned-wela (live) `bag`-grain count. Default 32. Pinned grains
+   *  are exempt and do not count against the cap. This is the `bag`-type dial; other
+   *  grain types override it via `typeCaps`. */
   readonly hotCap?:     number;
-  /** Idle threshold in ms. A wela bag untouched longer than this cools to anu.
+  /** Per-grain-type soft caps — the F2 per-type dials over the ONE collector (e.g.
+   *  `{ wiki: 4 }` bounds live wiki islands independently of bags). A type absent
+   *  here falls back to `hotCap`. `bag` always reads `hotCap`. */
+  readonly typeCaps?:   Readonly<Record<string, number>>;
+  /** Idle threshold in ms. A wela grain untouched longer than this cools to anu.
    *  Default 300_000 (5 minutes). */
   readonly idleMs?:     number;
   /** Sweeper tick interval in ms. Default 30_000 (30 seconds). */
   readonly sweepIntervalMs?: number;
-  /** Hook called when heating anu → wela (hoʻowela). Wires into repo.find(). */
-  readonly onHydrate?:  (url: BagUrl) => Promise<void>;
-  /** Hook called when cooling wela → anu (hoʻoanu). Compact-then-drop; until
-   *  automerge-repo#358 lands a public eviction API the actual handle drop
+  /** Hook called when heating anu → wela (hoʻowela). Wires into repo.find() (bag)
+   *  or mountWiki (wiki). The grain type routes the right activation. */
+  readonly onHydrate?:  (url: BagUrl, grainType: string) => Promise<void>;
+  /** Hook called when cooling wela → anu (hoʻoanu). Compact-then-drop (bag) or
+   *  unmountWiki (wiki); the grain type routes the right deactivation. Until
+   *  automerge-repo#358 lands a public eviction API the actual bag handle drop
    *  stays a TODO inside the hook impl. */
-  readonly onEvict?:    (url: BagUrl) => Promise<void>;
+  readonly onEvict?:    (url: BagUrl, grainType: string) => Promise<void>;
 }
 
-/** Internal per-bag residency state (single-map model). */
+/** Internal per-grain residency state (single-map model). */
 interface ResidencyState {
   temperature: ResidencyTemperature;
   pinned:      boolean;
   lastTouched: number;
+  /** Grain type — `bag` (default) or `wiki`. Selects the per-type cap + the
+   *  onHydrate/onEvict routing. Set on first registration; never changes. */
+  grainType:   string;
   pinReason?:  string;
   syncActive?: boolean;
   /** Transient: set while an async `onEvict` is in flight. A concurrent touch /
@@ -117,10 +132,11 @@ interface ResidencyState {
 export class BagResidencyManager {
   private readonly _bags = new Map<BagUrl, ResidencyState>();
   private readonly hotCap:          number;
+  private readonly typeCaps:        Readonly<Record<string, number>>;
   private readonly idleMs:          number;
   private readonly sweepIntervalMs: number;
-  private readonly onHydrate?:      (url: BagUrl) => Promise<void>;
-  private readonly onEvict?:        (url: BagUrl) => Promise<void>;
+  private readonly onHydrate?:      (url: BagUrl, grainType: string) => Promise<void>;
+  private readonly onEvict?:        (url: BagUrl, grainType: string) => Promise<void>;
   // ReturnType<typeof setInterval> resolves to DOM's `number` here because
   // @types/node isn't on the lararium-mesh type chain. The runtime value
   // is Node's Timeout. clearInterval accepts both; only Node has .unref().
@@ -129,16 +145,24 @@ export class BagResidencyManager {
 
   constructor(opts: BagResidencyManagerOptions = {}) {
     this.hotCap          = opts.hotCap          ?? 32;
+    this.typeCaps        = opts.typeCaps        ?? {};
     this.idleMs          = opts.idleMs          ?? 300_000;
     this.sweepIntervalMs = opts.sweepIntervalMs ?? 30_000;
     if (opts.onHydrate) this.onHydrate = opts.onHydrate;
     if (opts.onEvict)   this.onEvict   = opts.onEvict;
   }
 
-  private _ensure(url: BagUrl): ResidencyState {
+  /** The soft cap for a grain type — `bag` reads `hotCap`; other types read their
+   *  `typeCaps` dial, falling back to `hotCap` when unset. */
+  private _capForType(grainType: string): number {
+    if (grainType === DEFAULT_GRAIN_TYPE) return this.hotCap;
+    return this.typeCaps[grainType] ?? this.hotCap;
+  }
+
+  private _ensure(url: BagUrl, grainType: string = DEFAULT_GRAIN_TYPE): ResidencyState {
     let s = this._bags.get(url);
     if (!s) {
-      s = { temperature: "anu", pinned: false, lastTouched: Date.now() };
+      s = { temperature: "anu", pinned: false, lastTouched: Date.now(), grainType };
       this._bags.set(url, s);
     }
     return s;
@@ -157,15 +181,15 @@ export class BagResidencyManager {
 
   /** Pin a bag — exempt it from cooling (orthogonal flag). An anu bag heats to
    *  wela (hydrate); a wela bag stays resident and gains the flag. */
-  async pin(url: BagUrl, reason?: string): Promise<void> {
+  async pin(url: BagUrl, reason?: string, grainType: string = DEFAULT_GRAIN_TYPE): Promise<void> {
     const wasCold = (this._bags.get(url)?.temperature ?? "anu") === "anu";
-    const s = this._ensure(url);
+    const s = this._ensure(url, grainType);
     s.pinned = true;
     if (reason !== undefined) s.pinReason = reason;
     if (wasCold) {
       s.temperature = "wela";
       s.lastTouched = Date.now();
-      if (this.onHydrate) await this.onHydrate(url);
+      if (this.onHydrate) await this.onHydrate(url, s.grainType);
     }
   }
 
@@ -181,22 +205,22 @@ export class BagResidencyManager {
   /** Note that a bag was just touched (read or write) — `hoʻowela` to wela.
    *  Heats anu → wela via onHydrate (only when it was cold); bumps lastTouched.
    *  Triggers an LRU trim when adding pushes resident count past hotCap. */
-  async touch(url: BagUrl): Promise<void> {
+  async touch(url: BagUrl, grainType: string = DEFAULT_GRAIN_TYPE): Promise<void> {
     const wasCold = (this._bags.get(url)?.temperature ?? "anu") === "anu";
-    const s = this._ensure(url);
-    if (wasCold && this.onHydrate) await this.onHydrate(url);
+    const s = this._ensure(url, grainType);
+    if (wasCold && this.onHydrate) await this.onHydrate(url, s.grainType);
     s.temperature = "wela";
     s.lastTouched = Date.now();
-    delete s.evicting;            // cancel any in-flight cool — bag is live again
+    delete s.evicting;            // cancel any in-flight cool — grain is live again
     await this.enforceCap();
   }
 
   /** Register a URL we know about but haven't loaded. Oracle traversal calls
    *  this when it sees a `tiddler.text → automerge:URL` pointer for a bag not
-   *  already tracked. No-op if already known (never cools a live bag). */
-  registerCold(url: BagUrl): void {
+   *  already tracked. No-op if already known (never cools a live grain). */
+  registerCold(url: BagUrl, grainType: string = DEFAULT_GRAIN_TYPE): void {
     if (this._bags.has(url)) return;
-    this._bags.set(url, { temperature: "anu", pinned: false, lastTouched: Date.now() });
+    this._bags.set(url, { temperature: "anu", pinned: false, lastTouched: Date.now(), grainType });
   }
 
   /** `hoʻoanu` — cool a wela bag to anu (compact-then-drop the handle).
@@ -213,7 +237,7 @@ export class BagResidencyManager {
     const s = this._bags.get(url);
     if (!s || s.pinned || s.temperature === "anu" || s.syncActive) return false;
     s.evicting = true;
-    if (this.onEvict) await this.onEvict(url);
+    if (this.onEvict) await this.onEvict(url, s.grainType);
     const after = this._bags.get(url);
     if (!after || !after.evicting || after.pinned || after.syncActive) {
       if (after) delete after.evicting;
@@ -230,31 +254,46 @@ export class BagResidencyManager {
     return this.cool(url);
   }
 
-  /** Count of UNPINNED wela (live) bags. Pinned bags are exempt from cooling and
-   *  do NOT count against the cap (preserves pre-collapse semantics where `_hot`
-   *  excluded pinned). The cap bounds this number. */
-  private residentCount(): number {
+  /** Count of UNPINNED wela (live) grains of a type. Pinned grains are exempt from
+   *  cooling and do NOT count against the cap (preserves pre-collapse semantics where
+   *  `_hot` excluded pinned). The per-type cap bounds this number. */
+  private residentCount(grainType: string): number {
+    let n = 0;
+    for (const s of this._bags.values())
+      if (!s.pinned && s.temperature === "wela" && s.grainType === grainType) n++;
+    return n;
+  }
+
+  /** LRU trim — per grain type, while unpinned-wela of that type > its cap, cool the
+   *  oldest evictable grain of that type. Each type bounds independently (the F2
+   *  per-type dials over the ONE collector): a wiki flood never evicts a live bag. */
+  private async enforceCap(): Promise<void> {
+    const types = new Set<string>();
+    for (const s of this._bags.values()) if (!s.pinned && s.temperature === "wela") types.add(s.grainType);
+    for (const grainType of types) {
+      const cap = this._capForType(grainType);
+      while (this.residentCount(grainType) > cap) {
+        const target = this._oldestWela(grainType);
+        if (!target) break;        // every wela grain of this type is pinned or mid-sync
+        const ok = await this.cool(target);
+        if (!ok) break;            // race or refusal — bail; next sweep retries
+      }
+    }
+  }
+
+  /** Total UNPINNED wela grains across all types — the sweep's evicted-delta base. */
+  private _totalResidentCount(): number {
     let n = 0;
     for (const s of this._bags.values()) if (!s.pinned && s.temperature === "wela") n++;
     return n;
   }
 
-  /** LRU trim — while unpinned-wela > hotCap, cool the oldest evictable bag. */
-  private async enforceCap(): Promise<void> {
-    while (this.residentCount() > this.hotCap) {
-      const target = this._oldestWela();
-      if (!target) break;        // every wela bag is pinned or mid-sync
-      const ok = await this.cool(target);
-      if (!ok) break;            // race or refusal — bail; next sweep retries
-    }
-  }
-
-  /** Oldest unpinned, non-syncing wela bag, or null. */
-  private _oldestWela(): BagUrl | null {
+  /** Oldest unpinned, non-syncing wela grain of a type, or null. */
+  private _oldestWela(grainType: string): BagUrl | null {
     let oldestUrl: BagUrl | null = null;
     let oldestAt  = Infinity;
     for (const [url, s] of this._bags) {
-      if (s.pinned || s.syncActive || s.temperature !== "wela") continue;
+      if (s.pinned || s.syncActive || s.temperature !== "wela" || s.grainType !== grainType) continue;
       if (s.lastTouched < oldestAt) {
         oldestAt  = s.lastTouched;
         oldestUrl = url;
@@ -302,9 +341,9 @@ export class BagResidencyManager {
         if (!s.pinned && !s.syncActive && s.temperature === "wela" && s.lastTouched < cutoff)
           stale.push(url);
       for (const url of stale) if (await this.cool(url)) cooled++;
-      const before = this.residentCount();
+      const before = this._totalResidentCount();
       await this.enforceCap();
-      lruEvicted = before - this.residentCount();
+      lruEvicted = before - this._totalResidentCount();
     } finally {
       this.sweepInFlight = false;
     }
