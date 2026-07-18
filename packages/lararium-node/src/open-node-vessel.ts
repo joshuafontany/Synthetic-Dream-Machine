@@ -665,6 +665,17 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).refresh(req);
       },
+      readRejim: async (input) => {
+        // Read the landed rejim (rhythm/geology) plane through the holder that owns the store.
+        const { sensoriumRoot } = input;
+        return await captureFor(sensoriumRoot).readRejim({});
+      },
+      repourRejim: async (input) => {
+        // Re-derive the rejim plane over the holder's content — the heavy repour rides the capture pipe, so
+        // it queues between passes and never races the live writer (the derived-view discipline).
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).repourRejim(req);
+      },
       placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),

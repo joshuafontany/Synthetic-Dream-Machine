@@ -68,6 +68,12 @@ export interface SourceCapture {
   /** Re-pave the in-tree mempalace projection over the content plane, on the SAME serialized pipe — so a
    *  refresh queues between capture passes and never races the writer (a second store connection would). */
   refresh(request: { query?: string; k?: number; allStrata?: boolean }): Promise<Record<string, unknown>>;
+  /** Read the landed rejim (rhythm/geology) plane — the derived regimes made askable, or an honest absence
+   *  when the plane has never been repoured. Rides the same serialized pipe. */
+  readRejim(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
+  /** Re-derive the rejim plane over the content the holder already owns — the heavy whole-stream repour,
+   *  queued between capture passes so it never races the writer. */
+  repourRejim(request?: { channel?: string; nSurrogates?: number }): Promise<Record<string, unknown>>;
   close(): Promise<void>;
 }
 
@@ -100,6 +106,10 @@ export function makeSourceCapture(
     // A refresh carries no session text — only the projection knobs — so it needs no admission descriptor;
     // the holder re-derives the view from the content it already owns.
     refresh: async (request) => await p.send("refresh", { ...request }) as Record<string, unknown>,
+    // The rejim (rhythm/geology) DERIVED plane: read the landed geology, or re-derive it over the content
+    // the holder already owns — both ride the pipe (queue between capture passes, never race the writer).
+    readRejim: async (request) => await p.send("read_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
+    repourRejim: async (request) => await p.send("repour_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
     close: p.close,
   };
 }

@@ -125,6 +125,12 @@ export interface DaemonVerbProvider {
    *  capture holder — so a refresh queues between capture passes and never races the live writer.
    *  `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
   refreshMempalace(input: { query?: string; k?: number; allStrata?: boolean; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** Read the landed rejim (rhythm/geology) plane — the derived regimes made askable — THROUGH the holder
+   *  that owns the store. `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
+  readRejim(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** Re-derive the rejim plane over the content plane, THROUGH the serialized capture holder — the heavy
+   *  whole-stream repour queues between capture passes and never races the live writer. */
+  repourRejim(input: { channel?: string; nSurrogates?: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeStructurepalaceKapae(turnKey: string, ended?: string): void;
@@ -366,6 +372,24 @@ export function captureVerbCap(): CapModule {
             ...(query ? { query } : {}),
             ...(k !== undefined ? { k } : {}),
             ...(allStrata ? { allStrata } : {}),
+            ...(sensoriumRoot ? { sensoriumRoot } : {}),
+          });
+        });
+        registry.register("rejim", async (args) => {
+          // Read the landed rejim (rhythm/geology) plane — the derived regimes made askable (repour writes
+          // it, this reads it). An honest absence when the plane has never been repoured.
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.readRejim({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("repour-rejim", async (args) => {
+          // Re-derive the rejim plane over the content plane, serialized on the capture holder's pipe (rides
+          // between capture passes — no race with the live writer), exactly as `refresh` re-paves the projection.
+          const channel = typeof args["channel"] === "string" ? (args["channel"] as string) : undefined;
+          const nSurrogates = typeof args["nSurrogates"] === "number" ? (args["nSurrogates"] as number) : undefined;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.repourRejim({
+            ...(channel ? { channel } : {}),
+            ...(nSurrogates !== undefined ? { nSurrogates } : {}),
             ...(sensoriumRoot ? { sensoriumRoot } : {}),
           });
         });
