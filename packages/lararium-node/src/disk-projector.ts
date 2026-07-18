@@ -33,7 +33,7 @@
  *   (bag, root); the flush renders the ROOT — one carrier, one file. A
  *   fragment URI never owns a disk path (bag-paths returns null for them).
  *
- * Echo suppression ranks (§6): the CONTENT-HASH gates carry the law —
+ * Echo suppression ranks (Confluence): the CONTENT-HASH gates carry the law —
  * ingest drops disk-hash == synced-hash; projection skips byte-identical
  * writes. The `writing` Set survives beneath them as a latency
  * optimization only (skip re-statting our own in-flight writes); no
@@ -77,7 +77,7 @@ export interface LarDiskProjectorOptions {
   /** Write a .json sidecar next to each .md for peek debugging. */
   readonly debugJson?: boolean;
   /**
-   * The Synced tree (§6 merge base): records the content hash of every
+   * The Synced tree (Confluence merge base): records the content hash of every
    * projected carrier; arms the projection-side hash gate — a write whose
    * bytes match disk skips silently (no event, no churn).
    */
@@ -343,7 +343,7 @@ export class LarDiskProjector {
     }
     const candidate = gate.path;
 
-    // Projection-side hash gate (§6): bytes already on disk == would-write
+    // Projection-side hash gate (Confluence): bytes already on disk == would-write
     // bytes → skip the write entirely (no event for any watcher, no mtime
     // churn) — but still record the observation in the Synced tree. The gate
     // reads the MAIN body per-file; the Synced-tree OBSERVATION folds the `.meta`

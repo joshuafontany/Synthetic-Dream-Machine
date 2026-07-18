@@ -52,7 +52,7 @@ Six residency verbs (SPARQL set-algebra) + a ''non-residency tier'' (INGEST, REC
 | ''CLEAR'' | enumerate live titles in bag, tombstone each | disposition (bag-level) | bag |
 | ''DROP'' | tombstone every live title in bag + mark the bag retired | disposition (bag retired) | bag |
 | ''LOAD'' | land operator-supplied carriers into `to-bag` (carrier-borne; islands never fetch — `source-uri` = provenance) | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
-| ''INGEST'' | disk→records through the §6 gate (three-way diff, replace-by-group, NFC; + whole-carrier `deletions`) — the non-residency precedent | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
+| ''INGEST'' | disk→records through the Confluence — the three-way reconcile gate (disk · synced · records meet; replace-by-group, NFC; + whole-carrier `deletions`; surface-never-overwrite) — the non-residency precedent | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
 | ''RECONCILE'' //(design)// | fold a newer engine genesis forward into `@oracle` (operator-admin engine rite; preview → conflict-surface → confirm → idempotent) | engine-version record (`@oracle` ledger) | see residency-model #non-residency-verbs |
 
 ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''never version control''. ''INGEST + RECONCILE'' form the non-residency tier — the same VERB → SUMMONS → OUTCOME rail, `withEffectRecord` audit, and cap-gate, with no tiddler-between-bags move. See [[residency-model|residency-model.md]] `#action-verb-surface` + `#non-residency-verbs`.

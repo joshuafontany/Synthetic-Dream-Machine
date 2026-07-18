@@ -79,7 +79,7 @@ export function readCarrierText(file: string): { text: string; binary: boolean }
  * of its own), a single file lists itself. Returns null when the source does
  * not resolve. Filetype routing is the ISLAND's job (TW5's registry); the Node
  * gesture only enumerates + carries the extension. Observations only, never a
- * work queue (§6: scan is truth, events are hints).
+ * work queue (Confluence: scan is truth, events are hints).
  */
 export function listCarriers(source: string): string[] | null {
   let st;
@@ -237,7 +237,7 @@ export interface SubmitIngestOpts {
 
 /**
  * Submit NEW+CHANGED carriers as ONE INGEST verb — hashes travel WITH the content;
- * the island runs the full §6 gate and answers per-carrier decisions. One call =
+ * the island runs the full Confluence gate and answers per-carrier decisions. One call =
  * one wave, one line over the sock. The one-shot gesture and the watcher's every
  * wave submit identically; the daemon holds the warm replica across both.
  */

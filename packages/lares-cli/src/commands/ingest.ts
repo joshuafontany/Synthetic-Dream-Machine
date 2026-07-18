@@ -9,7 +9,7 @@
  *   diff      disk-hash vs synced-hash per carrier (the cheap two legs)
  *   preview   (default) print NEW / UNCHANGED / CHANGED; submit nothing
  *   --apply   send NEW+CHANGED carriers with their hashes riding an INGEST
- *             verb; the island runs the full §6 gate (its currentRenderHash
+ *             verb; the island runs the full Confluence gate (its currentRenderHash
  *             = the third leg) and answers per-carrier decisions
  *
  * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff

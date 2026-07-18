@@ -152,7 +152,7 @@ export interface LoadAction extends ResidencyActionBase {
   readonly carriers?:   readonly LoadCarrier[];
 }
 
-/** One carrier riding an INGEST verb — the §6 triangle's inputs travel WITH
+/** One carrier riding an INGEST verb — the Confluence triangle's inputs travel WITH
  *  the content: the gesture (which holds the disk grant + the Synced tree)
  *  computes diskHash and reads syncedHash; the island computes only the
  *  currentRenderHash from its own merge seat (readiness reads local). */
@@ -187,7 +187,7 @@ export interface IngestDeletion {
   readonly syncedHash: string;
 }
 
-/** INGEST — disk → records through the §6 gate, replace-by-group apply.
+/** INGEST — disk → records through the Confluence gate, replace-by-group apply.
  *  LOAD lands unconditionally and never removes; INGEST decides (echo-noop ·
  *  refuse · canonical-equivalent · ingest · conflict) and tombstones group
  *  members that vanished from the re-parsed carrier. A wave MAY also carry

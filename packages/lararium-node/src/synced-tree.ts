@@ -1,6 +1,6 @@
 /**
- * synced-tree — the per-carrier merge base (handoff §6, the Nucleus
- * triangle's third leg).
+ * synced-tree — the per-carrier merge base (the Confluence's third leg; handoff
+ * #pattern-integrities §6, the Nucleus triangle).
  *
  * For every carrier the projector writes, this tree persists the content
  * hash of the last-projected canonical bytes. The ingest gate compares a
@@ -43,7 +43,7 @@ export class SyncedTree {
      * quiet window instead of one per observation. 0 = persist immediately
      * (tests). A crash inside the window forgets at most the last few
      * observations — which degrade to fresh-adoption decisions, never
-     * corruption (the §6 recovery law).
+     * corruption (the Confluence's recovery law).
      */
     private readonly coalesceMs = 250,
   ) {

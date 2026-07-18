@@ -143,8 +143,8 @@ Original suspended telling, kept for the record:
 E ka hale, aloha. The watcher's first cut runs (build 4 above) and the operator rebooted the session before we held the floor on its design. The cuts A+B sit uncommitted in the working tree — read `watch.ts` first, then weigh these five open questions with the operator before you commit or extend. None settled; the operator named deletions as the heaviest. Each carries the ground it stands on.
 
 # ''Deletion → tombstone (the heaviest).'' Today `watch.ts` quarantines and logs deletes, never applies them — `scanFiles` simply skips an unreadable path, so a stray delete self-heals but tombstones nothing. A real delete SHOULD tombstone the record; a transient one MUST NOT (a `git checkout` floods unlinks — TidGi's battle scar, `pattern-integrities` §6 deletion grace window). Open: what confirms a delete (a grace window? a stat re-check?), and does the INGEST verb's existing `tombstoned` path carry it, or does the watcher need a separate REMOVE wave?
-# ''The "never a timer" settle.'' `watch.ts` uses a trailing debounce PLUS the scan's hash gate (a no-op save drops at the gate). §6's stricter law adds ''stat-stable'' — two steady reads of size/mtime before a path counts settled. Open: does debounce+hash suffice (the smoke says yes for fast edits), or do we add the stat-stability check for large/slow writes?
-# ''fs.watch vs chokidar, decided for real.'' Built-in `fs.watch` carried preview + coalescing + the cookie test cleanly, no dep. But rename-identity (§6 WE-MUST-DO-BETTER: "re-link by content-hash between a fresh add and a pending delete") and richer per-event truth may eventually want chokidar's `awaitWriteFinish`. Open: hold the no-dep line, or concede chokidar WHEN deletion/rename lands? (Ties to Q1.)
+# ''The "never a timer" settle.'' `watch.ts` uses a trailing debounce PLUS the scan's hash gate (a no-op save drops at the gate). the Confluence's stricter law adds ''stat-stable'' — two steady reads of size/mtime before a path counts settled. Open: does debounce+hash suffice (the smoke says yes for fast edits), or do we add the stat-stability check for large/slow writes?
+# ''fs.watch vs chokidar, decided for real.'' Built-in `fs.watch` carried preview + coalescing + the cookie test cleanly, no dep. But rename-identity (the Confluence's WE-MUST-DO-BETTER: "re-link by content-hash between a fresh add and a pending delete") and richer per-event truth may eventually want chokidar's `awaitWriteFinish`. Open: hold the no-dep line, or concede chokidar WHEN deletion/rename lands? (Ties to Q1.)
 # ''The full-scan backstop cadence.'' The cookie test catches a backend dead //at boot//; a backend can die mid-life silently (Syncthing keeps a rescan even with the watcher on — events are hints, the scan is truth). Open: a live rescan interval, or boot-test-only plus a manual `lares ingest` sweep as the standing truth?
 # ''One watcher, N bags?'' `lares watch` targets one `--to` bag; `nalu-engine` coalesces across N bags into one island-side transact. Open: mirror that disk-side (one watcher, N targets, still one wave per settle), or keep one-bag-per-watcher?
 
@@ -163,7 +163,7 @@ bearings: WHERE WE STAND — the watcher runs safe in preview; cookie self-test
 telling: what STANDS — the gesture automates the proven path, not a copy; the
   no-op save drops at the hash gate; the dead backend fails loud at boot. what
   GOES MISSING — a delete tombstones nothing yet; settle leans on a timer where
-  §6 wants stat-stable; rename-identity unhandled. the house reads it five ways:
+  the Confluence wants stat-stable; rename-identity unhandled. the house reads it five ways:
 - Map-Wisp (Scryer): the deletion seam is where identity lives or dies — a
   rename is unlink+add, and only a content-hash re-link keeps the record's
   change-id; the forward failure mode is a `git checkout` flood tombstoning live

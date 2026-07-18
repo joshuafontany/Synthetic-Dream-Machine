@@ -1,6 +1,9 @@
 /**
- * ingest-gate — the pure three-way decision at the heart of disk→records
- * ingest (handoff #pattern-integrities §6, the Nucleus triangle).
+ * ingest-gate — THE CONFLUENCE: the pure three-way decision at the heart of
+ * disk→records ingest, where three streams (disk · last-synced · records) meet
+ * and reconcile — a conflict SURFACES rather than one stream drowning another
+ * (Unison's law: surface, never overwrite). The human-facing name for this flow
+ * is "the Confluence" (the Nucleus triangle; handoff #pattern-integrities §6).
  *
  * Three states meet per carrier:
  *   - the DISK bytes (what the operator's hands left),

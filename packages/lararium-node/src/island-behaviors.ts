@@ -31,7 +31,7 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       const mirrors = mirrorDefs.map(({ bagId, mirrorRoot, scope }) =>
         namedBagMirror(bagId, scope, mirrorRoot),
       );
-      // The Synced tree (§6 merge base) sits at the INSTANCE ROOT (the dir
+      // The Synced tree (Confluence merge base) sits at the INSTANCE ROOT (the dir
       // holding bags/) under .lararium-projection/ — observation state,
       // never a meme surface, never inside bags/; the ingest gate reads the
       // same file. mirrorRoot shape under the full-path-inside-bag ruling:

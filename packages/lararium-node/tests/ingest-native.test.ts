@@ -1,10 +1,10 @@
 /**
- * ingest-native — the §6 gate for a NATIVE filetype carrier (.md/.tid/.json).
+ * ingest-native — the Confluence gate for a NATIVE filetype carrier (.md/.tid/.json).
  *
  * A native carrier runs the SAME triangle a memetic one does, via the registry's
  * own render (the file-info body): echo-noop · canonical-equivalent · ingest ·
  * conflict. The conflict leg is the load-bearing one — without it a native carrier
- * read last-write-wins over a wiki-side edit (a silent §6 overwrite).
+ * read last-write-wins over a wiki-side edit (a silent overwrite the Confluence forbids).
  */
 
 import { describe, test, expect, beforeAll } from "vitest";
@@ -65,7 +65,7 @@ async function runIngest(composite: CompositeStore, engine: TW5Engine, a: Record
   return (result["carriers"] as Array<Record<string, unknown>>)[0]!;
 }
 
-describe.skipIf(!corePresent)("INGEST — the native filetype §6 triangle", () => {
+describe.skipIf(!corePresent)("INGEST — the native filetype Confluence triangle", () => {
   let engine: TW5Engine;
   beforeAll(async () => {
     engine = new TW5Engine();

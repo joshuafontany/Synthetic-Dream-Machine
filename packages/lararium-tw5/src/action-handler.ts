@@ -81,7 +81,7 @@ export interface Tw5Deserializer {
    *  the projector + the ingest echo gate share). The INGEST gate hashes this via
    *  `carrierHash` to detect a native carrier's canonical-equivalence (a cosmetic
    *  edit) and a conflict (both disk AND records moved) — so a native filetype
-   *  honors the same §6 law as a memetic carrier, never a silent last-write-wins
+   *  honors the same Confluence law as a memetic carrier, never a silent last-write-wins
    *  overwrite. The `.meta` folds into the hash, so a FIELD-only edit surfaces too. */
   renderCarrier(uri: string, fields: Record<string, unknown>): { body: string; metaBody?: string };
   /** Re-serialize a set of member records back into ONE multi-tiddler file (the
@@ -548,7 +548,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
 
 
 /**
- * INGEST — disk -> records through the §6 gate, replace-by-group apply.
+ * INGEST — disk -> records through the Confluence gate, replace-by-group apply.
  * The gesture supplies diskHash + syncedHash with each carrier (it holds the
  * disk grant and the Synced tree); the island computes only the
  * currentRenderHash from its own merge seat. On an ingest decision the fresh
@@ -614,7 +614,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
     const groupTitles = all.filter((t) => t === uri || t.startsWith(`${uri}#`) || t.startsWith(`${uri}/`));
 
     // Route by content, mirroring LOAD: a memetic carrier (SOH heading / no
-    // native bridge) decomposes at the membrane through the §6 gate; ANY other
+    // native bridge) decomposes at the membrane through the Confluence gate; ANY other
     // legal TW5 filetype rides TW5's OWN deserializer registry, keyed by its
     // extension. The registry — not a CLI-side reimplementation — owns the
     // filetype routing; the island hands the bytes to it.
@@ -693,10 +693,10 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         packInfo = { packPath, members: freshRecords.map((r) => String(r["title"])) };
       }
 
-      // §6 for a SINGLE native carrier — the SAME triangle a memetic carrier runs,
+      // Confluence for a SINGLE native carrier — the SAME triangle a memetic carrier runs,
       // via the registry's own render (the file-info BODY, the digest surface the
       // projector + echo gate share). Without it a native carrier read
-      // last-write-wins over a wiki-side edit (a silent §6 overwrite). A PACK skips
+      // last-write-wins over a wiki-side edit (a silent overwrite the Confluence forbids). A PACK skips
       // this: it holds no single tiddler at the carrier URI — its change-detection
       // rides the membership diff (dropped members tombstone) + a full re-land.
       const rootFresh = packInfo ? undefined : (freshRecords.find((r) => r["title"] === uri) ?? freshRecords[0]);

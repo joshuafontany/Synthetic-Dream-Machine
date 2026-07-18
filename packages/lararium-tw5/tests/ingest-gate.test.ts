@@ -1,5 +1,5 @@
 /**
- * ingest-gate — vectors for the three-way decision (§6 triangle), driven
+ * ingest-gate — vectors for the three-way decision (Confluence triangle), driven
  * by the live boot meme: real carrier, real membrane, no vessel.
  *
  * The five branches under proof:
@@ -32,7 +32,7 @@ function renderOf(text: string, uri: string): string {
 const source = readFileSync(BOOT, "utf8");          // corpus-canonical (the slate)
 const canonical = renderOf(source, URI);
 
-describe("ingest-gate — the §6 triangle decides", () => {
+describe("ingest-gate — the Confluence triangle decides", () => {
   test("disk == synced → noop (the echo gate)", () => {
     const d = decideIngest({
       uri: URI, diskText: source, diskHash: sha(source),
