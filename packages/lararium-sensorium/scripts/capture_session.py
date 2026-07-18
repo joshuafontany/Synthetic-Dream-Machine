@@ -191,6 +191,20 @@ class CaptureSessionServer:
             all_strata=bool(req.get("allStrata")),
         )
 
+    def repour_rejim(self, req: dict) -> dict:
+        """Re-derive the REJIM (rhythm/geology) plane over THIS holder's content — the nameless regimes the
+        stream's own structure holds, re-poured from the eidetic ground, rebuildable like the mempalace
+        projection. Rides the SAME serialized pipe as `capture`/`refresh`, so this heavy whole-stream repour
+        queues BETWEEN capture passes and never races the writer (the pipe IS the serializer; no second
+        store connection). Content-only, so a sigil-less sensorium repours unchanged."""
+        import rejim_io
+        rejim_dir = os.path.join(self._paths.root, "rejim")
+        return rejim_io.repour_rejim(
+            self._paths.content, rejim_dir,
+            channel=str(req.get("channel") or rejim_io.CONTENT),
+            n_surrogates=int(req.get("nSurrogates") or 3),
+        )
+
 
 def _serve(sensorium_root: str) -> None:
     """Serve one serialized Python capture pipe over NDJSON stdio."""
@@ -202,6 +216,7 @@ def _serve(sensorium_root: str) -> None:
             "ping": lambda _req: {"ready": True},
             "capture": server.capture,
             "refresh": server.refresh,   # re-pave the mempalace projection, serialized with capture
+            "repour_rejim": server.repour_rejim,   # re-derive the rejim geology plane, serialized with capture
         }),
         idle_ttl=idle_ttl_seconds("LARES_CAPTURE_IDLE_TTL", 600.0),
         singleton_msg="capture_session: another holder already serves this palace; exiting (singleton)\n",

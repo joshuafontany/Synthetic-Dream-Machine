@@ -77,6 +77,20 @@ def test_serve_holder_keeps_capture_in_python_and_rederives_idempotently(tmp_pat
     assert second["landed"] == 0 and second["skipped"] == TURN_COUNT
 
 
+def test_repour_rejim_derives_the_geology_plane_over_content(tmp_path):
+    # the serve op re-derives the rejim (rhythm/geology) DERIVED plane over the holder's content, on the
+    # SAME serialized pipe as capture. The small fixture is far too short to LOCK a scale, so zero nameless
+    # regimes ride out — but the plane derives + lands a valid geology record (the live-wiring witness).
+    root = str(tmp_path / ".mem")
+    server = CaptureSessionServer(root, embed_factory=_stub_embed_factory())
+    server.capture({"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"})
+    out = server.repour_rejim({})
+    assert "rejim" in out and "n_ticks" in out and out["stream_chars"] > 0   # content stream drained
+    geology = os.path.join(root, "rejim", "geology.json")
+    assert os.path.exists(geology)                                           # landed to the rejim plane
+    assert json.load(open(geology, encoding="utf-8"))["n_ticks"] == out["n_ticks"]
+
+
 def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
     # crash sim: land only a truncated prefix (a partial transcript = the "crash"), then re-run over the
     # FULL fixture — the re-derivation lands the tail (the blocks past the prefix), skips the durable prefix.
