@@ -2,15 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/tw5-boot-gate >>
 ```toml iam
-file-path   = "bags/@lararium/docs/tw5-boot-gate.mem"
-mana        = 17
-manao       = 17
-manaoio     = 17
-register    = "Synthesis-Canon"
-role        = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
-status-date = "2026-04-30"
-type        = "text/x-memetic-wikitext"
-uri-path    = "ha.ka.ba/lararium/docs/tw5-boot-gate"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/tw5-boot-gate.mem"
+last-reviewed = "2026-07-18"
+mana          = 17
+manao         = 17
+manaoio       = 17
+register      = "Synthesis-Canon"
+role          = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 ```
 
 <<~ &#x0002; >>
@@ -38,7 +39,11 @@ _bootModules()
     │
     └─ if none pass → imperative fallback:
             MemeticParser registered in tw.Wiki.parsers
-            tiddlerDeserializerModules["text/x-memetic-wikitext"] = splitCarrierToTiddlers
+            the text/x-memetic-wikitext deserializer rides TW5's native
+              module-type collection — a `module-type: tiddlerdeserializer`
+              plugin tiddler auto-collected into $tw.modules.types keyed by
+              content-type (no imperative map assignment); md-file-router
+              routes .mem/.md through it
             createLarariumWidgets() → _registerWidgets()
 ```
 

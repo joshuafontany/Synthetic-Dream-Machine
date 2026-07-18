@@ -2,16 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
 ```toml iam
-file-path   = "bags/@lararium/docs/tw5-deserializer.mem"
-mana        = 17
-manao       = 17
-manaoio     = 16
-register    = "Synthesis-Canon"
-role        = "design doc: TW5 tiddlerDeserializerModules registration for text/x-memetic-wikitext"
-source      = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
-status-date = "2026-04-30"
-type        = "text/x-memetic-wikitext"
-uri-path    = "ha.ka.ba/lararium/docs/tw5-deserializer"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/tw5-deserializer.mem"
+last-reviewed = "2026-07-18"
+mana          = 17
+manao         = 17
+manaoio       = 16
+register      = "Synthesis-Canon"
+role          = "design doc: TW5 tiddlerdeserializer module (module-type auto-collection) for text/x-memetic-wikitext"
+source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lararium/docs/tw5-deserializer"
 ```
 
 <<~ &#x0002; >>
@@ -20,9 +21,9 @@ uri-path    = "ha.ka.ba/lararium/docs/tw5-deserializer"
 
 !! Overview
 
-TW5 parses tiddler content by content-type. The deserializer for `text/x-memetic-wikitext` is registered in the `TW5.Wiki.tiddlerDeserializerModules` map at boot time. When TW5 encounters a tiddler with this type, it calls the deserializer to split the raw carrier text into one parent tiddler and N ahu child slot tiddlers — the same structural split performed on the Node side by the disk projector.
+TW5 deserializes tiddler content by content-type. The deserializer for `text/x-memetic-wikitext` declares `module-type: tiddlerdeserializer`; TW5's native module loader collects it at boot into `$tw.modules.types.tiddlerdeserializer`, keyed by content-type. The compiled CJS exports the function under its content-type key — `exports["text/x-memetic-wikitext"] = memeticWikitextDeserializer` — so TW5 reaches it through the same registry `$tw.wiki.deserializeTiddlers` reads. When TW5 meets a tiddler of this type, it calls the collected function to split the raw carrier text into one parent tiddler and N ahu child slot tiddlers — the same structural split the disk projector performs on the Node side.
 
-The canonical source is at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer`.
+The canonical source rests at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer`.
 
 <<~/ahu >>
 
@@ -30,19 +31,21 @@ The canonical source is at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer`.
 
 !! Split Model
 
-The deserializer delegates to `splitCarrierToTiddlers(uri, text)` (from `@lararium/tw5`). The parent tiddler receives all `#iam` TOML fields merged into its TW5 fields. Each `<<~ ahu #slot >>` block becomes a child tiddler with `ahu-slot` and `ahu-parent` fields set.
+The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all iam TOML fields merged into its TW5 fields; each `<<~ ahu #slot >>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot >>` reference in its place. Prologue, preamble, header-text, and postamble ride the parent so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte.
 
-Parse warnings are surfaced as `$:/lararium/parse-warning/<slug>` tiddlers so the operator can review and acknowledge them without the warnings being lost in the console.
+A split failure never truncates: `safeSplitMeme` falls back to one verbatim tiddler flagged `lar_parse_degraded`, and grades the parse via `parseMemeText().failures` into `lar_parse_failures` — degradation surfaces legibly rather than dropping bytes.
+
+Parse warnings ride a synthesised `$:/lararium/parse-warning/<slug>` tiddler (`PARSE_WARNING_TAG`). The `deserializeCarrier(text, fields)` wrapper reads that same channel and returns `{ records, diagnostics }` on the shared `MemeDiagnostic` contract, so a gate reads a grade rather than sniffing a title.
 
 <<~/ahu >>
 
-<<~ ahu #why-stuck >>
+<<~ ahu #module-collection >>
 
-!! Why This Cannot Be a Meme
+!! The Module Rides the Native Registry
 
-The deserializer is a closure over the compiled `splitCarrierToTiddlers` TypeScript function. It is registered as a property assignment on the live `tw.Wiki` class — a reference that only exists after TW5 boot. There is no TW5 hook to load a deserializer from a tiddler; registration must be imperative.
+The deserializer travels as a plugin tiddler — TS source compiled to a CJS module tiddler carrying `module-type: tiddlerdeserializer`. TW5 collects every such module by type at boot; the content-type key on the export binds the function to `text/x-memetic-wikitext` with no imperative property assignment and no closure over a live wiki class. Disk ingest and store load converge on the exact registry: `$tw.wiki.deserializeTiddlers` dispatches by content-type into the collected set.
 
-Once the corpus path passes the boot gate and injects `tw5-modules`, that bundle includes the parser and a compatible deserializer. The imperative registration here is the cold-boot fallback.
+The paired `md-file-router` startup module registers `.mem` (and `.md`) as `text/x-md-auto` through `$tw.config.fileExtensionInfo`, so drag-and-drop, the import dialog, and the filesystem adaptor route as one. Its `text/x-md-auto` deserializer sniffs the head bytes — the `!DOCTYPE` comment fast-path or a line-bound SOH sigil — then delegates a carrier to `text/x-memetic-wikitext` and everything else to `text/x-markdown`, resolving each target function out of the same collected `tiddlerdeserializer` set.
 
 <<~/ahu >>
 
