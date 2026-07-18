@@ -86,3 +86,90 @@ export function forgetPack(p: PackProvenance, packPath: string): PackProvenance 
   for (const [title, path] of Object.entries(p)) if (path !== packPath) out[title] = path;
   return out;
 }
+
+// ── Per-member content-hash (the presence-diff GROWS a content-diff) ─────────
+//
+// A SIBLING aside map — `$:/config/OriginalTiddlerHashes`, memberTitle → the
+// member's content-hash — rides ALONGSIDE the path map, never fused into it: the
+// path map stays TW5's own byte-clean `OriginalTiddlerPaths` (boot.js legibility +
+// an upstream-PR-clean diff), while the hash map carries what the path map cannot —
+// which member's CONTENT moved. Presence-tracking (adds/drops) alone lets a member
+// land last-write-wins whenever the pack file re-lands; the content-hash lets each
+// member reconcile through the single-carrier Confluence gate at member grain
+// (echo · canonical-equivalent · conflict), so a concurrent wiki-edit + disk-change
+// names WHICH member conflicts and the rest flow clean.
+//
+// The hash reads bare-hex `carrierHash`-family (sha256 of the member's canonical
+// carrier render) — agile-comparable, so a later dual-read widening picks it up for
+// free, never a parallel digest scheme.
+
+/** The sibling aside tiddler — a JSON map of member title → content-hash. */
+export const ORIGINAL_TIDDLER_HASHES = "$:/config/OriginalTiddlerHashes";
+
+/** member title → the bare-hex content-hash of the member as last reconciled. */
+export type PackHashes = Readonly<Record<string, string>>;
+
+/** Parse the hash map from a tiddler's text; a missing or malformed body reads as
+ *  an empty map (a forgotten observation degrades to "no hashes recorded", which
+ *  the gate reads as "never synced" → a fresh member ingests, never corrupts). */
+export function parseHashes(text: string | undefined | null): PackHashes {
+  if (!text) return {};
+  try {
+    const parsed = JSON.parse(text) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    const out: Record<string, string> = {};
+    for (const [title, h] of Object.entries(parsed as Record<string, unknown>)) {
+      if (typeof h === "string" && h) out[title] = h;
+    }
+    return out;
+  } catch { return {}; }
+}
+
+/** Serialize the hash map to canonical JSON — keys sorted, so the tiddler's bytes
+ *  stay stable across re-writes (no CRDT churn from key reordering). */
+export function serializeHashes(p: PackHashes): string {
+  const sorted: Record<string, string> = {};
+  for (const title of Object.keys(p).sort()) sorted[title] = p[title]!;
+  return JSON.stringify(sorted, null, 2);
+}
+
+/** The content-hash last recorded for a member, or undefined when the member rides
+ *  unseen (never synced) — the gate reads undefined as a null merge base. */
+export function hashOfMember(p: PackHashes, title: string): string | undefined {
+  return p[title];
+}
+
+/**
+ * Re-stamp a pack's per-member content-hashes. `paths` (the SIBLING path map)
+ * names which members belong to `packPath`, so members that LEFT this pack drop
+ * their hash while members of OTHER packs keep theirs. `hashes` carries the
+ * reconciled hash for each CURRENT member — an ingested member advances to its
+ * fresh disk hash; a noop keeps its unchanged hash; a CONFLICTED member carries
+ * its OLD synced hash forward unchanged (the caller passes it), so the conflict
+ * re-surfaces on the next scan rather than the disk side silently winning.
+ */
+export function recordPackHashes(
+  prevHashes: PackHashes,
+  paths: PackProvenance,
+  packPath: string,
+  hashes: Readonly<Record<string, string>>,
+): PackHashes {
+  const out: Record<string, string> = {};
+  // keep the hash for every member that belongs to a DIFFERENT pack
+  for (const [title, h] of Object.entries(prevHashes)) {
+    if (paths[title] !== undefined && paths[title] !== packPath) out[title] = h;
+  }
+  // (re-)stamp this pack's current members
+  for (const [title, h] of Object.entries(hashes)) out[title] = h;
+  return out;
+}
+
+/** Forget a whole pack's member hashes (its file vanished) — every member of
+ *  `packPath` (per the sibling path map) leaves the hash map; other packs stay. */
+export function forgetPackHashes(prevHashes: PackHashes, paths: PackProvenance, packPath: string): PackHashes {
+  const out: Record<string, string> = {};
+  for (const [title, h] of Object.entries(prevHashes)) {
+    if (paths[title] !== undefined && paths[title] !== packPath) out[title] = h;
+  }
+  return out;
+}
