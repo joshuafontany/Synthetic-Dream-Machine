@@ -41,7 +41,7 @@ import numpy as np
 from desync import min_pairwise_gap, roberts_phase
 from ffz_clock import recover_clock
 
-# The metadata slot the whole stack reads for the membership address (drawer_io projects it, the
+# The metadata slot the whole stack reads for the membership address (loci_io projects it, the
 # mesh capture path mints it). This per-worldline leg ENRICHES the same shape under the same key.
 FFZ_META = "lar_ffz"
 

@@ -55,7 +55,7 @@ export interface CaptureContext {
 
 /**
  * `lar_hv` — the enrich-logic version (the Kappa upgrade gate). Bump in lockstep
- * with `HARVEST_VERSION` in `drawer_io.py` when the reading logic changes, so the
+ * with `HARVEST_VERSION` in `loci_io.py` when the reading logic changes, so the
  * next sweep re-reads exactly the stale drawers. THE single source for this number.
  */
 export const LAR_HV = 7;

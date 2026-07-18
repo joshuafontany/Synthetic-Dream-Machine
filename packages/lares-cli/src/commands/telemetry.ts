@@ -47,7 +47,7 @@ export async function cmdTelemetry(args: ParsedArgs): Promise<number> {
     return exitFor("not-found");
   }
 
-  // The projection spawns drawer_io + reads each drawer — give it room beyond the
+  // The projection spawns loci_io + reads each drawer — give it room beyond the
   // 10s default for a large wing; idempotent, so a generous budget costs nothing.
   // UDS fast path, WS fallback (the lares↔lararium binding).
   let result;

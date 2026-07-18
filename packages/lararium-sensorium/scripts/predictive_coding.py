@@ -44,7 +44,7 @@ The residual is STANDARDIZED (`z = ε/σ_obs`) before weighting, so `π·z²` is
 and the planes' surprises sum into one comparable F across content · structure · bands ·
 form · coupling.
 
-Faces (drawer_io-style NDJSON over stdio, the established sidecar contract):
+Faces (loci_io-style NDJSON over stdio, the established sidecar contract):
   * the library: ewma_predict · ar1_fit_predict · plane_pc · free_energy · the π↔confidence
     map (pure, dependency-light — numpy only; the VERIFY surface)
   * `pc       --signal <file|-> [--model ewma|ar1] [--confidence N]` → one plane's loop:

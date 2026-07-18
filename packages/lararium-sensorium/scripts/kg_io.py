@@ -8,7 +8,7 @@ edge of a retracted turn closed (valid_to set, never deleted — history kept).
 
 This is OUR script (packages/lararium-sensorium/scripts), NOT the vendored submodule:
 it CALLS the mempalace KnowledgeGraph public API (add_triple / invalidate) the same
-way drawer_io.py calls the collection. We never edit mempalace/.
+way loci_io.py calls the collection. We never edit mempalace/.
 
   add  PATCHFILE       <- NDJSON {subject,predicate,object,valid_from?,valid_to?,
                           turn_key?,source_file?,confidence?} ; one kg.add_triple each.

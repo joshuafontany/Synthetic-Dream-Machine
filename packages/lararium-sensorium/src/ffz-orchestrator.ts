@@ -8,7 +8,7 @@
  * continuously). THIS module is that pipeline:
  *
  *   1. READBACK — read a session's stored vectors back out of the palace, ordered by
- *      (source_file, chunk_index), via `drawer_io.py embeddings` (the CONTENT plane,
+ *      (source_file, chunk_index), via `loci_io.py embeddings` (the CONTENT plane,
  *      live). FORM/STRUCTURE planes (formpalace/structurepalace move/AST vectors keyed by
  *      verbatim_sha) are SCOPED — see the scope note below; absent them the quorum
  *      degrades gracefully to the one CONTENT plane (the N=1 {@link quorumStep} path).
@@ -16,19 +16,19 @@
  *      per drawer ({@link quorumStep} always — content as plane-0, derived from the embeddings
  *      via {@link centroidDriftStep} when no multi-plane drift feed rides). Theme: the wing's
  *      drawer-graph clustered
- *      (networkx, in `drawer_io.py cluster`) + the {@link ffzAcceptRecluster} MDL guard.
+ *      (networkx, in `loci_io.py cluster`) + the {@link ffzAcceptRecluster} MDL guard.
  *      Beat: the drawer's `chunk_index` (free, from the readback).
  *   3. STAMP-BACK — overlay the committed fluid-band cells onto each drawer's EXISTING
  *      `lar_ffz` (parse → overlay Measure/Beat/Theme → re-serialize), preserving the
- *      birth-stamped Arc/Pulse, and merge the `{lar_ffz}` patch back via `drawer_io.py
+ *      birth-stamped Arc/Pulse, and merge the `{lar_ffz}` patch back via `loci_io.py
  *      apply`. Deterministic + idempotent: a re-run derives the byte-identical address,
  *      so the merge is a no-op. The patch carries ONLY `lar_ffz` — ZERO causal/edge/itc
  *      key rides it (the PATH-B cut: `lar_ffz` is rhythm-only).
  *
  * SCOPE REPORT (form/structure plane availability):
- *   - CONTENT — LIVE. `drawer_io.py embeddings` reads the stored nomic vectors (never
+ *   - CONTENT — LIVE. `loci_io.py embeddings` reads the stored nomic vectors (never
  *     re-embeds), ordered per session. Always plane-0.
- *   - FORM — LIVE. `drawer_io.py form-embeddings` dumps the stored move-vectors flat,
+ *   - FORM — LIVE. `loci_io.py form-embeddings` dumps the stored move-vectors flat,
  *     joined per session on verbatim_sha (plane-1 when a session joins it).
  *   - STRUCTURE — LIVE. `structurepalace_io.py structure-embeddings` dumps the stored AST-SHAPE
  *     vectors flat (the deterministic structural encoder — a node-type histogram + tree-shape
@@ -67,7 +67,7 @@ import { repoRoot } from "@lararium/mesh/node";
 
 import { resolveMempalacePython, resolveStructurePalaceSpawn } from "@lararium/mempalace";
 import { memorySensoriumStructureDir, memorySensoriumContentDir } from "@lararium/mempalace/xdg-base";
-import { resolveDrawerIo, TelemetryUnavailable } from "./telemetry-writeback.js";
+import { resolveLociIo, TelemetryUnavailable } from "./telemetry-writeback.js";
 import { mineWithServo } from "@lararium/mempalace";
 import { TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 
@@ -75,7 +75,7 @@ import { TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 // Types — the seam shapes (the python I/O is INJECTED, so the run tests pure).
 // ───────────────────────────────────────────────────────────────────────────
 
-/** One drawer's stored-vector readback record (a row of `drawer_io.py embeddings`). */
+/** One drawer's stored-vector readback record (a row of `loci_io.py embeddings`). */
 export interface DrawerVector {
   /** the drawer id (the chroma id). */
   readonly id: string;
@@ -114,7 +114,7 @@ export interface DrawerVector {
   readonly frontier?: string;
 }
 
-/** The Theme-cluster reading (one line of `drawer_io.py cluster`). */
+/** The Theme-cluster reading (one line of `loci_io.py cluster`). */
 export interface ClusterReading {
   /** drawer id → community LABEL (deterministic, ranked by min member ordinal). */
   readonly communities: Readonly<Record<string, number>>;
@@ -434,7 +434,7 @@ export function orchestrateWing(
   const structBySha = deps.readStructureVectors ? deps.readStructureVectors(wing) : undefined;
 
   // Group by (source_file, frontier) — the Arc × fork-branch, preserving the readback order
-  // (drawer_io.py already sorts by (source_file, chunk_index, id)). Two forked branches that
+  // (loci_io.py already sorts by (source_file, chunk_index, id)). Two forked branches that
   // share a source_file but diverge at a frontier would otherwise INTERLEAVE under one servo
   // pass, bleeding their Measure segments across the fork; keying on the frontier runs each
   // branch its OWN pass (each restarts at Measure 0). Absent frontier ⇒ key = source_file
@@ -521,35 +521,35 @@ export function orchestrateWing(
 }
 
 // ───────────────────────────────────────────────────────────────────────────
-// The default python-backed seams (drawer_io.py — the substrate boundary).
+// The default python-backed seams (loci_io.py — the substrate boundary).
 // ───────────────────────────────────────────────────────────────────────────
 
 interface PyContext {
   readonly PY: string;
-  readonly DRAWER_IO: string;
+  readonly LOCI_IO: string;
   readonly submoduleRoot: string;
   readonly pyEnv: NodeJS.ProcessEnv;
-  /** The sovereign content plane every drawer_io read/write NAMES — drawer_io refuses an unnamed
+  /** The sovereign content plane every loci_io read/write NAMES — loci_io refuses an unnamed
    *  palace (it would reach the guest, then no-op after a pave). One value, every FFZ leg. */
   readonly contentPalace: string;
 }
 
-/** Resolve the python + drawer_io.py + PYTHONPATH (mirrors telemetry-writeback's setup). */
+/** Resolve the python + loci_io.py + PYTHONPATH (mirrors telemetry-writeback's setup). */
 function pyContext(): PyContext {
   const PY = resolveMempalacePython();
   if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
-  const DRAWER_IO = resolveDrawerIo();
-  if (!existsSync(DRAWER_IO)) throw new TelemetryUnavailable(`drawer_io.py missing at ${DRAWER_IO}`);
+  const LOCI_IO = resolveLociIo();
+  if (!existsSync(LOCI_IO)) throw new TelemetryUnavailable(`loci_io.py missing at ${LOCI_IO}`);
   const submoduleRoot = join(repoRoot, "mempalace");
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
-  return { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace: memorySensoriumContentDir() };
+  return { PY, LOCI_IO, submoduleRoot, pyEnv, contentPalace: memorySensoriumContentDir() };
 }
 
-/** Default {@link EmbeddingsReader} — `drawer_io.py embeddings --wing W` (CONTENT plane). */
+/** Default {@link EmbeddingsReader} — `loci_io.py embeddings --wing W` (CONTENT plane). */
 export function pythonEmbeddingsReader(wing: string): DrawerVector[] {
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
+  const { PY, LOCI_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const out = mineWithServo("drawer-io-embeddings", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "embeddings", ...(wing ? ["--wing", wing] : [])], {
+    execFileSync(PY, [LOCI_IO, "--palace", contentPalace, "embeddings", ...(wing ? ["--wing", wing] : [])], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -590,15 +590,15 @@ function parseFrontier(handle: string | null | undefined): string | undefined {
 }
 
 /**
- * Default {@link FormVectorReader} — `drawer_io.py form-embeddings` (the FORM plane).
+ * Default {@link FormVectorReader} — `loci_io.py form-embeddings` (the FORM plane).
  * Reads the stored form-vectors back from the "form" collection (NEVER re-embeds), keyed by
  * `verbatim_sha` → the form vector. A `--wing` filter does not apply (form is keyed by sha,
  * not wing-scoped); the orchestrator joins per session on the content readback's verbatim_sha.
  */
 export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
+  const { PY, LOCI_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const out = mineWithServo("drawer-io-form-embeddings", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "form-embeddings"], {
+    execFileSync(PY, [LOCI_IO, "--palace", contentPalace, "form-embeddings"], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -642,11 +642,11 @@ export function pythonStructureEmbeddingsReader(_wing: string): Map<string, read
   return bySha;
 }
 
-/** Default {@link ClusterReader} — `drawer_io.py cluster --wing W` (Theme band). */
+/** Default {@link ClusterReader} — `loci_io.py cluster --wing W` (Theme band). */
 export function pythonClusterReader(wing: string): ClusterReading | null {
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
+  const { PY, LOCI_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const out = mineWithServo("drawer-io-cluster", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "cluster", ...(wing ? ["--wing", wing] : [])], {
+    execFileSync(PY, [LOCI_IO, "--palace", contentPalace, "cluster", ...(wing ? ["--wing", wing] : [])], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -656,17 +656,17 @@ export function pythonClusterReader(wing: string): ClusterReading | null {
   return JSON.parse(line) as ClusterReading;
 }
 
-/** Default {@link PatchWriter} — merge the `{lar_ffz}` patches via `drawer_io.py apply`. */
+/** Default {@link PatchWriter} — merge the `{lar_ffz}` patches via `loci_io.py apply`. */
 export function pythonPatchWriter(
   patches: ReadonlyArray<{ readonly id: string; readonly patch: Record<string, string | number> }>,
 ): number {
   if (patches.length === 0) return 0;
-  const { PY, DRAWER_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
+  const { PY, LOCI_IO, submoduleRoot, pyEnv, contentPalace } = pyContext();
   const pf = join(tmpdir(), `ffz-orchestrator-patch-${process.pid}.ndjson`);
   writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
   try {
     const out = mineWithServo("drawer-io-apply", (timeoutMs) =>
-      execFileSync(PY, [DRAWER_IO, "--palace", contentPalace, "apply", pf], {
+      execFileSync(PY, [LOCI_IO, "--palace", contentPalace, "apply", pf], {
         cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
         timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
       }),

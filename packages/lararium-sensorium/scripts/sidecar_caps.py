@@ -2,7 +2,7 @@
 """sidecar_caps — the composition foundation for the mempalace Python sidecars.
 
 NOT a base class to subclass. A LIBRARY OF CAPABILITIES (caps) that a sidecar
-COMPOSES. Each sidecar (drawer_io · structurepalace_io · form_encoder · kg_io) is a
+COMPOSES. Each sidecar (loci_io · structurepalace_io · form_encoder · kg_io) is a
 NAMELESS entity whose identity IS its cap-stack — the set of caps it #has, fused
 with the OPS it declares. The caps live here as free functions + one small
 composition root; a sidecar imports the caps it needs, declares its ops as a
@@ -29,7 +29,7 @@ Serve:     serve_lock_path / acquire_serve_lock /
            run_sidecar                            — the serve composition root
 
 The serve caps form the HEAVY shared machinery (structurepalace_io + form_encoder #has
-the full serve stack); the batch CLIs (drawer_io + kg_io) #has only the lighter
+the full serve stack); the batch CLIs (loci_io + kg_io) #has only the lighter
 path/NDJSON caps — an entity carries only the components it needs.
 """
 from __future__ import annotations

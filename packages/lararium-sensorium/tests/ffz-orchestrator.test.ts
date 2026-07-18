@@ -582,7 +582,7 @@ describe("per-frontier keying — two forks sharing a source_file do not bleed",
   // chunk 3, F2 at chunk 5. Their distinct gong points are what the keying must keep apart.
   const F1 = [0, 1, 2, 3, 4, 5].map((c) => bdrawer("s.jsonl", "F1", c, c < 3 ? 0 : 1)); // shift@3
   const F2 = [0, 1, 2, 3, 4, 5].map((c) => bdrawer("s.jsonl", "F2", c, c < 5 ? 0 : 1)); // shift@5
-  // The readback INTERLEAVES the branches (drawer_io sorts by chunk_index, the shared key).
+  // The readback INTERLEAVES the branches (loci_io sorts by chunk_index, the shared key).
   const interleaved: DrawerVector[] = [];
   for (let c = 0; c < 6; c++) { interleaved.push(F1[c]!); interleaved.push(F2[c]!); }
   const F1_TRUE = ["0", "0", "0", "1", "1", "1"]; // F1's own segmentation (shift@3)

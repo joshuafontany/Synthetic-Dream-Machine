@@ -5,7 +5,7 @@ request/response JSON, same serve protocol) and assert the byte-stable contract 
 the load-bearing check that the composition refactor (importing sidecar_caps at
 launch) left every CLI surface intact:
 
-  drawer_io     export --wing W  ·  apply PATCHFILE      (telemetry-writeback.ts)
+  loci_io     export --wing W  ·  apply PATCHFILE      (telemetry-writeback.ts)
   kg_io         --palace P add PF · kapae --turn-key K   (worldline-kg.ts)
   structurepalace_io  serve --palace D  + NDJSON ping/put/get   (structurepalace.ts)
   form_encoder  serve             + NDJSON ping           (formpalace.ts)
@@ -82,11 +82,11 @@ def test_kg_io_add_then_kapae_round_trip(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# drawer_io — export + apply (ChromaDB collection at HOME/.mempalace/palace)
+# loci_io — export + apply (ChromaDB collection at HOME/.mempalace/palace)
 # ---------------------------------------------------------------------------
 
 
-def test_drawer_io_export_then_apply_round_trip(tmp_path):
+def test_loci_io_export_then_apply_round_trip(tmp_path):
     from mempalace.palace import get_collection
 
     palace_path = os.path.join(str(tmp_path), ".mempalace", "palace")
@@ -99,25 +99,25 @@ def test_drawer_io_export_then_apply_round_trip(tmp_path):
         embeddings=[[0.1] * 8],
     )
 
-    exp = _run(["drawer_io.py", "--palace", palace_path, "export", "--wing", "w1"], home=tmp_path)
+    exp = _run(["loci_io.py", "--palace", palace_path, "export", "--wing", "w1"], home=tmp_path)
     assert exp.returncode == 0, exp.stderr
     lines = _json_lines(exp.stdout)
     assert lines == [{"id": "d1", "content": "hello shore", "source_file": "claude__x"}]
 
-    import drawer_io as dio  # the single source of HARVEST_VERSION (bumps must not break this round-trip)
+    import loci_io as dio  # the single source of HARVEST_VERSION (bumps must not break this round-trip)
     patch = tmp_path / "patch.ndjson"
     patch.write_text(json.dumps({"id": "d1", "patch": {"lar_hv": dio.HARVEST_VERSION}}) + "\n")
-    app = _run(["drawer_io.py", "--palace", palace_path, "apply", str(patch)], home=tmp_path)
+    app = _run(["loci_io.py", "--palace", palace_path, "apply", str(patch)], home=tmp_path)
     assert app.returncode == 0, app.stderr
     out = json.loads(app.stdout)
     assert out["applied"] == 1 and out["hv"] == dio.HARVEST_VERSION
 
     # The patch landed: re-export now skips the (now-current) drawer.
-    exp2 = _run(["drawer_io.py", "--palace", palace_path, "export", "--wing", "w1"], home=tmp_path)
+    exp2 = _run(["loci_io.py", "--palace", palace_path, "export", "--wing", "w1"], home=tmp_path)
     assert _json_lines(exp2.stdout) == []
 
 
-def test_drawer_io_embeddings_reads_stored_vectors_in_session_order(tmp_path):
+def test_loci_io_embeddings_reads_stored_vectors_in_session_order(tmp_path):
     """The FFZ Measure servo's cosine feed: read STORED vectors back, ordered per
     session by (source_file, chunk_index). Never re-embeds (model-agnostic)."""
     from mempalace.palace import get_collection
@@ -136,7 +136,7 @@ def test_drawer_io_embeddings_reads_stored_vectors_in_session_order(tmp_path):
         embeddings=[[0.0, 1.0], [1.0, 0.0]],
     )
 
-    out = _run(["drawer_io.py", "--palace", palace_path, "embeddings", "--wing", "w1"], home=tmp_path)
+    out = _run(["loci_io.py", "--palace", palace_path, "embeddings", "--wing", "w1"], home=tmp_path)
     assert out.returncode == 0, out.stderr
     rows = _json_lines(out.stdout)
     assert [r["id"] for r in rows] == ["d1", "d2"]  # chunk_index 0 before 1

@@ -6,7 +6,7 @@
  *
  * It CALLS the mempalace KG API through OUR `scripts/kg_io.py` (which calls the vendored
  * KnowledgeGraph.add_triple / .invalidate) via the SAME execFileSync idiom telemetry-writeback
- * uses for drawer_io.py — the established node→mempalace write membrane. We never spawn a write
+ * uses for loci_io.py — the established node→mempalace write membrane. We never spawn a write
  * MCP client (the node's MempalaceClient is read-only by contract) and never edit the submodule.
  *
  * The KG is a RE-DERIVABLE projection: the transcripts are the source of truth, so a wiped or
@@ -69,7 +69,7 @@ function resolve(opts: WorldlineKgOptions): Resolved {
   const exec =
     opts.exec ??
     ((bin: string, args: readonly string[]): string => {
-      // drawer_io's PYTHONPATH discipline: kg_io does `from mempalace.knowledge_graph import …`;
+      // loci_io's PYTHONPATH discipline: kg_io does `from mempalace.knowledge_graph import …`;
       // mempalace isn't pip-installed, it lives at <submoduleRoot>/mempalace/, and `python script.py`
       // sets sys.path[0] to the SCRIPT dir, so PYTHONPATH=submoduleRoot makes `import mempalace` resolve.
       const submoduleRoot = join(repoRoot, "mempalace");

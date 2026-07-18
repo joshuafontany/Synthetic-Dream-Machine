@@ -31,7 +31,7 @@ import { homedir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { harvestTurnGradient, branchContextForTurn, detectGoneTurns, liveKeysForRewind, type TurnNode, type KeyedBranchNode } from "@lararium/mesh";
 import { listSpiritFiles, TIMEOUT_CEIL_MS } from "@lararium/mempalace";
-import { writebackWing, resolveDrawerIo, kapaeTurn, KgUnavailable, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/sensorium";
+import { writebackWing, resolveLociIo, kapaeTurn, KgUnavailable, isoWholeSeconds, runFfzEnrich, type FfzEnrichReport } from "@lararium/sensorium";
 import { cmdSubagents } from "./subagents.js";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
@@ -279,9 +279,9 @@ const PY = resolvePython() ?? "python3";
 // this CLI leg and the @daemon `lar-telemetry` verb call it. No local copy here.
 
 function runWriteback(args: ParsedArgs, wing: string): number {
-  const drawerIo = resolveDrawerIo();
-  if (!existsSync(drawerIo)) {
-    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${drawerIo}` };
+  const lociIo = resolveLociIo();
+  if (!existsSync(lociIo)) {
+    const error: LaresError = { code: "not-found", message: `loci_io.py missing at ${lociIo}` };
     emit(args, { ok: false, error, human: () => console.error(`lares sense pour: ${error.message}`) });
     return 3;
   }
@@ -533,8 +533,8 @@ async function runHarvestAll(args: ParsedArgs): Promise<number> {
   // The addressed sensorium root (from `lares sense <sensorium> pour --all`), threaded to every capture leg.
   const sensoriumRoot = typeof args.options["sensorium-root"] === "string" ? args.options["sensorium-root"] : undefined;
   const rootOpt: Record<string, string> = sensoriumRoot ? { "sensorium-root": sensoriumRoot } : {};
-  if (!existsSync(resolveDrawerIo())) {
-    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${resolveDrawerIo()}` };
+  if (!existsSync(resolveLociIo())) {
+    const error: LaresError = { code: "not-found", message: `loci_io.py missing at ${resolveLociIo()}` };
     emit(args, { ok: false, error, human: () => console.error(`lares sense pour --all: ${error.message}`) });
     return 3;
   }

@@ -6,7 +6,7 @@ it; the live capture route remains Python-owned and pointer-driven.
 
 The maintainer anti-pattern smuggles undeclared writes past the schema/transform
 contract. Every `lar_*` field enrichment writes appears here as a FieldSpec, and
-`drawer_io.apply` validates each write against it and stamps the adapter
+`loci_io.apply` validates each write against it and stamps the adapter
 identity. A declared write carries sovereign enrichment; an undeclared write
 refuses the boundary.
 
@@ -38,7 +38,7 @@ ADAPTER_VERSION = "0.1.0"
 
 # The declared lar_* schema — MUST stay in lockstep with buildPatch() in
 # packages/lares-cli/src/commands/harvest.ts. Every key harvest writes appears
-# here; drawer_io validates the write set against it.
+# here; loci_io validates the write set against it.
 LAR_SCHEMA = AdapterSchema(
     version=ADAPTER_VERSION,
     fields={
@@ -93,7 +93,7 @@ LAR_SCHEMA = AdapterSchema(
 
 
 def declared_field_names() -> frozenset[str]:
-    """The lar_* keys this adapter declares — drawer_io validates against this."""
+    """The lar_* keys this adapter declares — loci_io validates against this."""
     return frozenset(LAR_SCHEMA.fields)
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""drawer_io — the substrate side of the @admin memory-shore.
+"""loci_io — the substrate side of the @admin memory-shore.
 
 The causal-island boundary made crossable, in ONE direction's I/O only:
 this helper READS verbatim drawer content out of the mempalace library and
@@ -21,7 +21,7 @@ our side, and delegates straight to the nakama palace API, so the store and flow
                                     merge-only — we never delete a field)
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  /home/joshu/.venv/bin/python3 drawer_io.py export --wing wing_joshu
+  /home/joshu/.venv/bin/python3 loci_io.py export --wing wing_joshu
 """
 import argparse
 import json
@@ -91,7 +91,7 @@ def _palace() -> str:
     and an empty one updates nothing while reporting success. Name it, or stop."""
     if not PALACE:
         raise SystemExit(
-            "drawer_io: no palace named — pass `--palace <dir>`. This writes lar_* metadata onto "
+            "loci_io: no palace named — pass `--palace <dir>`. This writes lar_* metadata onto "
             "drawers; an unnamed palace would reach whichever store sits at a default, and after a "
             "pave it would update nothing while reporting success."
         )

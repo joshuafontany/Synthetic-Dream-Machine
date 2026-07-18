@@ -1,4 +1,4 @@
-"""Tests for drawer_io — the two readers COMPOSE the shared store-readback cap.
+"""Tests for loci_io — the two readers COMPOSE the shared store-readback cap.
 
 The cap (read_stored_embeddings) lives in sidecar_caps and is tested there; here we
 prove the two call sites compose it correctly: the CONTENT reader (cmd_embeddings)
@@ -7,7 +7,7 @@ dumps FLAT (native order, keyed by verbatim_sha). No ChromaDB — the collection
 fake, injected by monkeypatch. Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-sensorium/scripts/test_drawer_io.py -q
+        packages/lararium-sensorium/scripts/test_loci_io.py -q
 """
 
 import argparse
@@ -15,7 +15,7 @@ import json
 
 import pytest
 
-import drawer_io as dio
+import loci_io as dio
 
 
 def test_write_paths_fail_closed_when_adapter_missing(monkeypatch, tmp_path):
@@ -195,7 +195,7 @@ def test_cmd_kapae_skips_missing_shas(monkeypatch, capsys, tmp_path):
 
 # --- the spawn-boundary contract (FFZ caller-lag guard, 2026-07-15) ----------------------
 # The cmd_* tests above call in-process and bypass argparse — exactly why the FFZ readers'
-# bare `drawer_io <sub>` (no --palace) crashed unguarded. These spawn the real CLI to lock the
+# bare `loci_io <sub>` (no --palace) crashed unguarded. These spawn the real CLI to lock the
 # boundary contract: read subcommands REFUSE a missing palace (no silent guest-reach) and run
 # graceful WITH one (the shape ffz-orchestrator's readers now pass).
 
@@ -203,11 +203,11 @@ import os as _os
 import subprocess as _subprocess
 import sys as _sys
 
-_DRAWER_IO_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "drawer_io.py")
+_LOCI_IO_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "loci_io.py")
 
 
-def _spawn_drawer_io(sub_args, palace=None):
-    argv = [_sys.executable, _DRAWER_IO_PATH]
+def _spawn_loci_io(sub_args, palace=None):
+    argv = [_sys.executable, _LOCI_IO_PATH]
     if palace is not None:
         argv += ["--palace", palace]
     argv += sub_args
@@ -216,12 +216,12 @@ def _spawn_drawer_io(sub_args, palace=None):
 
 @pytest.mark.parametrize("sub", [["embeddings", "--wing", "x"], ["cluster", "--wing", "x"], ["form-embeddings"]])
 def test_read_subcommand_refuses_a_missing_palace(sub):
-    r = _spawn_drawer_io(sub)  # NO --palace — the confused-deputy contract must refuse loudly
+    r = _spawn_loci_io(sub)  # NO --palace — the confused-deputy contract must refuse loudly
     assert r.returncode != 0, f"{sub} accepted a missing palace (silent guest-reach regressed)"
     assert "palace" in (r.stderr + r.stdout).lower()
 
 
 @pytest.mark.parametrize("sub", [["embeddings", "--wing", "x"], ["cluster", "--wing", "x"], ["form-embeddings"]])
 def test_read_subcommand_graceful_on_empty_named_palace(sub, tmp_path):
-    r = _spawn_drawer_io(sub, palace=str(tmp_path))  # the shape the FFZ readers now pass
+    r = _spawn_loci_io(sub, palace=str(tmp_path))  # the shape the FFZ readers now pass
     assert r.returncode == 0, f"{sub} crashed on an empty named palace: {r.stderr}"

@@ -27,7 +27,7 @@ prefix code on the li side. The wavelet/EWT/scalogram functions below
 (modwt_mra · ewt_servo · ridges) stand as an UNSEATED shelf — callable,
 tested, canon-retired; a future aperture may re-summon them by name.
 
-drawer_io-style NDJSON over stdio (the established sidecar contract). Faces:
+loci_io-style NDJSON over stdio (the established sidecar contract). Faces:
   * the library: cohesion_signal · modwt_mra · ewt_servo · changepoint_tree ·
     stability_gate · ffz_cells (pure, chroma-free — the VERIFY surface)
   * `decompose --signal <file|-> [--planes N]`  → the full stack over a raw signal
@@ -326,7 +326,7 @@ def _ecp_divisive_R(matrix: np.ndarray, min_size: int, sig_lvl: float) -> list[i
     """Invoke the thin R sidecar (bands_ecp.R) → `ecp::e.divisive` over the multivariate
     drift matrix. Returns the ORDERED changepoint indices (0-based, coarse→fine — the
     divisive discovery order IS the hierarchy) or None when R / the sidecar / ecp is
-    unavailable (⇒ the caller falls to the ruptures path). drawer_io-style: one NDJSON
+    unavailable (⇒ the caller falls to the ruptures path). loci_io-style: one NDJSON
     request on stdin, one NDJSON response on stdout."""
     if not _r_available():
         return None
@@ -426,7 +426,7 @@ def _couple_ete_R(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int = 
     matrix (ete[i][j] = flow i→j) + a source-permutation bootstrap p-value matrix. Returns the
     parsed verdict dict, or None when R / the sidecar / RTransferEntropy is unavailable (⇒ the
     caller degrades to a graceful skip — coupling has NO python fallback, TE is the R plane).
-    drawer_io-style: one NDJSON request on stdin, one NDJSON response on stdout."""
+    loci_io-style: one NDJSON request on stdin, one NDJSON response on stdout."""
     if not _r_available():
         return None
     r_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coupling.R")
@@ -1368,7 +1368,7 @@ def run_stack(tree_matrix: np.ndarray, spine_signal: np.ndarray | None = None,
 def _read_sensorium_planes(sensorium: str, *, require_one_source: bool = False) -> tuple[list[np.ndarray], list[str], str]:
     """Read content embeddings from a rooted sensorium in declared source order.
     Returns (planes, ids, note).
-    NEVER re-embeds — reads the STORED nomic vectors (the readback discipline of drawer_io's
+    NEVER re-embeds — reads the STORED nomic vectors (the readback discipline of loci_io's
     cmd_embeddings). Graceful: no chroma / mempalace / no vectors ⇒ ([], [], note)."""
     from order_vectors import source_ordered_vectors
     ids_sorted, content, note = source_ordered_vectors(sensorium, require_one_source=require_one_source)

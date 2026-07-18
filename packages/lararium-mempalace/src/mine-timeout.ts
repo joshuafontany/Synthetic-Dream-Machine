@@ -1,5 +1,5 @@
 /**
- * mine-timeout — a SELF-TUNING subprocess-timeout servo for every `mempalace mine` / drawer_io
+ * mine-timeout — a SELF-TUNING subprocess-timeout servo for every `mempalace mine` / loci_io
  * call, modeled on the nalu-gate feedback servo (mesh gate-tuning#adaptGate + capture-engine's
  * EWMA cost loop) but INVERTED. A flush gate is a fire-THRESHOLD the servo SHRINKS under load
  * (smaller batches, flush sooner); a timeout is an upper-bound-to-KILL the servo GROWS under load

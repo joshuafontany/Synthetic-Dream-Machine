@@ -4,7 +4,7 @@
  * Reads mempalace drawers needing telemetry (the `lar_hv` gate), runs the
  * sovereign gradient reader over each (`harvestTurnGradient` — the turn's
  * instrument readings), builds the `lar_*` patch, and projects it back ONTO the
- * drawer via `drawer_io.py`. Idempotent: already-current drawers skip.
+ * drawer via `loci_io.py`. Idempotent: already-current drawers skip.
  *
  * Lives HERE (beside the mempalace boundary) so ONE core serves both surfaces:
  *   - the @daemon `lar-telemetry` verb (mempalace through the seat)
@@ -40,12 +40,12 @@ export interface WritebackResult {
   readonly bands: Record<string, number>;
 }
 
-/** Locate `drawer_io.py` — CODE, so it lives at the repo root (never LAR_ROOT). */
-export function resolveDrawerIo(): string {
-  return join(repoRoot, "packages", "lararium-sensorium", "scripts", "drawer_io.py");
+/** Locate `loci_io.py` — CODE, so it lives at the repo root (never LAR_ROOT). */
+export function resolveLociIo(): string {
+  return join(repoRoot, "packages", "lararium-sensorium", "scripts", "loci_io.py");
 }
 
-/** Raised when python/`drawer_io.py` are absent — the caller renders a clean error. */
+/** Raised when python/`loci_io.py` are absent — the caller renders a clean error. */
 export class TelemetryUnavailable extends Error {}
 
 /**
@@ -56,28 +56,28 @@ export class TelemetryUnavailable extends Error {}
 export function writebackWing(wing: string, opts: { limit?: number } = {}): WritebackResult {
   const PY = resolveMempalacePython();
   if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
-  const DRAWER_IO = resolveDrawerIo();
-  if (!existsSync(DRAWER_IO)) throw new TelemetryUnavailable(`drawer_io.py missing at ${DRAWER_IO}`);
+  const LOCI_IO = resolveLociIo();
+  if (!existsSync(LOCI_IO)) throw new TelemetryUnavailable(`loci_io.py missing at ${LOCI_IO}`);
 
-  // drawer_io.py does `from mempalace.palace import …`. mempalace isn't pip-installed;
+  // loci_io.py does `from mempalace.palace import …`. mempalace isn't pip-installed;
   // it lives at <submoduleRoot>/mempalace/. `python script.py` sets sys.path[0] to the
   // SCRIPT dir (not cwd), so cwd alone can't find it — PYTHONPATH=submoduleRoot makes
   // `import mempalace` resolve, while the venv python supplies chromadb/sqlite.
   const submoduleRoot = join(repoRoot, "mempalace");
-  // + the GPU compute cap: drawer_io opens a chroma collection (default onnxruntime embedder), which
+  // + the GPU compute cap: loci_io opens a chroma collection (default onnxruntime embedder), which
   // HARD-fails to import onnxruntime-gpu without the CUDA runtime libs on LD_LIBRARY_PATH. Cap absent
   // (the QA box) ⇒ only the device hint rides and the embedder degrades to CPU. (Restart-safety P0.)
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(PY) };
   // The telemetry describes the drawers the capture path landed, so it writes where they LIVE —
-  // the sovereign content plane. NAMED, never defaulted: drawer_io refuses an unnamed palace.
+  // the sovereign content plane. NAMED, never defaulted: loci_io refuses an unnamed palace.
   const palace = memorySensoriumContentDir();
   const limit = opts.limit ?? 0;
   const exportArgs = ["--palace", palace, "export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
-  // drawer_io export had NO timeout — the confirmed 9 h-stuck source. The servo bounds it: an
+  // loci_io export had NO timeout — the confirmed 9 h-stuck source. The servo bounds it: an
   // adaptive `timeout` + SIGKILL kills a wedged export ≤ CEIL and surfaces it (MineHangError),
   // and learns each export's real duration so a normal-but-slow run is never false-killed.
   const exportOut = mineWithServo("drawer-io-export", (timeoutMs) =>
-    execFileSync(PY, [DRAWER_IO, ...exportArgs], {
+    execFileSync(PY, [LOCI_IO, ...exportArgs], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
       timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
     }),
@@ -91,10 +91,10 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
     bands[h.band] = (bands[h.band] ?? 0) + 1;
     if (h.bearing) framed += 1;
     // NO CaptureContext (4th arg) here, so this re-read sweep emits NO `lar_ffz`. This is the
-    // RIGHT call, not a gap: the export (`drawer_io.py export`) carries only {id, content,
+    // RIGHT call, not a gap: the export (`loci_io.py export`) carries only {id, content,
     // source_file} — the drawer's ORIGINAL captured wall-time is not available at re-read, and
     // stamping against `now` would be a lie (the turn was filed long ago). The live in-VM annotate
-    // (capture-annotate-vm) stamps `lar_ffz` at BIRTH; `drawer_io.py apply` MERGES this patch onto
+    // (capture-annotate-vm) stamps `lar_ffz` at BIRTH; `loci_io.py apply` MERGES this patch onto
     // the drawer's existing metadata, so the birth-stamp is preserved untouched by this sweep.
     return { id: d.id, patch: buildPatch(h, d.source_file) };
   });
@@ -106,7 +106,7 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
     writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
     try {
       const applyOut = mineWithServo("drawer-io-apply", (timeoutMs) =>
-        execFileSync(PY, [DRAWER_IO, "--palace", palace, "apply", pf], {
+        execFileSync(PY, [LOCI_IO, "--palace", palace, "apply", pf], {
           cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8",
           timeout: timeoutMs, killSignal: TIMEOUT_KILL_SIGNAL,
         }),
@@ -135,8 +135,8 @@ export function stampKapaeSalience(verbatimShas: readonly string[], ended?: stri
   if (verbatimShas.length === 0) return { stamped: 0 };
   const PY = resolveMempalacePython();
   if (!PY) return null;
-  const DRAWER_IO = resolveDrawerIo();
-  if (!existsSync(DRAWER_IO)) return null;
+  const LOCI_IO = resolveLociIo();
+  if (!existsSync(LOCI_IO)) return null;
   const palace = memorySensoriumContentDir();
   const endedIso = isoWholeSeconds(ended ?? new Date().toISOString());
   const submoduleRoot = join(repoRoot, "mempalace");
@@ -144,7 +144,7 @@ export function stampKapaeSalience(verbatimShas: readonly string[], ended?: stri
   const pf = join(tmpdir(), `lar-kapae-salience-${process.pid}-${Date.now()}.ndjson`);
   writeFileSync(pf, verbatimShas.map((s) => JSON.stringify({ verbatim_sha: s, ended: endedIso })).join("\n") + "\n");
   try {
-    const out = execFileSync(PY, [DRAWER_IO, "--palace", palace, "kapae", pf], {
+    const out = execFileSync(PY, [LOCI_IO, "--palace", palace, "kapae", pf], {
       cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 28, encoding: "utf8",
     });
     try { return { stamped: (JSON.parse(out.trim()) as { stamped: number }).stamped }; } catch { return { stamped: verbatimShas.length }; }

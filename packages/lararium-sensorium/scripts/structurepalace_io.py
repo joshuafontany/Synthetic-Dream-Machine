@@ -526,7 +526,7 @@ def _serve(palace_path: str) -> None:
 
 # ── The STRUCTURE-PLANE READER — the batch readback the FFZ Measure servo joins ──────
 #
-# Mirrors `drawer_io.py cmd_form_embeddings` (the FORM plane), one tier up: the FORM store
+# Mirrors `loci_io.py cmd_form_embeddings` (the FORM plane), one tier up: the FORM store
 # keys an entry BY the verbatim_sha (one vector per turn), so its readback is a 1:1 dump.
 # The structurepalace keys by STRUCTURAL HASH with a recurrence tally, and ONE structure may have
 # unfolded from MANY turns (its `lar_provenance` list of verbatim_shas). So this reader
