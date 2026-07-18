@@ -22,7 +22,7 @@ import { emit, wantsJson, exitFor } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { larRoot, operatorDid } from "../env.js";
-import { openSyncedTree, scanSource, candidatesOf, submitIngest } from "../ingest-core.js";
+import { openSyncedTree, scanSource, candidatesOf, submitIngest, recordLandedPacks } from "../ingest-core.js";
 
 function printUsage(): void {
   console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes]");
@@ -117,6 +117,13 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     return exitFor(code);
   }
   const summary = summaryOutput(result) ?? {};
+
+  // Pack echo-gate: record each landed PACK's synced observation (the projector
+  // never does — a pack file has no project-back), so an unchanged pack noops on
+  // the next scan instead of re-landing the whole bundle.
+  const landedCarriers = (summary as { carriers?: Array<Record<string, unknown>> }).carriers ?? [];
+  if (recordLandedPacks(tree, toBag, candidates, landedCarriers) > 0) tree.flush();
+
   const auditUri = `${OUTCOME_URI_PREFIX}${result.requestId}`;
   emit(args, {
     ok: true,

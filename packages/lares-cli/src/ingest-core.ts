@@ -165,6 +165,30 @@ export function scanFiles(
   return { rows, skipped };
 }
 
+/**
+ * Record a landed PACK's synced observation — the gesture's job, because a pack
+ * file never projects back (its foreign-titled members don't map to the carrier
+ * URI), so the projector never sets its synced hash. Without this every re-scan
+ * re-lands the whole bundle; with it, an UNCHANGED pack reads "unchanged" next
+ * scan and noops. Returns the count recorded; the caller flushes the tree.
+ */
+export function recordLandedPacks(
+  tree: SyncedTree,
+  toBag: string,
+  candidates: readonly ScanRow[],
+  resultCarriers: ReadonlyArray<Record<string, unknown>>,
+): number {
+  const byUri = new Map(candidates.map((c) => [c.uri, c] as const));
+  let recorded = 0;
+  for (const c of resultCarriers) {
+    if (c["decision"] === "ingest" && typeof c["pack"] === "string") {
+      const cand = byUri.get(String(c["uri"]));
+      if (cand) { tree.set(syncedTreeKey(toBag, cand.uri), cand.diskHash); recorded++; }
+    }
+  }
+  return recorded;
+}
+
 /** Walk a source and scan it whole. Returns null when the source does not
  *  resolve. `fileToUri` defaults to the source's mirror plane (bags/ vs wikis/). */
 export function scanSource(

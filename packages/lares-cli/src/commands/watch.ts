@@ -35,7 +35,7 @@ import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { udsAvailable, udsSocketPath } from "../local-connector.js";
 import { larRoot, operatorDid } from "../env.js";
-import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngest, type PendingDeletion } from "../ingest-core.js";
+import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngest, recordLandedPacks, type PendingDeletion } from "../ingest-core.js";
 
 const DEFAULT_DEBOUNCE_MS = 400;   // twillm's field-tested trailing window
 const COOKIE_TIMEOUT_MS   = 2_000; // a live backend echoes our own write well under this
@@ -158,6 +158,9 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       const summary  = summaryOutput(result) ?? {};
       const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
       const del      = (summary as { deletions?: Record<string, unknown> })["deletions"];
+      // Pack echo-gate: record each landed PACK's synced observation (a pack file
+      // never projects back), so an unchanged bundle noops on the next settle.
+      if (recordLandedPacks(tree, toBag, candidates, carriers) > 0) tree.flush();
       console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/bags/@daemon/outcomes/${result.requestId}`);
       for (const c of carriers) console.log(`    ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}`);
       if (del && (del as { decision?: string })["decision"] === "suspend") {
