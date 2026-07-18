@@ -361,7 +361,7 @@ def idle_ttl_seconds(env_name: str, default: float) -> float:
 # ---------------------------------------------------------------------------
 
 
-def serve_loop(dispatch, in_fd: int, out, *, idle_ttl: float) -> None:
+def serve_loop(dispatch, in_fd: int, out, *, idle_ttl: float, on_idle=None) -> None:
     """NDJSON request loop with idle-reap.
 
     Reads at the raw fd (not the buffered ``sys.stdin`` iterator) so ``select`` and
@@ -369,7 +369,12 @@ def serve_loop(dispatch, in_fd: int, out, *, idle_ttl: float) -> None:
     (non-JSON lines ignored defensively) and calls ``dispatch(req, out)``. Exits on
     EOF (the parent closed stdin — the natural lifetime end) or when idle past the
     TTL (orphan bound). Without ``select`` the loop degrades to a plain blocking
-    read (EOF-only)."""
+    read (EOF-only).
+
+    ``on_idle`` (optional) fires once per idle beat — when ``select`` wakes with no
+    bytes pending — BEFORE the reap check, so a holder can drive background work on
+    quiet ground (e.g. the rejim re-regime cadence). It must never raise; any error
+    stays swallowed so idle work can never crash the serve loop or block the reap."""
     poll = _select is not None and idle_ttl > 0
     last_activity = time.monotonic()
     buf = b""
@@ -381,7 +386,13 @@ def serve_loop(dispatch, in_fd: int, out, *, idle_ttl: float) -> None:
                 poll = False
                 ready = [in_fd]
             if not ready:
-                # No bytes pending: reap if idle past the TTL and nothing half-buffered.
+                # No bytes pending: an idle beat — drive any background work, then reap if idle past the
+                # TTL and nothing half-buffered.
+                if on_idle is not None:
+                    try:
+                        on_idle()
+                    except Exception:  # noqa: BLE001 — idle work must never crash the serve loop
+                        pass
                 if not buf.strip() and (time.monotonic() - last_activity) >= idle_ttl:
                     return
                 continue
@@ -439,6 +450,7 @@ def run_sidecar(
     require_lock: bool = True,
     in_fd: int | None = None,
     out=None,
+    on_idle=None,
 ) -> None:
     """The serve composition root: acquire the per-palace singleton, then (only if
     held) wire the sidecar's ops into the serve loop, then release.
@@ -462,6 +474,7 @@ def run_sidecar(
             sys.stdin.fileno() if in_fd is None else in_fd,
             sys.stdout if out is None else out,
             idle_ttl=idle_ttl,
+            on_idle=on_idle,
         )
     finally:
         release_lock(lock)

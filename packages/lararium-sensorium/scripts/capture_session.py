@@ -251,8 +251,21 @@ class CaptureSessionServer:
                 "rejim": landed.get("rejim", []), "couples": landed.get("couples", [])}
 
 
+def _rejim_idle_beat(server: "CaptureSessionServer") -> None:
+    """One idle beat of the backpressure-triggered rejim cadence: tick the scheduler; a DUE + settled beat
+    fires ONE repour on quiet ground (a burst of captures coalesces to one repour of the freshest settled
+    content). The serve loop's idle guard swallows any error — the cadence rides background derivation, never
+    the holder's lifeline. This is the AUTO-drive: the holder keeps its own rhythm plane fresh, no TS poll."""
+    out = server.rejim_tick({})
+    if out.get("fired"):
+        sys.stderr.write(f"capture_session: rejim re-poured on idle (rev {out.get('revision')}, "
+                         f"{out.get('stream_chars')} chars)\n")
+        sys.stderr.flush()
+
+
 def _serve(sensorium_root: str) -> None:
-    """Serve one serialized Python capture pipe over NDJSON stdio."""
+    """Serve one serialized Python capture pipe over NDJSON stdio. The holder AUTO-drives the rejim cadence
+    on the serve loop's idle beat — each capture marks the scheduler, and quiet ground fires the repour."""
     server = CaptureSessionServer(sensorium_root)
     run_sidecar(
         palace=server._paths.content,
@@ -267,6 +280,7 @@ def _serve(sensorium_root: str) -> None:
         }),
         idle_ttl=idle_ttl_seconds("LARES_CAPTURE_IDLE_TTL", 600.0),
         singleton_msg="capture_session: another holder already serves this palace; exiting (singleton)\n",
+        on_idle=lambda: _rejim_idle_beat(server),   # AUTO-drive the rejim cadence on quiet ground
     )
 
 

@@ -254,6 +254,54 @@ def test_serve_loop_reaps_when_idle():
         t.join(timeout=2)
 
 
+@pytest.mark.skipif(sc._select is None, reason="idle-reap needs select")
+def test_serve_loop_drives_on_idle_before_reaping():
+    # the idle beat: with the pipe empty, select times out → on_idle fires (the rejim auto-drive hook) and
+    # the loop still reaps at the TTL. on_idle must be reached at least once before the reap.
+    r, w = os.pipe()
+    out = io.StringIO()
+    done = threading.Event()
+    beats = []
+
+    def _run():
+        sc.serve_loop(lambda req, o: None, r, out, idle_ttl=1.5, on_idle=lambda: beats.append(1))
+        done.set()
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    try:
+        assert done.wait(timeout=6), "idle loop did not reap within the TTL window"
+    finally:
+        os.close(w)
+        os.close(r)
+        t.join(timeout=2)
+    assert beats, "on_idle never fired on an idle beat"
+
+
+@pytest.mark.skipif(sc._select is None, reason="idle-reap needs select")
+def test_serve_loop_swallows_on_idle_errors():
+    # idle work must never crash the serve loop — a raising on_idle is swallowed, the loop still reaps.
+    r, w = os.pipe()
+    out = io.StringIO()
+    done = threading.Event()
+
+    def _boom():
+        raise RuntimeError("idle work blew up")
+
+    def _run():
+        sc.serve_loop(lambda req, o: None, r, out, idle_ttl=1.5, on_idle=_boom)
+        done.set()
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    try:
+        assert done.wait(timeout=6), "a raising on_idle crashed or hung the serve loop"
+    finally:
+        os.close(w)
+        os.close(r)
+        t.join(timeout=2)
+
+
 def test_serve_loop_handles_then_exits_on_eof():
     r, w = os.pipe()
     out = io.StringIO()
