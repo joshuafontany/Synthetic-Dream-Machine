@@ -91,6 +91,33 @@ def test_repour_rejim_derives_the_geology_plane_over_content(tmp_path):
     assert json.load(open(geology, encoding="utf-8"))["n_ticks"] == out["n_ticks"]
 
 
+def test_read_rejim_makes_the_geology_askable(tmp_path):
+    # the rhythm plane made ASKABLE: an honest absence before any repour, the landed geology after — the
+    # derived plane now reads back through the pipe, not only writes (the audit's read-side gap, closed).
+    root = str(tmp_path / ".mem")
+    server = CaptureSessionServer(root, embed_factory=_stub_embed_factory())
+    server.capture({"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"})
+    absent = server.read_rejim({})
+    assert absent["repoured"] is False and absent["geology"] is None      # never poured → honest None, no lie
+    server.repour_rejim({})
+    got = server.read_rejim({})
+    assert got["repoured"] is True and got["geology"]["stream_chars"] > 0  # the landed geology reads back
+
+
+def test_rejim_tick_holds_under_backpressure_then_fires_on_settled_ground(tmp_path, monkeypatch):
+    # the live-drive: capture MARKS the scheduler; a tick under backpressure (a non-empty backlog) HOLDS the
+    # heavy repour off the capture path, and only a settled + crested tick fires ONE repour of quiet ground.
+    monkeypatch.setenv("LARES_REJIM_WINDOW", "2")                          # a tiny window crests in-test
+    root = str(tmp_path / ".mem")
+    server = CaptureSessionServer(root, embed_factory=_stub_embed_factory())
+    server.capture({"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"})
+    assert server.rejim_tick({"backlog": 3})["fired"] is False            # backpressure holds the re-regime
+    fired = server.rejim_tick({"backlog": 0})                             # settled + crested → fire once
+    assert fired["fired"] is True and fired["revision"] >= 1
+    assert os.path.exists(os.path.join(root, "rejim", "geology.json"))    # the repour landed on the tick
+    assert server.rejim_tick({"backlog": 0})["fired"] is False            # coalesced — no new ground, no repour
+
+
 def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
     # crash sim: land only a truncated prefix (a partial transcript = the "crash"), then re-run over the
     # FULL fixture — the re-derivation lands the tail (the blocks past the prefix), skips the durable prefix.

@@ -34,6 +34,7 @@ import argparse
 import json
 import os
 import sys
+import time
 from typing import Callable, Iterator
 
 from capture_sources import Record, SourceCap, resolve_source
@@ -144,11 +145,25 @@ class CaptureSessionServer:
     def __init__(self, sensorium_root: str, *, embed_factory: "Callable | None" = None) -> None:
         self._stream, self._model, self._dim, self._paths = compose_memory_stream_sensorium(
             sensorium_root, embed_factory=embed_factory or self._make_embedder)
+        # The backpressure-triggered rejim cadence rides here: each capture MARKS the scheduler (the ground
+        # moved), and an idle `rejim_tick` fires ONE repour per settled + crested batch. Clock-pure — the
+        # holder drives a monotonic ordinal; nothing fires until the daemon ticks, so the drive stays dormant
+        # (and every existing deploy unchanged) until something asks the rhythm plane to keep itself fresh.
+        from rejim_scheduler import RejimScheduler
+        self._rejim = RejimScheduler(window=float(os.environ.get("LARES_REJIM_WINDOW") or 64))
+        self._rejim_clock = 0
+        self._rejim_backlog = 0
 
     @staticmethod
     def _make_embedder():
         from embed_cap import make_embed_cap
         return make_embed_cap()
+
+    def _tick(self) -> int:
+        """Bump the rejim scheduler's monotonic ordinal clock — the daemon's tick cadence sets its real-time
+        meaning; the scheduler itself reads only the ordinal (clock-pure), so a replay drives it the same."""
+        self._rejim_clock += 1
+        return self._rejim_clock
 
     def capture(self, req: dict) -> dict:
         surface = str(req.get("surface") or "")
@@ -164,6 +179,9 @@ class CaptureSessionServer:
             raise ValueError("capture requires a non-empty wing")
 
         summary = self._stream.capture(pointer, surface=surface, wing=wing, room=room, session_id=session_id)
+        # the ground moved: arm the coalesce window and record the honest backlog the next tick reads.
+        self._rejim.mark(self._tick())
+        self._rejim_backlog = len(summary.get("backlog") or [])
         return {
             "surface": surface, "pointer": pointer, "wing": wing, "room": room,
             **({"sessionId": session_id} if session_id else {}),
@@ -205,6 +223,33 @@ class CaptureSessionServer:
             n_surrogates=int(req.get("nSurrogates") or 3),
         )
 
+    def read_rejim(self, req: dict) -> dict:
+        """The landed rejim geology for THIS holder — the derived rhythm plane made ASKABLE (repour writes it,
+        this reads it), or an honest absence when it has never been repoured. Rides the serialized pipe like
+        every other op, so a read never tears a half-written geology (the land swaps atomically)."""
+        import rejim_io
+        rejim_dir = os.path.join(self._paths.root, "rejim")
+        geology = rejim_io.read_rejim(rejim_dir)
+        return {"repoured": geology is not None, "geology": geology}
+
+    def rejim_tick(self, req: dict) -> dict:
+        """DRIVE the backpressure-triggered rejim cadence one ordinal tick. Fire a re-regime ONLY when the
+        coalesce window has crested over marked ground AND capture has settled (the backlog drained) — so the
+        heavy whole-stream repour runs on quiet ground, coalescing a burst to ONE repour of the freshest
+        content, never on the capture path. The daemon calls this on idle; `backlog` rides the request (its
+        live drain reading) or falls back to the last capture's backlog. Holds (fires nothing) until due."""
+        raw = req.get("backlog")
+        backlog = int(raw) if raw is not None else self._rejim_backlog
+        rev = self._rejim.due(self._tick(), backlog=backlog)
+        if rev is None:
+            return {"fired": False, "backlog": backlog}
+        t0 = time.perf_counter()
+        landed = self.repour_rejim(req)
+        self._rejim.observe_repour((time.perf_counter() - t0) * 1000.0)   # fold true cost into the window servo
+        self._rejim_backlog = 0
+        return {"fired": True, "revision": rev, "stream_chars": landed.get("stream_chars"),
+                "rejim": landed.get("rejim", []), "couples": landed.get("couples", [])}
+
 
 def _serve(sensorium_root: str) -> None:
     """Serve one serialized Python capture pipe over NDJSON stdio."""
@@ -217,6 +262,8 @@ def _serve(sensorium_root: str) -> None:
             "capture": server.capture,
             "refresh": server.refresh,   # re-pave the mempalace projection, serialized with capture
             "repour_rejim": server.repour_rejim,   # re-derive the rejim geology plane, serialized with capture
+            "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
+            "rejim_tick": server.rejim_tick,       # drive the backpressure-triggered re-regime cadence
         }),
         idle_ttl=idle_ttl_seconds("LARES_CAPTURE_IDLE_TTL", 600.0),
         singleton_msg="capture_session: another holder already serves this palace; exiting (singleton)\n",
