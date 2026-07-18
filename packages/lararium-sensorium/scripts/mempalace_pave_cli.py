@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """mempalace_pave_cli — RUN the re-pave over a real ContentStore, filling a mempalace projection.
 
-Open the content plane (the ONE verbatim source), stream its atoms through the derived recall surfaces,
+Open the content plane (the ONE verbatim source), stream its blocks through the derived recall surfaces,
 land them under `<mempalace>/mempalace.{lex,ent}`. cid-parity rides by construction — content's own cids
 flow through. An optional `--query` witnesses a recall so the pave proves itself end to end: a hit
 resolves its verbatim FROM content, never from bytes the projection holds (a hit whose preview carries
@@ -18,7 +18,7 @@ import argparse
 import json
 import os
 
-from content_atoms import authored_only, content_atoms, content_getter
+from content_blocks import authored_only, content_blocks, content_getter
 from content_io import ContentStore
 from entity_graph import nakama_entity_extractor
 from mempalace_pave import pave
@@ -27,7 +27,7 @@ from mempalace_projection import MempalaceProjection
 
 def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int = 5,
         rebuild: bool = True, all_strata: bool = False) -> dict:
-    """Open content, pave the projection over its atoms, optionally witness a recall. Returns a report.
+    """Open content, pave the projection over its blocks, optionally witness a recall. Returns a report.
 
     By default the pave reads the AUTHORED voice only (skips the low-volume harness/thinking murmur) —
     the derived plane reading by volume. `all_strata=True` indexes every stratum (a generic corpus that
@@ -42,11 +42,11 @@ def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int
     proj = MempalaceProjection(db_path=db, extract_entities=extract)
     keep = None if all_strata else authored_only
     try:
-        # Dedup the VIEW by each ATOM's true identity: an atom re-carried across a resume/rewind (same
-        # lar_atom_key — native uuid + block ordinal, stable across the re-carry — under distinct
-        # source-keyed cids) paves ONCE; content keeps every copy. Keying on the atom, not the turn, so
-        # a turn's several atoms all survive (turn-key would collapse them to the first).
-        n = pave(content_atoms(store, keep=keep, dedup_key="lar_atom_key"), proj, rebuild=rebuild)
+        # Dedup the VIEW by each BLOCK's true identity: an block re-carried across a resume/rewind (same
+        # lar_block_key — native uuid + block ordinal, stable across the re-carry — under distinct
+        # source-keyed cids) paves ONCE; content keeps every copy. Keying on the block, not the turn, so
+        # a turn's several blocks all survive (turn-key would collapse them to the first).
+        n = pave(content_blocks(store, keep=keep, dedup_key="lar_block_key"), proj, rebuild=rebuild)
         out: dict = {"content": content_dir, "mempalace": db, "paved": n, "rebuild": rebuild,
                      "entities": extract is not None, "strata": "all" if all_strata else "authored"}
         if query:

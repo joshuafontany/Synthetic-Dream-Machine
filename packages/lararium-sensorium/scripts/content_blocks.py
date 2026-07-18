@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""content_atoms — the CONTENT→atoms adapter: page a ContentStore into (cid, text) atoms for the pave.
+"""content_blocks — the CONTENT→blocks adapter: page a ContentStore into (cid, text) blocks for the pave.
 
-The content plane holds the ONE verbatim source; the pave reads it as a stream of `(cid, text)` atoms
+The content plane holds the ONE verbatim source; the pave reads it as a stream of `(cid, text)` blocks
 and fans each into the derived recall surfaces. This adapter bridges content_io's ContentStore (its
 `scan(offset, limit)` page API) and mempalace_pave.pave — it yields content's OWN cids, so the
 projection inherits cid-parity by construction. The store rides in as an argument (never opened here),
@@ -20,9 +20,9 @@ def authored_only(meta: dict) -> bool:
     return (meta.get("lar_volume") or "normal") == "normal"
 
 
-def content_atoms(store, page: int = 256, keep: "Callable[[dict], bool] | None" = None,
+def content_blocks(store, page: int = 256, keep: "Callable[[dict], bool] | None" = None,
                   dedup_key: "str | None" = None) -> "Iterator[Tuple[str, str]]":
-    """Drain the store's `scan` into `(cid, text)` atoms — content's own cids, verbatim documents.
+    """Drain the store's `scan` into `(cid, text)` blocks — content's own cids, verbatim documents.
 
     Pages `scan(offset, limit)` until it reports no `next`. A record carrying no document yields an
     empty text (the surfaces hold no verbatim regardless); its cid still rides, so a later resolve

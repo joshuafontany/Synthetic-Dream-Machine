@@ -8,20 +8,20 @@ re-derivation makes BULK and LIVE the SAME cap over one pointer: a re-pass re-re
 source, is_landed skips the already-durable prefix, only the fresh tail lands. Main and sub-agent
 sessions ride the same cap (a sub-agent transcript reads through the same parser, marked by surface).
 
-THE ATOM GRAIN. A source reads as a stream of typed ATOMS, not merged exchanges: each content-block
+THE BLOCK GRAIN. A source reads as a stream of typed BLOCKS, not merged exchanges: each content-block
 lands 1:1, carrying WHO authored the bytes (`lar_speaker`) × WHAT MOVE it carries (`lar_move`). The
 operator's steering, the agent's surface/thinking/action, and the harness's result/scaffold each ride
-as their own atom — so content keeps the operator/agent boundary the eidetic ground demands, and recall
-pairs atoms into exchanges as a derived VIEW. The three native encodings normalize into this one grain:
+as their own block — so content keeps the operator/agent boundary the eidetic ground demands, and recall
+pairs blocks into exchanges as a derived VIEW. The three native encodings normalize into this one grain:
 Claude's DAG-linked JSONL and Codex's flat response_items already atomize per message; Copilot's SQLite
-`turns` row splits its user_message ⊥ assistant_response columns into two atoms.
+`turns` row splits its user_message ⊥ assistant_response columns into two blocks.
 
-THE SINGLE CID GATE. ONE derivation mints every atom id: `cid = sha256(source_file)_<chunk_index>`, FULL
-sha256 hex, matching `caller-vector-flush.ts`'s `drawerCid`. The `chunk_index` (the per-source atom
-ordinal) makes distinct same-source atoms derive DISTINCT cids — so none clobbers another under a shared
+THE SINGLE CID GATE. ONE derivation mints every block id: `cid = sha256(source_file)_<chunk_index>`, FULL
+sha256 hex, matching `caller-vector-flush.ts`'s `drawerCid`. The `chunk_index` (the per-source block
+ordinal) makes distinct same-source blocks derive DISTINCT cids — so none clobbers another under a shared
 key. Two identity keys ride METADATA, never the cid (the address stays pure content-identity): the
-`lar_turn_key` (the heading operator atom, worldline binding + kapae cascade) and the `lar_atom_key`
-(this atom's own identity, the dedup key across a re-carry). Idempotent by construction: the same
+`lar_turn_key` (the heading operator block, worldline binding + kapae cascade) and the `lar_block_key`
+(this block's own identity, the dedup key across a re-carry). Idempotent by construction: the same
 (source_file, chunk) re-derives the same cid.
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/capture-sources
@@ -94,44 +94,44 @@ def _source_key(surface: str, pointer: str) -> str:
     return f"{surface}:{base}"
 
 
-def _atom_key(source_file: str, atom: dict, chunk_index: int) -> str:
-    """THIS atom's stable identity — the DEDUP key across a re-carry. A native uuid folds the block
-    ordinal (`bi`), so two atoms from one message (a thinking block + its utterance share the record's
-    uuid) still get DISTINCT keys, while a resumed transcript re-carries each atom under the SAME
+def _block_key(source_file: str, block: dict, chunk_index: int) -> str:
+    """THIS block's stable identity — the DEDUP key across a re-carry. A native uuid folds the block
+    ordinal (`bi`), so two blocks from one message (a thinking block + its utterance share the record's
+    uuid) still get DISTINCT keys, while a resumed transcript re-carries each block under the SAME
     key (uuid + bi stay stable across the resume). A surface with no native id (a Codex user message,
-    a Copilot column) falls back to a source+chunk-folded content hash — distinct atoms stay distinct."""
-    uuid = atom.get("uuid")
+    a Copilot column) falls back to a source+chunk-folded content hash — distinct blocks stay distinct."""
+    uuid = block.get("uuid")
     if uuid:
-        return f"{uuid}#{atom.get('bi', 0)}"
-    return _sha16(f"{source_file}#{chunk_index}#" + atom.get("ts", "") + (atom.get("text") or "")[:64])
+        return f"{uuid}#{block.get('bi', 0)}"
+    return _sha16(f"{source_file}#{chunk_index}#" + block.get("ts", "") + (block.get("text") or "")[:64])
 
 
-def _atoms(source_file: str, atoms: list, *, wing: str, room: str,
+def _blocks(source_file: str, blocks: list, *, wing: str, room: str,
            extra: "dict | None" = None) -> Iterator[tuple]:
-    """Yield (cid, text, metadata) per ATOM — content's 1:1 grain, NO exchange merge. The operator's
-    steering and the agent's surface land as DISTINCT atoms, each its own cid; recall pairs them into
+    """Yield (cid, text, metadata) per BLOCK — content's 1:1 grain, NO exchange merge. The operator's
+    steering and the agent's surface land as DISTINCT blocks, each its own cid; recall pairs them into
     exchanges as a derived VIEW (grouped by lar_turn_key), so the operator's steering stays its own
     recallable speaker instead of fusing into the agent's stream the way a merged drawer fused them.
 
-    Each atom carries: `lar_speaker`/`lar_move` (the taxonomy axes — who authored the bytes, what move
-    they carry); `lar_atom_key` (this atom's identity, the dedup key across a re-carry); `lar_turn_key`
-    (the turn it HEADS — an operator atom — or JOINS — the atoms that follow, until the next operator
-    atom; the exchange-view groups on it, the kapae cascade mutes on it); `lar_parent` (the source DAG
+    Each block carries: `lar_speaker`/`lar_move` (the taxonomy axes — who authored the bytes, what move
+    they carry); `lar_block_key` (this block's identity, the dedup key across a re-carry); `lar_turn_key`
+    (the turn it HEADS — an operator block — or JOINS — the blocks that follow, until the next operator
+    block; the exchange-view groups on it, the kapae cascade mutes on it); `lar_parent` (the source DAG
     link, e.g. Claude's parentUuid, the view may walk); `lar_chain` (the per-source content-hash chain —
     an edited prefix keeps its content-INDEPENDENT cid but BREAKS the chain, so a re-capture detects the
-    rewind). An atom carrying a bare `role` but no (speaker, move) — a surface with no block detail, e.g.
+    rewind). An block carrying a bare `role` but no (speaker, move) — a surface with no block detail, e.g.
     a Copilot column — gets classified here. The caller assigns the dense pass seq; `extra` folds in the
     per-surface marks (lar_surface, lar_sidechain)."""
     prev_chain = ""
     turn_key = ""
-    for chunk, a in enumerate(atoms):
+    for chunk, a in enumerate(blocks):
         text = a.get("text") or ""
         speaker, move = a.get("speaker"), a.get("move")
         if speaker is None or move is None:
             speaker, move = _classify(str(a.get("role", "")), text)
-        atom_key = _atom_key(source_file, a, chunk)
-        # An operator atom HEADS a new turn; the atoms after it inherit its turn-key. A session opening
-        # on agent/harness atoms (no operator yet) lets the first atom head, so nothing rides keyless.
+        atom_key = _block_key(source_file, a, chunk)
+        # An operator block HEADS a new turn; the blocks after it inherit its turn-key. A session opening
+        # on agent/harness blocks (no operator yet) lets the first block head, so nothing rides keyless.
         if speaker == "operator" or not turn_key:
             turn_key = _turn_key(source_file, a, chunk) if speaker == "operator" else atom_key
         chain = _sha16(text + prev_chain)   # each link binds its text + the predecessor's link
@@ -142,7 +142,7 @@ def _atoms(source_file: str, atoms: list, *, wing: str, room: str,
             "source_file": source_file,
             "chunk_index": chunk,
             "lar_turn_key": turn_key,
-            "lar_atom_key": atom_key,
+            "lar_block_key": atom_key,
             "lar_parent": a.get("parent") or "",
             "lar_chain": chain,
             # AI-operator chat IS native memetic-wikitext — a turn that invokes no sigil holds a
@@ -173,8 +173,8 @@ def _seq_records(drawers: Iterable[tuple]) -> Iterator[Record]:
 # Each line carries `type` (user/assistant), `uuid`, `timestamp`, `sessionId`, `message` (text blocks).
 
 
-# The atom taxonomy — WHO authored the bytes × WHAT MOVE the atom carries. A source reads as a stream
-# of typed atoms; content holds each 1:1 (eidetic ground), and recall pairs them into exchanges as a
+# The block taxonomy — WHO authored the bytes × WHAT MOVE the block carries. A source reads as a stream
+# of typed blocks; content holds each 1:1 (eidetic ground), and recall pairs them into exchanges as a
 # derived VIEW, so the operator's steering rides as its own recallable speaker rather than fusing into
 # the agent's stream the way a merged drawer fused them.
 #   speaker: operator (the human hand) · agent (the Lares) · harness (the machinery — it injects
@@ -214,7 +214,7 @@ _HARNESS_OPENERS = (
 
 
 def _render_tool_use(b: dict) -> str:
-    """An agent ACTION atom's verbatim — the tool name + its input args (the move the agent took)."""
+    """An agent ACTION block's verbatim — the tool name + its input args (the move the agent took)."""
     name = b.get("name") or "?"
     inp = b.get("input")
     try:
@@ -225,7 +225,7 @@ def _render_tool_use(b: dict) -> str:
 
 
 def _render_tool_result(b: dict) -> str:
-    """A harness RESULT atom's verbatim — the tool return, a bare string or joined text blocks."""
+    """A harness RESULT block's verbatim — the tool return, a bare string or joined text blocks."""
     c = b.get("content")
     if isinstance(c, str):
         return c
@@ -236,9 +236,9 @@ def _render_tool_result(b: dict) -> str:
 
 
 def _claude_blocks(rtype: str, message) -> Iterator[tuple]:
-    """Yield (speaker, move, text, bi) atoms from one Claude message, in document order — `bi` names the
-    block ordinal within the record (stable across a re-carry), so atoms sharing the record's uuid still
-    get distinct atom-keys. A user record's content is a bare string (operator steering, unless a harness
+    """Yield (speaker, move, text, bi) blocks from one Claude message, in document order — `bi` names the
+    block ordinal within the record (stable across a re-carry), so blocks sharing the record's uuid still
+    get distinct block-keys. A user record's content is a bare string (operator steering, unless a harness
     opener) or a list mixing text (operator steering) and tool_result (harness result); an assistant
     record's content lists text (agent surface), thinking (agent inner speech), and tool_use (agent
     action) blocks. Thinking precedes the utterance it thought toward, in its native block order."""
@@ -280,10 +280,10 @@ def _classify(role: str, text: str) -> tuple:
 
 
 def _parse_claude(path: str) -> list:
-    """Parse a Claude `.jsonl` transcript into ATOMS — one per message content-block, each carrying its
+    """Parse a Claude `.jsonl` transcript into BLOCKS — one per message content-block, each carrying its
     speaker and move (operator steering · agent surface/thinking/action · harness result/scaffold), its
     record uuid + block ordinal, and the parentUuid DAG link."""
-    atoms: list = []
+    blocks: list = []
     # errors="replace": a lone non-UTF8 byte substitutes U+FFFD, never crashes the whole pass on one
     # line (matches structure_router's decode idiom); the bad line still JSON-parses or skips cleanly.
     with open(path, encoding="utf-8", errors="replace") as fh:
@@ -304,9 +304,9 @@ def _parse_claude(path: str) -> list:
             for speaker, move, text, bi in _claude_blocks(rtype, row.get("message")):
                 if not text.strip():
                     continue
-                atoms.append({"uuid": uuid, "bi": bi, "parent": parent, "speaker": speaker,
+                blocks.append({"uuid": uuid, "bi": bi, "parent": parent, "speaker": speaker,
                               "move": move, "text": text, "ts": ts})
-    return atoms
+    return blocks
 
 
 def _claude_agent_id(path: str) -> "str | None":
@@ -325,7 +325,7 @@ def claude_source(*, wing: str, room: str = "conversations") -> SourceCap:
         extra = {"lar_surface": "claude"}
         if agent_id is not None:
             extra.update({"lar_sidechain": 1, "lar_agent": agent_id})  # int, isomorphic with the TS stamp (Q3)
-        yield from _seq_records(_atoms(_source_key("claude", pointer), _parse_claude(pointer),
+        yield from _seq_records(_blocks(_source_key("claude", pointer), _parse_claude(pointer),
                                          wing=wing, room=room, extra=extra))
     return source
 
@@ -349,7 +349,7 @@ def _codex_message_text(content) -> str:
 
 def _codex_reasoning_text(p: dict) -> str:
     """Plaintext reasoning from a Codex `reasoning` item — its summary blocks and any content; the
-    encrypted_content stays opaque (skipped). Often empty → the atom drops upstream."""
+    encrypted_content stays opaque (skipped). Often empty → the block drops upstream."""
     parts: list = []
     for field in ("summary", "content"):
         v = p.get(field)
@@ -362,7 +362,7 @@ def _codex_reasoning_text(p: dict) -> str:
 
 
 def _render_codex_call(p: dict) -> str:
-    """An agent ACTION atom's verbatim across the Codex tool payloads — function_call (name+arguments),
+    """An agent ACTION block's verbatim across the Codex tool payloads — function_call (name+arguments),
     custom_tool_call (name+input), web_search_call (the search action)."""
     if p.get("type") == "web_search_call":
         return f"web_search({json.dumps(p.get('action'), ensure_ascii=False)})"
@@ -379,12 +379,12 @@ def _render_codex_call(p: dict) -> str:
 
 
 def _parse_codex(path: str) -> list:
-    """Parse a Codex rollout `.jsonl` into ATOMS. A `response_item` payload maps to the taxonomy: a
+    """Parse a Codex rollout `.jsonl` into BLOCKS. A `response_item` payload maps to the taxonomy: a
     message (user→operator/steering · assistant→agent/surface · developer→harness/scaffold), a reasoning
     item (agent/thinking), a function_call / custom_tool_call / web_search_call (agent/action), a
     *_output (harness/result). A user message and the tool items often carry no native id → a content-hash
-    atom-key. Codex atoms carry no per-record block split (bi stays 0; each item is one atom)."""
-    atoms: list = []
+    block-key. Codex blocks carry no per-record block split (bi stays 0; each item is one block)."""
+    blocks: list = []
     # errors="replace": one non-UTF8 byte never crashes the pass (matches _parse_claude / structure_router).
     with open(path, encoding="utf-8", errors="replace") as fh:
         for line in fh:
@@ -424,15 +424,15 @@ def _parse_codex(path: str) -> list:
                 continue
             if not text.strip():
                 continue
-            atoms.append({"uuid": iid, "bi": 0, "parent": "", "speaker": speaker,
+            blocks.append({"uuid": iid, "bi": 0, "parent": "", "speaker": speaker,
                           "move": move, "text": text, "ts": ts})
-    return atoms
+    return blocks
 
 
 def codex_source(*, wing: str, room: str = "conversations") -> SourceCap:
     """The Codex source-cap. `pointer` names one rollout `.jsonl`."""
     def source(pointer: str) -> Iterator[Record]:
-        yield from _seq_records(_atoms(_source_key("codex", pointer), _parse_codex(pointer),
+        yield from _seq_records(_blocks(_source_key("codex", pointer), _parse_codex(pointer),
                                          wing=wing, room=room, extra={"lar_surface": "codex"}))
     return source
 
@@ -454,7 +454,7 @@ def copilot_source(*, wing: "str | None" = None, room: str = "conversations",
                 if session_id is not None and sid != session_id:
                     continue
                 w = wing or "wing_copilot_unsorted"
-                yield from _atoms(f"copilot:{sid}", turns, wing=w, room=room,
+                yield from _blocks(f"copilot:{sid}", turns, wing=w, room=room,
                                     extra={"lar_surface": "copilot-cli"})
         yield from _seq_records(all_drawers())
     return source
@@ -495,7 +495,7 @@ def copilot_vscode_source(*, wing: str, room: str = "conversations") -> SourceCa
     def source(pointer: str) -> Iterator[Record]:
         session_id, turns = _parse_copilot_vscode(pointer)
         source_file = f"copilot-vscode:{session_id}" if session_id else _source_key("copilot-vscode", pointer)
-        yield from _seq_records(_atoms(source_file, turns, wing=wing, room=room,
+        yield from _seq_records(_blocks(source_file, turns, wing=wing, room=room,
                                          extra={"lar_surface": "copilot-vscode"}))
     return source
 
