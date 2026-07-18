@@ -9,7 +9,7 @@
 """
 import numpy as np
 
-from aliran import CONTENT, couple_aliran, detect_aliran
+from aliran import CONTENT, _amplitude_modulation, couple_aliran, detect_aliran, strip_private
 
 
 def _refrain_text(n_reps: int = 140, seed: int = 11) -> str:
@@ -63,4 +63,32 @@ def test_couple_nests_cepat_in_lambat():
     assert all(c["lambat"] > c["cepat"] for c in couples)          # lambat is always the slower flow
     fast = next(c for c in couples if c["cepat"] == 128 and c["lambat"] == 512)
     assert fast["ratio"] == 4.0                                    # 512/128 — four fast periods per slow
-    assert fast["modulation"] is None                              # v1 fills the amplitude-modulation witness
+    assert fast["modulation"] is None                              # no band series retained → witness abstains
+
+
+def test_amplitude_modulation_reads_the_two_witness():
+    # THE realness witness: a fast carrier whose amplitude is MODULATED at a slow period (the cepat riding
+    # the lambat) scores high; a constant-amplitude carrier (two independent flows) scores ~0. Noise cannot
+    # counterfeit a fast envelope that carries the slow period — the cyclostratigraphy two-witness.
+    t = np.arange(4096)
+    p_fast, p_slow = 16, 512
+    carrier = np.sin(2 * np.pi * t / p_fast)
+    modulated = carrier * (1.0 + 0.9 * np.sin(2 * np.pi * t / p_slow))   # amplitude rides the slow flow
+    cepat_mod = {"scale": p_fast, "_series": modulated, "_stride": 1}
+    cepat_flat = {"scale": p_fast, "_series": carrier, "_stride": 1}
+    lambat = {"scale": p_slow}
+    mod = _amplitude_modulation(cepat_mod, lambat)
+    flat = _amplitude_modulation(cepat_flat, lambat)
+    assert mod is not None and flat is not None
+    assert mod > 0.3                                               # the fast envelope carries the slow period
+    assert mod > flat + 0.2                                        # genuine nesting stands well clear of flat
+
+
+def test_strip_private_drops_the_band_series():
+    # the persistable record holds NO band arrays — a landed aliran resolves back to the stream by scale +
+    # span, never a stored series (the derived-view discipline: hold no verbatim).
+    reading = {"aliran": [{"scale": 128, "channel": CONTENT, "name": None,
+                           "_series": np.zeros(4), "_stride": 1}]}
+    clean = strip_private(reading)
+    assert clean["aliran"][0].keys() == {"scale", "channel", "name"}
+    assert "_series" not in clean["aliran"][0] and "_stride" not in clean["aliran"][0]

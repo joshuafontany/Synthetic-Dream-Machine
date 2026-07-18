@@ -19,7 +19,9 @@ Meme: lar:///ha.ka.ba/lararium/sensorium/aliran
 """
 from __future__ import annotations
 
-from ffz_continuous_pour import pour_ticks, probe_signal
+import numpy as np
+
+from ffz_continuous_pour import pour_ticks, reference_row, zoning_gate, zoning_read
 
 # The channels a stream carries, each a distinct bearer of rhythm. Detection reads CONTENT by default —
 # the only channel a sigil-less corpus carries — so the capability generalizes off the framed test beds.
@@ -28,44 +30,84 @@ SHAPE = "class-transition"   # the word/clause texture (line-blind)
 FRAME = "sigil-event"        # the memetic-wikitext exchange-frame cadence (red channel; framed beds only)
 
 
-def _as_aliran(row: dict, channel: str) -> dict:
-    """A detected NAMELESS flow — its capability record, no name: everything the gate knows (the scale,
-    the lock profile, the boundary-crest count, the span entities), minus a name. Naming-by-condensation
-    reads this record LATER; detection never presumes what the flow IS, only that it holds."""
-    return {
-        "scale": row["scale_ticks"],
-        "channel": channel,
-        "lock": row.get("lock", {}),                 # locked_frac · beat · beat_ticks · lock_quality
-        "reference_zoning": row.get("reference_zoning"),
-        "n_boundaries": row.get("n_boundaries", 0),
-        "spans": (row.get("entities") or {}).get("spans", []),
-        "name": None,                                # NAMELESS — awaiting naming-by-condensation
-    }
-
-
 def detect_aliran(text: str, *, channel: str = CONTENT, n_surrogates: int = 3, seed: int = 4241) -> dict:
     """Pour a stream and DETECT its nameless aliran on one channel — the real characteristic scales the
     stream's own structure holds (the gate's REPRODUCED scales), each emitted as a nameless capability
     record, ordered cepat→lambat (fast→slow). Content-only by default, so the SAME detector runs on a
-    sigil-less target as on a framed test bed — the sigils never enter detection, only its validation."""
+    sigil-less target as on a framed test bed — the sigils never enter detection, only its validation.
+
+    Each aliran retains its reference band series (`_series`/`_stride`, private, in-memory only) so the
+    cross-scale coupling can read the flow's amplitude envelope — dropped before the record persists."""
     poured = pour_ticks([{"stream": "aliran", "text": text}])
     n = poured["n_ticks"]
     signals = poured["signals"]
     if channel not in signals:
         raise ValueError(f"aliran: channel {channel!r} unknown — one of {sorted(signals)}")
-    read = probe_signal(channel, signals[channel], poured["classes"], poured["annotations"],
-                        n_surrogates=n_surrogates, seed=seed)
-    aliran = sorted((_as_aliran(r, channel) for r in read.get("reproduced", [])),
-                    key=lambda a: a["scale"])
+    reads = zoning_read(signals[channel], n_surrogates=n_surrogates, seed=seed)
+    gate = zoning_gate(reads, n)
+    aliran = []
+    for g in gate:
+        if not g["reproduced"]:
+            continue
+        ref = reference_row(reads, g["scale_ticks"], g["eligible_zonings"])
+        if ref is None:
+            continue
+        row, lk, _v = ref
+        aliran.append({
+            "scale": g["scale_ticks"],
+            "channel": channel,
+            "lock": {k: lk[k] for k in ("locked_frac", "beat", "beat_ticks", "lock_quality") if k in lk},
+            "reference_zoning": row["zoning"],
+            "name": None,                            # NAMELESS — awaiting naming-by-condensation
+            "_series": np.asarray(row["series"], dtype=float),   # retained for the coupling; not persisted
+            "_stride": int(row["sample_stride"]),
+        })
+    aliran.sort(key=lambda a: a["scale"])
     return {"n_ticks": n, "channel": channel, "aliran": aliran,
-            "refused": read.get("refused", []), "untestable": read.get("untestable", [])}
+            "refused": [g["band"] for g in gate if g["verdict"] == "MOVED"],
+            "untestable": [g["band"] for g in gate if g["verdict"] == "UNTESTABLE"]}
+
+
+def _envelope(series: np.ndarray, win: int) -> np.ndarray:
+    """The amplitude ENVELOPE of a bandpassed flow — rectify its oscillation (|·|) and smooth over ~one
+    of its own periods, leaving how STRONG the flow runs from place to place. numpy-only (no scipy)."""
+    a = np.abs(np.asarray(series, dtype=float))
+    if win < 2:
+        return a
+    kernel = np.ones(win) / win
+    return np.convolve(a, kernel, mode="same")
+
+
+def _amplitude_modulation(cepat: dict, lambat: dict) -> "float | None":
+    """The TWO-WITNESS realness test (after cyclostratigraphy's TimeOpt): does the fast flow's amplitude
+    ENVELOPE oscillate at the SLOW flow's period? A real nesting — the aliran cepat riding on the aliran
+    lambat — leaves the fast band strong where the slow flow crests and weak in its troughs, so the fast
+    envelope carries the slow period; independent flows leave the envelope flat there. Returns the
+    normalized envelope-autocorrelation at the lambat lag (0..1); a coupling noise cannot counterfeit.
+    None when the band series is unavailable."""
+    s = cepat.get("_series")
+    stride = cepat.get("_stride")
+    if s is None or stride is None or len(s) < 8:
+        return None
+    period = max(2, cepat["scale"] // max(stride, 1))          # the cepat's own period in band samples
+    env = _envelope(s, period)
+    env = env - env.mean()
+    lag = int(round(lambat["scale"] / max(stride, 1)))         # the lambat period in the cepat's sample grid
+    if lag < 1 or lag >= len(env):
+        return None
+    denom = float(np.dot(env, env))
+    if denom < 1e-12:
+        return None
+    ac = float(np.dot(env[:-lag], env[lag:]) / denom)          # envelope autocorr at the slow period
+    return max(0.0, ac)
 
 
 def couple_aliran(reading: dict) -> "list[dict]":
     """The cepat⊥lambat coupling — pair a FAST flow (aliran cepat) with a SLOWER flow (aliran lambat) it
-    nests in. v0 reads the STRUCTURAL nesting (the ratio of periods a fast flow sits at inside a slow one);
-    the amplitude-modulation witness — does the cepat's envelope track the lambat, the noise-proof
-    two-witness of cyclostratigraphy — rides v1 (`modulation` stays None until then). Cepat-first."""
+    nests in, and witness the nesting. `ratio` reads the structural nesting (fast periods per slow);
+    `modulation` reads the two-witness realness (the cepat's amplitude envelope oscillating at the lambat
+    period — the noise-proof coupling). A high modulation says the fast flow genuinely RIDES the slow one,
+    not that two independent flows happen to share a stream. Cepat-first."""
     al = reading.get("aliran", [])
     couples = []
     for i, cepat in enumerate(al):
@@ -75,6 +117,14 @@ def couple_aliran(reading: dict) -> "list[dict]":
                     "cepat": cepat["scale"], "lambat": lambat["scale"],
                     "ratio": lambat["scale"] / cepat["scale"],   # fast periods nested in one slow
                     "channel": cepat["channel"],
-                    "modulation": None,   # v1: the amplitude-modulation witness (cepat envelope ~ lambat)
+                    "modulation": _amplitude_modulation(cepat, lambat),
                 })
     return couples
+
+
+def strip_private(reading: dict) -> dict:
+    """Drop the retained band series (`_series`/`_stride`) from every aliran — the persistable record.
+    The band arrays serve only the in-memory coupling; a landed aliran resolves back to the stream by
+    its scale + span, never by a stored series (the derived-view discipline: hold no verbatim)."""
+    return {**reading, "aliran": [{k: v for k, v in a.items() if not k.startswith("_")}
+                                  for a in reading.get("aliran", [])]}
