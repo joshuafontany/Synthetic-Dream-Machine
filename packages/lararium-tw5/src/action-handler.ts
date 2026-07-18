@@ -41,7 +41,7 @@ import type {
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
-  parseResidencyAction, withEffectRecord, sha256HexSync, carrierHash,
+  parseResidencyAction, withEffectRecord, sha256HexSync,
   emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
   ORIGINAL_TIDDLER_PATHS, parseProvenance, serializeProvenance, recordPack, membersOfPack,
 } from "@lararium/mesh";
@@ -51,6 +51,7 @@ import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
 import { makeTw5FileInfo } from "./tw5-file-info.js";
 import { decideIngest } from "./ingest-gate.js";
+import type { IngestOps } from "./ingest-gate.js";
 import { gradeOf } from "./meme-ast/diagnostics.js";
 import { decideDeletions } from "./delete-gate.js";
 
@@ -78,13 +79,13 @@ export interface Tw5Deserializer {
    *  across a body-only edit. */
   parseFields(metaText: string): Record<string, unknown>;
   /** Render a native record to its carrier BODY + `.meta` sidecar (the file-info
-   *  the projector + the ingest echo gate share). The INGEST gate hashes this via
-   *  `carrierHash` to detect a native carrier's canonical-equivalence (a cosmetic
-   *  edit) and a conflict (both disk AND records moved) — so a native filetype runs
-   *  the same surface-never-overwrite Confluence check — echo · canonical-equivalent ·
-   *  conflict — as a memetic carrier (it omits the memetic refuse-on-grade and
-   *  ahu-fidelity legs; a native deserialize throws rather than grading), never a silent
-   *  last-write-wins overwrite. The `.meta` folds into the hash, so a FIELD-only edit surfaces too. */
+   *  the projector + the ingest echo gate share). The INGEST gate reads this join as
+   *  the native congruence's `render` — its sha256 equals `carrierHash(body, meta)` — so
+   *  a native filetype runs the SAME `decideIngest` Confluence gate a memetic carrier does
+   *  (echo · canonical-equivalent · conflict · ingest), never a silent last-write-wins
+   *  overwrite. Native declares ∅ structure and never grades error, so the gate's
+   *  ahu-fidelity + refuse legs ride dormant for it — one shape, two families. The `.meta`
+   *  folds into the hash, so a FIELD-only edit surfaces too. */
   renderCarrier(uri: string, fields: Record<string, unknown>): { body: string; metaBody?: string };
   /** Re-serialize a set of member records back into ONE multi-tiddler file (the
    *  REPACK reciprocal of a bundle deserialize), via TW5's own field serializer.
@@ -559,7 +560,10 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
  * currentRenderHash from its own merge seat. On an ingest decision the fresh
  * records land under the action's changeId and group members that vanished
  * from the re-parsed carrier tombstone (LOAD never removes; INGEST must).
- * noop/refuse/conflict apply NOTHING (native emits noop/conflict; refuse is the memetic grade-leg) — the decision rides the outcome.
+ * noop/refuse/conflict apply NOTHING — the decision rides the outcome. Memetic and
+ * native carriers alike run the ONE `decideIngest` gate (native passes its own congruence
+ * `IngestOps`); the refuse leg fires only where a family grades error (memetic), riding
+ * dormant for native (a native deserialize throws rather than grading).
  */
 async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
   const o = origin(action);
@@ -667,9 +671,11 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       receipt = { uri, decision: "ingest", grade };
     } else {
       // Native filetype: the echo gate (disk == last-projected) short-circuits
-      // an unchanged carrier; any other state deserializes through the registry
-      // and lands. The projector records the native body hash in the Synced
-      // tree, so a re-ingest of an unprojected-back carrier reads this echo.
+      // an unchanged carrier BEFORE any deserialize (the "zero deserialize" echo),
+      // so it stays ahead of the gate call. The projector records the native body
+      // hash in the Synced tree, so a re-ingest of an unprojected-back carrier reads
+      // this echo. (`decideIngest` re-checks the echo cheaply; keeping it here spares
+      // the deserialize.)
       if (carrier.syncedHash !== null && carrier.diskHash === carrier.syncedHash) {
         results.push({ uri, decision: "noop", reason: "disk-matches-synced" });
         continue;
@@ -698,36 +704,70 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         packInfo = { packPath, members: freshRecords.map((r) => String(r["title"])) };
       }
 
-      // Confluence for a SINGLE native carrier — the same 3-way SHAPE a memetic carrier
-      // runs (echo · canonical-equivalent · conflict), minus the refuse-on-grade + ahu-fidelity legs,
-      // via the registry's own render (the file-info BODY, the digest surface the
-      // projector + echo gate share). Without it a native carrier read
-      // last-write-wins over a wiki-side edit (a silent overwrite the Confluence forbids). A PACK skips
-      // this: it holds no single tiddler at the carrier URI — its change-detection
-      // rides the membership diff (dropped members tombstone) + a full re-land.
-      const rootFresh = packInfo ? undefined : (freshRecords.find((r) => r["title"] === uri) ?? freshRecords[0]);
-      const currentRec = rootFresh ? await readFromBag(access, action.toBag, uri) : null;
-      if (rootFresh) {
-        const cand = tw5!.renderCarrier(uri, rootFresh);
-        const candidateHash = carrierHash(cand.body, cand.metaBody);
-        let currentHash: string | null = null;
-        if (currentRec) {
-          const cur = tw5!.renderCarrier(uri, currentRec.tiddler as unknown as Record<string, unknown>);
-          currentHash = carrierHash(cur.body, cur.metaBody);
-        }
-        // canonical-equivalent: the disk edit renders to what the records already hold.
-        if (currentHash !== null && candidateHash === currentHash) {
-          results.push({ uri, decision: "noop", reason: "canonical-equivalent" });
+      if (packInfo) {
+        // A PACK holds no single tiddler at the carrier URI — it stands OUTSIDE the
+        // Confluence triangle: its change-detection rides the membership diff (dropped
+        // members tombstone) + a full re-land. Straight ingest, no gate.
+        receipt = { uri, decision: "ingest", filetype: carrier.ext || "text/plain" };
+      } else {
+        // A SINGLE native carrier runs the SAME `decideIngest` Confluence gate a memetic
+        // carrier does, parameterized by the NATIVE congruence: the registry's own render
+        // (the file-info BODY + `.meta`, the digest surface the projector + echo gate share)
+        // IS the `≈`, joined so its sha256 equals `carrierHash(body, meta)`. Native declares
+        // ∅ structure (the ahu-fidelity guard no-ops) and never grades error (a native
+        // deserialize throws), so the gate's refuse + ahu legs ride dormant — but native
+        // GAINS the shared shape + the conflict leg that forbids a silent last-write-wins
+        // overwrite. Without this gate a native carrier read last-write-wins over a wiki-side
+        // edit (a silent overwrite the Confluence forbids).
+        const rootOf = (records: readonly Record<string, unknown>[]): Record<string, unknown> =>
+          records.find((r) => r["title"] === uri) ?? records[0]!;
+        const nativeRender = (u: string, records: readonly Record<string, unknown>[]): string => {
+          const c = tw5!.renderCarrier(u, rootOf(records));
+          // The join reconstructs `carrierHash`'s surface: `${meta}\n\n${body}` when a
+          // sidecar rides, body-only otherwise — so sha256HexSync(render) === carrierHash.
+          return c.metaBody === undefined ? c.body : `${c.metaBody}\n\n${c.body}`;
+        };
+        const nativeOps: IngestOps<Record<string, unknown>> = {
+          // The records are already deserialized above (the echo gate must precede any
+          // deserialize); the gate re-reads them here rather than parsing the bytes twice.
+          // A native deserialize never grades — it throws — so the diagnostics ride empty.
+          deserialize: () => ({ records: freshRecords as ReadonlyArray<Record<string, unknown>>, diagnostics: [] }),
+          render: nativeRender,
+          declaredStructure: () => new Set<string>(),
+          grade: () => "clean",
+        };
+        // The current render hash the gate compares against: the records' present carrier
+        // hash when they hold this carrier, else the merge base (no records → a fresh
+        // adoption / re-land, never a phantom conflict — decideIngest routes both to ingest).
+        const currentRec = await readFromBag(access, action.toBag, uri);
+        const currentRenderHash = currentRec
+          ? sha256HexSync(nativeRender(uri, [currentRec.tiddler as unknown as Record<string, unknown>]))
+          : (carrier.syncedHash ?? "");
+        const decision = decideIngest<Record<string, unknown>>({
+          uri,
+          diskText:          carrier.text,
+          diskHash:          carrier.diskHash,
+          syncedHash:        carrier.syncedHash,
+          currentRenderHash,
+          hash:              sha256HexSync,
+        }, nativeOps);
+        if (decision.kind === "noop") {
+          results.push({ uri, decision: "noop", reason: decision.reason });
           continue;
         }
-        // both moved since the merge base (records shifted AND disk passed the echo
-        // gate) → surface, never overwrite (Unison's law).
-        if (currentHash !== null && carrier.syncedHash !== null && currentHash !== carrier.syncedHash) {
+        if (decision.kind === "refuse") {
+          // Dormant for native today (deserialize throws rather than grading); handled so the
+          // shared shape stays total should a future native family grade its own faults.
+          results.push({ uri, decision: "refuse", warnings: [...decision.warnings] });
+          continue;
+        }
+        if (decision.kind === "conflict") {
           results.push({ uri, decision: "conflict", filetype: carrier.ext || "text/plain" });
           continue;
         }
+        freshRecords = decision.records as Array<Record<string, unknown>>;
+        receipt = { uri, decision: "ingest", filetype: carrier.ext || "text/plain" };
       }
-      receipt = { uri, decision: "ingest", filetype: carrier.ext || "text/plain" };
     }
 
     const freshTitles = new Set<string>();
