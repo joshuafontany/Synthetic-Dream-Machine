@@ -203,12 +203,12 @@ FORM_COLLECTION = "form"
 def read_stored_embeddings(collection, key_map: dict, *, where=None) -> list:
     """Read STORED vectors back out of ``collection`` — NEVER re-embed, NEVER load a
     model. The model-agnostic readback shared by every plane's feed (content · form):
-    a `.get(include=["embeddings","metadatas"])`, the None-embedding skip (a drawer
+    a `.get(include=["embeddings","metadatas"])`, the None-embedding skip (a block
     with no stored vector has nothing to feed), and the `[float(x) for x in emb]`
     coercion (numpy → JSON-legal floats).
 
     ``key_map`` is ``{output_field: metadata_key}`` — each row projects the named
-    metadata keys under the chosen output names. One row per drawer with a vector::
+    metadata keys under the chosen output names. One row per block with a vector::
 
         {id, embedding:[...], **projected}
 
@@ -221,7 +221,7 @@ def read_stored_embeddings(collection, key_map: dict, *, where=None) -> list:
     rows = []
     for i, emb, m in zip(ids, embs, metas):
         if emb is None:
-            continue  # a drawer with no stored vector — nothing to feed a plane
+            continue  # a block with no stored vector — nothing to feed a plane
         m = m or {}
         row = {"id": i, "embedding": [float(x) for x in emb]}
         for out_field, meta_key in key_map.items():

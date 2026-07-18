@@ -1486,7 +1486,7 @@ def cmd_analyze(args) -> None:
         sys.stdout.write(json.dumps({"note": f"bands-skipped: flat signal ({note})", "cells": 0, "bands": 0}) + "\n")
         return
     out = run_stack(tree_matrix, spine_signal=spine_signal, n_boot=args.boot, gate_method=args.gate)
-    # Emit one NDJSON cell per chunk (keyed to the drawer id when the palace supplied ids).
+    # Emit one NDJSON cell per chunk (keyed to the block id when the palace supplied ids).
     for row in out["cells"]:
         rec = {"lar_ffz": row["lar_ffz"], "repro_grade": row["repro_grade"], "cells": row["cells"]}
         if ids is not None and row["index"] < len(ids):

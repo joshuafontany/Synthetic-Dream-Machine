@@ -13,7 +13,7 @@ sequence rides the edge-DAG, never the address):
   2. THE STAMP — membership enrichment. The capture path (mesh build-patch → ffzMembershipAddress)
      already mints `lar_ffz` as a membership address (`profile/theme.arc.measure.beat.pulse`, `_`
      naming an absent cell). This leg ENRICHES: it fills the absent BEAT cell with the turn's own
-     identity (the grounding-ratchet label — same-turn drawers share a beat cell, so the ultrametric
+     identity (the grounding-ratchet label — same-turn blocks share a beat cell, so the ultrametric
      reads them adjacent), minting a fresh `worldline/` address only where no membership stamp
      stands. A cell LABELS; nothing tallies.
 
@@ -46,7 +46,7 @@ from ffz_clock import recover_clock
 FFZ_META = "lar_ffz"
 
 # The profile this leg mints where NO membership stamp stands (a capture-time stamp keeps its own
-# profile — "session" — through enrichment; only a stamp-less drawer takes this one).
+# profile — "session" — through enrichment; only a stamp-less block takes this one).
 FFZ_PROFILE = "worldline"
 
 #: The membership tree's absent-cell sentinel (mesh FFZ_ABSENT / ffz_address NULL_BAND).
@@ -74,7 +74,7 @@ def worldline_turn_order(worldline_store, root, as_of=None) -> list:
 def _iter_turn_vectors(content_stores, wanted):
     """Yield (turn_key, vector) pairs. SCOPED when `wanted` (a turn-key set) rides in — a targeted
     chroma $in read pulls ONLY the braids being stamped (never the whole corpus, so a kapae'd/idle
-    tail of unrelated drawers never gets scanned). `wanted=None` keeps the full `scan` (back-compat)."""
+    tail of unrelated blocks never gets scanned). `wanted=None` keeps the full `scan` (back-compat)."""
     from content_io import TURN_KEY_META
 
     for store in content_stores:
@@ -99,10 +99,10 @@ def _iter_turn_vectors(content_stores, wanted):
 
 
 def collect_turn_vectors(content_stores, wanted=None) -> dict:
-    """A `turn_key -> mean vector` map. A turn lands as one-or-more drawers (chunks) sharing a
+    """A `turn_key -> mean vector` map. A turn lands as one-or-more blocks (chunks) sharing a
     `lar_turn_key`; this AVERAGES a turn's chunk vectors into one turn vector (the turn's centroid in
     embedding space). When `wanted` (a turn-key set) rides in, the pull SCOPES to those braids via a
-    chroma $in read; else it full-scans (back-compat). Skips a drawer with no key or no vector."""
+    chroma $in read; else it full-scans (back-compat). Skips a block with no key or no vector."""
     sums: dict = {}
     counts: dict = {}
     for tk, emb in _iter_turn_vectors(content_stores, wanted):
@@ -178,8 +178,8 @@ def _label(text: str) -> str:
 
 
 def membership_stamp(turn_key: str, root: str, existing: "str | None" = None) -> str:
-    """The drawer's membership address, ENRICHED: the beat cell takes the turn's own identity label
-    (the grounding-ratchet — same-turn drawers share the cell), every other cell keeps whatever the
+    """The block's membership address, ENRICHED: the beat cell takes the turn's own identity label
+    (the grounding-ratchet — same-turn blocks share the cell), every other cell keeps whatever the
     capture path minted. Where no membership stamp stands, a fresh `worldline/_.<arc>._.<beat>`
     mints with arc = the braid root's label. Idempotent: enriching an already-enriched address
     returns it unchanged."""
@@ -217,7 +217,7 @@ class WorldlineClock:
     phase: float
     #: The count of content turns the signal read.
     turns: int
-    #: The count of drawers whose lar_ffz stamp landed or enriched.
+    #: The count of blocks whose lar_ffz stamp landed or enriched.
     stamped: int
     #: TESTIMONY: the recovered band names (empty on holdover).
     bands: tuple = field(default_factory=tuple)
@@ -227,14 +227,14 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
                          lock_threshold: float = 0.3) -> dict:
     """Enrich `lar_ffz` membership stamps across every braid, and testify each braid's rhythm.
 
-    Per root: order the content turns, read their vectors, and ENRICH each turn's drawers — the beat
+    Per root: order the content turns, read their vectors, and ENRICH each turn's blocks — the beat
     cell takes the turn's identity label; capture-minted cells stand untouched; a stamp-less
-    drawer mints fresh. The drift-signal feeds `recover_clock`, whose reading rides
+    block mints fresh. The drift-signal feeds `recover_clock`, whose reading rides
     the report as TESTIMONY only. LOCAL only; the stamp rides content_io.patch_metadata
     (vector-safe). Returns `{root: WorldlineClock}` — deterministic and idempotent (the same braid
     enriches to the same address; an unchanged address still merge-writes the same value)."""
     # Order every braid's turns FIRST, then pull vectors SCOPED to exactly those turn-keys — never a
-    # whole-corpus scan (a store may hold far more drawers than the braids being stamped).
+    # whole-corpus scan (a store may hold far more blocks than the braids being stamped).
     roots = worldline_store.roots(as_of)
     ordered_by_root = {root: worldline_turn_order(worldline_store, root, as_of) for root in roots}
     wanted = {tk for keys in ordered_by_root.values() for tk in keys}
@@ -253,7 +253,7 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
     for root in roots:
         ordered_keys = ordered_by_root[root]
         if vecmap is None:
-            # vectors unreadable → enrich every turn that landed drawers; testimony degrades.
+            # vectors unreadable → enrich every turn that landed blocks; testimony degrades.
             content_keys = [k for k in ordered_keys
                             if any(store.cids_for_turn(k) for store in content_stores)]
             signal = []
