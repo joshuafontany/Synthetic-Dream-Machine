@@ -20,16 +20,29 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/wiki-activation
  */
 
+import type { WikiMountSpec } from "./wiki-recipe.js";
+
 /** The residency collector surface the cap heats a grain through (BagResidencyManager). */
 export interface ActivationResidency {
   touch(url: string, grainType?: string): Promise<void>;
 }
 
-/** The pool surface the cap reads (VesselIslandPoolCore): liveness + spec knowledge. */
+/** The pool surface the cap reads (VesselIslandPoolCore): liveness + spec knowledge,
+ *  plus the register-spec seam the unknown-grain resolver teaches through. */
 export interface ActivationPool {
   has(wikiId: string): boolean;
   knowsSpec(wikiId: string): boolean;
+  registerSpec(wikiId: string, spec: WikiMountSpec, opts?: { pinned?: boolean }): void;
 }
+
+/**
+ * Resolve a never-opened wiki's mount spec from its recipe/catalog — the UNKNOWN-grain
+ * branch of activation-on-reference (the true multi-wiki swap). The vessel supplies it,
+ * closing over the catalog + binding resolver. Returns null for a genuinely-unknown
+ * reference (no catalog entry) → the caller parks/drops. Absent entirely → retain-only
+ * (a bare reference only reactivates a grain the pool already mounted once).
+ */
+export type ResolveWikiSpec = (wikiId: string) => Promise<WikiMountSpec | null>;
 
 /**
  * The vessel's activation GRANT — the spectrum point this vessel advertises.
@@ -56,25 +69,33 @@ export interface WikiActivationCap {
 
 /**
  * Build the activation cap over a residency collector + a pool + the vessel grant.
- * The vessel constructs it once and hands it to the resolver.
+ * The vessel constructs it once and hands it to the resolver. `resolveSpec` (optional)
+ * is the UNKNOWN-grain branch — the true multi-wiki swap; absent → retain-only.
  */
 export function makeWikiActivationCap(
   residency: ActivationResidency,
   pool:      ActivationPool,
   grant:     WikiActivationGrant,
+  resolveSpec?: ResolveWikiSpec,
 ): WikiActivationCap {
   return {
     grant,
     async ensureActive(wikiId: string): Promise<boolean> {
       // Already live → done (cheap, the common case for a pinned/active wiki).
       if (pool.has(wikiId)) return true;
-      // Retain-only: a grain the pool never mounted has no spec to reactivate from,
-      // so touching it would strand a phantom resident (wela in the collector, cold
-      // in the pool). Refuse cleanly — the caller parks; `resolveWikiSpec` (the
-      // multi-wiki follow-on) is what teaches the pool a never-opened grain's spec.
-      if (!pool.knowsSpec(wikiId)) return false;
+      // Unknown grain (the pool never mounted it, no retained spec): the true swap
+      // RESOLVES its spec from the recipe/catalog and teaches the pool, so a bare
+      // reference wakes ANY wiki cold. A genuinely-unknown reference (resolveSpec
+      // null, or no resolver under retain-only) refuses cleanly — the caller parks;
+      // touching an unresolved grain would strand a phantom resident (wela in the
+      // collector, cold in the pool), so we teach-BEFORE-touch or not at all.
+      if (!pool.knowsSpec(wikiId)) {
+        const spec = resolveSpec ? await resolveSpec(wikiId) : null;
+        if (!spec) return false;
+        pool.registerSpec(wikiId, spec);   // teach it (no mount) — now knowsSpec
+      }
       // Heat the grain through the ONE collector: `touch` marks it wela (its
-      // onHydrate mounts the cold grain via pool.ensureWiki, single-flight) and
+      // onHydrate mounts the now-known grain via pool.ensureWiki, single-flight) and
       // enforces the wiki cap (onEvict unmounts the LRU wiki). Local-first act.
       await residency.touch(wikiId, "wiki");
       return pool.has(wikiId);

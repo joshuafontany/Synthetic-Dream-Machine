@@ -44,7 +44,7 @@ function countingHost(): { host: VesselIslandHost; spawns: () => number } {
 }
 
 /** Wire the pool + collector + cap exactly as a vessel does. */
-function makeVesselTrio(wikiCap: number) {
+function makeVesselTrio(wikiCap: number, resolveSpec?: (id: string) => Promise<WikiMountSpec | null>) {
   const { host, spawns } = countingHost();
   const pool = new VesselIslandPoolCore({ host });
   const residency = new BagResidencyManager({
@@ -52,7 +52,7 @@ function makeVesselTrio(wikiCap: number) {
     onHydrate: async (id, t) => { if (t === "wiki") await pool.ensureWiki(id); },
     onEvict:   async (id, t) => { if (t === "wiki") await pool.unmountWiki(id); },
   });
-  const cap = makeWikiActivationCap(residency, pool, { activationCap: wikiCap, pinBudget: 1 });
+  const cap = makeWikiActivationCap(residency, pool, { activationCap: wikiCap, pinBudget: 1 }, resolveSpec);
   return { pool, residency, cap, spawns };
 }
 
@@ -61,6 +61,50 @@ describe("wiki-activation cap — activation-on-reference over the one collector
     const { residency, cap } = makeVesselTrio(2);
     expect(await cap.ensureActive("lar:///wiki/never")).toBe(false);
     expect(residency.tier("lar:///wiki/never")).toBeNull();   // no phantom wela in the collector
+  });
+
+  test("a NEVER-opened grain resolves its spec and activates (the true multi-wiki swap)", async () => {
+    const W3 = "lar:///wiki/three";
+    let resolvedFor = "";
+    // The resolver knows W3 (a wiki the pool never mounted) but not others.
+    const resolveSpec = async (id: string): Promise<WikiMountSpec | null> => {
+      if (id !== W3) return null;
+      resolvedFor = id;
+      return spec();
+    };
+    const { pool, residency, cap, spawns } = makeVesselTrio(2, resolveSpec);
+
+    // A bare reference to a never-opened wiki: resolveSpec → registerSpec → touch → mount.
+    expect(pool.knowsSpec(W3)).toBe(false);
+    expect(await cap.ensureActive(W3)).toBe(true);
+    expect(resolvedFor).toBe(W3);
+    expect(pool.tier(W3)).toBe("wela");
+    expect(residency.tier(W3)).toBe("wela");
+    expect(spawns()).toBe(1);                       // one clean activation
+
+    // An unknown reference the resolver refuses → false, no phantom.
+    expect(await cap.ensureActive("lar:///wiki/unknown")).toBe(false);
+    expect(residency.tier("lar:///wiki/unknown")).toBeNull();
+
+    await pool.disposeAll();
+  });
+
+  test("concurrent references to a never-opened grain resolve + spawn exactly ONE worker", async () => {
+    const W3 = "lar:///wiki/three";
+    let resolveCalls = 0;
+    const resolveSpec = async (id: string): Promise<WikiMountSpec | null> => {
+      resolveCalls++;
+      return id === W3 ? spec() : null;
+    };
+    const { pool, cap, spawns } = makeVesselTrio(4, resolveSpec);
+
+    // Fire six references at one never-opened grain in one tick — single-owner holds.
+    const results = await Promise.all(Array.from({ length: 6 }, () => cap.ensureActive(W3)));
+    expect(results.every((r) => r === true)).toBe(true);
+    expect(pool.tier(W3)).toBe("wela");
+    expect(spawns()).toBe(1);                       // never two sovereign workers for one stream
+
+    await pool.disposeAll();
   });
 
   test("an already-live grain short-circuits to true", async () => {

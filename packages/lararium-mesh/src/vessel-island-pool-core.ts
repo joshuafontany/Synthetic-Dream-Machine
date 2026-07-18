@@ -466,11 +466,21 @@ export class VesselIslandPoolCore {
   get size(): number { return this._slots.size; }
 
   /** Whether a retained mount spec exists for this grain — true when the pool has
-   *  mounted it at least once (so `ensureWiki` can reactivate it). The activation
-   *  cap reads this to distinguish a reactivatable grain from a never-opened one
-   *  (which needs the caller's spec resolution — the `resolveWikiSpec` follow-on). */
+   *  mounted it at least once OR a resolver taught it one (so `ensureWiki` can
+   *  activate it). The activation cap reads this to distinguish a reactivatable grain
+   *  from a never-opened one (which needs the caller's `resolveWikiSpec`). */
   knowsSpec(wikiId: string): boolean {
     return this._mountSpecs.has(wikiId);
+  }
+
+  /** TEACH the pool a grain's mount spec WITHOUT mounting it — the resolver's seam
+   *  for a never-opened wiki (resolveWikiSpec). Once taught, `ensureWiki` (and so
+   *  the collector's onHydrate) can activate it exactly like a reactivated grain,
+   *  through the single-flight latch. A no-op once the grain is already known, so a
+   *  resolve never clobbers a live grain's retained spec. */
+  registerSpec(wikiId: string, spec: WikiMountSpec, opts: { pinned?: boolean } = {}): void {
+    if (this._mountSpecs.has(wikiId)) return;
+    this._mountSpecs.set(wikiId, { spec, pinned: opts.pinned ?? false });
   }
 
   // ── Private ───────────────────────────────────────────────────────────────────

@@ -85,7 +85,7 @@ export { awaitIslandMsg } from "./vessel-host.js";
 export type { AwaitIslandMsgOpts, VesselWorkerHandle, VesselIslandHost } from "./vessel-host.js";
 export { VesselIslandPoolCore } from "./vessel-island-pool-core.js";
 export { makeWikiActivationCap } from "./wiki-activation.js";
-export type { WikiActivationCap, WikiActivationGrant, ActivationResidency, ActivationPool } from "./wiki-activation.js";
+export type { WikiActivationCap, WikiActivationGrant, ActivationResidency, ActivationPool, ResolveWikiSpec } from "./wiki-activation.js";
 export { makeDurableMailbox, type DurableMailbox, type MailboxVerb } from "./vessel-mailbox.js";
 export type { VesselIslandPoolCoreOptions, DiskMirrorGrant } from "./vessel-island-pool-core.js";
 export {

@@ -112,23 +112,20 @@ export interface PrimaryMountInputs {
 const PRIMARY_MIRROR_BAGS: readonly string[] = [LARES_DOC_URI, LARARIUM_DOC_URI];
 
 /**
- * Mount the primary wiki island — the isomorphic keystone both vessels run.
- *
- * Every keeper, on every platform, binds its sovereign @personal/@draft slots
- * (resolved island-side per recipe-fingerprint) and mounts a pinned primary.
- * Persona/office divergence lives only in DATA + held capability: mirrorBags is
- * a universal designation a pool's disk-grant may or may not honor; pinned is a
- * residency capability a pool may or may not implement. No per-platform branch.
+ * buildWikiMountSpec — the reusable resolver: per-wiki inputs → a WikiMountSpec
+ * plus the sovereign binding urls. Generalized OUT of mountPrimaryWiki so the SAME
+ * fingerprint → resolveBinding → IslandGrants → WikiRecipe machinery serves BOTH
+ * boot's pinned primary AND activation-on-reference of ANY wiki (resolveWikiSpec,
+ * the true multi-wiki swap). No side effects (no mount, no catalog write) — a pure
+ * resolve; the caller mounts (boot pins; a reference activates unpinned).
  */
-export async function mountPrimaryWiki(
-  pool:    PrimaryMountPool,
+export async function buildWikiMountSpec(
   binding: BindingResolver,
   inputs:  PrimaryMountInputs,
-): Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }> {
+): Promise<{ spec: WikiMountSpec; personalUrl: string; draftUrl: string; workingUrl: string }> {
   // @personal + @draft + @working bind TOGETHER per recipe-fingerprint (Q11).
   // Fingerprint covers wikiDocId + libraryBags only (@lares/@lararium excluded
-  // per Q4); the live primary carries no libraryBags, so it keys on the wiki
-  // doc url alone.
+  // per Q4); the live wiki carries no libraryBags, so it keys on the wiki doc url alone.
   const recipeTrace = { wikiDocId: inputs.wikiUrl, libraryBagDocIds: [] as readonly string[] };
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
   const { personalUrl, draftUrl, workingUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
@@ -153,12 +150,25 @@ export async function mountPrimaryWiki(
     mirrorBags: [...PRIMARY_MIRROR_BAGS, wikiSlotUri(inputs.wikiSlug, "working"), wikiBagUri(inputs.wikiSlug)],
   };
 
-  await pool.mountWiki(
-    inputs.activeWikiId,
-    { coreHash: inputs.coreHash, recipe, grants },
-    { pinned: true },
-  );
+  return { spec: { coreHash: inputs.coreHash, recipe, grants }, personalUrl, draftUrl, workingUrl };
+}
 
+/**
+ * Mount the primary wiki island — the isomorphic keystone both vessels run.
+ *
+ * Every keeper, on every platform, binds its sovereign @personal/@draft slots
+ * (resolved island-side per recipe-fingerprint) and mounts a pinned primary.
+ * Persona/office divergence lives only in DATA + held capability: mirrorBags is
+ * a universal designation a pool's disk-grant may or may not honor; pinned is a
+ * residency capability a pool may or may not implement. No per-platform branch.
+ */
+export async function mountPrimaryWiki(
+  pool:    PrimaryMountPool,
+  binding: BindingResolver,
+  inputs:  PrimaryMountInputs,
+): Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }> {
+  const { spec, personalUrl, draftUrl, workingUrl } = await buildWikiMountSpec(binding, inputs);
+  await pool.mountWiki(inputs.activeWikiId, spec, { pinned: true });
   return { personalUrl, draftUrl, workingUrl };
 }
 
