@@ -147,6 +147,10 @@ const MOUNT_FAILURE_WINDOW_MS     = 60_000;
 
 export class VesselIslandPoolCore {
   private readonly _slots = new Map<string, Slot>();
+  // Single-flight activation latch — one in-flight mount Promise per grain. The
+  // single-owner gate: concurrent references to one cold grain fold into ONE
+  // activation, so no stream ever spawns two sovereign workers (no safe epsilon).
+  private readonly _activating = new Map<string, Promise<void>>();
   private readonly _host:           VesselIslandHost;
   private readonly _mainRepo:       Repo | null;
   private readonly _diskMirrorGrant: DiskMirrorGrant;
@@ -181,14 +185,40 @@ export class VesselIslandPoolCore {
 
   // ── Lifecycle ──────────────────────────────────────────────────────────────
 
-  /** Mount a wiki as a live (`wela`) island. `opts.pinned` exempts from LRU. */
+  /** Mount a wiki as a live (`wela`) island. `opts.pinned` exempts from LRU.
+   *  Single-flight per grain: concurrent activations of one wikiId fold into ONE. */
   async mountWiki(wikiId: string, spec: WikiMountSpec, opts: { pinned?: boolean } = {}): Promise<void> {
+    // Already live — refresh recency, done.
     const existing = this._slots.get(wikiId);
     if (existing && existing.temperature === "wela") {
       existing.lastUsedAt = Date.now();
       return;
     }
+    // Single-flight activation latch: an activation for this grain already runs →
+    // FOLD into it. One sovereign body per stream, never two workers for one wikiId
+    // (the single-owner law; the strong-consistency Orleans grain-directory, not the
+    // eventual-consistency default). A cold→wela activation runs exactly once;
+    // concurrent references await the ONE in-flight mount and share its outcome.
+    const inFlight = this._activating.get(wikiId);
+    if (inFlight) {
+      await inFlight;
+      const live = this._slots.get(wikiId);
+      if (live && live.temperature === "wela") live.lastUsedAt = Date.now();
+      return;
+    }
+    const activation = this._activateWiki(wikiId, spec, opts);
+    this._activating.set(wikiId, activation);
+    try {
+      await activation;
+    } finally {
+      this._activating.delete(wikiId);
+    }
+  }
 
+  /** The activation body proper — intensity gate → LRU evict → spawn → `ea`
+   *  handshake → live slot. Runs under mountWiki's single-flight latch, so exactly
+   *  one activation runs per grain at a time (single-owner preserved). */
+  private async _activateWiki(wikiId: string, spec: WikiMountSpec, opts: { pinned?: boolean }): Promise<void> {
     const pinned = opts.pinned ?? false;
     // Intensity gate (MaxR/MaxT): a wiki that keeps failing its mount inside
     // the window fails FAST and NAMED — never another full silence budget per
